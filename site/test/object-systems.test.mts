@@ -18,7 +18,8 @@ test('planetary systems follow prepared orbit chains to their stars', () => {
   for (const system of systems.slice(1)) {
     const star = SCENE_OBJECTS.find(object => object.id === system.id);
     assert.ok(star, `${system.id} is a registered star`);
-    assert.deepEqual([system.name, system.route], [star.systemName, `/${system.id}/`]);
+    // Named by its star's system name when that names a system, else after its star (Sirius's is its constellation).
+    assert.deepEqual([system.name, system.route], [star.systemName.endsWith(' system') ? star.systemName : `${star.name} system`, `/${system.id}/`]);
   }
   for (const id of ['wasp-43', 'hd-189733', 'hd-209458', 'k2-18', 'kepler-186', 'kepler-452', 'trappist-1', 'wasp-39', 'beta-pictoris', 'hr-8799', 'sgr-a-star', 'hd-110067', 'hd-29391', 'kepler-16-a', 'wd-1856-534', 'kelt-9', 'vhs-1256-1257', 'gq-lup', 'dh-tau', 'roxs-42b', 'wasp-76', 'pds-70', 'wasp-18', 'wasp-121', 'luhman-16', 'hip-65426', 'af-lep', 'ab-pic', 'yses-1', 'hd-206893', 'hd-95086', 'gj-504', 'hd-135344-a', 'eps-indi-a', 'hd-219134', 'hip-56998', 'hd-136352', 'gj-143', 'hd-39091', 'toi-2194', 'toi-5789', 'hd-97658', 'hd-63433', 'toi-2134', 'hd-207496', 'toi-836', 'hd-207897', 'hd-73583', 'hr-858', 'toi-431', 'hd-88986', 'hd-60779', 'kepler-444']) assert.ok(systems.some(system => system.id === id), `${id} keeps its system`);
   // A page builds its systems from the world summary alone; they match the registry's. The summary is regenerated on each
@@ -59,13 +60,18 @@ test('planetary systems follow prepared orbit chains to their stars', () => {
   assert.deepEqual(systemById(SCENE_OBJECTS, 'roxs-42b')!.memberIds, ['roxs-42b-companion', 'roxs-42b-b']);
 });
 
-test('a page that holds only the summary has the systems whose members it holds, and each other one once its holder is read', async () => {
+test('a page that holds the files every page reads has the systems whose members it holds, and each other one once its file is read', async () => {
   const { readFile } = await import('node:fs/promises');
-  const { extendWorldContext, parsePreparedWorldContextSummary, parsePreparedWorldSystem } = await import('@cssearth/objects');
+  const { extendWorldContext, parsePreparedWorldContextSummary, parsePreparedWorldIndex, parsePreparedWorldSystem } = await import('@cssearth/objects');
   const { worldObjects } = await import('../world-objects.mts');
   const prepared = new URL('../../src/objects/sun/prepared/', import.meta.url);
-  const summary = parsePreparedWorldContextSummary(JSON.parse(await readFile(new URL('world-context-summary.json', prepared), 'utf8')));
-  // TRAPPIST-1 is a body of the summary; its planets are in its holder's file.
+  const json = async (name: string) => JSON.parse(await readFile(new URL(name, prepared), 'utf8')) as { anywhere?: unknown };
+  let summary = parsePreparedWorldContextSummary(await json('world-context-summary.json'));
+  for (const id of parsePreparedWorldIndex(await json('world-index.json')).files) {
+    const file = await json(`../../${id}/prepared/members.json`);
+    if (file.anywhere === true) summary = extendWorldContext(summary, [parsePreparedWorldSystem(file, summary, id)]);
+  }
+  // TRAPPIST-1 is a body of the Milky Way's file, which every page reads; its planets are in its system's file.
   const before = planetarySystems(worldObjects(summary), summary, systemFramingRadii(summary));
   assert.ok(before.some(system => system.id === SOLAR_SYSTEM_ID));
   assert.equal(before.some(system => system.id === 'trappist-1'), false, 'no system until its planets are held');
@@ -101,19 +107,24 @@ test("a system's exit distance scales the Sun's 100 AU by the prepared framing r
   assert.ok(wasp.exitDistanceM > wasp.radiusM && wasp.exitDistanceM < .1 * au);
 });
 
-test('every member names its star’s system', () => {
-  const renamed = SCENE_OBJECTS.map(object => object.id === 'wasp-43b' ? { ...object, systemName: 'Sextans' } : object);
-  assert.throws(() => planetarySystems(renamed), /wasp-43b orbits WASP-43 but names its system Sextans, not WASP-43 system/u);
+test('a system is named by its star’s system name when that names a system, else after its star', () => {
+  assert.equal(systemById(SCENE_OBJECTS, 'wasp-43')!.name, 'WASP-43 system');
+  // Sirius's system name is its constellation, and Sgr A*'s the Galactic Centre: display text, not the system's name.
+  assert.equal(SCENE_OBJECTS.find(object => object.id === 'sirius')!.systemName, 'Canis Major');
+  assert.equal(systemById(SCENE_OBJECTS, 'sirius')!.name, 'Sirius system');
+  assert.equal(systemById(SCENE_OBJECTS, SOLAR_SYSTEM_ID)!.name, 'Solar System');
 });
 
 test("every system's overview lasts two doublings of distance before its orbits are gone, more than one wheel step", async () => {
-  const { overviewScopeAtCamera } = await import('../overview-context.mts');
+  const { zoomScopeAtCamera } = await import('../zoom-scope.mts');
+  const { ancestorsOf } = await import('../objects.mts');
   const { SYSTEM_RANGES } = await import('../system-framing.mts');
   const { APPLICATION_WORLD_CONTEXT: plan } = await import('../world-context-plan.mts');
   for (const system of allPlanetarySystems(SCENE_OBJECTS)) {
     const at = (factor: number) => ({ referenceFrame: 'sun-icrf', epochJdTt: 1, pose: { positionM: [system.originM[0] + system.exitDistanceM * factor, system.originM[1], system.originM[2]] as const,
       orientationXyzw: [0, 0, 0, 1] as const } });
-    assert.equal(overviewScopeAtCamera(at(3.99), 'system', plan, { originM: system.originM, orbitsWithinM: SYSTEM_RANGES.get(system.id) }), 'system', system.id);
+    const steps = ancestorsOf(system.id).flatMap(object => object.zoom ? [{ id: object.id, zoom: object.zoom }] : []);
+    assert.equal(zoomScopeAtCamera(at(3.99), 'system', plan, { originM: system.originM, orbitsWithinM: SYSTEM_RANGES.get(system.id) }, steps), 'system', system.id);
   }
   assert.ok(systemById(SCENE_OBJECTS, 'sgr-a-star')!.exitDistanceM < 0.8 * 9.4607e15, 'Sgr A* opens at 0.8 ly, not the scaled 3.6 ly');
 });

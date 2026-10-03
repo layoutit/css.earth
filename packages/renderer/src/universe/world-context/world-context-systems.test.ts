@@ -2,16 +2,24 @@ import { readFile } from 'node:fs/promises';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { extendWorldContext, parsePreparedWorldContextSummary, parsePreparedWorldIndex, parsePreparedWorldSystem } from '@cssearth/objects';
+import type { PreparedWorldContext } from '@cssearth/objects';
 import { createWorldContextPlanner, type WorldContextView } from './world-context-planner.js';
 import { createWorldContextPlannerClient, type WorldPlannerWorker } from './world-context-planner-client.js';
 
-// The summary every page reads, and one other system's file: TRAPPIST-1's seven planets (packages/bake/src/world-context/summary.ts).
-const prepared = new URL('../../../../../src/objects/sun/prepared/', import.meta.url);
-const summary = parsePreparedWorldContextSummary(JSON.parse(await readFile(new URL('world-context-summary.json', prepared), 'utf8')));
-const trappistFile = JSON.parse(await readFile(new URL('../../trappist-1-system/prepared/members.json', prepared), 'utf8')) as Record<string, unknown>;
+// What every page reads: the summary (the frame and the Sun) and the files drawn from anywhere, among them the Milky Way's,
+// which has TRAPPIST-1; and one other file, the TRAPPIST-1 system's seven planets (packages/bake/src/world-context/summary.ts).
+const objects = new URL('../../../../../src/objects/', import.meta.url);
+const json = async (path: string): Promise<Record<string, unknown>> => JSON.parse(await readFile(new URL(path, objects), 'utf8')) as Record<string, unknown>;
+// The build's index of the world: its order and every object with a file, from the root of the tree down; a page never reads it.
+const index = parsePreparedWorldIndex(await json('sun/prepared/world-index.json'));
+const root = parsePreparedWorldContextSummary(await json('sun/prepared/world-context-summary.json'));
+let summary: PreparedWorldContext = root;
+for (const id of index.files) {
+  const file = await json(`${id}/prepared/members.json`);
+  if (file.anywhere === true) summary = extendWorldContext(summary, [parsePreparedWorldSystem(file, summary, id)]);
+}
+const trappistFile = await json('trappist-1-system/prepared/members.json');
 const trappist = parsePreparedWorldSystem(trappistFile, summary, 'trappist-1-system');
-// The build's index of which holder has each body (world-index.json); a page never reads it.
-const index = parsePreparedWorldIndex(JSON.parse(await readFile(new URL('world-index.json', prepared), 'utf8')));
 
 const view = (count: number): WorldContextView => ({
   world: { referenceFrame: summary.frame.referenceFrame, epochJdTt: summary.frame.epochJdTt,
@@ -22,27 +30,33 @@ const view = (count: number): WorldContextView => ({
     labelShown: false, labelPlacement: 0, indicatorShown: false, indicatorRadius: 8, orbitAppearance: { width: 1, opacity: 1 } })),
 });
 
-test('the summary holds the Sun\'s system and the bodies that orbit nothing, and lists no body of another holder', () => {
-  assert.ok(summary.bodies.some(body => body.id === 'earth') && summary.bodies.some(body => body.id === 'trappist-1'));
+test('the summary holds the Sun alone; every other body is in the file of the object it is inside', async () => {
+  assert.deepEqual(root.bodies, []);
+  assert.equal(root.focus.id, 'sun');
+  const milkyWay = await json('milky-way/prepared/members.json') as { bodies: { id: string[] } };
+  // A star with a system is drawn as its system, which is inside the Milky Way; its planets are in its system's file.
+  assert.ok(milkyWay.bodies.id.includes('trappist-1'));
   assert.equal(summary.bodies.some(body => body.id === 'trappist-1b'), false);
-  assert.equal('deferred' in summary, false, 'a body is found through its holder, never through a list of the world');
-  assert.equal(index.holders['trappist-1b'], 'trappist-1-system');
-  assert.deepEqual(trappist.bodies.map(body => body.id).sort(), Object.keys(index.holders).filter(id => index.holders[id] === 'trappist-1-system').sort());
-  assert.equal(index.order.length, summary.worldBodyCount);
+  assert.ok(trappist.bodies.some(body => body.id === 'trappist-1b'));
+  assert.equal('deferred' in summary, false, 'a body is found through the object tree, never through a list of the world');
+  // The files are listed from the root of the tree down: an object's file comes after the file of the object it is inside.
+  assert.ok(index.files.indexOf('milky-way') < index.files.indexOf('trappist-1-system'));
+  assert.ok(index.files.indexOf('solar-system') < index.files.indexOf('earth-system'));
+  assert.equal(index.order.length, root.worldBodyCount);
 });
 
-test('a holder file names itself and holds bodies', () => {
+test('a file names itself and holds bodies or places', () => {
   assert.throws(() => parsePreparedWorldSystem(trappistFile, summary, 'wasp-43-system'), /names trappist-1-system/);
   const columns = trappistFile.bodies as Record<string, unknown[]>;
   const empty = { ...trappistFile, bodies: Object.fromEntries(Object.entries(columns).map(([field]) => [field, []])) };
-  assert.throws(() => parsePreparedWorldSystem(empty, summary, 'trappist-1-system'), /holds no body/);
+  assert.throws(() => parsePreparedWorldSystem(empty, summary, 'trappist-1-system'), /holds no body and no places/);
 });
 
-test('a holder added to a plan keeps every earlier body at its index, and its own bodies follow', () => {
+test('a file added to a plan keeps every earlier body at its index, and its own bodies follow', () => {
   const extended = extendWorldContext(summary, [trappist]);
   assert.deepEqual(extended.bodies.slice(0, summary.bodies.length), summary.bodies);
   assert.deepEqual(extended.bodies.slice(summary.bodies.length).map(body => body.id), trappist.bodies.map(body => body.id));
-  assert.equal(extendWorldContext(extended, [trappist]), extended, 'a holder read twice is added once');
+  assert.equal(extendWorldContext(extended, [trappist]), extended, 'a file read twice is added once');
   // A plan being built whole puts every body at its place in the full context instead: the index's order.
   const ordered = extendWorldContext(summary, [trappist], index.order);
   const places = new Map(index.order.map((id, place) => [id, place] as const));

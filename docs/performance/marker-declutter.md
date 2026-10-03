@@ -22,7 +22,7 @@ frame, though almost all lay under others.
   582 AU swapped the order of 13,679 overlapping pairs.
 - **Past the system scope, a system is its star** (`setSystemRetired` in `prepared-world-context.ts`). The universe nests
   one inside another: the Solar System in the Milky Way, the Milky Way in the Local Group. The application already
-  crosses those levels (its overview scope, `site/overview-context.mts`, with a lower edge on the way back), and passes
+  crosses those levels (its overview scope, `site/zoom-scope.mts`, with a lower edge on the way back), and passes
   the scope to the universe with each crossing. Once it leaves the system for the Milky Way's (about 6,500 AU from the
   Sun on the way out, 670 AU on the way back), every system retires through the path a system faded past already took,
   and its star stands for it. Inside the system the existing fades still apply. Before, the Solar System's bodies faded

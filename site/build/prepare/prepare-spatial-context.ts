@@ -1,4 +1,4 @@
-import { access, mkdir, readFile, readdir, rm, writeFile } from 'node:fs/promises';
+import { mkdir, readFile, readdir, rm, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { gunzipSync } from 'node:zlib';
@@ -239,10 +239,11 @@ export async function prepareSpatialContext(options: SpatialContextPreparationOp
   await rm(resolve(dirname(options.outputPath), 'world-stars.json'), { force: true });
   // Each holder is an object: a star's system, or the asteroid dot bank. Its members are its own package's prepared file,
   // published with it; a holder without a package is refused, named.
-  const objectsRoot = dirname(dirname(dirname(options.outputPath))), holders = new Set<string>(), placed = new Set<string>();
+  // Each file is in its own object's package, in the objects directory this bake writes for (a fixture's, or the checkout's).
+  const objectsRoot = options.objectsDirectory ?? dirname(dirname(dirname(options.outputPath))), holders = new Set<string>(), placed = new Set<string>();
   for (const system of systems) {
-    const directory = resolve(objectsRoot, system.id);
-    await access(resolve(directory, 'object.json')).catch(() => { throw new TypeError(`World holder ${system.id} has no package (src/objects/${system.id}/object.json): run node site/build/prepare/system-packages.mts.`); });
+    // Every file's object is an object of the registry, or the asteroid dot bank: anything else has no package.
+    if (!tree.has(system.id) && system.id !== ASTEROID_DOT_BANK) throw new TypeError(`World file ${system.id} has no package (src/objects/${system.id}/object.json): run node site/build/prepare/system-packages.mts.`);
     holders.add(system.id);
     await writeIfChanged(memberFilePath(objectsRoot, system.id), `${JSON.stringify(system.file)}\n`);
   }
@@ -263,7 +264,7 @@ export async function prepareSpatialContext(options: SpatialContextPreparationOp
     const owner = tree.get(view.id);
     if (owner === undefined) throw new TypeError(`src/objects/${view.id}/object.json: ${view.id} draws a system, so it is inside its system object, but it names no parent: run node site/build/prepare/system-packages.mts.`);
     const file = resolve(objectsRoot, owner, 'prepared', systemViewFile(view.id));
-    await access(resolve(objectsRoot, owner, 'object.json')).catch(() => { throw new TypeError(`The system view of ${view.id} belongs to ${owner}, which has no package (src/objects/${owner}/object.json): run node site/build/prepare/system-packages.mts.`); });
+    if (!tree.has(owner)) throw new TypeError(`The system view of ${view.id} belongs to ${owner}, which has no package (src/objects/${owner}/object.json): run node site/build/prepare/system-packages.mts.`);
     (owned.get(owner) ?? owned.set(owner, new Set()).get(owner)!).add(`${view.id}.json`);
     await writeIfChanged(file, `${JSON.stringify(view)}\n`);
   }

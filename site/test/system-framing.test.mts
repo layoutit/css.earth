@@ -2,10 +2,13 @@ import assert from 'node:assert/strict';
 import { readSystemViewFile } from './system-view-file.mts';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
-import { SCENE_OBJECTS } from '../objects.mts';
+import { OBJECTS, SCENE_OBJECTS } from '../objects.mts';
+import { seedObjectDirectory } from '../object-directory.mts';
+// A page knows the objects it has read; this test holds the whole registry.
+seedObjectDirectory(OBJECTS);
 import contextInput from '../../src/objects/sun/prepared/world-context.json' with { type: 'json' };
 import { STELLAR_SYSTEMS, SYSTEM_FRAMING_RADII, SYSTEM_VIEWS, SYSTEM_VIEW_HOSTS, loadSystemView, systemFramingRadii, systemFramingRect, systemViewTarget } from '../system-framing.mts';
-import { bodyViewAtCamera } from '../overview-context.mts';
+import { bodyViewAtCamera } from '../zoom-scope.mts';
 import { createPreparedWorldNavigation } from '../prepared-world-navigation.mts';
 import { createWorldSelectionTarget, parseSharedView, savedWorldCamera } from '@cssearth/renderer/navigation';
 import { worldQuaternionFromRotation, worldRotationFromQuaternion } from '@cssearth/engine';
@@ -149,7 +152,9 @@ test('a dataset volume is fitted through the normal projection, whatever magnifi
 });
 
 test('selecting the Milky Way from Local Group zooms in to the galaxy while keeping the viewing direction', async () => {
-  const { overviewScopeAtCamera } = await import('../overview-context.mts');
+  const { zoomScopeAtCamera } = await import('../zoom-scope.mts');
+  const { ancestorsOf } = await import('../objects.mts');
+  const steps = ancestorsOf('sun').flatMap(object => object.zoom ? [{ id: object.id, zoom: object.zoom }] : []);
   const navigation = createPreparedWorldNavigation({ objects: SCENE_OBJECTS, windowTarget, documentTarget });
   const far: WorldCameraPose = { ...world, pose: { positionM: [0, 0, 3.085677581491367e22], orientationXyzw: [0, 0, 0, 1] } };
   const distantMount = { sharedView: unusedSharedView, navigation: navigationFixture(sun, () => far, () => optics) };
@@ -157,7 +162,7 @@ test('selecting the Milky Way from Local Group zooms in to the galaxy while keep
   assert.ok(Math.hypot(...target.world.pose.positionM) < Math.hypot(...far.pose.positionM) / 5,
     'The arrival must leave Local Group range instead of preserving its departure distance');
   assert.deepEqual(target.world.pose.orientationXyzw, far.pose.orientationXyzw);
-  assert.equal(overviewScopeAtCamera(target.world, 'milky-way'), 'milky-way');
+  assert.equal(zoomScopeAtCamera(target.world, 'milky-way', undefined, undefined, steps), 'milky-way');
 });
 
 test('galactic breadcrumbs zoom straight out from the current view without panning or turning', async () => {
@@ -210,17 +215,19 @@ test('the Local Group overview frames the Milky Way and every drawn member galax
   const { GALACTIC_VOLUME, drawnGalaxiesZoomTarget } = await import('../system-framing.mts');
   const members = (await import('../prepared-local-group-galaxies.json', { with: { type: 'json' } })).default as Record<string, { originM: number[] }>;
   const { cssViewFromOrientation, rotateWorldPosition } = await import('@cssearth/engine');
-  // The catalogue's Local Group members with a drawn object: M81, NGC 253, M83 and NGC 300 are drawn but belong elsewhere.
-  // The association comes from the restored prepared catalogue (prepare-catalog.mts); without it only distance applies.
+  // The galaxies inside the Local Group with a drawn object: M81, NGC 253, M83 and NGC 300 are drawn but are inside the
+  // Nearby Universe (prepare-catalog.mts reads the object tree).
   const { existsSync } = await import('node:fs');
   const associated = existsSync(new URL('../../src/objects/local-group-galaxies/prepared/catalogue.json', import.meta.url));
   if (associated) assert.deepEqual(Object.keys(members).sort(), ['lmc', 'm31', 'm33', 'smc']);
-  const { overviewScopeAtCamera } = await import('../overview-context.mts');
+  const { zoomScopeAtCamera } = await import('../zoom-scope.mts');
+  const { ancestorsOf } = await import('../objects.mts');
+  const steps = ancestorsOf('sun').flatMap(object => object.zoom ? [{ id: object.id, zoom: object.zoom }] : []);
   for (const orientationXyzw of [[0, 0, 0, 1], [.5, -.5, .5, .5], [0, .7071067811865476, 0, .7071067811865476]] as const) {
     const from: WorldCameraPose = { ...world, pose: { ...world.pose, orientationXyzw } };
     const { world: target } = drawnGalaxiesZoomTarget(from, optics, systemFramingRect(optics));
     assert.deepEqual(target.pose.orientationXyzw, orientationXyzw, 'the view keeps its angle');
-    if (associated) assert.equal(overviewScopeAtCamera(target, 'local-group'), 'local-group', 'the Local Group frame is a Local Group view');
+    if (associated) assert.equal(zoomScopeAtCamera(target, 'local-group', undefined, undefined, steps), 'local-group', 'the Local Group frame is a Local Group view');
     const view = cssViewFromOrientation(orientationXyzw);
     for (const [id, originM] of [['milky-way', GALACTIC_VOLUME.originM], ...Object.entries(members).map(([id, frame]) => [id, frame.originM] as const)] as const) {
       const [x, y, z] = rotateWorldPosition(view, position(originM.map((value, axis) => value - target.pose.positionM[axis]!)));

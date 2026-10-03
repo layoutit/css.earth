@@ -2,12 +2,19 @@ import assert from 'node:assert/strict';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import preparedContext from '../../src/objects/sun/prepared/world-context.json' with { type: 'json' };
-import { bodyViewAtCamera, overviewFrameDistanceM, overviewScopeAtCamera, overviewsReachableFrom, viewDistance } from '../overview-context.mts';
+import { bodyViewAtCamera, zoomFrameDistanceM, zoomScopeAtCamera, viewDistance, type ZoomStep } from '../zoom-scope.mts';
 import { GALAXY_SCALE } from '@cssearth/renderer/labels/universe-label-policy.ts';
 import { presentWorldCamera } from '@cssearth/renderer/navigation/world-camera.ts';
 import { parsePreparedWorldContext, type WorldCameraPose, type PreparedWorldCameraFrame } from '@cssearth/objects';
 import { systemOverviewDistance, SYSTEM_FRAMING_RADII } from '../system-framing.mts';
-import { OVERVIEWS } from '../objects.mts';
+import { ancestorsOf } from '../objects.mts';
+
+/** The objects a zoom out of `id` hands over to: those it is inside that are seen from inside, nearest first. */
+const stepsOf = (id: string): ZoomStep[] => ancestorsOf(id).flatMap(object => object.zoom ? [{ id: object.id, zoom: object.zoom }] : []);
+const SUN_STEPS = stepsOf('sun');
+/** The scope at a camera, for a zoom out of the Sun unless `chain` says otherwise. */
+const overviewScopeAtCamera = (world: Parameters<typeof zoomScopeAtCamera>[0], previous?: string, plan?: Parameters<typeof zoomScopeAtCamera>[2],
+  centre?: Parameters<typeof zoomScopeAtCamera>[3], chain: readonly ZoomStep[] = SUN_STEPS) => zoomScopeAtCamera(world, previous, plan, centre, chain);
 
 // The same validated plan the application mounts; the raw JSON import is untyped.
 const context = parsePreparedWorldContext(preparedContext);
@@ -76,26 +83,26 @@ test('overview leaves the Solar System midway through its fade, with a lower ret
   assert.equal(overviewScopeAtCamera(camera(start * .99), 'milky-way'), 'system');
 });
 
-test('zooming out from the Sun walks the registry overviews in their order, and nothing else', () => {
+test('zooming out from the Sun walks the objects it is inside that are seen from inside, in their order, and nothing else', () => {
   const walked: string[] = [];
   let scope: ReturnType<typeof overviewScopeAtCamera> = 'system';
   for (let distance = context.system.fadeOutStartDistanceM; distance <= context.camera.maximumDistanceM; distance *= 1.05) {
     scope = overviewScopeAtCamera(camera(distance), scope);
     if (scope !== 'system' && walked.at(-1) !== scope) walked.push(scope);
   }
-  assert.deepEqual(walked, OVERVIEWS.map(overview => overview.id));
+  assert.deepEqual(walked, ['milky-way', 'local-group', 'nearby-universe', 'observable-universe']);
+  assert.deepEqual(SUN_STEPS.map(step => step.id), walked);
 });
 
-test('the ladder is the overview entries: an authored fifth level is reached past its own threshold', async () => {
-  // A level is the ladder data of an object: a fifth one is the last level's, further out.
-  const last = OVERVIEWS.at(-1)!;
-  const beyond = { ...last, id: 'beyond-the-horizon', name: 'Beyond', description: 'A test level.', route: '/beyond-the-horizon/', order: 5,
-    zoom: { enter: { distancePc: 3e10 }, returnBelow: { distancePc: 2e10 }, frame: { distance: { distancePc: 5e10 } } }, holds: [], packages: [] };
-  const levels = [...OVERVIEWS, beyond], gpc = 1e9 * 3.085677581491367e16;
-  assert.equal(overviewScopeAtCamera(camera(40 * gpc), 'observable-universe', context, undefined, levels), 'beyond-the-horizon');
-  assert.equal(overviewScopeAtCamera(camera(25 * gpc), 'observable-universe', context, undefined, levels), 'observable-universe');
-  assert.equal(overviewScopeAtCamera(camera(25 * gpc), 'beyond-the-horizon', context, undefined, levels), 'beyond-the-horizon', 'it returns only below its lower threshold');
-  assert.equal(overviewFrameDistanceM(beyond, context), 5e10 * 3.085677581491367e16);
+test('the steps are the chain it is given: an object farther out is reached past its own threshold', async () => {
+  const beyond: ZoomStep = { id: 'beyond-the-horizon', zoom: { enter: { distancePc: 3e10 }, returnBelow: { distancePc: 2e10 }, frame: { distance: { distancePc: 5e10 } } } };
+  const steps = [...SUN_STEPS, beyond], gpc = 1e9 * 3.085677581491367e16;
+  assert.equal(overviewScopeAtCamera(camera(40 * gpc), 'observable-universe', context, undefined, steps), 'beyond-the-horizon');
+  assert.equal(overviewScopeAtCamera(camera(25 * gpc), 'observable-universe', context, undefined, steps), 'observable-universe');
+  assert.equal(overviewScopeAtCamera(camera(25 * gpc), 'beyond-the-horizon', context, undefined, steps), 'beyond-the-horizon', 'it returns only below its lower threshold');
+  assert.equal(zoomFrameDistanceM(beyond, context), 5e10 * 3.085677581491367e16);
+  // A centre inside nothing seen from inside stays its own system.
+  assert.equal(zoomScopeAtCamera(camera(40 * gpc), 'system', context, undefined, []), 'system');
 });
 
 test("another star's system overview is left by the distance from that star, not from the Sun", () => {
@@ -104,15 +111,20 @@ test("another star's system overview is left by the distance from that star, not
   assert.equal(overviewScopeAtCamera(near, 'system', context, { originM: star }), 'system', 'one astronomical unit from its star');
   const far = { ...camera(0), pose: { ...camera(0).pose, positionM: [star[0]! + hidden, 0, 0] as const } };
   assert.equal(overviewScopeAtCamera(far, 'system', context, { originM: star }), 'milky-way');
-  // A binary in the Large Magellanic Cloud keeps its overview, then has no Milky Way step: it lies past the galaxy's own
-  // boundary. Zooming out of it gives the same sequence whichever way the camera backs away, even toward the Sun.
+  // A star of the Large Magellanic Cloud keeps its overview, then walks the objects it is inside: the Milky Way (the Cloud
+  // is in its subgroup), the Local Group, and on out. The sequence is the same whichever way the camera backs away.
   const lmc = [49.9e3 * parsec, 0, 0], at = (offsetM: number) => ({ ...camera(0), pose: { ...camera(0).pose, positionM: [lmc[0]! + offsetM, 0, 0] as const } });
-  assert.equal(overviewScopeAtCamera(at(1e12), 'system', context, { originM: lmc }), 'system');
+  const cloudSteps = stepsOf('hv-1005');
+  assert.deepEqual(cloudSteps.map(step => step.id), ['milky-way', 'local-group', 'nearby-universe', 'observable-universe']);
+  assert.equal(overviewScopeAtCamera(at(1e12), 'system', context, { originM: lmc }, cloudSteps), 'system');
   for (const side of [1, -1]) {
-    assert.equal(overviewScopeAtCamera(at(side * hidden), 'system', context, { originM: lmc }), 'local-group');
-    assert.equal(overviewScopeAtCamera(at(side * 38e3 * parsec), 'local-group', context, { originM: lmc }), 'local-group',
-      side < 0 ? '12 kpc from the Sun, 38 kpc from its star' : '88 kpc from the Sun');
-    assert.equal(overviewScopeAtCamera(at(side * 6e6 * parsec), 'local-group', context, { originM: lmc }), 'nearby-universe');
+    const walked: string[] = [];
+    let scope = 'system';
+    for (let distance = hidden / 4; distance <= context.camera.maximumDistanceM; distance *= 1.05) {
+      scope = overviewScopeAtCamera(at(side * distance), scope, context, { originM: lmc }, cloudSteps);
+      if (scope !== 'system' && walked.at(-1) !== scope) walked.push(scope);
+    }
+    assert.deepEqual(walked, cloudSteps.map(step => step.id), side < 0 ? 'backing away toward the Sun' : 'backing away from the Sun');
   }
   // A host that authors its own orbit range (Sgr A*) keeps its overview while the world context still draws its orbits.
   const range = 1.5e16, sgr = [8.2e3 * parsec, 0, 0];
@@ -121,11 +133,13 @@ test("another star's system overview is left by the distance from that star, not
   assert.equal(overviewScopeAtCamera(around(range * 2), 'system', context, { originM: sgr, orbitsWithinM: range }), 'milky-way');
 });
 
-test('a centre reaches only the levels around it: M87* no Local Group, a Magellanic Cloud star no Milky Way', () => {
-  const at = (id: string) => overviewsReachableFrom(context.bodies.find(body => body.id === id)!.positionM, context).map(overview => overview.id);
-  assert.deepEqual(at('sgr-a-star'), OVERVIEWS.map(overview => overview.id));
-  assert.deepEqual(at('hv-1005'), ['local-group', 'nearby-universe', 'observable-universe']);
+test('a centre walks only the objects it is inside: M87* no Local Group, a Magellanic Cloud star the Milky Way', () => {
+  const at = (id: string) => stepsOf(id).map(step => step.id);
+  assert.deepEqual(at('sgr-a-star'), ['milky-way', 'local-group', 'nearby-universe', 'observable-universe']);
+  assert.deepEqual(at('hv-1005'), ['milky-way', 'local-group', 'nearby-universe', 'observable-universe']);
+  assert.deepEqual(at('m33'), ['local-group', 'nearby-universe', 'observable-universe']);
   assert.deepEqual(at('m87-star'), ['nearby-universe', 'observable-universe']);
+  assert.deepEqual(at('abell-2744'), ['observable-universe']);
 });
 
 test('galactic distance is measured from the Sun, independent of selected body and surface radius', () => {

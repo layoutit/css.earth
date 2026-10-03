@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { PAGE_VIEWS, namesSystem, withView, WORLD_HOST_ID } from '../navigation/navigation-scope.mts';
+import { namesSystem, withView, WORLD_HOST_ID } from '../navigation/navigation-scope.mts';
 import { systemHostId, systemObjectId, systemRoute } from '../navigation/system-address.mts';
 import { objectIdAtPath, pageIdAtPath } from '../root-object.mts';
 
@@ -9,7 +9,6 @@ const address = (value: URL) => value.pathname + value.search;
 
 test('a system is an object with an address of its own, named after its host', () => {
   assert.equal(WORLD_HOST_ID, 'sun');
-  assert.deepEqual(Object.keys(PAGE_VIEWS), ['body', 'moons', 'system']);
   assert.equal(systemObjectId('jupiter'), 'jupiter-system');
   assert.equal(systemObjectId('sun'), 'solar-system');
   assert.equal(systemRoute('trappist-1'), '/trappist-1-system/');
@@ -20,7 +19,7 @@ test('a system is an object with an address of its own, named after its host', (
   assert.equal(namesSystem(url('/jupiter-system/')), true);
   assert.equal(namesSystem(url('/solar-system/?v=abc')), true);
   assert.equal(namesSystem(url('/jupiter/')), false);
-  // A level is an object of its own, never a system; and no query names a view any more.
+  // An object seen from inside is an object of its own, never a system; and no query names a view any more.
   assert.equal(namesSystem(url('/milky-way/')), false);
   assert.equal(namesSystem(url('/jupiter/?view=satellites')), false);
   assert.equal(namesSystem(url('/sun/?overview=system')), false);

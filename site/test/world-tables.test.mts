@@ -1,24 +1,31 @@
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { sourceTest } from '@cssearth/objects/node/source-test';
-import { extendWorldContext, parsePreparedWorldContextSummary, parsePreparedWorldSystem } from '@cssearth/objects';
+import { extendWorldContext, parsePreparedWorldContextSummary, parsePreparedWorldIndex, parsePreparedWorldSystem } from '@cssearth/objects';
+import type { PreparedWorldContext } from '@cssearth/objects';
 import { systemFramingTables } from '../system-framing.mts';
 import { satelliteSystemIndex } from '../satellite-systems.mts';
 import { annotationsForBodies, createWorldVisibilityPolicy } from '../application-world-visibility.mts';
 import { worldObjects } from '../world-objects.mts';
 const test = sourceTest();
 
-// The summary every page reads and one holder a page reads later: TOI-178, a plain-dot star with six planets.
+// What every page reads (the summary and the files drawn from anywhere), the Earth system's file, and one file a page reads
+// later: TOI-178's system, a plain-dot star with its six planets.
 const prepared = new URL('../../src/objects/sun/prepared/', import.meta.url);
 const json = async (name: string) => JSON.parse(await readFile(new URL(name, prepared), 'utf8')) as unknown;
-const summary = parsePreparedWorldContextSummary(await json('world-context-summary.json'));
+const index = parsePreparedWorldIndex(await json('world-index.json'));
+let summary: PreparedWorldContext = parsePreparedWorldContextSummary(await json('world-context-summary.json'));
+for (const id of index.files) {
+  const file = await json(`../../${id}/prepared/members.json`) as { anywhere?: unknown };
+  if (file.anywhere === true || id === 'earth-system') summary = extendWorldContext(summary, [parsePreparedWorldSystem(file, summary, id)]);
+}
 const host = 'toi-178', holder = `${host}-system`, system = parsePreparedWorldSystem(await json(`../../${holder}/prepared/members.json`), summary, holder);
 const extended = extendWorldContext(summary, [system]);
 assert.ok(!summary.bodies.some(body => body.id === host) && extended.bodies.some(body => body.id === host), `${host} arrives with its file`);
 
-test('a star whose planets are in a holder not read yet is no system host; its holder brings its candidates and its radius', () => {
+test('a star whose planets are in a file not read yet is no system host; its system\'s file brings its candidates and its radius', () => {
   const before = systemFramingTables(summary);
-  assert.equal(before.viewHosts.has(host), false, 'the summary alone does not know the host');
+  assert.equal(before.viewHosts.has(host), false, 'the files a page starts with do not know the host');
   assert.equal(before.radii.get(host), undefined);
   const after = systemFramingTables(extended);
   assert.ok(after.viewHosts.has(host) && after.stellar.has(host), 'held, it has candidates and opens out of edge-on');
