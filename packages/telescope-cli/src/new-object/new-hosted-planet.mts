@@ -47,6 +47,10 @@ export interface HostedPlanetScaffold {
   readonly selfLuminous?: { readonly temperatureK: number; readonly source: string };
 }
 
+/** The object a hosted body is inside: the system of the body its orbit record names (`physical.parent`), the Sun's being the
+ * Solar System. */
+export const hostedParent = (hostId: string) => hostId === 'sun' ? 'solar-system' : `${hostId}-system`;
+
 /** Every file of a new shape-only planet of another star, keyed by repository path. Pure: the caller writes them. */
 export function scaffoldHostedPlanetFiles(spec: HostedPlanetScaffold, bodyRecord: unknown, hostRecord: unknown, epochJdTt: number): Map<string, string> {
   if (!/^[a-z][a-z0-9-]*$/u.test(spec.id)) throw new TypeError('A planet needs a lowercase id.');
@@ -78,7 +82,7 @@ export function scaffoldHostedPlanetFiles(spec: HostedPlanetScaffold, bodyRecord
   const glow = spec.selfLuminous, material = glow ? 'emission' : 'lighting';
   if (glow && !(glow.temperatureK > 0)) throw new TypeError(`${spec.id}: a self-luminous planet needs a positive effective temperature, not ${glow.temperatureK}.`);
 
-  put(`${o}/object.json`, { schema: 'cssearth-object@2', id, type: 'layered-body', properties: {
+  put(`${o}/object.json`, { schema: 'cssearth-object@2', id, parent: hostedParent(hostId), type: 'layered-body', properties: {
     preparation: { schema: 'cssearth-object-preparation@1', label: name,
       steps: ['verify-sources', 'assets', 'panel-content', 'datasets', 'starfield', ...(glow ? [] : ['sky-sun']), 'system-markers', 'scene', 'controls', 'presentation', 'runtime-assets'] },
     recipe: { schema: 'cssearth-authored-object@2',

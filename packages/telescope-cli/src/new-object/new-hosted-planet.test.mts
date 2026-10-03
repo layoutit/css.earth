@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
-import { scaffoldHostedPlanetFiles } from './new-hosted-planet.mts';
+import { hostedParent, scaffoldHostedPlanetFiles } from './new-hosted-planet.mts';
 
 test('the hosted-planet scaffold refuses to invent a uniform synchronous rotation for an eccentric orbit', () => {
   assert.throws(() => scaffoldHostedPlanetFiles(
@@ -43,4 +43,18 @@ test('a star on a hosted orbit scaffolds as a self-luminous star with its temper
   const catalog = JSON.parse(files.get('src/objects/vhs-1256-1257-companion/object.json')!).properties.catalog;
   assert.equal(catalog.classification, 'star');
   assert.notEqual(catalog.color, '#9a9a9a');
+});
+
+test('a hosted body is inside the system of the body its orbit names, written before its type as the shipped packages have it', async () => {
+  const { readFile } = await import('node:fs/promises');
+  const read = async (path: string) => readFile(new URL(`../../../../${path}`, import.meta.url), 'utf8');
+  const json = async (path: string) => JSON.parse(await read(path)) as Record<string, any>;
+  const files = scaffoldHostedPlanetFiles({ id: 'vhs-1256-1257-companion', name: 'VHS 1256-1257 B', system: 'VHS 1256-1257 system', description: 'Test', paper: 'https://arxiv.org/abs/2208.08448',
+    paperCredit: 'Test source', rotation: 'unmeasured', selfLuminous: { temperatureK: 2700, source: '2700 K, Dupuy et al. (2023)' } },
+  await json('packages/astronomy/data/bodies/vhs-1256-1257-companion.json'), await json('packages/astronomy/data/bodies/vhs-1256-1257.json'), 2461041.5);
+  const object = JSON.parse(files.get('src/objects/vhs-1256-1257-companion/object.json')!) as Record<string, unknown>;
+  assert.equal(object.parent, 'vhs-1256-1257-system');
+  assert.equal(object.parent, (await json('src/objects/vhs-1256-1257-companion/object.json')).parent);
+  assert.deepEqual(Object.keys(object).slice(0, 4), ['schema', 'id', 'parent', 'type']);
+  assert.equal(hostedParent('sun'), 'solar-system');
 });
