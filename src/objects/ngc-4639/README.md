@@ -1,6 +1,6 @@
 # NGC 4639
 
-NGC 4639 as an object of the world: its place and its card. It has no surface and no dataset yet.
+NGC 4639 as an object of the world: its place, its card and its list marker. It has no surface. Its dataset shows the [NGC 4639 image layers](../ngc-4639-layers/README.md) bank, whose README holds the sources, processing, evidence and known problems of the imagery.
 
 NGC 4639 is one of the 19 galaxies in which the Hubble Space Telescope found Cepheids to set the brightness of a Type Ia supernova
 for the Hubble constant (Riess et al. 2016). Its 32 Cepheids (`src/objects/ngc-4639-cepheid-*`) are objects inside it and are placed
@@ -20,8 +20,10 @@ The card's facts cite their catalogues in [source/content/object.json](source/co
 
 ## Processing
 
-1. The [astronomy record](../../../packages/astronomy/data/bodies/ngc-4639.json) places it at the position and distance below, with SIMBAD's radial velocity.
-2. `node packages/bake/cli/prepare-object.mts ngc-4639` prepares its scene through the standard authored lane. The [recipe](object.json) declares no surface, so the scene is the camera, sky and world frame. The page frames it at 8,100 pc, RC3's isophotal radius (half of D25, log D25 = 1.44 in 0.1′) at the Cepheid distance ([solar-system.json](source/presentation/solar-system.json)).
+1. The [astronomy record](../../../packages/astronomy/data/bodies/ngc-4639.json) places it at the position and distance of the sources above, with SIMBAD's radial velocity.
+2. `node packages/bake/cli/prepare-image-layers.mts src/objects/ngc-4639-layers` bakes the image bank from its [recipe](../ngc-4639-layers/source/recipe.json), and `node site/build/prepare/prepare-volume-presentation.mts --object=ngc-4639-layers` prepares its dataset card.
+3. `node packages/bake/cli/prepare-object.mts ngc-4639` prepares its scene through the standard authored lane. The [recipe](object.json) declares no surface, so the scene is the camera, sky and world frame. The page frames it at 8,100 pc, RC3's isophotal radius (half of D25, log D25 = 1.44 in 0.1′) at the Cepheid distance ([solar-system.json](source/presentation/solar-system.json)).
+4. `node site/build/prepare/companion-context.mts ngc-4639` saves the list marker from the default dataset's picture.
 
 ## Known problems
 

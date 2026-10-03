@@ -1,0 +1,48 @@
+{
+  "schema": "cssearth-image-layer-provenance@1",
+  "title": "SDSS9 color",
+  "publisher": "CDS (CNRS/Unistra)",
+  "sourceId": "CDS/P/SDSS9/color",
+  "sourcePage": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record",
+  "download": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FSDSS9%2Fcolor&width=1125&height=1125&fov=0.125&projection=TAN&coordsys=icrs&ra=186.798333&dec=9.420556&format=jpg",
+  "credit": "Sloan Digital Sky Survey; color HiPS CDS/P/SDSS9/color by T. Boch (CDS), cut out by the CDS hips2fits service",
+  "license": "CC-BY",
+  "original": {
+    "dimensions": [
+      1125,
+      1125
+    ],
+    "bands": [
+      "SDSS",
+      "g",
+      "r",
+      "i"
+    ],
+    "fieldOfViewDeg": [
+      0.125,
+      0.125
+    ]
+  },
+  "checkedSource": {
+    "kind": "CDS hips2fits cutout (JPEG)",
+    "dimensions": [
+      1125,
+      1125
+    ]
+  },
+  "geometryEvidence": {
+    "inclinationDeg": 58.2,
+    "lineOfNodesPaDeg": 88.3,
+    "reference": "Leroy et al. 2021"
+  },
+  "displayModel": "The photograph lies on one flat plane, the disc's midplane, as the Milky Way's backing image does. Nothing in the image has depth.",
+  "coverage": "Milky Way foreground stars (Gaia DR3) are removed where they show; fainter and uncatalogued stars remain.",
+  "acquisition": {
+    "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FSDSS9%2Fcolor&width=1125&height=1125&fov=0.125&projection=TAN&coordsys=icrs&ra=186.798333&dec=9.420556&format=jpg",
+    "dimensions": [
+      1125,
+      1125
+    ],
+    "operation": "Request the cutout from the CDS hips2fits service: 1125 x 1125 px, 0.125 degrees wide, tangent projection on 186.798333, +9.420556, north up; no crop or resample."
+  }
+}

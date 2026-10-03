@@ -46,5 +46,20 @@
       }
     ]
   },
-  "datasets": {}
+  "datasets": {
+    "optical": {
+      "title": "NGC 1365 in visible light",
+      "detail": "3383 × 3263 px",
+      "summary": "Visible-light image, flat on its measured disc; depths are not measured.",
+      "sources": [
+        {
+          "catalogueId": "noirlab-iotw2127a",
+          "url": "https://noirlab.edu/public/images/iotw2127a/",
+          "label": "Portrait of the Great Barred Spiral; Dark Energy Survey/DOE/FNAL/DECam/CTIO/NOIRLab/NSF/AURA",
+          "checked": "2026-10-02",
+          "locator": "Portrait of the Great Barred Spiral"
+        }
+      ]
+    }
+  }
 }

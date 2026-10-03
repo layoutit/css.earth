@@ -1,0 +1,57 @@
+{
+  "id": "noirlab-iotw2127a",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Portrait of the Great Barred Spiral (NGC 1365)",
+  "identifiers": [
+    {
+      "type": "Publisher image",
+      "value": "iotw2127a"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://noirlab.edu/public/images/iotw2127a/",
+      "label": "Published source"
+    },
+    {
+      "role": "original",
+      "url": "https://storage.noirlab.edu/media/archives/images/large/iotw2127a.jpg",
+      "label": "Large JPEG, 3383 x 3263 px"
+    },
+    {
+      "role": "rights",
+      "url": "https://noirlab.edu/public/copyright/",
+      "label": "Reuse terms"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://noirlab.edu/public/images/iotw2127a/",
+      "checkedOn": "2026-10-02",
+      "locator": "3383 x 3263 px; Dark Energy Survey data from DECam on the Blanco 4-metre telescope; the page names no filters. The page states a field of 14.82 x 14.30 arcmin, centre RA 3 33 37.00, Dec -36 8 44.35 and north 0.0 deg left of vertical. On that registration 72 of the 90 Gaia DR3 stars brighter than G = 19 in the frame have a star within 4 px of their places; a search over centre, scale, rotation and mirror finds nothing better than 73 (the recipe's observation). Found in the NOIRLab image archive search for NGC 1365."
+    },
+    {
+      "url": "https://noirlab.edu/public/copyright/",
+      "checkedOn": "2026-10-02",
+      "locator": "Unless specifically noted, the images distributed on the public NOIRLab website are licensed under a Creative Commons Attribution 4.0 International License; the image page notes no exception."
+    }
+  ],
+  "publisher": "NOIRLab",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Dark Energy Survey/DOE/FNAL/DECam/CTIO/NOIRLab/NSF/AURA. Image processing: Travis Rector (University of Alaska Anchorage/NSF NOIRLab), Jen Miller (Gemini Observatory/NSF NOIRLab), Mahdi Zamani & Davide de Martin (NSF NOIRLab)",
+      "scope": "Published source",
+      "evidence": "https://noirlab.edu/public/images/iotw2127a/"
+    },
+    {
+      "kind": "rights",
+      "text": "CC BY 4.0; retain the complete recorded credit.",
+      "scope": "Published source",
+      "evidence": "https://noirlab.edu/public/copyright/"
+    }
+  ]
+}
