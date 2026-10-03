@@ -197,3 +197,7 @@ export { worldCameraFromCenteredPresentation, worldCameraFromPresentation, camer
 export type { WorldCameraPose, LocalWorldCameraPresentation, PreparedWorldCameraViewport } from './prepared-data/world-camera-conversion.js';
 export { preparedDefaultViewRotation } from './prepared-data/prepared-arrival-view.js';
 export { parsePreparedDensityVolume } from './prepared-data/prepared-density-volume.js';
+export { AUTHORED_OBJECT_SCHEMA } from './authored.js';
+export { SOURCE_MANIFEST_SCHEMA } from './sources/source-manifest-schema.js';
+export { OBJECT_PAGE_SCHEMA } from './prepared-data/object-page-schema.js';
+export { OBJECT_SCHEMA, PREPARED_OBJECT_SCHEMA } from './descriptor.js';

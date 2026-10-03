@@ -1,3 +1,4 @@
+import { SOURCE_MANIFEST_SCHEMA } from '../sources/source-manifest-schema.js';
 import { safeRelativePath } from './source-path.js';
 import { isArray } from '@cssearth/core';
 import { parseSourceBinding } from '../sources/catalog.js';
@@ -70,8 +71,6 @@ export async function createSourceManifest({ objectId, objectName, sourceRoot, i
   });
 }
 
-/** Every source manifest, of an object or of a shared kernel bank, has this one format name. */
-export const SOURCE_MANIFEST_SCHEMA = "cssearth-authoritative-sources@3";
 
 /** `inputs: 'optional'` is for an object whose recipe declares no surface: it prepares nothing from input files, and its
  * datasets' inputs are their banks'. Every other manifest lists at least one input. */

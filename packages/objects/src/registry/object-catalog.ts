@@ -1,3 +1,4 @@
+import { OBJECT_SCHEMA } from '../descriptor.js';
 import { parseDistanceSubject } from '../prepared-data/spatial-relations.js';
 import type { ObjectDiscovery } from './object-discovery.js';
 import { parseObjectDiscovery } from './object-discovery.js';
@@ -38,7 +39,7 @@ function aliases(value: unknown, id: string): readonly string[] {
 
 /** Decode package metadata at both the build and application boundaries. */
 export function catalogEntry<Scene, Signal>(input: unknown, loadScene: ObjectDefinitionInput<Scene, Signal>['loadScene'], distance: NavigationDistance, discovery?: ObjectDiscovery): CatalogEntry<Scene, Signal> {
-  if (!isRecord(input) || input.schema !== 'cssearth-object@2' || typeof input.id !== 'string' || !isRecord(input.properties)) {
+  if (!isRecord(input) || input.schema !== OBJECT_SCHEMA || typeof input.id !== 'string' || !isRecord(input.properties)) {
     throw new TypeError('Invalid catalogue descriptor.');
   }
   const catalog = input.properties.catalog;

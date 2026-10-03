@@ -1,3 +1,4 @@
+import { SOURCE_MANIFEST_SCHEMA } from '@cssearth/objects';
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { createSourceManifest } from '@cssearth/objects/node';
@@ -13,7 +14,7 @@ export async function fixtureSource(sourceRoot: string, entries: readonly {
       sourceBinding: { kind: 'local', reason: 'Synthetic unit-test input' }, ...entry, bytes: bytes.length };
   }));
   await writeFile(resolve(sourceRoot, 'manifest.json'), JSON.stringify({
-    schema: 'cssearth-authoritative-sources@3', inputs, documents: [], generatedIntermediates: [],
+    schema: SOURCE_MANIFEST_SCHEMA, inputs, documents: [], generatedIntermediates: [],
   }));
   return createSourceManifest({ objectId: 'fixture', objectName: 'Fixture', sourceRoot });
 }

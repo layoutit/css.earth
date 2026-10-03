@@ -1,3 +1,4 @@
+export const PREPARED_EXPLORATION_SCHEMA = 'cssearth-prepared-exploration@3';
 import type { SourceResolver } from '../sources/catalog.js';
 import { explorationArray, explorationId, explorationRecord, explorationText, explorationUrl, parseAgencies, parseExplorationCatalog } from './exploration-catalog.js';
 import type { Agency } from './exploration-catalog.js';
@@ -24,7 +25,7 @@ export function parseExplorationImage(raw: unknown): ExplorationImage {
 /** `sources` checks every citation names a catalogued source; a reader of a file the catalogue writer already checked omits it. */
 export function parsePreparedExploration(input: unknown, sources: SourceResolver | undefined, routes: DatasetRoutes) {
   const value = explorationRecord(input, ['schema', 'catalog', 'agencies', 'images', 'emblems', 'graph']);
-  if (value.schema !== 'cssearth-prepared-exploration@3') throw new TypeError('Unsupported prepared exploration catalogue.');
+  if (value.schema !== PREPARED_EXPLORATION_SCHEMA) throw new TypeError('Unsupported prepared exploration catalogue.');
   const agencies: Readonly<Record<string, Agency>> = parseAgencies(value.agencies);
   const catalog = parseExplorationCatalog(value.catalog, agencies, sources);
   const assets = (raw: unknown) => {

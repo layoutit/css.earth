@@ -3,7 +3,7 @@
 // catalogue and of the catalogue and context descriptors in the object folders it is prepared from, and the runtime asset
 // closure: each object's inventory of baked files, which the bake writes, setup
 // restores and the build assembles. Nothing in the main entry imports this one.
-export { SOURCE_MANIFEST_SCHEMA, assertRangeResponse, assertSourceRange, createSourceManifest, rangeRequestHeader, validateSourceManifest,
+export { assertRangeResponse, assertSourceRange, createSourceManifest, rangeRequestHeader, validateSourceManifest,
   verifySourceManifest } from './source-manifest.js';
 export type { SourceEntry, SourceInput, SourceManifest, SourceManifestLocation, SourceRange, SourceVerification } from './source-manifest.js';
 export { safeRelativePath } from './source-path.js';

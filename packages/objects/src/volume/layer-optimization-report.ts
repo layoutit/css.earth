@@ -1,9 +1,10 @@
+export const LAYER_OPTIMIZATION_SCHEMA = 'cssearth-layer-optimization@1';
 import type { Axis } from './coordinates.js';
 import type { VolumeLayerPlan } from './volume-layer-plan.js';
 
 export const DEFAULT_VOLUME_LAYER_BUDGET = 500;
 export interface LayerOptimizationReport {
-  schema: 'cssearth-layer-optimization@1';
+  schema: typeof LAYER_OPTIMIZATION_SCHEMA;
   method: 'gradient-weighted-depth-displacement@1';
   maximumLayers: number;
   referenceLayers: number;
@@ -22,7 +23,7 @@ const sum = (v: Record<Axis, number>) => v.x + v.y + v.z;
 
 /** The report describes a coarse planning proxy. It never certifies a material or browser rendering. */
 export function readLayerOptimizationReport(value: unknown, plan: VolumeLayerPlan): LayerOptimizationReport {
-  if (!object(value) || value.schema !== 'cssearth-layer-optimization@1' || value.method !== 'gradient-weighted-depth-displacement@1' ||
+  if (!object(value) || value.schema !== LAYER_OPTIMIZATION_SCHEMA || value.method !== 'gradient-weighted-depth-displacement@1' ||
       !integer(value.maximumLayers, 3, DEFAULT_VOLUME_LAYER_BUDGET) || !integer(value.referenceLayers, 3, 1536) ||
       !integer(value.plannedLayers, 3, value.maximumLayers) || !integer(value.probeWidth, 8, 256) || value.probeSubpixels !== 2 ||
       !finite(value.targetNormalizedL1) || value.targetNormalizedL1 <= 0 || value.targetNormalizedL1 > .04 ||

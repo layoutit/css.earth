@@ -9,6 +9,7 @@
  *
  * Usage: node site/build/prepare/system-packages.mts [host id ...]   (no ids: every system)
  */
+import { OBJECT_SCHEMA } from '@cssearth/objects';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { SCENE_OBJECTS } from '../../objects.mts';
@@ -49,7 +50,7 @@ for (const system of systems) {
   if (host.parent !== id) {
     await writeFile(resolve(objectsRoot, system.hostId, 'object.json'), `${JSON.stringify({ ...host, parent: id }, null, 2)}\n`);
   }
-  const descriptor = { schema: 'cssearth-object@2', id, parent, type: 'system',
+  const descriptor = { schema: OBJECT_SCHEMA, id, parent, type: 'system',
     generator: 'site/build/prepare/system-packages.mts',
     properties: {
       system: { host: system.hostId, members: system.members },

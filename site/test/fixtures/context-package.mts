@@ -1,4 +1,4 @@
-import { PREPARED_CSS_VOLUME_SCHEMA, PREPARED_VOLUME_DATASETS_SCHEMA } from '@cssearth/objects';
+import { OBJECT_SCHEMA, PREPARED_OBJECT_SCHEMA, PREPARED_CSS_VOLUME_SCHEMA, PREPARED_VOLUME_DATASETS_SCHEMA } from '@cssearth/objects';
 import { createHash } from 'node:crypto';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
@@ -10,7 +10,7 @@ export async function writeContextPackage(root: string, id: string) {
   const image = Buffer.from('fixture texture bytes');
   const frame = { referenceFrame: 'sun-icrf', epochJdTt: 1, originM: [0, 0, 0],
     localToReferenceXyzw: [0, 0, 0, 1], metersPerUnit: 1, boundsUnits: { min: [-1, -1, -1], max: [1, 1, 1] } };
-  const bank = { schema: 'cssearth-prepared-object@1', id, type: 'volume-dataset-bank', format: PREPARED_VOLUME_DATASETS_SCHEMA,
+  const bank = { schema: PREPARED_OBJECT_SCHEMA, id, type: 'volume-dataset-bank', format: PREPARED_VOLUME_DATASETS_SCHEMA,
     data: { schema: PREPARED_VOLUME_DATASETS_SCHEMA, id, defaultDataset: 'optical', framingRadiusUnits: 1, datasets: [{
       id: 'optical', label: 'Optical', title: 'Fixture optical image', description: 'Structural test fixture', sourceUrl: 'https://example.test/source',
       brightness: { overall: 1, x: 1, y: 1, z: 1 }, stars: { frame, points: [] },
@@ -20,7 +20,7 @@ export async function writeContextPackage(root: string, id: string) {
           style: { width: '1px', height: '1px', transform: 'matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)', backgroundSize: '1px 1px', backgroundPosition: '0px 0px' } }] })) },
     }] } };
   const bankBytes = JSON.stringify(bank), preview = `/scenes/${id}/preview.webp`;
-  const descriptor = { schema: 'cssearth-object@2', id, type: 'volume-dataset-bank', properties: { frame },
+  const descriptor = { schema: OBJECT_SCHEMA, id, type: 'volume-dataset-bank', properties: { frame },
     prepared: { format: PREPARED_VOLUME_DATASETS_SCHEMA, url: 'prepared/datasets.json' } };
   // The dataset's own source record: the manifest input that names it.
   const manifest = { schema: 'cssearth-volume-source-manifest@2', pathBase: 'repository', inputs: [{ id: 'image', datasetId: 'optical', path: '.local/fixture/image.tif',

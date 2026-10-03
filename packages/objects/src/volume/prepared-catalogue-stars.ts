@@ -1,4 +1,6 @@
 /** Prepared catalogue contract. Historical schema identifiers are preserved byte-for-byte. */
+export const PREPARED_LMC_STARS_SCHEMA = 'cssearth-lmc-stars@1';
+export const PREPARED_CATALOGUE_STARS_SCHEMA = 'cssearth-catalogue-stars@2';
 import type { DensityVolumeFrame } from '../density-volume.js';
 
 export interface PreparedLmcStar {
@@ -8,7 +10,7 @@ export interface PreparedLmcStar {
 }
 export interface PreparedLmcStars {
   /** The historical LMC schema fixes its id and 'Bonanos2009:' star prefix; the generic schema declares both. */
-  schema: 'cssearth-lmc-stars@1' | 'cssearth-catalogue-stars@2'; id: string; frame: DensityVolumeFrame;
+  schema: typeof PREPARED_LMC_STARS_SCHEMA | typeof PREPARED_CATALOGUE_STARS_SCHEMA; id: string; frame: DensityVolumeFrame;
   magnitudeBand: 'V'; stars: PreparedLmcStar[]; sourceUrl: string; credit: string; depthAssumption: string; provenance: unknown;
   starIdPrefix?: string;
 }
@@ -17,10 +19,10 @@ const finiteArray = (v: unknown, length: number): v is number[] =>
 
 export function parsePreparedLmcStars(value: unknown, expectedFrame: DensityVolumeFrame): PreparedLmcStars {
   const payload = value as PreparedLmcStars;
-  const historical = payload?.schema === 'cssearth-lmc-stars@1';
+  const historical = payload?.schema === PREPARED_LMC_STARS_SCHEMA;
   const prefix = historical ? 'Bonanos2009:' : payload?.starIdPrefix;
   if (!payload || (historical ? payload.id !== 'lmc-stars' || payload.starIdPrefix !== undefined :
-        payload.schema !== 'cssearth-catalogue-stars@2' || typeof payload.id !== 'string' || !/^[a-z0-9-]{1,64}$/.test(payload.id)) ||
+        payload.schema !== PREPARED_CATALOGUE_STARS_SCHEMA || typeof payload.id !== 'string' || !/^[a-z0-9-]{1,64}$/.test(payload.id)) ||
       typeof prefix !== 'string' || !/^[A-Za-z0-9]{1,32}:$/.test(prefix) ||
       payload.magnitudeBand !== 'V' || !payload.frame || !Array.isArray(payload.stars) || payload.stars.length < 1 || payload.stars.length > 2000 ||
       typeof payload.sourceUrl !== 'string' || !payload.sourceUrl.startsWith('https://') ||

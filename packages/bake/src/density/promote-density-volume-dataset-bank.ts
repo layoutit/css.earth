@@ -1,4 +1,4 @@
-import { PREPARED_VOLUME_DATASETS_SCHEMA, DENSITY_VOLUME_FORMAT, parsePreparedDensityVolume, parseDensityVolumeObjectDescriptor, validatePreparedVolumeDatasets, type PreparedCssVolume } from '@cssearth/objects';
+import { OBJECT_SCHEMA, PREPARED_OBJECT_SCHEMA, PREPARED_VOLUME_DATASETS_SCHEMA, DENSITY_VOLUME_FORMAT, parsePreparedDensityVolume, parseDensityVolumeObjectDescriptor, validatePreparedVolumeDatasets, type PreparedCssVolume } from '@cssearth/objects';
 /**
  * Package an already-prepared physical density volume as one selectable dataset.
  *
@@ -179,7 +179,7 @@ export async function promoteDensityVolumeDatasetBank(request: DensityVolumeData
     framingRadiusUnits: request.framingRadiusUnits, contextVisibility: 'independent', starsEnabled: false,
     ...(request.attachedTo === undefined ? {} : { attachedTo: request.attachedTo }),
     provenance, datasets });
-  const envelope = json({ schema: 'cssearth-prepared-object@1', id: request.id, type: 'volume-dataset-bank', format: PREPARED_VOLUME_DATASETS_SCHEMA, data });
+  const envelope = json({ schema: PREPARED_OBJECT_SCHEMA, id: request.id, type: 'volume-dataset-bank', format: PREPARED_VOLUME_DATASETS_SCHEMA, data });
   const delivery = json({ schema: 'cssearth-density-volume-dataset-bank-source@1',
     ...(request.attachedTo === undefined ? {} : { attachedTo: request.attachedTo }),
     ...(sourceReceipts.length === 1 ? { source: sourceReceipts[0] } : { sources: sourceReceipts }),
@@ -197,7 +197,7 @@ export async function promoteDensityVolumeDatasetBank(request: DensityVolumeData
     await mkdir(dirname(output), { recursive: true }); await writeFile(output, bytes);
   }
   await writeFile(preparedOutput, envelope);
-  const destinationDescriptor = json({ schema: 'cssearth-object@2', id: request.id, type: 'volume-dataset-bank', properties: {
+  const destinationDescriptor = json({ schema: OBJECT_SCHEMA, id: request.id, type: 'volume-dataset-bank', properties: {
     frame: presentationFrame, preparation: { source: 'source/delivery.json' },
   }, prepared: { format: PREPARED_VOLUME_DATASETS_SCHEMA, url: 'prepared/datasets.json' } });
   const destinationDescriptorPath = local(destinationDirectory, 'object.json');
