@@ -36,7 +36,7 @@
     "reference": "Leroy et al. (2021), PHANGS-ALMA, ApJS 257, 43, table of galaxies (orientations from Lang et al. 2020), row NGC4254: inclination 34.4 ± 1.0°, position angle 68.1 ± 0.5°. Which edge of the disc is nearer is not in the source: the disc is drawn with the edge at position angle 158° nearer, an assumption."
   },
   "displayModel": "The photograph lies on one flat plane, the disc's midplane, as the Milky Way's backing image does. Nothing in the image has depth.",
-  "coverage": "Milky Way foreground stars (Gaia DR3) are removed where they show; fainter and uncatalogued stars remain.",
+  "coverage": "Stars are removed from the picture before the bake by NOX, which predicts the light under a star and does not measure it; 3 of the 3 Gaia stars brighter than G 14 in the picture had a glow, filled out to at most 140 px (23″).",
   "acquisition": {
     "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FSDSS9%2Fcolor&width=3000&height=3000&fov=0.134&projection=TAN&coordsys=icrs&ra=184.706731&dec=14.416792&format=jpg",
     "dimensions": [

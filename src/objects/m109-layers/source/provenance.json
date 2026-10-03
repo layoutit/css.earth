@@ -36,7 +36,7 @@
     "reference": "HyperLEDA (Makarov et al. 2014), NGC3992 = PGC 37617: inclination 47.36°, major-axis position angle 74.57°, from its outline at 25 mag per square arcsecond. Which edge of the disc is nearer is not in the source: the disc is drawn with the edge at position angle 165° nearer, an assumption."
   },
   "displayModel": "The photograph lies on one flat plane, the disc's midplane, as the Milky Way's backing image does. Nothing in the image has depth.",
-  "coverage": "Milky Way foreground stars (Gaia DR3) are removed where they show; fainter and uncatalogued stars remain.",
+  "coverage": "Stars are removed from the picture before the bake by NOX, which predicts the light under a star and does not measure it; 5 of the 5 Gaia stars brighter than G 14 in the picture had a glow, filled out to at most 232 px (52″).",
   "acquisition": {
     "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FSDSS9%2Fcolor&width=3000&height=3000&fov=0.188&projection=TAN&coordsys=icrs&ra=179.399919&dec=53.374515&format=jpg",
     "dimensions": [

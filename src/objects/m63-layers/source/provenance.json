@@ -36,7 +36,7 @@
     "reference": "HyperLEDA (Makarov et al. 2014), NGC5055 = PGC 46153: inclination 54.87°, major-axis position angle 103°, from its outline at 25 mag per square arcsecond. Which edge of the disc is nearer is not in the source: the disc is drawn with the edge at position angle 193° nearer, an assumption."
   },
   "displayModel": "The photograph lies on one flat plane, the disc's midplane, as the Milky Way's backing image does. Nothing in the image has depth.",
-  "coverage": "Milky Way foreground stars (Gaia DR3) are removed where they show; fainter and uncatalogued stars remain.",
+  "coverage": "Stars are removed from the picture before the bake by NOX, which predicts the light under a star and does not measure it; 12 of the 13 Gaia stars brighter than G 14 in the picture had a glow, filled out to at most 145 px (55″).",
   "acquisition": {
     "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FSDSS9%2Fcolor&width=3000&height=3000&fov=0.315&projection=TAN&coordsys=icrs&ra=198.955396&dec=42.029278&format=jpg",
     "dimensions": [

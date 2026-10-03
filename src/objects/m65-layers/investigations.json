@@ -21,6 +21,15 @@
         "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record"
       ],
       "revisitWhen": "A whole-galaxy photograph with sky coordinates is published under an attribution licence."
+    },
+    {
+      "id": "star-removal",
+      "subject": "Stars in the picture",
+      "status": "included",
+      "finding": "The picture was first cleaned only by the bake's pass over the Gaia foreground stars, which leaves the brightest stars, the faint ones Gaia cannot certify and those it reads as extended. The Nebula Lab's NOX removes them all and keeps the galaxy's arms and dust lanes; it also takes the galaxy's own compact knots and clusters, most visibly in M51, which was looked at and accepted on 2026-10-03; 8 of the 8 Gaia stars brighter than G 14 in the picture had a glow, filled out to at most 156 px (38″). The lab's isophote fill, made for ellipticals, left a dark notch on a spiral, so the glow is filled from the ring around it.",
+      "evidence": [
+        "https://github.com/charvey2718/nox"
+      ]
     }
   ]
 }
