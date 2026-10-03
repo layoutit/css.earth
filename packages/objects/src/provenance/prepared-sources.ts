@@ -1,9 +1,10 @@
+export const PREPARED_SOURCES_SCHEMA = 'cssearth-prepared-sources@1';
 import { parseSourceCatalog, parseSourceBinding, sourceResolver, sourceArray, sourceObject, sourceText, sourcePath, sourceUnique } from '../sources/catalog.js';
 import { parseSourceUsage } from './source-usage.js';
 import type { DatasetRoutes } from './dataset-routes.js';
 export function parsePreparedSources(raw: unknown, routes: DatasetRoutes) {
   const value = sourceObject(raw,['schema','catalog','usage','inventory','closure']);
-  if (value.schema !== 'cssearth-prepared-sources@1') throw new TypeError('Unsupported prepared sources.');
+  if (value.schema !== PREPARED_SOURCES_SCHEMA) throw new TypeError('Unsupported prepared sources.');
   const catalog = parseSourceCatalog(value.catalog), sources = sourceResolver(catalog);
   const inventory = sourceArray(value.inventory, raw => {
     const entry = sourceObject(raw,['ownerPath','localId','binding','used']);

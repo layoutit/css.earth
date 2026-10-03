@@ -1,4 +1,4 @@
-import { PREPARED_VOLUME_DATASETS_SCHEMA, parsePreparedLmcStars, cloudDensityWeight, validateCloudDensityFilter, type CloudDensityFilter, validatePreparedVolumeDatasets } from '@cssearth/objects';
+import { OBJECT_SCHEMA, PREPARED_OBJECT_SCHEMA, PREPARED_VOLUME_DATASETS_SCHEMA, parsePreparedLmcStars, cloudDensityWeight, validateCloudDensityFilter, type CloudDensityFilter, validatePreparedVolumeDatasets } from '@cssearth/objects';
 import { isRecord, isNonemptyText } from '@cssearth/core';
 /** Restore a delivered finite-emission dataset bank from its checked-in compact inputs; no lab, no research services. */
 import assert from 'node:assert/strict';
@@ -130,7 +130,7 @@ export async function prepareFiniteEmissionObject(root: string, directory: strin
     assert.ok(first, 'The delivered default dataset is missing.');
     const data = validatePreparedVolumeDatasets({ schema: PREPARED_VOLUME_DATASETS_SCHEMA, id: bankId, defaultDataset, framingRadiusUnits,
       starsEnabled: Boolean(record(first.stars, 'default star presentation').enabled), datasets });
-    const envelope = stringify({ schema: 'cssearth-prepared-object@1', id: bankId, type: 'volume-dataset-bank', format: PREPARED_VOLUME_DATASETS_SCHEMA, data });
+    const envelope = stringify({ schema: PREPARED_OBJECT_SCHEMA, id: bankId, type: 'volume-dataset-bank', format: PREPARED_VOLUME_DATASETS_SCHEMA, data });
 
     await mkdir(installed, { recursive: true });
     // Replace each installed dataset directory; a rename onto a populated one fails, and a re-prepare is normal.
@@ -141,7 +141,7 @@ export async function prepareFiniteEmissionObject(root: string, directory: strin
     await writeAtomic(resolve(installed, 'datasets.json'), envelope);
     await writeAtomic(resolve(installed, 'delivery.json'), stringify({ schema: 'cssearth-finite-emission-delivery-receipt@2',
       compactInputs, datasets: receipts }));
-    await writeAtomic(resolve(directory, 'object.json'), stringify({ schema: 'cssearth-object@2', id: bankId, type: 'volume-dataset-bank',
+    await writeAtomic(resolve(directory, 'object.json'), stringify({ schema: OBJECT_SCHEMA, id: bankId, type: 'volume-dataset-bank',
       properties: { frame, preparation: { source: 'source/compact-delivery.json' } },
       prepared: { format: PREPARED_VOLUME_DATASETS_SCHEMA, url: 'prepared/datasets.json' } }));
     console.log(`DELIVERY_READY ${directory}: ${datasets.length} datasets, ${datasets.reduce((sum, dataset) => sum + dataset.volume.resources.length, 0)} atlases`);

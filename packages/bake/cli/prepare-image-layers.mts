@@ -1,4 +1,4 @@
-import { PREPARED_IMAGE_LAYER_BANK_SCHEMA } from '@cssearth/objects';
+import { OBJECT_SCHEMA, PREPARED_IMAGE_LAYER_BANK_SCHEMA } from '@cssearth/objects';
 /** Generic offline preparation entry point for retained extruded image layers. */
 import { mkdir, readFile, unlink, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
@@ -18,7 +18,7 @@ export async function prepareImageLayerObject(objectDirectory: string) {
   let previous:string[]=[];try{const old=JSON.parse(await readFile(resolve(outputDirectory,'image-layers.json'),'utf8')) as {resources?:{path?:unknown}[]};previous=(old.resources??[]).flatMap(r=>typeof r.path==='string'?[r.path]:[]);}catch(error){if((error as NodeJS.ErrnoException).code!=='ENOENT')throw error;}
   const prepared=await prepareImageLayers({sourceDirectory,outputDirectory,recipe});
   const preparedPath=resolve(outputDirectory,'image-layers.json'),preparedBytes=await readFile(preparedPath);
-  const nextDescriptor={schema:'cssearth-object@2',id:recipe.id,type:'image-layer-bank',properties:{...descriptor.properties,frame:prepared.frame,preparation:ref},
+  const nextDescriptor={schema:OBJECT_SCHEMA,id:recipe.id,type:'image-layer-bank',properties:{...descriptor.properties,frame:prepared.frame,preparation:ref},
     prepared:{format:PREPARED_IMAGE_LAYER_BANK_SCHEMA,url:'prepared/image-layers.json'}};
   await writeFile(resolve(root,'object.json'),JSON.stringify(nextDescriptor,null,2)+'\n');
   const retained=new Set(prepared.resources.map(resource=>resource.path));

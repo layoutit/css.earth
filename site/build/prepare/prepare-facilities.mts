@@ -1,7 +1,7 @@
 import { contextLineages } from '@cssearth/bake/sources';
 import { spatialSourceCitations } from '@cssearth/bake/sources';
 import { sourceResolver, parseSourceBinding } from '@cssearth/objects/sources';
-import { compileSourceUsage, sourceCredits } from '@cssearth/objects/provenance';
+import { PREPARED_EXPLORATION_SCHEMA, PREPARED_SOURCES_SCHEMA, compileSourceUsage, sourceCredits } from '@cssearth/objects/provenance';
 import type { SourceUse, SourceUsageObject } from '@cssearth/objects/provenance';
 import { parsePreparedSources } from '@cssearth/objects/provenance';
 import { readSourceCatalog } from '@cssearth/bake/sources';
@@ -185,10 +185,10 @@ export async function prepareFacilities({ root = resolve(import.meta.dirname, '.
     }
   }
   metadata.push(...await spatialSourceCitations(root, sources, input));
-  const sourcePayload = {schema:'cssearth-prepared-sources@1',catalog:sourceCatalog,
+  const sourcePayload = {schema:PREPARED_SOURCES_SCHEMA,catalog:sourceCatalog,
     usage:compileSourceUsage(objects,sources,DATASET_ROUTES,metadata),inventory,closure:[...closure].sort()};
   const preparedSources = parsePreparedSources(sourcePayload,DATASET_ROUTES);
-  const payload = { schema: 'cssearth-prepared-exploration@3', catalog, agencies, images, emblems,
+  const payload = { schema: PREPARED_EXPLORATION_SCHEMA, catalog, agencies, images, emblems,
     graph: compileContributions(objects, catalog, DATASET_ROUTES) };
   const prepared = parsePreparedExploration(payload,sources,DATASET_ROUTES);
   const output = { path: resolve(root, 'site/prepared-facilities.json'), text: JSON.stringify(payload, null, 2) + '\n' };

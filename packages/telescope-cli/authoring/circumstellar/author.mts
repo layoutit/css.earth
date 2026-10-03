@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { VOLUME_RECIPE_SCHEMA } from '@cssearth/objects';
 /** Author a circumstellar volume: the material around a star, drawn from coronagraph mosaics as a density grid attached to
  * that star, the way Betelgeuse's shell is (packages/bake/authoring/betelgeuse-shell/author.mts), but from one
  * checked-in recipe rather than a script per star.
@@ -724,7 +725,7 @@ export async function author(id: string, options: { sources?: readonly string[] 
   const deliveryGrids: { id: string; label: string; sourceUrl: string; recipe: { path: string } }[] = [];
   for (const b of built) {
     const file = `density-${b.dataset.id}.ktx2`, recipeBytes = Buffer.from(JSON.stringify({
-      schema: 'cssearth-volume-recipe@1',
+      schema: VOLUME_RECIPE_SCHEMA,
       grid: { path: file, dimensions: [size, size, size], encoding: 'sqrt-density-unorm8', bounds: { min: [-halfUnits, -halfUnits, -halfUnits], max: [halfUnits, halfUnits, halfUnits] } },
       material: { intensityScale: 1, stepScale: 1, stepMetric: 'source', emission: [[1, 0, 0], [0, 1, 0], [0, 0, 1]].map((color, channel) => ({ channel, color, strength: 1 })),
         absorption: [], emissionTransfer: 'shared-opacity', exposureGain: b.exposureGain },

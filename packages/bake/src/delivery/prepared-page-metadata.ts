@@ -1,3 +1,4 @@
+import { OBJECT_PAGE_SCHEMA } from '@cssearth/objects';
 import { requireRecord } from '@cssearth/core';
 
 /** The page's share of the runtime: assets and controls beside the scene. The site builds it from the restored runtime
@@ -7,6 +8,6 @@ export function preparePageMetadata(id: string, input: unknown) {
   if (definition.id !== id || !definition.assets || !definition.controls) {
     throw new TypeError(`${id}: invalid prepared page metadata inputs.`);
   }
-  const text = JSON.stringify({ schema: 'cssearth-object-page@1', id, assets: definition.assets, controls: definition.controls });
+  const text = JSON.stringify({ schema: OBJECT_PAGE_SCHEMA, id, assets: definition.assets, controls: definition.controls });
   return { text, reference: { url: 'prepared/page.json' } };
 }

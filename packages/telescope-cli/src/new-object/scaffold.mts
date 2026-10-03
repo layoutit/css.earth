@@ -1,10 +1,11 @@
 /** The package files of a placed star, shared by the shape-only scaffold and the full generator (generate.mts); the command is
  * packages/telescope-cli/src/new-object/new-object-cli.mts. */
+
 import { mkdir, readFile, stat, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { skyPlaneOrientation, starStateFromAstrometryKm } from '@cssearth/astronomy';
 import { requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { NEUTRAL_CATALOGUE_COLOR } from '@cssearth/objects';
+import { AUTHORED_OBJECT_SCHEMA, OBJECT_SCHEMA, SOURCE_MANIFEST_SCHEMA, NEUTRAL_CATALOGUE_COLOR, PREPARED_CSS_OBJECT_FORMAT } from '@cssearth/objects';
 import { readStarTemperature, temperatureCatalogueColor } from '@cssearth/bake/objects/color';
 import { neutralDiscMarker } from '@cssearth/bake/navigation';
 import { sphereProjection } from '@cssearth/bake/objects/scene';
@@ -143,9 +144,9 @@ export function scaffoldStarFiles(spec: StarScaffold, bodyRecord: unknown, epoch
   const orientation = skyPlaneOrientation(astrometry, 0), offLimbSize = 600;
   const files = new Map<string, string>(), put = (path: string, value: unknown) => files.set(path, typeof value === 'string' ? value : `${JSON.stringify(value, null, 2)}\n`);
   const o = `src/objects/${id}`;
-  put(`${o}/object.json`, { schema: 'cssearth-object@2', id, type: 'layered-body', properties: {
+  put(`${o}/object.json`, { schema: OBJECT_SCHEMA, id, type: 'layered-body', properties: {
     preparation: { schema: 'cssearth-object-preparation@1', label: name, steps: ['verify-sources', 'assets', 'panel-content', 'datasets', 'starfield', 'scene', 'controls', 'presentation', 'runtime-assets'] },
-    recipe: { schema: 'cssearth-authored-object@2', surfaces: [{ id: 'body', source: 'geometry', projection: 'equirectangular', datasets: [{ id: 'shape', source: 'content', material: 'emission' }] }],
+    recipe: { schema: AUTHORED_OBJECT_SCHEMA, surfaces: [{ id: 'body', source: 'geometry', projection: 'equirectangular', datasets: [{ id: 'shape', source: 'content', material: 'emission' }] }],
       shape: { kind: 'sphere', radiusKm }, materials: [{ id: 'emission', source: 'raster', model: 'emissive' }],
       sources: ['raster', 'geometry', 'presentation'].map(source => ({ id: source, path: `source/preparation/${source}.json` })).concat([
         { id: 'content', path: 'source/content/object.json' }, { id: 'solar-system', path: 'source/presentation/solar-system.json' }, { id: 'rotation', path: 'source/preparation/rotation.json' },
@@ -155,7 +156,7 @@ export function scaffoldStarFiles(spec: StarScaffold, bodyRecord: unknown, epoch
     catalog: { name, classification: blackHole ? 'black-hole' : 'star', color: catalogColor, distanceAu: Math.round(Math.hypot(...originM) / AU_M * 10) / 10, description: spec.description, systemName: spec.system, ...(spec.aliases?.length ? { aliases: spec.aliases } : {}), order: spec.order ?? 1100, context: { order: (spec.order ?? 1100) - 3 }, ...(spec.featured ? { featured: true } : {}) },
     // A first frame for the catalogue; preparation replaces it with the prepared presentation frame.
     worldFrame: { referenceFrame: 'sun-icrf', epochJdTt, originM, presentationToReference: [1, 0, 0, 0, -1, 0, 0, 0, 1], orbitUpReference: [0, 0, 1], metersPerUnit: radiusKm * 1000 / BODY_RADIUS_UNITS, bodyRadiusM: radiusKm * 1000 } },
-    prepared: { format: 'cssearth-css-object@5', url: 'prepared/object.json' } });
+    prepared: { format: PREPARED_CSS_OBJECT_FORMAT, url: 'prepared/object.json' } });
   put(`${o}/source/preparation/raster.json`, { schema: 'cssearth-raster-recipe@2', publicBase: `/scenes/${id}/`, sourceWidth: 1024, sourceHeight: 512, width: 1024, height: 512, latitudeBands: 16, polarTile: 256,
     resample: 'density-before-pack', polarProjection: 'orthographic-bilinear', polesOutput: `${id}-poles-{id}{suffix}.webp`, surfaceMetadata: { schema: `css${id}-prepared-assets@1` },
     thumbnail: { size: 64, centerLongitudeDegrees: 0 },
@@ -220,7 +221,7 @@ export function scaffoldStarFiles(spec: StarScaffold, bodyRecord: unknown, epoch
   const local = (reason: string) => ({ kind: 'local', reason });
   const preparation = (entryId: string, path: string, origin: string, consumers: string[]) => ({ id: `${id}-${entryId}`, path, origin, sourceBinding: local('Project-authored preparation record; published inputs retain their own identities and hashes.'),
     credit: 'cssEarth and the institutional sources identified in this record', license: 'Project-authored preparation record; referenced observations retain their source terms', acquisition: 'checked repository source', redistribution: 'checked authored source with embedded provenance', consumers });
-  put(`${o}/source/manifest.json`, { schema: `cssearth-authoritative-sources@3`, inputs: [
+  put(`${o}/source/manifest.json`, { schema: SOURCE_MANIFEST_SCHEMA, inputs: [
     { id: `${id}-observational-measurements`, path: 'measurements.json', origin: spec.paper, credit: spec.paperCredit, license: 'Factual numerical measurements; source attribution retained', acquisition: 'Transcribed published measurements with their sources', redistribution: 'Factual parameter transcription only; no paper figures', consumers: ['shape-model'], sourceBinding: local('Measurements transcribed in this package with their sources; repinned when edited.') },
     preparation('preparation-raster', 'preparation/raster.json', 'Repository-authored raster recipe: the shared neutral gray on the reference sphere, transparent plates', ['assets', 'datasets']),
     preparation('preparation-geometry', 'preparation/geometry.json', 'Repository-authored CSS geometry profile: 248-unit sphere, 16 x 32 leaves, emissive material', ['scene', 'presentation']),
@@ -244,4 +245,3 @@ export async function scaffoldStar(spec: StarScaffold, { SOLAR_GEOMETRY_EPOCH_JD
   await writeFile(resolve(presentation, 'context.png'), await neutralDiscMarker());
   return [...files.keys(), `src/objects/${spec.id}/source/presentation/context.png`];
 }
-
