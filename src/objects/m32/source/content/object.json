@@ -48,6 +48,17 @@
           "label": "HyperLEDA (Makarov et al. 2014), NGC0221 = PGC 2555: centre, type E, D25 diameter 7.7 arcmin",
           "checked": "2026-10-02"
         }
+      },
+      {
+        "id": "membership",
+        "label": "Membership",
+        "value": "Local group, Andromeda",
+        "source": {
+          "catalogueId": "lvdb-v1-1-1",
+          "url": "https://github.com/apace7/local_volume_database/releases/download/v1.1.1/comb_all.csv",
+          "label": "Pace (2025), The Local Volume Database, DOI 10.33232/001c.144859; release v1.1.1: M 32 (key m_032), host m_031 (M 31).",
+          "checked": "2026-10-03"
+        }
       }
     ],
     "moreFacts": []
@@ -91,6 +102,12 @@
       "role": "facts",
       "description": "HyperLEDA (Makarov et al. 2014), NGC0221 = PGC 2555: centre, type E, D25 diameter 7.7 arcmin",
       "href": "http://atlas.obs-hp.fr/hyperleda/"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Pace (2025), The Local Volume Database, DOI 10.33232/001c.144859; release v1.1.1: M 32 (key m_032), host m_031 (M 31).",
+      "href": "https://github.com/apace7/local_volume_database/releases/download/v1.1.1/comb_all.csv"
     }
   ],
   "provenance": {

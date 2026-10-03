@@ -48,6 +48,17 @@
           "label": "HyperLEDA (Makarov et al. 2014), NGC4649 = PGC 42831: centre, type E, D25 diameter 6.8 arcmin",
           "checked": "2026-10-02"
         }
+      },
+      {
+        "id": "membership",
+        "label": "Membership",
+        "value": "Galaxy cluster, Virgo",
+        "source": {
+          "catalogueId": "publication-binggeli1985aj-90-1681b",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/AJ/90/1681",
+          "label": "Binggeli, Sandage & Tammann (1985), AJ 90, 1681: the Virgo Cluster Catalog, VCC 1978 = NGC 4649, membership M (member).",
+          "checked": "2026-10-03"
+        }
       }
     ],
     "moreFacts": []
@@ -91,6 +102,12 @@
       "role": "facts",
       "description": "HyperLEDA (Makarov et al. 2014), NGC4649 = PGC 42831: centre, type E, D25 diameter 6.8 arcmin",
       "href": "http://atlas.obs-hp.fr/hyperleda/"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Binggeli, Sandage & Tammann (1985), AJ 90, 1681: the Virgo Cluster Catalog, VCC 1978 = NGC 4649, membership M (member).",
+      "href": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/AJ/90/1681"
     }
   ],
   "provenance": {

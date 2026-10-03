@@ -59,6 +59,17 @@
           "label": "HyperLEDA (Makarov et al. 2014), NGC4569 = PGC 42089: centre, type Sab, D25 diameter 9.1 arcmin",
           "checked": "2026-10-02"
         }
+      },
+      {
+        "id": "membership",
+        "label": "Membership",
+        "value": "Galaxy cluster, Virgo",
+        "source": {
+          "catalogueId": "publication-binggeli1985aj-90-1681b",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/AJ/90/1681",
+          "label": "Binggeli, Sandage & Tammann (1985), AJ 90, 1681: the Virgo Cluster Catalog, VCC 1690 = NGC 4569, membership M (member).",
+          "checked": "2026-10-03"
+        }
       }
     ],
     "moreFacts": []
@@ -108,6 +119,12 @@
       "role": "facts",
       "description": "Leroy et al. (2021), PHANGS-ALMA, ApJS 257, 43, table of galaxies (orientations from Lang et al. 2020), row NGC4569: inclination 70.0 ± 6.0°, position angle 18.0 ± 2.0°",
       "href": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/257/43"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Binggeli, Sandage & Tammann (1985), AJ 90, 1681: the Virgo Cluster Catalog, VCC 1690 = NGC 4569, membership M (member).",
+      "href": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/AJ/90/1681"
     }
   ],
   "provenance": {
