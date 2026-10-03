@@ -29,12 +29,20 @@ test('every scene and every package the host draws has exactly one searchable de
   const systems = OBJECTS.filter(object => object.system);
   assert.deepEqual(SCENE_OBJECTS, OBJECTS.filter(object => !object.system));
   assert.ok(systems.length > 700 && systems.some(object => object.id === 'solar-system') && systems.some(object => object.id === 'jupiter-system'));
+  const starSystems = new Set(systems.filter(object => object.classification === 'star-system').map(object => object.name));
+  for (const name of ['61 Cygni system', '70 Ophiuchi system', 'Alpha Centauri system', 'GJ 338 system', 'Struve 2398 system', 'Sirius system']) assert.ok(starSystems.has(name), name);
+  assert.equal(requireObject('trappist-1-system').classification, 'planetary-system');
   for (const system of systems) {
     const host = requireObject(system.system!.host);
     assert.equal(system.id, systemObjectId(host.id), `${system.id} is named after its host`);
     assert.equal(system.route, `/${system.id}/`);
-    // What kind of system it is is its classification: a star's planets, or a planet's or small body's moons.
-    assert.equal(system.classification, ['star', 'black-hole'].includes(host.classification) ? 'planetary-system' : 'satellite-system', system.id);
+    // What kind of system it is is its classification: a planet's or small body's moons, a star with only stars inside its
+    // system, or a star with a planet.
+    const inside = OBJECTS.filter(object => object.parent === system.id && object.id !== host.id);
+    if (!['star', 'black-hole'].includes(host.classification)) assert.equal(system.classification, 'satellite-system', system.id);
+    else if (inside.some(object => !['star', 'black-hole'].includes(object.classification))) assert.equal(system.classification, 'planetary-system', system.id);
+    else if (inside.length) assert.equal(system.classification, 'star-system', system.id);
+    else assert.ok(['star-system', 'planetary-system'].includes(system.classification), system.id);
     assert.equal(host.system, undefined, `${host.id} hosts a system and is not one`);
   }
   // No other object's id reads as a system's.

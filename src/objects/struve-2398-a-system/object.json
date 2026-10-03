@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "struve-2398-a-system",
+  "parent": "milky-way",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "struve-2398-a"
+    },
+    "catalog": {
+      "name": "Struve 2398 system",
+      "systemName": "Struve 2398 system",
+      "classification": "star-system",
+      "color": "#ffca8b",
+      "distanceAu": 726690.7,
+      "description": "A nearby red dwarf whose disc was measured by interferometry: 36% of the Sun's width."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        10177350623261552,
+        -53989269979796730,
+        93806954962331950
+      ],
+      "presentationToReference": [
+        0.09363290972300438,
+        0.15995233621704433,
+        -0.9826739684938811,
+        -0.49670803718532974,
+        -0.8478969616523374,
+        -0.18534256989755984,
+        0.862852249236392,
+        -0.5054562221987621,
+        -0.000058551300773012455
+      ],
+      "orbitUpReference": [
+        -0.15995233621704433,
+        0.8478969616523374,
+        0.5054562221987621
+      ],
+      "metersPerUnit": 799157.4193548387,
+      "bodyRadiusM": 247738800
+    }
+  }
+}

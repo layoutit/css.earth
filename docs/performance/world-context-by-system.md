@@ -118,5 +118,9 @@ objects added since (15 far destinations, the four SH0ES galaxies), less the two
 These are the files as the bake writes them. The deployed response also carries each billboard's published address, which
 does not compress: `/world/anywhere.json` is then 36,245 B.
 
+Later that day five star systems joined the tree (61 Cygni, 70 Ophiuchi, Alpha Centauri, GJ 338, Struve 2398: 756
+files, 1,802 rows in entries). Two of them hold a featured companion, so 22 files are read by every page:
+`/world/anywhere.json` is 25,850 B as baked, with the same 286 bodies.
+
 `/world/hosts.json` (12.8 KB gzipped after the first view) is gone: the Milky Way's `places.json` is 12.6 KB and the
 Solar System's, the Clouds' and M31's are under 0.3 KB each, asked for after the first view as before.

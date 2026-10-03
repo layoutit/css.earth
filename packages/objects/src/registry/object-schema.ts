@@ -19,11 +19,11 @@ export interface ObjectWorldFrame {
 
 export type ObjectClassification = 'star' | 'planet' | 'satellite' | 'dwarf-planet' | 'asteroid' | 'comet' | 'trans-neptunian' | 'interstellar' | 'exoplanet' | 'black-hole'
   | 'galaxy' | 'galaxy-cluster' | 'nebula' | 'globular-cluster'
-  /** A host with the bodies that orbit it, as an object of its own: a star's planets, a planet's moons. */
-  | 'planetary-system' | 'satellite-system';
-/** The classifications of a system object: what its host is says which (a star's is planetary, any other body's a satellite
- * system). */
-export const SYSTEM_CLASSIFICATIONS = Object.freeze(['planetary-system', 'satellite-system'] as const);
+  /** A host with what is bound to it, as an object of its own: a star's planets, a planet's moons, a star's companion stars. */
+  | 'planetary-system' | 'satellite-system' | 'star-system';
+/** The classifications of a system object: a star with the bodies that orbit it (planetary), a star with only the stars
+ * bound to it (star), any other body with its moons (satellite). */
+export const SYSTEM_CLASSIFICATIONS = Object.freeze(['planetary-system', 'satellite-system', 'star-system'] as const);
 export const isSystemClassification = (classification: string): classification is (typeof SYSTEM_CLASSIFICATIONS)[number] =>
   (SYSTEM_CLASSIFICATIONS as readonly string[]).includes(classification);
 /** A body placed by its astrometry (a position and a distance) rather than an orbit: stars, black holes and the galaxies,
@@ -63,7 +63,7 @@ const OBJECT_INPUT_KEYS = new Set([
 // list deliberately when a package introduces a new kind of body.
 export const OBJECT_CLASSIFICATIONS = Object.freeze([
   "star", "planet", "satellite", "dwarf-planet", "asteroid", "trans-neptunian", "comet", "interstellar", "exoplanet", "black-hole",
-  "galaxy", "galaxy-cluster", "nebula", "globular-cluster", "planetary-system", "satellite-system",
+  "galaxy", "galaxy-cluster", "nebula", "globular-cluster", "planetary-system", "satellite-system", "star-system",
 ]);
 
 export function defineObject<Scene, Signal>(input: ObjectDefinitionInput<Scene, Signal>): ObjectEntry<Scene, Signal> {

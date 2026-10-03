@@ -41,7 +41,7 @@ const html = `<!doctype html><html><head><style>u { color: red }</style></head><
     <details class="object-feature-results" hidden><summary>Named features <span class="object-panel-heading-count"></span></summary><p class="object-destination-hint"></p>
       <ul><li hidden><a class="object-destination-result"><span class="object-destination-result-name"></span><span class="object-destination-result-context"></span></a></li></ul></details></div>
   </nav><div class="object-selected-content">
-    <section class="object-information-panel"><div data-view-part="system">System header</div><div class="body-part">Saturn</div><div data-view-part="system" data-system-bodies-slot></div></section></div></div><!--search-shell:end-->
+    <section class="object-information-panel"><div data-view-part="system">System header</div><div class="body-part">Saturn</div><div data-view-part="system"></div></section></div></div><!--search-shell:end-->
   <main class="object-stage"><u style='color: red;' data-prepared-node="0"></u></main><script type="module" src="/app.js"></script></body></html>`;
 const visibleNames = (document: Document) => [...document.querySelectorAll('[data-catalogue-list] .object-item .object-name')].map(element => element.textContent);
 const render = async (path: string, search = data(), source = html) => parseHTML(await renderSearchResponse(source, new URL(path, origin), search)).document;

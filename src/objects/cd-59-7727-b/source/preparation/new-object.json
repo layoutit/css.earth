@@ -2,6 +2,10 @@
   "id": "cd-59-7727-b",
   "name": "CD-59 7727B",
   "system": "WASP-145 system",
+  "boundTo": {
+    "host": "wasp-145-a",
+    "source": "El-Badry, Rix & Heintz (2021, MNRAS 506, 2269) list WASP-145 A and CD-59 7727B in their Gaia EDR3 wide-binary catalogue (VizieR J/MNRAS/506/2269, source_id 6458529931463278848 and 6458529931463278976), 471 AU apart on the sky, with a chance-alignment probability of 9.8e-8: the pair is bound. No orbit of the pair is published, and the Gaia astrometry alone does not constrain one, so the star is placed by its own astrometry and carries no orbit."
+  },
   "description": "Star bound to WASP-145 A, 471 AU away.",
   "gaia": "6458529931463278976",
   "paper": {

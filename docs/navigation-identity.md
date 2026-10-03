@@ -55,7 +55,20 @@ registry, so no list names the systems. Every
 member is inside its star's system in the object tree, and the derivation fails
 otherwise. A star without orbiting bodies, such as Betelgeuse, belongs to no
 system. A system is named by its star's system name when that names a system, and
-otherwise after its star (Sirius's system name is its constellation).
+otherwise after its star.
+
+A system's classification says what it holds. A star with a planet is a
+`planetary-system`. A star with only stars inside its system is a `star-system`:
+a companion with an orbit (Sirius B, the S stars of Sgr A*), or one its record
+says is bound with no orbit adopted (`star.boundTo` in the astronomy record, with
+its source in `sources.binary`: 61 Cygni B, Alpha Centauri B and Proxima). A star
+nothing orbits is framed out to the stars bound to it, and the camera aims at the
+nearest pair's centre of mass once it is farther out than their separation. A
+planet's or small body's moons are a `satellite-system`.
+[`system-packages.mts`](../site/build/prepare/system-packages.mts) writes every
+system's package, and puts a bound star inside its host's system.
+
+![The 61 Cygni system: the card lists its two stars, and the view frames both](images/61-cygni-system.png)
 
 Inside a stellar system, every nonstellar host with prepared satellite children
 has a [satellite-system view](satellite-system-navigation.md). Its
@@ -65,10 +78,12 @@ host's mounted scene and the same world camera.
 
 There is one selection: an object, by its id (`site/scene/scene-subject.mts`, `{ objectId }`). A
 system is an object of its own, the host's system (`/jupiter-system/`, `/trappist-1-system/`,
-`/solar-system/`), whose page mounts the host's scene; how far out that scene is seen (`body`,
-`moons` for a host out to its moons, `system` for a star out to its planetary system) is read from
-the selected object. All three show the same card, the host's: its moons and its planetary system
-are parts of it, mounted while they are the view.
+`/solar-system/`), whose page mounts the host's scene; how far out that scene is seen (`body`, or
+`system` for a host out to what is inside its system) is read from the selected object. Both show
+the same card, the host's: the system's header, tabs and list are parts of it
+([`SystemCard.astro`](../site/components/SystemCard.astro)), mounted while the system is the view.
+A star's planets, a star's companion stars and a planet's moons are one card, read from the
+system's object and the objects inside it ([`system-card.mts`](../site/system-card.mts)).
 
 ![The WASP-43 system overview: the star, WASP-43b and its orbit, with the system's card](images/wasp-43-system-overview.png)
 

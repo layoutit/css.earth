@@ -1,7 +1,7 @@
 {
   "schema": "cssearth-object@2",
   "id": "gj-338-a",
-  "parent": "milky-way",
+  "parent": "gj-338-a-system",
   "type": "layered-body",
   "properties": {
     "preparation": {
@@ -100,7 +100,7 @@
       "color": "#ffbf90",
       "distanceAu": 1306424,
       "description": "A nearby red dwarf whose disc was measured by interferometry: 58% of the Sun's width.",
-      "systemName": "GJ 338 A system",
+      "systemName": "GJ 338 system",
       "order": 5370,
       "context": {
         "order": 5367

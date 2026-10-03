@@ -15,10 +15,10 @@ const inside = (id: string): ObjectEntry[] => (children.get(id) ?? []).flatMap(c
   return [...(body ? [body] : []), ...inside(child)];
 });
 
-/** Whether a system's card lists a body inside it: its planets and its featured bodies. Search reaches the rest; the
- * Solar System's card listed all 545 of its bodies, 4,900 elements (2026-10-01). */
+/** Whether a system's card lists a body inside it: its stars, its planets and its featured bodies. Search reaches the
+ * rest; the Solar System's card listed all 545 of its bodies, 4,900 elements (2026-10-01). */
 export function listedInSystemCard(object: { readonly classification: string; readonly discovery: { readonly featured: boolean } }): boolean {
-  return object.classification === 'planet' || object.classification === 'exoplanet' || object.discovery.featured;
+  return object.classification === 'star' || object.classification === 'planet' || object.classification === 'exoplanet' || object.discovery.featured;
 }
 
 /** The card of the system `hostId` hosts, read from the object tree: the system object names it and introduces it, and
@@ -30,7 +30,7 @@ export function systemCard(hostId: string) {
   // A row is a body with a page, or a moon its host's catalogue names that has no package yet.
   const row = (object: ObjectEntry): MoonListEntry => ({ id: object.id, name: object.name, object });
   // A planet's or a small body's system lists the host and its moons in its moon catalogue's order (prepare-body-moons.mts).
-  // A star's lists the star and, of the bodies inside, its planets and featured bodies: the Solar System's planets lead,
+  // A star's lists the star and, of the bodies inside, its stars, planets and featured bodies: the Solar System's planets lead,
   // each group nearest first; another star's bodies are all one distance from the Sun, which left TRAPPIST-1's as h, g, d,
   // c, the star, b, f, e (2026-10-02), so the star leads, then its bodies by name.
   const rows = system.classification === 'satellite-system' ? [row(host), ...prepareBodyMoons(hostId)]

@@ -2,6 +2,10 @@
   "id": "bd-20-761-b",
   "name": "BD-20 761B",
   "system": "WASP-140 system",
+  "boundTo": {
+    "host": "wasp-140",
+    "source": "El-Badry, Rix & Heintz (2021, MNRAS 506, 2269) list WASP-140 and BD-20 761B in their Gaia EDR3 wide-binary catalogue (VizieR J/MNRAS/506/2269, source_id 5094154336332482304 and 5094154336332482176), 845 AU apart on the sky, with a chance-alignment probability of 2.8e-8: the pair is bound. No orbit of the pair is published, and the Gaia astrometry alone does not constrain one, so the star is placed by its own astrometry and carries no orbit."
+  },
   "description": "Star bound to WASP-140, 845 AU away.",
   "gaia": "5094154336332482176",
   "paper": {

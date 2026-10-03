@@ -437,14 +437,16 @@ function checkBodies(focus: PreparedContextFocus, bodies: readonly PreparedConte
   if (bodies.length === 0 && !partial) throw new TypeError('World context requires bodies.');
   unique([focus.id, ...bodies.map(body => body.id)], 'context body identities');
   const orbitCenters = parsePreparedOrbitCenters(orbitCentersInput, focus, bodies);
-  // A member orbits its system's parent, or a named centre placed off it (a circumbinary planet's barycentre).
+  // A member orbits its system's parent, or a named centre placed off it (a circumbinary planet's barycentre), or is a
+  // star bound to it with no orbit in the record.
   // Identities are unique (checked above), so one index answers each member in constant time.
   const bodyById = new Map(bodies.map(body => [body.id, body] as const));
   for (const body of [focus, ...bodies]) for (const [index, id] of (body.systemView?.memberIds ?? []).entries()) {
     const moon = bodyById.get(id), centre = moon?.orbit?.centerBodyId;
     if (!moon && partial) continue;
-    if (!moon || centre === undefined || (centre !== body.id && orbitCenters?.[centre]?.centerBodyId !== body.id)) {
-      throw new TypeError(`System view member ${id} of ${body.id} must orbit ${body.id} or a centre placed off it.`);
+    const bound = moon !== undefined && 'boundTo' in moon && moon.boundTo?.hostId === body.id;
+    if (!moon || !bound && (centre === undefined || (centre !== body.id && orbitCenters?.[centre]?.centerBodyId !== body.id))) {
+      throw new TypeError(`System view member ${id} of ${body.id} must orbit ${body.id} or a centre placed off it, or be bound to it.`);
     }
     if (moon.radiusM !== body.systemView!.memberRadiiM[index]) throw new TypeError('System view radii must match their prepared members.');
   }

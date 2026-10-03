@@ -2,6 +2,10 @@
   "id": "hd-233731-b",
   "name": "HD 233731B",
   "system": "HAT-P-22 system",
+  "boundTo": {
+    "host": "hat-p-22",
+    "source": "El-Badry, Rix & Heintz (2021, MNRAS 506, 2269) list HAT-P-22 and HD 233731B in their Gaia EDR3 wide-binary catalogue (VizieR J/MNRAS/506/2269, source_id 846946629987527168 and 846946625690867328), 747 AU apart on the sky, with a chance-alignment probability of 7.3e-7: the pair is bound. No orbit of the pair is published, and the Gaia astrometry alone does not constrain one, so the star is placed by its own astrometry and carries no orbit."
+  },
   "description": "Star bound to HAT-P-22, 747 AU away.",
   "gaia": "846946625690867328",
   "paper": {

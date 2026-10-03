@@ -49,8 +49,10 @@ the body's introduction typography.
 
 ## Overview navigation
 
-Each system lists its prepared orbit members under **Celestial bodies**, using
-the same rows as search. The Solar System puts its planets first. Large-scale
+Each system lists what is inside it under **Celestial bodies**, with their
+count, using the same rows as search: its host, its stars, its planets and its
+featured bodies, or a planet's moons in its moon catalogue's order. The Solar
+System puts its planets first. Large-scale
 overviews use their registry-held groups for navigation: the Milky Way starts
 with the Sun and featured stars within its existing galactic range; the Local
 Group and Nearby Universe list their held galaxies and clusters.

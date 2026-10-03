@@ -2,6 +2,10 @@
   "id": "bd-50-1471-b",
   "name": "BD+50 1471B",
   "system": "XO-2 N system",
+  "boundTo": {
+    "host": "xo-2-n",
+    "source": "El-Badry, Rix & Heintz (2021, MNRAS 506, 2269) list XO-2 N and BD+50 1471B in their Gaia EDR3 wide-binary catalogue (VizieR J/MNRAS/506/2269, source_id 934346809278715776 and 934346740559239296), 4,677 AU apart on the sky, with a chance-alignment probability of 1.1e-11: the pair is bound. No orbit of the pair is published, and the Gaia astrometry alone does not constrain one, so the star is placed by its own astrometry and carries no orbit."
+  },
   "description": "Star bound to XO-2 N, 4,677 AU away.",
   "gaia": "934346740559239296",
   "paper": {

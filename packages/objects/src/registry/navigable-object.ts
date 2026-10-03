@@ -26,7 +26,7 @@ export type NavigableObject<Scene = unknown, Signal = unknown> = ObjectEntry<Sce
 
 /** A system names its host. What is inside it is the object tree's to say (the objects whose `parent` it is), and what kind
  * of system it is is its classification: a planet's or small body's moons (`satellite-system`), a star's planets
- * (`planetary-system`). */
+ * (`planetary-system`), a star with only the stars bound to it (`star-system`). */
 export interface ObjectSystem { readonly host: string }
 /** A system package's `properties.system`, checked: its host's id. Null for any other object. */
 export function objectSystem(descriptor: unknown): ObjectSystem | null {

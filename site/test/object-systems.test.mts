@@ -6,7 +6,7 @@ import { WORLD_OBJECTS } from '../world-objects.mts';
 import { SOLAR_SYSTEM_ID, allPlanetarySystems, planetarySystems, systemById, systemOfObject } from '../object-systems.mts';
 import { planetarySystemMembers } from '../planetary-system-members.mts';
 import { PREPARED_WORLD_PRESENTATION } from '../prepared-world-presentation.mts';
-import { SYSTEM_FRAMING_RADII, systemFramingRadii } from '../system-framing.mts';
+import { SYSTEM_CENTERS, SYSTEM_FRAMING_RADII, systemFramingRadii } from '../system-framing.mts';
 import { APPLICATION_WORLD_CONTEXT } from '../world-context-plan.mts';
 
 test('planetary systems follow prepared orbit chains to their stars', () => {
@@ -38,10 +38,16 @@ test('planetary systems follow prepared orbit chains to their stars', () => {
     ['roxs-42b-companion', 'roxs-42b'], ['roxs-42b-b', 'roxs-42b'],
     ['hip-65426-b', 'hip-65426'], ['af-lep-b', 'af-lep'], ['ab-pic-b', 'ab-pic'], ['yses-1-b', 'yses-1'],
     ['hd-206893-b', 'hd-206893'], ['hd-206893-c', 'hd-206893'], ['hd-95086-b', 'hd-95086'], ['gj-504-b', 'gj-504'], ['hd-135344-ab', 'hd-135344-a'],
-    ['eps-indi-ab', 'eps-indi-a'], ['eps-indi-ba', 'eps-indi-a'], ['eps-indi-bb', 'eps-indi-a']] as const) {
+    ['eps-indi-ab', 'eps-indi-a'], ['eps-indi-ba', 'eps-indi-a'], ['eps-indi-bb', 'eps-indi-a'],
+    // Stars nothing orbits, with the stars their records bind to them: a star system.
+    ['gj-820-a', 'gj-820-a'], ['gj-820-b', 'gj-820-a'], ['alpha-centauri-b', 'alpha-centauri-a'], ['proxima-centauri', 'alpha-centauri-a']] as const) {
     assert.equal(systemOfObject(SCENE_OBJECTS, id)?.id, system, id);
   }
   assert.equal(systemOfObject(SCENE_OBJECTS, 'betelgeuse'), null, 'A star without orbiting bodies belongs to no system');
+  // A star system is framed out to its farthest star, and the camera aims at the nearest pair's centre of mass.
+  const AU_M = 149_597_870_700, centauri = SYSTEM_CENTERS.get('alpha-centauri-a')!;
+  assert.ok(SYSTEM_FRAMING_RADII.get('alpha-centauri-a')! > 10_000 * AU_M && centauri.separationM < 100 * AU_M, 'Proxima frames the system; A and B are its nearest pair');
+  assert.ok(SYSTEM_FRAMING_RADII.get('gj-820-a')! > SYSTEM_CENTERS.get('gj-820-a')!.separationM);
   assert.equal(systemById(SCENE_OBJECTS, 'jupiter'), null, "A planet's moons are not a planetary system");
   assert.deepEqual(systemById(SCENE_OBJECTS, 'wasp-43')!.memberIds, ['wasp-43b']);
   assert.deepEqual(systemById(SCENE_OBJECTS, 'hd-189733')!.memberIds, ['hd-189733b', 'hd-189733-companion']);
@@ -129,10 +135,21 @@ test("every system's overview lasts two doublings of distance before its orbits 
   assert.ok(systemById(SCENE_OBJECTS, 'sgr-a-star')!.exitDistanceM < 0.8 * 9.4607e15, 'Sgr A* opens at 0.8 ly, not the scaled 3.6 ly');
 });
 
-test("a system's card lists its star, its planets and its featured bodies", async () => {
-  const { listedInSystemCard } = await import('../object-systems.mts');
+test("a system's card lists its stars, its planets and its featured bodies, read from the object tree", async () => {
+  const { listedInSystemCard, systemCard } = await import('../system-card.mts');
   const body = (id: string, classification: string, featured: boolean) => ({ id, classification, discovery: { featured } });
-  assert.deepEqual([body('sun', 'star', false), body('neptune', 'planet', false), body('trappist-1b', 'exoplanet', false), body('ceres', 'dwarf-planet', true),
-    body('asteroid-1998-wt24', 'asteroid', false), body('hyperion', 'satellite', false)].filter(object => listedInSystemCard(object, 'sun')).map(object => object.id),
-  ['sun', 'neptune', 'trappist-1b', 'ceres']);
+  assert.deepEqual([body('gj-820-b', 'star', false), body('neptune', 'planet', false), body('trappist-1b', 'exoplanet', false), body('ceres', 'dwarf-planet', true),
+    body('asteroid-1998-wt24', 'asteroid', false), body('hyperion', 'satellite', false)].filter(listedInSystemCard).map(object => object.id),
+  ['gj-820-b', 'neptune', 'trappist-1b', 'ceres']);
+  // One card for every kind of system: a star's planets by name after the star, a planet's moons in its catalogue's order,
+  // a star's companions.
+  assert.deepEqual(systemCard('trappist-1')!.rows.map(row => row.id), ['trappist-1', ...[...'bcdefgh'].map(letter => `trappist-1${letter}`)]);
+  assert.deepEqual(systemCard('earth')!.rows.map(row => row.id), ['earth', 'moon']);
+  assert.deepEqual(systemCard('gj-820-a')!.rows.map(row => row.id), ['gj-820-a', 'gj-820-b']);
+  assert.deepEqual(systemCard('alpha-centauri-a')!.rows.map(row => row.id), ['alpha-centauri-a', 'alpha-centauri-b', 'proxima-centauri']);
+  assert.equal(systemCard('alpha-centauri-a')!.system.classification, 'star-system');
+  const solar = systemCard('sun')!;
+  assert.equal(solar.rows[0]!.id, 'mercury');
+  assert.ok(solar.facts && solar.rows.length < 150 && solar.rows.some(row => row.id === 'sun'));
+  assert.equal(systemCard('moon'), null);
 });

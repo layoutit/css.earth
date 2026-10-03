@@ -2,6 +2,10 @@
   "id": "gaia-dr3-2984391358868786560",
   "name": "Gaia DR3 2984391358868786560",
   "system": "TIC 46432937 system",
+  "boundTo": {
+    "host": "tic-46432937",
+    "source": "El-Badry, Rix & Heintz (2021, MNRAS 506, 2269) list TIC 46432937 and Gaia DR3 2984391358868786560 in their Gaia EDR3 wide-binary catalogue (VizieR J/MNRAS/506/2269, source_id 2984391358868786816 and 2984391358868786560), 3,604 AU apart on the sky, with a chance-alignment probability of 1.4e-4: the pair is bound. No orbit of the pair is published, and the Gaia astrometry alone does not constrain one, so the star is placed by its own astrometry and carries no orbit."
+  },
   "description": "Star bound to TIC 46432937, 3,604 AU away.",
   "gaia": "2984391358868786560",
   "paper": {

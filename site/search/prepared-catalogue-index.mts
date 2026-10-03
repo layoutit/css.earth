@@ -6,7 +6,7 @@ import { PREPARED_NAVIGATION_MARKERS } from '../prepared-navigation-markers.mjs'
 import { markerStyle } from '@cssearth/renderer/navigation/marker-presentation.ts';
 import { sourceDocumentation, systemSourceDocumentation } from '../source-documentation.mts';
 import { allPlanetarySystems } from '../object-systems.mts';
-import { SCENE_OBJECTS } from '../objects.mts';
+import { SCENE_OBJECTS, requireObject } from '../objects.mts';
 import type { CatalogueIndex, CatalogueIndexEntry } from './catalogue-index.mts';
 import { listDistance } from './list-distance.mts';
 import { systemObjectId } from '@cssearth/objects';
@@ -66,8 +66,9 @@ function systemEntries(): CatalogueIndexEntry[] {
       id: systemObjectId(system.id),
       name: system.name,
       searchNames: Object.freeze([]),
-      classification: 'planetary-system',
-      classificationName: 'planetary system',
+      // A star with planets is a planetary system; a star with only the stars bound to it, a star system.
+      classification: requireObject(systemObjectId(system.id)).classification,
+      classificationName: requireObject(systemObjectId(system.id)).classification.replaceAll('-', ' '),
       systemName: system.name.toLocaleLowerCase('en'),
       route: `/${systemObjectId(system.id)}/`,
       illustration: false,
