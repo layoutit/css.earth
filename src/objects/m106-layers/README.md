@@ -21,6 +21,16 @@ A survey image of M106 (NGC 4258), cleaned of the Milky Way stars in front of it
 - **Rim:** the picture fades out on a round rim at 29.23 kpc, 0.98 of its half-width, so no straight edge shows.
 - **Sky:** the image's sky, (7, 6, 4) of 255 (each channel's median over the frame's outer ring), is subtracted as the background floor (7 of 255).
 
+## Dots
+
+| Catalogue | Drawn | Note |
+| --- | --- | --- |
+| [Cepheids (Yuan et al. 2022)](https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/940/64), [recipe](source/yuan-cepheids/points.json) | 669 | the variables that calibrate the Cepheid distance scale on this galaxy |
+| [HII regions (Yuan et al. 2022)](https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/940/64), [recipe](source/yuan-hii/points.json) | 52 | those with a measured metallicity |
+| [Globular cluster candidates (González-Lópezlira et al. 2017)](https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/835/184), [recipe](source/gonzalez-gc/points.json) | 37 | candidates, not confirmed clusters; 2 more lie outside the photograph |
+
+The catalogue tables are files of the CDS archive (each descriptor's `table.origin`); they are not tracked. Each dot is a catalogued object at its published sky position, placed on the plane the picture stands on; its depth is not measured, and it is not drawn. Each dot takes its tone from the image's brightness under it and moves halfway from its kind's color to the image's color there.
+
 ## Known problems
 
 - The picture is flat: seen from the side it is a line.

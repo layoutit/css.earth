@@ -21,6 +21,16 @@ A survey image of the Whirlpool Galaxy (NGC 5194), cleaned of the Milky Way star
 - **Near side:** the source gives the tilt, not which edge is nearer. The disc is drawn with the edge at position angle 253° nearer: an assumption, not a measurement.
 - **Sky:** the image's sky, (7, 7, 4) of 255 (each channel's median over the frame's outer ring), is subtracted as the background floor (7 of 255).
 
+## Dots
+
+| Catalogue | Drawn | Note |
+| --- | --- | --- |
+| [Star clusters (Chandar et al. 2016)](https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/824/71), [recipe](source/chandar-clusters/points.json) | 3,812 | compact clusters in Hubble images, with ages and masses in the table |
+| [Cepheids (Csörnyei et al. 2023)](https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/678/A44), [recipe](source/csornyei-cepheids/points.json) | 638 | the variables behind the galaxy's Cepheid distance |
+| [Planetary nebulae (Feldmeier et al. 1997)](https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/479/231), [recipe](source/feldmeier-pne/points.json) | 63 | the survey for the galaxy's distance; 1 more lie outside the photograph |
+
+The catalogue tables are files of the CDS archive (each descriptor's `table.origin`); they are not tracked. Each dot is a catalogued object at its published sky position, placed where its sight line meets the disc. Its height above the disc is drawn from a 466 pc layer, the scale length over 7.3 ([Kregel et al. 2002](https://arxiv.org/abs/astro-ph/0204154), [record](../../sources/kregel-2002-disc-flattening.json)); that height is not measured. Each dot takes its tone from the image's brightness under it and moves halfway from its kind's color to the image's color there.
+
 ## Known problems
 
 - Which edge of the disc is nearer is assumed.

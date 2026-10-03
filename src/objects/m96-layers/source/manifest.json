@@ -53,6 +53,24 @@
           }
         ]
       }
+    },
+    {
+      "id": "feldmeier-pne-table",
+      "path": "src/objects/m96-layers/source/feldmeier-pne/tab2-4.dat",
+      "origin": "https://cdsarc.cds.unistra.fr/ftp/J/ApJ/479/231/tab2-4.dat",
+      "title": "Planetary nebulae as standard candles. XI. Application to spiral galaxies, tab2-4.dat",
+      "credit": "J. J. Feldmeier, R. Ciardullo, G. H. Jacoby; ApJ 479, 231",
+      "acquisition": "Published table downloaded unchanged from its CDS origin; read by packages/bake/cli/prepare-catalogue-points.mts through feldmeier-pne/points.json.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "feldmeier-1997-spiral-pne",
+            "role": "material",
+            "evidence": "https://cdsarc.cds.unistra.fr/ftp/J/ApJ/479/231/tab2-4.dat"
+          }
+        ]
+      }
     }
   ],
   "documents": [

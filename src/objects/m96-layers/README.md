@@ -21,6 +21,14 @@ A survey image of M96 (NGC 3368), cleaned of the Milky Way stars in front of it 
 - **Near side:** the source gives the tilt, not which edge is nearer. The disc is drawn with the edge at position angle 95° nearer: an assumption, not a measurement.
 - **Sky:** the image's sky, (9, 8, 5) of 255 (each channel's median over the frame's outer ring), is subtracted as the background floor (9 of 255).
 
+## Dots
+
+| Catalogue | Drawn | Note |
+| --- | --- | --- |
+| [Planetary nebulae (Feldmeier et al. 1997)](https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/479/231), [recipe](source/feldmeier-pne/points.json) | 56 | the survey for the galaxy's distance; 18 more lie outside the photograph |
+
+The catalogue tables are files of the CDS archive (each descriptor's `table.origin`); they are not tracked. Each dot is a catalogued object at its published sky position, placed where its sight line meets the disc. No height above the disc is drawn: no published scale length was found for this disc. Each dot takes its tone from the image's brightness under it and moves halfway from its kind's color to the image's color there.
+
 ## Known problems
 
 - Which edge of the disc is nearer is assumed.

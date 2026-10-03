@@ -53,6 +53,60 @@
           }
         ]
       }
+    },
+    {
+      "id": "chandar-clusters-table",
+      "path": "src/objects/m51-layers/source/chandar-clusters/table1.dat",
+      "origin": "https://cdsarc.cds.unistra.fr/ftp/J/ApJ/824/71/table1.dat",
+      "title": "The age, mass, and size distributions of star clusters in M51, table1.dat",
+      "credit": "R. Chandar, B. C. Whitmore, D. Dinino, R. C. Kennicutt, L.-H. Chien, E. Schinnerer; ApJ 824, 71",
+      "acquisition": "Published table downloaded unchanged from its CDS origin; read by packages/bake/cli/prepare-catalogue-points.mts through chandar-clusters/points.json.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "chandar-2016-m51-star-clusters",
+            "role": "material",
+            "evidence": "https://cdsarc.cds.unistra.fr/ftp/J/ApJ/824/71/table1.dat"
+          }
+        ]
+      }
+    },
+    {
+      "id": "csornyei-cepheids-table",
+      "path": "src/objects/m51-layers/source/csornyei-cepheids/ceps.dat",
+      "origin": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/678/A44/ceps.dat",
+      "title": "Reeling in the Whirlpool galaxy: Distance to M 51 clarified through Cepheids and the type IIP supernova 2005cs, ceps.dat",
+      "credit": "G. Csörnyei, R. I. Anderson, C. Vogl, S. Taubenberger, S. Blondin, B. Leibundgut; A&A 678, A44",
+      "acquisition": "Published table downloaded unchanged from its CDS origin; read by packages/bake/cli/prepare-catalogue-points.mts through csornyei-cepheids/points.json.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "publication-csornyei2023a-a-678a-44c",
+            "role": "material",
+            "evidence": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/678/A44/ceps.dat"
+          }
+        ]
+      }
+    },
+    {
+      "id": "feldmeier-pne-table",
+      "path": "src/objects/m51-layers/source/feldmeier-pne/tab2-4.dat",
+      "origin": "https://cdsarc.cds.unistra.fr/ftp/J/ApJ/479/231/tab2-4.dat",
+      "title": "Planetary nebulae as standard candles. XI. Application to spiral galaxies, tab2-4.dat",
+      "credit": "J. J. Feldmeier, R. Ciardullo, G. H. Jacoby; ApJ 479, 231",
+      "acquisition": "Published table downloaded unchanged from its CDS origin; read by packages/bake/cli/prepare-catalogue-points.mts through feldmeier-pne/points.json.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "feldmeier-1997-spiral-pne",
+            "role": "material",
+            "evidence": "https://cdsarc.cds.unistra.fr/ftp/J/ApJ/479/231/tab2-4.dat"
+          }
+        ]
+      }
     }
   ],
   "documents": [

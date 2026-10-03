@@ -6,6 +6,9 @@
     "preparation": {
       "source": "source/recipe.json"
     },
+    "cataloguePoints": [
+      "dots"
+    ],
     "host": "m51",
     "frame": {
       "referenceFrame": "sun-icrf",

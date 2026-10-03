@@ -22,6 +22,16 @@ A survey image of M74 (NGC 628), cleaned of the Milky Way stars in front of it a
 - **Near side:** the source gives the tilt, not which edge is nearer. The disc is drawn with the edge at position angle 111° nearer: an assumption, not a measurement.
 - **Sky:** the image's sky, (8, 8, 6) of 255 (each channel's median over the frame's outer ring), is subtracted as the background floor (8 of 255).
 
+## Dots
+
+| Catalogue | Drawn | Note |
+| --- | --- | --- |
+| [HII region candidates (Rousseau-Nepton et al. 2018)](https://cdsarc.cds.unistra.fr/viz-bin/cat/J/MNRAS/477/4152), [recipe](source/rousseau-hii/points.json) | 4,202 | over the whole disc; the table sorts them as symmetrical, asymmetrical, transient or diffuse; 83 more lie outside the photograph |
+| [Planetary nebulae (Scheuermann et al. 2022)](https://cdsarc.cds.unistra.fr/viz-bin/cat/J/MNRAS/511/6087), [recipe](source/scheuermann-pne/points.json) | 139 | type PN |
+| [Supernova remnants (Scheuermann et al. 2022)](https://cdsarc.cds.unistra.fr/viz-bin/cat/J/MNRAS/511/6087), [recipe](source/scheuermann-snr/points.json) | 10 | type SNR |
+
+The catalogue tables are files of the CDS archive (each descriptor's `table.origin`); they are not tracked. Each dot is a catalogued object at its published sky position, placed where its sight line meets the disc. Its height above the disc is drawn from a 438 pc layer, the scale length over 7.3 ([Kregel et al. 2002](https://arxiv.org/abs/astro-ph/0204154), [record](../../sources/kregel-2002-disc-flattening.json)); that height is not measured. Each dot takes its tone from the image's brightness under it and moves halfway from its kind's color to the image's color there.
+
 ## Known problems
 
 - Which edge of the disc is nearer is assumed.

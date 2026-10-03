@@ -1,6 +1,6 @@
 # NGC 4536
 
-A survey image of NGC 4536, cleaned of the Milky Way stars in front of it where they show and color-tied to its measured integrated color, lies flat on its measured disc. It has no dots. Image brightness does not measure per-pixel distance.
+A survey image of NGC 4536, cleaned of the Milky Way stars in front of it where they show and color-tied to its measured integrated color, lies flat on its measured disc, with its bulge standing through it as a small volume. It has no dots. Image brightness does not measure per-pixel distance.
 
 ## Sources
 

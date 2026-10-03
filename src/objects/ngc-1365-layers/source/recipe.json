@@ -112,7 +112,33 @@
       1,
       1,
       1
-    ]
+    ],
+    "bulge": {
+      "source": "salo-2015-s4g-decompositions",
+      "lightFrom": "fit",
+      "positionAngleDeg": 33.31,
+      "sersicIndex": 0.857,
+      "halfLightRadiusKpc": 1.1187,
+      "surfaceBrightnessAtHalfLight": 17.74,
+      "skyEllipticity": 0.423,
+      "disc": {
+        "centralSurfaceBrightness": 20.674,
+        "scaleLengthKpc": 8.4125,
+        "skyEllipticity": 0.412,
+        "positionAngleDeg": 31.66
+      },
+      "bar": {
+        "centralSurfaceBrightness": 19.892,
+        "radiusKpc": 7.9656,
+        "skyEllipticity": 0.496,
+        "positionAngleDeg": 88.51
+      },
+      "extentKpc": {
+        "radius": 8.95,
+        "height": 1.12,
+        "fadeFrom": 4.47
+      }
+    }
   },
   "bake": {
     "maxFacePixels": 1024,
@@ -134,7 +160,10 @@
       "source": "rc3-1991",
       "basis": "RC3 (de Vaucouleurs et al. 1991, CDS VII/155) gives NGC 1365 (PGC 13179) a total (B-V)T of 0.69 as observed; red and blue are scaled in linear light so the disc's mean color matches the engine's catalogue color for that index, the function that colors the star dots."
     },
-    "flat": true
+    "flat": true,
+    "bulgeSlices": 40,
+    "bulgeFacePixels": 256,
+    "bulgeCrossSlices": 24
   },
   "provenance": {
     "path": "provenance.json"

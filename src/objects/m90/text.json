@@ -29,7 +29,7 @@
     ]
   },
   "introduction": {
-    "text": "Its picture is the Sloan Digital Sky Survey's, with the Milky Way's foreground stars removed, standing as a flat picture that faces the Sun.",
+    "text": "Its picture is the Sloan Digital Sky Survey's, with stars removed, standing flat and facing the Sun. Its bulge stands through it as a volume, from a published fit.",
     "sources": [
       {
         "catalogueId": "sdss-dr9-color-hips",
@@ -37,6 +37,13 @@
         "label": "Sloan Digital Sky Survey; color HiPS CDS/P/SDSS9/color by T. Boch (CDS), cut out by the CDS hips2fits service",
         "checked": "2026-10-02",
         "locator": "hips2fits cutout, 14.58 arcmin wide"
+      },
+      {
+        "catalogueId": "salo-2015-s4g-decompositions",
+        "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/219/4",
+        "label": "Salo et al. (2015), ApJS 219, 4: S4G Pipeline 4 decompositions, table 7",
+        "checked": "2026-10-03",
+        "locator": "NGC4569, model _bdbar: bulge 14.6% of the light, Re 6.52 arcsec, n 4.898"
       },
       {
         "catalogueId": "wikipedia-messier-90",
@@ -52,7 +59,7 @@
     "optical": {
       "title": "M90 in visible light",
       "detail": "3000 × 3000 px",
-      "summary": "Visible-light image on a flat plane facing the Sun; nothing in it has depth.",
+      "summary": "Flat picture facing the Sun; the bulge of a published fit stands through it. Depth is modelled.",
       "sources": [
         {
           "catalogueId": "sdss-dr9-color-hips",

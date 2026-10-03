@@ -1,7 +1,7 @@
 # NGC 2903
 
 A survey image of NGC 2903, cleaned of the Milky Way stars in front of it and color-tied to its measured integrated
-color, lies flat on its measured disc. Published catalogues of the HII regions of its bar and of its supernova
+color, lies flat on its measured disc, with its bulge standing through it as a small volume. Published catalogues of the HII regions of its bar and of its supernova
 remnants are drawn as dots on the same disc. Image brightness does not measure per-pixel distance.
 
 ## Sources

@@ -30,6 +30,15 @@
       "evidence": [
         "https://github.com/charvey2718/nox"
       ]
+    },
+    {
+      "id": "bulge",
+      "subject": "Bulge",
+      "status": "included",
+      "finding": "Salo et al. (2015), S4G Pipeline 4, table 7, NGC3623, model _bd: a Sérsic bulge (26.0% of the light, magnitude 10.03, half-light radius 29.59″ = 1.83 kpc, n = 2.172, axis ratio 0.697, PA 139.87°) and an exponential disc (74.1% of the light, scale length 65.19″ = 4.02 kpc, axis ratio 0.281, PA 173.99°, face-on central surface brightness 19.960, 18.582 as projected on the sky). Used as published; the half-light surface brightness the bake needs, 20.067 mag per square arcsecond, follows from the bulge's magnitude, radius, index and axis ratio. The picture faces the Sun, so the spheroid takes the galaxy's own disc: HyperLEDA, NGC 3623 = PGC 34612: inclination 90°, position angle 173.33°. At that tilt the bulge's axis ratio is one an oblate spheroid in the disc plane can show (intrinsic 0.70).",
+      "evidence": [
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/219/4"
+      ]
     }
   ]
 }

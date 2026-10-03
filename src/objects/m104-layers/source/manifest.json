@@ -53,6 +53,42 @@
           }
         ]
       }
+    },
+    {
+      "id": "spitler-gc-table",
+      "path": "src/objects/m104-layers/source/spitler-gc/table2.dat",
+      "origin": "https://cdsarc.cds.unistra.fr/ftp/J/AJ/132/1593/table2.dat",
+      "title": "Hubble Space Telescope ACS wide-field photometry of the Sombrero galaxy globular cluster system, table2.dat",
+      "credit": "L. R. Spitler, S. S. Larsen, J. Strader, J. P. Brodie, D. A. Forbes, M. A. Beasley; AJ 132, 1593",
+      "acquisition": "Published table downloaded unchanged from its CDS origin; read by packages/bake/cli/prepare-catalogue-points.mts through spitler-gc/points.json.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "spitler-2006-sombrero-globular-clusters",
+            "role": "material",
+            "evidence": "https://cdsarc.cds.unistra.fr/ftp/J/AJ/132/1593/table2.dat"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ford-pne-table",
+      "path": "src/objects/m104-layers/source/ford-pne/table3",
+      "origin": "https://cdsarc.cds.unistra.fr/ftp/J/ApJ/458/455/table3",
+      "title": "The stellar halo of M104. I. A survey for planetary nebulae and the planetary nebula luminosity function distance, table3",
+      "credit": "H. C. Ford, X. Hui, R. Ciardullo, G. H. Jacoby, K. C. Freeman; ApJ 458, 455",
+      "acquisition": "Published table downloaded unchanged from its CDS origin; read by packages/bake/cli/prepare-catalogue-points.mts through ford-pne/points.json.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "ford-1996-m104-planetary-nebulae",
+            "role": "material",
+            "evidence": "https://cdsarc.cds.unistra.fr/ftp/J/ApJ/458/455/table3"
+          }
+        ]
+      }
     }
   ],
   "documents": [

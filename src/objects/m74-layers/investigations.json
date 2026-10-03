@@ -30,6 +30,17 @@
       "evidence": [
         "https://github.com/charvey2718/nox"
       ]
+    },
+    {
+      "id": "dots",
+      "subject": "Catalogued objects as dots",
+      "status": "included",
+      "finding": "4,351 dots from 3 published tables: 4,202 hii region candidates (Rousseau-Nepton et al. (2018), CDS J/MNRAS/477/4152, 4,285 rows in the file); 139 planetary nebulae (Scheuermann et al. (2022), CDS J/MNRAS/511/6087, 1,049 rows in the file); 10 supernova remnants (Scheuermann et al. (2022), CDS J/MNRAS/511/6087, 1,049 rows in the file). Each dot is a catalogued object at its published sky position, placed where its sight line meets the disc. Its height above the disc is drawn from a 438 pc layer, the scale length over 7.3 ([Kregel et al. 2002](https://arxiv.org/abs/astro-ph/0204154), [record](../../sources/kregel-2002-disc-flattening.json)); that height is not measured.",
+      "evidence": [
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/MNRAS/477/4152",
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/MNRAS/511/6087",
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/MNRAS/511/6087"
+      ]
     }
   ]
 }

@@ -30,6 +30,15 @@
       "evidence": [
         "https://github.com/charvey2718/nox"
       ]
+    },
+    {
+      "id": "dots",
+      "subject": "Catalogued objects as dots",
+      "status": "included",
+      "finding": "172 dots from 1 published table: 172 planetary nebulae (Hartke et al. (2022), CDS J/A+A/663/A12, 319 rows in the file). Each dot is a catalogued object at its published sky position, placed on the plane the picture stands on; its depth is not measured, and it is not drawn.",
+      "evidence": [
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/663/A12"
+      ]
     }
   ]
 }

@@ -30,6 +30,15 @@
       "evidence": [
         "https://github.com/charvey2718/nox"
       ]
+    },
+    {
+      "id": "bulge",
+      "subject": "Bulge",
+      "status": "included",
+      "finding": "Salo et al. (2015), S4G Pipeline 4, table 7, NGC4569, model _bdbar: a Sérsic bulge (14.6% of the light, magnitude 11.222, half-light radius 6.52″ = 0.50 kpc, n = 4.898, axis ratio 0.61, PA 16.25°) and an exponential disc (71.4% of the light, scale length 66.14″ = 5.05 kpc, axis ratio 0.407, PA 24.8°, face-on central surface brightness 20.598, 19.622 as projected on the sky) and a Ferrers bar (13.9% of the light, radius 118.84″ = 9.08 kpc, axis ratio 0.221, PA 16.53°, central surface brightness 20.058 on the sky). Used as published; the half-light surface brightness the bake needs, 18.251 mag per square arcsecond, follows from the bulge's magnitude, radius, index and axis ratio. The picture faces the Sun, so the spheroid takes the galaxy's own disc: Leroy et al. (2021), row NGC4569: inclination 70.0 ± 6.0°, position angle 18.0 ± 2.0°, from the rotation of its gas (Lang et al. 2020). At that tilt the bulge's axis ratio is one an oblate spheroid in the disc plane can show (intrinsic 0.54).",
+      "evidence": [
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/219/4"
+      ]
     }
   ]
 }

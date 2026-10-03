@@ -53,6 +53,60 @@
           }
         ]
       }
+    },
+    {
+      "id": "yuan-cepheids-table",
+      "path": "src/objects/m106-layers/source/yuan-cepheids/table2.dat",
+      "origin": "https://cdsarc.cds.unistra.fr/ftp/J/ApJ/940/64/table2.dat",
+      "title": "Absolute calibration of Cepheid period-luminosity relations in NGC 4258, table2.dat",
+      "credit": "W. Yuan, L. M. Macri, A. G. Riess, T. G. Brink, S. Casertano, A. V. Filippenko; ApJ 940, 64",
+      "acquisition": "Published table downloaded unchanged from its CDS origin; read by packages/bake/cli/prepare-catalogue-points.mts through yuan-cepheids/points.json.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "yuan-2022-ngc4258-cepheids",
+            "role": "material",
+            "evidence": "https://cdsarc.cds.unistra.fr/ftp/J/ApJ/940/64/table2.dat"
+          }
+        ]
+      }
+    },
+    {
+      "id": "yuan-hii-table",
+      "path": "src/objects/m106-layers/source/yuan-hii/table4.dat",
+      "origin": "https://cdsarc.cds.unistra.fr/ftp/J/ApJ/940/64/table4.dat",
+      "title": "Absolute calibration of Cepheid period-luminosity relations in NGC 4258, table4.dat",
+      "credit": "W. Yuan, L. M. Macri, A. G. Riess, T. G. Brink, S. Casertano, A. V. Filippenko; ApJ 940, 64",
+      "acquisition": "Published table downloaded unchanged from its CDS origin; read by packages/bake/cli/prepare-catalogue-points.mts through yuan-hii/points.json.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "yuan-2022-ngc4258-cepheids",
+            "role": "material",
+            "evidence": "https://cdsarc.cds.unistra.fr/ftp/J/ApJ/940/64/table4.dat"
+          }
+        ]
+      }
+    },
+    {
+      "id": "gonzalez-gc-table",
+      "path": "src/objects/m106-layers/source/gonzalez-gc/table6.dat",
+      "origin": "https://cdsarc.cds.unistra.fr/ftp/J/ApJ/835/184/table6.dat",
+      "title": "The relation between globular cluster systems and supermassive black holes in spiral galaxies: the case study of NGC 4258, table6.dat",
+      "credit": "R. A. González-Lópezlira, L. Lomelí-Núñez, K. Álamo-Martínez, Y. Órdenes-Briceño, L. Loinard, I. Y. Georgiev; ApJ 835, 184",
+      "acquisition": "Published table downloaded unchanged from its CDS origin; read by packages/bake/cli/prepare-catalogue-points.mts through gonzalez-gc/points.json.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "gonzalez-lopezlira-2017-ngc4258-globular-clusters",
+            "role": "material",
+            "evidence": "https://cdsarc.cds.unistra.fr/ftp/J/ApJ/835/184/table6.dat"
+          }
+        ]
+      }
     }
   ],
   "documents": [

@@ -1,0 +1,53 @@
+{
+  "id": "rousseau-nepton-2018-ngc628-hii-regions",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "NGC628 with SITELLE: I. Imaging spectroscopy of 4285 H II region candidates",
+  "identifiers": [
+    {
+      "type": "ads",
+      "value": "2018MNRAS.477.4152R"
+    },
+    {
+      "type": "CDS/VizieR",
+      "value": "J/MNRAS/477/4152"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://ui.adsabs.harvard.edu/abs/2018MNRAS.477.4152R",
+      "label": "2018MNRAS.477.4152R"
+    },
+    {
+      "role": "archive",
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/MNRAS/477/4152",
+      "label": "CDS J/MNRAS/477/4152"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/MNRAS/477/4152/ReadMe",
+      "checkedOn": "2026-10-03",
+      "locator": "catalog.dat.gz: 4,285 rows; 4,202 drawn as M74's hii region candidates."
+    }
+  ],
+  "creators": [
+    "L. Rousseau-Nepton",
+    "C. Robert",
+    "R. P. Martin",
+    "L. Drissen",
+    "T. Martin"
+  ],
+  "publisher": "MNRAS 477, 4152",
+  "publicationDate": "2018",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite Rousseau-Nepton et al. (2018), MNRAS 477, 4152.",
+      "scope": "M74's hii region candidates",
+      "evidence": "https://cdsarc.cds.unistra.fr/ftp/J/MNRAS/477/4152/ReadMe"
+    }
+  ]
+}

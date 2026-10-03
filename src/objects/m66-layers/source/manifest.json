@@ -53,6 +53,42 @@
           }
         ]
       }
+    },
+    {
+      "id": "scheuermann-pne-table",
+      "path": "src/objects/m66-layers/source/scheuermann-pne/table2.dat",
+      "origin": "https://cdsarc.cds.unistra.fr/ftp/J/MNRAS/511/6087/table2.dat",
+      "title": "Planetary nebula luminosity function distances for 19 galaxies observed by PHANGS-MUSE, table2.dat",
+      "credit": "F. Scheuermann, K. Kreckel, G. S. Anand, G. A. Blanc, E. Congiu, F. Santoro; MNRAS 511, 6087",
+      "acquisition": "Published table downloaded unchanged from its CDS origin; read by packages/bake/cli/prepare-catalogue-points.mts through scheuermann-pne/points.json.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "scheuermann-2022-phangs-pne",
+            "role": "material",
+            "evidence": "https://cdsarc.cds.unistra.fr/ftp/J/MNRAS/511/6087/table2.dat"
+          }
+        ]
+      }
+    },
+    {
+      "id": "scheuermann-snr-table",
+      "path": "src/objects/m66-layers/source/scheuermann-snr/table2.dat",
+      "origin": "https://cdsarc.cds.unistra.fr/ftp/J/MNRAS/511/6087/table2.dat",
+      "title": "Planetary nebula luminosity function distances for 19 galaxies observed by PHANGS-MUSE, table2.dat",
+      "credit": "F. Scheuermann, K. Kreckel, G. S. Anand, G. A. Blanc, E. Congiu, F. Santoro; MNRAS 511, 6087",
+      "acquisition": "Published table downloaded unchanged from its CDS origin; read by packages/bake/cli/prepare-catalogue-points.mts through scheuermann-snr/points.json.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "scheuermann-2022-phangs-pne",
+            "role": "material",
+            "evidence": "https://cdsarc.cds.unistra.fr/ftp/J/MNRAS/511/6087/table2.dat"
+          }
+        ]
+      }
     }
   ],
   "documents": [

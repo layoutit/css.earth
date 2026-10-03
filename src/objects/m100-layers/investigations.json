@@ -39,6 +39,25 @@
       "evidence": [
         "https://github.com/charvey2718/nox"
       ]
+    },
+    {
+      "id": "dots",
+      "subject": "Catalogued objects as dots",
+      "status": "included",
+      "finding": "73 dots from 2 published tables: 62 planetary nebulae (Scheuermann et al. (2022), CDS J/MNRAS/511/6087, 1,049 rows in the file); 11 supernova remnants (Scheuermann et al. (2022), CDS J/MNRAS/511/6087, 1,049 rows in the file). Each dot is a catalogued object at its published sky position, placed where its sight line meets the disc. Its height above the disc is drawn from a 618 pc layer, the scale length over 7.3 ([Kregel et al. 2002](https://arxiv.org/abs/astro-ph/0204154), [record](../../sources/kregel-2002-disc-flattening.json)); that height is not measured. Planetary nebulae near the centre can sit in the bulge, with the bulge's share of the fitted light there; that membership is drawn, not measured.",
+      "evidence": [
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/MNRAS/511/6087",
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/MNRAS/511/6087"
+      ]
+    },
+    {
+      "id": "dots-waiting",
+      "subject": "Ionised nebulae (Groves et al. 2023)",
+      "status": "deferred",
+      "finding": "The table has rows for this galaxy, but CDS serves it per galaxy only through TAP, which answered with an error on 2026-10-03 (HTTP Error 503: Service Unavailable); the whole file is 43 MB. The dots follow when TAP answers.",
+      "evidence": [
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/MNRAS/520/4902"
+      ]
     }
   ]
 }

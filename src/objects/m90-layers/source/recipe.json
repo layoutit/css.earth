@@ -112,7 +112,39 @@
       1,
       1,
       1
-    ]
+    ],
+    "bulge": {
+      "source": "salo-2015-s4g-decompositions",
+      "lightFrom": "fit",
+      "positionAngleDeg": 16.25,
+      "sersicIndex": 4.898,
+      "halfLightRadiusKpc": 0.4982,
+      "surfaceBrightnessAtHalfLight": 18.251,
+      "skyEllipticity": 0.39,
+      "disc": {
+        "centralSurfaceBrightness": 19.622,
+        "scaleLengthKpc": 5.0535,
+        "skyEllipticity": 0.593,
+        "positionAngleDeg": 24.8
+      },
+      "galaxyDisc": {
+        "inclinationDeg": 70,
+        "lineOfNodesPaDeg": 18,
+        "source": "leroy-2021-phangs-alma",
+        "basis": "Leroy et al. (2021), row NGC4569: inclination 70.0 ± 6.0°, position angle 18.0 ± 2.0°, from the rotation of its gas (Lang et al. 2020)."
+      },
+      "bar": {
+        "centralSurfaceBrightness": 20.058,
+        "radiusKpc": 9.0802,
+        "skyEllipticity": 0.779,
+        "positionAngleDeg": 16.53
+      },
+      "extentKpc": {
+        "radius": 3.99,
+        "height": 3.99,
+        "fadeFrom": 2
+      }
+    }
   },
   "bake": {
     "maxFacePixels": 1024,
@@ -134,7 +166,10 @@
       "source": "rc3-1991",
       "basis": "RC3 (de Vaucouleurs et al. 1991, CDS VII/155) gives NGC 4569 a total (B-V)T of 0.72 as observed; red and blue are scaled in linear light so the galaxy's mean color matches the engine's catalogue color for that index, the function that colors the star dots."
     },
-    "flat": true
+    "flat": true,
+    "bulgeSlices": 40,
+    "bulgeFacePixels": 256,
+    "bulgeCrossSlices": 24
   },
   "provenance": {
     "path": "provenance.json"

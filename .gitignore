@@ -463,3 +463,16 @@ src/objects/wasp-43b/source/science/bt-settl-cifist/bt-settl-cifist-4500-4.5-0.0
 !src/objects/sn263-gamma/source/reference/*.tab
 !src/objects/susi/source/reference/*.tab
 !src/objects/titan/source/geology/titan-geologic-units.tif
+# Catalogue tables of the flat galaxy banks' dots; restored from their CDS origin (each bank's source/<catalogue>/points.json).
+src/objects/*/source/feldmeier-pne/tab2-4.dat
+src/objects/*/source/scheuermann-*/table2.dat
+src/objects/*/source/chandar-clusters/table1.dat
+src/objects/*/source/csornyei-cepheids/ceps.dat
+src/objects/*/source/rousseau-hii/catalog.dat.gz
+src/objects/*/source/spitler-gc/table2.dat
+src/objects/*/source/ford-pne/table3
+src/objects/*/source/hartke-pne/kinema.dat
+src/objects/*/source/yuan-*/table*.dat
+src/objects/*/source/gonzalez-gc/table6.dat
+src/objects/m32-layers/source/merrett-pne/table3.dat
+src/objects/m110-layers/source/merrett-pne/table3.dat

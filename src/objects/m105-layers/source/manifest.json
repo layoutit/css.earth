@@ -53,6 +53,24 @@
           }
         ]
       }
+    },
+    {
+      "id": "hartke-pne-table",
+      "path": "src/objects/m105-layers/source/hartke-pne/kinema.dat",
+      "origin": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/663/A12/kinema.dat",
+      "title": "The halo of M105 and its group environment as traced by planetary nebula populations. II. Using kinematics of single stars to unveil the presence of intragroup light around the Leo I galaxies NGC 3384 and M105, kinema.dat",
+      "credit": "J. Hartke, M. Arnaboldi, O. Gerhard, L. Coccato, M. Merrifield, K. Kuijken; A&A 663, A12",
+      "acquisition": "Published table downloaded unchanged from its CDS origin; read by packages/bake/cli/prepare-catalogue-points.mts through hartke-pne/points.json.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "hartke-2022-m105-planetary-nebulae",
+            "role": "material",
+            "evidence": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/663/A12/kinema.dat"
+          }
+        ]
+      }
     }
   ],
   "documents": [

@@ -20,6 +20,11 @@
     {
       "path": "src/objects/local-group-galaxies/prepared/catalogue.json",
       "locator": "/sources/3/references/148"
+    },
+    {
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/678/A44/ReadMe",
+      "checkedOn": "2026-10-03",
+      "locator": "ceps.dat: 638 rows; 638 drawn as Whirlpool Galaxy's cepheids."
     }
   ],
   "relations": [],

@@ -30,6 +30,17 @@
       "evidence": [
         "https://github.com/charvey2718/nox"
       ]
+    },
+    {
+      "id": "dots",
+      "subject": "Catalogued objects as dots",
+      "status": "included",
+      "finding": "4,513 dots from 3 published tables: 3,812 star clusters (Chandar et al. (2016), CDS J/ApJ/824/71, 3,812 rows in the file); 638 cepheids (Csörnyei et al. (2023), CDS J/A+A/678/A44, 638 rows in the file); 63 planetary nebulae (Feldmeier et al. (1997), CDS J/ApJ/479/231, 203 rows in the file). Each dot is a catalogued object at its published sky position, placed where its sight line meets the disc. Its height above the disc is drawn from a 466 pc layer, the scale length over 7.3 ([Kregel et al. 2002](https://arxiv.org/abs/astro-ph/0204154), [record](../../sources/kregel-2002-disc-flattening.json)); that height is not measured.",
+      "evidence": [
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/824/71",
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/678/A44",
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/479/231"
+      ]
     }
   ]
 }

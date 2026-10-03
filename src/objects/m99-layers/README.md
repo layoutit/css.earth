@@ -22,6 +22,17 @@ A survey image of M99 (NGC 4254), cleaned of the Milky Way stars in front of it 
 - **Near side:** the source gives the tilt, not which edge is nearer. The disc is drawn with the edge at position angle 158° nearer: an assumption, not a measurement.
 - **Sky:** the image's sky, (7, 7, 6) of 255 (each channel's median over the frame's outer ring), is subtracted as the background floor (7 of 255).
 
+## Dots
+
+| Catalogue | Drawn | Note |
+| --- | --- | --- |
+| [Planetary nebulae (Scheuermann et al. 2022)](https://cdsarc.cds.unistra.fr/viz-bin/cat/J/MNRAS/511/6087), [recipe](source/scheuermann-pne/points.json) | 42 | type PN |
+| [Supernova remnants (Scheuermann et al. 2022)](https://cdsarc.cds.unistra.fr/viz-bin/cat/J/MNRAS/511/6087), [recipe](source/scheuermann-snr/points.json) | 23 | type SNR |
+
+The catalogue tables are files of the CDS archive (each descriptor's `table.origin`); they are not tracked. Each dot is a catalogued object at its published sky position, placed where its sight line meets the disc. Its height above the disc is drawn from a 341 pc layer, the scale length over 7.3 ([Kregel et al. 2002](https://arxiv.org/abs/astro-ph/0204154), [record](../../sources/kregel-2002-disc-flattening.json)); that height is not measured. Each dot takes its tone from the image's brightness under it and moves halfway from its kind's color to the image's color there.
+
+Ionised nebulae (Groves et al. 2023) are not drawn yet: CDS's TAP service, the only route to that table short of a 43 MB file, did not answer on 2026-10-03.
+
 ## Known problems
 
 - Which edge of the disc is nearer is assumed.

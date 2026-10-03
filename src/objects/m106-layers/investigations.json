@@ -30,6 +30,17 @@
       "evidence": [
         "https://github.com/charvey2718/nox"
       ]
+    },
+    {
+      "id": "dots",
+      "subject": "Catalogued objects as dots",
+      "status": "included",
+      "finding": "758 dots from 3 published tables: 669 cepheids (Yuan et al. (2022), CDS J/ApJ/940/64, 669 rows in the file); 52 hii regions (Yuan et al. (2022), CDS J/ApJ/940/64, 52 rows in the file); 37 globular cluster candidates (González-Lópezlira et al. (2017), CDS J/ApJ/835/184, 39 rows in the file). Each dot is a catalogued object at its published sky position, placed on the plane the picture stands on; its depth is not measured, and it is not drawn.",
+      "evidence": [
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/940/64",
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/940/64",
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/835/184"
+      ]
     }
   ]
 }

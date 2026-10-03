@@ -35,7 +35,7 @@
     "lineOfNodesPaDeg": 0,
     "reference": "A picture of the sky, centred on the galaxy, so its plane faces the Sun. The recipe's inclination of 0.001° is not a measurement: the bake needs a plane with some depth along the sight line, and this is the smallest tilt that gives it one."
   },
-  "displayModel": "The photograph lies on one flat plane facing the Sun at the galaxy's distance. Nothing in the image has depth: seen from the side it is a line.",
+  "displayModel": "The photograph lies on one flat plane facing the Sun at the galaxy's distance. The bulge of S4G's published fit, scaled to the photograph, fills a spheroid through that plane, flattened along the galaxy's own disc normal; its depth is modelled, not measured. Everything else in the image has no depth.",
   "coverage": "Stars are removed from the picture before the bake by NOX, which predicts the light under a star and does not measure it; 5 of the 5 Gaia stars brighter than G 14 in the picture had a glow, filled out to at most 101 px (29″).",
   "acquisition": {
     "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FSDSS9%2Fcolor&width=3000&height=3000&fov=0.243&projection=TAN&coordsys=icrs&ra=189.208080&dec=13.163395&format=jpg",

@@ -53,6 +53,24 @@
           }
         ]
       }
+    },
+    {
+      "id": "merrett-pne-table",
+      "path": "src/objects/m110-layers/source/merrett-pne/table3.dat",
+      "origin": "https://cdsarc.cds.unistra.fr/ftp/J/MNRAS/369/120/table3.dat",
+      "title": "A deep kinematic survey of planetary nebulae in the Andromeda galaxy using the Planetary Nebula Spectrograph, table3.dat",
+      "credit": "H. R. Merrett, M. R. Merrifield, N. G. Douglas; MNRAS 369, 120",
+      "acquisition": "Published table downloaded unchanged from its CDS origin; read by packages/bake/cli/prepare-catalogue-points.mts through merrett-pne/points.json.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "merrett-2006-m31-planetary-nebulae",
+            "role": "material",
+            "evidence": "https://cdsarc.cds.unistra.fr/ftp/J/MNRAS/369/120/table3.dat"
+          }
+        ]
+      }
     }
   ],
   "documents": [

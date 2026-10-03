@@ -1,7 +1,7 @@
 # NGC 3521
 
 An observatory photograph of NGC 3521, cleaned of the Milky Way stars in front of it and color-tied to its measured
-integrated color, lies flat on its measured disc. No catalogue of its nebulae or clusters was found, so it has no dots. Image brightness does not measure per-pixel distance.
+integrated color, lies flat on its measured disc, with its bulge standing through it as a small volume. No catalogue of its nebulae or clusters was found, so it has no dots. Image brightness does not measure per-pixel distance.
 
 ## Sources
 

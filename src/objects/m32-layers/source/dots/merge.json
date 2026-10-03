@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-catalogue-points-merge@1",
+  "id": "dots",
+  "published": true,
+  "meaning": "M32's catalogued objects as dots on its photograph's plane: planetary nebulae.",
+  "centreOnGalaxy": true,
+  "banks": [
+    {
+      "bank": "merrett-pne",
+      "withinPcOfCentre": 1374,
+      "basis": "Presentation choice: a dot is drawn only where the photograph is, inside the image layers' 1.374 kpc support radius (recipe.json)."
+    }
+  ],
+  "colorTowardWhite": 0.5,
+  "colorTowardWhiteBasis": "Presentation choice: the Milky Way dots' value (milky-way/source/local-3kpc/merge.json), so both galaxies' dots read as the same tints of starlight.",
+  "colorGamma": 1.6,
+  "colorGammaBasis": "Presentation choice: the Milky Way dots' value (milky-way/source/local-3kpc/merge.json), picked there from three renders over its backing."
+}
