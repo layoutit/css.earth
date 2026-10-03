@@ -1,0 +1,97 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "macs-j0717",
+  "parent": "observable-universe",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "MACS J0717",
+      "steps": [
+        "verify-sources",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 44584599152546180000
+      },
+      "sources": [
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "MACS J0717",
+      "systemName": "Galaxy clusters",
+      "classification": "galaxy-cluster",
+      "color": "#9a9a9a",
+      "distanceAu": 434936958104055,
+      "description": "Four clusters of galaxies caught colliding, the first such collision documented.",
+      "aliases": [
+        "MACS J0717.5+3745",
+        "MACSJ0717.5+3745"
+      ],
+      "order": 5457,
+      "context": {}
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -1.7068793422088618e+25,
+        4.8526599610399565e+25,
+        3.984172831486929e+25
+      ],
+      "presentationToReference": [
+        -0.2720690286772444,
+        0,
+        0.962277737264362,
+        0.8828725626685733,
+        0.3977771559319137,
+        0.24961845345595757,
+        0.3827721015456153,
+        -0.9174820620691818,
+        0.10822284444439255
+      ],
+      "orbitUpReference": [
+        0,
+        -0.3977771559319137,
+        0.9174820620691818
+      ],
+      "metersPerUnit": 143821287588858640000,
+      "bodyRadiusM": 4.458459915254618e+22
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

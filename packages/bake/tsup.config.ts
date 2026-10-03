@@ -75,8 +75,7 @@ const entry: Record<string, string> = { volume: 'src/volume/index.ts', 'volume/n
  * not tsup's `dts`: its rollup bundling of every entry in one worker grew past Node's default heap as topics were added,
  * while a plain declaration emit costs one type-check whatever the entry count. Each entry's `dist/<entry>.d.ts`, the
  * path `package.json` exports, re-exports its source index. The build config extends `tsconfig.node.json`, so every entry
- * is declared with Node's types and the DOM library (offline CSSOM reads evaluate in a browser page, and the renderer
- * types they name use it); `tsconfig.json` keeps both out of the browser-safe sources. */
+ * is declared with Node's types and the DOM library (offline CSSOM reads evaluate in a browser page); `tsconfig.json` keeps both out of the browser-safe sources. */
 async function emitDeclarations(): Promise<void> {
   // A failed pass leaves no stubs, so the exports stop resolving and packages/bake/cli/check-stale-builds.mts reads the build stale.
   for (const name of Object.keys(entry)) await rm(resolve(root, 'dist', `${name}.d.ts`), { force: true })
@@ -122,10 +121,6 @@ export default defineConfig(options => ({
     await emitDeclarations(); return options.watch ? await watchDeclarationSources() : undefined
   },
   clean: true,
-  // Topics read shared conventions from objects and numerics from engine; remaining renderer uses name source subpaths.
-  // Those subpaths are TypeScript whose sibling imports name `.js`, which Node cannot load, so they are bundled; the
-  // renderer's built entries would be too, but no topic imports one.
-  noExternal: [/^@cssearth\/renderer\//],
   // packages/bake/cli/check-stale-builds.mts reads the inputs to know when this bundle is stale.
   metafile: true,
   target: 'es2022',

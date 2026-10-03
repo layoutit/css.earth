@@ -1,6 +1,7 @@
 {
   "schema": "cssearth-object@2",
   "id": "dh-tau",
+  "parent": "dh-tau-system",
   "type": "layered-body",
   "properties": {
     "preparation": {

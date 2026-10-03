@@ -1,6 +1,7 @@
 {
   "schema": "cssearth-object@2",
   "id": "oberon",
+  "parent": "uranus-system",
   "type": "layered-body",
   "properties": {
     "preparation": {

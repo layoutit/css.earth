@@ -9,6 +9,9 @@ export interface ObjectDescriptor {
   readonly schema: 'cssearth-object@2';
   readonly id: string;
   readonly type: string;
+  /** The one object this object is inside (object-tree.ts). Only the root, the Observable Universe, has none; a dataset bank has
+   * none either: it is attached to the object it draws for by `properties.host`, not inside it. */
+  readonly parent?: string;
   /** Parameters interpreted by the registered reusable object type. */
   readonly properties: JsonRecord;
   /** A bake may attach an artifact without changing the authored properties. */

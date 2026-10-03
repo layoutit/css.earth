@@ -11,7 +11,7 @@ import { worldOrbitBankRegions } from '@cssearth/objects';
 import { prepareSceneDistance } from '@cssearth/bake/navigation';
 import { parseWorldContextSource, PLAIN_STAR_DOT_BANK_IDS, plainStarDotBanks, prepareWorldContext, summarizeWorldContext, worldSystemViews } from '@cssearth/bake/world-context';
 import { writeCatalogueBank } from '@cssearth/bake/volume/node';
-import { worldOrbitBanks } from '@cssearth/objects';
+import { systemViewFile, systemViewOwner, worldOrbitBanks } from '@cssearth/objects';
 import type { OrbitalState, Vector3, WorldContextBodyFact } from '@cssearth/bake/world-context';
 import type { PreparedOrbitCenter as WorldContextOrbitCenter } from '@cssearth/objects';
 
@@ -249,21 +249,28 @@ export async function prepareSpatialContext(options: SpatialContextPreparationOp
     if (entry.isDirectory() && !holders.has(entry.name)) await rm(memberFilePath(objectsRoot, entry.name), { force: true });
   }
   await rm(resolve(dirname(options.outputPath), 'world-systems'), { recursive: true, force: true });
-  // System framing's camera candidates, one file per host, read when navigation frames that system.
-  const directory = worldSystemViewsDirectory(options.outputPath), views = worldSystemViews(prepared), kept = new Set<string>();
-  for (const view of views) { kept.add(`${view.id}.json`); await writeIfChanged(resolve(directory, `${view.id}.json`), `${JSON.stringify(view)}\n`); }
-  for (const name of await readdir(directory).catch(() => [] as string[])) if (!kept.has(name)) await rm(resolve(directory, name));
+  // System framing's camera candidates, one file per host, read when navigation frames that system: each in the package of
+  // the system that owns it (`systemViewOwner` in @cssearth/objects), which a host's system always has.
+  const boundTo = new Map(prepared.bodies.flatMap(body => 'boundTo' in body && body.boundTo ? [[body.id, body.boundTo.hostId] as const] : []));
+  const owned = new Map<string, Set<string>>();
+  for (const view of worldSystemViews(prepared)) {
+    const owner = systemViewOwner(view.id, id => boundTo.get(id)), file = resolve(objectsRoot, owner, 'prepared', systemViewFile(view.id));
+    await access(resolve(objectsRoot, owner, 'object.json')).catch(() => { throw new TypeError(`The system view of ${view.id} belongs to ${owner}, which has no package (src/objects/${owner}/object.json): run node site/build/prepare/system-packages.mts.`); });
+    (owned.get(owner) ?? owned.set(owner, new Set()).get(owner)!).add(`${view.id}.json`);
+    await writeIfChanged(file, `${JSON.stringify(view)}\n`);
+  }
+  for (const entry of await readdir(objectsRoot, { withFileTypes: true })) {
+    if (!entry.isDirectory()) continue;
+    const directory = resolve(objectsRoot, entry.name, 'prepared', 'views'), kept = owned.get(entry.name);
+    for (const name of await readdir(directory).catch(() => [] as string[])) if (!kept?.has(name)) await rm(resolve(directory, name));
+  }
+  await rm(resolve(dirname(options.outputPath), 'system-views'), { recursive: true, force: true });
   await rm(resolve(dirname(options.outputPath), 'world-system-views.json'), { force: true });
 }
 
 /** The dot bank the paged asteroids are dots of (paged-asteroid-dot-positions.mts writes their places into it): the
  * holder of every asteroid the map draws as a plain dot. */
 const ASTEROID_DOT_BANK = 'catalogue-asteroids';
-
-/** `world-context.json` → `system-views/`, beside it: `<host id>.json` per system. */
-export function worldSystemViewsDirectory(outputPath: string): string {
-  return resolve(dirname(outputPath), 'system-views');
-}
 
 /** The star packages that are dots of the Milky Way's own bank, by id: the names of its tracked table. An object folder
  * without the table (a fixture) has none. */

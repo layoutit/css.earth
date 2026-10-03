@@ -1,0 +1,99 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "einstein-cross",
+  "parent": "observable-universe",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Einstein Cross",
+      "steps": [
+        "verify-sources",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 8875023267577364000
+      },
+      "sources": [
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Einstein Cross",
+      "systemName": "Quasars",
+      "classification": "galaxy",
+      "classificationLabel": "Lensed quasar",
+      "color": "#c8d8ff",
+      "distanceAu": 995431408632365,
+      "description": "One quasar seen four times: a nearer galaxy's gravity bends its light into four images.",
+      "aliases": [
+        "QSO 2237+0305",
+        "G2237+0305",
+        "Huchra's Lens"
+      ],
+      "order": 5456,
+      "context": {}
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1.3980501914284171e+26,
+        -5.053661167901789e+25,
+        8.724211334281961e+24
+      ],
+      "presentationToReference": [
+        0.9560108718466003,
+        0,
+        -0.29333123412126305,
+        -0.2691261455508744,
+        0.3977771559319137,
+        -0.8771228260623751,
+        -0.11668046405475435,
+        -0.9174820620691818,
+        -0.3802792856431299
+      ],
+      "orbitUpReference": [
+        0,
+        -0.3977771559319137,
+        0.9174820620691818
+      ],
+      "metersPerUnit": 28629107314765693000,
+      "bodyRadiusM": 8.875023267577364e+21
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

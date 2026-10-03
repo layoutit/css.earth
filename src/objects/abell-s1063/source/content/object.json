@@ -1,0 +1,136 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "abell-s1063",
+  "displayName": "Abell S1063",
+  "panel": {
+    "facts": [
+      {
+        "id": "distance",
+        "label": "Distance (comoving)",
+        "value": "1,425 Mpc, 4.6 billion light years",
+        "source": {
+          "catalogueId": "planck-2018-cosmology",
+          "url": "https://arxiv.org/abs/1807.06209",
+          "label": "Planck Collaboration (2020), Planck 2018 results VI, A&A 641, A6; Astropy Planck18",
+          "checked": "2026-10-02"
+        }
+      },
+      {
+        "id": "redshift",
+        "label": "Redshift",
+        "value": "0.3517 ± 0.0049",
+        "source": {
+          "catalogueId": "ned-abell-s1063",
+          "url": "https://ned.ipac.caltech.edu/byname?objname=Abell%20S1063",
+          "label": "NASA/IPAC Extragalactic Database (NED), Abell S1063: position from 2015ApJS..216...27B, redshift from 2024MNRAS.531.3973K",
+          "checked": "2026-10-02"
+        }
+      },
+      {
+        "id": "light-travel",
+        "label": "Light travel time",
+        "value": "4.00 billion years",
+        "source": {
+          "catalogueId": "planck-2018-cosmology",
+          "url": "https://arxiv.org/abs/1807.06209",
+          "label": "Planck Collaboration (2020), Planck 2018 results VI, A&A 641, A6; Astropy Planck18",
+          "checked": "2026-10-02"
+        }
+      },
+      {
+        "id": "position",
+        "label": "Sky position (J2000)",
+        "value": "RA 342.1907°, Dec -44.5269°",
+        "source": {
+          "catalogueId": "ned-abell-s1063",
+          "url": "https://ned.ipac.caltech.edu/byname?objname=Abell%20S1063",
+          "label": "NASA/IPAC Extragalactic Database (NED), Abell S1063: position from 2015ApJS..216...27B, redshift from 2024MNRAS.531.3973K",
+          "checked": "2026-10-02"
+        }
+      },
+      {
+        "id": "picture",
+        "label": "Picture width",
+        "value": "2.07 arcmin, 860.0 kpc comoving at its distance",
+        "source": {
+          "catalogueId": "esahubble-heic1615a",
+          "url": "https://esahubble.org/images/heic1615a/",
+          "label": "ESA/Hubble heic1615a: NASA, ESA, and J. Lotz (STScI)",
+          "checked": "2026-10-02"
+        }
+      },
+      {
+        "id": "members",
+        "label": "Member dots",
+        "value": "153 flagged members",
+        "source": {
+          "catalogueId": "raney-2020-frontier-fields-galaxies",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/MNRAS/492/503",
+          "label": "Raney, Keeton & Brennan (2020), MNRAS 492, 503; CDS J/MNRAS/492/503",
+          "checked": "2026-10-02"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "optical",
+    "controls": [
+      {
+        "id": "optical",
+        "label": "Hubble · visible and near infrared",
+        "thumbnail": "abell-s1063-dataset-optical.webp",
+        "volume": {
+          "objectId": "abell-s1063-layers",
+          "datasetId": "optical",
+          "surface": "optical"
+        },
+        "source": {
+          "id": "abell-s1063-layers-optical",
+          "path": "../../abell-s1063-layers/source/manifest.json",
+          "url": "https://esahubble.org/images/heic1615a/"
+        },
+        "falseColor": true
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Planck Collaboration (2020), Planck 2018 results VI, A&A 641, A6; Astropy Planck18",
+      "href": "https://arxiv.org/abs/1807.06209"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "NASA/IPAC Extragalactic Database (NED), Abell S1063: position from 2015ApJS..216...27B, redshift from 2024MNRAS.531.3973K",
+      "href": "https://ned.ipac.caltech.edu/byname?objname=Abell%20S1063"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "ESA/Hubble heic1615a: NASA, ESA, and J. Lotz (STScI)",
+      "href": "https://esahubble.org/images/heic1615a/"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Raney, Keeton & Brennan (2020), MNRAS 492, 503; CDS J/MNRAS/492/503",
+      "href": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/MNRAS/492/503"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ned.ipac.caltech.edu/byname?objname=Abell%20S1063",
+      "credit": "NASA/IPAC Extragalactic Database (NED), Abell S1063: position from 2015ApJS..216...27B, redshift from 2024MNRAS.531.3973K"
+    }
+  }
+}

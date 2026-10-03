@@ -1,0 +1,43 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "earendel-layers",
+  "type": "image-layer-bank",
+  "properties": {
+    "preparation": {
+      "source": "source/recipe.json"
+    },
+    "host": "earendel",
+    "frame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        2.3338536568741546e+26,
+        1.0560711424116862e+26,
+        -3.812218290122354e+25
+      ],
+      "localToReferenceXyzw": [
+        0.41056511524506006,
+        0.6364232745910225,
+        0.5487210126283785,
+        0.3539872201121636
+      ],
+      "metersPerUnit": 30856775814913670000,
+      "boundsUnits": {
+        "min": [
+          -119.11060312117004,
+          -355.22733029379077,
+          -0.004087451845407486
+        ],
+        "max": [
+          364.234793863645,
+          244.2340357856578,
+          0.010549884289503098
+        ]
+      }
+    }
+  },
+  "prepared": {
+    "format": "cssearth-image-layer-bank@1",
+    "url": "prepared/image-layers.json"
+  }
+}

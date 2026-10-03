@@ -1,0 +1,71 @@
+{
+  "schema": "cssearth-image-layer-recipe@1",
+  "id": "abell-370-layers",
+  "source": {
+    "path": "source.jpg",
+    "dimensions": [
+      4164,
+      4634
+    ],
+    "originalDimensions": [
+      4164,
+      4634
+    ],
+    "publisherUrl": "https://esahubble.org/images/heic1711a/",
+    "downloadUrl": "https://cdn.esahubble.org/archives/images/large/heic1711a.jpg",
+    "credit": "NASA, ESA/Hubble, HST Frontier Fields",
+    "license": "CC-BY-4.0"
+  },
+  "observation": {
+    "centerRaDeg": 39.9702863,
+    "centerDecDeg": -1.5768308,
+    "fieldOfViewDeg": [
+      0.03470528,
+      0.03862254
+    ],
+    "northClockwiseDeg": 27.94
+  },
+  "target": {
+    "centerRaDeg": 39.97136,
+    "centerDecDeg": -1.58222,
+    "distancePc": 1510644641.4313226
+  },
+  "geometry": {
+    "kind": "inclined-disk",
+    "inclinationDeg": 0.005495,
+    "lineOfNodesPaDeg": 78.737,
+    "thicknessKpc": 0.458,
+    "depthWeights": [
+      0.25,
+      0.5,
+      0.25
+    ],
+    "supportRadiusKpc": 448.36,
+    "supportTaperFraction": 0.7,
+    "depthScales": [
+      1,
+      1,
+      1
+    ]
+  },
+  "bake": {
+    "maxFacePixels": 1024,
+    "crossAxisSlices": 32,
+    "crossAxisDepthPixels": 97,
+    "backgroundFloor": 0.03,
+    "encoding": {
+      "format": "webp",
+      "quality": 70,
+      "alphaQuality": 80
+    },
+    "diffuseFacePixels": 80,
+    "crossAxisAlongPixels": 384,
+    "edgeTaperFraction": 0.04,
+    "diffuseFraction": 0.65,
+    "diffuseSigmaPixels": 2,
+    "flat": true
+  },
+  "provenance": {
+    "path": "provenance.json"
+  }
+}

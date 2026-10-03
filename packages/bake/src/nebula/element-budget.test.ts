@@ -6,10 +6,9 @@ import { mkdtemp, mkdir, rm } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { spawnSync } from 'node:child_process';
 import { build } from 'esbuild';
-import { bundleRendererPackage } from '@cssearth/bake/preparation';
 
 // CI invokes this file directly. Bundle the typed cases just as the preparation runner does,
-// so renderer-source .js imports resolve to their TypeScript owners without a runtime loader.
+// while keeping native modules external.
 test('element-budget executes all 9 typed application cases', async t => {
   const root = projectRoot(import.meta.url), parent = resolve(root, '.local/nebula-application-tests');
   await mkdir(parent, { recursive: true });
@@ -18,7 +17,7 @@ test('element-budget executes all 9 typed application cases', async t => {
   const outfile = resolve(directory, 'cases.test.mjs');
   await build({ entryPoints: [resolve(root, 'packages/bake/src/nebula/fixtures/element-budget.cases.mts')], outfile,
     bundle: true, platform: 'node', format: 'esm', target: 'node22', packages: 'external',
-    plugins: [bundleRendererPackage, { name: 'retain-native-modules', setup(builder) {
+    plugins: [{ name: 'retain-native-modules', setup(builder) {
       builder.onResolve({ filter: /\.m[jt]s$/ }, args => args.kind === 'entry-point' ? undefined : ({ path: resolve(args.resolveDir, args.path), external: true }));
     } }],
   });

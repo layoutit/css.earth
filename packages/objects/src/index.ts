@@ -194,3 +194,4 @@ export { RENDER_ELEMENT_PROFILE_SCHEMA } from './volume/render-element-budget.js
 export { worldCameraFromCenteredPresentation, worldCameraFromPresentation, cameraProjectionScale, worldCameraFocusFrame, validateWorldCameraViewport } from './prepared-data/world-camera-conversion.js';
 export type { WorldCameraPose, LocalWorldCameraPresentation, PreparedWorldCameraViewport } from './prepared-data/world-camera-conversion.js';
 export { preparedDefaultViewRotation } from './prepared-data/prepared-arrival-view.js';
+export { parsePreparedDensityVolume } from './prepared-data/prepared-density-volume.js';

@@ -1,0 +1,65 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "jades-gs-z14-0",
+  "card": {
+    "text": "A galaxy seen 290 million years after the Big Bang, its distance measured by both Webb and ALMA.",
+    "sources": [
+      {
+        "catalogueId": "publication-schouws-2025-oiii",
+        "url": "https://arxiv.org/abs/2409.20549",
+        "label": "Schouws et al. (2025), Detection of [OIII] 88 µm in JADES-GS-z14-0 at z = 14.1793, ApJ (accepted), arXiv:2409.20549",
+        "checked": "2026-10-02",
+        "locator": "abstract: detection of the [O III] 88 µm line with ALMA at z = 14.1793, confirming the NIRSpec redshift"
+      },
+      {
+        "catalogueId": "publication-schouws-2025-oiii",
+        "url": "https://arxiv.org/abs/2409.20549",
+        "label": "Schouws et al. (2025), Detection of [OIII] 88 µm in JADES-GS-z14-0 at z = 14.1793, ApJ (accepted), arXiv:2409.20549",
+        "checked": "2026-10-02",
+        "locator": "abstract: z = 14.1793 ± 0.0007 from the [O III] 88 µm line (ALMA)"
+      },
+      {
+        "catalogueId": "planck-2018-cosmology",
+        "url": "https://arxiv.org/abs/1807.06209",
+        "label": "Planck Collaboration (2020), Planck 2018 results VI, A&A 641, A6; Astropy Planck18",
+        "checked": "2026-10-02",
+        "locator": "z = 14.1793: comoving distance 10,347 Mpc, lookback time 13.50 Gyr, age 290 Myr"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Webb's near-infrared view: the orange light is the galaxy, the pale one beside it a nearer galaxy. The picture is flat and has no depth.",
+    "sources": [
+      {
+        "catalogueId": "esawebb-jades5",
+        "url": "https://esawebb.org/images/jades5/",
+        "label": "ESA/Webb jades5: NASA, ESA, CSA, J. Olmsted (STScI), S. Carniani (Scuola Normale Superiore), JADES Collaboration",
+        "checked": "2026-10-02",
+        "locator": "Webb finds most distant known galaxy (JADES-GS-z14-0 environment NIRCam image); Webb NIRCam: 0.9 to 1.5 µm blue, 2.0 and 2.8 µm green, 3.6 to 4.4 µm red"
+      },
+      {
+        "catalogueId": "planck-2018-cosmology",
+        "url": "https://arxiv.org/abs/1807.06209",
+        "label": "Planck Collaboration (2020), Planck 2018 results VI, A&A 641, A6; Astropy Planck18",
+        "checked": "2026-10-02",
+        "locator": "z = 14.1793: age of the universe 290 Myr of 13,787 Myr"
+      }
+    ]
+  },
+  "datasets": {
+    "optical": {
+      "title": "JADES-GS-z14-0 in near infrared",
+      "detail": "80 × 80 px",
+      "summary": "Webb's deep field around the galaxy, 2.4 arcsec across, at the publisher's own pixels. A flat picture, with no depth.",
+      "sources": [
+        {
+          "catalogueId": "esawebb-jades5",
+          "url": "https://esawebb.org/images/jades5/",
+          "label": "ESA/Webb jades5: NASA, ESA, CSA, J. Olmsted (STScI), S. Carniani (Scuola Normale Superiore), JADES Collaboration",
+          "checked": "2026-10-02",
+          "locator": "Webb finds most distant known galaxy (JADES-GS-z14-0 environment NIRCam image)"
+        }
+      ]
+    }
+  }
+}

@@ -5,7 +5,6 @@ import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 import { createRequire } from 'node:module';
 import { spawnSync } from 'node:child_process';
-import { bundleRendererPackage } from '../preparation/bundle-renderer.ts';
 import { zstdCompressSync } from 'node:zlib';
 import { encodeDensityKtx2 } from './acquisition.ts';
 import { readPreviousVolumeTextures, retireVolumeTextures } from './retirement.ts';
@@ -41,7 +40,7 @@ test('normal preparation CLI removes obsolete PNG/count outputs after publishing
     const { build } = createRequire(engineRequire.resolve('tsup'))('esbuild') as { build(options: unknown): Promise<void> };
     const executable = join(root, 'prepare-volume.mjs');
     await build({ entryPoints: [resolve('packages/bake/cli/prepare-volume.mts')], outfile: executable,
-      bundle: true, platform: 'node', format: 'esm', target: 'node22', packages: 'external', plugins: [bundleRendererPackage] });
+      bundle: true, platform: 'node', format: 'esm', target: 'node22', packages: 'external' });
     const object = join(root, 'fixture'); await mkdir(join(object, 'source'), { recursive: true });
     const raw = Buffer.from(Array.from({ length: 8 }, () => [128, 0, 0, 0]).flat());
     const grid = encodeDensityKtx2({ width: 2, height: 2, depth: 2, encodedRgba: raw }, 9);

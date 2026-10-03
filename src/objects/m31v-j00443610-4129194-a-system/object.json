@@ -1,6 +1,7 @@
 {
   "schema": "cssearth-object@2",
   "id": "m31v-j00443610-4129194-a-system",
+  "parent": "m31",
   "type": "system",
   "generator": "site/build/prepare/system-packages.mts",
   "properties": {

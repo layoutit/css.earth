@@ -1,0 +1,158 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "jades-gs-z14-0",
+  "displayName": "JADES-GS-z14-0",
+  "panel": {
+    "facts": [
+      {
+        "id": "distance",
+        "label": "Distance (comoving)",
+        "value": "10,347 Mpc, 33.7 billion light years",
+        "source": {
+          "catalogueId": "planck-2018-cosmology",
+          "url": "https://arxiv.org/abs/1807.06209",
+          "label": "Planck Collaboration (2020), Planck 2018 results VI, A&A 641, A6; Astropy Planck18",
+          "checked": "2026-10-02"
+        }
+      },
+      {
+        "id": "redshift",
+        "label": "Redshift",
+        "value": "14.1793 ± 0.0007",
+        "source": {
+          "catalogueId": "publication-schouws-2025-oiii",
+          "url": "https://arxiv.org/abs/2409.20549",
+          "label": "Schouws et al. (2025), Detection of [OIII] 88 µm in JADES-GS-z14-0 at z = 14.1793, ApJ (accepted), arXiv:2409.20549",
+          "checked": "2026-10-02"
+        }
+      },
+      {
+        "id": "light-travel",
+        "label": "Light travel time",
+        "value": "13.50 billion years",
+        "source": {
+          "catalogueId": "planck-2018-cosmology",
+          "url": "https://arxiv.org/abs/1807.06209",
+          "label": "Planck Collaboration (2020), Planck 2018 results VI, A&A 641, A6; Astropy Planck18",
+          "checked": "2026-10-02"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age of the universe then",
+        "value": "290 million years",
+        "source": {
+          "catalogueId": "planck-2018-cosmology",
+          "url": "https://arxiv.org/abs/1807.06209",
+          "label": "Planck Collaboration (2020), Planck 2018 results VI, A&A 641, A6; Astropy Planck18",
+          "checked": "2026-10-02"
+        }
+      },
+      {
+        "id": "position",
+        "label": "Sky position (J2000)",
+        "value": "RA 53.0829°, Dec -27.8556°",
+        "source": {
+          "catalogueId": "publication-carniani-2024-z14",
+          "url": "https://arxiv.org/abs/2405.18485",
+          "label": "Carniani et al. (2024), Spectroscopic confirmation of two luminous galaxies at z ~ 14, Nature 633, 318",
+          "checked": "2026-10-02"
+        }
+      },
+      {
+        "id": "webb-redshift",
+        "label": "Redshift from Webb",
+        "value": "14.32 (+0.08, −0.20)",
+        "source": {
+          "catalogueId": "publication-carniani-2024-z14",
+          "url": "https://arxiv.org/abs/2405.18485",
+          "label": "Carniani et al. (2024), Spectroscopic confirmation of two luminous galaxies at z ~ 14, Nature 633, 318",
+          "checked": "2026-10-02"
+        }
+      },
+      {
+        "id": "size",
+        "label": "Radius",
+        "value": "260 pc",
+        "source": {
+          "catalogueId": "publication-carniani-2024-z14",
+          "url": "https://arxiv.org/abs/2405.18485",
+          "label": "Carniani et al. (2024), Spectroscopic confirmation of two luminous galaxies at z ~ 14, Nature 633, 318",
+          "checked": "2026-10-02"
+        }
+      },
+      {
+        "id": "picture",
+        "label": "Picture width",
+        "value": "2.39 arcsec, 120.0 kpc comoving at its distance",
+        "source": {
+          "catalogueId": "esawebb-jades5",
+          "url": "https://esawebb.org/images/jades5/",
+          "label": "ESA/Webb jades5: NASA, ESA, CSA, J. Olmsted (STScI), S. Carniani (Scuola Normale Superiore), JADES Collaboration",
+          "checked": "2026-10-02"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "optical",
+    "controls": [
+      {
+        "id": "optical",
+        "label": "Webb · near infrared",
+        "thumbnail": "jades-gs-z14-0-dataset-optical.webp",
+        "volume": {
+          "objectId": "jades-gs-z14-0-layers",
+          "datasetId": "optical",
+          "surface": "optical"
+        },
+        "source": {
+          "id": "jades-gs-z14-0-layers-optical",
+          "path": "../../jades-gs-z14-0-layers/source/manifest.json",
+          "url": "https://esawebb.org/images/jades5/"
+        },
+        "falseColor": true
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Planck Collaboration (2020), Planck 2018 results VI, A&A 641, A6; Astropy Planck18",
+      "href": "https://arxiv.org/abs/1807.06209"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Schouws et al. (2025), Detection of [OIII] 88 µm in JADES-GS-z14-0 at z = 14.1793, ApJ (accepted), arXiv:2409.20549",
+      "href": "https://arxiv.org/abs/2409.20549"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Carniani et al. (2024), Spectroscopic confirmation of two luminous galaxies at z ~ 14, Nature 633, 318",
+      "href": "https://arxiv.org/abs/2405.18485"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "ESA/Webb jades5: NASA, ESA, CSA, J. Olmsted (STScI), S. Carniani (Scuola Normale Superiore), JADES Collaboration",
+      "href": "https://esawebb.org/images/jades5/"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://arxiv.org/abs/2405.18485",
+      "credit": "Carniani et al. (2024), Spectroscopic confirmation of two luminous galaxies at z ~ 14, Nature 633, 318"
+    }
+  }
+}

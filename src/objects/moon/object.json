@@ -259,5 +259,6 @@
     }
   },
   "schema": "cssearth-object@2",
+  "parent": "earth-system",
   "type": "layered-body"
 }

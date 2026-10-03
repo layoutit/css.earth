@@ -1,0 +1,99 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "ton-618",
+  "parent": "observable-universe",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "TON 618",
+      "steps": [
+        "verify-sources",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 25203443972794110000
+      },
+      "sources": [
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "TON 618",
+      "systemName": "Quasars",
+      "classification": "galaxy",
+      "classificationLabel": "Quasar",
+      "color": "#b0a0ff",
+      "distanceAu": 1158346141221275,
+      "description": "A quasar at redshift 2.22: a point of light from a galaxy's core, which left it 10.8 billion years ago.",
+      "aliases": [
+        "Ton 618",
+        "SDSS J122824.96+312837.6",
+        "FBQS J122824.9+312837"
+      ],
+      "order": 5449,
+      "context": {}
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -1.4665230975268202e+26,
+        -1.827700935871415e+25,
+        9.048275667665688e+25
+      ],
+      "presentationToReference": [
+        -0.9915181969286427,
+        0,
+        0.1299679389671682,
+        0.11924325264647907,
+        0.3977771559319137,
+        0.9097001598972082,
+        0.05169827712469269,
+        -0.9174820620691818,
+        0.3944032884290146
+      ],
+      "orbitUpReference": [
+        0,
+        -0.3977771559319137,
+        0.9174820620691818
+      ],
+      "metersPerUnit": 81301432170303590000,
+      "bodyRadiusM": 2.520344397279411e+22
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

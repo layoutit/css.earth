@@ -1,6 +1,7 @@
 {
   "schema": "cssearth-object@2",
   "id": "charon",
+  "parent": "pluto-system",
   "type": "layered-body",
   "properties": {
     "preparation": {

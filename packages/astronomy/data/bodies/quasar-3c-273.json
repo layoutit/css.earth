@@ -1,0 +1,28 @@
+{
+  "id": "quasar-3c-273",
+  "classification": "galaxy",
+  "order": 5450,
+  "physical": {
+    "name": "3C 273",
+    "horizonsCode": null,
+    "meanRadiusKm": 0,
+    "gravitationalParameterKm3PerS2": 0,
+    "parent": null
+  },
+  "physicalNotes": "No radius or mass of 3C 273 is recorded here: its package frames it at 112,980 pc (object.json worldFrame.bodyRadiusM), half the short side of its picture at its distance, a presentation value.",
+  "star": {
+    "rightAscensionDegrees": 187.27791594049,
+    "declinationDegrees": 2.05238823055,
+    "positionEpochJulianYear": 2000,
+    "distanceParsecs": 671841545.221143,
+    "properMotionRaMasPerYear": 0,
+    "properMotionDecMasPerYear": 0,
+    "radialVelocityKmPerS": 47237.6,
+    "sources": {
+      "position": "Gaia Collaboration (2023), Gaia Data Release 3, A&A 674, A1; position as SIMBAD records it (https://doi.org/10.1051/0004-6361/202243940); SIMBAD 3C 273: RA 187.27791594049°, Dec 2.05238823055°, coordinate reference 2020yCat.1350....0G (Gaia EDR3)",
+      "distance": "Comoving distance of the redshift z = 0.15756751 (Koss et al. (2022), BASS XXII: The BASS DR2 AGN Catalog and Data, ApJS 261, 2; redshift as SIMBAD records it) in the Planck 2018 cosmology: 671841545.221143 pc, from Astropy 8.0.1 Planck18.comoving_distance (Planck Collaboration 2020, A&A 641, A6, https://arxiv.org/abs/1807.06209). The project's convention for objects placed by redshift (packages/bake/cli/prepare-catalogue-points.mts).",
+      "properMotion": "Zero: the object is held at its published position; no motion across the sky is applied.",
+      "radialVelocity": "c z for the redshift z = 0.15756751: the redshift written as a velocity, not a motion through space. Koss et al. (2022), BASS XXII: The BASS DR2 AGN Catalog and Data, ApJS 261, 2; redshift as SIMBAD records it (https://ui.adsabs.harvard.edu/abs/2022ApJS..261....2K); SIMBAD 3C 273: redshift 0.15756751 ± 0.0005, reference 2022ApJS..261....2K."
+    }
+  }
+}

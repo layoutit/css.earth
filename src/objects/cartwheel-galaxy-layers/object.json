@@ -1,0 +1,43 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "cartwheel-galaxy-layers",
+  "type": "image-layer-bank",
+  "properties": {
+    "preparation": {
+      "source": "source/recipe.json"
+    },
+    "host": "cartwheel-galaxy",
+    "frame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        3.3627121146868657e+24,
+        5.5798407389932275e+23,
+        -2.2747168507454063e+24
+      ],
+      "localToReferenceXyzw": [
+        0.5702023715325754,
+        0.6726142015180663,
+        0.3597740748120383,
+        0.3049950925965578
+      ],
+      "metersPerUnit": 30856775814913670000,
+      "boundsUnits": {
+        "min": [
+          -52.36743992272264,
+          -50.51756029916662,
+          -0.00319435796700418
+        ],
+        "max": [
+          53.03265857845805,
+          54.46210126206312,
+          0.003425904782488942
+        ]
+      }
+    }
+  },
+  "prepared": {
+    "format": "cssearth-image-layer-bank@1",
+    "url": "prepared/image-layers.json"
+  }
+}

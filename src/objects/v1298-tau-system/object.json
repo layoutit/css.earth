@@ -1,6 +1,7 @@
 {
   "schema": "cssearth-object@2",
   "id": "v1298-tau-system",
+  "parent": "milky-way",
   "type": "system",
   "generator": "site/build/prepare/system-packages.mts",
   "properties": {

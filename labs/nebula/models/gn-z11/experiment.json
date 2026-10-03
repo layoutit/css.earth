@@ -1,0 +1,84 @@
+{
+  "schema": "cssearth-emission-inference@1",
+  "id": "gn-z11-inferred",
+  "source": {
+    "url": "https://cdn.esawebb.org/archives/images/large/weic2406a.jpg",
+    "width": 4049,
+    "height": 1961,
+    "publisher": "https://esawebb.org/images/weic2406a/",
+    "credit": "NASA, ESA, CSA, B. Robertson (UC Santa Cruz), B. Johnson (CfA), S. Tacchella (Cambridge), M. Rieke (University of Arizona), D. Eisenstein (CfA). ESA/Webb, GN-z11 in the GOODS-North field."
+  },
+  "crop": {
+    "left": 3600,
+    "top": 281,
+    "width": 160,
+    "height": 160
+  },
+  "pointMasks": [
+    {
+      "x": 3600,
+      "y": 441,
+      "radius": 48
+    }
+  ],
+  "grid": {
+    "width": 64,
+    "height": 64,
+    "depth": 128
+  },
+  "prior": {
+    "axis": [
+      -0.887815,
+      -0.4602,
+      0
+    ],
+    "center": [
+      31.5,
+      31.5,
+      63.5
+    ],
+    "binWidth": 1
+  },
+  "tau": 0.001,
+  "iterations": 100,
+  "blackLevel": [
+    0.196,
+    0.173,
+    0.165
+  ],
+  "displayExposure": 1.5,
+  "slices": 48,
+  "assumptions": [
+    "Depth follows the deprojected density (Prugniel & Simien 1997) of the extended component of Tacchella et al.'s (2023) ForcePho fit (Section 3): Sérsic index 0.9 +/- 0.1, half-light radius along the major axis 49 +/- 3 mas, axis ratio 0.67 +/- 0.05, position angle 34 +/- 5 degrees, on an oblate spheroid whose axis is the galaxy's minor axis in the plane of the sky. The fit's point source, which holds about two thirds of the light, is not modelled separately: its light is in the picture and is spread through the same spheroid. The picture's light along each sight line is kept; only its depth comes from the prior. The intrinsic orientation is not measured.",
+    "GN-z11 is a few native pixels of the telescope: the picture is the publisher's enlarged, resampled view, still blurred by the telescope, so the volume is almost entirely the published model, and the picture gives its color and brightness.",
+    "The 160 x 160 px window of the publisher's enlarged view is centred on the galaxy's light. The publisher's file carries no sky tags; the project measured 0.002447 arcsec per pixel of the enlarged view (to about 3%) and north 61.4 degrees right of vertical (src/sources/esawebb-weic2406a.json), so the window is 0.392 arcsec across and the delivery turns it by -61.4 degrees.",
+    "The prior ends at 6.5 half-light radii, chosen here so that no light is cut: after the black level, the farthest lit cell of the picture lies at 2.6 half-light radii of the spheroid, inside its end, and the prior's density has fallen to a few thousandths along every lit sight line before its end, so every edge that is drawn is light falling smoothly to zero.",
+    "The telescope's blur makes the picture wider than the published ellipse. What is drawn is therefore the blurred picture's extent on the published model's depth, not the deconvolved galaxy.",
+    "Sizes are comoving, as the object's distance is: an angle times the comoving distance, 9,762 Mpc. Proper sizes at redshift 10.603 are smaller by 1 + z.",
+    "Black level per channel, red 0.196, green 0.173, blue 0.165 (50, 44 and 42 of 255): a presentation choice, at or above the brightest background of the window (50, 44 and 42, which takes in a faint bluish patch 0.1 arcsec from the core of 255) so that no box or outline of the window is drawn. It keeps 23% of the light above the window's median background; the faint outer light is lost. The publisher's pointer line in one corner of the window is masked with the light around it. No star removal or median clamp.",
+    "The color is the publisher's display composite of the telescope's filters, not calibrated photometry. Single-image depth is modelled by the prior, not measured.",
+    "The grid has 64 cells across the picture and 128 in depth, so the spheroid's faint outer density is not cut by the box, less than the 150 of the nearby ellipticals: the picture holds no finer detail, and the tracked inputs stay small."
+  ],
+  "shapePrior": {
+    "components": [
+      {
+        "kind": "sersic",
+        "axis": [
+          -0.887815,
+          -0.4602,
+          0
+        ],
+        "radius": 8.01,
+        "radialSigma": 1,
+        "axialSigma": 1,
+        "weight": 1,
+        "sersicIndex": 0.9,
+        "axisRatio": 0.67
+      }
+    ],
+    "sigmaCutoff": 6.5
+  },
+  "modelReference": {
+    "paper": "https://arxiv.org/abs/2302.07234"
+  }
+}

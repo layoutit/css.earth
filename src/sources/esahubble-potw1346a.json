@@ -1,0 +1,52 @@
+{
+  "id": "esahubble-potw1346a",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Best image of bright quasar 3C 273",
+  "identifiers": [
+    {
+      "type": "ESA/Hubble image",
+      "value": "potw1346a"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://esahubble.org/images/potw1346a/",
+      "label": "Published source"
+    },
+    {
+      "role": "original",
+      "url": "https://cdn.esahubble.org/archives/images/large/potw1346a.jpg",
+      "label": "Large JPEG, 705 x 696 px"
+    },
+    {
+      "role": "rights",
+      "url": "https://esahubble.org/copyright/",
+      "label": "Reuse terms"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://esahubble.org/images/potw1346a/",
+      "checkedOn": "2026-10-02",
+      "locator": "705 x 696 px; Hubble WFPC2, two filters: blue light at 450 nm and visible light at 606 nm. The file's embedded tags, used as they are: 0.09967 arcsec per pixel, north 159.6° right of vertical, centre 187.277387°, 2.052926°. They place the catalogue position on the bright core, 11 px from the frame's centre. Not measured against Gaia: the frame holds too few stars."
+    }
+  ],
+  "publisher": "ESA/Hubble",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "ESA/Hubble & NASA",
+      "scope": "Published source",
+      "evidence": "https://esahubble.org/images/potw1346a/"
+    },
+    {
+      "kind": "rights",
+      "text": "Creative Commons Attribution 4.0 International; the full credit must be shown.",
+      "scope": "Published source",
+      "evidence": "https://esahubble.org/copyright/"
+    }
+  ]
+}

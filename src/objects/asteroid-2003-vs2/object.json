@@ -1,6 +1,7 @@
 {
   "schema": "cssearth-object@2",
   "id": "asteroid-2003-vs2",
+  "parent": "solar-system",
   "type": "layered-body",
   "properties": {
     "preparation": {

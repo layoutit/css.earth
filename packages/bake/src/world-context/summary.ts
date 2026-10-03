@@ -65,13 +65,20 @@ export function summarizeWorldContext(prepared: PreparedWorldContext, orbitBanks
   const orbited = new Set(parents.values());
   const plainAsteroid = (body: Body) => asteroidHolder !== undefined && body !== focus && body.plainDot === true && body.classification === 'asteroid'
     && 'orbit' in body && body.orbit?.centerBodyId === focus.id && !orbited.has(body.id);
-  const local = (body: Body) => !plainStar(body) && !plainAsteroid(body) && (!('orbit' in body && body.orbit) || systemOf(body.id) === focus.id);
+  // A moon is a member of its planet's system, an object of its own (`jupiter-system`): the bodies that orbit a body that is
+  // no star. Its planet stays in the summary with the Sun's system.
+  const byId = new Map(bodies.map(body => [body.id, body] as const));
+  const moonHost = (body: Body) => {
+    const centre = 'orbit' in body && body.orbit ? byId.get(body.orbit.centerBodyId) : undefined;
+    return centre && centre !== body && centre.classification !== 'star' && centre.classification !== 'black-hole' && body.classification === 'satellite' ? centre.id : null;
+  };
+  const local = (body: Body) => !plainStar(body) && !plainAsteroid(body) && moonHost(body) === null && (!('orbit' in body && body.orbit) || systemOf(body.id) === focus.id);
   /** The holder whose file has a body the summary does not: its star's system, a plain-dot star's own, or the asteroid dot
    * bank: always an object with a package, whose `prepared/members.json` the file is. */
   // A star with the bodies that orbit it is a system, an object of its own (system-address.ts in @cssearth/objects): its
   // holder is that object. A plain-dot star with planets is in it with them; one nothing orbits is its own holder.
   const systemStars = new Set(bodies.filter(body => 'orbit' in body && body.orbit && systemOf(body.id) !== focus.id).map(body => systemOf(body.id)));
-  const fileOf = (body: Body) => plainAsteroid(body) ? asteroidHolder! : plainStar(body) ? systemStars.has(body.id) ? systemObjectId(body.id) : body.id : systemObjectId(systemOf(body.id));
+  const fileOf = (body: Body) => moonHost(body) !== null ? systemObjectId(moonHost(body)!) : plainAsteroid(body) ? asteroidHolder! : plainStar(body) ? systemStars.has(body.id) ? systemObjectId(body.id) : body.id : systemObjectId(systemOf(body.id));
   const systems = new Map<string, PreparedWorldContext['bodies'][number][]>();
   for (const body of bodies) if (!local(body)) (systems.get(fileOf(body)) ?? systems.set(fileOf(body), []).get(fileOf(body))!).push(body);
   const centresOf = (host: string) => Object.fromEntries(Object.entries(orbitCenters).filter(([id]) => systemOf(id) === host));
@@ -83,7 +90,8 @@ export function summarizeWorldContext(prepared: PreparedWorldContext, orbitBanks
     ...(Object.keys(rootCentres).length ? { orbitCenters: rootCentres } : {}), orbitBanks: pinsOf(rootBodies),
     ...root.tables(), focus: focusRow!, bodies: columns(rows) };
   const files = [...systems].map(([id, members]) => {
-    const file = encodeBodies(members, positions), centres = centresOf(systemHostId(id) ?? id);
+    // A moon system's named centres stay with the Sun's system: its moons orbit their planet directly.
+    const file = encodeBodies(members, positions), centres = members.some(member => moonHost(member) !== null) ? {} : centresOf(systemHostId(id) ?? id);
     return { id, file: { schema: PREPARED_WORLD_SYSTEM_SCHEMA as typeof PREPARED_WORLD_SYSTEM_SCHEMA, id, ...(Object.keys(centres).length ? { orbitCenters: centres } : {}),
       orbitBanks: pinsOf(members), ...file.tables(), bodies: columns(file.rows) } };
   });
