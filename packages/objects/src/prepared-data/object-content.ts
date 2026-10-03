@@ -1,6 +1,6 @@
 /** Authored object content wire records; asset preparation stays with bake/site. */
 import type { DatasetVolume } from './object-controls.js';
-import { isRecord } from '@cssearth/core';
+import { object as preparedObject, text as preparedText, array as preparedArray } from './panel-readers.js';
 import { parse, object, array, dictionary, union, optional, literal, number, string, boolean, json } from '@cssearth/core/schema';
 import { sourceUrl } from '../sources/catalog.js';
 
@@ -202,18 +202,6 @@ export function validateObjectContentEnvelope(source: { schema: unknown; version
   }
 }
 
-const preparedObject = (value: unknown, label: string): Record<string, unknown> => {
-  if (!isRecord(value)) throw new TypeError(`Prepared ${label} must be an object.`);
-  return value;
-};
-const preparedText = (value: unknown, label: string): string => {
-  if (typeof value !== 'string') throw new TypeError(`Prepared ${label} must be text.`);
-  return value;
-};
-const preparedArray = (value: unknown, label: string): readonly unknown[] => {
-  if (!Array.isArray(value)) throw new TypeError(`Prepared ${label} must be an array.`);
-  return value;
-};
 /** Join authored dataset links and scope while building the page; no source lookup runs in the browser. */
 export function authoredDatasetMetadata(input: unknown, objectId: string): {
   sourceUrls: ReadonlyMap<string, string>; systemDatasetIds: ReadonlySet<string>;

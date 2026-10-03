@@ -188,7 +188,7 @@ export { samePreparedVolumeTopology } from './volume/prepared-volume-topology.js
 
 export { RENDER_ELEMENT_PROFILE_SCHEMA } from './volume/render-element-budget.js';
 
-export { parsePreparedDensityVolume } from './prepared-data/prepared-density-volume.js';
+export { parsePreparedDensityVolume, parsePreparedDensityVolumeText } from './prepared-data/prepared-density-volume.js';
 export { AUTHORED_OBJECT_SCHEMA } from './authored.js';
 export { SOURCE_MANIFEST_SCHEMA } from './sources/source-manifest-schema.js';
 export { OBJECT_PAGE_SCHEMA } from './prepared-data/object-page-schema.js';
@@ -205,12 +205,12 @@ export { DISPLAY_ORIENTATION_SCHEMA, parseAuthoredOrientation, type DisplayOrien
 export { SYNCHRONOUS_ROTATION_SCHEMA, parseSynchronousRotation, type SynchronousRotation } from './prepared-data/synchronous-rotation.js';
 export { PUBLISHED_LIMB_DARKENING_SCHEMA, readPublishedPowerLaw, readPublishedLimbDarkening, checkLimbLaw, type LimbLaw, type PublishedLimbCoefficient, type PublishedLimbDarkening } from './prepared-data/published-limb-darkening.js';
 
-export { DISC_INTEGRATED_COLOR_SCHEMA, parseDiscColorRecord, parseDiscColorPhotometry, type DiscColorRecord, type DiscColorPhotometry } from './prepared-data/disc-integrated-color.js';
+export { DISC_INTEGRATED_COLOR_SCHEMA, parseDiscColor, parseDiscColorRecord, parseDiscColorPhotometry, type DiscColorRecord, type DiscColorPhotometry } from './prepared-data/disc-integrated-color.js';
 export { STELLAR_PHOTOMETRIC_COLOR_SCHEMA, PLANCK_FLOOR_KELVIN, parseStellarColorRecord, parseMeasuredSpectrumRecord, checkStellarTemperature, type StellarColorRecord, type StellarTemperature, type MeasuredSpectrumRecord } from './prepared-data/stellar-photometric-color.js';
 export { UNIFORM_DISC_STAR_SCHEMA, parseUniformDiscStarMeasurements, type UniformDiscStarMeasurements } from './prepared-data/uniform-disc-star.js';
 export { MEASURED_SPECTRUM_SCHEMA, parseMeasuredSpectrumDocument, type Measurement, type MeasuredSpectrumDocument } from './prepared-data/measured-spectrum.js';
 export { DENSITY_PLACEMENT_SCHEMA, parseDensityPlacement, type DensityPlacement } from './volume/density-placement.js';
-export { OBSERVED_STELLAR_CATALOGUE_SCHEMA, readObservedStellarCatalogueEnvelope, parseObservedStellarCatalogue,
+export { OBSERVED_STELLAR_CATALOGUE_SCHEMA, isStellarCoordinate, readObservedStellarCatalogueEnvelope, parseObservedStellarCatalogue,
   type ObservedStar, type PhotometryKind, type ObservedStellarCatalogueEnvelope, type ObservedStellarCatalogue } from './volume/observed-stellar-catalogue.js';
 export { CAMERA_POSE_SCHEMA, parseCameraPose, parseCameraPoseMatrix, parseRestoredCameraPose, type CameraPose } from './prepared-data/camera-pose.js';
 export * from './prepared-data/object-content.js';
@@ -236,3 +236,7 @@ export { CIRCUMSTELLAR_RECONSTRUCTION_SCHEMA } from './volume/circumstellar-reco
 export { PYUVDATA_UVFITS_SCHEMA, parsePyuvdataUvfitsRequest, parsePyuvdataUvfitsAnswer, type PyuvdataUvfitsRequest, type PyuvdataUvfitsAnswer } from './prepared-data/pyuvdata-uvfits.js';
 export { VOLUME_SOURCE_MANIFEST_SCHEMA } from './prepared-data/volume-source-manifest.js';
 export { VOLUME_PRESENTATION_SOURCE_SCHEMA, type VolumeSourcePreview, type TrackedVolumeSourcePreview, type VolumeDatasetSource, type VolumePresentationSource } from './prepared-data/volume-presentation-source.js';
+
+export * as preparedPanelReaders from './prepared-data/panel-readers.js';
+export { parseCloudAppearance, DEFAULT_CLOUD_APPEARANCE, type CloudAppearance } from './volume/cloud-appearance.js';
+export { validateChannelGain, type ChannelGain } from './volume/channel-gain.js';

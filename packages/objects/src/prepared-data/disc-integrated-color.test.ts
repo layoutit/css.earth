@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { DISC_INTEGRATED_COLOR_SCHEMA, parseDiscColorRecord, parseDiscColorPhotometry } from './disc-integrated-color.js';
+import { DISC_INTEGRATED_COLOR_SCHEMA, parseDiscColor, parseDiscColorRecord, parseDiscColorPhotometry } from './disc-integrated-color.js';
 
 const indices = { indices: { 'B-V': { value: .65 }, 'V-R': { value: .35 }, 'V-I': { value: .7 } } };
 const record = { schema: DISC_INTEGRATED_COLOR_SCHEMA, object: indices, sun: indices,
@@ -16,6 +16,7 @@ test('disc color preserves its compiler checks and diagnostics', () => {
 test('public photometry preserves subset admission and numeric coercion', () => {
   const subset = { schema: DISC_INTEGRATED_COLOR_SCHEMA, geometricAlbedo: { band: 'R', value: '2', uncertainty: '.1' },
     object: { system: 'Vega' }, effectiveWavelengths: { nanometres: { R: '640' } } };
+  assert.deepEqual(parseDiscColor(subset, { acceptance: 'photometry' }), parseDiscColorPhotometry(subset));
   assert.deepEqual(parseDiscColorPhotometry(subset), { band: 'R', system: 'Vega', effectiveWavelength: 640, value: 2, uncertainty: .1 });
   assert.throws(() => parseDiscColorRecord(subset));
   assert.throws(() => parseDiscColorPhotometry({ ...subset, schema: 'other' }), { message: 'The public photometry executor currently supports the pinned disc-integrated-color schema.' });

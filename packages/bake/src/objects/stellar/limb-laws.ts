@@ -7,12 +7,7 @@
 import { requireFiniteNumber } from '@cssearth/core';
 import { checkLimbLaw, type LimbLaw } from '@cssearth/objects';
 
-/** Intensity relative to the disc centre at mu = cos(angle from the line of sight). */
-export function limbIntensity(mu: number, law: LimbLaw | { readonly u1: number; readonly u2: number }): number {
-  if ('law' in law && law.law === 'power') return Math.max(0, mu) ** law.alpha;
-  const { u1, u2 } = law as { u1: number; u2: number };
-  return 1 - u1 * (1 - mu) - u2 * (1 - mu) ** 2;
-}
+export { limbIntensity } from '@cssearth/core';
 
 export interface GridNode { readonly teff: number; readonly logg: number; readonly mass?: number; readonly u1: number; readonly u2: number }
 export interface GridRead { readonly u1: number; readonly u2: number; readonly u1Bounds: readonly [number, number]; readonly u2Bounds: readonly [number, number];
