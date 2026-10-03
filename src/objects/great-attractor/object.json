@@ -1,6 +1,7 @@
 {
   "schema": "cssearth-object@2",
   "id": "great-attractor",
+  "parent": "nearby-universe",
   "type": "layered-body",
   "properties": {
     "preparation": {

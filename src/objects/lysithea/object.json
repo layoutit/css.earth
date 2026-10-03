@@ -1,6 +1,7 @@
 {
   "schema": "cssearth-object@2",
   "id": "lysithea",
+  "parent": "jupiter-system",
   "type": "layered-body",
   "properties": {
     "preparation": {

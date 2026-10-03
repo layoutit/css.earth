@@ -1,6 +1,7 @@
 {
   "schema": "cssearth-object@2",
   "id": "despina",
+  "parent": "neptune-system",
   "type": "layered-body",
   "properties": {
     "preparation": {

@@ -116,6 +116,7 @@
     }
   },
   "schema": "cssearth-object@2",
+  "parent": "solar-system",
   "type": "layered-body",
   "prepared": {
     "format": "cssearth-css-object@5",

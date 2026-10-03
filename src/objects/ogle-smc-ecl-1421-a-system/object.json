@@ -1,6 +1,7 @@
 {
   "schema": "cssearth-object@2",
   "id": "ogle-smc-ecl-1421-a-system",
+  "parent": "smc",
   "type": "system",
   "generator": "site/build/prepare/system-packages.mts",
   "properties": {
