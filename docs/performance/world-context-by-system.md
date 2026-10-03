@@ -30,10 +30,11 @@ by one rule the bake and the build share ([world-holders.ts](../../packages/obje
   package holds the bank (`prepared/plain-stars.bin`, about its centre, served at `/world/dots/<object id>.bin`;
   [plain-star-dots.ts](../../packages/bake/src/world-context/plain-star-dots.ts)), and a page asks for it only while that
   object or a body inside it is selected. A star package of the Milky Way that the galaxy's table does not name yet is
-  inside the Milky Way, so its dot is in the Milky Way's bank until the galaxy's dots are next merged: three stars and
-  one request of about 1 KB on a page inside the Milky Way (2026-10-03). As two banks of the world's own they were two
-  requests and 5.8 KB on every page, and one bank per galaxy asked for on every page was nine requests and 12.5 KB
-  (measured 2026-10-03).
+  inside the Milky Way, so its dot is in the Milky Way's bank, one request on every page inside the galaxy, until
+  [paged-star-dot-positions.mts](../../site/build/prepare/paged-star-dot-positions.mts) rewrites the table and the
+  galaxy's dots are merged again; on 2026-10-03 the table names every one, and no page inside the Milky Way asks for a
+  dot bank. As two banks of the world's own they were two requests and 5.8 KB on every page, and one bank per galaxy
+  asked for on every page was nine requests and 12.5 KB (measured 2026-10-03).
   An asteroid drawn as a plain dot is a dot of the bank its star hosts that declares them (`properties.plainDots` of
   `catalogue-asteroids`), whose file has its row.
 - `src/objects/<object id>/prepared/places.json` is, per object, where each of its children's systems that is read on
