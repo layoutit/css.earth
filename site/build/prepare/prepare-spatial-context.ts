@@ -1,5 +1,5 @@
 import { mkdir, readFile, readdir, rm, writeFile } from 'node:fs/promises';
-import { dirname, resolve } from 'node:path';
+import { basename, dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { gunzipSync } from 'node:zlib';
 import { BODIES, EXOPLANET_IDS, HOSTED_PLANET_IDS, M_PER_AU, M_PER_KM, SOLAR_EFFECTIVE_TEMPERATURE_K, SOLAR_RADIUS_M, STAR_IDS, isSceneSatellite, sceneSatelliteStateKm, starAstrometry } from '@cssearth/astronomy';
@@ -9,7 +9,7 @@ import { isRecord } from '@cssearth/core';
 import { packPreparedBinary, readCatalog, readPreparedObjects } from '@cssearth/objects/node';
 import { worldOrbitBankRegions } from '@cssearth/objects';
 import { prepareSceneDistance } from '@cssearth/bake/navigation';
-import { parseWorldContextSource, PLAIN_STAR_DOT_BANK_ID, plainStarDotBank, prepareWorldContext, summarizeWorldContext, worldSystemViews } from '@cssearth/bake/world-context';
+import { parseWorldContextSource, PLAIN_STAR_DOT_BANK_IDS, plainStarDotBanks, prepareWorldContext, summarizeWorldContext, worldSystemViews } from '@cssearth/bake/world-context';
 import { writeCatalogueBank } from '@cssearth/bake/volume/node';
 import { systemViewFile, worldOrbitBanks } from '@cssearth/objects';
 import type { OrbitalState, Vector3, WorldContextBodyFact } from '@cssearth/bake/world-context';
@@ -213,37 +213,28 @@ export async function prepareSpatialContext(options: SpatialContextPreparationOp
   const banks = worldOrbitBanks(prepared);
   // Every page reads the summary: frame, camera and sky facts and the Sun. Every other body is in the file of the object it
   // is inside, by the object tree (summarizeWorldContext).
-  const tree = new Map(readPreparedObjects(process.cwd()).objects.map(object => [object.id, { parent: object.parent, classification: object.classification }] as const));
+  const tree = new Map(readPreparedObjects(process.cwd()).objects.map(object => [object.id, { parent: object.parent }] as const));
   const { summary, systems, places, index, plainStars } = summarizeWorldContext(prepared, Object.fromEntries(banks.map(bank => [bank.id, bank.bytes.byteLength])),
     id => tree.get(id)?.parent, ASTEROID_DOT_BANK);
   // Each file is in its own object's package, in the objects directory this bake writes for (a fixture's, or the checkout's).
-  const objectsRoot = options.objectsDirectory ?? dirname(dirname(dirname(options.outputPath)));
+  const objectsRoot = worldFilesRoot(options);
   // The map draws those stars as dots, not as bodies. A star of the Milky Way is one of the galaxy's own dots
-  // (src/objects/milky-way-volume/source/packaged-stars, written by paged-star-dot-positions.mts). Every other is a dot of
-  // the galaxy it is inside, in that galaxy's own package (`prepared/plain-stars.bin`, served at `/world/dots/<galaxy>.bin`);
-  // one outside every galaxy is the root object's.
-  const galaxyStars = await packagedGalaxyStars(dirname(dirname(dirname(options.outputPath))));
-  const galaxyOf = (id: string) => {
-    for (let parent = tree.get(id)?.parent; parent !== undefined; parent = tree.get(parent)?.parent) if (tree.get(parent)?.classification === 'galaxy') return parent;
-    return OBJECT_TREE_ROOT;
-  };
-  const starsOf = new Map<string, { id: string; positionM: Vector3; color: string }[]>();
-  for (const body of plainStars) if (!galaxyStars.has(body.id)) {
-    const owner = galaxyOf(body.id);
-    (starsOf.get(owner) ?? starsOf.set(owner, []).get(owner)!).push({ id: body.id, positionM: body.positionM, color: body.color });
+  // (src/objects/milky-way-volume/source/packaged-stars, written by paged-star-dot-positions.mts). The stars that table
+  // does not name, the ones in other galaxies, are dots of the world's own two banks, in the root object's package
+  // (`/world/dots/<id>.bin`): one bank per galaxy was nine requests and 12.5 KB on every page against two and 5.8 KB
+  // (2026-10-03), because a bank is asked for before its extent is known.
+  const galaxyStars = await packagedGalaxyStars(objectsRoot);
+  const dotBanks = plainStarDotBanks(plainStars.filter(body => !galaxyStars.has(body.id)).map(body => ({ id: body.id, positionM: body.positionM, color: body.color })), prepared.frame);
+  const rootPackage = resolve(objectsRoot, OBJECT_TREE_ROOT);
+  for (const id of PLAIN_STAR_DOT_BANK_IDS) {
+    if (!dotBanks.some(bank => bank.id === id)) await rm(resolve(rootPackage, 'prepared', `${id}.bin`), { force: true });
+    // The Sun's package held them before the root's did.
+    await rm(resolve(dirname(options.outputPath), `${id}.bin`), { force: true });
   }
-  const dotBanks = [...starsOf.keys()].sort();
-  for (const owner of dotBanks) {
-    await writeCatalogueBank({ objectDirectory: resolve(objectsRoot, owner), id: PLAIN_STAR_DOT_BANK_ID, bank: plainStarDotBank(starsOf.get(owner)!, prepared.frame)!, published: true, inventory: async () => undefined });
-  }
-  // An object that holds no such star any more loses its bank, and the Sun's old ones go.
-  for (const entry of await readdir(objectsRoot, { withFileTypes: true })) {
-    if (entry.isDirectory() && !starsOf.has(entry.name)) await rm(resolve(objectsRoot, entry.name, 'prepared', `${PLAIN_STAR_DOT_BANK_ID}.bin`), { force: true });
-  }
-  await rm(resolve(dirname(options.outputPath), 'plain-stars-far.bin'), { force: true });
+  for (const bank of dotBanks) await writeCatalogueBank({ objectDirectory: rootPackage, id: bank.id, bank, published: true, inventory: async () => undefined });
   // The summary and the build's index are in the root object's package, the object nothing is outside of. The summary names
-  // the objects whose dot bank this bake wrote, so the site asks for no other.
-  await writeIfChanged(worldSummaryPath(objectsRoot), `${JSON.stringify({ ...summary, ...(dotBanks.length ? { dotBanks } : {}) })}\n`);
+  // the dot banks this bake wrote, so the site asks for no other.
+  await writeIfChanged(worldSummaryPath(objectsRoot), `${JSON.stringify({ ...summary, ...(dotBanks.length ? { dotBanks: dotBanks.map(bank => bank.id) } : {}) })}\n`);
   // Read by the build and Node tools only: every body's place in the world's order, and the rows object entries carry.
   await writeIfChanged(worldIndexPath(objectsRoot), `${JSON.stringify(index)}\n`);
   for (const old of ['world-stars.json', 'world-context-summary.json', 'world-index.json']) await rm(resolve(dirname(options.outputPath), old), { force: true });
@@ -285,6 +276,8 @@ export async function prepareSpatialContext(options: SpatialContextPreparationOp
     if (!placed.has(entry.name)) await rm(placesFilePath(objectsRoot, entry.name), { force: true });
     const directory = resolve(objectsRoot, entry.name, 'prepared', 'orbits'), kept = orbits.get(entry.name);
     for (const name of await readdir(directory).catch(() => [] as string[])) if (!kept?.has(name)) await rm(resolve(directory, name));
+    // Only the root object's package holds plain-star dot banks.
+    if (entry.name !== OBJECT_TREE_ROOT) for (const id of PLAIN_STAR_DOT_BANK_IDS) await rm(resolve(objectsRoot, entry.name, 'prepared', `${id}.bin`), { force: true });
   }
   for (const old of ['world-systems', 'world-orbits']) await rm(resolve(dirname(options.outputPath), old), { recursive: true, force: true });
   await rm(resolve(dirname(options.outputPath), 'world-orbits.bin'), { force: true });
@@ -321,6 +314,15 @@ async function packagedGalaxyStars(objectsRoot: string): Promise<ReadonlySet<str
   const [header, ...rows] = gunzipSync(bytes).toString('utf8').trim().split('\n');
   if (header !== 'name,xKpc,yKpc,zKpc,color') throw new TypeError(`${path}: the header is ${JSON.stringify(header)}, not name,xKpc,yKpc,zKpc,color.`);
   return new Set(rows.map(row => row.slice(0, row.indexOf(','))));
+}
+
+/** The objects directory the world's per-object files are written into: the one given; else the one the output is in, when
+ * the output is an object's prepared file (`<objects>/<id>/prepared/world-context.json`); else the output's own folder, so a
+ * run that writes its context anywhere else (a test's temporary folder) keeps every file it writes beside it. */
+export function worldFilesRoot(options: Pick<SpatialContextPreparationOptions, 'outputPath' | 'objectsDirectory'>): string {
+  if (options.objectsDirectory !== undefined) return options.objectsDirectory;
+  const folder = dirname(options.outputPath);
+  return basename(folder) === 'prepared' ? dirname(dirname(folder)) : folder;
 }
 
 /** The world file every page reads: the root object's prepared `world.json` (frame, camera and sky facts and the focus). */

@@ -61,8 +61,8 @@ async function fetchJson(url: string): Promise<unknown> {
 }
 
 const summary = parsePreparedWorldContextSummary(startup ? startup.summary : await readPreparedWorldContext());
-/** The objects with a bank of plain-dot stars (`pages/world/dots/[id].bin.ts`), as the bake names them in the summary: each
- * galaxy's stars the map draws as plain dots, in that galaxy's own package (`plainStarDotBank`). */
+/** The world's own dot banks (`pages/world/dots/[id].bin.ts`), as the bake names them in the summary: the stars drawn as
+ * plain dots in other galaxies, written by the bake as `plainStarDotBanks` into the root object's package. */
 export const WORLD_DOT_BANKS: readonly string[] = summary.dotBanks ?? [];
 
 const loaded = new Set<string>(), loading = new Map<string, Promise<unknown>>();

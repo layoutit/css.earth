@@ -21,12 +21,15 @@ by one rule the bake and the build share ([world-holders.ts](../../packages/obje
   Moon's in the Earth system's, TRAPPIST-1's in the Milky Way's and its planets' in the TRAPPIST-1 system's.
 - `src/objects/<object id>/prepared/orbits/<body id>.bin` is the orbit path of one body of that file, beside the file
   that pins it, served at `/world/orbits/<body id>.bin`. The planner worker reads it when a frame first draws that orbit.
-- A star the map draws as a plain dot, with no label, hover or click, is not in its parent's file. One with planets is in
-  its own system's file with them; one with nothing round it has no file, and its row travels in its object entry. The
+- A star the map draws as a plain dot, with no label, hover or click, is in no file every page reads. One with planets is in
+  its own system's file with them; a companion bound to a system's star is in that system's file; one inside no system has
+  no file, and its row travels in its object entry. The
   map draws a plain-dot star of the Milky Way as one of the galaxy's own dots
-  ([packaged-stars](../../src/objects/milky-way-volume/source/packaged-stars/points.json)), and one of another galaxy as a
-  dot of that galaxy's own bank, `src/objects/<galaxy id>/prepared/plain-stars.bin`
-  ([plain-star-dots.ts](../../packages/bake/src/world-context/plain-star-dots.ts), served at `/world/dots/<galaxy id>.bin`).
+  ([packaged-stars](../../src/objects/milky-way-volume/source/packaged-stars/points.json)), and the ones in other
+  galaxies from the world's two dot banks, in the root object's package
+  ([plain-star-dots.ts](../../packages/bake/src/world-context/plain-star-dots.ts), served at `/world/dots/<id>.bin`).
+  One bank per galaxy was measured on 2026-10-03: nine requests and 12.5 KB on every page against two and 5.8 KB,
+  because a bank is asked for before its extent is known.
   An asteroid drawn as a plain dot is a dot of `catalogue-asteroids`, whose file has its row.
 - `src/objects/<object id>/prepared/places.json` is, per object, where each of its children's systems that is read on
   approach is: its host's place, rounded to 1e12 m, and the range its orbits are authored to. Served at
@@ -40,8 +43,9 @@ frame is the Sun's and the Sun's scene is framed from it. Node tools read it; no
 
 A file is read by every page when a body in it is drawn from anywhere: one that orbits nothing or the Sun and is no
 plain dot (the Solar System's planets, the Milky Way's featured stars, the galaxies and clusters, a featured star of
-another galaxy), or when it has places. On 2026-10-03 that is 22 files. The build serves them as one response, each file
-whole and named by its object (`/world/anywhere.json`): as 22 responses they were 32.1 KB gzipped, as one 26.1 KB.
+another galaxy), or when it has places. On 2026-10-03 that is 20 files. The build serves them as one response, each file
+whole and named by its object (`/world/anywhere.json`): measured with 22 files, separate responses were 32.1 KB gzipped
+and one response 26.1 KB.
 
 The build tells each page and each object entry which files it needs ([world-places.mts](../../site/world-places.mts)),
 root first, so an orbit's parent is placed before it: the page names its own in its head
@@ -100,17 +104,19 @@ holders, 713 of them files):
 The bundled world presentation also lost its table of every system's members and framing radii: 127 KB to 16 KB raw.
 The four batches (572 KB raw after the first view) are gone: a system is read when it is flown to or approached.
 
-On 2026-10-03 the files followed the object tree (4,144 bodies; 751 files, 22 of them read by every page; 1,840 rows in
-object entries). The summary of the day before held 269 bodies; the files every page reads now hold 291: the same, 19
-objects added since (15 far destinations, the four SH0ES galaxies) and three bodies that share a file with one drawn
-from anywhere.
+On 2026-10-03 the files followed the object tree (4,144 bodies; 751 files, 20 of them read by every page; 1,806 rows in
+object entries). The summary of the day before held 269 bodies; the files every page reads now hold 286: the same, 19
+objects added since (15 far destinations, the four SH0ES galaxies), less the two bound companions that are plain dots
+(Epsilon Indi Ba and HD 189733's companion, now read with their systems on approach).
 
 | What Earth's page downloads for the world context at startup | Gzip |
 | --- | --- |
-| One summary of those 291 bodies, as the files were before (computed from the same rows) | 26,283 B |
-| `world.json` (no bodies) | 1,269 B |
-| `/world/anywhere.json` (22 files in one response) | 26,100 B |
-| `earth-system.json` (the page's own) | 484 B |
+| `world.json` (no bodies) | 1,290 B |
+| `/world/anywhere.json` (20 files in one response) | 25,566 B |
+| `earth-system.json` (the page's own) | 471 B |
+
+These are the files as the bake writes them. The deployed response also carries each billboard's published address, which
+does not compress: `/world/anywhere.json` is then 36,245 B.
 
 `/world/hosts.json` (12.8 KB gzipped after the first view) is gone: the Milky Way's `places.json` is 12.6 KB and the
 Solar System's, the Clouds' and M31's are under 0.3 KB each, asked for after the first view as before.

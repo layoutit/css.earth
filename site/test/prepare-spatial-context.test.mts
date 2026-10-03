@@ -10,7 +10,7 @@ import { SCENE_SATELLITE_IDS, SMALL_BODY_IDS, asteroidPositionKm, COMET_IDS, com
 import type { SmallBodyId, CometId, BodyId, DwarfPlanetId, Vsop87BodyKey, StarId, HostedPlanetId } from '@cssearth/astronomy';
 import { readCatalog } from '@cssearth/objects/node';
 import { prepareSceneDistance } from '@cssearth/bake/navigation';
-import { parseSpatialContextCommand, prepareSpatialContext } from '../build/prepare/prepare-spatial-context.ts';
+import { parseSpatialContextCommand, prepareSpatialContext, worldFilesRoot } from '../build/prepare/prepare-spatial-context.ts';
 
 const root = process.cwd();
 const sourcePath = resolve(root, 'src/objects/sun/source/navigation/universe.json');
@@ -127,6 +127,10 @@ test('all authored bodies retain parent-relative ephemeris orbits in one physica
     await prepareSpatialContext({ sourcePath, solarGeometryPath, outputPath });
     const result = JSON.parse(await readFile(outputPath, 'utf8'));
     const source = JSON.parse(await readFile(sourcePath, 'utf8'));
+    // A context written outside an objects folder keeps the world's per-object files beside it, never in a folder above.
+    assert.equal(worldFilesRoot({ outputPath }), directory);
+    assert.equal(worldFilesRoot({ outputPath: resolve(root, 'src/objects/sun/prepared/world-context.json') }), resolve(root, 'src/objects'));
+    assert.ok(JSON.parse(await readFile(resolve(directory, 'solar-system/prepared/members.json'), 'utf8')).bodies.id.includes('mercury'));
     // Catalogue entries first, then the bodies drawn from their astronomy records around a packaged host.
     assert.deepEqual(result.bodies.filter((body: { unpackaged?: true }) => !body.unpackaged).map((body: { id: string }) => body.id), contextEntries.map(body => body.id));
     for (const body of result.bodies.filter((body: { unpackaged?: true }) => body.unpackaged)) {
