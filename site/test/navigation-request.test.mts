@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { requireObject } from '../objects.mts';
+import { subjectView } from '../scene/scene-subject.mts';
 import { WORLD_OBJECTS } from '../world-objects.mts';
 import { resolveNavigation } from '../navigation/navigation-request.mts';
 
@@ -68,15 +69,15 @@ test('a showcase hop frames the body itself; its first hop is a history entry an
     overviewTarget() { assert.fail('a body view opens no overview'); },
   } as unknown as Parameters<typeof resolveNavigation>[1]['navigation'];
   const hop = (history?: 'replace') => resolveNavigation({ kind: 'object', view: 'body', camera: 'frame', ...(history ? { history } : {}) }, {
-    object: requireSceneObject('jupiter'), objects: WORLD_OBJECTS, navigation,
-    current: { objectId: 'earth', href: 'https://css.earth/earth/', subject: { objectId: 'earth', view: 'body' },
+    object: requireObject('jupiter'), objects: WORLD_OBJECTS, navigation,
+    current: { objectId: 'earth', href: 'https://css.earth/earth/', subject: { objectId: 'earth' },
       centeredObjectId: null, hasPresented: true, reuseScene: false, mount: null, pending: null },
   });
   const first = hop(), next = hop('replace');
   for (const { destination } of [first, next]) {
     assert.equal(destination.camera.kind, 'frame');
     if (destination.camera.kind === 'frame') assert.equal(destination.camera.framing, 'detail');
-    assert.equal(destination.subject.view, 'body');
+    assert.equal(subjectView(destination.subject), 'body');
     assert.equal(new URL(destination.url).pathname, '/jupiter/');
   }
   assert.deepEqual(first.destination.history, { history: 'push' });
