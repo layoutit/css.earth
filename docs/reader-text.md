@@ -63,8 +63,9 @@ whose parent it is in the object tree.
 - A system's host leads, planets come before other bodies, then nearest first:
   from the host in a system, from the centre of the reader's home galaxy where
   the list holds it, else from the Sun. Then by name.
-- A moon its host's catalogue names and nobody has packaged is a row that opens
-  nothing, after the moons with pages.
+- A body inside it with no page yet closes the list as a row that opens nothing:
+  a moon its host's catalogue names and nobody has packaged, or a star the world
+  draws from its orbit alone (33 of the stars around Sgr A*).
 
 ![The Solar System's list, and M31's new Celestial bodies tab](images/celestial-bodies-list.png)
 

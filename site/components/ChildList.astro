@@ -24,10 +24,10 @@ const markup = ({ object, distancePc }: (typeof rows)[number]) => {
 ---
 <ul class="object-list">
   {rows.map(row => <li class="object-item"><Fragment set:html={markup(row)} /></li>)}
-  {drafts.map(moon => <li class="object-item">
+  {drafts.map(body => <li class="object-item">
     <span class="object-link object-observation-control object-thumbnail-leading object-result-row" role="link" aria-disabled="true" title="Not available yet">
       <span class="object-dataset-icon" aria-hidden="true"><span class="object-moon-placeholder"></span></span>
-      <span class="object-name object-dataset-label">{moon.name}</span>
+      <span class="object-name object-dataset-label">{body.name}</span>
       <span class="object-dataset-detail">Not available</span>
     </span>
   </li>)}

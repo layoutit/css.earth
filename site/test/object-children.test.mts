@@ -37,4 +37,8 @@ test('a moon its host\'s catalogue names and nobody has packaged is a row that o
   assert.ok(saturn.rows.every(row => row.object.id === 'saturn' || row.object.classification === 'satellite'));
   assert.ok(saturn.drafts.length > 200 && saturn.drafts.every(moon => !saturn.rows.some(row => row.object.id === moon.id)));
   assert.equal(childrenOf('trappist-1-system').drafts.length, 0);
+  // A star or a black hole the world draws from its orbit alone is a row of the system it orbits in.
+  assert.equal(childrenOf('sgr-a-star-system').drafts.length, 33);
+  assert.deepEqual(childrenOf('hd-226868-system').drafts.map(body => body.name), ['Cygnus X-1']);
+  assert.deepEqual(childrenOf('kepler-16-a-system').drafts.map(body => body.name), ['Kepler-16 B']);
 });
