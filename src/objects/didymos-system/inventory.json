@@ -1,0 +1,17 @@
+{
+  "schema": "cssearth-inventory@1",
+  "assets": [
+    {
+      "location": "prepared",
+      "filename": "members.json",
+      "bytes": 763,
+      "sha256": "6e3abf39becd38c23734958ca2f558677a12cd0ef999d5fb539f142f470eb156"
+    },
+    {
+      "location": "prepared",
+      "filename": "views/didymos.json",
+      "bytes": 30403,
+      "sha256": "fa5460b19d1af60402ca29b21682b77e27a3804104ef6b1e8df4d1079f0adf3c"
+    }
+  ]
+}

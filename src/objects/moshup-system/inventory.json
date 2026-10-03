@@ -1,0 +1,17 @@
+{
+  "schema": "cssearth-inventory@1",
+  "assets": [
+    {
+      "location": "prepared",
+      "filename": "members.json",
+      "bytes": 785,
+      "sha256": "9442587ab9bccb09c118f8364463092ec7751e97dc7465db472f1c8f74095da0"
+    },
+    {
+      "location": "prepared",
+      "filename": "views/moshup.json",
+      "bytes": 30556,
+      "sha256": "a02a3356f267178da5191f09c79fad704ccc11deb36dfcb6e425c475a68f93a7"
+    }
+  ]
+}

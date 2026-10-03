@@ -3,9 +3,21 @@
   "assets": [
     {
       "location": "public",
+      "filename": "saturn-arrival.webp",
+      "bytes": 175096,
+      "sha256": "3d6ed2e3590e81b78b1fe662003c5e99c3e8d230b5744e85613c3e3c94dfdd7a"
+    },
+    {
+      "location": "public",
       "filename": "saturn-atmosphere-spectrum.svg",
       "bytes": 6637,
       "sha256": "dd6872803782e2cb9259b361329f5e598662a61e23ae81f8a4760c98a5124212"
+    },
+    {
+      "location": "public",
+      "filename": "saturn-billboard.webp",
+      "bytes": 15440,
+      "sha256": "6243bb6438cb81b067ea5ebfcd0ab12ddfb40fb637138a5cbe24e17e727499aa"
     },
     {
       "location": "public",
@@ -1038,18 +1050,6 @@
       "filename": "world-navigation.json",
       "bytes": 1078,
       "sha256": "cd48a683440eabcd4326d1a40f4714e3bc03bb1267db87f7a9f4eafe973ff99d"
-    },
-    {
-      "location": "public",
-      "filename": "saturn-arrival.webp",
-      "bytes": 175096,
-      "sha256": "3d6ed2e3590e81b78b1fe662003c5e99c3e8d230b5744e85613c3e3c94dfdd7a"
-    },
-    {
-      "location": "public",
-      "filename": "saturn-billboard.webp",
-      "bytes": 15440,
-      "sha256": "6243bb6438cb81b067ea5ebfcd0ab12ddfb40fb637138a5cbe24e17e727499aa"
     }
   ]
 }
