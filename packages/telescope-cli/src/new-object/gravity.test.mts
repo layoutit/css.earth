@@ -2,7 +2,7 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 import type { Archive } from './archives.mts';
-import { chooseGravity, choosePublished, SURVEY_PIPELINES } from './gravity.mts';
+import { chooseGravity, choosePublished, impliedMassSolar, SURVEY_PIPELINES } from './gravity.mts';
 
 const test = sourceTest();
 const range = { min: -1.33, max: 2.86, source: 'Luck (2018), AJ 156, 171, table 3', url: 'https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=J/AJ/156/171/table3' };
@@ -45,4 +45,20 @@ test('a published value is used as a fact, with the spread of laws across every 
   assert.equal(await survey('2022A&A...663A...4S'), '2022A&A...663A...4S ("T"), a comparison of survey pipelines (Soubiran et al. 2022)');
   const twoStars = 'main_id\tlog_g\tbibcode\ttitle\n"A"\t1\t"b"\t"t"\n"B"\t1\t"b"\t"t"\n';
   await assert.rejects(chooseGravity({ archive: archive(twoStars), ra: 0, dec: 0, teffK: 5500, range, where: 'test' }), /test: SIMBAD holds gravities for A and B within 1 arcsecond/u);
+});
+
+test('a published gravity that would make the star more massive than any star contradicts its radius and is not used', async () => {
+  // Beta Gruis: a giant of 153.871 solar radii whose one published value is log g 3.47.
+  assert.equal(Math.round(impliedMassSolar(3.47, 153.871)), 2548);
+  assert.ok(Math.abs(impliedMassSolar(4.4381, 1) - 1) < 1e-3, 'the Sun weighs one solar mass');
+  const library = 'main_id\tlog_g\tbibcode\ttitle\n"* bet Gru"\t3.47\t"2023ApJS..266...11B"\t"A library"\n';
+  let reason: string | undefined;
+  assert.equal(await chooseGravity({ archive: archive(library), ra: 0, dec: 0, teffK: 5500, where: 'test', radiusSolar: 153.871, contradicted: sentence => { reason = sentence; } }), null);
+  assert.equal(reason, 'the published gravity, log g 3.47 (2023ApJS..266...11B), would give this star of 153.9 solar radii 2,548 solar masses or more, above the 320 that Crowther et al. (2010) infer for the most massive star, so it contradicts the radius and is not used');
+  // The same value on a star it fits is used, and a second, consistent value is chosen when one contradicts.
+  reason = undefined;
+  assert.equal((await chooseGravity({ archive: archive(library), ra: 0, dec: 0, teffK: 5500, where: 'test', radiusSolar: 3, contradicted: sentence => { reason = sentence; } }))?.logg, 3.47);
+  const both = `${library}"* bet Gru"\t1.0\t"2011AJ....142..136L"\t"A paper"\n`;
+  assert.equal((await chooseGravity({ archive: archive(both), ra: 0, dec: 0, teffK: 5500, where: 'test', radiusSolar: 153.871, contradicted: sentence => { reason = sentence; } }))?.logg, 1);
+  assert.equal(reason, undefined);
 });

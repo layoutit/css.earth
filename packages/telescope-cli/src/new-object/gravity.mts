@@ -51,6 +51,14 @@ export async function publishedGravities(archive: Archive, ra: number, dec: numb
   return rows.map(row => ({ logg: Number(row.log_g), bibcode: String(row.bibcode), title: String(row.title ?? '') })).filter(row => Number.isFinite(row.logg));
 }
 
+/** The largest mass inferred for any star: an initial 320 solar masses, in the cluster R136 (Crowther et al. 2010, MNRAS 408, 731,
+ * https://arxiv.org/abs/1007.3284). A published gravity that implies more, with the star's own published radius, contradicts that
+ * radius and is not used: Beta Gruis's one value, log g 3.47, would give a giant of 154 solar radii 2,500 solar masses. */
+export const LARGEST_STELLAR_MASS_SOLAR = 320;
+const GM_SUN_KM3_S2 = 132712440041.93938, SOLAR_RADIUS_KM = 695700;
+/** The mass, in solar masses, of a star of `radiusSolar` whose surface gravity is `logg` (cgs): g R^2 / G. */
+export const impliedMassSolar = (logg: number, radiusSolar: number): number => 10 ** logg * (radiusSolar * SOLAR_RADIUS_KM * 1e5) ** 2 / (GM_SUN_KM3_S2 * 1e15);
+
 const median = (values: readonly number[]) => { const sorted = [...values].sort((a, b) => a - b), mid = sorted.length >> 1; return sorted.length % 2 ? sorted[mid]! : (sorted[mid - 1]! + sorted[mid]!) / 2; };
 
 /** The published value the rule chooses, or null when none is usable. */
@@ -91,8 +99,12 @@ const profile = ({ u1, u2 }: { u1: number; u2: number }) => Array.from({ length:
 const difference = (a: readonly number[], b: readonly number[]) => Math.max(...a.map((value, i) => Math.abs(value - b[i]!)));
 
 /** Choose the gravity a star's limb is read at (header). Null when the star has no published value and the spec gives no range. */
-export async function chooseGravity({ archive, ra, dec, teffK, range, where }: { archive: Archive; ra: number; dec: number; teffK: number; range?: GravityRange; where: string }): Promise<GravityChoice | null> {
-  const rows = await publishedGravities(archive, ra, dec, where), published = choosePublished(rows, range);
+export async function chooseGravity({ archive, ra, dec, teffK, range, where, radiusSolar, contradicted }: { archive: Archive; ra: number; dec: number; teffK: number; range?: GravityRange; where: string;
+  /** The star's published radius: a gravity that with it implies more than any star's mass is left out, and `contradicted` is told why. */
+  radiusSolar?: number; contradicted?: (sentence: string) => void }): Promise<GravityChoice | null> {
+  const every = await publishedGravities(archive, ra, dec, where), tooMassive = radiusSolar === undefined ? [] : every.filter(row => impliedMassSolar(row.logg, radiusSolar) > LARGEST_STELLAR_MASS_SOLAR);
+  const rows = every.filter(row => !tooMassive.includes(row)), published = choosePublished(rows, range);
+  if (tooMassive.length && !rows.length) contradicted?.(`the published gravit${tooMassive.length === 1 ? 'y' : 'ies'}, ${tooMassive.map(row => `log g ${row.logg} (${row.bibcode})`).join(', ')}, would give this star of ${Number(radiusSolar!.toFixed(1))} solar radii ${Math.round(Math.min(...tooMassive.map(row => impliedMassSolar(row.logg, radiusSolar!)))).toLocaleString('en-US')} solar masses or more, above the ${LARGEST_STELLAR_MASS_SOLAR} that Crowther et al. (2010) infer for the most massive star, so ${tooMassive.length === 1 ? 'it contradicts' : 'they contradict'} the radius and ${tooMassive.length === 1 ? 'is' : 'are'} not used`);
   if (published) {
     const values = rows.filter(row => !range || (row.logg >= range.min && row.logg <= range.max)).map(row => row.logg);
     const gravities = [...new Set([...values, published.logg])], span = [Math.min(...values), Math.max(...values)] as const;

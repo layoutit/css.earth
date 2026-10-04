@@ -155,6 +155,7 @@ export async function starLimb(root: string, ids: readonly string[], { archive =
     const gm = Number(body.physical.gravitationalParameterKm3PerS2), radiusKm = Number(body.physical.meanRadiusKm);
     const massSolar = gm > 0 ? Number((gm / GM_SUN).toFixed(3)) : undefined;
     const published = await publishedLaw(root, id);
+    let unusable: string | undefined;
     let gravity: StarGravity | null = gm > 0 ? { logg: Number(Math.log10(gm * 1e15 / (radiusKm * 1e5) ** 2).toFixed(2)), kind: 'measured',
       sentence: `log g from the mass and radius in packages/astronomy/data/bodies/${id}.json: ${Math.log10(gm * 1e15 / (radiusKm * 1e5) ** 2).toFixed(3)}` } : null;
     if (!gravity && !published && host.star) {
@@ -162,13 +163,13 @@ export async function starLimb(root: string, ids: readonly string[], { archive =
       const star = host.star as Record<string, unknown>, number = (key: string) => requireFiniteNumber(star[key], `${id}: star.${key}`);
       const at = simbadPosition({ ra: number('rightAscensionDegrees'), dec: number('declinationDegrees'), epoch: number('positionEpochJulianYear') },
         { ra: star.properMotionRaMasPerYear === undefined ? 0 : number('properMotionRaMasPerYear'), dec: star.properMotionDecMasPerYear === undefined ? 0 : number('properMotionDecMasPerYear') });
-      const choice = await chooseGravity({ archive, ...at, teffK, where: id });
+      const choice = await chooseGravity({ archive, ...at, teffK, where: id, radiusSolar: radiusKm / 695700, contradicted: sentence => { unusable = sentence; } });
       if (choice) gravity = { logg: choice.logg, kind: choice.kind, sentence: choice.sentence, url: choice.url, ...(choice.kind === 'published' ? { published: choice } : {}) };
     }
     // A white dwarf's stored spec cites its atmosphere class, which names the grid its law is read from (limb.mts).
     const stored = await readFile(resolve(root, o, STORED_SPEC), 'utf8').then(text => JSON.parse(text) as Record<string, any>, () => null);
     const whiteDwarf = parseWhiteDwarf((stored?.companions as { id?: string }[] | undefined)?.find(entry => entry.id === id) ?? stored, id);
-    let limb: LimbChoice = published ?? (gravity ? await chooseLimb(id, teffK, gravity.logg, archive, undefined, massSolar, whiteDwarf?.atmosphere) : { sentence: 'No limb darkening is drawn: no gravity of this star is measured or published' });
+    let limb: LimbChoice = published ?? (gravity ? await chooseLimb(id, teffK, gravity.logg, archive, undefined, massSolar, whiteDwarf?.atmosphere) : { sentence: `No limb darkening is drawn: ${unusable ?? 'no gravity of this star is measured or published'}` });
     if (whiteDwarf && !published) limb = { ...limb, sentence: `${limb.sentence}; its atmosphere is ${whiteDwarf.atmosphere}: ${whiteDwarf.source} (${whiteDwarf.url})` };
     // No paper and no grid: the star's own calibrated interferometry, fitted inside the first lobe (interferometric-limb.mts).
     if (!limb.limbDarkening && await fitInterferometricLimb(root, id, progress)) limb = (await publishedLaw(root, id)) ?? limb;
