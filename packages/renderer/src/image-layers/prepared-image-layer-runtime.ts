@@ -1,5 +1,5 @@
 import { presentPhysicalPoseInVolume, worldRotationCss, worldRotationFromQuaternion } from '@cssearth/engine';
-import { preparedVolumeCameraTransform, LARGE_IMAGE_PIXELS } from '../volume/prepared-volume-runtime.js';
+import { preparedVolumeCameraTransform, LARGE_IMAGE_PIXELS, STACK_OPACITY_CEILING } from '../volume/prepared-volume-runtime.js';
 import type { VolumeCameraPublication } from '../volume/types.js';
 import type { PreparedCssImageLayers, PreparedImageLayerView } from '@cssearth/objects';
 import { revealLayer } from '../rendering/layer-reveal.js';
@@ -63,7 +63,9 @@ export function mountPreparedCssImageLayers({ host, before, payload, resolveReso
           bank.loaded = true;
         }
         if (returning) revealLarge(bank);
-        set(bank.projection, 'opacity', String(weight));
+        // Never 1 (STACK_OPACITY_CEILING): a drag across M31 had its longest frame at 108 to 111 ms with a bank's opacity
+        // reaching 1, and 67 to 72 ms under the ceiling (iPad, 2026-10-04).
+        set(bank.projection, 'opacity', String(Math.min(STACK_OPACITY_CEILING, weight)));
         set(bank.projection, 'visibility', weight > 0 ? 'visible' : 'hidden');
         // A zero-weight axis contributes nothing; its 3D leaves leave compositing.
         set(bank.projection, 'display', weight > 0 ? '' : 'none');

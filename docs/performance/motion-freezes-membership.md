@@ -28,7 +28,8 @@ held differently while coasting:
   the camera turns to joins a paced share of its slices a frame, every eighth slice first, and a stack that leaves at
   rest leaves whole: on the iPad joining costs by the slices in the frame (8 a frame none over 21 ms, all 628 at once
   182 ms), and leaving by the slices still there (all at once 42 to 50 ms, 16 a frame eight frames of 34 to 93 ms,
-  2026-10-04).
+  2026-10-04). A stack's opacity in the mix stops at 0.999: Safari painted every slice under a stack again each time its
+  opacity left or reached 1 (54 ms for 88 slices with the camera still, nothing for 0.99 to 0.98).
 
 ## Why
 
