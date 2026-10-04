@@ -18,8 +18,8 @@ test('a bank drawn only for the bodies that hold it names its carriers; a bank d
     ['free-nebula', bank('free-nebula', 'volume-dataset-bank', { host: 'nebula', preparation: { source: 'source/delivery.json' } })],
     ['galaxy-layers', bank('galaxy-layers', 'image-layer-bank', { host: 'galaxy' })],
   ]);
-  await write(resolve(root, 'src/objects/star-disc/source/delivery.json'), { attachedTo: 'star' });
-  await write(resolve(root, 'src/objects/free-nebula/source/delivery.json'), {});
+  await write(resolve(root, 'src/objects/star-disc/source/delivery.json'), { schema: 'cssearth-nebula-delivery@2', attachedTo: 'star' });
+  await write(resolve(root, 'src/objects/free-nebula/source/delivery.json'), { schema: 'cssearth-nebula-delivery@2' });
   const contexts = [...descriptors].map(([id, descriptor]) => ({ id, type: (descriptor as { type: string }).type }));
   const hosted = await readHostedContextBanks(contexts, descriptors, [['star-companion', 'star-disc'], ['galaxy', 'galaxy-layers']], root);
   assert.deepEqual(hosted, { 'planet-dots': ['planet'], 'star-disc': ['star', 'star-companion'] },

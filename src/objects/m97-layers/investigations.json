@@ -15,12 +15,12 @@
     {
       "id": "volume",
       "subject": "The shape of the Owl Nebula",
-      "status": "deferred",
-      "finding": "The picture is flat. Guerrero et al. (2003) give the shape from echelle spectra: an outer shell that is a filled envelope, 218 arcsec across, expanding at 40 km/s; an inner shell that is an ellipsoid of radius 93 arcsec along its pole and 83 arcsec across it, its pole tilted 10 to 30 degrees from the line of sight toward the south-east, expanding at about 45 and 40 km/s; and a bipolar cavity along that pole, the owl's eyes. The Ring's bake draws thin walls; the Owl needs a filled envelope with a cavity cut in it, which the bake does not draw yet.",
+      "status": "included",
+      "finding": "García-Díaz et al. (2018, Sect. 3) find that a shell does not fit the spectra: the nebula is a slightly prolate spheroid filled with emission, inclined about 25 degrees with its north-west half toward Earth, with a multipolar cavity carved out of it that emits 0.3 of the gas around it; their velocity channels (Sect. 2.3) need three cavity lobes, one to the north-west toward us and two to the south-east, the more easterly toward us and the more southerly away. Guerrero et al. (2003) give the sizes: an ellipsoid of radius 93 arcsec along the pole and 83 arcsec across it, inside a filled envelope 218 arcsec across, with eyes about 35 arcsec in size and denser gas along the equatorial plane. The bank fills that body with the picture's light. How much the gas emits at each distance from the star, and how long each cavity is along its sight line, are read from the picture.",
       "evidence": [
+        "https://arxiv.org/abs/1806.04676",
         "https://arxiv.org/abs/astro-ph/0303056"
-      ],
-      "revisitWhen": "The image-layer bake draws a filled envelope with a cavity, and the cavity's size is read from the paper."
+      ]
     },
     {
       "id": "noao-m97",

@@ -1,3 +1,4 @@
+import { parseObjectDescriptor } from '@cssearth/objects';
 import { objectPageStyles } from '../object-page-contract.mts';
 import { access, readFile } from "node:fs/promises";
 import { resolve } from "node:path";
@@ -39,7 +40,7 @@ export async function validateObjectPackageFiles(
   if (!await authoredObject(objectRecord.id, projectRoot))
     throw new TypeError(`src/objects/${objectRecord.id}/object.json: implemented object ${objectRecord.id} has no authored recipe (properties.recipe).`);
   const paths = objectPackagePaths(objectRecord, projectRoot);
-  const descriptor = JSON.parse(await readFile(resolve(paths.root, 'object.json'), 'utf8'));
+  const descriptor = parseObjectDescriptor(JSON.parse(await readFile(resolve(paths.root, 'object.json'), 'utf8')));
   for (const path of objectPageStyles(descriptor)) await accessFile(resolve(projectRoot, path));
   for (const file of paths.requiredFiles) {
     try {

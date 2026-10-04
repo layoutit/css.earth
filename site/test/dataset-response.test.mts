@@ -10,6 +10,7 @@ import { UnreadableSavedView, renderDatasetResponse } from '../dataset-response.
 import { loadPreparedSceneMarkup } from '../server/load-prepared-scene.mts';
 import { handleSearchRequest } from '../server/search-response.mts';
 import searchRoute from '../server/search-route.mts';
+import { NATIVE_INPUT_STRIPS, NATIVE_TURNING_MESH, nativeInputMarkup, nativeInputStylesheet } from '../native-input.mts';
 
 const origin = 'https://example.test';
 // A refused dataset request never reaches search.
@@ -89,13 +90,21 @@ test('a billboard startup page takes the selected scene and its prepared mark', 
   await assert.rejects(renderDatasetResponse(unmarked, new URL('/saturn/?dataset=ultraviolet', origin), 'saturn', read), /identity drifted: requested saturn/);
 });
 test('the drag rule of a page without script finds the spinning meshes a native response draws, with no mark for it', async () => {
-  const layout = await readFile(new URL('../layouts/ObjectLayout.astro', import.meta.url), 'utf8');
-  const selector = /^ {2}(\.object-stage \.polycss-mesh\[style\*="[^"]+"\]) \{$/mu.exec(layout)?.[1];
-  assert.ok(selector, 'ObjectLayout names the spinning meshes by their inline animation');
+  assert.ok(nativeInputStylesheet.includes(`\n  ${NATIVE_TURNING_MESH} {\n    rotate: z `), 'the stylesheet turns the spinning meshes');
   const result = await renderDatasetResponse(html, new URL('/saturn/?dataset=ultraviolet', origin), 'saturn', read);
-  const turning = [...parseHTML(result).document.querySelectorAll(selector)].map(node => node.getAttribute('class'));
+  const turning = [...parseHTML(result).document.querySelectorAll(NATIVE_TURNING_MESH)].map(node => node.getAttribute('class'));
   assert.deepEqual(turning, ['polycss-mesh saturn-body saturn-body-polar', 'polycss-mesh saturn-body']);
   assert.equal(result.includes('data-native'), false);
+});
+test('the page without script lays its strips, frame and world stage in the order their anchors need', async () => {
+  const layer = parseHTML(`<main>${nativeInputMarkup}</main>`).document;
+  assert.equal(layer.querySelectorAll('.native-drag-layer > i').length, NATIVE_INPUT_STRIPS);
+  // An anchor has to precede the box that reads it: the strips before the frame, and the sensor before the world stage.
+  assert.ok(layer.querySelector('.native-drag-layer > i:last-of-type + .native-drag-frame > .native-drag-sensor'));
+  assert.ok(nativeInputStylesheet.includes('.native-drag-layer > i:hover { anchor-name: --native-strip;'));
+  const layout = await readFile(new URL('../layouts/ObjectLayout.astro', import.meta.url), 'utf8');
+  const input = layout.indexOf('<noscript set:html={nativeInputMarkup} />');
+  assert.ok(input > 0 && input < layout.indexOf('<div class="object-world-stage">'), 'the input layer comes before the world stage');
 });
 test('a city link is left to the page, which selects the city on arrival', async () => {
   // The native response used to reject every non-numeric feature, so a shared city link answered 400.

@@ -1,3 +1,4 @@
+import { readPackagedPointsFrame } from '@cssearth/objects';
 /**
  * The stars that have a page and no map marker, each at its own prepared position, for the dots of the galaxy they are in.
  *
@@ -17,14 +18,13 @@ import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { gzipSync } from 'node:zlib';
 import { hasErrorCode, isRecord } from '@cssearth/core';
-import { systemHostId } from '@cssearth/objects';
+import { systemHostId, parsePreparedWorldContextPlan } from '@cssearth/objects';
 import { readObjectDescriptors } from '@cssearth/objects/node';
 
 const KPC_M = 3.0856775814913673e19;
 const objects = resolve(import.meta.dirname, '../../../src/objects');
 const worldPath = resolve(objects, 'sun/prepared/world-context.json');
-const world = JSON.parse(await readFile(worldPath, 'utf8')) as { frame: { referenceFrame: string; epochJdTt: number; originM: number[] };
-  bodies: { id: string; classification?: string; plainDot?: boolean; orbit?: unknown; inside?: string; positionM: number[]; color: string; dotColor?: string }[] };
+const world = parsePreparedWorldContextPlan(JSON.parse(await readFile(worldPath, 'utf8')));
 const bodies = new Map(world.bodies.map(body => [body.id, body]));
 /** The object a body is inside past any system: its own, or the one of the star it is bound to (each row's `inside`,
  * packages/objects/src/prepared-data/world-holders.ts `insideOf`). */
@@ -36,7 +36,7 @@ const holderOf = (id: string): string | undefined => {
 let banks = 0;
 for (const [bankId, descriptor] of await readObjectDescriptors(objects)) {
   const recipePath = resolve(objects, bankId, 'source/packaged-stars/points.json');
-  const recipe = await readFile(recipePath, 'utf8').then(text => JSON.parse(text) as { frame?: { referenceFrame?: unknown; epochJdTt?: unknown } },
+  const recipe = await readFile(recipePath, 'utf8').then(text => readPackagedPointsFrame(JSON.parse(text)),
     (error: unknown) => { if (hasErrorCode(error, 'ENOENT')) return null; throw error; });
   if (recipe === null) continue;
   const host = isRecord(descriptor) && isRecord(descriptor.properties) ? descriptor.properties.host : undefined;

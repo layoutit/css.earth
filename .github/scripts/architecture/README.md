@@ -18,6 +18,11 @@ baseline updates. Contract lint runs the check and `node --test .github/scripts/
   matching; TypeScript uses its syntax tree.
   `format-schema-exceptions.json` contains only `{ schema, owners, reason }` debt.
   Owner sets must match exactly; stale entries, duplicates and empty reasons fail.
+- `site-build-format-readers.mts` requires build readers to admit shared JSON through
+  objects parsers before projection. Its AST scan discovers source addresses from
+  tracked schema-bearing records; objects reader ledgers name generated addresses
+  and format-specific readers. It follows local aliases, transports, callbacks and
+  literal filename loops. Computed and cross-module paths remain analysis limits.
 
 The declared import scanner and resolved graph do not prove arbitrary computed
 runtime paths. There is no custom import-form parser. Binary magic/version values

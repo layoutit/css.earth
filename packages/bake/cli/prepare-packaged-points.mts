@@ -9,7 +9,7 @@
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { gunzipSync } from 'node:zlib';
-import { CATALOGUE_POINTS_SCHEMA } from '@cssearth/objects';
+import { CATALOGUE_POINTS_SCHEMA, PACKAGED_POINTS_SOURCE_SCHEMA } from '@cssearth/objects';
 import { writeCatalogueBank } from '@cssearth/bake/volume/node';
 
 const KPC_M = 3.0856775814913673e19;
@@ -20,7 +20,7 @@ const recipe = JSON.parse(await readFile(recipePath, 'utf8')) as { schema?: unkn
   table?: { path?: unknown; generator?: unknown }; frame?: { referenceFrame?: unknown; epochJdTt?: unknown };
   appearance?: { radiusPx?: unknown; opacity?: unknown; colorLevels?: unknown; colorLevelsBasis?: unknown } };
 const fail = (message: string): never => { throw new TypeError(`${recipePath}: ${message}`); };
-if (recipe.schema !== 'cssearth-packaged-points-source@1' || recipe.id !== id) fail(`needs schema cssearth-packaged-points-source@1 and id ${id}.`);
+if (recipe.schema !== PACKAGED_POINTS_SOURCE_SCHEMA || recipe.id !== id) fail(`needs schema ${PACKAGED_POINTS_SOURCE_SCHEMA} and id ${id}.`);
 if (typeof recipe.source !== 'string' || typeof recipe.meaning !== 'string') fail('needs its source and meaning.');
 if (typeof recipe.table?.path !== 'string' || typeof recipe.table.generator !== 'string') fail('table names its path and the generator that writes it.');
 if (typeof recipe.frame?.referenceFrame !== 'string' || typeof recipe.frame.epochJdTt !== 'number') fail('frame names the reference frame and epoch of the table.');

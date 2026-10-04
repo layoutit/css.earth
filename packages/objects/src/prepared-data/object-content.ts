@@ -226,3 +226,27 @@ export function authoredDatasetMetadata(input: unknown, objectId: string): {
   }
   return { sourceUrls, systemDatasetIds };
 }
+
+/** Catalogue consumers read dataset companions, without requiring chart dimensions produced later. */
+export function readObjectContentDatasets(input: unknown) {
+  const record = preparedObject(input, 'object content source');
+  validateObjectContentEnvelope({ schema: record.schema, version: record.version, id: record.id });
+  const datasets = preparedObject(record.datasets, 'object datasets');
+  const controls = preparedArray(datasets.controls, 'object datasets').map(value => {
+    const control = preparedObject(value, 'object dataset');
+    const id = preparedText(control.id, 'dataset id'), label = preparedText(control.label, 'dataset label');
+    const thumbnail = control.thumbnail === undefined ? undefined : preparedText(control.thumbnail, 'dataset thumbnail');
+    const rawVolume = control.volume === undefined ? undefined : preparedObject(control.volume, 'dataset volume');
+    const volume = rawVolume === undefined ? undefined : { objectId: preparedText(rawVolume.objectId, 'volume object'),
+      datasetId: preparedText(rawVolume.datasetId, 'volume dataset'), surface: preparedText(rawVolume.surface, 'volume surface') };
+    return { ...control, id, label, ...(thumbnail === undefined ? {} : { thumbnail }), ...(volume === undefined ? {} : { volume }) };
+  });
+  return { ...record, id: preparedText(record.id, 'content id'), displayName: preparedText(record.displayName, 'display name'),
+    datasets: { ...datasets, defaultDataset: preparedText(datasets.defaultDataset, 'default dataset'), controls } };
+}
+/** Factsheet consumers own cited panel admission; this reader checks the content envelope before exposing it. */
+export function readObjectContentPanel(input: unknown) {
+  const record = preparedObject(input, 'object content source');
+  validateObjectContentEnvelope({ schema: record.schema, version: record.version, id: record.id });
+  return { ...record, panel: preparedObject(record.panel, 'content panel') };
+}

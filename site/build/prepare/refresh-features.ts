@@ -1,3 +1,5 @@
+import { requireInventory } from '@cssearth/objects/node';
+import { parsePreparedObjectRuntime } from '@cssearth/objects';
 // Refresh the named-feature catalogue of an already prepared object without re-preparing its surfaces: verify the
 // authored source pins, re-run the shared feature attachment against the prepared runtime definition, and rewrite the
 // catalogue, the runtime plan, the content document, the runtime asset manifest and the
@@ -18,13 +20,13 @@ export async function refreshObjectFeatures(id: string): Promise<{ count: number
   const objectDirectory = resolve('src/objects', id), sourceDirectory = resolve(objectDirectory, 'source'), outputDirectory = resolve(objectDirectory, 'prepared'), publicDirectory = resolve('public/scenes', id);
   const { descriptor, sources } = await readAuthoredSources(objectDirectory);
   if (!descriptor.recipe.features) return { count: null };
-  const definition = record(JSON.parse(await readFile(resolve(outputDirectory, 'runtime.json'), 'utf8')), 'prepared runtime');
+  const definition = record(parsePreparedObjectRuntime(JSON.parse(await readFile(resolve(outputDirectory, 'runtime.json'), 'utf8')), { parsedJson: true }), 'prepared runtime');
   const attached = await attachSurfaceFeatures({ descriptor, sources, sourceDirectory, publicDirectory, outputDirectory, definition });
   if (!attached.features) throw new TypeError(`${id} declares features but attached none.`);
   await writeFeatureContent(outputDirectory, attached.features);
   await writeFile(resolve(outputDirectory, 'runtime.json'), `${JSON.stringify(attached.definition)}\n`);
   // Only the feature transport changed among the delivered assets: replace its label catalogue and selection banks.
-  const manifest = parseRuntimeManifest(JSON.parse(await readFile(resolve(objectDirectory, 'inventory.json'), 'utf8')), id);
+  const manifest = parseRuntimeManifest(requireInventory(id, JSON.parse(await readFile(resolve(objectDirectory, 'inventory.json'), 'utf8'))), id);
   const plan = record(record(attached.definition, 'definition').features, 'features plan');
   const catalog = record(plan.catalog, 'catalog');
   const urls = [String(catalog.url)];

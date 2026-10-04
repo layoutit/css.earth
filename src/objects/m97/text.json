@@ -22,7 +22,7 @@
     ]
   },
   "introduction": {
-    "text": "A Sloan Digital Sky Survey image of it stands here as a flat picture facing the Sun, 1.70 pc wide.",
+    "text": "A Sloan Digital Sky Survey image of it fills here the nebula's published body: a ball of gas 0.86 pc across with cavities along its pole, the owl's eyes.",
     "sources": [
       {
         "catalogueId": "sdss-dr9-color-hips",
@@ -38,6 +38,20 @@
         "checked": "2026-10-02",
         "locator": "Lead section, revision 1368396740",
         "quote": "Estimated to be about 8,000 years old, it is approximately circular in cross-section with a faint internal structure."
+      },
+      {
+        "catalogueId": "publication-garcia-diaz-2018-owl-nebula-cavities",
+        "url": "https://arxiv.org/abs/1806.04676",
+        "label": "García-Díaz et al. (2018), MNRAS 479, 3909: The Owl and other strigiform nebulae: multipolar cavities within a filled shell",
+        "checked": "2026-10-03",
+        "locator": "Sect. 2.3 and 3: a filled, slightly prolate spheroid inclined about 25 degrees, north-west half toward Earth; a multipolar cavity that emits 0.3 of the gas around it; three lobes, north-west toward us, south-east one toward us and one away"
+      },
+      {
+        "catalogueId": "publication-guerrero-2003-owl-nebula",
+        "url": "https://arxiv.org/abs/astro-ph/0303056",
+        "label": "Guerrero et al. (2003), AJ 125, 3213: Physical structure of planetary nebulae. I. The Owl Nebula",
+        "checked": "2026-10-03",
+        "locator": "Sect. III and IV: an ellipsoid of radius 93 arcsec along the pole and 83 arcsec across it; eyes about 35 arcsec in size; a filled envelope 218 arcsec across; denser gas along the equatorial plane"
       }
     ]
   },
@@ -45,7 +59,7 @@
     "optical": {
       "title": "Owl Nebula in visible light",
       "detail": "2000 × 2000 px",
-      "summary": "A flat picture facing the Sun at the nebula's distance; nothing in it has depth.",
+      "summary": "The picture's light through the nebula's published body: a ball of gas with cavities along its pole, the owl's eyes.",
       "sources": [
         {
           "catalogueId": "sdss-dr9-color-hips",
@@ -53,6 +67,20 @@
           "label": "Sloan Digital Sky Survey; color HiPS CDS/P/SDSS9/color by T. Boch (CDS), cut out by the CDS hips2fits service",
           "checked": "2026-10-02",
           "locator": "SDSS9 color"
+        },
+        {
+          "catalogueId": "publication-garcia-diaz-2018-owl-nebula-cavities",
+          "url": "https://arxiv.org/abs/1806.04676",
+          "label": "García-Díaz et al. (2018), MNRAS 479, 3909: The Owl and other strigiform nebulae: multipolar cavities within a filled shell",
+          "checked": "2026-10-03",
+          "locator": "Sect. 2.3 and 3: a filled, slightly prolate spheroid inclined about 25 degrees, north-west half toward Earth; a multipolar cavity that emits 0.3 of the gas around it; three lobes, north-west toward us, south-east one toward us and one away"
+        },
+        {
+          "catalogueId": "publication-guerrero-2003-owl-nebula",
+          "url": "https://arxiv.org/abs/astro-ph/0303056",
+          "label": "Guerrero et al. (2003), AJ 125, 3213: Physical structure of planetary nebulae. I. The Owl Nebula",
+          "checked": "2026-10-03",
+          "locator": "Sect. III and IV: an ellipsoid of radius 93 arcsec along the pole and 83 arcsec across it; eyes about 35 arcsec in size; a filled envelope 218 arcsec across; denser gas along the equatorial plane"
         }
       ]
     }
