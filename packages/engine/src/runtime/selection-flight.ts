@@ -158,15 +158,16 @@ export function sampleSelectionFlight(flight: SelectionFlight, elapsedS: number)
 export function cameraPoseToReferenceFrame(pose: PhysicalCameraPose, frame: FocusFrame): PhysicalCameraPose {
   validatePose(pose); validateFrame(frame);
   const offset = rotateVector(frame.localToReferenceXyzw, pose.positionM);
-  return Object.freeze({ positionM: add(frame.originM, offset), orientationXyzw: multiplyQuaternion(frame.localToReferenceXyzw, pose.orientationXyzw),
-    focusOffset: Object.freeze({ originM: frame.originM, offsetM: offset }) });
+  return { positionM: add(frame.originM, offset), orientationXyzw: multiplyQuaternion(frame.localToReferenceXyzw, pose.orientationXyzw),
+    focusOffset: { originM: frame.originM, offsetM: offset } };
 }
 
 /** Where the eye is, as an origin and an offset from it: the pose's exact focus offset while it still adds up to `positionM`
  * (a copy whose position was changed keeps a stale one), else `positionM` itself with no offset. */
 export function eyeAnchor(pose: PhysicalCameraPose): { readonly originM: PositionM; readonly offsetM: PositionM } {
-  const exact = pose.focusOffset;
-  return exact !== undefined && [0, 1, 2].every(axis => pose.positionM[axis] === exact.originM[axis]! + exact.offsetM[axis]!) ? exact : { originM: pose.positionM, offsetM: ZERO };
+  const exact = pose.focusOffset, eye = pose.positionM;
+  return exact !== undefined && eye[0] === exact.originM[0] + exact.offsetM[0] && eye[1] === exact.originM[1] + exact.offsetM[1]
+    && eye[2] === exact.originM[2] + exact.offsetM[2] ? exact : { originM: eye, offsetM: ZERO };
 }
 const ZERO: PositionM = Object.freeze([0, 0, 0]);
 
@@ -176,9 +177,9 @@ const ZERO: PositionM = Object.freeze([0, 0, 0]);
 export function dollyPoseAboutFocus(pose: PhysicalCameraPose, ratio: number): PhysicalCameraPose {
   const { originM, offsetM } = eyeAnchor(pose);
   if (pose.focusOffset === undefined || originM !== pose.focusOffset.originM || !(ratio > 0) || !Number.isFinite(ratio)) return pose;
-  const offset: PositionM = Object.freeze([offsetM[0] * ratio, offsetM[1] * ratio, offsetM[2] * ratio]);
-  return Object.freeze({ positionM: Object.freeze([originM[0] + offset[0], originM[1] + offset[1], originM[2] + offset[2]]) as PositionM,
-    orientationXyzw: pose.orientationXyzw, focusOffset: Object.freeze({ originM, offsetM: offset }) });
+  const offset: PositionM = [offsetM[0] * ratio, offsetM[1] * ratio, offsetM[2] * ratio];
+  return { positionM: [originM[0] + offset[0], originM[1] + offset[1], originM[2] + offset[2]],
+    orientationXyzw: pose.orientationXyzw, focusOffset: { originM, offsetM: offset } };
 }
 
 /** A point's position from the eye in the reference frame, point - eye. Every reader of the camera's place goes through this:
@@ -207,8 +208,7 @@ export function cameraPoseFromReferenceFrame(pose: PhysicalCameraPose, frame: Fo
   const [x, y, z, w] = frame.localToReferenceXyzw;
   const inverse: OrientationXyzw = [-x, -y, -z, w];
   const [dx, dy, dz] = fromEyeM(pose, frame.originM);
-  return Object.freeze({ positionM: rotateVector(inverse, [0 - dx, 0 - dy, 0 - dz]),
-    orientationXyzw: multiplyQuaternion(inverse, pose.orientationXyzw) });
+  return { positionM: rotateVector(inverse, [0 - dx, 0 - dy, 0 - dz]), orientationXyzw: multiplyQuaternion(inverse, pose.orientationXyzw) };
 }
 
 function slerpDirectionInto(out: MutablePosition, from: PositionM, to: PositionM, t: number): void {
@@ -264,9 +264,11 @@ function copyPose(pose: PhysicalCameraPose): PhysicalCameraPose {
     ...(pose.focusOffset ? { focusOffset: Object.freeze({ originM: copyPosition(pose.focusOffset.originM), offsetM: copyPosition(pose.focusOffset.offsetM) }) } : {}) });
 }
 function copy3Into(out: MutablePosition, value: PositionM): void { out[0] = value[0]; out[1] = value[1]; out[2] = value[2]; }
-function subtract(a: PositionM, b: PositionM): PositionM { return Object.freeze([a[0] - b[0], a[1] - b[1], a[2] - b[2]]); }
-function add(a: PositionM, b: PositionM): PositionM { return Object.freeze([a[0] + b[0], a[1] + b[1], a[2] + b[2]]); }
-function scale(a: PositionM, factor: number): PositionM { return Object.freeze([a[0] * factor, a[1] * factor, a[2] * factor]); }
+// The vector helpers return plain arrays: a camera pose is converted for every body on every frame, and Safari pays for
+// each frozen array (heliocentric-geometry.ts offAxisFrame has the measurement). A flight's own plan stays frozen.
+function subtract(a: PositionM, b: PositionM): PositionM { return [a[0] - b[0], a[1] - b[1], a[2] - b[2]]; }
+function add(a: PositionM, b: PositionM): PositionM { return [a[0] + b[0], a[1] + b[1], a[2] + b[2]]; }
+function scale(a: PositionM, factor: number): PositionM { return [a[0] * factor, a[1] * factor, a[2] * factor]; }
 function viewDirection(offset: PositionM, rangeM: number, orientation: OrientationXyzw): PositionM {
   const [x, y, z, w] = orientation;
   return rotateVector([-x, -y, -z, w], scale(offset, 1 / rangeM));
@@ -274,13 +276,13 @@ function viewDirection(offset: PositionM, rangeM: number, orientation: Orientati
 function dot4(a: OrientationXyzw, b: OrientationXyzw): number { return a[0] * b[0] + a[1] * b[1] + a[2] * b[2] + a[3] * b[3]; }
 function multiplyQuaternion(a: OrientationXyzw, b: OrientationXyzw): OrientationXyzw {
   const [x, y, z, w] = a, [i, j, k, r] = b;
-  return Object.freeze([w * i + x * r + y * k - z * j, w * j - x * k + y * r + z * i,
-    w * k + x * j - y * i + z * r, w * r - x * i - y * j - z * k]);
+  return [w * i + x * r + y * k - z * j, w * j - x * k + y * r + z * i,
+    w * k + x * j - y * i + z * r, w * r - x * i - y * j - z * k];
 }
 function rotateVector(q: OrientationXyzw, value: PositionM): PositionM {
   const out: MutablePosition = [0, 0, 0];
   rotateVectorInto(out, q, value);
-  return Object.freeze(out);
+  return out;
 }
 function rotateVectorInto(out: MutablePosition, q: OrientationXyzw, value: PositionM): void {
   const [x, y, z, w] = q, [a, b, c] = value;

@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "wasp-21b",
+  "radiusKm": 76496.4,
+  "radiusSource": "Radius 1.07 Jupiter radii from Bouchy et al. 2010 (2010arXiv1006.2605B), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2010arXiv1006.2605B/abstract): 76,496.4 km at 71,492 km per Jupiter radius. GM from the mass 0.3 Jupiter masses (Bouchy et al. 2010, the mass the NASA Exoplanet Archive's composite table adopts (2010arXiv1006.2605B), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2010arXiv1006.2605B/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 4.32250416,
+  "orbitalPeriodSource": "Kokori et al. 2023 (2023ApJS..265....4K), via the NASA Exoplanet Archive ps table (pl_refname KOKORI_ET_AL__2023): P 4.32250416 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, color, map or oblateness of WASP-21 b is measured; only its size, mass and orbit are."
+  },
+  "massSource": "0.3 Jupiter masses: Bouchy et al. 2010, the mass the NASA Exoplanet Archive's composite table adopts (2010arXiv1006.2605B), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2010arXiv1006.2605B/abstract)."
+}

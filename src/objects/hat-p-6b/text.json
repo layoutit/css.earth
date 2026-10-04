@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hat-p-6b",
+  "card": {
+    "text": "HAT-P-6 b was found in 2007 by HATNet as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-aa5df3",
+        "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+        "label": "Stassun et al. 2017",
+        "checked": "2026-10-03",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname STASSUN_ET_AL__2017): disc_year 2007, disc_facility HATNet, sy_pnum 1; pl_orbper 3.85299668, pl_radj 1.48, pl_bmassj 1.32"
+      },
+      {
+        "catalogueId": "wikipedia-hat-p-6b",
+        "url": "https://en.wikipedia.org/wiki/HAT-P-6b",
+        "label": "Wikipedia, \"HAT-P-6b\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374168851",
+        "quote": "HAT-P-6b is a transiting extrasolar planet discovered by Noyes et al. on October 15, 2007."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is the only planet known around Sterrennacht. Its orbit and size follow Stassun et al. 2017's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-aa5df3",
+        "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+        "label": "Stassun et al. 2017",
+        "checked": "2026-10-03",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname STASSUN_ET_AL__2017): disc_year 2007, disc_facility HATNet, sy_pnum 1; pl_orbper 3.85299668, pl_radj 1.48, pl_bmassj 1.32"
+      },
+      {
+        "catalogueId": "wikipedia-hat-p-6b",
+        "url": "https://en.wikipedia.org/wiki/HAT-P-6b",
+        "label": "Wikipedia, \"HAT-P-6b\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374168851",
+        "quote": "It is located approximately 910 light-years away in the constellation of Andromeda, orbiting the star HAT-P-6."
+      }
+    ]
+  },
+  "datasets": {
+    "thermal": {
+      "title": "Dayside heat",
+      "detail": "From its dayside temperature",
+      "summary": "The color of a black body at the 1,657 K day side measured in eclipse."
+    }
+  }
+}

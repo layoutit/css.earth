@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "xo-5b",
+  "radiusKm": 81500.9,
+  "radiusSource": "Radius 1.14 Jupiter radii from Smith 2015 (2015AcA....65..117S), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2015AcA....65..117S/abstract): 81,500.9 km at 71,492 km per Jupiter radius. GM from the mass 1.19 Jupiter masses (Smith 2015, the mass the NASA Exoplanet Archive's composite table adopts (2015AcA....65..117S), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2015AcA....65..117S/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 4.18775631,
+  "orbitalPeriodSource": "Kokori et al. 2023 (2023ApJS..265....4K), via the NASA Exoplanet Archive ps table (pl_refname KOKORI_ET_AL__2023): P 4.18775631 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, color, map or oblateness of XO-5 b is measured; only its size, mass and orbit are."
+  },
+  "massSource": "1.19 Jupiter masses: Smith 2015, the mass the NASA Exoplanet Archive's composite table adopts (2015AcA....65..117S), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2015AcA....65..117S/abstract)."
+}

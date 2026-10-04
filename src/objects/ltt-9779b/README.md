@@ -2,7 +2,7 @@
 
 ## Sources
 
-It is the only planet known around LTT 9779. Its orbit and size follow Jenkins et al. 2020's fit, the archive's default. The introduction is generated from Jenkins et al. 2020's published values; the sections below are the data's own.
+It is the only planet known around Uúba. Its orbit and size follow Jenkins et al. 2020's fit, the archive's default. The introduction is generated from Jenkins et al. 2020's published values; the sections below are the data's own.
 
 **Size and mass.** Radius 0.4210902 Jupiter radii from Jenkins et al. 2020 (2020NatAs...4.1148J), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2020NatAs...4.1148J/abstract): 30,104.6 km at 71,492 km per Jupiter radius. GM from the mass 0.09225057 Jupiter masses (Jenkins et al. 2020, the mass the NASA Exoplanet Archive's composite table adopts (2020NatAs...4.1148J), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2020NatAs...4.1148J/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.
 
@@ -10,11 +10,12 @@ It is the only planet known around LTT 9779. Its orbit and size follow Jenkins e
 
 **Color.** No image or measured color exists. The neutral gray is lit by ltt-9779's measured color (#ffeade, the color dataset of ltt-9779 (src/objects/ltt-9779/source/photometry/stellar-color.json)) at the gray's own brightness.
 
-**Charts.** The orbits of LTT 9779's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (69, 96, 106), folded onto its orbit. Upper limits and rows without an error are left out.
+**Charts.** The orbits of Uúba's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (69, 96, 106), folded onto its orbit. Upper limits and rows without an error are left out.
 
 ## Evidence
 
-Generated 2026-09-29 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/ltt-9779b.json).
+Generated 2026-10-03 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/ltt-9779b.json).
+
 
 ## Known problems
 

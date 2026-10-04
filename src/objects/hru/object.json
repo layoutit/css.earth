@@ -1,0 +1,149 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "hru",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Hru",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 4257209.9
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/hru-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Hru",
+      "classification": "star",
+      "color": "#b2c7ff",
+      "distanceAu": 49633635.7,
+      "description": "A star about 240 parsecs away, 6.1 times the Sun's width, measured by Gaia.",
+      "systemName": "Hru system",
+      "aliases": [
+        "Gaia DR3 4291462091610511744",
+        "HR 7474",
+        "Sigma Aquilae",
+        "HIP 96665",
+        "HD 185507"
+      ],
+      "order": 5565,
+      "context": {
+        "order": 5562
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        3100486759793489000,
+        -6710516077901472000,
+        698470610254916000
+      ],
+      "presentationToReference": [
+        0.4175691163268015,
+        0.03945535456571674,
+        -0.9077881405295776,
+        -0.9037626946462787,
+        -0.08539496385528675,
+        -0.41942900700100827,
+        0.0940692556351525,
+        -0.9955656558681842,
+        2.20352747246803e-8
+      ],
+      "orbitUpReference": [
+        -0.03945535456571674,
+        0.08539496385528675,
+        0.9955656558681842
+      ],
+      "metersPerUnit": 13732935.161290323,
+      "bodyRadiusM": 4257209900.0000005
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

@@ -1,0 +1,148 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "beemim",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Beemim",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 28981470.6
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/beemim-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Beemim",
+      "classification": "star",
+      "color": "#ffcd90",
+      "distanceAu": 18734261.5,
+      "description": "A star 91 parsecs away, 42 times the Sun's width, measured from its light.",
+      "systemName": "Beemim system",
+      "aliases": [
+        "Upsilon3 Eridani",
+        "HD 28028",
+        "HIP 20535",
+        "HR 1393"
+      ],
+      "order": 5501,
+      "context": {
+        "order": 5498
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        944492120742857200,
+        2122340620946270000,
+        -1567865833518622200
+      ],
+      "presentationToReference": [
+        0.33700443244819556,
+        -0.22745689461362076,
+        0.9136144556666109,
+        0.7572728037952839,
+        -0.51110593250211,
+        -0.40658163558279137,
+        -0.5594335645474794,
+        -0.8288751937739943,
+        -0.0000019556228456806885
+      ],
+      "orbitUpReference": [
+        0.22745689461362076,
+        0.51110593250211,
+        0.8288751937739943
+      ],
+      "metersPerUnit": 93488614.83870968,
+      "bodyRadiusM": 28981470600
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

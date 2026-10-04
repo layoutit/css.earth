@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "wasp-13",
+  "angularDiameterMas": 0.06,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 953,109 km at 230.89 pc = 0.06 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 230.8934611824005,
+  "distanceSource": "Gaia DR3 parallax 4.3310 +/- 0.0195 mas (same row, RUWE 0.89): 230.89 pc, no zero-point correction",
+  "radiusKm": 953109,
+  "radiusSource": "Radius 1.37 +/- 0.15 solar radii from Stassun et al. 2017, the stellar radius of the default parameter set of WASP-13 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract): 953,109 km at 695,700 km per solar radius. Mass 0.72 +/- 0.25 solar masses from Stassun et al. 2017, the stellar mass of the default parameter set of WASP-13 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract); GM is that mass times the JPL solar GM. Temperature 5950 +/- 70 K from Stassun et al. 2017, the stellar temperature of the default parameter set of WASP-13 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 5950,
+  "effectiveTemperatureSource": "Stassun et al. 2017, the stellar temperature of the default parameter set of WASP-13 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract)",
+  "surfaceGravityLogg": 4.02,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/wasp-13.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.022, rounded to two decimals",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

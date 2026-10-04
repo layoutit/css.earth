@@ -1,0 +1,119 @@
+{
+  "schema": "cssearth-inventory@1",
+  "assets": [
+    {
+      "location": "public",
+      "filename": "tania-borealis-arrival.webp",
+      "bytes": 17612,
+      "sha256": "335f8128e42049714e9381399e03eeeb89f4a1d830c9bc415d2dfe948d897274"
+    },
+    {
+      "location": "public",
+      "filename": "tania-borealis-billboard.webp",
+      "bytes": 3078,
+      "sha256": "a277c28b37c163ffa88438fd676a396ddc42e217e11da73fd3f3022d61e8c2e2"
+    },
+    {
+      "location": "public",
+      "filename": "tania-borealis-dataset-color.webp",
+      "bytes": 44,
+      "sha256": "349837e1b7b9b12d5df5343c701a7750fc14835ab95cc51f87f70fcc2c4130b2"
+    },
+    {
+      "location": "public",
+      "filename": "tania-borealis-poles-color@2x.webp",
+      "bytes": 1340,
+      "sha256": "1df3d38b59516c3afc7319f7d7e1b186d6c5222988401caf460f389cff7ebb6a"
+    },
+    {
+      "location": "public",
+      "filename": "tania-borealis-surface-color@2x.webp",
+      "bytes": 38,
+      "sha256": "60fdc35168cd910709aa4921e39f6c3f1b06b4a86ef722f580dc2ecf4589fc0d"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 394,
+      "sha256": "4c3f0a58023602da45d18acc4f4fac78b649ec77d6bfc17131dbd1849ceccd91"
+    },
+    {
+      "location": "prepared",
+      "filename": "assets.json",
+      "bytes": 1723,
+      "sha256": "02b7672a742c39a65426eb8011de71645b8f56b439463c4b02900ef004619646"
+    },
+    {
+      "location": "prepared",
+      "filename": "authored-preparation.json",
+      "bytes": 667,
+      "sha256": "608e6152e6eb33f1657098e774e05c5f5b7a1d336ad5e7a626d09cf5f8b0073c"
+    },
+    {
+      "location": "prepared",
+      "filename": "content.json",
+      "bytes": 1600,
+      "sha256": "1485b9415f59bcd0b331069955aa7b1844b81c39ddf9cf24baa7cfc1db40533b"
+    },
+    {
+      "location": "prepared",
+      "filename": "controls.json",
+      "bytes": 378,
+      "sha256": "578c23ba1c25fc05b4a83b4b57bae710a32269572bee7492a4598a4c14f3eb2e"
+    },
+    {
+      "location": "prepared",
+      "filename": "datasets.json",
+      "bytes": 877,
+      "sha256": "cec68ef5a8d67e81b500c3446d22eb24c70a4811243e6cffa0f95ea51b6e8762"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps.json",
+      "bytes": 101,
+      "sha256": "087c2291c1fc076eb71a6d0d7ff5d5b77074bd9ac9b4e63929c77733a8528617"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/color.webp",
+      "bytes": 448,
+      "sha256": "c975f6916939e444e67bc3286fd84237b9712ce7dcbbc3651052362e57b9b905"
+    },
+    {
+      "location": "prepared",
+      "filename": "runtime.json",
+      "bytes": 273624,
+      "sha256": "2a25d854b78536c8144db3b3bb59cfe17b3097c7b124209db647cb1111f606fe"
+    },
+    {
+      "location": "prepared",
+      "filename": "scene.json",
+      "bytes": 396100,
+      "sha256": "1d802e5d8671c3aef1ade3de12f219309e118e285a56f3ae8343a9fecadc0c43"
+    },
+    {
+      "location": "prepared",
+      "filename": "sky.json",
+      "bytes": 1212,
+      "sha256": "7b7808d7d3d9a8f182c0f18ba2f21f8567cf0f86940fdd9f9c822f07be71f022"
+    },
+    {
+      "location": "prepared",
+      "filename": "sun.json",
+      "bytes": 5,
+      "sha256": "38e0b9de817f645c4bec37c0d4a3e58baecccb040f5718dc069a72c7385a0bed"
+    },
+    {
+      "location": "prepared",
+      "filename": "text.json",
+      "bytes": 1315,
+      "sha256": "25d728b119039acc30302a5163de8837f2e2c61eb5bcd83f64acf231adecf1a6"
+    },
+    {
+      "location": "prepared",
+      "filename": "world-navigation.json",
+      "bytes": 1176,
+      "sha256": "e867dc31876421bff0ae3dffe86a2a10440c82f9c286d15d43b15605918203f9"
+    }
+  ]
+}

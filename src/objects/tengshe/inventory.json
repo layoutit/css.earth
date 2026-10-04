@@ -1,0 +1,119 @@
+{
+  "schema": "cssearth-inventory@1",
+  "assets": [
+    {
+      "location": "public",
+      "filename": "tengshe-arrival.webp",
+      "bytes": 18510,
+      "sha256": "0a53c6cb5c0193296c55b7652735acc7d2e8c50f45be25f7ce8eccbf14ad9b52"
+    },
+    {
+      "location": "public",
+      "filename": "tengshe-billboard.webp",
+      "bytes": 3398,
+      "sha256": "449243df9a6164789b3bc5fc173568fddebf89fe4ef6744d26db57452c996b31"
+    },
+    {
+      "location": "public",
+      "filename": "tengshe-dataset-color.webp",
+      "bytes": 44,
+      "sha256": "fe1edb16f355ecdaddc083403a169f82ed044e2a698f5b3778c64aa5dbd2bc95"
+    },
+    {
+      "location": "public",
+      "filename": "tengshe-poles-color@2x.webp",
+      "bytes": 1340,
+      "sha256": "526ca7e94a3726bac3b3e256254fbc5dd38f3ce396c7fcb6fb8fbfda89aca03e"
+    },
+    {
+      "location": "public",
+      "filename": "tengshe-surface-color@2x.webp",
+      "bytes": 38,
+      "sha256": "fede7f96819e0e9da7b12ba0b4e9dc86e611b9b728a873258a74cd3eab43fc73"
+    },
+    {
+      "location": "prepared",
+      "filename": "arrival-billboard.json",
+      "bytes": 373,
+      "sha256": "a96df92d687993128c018e84aacbb7478128e6c195387ce209fd4feebfdb4df4"
+    },
+    {
+      "location": "prepared",
+      "filename": "assets.json",
+      "bytes": 1344,
+      "sha256": "641681b78d56ddb696338750d0b377843d88c52e29080aa587fca663a0c5546d"
+    },
+    {
+      "location": "prepared",
+      "filename": "authored-preparation.json",
+      "bytes": 660,
+      "sha256": "476b7f50df4c8964934cadb857c9cb2c34bb9b8b7449d1670a8dd68383daebae"
+    },
+    {
+      "location": "prepared",
+      "filename": "content.json",
+      "bytes": 1580,
+      "sha256": "cdf03ddadc64e6c617b13cc4d229eaced60fa261d41723d3a32f1632d70d8c12"
+    },
+    {
+      "location": "prepared",
+      "filename": "controls.json",
+      "bytes": 364,
+      "sha256": "a0f84439951a54a8ab2ed54d9bcb5a3cb8e8b9fd600a257eb1450eab2d56b9dd"
+    },
+    {
+      "location": "prepared",
+      "filename": "datasets.json",
+      "bytes": 883,
+      "sha256": "11193371be6c0ffe06d07599432a03827a4df92b69bff7daf71d120fc0e3f9b2"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps.json",
+      "bytes": 101,
+      "sha256": "087c2291c1fc076eb71a6d0d7ff5d5b77074bd9ac9b4e63929c77733a8528617"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/color.webp",
+      "bytes": 450,
+      "sha256": "b4550e4c9e0da5bf55f46b294e4ab0ce2d075d1f7f9e42e58adeafc95a056860"
+    },
+    {
+      "location": "prepared",
+      "filename": "runtime.json",
+      "bytes": 270294,
+      "sha256": "0b129d8be5d5ff8872654fadea0ac4c16b13cb9723f46e22cdc41129eb3c19a3"
+    },
+    {
+      "location": "prepared",
+      "filename": "scene.json",
+      "bytes": 392872,
+      "sha256": "62213332fa93b2b43c8efab8d3414f608c88e270fa15abcfc927d18d09d2f21f"
+    },
+    {
+      "location": "prepared",
+      "filename": "sky.json",
+      "bytes": 1201,
+      "sha256": "ccba623465b7e7ef618cbeb57bc630d73ff790827a7d8956627d4e50d926b739"
+    },
+    {
+      "location": "prepared",
+      "filename": "sun.json",
+      "bytes": 5,
+      "sha256": "38e0b9de817f645c4bec37c0d4a3e58baecccb040f5718dc069a72c7385a0bed"
+    },
+    {
+      "location": "prepared",
+      "filename": "text.json",
+      "bytes": 1552,
+      "sha256": "eb174e8da8e55b31842390cd10b539de2562c56c8cf3af766b91fe83c50c7704"
+    },
+    {
+      "location": "prepared",
+      "filename": "world-navigation.json",
+      "bytes": 1166,
+      "sha256": "e8109be8546dce2dfb5a3a30d17a378b81d2a0dc23e6ca8caaced0bf2fc47a3f"
+    }
+  ]
+}

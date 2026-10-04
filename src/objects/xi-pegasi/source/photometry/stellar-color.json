@@ -3,7 +3,7 @@
   "objectId": "xi-pegasi",
   "spectrum": "measured",
   "measuredSpectrum": {
-    "source": "Pulkovo spectrophotometric catalogue, table 5 (320-1080 nm, 2.5 nm steps, 10 nm resolution, absolute flux in W m^-2 m^-1): Alekseeva et al. (1996, 1997), Baltic Astronomy 5, 603 and 6, 481; VizieR III/201. Xi Pegasi is HR 8665.",
+    "source": "Pulkovo spectrophotometric catalogue, table 5 (320-1080 nm, 2.5 nm steps, 10 nm resolution, absolute flux in W m^-2 m^-1): Alekseeva et al. (1996, 1997), Baltic Astronomy 5, 603 and 6, 481; VizieR III/201. Tugongli is HR 8665.",
     "path": "photometry/pulkovo-table5.dat",
     "format": "pulkovo-blocks",
     "wavelength": {
@@ -15,7 +15,7 @@
       "kind": "flux"
     },
     "service": "https://cdsarc.cds.unistra.fr/ftp/III/201/table5.dat",
-    "checked": "2026-10-02",
+    "checked": "2026-10-03",
     "gaps": [],
     "note": "Ground-based photoelectric scans by Pulkovo astronomers, combined into one absolute energy distribution per star with a stated accuracy of 1.5-2%. The catalogue gives no observation dates. HR 8665's column is read from the raw flux file, which lists seven stars per block."
   },

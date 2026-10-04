@@ -1,0 +1,147 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "phoenicia",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Phoenicia",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 523166.4
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/phoenicia-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Phoenicia",
+      "classification": "star",
+      "color": "#ffdfcc",
+      "distanceAu": 4058647.9,
+      "description": "A star 20 parsecs away, 75% of the Sun's width, measured from its light.",
+      "systemName": "Phoenicia system",
+      "aliases": [
+        "V1703 Aquilae",
+        "HD 192263",
+        "HIP 99711"
+      ],
+      "order": 5662,
+      "context": {
+        "order": 5659
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        335068891986074300,
+        -506255149144176300,
+        -9165533432248226
+      ],
+      "presentationToReference": [
+        0.5518578549994886,
+        -0.008339074681979336,
+        -0.8338964969999644,
+        -0.8338013088399873,
+        0.01259940814238606,
+        -0.5519208569090189,
+        -0.015109111558514906,
+        -0.9998858508589418,
+        4.903262850908026e-8
+      ],
+      "orbitUpReference": [
+        0.008339074681979336,
+        -0.01259940814238606,
+        0.9998858508589418
+      ],
+      "metersPerUnit": 1687633.5483870967,
+      "bodyRadiusM": 523166400
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

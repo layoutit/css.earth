@@ -5,11 +5,11 @@
     {
       "kind": "system-orbits",
       "id": "hd-118203b-orbits",
-      "title": "HD 118203 b: orbits around HD 118203",
+      "title": "HD 118203 b: orbits around Liesma",
       "output": "hd-118203b-system-orbits.svg",
       "system": "hd-118203",
       "highlight": "hd-118203b",
-      "description": "The orbits of HD 118203's planets in this map from above, to scale, with HD 118203 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "description": "The orbits of Liesma's planets in this map from above, to scale, with HD 118203 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
       "metadata": {
         "orbitSource": "Castro-González et al. 2024 (2024A&A...684A.160C), via the NASA Exoplanet Archive ps table (pl_refname CASTRO_GONZALEZ_ET_AL_2024): P 6.1349847 d"
       }

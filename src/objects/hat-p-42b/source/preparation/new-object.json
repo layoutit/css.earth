@@ -1,0 +1,24 @@
+{
+  "host": "hat-p-42",
+  "planets": [
+    {
+      "id": "hat-p-42b",
+      "name": "HAT-P-42 b",
+      "description": "Transiting planet of Lerna with a 4.64-day year, found in 2012.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2013A%26A...558A..86B/abstract",
+        "credit": "Boisse et al. 2013"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "BOISSE_ET_AL__2013"
+      },
+      "text": {
+        "card": "HAT-P-42 b was found in 2012 by HATNet as it crossed its star.",
+        "introduction": "It is the only planet known around Lerna. Its orbit and size follow Boisse et al. 2013's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname BOISSE_ET_AL__2013): disc_year 2012, disc_facility HATNet, sy_pnum 1; pl_orbper 4.64183885, pl_radj 1.28, pl_bmassj 1.044"
+      },
+      "order": 5597
+    }
+  ]
+}

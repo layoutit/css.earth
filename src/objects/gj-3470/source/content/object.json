@@ -2,7 +2,7 @@
   "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "gj-3470",
-  "displayName": "GJ 3470",
+  "displayName": "Kaewkosin",
   "panel": {
     "facts": [
       {
@@ -13,7 +13,7 @@
           "catalogueId": "doi-10-1093-mnras-stw2148",
           "url": "https://ui.adsabs.harvard.edu/abs/2016MNRAS.463.2574A",
           "label": "Awiphan et al. (2016), Monthly Notices of the Royal Astronomical Society 463 2574-2582",
-          "checked": "2026-09-29",
+          "checked": "2026-10-03",
           "path": "source/measurements.json",
           "locator": "radiusKm; radiusSource"
         }
@@ -26,7 +26,7 @@
           "catalogueId": "gaia-dr3-gj-3470",
           "url": "https://gea.esac.esa.int/archive/",
           "label": "Gaia DR3 parallax",
-          "checked": "2026-09-29",
+          "checked": "2026-10-03",
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }

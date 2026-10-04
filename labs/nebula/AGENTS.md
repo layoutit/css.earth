@@ -32,7 +32,7 @@ packages/
   lab/browser/                                 real browser checks and helpers
   reconstruction/src/                         configured scientific methods
 models/                                      object recipes and source evidence
-sources/                                     acquisition metadata and credits
+packages/lab/sources/                        acquisition metadata and credits
 run.mts                                      research CLI entrypoint
 ```
 

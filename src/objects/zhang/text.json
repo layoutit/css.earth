@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "zhang",
+  "card": {
+    "text": "A star 81 parsecs away, 15 times the Sun's width, measured from its light.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 48356: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-upsilon1-hydrae",
+        "url": "https://en.wikipedia.org/wiki/Upsilon1_Hydrae",
+        "label": "Wikipedia, \"Upsilon1 Hydrae\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1353195476",
+        "quote": "Upsilon1 Hydrae, Latinised from υ1 Hydrae formally named Zhang, is a yellow-hued star in the constellation of Hydra."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its brightness, measured band by band, gives 141 times the Sun's luminosity at 5,079 K, so 15.333 solar radii.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 48356: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-upsilon1-hydrae",
+        "url": "https://en.wikipedia.org/wiki/Upsilon1_Hydrae",
+        "label": "Wikipedia, \"Upsilon1 Hydrae\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1353195476",
+        "quote": "It is visible to the naked eye, having an apparent visual magnitude of 4.12."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its spectrum",
+      "summary": "The color of the star's light."
+    }
+  }
+}

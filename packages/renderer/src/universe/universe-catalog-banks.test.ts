@@ -18,16 +18,16 @@ const { parseDatasetBillboards } = await import('@cssearth/objects');
 
 const frame = { referenceFrame: 'fixture', epochJdTt: 1, originM: [0, 0, 0] as const, localToReferenceXyzw: [0, 0, 0, 1] as const,
   metersPerUnit: 1, boundsUnits: { min: [-1, -1, -1] as const, max: [1, 1, 1] as const } };
-const plan = parseDatasetBillboards({ schema: 'cssearth-dataset-billboards@1', atlas: { columns: 1, rows: 1, cellPx: 256 },
+const plan = parseDatasetBillboards({ schema: 'cssearth-dataset-billboards@2', imagePx: 256,
   banks: [{ id: 'galaxy', contextVisibility: 'galactic', attached: false,
-    billboard: { cell: 0, radiusUnits: 1, back: [0, 0, 1], right: [1, 0, 0], down: [0, 1, 0] } }] });
+    billboard: { radiusUnits: 1, back: [0, 0, 1], right: [1, 0, 0], down: [0, 1, 0] } }] });
 
 test('a galaxy drawn from image layers shows its billboard from afar and hands it to its slices once they load', async () => {
   const { document } = parseHTML('<div id="root"><span></span></div>');
   const root = document.getElementById('root')!, lifetime = createSceneLifetime();
-  const banks = createUniverseCatalogBanks({ prepareBillboardAtlas: () => true, root, end: root.firstElementChild!, stage: root, lifetime, declarations: [{ id: 'galaxy', frame }],
+  const banks = createUniverseCatalogBanks({ prepareBillboardImage: () => true, root, end: root.firstElementChild!, stage: root, lifetime, declarations: [{ id: 'galaxy', frame }],
     initialImages: new Map(), volumeDeclarations: [], catalogBank: undefined, loadCatalog: undefined,
-    loadImageLayer: async () => ({ payload: { id: 'galaxy', frame } }) as never, billboards: { plan, atlasUrl: '/atlas.webp' } });
+    loadImageLayer: async () => ({ payload: { id: 'galaxy', frame } }) as never, billboards: { plan, imageUrl: id => `/billboards/${id}.webp` } });
   const billboard = root.querySelector<HTMLElement>('[data-dataset-billboard="galaxy"]')!;
   const publish = (volumeOpacity: number, detailed?: string) => banks.publishImages({ referenceFrame: 'fixture', epochJdTt: 1,
     pose: { positionM: [0, 0, 10], orientationXyzw: [0, 0, 0, 1] } },
@@ -45,7 +45,7 @@ test('a galaxy drawn from image layers shows its billboard from afar and hands i
 test('a package of catalogue dots mounts them when its row is selected, and hides them when another is', () => {
   const { document } = parseHTML('<div id="root"><span></span></div>');
   const root = document.getElementById('root')!, lifetime = createSceneLifetime();
-  const banks = createUniverseCatalogBanks({ prepareBillboardAtlas: () => true, root, end: root.firstElementChild!, stage: root, lifetime, declarations: [],
+  const banks = createUniverseCatalogBanks({ prepareBillboardImage: () => true, root, end: root.firstElementChild!, stage: root, lifetime, declarations: [],
     initialImages: new Map(), volumeDeclarations: [], catalogBank: undefined, loadCatalog: undefined, loadImageLayer: undefined,
     pointBanks: [{ id: 'cluster', url: '/cluster/dots.bin' }] });
   const publish = (selected?: string) => banks.publishPoints({ referenceFrame: 'fixture', epochJdTt: 1,
@@ -65,7 +65,7 @@ test('a package of catalogue dots mounts them when its row is selected, and hide
 test('a bank that belongs to a body draws while that body or one of its system is selected', () => {
   const { document } = parseHTML('<div id="root"><span></span></div>');
   const root = document.getElementById('root')!, lifetime = createSceneLifetime();
-  const banks = createUniverseCatalogBanks({ prepareBillboardAtlas: () => true, root, end: root.firstElementChild!, stage: root, lifetime, declarations: [],
+  const banks = createUniverseCatalogBanks({ prepareBillboardImage: () => true, root, end: root.firstElementChild!, stage: root, lifetime, declarations: [],
     initialImages: new Map(), volumeDeclarations: [], catalogBank: undefined, loadCatalog: undefined, loadImageLayer: undefined,
     pointBanks: [{ id: 'minor-moons', url: '/minor-moons/dots.bin', host: 'planet' }] });
   const publish = (...system: string[]) => banks.publishPoints({ referenceFrame: 'fixture', epochJdTt: 1,
@@ -86,7 +86,7 @@ test('a bank that belongs to a body draws while that body or one of its system i
 test('a bank of plain-dot stars draws while the selected body is inside its host, dimmed as the other stars are', () => {
   const { document } = parseHTML('<div id="root"><span></span></div>');
   const root = document.getElementById('root')!, lifetime = createSceneLifetime();
-  const banks = createUniverseCatalogBanks({ prepareBillboardAtlas: () => true, root, end: root.firstElementChild!, stage: root, lifetime, declarations: [],
+  const banks = createUniverseCatalogBanks({ prepareBillboardImage: () => true, root, end: root.firstElementChild!, stage: root, lifetime, declarations: [],
     initialImages: new Map(), volumeDeclarations: [], catalogBank: undefined, loadCatalog: undefined, loadImageLayer: undefined,
     pointBanks: [{ id: 'cloud/plain-stars', url: '/world/dots/cloud.bin', host: 'cloud', stars: true }, { id: 'group-members', url: '/group/dots.bin', host: 'group' }] });
   let asked = 0;
@@ -113,7 +113,7 @@ test('a bank of plain-dot stars draws while the selected body is inside its host
 test('a package of catalogue dots declared after mount draws while its host is selected, mounted once', () => {
   const { document } = parseHTML('<div id="root"><span></span></div>');
   const root = document.getElementById('root')!, lifetime = createSceneLifetime();
-  const banks = createUniverseCatalogBanks({ prepareBillboardAtlas: () => true, root, end: root.firstElementChild!, stage: root, lifetime, declarations: [],
+  const banks = createUniverseCatalogBanks({ prepareBillboardImage: () => true, root, end: root.firstElementChild!, stage: root, lifetime, declarations: [],
     initialImages: new Map(), volumeDeclarations: [], catalogBank: undefined, loadCatalog: undefined, loadImageLayer: undefined });
   const publish = (...system: string[]) => banks.publishPoints({ referenceFrame: 'fixture', epochJdTt: 1,
     pose: { positionM: [0, 0, 10], orientationXyzw: [0, 0, 0, 1] } },

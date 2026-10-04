@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "yuyu",
+  "card": {
+    "text": "A star 102 parsecs away, 21 times the Sun's width, measured from its light.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 43103: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-iota-cancri",
+        "url": "https://en.wikipedia.org/wiki/Iota_Cancri",
+        "label": "Wikipedia, \"Iota Cancri\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1370780382",
+        "quote": "Iota Cancri, also named Yuyu, is a double star in the constellation Cancer."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its brightness, measured band by band, gives 257 times the Sun's luminosity at 5,004 K, so 21.353 solar radii.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 43103: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-iota-cancri",
+        "url": "https://en.wikipedia.org/wiki/Iota_Cancri",
+        "label": "Wikipedia, \"Iota Cancri\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1370780382",
+        "quote": "The brighter component is located at a distance of approximately 347 light-years (106 pc) from Earth based on parallax measurements, and is drifting further away with a line of sight velocity of 16 km/s."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its spectrum",
+      "summary": "The color of the star's light."
+    }
+  }
+}

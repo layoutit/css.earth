@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "wasp-64",
+  "angularDiameterMas": 0.03,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 736,051 km at 360.73 pc = 0.03 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 360.73142392243903,
+  "distanceSource": "Gaia DR3 parallax 2.7721 +/- 0.0102 mas (same row, RUWE 1.06): 360.73 pc, no zero-point correction",
+  "radiusKm": 736050.6,
+  "radiusSource": "Radius 1.058 +/- 0.025 solar radii from Gillon et al. 2013, the stellar radius of the default parameter set of WASP-64 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2013A&A...552A..82G/abstract): 736,051 km at 695,700 km per solar radius. Mass 1.004 +/- 0.028 solar masses from Gillon et al. 2013, the stellar mass of the default parameter set of WASP-64 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2013A&A...552A..82G/abstract); GM is that mass times the JPL solar GM. Temperature 5400 +/- 100 K from Gillon et al. 2013, the stellar temperature of the default parameter set of WASP-64 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2013A&A...552A..82G/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 5400,
+  "effectiveTemperatureSource": "Gillon et al. 2013, the stellar temperature of the default parameter set of WASP-64 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2013A&A...552A..82G/abstract)",
+  "surfaceGravityLogg": 4.39,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/wasp-64.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.391, rounded to two decimals",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

@@ -35,6 +35,7 @@ import { createUniverseDatasetBanks } from './universe-dataset-banks.js';
 import { createUniverseCatalogBanks } from './universe-catalog-banks.js';
 import { createUniverseBackground } from './universe-background.js';
 import { createVolumeTextureReadiness } from '../volume/volume-texture-readiness.js';
+import { reservePointLayer } from './point-layer.js';
 
 /** Prepared, route-independent surroundings. One application owner holds the decoded bank and DOM. */
 // Galaxy files download from this fraction of the volume's fade-start distance:
@@ -202,33 +203,41 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
         const background = createUniverseBackground({ root, end, lifetime, plan, payload, sky, resolveResource,
           prefetchUrls: galaxyUrls, prefetchDistanceM: galaxyPrefetchDistanceM, cataloguePointUrls: galaxyCataloguePoints,
           ...(galaxyBacking ? { backingUrl: galaxyBacking } : {}) });
-        // Both billboard layers sample one atlas. Keep one demand-driven decode lease
-        // for the universe lifetime, and publish again when its pixels are ready.
+        // Both billboard layers draw their banks' own images. Keep one demand-driven decode lease
+        // for the universe lifetime, and publish again when an image's pixels are ready.
         const billboardTextures = own(createVolumeTextureReadiness(() => { requestPublication?.(); }));
-        const prepareBillboardAtlas = () => datasetBillboards !== undefined && billboardTextures.ready([datasetBillboards.atlasUrl]);
+        // Each billboard asks for its own image when it first shows; the lease keeps every image asked for.
+        const billboardImages = new Set<string>();
+        const prepareBillboardImage = (url: string) => {
+          if (!billboardImages.has(url)) { billboardImages.add(url); billboardTextures.ready([...billboardImages]); }
+          return billboardTextures.decoded(url);
+        };
         const datasets = createUniverseDatasetBanks({ root, end, frontRoot, frontEnd, lifetime,
           declarations: [...declaredVolumes], facts: [...datasetFacts], frame: plan.frame, visibility: datasetVisibility,
-          billboards: datasetBillboards, load: loadVolumeDataset, warmDomNodeBudget: warmVolumeDatasetDomNodeBudget, requestPublication, prepareBillboardAtlas });
+          billboards: datasetBillboards, load: loadVolumeDataset, warmDomNodeBudget: warmVolumeDatasetDomNodeBudget, requestPublication, prepareBillboardImage });
         // A cut-open mesh draws the inside of its far wall here, behind the points it holds; its outer shell stays over them.
         const meshInterior = document.createElement('span'); meshInterior.hidden = true; root.insertBefore(meshInterior, end);
+        // The galaxies' billboards and image slices mount here, and every dot of the world paints in one layer just after
+        // them (point-layer.ts): over the galaxies' pictures, inside a cut-open mesh, under the markers and the labels.
+        const galaxyImages = document.createElement('span'); galaxyImages.hidden = true; root.insertBefore(galaxyImages, end);
+        const dots = document.createElement('span'); dots.hidden = true; root.insertBefore(dots, end);
+        reservePointLayer(root, dots);
         // Our galaxy's disc, as its volume frames it: the centre, the frame's z axis and its reach in the plane.
         const [gx, gy, gz, gw] = payload.frame.localToReferenceXyzw;
         const galaxyDisc = { centreM: payload.frame.originM, normal: [2 * (gx * gz + gw * gy), 2 * (gy * gz - gw * gx), 1 - 2 * (gx * gx + gy * gy)],
           radiusM: Math.max(...[payload.frame.boundsUnits.min, payload.frame.boundsUnits.max].flatMap(bound => [Math.abs(bound[0]), Math.abs(bound[1])])) * payload.frame.metersPerUnit };
         const additionalPoints = own(mountBackgroundPoints(root, end, backgroundCataloguePoints, target => fetchPreparedCatalogueBank(target), galaxyDisc));
-        // The places of the stars a body marker draws: a bank of plain-dot stars leaves its dot out there. Such a bank mounts
-        // here whenever it is first shown (`starDots` marks the place), so every layer mounted after this paints over it.
+        // The places of the stars a body marker draws: a bank of plain-dot stars leaves its dot out there.
         let starPlaces: readonly (readonly number[])[] = [], starPlacesFor: unknown = null, starPlacesSelected: unknown = null;
-        const starDots = document.createElement('span'); starDots.hidden = true; root.insertBefore(starDots, end);
         // Over the galaxies: a mesh seen from outside hides what lies inside it.
         const meshes = imageMeshes.map(mesh => ({ cutaway: () => mesh.cutaway?.() ?? true, hidden: () => mesh.hidden?.() ?? false,
           runtime: own(mountImageMesh({ host: root, before: end, interiorBefore: meshInterior, labelHost: frontRoot, url: mesh.url,
             fetchJson: fetchPreparedJson, resolveResource: mesh.resolveResource, cutaway: mesh.cutaway?.() ?? true,
             hidden: mesh.hidden?.() ?? false, hiddenCaption: mesh.hiddenCaption })) }));
-        const catalogBanks = createUniverseCatalogBanks({ root, end, stage, lifetime, starsBefore: starDots,
+        const catalogBanks = createUniverseCatalogBanks({ root, end, stage, lifetime, imagesBefore: galaxyImages,
           declarations: declaredImageLayers, initialImages: initialImageLayers, volumeDeclarations: [...declaredVolumes],
           pointBanks: [...declaredPoints],
-          initialCatalog: catalog, catalogBank, loadCatalog, loadImageLayer, requestPublication, billboards: datasetBillboards, stellarExtents, prepareBillboardAtlas });
+          initialCatalog: catalog, catalogBank, loadCatalog, loadImageLayer, requestPublication, billboards: datasetBillboards, stellarExtents, prepareBillboardImage });
         let labelBudget = createLabelBudget(0, 0);
         let labelBlockers: readonly LabelScreenRect[] = [];
         let overview = false;

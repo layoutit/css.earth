@@ -1,0 +1,30 @@
+{
+ "id": "wasp-71",
+ "classification": "star",
+ "order": 5631,
+ "physical": {
+  "name": "Mpingo",
+  "horizonsCode": null,
+  "meanRadiusKm": 1266174,
+  "gravitationalParameterKm3PerS2": 100861454431.87393,
+  "parent": null,
+  "effectiveTemperatureK": 6050
+ },
+ "physicalNotes": "Radius 1.82 +/- 0.19 solar radii from Stassun et al. 2017, the stellar radius of the default parameter set of WASP-71 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract): 1,266,174 km at 695,700 km per solar radius. Mass 0.76 +/- 0.27 solar masses from Stassun et al. 2017, the stellar mass of the default parameter set of WASP-71 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract); GM is that mass times the JPL solar GM. Temperature 6050 +/- 100 K from Stassun et al. 2017, the stellar temperature of the default parameter set of WASP-71 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 29.263453872908574,
+  "declinationDegrees": 0.7588237656525679,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 355.13602692090063,
+  "properMotionRaMasPerYear": 23.417993004601733,
+  "properMotionDecMasPerYear": -6.843532950264728,
+  "radialVelocityKmPerS": 7.521127,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 2507901914613201024 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/wasp-71/source/photometry/gaia-dr3-source.csv",
+   "distance": "Gaia DR3 parallax 2.8158 +/- 0.0265 mas (same row, RUWE 0.98): 355.14 pc, no zero-point correction",
+   "properMotion": "Gaia DR3 (same row): 23.418, -6.844 mas/yr",
+   "radialVelocity": "Gaia DR3 (same row): 7.52 +/- 0.40 km/s"
+  }
+ }
+}

@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "mekbuda",
+  "card": {
+    "text": "A star 422 parsecs away, 79 times the Sun's width, measured from its light.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 34088: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-zeta-geminorum",
+        "url": "https://en.wikipedia.org/wiki/Zeta_Geminorum",
+        "label": "Wikipedia, \"Zeta Geminorum\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1377232741",
+        "quote": "Zeta Geminorum is a bright star with cluster components, distant optical components and a likely spectroscopic partner in the zodiac constellation of Gemini — in its south, on the left 'leg' of the twin Pollux."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its brightness, measured band by band, gives 4,497 times the Sun's luminosity at 5,335 K, so 78.606 solar radii.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 34088: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-zeta-geminorum",
+        "url": "https://en.wikipedia.org/wiki/Zeta_Geminorum",
+        "label": "Wikipedia, \"Zeta Geminorum\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1377232741",
+        "quote": "It is a classical Cepheid variable star, of which over 800 have been found in our galaxy."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its spectrum",
+      "summary": "The color of the star's light."
+    }
+  }
+}

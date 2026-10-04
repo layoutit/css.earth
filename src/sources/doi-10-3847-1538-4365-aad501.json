@@ -1,0 +1,54 @@
+{
+  "id": "doi-10-3847-1538-4365-aad501",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Brewer & Fischer (2018): Spectral Properties of Cool Stars: Extended Abundance Analysis of Kepler Objects of Interest",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1804.00673"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-4365/aad501"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2018ApJS..237...38B"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2018ApJS..237...38B",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-4365/aad501",
+      "label": "The Astrophysical Journal Supplement Series 237 38"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2018ApJS..237...38B",
+      "checkedOn": "2026-10-03",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Brewer & Fischer (2018), The Astrophysical Journal Supplement Series 237 38",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2018ApJS..237...38B"
+    }
+  ],
+  "publisher": "The Astrophysical Journal Supplement Series 237 38",
+  "creators": [
+    "John M. Brewer",
+    "Debra A. Fischer"
+  ],
+  "publicationDate": "2018"
+}

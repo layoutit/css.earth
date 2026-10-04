@@ -1,4 +1,4 @@
-/* LHS 3844: the Sun's emissive presentation (body-surfaces.css, SUN block) scoped to this object, loaded after the shared
+/* Batsũ̀: the Sun's emissive presentation (body-surfaces.css, SUN block) scoped to this object, loaded after the shared
    body-surfaces.css base rules. No spin: the rotation axis and period are unmeasured. Both plates are transparent: no observation is cast. */
 .object-stage[data-object-id="lhs-3844"] > :is(.polycss-camera, .lhs-3844-corona-layer, .lhs-3844-limb-layer) {
   --lhs-3844-scene-side-padding: 16px;

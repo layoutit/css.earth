@@ -1,0 +1,73 @@
+{
+  "id": "atria",
+  "name": "Atria",
+  "system": "Atria system",
+  "description": "A star 120 parsecs away, 112 times the Sun's width, measured from its light.",
+  "aliases": [
+    "HD 150798",
+    "HIP 82273",
+    "HR 6217",
+    "Alpha Trianguli Australis"
+  ],
+  "featured": true,
+  "target": "HIP 82273",
+  "paper": {
+    "url": "https://doi.org/10.1093/mnras/stx1433",
+    "credit": "McDonald, Zijlstra & Watson (2017), MNRAS 471, 770"
+  },
+  "radius": {
+    "value": 111.552,
+    "source": "McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 82273: radius 111.552 solar radii, implied by the fitted luminosity 3713.19 solar luminosities (fractional uncertainty 0.061) and temperature",
+    "url": "https://doi.org/10.1093/mnras/stx1433"
+  },
+  "mass": "unmeasured",
+  "temperature": {
+    "value": 4269,
+    "source": "McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 82273: effective temperature 4269 +/- 125 K, from the fit of a model atmosphere to the star's spectral energy distribution (goodness of fit Q 0.065)",
+    "url": "https://doi.org/10.1093/mnras/stx1433",
+    "uncertainty": 125
+  },
+  "radialVelocity": {
+    "value": -3,
+    "source": "Anderson & Francis (2012), Astronomy Letters 38, 331 (XHIP), Hipparcos astrometry, HIP 82273: RV -3 +/- 0.1 km/s (quality A)",
+    "url": "https://doi.org/10.1134/S1063773712050015",
+    "uncertainty": 0.1
+  },
+  "distance": {
+    "value": 119.76,
+    "source": "McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 82273: distance 119.76 pc, the paper's parallax inverted (Gaia DR1's where it revised the star's, else the Hipparcos reduction of van Leeuwen 2007; section 2.3; fractional uncertainty 0.018), at which the luminosity and radius hold",
+    "url": "https://doi.org/10.1093/mnras/stx1433",
+    "uncertainty": 2.156
+  },
+  "position": {
+    "catalogue": "V/137D/XHIP",
+    "row": {
+      "HIP": "82273"
+    },
+    "credit": "Anderson & Francis (2012), Astronomy Letters 38, 331 (XHIP), Hipparcos astrometry",
+    "url": "https://doi.org/10.1134/S1063773712050015",
+    "motion": {
+      "epoch": 1991.25,
+      "ra": "pmRA",
+      "dec": "pmDE"
+    }
+  },
+  "limb": {
+    "none": "no mass is measured and no spectroscopic surface gravity is published with this radius: McDonald, Zijlstra & Watson (2017), MNRAS 471, 770 assume the gravity of their fit (table column 15)"
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A star 120 parsecs away, 112 times the Sun's width, measured from its light.",
+    "introduction": "Its brightness, measured band by band, gives 3,713 times the Sun's luminosity at 4,269 K, so 111.552 solar radii.",
+    "locator": "Table 2, HIP 82273: D, Teff, L, Rad, Q",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/Alpha_Trianguli_Australis",
+      "title": "Alpha Trianguli Australis",
+      "revision": "1374619062",
+      "card": "Alpha Trianguli Australis, officially named Atria, is the brightest star in the southern constellation of Triangulum Australe, forming an apex of a triangle with Beta Trianguli Australis and Gamma Trianguli Australis that gives the constellation its name."
+    }
+  },
+  "notes": [],
+  "order": 5494
+}

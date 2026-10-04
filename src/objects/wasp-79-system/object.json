@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "wasp-79-system",
+  "parent": "milky-way",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "wasp-79"
+    },
+    "catalog": {
+      "name": "Montuno system",
+      "systemName": "Montuno system",
+      "classification": "planetary-system",
+      "color": "#eaebff",
+      "distanceAu": 50669459.5,
+      "description": "WASP-79 b crosses Montuno as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        2615086554300819000,
+        5977419836411906000,
+        -3858604693990932500
+      ],
+      "presentationToReference": [
+        0.3449962297728482,
+        -0.20403373720443246,
+        0.91615928501812,
+        0.7885732515965966,
+        -0.46636901954491305,
+        -0.40081437658233676,
+        -0.5090479626802281,
+        -0.8607381551268127,
+        5.84314994989133e-9
+      ],
+      "orbitUpReference": [
+        0.20403373720443246,
+        0.46636901954491305,
+        0.8607381551268127
+      ],
+      "metersPerUnit": 3388732.2580645164,
+      "bodyRadiusM": 1050507000
+    }
+  }
+}

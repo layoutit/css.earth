@@ -1,4 +1,4 @@
-/* HD 149026: the Sun's emissive presentation (body-surfaces.css, SUN block) scoped to this object, loaded after the shared
+/* Ogma: the Sun's emissive presentation (body-surfaces.css, SUN block) scoped to this object, loaded after the shared
    body-surfaces.css base rules. No spin: the rotation axis and period are unmeasured. Both plates are transparent: no observation is cast. */
 .object-stage[data-object-id="hd-149026"] > :is(.polycss-camera, .hd-149026-corona-layer, .hd-149026-limb-layer) {
   --hd-149026-scene-side-padding: 16px;

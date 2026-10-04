@@ -1,4 +1,4 @@
-# GJ 367 credits
+# Añañuca credits
 
 Radius, mass and temperature: Radius 0.457 +/- 0.015 solar radii from Lee et al. 2026, the stellar radius of the default parameter set of GJ 367 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026arXiv260618355L/abstract); Mass 0.451 +/- 0.019 solar masses from Lee et al. 2026, the stellar mass of the default parameter set of GJ 367 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026arXiv260618355L/abstract); temperature from Lee et al. 2026, the stellar temperature of the default parameter set of GJ 367 b in the NASA Exoplanet Archive.
 

@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "waiping",
+  "card": {
+    "text": "A star 95 parsecs away, 35 times the Sun's width, measured from its light.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 3786: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-delta-piscium",
+        "url": "https://en.wikipedia.org/wiki/Delta_Piscium",
+        "label": "Wikipedia, \"Delta Piscium\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1375891855",
+        "quote": "Delta Piscium, also named Waiping, is a solitary, orange-hued star in the zodiac constellation of Pisces."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its brightness, measured band by band, gives 291 times the Sun's luminosity at 4,041 K, so 34.829 solar radii.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 3786: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-delta-piscium",
+        "url": "https://en.wikipedia.org/wiki/Delta_Piscium",
+        "label": "Wikipedia, \"Delta Piscium\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1375891855",
+        "quote": "It has an apparent visual magnitude of +4.4, so it is bright enough to be faintly visible to the naked eye."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its spectrum",
+      "summary": "The color of the star's light."
+    }
+  }
+}

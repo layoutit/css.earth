@@ -1,0 +1,148 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "alchiba",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Alchiba",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 953109
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/alchiba-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Alchiba",
+      "classification": "star",
+      "color": "#dee5ff",
+      "distanceAu": 3080983.7,
+      "description": "A star 15 parsecs away, 1.4 times the Sun's width, measured from its light.",
+      "systemName": "Alchiba system",
+      "aliases": [
+        "HD 105452",
+        "HIP 59199",
+        "HR 4623",
+        "Alpha Corvi"
+      ],
+      "order": 5468,
+      "context": {
+        "order": 5465
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -418358832821424700,
+        -15371203584133960,
+        -192811705139700130
+      ],
+      "presentationToReference": [
+        -0.907683711758155,
+        0.418045714830936,
+        -0.0367159327871513,
+        -0.0333498184497269,
+        0.015357386958899958,
+        0.9993257428262143,
+        -0.41832770529611013,
+        -0.9082961691966372,
+        -0.000002098695537422736
+      ],
+      "orbitUpReference": [
+        -0.418045714830936,
+        -0.015357386958899958,
+        0.9082961691966372
+      ],
+      "metersPerUnit": 3074545.1612903224,
+      "bodyRadiusM": 953109000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

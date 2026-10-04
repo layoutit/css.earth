@@ -1,0 +1,148 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "nuchuang",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Nüchuang",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 47050886.7
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/nuchuang-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Nüchuang",
+      "classification": "star",
+      "color": "#ffd397",
+      "distanceAu": 23817958.4,
+      "description": "A star 115 parsecs away, 68 times the Sun's width, measured from its light.",
+      "systemName": "Nüchuang system",
+      "aliases": [
+        "Pi Herculis",
+        "HD 156283",
+        "HIP 84380",
+        "HR 6418"
+      ],
+      "order": 5651,
+      "context": {
+        "order": 5648
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -555980868850544100,
+        -2798053793070593000,
+        2134847746018487600
+      ],
+      "presentationToReference": [
+        -0.15603784809712512,
+        -0.11676915737398487,
+        -0.9808247314619408,
+        -0.7852829426196625,
+        -0.5876630445065552,
+        0.19489188323758005,
+        0.5991518088029297,
+        -0.8006354413885611,
+        -8.493611466323295e-7
+      ],
+      "orbitUpReference": [
+        0.11676915737398487,
+        0.5876630445065552,
+        0.8006354413885611
+      ],
+      "metersPerUnit": 151777053.87096775,
+      "bodyRadiusM": 47050886700
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

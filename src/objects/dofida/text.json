@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "dofida",
+  "card": {
+    "text": "A star about 38 parsecs away, 1.2 times the Sun's width, measured by Gaia.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202243688",
+        "url": "https://doi.org/10.1051/0004-6361/202243688",
+        "label": "Creevey et al. (2023), Astronomy & Astrophysics 674 A26",
+        "checked": "2026-10-03",
+        "locator": "gaiadr3.astrophysical_parameters, Gaia DR3 6083860761505899904: radius_flame, mass_flame, teff_gspphot"
+      },
+      {
+        "catalogueId": "wikipedia-hd-117618",
+        "url": "https://en.wikipedia.org/wiki/HD_117618",
+        "label": "Wikipedia, \"HD 117618\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374407791",
+        "quote": "HD 117618, named Dofida by the IAU, is a single, yellow-hued star in the southern constellation of Centaurus."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Gaia's parallax, brightness and spectrum give it 1.2 solar radii and 1.03 solar masses (FLAME) and 5,847 K at its surface (GSP-Phot).",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202243688",
+        "url": "https://doi.org/10.1051/0004-6361/202243688",
+        "label": "Creevey et al. (2023), Astronomy & Astrophysics 674 A26",
+        "checked": "2026-10-03",
+        "locator": "gaiadr3.astrophysical_parameters, Gaia DR3 6083860761505899904: radius_flame, mass_flame, teff_gspphot"
+      },
+      {
+        "catalogueId": "wikipedia-hd-117618",
+        "url": "https://en.wikipedia.org/wiki/HD_117618",
+        "label": "Wikipedia, \"HD 117618\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374407791",
+        "quote": "With an apparent visual magnitude of 7.17, it is too faint to be visible to the naked eyes of a typical observer."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its temperature",
+      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

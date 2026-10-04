@@ -1,11 +1,13 @@
 {
   "id": "sigma-bootis",
-  "name": "Sigma Bootis",
-  "system": "Sigma Bootis system",
+  "name": "Genghe",
+  "system": "Genghe system",
   "description": "A naked-eye star 15.8 parsecs away, 1.4 times the Sun's width: its disc was measured with the CHARA Array.",
   "aliases": [
-    "HD 128167"
+    "HD 128167",
+    "Sigma Bootis"
   ],
+  "order": 5350,
   "target": "HD 128167",
   "paper": {
     "url": "https://doi.org/10.1088/0004-637X/746/1/101",
@@ -42,6 +44,5 @@
     "introduction": "Its disc spans 0.841 milliarcseconds, which gives 1.431 solar radii and 6,594 K at its surface.",
     "locator": "Tables 5 and 10, HD 128167: limb-darkened diameter, R, Teff"
   },
-  "notes": [],
-  "order": 5350
+  "notes": []
 }

@@ -1,0 +1,148 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "angetenar",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Angetenar",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 5833444.5
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/angetenar-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Angetenar",
+      "classification": "star",
+      "color": "#ffe7d1",
+      "distanceAu": 11820404.6,
+      "description": "A star 57 parsecs away, 8.4 times the Sun's width, measured from its light.",
+      "systemName": "Angetenar system",
+      "aliases": [
+        "HD 17824",
+        "HIP 13288",
+        "HR 850",
+        "Tau2 Eridani"
+      ],
+      "order": 5485,
+      "context": {
+        "order": 5482
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1212046216986462500,
+        1120767977726205300,
+        -633824919517188100
+      ],
+      "presentationToReference": [
+        0.6854276406433452,
+        -0.2631666995979971,
+        0.6789199051911756,
+        0.6338086286787382,
+        -0.24334925493646753,
+        -0.7342123414477882,
+        -0.3584348917927419,
+        -0.9335547270217015,
+        9.806773028606679e-7
+      ],
+      "orbitUpReference": [
+        0.2631666995979971,
+        0.24334925493646753,
+        0.9335547270217015
+      ],
+      "metersPerUnit": 18817562.903225806,
+      "bodyRadiusM": 5833444500
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "wasp-60-system",
+  "parent": "milky-way",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "wasp-60"
+    },
+    "catalog": {
+      "name": "Morava system",
+      "systemName": "Morava system",
+      "classification": "planetary-system",
+      "color": "#fff0eb",
+      "distanceAu": 88743757.8,
+      "description": "WASP-60 b crosses Morava as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        11341782530459089000,
+        -660552509885606800,
+        6868519129501915000
+      ],
+      "presentationToReference": [
+        0.8543149520930228,
+        0.5164933706379998,
+        -0.05814258953034216,
+        -0.04975583726094127,
+        -0.030081844631138704,
+        -0.9983082886974599,
+        0.5173686493099083,
+        -0.8557626310552393,
+        8.09559101672372e-7
+      ],
+      "orbitUpReference": [
+        -0.5164933706379998,
+        0.030081844631138704,
+        0.8557626310552393
+      ],
+      "metersPerUnit": 2625706.4516129033,
+      "bodyRadiusM": 813969000
+    }
+  }
+}

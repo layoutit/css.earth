@@ -1,0 +1,148 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "azha",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Azha",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 7821755.1
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/azha-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Azha",
+      "classification": "star",
+      "color": "#ffdeb5",
+      "distanceAu": 8633786.5,
+      "description": "A star 42 parsecs away, 11 times the Sun's width, measured from its light.",
+      "systemName": "Azha system",
+      "aliases": [
+        "HD 18322",
+        "HIP 13701",
+        "HR 874",
+        "Eta Eridani"
+      ],
+      "order": 5498,
+      "context": {
+        "order": 5495
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        916246517834981800,
+        888135948942311800,
+        -199818135746122900
+      ],
+      "presentationToReference": [
+        0.7093921689243978,
+        -0.1110770936627231,
+        0.6960061996363118,
+        0.6876279198304391,
+        -0.1076683509776035,
+        -0.718035772136338,
+        -0.1546951664998041,
+        -0.9879622490061076,
+        -6.258315936744174e-7
+      ],
+      "orbitUpReference": [
+        0.1110770936627231,
+        0.1076683509776035,
+        0.9879622490061076
+      ],
+      "metersPerUnit": 25231468.06451613,
+      "bodyRadiusM": 7821755100
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

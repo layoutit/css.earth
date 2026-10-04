@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "wasp-21",
+  "angularDiameterMas": 0.04,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 790,315 km at 255.82 pc = 0.04 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 255.8244183482429,
+  "distanceSource": "Gaia DR3 parallax 3.9089 +/- 0.0197 mas (same row, RUWE 0.91): 255.82 pc, no zero-point correction",
+  "radiusKm": 790315.2,
+  "radiusSource": "Radius 1.136 +/- 0.051 solar radii from Chen et al. 2020, the stellar radius of WASP-21 b's parameter set from Chen et al. 2020 (the default leaves it empty) in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2020A&A...642A..54C/abstract): 790,315 km at 695,700 km per solar radius. Mass 0.89 +/- 0.079 solar masses from Chen et al. 2020, the stellar mass of WASP-21 b's parameter set from Chen et al. 2020 (the default leaves it empty) in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2020A&A...642A..54C/abstract); GM is that mass times the JPL solar GM. Temperature 5800 +/- 100 K from Chen et al. 2020, the stellar temperature of WASP-21 b's parameter set from Chen et al. 2020 (the default leaves it empty) in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2020A&A...642A..54C/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 5800,
+  "effectiveTemperatureSource": "Chen et al. 2020, the stellar temperature of WASP-21 b's parameter set from Chen et al. 2020 (the default leaves it empty) in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2020A&A...642A..54C/abstract)",
+  "surfaceGravityLogg": 4.28,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/wasp-21.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.277, rounded to two decimals",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

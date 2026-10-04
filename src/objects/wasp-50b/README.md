@@ -2,7 +2,7 @@
 
 ## Sources
 
-It is the only planet known around WASP-50. Its orbit and size follow Chakrabarty & Sengupta 2019's fit, the archive's default. The introduction is generated from Chakrabarty & Sengupta 2019's published values; the sections below are the data's own.
+It is the only planet known around Chaophraya. Its orbit and size follow Chakrabarty & Sengupta 2019's fit, the archive's default. The introduction is generated from Chakrabarty & Sengupta 2019's published values; the sections below are the data's own.
 
 **Size and mass.** Radius 1.166 Jupiter radii from Chakrabarty & Sengupta 2019 (2019AJ....158...39C), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2019AJ....158...39C/abstract): 83,359.7 km at 71,492 km per Jupiter radius. GM from the mass 1.4688 Jupiter masses (Chakrabarty & Sengupta 2019, the mass the NASA Exoplanet Archive's composite table adopts (2019AJ....158...39C), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2019AJ....158...39C/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.
 
@@ -10,11 +10,12 @@ It is the only planet known around WASP-50. Its orbit and size follow Chakrabart
 
 **Color.** No image or measured color exists. The neutral gray is lit by wasp-50's measured color (#ffebde, the color dataset of wasp-50 (src/objects/wasp-50/source/photometry/stellar-color.json)) at the gray's own brightness.
 
-**Charts.** The orbits of WASP-50's planets from above, from their hosted-orbit records, and its transit in 2 TESS sectors (4, 31), folded onto its orbit. Upper limits and rows without an error are left out.
+**Charts.** The orbits of Chaophraya's planets from above, from their hosted-orbit records, and its transit in 2 TESS sectors (4, 31), folded onto its orbit. Upper limits and rows without an error are left out.
 
 ## Evidence
 
-Generated 2026-09-29 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/wasp-50b.json).
+Generated 2026-10-03 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/wasp-50b.json).
+
 
 ## Known problems
 

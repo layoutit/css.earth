@@ -1,4 +1,4 @@
-# L 168-9 credits
+# Danfeng credits
 
 Radius, mass and temperature: Radius 0.604 +/- 0.037 solar radii from Hobson et al. 2024, the stellar radius of the default parameter set of L 168-9 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...688A.216H/abstract); Mass 0.614 +/- 0.055 solar masses from Hobson et al. 2024, the stellar mass of the default parameter set of L 168-9 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024A&A...688A.216H/abstract); temperature from Hobson et al. 2024, the stellar temperature of the default parameter set of L 168-9 b in the NASA Exoplanet Archive.
 

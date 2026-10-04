@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "wasp-15b",
+  "card": {
+    "text": "WASP-15 b was found in 2009 by SuperWASP as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-aa5df3",
+        "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+        "label": "Stassun et al. 2017",
+        "checked": "2026-10-03",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname STASSUN_ET_AL__2017): disc_year 2009, disc_facility SuperWASP, sy_pnum 1; pl_orbper 3.7520997, pl_radj 1.41, pl_bmassj 0.54"
+      },
+      {
+        "catalogueId": "wikipedia-wasp-15b",
+        "url": "https://en.wikipedia.org/wiki/WASP-15b",
+        "label": "Wikipedia, \"WASP-15b\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374242607",
+        "quote": "WASP-15b, formally named Asye, is an extrasolar planet discovered in 2008 by the SuperWASP collaboration, which seeks to discover exoplanets that transit their host stars."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is the only planet known around Nyamien. Its orbit and size follow Stassun et al. 2017's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-aa5df3",
+        "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+        "label": "Stassun et al. 2017",
+        "checked": "2026-10-03",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname STASSUN_ET_AL__2017): disc_year 2009, disc_facility SuperWASP, sy_pnum 1; pl_orbper 3.7520997, pl_radj 1.41, pl_bmassj 0.54"
+      },
+      {
+        "catalogueId": "wikipedia-wasp-15b",
+        "url": "https://en.wikipedia.org/wiki/WASP-15b",
+        "label": "Wikipedia, \"WASP-15b\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374242607",
+        "quote": "The planet orbits its host star at a distance of 0.05 AU every four days."
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

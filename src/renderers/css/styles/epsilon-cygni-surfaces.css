@@ -1,4 +1,4 @@
-/* Epsilon Cygni: the Sun's emissive presentation (body-surfaces.css, SUN block) scoped to this object, loaded after the shared
+/* Aljanah: the Sun's emissive presentation (body-surfaces.css, SUN block) scoped to this object, loaded after the shared
    body-surfaces.css base rules. No spin: the rotation axis and period are unmeasured. Both plates are transparent: no observation is cast. */
 .object-stage[data-object-id="epsilon-cygni"] > :is(.polycss-camera, .epsilon-cygni-corona-layer, .epsilon-cygni-limb-layer) {
   --epsilon-cygni-scene-side-padding: 16px;

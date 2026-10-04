@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "dalim",
+  "card": {
+    "text": "A star 14 parsecs away, 2.0 times the Sun's width, measured from its light.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 14879: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-alpha-fornacis",
+        "url": "https://en.wikipedia.org/wiki/Alpha_Fornacis",
+        "label": "Wikipedia, \"Alpha Fornacis\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1370772942",
+        "quote": "Alpha Fornacis is a triple star system in the southern constellation of Fornax."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its brightness, measured band by band, gives 4.705 times the Sun's luminosity at 6,055 K, so 1.974 solar radii.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 14879: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-alpha-fornacis",
+        "url": "https://en.wikipedia.org/wiki/Alpha_Fornacis",
+        "label": "Wikipedia, \"Alpha Fornacis\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1370772942",
+        "quote": "At a combined apparent magnitude of 3.92, it is the brightest star in the constellation and the only one brighter than magnitude 4.0."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its spectrum",
+      "summary": "The color of the star's light."
+    }
+  }
+}

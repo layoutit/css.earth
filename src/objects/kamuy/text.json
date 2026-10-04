@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "kamuy",
+  "card": {
+    "text": "A star about 140 parsecs away, 10 times the Sun's width, measured by Gaia.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202243688",
+        "url": "https://doi.org/10.1051/0004-6361/202243688",
+        "label": "Creevey et al. (2023), Astronomy & Astrophysics 674 A26",
+        "checked": "2026-10-03",
+        "locator": "gaiadr3.astrophysical_parameters, Gaia DR3 1315900158983769472: radius_flame, mass_flame, teff_gspphot"
+      },
+      {
+        "catalogueId": "wikipedia-hd-145457",
+        "url": "https://en.wikipedia.org/wiki/HD_145457",
+        "label": "Wikipedia, \"HD 145457\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374546484",
+        "quote": "HD 145457 is a star located in the northern constellation of Corona Borealis at a distance of around 442 light-years from the Sun, as determined through parallax measurements."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Gaia's parallax, brightness and spectrum give it 10.1 solar radii and 2.80 solar masses (FLAME) and 4,939 K at its surface (GSP-Phot).",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202243688",
+        "url": "https://doi.org/10.1051/0004-6361/202243688",
+        "label": "Creevey et al. (2023), Astronomy & Astrophysics 674 A26",
+        "checked": "2026-10-03",
+        "locator": "gaiadr3.astrophysical_parameters, Gaia DR3 1315900158983769472: radius_flame, mass_flame, teff_gspphot"
+      },
+      {
+        "catalogueId": "wikipedia-hd-145457",
+        "url": "https://en.wikipedia.org/wiki/HD_145457",
+        "label": "Wikipedia, \"HD 145457\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374546484",
+        "quote": "It has been formally named Kamuy by the IAU, after a spiritual or divine being in Ainu mythology."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its temperature",
+      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

@@ -4,7 +4,8 @@
     {
       "id": "wasp-50b",
       "name": "WASP-50 b",
-      "description": "Transiting planet of WASP-50 with a 1.96-day year, found in 2011.",
+      "description": "Transiting planet of Chaophraya with a 1.96-day year, found in 2011.",
+      "order": 4821,
       "paper": {
         "url": "https://ui.adsabs.harvard.edu/abs/2019AJ....158...39C/abstract",
         "credit": "Chakrabarty & Sengupta 2019"
@@ -15,10 +16,9 @@
       },
       "text": {
         "card": "WASP-50 b was found in 2011 by SuperWASP as it crossed its star.",
-        "introduction": "It is the only planet known around WASP-50. Its orbit and size follow Chakrabarty & Sengupta 2019's fit, the archive's default.",
+        "introduction": "It is the only planet known around Chaophraya. Its orbit and size follow Chakrabarty & Sengupta 2019's fit, the archive's default.",
         "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname CHAKRABARTY__AMP__SENGUPTA_2019): disc_year 2011, disc_facility SuperWASP, sy_pnum 1; pl_orbper 1.955092447, pl_radj 1.166, pl_bmassj 1.4688"
-      },
-      "order": 4821
+      }
     }
   ]
 }

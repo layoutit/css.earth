@@ -1,0 +1,148 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "niandao",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Niandao",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 100499430.6
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/niandao-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Niandao",
+      "classification": "star",
+      "color": "#ffcb84",
+      "distanceAu": 18854192.3,
+      "description": "A star 91 parsecs away, 144 times the Sun's width, measured from its light.",
+      "systemName": "Niandao system",
+      "aliases": [
+        "13 Lyrae",
+        "HD 175865",
+        "HIP 92862",
+        "HR 7157"
+      ],
+      "order": 5646,
+      "context": {
+        "order": 5643
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        485571788562112260,
+        -1971847104146800600,
+        1957428040656881700
+      ],
+      "presentationToReference": [
+        0.17215588133963874,
+        0.16593736405260795,
+        -0.9709928649230358,
+        -0.6991037866825441,
+        -0.6738553547892122,
+        -0.23910846130581181,
+        0.6939857692822672,
+        -0.7199887166012932,
+        7.229378736956704e-7
+      ],
+      "orbitUpReference": [
+        -0.16593736405260795,
+        0.6738553547892122,
+        0.7199887166012932
+      ],
+      "metersPerUnit": 324191711.61290324,
+      "bodyRadiusM": 100499430600
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

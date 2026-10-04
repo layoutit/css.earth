@@ -1,0 +1,148 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "gouguo",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Gouguo",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 88510432.5
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/gouguo-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Gouguo",
+      "classification": "star",
+      "color": "#ffc78c",
+      "distanceAu": 28372158.9,
+      "description": "A star 138 parsecs away, 127 times the Sun's width, measured from its light.",
+      "systemName": "Gouguo system",
+      "aliases": [
+        "c Sagittarii",
+        "HD 189763",
+        "HIP 98688",
+        "HR 7650"
+      ],
+      "order": 5553,
+      "context": {
+        "order": 5550
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1916450925736874800,
+        -3232195965066069500,
+        -1973621051632084200
+      ],
+      "presentationToReference": [
+        0.45152285519710184,
+        -0.23715236512630156,
+        -0.8601661856581312,
+        -0.7615172040680172,
+        0.39997176757705044,
+        -0.5100138557428808,
+        -0.4649931818243006,
+        -0.8853142610713391,
+        -7.884655227248951e-7
+      ],
+      "orbitUpReference": [
+        0.23715236512630156,
+        -0.39997176757705044,
+        0.8853142610713391
+      ],
+      "metersPerUnit": 285517524.1935484,
+      "bodyRadiusM": 88510432500
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

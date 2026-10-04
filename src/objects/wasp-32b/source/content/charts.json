@@ -1,0 +1,43 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/wasp-32b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "wasp-32b-orbits",
+      "title": "WASP-32 b: orbits around Parumleo",
+      "output": "wasp-32b-system-orbits.svg",
+      "system": "wasp-32",
+      "highlight": "wasp-32b",
+      "description": "The orbits of Parumleo's planets in this map from above, to scale, with WASP-32 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Ivshina & Winn 2022 (2022ApJS..259...62I), via the NASA Exoplanet Archive ps table (pl_refname IVSHINA__AMP__WINN_2022): P 2.71866151 d"
+      }
+    },
+    {
+      "kind": "folded-transit",
+      "id": "wasp-32b-transit",
+      "title": "WASP-32 b: its transit",
+      "description": "WASP-32 b crossing its star, as TESS recorded it: 1 sector (42) of the SPOC pipeline's 2-minute light curves of TIC 427332229, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 10-minute bins. Error bars are each bin's standard error.",
+      "output": "wasp-32b-transit.svg",
+      "metadata": {
+        "tic": "TIC 427332229",
+        "sectors": [
+          42
+        ],
+        "pipeline": "TESS SPOC, PDCSAP flux, quality 0"
+      },
+      "planet": "wasp-32b",
+      "sources": [
+        "photometry/tess/tess2021232031932-s0042-0000000427332229-0213-s_lc.fits"
+      ],
+      "durationHours": 2.424,
+      "binMinutes": 10,
+      "notes": [
+        "TESS 2-min SPOC · sector 42",
+        "Folded on the app's orbit; 10-min bins.",
+        "Bars: standard error of each bin."
+      ]
+    }
+  ]
+}

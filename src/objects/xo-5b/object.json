@@ -1,0 +1,139 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "xo-5b",
+  "parent": "xo-5-system",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "XO-5 b",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "sky-sun",
+        "system-markers",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "shape",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 81500.9
+      },
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "raster",
+          "model": "lit"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/templates/composite-planet.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "XO-5 b",
+      "classification": "exoplanet",
+      "color": "#9a9a9a",
+      "distanceAu": 56484410.3,
+      "description": "XO-5 b was found in 2008 by XO as it crossed its star.",
+      "systemName": "Absolutno system",
+      "order": 5461,
+      "context": {
+        "order": 5461
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -2948333373998442000,
+        5857955918620075000,
+        5328535983831277000
+      ],
+      "presentationToReference": [
+        -0.39823647018983366,
+        0.8723729705941777,
+        0.2835015237832624,
+        0.6670761630977036,
+        0.487571823980211,
+        -0.5632788910366303,
+        0.6296166344987939,
+        0.035201088581180595,
+        0.7761080961600079
+      ],
+      "orbitUpReference": [
+        -0.8723729705941777,
+        -0.487571823980211,
+        -0.035201088581180595
+      ],
+      "metersPerUnit": 262906.12903225806,
+      "bodyRadiusM": 81500900
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

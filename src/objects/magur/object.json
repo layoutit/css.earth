@@ -1,0 +1,147 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "magur",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Magur",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 27369533.7
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/magur-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Magur",
+      "classification": "star",
+      "color": "#ffd4a7",
+      "distanceAu": 30648515.9,
+      "description": "A star 149 parsecs away, 39 times the Sun's width, measured from its light.",
+      "systemName": "Magur system",
+      "aliases": [
+        "HD 168592",
+        "HIP 90037",
+        "HR 6862"
+      ],
+      "order": 5607,
+      "context": {
+        "order": 5604
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        347953234699704300,
+        -3563433525503591000,
+        -2864028880211714600
+      ],
+      "presentationToReference": [
+        0.07589034819007817,
+        -0.060707948730042496,
+        -0.995266396505267,
+        -0.7772027503256141,
+        0.6217001567481585,
+        -0.09718436080777691,
+        -0.6246571379067799,
+        -0.7808991356508891,
+        0.000001343354171482891
+      ],
+      "orbitUpReference": [
+        0.060707948730042496,
+        -0.6217001567481585,
+        0.7808991356508891
+      ],
+      "metersPerUnit": 88288818.38709678,
+      "bodyRadiusM": 27369533700
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

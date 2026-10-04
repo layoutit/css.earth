@@ -24,7 +24,7 @@ const LOCAL_EXPRESSION_SUBSTITUTIONS:Record<string,string>={
  '${{ needs.changes.outputs.test_packages }}':'all',
  '${{ needs.changes.outputs.test_files }}':'',
  "${{ (matrix.lane == 'packages' && needs.changes.outputs.test_packages == '' && needs.changes.outputs.test_files == '') || (matrix.lane == 'site' && needs.changes.outputs.test_site != 'true') }}":'false',
- '${{ steps.build-tools-cache.outputs.cache-hit }}':'false',
+ '${{ steps.build-preparation-cache.outputs.cache-hit }}':'false',
  '${{ steps.ci-cache-key.outputs.build_digest }}':'',
  '${{ steps.package-cache.outputs.cache-hit }}':'false',
  '${{ steps.ci-cache-key.outputs.package_digest }}':'',
@@ -149,7 +149,7 @@ export const SHARED_TYPECHECK_STEP:CiStep={
 /** CI jobs have separate disks; the local plan shares one checkout. Reuse only explicit common prerequisites,
  * never tests, audits, or a production build with a different environment. */
 export function reuseLocalPreparation(steps:readonly CiStep[]):CiStep[] {
- const reusable=new Set(['pnpm install --frozen-lockfile --ignore-scripts','pnpm build:tools','node .github/scripts/ci/build-ci.mts full','node .github/scripts/ci/ci-cache-key.mts','pnpm prepare:typecheck']);
+ const reusable=new Set(['pnpm install --frozen-lockfile --ignore-scripts','pnpm build:preparation','node .github/scripts/ci/build-ci.mts full','node .github/scripts/ci/ci-cache-key.mts','pnpm prepare:typecheck']);
  const seen=new Set<string>();
  return steps.filter(step=>{
   if(!reusable.has(step.run.trim()))return true;

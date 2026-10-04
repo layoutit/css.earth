@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "kalasungsang",
+  "card": {
+    "text": "A star 49 parsecs away, 20 times the Sun's width, measured from its light.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 71053: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-rho-bo-tis",
+        "url": "https://en.wikipedia.org/wiki/Rho_Bo%C3%B6tis",
+        "label": "Wikipedia, \"Rho Boötis\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374877439",
+        "quote": "Rho Boötis, Latinised from ρ Boötis and formally named Kalasungsang, is a single, orange-hued star in the northern constellation of Boötes."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its brightness, measured band by band, gives 124 times the Sun's luminosity at 4,350 K, so 19.67 solar radii.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 71053: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-rho-bo-tis",
+        "url": "https://en.wikipedia.org/wiki/Rho_Bo%C3%B6tis",
+        "label": "Wikipedia, \"Rho Boötis\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374877439",
+        "quote": "This star is visible to the naked eye with an apparent visual magnitude of 3.59."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its spectrum",
+      "summary": "The color of the star's light."
+    }
+  }
+}

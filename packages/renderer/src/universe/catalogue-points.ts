@@ -75,7 +75,7 @@ const toLocalAxes = ([x, y, z, w]: readonly number[], [vx, vy, vz]: readonly num
 /**
  * A published catalogue drawn as fixed dust: every point the same small dot, whatever the distance, so a population's
  * shape shows without any star claiming a size. Fetched on the first publication that shows it. Its root is a group in
- * the dot layer that ends where it mounts (point-layer.ts): banks mounted next to each other are one layer, and the
+ * its host's one dot layer (point-layer.ts): every bank of a host paints into the same layer, and the
  * root's stroke opacity dims this bank alone.
  */
 export function mountCataloguePoints({ host, before, url, loadBank, occluder }: {

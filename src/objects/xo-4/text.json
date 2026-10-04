@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "xo-4",
+  "card": {
+    "text": "XO-4 b crosses Koit as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-aa5df3",
+        "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+        "label": "Stassun et al. (2017), The Astronomical Journal 153 136",
+        "checked": "2026-10-03",
+        "locator": "NASA Exoplanet Archive ps table (st_refname STASSUN_ET_AL__2017): st_teff 6397, st_rad 1.45, st_mass 1.1"
+      },
+      {
+        "catalogueId": "wikipedia-xo-4",
+        "url": "https://en.wikipedia.org/wiki/XO-4",
+        "label": "Wikipedia, \"XO-4\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374434207",
+        "quote": "XO-4 is a star located approximately 863 light-years away from Earth in the Lynx constellation."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Stassun et al. 2017.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-aa5df3",
+        "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+        "label": "Stassun et al. (2017), The Astronomical Journal 153 136",
+        "checked": "2026-10-03",
+        "locator": "NASA Exoplanet Archive ps table (st_refname STASSUN_ET_AL__2017): st_teff 6397, st_rad 1.45, st_mass 1.1"
+      },
+      {
+        "catalogueId": "wikipedia-xo-4",
+        "url": "https://en.wikipedia.org/wiki/XO-4",
+        "label": "Wikipedia, \"XO-4\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374434207",
+        "quote": "It has a magnitude of about 11 and cannot be seen with the naked eye but is visible through a small telescope."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its Gaia spectrum",
+      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

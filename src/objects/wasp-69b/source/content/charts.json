@@ -5,11 +5,11 @@
     {
       "kind": "system-orbits",
       "id": "wasp-69b-orbits",
-      "title": "WASP-69 b: orbits around WASP-69",
+      "title": "WASP-69 b: orbits around Wouri",
       "output": "wasp-69b-system-orbits.svg",
       "system": "wasp-69",
       "highlight": "wasp-69b",
-      "description": "The orbits of WASP-69's planets in this map from above, to scale, with WASP-69 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "description": "The orbits of Wouri's planets in this map from above, to scale, with WASP-69 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
       "metadata": {
         "orbitSource": "Allart et al. 2025 (2025A&A...700A...7A), via the NASA Exoplanet Archive ps table (pl_refname ALLART_ET_AL__2025): P 3.86813881 d"
       }

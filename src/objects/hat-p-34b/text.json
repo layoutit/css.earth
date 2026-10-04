@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hat-p-34b",
+  "card": {
+    "text": "HAT-P-34 b was found in 2011 by HATNet as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-201629882",
+        "url": "https://ui.adsabs.harvard.edu/abs/2017A&A...602A.107B/abstract",
+        "label": "Bonomo et al. 2017",
+        "checked": "2026-10-03",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname BONOMO_ET_AL__2017): disc_year 2011, disc_facility HATNet, sy_pnum 1; pl_orbper 5.45264682, pl_radj 1.197, pl_bmassj 3.33"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is the only planet known around Sansuna. Its orbit and size follow Bonomo et al. 2017's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-201629882",
+        "url": "https://ui.adsabs.harvard.edu/abs/2017A&A...602A.107B/abstract",
+        "label": "Bonomo et al. 2017",
+        "checked": "2026-10-03",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname BONOMO_ET_AL__2017): disc_year 2011, disc_facility HATNet, sy_pnum 1; pl_orbper 5.45264682, pl_radj 1.197, pl_bmassj 3.33"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

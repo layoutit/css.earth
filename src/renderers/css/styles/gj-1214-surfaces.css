@@ -1,4 +1,4 @@
-/* GJ 1214: the Sun's emissive presentation (body-surfaces.css, SUN block) scoped to this object, loaded after the shared
+/* Orkaria: the Sun's emissive presentation (body-surfaces.css, SUN block) scoped to this object, loaded after the shared
    body-surfaces.css base rules. No spin: the rotation axis and period are unmeasured. Both plates are transparent: no observation is cast. */
 .object-stage[data-object-id="gj-1214"] > :is(.polycss-camera, .gj-1214-corona-layer, .gj-1214-limb-layer) {
   --gj-1214-scene-side-padding: 16px;

@@ -1,0 +1,148 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "tania-borealis",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Tania Borealis",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 2310419.7
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/tania-borealis-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Tania Borealis",
+      "classification": "star",
+      "color": "#b8ceff",
+      "distanceAu": 8695742.8,
+      "description": "A star 42 parsecs away, 3.3 times the Sun's width, measured from its light.",
+      "systemName": "Tania Borealis system",
+      "aliases": [
+        "HD 89021",
+        "HIP 50372",
+        "HR 4033",
+        "Lambda Ursae Majoris"
+      ],
+      "order": 5712,
+      "context": {
+        "order": 5709
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -858277734602655700,
+        413568048543055300,
+        885759294328019100
+      ],
+      "presentationToReference": [
+        -0.6597732673793456,
+        -0.6134070045299461,
+        0.43408649189439313,
+        0.31791707006731434,
+        0.29556694509709935,
+        0.9008711991876434,
+        0.6809023220781354,
+        -0.7323742402348452,
+        -0.0000053885428834038754
+      ],
+      "orbitUpReference": [
+        0.6134070045299461,
+        -0.29556694509709935,
+        0.7323742402348452
+      ],
+      "metersPerUnit": 7452966.774193549,
+      "bodyRadiusM": 2310419700
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

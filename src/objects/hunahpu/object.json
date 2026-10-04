@@ -1,0 +1,147 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "hunahpu",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Hunahpú",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 2729599.5
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/hunahpu-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Hunahpú",
+      "classification": "star",
+      "color": "#ffe6cf",
+      "distanceAu": 23342425.4,
+      "description": "A star about 110 parsecs away, 3.9 times the Sun's width, measured by Gaia.",
+      "systemName": "Hunahpú system",
+      "aliases": [
+        "Gaia DR3 3534621989981179520",
+        "HD 98219",
+        "HIP 55174"
+      ],
+      "order": 5566,
+      "context": {
+        "order": 5563
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -3136719158772349000,
+        584353846656439400,
+        -1418953056841286100
+      ],
+      "presentationToReference": [
+        -0.8982648658822405,
+        0.3994734983803537,
+        0.18314244405195163,
+        0.16734189550196613,
+        -0.07441669725728163,
+        0.9830863874447288,
+        -0.40634581421662236,
+        -0.9137193657032118,
+        0.0000027478405586121098
+      ],
+      "orbitUpReference": [
+        -0.3994734983803537,
+        0.07441669725728163,
+        0.9137193657032118
+      ],
+      "metersPerUnit": 8805159.677419355,
+      "bodyRadiusM": 2729599500
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

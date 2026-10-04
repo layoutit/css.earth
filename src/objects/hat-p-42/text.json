@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hat-p-42",
+  "card": {
+    "text": "HAT-P-42 b crosses Lerna as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-201220993",
+        "url": "https://ui.adsabs.harvard.edu/abs/2013A&A...558A..86B/abstract",
+        "label": "Boisse et al. (2013), Astronomy & Astrophysics 558 A86",
+        "checked": "2026-10-03",
+        "locator": "NASA Exoplanet Archive ps table (st_refname BOISSE_ET_AL__2013): st_teff 5743, st_rad 1.53, st_mass 1.178"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Boisse et al. 2013.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-201220993",
+        "url": "https://ui.adsabs.harvard.edu/abs/2013A&A...558A..86B/abstract",
+        "label": "Boisse et al. (2013), Astronomy & Astrophysics 558 A86",
+        "checked": "2026-10-03",
+        "locator": "NASA Exoplanet Archive ps table (st_refname BOISSE_ET_AL__2013): st_teff 5743, st_rad 1.53, st_mass 1.178"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its Gaia spectrum",
+      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

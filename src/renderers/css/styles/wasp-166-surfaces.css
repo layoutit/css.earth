@@ -1,4 +1,4 @@
-/* WASP-166: the Sun's emissive presentation (body-surfaces.css, SUN block) scoped to this object, loaded after the shared
+/* Filetdor: the Sun's emissive presentation (body-surfaces.css, SUN block) scoped to this object, loaded after the shared
    body-surfaces.css base rules. No spin: the rotation axis and period are unmeasured. Both plates are transparent: no observation is cast. */
 .object-stage[data-object-id="wasp-166"] > :is(.polycss-camera, .wasp-166-corona-layer, .wasp-166-limb-layer) {
   --wasp-166-scene-side-padding: 16px;

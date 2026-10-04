@@ -1,0 +1,61 @@
+{
+  "id": "schedar",
+  "name": "Schedar",
+  "system": "Schedar system",
+  "description": "A star 70 parsecs away, 41 times the Sun's width, measured from its light.",
+  "aliases": [
+    "HD 3712",
+    "HIP 3179",
+    "HR 168",
+    "Alpha Cassiopeiae"
+  ],
+  "featured": true,
+  "target": "HIP 3179",
+  "paper": {
+    "url": "https://doi.org/10.1093/mnras/stx1433",
+    "credit": "McDonald, Zijlstra & Watson (2017), MNRAS 471, 770"
+  },
+  "radius": {
+    "value": 41.078,
+    "source": "McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 3179: radius 41.078 solar radii, implied by the fitted luminosity 733.504 solar luminosities (fractional uncertainty 0.054) and temperature",
+    "url": "https://doi.org/10.1093/mnras/stx1433"
+  },
+  "mass": "unmeasured",
+  "temperature": {
+    "value": 4690,
+    "source": "McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 3179: effective temperature 4690 +/- 125 K, from the fit of a model atmosphere to the star's spectral energy distribution (goodness of fit Q 0.066)",
+    "url": "https://doi.org/10.1093/mnras/stx1433",
+    "uncertainty": 125
+  },
+  "distance": {
+    "value": 69.979,
+    "source": "McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 3179: distance 69.979 pc, the paper's parallax inverted (Gaia DR1's where it revised the star's, else the Hipparcos reduction of van Leeuwen 2007; section 2.3; fractional uncertainty 0.01), at which the luminosity and radius hold",
+    "url": "https://doi.org/10.1093/mnras/stx1433",
+    "uncertainty": 0.7
+  },
+  "limb": {
+    "none": "no mass is measured and no spectroscopic surface gravity is published with this radius: McDonald, Zijlstra & Watson (2017), MNRAS 471, 770 assume the gravity of their fit (table column 15)"
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A star 70 parsecs away, 41 times the Sun's width, measured from its light.",
+    "introduction": "Its brightness, measured band by band, gives 734 times the Sun's luminosity at 4,690 K, so 41.078 solar radii.",
+    "locator": "Table 2, HIP 3179: D, Teff, L, Rad, Q",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/Alpha_Cassiopeiae",
+      "title": "Alpha Cassiopeiae",
+      "revision": "1374937488",
+      "card": "Alpha Cassiopeiae is a star in the northern constellation of Cassiopeia.",
+      "introduction": "Though listed as the \"alpha star\" by Johann Bayer, α Cas's visual brightness closely matches the 'beta' (β) star in the constellation and it may appear marginally brighter or dimmer, depending on which passband is used."
+    }
+  },
+  "notes": [],
+  "radialVelocity": {
+    "value": -4.204,
+    "uncertainty": 0.0006,
+    "source": "SIMBAD's radial velocity for Gaia DR3 418551920284673408 (quality A), from 2018A&A...616A...7S; Gaia DR3 measures none",
+    "url": "https://ui.adsabs.harvard.edu/abs/2018A&A...616A...7S/abstract"
+  },
+  "order": 5689
+}

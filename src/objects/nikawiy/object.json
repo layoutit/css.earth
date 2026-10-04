@@ -1,0 +1,146 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "nikawiy",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Nikawiy",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 2855152.8
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/nikawiy-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Nikawiy",
+      "classification": "star",
+      "color": "#ffe6cf",
+      "distanceAu": 22048805.4,
+      "description": "A star 107 parsecs away, 4.1 times the Sun's width, measured from its light.",
+      "systemName": "Nikawiy system",
+      "aliases": [
+        "HD 136418",
+        "HIP 74961"
+      ],
+      "order": 5648,
+      "context": {
+        "order": 5645
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -1589616220182739500,
+        -1879430114554828800,
+        2195600989933691600
+      ],
+      "presentationToReference": [
+        -0.48192356708195366,
+        -0.42986660207274885,
+        -0.7635210409107497,
+        -0.5697863757090433,
+        -0.5082399688830638,
+        0.6457829512197542,
+        0.6656524329913913,
+        -0.7462619100906674,
+        -6.855043540710657e-7
+      ],
+      "orbitUpReference": [
+        0.42986660207274885,
+        0.5082399688830638,
+        0.7462619100906674
+      ],
+      "metersPerUnit": 9210170.322580645,
+      "bodyRadiusM": 2855152800
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

@@ -1,0 +1,148 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "nembus",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Nembus",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 14793364.8
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/nembus-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Nembus",
+      "classification": "star",
+      "color": "#ffddac",
+      "distanceAu": 11203928.4,
+      "description": "A star 54 parsecs away, 21 times the Sun's width, measured from its light.",
+      "systemName": "Nembus system",
+      "aliases": [
+        "Upsilon Persei",
+        "HD 9927",
+        "HIP 7607",
+        "HR 464"
+      ],
+      "order": 5642,
+      "context": {
+        "order": 5639
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1008076161831537000,
+        459382641722955650,
+        1257778609581516800
+      ],
+      "presentationToReference": [
+        0.601443385418072,
+        0.6828707223186689,
+        0.4146726790335094,
+        0.27407914374436293,
+        0.3111817052899489,
+        -0.909970641975441,
+        0.7504308609733513,
+        -0.6609489563444508,
+        0.0000024445514397772476
+      ],
+      "orbitUpReference": [
+        -0.6828707223186689,
+        -0.3111817052899489,
+        0.6609489563444508
+      ],
+      "metersPerUnit": 47720531.61290322,
+      "bodyRadiusM": 14793364800
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

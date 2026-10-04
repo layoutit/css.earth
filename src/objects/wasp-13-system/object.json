@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "wasp-13-system",
+  "parent": "milky-way",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "wasp-13"
+    },
+    "catalog": {
+      "name": "Gloas system",
+      "systemName": "Gloas system",
+      "classification": "planetary-system",
+      "color": "#fff6fb",
+      "distanceAu": 47625217.6,
+      "description": "WASP-13 b crosses Gloas as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -4537794289546959000,
+        3793787056880453600,
+        3971897732479669000
+      ],
+      "presentationToReference": [
+        -0.6369159382207461,
+        -0.42770468024754277,
+        0.6414100047042717,
+        0.5324885370650996,
+        0.3575790150847896,
+        0.7671982832783594,
+        0.5574890541837182,
+        -0.8301842894594783,
+        -6.560013110260505e-8
+      ],
+      "orbitUpReference": [
+        0.42770468024754277,
+        -0.3575790150847896,
+        0.8301842894594783
+      ],
+      "metersPerUnit": 3074545.1612903224,
+      "bodyRadiusM": 953109000
+    }
+  }
+}

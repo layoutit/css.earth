@@ -6,7 +6,7 @@
   "properties": {
     "preparation": {
       "schema": "cssearth-object-preparation@1",
-      "label": "ε Eridani",
+      "label": "Ran",
       "steps": [
         "verify-sources",
         "assets",
@@ -95,17 +95,20 @@
       }
     },
     "catalog": {
-      "name": "ε Eridani",
+      "name": "Ran",
       "classification": "star",
       "color": "#ffe6d0",
       "distanceAu": 664170.4,
       "description": "ε Eridani is a star of 5,039 K, 3.2 parsecs away, with 1 known planet.",
-      "systemName": "ε Eridani system",
+      "systemName": "Ran system",
       "order": 1841,
       "context": {
         "order": 1838
       },
-      "featured": true
+      "featured": true,
+      "aliases": [
+        "ε Eridani"
+      ]
     },
     "worldFrame": {
       "referenceFrame": "sun-icrf",

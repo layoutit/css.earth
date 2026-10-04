@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "wasp-64",
+  "card": {
+    "text": "WASP-64 b crosses Atakoraka as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-201220561",
+        "url": "https://ui.adsabs.harvard.edu/abs/2013A&A...552A..82G/abstract",
+        "label": "Gillon et al. (2013), Astronomy & Astrophysics 552 A82",
+        "checked": "2026-10-03",
+        "locator": "NASA Exoplanet Archive ps table (st_refname GILLON_ET_AL__2013): st_teff 5400, st_rad 1.058, st_mass 1.004"
+      },
+      {
+        "catalogueId": "wikipedia-wasp-64",
+        "url": "https://en.wikipedia.org/wiki/WASP-64",
+        "label": "Wikipedia, \"WASP-64\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1370791684",
+        "quote": "WASP-64, also named Atakoraka, is a star about 1,177 light-years away in the constellation Canis Major."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Gillon et al. 2013.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-201220561",
+        "url": "https://ui.adsabs.harvard.edu/abs/2013A&A...552A..82G/abstract",
+        "label": "Gillon et al. (2013), Astronomy & Astrophysics 552 A82",
+        "checked": "2026-10-03",
+        "locator": "NASA Exoplanet Archive ps table (st_refname GILLON_ET_AL__2013): st_teff 5400, st_rad 1.058, st_mass 1.004"
+      },
+      {
+        "catalogueId": "wikipedia-wasp-64",
+        "url": "https://en.wikipedia.org/wiki/WASP-64",
+        "label": "Wikipedia, \"WASP-64\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1370791684",
+        "quote": "It is a G7 class main-sequence star, orbited by a planet WASP-64b."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its Gaia spectrum",
+      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

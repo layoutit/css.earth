@@ -1,4 +1,4 @@
-# XO-1 credits
+# Moldoveanu credits
 
 Radius, mass and temperature: Radius 0.88 +/- 0.05 solar radii from Stassun et al. 2017, the stellar radius of the default parameter set of XO-1 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract); Mass 0.88 +/- 0.19 solar masses from Stassun et al. 2017, the stellar mass of the default parameter set of XO-1 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract); temperature from Stassun et al. 2017, the stellar temperature of the default parameter set of XO-1 b in the NASA Exoplanet Archive.
 

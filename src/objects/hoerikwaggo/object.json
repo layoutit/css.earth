@@ -1,0 +1,149 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "hoerikwaggo",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Hoerikwaggo",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 706289.7
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/hoerikwaggo-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Hoerikwaggo",
+      "classification": "star",
+      "color": "#ffede1",
+      "distanceAu": 2106634.1,
+      "description": "A star about 10 parsecs away, the Sun's width, measured by Gaia.",
+      "systemName": "Hoerikwaggo system",
+      "aliases": [
+        "Gaia DR3 5264749303462961280",
+        "HR 2261",
+        "Alpha Mensae",
+        "HIP 29271",
+        "HD 43834"
+      ],
+      "order": 5560,
+      "context": {
+        "order": 5557
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -3706788695138584.5,
+        82786306846724910,
+        -304057458300885400
+      ],
+      "presentationToReference": [
+        -0.01176253147711856,
+        0.043133246981264084,
+        0.9990000830120602,
+        0.2627008554473233,
+        -0.963840975701998,
+        0.044708322548100095,
+        -0.9648056298553065,
+        -0.2629640594504764,
+        -0.00000606893543266433
+      ],
+      "orbitUpReference": [
+        -0.043133246981264084,
+        0.963840975701998,
+        0.2629640594504764
+      ],
+      "metersPerUnit": 2278353.870967742,
+      "bodyRadiusM": 706289700
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

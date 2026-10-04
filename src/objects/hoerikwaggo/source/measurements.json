@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "hoerikwaggo",
+  "angularDiameterMas": 0.92,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 706,290 km at 10.21 pc = 0.92 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 10.212856977269889,
+  "distanceSource": "Gaia DR3 parallax 97.9158 +/- 0.0573 mas (same row, RUWE 1.36): 10.21 pc, no zero-point correction",
+  "radiusKm": 706289.7,
+  "radiusSource": "Radius 1.015 (0.995 to 1.036) from Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26; astrophysical_parameters of the same source): 706,290 km at 695,700 km per solar radius. Mass 0.875 (0.835 to 0.915) from Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26; astrophysical_parameters of the same source); GM is that mass times the JPL solar GM. Temperature 5496 +/- 5.1 K from Andrae et al. (2023), A&A 674, A27 (Gaia DR3 GSP-Phot), astrophysical_parameters of Gaia DR3 5264749303462961280: teff_gspphot 5495.937 K (16th-84th percentiles 5491.775-5502.065), the temperature FLAME used (https://doi.org/10.1051/0004-6361/202243462). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 5496,
+  "effectiveTemperatureSource": "Andrae et al. (2023), A&A 674, A27 (Gaia DR3 GSP-Phot), astrophysical_parameters of Gaia DR3 5264749303462961280: teff_gspphot 5495.937 K (16th-84th percentiles 5491.775-5502.065), the temperature FLAME used (https://doi.org/10.1051/0004-6361/202243462)",
+  "surfaceGravityLogg": 4.37,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/hoerikwaggo.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.367, rounded to two decimals",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "wasp-15-system",
+  "parent": "milky-way",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "wasp-15"
+    },
+    "catalog": {
+      "name": "Nyamien system",
+      "systemName": "Nyamien system",
+      "classification": "planetary-system",
+      "color": "#f7f3ff",
+      "distanceAu": 59116366.1,
+      "description": "WASP-15 b crosses Nyamien as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -6552629737191893000,
+        -3621431564066590000,
+        -4707334393122492000
+      ],
+      "presentationToReference": [
+        -0.7409395913087051,
+        0.46586746623599856,
+        -0.48371068412237894,
+        -0.4094939178082405,
+        0.2574699151595298,
+        0.8752279554869135,
+        -0.5322811788043488,
+        -0.8465676267674043,
+        -2.4021578822484266e-7
+      ],
+      "orbitUpReference": [
+        -0.46586746623599856,
+        -0.2574699151595298,
+        0.8465676267674043
+      ],
+      "metersPerUnit": 3321406.4516129033,
+      "bodyRadiusM": 1029636000
+    }
+  }
+}

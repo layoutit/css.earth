@@ -1,0 +1,148 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "kraz",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Kraz",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 10828570.5
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/kraz-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Kraz",
+      "classification": "star",
+      "color": "#ffead0",
+      "distanceAu": 9212388.5,
+      "description": "A star 45 parsecs away, 16 times the Sun's width, measured from its light.",
+      "systemName": "Kraz system",
+      "aliases": [
+        "HD 109379",
+        "HIP 61359",
+        "HR 4786",
+        "Beta Corvi"
+      ],
+      "order": 5591,
+      "context": {
+        "order": 5588
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -1250623054702391300,
+        -189067982427422000,
+        -547268592082815900
+      ],
+      "presentationToReference": [
+        -0.9074638308815755,
+        0.3926384886871853,
+        -0.14948047646157228,
+        -0.13718950325234078,
+        0.059358681256874005,
+        0.9887646773407822,
+        -0.3971000325347652,
+        -0.9177753342517372,
+        -2.293130352422122e-8
+      ],
+      "orbitUpReference": [
+        -0.3926384886871853,
+        -0.059358681256874005,
+        0.9177753342517372
+      ],
+      "metersPerUnit": 34930872.58064516,
+      "bodyRadiusM": 10828570500
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

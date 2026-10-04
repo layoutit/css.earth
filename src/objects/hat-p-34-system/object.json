@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "hat-p-34-system",
+  "parent": "milky-way",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "hat-p-34"
+    },
+    "catalog": {
+      "name": "Sansuna system",
+      "systemName": "Sansuna system",
+      "classification": "planetary-system",
+      "color": "#f0eeff",
+      "distanceAu": 52249145.5,
+      "description": "HAT-P-34 b crosses Sansuna as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        4067562149763561000,
+        -6216954618171966000,
+        2428973325429844000
+      ],
+      "presentationToReference": [
+        0.5203906639600617,
+        0.17013766417775042,
+        -0.83680746417043,
+        -0.7953769413816407,
+        -0.2600427911129279,
+        -0.5474972766220707,
+        0.3107556563951688,
+        -0.9504898326748883,
+        2.657777683033464e-7
+      ],
+      "orbitUpReference": [
+        -0.17013766417775042,
+        0.2600427911129279,
+        0.9504898326748883
+      ],
+      "metersPerUnit": 3433616.129032258,
+      "bodyRadiusM": 1064421000
+    }
+  }
+}

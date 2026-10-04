@@ -1,4 +1,4 @@
-# GJ 3470 credits
+# Kaewkosin credits
 
 Radius, mass and temperature: Radius 0.547 +/- 0.018 solar radii from Awiphan et al. 2016, the stellar radius of the default parameter set of GJ 3470 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2016MNRAS.463.2574A/abstract); Mass 0.539 +/- 0.047 solar masses from Awiphan et al. 2016, the stellar mass of the default parameter set of GJ 3470 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2016MNRAS.463.2574A/abstract); temperature from Awiphan et al. 2016, the stellar temperature of the default parameter set of GJ 3470 b in the NASA Exoplanet Archive.
 

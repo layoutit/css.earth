@@ -1,4 +1,4 @@
-/* WASP-52: the Sun's emissive presentation (body-surfaces.css, SUN block) scoped to this object, loaded after the shared
+/* Anadolu: the Sun's emissive presentation (body-surfaces.css, SUN block) scoped to this object, loaded after the shared
    body-surfaces.css base rules. No spin: the rotation axis and period are unmeasured. Both plates are transparent: no observation is cast. */
 .object-stage[data-object-id="wasp-52"] > :is(.polycss-camera, .wasp-52-corona-layer, .wasp-52-limb-layer) {
   --wasp-52-scene-side-padding: 16px;

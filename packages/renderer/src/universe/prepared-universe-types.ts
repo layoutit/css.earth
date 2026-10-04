@@ -64,7 +64,8 @@ export interface PreparedUniverseOptions {
   volumeDatasetBanks?: readonly { id: string; frame: DensityVolumeFrame }[];
   /** Prepared before any dataset is fetched: each bank's context visibility and, where it has one, its Sun-facing
    * billboard in a shared atlas. A small or distant bank draws its billboard; its datasets load only once large. */
-  datasetBillboards?: { readonly plan: DatasetBillboards; readonly atlasUrl: string };
+  /** What the universe knows of every dataset bank before fetching it, and where each bank's billboard image is served. */
+  datasetBillboards?: { readonly plan: DatasetBillboards; readonly imageUrl: (id: string) => string };
   /** Mount the prepared celestial sky cube. Phones leave it out: its faces cost tens of megabytes of layers. */
   sky?: boolean;
   /** A bank's payload, and any published catalogue points drawn with it (M87's globular clusters). */

@@ -1,4 +1,4 @@
-/* XO-1: the Sun's emissive presentation (body-surfaces.css, SUN block) scoped to this object, loaded after the shared
+/* Moldoveanu: the Sun's emissive presentation (body-surfaces.css, SUN block) scoped to this object, loaded after the shared
    body-surfaces.css base rules. No spin: the rotation axis and period are unmeasured. Both plates are transparent: no observation is cast. */
 .object-stage[data-object-id="xo-1"] > :is(.polycss-camera, .xo-1-corona-layer, .xo-1-limb-layer) {
   --xo-1-scene-side-padding: 16px;

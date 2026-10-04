@@ -1,0 +1,146 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "intan",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Intan",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 536384.7
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/intan-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Intan",
+      "classification": "star",
+      "color": "#ffd6bc",
+      "distanceAu": 9939798.8,
+      "description": "A star 48 parsecs away, 77% of the Sun's width, measured from its light.",
+      "systemName": "Intan system",
+      "aliases": [
+        "HD 20868",
+        "HIP 15578"
+      ],
+      "order": 5571,
+      "context": {
+        "order": 5568
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        791927638871372800,
+        949843452840467200,
+        -825673037081683200
+      ],
+      "presentationToReference": [
+        0.5325753375145055,
+        -0.35559003991449967,
+        0.7680619983991626,
+        0.6387745201891721,
+        -0.4264813545896995,
+        -0.6403754887130113,
+        -0.5552752670778734,
+        -0.83166662654031,
+        -0.000008405766180365241
+      ],
+      "orbitUpReference": [
+        0.35559003991449967,
+        0.4264813545896995,
+        0.83166662654031
+      ],
+      "metersPerUnit": 1730273.2258064514,
+      "bodyRadiusM": 536384699.99999994
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

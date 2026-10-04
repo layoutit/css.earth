@@ -52,22 +52,34 @@ export interface PointLayer {
   painted(member: PointLayerMember, publication: VolumeCameraPublication, reason: PointLayerRepaint): void;
 }
 
-const layers = new WeakMap<Node, PointLayer>();
+/** Each host's one dot layer, and the place its owner reserved for it. */
+const layers = new WeakMap<Node, PointLayer>(), places = new WeakMap<Node, Node>();
 
-/** A place for dots in `host` before `before`: in the dot layer that already ends there, or in a new one. Dot fields
- * mounted next to each other share one svg, so they are one compositing layer and one raster when they repaint. On the
- * iPad each bank's own layer was a view-sized backing store (10.5 MB, and as much again for its parent): at the Milky
- * Way ten banks held 202 MB of layers and left 37 and 77 frames over 20 ms in 690, where three shared layers hold 130 MB
- * and left 25 and 25 (interleaved runs, 2026-10-03).
- * Anything mounted between two banks keeps them in separate layers, so the stacking order is the mount order, as it was.
+/** A place for dots in `host`: a group in the host's one dot layer, which the first field to ask makes before `before`
+ * unless the host's owner has reserved its place (reservePointLayer). Every dot field of a host shares one svg, so they are one
+ * compositing layer and one raster when they repaint. On the iPad each bank's own layer was a view-sized backing store
+ * (10.5 MB, and as much again for its parent): at the Milky Way ten banks held 202 MB of layers and left 37 and 77 frames
+ * over 20 ms in 690, where three shared layers held 130 MB and left 25 and 25 (interleaved runs, 2026-10-03). Three
+ * became one on 2026-10-04: zooming out of Earth the page's layers held 60.5 MB with three and 37 to 40 MB with one, and
+ * the GPU process spent about a fifth less on surfaces (two native captures each).
+ * One layer is one place in the stacking order: every dot of the host paints there, over what is mounted before the
+ * layer and under what is mounted after it.
  *
  * The layer owns the warp, since one transform moves every field in it. A turn or a change of lens moves all far
  * points by the same projective map of the screen: while every showing field's paint is from the same turn and lens and
  * covers the view, the layer moves them as one. A field that repaints at a new turn or lens ends that: the layer goes
  * back to no warp, and its other showing fields repaint from the same camera. */
 export function pointLayerSlot(host: HTMLElement, before?: Node | null): PointLayerSlot {
-  const previous = before ? before.previousSibling : host.lastChild;
-  return ((previous && layers.get(previous)) ?? createLayer(host, before ?? null)).slot();
+  return (layers.get(host) ?? createLayer(host, places.get(host) ?? before ?? null)).slot();
+}
+
+/** `host`'s dot layer goes just before `before`: the owner of the host's stacking order says where its dots paint. A
+ * layer a field has already made moves there; otherwise the first field to ask makes it there. A host with no dots
+ * gets no layer. */
+export function reservePointLayer(host: HTMLElement, before: Node): void {
+  places.set(host, before);
+  const layer = layers.get(host);
+  if (layer && layer.root.nextSibling !== before) host.insertBefore(layer.root, before);
 }
 
 function createLayer(host: HTMLElement, before: Node | null): PointLayer {
@@ -95,7 +107,7 @@ function createLayer(host: HTMLElement, before: Node | null): PointLayer {
       const group = document.createElementNS(SVG_NS, 'g');
       svg.append(group); groups++;
       let released = false;
-      return { layer, group, release() { if (released) return; released = true; group.remove(); if (--groups === 0) { layers.delete(root); root.remove(); } } };
+      return { layer, group, release() { if (released) return; released = true; group.remove(); if (--groups === 0) { layers.delete(host); root.remove(); } } };
     },
     join(member) { members.add(member); return () => { members.delete(member); }; },
     holds: rest => epoch !== null && sameRest(rest, epoch.rest),
@@ -154,6 +166,6 @@ function createLayer(host: HTMLElement, before: Node | null): PointLayer {
       }
     },
   };
-  layers.set(root, layer);
+  layers.set(host, layer);
   return layer;
 }

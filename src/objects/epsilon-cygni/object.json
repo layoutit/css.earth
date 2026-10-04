@@ -6,7 +6,7 @@
   "properties": {
     "preparation": {
       "schema": "cssearth-object-preparation@1",
-      "label": "Epsilon Cygni",
+      "label": "Aljanah",
       "steps": [
         "verify-sources",
         "assets",
@@ -95,14 +95,15 @@
       }
     },
     "catalog": {
-      "name": "Epsilon Cygni",
+      "name": "Aljanah",
       "classification": "star",
       "color": "#ffe3be",
       "distanceAu": 4776858.3,
       "description": "A giant of type K0 III, 23 parsecs away: 12.4 times the Sun's width and 65 times its light.",
-      "systemName": "Epsilon Cygni system",
+      "systemName": "Aljanah system",
       "aliases": [
-        "HD 197989"
+        "HD 197989",
+        "Epsilon Cygni"
       ],
       "order": 5481,
       "context": {

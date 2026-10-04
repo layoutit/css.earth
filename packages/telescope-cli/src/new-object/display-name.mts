@@ -1,5 +1,7 @@
 /** The name a star is shown by, chosen from the designations SIMBAD lists for it, in one order of preference:
  *
+ * 0. the name the IAU's Working Group on Star Names adopted for it (iau-names.mts, the bank src/references/iau-star-names),
+ *    matched by one of those designations, when the caller passes the bank's lookup;
  * 1. a proper name (SIMBAD `NAME Betelgeuse`);
  * 2. a Bayer or Flamsteed designation (`* alf Ori`, `* 55 Cnc`), the Bayer letter first, spelled out as a reader meets it
  *    (Alpha Orionis, 55 Cancri);
@@ -13,6 +15,7 @@
  * steps 1 to 3 drop SIMBAD's own prefix and spell out the constellation, step 4 returns the identifier as SIMBAD writes it. */
 import type { Archive } from './archives.mts';
 import { adql, csv, SIMBAD_TAP } from './companions.mts';
+import type { IauLookup } from './iau-names.mts';
 import { spelledOut } from './prose.mts';
 
 /** Catalogues before surveys; among surveys, those that name stars a reader has met (planet hosts) before the wide photometric ones. */
@@ -21,9 +24,13 @@ const SURVEYS = ['WASP', 'Kepler', 'K2', 'TOI', 'HAT-P', 'HATS', 'KELT', 'TrES',
 const collapse = (text: string) => text.replace(/\s+/gu, ' ').trim();
 const starts = (identifier: string, prefix: string) => identifier.startsWith(`${prefix} `) || identifier.startsWith(`${prefix}-`) || identifier.startsWith(`${prefix}+`);
 
-export type NameStep = 'proper' | 'bayer-flamsteed' | 'variable' | 'catalogue';
-export function preferredName(identifiers: readonly string[]): { readonly name: string; readonly step: NameStep; readonly identifier: string } | undefined {
+export type NameStep = 'iau' | 'proper' | 'bayer-flamsteed' | 'variable' | 'catalogue';
+/** Steps that give a star a name of its own rather than a designation; such a star is a map target (spec `featured`). */
+export const PROPER_STEPS: ReadonlySet<NameStep> = new Set(['iau', 'proper']);
+export function preferredName(identifiers: readonly string[], iau?: IauLookup): { readonly name: string; readonly step: NameStep; readonly identifier: string } | undefined {
   const ids = identifiers.map(collapse), found = (test: (id: string) => boolean) => ids.find(test);
+  const adopted = iau?.(ids);
+  if (adopted) return { name: adopted.name, step: 'iau', identifier: adopted.designation && adopted.designation !== '-' ? adopted.designation : `HIP ${adopted.hip}` };
   const proper = found(id => id.startsWith('NAME '));
   if (proper) return { name: proper.slice(5), step: 'proper', identifier: proper };
   // A Bayer letter before a Flamsteed number, and the plain letter before its numbered form (kap Cet before kap01 Cet): SIMBAD

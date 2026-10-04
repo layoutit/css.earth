@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "giausar",
+  "card": {
+    "text": "A star 102 parsecs away, 66 times the Sun's width, measured from its light.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 56211: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-lambda-draconis",
+        "url": "https://en.wikipedia.org/wiki/Lambda_Draconis",
+        "label": "Wikipedia, \"Lambda Draconis\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1377667235",
+        "quote": "Lambda Draconis, also named Giausar, is a solitary, orange-red star in the northern circumpolar constellation of Draco."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its brightness, measured band by band, gives 811 times the Sun's luminosity at 3,785 K, so 66.319 solar radii.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 56211: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-lambda-draconis",
+        "url": "https://en.wikipedia.org/wiki/Lambda_Draconis",
+        "label": "Wikipedia, \"Lambda Draconis\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1377667235",
+        "quote": "It is visible to the naked eye with an apparent visual magnitude of around +3.8."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its spectrum",
+      "summary": "The color of the star's light."
+    }
+  }
+}

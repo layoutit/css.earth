@@ -1,4 +1,4 @@
-# Psi1 Draconis A
+# Dziban
 
 ## Sources
 
@@ -12,7 +12,7 @@ Its disc spans 0.949 milliarcseconds, which gives 2.329 solar radii and 6,014 K 
 
 ## Evidence
 
-Generated 2026-10-02 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts) from Gaia DR3, SIMBAD and the archives named above; each choice was read with the dataset's own reader.
+Generated 2026-10-03 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts) from Gaia DR3, SIMBAD and the archives named above; each choice was read with the dataset's own reader.
 
 
 ## Known problems

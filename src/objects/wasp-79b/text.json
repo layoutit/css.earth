@@ -1,0 +1,43 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "wasp-79b",
+  "card": {
+    "text": "WASP-79 b was found in 2012 by SuperWASP as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202244429",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...672A..34G/abstract",
+        "label": "Gressier et al. 2023",
+        "checked": "2026-10-03",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname GRESSIER_ET_AL__2023): disc_year 2012, disc_facility SuperWASP, sy_pnum 1; pl_orbper 3.66239163, pl_radj 1.53, pl_bmassj 0.85"
+      },
+      {
+        "catalogueId": "wikipedia-wasp-79",
+        "url": "https://en.wikipedia.org/wiki/WASP-79",
+        "label": "Wikipedia, \"WASP-79\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1375774697",
+        "quote": "It hosts one known exoplanet, WASP-79b."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is the only planet known around Montuno. Its orbit and size follow Gressier et al. 2023's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202244429",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...672A..34G/abstract",
+        "label": "Gressier et al. 2023",
+        "checked": "2026-10-03",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname GRESSIER_ET_AL__2023): disc_year 2012, disc_facility SuperWASP, sy_pnum 1; pl_orbper 3.66239163, pl_radj 1.53, pl_bmassj 0.85"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

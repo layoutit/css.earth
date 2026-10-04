@@ -22,8 +22,8 @@ beforeEach(() => stubGlobal('Image', class {
  * carry no billboard images, so a small bank draws nothing until its datasets load. */
 const datasetBanks = (banks: readonly { id: string; frame: DensityVolumeFrame; contextVisibility?: string; attachedTo?: string }[]) => ({
   volumeDatasetBanks: banks.map(bank => ({ id: bank.id, frame: bank.frame })),
-  datasetBillboards: { atlasUrl: '/atlas.webp', plan: parseDatasetBillboards({ schema: 'cssearth-dataset-billboards@1',
-    atlas: { columns: 1, rows: 1, cellPx: 256 },
+  datasetBillboards: { imageUrl: (id: string) => `/billboards/${id}.webp`, plan: parseDatasetBillboards({ schema: 'cssearth-dataset-billboards@2',
+    imagePx: 256,
     banks: banks.map(bank => ({ id: bank.id, contextVisibility: bank.contextVisibility ?? 'galactic', attached: bank.attachedTo !== undefined })) }) },
 });
 

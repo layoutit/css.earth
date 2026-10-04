@@ -1,0 +1,31 @@
+{
+  "host": "xo-5",
+  "planets": [
+    {
+      "id": "xo-5b",
+      "name": "XO-5 b",
+      "description": "Transiting planet of Absolutno with a 4.19-day year, found in 2008.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2015AcA....65..117S/abstract",
+        "credit": "Smith 2015"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "SMITH_2015"
+      },
+      "text": {
+        "card": "XO-5 b was found in 2008 by XO as it crossed its star.",
+        "introduction": "It is the only planet known around Absolutno. Its orbit and size follow Smith 2015's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname SMITH_2015): disc_year 2008, disc_facility XO, sy_pnum 1; pl_orbper 4.18775631, pl_radj 1.14, pl_bmassj 1.19",
+        "quotes": {
+          "url": "https://en.wikipedia.org/wiki/XO-5b",
+          "title": "XO-5b",
+          "revision": "1376696343",
+          "card": "XO-5b, formally named Makropulos, is an extrasolar planet approximately 910 light years away in the constellation of Lynx.",
+          "introduction": "This planet was found by the transit method using the XO Telescope and announced in May 2008."
+        }
+      },
+      "order": 5461
+    }
+  ]
+}

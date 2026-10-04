@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1051-0004-6361-201220993",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Boisse et al. (2013): HAT-P-42b and HAT-P-43b",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1212.6448"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/201220993"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2013A&A...558A..86B"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2013A&A...558A..86B",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/201220993",
+      "label": "Astronomy & Astrophysics 558 A86"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2013A&A...558A..86B",
+      "checkedOn": "2026-10-03",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Boisse et al. (2013), Astronomy & Astrophysics 558 A86",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2013A&A...558A..86B"
+    }
+  ],
+  "publisher": "Astronomy & Astrophysics 558 A86",
+  "creators": [
+    "I. Boisse",
+    "J. D. Hartman",
+    "G. Á. Bakos",
+    "et al."
+  ],
+  "publicationDate": "2013"
+}

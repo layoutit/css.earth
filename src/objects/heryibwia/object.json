@@ -1,0 +1,148 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "heryibwia",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Heryibwia",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 40230243.9
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/heryibwia-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Heryibwia",
+      "classification": "star",
+      "color": "#ffcc87",
+      "distanceAu": 9228906.7,
+      "description": "A star 45 parsecs away, 58 times the Sun's width, measured from its light.",
+      "systemName": "Heryibwia system",
+      "aliases": [
+        "Eta Sagittarii",
+        "HD 167618",
+        "HIP 89642",
+        "HR 6832"
+      ],
+      "order": 5559,
+      "context": {
+        "order": 5556
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        84962499792624100,
+        -1102776449808749800,
+        -826311248767341000
+      ],
+      "presentationToReference": [
+        0.06153956290027354,
+        -0.04597964761191573,
+        -0.9970450111221297,
+        -0.7987568729158522,
+        0.596729597212901,
+        -0.07681956638655559,
+        -0.5984984044821947,
+        -0.8011239977778802,
+        0.000004080962128428805
+      ],
+      "orbitUpReference": [
+        0.04597964761191573,
+        -0.596729597212901,
+        0.8011239977778802
+      ],
+      "metersPerUnit": 129774980.32258065,
+      "bodyRadiusM": 40230243900
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

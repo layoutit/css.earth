@@ -2,7 +2,7 @@
 
 ## Sources
 
-It is the only planet known around HATS-72. Its orbit and size follow Hartman et al. 2020's fit, the archive's default. The introduction is generated from Hartman et al. 2020's published values; the sections below are the data's own.
+It is the only planet known around Zembra. Its orbit and size follow Hartman et al. 2020's fit, the archive's default. The introduction is generated from Hartman et al. 2020's published values; the sections below are the data's own.
 
 **Size and mass.** Radius 0.7224 Jupiter radii from Hartman et al. 2020 (2020AJ....159..173H), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2020AJ....159..173H/abstract): 51,645.8 km at 71,492 km per Jupiter radius. GM from the mass 0.1254 Jupiter masses (Hartman et al. 2020, the mass the NASA Exoplanet Archive's composite table adopts (2020AJ....159..173H), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2020AJ....159..173H/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.
 
@@ -10,10 +10,11 @@ It is the only planet known around HATS-72. Its orbit and size follow Hartman et
 
 **Color.** No image or measured color exists. The neutral gray is lit by hats-72's measured color (#ffceaf, the color dataset of hats-72 (src/objects/hats-72/source/photometry/stellar-color.json)) at the gray's own brightness.
 
-**Charts.** The orbits of HATS-72's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (42, 92, 96), folded onto its orbit. Upper limits and rows without an error are left out.
+**Charts.** The orbits of Zembra's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (42, 92, 96), folded onto its orbit. Upper limits and rows without an error are left out.
 
 ## Evidence
 
-Generated 2026-09-29 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/hats-72b.json).
+Generated 2026-10-03 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/hats-72b.json).
+
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

@@ -4,6 +4,8 @@ const relocated: [string, string][] = [
 ];
 const prefix = 'labs/nebula/models/';
 export function resolveLabModelPath(path: string): string {
+  if (/^labs\/nebula\/sources\/(?:reference-images|orion-reference|(?:lmc-smash-full|smc-smash-full|omega-centauri-vst|omega-centauri-wfi)\.webp)\.json$/.test(path))
+    return path.replace('labs/nebula/sources/', 'labs/nebula/packages/lab/sources/');
   if (path === 'labs/nebula/src/validate-image-registration.py' || path === 'labs/nebula/src/alignment/validate-image-registration.py')
     return 'labs/nebula/models/lmc/candidates/source/wise-registration/validate-image-registration.pinned.py';
   if (path === 'labs/nebula/src/star-removal/star-removal.py' || path === 'labs/nebula/src/star-removal/star-separation.py')

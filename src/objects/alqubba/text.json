@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "alqubba",
+  "card": {
+    "text": "A star 145 parsecs away, 39 times the Sun's width, measured from its light.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 94160: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-beta-coronae-australis",
+        "url": "https://en.wikipedia.org/wiki/Beta_Coronae_Australis",
+        "label": "Wikipedia, \"Beta Coronae Australis\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374619107",
+        "quote": "Beta Coronae Australis, also named Alqubba, is a solitary star located in the southern constellation Corona Australis."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its brightness, measured band by band, gives 602 times the Sun's luminosity at 4,607 K, so 38.553 solar radii.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 94160: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-beta-coronae-australis",
+        "url": "https://en.wikipedia.org/wiki/Beta_Coronae_Australis",
+        "label": "Wikipedia, \"Beta Coronae Australis\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374619107",
+        "quote": "Its Bayer designation is Latinized from β Coronae Australis, and abbreviated Beta CrA or β CrA."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its temperature",
+      "summary": "The color of the star's light."
+    }
+  }
+}

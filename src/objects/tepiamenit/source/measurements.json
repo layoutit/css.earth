@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "tepiamenit",
+  "angularDiameterMas": 0.89,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 1,035,649 km at 15.61 pc = 0.89 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 15.613539605240174,
+  "distanceSource": "Gaia DR3 parallax 64.0470 +/- 0.1093 mas (same row, RUWE 0.87): 15.61 pc, no zero-point correction",
+  "radiusKm": 1035648.6,
+  "radiusSource": "Radius 1.489 (1.459 to 1.519) from Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26; astrophysical_parameters of the same source): 1,035,649 km at 695,700 km per solar radius. Mass 1.250 (1.210 to 1.290) from Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26; astrophysical_parameters of the same source); GM is that mass times the JPL solar GM. Temperature 6319 +/- 1.7 K from Andrae et al. (2023), A&A 674, A27 (Gaia DR3 GSP-Phot), astrophysical_parameters of Gaia DR3 1244571953471006720: teff_gspphot 6319.2407 K (16th-84th percentiles 6317.7007-6321.0938), the temperature FLAME used (https://doi.org/10.1051/0004-6361/202243462). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 6319,
+  "effectiveTemperatureSource": "Andrae et al. (2023), A&A 674, A27 (Gaia DR3 GSP-Phot), astrophysical_parameters of Gaia DR3 1244571953471006720: teff_gspphot 6319.2407 K (16th-84th percentiles 6317.7007-6321.0938), the temperature FLAME used (https://doi.org/10.1051/0004-6361/202243462)",
+  "surfaceGravityLogg": 4.19,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/tepiamenit.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.189, rounded to two decimals",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

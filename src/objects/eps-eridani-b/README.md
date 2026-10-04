@@ -10,12 +10,12 @@
 
 **Color.** No image or measured color exists. The neutral gray is lit by eps-eridani's measured color (#ffe6d0, the color dataset of eps-eridani (src/objects/eps-eridani/source/photometry/stellar-color.json)) at the gray's own brightness.
 
+**Charts.** The orbits of ε Eridani's planets from above, from their hosted-orbit records. Upper limits and rows without an error are left out.
+
 ## Evidence
 
-Generated 2026-09-26 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/eps-eridani-b.json).
+Generated 2026-10-03 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/eps-eridani-b.json).
 
-- [`hostedOrbits.test.ts`](../../../packages/astronomy/src/hostedOrbits.test.ts) checks the drawn orbit against what Thompson et al. (2025) state rather than against its own elements: on 2024-12-07 the planet is 1,096 mas from the star (their radial velocities alone: 1,071 ± 58 mas) at position angle 186° (their node, 186 +8/−9°, south of the star), its position angle grows through 2025 (counterclockwise), and in August 2028 it is north of the star.
-- Rendered with the star and the system view in the star's evidence image.
 
 ## Known problems
 

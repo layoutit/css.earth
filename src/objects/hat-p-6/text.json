@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hat-p-6",
+  "card": {
+    "text": "HAT-P-6 b crosses Sterrennacht as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-aa5df3",
+        "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+        "label": "Stassun et al. (2017), The Astronomical Journal 153 136",
+        "checked": "2026-10-03",
+        "locator": "NASA Exoplanet Archive ps table (st_refname STASSUN_ET_AL__2017): st_teff 6570, st_rad 1.62, st_mass 1.79"
+      },
+      {
+        "catalogueId": "wikipedia-hat-p-6",
+        "url": "https://en.wikipedia.org/wiki/HAT-P-6",
+        "label": "Wikipedia, \"HAT-P-6\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374435580",
+        "quote": "HAT-P-6, also named Sterrennacht is a star in the constellation Andromeda, located approximately 895 light years or 274 parsecs away from the Earth."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Stassun et al. 2017.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-aa5df3",
+        "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+        "label": "Stassun et al. (2017), The Astronomical Journal 153 136",
+        "checked": "2026-10-03",
+        "locator": "NASA Exoplanet Archive ps table (st_refname STASSUN_ET_AL__2017): st_teff 6570, st_rad 1.62, st_mass 1.79"
+      },
+      {
+        "catalogueId": "wikipedia-hat-p-6",
+        "url": "https://en.wikipedia.org/wiki/HAT-P-6",
+        "label": "Wikipedia, \"HAT-P-6\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374435580",
+        "quote": "It is an F-type star, implying that it is hotter and more massive than the Sun."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its Gaia spectrum",
+      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

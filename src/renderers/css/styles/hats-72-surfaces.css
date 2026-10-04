@@ -1,4 +1,4 @@
-/* HATS-72: the Sun's emissive presentation (body-surfaces.css, SUN block) scoped to this object, loaded after the shared
+/* Zembra: the Sun's emissive presentation (body-surfaces.css, SUN block) scoped to this object, loaded after the shared
    body-surfaces.css base rules. No spin: the rotation axis and period are unmeasured. Both plates are transparent: no observation is cast. */
 .object-stage[data-object-id="hats-72"] > :is(.polycss-camera, .hats-72-corona-layer, .hats-72-limb-layer) {
   --hats-72-scene-side-padding: 16px;

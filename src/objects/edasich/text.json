@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "edasich",
+  "card": {
+    "text": "A star 31 parsecs away, 12 times the Sun's width, measured from its light.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 75458: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-iota-draconis",
+        "url": "https://en.wikipedia.org/wiki/Iota_Draconis",
+        "label": "Wikipedia, \"Iota Draconis\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1375290884",
+        "quote": "Iota Draconis, also named Edasich, is a star in the northern circumpolar constellation of Draco."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its brightness, measured band by band, gives 57 times the Sun's luminosity at 4,570 K, so 12.083 solar radii.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 75458: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-iota-draconis",
+        "url": "https://en.wikipedia.org/wiki/Iota_Draconis",
+        "label": "Wikipedia, \"Iota Draconis\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1375290884",
+        "quote": "A visually unremarkable star of apparent magnitude 3.3, in 2002 it was discovered to have a planet orbiting it."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its spectrum",
+      "summary": "The color of the star's light."
+    }
+  }
+}

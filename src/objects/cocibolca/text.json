@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "cocibolca",
+  "card": {
+    "text": "A star about 34 parsecs away, the Sun's width, measured by Gaia.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202243688",
+        "url": "https://doi.org/10.1051/0004-6361/202243688",
+        "label": "Creevey et al. (2023), Astronomy & Astrophysics 674 A26",
+        "checked": "2026-10-03",
+        "locator": "gaiadr3.astrophysical_parameters, Gaia DR3 2343647384368388608: radius_flame, mass_flame, teff_gspphot"
+      },
+      {
+        "catalogueId": "wikipedia-hd-4208",
+        "url": "https://en.wikipedia.org/wiki/HD_4208",
+        "label": "Wikipedia, \"HD 4208\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374406065",
+        "quote": "HD 4208 is a star with an orbiting exoplanetary companion in the southern constellation of Sculptor."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Gaia's parallax, brightness and spectrum give it 1.0 solar radii and 0.91 solar masses (FLAME) and 5,545 K at its surface (GSP-Phot).",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202243688",
+        "url": "https://doi.org/10.1051/0004-6361/202243688",
+        "label": "Creevey et al. (2023), Astronomy & Astrophysics 674 A26",
+        "checked": "2026-10-03",
+        "locator": "gaiadr3.astrophysical_parameters, Gaia DR3 2343647384368388608: radius_flame, mass_flame, teff_gspphot"
+      },
+      {
+        "catalogueId": "wikipedia-hd-4208",
+        "url": "https://en.wikipedia.org/wiki/HD_4208",
+        "label": "Wikipedia, \"HD 4208\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374406065",
+        "quote": "It has a yellow hue with an apparent visual magnitude of 7.78, making it too dim to be visible to the naked eye."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its temperature",
+      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

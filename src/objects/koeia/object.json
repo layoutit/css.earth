@@ -1,0 +1,145 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "koeia",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Koeia",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 436899.6
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/koeia-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Koeia",
+      "classification": "star",
+      "color": "#ffbf90",
+      "distanceAu": 4800474,
+      "description": "A star 23 parsecs away, 63% of the Sun's width, measured from its light.",
+      "systemName": "Koeia system",
+      "aliases": [
+        "HIP 12961"
+      ],
+      "order": 5586,
+      "context": {
+        "order": 5583
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        493398397010699140,
+        439309588356472960,
+        -281586844094930200
+      ],
+      "presentationToReference": [
+        0.6870476407575313,
+        -0.2928563664680909,
+        0.6649817200108717,
+        0.6117300301387903,
+        -0.2607432802791906,
+        -0.746859633408877,
+        -0.39211211350314706,
+        -0.9199174367345989,
+        -0.000005978326664228119
+      ],
+      "orbitUpReference": [
+        0.2928563664680909,
+        0.2607432802791906,
+        0.9199174367345989
+      ],
+      "metersPerUnit": 1409353.5483870967,
+      "bodyRadiusM": 436899600
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

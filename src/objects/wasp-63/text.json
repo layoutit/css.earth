@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "wasp-63",
+  "card": {
+    "text": "WASP-63 b crosses Kosjenka as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-aa5df3",
+        "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+        "label": "Stassun et al. (2017), The Astronomical Journal 153 136",
+        "checked": "2026-10-03",
+        "locator": "NASA Exoplanet Archive ps table (st_refname STASSUN_ET_AL__2017): st_teff 5550, st_rad 1.86, st_mass 1.28"
+      },
+      {
+        "catalogueId": "wikipedia-wasp-63",
+        "url": "https://en.wikipedia.org/wiki/WASP-63",
+        "label": "Wikipedia, \"WASP-63\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1352828717",
+        "quote": "WASP-63, also named Kosjenka, is a single star with an exoplanetary companion in the southern constellation of Columba."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Stassun et al. 2017.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-aa5df3",
+        "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+        "label": "Stassun et al. (2017), The Astronomical Journal 153 136",
+        "checked": "2026-10-03",
+        "locator": "NASA Exoplanet Archive ps table (st_refname STASSUN_ET_AL__2017): st_teff 5550, st_rad 1.86, st_mass 1.28"
+      },
+      {
+        "catalogueId": "wikipedia-wasp-63",
+        "url": "https://en.wikipedia.org/wiki/WASP-63",
+        "label": "Wikipedia, \"WASP-63\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1352828717",
+        "quote": "It is too faint to be visible with the naked eye, having an apparent visual magnitude of 11.1."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its Gaia spectrum",
+      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

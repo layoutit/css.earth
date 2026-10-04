@@ -1,0 +1,30 @@
+{
+ "id": "rastaban",
+ "classification": "star",
+ "order": 5676,
+ "physical": {
+  "name": "Rastaban",
+  "horizonsCode": null,
+  "meanRadiusKm": 28025578.8,
+  "gravitationalParameterKm3PerS2": 0,
+  "parent": null,
+  "effectiveTemperatureK": 5113
+ },
+ "physicalNotes": "Radius 40.284 solar radii from McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 85670: radius 40.284 solar radii, implied by the fitted luminosity 996.471 solar luminosities (fractional uncertainty 0.05) and temperature (https://doi.org/10.1093/mnras/stx1433): 28,025,579 km at 695,700 km per solar radius. No mass is measured, so GM is 0, the records' unpublished value. Temperature 5113 +/- 125 K from McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 85670: effective temperature 5113 +/- 125 K, from the fit of a model atmosphere to the star's spectral energy distribution (goodness of fit Q 0.049) (https://doi.org/10.1093/mnras/stx1433). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 262.60823689,
+  "declinationDegrees": 52.30135886,
+  "positionEpochJulianYear": 1991.25,
+  "distanceParsecs": 116.55,
+  "properMotionRaMasPerYear": -15.89,
+  "properMotionDecMasPerYear": 12.28,
+  "radialVelocityKmPerS": -21,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Anderson & Francis (2012), Astronomy Letters 38, 331 (XHIP), Hipparcos astrometry (https://doi.org/10.1134/S1063773712050015), VizieR V/137D/XHIP row HIP = 85670: RAJ2000 262.60823689, DEJ2000 52.30135886 (ICRS at epoch J1991.25), from the archived row src/objects/rastaban/source/photometry/catalogue-row.tsv; SIMBAD names it HIP 85670",
+   "distance": "McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 85670: distance 116.55 pc, the paper's parallax inverted (Gaia DR1's where it revised the star's, else the Hipparcos reduction of van Leeuwen 2007; section 2.3; fractional uncertainty 0.012), at which the luminosity and radius hold (https://doi.org/10.1093/mnras/stx1433): 116.55 +/- 1.399 pc; Gaia DR3 cannot see the star",
+   "properMotion": "VizieR V/137D/XHIP row HIP = 85670 (same row): -15.89, 12.28 mas/yr",
+   "radialVelocity": "Anderson & Francis (2012), Astronomy Letters 38, 331 (XHIP), Hipparcos astrometry, HIP 85670: RV -21 +/- 0.23 km/s (quality A) (https://doi.org/10.1134/S1063773712050015)"
+  }
+ }
+}

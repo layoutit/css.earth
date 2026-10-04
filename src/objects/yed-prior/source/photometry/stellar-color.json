@@ -1,0 +1,42 @@
+{
+  "schema": "cssearth-stellar-photometric-color@1",
+  "objectId": "yed-prior",
+  "spectrum": "measured",
+  "measuredSpectrum": {
+    "source": "HST/STIS Next Generation Spectral Library v2 (Heap & Lindler; MAST high-level science product), HD 146051: 168-1020 nm",
+    "path": "photometry/h_stis_ngsl_hd146051_v2.fits",
+    "format": "fits-table",
+    "extension": "1",
+    "wavelength": {
+      "column": "WAVELENGTH",
+      "unit": "angstrom"
+    },
+    "flux": {
+      "column": "FLUX",
+      "kind": "flux"
+    },
+    "service": "https://archive.stsci.edu/pub/hlsp/stisngsl/v2/hd146051/h_stis_ngsl_hd146051_v2.fits",
+    "checked": "2026-10-03",
+    "gaps": [],
+    "note": "Space spectrophotometry from the Hubble Space Telescope; the file header marks it DATAQUAL good."
+  },
+  "whitePoint": "sRGB D65",
+  "normalization": "brightest linear sRGB channel = 1",
+  "crossCheck": {
+    "source": "Kiehling (1987), spectrophotometry of 60 bright F, G, K and M stars, 320-880 nm in 1 nm steps as normalised magnitudes: Kiehling (1987), A&AS 69, 465; VizieR III/124. * del Oph is HR 6056.",
+    "spectrum": {
+      "path": "photometry/crosscheck-kiehling-1987.tsv",
+      "format": "tsv-columns",
+      "wavelength": {
+        "column": "lambda",
+        "unit": "nm"
+      },
+      "flux": {
+        "column": "m(HR6056)",
+        "kind": "magnitude",
+        "missing": 99.999
+      },
+      "gaps": []
+    }
+  }
+}

@@ -1,0 +1,148 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "alcyone",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Alcyone",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 9574223.4
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/alcyone-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Alcyone",
+      "classification": "star",
+      "color": "#aec4ff",
+      "distanceAu": 25496198.6,
+      "description": "A star 124 parsecs away, 14 times the Sun's width, measured from its light.",
+      "systemName": "Alcyone system",
+      "aliases": [
+        "HD 23630",
+        "HIP 17702",
+        "HR 1165",
+        "Eta Tauri"
+      ],
+      "order": 5469,
+      "context": {
+        "order": 5466
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1902759232154603300,
+        2915627838749265400,
+        1557744507676754700
+      ],
+      "presentationToReference": [
+        0.4988649509752202,
+        0.2232046391644668,
+        0.8374445950293973,
+        0.7644185949856724,
+        0.34201997220057434,
+        -0.546522232169972,
+        0.40840907473833327,
+        -0.9127990072690584,
+        2.50078433060516e-17
+      ],
+      "orbitUpReference": [
+        -0.2232046391644668,
+        -0.34201997220057434,
+        0.9127990072690584
+      ],
+      "metersPerUnit": 30884591.612903226,
+      "bodyRadiusM": 9574223400
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

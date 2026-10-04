@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "chalawan",
+  "card": {
+    "text": "A star about 14 parsecs away, 1.3 times the Sun's width, measured by Gaia.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202243688",
+        "url": "https://doi.org/10.1051/0004-6361/202243688",
+        "label": "Creevey et al. (2023), Astronomy & Astrophysics 674 A26",
+        "checked": "2026-10-03",
+        "locator": "gaiadr3.astrophysical_parameters, Gaia DR3 777254360337133312: radius_flame, mass_flame, teff_gspphot"
+      },
+      {
+        "catalogueId": "wikipedia-47-ursae-majoris",
+        "url": "https://en.wikipedia.org/wiki/47_Ursae_Majoris",
+        "label": "Wikipedia, \"47 Ursae Majoris\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374404584",
+        "quote": "47 Ursae Majoris, formally named Chalawan, is a yellow dwarf star approximately 45.3 light-years from Earth in the constellation of Ursa Major."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Gaia's parallax, brightness and spectrum give it 1.3 solar radii and 0.99 solar masses (FLAME) and 5,764 K at its surface (GSP-Phot).",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202243688",
+        "url": "https://doi.org/10.1051/0004-6361/202243688",
+        "label": "Creevey et al. (2023), Astronomy & Astrophysics 674 A26",
+        "checked": "2026-10-03",
+        "locator": "gaiadr3.astrophysical_parameters, Gaia DR3 777254360337133312: radius_flame, mass_flame, teff_gspphot"
+      },
+      {
+        "catalogueId": "wikipedia-47-ursae-majoris",
+        "url": "https://en.wikipedia.org/wiki/47_Ursae_Majoris",
+        "label": "Wikipedia, \"47 Ursae Majoris\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374404584",
+        "quote": "As of 2011, three extrasolar planets are known to orbit the star."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its temperature",
+      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

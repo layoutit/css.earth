@@ -6,7 +6,7 @@
   "properties": {
     "preparation": {
       "schema": "cssearth-object-preparation@1",
-      "label": "HD 17156",
+      "label": "Nushagak",
       "steps": [
         "verify-sources",
         "assets",
@@ -95,12 +95,15 @@
       }
     },
     "catalog": {
-      "name": "HD 17156",
+      "name": "Nushagak",
       "classification": "star",
       "color": "#fff7fd",
       "distanceAu": 15971923.6,
       "description": "HD 17156 b crosses HD 17156 as seen from Earth, which is how it was found.",
-      "systemName": "HD 17156 system",
+      "systemName": "Nushagak system",
+      "aliases": [
+        "HD 17156"
+      ],
       "order": 3175,
       "context": {
         "order": 3172

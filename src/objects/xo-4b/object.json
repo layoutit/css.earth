@@ -1,0 +1,139 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "xo-4b",
+  "parent": "xo-4-system",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "XO-4 b",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "sky-sun",
+        "system-markers",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "thermal",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 89365
+      },
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "raster",
+          "model": "lit"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/templates/composite-planet.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "XO-4 b",
+      "classification": "exoplanet",
+      "color": "#9a9a9a",
+      "distanceAu": 54550675,
+      "description": "XO-4 b was found in 2010 by Lowell Observatory as it crossed its star.",
+      "systemName": "Koit system",
+      "order": 5588,
+      "context": {
+        "order": 5588
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -1495244457663380700,
+        4023185517434286000,
+        6940797702876471000
+      ],
+      "presentationToReference": [
+        -0.20281693266402456,
+        0.9333120396649767,
+        0.29630040236415056,
+        0.4855930061959298,
+        0.3586242773062334,
+        -0.7972377688369896,
+        0.8503321257945957,
+        0.017811915758357468,
+        0.5259448749618738
+      ],
+      "orbitUpReference": [
+        -0.9333120396649767,
+        -0.3586242773062334,
+        -0.017811915758357468
+      ],
+      "metersPerUnit": 288274.1935483871,
+      "bodyRadiusM": 89365000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

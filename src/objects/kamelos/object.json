@@ -1,0 +1,147 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "kamelos",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Kamelos",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 28748411.1
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/kamelos-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Kamelos",
+      "classification": "star",
+      "color": "#ffcb92",
+      "distanceAu": 44168064.1,
+      "description": "A star 214 parsecs away, 41 times the Sun's width, measured from its light.",
+      "systemName": "Kamelos system",
+      "aliases": [
+        "HD 45866",
+        "HIP 31940",
+        "HR 2363"
+      ],
+      "order": 5579,
+      "context": {
+        "order": 5576
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -241488665762857730,
+        1352862123524393200,
+        6462957594113644000
+      ],
+      "presentationToReference": [
+        -0.03654789540378215,
+        -0.17187839285123557,
+        0.9844399775570019,
+        0.20474776001902378,
+        0.9629124696358046,
+        0.17572117284797467,
+        0.9781322027766729,
+        -0.20798411932345193,
+        7.082912866658547e-7
+      ],
+      "orbitUpReference": [
+        0.17187839285123557,
+        -0.9629124696358046,
+        0.20798411932345193
+      ],
+      "metersPerUnit": 92736810,
+      "bodyRadiusM": 28748411100
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

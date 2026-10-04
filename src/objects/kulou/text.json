@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "kulou",
+  "card": {
+    "text": "A star 18 parsecs away, 1.9 times the Sun's width, measured from its light.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 65109: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-iota-centauri",
+        "url": "https://en.wikipedia.org/wiki/Iota_Centauri",
+        "label": "Wikipedia, \"Iota Centauri\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374447959",
+        "quote": "Iota Centauri is a star in the southern constellation of Centaurus."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its brightness, measured band by band, gives 22 times the Sun's luminosity at 9,191 K, so 1.872 solar radii.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 65109: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-iota-centauri",
+        "url": "https://en.wikipedia.org/wiki/Iota_Centauri",
+        "label": "Wikipedia, \"Iota Centauri\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374447959",
+        "quote": "It has the proper name Kulou; Iota Centauri is its Bayer designation, which is Latinized from ι Centauri and is abbreviated Iota Cen or ι Cen."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its spectrum",
+      "summary": "The color of the star's light."
+    }
+  }
+}
