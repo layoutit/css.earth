@@ -52,11 +52,11 @@ export interface CliServices {
   readonly listArtifactOutputs:(path:string,structure?:string)=>Promise<InspectedArtifact>;
   readonly exportOutput:typeof exportOutput;
   readonly projectOutput:typeof projectOutput;
-  readonly exportSphere:typeof exportSphere;
+  readonly exportSphere:(recordPath:string,outputDirectory:string)=>ReturnType<typeof exportSphere>;
   readonly exportSpatialObject:typeof exportSpatialObject;
   readonly executeFamilyOperation:typeof executeFamilyOperation;
 }
-const defaultServices:CliServices={importLocalArtifact,familyCoverageLedger,saveExploration,getSession,listArtifactOutputs,exportOutput,projectOutput,exportSphere,exportSpatialObject,executeFamilyOperation};
+const defaultServices:CliServices={importLocalArtifact,familyCoverageLedger,saveExploration,getSession,listArtifactOutputs,exportOutput,projectOutput,exportSphere:async(recordPath,outputDirectory)=>exportSphere(recordPath,outputDirectory,await import(pathToFileURL(resolve(WORKSPACE,'src/platform/solar-geometry.mts')).href)),exportSpatialObject,executeFamilyOperation};
 const inheritedTty=(name:string,fallback:boolean|undefined):boolean=>process.env[name]==='1'?true:process.env[name]==='0'?false:fallback===true;
 function processIo(output:(text:string)=>void):CliIo {
   let terminal:ReturnType<typeof createInterface>|undefined;

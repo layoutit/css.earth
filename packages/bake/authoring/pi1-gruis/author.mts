@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 /** π¹ Gruis authored inputs: the uniform-disc reference sphere from the retained measurements, the beam-convolved
  * reconstruction from the pinned SQUEEZE image, and the navigation marker rendered from it. The visibilities need no merge:
  * the pinned VLTI/PIONIER file is the image-ready file its authors published in the JMMC OiDB, and SQUEEZE read it as is.
@@ -15,7 +16,7 @@ import { readChannelRows } from '@cssearth/bake/objects/layers/observation';
 import { requireArray, requireRecord, requireFiniteNumber, requireString } from '@cssearth/core';
 import { authorUniformDiscSphere, contextMarker } from '../betelgeuse/author.mts';
 
-const root = resolve(import.meta.dirname, '../../../../src/objects/pi1-gruis/source');
+const root = resolve(checkoutProjectRoot(import.meta.url), 'src/objects/pi1-gruis/source');
 
 /** The image-ready PIONIER file (Paladini et al. 2018) as published in the OiDB, and the reconstruction made from it. */
 export const VISIBILITIES_PATH = 'observations/PI_GRU_forImage.fits';

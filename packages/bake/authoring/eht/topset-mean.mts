@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 /**
  * The EHT image of a black hole, made the way its collaboration made it: EHT's own eht-imaging pipeline, run on the
  * released calibrated data for a drawn sample of its published Top Set parameter combinations, and averaged. A release
@@ -23,7 +24,7 @@ import { requireArray, requireFiniteNumber, requireRecord, requireString } from 
 interface ReleaseFile { readonly role: string; readonly path: string }
 interface Release { readonly repository: string; readonly commit: string; readonly files: readonly ReleaseFile[] }
 
-const root = resolve(import.meta.dirname, '../../../..');
+const root = checkoutProjectRoot(import.meta.url);
 const args = process.argv.slice(2), objectId = args.find(arg => !arg.startsWith('--') && !/^\d+$/u.test(arg) && !arg.includes('/'));
 const option = (name: string) => { const index = args.indexOf(`--${name}`); return index < 0 ? undefined : args[index + 1]; };
 if (!objectId || !/^[a-z][a-z0-9-]*$/u.test(objectId)) throw new Error('Usage: node packages/bake/authoring/eht/topset-mean.mts <object-id> [--python <path>] [--workers <n>]');

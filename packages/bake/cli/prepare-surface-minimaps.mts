@@ -1,3 +1,4 @@
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 // Entry script: node packages/bake/cli/prepare-surface-minimaps.mts [<object-id>...]. Writes the sidebar minimaps of the registered
 // objects of the checkout it runs in; the work is `prepareSurfaceMinimaps` in @cssearth/bake/surface-previews, with the generated
 // solar geometry this entry loads from the checkout.
@@ -7,7 +8,7 @@ import { prepareSurfaceMinimaps } from '@cssearth/bake/surface-previews';
 import type { SolarGeometry } from '@cssearth/bake/objects/scene';
 import { readPreparedObjects } from '@cssearth/objects/node';
 
-const projectRoot = process.cwd();
+const projectRoot = checkoutProjectRoot(import.meta.url);
 const SCENE_OBJECTS = readPreparedObjects(projectRoot).sceneObjects;
 const solarGeometry: SolarGeometry = await import(pathToFileURL(resolve(projectRoot, 'src/platform/solar-geometry.mts')).href);
 const requested = process.argv.slice(2);

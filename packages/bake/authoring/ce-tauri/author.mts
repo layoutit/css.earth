@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 /** CE Tauri authored inputs: the uniform-disc reference sphere from the retained measurements and the navigation marker
  * rendered from the published December 2016 image. The images themselves are the authors' (Montargès et al. 2018, CDS
  * J/A+A/614/A12) and are restored by the acquisition plan, not written here.
@@ -12,7 +13,7 @@ import { readReconstruction } from '@cssearth/bake/objects/layers/observation';
 import { requireArray, requireRecord, requireFiniteNumber, requireString } from '@cssearth/core';
 import { authorUniformDiscSphere, contextMarker } from '../betelgeuse/author.mts';
 
-const root = resolve(import.meta.dirname, '../../../../src/objects/ce-tauri/source');
+const root = resolve(checkoutProjectRoot(import.meta.url), 'src/objects/ce-tauri/source');
 export const MARKER_IMAGE_PATH = 'observations/dec_avg.fit';
 export const SPHERE_PATH = 'shape/uniform-disc.tab';
 export const CONTEXT_PATH = 'presentation/context.png';

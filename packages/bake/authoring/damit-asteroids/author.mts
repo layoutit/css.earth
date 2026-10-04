@@ -1,3 +1,4 @@
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 /**
  * Author a DAMIT asteroid package from one archived model (convex, or nonconvex with `model.nonconvex` and `model.basis`)
  * and a separately published physical size.
@@ -25,8 +26,7 @@ import { requireArray, requireFiniteNumber, requireRecord, requireString } from 
 import { loadPdsPlateShape, requireTerrainMesh, simplifyRadialShape } from '@cssearth/bake/objects/geometry';
 import { loadRadialTerrain } from '@cssearth/bake/objects/layers/terrestrial';
 
-const ROOT = resolve(import.meta.dirname, '../../../..');
-if (process.cwd() !== ROOT) throw new Error('Run from the repository root.');
+const ROOT = checkoutProjectRoot(import.meta.url);
 const TEMPLATE = 'achilles';
 const EPOCH_JD = 2461286.5, AU_KM = 149597870.7, OBLIQUITY_DEGREES = 23.439291111;
 const DAMIT = 'https://damit.cuni.cz/projects/damit';

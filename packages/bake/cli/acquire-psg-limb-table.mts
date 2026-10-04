@@ -1,3 +1,4 @@
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 /**
  * Build a planet's PSG limb profile (halo.mts) from the NASA GSFC Planetary Spectrum Generator: the planet's own
  * atmosphere template, a 1 km beam on a limb line of sight at each tangent altitude with the Sun behind the observer
@@ -122,7 +123,7 @@ if (!altitudes.length || altitudes.some((value, index) => !Number.isFinite(value
   throw new TypeError(`--altitudes= must be increasing numbers in km, got ${JSON.stringify(argument('altitudes'))}.`);
 const lmax = integer('lmax'), nmax = integer('nmax', 8), WINDOW_NM = integer('window-nm', 10);
 if (!(WINDOW_NM > 0)) throw new TypeError('--window-nm= must be positive.');
-const root = process.cwd(), cachePath = resolve(root, 'output/psg-limb', `${body}.jsonl`), outputDirectory = resolve(root, 'src/objects', body, 'source/atmosphere');
+const root = checkoutProjectRoot(import.meta.url), cachePath = resolve(root, 'output/psg-limb', `${body}.jsonl`), outputDirectory = resolve(root, 'src/objects', body, 'source/atmosphere');
 await mkdir(dirname(cachePath), { recursive: true });
 const cache = new Map<string, unknown>((await readFile(cachePath, 'utf8').catch(() => '')).split('\n').filter(Boolean).map(line => { const { key, value } = JSON.parse(line); return [key, value]; }));
 const cached = async <T,>(key: string, compute: () => Promise<T>): Promise<T> => {

@@ -1,3 +1,4 @@
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 import { DATASET_BILLBOARDS_SCHEMA } from '@cssearth/objects';
 // `pnpm prepare:dataset-billboards` (`packages/bake/cli/prepare-dataset-billboards.mts`): what the universe knows about every volume dataset bank before fetching it.
 // Each bank gets its context visibility (whether it fades with the galaxy) and, when its default dataset has
@@ -114,7 +115,7 @@ async function imageLayerBillboard(id: string, descriptor: Record<string, unknow
 }
 
 /** Writes the dataset billboards of the checkout at `projectRoot`. */
-export async function prepareDatasetBillboards(projectRoot = process.cwd()) {
+export async function prepareDatasetBillboards(projectRoot = checkoutProjectRoot(import.meta.url)) {
   const objects = resolve(projectRoot, 'src/objects');
   const banks: { id: string; contextVisibility: 'galactic' | 'independent'; attached: boolean;
     view?: { back: Vector; right: Vector; down: Vector }; radiusUnits?: number; framingRadiusUnits?: number; image?: Buffer }[] = [];

@@ -16,7 +16,7 @@
  * that takes the id list (page data, reader text, markers) once with every id, and the authored preparation, the
  * only CPU-bound step, PREPARATIONS_AT_ONCE objects at a time. Measured on 57 objects (2026-09-24): one call per object and
  * per tool spent about 20 s of start-up on each, an hour in all; this order takes minutes. */
-import { execFile, spawnSync } from 'node:child_process';
+import { spawn } from 'node:child_process';
 import { access } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { projectRoot } from '@cssearth/core/node';
@@ -87,10 +87,48 @@ export const PREPARATION_STEPS: readonly PreparationStep[] = Object.freeze<Prepa
 
 export type Progress = (line: string) => void;
 
+/** Each command owns a process group: an abort stops descendants as well as the direct child. Parent signals and IPC
+ * disconnection preserve the telescope wrapper's cleanup even though these groups are detached from its group. */
+async function runPreparationCommand(command: string, args: readonly string[], root: string, signal: AbortSignal | undefined, capture: boolean): Promise<string | null> {
+  if (signal?.aborted) return 'Preparation aborted.';
+  return new Promise(done => {
+    const child = spawn(command, args, { cwd: root, detached: true, stdio: capture ? ['ignore', 'pipe', 'pipe'] : 'inherit' });
+    let stderr = '', error: Error | undefined;
+    let groupTerminated = false;
+    const killGroup = () => {
+      if (child.pid === undefined || groupTerminated) return;
+      try { process.kill(-child.pid, 'SIGKILL'); }
+      catch (failure) { if (!(failure instanceof Error && 'code' in failure && failure.code === 'ESRCH')) throw failure; }
+      // A sent SIGKILL (or an already-gone group) completes ownership: exit/close must not signal that id again.
+      groupTerminated = true;
+    };
+    const forward = (received: NodeJS.Signals) => { killGroup(); cleanup(); process.kill(process.pid, received); };
+    const cleanup = () => {
+      signal?.removeEventListener('abort', killGroup);
+      process.off('SIGINT', forward); process.off('SIGTERM', forward); process.off('exit', killGroup); process.off('disconnect', killGroup);
+    };
+    signal?.addEventListener('abort', killGroup, { once: true });
+    process.on('SIGINT', forward); process.on('SIGTERM', forward); process.on('exit', killGroup);
+    // answerParent also handles disconnect by terminating its own group; stop the detached steps first.
+    process.prependListener('disconnect', killGroup);
+    child.stdout?.resume();
+    child.stderr?.on('data', (chunk: Buffer) => { stderr = (stderr + chunk.toString()).slice(-64 * 1024 * 1024); });
+    child.once('error', failure => { error = failure; });
+    // Kill descendants at exit, before waiting for inherited output pipes to close.
+    child.once('exit', killGroup);
+    child.once('close', status => {
+      // A command may have left descendants behind: they still belong to this step, including after an abort.
+      killGroup(); cleanup();
+      done(status === 0 && !signal?.aborted && !error ? null : `${[command, ...args].join(' ')}\n${error?.message ?? stderr.split('\n').filter(line => line.trim() && !line.startsWith('    at')).slice(-6).join('\n')}`);
+    });
+    if (signal?.aborted) killGroup();
+  });
+}
+
 /** Prepare `ids` through the chain from `from` to `to` (inclusive; the whole chain by default). Returns false after naming
  * the failed step and the command that resumes. */
-export async function prepareObjects(ids: readonly string[], { from, to, reuseImages = false, root = projectRoot(import.meta.url), atOnce = PREPARATIONS_AT_ONCE, progress = line => console.log(line) }:
-  { from?: string; to?: string; reuseImages?: boolean; root?: string; atOnce?: number; progress?: Progress } = {}) {
+export async function prepareObjects(ids: readonly string[], { from, to, reuseImages = false, root = projectRoot(import.meta.url), atOnce = PREPARATIONS_AT_ONCE, signal, progress = line => console.log(line) }:
+  { from?: string; to?: string; reuseImages?: boolean; root?: string; atOnce?: number; signal?: AbortSignal; progress?: Progress } = {}) {
   root = resolve(root);
   if (!ids.length || new Set(ids).size !== ids.length) throw new TypeError('prepare-object: name each object once.');
   for (const id of ids) if (!/^[a-z][a-z0-9-]*$/u.test(id) || !await exists(resolve(root, 'src/objects', id, 'object.json'))) throw new TypeError(`No object package: src/objects/${id}/object.json.`);
@@ -101,6 +139,7 @@ export async function prepareObjects(ids: readonly string[], { from, to, reuseIm
   const steps = PREPARATION_STEPS.slice(start, end + 1), started = Date.now(), elapsed = () => `${Math.round((Date.now() - started) / 1000)}s`;
   const resume = (step: PreparationStep) => `node packages/bake/cli/prepare-object.mts ${ids.join(' ')} --from ${step.name}${to ? ` --to ${to}` : ''}`;
   for (const step of steps) {
+    if (signal?.aborted) return false;
     if (step.scope === 'each') {
       const queue = ids.map((id, at) => [id, at] as const), failures: string[] = [];
       progress(`\n[${step.name}] ${step.purpose} (${elapsed()})`);
@@ -109,8 +148,7 @@ export async function prepareObjects(ids: readonly string[], { from, to, reuseIm
           const [id, at] = next;
           progress(`  [${at + 1}/${ids.length}] ${id} (${elapsed()})`);
           for (const [command, ...args] of await step.commands([id], { reuseImages, root })) {
-            const failure = await new Promise<string | null>(done => execFile(command!, args, { cwd: root, maxBuffer: 64 * 1024 * 1024 }, (error, _stdout, stderr) =>
-              done(error ? `${[command, ...args].join(' ')}\n${stderr.toString().split('\n').filter(line => line.trim() && !line.startsWith('    at')).slice(-6).join('\n')}` : null)));
+            const failure = await runPreparationCommand(command!, args, root, signal, true);
             if (failure) { failures.push(failure); break; }
           }
         }
@@ -123,8 +161,8 @@ export async function prepareObjects(ids: readonly string[], { from, to, reuseIm
     if (commands instanceof Error) { console.error(`\nStep "${step.name}" refused: ${commands.message}\nFix it, then resume: ${resume(step)}`); return false; }
     progress(`\n[${step.name}] ${step.purpose}${commands.length ? '' : ' (nothing to do)'} (${elapsed()})`);
     for (const [command, ...args] of commands) {
-      const run = spawnSync(command!, args, { cwd: root, stdio: 'inherit' });
-      if (run.status !== 0) { console.error(`\nStep "${step.name}" failed running: ${[command, ...args].join(' ')}\nFix it, then resume: ${resume(step)}`); return false; }
+      const failure = await runPreparationCommand(command!, args, root, signal, false);
+      if (failure) { console.error(`\nStep "${step.name}" failed running: ${[command, ...args].join(' ')}\nFix it, then resume: ${resume(step)}`); return false; }
     }
   }
   progress(`\n${ids.length === 1 ? ids[0] : `${ids.length} objects`}: prepared in ${elapsed()}. Check in the browser, run the unit tests, review git status before committing, and publish: node packages/bake/cli/publish-runtime-assets.mts ${[...ids, ...(end >= index('pins', 0) ? ['sun'] : [])].map(id => `--object=${id}`).join(' ')}`);
@@ -132,4 +170,4 @@ export async function prepareObjects(ids: readonly string[], { from, to, reuseIm
 }
 
 /** One object, as before. */
-export const prepareObject = (id: string, options: { from?: string; reuseImages?: boolean; root?: string } = {}) => prepareObjects([id], options);
+export const prepareObject = (id: string, options: { from?: string; reuseImages?: boolean; root?: string; signal?: AbortSignal } = {}) => prepareObjects([id], options);

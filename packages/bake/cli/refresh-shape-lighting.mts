@@ -1,3 +1,4 @@
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 // Entry script: node packages/bake/cli/refresh-shape-lighting.mts stage|publish <object-id>... | --all. The work is in
 // @cssearth/bake/refresh-shape-lighting, with the generated solar geometry this entry loads from the checkout.
 import { readFile } from 'node:fs/promises';
@@ -8,7 +9,7 @@ import { requireArray, requireRecord } from '@cssearth/core';
 import { readPreparedObjects } from '@cssearth/objects/node';
 import { publishShapeLighting, stageShapeLighting, validateStage } from '@cssearth/bake/refresh-shape-lighting';
 
-const projectRoot = process.cwd();
+const projectRoot = checkoutProjectRoot(import.meta.url);
 const SCENE_OBJECTS = readPreparedObjects(resolve(import.meta.dirname, '../../..')).sceneObjects;
 const json = async (path: string) => requireRecord(JSON.parse(await readFile(path, 'utf8')));
 

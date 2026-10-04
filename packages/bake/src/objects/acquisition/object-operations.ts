@@ -1,3 +1,4 @@
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 import { parseRuntimeManifest, prepareRuntimeManifest, assembleRuntimeAssets } from '../../delivery/index.ts';
 import { containedPath, parseSourceManifest, verifySources } from '../sources/index.ts';
 import { executeAcquisition, parseAcquisitionPlan, restoreMissingSources } from './operations-acquisition.ts';
@@ -10,7 +11,7 @@ const object=(value:unknown):Record<string,unknown>=>{if(!value||typeof value!==
 
 export async function runOperations(mode:string,id:string,argumentsList:string[]=[]) {
  if(!/^[a-z][a-z0-9-]*$/.test(id))throw new TypeError('Operation needs an object id.');
- const root=process.cwd(),objectRoot=resolve(root,'src/objects',id),sourceRoot=resolve(objectRoot,'source'),preparationRoot=resolve(objectRoot,'prepared');
+ const root=checkoutProjectRoot(import.meta.url),objectRoot=resolve(root,'src/objects',id),sourceRoot=resolve(objectRoot,'source'),preparationRoot=resolve(objectRoot,'prepared');
  const descriptor=object(JSON.parse(await readFile(resolve(objectRoot,'object.json'),'utf8')) as unknown);if(descriptor.id!==id)throw new TypeError('Object descriptor identity differs.');
  if(mode==='acquire'||mode==='verify'){
   const manifest=parseSourceManifest(JSON.parse(await readFile(resolve(sourceRoot,'manifest.json'),'utf8')) as unknown,id);

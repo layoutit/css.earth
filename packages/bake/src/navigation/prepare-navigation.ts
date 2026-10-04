@@ -1,6 +1,6 @@
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 import { constants } from "node:fs";
 import { copyFile, lstat, mkdir, mkdtemp, readFile, readdir, rename, rm, unlink, writeFile } from "node:fs/promises";
-import { createRequire } from "node:module";
 import { dirname, resolve } from "node:path";
 
 import sharp from "sharp";
@@ -38,8 +38,8 @@ import { readPreparedObjects } from "@cssearth/objects/node";
 
 const markerTileSize = 16;
 export const BODY_MARKER_ATLAS_PAGE_SIZE = 256;
-/** The checkout, found through this package's own name so the path holds from the sources and from `dist/`. */
-const ROOT = resolve(dirname(createRequire(import.meta.url).resolve("@cssearth/bake/package.json")), "../..");
+/** The real checkout, found by the shared workspace-marker resolver from source and `dist/`. */
+const ROOT = checkoutProjectRoot(import.meta.url);
 /** The scene objects nearest first, read from the registry on first use rather than when the entry is imported. */
 let planetMarkerPlanets: readonly MarkerPlanet[] | undefined;
 const PLANET_MARKER_PLANETS = () => planetMarkerPlanets ??= Object.freeze(

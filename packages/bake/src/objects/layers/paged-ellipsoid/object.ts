@@ -1,3 +1,4 @@
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 import { AUTHORED_PREPARATION_SCHEMA, type AuthoredPreparationReceipt, readPublishedPreparationSources, requireObjectControls } from '@cssearth/objects';
 
 import type { ContentPreparationContext, PreparedObjectContentAssets } from '../../content/index.ts';
@@ -43,7 +44,7 @@ const canonical = (value: unknown): string => JSON.stringify(value, (_key, item:
 const write = (directory: string, name: string, value: unknown) => writeFile(resolve(directory, `${name}.json`), `${JSON.stringify(value)}\n`);
 
 /** Source-derived projective globe, atmosphere, cutaway, map hierarchy and places. */
-export async function preparePagedEllipsoidObject({ objectDirectory, publicDirectory, outputDirectory, prepareContent, solarGeometry, assetWorker, reuseImages = false, acceptChanged = [], packDirectory = process.env.CSSEARTH_WMTS_PACK_DIRECTORY ?? resolve(process.cwd(), '.local/wmts-global') }: PagedEllipsoidContext) {
+export async function preparePagedEllipsoidObject({ objectDirectory, publicDirectory, outputDirectory, prepareContent, solarGeometry, assetWorker, reuseImages = false, acceptChanged = [], packDirectory = process.env.CSSEARTH_WMTS_PACK_DIRECTORY ?? resolve(checkoutProjectRoot(import.meta.url), '.local/wmts-global') }: PagedEllipsoidContext) {
   const { descriptor, entries, sources, config, bindingSource, sourceDirectory, sourceManifest, sun, raster, scene, surfaceRasterPlan } = await readPagedEllipsoid(solarGeometry, objectDirectory);
   // The raw imagery is read only by the stages a reuse-images run reuses; it may be absent from this checkout.
   if (!reuseImages) await verifySourceManifest({ sourceRoot: sourceDirectory, manifest: sourceManifest, objectName: config.displayName });

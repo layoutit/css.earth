@@ -483,6 +483,12 @@ importers:
       '@cssearth/telescope':
         specifier: workspace:*
         version: link:../telescope
+      linkedom:
+        specifier: ^0.18.13
+        version: 0.18.13
+      sharp:
+        specifier: 0.35.3
+        version: 0.35.3(@types/node@26.4.0)
     devDependencies:
       '@types/node':
         specifier: ^26.4.0
@@ -493,15 +499,12 @@ importers:
       esbuild:
         specifier: 0.27.7
         version: 0.27.7
-      linkedom:
-        specifier: ^0.18.13
-        version: 0.18.13
       pngjs:
         specifier: 7.0.0
         version: 7.0.0
-      sharp:
-        specifier: 0.35.3
-        version: 0.35.3(@types/node@26.4.0)
+      tsup:
+        specifier: ^8.0.1
+        version: 8.5.1(jiti@2.6.1)(postcss@8.5.26)(tsx@4.23.15)(typescript@5.9.3)(yaml@2.9.0)
       typescript:
         specifier: 5.9.3
         version: 5.9.3

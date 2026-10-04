@@ -13,3 +13,4 @@ export * from './math/normalize.js';
 export * from './math/world-rotation.js';
 export * from './math/convex-window.js';
 export * from './math/limb-intensity.js';
+export type { PitchCalibration } from './pitch-calibration.js';

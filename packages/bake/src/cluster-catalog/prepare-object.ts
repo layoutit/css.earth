@@ -1,5 +1,5 @@
 import { mkdir, readFile, rename, writeFile } from 'node:fs/promises';
-import { basename, dirname, resolve } from 'node:path';
+import { dirname, resolve } from 'node:path';
 import { gunzipSync } from 'node:zlib';
 import { parsePreparedClusterCatalog } from '@cssearth/objects';
 import { requireRecord as record } from '@cssearth/core';
@@ -29,6 +29,9 @@ export function readClusterGroupDistances(csv: string, path: string): Map<string
  * group distances, written with its inventory into the object's own `prepared/`. */
 export async function prepareClusterCatalogObject(options: { objectDirectory: string }) {
   const objectDirectory = resolve(options.objectDirectory), sourceDirectory = resolve(objectDirectory, 'source');
+  const descriptor = record(JSON.parse(await readFile(resolve(objectDirectory, 'object.json'), 'utf8')), 'object.json');
+  if (typeof descriptor.id !== 'string' || !/^[a-z][a-z0-9-]*$/u.test(descriptor.id)) throw new TypeError(`${objectDirectory}/object.json: authored descriptor id is required.`);
+  const objectId = descriptor.id;
   const recipe = record(JSON.parse(await readFile(resolve(sourceDirectory, 'catalogue.json'), 'utf8')), 'Cluster recipe') as unknown as ClusterRecipe;
   const pinned = async (id: string) => {
     const source = recipe.sources.find(candidate => candidate.id === id);
@@ -43,7 +46,7 @@ export async function prepareClusterCatalogObject(options: { objectDirectory: st
   const bytes = Buffer.from(JSON.stringify(data) + '\n'), path = resolve(objectDirectory, 'prepared/catalogue.json');
   await mkdir(dirname(path), { recursive: true });
   await writeFile(`${path}.tmp`, bytes); await rename(`${path}.tmp`, path);
-  const objectId = basename(objectDirectory), current = await readInventory(objectId, objectDirectory);
+  const current = await readInventory(objectId, objectDirectory);
   const kept = current?.assets.filter(asset => asset.location === 'prepared' && asset.filename !== 'catalogue.json') ?? [];
   await updateInventory({ objectId, objectDirectory, location: 'prepared', assets: [...kept, { filename: 'catalogue.json', bytes: bytes.length, sha256: sha256(bytes) }] });
   console.log(`PREPARED CLUSTER CATALOGUE: ${JSON.stringify({ path, bytes: bytes.length, clusters: data.objects.map(object => `${object.id} ${(object.distance.valuePc / 1e6).toFixed(1)} Mpc${object.detailedObjectId ? ` -> ${object.detailedObjectId}` : ''}`) })}`);

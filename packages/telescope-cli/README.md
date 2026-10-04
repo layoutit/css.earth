@@ -117,3 +117,5 @@ Renderer runtime exceptions are file-scoped in [the architecture rule](../../.gi
 `src/spatial-handoff.mts` runs physical resource loaders; `src/sphere/native-scroll/native-camera.mts`,
 `src/sphere/sphere-html.mts` and `src/sphere/sphere-oracle.mts` publish retained scenes.
 The package keeps its renderer dependency for these four consumers. F16 validation uses objects contracts.
+
+Sphere export imports the built `@cssearth/telescope-cli/sphere/lane` entry. The CLI loads the checkout's generated solar geometry and passes it to `exportSphere`; the lane compiles only during package build.

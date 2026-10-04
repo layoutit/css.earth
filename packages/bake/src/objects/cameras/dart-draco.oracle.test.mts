@@ -1,3 +1,5 @@
+import { setupBakeOracleInputs } from './oracle-inputs.mts';
+await setupBakeOracleInputs();
 import assert from 'node:assert/strict';
 import { sourceLoad, sourceTest, sourceValues } from '@cssearth/objects/node/source-test';
 import { readFile } from 'node:fs/promises';

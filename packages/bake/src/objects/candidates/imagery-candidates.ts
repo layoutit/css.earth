@@ -1,3 +1,4 @@
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 /** Before wiring or re-registering a photograph dataset, find whether a public archive holds finer frames than the body ships
  * (`packages/bake/cli/imagery-candidates.mts` prints what these find).
  *
@@ -13,13 +14,12 @@
  * The verdict is advisory: finer frames still need a camera, registration and reuse terms before they can ship. */
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
-import { createRequire } from 'node:module';
 import { requireArray, requireRecord } from '@cssearth/core';
 import { almaObservations, archiveLeads, depositsCiting, esoRawObservations, fetchRetrying, mastObservations } from './archive-search.ts';
 
 const OPUS = 'https://opus.pds-rings.seti.org/api';
-/** The checkout, found through this package's own name so the path holds from the sources and from `dist/`. */
-const ROOT = resolve(dirname(createRequire(import.meta.url).resolve('@cssearth/bake/package.json')), '../..');
+/** The real checkout, found by the shared workspace-marker resolver from source and `dist/`. */
+const ROOT = checkoutProjectRoot(import.meta.url);
 /** A frame must be at least twice as fine as the shipped one to count as an upgrade: finer by less is within footprint and mesh error. */
 export const UPGRADE_FACTOR = 2;
 

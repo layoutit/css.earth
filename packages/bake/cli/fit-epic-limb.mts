@@ -1,3 +1,4 @@
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 /**
  * Earth's limb law measured from DSCOVR EPIC Level 1B frames: one Minnaert coefficient per color channel (680, 551
  * and 443 nm), fitted to the whole sunlit disc as EPIC sees it from L1, clouds and atmosphere included. Each frame's
@@ -84,7 +85,7 @@ const summary = BANDS.map(({ band, channel }) => {
 });
 console.log(summary);
 if (process.argv.includes('--write')) {
-  const root = process.cwd(), photometry = resolve(root, 'src/objects/earth/source/photometry'), evidence = resolve(root, 'src/objects/earth/evidence');
+  const root = checkoutProjectRoot(import.meta.url), photometry = resolve(root, 'src/objects/earth/source/photometry'), evidence = resolve(root, 'src/objects/earth/evidence');
   await mkdir(photometry, { recursive: true }); await mkdir(evidence, { recursive: true });
   const phase = [Math.min(...fits.map(fit => fit.phaseDegrees[0])), Math.max(...fits.map(fit => fit.phaseDegrees[1]))].map(value => Math.round(value * 10) / 10);
   const emission = Math.round(Math.acos(MINIMUM_COSINE) * 1800 / Math.PI) / 10;

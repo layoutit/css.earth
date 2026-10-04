@@ -1,8 +1,7 @@
+import type { PitchCalibration } from '@cssearth/core';
 import type { LevelOfDetailPlan, OrbitLineFade } from './world-presentation.js';
 
-export interface PitchCalibration {
-  defaultControlPitchDegrees: number; maximumControlPitchDegrees: number; initialScenePitchDegrees: number; maximumScenePitchDegrees: number;
-}
+export type { PitchCalibration } from '@cssearth/core';
 
 export interface ResponsiveFit {
   model: string; portraitBaseWidthShare: number; narrowPortraitWidthShareGain: number;

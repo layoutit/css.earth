@@ -1,3 +1,4 @@
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 import { sha256 } from '@cssearth/core/node';
 import type { RuntimeAssetLocation } from '../delivery/index.ts';
 interface InstallProgress {completed: number; total: number; installed: number; reused: number; skipped: number;}
@@ -123,7 +124,7 @@ export async function installRuntimeAssets(assets: readonly RuntimeAssetLocation
  * restores inventoried files from R2. `--location` narrows to one location; `--metadata` restores only the
  * prepared presentation of the volume objects, which is all a deploy catalogue reads.
  */
-export async function setupAssets(args: readonly string[], root = process.cwd()) {
+export async function setupAssets(args: readonly string[], root = checkoutProjectRoot(import.meta.url)) {
   const allowMissing = readAllowMissingFlag(args), metadata = args.includes("--metadata");
   const locationArg = args.find(arg => arg.startsWith("--location="))?.slice("--location=".length);
   if (locationArg !== undefined && !(ASSET_LOCATIONS as readonly string[]).includes(locationArg)) throw new TypeError(`Unknown asset location: ${locationArg}.`);

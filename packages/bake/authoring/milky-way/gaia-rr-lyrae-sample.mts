@@ -1,3 +1,4 @@
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 // Entry script: node packages/bake/authoring/milky-way/gaia-rr-lyrae-sample.mts [table5.dat.gz]
 /**
  * The Milky Way's Gaia RR Lyrae sample: the Gaia DR3 RR Lyrae stars Li et al. (2023, ApJ 944, 88, table 5) place beyond
@@ -23,7 +24,7 @@ import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { gunzipSync, gzipSync } from 'node:zlib';
 
-const repository = resolve(import.meta.dirname, '../../../..');
+const repository = checkoutProjectRoot(import.meta.url);
 const inputPath = resolve(process.argv[2] ?? resolve(repository, 'output/rrlyrae/table5.dat.gz'));
 const outputPath = resolve(repository, 'src/objects/milky-way-volume/source/gaia-rr-lyrae/sample.csv.gz');
 const descriptorPath = resolve(repository, 'src/objects/milky-way-volume/object.json');

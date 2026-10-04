@@ -1,3 +1,4 @@
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 // Entry script: node packages/bake/authoring/far-destinations/picture-source.mts <object id>...
 /**
  * The picture each far destination's image-layer bank bakes: a publisher's image, or the part of it that shows the
@@ -20,7 +21,7 @@ import { basename, resolve } from 'node:path';
 import sharp from 'sharp';
 import type { Sharp } from 'sharp';
 
-const repository = resolve(import.meta.dirname, '../../../..');
+const repository = checkoutProjectRoot(import.meta.url);
 const ids = process.argv.slice(2);
 if (!ids.length) throw new TypeError('Usage: picture-source.mts <object id>...');
 

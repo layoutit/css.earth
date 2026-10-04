@@ -1,3 +1,4 @@
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 import { refreshSourceRecord } from '../source-authoring-templates.mts';
 import { requireRecord, requireArray, requireString, requireFiniteNumber } from '@cssearth/core';
 import { createSourceManifest } from '@cssearth/objects/node';
@@ -11,8 +12,7 @@ import sharp from 'sharp';
 import { loadRadialTerrain } from '@cssearth/bake/objects/layers/terrestrial';
 import { renderRadialSnapshot } from '@cssearth/bake/objects/layers/terrestrial';
 import { paintMissingCoverage } from '@cssearth/bake/raster';
-const root = resolve(import.meta.dirname, '../../../..');
-if (process.cwd() !== root) throw new Error('Run from the repository root.');
+const root = checkoutProjectRoot(import.meta.url);
 const read = async (path: string) => requireRecord(JSON.parse(await readFile(path, 'utf8')));
 const records = (value: unknown) => requireArray(value).map(entry => requireRecord(entry));
 const bodies = records((await read(process.argv.find(arg => arg.startsWith('--inputs='))?.slice('--inputs='.length) ?? 'packages/bake/authoring/distant-worlds/inputs.json')).bodies).map(b => ({...b,id:requireString(b.id),name:requireString(b.name),source:requireString(b.source),credit:requireString(b.credit)}));

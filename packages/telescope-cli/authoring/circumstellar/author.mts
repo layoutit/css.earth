@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 import { VOLUME_PROVENANCE_SCHEMA } from '@cssearth/bake/volume';
 import { VOLUME_SOURCE_MANIFEST_SCHEMA, VOLUME_PRESENTATION_SOURCE_SCHEMA, VOLUME_RECIPE_SCHEMA, NEBULA_DELIVERY_SCHEMA, CIRCUMSTELLAR_RECONSTRUCTION_SCHEMA, type EdgeOnReconstruction, type CircumstellarOpacity } from '@cssearth/objects';
 /** Author a circumstellar volume: the material around a star, drawn from coronagraph mosaics as a density grid attached to
@@ -38,7 +39,7 @@ import { midplaneGeometry, registerStarByPlanet, type MidplaneGeometry, type Pla
 import { hostedPlanetStateRelativeKm, PARSEC_KM, skyBasis, starAstrometry } from '@cssearth/astronomy';
 
 const METERS_PER_PARSEC = 3.085677581491367e16;
-const repositoryRoot = resolve(import.meta.dirname, '../../../..');
+const repositoryRoot = checkoutProjectRoot(import.meta.url);
 
 export interface CircumstellarDataset {
   readonly id: string; readonly label: string; readonly title: string; readonly summary: string; readonly description: string;
@@ -644,7 +645,7 @@ async function hostPlacement(recipe: CircumstellarRecipe) {
 }
 
 export async function author(id: string, options: { sources?: readonly string[] } = {}) {
-  const repository = resolve(import.meta.dirname, '../../../..'), packageBase = `src/objects/${id}/source`, root = resolve(repository, packageBase);
+  const repository = checkoutProjectRoot(import.meta.url), packageBase = `src/objects/${id}/source`, root = resolve(repository, packageBase);
   const recipe = parseCircumstellarRecipe(JSON.parse(await readFile(resolve(root, 'circumstellar.json'), 'utf8')));
   if (recipe.id !== id) throw new TypeError(`The recipe is for ${recipe.id}, not ${id}.`);
   const downloadsBase = `.local/${id}`, downloads = resolve(repository, downloadsBase);

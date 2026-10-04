@@ -1,3 +1,4 @@
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 // Entry script: node packages/bake/cli/refresh-shape-materials.mts <object-id>... | --all [--resume] [--descriptions-only]
 // [--source-root=<path>] [--shard=<index>/<count>]. The work is in @cssearth/bake/refresh-shape-materials, with the
 // generated solar geometry this entry loads from the checkout.
@@ -11,7 +12,7 @@ import { readInventory, readPreparedObjects } from '@cssearth/objects/node';
 import { anyChangedAfter } from '@cssearth/bake/preparation';
 import { refreshShapeMaterialDescriptions, refreshShapeMaterials } from '@cssearth/bake/refresh-shape-materials';
 
-const projectRoot = process.cwd();
+const projectRoot = checkoutProjectRoot(import.meta.url);
 const SCENE_OBJECTS = readPreparedObjects(resolve(import.meta.dirname, '../../..')).sceneObjects;
 const records = (value: unknown) => requireArray(value).map(value => requireRecord(value));
 const json = async (path: string) => requireRecord(JSON.parse(await readFile(path, 'utf8')));
