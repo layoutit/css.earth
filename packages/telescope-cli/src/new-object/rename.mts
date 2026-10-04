@@ -44,7 +44,8 @@ export async function renameStars(root: string, ids: readonly string[], archive:
   const lines: string[] = [], refresh: string[] = [];
   // The bodies each star hosts, from their own stored specs.
   const hosted = new Map<string, string[]>();
-  for (const id of await readdir(objects)) {
+  // Only an object's folder holds a spec: the guide beside them (src/objects/README.md) is a file.
+  for (const { name: id } of (await readdir(objects, { withFileTypes: true })).filter(entry => entry.isDirectory())) {
     const spec = await read(id).catch((error: unknown) => {
       if (error instanceof Error && 'code' in error && error.code === 'ENOENT') return undefined;
       throw error;
