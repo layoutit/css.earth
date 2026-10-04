@@ -26,6 +26,27 @@
     ]
   },
   "datasets": {
+    "rings": {
+      "title": "Helix on its two rings",
+      "detail": "6145 × 6623 px",
+      "summary": "The photograph on the nebula's two published rings: an inner disc and the outer ring around it, each at its own tilt.",
+      "sources": [
+        {
+          "catalogueId": "esahubble-opo0432d",
+          "url": "https://esahubble.org/images/opo0432d/",
+          "label": "ESA/Hubble opo0432d: NASA, ESA, C.R. O'Dell (Vanderbilt University), and M. Meixner, P. McCullough, and G. Bacon (Space Telescope Science Institute)",
+          "checked": "2026-10-04",
+          "locator": "A new view of the Helix Nebula"
+        },
+        {
+          "catalogueId": "publication-odell-2004-helix-structure",
+          "url": "https://arxiv.org/abs/astro-ph/0407556",
+          "label": "O'Dell, McCullough & Meixner (2004), AJ 128, 2339: Unraveling the Helix Nebula: its structure and knots",
+          "checked": "2026-10-04",
+          "locator": "Sect. III.1 and IV: an inner disc of radius 250 arcsec tilted 23 degrees and an outer ring of radius 371 arcsec tilted 53 degrees; the far side of the disc's axis at position angle 288 degrees, of the ring's at about 168 degrees"
+        }
+      ]
+    },
     "eso-vista": {
       "title": "Helix in near infrared",
       "detail": "6592 × 6592 px",
