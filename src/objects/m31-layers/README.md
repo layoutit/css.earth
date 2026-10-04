@@ -70,6 +70,10 @@ Each dot keeps its place in the disc at a height drawn from its population's lay
 770 pc for planetary nebulae. Dots are toned by the photograph beneath them so they sit in the galaxy's light; stars are
 colored by their measured B-V. These are presentation choices.
 
+M31's globular clusters are their own package, the [globular clusters](../m31-globular-clusters/README.md), drawn while
+M31 is selected: 441 clusters that reach far past the photograph, each at a depth drawn from the cluster system's
+published profile.
+
 ## Evidence
 
 - [Composite report](evidence/2026-09-29/optical-composite.json): pixels from each input (6,849,915 from the survey,

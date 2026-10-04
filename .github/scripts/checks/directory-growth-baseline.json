@@ -3,7 +3,7 @@
   "allowance": 20,
   "directories": {
     ".github/scripts/architecture": {
-      "implementations": 23,
+      "implementations": 22,
       "tests": 16,
       "reason": "Architecture graph, resolver and rule checks form one repository-boundary checker; moving individual rules would fragment its shared policy owner."
     },
@@ -24,12 +24,12 @@
     },
     "packages/astronomy/src": {
       "implementations": 25,
-      "tests": 20,
+      "tests": 21,
       "reason": "The package root is the host-neutral astronomical calculation API; a single extra module does not establish a separate format owner."
     },
     "packages/bake/cli": {
-      "implementations": 103,
-      "tests": 0,
+      "implementations": 104,
+      "tests": 1,
       "reason": "Preparation commands form the documented executable entry surface; moving isolated commands would churn invocation paths without separating their implementation owners."
     },
     "packages/bake/src/objects/raster": {
@@ -38,18 +38,18 @@
       "reason": "Measured-map preparation modules and colocated science tests form one raster-object owner; the extra module does not create an independent format area."
     },
     "packages/renderer/src/navigation": {
-      "implementations": 39,
-      "tests": 17,
+      "implementations": 36,
+      "tests": 23,
       "reason": "The retained world camera and input policy form one navigation owner; its decomposition requires a dedicated interaction change."
     },
     "packages/renderer/src/rendering": {
       "implementations": 34,
-      "tests": 22,
+      "tests": 31,
       "reason": "Prepared scene activation and retained DOM writes form one rendering lifecycle owner; the additional modules and colocated tests do not establish an independent rendering area."
     },
     "packages/renderer/src/universe": {
       "implementations": 29,
-      "tests": 15,
+      "tests": 17,
       "reason": "Universe context projection and prepared catalogue display form one renderer owner; retain the existing ceiling pending dedicated decomposition."
     },
     "packages/telescope-cli/src": {
@@ -59,17 +59,17 @@
     },
     "packages/telescope-cli/src/archives/interferometry": {
       "implementations": 27,
-      "tests": 21,
+      "tests": 20,
       "reason": "Archive calibration and reconstruction modules share the interferometry acquisition owner and its colocated tests."
     },
     "packages/telescope-cli/src/new-object": {
       "implementations": 33,
-      "tests": 13,
+      "tests": 14,
       "reason": "Object drafting orchestration remains one command owner; archive-specific provider readers and their tests now live in archives/."
     },
     "site": {
       "implementations": 102,
-      "tests": 3,
+      "tests": 4,
       "reason": "plan 7: site architecture"
     },
     "site/build/prepare": {
@@ -78,19 +78,14 @@
       "reason": "plan 7: site architecture"
     },
     "site/components": {
-      "implementations": 38,
+      "implementations": 30,
       "tests": 0,
       "reason": "Existing shared application-shell components remain together pending plan 7: site architecture."
     },
     "site/test": {
-      "implementations": 9,
-      "tests": 110,
+      "implementations": 7,
+      "tests": 129,
       "reason": "Flat site integration tests are advisory only; splitting their common harness ownership belongs to plan 7: site architecture."
-    },
-    "src/platform": {
-      "implementations": 13,
-      "tests": 23,
-      "reason": "Existing platform integration tests remain colocated with their source owner; test growth is advisory and does not block new coverage."
     }
   }
 }

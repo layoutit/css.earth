@@ -1,4 +1,5 @@
 import { isArray } from '@cssearth/core';
+import { TEXELS_PER_CSS_PIXEL } from '@cssearth/objects';
 export interface ProjectiveGeometry { projection: string; matrix: string; leafWidth: number; leafHeight: number; backgroundPosition: readonly number[]; backgroundSize: readonly number[]; }
 export interface RasterBand { y: number; height: number; }
 export interface RasterLayoutOptions { width: number; height: number; bandCount?: number; bands?: readonly RasterBand[]; gutter: number; }
@@ -15,11 +16,7 @@ export const MAX_PROJECTIVE_TEXTURE_LEAF_LAYOUT_SIZE = 32;
 export const PREPARED_PROJECTIVE_TEXTURE_LAYER_SCHEMA =
   "polycss-prepared-projective-texture-layer@1";
 
-/** Image texels per CSS pixel of every raster leaf: the @2x convention, one backing pixel per texel at DPR 2. WebKit backs a
- * composited leaf at its box size times the device pixel ratio and ignores its transform, so a larger box costs memory and
- * adds no detail: Itokawa's 794 faces held 486 MB of layers on a DPR 3 iPhone at one texel per CSS pixel and 173 MB at two
- * (739 of 3.16 million screen pixels changed at rest), and each of Earth's caps 36 MB at raster scale 4 and 2.3 MB at 1. */
-export const TEXELS_PER_CSS_PIXEL = 2;
+export { TEXELS_PER_CSS_PIXEL };
 
 /** The raster scale that shows a leaf's widest image at TEXELS_PER_CSS_PIXEL. `imagePixels` is the pixel width of the widest
  * image the leaf can show, over every dataset, texture level and page; `backgroundWidth` is its background-size width in CSS

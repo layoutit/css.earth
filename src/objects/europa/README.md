@@ -1,6 +1,6 @@
 # Europa
 
-Europa's Monochrome globe is the USGS Voyager/Galileo global mosaic with controlled Galileo photographs inserted. Other views show False color, Elevation, geology, infrared, carbon dioxide, peroxide and salt signatures, and JunoCam images. Magnetic evidence strongly suggests a subsurface salty ocean; the ocean is not directly mapped by this globe.
+Europa's Monochrome globe is the USGS Voyager/Galileo global mosaic with controlled Galileo photographs inserted. Other views show False color, geology, infrared, carbon dioxide, peroxide and salt signatures, and JunoCam images. Magnetic evidence strongly suggests a subsurface salty ocean; the ocean is not directly mapped by this globe.
 
 The navigation marker uses the source map as a stylized identifier. The [marker recipe](source/preparation/navigation.json) crops and resizes it, then prepares a circular alpha edge and the shared full-phase curvature shading (35% ambient, 65% diffuse). It is not a view at the scene epoch.
 
@@ -9,7 +9,6 @@ The navigation marker uses the source map as a stylized identifier. The [marker 
 - The [USGS Voyager/Galileo global mosaic](https://astrogeology.usgs.gov/search/map/europa_voyager_galileo_ssi_global_mosaic_500m) is a 19,631 × 9,816 monochrome GeoTIFF on a nominal 500 m grid.
 - Monochrome photographic inserts use 332 CLEAR-filter photographs from the [USGS controlled individual-image release](https://stac.astrogeology.usgs.gov/docs/data/jupiter/europa/galileo_individual_images/), described by [Bland et al. (2021)](https://doi.org/10.1029/2021EA001935).
 - The False color dataset uses the [USGS controlled Galileo observations](https://stac.astrogeology.usgs.gov/docs/data/jupiter/europa/galileo_individual_images/) (CC0), by Bland, Weller and colleagues: sequences G1ESGLOBAL01 (1996-06-28), 12ESGLOCOL01 (1997-12-16) and 14ESGLOCOL01 (1998-03-29).
-- The Elevation view uses the [USGS controlled Agenor DTM](https://stac.astrogeology.usgs.gov/docs/data/jupiter/europa/europa_controlled_usgs_dtms/). The CC0 release and source authors retain attribution.
 - The geology view keeps the ten map units and no-data regions of [Leonard, Patthoff and Senske (2024), SIM 3513](https://pubs.usgs.gov/publication/sim3513), scale 1:15 million.
 - The infrared view uses [the registered Galileo NIMS archive](https://doi.org/10.17189/4sz4-5024), observations 17ENGLOBAL01A and 17ENGLOBAL02A, Minnaert-corrected CIOF products.
 - Lighting uses the Lommel–Seeliger plus Lambert law of [Dhingra, Buratti and Seignovert (2021)](https://doi.org/10.3847/PSJ/ac06d6), fitted to 21 Voyager 2, Galileo and New Horizons clear-filter images. See [Lighting law](#lighting-law).
@@ -45,8 +44,6 @@ Each insert is carried to normal incidence with the Lambert law, I/F ÷ cos(inci
 | G1ESGLOBAL01, June 1996 | 0.5 |
 
 These weights are visual choices, not fitted scattering parameters; the [USGS Europa photometry study](https://www.hou.usra.edu/meetings/lpsc2022/pdf/1691.pdf) motivated comparing Lambert. Color appears only where all three bands are valid with incidence and emission at most 75°. Geometry comes from 20 controlled ISIS labels and [JPL Horizons](https://ssd-api.jpl.nasa.gov/doc/horizons.html) vectors in `source/photometry/`, oriented with [NAIF PCK equations](https://naif.jpl.nasa.gov/pub/naif/toolkit_docs/C/req/pck.html). One brightness multiplier per sequence softens steps against monochrome.
-
-**Elevation.** The Agenor relative stereo heights stay in meters, with no globe displacement. The −700…+300 m scale spans the −641.9267578125…+218.51205444335938 m source range. Fixed northwest relief shading shows slopes.
 
 **Geology and infrared.** Geology colors use the released ArcGIS CMYK symbols converted to RGB. Infrared RGB takes bands near 1.50, 1.35 and 0.74 µm, pinned in `source/nims/prepare-composite.json`, with fixed I/F ranges R 0–0.6, G 0–1.2, B 0–1.5.
 
@@ -84,7 +81,6 @@ The withheld composition grids match the original release exactly after float32 
 
 - **Monochrome inserts:** Smaller brightness steps remain where one gain per image cannot follow the phase-angle change in albedo, and shadows keep their original direction. Photographs beyond 85° incidence are not shown. Relative control uncertainties are about 247 m in latitude and 307 m in longitude; the older global mosaic has different registration errors. The delivered grid is about 1.20 km at the equator, so finer native detail is not shown. Atlas seams can show at extreme close zoom.
 - **False color:** 756 nm, 559 nm and 404 nm are shown as red, green and blue. This is not natural color. About 14.3% of the sphere has usable three-band coverage.
-- **Elevation:** Heights are relative, not tied to a global reference level. Effective resolved detail is about 3 km; source documentation gives nominal 52 m vertical precision.
 - **Illumination:** The disk correction is approximate: no phase-angle normalization, fitted scattering model, or removal of cast shadows.
 - **Lighting law:** One law lights every terrain; the paper's chaos and crater rows differ from the ridged-plains row used. Its emission limit, 84.5°, is derived here, not stated by the paper. The fits cover 10° to 128° phase, so the flood-lit default view (0°) and frames beyond 128° use the printed lines outside that range. The line for f crosses zero at 111°; from there the lit side follows the Lambert term alone. The paper's own fit of its 10° image (A = 0.69, f = 1.17, its Figure 6) gives a darker flood-lit limb, 0.61 of the centre, than the lines of Table 2.
 - **Infrared:** This is a spectral color display, not an abundance map. Its 2010 registration grid is not the 2021 control grid.

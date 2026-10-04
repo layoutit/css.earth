@@ -1,0 +1,43 @@
+{
+  "schema": "cssearth-catalogue-points-source@1",
+  "id": "mieske-gc",
+  "table": {
+    "path": "table.csv",
+    "origin": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&MAXREC=100000&QUERY=SELECT+CCOS%2C+RAJ2000%2C+DEJ2000+FROM+%22J%2FA%2BA%2F472%2F111%2Ftable1%22",
+    "bytes": 1559,
+    "format": "csv",
+    "columns": {
+      "name": 1,
+      "raDeg": 2,
+      "decDeg": 3
+    }
+  },
+  "filters": [],
+  "frame": {
+    "input": "icrs",
+    "output": "sun-icrf",
+    "epochJdTt": 2461286.5,
+    "placement": "spheroid",
+    "converter": "Each sky position at a depth drawn from the spheroid's density along its sight line (frame.spheroid).",
+    "spheroid": {
+      "centerRaDeg": 192.205322,
+      "centerDecDeg": -41.311089,
+      "distancePc": 40300000,
+      "halfLightRadiusKpc": 17.8,
+      "sersicIndex": 2.99,
+      "axisRatio": 0.781,
+      "axisPositionAngleDeg": 2.1,
+      "cutoffHalfLightRadii": 3.601,
+      "source": "gao-2020-cgs-ellipticals",
+      "basis": "The spheroid the volume's light is spread through (labs/nebula/models/ngc-4696/experiment.json shapePrior): Gao et al.'s (2020) Table 2 single-Sérsic fit to NGC 4696 (n = 2.99, half-light radius 16.65 kpc at their survey's scale, 91.3 arcsec, 17.8 kpc at 40.3 Mpc, axis ratio 0.781), axis along NGC 4696's minor axis in the plane of the sky (Ho et al. 2011), ending at 3.601 half-light radii, half of Ho et al.'s 26.5 B mag diameter. Each object's depth is drawn from it, not measured."
+    }
+  },
+  "source": "mieske-2007-centaurus-compact-objects",
+  "meaning": "Compact objects of the Centaurus Cluster, bright globular clusters and ultra-compact dwarf galaxies, that Mieske et al.'s (2007) spectra place in the cluster by their velocities: one dot per object at its catalogue position.",
+  "appearance": {
+    "colorCss": "#ffb38a",
+    "radiusPx": 1,
+    "opacity": 1,
+    "note": "Presentation only: the Milky Way globular clusters' warm orange."
+  }
+}

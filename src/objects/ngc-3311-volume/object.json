@@ -34,7 +34,10 @@
     "preparation": {
       "source": "source/delivery.json"
     },
-    "host": "ngc-3311"
+    "host": "ngc-3311",
+    "cataloguePoints": [
+      "dots"
+    ]
   },
   "prepared": {
     "format": "cssearth-volume-dataset-index@1",

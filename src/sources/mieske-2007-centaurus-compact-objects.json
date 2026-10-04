@@ -1,0 +1,53 @@
+{
+  "id": "mieske-2007-centaurus-compact-objects",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "A search for ultra-compact dwarf galaxies in the Centaurus galaxy cluster",
+  "identifiers": [
+    {
+      "type": "ads",
+      "value": "2007A&A...472..111M"
+    },
+    {
+      "type": "CDS/VizieR",
+      "value": "J/A+A/472/111"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://ui.adsabs.harvard.edu/abs/2007A%26A...472..111M",
+      "label": "2007A&A...472..111M"
+    },
+    {
+      "role": "archive",
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/472/111",
+      "label": "CDS J/A+A/472/111"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/472/111/ReadMe",
+      "checkedOn": "2026-10-04",
+      "locator": "table.csv: 27 rows; 18 drawn as NGC 4696's compact objects, inside the volume's 64.2 kpc edge."
+    }
+  ],
+  "creators": [
+    "S. Mieske",
+    "M. Hilker",
+    "A. Jordán",
+    "L. Infante",
+    "M. Kissler-Patig"
+  ],
+  "publisher": "A&A 472, 111",
+  "publicationDate": "2007",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite Mieske et al. (2007), A&A 472, 111.",
+      "scope": "NGC 4696's compact objects",
+      "evidence": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/472/111/ReadMe"
+    }
+  ]
+}

@@ -53,6 +53,24 @@
           }
         ]
       }
+    },
+    {
+      "id": "cantiello-gc-table",
+      "path": "src/objects/m102-layers/source/cantiello-gc/table1.dat",
+      "origin": "https://cdsarc.cds.unistra.fr/ftp/J/ApJ/668/209/table1.dat",
+      "title": "The globular cluster system in NGC 5866: optical observations from Hubble Space Telescope Advanced Camera for Surveys, table1.dat",
+      "credit": "M. Cantiello, J. P. Blakeslee, G. Raimondo; ApJ 668, 209",
+      "acquisition": "Published table downloaded unchanged from its CDS origin; read by packages/bake/cli/prepare-catalogue-points.mts through cantiello-gc/points.json.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "cantiello-2007-ngc5866-globular-clusters",
+            "role": "material",
+            "evidence": "https://cdsarc.cds.unistra.fr/ftp/J/ApJ/668/209/table1.dat"
+          }
+        ]
+      }
     }
   ],
   "documents": [

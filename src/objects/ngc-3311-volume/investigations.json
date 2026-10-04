@@ -57,12 +57,12 @@
     {
       "id": "globular-clusters",
       "subject": "Globular cluster and compact object catalogues",
-      "status": "deferred",
-      "finding": "Wehner et al. (2008) publish no cluster positions at CDS. Misgeld et al. (2011), CDS J/A+A/531/A4 tablea1, lists 118 globular clusters and ultra-compact dwarfs of the Hydra I core with positions and velocities. Not drawn: a volume bank's dots are switched on by a table in the site's runtime code, which this change does not touch.",
+      "status": "included",
+      "finding": "508 dots from 2 published tables: 85 globular clusters and ultra-compact dwarfs with velocities (Misgeld et al. (2011), CDS J/A+A/531/A4, 118 rows in the file; the others lie outside the volume) and 423 globular cluster candidates (Mirabile et al. (2026), CDS J/A+A/705/A117, their NGC 3311 master catalogue, selected with VISTA H-band photometry among other bands). Each sits along its sight line at a depth drawn from the volume's spheroid; that depth is not measured. No object is in both tables: the nearest pair is 1.7 arcsec apart. Wehner et al. (2008) publish no cluster positions at CDS.",
       "evidence": [
-        "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/531/A4"
-      ],
-      "revisitWhen": "The dots of a volume bank are declared in its package."
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/531/A4",
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/705/A117"
+      ]
     }
   ]
 }

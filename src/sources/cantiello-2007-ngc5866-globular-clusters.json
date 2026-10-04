@@ -1,0 +1,51 @@
+{
+  "id": "cantiello-2007-ngc5866-globular-clusters",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "The globular cluster system in NGC 5866: optical observations from Hubble Space Telescope Advanced Camera for Surveys",
+  "identifiers": [
+    {
+      "type": "ads",
+      "value": "2007ApJ...668..209C"
+    },
+    {
+      "type": "CDS/VizieR",
+      "value": "J/ApJ/668/209"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://ui.adsabs.harvard.edu/abs/2007ApJ...668..209C",
+      "label": "2007ApJ...668..209C"
+    },
+    {
+      "role": "archive",
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/668/209",
+      "label": "CDS J/ApJ/668/209"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/ApJ/668/209/ReadMe",
+      "checkedOn": "2026-10-04",
+      "locator": "table1.dat: 109 rows; 109 drawn as M102's globular cluster candidates."
+    }
+  ],
+  "creators": [
+    "M. Cantiello",
+    "J. P. Blakeslee",
+    "G. Raimondo"
+  ],
+  "publisher": "ApJ 668, 209",
+  "publicationDate": "2007",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite Cantiello et al. (2007), ApJ 668, 209.",
+      "scope": "M102's globular cluster candidates",
+      "evidence": "https://cdsarc.cds.unistra.fr/ftp/J/ApJ/668/209/ReadMe"
+    }
+  ]
+}

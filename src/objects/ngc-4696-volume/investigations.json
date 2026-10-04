@@ -53,12 +53,12 @@
     {
       "id": "globular-clusters",
       "subject": "Globular cluster and compact object catalogues",
-      "status": "deferred",
-      "finding": "Harris et al. (2006) publish no cluster positions at CDS. Mieske et al. (2007), CDS J/A+A/472/111 table1, lists 27 compact objects of the Centaurus Cluster with positions and velocities. Not drawn: a volume bank's dots are switched on by a table in the site's runtime code, which this change does not touch.",
+      "status": "included",
+      "finding": "3,716 dots from 2 published tables: 18 compact objects with velocities (Mieske et al. (2007), CDS J/A+A/472/111, 27 rows in the file; the others lie outside the volume) and 3,698 globular cluster candidates (Federle et al. (2024), CDS J/A+A/689/A342, 3,818 rows in the file; 12 are Mieske et al.'s objects and 108 lie outside the volume). Each sits along its sight line at a depth drawn from the volume's spheroid; that depth is not measured. Harris et al. (2006) publish no cluster positions at CDS.",
       "evidence": [
-        "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/472/111"
-      ],
-      "revisitWhen": "The dots of a volume bank are declared in its package."
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/472/111",
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/689/A342"
+      ]
     }
   ]
 }

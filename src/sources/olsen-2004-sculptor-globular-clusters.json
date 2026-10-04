@@ -1,0 +1,53 @@
+{
+  "id": "olsen-2004-sculptor-globular-clusters",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "The globular cluster systems of the Sculptor group",
+  "identifiers": [
+    {
+      "type": "ads",
+      "value": "2004AJ....127.2674O"
+    },
+    {
+      "type": "CDS/VizieR",
+      "value": "J/AJ/127/2674"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://ui.adsabs.harvard.edu/abs/2004AJ....127.2674O",
+      "label": "2004AJ....127.2674O"
+    },
+    {
+      "role": "archive",
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/AJ/127/2674",
+      "label": "CDS J/AJ/127/2674"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/AJ/127/2674/ReadMe",
+      "checkedOn": "2026-10-04",
+      "locator": "table3.dat: 712 rows, the candidate clusters of six Sculptor group galaxies; 122 are around NGC 300, 7 of them with the note 'cluster' (a spectrum confirmed the candidate as a star cluster); 4 drawn as NGC 300's globular clusters, 3 lie outside the photograph."
+    }
+  ],
+  "creators": [
+    "K. A. G. Olsen",
+    "B. W. Miller",
+    "N. B. Suntzeff",
+    "R. A. Schommer",
+    "J. Bright"
+  ],
+  "publisher": "AJ 127, 2674",
+  "publicationDate": "2004",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite Olsen et al. (2004), AJ 127, 2674.",
+      "scope": "NGC 300's globular clusters",
+      "evidence": "https://cdsarc.cds.unistra.fr/ftp/J/AJ/127/2674/ReadMe"
+    }
+  ]
+}

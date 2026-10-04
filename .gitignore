@@ -496,6 +496,19 @@ src/objects/*/source/yuan-*/table*.dat
 src/objects/*/source/gonzalez-gc/table6.dat
 src/objects/m32-layers/source/merrett-pne/table3.dat
 src/objects/m110-layers/source/merrett-pne/table3.dat
+src/objects/*/source/whitlock-gc/tablea1.dat
+src/objects/*/source/cantiello-gc/table1.dat
+src/objects/*/source/lomeli-gc/table6.dat
+src/objects/*/source/gonzalez-gc/table[578].dat
+src/objects/*/source/lim-clusters/table2.dat
+src/objects/*/source/olsen-gc/table3.dat
+src/objects/*/source/sharina-gc/objects.dat
+src/objects/*/source/misgeld-gc/tablea1.dat
+src/objects/*/source/mirabile-gc/ngc3311.dat
+src/objects/*/source/federle-gc/tablea1.dat
+src/objects/m31-globular-clusters/source/dots/table1.dat
 
 # The Cloudflare Worker bundled by site/build/bundle-cloudflare-worker.mts.
 cloudflare/bundled/
+# The Southern Ring's published density grid (39.7 MB); restored from its authors' repository (src/objects/ngc-3132-layers/source/manifest.json).
+src/objects/ngc-3132-layers/source/ngc3132_density_structure_101.dat

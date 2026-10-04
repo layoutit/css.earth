@@ -1,0 +1,52 @@
+{
+  "id": "esawebb-weic2207b",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Southern Ring Nebula (NIRCam Image)",
+  "identifiers": [
+    {
+      "type": "ESA/Webb image",
+      "value": "weic2207b"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://esawebb.org/images/weic2207b/",
+      "label": "Published source"
+    },
+    {
+      "role": "original",
+      "url": "https://cdn.esawebb.org/archives/images/large/weic2207b.jpg",
+      "label": "JPEG, 4833 x 4501 px"
+    },
+    {
+      "role": "rights",
+      "url": "https://esawebb.org/copyright/",
+      "label": "Reuse terms"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://esawebb.org/images/weic2207b/",
+      "checkedOn": "2026-10-04",
+      "locator": "4833 x 4501 px over 2.42 × 2.25 arcmin; NIRCam 0.90, 1.87, 2.12, 3.56, 4.05 and 4.70 µm; released 12 July 2022. The file's embedded sky tags for scale and direction, 0.0300 arcsec per pixel and north 111.99° right of vertical, and the star for place: the middle of the bright central star's saturated pixels, pixel 2411.6, 2112.8, is set at SIMBAD's place for NGC 3132, so the frame's centre is 151.7559818°, -40.435963°."
+    }
+  ],
+  "publisher": "ESA/Webb",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "NASA, ESA, CSA, STScI, and the Webb ERO Production Team",
+      "scope": "Published source",
+      "evidence": "https://esawebb.org/images/weic2207b/"
+    },
+    {
+      "kind": "rights",
+      "text": "Creative Commons Attribution 4.0 International; the full credit must be shown.",
+      "scope": "Published source",
+      "evidence": "https://esawebb.org/copyright/"
+    }
+  ]
+}

@@ -71,6 +71,24 @@
           }
         ]
       }
+    },
+    {
+      "id": "sharina-gc-table",
+      "path": "src/objects/m110-layers/source/sharina-gc/objects.dat",
+      "origin": "https://cdsarc.cds.unistra.fr/ftp/J/MNRAS/372/1259/objects.dat",
+      "title": "Ages, metallicities and [α/Fe] ratios of globular clusters in NGC 147, 185 and 205, objects.dat",
+      "credit": "M. E. Sharina, V. L. Afanasiev, T. H. Puzia; MNRAS 372, 1259",
+      "acquisition": "Published table downloaded unchanged from its CDS origin; read by packages/bake/cli/prepare-catalogue-points.mts through sharina-gc/points.json.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "sharina-2006-dwarf-elliptical-globular-clusters",
+            "role": "material",
+            "evidence": "https://cdsarc.cds.unistra.fr/ftp/J/MNRAS/372/1259/objects.dat"
+          }
+        ]
+      }
     }
   ],
   "documents": [

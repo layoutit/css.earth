@@ -3,7 +3,8 @@
 The giant elliptical galaxy NGC 4696, the brightest galaxy of the Centaurus Cluster, drawn as a volume of starlight on
 its own page, [NGC 4696](../ngc-4696/README.md). A survey image, cleaned of the Milky Way stars and neighbouring
 galaxies, supplies the light along every sight line; the depth of that light follows a published fit to NGC 4696's
-profile. **Depth is modelled, not measured.**
+profile. Its compact objects, globular clusters and ultra-compact dwarfs, are drawn as dots through the same volume.
+**Depth is modelled, not measured.**
 
 ## Sources
 
@@ -14,6 +15,8 @@ profile. **Depth is modelled, not measured.**
 | [Ho et al. (2011)](https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/197/21) | [Record](../../sources/ho-2011-cgs.json). The same survey's row NGC 4696: scale 10.94 kpc per arcmin (37.6 Mpc), diameter at 26.5 B mag per square arcsec 10.96′, photometric major axis at position angle 92.1 ± 1.3°. |
 | [HyperLEDA PGC](https://cdsarc.cds.unistra.fr/viz-bin/cat/VII/237) (Paturel et al. 2003) | [Record](../../sources/paturel-2003-hyperleda-pgc.json). Positions and D25 sizes of the 7 neighbouring galaxies masked in the image. |
 | [Cosmicflows-4](https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/944/94) (Tully et al. 2023) | Table 3, group 1PGC 43296: 40.3 Mpc. Position from the 2MASS Extended Source Catalog. See the [host](../ngc-4696/README.md). |
+| [Mieske et al. (2007)](https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/472/111) | [Record](../../sources/mieske-2007-centaurus-compact-objects.json). [Compact objects](source/mieske-gc/points.json), bright globular clusters and ultra-compact dwarfs, that their VIMOS spectra place in the Centaurus Cluster by velocity: 27 in Table 1, of which the 18 inside the volume are drawn. |
+| [Federle et al. (2024)](https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/689/A342) | [Record](../../sources/federle-2024-ngc4696-globular-clusters.json). [Globular cluster candidates](source/federle-gc/points.json) picked by shape, color and magnitude in Magellan/MegaCam g′, r′, i′ images of the central 8.8 × 11.5 arcmin: 3,818 in Table A1, of which the 3,698 inside the volume that are not also Mieske et al.'s are drawn. |
 
 ## Method
 
@@ -33,6 +36,10 @@ The Nebula Lab recipe is [labs/nebula/models/ngc-4696/experiment.json](../../../
    Gao et al.'s fit: n = 2.99, half-light radius 91.3″ (16.65 kpc at their survey's scale; 17.8 kpc at 40.3 Mpc), axis
    ratio 0.781. The spheroid's axis is NGC 4696's minor axis (position angle 2.1°), placed in the plane of the sky; no
    intrinsic axis is measured. It ends at 3.601 half-light radii, 328.8″ (64.2 kpc).
+5. **Dots:** each object sits along its sight line at a depth drawn from the same density
+   (`frame.placement: spheroid` in [prepare-catalogue-points](../../../packages/bake/cli/prepare-catalogue-points.mts)).
+   An object in both catalogues is drawn once: 12 of Mieske et al.'s lie within 0.95″ of one of Federle et al.'s, and
+   the next nearest pair is 1.79″ apart.
 
 Values chosen here, not measured:
 
@@ -41,6 +48,7 @@ Values chosen here, not measured:
   ellipticity.
 - The half-light radius in arcseconds assumes Gao et al. used their survey's tabulated scale; the paper gives kpc only.
 - The display exposure 1.5 and the 150-cell grid are M87's; the mask radius and the median window are M87's rules.
+- The dots' color is the Milky Way globular clusters'.
 
 ## Evidence
 
@@ -57,6 +65,8 @@ arrival, then the camera turned to the side and to above the galaxy.
 
 ## Known problems
 
+- The cluster candidates are picked from images alone: a dot can be a background galaxy or a foreground star. Their
+  field is a rectangle on the centre, so the dots stop at its edges before the volume does.
 - The survey's sky subtraction removes NGC 4696's faint outer light: the image fades into the sky about 200″ (39 kpc)
   from the centre, well inside the 329″ spheroid. Where the survey's coadded tiles meet, that subtraction changes
   level along straight lines, most visibly east and north-west of the core.

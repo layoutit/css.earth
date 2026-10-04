@@ -1,0 +1,55 @@
+{
+  "id": "federle-2024-ngc4696-globular-clusters",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "The turbulent life of NGC 4696 as told by its globular cluster system",
+  "identifiers": [
+    {
+      "type": "ads",
+      "value": "2024A&A...689A.342F"
+    },
+    {
+      "type": "CDS/VizieR",
+      "value": "J/A+A/689/A342"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://ui.adsabs.harvard.edu/abs/2024A%26A...689A.342F",
+      "label": "2024A&A...689A.342F"
+    },
+    {
+      "role": "archive",
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/689/A342",
+      "label": "CDS J/A+A/689/A342"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/689/A342/ReadMe",
+      "checkedOn": "2026-10-04",
+      "locator": "tablea1.dat: 3,818 rows; 3,698 drawn as NGC 4696's globular cluster candidates, inside the volume's 64.2 kpc edge."
+    }
+  ],
+  "creators": [
+    "S. Federle",
+    "M. Gómez",
+    "S. Mieske",
+    "W. E. Harris",
+    "M. Hilker",
+    "I. A. Yegorova",
+    "G. L. H. Harris"
+  ],
+  "publisher": "A&A 689, A342",
+  "publicationDate": "2024",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite Federle et al. (2024), A&A 689, A342.",
+      "scope": "NGC 4696's globular cluster candidates",
+      "evidence": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/689/A342/ReadMe"
+    }
+  ]
+}
