@@ -203,10 +203,12 @@ export async function installThermalDataset(files: PackageFiles, id: string, nam
   science.qualification += mapped;
 
   const raster = read(`${s}/preparation/raster.json`);
-  raster.surfaces = [{ id: 'thermal', output: `${id}-surface-{id}{suffix}.webp`, thumbnail: `${id}-dataset-{id}.webp`, source: 'photometry/thermal-color.json', falseColor: false, science }];
+  // The glow takes the place of the neutral shape; any other dataset the package has (an illustration) stays beside it.
+  const kept = <T extends { id?: string }>(list: readonly T[] | undefined) => (list ?? []).filter(entry => entry.id !== 'shape' && entry.id !== 'thermal');
+  raster.surfaces = [{ id: 'thermal', output: `${id}-surface-{id}{suffix}.webp`, thumbnail: `${id}-dataset-{id}.webp`, source: 'photometry/thermal-color.json', falseColor: false, science }, ...kept(raster.surfaces)];
   files.set(`${s}/preparation/raster.json`, json(raster));
   const descriptor = read(`${o}/object.json`);
-  descriptor.properties.recipe.surfaces[0].datasets = [{ id: 'thermal', source: 'content', material: 'lighting' }];
+  descriptor.properties.recipe.surfaces[0].datasets = [{ id: 'thermal', source: 'content', material: 'lighting' }, ...kept(descriptor.properties.recipe.surfaces[0].datasets)];
   files.set(`${o}/object.json`, json(descriptor));
   ensureStylesheet(files, id);
   const geometry = read(`${s}/preparation/geometry.json`);
@@ -214,15 +216,16 @@ export async function installThermalDataset(files: PackageFiles, id: string, nam
   geometry.surface.surface.url = `/scenes/${id}/${id}-surface-thermal@2x.webp`; geometry.surface.poles.url = `/scenes/${id}/${id}-poles-thermal@2x.webp`;
   files.set(`${s}/preparation/geometry.json`, json(geometry));
   const content = read(`${s}/content/object.json`);
+  const others = kept(content.datasets?.controls as { id?: string }[] | undefined);
   content.datasets = { titleKey: 'datasets', defaultDataset: 'thermal', controls: [{ id: 'thermal', label: measured ? 'Thermal glow' : 'Expected glow',
     qualification: measured ? `Black-body color at its measured dayside temperature, ${kelvin} K. The disc itself is unresolved.` : rock ? `An estimate, not a measurement: black-body color at ${kelvin} K, the bare-rock maximum for its orbit.` : `An estimate, not a measurement: black-body color at its published equilibrium temperature, ${kelvin} K.`,
     thumbnail: `${id}-dataset-thermal.webp`, surface: `${id}-surface-thermal@2x.webp`, poles: `${id}-poles-thermal@2x.webp`,
     source: { id: `${id}-thermal-color`, path: '../manifest.json', url: thermal.url }, falseColor: false,
     notes: measured ? `The color of ${name}'s heat: a black body at the dayside brightness temperature measured in secondary eclipse at ${measured.wavelengthMicrometres} µm (${measured.facility}). Its star lights the day side; the night side is not measured. Reflected starlight is not included.`
-      : `Nobody has measured ${name}'s heat. This is the color of a black body at ${kelvin} K, ${basis} (${thermal.source}). ${tested}. Its star lights the day side. Reflected starlight is not included.` }] };
+      : `Nobody has measured ${name}'s heat. This is the color of a black body at ${kelvin} K, ${basis} (${thermal.source}). ${tested}. Its star lights the day side. Reflected starlight is not included.` }, ...others] };
   files.set(`${s}/content/object.json`, json(content));
   const text = read(`${o}/text.json`);
-  text.datasets = { thermal: measured ? { title: 'Dayside heat', detail: 'From its dayside temperature', summary: `The color of a black body at the ${kelvin} K day side measured in eclipse.` }
+  text.datasets = { ...Object.fromEntries(Object.entries((text.datasets ?? {}) as Record<string, unknown>).filter(([key]) => key !== 'shape' && key !== 'thermal')), thermal: measured ? { title: 'Dayside heat', detail: 'From its dayside temperature', summary: `The color of a black body at the ${kelvin} K day side measured in eclipse.` }
     : { title: 'Estimated heat', detail: 'An estimate, not measured', summary: rock ? `Not measured: the color of a black body at the ${kelvin} K a dark, airless rock would reach there.` : `Not measured: the color of a black body at the ${kelvin} K its paper computes from its star's light.` } };
   files.set(`${o}/text.json`, json(text));
   const manifest = read(`${s}/manifest.json`);

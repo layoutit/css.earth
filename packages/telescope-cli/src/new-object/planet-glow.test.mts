@@ -69,6 +69,10 @@ test('an expected glow says it is an estimate everywhere, and a measured day sid
   const installed = await installThermalDataset(files, id, 'TRAPPIST-1f', estimate, undefined);
   const science = after('source/preparation/raster.json').surfaces[0].science, control = after('source/content/object.json').datasets.controls[0];
   assert.equal(science.kind, 'equilibrium-thermal-color');
+  // TRAPPIST-1f also carries an illustration: the glow replaces the neutral shape, and the illustration stays beside it.
+  assert.deepEqual(after('source/content/object.json').datasets.controls.map((entry: { id: string }) => entry.id), ['thermal', 'illustration']);
+  assert.deepEqual(after('source/preparation/raster.json').surfaces.map((entry: { id: string }) => entry.id), ['thermal', 'illustration']);
+  assert.deepEqual(Object.keys(after('text.json').datasets).sort(), ['illustration', 'thermal']);
   assert.match(science.qualification, /^An estimate, not a measurement: the color of a black body at the equilibrium temperature 1,624 K \(Southworth 2012/u);
   assert.deepEqual([control.label, control.qualification], ['Expected glow', 'An estimate, not a measurement: black-body color at its published equilibrium temperature, 1,624 K.']);
   assert.match(control.notes, new RegExp(`^Nobody has measured TRAPPIST-1f's heat\\. This is the color of a black body at 1,624 K, the equilibrium temperature its paper computes from its star's light .*${EQUILIBRIUM_TEST.replace(/[()]/gu, '\\$&')}\\.`, 'u'));

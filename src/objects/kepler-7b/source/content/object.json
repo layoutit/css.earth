@@ -65,6 +65,21 @@
         },
         "falseColor": false,
         "notes": "Nobody has measured Kepler-7 b's heat. This is the color of a black body at 1,630 K, the equilibrium temperature its paper computes from its star's light (Esteves et al. 2015, equilibrium temperature (NASA Exoplanet Archive planetary systems table)). On 120 hot Jupiters whose day side Spitzer measured, the measured temperature is within 20% of this kind of estimate for 83% (Deming et al. 2023). Its star lights the day side. Reflected starlight is not included."
+      },
+      {
+        "id": "illustration",
+        "label": "Illustration",
+        "qualification": "NASA's artist's concept of Kepler-7 b, from Eyes on Exoplanets; not an observation.",
+        "thumbnail": "kepler-7b-dataset-illustration.webp",
+        "surface": "kepler-7b-surface-illustration@2x.webp",
+        "poles": "kepler-7b-poles-illustration@2x.webp",
+        "source": {
+          "id": "kepler-7b-nasa-eyes-illustration",
+          "path": "../manifest.json",
+          "url": "https://eyes.nasa.gov/apps/exo/"
+        },
+        "falseColor": false,
+        "notes": "NASA's artist's concept of Kepler-7 b: the map its Eyes on Exoplanets app wraps around the planet. Nobody has resolved this planet's disc, so none of the color, clouds or terrain in it was observed. Its longitudes are arbitrary."
       }
     ]
   },
