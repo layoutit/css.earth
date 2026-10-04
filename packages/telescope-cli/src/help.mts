@@ -15,7 +15,7 @@ export const HELP = `Telescope — explore observations or continue from an exis
 Human entry points:
   telescope explore TARGET [--family F01..F18] [--kind KIND] [--instrument NAME] [--wavelength MIN,MAX] [--from ISO --to ISO] [--icrs-circle RA,DEC,RADIUS] [--out DIRECTORY]
   telescope fetch EXPLORE.json --archive keck|gemini|opus|chandra|spitzer --pick N [--file NAME] --out DIRECTORY [--resume] [--json]
-  telescope papers TARGET [--instrument NAME] [--host NAME] [--json] [--out DIRECTORY]
+  telescope papers TARGET... [--about PHRASE,PHRASE] [--fulltext] [--instrument NAME] [--host NAME] [--json] [--out DIRECTORY]
   telescope simulations TARGET [--json] [--out DIRECTORY]
   telescope leads TARGET | --class CLASS [--json] [--out DIRECTORY]
   telescope stars GALAXY [--json] [--out DIRECTORY]
@@ -51,10 +51,15 @@ NASA Exoplanet Archive's default parameter sets (their transiting planets, with 
 an eclipsing binary from DEBCat, --from-apokasc a Kepler-field giant from APOKASC-3, --from-cepheids a Cepheid from Groenewegen
 (2013), --from-k2 a K2-field giant and --from-tess a TESS giant from Khan et al. (2023), --from-gaia any star from Gaia DR3 FLAME, --from-hipparcos a Hipparcos star from the model-atmosphere fit to its light (McDonald et al. 2017), --from-iau the stars the IAU has named that the universe lacks, each by the first of those routes that measures it, --from-chara a nearby star whose disc CHARA measured (Boyajian et al. 2012), --from-npoi a bright star whose disc the NPOI measured (Baines et al. 2018, 2021), --from-sh0es the Cepheids Hubble found in a SN Ia host galaxy (Hoffmann et al. 2016), --from-m31cepheids Hubble's V1 and the Cepheids Hubble measured in Andromeda (Li et al. 2021), --from-m33cepheids those it measured in Triangulum (Breuval et al. 2023), --from-table a star of another galaxy from any VizieR table that lists it with a period (cepheid:m81=J/ApJ/743/176/table1), placed in its galaxy by the table's position, by SIMBAD's, or by the table's detector pixel on the exposure the request names (#exposure=mast:HST/product/FILE.fits,firstPixel=N), each naming what the spec still needs from the paper; --check runs the bake's first steps on
 what was generated; --skip-existing leaves objects already in the universe alone. The spec format is in packages/telescope-cli/src/new-object/spec.mts.
-Papers lists up to 20 OpenAlex works that name the target (and instrument) in their title or abstract,
-using arXiv's Atom API when OpenAlex is temporarily unavailable. The saved report names the source and fallback reason.
-It ranks open access first, tries one plain GET per open copy, marks browser challenges as blocked, and prints
-HTML figure captions and table titles about maps or observation lists. Nothing is saved without --out.
+Papers lists up to 20 OpenAlex works that name the target, by any spelling of its catalogue names, in their title or
+abstract, with the instrument and any one of the --about phrases (singular or plural); --fulltext asks for the works whose
+indexed full text names them. It uses arXiv's Atom API when OpenAlex is unavailable or its daily budget is spent, and the
+report names the source and the reason. It tries one plain GET per open copy, reads the arXiv preprint as HTML when the
+copy is not, marks browser challenges as blocked, and prints the sentences that name the subject with the target and the
+figure captions and table titles about maps or observation lists. Each work then lists what else was published under its
+title (an erratum is printed that way), whether it is retracted, and the later works that cite it and name the target.
+Several targets are a sweep: one search each, the works named, nothing fetched. A search costs 10 of OpenAlex's 1,000 daily
+credits for a network without a key; OPENALEX_API_KEY in the environment has ten times that. Nothing is saved without --out.
 Simulations lists the Zenodo dataset records that name the target and speak of a simulation or a model, each with its
 license, size and files. It downloads nothing. A listed record is a lead: new-object --simulation adds one as a dataset from
 an entry written after reading its paper (packages/telescope-cli/src/new-object/simulation/simulation-dataset.mts), fetching

@@ -76,7 +76,7 @@
   "body": "main_id\totype\tnbref\n"
  },
  {
-  "url": "https://api.openalex.org/works?filter=title_and_abstract.search%3A%28%22M+83%22+OR+%22M83%22+OR+%22ESO+444-081%22+OR+%22ESO444-081%22+OR+%22NGC+5236%22+OR+%22NGC5236%22+OR+%22PGC048082%22+OR+%22UGCA366%22%29+AND+%28%22Cepheid%22+OR+%22Cepheids%22+OR+%22supergiant%22+OR+%22supergiants%22+OR+%22hypergiant%22+OR+%22luminous+blue+variable%22+OR+%22Wolf-Rayet%22+OR+%22Mira%22+OR+%22Miras%22+OR+%22RR+Lyrae%22+OR+%22early-type+star%22+OR+%22massive+star%22%29%2Ctype%3Aarticle%7Creview%7Cpreprint%7Cletter&per-page=100&sort=publication_year%3Adesc&select=id%2Cdoi%2Ctitle%2Cdisplay_name%2Cpublication_year%2Ctype%2Cauthorships%2Copen_access%2Cbest_oa_location%2Cprimary_location%2Crelevance_score%2Cabstract_inverted_index",
+  "url": "https://api.openalex.org/works?filter=title_and_abstract.search%3A%28%22M+83%22+OR+%22M83%22+OR+%22ESO+444-081%22+OR+%22ESO444-081%22+OR+%22NGC+5236%22+OR+%22NGC5236%22+OR+%22PGC+048082%22+OR+%22PGC048082%22+OR+%22UGCA+366%22+OR+%22UGCA366%22%29+AND+%28%22Cepheid%22+OR+%22Cepheids%22+OR+%22supergiant%22+OR+%22supergiants%22+OR+%22hypergiant%22+OR+%22hypergiants%22+OR+%22luminous+blue+variable%22+OR+%22luminous+blue+variables%22+OR+%22Wolf-Rayet%22+OR+%22Wolf-Rayets%22+OR+%22Mira%22+OR+%22Miras%22+OR+%22RR+Lyrae%22+OR+%22RR+Lyraes%22+OR+%22early-type+star%22+OR+%22early-type+stars%22+OR+%22massive+star%22+OR+%22massive+stars%22%29%2Ctype%3Aarticle%7Creview%7Cpreprint%7Cletter&per-page=100&sort=publication_year%3Adesc&select=id%2Cdoi%2Ctitle%2Cdisplay_name%2Cpublication_year%2Ctype%2Cauthorships%2Copen_access%2Cbest_oa_location%2Cprimary_location%2Clocations%2Cis_retracted%2Crelevance_score%2Cabstract_inverted_index",
   "body": "{\"results\":[]}"
  }
 ]
