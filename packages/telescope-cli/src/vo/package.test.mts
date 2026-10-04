@@ -5,6 +5,7 @@ import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
+import { astroqueryToolchain } from '@cssearth/telescope/node';
 import { extractVoPackage } from './package.mts';
 
 const PYTHON = String.raw`
@@ -35,6 +36,9 @@ else:
 `;
 
 async function workspace(): Promise<{ root: string; staging: string }> {
+  // extractVoPackage validates inside the astroquery toolchain's Python, so every test here needs that toolchain. Without it the
+  // coded absence skips the test; the rejection assertions below would otherwise pass vacuously or fail on the missing toolchain.
+  await astroqueryToolchain();
   const root = await mkdtemp(resolve(tmpdir(), 'vo-package-')), staging = resolve(root, 'staging');
   await (await import('node:fs/promises')).mkdir(staging);
   return { root, staging };

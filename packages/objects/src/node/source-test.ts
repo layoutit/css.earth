@@ -2,6 +2,7 @@ import { test as nodeTest, type TestContext, type TestOptions } from 'node:test'
 import { execFileSync } from 'node:child_process';
 import { existsSync } from 'node:fs';
 import { resolve, sep } from 'node:path';
+import { isMissingSourceInput } from '@cssearth/core';
 import { projectRoot } from '@cssearth/core/node';
 
 const root = projectRoot(import.meta.url);
@@ -65,10 +66,8 @@ export function missingSourceReason(error: unknown, objectId: string | null = nu
     }
     return `${relative} is not restored; run ${objectId ? RESTORE(objectId) : 'pnpm setup:sources'}`;
   }
-  // Coverage that only misses declared files is an unrestored download; an undeclared file is a real failure.
-  if (/coverage failed\. Undeclared: none\. Missing: (?!none\.)/iu.test(error.message)
-    || /source is missing|is not restored|not installed|toolchain is not installed|missing fits oracle input/iu.test(error.message))
-    return `${error.message.split('\n')[0]}; run ${objectId ? RESTORE(objectId) : 'pnpm setup:sources'}`;
+  // The thrower says an input is absent by `code` (MissingSourceInputError in @cssearth/core), never by its wording.
+  if (isMissingSourceInput(error)) return `${error.message.split('\n')[0]}; run ${objectId ? RESTORE(objectId) : 'pnpm setup:sources'}`;
   return null;
 }
 

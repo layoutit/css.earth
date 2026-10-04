@@ -1,4 +1,5 @@
 /** One retained pymobiledevice3 session for visible Safari and native iPad frames. */
+import { MissingSourceInputError } from '@cssearth/core';
 import { spawn, type ChildProcess } from 'node:child_process';
 import { mkdir, readdir, realpath, rm } from 'node:fs/promises';
 import { resolve } from 'node:path';
@@ -142,7 +143,7 @@ except Exception as error:
 async function workerPython(): Promise<string> {
   const binary = process.env.PYMOBILEDEVICE3 ?? 'pymobiledevice3';
   const executable = binary.includes('/') ? binary : (await exec('which', [binary])).stdout.trim();
-  if (!executable) throw new Error(`${binary} is not installed; set PYMOBILEDEVICE3 to pymobiledevice3's command.`);
+  if (!executable) throw new MissingSourceInputError(`${binary} is not installed; set PYMOBILEDEVICE3 to pymobiledevice3's command.`);
   return resolve(await realpath(executable).catch(() => executable), '..', 'python');
 }
 
