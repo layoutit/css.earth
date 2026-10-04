@@ -23,9 +23,12 @@ held differently while coasting:
   resident a margin before it enters the view (image loaded, `display` on, opacity 0), then faded in. During a coast
   content is only added, never retired; retirement waits for the coast to stop.
   A nebula's slices follow this (`volume/prepared-volume-runtime.ts`): an axis stack whose weight reached zero, an
-  optical copy whose alpha did and a slice that left the view stay as they are until the camera stops, then leave a
-  paced slice per frame. Hiding them as the camera turned flipped `display` on 2,016 slices in one throw of a drag at
-  the Milky Way (2026-10-03).
+  optical copy whose alpha did and a slice that left the view stay as they are until the camera stops. Hiding them as
+  the camera turned flipped `display` on 2,016 slices in one throw of a drag at the Milky Way (2026-10-03). A stack
+  the camera turns to joins a paced share of its slices a frame, every eighth slice first, and a stack that leaves at
+  rest leaves whole: on the iPad joining costs by the slices in the frame (8 a frame none over 21 ms, all 628 at once
+  182 ms), and leaving by the slices still there (all at once 42 to 50 ms, 16 a frame eight frames of 34 to 93 ms,
+  2026-10-04).
 
 ## Why
 
@@ -52,10 +55,11 @@ gesture.
 - **Pacer:** a document has one pacer (`packages/renderer/src/rendering/settle-pacer.ts`), on its one frame clock
   (`packages/renderer/src/stars/opacity-clock.ts`), and one budget a frame that every owner shares in turn. A frame
   starts at 16 units and can grow to 64; after a frame over 25 ms the pacer waits a frame and halves it. Each owner says
-  what holds its work: any motion (leaf-box steps and the seam outset, because a resized leaf repaints), only a coast, or
-  nothing (a mesh's reveal, a mount's activation, a body's feature names and a dot bank's load, which land during a zoom
-  or a flight). Work that cannot wait for its turn (the dots a travelling camera repaints from that frame's camera) asks
-  the pacer what share of the budget it may spend (`take`), and the frame it causes paces the next.
+  what holds its work: any motion (leaf-box steps and the seam outset, because a resized leaf repaints), only a coast,
+  or nothing (a mesh's reveal, a mount's activation, a nebula's slices joining, a body's feature names and a dot bank's
+  load, which land during a zoom or a flight). Work that cannot wait for its turn (the dots a travelling camera repaints
+  from that frame's camera) asks the pacer what share of the budget it may spend (`take`), and the frame it causes paces
+  the next.
 
 ## Mesh detail survives input reversals
 
