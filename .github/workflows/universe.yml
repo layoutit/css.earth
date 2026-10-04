@@ -46,16 +46,26 @@ jobs:
           # `git diff --name-only` reads only commits and trees either way.
           fetch-depth: 0
           filter: blob:none
-          # Classification reads Git trees, not object bytes. Keep the complete diff/history without
-          # transferring the source-media bank before any validation job can start.
+          # Classification reads Git trees and test source for cross-owner imports and source pins.
+          # Keep those scripts/tests and complete diff/history without transferring source media.
           sparse-checkout-cone-mode: false
           sparse-checkout: |
             /.github/scripts/**/*.mts
+            /.github/**/*.test.mts
             /packages/core/src/validate.ts
             /packages/core/src/node/script-test-files.ts
             /.github/ci-areas.json
             /package.json
             /packages/*/package.json
+            /packages/**/*.test.ts
+            /packages/**/*.test.mts
+            /integration/**/*.test.ts
+            /integration/**/*.test.mts
+            /site/**/*.test.ts
+            /site/**/*.test.mts
+            /site/test/**
+            /src/**/*.test.*
+            /labs/performance/*.test.mts
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: '22'

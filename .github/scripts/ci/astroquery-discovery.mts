@@ -3,6 +3,7 @@ import { globSync, readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 
 export const ASTROQUERY_EXCLUSIONS: Readonly<Record<string, string>> = {
+  'packages/telescope-cli/src/output-handoffs.test.mts': 'Mixed PDS decoding and stellar handoffs require the PDS toolchain and restored stellar-neighbourhood stars.json/stars.bin; remains in the source-qualified CLI lane.',
   'packages/bake/src/objects/raster/healpix-map.test.mts': 'Mixed toolchain and deposited Luhman 16 B maps: requires untracked posterior NPY sources; remains in the source-qualified bake lane.',
 };
 export function astroqueryTestFiles(root: string): string[] {
@@ -26,7 +27,11 @@ export function astroqueryTriggerPaths(root: string): string[] {
       if (dependency.startsWith('@cssearth/')) visit(dependency.slice('@cssearth/'.length));
     }
   };
-  visit('telescope');
+  for (const file of astroqueryLaneFiles(root)) {
+    const owner = /^packages\/([^/]+)\//u.exec(file)?.[1];
+    if (!owner) throw new Error(`No workspace owner for ${file}`);
+    visit(owner);
+  }
   return [...new Set([...visited].map(name => `packages/${name}/**`).concat([
     'packages/telescope-cli/**', ...astroqueryTestFiles(root), '.github/workflows/universe.yml',
     '.github/scripts/ci/astroquery-*', '.github/scripts/ci/ci-affected.mts', '.github/ci-areas.json',

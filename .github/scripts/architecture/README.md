@@ -88,7 +88,8 @@ no git refs or history and checks library surfaces rather than command-body comp
 
 The format/root source ratchets are in `source-ratchets.json`. Each remaining objects numeric
 admission or ordering file and each working-directory command has a specific reason. New
-files fail, stale allowances must be removed, and budgets can only shrink compared with
-`origin/main` when that prior budget is available. Initial adoption and shallow checkouts
-still enforce the current committed budget. Unit mutations prove math, sorting, root calls,
+files fail and stale allowances must be removed. Committed ceilings limit entry counts
+without git history; tests pin each ceiling to its current count. Removing debt lowers
+the ceiling, while any increase requires an explicit reviewed ceiling change. Missing
+budget files fail in every checkout. Unit mutations prove math, sorting, root calls,
 and budget growth fail; tests and comments are excluded through the TypeScript syntax tree.

@@ -4,7 +4,7 @@ import { execFileSync } from 'node:child_process';
 import { globSync, mkdirSync, mkdtempSync, rmSync, writeFileSync, readFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
-import { checkStaleReferences, staleReferenceLines, workflowCommandPaths } from './check-stale-references.mts';
+import { checkStaleReferences, staleReferenceLines, workflowCommandPaths, workflowPathTracked } from './check-stale-references.mts';
 
 const bytes = (value: string) => new TextEncoder().encode(value);
 test('every live reference class rejects a retired path, including output generator literals and bundle specifiers', () => {
@@ -101,7 +101,7 @@ test('every relocated CI root owner rejects a caller cwd while its module-relati
 });
 
 
-test('workflow command paths cover inline and block node/pnpm commands, excluding globs and dynamic inputs', () => {
+test('workflow command paths cover inline and block node/pnpm commands, including globs and excluding dynamic inputs', () => {
   assert.deepEqual(workflowCommandPaths(`jobs:
   check:
     steps:
@@ -109,7 +109,7 @@ test('workflow command paths cover inline and block node/pnpm commands, excludin
       - run: |
           pnpm test packages/b/value.test.mts
           node --test "packages/c/*.test.ts" $INPUT
-`), ['packages/a/value.test.ts', 'absent.mts', 'packages/b/value.test.mts']);
+`), ['packages/a/value.test.ts', 'absent.mts', 'packages/b/value.test.mts', 'packages/c/*.test.ts']);
 });
 test('mutation: a tracked workflow stale test path is red and a tracked replacement is green', () => {
   const root = mkdtempSync(join(tmpdir(), 'workflow-paths-'));
@@ -164,4 +164,14 @@ test('continued workflow node commands retain every literal test path', () => {
             packages/a/present.test.ts
 `;
   assert.deepEqual(workflowCommandPaths(workflow), ['fixtures/continued.test.mts', 'packages/a/present.test.ts']);
+});
+
+test('workflow test globs must match tracked files; directory arguments are ignored', () => {
+  const tracked = new Set(['packages/bake/src/sources/current.test.mts']);
+  assert.equal(workflowPathTracked('packages/bake/src/sources/*.test.*', tracked), true);
+  assert.equal(workflowPathTracked('packages/bake', tracked), true, 'tracked directory arguments are valid');
+  assert.equal(workflowPathTracked('packages/bake/missing-command', tracked), false, 'extensionless missing commands stay guarded');
+  assert.equal(workflowPathTracked('packages/bake/src/missing/*.test.*', tracked), false, 'mutation red');
+  assert.equal(workflowPathTracked('packages/bake/src/sources/*.test.*', tracked), true, 'mutation green');
+  assert.deepEqual(workflowCommandPaths('jobs:\n  check:\n    steps:\n      - run: cd packages/bake && pnpm test --dir packages/bake.v2 packages/bake/src/sources/*.test.*\n'), ['packages/bake/src/sources/*.test.*']);
 });

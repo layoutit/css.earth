@@ -11,13 +11,13 @@ timings before claiming it is met. Report cold and warm-cache runs separately.
 
 | Workflow | Trigger and responsibility |
 | --- | --- |
-| [Shared universe](../.github/workflows/universe.yml) | PRs run classification and contract lint; changed ownership selects application/test types, runtime/shell/renderer, preparation/publication and nebula checks. Main runs every shared lane. The path-filtered astroquery job installs pinned Python tools and requires all 13 archive-safety/CDF tests without skips. |
+| [Shared universe](../.github/workflows/universe.yml) | PRs run classification and contract lint; changed ownership selects application/test types, runtime/shell/renderer, preparation/publication and nebula checks. Main runs every shared lane. The path-filtered astroquery job installs pinned Python tools and requires every derived test file without skips. |
 | [Repository audit](../.github/workflows/audit.yml) | Main pushes, scheduled runs and manual dispatch: documentation, repository completeness, source-catalogue reconciliation and bake reproduction. Advisory; does not run on PRs or gate deployment. |
 | [Object-scope gate](../.github/workflows/object-scope.yml) | Every PR: more than 12 changed object directories needs the `pipeline-change` label. Labels re-evaluate this gate. |
 | [Nightly asset sweep](../.github/workflows/nightly.yml) | Scheduled/manual runs check published keys, test types and a production build/browser probe. They do not publish the site or run on PRs. |
 | [Deploy](../.github/workflows/deploy.yml) | Manual dispatch only. The default R2 deployment checks build asset references and requires verified published keys before shipping. Merging validates the gate; it does not deploy. |
 
-The astroquery filter in the affected-path map covers telescope code, CLI toolchain pins and installer, its two protected test files and the workflow. Its pip and toolchain caches are keyed on the pinned requirements and toolchain record. A skipped test or fewer than 13 completed tests fails the lane.
+The astroquery filter covers the owning workspaces of its discovered test files and their transitive runtime dependencies, toolchain pins and lane configuration. Its pip and toolchain caches are keyed on the pinned requirements and toolchain record. A skipped test or an incomplete derived file run fails the lane.
 
 The universe and preparation status jobs aggregate their matrix lanes: every
 selected lane must pass. Lint failures do not cancel unrelated checks or conceal
@@ -177,8 +177,9 @@ selection, cache, publication or deployment contract changes.
 
 The astroquery lane discovers tests importing `astroqueryToolchain`, prints its
 file list, runs each file and requires a passing TAP summary with zero skips.
-Triggers come from telescope's transitive runtime workspace dependencies (core,
-objects and fits), telescope-cli, the discovered tests and lane configuration.
+Triggers come from each lane file's owning package and its transitive runtime
+workspace dependencies, including telescope-cli, bake, renderer, astronomy, engine
+and spice, plus the discovered tests and lane configuration.
 The mixed bake HEALPix suite is excluded by name: it also reads the untracked
 Luhman 16 B posterior mean and variance NPY maps. It remains in bake's
 source-qualified test lane, where absent maps deliberately skip through
@@ -189,3 +190,19 @@ foreign-test limit is 150 files, so objects-only changes retain the tool gate;
 when the derived count falls to 150 or fewer, those imports select each test.
 Fixture readers and source-code pins are discovered from test literals, with
 module-relative and checkout-relative paths, rather than maintained owner maps.
+
+The mixed CLI `output-handoffs.test.mts` suite is excluded by name because its PDS
+case needs the PDS toolchain and its stellar inspection needs restored
+stellar-neighbourhood `prepared/stars.json` and `stars.bin`. It remains in the
+source-qualified CLI lane. The other 13 toolchain files use generated temporary
+fixtures or tracked fixtures; the astroquery lane requires zero skipped tests.
+
+Classification's sparse checkout includes every expanded root `test:packages`
+and `test:site` test glob. A real sparse-clone regression compares objects-only
+foreign selection against the full checkout without restoring prepared assets.
+
+Source and CLI export allowances carry committed ceilings and per-entry reasons.
+Checks need no git history, fail on missing budgets and reject counts above the
+ceiling. Tests pin each ceiling to the current entry/export count. Lowering the
+budget means removing allowances and editing the ceiling; raising a ceiling is
+an explicit reviewed change in the same diff as its justified additions.

@@ -2,6 +2,7 @@
 import ts from 'typescript';
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
+import { ceilingFindings } from './source-ratchets.mts';
 import { isTestPath } from './zones.mts';
 
 const AVERAGING_ROOTS = ['packages/telescope-cli/src/', 'packages/telescope-cli/authoring/', 'packages/bake/authoring/'];
@@ -92,14 +93,18 @@ export function cliLibraryFindings(path: string, text: string, baseline: Readonl
 }
 
 export function checkAuthoringPolicies(root: string, files: readonly string[]): string[] {
-  // No refs or git history are needed in a depth-one CI checkout. This allowance may only shrink.
+  // No refs or git history are needed in a depth-one CI checkout. The committed ceiling makes budget increases explicit.
   const value: unknown = JSON.parse(readFileSync(resolve(root, '.github/scripts/architecture/cli-exports-baseline.json'), 'utf8'));
   if (!value || typeof value !== 'object' || Array.isArray(value)) throw new TypeError('Invalid CLI export baseline');
+  const entries: unknown = Reflect.get(value, 'entries');
+  if (!entries || typeof entries !== 'object' || Array.isArray(entries)) throw new TypeError('Invalid CLI baseline entries');
   const baseline: Record<string, string[]> = {};
-  for (const [path, names] of Object.entries(value)) {
-    if (!Array.isArray(names) || !names.every((name: unknown) => typeof name === 'string')) throw new TypeError(`Invalid CLI exports: ${path}`);
-    baseline[path] = names;
+  for (const [path, entry] of Object.entries(entries)) {
+    if (!entry || typeof entry !== 'object' || typeof entry.reason !== 'string' || !entry.reason.trim()
+      || !Array.isArray(entry.exports) || !entry.exports.every((name: unknown) => typeof name === 'string')) throw new TypeError(`Invalid CLI exports: ${path}`);
+    baseline[path] = entry.exports;
   }
-  return files.filter(path => /\.[cm]?[jt]s$/u.test(path) && (AVERAGING_ROOTS.some(prefix => path.startsWith(prefix)) || /^packages\/[^/]+\/cli\//u.test(path)))
-    .flatMap(path => { const text = readFileSync(resolve(root, path), 'utf8'); return [...bodyMapAveragingFindings(path, text), ...cliLibraryFindings(path, text, baseline)]; });
+  const findings = ceilingFindings(Reflect.get(value, 'ceiling'), Object.values(baseline).reduce((count, names) => count + names.length, 0), 'CLI exports');
+  return [...findings, ...files.filter(path => /\.[cm]?[jt]s$/u.test(path) && (AVERAGING_ROOTS.some(prefix => path.startsWith(prefix)) || /^packages\/[^/]+\/cli\//u.test(path)))
+    .flatMap(path => { const text = readFileSync(resolve(root, path), 'utf8'); return [...bodyMapAveragingFindings(path, text), ...cliLibraryFindings(path, text, baseline)]; })];
 }

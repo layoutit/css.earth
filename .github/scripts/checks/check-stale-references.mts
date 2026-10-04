@@ -1,6 +1,6 @@
 import { execFileSync } from 'node:child_process';
 import { existsSync, readFileSync } from 'node:fs';
-import { resolve } from 'node:path';
+import { resolve, matchesGlob } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import ts from 'typescript';
 import { parse } from 'yaml';
@@ -92,7 +92,8 @@ export function workflowCommandPaths(text: string): string[] {
           if (!/\b(?:node|pnpm)\b/u.test(line)) continue;
           for (const token of line.matchAll(/(?:^|[\s"'])(\.?\/?(?:packages|site|src|labs|integration|\.github)\/[^\s"';&|<>]+|(?:[\w.@-]+\/)*[\w.@-]+\.(?:[cm]?[jt]s|tsx|json))/gu)) {
             const path = token[1]!.replace(/^\.\//u, '');
-            if (!/[*?{}$]/u.test(path)) paths.push(path);
+            const before = line.slice(0, token.index! + token[0].indexOf(token[1]!)).trimEnd();
+            if (!/[$]/u.test(path) && !/(?:\bcd|--(?:dir|directory|cwd)|-C)$/u.test(before)) paths.push(path);
           }
         }
       } else visit(child);
@@ -100,6 +101,11 @@ export function workflowCommandPaths(text: string): string[] {
   };
   visit(parse(text));
   return [...new Set(paths)];
+}
+
+export function workflowPathTracked(target: string, tracked: ReadonlySet<string>): boolean {
+  return /[*?{}[\]]/u.test(target) ? [...tracked].some(path => matchesGlob(path, target))
+    : tracked.has(target) || [...tracked].some(path => path.startsWith(`${target.replace(/\/$/u, '')}/`));
 }
 
 export function checkStaleReferences(root: string): string[] {
@@ -110,7 +116,7 @@ export function checkStaleReferences(root: string): string[] {
     if (!existsSync(resolve(root, path))) return [];
     const bytes = readFileSync(resolve(root, path));
     const workflow = /^\.github\/workflows\/.*\.ya?ml$/u.test(path)
-      ? workflowCommandPaths(bytes.toString()).filter(target => !tracked.has(target)).map(target => `${path}: workflow command path is not tracked: ${target}`) : [];
+      ? workflowCommandPaths(bytes.toString()).filter(target => !workflowPathTracked(target, tracked)).map(target => `${path}: workflow command path is not tracked: ${target}`) : [];
     return [...staleReferenceLines(path, bytes), ...workflow];
   });
 }

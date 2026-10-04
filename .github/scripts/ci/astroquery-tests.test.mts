@@ -20,7 +20,7 @@ test('astroquery classification and workflow preserve the protected lane', async
   const config = await loadCiAreasConfig();
   for (const path of ['packages/telescope/src/node/toolchain/python.ts', 'packages/telescope/toolchains/toolchain.json', 'packages/telescope/toolchains/requirements.lock', 'packages/telescope-cli/src/toolchains/astronomy-toolchains.mts', 'packages/telescope-cli/src/archives/jwst/toolchain.json', 'packages/telescope-cli/src/archives/toolchain-descriptor.mts', 'packages/telescope-cli/src/vo/package.mts', 'packages/telescope-cli/src/families/f07-dynamic-spectrum.mts', '.github/ci-areas.json', 'packages/telescope-cli/src/families/f07-dynamic-spectrum.test.mts', 'packages/telescope-cli/src/vo/package.test.mts', '.github/workflows/universe.yml'])
     assert.ok(classifyAffectedPaths([path], config).jobs.has('astroquery'), path);
-  for (const path of ['README.md', 'packages/renderer/src/index.ts', 'site/runtime-policy.mts'])
+  for (const path of ['README.md', 'site/runtime-policy.mts'])
     assert.equal(classifyAffectedPaths([path], config).jobs.has('astroquery'), false, path);
   const workflow = requireRecord(parse(await readFile(new URL('../../workflows/universe.yml', import.meta.url), 'utf8')));
   const jobs = requireRecord(workflow.jobs), job = requireRecord(jobs.astroquery);
@@ -75,10 +75,11 @@ test('all toolchain-importing files are discovered; only named source exclusions
   const imported = execFileSync('git', ['grep', '-l', '-w', 'astroqueryToolchain', '--', 'packages/**/*.test.*'], { cwd: root, encoding: 'utf8' }).trim().split('\n').sort();
   assert.deepEqual(all, imported);
   assert.ok(all.length > 2);
+  assert.match(ASTROQUERY_EXCLUSIONS['packages/telescope-cli/src/output-handoffs.test.mts'] ?? '', /PDS.*stellar-neighbourhood.*stars\.json\/stars\.bin/u);
   assert.equal(files.length, all.length - Object.keys(ASTROQUERY_EXCLUSIONS).length);
-  assert.deepEqual(all.filter(file => !files.includes(file)), Object.keys(ASTROQUERY_EXCLUSIONS));
+  assert.deepEqual(all.filter(file => !files.includes(file)), Object.keys(ASTROQUERY_EXCLUSIONS).sort());
   const triggers = astroqueryTriggerPaths(root);
-  for (const name of ['telescope', 'core', 'objects', 'fits']) assert.ok(triggers.includes(`packages/${name}/**`));
+  for (const name of ['telescope-cli', 'telescope', 'core', 'objects', 'fits', 'bake', 'renderer', 'astronomy', 'engine', 'spice']) assert.ok(triggers.includes(`packages/${name}/**`));
 });
 
 

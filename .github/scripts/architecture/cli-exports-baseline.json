@@ -1,234 +1,234 @@
 {
-  "packages/astronomy/cli/acquire-scene-ephemeris.mts": [],
-  "packages/astronomy/cli/body-epoch-ephemeris.mts": [
-    "loadBodyEpochEphemeris",
-    "evaluatePublishedOrbit"
-  ],
-  "packages/astronomy/cli/body-records.mts": [
-    "readBodyRecords",
-    "writeBodyRecord",
-    "prepareBodyRecords"
-  ],
-  "packages/astronomy/cli/fetch-fixtures.mts": [],
-  "packages/astronomy/cli/fetch-rotation-fixtures.mts": [],
-  "packages/astronomy/cli/generate-asteroids.mts": [],
-  "packages/astronomy/cli/generate-comets.mts": [],
-  "packages/astronomy/cli/generate-dwarf-planets.mts": [],
-  "packages/astronomy/cli/generate-heliocentric.mts": [
-    "generateHeliocentric"
-  ],
-  "packages/astronomy/cli/generate-s-stars.mts": [],
-  "packages/astronomy/cli/generate-satellites.mts": [],
-  "packages/astronomy/cli/generate-scene-satellites.mts": [],
-  "packages/astronomy/cli/generate-series.mts": [],
-  "packages/astronomy/cli/lib/elp2000.mts": [
-    "loadElpTerms",
-    "elpPositionKm"
-  ],
-  "packages/astronomy/cli/lib/ephemeris-records.mts": [
-    "parseBodyEpochRecord"
-  ],
-  "packages/astronomy/cli/lib/fit-cosine-series.mts": [
-    "fitCosineSeries"
-  ],
-  "packages/astronomy/cli/lib/fit-harmonics.mts": [
-    "fitHarmonics"
-  ],
-  "packages/astronomy/cli/lib/fit-libration.mts": [
-    "fitLibration"
-  ],
-  "packages/astronomy/cli/lib/fit-position-correction.mts": [
-    "fitPositionCorrection"
-  ],
-  "packages/astronomy/cli/lib/generator-records.mts": [
-    "{ objectValue, stringValue, numberValue, arrayValue, numberVector }",
-    "readElementRecord",
-    "readVectorFixture",
-    "recordMap",
-    "readStarRecord",
-    "readHostedOrbitRecord"
-  ],
-  "packages/astronomy/cli/lib/horizons.mts": [
-    "vectorsUrl",
-    "elementsUrl",
-    "physicalDataUrl",
-    "horizons",
-    "parseVectors",
-    "parseElements"
-  ],
-  "packages/astronomy/cli/lib/s-stars.mts": [
-    "parseVizierTsv",
-    "gillessenOrbits",
-    "multiStarFitStars",
-    "gravityOrbits",
-    "habibiStars",
-    "sStarRecords"
-  ],
-  "packages/astronomy/cli/lib/satellite-fit.mts": [
-    "mean",
-    "fitLine",
-    "dot",
-    "cross",
-    "normalize",
-    "solveKepler",
-    "planeBasis",
-    "fitRotation"
-  ],
-  "packages/astronomy/cli/lib/source-validation.mts": [
-    "{ string, number, vector, optional, array, dictionary, boolean, literal, shape }"
-  ],
-  "packages/astronomy/cli/lib/sources.mts": [
-    "cached",
-    "shortest",
-    "HEADER"
-  ],
-  "packages/astronomy/cli/lib/vsop87.mts": [
-    "parseVsop87",
-    "loadVsop87a",
-    "evalVsop87",
-    "evalVsop87Rate"
-  ],
-  "packages/astronomy/cli/lib/write-record-sections.mts": [
-    "literalRecords",
-    "readRecordSections",
-    "writeRecordSections"
-  ],
-  "packages/astronomy/cli/scene-ephemeris.mts": [
-    "loadSceneEpochEphemeris"
-  ],
-  "packages/bake/cli/acquire-moon-catalogues.mts": [],
-  "packages/bake/cli/acquire-psg-limb-table.mts": [],
-  "packages/bake/cli/align-camera-bands.mts": [],
-  "packages/bake/cli/astronomy-data-apply-ledger-fixes.mts": [],
-  "packages/bake/cli/astronomy-data-apply-structure.mts": [],
-  "packages/bake/cli/astronomy-data-browse.mts": [],
-  "packages/bake/cli/astronomy-data-build-instruments.mts": [],
-  "packages/bake/cli/astronomy-data-collect-archives.mts": [],
-  "packages/bake/cli/astronomy-data-collect-opus-catalog.mts": [],
-  "packages/bake/cli/astronomy-data-collect-opus-labels.mts": [],
-  "packages/bake/cli/astronomy-data-collect-opus-products.mts": [],
-  "packages/bake/cli/astronomy-data-collect-opus-review.mts": [],
-  "packages/bake/cli/astronomy-data-collect-opus-samples.mts": [],
-  "packages/bake/cli/astronomy-data-collect-opus-volumes.mts": [],
-  "packages/bake/cli/astronomy-data-collect-opus.mts": [],
-  "packages/bake/cli/astronomy-data-collect-photojournal.mts": [
-    "captionText",
-    "captionPhrases"
-  ],
-  "packages/bake/cli/astronomy-data-collect-targets.mts": [
-    "pds4Targets",
-    "pds3Targets"
-  ],
-  "packages/bake/cli/astronomy-data-collect-trek.mts": [],
-  "packages/bake/cli/astronomy-data-collect-usgs-files.mts": [
-    "productFiles",
-    "memberProducts"
-  ],
-  "packages/bake/cli/astronomy-data-mark-map-usage.mts": [],
-  "packages/bake/cli/astronomy-data-slice.mts": [],
-  "packages/bake/cli/astronomy-data-verify.mts": [],
-  "packages/bake/cli/camera-reference.mts": [],
-  "packages/bake/cli/check-asset-origin-scenes.mts": [],
-  "packages/bake/cli/check-assets-published.mts": [],
-  "packages/bake/cli/check-deploy-assets.mts": [],
-  "packages/bake/cli/check-prepared-presentation.mts": [],
-  "packages/bake/cli/check-projected-controls.mts": [],
-  "packages/bake/cli/check-stale-builds.mts": [],
-  "packages/bake/cli/cite-pinned-facts.mts": [],
-  "packages/bake/cli/diviner-gcp-grid.mts": [],
-  "packages/bake/cli/fit-epic-limb.mts": [],
-  "packages/bake/cli/illustration-dataset.mts": [],
-  "packages/bake/cli/imagery-candidates.mts": [],
-  "packages/bake/cli/kernel-bank.mts": [],
-  "packages/bake/cli/lossy-lane-sweep.mts": [],
-  "packages/bake/cli/mapped-composition-evidence.mts": [
-    "qualifyMappedComposition"
-  ],
-  "packages/bake/cli/merge-catalogue-points.mts": [],
-  "packages/bake/cli/object-operations.mts": [],
-  "packages/bake/cli/observer-cameras.mts": [],
-  "packages/bake/cli/osiris-shape-comparison.mts": [
-    "compareOsirisShapes"
-  ],
-  "packages/bake/cli/pack-prepared-banks.mts": [],
-  "packages/bake/cli/paged-ellipsoid-asset-worker.mts": [],
-  "packages/bake/cli/prepare-arrival-billboard.mts": [],
-  "packages/bake/cli/prepare-body-points.mts": [],
-  "packages/bake/cli/prepare-catalogue-points.mts": [],
-  "packages/bake/cli/prepare-cluster-catalog.mts": [],
-  "packages/bake/cli/prepare-dataset-billboards.mts": [],
-  "packages/bake/cli/prepare-dataset-sprites.mts": [],
-  "packages/bake/cli/prepare-facility-emblems.mts": [],
-  "packages/bake/cli/prepare-facility-photographs.mts": [],
-  "packages/bake/cli/prepare-facility-renders.mts": [],
-  "packages/bake/cli/prepare-factsheets.mts": [],
-  "packages/bake/cli/prepare-feature-notes.mts": [],
-  "packages/bake/cli/prepare-galaxy-backing.mts": [],
-  "packages/bake/cli/prepare-galaxy-catalog.mts": [],
-  "packages/bake/cli/prepare-image-layers.mts": [
-    "prepareImageLayerObject"
-  ],
-  "packages/bake/cli/prepare-lighting-bank.mts": [],
-  "packages/bake/cli/prepare-llorri-overlap.mts": [
-    "prepareLlorriOverlap"
-  ],
-  "packages/bake/cli/prepare-magnetic-map.mts": [
-    "prepareMagneticMap"
-  ],
-  "packages/bake/cli/prepare-map-sphere.mts": [],
-  "packages/bake/cli/prepare-mars-crust.mts": [
-    "convertCrustGrid"
-  ],
-  "packages/bake/cli/prepare-navigation.mts": [],
-  "packages/bake/cli/prepare-nebula-field-catalogues.mts": [],
-  "packages/bake/cli/prepare-nebulae.mts": [],
-  "packages/bake/cli/prepare-object-information.mts": [],
-  "packages/bake/cli/prepare-object.mts": [],
-  "packages/bake/cli/prepare-objects.mts": [],
-  "packages/bake/cli/prepare-packaged-points.mts": [],
-  "packages/bake/cli/prepare-scientific-charts.mts": [],
-  "packages/bake/cli/prepare-search-thumbnails.mts": [],
-  "packages/bake/cli/prepare-shell.mts": [],
-  "packages/bake/cli/prepare-solar-geometry.mts": [
-    "prepareSolarGeometry"
-  ],
-  "packages/bake/cli/prepare-stars.mts": [
-    "prepareStarsObject"
-  ],
-  "packages/bake/cli/prepare-surface-minimaps.mts": [],
-  "packages/bake/cli/prepare-volume.mts": [
-    "prepareDensityVolumeObject"
-  ],
-  "packages/bake/cli/prepare-world-billboards.mts": [],
-  "packages/bake/cli/project-encounter-landmarks.mts": [],
-  "packages/bake/cli/project-orthophoto-landmarks.mts": [],
-  "packages/bake/cli/prune-runtime-assets.mts": [],
-  "packages/bake/cli/publish-runtime-assets.mts": [],
-  "packages/bake/cli/publish-source-cache.mts": [
-    "objectSourceCacheCandidates",
-    "publishSourceCache"
-  ],
-  "packages/bake/cli/published-comparison.mts": [],
-  "packages/bake/cli/refresh-shape-lighting.mts": [],
-  "packages/bake/cli/refresh-shape-materials.mts": [],
-  "packages/bake/cli/refresh-sphere-photographs.mts": [
-    "refreshSpherePhotographs"
-  ],
-  "packages/bake/cli/refresh-surface-observations.mts": [],
-  "packages/bake/cli/refresh-terrain-photographs.mts": [],
-  "packages/bake/cli/registration-stage.mts": [],
-  "packages/bake/cli/report-investigations.mts": [],
-  "packages/bake/cli/report-registration.mts": [],
-  "packages/bake/cli/restore-environment-images.mts": [],
-  "packages/bake/cli/restore-source-inputs.mts": [],
-  "packages/bake/cli/run-implemented-objects.mts": [],
-  "packages/bake/cli/setup-assets.mts": [],
-  "packages/bake/cli/sphere-horizons.mts": [],
-  "packages/bake/cli/sphere-survey-apparitions.mts": [],
-  "packages/bake/cli/sphere-survey-install.mts": [],
-  "packages/bake/cli/sphere-survey-setup.mts": [],
-  "packages/bake/cli/stack-catalogue-points.mts": [],
-  "packages/bake/cli/stage-published-assets.mts": [],
-  "packages/bake/cli/star-candidates.mts": [],
-  "packages/bake/cli/test-sbmt.mts": []
+  "ceiling": 69,
+  "entries": {
+    "packages/astronomy/cli/body-epoch-ephemeris.mts": {
+      "reason": "Retained body epoch ephemeris CLI implementation exports; migration to src remains outstanding.",
+      "exports": [
+        "loadBodyEpochEphemeris",
+        "evaluatePublishedOrbit"
+      ]
+    },
+    "packages/astronomy/cli/body-records.mts": {
+      "reason": "Retained body records CLI implementation exports; migration to src remains outstanding.",
+      "exports": [
+        "readBodyRecords",
+        "writeBodyRecord",
+        "prepareBodyRecords"
+      ]
+    },
+    "packages/astronomy/cli/generate-heliocentric.mts": {
+      "reason": "Retained generate heliocentric CLI implementation exports; migration to src remains outstanding.",
+      "exports": [
+        "generateHeliocentric"
+      ]
+    },
+    "packages/astronomy/cli/lib/elp2000.mts": {
+      "reason": "Retained elp2000 CLI implementation exports; migration to src remains outstanding.",
+      "exports": [
+        "loadElpTerms",
+        "elpPositionKm"
+      ]
+    },
+    "packages/astronomy/cli/lib/ephemeris-records.mts": {
+      "reason": "Retained ephemeris records CLI implementation exports; migration to src remains outstanding.",
+      "exports": [
+        "parseBodyEpochRecord"
+      ]
+    },
+    "packages/astronomy/cli/lib/fit-cosine-series.mts": {
+      "reason": "Retained fit cosine series CLI implementation exports; migration to src remains outstanding.",
+      "exports": [
+        "fitCosineSeries"
+      ]
+    },
+    "packages/astronomy/cli/lib/fit-harmonics.mts": {
+      "reason": "Retained fit harmonics CLI implementation exports; migration to src remains outstanding.",
+      "exports": [
+        "fitHarmonics"
+      ]
+    },
+    "packages/astronomy/cli/lib/fit-libration.mts": {
+      "reason": "Retained fit libration CLI implementation exports; migration to src remains outstanding.",
+      "exports": [
+        "fitLibration"
+      ]
+    },
+    "packages/astronomy/cli/lib/fit-position-correction.mts": {
+      "reason": "Retained fit position correction CLI implementation exports; migration to src remains outstanding.",
+      "exports": [
+        "fitPositionCorrection"
+      ]
+    },
+    "packages/astronomy/cli/lib/generator-records.mts": {
+      "reason": "Retained generator records CLI implementation exports; migration to src remains outstanding.",
+      "exports": [
+        "{ objectValue, stringValue, numberValue, arrayValue, numberVector }",
+        "readElementRecord",
+        "readVectorFixture",
+        "recordMap",
+        "readStarRecord",
+        "readHostedOrbitRecord"
+      ]
+    },
+    "packages/astronomy/cli/lib/horizons.mts": {
+      "reason": "Retained horizons CLI implementation exports; migration to src remains outstanding.",
+      "exports": [
+        "vectorsUrl",
+        "elementsUrl",
+        "physicalDataUrl",
+        "horizons",
+        "parseVectors",
+        "parseElements"
+      ]
+    },
+    "packages/astronomy/cli/lib/s-stars.mts": {
+      "reason": "Retained s stars CLI implementation exports; migration to src remains outstanding.",
+      "exports": [
+        "parseVizierTsv",
+        "gillessenOrbits",
+        "multiStarFitStars",
+        "gravityOrbits",
+        "habibiStars",
+        "sStarRecords"
+      ]
+    },
+    "packages/astronomy/cli/lib/satellite-fit.mts": {
+      "reason": "Retained satellite fit CLI implementation exports; migration to src remains outstanding.",
+      "exports": [
+        "mean",
+        "fitLine",
+        "dot",
+        "cross",
+        "normalize",
+        "solveKepler",
+        "planeBasis",
+        "fitRotation"
+      ]
+    },
+    "packages/astronomy/cli/lib/source-validation.mts": {
+      "reason": "Retained source validation CLI implementation exports; migration to src remains outstanding.",
+      "exports": [
+        "{ string, number, vector, optional, array, dictionary, boolean, literal, shape }"
+      ]
+    },
+    "packages/astronomy/cli/lib/sources.mts": {
+      "reason": "Retained sources CLI implementation exports; migration to src remains outstanding.",
+      "exports": [
+        "cached",
+        "shortest",
+        "HEADER"
+      ]
+    },
+    "packages/astronomy/cli/lib/vsop87.mts": {
+      "reason": "Retained vsop87 CLI implementation exports; migration to src remains outstanding.",
+      "exports": [
+        "parseVsop87",
+        "loadVsop87a",
+        "evalVsop87",
+        "evalVsop87Rate"
+      ]
+    },
+    "packages/astronomy/cli/lib/write-record-sections.mts": {
+      "reason": "Retained write record sections CLI implementation exports; migration to src remains outstanding.",
+      "exports": [
+        "literalRecords",
+        "readRecordSections",
+        "writeRecordSections"
+      ]
+    },
+    "packages/astronomy/cli/scene-ephemeris.mts": {
+      "reason": "Retained scene ephemeris CLI implementation exports; migration to src remains outstanding.",
+      "exports": [
+        "loadSceneEpochEphemeris"
+      ]
+    },
+    "packages/bake/cli/astronomy-data-collect-photojournal.mts": {
+      "reason": "Retained astronomy data collect photojournal CLI implementation exports; migration to src remains outstanding.",
+      "exports": [
+        "captionText",
+        "captionPhrases"
+      ]
+    },
+    "packages/bake/cli/astronomy-data-collect-targets.mts": {
+      "reason": "Retained astronomy data collect targets CLI implementation exports; migration to src remains outstanding.",
+      "exports": [
+        "pds4Targets",
+        "pds3Targets"
+      ]
+    },
+    "packages/bake/cli/astronomy-data-collect-usgs-files.mts": {
+      "reason": "Retained astronomy data collect usgs files CLI implementation exports; migration to src remains outstanding.",
+      "exports": [
+        "productFiles",
+        "memberProducts"
+      ]
+    },
+    "packages/bake/cli/mapped-composition-evidence.mts": {
+      "reason": "Retained mapped composition evidence CLI implementation exports; migration to src remains outstanding.",
+      "exports": [
+        "qualifyMappedComposition"
+      ]
+    },
+    "packages/bake/cli/osiris-shape-comparison.mts": {
+      "reason": "Retained osiris shape comparison CLI implementation exports; migration to src remains outstanding.",
+      "exports": [
+        "compareOsirisShapes"
+      ]
+    },
+    "packages/bake/cli/prepare-image-layers.mts": {
+      "reason": "Retained prepare image layers CLI implementation exports; migration to src remains outstanding.",
+      "exports": [
+        "prepareImageLayerObject"
+      ]
+    },
+    "packages/bake/cli/prepare-llorri-overlap.mts": {
+      "reason": "Retained prepare llorri overlap CLI implementation exports; migration to src remains outstanding.",
+      "exports": [
+        "prepareLlorriOverlap"
+      ]
+    },
+    "packages/bake/cli/prepare-magnetic-map.mts": {
+      "reason": "Retained prepare magnetic map CLI implementation exports; migration to src remains outstanding.",
+      "exports": [
+        "prepareMagneticMap"
+      ]
+    },
+    "packages/bake/cli/prepare-mars-crust.mts": {
+      "reason": "Retained prepare mars crust CLI implementation exports; migration to src remains outstanding.",
+      "exports": [
+        "convertCrustGrid"
+      ]
+    },
+    "packages/bake/cli/prepare-solar-geometry.mts": {
+      "reason": "Retained prepare solar geometry CLI implementation exports; migration to src remains outstanding.",
+      "exports": [
+        "prepareSolarGeometry"
+      ]
+    },
+    "packages/bake/cli/prepare-stars.mts": {
+      "reason": "Retained prepare stars CLI implementation exports; migration to src remains outstanding.",
+      "exports": [
+        "prepareStarsObject"
+      ]
+    },
+    "packages/bake/cli/prepare-volume.mts": {
+      "reason": "Retained prepare volume CLI implementation exports; migration to src remains outstanding.",
+      "exports": [
+        "prepareDensityVolumeObject"
+      ]
+    },
+    "packages/bake/cli/publish-source-cache.mts": {
+      "reason": "Retained publish source cache CLI implementation exports; migration to src remains outstanding.",
+      "exports": [
+        "objectSourceCacheCandidates",
+        "publishSourceCache"
+      ]
+    },
+    "packages/bake/cli/refresh-sphere-photographs.mts": {
+      "reason": "Retained refresh sphere photographs CLI implementation exports; migration to src remains outstanding.",
+      "exports": [
+        "refreshSpherePhotographs"
+      ]
+    }
+  }
 }
