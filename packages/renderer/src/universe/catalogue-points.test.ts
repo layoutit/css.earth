@@ -65,9 +65,9 @@ test('a catalogue loads on its first publication and draws every point as the sa
   const paths = [...points.root.querySelectorAll('path')];
   assert.equal(paths.length, 1);
   assert.equal(paths[0]!.getAttribute('stroke'), '#ffe2a8ff');
-  assert.equal(paths[0]!.getAttribute('stroke-width'), '12', 'as wide as the dot, 1.5 px in eighths of a pixel');
+  assert.equal(paths[0]!.getAttribute('stroke-width'), '1.5', 'as wide as the dot, in pixels');
   assert.equal(paths[0]!.getAttribute('d')!.match(/M/g)?.length, 2);
-  assert.match(paths[0]!.getAttribute('d') ?? '', /^(M-?[\d.]+ -?[\d.]+h\.1){2}$/);
+  assert.match(paths[0]!.getAttribute('d') ?? '', /^(M-?[\d.]+ -?[\d.]+h\.01){2}$/);
   const retainedPath = paths[0];
   points.publish({ world: {...world, pose: {...world.pose, positionM: [1,0,0]}}, viewport });
   assert.equal(points.root.querySelector('path'), retainedPath);
@@ -182,7 +182,7 @@ test('a sized palette draws one color at two radii as two paths, and refuses a r
     viewport: { focalPixels: 100, principalOffsetPixels: [0, 0], widthPixels: 1000, heightPixels: 800 } });
   await new Promise(resolve => setTimeout(resolve, 0));
   const drawn = [...points.root.querySelectorAll('path')].filter(path => path.getAttribute('d'));
-  assert.deepEqual(drawn.map(path => [path.getAttribute('stroke'), path.getAttribute('stroke-width')]).sort(), [['#ffffffb3', '17.6'], ['#ffffffb3', '8']]);
+  assert.deepEqual(drawn.map(path => [path.getAttribute('stroke'), path.getAttribute('stroke-width')]).sort(), [['#ffffffb3', '1'], ['#ffffffb3', '2.2']]);
   points.destroy();
 });
 

@@ -59,8 +59,8 @@ test('a camera turn warps the painted dots exactly where a repaint puts them, an
   const mount = () => { const { document } = parseHTML('<div id="host"></div>');
     return mountBatchedSpatialPoints({ host: document.getElementById('host')!, frame, points, className: 'test-points',
       stylePoint: () => ({ colorCss: '#ffffff', opacity: 1, radiusPx: 1 }), paintPalette: ['#ffffffff@1'] }); };
-  const centres = (field: ReturnType<typeof mount>) => [...(field.root.querySelector('path')!.getAttribute('d') ?? '').matchAll(/M(-?[\d.]+) (-?[\d.]+)h0/g)]
-    .map(match => [Number(match[1]) / 8 + 500, Number(match[2]) / 8 + 400]);
+  const centres = (field: ReturnType<typeof mount>) => [...(field.root.querySelector('path')!.getAttribute('d') ?? '').matchAll(/M(-?[\d.]+) (-?[\d.]+)h\.01/g)]
+    .map(match => [Number(match[1]) + 500, Number(match[2]) + 400]);
   const warped = mount(), exact = mount();
   warped.publish({ world: pose(0), viewport });
   const painted = centres(warped), before = warped.root.querySelector('path')!.getAttribute('d');
@@ -73,6 +73,7 @@ test('a camera turn warps the painted dots exactly where a repaint puts them, an
   const moved = painted.map(([x, y]) => { const w = c! * x! + g! * y! + j!; return [(a! * x! + d! * y! + h!) / w, (b! * x! + e! * y! + i!) / w]; });
   exact.publish({ world: pose(2), viewport });
   const repainted = centres(exact);
+  assert.ok(painted.length > 20 && repainted.length > 20, 'the dots are read from the paths');
   // The same dots, placed by the warp and by a repaint: every in-view dot of the repaint has its warped twin.
   // Each paint rounds its centres to an eighth of a pixel (up to 0.09 px off), and the warp carries the first paint's
   // rounding with it, so the warped and the repainted dot agree to within 0.2 px.
@@ -138,7 +139,7 @@ test('prepared cells skip out-of-view boxes without changing a single drawn dot 
       ...(withCells ? { cells: { boxes: cells.boxes, of: cells.of } } : {}),
       stylePoint: point => styles[point.color]!, paintPalette: styles.map(pointPaint), drawnCount: () => drawn, keepFraction: () => keep }); };
   const dots = (field: ReturnType<typeof mount>) => [...field.root.querySelectorAll('path')]
-    .map(path => [...(path.getAttribute('d') ?? '').matchAll(/M-?\d+ -?\d+h\.1/g)].map(match => match[0]).sort().join(''));
+    .map(path => [...(path.getAttribute('d') ?? '').matchAll(/M-?[\d.]+ -?[\d.]+h\.01/g)].map(match => match[0]).sort().join(''));
   const plain = mount(false), celled = mount(true);
   let last: { focalPixels: number; principalOffsetPixels: readonly [number, number]; widthPixels: number; heightPixels: number } =
     { focalPixels: 800, principalOffsetPixels: [0, 0], widthPixels: 1000, heightPixels: 800 };
@@ -377,6 +378,40 @@ test('a layer\'s fields turn by one warp, and all repaint when one of them must'
   assert.equal(d(far), exact('far', -4, 9));
   assert.equal(svg.style.transform, '');
   far.destroy(); near.destroy();
+});
+
+test('a field hidden during a turn does not repaint the layer from the camera it last saw', async () => {
+  const frame = { referenceFrame: 'sun-icrf', epochJdTt: 2451545, originM: [0, 0, 0] as const, localToReferenceXyzw: [0, 0, 0, 1] as const,
+    metersPerUnit: 1, boundsUnits: { min: [-2e6, -2e6, -2e6] as const, max: [2e6, 2e6, 2e6] as const } };
+  const viewport = { focalPixels: 900, principalOffsetPixels: [0, 0] as const, widthPixels: 1000, heightPixels: 800 };
+  const at = (degrees: number) => { const half = degrees * Math.PI / 360;
+    return { world: { referenceFrame: 'sun-icrf', epochJdTt: 2451545, pose: { positionM: [0, 0, 0] as const, orientationXyzw: [0, Math.sin(half), 0, Math.cos(half)] as const } }, viewport }; };
+  const grid = (shift: number) => Array.from({ length: 30 }, (_, index) => ({ positionUnits: [((index % 6) - 2.5 + shift) * 1e5, (Math.floor(index / 6) - 2) * 1e5, -1e6] as const }));
+  const mountIn = (host: HTMLElement, shift: number) => mountBatchedSpatialPoints({ host, frame, points: grid(shift), className: 'test-points',
+    stylePoint: () => ({ colorCss: '#ffffff', opacity: 1, radiusPx: 1 }), paintPalette: ['#ffffffff@1'] });
+  const { document } = parseHTML('<div id="host"></div>'), host = document.getElementById('host')!;
+  const kept = mountIn(host, 0), hidden = mountIn(host, .5);
+  const d = (field: typeof kept) => field.root.querySelector('path')!.getAttribute('d');
+  const exact = (degrees: number) => { const fresh = mountIn(parseHTML('<div id="host"></div>').document.getElementById('host')!, 0);
+    fresh.publish(at(degrees)); const text = d(fresh); fresh.destroy(); return text; };
+  kept.publish(at(0)); hidden.publish(at(0));
+  kept.publish(at(.5)); hidden.publish(at(.5));
+  assert.match(kept.svg.style.transform, /^matrix3d/, 'both turn by the warp');
+  // One field is hidden; the camera turns on for 60 ms and stops, inside the hidden field's pause.
+  hidden.hide();
+  await new Promise(resolve => setTimeout(resolve, 30));
+  kept.publish(at(1));
+  await new Promise(resolve => setTimeout(resolve, 30));
+  kept.publish(at(1.5));
+  await new Promise(resolve => setTimeout(resolve, 300));
+  assert.equal(kept.svg.style.transform, '');
+  assert.equal(d(kept), exact(1.5), 'the showing dots are painted from where the camera stopped');
+  // Shown again, the hidden field repaints from the camera it is given.
+  hidden.publish(at(1.5));
+  const shownAgain = mountIn(parseHTML('<div id="host"></div>').document.getElementById('host')!, .5);
+  shownAgain.publish(at(1.5));
+  assert.equal(d(hidden), d(shownAgain));
+  kept.destroy(); hidden.destroy(); shownAgain.destroy();
 });
 
 test('a field left unresolved at mount resolves its points in slices and draws a part only once it is whole', () => {
