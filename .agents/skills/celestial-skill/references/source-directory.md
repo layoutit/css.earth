@@ -45,7 +45,8 @@ inputs, example configurations, release assets and supplements, including
 `.obj`, `.stl`, `.ply`, `.vtk`, vertex/facet tables and radius grids. Confirm what
 each table represents; point positions or facet centres alone need not provide
 surface connectivity. Simulation outputs and author-drawn models remain models,
-even when distributed beside spacecraft observations.
+even when distributed beside spacecraft observations;
+[published simulations](scientific-faithfulness.md#published-simulations) says when one may be shown.
 
 For a relevant public Git repository, inspect its file tree and path history
 before cloning it or downloading large archives. If a cleanup removed the input,
@@ -68,6 +69,17 @@ For a numeric-table example, [Mathilde's Thomas release](https://sbnarchive.psi.
 contains both `253mathilde.tab` (shape) and `253mathimg.tab` (reconstructed image
 geometry). Read the [registration investigation](registered-photographic-mosaics.md#inspect-the-release-before-reconstructing-geometry)
 before substituting image-header pointing for such companion tables.
+
+## Published simulations
+
+| Source | What to look for | Selection detail |
+| --- | --- | --- |
+| [Zenodo](https://zenodo.org/) | Model output released with a paper: climate-model runs of a named exoplanet, whole-star convection runs of a named supergiant. Search by the object's name. | Read the record's file list and license before downloading. Outputs run from megabytes to tens of gigabytes; take the one field and time mean the view needs. |
+| [THAI, Part II](https://arxiv.org/abs/2109.11459) with the [ExoCAM release](https://doi.org/10.5281/zenodo.5532765) | TRAPPIST-1e under one protocol in four climate models, with one model's mean climate states released as NetCDF. | The four models differ on the same case. The scenario assumes an atmosphere nobody has detected. |
+
+A public code repository usually holds the simulation program and its analysis
+scripts, not the output. Use it to read how a result was made. Apply the
+[published simulations](scientific-faithfulness.md#published-simulations) conditions before preparing a view.
 
 ## Positions, physical values and places
 
