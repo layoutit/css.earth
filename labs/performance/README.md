@@ -127,11 +127,25 @@ CPU a frame, against 5.4 ms for the page's main thread, and some of the late fra
 pnpm ipad:timed --open /earth/ --origin http://192.168.0.8:4293 --name far-zoom
 ```
 
-It installs a wheel program in the page (out of the subject and back, twice, unless `--program` gives another), leaves
-for the run, and comes back for the record: every frame's time, how long the page's frame callbacks ran, and for each
-frame over 25 ms the hand-over, the files that arrived and the timers over 8 ms in it. It prints the summary and saves
-it as `self-timed.json` beside the reading capture. Use a profiled capture to name what runs in a frame; never to count
-late frames, or to judge a change by their count.
+It installs a program of input in the page, leaves for the run, and comes back for the record: every frame's time, how
+long the page's frame callbacks ran, and for each frame over 25 ms the step it fell in, the hand-over, the files that
+arrived and the timers over 8 ms in it. It prints the summary and saves it as `self-timed.json` beside the reading
+capture. Use a profiled capture to name what runs in a frame; never to count late frames, or to judge a change by their
+count.
+
+`--program` picks the input: `far-zoom` (the default: out of the subject and back, twice, 34 s), or one of the short
+ones for a hot interaction, `drag` (two throws and a held turn, 6.5 s), `zoom` (out and in, twice, 7 s) and `fly`
+(two flights, 7 s). A JSON list of steps gives another: `["wheel", frames, deltaY]`, `["wait", frames]`,
+`["drag", frames, dx, dy, "fling"|"hold"]`, `["fly", "<object id>"]`, `["click", "<selector>", index]`.
+
+`--trace` runs the program once with the Inspector's timeline attached instead, and writes `trace.devtools.json` for
+Chrome DevTools' Performance panel: cut to the run, with a time stamp at each step, every frame in the Frames track and
+the iPad's screen as the filmstrip. It is the chart to look at; the count comes from the run without it.
+
+```sh
+pnpm ipad:timed --open /m42/ --origin http://192.168.0.8:4293 --program drag
+pnpm ipad:timed --open /m42/ --origin http://192.168.0.8:4293 --program drag --trace
+```
 
 ### Repeatable journeys on the connected iPad
 
