@@ -28,3 +28,23 @@ test('the interval sweep preserves top-level tasks and excludes nested style wor
     event('RecalculateStyles', 5, 20), event('Layout', 25, 10), event('Composite', 60, 20), event('Paint', 62, 16)] });
   assert.deepEqual(trace.traceEvents.filter(e => e.name === 'RunTask').map(e => [e.ts, e.dur]), [[5, 50], [60, 20]]);
 });
+
+test('every frame is drawn in the Frames track, one that composited nothing too', () => {
+  const event = (name: string, ts: number, dur: number) => ({ name, ts, dur, ph: 'X', pid: 1, tid: 1 });
+  const trace = devtoolsTrace({ traceEvents: [event('RenderingFrame', 0, 16), event('Composite', 4, 6), event('RenderingFrame', 16, 44), event('RenderingFrame', 60, 17)] });
+  assert.deepEqual(trace.traceEvents.filter(e => e.name === 'BeginFrame').map(e => e.ts), [0, 16, 60]);
+  assert.deepEqual(trace.traceEvents.filter(e => e.name === 'DrawFrame').map(e => e.ts), [16, 60, 77]);
+});
+
+test('marks keep only the run between the first and last matching time stamp', () => {
+  const event = (name: string, ts: number, dur: number) => ({ name, ts, dur, ph: 'X', pid: 1, tid: 1 });
+  const mark = (message: string, ts: number) => ({ name: 'TimeStamp', ts, ph: 'i', pid: 1, tid: 1, args: { data: { message } } });
+  const source = { metadata: { stopwatchEpochMs: 0 }, traceEvents: [event('RenderingFrame', 0, 16000), mark('other', 100000), mark('run step', 3000000),
+    event('RenderingFrame', 3100000, 16000), event('RenderingFrame', 4990000, 4000000), mark('run end', 5000000), event('RenderingFrame', 9000000, 16000)] };
+  const trace = devtoolsTrace(source, [{ epochMs: 1000, jpeg: 'before' }, { epochMs: 4000, jpeg: 'during' }], 'run');
+  assert.deepEqual(trace.traceEvents.filter(e => e.name === 'BeginFrame').map(e => e.ts), [3100000, 4990000]);
+  assert.deepEqual(trace.traceEvents.filter(e => e.name === 'DrawFrame').map(e => e.ts), [3116000, 5250000]);
+  assert.deepEqual(trace.traceEvents.filter(e => e.name === 'Screenshot').map(e => (e.args as { snapshot: string }).snapshot), ['during']);
+  assert.deepEqual(trace.traceEvents.filter(e => e.name === 'TimeStamp').map(e => e.ts), [3000000, 5000000]);
+  assert.throws(() => devtoolsTrace(source, [], 'absent'), /no time stamp starting with "absent"/u);
+});
