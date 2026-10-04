@@ -22,3 +22,15 @@ test('prepared billboards carry every bank once, with its own image and no hash'
   assert.throws(() => parseDatasetBillboards({ ...input, imagePx: 0 }), /image size/);
   assert.throws(() => parseDatasetBillboards({ ...input, banks: [{ ...input.banks[1], attached: undefined }] }), /attached/);
 });
+
+test('a bank with several datasets carries a view of each, so its billboard can picture the one selected', () => {
+  const view = input.banks[0]!.billboard!, bank = { ...input.banks[0]!, defaultDataset: 'dust', datasets: [{ id: 'gas', ...view, radiusUnits: 2 }] };
+  const parsed = parseDatasetBillboards({ ...input, banks: [bank] }).banks.get('nebula')!;
+  assert.equal(parsed.defaultDataset, 'dust');
+  assert.deepEqual([...parsed.datasets!.keys()], ['gas']);
+  assert.equal(parsed.datasets!.get('gas')!.radiusUnits, 2);
+  // The default dataset's view is `billboard`; listing it again would give it two images.
+  assert.throws(() => parseDatasetBillboards({ ...input, banks: [{ ...bank, datasets: [{ id: 'dust', ...view }] }] }), /lists dust twice/);
+  assert.throws(() => parseDatasetBillboards({ ...input, banks: [{ ...bank, defaultDataset: undefined }] }), /default dataset/);
+  assert.throws(() => parseDatasetBillboards({ ...input, banks: [{ ...input.banks[0]!, defaultDataset: 'dust' }] }), /without other datasets/);
+});

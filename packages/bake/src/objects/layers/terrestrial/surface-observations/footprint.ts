@@ -70,6 +70,40 @@ export function sampleFootprint({ image, camera, geometry, photometry }: Footpri
     gain, maximumEmissionDegrees: emission * 180 / Math.PI, maximumIncidenceDegrees: incidence * 180 / Math.PI };
 }
 
+/** Sample a sky field at a surface point. A reconstructed image is a brightness field over its whole frame: a pixel holds the
+ * field's value whether or not that pixel's own ray meets the body. Near the limb the four pixels around a projected point straddle
+ * the silhouette, and asking each for a surface point of its own left the last pixel of the disc in holes (Betelgeuse cast to 88
+ * degrees: black fans at both poles, 2026-10-03). So the point is held to the emission limit by its own normal, and every pixel
+ * that passes the archive's verdict contributes; the sample still needs at least half the bilinear weight. */
+export function sampleSkyField({ image, camera, photometry }: { image: ObservationImage; camera: Pick<ObservationCamera, 'project' | 'positionMeters'>; photometry: Pick<ObservationPhotometry, 'gain'> },
+  point: readonly number[], normal: readonly number[],
+  { maximumEmissionDegrees }: { maximumEmissionDegrees: number }): FootprintSample {
+  const projected = camera.project(point);
+  if (!projected || !(projected[2] > 0)) return { reason: 'behind-camera' };
+  const [x, y] = projected, { width, height } = image;
+  if (!Number.isFinite(x + y) || x < 0 || y < 0 || x >= width - 1 || y >= height - 1) return { reason: 'outside-detector' };
+  const eye = camera.positionMeters, d0 = eye[0] - point[0], d1 = eye[1] - point[1], d2 = eye[2] - point[2];
+  const cosine = (normal[0] * d0 + normal[1] * d1 + normal[2] * d2) / (Math.hypot(d0, d1, d2) * Math.hypot(normal[0], normal[1], normal[2]));
+  const emission = Math.acos(Math.max(-1, Math.min(1, cosine)));
+  if (!Number.isFinite(emission) || emission > maximumEmissionDegrees * Math.PI / 180) return { reason: 'grazing' };
+  // A self-luminous field is seen along its own emission direction: incidence equals emission and the phase is zero.
+  const gain = photometry.gain(emission, emission, 0);
+  if (gain === null) return { reason: 'photometry' };
+  const ix = Math.floor(x), iy = Math.floor(y), tx = x - ix, ty = y - iy, i0 = iy * width + ix;
+  let used = 0, weight = 0, failureReason: string | undefined, failureWeight = 0;
+  for (let k = 0; k < 4; k++) {
+    const index = k === 0 ? i0 : k === 1 ? i0 + 1 : k === 2 ? i0 + width : i0 + width + 1;
+    const contributorWeight = k === 0 ? (1 - tx) * (1 - ty) : k === 1 ? tx * (1 - ty) : k === 2 ? (1 - tx) * ty : tx * ty, reason = image.reject(index);
+    if (reason === null) { usedIndex[used] = index; usedWeight[used] = contributorWeight; usedGain[used] = gain; used++; weight += contributorWeight; }
+    else if (failureReason === undefined || contributorWeight > failureWeight) { failureReason = reason; failureWeight = contributorWeight; }
+  }
+  if (weight < .5) return { reason: failureReason ?? 'no-geometry' };
+  const degrees = emission * 180 / Math.PI;
+  return { radiance: interpolateUsed(image.values, used, weight) * (image.radianceFactor?.factor ?? 1), separationMeters: 0,
+    ...(image.colorValues ? { color: image.colorValues.map(plane => interpolateUsed(plane, used, weight)) } : {}),
+    gain, maximumEmissionDegrees: degrees, maximumIncidenceDegrees: degrees };
+}
+
 /** A footprint-scaled separation limit over the contributors that have a surface point, or NaN when none has. */
 function separationLimit(limit: (ids: readonly number[]) => number, ids: readonly number[], geometry: PixelGeometry) {
   const surfaced = ids.filter(i => geometry.reject(i) === null);
@@ -78,13 +112,15 @@ function separationLimit(limit: (ids: readonly number[]) => number, ids: readonl
 
 export interface CameraFrameOptions {
   id: string; image: ObservationImage; camera: ObservationCamera; geometry: PixelGeometry; photometry: ObservationPhotometry;
-  limits: TransferLimits; mesh: Pick<SourceMesh, 'intersect' | 'positions' | 'indices' | 'faceProvenance' | 'constraintFlags'>;
+  limits: TransferLimits; mesh: Pick<SourceMesh, 'intersect' | 'closestPoint' | 'positions' | 'indices' | 'faceProvenance' | 'constraintFlags'>;
+  /** The image is a brightness field over its whole frame (a reconstruction), sampled at the point itself (`sampleSkyField`). */
+  skyField?: boolean;
   report?: Record<string, unknown>;
 }
 
 /** Assemble a camera route's frame: count its pixels, measure its footprint and bind sampling and visibility to its limits. */
 export function cameraFrame(options: CameraFrameOptions): ObservationFrame {
-  const { id, image, camera, geometry, photometry, limits, mesh, report = {} } = options;
+  const { id, image, camera, geometry, photometry, limits, mesh, skyField = false, report = {} } = options;
   const angle = pixelAngle(camera, image.width, image.height);
   const nadir: number[] = [], rejectedPixels: Record<string, number> = {};
   let geometryPixels = 0, acceptedPixels = 0, acceptedLossyPixels = 0;
@@ -114,7 +150,9 @@ export function cameraFrame(options: CameraFrameOptions): ObservationFrame {
   return { id, startTime: image.startTime, filter: image.filter, positionKm: camera.positionKm, cameraKind: camera.kind, geometrySource: geometry.source,
     nominalPixelScaleMeters: camera.nominalPixelScaleMeters, footprint, detector: { image, camera, mesh },
     withCamera: turned => cameraFrame({ ...options, camera: turned, geometry: castSourceRays(turned, mesh, image.width, image.height) }),
-    sample: point => sampleFootprint({ image, camera, geometry, photometry }, point, { maximumSeparationMeters: separation, maximumEmissionDegrees: limits.maximumEmissionDegrees }),
+    sample: skyField
+      ? point => { const hit = mesh.closestPoint(point); return hit ? sampleSkyField({ image, camera, photometry }, point, hit.normal, { maximumEmissionDegrees: limits.maximumEmissionDegrees }) : { reason: 'no-geometry' }; }
+      : point => sampleFootprint({ image, camera, geometry, photometry }, point, { maximumSeparationMeters: separation, maximumEmissionDegrees: limits.maximumEmissionDegrees }),
     contourDepth: point => {
       contour ??= contourDistances(image.width, image.height, usable);
       const projected = camera.project(point);

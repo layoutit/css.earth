@@ -124,7 +124,7 @@ export type { BackingNearFade, PreparedGalaxyBacking } from './prepared-data/gal
 export { IMAGE_MESH_SCHEMA, parseImageMesh } from './prepared-data/image-mesh.js';
 export type { PreparedImageMesh } from './prepared-data/image-mesh.js';
 export { DATASET_BILLBOARDS_SCHEMA, parseDatasetBillboards } from './prepared-data/dataset-billboards.js';
-export type { DatasetBankBillboard, DatasetBillboards } from './prepared-data/dataset-billboards.js';
+export type { DatasetBankBillboard, DatasetBillboardView, DatasetBillboards } from './prepared-data/dataset-billboards.js';
 export { PREPARED_GALAXY_CATALOG_SCHEMA, parsePreparedGalaxyCatalog } from './prepared-data/galaxy-catalog.js';
 export type { SpatialCitation, SpatialCatalogSource, SpatialMeasurement, PreparedGalaxyRecord, PreparedGalaxyCatalog } from './prepared-data/galaxy-catalog.js';
 export { PREPARED_CLUSTER_CATALOG_SCHEMA, isPreparedCluster, parsePreparedClusterCatalog } from './prepared-data/cluster-catalog.js';
