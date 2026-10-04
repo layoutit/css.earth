@@ -12,7 +12,9 @@ DH Tau b is a companion of about 12 Jupiter masses, less than a million years ol
 
 **Its own light.** The planet is drawn self-luminous, as the other imaged planets are: its glow is its own heat.
 
-**Shape dataset.** A sphere of the model radius in the shared neutral gray. No paper gives its flux in three bands comparable with HR 8799's planets, whose false color comes from JWST (the [ledger](investigations.json) says what would change that).
+**Infrared color dataset.** The default dataset paints the sphere one false color from its measured flux in three infrared bands: red MKO K 2.184 µm (1346 ± 25 µJy), green MKO H 1.614 µm (1074 ± 40 µJy), blue MKO J 1.2417 µm (802.9 ± 37 µJy) (Itoh et al. (2005), as compiled in Best, Liu, Magnier & Dupuy (2024), The UltracoolSheet v2.1 (Zenodo); zero points from the SVO Filter Profile Service; [record](source/photometry/band-color.json)). Display range: this planet alone, from zero to its brightest band (MKO K), so the color shows its band ratios; brightness is not compared across planets at different distances. Not a natural color; nobody has resolved its disc.
+
+**Limb.** The disc is dimmed toward the limb by the quadratic law Claret, Hauschildt & Witte (2012), A&A 546, A14 compute from PHOENIX model atmospheres for the H band at 2,350 K and log g 3.64 (u1 0.241, u2 0.499): a model, not a measurement of this planet ([nodes](source/photometry/claret-2012-h-quadratic.tsv)). Its temperature is the 2,350 K of its measurements record; log g 3.64 follows from the mass and radius of its astronomy record (packages/astronomy/data/bodies/dh-tau-b.json).
 
 **Rotation.** No spin axis on the sky is measured; the display axis is the orbit normal ([rotation.json](source/preparation/rotation.json)).
 
@@ -26,6 +28,7 @@ Run of 2026-09-23 (this version):
 
 - The positions barely move in twenty years, so almost any orientation fits: the recorded orbit is one of them, not a measurement of the planet's path.
 - The radius and mass are model values; the planet is a point in every image.
-- No color is measured in bands comparable with HR 8799's, and no spin axis is measured.
+- No spin axis is measured.
+- **Model limb.** The limb darkening is a model atmosphere at the planet's temperature and gravity, in the middle band of its color, not a measurement of this planet.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

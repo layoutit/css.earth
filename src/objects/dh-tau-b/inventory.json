@@ -4,20 +4,26 @@
     {
       "location": "public",
       "filename": "dh-tau-b-arrival.webp",
-      "bytes": 16594,
-      "sha256": "3eee91486ce7b87c152ce6aff47e4ac5e5719a6c8ba04d97cbf00a1a4b273458"
+      "bytes": 28578,
+      "sha256": "d54bd0be092eb7b5f2dbf804cd1d00c7ca6a10c78c16d8c93ef38f177c55b895"
     },
     {
       "location": "public",
       "filename": "dh-tau-b-billboard.webp",
-      "bytes": 2890,
-      "sha256": "aab7295855cbb556721c27ee7d0b3ea6d1e3051b93a2f769a5a627fa4f75d175"
+      "bytes": 5120,
+      "sha256": "2ff0fa7f6e034ef866c882f3ff3c7f355e9eabedc518cd87318fbebad958353c"
     },
     {
       "location": "public",
       "filename": "dh-tau-b-dataset-infrared.webp",
       "bytes": 44,
       "sha256": "6b5f90cabf54a316505905f7471c4500fecb12085273bf6bbcd1284e10ffb4b0"
+    },
+    {
+      "location": "public",
+      "filename": "dh-tau-b-limb-infrared@2x.webp",
+      "bytes": 97020,
+      "sha256": "11dd47de4fda10466371524d8b6529447235bc4e4134be2fe7b00cf95c8e7940"
     },
     {
       "location": "public",
@@ -28,8 +34,8 @@
     {
       "location": "public",
       "filename": "dh-tau-b-surface-infrared@2x.webp",
-      "bytes": 178,
-      "sha256": "878a8bb017b6cb299c94f5f46d394d9a66995447bb7699944b7ca2477480d532"
+      "bytes": 38,
+      "sha256": "ba2be0c39d4a2dd79f9a442e5a0ff3c16a7e4073cbdab0c1c2bb211e31c3a30c"
     },
     {
       "location": "prepared",
@@ -40,14 +46,14 @@
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 2453,
-      "sha256": "cf1e220c00464ab8897cfc2b0bc1c0c6387e14552e66ccfb9b2fc9f17e3359af"
+      "bytes": 2540,
+      "sha256": "86a973c9b3851833d0d122dc94e0ef64ae09a2b8c0f0764f23dbfd991fc023fd"
     },
     {
       "location": "prepared",
       "filename": "authored-preparation.json",
-      "bytes": 723,
-      "sha256": "c171ad26503fb954283047c3016679051b914cc7ebdb509d17c05ea35f0e1f14"
+      "bytes": 661,
+      "sha256": "0cce79960c42fdf4939554061441de4dcb6f0bfd4551b410575b5a10f5a3429c"
     },
     {
       "location": "prepared",
@@ -64,14 +70,14 @@
     {
       "location": "prepared",
       "filename": "datasets.json",
-      "bytes": 1011,
-      "sha256": "93f15c56f5e99c0e3a4d70f0d6eb63e4c145e0cf41b7b36adc81b41b0d7edea5"
+      "bytes": 1184,
+      "sha256": "2e3d839af76e72d270f3393def4cf4f680c593e4a2b5d0bc98a6fc09ab036eb1"
     },
     {
       "location": "prepared",
       "filename": "minimaps.json",
-      "bytes": 88,
-      "sha256": "6cb59671d8d139b7d1638d9b32322c616d84f051b998fdacd4d019c8bcb3acc6"
+      "bytes": 107,
+      "sha256": "22268ee390c676bc0aaf3729f5ac9ce4ea971a14f53f111b5d7857b580dbee1e"
     },
     {
       "location": "prepared",
@@ -88,14 +94,14 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 270876,
-      "sha256": "c4dd9cd02d4812b5ef76675df082aab2548364cb361fe69cf2510d8d54a64c49"
+      "bytes": 270953,
+      "sha256": "7aa354dd939bcd090f5976ced4cb0cae8c8e8417ded2bfbb9b84ab64deca93f6"
     },
     {
       "location": "prepared",
       "filename": "scene.json",
-      "bytes": 393306,
-      "sha256": "5aca1c086cfda970fd00a529a74d21b0638d164c7f16af07e137ad5cdfe19281"
+      "bytes": 393287,
+      "sha256": "4bc66eb58252a34d8f79d0a74f69a242d016bf1f315fe25a1b7c0669969ae4f8"
     },
     {
       "location": "prepared",

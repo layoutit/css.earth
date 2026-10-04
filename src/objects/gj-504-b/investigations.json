@@ -5,11 +5,12 @@
     {
       "id": "band-color",
       "subject": "A false color from three measured bands, as the HR 8799 planets have",
-      "status": "unresolved",
-      "finding": "JWST has a NIRSpec spectrum and MIRI photometry of this companion, but no paper gives its flux densities in the NIRCam F410M, F430M and F460M bands that color HR 8799's planets. Band fluxes computed here from the spectrum would be a derived value, so it is the shared neutral gray.",
+      "status": "included",
+      "finding": "Shown in infrared false color from its measured flux in MKO K 2.184 µm, MKO H 1.614 µm, MKO J 1.2417 µm (Janson et al. (2013c), as compiled in Best, Liu, Magnier & Dupuy (2024), The UltracoolSheet v2.1 (Zenodo); zero points from the SVO Filter Profile Service). JWST has a NIRSpec spectrum and MIRI photometry of this companion, but no paper gives its flux densities in the NIRCam F410M, F430M and F460M bands that color HR 8799's planets. Band fluxes computed here from the spectrum would be a derived value.",
       "revisitWhen": "Flux densities in three bands comparable with HR 8799's are published.",
       "evidence": [
-        "https://arxiv.org/abs/2606.19228"
+        "https://arxiv.org/abs/2606.19228",
+        "https://ui.adsabs.harvard.edu/abs/2013ApJ...778L...4J"
       ]
     },
     {

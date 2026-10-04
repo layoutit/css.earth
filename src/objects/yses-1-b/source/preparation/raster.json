@@ -26,7 +26,26 @@
       "falseColor": true,
       "science": {
         "kind": "disc-integrated-band-color",
-        "qualification": "Infrared false color of the whole disc from published flux densities (Bohn et al. (2020a), as compiled in Best, Liu, Magnier & Dupuy (2024), The UltracoolSheet v2.1 (Zenodo); zero points from the SVO Filter Profile Service, UltracoolSheet Main.csv, YSES 1 b: 2MASS Ks 14.7 +/- 0.14 (Bohn20a), 2MASS H 15.87 +/- 0.38 (Bohn20a), 2MASS J 15.73 +/- 0.38 (Bohn20a); SVO 2MASS/2MASS.Ks 666.8 Jy, 2MASS/2MASS.H 1024.0 Jy, 2MASS/2MASS.J 1594.0 Jy): red 2MASS Ks 2.159 µm, green 2MASS H 1.662 µm, blue 2MASS J 1.235 µm, on one range shared with the bodies the record names. The planet is unresolved, so no map is implied. It glows with its own heat, so no lighting."
+        "qualification": "Infrared false color of the whole disc from published flux densities (Bohn et al. (2020a), as compiled in Best, Liu, Magnier & Dupuy (2024), The UltracoolSheet v2.1 (Zenodo); zero points from the SVO Filter Profile Service, UltracoolSheet Main.csv, YSES 1 b: 2MASS Ks 14.7 +/- 0.14 (Bohn20a), 2MASS H 15.87 +/- 0.38 (Bohn20a), 2MASS J 15.73 +/- 0.38 (Bohn20a); SVO 2MASS/2MASS.Ks 666.8 Jy, 2MASS/2MASS.H 1024.0 Jy, 2MASS/2MASS.J 1594.0 Jy): red 2MASS Ks 2.159 µm, green 2MASS H 1.662 µm, blue 2MASS J 1.235 µm, on one range shared with the bodies the record names. The planet is unresolved, so no map is implied. It glows with its own heat, so no lighting. The disc is dimmed toward the limb by the quadratic law Claret, Hauschildt & Witte (2012), A&A 546, A14 compute from PHOENIX model atmospheres for the H band at 1,727 K and log g 3.59 (u1 0.791, u2 -0.029): a model, not a measurement of this planet.",
+        "limbDarkening": {
+          "law": "quadratic",
+          "path": "photometry/claret-2012-h-quadratic.tsv",
+          "grid": {
+            "teffK": 1727,
+            "logg": 3.59,
+            "models": {
+              "Filt": "H",
+              "Met": "L",
+              "Mod": "qs"
+            }
+          },
+          "columns": {
+            "teff": "Teff",
+            "logg": "logg",
+            "u1": "a",
+            "u2": "b"
+          }
+        }
       }
     }
   ],
@@ -48,7 +67,7 @@
       },
       "limbMaterial": {
         "logicalSize": 496,
-        "composition": "transparent: the adopted source-radius opaque-sphere silhouette is the limb; no off-limb or radial-brightness source is selected",
+        "composition": "black alpha darkens the disc according to the selected limb-darkening law; transparent outside the silhouette",
         "sourceRadius": "measurements.json#radiusKm",
         "surfaceReplacement": false,
         "runtimeAlphaProcessing": false

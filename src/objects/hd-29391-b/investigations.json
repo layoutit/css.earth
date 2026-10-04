@@ -30,6 +30,15 @@
         "https://arxiv.org/abs/2401.01468",
         "https://doi.org/10.1017/pasa.2024.40"
       ]
+    },
+    {
+      "id": "band-color",
+      "subject": "A false color from three measured bands",
+      "status": "included",
+      "finding": "Shown in infrared false color from its measured flux in MKO K 2.184 µm, MKO H 1.614 µm, MKO J 1.2417 µm (Rajan et al. (2017), as compiled in Best, Liu, Magnier & Dupuy (2024), The UltracoolSheet v2.1 (Zenodo); zero points from the SVO Filter Profile Service).",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2017AJ....154...10R"
+      ]
     }
   ]
 }

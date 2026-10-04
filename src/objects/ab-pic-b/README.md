@@ -12,7 +12,9 @@ AB Pic b orbits about 190 au out, on an orbit seen edge-on. It spins in about tw
 
 **Its own light.** The planet is drawn self-luminous, as the other imaged planets are: its glow is its own heat.
 
-**Shape dataset.** A sphere of the model radius in the shared neutral gray ([ledger](investigations.json)).
+**Infrared color dataset.** The default dataset paints the sphere one false color from its measured flux in three infrared bands: red MKO K 2.184 µm (2056 ± 190 µJy), green MKO H 1.614 µm (1315 ± 120 µJy), blue MKO J 1.2417 µm (1011 ± 130 µJy) (Liu Dupuy & Allers (2016); Dupuy & Liu (2012), as compiled in Best, Liu, Magnier & Dupuy (2024), The UltracoolSheet v2.1 (Zenodo); zero points from the SVO Filter Profile Service; [record](source/photometry/band-color.json)). Display range: this planet alone, from zero to its brightest band (MKO K), so the color shows its band ratios; brightness is not compared across planets at different distances. Not a natural color; nobody has resolved its disc.
+
+**Limb.** The disc is dimmed toward the limb by the quadratic law Claret, Hauschildt & Witte (2012), A&A 546, A14 compute from PHOENIX model atmospheres for the H band at 1,800 K and log g 3.88 (u1 0.756, u2 0.013): a model, not a measurement of this planet ([nodes](source/photometry/claret-2012-h-quadratic.tsv)). Its temperature is the 1,800 K of its measurements record; log g 3.88 follows from the mass and radius of its astronomy record (packages/astronomy/data/bodies/ab-pic-b.json).
 
 **Rotation.** AB Pic b spins in about 2.1 hours (Palma-Bifani et al. 2023, Abstract), and its true obliquity is about 45 or 135 degrees, but the direction of its axis on the sky is not measured; no spin is propagated. The display axis is the orbit normal ([rotation.json](source/preparation/rotation.json)).
 
@@ -26,6 +28,7 @@ Run of 2026-09-23 (this version):
 
 - Twelve years of positions on a 2,800-year orbit: the orbit drawn is one of many that fit equally well.
 - The measured two-hour spin is not drawn, because its axis direction on the sky is unknown.
-- The radius and mass are model values; no color is measured in bands comparable with HR 8799's.
+- The radius and mass are model values.
+- **Model limb.** The limb darkening is a model atmosphere at the planet's temperature and gravity, in the middle band of its color, not a measurement of this planet.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

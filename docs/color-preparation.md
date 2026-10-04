@@ -266,6 +266,13 @@ the two differ by more than 12 levels in any channel unless the record states th
 
 The plate is a round overlay fitted to the sphere's outline at its drawn size, geometry scale included.
 
+**An imaged planet's limb.** A planet seen by its own heat is one infrared color on an unresolved disc. It takes its law
+the way a cool star does, from a model grid at its own temperature and gravity: Claret, Hauschildt & Witte
+([2012](https://ui.adsabs.harvard.edu/abs/2012A&A...546A..14C/abstract)), PHOENIX models from 1,500 to 4,800 K, in the H
+band, the middle band of a J, H, K color (`new-object --imaged-limb <id>...`,
+[imaged-limb.mts](../packages/telescope-cli/src/new-object/imaged/imaged-limb.mts)). The nodes it is read between are kept
+beside the planet, and every text calls it a model. A planet cooler than 1,500 K is outside the grid and stays a flat disc.
+
 **Gravity darkening.** A star that spins fast is flattened and hotter at its poles. Where a paper publishes a Roche-von Zeipel
 fit (ω, β, the polar temperature, the radii and the pole's orientation), [gravity-darkening.ts](../packages/bake/src/objects/stellar/gravity-darkening.ts)
 rebuilds the surface from those numbers and writes a temperature for each latitude row. Its tests require the paper's

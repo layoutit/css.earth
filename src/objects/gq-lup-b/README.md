@@ -12,7 +12,9 @@ GQ Lup b is a young, accreting companion of about 30 Jupiter masses, 0.7 arcseco
 
 **Its own light.** The planet is drawn self-luminous, as the other imaged planets are: its glow is its own heat.
 
-**Shape dataset.** A sphere of the model radius in the shared neutral gray. No paper gives its flux in three bands comparable with HR 8799's planets, whose false color comes from JWST (the [ledger](investigations.json) says what would change that).
+**Infrared color dataset.** The default dataset paints the sphere one false color from its measured flux in three infrared bands: red MKO K 2.184 µm (2864 ± 320 µJy), green MKO H 1.614 µm (2552 ± 310 µJy), blue 2MASS J 1.235 µm (1748 ± 180 µJy) (Marois et al. (2007); Stolker et al. (2021); McElwain et al. (2007), as compiled in Best, Liu, Magnier & Dupuy (2024), The UltracoolSheet v2.1 (Zenodo); zero points from the SVO Filter Profile Service; [record](source/photometry/band-color.json)). Display range: this planet alone, from zero to its brightest band (MKO K), so the color shows its band ratios; brightness is not compared across planets at different distances. Not a natural color; nobody has resolved its disc.
+
+**Limb.** The disc is dimmed toward the limb by the quadratic law Claret, Hauschildt & Witte (2012), A&A 546, A14 compute from PHOENIX model atmospheres for the H band at 2,700 K and log g 3.76 (u1 0.126, u2 0.537): a model, not a measurement of this planet ([nodes](source/photometry/claret-2012-h-quadratic.tsv)). Its temperature is the 2,700 K of its measurements record; log g 3.76 follows from the mass and radius of its astronomy record (packages/astronomy/data/bodies/gq-lup-b.json).
 
 **Rotation.** No spin axis on the sky is measured; the display axis is the orbit normal ([rotation.json](source/preparation/rotation.json)).
 
@@ -26,6 +28,7 @@ Run of 2026-09-23 (this version):
 
 - The GRAVITY positions are so precise that the recorded orbit still misses the latest by a few tenths of a milliarcsecond, several times its error; on a 0.7-arcsecond separation that is invisible.
 - The radius and mass are model values; the planet is a point in every image.
-- No color is measured in bands comparable with HR 8799's, and no spin axis is measured.
+- No spin axis is measured.
+- **Model limb.** The limb darkening is a model atmosphere at the planet's temperature and gravity, in the middle band of its color, not a measurement of this planet.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

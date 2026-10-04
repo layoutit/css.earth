@@ -99,6 +99,32 @@
         "kind": "local",
         "reason": "Project-authored color recipe transcribing the cited photometry; repinned when edited."
       }
+    },
+    {
+      "id": "dh-tau-b-claret-2012-limb-darkening",
+      "path": "photometry/claret-2012-h-quadratic.tsv",
+      "origin": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/546/A14/tableab.dat",
+      "credit": "Claret, Hauschildt & Witte (2012), A&A 546, A14 (CDS J/A+A/546/A14)",
+      "license": "CDS catalogue data, public with citation of the paper and CDS",
+      "licenseEvidence": [
+        "https://cds.unistra.fr/vizier-org/licences_vizier.html"
+      ],
+      "acquisition": "Rows of tableab.dat: the quadratic H coefficients (least-squares fits, quasi-spherical models) of the grid nodes the planet's temperature and gravity lie between, each cell as printed, the fixed columns rewritten as tabs.",
+      "redistribution": "Catalogue rows retained with their citation.",
+      "consumers": [
+        "assets",
+        "datasets"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-dh-tau-b-claret-2012-limb-darkening",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
@@ -106,7 +132,7 @@
       "id": "dataset-color-context-marker",
       "path": "presentation/context.png",
       "origin": "https://arxiv.org/abs/2405.13128",
-      "credit": "The default dataset's color as a disc; rendered by packages/telescope-cli/src/source-authoring/context-markers.mts",
+      "credit": "The default dataset's color as a disc, dimmed toward the limb by its law; rendered by packages/telescope-cli/src/source-authoring/context-markers.mts",
       "license": "Project-authored display derivative.",
       "consumers": [
         "navigation"
@@ -116,7 +142,8 @@
         "inputs": [
           "dh-tau-b-observational-measurements",
           "dh-tau-b-preparation-raster",
-          "dh-tau-b-band-color"
+          "dh-tau-b-band-color",
+          "dh-tau-b-claret-2012-limb-darkening"
         ]
       },
       "generator": "packages/telescope-cli/src/source-authoring/context-markers.mts",

@@ -5,11 +5,12 @@
     {
       "id": "band-color",
       "subject": "A false color from three measured bands, as the HR 8799 planets have",
-      "status": "unresolved",
-      "finding": "Hoch et al. (2025) publish JWST spectra of this planet, but no paper gives its flux densities in the NIRCam F410M, F430M and F460M bands that color HR 8799's planets. Band fluxes computed here from the spectrum would be a derived value, not a published one, so the planet is the shared neutral gray.",
+      "status": "included",
+      "finding": "Shown in infrared false color from its measured flux in 2MASS Ks 2.159 µm, 2MASS H 1.662 µm, 2MASS J 1.235 µm (Bohn et al. (2020a), as compiled in Best, Liu, Magnier & Dupuy (2024), The UltracoolSheet v2.1 (Zenodo); zero points from the SVO Filter Profile Service). Hoch et al. (2025) publish JWST spectra of this planet, but no paper gives its flux densities in the NIRCam F410M, F430M and F460M bands that color HR 8799's planets. Band fluxes computed here from the spectrum would be a derived value, not a published one.",
       "revisitWhen": "Flux densities in three bands comparable with HR 8799's are published.",
       "evidence": [
-        "https://arxiv.org/abs/2507.18861"
+        "https://arxiv.org/abs/2507.18861",
+        "https://ui.adsabs.harvard.edu/abs/2020MNRAS.492..431B"
       ]
     },
     {
@@ -20,6 +21,15 @@
       "revisitWhen": "The disc is resolved or its extent is modelled in a paper.",
       "evidence": [
         "https://arxiv.org/abs/2507.18861"
+      ]
+    },
+    {
+      "id": "limb-darkening",
+      "subject": "Limb darkening",
+      "status": "included",
+      "finding": "The disc is dimmed toward the limb by the quadratic law Claret, Hauschildt & Witte (2012), A&A 546, A14 compute from PHOENIX model atmospheres for the H band at 1,727 K and log g 3.59 (u1 0.791, u2 -0.029): a model, not a measurement of this planet. Its temperature is the 1,727 K of its measurements record; log g 3.59 follows from the mass and radius of its astronomy record (packages/astronomy/data/bodies/yses-1-b.json).",
+      "evidence": [
+        "https://cdsarc.cds.unistra.fr/ftp/J/A+A/546/A14/tableab.dat"
       ]
     }
   ]

@@ -452,6 +452,13 @@ export function interpolateQuadraticLimbDarkening(tsv: string, recipe: Extract<L
   const { u1, u2, u1Bounds, u2Bounds } = readLimbGrid(tsv, recipe);
   return { u1, u2, u1Bounds, u2Bounds };
 }
+/** The law a one-color disc names (an imaged planet's band color), read from the model grid beside it. A star's law is read with
+ * its color (loadStellarPhotometricColor). */
+export async function loadGridLimbDarkening(read: (path: string) => Promise<Buffer>, limbDarkening: unknown, where: string): Promise<QuadraticLimbDarkening> {
+  const law = parseLimbDarkeningRecipe(limbDarkening);
+  if (law.source !== 'grid') throw new TypeError(`${where}: its limb law is read from a model grid.`);
+  return interpolateQuadraticLimbDarkening((await read(law.path)).toString('utf8'), law);
+}
 /** The grid read itself, with the corner nodes it used: the generator requests exactly those nodes. */
 export function readLimbGrid(tsv: string, recipe: Extract<LimbDarkeningRecipe, { source: 'grid' }>): GridRead {
   const lines = tsv.split(/\r?\n/u).filter(line => line.trim() && !line.startsWith('#') && !/^-+(\t-+)*$/u.test(line.trim()));

@@ -23,7 +23,7 @@ import { prepareAkatsukiUviMap } from './akatsuki-uvi-l3b.ts';
 import { loadDiscIntegratedColor, encodeBandColor, hostLitGray } from '../color/index.ts';
 import { readCie1931ColorMatching } from '../sources/index.ts';
 import { prepareGlbSurface } from '../layers/shape-model/index.ts';
-import { addSpotFigureToLimbPlate, addSpotOccultationToLimbPlate, limbDarkeningPlate, limbIntensity, loadStellarPhotometricColor, parseSpotFigureModel, parseSpotOccultation, spotDiscCentre } from '../stellar/index.ts';
+import { addSpotFigureToLimbPlate, addSpotOccultationToLimbPlate, limbDarkeningPlate, limbIntensity, loadGridLimbDarkening, loadStellarPhotometricColor, parseSpotFigureModel, parseSpotOccultation, spotDiscCentre } from '../stellar/index.ts';
 
 /** The raster recipe facts the interpreter reads: each surface's id, pinned source and science block, plus the emission sizes. */
 export interface InterpreterRecipe { readonly surfaces: readonly { id: string; source: string; science?: Record<string, unknown>; nativeSourcePoles?: boolean }[]; readonly emission?: RasterRecipe['emission']; readonly missingCoverage?: RasterRecipe['missingCoverage']; }
@@ -474,13 +474,19 @@ export async function createSurfaceInterpreter({ objectId, displayName, sourceDi
       case 'disc-integrated-band-color': {
         // An unresolved body painted with one false color from its published flux densities in three infrared bands.
         const source = await manifest;
-        const color = await loadDiscBandColor(async path => { await source.validatePath(path); return readFile(resolve(sourceDirectory, path)); }, surface.source);
+        const read = async (path: string) => { await source.validatePath(path); return readFile(resolve(sourceDirectory, path)); };
+        const color = await loadDiscBandColor(read, surface.source);
         if (color.record.objectId !== objectId) throw new TypeError(`${objectId}/${surface.id}: ${surface.source} is the band color of ${color.record.objectId}.`);
         const data = Buffer.alloc(width * height * 4);
         for (let offset = 0; offset < data.length; offset += 4) data.set([...color.srgb, 255], offset);
         // A self-luminous body owes the presentation its off-limb and limb plates, transparent: no light beyond the silhouette is observed.
-        const plates = recipe.emission ? { plates: transparentPlates(recipe.emission.offLimbSize * density, recipe.emission.limbSize * density) } : {};
-        return { data, channels: 4, nearest: true, ...plates, report: { discIntegratedBandColor: { srgb: color.srgb, linearDisplay: color.linear, bands: color.record.bands, unit: color.record.unit,
+        // With a limb law (a model atmosphere's, in a band the color is drawn from) the limb plate darkens the disc toward its edge, as a star's does.
+        const emitted = recipe.emission ? transparentPlates(recipe.emission.offLimbSize * density, recipe.emission.limbSize * density) : undefined;
+        const law = emitted && surface.science.limbDarkening !== undefined ? await loadGridLimbDarkening(read, surface.science.limbDarkening, `${objectId}/${surface.id}`) : undefined;
+        if (emitted && recipe.emission && law) emitted.limb = limbDarkeningPlate(recipe.emission.limbSize * density, law, { linear: color.linear, srgb: color.srgb });
+        const limbDarkening = law && { u1: law.u1, u2: law.u2 };
+        const plates = emitted ? { plates: emitted } : {};
+        return { data, channels: 4, nearest: true, ...plates, report: { discIntegratedBandColor: { srgb: color.srgb, linearDisplay: color.linear, bands: color.record.bands, unit: color.record.unit, ...(limbDarkening ? { limbDarkening } : {}),
           displayRange: color.record.displayRange, displayRangeSource: color.record.displayRangeSource, source: color.record.source,
           meaning: 'Infrared false color, uniform over the body: red, green and blue are the published flux densities in three bands, longest wavelength red, over one range shared with the bodies it names; not a natural color and not a resolved surface map.' } } };
       }

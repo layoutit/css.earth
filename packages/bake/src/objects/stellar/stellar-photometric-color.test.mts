@@ -6,7 +6,7 @@ import { readFile } from 'node:fs/promises';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import { parseCieTable, linearToSrgb } from '@cssearth/bake/objects/color';
-import { limbDarkeningPlate, loadStellarPhotometricColor, planckColor, quadraticIntensity, readQuadraticLimbDarkening, readStellarTemperature } from '@cssearth/bake/objects/stellar';
+import { limbDarkeningPlate, loadGridLimbDarkening, loadStellarPhotometricColor, planckColor, quadraticIntensity, readQuadraticLimbDarkening, readStellarTemperature } from '@cssearth/bake/objects/stellar';
 import { readCie1931ColorMatching } from '@cssearth/bake/objects/sources';
 
 const root = new URL('src/objects/wasp-43/source/', pathToFileURL(findProjectRoot(import.meta.url) + '/'));
@@ -117,4 +117,21 @@ test('TRAPPIST-1 bakes its cited I+z model-prior limb law without off-disc light
   assert.equal(plate.data[3], 0);
   assert.equal(plate.data[(128 * 256 + 128) * 4 + 3], 0);
   assert.ok(plate.data[(128 * 256 + 254) * 4 + 3]! > 100);
+});
+
+test("an imaged planet's one-color disc takes its limb law from the model nodes beside it: YSES 1 b in the H band", async () => {
+  const source = new URL('src/objects/yses-1-b/source/', pathToFileURL(findProjectRoot(import.meta.url) + '/')), readPlanet = async (path: string) => readFile(new URL(path, source));
+  const science = JSON.parse((await readPlanet('preparation/raster.json')).toString('utf8')).surfaces[0].science;
+  assert.equal(science.kind, 'disc-integrated-band-color');
+  // Claret, Hauschildt & Witte (2012), tableab: the H-band nodes at 1,700 and 1,800 K, log g 3.5 and 4.0, read at 1,727 K and log g 3.59.
+  const law = await loadGridLimbDarkening(readPlanet, science.limbDarkening, 'yses-1-b');
+  assert.ok(Math.abs(law.u1 - 0.7909) < 1e-3 && Math.abs(law.u2 + 0.0288) < 1e-3, `${law.u1}, ${law.u2}`);
+  assert.ok(law.u1 >= law.u1Bounds[0] && law.u1 <= law.u1Bounds[1]);
+  // The limb is about a quarter as bright as the centre, and the plate darkens toward it.
+  assert.ok(Math.abs(quadraticIntensity(0, law.u1, law.u2) - 0.238) < 0.005);
+  const size = 128, plate = limbDarkeningPlate(size, law, { linear: [0.9, 0.5, 0.3], srgb: [243, 188, 149] });
+  const alphaAt = (radial: number) => plate.data[((size / 2) * size + Math.floor(size / 2 + radial * size / 2)) * 4 + 3]!;
+  assert.ok(alphaAt(0) <= 1 && alphaAt(0.95) > alphaAt(0.6) && alphaAt(0.6) > alphaAt(0.2));
+  // A transcribed law is a star's route: a band color names a grid.
+  await assert.rejects(loadGridLimbDarkening(readPlanet, { law: 'quadratic', published: true, path: 'photometry/x.json' }, 'yses-1-b'), /yses-1-b: its limb law is read from a model grid/u);
 });

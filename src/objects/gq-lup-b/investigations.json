@@ -5,11 +5,21 @@
     {
       "id": "band-color",
       "subject": "A false color from three measured bands, as the HR 8799 planets have",
-      "status": "unresolved",
-      "finding": "No paper gives flux densities of this planet in three JWST bands like the NIRCam F410M, F430M and F460M that color HR 8799's planets. A color from ground-based near-infrared bands would not compare with those (the reason 51 Eridani b's was set aside on 2026-09-23), so the planet is the shared neutral gray.",
+      "status": "included",
+      "finding": "Shown in infrared false color from its measured flux in MKO K 2.184 µm, MKO H 1.614 µm, 2MASS J 1.235 µm (Marois et al. (2007); Stolker et al. (2021); McElwain et al. (2007), as compiled in Best, Liu, Magnier & Dupuy (2024), The UltracoolSheet v2.1 (Zenodo); zero points from the SVO Filter Profile Service). No paper gives flux densities of this planet in three JWST bands like the NIRCam F410M, F430M and F460M that color HR 8799's planets. Its color is from ground-based J, H and K photometry on its own range, so it is not compared with theirs.",
       "revisitWhen": "Flux densities in three bands comparable with HR 8799's are published.",
       "evidence": [
-        "https://arxiv.org/abs/2503.13608"
+        "https://arxiv.org/abs/2503.13608",
+        "https://ui.adsabs.harvard.edu/abs/2007ApJ...654L.151M"
+      ]
+    },
+    {
+      "id": "limb-darkening",
+      "subject": "Limb darkening",
+      "status": "included",
+      "finding": "The disc is dimmed toward the limb by the quadratic law Claret, Hauschildt & Witte (2012), A&A 546, A14 compute from PHOENIX model atmospheres for the H band at 2,700 K and log g 3.76 (u1 0.126, u2 0.537): a model, not a measurement of this planet. Its temperature is the 2,700 K of its measurements record; log g 3.76 follows from the mass and radius of its astronomy record (packages/astronomy/data/bodies/gq-lup-b.json).",
+      "evidence": [
+        "https://cdsarc.cds.unistra.fr/ftp/J/A+A/546/A14/tableab.dat"
       ]
     }
   ]

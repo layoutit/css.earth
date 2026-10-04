@@ -1,0 +1,165 @@
+/** Limb darkening for a directly imaged planet. Its disc is unresolved, so its dataset is one measured infrared color; without
+ * a limb law that color fills a flat disc. A star takes its law from a model-atmosphere grid at its own temperature and gravity
+ * (limb.mts), and so does the planet, from the grid computed for objects this cool in the bands its color is drawn from:
+ * Claret, Hauschildt & Witte (2012, A&A 546, A14), quadratic laws of PHOENIX model atmospheres from 1,500 to 4,800 K and
+ * log g 2.5 to 5.5. The H law is taken, the middle band of a J, H, K color. It is a model's darkening, not a measurement, and
+ * the texts say so.
+ *
+ *   new-object --imaged-limb <id>...
+ *
+ * The temperature is the planet's own, from its measurements record; the gravity follows from the mass and radius of its
+ * astronomy record. A planet the grid does not reach (cooler than 1,500 K), or whose color is not drawn from H, gets no law.
+ * The CDS serves the table as one fixed-width file; the nodes around the planet are kept beside it as tab-separated text,
+ * which the bake's grid reader interpolates (packages/bake/src/objects/stellar, readLimbGrid).
+ *
+ * The run also brings the package's documents in line with its color: the README's dataset paragraph, the credits and the
+ * ledger of a planet that was a gray sphere before its color still said so. */
+import { readFile, writeFile } from 'node:fs/promises';
+import { resolve } from 'node:path';
+import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
+import { readLimbGrid } from '@cssearth/bake/objects/stellar';
+import { WORKSPACE } from '@cssearth/telescope/node';
+import { authorContextMarkers, MARKER_PATH } from '../../source-authoring/context-markers.mts';
+import type { Archive } from '../archives/archives.mts';
+import { bindInputs, json, type PackageFiles } from '../dataset.mts';
+
+export const CLARET_2012 = { table: 'https://cdsarc.cds.unistra.fr/ftp/J/A+A/546/A14/tableab.dat', cite: 'Claret, Hauschildt & Witte (2012), A&A 546, A14', catalogue: 'J/A+A/546/A14',
+  band: 'H', file: 'photometry/claret-2012-h-quadratic.tsv', input: 'claret-2012-limb-darkening' } as const;
+const MODELS = { Filt: CLARET_2012.band, Met: 'L', Mod: 'qs' }, COLUMNS = { teff: 'Teff', logg: 'logg', u1: 'a', u2: 'b' };
+const HEADER = ['logg\tTeff\tZ\txi\ta\tb\tFilt\tMet\tMod', '[cm/s2]\tK\t[Sun]\tkm/s\t \t \t \t \t ', '-----\t------\t----\t----\t--------\t--------\t--\t-\t--'];
+// The table's fixed columns (its ReadMe, "Byte-by-byte Description of file: tableab.dat"), as zero-based slices.
+const FIELDS = [[0, 5], [6, 12], [13, 17], [18, 22], [23, 31], [32, 40], [41, 43], [44, 45], [46, 48]] as const;
+const PACKAGE_FILES = ['README.md', 'NOTICE.md', 'investigations.json', 'source/preparation/raster.json', 'source/content/object.json', 'source/manifest.json'] as const;
+
+/** The table's H-band least-squares rows as the tab-separated text the grid reader takes, each cell as printed. */
+export function claret2012Grid(table: string) {
+  const rows = table.split(/\r?\n/u).map(line => FIELDS.map(([from, to]) => line.slice(from, to).trim())).filter(cells => cells[6] === MODELS.Filt && cells[7] === MODELS.Met && cells[8] === MODELS.Mod);
+  if (!rows.length) throw new TypeError(`${CLARET_2012.catalogue} tableab.dat holds no ${CLARET_2012.band}-band rows: its layout has changed (${CLARET_2012.table}).`);
+  return [...HEADER, ...rows.map(cells => cells.join('\t'))].join('\n') + '\n';
+}
+
+export interface ImagedLimb { readonly limbDarkening: Record<string, unknown>; readonly text: string; readonly u1: number; readonly u2: number; readonly sentence: string }
+
+/** The law at a planet's temperature and gravity, with the nodes it is read between as the file kept beside the planet, or
+ * why the grid does not reach it. */
+export function imagedLimb(grid: string, teffK: number, logg: number): { limb?: ImagedLimb; why?: string } {
+  const recipe = { law: 'quadratic' as const, source: 'grid' as const, path: CLARET_2012.file, teffK, logg, models: MODELS, columns: COLUMNS };
+  const [header, units, rule, ...rows] = grid.trimEnd().split('\n'), nodes = rows.map(row => row.split('\t')), span = (column: number) => { const values = nodes.map(cells => Number(cells[column])); return [Math.min(...values), Math.max(...values)] as const; };
+  const [coolest, hottest] = span(1), [lowest, highest] = span(0);
+  if (teffK < coolest || teffK > hottest) return { why: `at ${teffK.toLocaleString('en-US')} K it is outside the ${coolest.toLocaleString('en-US')} to ${hottest.toLocaleString('en-US')} K of the models ${CLARET_2012.cite} tabulate` };
+  if (logg < lowest || logg > highest) return { why: `at log g ${logg} it is outside the log g ${lowest} to ${highest} of the models ${CLARET_2012.cite} tabulate` };
+  const { corners } = readLimbGrid(grid, recipe);
+  const text = [header, units, rule, ...rows.filter(row => { const cells = row.split('\t'); return corners.some(corner => corner.logg === Number(cells[0]) && corner.teff === Number(cells[1])); })].join('\n') + '\n';
+  const { u1, u2 } = readLimbGrid(text, recipe);
+  return { limb: { limbDarkening: { law: 'quadratic', path: CLARET_2012.file, grid: { teffK, logg, models: MODELS }, columns: COLUMNS }, text, u1, u2,
+    sentence: `dimmed toward the limb by the quadratic law ${CLARET_2012.cite} compute from PHOENIX model atmospheres for the ${CLARET_2012.band} band at ${Math.round(teffK).toLocaleString('en-US')} K and log g ${logg} (u1 ${u1.toFixed(3)}, u2 ${u2.toFixed(3)}): a model, not a measurement of this planet` } };
+}
+
+const GRAY_CREDIT = 'Shape: a sphere of the model radius in the shared neutral gray; no image or color of the planet\'s surface exists.';
+const EDGE = '; darkening toward the edge from a model atmosphere.', DISC = ' The disc is dimmed toward the limb by ', NOTE = ' The darkening toward the edge is ';
+
+function bandColorSurface(raster: Record<string, unknown>, id: string) {
+  const surface = requireArray(raster.surfaces, `${id} raster surfaces`).map(entry => requireRecord(entry, `${id} raster surface`)).find(entry => requireRecord(entry.science ?? {}, `${id} science`).kind === 'disc-integrated-band-color');
+  if (!surface) throw new TypeError(`${id}: no infrared color dataset, so there is no disc color to darken.`);
+  if (raster.emission === undefined) throw new TypeError(`${id}: it is lit by its star, which shades its disc already.`);
+  return surface;
+}
+
+/** Put the law on the package's infrared-color dataset: recipe, limb plate, dataset texts, the node file and its manifest entry.
+ * A rerun replaces what an earlier run wrote. */
+export function installImagedLimb(files: PackageFiles, id: string, limb: ImagedLimb) {
+  const s = `src/objects/${id}/source`, read = (path: string) => requireRecord(JSON.parse(String(files.get(path))), path);
+  const raster = read(`${s}/preparation/raster.json`), surface = bandColorSurface(raster, id), science = requireRecord(surface.science, `${id} science`);
+  science.limbDarkening = limb.limbDarkening;
+  science.qualification = `${requireString(science.qualification, `${id} science.qualification`).split(DISC)[0]!.trim()} The disc is ${limb.sentence}.`;
+  const limbMaterial = requireRecord(requireRecord(requireRecord(raster.emission, `${id} emission`).metadata, `${id} emission.metadata`).limbMaterial, `${id} limbMaterial`);
+  limbMaterial.composition = 'black alpha darkens the disc according to the selected limb-darkening law; transparent outside the silhouette';
+  files.set(`${s}/preparation/raster.json`, json(raster));
+  files.set(`${s}/${CLARET_2012.file}`, limb.text);
+
+  const content = read(`${s}/content/object.json`), controls = requireArray(requireRecord(content.datasets, `${id} datasets`).controls, `${id} controls`).map(entry => requireRecord(entry, `${id} control`));
+  const control = controls.find(entry => entry.id === surface.id);
+  if (!control) throw new TypeError(`${id}: source/content/object.json has no control for the ${String(surface.id)} dataset.`);
+  control.qualification = `${requireString(control.qualification, `${id} control.qualification`).split(EDGE)[0]!.replace(/\.\s*$/u, '')}${EDGE}`;
+  control.notes = `${requireString(control.notes, `${id} control.notes`).split(NOTE)[0]!.trim()}${NOTE}${limb.sentence.replace(/^dimmed toward the limb by /u, '')}.`;
+  files.set(`${s}/content/object.json`, json(content));
+
+  const manifest = read(`${s}/manifest.json`), input = `${id}-${CLARET_2012.input}`;
+  manifest.inputs = [...requireArray(manifest.inputs, `${id} manifest inputs`).filter(entry => requireRecord(entry, `${id} manifest input`).id !== input),
+    { id: input, path: CLARET_2012.file, origin: CLARET_2012.table, credit: `${CLARET_2012.cite} (CDS ${CLARET_2012.catalogue})`, license: 'CDS catalogue data, public with citation of the paper and CDS', licenseEvidence: ['https://cds.unistra.fr/vizier-org/licences_vizier.html'],
+      acquisition: `Rows of tableab.dat: the quadratic ${CLARET_2012.band} coefficients (least-squares fits, quasi-spherical models) of the grid nodes the planet's temperature and gravity lie between, each cell as printed, the fixed columns rewritten as tabs.`,
+      redistribution: 'Catalogue rows retained with their citation.', consumers: ['assets', 'datasets'] }];
+  // The map marker is the same disc, dimmed by the same law (source-authoring/context-markers.mts).
+  manifest.generatedIntermediates = requireArray(manifest.generatedIntermediates ?? [], `${id} generated intermediates`).map(entry => {
+    const marker = requireRecord(entry, `${id} generated intermediate`);
+    if (marker.path !== MARKER_PATH || marker.recipe === undefined) return marker;
+    const recipe = requireRecord(marker.recipe, `${id} marker recipe`);
+    return { ...marker, credit: String(marker.credit).replace('color as a disc;', 'color as a disc, dimmed toward the limb by its law;'), recipe: { ...recipe, inputs: [...new Set([...requireArray(recipe.inputs, `${id} marker inputs`).map(String), input])] } };
+  });
+  files.set(`${s}/manifest.json`, json(manifest));
+  bindInputs(files, id);
+}
+
+/** Bring the README, credits and ledger in line with the planet's color and, when it has one, its limb law. */
+export function documentImagedColor(files: PackageFiles, id: string, record: Record<string, unknown>, recordPath: string, limb: { law: ImagedLimb; gravity: string } | undefined) {
+  const o = `src/objects/${id}`, source = requireRecord(record.source, `${id} band color source`), citation = requireString(source.citation, `${id} band color citation`);
+  const unit = requireString(record.unit, `${id} band color unit`), fluxes = requireArray(record.bands, `${id} bands`).map(entry => requireRecord(entry, `${id} band`));
+  const bands = fluxes.map(band => `${requireString(band.band, `${id} band name`)} ${requireFiniteNumber(band.wavelengthMicrometres, `${id} band wavelength`)} µm`);
+  // The README gives each flux with its error: a faint band's error is the uncertainty of the hue.
+  const measured = fluxes.map((band, index) => `${bands[index]} (${requireFiniteNumber(band.value, `${id} band value`)} ± ${requireFiniteNumber(band.error, `${id} band error`)} ${unit})`);
+  const generated = '**Infrared color dataset.** The default dataset paints the sphere one false color from its measured flux';
+  const color = `${generated} in three infrared bands: red ${measured[0]}, green ${measured[1]}, blue ${measured[2]} (${citation}; [record](source/${recordPath})). Display range: ${requireString(record.displayRangeSource, `${id} displayRangeSource`).replace(/^T/u, 't')} Not a natural color; nobody has resolved its disc.`;
+  const limbLine = limb && `**Limb.** The disc is ${limb.law.sentence} ([nodes](source/${CLARET_2012.file})). ${limb.gravity}.`;
+  const problem = '- **Model limb.** The limb darkening is a model atmosphere at the planet\'s temperature and gravity, in the middle band of its color, not a measurement of this planet.';
+  // A planet colored after it was scaffolded still has the gray sphere's paragraph, which the color's replaces. A color paragraph
+  // written by hand is kept.
+  const lines = String(files.get(`${o}/README.md`)).split('\n'), keepsOwn = lines.some(line => /^\*\*[^*]*color dataset\.\*\*/iu.test(line) && !line.startsWith(generated));
+  const kept = lines.filter(line => !line.startsWith('**Limb.**') && !line.startsWith('- **Model limb.**') && (keepsOwn || (!line.startsWith('**Shape dataset.**') && !line.startsWith(generated))));
+  const heading = kept.some(line => line.startsWith('**Rotation.**')) ? '**Rotation.**' : '## Evidence', at = kept.findIndex(line => line.startsWith(heading));
+  if (at < 0) throw new TypeError(`${id}: README.md has no "${heading}" to place the dataset paragraphs before.`);
+  kept.splice(at, 0, ...[...(keepsOwn ? [] : [color]), ...(limbLine ? [limbLine] : [])].flatMap(line => [line, '']));
+  const problems = kept.indexOf('## Known problems');
+  if (limb && problems >= 0) { let end = problems + 1; while (end < kept.length && !kept[end]!.startsWith('## ') && !kept[end]!.startsWith('[')) end++; while (kept[end - 1] === '') end--; kept.splice(end, 0, problem); }
+  files.set(`${o}/README.md`, kept.join('\n').replace(/\n{3,}/gu, '\n\n'));
+
+  // The credits: the gray sphere's stock line no longer holds, and the color and the law are credited after the lines written by hand.
+  const notice = String(files.get(`${o}/NOTICE.md`)).split('\n').filter(line => !line.startsWith('Limb darkening: ') && !line.startsWith('Color: infrared false color'))
+    .map(line => line === GRAY_CREDIT ? 'Shape: a sphere of the model radius; no image resolves the planet.' : line);
+  files.set(`${o}/NOTICE.md`, `${[...notice, '', `Color: infrared false color from the flux densities of ${citation} (${bands.join(', ')}).`, ...(limb ? ['', `Limb darkening: ${CLARET_2012.cite}, CDS ${CLARET_2012.catalogue}.`] : [])].join('\n').replace(/\n{3,}/gu, '\n\n').trimEnd()}\n`);
+
+  const ledger = requireRecord(JSON.parse(String(files.get(`${o}/investigations.json`))), `${id} ledger`), entries = requireArray(ledger.entries, `${id} ledger entries`).map(entry => requireRecord(entry, `${id} ledger entry`));
+  const shown = `Shown in infrared false color from its measured flux in ${bands.join(', ')} (${citation}).`, url = requireString(source.url, `${id} band color url`);
+  ledger.entries = [...entries.filter(entry => entry.id !== 'limb-darkening').map(entry => entry.id !== 'band-color' ? entry
+    : { ...entry, status: 'included', finding: `${shown} ${String(entry.finding).replace(shown, '').replace(/,? so (?:the planet|it) is the shared neutral gray\./u, '.').trim()}`.trim(), evidence: [...new Set([...requireArray(entry.evidence ?? [], `${id} ledger evidence`), url])] }),
+    ...(entries.some(entry => entry.id === 'band-color') ? [] : [{ id: 'band-color', subject: 'A false color from three measured bands', status: 'included', finding: shown, evidence: [url] }]),
+    ...(limb ? [{ id: 'limb-darkening', subject: 'Limb darkening', status: 'included', finding: `The disc is ${limb.law.sentence}. ${limb.gravity}.`, evidence: [CLARET_2012.table] }] : [])];
+  files.set(`${o}/investigations.json`, json(ledger));
+}
+
+/** `new-object --imaged-limb`: give each imaged planet named the published law at its own temperature and gravity, and bring
+ * its documents in line with its color. Returns one line per planet; nothing is baked here. */
+export async function addImagedLimbs(root: string, ids: readonly string[], archive: Archive, progress = (_line: string) => {}): Promise<string[]> {
+  const grid = claret2012Grid(await archive.text(CLARET_2012.table)), lines: string[] = [], say = (line: string) => { lines.push(line); progress(line); };
+  for (const id of ids) {
+    const o = resolve(root, 'src/objects', id), files: PackageFiles = new Map();
+    for (const path of PACKAGE_FILES) files.set(`src/objects/${id}/${path}`, await readFile(resolve(o, path), 'utf8'));
+    const body = requireRecord(JSON.parse(await readFile(resolve(root, 'packages/astronomy/data/bodies', `${id}.json`), 'utf8')), `${id} body`), physical = requireRecord(body.physical, `${id} physical`);
+    const measurements = requireRecord(JSON.parse(await readFile(resolve(o, 'source/measurements.json'), 'utf8')), `${id} measurements`);
+    let recordPath: string;
+    try { recordPath = requireString(bandColorSurface(requireRecord(JSON.parse(String(files.get(`src/objects/${id}/source/preparation/raster.json`))), `${id} raster`), id).source, `${id} band color path`); } catch (error) { say(`${id}: ${(error as Error).message}`); continue; }
+    const record = requireRecord(JSON.parse(await readFile(resolve(o, 'source', recordPath), 'utf8')), `${id} band color`);
+    const inBand = requireArray(record.bands, `${id} bands`).some(entry => new RegExp(`(?:^|\\s)${CLARET_2012.band}$`, 'u').test(String(requireRecord(entry, `${id} band`).band)));
+    const gm = Number(physical.gravitationalParameterKm3PerS2), radiusKm = requireFiniteNumber(physical.meanRadiusKm, `${id} meanRadiusKm`), teffK = Number(measurements.effectiveTemperatureK);
+    // log g in cgs from GM (km^3/s^2) and the radius (km).
+    const logg = Number(Math.log10(gm * 1e15 / (radiusKm * 1e5) ** 2).toFixed(2));
+    const why = !inBand ? `its color is not drawn from the ${CLARET_2012.band} band the law is read in` : !(teffK > 0) ? 'its measurements record cites no temperature' : !(gm > 0) ? 'its astronomy record has no mass, so its gravity is unknown' : undefined;
+    const { limb, why: outside } = why ? { limb: undefined, why } : imagedLimb(grid, teffK, logg);
+    if (limb) installImagedLimb(files, id, limb);
+    documentImagedColor(files, id, record, recordPath, limb && { law: limb, gravity: `Its temperature is the ${teffK.toLocaleString('en-US')} K of its measurements record; log g ${logg} follows from the mass and radius of its astronomy record (packages/astronomy/data/bodies/${id}.json)` });
+    for (const [path, value] of files) await writeFile(resolve(root, path), value);
+    // The marker author draws in the checkout it runs in; a package written to a scratch root keeps the marker it has.
+    if (limb && resolve(root) === resolve(WORKSPACE)) await authorContextMarkers([id]);
+    say(limb ? `${id}: limb law at ${teffK} K, log g ${logg}: u1 ${limb.u1.toFixed(3)}, u2 ${limb.u2.toFixed(3)}` : `${id}: no limb law: ${outside}; documents brought in line with its color`);
+  }
+  return lines;
+}

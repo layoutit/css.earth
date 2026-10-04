@@ -12,7 +12,7 @@ AF Lep b is the lowest-mass imaged planet whose mass was weighed through its orb
 
 **Its own light.** The planet is drawn self-luminous, as the other imaged planets are: its glow is its own heat.
 
-**Shape dataset.** A sphere of the model radius in the shared neutral gray ([ledger](investigations.json)).
+**Infrared color dataset.** The default dataset paints the sphere one false color from its measured flux in three infrared bands: red 2MASS Ks 2.159 µm (133 ± 8.6 µJy), green MKO H 1.614 µm (37.23 ± 12 µJy), blue MKO J 1.2417 µm (31.67 ± 9.6 µJy) (De Rosa et al. (2023); Mesa et al. (2023), as compiled in Best, Liu, Magnier & Dupuy (2024), The UltracoolSheet v2.1 (Zenodo); zero points from the SVO Filter Profile Service; [record](source/photometry/band-color.json)). Display range: this planet alone, from zero to its brightest band (2MASS Ks), so the color shows its band ratios; brightness is not compared across planets at different distances. Not a natural color; nobody has resolved its disc.
 
 **Rotation.** No rotation period or spin axis of AF Lep b is measured; the papers cited in the README were checked. The display axis is the orbit normal ([rotation.json](source/preparation/rotation.json)).
 
@@ -26,6 +26,6 @@ Run of 2026-09-23 (this version):
 
 - The posterior stores no likelihoods, so the orbit kept is the sample nearest the GRAVITY positions; it misses the first by 0.3 mas, several times that measurement's error.
 - The radius is a model value, and the paper's own atmosphere fits disagree with it.
-- No color is measured in bands comparable with HR 8799's, and no spin axis is measured.
+- No spin axis is measured.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

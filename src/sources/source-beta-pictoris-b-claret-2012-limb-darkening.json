@@ -1,0 +1,35 @@
+{
+  "id": "source-beta-pictoris-b-claret-2012-limb-darkening",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Beta Pictoris b · beta pictoris b claret 2012 limb darkening",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/546/A14/tableab.dat",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/beta-pictoris-b/source/manifest.json",
+      "locator": "/inputs/6"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Claret, Hauschildt & Witte (2012), A&A 546, A14 (CDS J/A+A/546/A14)",
+      "scope": "The beta pictoris b claret 2012 limb darkening input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "CDS catalogue data, public with citation of the paper and CDS",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}
