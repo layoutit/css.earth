@@ -584,6 +584,15 @@ jobs:
         run: pnpm install --frozen-lockfile --ignore-scripts
       - name: Build the telescope dependency closure
         run: node .github/scripts/architecture/workspace-builds.mts --run @cssearth/telescope
+      - name: Install micromamba for the toolchain installer
+        # The installer runs `micromamba create` and the runner image has no micromamba. A pinned release binary, so the
+        # install cannot change under the lane.
+        run: |
+          mkdir -p "$HOME/.local/bin"
+          curl -fsSL "https://github.com/mamba-org/micromamba-releases/releases/download/2.0.5-0/micromamba-linux-64" -o "$HOME/.local/bin/micromamba"
+          chmod +x "$HOME/.local/bin/micromamba"
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+          "$HOME/.local/bin/micromamba" --version
       - name: Install and verify the pinned astroquery toolchain
         run: |
           node packages/telescope-cli/src/toolchains/astronomy-toolchains.mts astroquery install

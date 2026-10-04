@@ -26,6 +26,8 @@ test('astroquery classification and workflow preserve the protected lane', async
   assert.equal(requireRecord(requireRecord(jobs.changes).outputs).run_astroquery, '${{ steps.classify.outputs.run_astroquery }}');
   const steps = requireArray(job.steps).map(step => requireRecord(step));
   const runs = steps.map(step => step.run ?? '').join('\n');
+  assert.match(runs, /micromamba-releases\/releases\/download\/\d+\.\d+\.\d+-\d+\/micromamba-linux-64/u, 'the runner has no micromamba: the lane installs a pinned release first');
+  assert.ok(runs.indexOf('micromamba-linux-64') < runs.indexOf('astroquery install'), 'micromamba is installed before the toolchain installer runs');
   assert.match(runs, /astronomy-toolchains\.mts astroquery install/u);
   assert.match(runs, /astronomy-toolchains\.mts astroquery verify/u);
   assert.match(runs, /node --test --test-reporter=tap .*f07-dynamic-spectrum\.test\.mts .*vo\/package\.test\.mts/u);
