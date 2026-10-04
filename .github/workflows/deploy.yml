@@ -6,6 +6,11 @@ name: Deploy
 on:
   workflow_dispatch:
     inputs:
+      host:
+        description: Where the build is published. Cloudflare serves css.earth; Netlify is the host it can be pointed back to.
+        type: choice
+        options: [cloudflare, netlify]
+        default: cloudflare
       bundle_textures:
         description: Bundle public/scenes into the deploy instead of serving it from R2 (rollback switch)
         type: boolean
@@ -25,8 +30,12 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 90
     env:
+      # An automatic run has no inputs and publishes where the site is served.
+      HOST: ${{ inputs.host || 'cloudflare' }}
       HOSTING_AUTH_TOKEN: ${{ secrets.HOSTING_AUTH_TOKEN }}
       HOSTING_SITE_ID: ${{ secrets.HOSTING_SITE_ID }}
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
@@ -41,9 +50,21 @@ jobs:
           node-version: '24'
           cache: pnpm
       - name: Check deploy inputs
+        env:
+          BUNDLE_TEXTURES: ${{ inputs.bundle_textures }}
         run: |
-          test -n "$HOSTING_AUTH_TOKEN"
-          test -n "$HOSTING_SITE_ID"
+          missing() { echo "::error::The repository secret $1 is not set; a deploy to $HOST needs it ($2)."; exit 1; }
+          if [ "$HOST" = "cloudflare" ]; then
+            [ -n "$CLOUDFLARE_API_TOKEN" ] || missing CLOUDFLARE_API_TOKEN "a Cloudflare API token from the Edit Cloudflare Workers template"
+            [ -n "$CLOUDFLARE_ACCOUNT_ID" ] || missing CLOUDFLARE_ACCOUNT_ID "the Cloudflare account id"
+            if [ "$BUNDLE_TEXTURES" = "true" ]; then
+              echo "::error::bundle_textures is Netlify's rollback: a Worker's static assets cannot hold public/scenes. Dispatch with host netlify to use it."
+              exit 1
+            fi
+          else
+            [ -n "$HOSTING_AUTH_TOKEN" ] || missing HOSTING_AUTH_TOKEN "the Netlify access token"
+            [ -n "$HOSTING_SITE_ID" ] || missing HOSTING_SITE_ID "the Netlify site id"
+          fi
       - name: Install dependencies
         run: pnpm install --frozen-lockfile --ignore-scripts
       - name: Build the site
@@ -96,7 +117,13 @@ jobs:
             git diff --name-only -- src/objects
             exit 1
           fi
-      - name: Publish the prebuilt site
+      - name: Publish the prebuilt site to Cloudflare
+        # Bundles the Worker, answers one search and one page from the bundle, and uploads it with the built pages as its
+        # static assets (wrangler.jsonc, the `production` environment). docs/ci-cd.md, "Serving the site from Cloudflare".
+        if: env.HOST == 'cloudflare'
+        run: pnpm deploy:cloudflare
+      - name: Publish the prebuilt site to Netlify
+        if: env.HOST == 'netlify'
         # netlify.toml supplies the edge route and the search function; the site is not linked to git,
         # so Actions is the only thing that deploys it.
         #

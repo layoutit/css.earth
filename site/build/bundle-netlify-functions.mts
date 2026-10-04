@@ -11,6 +11,7 @@ import { readdir, readFile, rm } from 'node:fs/promises';
 import { extname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { build } from 'esbuild';
+import { FUNCTION_PROJECT_FILES } from './function-project-files.mts';
 
 const root = resolve(import.meta.dirname, '../..');
 const source = resolve(root, 'netlify/functions'), output = resolve(root, 'netlify/functions-bundled');
@@ -29,7 +30,7 @@ const result = await build({
 // query answered 502.
 const included = /included_files\s*=\s*\[([^\]]*)\]/u.exec(await readFile(resolve(root, 'netlify.toml'), 'utf8'))?.[1];
 if (included === undefined) throw new Error('netlify.toml: [functions] included_files is missing.');
-for (const path of ['src/objects/observable-universe/prepared/world.json', 'src/objects/observable-universe/prepared/world-index.json', 'src/objects/*/prepared/members.json', 'src/objects/*/prepared/places.json']) {
+for (const path of FUNCTION_PROJECT_FILES) {
   if (!included.includes(`"${path}"`)) throw new Error(`netlify.toml: [functions] included_files does not list ${path}, which the page function reads (site/world-context-plan.mts); a deployed function would answer 502.`);
 }
 for (const [file, { bytes }] of Object.entries(result.metafile.outputs)) {

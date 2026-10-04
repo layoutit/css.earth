@@ -6,6 +6,7 @@ import type { FindResponse, FindResult } from '../search/find-protocol.mts';
 import { searchObjects } from '../search/object-search.mts';
 import { catalogueRow, type CatalogueIndexEntry } from '../search/catalogue-index.mts';
 import { readPublicFile, type ReadPrepared, type SearchData } from './search-data.mts';
+import { keptLoad } from './kept-load.mts';
 
 /** The search function's side of search/find-protocol.mts. */
 interface FindData { readonly index: FeatureIndex; readonly places: ReadonlyMap<string, ReadonlyMap<string, unknown>>; }
@@ -29,16 +30,11 @@ async function readFindData(pin: FeatureIndexPin, read: ReadPrepared): Promise<F
 }
 
 // A warm function instance keeps the loaded data for its deploy, never results.
-const loaded = new Map<string, Promise<FindData>>();
+let kept: { readonly url: string; readonly data: () => Promise<FindData> } | undefined;
 function findData(pin: FeatureIndexPin, read: ReadPrepared): Promise<FindData> {
   if (read !== readPublicFile) return readFindData(pin, read);
-  let pending = loaded.get(pin.url);
-  if (!pending) {
-    loaded.clear();
-    pending = readFindData(pin, read).catch(error => { loaded.delete(pin.url); throw error; });
-    loaded.set(pin.url, pending);
-  }
-  return pending;
+  if (kept?.url !== pin.url) kept = { url: pin.url, data: keptLoad(() => readFindData(pin, read)) };
+  return kept.data();
 }
 
 /** Every result lists planets first, then by distance, then by name. A category query already excludes other classes, so it needs no

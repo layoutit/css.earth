@@ -29,10 +29,10 @@ export const RUNTIME_CODE = ['site/', 'packages/renderer/src/'] as const;
  * the runtime never imports it, and packages never import any of `site/`. */
 export const SITE_BUILD = 'site/build/';
 
-/** Entry glue that may reach into an application tree: Netlify functions and root build configuration
- * (`astro.config.mts` wires `site/build` into the Astro build). Astro pages
+/** Entry glue that may reach into an application tree: each host's entry code (Netlify's functions, Cloudflare's
+ * Worker) and root build configuration (`astro.config.mts` wires `site/build` into the Astro build). Astro pages
  * live inside `site/` and need no entry here. */
-export const ENTRY_GLUE: readonly RegExp[] = [/^netlify\//u, /^[^/]+\.config\.[cm]?[jt]s$/u];
+export const ENTRY_GLUE: readonly RegExp[] = [/^netlify\//u, /^cloudflare\//u, /^[^/]+\.config\.[cm]?[jt]s$/u];
 
 export const APPLICATION_TREES = ['site', 'labs', '.github'] as const;
 
