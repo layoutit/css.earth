@@ -9,6 +9,7 @@
 import { VIZIER_ASU, type Archive } from './archives.mts';
 import { adql, csv, SIMBAD_TAP } from '../companions.mts';
 import { CEPHEID_GRAVITIES } from './cepheids.mts';
+import type { CataloguePosition } from '../spec.mts';
 
 export const HOFFMANN = { catalogue: 'J/ApJ/830/10/table5', credit: 'Hoffmann et al. (2016), ApJ 830, 10', paper: 'https://arxiv.org/abs/1607.08658' };
 const COLUMNS = ['Gal', 'RAJ2000', 'DEJ2000', 'ID', 'Per', 'F555W', 'F814W', 'SimbadName'] as const;
@@ -76,7 +77,7 @@ export interface RelationCepheid {
   /** The galaxy's object, which the star is inside (the spec's `parent`). */
   readonly inside: string;
   readonly paper: { readonly url: string; readonly credit: string }; readonly periodSource: string;
-  readonly position: { readonly catalogue: string; readonly row: Readonly<Record<string, string>>; readonly credit: string; readonly url: string };
+  readonly position: CataloguePosition;
   readonly distance: { readonly value: number; readonly uncertainty?: number; readonly source: string; readonly url: string };
   readonly velocity: { readonly value: number; readonly uncertainty?: number; readonly source: string; readonly url: string };
   readonly description: string; readonly text: { readonly card: string; readonly introduction: string; readonly locator: string };

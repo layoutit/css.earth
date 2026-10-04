@@ -43,7 +43,8 @@
  * DR3 source_id. Give either: the other is read from SIMBAD, and when both are given they must name the same star.
  * `position` anchors a star Gaia cannot see (a Cepheid in another galaxy, 25th magnitude) on one row of a published VizieR table
  * instead: { "catalogue": "J/ApJ/830/10/table5", "row": { "Gal": "N4536", "ID": "12345" }, "credit", "url" }, where `row` holds the
- * column values that pick exactly one row, whose RAJ2000 and DEJ2000 place the star (generate.mts catalogueAnchor). Such a star takes
+ * column values that pick exactly one row, whose RAJ2000 and DEJ2000 place the star (generate.mts catalogueAnchor); `columns` names
+ * other decimal J2000 columns ({ "ra": "_RAJ2000", "dec": "_DEJ2000" }, VizieR's own, for a sexagesimal table). Such a star takes
  * no `gaia`, and cites its distance, radial velocity, radius and mass; `target` is then only its SIMBAD name, for the README. A star
  * too bright for Gaia is placed the same way on its Hipparcos row, whose `motion` names the position's epoch and the proper-motion columns.
  * `distance` (parsecs) places the star at a cited distance instead of Gaia DR3's parallax: for a star Gaia gives no parallax (a
@@ -127,6 +128,12 @@ export interface StarSpec {
 /** `motion` is for a catalogue that measures the star's proper motion (Hipparcos, for a star too bright for Gaia): the Julian year its
  * RAJ2000 and DEJ2000 are given at and the columns holding the motion in right ascension (times cos declination) and declination, mas/yr. */
 export interface CataloguePosition { readonly catalogue: string; readonly row: Readonly<Record<string, string>>; readonly credit: string; readonly url: string;
+  /** The columns holding the J2000 position in decimal degrees when they are not the table's RAJ2000 and DEJ2000: VizieR's own
+   * `_RAJ2000` and `_DEJ2000`, for a table that writes its positions in sexagesimal or inside a name. */
+  readonly columns?: { readonly ra: string; readonly dec: string };
+  /** `simbad` places the star at SIMBAD's position of the object whose `main_id` is `row.main_id` (catalogue `basic`): for a star whose
+   * own table gives each row no position, and whose rows CDS has matched to SIMBAD by name. */
+  readonly archive?: 'simbad';
   readonly motion?: { readonly epoch: number; readonly ra: string; readonly dec: string } }
 /** Sentences of the body's Wikipedia article lead, verbatim (prose.mts), cited as quotes beside the drafted text. */
 export interface DraftQuotes { readonly url: string; readonly title: string; readonly revision: string; readonly card?: string; readonly introduction?: string }
@@ -266,14 +273,18 @@ function cited(value: unknown, label: string, range: readonly [number, number]):
 }
 function cataloguePosition(value: unknown, label: string): CataloguePosition {
   const input = requireRecord(value, label), catalogue = requireString(input.catalogue, `${label}.catalogue`), row = requireRecord(input.row, `${label}.row`);
-  if (!/^[A-Z]+\/[\w+/.-]+$/u.test(catalogue)) throw new TypeError(`${label}.catalogue is a VizieR table (J/ApJ/830/10/table5), not ${catalogue}.`);
-  const entries = Object.entries(row).map(([column, cell]) => [column, requireString(cell, `${label}.row.${column}`)] as const);
+  if (input.archive !== undefined && input.archive !== 'simbad') throw new TypeError(`${label}.archive is "simbad" or absent (a VizieR table), not ${JSON.stringify(input.archive)}.`);
+  const simbad = input.archive === 'simbad', entries = Object.entries(row).map(([column, cell]) => [column, requireString(cell, `${label}.row.${column}`)] as const);
+  if (simbad ? catalogue !== 'basic' || entries.length !== 1 || entries[0]![0] !== 'main_id' || input.columns !== undefined || input.motion !== undefined : !/^[A-Z]+\/[\w+/.-]+$/u.test(catalogue))
+    throw new TypeError(simbad ? `${label}: a SIMBAD position is { "archive": "simbad", "catalogue": "basic", "row": { "main_id": NAME } }, with no columns or motion.` : `${label}.catalogue is a VizieR table (J/ApJ/830/10/table5), not ${catalogue}.`);
   if (!entries.length) throw new TypeError(`${label}.row names no column: give the values that pick one row of ${catalogue}.`);
   const url = requireString(input.url, `${label}.url`);
   if (!URL_PATTERN.test(url)) throw new TypeError(`${label}.url must be an https URL, not ${url}.`);
   const motion = input.motion === undefined ? undefined : requireRecord(input.motion, `${label}.motion`), epoch = motion && requireFiniteNumber(motion.epoch, `${label}.motion.epoch`);
   if (epoch !== undefined && !(epoch >= 1900 && epoch <= 2100)) throw new RangeError(`${label}.motion.epoch is the Julian year of the position, not ${epoch}.`);
-  return { catalogue, row: Object.fromEntries(entries), credit: requireString(input.credit, `${label}.credit`), url,
+  const columns = input.columns === undefined ? undefined : requireRecord(input.columns, `${label}.columns`);
+  return { catalogue, row: Object.fromEntries(entries), credit: requireString(input.credit, `${label}.credit`), url, ...(simbad ? { archive: 'simbad' as const } : {}),
+    ...(columns ? { columns: { ra: requireString(columns.ra, `${label}.columns.ra`), dec: requireString(columns.dec, `${label}.columns.dec`) } } : {}),
     ...(motion ? { motion: { epoch: epoch!, ra: requireString(motion.ra, `${label}.motion.ra`), dec: requireString(motion.dec, `${label}.motion.dec`) } } : {}) };
 }
 const citedOrFlame = (value: unknown, label: string, range: readonly [number, number]) => value === 'gaia-flame' ? 'gaia-flame' as const : cited(value, label, range);
