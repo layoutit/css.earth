@@ -48,13 +48,14 @@ changes.
 
 Measured on 2026-10-04.
 
-| Drag code | Drags | End more than 1° from Cesium | Median distance from Cesium |
+| Drag code | Drags | End more than 0.1° from Cesium | Median distance from Cesium |
 |---|---|---|---|
-| `main` before this change | 4,000 | 3,465 | 27° |
-| With Cesium's pan, turn off the globe, hold at the poles and inertia | 16,000 | 6 | 0.00° |
+| `main` before this change | 4,000 | 3,842 | 26.6° |
+| With Cesium's pan, turn off the globe, hold at the poles and inertia | 16,000 | 10 | 0.000° |
 
-All 6 are drags Cesium does not repeat itself under a 0.001 px nudge: a press exactly on the limb, or a coast that spins
-tens of degrees a frame beside a pole. Three drags in a row without re-sync, 6,000 drags: never more than 0.01° apart.
+All 10 are drags Cesium does not repeat itself under a 0.001 px nudge: a press exactly on the limb, or a coast that
+spins tens of degrees a frame beside a pole. Three drags in a row without re-sync, 6,000 drags: 3 end more than 0.1°
+apart, all of that kind.
 
 Four rules of Cesium's had to be matched, each found by a drag that differed:
 
