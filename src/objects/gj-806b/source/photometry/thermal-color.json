@@ -1,0 +1,19 @@
+{
+  "schema": "cssearth-stellar-photometric-color@1",
+  "objectId": "gj-806b",
+  "spectrum": "planck",
+  "temperature": {
+    "published": {
+      "kelvin": 1204,
+      "lowerKelvin": 1204,
+      "upperKelvin": 1204,
+      "citation": "computed from gj-806's temperature, 3600 K, and the orbit's a/R* 7.3, as T* (R*/a)^(1/2) (2/3)^(1/4): 1204 K; the source gives no uncertainty, so the range is the value itself, https://arxiv.org/abs/2412.06573"
+    },
+    "note": "Nobody has measured its heat or imaged it; this is the hottest day side a dark, airless rock can have on its orbit, an estimate, so the color is a Planck spectrum at its published temperature.",
+    "chosen": "the bare-rock maximum, no light reflected and no heat carried to the night side; the star's temperature is Palle et al. 2023, the stellar temperature of the default parameter set of GJ 806 b in the NASA Exoplanet Archive, a/R* is Palle et al. 2023",
+    "estimate": true
+  },
+  "whitePoint": "sRGB D65",
+  "normalization": "brightest linear sRGB channel = 1",
+  "gamut": "desaturate"
+}

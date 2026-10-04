@@ -120,3 +120,21 @@ test('a rock set by a depth summed over a spectrograph reads a throughput table,
     await assert.rejects(loadBareRockEclipse(root, { ...recipe, band: { ...recipe.band, encoding: 'grism' } }), /Unknown band encoding grism/u);
   } finally { await rm(root, { recursive: true, force: true }); }
 });
+
+test('a measured day side is one temperature over the hemisphere under the star, and nothing on the night side', async () => {
+  const { mkdtemp, mkdir, rm, writeFile } = await import('node:fs/promises'), { tmpdir } = await import('node:os'), { join } = await import('node:path');
+  const { loadMeasuredDayside } = await import('@cssearth/bake/objects/raster');
+  const root = await mkdtemp(join(tmpdir(), 'dayside-'));
+  try {
+    await mkdir(join(root, 'photometry'), { recursive: true });
+    const record = { schema: 'cssearth-dayside-temperature@1', planet: 'wasp-80b', temperatureK: { value: 888, lower: 831, upper: 946 }, wavelengthMicrons: 4.5, source: 'test' };
+    await writeFile(join(root, 'photometry/dayside-temperature.json'), JSON.stringify(record));
+    const recipe = { format: 'measured-dayside', path: 'photometry/dayside-temperature.json', sampling: 'bilinear', units: 'K', planet: 'wasp-80b' };
+    const day = await loadMeasuredDayside(root, recipe);
+    assert.deepEqual([day.sample(0, 0), day.sample(89, 0), day.sample(-60, 70), day.sample(91, 0), day.sample(180, 0), day.sample(0, 91)], [888, 888, 888, null, null, null]);
+    assert.deepEqual(day.report, { format: 'measured-dayside', units: 'K', daysideK: 888, daysideRangeK: [831, 946], wavelengthMicrons: 4.5 });
+    await assert.rejects(loadMeasuredDayside(root, { ...recipe, planet: 'wasp-69b' }), /is not a dayside temperature of wasp-69b/u);
+    await writeFile(join(root, 'photometry/dayside-temperature.json'), JSON.stringify({ ...record, temperatureK: { value: 888, lower: 900, upper: 946 } }));
+    await assert.rejects(loadMeasuredDayside(root, recipe), /needs 0 < lower <= value <= upper/u);
+  } finally { await rm(root, { recursive: true, force: true }); }
+});

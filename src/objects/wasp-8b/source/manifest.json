@@ -169,6 +169,28 @@
           }
         ]
       }
+    },
+    {
+      "id": "wasp-8b-dayside-temperature",
+      "path": "photometry/dayside-temperature.json",
+      "origin": "https://ui.adsabs.harvard.edu/abs/2013ApJ...768...42C/abstract",
+      "credit": "Cubillos et al. 2013, dayside brightness temperature at 8 µm (NASA Exoplanet Archive emission table)",
+      "license": "Factual numerical measurement; source attribution retained",
+      "acquisition": "Transcribed measurement record: the dayside brightness temperature and its one-sigma range, with the row chosen",
+      "redistribution": "A one-number measurement record",
+      "consumers": [
+        "wasp-8b-measured-dayside"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-wasp-8b-dayside-temperature",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
@@ -185,7 +207,8 @@
         "generator": "packages/telescope-cli/src/source-authoring/context-markers.mts",
         "inputs": [
           "wasp-8b-observational-measurements",
-          "wasp-8b-preparation-raster"
+          "wasp-8b-preparation-raster",
+          "wasp-8b-dayside-temperature"
         ]
       },
       "generator": "packages/telescope-cli/src/source-authoring/context-markers.mts",

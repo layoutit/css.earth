@@ -12,7 +12,7 @@ const hex = (color: StellarColor) => `#${color.srgb.map(value => value.toString(
 export type PackageFiles = Map<string, string | Buffer>;
 
 /** Dataset kinds that draw one color, or the neutral shape, over the whole body: the last a body falls back to. */
-export const UNIFORM_DATASET_KINDS: ReadonlySet<string> = new Set(['neutral-shape', 'dayside-thermal-color', 'disc-integrated-band-color']);
+export const UNIFORM_DATASET_KINDS: ReadonlySet<string> = new Set(['neutral-shape', 'equilibrium-thermal-color', 'dayside-thermal-color', 'disc-integrated-band-color']);
 
 /** A body opens on the best dataset it has: a map of it, measured or simulated, before one color over the whole body
  * (.agents/skills/celestial-skill/references/scientific-faithfulness.md). `dataset` becomes the package's default when its

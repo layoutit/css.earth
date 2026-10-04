@@ -19,14 +19,14 @@
   },
   "surfaces": [
     {
-      "id": "shape",
+      "id": "infrared",
       "output": "af-lep-b-surface-{id}{suffix}.webp",
       "thumbnail": "af-lep-b-dataset-{id}.webp",
-      "source": "measurements.json",
-      "falseColor": false,
+      "source": "photometry/band-color.json",
+      "falseColor": true,
       "science": {
-        "kind": "neutral-shape",
-        "qualification": "Shared neutral gray display convention for a self-luminous planet with no image or measured visible color in this package; a sphere of the published radius that glows with its own heat (770 K), so no lighting."
+        "kind": "disc-integrated-band-color",
+        "qualification": "Infrared false color of the whole disc from published flux densities (De Rosa et al. (2023); Mesa et al. (2023), as compiled in Best, Liu, Magnier & Dupuy (2024), The UltracoolSheet v2.1 (Zenodo); zero points from the SVO Filter Profile Service, UltracoolSheet Main.csv, AF Lep b: 2MASS Ks 16.75 +/- 0.07 (DeRo23), MKO H 18.61 +/- 0.36 (Mesa23), MKO J 19.22 +/- 0.33 (Mesa23); SVO 2MASS/2MASS.Ks 666.8 Jy, MKO/NSFCam.H 1034.8 Jy, MKO/NSFCam.J 1544.0 Jy): red 2MASS Ks 2.159 µm, green MKO H 1.614 µm, blue MKO J 1.2417 µm, on one range shared with the bodies the record names. The planet is unresolved, so no map is implied. It glows with its own heat, so no lighting."
       }
     }
   ],

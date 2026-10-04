@@ -49,22 +49,22 @@
   },
   "datasets": {
     "titleKey": "datasets",
-    "defaultDataset": "shape",
+    "defaultDataset": "thermal",
     "controls": [
       {
-        "id": "shape",
-        "label": "Shape",
-        "qualification": "A sphere of the published radius, lit by LHS 1678; the neutral gray is a display convention, not a measured color.",
-        "thumbnail": "lhs-1678b-dataset-shape.webp",
-        "surface": "lhs-1678b-surface-shape@2x.webp",
-        "poles": "lhs-1678b-poles-shape@2x.webp",
+        "id": "thermal",
+        "label": "Expected glow",
+        "qualification": "An estimate, not a measurement: black-body color at 1,109 K, the bare-rock maximum for its orbit.",
+        "thumbnail": "lhs-1678b-dataset-thermal.webp",
+        "surface": "lhs-1678b-surface-thermal@2x.webp",
+        "poles": "lhs-1678b-poles-thermal@2x.webp",
         "source": {
-          "id": "lhs-1678b-observational-measurements",
+          "id": "lhs-1678b-thermal-color",
           "path": "../manifest.json",
-          "url": "https://ui.adsabs.harvard.edu/abs/2024AJ....167..255S/abstract"
+          "url": "https://arxiv.org/abs/2412.06573"
         },
         "falseColor": false,
-        "notes": "No image or color of LHS 1678 b is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the color of lhs-1678's light, as its color dataset measures it."
+        "notes": "Nobody has measured LHS 1678 b's heat. This is the color of a black body at 1,109 K, the hottest day side a dark, airless rock can have on its orbit (computed from lhs-1678's temperature, 3490 K, and the orbit's a/R* 8.08, as T* (R*/a)^(1/2) (2/3)^(1/4)). Nine rocky planets of red dwarfs with a measured day side fall within 13% of this kind of estimate (Coy et al. 2025); GJ 357 b, measured since, is 35% above it. Its star lights the day side. Reflected starlight is not included."
       }
     ]
   },

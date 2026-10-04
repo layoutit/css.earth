@@ -1,0 +1,20 @@
+{
+  "schema": "cssearth-stellar-photometric-color@1",
+  "objectId": "k2-141b",
+  "spectrum": "planck",
+  "temperature": {
+    "published": {
+      "kelvin": 2049,
+      "lowerKelvin": 1687,
+      "upperKelvin": 2411,
+      "citation": "Zieba et al. 2022, dayside temperature of the joint fit to the Spitzer 4.5 µm and K2 phase curves, 2049 +362 -359 K: 2049 +/- 362 K, https://arxiv.org/abs/2203.00370"
+    },
+    "note": "Its day side's brightness temperature is measured in secondary eclipse at 4.5 µm (Spitzer IRAC and Kepler) and nobody has imaged it, so the color is a Planck spectrum at its published temperature.",
+    "chosen": "the paper's two-temperature model with reflected light fitted beside the heat; the larger of its two errors is kept",
+    "wavelengthMicrometres": 4.5,
+    "facility": "Spitzer IRAC and Kepler"
+  },
+  "whitePoint": "sRGB D65",
+  "normalization": "brightest linear sRGB channel = 1",
+  "gamut": "desaturate"
+}

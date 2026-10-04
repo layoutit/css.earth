@@ -19,19 +19,14 @@
   },
   "surfaces": [
     {
-      "id": "shape",
+      "id": "thermal",
       "output": "wolf-327b-surface-{id}{suffix}.webp",
       "thumbnail": "wolf-327b-dataset-{id}.webp",
-      "source": "measurements.json",
+      "source": "photometry/thermal-color.json",
       "falseColor": false,
       "science": {
-        "kind": "neutral-shape",
-        "qualification": "Shared neutral gray display convention for a planet with no image or measured color in this package; a sphere of the published radius, lit by its own star, whose measured color (#ffc787, the color dataset of wolf-327 (src/objects/wolf-327/source/photometry/stellar-color.json)) tints the gray at the same brightness.",
-        "hostLight": {
-          "host": "wolf-327",
-          "srgb": "#ffc787",
-          "source": "the color dataset of wolf-327 (src/objects/wolf-327/source/photometry/stellar-color.json)"
-        }
+        "kind": "equilibrium-thermal-color",
+        "qualification": "An estimate, not a measurement: the color of a black body at 1,390 K, the hottest day side a dark, airless rock can have on its orbit (computed from wolf-327's temperature, 3542 K, and the orbit's a/R* 5.3, as T* (R*/a)^(1/2) (2/3)^(1/4)), uniform over the disc. Nine rocky planets of red dwarfs with a measured day side fall within 13% of this kind of estimate (Coy et al. 2025); GJ 357 b, measured since, is 35% above it. Its black-body color lies outside the sRGB gamut and is shown mixed with 2% white, the least that brings it inside, hue kept."
       }
     }
   ],

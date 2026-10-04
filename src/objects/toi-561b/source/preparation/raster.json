@@ -19,19 +19,14 @@
   },
   "surfaces": [
     {
-      "id": "shape",
+      "id": "thermal",
       "output": "toi-561b-surface-{id}{suffix}.webp",
       "thumbnail": "toi-561b-dataset-{id}.webp",
-      "source": "measurements.json",
+      "source": "photometry/thermal-color.json",
       "falseColor": false,
       "science": {
-        "kind": "neutral-shape",
-        "qualification": "Shared neutral gray display convention for a planet with no image or measured color in this package; a sphere of the published radius, lit by its own star, whose measured color (#ffede4, the color dataset of toi-561 (src/objects/toi-561/source/photometry/stellar-color.json)) tints the gray at the same brightness.",
-        "hostLight": {
-          "host": "toi-561",
-          "srgb": "#ffede4",
-          "source": "the color dataset of toi-561 (src/objects/toi-561/source/photometry/stellar-color.json)"
-        }
+        "kind": "dayside-thermal-color",
+        "qualification": "Color of a black body at the dayside brightness temperature 2,048 K measured in secondary eclipse at 4 µm (Boucher et al. 2026, dayside temperature of the combined NIRSpec G395H phase-curve fit, 2048 +193 -206 K), uniform over the disc and lit by its star so the day side faces it. The planet is unresolved: no map is implied, and reflected starlight is not included."
       }
     }
   ],

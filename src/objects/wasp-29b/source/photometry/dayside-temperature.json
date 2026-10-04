@@ -1,0 +1,11 @@
+{
+  "schema": "cssearth-dayside-temperature@1",
+  "planet": "wasp-29b",
+  "temperatureK": {
+    "value": 913,
+    "lower": 819,
+    "upper": 1007
+  },
+  "wavelengthMicrons": 4.5,
+  "source": "Deming et al. 2023, dayside brightness temperature at 4.5 µm (uniform reanalysis of Spitzer's eclipses, CDS J/AJ/165/104 table 2). 1 measured of 1 rows; the smallest relative uncertainty, then the longest wavelength. https://ui.adsabs.harvard.edu/abs/2023AJ....165..104D/abstract"
+}

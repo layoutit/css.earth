@@ -19,19 +19,14 @@
   },
   "surfaces": [
     {
-      "id": "shape",
+      "id": "thermal",
       "output": "wasp-62b-surface-{id}{suffix}.webp",
       "thumbnail": "wasp-62b-dataset-{id}.webp",
-      "source": "measurements.json",
+      "source": "photometry/thermal-color.json",
       "falseColor": false,
       "science": {
-        "kind": "neutral-shape",
-        "qualification": "Shared neutral gray display convention for a planet with no image or measured color in this package; a sphere of the published radius, lit by its own star, whose measured color (#faf5ff, the color dataset of wasp-62 (src/objects/wasp-62/source/photometry/stellar-color.json)) tints the gray at the same brightness.",
-        "hostLight": {
-          "host": "wasp-62",
-          "srgb": "#faf5ff",
-          "source": "the color dataset of wasp-62 (src/objects/wasp-62/source/photometry/stellar-color.json)"
-        }
+        "kind": "dayside-thermal-color",
+        "qualification": "Color of a black body at the dayside brightness temperature 1,616 K measured in secondary eclipse at 3.6 µm (Deming et al. 2023, dayside brightness temperature at 3.6 µm (uniform reanalysis of Spitzer's eclipses, CDS J/AJ/165/104 table 2)), uniform over the disc and lit by its star so the day side faces it. The planet is unresolved: no map is implied, and reflected starlight is not included. Its black-body color lies outside the sRGB gamut and is shown mixed with 2% white, the least that brings it inside, hue kept."
       }
     }
   ],

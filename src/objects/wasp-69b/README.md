@@ -10,6 +10,8 @@ It is the only planet known around Wouri. Its orbit and size follow Allart et al
 
 **Color.** No image or measured color exists. The neutral gray is lit by wasp-69's measured color (#ffd7be, the color dataset of wasp-69 (src/objects/wasp-69/source/photometry/stellar-color.json)) at the gray's own brightness.
 
+**Measured day side.** The page opens on the one thing measured of its surface: a dayside brightness temperature of 949 K at 4.5 µm (Deming et al. 2023, dayside brightness temperature at 4.5 µm (uniform reanalysis of Spitzer's eclipses, CDS J/AJ/165/104 table 2); [record](source/photometry/dayside-temperature.json)). Chosen by rule: 2 measured of 2 rows; the smallest relative uncertainty, then the longest wavelength. The `measured-dayside` format paints the hemisphere under the star in false color at that temperature, on the 300 to 3,000 K scale every measured day side shares, and leaves the night hemisphere blank. It is too cool for a visible glow, so no black-body color is shown.
+
 **Charts.** The orbits of Wouri's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (55, 81, 92), folded onto its orbit. Upper limits and rows without an error are left out.
 
 ## Evidence
