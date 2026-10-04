@@ -1,18 +1,20 @@
 import { readFileSync } from 'node:fs';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { catalogueCells, cataloguePointSpread, catalogueBankColumns, decodeCatalogueBankBinary, decodePreparedBank, encodeCatalogueBankBinary, readCataloguePointBank } from '@cssearth/objects';
+import { catalogueBankColumns, decodeCatalogueBankBinary, decodePreparedBank, encodeCatalogueBankBinary, readCataloguePointBank } from '@cssearth/objects';
 import { unpackPreparedBinary } from '@cssearth/objects/node';
 import { cataloguePointColumnBuffers, cataloguePointColumns, readCataloguePointColumns } from './catalogue-point-columns.js';
 
 const frame = { referenceFrame: 'sun-icrf', epochJdTt: 2451545, originM: [0, 0, 0], localToReferenceXyzw: [0, 0, 0, 1],
   metersPerUnit: 1, boundsUnits: { min: [-20, -20, -20], max: [20, 20, 20] } };
 // Two levels of a stacked bank with a palette that sizes its dots: everything a published bank can carry.
-const points = [[1, 0, -10, 0], [-1, 0.5, -10, 1], [3, 4, -12, 1], [0.0001, 0, 5, 0], [2, 2, 2, 2]], levels = [3, 2];
+// Its spread and cells are what the preparation computes for these points (@cssearth/bake/volume catalogue-points.ts).
+const points = [[1, 0, -10, 0], [-1, 0.5, -10, 1], [3, 4, -12, 1], [0.0001, 0, 5, 0], [2, 2, 2, 2]];
 const bank = { schema: 'cssearth-catalogue-points@1', id: 'test-dots', frame,
   appearance: { colorCss: '#ffe2a8', radiusPx: .75, opacity: .7, palette: ['#8ec9ff', '#ffc07080', '#ffffff'], paletteRadiusPx: [1.1, .5, .9], screenBudget: 400,
     levels: [{ points: 3, fullDetailUnits: 100 }, { points: 2, appearUnits: [50, 10] }] },
-  points, spread: cataloguePointSpread(points), cells: catalogueCells(points, levels) };
+  points, spread: { normal: [0.9768864294165428, 0.1797228227352233, 0.11572644905068734], across: 10.048256752047953, along: 2.260833190582274 },
+  cells: { boxes: [[-1, 0, -12, 3, 4, -10], [0.0001, 0, 2, 2, 2, 5]], of: [0, 0, 0, 1, 1] } };
 const file = () => { const { bytes } = encodeCatalogueBankBinary(bank, 'test.bin'); return decodePreparedBank(bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.byteLength) as ArrayBuffer, 'test.bin'); };
 
 test('a bank read as columns is the bank its JSON form parses to: every place, style and cell, with no object for a point', () => {
