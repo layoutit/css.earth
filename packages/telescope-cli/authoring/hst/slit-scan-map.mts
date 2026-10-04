@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-import { BODY_MAP_SCHEMA } from '@cssearth/objects';
 /** Map one absorption band over a body's surface from STIS long-slit spectra scanned across its disc.
  *
  *   node packages/telescope-cli/authoring/hst/slit-scan-map.mts <scan id> <frames directory> <output directory> [--fetch] [--receipt] [--mirror]
@@ -21,6 +20,7 @@ import { BODY_MAP_SCHEMA } from '@cssearth/objects';
  *
  * Which way the aperture's first axis lies on the sky is **not assumed**: `--mirror` runs the opposite choice as well and the
  * receipt reports what each one does to the agreement between visits that saw the same ground. */
+import { BODY_MAP_SCHEMA, type BodyMapFrame, type BodyMapObservation, type BodyMapProduct, type CombinationPolicy, type MeasurementDefinition } from '@cssearth/objects';
 import { mkdir, readFile, stat, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -29,9 +29,7 @@ import { requireFiniteNumber } from '@cssearth/core';
 import { HST_PROGRAMS, PROGRAMS } from '@cssearth/telescope-cli/archives/hst/archive';
 import { observerCamera, type BodyOrientation } from '@cssearth/bake/objects/cameras';
 import { loadOrientation } from '@cssearth/bake/objects/layers/terrestrial';
-import { bodyMapFits, combineBodyMaps, projectBandMap, type BodyMap } from '@cssearth/bake/objects/layers/observation';
-import { combineUnderPolicy, renderBodyMapProduct } from '@cssearth/bake/objects/layers/observation';
-import { type BodyMapFrame, type BodyMapObservation, type BodyMapProduct, type CombinationPolicy, type MeasurementDefinition } from '@cssearth/objects';
+import { bodyMapFits, combineBodyMaps, projectBandMap, type BodyMap, combineUnderPolicy, renderBodyMapProduct } from '@cssearth/bake/objects/layers/observation';
 import { bodyMapProductRecord, formatProductRecord } from '@cssearth/telescope-cli/body-map-publication';
 import type { ProductInput, ProductSoftware } from '@cssearth/objects';
 import { ACROSS_SLIT_DIRECTIONS, addFeatureless, bandFromReflectance, featurelessMean, newFeatureless, parseSlitScan, quantiles, ratioAgainst, reflectance, scanImage, type AcrossSlitDirection, type Reflectance, type ReferenceSpectrum, type SlitScanDefinition, type ScanSampling } from '@cssearth/telescope-cli/archives/hst/slit-scan-reduction';

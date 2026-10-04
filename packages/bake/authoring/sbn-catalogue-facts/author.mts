@@ -1,4 +1,3 @@
-import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 /**
  * Fill small-body factsheets from six PDS Small Bodies Node catalogues (catalogues.json): the Asteroid Lightcurve
  * Database V4.0, Small Bodies Occultations V4.0, TNO and Centaur Diameters, Albedos and Densities V1.0, NEOWISE
@@ -37,6 +36,7 @@ import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
  * Run from the repository root. `--fetch` downloads missing tables and labels into the cache named in
  * catalogues.json; `--check` writes nothing and fails when a file would change.
  */
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 import { INVESTIGATION_LEDGER_SCHEMA } from '@cssearth/objects';
 import assert from 'node:assert/strict';
 import { mkdir, readFile, readdir, unlink, writeFile } from 'node:fs/promises';

@@ -1,4 +1,3 @@
-import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 /**
  * The small bodies of a bank's populations that have no page, each at its position at the world's epoch.
  *
@@ -11,6 +10,7 @@ import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
  *
  * Usage: node packages/bake/authoring/small-body-dots/positions.mts <object id>
  */
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 import { readdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { gunzipSync, gzipSync } from 'node:zlib';

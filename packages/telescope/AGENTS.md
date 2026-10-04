@@ -40,3 +40,5 @@ to reinstall it.
 Product record data, evidence kinds and parsing live in `@cssearth/objects`. This package retains product paths,
 evidence queries, Node run identity and file transport. VO metadata, pins, regions, JSON admission and discovery
 snapshots also come from objects; archive/network operations and row identity queries stay here.
+
+The library/command split is accepted: bake imports this light archive-neutral library, while telescope-cli depends on bake for preparation. Merge only if those dependency directions can be preserved without a cycle.

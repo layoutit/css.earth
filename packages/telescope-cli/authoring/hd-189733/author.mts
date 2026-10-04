@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 /** HD 189733 system navigation markers, rendered from each body's own data with the WASP-43 system's renderers:
  *
  * - HD 189733 A: the color of its Gaia XP spectrum, dimmed toward the limb by the law fitted to TESS transits of HD 189733b.
@@ -9,6 +8,7 @@ import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
  *   node packages/telescope-cli/authoring/hd-189733/author.mts [--check]
  *
  * --check recomputes the markers and fails if any differs from the file on disk. */
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';

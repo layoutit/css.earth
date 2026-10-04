@@ -1,8 +1,7 @@
-import type { PointFieldRgb } from '@cssearth/objects';
+import type { PointFieldRgb, PreparedPointFieldStar } from '@cssearth/objects';
 import { STAR_IDS, starAstrometry, starStateKm, PARSEC_KM } from '@cssearth/astronomy';
 import { readCatalog } from '@cssearth/catalog';
 import type { Catalog } from '@cssearth/catalog';
-import type { PreparedPointFieldStar } from '@cssearth/objects';
 import type { StarsRecipe } from './types.ts';
 import { sourceBytes } from '../volume/node/index.ts';
 import { catalogueColor } from '@cssearth/engine';

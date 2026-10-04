@@ -1,9 +1,9 @@
 #!/usr/bin/env node
-import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 /** Antares authored input: the navigation marker, the scaffold's flat disc in the shared neutral gray, because no image of
  * the photosphere is cast in this package (see the object's investigations.json).
  *
  *   node packages/bake/authoring/antares/author.mts [--check] */
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 import { resolve } from 'node:path';
 import { runAuthor } from '../authored-output.mts';
 import { pathToFileURL } from 'node:url';

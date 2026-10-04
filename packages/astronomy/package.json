@@ -1,7 +1,7 @@
 {
   "name": "@cssearth/astronomy",
   "version": "0.0.0",
-  "description": "Time scales, float64 vectors and the reference-frame tree for large-scale 3D scenes. Zero dependencies, zero browser globals.",
+  "description": "Time scales, float64 vectors and the reference-frame tree for large-scale 3D scenes. Host-neutral source contracts, zero browser globals.",
   "type": "module",
   "main": "dist/index.cjs",
   "module": "dist/index.js",
@@ -45,7 +45,9 @@
   },
   "devDependencies": {
     "tsup": "^8.0.1",
-    "typescript": "5.9.3",
+    "typescript": "5.9.3"
+  },
+  "dependencies": {
     "@cssearth/objects": "workspace:*"
   }
 }

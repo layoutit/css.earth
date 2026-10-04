@@ -1,5 +1,5 @@
-import { cameraOrientation, gestureCamera } from './browser-camera.ts';
 /** Historical Hubble baseline only; current ESO maps use browser-observation-structures. */
+import { cameraOrientation, gestureCamera } from './browser-camera.ts';
 import assert from 'node:assert/strict';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { chromium } from 'playwright';

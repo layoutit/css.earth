@@ -1,7 +1,7 @@
+/** Product facts answer a request; catalogue capabilities and successful decoding alone do not. */
 import type { CalibrationDependency } from './calibration-dependencies.mts';
 import type { NativeMetadata } from './native-metadata.mts';
 import { inputWavelengths } from './recipe-request.mts';
-/** Product facts answer a request; catalogue capabilities and successful decoding alone do not. */
 import type { CapabilityRequest, ProductKind, RequestedResult } from './recipe-request.mts';
 import type { ConstraintVerdict } from './query-contract.mts';
 import { supportsMeasuredResolution, PROFILE_ASSUMPTIONS, RESOLUTION_ASSUMPTIONS, type ResolutionEvidence } from '@cssearth/objects';

@@ -1,5 +1,5 @@
-import { gestureCamera } from './browser-camera.ts';
 /** Real prepared-density-filter browser checks; no synthetic scene or browser pixel processing. */
+import { gestureCamera } from './browser-camera.ts';
 import assert from 'node:assert/strict';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { chromium, type Route } from 'playwright';

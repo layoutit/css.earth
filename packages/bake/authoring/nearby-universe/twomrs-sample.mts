@@ -1,4 +1,3 @@
-import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 // Entry script: node packages/bake/authoring/nearby-universe/twomrs-sample.mts [table3.dat.gz]
 /**
  * The Nearby Universe's 2MASS Redshift Survey sample: the 2MRS galaxies (Huchra et al. 2012, ApJS 199, 26, table 3) that
@@ -18,6 +17,7 @@ import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
  *   stages); a quasar or AGN (-9), an HI cloud (12), a peculiar (15), an unclassified galaxy (19), an unclassified spiral
  *   (20) or an unexamined one (98) has none.
  */
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { gunzipSync, gzipSync } from 'node:zlib';

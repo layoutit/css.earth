@@ -1,5 +1,5 @@
-import { PREPARED_CSS_SURFACE_SHELL_SCHEMA, SHELL_CORNER_PERMUTATIONS, type Vector3, type PreparedCssSurfaceShell } from '@cssearth/objects';
 /** Actual PolyCSS preparation of static triangular image coverage and retained transforms. */
+import { PREPARED_CSS_SURFACE_SHELL_SCHEMA, SHELL_CORNER_PERMUTATIONS, type Vector3, type PreparedCssSurfaceShell } from '@cssearth/objects';
 import { computeTextureAtlasPlanPublic, resolvePolyTextureLeafGeometry, resolveProjectiveQuadGuards, type Polygon } from '@layoutit/polycss';
 import type { ShellRecipe } from './config.ts';
 import { unitVector, type ShellMesh } from './mesh.ts';

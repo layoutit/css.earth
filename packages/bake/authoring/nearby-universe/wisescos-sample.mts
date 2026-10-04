@@ -1,4 +1,3 @@
-import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 // Entry script: node packages/bake/authoring/nearby-universe/wisescos-sample.mts [wiseScosPhotoz160708.csv.gz]
 /**
  * The Nearby Universe's WISE x SuperCOSMOS sample: the photometric-redshift galaxies (Bilicki et al. 2016, ApJS 225, 5)
@@ -24,6 +23,7 @@ import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
  *   which `prepare-catalogue-points.mts src/objects/nearby-universe-galaxies desi-bright-galaxies` writes): the recipe's color
  *   stops.
  */
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 import { catalogueBankInputPath } from '@cssearth/bake/volume/node';
 import { medianUpperMiddle as median } from '@cssearth/core';
 import { createReadStream } from 'node:fs';

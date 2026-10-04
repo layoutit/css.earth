@@ -9,8 +9,7 @@ import { bandMode, bandOfHeader, isCubeBand, JWST_BANDS } from './bands.mts';
 import { assertCubeMembers, spec3Steps } from '../cubes/spec3.mts';
 import { gridResample, imagingProductRun, pipelineSoftware, recordProductEvidence } from './image3.mts';
 import { evidenceFor, productRecordPath } from '@cssearth/telescope';
-import { readProductRecord, runKey, writeProductRecord } from '@cssearth/telescope/node';
-import { toolchainPython } from '@cssearth/telescope/node';
+import { readProductRecord, runKey, writeProductRecord, toolchainPython } from '@cssearth/telescope/node';
 import { findPointSources } from '@cssearth/bake/objects/layers/observation';
 
 const member = (name: string, bytes = 1000) => ({ name, uri: `mast:JWST/product/${name}`, bytes });

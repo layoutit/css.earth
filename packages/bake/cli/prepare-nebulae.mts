@@ -1,5 +1,5 @@
-import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 /** Application nebula preparation (`pnpm prepare:nebulae`). Scientific regeneration remains an explicit research command. */
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 import { readdir, access, readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { prepareNebulaObject, prepareCompactDensityObject, applicationDeliveryKind } from '@cssearth/bake/nebula';

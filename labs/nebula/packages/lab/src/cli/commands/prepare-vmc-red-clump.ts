@@ -1,6 +1,6 @@
+/** Offline cross-match of preserved Tatton RC rows to public ESO DR5 PSF measurements. */
 import { readVmcRecipe } from './vmc-recipe.ts';
 import { redClumpDistanceKpc, unambiguousMatch } from '@cssearth/nebula-reconstruction/registration/red-clump-distance';
-/** Offline cross-match of preserved Tatton RC rows to public ESO DR5 PSF measurements. */
 import { readFile, writeFile, readdir, mkdir } from 'node:fs/promises';
 import { gunzipSync } from 'node:zlib';
 const recipe = await readVmcRecipe();

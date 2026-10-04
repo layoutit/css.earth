@@ -1,7 +1,7 @@
+/** Reproducible local experiment: a pinned simulation snapshot, photograph colors, and the shared volume baker. */
 import { OBJECT_SCHEMA, VOLUME_RECIPE_SCHEMA, type VolumeRecipe, type Vector3 } from '@cssearth/objects';
 import {rotateParticles} from '@cssearth/nebula-reconstruction/stars/rotate-particles';
 import { parseLabModelJson } from '../../resources/model-paths.ts';
-/** Reproducible local experiment: a pinned simulation snapshot, photograph colors, and the shared volume baker. */
 import { access, mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve, relative } from 'node:path';
 import { spawnSync } from 'node:child_process';

@@ -7,12 +7,7 @@ import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import sharp from "sharp";
 
-import { loadObjectMarkerDescriptor } from "@cssearth/bake/navigation";
-import {
-  validateMarkerDescriptor,
-  validateMarkerSourceBytes,
-  renderMarker,
-} from "@cssearth/bake/navigation";
+import { loadObjectMarkerDescriptor, validateMarkerDescriptor, validateMarkerSourceBytes, renderMarker } from "@cssearth/bake/navigation";
 
 const marsMarker = validateMarkerDescriptor(await loadObjectMarkerDescriptor("mars", projectRoot(import.meta.url)));
 

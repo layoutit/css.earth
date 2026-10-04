@@ -11,11 +11,9 @@
  */
 import { readFile, writeFile } from 'node:fs/promises';
 import { basename, resolve } from 'node:path';
-import { CATALOGUE_POINTS_SCHEMA, decodeCatalogueBankBinary } from '@cssearth/objects';
+import { CATALOGUE_POINTS_SCHEMA, decodeCatalogueBankBinary, worldOrbitBankRegions, POINT_FIELD_BANK_MAGIC, pointFieldBankRegions } from '@cssearth/objects';
 import { writeCatalogueBank } from '@cssearth/bake/volume/node';
 import { inventoryPreparedAssets, packPreparedBinary, readInventory, unpackPreparedBinary } from '@cssearth/objects/node';
-import { worldOrbitBankRegions } from '@cssearth/objects';
-import { POINT_FIELD_BANK_MAGIC, pointFieldBankRegions } from '@cssearth/objects';
 
 // Non-catalogue binary formats share the inventory; decode only their published bytes.
 function decodePublishedBank(bytes: Uint8Array, path: string): unknown {

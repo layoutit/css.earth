@@ -1,10 +1,8 @@
 import { writeStyle } from '../rendering/retained-write.js';
-import { fromEyeM } from '@cssearth/engine';
+import { fromEyeM, type WorldCameraPose, cssViewFromOrientation } from '@cssearth/engine';
 import type { PreparedLabelEdge } from '../navigation/prepared-label-edge.js';
 import { type PreparedContextPoint } from '@cssearth/objects';
-import { type WorldCameraPose } from '@cssearth/engine';
 import type { WorldCameraViewport } from '../navigation/world-camera.js';
-import { cssViewFromOrientation } from '@cssearth/engine';
 import type { LabelScreenRect } from '../labels/screen-label-layout.js';
 import { DEFAULT_CONTEXT_LABEL_OPACITY } from '../labels/label-presentation.js';
 import { createOpacityFader } from '../stars/opacity-fader.js';

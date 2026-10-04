@@ -7,12 +7,10 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { preparedObjectCapabilities } from '@cssearth/renderer';
 
-import { createPreparedPlayback, createPreparedResidency, createObjectControlBinding, createObjectSelectionRuntime, mountPreparedPresentation, resolvePreparedPresentation } from "@cssearth/renderer/testing";
+import { createPreparedPlayback, createPreparedResidency, createObjectControlBinding, createObjectSelectionRuntime, mountPreparedPresentation, resolvePreparedPresentation, initialObjectSelection } from "@cssearth/renderer/testing";
 
 import type { ObjectControlBindingOptions, PreparedImage, PreparedPresentationContext } from "@cssearth/renderer/testing";
-import { viewSunDirectionToPreparedLightDirection } from '@cssearth/engine';
-import { createSceneLifetime } from "@cssearth/engine";
-import { initialObjectSelection } from "@cssearth/renderer/testing";
+import { viewSunDirectionToPreparedLightDirection, createSceneLifetime } from '@cssearth/engine';
 // A single resident feature is sufficient for image-lifetime fixtures.
 export function fixtureFeaturePlan(plan: NonNullable<ObjectRuntimeDefinition['features']>) {
   return { ...plan, catalog: { ...plan.catalog, count: 1 }, selection: undefined };

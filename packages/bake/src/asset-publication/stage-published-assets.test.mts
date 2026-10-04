@@ -1,5 +1,5 @@
 import { pathToFileURL } from 'node:url';
-import { projectRoot } from '@cssearth/core/node';
+import { projectRoot, sha256 } from '@cssearth/core/node';
 import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
 import { mkdir, mkdtemp, readFile, rm, symlink, writeFile } from 'node:fs/promises';
@@ -7,7 +7,6 @@ import { tmpdir } from 'node:os';
 import { dirname, resolve } from 'node:path';
 import test, { type TestContext } from 'node:test';
 import { parseDocument } from 'yaml';
-import { sha256 } from '@cssearth/core/node';
 import { stagePublishedAssets } from '@cssearth/bake/asset-publication';
 
 const objectId = 'fixture';

@@ -2,12 +2,11 @@
 import { lstat, mkdir, mkdtemp, open, readFile, rename, rm, stat, writeFile } from 'node:fs/promises';
 import { basename, dirname, resolve } from 'node:path';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
-import { writeProductRecord } from '@cssearth/telescope/node';
+import { writeProductRecord, parseLimits } from '@cssearth/telescope/node';
 import { VERSION } from './help.mts';
 import { INSTRUMENT_TABLES, koaDownload, koaQuery, lev0Url, TAP_SYNC } from './archives/keck/koa.mts';
 import { EXPLORATION_SCHEMA } from './exploration.mts';
 import { FITS_SOURCE_SCHEMA } from './fits-source.mts';
-import { parseLimits } from '@cssearth/telescope/node';
 import type { KeckSourceLead } from './archive-leads.mts';
 
 const limitations = [

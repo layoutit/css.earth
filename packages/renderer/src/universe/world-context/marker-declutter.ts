@@ -45,4 +45,3 @@ export function createMarkerDeclutter(annotationPriorities: Readonly<Record<stri
     }
   };
 }
-

@@ -1,4 +1,3 @@
-import { authorPath } from './paths.mts';
 /**
  * Author a DAMIT asteroid package from one archived model (convex, or nonconvex with `model.nonconvex` and `model.basis`)
  * and a separately published physical size.
@@ -12,6 +11,7 @@ import { authorPath } from './paths.mts';
  * snapshot and writes the source manifest. The astronomy record is written without elements; run
  * `node packages/astronomy/cli/generate-asteroids.mts --object=<ids>` next, then `node packages/bake/cli/prepare-object.mts <id>`.
  */
+import { authorPath } from './paths.mts';
 import { OBJECT_CONTENT_SCHEMA, OBJECT_CONTENT_VERSION, SOURCE_MANIFEST_SCHEMA, NEUTRAL_CATALOGUE_COLOR, PREPARED_CSS_OBJECT_FORMAT, OBJECT_TEXT_SCHEMA, INVESTIGATION_LEDGER_SCHEMA, ACQUISITION_PLAN_SCHEMA } from '@cssearth/objects';
 
 import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
@@ -20,11 +20,10 @@ import sharp from 'sharp';
 import { createSourceManifest } from '@cssearth/objects/node';
 
 import { ENTRY_EVIDENCE } from '@cssearth/bake/sources';
-import { shapeMaterialRaster, renderRadialSnapshot } from '@cssearth/bake/objects/layers/terrestrial';
+import { shapeMaterialRaster, renderRadialSnapshot, loadRadialTerrain } from '@cssearth/bake/objects/layers/terrestrial';
 import { elementsUrl, vectorsUrl } from '../../../../packages/astronomy/cli/lib/horizons.mts';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { loadPdsPlateShape, requireTerrainMesh, simplifyRadialShape } from '@cssearth/bake/objects/geometry';
-import { loadRadialTerrain } from '@cssearth/bake/objects/layers/terrestrial';
 
 const ROOT = authorPath();
 const TEMPLATE = 'achilles';

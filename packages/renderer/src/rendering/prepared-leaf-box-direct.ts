@@ -1,5 +1,3 @@
-import { type LeafBoxComponent, type PreparedLeafBox, type PreparedViewBinding } from '@cssearth/objects';
-
 /**
  * Leaf boxes written from their prepared records (packages/bake/src/presentation/leaf-box-records.ts).
  *
@@ -8,9 +6,10 @@ import { type LeafBoxComponent, type PreparedLeafBox, type PreparedViewBinding }
  * `background-position` and `transform` directly: no custom property, `calc()` or parse, and each leaf keeps what it
  * last wrote so an unchanged value is never written again.
  */
+import { LEAF_BOX_PROPERTY as LEAF_BOX_STEP, SURFACE_SEAM_OUTSET_PROPERTY as SEAM_OUTSET, type LeafBoxComponent, type PreparedLeafBox, type PreparedViewBinding } from '@cssearth/objects';
 
-export const LEAF_BOX_STEP = '--silhouette-step';
-export const SEAM_OUTSET = '--surface-seam-outset';
+
+export { LEAF_BOX_PROPERTY as LEAF_BOX_STEP, SURFACE_SEAM_OUTSET_PROPERTY as SEAM_OUTSET } from '@cssearth/objects';
 
 type StepBinding = Extract<PreparedViewBinding, { kind: 'silhouette-step-property' }>;
 

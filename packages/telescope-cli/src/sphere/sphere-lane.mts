@@ -1,6 +1,6 @@
+/** A measurement dataset for an existing standard sphere. No geometry or camera is authored here. */
 import { objectPageCss, parsePreparedObjectRuntime, parsePreparedWorldContext } from '@cssearth/objects';
 
-/** A measurement dataset for an existing standard sphere. No geometry or camera is authored here. */
 import { readFile, mkdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import sharp from 'sharp';

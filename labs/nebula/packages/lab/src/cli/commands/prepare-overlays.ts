@@ -1,5 +1,5 @@
-import { parseLabModelJson } from '../../resources/model-paths.ts';
 /** Prepare WCS-positioned photographic inspection planes; no nebula extraction or image fitting. */
+import { parseLabModelJson } from '../../resources/model-paths.ts';
 import { readFile, writeFile, mkdir, rename } from 'node:fs/promises';
 import { basename, dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';

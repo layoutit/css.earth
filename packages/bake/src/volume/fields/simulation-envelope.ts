@@ -1,4 +1,3 @@
-import { type SimulationEnvelopeSettings, type SkyBounds, type SimulationDepthPrior } from '@cssearth/objects';
 /**
  * Low-frequency emission that keeps a pinned density's own 3D shape, scaled per sky position to the image.
  *
@@ -6,6 +5,7 @@ import { type SimulationEnvelopeSettings, type SkyBounds, type SimulationDepthPr
  * depending on the fitting methods. Arithmetic order, coordinate conventions and validator bounds are
  * unchanged; the fit itself stays with its scientific owner.
  */
+import { type SimulationEnvelopeSettings, type SkyBounds, type SimulationDepthPrior } from '@cssearth/objects';
 
 export interface SimulationEnvelopeGrid {
   width: number; height: number; bounds: SkyBounds; zRange: [number, number];

@@ -1,7 +1,6 @@
-import type { PointFieldRgb } from '@cssearth/objects';
+import type { PointFieldRgb, PreparedCssPointFieldManifest as PreparedCssPointField } from '@cssearth/objects';
 import sharp from 'sharp';
 import { createExposure, exposureLimits, POINT_MIN_RADIUS_PX, starPresentation } from '@cssearth/engine';
-import type { PreparedCssPointFieldManifest as PreparedCssPointField } from '@cssearth/objects';
 import type { StarsRecipe } from './types.ts';
 
 function smoothstep(min: number, max: number, value: number) { const t = Math.max(0,Math.min(1,(value-min)/(max-min))); return t*t*(3-2*t); }

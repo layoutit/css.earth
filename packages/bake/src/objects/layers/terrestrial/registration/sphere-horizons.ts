@@ -1,4 +1,3 @@
-import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 /**
  * Write the two JPL Horizons tables a ground-based dataset's cameras are derived from, for exactly its frames
  * (`packages/bake/cli/sphere-horizons.mts` fetches, reports and writes them).
@@ -11,6 +10,7 @@ import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
  * epochs go in batches and one table is written with every row in order. The acquisition plan gets one refresh step per
  * table holding those exact queries, so the tables can be asked for again and their rows compared.
  */
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 import { readFile, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { readFitsHdu } from '@cssearth/fits';

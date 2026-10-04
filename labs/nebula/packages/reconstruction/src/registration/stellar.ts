@@ -1,5 +1,5 @@
-import { applyAffine, type Affine, type Point } from './affine.ts';
 /** Offline point-source registration. All coordinates are raster pixel edges (centres at n + .5). */
+import { applyAffine, type Affine, type Point } from './affine.ts';
 import sharp from 'sharp';
 import { wcsPixelRay, type ImageWcs } from '@cssearth/bake/volume';
 import { registrationOverlap, type ReferenceFootprint } from './overlap.ts';

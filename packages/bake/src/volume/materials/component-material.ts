@@ -1,5 +1,5 @@
-import { COMPONENT_MATERIAL_SCHEMA, type EmissionFieldModel, type ComponentMaterialReceipt, type EmissionVector3 } from '@cssearth/objects';
 /** Assign observation color once to finite 3D emitters; never project an image through depth. */
+import { COMPONENT_MATERIAL_SCHEMA, type EmissionFieldModel, type ComponentMaterialReceipt, type EmissionVector3 } from '@cssearth/objects';
 import { createEmissionField, emissionKernel, prepareEmissionComponent } from '../fields/emission.ts';
 
 

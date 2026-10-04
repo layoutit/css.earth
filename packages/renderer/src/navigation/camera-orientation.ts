@@ -5,10 +5,7 @@ import type { CameraAngles, Quaternion, Vector3 } from './types.js';
 
 export interface CameraOrientationOptions extends CameraAngles { cameraPlan: CameraPlan; sunDirection?: Vector3 | null; }
 export type CameraOrientation = ReturnType<typeof createCameraOrientation>;
-import { rotationAxisAngle } from "@cssearth/engine";
-import { cssDirectionToViewDirection } from '@cssearth/engine';
-import { nearestWorldRotation } from '@cssearth/engine';
-import { preparedSceneMatrix } from '@cssearth/engine';
+import { rotationAxisAngle, cssDirectionToViewDirection, nearestWorldRotation, preparedSceneMatrix } from "@cssearth/engine";
 
 export function createCameraOrientation({
   controlPitch,

@@ -1,4 +1,3 @@
-import { GALAXY_BACKING_SCHEMA, parseDensityVolumeFrame, type VolumeSliceQuad } from '@cssearth/objects';
 /**
  * Prepare a face-on image of a galaxy as a flat backing plane in its volume frame. `source/<id>/recipe.json` names the
  * image, the pixels of the galaxy's centre and of the Sun on it, the view it was drawn from, and the levels that keep it
@@ -14,6 +13,7 @@ import { GALAXY_BACKING_SCHEMA, parseDensityVolumeFrame, type VolumeSliceQuad } 
  *
  * Usage: node packages/bake/cli/prepare-galaxy-backing.mts <object-directory> <id>
  */
+import { GALAXY_BACKING_SCHEMA, parseDensityVolumeFrame, type VolumeSliceQuad } from '@cssearth/objects';
 import { mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { basename, resolve } from 'node:path';
 import sharp from 'sharp';

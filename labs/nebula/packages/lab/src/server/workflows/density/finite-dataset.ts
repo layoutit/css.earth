@@ -1,6 +1,6 @@
+/** Finite component colors on one immutable conditional emission field. */
 import { OBJECT_SCHEMA, PREPARED_OBJECT_SCHEMA, CLOUD_PARTS_SCHEMA, COMPACT_FINITE_EMISSION_METHOD, readSimulationEnvelopeRecord, validateDatasetToneCurve, DENSITY_VOLUME_FORMAT, validateEnvelopeSettings, type DatasetToneCurve, type EmissionFieldModel, type VolumeSlices, type Vector3 } from '@cssearth/objects';
 import { collectArtifacts } from './io.ts';
-/** Finite component colors on one immutable conditional emission field. */
 import {readFile,writeFile,mkdir,cp,rename,rm} from 'node:fs/promises';
 import {resolve,relative} from 'node:path';
 import sharp from 'sharp';

@@ -39,6 +39,8 @@ explain the software, but their default branches must not be assumed to match
 the binary. Each fixture pins this harness's generator code and the exact inputs
 it read, and comparisons recheck source bytes before decoding them.
 
+The accepted historical mismatch is between the saved fixture/tool fingerprint and the current relocated generator, not permission to treat a new native run as the saved reference. The fixture remains the released SBMT 0.9.2.1 (2026.09.10), Java 17.0.2 and bridge 2.8.1 result; a fresh qualified native regeneration with the current generator is required to retire that mismatch.
+
 ## Tracked truth fixture
 
 [projection.json](projection.json) is the 69,858-line saved reference result from

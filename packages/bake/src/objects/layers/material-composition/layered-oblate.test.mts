@@ -10,8 +10,7 @@ import { computeTextureAtlasPlanPublic, resolvePolyTextureLeafGeometry, textureT
 import { leafRasterScale, requireOutwardCap } from '@cssearth/bake/scene';
 import { floodDiscMean, loadLimbLaw } from '@cssearth/bake/photometry';
 import { displayBandRatios, loadWholeDiscColor } from '@cssearth/bake/objects/raster';
-import { prepareSurfaceColor, widestPublishedImage } from '@cssearth/bake/objects/layers/material-composition';
-import { polarQuad } from '@cssearth/bake/objects/layers/material-composition';
+import { prepareSurfaceColor, widestPublishedImage, polarQuad } from '@cssearth/bake/objects/layers/material-composition';
 import { assertCapFacesOut } from './fixtures/polar-caps.mts';
 
 const image = (path: string, width: number, height: number) =>

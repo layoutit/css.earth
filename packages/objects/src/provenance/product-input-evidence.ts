@@ -45,4 +45,3 @@ export function productInputRoles(document: ObjectLineage, productId: string,
   [...roles.keys()].forEach(dependencies);
   return new Map([...roles].map(([id, values]) => [id, [...values].sort()]));
 }
-

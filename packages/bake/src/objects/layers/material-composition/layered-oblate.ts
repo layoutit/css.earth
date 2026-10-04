@@ -1,7 +1,6 @@
-import { normalize3OrZero } from '@cssearth/core';
+import { normalize3OrZero, isArray, requireString, requireRecord } from '@cssearth/core';
 import { LAYERED_OBLATE_SCHEMA } from '../../scene/index.ts';
 import { linearToSrgb, srgbToLinear } from '../../color/index.ts';
-import { isArray, requireString, requireRecord } from '@cssearth/core';
 import type { prepareRadialMotionAndShadow } from './radial-motion.ts';
 import type { prepareSpectralMaterialVariants } from './spectral-variants.ts';
 interface PixelImage {data:Uint8Array;info:{width:number;height:number;channels:number};}
@@ -45,8 +44,7 @@ import { optimizePreparedQ75Webp, PREPARED_Q75_WEBP_ENCODING } from '../../../de
 import { verifyObservationSources } from '../observed-surfaces/index.ts';
 import { ellipsoidPoint, planetographicRowsToMeshLatitude, intersectViewRayWithEllipsoid, prepareProjectedEllipsoidSilhouetteCoverage, prepareObjectViewDirection as prepareViewDirection, prepareObjectSpaceDirection,  dotVector, subtractVector, rotateX, rotateY, rotateZ } from '../../geometry/index.ts';
 import { CHANNEL_NAMES, floodDiscMean, loadLimbLaw, limbFactors, limbOverlay, meanObservedColor, outsideSilhouette, scatteringAngles, type Channels } from '../../../photometry/index.ts';
-import { displayBandRatios, keepLuminance, latitudeWeightedLuminance, loadWholeDiscColor } from '../../raster/index.ts';
-import { tieBandRatios } from '../../raster/index.ts';
+import { displayBandRatios, keepLuminance, latitudeWeightedLuminance, loadWholeDiscColor, tieBandRatios } from '../../raster/index.ts';
 import type { BandRatioPolicy } from '../../raster/index.ts';
 
 /** The pixel width of the widest of these published images, read from each file's header. */

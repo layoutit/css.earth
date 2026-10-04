@@ -1,5 +1,5 @@
-import { isRecord as coreIsRecord } from '@cssearth/core';
 /** Apply jobs belong to the local server; disconnecting an HTTP observer never cancels them. */
+import { isRecord as coreIsRecord } from '@cssearth/core';
 import { mkdir, readFile, readdir, rename, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { HttpError, jobErrorMessage as message, type JobProgress } from './protocol.ts';

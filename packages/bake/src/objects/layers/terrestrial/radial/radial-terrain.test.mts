@@ -7,8 +7,7 @@ import { mkdtemp, writeFile, rm } from 'node:fs/promises';
 import { execFileSync } from 'node:child_process';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { loadRadialTerrain, rasterAtlasLayout, rasterLeafStyle } from '@cssearth/bake/objects/layers/terrestrial';
-import { fillUndrawnTexels } from '@cssearth/bake/objects/layers/terrestrial';
+import { loadRadialTerrain, rasterAtlasLayout, rasterLeafStyle, fillUndrawnTexels } from '@cssearth/bake/objects/layers/terrestrial';
 import { loadPdsScalarGrid, parsePdsScalarLabel } from '@cssearth/bake/objects/raster';
 const test = sourceTest();
 

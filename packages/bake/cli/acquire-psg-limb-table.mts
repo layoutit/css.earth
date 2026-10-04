@@ -1,4 +1,3 @@
-import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 /**
  * Build a planet's PSG limb profile (halo.mts) from the NASA GSFC Planetary Spectrum Generator: the planet's own
  * atmosphere template, a 1 km beam on a limb line of sight at each tangent altitude with the Sun behind the observer
@@ -26,6 +25,7 @@ import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
  *
  * Writes src/objects/<body>/source/atmosphere/psg-limb.json and the limb and nadir configurations beside it.
  */
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 import { execFile } from 'node:child_process';
 import { promisify } from 'node:util';
 import { mkdir, readFile, writeFile, appendFile } from 'node:fs/promises';

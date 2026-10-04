@@ -35,4 +35,3 @@ test('a frame decides from its own projection alone', () => {
   assert.equal(frame(2.5), true, 'clear of touching (2.4 px), it draws');
   assert.equal(frame(2), false);
 });
-

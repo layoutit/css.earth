@@ -1,8 +1,7 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
-import {polarZeroCoverage,resizeObservedRgb,prepareMeasuredPolarAtlas} from '@cssearth/bake/objects/layers/observed-surfaces';
-import {measureScalarCoverage,finitePercentiles} from '@cssearth/bake/objects/layers/observed-surfaces';
+import { polarZeroCoverage, resizeObservedRgb, prepareMeasuredPolarAtlas, measureScalarCoverage, finitePercentiles } from '@cssearth/bake/objects/layers/observed-surfaces';
 
 test('polar fill is unavailable while black terrain, faint signal and negative finite measurements survive',()=>{
   const values=new Float64Array(8*8).fill(100);

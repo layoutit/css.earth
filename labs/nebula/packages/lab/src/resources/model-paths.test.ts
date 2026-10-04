@@ -14,4 +14,3 @@ test('historical model locations resolve without changing unrelated paths or cal
   assert.equal(parseLabModelJson(text).note, 'original-note');
   assert.equal(JSON.parse(text).path, 'labs/nebula/models/lmc-clouds/object.json');
 });
-

@@ -25,4 +25,3 @@ export function parseSpectrumRecipe(value: unknown, admission: 'source' | 'chart
   if (chart.metadataFields !== undefined) for (const [key, path] of Object.entries(requireRecord(chart.metadataFields, 'Spectrum metadata fields'))) requireString(path, key);
   return chart as unknown as SpectrumRecipe;
 }
-

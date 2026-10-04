@@ -140,4 +140,3 @@ test('diagnostics count only captured leaves when a retained block is partial', 
   pool.setVisible(64, false);
   assert.equal(snapshot().directlyHiddenLeaves, 64);
 });
-

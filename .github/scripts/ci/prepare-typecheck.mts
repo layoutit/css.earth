@@ -1,4 +1,4 @@
-import { readPreparedFeaturePins } from '@cssearth/objects';
+import { readPreparedFeaturePins, OBJECT_TREE_ROOT, parsePreparedWorldIndex } from '@cssearth/objects';
 import { execFile, spawn } from 'node:child_process';
 import { access, readFile } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
@@ -6,11 +6,9 @@ import { dirname, relative, resolve, sep } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { promisify } from 'node:util';
 import ts from 'typescript';
-import { type RuntimeAssetLocation, inventoryAssets } from '@cssearth/bake/delivery';
+import { type RuntimeAssetLocation, inventoryAssets, volumeMetadataAssets } from '@cssearth/bake/delivery';
 import { installRuntimeAssets } from '@cssearth/bake/asset-publication';
-import { volumeMetadataAssets } from '@cssearth/bake/delivery';
 import { hasErrorCode, requireArray, requireRecord, requireString } from '@cssearth/core';
-import { OBJECT_TREE_ROOT, parsePreparedWorldIndex } from '@cssearth/objects';
 import { readPreparedObjects } from '@cssearth/objects/node';
 
 const SCENE_OBJECTS = readPreparedObjects(resolve(import.meta.dirname, '../../..')).sceneObjects;

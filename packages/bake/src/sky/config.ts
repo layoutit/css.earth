@@ -1,6 +1,5 @@
-import { requireNonemptyString as text } from '@cssearth/core';
+import { requireNonemptyString as text, requireRecord as record, requireFiniteNumber as finite } from '@cssearth/core';
 /** Renderer-independent, pinned celestial radiance image and fixed offline display transfer. */
-import { requireRecord as record, requireFiniteNumber as finite } from '@cssearth/core';
 export interface SkyReference { path: string; }
 export interface SkyShadowFloor { blackPoint: number; fullSignal: number; }
 export interface SkyParallax { originM: [number, number, number]; radiusM: number; }

@@ -41,7 +41,7 @@ export async function readAuthoredRotation(directory: string, reference: { path:
   return { poleRightAscensionRad: rightAscension * rad,
     poleDeclinationRad: declination * rad,
     primeMeridianRad: meridian * rad,
-    spinRateRadPerDay: observed ? 2 * Math.PI * 24 / periodHours : 0 };
+    spinRateRadPerDay: periodHours === undefined ? 0 : 2 * Math.PI * 24 / periodHours };
 }
 
 /** A planet that keeps one face toward its star: the pole is the orbit normal (prograde spin) and the uniform spin rate is the

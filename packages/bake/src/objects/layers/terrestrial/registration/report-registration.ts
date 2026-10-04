@@ -1,13 +1,12 @@
-import { isFiniteNumber } from '@cssearth/core';
 /**
  * The registration stage's numbers as a body README states them, generated from the prepared report so no residual
  * is ever typed by hand. The README carries the block between two markers; `--write` replaces it, and the shared
  * test refuses a README whose block differs from what its prepared report gives. `packages/bake/cli/report-registration.mts`
  * prints or writes it.
  */
+import { isFiniteNumber, hasErrorCode, requireArray, requireRecord, requireString } from '@cssearth/core';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { hasErrorCode, requireArray, requireRecord, requireString } from '@cssearth/core';
 import { COMPARISON_SPEC_FILE, parseComparisonSpec } from '../surface-observations/published-comparison.ts';
 import { offsetAgreementDegrees, VERDICT_DEGREES } from '../surface-observations/registration.ts';
 import { OBSERVER_CAMERAS_FILE, parseObserverCameras } from './observer-cameras.ts';

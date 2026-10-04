@@ -1,5 +1,5 @@
 /** Human discovery starts from a target and preserves omitted scientific filters as omitted. */
-import { parseSkyTarget, resolveSkyTarget, skyCatalogueEntry, skyRegion, type SkyResolution, type SkyTarget } from '@cssearth/telescope/node';
+import { parseSkyTarget, resolveSkyTarget, skyCatalogueEntry, skyRegion, type SkyResolution, type SkyTarget, parseLimits, type TransferLimits } from '@cssearth/telescope/node';
 import { flagValue } from '@cssearth/core';
 import { PRODUCT_KINDS, type ProductKind } from './recipe-request.mts';
 import { assessSearchCoverage, type QueryInputs, type SearchCoverage, type TargetCoverage } from './query-contract.mts';
@@ -8,7 +8,6 @@ import { loadQueryInputs, loadTargetCatalogue, type ArchiveSelection } from './q
 import { canonicalTargetRequest, resolveTarget, type TargetResolution } from '@cssearth/telescope';
 import { explorationQualificationFor, type QualificationConfiguration } from './qualification-routes.mts';
 import type { QualifiedObservation } from './qualified-observations.mts';
-import { parseLimits, type TransferLimits } from '@cssearth/telescope/node';
 import { parseRegion } from '@cssearth/objects';
 import type { DiscoveryRequest } from './vo/discovery.mts';
 import type { VoInputs } from './vo/bridge.mts';

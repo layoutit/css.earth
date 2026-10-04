@@ -1,10 +1,8 @@
-import { presentPhysicalPoseInVolume } from '@cssearth/engine';
-import { preparedVolumeCameraTransform } from '../volume/prepared-volume-runtime.js';
-import { worldRotationCss, worldRotationFromQuaternion } from '@cssearth/engine';
+import { presentPhysicalPoseInVolume, worldRotationCss, worldRotationFromQuaternion } from '@cssearth/engine';
+import { preparedVolumeCameraTransform, LARGE_IMAGE_PIXELS } from '../volume/prepared-volume-runtime.js';
 import type { VolumeCameraPublication } from '../volume/types.js';
 import type { PreparedCssImageLayers, PreparedImageLayerView } from '@cssearth/objects';
 import { revealLayer } from '../rendering/layer-reveal.js';
-import { LARGE_IMAGE_PIXELS } from '../volume/prepared-volume-runtime.js';
 
 /** Transparent prepared layer banks. No opaque viewport matte is allowed here. */
 export function mountPreparedCssImageLayers({ host, before, payload, resolveResource }: {

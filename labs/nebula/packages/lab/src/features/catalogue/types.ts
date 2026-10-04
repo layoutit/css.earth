@@ -1,6 +1,5 @@
-import { isFiniteNumber as coreIsFiniteNumber } from '@cssearth/core';
+import { isFiniteNumber as coreIsFiniteNumber, isRecord as record } from '@cssearth/core';
 export * from '@cssearth/nebula-reconstruction/observations/model';
-import {isRecord as record} from '@cssearth/core';
 import {safeArchiveUrl,readArchiveQuery as readQuery,type ArchiveQuery} from '@cssearth/nebula-reconstruction/observations/model';
 export interface MessierObject {
   id: string; messier: number; name: string; aliases: string[]; type: string;

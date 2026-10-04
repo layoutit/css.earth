@@ -1,4 +1,3 @@
-import { NEUTRON_STAR_MEASUREMENTS_SCHEMA } from '@cssearth/objects';
 /** A pulsar with a published surface map, as a placed star: the `pulsars` entries of a spec file (spec.mts lists the stars').
  *
  * A neutron star is too small to image, so everything here is cited: its timing position, proper motion and distance, its mass, the
@@ -29,10 +28,10 @@ import { NEUTRON_STAR_MEASUREMENTS_SCHEMA } from '@cssearth/objects';
  * bolometric intensity against the emission angle, at the star's gravity and the temperature most of the disc is at, is fitted with
  * the quadratic law and kept beside the star with the profile it was fitted to, so the law can be checked without the 256 MB table
  * (X-PSI's tutorial files, https://doi.org/10.5281/zenodo.7113931, hold it). */
+import { NEUTRON_STAR_MEASUREMENTS_SCHEMA, NEUTRAL_CATALOGUE_COLOR, PUBLISHED_LIMB_DARKENING_SCHEMA, DISPLAY_ORIENTATION_SCHEMA, checkLimbLaw } from '@cssearth/objects';
 import { readFile } from 'node:fs/promises';
 import { skyBasis, directionFromRaDec } from '@cssearth/astronomy';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { NEUTRAL_CATALOGUE_COLOR, PUBLISHED_LIMB_DARKENING_SCHEMA, DISPLAY_ORIENTATION_SCHEMA, checkLimbLaw } from '@cssearth/objects';
 import { parseHotRegionSamples, parsePublishedHotRegions, publishedHotRegionMap } from '@cssearth/bake/objects/raster';
 import { fitQuadraticLimb, neutronStarLog10Gravity, nsxLimbProfile, readNsxTable, type NsxTable } from '@cssearth/bake/objects/stellar';
 import { CHECKED } from '../color.mts';

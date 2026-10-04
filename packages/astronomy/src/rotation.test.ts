@@ -204,4 +204,3 @@ describe('the rotation matrix itself', () => {
     assert.ok(Math.abs(delta) < 1e-6)
   })
 })
-

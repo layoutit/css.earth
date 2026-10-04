@@ -1,8 +1,8 @@
-import { readNonArrayRecord, readNonblankText } from '@cssearth/core';
 /** Registration evidence for composites built from pinned survey bands on one exact TAN request grid.
  * A composite with enough catalogue stars in its blue channel runs the unchanged fixed-WCS catalogue gate.
  * A composite the gate cannot qualify may inherit the grid only from a passing composite on the identical grid;
  * its own gate result is kept beside the transfer as a diagnostic, never as the qualification. */
+import { readNonArrayRecord, readNonblankText } from '@cssearth/core';
 import { mkdir, readFile, rename, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';

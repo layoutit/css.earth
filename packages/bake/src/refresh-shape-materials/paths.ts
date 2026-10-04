@@ -5,4 +5,3 @@ import { resolve } from 'node:path';
 export function shapeMaterialPath(...parts: string[]): string {
   return resolve(projectRoot(import.meta.url), ...parts);
 }
-

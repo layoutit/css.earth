@@ -1,10 +1,10 @@
-import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 /** Author the pins of a sky band composite recipe: hips2fits responses, AllWISE atlas tile lists and JWST MAST products.
  * Usage: node packages/telescope-cli/src/sky/author-sky-bands.mts <recipe.json> [--cache=.local/nebula-lab/sky-bands]
  * A band without pins is acquired and pinned; existing pins are verified, never silently replaced.
  * A JWST band names its level-3 product in the draft ({ band, product }); the product is downloaded by streaming and pinned.
  * WISE tiles come from the IRSA IBE atlas search around the grid; a tile is kept when any sample of its
  * published footprint edges or its centre projects inside the grid. */
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 import { WISE_ATLAS_TILES_SCHEMA, type WiseBand } from '@cssearth/objects';
 import { mkdir, readFile, rename, stat, writeFile } from 'node:fs/promises';
 import { realpathSync } from 'node:fs';

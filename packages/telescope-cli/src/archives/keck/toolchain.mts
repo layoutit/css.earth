@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-import { readToolchainDescriptor } from '../toolchain-descriptor.mts';
 /** Install and locate the pinned Keck reduction environment of toolchain.json under output/toolchains/keck (ignored by git).
  *
  *   node packages/telescope-cli/src/archives/keck/toolchain.mts install
@@ -12,6 +11,7 @@ import { readToolchainDescriptor } from '../toolchain-descriptor.mts';
  *
  * Only the KCWI pipeline is installed. The OSIRIS DRP is IDL and does not run here; toolchain.json says so, and archive.mts
  * pins KOA's own OSIRIS products instead of re-running them. */
+import { readToolchainDescriptor } from '../toolchain-descriptor.mts';
 import { spawnSync } from 'node:child_process';
 import { assertInstalledMarker, runToolchainProcess, WORKSPACE, writeInstalledMarker } from '@cssearth/telescope/node';
 import { access, mkdir, rm } from 'node:fs/promises';
