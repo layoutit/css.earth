@@ -1,5 +1,4 @@
-import { parseObjectDescriptor } from '@cssearth/objects';
-import { parsePreparedObjectRuntime } from '@cssearth/objects';
+import { parseObjectDescriptor, parsePreparedObjectRuntime } from '@cssearth/objects';
 
 import { requireRecord } from '@cssearth/core';
 import { readFile, writeFile } from 'node:fs/promises';

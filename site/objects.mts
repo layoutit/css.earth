@@ -33,4 +33,3 @@ export function requireObject(id: string) {
   if (!object) throw new Error(`Unknown cssEarth object: ${id}`);
   return object;
 }
-

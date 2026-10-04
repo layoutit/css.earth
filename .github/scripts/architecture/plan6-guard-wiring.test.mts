@@ -34,7 +34,7 @@ test('both authoring trees remain leaves for production, type imports and outsid
   }
 });
 
-import { readFileSync } from 'node:fs';
+import { readFileSync, globSync, mkdtempSync, mkdirSync, writeFileSync, rmSync } from 'node:fs';
 import ts from 'typescript';
 
 test('system orbit preparation imports its parser from the objects owner', () => {
@@ -51,7 +51,6 @@ test('system orbit preparation imports its parser from the objects owner', () =>
   assert.deepEqual(imports, [{ owner: "'@cssearth/objects'", original: 'parseSystemOrbits', typeOnly: false }]);
 });
 
-import { globSync, mkdtempSync, mkdirSync, writeFileSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { resolve, dirname } from 'node:path';
 
@@ -72,7 +71,7 @@ test('the real reader ledger protects generated map-sphere data without tracked 
     visit(tree);
   }
   const files = ['packages/objects/src/constant-fixture.ts',
-    'packages/objects/src/prepared-data/format-reader-ledger.ts', 'site/build/read.mts'];
+    'packages/objects/src/prepared-data/source/format-reader-ledger.ts', 'site/build/read.mts'];
   try {
     for (const file of files) mkdirSync(dirname(resolve(root, file)), { recursive: true });
     writeFileSync(resolve(root, files[0]!), constants.join('\n'));

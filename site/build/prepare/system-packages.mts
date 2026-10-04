@@ -1,5 +1,3 @@
-import { sourceObject } from '@cssearth/objects/sources';
-import { readObjectDescriptorRecord, readSystemText, SYSTEM_TEXT_SCHEMA } from '@cssearth/objects';
 /**
  * A system is an object: a host with the bodies that orbit it has a package, an address and a page of its own
  * (`src/objects/<host>-system/object.json`; the Sun's is `solar-system`). This writes each one from what the repository
@@ -12,7 +10,8 @@ import { readObjectDescriptorRecord, readSystemText, SYSTEM_TEXT_SCHEMA } from '
  *
  * Usage: node site/build/prepare/system-packages.mts [host id ...]   (no ids: every system)
  */
-import { OBJECT_SCHEMA } from '@cssearth/objects';
+import { sourceObject } from '@cssearth/objects/sources';
+import { readObjectDescriptorRecord, readSystemText, SYSTEM_TEXT_SCHEMA, OBJECT_SCHEMA } from '@cssearth/objects';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { SCENE_OBJECTS } from '../../objects.mts';

@@ -2,20 +2,12 @@ import assert from "node:assert/strict";
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 
-import { prepareAstrometricSkySceneRegistration } from "@cssearth/bake/objects/scene";
-import {
-  ICRS_TO_GALACTIC,
-  multiplyMatrices,
-  transformDirection,
-  transposeMatrix,
-} from "@cssearth/bake/objects/scene";
+import { prepareAstrometricSkySceneRegistration, ICRS_TO_GALACTIC, multiplyMatrices, transformDirection, transposeMatrix, prepareEclipticPresentationFrame } from "@cssearth/bake/objects/scene";
 import {
   requireBodyFixedEclipticNorth,
   requireBodyFixedSunDirection,
   requireBodyFixedToIcrf,
 } from "./solar-geometry.mts";
-import { prepareEclipticPresentationFrame } from
-  "@cssearth/bake/objects/scene";
 import * as solarGeometry from './solar-geometry.mts';
 
 // IAU 1976 obliquity at J2000 (84381.448 arcseconds): the J2000 ecliptic north

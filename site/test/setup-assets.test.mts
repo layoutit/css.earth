@@ -156,4 +156,3 @@ test("a connection that drops while the body streams is retried, and a failure n
     assert.equal(drops, 4);
   } finally { await rm(root, { recursive: true, force: true }); }
 });
-

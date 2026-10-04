@@ -1,14 +1,8 @@
 import { parseObjectDescriptor, readSourceManifestInputs, readObjectContentPanel, parseFacilityEmblemLibrary, parseFacilityEmblemImage } from '@cssearth/objects';
-import { contextLineages } from '@cssearth/bake/sources';
-import { spatialSourceCitations } from '@cssearth/bake/sources';
-import { sourceResolver, parseSourceBinding } from '@cssearth/objects/sources';
-import { PREPARED_EXPLORATION_SCHEMA, PREPARED_SOURCES_SCHEMA, compileSourceUsage, sourceCredits } from '@cssearth/objects/provenance';
-import type { SourceUse, SourceUsageObject } from '@cssearth/objects/provenance';
-import { parsePreparedSources } from '@cssearth/objects/provenance';
-import { readSourceCatalog } from '@cssearth/bake/sources';
-import { sourceInventory, metadataCitations, factsheetCitations } from '@cssearth/bake/sources';
-import { verifyFactsheetSources } from '@cssearth/bake/sources';
-import { sourcePath } from '@cssearth/objects/sources';
+import { contextLineages, spatialSourceCitations, readSourceCatalog, sourceInventory, metadataCitations, factsheetCitations, verifyFactsheetSources } from '@cssearth/bake/sources';
+import { sourceResolver, parseSourceBinding, sourcePath } from '@cssearth/objects/sources';
+import { PREPARED_EXPLORATION_SCHEMA, PREPARED_SOURCES_SCHEMA, compileSourceUsage, sourceCredits, parsePreparedSources, explorationRecord, explorationArray, explorationText, parseAgencies, parseCapture, validateCapture, parseExplorationCatalog, compileContributions, parsePreparedExploration, parseExplorationImage, CONTEXT_ROUTE, DATASET_ROUTES } from '@cssearth/objects/provenance';
+import type { SourceUse, SourceUsageObject, ExplorationImage } from '@cssearth/objects/provenance';
 import type { SourceInventoryEntry } from '@cssearth/bake/sources';
 import { existsSync } from 'node:fs';
 import { readFile } from 'node:fs/promises';
@@ -16,17 +10,12 @@ import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { RUNTIME_ASSET_ORIGIN } from '@cssearth/bake/objects/sources';
 import sharp from 'sharp';
-import { explorationRecord, explorationArray, explorationText, parseAgencies, parseCapture, validateCapture, parseExplorationCatalog } from '@cssearth/objects/provenance';
-import { compileContributions } from '@cssearth/objects/provenance';
-import { parsePreparedExploration, parseExplorationImage } from '@cssearth/objects/provenance';
-import type { ExplorationImage } from '@cssearth/objects/provenance';
 import { bodyLineage } from '@cssearth/bake/objects/lineage';
 import { writePreparedSet } from '@cssearth/bake/delivery';
 import { restoreFactsheetEvidence } from '@cssearth/bake/objects/acquisition';
 import type { FactsheetSourceTransport } from '@cssearth/bake/objects/acquisition';
 import { prepareVolumePresentations, readPreparedVolumes, volumePresentationCompilerClosure } from './prepare-volume-presentation.mts';
 import { readPreparedObjects } from '@cssearth/objects/node';
-import { CONTEXT_ROUTE, DATASET_ROUTES } from '@cssearth/objects/provenance';
 
 const SCENE_OBJECTS = readPreparedObjects(resolve(import.meta.dirname, '../../..')).sceneObjects;
 

@@ -1,4 +1,3 @@
-import { parseObjectText } from '@cssearth/objects';
 /** Check what the preparation chain's later steps read, before its long bake, so a bad input fails in seconds.
  *
  *   node site/build/prepare/check-preparation-inputs.mts <object-id>...
@@ -11,6 +10,7 @@ import { parseObjectText } from '@cssearth/objects';
  *   run). Each file that differs from the Sun's inventory is restored from R2 by hash, as `pnpm setup:assets` does,
  *   except the files the world step writes itself, and its page data is derived when missing. A run that prepares the
  *   Sun skips this. */
+import { parseObjectText } from '@cssearth/objects';
 import { access, readdir, readFile, stat } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';

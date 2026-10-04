@@ -1,11 +1,10 @@
-import { requirePreparedData, parsePreparedObjectRuntime, type ObjectRuntimeDefinition } from '@cssearth/objects';
+import { requirePreparedData, parsePreparedObjectRuntime, type ObjectRuntimeDefinition, PREPARED_PRESENTATION_SCHEMA } from '@cssearth/objects';
 
 import { requireRecord, requireArray } from "@cssearth/core";
 import { loadObjectTestDefinition } from '@cssearth/objects/node/contract';
 import assert from "node:assert/strict";
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
-import { PREPARED_PRESENTATION_SCHEMA } from '@cssearth/objects';
 import { requirePreparedPresentation } from "@cssearth/bake/presentation";
 
 type FixtureVariant = { when: Record<string, string | number | boolean | null>; required: string[]; writes: unknown[]; materials: unknown[] };

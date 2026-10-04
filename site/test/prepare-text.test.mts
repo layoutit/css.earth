@@ -15,4 +15,3 @@ test('a run for named objects shows each warning about them once, not the catalo
   assert.deepEqual(reviewWarnings([standing, shared, standing, shared], ['aquitania', 'siegena']), [shared]);
   assert.deepEqual(reviewWarnings([standing, shared, standing], []), [standing, shared], 'a full run shows every object');
 });
-

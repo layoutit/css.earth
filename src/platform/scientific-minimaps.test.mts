@@ -59,4 +59,3 @@ test('nearest, categorical and facet minimaps keep the smaller of lossless and l
   assert.deepEqual(await readFile(path),original);
   assert.deepEqual(await readFile(resolve(f.outputDirectory,'surfaces.json')),sourceBytes);
 });
-

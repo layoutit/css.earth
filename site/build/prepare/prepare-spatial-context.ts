@@ -1,18 +1,15 @@
-import { readWorldContextSourceSelection, readStellarDotMeasurements } from '@cssearth/objects';
+import { readWorldContextSourceSelection, readStellarDotMeasurements, isPlacedClassification, mapLabel, NEUTRAL_CATALOGUE_COLOR, OBJECT_TREE_ROOT, parseObjectDescriptor, worldOrbitBankRegions, systemViewFile, worldOrbitBanks } from '@cssearth/objects';
 import { mkdir, readFile, readdir, rm, writeFile } from 'node:fs/promises';
 import { basename, dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { gunzipSync } from 'node:zlib';
 import { BODIES, EXOPLANET_IDS, HOSTED_PLANET_IDS, M_PER_AU, M_PER_KM, SOLAR_EFFECTIVE_TEMPERATURE_K, SOLAR_RADIUS_M, STAR_IDS, isSceneSatellite, sceneSatelliteStateKm, starAstrometry } from '@cssearth/astronomy';
 import type { StarId } from '@cssearth/astronomy';
-import { isPlacedClassification, mapLabel, NEUTRAL_CATALOGUE_COLOR, OBJECT_TREE_ROOT, parseObjectDescriptor } from '@cssearth/objects';
 import { packPreparedBinary, readCatalog, readPreparedObjects } from '@cssearth/objects/node';
-import { worldOrbitBankRegions } from '@cssearth/objects';
 import { prepareSceneDistance } from '@cssearth/bake/navigation';
 import { plainDotBank } from './plain-dot-bank.mts';
 import { parseWorldContextSource, PLAIN_STAR_DOT_BANK, RETIRED_PLAIN_STAR_DOT_BANK, plainStarDotBank, prepareWorldContext, summarizeWorldContext, worldSystemViews } from '@cssearth/bake/world-context';
 import { writeCatalogueBank } from '@cssearth/bake/volume/node';
-import { systemViewFile, worldOrbitBanks } from '@cssearth/objects';
 import type { OrbitalState, Vector3, WorldContextBodyFact } from '@cssearth/bake/world-context';
 import type { PreparedOrbitCenter as WorldContextOrbitCenter } from '@cssearth/objects';
 
