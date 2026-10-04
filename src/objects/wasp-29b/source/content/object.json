@@ -49,7 +49,7 @@
   },
   "datasets": {
     "titleKey": "datasets",
-    "defaultDataset": "shape",
+    "defaultDataset": "dayside",
     "controls": [
       {
         "id": "shape",
@@ -65,6 +65,66 @@
         },
         "falseColor": false,
         "notes": "No image or color of WASP-29 b is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the color of wasp-29's light, as its color dataset measures it."
+      },
+      {
+        "id": "dayside",
+        "label": "Day side",
+        "qualification": "Measured in eclipse: Deming et al. 2023, dayside brightness temperature at 4.5 µm (uniform reanalysis of Spitzer's eclipses, CDS J/AJ/165/104 table 2)",
+        "thumbnail": "wasp-29b-dataset-dayside.webp",
+        "surface": "wasp-29b-surface-dayside@2x.webp",
+        "poles": "wasp-29b-poles-dayside@2x.webp",
+        "source": {
+          "id": "wasp-29b-dayside-temperature",
+          "path": "../manifest.json",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....165..104D/abstract"
+        },
+        "falseColor": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Brightness temperature",
+          "labels": [
+            "300",
+            "1650",
+            "3000"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                13,
+                8,
+                135
+              ],
+              [
+                126,
+                3,
+                168
+              ],
+              [
+                204,
+                71,
+                120
+              ],
+              [
+                248,
+                149,
+                64
+              ],
+              [
+                240,
+                249,
+                33
+              ]
+            ],
+            "labels": [
+              "300",
+              "1650",
+              "3000"
+            ]
+          },
+          "meta": "K",
+          "sourceUrl": "https://ui.adsabs.harvard.edu/abs/2023AJ....165..104D/abstract"
+        },
+        "notes": "The day side of WASP-29 b is 913 K: its brightness temperature at 4.5 µm (Spitzer IRAC), measured from the light lost when the planet passes behind its star. The false color shows that one number over the day side, on a scale every planet shown this way shares. The night side is not measured and is left blank. With shadows on, the star's light darkens the night half."
       }
     ]
   },

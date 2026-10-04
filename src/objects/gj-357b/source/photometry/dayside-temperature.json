@@ -1,0 +1,11 @@
+{
+  "schema": "cssearth-dayside-temperature@1",
+  "planet": "gj-357b",
+  "temperatureK": {
+    "value": 923,
+    "lower": 884,
+    "upper": 962
+  },
+  "wavelengthMicrons": 15,
+  "source": "Zgraggen et al. 2026, dayside brightness temperature at 15 µm, 923 +39 -38 K, from an occultation depth of 200.5 +/- 12.7 ppm in F1500W (abstract). the paper's one band; it calls this day side anomalously hot for the planet's orbit; the larger of its two errors is kept. https://arxiv.org/abs/2609.30552"
+}

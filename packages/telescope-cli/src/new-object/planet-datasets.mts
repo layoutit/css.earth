@@ -23,6 +23,7 @@ import { parseCieTable, hostLitGray } from '@cssearth/bake/objects/color';
 import { readCie1931ColorMatching } from '@cssearth/bake/objects/sources';
 import { HOSTED_PLANET_STYLESHEET } from './new-hosted-planet.mts';
 import { installPhaseCurveDataset, type PhaseCurveEntry } from './phase-curve-dataset.mts';
+import { daysideLine, installDaysideDataset } from './thermal/dayside-dataset.mts';
 import { WORKSPACE } from '@cssearth/telescope/node';
 import { installSimulationDataset, restoreSimulationField, simulationPaths, simulationRecipe, simulationRelease, type SimulationEntry } from './simulation/simulation-dataset.mts';
 import { loadNetcdfLonLatField } from '@cssearth/bake/objects/raster';
@@ -84,15 +85,17 @@ export function parseSpitzerEclipses(table: string, planet: string): EmissionRow
   }
   return rows;
 }
-/** From this eccentricity a planet's temperature swings round its orbit, and a single eclipse is one moment of it. */
-const ECCENTRIC_ORBIT = 0.3;
+/** From this eccentricity a planet's temperature swings round its orbit, and a single eclipse is one moment of it: the measurement
+ * is shown as the day side at secondary eclipse, never as a glow. Past the second, the swing is so large (HD 80606 b heats by
+ * hundreds of kelvin in hours) that no single temperature is shown. */
+const ECCENTRIC_ORBIT = 0.3, EXTREME_ORBIT = 0.6;
 // One request for the catalogue per archive, however many planets ask.
 const eclipseTables = new WeakMap<Archive, Promise<string>>();
 
 /** The archive's emission rows for a planet and the spec's thermal entry, or undefined with no measured temperature or one too
  * cool to glow (`why` says which). A planet the archive's table lacks is looked up in the Spitzer eclipse catalogue; then
  * `csv` is empty, since the archive's rows are not what the color comes from. */
-export async function thermalFromArchive(archive: Archive, planet: string): Promise<{ rows: EmissionRow[]; csv: string; thermal?: ThermalSpec; why?: string }> {
+export async function thermalFromArchive(archive: Archive, planet: string): Promise<{ rows: EmissionRow[]; csv: string; thermal?: ThermalSpec; cool?: ThermalSpec; why?: string }> {
   let csv = await archive.text(`${NASA_TAP}?${new URLSearchParams({ query: emissionQuery(planet), format: 'csv' })}`);
   let rows = parseEmissionRows(csv), row = pickThermalRow(rows), where = 'NASA Exoplanet Archive emission table';
   if (!row) {
@@ -103,23 +106,43 @@ export async function thermalFromArchive(archive: Archive, planet: string): Prom
     if (pickThermalRow(catalogued)) { rows = catalogued; row = pickThermalRow(catalogued); csv = ''; where = `uniform reanalysis of Spitzer's eclipses, CDS ${SPITZER_ECLIPSES.catalogue} table 2`; }
   }
   if (!row) return { rows, csv, why: "no measured dayside brightness temperature in the archive's emission table or the Spitzer eclipse catalogue" };
-  if (row.temperatureK! <= PLANCK_FLOOR_KELVIN) return { rows, csv, why: `its dayside brightness temperature, ${row.temperatureK} K (${row.label}), is too cool to glow (a black-body color needs over ${PLANCK_FLOOR_KELVIN} K)` };
-  return { rows, csv, thermal: { temperatureK: row.temperatureK!, ...(row.temperatureErrorK === undefined ? {} : { uncertaintyK: row.temperatureErrorK }), wavelengthMicrometres: row.wavelengthMicrometres,
+  const thermal: ThermalSpec = { temperatureK: row.temperatureK!, ...(row.temperatureErrorK === undefined ? {} : { uncertaintyK: row.temperatureErrorK }), wavelengthMicrometres: row.wavelengthMicrometres,
     facility: `${row.facility}${row.instrument ? ` ${row.instrument}` : ''}`.trim(), source: `${row.label}, dayside brightness temperature at ${row.wavelengthMicrometres} µm (${where})`,
-    url: row.url ?? 'https://exoplanetarchive.ipac.caltech.edu/', chosen: `${rows.filter(r => r.temperatureK !== undefined && !r.temperatureLimit).length} measured of ${rows.length} rows; the smallest relative uncertainty, then the longest wavelength` } };
+    url: row.url ?? 'https://exoplanetarchive.ipac.caltech.edu/', chosen: `${rows.filter(r => r.temperatureK !== undefined && !r.temperatureLimit).length} measured of ${rows.length} rows; the smallest relative uncertainty, then the longest wavelength` };
+  // Measured, but too cool for a visible glow: the measurement is returned for the false-color day side (thermal/dayside-dataset.mts).
+  if (row.temperatureK! <= PLANCK_FLOOR_KELVIN) return { rows, csv, cool: thermal, why: `its dayside brightness temperature, ${row.temperatureK} K (${row.label}), is too cool to glow (a black-body color needs over ${PLANCK_FLOOR_KELVIN} K)` };
+  return { rows, csv, thermal };
 }
 
 /** A hot giant's published equilibrium temperature, for the "Expected glow" dataset of a planet nobody has measured: the
  * temperature, the paper that computes it and its address, and which archive row it is. */
-export interface EquilibriumSpec { readonly temperatureK: number; readonly uncertaintyK?: number; readonly source: string; readonly url: string; readonly chosen: string }
+export interface EquilibriumSpec { readonly temperatureK: number; readonly uncertaintyK?: number; readonly source: string; readonly url: string; readonly chosen: string;
+  /** Set for a small planet of a red dwarf: the temperature is the bare-rock maximum for its orbit, not a paper's equilibrium temperature. */
+  readonly rock?: boolean }
 /** How the estimate was tested, said wherever it is shown: Deming et al. (2023) table 2 over table 3, the 120 planets on near-circular orbits. */
 export const EQUILIBRIUM_TEST = 'On 120 hot Jupiters whose day side Spitzer measured, the measured temperature is within 20% of this kind of estimate for 83% (Deming et al. 2023)';
 /** The giants the test covers: Deming et al.'s sample starts at 0.77 Jupiter radii. */
 export const TESTED_GIANT_RADIUS_KM = 0.77 * 71492;
+/** The same kind of estimate for a small planet of a red dwarf: the hottest day side a dark, airless rock can have: the star's
+ * temperature over the square root of a/R_star, times (2/3)^(1/4). Coy et al. (2025, ApJ 987, 22, Table 2) print the measured day side over that maximum for nine such rocks: 0.88 to
+ * 1.07. The planets shown are like those nine: at most 1.5 Earth radii (their largest is 1.38), a star no hotter than 3,600 K
+ * (their hottest is 3,575 K), an irradiation temperature of 480 to 1,930 K. GJ 357 b, measured since, is 1.35: said with the test. */
+export const ROCK_TEST = 'Nine rocky planets of red dwarfs with a measured day side fall within 13% of this kind of estimate (Coy et al. 2025); GJ 357 b, measured since, is 35% above it';
+export const TESTED_ROCK = { radiusKm: 1.5 * 6371, hostKelvin: 3600, irradiationKelvin: [480, 1930] as const, paper: 'https://arxiv.org/abs/2412.06573' };
+/** The bare-rock maximum from the star's temperature and the orbit's a/R*, or why the planet is not like the tested rocks. */
+export function rockEstimate(planetRadiusKm: number, star: { readonly id: string; readonly kelvin: number; readonly source: string }, orbit: { readonly aOverRstar: number; readonly source: string }): { rock?: EquilibriumSpec; why?: string } {
+  if (planetRadiusKm > TESTED_ROCK.radiusKm) return { why: `at ${(planetRadiusKm / 6371).toFixed(2)} Earth radii it is larger than the rocks the estimate was tested on` };
+  if (star.kelvin > TESTED_ROCK.hostKelvin) return { why: `its star, at ${star.kelvin} K, is hotter than the red dwarfs the estimate was tested on` };
+  const irradiation = star.kelvin / Math.sqrt(orbit.aOverRstar), maximum = Math.round(irradiation * (2 / 3) ** 0.25);
+  if (irradiation < TESTED_ROCK.irradiationKelvin[0] || irradiation > TESTED_ROCK.irradiationKelvin[1]) return { why: `its irradiation temperature, ${Math.round(irradiation)} K, is outside the 480 to 1,930 K the estimate was tested on` };
+  return { rock: { rock: true, temperatureK: maximum, source: `computed from ${star.id}'s temperature, ${star.kelvin} K, and the orbit's a/R* ${orbit.aOverRstar}, as T* (R*/a)^(1/2) (2/3)^(1/4)`, url: TESTED_ROCK.paper,
+    chosen: `the bare-rock maximum, no light reflected and no heat carried to the night side; the star's temperature is ${star.source.split(' (')[0]}, a/R* is ${orbit.source.split(' (')[0]}` } };
+}
 
 /** The body README's color paragraph for either dataset. */
 export const thermalColorLine = (thermal: ThermalSpec | EquilibriumSpec, hex: string) => 'wavelengthMicrometres' in thermal
   ? `**Color.** A black body at the ${thermal.temperatureK.toLocaleString('en-US')} K dayside brightness temperature measured in secondary eclipse at ${thermal.wavelengthMicrometres} µm (${thermal.source}): ${hex}. ${thermal.where ? `Read from the paper (${thermal.where}): ` : "Chosen from the archive's emission rows by rule: "}${thermal.chosen}. Reflected starlight is not included.`
+  : thermal.rock ? `**Color.** An estimate, not a measurement: a black body at ${thermal.temperatureK.toLocaleString('en-US')} K, the hottest day side a dark, airless rock can have on its orbit, ${thermal.source}: ${hex}. Chosen by rule: ${thermal.chosen}. ${ROCK_TEST}; see [the expected glow](../../../docs/color-preparation.md#the-expected-glow-of-a-hot-giant). Reflected starlight is not included.`
   : `**Color.** An estimate, not a measurement: a black body at the ${thermal.temperatureK.toLocaleString('en-US')} K equilibrium temperature of ${thermal.source}: ${hex}. Chosen by rule: ${thermal.chosen}. ${EQUILIBRIUM_TEST}; see [the expected glow](../../../docs/color-preparation.md#the-expected-glow-of-a-hot-giant). Reflected starlight is not included.`;
 
 const EQUILIBRIUM_COLUMNS = 'pl_name,pl_eqt,pl_eqterr1,pl_eqterr2,pl_refname,default_flag,pl_pubdate';
@@ -159,16 +182,19 @@ export async function equilibriumFromArchive(archive: Archive, planet: string): 
  * `EquilibriumSpec` makes the "Expected glow" dataset instead: the same color at the temperature its paper computes, said
  * to be an estimate in every text. A measured temperature replaces an estimate; nothing else is replaced. */
 export async function installThermalDataset(files: PackageFiles, id: string, name: string, thermal: ThermalSpec | EquilibriumSpec, csv: string | undefined) {
-  const measured = 'wavelengthMicrometres' in thermal ? thermal : undefined, kelvin = thermal.temperatureK.toLocaleString('en-US');
+  const measured = 'wavelengthMicrometres' in thermal ? thermal : undefined, kelvin = thermal.temperatureK.toLocaleString('en-US'), rock = !measured && (thermal as EquilibriumSpec).rock === true;
+  // What the estimated temperature is, and the published sample that tests it.
+  const basis = rock ? 'the hottest day side a dark, airless rock can have on its orbit' : "the equilibrium temperature its paper computes from its star's light", tested = rock ? ROCK_TEST : EQUILIBRIUM_TEST;
   const o = `src/objects/${id}`, s = `${o}/source`, read = (path: string) => JSON.parse(String(files.get(path))) as Record<string, any>;
   const cmf = parseCieTable((await readCie1931ColorMatching()).toString('utf8'), 3);
   const cited: Cited = { value: thermal.temperatureK, ...(thermal.uncertaintyK === undefined ? {} : { uncertainty: thermal.uncertaintyK }), source: thermal.source, url: thermal.url };
   const color = planckChoice(id, cited, measured ? `Its day side's brightness temperature is measured in secondary eclipse at ${measured.wavelengthMicrometres} µm (${measured.facility}) and nobody has imaged it`
-    : `Nobody has measured its heat or imaged it; this is the equilibrium temperature its paper computes from its star's light, an estimate`, [], cmf, 'desaturate');
+    : `Nobody has measured its heat or imaged it; this is ${basis}, an estimate`, [], cmf, 'desaturate');
   const record = { ...color.record, temperature: { ...(color.record.temperature as Record<string, unknown>), chosen: thermal.chosen, ...(measured ? { wavelengthMicrometres: measured.wavelengthMicrometres, facility: measured.facility } : { estimate: true }), ...(csv ? { rows: 'photometry/emission-spectroscopy.csv' } : {}) } };
   files.set(`${s}/photometry/thermal-color.json`, json(record));
   if (csv) files.set(`${s}/photometry/emission-spectroscopy.csv`, csv);
-  const science: { kind: string; qualification: string } = !measured ? { kind: 'equilibrium-thermal-color', qualification: `An estimate, not a measurement: the color of a black body at the equilibrium temperature ${kelvin} K (${thermal.source}), uniform over the disc. ${EQUILIBRIUM_TEST}.` }
+  const science: { kind: string; qualification: string } = !measured ? { kind: 'equilibrium-thermal-color', qualification: rock ? `An estimate, not a measurement: the color of a black body at ${kelvin} K, ${basis} (${thermal.source}), uniform over the disc. ${tested}.`
+      : `An estimate, not a measurement: the color of a black body at the equilibrium temperature ${kelvin} K (${thermal.source}), uniform over the disc. ${EQUILIBRIUM_TEST}.` }
     : { kind: 'dayside-thermal-color', qualification: `Color of a black body at the dayside brightness temperature ${thermal.temperatureK.toLocaleString('en-US')} K measured in secondary eclipse at ${measured.wavelengthMicrometres} µm (${thermal.source}), uniform over the disc and lit by its star so the day side faces it. The planet is unresolved: no map is implied, and reflected starlight is not included.` };
   const loaded = await loadStellarPhotometricColor(async path => { const value = files.get(`${s}/${path}`); if (value === undefined) throw new Error(`${id}: ${path} is not in the generated package.`); return Buffer.from(value); }, science, 'photometry/thermal-color.json');
   const colorHex = `#${loaded.color.srgb.map(value => value.toString(16).padStart(2, '0')).join('')}`;
@@ -189,15 +215,15 @@ export async function installThermalDataset(files: PackageFiles, id: string, nam
   files.set(`${s}/preparation/geometry.json`, json(geometry));
   const content = read(`${s}/content/object.json`);
   content.datasets = { titleKey: 'datasets', defaultDataset: 'thermal', controls: [{ id: 'thermal', label: measured ? 'Thermal glow' : 'Expected glow',
-    qualification: measured ? `Black-body color at its measured dayside temperature, ${kelvin} K. The disc itself is unresolved.` : `An estimate, not a measurement: black-body color at its published equilibrium temperature, ${kelvin} K.`,
+    qualification: measured ? `Black-body color at its measured dayside temperature, ${kelvin} K. The disc itself is unresolved.` : rock ? `An estimate, not a measurement: black-body color at ${kelvin} K, the bare-rock maximum for its orbit.` : `An estimate, not a measurement: black-body color at its published equilibrium temperature, ${kelvin} K.`,
     thumbnail: `${id}-dataset-thermal.webp`, surface: `${id}-surface-thermal@2x.webp`, poles: `${id}-poles-thermal@2x.webp`,
     source: { id: `${id}-thermal-color`, path: '../manifest.json', url: thermal.url }, falseColor: false,
     notes: measured ? `The color of ${name}'s heat: a black body at the dayside brightness temperature measured in secondary eclipse at ${measured.wavelengthMicrometres} µm (${measured.facility}). Its star lights the day side; the night side is not measured. Reflected starlight is not included.`
-      : `Nobody has measured ${name}'s heat. This is the color of a black body at ${kelvin} K, the equilibrium temperature its paper computes from its star's light (${thermal.source}). ${EQUILIBRIUM_TEST}. Its star lights the day side. Reflected starlight is not included.` }] };
+      : `Nobody has measured ${name}'s heat. This is the color of a black body at ${kelvin} K, ${basis} (${thermal.source}). ${tested}. Its star lights the day side. Reflected starlight is not included.` }] };
   files.set(`${s}/content/object.json`, json(content));
   const text = read(`${o}/text.json`);
   text.datasets = { thermal: measured ? { title: 'Dayside heat', detail: 'From its dayside temperature', summary: `The color of a black body at the ${kelvin} K day side measured in eclipse.` }
-    : { title: 'Estimated heat', detail: 'An estimate, not measured', summary: `Not measured: the color of a black body at the ${kelvin} K its paper computes from its star's light.` } };
+    : { title: 'Estimated heat', detail: 'An estimate, not measured', summary: rock ? `Not measured: the color of a black body at the ${kelvin} K a dark, airless rock would reach there.` : `Not measured: the color of a black body at the ${kelvin} K its paper computes from its star's light.` } };
   files.set(`${o}/text.json`, json(text));
   const manifest = read(`${s}/manifest.json`);
   const inputs = [{ id: `${id}-thermal-color`, path: 'photometry/thermal-color.json', origin: thermal.url, credit: `${thermal.source}; CIE 1931 2° observer`, license: 'Factual numerical measurements; source attribution retained',
@@ -216,6 +242,7 @@ export async function installThermalDataset(files: PackageFiles, id: string, nam
     files.set(`${s}/preparation/acquisition.json`, json(plan));
   }
   return { hex: colorHex, credit: measured ? `Color: a black body at the ${kelvin} K dayside brightness temperature of ${thermal.source}, through the CIE 1931 2° color-matching functions.`
+    : rock ? `Color: an estimate, a black body at ${kelvin} K, the bare-rock maximum ${thermal.source}, through the CIE 1931 2° color-matching functions.`
     : `Color: an estimate, a black body at the ${kelvin} K equilibrium temperature of ${thermal.source}, through the CIE 1931 2° color-matching functions.`, checked: CHECKED };
 }
 
@@ -309,7 +336,7 @@ export async function rebuildExistingDatasets(root: string, ids: readonly string
     const o = resolve(root, 'src/objects', id), files: PackageFiles = new Map();
     for (const path of DATASET_REBUILD_FILES) files.set(`src/objects/${id}/${path}`, await readFile(resolve(o, path), 'utf8'));
     const before = new Map(files);
-    const descriptor = JSON.parse(String(files.get(`src/objects/${id}/source/content/object.json`))) as { displayName: string }, body = JSON.parse(await readFile(resolve(root, 'packages/astronomy/data/bodies', `${id}.json`), 'utf8')) as { physical?: { parent?: string; meanRadiusKm?: number }; hostedOrbit?: { eccentricity?: number } };
+    const descriptor = JSON.parse(String(files.get(`src/objects/${id}/source/content/object.json`))) as { displayName: string }, body = JSON.parse(await readFile(resolve(root, 'packages/astronomy/data/bodies', `${id}.json`), 'utf8')) as { physical?: { parent?: string; meanRadiusKm?: number }; hostedOrbit?: { eccentricity?: number; semiMajorAxisStellarRadii?: number; sources?: { shape?: string } } };
     const raster = JSON.parse(String(files.get(`src/objects/${id}/source/preparation/raster.json`))) as { emission?: unknown; surfaces: { science: { kind: string; hostLight?: unknown } }[] };
     const kind = raster.surfaces[0]?.science.kind;
     // A self-luminous body (an imaged young planet, drawn emissive) shines with its own heat; no starlight to tint.
@@ -358,20 +385,41 @@ export async function rebuildExistingDatasets(root: string, ids: readonly string
       if (raster.emission !== undefined) { say(`${id}: self-luminous, its own light is its color`); continue; }
       // One eclipse of a planet on a very eccentric orbit catches it near its closest approach: not its day side round the orbit.
       const eccentricity = body.hostedOrbit?.eccentricity ?? 0;
-      if (eccentricity >= ECCENTRIC_ORBIT) { say(`${id}: its orbit is eccentric (e ${eccentricity}), so one temperature is not its day side round the orbit`); continue; }
+      if (eccentricity >= EXTREME_ORBIT) { say(`${id}: its orbit is so eccentric (e ${eccentricity}) that one temperature is a moment of it, not its day side`); continue; }
+      const atEclipse = eccentricity >= ECCENTRIC_ORBIT;
       // A name the archive cannot be asked for (a Greek letter in it) is one planet's line, not the end of the run.
       // A day side read from its paper (--thermal-entries) is taken as given; the archives are asked for the others.
       const given = thermals.get(id);
-      if (given && given.temperatureK <= PLANCK_FLOOR_KELVIN) { say(`${id}: its dayside brightness temperature, ${given.temperatureK} K, is too cool to glow (a black-body color needs over ${PLANCK_FLOOR_KELVIN} K)`); continue; }
-      const asked = given ? { csv: '', thermal: given, why: undefined } : await thermalFromArchive(archive, descriptor.displayName).catch((error: Error) => ({ csv: '', thermal: undefined, why: `the archive could not be asked for ${descriptor.displayName} (${error.message.split('\n')[0]!.slice(0, 80)})`, failed: true }));
+      const asked = given ? { csv: '', ...(given.temperatureK <= PLANCK_FLOOR_KELVIN ? { cool: given, thermal: undefined } : { thermal: given }), why: undefined } : await thermalFromArchive(archive, descriptor.displayName).catch((error: Error) => ({ csv: '', thermal: undefined, why: `the archive could not be asked for ${descriptor.displayName} (${error.message.split('\n')[0]!.slice(0, 80)})`, failed: true }));
       if ('failed' in asked) { say(`${id}: ${asked.why}`); continue; }
       const { csv, thermal, why } = asked;
+      // A measured day side that cannot be a glow (too cool, or one moment of an eccentric orbit) is its own false-color dataset.
+      const lens = 'cool' in asked && asked.cool ? asked.cool : atEclipse ? thermal : undefined;
+      if (lens) {
+        if (kind !== 'neutral-shape') { say(`${id}: keeps its ${kind} dataset`); continue; }
+        installDaysideDataset(files, id, descriptor.displayName, lens, atEclipse);
+        const readme = resolve(o, 'README.md'), text = await readFile(readme, 'utf8'), line = daysideLine(lens, atEclipse), old = text.split('\n').find(row => row.startsWith('**Measured day side.**'));
+        await writeFile(readme, old !== undefined ? text.replace(old, () => line) : text.replace('\n**Charts.**', () => `\n${line}\n\n**Charts.**`));
+        await writeWithMarker(root, files, id, true);
+        say(`${id}: measured day side ${lens.temperatureK} K (${lens.wavelengthMicrometres} µm, ${lens.facility})${atEclipse ? ', at secondary eclipse' : ''}, drawn in false color`);
+        continue;
+      }
+      if (atEclipse) { say(`${id}: its orbit is eccentric (e ${eccentricity}) and no day side is measured; an estimate would hold for no moment of it`); continue; }
       let chosen: ThermalSpec | EquilibriumSpec | undefined = thermal;
       if (!chosen && mode === 'expected-glow') {
         // The estimate is shown only for the planets its test covers: giants hot enough to glow.
         const radiusKm = body.physical?.meanRadiusKm ?? 0;
-        if (radiusKm < TESTED_GIANT_RADIUS_KM) { say(`${id}: ${why}; at ${(radiusKm / 71492).toFixed(2)} Jupiter radii it is smaller than the giants the estimate was tested on`); continue; }
-        const { equilibrium, why: none } = await equilibriumFromArchive(archive, descriptor.displayName).catch((error: Error) => ({ equilibrium: undefined, why: `the archive could not be asked for its equilibrium temperature (${error.message.split('\n')[0]!.slice(0, 80)})` }));
+        if (radiusKm < TESTED_GIANT_RADIUS_KM) {
+          // A small planet: the bare-rock maximum, for planets like the red-dwarf rocks that test it.
+          const hostId = body.physical?.parent, aOverRstar = body.hostedOrbit?.semiMajorAxisStellarRadii;
+          const star = hostId ? JSON.parse(await readFile(resolve(root, 'src/objects', hostId, 'source/measurements.json'), 'utf8').catch(() => '{}')) as { effectiveTemperatureK?: number; effectiveTemperatureSource?: string } : {};
+          if (!hostId || !(aOverRstar! > 0) || !(star.effectiveTemperatureK! > 0)) { say(`${id}: ${why}; no star temperature or a/R* in its records for the bare-rock estimate`); continue; }
+          const { rock, why: unlike } = rockEstimate(radiusKm, { id: hostId, kelvin: star.effectiveTemperatureK!, source: star.effectiveTemperatureSource ?? 'its record' }, { aOverRstar: aOverRstar!, source: body.hostedOrbit?.sources?.shape ?? 'its record' });
+          if (!rock) { say(`${id}: ${why}; ${unlike}`); continue; }
+          if (rock.temperatureK <= PLANCK_FLOOR_KELVIN) { say(`${id}: ${why}; a bare rock there reaches ${rock.temperatureK} K, too cool to glow`); continue; }
+          chosen = rock;
+        }
+        const { equilibrium, why: none } = chosen ? { equilibrium: chosen as EquilibriumSpec, why: undefined } : await equilibriumFromArchive(archive, descriptor.displayName).catch((error: Error) => ({ equilibrium: undefined, why: `the archive could not be asked for its equilibrium temperature (${error.message.split('\n')[0]!.slice(0, 80)})` }));
         if (!equilibrium) { say(`${id}: ${why}, and ${none}`); continue; }
         if (equilibrium.temperatureK <= PLANCK_FLOOR_KELVIN) { say(`${id}: ${why}; its equilibrium temperature, ${equilibrium.temperatureK} K, is too cool to glow`); continue; }
         chosen = equilibrium;
@@ -381,7 +429,7 @@ export async function rebuildExistingDatasets(root: string, ids: readonly string
       const { hex } = await installThermalDataset(files, id, descriptor.displayName, chosen, 'wavelengthMicrometres' in chosen ? csv : undefined);
       const readme = resolve(o, 'README.md'), text = await readFile(readme, 'utf8'), color = text.split('\n').find(line => line.startsWith('**Color.**'));
       if (color !== undefined) await writeFile(readme, text.replace(color, () => thermalColorLine(chosen, hex)));
-      say('wavelengthMicrometres' in chosen ? `${id}: thermal glow ${hex} at ${chosen.temperatureK} K (${chosen.wavelengthMicrometres} µm, ${chosen.facility})` : `${id}: expected glow ${hex} at ${chosen.temperatureK} K, an estimate (${chosen.source})`);
+      say('wavelengthMicrometres' in chosen ? `${id}: thermal glow ${hex} at ${chosen.temperatureK} K (${chosen.wavelengthMicrometres} µm, ${chosen.facility})` : `${id}: expected glow ${hex} at ${chosen.temperatureK} K, an estimate${chosen.rock ? ' for a bare rock' : ''} (${chosen.source})`);
     } else {
       if (kind !== 'neutral-shape') { lines.push(`${id}: keeps its ${kind} dataset`); continue; }
       if (raster.surfaces[0]!.science.hostLight !== undefined) { lines.push(`${id}: already lit by its host`); if ([...files].some(([path, value]) => before.get(path) !== value)) for (const [path, value] of files) { await mkdir(dirname(resolve(root, path)), { recursive: true }); await writeFile(resolve(root, path), value); } continue; }

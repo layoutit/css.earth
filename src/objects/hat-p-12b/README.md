@@ -10,6 +10,8 @@ It is the only planet known around Komondor. Its orbit and size follow Hartman e
 
 **Color.** No image or measured color exists. The neutral gray is lit by hat-p-12's measured color (#ffd1b6, the color dataset of hat-p-12 (src/objects/hat-p-12/source/photometry/stellar-color.json)) at the gray's own brightness.
 
+**Measured day side.** The page opens on the one thing measured of its surface: a dayside brightness temperature of 959 K at 3.6 µm (Deming et al. 2023, dayside brightness temperature at 3.6 µm (uniform reanalysis of Spitzer's eclipses, CDS J/AJ/165/104 table 2); [record](source/photometry/dayside-temperature.json)). Chosen by rule: 2 measured of 2 rows; the smallest relative uncertainty, then the longest wavelength. The `measured-dayside` format paints the hemisphere under the star in false color at that temperature, on the 300 to 3,000 K scale every measured day side shares, and leaves the night hemisphere blank. It is too cool for a visible glow, so no black-body color is shown.
+
 **Charts.** The orbits of Komondor's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (50, 76, 77), folded onto its orbit. Upper limits and rows without an error are left out.
 
 ## Evidence

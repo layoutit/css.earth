@@ -10,6 +10,8 @@ It is the only planet known around Sansuna. Its orbit and size follow Bonomo et 
 
 **Color.** No image or measured color exists. The neutral gray is lit by hat-p-34's measured color (#f0eeff, the color dataset of hat-p-34 (src/objects/hat-p-34/source/photometry/stellar-color.json)) at the gray's own brightness.
 
+**Measured day side.** The page opens on the one thing measured of its surface: a dayside brightness temperature of 2,852 K at 4.5 µm, at secondary eclipse, (Deming et al. 2023, dayside brightness temperature at 4.5 µm (uniform reanalysis of Spitzer's eclipses, CDS J/AJ/165/104 table 2); [record](source/photometry/dayside-temperature.json)). Chosen by rule: 1 measured of 1 rows; the smallest relative uncertainty, then the longest wavelength. The `measured-dayside` format paints the hemisphere under the star in false color at that temperature, on the 300 to 3,000 K scale every measured day side shares, and leaves the night hemisphere blank. The orbit is eccentric, so this is the day side at the moment of eclipse, not round the orbit. No black-body glow is shown, since the temperature holds for one moment of the orbit.
+
 **Charts.** The orbits of Sansuna's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (41, 54, 81), folded onto its orbit. Upper limits and rows without an error are left out.
 
 ## Evidence

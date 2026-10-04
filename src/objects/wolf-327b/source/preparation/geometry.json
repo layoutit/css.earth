@@ -7,14 +7,14 @@
     "latitudeSegments": 16,
     "longitudeSegments": 32,
     "surface": {
-      "url": "/scenes/wolf-327b/wolf-327b-surface-shape@2x.webp",
+      "url": "/scenes/wolf-327b/wolf-327b-surface-thermal@2x.webp",
       "width": 1024,
       "height": 768
     },
     "surfaceLatitudeHeight": 512,
     "packedBandGutter": 8,
     "poles": {
-      "url": "/scenes/wolf-327b/wolf-327b-poles-shape@2x.webp",
+      "url": "/scenes/wolf-327b/wolf-327b-poles-thermal@2x.webp",
       "width": 512,
       "height": 256
     },
@@ -22,7 +22,7 @@
     "polarRadiusScale": 1.035,
     "polarOffset": 0.1,
     "uv": "cell",
-    "color": "#bd9262"
+    "color": "#ff6300"
   },
   "projection": {
     "tileSize": 50,

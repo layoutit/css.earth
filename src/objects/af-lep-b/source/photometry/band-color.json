@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-disc-band-color@1",
+  "objectId": "af-lep-b",
+  "unit": "µJy",
+  "source": {
+    "citation": "De Rosa et al. (2023); Mesa et al. (2023), as compiled in Best, Liu, Magnier & Dupuy (2024), The UltracoolSheet v2.1 (Zenodo); zero points from the SVO Filter Profile Service",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...672A..94D",
+    "locator": "UltracoolSheet Main.csv, AF Lep b: 2MASS Ks 16.75 +/- 0.07 (DeRo23), MKO H 18.61 +/- 0.36 (Mesa23), MKO J 19.22 +/- 0.33 (Mesa23); SVO 2MASS/2MASS.Ks 666.8 Jy, MKO/NSFCam.H 1034.8 Jy, MKO/NSFCam.J 1544.0 Jy"
+  },
+  "bands": [
+    {
+      "band": "2MASS Ks",
+      "wavelengthMicrometres": 2.159,
+      "value": 133,
+      "error": 8.6
+    },
+    {
+      "band": "MKO H",
+      "wavelengthMicrometres": 1.614,
+      "value": 37.23,
+      "error": 12
+    },
+    {
+      "band": "MKO J",
+      "wavelengthMicrometres": 1.2417,
+      "value": 31.67,
+      "error": 9.6
+    }
+  ],
+  "displayRange": [
+    0,
+    133
+  ],
+  "displayRangeSource": "This planet alone, from zero to its brightest band (2MASS Ks), so the color shows its band ratios; brightness is not compared across planets at different distances."
+}

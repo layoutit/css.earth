@@ -9,7 +9,7 @@
  *   node packages/telescope-cli/src/new-object/new-object-cli.mts --rename <star id>...
  *   node packages/telescope-cli/src/new-object/new-object-cli.mts --retext <host id>... | --charts <host id>... | --retime <host id>...
  *   node packages/telescope-cli/src/new-object/new-object-cli.mts --star-limb <id>... [--bake]
- *   node packages/telescope-cli/src/new-object/new-object-cli.mts --draft-photometry <id>... --out entries.json
+ *   node packages/telescope-cli/src/new-object/new-object-cli.mts --draft-photometry <id>[="name in the sheet"]... --out entries.json
  *
  * generates complete packages from a star spec (new-object/spec.mts): Gaia DR3 placement, the color dataset from the best archived
  * spectrum with its cross-check, the model limb law, the catalogue color, marker, manifest, acquisition plan, source records and
@@ -54,7 +54,9 @@ if (process.argv[1] && import.meta.url === pathToFileURL(realpathSync(process.ar
     const { readFile, writeFile } = await import('node:fs/promises'), { draftUltracoolPhotometry } = await import('./archives/ultracool.mts'), { liveArchive } = await import('./archives/archives.mts');
     const out = option('out'), ids = args.filter((argument, i) => !argument.startsWith('--') && args[i - 1] !== '--out');
     if (!out || !ids.length) throw new TypeError('Usage: new-object --draft-photometry ID... --out entries.json');
-    const planets = await Promise.all(ids.map(async id => ({ id, name: String((JSON.parse(await readFile(`src/objects/${id}/source/content/object.json`, 'utf8')) as { displayName: string }).displayName) })));
+    // `ID="name in the sheet"` names a planet the sheet lists another way (VHS 1256-1257 b is its "VHS J125601.92-125723.9 b").
+    const planets = await Promise.all(ids.map(async token => { const [id, alias] = token.split('=') as [string, string | undefined];
+      return { id, name: String((JSON.parse(await readFile(`src/objects/${id}/source/content/object.json`, 'utf8')) as { displayName: string }).displayName), aliases: alias ? [alias] : [] }; }));
     const { entries, notes } = await draftUltracoolPhotometry(liveArchive, planets);
     await writeFile(out, `${JSON.stringify(entries, null, 2)}\n`);
     process.stdout.write(`${entries.map(entry => `${entry.id}: ${entry.photometry.bands.map(band => `${band.band} ${band.value} µJy`).join(', ')}`).join('\n')}\n${notes.join('\n')}\n${entries.length} of ${ids.length} planets drafted to ${out}; apply with --photometry ${out}\n`);
