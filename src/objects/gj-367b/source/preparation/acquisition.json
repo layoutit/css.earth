@@ -27,6 +27,25 @@
       ],
       "path": "photometry/tess/tess2026005125623-s0099-0000000034068865-0300-s_lc.fits",
       "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2026005125623-s0099-0000000034068865-0300-s_lc.fits"
+    },
+    {
+      "kind": "zip-member",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "science/valentine-2024/miri_throughput.dat",
+      "url": "https://zenodo.org/records/12571830/files/ThERESA.zip?download=1",
+      "member": "ThERESA/miri_throughput.dat"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "science/bt-settl-cifist/bt-settl-cifist-3500-5.0-0.0.xml",
+      "url": "https://svo2.cab.inta-csic.es/theory/newov2/ssap.php?model=bt-settl-cifist&fid=200"
     }
   ]
 }

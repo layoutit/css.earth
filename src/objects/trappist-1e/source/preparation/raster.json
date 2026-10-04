@@ -43,6 +43,54 @@
       "science": {
         "kind": "equirectangular-illustration"
       }
+    },
+    {
+      "id": "climate-model",
+      "output": "trappist-1e-surface-{id}{suffix}.webp",
+      "thumbnail": "trappist-1e-dataset-{id}.webp",
+      "source": "science/wolf-2022/ExoCAM_thai_hab1_L51_n68equiv.cam.h0.avg.head.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "climate-model",
+        "label": "Climate model",
+        "format": "netcdf-lonlat-field",
+        "path": "science/wolf-2022/ExoCAM_thai_hab1_L51_n68equiv.cam.h0.avg.head.dat",
+        "field": "science/wolf-2022/ExoCAM_thai_hab1_L51_n68equiv.cam.h0.avg.TS-time0.dat",
+        "variable": "TS",
+        "coordinates": {
+          "longitude": "lon",
+          "latitude": "lat"
+        },
+        "select": {
+          "time": 0
+        },
+        "sourceUnits": "K",
+        "longitudeZeroAt": 180,
+        "coordinateToleranceDegrees": 0.005,
+        "consumer": "climate-model-simulation",
+        "sampling": "bilinear",
+        "displaySampling": "nearest",
+        "outputLongitudeOrigin": 0,
+        "units": "K",
+        "minimum": 200,
+        "maximum": 300,
+        "colors": [
+          "#000004",
+          "#57106e",
+          "#bc3754",
+          "#f98e09",
+          "#fcffa4"
+        ],
+        "labels": [
+          "200",
+          "250",
+          "300"
+        ],
+        "description": "Simulated surface temperature from the ExoCAM model, a published simulation and not a measurement.",
+        "title": "Climate model · ExoCAM simulation",
+        "sourceUrl": "https://arxiv.org/abs/2201.09797"
+      }
     }
   ],
   "lighting": {

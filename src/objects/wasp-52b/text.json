@@ -30,6 +30,11 @@
       "title": "Shape only",
       "detail": "Published radius",
       "summary": "A sphere at the published size. No picture of its surface exists."
+    },
+    "temperature": {
+      "title": "Spitzer heat map",
+      "detail": "Published fit",
+      "summary": "Heat at 3.6 µm from the paper's phase-curve fit. It varies only with longitude: the data hold no north-south detail."
     }
   }
 }

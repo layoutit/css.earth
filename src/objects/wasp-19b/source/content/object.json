@@ -49,7 +49,7 @@
   },
   "datasets": {
     "titleKey": "datasets",
-    "defaultDataset": "thermal",
+    "defaultDataset": "temperature",
     "controls": [
       {
         "id": "thermal",
@@ -65,6 +65,66 @@
         },
         "falseColor": false,
         "notes": "The color of WASP-19 b's heat: a black body at the dayside brightness temperature measured in secondary eclipse at 3.6 µm (Spitzer Space Telescope satellite Infrared Array Camera (IRAC)). Its star lights the day side; the night side is not measured. Reflected starlight is not included."
+      },
+      {
+        "id": "temperature",
+        "label": "Spitzer",
+        "qualification": "Published fit · Bell et al. (2021) · a Spitzer IRAC 4.5 µm phase curve (program 80073, first published by Wong et al. (2016)) · longitude only",
+        "thumbnail": "wasp-19b-dataset-temperature.webp",
+        "surface": "wasp-19b-surface-temperature@2x.webp",
+        "poles": "wasp-19b-poles-temperature@2x.webp",
+        "source": {
+          "id": "wasp-19b-temperature-phase-curve",
+          "path": "../manifest.json",
+          "url": "https://arxiv.org/abs/2010.00687"
+        },
+        "falseColor": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Brightness temperature",
+          "labels": [
+            "950",
+            "1725",
+            "2500"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                13,
+                8,
+                135
+              ],
+              [
+                126,
+                3,
+                168
+              ],
+              [
+                204,
+                71,
+                120
+              ],
+              [
+                248,
+                149,
+                64
+              ],
+              [
+                240,
+                249,
+                33
+              ]
+            ],
+            "labels": [
+              "950",
+              "1725",
+              "2500"
+            ]
+          },
+          "meta": "K",
+          "sourceUrl": "https://arxiv.org/abs/2010.00687"
+        },
+        "notes": "Brightness temperature at 4.5 µm of WASP-19 b from Bell et al. (2021)'s published fit to a Spitzer IRAC 4.5 µm phase curve (program 80073, first published by Wong et al. (2016)). Their Fourier series becomes a map of longitude through the Cowan & Agol (2008) inversion, so there is no north-south detail and every latitude is drawn alike. The hottest longitude is 25° west of noon. The false color runs from 950 to 2,500 K. With shadows on, the star's light darkens the night half."
       }
     ]
   },

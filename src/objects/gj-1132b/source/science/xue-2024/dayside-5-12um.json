@@ -1,0 +1,10 @@
+{
+  "schema": "cssearth-eclipse-depth@1",
+  "planet": "gj-1132b",
+  "eclipseDepthPpm": {
+    "low": 123,
+    "high": 157
+  },
+  "radiusRatio": 0.04943,
+  "source": "Xue et al. (2024): one JWST MIRI LRS eclipse on 1 July 2023 (GTO 1274). Eclipse depth 140 +/- 17 ppm, white light, 5 to 12 um (abstract); the range is its one-sigma interval. Radius ratio 0.04943 +/- 0.00015 (Table 1, R_P/R_*), fitted with the depth. The paper finds the day side only one sigma below the hottest a bare rock can be, and concludes the planet likely has no significant atmosphere. https://arxiv.org/abs/2408.13340"
+}

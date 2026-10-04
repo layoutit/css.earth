@@ -169,6 +169,37 @@
           }
         ]
       }
+    },
+    {
+      "id": "wasp-17b-temperature-map",
+      "path": "science/valentine-2024/tmap.pkl",
+      "origin": "https://zenodo.org/records/12571830/files/ThERESA.zip?download=1",
+      "productId": "ThERESA/eclipse_mapping_l2n2_model/tmap.pkl",
+      "version": "10.5281/zenodo.12571830",
+      "title": "JWST-TST DREAMS: Non-Uniform Dayside Emission for WASP-17b from MIRI/LRS: the eclipse map of WASP-17 b",
+      "sourceUrl": "https://zenodo.org/records/12571830",
+      "credit": "Valentine et al. (2024); JWST MIRI, one eclipse on 14 March 2023",
+      "displayCredit": "Valentine et al. (2024) · JWST MIRI",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/12571830",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Restored through source/preparation/acquisition.json from Zenodo record 10.5281/zenodo.12571830. The member ThERESA/eclipse_mapping_l2n2_model/tmap.pkl of ThERESA.zip (4.1 MB), unchanged. The hot-spot longitude the paper prints (18.7°, Section 4.3 of https://arxiv.org/abs/2410.08148) is the check that the grid is read as drawn.",
+      "redistribution": "Not redistributed in git; restored from Zenodo. CC BY 4.0 with attribution.",
+      "consumers": [
+        "wasp-17b-temperature-published-map"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-wasp-17b-temperature-map",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
@@ -185,7 +216,8 @@
         "generator": "packages/telescope-cli/src/source-authoring/context-markers.mts",
         "inputs": [
           "wasp-17b-observational-measurements",
-          "wasp-17b-preparation-raster"
+          "wasp-17b-preparation-raster",
+          "wasp-17b-temperature-map"
         ]
       },
       "generator": "packages/telescope-cli/src/source-authoring/context-markers.mts",

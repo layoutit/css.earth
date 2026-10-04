@@ -28,6 +28,42 @@
         "kind": "dayside-thermal-color",
         "qualification": "Color of a black body at the dayside brightness temperature 2,346 K measured in secondary eclipse at 3.6 µm (Anderson et al. 2013, dayside brightness temperature at 3.6 µm (NASA Exoplanet Archive emission table)), uniform over the disc and lit by its star so the day side faces it. The planet is unresolved: no map is implied, and reflected starlight is not included."
       }
+    },
+    {
+      "id": "temperature",
+      "output": "wasp-19b-surface-{id}{suffix}.webp",
+      "thumbnail": "wasp-19b-dataset-{id}.webp",
+      "source": "science/bell-2021/phase-curve.json",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "temperature",
+        "label": "Spitzer",
+        "format": "published-phase-curve-map",
+        "path": "science/bell-2021/phase-curve.json",
+        "consumer": "temperature-phase-curve-map",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "K",
+        "minimum": 950,
+        "maximum": 2500,
+        "colors": [
+          "#0d0887",
+          "#7e03a8",
+          "#cc4778",
+          "#f89540",
+          "#f0f921"
+        ],
+        "labels": [
+          "950",
+          "1725",
+          "2500"
+        ],
+        "description": "Brightness temperature at 4.5 µm from the paper's phase-curve fit, turned into a map of longitude. It has no north-south information.",
+        "title": "Spitzer · published phase-curve fit",
+        "sourceUrl": "https://arxiv.org/abs/2010.00687"
+      }
     }
   ],
   "lighting": {

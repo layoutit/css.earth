@@ -27,6 +27,16 @@
       ],
       "path": "photometry/tess/tess2025099153000-s0091-0000000066818296-0288-s_lc.fits",
       "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2025099153000-s0091-0000000066818296-0288-s_lc.fits"
+    },
+    {
+      "kind": "zip-member",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "science/valentine-2024/tmap.pkl",
+      "url": "https://zenodo.org/records/12571830/files/ThERESA.zip?download=1",
+      "member": "ThERESA/eclipse_mapping_l2n2_model/tmap.pkl"
     }
   ]
 }

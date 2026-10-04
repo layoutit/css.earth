@@ -73,17 +73,26 @@ export function parseZenodoSearch(value: unknown): readonly ZenodoRecord[] {
 }
 
 const words = (value: string): string => ` ${value.normalize('NFKD').replace(/\p{Diacritic}/gu, '').toLowerCase().replace(/[^\p{L}\p{N}]+/gu, ' ').trim()} `;
-/** A planet is written with and without a space before its letter ("TRAPPIST-1e", "TRAPPIST-1 e"): both are searched and matched. */
+/** A planet is written with and without a space before its letter ("TRAPPIST-1e", "TRAPPIST-1 e"), and a catalogue number
+ * with and without one after its letters ("GJ 1214b", "GJ1214b"): every spelling is searched and matched. */
 export function nameForms(names: readonly string[]): string[] {
   return [...new Set(names.map(name => name.trim()).filter(Boolean).flatMap(name => {
     const planet = /^(.*[^\s])\s?([b-z])$/u.exec(name);
-    return planet && /\d$/u.test(planet[1]!) ? [`${planet[1]}${planet[2]}`, `${planet[1]} ${planet[2]}`] : [name];
+    const forms = planet && /\d$/u.test(planet[1]!) ? [`${planet[1]}${planet[2]}`, `${planet[1]} ${planet[2]}`] : [name];
+    return forms.flatMap(form => /^[A-Za-z]+ \d/u.test(form) ? [form, form.replace(' ', '')] : [form]);
   }))];
 }
-/** Whether the record's title or description names the object by any of its names. */
+/** Whether the record's title or description names the object by any of its names. A planet is also named by its letter in
+ * a list after its host: "TRAPPIST-1b, c and d" names TRAPPIST-1 d. */
 export function namesObject(record: Pick<ZenodoRecord, 'title' | 'description'>, names: readonly string[]): boolean {
   const text = words(`${record.title} ${record.description}`);
-  return nameForms(names).some(name => text.includes(words(name)));
+  return nameForms(names).some(name => text.includes(words(name))) || names.some(name => {
+    const planet = /^(.*\d)\s?([b-z])$/u.exec(name.trim());
+    if (!planet) return false;
+    // words() leaves letters, digits and single spaces, so the host needs no escaping.
+    const lists = new RegExp(`${words(planet[1]!).trimEnd()} ?([b-z](?: (?:and |or )?[b-z])+) `, 'gu');
+    return [...text.matchAll(lists)].some(list => list[1]!.split(/ (?:and |or )?/u).includes(planet[2]!));
+  });
 }
 const SIMULATION = /\bsimulat\w*|\bGCMs?\b|general circulation|climate model|model outputs?|hydrodynamic\w*|\b3D models?\b|radiative[- ]transfer model/iu;
 /** Whether the record speaks of a simulation or a model, in its title or description. */

@@ -1,24 +1,26 @@
 import assert from 'node:assert/strict';
+import { execFileSync } from 'node:child_process';
 import test from 'node:test';
 import { readFile } from 'node:fs/promises';
 import { parse } from 'yaml';
 import { requireRecord, requireArray } from '@cssearth/core';
-import { requireAstroqueryTests } from './astroquery-tests.mts';
+import { astroqueryTestFiles, astroqueryLaneFiles, astroqueryTriggerPaths, ASTROQUERY_EXCLUSIONS } from './astroquery-discovery.mts';
+import { requireAstroqueryTests, runAstroqueryFiles } from './astroquery-tests.mts';
 import { classifyAffectedPaths, loadCiAreasConfig } from './ci-affected.mts';
 
 function stub(count = 13, skipped = 0): string {
   return `TAP version 13\n${Array.from({ length: count }, (_, i) => `ok ${i + 1} - case ${i + 1}`).join('\n')}\n1..${count}\n# tests ${count}\n# pass ${count - skipped}\n# fail 0\n# cancelled 0\n# skipped ${skipped}\n# todo 0\n`;
 }
 test('toolchain lane rejects skipped, empty, truncated, failed and short TAP runs', () => {
-  requireAstroqueryTests(stub());
+  requireAstroqueryTests(stub(), 13);
   for (const bad of [stub(13, 1), stub(13, 1).replace('# pass 12', '# pass 13'), stub(12), '', stub().replace('# skipped 0', ''), stub().replace('# fail 0', '# fail 1'), stub().replace('ok 1 -', 'not ok 1 -'), stub().replace('# cancelled 0', '# cancelled 1'), stub().replace('# todo 0', '# todo 1')])
-    assert.throws(() => requireAstroqueryTests(bad));
+    assert.throws(() => requireAstroqueryTests(bad, 13));
 });
 test('astroquery classification and workflow preserve the protected lane', async () => {
   const config = await loadCiAreasConfig();
   for (const path of ['packages/telescope/src/node/toolchain/python.ts', 'packages/telescope/toolchains/toolchain.json', 'packages/telescope/toolchains/requirements.lock', 'packages/telescope-cli/src/toolchains/astronomy-toolchains.mts', 'packages/telescope-cli/src/archives/jwst/toolchain.json', 'packages/telescope-cli/src/archives/toolchain-descriptor.mts', 'packages/telescope-cli/src/vo/package.mts', 'packages/telescope-cli/src/families/f07-dynamic-spectrum.mts', '.github/ci-areas.json', 'packages/telescope-cli/src/families/f07-dynamic-spectrum.test.mts', 'packages/telescope-cli/src/vo/package.test.mts', '.github/workflows/universe.yml'])
     assert.ok(classifyAffectedPaths([path], config).jobs.has('astroquery'), path);
-  for (const path of ['README.md', 'packages/renderer/src/index.ts', 'site/runtime-policy.mts'])
+  for (const path of ['README.md', 'site/runtime-policy.mts'])
     assert.equal(classifyAffectedPaths([path], config).jobs.has('astroquery'), false, path);
   const workflow = requireRecord(parse(await readFile(new URL('../../workflows/universe.yml', import.meta.url), 'utf8')));
   const jobs = requireRecord(workflow.jobs), job = requireRecord(jobs.astroquery);
@@ -30,8 +32,8 @@ test('astroquery classification and workflow preserve the protected lane', async
   assert.ok(runs.indexOf('micromamba-linux-64') < runs.indexOf('astroquery install'), 'micromamba is installed before the toolchain installer runs');
   assert.match(runs, /astronomy-toolchains\.mts astroquery install/u);
   assert.match(runs, /astronomy-toolchains\.mts astroquery verify/u);
-  assert.match(runs, /node --test --test-reporter=tap .*f07-dynamic-spectrum\.test\.mts .*vo\/package\.test\.mts/u);
-  assert.match(runs, /node \.github\/scripts\/ci\/astroquery-tests\.mts astroquery.tap/u);
+  assert.match(runs, /node \.github\/scripts\/ci\/astroquery-tests\.mts --list/u);
+  assert.match(runs, /node \.github\/scripts\/ci\/astroquery-tests\.mts --run/u);
   assert.ok(requireArray(requireRecord(jobs['ci-guard']).needs).includes('astroquery'));
 });
 
@@ -64,4 +66,28 @@ test('filtered astroquery classification survives projection into the runnable j
   assert.ok(affectedJobNames(selected).includes('astroquery'), 'the selected filtered lane must remain runnable');
   const ordinary = classifyAffectedPaths(['README.md'], config);
   assert.ok(!affectedJobNames(ordinary).includes('astroquery'), 'ordinary documentation does not run the filtered lane');
+});
+
+
+test('all toolchain-importing files are discovered; only named source exclusions remain', () => {
+  const root = new URL('../../../', import.meta.url).pathname;
+  const all = astroqueryTestFiles(root), files = astroqueryLaneFiles(root);
+  const imported = execFileSync('git', ['grep', '-l', '-w', 'astroqueryToolchain', '--', 'packages/**/*.test.*'], { cwd: root, encoding: 'utf8' }).trim().split('\n').sort();
+  assert.deepEqual(all, imported);
+  assert.ok(all.length > 2);
+  assert.match(ASTROQUERY_EXCLUSIONS['packages/telescope-cli/src/output-handoffs.test.mts'] ?? '', /PDS.*stellar-neighbourhood.*stars\.json\/stars\.bin/u);
+  assert.equal(files.length, all.length - Object.keys(ASTROQUERY_EXCLUSIONS).length);
+  assert.deepEqual(all.filter(file => !files.includes(file)), Object.keys(ASTROQUERY_EXCLUSIONS).sort());
+  const triggers = astroqueryTriggerPaths(root);
+  for (const name of ['telescope-cli', 'telescope', 'core', 'objects', 'fits', 'bake', 'renderer', 'astronomy', 'engine', 'spice']) assert.ok(triggers.includes(`packages/${name}/**`));
+});
+
+
+test('runner executes exactly the derived files and a skip makes the run red', () => {
+  const root = new URL('../../../', import.meta.url).pathname;
+  const files = astroqueryLaneFiles(root), visited: string[] = [];
+  assert.throws(() => runAstroqueryFiles(root, () => ({ status: 0, stdout: stub(1, 1), stderr: '' })), /skipped/u);
+  const ran = runAstroqueryFiles(root, file => { visited.push(file); return { status: 0, stdout: stub(1), stderr: '' }; });
+  assert.equal(ran, files.length);
+  assert.deepEqual(visited, files);
 });

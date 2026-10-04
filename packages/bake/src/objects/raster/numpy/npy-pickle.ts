@@ -1,5 +1,6 @@
 /** A restricted reader for NumPy `.npy` files that hold a pickled object: `np.save` of a dictionary of arrays, as published data
- * products often are. Pickle is a program for a stack machine; this reader interprets only the opcodes such files use, resolves
+ * products often are, and for a bare pickle of such a value (`pickle.dump` of an array, protocol 4 and below). Pickle is a
+ * program for a stack machine; this reader interprets only the opcodes such files use, resolves
  * only the three NumPy globals that rebuild an array (`_reconstruct`, `ndarray`, `dtype`) and decodes array bytes itself. It
  * never imports or calls anything a file names, so an unexpected opcode or global is an error, not code. */
 
@@ -42,6 +43,9 @@ export function readNpyObject(bytes: Uint8Array): NpyValue {
   return value.data[0]!;
 }
 
+/** Read a bare pickle (`pickle.dump` of an array or of a dictionary of arrays) into plain values, under the same restrictions. */
+export const readPickledValue = (bytes: Uint8Array): NpyValue => unpickle(Buffer.from(bytes.buffer, bytes.byteOffset, bytes.byteLength));
+
 const isArray = (value: unknown): value is NpyArray => typeof value === 'object' && value !== null && (value as { kind?: unknown }).kind === 'ndarray';
 
 function unpickle(buffer: Buffer): NpyValue {
@@ -59,6 +63,11 @@ function unpickle(buffer: Buffer): NpyValue {
     const op = u8();
     switch (op) {
       case 0x80: if (u8() > 4) throw new TypeError('Unsupported pickle protocol.'); break; // PROTO
+      case 0x95: take(8); break; // FRAME (protocol 4): a length hint, nothing to do
+      case 0x94: memo.set(memo.size, stack.at(-1)!); break; // MEMOIZE (protocol 4)
+      case 0x93: { const name = pop(), module = pop(), key = `${String(module)}\n${String(name)}`; // STACK_GLOBAL (protocol 4)
+        if (typeof name !== 'string' || typeof module !== 'string' || !ALLOWED_GLOBALS.has(key)) throw new TypeError(`Pickle global not allowed: ${key.replace('\n', '.')}.`);
+        stack.push({ global: ALLOWED_GLOBALS.get(key)! }); break; }
       case 0x63: { const name = `${line()}\n${line()}`; if (!ALLOWED_GLOBALS.has(name)) throw new TypeError(`Pickle global not allowed: ${name.replace('\n', '.')}.`); stack.push({ global: ALLOWED_GLOBALS.get(name)! }); break; } // GLOBAL
       case 0x71: memo.set(u8(), stack.at(-1)!); break; // BINPUT
       case 0x72: memo.set(take(4).readUInt32LE(0), stack.at(-1)!); break; // LONG_BINPUT

@@ -29,11 +29,18 @@ test('a Zenodo record is validated and reduced to what the report says of it', a
 
 test('a planet is matched with and without the space before its letter, as a phrase and never inside another word', () => {
   assert.deepEqual(nameForms(['TRAPPIST-1e', 'TRAPPIST-1 e', 'Proxima Centauri']), ['TRAPPIST-1e', 'TRAPPIST-1 e', 'Proxima Centauri']);
-  assert.deepEqual(nameForms(['HD 189733 b']), ['HD 189733b', 'HD 189733 b']);
+  // A catalogue number is also written without the space after its letters.
+  assert.deepEqual(nameForms(['HD 189733 b']), ['HD 189733b', 'HD189733b', 'HD 189733 b', 'HD189733 b']);
   // A star's own name does not end in a planet letter after a digit: "Proxima b" is left as written.
   assert.deepEqual(nameForms(['Proxima b', ' ']), ['Proxima b']);
   assert.equal(namesObject({ title: 'Simulations of TRAPPIST-1 e', description: '' }, ['TRAPPIST-1e']), true);
   assert.equal(namesObject({ title: 'The TRAPPIST-1 system', description: 'Planets b to h.' }, ['TRAPPIST-1e']), false);
+  // A release lists its planets by letter after the host.
+  const listed = { title: 'Data associated with the Turbet et al. 2023 manuscript (GCM simulations of TRAPPIST-1b, c and d)', description: '' };
+  assert.deepEqual(['b', 'c', 'd', 'e'].map(letter => namesObject(listed, [`TRAPPIST-1 ${letter}`])), [true, true, true, false]);
+  assert.equal(namesObject({ title: 'Climates of TRAPPIST-1 e, f, and g', description: '' }, ['TRAPPIST-1g']), true);
+  assert.equal(namesObject({ title: 'TRAPPIST-1 b and the star s spectrum', description: '' }, ['TRAPPIST-1 c']), false);
+  assert.equal(namesObject({ title: 'K2-18 b or c', description: '' }, ['K2-181 c']), false);
   assert.equal(namesObject({ title: 'Wasps of the genus S2X', description: '' }, ['S2']), false);
   assert.equal(speaksOfSimulation({ title: 'Transmission spectroscopy with NIRSpec', description: 'Software and data to reproduce figures.' }), false);
   assert.equal(speaksOfSimulation({ title: 'GCM output', description: '' }), true);

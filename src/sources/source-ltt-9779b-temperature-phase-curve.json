@@ -1,0 +1,35 @@
+{
+  "id": "source-ltt-9779b-temperature-phase-curve",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "LTT 9779 b · ltt 9779b temperature phase curve",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/2010.12745",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/ltt-9779b/source/manifest.json",
+      "locator": "/inputs/8"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Crossfield et al. (2020); a Spitzer IRAC 4.5 µm phase curve (program 14290)",
+      "scope": "The ltt 9779b temperature phase curve input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "Factual numerical measurements; source attribution retained",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

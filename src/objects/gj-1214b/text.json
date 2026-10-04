@@ -46,6 +46,11 @@
       "title": "Shape only",
       "detail": "Published radius",
       "summary": "A sphere at the published size. No picture of its surface exists."
+    },
+    "temperature": {
+      "title": "JWST heat map",
+      "detail": "Published fit",
+      "summary": "Heat across 5–12 µm from the paper's phase-curve fit. It varies only with longitude: the data hold no north-south detail."
     }
   }
 }

@@ -1,0 +1,35 @@
+{
+  "id": "source-lhs-3844b-temperature-phase-curve",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "LHS 3844 b · lhs 3844b temperature phase curve",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/1908.06834",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/lhs-3844b/source/manifest.json",
+      "locator": "/inputs/8"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Kreidberg et al. (2019); a Spitzer IRAC 4.5 µm phase curve (program 14204)",
+      "scope": "The lhs 3844b temperature phase curve input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "Factual numerical measurements; source attribution retained",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

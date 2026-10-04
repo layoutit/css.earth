@@ -8,6 +8,7 @@ import { pathToFileURL } from 'node:url';
 import { promisify } from 'node:util';
 // CI's change-classification step runs this before `pnpm install`, so import core's dependency-free source, not its built package.
 import { requireArray, requireRecord, requireString } from '../../../packages/core/src/validate.ts';
+import { astroqueryTriggerPaths } from './astroquery-discovery.mts';
 import type { ChangeMode } from './classify-changes.mts';
 
 const execFileAsync = promisify(execFile);
@@ -58,7 +59,8 @@ export function parseCiAreasConfig(raw: unknown): CiAreasConfig {
 }
 
 export async function loadCiAreasConfig(path = resolve(import.meta.dirname, '../../..', '.github', 'ci-areas.json')): Promise<CiAreasConfig> {
-  return parseCiAreasConfig(JSON.parse(await readFile(path, 'utf8')));
+  const config = parseCiAreasConfig(JSON.parse(await readFile(path, 'utf8')));
+  return { ...config, astroquery: astroqueryTriggerPaths(resolve(path, '../..')) };
 }
 
 /** Converts one `ci-areas.json` glob pattern to a matcher. `**` matches zero or more whole path segments

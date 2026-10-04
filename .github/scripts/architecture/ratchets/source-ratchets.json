@@ -1,0 +1,51 @@
+{
+  "objects": {
+    "ceiling": 34,
+    "entries": {
+      "packages/objects/src/catalogue-points.ts": "Checks catalogue ellipse normals have unit length before admitting their prepared spans.",
+      "packages/objects/src/prepared-binary.ts": "Sorts binary byte regions by offset to reject overlapping payloads.",
+      "packages/objects/src/density-volume.ts": "Checks density-grid placement quaternions are normalized.",
+      "packages/objects/src/stars/point-field-validation.ts": "Sorts serialized star-field keys to reject unexpected fields.",
+      "packages/objects/src/provenance/source-credits.ts": "Sorts contributing object ids for stable credit grouping.",
+      "packages/objects/src/provenance/product-input-evidence.ts": "Sorts dataset-role evidence labels for deterministic product records.",
+      "packages/objects/src/provenance/prepared-sources.ts": "Sorts the declared prepared source closure for canonical transport.",
+      "packages/objects/src/registry/fact-order.ts": "Sorts authored fact rows by presentation order and label.",
+      "packages/objects/src/registry/object-schema.ts": "Checks the authored world-frame orbit-up direction is normalized.",
+      "packages/objects/src/registry/destination-search.ts": "Ranks and sorts catalogue search matches for the navigation menu.",
+      "packages/objects/src/node/runtime-asset-closure.ts": "Sorts runtime filenames and inventory entries for canonical asset closure comparison.",
+      "packages/objects/src/node/catalog-directory.ts": "Sorts object catalogue entries and contexts by declared order and id.",
+      "packages/objects/src/volume/emission/sampled-recipe.ts": "Checks torus axes are normalized and jet endpoints do not coincide.",
+      "packages/objects/src/volume/emission/sampled-emission-fit.ts": "Checks the sampled-fit axis is normalized before accepting radii.",
+      "packages/objects/src/volume/emission/photometric-mge.ts": "Retained published MGE inclination admission; deprojection validation remains parser debt.",
+      "packages/objects/src/volume/delivery/css-volume-validation.ts": "Sorts serialized volume keys and checks stack normals have unit length.",
+      "packages/objects/src/volume/delivery/volume-impostor-validation.ts": "Sorts allowed impostor keys and checks the view basis is orthonormal.",
+      "packages/objects/src/volume/delivery/image-layer-bank-validation.ts": "Checks image-layer normals have unit length and independent view directions.",
+      "packages/objects/src/volume/catalogue/prepared-catalogue-stars.ts": "Checks catalogue placement quaternions are normalized.",
+      "packages/objects/src/prepared-data/orbit/world-orbit-encoder.ts": "Retained binary codec quantization-error admission; scientific orbit derivation stays outside objects.",
+      "packages/objects/src/prepared-data/sky/css-sky-validation.ts": "Checks prepared sky basis directions are normalized and orthogonal.",
+      "packages/objects/src/prepared-data/sky/sky-contract.ts": "Checks the prepared solar sky directions have unit length.",
+      "packages/objects/src/prepared-data/runtime-validation/prepared-texture-levels.ts": "Sorts texture resource keys and checks prepared tile normals.",
+      "packages/objects/src/prepared-data/runtime-validation/presentation.ts": "Checks the declared feature polar axis has unit length.",
+      "packages/objects/src/prepared-data/runtime-validation/depth-partitions.ts": "Checks prepared depth-split planes use normalized normals.",
+      "packages/objects/src/prepared-data/runtime-validation/guards.ts": "Checks parsed direction vectors against the declared unit-length tolerance.",
+      "packages/objects/src/prepared-data/camera/archived-camera.ts": "Checks archived camera solar direction has unit length.",
+      "packages/objects/src/prepared-data/source/vo-discovery.ts": "Sorts VO discovery record keys into canonical JSON order.",
+      "packages/objects/src/prepared-data/world/world-frame.ts": "Checks the authored orbit-up direction has unit length.",
+      "packages/objects/src/prepared-data/world/world-context.ts": "Checks prepared trajectory extent and sorts bodies by authored placement order.",
+      "packages/objects/src/prepared-data/surface/surface-feature-catalog.ts": "Checks feature centers and rims lie on the declared prepared sphere or ellipsoid.",
+      "packages/objects/src/prepared-data/surface/css-surface-shell-validation.ts": "Checks prepared shell face directions have unit length.",
+      "packages/objects/src/prepared-data/catalogue/spatial-relations.ts": "Retained coordinate consistency admission against published sky position.",
+      "packages/objects/src/registry/context-color.ts": "Retained WCAG label contrast adjustment uses Oklab cube roots and gamut/lightness search; presentation color preparation has not moved to its owner."
+    }
+  },
+  "cwd": {
+    "ceiling": 5,
+    "entries": {
+      "packages/telescope-cli/src/session.mts": "User output directory telescope-runs is intentionally relative to the invoking working directory.",
+      "packages/telescope-cli/src/cli-format.mts": "Display paths relative to the invoking working directory; does not choose a checkout root.",
+      "packages/telescope-cli/src/bin.mts": "CLI --workspace defaults to the invoking directory and discovers the workspace above it.",
+      "packages/bake/cli/refresh-sphere-photographs.mts": "Print refreshed output paths relative to the invoking directory; does not choose a checkout root.",
+      "packages/bake/cli/object-operations.mts": "Object operations entry is documented to run from the checkout working directory."
+    }
+  }
+}

@@ -39,3 +39,11 @@ test('the table and the recipe say what is wrong with them', () => {
   assert.throws(() => parseBodyPointsRecipe({ ...recipe(), frame: { ...recipe().frame, input: 'icrs' } }, 'points.json'), /points\.json: frame\.input must be host-centred-icrf-km, got "icrs"/u);
   assert.throws(() => parseBodyPointsRecipe({ ...recipe(), seed: 1 }, 'points.json'), /points\.json: recipe has unknown seed/u);
 });
+
+test('shared body-point text admission preserves whitespace and value-specific diagnostics', () => {
+  for (const value of [' ', ' source ']) assert.equal(parseBodyPointsRecipe({ ...recipe(), source: value }, 'points.json').source, value);
+  for (const value of [undefined, null, false, 0, [], {}, ''])
+    assert.throws(() => parseBodyPointsRecipe({ ...recipe(), source: value }, 'points.json'), {
+      name: 'TypeError', message: `points.json: source must be text, got ${JSON.stringify(value)}.`,
+    });
+});

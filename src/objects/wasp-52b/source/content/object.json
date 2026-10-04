@@ -49,7 +49,7 @@
   },
   "datasets": {
     "titleKey": "datasets",
-    "defaultDataset": "shape",
+    "defaultDataset": "temperature",
     "controls": [
       {
         "id": "shape",
@@ -65,6 +65,66 @@
         },
         "falseColor": false,
         "notes": "No image or color of WASP-52 b is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the color of wasp-52's light, as its color dataset measures it."
+      },
+      {
+        "id": "temperature",
+        "label": "Spitzer",
+        "qualification": "Published fit · May et al. (2022) · a Spitzer IRAC 3.6 µm phase curve of 17-19 October 2016 and 21-23 October 2017, fitted together · longitude only",
+        "thumbnail": "wasp-52b-dataset-temperature.webp",
+        "surface": "wasp-52b-surface-temperature@2x.webp",
+        "poles": "wasp-52b-poles-temperature@2x.webp",
+        "source": {
+          "id": "wasp-52b-temperature-phase-curve",
+          "path": "../manifest.json",
+          "url": "https://arxiv.org/abs/2203.15059"
+        },
+        "falseColor": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Brightness temperature",
+          "labels": [
+            "1000",
+            "1250",
+            "1500"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                13,
+                8,
+                135
+              ],
+              [
+                126,
+                3,
+                168
+              ],
+              [
+                204,
+                71,
+                120
+              ],
+              [
+                248,
+                149,
+                64
+              ],
+              [
+                240,
+                249,
+                33
+              ]
+            ],
+            "labels": [
+              "1000",
+              "1250",
+              "1500"
+            ]
+          },
+          "meta": "K",
+          "sourceUrl": "https://arxiv.org/abs/2203.15059"
+        },
+        "notes": "Brightness temperature at 3.6 µm of WASP-52 b from May et al. (2022)'s published fit to a Spitzer IRAC 3.6 µm phase curve of 17-19 October 2016 and 21-23 October 2017, fitted together. Their Fourier series becomes a map of longitude through the Cowan & Agol (2008) inversion, so there is no north-south detail and every latitude is drawn alike. The hottest longitude is 2° west of noon. The false color runs from 1,000 to 1,500 K. With shadows on, the star's light darkens the night half."
       }
     ]
   },
