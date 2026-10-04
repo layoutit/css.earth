@@ -52,6 +52,7 @@ jobs:
           sparse-checkout: |
             /.github/scripts/**/*.mts
             /packages/core/src/validate.ts
+            /packages/core/src/node/script-test-files.ts
             /.github/ci-areas.json
             /package.json
             /packages/*/package.json

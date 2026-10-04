@@ -28,7 +28,7 @@
       "finding": "Pinned by archive.mts beside c1002 and not read: it images the same disc at the same wavelengths a few hours later, so it adds noise reduction, not coverage.",
       "revisitWhen": "The disc dataset needs lower noise at its outer edge.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/main/packages/telescope-cli/src/archives/jwst/imaging/programs/beta-pictoris-4758.json"
+        "https://github.com/layoutit/css.earth/blob/main/packages/telescope-cli/src/archives/jwst/programs/beta-pictoris-4758.json"
       ]
     },
     {
@@ -39,7 +39,7 @@
       "revisitWhen": "The authors deposit their reductions, or a reduction here beats MAST's inside 1.5 arcseconds.",
       "evidence": [
         "https://arxiv.org/abs/2401.05271",
-        "https://github.com/layoutit/css.earth/blob/main/packages/telescope-cli/src/archives/jwst/imaging/programs/beta-pictoris-1411.json"
+        "https://github.com/layoutit/css.earth/blob/main/packages/telescope-cli/src/archives/jwst/programs/beta-pictoris-1411.json"
       ]
     },
     {

@@ -39,6 +39,19 @@ explain the software, but their default branches must not be assumed to match
 the binary. Each fixture pins this harness's generator code and the exact inputs
 it read, and comparisons recheck source bytes before decoding them.
 
+## Tracked truth fixture
+
+[projection.json](projection.json) is the 69,858-line saved reference result from
+SBMT's released Java/VTK readers, intersections and texture-coordinate queries.
+It records the cases, pinned inputs, stage outputs and numeric probes generated
+by [projection.mts](projection.mts); it is test evidence, not a prepared asset.
+[projection.test.mts](projection.test.mts) reads it through `readOracleFixture`,
+and [compare.mts](compare.mts) compares the candidate results stage by stage.
+It is tracked so ordinary CI can test the independent reference without
+installing SBMT, Java or VTK. Regeneration is explicit, with the tolerances and
+non-bit-reproducibility limits below; it does not replace the accepted reference
+on an ordinary test run.
+
 ## Run it
 
 Ordinary regression checks need neither Java nor SBMT:

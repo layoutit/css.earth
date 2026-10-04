@@ -22,3 +22,16 @@ export async function writeOrCheckAuthoredOutputs(root: string, outputs: readonl
     } else await writeFile(target, bytes);
   }
 }
+
+interface AuthorRunOptions<Result> extends AuthoredOutputOptions {
+  root: string;
+  /** Body-specific source reads and computation remain in the author config. */
+  compute: () => Promise<{ outputs: readonly (readonly [string, Buffer])[]; result: Result }>;
+}
+
+/** Run one authored stage without changing its bytes, return value, or read-error policy. */
+export async function runAuthor<Result>({ root, compute, ...policy }: AuthorRunOptions<Result>): Promise<Result> {
+  const { outputs, result } = await compute();
+  await writeOrCheckAuthoredOutputs(root, outputs, policy);
+  return result;
+}

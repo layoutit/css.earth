@@ -16,16 +16,21 @@ import { measureScalarCoverage } from './scalar-coverage.ts';
 const clamp = (value: number, low=0, high=1) => Math.max(low, Math.min(high,value));
 const fixed = (value: number,digits: number) => Number(value.toFixed(digits));
 
+/** Observed surfaces cap allocations at 64 Mi pixels and retain their restricted product naming convention. */
+const OBSERVATION_RECIPE_POLICY = { maximumRasterPixels: 67108864, identifier: /^[a-z][a-z0-9-]*$/u,
+  productFilename: /^[a-z0-9][a-z0-9-]*(?:@2x)?\.webp$/u };
+
 export function parseObservedSurfaceRecipe(input: unknown) {
   const config = parse(input, observedRecipe, 'observed surface recipe');
   if(config?.schema!=='cssearth-observed-surfaces@2'||!isArray(config.sources)||!isArray(config.datasets)||!config.datasets.length)throw new TypeError('Invalid observed-surface recipe.');
   const sourcePaths=new Set(config.sources.map(source=>source.path)),ids=new Set(),outputs=new Set();
+  /** Measurement magnitudes are positive; fractional coverage admits both endpoints. */
   const positive=(value: number)=>Number.isFinite(value)&&value>0;
   const fraction=(value: number)=>Number.isFinite(value)&&value>=0&&value<=1;
-  const dimensions=(width: number,height: number)=>Number.isSafeInteger(width)&&Number.isSafeInteger(height)&&width>0&&height>0&&width*height<=67108864;
+  const dimensions=(width: number,height: number)=>Number.isSafeInteger(width)&&Number.isSafeInteger(height)&&width>0&&height>0&&width*height<=OBSERVATION_RECIPE_POLICY.maximumRasterPixels;
   const operations=(items: readonly ObservationTransform[] | undefined)=>{for(const op of items??[]){if(!['flip','crop','resize','sharpen'].includes(op.kind))throw new TypeError('Unsupported observation transform.');if(op.kind==='resize'&&!dimensions(op.width,op.height))throw new TypeError('Invalid resize dimensions.');if(op.kind==='crop'&&(!op.region||!dimensions(op.region.width,op.region.height)||![op.region.left,op.region.top].every(v=>Number.isSafeInteger(v)&&v>=0)))throw new TypeError('Invalid crop dimensions.');if(op.kind==='sharpen'&&!positive(op.options?.sigma))throw new TypeError('Invalid sharpening radius.');}};
   for(const dataset of config.datasets){
-    if(!/^[a-z][a-z0-9-]*$/u.test(dataset.id)||ids.has(dataset.id)||!sourcePaths.has(dataset.source)||!dataset.decode)throw new TypeError('Invalid observation identity.');ids.add(dataset.id);
+    if(!OBSERVATION_RECIPE_POLICY.identifier.test(dataset.id)||ids.has(dataset.id)||!sourcePaths.has(dataset.source)||!dataset.decode)throw new TypeError('Invalid observation identity.');ids.add(dataset.id);
     if(!['raster','fits'].includes(dataset.decode.kind))throw new TypeError('Unsupported observation decoder.');
     if(dataset.decode.kind==='raster'&&![3,4].includes(dataset.decode.channels))throw new TypeError('Invalid raster channels.');
     if(dataset.decode.kind==='fits'){
@@ -38,7 +43,7 @@ export function parseObservedSurfaceRecipe(input: unknown) {
     operations(dataset.transforms);
     if(!isArray(dataset.products)||!dataset.products.length)throw new TypeError('Observation has no products.');
     for(const product of dataset.products){
-      if(!/^[a-z0-9][a-z0-9-]*(?:@2x)?\.webp$/u.test(product.filename)||outputs.has(product.filename)||!['surface','poles','thumbnail'].includes(product.kind)||!product.encoding)throw new TypeError('Invalid observation product.');outputs.add(product.filename);operations(product.transforms);
+      if(!OBSERVATION_RECIPE_POLICY.productFilename.test(product.filename)||outputs.has(product.filename)||!['surface','poles','thumbnail'].includes(product.kind)||!product.encoding)throw new TypeError('Invalid observation product.');outputs.add(product.filename);operations(product.transforms);
       if(product.kind==='surface'&&(!Number.isSafeInteger(product.packing?.bandCount)||product.packing.bandCount<1||!Number.isFinite(product.packing.gutter)||product.packing.gutter<0))throw new TypeError('Invalid surface packing.');
       if(product.kind==='poles'){const p=product.projection;if(!p||!dimensions(p.tileSize,p.tileSize)||!isArray(p.poles)||!p.poles.length||p.poles.some(value=>!['north','south'].includes(value))||!positive(p.latitudeSegments)||!['nearest-closed','bilinear-wrapped'].includes(p.sampling)||!['direct-segment','boundary-difference','orthographic'].includes(p.angularMode))throw new TypeError('Invalid polar projection.');}
     }
@@ -292,7 +297,7 @@ export async function prepareObservedSurfaces({sourceDirectory,publicDirectory,c
     const nativePoleMap=map,transformedMap=await transformMap(map,dataset.transforms);
     if(dataset.atmosphereColor)transformedMap.atmosphereColor=brightTailColor(transformedMap.data,dataset.atmosphereColor);maps.set(dataset.id,transformedMap);
     for(const product of productKinds?dataset.products.filter(product=>productKinds.includes(product.kind)):dataset.products){
-      if(!/^[a-z0-9][a-z0-9-]*(?:@2x)?\.webp$/u.test(product.filename))throw new TypeError('Invalid observation output name.');
+      if(!OBSERVATION_RECIPE_POLICY.productFilename.test(product.filename))throw new TypeError('Invalid observation output name.');
       const productMap=product.kind==='poles'&&retainsNativePoleCoordinates(nativePoleMap,dataset.transforms)?nativePoleMap:transformedMap;
       let raster=await transformMap(productMap,product.transforms);
       if(product.kind==='surface'){const packed=packProjectiveSurfaceRaster(raster.data,{width:raster.width,height:raster.height,channels:raster.channels,...product.packing});raster={data:packed.data,width:packed.packedWidth,height:packed.packedHeight,channels:raster.channels};}

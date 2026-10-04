@@ -131,11 +131,11 @@ cycle. Share anything else through `@cssearth/core` or another package. Prepared
   three layers).
 - `src/preparation/` is published as `@cssearth/bake/preparation` (Node only). It holds the stale-build check (`stale-builds.ts`) that `pnpm dev:prepare` and `packages/bake/cli/prepare-object.mts` run through
   `packages/bake/cli/check-stale-builds.mts`: that command imports the module from source, the one bake command that does,
-  because it must run, and `--run` must rebuild, while this package is unbuilt, so its source closure imports only Node built-ins. The workspace graph reader is also exported as `@cssearth/bake/preparation/workspace-graph` directly from source for bootstrap-safe CI discovery.
+  because it must run, and `--run` must rebuild, while this package is unbuilt, so its source closure imports only Node built-ins. The workspace graph reader is also exported as `@cssearth/bake/preparation/workspace-graph` directly from source for bootstrap-safe CI discovery. Test-lane collection uses core’s generic quoted-glob collector; lane names come from the root scripts.
   Its tests are `node --test` suites in `src/preparation/`.
 - `src/run-implemented-objects/` is published as `@cssearth/bake/run-implemented-objects` (Node only): runs a registered
   scene object's acquire, prepare, test, browser or assemble command, and the concurrency-limited, memory-budgeted
-  scheduler `prepare-objects` calls to prepare several objects at once. It imports `sources`. `packages/bake/cli/run-implemented-objects.mts` is its command.
+  scheduler `prepare-objects` calls to prepare several objects at once. It imports `sources` and `preparation`. Object suites come from root test-lane globs; shared suites mark the `CSSEARTH_TEST_OBJECTS` contract. `packages/bake/cli/run-implemented-objects.mts` is its command.
 - `src/prepare-objects/` is published as `@cssearth/bake/prepare-objects` (Node only): the catalogue-wide preparation run,
   each object through `run-implemented-objects`'s scheduler, then navigation and the inventories. It imports
   `run-implemented-objects`. `packages/bake/cli/prepare-objects.mts` is its command.

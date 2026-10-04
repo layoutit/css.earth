@@ -99,6 +99,22 @@ Every textured presentation resolves its image consumers from the actual scene C
 
 The runtime uses those bindings to keep the mesh connected, publish images directly to their leaves, and introduce each atlas on one face before activating later batches. A missing binding bank falls back to inherited texture publication and connected-node batching. The registry activation check rejects that omission for textured deliveries.
 
+## Declaration adapter policies
+
+The shared scanner splits fragments only. Each adapter supplies its own named
+`declarationName` parameter; the historical #1152 quote/backslash convention
+stays in the scanner and is pinned by its tests.
+
+| Adapter | Named default | Name/admission policy |
+| --- | --- | --- |
+| Clean leaves | `CLEAN_DECLARATION_NAME` | Native names lowercase; custom names preserve case; reject colonless and colon-at-zero fragments. |
+| Leaf boxes | `LEAF_BOX_DECLARATION_NAME` | Case-sensitive exclusion; colonless fragments have no name and remain. |
+| Texture tiles | `TEXTURE_DECLARATION_NAME` | Preserve case; historical colonless name drops its last character (`slice(0, -1)`). |
+
+`src/presentation/css-declaration-scanner.test.mts` pins these separate policies,
+including malformed fragments. This documents the texture adapter's existing
+truncation without changing its admission during a relocation.
+
 ## Prepared ring backings
 
 Ring wedges and full ring planes carry the same projective leaf metadata as body surfaces. Their compiler scales each leaf box and texture address together with the inverse transform, preserving the prepared world geometry. The shared silhouette groups choose backing sizes before connection and keep them during coasting. A ring must not bypass this contract by emitting only a fixed CSS box.

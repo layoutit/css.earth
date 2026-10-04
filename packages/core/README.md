@@ -53,3 +53,5 @@ Shared world rotation/reflection types and validation live in `src/math/world-ro
 Normalization policies preserve each caller’s historical zero, NaN and component-count behavior: `normalizeOrZero` keeps array length and signed zeros; `normalize3OrZero` returns exactly three components; `normalize3OrZeroNonPositive` uses positive zero for non-positive/NaN lengths; `normalizeOrThrow` keeps caller diagnostics; `normalize3Unchecked` is for admitted nonzero vectors. Tests pin these differences. The two median policies likewise distinguish an averaged middle pair from a copied upper-middle sample.
 
 `PitchCalibration` is the host-neutral structural pitch contract shared by navigation and authored camera records.
+
+The Node entry also exports `scriptTestFiles`: it collects quoted test globs from caller-supplied package scripts. Callers own manifest reading and lane names; CI may import its builtins-only source before installation.

@@ -54,7 +54,7 @@ export const FORMAT_READER_POLICIES: readonly FormatReaderPolicy[] = [
   { schema: PREPARED_GALAXY_CATALOG_SCHEMA, readers: ['parsePreparedGalaxyCatalog'], paths: [] },
   { schema: PREPARED_IMAGE_LAYER_BANK_SCHEMA, readers: ['validatePreparedImageLayerBank'], paths: [] },
   { schema: OBJECT_SCHEMA, readers: ['parseObjectDescriptor', 'readObjectDescriptorRecord'], paths: ['object.json'] },
-  { schema: OBJECT_CONTENT_SCHEMA, readers: ['parseCompleteObjectContentSource', 'readObjectContentDatasets', 'readObjectContentPanel', 'validateObjectContentEnvelope'], paths: ['source/content/object.json', 'content/object.json'] },
+  { schema: OBJECT_CONTENT_SCHEMA, readers: ['readObjectContentDatasets', 'readObjectContentPanel', 'validateObjectContentEnvelope'], paths: ['source/content/object.json', 'content/object.json'] },
   { schema: OBJECT_RUNTIME_SCHEMA, readers: ['parsePreparedObjectRuntime', 'requireObjectRuntimeDefinition', 'readRuntimeCamera', 'readRuntimeCameraPrefix', 'readRuntimeFeatureDatasets'], paths: ['prepared/runtime.json', 'runtime.json'] },
   { schema: PREPARED_DESTINATIONS_SCHEMA, readers: ['parsePreparedDestinations', 'readDestinationSettlements'], paths: [] },
   { schema: PREPARED_FEATURES_SCHEMA, readers: ['readPreparedFeaturePins', 'readFeatureMapLongitude'], paths: ['prepared/features.json'] },

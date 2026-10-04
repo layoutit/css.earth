@@ -1,12 +1,14 @@
 import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
+import { testLaneFiles } from '../preparation/index.ts';
 // `@cssearth/bake/run-implemented-objects` (Node only): runs a registered scene object's acquire, prepare, test, browser
 // or assemble command, and the concurrency-limited scheduler that prepares several objects with a memory budget. It
 // imports `sources`. `packages/bake/cli/run-implemented-objects.mts` is its command.
 import { isArray } from '@cssearth/core';
 import { execFileSync, spawn } from "node:child_process";
-import { access, readdir, readFile } from "node:fs/promises";
+import { access, readFile } from "node:fs/promises";
 import { availableParallelism, freemem, totalmem } from "node:os";
 import { resolve } from "node:path";
+import { readFileSync } from "node:fs";
 
 import { readPreparedObjects } from "@cssearth/objects/node";
 import { authoredObject } from '../sources/index.ts';
@@ -40,30 +42,15 @@ async function requireAuthored(id: string, projectRoot: string) {
 
 export async function discoverObjectTests(
   id: string,
-  { projectRoot = checkoutProjectRoot(import.meta.url), readDirectory = readdir }: {projectRoot?: string; readDirectory?: (directory: string) => Promise<string[]>} = {},
+  { projectRoot = checkoutProjectRoot(import.meta.url) }: {projectRoot?: string} = {},
 ) {
-  const directory = resolve(projectRoot, 'src/objects', id);
-  const isTest = (filename: string) => /\.test\.m(?:j|t)s$/u.test(filename);
-  let filenames: string[] = [];
-  try {
-    filenames = await readDirectory(directory);
-  } catch {
-    // A body covered only by the shared contract runners keeps no directory of its own.
-  }
-  const own = filenames.filter(isTest).sort().map((filename) => resolve(directory, filename));
-  // The shared runtime runner tests once per runtime structure; CSSEARTH_TEST_OBJECTS limits it to this body.
-  const shared = sharedUnitTestDirectory(projectRoot);
-  const sharedSuites = new Set(['runtime-package.test.mts']);
-  const runners = (await readDirectory(shared)).filter(filename => sharedSuites.has(filename)).sort().map((filename) => resolve(shared, filename));
-  const tests = [...own, ...runners, resolve(projectRoot, 'packages/bake/src/raster/raster-pages.test.mts')];
-  if (tests.length === 0) {
-    throw new Error(`Implemented object ${id} has no tests.`);
-  }
-  return tests;
-}
-
-export function sharedUnitTestDirectory(projectRoot = checkoutProjectRoot(import.meta.url)) {
-  return resolve(projectRoot, 'site/test');
+  const lanes = testLaneFiles(projectRoot, JSON.parse(readFileSync(resolve(projectRoot, 'package.json'), 'utf8')) as unknown, ['test:packages', 'test:site']);
+  // Lane globs determine membership. Shared object suites declare the selection contract in their source;
+  // unfiltered shared invariants use the same marker, so adding a suite requires no runner name list.
+  const tests = [...lanes.packages, ...lanes.site].filter(file => file.startsWith(`src/objects/${id}/`)
+    || /^\/\/[^\n]*\bCSSEARTH_TEST_OBJECTS\b/mu.test(readFileSync(resolve(projectRoot, file), 'utf8'))).map(file => resolve(projectRoot, file));
+  if (tests.length === 0) throw new Error(`Implemented object ${id} has no tests.`);
+  return [...new Set(tests)].sort();
 }
 
 export async function resolveObjectAssembly(id: string, { projectRoot = checkoutProjectRoot(import.meta.url), accessFile = access }: ResolveOptions = {}) {

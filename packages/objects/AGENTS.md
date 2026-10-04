@@ -16,6 +16,7 @@ inventory (`src/node/`, the Node-only `@cssearth/objects/node` entry); the main,
 import `node/`.
 `src/node/contract/` is the Node-only `@cssearth/objects/node/contract` entry: the helpers tests use to check an object
 against its contract (its final prepared definition, and fixture values required before a test inspects them).
+`src/node/contract/object-content-fixture.ts` owns complete content-fixture admission, exported only by the Node contract entry; production content readers stay browser-safe.
 `src/node/contract/source-test.ts` owns restored-source test support; `@cssearth/objects/node/contract` exports it. The old `node/source-test` subpath is a compatibility facade for frozen site consumers. `sourceLoad` discriminates loaded values from a skip; callers read `sourceValues` inside a running test. Restore hints may be injected by the caller.
 `src/volume/` holds browser-safe prepared compiler/joint/shape scene contracts, density-filter helpers,
 layer-plan/report readers and render-element budgets; exported through the main entry. It also owns the data-only

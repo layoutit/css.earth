@@ -5,7 +5,7 @@ import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
  *
  *   node packages/bake/authoring/antares/author.mts [--check] */
 import { resolve } from 'node:path';
-import { writeOrCheckAuthoredOutputs } from '../authored-output.mts';
+import { runAuthor } from '../authored-output.mts';
 import { pathToFileURL } from 'node:url';
 import { neutralDiscMarker } from '@cssearth/bake/navigation';
 
@@ -14,9 +14,13 @@ export const CONTEXT_PATH = 'presentation/context.png';
 export const CONTEXT_SIZE = 512;
 
 export async function authorAntares({ check = false } = {}) {
-  const marker = await neutralDiscMarker(CONTEXT_SIZE);
-  await writeOrCheckAuthoredOutputs(root, [[CONTEXT_PATH, marker]], { check, readError: 'propagate-read-error', mkdir: 'none' });
-  return { size: CONTEXT_SIZE };
+  return runAuthor({
+    root: root, check, readError: 'propagate-read-error', mkdir: 'none',
+    compute: async () => {
+      const marker = await neutralDiscMarker(CONTEXT_SIZE);
+      return { outputs: [[CONTEXT_PATH, marker]], result: { size: CONTEXT_SIZE } };
+    },
+  });
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {

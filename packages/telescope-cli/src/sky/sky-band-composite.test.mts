@@ -207,3 +207,20 @@ test('the planes a volume reads are each band divided by its own measured range,
     assert.ok(Math.abs(finite[Math.floor(0.05 * (finite.length - 1))]!) < 1e-6, 'the background percentile maps to 0');
     assert.ok(Math.abs(finite.at(-1)! - 1) < 1e-6, 'the peak percentile maps to 1');
   }));
+
+test('image3 evidence preserves the serialized historical program path', async () => {
+  const cache = await mkdtemp(join(tmpdir(), 'sky-image3-history-'));
+  try {
+    const primary = i2d('F187N', 'CLEAR', () => 1).subarray(0, 2880);
+    const science = hips2fits('fixture', x => x + 1, [card('PCOUNT', '0'), card('GCOUNT', '1'),
+      card('EXTNAME', "'SCI'"), card('BUNIT', "'MJy/sr'")]);
+    science.write(card('XTENSION', "'IMAGE'"), 0, 'ascii');
+    await mkdir(join(cache, 'jwst-image3'));
+    await writeFile(join(cache, 'jwst-image3', 'fixture-NIRCAM-F187N.fits'), Buffer.concat([primary, science]));
+    const result = await composeSkyBands(recipe([{ band: 'NIRCAM-F187N', program: 'fixture' }]), { input: noInput, cache });
+    const acquisition = result.evidence.bands[0]!.acquisition;
+    assert.ok('program_file' in acquisition);
+    assert.equal(acquisition.program_file,
+      'packages/telescope-cli/src/archives/jwst/imaging/programs/fixture.json');
+  } finally { await rm(cache, { recursive: true, force: true }); }
+});

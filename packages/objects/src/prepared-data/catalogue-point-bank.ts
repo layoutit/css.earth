@@ -146,6 +146,3 @@ function parseLevels(value: unknown, total: number, id: string): readonly Catalo
   if (sum !== total) throw new TypeError(`${id}: the levels hold ${sum} points, the bank ${total}.`);
   return Object.freeze(parsed);
 }
-
-// Main-entry spelling is frozen until the concurrent barrel change lands.
-export { readCataloguePointBank as parseCataloguePoints };

@@ -22,7 +22,7 @@ import { VOLUME_SOURCE_MANIFEST_SCHEMA, VOLUME_PRESENTATION_SOURCE_SCHEMA, VOLUM
 import { access, readFile, readdir } from 'node:fs/promises';
 import sharp from 'sharp';
 import { resolve } from 'node:path';
-import { writeOrCheckAuthoredOutputs } from '../authored-output.mts';
+import { runAuthor } from '../authored-output.mts';
 import { pathToFileURL } from 'node:url';
 import { fitsImageAccessor, readFitsHdu, readFitsImage, skyImageAxes } from '@cssearth/fits';
 import { encodeDensityKtx2 } from '@cssearth/bake/density';
@@ -1041,9 +1041,10 @@ if (direct) {
     console.log(`SKIP betelgeuse-shell --check: requires sources under ${DOWNLOADS_BASE}: ${missing.join(', ')}. Restore source-cache/betelgeuse-shell/<manifest path> when available; otherwise acquire the declared ESO/MATISSE inputs and run packages/bake/authoring/betelgeuse-shell/reduce-alma-sio.mts for the ALMA products. No outputs compared.`);
   } else {
     const selected = process.argv.find(arg => arg.startsWith('--default='))?.slice(10);
-    const result = await author(selected);
-    await writeOrCheckAuthoredOutputs(root, result.outputs, { check, readError: 'mismatch-on-read-error',
-      mkdir: 'root-before-write-or-check', mismatchMessage: name => `Authored output differs: ${name}` });
+    const result = await runAuthor({ root, check, readError: 'mismatch-on-read-error',
+      mkdir: 'root-before-write-or-check', mismatchMessage: name => `Authored output differs: ${name}`,
+      compute: async () => { const result = await author(selected); return { outputs: result.outputs, result }; },
+    });
     console.log(`${check ? 'CHECKED' : 'AUTHORED'} betelgeuse-shell: ${JSON.stringify(result.measured)}; grid ${GRID.size}^3; ${JSON.stringify(result.grids)}`);
   }
 }

@@ -73,7 +73,7 @@ export type { PreparedResourceEntry, PreparedResourcePool, PreparedAssets, Prepa
 export type { PitchCalibration, ResponsiveFit, CameraPlan, PerspectiveCameraPlan, CubicSkyCameraContract, CubicSkyPlan, DirectionalSunPlan } from './prepared-data/runtime-camera-types.js';
 export { CSS_NUMBER, cssMatrix } from './prepared-data/runtime-validation/css-matrix.js';
 
-export { record, array, text, finite, positive, requireJsonData, requirePreparedData } from './prepared-data/runtime-validation/guards.js';
+export { requireJsonData, requirePreparedData } from './prepared-data/runtime-validation/guards.js';
 export type { RecordValue } from './prepared-data/runtime-validation/guards.js';
 export { parsePreparedObjectRuntime } from './prepared-data/runtime-validation/index.js';
 
@@ -117,7 +117,7 @@ export { validatePreparedCssSurfaceShell } from './prepared-data/css-surface-she
 export { PREPARED_CSS_VOLUME_SCHEMA, PREPARED_VOLUME_IMPOSTORS_SCHEMA, PREPARED_VOLUME_DATASETS_SCHEMA, PREPARED_IMAGE_LAYER_BANK_SCHEMA, DENSITY_VOLUME_FORMAT } from './volume/volume-schemas.js';
 export { PREPARED_CSS_SURFACE_SHELL_SCHEMA, SURFACE_SHELL_FORMAT, SHELL_CORNER_PERMUTATIONS } from './prepared-data/css-surface-shell-types.js';
 
-export { parseCataloguePoints, parseCataloguePointSteps } from './prepared-data/catalogue-point-bank.js';
+export { readCataloguePointBank, parseCataloguePointSteps } from './prepared-data/catalogue-point-bank.js';
 export type { CataloguePointLevel, PreparedCataloguePointBank } from './prepared-data/catalogue-point-bank.js';
 export { GALAXY_BACKING_SCHEMA, parseGalaxyBacking } from './prepared-data/galaxy-backing.js';
 export type { BackingNearFade, PreparedGalaxyBacking } from './prepared-data/galaxy-backing.js';
@@ -213,9 +213,9 @@ export { DENSITY_PLACEMENT_SCHEMA, parseDensityPlacement, type DensityPlacement 
 export { OBSERVED_STELLAR_CATALOGUE_SCHEMA, isStellarCoordinate, readObservedStellarCatalogueEnvelope, parseObservedStellarCatalogue,
   type ObservedStar, type PhotometryKind, type ObservedStellarCatalogueEnvelope, type ObservedStellarCatalogue } from './volume/observed-stellar-catalogue.js';
 export { CAMERA_POSE_SCHEMA, parseCameraPose, parseCameraPoseMatrix, parseRestoredCameraPose, type CameraPose } from './prepared-data/camera-pose.js';
-export * from './prepared-data/object-content.js';
-export * from './prepared-data/prepared-content.js';
-export * from './prepared-data/facility-emblems.js';
+export { OBJECT_CONTENT_SCHEMA, OBJECT_CONTENT_VERSION, validateObjectContentEnvelope, authoredDatasetMetadata, type DatasetLegendRecipe, type DatasetSource, type ContentDatasetRecipe, type DatasetStep, type ChartRecipe, type GalleryRecipe, type ObjectContentSource, type Fact } from './prepared-data/object-content.js';
+export { PREPARED_CONTENT_SCHEMA, parsePreparedPanelContent, type PreparedObjectContent, type PreparedObjectContentDocument, type PreparedTitle, type ObjectTitle, type Chart, type GalleryItem, type Gallery, type PreparedPanelContent } from './prepared-data/prepared-content.js';
+export { FACILITY_EMBLEMS_SCHEMA, readFacilityEmblemSource, parseFacilityEmblemLibrary, parseFacilityEmblemImage, type FacilityEmblemEntry, type FacilityEmblemLibrary } from './prepared-data/facility-emblems.js';
 
 // E2-rest: P1
 export { PUBLISHED_MUTUAL_ORBIT_SCHEMA, PUBLISHED_BODY_EPOCH_EPHEMERIS_SCHEMA, SOLAR_SYSTEM_PREPARATION_SCHEMA, INVESTIGATION_LEDGER_SCHEMA, ACQUISITION_PLAN_SCHEMA } from './prepared-data/source-schema-identifiers.js';
