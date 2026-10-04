@@ -99,6 +99,8 @@ function mountFlightAnnotations(root: HTMLElement, { billboardFadeStartDiscPixel
     return element;
   };
   const caption = leaf('context-flight-caption', 'contextFlightLabel'), circle = leaf('context-flight-circle', 'contextFlightCircle');
+  // The circle takes its destination's shape. Its place is inline, so a diamond's turn is too.
+  let turn = '';
   type Entry = { readonly body: { readonly id: string }; readonly marker: HTMLElement; readonly baseAlpha: { readonly line: number; readonly label: number } };
   return {
     /** Returns the destination whose caption is drawn, so its footprint joins the label exclusions. */
@@ -108,10 +110,15 @@ function mountFlightAnnotations(root: HTMLElement, { billboardFadeStartDiscPixel
       const circleVisibility = circleVisible ? '' : 'hidden';
       if (circle.style.visibility !== circleVisibility) circle.style.visibility = circleVisibility;
       if (circleVisible && flightBody && entry) {
-        if (circle.dataset.contextFlightCircle !== entry.body.id) circle.dataset.contextFlightCircle = entry.body.id;
+        if (circle.dataset.contextFlightCircle !== entry.body.id) {
+          circle.dataset.contextFlightCircle = entry.body.id;
+          const shape = entry.marker.dataset.contextShape;
+          if (shape) circle.dataset.contextShape = shape; else delete circle.dataset.contextShape;
+          turn = shape === 'diamond' ? ' rotate(45deg)' : '';
+        }
         const opacity = String(entry.baseAlpha.line * Math.max(0, Math.min(1, (start - flightBody.diameter) / (start - full))));
         writeStyle(circle, 'opacity', opacity);
-        const transform = `translate(${Math.round(flightBody.x * 1000) / 1000}px, ${Math.round(flightBody.y * 1000) / 1000}px) translate(-50%, -50%)`;
+        const transform = `translate(${Math.round(flightBody.x * 1000) / 1000}px, ${Math.round(flightBody.y * 1000) / 1000}px) translate(-50%, -50%)${turn}`;
         writeStyle(circle, 'transform', transform);
       }
       const captionVisibility = captionBody ? '' : 'hidden';
@@ -203,6 +210,8 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
     const color = body.contextColor ?? (unpackaged ? body.color : undefined);
     if (color) marker.style.color = color;
     if (body.labelCase === 'upper') data.contextLabelCase = 'upper';
+    // A galaxy's ring is a diamond (world-context.css): its marker is another galaxy, not a body of this one.
+    if (body.classification === 'galaxy') data.contextShape = 'diamond';
     if (approximate) {
       data.contextPlacement = 'approximate';
       marker.title = `${body.name}${APPROXIMATE_TITLE}`;
