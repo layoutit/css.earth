@@ -72,10 +72,28 @@ test('disk functions have their defining limits and refuse invalid parameters', 
   assert.ok(Math.abs(at({ family: 'lunar-lambert', weight: 1 }, 0.4, 0.7) - at({ family: 'lommel-seeliger' }, 0.4, 0.7)) < 1e-15);
   assert.ok(Math.abs(at({ family: 'minnaert', coefficient: 1, coefficientPerDegree: 0 }, 0.4, 0.7) - 0.4) < 1e-15, 'k = 1 is Lambert');
   // Normalizing to the observed geometry itself is the identity.
-  for (const model of [{ family: 'lommel-seeliger' }, { family: 'lunar-lambert', weight: 0.3 }, { family: 'minnaert', coefficient: 0.7, coefficientPerDegree: 0.002 }] as DiskModel[]) {
+  for (const model of [{ family: 'lommel-seeliger' }, { family: 'lunar-lambert', weight: 0.3 }, { family: 'minnaert', coefficient: 0.7, coefficientPerDegree: 0.002 }, { family: 'lommel-seeliger-lambert', lunarFraction: 0.871, lunarFractionPerDegree: -0.003, surfacePhase: 1.556, surfacePhasePerDegree: -0.014 }] as DiskModel[]) {
     const g = { mu0: 0.37, mu: 0.81, phase: 0.9 };
     assert.ok(Math.abs(diskGain(model, g, g) - 1) < 1e-14, model.family);
   }
   assert.throws(() => assertDiskModel({ family: 'lunar-lambert', weight: 1.2 }), /weight/);
   assert.throws(() => assertDiskModel({ family: 'minnaert', coefficient: Number.NaN, coefficientPerDegree: 0 }), /Minnaert/);
+});
+
+test('Lommel-Seeliger plus Lambert follows its printed lines in phase and sends no negative light', () => {
+  // Dhingra et al. (2021) eq. 2 with the ridged-plains lines of its Table 2.
+  const europa: DiskModel = { family: 'lommel-seeliger-lambert', lunarFraction: 0.871, lunarFractionPerDegree: -0.003, surfacePhase: 1.556, surfacePhasePerDegree: -0.014 };
+  const degree = Math.PI / 180, near = (value: number, expected: number) => assert.ok(Math.abs(value - expected) < 1e-12, `${value} is not ${expected}`);
+  // At 60 degrees the lines give A = 0.691 and f = 0.716.
+  near(diskValue(europa, { mu0: 0.5, mu: 0.8, phase: 60 * degree }), 0.691 * 0.716 * 0.5 / 1.3 + 0.309 * 0.5);
+  // The flood-lit disc, relative to its centre: (A f / 2 + (1 - A) mu) / (A f / 2 + 1 - A).
+  near(diskGain(europa, { mu0: 1, mu: 1, phase: 0 }, { mu0: 0.1, mu: 0.1, phase: 0 }), (0.871 * 1.556 / 2 + 0.129 * 0.1) / (0.871 * 1.556 / 2 + 0.129));
+  // A = 1 with f = 2 is Lommel-Seeliger and A = 0 is Lambert.
+  near(diskValue({ ...europa, lunarFraction: 1, lunarFractionPerDegree: 0, surfacePhase: 2, surfacePhasePerDegree: 0 }, { mu0: 0.4, mu: 0.7, phase: 1 }), diskValue({ family: 'lommel-seeliger' }, { mu0: 0.4, mu: 0.7, phase: 1 }));
+  near(diskValue({ ...europa, lunarFraction: 0, lunarFractionPerDegree: 0 }, { mu0: 0.4, mu: 0.7, phase: 1 }), 0.4);
+  // The line for f crosses zero at 111.1 degrees; at 128 degrees only the Lambert term, 1 - A = 0.513, remains.
+  near(diskValue(europa, { mu0: 0.3, mu: 0.2, phase: 128 * degree }), 0.513 * 0.3);
+  assert.throws(() => assertDiskModel({ ...europa, lunarFractionPerDegree: -0.006 }), /lunar fraction/);
+  assert.throws(() => assertDiskModel({ ...europa, surfacePhase: 0 }), /surface phase/);
+  assert.throws(() => assertDiskModel({ ...europa, surfacePhasePerDegree: Number.NaN }), /finite/);
 });

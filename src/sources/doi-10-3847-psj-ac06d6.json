@@ -1,0 +1,32 @@
+{
+  "id": "doi-10-3847-psj-ac06d6",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Europa Clipper Preparatory Photometry to Constrain Surface Properties",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.3847/PSJ/ac06d6"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/PSJ/ac06d6",
+      "label": "Publication"
+    },
+    {
+      "role": "mirror",
+      "url": "https://hal.science/hal-04259112",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/europa/source/manifest.json",
+      "locator": "/documents/36"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

@@ -1,0 +1,27 @@
+{
+  "id": "pds-opus-vg-iss-2-j-c2065221",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "PDS Ring-Moon Systems Node observation record · Voyager 2 ISS wide-angle frame C2065221 of Europa",
+  "identifiers": [
+    {
+      "type": "OPUS ID",
+      "value": "vg-iss-2-j-c2065221"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://opus.pds-rings.seti.org/opus/api/metadata/vg-iss-2-j-c2065221.json",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/europa/source/manifest.json",
+      "locator": "/documents/36"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

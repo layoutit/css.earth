@@ -62,9 +62,10 @@ export function formatInvestigationReport(report: ReturnType<typeof investigatio
   return lines.join('\n') + '\n';
 }
 
-/** The external source an open decision examined: where the evidence that would reopen it appears. */
+/** The external source an open decision examined: where the evidence that would reopen it appears. A path inside the
+ * repository, like a link to it, is not one. */
 export function watchedSource(evidence: readonly string[]) {
-  const external = evidence.find(link => !link.startsWith('https://github.com/layoutit/css.earth/'));
+  const external = evidence.find(link => /^https?:\/\//u.test(link) && !link.startsWith('https://github.com/layoutit/css.earth/'));
   return external === undefined ? null : new URL(external).host;
 }
 
