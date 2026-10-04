@@ -54,7 +54,7 @@
       {
         "id": "infrared",
         "label": "Infrared color",
-        "qualification": "False color from its measured flux in three infrared bands (Sanghi et al. (2026), arXiv:2603.08787, with the MIRI fluxes of Matthews et al. (2024), Nature 633, 789). The disc itself is unresolved.",
+        "qualification": "False color from its measured flux in three infrared bands (Sanghi et al. (2026), arXiv:2603.08787, with the MIRI fluxes of Matthews et al. (2024), Nature 633, 789). The disc itself is unresolved; darkening toward the edge from a model atmosphere.",
         "thumbnail": "eps-indi-ab-dataset-infrared.webp",
         "surface": "eps-indi-ab-surface-infrared@2x.webp",
         "poles": "eps-indi-ab-poles-infrared@2x.webp",
@@ -64,7 +64,7 @@
           "url": "https://arxiv.org/abs/2603.08787"
         },
         "falseColor": true,
-        "notes": "Epsilon Indi Ab's brightness in three infrared bands as one color: red F1550C 15.51 µm, green F1065C 10.55 µm, blue F430M 4.278 µm (Sanghi et al. (2026), arXiv:2603.08787, with the MIRI fluxes of Matthews et al. (2024), Nature 633, 789), on a range shared with this planet alone, from zero to its brightest band (f1550c), so the color shows its band ratios; brightness is not compared across planets at different distances. Not a natural color; nobody has resolved its disc."
+        "notes": "Epsilon Indi Ab's brightness in three infrared bands as one color: red F1550C 15.51 µm, green F1065C 10.55 µm, blue F430M 4.278 µm (Sanghi et al. (2026), arXiv:2603.08787, with the MIRI fluxes of Matthews et al. (2024), Nature 633, 789), on a range shared with this planet alone, from zero to its brightest band (f1550c), so the color shows its band ratios; brightness is not compared across planets at different distances. Not a natural color; nobody has resolved its disc. The darkening toward the edge is the quadratic law fitted to the JWST/MIRI F1065C intensity PICASO 4.1 (Batalha et al. 2019, ApJ 878, 70) computes from Sonora Elf Owl cloud-free (Mukherjee et al. 2024, ApJ 963, 73; [M/H] +0.7, C/O 2.5 times solar, log Kzz 4) model atmospheres at 300 K and log g 4.25, read between the models spectra_logzz_4.0_teff_275.0_grav_100.0_mh_0.7_co_2.5, spectra_logzz_4.0_teff_275.0_grav_178.0_mh_0.7_co_2.5, spectra_logzz_4.0_teff_300.0_grav_100.0_mh_0.7_co_2.5, spectra_logzz_4.0_teff_300.0_grav_178.0_mh_0.7_co_2.5 (u1 0.497, u2 0.367; the law fits each model's eight angles within 0.38% of the centre): a cloud-free model, the one Sanghi et al. (2026), arXiv:2603.08787 fit to this planet, because no table reaches a planet this cold and nobody has resolved its disc."
       }
     ]
   },

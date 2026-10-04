@@ -1,0 +1,14 @@
+{
+  "schema": "cssearth-atmosphere-grid-fit@1",
+  "grid": "sonora-elf-owl",
+  "teffK": 300,
+  "logg": 4.25,
+  "metallicity": 0.7,
+  "co": 2.5,
+  "logKzz": 4,
+  "source": {
+    "citation": "Sanghi et al. (2026), arXiv:2603.08787",
+    "url": "https://arxiv.org/abs/2603.08787",
+    "locator": "Table 5, Sonora Elf Owl, the lowest reduced chi-squared among the fits whose mass agrees with the dynamical mass: Teff 300 K, g 178 m/s2 (log g 4.25), [M/H] +0.7, log Kzz 4, C/O 2.5 times solar, radius 0.925, reduced chi-squared 2.62"
+  }
+}

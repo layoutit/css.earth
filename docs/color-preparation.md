@@ -288,7 +288,11 @@ intensity at eight viewing angles in the middle band of the planet's color
 ([picaso-limb.mts](../packages/telescope-cli/src/new-object/picaso-limb.mts)). The fit is transcribed with its table in
 `source/photometry/atmosphere-fit.json`. Fed those files, PICASO reproduces the grid's own published J−H and H−K colors
 within 0.11 mag at 1,100 K, log g 3.5 and [M/H] +0.5 (1.29 and 1.04 against 1.20 and 0.97 for f_sed 2), and misses by 0.8 and
-0.3 mag with the clouds left out. A planet with no such fit stays a flat disc, and its README says why.
+0.3 mag with the clouds left out. A fit on the cloud-free Sonora Elf Owl grid (Mukherjee et al.
+[2024](https://doi.org/10.5281/zenodo.10381250)) is computed the same way from the release's own file, which states the
+abundances of its disequilibrium chemistry and carries the spectrum its authors computed; each node records the band flux
+computed here over theirs (1.04 for Epsilon Indi Ab at 10.65 µm). A planet with no usable fit stays a flat disc, and its
+ledger says why, with the fits read in its papers.
 
 **Gravity darkening.** A star that spins fast is flattened and hotter at its poles. Where a paper publishes a Roche-von Zeipel
 fit (ω, β, the polar temperature, the radii and the pole's orientation), [gravity-darkening.ts](../packages/bake/src/objects/stellar/gravity-darkening.ts)

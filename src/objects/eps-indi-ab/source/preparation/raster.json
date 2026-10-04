@@ -26,7 +26,22 @@
       "falseColor": true,
       "science": {
         "kind": "disc-integrated-band-color",
-        "qualification": "Infrared false color of the whole disc from published flux densities (Sanghi et al. (2026), arXiv:2603.08787, with the MIRI fluxes of Matthews et al. (2024), Nature 633, 789, Table 2, flux density in Jy: JWST/MIRI F1550C (5.25 +/- 0.16)e-4, JWST/MIRI F1065C (1.88 +/- 0.06)e-4, JWST/NIRCam F430M (8.4 +/- 0.4)e-5): red F1550C 15.51 µm, green F1065C 10.55 µm, blue F430M 4.278 µm, on one range shared with the bodies the record names. The planet is unresolved, so no map is implied. It glows with its own heat, so no lighting."
+        "qualification": "Infrared false color of the whole disc from published flux densities (Sanghi et al. (2026), arXiv:2603.08787, with the MIRI fluxes of Matthews et al. (2024), Nature 633, 789, Table 2, flux density in Jy: JWST/MIRI F1550C (5.25 +/- 0.16)e-4, JWST/MIRI F1065C (1.88 +/- 0.06)e-4, JWST/NIRCam F430M (8.4 +/- 0.4)e-5): red F1550C 15.51 µm, green F1065C 10.55 µm, blue F430M 4.278 µm, on one range shared with the bodies the record names. The planet is unresolved, so no map is implied. It glows with its own heat, so no lighting. The disc is dimmed toward the limb by the quadratic law fitted to the JWST/MIRI F1065C intensity PICASO 4.1 (Batalha et al. 2019, ApJ 878, 70) computes from Sonora Elf Owl cloud-free (Mukherjee et al. 2024, ApJ 963, 73; [M/H] +0.7, C/O 2.5 times solar, log Kzz 4) model atmospheres at 300 K and log g 4.25, read between the models spectra_logzz_4.0_teff_275.0_grav_100.0_mh_0.7_co_2.5, spectra_logzz_4.0_teff_275.0_grav_178.0_mh_0.7_co_2.5, spectra_logzz_4.0_teff_300.0_grav_100.0_mh_0.7_co_2.5, spectra_logzz_4.0_teff_300.0_grav_178.0_mh_0.7_co_2.5 (u1 0.497, u2 0.367; the law fits each model's eight angles within 0.38% of the centre): a cloud-free model, the one Sanghi et al. (2026), arXiv:2603.08787 fit to this planet, because no table reaches a planet this cold and nobody has resolved its disc.",
+        "limbDarkening": {
+          "law": "quadratic",
+          "path": "photometry/picaso-elf-owl-f1065c-quadratic.tsv",
+          "grid": {
+            "teffK": 300,
+            "logg": 4.25,
+            "models": {}
+          },
+          "columns": {
+            "teff": "Teff",
+            "logg": "logg",
+            "u1": "a",
+            "u2": "b"
+          }
+        }
       }
     }
   ],
@@ -48,7 +63,7 @@
       },
       "limbMaterial": {
         "logicalSize": 496,
-        "composition": "transparent: the adopted source-radius opaque-sphere silhouette is the limb; no off-limb or radial-brightness source is selected",
+        "composition": "black alpha darkens the disc according to the selected limb-darkening law; transparent outside the silhouette",
         "sourceRadius": "measurements.json#radiusKm",
         "surfaceReplacement": false,
         "runtimeAlphaProcessing": false

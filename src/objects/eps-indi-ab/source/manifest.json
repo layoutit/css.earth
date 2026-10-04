@@ -121,6 +121,39 @@
         "kind": "local",
         "reason": "Project-authored color recipe transcribing the cited photometry; repinned when edited."
       }
+    },
+    {
+      "id": "eps-indi-ab-picaso-elf-owl-limb-darkening",
+      "path": "photometry/picaso-elf-owl-f1065c-quadratic.tsv",
+      "origin": "https://doi.org/10.5281/zenodo.10381250",
+      "credit": "PICASO 4.1 (Batalha et al. 2019, ApJ 878, 70) on Sonora Elf Owl cloud-free (Mukherjee et al. 2024, ApJ 963, 73; [M/H] +0.7, C/O 2.5 times solar, log Kzz 4) profiles",
+      "license": "Project-computed model values; the Sonora profiles and PICASO correlated-k tables are CC BY 4.0, PICASO is GPL-3.0",
+      "acquisition": "Computed by node packages/telescope-cli/src/new-object/new-object-cli.mts --imaged-limb eps-indi-ab (packages/telescope-cli/src/new-object/picaso-limb.mts, @cssearth/telescope/node picasoLimbNodes) at the nodes spectra_logzz_4.0_teff_275.0_grav_100.0_mh_0.7_co_2.5, spectra_logzz_4.0_teff_275.0_grav_178.0_mh_0.7_co_2.5, spectra_logzz_4.0_teff_300.0_grav_100.0_mh_0.7_co_2.5, spectra_logzz_4.0_teff_300.0_grav_178.0_mh_0.7_co_2.5.",
+      "redistribution": "Model coefficients and the intensities they are fitted to, with the model and tool cited.",
+      "consumers": [
+        "assets",
+        "datasets"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Computed with the pinned PICASO toolchain; --imaged-limb recomputes it."
+      }
+    },
+    {
+      "id": "eps-indi-ab-atmosphere-fit",
+      "path": "photometry/atmosphere-fit.json",
+      "origin": "https://arxiv.org/abs/2603.08787",
+      "credit": "Sanghi et al. (2026), arXiv:2603.08787, Table 5, Sonora Elf Owl, the lowest reduced chi-squared among the fits whose mass agrees with the dynamical mass: Teff 300 K, g 178 m/s2 (log g 4.25), [M/H] +0.7, log Kzz 4, C/O 2.5 times solar, radius 0.925, reduced chi-squared 2.62",
+      "license": "Factual numerical values; source attribution retained",
+      "acquisition": "Transcribed from the paper: the model of the public grid it fits to the planet, each value as printed",
+      "redistribution": "Factual parameter transcription only; no paper figures",
+      "consumers": [
+        "datasets"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Published fit transcribed with its source; repinned when edited."
+      }
     }
   ],
   "generatedIntermediates": [
@@ -128,7 +161,7 @@
       "id": "dataset-color-context-marker",
       "path": "presentation/context.png",
       "origin": "https://arxiv.org/abs/2603.08787",
-      "credit": "The default dataset's color as a disc; rendered by packages/telescope-cli/src/source-authoring/context-markers.mts",
+      "credit": "The default dataset's color as a disc, dimmed toward the limb by its law; rendered by packages/telescope-cli/src/source-authoring/context-markers.mts",
       "license": "Project-authored display derivative.",
       "consumers": [
         "navigation"
@@ -138,7 +171,8 @@
         "inputs": [
           "eps-indi-ab-observational-measurements",
           "eps-indi-ab-preparation-raster",
-          "eps-indi-ab-band-color"
+          "eps-indi-ab-band-color",
+          "eps-indi-ab-picaso-elf-owl-limb-darkening"
         ]
       },
       "generator": "packages/telescope-cli/src/source-authoring/context-markers.mts",
