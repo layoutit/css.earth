@@ -171,6 +171,7 @@ const structuredData = JSON.stringify(home ? websiteJsonLd() : breadcrumbJsonLd(
       loadStartupWorld(window).then(importSceneRouter).then(() => startViewCode(document), error => {
         document.documentElement.dataset.ready = 'error';
         document.querySelector('.startup-loading')?.remove();
+        document.querySelector('.explorer-navigation-progress')?.setAttribute('aria-hidden', 'true');
         delete document.documentElement.dataset.shellContext;
         delete document.documentElement.dataset.bodyPending;
         console.error('The interactive scene could not load.', error);

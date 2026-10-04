@@ -21,6 +21,8 @@ interface ScenePublicationInput {
   mountedObjectCount: number;
   playing: boolean;
   hasPresented: boolean;
+  /** A cold page's arrival photograph stands in for the scene, which does not answer input yet. */
+  covered: boolean;
 }
 
 /** One projection feeds playback, DOM state, and diagnostics without writing into scene ownership. */
@@ -63,6 +65,7 @@ export function createScenePublication({ stage, documentTarget, windowTarget, re
     const inFlight = Boolean(pending && !(pending.scene === 'replace' && pending.camera.kind === 'preserve'));
     getWorld()?.setNavigationInFlight?.(inFlight);
     getShell()?.setNavigationInFlight?.(inFlight);
+    getShell()?.setDestinationLoading?.(inFlight || read().covered);
     const { scene: state, sceneState, playing, playback } = readPublication();
     const root = documentTarget.documentElement;
     setData(root, "scenePresented", String(read().hasPresented));
