@@ -34,20 +34,41 @@
     "kind": "inclined-disk",
     "inclinationDeg": 0.001,
     "lineOfNodesPaDeg": 255.684,
-    "thicknessKpc": 8.49e-07,
+    "thicknessKpc": 8.49e-7,
     "depthWeights": [
       0.25,
       0.5,
       0.25
     ],
-    "supportRadiusKpc": 0.00083231,
-    "supportTaperFraction": 0.7,
+    "supportRadiusKpc": 0.0004762,
+    "supportTaperFraction": 0.9,
     "depthScales": [
       1,
       1,
       1
     ],
-    "unit": "pc"
+    "unit": "pc",
+    "body": {
+      "source": "publication-garcia-diaz-2018-owl-nebula-cavities",
+      "basis": "Garcia-Diaz et al. (2018, Sect. 3) model the H-alpha outline as a slightly prolate spheroid filled with emission, its major axis on the north-west to south-east line at about 60 degrees from north, inclined about 25 degrees with the north-west half toward Earth, and carve a multipolar cavity out of it whose volume multiplies the emission inside by 0.3. Their channel maps (Sect. 2.3) need three cavity lobes: one to the north-west pointing toward us, and two to the south-east, the more easterly toward us and the more southerly away. Guerrero et al. (2003, Sect. III.3) fit the inner shell's boundary with an ellipsoid of radius 93 arcsec along the pole and 83 arcsec in the equatorial plane, its major axis 10 to 30 degrees from the line of sight; each eye is about 35 arcsec in size; the outer shell is a filled, almost circular envelope 218 arcsec across; and the brighter forehead and beak are denser gas along the equatorial plane, seen at the systemic velocity.",
+      "semiPolarArcsec": 93,
+      "semiEquatorialArcsec": 83,
+      "polarTiltDeg": 25,
+      "polarLeansToPaDeg": 300,
+      "envelope": {
+        "source": "publication-guerrero-2003-owl-nebula",
+        "radiusArcsec": 109
+      },
+      "cavities": {
+        "source": "publication-garcia-diaz-2018-owl-nebula-cavities",
+        "emission": 0.3,
+        "sizeArcsec": 35,
+        "farBetweenPaDeg": [
+          135,
+          210
+        ]
+      }
+    }
   },
   "bake": {
     "maxFacePixels": 1024,
@@ -64,7 +85,10 @@
     "edgeTaperFraction": 0.04,
     "diffuseFraction": 0.65,
     "diffuseSigmaPixels": 2,
-    "flat": true
+    "flat": true,
+    "bulgeSlices": 32,
+    "bulgeFacePixels": 256,
+    "bulgeCrossSlices": 40
   },
   "provenance": {
     "path": "provenance.json"

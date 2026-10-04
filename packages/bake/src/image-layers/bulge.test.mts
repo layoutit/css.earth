@@ -171,3 +171,40 @@ test('the lower envelope stays under fine dark detail and ignores fine bright de
   for (let p = 0; p < map.length; p++) assert.ok(envelope[p]! <= map[p]! + 1e-6, `the envelope is above the map at ${p}`);
   assert.throws(() => lowerEnvelope(map, width, height, 0), /whole number of pixels/);
 });
+
+// A nebula's published filled body (geometry.body): the Owl Nebula's spheroid, envelope and cavities.
+import { imageLayerBodyModel } from '@cssearth/bake/image-layers';
+const owl = imageLayerBodyModel({ source: 'test', basis: 'test', semiPolarArcsec: 93, semiEquatorialArcsec: 83, polarTiltDeg: 25, polarLeansToPaDeg: 300,
+  envelope: { source: 'test', radiusArcsec: 109 }, cavities: { source: 'test', emission: 0.3, sizeArcsec: 35, farBetweenPaDeg: [135, 210] } });
+
+test('a sight line crosses the envelope, then the body inside it', () => {
+  const centre = owl.along(0, 0)!, tilt = 25 * Math.PI / 180;
+  // Through the star: the envelope's radius either side, and the spheroid along a line 25 degrees from its pole.
+  assert.ok(Math.abs(centre.envelope![1] - 109) < 1e-9 && Math.abs(centre.envelope![0] + 109) < 1e-9);
+  assert.ok(Math.abs(centre.body![1] - 1 / Math.hypot(Math.cos(tilt) / 93, Math.sin(tilt) / 83)) < 1e-9, `${centre.body}`);
+  assert.ok(Math.abs(centre.cavityAt) < 1e-12);
+  // 100 arcsec out there is only envelope; beyond 109 arcsec there is nothing.
+  const outer = owl.along(...along(100, 20))!;
+  assert.equal(outer.body, null);
+  assert.ok(Math.abs(outer.envelope![1] - Math.sqrt(109 ** 2 - 100 ** 2)) < 1e-9);
+  assert.equal(owl.along(...along(110, 20)), null);
+  assert.ok(Math.abs(owl.reach - 109) < 1e-9);
+});
+
+test('the cavities run along the pole: toward the Sun to the north-west and the east, away from it to the south', () => {
+  const depth = 20 / Math.tan(25 * Math.PI / 180);
+  // The near pole leans north-west: 20 arcsec that way the pole's line is in front of the star.
+  assert.ok(Math.abs(owl.along(...along(20, 300))!.cavityAt + depth) < 1e-9);
+  // To the south-east the pole's line is behind the star, but the easterly lobe points toward the Sun.
+  assert.ok(owl.along(...along(20, 100))!.cavityAt < 0);
+  assert.ok(owl.along(...along(20, 170))!.cavityAt > 0);
+  // The near lobe is led into the far one across position angle 135°: no wall stands between them.
+  assert.ok(Math.abs(owl.along(...along(20, 135))!.cavityAt) < 1e-9);
+  assert.ok(owl.along(...along(20, 128))!.cavityAt < 0 && owl.along(...along(20, 142))!.cavityAt > 0);
+  assert.ok(Math.abs(owl.along(...along(20, 119))!.cavityAt + 20 * Math.abs(Math.cos((119 - 300) * Math.PI / 180)) / Math.tan(25 * Math.PI / 180)) < 1e-9);
+  // The far range ends where the pole's line passes through the star's depth, so there is no step there.
+  assert.ok(Math.abs(owl.along(...along(20, 210))!.cavityAt) < 1e-9);
+  // The equatorial plane is at the star's depth across the lean, and behind the star where the near pole leans.
+  assert.ok(Math.abs(owl.along(...along(20, 30))!.equatorAt) < 1e-9);
+  assert.ok(Math.abs(owl.along(...along(20, 300))!.equatorAt - 20 * Math.tan(25 * Math.PI / 180)) < 1e-9);
+});
