@@ -57,8 +57,8 @@ test('a camera turn warps the painted dots exactly where a repaint puts them, an
   const mount = () => { const { document } = parseHTML('<div id="host"></div>');
     return mountBatchedSpatialPoints({ host: document.getElementById('host')!, frame, points, className: 'test-points',
       stylePoint: () => ({ colorCss: '#ffffff', opacity: 1, radiusPx: 1 }), paintPalette: ['#ffffffff@1'] }); };
-  const centres = (field: ReturnType<typeof mount>) => [...(field.root.querySelector('path')!.getAttribute('d') ?? '').matchAll(/M(-?[\d.]+) (-?[\d.]+)h0/g)]
-    .map(match => [Number(match[1]) / 8 + 500, Number(match[2]) / 8 + 400]);
+  const centres = (field: ReturnType<typeof mount>) => [...(field.root.querySelector('path')!.getAttribute('d') ?? '').matchAll(/M(-?[\d.]+) (-?[\d.]+)h\.01/g)]
+    .map(match => [Number(match[1]) + 500, Number(match[2]) + 400]);
   const warped = mount(), exact = mount();
   warped.publish({ world: pose(0), viewport });
   const painted = centres(warped), before = warped.root.querySelector('path')!.getAttribute('d');
@@ -71,6 +71,7 @@ test('a camera turn warps the painted dots exactly where a repaint puts them, an
   const moved = painted.map(([x, y]) => { const w = c! * x! + g! * y! + j!; return [(a! * x! + d! * y! + h!) / w, (b! * x! + e! * y! + i!) / w]; });
   exact.publish({ world: pose(2), viewport });
   const repainted = centres(exact);
+  assert.ok(painted.length > 20 && repainted.length > 20, 'the dots are read from the paths');
   // The same dots, placed by the warp and by a repaint: every in-view dot of the repaint has its warped twin.
   // Each paint rounds its centres to an eighth of a pixel (up to 0.09 px off), and the warp carries the first paint's
   // rounding with it, so the warped and the repainted dot agree to within 0.2 px.
@@ -131,7 +132,7 @@ test('prepared cells skip out-of-view boxes without changing a single drawn dot 
       ...(withCells ? { cells: { boxes: Float64Array.from(cells.boxes.flat()), of: Int32Array.from(cells.of) } } : {}),
       stylePoint: point => styles[point.color]!, paintPalette: styles.map(pointPaint), drawnCount: () => drawn, keepFraction: () => keep }); };
   const dots = (field: ReturnType<typeof mount>) => [...field.root.querySelectorAll('path')]
-    .map(path => [...(path.getAttribute('d') ?? '').matchAll(/M-?\d+ -?\d+h\.1/g)].map(match => match[0]).sort().join(''));
+    .map(path => [...(path.getAttribute('d') ?? '').matchAll(/M-?[\d.]+ -?[\d.]+h\.01/g)].map(match => match[0]).sort().join(''));
   const plain = mount(false), celled = mount(true);
   let last: { focalPixels: number; principalOffsetPixels: readonly [number, number]; widthPixels: number; heightPixels: number } =
     { focalPixels: 800, principalOffsetPixels: [0, 0], widthPixels: 1000, heightPixels: 800 };
