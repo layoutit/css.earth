@@ -1,0 +1,43 @@
+{
+  "id": "doi-10-26093-cds-vizier-51281167",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Gieren et al. (2005): ARAUCARIA project : NGC 300 Cepheid Variables. II",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.26093/cds/vizier.51281167"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://doi.org/10.26093/cds/vizier.51281167",
+      "label": "Publisher"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://doi.org/10.26093/cds/vizier.51281167",
+      "checkedOn": "2026-10-04",
+      "locator": "Crossref record: title, authors, container"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Gieren et al. (2005), Centre de Donnees Strasbourg (CDS)",
+      "scope": "citation",
+      "evidence": "https://doi.org/10.26093/cds/vizier.51281167"
+    }
+  ],
+  "publisher": "Centre de Donnees Strasbourg (CDS)",
+  "creators": [
+    "W. Gieren",
+    "G. Pietrzynski",
+    "A. Walker",
+    "et al."
+  ],
+  "publicationDate": "2005"
+}

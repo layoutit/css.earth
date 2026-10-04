@@ -1,0 +1,43 @@
+{
+  "id": "doi-10-26093-cds-vizier-34110361",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Kanbur et al. (2003): VI photometry of extra-galactic Cepheids",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.26093/cds/vizier.34110361"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://doi.org/10.26093/cds/vizier.34110361",
+      "label": "Publisher"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://doi.org/10.26093/cds/vizier.34110361",
+      "checkedOn": "2026-10-04",
+      "locator": "Crossref record: title, authors, container"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Kanbur et al. (2003), Centre de Donnees Strasbourg (CDS)",
+      "scope": "citation",
+      "evidence": "https://doi.org/10.26093/cds/vizier.34110361"
+    }
+  ],
+  "publisher": "Centre de Donnees Strasbourg (CDS)",
+  "creators": [
+    "S. Kanbur",
+    "C. Ngeow",
+    "S. Nikolaev",
+    "et al."
+  ],
+  "publicationDate": "2003"
+}

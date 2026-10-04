@@ -1,0 +1,142 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "gpf97-c01",
+  "parent": "m95",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "[GPF97] c01",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 126686970
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/gpf97-c01-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "[GPF97] c01",
+      "classification": "star",
+      "color": "#ffe3ca",
+      "distanceAu": 2052690427067.4,
+      "description": "A Cepheid in the galaxy M95, 10.0 million parsecs away, that swells and shrinks every 43.0 days.",
+      "systemName": "[GPF97] c01 system",
+      "order": 5765,
+      "context": {
+        "order": 5762
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -2.8427824034910853e+23,
+        9.804720953073262e+22,
+        6.220608303214061e+22
+      ],
+      "presentationToReference": [
+        -0.9257521930833309,
+        -0.1915039108839007,
+        0.3260508075708053,
+        0.31929077349469115,
+        0.06604945933719766,
+        0.9453522469865007,
+        0.20257413201730648,
+        -0.9792669304318588,
+        -3.257640499356157e-17
+      ],
+      "orbitUpReference": [
+        0.1915039108839007,
+        -0.06604945933719766,
+        0.9792669304318588
+      ],
+      "metersPerUnit": 408667645.16129035,
+      "bodyRadiusM": 126686970000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

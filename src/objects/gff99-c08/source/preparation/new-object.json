@@ -1,0 +1,65 @@
+{
+  "id": "gff99-c08",
+  "name": "[GFF99] C08",
+  "system": "[GFF99] C08 system",
+  "description": "A Cepheid in the galaxy M91 that pulsates every 38.2 days.",
+  "parent": "m91",
+  "featured": true,
+  "target": "[GFF99] C08",
+  "paper": {
+    "url": "https://doi.org/10.26093/cds/vizier.34110361",
+    "credit": "Kanbur et al. (2003), A&A 411, 361"
+  },
+  "radius": {
+    "value": 167.3,
+    "source": "Groenewegen (2020), A&A 635, A33, period relations for Galactic fundamental-mode Cepheids applied to this star's period, 38.19 d in Kanbur et al. (2003), A&A 411, 361, VizieR J/A+A/411/361/table1 Galaxy = NGC4548, Cepheid = C8 (log(P) 1.582); not a measurement of this star: eq. 2, log R = 0.721 log P + 1.083; the uncertainty is the relation's scatter, 0.067 dex",
+    "url": "https://arxiv.org/abs/2002.02186",
+    "uncertainty": 27.9
+  },
+  "mass": "unmeasured",
+  "temperature": {
+    "value": 4880,
+    "source": "Groenewegen (2020), A&A 635, A33, period relations for Galactic fundamental-mode Cepheids applied to this star's period, 38.19 d in Kanbur et al. (2003), A&A 411, 361, VizieR J/A+A/411/361/table1 Galaxy = NGC4548, Cepheid = C8 (log(P) 1.582); not a measurement of this star: the luminosity of eq. 1 (M_bol = -2.95 log P - 0.98, with the nominal solar M_bol 4.74) over the radius of eq. 2, through L = 4 pi R^2 sigma T^4 with the nominal solar 5772 K (IAU 2015 Resolutions B2 (Mamajek et al. 2015, arXiv:1510.06262) and B3 (Prsa et al. 2016, arXiv:1605.09788)); the uncertainty is the 317 K by which the two relations miss the paper's own Cepheid temperatures",
+    "url": "https://arxiv.org/abs/2002.02186",
+    "uncertainty": 317
+  },
+  "gravityRange": {
+    "min": -1.33,
+    "max": 2.86,
+    "source": "Luck (2018), AJ 156, 171, table 3 (the spectroscopic gravities of its Cepheid spectra)",
+    "url": "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=J/AJ/156/171/table3"
+  },
+  "radialVelocity": {
+    "value": 489,
+    "source": "SIMBAD's radial velocity of M91, the Cepheid's galaxy, from 2022ApJS..261...21Y; the star's own motion within the galaxy is not measured",
+    "url": "https://ui.adsabs.harvard.edu/abs/2022ApJS..261...21Y/abstract",
+    "uncertainty": 3
+  },
+  "distance": {
+    "value": 16187457,
+    "source": "Placed in M91 as the app draws it, where the star's sight line crosses the disc's midplane: 16,187,457 pc (src/objects/m91-layers/source/recipe.json: centre 16,188,254 pc, inclination 38.3 deg, line of nodes 138 deg). The galaxy's distance, which places the galaxy and not a star within it: Tully et al. (2023), Cosmicflows-4, ApJ 944, 94; CDS J/ApJ/944/94, table 2 (distances of individual galaxies), PGC 41934: distance modulus 31.046 ± 0.048 mag (https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/944/94)",
+    "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/944/94"
+  },
+  "position": {
+    "catalogue": "basic",
+    "row": {
+      "main_id": "[GFF99] C08"
+    },
+    "credit": "Kanbur et al. (2003), A&A 411, 361, VizieR J/A+A/411/361/table1 Galaxy = NGC4548, Cepheid = C8, names the star in SIMBAD (SName); SIMBAD holds its position, from 1999ApJ...516..626G",
+    "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=%5BGFF99%5D%20C08",
+    "archive": "simbad"
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A Cepheid in the galaxy M91, 16.2 million parsecs away, that swells and shrinks every 38.2 days.",
+    "introduction": "Kanbur et al. (2003) list its pulsation at 38.2 days.",
+    "locator": "VizieR J/A+A/411/361/table1 Galaxy = NGC4548, Cepheid = C8: log(P)"
+  },
+  "notes": [
+    "The star pulsates; it is drawn at its mean radius",
+    "Its radius and temperature are what Groenewegen (2020), A&A 635, A33's relations for Galactic Cepheids give at its period; no measurement of this star's size or temperature exists",
+    "Its radial velocity is its galaxy's; its own motion within M91 is not measured"
+  ],
+  "order": 5767
+}

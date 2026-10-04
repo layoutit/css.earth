@@ -39,6 +39,11 @@ own through `workspace-commands/new-object.mts`, `new-object-cli.mts` is the sta
 The generated solar geometry (`src/platform/solar-geometry.mts`) stays generated: the entries load it with `solar-epoch.mts` and
 pass the epoch down, so no module here imports it.
 
+The star survey behind `telescope stars GALAXY` is `src/stars/`. It and the generator's `--from-table` route
+(`src/new-object/archives/tables/table-stars.mts`) read VizieR's table metadata and SIMBAD through the same two modules,
+`vizier-tables.mts` and `simbad-tap.mts` beside it; a star class is a branch of SIMBAD's own type tree, never a
+list of types kept here.
+
 The sky band composer is `src/sky/` (exported as `./sky/*`): `sky-band-composite.mts` composes pinned hips2fits, AllWISE
 atlas and JWST level-3 bands on one TAN grid, and `author-sky-bands.mts` acquires and pins those bands. It moved from
 `tools/objects/observation/` (now here) because it imports this package's JWST imaging modules. `site/build/prepare/prepare-volume-presentation.mts`

@@ -47,7 +47,7 @@ const normal = (name: string) => name.normalize('NFKD').replace(/[̀-ͯ]/gu, '')
 /** `row` is the VizieR table and row a catalogue-placed star cites (CatalogueRow.words without its "VizieR"). */
 interface Placed { readonly id: string; readonly ra: number; readonly dec: number; readonly epoch: number; readonly pmra: number; readonly pmdec: number; readonly row?: { readonly table: string; readonly key: string } }
 /** The table and row an astronomy record's position cites, as generate.mts writes it ("VizieR J/ApJ/830/10/table5 row Gal = N4536, ID = 38676:"). */
-export const citedRow = (position: string) => { const match = /VizieR (\S+) row ([^:]+):/u.exec(position); return match ? { table: match[1]!, key: match[2]! } : undefined; };
+export const citedRow = (position: string) => { const match = /(?:VizieR|SIMBAD) (\S+) row ([^:]+):/u.exec(position); return match ? { table: match[1]!, key: match[2]! } : undefined; };
 /** What the universe already holds: ids, the normalized names of every record, and where every placed star is. */
 export interface Existing { readonly ids: ReadonlySet<string>; readonly names: ReadonlyMap<string, string>; readonly stars: readonly Placed[];
   /** Placed stars by the Gaia DR3 source their position cites, and every package's system name. */

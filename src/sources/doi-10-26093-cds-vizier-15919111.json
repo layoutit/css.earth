@@ -1,0 +1,41 @@
+{
+  "id": "doi-10-26093-cds-vizier-15919111",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Bonanos & Stanek (2004): Period of Cepheids in M 83",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.26093/cds/vizier.15919111"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://doi.org/10.26093/cds/vizier.15919111",
+      "label": "Publisher"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://doi.org/10.26093/cds/vizier.15919111",
+      "checkedOn": "2026-10-04",
+      "locator": "Crossref record: title, authors, container"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Bonanos & Stanek (2004), Centre de Donnees Strasbourg (CDS)",
+      "scope": "citation",
+      "evidence": "https://doi.org/10.26093/cds/vizier.15919111"
+    }
+  ],
+  "publisher": "Centre de Donnees Strasbourg (CDS)",
+  "creators": [
+    "A.Z. Bonanos",
+    "K.Z. Stanek"
+  ],
+  "publicationDate": "2004"
+}

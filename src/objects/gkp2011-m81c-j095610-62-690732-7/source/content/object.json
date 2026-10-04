@@ -1,0 +1,81 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "gkp2011-m81c-j095610-62-690732-7",
+  "displayName": "[GKP2011] M81C J095610.62+690732.7",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "245 solar radii",
+        "source": {
+          "catalogueId": "arxiv-2002-02186",
+          "url": "https://arxiv.org/abs/2002.02186",
+          "label": "Groenewegen (2020), A&A 635, A33 (2020)",
+          "checked": "2026-10-04",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "3,622,342 parsecs",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-4357-ad306d",
+          "url": "https://ui.adsabs.harvard.edu/abs/2024ApJ...966..175N",
+          "label": "Placed in M81 as the app draws it, where the star's sight line crosses the disc's midplane: 3,622,342 pc (src/objects/m81-layers/source/recipe.json: centre 3,614,099 pc, inclination 59 deg, line of nodes 150.2 deg). The galaxy's distance, which places the galaxy and not a star within it: Newman2024ApJ...966..175N: An Empirical Calibration of the Tip of the Red Giant Branch Distance Method in the Near Infrared. I. Hubble Space Telescope WFC3/IR F110W and F160W Filters (https://ui.adsabs.harvard.edu/abs/2024ApJ...966..175N); catalogue reference Newman2024ApJ...966..175N: 3614098.6264 pc (-65964.7340604/+33440.8428599); trgb",
+          "checked": "2026-10-04",
+          "path": "source/measurements.json",
+          "locator": "distanceParsecs; distanceSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "color",
+    "controls": [
+      {
+        "id": "color",
+        "label": "Color",
+        "qualification": "Color of a blackbody at the star's temperature; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
+        "thumbnail": "gkp2011-m81c-j095610-62-690732-7-dataset-color.webp",
+        "surface": "gkp2011-m81c-j095610-62-690732-7-surface-color@2x.webp",
+        "poles": "gkp2011-m81c-j095610-62-690732-7-poles-color@2x.webp",
+        "source": {
+          "id": "gkp2011-m81c-j095610-62-690732-7-stellar-color",
+          "path": "../manifest.json",
+          "url": "https://arxiv.org/abs/2002.02186"
+        },
+        "falseColor": false,
+        "notes": "The color of a blackbody at the star's published temperature. The darkening toward the edge is the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 4,710 K and log g 0.6 (u1 0.710, u2 0.073): a model, because no fit of this star's limb is used. The spin axis's direction on the sky is a display convention."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Gerke et al. (2011), ApJ 743, 176",
+      "href": "https://doi.org/10.26093/cds/vizier.17430176"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://doi.org/10.26093/cds/vizier.17430176",
+      "credit": "Gerke et al. (2011), ApJ 743, 176"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/gkp2011-m81c-j095610-62-690732-7.json",
+      "credit": "Groenewegen radius; Gerke et al. (2011), ApJ 743, 176 position; cited distance; no measured rotation axis (display convention)"
+    }
+  }
+}

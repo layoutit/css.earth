@@ -1,0 +1,68 @@
+{
+  "id": "mwmm-v32",
+  "name": "MWMM V32",
+  "system": "MWMM V32 system",
+  "description": "A Cepheid in the galaxy NGC 300 that pulsates every 52.8 days.",
+  "parent": "ngc-300",
+  "featured": true,
+  "target": "MWMM V32",
+  "paper": {
+    "url": "https://doi.org/10.26093/cds/vizier.51281167",
+    "credit": "Gieren et al. (2004), AJ 128, 1167"
+  },
+  "radius": {
+    "value": 211.2,
+    "source": "Groenewegen (2020), A&A 635, A33, period relations for Galactic fundamental-mode Cepheids applied to this star's period, 52.751 d in Gieren et al. (2004), AJ 128, 1167, VizieR J/AJ/128/1167/table1 [PGF2002] = cep006 (Per); not a measurement of this star: eq. 2, log R = 0.721 log P + 1.083; the uncertainty is the relation's scatter, 0.067 dex",
+    "url": "https://arxiv.org/abs/2002.02186",
+    "uncertainty": 35.2
+  },
+  "mass": "unmeasured",
+  "temperature": {
+    "value": 4780,
+    "source": "Groenewegen (2020), A&A 635, A33, period relations for Galactic fundamental-mode Cepheids applied to this star's period, 52.751 d in Gieren et al. (2004), AJ 128, 1167, VizieR J/AJ/128/1167/table1 [PGF2002] = cep006 (Per); not a measurement of this star: the luminosity of eq. 1 (M_bol = -2.95 log P - 0.98, with the nominal solar M_bol 4.74) over the radius of eq. 2, through L = 4 pi R^2 sigma T^4 with the nominal solar 5772 K (IAU 2015 Resolutions B2 (Mamajek et al. 2015, arXiv:1510.06262) and B3 (Prsa et al. 2016, arXiv:1605.09788)); the uncertainty is the 317 K by which the two relations miss the paper's own Cepheid temperatures",
+    "url": "https://arxiv.org/abs/2002.02186",
+    "uncertainty": 317
+  },
+  "gravityRange": {
+    "min": -1.33,
+    "max": 2.86,
+    "source": "Luck (2018), AJ 156, 171, table 3 (the spectroscopic gravities of its Cepheid spectra)",
+    "url": "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=J/AJ/156/171/table3"
+  },
+  "radialVelocity": {
+    "value": 146,
+    "source": "SIMBAD's radial velocity of NGC 300, the Cepheid's galaxy, from 2012AJ....144....4M; the star's own motion within the galaxy is not measured",
+    "url": "https://ui.adsabs.harvard.edu/abs/2012AJ....144....4M/abstract",
+    "uncertainty": 2
+  },
+  "distance": {
+    "value": 2086765,
+    "source": "Placed in NGC 300 as the app draws it, where the star's sight line crosses the disc's midplane: 2,086,765 pc (src/objects/ngc-300-layers/source/recipe.json: centre 2,089,296 pc, inclination 44 deg, line of nodes 110 deg). The galaxy's distance, which places the galaxy and not a star within it: Tully2009AJ....138..323T: The Extragalactic Distance Database (https://ui.adsabs.harvard.edu/abs/2009AJ....138..323T); catalogue reference Tully2009AJ....138..323T: 2089296.13085 pc (-56939.1199178/+58534.3432765); trgb",
+    "url": "https://ui.adsabs.harvard.edu/abs/2009AJ....138..323T"
+  },
+  "position": {
+    "catalogue": "J/AJ/128/1167/table1",
+    "row": {
+      "[PGF2002]": "cep006"
+    },
+    "credit": "Gieren et al. (2004), AJ 128, 1167",
+    "url": "https://doi.org/10.26093/cds/vizier.51281167",
+    "columns": {
+      "ra": "_RAJ2000",
+      "dec": "_DEJ2000"
+    }
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A Cepheid in the galaxy NGC 300, 2.1 million parsecs away, that swells and shrinks every 52.8 days.",
+    "introduction": "Gieren et al. (2004) list its pulsation at 52.8 days.",
+    "locator": "VizieR J/AJ/128/1167/table1 [PGF2002] = cep006: Per"
+  },
+  "notes": [
+    "The star pulsates; it is drawn at its mean radius",
+    "Its radius and temperature are what Groenewegen (2020), A&A 635, A33's relations for Galactic Cepheids give at its period; no measurement of this star's size or temperature exists",
+    "Its radial velocity is its galaxy's; its own motion within NGC 300 is not measured"
+  ],
+  "order": 5762
+}
