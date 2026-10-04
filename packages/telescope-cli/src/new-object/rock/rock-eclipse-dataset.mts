@@ -15,6 +15,7 @@ import { mkdir, readFile, stat, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { containedPath } from '@cssearth/bake/objects/sources';
+import { ECLIPSE_DEPTH_SCHEMA } from '@cssearth/objects';
 import type { Archive } from '../archives/archives.mts';
 import { bindInputs, json, openOnMap, type PackageFiles } from '../dataset.mts';
 import { DATASET_REBUILD_FILES, writeWithMarker } from '../planet-datasets.mts';
@@ -128,7 +129,7 @@ export function installRockEclipseDataset(files: PackageFiles, id: string, name:
   // The night side is dark in the model: the scale starts at 50 K, as TRAPPIST-1 c's does, and ends above the hottest rock.
   const minimum = 50, maximum = Math.ceil(report.substellarRangeK[1] / 100) * 100, labels = [`≤ ${minimum}`, String((minimum + maximum) / 2), String(maximum)];
   const consumer = `${id}-bare-rock-model`, input = `${id}-${entry.dataset}-eclipse-depth`, filterId = `${id}-${entry.filter.toLowerCase().replace(/[^a-z0-9]+/gu, '-')}-filter`, starId = `${id}-bt-settl-cifist-${entry.star.teffK}`;
-  files.set(`${s}/${entry.path}`, json({ schema: 'cssearth-eclipse-depth@1', planet: id, eclipseDepthPpm: { low, high },
+  files.set(`${s}/${entry.path}`, json({ schema: ECLIPSE_DEPTH_SCHEMA, planet: id, eclipseDepthPpm: { low, high },
     source: `${entry.credit}: ${entry.observed}. Eclipse depth ${entry.depth.cell} (${entry.depth.where}); the range is its one-sigma interval. The paper finds the day side ${entry.verdict}. ${entry.url}` }));
 
   const raster = read(`${s}/preparation/raster.json`), lit = raster.emission === undefined;
@@ -199,7 +200,7 @@ export async function addRockEclipseDatasets(root: string, entries: ReadonlyMap<
       // The reader takes the depth record from the source directory, as the bake will.
       const record = resolve(o, 'source', entry.path);
       await mkdir(dirname(record), { recursive: true });
-      await writeFile(record, json({ schema: 'cssearth-eclipse-depth@1', planet: id, eclipseDepthPpm: { low: entry.depth.low, high: entry.depth.high }, source: entry.credit }));
+      await writeFile(record, json({ schema: ECLIPSE_DEPTH_SCHEMA, planet: id, eclipseDepthPpm: { low: entry.depth.low, high: entry.depth.high }, source: entry.credit }));
       const rock = await loadBareRockEclipse(resolve(o, 'source'), rockRecipe(id, host, entry));
       const installed = installRockEclipseDataset(files, id, name, host, entry, { substellarK: rock.substellarK, substellarRangeK: [rock.lowerK, rock.upperK] });
       promoted ||= installed.promoted;

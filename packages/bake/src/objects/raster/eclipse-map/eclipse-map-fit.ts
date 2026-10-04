@@ -6,6 +6,7 @@ import { bareRockFromEclipseDepth, bareRockTemperature, fitBareRock } from './ba
 import { measureTransitShift } from './transit-timing.ts';
 import { readTarMember } from '../numpy/tar-member.ts';
 import { array, boolean, number, optional, shape, text } from '@cssearth/core';
+import { ECLIPSE_DEPTH_SCHEMA } from '@cssearth/objects';
 
 const inside = (path: string) => { if (!path || path.startsWith('/') || path.includes('\\') || path.split('/').includes('..')) throw new TypeError('An eclipse-map input must be inside the source directory.'); return path; };
 const systematic = (value: unknown): Systematic => {
@@ -197,7 +198,7 @@ export async function loadBareRockEclipse(root: string, value: unknown) {
   if (recipe.units !== 'K') throw new TypeError('A bare rock is a brightness temperature in K.');
   const read = async (path: string) => readFile(resolve(root, inside(path)));
   const record = depthRecord(JSON.parse((await read(recipe.path)).toString('utf8')));
-  if (record.schema !== 'cssearth-eclipse-depth@1' || record.planet !== recipe.planet) throw new TypeError(`${recipe.path} is not an eclipse depth of ${recipe.planet}.`);
+  if (record.schema !== ECLIPSE_DEPTH_SCHEMA || record.planet !== recipe.planet) throw new TypeError(`${recipe.path} is not an eclipse depth of ${recipe.planet}.`);
   const { low, high } = record.eclipseDepthPpm;
   if (!(low > 0 && high >= low)) throw new TypeError('An eclipse depth range needs 0 < low <= high.');
   const objectId = HOSTED_PLANET_IDS.find(id => id === recipe.planet), hostId = STAR_IDS.find(id => id === recipe.host);
