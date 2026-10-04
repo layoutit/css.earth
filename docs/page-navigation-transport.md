@@ -23,7 +23,7 @@ A body with several datasets sends the tables of its default dataset only. Each
 other dataset's tables go in their own file, `/objects/<id>/datasets/<dataset>.json`.
 These tables are the dataset's selection variants, the texture-level addresses
 of its pages, and the image entries that only it reads
-([dataset tables](../packages/objects/src/prepared-data/dataset-tables.ts)).
+([dataset tables](../packages/objects/src/prepared-data/content/dataset-tables.ts)).
 Earth's transport fell from 85 KB to 44 KB gzipped. Each of its other datasets is
 about 7 KB gzipped (2026-09-30).
 

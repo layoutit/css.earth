@@ -3,7 +3,7 @@ import { defineConfig } from 'tsup'
 export default defineConfig({
   // `node`, `node/contract` and `node/source-test` are Node-only entries.
   // `index`, `sources` and `provenance` stay browser-safe.
-  entry: { 'archived-camera': 'src/prepared-data/archived-camera.ts', index: 'src/index.ts', sources: 'src/sources/index.ts', provenance: 'src/provenance/index.ts', node: 'src/node/index.ts', 'node/contract': 'src/node/contract/index.ts', 'node/source-test': 'src/node/source-test.ts' },
+  entry: { 'archived-camera': 'src/prepared-data/camera/archived-camera.ts', index: 'src/index.ts', sources: 'src/sources/index.ts', provenance: 'src/provenance/index.ts', node: 'src/node/index.ts', 'node/contract': 'src/node/contract/index.ts', 'node/source-test': 'src/node/source-test.ts' },
   format: ['esm', 'cjs'],
   // The Node contract's default checkout lookup needs import.meta.url in CommonJS too.
   shims: true,

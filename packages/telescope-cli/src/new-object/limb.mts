@@ -24,7 +24,7 @@
  * Where a node beside the star is missing, the law is read between the nearest nodes that all exist. Outside every grid no law is
  * drawn and the reason is recorded; nothing is extrapolated. A spec may decline a law with its own reason. */
 import { interpolateGrid, readHowarthNode, readLimbGrid, type GridNode, type QuadraticLimbDarkening } from '@cssearth/bake/objects/stellar';
-import { VIZIER_ASU, type Archive } from './archives.mts';
+import { VIZIER_ASU, type Archive } from './archives/archives.mts';
 import { fromPicaso, PICASO } from './picaso-limb.mts';
 
 interface Grid {

@@ -5,7 +5,7 @@
  * of the transit below the baseline) at least DETECTION_SIGMA times its standard error. A planet with no 2-minute light curve, no
  * whole transit, or a dip TESS does not resolve gets no chart, and the report says which. */
 import { resolve } from 'node:path';
-import type { Archive } from './archives.mts';
+import type { Archive } from './archives/archives.mts';
 import type { PackageFiles } from './dataset.mts';
 import { NASA_TAP } from './orbit.mts';
 

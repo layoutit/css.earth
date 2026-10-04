@@ -8,7 +8,7 @@
  *
  * The conversion keeps an imaged orbit at its fitted angular size and places it at the host's Gaia distance, as the imaged planets
  * already shipped do, and stores the argument of periastron as the star's (orbitize!'s is the companion's). */
-import type { Archive } from './archives.mts';
+import type { Archive } from './archives/archives.mts';
 
 export const AU_KM = 149597870.7, DAYS_PER_YEAR = 365.25;
 export const NASA_TAP = 'https://exoplanetarchive.ipac.caltech.edu/TAP/sync';

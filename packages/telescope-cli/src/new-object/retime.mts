@@ -8,7 +8,7 @@
  * every other file stay as they are. Nothing is baked here. */
 import { readdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import type { Archive } from './archives.mts';
+import type { Archive } from './archives/archives.mts';
 import { json } from './dataset.mts';
 import { archiveRows, assembleArchiveOrbit, compositeMass } from './orbit.mts';
 

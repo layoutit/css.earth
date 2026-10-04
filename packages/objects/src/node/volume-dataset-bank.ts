@@ -1,14 +1,14 @@
-// A volume dataset bank on disk (volume/volume-dataset-bank-files.ts): every preparation writes one through
+// A volume dataset bank on disk (volume/delivery/volume-dataset-bank-files.ts): every preparation writes one through
 // writeVolumeDatasetBank and reads one whole through readVolumeDatasetBank, so the layout has one owner.
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { PREPARED_OBJECT_SCHEMA } from '../descriptor.js';
-import { validatePreparedCssVolume } from '../volume/css-volume-validation.js';
-import type { PreparedCssVolume } from '../volume/css-volume-types.js';
+import { validatePreparedCssVolume } from '../volume/delivery/css-volume-validation.js';
+import type { PreparedCssVolume } from '../volume/delivery/css-volume-types.js';
 import type { PreparedBank } from '../prepared-bank.js';
-import { validatePreparedVolumeDatasets, type PreparedVolumeDatasets } from '../volume/prepared-volume-datasets.js';
+import { validatePreparedVolumeDatasets, type PreparedVolumeDatasets } from '../volume/delivery/prepared-volume-datasets.js';
 import { PREPARED_VOLUME_DATASET_INDEX_SCHEMA, VOLUME_DATASET_INDEX_FILE, VOLUME_DATASET_RECORD_FILE, joinPreparedVolumeDatasets, splitPreparedVolumeDatasets,
-  type PreparedVolumeDatasetFiles, type PreparedVolumeDatasetIndex } from '../volume/volume-dataset-bank-files.js';
+  type PreparedVolumeDatasetFiles, type PreparedVolumeDatasetIndex } from '../volume/delivery/volume-dataset-bank-files.js';
 import { packPreparedBank, unpackPreparedBank } from './prepared-binary-file.js';
 
 const json = (value: unknown) => `${JSON.stringify(value)}\n`;

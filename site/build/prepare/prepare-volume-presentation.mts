@@ -22,7 +22,7 @@ import { RUNTIME_ASSET_ORIGIN, fetchWithRetry, sourceCacheUrl } from '@cssearth/
 import { DECORATIVE_WEBP } from '@cssearth/bake/raster';
 
 export const volumePresentationCompilerClosure = ['site/build/prepare/prepare-volume-presentation.mts', 'site/dataset-content.mts', 'packages/bake/src/sources/context-source-records.ts',
-  'packages/objects/src/prepared-data/volume-source-manifest.ts', 'packages/objects/src/prepared-data/volume-presentation-source.ts',
+  'packages/objects/src/prepared-data/source/volume-source-manifest.ts', 'packages/objects/src/prepared-data/source/volume-presentation-source.ts',
   'packages/telescope-cli/src/sky/sky-band-composite.mts', 'packages/bake/src/objects/raster/wise-atlas-mosaic.ts', 'packages/bake/src/objects/color/color-transfer.ts', 'packages/fits/src/fits.ts', 'packages/fits/src/node/file.ts', 'packages/bake/src/raster/lossy-lane.ts'] as const;
 
 const json = (bytes: Buffer): unknown => JSON.parse(bytes.toString('utf8'));

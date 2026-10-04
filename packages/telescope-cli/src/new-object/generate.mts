@@ -13,10 +13,10 @@ import { bindInputs, installColorDataset, json } from './dataset.mts';
 import { CROSS_CHECK_AGREEMENT } from '@cssearth/bake/objects/stellar';
 import { neutralDiscMarker } from '@cssearth/bake/navigation';
 import { scaffoldStarFiles, solarRadii, TODO } from './scaffold.mts';
-import { CATALOGUE_ROW_REPLACEMENTS, citedName, isCollaboration, fetchGaiaEclipsingPeriod, fetchCatalogueRow, fetchGaiaRow, fetchPublication, GAIA_TAP, gaiaRowForm, identify, liveArchive, readIdentifiers, telescopeResolver, VIZIER_ASU, type Archive, type CatalogueRow, type GaiaRow, type Identifiers, type Publication, type Resolver } from './archives.mts';
+import { CATALOGUE_ROW_REPLACEMENTS, citedName, isCollaboration, fetchGaiaEclipsingPeriod, fetchCatalogueRow, fetchGaiaRow, fetchPublication, GAIA_TAP, gaiaRowForm, identify, liveArchive, readIdentifiers, telescopeResolver, VIZIER_ASU, type Archive, type CatalogueRow, type GaiaRow, type Identifiers, type Publication, type Resolver } from './archives/archives.mts';
 import { CHECKED, chooseColor, type ColorChoice } from './color.mts';
 import { chooseLimb, type LimbChoice } from './limb.mts';
-import { chooseGravity } from './gravity.mts';
+import { chooseGravity } from './archives/gravity.mts';
 import type { Cited, StarSpec } from './spec.mts';
 import { citedRow, DUPLICATE_ARCSEC, duplicateName, duplicateStar, existingBodies, type Existing } from './identity.mts';
 import { mergeRefresh, removeStale, STORED_SPEC, storedSpecDocument, storedStarSpec } from './refresh.mts';
@@ -24,7 +24,7 @@ import { quoteSource } from './prose.mts';
 import { gaiaCepheidForm, installLightCurve } from './light-curve.mts';
 import type { SolarEpoch } from './solar-epoch.mts';
 import { gaiaCepheidClass } from '@cssearth/bake/photometry';
-import { CEPHEID_GRAVITIES } from './cepheids.mts';
+import { CEPHEID_GRAVITIES } from './archives/cepheids.mts';
 import { writeLedger } from './ledger.mts';
 import { adql, csv, SIMBAD_TAP } from './companions.mts';
 import { packageParent, withParent } from './package-parent.mts';
@@ -492,7 +492,7 @@ export async function runNewObject(specPath: string, { root = checkoutProjectRoo
   for (const pulsar of pulsars) {
     progress(`[${++done}/${total}] ${pulsar.id}: writing the pulsar from its cited values`);
     try {
-      const { generatePulsar } = await import('./pulsar.mts'), generated = await generatePulsar(pulsar, { order: pulsar.order ?? next++, epochJdTt: solarEpoch.SOLAR_GEOMETRY_EPOCH_JD_TT });
+      const { generatePulsar } = await import('./archives/pulsar.mts'), generated = await generatePulsar(pulsar, { order: pulsar.order ?? next++, epochJdTt: solarEpoch.SOLAR_GEOMETRY_EPOCH_JD_TT });
       withParent(generated.files, pulsar.id, await packageParent(root, pulsar.id, pulsar));
       results.push({ id: pulsar.id, kind: 'star', files: (await writeGenerated(generated, root)).written.length, color: `${generated.regions} hot regions`, todo: ['review the drafted card, introduction and README'] });
     } catch (error) { failed(pulsar.id, 'star', error); }

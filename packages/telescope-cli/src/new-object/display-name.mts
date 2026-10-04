@@ -13,9 +13,9 @@
  *
  * The designations not chosen stay the star's aliases, so search finds each. Nothing here writes a name SIMBAD does not list:
  * steps 1 to 3 drop SIMBAD's own prefix and spell out the constellation, step 4 returns the identifier as SIMBAD writes it. */
-import type { Archive } from './archives.mts';
+import type { Archive } from './archives/archives.mts';
 import { adql, csv, SIMBAD_TAP } from './companions.mts';
-import type { IauLookup } from './iau-names.mts';
+import type { IauLookup } from './archives/iau-names.mts';
 import { spelledOut } from './prose.mts';
 
 /** Catalogues before surveys; among surveys, those that name stars a reader has met (planet hosts) before the wide photometric ones. */

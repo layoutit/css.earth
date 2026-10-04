@@ -3,10 +3,10 @@ import assert from 'node:assert/strict';
 import { mkdtemp, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import type { PreparedCssVolume } from '../volume/css-volume-types.js';
-import type { PreparedCataloguePoints } from '../volume/prepared-catalogue-points.js';
-import { validatePreparedVolumeDatasets, type PreparedVolumeDatasets } from '../volume/prepared-volume-datasets.js';
-import { validatePreparedVolumeDatasetIndex } from '../volume/volume-dataset-bank-files.js';
+import type { PreparedCssVolume } from '../volume/delivery/css-volume-types.js';
+import type { PreparedCataloguePoints } from '../volume/catalogue/prepared-catalogue-points.js';
+import { validatePreparedVolumeDatasets, type PreparedVolumeDatasets } from '../volume/delivery/prepared-volume-datasets.js';
+import { validatePreparedVolumeDatasetIndex } from '../volume/delivery/volume-dataset-bank-files.js';
 import { readVolumeDatasetBank, volumeDatasetBankFiles, writeVolumeDatasetBank } from './volume-dataset-bank.js';
 import { unpackPreparedBank } from './prepared-binary-file.js';
 
