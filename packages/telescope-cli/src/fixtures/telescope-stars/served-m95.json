@@ -30,5 +30,9 @@
  {
   "url": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv?-source=1997ApJ...491...13K&-meta.all=",
   "body": "#\n#   VizieR Astronomical Server vizier.cds.unistra.fr\n#    Date: 2026-10-04T04:37:18 [V7.6]\n#   In case of problem, please report to:\tcds-question@unistra.fr\n#\n#\n#Coosys\tJ2000:\teq_FK5 J2000\n#INFO\tservice_protocol=ASU\t  IVOID of the protocol through which the data was retrieved\n#INFO\trequest_date=2026-10-04T04:37:18\t  Query execution date\n#INFO\trequest=https://vizier.cds.unistra.fr/viz-bin/asu-tsv?-source=1997ApJ...491...13K&-meta.all=\t  Full request URL\n#INFO\tcontact=cds-question@unistra.fr\t  Email or URL to contact publisher\n#INFO\tserver_software=VizieR/7.6\t  Software version\n#INFO\tpublisher=CDS\t  Data centre that produced the VOTable\n#INFO\tError=Table or Catalog not found: 1997ApJ...491...13K\t\n"
+ },
+ {
+  "url": "https://simbad.cds.unistra.fr/simbad/sim-tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=tsv&QUERY=SELECT+TOP+8+b.main_id%2C+b.otype%2C+b.nbref+FROM+basic+AS+b+WHERE+CONTAINS%28POINT%28%27ICRS%27%2C+b.ra%2C+b.dec%29%2C+CIRCLE%28%27ICRS%27%2C+160.99054728575%2C+11.703694775369998%2C+0.04664%29%29+%3D+1+AND+b.plx_value+IS+NULL+AND+b.pmra+IS+NULL+AND+b.nbref+%3E%3D+2+AND+b.otype+IN+%28%27*%27%29+ORDER+BY+nbref+DESC",
+  "body": "main_id\totype\tnbref\n"
  }
 ]

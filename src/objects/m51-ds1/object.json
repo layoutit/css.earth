@@ -1,0 +1,142 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "m51-ds1",
+  "parent": "m51",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "M51-DS1",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 791010900
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/m51-ds1-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "M51-DS1",
+      "classification": "star",
+      "color": "#ffdab3",
+      "distanceAu": 1720571497727.3,
+      "description": "A cool supergiant in the Whirlpool Galaxy that dimmed more than sixfold by 2019 and then recovered.",
+      "systemName": "M51-DS1 system",
+      "order": 5772,
+      "context": {
+        "order": 5769
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -1.6160075306304833e+23,
+        -6.688435963317772e+22,
+        1.8884719756387193e+23
+      ],
+      "presentationToReference": [
+        -0.6278345969935094,
+        -0.6779192545748216,
+        -0.38242542161147686,
+        -0.25985222333142166,
+        -0.28058158372286796,
+        0.9239863618610852,
+        0.7336896761218019,
+        -0.6794847011907519,
+        4.492553567150115e-17
+      ],
+      "orbitUpReference": [
+        0.6779192545748216,
+        0.28058158372286796,
+        0.6794847011907519
+      ],
+      "metersPerUnit": 2551648064.516129,
+      "bodyRadiusM": 791010900000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}
