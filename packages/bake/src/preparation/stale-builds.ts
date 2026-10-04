@@ -18,7 +18,7 @@ export async function anyChangedAfter(paths: readonly string[], time: number) {
 /** `inputs` names the bundler's metafile: every file the last build read counts as a source, so an import from outside the
  * declared directories (src/platform, a site module) still marks the bundle stale. `base` is the directory tsup ran from,
  * which the metafile's input paths are relative to. */
-export interface BuildRule { readonly name: string; readonly command: string; readonly sources: readonly string[]; readonly output: string; readonly inputs?: string; readonly base?: string }
+export interface BuildRule { readonly name: string; readonly command: string; readonly sources: readonly string[]; readonly output: string; readonly additionalOutputs?: readonly string[]; readonly inputs?: string; readonly base?: string }
 
 /** The builds preparation tools import. Sources are directories scanned for TypeScript, JSON body records or generator scripts.
  * A package's rule follows the rules of the workspace packages it depends on (its package.json `dependencies`), since --run
@@ -29,7 +29,7 @@ const BUILD_METADATA: readonly (Partial<BuildRule> & Pick<BuildRule, 'name'> & {
   { name: '@cssearth/bake', output: 'packages/bake/dist/volume.d.ts', inputs: 'packages/bake/dist/metafile-esm.json', base: 'packages/bake' },
   { name: '@cssearth/renderer', inputs: 'packages/renderer/dist/metafile-esm.json', base: 'packages/renderer' },
   { name: '@cssearth/volume-viewer', sources: ['packages/volume-viewer/src', 'packages/bake/src'], output: 'packages/volume-viewer/dist/scene/compiler-viewer.js' },
-  { name: '@cssearth/telescope-cli', sources: ['packages/telescope-cli/src', 'packages/telescope-cli/src/sphere'], output: 'packages/telescope-cli/dist/telescope.mjs', bundledWorkspace: true },
+  { name: '@cssearth/telescope-cli', sources: ['packages/telescope-cli/src', 'packages/telescope-cli/src/sphere'], output: 'packages/telescope-cli/dist/telescope.mjs', additionalOutputs: ['packages/telescope-cli/dist/sphere-lane.js'], bundledWorkspace: true },
 ];
 
 export function buildRules(root: string): readonly BuildRule[] {
@@ -79,8 +79,10 @@ async function metafileInputs(root: string, rule: BuildRule): Promise<string[] |
 export async function staleBuilds(root = BOOTSTRAP_ROOT, rules: readonly BuildRule[] = BUILD_RULES) {
   const stale: { name: string; command: string; reason: string }[] = [];
   for (const rule of rules) {
-    const output = await stat(resolve(root, rule.output)).catch(() => null);
-    if (!output) { stale.push({ name: rule.name, command: rule.command, reason: `${rule.output} is missing` }); continue; }
+    const outputs = await Promise.all([rule.output, ...rule.additionalOutputs ?? []].map(async path => ({ path, info: await stat(resolve(root, path)).catch(() => null) })));
+    const missing = outputs.find(output => !output.info);
+    if (missing) { stale.push({ name: rule.name, command: rule.command, reason: `${missing.path} is missing` }); continue; }
+    const output = outputs.reduce((oldest, candidate) => candidate.info!.mtimeMs < oldest.info!.mtimeMs ? candidate : oldest);
     let source = 0, newestPath = '';
     for (const path of rule.sources) { const time = await newest(resolve(root, path)); if (time > source) { source = time; newestPath = path; } }
     const inputs = await metafileInputs(root, rule);
@@ -89,7 +91,7 @@ export async function staleBuilds(root = BOOTSTRAP_ROOT, rules: readonly BuildRu
       const time = (await stat(resolve(root, path)).catch(() => null))?.mtimeMs ?? Infinity;
       if (time > source) { source = time; newestPath = path; }
     }
-    if (source > output.mtimeMs) stale.push({ name: rule.name, command: rule.command, reason: `${newestPath} changed after ${relative(root, resolve(root, rule.output))} was built` });
+    if (source > output.info!.mtimeMs) stale.push({ name: rule.name, command: rule.command, reason: `${newestPath} changed after ${relative(root, resolve(root, output.path))} was built` });
   }
   return stale;
 }

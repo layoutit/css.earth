@@ -30,7 +30,7 @@ export function readClusterGroupDistances(csv: string, path: string): Map<string
 export async function prepareClusterCatalogObject(options: { objectDirectory: string }) {
   const objectDirectory = resolve(options.objectDirectory), sourceDirectory = resolve(objectDirectory, 'source');
   const descriptor = record(JSON.parse(await readFile(resolve(objectDirectory, 'object.json'), 'utf8').catch((error: unknown) => {
-    if (error instanceof Error && 'code' in error && error.code === 'ENOENT') throw new TypeError(`${objectDirectory}/object.json: authored descriptor id is required.`);
+    if (error instanceof Error && 'code' in error && error.code === 'ENOENT') throw new TypeError(`object.json is missing for ${objectDirectory}`);
     throw error;
   })), 'object.json');
   if (typeof descriptor.id !== 'string' || !/^[a-z][a-z0-9-]*$/u.test(descriptor.id)) throw new TypeError(`${objectDirectory}/object.json: authored descriptor id is required.`);

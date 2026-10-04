@@ -145,6 +145,7 @@ async function runPreparationCommand(command: string, args: readonly string[], r
     const stop = () => {
       if (stopping || groupFinished) return;
       stopping = true;
+      if (child.pid === undefined) { finishGroup(); return; }
       if (!signalGroup('SIGTERM') && !error) { finishGroup(); return; }
       timer = setTimeout(() => {
         const killed = signalGroup('SIGKILL');
@@ -164,7 +165,11 @@ async function runPreparationCommand(command: string, args: readonly string[], r
     process.on('exit', exit);
     child.stdout?.resume();
     child.stderr?.on('data', (chunk: Buffer) => { stderr = (stderr + chunk.toString()).slice(-64 * 1024 * 1024); });
-    child.once('error', recordError);
+    child.once('error', failure => {
+      recordError(failure);
+      if (child.pid === undefined) { closed = true; finishGroup(); }
+      else stop();
+    });
     // Descendants may keep output pipes open after their leader exits.
     child.once('exit', stop);
     child.once('close', code => { closed = true; status = code; stop(); finish(); });
