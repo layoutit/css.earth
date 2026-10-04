@@ -40,6 +40,7 @@
     "ipad:screen": "node labs/performance/ios-capture.mts --screen",
     "ipad:inspect": "node labs/performance/ios-capture.mts --inspect",
     "ipad:run": "node labs/performance/ipad-run.mts",
+    "ipad:timed": "node labs/performance/ipad-self-timed.mts",
     "lab:nebula": "node --experimental-strip-types labs/nebula/run.mts bake-nebula --stage=assets && vite --config labs/nebula/vite.config.ts --host 127.0.0.1 --port 4331 --strictPort",
     "lint": "eslint packages labs src site .github/scripts integration",
     "lint:packages": "eslint packages --max-warnings 0",

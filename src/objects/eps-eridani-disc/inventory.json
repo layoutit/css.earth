@@ -10,8 +10,8 @@
     {
       "location": "prepared",
       "filename": "datasets.json",
-      "bytes": 333297,
-      "sha256": "90b78de1de620d1f543d940106edef21f585fab33d14b14d0e3a3a1a92fdd2de"
+      "bytes": 3379,
+      "sha256": "f9118d56f1e08af12b236b7d92d92a9f5d38d2f586c3bfcd92fd6874e610f324"
     },
     {
       "location": "prepared",
@@ -195,9 +195,27 @@
     },
     {
       "location": "prepared",
+      "filename": "dust/volume.json",
+      "bytes": 125161,
+      "sha256": "2d3931ba369ee2ee6e770e9560eb375b5978998622d584cf0a4dd3f8008d0e76"
+    },
+    {
+      "location": "prepared",
       "filename": "presentation.json",
       "bytes": 2940,
       "sha256": "8460ecd4ab484058044dcb46fb6107882291fee34cabfec189bd9e5db7f977e9"
+    },
+    {
+      "location": "prepared",
+      "filename": "record.json",
+      "bytes": 14859,
+      "sha256": "25620d0c3acb84fa821fe60b8bd523f5d50f2b7740410f0454c450fad6e23be9"
+    },
+    {
+      "location": "prepared",
+      "filename": "stars.bin",
+      "bytes": 381,
+      "sha256": "bcdba927f8626cb13d7c0e82be1090ddf8ce1d3e51af97ec589815446a0457c8"
     }
   ]
 }

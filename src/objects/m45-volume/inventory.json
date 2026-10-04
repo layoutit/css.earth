@@ -34,8 +34,8 @@
     {
       "location": "prepared",
       "filename": "datasets.json",
-      "bytes": 2633681,
-      "sha256": "7ddccb1a8bc3ce92dd2e49840fc2f90486301196679c3f75bac245959a546dca"
+      "bytes": 16826,
+      "sha256": "654cf0232d4b44b4ce14319b7f982a08273e399efe575c95f461125bf48e4820"
     },
     {
       "location": "prepared",
@@ -219,6 +219,12 @@
     },
     {
       "location": "prepared",
+      "filename": "noirlab-optical/volume.json",
+      "bytes": 431241,
+      "sha256": "c52bfd7f682d857e2cb3601d4b66758d8a2d6fd9c250869c4e81e9584dcd3d2f"
+    },
+    {
+      "location": "prepared",
       "filename": "optical-composite/atlases/x.webp",
       "bytes": 286882,
       "sha256": "d2807c6734cdc07356f6d03f62db7138d87046d53edd0e9c956317a3cc42adc3"
@@ -393,9 +399,21 @@
     },
     {
       "location": "prepared",
+      "filename": "optical-composite/volume.json",
+      "bytes": 432995,
+      "sha256": "732087c60af4ee5378cc420c508670fd01f35ac391132c793420ee9407c322e8"
+    },
+    {
+      "location": "prepared",
       "filename": "presentation.json",
       "bytes": 8231,
       "sha256": "4fb4d08a0791f372bfdb1fcd879680c37309b1978bebfe2792d556a6873c94f1"
+    },
+    {
+      "location": "prepared",
+      "filename": "record.json",
+      "bytes": 13837,
+      "sha256": "c65c8238a62a03d7516076003c54704273cc32e82271b78c05496522e5f34e18"
     },
     {
       "location": "prepared",
@@ -573,6 +591,12 @@
     },
     {
       "location": "prepared",
+      "filename": "spitzer-irac-mips/volume.json",
+      "bytes": 432995,
+      "sha256": "80b5442076f176af6cbd295ccbd0d30cd325dcb00c5b2aacfda25fd0fbcc394b"
+    },
+    {
+      "location": "prepared",
       "filename": "spitzer-irac/atlases/x.webp",
       "bytes": 318314,
       "sha256": "bd580ebddf0a8d21e5c47c84a5b256ad260fc2b29f352c70386d0805f9930a55"
@@ -747,6 +771,18 @@
     },
     {
       "location": "prepared",
+      "filename": "spitzer-irac/volume.json",
+      "bytes": 428610,
+      "sha256": "83c59c9caf43e0414ee248647ac837192f3a9134be44ff2a517c36adfd95fb16"
+    },
+    {
+      "location": "prepared",
+      "filename": "stars.bin",
+      "bytes": 23903,
+      "sha256": "346dc04f36c17fc96b609d62dc18689d18a400b00b30841665e45b470eb8fc4c"
+    },
+    {
+      "location": "prepared",
       "filename": "wise-four-band/atlases/x.webp",
       "bytes": 395600,
       "sha256": "c1937e83ab0521b48fc7676cef1119661c08b3bcad28ef5c3900470feb4b41c0"
@@ -918,6 +954,12 @@
       "filename": "wise-four-band/impostors/view-ppp.png",
       "bytes": 23345,
       "sha256": "e61bc845d4fcb2427cea630c94451d463dca1695d896b8f66535cccabe099684"
+    },
+    {
+      "location": "prepared",
+      "filename": "wise-four-band/volume.json",
+      "bytes": 430364,
+      "sha256": "3967106901ad28105430ebf6b2a14d29fbc45313d287bed526da6c31d5533bf0"
     }
   ]
 }

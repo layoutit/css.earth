@@ -18,6 +18,9 @@ export interface PreparedCataloguePoints {
 /** The catalogues this validator has returned: frozen through, so one handed back is answered as it is (css-volume-validation.ts). */
 const validated = new WeakSet<object>();
 
+/** Catalogue points the data worker validated and sent to the page (css-volume-validation.ts trustPreparedCssVolume). */
+export function trustPreparedCataloguePoints(points: PreparedCataloguePoints): PreparedCataloguePoints { validated.add(points); return points; }
+
 export function validatePreparedCataloguePoints(input: unknown): PreparedCataloguePoints {
   if (!input || typeof input !== 'object' || Array.isArray(input)) throw new TypeError('Prepared catalogue points must be an object.');
   if (validated.has(input)) return input as PreparedCataloguePoints;

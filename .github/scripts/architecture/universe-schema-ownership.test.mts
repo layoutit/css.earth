@@ -6,9 +6,9 @@ import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const root = fileURLToPath(new URL('../../../', import.meta.url));
-const pattern = /cssearth-(catalogue-points(-bin)?|galaxy-backing|image-mesh|dataset-billboards)@1|CSCPTS01/u;
+const pattern = /cssearth-(catalogue-points|galaxy-backing|image-mesh|dataset-billboards)@1|cssearth-catalogue-points-bin@2|CSBANK01/u;
 
-test('Universe schema identifiers and catalogue binary magic are owned only by objects', () => {
+test('Universe schema identifiers and the prepared bank magic are owned only by objects', () => {
   const paths = execFileSync('git', ['ls-files', '--cached', '--others', '--exclude-standard', '-z', '--', '*.ts', '*.mts', '*.js', '*.mjs', '*.astro'], { cwd: root, encoding: 'utf8' }).split('\0');
   const findings = [...new Set(paths)].filter(path => /\.(?:ts|mts|js|mjs|astro)$/u.test(path)
     && !path.startsWith('packages/objects/') && !path.includes('.test.') && !path.startsWith('untangle/') && !path.startsWith('output/'))

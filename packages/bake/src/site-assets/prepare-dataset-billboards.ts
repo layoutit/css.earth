@@ -22,7 +22,7 @@ import sharp from 'sharp';
 import { encodeLossyWebp } from '../raster/index.ts';
 import { presentPhysicalPoseInVolume } from '@cssearth/engine';
 import { isRecord, requireArray, requireRecord, requireString } from '@cssearth/core';
-import { readInventory } from '@cssearth/objects/node';
+import { readInventory, readVolumeDatasetBank } from '@cssearth/objects/node';
 
 /** The images are served from the site's own `public/` tree, beside the other generated navigation images. */
 const OUTPUT = { metadata: 'site/prepared-dataset-billboards.json', images: 'public/navigation/dataset-billboards' };
@@ -129,7 +129,9 @@ export async function prepareDatasetBillboards(projectRoot = checkoutProjectRoot
     catch (error) { if (isRecord(error) && error.code === 'ENOENT') continue; throw error; }
     if (descriptor.type === 'image-layer-bank') { banks.push(await imageLayerBillboard(id, descriptor, objects)); continue; }
     if (descriptor.type !== 'volume-dataset-bank') continue;
-    const data = requireRecord((await preparedPayload(id, descriptor, objects)).data, `${id} datasets`);
+    // The inventory lists the bank's index; the bank is read whole from its files (@cssearth/objects volume-dataset-bank-files.ts).
+    await preparedPayload(id, descriptor, objects);
+    const data = requireRecord(await readVolumeDatasetBank(resolve(objects, id, 'prepared')) as unknown, `${id} datasets`);
     const contextVisibility = data.contextVisibility ?? 'galactic';
     if (contextVisibility !== 'galactic' && contextVisibility !== 'independent') throw new TypeError(`${id}: unsupported context visibility.`);
     const datasets = requireArray(data.datasets, `${id} datasets`).map(value => requireRecord(value));

@@ -19,7 +19,7 @@ export default {
     testing: fileURLToPath(new URL('./src/testing.ts', import.meta.url)),
     'scene-native-waits': fileURLToPath(new URL('./src/runtime/scene-native-waits.ts', import.meta.url)),
     'world-context-planner-worker': fileURLToPath(new URL('./src/universe/world-context/world-context-planner-worker.ts', import.meta.url)),
-    'prepared-object-worker': fileURLToPath(new URL('./src/prepared-object-worker.ts', import.meta.url)),
+    'prepared-data-worker': fileURLToPath(new URL('./src/prepared-data-worker.ts', import.meta.url)),
   },
   outDir: fileURLToPath(new URL('./dist', import.meta.url)),
   tsconfig: fileURLToPath(new URL('./tsconfig.json', import.meta.url)),

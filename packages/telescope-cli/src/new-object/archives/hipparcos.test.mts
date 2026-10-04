@@ -17,7 +17,7 @@ test('a table 2 row inside the paper\'s well-fit subset is drafted at its distan
     name: { name: 'Acamar', step: 'iau', identifier: '* tet Eri' } });
   assert.equal(spec.id, 'acamar');
   assert.equal(spec.parent, 'milky-way', 'a star Hipparcos places is inside the Milky Way');
-  assert.equal(spec.featured, true);
+  assert.equal('featured' in spec, false, 'a name alone does not make a star a map target');
   assert.equal(spec.mass, 'unmeasured');
   assert.match(spec.limb?.none ?? '', /^no mass is measured and no spectroscopic surface gravity is published/u, 'with no published gravity no limb law is chosen');
   assert.equal(spec.gravity, undefined);

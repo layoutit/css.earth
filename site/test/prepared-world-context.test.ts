@@ -2773,7 +2773,9 @@ test('CSSOM transform serialization cannot turn an unchanged publication into an
   layer.destroy();
 });
 
-test('the orbit banks decode to the orbits of the full prepared file, each vertex within half an Int32 step', { timeout: 30_000 }, async () => {
+// Reads every holder's bank and the whole world file: 7.6 s on a Mac and 30 to 31 s on CI's runner with 4,540 objects
+// (2026-10-04), where a 30 s limit passed on one run and failed on the next.
+test('the orbit banks decode to the orbits of the full prepared file, each vertex within half an Int32 step', { timeout: 120_000 }, async () => {
   const objects = new URL('../../src/objects/', import.meta.url);
   const full = parsePreparedWorldContext(JSON.parse(await readFile(new URL('sun/prepared/world-context.json', objects), 'utf8')));
   // Every object's file read, as Node reads the world (site/world-context-plan.mts): the summary and the index are the root object's.

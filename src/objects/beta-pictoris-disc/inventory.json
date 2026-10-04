@@ -195,6 +195,12 @@
     },
     {
       "location": "prepared",
+      "filename": "color/volume.json",
+      "bytes": 102774,
+      "sha256": "0efc367f92e01e485a22d133ceca364c4f9a00541584b3eeba4909223687a67e"
+    },
+    {
+      "location": "prepared",
       "filename": "contrast/atlases/x.webp",
       "bytes": 429726,
       "sha256": "304ca89aae6b9331f418122f0351d239487e9c2b2723c6dcaa19089b33f8ffbc"
@@ -369,9 +375,15 @@
     },
     {
       "location": "prepared",
+      "filename": "contrast/volume.json",
+      "bytes": 92338,
+      "sha256": "2a5186586bb399c16b13005b35869d90cbfb5d45c1664dddf30e09672a407484"
+    },
+    {
+      "location": "prepared",
       "filename": "datasets.json",
-      "bytes": 960280,
-      "sha256": "6b7576985ef4d46a9f8373f22aab0da30b5297253d4fb5b3625ade679bdb2e64"
+      "bytes": 9589,
+      "sha256": "5f56aa4aa68bcb4764b45271ce28915eb00f899bfaed9415b3db3c6f9edf3828"
     },
     {
       "location": "prepared",
@@ -384,6 +396,18 @@
       "filename": "presentation.json",
       "bytes": 9515,
       "sha256": "b92d42d3970b9f5ecc9f387c144718799bc0d5b2a11e39c4b4dc9dc644f3ea7f"
+    },
+    {
+      "location": "prepared",
+      "filename": "record.json",
+      "bytes": 161957,
+      "sha256": "b873071ced11b3a8b836ab4298f1572251b882601af4498492a49bb269a693af"
+    },
+    {
+      "location": "prepared",
+      "filename": "stars.bin",
+      "bytes": 379,
+      "sha256": "8f94235f39728c7c01e80f61f5fa3b592df358234551045718a57da3a3376ae2"
     },
     {
       "location": "prepared",
@@ -558,6 +582,12 @@
       "filename": "visible/impostors/view-ppp.png",
       "bytes": 5652,
       "sha256": "bc02720cf7c3ce7122880a55b1611b7db2d76c2c5edf17504414c38cb87fe40c"
+    },
+    {
+      "location": "prepared",
+      "filename": "visible/volume.json",
+      "bytes": 72332,
+      "sha256": "b5c93ff385a81b449b8c4a1c42b6a027e7f05b5bad4e8046a71ea2d386dbf97f"
     }
   ]
 }

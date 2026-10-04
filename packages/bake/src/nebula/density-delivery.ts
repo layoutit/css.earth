@@ -2,6 +2,7 @@
 import assert from 'node:assert/strict';
 import { prepareVolumeAtlases } from '../density/index.ts';
 import { validatePreparedVolumeDatasets, validatePreparedCssVolume, parseVolumeDatasetManifest } from '@cssearth/objects';
+import { readVolumeDatasetBank } from '@cssearth/objects/node';
 
 import { localPath, pinned, type CompilerPin, writeAtomic } from '../volume/node/index.ts';
 
@@ -58,8 +59,7 @@ async function restoreAtlasDelivery(root: string, delivery: BakeDelivery, result
   assert.equal(inputs.schema, 'cssearth-volume-atlas-inputs@1');
   assert.ok(Array.isArray(inputs.datasets));
   const manifest = JSON.parse((await pinned(root, delivery.manifest)).toString());
-  const envelope = JSON.parse((await pinned(root, { path: `${delivery.directory}/prepared/datasets.json` })).toString());
-  const bank = validatePreparedVolumeDatasets(envelope.data);
+  const bank = await readVolumeDatasetBank(localPath(root, `${delivery.directory}/prepared`));
   const writes: {path: string; bytes: Buffer}[] = [];
   for (const result of results) {
     const sourceDirectory = result.directory;

@@ -10,8 +10,8 @@
     {
       "location": "prepared",
       "filename": "datasets.json",
-      "bytes": 76770,
-      "sha256": "42cfd255efe4402ed73d7dc9a4e3c381f1053804fbb93da8857626581d61ab93"
+      "bytes": 3470,
+      "sha256": "4c62d90054f021f9d98069e667fa2abb788be0ec3f850f8b4de6bc88f2524b6e"
     },
     {
       "location": "prepared",
@@ -195,9 +195,27 @@
     },
     {
       "location": "prepared",
+      "filename": "hst-optical/volume.json",
+      "bytes": 70015,
+      "sha256": "80294137fa9abe64675ace8060e8a2daf46462c655547da67ca325de3c547e47"
+    },
+    {
+      "location": "prepared",
       "filename": "presentation.json",
       "bytes": 1863,
       "sha256": "120942527f8b7f6a77d5466a0fcf38363dccf3c1fc50306b4724b3aca5916aba"
+    },
+    {
+      "location": "prepared",
+      "filename": "record.json",
+      "bytes": 3903,
+      "sha256": "d9bb72e39d1294609d12666a2a1e376b903b531d2a26d1b24865e94a56c7d81e"
+    },
+    {
+      "location": "prepared",
+      "filename": "stars.bin",
+      "bytes": 966,
+      "sha256": "51fb9d863a78ad4493a1463c6215c4db4629303d2d3f70164cf8d8960da5a5cc"
     }
   ]
 }

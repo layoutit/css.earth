@@ -21,11 +21,23 @@ export function navigationHref(windowTarget: Window) {
   return owners.get(windowTarget)?.href() ?? windowTarget.location.href;
 }
 
-// On the iPad every URL change through the History API costs 20–35 ms of main-thread time: Safari dispatches a navigate
-// event and re-runs Reader detection over the page (2026-09-30). Every write is held and applied once the user has paused
-// for this long: a handoff in a pinch, a view change in a drag and the writes of one arrival become one, and the cost
-// lands in a pause instead of beside the next gesture (150 ms landed between stress gestures on the iPad).
-const REST_WRITE_MS = 1000;
+// On the iPad every URL change through the History API is followed by slow frames that are not our code: with no inspector
+// attached, `replaceState` returned in 0 to 12 ms, yet the frame of the write took 29 to 42 ms and another of 26 to 34 ms
+// came 0.2 s later (2026-10-04). Written a second after the camera rested, as they were, the two met the next gesture of
+// a reader who pauses about that long. So the address bar is not kept current while the reader uses the page. The app
+// reads the held address (navigationHref) and the History API hears of it when a write cannot meet a gesture:
+//  - A navigation's entry is written when the camera rests after it, with the view the entry it left keeps: Back has
+//    to find both.
+//  - A view's address is written when the reader leaves the page's content: the window loses focus (the address bar,
+//    another tab), a mouse leaves the page, the page is hidden, or a Command, Control or F5 key goes down (a reload
+//    or a copy of the address starts there).
+//  - With no mouse over the page (a touch screen) nothing tells the page that the reader reaches for the browser's
+//    Share button, so there a view is also written once the page has been still this long. The length is a judgement,
+//    not a measurement: longer than the pauses inside a run of gestures, shorter than a look before sharing.
+const IDLE_WRITE_MS = 3000;
+
+/** A write the History API has not heard of: a view of `entry`, or the push that creates it. */
+interface HeldWrite { push: boolean; entry: string; path: string }
 
 /** Standalone scenes replace the current URL without creating application history entries. */
 export function replaceNavigationUrl(windowTarget: Window, url: string) {
@@ -40,52 +52,77 @@ export function createNavigationHistory({ windowTarget, capture, navigate, navig
   // Not randomUUID: it exists only in secure contexts, and a device on the network loads the dev server over plain http.
   const prefix = Array.from(crypto.getRandomValues(new Uint8Array(16)), byte => byte.toString(16).padStart(2, '0')).join('');
   let serial = 0, entry = `${prefix}-${++serial}`, disposed = false;
-  const state = () => ({ ...(windowTarget.history.state ?? {}), cssEarthEntry: entry });
-  // A write held while the camera moves: whether any held write pushed an entry, and the latest path.
-  let moving = false, pending: { push: boolean; path: string } | null = null, restTimer: number | null = null;
-  const apply = (push: boolean, path: string) => {
-    pending = null;
-    windowTarget.history[push ? 'pushState' : 'replaceState']({ ...state(), cssEarthView: path }, '', path);
+  // The held writes in the order the History API will hear them: the view an entry keeps, then the push that left it.
+  const held: HeldWrite[] = [];
+  let moving = false, timer: number | null = null;
+  // The reader: a mouse is `over` the page, they `left` its content, or a key says the address is `due`.
+  let over = false, left = false, due = false;
+  function isCurrentView(url: string, id = entry) {
+    const current: unknown = windowTarget.history.state;
+    if (!isRecord(current) || current.cssEarthEntry !== id || typeof current.cssEarthView !== 'string') return false;
+    const href = windowTarget.location.href;
+    try { return new URL(url, href).href === href && new URL(current.cssEarthView, href).href === href; }
+    catch { return false; }
+  }
+  // An entry that already shows this view is left alone: replacing it again fires Safari's native navigation work even
+  // with identical state and URL.
+  const publish = ({ push, entry: id, path }: HeldWrite) => {
+    if (!push && isCurrentView(path, id)) return;
+    windowTarget.history[push ? 'pushState' : 'replaceState']({ ...(windowTarget.history.state ?? {}), cssEarthEntry: id, cssEarthView: path }, '', path);
   };
-  // Every push and replace waits for the camera to rest this long, so no handoff or camera frame pays for the write.
-  const write = (push: boolean, path: string) => {
-    pending = { push: push || (pending?.push ?? false), path };
-    if (moving) return;
-    if (restTimer !== null) windowTarget.clearTimeout(restTimer);
-    restTimer = windowTarget.setTimeout(applyPending, REST_WRITE_MS);
+  const flush = () => {
+    if (timer !== null) { windowTarget.clearTimeout(timer); timer = null; }
+    due = false;
+    for (const write of held.splice(0)) publish(write);
   };
-  const applyPending = () => { restTimer = null; if (pending && !disposed) apply(pending.push, pending.path); };
+  // Every write runs in its own task, with the camera at rest.
+  const settle = () => {
+    if (timer !== null) { windowTarget.clearTimeout(timer); timer = null; }
+    if (!held.length || disposed || moving) return;
+    if (left || due || held.some(write => write.push)) timer = windowTarget.setTimeout(flush, 0);
+    else if (!over) timer = windowTarget.setTimeout(flush, IDLE_WRITE_MS);
+  };
+  const hold = (write: HeldWrite) => {
+    const last = held[held.length - 1];
+    // A view takes the place of the one held for its entry, and of one held for an entry no push left behind.
+    if (!write.push && last && (last.entry === write.entry || !last.push)) held[held.length - 1] = { ...write, push: last.push && last.entry === write.entry };
+    else held.push(write);
+    settle();
+  };
   const onMotion = (event: Event) => {
     const active = isRecord((event as CustomEvent).detail) && (event as CustomEvent<{ active?: unknown }>).detail.active === true;
     if (active === moving) return;
-    moving = active;
-    if (restTimer !== null) { windowTarget.clearTimeout(restTimer); restTimer = null; }
-    if (!moving && pending) restTimer = windowTarget.setTimeout(applyPending, REST_WRITE_MS);
+    moving = active; settle();
   };
+  const leave = () => { left = true; settle(); };
+  // Any use of the page: the reader is here, and the still period starts again.
+  const use = () => { if (left || timer !== null) { left = false; settle(); } };
+  // A wheel is turned with a mouse or a trackpad over the page, even one that has not moved since the page loaded.
+  const onWheel = () => { if (!over || left || timer !== null) { over = true; left = false; settle(); } };
+  const onPointer = (event: Event) => {
+    if ((event as PointerEvent).pointerType !== 'mouse') { if (event.type === 'pointerdown') { over = false; left = false; settle(); } return; }
+    over = event.type !== 'pointerleave'; left = !over; settle();
+  };
+  const onKey = (event: Event) => {
+    const { key, repeat } = event as KeyboardEvent;
+    if (held.length && !repeat && (key === 'Meta' || key === 'Control' || key === 'F5')) { due = true; settle(); } else use();
+  };
+  // A hidden page may run no later task: it writes at once, whatever the camera does.
+  const onVisibility = () => { if (windowTarget.document?.visibilityState !== 'hidden') { use(); return; } left = true; flush(); };
   function remember() {
     const url = capture();
     if (url) snapshots.set(entry, url);
     return url;
   }
-  function isCurrentView(url: string) {
-    const current: unknown = windowTarget.history.state;
-    if (!isRecord(current) || current.cssEarthEntry !== entry || typeof current.cssEarthView !== 'string') return false;
-    const href = windowTarget.location.href;
-    try { return new URL(url, href).href === href && new URL(current.cssEarthView, href).href === href; }
-    catch { return false; }
-  }
   function checkpoint() {
     const url = remember();
-    // A settled drag already published this entry. Replacing it again fires Safari's
-    // native navigation work even with identical state and URL.
-    if (url && (pending || !isCurrentView(url))) write(false, url);
+    if (url) hold({ push: false, entry, path: url });
   }
   const onPopState = (event: PopStateEvent) => {
     if (disposed) return;
-    // The browser moved to another entry: a write held for the one it left no longer applies.
-    const unpublished = pending?.push === true;
-    pending = null;
-    if (restTimer !== null) { windowTarget.clearTimeout(restTimer); restTimer = null; }
+    // The browser moved to another entry: the writes held for the one it left no longer apply.
+    const unpublished = held.some(write => write.push);
+    held.length = 0; settle();
     // location already names the incoming entry. Capture the old scene without
     // replacing that URL; the router retires its continuous URL writer next.
     remember();
@@ -96,8 +133,8 @@ export function createNavigationHistory({ windowTarget, capture, navigate, navig
     // left. One step Back means "not there after all": fly back to that view as a new entry
     // instead of skipping it for the one before.
     const departure = snapshots.get(entry);
-    // Back within the rest period of an arrival: the arrival's entry was never published, so the browser left the entry
-    // the flight departed from, one step too far. Step forward to it again; that move restores the departure.
+    // Back before an arrival's entry was written (its camera still flies): the browser left the entry the flight
+    // departed from, one step too far. Step forward to it again; that move restores the departure.
     if (unpublished && previous.has(entry) && previous.get(entry) !== targetEntry) { windowTarget.history.forward(); return; }
     if (navigating() && departure && previous.get(entry) === targetEntry) {
       const location = new URL(departure, windowTarget.location.href);
@@ -112,12 +149,23 @@ export function createNavigationHistory({ windowTarget, capture, navigate, navig
     Promise.resolve(navigate(id, { kind: 'history', url: location.href, history: { history: 'pop', entry: targetEntry } })).catch(onError);
   };
   // The page's own entry gets its identity at once: Back reads it before any rest.
-  { const url = remember(); if (url && !isCurrentView(url)) apply(false, url); }
-  windowTarget.addEventListener('popstate', onPopState);
-  windowTarget.document?.addEventListener('objectmotionchange', onMotion, { capture: true });
+  { const url = remember(); if (url) publish({ push: false, entry, path: url }); }
+  const listening = new AbortController(), { signal } = listening, page = windowTarget.document;
+  windowTarget.addEventListener('popstate', onPopState, { signal });
+  windowTarget.addEventListener('blur', leave, { signal });
+  windowTarget.addEventListener('focus', use, { signal });
+  windowTarget.addEventListener('pagehide', flush, { signal });
+  windowTarget.addEventListener('keydown', onKey, { capture: true, signal });
+  windowTarget.addEventListener('wheel', onWheel, { capture: true, passive: true, signal });
+  page?.addEventListener('objectmotionchange', onMotion, { capture: true, signal });
+  page?.addEventListener('visibilitychange', onVisibility, { signal });
+  page?.addEventListener('pointerdown', onPointer, { capture: true, signal });
+  page?.addEventListener('scroll', use, { capture: true, passive: true, signal });
+  page?.documentElement?.addEventListener('pointerenter', onPointer, { signal });
+  page?.documentElement?.addEventListener('pointerleave', onPointer, { signal });
   const owner = Object.freeze({
-    /** The URL this owner has published or holds to publish at rest. */
-    href() { return pending ? new URL(pending.path, windowTarget.location.href).href : windowTarget.location.href; },
+    /** The URL this owner has published or holds to publish. */
+    href() { const last = held[held.length - 1]; return last ? new URL(last.path, windowTarget.location.href).href : windowTarget.location.href; },
     checkpoint, remember,
     /** The current entry keeps `url`, a view the camera has since left: a header pill flew out of it, and the entry
      * pushed next must come Back to it rather than to where that flight landed. */
@@ -125,36 +173,28 @@ export function createNavigationHistory({ windowTarget, capture, navigate, navig
       if (disposed) return;
       const value = new URL(url, navigationHref(windowTarget)), path = value.pathname + value.search + value.hash;
       snapshots.set(entry, path);
-      if (restTimer !== null) { windowTarget.clearTimeout(restTimer); restTimer = null; }
-      if (!isCurrentView(path)) apply(false, path);
+      hold({ push: false, entry, path });
     },
     commit(url: string, action: NavigationHistory = { history: 'push' }) {
       const { history } = action, targetEntry = action.history === 'pop' ? action.entry : undefined;
       if (disposed) return;
       if (history === 'pop' && !targetEntry) throw new TypeError('History restoration requires an entry.');
-      // A push still held from the last arrival is its own entry: publish it before this one takes its place, or two
-      // flights within the rest period become one entry and Back skips the body between them.
-      if (history === 'push' && pending?.push) {
-        if (restTimer !== null) { windowTarget.clearTimeout(restTimer); restTimer = null; }
-        apply(true, pending.path);
-      }
+      const value = new URL(url, navigationHref(windowTarget)), path = value.pathname + value.search + value.hash;
       const from = entry;
       entry = history === 'pop' ? targetEntry! : history === 'push' ? `${prefix}-${++serial}` : entry;
       if (history === 'push' && !embedded) previous.set(entry, from);
-      const value = new URL(url, navigationHref(windowTarget)), path = value.pathname + value.search + value.hash;
       snapshots.set(entry, path);
-      // An embedded scene shares the host page's session history, so it never adds entries of its own.
-      const push = history === 'push' && !embedded;
       // A pop is the browser's own move and is never held; it drops any held write (onPopState).
-      if (history === 'pop') { if (!isCurrentView(path)) apply(false, path); return; }
-      if (push || pending || !isCurrentView(path)) write(push, path);
+      if (history === 'pop') { held.length = 0; settle(); publish({ push: false, entry, path }); return; }
+      // An embedded scene shares the host page's session history, so it never adds entries of its own.
+      const push = history === 'push' && !embedded, departed = snapshots.get(from);
+      // The entry a push leaves keeps the view it was left in, written just before the push.
+      if (push && departed !== undefined) hold({ push: false, entry: from, path: departed });
+      hold({ push, entry, path });
     },
     destroy() {
       if (disposed) return;
-      if (restTimer !== null) { windowTarget.clearTimeout(restTimer); restTimer = null; }
-      if (pending) apply(pending.push, pending.path);
-      disposed = true; windowTarget.removeEventListener('popstate', onPopState);
-      windowTarget.document?.removeEventListener('objectmotionchange', onMotion, { capture: true });
+      flush(); disposed = true; listening.abort();
       if (owners.get(windowTarget) === owner) owners.delete(windowTarget);
     },
   });
