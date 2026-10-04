@@ -9,8 +9,11 @@ import { readFitsImage, skyDisplayRaster, skyImageAxes } from '@cssearth/fits';
 export interface FitsGalleryImageRecipe {
   /** The window's first column and first stored row, counted from 1 as FITS viewers do, and its size in source pixels. */
   readonly window: { readonly x: number; readonly y: number; readonly width: number; readonly height: number };
-  /** The header's BUNIT, stated so a recipe cannot be applied to an image in another unit. */
+  /** The header's BUNIT, stated so a recipe cannot be applied to an image in another unit. Empty for an image of a pure
+   * ratio, whose header leaves BUNIT blank; `quantity` then says what the ratio is. */
   readonly unit: string;
+  /** What an image without a unit holds (a signal-to-noise ratio): stated when `unit` is empty, and only then. */
+  readonly quantity?: string;
   /** The values shown as black and white, in `unit`. */
   readonly range: readonly [number, number];
   /** Output pixels per source pixel along each axis. */
@@ -30,11 +33,14 @@ export function parseFitsGalleryImageRecipe(value: unknown): FitsGalleryImageRec
   const [x, y, width, height] = [whole(window.x, 'window.x'), whole(window.y, 'window.y'), whole(window.width, 'window.width'), whole(window.height, 'window.height')];
   const enlarge = whole(recipe.enlarge, 'enlarge');
   if (width * enlarge > MAX_OUTPUT_EDGE || height * enlarge > MAX_OUTPUT_EDGE) throw new RangeError('A FITS gallery picture is larger than 4096 pixels on an edge.');
-  if (typeof recipe.unit !== 'string' || !recipe.unit.trim()) throw new TypeError('A FITS gallery recipe states the image unit.');
+  if (typeof recipe.unit !== 'string') throw new TypeError('A FITS gallery recipe states the image unit.');
+  const unit = recipe.unit.trim(), quantity = recipe.quantity;
+  // An image of a ratio has no unit to state, so the recipe says what the ratio is instead; nothing else may leave the unit out.
+  if (unit ? quantity !== undefined : typeof quantity !== 'string' || !quantity.trim()) throw new TypeError('A FITS gallery recipe states the image unit, or for an image without one, the quantity it holds.');
   const range = recipe.range;
   if (!Array.isArray(range) || range.length !== 2 || range.some(n => typeof n !== 'number' || !Number.isFinite(n)) || !(range[0] < range[1]))
     throw new TypeError('A FITS gallery range is two finite values, black below white.');
-  return { window: { x, y, width, height }, unit: recipe.unit.trim(), range: [range[0], range[1]], enlarge };
+  return { window: { x, y, width, height }, unit, ...(unit ? {} : { quantity: (quantity as string).trim() }), range: [range[0], range[1]], enlarge };
 }
 
 /** Eight-bit grey samples of the window in display order, before enlargement. A sample outside the range is clipped. */

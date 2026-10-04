@@ -43,6 +43,32 @@
           "catalogueId": "source-betelgeuse-betelgeuse-matisse-2020-02-continuum",
           "locator": "angularDiameterMas; angularDiameterSource"
         }
+      },
+      {
+        "id": "companion",
+        "label": "Companion",
+        "value": "Siwarha, 52 milliarcseconds away in December 2024",
+        "source": {
+          "url": "https://doi.org/10.1051/0004-6361/202661023",
+          "label": "Montargès et al. (2026)",
+          "checked": "2026-10-03",
+          "path": "source/measurements.json",
+          "catalogueId": "doi-10-1051-0004-6361-202661023",
+          "locator": "companionSeparationMas; companionSource"
+        }
+      },
+      {
+        "id": "companion-period",
+        "label": "Companion’s orbit",
+        "value": "2,109 days",
+        "source": {
+          "url": "https://arxiv.org/abs/2409.11332",
+          "label": "MacLeod et al. (2025)",
+          "checked": "2026-10-03",
+          "path": "source/measurements.json",
+          "catalogueId": "arxiv-2409-11332",
+          "locator": "companionOrbitalPeriodDays; companionOrbitalPeriodSource"
+        }
       }
     ],
     "moreFacts": []
@@ -453,5 +479,25 @@
       "path": "../../../../../packages/astronomy/data/bodies/betelgeuse.json",
       "credit": "Joyce et al. (2020) radius and distance; SIMBAD astrometry; Kervella et al. (2018) rotation"
     }
-  }
+  },
+  "galleries": [
+    {
+      "id": "telescope-images",
+      "titleKey": "telescopeImages",
+      "open": false,
+      "qualification": "The map ESO published with the paper that found the companion, drawn in plain grays from zero (black) to its brightest point (white). Each pixel of the original is a square here; nothing is smoothed or sharpened. It is not a photograph: Betelgeuse’s own light has been removed, and each pixel says how far what is left there stands above the noise. The brightest point, 6.1 times the noise, is the companion. One point of light cannot be laid onto a surface, so it is kept here as a picture.",
+      "items": [
+        {
+          "id": "sphere-2024-12-06",
+          "label": "VLT/SPHERE · 6 December 2024",
+          "src": "/scenes/betelgeuse/betelgeuse-companion-sphere-2024-12-06.webp",
+          "width": 730,
+          "height": 730,
+          "alt": "Grainy grayscale map: a mottled dark field with one small bright point to the lower left of the centre.",
+          "caption": "Betelgeuse is at the centre, its own light removed. The bright point to the lower left, east-southeast of the star, is Siwarha: 52 milliarcseconds away, about two and a half times the star’s radius from its centre. North is up and the picture is about a quarter of an arcsecond across, through a red filter beside the hydrogen line.",
+          "sourceUrl": "https://dataportal.eso.org/dataPortal/file/ADP.2026-08-19T13:19:07.650"
+        }
+      ]
+    }
+  ]
 }

@@ -1762,6 +1762,15 @@
           "replacement": ""
         }
       ]
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "companion/Betelgeuse_B_PACO_2024-12-06_CntHa.fits",
+      "url": "https://dataportal.eso.org/dataPortal/file/ADP.2026-08-19T13:19:07.650"
     }
   ]
 }

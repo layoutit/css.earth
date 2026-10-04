@@ -40,9 +40,16 @@ test('a recipe for another unit, a window off the image, missing samples and mal
   assert.throws(() => fitsGalleryGreys(skyFits([0, 0, 0, 0, 0, 0], 'K'), recipe), /unit changed/u);
   assert.throws(() => fitsGalleryGreys(skyFits([0, 0, 0, 0, 0, 0]), { ...recipe, window: { x: 2, y: 1, width: 3, height: 2 } }), /leaves the image/u);
   assert.throws(() => fitsGalleryGreys(skyFits([0, NaN, 0, 0, 0, 0]), recipe), /without a value/u);
-  for (const bad of [null, {}, { ...recipe, enlarge: 0 }, { ...recipe, enlarge: 1.5 }, { ...recipe, unit: '' }, { ...recipe, range: [1, 1] }, { ...recipe, range: [0, Infinity] },
+  for (const bad of [null, {}, { ...recipe, enlarge: 0 }, { ...recipe, enlarge: 1.5 }, { ...recipe, unit: '' }, { ...recipe, quantity: 'signal-to-noise ratio' }, { ...recipe, unit: '', quantity: ' ' }, { ...recipe, range: [1, 1] }, { ...recipe, range: [0, Infinity] },
     { ...recipe, window: { x: 0, y: 1, width: 3, height: 2 } }, { ...recipe, window: { x: 1, y: 1, width: 1000, height: 2 }, enlarge: 8 }])
     assert.throws(() => parseFitsGalleryImageRecipe(bad), JSON.stringify(bad));
+});
+
+test('an image of a ratio states what the ratio is in place of a unit, and is refused for an image that has one', () => {
+  const ratio = parseFitsGalleryImageRecipe({ window: { x: 1, y: 1, width: 3, height: 2 }, unit: '', quantity: 'signal-to-noise ratio', range: [0, 6], enlarge: 2 });
+  assert.equal(ratio.quantity, 'signal-to-noise ratio');
+  assert.deepEqual([...fitsGalleryGreys(skyFits([0, 3, 6, -1, 1.5, 9], ''), ratio).greys], [0, 64, 255, 0, 128, 255]);
+  assert.throws(() => fitsGalleryGreys(skyFits([0, 0, 0, 0, 0, 0]), ratio), /unit changed/u);
 });
 
 test("Haumea's recipe centres its window on the brightest pixel of the archive cutout and spans the noise to that peak", async () => {

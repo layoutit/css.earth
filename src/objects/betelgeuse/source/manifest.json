@@ -6545,6 +6545,40 @@
           }
         ]
       }
+    },
+    {
+      "id": "sphere-paco-cntha-2024-12-06",
+      "path": "companion/Betelgeuse_B_PACO_2024-12-06_CntHa.fits",
+      "origin": "https://dataportal.eso.org/dataPortal/file/ADP.2026-08-19T13:19:07.650",
+      "credit": "ESO/VLT/SPHERE-ZIMPOL, programme 114.28H9.001; Montargès et al. (2026), A&A 711, L12",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlt-ut3",
+            "evidence": "ESO Phase 3 collection BETELGEUSE-B: the ancillary product Betelgeuse_B_PACO_2024-12-06_CntHa.fits of the CntHa science image ADP.2026-08-19T13:19:07.649, observed on 6 December 2024. Its header names Fig. 1 of the paper."
+          }
+        ]
+      },
+      "license": "CC-BY-4.0 under the ESO data access policy; retain the ESO provenance and the paper citation.",
+      "acquisition": "Downloaded unchanged from the ESO archive by its identifier ADP.2026-08-19T13:19:07.650, first on 2026-10-03; the acquisition plan restores it from the same address.",
+      "redistribution": "The archive file is not redistributed; the sidebar picture is an attributed display derivative; see NOTICE.md.",
+      "consumers": [
+        "content"
+      ],
+      "coverage": "142 x 142 pixels holding the signal-to-noise ratio of the PACO angular and spectral differential imaging analysis in the CntHa filter; the header leaves BUNIT blank and states the quantity. The map peaks at 6.11 at pixel (59, 65), east-southeast of the centre of its footprint.",
+      "width": 142,
+      "height": 142,
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-betelgeuse-sphere-paco-cntha-2024-12-06",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
@@ -6935,6 +6969,23 @@
       "sourceBinding": {
         "kind": "local",
         "reason": "SQUEEZE's raw posterior mean at 0.78 mas pixels from image-star.mts with the season betelgeuse-matisse-2020-12, the input to the beam convolution; not displayed."
+      }
+    },
+    {
+      "path": "presentation/minimap.json"
+    },
+    {
+      "path": "content/charts.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored pointer from the shared content step to the telescope-image gallery."
+      }
+    },
+    {
+      "path": "companion/gallery.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored gallery record: the pixel window, gray range, enlargement and reader text of the SPHERE detection map."
       }
     }
   ]

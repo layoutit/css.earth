@@ -1,0 +1,42 @@
+{
+  "id": "arxiv-2409-11332",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "MacLeod et al. (2024): Radial Velocity and Astrometric Evidence for a Close Companion to Betelgeuse",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2409.11332"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/2409.11332",
+      "label": "arXiv preprint"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/2409.11332",
+      "checkedOn": "2026-10-04",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "MacLeod et al. (2024)",
+      "scope": "citation",
+      "evidence": "https://arxiv.org/abs/2409.11332"
+    }
+  ],
+  "creators": [
+    "Morgan MacLeod",
+    "Sarah Blunt",
+    "Robert J. De Rosa",
+    "et al."
+  ],
+  "publicationDate": "2024"
+}
