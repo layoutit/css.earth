@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
-import { diskGain, diskValue, assertDiskModel, NORMAL_GEOMETRY, type DiskModel, phaseGain } from '@cssearth/bake/photometry';
+import { diskGain, diskValue, assertDiskModel, NORMAL_GEOMETRY, type DiskModel, phaseGain, phaseValue, assertPhaseModel } from '@cssearth/bake/photometry';
 
 /**
  * Frozen copies of the photometric arithmetic the routes used before tools/photometry
@@ -96,4 +96,31 @@ test('Lommel-Seeliger plus Lambert follows its printed lines in phase and sends 
   assert.throws(() => assertDiskModel({ ...europa, lunarFractionPerDegree: -0.006 }), /lunar fraction/);
   assert.throws(() => assertDiskModel({ ...europa, surfacePhase: 0 }), /surface phase/);
   assert.throws(() => assertDiskModel({ ...europa, surfacePhasePerDegree: Number.NaN }), /finite/);
+});
+
+test('the Akimov disk function is flat at zero phase and follows its printed form elsewhere', () => {
+  const akimov: DiskModel = { family: 'akimov' }, degree = Math.PI / 180, near = (value: number, expected: number) => assert.ok(Math.abs(value - expected) < 1e-12, `${value} is not ${expected}`);
+  const at = (incidence: number, emission: number, phase: number) => diskValue(akimov, { mu0: Math.cos(incidence * degree), mu: Math.cos(emission * degree), phase: phase * degree });
+  // Flood light: 1 at every emission, so no limb darkening.
+  for (const emission of [0, 40, 70, 89]) assert.equal(at(emission, emission, 0), 1);
+  // Filacchione et al. (2022) eq. 4 at 60 degrees phase. Sub-observer point: gamma = 0, so D = cos 30 cos(1.5 x 30).
+  near(at(60, 0, 60), Math.cos(30 * degree) * Math.cos(45 * degree));
+  // The mirror meridian, gamma = g/2 on the photometric equator: D = 1.
+  near(at(30, 30, 60), 1);
+  // The sub-solar point, gamma = g: D = cos 30 cos(1.5 x 30) / cos 60.
+  near(at(0, 60, 60), Math.cos(30 * degree) * Math.cos(45 * degree) / Math.cos(60 * degree));
+  // The terminator on the equator, gamma = g - 90: no light.
+  assert.ok(at(90 - 1e-7, 30, 60) < 1e-6);
+  assert.equal(assertDiskModel(akimov), akimov);
+});
+
+test('a quadratic phase curve follows its printed line and is held beyond its fitted phase', () => {
+  // Rhea at 599 nm, Filacchione et al. (2022) Table 6.
+  const rhea = { family: 'quadratic' as const, constant: 0.610461, perDegree: -0.00352956, perDegreeSquared: -1.00710e-06, heldBeyondDegrees: 120 };
+  const degree = Math.PI / 180, line = (g: number) => 0.610461 - 0.00352956 * g - 1.00710e-06 * g * g;
+  assert.equal(phaseValue(rhea, 0), 0.610461);
+  assert.ok(Math.abs(phaseValue(rhea, 90 * degree) - line(90)) < 1e-12);
+  assert.ok(Math.abs(phaseValue(rhea, 170 * degree) - line(120)) < 1e-12, 'held at 120 degrees');
+  assert.throws(() => assertPhaseModel({ ...rhea, heldBeyondDegrees: 180 }), /positive/);
+  assert.throws(() => assertPhaseModel({ ...rhea, constant: Number.NaN }), /finite/);
 });

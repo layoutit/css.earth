@@ -75,11 +75,16 @@ export function parsePhotometricModel(value: unknown): PhotometricModel {
     const disk: DiskModel = diskFamily === 'lunar-lambert' ? { family: diskFamily, weight: requireFiniteNumber(strict(r.disk, ['family', 'weight'], 'disk function').weight, 'weight') }
       : diskFamily === 'minnaert' ? (() => { const d = strict(r.disk, ['family', 'coefficient', 'coefficientPerDegree'], 'disk function'); return { family: diskFamily, coefficient: requireFiniteNumber(d.coefficient, 'coefficient'), coefficientPerDegree: requireFiniteNumber(d.coefficientPerDegree ?? 0, 'coefficient per degree') }; })()
       : diskFamily === 'lommel-seeliger-lambert' ? (() => { const d = strict(r.disk, ['family', 'lunarFraction', 'lunarFractionPerDegree', 'surfacePhase', 'surfacePhasePerDegree'], 'disk function'); return { family: diskFamily, lunarFraction: requireFiniteNumber(d.lunarFraction, 'lunar fraction'), lunarFractionPerDegree: requireFiniteNumber(d.lunarFractionPerDegree, 'lunar fraction per degree'), surfacePhase: requireFiniteNumber(d.surfacePhase, 'surface phase function'), surfacePhasePerDegree: requireFiniteNumber(d.surfacePhasePerDegree, 'surface phase function per degree') }; })()
-      : diskFamily === 'lambert' || diskFamily === 'lommel-seeliger' ? (strict(r.disk, ['family'], 'disk function'), { family: diskFamily })
+      : diskFamily === 'lambert' || diskFamily === 'lommel-seeliger' || diskFamily === 'akimov' ? (strict(r.disk, ['family'], 'disk function'), { family: diskFamily })
       : (() => { throw new TypeError(`Unknown disk function: ${diskFamily}.`); })();
     const phase: PhaseModel | undefined = optional(r.phase, value => {
       if (requireRecord(value, 'phase function').family === 'exponential')
         return assertPhaseModel({ family: 'exponential', slopePerRadian: requireFiniteNumber(strict(value, ['family', 'slopePerRadian'], 'phase function').slopePerRadian, 'phase slope per radian') });
+      if (requireRecord(value, 'phase function').family === 'quadratic') {
+        const q = strict(value, ['family', 'constant', 'perDegree', 'perDegreeSquared', 'heldBeyondDegrees'], 'phase function');
+        return assertPhaseModel({ family: 'quadratic', constant: requireFiniteNumber(q.constant, 'phase constant'), perDegree: requireFiniteNumber(q.perDegree, 'phase term per degree'),
+          perDegreeSquared: requireFiniteNumber(q.perDegreeSquared, 'phase term per degree squared'), heldBeyondDegrees: requireFiniteNumber(q.heldBeyondDegrees, 'phase held beyond') });
+      }
       const p = strict(value, ['family', 'asymmetry', 'amplitude', 'width'], 'phase function');
       return assertPhaseModel({ family: oneOf(p.family, ['hg-shadow-hiding'] as const, 'phase family'), asymmetry: requireFiniteNumber(p.asymmetry, 'asymmetry'), amplitude: requireFiniteNumber(p.amplitude, 'amplitude'), width: requireFiniteNumber(p.width, 'width') });
     });
