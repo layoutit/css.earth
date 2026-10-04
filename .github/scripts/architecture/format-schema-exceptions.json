@@ -83,5 +83,12 @@
       "src"
     ],
     "reason": "Preserved heliosphere IBEX extract.py writes samples parsed and triangulated by bake; Python cannot import TypeScript. shell-grid-schema.test.ts pins writer and real fixture to SURFACE_GRID_SCHEMA; geometry stays bake."
+  },
+  {
+    "schema": "cssearth-volume-presentation@2",
+    "owners": [
+      "site"
+    ],
+    "reason": "P5 moves build preview admission into objects. The existing site/volume-presentation.mts runtime adapter retains its schema spelling because this packet forbids runtime changes; site/test/volume-presentation.test.mts pins its admission. Remove this exception when that runtime adapter imports the objects identifier in Plan 7."
   }
 ]

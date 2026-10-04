@@ -3,12 +3,14 @@ import { pathToFileURL } from 'node:url';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { gzipSync, gunzipSync } from 'node:zlib';
 import catalogue from '../../source/moon-catalogues.json' with { type: 'json' };
-import world from '../../../src/objects/sun/prepared/world-context.json' with { type: 'json' };
+import worldInput from '../../../src/objects/sun/prepared/world-context.json' with { type: 'json' };
+import { parsePreparedWorldContext } from '@cssearth/objects';
 import { hasProperMoonName, prepareBodyMoons } from '../../prepare-body-moons.mts';
 import { sourceArray, sourceObject, sourceText } from '@cssearth/objects/sources';
 
 
 const centerCodes: Readonly<Record<string, string>> = { jupiter: '599', saturn: '699', uranus: '799', neptune: '899' };
+const world = parsePreparedWorldContext(worldInput);
 const epoch = world.frame.epochJdTt;
 // The discovery/element table lists this new moon, but its code currently
 // resolves to asteroid 75052 in Horizons. Keep the failed reply as evidence.

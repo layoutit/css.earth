@@ -81,6 +81,37 @@ separately from its resampled grid spacing. If a fit's header conflicts with the
 paper's observation dates, inspect released masks and preserve the discrepancy;
 footprint agreement alone does not establish every cell's acquisition time.
 
+## Published simulations
+
+A simulation is a source when it was computed for the named object, a paper
+describes it, and its output is released under terms that allow reuse. Look for
+one during the source survey, also where nothing is measured: a planet without a
+measured map need not stay a neutral sphere.
+
+- Show it as a dataset of its own. Its visible description names the model, the
+  paper and the scenario the run assumes: the atmosphere, surface and rotation it
+  was given. When nobody has detected that atmosphere, say so.
+- The default view stays the measured one, or the neutral one where nothing is
+  measured. Never blend simulated structure into a measured dataset, and never use
+  it to fill a gap in one.
+- Use the released numbers: the quantity, units, grid and time averaging the
+  release states, with a legend in those units. A temperature map in false color
+  is not what an eye would see.
+- When several models of the same case are published, show one and name it, and
+  state how far the others differ. Do not average models.
+- Draw only what is visible at the size the body is shown. A pattern that spans
+  the body qualifies: the day and night sides of a tidally locked planet, or the
+  few convection cells of a red supergiant. Structure smaller than a pixel, such
+  as granulation on a Sun-like star, is not painted larger.
+- A model of a class of objects is not a model of this object. A generic emulator,
+  an author-drawn impression and a procedural texture stay out.
+- A measured dataset outranks a simulation of the same quantity. Keep both when
+  the comparison is the point.
+
+[WASP-103b](../../../../src/objects/wasp-103b/README.md) is the worked example: one
+published climate simulation, read from the authors' numeric table, with the
+paper's assumptions and its known mismatch with the observations stated beside it.
+
 ## Shape scalars must refer to the displayed surface
 
 For an irregular body's radius or elevation layer, bind the scalar to a defined

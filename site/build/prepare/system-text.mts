@@ -1,12 +1,10 @@
-import { parseCitedText } from '@cssearth/objects';
+import { parseCitedText, readSystemText } from '@cssearth/objects';
 import { sourceId, sourceObject } from '@cssearth/objects/sources';
 import { textBlockBudgetErrors } from '../../object-text.mts';
 
 /** Prepare short, cited system introductions: each becomes its system object's description (system-packages.mts). */
 export function prepareSystemIntroductions(input: unknown, hosts: readonly string[], catalogue: ReadonlySet<string>) {
-  const value = sourceObject(input, ['schema', 'satellites']);
-  if (value.schema !== 'cssearth-system-text@1') throw new TypeError('Unsupported system text schema.');
-  const blocks = sourceObject(value.satellites);
+  const blocks = readSystemText(input);
   for (const id of Object.keys(blocks)) if (!hosts.includes(id)) throw new TypeError(`System text names unavailable satellite host ${id}.`);
   return Object.fromEntries(hosts.map(id => {
     sourceId(id);

@@ -1,3 +1,4 @@
+import { readChartAssetRecipe } from '@cssearth/objects';
 // Shared object-content preparation. Source JSON owns facts, labels, recipes,
 // and provenance; this module owns the derived shell payload.
 
@@ -96,6 +97,7 @@ export async function prepareObjectContentAssets({
   }
   const sourcePath = resolve(sourceDirectory, config.contentPath ?? "content/object.json");
   const source = JSON.parse(await readFile(sourcePath, "utf8")) as ObjectContentSource;
+  validateObjectContentEnvelope(source);
   const objectDirectory = resolve(sourceDirectory, '..');
   await verifyFactsheetSources(source.panel, { objectDirectory });
   await prepareRasterLegendAssets(source, sourceDirectory, publicDirectory);
@@ -113,7 +115,7 @@ export async function prepareObjectContentAssets({
   let chartConfig: unknown;
   try {
     const chartsPath = resolve(sourceDirectory, config.chartsPath ?? "content/charts.json");
-    chartConfig = JSON.parse(await readFile(chartsPath, "utf8")) as unknown;
+    chartConfig = readChartAssetRecipe(JSON.parse(await readFile(chartsPath, "utf8")));
   } catch (error) {
     if ((error as NodeJS.ErrnoException).code !== "ENOENT") throw error;
   }

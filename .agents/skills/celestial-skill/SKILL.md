@@ -110,7 +110,8 @@ finalizing a new body's datasets or expanding its views, make a brief source
 survey beyond the first usable texture. Use the
 [source directory](references/source-directory.md) to choose concrete archives
 for the target and product: mission images and geometry, mapped surfaces,
-radar or optical shape models, paper tables, and research-code inputs.
+radar or optical shape models, paper tables, research-code inputs, and
+[published simulations](references/scientific-faithfulness.md#published-simulations) of the body.
 Search those relevant sources for better-resolution, registered or
 photometrically corrected imagery and useful complementary products, such as
 elevation, geology or composition. The directory also gives the public Git-history

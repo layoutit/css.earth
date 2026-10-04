@@ -1,9 +1,8 @@
 import { open, readFile } from 'node:fs/promises';
 import { basename, resolve, sep } from 'node:path';
 import { hasErrorCode, isRecord } from '@cssearth/core';
-import { requireCamera, parseArrivalView, parseArrivalBillboard, type CameraPlan, type ObjectDiscovery } from '@cssearth/objects';
+import { readShapeModelDiscovery, readRasterDiscovery, readRuntimeCamera, readRuntimeCameraPrefix, parseObjectDescriptor, readObjectContentDatasets, requireCamera, parseArrivalView, parseArrivalBillboard, type CameraPlan, type ObjectDiscovery } from '@cssearth/objects';
 import { preparedDefaultViewRotation } from '@cssearth/engine';
-import { SHAPE_MODEL_SCHEMA } from '@cssearth/bake/objects/scene';
 import { resolveBuildSceneAddress } from '../../asset-origin.mts';
 
 /** Authored exceptions describe illustrative datasets, not a permanent body blacklist. */
@@ -82,19 +81,9 @@ export async function preparedRuntimeCamera(path: string): Promise<unknown> {
   catch (error) { if (hasErrorCode(error, 'ENOENT')) return null; throw error; }
   try {
     const { buffer, bytesRead } = await handle.read({ buffer: Buffer.alloc(65536), position: 0 });
-    const head = buffer.toString('utf8', 0, bytesRead), start = head.match(/^\{"schema":"[^"\\]*","camera":/u)?.[0].length;
-    if (start !== undefined && head[start] === '{') {
-      let depth = 0, inString = false;
-      for (let index = start; index < head.length; index++) {
-        const char = head[index];
-        if (inString) { if (char === '\\') index++; else if (char === '"') inString = false; continue; }
-        if (char === '"') inString = true;
-        else if (char === '{' || char === '[') depth++;
-        else if ((char === '}' || char === ']') && --depth === 0) return JSON.parse(head.slice(start, index + 1));
-      }
-    }
-    const whole: unknown = JSON.parse(await readFile(path, 'utf8'));
-    return isRecord(whole) ? whole.camera : undefined;
+    const prefix = readRuntimeCameraPrefix(buffer.toString('utf8', 0, bytesRead));
+    if (prefix) return prefix.camera;
+    return readRuntimeCamera(JSON.parse(await readFile(path, 'utf8')));
   } finally { await handle.close(); }
 }
 
@@ -109,12 +98,12 @@ export async function prepareObjectDiscovery(descriptor: unknown, objectDirector
   if (isRecord(descriptor) && isRecord(descriptor.properties) && isRecord(descriptor.properties.recipe) && Array.isArray(descriptor.properties.recipe.surfaces) && !descriptor.properties.recipe.surfaces.length) {
     // An object with no surface shows the banks its datasets name: it is pictured when one of them is imagery. It is a
     // place on the map by itself, so it is featured.
-    const content: unknown = JSON.parse(await readFile(resolve(objectDirectory, 'source/content/object.json'), 'utf8'));
+    const content = readObjectContentDatasets(JSON.parse(await readFile(resolve(objectDirectory, 'source/content/object.json'), 'utf8')));
     const controls = isRecord(content) && isRecord(content.datasets) && Array.isArray(content.datasets.controls) ? content.datasets.controls : [];
     const banks = new Set(controls.flatMap(control => isRecord(control) && isRecord(control.volume) && typeof control.volume.objectId === 'string' ? [control.volume.objectId] : []));
     const pictured = new Set<string>();
     for (const bank of banks) {
-      const companion: unknown = JSON.parse(await readFile(resolve(objectDirectory, '..', bank, 'object.json'), 'utf8'));
+      const companion = parseObjectDescriptor(JSON.parse(await readFile(resolve(objectDirectory, '..', bank, 'object.json'), 'utf8')));
       if (!isRecord(companion) || typeof companion.type !== 'string' || !Object.hasOwn(DATASET_PACKAGE_IMAGERY, companion.type)) throw new TypeError(`src/objects/${bank}/object.json: ${String(descriptor.id)} shows it as a dataset, but it is not a bank package.`);
       if (DATASET_PACKAGE_IMAGERY[companion.type]) pictured.add(bank);
     }
@@ -144,10 +133,8 @@ export async function prepareObjectDiscovery(descriptor: unknown, objectDirector
     const recipe: unknown = JSON.parse(await readFile(path, 'utf8'));
     // A shape model names its dataset surfaces by `dataset`; discovery reads them as surfaces like the raster lane's.
     if (source.id === 'shape-model') {
-      if (!isRecord(recipe) || recipe.schema !== SHAPE_MODEL_SCHEMA) throw new TypeError(`Discovery shape-model recipe has an unexpected schema: ${source.path}.`);
-      if (Array.isArray(recipe.surfaces))
-        inputs.push({ surfaces: recipe.surfaces.map(surface => isRecord(surface) ? { id: surface.dataset, science: surface.science } : surface) });
-    } else inputs.push(recipe);
+      inputs.push(readShapeModelDiscovery(recipe));
+    } else inputs.push(source.id === 'raster' ? readRasterDiscovery(recipe) : recipe);
   }
   // A new package has no prepared datasets until its first preparation: it is discoverable as shape only, not an error.
   const preparedJson = async (name: string): Promise<unknown> => {

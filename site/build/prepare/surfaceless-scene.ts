@@ -1,3 +1,5 @@
+import { readMapSphereDatasetPreviews, parsePreparedGalaxyCatalog, readVolumePresentationPreviews } from '@cssearth/objects';
+import { parseObjectDescriptor } from '@cssearth/objects';
 import { PREPARED_GALAXY_CATALOG_SCHEMA } from '@cssearth/objects';
 import { IMAGE_MESH_SCHEMA, CATALOGUE_POINTS_BINARY_SCHEMA, DENSITY_VOLUME_FORMAT, OBJECT_RUNTIME_SCHEMA, parsePreparedObjectRuntime, requireControls } from '@cssearth/objects';
 
@@ -79,7 +81,7 @@ export async function companionThumbnails({ objectDirectory, publicDirectory, co
   for (const control of controls) {
     if (!control.volume || !control.thumbnail || control.thumbnail.startsWith('/')) continue;
     const bankDirectory = resolve(objectDirectory, '..', control.volume.objectId), output = resolve(publicDirectory, control.thumbnail);
-    const bank = JSON.parse(await readFile(resolve(bankDirectory, 'object.json'), 'utf8')) as { prepared?: { format?: string } };
+    const bank = parseObjectDescriptor(JSON.parse(await readFile(resolve(bankDirectory, 'object.json'), 'utf8'))) as { prepared?: { format?: string } };
     if (bank.prepared?.format === CATALOGUE_POINTS_BINARY_SCHEMA) { await dotsPicture(bankDirectory, output); continue; }
     // The galaxy's own volume publishes one picture of itself, its backing.
     if (bank.prepared?.format === DENSITY_VOLUME_FORMAT) {
@@ -90,7 +92,7 @@ export async function companionThumbnails({ objectDirectory, publicDirectory, co
     }
     // A sphere of sky (the microwave background) publishes a picture of each of its datasets.
     if (bank.prepared?.format === IMAGE_MESH_SCHEMA) {
-      const datasets = JSON.parse(await readFile(resolve(bankDirectory, 'prepared/datasets.json'), 'utf8')) as { controls: { id: string; thumbnailUrl: string }[] };
+      const datasets = readMapSphereDatasetPreviews(JSON.parse(await readFile(resolve(bankDirectory, 'prepared/datasets.json'), 'utf8')));
       const picture = datasets.controls.find(candidate => candidate.id === control.volume!.datasetId)?.thumbnailUrl;
       if (!picture) throw new TypeError(`${bankDirectory}/prepared/datasets.json: dataset ${control.volume.datasetId} names no picture.`);
       await mkdir(dirname(output), { recursive: true });
@@ -99,11 +101,11 @@ export async function companionThumbnails({ objectDirectory, publicDirectory, co
     }
     // A catalogue of galaxies is drawn as its dots lie on the sky, like a bank of dots.
     if (bank.prepared?.format === PREPARED_GALAXY_CATALOG_SCHEMA) {
-      const catalogue = JSON.parse(await readFile(resolve(bankDirectory, 'prepared/catalogue.json'), 'utf8')) as { objects: { positionM: number[] }[] };
+      const catalogue = parsePreparedGalaxyCatalog(JSON.parse(await readFile(resolve(bankDirectory, 'prepared/catalogue.json'), 'utf8')));
       await pointsPicture(catalogue.objects.map(object => object.positionM), { colorCss: '#d8d8d8' }, output);
       continue;
     }
-    const presentation = JSON.parse(await readFile(resolve(bankDirectory, 'prepared/presentation.json'), 'utf8')) as { controls: { id: string; thumbnailUrl: string }[] };
+    const presentation = readVolumePresentationPreviews(JSON.parse(await readFile(resolve(bankDirectory, 'prepared/presentation.json'), 'utf8')));
     const picture = presentation.controls.find(candidate => candidate.id === control.volume!.datasetId)?.thumbnailUrl;
     const prefix = `/scenes/${control.volume.objectId}/`;
     if (!picture?.startsWith(prefix)) throw new TypeError(`${bankDirectory}/prepared/presentation.json: dataset ${control.volume.datasetId} names no picture under ${prefix}.`);

@@ -57,8 +57,11 @@ test('without JavaScript the phone sheet shows, and the arrival photograph only 
     assert.equal(rules.length, 1, `${route}: one noscript billboard rule`);
     // A native dataset, settings or saved-view response marks the stage it draws (dataset-response.mts).
     assert.ok(rules[0]!.startsWith('.object-stage:not([data-prepared-object]) ~ img[data-startup-billboard]'), `${route}: ${rules[0]!.slice(0, 80)}`);
-    // Sized by the share of the viewport width a native response frames the body at (default-width-share.mts).
-    assert.match(rules[0]!, /width: [0-9.]+vw;/u, `${route}: ${rules[0]!.slice(0, 160)}`);
+    // Sized by the share of the viewport width a native response frames the body at, and kept within the share of the
+    // height the live camera allows (default-width-share.mts); the drawn body takes the same limit.
+    assert.match(rules[0]!, /width: min\([0-9.]+vw, [0-9.]+cqh\);/u, `${route}: ${rules[0]!.slice(0, 160)}`);
+    assert.ok(noscript.some(rule => /^\.object-stage\[data-prepared-object\]:not\(\[data-prepared-view\]\) \{ --native-stage-height: 100cqh; --native-stage-width: 100vw; --native-fit: min\(1, calc\([0-9.]+ \* tan\(atan2\(var\(--native-stage-height\), var\(--native-stage-width\)\)\)\)\); scale: var\(--native-fit\); overflow: visible; \}$/u.test(rule)),
+      `${route}: the drawn body keeps within the viewport's height without JavaScript`);
     const { document } = parseHTML(html);
     const stage = document.querySelector('.object-stage');
     assert.ok(stage && !stage.hasAttribute('data-prepared-object'), `${route}: the default page ships an unmarked stage`);

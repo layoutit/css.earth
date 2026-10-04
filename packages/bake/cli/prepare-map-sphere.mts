@@ -1,3 +1,4 @@
+import { MAP_SPHERE_DATASETS_SCHEMA, readMapSphereDatasetPreviews } from '@cssearth/objects';
 import { IMAGE_MESH_SCHEMA } from '@cssearth/objects';
 import { createSurfacePatches } from '../src/surface-geometry/index.ts';
 /**
@@ -295,7 +296,7 @@ if (datasets && rays && view) {
   const unit = legend!.unit as { symbol: string; perMapUnit: number };
   const inUnit = (value: number) => `${value > 0 ? '+' : value < 0 ? '\u2212' : ''}${Math.round(Math.abs(value) * unit.perMapUnit)} ${unit.symbol}`;
   const pictureAttribution = { label: attribution!.label as string, url: attribution!.url as string };
-  datasetsOutput = { schema: 'cssearth-map-sphere-datasets@2', objectId: basename(objectDirectory), mesh: `${id}.json`, defaultDataset: datasetRecipe!.default,
+  datasetsOutput = { schema: MAP_SPHERE_DATASETS_SCHEMA, objectId: basename(objectDirectory), mesh: `${id}.json`, defaultDataset: datasetRecipe!.default,
     view: { ...view, basis: preview!.basis },
     controls: datasets.map(dataset => ({ id: dataset.id, view: dataset.view, label: dataset.label, detail: dataset.detail, title: dataset.title, summary: dataset.summary,
       description: dataset.description, thumbnailUrl: pictures.get(dataset.view)!,
@@ -314,6 +315,7 @@ const output = { schema: IMAGE_MESH_SCHEMA, id, name: recipe.name, source: recip
   sampling: { nside: sampled.nside, ordering: sampled.ordering, mapMin: sampled.min, mapMax: sampled.max, range: range, colorTable: colorTable!.basis, radius: radius, mesh },
   leaves };
 await writeFile(resolve(prepared, `${id}.json`), JSON.stringify(output) + '\n');
+if (datasetsOutput) readMapSphereDatasetPreviews(datasetsOutput);
 if (datasetsOutput) await writeFile(resolve(prepared, 'datasets.json'), JSON.stringify(datasetsOutput, null, 2) + '\n');
 const { inventoryPreparedAssets } = await import('@cssearth/objects/node');
 await inventoryPreparedAssets({ objectId: basename(objectDirectory), objectDirectory });

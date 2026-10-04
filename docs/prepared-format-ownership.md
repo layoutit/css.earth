@@ -4,7 +4,7 @@ Shared prepared types, schema ids, validators and binary codecs belong in the
 browser-safe `@cssearth/objects` entry. Writers and readers import the same constants;
 preparation, projection, mounting and file I/O stay with their owners.
 
-Contract lint enforces two hard rules with mutation tests:
+Contract lint enforces three hard rules with mutation tests:
 
 - Bake declares no renderer dependency in any dependency field and has no named
   renderer exception. The existing declared-dependencies rule rejects ordinary
@@ -14,6 +14,12 @@ Contract lint enforces two hard rules with mutation tests:
   or raw outside objects when objects source defines it, fails. Ids confined to
   one owner outside objects are internal and need no entry. Tests, fixtures, data,
   prepared outputs and compiled output are excluded.
+
+- Build-time site JSON readers admit known shared formats through their objects reader.
+  The AST rule derives schemas and source paths from objects definitions and tracked JSON;
+  objects' format-reader ledgers supply generated paths and format-specific admission names.
+  It follows local path bindings, JSON transports and parse callbacks, and rejects projection
+  before admission. Computed paths and cross-module transport remain static-analysis limits.
 
 The [rule guide](../.github/scripts/architecture/README.md) links the implementation.
 The [exception list](../.github/scripts/architecture/format-schema-exceptions.json)

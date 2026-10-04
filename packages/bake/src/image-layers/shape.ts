@@ -3,12 +3,12 @@ import type { ImageLayerRecipe, Vec3 } from './config.ts';
 import { norm, rad } from './disc.ts';
 
 type Shape = NonNullable<ImageLayerRecipe['geometry']['shape']>;
-type Span = (east: number, north: number) => [number, number] | null;
+export type Span = (east: number, north: number) => [number, number] | null;
 
 /** Where the sight line at a sky offset from the star (east, north) enters and leaves an ellipsoid centred on the star,
  * along z from the star; null where it misses. The pole is tipped `tiltDeg` from the sight line, its near end leaning to
  * position angle `leansToPaDeg`; `major` and `minor` are the semi-axes in the equatorial plane, `major` toward `majorPaDeg`. */
-function ellipsoid(polar: number, major: number, minor: number, tiltDeg: number, leansToPaDeg: number, majorPaDeg: number): { span: Span; height: number } {
+export function ellipsoid(polar: number, major: number, minor: number, tiltDeg: number, leansToPaDeg: number, majorPaDeg: number): { span: Span; height: number } {
   const tilt = rad(tiltDeg), lean = rad(leansToPaDeg), majorPa = rad(majorPaDeg);
   const pole: Vec3 = [Math.sin(tilt) * Math.sin(lean), Math.sin(tilt) * Math.cos(lean), -Math.cos(tilt)];
   const across = cross(pole, [Math.sin(majorPa), Math.cos(majorPa), 0]);
@@ -79,14 +79,19 @@ function pass(source: Float32Array, width: number, height: number, horizontal: b
   return output;
 }
 
+/** A map blurred by a Gaussian that reaches no farther than `radius` pixels, edges repeated. */
+export function smoothed(values: Float32Array, width: number, height: number, radius: number): Float32Array {
+  const weights = Array.from({ length: radius + 1 }, (_, offset) => Math.exp(-2 * (offset / radius) ** 2));
+  const blurred: Fold = read => { let sum = 0, total = 0; for (let offset = -radius; offset <= radius; offset++) { const weight = weights[Math.abs(offset)]!; sum += weight * read(offset); total += weight; } return sum / total; };
+  return pass(pass(values, width, height, true, blurred), width, height, false, blurred);
+}
+
 /** The smooth lower envelope of a map: the smallest value within `radius` pixels (a square), then a Gaussian blur that
  * reaches no farther than that radius. Every value the blur averages is a minimum over a square holding the pixel, so
  * the envelope never rises above the map, at fine dark detail either, and never follows fine bright detail. */
 export function lowerEnvelope(values: Float32Array, width: number, height: number, radius: number): Float32Array {
   if (values.length !== width * height) throw new TypeError(`The map is not ${width} x ${height}.`);
   if (!(Number.isInteger(radius) && radius >= 1)) throw new RangeError(`The envelope's radius is a whole number of pixels, at least 1; got ${radius}.`);
-  const weights = Array.from({ length: radius + 1 }, (_, offset) => Math.exp(-2 * (offset / radius) ** 2));
   const smallest: Fold = read => { let value = Infinity; for (let offset = -radius; offset <= radius; offset++) value = Math.min(value, read(offset)); return value; };
-  const blurred: Fold = read => { let sum = 0, total = 0; for (let offset = -radius; offset <= radius; offset++) { const weight = weights[Math.abs(offset)]!; sum += weight * read(offset); total += weight; } return sum / total; };
-  return pass(pass(pass(pass(values, width, height, true, smallest), width, height, false, smallest), width, height, true, blurred), width, height, false, blurred);
+  return smoothed(pass(pass(values, width, height, true, smallest), width, height, false, smallest), width, height, radius);
 }
