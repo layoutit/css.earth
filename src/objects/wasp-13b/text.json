@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "wasp-13b",
+  "card": {
+    "text": "WASP-13 b was found in 2009 by SuperWASP as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-aa5df3",
+        "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+        "label": "Stassun et al. 2017",
+        "checked": "2026-10-03",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname STASSUN_ET_AL__2017): disc_year 2009, disc_facility SuperWASP, sy_pnum 1; pl_orbper 4.35301101, pl_radj 1.22, pl_bmassj 0.36"
+      },
+      {
+        "catalogueId": "wikipedia-wasp-13b",
+        "url": "https://en.wikipedia.org/wiki/WASP-13b",
+        "label": "Wikipedia, \"WASP-13b\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374242494",
+        "quote": "WASP-13b, also known as Cruinlagh, is an extrasolar planet that was discovered in 2008 in the orbit of the sunlike star WASP-13."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is the only planet known around Gloas. Its orbit and size follow Stassun et al. 2017's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-aa5df3",
+        "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+        "label": "Stassun et al. 2017",
+        "checked": "2026-10-03",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname STASSUN_ET_AL__2017): disc_year 2009, disc_facility SuperWASP, sy_pnum 1; pl_orbper 4.35301101, pl_radj 1.22, pl_bmassj 0.36"
+      },
+      {
+        "catalogueId": "wikipedia-wasp-13b",
+        "url": "https://en.wikipedia.org/wiki/WASP-13b",
+        "label": "Wikipedia, \"WASP-13b\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374242494",
+        "quote": "The planet has a mass of nearly half that of Jupiter, but a radius five-quarters of the size of Jupiter."
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

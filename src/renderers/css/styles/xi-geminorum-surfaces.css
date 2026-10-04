@@ -1,4 +1,4 @@
-/* Xi Geminorum: the Sun's emissive presentation (body-surfaces.css, SUN block) scoped to this object, loaded after the shared
+/* Alzirr: the Sun's emissive presentation (body-surfaces.css, SUN block) scoped to this object, loaded after the shared
    body-surfaces.css base rules. No spin: the rotation axis and period are unmeasured. Both plates are transparent: no observation is cast. */
 .object-stage[data-object-id="xi-geminorum"] > :is(.polycss-camera, .xi-geminorum-corona-layer, .xi-geminorum-limb-layer) {
   --xi-geminorum-scene-side-padding: 16px;

@@ -1,4 +1,4 @@
-# LHS 3844 credits
+# Batsũ̀ credits
 
 Radius, mass and temperature: Radius 0.189 +/- 0.006 solar radii from Nagel et al. 2026, the stellar radius of the default parameter set of LHS 3844 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026A&A...710A.311N/abstract); Mass 0.151 +/- 0.014 solar masses from Nagel et al. 2026, the stellar mass of the default parameter set of LHS 3844 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2026A&A...710A.311N/abstract); temperature from Nagel et al. 2026, the stellar temperature of the default parameter set of LHS 3844 b in the NASA Exoplanet Archive.
 

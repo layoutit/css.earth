@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "rastaban",
+  "card": {
+    "text": "A star 117 parsecs away, 40 times the Sun's width, measured from its light.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 85670: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-beta-draconis",
+        "url": "https://en.wikipedia.org/wiki/Beta_Draconis",
+        "label": "Wikipedia, \"Beta Draconis\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1377345578",
+        "quote": "Beta Draconis is a binary star system and the third-brightest star in the northern circumpolar constellation of Draco."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its brightness, measured band by band, gives 996 times the Sun's luminosity at 5,113 K, so 40.284 solar radii.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 85670: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-beta-draconis",
+        "url": "https://en.wikipedia.org/wiki/Beta_Draconis",
+        "label": "Wikipedia, \"Beta Draconis\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1377345578",
+        "quote": "The two components are designated Beta Draconis A and B respectively."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its spectrum",
+      "summary": "The color of the star's light."
+    }
+  }
+}

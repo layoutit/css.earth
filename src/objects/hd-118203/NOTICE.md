@@ -1,4 +1,4 @@
-# HD 118203 credits
+# Liesma credits
 
 Radius, mass and temperature: Radius 2.04 +/- 0.03 solar radii from Zhang et al. 2024, the stellar radius of the default parameter set of HD 118203 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024AJ....168..295Z/abstract); Mass 1.27 +/- 0.028 solar masses from Zhang et al. 2024, the stellar mass of the default parameter set of HD 118203 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024AJ....168..295Z/abstract); temperature from Zhang et al. 2024, the stellar temperature of the default parameter set of HD 118203 b in the NASA Exoplanet Archive.
 

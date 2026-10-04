@@ -6,7 +6,7 @@
   "properties": {
     "preparation": {
       "schema": "cssearth-object-preparation@1",
-      "label": "XO-1",
+      "label": "Moldoveanu",
       "steps": [
         "verify-sources",
         "assets",
@@ -95,12 +95,15 @@
       }
     },
     "catalog": {
-      "name": "XO-1",
+      "name": "Moldoveanu",
       "classification": "star",
       "color": "#fff1eb",
       "distanceAu": 33545150.5,
       "description": "XO-1 b crosses XO-1 as seen from Earth, which is how it was found.",
-      "systemName": "XO-1 system",
+      "systemName": "Moldoveanu system",
+      "aliases": [
+        "XO-1"
+      ],
       "order": 4861,
       "context": {
         "order": 4858

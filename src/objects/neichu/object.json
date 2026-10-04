@@ -1,0 +1,148 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "neichu",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Neichu",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 5748569.1
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/neichu-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Neichu",
+      "classification": "star",
+      "color": "#edeeff",
+      "distanceAu": 16634249.1,
+      "description": "A star 81 parsecs away, 8.3 times the Sun's width, measured from its light.",
+      "systemName": "Neichu system",
+      "aliases": [
+        "Pi Pegasi",
+        "HD 210459",
+        "HIP 109410",
+        "HR 8454"
+      ],
+      "order": 5640,
+      "context": {
+        "order": 5637
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1847381286333239300,
+        -961819484493305500,
+        1361785704192066000
+      ],
+      "presentationToReference": [
+        0.7423823338484207,
+        0.4853969950016445,
+        -0.4617989038890691,
+        -0.38651349286815534,
+        -0.2527163379445853,
+        -0.8869846517086621,
+        0.5472438124096339,
+        -0.8369732431680547,
+        -3.432008647021128e-7
+      ],
+      "orbitUpReference": [
+        -0.4853969950016445,
+        0.2527163379445853,
+        0.8369732431680547
+      ],
+      "metersPerUnit": 18543771.29032258,
+      "bodyRadiusM": 5748569100
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

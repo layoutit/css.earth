@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "hat-p-14-system",
+  "parent": "milky-way",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "hat-p-14"
+    },
+    "catalog": {
+      "name": "Franz system",
+      "systemName": "Franz system",
+      "classification": "planetary-system",
+      "color": "#efedff",
+      "distanceAu": 46380184.7,
+      "description": "HAT-P-14 b crosses Franz as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -935396644331289900,
+        -5368532442074706000,
+        4294760328433152500
+      ],
+      "presentationToReference": [
+        -0.1348148717846165,
+        -0.10624968894143076,
+        -0.9851578319972626,
+        -0.7737445042551407,
+        -0.609799472023811,
+        0.17165094248051108,
+        0.6189865850571108,
+        -0.7854015581340098,
+        7.526203332992717e-8
+      ],
+      "orbitUpReference": [
+        0.10624968894143076,
+        0.609799472023811,
+        0.7854015581340098
+      ],
+      "metersPerUnit": 4084432.2580645164,
+      "bodyRadiusM": 1266174000
+    }
+  }
+}

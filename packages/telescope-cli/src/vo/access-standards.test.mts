@@ -6,7 +6,8 @@ import { resolve } from 'node:path';
 import { astroquery } from '@cssearth/telescope/node';
 import { planAccess, sodaParameters, type MetadataLoader } from './access.mts';
 import type { CapabilityRequest } from '../recipe-request.mts';
-import { jsonValue, parseLimits, type DiscoverySnapshot, type Json, type MetadataResponse, type Resource } from '@cssearth/telescope/node';
+import { parseLimits } from '@cssearth/telescope/node';
+import { jsonValue, type DiscoverySnapshot, type Json, type MetadataResponse, type Resource } from '@cssearth/objects';
 import { normalizeSnapshot, SERVICES } from './discovery.mts';
 const test = sourceTest();
 

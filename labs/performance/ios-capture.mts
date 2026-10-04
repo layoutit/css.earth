@@ -35,6 +35,7 @@
 // it never differs. It also prints the before/after table (frames, work and compositing per frame, slow frames, layer
 // memory, and on a device its frame rate and Safari's memory), from the means of every baseline capture of that name and of
 // this command's --runs <n> repeats, and writes it to comparison.md in the last run.
+import { MissingSourceInputError } from '@cssearth/core';
 import { holdNativeDeviceTunnel } from './ipad-native-tunnel.mts';
 import { appendFileSync } from 'node:fs';
 import { symbolicateNativeXml } from './native-symbols.mts';
@@ -206,7 +207,7 @@ async function bootedUdid() {
 async function connectedDevice(udid: string | null) {
   // A failed command still says why; a missing one names its package.
   const said = (tool: string) => (error: unknown) => {
-    if (isRecord(error) && error.code === 'ENOENT') throw new Error(`${tool} is not installed: brew install libimobiledevice.`);
+    if (isRecord(error) && error.code === 'ENOENT') throw new MissingSourceInputError(`${tool} is not installed: brew install libimobiledevice.`);
     return { stdout: isRecord(error) ? [error.stdout, error.stderr].filter(text => typeof text === 'string').join(' ') : '' };
   };
   const { stdout } = await run('idevice_id', ['-l']).catch(said('idevice_id'));
@@ -450,7 +451,8 @@ const memoryCategories = (event: unknown) => Object.fromEntries(requireArray(req
 
 // ---- Summaries -----------------------------------------------------------------------------------------------------
 
-type Frame = { readonly name: string; readonly url: string; readonly line: number; readonly column: number };
+/** A sampled or scheduling stack frame: the function's own position, and `at`, the line it was executing when sampled. */
+type Frame = { readonly name: string; readonly url: string; readonly line: number; readonly column: number; readonly at?: number };
 export type NamedFrame = { readonly label: string };
 const top = (counts: Map<string, number>, limit: number) => [...counts].sort((a, b) => b[1] - a[1]).slice(0, limit).map(([label, count]) => ({ label, count }));
 const bump = (counts: Map<string, number>, key: string, by = 1) => counts.set(key, (counts.get(key) ?? 0) + by);
@@ -463,6 +465,42 @@ export function summariseSamples(stacks: readonly (readonly Frame[])[], name: (f
     for (const label of new Set(stack.map(name))) bump(inclusive, label);
   }
   return { samples: stacks.length, self: top(self, limit), inclusive: top(inclusive, limit) };
+}
+
+/** The device's sampled stacks (leaf first) as a V8 `.cpuprofile`, which `jankmonster hot` ranks by function and, with
+ * `--lines`, by source line. A host function (`freeze`, `setAttribute`) has no line of its own: with `callers` its
+ * samples are left on the script line that called it, so the lines table shows who pays for it. */
+export function cpuProfileFromSamples(samples: readonly { readonly timestamp: number; readonly frames: readonly Frame[] }[], callers = false) {
+  type Node = { id: number; callFrame: { functionName: string; scriptId: string; url: string; lineNumber: number; columnNumber: number };
+    hitCount: number; children: number[]; positionTicks: { line: number; ticks: number }[] };
+  const node = (id: number, frame: Frame | null): Node => ({ id, hitCount: 0, children: [], positionTicks: [],
+    // WebKit counts lines and columns from 1, V8 from 0.
+    callFrame: frame ? { functionName: frame.name, scriptId: '0', url: frame.url, lineNumber: frame.line - 1, columnNumber: frame.column - 1 }
+      : { functionName: '(root)', scriptId: '0', url: '', lineNumber: -1, columnNumber: -1 } });
+  const root = node(1, null), nodes = [root], byPath = new Map<string, Node>(), ticks = new Map<Node, Map<number, number>>();
+  const ids: number[] = [], deltas: number[] = [];
+  let before: number | null = null;
+  for (const sample of samples) {
+    let frames = sample.frames;
+    if (callers) { const script = frames.findIndex(frame => frame.url); if (script > 0) frames = frames.slice(script); }
+    if (!frames.length) continue;
+    let parent = root;
+    for (let depth = frames.length - 1; depth >= 0; depth--) {
+      const frame = frames[depth]!, key = `${parent.id}|${frame.name}|${frame.url}|${frame.line}|${frame.column}`;
+      let child = byPath.get(key);
+      if (!child) { child = node(nodes.length + 1, frame); nodes.push(child); byPath.set(key, child); parent.children.push(child.id); }
+      parent = child;
+    }
+    parent.hitCount++;
+    const leaf = frames[0]!, line = leaf.at ?? leaf.line;
+    if (leaf.url && line > 0) { const lines = ticks.get(parent) ?? new Map<number, number>(); lines.set(line, (lines.get(line) ?? 0) + 1); ticks.set(parent, lines); }
+    ids.push(parent.id);
+    deltas.push(before === null ? 0 : Math.max(0, Math.round((sample.timestamp - before) * 1e6)));
+    before = sample.timestamp;
+  }
+  for (const [owner, lines] of ticks) owner.positionTicks = [...lines].sort((a, b) => a[0] - b[0]).map(([line, count]) => ({ line, ticks: count }));
+  const startTime = Math.round((samples[0]?.timestamp ?? 0) * 1e6);
+  return { nodes, startTime, endTime: startTime + deltas.reduce((sum, delta) => sum + delta, 0), samples: ids, timeDeltas: deltas };
 }
 
 const span = (value: Record<string, unknown>) => {
@@ -1077,7 +1115,7 @@ const DEVELOPER_SERVICES = 'pymobiledevice3 (--pymobiledevice3 <path> or $PYMOBI
 /** pymobiledevice3's own Python, beside its command. */
 async function bridgePython(binary: string) {
   const path = binary.includes('/') ? binary : (await run('which', [binary]).catch(() => ({ stdout: '' }))).stdout.trim();
-  if (!path) throw new Error(`${binary} is not installed; pip install pymobiledevice3 or pass --pymobiledevice3 <path>.`);
+  if (!path) throw new MissingSourceInputError(`${binary} is not installed; pip install pymobiledevice3 or pass --pymobiledevice3 <path>.`);
   return resolve(await realpath(path).then(real => real, () => path), '..', 'python');
 }
 
@@ -1824,13 +1862,23 @@ export async function captureIosMoment(args: readonly string[], deviceScreensSes
 
   // Page side.
   const stacks = new Map<string, Frame[][]>();
+  let pageSamples: { timestamp: number; frames: Frame[] }[] = [];
   for (const event of moment) {
     if (event.method !== 'ScriptProfiler.trackingComplete' || !isRecord(event.params) || !isRecord(event.params.samples)) continue;
-    const traces = requireArray(event.params.samples.stackTraces, 'stack traces').map(trace => requireArray(requireRecord(trace, 'trace').stackFrames, 'frames')
-      .map(frame => requireRecord(frame, 'frame')).map(frame => ({ name: typeof frame.name === 'string' ? frame.name : '', url: typeof frame.url === 'string' ? frame.url : '',
-        line: typeof frame.line === 'number' ? frame.line : 0, column: typeof frame.column === 'number' ? frame.column : 0 })));
+    const sampled = requireArray(event.params.samples.stackTraces, 'stack traces').map(trace => requireRecord(trace, 'trace')).map(trace => ({
+      timestamp: typeof trace.timestamp === 'number' ? trace.timestamp : 0,
+      frames: requireArray(trace.stackFrames, 'frames').map(frame => requireRecord(frame, 'frame')).map(frame => ({ name: typeof frame.name === 'string' ? frame.name : '', url: typeof frame.url === 'string' ? frame.url : '',
+        line: typeof frame.line === 'number' ? frame.line : 0, column: typeof frame.column === 'number' ? frame.column : 0,
+        ...(isRecord(frame.expressionLocation) && typeof frame.expressionLocation.line === 'number' ? { at: frame.expressionLocation.line } : {}) })) }));
     const source = requireString(event.source, 'source');
-    stacks.set(source === 'page' ? 'page' : `worker ${workers.get(source) ?? source}`, traces);
+    if (source === 'page') pageSamples = sampled;
+    stacks.set(source === 'page' ? 'page' : `worker ${workers.get(source) ?? source}`, sampled.map(sample => sample.frames));
+  }
+  // The page's samples as V8 profiles for `jankmonster hot <capture>/javascript.cpuprofile --lines --root <dist> --root site`;
+  // the second leaves each host function's time on the script line that called it.
+  if (pageSamples.length) {
+    await writeFile(resolve(out, 'javascript.cpuprofile'), JSON.stringify(cpuProfileFromSamples(pageSamples)));
+    await writeFile(resolve(out, 'javascript.callers.cpuprofile'), JSON.stringify(cpuProfileFromSamples(pageSamples, true)));
   }
   const timelineRecords = moment.filter(event => event.method === 'Timeline.eventRecorded' && isRecord(event.params)).map(event => (event.params as Message).record);
   const scheduling = schedulingStacks(timelineRecords);

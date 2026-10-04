@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1051-0004-6361-201731696",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Deka-Szymankiewicz et al. (2018): The Penn State - Toruń Centre for Astronomy Planet Search stars",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1801.02899"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/201731696"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2018A&A...615A..31D"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2018A&A...615A..31D",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/201731696",
+      "label": "Astronomy & Astrophysics 615 A31"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2018A&A...615A..31D",
+      "checkedOn": "2026-10-03",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Deka-Szymankiewicz et al. (2018), Astronomy & Astrophysics 615 A31",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2018A&A...615A..31D"
+    }
+  ],
+  "publisher": "Astronomy & Astrophysics 615 A31",
+  "creators": [
+    "B. Deka-Szymankiewicz",
+    "A. Niedzielski",
+    "M. Adamczyk",
+    "et al."
+  ],
+  "publicationDate": "2018"
+}

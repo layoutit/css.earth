@@ -4,7 +4,8 @@
     {
       "id": "hat-p-12b",
       "name": "HAT-P-12 b",
-      "description": "Transiting planet of HAT-P-12 with a 3.21-day year, found in 2009.",
+      "description": "Transiting planet of Komondor with a 3.21-day year, found in 2009.",
+      "order": 3113,
       "paper": {
         "url": "https://ui.adsabs.harvard.edu/abs/2009ApJ...706..785H/abstract",
         "credit": "Hartman et al. 2009"
@@ -15,7 +16,7 @@
       },
       "text": {
         "card": "HAT-P-12 b was found in 2009 by HATNet as it crossed its star.",
-        "introduction": "It is the only planet known around HAT-P-12. Its orbit and size follow Hartman et al. 2009's fit, the archive's default.",
+        "introduction": "It is the only planet known around Komondor. Its orbit and size follow Hartman et al. 2009's fit, the archive's default.",
         "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname HARTMAN_ET_AL__2009): disc_year 2009, disc_facility HATNet, sy_pnum 1; pl_orbper 3.21305762, pl_radj 0.959, pl_bmassj 0.211",
         "quotes": {
           "url": "https://en.wikipedia.org/wiki/HAT-P-12b",
@@ -24,8 +25,7 @@
           "card": "HAT-P-12b, formally named Puli, is an extrasolar planet approximately 468 light years away from Earth, orbiting the 13th magnitude K-type star HAT-P-12, which is located in Canes Venatici constellation.",
           "introduction": "It is a transiting hot Jupiter that was discovered by the HATNet Project on April 29, 2009."
         }
-      },
-      "order": 3113
+      }
     }
   ]
 }

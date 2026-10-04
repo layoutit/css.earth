@@ -1,8 +1,8 @@
-import { parseLabModelJson } from '../../resources/model-paths.ts';
+import { parseLabModelJson, resolveLabModelPath } from '../../resources/model-paths.ts';
 /** Acquisition of full-resolution lab reference images by URL, checked by their declared dimensions; never a browser dependency. */
 import { createWriteStream } from 'node:fs';
 import { mkdir, readFile, rename, stat, writeFile } from 'node:fs/promises';
-import { dirname, resolve } from 'node:path';
+import { basename, dirname, resolve } from 'node:path';
 import { Readable } from 'node:stream';
 import { pipeline } from 'node:stream/promises';
 import sharp from 'sharp';
@@ -22,7 +22,8 @@ const DEPTH_WORDS: Record<string, string> = { uchar: '8-bit', ushort: '16-bit', 
 
 const [recipePath, extra] = process.argv.slice(2);
 if (!recipePath || extra) throw new TypeError('Usage: acquire-images <reference-images.json>');
-const recipe: ReferenceImageRecipe = parseLabModelJson(await readFile(recipePath, 'utf8'));
+const recipeFile = resolveLabModelPath(recipePath);
+const recipe: ReferenceImageRecipe = parseLabModelJson(await readFile(recipeFile, 'utf8'));
 if (recipe.schema !== 'cssearth-lab-reference-images@1') throw new TypeError('Unsupported reference image recipe.');
 const cache = resolve('.local/nebula-lab/source-originals');
 await mkdir(cache, { recursive: true });
@@ -50,7 +51,7 @@ for (const image of recipe.images) {
   await (resizeWidth === undefined ? pipe : pipe.resize({ width: resizeWidth }))
     .webp({ quality: image.output.quality, effort: image.output.effort }).toFile(`${output}.part`);
   await rename(`${output}.part`, output);
-  await writeFile(`${output}.json`, JSON.stringify({ schema: 'cssearth-lab-reference-image@1', source: image,
+  await writeFile(resolve(dirname(recipeFile), `${basename(output)}.json`), JSON.stringify({ schema: 'cssearth-lab-reference-image@1', source: image,
     interpretation: `Converted from the publisher's ${DEPTH_WORDS[metadata.depth ?? ''] ?? `${metadata.depth ?? 'unknown'}-sample`} TIFF to 8-bit sRGB WebP. Lossy display reference; never cropped.${
       resizeWidth === undefined
         ? ' Full spatial resolution: not resized.'

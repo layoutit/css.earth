@@ -1,0 +1,147 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "alruba",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Alruba",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 3216221.1
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/alruba-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Alruba",
+      "classification": "star",
+      "color": "#b4c9ff",
+      "distanceAu": 34092484.6,
+      "description": "A star 165 parsecs away, 4.6 times the Sun's width, measured from its light.",
+      "systemName": "Alruba system",
+      "aliases": [
+        "HD 161693",
+        "HIP 86782",
+        "HR 6618"
+      ],
+      "order": 5476,
+      "context": {
+        "order": 5473
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -210280998796401250,
+        -3004722532343625700,
+        4115712335116875000
+      ],
+      "presentationToReference": [
+        -0.041230200303217876,
+        -0.0563385886859775,
+        -0.9975600403022512,
+        -0.5891417321424941,
+        -0.8050081076961652,
+        0.0698137951380749,
+        0.8069771310459166,
+        -0.590582686817275,
+        7.681988930231016e-7
+      ],
+      "orbitUpReference": [
+        0.0563385886859775,
+        0.8050081076961652,
+        0.590582686817275
+      ],
+      "metersPerUnit": 10374906.774193548,
+      "bodyRadiusM": 3216221100
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

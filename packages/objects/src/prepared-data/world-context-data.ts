@@ -4,6 +4,8 @@ import type { PreparedContextFocus, PreparedWorldContext } from './world-context
 import type { PreparedOrbitCenter } from './prepared-orbit-centers.js';
 import type { PreparedSystemView } from './world-system-view.js';
 
+/** JSON writer transport. parseCompleteWorldContext reads this into PreparedWorldContextGeometry,
+ * flattening orbit vertices into typed arrays; shared camera/system/volume/stars fields link both records. */
 export interface PreparedWorldContextData {
   readonly schema: typeof PREPARED_WORLD_CONTEXT_SCHEMA;
   readonly orbitCenters?: Readonly<Record<string, PreparedOrbitCenter>>;

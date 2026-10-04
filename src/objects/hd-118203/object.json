@@ -6,7 +6,7 @@
   "properties": {
     "preparation": {
       "schema": "cssearth-object-preparation@1",
-      "label": "HD 118203",
+      "label": "Liesma",
       "steps": [
         "verify-sources",
         "assets",
@@ -95,12 +95,15 @@
       }
     },
     "catalog": {
-      "name": "HD 118203",
+      "name": "Liesma",
       "classification": "star",
       "color": "#fff3f2",
       "distanceAu": 18985472.9,
       "description": "HD 118203's planets b, c are placed on the orbits their papers measured.",
-      "systemName": "HD 118203 system",
+      "systemName": "Liesma system",
+      "aliases": [
+        "HD 118203"
+      ],
       "order": 3157,
       "context": {
         "order": 3154

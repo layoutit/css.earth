@@ -26,8 +26,9 @@ import { limbIntensity, loadStellarPhotometricColor } from '@cssearth/bake/objec
 import { colorForValue, loadScienceSurface } from '@cssearth/bake/objects/raster';
 import { MISSING_COVERAGE_STYLES } from '@cssearth/bake/raster';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
+import { WORKSPACE } from '@cssearth/telescope/node';
 
-const objects = resolve(import.meta.dirname, '../../../../src/objects');
+const objects = resolve(WORKSPACE, 'src/objects');
 export const MARKER_PATH = 'presentation/context.png';
 export const MARKER_SIZE = 512;
 /** The disc fills this share of the marker, as the scaffold's disc did. */

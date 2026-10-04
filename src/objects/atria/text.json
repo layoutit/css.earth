@@ -1,0 +1,43 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "atria",
+  "card": {
+    "text": "A star 120 parsecs away, 112 times the Sun's width, measured from its light.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 82273: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-alpha-trianguli-australis",
+        "url": "https://en.wikipedia.org/wiki/Alpha_Trianguli_Australis",
+        "label": "Wikipedia, \"Alpha Trianguli Australis\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374619062",
+        "quote": "Alpha Trianguli Australis, officially named Atria, is the brightest star in the southern constellation of Triangulum Australe, forming an apex of a triangle with Beta Trianguli Australis and Gamma Trianguli Australis that gives the constellation its name."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its brightness, measured band by band, gives 3,713 times the Sun's luminosity at 4,269 K, so 111.552 solar radii.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 82273: D, Teff, L, Rad, Q"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its spectrum",
+      "summary": "The color of the star's light."
+    }
+  }
+}

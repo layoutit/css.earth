@@ -1,0 +1,36 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "rhombus",
+  "entries": [
+    {
+      "id": "placement",
+      "subject": "Placement",
+      "status": "included",
+      "finding": "Gaia DR3 source 4676528209144882304: position at J2016.0. Distance: McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 19780: distance 49.554 pc, the paper's parallax inverted (Gaia DR1's where it revised the star's, else the Hipparcos reduction of van Leeuwen 2007; section 2.3; fractional uncertainty 0.005), at which the luminosity and radius hold (https://doi.org/10.1093/mnras/stx1433): 49.554 +/- 0.248 pc; Gaia DR3 parallax 20.3431 +/- 0.1859 mas (same row, RUWE 4.09), 109.4 standard errors, is not used. Proper motion: Gaia DR3 (same row): 45.069, 42.948 mas/yr. Radial velocity from SIMBAD's radial velocity for Gaia DR3 4676528209144882304 (quality A), from 2015A&A...574A..50J; Gaia DR3 measures none.",
+      "evidence": [
+        "https://gea.esac.esa.int/archive/",
+        "https://doi.org/10.1093/mnras/stx1433",
+        "https://ui.adsabs.harvard.edu/abs/2015A&A...574A..50J/abstract"
+      ]
+    },
+    {
+      "id": "radius-mass-and-temperature",
+      "subject": "Radius, mass and temperature",
+      "status": "included",
+      "finding": "Radius 12.812 solar radii from McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 19780: radius 12.812 solar radii, implied by the fitted luminosity 103.911 solar luminosities (fractional uncertainty 0.049) and temperature (https://doi.org/10.1093/mnras/stx1433). No mass is measured, so GM is 0, the records' unpublished value. Temperature 5152 +/- 125 K from McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 19780: effective temperature 5152 +/- 125 K, from the fit of a model atmosphere to the star's spectral energy distribution (goodness of fit Q 0.04).",
+      "evidence": [
+        "https://doi.org/10.1093/mnras/stx1433"
+      ]
+    },
+    {
+      "id": "color",
+      "subject": "Color",
+      "status": "included",
+      "finding": "Burnashev (1985), Abastumani Astrophys. Obs. Bull. 59, 83; VizieR III/126, part2 record 35 (BS 1336), cross-checked against Gaia DR3 XP spectrum, source 4676528209144882304 (41 levels apart at most, the threshold is 12), through the CIE 1931 2-degree observer: #ffeacf. Routes tried in order: stis-ngsl: HD 27256 is not in the library; pulkovo: HR 1336 is not in the catalogue; kiehling: HR 1336 is not among its 60 stars; kharitonov: HR 1336 is not in the catalogue; burnashev: used.",
+      "evidence": [
+        "https://cdsarc.cds.unistra.fr/ftp/III/126/part2.dat.gz",
+        "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=4676528209144882304&FORMAT=csv&DATA_STRUCTURE=RAW&RELEASE=Gaia+DR3"
+      ]
+    }
+  ]
+}

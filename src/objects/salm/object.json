@@ -1,0 +1,149 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "salm",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Salm",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 2078088.9
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/salm-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Salm",
+      "classification": "star",
+      "color": "#e9ebff",
+      "distanceAu": 9957512.3,
+      "description": "A star about 48 parsecs away, 3.0 times the Sun's width, measured by Gaia.",
+      "systemName": "Salm system",
+      "aliases": [
+        "Gaia DR3 2840673506807375360",
+        "HR 8880",
+        "Tau Pegasi",
+        "HD 220061",
+        "HIP 115250"
+      ],
+      "order": 5684,
+      "context": {
+        "order": 5681
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1343508740396059400,
+        -233038687378136400,
+        599710613086592600
+      ],
+      "presentationToReference": [
+        0.9019120918566053,
+        0.3966692628128774,
+        -0.17090369949866732,
+        -0.15644141619400748,
+        -0.06880521638738425,
+        -0.9852877374133399,
+        0.40259242648372773,
+        -0.9153793411134936,
+        7.554075126414128e-7
+      ],
+      "orbitUpReference": [
+        -0.3966692628128774,
+        0.06880521638738425,
+        0.9153793411134936
+      ],
+      "metersPerUnit": 6703512.580645162,
+      "bodyRadiusM": 2078088900
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

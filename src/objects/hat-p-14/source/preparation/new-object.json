@@ -1,0 +1,51 @@
+{
+  "id": "hat-p-14",
+  "name": "Franz",
+  "system": "Franz system",
+  "description": "Star of 6,600 K, 223 parsecs away, with 1 transiting planet.",
+  "aliases": [
+    "HAT-P-14",
+    "WASP-27"
+  ],
+  "featured": true,
+  "target": "HAT-P-14",
+  "gaia": "1340497608486742400",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+    "credit": "Stassun et al. 2017"
+  },
+  "radius": {
+    "value": 1.82,
+    "source": "Stassun et al. 2017, the stellar radius of the default parameter set of HAT-P-14 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+    "uncertainty": 0.15
+  },
+  "mass": {
+    "value": 2.65,
+    "source": "Stassun et al. 2017, the stellar mass of the default parameter set of HAT-P-14 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+    "uncertainty": 0.73
+  },
+  "temperature": {
+    "value": 6600,
+    "source": "Stassun et al. 2017, the stellar temperature of the default parameter set of HAT-P-14 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+    "uncertainty": 90
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "HAT-P-14 b crosses Franz as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Stassun et al. 2017.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname STASSUN_ET_AL__2017): st_teff 6600, st_rad 1.82, st_mass 2.65",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/HAT-P-14b",
+      "title": "HAT-P-14b",
+      "revision": "1374169060",
+      "card": "HAT-P-14b, officially named Sissi and also known as WASP-27b, is an extrasolar planet located approximately 224.2 ± 0.6 parsecs (731.2 ± 2.0 ly) away in the constellation of Hercules, orbiting the 10th magnitude F-type main-sequence star HAT-P-14.",
+      "introduction": "This planet was discovered in 2010 by the HATNet Project using the transit method."
+    }
+  },
+  "notes": [],
+  "order": 5545
+}

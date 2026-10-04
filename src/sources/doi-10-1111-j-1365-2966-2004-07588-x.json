@@ -1,0 +1,47 @@
+{
+  "id": "doi-10-1111-j-1365-2966-2004-07588-x",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Karataş et al. (2004): Kinematics of chromospherically active binaries and evidence of an orbital period decrease in binary evolution",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.1111/j.1365-2966.2004.07588.x"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2004MNRAS.349.1069K"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2004MNRAS.349.1069K",
+      "label": "Publisher"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2004MNRAS.349.1069K",
+      "checkedOn": "2026-10-03",
+      "locator": "Crossref record: title, authors, container"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Karataş et al. (2004), Monthly Notices of the Royal Astronomical Society 349 1069-1092",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2004MNRAS.349.1069K"
+    }
+  ],
+  "publisher": "Monthly Notices of the Royal Astronomical Society 349 1069-1092",
+  "creators": [
+    "Y. Karataş",
+    "S. Bilir",
+    "Z. Eker",
+    "et al."
+  ],
+  "publicationDate": "2004"
+}

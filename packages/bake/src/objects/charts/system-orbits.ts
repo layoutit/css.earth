@@ -4,25 +4,13 @@
  * the record's transit convention puts it (true anomaly pi/2 - omega). Inclination and the node set how the orbit is tilted on the
  * sky, which a top-down view does not show. The star is a marker, not to scale. */
 import { bodyData, HOSTED_PLANET_IDS, hostedOrbit, hostedOrbitCentreId, type BodyId, type HostedPlanetId } from '@cssearth/astronomy';
-import { requireRecord, requireString } from '@cssearth/core';
 import { CHART, chartDocument, chartNotes, coordinate, escapeXml } from './chart-style.ts';
 
 /** The IAU 2012 astronomical unit, km (Resolution B2). */
 const AU_KM = 149597870.7;
 
-export interface SystemOrbitsRecipe {
-  kind: 'system-orbits'; id: string; title: string; description: string; output: string; metadata: Record<string, unknown>;
-  /** The host star's id, and the planet drawn brighter. */
-  system: string; highlight: string;
-}
-
-export function parseSystemOrbits(value: unknown): SystemOrbitsRecipe {
-  const r = requireRecord(value, 'system-orbits chart'), id = requireString(r.id, 'chart id');
-  if (r.kind !== 'system-orbits' || !/^[a-z][a-z0-9-]*$/.test(id)) throw new TypeError(`${id}: a system-orbits chart has kind system-orbits and a lowercase id.`);
-  return { kind: 'system-orbits', id, title: requireString(r.title, 'title'), description: requireString(r.description, 'description'), output: requireString(r.output, 'output'),
-    metadata: requireRecord(r.metadata, 'chart metadata'), system: requireString(r.system, `${id}.system`), highlight: requireString(r.highlight, `${id}.highlight`) };
-}
-
+import { parseSystemOrbits, type SystemOrbitsRecipe } from '@cssearth/objects';
+export { parseSystemOrbits, type SystemOrbitsRecipe } from '@cssearth/objects';
 /** Each planet of the system as a closed path in au, in its orbital plane with Earth toward +y, innermost first. */
 export function readSystemOrbits(recipe: SystemOrbitsRecipe, samples = 180) {
   const planets = HOSTED_PLANET_IDS.filter(id => hostedOrbitCentreId(id) === recipe.system);

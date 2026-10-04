@@ -1,0 +1,55 @@
+{
+  "id": "urquchillay",
+  "name": "Urquchillay",
+  "system": "Urquchillay system",
+  "description": "A star 2.0 solar radii and 1.63 solar masses, about 48 parsecs away, measured by Gaia.",
+  "aliases": [
+    "Gaia DR3 2096869455581362560",
+    "HR 7057",
+    "Zeta2 Lyrae",
+    "HIP 91973",
+    "HD 173649"
+  ],
+  "featured": true,
+  "target": "HR 7057",
+  "gaia": "2096869455581362560",
+  "paper": {
+    "url": "https://doi.org/10.1051/0004-6361/202243688",
+    "credit": "Creevey et al. (2023), A&A 674, A26 (Gaia DR3 FLAME)"
+  },
+  "radius": "gaia-flame",
+  "mass": "gaia-flame",
+  "temperature": {
+    "value": 7257,
+    "source": "Andrae et al. (2023), A&A 674, A27 (Gaia DR3 GSP-Phot), astrophysical_parameters of Gaia DR3 2096869455581362560: teff_gspphot 7257.1553 K (16th-84th percentiles 7253.877-7293.813), the temperature FLAME used",
+    "url": "https://doi.org/10.1051/0004-6361/202243462",
+    "uncertainty": 20
+  },
+  "color": {
+    "skip": [
+      "stis-ngsl",
+      "gaia-xp",
+      "pulkovo",
+      "kiehling",
+      "kharitonov",
+      "burnashev"
+    ],
+    "reason": "GSP-Phot fits an extinction A_G = 0.00 mag toward this star (Andrae et al. (2023), A&A 674, A27 (Gaia DR3 GSP-Phot), ag_gspphot), and the color routes do not remove extinction; GSP-Phot measured its temperature"
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A star about 48 parsecs away, 2.0 times the Sun's width, measured by Gaia.",
+    "introduction": "Gaia's parallax, brightness and spectrum give it 2.0 solar radii and 1.63 solar masses (FLAME) and 7,257 K at its surface (GSP-Phot).",
+    "locator": "gaiadr3.astrophysical_parameters, Gaia DR3 2096869455581362560: radius_flame, mass_flame, teff_gspphot",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/Zeta2_Lyrae",
+      "title": "Zeta2 Lyrae",
+      "revision": "1360486232",
+      "card": "Zeta2 Lyrae, also named Urquchillay, is a single, white-hued star in the northern constellation of Lyra.",
+      "introduction": "It is a dim star that is just visible to the naked eye with an apparent visual magnitude of 5.74 An annual parallax shift of 20.6 mas as seen from Earth provides a distance estimate of about 158 light years from the Sun."
+    }
+  },
+  "notes": [],
+  "order": 5742
+}

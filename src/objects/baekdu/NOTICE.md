@@ -1,0 +1,9 @@
+# Baekdu credits
+
+Radius, mass and temperature: Radius 10.462 (10.250 to 10.673) from Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26; astrophysical_parameters of the same source); Mass 3.003 (2.963 to 3.043) from Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26; astrophysical_parameters of the same source); temperature from Andrae et al. (2023), A&A 674, A27 (Gaia DR3 GSP-Phot), astrophysical_parameters of Gaia DR3 1700658653802527104: teff_gspphot 4860.1943 K (16th-84th percentiles 4845.6187-4862.3267), the temperature FLAME used.
+
+Color: a Planck spectrum at the temperature of Andrae et al. (2023), A&A 674, A27 (Gaia DR3 GSP-Phot), astrophysical_parameters of Gaia DR3 1700658653802527104: teff_gspphot 4860.1943 K (16th-84th percentiles 4845.6187-4862.3267), the temperature FLAME used, through the CIE 1931 2° color-matching functions (CIE 2019, CC BY-SA 4.0, doi:10.25039/CIE.DS.xvudnb9b).
+
+Limb darkening: Claret & Bloemen (2011), A&A 529, A75, via VizieR J/A+A/529/A75.
+
+Placement: Gaia DR3 source 1700658653802527104: position, parallax, proper motion and radial velocity. This work has made use of data from the European Space Agency (ESA) mission Gaia, processed by the Gaia Data Processing and Analysis Consortium (DPAC). Identifiers: SIMBAD, CDS, Strasbourg.

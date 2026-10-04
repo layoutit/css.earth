@@ -1,0 +1,43 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "nihal",
+  "card": {
+    "text": "A star 49 parsecs away, 15 times the Sun's width, measured from its light.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 25606: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-beta-leporis",
+        "url": "https://en.wikipedia.org/wiki/Beta_Leporis",
+        "label": "Wikipedia, \"Beta Leporis\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374617951",
+        "quote": "Beta Leporis, formally named Nihal, is the second brightest star in the constellation of Lepus."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its brightness, measured band by band, gives 166 times the Sun's luminosity at 5,264 K, so 15.495 solar radii.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 25606: D, Teff, L, Rad, Q"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its spectrum",
+      "summary": "The color of the star's light."
+    }
+  }
+}

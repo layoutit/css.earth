@@ -5,11 +5,11 @@
     {
       "kind": "system-orbits",
       "id": "gj-486b-orbits",
-      "title": "GJ 486 b: orbits around GJ 486",
+      "title": "GJ 486 b: orbits around Gar",
       "output": "gj-486b-system-orbits.svg",
       "system": "gj-486",
       "highlight": "gj-486b",
-      "description": "The orbits of GJ 486's planets in this map from above, to scale, with GJ 486 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "description": "The orbits of Gar's planets in this map from above, to scale, with GJ 486 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
       "metadata": {
         "orbitSource": "Weiner Mansfield et al. 2024 (2024ApJ...975L..22W), via the NASA Exoplanet Archive ps table (pl_refname WEINER_MANSFIELD_ET_AL__2024): P 1.46712127 d"
       }

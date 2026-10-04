@@ -1,0 +1,55 @@
+{
+  "id": "leidian",
+  "name": "Leidian",
+  "system": "Leidian system",
+  "description": "A star 3.4 solar radii and 2.85 solar masses, about 90 parsecs away, measured by Gaia.",
+  "aliases": [
+    "Gaia DR3 2713130535941345792",
+    "HR 8717",
+    "Rho Pegasi",
+    "HD 216735",
+    "HIP 113186"
+  ],
+  "featured": true,
+  "target": "HR 8717",
+  "gaia": "2713130535941345792",
+  "paper": {
+    "url": "https://doi.org/10.1051/0004-6361/202243688",
+    "credit": "Creevey et al. (2023), A&A 674, A26 (Gaia DR3 FLAME)"
+  },
+  "radius": "gaia-flame",
+  "mass": "gaia-flame",
+  "temperature": {
+    "value": 10006,
+    "source": "Andrae et al. (2023), A&A 674, A27 (Gaia DR3 GSP-Phot), astrophysical_parameters of Gaia DR3 2713130535941345792: teff_gspphot 10005.865 K (16th-84th percentiles 9962.1045-10039.913), the temperature FLAME used",
+    "url": "https://doi.org/10.1051/0004-6361/202243462",
+    "uncertainty": 38.9
+  },
+  "color": {
+    "skip": [
+      "stis-ngsl",
+      "gaia-xp",
+      "pulkovo",
+      "kiehling",
+      "kharitonov",
+      "burnashev"
+    ],
+    "reason": "GSP-Phot fits an extinction A_G = 0.11 mag toward this star (Andrae et al. (2023), A&A 674, A27 (Gaia DR3 GSP-Phot), ag_gspphot), and the color routes do not remove extinction; GSP-Phot measured its temperature"
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A star about 90 parsecs away, 3.4 times the Sun's width, measured by Gaia.",
+    "introduction": "Gaia's parallax, brightness and spectrum give it 3.4 solar radii and 2.85 solar masses (FLAME) and 10,006 K at its surface (GSP-Phot).",
+    "locator": "gaiadr3.astrophysical_parameters, Gaia DR3 2713130535941345792: radius_flame, mass_flame, teff_gspphot",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/Rho_Pegasi",
+      "title": "Rho Pegasi",
+      "revision": "1374763639",
+      "card": "Rho Pegasi, Latinized from ρ Pegasi, also named Leidian, is a star in the northern constellation of Pegasus, near the southern constellation boundary with Pisces.",
+      "introduction": "This is a probable astrometric binary system, as determined by changes to the proper motion of the visible component."
+    }
+  },
+  "notes": [],
+  "order": 5595
+}

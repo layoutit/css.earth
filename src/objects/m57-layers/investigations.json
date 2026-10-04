@@ -14,13 +14,14 @@
     },
     {
       "id": "volume",
-      "subject": "A volume of the Ring Nebula",
-      "status": "deferred",
-      "finding": "The picture is flat. The Nebula Lab could spread its light in depth where a paper publishes the nebula's three-dimensional shape; that fit has not been made here.",
+      "subject": "The shape of the Ring Nebula",
+      "status": "included",
+      "finding": "O'Dell et al. (2013, Sect. III.1 and III.3), with O'Dell, Sabbadin & Henney (2007) as restated there, give the shape from long-slit spectra: expansion of 0.65 km/s per arcsec; a Main Ring 44 by 30 arcsec on the sky whose velocity ellipse is 19 km/s in [N II] and [S II] and 9 km/s in [O III]; and polar Lobes through its centre at 36 km/s in [N II], 28 in [O III] and 20 in He II. Kastner et al. (2025, Sect. IV) find the same form in the CO cube: a thin ellipsoidal shell seen nearly pole-on, open at both poles, with an elongated body of radius 2.3e17 cm through the openings. The picture's light is laid on those walls. Two earlier attempts are not used: a Nebula Lab volume of the 2007 ellipsoid, whose 192 px slices lost the picture's detail, and an even fill of that ellipsoid around the flat picture, which guessed where the light lies and read as a flat picture from every direction but the Sun's.",
       "evidence": [
+        "https://arxiv.org/abs/1301.6636",
+        "https://arxiv.org/abs/2501.12223",
         "https://esahubble.org/images/heic1310a/"
-      ],
-      "revisitWhen": "A published three-dimensional model of the nebula is read and a Nebula Lab recipe is written from it."
+      ]
     },
     {
       "id": "star-removal",

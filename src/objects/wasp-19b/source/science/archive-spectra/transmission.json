@@ -1,0 +1,84 @@
+{
+  "schema": "cssearth-measured-spectrum@1",
+  "source": "NASA Exoplanet Archive transitspec, Bean et al. 2013",
+  "units": {
+    "x": "um",
+    "y": "%"
+  },
+  "uncertainty": "published 1-sigma, asymmetric (err1, err2)",
+  "observation": "Magellan II Landon Clay Telescope, MMIRS",
+  "measurements": [
+    {
+      "x": 1.29,
+      "xLow": 1.25,
+      "xHigh": 1.33,
+      "y": 2.06,
+      "minus": 0.028,
+      "plus": 0.028
+    },
+    {
+      "x": 1.45,
+      "xLow": 1.4,
+      "xHigh": 1.5,
+      "y": 2.117,
+      "minus": 0.031,
+      "plus": 0.031
+    },
+    {
+      "x": 1.55,
+      "xLow": 1.5,
+      "xHigh": 1.6,
+      "y": 2.106,
+      "minus": 0.015,
+      "plus": 0.015
+    },
+    {
+      "x": 1.65,
+      "xLow": 1.6,
+      "xHigh": 1.7,
+      "y": 2.056,
+      "minus": 0.03,
+      "plus": 0.03
+    },
+    {
+      "x": 1.75,
+      "xLow": 1.7,
+      "xHigh": 1.8,
+      "y": 2.03,
+      "minus": 0.016,
+      "plus": 0.016
+    },
+    {
+      "x": 2,
+      "xLow": 1.95,
+      "xHigh": 2.05,
+      "y": 2.06,
+      "minus": 0.031,
+      "plus": 0.031
+    },
+    {
+      "x": 2.1,
+      "xLow": 2.05,
+      "xHigh": 2.15,
+      "y": 2.089,
+      "minus": 0.01,
+      "plus": 0.01
+    },
+    {
+      "x": 2.2,
+      "xLow": 2.15,
+      "xHigh": 2.25,
+      "y": 2.07,
+      "minus": 0.018,
+      "plus": 0.018
+    },
+    {
+      "x": 2.3,
+      "xLow": 2.25,
+      "xHigh": 2.35,
+      "y": 2.048,
+      "minus": 0.047,
+      "plus": 0.047
+    }
+  ]
+}

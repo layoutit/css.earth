@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "hat-p-5-system",
+  "parent": "milky-way",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "hat-p-5"
+    },
+    "catalog": {
+      "name": "Chasoň system",
+      "systemName": "Chasoň system",
+      "classification": "planetary-system",
+      "color": "#fff4f2",
+      "distanceAu": 64088411,
+      "description": "HAT-P-5 b crosses Chasoň as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        591089379181547800,
+        -7672124628420453000,
+        5719185096365769000
+      ],
+      "presentationToReference": [
+        0.061652165913727824,
+        0.04582232405115291,
+        -0.9970452973946055,
+        -0.8002226349561496,
+        -0.5947630280714071,
+        -0.07681585085883819,
+        0.596525561013091,
+        -0.8025940786337024,
+        3.6799398141551793e-7
+      ],
+      "orbitUpReference": [
+        -0.04582232405115291,
+        0.5947630280714071,
+        0.8025940786337024
+      ],
+      "metersPerUnit": 2513496.7741935486,
+      "bodyRadiusM": 779184000
+    }
+  }
+}

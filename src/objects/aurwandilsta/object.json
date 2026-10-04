@@ -1,0 +1,149 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "aurwandilsta",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Aurwandilsta",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 2643413.8
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/aurwandilsta-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Aurwandilsta",
+      "classification": "star",
+      "color": "#c9d7ff",
+      "distanceAu": 23519119.2,
+      "description": "A star about 110 parsecs away, 3.8 times the Sun's width, measured by Gaia.",
+      "systemName": "Aurwandilsta system",
+      "aliases": [
+        "Gaia DR3 1320255698202371072",
+        "HR 5971",
+        "Iota Coronae Borealis",
+        "HIP 78493",
+        "HD 143807"
+      ],
+      "order": 5495,
+      "context": {
+        "order": 5492
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -1509146619235930600,
+        -2652304652810047500,
+        1751275682988883700
+      ],
+      "presentationToReference": [
+        -0.42892847596085854,
+        -0.24615625654169918,
+        -0.8691533005605353,
+        -0.7538359613384995,
+        -0.4326185424471317,
+        0.49454275864052377,
+        0.497746628218369,
+        -0.8673224856397397,
+        -9.737946580825309e-7
+      ],
+      "orbitUpReference": [
+        0.24615625654169918,
+        0.4326185424471317,
+        0.8673224856397397
+      ],
+      "metersPerUnit": 8527141.290322581,
+      "bodyRadiusM": 2643413800
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

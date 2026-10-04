@@ -1,0 +1,147 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "natasha",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Natasha",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 582334.8
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/natasha-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Natasha",
+      "classification": "star",
+      "color": "#ffe7d3",
+      "distanceAu": 6915387.7,
+      "description": "A star about 34 parsecs away, 84% of the Sun's width, measured by Gaia.",
+      "systemName": "Natasha system",
+      "aliases": [
+        "Gaia DR3 5406324138654973824",
+        "HD 85390",
+        "HIP 48235"
+      ],
+      "order": 5639,
+      "context": {
+        "order": 5636
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -563344153678744960,
+        358742141358011900,
+        -790059564409131600
+      ],
+      "presentationToReference": [
+        -0.5445445879559845,
+        0.6441647856457151,
+        0.5371432962086159,
+        0.34677042492707866,
+        -0.4102111566726201,
+        0.843491007265166,
+        -0.7636893767257342,
+        -0.6455838720687817,
+        -9.688438145194835e-7
+      ],
+      "orbitUpReference": [
+        -0.6441647856457151,
+        0.4102111566726201,
+        0.6455838720687817
+      ],
+      "metersPerUnit": 1878499.3548387096,
+      "bodyRadiusM": 582334800
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

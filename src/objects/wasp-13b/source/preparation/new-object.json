@@ -1,0 +1,31 @@
+{
+  "host": "wasp-13",
+  "planets": [
+    {
+      "id": "wasp-13b",
+      "name": "WASP-13 b",
+      "description": "Transiting planet of Gloas with a 4.35-day year, found in 2009.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+        "credit": "Stassun et al. 2017"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "STASSUN_ET_AL__2017"
+      },
+      "text": {
+        "card": "WASP-13 b was found in 2009 by SuperWASP as it crossed its star.",
+        "introduction": "It is the only planet known around Gloas. Its orbit and size follow Stassun et al. 2017's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname STASSUN_ET_AL__2017): disc_year 2009, disc_facility SuperWASP, sy_pnum 1; pl_orbper 4.35301101, pl_radj 1.22, pl_bmassj 0.36",
+        "quotes": {
+          "url": "https://en.wikipedia.org/wiki/WASP-13b",
+          "title": "WASP-13b",
+          "revision": "1374242494",
+          "card": "WASP-13b, also known as Cruinlagh, is an extrasolar planet that was discovered in 2008 in the orbit of the sunlike star WASP-13.",
+          "introduction": "The planet has a mass of nearly half that of Jupiter, but a radius five-quarters of the size of Jupiter."
+        }
+      },
+      "order": 5551
+    }
+  ]
+}

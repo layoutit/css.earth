@@ -1,0 +1,147 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "sika",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Sika",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 1064507.9
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/sika-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Sika",
+      "classification": "star",
+      "color": "#fff1ea",
+      "distanceAu": 12368413.8,
+      "description": "A star about 60 parsecs away, 1.5 times the Sun's width, measured by Gaia.",
+      "systemName": "Sika system",
+      "aliases": [
+        "Gaia DR3 6745589980571162752",
+        "HD 181720",
+        "HIP 95262"
+      ],
+      "order": 5695,
+      "context": {
+        "order": 5692
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        549546024705962750,
+        -1452678879613727700,
+        -1005629290975454600
+      ],
+      "presentationToReference": [
+        0.29700974070997394,
+        -0.1922951648176525,
+        -0.9353115970152118,
+        -0.785120368577242,
+        0.5083244931757748,
+        -0.3538251213279341,
+        -0.543480653536563,
+        -0.8394216933254367,
+        -0.00000247523740894143
+      ],
+      "orbitUpReference": [
+        0.1922951648176525,
+        -0.5083244931757748,
+        0.8394216933254367
+      ],
+      "metersPerUnit": 3433896.451612903,
+      "bodyRadiusM": 1064507899.9999999
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

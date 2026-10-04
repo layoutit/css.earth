@@ -1,0 +1,24 @@
+{
+  "host": "hat-p-38",
+  "planets": [
+    {
+      "id": "hat-p-38b",
+      "name": "HAT-P-38 b",
+      "description": "Transiting planet of Horna with a 4.64-day year, found in 2012.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2012PASJ...64...97S/abstract",
+        "credit": "Sato et al. 2012"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "SATO_ET_AL__2012"
+      },
+      "text": {
+        "card": "HAT-P-38 b was found in 2012 by HATNet as it crossed its star.",
+        "introduction": "It is the only planet known around Horna. Its orbit and size follow Sato et al. 2012's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname SATO_ET_AL__2012): disc_year 2012, disc_facility HATNet, sy_pnum 1; pl_orbper 4.64032787, pl_radj 0.825, pl_bmassj 0.267"
+      },
+      "order": 5564
+    }
+  ]
+}

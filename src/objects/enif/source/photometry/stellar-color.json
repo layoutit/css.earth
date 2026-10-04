@@ -1,0 +1,48 @@
+{
+  "schema": "cssearth-stellar-photometric-color@1",
+  "objectId": "enif",
+  "spectrum": "measured",
+  "measuredSpectrum": {
+    "source": "HST/STIS Next Generation Spectral Library v2 (Heap & Lindler; MAST high-level science product), HD 206778: 168-1020 nm",
+    "path": "photometry/h_stis_ngsl_hd206778_v2.fits",
+    "format": "fits-table",
+    "extension": "1",
+    "wavelength": {
+      "column": "WAVELENGTH",
+      "unit": "angstrom"
+    },
+    "flux": {
+      "column": "FLUX",
+      "kind": "flux"
+    },
+    "service": "https://archive.stsci.edu/pub/hlsp/stisngsl/v2/hd206778/h_stis_ngsl_hd206778_v2.fits",
+    "checked": "2026-10-03",
+    "gaps": [],
+    "note": "Space spectrophotometry from the Hubble Space Telescope; the file header marks it DATAQUAL good."
+  },
+  "whitePoint": "sRGB D65",
+  "normalization": "brightest linear sRGB channel = 1",
+  "crossCheck": {
+    "source": "Kharitonov, Tereshchenko & Knyazeva (1988), Spectrophotometric Catalogue of Stars (Alma-Ata), record 1012: HR 8308; VizieR III/202",
+    "spectrum": {
+      "path": "photometry/crosscheck-kharitonov-catalog.dat",
+      "format": "kharitonov-records",
+      "wavelength": {
+        "column": "lambda",
+        "unit": "nm"
+      },
+      "flux": {
+        "column": "1012",
+        "kind": "flux",
+        "missing": 0
+      },
+      "gaps": [
+        {
+          "fromNm": 752.5,
+          "toNm": 780,
+          "reason": "the spectrum ends at 752.5 nm; the last value is held to 780 nm, where the observer adds little"
+        }
+      ]
+    }
+  }
+}

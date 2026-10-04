@@ -1,0 +1,146 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "dingolay",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Dingolay",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 3312227.7
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/dingolay-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Dingolay",
+      "classification": "star",
+      "color": "#ffe6d0",
+      "distanceAu": 32585298.4,
+      "description": "A star 158 parsecs away, 4.8 times the Sun's width, measured from its light.",
+      "systemName": "Dingolay system",
+      "aliases": [
+        "HD 96063",
+        "HIP 54158"
+      ],
+      "order": 5528,
+      "context": {
+        "order": 5525
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -4729130379047029000,
+        1162860630946215700,
+        -213765947981737500
+      ],
+      "presentationToReference": [
+        -0.9701395063055837,
+        0.042582803012249044,
+        0.23878032413241027,
+        0.23855063150869993,
+        -0.010470883419432697,
+        0.971073610395843,
+        -0.043851277198724475,
+        -0.9990380700894419,
+        -6.312112917920686e-8
+      ],
+      "orbitUpReference": [
+        -0.042582803012249044,
+        0.010470883419432697,
+        0.9990380700894419
+      ],
+      "metersPerUnit": 10684605.483870968,
+      "bodyRadiusM": 3312227700
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

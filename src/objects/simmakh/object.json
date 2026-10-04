@@ -1,0 +1,148 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "simmakh",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Simmakh",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 14807278.8
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/simmakh-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Simmakh",
+      "classification": "star",
+      "color": "#ffd2a1",
+      "distanceAu": 25783134.3,
+      "description": "A star 125 parsecs away, 21 times the Sun's width, measured from its light.",
+      "systemName": "Simmakh system",
+      "aliases": [
+        "d Piscium",
+        "HD 1635",
+        "HIP 1645",
+        "HR 80"
+      ],
+      "order": 5696,
+      "context": {
+        "order": 5693
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        3802352281584947700,
+        342655199233398200,
+        549490918026307000
+      ],
+      "presentationToReference": [
+        0.9858055530505954,
+        0.14188665217097654,
+        0.08975293594263173,
+        0.08883748089885017,
+        0.012786379388613163,
+        -0.9959640608423965,
+        0.1424616213657428,
+        -0.9898003265496748,
+        -3.1052665605820386e-8
+      ],
+      "orbitUpReference": [
+        -0.14188665217097654,
+        -0.012786379388613163,
+        0.9898003265496748
+      ],
+      "metersPerUnit": 47765415.48387097,
+      "bodyRadiusM": 14807278800
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

@@ -1,0 +1,124 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "xo-4b",
+  "displayName": "XO-4 b",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "1.3 Jupiter radii",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-aa5df3",
+          "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S",
+          "label": "Stassun et al. 2017",
+          "checked": "2026-10-03",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "4.13 days",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-aa5df3",
+          "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S",
+          "label": "Stassun et al. 2017",
+          "checked": "2026-10-03",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "1.4 Jupiter masses",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-aa5df3",
+          "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S",
+          "label": "Stassun et al. 2017",
+          "checked": "2026-10-03",
+          "path": "source/measurements.json",
+          "locator": "massSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "thermal",
+    "controls": [
+      {
+        "id": "thermal",
+        "label": "Thermal glow",
+        "qualification": "Black-body color at its measured dayside temperature, 1,961 K. The disc itself is unresolved.",
+        "thumbnail": "xo-4b-dataset-thermal.webp",
+        "surface": "xo-4b-surface-thermal@2x.webp",
+        "poles": "xo-4b-poles-thermal@2x.webp",
+        "source": {
+          "id": "xo-4b-thermal-color",
+          "path": "../manifest.json",
+          "url": "https://ui.adsabs.harvard.edu/abs/2012ApJ...746..111T/abstract"
+        },
+        "falseColor": false,
+        "notes": "The color of XO-4 b's heat: a black body at the dayside brightness temperature measured in secondary eclipse at 4.5 µm (Spitzer Space Telescope satellite Infrared Array Camera (IRAC)). Its star lights the day side; the night side is not measured. Reflected starlight is not included."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [
+    {
+      "id": "xo-4b-orbits",
+      "titleKey": "systemOrbits",
+      "src": "/scenes/xo-4b/xo-4b-system-orbits.svg",
+      "alt": "The orbits of Koit's planets in this map from above, to scale, with XO-4 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "source": {
+        "id": "xo-4b-observational-measurements",
+        "path": "../manifest.json",
+        "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S"
+      }
+    },
+    {
+      "id": "xo-4b-transit",
+      "titleKey": "transitLightCurve",
+      "src": "/scenes/xo-4b/xo-4b-transit.svg",
+      "alt": "XO-4 b crossing its star, as TESS recorded it: 3 sectors (47, 60, 74) of the SPOC pipeline's 2-minute light curves of TIC 51234631, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 18-minute bins. Error bars are each bin's standard error.",
+      "source": {
+        "id": "xo-4b-tess-sector-47",
+        "path": "../manifest.json",
+        "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2021364111932-s0047-0000000051234631-0218-s_lc.fits"
+      }
+    }
+  ],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Stassun et al. 2017",
+      "href": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+      "credit": "Stassun et al. 2017"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/xo-4b.json",
+      "credit": "Radius from Stassun et al. 2017 (2017AJ....153..136S), via the NASA Exoplanet Archive; mass from Stassun et al. 2017, the mass the NASA Exoplanet Archive's composite table adopts (2017AJ....153..136S), via the NASA Exoplanet Archive; orbit from Stassun et al. 2017 (2017AJ....153..136S), via the NASA Exoplanet Archive"
+    }
+  }
+}

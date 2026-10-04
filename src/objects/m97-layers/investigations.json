@@ -14,13 +14,13 @@
     },
     {
       "id": "volume",
-      "subject": "A volume of the Owl Nebula",
+      "subject": "The shape of the Owl Nebula",
       "status": "deferred",
-      "finding": "The picture is flat. The Nebula Lab could spread its light in depth where a paper publishes the nebula's three-dimensional shape; that fit has not been made here.",
+      "finding": "The picture is flat. Guerrero et al. (2003) give the shape from echelle spectra: an outer shell that is a filled envelope, 218 arcsec across, expanding at 40 km/s; an inner shell that is an ellipsoid of radius 93 arcsec along its pole and 83 arcsec across it, its pole tilted 10 to 30 degrees from the line of sight toward the south-east, expanding at about 45 and 40 km/s; and a bipolar cavity along that pole, the owl's eyes. The Ring's bake draws thin walls; the Owl needs a filled envelope with a cavity cut in it, which the bake does not draw yet.",
       "evidence": [
-        "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record"
+        "https://arxiv.org/abs/astro-ph/0303056"
       ],
-      "revisitWhen": "A published three-dimensional model of the nebula is read and a Nebula Lab recipe is written from it."
+      "revisitWhen": "The image-layer bake draws a filled envelope with a cavity, and the cavity's size is read from the paper."
     },
     {
       "id": "noao-m97",

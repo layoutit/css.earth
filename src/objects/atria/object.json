@@ -1,0 +1,148 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "atria",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Atria",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 77606726.4
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/atria-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Atria",
+      "classification": "star",
+      "color": "#ffd292",
+      "distanceAu": 24702250.8,
+      "description": "A star 120 parsecs away, 112 times the Sun's width, measured from its light.",
+      "systemName": "Atria system",
+      "aliases": [
+        "HD 150798",
+        "HIP 82273",
+        "HR 6217",
+        "Alpha Trianguli Australis"
+      ],
+      "order": 5494,
+      "context": {
+        "order": 5491
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -405056245446988200,
+        -1259080420836391700,
+        -3450602487872176600
+      ],
+      "presentationToReference": [
+        -0.10961236610488209,
+        0.2859698187902932,
+        -0.9519487338811562,
+        -0.3407200494687741,
+        0.8888848293430568,
+        0.3062574212223453,
+        -0.933753167109427,
+        -0.3579176202770851,
+        -0.000002881465778280291
+      ],
+      "orbitUpReference": [
+        -0.2859698187902932,
+        -0.8888848293430568,
+        0.3579176202770851
+      ],
+      "metersPerUnit": 250344278.70967743,
+      "bodyRadiusM": 77606726400
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

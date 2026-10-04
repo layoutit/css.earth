@@ -8,7 +8,7 @@
 import { resolve } from 'node:path';
 import { astroquery } from './astroquery.js';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import type { IcrsCircle, MetadataResponse, Pin } from './vo-contracts.js';
+import type { IcrsCircle, MetadataResponse, Pin } from '@cssearth/objects';
 import type { TargetCatalogueEntry } from '../targets.js';
 
 export const SIMBAD_TAP = 'https://simbad.cds.unistra.fr/simbad/sim-tap';

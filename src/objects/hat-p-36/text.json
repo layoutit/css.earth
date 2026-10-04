@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hat-p-36",
+  "card": {
+    "text": "HAT-P-36 b crosses Tuiren as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ab24dd",
+        "url": "https://ui.adsabs.harvard.edu/abs/2019AJ....158...39C/abstract",
+        "label": "Chakrabarty & Sengupta (2019), The Astronomical Journal 158 39",
+        "checked": "2026-10-03",
+        "locator": "NASA Exoplanet Archive ps table (st_refname CHAKRABARTY__AMP__SENGUPTA_2019): st_teff 5620, st_rad 1.041, st_mass 1.03"
+      },
+      {
+        "catalogueId": "wikipedia-hat-p-36",
+        "url": "https://en.wikipedia.org/wiki/HAT-P-36",
+        "label": "Wikipedia, \"HAT-P-36\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374405757",
+        "quote": "HAT-P-36, also referred to as Tuiren is a 12th magnitude G-type main-sequence star estimated to be approximately 958 light-years away from Earth in the constellation Canes Venatici."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Chakrabarty & Sengupta 2019.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ab24dd",
+        "url": "https://ui.adsabs.harvard.edu/abs/2019AJ....158...39C/abstract",
+        "label": "Chakrabarty & Sengupta (2019), The Astronomical Journal 158 39",
+        "checked": "2026-10-03",
+        "locator": "NASA Exoplanet Archive ps table (st_refname CHAKRABARTY__AMP__SENGUPTA_2019): st_teff 5620, st_rad 1.041, st_mass 1.03"
+      },
+      {
+        "catalogueId": "wikipedia-hat-p-36",
+        "url": "https://en.wikipedia.org/wiki/HAT-P-36",
+        "label": "Wikipedia, \"HAT-P-36\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374405757",
+        "quote": "HAT-P-36 is too faint to be seen with the naked eye, but it is possible to view it with binoculars or a small telescope."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its Gaia spectrum",
+      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

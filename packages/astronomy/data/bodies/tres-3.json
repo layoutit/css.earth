@@ -1,0 +1,30 @@
+{
+ "id": "tres-3",
+ "classification": "star",
+ "order": 5666,
+ "physical": {
+  "name": "Pipoltr",
+  "horizonsCode": null,
+  "meanRadiusKm": 576735.3,
+  "gravitationalParameterKm3PerS2": 123157144358.91975,
+  "parent": null,
+  "effectiveTemperatureK": 5650
+ },
+ "physicalNotes": "Radius 0.829 +/- 0.015 solar radii from Sozzetti et al. 2009, the stellar radius of the default parameter set of TrES-3 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2009ApJ...691.1145S/abstract): 576,735 km at 695,700 km per solar radius. Mass 0.928 +/- 0.028 solar masses from Sozzetti et al. 2009, the stellar mass of the default parameter set of TrES-3 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2009ApJ...691.1145S/abstract); GM is that mass times the JPL solar GM. Temperature 5650 +/- 75 K from Sozzetti et al. 2009, the stellar temperature of the default parameter set of TrES-3 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2009ApJ...691.1145S/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 268.0291063197835,
+  "declinationDegrees": 37.5463315901179,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 231.98687072347403,
+  "properMotionRaMasPerYear": -24.461692186739818,
+  "properMotionDecMasPerYear": 34.771618067671604,
+  "radialVelocityKmPerS": 10.304748,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 4609131509318715136 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/tres-3/source/photometry/gaia-dr3-source.csv",
+   "distance": "Gaia DR3 parallax 4.3106 +/- 0.0091 mas (same row, RUWE 0.94): 231.99 pc, no zero-point correction",
+   "properMotion": "Gaia DR3 (same row): -24.462, 34.772 mas/yr",
+   "radialVelocity": "Gaia DR3 (same row): 10.30 +/- 0.96 km/s"
+  }
+ }
+}

@@ -1,0 +1,148 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "baekdu",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Baekdu",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 7278665.9
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/baekdu-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Baekdu",
+      "classification": "star",
+      "color": "#ffe4ca",
+      "distanceAu": 33660489.1,
+      "description": "A star about 160 parsecs away, 10 times the Sun's width, measured by Gaia.",
+      "systemName": "Baekdu system",
+      "aliases": [
+        "Gaia DR3 1700658653802527104",
+        "HD 133086",
+        "8 Ursae Minoris",
+        "HIP 73136"
+      ],
+      "order": 5499,
+      "context": {
+        "order": 5496
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -940342028164195600,
+        -914501474107009500,
+        4861695356628302000
+      ],
+      "presentationToReference": [
+        -0.18674127144410801,
+        -0.692140750641863,
+        -0.6971864017896193,
+        -0.18160963021619062,
+        -0.6731172416849278,
+        0.716889894725273,
+        0.965476897575585,
+        -0.26048869504719946,
+        6.562384309461707e-7
+      ],
+      "orbitUpReference": [
+        0.692140750641863,
+        0.6731172416849278,
+        0.26048869504719946
+      ],
+      "metersPerUnit": 23479567.419354837,
+      "bodyRadiusM": 7278665900
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

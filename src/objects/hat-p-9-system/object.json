@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "hat-p-9-system",
+  "parent": "milky-way",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "hat-p-9"
+    },
+    "catalog": {
+      "name": "Tevel system",
+      "systemName": "Tevel system",
+      "classification": "planetary-system",
+      "color": "#fcf6ff",
+      "distanceAu": 95378218.3,
+      "description": "HAT-P-9 b crosses Tevel as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -3921594741192375300,
+        10676705023195849000,
+        8614852639459067000
+      ],
+      "presentationToReference": [
+        -0.27484501994528454,
+        -0.20817027974525634,
+        0.9386827737004968,
+        0.7482770145088725,
+        0.5667511439775311,
+        0.34478203311345634,
+        0.6037729081111249,
+        -0.7971563682433589,
+        -3.059667398717426e-7
+      ],
+      "orbitUpReference": [
+        0.20817027974525634,
+        -0.5667511439775311,
+        0.7971563682433589
+      ],
+      "metersPerUnit": 3002730.9677419355,
+      "bodyRadiusM": 930846600
+    }
+  }
+}

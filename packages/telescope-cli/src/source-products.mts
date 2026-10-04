@@ -6,7 +6,7 @@ import { resolve } from 'node:path';
 import { VERSION } from './help.mts';
 import { hasErrorCode, requireRecord } from '@cssearth/core';
 import { fileSize, readProductRecord, sameRun } from '@cssearth/telescope/node';
-import type { ProductRun } from '@cssearth/telescope';
+import type { ProductRun } from '@cssearth/objects';
 import { sourcePds3Observations } from './archives/pds/source-observations.mts';
 import { parseProductFacts, type QualifiedObservation } from './qualified-observations.mts';
 import { verifyCalibrationDependencies, type CalibrationDependency } from './calibration-dependencies.mts';

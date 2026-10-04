@@ -1,0 +1,53 @@
+{
+  "id": "buna",
+  "name": "Buna",
+  "system": "Buna system",
+  "description": "A star 1.9 solar radii and 1.16 solar masses, about 60 parsecs away, measured by Gaia.",
+  "aliases": [
+    "Gaia DR3 340028235795364864",
+    "HD 16175",
+    "HIP 12191"
+  ],
+  "featured": true,
+  "target": "HD 16175",
+  "gaia": "340028235795364864",
+  "paper": {
+    "url": "https://doi.org/10.1051/0004-6361/202243688",
+    "credit": "Creevey et al. (2023), A&A 674, A26 (Gaia DR3 FLAME)"
+  },
+  "radius": "gaia-flame",
+  "mass": "gaia-flame",
+  "temperature": {
+    "value": 5799,
+    "source": "Andrae et al. (2023), A&A 674, A27 (Gaia DR3 GSP-Phot), astrophysical_parameters of Gaia DR3 340028235795364864: teff_gspphot 5798.838 K (16th-84th percentiles 5797.52-5800.4263), the temperature FLAME used",
+    "url": "https://doi.org/10.1051/0004-6361/202243462",
+    "uncertainty": 1.5
+  },
+  "color": {
+    "skip": [
+      "stis-ngsl",
+      "gaia-xp",
+      "pulkovo",
+      "kiehling",
+      "kharitonov",
+      "burnashev"
+    ],
+    "reason": "GSP-Phot fits an extinction A_G = 0.00 mag toward this star (Andrae et al. (2023), A&A 674, A27 (Gaia DR3 GSP-Phot), ag_gspphot), and the color routes do not remove extinction; GSP-Phot measured its temperature"
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A star about 60 parsecs away, 1.9 times the Sun's width, measured by Gaia.",
+    "introduction": "Gaia's parallax, brightness and spectrum give it 1.9 solar radii and 1.16 solar masses (FLAME) and 5,799 K at its surface (GSP-Phot).",
+    "locator": "gaiadr3.astrophysical_parameters, Gaia DR3 340028235795364864: radius_flame, mass_flame, teff_gspphot",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/HD_16175",
+      "title": "HD 16175",
+      "revision": "1374603653",
+      "card": "HD 16175 is a 7th magnitude G-type star with temperature about 6,000 K located 196 light-years away in the Andromeda constellation.",
+      "introduction": "This star is only visible through binoculars or better equipment; it is also 3.3 times more luminous, is 1.34 times more massive, and has a radius 1.66 times bigger than the Sun."
+    }
+  },
+  "notes": [],
+  "order": 5511
+}

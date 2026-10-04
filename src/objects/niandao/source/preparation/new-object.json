@@ -1,0 +1,61 @@
+{
+  "id": "niandao",
+  "name": "Niandao",
+  "system": "Niandao system",
+  "description": "A star 91 parsecs away, 144 times the Sun's width, measured from its light.",
+  "aliases": [
+    "13 Lyrae",
+    "HD 175865",
+    "HIP 92862",
+    "HR 7157"
+  ],
+  "featured": true,
+  "target": "HIP 92862",
+  "paper": {
+    "url": "https://doi.org/10.1093/mnras/stx1433",
+    "credit": "McDonald, Zijlstra & Watson (2017), MNRAS 471, 770"
+  },
+  "radius": {
+    "value": 144.458,
+    "source": "McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 92862: radius 144.458 solar radii, implied by the fitted luminosity 2398.17 solar luminosities (fractional uncertainty 0.075) and temperature",
+    "url": "https://doi.org/10.1093/mnras/stx1433"
+  },
+  "mass": "unmeasured",
+  "temperature": {
+    "value": 3363,
+    "source": "McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 92862: effective temperature 3363 +/- 125 K, from the fit of a model atmosphere to the star's spectral energy distribution (goodness of fit Q 0.074)",
+    "url": "https://doi.org/10.1093/mnras/stx1433",
+    "uncertainty": 125
+  },
+  "distance": {
+    "value": 91.408,
+    "source": "McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 92862: distance 91.408 pc, the paper's parallax inverted (Gaia DR1's where it revised the star's, else the Hipparcos reduction of van Leeuwen 2007; section 2.3; fractional uncertainty 0.011), at which the luminosity and radius hold",
+    "url": "https://doi.org/10.1093/mnras/stx1433",
+    "uncertainty": 1.005
+  },
+  "limb": {
+    "none": "no mass is measured and no spectroscopic surface gravity is published with this radius: McDonald, Zijlstra & Watson (2017), MNRAS 471, 770 assume the gravity of their fit (table column 15)"
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A star 91 parsecs away, 144 times the Sun's width, measured from its light.",
+    "introduction": "Its brightness, measured band by band, gives 2,398 times the Sun's luminosity at 3,363 K, so 144.458 solar radii.",
+    "locator": "Table 2, HIP 92862: D, Teff, L, Rad, Q",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/R_Lyrae",
+      "title": "R Lyrae",
+      "revision": "1374585554",
+      "card": "R Lyrae, also known by its Flamsteed designation 13 Lyrae and named Niandao, is a 4th magnitude semiregular variable star in the constellation Lyra, approximately 350 light-years away from Earth.",
+      "introduction": "It is visible to the naked eye."
+    }
+  },
+  "notes": [],
+  "radialVelocity": {
+    "value": -27.15,
+    "uncertainty": 0.2,
+    "source": "SIMBAD's radial velocity for Gaia DR3 2106630885454013184 (quality A), from 2009A&A...498..627F; Gaia DR3 measures none",
+    "url": "https://ui.adsabs.harvard.edu/abs/2009A&A...498..627F/abstract"
+  },
+  "order": 5646
+}

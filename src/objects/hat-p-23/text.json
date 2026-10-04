@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hat-p-23",
+  "card": {
+    "text": "HAT-P-23 b crosses Moriah as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-1008-3388",
+        "url": "https://ui.adsabs.harvard.edu/abs/2010arXiv1008.3388B/abstract",
+        "label": "Bakos et al. (2010)",
+        "checked": "2026-10-03",
+        "locator": "NASA Exoplanet Archive ps table (st_refname BAKOS_ET_AL__2010): st_teff 5905, st_rad 1.203, st_mass 1.13"
+      },
+      {
+        "catalogueId": "wikipedia-hat-p-23",
+        "url": "https://en.wikipedia.org/wiki/HAT-P-23",
+        "label": "Wikipedia, \"HAT-P-23\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1357585877",
+        "quote": "HAT-P-23 is a G-type main-sequence star 1192 light-years away."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Bakos et al. 2010.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-1008-3388",
+        "url": "https://ui.adsabs.harvard.edu/abs/2010arXiv1008.3388B/abstract",
+        "label": "Bakos et al. (2010)",
+        "checked": "2026-10-03",
+        "locator": "NASA Exoplanet Archive ps table (st_refname BAKOS_ET_AL__2010): st_teff 5905, st_rad 1.203, st_mass 1.13"
+      },
+      {
+        "catalogueId": "wikipedia-hat-p-23",
+        "url": "https://en.wikipedia.org/wiki/HAT-P-23",
+        "label": "Wikipedia, \"HAT-P-23\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1357585877",
+        "quote": "It has a rapid rotation for its advanced age of 4 billion years, and exhibits a strong starspot activity."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its Gaia spectrum",
+      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

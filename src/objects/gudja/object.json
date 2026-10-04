@@ -1,0 +1,148 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "gudja",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Gudja",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 47269336.5
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/gudja-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Gudja",
+      "classification": "star",
+      "color": "#ffc984",
+      "distanceAu": 24152697.1,
+      "description": "A star 117 parsecs away, 68 times the Sun's width, measured from its light.",
+      "systemName": "Gudja system",
+      "aliases": [
+        "HD 141477",
+        "HIP 77450",
+        "HR 5879",
+        "Kappa Serpentis"
+      ],
+      "order": 5555,
+      "context": {
+        "order": 5552
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -1860786694078745000,
+        -2885660641693205500,
+        1124985521682919700
+      ],
+      "presentationToReference": [
+        -0.5149972303894734,
+        -0.16873599571364511,
+        -0.8404201428105448,
+        -0.7986445964123333,
+        -0.26167312636912177,
+        0.5419354053368269,
+        0.31135937646480644,
+        -0.9502922385701855,
+        -8.441504950844003e-7
+      ],
+      "orbitUpReference": [
+        0.16873599571364511,
+        0.26167312636912177,
+        0.9502922385701855
+      ],
+      "metersPerUnit": 152481730.6451613,
+      "bodyRadiusM": 47269336500
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

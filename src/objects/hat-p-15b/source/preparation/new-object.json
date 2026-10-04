@@ -4,7 +4,8 @@
     {
       "id": "hat-p-15b",
       "name": "HAT-P-15 b",
-      "description": "Transiting planet of HAT-P-15 with a 10.9-day year, found in 2010.",
+      "description": "Transiting planet of Berehynia with a 10.9-day year, found in 2010.",
+      "order": 3115,
       "paper": {
         "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
         "credit": "Stassun et al. 2017"
@@ -15,10 +16,9 @@
       },
       "text": {
         "card": "HAT-P-15 b was found in 2010 by HATNet as it crossed its star.",
-        "introduction": "It is the only planet known around HAT-P-15. Its orbit and size follow Stassun et al. 2017's fit, the archive's default.",
+        "introduction": "It is the only planet known around Berehynia. Its orbit and size follow Stassun et al. 2017's fit, the archive's default.",
         "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname STASSUN_ET_AL__2017): disc_year 2010, disc_facility HATNet, sy_pnum 1; pl_orbper 10.86345165, pl_radj 1.06, pl_bmassj 1.94"
-      },
-      "order": 3115
+      }
     }
   ]
 }

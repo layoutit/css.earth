@@ -4,7 +4,8 @@
     {
       "id": "hats-72b",
       "name": "HATS-72 b",
-      "description": "Transiting planet of HATS-72 with a 7.33-day year, found in 2020.",
+      "description": "Transiting planet of Zembra with a 7.33-day year, found in 2020.",
+      "order": 3138,
       "paper": {
         "url": "https://ui.adsabs.harvard.edu/abs/2020AJ....159..173H/abstract",
         "credit": "Hartman et al. 2020"
@@ -15,10 +16,9 @@
       },
       "text": {
         "card": "HATS-72 b was found in 2020 by HATSouth as it crossed its star.",
-        "introduction": "It is the only planet known around HATS-72. Its orbit and size follow Hartman et al. 2020's fit, the archive's default.",
+        "introduction": "It is the only planet known around Zembra. Its orbit and size follow Hartman et al. 2020's fit, the archive's default.",
         "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname HARTMAN_ET_AL__2020): disc_year 2020, disc_facility HATSouth, sy_pnum 1; pl_orbper 7.3279496, pl_radj 0.7224, pl_bmassj 0.1254"
-      },
-      "order": 3138
+      }
     }
   ]
 }

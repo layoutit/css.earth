@@ -10,7 +10,12 @@ export interface NavigationStyleStage {
 
 /** Install prepared object styles once, before arrival; stage other route styles. */
 export function createNavigationStyles(documentTarget: Document, windowTarget: BrowserWindow) {
-  let current = [...documentTarget.head.querySelectorAll<StyleNode>('style, link[rel="stylesheet"]')];
+  // A fetched page is parsed without script, so the styles inside its `<noscript>` are elements there. They stay out of
+  // this page: after the first visit to another body they ran beside the script (the sheet's `:has()` on the body, the
+  // drag sensor's timeline on every paused mesh; 2026-10-03).
+  const styleNodes = (head: HTMLHeadElement) => [...head.querySelectorAll<StyleNode>('style, link[rel="stylesheet"]')]
+    .filter(element => element.closest('noscript') === null);
+  let current = styleNodes(documentTarget.head);
   const styleKey = (element: StyleNode) => `style:${element.dataset.viteDevId ?? element.textContent}`;
   const key = (element: StyleNode) => element instanceof windowTarget.HTMLLinkElement ? `link:${element.href}` : styleKey(element);
 
@@ -28,7 +33,7 @@ export function createNavigationStyles(documentTarget: Document, windowTarget: B
       signal.addEventListener('abort', dispose, { once: true });
       try {
         signal.throwIfAborted();
-        for (const element of source.head.querySelectorAll<StyleNode>('style, link[rel="stylesheet"]')) {
+        for (const element of styleNodes(source.head)) {
           const href = element instanceof windowTarget.HTMLLinkElement
             ? new URL(element.getAttribute('href') ?? '', baseUrl).href : null;
           const reused = existing.get(href === null ? styleKey(element) : `link:${href}`);

@@ -1,0 +1,53 @@
+{
+  "id": "hunahpu",
+  "name": "Hunahpú",
+  "system": "Hunahpú system",
+  "description": "A star 3.9 solar radii and 1.38 solar masses, about 110 parsecs away, measured by Gaia.",
+  "aliases": [
+    "Gaia DR3 3534621989981179520",
+    "HD 98219",
+    "HIP 55174"
+  ],
+  "featured": true,
+  "target": "HD 98219",
+  "gaia": "3534621989981179520",
+  "paper": {
+    "url": "https://doi.org/10.1051/0004-6361/202243688",
+    "credit": "Creevey et al. (2023), A&A 674, A26 (Gaia DR3 FLAME)"
+  },
+  "radius": "gaia-flame",
+  "mass": "gaia-flame",
+  "temperature": {
+    "value": 4979,
+    "source": "Andrae et al. (2023), A&A 674, A27 (Gaia DR3 GSP-Phot), astrophysical_parameters of Gaia DR3 3534621989981179520: teff_gspphot 4978.5435 K (16th-84th percentiles 4976.1855-4981.9473), the temperature FLAME used",
+    "url": "https://doi.org/10.1051/0004-6361/202243462",
+    "uncertainty": 2.9
+  },
+  "color": {
+    "skip": [
+      "stis-ngsl",
+      "gaia-xp",
+      "pulkovo",
+      "kiehling",
+      "kharitonov",
+      "burnashev"
+    ],
+    "reason": "GSP-Phot fits an extinction A_G = 0.11 mag toward this star (Andrae et al. (2023), A&A 674, A27 (Gaia DR3 GSP-Phot), ag_gspphot), and the color routes do not remove extinction; GSP-Phot measured its temperature"
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A star about 110 parsecs away, 3.9 times the Sun's width, measured by Gaia.",
+    "introduction": "Gaia's parallax, brightness and spectrum give it 3.9 solar radii and 1.38 solar masses (FLAME) and 4,979 K at its surface (GSP-Phot).",
+    "locator": "gaiadr3.astrophysical_parameters, Gaia DR3 3534621989981179520: radius_flame, mass_flame, teff_gspphot",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/HD_98219",
+      "title": "HD 98219",
+      "revision": "1368377530",
+      "card": "HD 98219, also named Hunahpú, is a subgiant star in the constellation Crater.",
+      "introduction": "It has a confirmed exoplanet."
+    }
+  },
+  "notes": [],
+  "order": 5566
+}

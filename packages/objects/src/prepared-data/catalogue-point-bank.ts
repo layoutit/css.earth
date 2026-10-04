@@ -99,8 +99,10 @@ export function* parseCataloguePointSteps(value: unknown, at: string, chunk: num
     // Every palette entry was checked above, so an index names a color or nothing.
     const color: unknown = palette ? palette[point[3]] : colorCss;
     if (typeof color !== 'string') throw new TypeError(`${data.id}: point ${index} names palette color ${point[3]}, which the palette of ${palette!.length} lacks.`);
-    points[index] = Object.freeze({ positionUnits: Object.freeze([point[0], point[1], point[2]]) as unknown as VolumeVector, colorCss: color,
-      radiusPx: paletteRadiusPx ? (paletteRadiusPx as number[])[point[3]]! : radiusPx });
+    // A point and its position are plain values, read-only by type: freezing each of a bank's tens of thousands was
+    // 80,000 freezes in one zoom out of Earth, which Safari pays for one array at a time (2026-10-04).
+    points[index] = { positionUnits: [point[0], point[1], point[2]] as unknown as VolumeVector, colorCss: color,
+      radiusPx: paletteRadiusPx ? (paletteRadiusPx as number[])[point[3]]! : radiusPx };
   }
   if (rows.length > chunk) yield;
   const cells = parseCatalogueCells(data.cells, data.points as number[][], parsedLevels?.map(level => level.points) ?? [points.length], `${data.id} (${at})`);
@@ -110,7 +112,7 @@ export function* parseCataloguePointSteps(value: unknown, at: string, chunk: num
     ...(fullDetailUnits === undefined ? {} : { fullDetailUnits: fullDetailUnits as number }),
     ...(outsidePixelsPerDot === undefined ? {} : { outsidePixelsPerDot }),
     ...(fadeOutUnits === undefined ? {} : { fadeOutUnits: Object.freeze([...fadeOutUnits as number[]]) as unknown as readonly [number, number] }) }),
-    points: Object.freeze(points), spread, cells });
+    points, spread, cells });
 }
 
 function parseLevels(value: unknown, total: number, id: string): readonly CataloguePointLevel[] {

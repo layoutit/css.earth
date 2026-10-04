@@ -1,0 +1,54 @@
+{
+  "id": "magur",
+  "name": "Magur",
+  "system": "Magur system",
+  "description": "A star 149 parsecs away, 39 times the Sun's width, measured from its light.",
+  "aliases": [
+    "HD 168592",
+    "HIP 90037",
+    "HR 6862"
+  ],
+  "featured": true,
+  "target": "HIP 90037",
+  "paper": {
+    "url": "https://doi.org/10.1093/mnras/stx1433",
+    "credit": "McDonald, Zijlstra & Watson (2017), MNRAS 471, 770"
+  },
+  "radius": {
+    "value": 39.341,
+    "source": "McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 90037: radius 39.341 solar radii, implied by the fitted luminosity 371.904 solar luminosities (fractional uncertainty 0.089) and temperature",
+    "url": "https://doi.org/10.1093/mnras/stx1433"
+  },
+  "mass": "unmeasured",
+  "temperature": {
+    "value": 4044,
+    "source": "McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 90037: effective temperature 4044 +/- 125 K, from the fit of a model atmosphere to the star's spectral energy distribution (goodness of fit Q 0.041)",
+    "url": "https://doi.org/10.1093/mnras/stx1433",
+    "uncertainty": 125
+  },
+  "distance": {
+    "value": 148.588,
+    "source": "McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 90037: distance 148.588 pc, the paper's parallax inverted (Gaia DR1's where it revised the star's, else the Hipparcos reduction of van Leeuwen 2007; section 2.3; fractional uncertainty 0.064), at which the luminosity and radius hold",
+    "url": "https://doi.org/10.1093/mnras/stx1433",
+    "uncertainty": 9.51
+  },
+  "limb": {
+    "none": "no mass is measured and no spectroscopic surface gravity is published with this radius: McDonald, Zijlstra & Watson (2017), MNRAS 471, 770 assume the gravity of their fit (table column 15)"
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A star 149 parsecs away, 39 times the Sun's width, measured from its light.",
+    "introduction": "Its brightness, measured band by band, gives 372 times the Sun's luminosity at 4,044 K, so 39.341 solar radii.",
+    "locator": "Table 2, HIP 90037: D, Teff, L, Rad, Q",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/HD_168592",
+      "title": "HD 168592",
+      "revision": "1369721606",
+      "card": "HD 168592, also designated HR 6862 and named Magur, is a solitary star located in the southern constellation Corona Australis.",
+      "introduction": "It is faintly visible to the naked eye as an orange-hued star with an apparent magnitude of 5.07."
+    }
+  },
+  "notes": [],
+  "order": 5607
+}

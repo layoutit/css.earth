@@ -64,7 +64,7 @@ jobs:
       - name: Generate the object registry
         # `site/build/prepare/prepare-catalog.mts` reaches `site/build/prepare/prepare-object-discovery.mts`, which imports the built
         # `@cssearth/renderer/navigation`; `build:astronomy` alone never produces it, so the catalog step died with
-        # ERR_MODULE_NOT_FOUND. `build:packages` is the step of `build:tools` that produces it (the renderer is one of the
+        # ERR_MODULE_NOT_FOUND. `build:packages` is the step of `build:preparation` that produces it (the renderer is one of the
         # packages), without the preparation bundles this job never reads.
         run: pnpm build:packages && pnpm prepare:catalog
       - name: Check every inventoried key is published
@@ -89,7 +89,7 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile --ignore-scripts
       - name: Build shared packages and affected entry points
-        run: pnpm build:tools
+        run: pnpm build:preparation
       - name: Restore only compiler inputs and generate real shell data
         run: pnpm prepare:typecheck
       - name: Typecheck test, fixture and capture files

@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "lucilinburhuc",
+  "card": {
+    "text": "A star about 47 parsecs away, 1.3 times the Sun's width, measured by Gaia.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202243688",
+        "url": "https://doi.org/10.1051/0004-6361/202243688",
+        "label": "Creevey et al. (2023), Astronomy & Astrophysics 674 A26",
+        "checked": "2026-10-03",
+        "locator": "gaiadr3.astrophysical_parameters, Gaia DR3 955758320761687680: radius_flame, mass_flame, teff_gspphot"
+      },
+      {
+        "catalogueId": "wikipedia-hd-45350",
+        "url": "https://en.wikipedia.org/wiki/HD_45350",
+        "label": "Wikipedia, \"HD 45350\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1370778821",
+        "quote": "HD 45350 is a solar analog star with an exoplanetary companion in the northern constellation of Auriga."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Gaia's parallax, brightness and spectrum give it 1.3 solar radii and 0.92 solar masses (FLAME) and 5,502 K at its surface (GSP-Phot).",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202243688",
+        "url": "https://doi.org/10.1051/0004-6361/202243688",
+        "label": "Creevey et al. (2023), Astronomy & Astrophysics 674 A26",
+        "checked": "2026-10-03",
+        "locator": "gaiadr3.astrophysical_parameters, Gaia DR3 955758320761687680: radius_flame, mass_flame, teff_gspphot"
+      },
+      {
+        "catalogueId": "wikipedia-hd-45350",
+        "url": "https://en.wikipedia.org/wiki/HD_45350",
+        "label": "Wikipedia, \"HD 45350\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1370778821",
+        "quote": "It has an apparent visual magnitude of 7.89, which means it is an 8th magnitude star that is too dim to be readily visible to the naked eye."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its temperature",
+      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

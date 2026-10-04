@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "baekdu",
+  "card": {
+    "text": "A star about 160 parsecs away, 10 times the Sun's width, measured by Gaia.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202243688",
+        "url": "https://doi.org/10.1051/0004-6361/202243688",
+        "label": "Creevey et al. (2023), Astronomy & Astrophysics 674 A26",
+        "checked": "2026-10-03",
+        "locator": "gaiadr3.astrophysical_parameters, Gaia DR3 1700658653802527104: radius_flame, mass_flame, teff_gspphot"
+      },
+      {
+        "catalogueId": "wikipedia-8-ursae-minoris",
+        "url": "https://en.wikipedia.org/wiki/8_Ursae_Minoris",
+        "label": "Wikipedia, \"8 Ursae Minoris\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374592183",
+        "quote": "8 Ursae Minoris is a 7th-magnitude red clump star in Ursa Minor."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Gaia's parallax, brightness and spectrum give it 10.5 solar radii and 3.00 solar masses (FLAME) and 4,860 K at its surface (GSP-Phot).",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202243688",
+        "url": "https://doi.org/10.1051/0004-6361/202243688",
+        "label": "Creevey et al. (2023), Astronomy & Astrophysics 674 A26",
+        "checked": "2026-10-03",
+        "locator": "gaiadr3.astrophysical_parameters, Gaia DR3 1700658653802527104: radius_flame, mass_flame, teff_gspphot"
+      },
+      {
+        "catalogueId": "wikipedia-8-ursae-minoris",
+        "url": "https://en.wikipedia.org/wiki/8_Ursae_Minoris",
+        "label": "Wikipedia, \"8 Ursae Minoris\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374592183",
+        "quote": "The star is unusually rich in lithium, with an abundance of A = 2.0±0.2 dex."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its temperature",
+      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

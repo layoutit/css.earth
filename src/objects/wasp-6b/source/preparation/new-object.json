@@ -4,7 +4,8 @@
     {
       "id": "wasp-6b",
       "name": "WASP-6 b",
-      "description": "Transiting planet of WASP-6 with a 3.36-day year, found in 2009.",
+      "description": "Transiting planet of Márohu with a 3.36-day year, found in 2009.",
+      "order": 4827,
       "paper": {
         "url": "https://ui.adsabs.harvard.edu/abs/2023ApJ...944L..56M/abstract",
         "credit": "McGruder et al. 2023"
@@ -15,7 +16,7 @@
       },
       "text": {
         "card": "WASP-6 b was found in 2009 by SuperWASP as it crossed its star.",
-        "introduction": "It is the only planet known around WASP-6. Its orbit and size follow McGruder et al. 2023's fit, the archive's default.",
+        "introduction": "It is the only planet known around Márohu. Its orbit and size follow McGruder et al. 2023's fit, the archive's default.",
         "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname MCGRUDER_ET_AL__2023): disc_year 2009, disc_facility SuperWASP, sy_pnum 1; pl_orbper 3.36100237, pl_radj 1.119, pl_bmassj 0.467",
         "quotes": {
           "url": "https://en.wikipedia.org/wiki/WASP-6b",
@@ -33,8 +34,7 @@
         "source": "Kammer et al. 2015, dayside brightness temperature at 3.6 µm (NASA Exoplanet Archive emission table)",
         "url": "https://ui.adsabs.harvard.edu/abs/2015ApJ...810..118K/abstract",
         "chosen": "2 measured of 2 rows; the smallest relative uncertainty, then the longest wavelength"
-      },
-      "order": 4827
+      }
     }
   ]
 }

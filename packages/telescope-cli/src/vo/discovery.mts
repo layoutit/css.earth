@@ -1,10 +1,13 @@
+import { parseSnapshot } from '@cssearth/objects';
+import { VO_DISCOVERY_SCHEMA } from '@cssearth/objects';
 import { mkdir, stat, writeFile } from 'node:fs/promises';
 import { basename, resolve } from 'node:path';
 import { astroquery } from '@cssearth/telescope/node';
 import { mastService, type MastServiceRequest, type MastServiceResult } from '@cssearth/telescope/node';
 import type { ProductKind } from '../recipe-request.mts';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { canonical, jsonValue, parseMetadata, parsePin, parseRegion, recordKey, type DiscoverySnapshot, type IcrsCircle, type Json, type TransferLimits } from '@cssearth/telescope/node';
+import { recordKey, type TransferLimits } from '@cssearth/telescope/node';
+import { canonical, jsonValue, parseMetadata, parsePin, parseRegion, type DiscoverySnapshot, type IcrsCircle, type Json } from '@cssearth/objects';
 import { mapIvoaProductType, type ProductTypeMapping } from '../product-type.mts';
 import type { FamilyId } from '../product-descriptor.mts';
 import { productTypeFamilyEvidence, type ObservationFamilyEvidence } from '../observation-families.mts';
@@ -33,10 +36,10 @@ export interface DiscoveryRequest {
   readonly family?:FamilyId;
   /** Archive instrument name (ObsCore and EPN-TAP `instrument_name`), matched exactly by the service. */
   readonly instrument?: string;
-  readonly region?: import('@cssearth/telescope/node').IcrsCircle;
+  readonly region?: import('@cssearth/objects').IcrsCircle;
   /** A circle to search by footprint only, never a cutout (`region` is the cutout). A SIMBAD target supplies SIMBAD's
    * position and position error here. */
-  readonly footprint?: import('@cssearth/telescope/node').IcrsCircle;
+  readonly footprint?: import('@cssearth/objects').IcrsCircle;
   /** A target outside the application catalogue, named and placed by SIMBAD (`@cssearth/telescope/node`). */
   readonly skyTarget?: import('@cssearth/telescope/node').SkyTarget;
   readonly spectralFrame?: 'barycentric';
@@ -234,32 +237,6 @@ export function targetQuery(profile: ServiceProfile, names: readonly string[], s
   if (!profile.identityColumns.length || !profile.identityColumns.every(column => /^[A-Za-z_][A-Za-z0-9_]*$/u.test(column))) throw new TypeError('Unvalidated TAP identity columns.');
   return `SELECT TOP ${sampleLimit} * FROM ${profile.table} WHERE ${filters.join(' AND ')} ORDER BY ${profile.identityColumns.join(', ')}`;
 }
-export function parseSnapshot(value: unknown): DiscoverySnapshot {
-  const r = requireRecord(value);
-  if (r.schema !== 'cssearth-vo-discovery@1' || !['obscore-1.1','epn-tap-2.0'].includes(requireString(r.model))) throw new TypeError('Unsupported VO snapshot.');
-  const response = parseMetadata(r.response), sampleLimit = requireFiniteNumber(r.sampleLimit), query = requireString(r.query), request = jsonValue(r.request);
-  if (!Number.isSafeInteger(sampleLimit) || sampleLimit < 1) throw new TypeError('Invalid VO sample limit.');
-  let spatialSelection: DiscoverySnapshot['spatialSelection'];
-  if (r.spatialSelection !== undefined) {
-    const raw = requireRecord(r.spatialSelection, 'MAST spatial selection');
-    if (raw.method !== 'mast-filtered-position@1' || typeof raw.complete !== 'boolean') throw new TypeError('Unsupported MAST spatial selection.');
-    const ids = requireArray(raw.ids, 'MAST spatial ids').map(value => requireString(value, 'MAST spatial id'));
-    if (ids.length > sampleLimit || new Set(ids).size !== ids.length || ids.some(id=>!id.trim()||/[\u0000-\u001f]/u.test(id))) throw new TypeError('Invalid bounded MAST spatial ids.');
-    spatialSelection = { method: 'mast-filtered-position@1', region: parseRegion(raw.region), collection: requireString(raw.collection),
-      ids, complete: raw.complete, pin: parsePin(raw.pin) };
-    const savedRequest = requireRecord(request, 'spatial discovery request');
-    const region = parseRegion(savedRequest.region ?? savedRequest.footprint);
-    const clause = `obs_id IN (${ids.map(id=>`'${id.replaceAll("'", "''")}'`).join(',')})`;
-    if (r.model !== 'obscore-1.1' || canonical(region) !== canonical(spatialSelection.region) ||
-      (ids.length > 0 && !query.includes(clause)))
-      throw new TypeError('MAST positional selection disagrees with its bounded query.');
-  }
-  const completeness = response.queryStatus === 'ERROR' ? 'failed' : response.queryStatus === 'OVERFLOW' || spatialSelection?.complete === false ? 'overflow' : 'bounded-sample';
-  if (r.completeness !== completeness) throw new TypeError('VO completeness contradicts response status.');
-  return { schema: 'cssearth-vo-discovery@1', service: requireString(r.service), table: requireString(r.table), model: r.model as DiscoverySnapshot['model'],
-    request, query, scope: requireString(r.scope), sampleLimit, response,
-    ...(spatialSelection ? { spatialSelection } : {}), completeness };
-}
 /** A failed refresh never replaces a successful immutable snapshot. */
 export const INSTRUMENT_FACET_LIMIT = 8;
 export const INSTRUMENT_SAMPLE_LIMIT = 5;
@@ -295,7 +272,7 @@ export async function discover(root: string, profile: ServiceProfile, request: D
   const spatialScope = spatialSelection
     ? `records selected by MAST's positional service for the requested ICRS circle (${spatialSelection.ids.length} ids; ${spatialSelection.complete ? 'bounded page' : 'more pages exist'}; positional membership is not target identity)`
     : 'records whose footprint intersects the requested ICRS circle (in the field, not identified as the target)';
-  const snapshot = parseSnapshot({ schema: 'cssearth-vo-discovery@1', service: profile.service, table: profile.table, model: profile.model,
+  const snapshot = parseSnapshot({ schema: VO_DISCOVERY_SCHEMA, service: profile.service, table: profile.table, model: profile.model,
     request, query, sampleLimit, scope: `${circle && profile.model === 'obscore-1.1' ? `Exact target-name/alias search, plus ${spatialScope}` : 'Exact target-name/alias search'}; bounded sample; incidental targets are not covered.${circle && profile.model !== 'obscore-1.1' ? ' This provider has no ICRS footprint; the region was not applied.' : ''}${request.wavelengthMicrometres && profile.model !== 'obscore-1.1' ? ' This provider did not apply the wavelength filter.' : ''}${request.time && !('any' in request.time) && (profile.model !== 'obscore-1.1' || profile.timeScale !== 'utc') ? ' This provider did not apply the time filter.' : ''}`, response,
     ...(spatialSelection ? { spatialSelection } : {}),
     completeness: response.queryStatus === 'ERROR' ? 'failed' : response.queryStatus === 'OVERFLOW' || spatialSelection?.complete === false ? 'overflow' : 'bounded-sample' });

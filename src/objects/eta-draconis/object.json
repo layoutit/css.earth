@@ -6,7 +6,7 @@
   "properties": {
     "preparation": {
       "schema": "cssearth-object-preparation@1",
-      "label": "Eta Draconis",
+      "label": "Athebyne",
       "steps": [
         "verify-sources",
         "assets",
@@ -95,14 +95,15 @@
       }
     },
     "catalog": {
-      "name": "Eta Draconis",
+      "name": "Athebyne",
       "classification": "star",
       "color": "#ffe9cd",
       "distanceAu": 5823441.1,
       "description": "A giant of type G8 III, 28 parsecs away: 10.5 times the Sun's width and 66 times its light.",
-      "systemName": "Eta Draconis system",
+      "systemName": "Athebyne system",
       "aliases": [
-        "HD 148387"
+        "HD 148387",
+        "Eta Draconis"
       ],
       "order": 5468,
       "context": {

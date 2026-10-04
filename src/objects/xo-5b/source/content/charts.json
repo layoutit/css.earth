@@ -1,0 +1,45 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/xo-5b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "xo-5b-orbits",
+      "title": "XO-5 b: orbits around Absolutno",
+      "output": "xo-5b-system-orbits.svg",
+      "system": "xo-5",
+      "highlight": "xo-5b",
+      "description": "The orbits of Absolutno's planets in this map from above, to scale, with XO-5 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Kokori et al. 2023 (2023ApJS..265....4K), via the NASA Exoplanet Archive ps table (pl_refname KOKORI_ET_AL__2023): P 4.18775631 d"
+      }
+    },
+    {
+      "kind": "folded-transit",
+      "id": "xo-5b-transit",
+      "title": "XO-5 b: its transit",
+      "description": "XO-5 b crossing its star, as TESS recorded it: 2 sectors (47, 60) of the SPOC pipeline's 2-minute light curves of TIC 9155187, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 12-minute bins. Error bars are each bin's standard error.",
+      "output": "xo-5b-transit.svg",
+      "metadata": {
+        "tic": "TIC 9155187",
+        "sectors": [
+          47,
+          60
+        ],
+        "pipeline": "TESS SPOC, PDCSAP flux, quality 0"
+      },
+      "planet": "xo-5b",
+      "sources": [
+        "photometry/tess/tess2021364111932-s0047-0000000009155187-0218-s_lc.fits",
+        "photometry/tess/tess2022357055054-s0060-0000000009155187-0249-s_lc.fits"
+      ],
+      "durationHours": 3.1176,
+      "binMinutes": 12,
+      "notes": [
+        "TESS 2-min SPOC · sectors 47, 60",
+        "Folded on the app's orbit; 12-min bins.",
+        "Bars: standard error of each bin."
+      ]
+    }
+  ]
+}

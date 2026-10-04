@@ -1,0 +1,149 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "tarf",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Tarf",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 33723361.8
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/tarf-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Tarf",
+      "classification": "star",
+      "color": "#ffcd8c",
+      "distanceAu": 19187422.7,
+      "description": "A star 93 parsecs away, 48 times the Sun's width, measured from its light.",
+      "systemName": "Tarf system",
+      "aliases": [
+        "Altarf",
+        "HD 69267",
+        "HIP 40526",
+        "HR 3249",
+        "Beta Cancri"
+      ],
+      "order": 5715,
+      "context": {
+        "order": 5712
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -1589788990789661400,
+        2345594936085115400,
+        458189520586772900
+      ],
+      "presentationToReference": [
+        -0.5538564910437805,
+        -0.08955991008657996,
+        0.8277813780425085,
+        0.8171669248178971,
+        0.13213715154247035,
+        0.561050791075018,
+        0.15962833179712102,
+        -0.9871771855586645,
+        -3.772225850036387e-7
+      ],
+      "orbitUpReference": [
+        0.08955991008657996,
+        -0.13213715154247035,
+        0.9871771855586645
+      ],
+      "metersPerUnit": 108785038.06451611,
+      "bodyRadiusM": 33723361799.999996
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

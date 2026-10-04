@@ -1,0 +1,148 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "paradys",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Paradys",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 38749098.6
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/paradys-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Paradys",
+      "classification": "star",
+      "color": "#ffd297",
+      "distanceAu": 28255390.5,
+      "description": "A star 137 parsecs away, 56 times the Sun's width, measured from its light.",
+      "systemName": "Paradys system",
+      "aliases": [
+        "Alpha Apodis",
+        "HD 129078",
+        "HIP 72370",
+        "HR 5470"
+      ],
+      "order": 5656,
+      "context": {
+        "order": 5653
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -597286117286655100,
+        -537143489127447300,
+        -4149915762413308400
+      ],
+      "presentationToReference": [
+        -0.14130501847161503,
+        0.7299991116635401,
+        -0.6686809319288076,
+        -0.12707656926431424,
+        0.656495037505432,
+        0.7435494679406027,
+        -0.9817761645603077,
+        -0.19004095006388375,
+        2.6072502893630545e-7
+      ],
+      "orbitUpReference": [
+        -0.7299991116635401,
+        -0.656495037505432,
+        0.19004095006388375
+      ],
+      "metersPerUnit": 124997092.25806452,
+      "bodyRadiusM": 38749098600
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

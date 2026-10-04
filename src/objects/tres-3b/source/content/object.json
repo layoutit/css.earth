@@ -1,0 +1,124 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "tres-3b",
+  "displayName": "TrES-3 b",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "1.3 Jupiter radii",
+        "source": {
+          "catalogueId": "doi-10-1088-0004-637x-691-2-1145",
+          "url": "https://ui.adsabs.harvard.edu/abs/2009ApJ...691.1145S",
+          "label": "Sozzetti et al. 2009",
+          "checked": "2026-10-03",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "31 hours",
+        "source": {
+          "catalogueId": "doi-10-1088-0004-637x-691-2-1145",
+          "url": "https://ui.adsabs.harvard.edu/abs/2009ApJ...691.1145S",
+          "label": "Sozzetti et al. 2009",
+          "checked": "2026-10-03",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "1.9 Jupiter masses",
+        "source": {
+          "catalogueId": "doi-10-1088-0004-637x-691-2-1145",
+          "url": "https://ui.adsabs.harvard.edu/abs/2009ApJ...691.1145S",
+          "label": "Sozzetti et al. 2009",
+          "checked": "2026-10-03",
+          "path": "source/measurements.json",
+          "locator": "massSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "thermal",
+    "controls": [
+      {
+        "id": "thermal",
+        "label": "Thermal glow",
+        "qualification": "Black-body color at its measured dayside temperature, 1,731 K. The disc itself is unresolved.",
+        "thumbnail": "tres-3b-dataset-thermal.webp",
+        "surface": "tres-3b-surface-thermal@2x.webp",
+        "poles": "tres-3b-poles-thermal@2x.webp",
+        "source": {
+          "id": "tres-3b-thermal-color",
+          "path": "../manifest.json",
+          "url": "https://ui.adsabs.harvard.edu/abs/2010ApJ...718..920C/abstract"
+        },
+        "falseColor": false,
+        "notes": "The color of TrES-3 b's heat: a black body at the dayside brightness temperature measured in secondary eclipse at 2.146 µm (3.58m Canada-France-Hawaii Telescope (CFHT) at Mauna Kea Observatory Wide-field Infrared Camera (WIRCam)). Its star lights the day side; the night side is not measured. Reflected starlight is not included."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [
+    {
+      "id": "tres-3b-orbits",
+      "titleKey": "systemOrbits",
+      "src": "/scenes/tres-3b/tres-3b-system-orbits.svg",
+      "alt": "The orbits of Pipoltr's planets in this map from above, to scale, with TrES-3 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "source": {
+        "id": "tres-3b-observational-measurements",
+        "path": "../manifest.json",
+        "url": "https://ui.adsabs.harvard.edu/abs/2009ApJ...691.1145S"
+      }
+    },
+    {
+      "id": "tres-3b-transit",
+      "titleKey": "transitLightCurve",
+      "src": "/scenes/tres-3b/tres-3b-transit.svg",
+      "alt": "TrES-3 b crossing its star, as TESS recorded it: 3 sectors (53, 79, 80) of the SPOC pipeline's 2-minute light curves of TIC 116264089, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 6-minute bins. Error bars are each bin's standard error.",
+      "source": {
+        "id": "tres-3b-tess-sector-53",
+        "path": "../manifest.json",
+        "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2022164095748-s0053-0000000116264089-0226-s_lc.fits"
+      }
+    }
+  ],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Sozzetti et al. 2009",
+      "href": "https://ui.adsabs.harvard.edu/abs/2009ApJ...691.1145S/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2009ApJ...691.1145S/abstract",
+      "credit": "Sozzetti et al. 2009"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/tres-3b.json",
+      "credit": "Radius from Sozzetti et al. 2009 (2009ApJ...691.1145S), via the NASA Exoplanet Archive; mass from Sozzetti et al. 2009, the mass the NASA Exoplanet Archive's composite table adopts (2009ApJ...691.1145S), via the NASA Exoplanet Archive; orbit from Sozzetti et al. 2009 (2009ApJ...691.1145S), via the NASA Exoplanet Archive"
+    }
+  }
+}

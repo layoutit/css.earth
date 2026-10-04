@@ -9,13 +9,8 @@ export interface SurfacePatch {
   surfaceSourceRect?: RasterRectangle; color: string;
   latitudeIndex: number; longitudeIndex?: number; pole?: Pole; inner?: boolean;
 }
-export interface SurfaceGeometryProfile {
-  radius: number; polarRadius: number; latitudeSegments: number; longitudeSegments: number;
-  surface: RasterReference; surfaceLatitudeHeight: number; packedBandGutter: number;
-  poles: RasterReference; polarTileSize: number; polarRadiusScale: number; polarOffset: number;
-  innerPoles?: { radiusScale: number; offset: number };
-  uv: 'global' | 'cell'; color: string; closeSeamAtZero?: boolean;
-}
+export type { SurfaceGeometryProfile } from '@cssearth/objects';
+import type { SurfaceGeometryProfile } from '@cssearth/objects';
 
 /** Numeric ellipsoid patches and source rectangles, independent of any renderer. */
 export function ellipsoidPoint(radius: number, polarRadius: number, latitude: number, longitude: number): Point3 {

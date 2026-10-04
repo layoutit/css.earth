@@ -1,8 +1,7 @@
 import { writeStyle } from '../rendering/retained-write.js';
 import { eyeDistanceM } from '@cssearth/engine';
-import { parseCataloguePointSteps, type CataloguePointLevel, decodeCatalogueBankBinary, type CataloguePointSpread, type VolumeVector } from '@cssearth/objects';
+import { parseCataloguePointSteps, type CataloguePointLevel, type CataloguePointSpread, type VolumeVector } from '@cssearth/objects';
 
-import { readPreparedBinary } from '../prepared-data/prepared-binary.js';
 
 import type { VolumeCameraPublication } from '../volume/types.js';
 
@@ -24,19 +23,6 @@ const FULL_DETAIL_DISTANCE_M = 10e3 * 3.0856775814913673e16;
 /** A bank fades out as its whole extent shrinks from 48 to 16 screen pixels: past that its dots pile onto a few pixels
  * (the stars within 100 pc, seen from across the galaxy) and still cost a projection every frame. */
 const EXTENT_FADE_PIXELS = [16, 48] as const;
-/** A prepared bank's JSON, refusing an unsuccessful answer. */
-export async function fetchPreparedJson(target: string): Promise<unknown> {
-  const response = await fetch(target);
-  if (!response.ok) throw new Error(`${target} answered ${response.status}.`);
-  return response.json() as Promise<unknown>;
-}
-/** A published catalogue point bank (`<id>.bin`): packed, gunzipped by the platform and decoded to the object its JSON
- * was (@cssearth/objects prepared-data/catalogue-bank-binary.ts), refusing an unsuccessful answer. */
-export async function fetchPreparedCatalogueBank(target: string, fetcher: typeof fetch = fetch): Promise<unknown> {
-  const response = await fetcher(target);
-  if (!response.ok) throw new Error(`${target} answered ${response.status}.`);
-  return decodeCatalogueBankBinary(await readPreparedBinary(await response.arrayBuffer(), target), target);
-}
 /** The points of a loading bank one unit of the document's pacer covers (settle-pacer.ts: 16 units a frame to start
  * with, up to 64, halved after a slow frame). On the iPad the nearby galaxies' 39,916 points took 33 ms to read, 20 to
  * style and 15 to resolve, in 17 slices: under two microseconds a point over the three passes, so a unit is about a
@@ -89,7 +75,7 @@ const toLocalAxes = ([x, y, z, w]: readonly number[], [vx, vy, vz]: readonly num
 /**
  * A published catalogue drawn as fixed dust: every point the same small dot, whatever the distance, so a population's
  * shape shows without any star claiming a size. Fetched on the first publication that shows it. Its root is a group in
- * the dot layer that ends where it mounts (point-layer.ts): banks mounted next to each other are one layer, and the
+ * its host's one dot layer (point-layer.ts): every bank of a host paints into the same layer, and the
  * root's stroke opacity dims this bank alone.
  */
 export function mountCataloguePoints({ host, before, url, loadBank, occluder }: {

@@ -14,13 +14,13 @@
     },
     {
       "id": "volume",
-      "subject": "A volume of the Little Dumbbell Nebula",
+      "subject": "The shape of the Little Dumbbell Nebula",
       "status": "deferred",
-      "finding": "The picture is flat. The Nebula Lab could spread its light in depth where a paper publishes the nebula's three-dimensional shape; that fit has not been made here.",
+      "finding": "The picture is flat. Depth needs the nebula's shape as a paper gives it, which is how the Ring and the Owl took theirs. A search of arXiv on 2026-10-03 found no paper that prints the Little Dumbbell's three-dimensional shape; the kinematic studies of its ring and lobes (Bryce et al. 1996) predate arXiv and were not read.",
       "evidence": [
-        "https://esahubble.org/images/heic2408a/"
+        "https://arxiv.org/abs/1308.2477"
       ],
-      "revisitWhen": "A published three-dimensional model of the nebula is read and a Nebula Lab recipe is written from it."
+      "revisitWhen": "A kinematic paper with the ring's tilt and the lobes' size is read."
     },
     {
       "id": "star-removal",

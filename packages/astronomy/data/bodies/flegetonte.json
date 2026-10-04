@@ -1,0 +1,30 @@
+{
+ "id": "flegetonte",
+ "classification": "star",
+ "order": 5543,
+ "physical": {
+  "name": "Flegetonte",
+  "horizonsCode": null,
+  "meanRadiusKm": 588694.5,
+  "gravitationalParameterKm3PerS2": 111057903819.60217,
+  "parent": null,
+  "effectiveTemperatureK": 5209
+ },
+ "physicalNotes": "Radius 0.846 (0.829 to 0.864) from Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26; astrophysical_parameters of the same source): 588,694 km at 695,700 km per solar radius. Mass 0.837 (0.797 to 0.877) from Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26; astrophysical_parameters of the same source); GM is that mass times the JPL solar GM. Temperature 5209 +/- 3 K from Andrae et al. (2023), A&A 674, A27 (Gaia DR3 GSP-Phot), astrophysical_parameters of Gaia DR3 3799626935341796096: teff_gspphot 5208.892 K (16th-84th percentiles 5205.1763-5211.172), the temperature FLAME used (https://doi.org/10.1051/0004-6361/202243462). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 176.4253800850321,
+  "declinationDegrees": 2.8209755114352486,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 29.357035074536363,
+  "properMotionRaMasPerYear": -188.8149070504868,
+  "properMotionDecMasPerYear": -113.26865602202437,
+  "radialVelocityKmPerS": 1.8903584,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 3799626935341796096 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/flegetonte/source/photometry/gaia-dr3-source.csv; cross-identification HD 102195, HIP 57370: https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia+DR3+3799626935341796096",
+   "distance": "Gaia DR3 parallax 34.0634 +/- 0.0215 mas (same row, RUWE 0.96): 29.36 pc, no zero-point correction",
+   "properMotion": "Gaia DR3 (same row): -188.815, -113.269 mas/yr",
+   "radialVelocity": "Gaia DR3 (same row): 1.89 +/- 0.13 km/s"
+  }
+ }
+}

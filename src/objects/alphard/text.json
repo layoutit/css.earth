@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "alphard",
+  "card": {
+    "text": "A star 55 parsecs away, 53 times the Sun's width, measured from its light.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 46390: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-alphard",
+        "url": "https://en.wikipedia.org/wiki/Alphard",
+        "label": "Wikipedia, \"Alphard\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374616122",
+        "quote": "It has the Bayer designation Alpha Hydrae, which is that is Latinized from α Hydrae, and abbreviated Alpha Hya or α Hya."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its brightness, measured band by band, gives 780 times the Sun's luminosity at 4,209 K, so 52.599 solar radii.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 46390: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-alphard",
+        "url": "https://en.wikipedia.org/wiki/Alphard",
+        "label": "Wikipedia, \"Alphard\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374616122",
+        "quote": "It is a giant star, cooler than the Sun but larger and more luminous."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its spectrum",
+      "summary": "The color of the star's light."
+    }
+  }
+}

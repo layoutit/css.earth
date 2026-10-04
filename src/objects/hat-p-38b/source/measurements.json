@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "hat-p-38b",
+  "radiusKm": 58980.9,
+  "radiusSource": "Radius 0.825 Jupiter radii from Sato et al. 2012 (2012PASJ...64...97S), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2012PASJ...64...97S/abstract): 58,980.9 km at 71,492 km per Jupiter radius. GM from the mass 0.267 Jupiter masses (Sato et al. 2012, the mass the NASA Exoplanet Archive's composite table adopts (2012PASJ...64...97S), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2012PASJ...64...97S/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 4.64032787,
+  "orbitalPeriodSource": "Kokori et al. 2023 (2023ApJS..265....4K), via the NASA Exoplanet Archive ps table (pl_refname KOKORI_ET_AL__2023): P 4.64032787 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, color, map or oblateness of HAT-P-38 b is measured; only its size, mass and orbit are."
+  },
+  "massSource": "0.267 Jupiter masses: Sato et al. 2012, the mass the NASA Exoplanet Archive's composite table adopts (2012PASJ...64...97S), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2012PASJ...64...97S/abstract)."
+}

@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "helvetios",
+  "angularDiameterMas": 0.73,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 847,269 km at 15.53 pc = 0.73 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 15.526799738100777,
+  "distanceSource": "Gaia DR3 parallax 64.4048 +/- 0.0771 mas (same row, RUWE 1.06): 15.53 pc, no zero-point correction",
+  "radiusKm": 847269.1,
+  "radiusSource": "Radius 1.218 (1.193 to 1.242) from Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26; astrophysical_parameters of the same source): 847,269 km at 695,700 km per solar radius. Mass 0.942 (0.902 to 0.982) from Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26; astrophysical_parameters of the same source); GM is that mass times the JPL solar GM. Temperature 5663 +/- 1.3 K from Andrae et al. (2023), A&A 674, A27 (Gaia DR3 GSP-Phot), astrophysical_parameters of Gaia DR3 2835207319109249920: teff_gspphot 5662.524 K (16th-84th percentiles 5661.2275-5663.87), the temperature FLAME used (https://doi.org/10.1051/0004-6361/202243462). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 5663,
+  "effectiveTemperatureSource": "Andrae et al. (2023), A&A 674, A27 (Gaia DR3 GSP-Phot), astrophysical_parameters of Gaia DR3 2835207319109249920: teff_gspphot 5662.524 K (16th-84th percentiles 5661.2275-5663.87), the temperature FLAME used (https://doi.org/10.1051/0004-6361/202243462)",
+  "surfaceGravityLogg": 4.24,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/helvetios.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.241, rounded to two decimals",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

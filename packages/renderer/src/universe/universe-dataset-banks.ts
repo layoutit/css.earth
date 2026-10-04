@@ -9,7 +9,8 @@ import { createPreparedVolumeDatasets } from '../volume/prepared-volume-datasets
 import { projectedVolumeOpacity, projectVolumeSphere, volumeFramingRadiusUnits } from '../volume/projected-volume-visibility.js';
 
 import { mountDatasetBillboards } from './dataset-billboards.js';
-import { fetchPreparedCatalogueBank, mountCataloguePoints } from './catalogue-points.js';
+import { mountCataloguePoints } from './catalogue-points.js';
+import { fetchPreparedCatalogueBank } from './catalogue-point-transport.js';
 import type { PreparedUniverseOptions } from './prepared-universe-types.js';
 
 type DatasetMount = ReturnType<ReturnType<typeof createPreparedVolumeDatasets>['mount']>;
@@ -36,17 +37,17 @@ interface DatasetBank {
 
 /** One stable record owns each declared bank through load, publication and eviction. */
 export function createUniverseDatasetBanks({ root, end, frontRoot, frontEnd, lifetime, declarations, facts, frame, visibility,
-  billboards: preparedBillboards, load, warmDomNodeBudget, requestPublication, prepareBillboardAtlas }: {
+  billboards: preparedBillboards, load, warmDomNodeBudget, requestPublication, prepareBillboardImage }: {
   root: HTMLElement; end: Element; frontRoot: HTMLElement; frontEnd: Element; lifetime: SceneLifetime;
   declarations: readonly { id: string; frame: DensityVolumeFrame }[];
   facts: readonly DatasetBankBillboard[];
   frame: { referenceFrame: string; epochJdTt: number };
   visibility: PreparedPointVisibility;
-  billboards?: { plan: DatasetBillboards; atlasUrl: string };
+  billboards?: { plan: DatasetBillboards; imageUrl: (id: string) => string };
   load: PreparedUniverseOptions['loadVolumeDataset'];
   warmDomNodeBudget: number;
   requestPublication?: () => boolean;
-  prepareBillboardAtlas: () => boolean;
+  prepareBillboardImage: (url: string) => boolean;
 }) {
   let billboardCount = 0, useClock = 0, coasting = false;
   const record = (declared: { id: string; frame: DensityVolumeFrame }, bankFacts: DatasetBankBillboard): DatasetBank => ({
@@ -73,8 +74,8 @@ export function createUniverseDatasetBanks({ root, end, frontRoot, frontEnd, lif
   for (const bank of banks) release(bank);
   const billboardEntry = (bank: DatasetBank) => ({ id: bank.id, frame: bank.framing.frame, billboard: bank.facts.billboard! });
   const mountBillboards = (entries: ReturnType<typeof billboardEntry>[]) => {
-    const mounted = mountDatasetBillboards({ host: root, before: end, atlasUrl: preparedBillboards!.atlasUrl,
-      atlas: preparedBillboards!.plan.atlas, entries, prepareAtlas: prepareBillboardAtlas });
+    const mounted = mountDatasetBillboards({ host: root, before: end, imageUrl: preparedBillboards!.imageUrl,
+      imagePx: preparedBillboards!.plan.imagePx, entries, prepareImage: prepareBillboardImage });
     lifetime.onDispose(() => mounted.destroy());
     return mounted;
   };

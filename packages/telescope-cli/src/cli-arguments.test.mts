@@ -54,10 +54,16 @@ test('selectors deliberately preserve lexical versus Number coercion policies', 
   for (const raw of ['0','-1','9007199254740992','NaN']) assert.throws(() => parseCli(['fetch','input','--pick',raw,'--out','out']));
   assert.throws(() => parseCli(['wwt-fits','input','--pick','9007199254740992','--level','0','--x','0','--y','0','--out','out']), { message:'--pick must be a nonnegative whole number.' });
   assert.throws(() => parseCli(['export','input','--output','image','--hdu','9007199254740992','--out','out']), { message:'Selectors must be nonnegative whole numbers' });
-  // Unlike selectors, orbit draws are only lexical: unsafe integers remain accepted.
-  const draws = parseCli(['candidates','star','--epoch','date','--out','out','--orbit-draws','9007199254740992']);
-  assert.equal(draws.command, 'candidates');
-  if (draws.command === 'candidates') assert.equal(draws.orbitDraws,9007199254740992);
+  for (const raw of ['9007199254740992', '9'.repeat(400)]) {
+    assert.throws(() => parseCli(['candidates','star','--epoch','date','--out','out','--orbit-draws',raw]),
+      { message: '--orbit-draws takes a whole number of posterior draws' });
+    assert.throws(() => parseCli(['associate','input','--system','star','--out','out','--orbit-draws',raw]));
+  }
+  for (const raw of ['0', '01', '9007199254740991']) {
+    const draws = parseCli(['candidates','star','--epoch','date','--out','out','--orbit-draws',raw]);
+    assert.equal(draws.command, 'candidates');
+    if (draws.command === 'candidates') assert.equal(draws.orbitDraws, Number(raw));
+  }
 });
 
 test('value tokens with one hyphen are accepted; errors keep their original precedence', () => {

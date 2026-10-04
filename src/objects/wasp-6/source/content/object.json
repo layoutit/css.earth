@@ -2,7 +2,7 @@
   "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "wasp-6",
-  "displayName": "WASP-6",
+  "displayName": "Márohu",
   "panel": {
     "facts": [
       {
@@ -13,7 +13,7 @@
           "catalogueId": "doi-10-3847-2041-8213-acb154",
           "url": "https://ui.adsabs.harvard.edu/abs/2023ApJ...944L..56M",
           "label": "McGruder et al. (2023), The Astrophysical Journal Letters 944 L56",
-          "checked": "2026-09-29",
+          "checked": "2026-10-03",
           "path": "source/measurements.json",
           "locator": "radiusKm; radiusSource"
         }
@@ -26,7 +26,7 @@
           "catalogueId": "gaia-dr3-wasp-6",
           "url": "https://gea.esac.esa.int/archive/",
           "label": "Gaia DR3 parallax",
-          "checked": "2026-09-29",
+          "checked": "2026-10-03",
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }

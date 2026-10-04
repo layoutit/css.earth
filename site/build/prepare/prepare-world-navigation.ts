@@ -1,4 +1,4 @@
-import { OBJECT_RUNTIME_SCHEMA, WORLD_NAVIGATION_PREPARATION_SCHEMA, SOLAR_SYSTEM_PREPARATION_SCHEMA, PAGED_ELLIPSOID_SCHEMA, type WorldNavigationPreparationReceipt } from '@cssearth/objects';
+import { parseSolarSceneSource, parsePagedRecipe, OBJECT_RUNTIME_SCHEMA, WORLD_NAVIGATION_PREPARATION_SCHEMA, SOLAR_SYSTEM_PREPARATION_SCHEMA, PAGED_ELLIPSOID_SCHEMA, type WorldNavigationPreparationReceipt } from '@cssearth/objects';
 
 import { HOSTED_PLANET_IDS, STAR_IDS } from '@cssearth/astronomy';
 import { buildPolyCameraSceneTransform } from '@layoutit/polycss';
@@ -36,7 +36,7 @@ export async function prepareWorldNavigationDefinition({ objectDirectory, defini
     // radius its solar-system source authors, and the sky rides that frame.
     const bodyToReference = solar.requireBodyFixedToIcrf(descriptor.id) as Matrix3;
     const distanceM = solar.requireBodyOrbit(descriptor.id).heliocentricDistanceAu * solar.ASTRONOMICAL_UNIT_KILOMETERS * 1000;
-    const authored = sources.get('solar-system') as { bodyRadiusUnits: number; geometryScale?: number };
+    const authored = parseSolarSceneSource(sources.get('solar-system'), 'units');
     const renderedRadiusUnits = authored.bodyRadiusUnits * (authored.geometryScale ?? 1);
     const frame = preparePhysicalWorldFrame({ referenceFrame: 'sun-icrf', epochJdTt: solar.SOLAR_GEOMETRY_EPOCH_JD_TT,
       originM: transform(bodyToReference, solar.requireBodyFixedSunDirection(descriptor.id) as Vector3).map(component => -component * distanceM) as unknown as Vector3,
@@ -214,23 +214,12 @@ async function surfacePlacement(objectDirectory: string, bound: Awaited<ReturnTy
  * target (`textureLevels.texelsPerCssPixel`) times one texel of the sharpest level. The canonical atlas carries
  * `atlas.density` texels per column of its `atlas.sourceWidth` grid around the equator (paged-ellipsoid surface-raster). */
 function pagedSurfaceArcPerCssPixel(paged: Input | undefined): number | undefined {
-  if (paged?.schema !== PAGED_ELLIPSOID_SCHEMA) return undefined;
-  const { sourceWidth, density } = paged.atlas ?? {}, texelsPerCssPixel = paged.textureLevels?.texelsPerCssPixel;
-  if (!(Number.isInteger(sourceWidth) && sourceWidth > 0 && Number.isInteger(density) && density > 0 && texelsPerCssPixel >= 1)) {
-    throw new TypeError(`${String(paged.namespace)}: paged ellipsoid zoom limit needs atlas.sourceWidth, atlas.density and textureLevels.texelsPerCssPixel; found ${String(sourceWidth)}, ${String(density)} and ${String(texelsPerCssPixel)}.`);
-  }
-  return texelsPerCssPixel * 2 * Math.PI / (sourceWidth * density);
+  const fields = parsePagedRecipe(paged, 'surface-arc');
+  return fields === undefined ? undefined : fields.texelsPerCssPixel * 2 * Math.PI / (fields.sourceWidth * fields.density);
 }
 
-/** A paged globe's recipe camera owns its drag model (Earth's "pole-held-tumble"), so this pass carries a change to it
- * without re-baking the globe. */
 function pagedDrag(paged: Input | undefined): Input | undefined {
-  const drag = paged?.camera?.drag;
-  if (drag === undefined) return undefined;
-  if (drag?.model !== 'screen-axis-tumble' && drag?.model !== 'pole-held-tumble') {
-    throw new TypeError(`${String(paged?.namespace)}: paged-ellipsoid camera.drag.model must be screen-axis-tumble or pole-held-tumble; found ${JSON.stringify(drag)}.`);
-  }
-  return { model: drag.model };
+  return parsePagedRecipe(paged, 'drag');
 }
 
 function physicalCamera(camera: Input, projection: Input, surfaceArcPerCssPixelRadians: number | undefined, recipeDrag?: Input): Input {

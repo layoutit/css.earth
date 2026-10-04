@@ -7,7 +7,8 @@ import { mountPreparedCssImageLayers } from '../image-layers/prepared-image-laye
 import { outsideVolumeOpacity, projectedVolumeOpacity, volumeFramingRadiusUnits } from '../volume/projected-volume-visibility.js';
 import { mountPreparedGalaxyCatalog } from './prepared-galaxy-catalog.js';
 import { mountDatasetBillboards } from './dataset-billboards.js';
-import { fetchPreparedCatalogueBank, mountCataloguePoints } from './catalogue-points.js';
+import { mountCataloguePoints } from './catalogue-points.js';
+import { fetchPreparedCatalogueBank } from './catalogue-point-transport.js';
 import type { PreparedCatalogBank, PreparedUniverseOptions } from './prepared-universe-types.js';
 import type { PreparedImageLayerMount } from './prepared-universe-types.js';
 
@@ -30,12 +31,12 @@ interface ImageBank {
 
 /** Catalogue and image layers remain descriptor-only until visibility or navigation admits them. */
 export function createUniverseCatalogBanks({ root, end, stage, lifetime, declarations, initialImages, volumeDeclarations,
-  initialCatalog, catalogBank, loadCatalog, loadImageLayer, requestPublication, billboards: prepared, stellarExtents = {}, prepareBillboardAtlas,
-  pointBanks = [], starsBefore }: {
+  initialCatalog, catalogBank, loadCatalog, loadImageLayer, requestPublication, billboards: prepared, stellarExtents = {}, prepareBillboardImage,
+  pointBanks = [], imagesBefore = end }: {
   root: HTMLElement; end: Element; stage: HTMLElement; lifetime: SceneLifetime;
-  /** Where a bank of plain-dot stars mounts: the world's own place for star dots, under every layer mounted after it (a
-   * galaxy's slices paint over its stars' dots). Without one such a bank mounts where every other does. */
-  starsBefore?: Node;
+  /** Where a galaxy's billboard and its image slices mount: under the world's dot layer, so its catalogue's dots and its
+   * stars' show over its picture. Without one they mount where every other layer does. */
+  imagesBefore?: Element;
   declarations: readonly { id: string; frame: DensityVolumeFrame }[];
   initialImages: ReadonlyMap<string, PreparedImageLayerMount>;
   volumeDeclarations: readonly { id: string; frame: DensityVolumeFrame }[];
@@ -44,7 +45,7 @@ export function createUniverseCatalogBanks({ root, end, stage, lifetime, declara
   loadCatalog: PreparedUniverseOptions['loadCatalog'];
   loadImageLayer: PreparedUniverseOptions['loadImageLayer'];
   requestPublication?: () => boolean;
-  prepareBillboardAtlas: () => boolean;
+  prepareBillboardImage: (url: string) => boolean;
   /** Published stellar extents in metres by object id (PreparedUniverseOptions.stellarExtents). */
   stellarExtents?: Readonly<Record<string, number>>;
   /** The prepared billboards: a galaxy with one shows its Sun-facing view from afar, before and without its slices. */
@@ -69,9 +70,9 @@ export function createUniverseCatalogBanks({ root, end, stage, lifetime, declara
     const billboard = prepared?.plan.banks.get(bank.id)?.billboard;
     return billboard ? [{ id: bank.id, frame: bank.frame, billboard }] : [];
   });
-  // Mounted with the bank declarations, after the opaque galaxy backdrop: the atlas itself loads when one first shows.
-  const billboards = billboardEntries.length ? mountDatasetBillboards({ host: root, before: end, atlasUrl: prepared!.atlasUrl,
-    atlas: prepared!.plan.atlas, entries: billboardEntries, prepareAtlas: prepareBillboardAtlas }) : null;
+  // Mounted with the bank declarations, after the opaque galaxy backdrop: a billboard's image loads when it first shows.
+  const billboards = billboardEntries.length ? mountDatasetBillboards({ host: root, before: imagesBefore, imageUrl: prepared!.imageUrl,
+    imagePx: prepared!.plan.imagePx, entries: billboardEntries, prepareImage: prepareBillboardImage }) : null;
   if (billboards) lifetime.onDispose(() => billboards.destroy());
   lifetime.onDispose(() => {
     const mounted = catalog;
@@ -129,7 +130,7 @@ export function createUniverseCatalogBanks({ root, end, stage, lifetime, declara
       if (loaded.payload.id !== bank.id || JSON.stringify(loaded.payload.frame) !== JSON.stringify(bank.frame)) {
         throw new TypeError('Prepared image-layer identity/frame mismatch.');
       }
-      bank.mounted = mountPreparedCssImageLayers({ host: root, before: end, payload: loaded.payload, resolveResource: loaded.resolveResource });
+      bank.mounted = mountPreparedCssImageLayers({ host: root, before: imagesBefore, payload: loaded.payload, resolveResource: loaded.resolveResource });
       bank.mounted.root.style.display = 'none';
       // The dots are mounted beside the slices, not inside them: from inside the galaxy they draw without its photograph.
       bank.points = (loaded.cataloguePointUrls ?? []).map(url => mountCataloguePoints({ host: root, before: end, url,
@@ -170,7 +171,7 @@ export function createUniverseCatalogBanks({ root, end, stage, lifetime, declara
       for (const bank of points) {
         const selected = bank.id === selectedObjectId || bank.host !== undefined && (systemIds.includes(bank.host) || bank.stars && stars?.inside.includes(bank.host) === true);
         if (!bank.mounted && !selected) continue;
-        bank.mounted ??= mountCataloguePoints({ host: root, before: bank.stars && starsBefore ? starsBefore : end, url: bank.url,
+        bank.mounted ??= mountCataloguePoints({ host: root, before: end, url: bank.url,
           loadBank: target => fetchPreparedCatalogueBank(target, (input, init) => root.ownerDocument.defaultView!.fetch(input, init)) });
         const shown = selected && bank.stars ? stars?.look() : undefined;
         if (shown) bank.mounted.publish({ world, viewport }, shown.opacity, shown.hiddenAtM);
@@ -181,7 +182,14 @@ export function createUniverseCatalogBanks({ root, end, stage, lifetime, declara
     setCoasting(active: boolean) { billboards?.setCoasting(active); catalog?.setCoasting(active); },
     /** The image bank whose framing sphere holds `positionM`: the galaxy a selected star is in. */
     imageBankContaining(positionM: readonly number[]): string | undefined {
-      return images.find(bank => Math.hypot(...positionM.map((value, axis) => value - bank.frame.originM[axis]!)) <= bank.radiusUnits * bank.frame.metersPerUnit)?.id;
+      // Asked on every frame of every bank: plain arithmetic, where a mapped array for each bank was 2.1 % of an iPad's
+      // script time in a zoom out of Earth (2026-10-04).
+      for (const bank of images) {
+        const origin = bank.frame.originM, x = positionM[0]! - origin[0], y = positionM[1]! - origin[1], z = positionM[2]! - origin[2];
+        const reachM = bank.radiusUnits * bank.frame.metersPerUnit;
+        if (x * x + y * y + z * z <= reachM * reachM) return bank.id;
+      }
+      return undefined;
     },
     /** `inside` is the galaxy the selected body is in, and how much of its dots show: a star of M33 stands among M33's
      * catalogue dots, without the photograph that is the galaxy seen from outside. */

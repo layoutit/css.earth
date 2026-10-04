@@ -1,0 +1,148 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "pherkad-minor",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Pherkad Minor",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 20571153.3
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/pherkad-minor-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Pherkad Minor",
+      "classification": "star",
+      "color": "#ffd29b",
+      "distanceAu": 27611392,
+      "description": "A star 134 parsecs away, 30 times the Sun's width, measured from its light.",
+      "systemName": "Pherkad Minor system",
+      "aliases": [
+        "HD 136726",
+        "HIP 74793",
+        "HR 5714",
+        "11 Ursae Minoris"
+      ],
+      "order": 5661,
+      "context": {
+        "order": 5658
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -840654909435434200,
+        -976476795696051800,
+        3924499168807919000
+      ],
+      "presentationToReference": [
+        -0.20351887298950042,
+        -0.619879612380389,
+        -0.7578451916402335,
+        -0.23640075699256602,
+        -0.7200305664245124,
+        0.6524344147174777,
+        0.9501024946975065,
+        -0.31193789376979286,
+        2.0021427395605848e-7
+      ],
+      "orbitUpReference": [
+        0.619879612380389,
+        0.7200305664245124,
+        0.31193789376979286
+      ],
+      "metersPerUnit": 66358559.03225806,
+      "bodyRadiusM": 20571153300
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

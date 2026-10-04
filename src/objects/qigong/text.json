@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "qigong",
+  "card": {
+    "text": "A star 37 parsecs away, 11 times the Sun's width, measured from its light.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 74666: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-delta-bo-tis",
+        "url": "https://en.wikipedia.org/wiki/Delta_Bo%C3%B6tis",
+        "label": "Wikipedia, \"Delta Boötis\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374805681",
+        "quote": "Delta Boötis, Latinized from δ Boötis formally named Qigong, is a double star in the northern constellation of Boötes, forming the easternmost member of the constellation's kite-shaped asterism of brighter stars."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its brightness, measured band by band, gives 64 times the Sun's luminosity at 4,822 K, so 11.482 solar radii.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 74666: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-delta-bo-tis",
+        "url": "https://en.wikipedia.org/wiki/Delta_Bo%C3%B6tis",
+        "label": "Wikipedia, \"Delta Boötis\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374805681",
+        "quote": "Based upon parallax measurements, it is located at a distance of approximately 120.5 light-years from the Earth."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its spectrum",
+      "summary": "The color of the star's light."
+    }
+  }
+}

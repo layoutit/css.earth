@@ -1,0 +1,149 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "helvetios",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Helvetios",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 847269.1
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/helvetios-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Helvetios",
+      "classification": "star",
+      "color": "#ffefe6",
+      "distanceAu": 3202557.3,
+      "description": "A star about 16 parsecs away, 1.2 times the Sun's width, measured by Gaia.",
+      "systemName": "Helvetios system",
+      "aliases": [
+        "Gaia DR3 2835207319109249920",
+        "HR 8729",
+        "51 Pegasi",
+        "HD 217014",
+        "HIP 113357"
+      ],
+      "order": 5558,
+      "context": {
+        "order": 5555
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        431393506075656000,
+        -120705137718933020,
+        169890124923606270
+      ],
+      "presentationToReference": [
+        0.900433827253341,
+        0.34148613814576234,
+        -0.2694552656605435,
+        -0.25194396206813896,
+        -0.09555302289341064,
+        -0.9630129073866766,
+        0.35460282389641085,
+        -0.9350170251231924,
+        0.0000038034737486520135
+      ],
+      "orbitUpReference": [
+        -0.34148613814576234,
+        0.09555302289341064,
+        0.9350170251231924
+      ],
+      "metersPerUnit": 2733126.129032258,
+      "bodyRadiusM": 847269100
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

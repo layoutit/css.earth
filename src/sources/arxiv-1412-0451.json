@@ -1,0 +1,44 @@
+{
+  "id": "arxiv-1412-0451",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Smith (2015): The properties of XO-5b and WASP-82b redetermined using new high-precision transit photometry and global data analyses",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1412.0451"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2015AcA....65..117S"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2015AcA....65..117S",
+      "label": "arXiv preprint"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2015AcA....65..117S",
+      "checkedOn": "2026-10-03",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Smith (2015), Acta Astron., 65, 117 (2015)",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2015AcA....65..117S"
+    }
+  ],
+  "publisher": "Acta Astron., 65, 117 (2015)",
+  "creators": [
+    "A. M. S. Smith"
+  ],
+  "publicationDate": "2015"
+}

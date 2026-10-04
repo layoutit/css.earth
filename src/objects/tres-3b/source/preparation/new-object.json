@@ -1,0 +1,40 @@
+{
+  "host": "tres-3",
+  "planets": [
+    {
+      "id": "tres-3b",
+      "name": "TrES-3 b",
+      "description": "Transiting planet of Pipoltr with a 1.31-day year, found in 2007.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2009ApJ...691.1145S/abstract",
+        "credit": "Sozzetti et al. 2009"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "SOZZETTI_ET_AL__2009"
+      },
+      "text": {
+        "card": "TrES-3 b was found in 2007 by TrES as it crossed its star.",
+        "introduction": "It is the only planet known around Pipoltr. Its orbit and size follow Sozzetti et al. 2009's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname SOZZETTI_ET_AL__2009): disc_year 2007, disc_facility TrES, sy_pnum 1; pl_orbper 1.30618626966, pl_radj 1.336, pl_bmassj 1.91",
+        "quotes": {
+          "url": "https://en.wikipedia.org/wiki/TrES-3b",
+          "title": "TrES-3b",
+          "revision": "1374222310",
+          "card": "TrES-3b is an extrasolar planet orbiting the star GSC 03089-00929.",
+          "introduction": "It has an orbital period of just 31 hours and nearly twice the mass of Jupiter."
+        }
+      },
+      "thermal": {
+        "temperatureK": 1731,
+        "uncertaintyK": 60,
+        "wavelengthMicrometres": 2.146,
+        "facility": "3.58m Canada-France-Hawaii Telescope (CFHT) at Mauna Kea Observatory Wide-field Infrared Camera (WIRCam)",
+        "source": "Croll et al. 2010, dayside brightness temperature at 2.146 µm (NASA Exoplanet Archive emission table)",
+        "url": "https://ui.adsabs.harvard.edu/abs/2010ApJ...718..920C/abstract",
+        "chosen": "1 measured of 6 rows; the smallest relative uncertainty, then the longest wavelength"
+      },
+      "order": 5667
+    }
+  ]
+}

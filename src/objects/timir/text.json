@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "timir",
+  "card": {
+    "text": "A star 71 parsecs away, 4.0 times the Sun's width, measured from its light.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 80687: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-hd-148427",
+        "url": "https://en.wikipedia.org/wiki/HD_148427",
+        "label": "Wikipedia, \"HD 148427\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1358448648",
+        "quote": "HD 148427, formally named Timir, is a 7th-magnitude star approximately 230 light-years away in the constellation Ophiuchus."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its brightness, measured band by band, gives 8.501 times the Sun's luminosity at 4,940 K, so 3.986 solar radii.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 80687: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-hd-148427",
+        "url": "https://en.wikipedia.org/wiki/HD_148427",
+        "label": "Wikipedia, \"HD 148427\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1358448648",
+        "quote": "It has a spectral type of K0III/IV, indicating a K-type star that is close to becoming a red giant."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its Gaia spectrum",
+      "summary": "The color of the star's light."
+    }
+  }
+}

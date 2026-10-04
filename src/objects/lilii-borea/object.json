@@ -1,0 +1,148 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "lilii-borea",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Lilii Borea",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 7112836.8
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/lilii-borea-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Lilii Borea",
+      "classification": "star",
+      "color": "#ffe0b9",
+      "distanceAu": 10850318.5,
+      "description": "A star 53 parsecs away, 10 times the Sun's width, measured from its light.",
+      "systemName": "Lilii Borea system",
+      "aliases": [
+        "39 Arietis",
+        "HD 17361",
+        "HIP 13061",
+        "HR 824"
+      ],
+      "order": 5599,
+      "context": {
+        "order": 5596
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1052852184355794700,
+        947278395743132000,
+        793028352640350000
+      ],
+      "presentationToReference": [
+        0.6486313486195247,
+        0.36320281733985793,
+        0.6688505715512295,
+        0.5835904341736187,
+        0.32677712927910396,
+        -0.7433968744359605,
+        0.48856890888498417,
+        -0.8725253126737915,
+        0.0000037998021272208467
+      ],
+      "orbitUpReference": [
+        -0.36320281733985793,
+        -0.32677712927910396,
+        0.8725253126737915
+      ],
+      "metersPerUnit": 22944634.83870968,
+      "bodyRadiusM": 7112836800
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

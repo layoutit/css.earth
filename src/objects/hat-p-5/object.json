@@ -1,0 +1,146 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "hat-p-5",
+  "parent": "hat-p-5-system",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Chasoň",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 779184
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/hat-p-5-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Chasoň",
+      "classification": "star",
+      "color": "#fff4f2",
+      "distanceAu": 64088411,
+      "description": "HAT-P-5 b crosses Chasoň as seen from Earth, which is how it was found.",
+      "systemName": "Chasoň system",
+      "aliases": [
+        "HAT-P-5",
+        "TOI-2135"
+      ],
+      "order": 5517,
+      "context": {
+        "order": 5514
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        591089379181547800,
+        -7672124628420453000,
+        5719185096365769000
+      ],
+      "presentationToReference": [
+        0.061652165913727824,
+        0.04582232405115291,
+        -0.9970452973946055,
+        -0.8002226349561496,
+        -0.5947630280714071,
+        -0.07681585085883819,
+        0.596525561013091,
+        -0.8025940786337024,
+        3.6799398141551793e-7
+      ],
+      "orbitUpReference": [
+        -0.04582232405115291,
+        0.5947630280714071,
+        0.8025940786337024
+      ],
+      "metersPerUnit": 2513496.7741935486,
+      "bodyRadiusM": 779184000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

@@ -1,0 +1,139 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "hat-p-21b",
+  "parent": "hat-p-21-system",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "HAT-P-21 b",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "sky-sun",
+        "system-markers",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "shape",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 79356.1
+      },
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "raster",
+          "model": "lit"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/templates/composite-planet.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "HAT-P-21 b",
+      "classification": "exoplanet",
+      "color": "#9a9a9a",
+      "distanceAu": 58614199,
+      "description": "HAT-P-21 b was found in 2010 by HATNet as it crossed its star.",
+      "systemName": "Mazaalai system",
+      "order": 5612,
+      "context": {
+        "order": 5612
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -6538347187517836000,
+        1003435766630555300,
+        5755933119283814000
+      ],
+      "presentationToReference": [
+        -0.7521780599495057,
+        0.11508689654623355,
+        0.6488321604035624,
+        0.06601450658182226,
+        0.992837728330774,
+        -0.0995757506813123,
+        0.655644912320195,
+        0.03206636004202624,
+        0.7543881610300489
+      ],
+      "orbitUpReference": [
+        -0.11508689654623355,
+        -0.992837728330774,
+        -0.03206636004202624
+      ],
+      "metersPerUnit": 255987.4193548387,
+      "bodyRadiusM": 79356100
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

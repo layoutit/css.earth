@@ -33,7 +33,7 @@ import { bodyMapFits, combineBodyMaps, projectBandMap, type BodyMap } from '@css
 import { combineUnderPolicy, renderBodyMapProduct } from '@cssearth/bake/objects/layers/observation';
 import { type BodyMapFrame, type BodyMapObservation, type BodyMapProduct, type CombinationPolicy, type MeasurementDefinition } from '@cssearth/objects';
 import { bodyMapProductRecord, formatProductRecord } from '@cssearth/telescope-cli/body-map-publication';
-import type { ProductInput, ProductSoftware } from '@cssearth/telescope';
+import type { ProductInput, ProductSoftware } from '@cssearth/objects';
 import { ACROSS_SLIT_DIRECTIONS, addFeatureless, bandFromReflectance, featurelessMean, newFeatureless, parseSlitScan, quantiles, ratioAgainst, reflectance, scanImage, type AcrossSlitDirection, type Reflectance, type ReferenceSpectrum, type SlitScanDefinition, type ScanSampling } from '@cssearth/telescope-cli/archives/hst/slit-scan-reduction';
 import { ARCSEC_PER_RADIAN, DEGREE, type PreparedFrame, REPOSITORY, type VisitRegistration, prepareFrames, readFrameRegion, registerVisits } from '@cssearth/telescope-cli/archives/hst/slit-scan-frames';
 

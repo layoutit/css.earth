@@ -1,0 +1,149 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "jishui",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Jishui",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 2711723
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/jishui-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Jishui",
+      "classification": "star",
+      "color": "#fff8fd",
+      "distanceAu": 10668653.5,
+      "description": "A star about 52 parsecs away, 3.9 times the Sun's width, measured by Gaia.",
+      "systemName": "Jishui system",
+      "aliases": [
+        "Gaia DR3 894363992351617920",
+        "HR 2930",
+        "Omicron Geminorum",
+        "HIP 37265",
+        "HD 61110"
+      ],
+      "order": 5577,
+      "context": {
+        "order": 5574
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -550970655988745340,
+        1192898942682514400,
+        905905333262319200
+      ],
+      "presentationToReference": [
+        -0.3452167190827444,
+        -0.238006608696925,
+        0.9078426466532261,
+        0.7474239412275053,
+        0.515301584670104,
+        0.4193110169270802,
+        0.567611547579582,
+        -0.8232965025147796,
+        -0.0000011151124959971897
+      ],
+      "orbitUpReference": [
+        0.238006608696925,
+        -0.515301584670104,
+        0.8232965025147796
+      ],
+      "metersPerUnit": 8747493.548387097,
+      "bodyRadiusM": 2711723000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

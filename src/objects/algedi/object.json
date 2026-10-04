@@ -1,0 +1,148 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "algedi",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Algedi",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 5639344.2
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/algedi-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Algedi",
+      "classification": "star",
+      "color": "#ffe6c7",
+      "distanceAu": 6692675.7,
+      "description": "A star 32 parsecs away, 8.1 times the Sun's width, measured from its light.",
+      "systemName": "Algedi system",
+      "aliases": [
+        "HD 192947",
+        "HIP 100064",
+        "HR 7754",
+        "Alpha Capricorni"
+      ],
+      "order": 5470,
+      "context": {
+        "order": 5467
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        553750262306951000,
+        -805289133121604500,
+        -217466329472258100
+      ],
+      "presentationToReference": [
+        0.5530809964763961,
+        -0.12306873536492927,
+        -0.8239875591975608,
+        -0.8043158559291819,
+        0.17897346622819374,
+        -0.5666078911268119,
+        -0.21720362620726272,
+        -0.97612631598679,
+        -6.878211589357585e-7
+      ],
+      "orbitUpReference": [
+        0.12306873536492927,
+        -0.17897346622819374,
+        0.97612631598679
+      ],
+      "metersPerUnit": 18191432.903225806,
+      "bodyRadiusM": 5639344200
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

@@ -1,4 +1,4 @@
-# GJ 1214 credits
+# Orkaria credits
 
 Radius, mass and temperature: Radius 0.2162 +/- 0.0025 solar radii from Mahajan et al. 2024, the stellar radius of the default parameter set of GJ 1214 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024ApJ...963L..37M/abstract); Mass 0.182 +/- 0.0042 solar masses from Mahajan et al. 2024, the stellar mass of the default parameter set of GJ 1214 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2024ApJ...963L..37M/abstract); temperature from Mahajan et al. 2024, the stellar temperature of the default parameter set of GJ 1214 b in the NASA Exoplanet Archive.
 

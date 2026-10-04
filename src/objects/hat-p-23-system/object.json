@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "hat-p-23-system",
+  "parent": "milky-way",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "hat-p-23"
+    },
+    "catalog": {
+      "name": "Moriah system",
+      "systemName": "Moriah system",
+      "classification": "planetary-system",
+      "color": "#fff2ee",
+      "distanceAu": 75393648.6,
+      "description": "HAT-P-23 b crosses Moriah as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        6366672988090527000,
+        -8723225968096390000,
+        3252773936680133000
+      ],
+      "presentationToReference": [
+        0.5644849056493917,
+        0.1700210104951588,
+        -0.8077435529202339,
+        -0.7734226960878364,
+        -0.23295274297690605,
+        -0.5895340131966584,
+        0.2883992449196423,
+        -0.9575102482635581,
+        1.9881134171602526e-7
+      ],
+      "orbitUpReference": [
+        -0.1700210104951588,
+        0.23295274297690605,
+        0.9575102482635581
+      ],
+      "metersPerUnit": 2699764.8387096776,
+      "bodyRadiusM": 836927100
+    }
+  }
+}

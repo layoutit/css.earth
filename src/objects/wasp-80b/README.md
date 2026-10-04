@@ -2,7 +2,7 @@
 
 ## Sources
 
-It is the only planet known around WASP-80. Its orbit and size follow Triaud et al. 2015's fit, the archive's default. The introduction is generated from Triaud et al. 2015's published values; the sections below are the data's own.
+It is the only planet known around Petra. Its orbit and size follow Triaud et al. 2015's fit, the archive's default. The introduction is generated from Triaud et al. 2015's published values; the sections below are the data's own.
 
 **Size and mass.** Radius 0.999 Jupiter radii from Triaud et al. 2015 (2015MNRAS.450.2279T), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2015MNRAS.450.2279T/abstract): 71,420.5 km at 71,492 km per Jupiter radius. GM from the mass 0.538 Jupiter masses (Triaud et al. 2015, the mass the NASA Exoplanet Archive's composite table adopts (2015MNRAS.450.2279T), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2015MNRAS.450.2279T/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.
 
@@ -10,11 +10,12 @@ It is the only planet known around WASP-80. Its orbit and size follow Triaud et 
 
 **Color.** No image or measured color exists. The neutral gray is lit by wasp-80's measured color (#ffbe8d, the color dataset of wasp-80 (src/objects/wasp-80/source/photometry/stellar-color.json)) at the gray's own brightness.
 
-**Charts.** The orbits of WASP-80's planets from above, from their hosted-orbit records, and its transit in 1 TESS sector (54), folded onto its orbit. Upper limits and rows without an error are left out.
+**Charts.** The orbits of Petra's planets from above, from their hosted-orbit records, and its transit in 1 TESS sector (54), folded onto its orbit. Upper limits and rows without an error are left out.
 
 ## Evidence
 
-Generated 2026-09-29 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/wasp-80b.json).
+Generated 2026-10-03 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/wasp-80b.json).
+
 
 ## Known problems
 

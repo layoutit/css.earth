@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "formosa",
+  "card": {
+    "text": "A star 136 parsecs away, 9.7 times the Sun's width, measured from its light.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 56508: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-hd-100655",
+        "url": "https://en.wikipedia.org/wiki/HD_100655",
+        "label": "Wikipedia, \"HD 100655\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374593008",
+        "quote": "HD 100655, also named Formosa, is a star in the zodiac constellation of Leo, located 451 light-years away from the Sun."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its brightness, measured band by band, gives 45 times the Sun's luminosity at 4,803 K, so 9.726 solar radii.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 56508: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-hd-100655",
+        "url": "https://en.wikipedia.org/wiki/HD_100655",
+        "label": "Wikipedia, \"HD 100655\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374593008",
+        "quote": "It has an apparent visual magnitude of +6.45, which makes it a challenge to see with the naked eye under ideal viewing conditions."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its temperature",
+      "summary": "The color of the star's light."
+    }
+  }
+}

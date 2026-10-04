@@ -1,0 +1,148 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "alphard",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Alphard",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 36593124.3
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/alphard-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Alphard",
+      "classification": "star",
+      "color": "#ffd093",
+      "distanceAu": 11402077.1,
+      "description": "A star 55 parsecs away, 53 times the Sun's width, measured from its light.",
+      "systemName": "Alphard system",
+      "aliases": [
+        "HD 81797",
+        "HIP 46390",
+        "HR 3748",
+        "Alpha Hydrae"
+      ],
+      "order": 5473,
+      "context": {
+        "order": 5470
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -1326939274544298800,
+        1040575266288391700,
+        -256783998427533400
+      ],
+      "presentationToReference": [
+        -0.7779313698520589,
+        0.11846640828051039,
+        0.6170806218876225,
+        0.610047617001562,
+        -0.09289994025869473,
+        0.7868999339755003,
+        -0.15054796176240662,
+        -0.9886027064544414,
+        3.7228163864950884e-7
+      ],
+      "orbitUpReference": [
+        -0.11846640828051039,
+        0.09289994025869473,
+        0.9886027064544414
+      ],
+      "metersPerUnit": 118042336.4516129,
+      "bodyRadiusM": 36593124300
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

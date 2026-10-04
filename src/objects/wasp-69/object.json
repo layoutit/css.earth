@@ -6,7 +6,7 @@
   "properties": {
     "preparation": {
       "schema": "cssearth-object-preparation@1",
-      "label": "WASP-69",
+      "label": "Wouri",
       "steps": [
         "verify-sources",
         "assets",
@@ -95,12 +95,15 @@
       }
     },
     "catalog": {
-      "name": "WASP-69",
+      "name": "Wouri",
       "classification": "star",
       "color": "#ffd7be",
       "distanceAu": 10372427.4,
       "description": "WASP-69 b crosses WASP-69 as seen from Earth, which is how it was found.",
-      "systemName": "WASP-69 system",
+      "systemName": "Wouri system",
+      "aliases": [
+        "WASP-69"
+      ],
       "order": 4832,
       "context": {
         "order": 4829

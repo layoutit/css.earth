@@ -1,0 +1,148 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "kulou",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Kulou",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 1302350.4
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/kulou-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Kulou",
+      "classification": "star",
+      "color": "#bbcfff",
+      "distanceAu": 3717098.3,
+      "description": "A star 18 parsecs away, 1.9 times the Sun's width, measured from its light.",
+      "systemName": "Kulou system",
+      "aliases": [
+        "Iota Centauri",
+        "HD 115892",
+        "HIP 65109",
+        "HR 5028"
+      ],
+      "order": 5594,
+      "context": {
+        "order": 5591
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -418493218624712770,
+        -153538949420044670,
+        -332419992570965950
+      ],
+      "presentationToReference": [
+        -0.7525909070310522,
+        0.561222901700599,
+        -0.3444354529675159,
+        -0.27611443164685656,
+        0.2059043513315618,
+        0.9388100014055358,
+        -0.5978024316532272,
+        -0.8016434698227689,
+        3.6604841722331456e-17
+      ],
+      "orbitUpReference": [
+        -0.561222901700599,
+        -0.2059043513315618,
+        0.8016434698227689
+      ],
+      "metersPerUnit": 4201130.322580645,
+      "bodyRadiusM": 1302350400
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

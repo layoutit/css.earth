@@ -4,6 +4,7 @@ import { readFileSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { requireRecord, requireString } from '@cssearth/core';
 import { TOOLCHAINS } from '../paths.js';
+import { MissingSourceInputError } from '@cssearth/core';
 
 export interface ToolchainPins { readonly id: string; readonly file: string; readonly descriptor: string; readonly lock: string | null; readonly entry: Record<string, unknown> }
 
@@ -30,6 +31,6 @@ export function installedMarkerIssue(root: string, pins: ToolchainPins): 'missin
 /** Refuse a toolchain that is not installed from the current pins, naming the command that installs it. */
 export function assertInstalledMarker(root: string, pins: ToolchainPins, name: string, install: string): void {
   const issue = installedMarkerIssue(root, pins);
-  if (issue === 'missing') throw new Error(`The ${name} toolchain is not installed at ${root}: ${install}`);
+  if (issue === 'missing') throw new MissingSourceInputError(`The ${name} toolchain is not installed at ${root}: ${install}`);
   if (issue === 'other-pins') throw new Error(`The ${name} toolchain at ${root} was installed from other pins than ${pins.file}; reinstall it: ${install}`);
 }

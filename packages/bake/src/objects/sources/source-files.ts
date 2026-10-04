@@ -7,6 +7,7 @@ import { createWriteStream } from 'node:fs';
 import { Readable, Transform } from 'node:stream';
 import { pipeline } from 'node:stream/promises';
 import { dirname, posix, resolve, relative, win32 } from 'node:path';
+import { MissingSourceInputError } from '@cssearth/core';
 const object=(value:unknown):Record<string,unknown>=>{if(!value||typeof value!=='object'||Array.isArray(value))throw new TypeError('Expected an object.');return value as Record<string,unknown>;};
 const nonempty=(value:unknown):value is string=>typeof value==='string'&&value.length>0;
 
@@ -56,7 +57,7 @@ export async function verifySources({sourceRoot,manifest,consumer}:{sourceRoot:s
  if(!entries.length)throw new Error(`No source inputs for ${consumer??'manifest'}.`);
  if(!consumer){const declared=new Set(entries.map(entry=>entry.path)),actual=new Set((await walk(sourceRoot)).map(path=>relative(sourceRoot,path).replaceAll('\\','/')).filter(path=>path!=='manifest.json'));
   const undeclared=[...actual].filter(path=>!declared.has(path)),missing=[...declared].filter(path=>!actual.has(path));
-  if(undeclared.length||missing.length)throw new Error(`Source coverage failed. Undeclared: ${undeclared.join(', ')||'none'}. Missing: ${missing.join(', ')||'none'}.`);
+  if(undeclared.length||missing.length){const message=`Source coverage failed. Undeclared: ${undeclared.join(', ')||'none'}. Missing: ${missing.join(', ')||'none'}.`;throw undeclared.length===0?new MissingSourceInputError(message):new Error(message);}
  }
  for(const entry of entries)await assertSourceFile(entry,containedPath(sourceRoot,entry.path));
  return {inputCount:manifest.inputs.length,generatedIntermediateCount:manifest.generatedIntermediates.length,documentCount:manifest.documents.length,verifiedCount:entries.length};

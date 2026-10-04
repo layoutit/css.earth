@@ -1,0 +1,148 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "giausar",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Giausar",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 46138128.3
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/giausar-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Giausar",
+      "classification": "star",
+      "color": "#ffc783",
+      "distanceAu": 21068933.5,
+      "description": "A star 102 parsecs away, 66 times the Sun's width, measured from its light.",
+      "systemName": "Giausar system",
+      "aliases": [
+        "HD 100029",
+        "HIP 56211",
+        "HR 4434",
+        "Lambda Draconis"
+      ],
+      "order": 5549,
+      "context": {
+        "order": 5546
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -1103862691639099300,
+        138470584002915310,
+        2948996837655004000
+      ],
+      "presentationToReference": [
+        -0.3502240519731763,
+        -0.928360132857956,
+        0.12446114710803563,
+        0.04393275484536832,
+        0.11644951779689547,
+        0.9922244820888907,
+        0.9356350925821385,
+        -0.35296879964782824,
+        -0.0000019961519109068677
+      ],
+      "orbitUpReference": [
+        0.928360132857956,
+        -0.11644951779689547,
+        0.35296879964782824
+      ],
+      "metersPerUnit": 148832671.93548387,
+      "bodyRadiusM": 46138128300
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

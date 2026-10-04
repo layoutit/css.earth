@@ -6,7 +6,7 @@
   "properties": {
     "preparation": {
       "schema": "cssearth-object-preparation@1",
-      "label": "GJ 486",
+      "label": "Gar",
       "steps": [
         "verify-sources",
         "assets",
@@ -95,12 +95,15 @@
       }
     },
     "catalog": {
-      "name": "GJ 486",
+      "name": "Gar",
       "classification": "star",
       "color": "#ffcd89",
       "distanceAu": 1666484.3,
       "description": "GJ 486 b crosses GJ 486 as seen from Earth, which is how it was found.",
-      "systemName": "GJ 486 system",
+      "systemName": "Gar system",
+      "aliases": [
+        "GJ 486"
+      ],
       "order": 3099,
       "context": {
         "order": 3096

@@ -1,0 +1,30 @@
+{
+ "id": "revati",
+ "classification": "star",
+ "order": 5677,
+ "physical": {
+  "name": "Revati",
+  "horizonsCode": null,
+  "meanRadiusKm": 1414809.9,
+  "gravitationalParameterKm3PerS2": 223869031870.86642,
+  "parent": null,
+  "effectiveTemperatureK": 7349
+ },
+ "physicalNotes": "Radius 2.034 (1.992 to 2.076) from Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26; astrophysical_parameters of the same source): 1,414,810 km at 695,700 km per solar radius. Mass 1.687 (1.647 to 1.727) from Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26; astrophysical_parameters of the same source); GM is that mass times the JPL solar GM. Temperature 7349 +/- 1.8 K from Andrae et al. (2023), A&A 674, A27 (Gaia DR3 GSP-Phot), astrophysical_parameters of Gaia DR3 2577061092921353984: teff_gspphot 7349.0825 K (16th-84th percentiles 7347.287-7350.8857), the temperature FLAME used (https://doi.org/10.1051/0004-6361/202243462). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 18.433498115965318,
+  "declinationDegrees": 7.575124155405294,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 40.88397064946956,
+  "properMotionRaMasPerYear": 142.69253661320377,
+  "properMotionDecMasPerYear": -53.05106618089854,
+  "radialVelocityKmPerS": 15,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 2577061092921353984 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/revati/source/photometry/gaia-dr3-source.csv; cross-identification HD 7344, HR 361, HIP 5737: https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia+DR3+2577061092921353984",
+   "distance": "Gaia DR3 parallax 24.4595 +/- 0.1169 mas (same row, RUWE 1.12): 40.88 pc, no zero-point correction",
+   "properMotion": "Gaia DR3 (same row): 142.693, -53.051 mas/yr",
+   "radialVelocity": "SIMBAD's radial velocity for Gaia DR3 2577061092921353984 (quality C), from 2006AstL...32..759G; Gaia DR3 measures none (https://ui.adsabs.harvard.edu/abs/2006AstL...32..759G/abstract)"
+  }
+ }
+}

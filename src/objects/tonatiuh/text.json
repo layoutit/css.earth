@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "tonatiuh",
+  "card": {
+    "text": "A star about 100 parsecs away, 11 times the Sun's width, measured by Gaia.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202243688",
+        "url": "https://doi.org/10.1051/0004-6361/202243688",
+        "label": "Creevey et al. (2023), Astronomy & Astrophysics 674 A26",
+        "checked": "2026-10-03",
+        "locator": "gaiadr3.astrophysical_parameters, Gaia DR3 1693159194226600192: radius_flame, mass_flame, teff_gspphot"
+      },
+      {
+        "catalogueId": "wikipedia-hd-104985",
+        "url": "https://en.wikipedia.org/wiki/HD_104985",
+        "label": "Wikipedia, \"HD 104985\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1370776922",
+        "quote": "HD 104985, formally named Tonatiuh, is a solitary star with an exoplanetary companion in the northern constellation of Camelopardalis."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Gaia's parallax, brightness and spectrum give it 10.8 solar radii and 3.00 solar masses (FLAME) and 4,943 K at its surface (GSP-Phot).",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202243688",
+        "url": "https://doi.org/10.1051/0004-6361/202243688",
+        "label": "Creevey et al. (2023), Astronomy & Astrophysics 674 A26",
+        "checked": "2026-10-03",
+        "locator": "gaiadr3.astrophysical_parameters, Gaia DR3 1693159194226600192: radius_flame, mass_flame, teff_gspphot"
+      },
+      {
+        "catalogueId": "wikipedia-hd-104985",
+        "url": "https://en.wikipedia.org/wiki/HD_104985",
+        "label": "Wikipedia, \"HD 104985\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1370776922",
+        "quote": "The companion is designated HD 104985 b and named Meztli."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its temperature",
+      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

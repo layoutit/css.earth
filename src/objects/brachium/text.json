@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "brachium",
+  "card": {
+    "text": "A star 88 parsecs away, 107 times the Sun's width, measured from its light.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 73714: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-sigma-librae",
+        "url": "https://en.wikipedia.org/wiki/Sigma_Librae",
+        "label": "Wikipedia, \"Sigma Librae\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1370789151",
+        "quote": "Sigma Librae is a star in the constellation of Libra."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its brightness, measured band by band, gives 1,676 times the Sun's luminosity at 3,577 K, so 106.746 solar radii.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 73714: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-sigma-librae",
+        "url": "https://en.wikipedia.org/wiki/Sigma_Librae",
+        "label": "Wikipedia, \"Sigma Librae\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1370789151",
+        "quote": "It has the proper name Brachium, Sigma Librae is its Bayer designation."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its temperature",
+      "summary": "The color of the star's light."
+    }
+  }
+}

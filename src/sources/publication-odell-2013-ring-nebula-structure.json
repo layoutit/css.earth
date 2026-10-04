@@ -1,0 +1,40 @@
+{
+  "id": "publication-odell-2013-ring-nebula-structure",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Studies of NGC 6720 with Calibrated HST/WFC3 Emission-line Filter Images. I. Structure and Evolution",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1301.6636"
+    },
+    {
+      "type": "doi",
+      "value": "10.1088/0004-6256/145/4/92"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/1301.6636",
+      "label": "Published reference"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/1301.6636",
+      "checkedOn": "2026-10-03",
+      "locator": "Sect. III.1, restating O'Dell, Sabbadin & Henney (2007): from flux-calibrated long-slit spectra, with all motion radial and in proportion to distance, expansion is 0.65 km/s per arcsec from the star; the Main Ring's semi-major axis is 44 arcsec along position angle about 60 degrees and its semi-minor axis 30 arcsec; the pole is tipped 6.5 +/- 2 degrees from the line of sight, the south-west end of the Main Ring moving away; the gas is concentrated toward the equatorial plane. Sect. III.3: velocity ellipses fitted to the spectra give the Main Ring 19 +/- 2 km/s along the line of sight in [N II] and [S II] and 9 +/- 2 km/s in [O III], and the central region, assigned to the polar Lobes, 37 km/s in [S II], 36 in [N II], 28 in [O III], 27 in H-alpha and 20 in He II (34 km/s adopted); the dark knots show best against background material; the paper has no evidence about the form of the Lobes. Sect. III.4: the Inner Halo's loops lie almost all within 65 arcsec of the star; the Outer Halo is a thin shell of radius 115 arcsec."
+    }
+  ],
+  "creators": [
+    "O'Dell, C. R.",
+    "Ferland, G. J.",
+    "Henney, W. J.",
+    "Peimbert, M."
+  ],
+  "publisher": "AJ 145, 92",
+  "publicationDate": "2013",
+  "relations": [],
+  "statements": []
+}

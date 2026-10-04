@@ -46,7 +46,7 @@ export function preparedJsonImports(file: string, source: string, root: string):
 
 /** Generated modules that import prepared JSON found by rule, so that no authored file names its object: the application's
  * context objects import the galaxy catalogue's display sample (site/build/prepare/prepare-catalog.mts contextObjectModule).
- * The tools build writes them before this scan; git ignores them, so the listing below does not find them. */
+ * The preparation build writes them before this scan; git ignores them, so the listing below does not find them. */
 const GENERATED_IMPORTERS = ['site/prepared-context-objects.mts'];
 
 /** Scan maintained source, including test imports. Generated declarations are not an alternate data contract.
@@ -87,7 +87,7 @@ export async function typecheckAssetsForPaths(paths: readonly string[], root = p
       const matches = candidates.filter(asset => asset.file === file);
       if (matches.length > 1) throw new TypeError(`Ambiguous typecheck inventory: ${id}/${filename}`);
       if (matches.length === 1) assets.push(matches[0]!);
-      else await access(file); // Tracked/generated inputs are supplied by checkout and build:tools.
+      else await access(file); // Tracked/generated inputs are supplied by checkout and build:preparation.
     }
   }
   return assets;
@@ -135,10 +135,12 @@ export async function restoreTypecheckInputs({ root = projectRoot, fetcher = fet
   const features = await typecheckFeatureAssets(root);
   // The world index names every object with a file of world bodies, which Node reads by computed path: each object's
   // `members.json` and `places.json` in its own package. They restore with the summary, after the index that names them:
-  // the world step of build:tools bakes without the bodies' imagery, so its own copies place stars in different files.
+  // the world step of build:preparation bakes without the bodies' imagery, so its own copies place stars in different files.
   const summary = resolve(root, `src/objects/${OBJECT_TREE_ROOT}/prepared/world.json`);
   const world = imports.includes(summary) ? await inventoryAssets(root, [OBJECT_TREE_ROOT], { location: 'prepared', filenames: ['world-index.json'] }) : [];
-  const initial = uniqueAssets([...await typecheckAssetsForPaths(imports, root), ...world, ...catalogue.assets, ...features.assets]);
+  const earthPlaces = await inventoryAssets(root, ['earth'], { location: 'public', filenames: ['earth-places.json'] });
+  if (earthPlaces.length !== 1) throw new TypeError('Typecheck preparation requires the inventoried public earth-places.json.');
+  const initial = uniqueAssets([...earthPlaces, ...await typecheckAssetsForPaths(imports, root), ...world, ...catalogue.assets, ...features.assets]);
   const first = await installRuntimeAssets(initial, { fetcher });
   const index = world.length ? parsePreparedWorldIndex(JSON.parse(await readFile(world[0]!.file, 'utf8'))) : null;
   const holders = index ? index.files : [];
@@ -177,7 +179,7 @@ export async function prepareTypecheck() {
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
-  // Entry script: `pnpm prepare:typecheck` (after pnpm build:tools).
-  if (process.argv.length !== 2) throw new TypeError('Usage: node .github/scripts/ci/prepare-typecheck.mts (after pnpm build:tools)');
+  // Entry script: `pnpm prepare:typecheck` (after pnpm build:preparation).
+  if (process.argv.length !== 2) throw new TypeError('Usage: node .github/scripts/ci/prepare-typecheck.mts (after pnpm build:preparation)');
   await prepareTypecheck();
 }

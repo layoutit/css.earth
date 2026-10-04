@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "cursa",
+  "card": {
+    "text": "A star 27 parsecs away, 3.4 times the Sun's width, measured from its light.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 23875: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-beta-eridani",
+        "url": "https://en.wikipedia.org/wiki/Beta_Eridani",
+        "label": "Wikipedia, \"Beta Eridani\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1377343599",
+        "quote": "Beta Eridani, formally named Cursa, is the second-brightest star in the barely equatorial-southern constellation of Eridanus, located in the northeast end of this constellation near the shared border with Orion."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its brightness, measured band by band, gives 43 times the Sun's luminosity at 7,997 K, so 3.439 solar radii.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 23875: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-beta-eridani",
+        "url": "https://en.wikipedia.org/wiki/Beta_Eridani",
+        "label": "Wikipedia, \"Beta Eridani\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1377343599",
+        "quote": "The apparent visual magnitude of this star is 2.796, so it can be viewed with the naked eye in dark skies."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its spectrum",
+      "summary": "The color of the star's light."
+    }
+  }
+}

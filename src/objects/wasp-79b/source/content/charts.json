@@ -1,0 +1,94 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/wasp-79b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "wasp-79b-orbits",
+      "title": "WASP-79 b: orbits around Montuno",
+      "output": "wasp-79b-system-orbits.svg",
+      "system": "wasp-79",
+      "highlight": "wasp-79b",
+      "description": "The orbits of Montuno's planets in this map from above, to scale, with WASP-79 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Kokori et al. 2023 (2023ApJS..265....4K), via the NASA Exoplanet Archive ps table (pl_refname KOKORI_ET_AL__2023): P 3.66239163 d"
+      }
+    },
+    {
+      "kind": "measured-spectrum",
+      "id": "wasp-79b-transmission",
+      "title": "WASP-79 b: transmission spectrum",
+      "description": "WASP-79 b's transmission spectrum: the fraction of starlight the planet blocks as it crosses its star, larger where its atmosphere absorbs. 26 measured bins from Sotzen et al. 2020 (Magellan II Landon Clay Telescope, LDSS-3C; Transiting Exoplanet Survey Satellite, TESS CCD Array; Hubble Space Telescope satellite, Wide Field Camera 3; Spitzer Space Telescope satellite, Infrared Array Camera (IRAC)), as the NASA Exoplanet Archive lists them. Horizontal bars are wavelength bins; vertical bars are the published 1-sigma errors.",
+      "output": "wasp-79b-transmission.svg",
+      "metadata": {
+        "publication": "https://ui.adsabs.harvard.edu/abs/2020AJ....159....5S/abstract",
+        "table": "transitspec",
+        "bins": 26
+      },
+      "source": {
+        "path": "science/archive-spectra/transmission.json",
+        "format": "records",
+        "yScale": 1,
+        "expectedRows": 26
+      },
+      "mode": "points",
+      "x": {
+        "label": "Wavelength (µm)",
+        "minimum": 0,
+        "maximum": 6,
+        "ticks": [
+          0,
+          2,
+          4,
+          6
+        ]
+      },
+      "y": {
+        "label": "Transit depth (%)",
+        "minimum": 1,
+        "maximum": 1.3,
+        "ticks": [
+          1,
+          1.1,
+          1.2,
+          1.3
+        ]
+      },
+      "notes": [
+        "Sotzen et al. 2020",
+        "Magellan II Landon Clay Telescope, LDSS-3C; Transit…",
+        "Bars: wavelength bins and 1σ errors.",
+        "Values as the NASA Exoplanet Archive lists them."
+      ]
+    },
+    {
+      "kind": "folded-transit",
+      "id": "wasp-79b-transit",
+      "title": "WASP-79 b: its transit",
+      "description": "WASP-79 b crossing its star, as TESS recorded it: 3 sectors (32, 106, 107) of the SPOC pipeline's 2-minute light curves of TIC 170634116, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 15-minute bins. Error bars are each bin's standard error.",
+      "output": "wasp-79b-transit.svg",
+      "metadata": {
+        "tic": "TIC 170634116",
+        "sectors": [
+          32,
+          106,
+          107
+        ],
+        "pipeline": "TESS SPOC, PDCSAP flux, quality 0"
+      },
+      "planet": "wasp-79b",
+      "sources": [
+        "photometry/tess/tess2020324010417-s0032-0000000170634116-0200-s_lc.fits",
+        "photometry/tess/tess2026192185000-s0106-0000000170634116-0308-s_lc.fits",
+        "photometry/tess/tess2026221103959-s0107-0000000170634116-0309-s_lc.fits"
+      ],
+      "durationHours": 3.7669692,
+      "binMinutes": 15,
+      "notes": [
+        "TESS 2-min SPOC · sectors 32, 106, 107",
+        "Folded on the app's orbit; 15-min bins.",
+        "Bars: standard error of each bin."
+      ]
+    }
+  ]
+}

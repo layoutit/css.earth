@@ -50,6 +50,15 @@ are addressed by their source paths and origin URLs; manifests do not verify
 source digests. Some conversions need the documented Python/native toolchains.
 Source acquisition and baking are separate from working on the shell, renderer or docs.
 
+## Fresh checkout for tests and typecheck
+
+With Node.js 24 (or 22.18+) and pnpm 10 installed, run `pnpm setup:checkout`
+from the checkout root. It installs the frozen lockfile without prompts, builds
+workspace packages and generated compiler inputs, restores prepared assets and
+the inventoried Earth places catalogue, and prepares typecheck metadata. It is
+safe to repeat and requires access to the asset host. Then run
+`pnpm test:run <test-file>` or `pnpm typecheck`.
+
 ## Checklist: a change that bakes or rebakes assets
 
 Does your change add a body, rebake one, or alter anything under a `prepared/`

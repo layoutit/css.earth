@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "nikawiy",
+  "card": {
+    "text": "A star 107 parsecs away, 4.1 times the Sun's width, measured from its light.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 74961: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-hd-136418-b",
+        "url": "https://en.wikipedia.org/wiki/HD_136418_b",
+        "label": "Wikipedia, \"HD 136418 b\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374388070",
+        "quote": "HD 136418 b, also known by its proper name Awasis, is an extrasolar planet orbiting the G-type star HD 136418 approximately 320 light years away in the constellation Boötes It has a notable orbit, staying within the known habitable zone."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its brightness, measured band by band, gives 8.448 times the Sun's luminosity at 4,861 K, so 4.104 solar radii.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 74961: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-hd-136418-b",
+        "url": "https://en.wikipedia.org/wiki/HD_136418_b",
+        "label": "Wikipedia, \"HD 136418 b\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374388070",
+        "quote": "It also has a star with a very similar temperature to the Sun."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its Gaia spectrum",
+      "summary": "The color of the star's light."
+    }
+  }
+}

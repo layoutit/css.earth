@@ -1,0 +1,60 @@
+{
+  "schema": "cssearth-raster-recipe@2",
+  "publicBase": "/scenes/xo-4b/",
+  "sourceWidth": 1024,
+  "sourceHeight": 512,
+  "width": 1024,
+  "height": 512,
+  "latitudeBands": 16,
+  "polarTile": 256,
+  "resample": "density-before-pack",
+  "polarProjection": "orthographic-bilinear",
+  "polesOutput": "xo-4b-poles-{id}{suffix}.webp",
+  "surfaceMetadata": {
+    "schema": "cssxo-4b-prepared-assets@1"
+  },
+  "thumbnail": {
+    "size": 64,
+    "centerLongitudeDegrees": 0
+  },
+  "surfaces": [
+    {
+      "id": "thermal",
+      "output": "xo-4b-surface-{id}{suffix}.webp",
+      "thumbnail": "xo-4b-dataset-{id}.webp",
+      "source": "photometry/thermal-color.json",
+      "falseColor": false,
+      "science": {
+        "kind": "dayside-thermal-color",
+        "qualification": "Color of a black body at the dayside brightness temperature 1,961 K measured in secondary eclipse at 4.5 µm (Todorov et al. 2012, dayside brightness temperature at 4.5 µm (NASA Exoplanet Archive emission table)), uniform over the disc and lit by its star so the day side faces it. The planet is unresolved: no map is implied, and reflected starlight is not included."
+      }
+    }
+  ],
+  "lighting": {
+    "bank": "sphere",
+    "presentationSize": 460,
+    "defaultFrame": 230,
+    "bankSchema": "cssxo-4b-prepared-lighting-bank@1",
+    "billboardSchema": "cssxo-4b-prepared-lighting-billboard@1",
+    "metadata": {
+      "schema": "cssxo-4b-prepared-lighting@1",
+      "storageModel": "prepared-full-resolution-density-row-shards",
+      "model": "prepared-full-phase-lambert-cubic-sky-sun-no-atmosphere",
+      "sourceRadius": "measurements.json#radiusKm",
+      "limbMeaning": "The adopted source-radius opaque-sphere silhouette and prepared phase lighting define the limb; no atmospheric rim is inferred.",
+      "sourceRenderer": "OpenSpace@56e29b54/modules/globebrowsing/shaders/texturetilemapping.glsl",
+      "ambientIntensity": 0.05,
+      "shadowlessFloodLimbFloor": 0.35,
+      "orenNayarRoughness": 0,
+      "terminatorSmoothstep": [
+        0,
+        0.1
+      ],
+      "minimumLightViewZ": -1,
+      "maximumLightViewZ": 1,
+      "baseLightAzimuthDegrees": 0,
+      "cameraContract": "unbounded-accumulated-matrix3d-phase-and-roll",
+      "runtimeRasterization": false
+    }
+  }
+}

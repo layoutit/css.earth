@@ -171,7 +171,7 @@ cycle. Share anything else through `@cssearth/core` or another package. Prepared
     `objects/geometry`, `objects/color`, `objects/cameras`, `raster` and `photometry`.
   - `objects/sources`: an object's authored source references read through its source manifest, and the pinned source
     files (bindings, byte ranges, contained paths, atomic publication) preparation reads and writes; JSON source values
-    left unchecked for their consumer; the shared reference banks under `src/references/` (the CIE 1931 table), whose
+    left unchecked for their consumer; the shared reference banks under `src/references/` (the CIE 1931 table, the IAU star names), whose
     directory is found on first use; and the
     idle-timeout stream relay pinned downloads go through.
   - `objects/charts`: the chart renderers and readers a content recipe names (measured spectra, retrieved profiles,
@@ -376,3 +376,6 @@ coverage, atmosphere and interior raster algorithms live in internal `src/baking
 Body-map and raster recipe contracts, resolution evidence and limb-model reference validation belong to
 `@cssearth/objects`. `readBodyMapProduct` and `readRasterRecipe` supply the surface-resolution calculation
 and lighting-bank resolution to those shared parsers. Keep scientific calculations, sampled maps and preparation here.
+
+The public `@cssearth/bake/run-implemented-objects/source` entry runs discovery guards
+against the current source, independent of a previous package build.

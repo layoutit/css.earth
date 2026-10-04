@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "hat-p-36-system",
+  "parent": "milky-way",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "hat-p-36"
+    },
+    "catalog": {
+      "name": "Tuiren system",
+      "systemName": "Tuiren system",
+      "classification": "planetary-system",
+      "color": "#ffeee7",
+      "distanceAu": 60567320.5,
+      "description": "HAT-P-36 b crosses Tuiren as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -6349705881354006000,
+        -922491475376356100,
+        6397444307544346000
+      ],
+      "presentationToReference": [
+        -0.700793424661246,
+        -0.6987261064316538,
+        -0.14377205619460107,
+        -0.10181195355044816,
+        -0.10151221727873502,
+        0.9896108305073243,
+        0.706061542690015,
+        -0.7081504769002249,
+        -4.2449921620073684e-7
+      ],
+      "orbitUpReference": [
+        0.6987261064316538,
+        0.10151221727873502,
+        0.7081504769002249
+      ],
+      "metersPerUnit": 2336205.4838709678,
+      "bodyRadiusM": 724223700
+    }
+  }
+}

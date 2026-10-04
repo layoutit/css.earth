@@ -1,4 +1,4 @@
-# HATS-72 credits
+# Zembra credits
 
 Radius, mass and temperature: Radius 0.7214 +/- 0.0021 solar radii from Hartman et al. 2020, the stellar radius of the default parameter set of HATS-72 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2020AJ....159..173H/abstract); Mass 0.7311 +/- 0.0028 solar masses from Hartman et al. 2020, the stellar mass of the default parameter set of HATS-72 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2020AJ....159..173H/abstract); temperature from Hartman et al. 2020, the stellar temperature of the default parameter set of HATS-72 b in the NASA Exoplanet Archive.
 

@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "ancha",
+  "card": {
+    "text": "A star 57 parsecs away, 11 times the Sun's width, measured from its light.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 110003: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-theta-aquarii",
+        "url": "https://en.wikipedia.org/wiki/Theta_Aquarii",
+        "label": "Wikipedia, \"Theta Aquarii\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1343024539",
+        "quote": "Theta Aquarii is a star in the equatorial constellation of Aquarius."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its brightness, measured band by band, gives 69 times the Sun's luminosity at 4,990 K, so 11.131 solar radii.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 110003: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-theta-aquarii",
+        "url": "https://en.wikipedia.org/wiki/Theta_Aquarii",
+        "label": "Wikipedia, \"Theta Aquarii\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1343024539",
+        "quote": "Its identifier is a Bayer designation that is Latinized from θ Aquarii, and abbreviated Tet Aqr or θ Aqr, respectively."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its spectrum",
+      "summary": "The color of the star's light."
+    }
+  }
+}

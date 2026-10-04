@@ -1,0 +1,45 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/wasp-15b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "wasp-15b-orbits",
+      "title": "WASP-15 b: orbits around Nyamien",
+      "output": "wasp-15b-system-orbits.svg",
+      "system": "wasp-15",
+      "highlight": "wasp-15b",
+      "description": "The orbits of Nyamien's planets in this map from above, to scale, with WASP-15 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Ivshina & Winn 2022 (2022ApJS..259...62I), via the NASA Exoplanet Archive ps table (pl_refname IVSHINA__AMP__WINN_2022): P 3.7520997 d"
+      }
+    },
+    {
+      "kind": "folded-transit",
+      "id": "wasp-15b-transit",
+      "title": "WASP-15 b: its transit",
+      "description": "WASP-15 b crossing its star, as TESS recorded it: 2 sectors (11, 102) of the SPOC pipeline's 2-minute light curves of TIC 111991770, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 15-minute bins. Error bars are each bin's standard error.",
+      "output": "wasp-15b-transit.svg",
+      "metadata": {
+        "tic": "TIC 111991770",
+        "sectors": [
+          11,
+          102
+        ],
+        "pipeline": "TESS SPOC, PDCSAP flux, quality 0"
+      },
+      "planet": "wasp-15b",
+      "sources": [
+        "photometry/tess/tess2019112060037-s0011-0000000111991770-0143-s_lc.fits",
+        "photometry/tess/tess2026086090000-s0102-0000000111991770-0304-s_lc.fits"
+      ],
+      "durationHours": 3.7128,
+      "binMinutes": 15,
+      "notes": [
+        "TESS 2-min SPOC · sectors 11, 102",
+        "Folded on the app's orbit; 15-min bins.",
+        "Bars: standard error of each bin."
+      ]
+    }
+  ]
+}

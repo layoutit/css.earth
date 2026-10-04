@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-3847-1538-4365-ab8b67",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Tautvaišienė et al. (2020): Chemical Composition of Bright Stars in the Continuous Viewing Zone of the TESS Space Mission",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2005.07526"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-4365/ab8b67"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2020ApJS..248...19T"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2020ApJS..248...19T",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-4365/ab8b67",
+      "label": "The Astrophysical Journal Supplement Series 248 19"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2020ApJS..248...19T",
+      "checkedOn": "2026-10-03",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Tautvaišienė et al. (2020), The Astrophysical Journal Supplement Series 248 19",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2020ApJS..248...19T"
+    }
+  ],
+  "publisher": "The Astrophysical Journal Supplement Series 248 19",
+  "creators": [
+    "G. Tautvaišienė",
+    "Š. Mikolaitis",
+    "A. Drazdauskas",
+    "et al."
+  ],
+  "publicationDate": "2020"
+}

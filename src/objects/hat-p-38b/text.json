@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hat-p-38b",
+  "card": {
+    "text": "HAT-P-38 b was found in 2012 by HATNet as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-pasj-64-5-97",
+        "url": "https://ui.adsabs.harvard.edu/abs/2012PASJ...64...97S/abstract",
+        "label": "Sato et al. 2012",
+        "checked": "2026-10-03",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname SATO_ET_AL__2012): disc_year 2012, disc_facility HATNet, sy_pnum 1; pl_orbper 4.64032787, pl_radj 0.825, pl_bmassj 0.267"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is the only planet known around Horna. Its orbit and size follow Sato et al. 2012's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-pasj-64-5-97",
+        "url": "https://ui.adsabs.harvard.edu/abs/2012PASJ...64...97S/abstract",
+        "label": "Sato et al. 2012",
+        "checked": "2026-10-03",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname SATO_ET_AL__2012): disc_year 2012, disc_facility HATNet, sy_pnum 1; pl_orbper 4.64032787, pl_radj 0.825, pl_bmassj 0.267"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

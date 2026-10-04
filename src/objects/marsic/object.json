@@ -1,0 +1,148 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "marsic",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Marsic",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 10973276.1
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/marsic-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Marsic",
+      "classification": "star",
+      "color": "#ffe8d1",
+      "distanceAu": 23254271.5,
+      "description": "A star 113 parsecs away, 16 times the Sun's width, measured from its light.",
+      "systemName": "Marsic system",
+      "aliases": [
+        "Kappa Herculis A",
+        "HD 145001",
+        "HIP 79043",
+        "Kappa Herculis"
+      ],
+      "order": 5609,
+      "context": {
+        "order": 5606
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -1560485328212118000,
+        -2937145006836056000,
+        1019824063449681000
+      ],
+      "presentationToReference": [
+        -0.44857131001369527,
+        -0.1375435479114004,
+        -0.8830999673086516,
+        -0.8443007823248944,
+        -0.2588855755471515,
+        0.469184875863653,
+        0.29315519575502785,
+        -0.956064867674555,
+        -5.166614982963111e-7
+      ],
+      "orbitUpReference": [
+        0.1375435479114004,
+        0.2588855755471515,
+        0.956064867674555
+      ],
+      "metersPerUnit": 35397664.838709675,
+      "bodyRadiusM": 10973276100
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

@@ -1,0 +1,148 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "ninnisig",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Ninnisig",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 45400686.3
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/ninnisig-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Ninnisig",
+      "classification": "star",
+      "color": "#ffdaaf",
+      "distanceAu": 52618494.7,
+      "description": "A star 255 parsecs away, 65 times the Sun's width, measured from its light.",
+      "systemName": "Ninnisig system",
+      "aliases": [
+        "Theta Lyrae",
+        "HD 180809",
+        "HIP 94713",
+        "HR 7314"
+      ],
+      "order": 5649,
+      "context": {
+        "order": 5646
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        2025183532627276300,
+        -5851013608509651000,
+        4860719129579818000
+      ],
+      "presentationToReference": [
+        0.25727680163025096,
+        0.2019758014023239,
+        -0.944994403682264,
+        -0.7433055045334158,
+        -0.5835335036834904,
+        -0.3270864977482167,
+        0.6174994528525777,
+        -0.786571310007401,
+        -9.149311265515777e-8
+      ],
+      "orbitUpReference": [
+        -0.2019758014023239,
+        0.5835335036834904,
+        0.786571310007401
+      ],
+      "metersPerUnit": 146453826.77419356,
+      "bodyRadiusM": 45400686300
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

@@ -1,37 +1,11 @@
-import { NEBULA_PHYSICAL_EVIDENCE_SCHEMA, type EmissionComponent, NEBULA_DEPTH_MODEL_SCHEMA, type DepthSurface, type DepthRecipe } from '@cssearth/objects';
-import { isFiniteNumber as coreIsFiniteNumber } from '@cssearth/core';
+import { NEBULA_PHYSICAL_EVIDENCE_SCHEMA, type EmissionComponent, parseDepthRecipe, type DepthSurface, type DepthRecipe } from '@cssearth/objects';
 import {jointPath,jointRecord} from '../joint/model.ts';
 
 type Pair = [number, number];
 type Triple = [number, number, number];
-const finite = coreIsFiniteNumber;
-const number = (v: unknown, low: number, high: number): v is number => finite(v) && v >= low && v <= high;
 const id = (v: unknown): v is string => typeof v === 'string' && /^[a-z0-9][a-z0-9-]{0,95}$/.test(v);
-function pair(v: unknown, low: number, high: number): Pair {
-  if (!Array.isArray(v) || v.length !== 2 || !v.every(n => number(n, low, high))) throw new TypeError('Invalid depth-model pair.');
-  return [v[0], v[1]];
-}
-function surface(v: unknown): DepthSurface {
-  if (!jointRecord(v) || !id(v.id) || v.methodId !== 'coherent-irregular-front' || !Array.isArray(v.evidenceIds) || !v.evidenceIds.length || !v.evidenceIds.every(id) ||
-      (v.support !== 'paper-guided' && v.support !== 'unconstrained') || !number(v.angleDegrees, -360, 360) || !number(v.depthArcsec, -1e6, 1e6) ||
-      !number(v.thicknessArcsec, .01, 1e5) || !number(v.strength, 0, 1) || typeof v.rationale !== 'string' || !v.rationale.trim() ||
-      !Array.isArray(v.curvaturePerArcsec) || v.curvaturePerArcsec.length !== 3 || !v.curvaturePerArcsec.every(n => number(n, -.1, .1)))
-    throw new TypeError('Invalid evidence-addressed depth surface.');
-  return { id: v.id, methodId: v.methodId, evidenceIds: [...v.evidenceIds], support: v.support,
-    centerArcsec: pair(v.centerArcsec, -1e6, 1e6), radiusArcsec: pair(v.radiusArcsec, .01, 1e6), angleDegrees: v.angleDegrees,
-    depthArcsec: v.depthArcsec, gradient: pair(v.gradient, -50, 50), curvaturePerArcsec: [v.curvaturePerArcsec[0], v.curvaturePerArcsec[1], v.curvaturePerArcsec[2]],
-    thicknessArcsec: v.thicknessArcsec, strength: v.strength, rationale: v.rationale };
-}
 export function readDepthRecipe(v: unknown, allowedPath: (path: string) => boolean = () => true): DepthRecipe {
-  if (!jointRecord(v) || v.schema !== NEBULA_DEPTH_MODEL_SCHEMA || !id(v.id) || !jointRecord(v.evidence) ||
-      !jointPath(v.evidence.path) || !allowedPath(v.evidence.path) ||
-      !Array.isArray(v.features) || v.features.length > 64 || !number(v.detailThicknessRatio, .05, 2) || !number(v.minimumThicknessArcsec, .01, 1000) ||
-      typeof v.interpretation !== 'string' || !v.interpretation.trim()) throw new TypeError('Invalid nebula depth-model recipe.');
-  const center = pair(v.centerIcrsDegrees, -360, 360), background = surface(v.background), features = v.features.map(surface);
-  if (center[0] < 0 || center[0] >= 360 || Math.abs(center[1]) > 90 || new Set([background.id, ...features.map(f => f.id)]).size !== features.length + 1 ||
-      background.support !== 'unconstrained') throw new TypeError('Invalid depth frame, duplicate surface, or unsupported background claim.');
-  return { schema: v.schema, id: v.id, centerIcrsDegrees: center, evidence: { path: v.evidence.path }, background, features,
-    detailThicknessRatio: v.detailThicknessRatio, minimumThicknessArcsec: v.minimumThicknessArcsec, interpretation: v.interpretation };
+  return parseDepthRecipe(v, path => jointPath(path) && allowedPath(path));
 }
 export function verifyDepthEvidence(recipe: DepthRecipe, v: unknown): string[] {
   if (!jointRecord(v) || v.schema !== NEBULA_PHYSICAL_EVIDENCE_SCHEMA || v.subjectId !== recipe.id || !Array.isArray(v.sources) || !Array.isArray(v.evidence) || !Array.isArray(v.methods))

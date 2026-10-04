@@ -1,0 +1,147 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "ceibo",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Ceibo",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 554784.1
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/ceibo-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Ceibo",
+      "classification": "star",
+      "color": "#ffe2c5",
+      "distanceAu": 7767796.4,
+      "description": "A star about 38 parsecs away, 80% of the Sun's width, measured by Gaia.",
+      "systemName": "Ceibo system",
+      "aliases": [
+        "Gaia DR3 5209903017765189760",
+        "HD 63454",
+        "HIP 37284"
+      ],
+      "order": 5513,
+      "context": {
+        "order": 5510
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -99166629123036700,
+        214220008172709340,
+        -1137816423177024900
+      ],
+      "presentationToReference": [
+        -0.0853388190726864,
+        0.4113362101048723,
+        0.9074799216598898,
+        0.18434913718949678,
+        -0.8885579349903465,
+        0.4200954555612083,
+        -0.9791489578081405,
+        -0.2031435906501885,
+        9.905778897596941e-7
+      ],
+      "orbitUpReference": [
+        -0.4113362101048723,
+        0.8885579349903465,
+        0.2031435906501885
+      ],
+      "metersPerUnit": 1789626.1290322582,
+      "bodyRadiusM": 554784100
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

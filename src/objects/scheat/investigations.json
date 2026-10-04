@@ -1,0 +1,36 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "scheat",
+  "entries": [
+    {
+      "id": "placement",
+      "subject": "Placement",
+      "status": "included",
+      "finding": "Anderson & Francis (2012), Astronomy Letters 38, 331 (XHIP), Hipparcos astrometry, VizieR V/137D/XHIP row HIP = 113881: position at J1991.25; Gaia cannot see the star. Distance: McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 113881: distance 60.096 pc, the paper's parallax inverted (Gaia DR1's where it revised the star's, else the Hipparcos reduction of van Leeuwen 2007; section 2.3; fractional uncertainty 0.009), at which the luminosity and radius hold (https://doi.org/10.1093/mnras/stx1433): 60.096 +/- 0.541 pc; Gaia DR3 cannot see the star. Proper motion: VizieR V/137D/XHIP row HIP = 113881 (same row): 187.3, 136 mas/yr. Radial velocity from Anderson & Francis (2012), Astronomy Letters 38, 331 (XHIP), Hipparcos astrometry, HIP 113881: RV 7.99 +/- 0.23 km/s (quality A).",
+      "evidence": [
+        "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=V/137D/XHIP",
+        "https://doi.org/10.1093/mnras/stx1433",
+        "https://doi.org/10.1134/S1063773712050015"
+      ]
+    },
+    {
+      "id": "radius-mass-and-temperature",
+      "subject": "Radius, mass and temperature",
+      "status": "included",
+      "finding": "Radius 114.864 solar radii from McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 113881: radius 114.864 solar radii, implied by the fitted luminosity 1863.64 solar luminosities (fractional uncertainty 0.071) and temperature (https://doi.org/10.1093/mnras/stx1433). No mass is measured, so GM is 0, the records' unpublished value. Temperature 3541 +/- 125 K from McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 113881: effective temperature 3541 +/- 125 K, from the fit of a model atmosphere to the star's spectral energy distribution (goodness of fit Q 0.088).",
+      "evidence": [
+        "https://doi.org/10.1093/mnras/stx1433"
+      ]
+    },
+    {
+      "id": "color",
+      "subject": "Color",
+      "status": "included",
+      "finding": "Kharitonov, Tereshchenko & Knyazeva (1988), Spectrophotometric Catalogue of Stars (Alma-Ata), record 1096: HR 8775; VizieR III/202, cross-checked against Burnashev (1985), Abastumani Astrophys. Obs. Bull. 59, 83; VizieR III/126, part2 record 470 (BS 8775) (2 levels apart at most, the threshold is 12), through the CIE 1931 2-degree observer: #ffca7d. Routes tried in order: stis-ngsl: HD 217906 is not in the library; gaia-xp: the star is placed by a catalogue row, so no Gaia DR3 source is read for it; pulkovo: HR 8775 is not in the catalogue; kiehling: HR 8775 is not among its 60 stars; kharitonov: used.",
+      "evidence": [
+        "https://cdsarc.cds.unistra.fr/ftp/III/202/catalog.dat",
+        "https://cdsarc.cds.unistra.fr/ftp/III/126/part2.dat.gz"
+      ]
+    }
+  ]
+}

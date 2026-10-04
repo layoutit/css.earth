@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "pabilsang",
+  "card": {
+    "text": "A star 84 parsecs away, 20 times the Sun's width, measured from its light.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 92845: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-nu2-sagittarii",
+        "url": "https://en.wikipedia.org/wiki/Nu2_Sagittarii",
+        "label": "Wikipedia, \"Nu2 Sagittarii\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1375721104",
+        "quote": "Nu2 Sagittarii (ν2 Sagittarii), also named Pabilsang, is a binary star system in the zodiac constellation of Sagittarius."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its brightness, measured band by band, gives 113 times the Sun's luminosity at 4,186 K, so 20.202 solar radii.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 92845: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-nu2-sagittarii",
+        "url": "https://en.wikipedia.org/wiki/Nu2_Sagittarii",
+        "label": "Wikipedia, \"Nu2 Sagittarii\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1375721104",
+        "quote": "It is faintly visible to the naked eye, having an apparent visual magnitude of +4.98; it is 0.16 degree north of the ecliptic."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its temperature",
+      "summary": "The color of the star's light."
+    }
+  }
+}

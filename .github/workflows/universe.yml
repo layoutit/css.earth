@@ -84,6 +84,10 @@ jobs:
   lint:
     name: Contract lint
     runs-on: ubuntu-latest
+    # A33: 12 minutes is an unmeasured safety ceiling, not a measured duration budget.
+    # Verify with gh run list --workflow universe.yml --branch main --limit 20,
+    # then gh run view <id> --json jobs: compare Contract lint startedAt/completedAt
+    # across successful cold-cache and warm-cache runs before changing this limit.
     timeout-minutes: 12
     permissions:
       contents: read
@@ -148,6 +152,10 @@ jobs:
           CI_PACKAGE_CACHE_HIT: ${{ steps.package-cache.outputs.cache-hit }}
           CI_PACKAGE_DIGEST: ${{ steps.ci-cache-key.outputs.package_digest }}
         run: node .github/scripts/ci/build-ci.mts lint
+      - name: Mutation-check stale reference guard
+        run: node --test .github/scripts/checks/check-stale-references.test.mts
+      - name: Check live references to retired paths
+        run: node .github/scripts/checks/check-stale-references.mts
       - name: Mutation-check architecture rules
         run: node --test .github/scripts/architecture/*.test.mts
       - name: Check the architecture against its baseline

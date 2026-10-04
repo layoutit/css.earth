@@ -1,0 +1,148 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "alshain",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Alshain",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 2149713
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/alshain-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Alshain",
+      "classification": "star",
+      "color": "#ffead3",
+      "distanceAu": 2825531.4,
+      "description": "A star 14 parsecs away, 3.1 times the Sun's width, measured from its light.",
+      "systemName": "Alshain system",
+      "aliases": [
+        "HD 188512",
+        "HIP 98036",
+        "HR 7602",
+        "Beta Aquilae A"
+      ],
+      "order": 5479,
+      "context": {
+        "order": 5476
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        202547816148501630,
+        -367997171976527100,
+        47140658196811910
+      ],
+      "presentationToReference": [
+        0.479182339093605,
+        0.05378785846702424,
+        -0.8760657236659317,
+        -0.8705981086237433,
+        -0.09772453859263668,
+        -0.48219171272183536,
+        0.11154917821993161,
+        -0.9937589148472519,
+        2.651413500208552e-7
+      ],
+      "orbitUpReference": [
+        -0.05378785846702424,
+        0.09772453859263668,
+        0.9937589148472519
+      ],
+      "metersPerUnit": 6934558.064516129,
+      "bodyRadiusM": 2149713000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

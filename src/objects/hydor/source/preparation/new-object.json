@@ -1,0 +1,61 @@
+{
+  "id": "hydor",
+  "name": "Hydor",
+  "system": "Hydor system",
+  "description": "A star 4.2 solar radii and 3.04 solar masses, about 95 parsecs away, measured by Gaia.",
+  "aliases": [
+    "Gaia DR3 2414783622022208128",
+    "HR 9098",
+    "2 Ceti",
+    "HIP 301",
+    "HD 225132"
+  ],
+  "featured": true,
+  "target": "HR 9098",
+  "gaia": "2414783622022208128",
+  "paper": {
+    "url": "https://doi.org/10.1051/0004-6361/202243688",
+    "credit": "Creevey et al. (2023), A&A 674, A26 (Gaia DR3 FLAME)"
+  },
+  "radius": "gaia-flame",
+  "mass": "gaia-flame",
+  "temperature": {
+    "value": 9823,
+    "source": "Andrae et al. (2023), A&A 674, A27 (Gaia DR3 GSP-Phot), astrophysical_parameters of Gaia DR3 2414783622022208128: teff_gspphot 9823.439 K (16th-84th percentiles 9758.921-9919.38), the temperature FLAME used",
+    "url": "https://doi.org/10.1051/0004-6361/202243462",
+    "uncertainty": 80.2
+  },
+  "color": {
+    "skip": [
+      "stis-ngsl",
+      "gaia-xp",
+      "pulkovo",
+      "kiehling",
+      "kharitonov",
+      "burnashev"
+    ],
+    "reason": "GSP-Phot fits an extinction A_G = 0.03 mag toward this star (Andrae et al. (2023), A&A 674, A27 (Gaia DR3 GSP-Phot), ag_gspphot), and the color routes do not remove extinction; GSP-Phot measured its temperature"
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A star about 95 parsecs away, 4.2 times the Sun's width, measured by Gaia.",
+    "introduction": "Gaia's parallax, brightness and spectrum give it 4.2 solar radii and 3.04 solar masses (FLAME) and 9,823 K at its surface (GSP-Phot).",
+    "locator": "gaiadr3.astrophysical_parameters, Gaia DR3 2414783622022208128: radius_flame, mass_flame, teff_gspphot",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/2_Ceti",
+      "title": "2 Ceti",
+      "revision": "1370770854",
+      "card": "2 Ceti, also named Hydor, is a single star in the equatorial constellation of Cetus, near the border with Aquarius.",
+      "introduction": "It is visible to the naked eye with an apparent visual magnitude of 4.483."
+    }
+  },
+  "notes": [],
+  "radialVelocity": {
+    "value": 8,
+    "uncertainty": 4.6,
+    "source": "SIMBAD's radial velocity for Gaia DR3 2414783622022208128 (quality C), from 2006AstL...32..759G; Gaia DR3 measures none",
+    "url": "https://ui.adsabs.harvard.edu/abs/2006AstL...32..759G/abstract"
+  },
+  "order": 5567
+}

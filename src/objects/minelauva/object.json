@@ -1,0 +1,148 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "minelauva",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Minelauva",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 45832716
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/minelauva-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Minelauva",
+      "classification": "star",
+      "color": "#ffcf83",
+      "distanceAu": 12546426.9,
+      "description": "A star 61 parsecs away, 66 times the Sun's width, measured from its light.",
+      "systemName": "Minelauva system",
+      "aliases": [
+        "HD 112300",
+        "HIP 63090",
+        "HR 4910",
+        "Delta Virginis"
+      ],
+      "order": 5619,
+      "context": {
+        "order": 5616
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -1818775083843343000,
+        -450013176914317700,
+        111217463557607360
+      ],
+      "presentationToReference": [
+        -0.9690215866393788,
+        -0.05752313384443379,
+        -0.24018379150062658,
+        -0.23976163219321414,
+        -0.014234234427460381,
+        0.9707274315163398,
+        0.059258116363474035,
+        -0.9982426937588772,
+        -0.000001439970084365743
+      ],
+      "orbitUpReference": [
+        0.05752313384443379,
+        0.014234234427460381,
+        0.9982426937588772
+      ],
+      "metersPerUnit": 147847470.96774194,
+      "bodyRadiusM": 45832716000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "id": "adhil",
+  "name": "Adhil",
+  "system": "Adhil system",
+  "description": "A star 11.9 solar radii and 2.70 solar masses, about 68 parsecs away, measured by Gaia.",
+  "aliases": [
+    "Gaia DR3 398030875774246656",
+    "HR 390",
+    "Xi Andromedae",
+    "HIP 6411",
+    "HD 8207"
+  ],
+  "featured": true,
+  "target": "HR 390",
+  "gaia": "398030875774246656",
+  "paper": {
+    "url": "https://doi.org/10.1051/0004-6361/202243688",
+    "credit": "Creevey et al. (2023), A&A 674, A26 (Gaia DR3 FLAME)"
+  },
+  "radius": "gaia-flame",
+  "mass": "gaia-flame",
+  "temperature": {
+    "value": 4666,
+    "source": "Andrae et al. (2023), A&A 674, A27 (Gaia DR3 GSP-Phot), astrophysical_parameters of Gaia DR3 398030875774246656: teff_gspphot 4665.719 K (16th-84th percentiles 4665.1074-4666.3804), the temperature FLAME used",
+    "url": "https://doi.org/10.1051/0004-6361/202243462",
+    "uncertainty": 0.6
+  },
+  "color": {
+    "skip": [
+      "stis-ngsl",
+      "gaia-xp",
+      "pulkovo",
+      "kiehling",
+      "kharitonov",
+      "burnashev"
+    ],
+    "reason": "GSP-Phot fits an extinction A_G = 0.00 mag toward this star (Andrae et al. (2023), A&A 674, A27 (Gaia DR3 GSP-Phot), ag_gspphot), and the color routes do not remove extinction; GSP-Phot measured its temperature"
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A star about 68 parsecs away, 12 times the Sun's width, measured by Gaia.",
+    "introduction": "Gaia's parallax, brightness and spectrum give it 11.9 solar radii and 2.70 solar masses (FLAME) and 4,666 K at its surface (GSP-Phot).",
+    "locator": "gaiadr3.astrophysical_parameters, Gaia DR3 398030875774246656: radius_flame, mass_flame, teff_gspphot",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/Xi_Andromedae",
+      "title": "Xi Andromedae",
+      "revision": "1348643124",
+      "card": "Xi Andromedae is a solitary star in the northern constellation of Andromeda.",
+      "introduction": "It has the proper name Adhil ; the Bayer designation is Latinized from ξ Andromedae, abbreviated Xi And or ξ And, respectively."
+    }
+  },
+  "notes": [],
+  "order": 5464
+}

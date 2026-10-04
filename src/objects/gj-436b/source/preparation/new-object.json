@@ -4,7 +4,8 @@
     {
       "id": "gj-436b",
       "name": "GJ 436 b",
-      "description": "Transiting planet of GJ 436 with a 2.64-day year, found in 2004.",
+      "description": "Transiting planet of Noquisi with a 2.64-day year, found in 2004.",
+      "order": 3098,
       "paper": {
         "url": "https://ui.adsabs.harvard.edu/abs/2014AcA....64..323M/abstract",
         "credit": "Maciejewski et al. 2014"
@@ -15,7 +16,7 @@
       },
       "text": {
         "card": "GJ 436 b was found in 2004 by W. M. Keck Observatory as it crossed its star.",
-        "introduction": "It is the only planet known around GJ 436. Its orbit and size follow Maciejewski et al. 2014's fit, the archive's default.",
+        "introduction": "It is the only planet known around Noquisi. Its orbit and size follow Maciejewski et al. 2014's fit, the archive's default.",
         "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname MACIEJEWSKI_ET_AL__2014): disc_year 2004, disc_facility W. M. Keck Observatory, sy_pnum 1; pl_orbper 2.643897621, pl_radj 0.372, pl_bmassj 0.07",
         "quotes": {
           "url": "https://en.wikipedia.org/wiki/Gliese_436_b",
@@ -33,8 +34,7 @@
         "source": "Stevenson et al. 2010, dayside brightness temperature at 3.6 µm (NASA Exoplanet Archive emission table)",
         "url": "https://ui.adsabs.harvard.edu/abs/2010Natur.464.1161S/abstract",
         "chosen": "6 measured of 6 rows; the smallest relative uncertainty, then the longest wavelength"
-      },
-      "order": 3098
+      }
     }
   ]
 }

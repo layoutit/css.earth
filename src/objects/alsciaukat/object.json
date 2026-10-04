@@ -1,0 +1,148 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "alsciaukat",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Alsciaukat",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 39701511.9
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/alsciaukat-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Alsciaukat",
+      "classification": "star",
+      "color": "#ffd1a0",
+      "distanceAu": 24181097.6,
+      "description": "A star 117 parsecs away, 57 times the Sun's width, measured from its light.",
+      "systemName": "Alsciaukat system",
+      "aliases": [
+        "HD 70272",
+        "HIP 41075",
+        "HR 3275",
+        "31 Lyncis"
+      ],
+      "order": 5478,
+      "context": {
+        "order": 5475
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -1539437218596301000,
+        2141677294158879000,
+        2475727921875964000
+      ],
+      "presentationToReference": [
+        -0.4255576851324896,
+        -0.39945398998715353,
+        0.8119957921738388,
+        0.5920392339535042,
+        0.5557217936776788,
+        0.5836632877707929,
+        0.6843903871946369,
+        -0.7291157644126249,
+        -7.541365171115028e-7
+      ],
+      "orbitUpReference": [
+        0.39945398998715353,
+        -0.5557217936776788,
+        0.7291157644126249
+      ],
+      "metersPerUnit": 128069393.22580644,
+      "bodyRadiusM": 39701511900
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

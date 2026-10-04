@@ -1,0 +1,53 @@
+{
+  "id": "formosa",
+  "name": "Formosa",
+  "system": "Formosa system",
+  "description": "A star 136 parsecs away, 9.7 times the Sun's width, measured from its light.",
+  "aliases": [
+    "HD 100655",
+    "HIP 56508"
+  ],
+  "featured": true,
+  "target": "HIP 56508",
+  "paper": {
+    "url": "https://doi.org/10.1093/mnras/stx1433",
+    "credit": "McDonald, Zijlstra & Watson (2017), MNRAS 471, 770"
+  },
+  "radius": {
+    "value": 9.726,
+    "source": "McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 56508: radius 9.726 solar radii, implied by the fitted luminosity 45.227 solar luminosities (fractional uncertainty 0.097) and temperature",
+    "url": "https://doi.org/10.1093/mnras/stx1433"
+  },
+  "mass": "unmeasured",
+  "temperature": {
+    "value": 4803,
+    "source": "McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 56508: effective temperature 4803 +/- 125 K, from the fit of a model atmosphere to the star's spectral energy distribution (goodness of fit Q 0.132)",
+    "url": "https://doi.org/10.1093/mnras/stx1433",
+    "uncertainty": 125
+  },
+  "distance": {
+    "value": 135.938,
+    "source": "McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 56508: distance 135.938 pc, the paper's parallax inverted (Gaia DR1's where it revised the star's, else the Hipparcos reduction of van Leeuwen 2007; section 2.3; fractional uncertainty 0.082), at which the luminosity and radius hold",
+    "url": "https://doi.org/10.1093/mnras/stx1433",
+    "uncertainty": 11.147
+  },
+  "limb": {
+    "none": "no mass is measured and no spectroscopic surface gravity is published with this radius: McDonald, Zijlstra & Watson (2017), MNRAS 471, 770 assume the gravity of their fit (table column 15)"
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A star 136 parsecs away, 9.7 times the Sun's width, measured from its light.",
+    "introduction": "Its brightness, measured band by band, gives 45 times the Sun's luminosity at 4,803 K, so 9.726 solar radii.",
+    "locator": "Table 2, HIP 56508: D, Teff, L, Rad, Q",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/HD_100655",
+      "title": "HD 100655",
+      "revision": "1374593008",
+      "card": "HD 100655, also named Formosa, is a star in the zodiac constellation of Leo, located 451 light-years away from the Sun.",
+      "introduction": "It has an apparent visual magnitude of +6.45, which makes it a challenge to see with the naked eye under ideal viewing conditions."
+    }
+  },
+  "notes": [],
+  "order": 5544
+}

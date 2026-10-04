@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import { resolve } from 'node:path';
 import { projectRoot } from '@cssearth/core/node';
-import { discoverObjectTests } from '@cssearth/bake/run-implemented-objects';
+import { discoverObjectTests } from '@cssearth/bake/run-implemented-objects/source';
 
 const root = projectRoot(import.meta.url);
 test('per-object discovery keeps the shared runtime suite and the body-owned suite', async () => {

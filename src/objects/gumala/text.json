@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "gumala",
+  "card": {
+    "text": "A star about 28 parsecs away, 1.3 times the Sun's width, measured by Gaia.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202243688",
+        "url": "https://doi.org/10.1051/0004-6361/202243688",
+        "label": "Creevey et al. (2023), Astronomy & Astrophysics 674 A26",
+        "checked": "2026-10-03",
+        "locator": "gaiadr3.astrophysical_parameters, Gaia DR3 6770313530317154560: radius_flame, mass_flame, teff_gspphot"
+      },
+      {
+        "catalogueId": "wikipedia-hd-179949",
+        "url": "https://en.wikipedia.org/wiki/HD_179949",
+        "label": "Wikipedia, \"HD 179949\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374435608",
+        "quote": "HD 179949 is a 6th magnitude star in the constellation of Sagittarius."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Gaia's parallax, brightness and spectrum give it 1.3 solar radii and 1.11 solar masses (FLAME) and 6,068 K at its surface (GSP-Phot).",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202243688",
+        "url": "https://doi.org/10.1051/0004-6361/202243688",
+        "label": "Creevey et al. (2023), Astronomy & Astrophysics 674 A26",
+        "checked": "2026-10-03",
+        "locator": "gaiadr3.astrophysical_parameters, Gaia DR3 6770313530317154560: radius_flame, mass_flame, teff_gspphot"
+      },
+      {
+        "catalogueId": "wikipedia-hd-179949",
+        "url": "https://en.wikipedia.org/wiki/HD_179949",
+        "label": "Wikipedia, \"HD 179949\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374435608",
+        "quote": "It is a yellow-white dwarf, a type of star hotter and more luminous than the Sun."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its temperature",
+      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

@@ -1,0 +1,148 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "enduri-senggu",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Enduri Senggu",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 1962569.7
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/enduri-senggu-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Enduri Senggu",
+      "classification": "star",
+      "color": "#edecff",
+      "distanceAu": 4195791.6,
+      "description": "A star 20 parsecs away, 2.8 times the Sun's width, measured from its light.",
+      "systemName": "Enduri Senggu system",
+      "aliases": [
+        "Tau Cygni A",
+        "HD 202444",
+        "HIP 104887",
+        "HR 8130"
+      ],
+      "order": 5539,
+      "context": {
+        "order": 5536
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        371342481103702500,
+        -326247307566697100,
+        386848182171006700
+      ],
+      "presentationToReference": [
+        0.591609731465736,
+        0.463004499083968,
+        -0.660018756902441,
+        -0.5197656929723906,
+        -0.4067780523479287,
+        -0.7512491201571929,
+        0.6163128670115288,
+        -0.7875013967962404,
+        3.7738278992949856e-17
+      ],
+      "orbitUpReference": [
+        -0.463004499083968,
+        0.4067780523479287,
+        0.7875013967962404
+      ],
+      "metersPerUnit": 6330870,
+      "bodyRadiusM": 1962569700
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

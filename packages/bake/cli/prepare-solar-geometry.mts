@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Entry script: node packages/bake/cli/prepare-solar-geometry.mts, run by `pnpm build:tools` and `pnpm prepare:objects`.
+// Entry script: node packages/bake/cli/prepare-solar-geometry.mts, run by `pnpm build:preparation` and `pnpm prepare:objects`.
 import { cross3 as cross, requireArray, requireRecord, requireString } from '@cssearth/core';
 
 // Computes, for each body, the direction to the Sun, the J2000 ecliptic

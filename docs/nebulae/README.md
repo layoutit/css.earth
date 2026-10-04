@@ -20,7 +20,7 @@ Requires Node 24 (or 22.18+) and pnpm 10.33.0. Dependency installation needs int
 
 ```sh
 pnpm install --frozen-lockfile --ignore-scripts
-pnpm build:tools
+pnpm build:preparation
 pnpm prepare:nebulae
 pnpm dev
 ```
@@ -35,7 +35,7 @@ To restore one of the six Galactic nebulae:
 
 ```sh
 pnpm install --frozen-lockfile --ignore-scripts
-pnpm build:tools
+pnpm build:preparation
 node packages/bake/cli/prepare-nebulae.mts --object=helix --if-missing
 node site/build/prepare/prepare-facilities.mts --catalog-only
 ```

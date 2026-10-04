@@ -1,0 +1,147 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "ayeyarwady",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Ayeyarwady",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 4127781.5
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/ayeyarwady-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Ayeyarwady",
+      "classification": "star",
+      "color": "#ffe9d7",
+      "distanceAu": 33345103.7,
+      "description": "A star about 160 parsecs away, 5.9 times the Sun's width, measured by Gaia.",
+      "systemName": "Ayeyarwady system",
+      "aliases": [
+        "Gaia DR3 5079636934554540160",
+        "HD 18742",
+        "HIP 13993"
+      ],
+      "order": 5497,
+      "context": {
+        "order": 5494
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        3294803304673943000,
+        3299896041632847000,
+        -1771625793212397000
+      ],
+      "presentationToReference": [
+        0.6604990575572939,
+        -0.2509354729711405,
+        0.707652727946891,
+        0.6615199828304589,
+        -0.25132388602517575,
+        -0.7065604125828122,
+        -0.35515110485808127,
+        -0.934808907059595,
+        3.600898433739702e-7
+      ],
+      "orbitUpReference": [
+        0.2509354729711405,
+        0.25132388602517575,
+        0.934808907059595
+      ],
+      "metersPerUnit": 13315424.193548387,
+      "bodyRadiusM": 4127781500
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

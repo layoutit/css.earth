@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "idigna",
+  "card": {
+    "text": "A star 35 parsecs away, 1.8 times the Sun's width, measured from its light.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 7535: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-pi-piscium",
+        "url": "https://en.wikipedia.org/wiki/Pi_Piscium",
+        "label": "Wikipedia, \"Pi Piscium\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1376028682",
+        "quote": "Pi Piscium, also named Idigna, is a spectroscopic binary star in the zodiac constellation of Pisces."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its brightness, measured band by band, gives 5.565 times the Sun's luminosity at 6,699 K, so 1.754 solar radii.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 7535: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-pi-piscium",
+        "url": "https://en.wikipedia.org/wiki/Pi_Piscium",
+        "label": "Wikipedia, \"Pi Piscium\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1376028682",
+        "quote": "It is faintly visible to the naked eye, having an apparent visual magnitude of 5.60."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its temperature",
+      "summary": "The color of the star's light."
+    }
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "id": "hat-p-21",
+  "name": "Mazaalai",
+  "system": "Mazaalai system",
+  "description": "Star of 5,588 K, 277 parsecs away, with 1 transiting planet.",
+  "aliases": [
+    "HAT-P-21",
+    "TOI-1800"
+  ],
+  "featured": true,
+  "target": "HAT-P-21",
+  "gaia": "770622651659107712",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+    "credit": "Stassun et al. 2017"
+  },
+  "radius": {
+    "value": 1.21,
+    "source": "Stassun et al. 2017, the stellar radius of the default parameter set of HAT-P-21 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+    "uncertainty": 0.17
+  },
+  "mass": {
+    "value": 1.24,
+    "source": "Stassun et al. 2017, the stellar mass of the default parameter set of HAT-P-21 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+    "uncertainty": 0.6
+  },
+  "temperature": {
+    "value": 5588,
+    "source": "Stassun et al. 2017, the stellar temperature of the default parameter set of HAT-P-21 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+    "uncertainty": 80
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "HAT-P-21 b crosses Mazaalai as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Stassun et al. 2017.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname STASSUN_ET_AL__2017): st_teff 5588, st_rad 1.21, st_mass 1.24",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/HAT-P-21",
+      "title": "HAT-P-21",
+      "revision": "1353846145",
+      "card": "HAT-P-21, also named Mazaalai, is a G-type main-sequence star about 927 light-years away.",
+      "introduction": "The star has amount of metals similar to solar abundance."
+    }
+  },
+  "notes": [],
+  "order": 5611
+}

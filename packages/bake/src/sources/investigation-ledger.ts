@@ -5,67 +5,33 @@
  * A facility keeps the same ledger in src/facilities/<facility id>/investigations.json: what was examined about a telescope's
  * archive, data policy and reduction software, and what was run from it. Every facility ledger answers the same three sweep
  * entries (FACILITY_SWEEP), so facilities compare side by side. */
-import { INVESTIGATION_LEDGER_SCHEMA, INVESTIGATION_STATUSES, type InvestigationStatus, type InvestigationEntry, type InvestigationLedger, type FacilityInvestigationLedger } from '@cssearth/objects';
+import { evidenceLink, parseInvestigationLedger as parseSharedInvestigationLedger, parseFacilityLedger as parseSharedFacilityLedger, type InvestigationStatus, type InvestigationEntry, type InvestigationLedger, type FacilityInvestigationLedger } from '@cssearth/objects';
 import { access, readdir, readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { hasErrorCode, isRecord } from '@cssearth/core';
+import { hasErrorCode } from '@cssearth/core';
 import { readInvestigationSurveys, type InvestigationSurvey } from './investigation-survey.ts';
 
+export { evidenceLink } from '@cssearth/objects';
 export const INVESTIGATION_LEDGER_FILE = 'investigations.json';
 /** The questions every facility ledger answers first. */
 export const FACILITY_SWEEP = ['archive-access', 'data-policy', 'reduction-software'] as const;
 
-const isStatus = (value: unknown): value is InvestigationStatus => INVESTIGATION_STATUSES.some(status => status === value);
-function fail(context: string, message: string): never { throw new TypeError(`${context}: ${message}.`); }
-
-function record(value: unknown, required: readonly string[], optional: readonly string[], context: string) {
-  if (!isRecord(value)) fail(context, 'expects an object');
-  for (const key of required) if (!Object.hasOwn(value, key)) fail(context, `needs ${key}`);
-  for (const key of Object.keys(value)) if (!required.includes(key) && !optional.includes(key)) fail(context, `has unknown field ${key}`);
-  return value;
-}
-
-function line(value: unknown, context: string) {
-  if (typeof value !== 'string' || !value || value !== value.trim() || /[\n\r]/.test(value)) fail(context, 'expects one trimmed line of text');
-  return value;
-}
-
-/** A ledger is a notebook: an evidence item is one line of text, a link or a note. */
-export function evidenceLink(value: unknown, context: string) { return line(value, context); }
-
-/** Validate one ledger against the object package that owns it. */
-export function parseInvestigationLedger(value: unknown, objectId: string, surveys: ReadonlyMap<string, InvestigationSurvey> = new Map()): InvestigationLedger {
-  const context = `${objectId} investigation ledger`, raw = record(value, ['schema', 'objectId', 'entries'], [], context);
-  if (raw.objectId !== objectId) fail(context, `expects objectId ${objectId}`);
-  return { schema: INVESTIGATION_LEDGER_SCHEMA, objectId, entries: parseEntries(raw, context, surveys) };
-}
-
-/** Validate one facility ledger: the object ledger's entries, led by the sweep entries every facility answers. */
-export function parseFacilityLedger(value: unknown, facilityId: string, surveys: ReadonlyMap<string, InvestigationSurvey> = new Map()): FacilityInvestigationLedger {
-  const context = `${facilityId} facility ledger`, raw = record(value, ['schema', 'facilityId', 'entries'], [], context);
-  if (raw.facilityId !== facilityId) fail(context, `expects facilityId ${facilityId}`);
-  return { schema: INVESTIGATION_LEDGER_SCHEMA, facilityId, entries: parseEntries(raw, context, surveys) };
-}
-
-function parseEntries(raw: Record<string, unknown>, context: string, surveys: ReadonlyMap<string, InvestigationSurvey>): InvestigationEntry[] {
-  if (raw.schema !== INVESTIGATION_LEDGER_SCHEMA) fail(context, `expects schema ${INVESTIGATION_LEDGER_SCHEMA}`);
-  if (!Array.isArray(raw.entries)) fail(context, 'expects entries');
-  const ids = new Set<string>();
-  return raw.entries.map((value: unknown, index): InvestigationEntry => {
-    const where = `${context} entry ${index + 1}`;
-    if (!isRecord(value)) fail(where, 'expects an object');
-    const id = line(value.id, `${where} id`);
-    if (ids.has(id)) fail(where, `repeats id ${id}`);
-    ids.add(id);
-    if (!isStatus(value.status)) fail(where, `expects status ${INVESTIGATION_STATUSES.join(', ')}`);
+function expandInvestigationEntry(surveys: ReadonlyMap<string, InvestigationSurvey>) {
+ return (value: Record<string, unknown>, id: string, status: InvestigationStatus): InvestigationEntry => {
     // A shared record supplies the finding, subject, evidence and revisit condition it is quoted for.
     const survey = typeof value.survey === 'string' ? surveys.get(value.survey) : undefined;
     const text = (key: string, fallback?: string) => typeof value[key] === 'string' && value[key] ? String(value[key]) : fallback;
     const revisitWhen = text('revisitWhen', survey?.revisitWhen);
-    return { id, subject: text('subject', survey?.subject) ?? id, status: value.status, finding: text('finding', survey?.finding) ?? '',
+    return { id, subject: text('subject', survey?.subject) ?? id, status, finding: text('finding', survey?.finding) ?? '',
       ...(revisitWhen === undefined ? {} : { revisitWhen }), ...(survey ? { survey: survey.id } : {}),
       evidence: [...(survey ? survey.evidence : []), ...(Array.isArray(value.evidence) ? value.evidence.filter((item): item is string => typeof item === 'string') : [])] };
-  });
+ };
+}
+export function parseInvestigationLedger(value: unknown, objectId: string, surveys: ReadonlyMap<string, InvestigationSurvey> = new Map()): InvestigationLedger {
+ return parseSharedInvestigationLedger(value, objectId, expandInvestigationEntry(surveys));
+}
+export function parseFacilityLedger(value: unknown, facilityId: string, surveys: ReadonlyMap<string, InvestigationSurvey> = new Map()): FacilityInvestigationLedger {
+ return parseSharedFacilityLedger(value, facilityId, expandInvestigationEntry(surveys));
 }
 
 /** Every ledger under src/objects, in object order. A ledger belongs to an object package that has a descriptor. */

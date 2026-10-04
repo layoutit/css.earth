@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "adhafera",
+  "card": {
+    "text": "A star 84 parsecs away, 10 times the Sun's width, measured from its light.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 50335: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-zeta-leonis",
+        "url": "https://en.wikipedia.org/wiki/Zeta_Leonis",
+        "label": "Wikipedia, \"Zeta Leonis\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374594699",
+        "quote": "Zeta Leonis, also named Adhafera, is a third-magnitude star in the constellation of Leo, the lion."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its brightness, measured band by band, gives 223 times the Sun's luminosity at 6,894 K, so 10.485 solar radii.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 50335: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-zeta-leonis",
+        "url": "https://en.wikipedia.org/wiki/Zeta_Leonis",
+        "label": "Wikipedia, \"Zeta Leonis\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374594699",
+        "quote": "It forms the second star in the blade of the sickle, which is an asterism formed from the head of Leo."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its spectrum",
+      "summary": "The color of the star's light."
+    }
+  }
+}
