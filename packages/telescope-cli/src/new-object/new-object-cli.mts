@@ -88,7 +88,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(realpathSync(process.ar
     // Published simulations for bodies already in the tree, each from an entry written after reading its paper: `--simulation entries.json` (new-object/simulation/simulation-dataset.mts).
     const { readFile } = await import('node:fs/promises'), { parseSimulationEntries } = await import('./simulation/simulation-dataset.mts'), { rebuildExistingDatasets } = await import('./planet-datasets.mts'), { liveArchive } = await import('./archives/archives.mts');
     const entries = parseSimulationEntries(JSON.parse(await readFile(option('simulation')!, 'utf8')));
-    const lines = await rebuildExistingDatasets(process.cwd(), [...entries.keys()], 'simulation', liveArchive, line => process.stdout.write(`${line}\n`), new Map(), new Map(), entries);
+    const lines = await rebuildExistingDatasets(newObjectPath(), [...entries.keys()], 'simulation', liveArchive, line => process.stdout.write(`${line}\n`), new Map(), new Map(), entries);
     process.stdout.write(`${lines.length} dataset${lines.length === 1 ? '' : 's'} written. Bake: node packages/bake/cli/prepare-object.mts ${[...entries.keys()].join(' ')}\n`);
   } else if (option('rock-eclipse') !== undefined && !specPath) {
     // Bare-rock models from published eclipse depths for rocky planets already in the tree: `--rock-eclipse entries.json` (new-object/rock/rock-eclipse-dataset.mts).

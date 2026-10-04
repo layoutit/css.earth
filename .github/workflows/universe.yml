@@ -46,16 +46,26 @@ jobs:
           # `git diff --name-only` reads only commits and trees either way.
           fetch-depth: 0
           filter: blob:none
-          # Classification reads Git trees, not object bytes. Keep the complete diff/history without
-          # transferring the source-media bank before any validation job can start.
+          # Classification reads Git trees and test source for cross-owner imports and source pins.
+          # Keep those scripts/tests and complete diff/history without transferring source media.
           sparse-checkout-cone-mode: false
           sparse-checkout: |
             /.github/scripts/**/*.mts
+            /.github/**/*.test.mts
             /packages/core/src/validate.ts
             /packages/core/src/node/script-test-files.ts
             /.github/ci-areas.json
             /package.json
             /packages/*/package.json
+            /packages/**/*.test.ts
+            /packages/**/*.test.mts
+            /integration/**/*.test.ts
+            /integration/**/*.test.mts
+            /site/**/*.test.ts
+            /site/**/*.test.mts
+            /site/test/**
+            /src/**/*.test.*
+            /labs/performance/*.test.mts
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: '22'
@@ -166,7 +176,7 @@ jobs:
       - name: Check live references to retired paths
         run: node .github/scripts/checks/check-stale-references.mts
       - name: Mutation-check architecture rules
-        run: node --test .github/scripts/architecture/*.test.mts
+        run: node --test .github/scripts/architecture/*.test.mts .github/scripts/architecture/ratchets/*.test.mts
       - name: Check the architecture against its baseline
         # Fails when a change adds a folder-cycle edge or a forbidden import (.github/scripts/architecture/rules.mts) that
         # .github/scripts/architecture/baseline.json does not record, or breaks a repository rule (repository-rules.mts:
@@ -619,7 +629,7 @@ jobs:
       - name: Install workspace dependencies
         run: pnpm install --frozen-lockfile --ignore-scripts
       - name: Build the telescope dependency closure
-        run: node .github/scripts/architecture/workspace-builds.mts --run @cssearth/telescope
+        run: node .github/scripts/architecture/workspace-builds.mts --run @cssearth/telescope-cli @cssearth/bake
       - name: Install micromamba for the toolchain installer
         # The installer runs `micromamba create` and the runner image has no micromamba. A pinned release binary, so the
         # install cannot change under the lane.
@@ -635,9 +645,8 @@ jobs:
           node packages/telescope-cli/src/toolchains/astronomy-toolchains.mts astroquery verify
       - name: Require all archive safety and CDF tests to run
         run: |
-          node --test --test-reporter=tap packages/telescope-cli/src/families/f07-dynamic-spectrum.test.mts packages/telescope-cli/src/vo/package.test.mts > astroquery.tap
-          cat astroquery.tap
-          node .github/scripts/ci/astroquery-tests.mts astroquery.tap
+          node .github/scripts/ci/astroquery-tests.mts --list
+          node .github/scripts/ci/astroquery-tests.mts --run
 
   ci-guard:
     name: Report the first CI failure

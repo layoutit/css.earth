@@ -59,3 +59,11 @@ export function readPhotometricMgeRecipe(value: unknown): PhotometricMgeRecipe {
     ...(value.envelope === undefined ? {} : { envelope: validateEnvelopeSettings(value.envelope) }),
     ...(value.residualMaximumComponents === undefined ? {} : { residualMaximumComponents: value.residualMaximumComponents }) };
 }
+
+/** Publication ownership admission preserves receipts that retain only identity and an evidence pin.
+ * Scientific recipe admission remains the full reader's responsibility. */
+export function readPublishedPhotometricMgeRecipe(value: unknown, expectedId: string): { evidence: unknown } {
+  if (!jointRecord(value) || value.schema !== PHOTOMETRIC_MGE_SCHEMA || value.id !== expectedId)
+    throw new Error('Prepared nebula omits its configured photometric model.');
+  return { evidence: value.evidence };
+}

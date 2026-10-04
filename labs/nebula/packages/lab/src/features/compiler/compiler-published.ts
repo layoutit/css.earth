@@ -1,4 +1,4 @@
-import { NEBULA_PHYSICAL_EVIDENCE_SCHEMA, PHOTOMETRIC_MGE_SCHEMA, verifySampledEvidence, NEBULA_DEPTH_MODEL_SCHEMA } from '@cssearth/objects';
+import { NEBULA_PHYSICAL_EVIDENCE_SCHEMA, readPublishedPhotometricMgeRecipe, verifySampledEvidence, readPublishedDepthRecipe } from '@cssearth/objects';
 import { isRecord as coreIsRecord } from '@cssearth/core';
 import { readCompilerRecipe, readCompilerRequest, type CompilerRequest } from './model.ts';
 import { readCompilerResult, type CompilerResult } from './result.ts';
@@ -45,9 +45,8 @@ export async function loadPublishedCompiler(path: string, recipePath: string, fe
   let depthInputs: { recipe: Pin; evidence: Pin } | undefined;
   if (recipe.depthRecipe) {
     const depth: unknown = JSON.parse(new TextDecoder().decode(inputs.find(([path]) => path === recipe.depthRecipe)![1]));
-    if (!record(depth) || depth.schema !== NEBULA_DEPTH_MODEL_SCHEMA || depth.id !== recipe.id)
-      throw new Error('Prepared depth recipe belongs to another nebula or has an invalid schema.');
-    const evidence = pin(depth.evidence);
+    const admitted = readPublishedDepthRecipe(depth, recipe.id);
+    const evidence = pin(admitted.evidence);
     if (!evidence.path.startsWith('labs/nebula/models/') || !publication.inputs.some(source => source.path === evidence.path))
       throw new Error('Prepared nebula receipt does not pin the declared depth evidence.');
     const ledger: unknown = JSON.parse(new TextDecoder().decode(inputs.find(([path]) => path === evidence.path)![1]));
@@ -64,9 +63,10 @@ export async function loadPublishedCompiler(path: string, recipePath: string, fe
     throw new Error('Prepared nebula method does not match its current recipe.');
   if (recipe.photometricPriorRecipe) {
     const model: unknown = JSON.parse(new TextDecoder().decode(inputs.find(([path]) => path === recipe.photometricPriorRecipe)![1]));
-    if (!record(model) || model.schema !== PHOTOMETRIC_MGE_SCHEMA || model.id !== recipe.id || !record(method.photometricPrior))
+    const admitted = readPublishedPhotometricMgeRecipe(model, recipe.id);
+    if (!record(method.photometricPrior))
       throw new Error('Prepared nebula omits its configured photometric model.');
-    const evidence = pin(model.evidence), snapshot = pin(method.photometricPrior.recipe), evidenceSnapshot = pin(method.photometricPrior.evidence);
+    const evidence = pin(admitted.evidence), snapshot = pin(method.photometricPrior.recipe), evidenceSnapshot = pin(method.photometricPrior.evidence);
     if (!evidence.path.startsWith('labs/nebula/models/') ||
         !publication.inputs.some(input => input.path === evidence.path))
       throw new Error('Prepared photometric model differs from its configured evidence.');

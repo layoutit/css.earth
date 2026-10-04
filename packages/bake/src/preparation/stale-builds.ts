@@ -26,9 +26,9 @@ export interface BuildRule { readonly name: string; readonly command: string; re
 const BUILD_METADATA: readonly (Partial<BuildRule> & Pick<BuildRule, 'name'> & { bundledWorkspace?: boolean })[] = [
   { name: '@cssearth/astronomy', sources: ['packages/astronomy/src', 'packages/astronomy/data/bodies', 'packages/astronomy/cli'] },
   // Declaration stubs are written after tsc succeeds; a failed declaration build must read stale.
-  { name: '@cssearth/bake', output: 'packages/bake/dist/volume.d.ts', inputs: 'packages/bake/dist/metafile-esm.json', base: 'packages/bake' },
+  { name: '@cssearth/bake', output: 'packages/bake/dist/volume.js', additionalOutputs: ['packages/bake/dist/volume.d.ts'], inputs: 'packages/bake/dist/metafile-esm.json', base: 'packages/bake' },
   { name: '@cssearth/renderer', inputs: 'packages/renderer/dist/metafile-esm.json', base: 'packages/renderer' },
-  { name: '@cssearth/volume-viewer', sources: ['packages/volume-viewer/src', 'packages/bake/src'], output: 'packages/volume-viewer/dist/scene/compiler-viewer.js' },
+  { name: '@cssearth/volume-viewer', sources: ['packages/volume-viewer/src'], output: 'packages/volume-viewer/dist/scene/compiler-viewer.js' },
   { name: '@cssearth/telescope-cli', sources: ['packages/telescope-cli/src', 'packages/telescope-cli/src/sphere'], output: 'packages/telescope-cli/dist/telescope.mjs', additionalOutputs: ['packages/telescope-cli/dist/sphere-lane.js'], bundledWorkspace: true },
 ];
 

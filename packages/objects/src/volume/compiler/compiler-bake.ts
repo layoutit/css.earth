@@ -1,10 +1,12 @@
-export const COMPILER_STAR_SPRITES_SCHEMA = 'cssearth-compiler-star-sprites@1';
-export const COMPILER_BAKE_SCHEMA = 'cssearth-compiler-bake@2';
+import { isFiniteTriple as triple } from '@cssearth/core';
 import type { DensityVolumeFrame } from '../../density-volume.js';
 import type { EmissionBounds, EmissionVector3, SkyBounds } from '../emission/coordinates.js';
 import { readVolumeLayerPlan, type VolumeLayerPlan } from './volume-layer-plan.js';
 import { readLayerOptimizationReport, type LayerOptimizationReport } from './layer-optimization-report.js';
 import { readRenderElementBudget, type RenderElementBudget } from './render-element-budget.js';
+
+export const COMPILER_STAR_SPRITES_SCHEMA = 'cssearth-compiler-star-sprites@1';
+export const COMPILER_BAKE_SCHEMA = 'cssearth-compiler-bake@2';
 
 export const COMPILER_LONGEST_AXIS_SLICES = 512;
 
@@ -66,7 +68,6 @@ export interface CompilerBakeResult {
 
 const record = (v: unknown): v is Record<string, unknown> => v !== null && typeof v === 'object' && !Array.isArray(v);
 const finite = (v: unknown): v is number => typeof v === 'number' && Number.isFinite(v);
-const triple = (v: unknown): v is EmissionVector3 => Array.isArray(v) && v.length === 3 && v.every(finite);
 const safeId = (v: unknown): v is string => typeof v === 'string' && /^[a-z0-9][a-z0-9-]{0,95}$/.test(v);
 /** Slab rasters are 512 pixels wide unless a scene saves a smaller width. A cloud that fills its bounds keeps every
  * slab at full size, so its three atlases grow with the square of this width. */

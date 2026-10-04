@@ -2,6 +2,7 @@
 // ephemeris), placed in the world at the host's own prepared position. The sky-table preparer
 // (packages/bake/cli/prepare-catalogue-points.mts) centres its banks on the Sun and reads sky coordinates; this one reads
 // Cartesian rows in the host's frame and writes the same bank the app draws.
+import { readNonemptyText } from '@cssearth/core';
 import { CATALOGUE_POINTS_SCHEMA } from '@cssearth/objects';
 
 export const BODY_POINTS_SOURCE_SCHEMA = 'cssearth-body-points-source@1';
@@ -29,24 +30,23 @@ export function parseBodyPointsRecipe(value: unknown, path: string): BodyPointsR
     if (unknown.length) throw new TypeError(`${at(key)} has unknown ${unknown.join(', ')}; it holds ${fields.join(', ')}.`);
     return input as Record<string, unknown>;
   };
-  const text = (input: unknown, key: string) => { if (typeof input !== 'string' || !input) throw new TypeError(`${at(key)} must be text, got ${JSON.stringify(input)}.`); return input; };
   const positive = (input: unknown, key: string) => { if (typeof input !== 'number' || !(input > 0) || !Number.isFinite(input)) throw new TypeError(`${at(key)} must be a positive number, got ${JSON.stringify(input)}.`); return input; };
   const recipe = record(value, 'recipe', ['schema', 'id', 'published', 'host', 'source', 'meaning', 'table', 'frame', 'appearance']);
   if (recipe.schema !== BODY_POINTS_SOURCE_SCHEMA) throw new TypeError(`${at('schema')} must be ${BODY_POINTS_SOURCE_SCHEMA}, got ${JSON.stringify(recipe.schema)}.`);
-  const id = text(recipe.id, 'id'), host = text(recipe.host, 'host');
+  const id = readNonemptyText(recipe.id, 'id', () => { throw new TypeError(`${at('id')} must be text, got ${JSON.stringify(recipe.id)}.`); }), host = readNonemptyText(recipe.host, 'host', () => { throw new TypeError(`${at('host')} must be text, got ${JSON.stringify(recipe.host)}.`); });
   if (![id, host].every(name => /^[a-z][a-z0-9-]*$/u.test(name))) throw new TypeError(`${at('id and host')} must be object ids, got ${JSON.stringify([id, host])}.`);
   const table = record(recipe.table, 'table', ['path', 'origin', 'generator']);
   const frame = record(recipe.frame, 'frame', ['input', 'output', 'epochJdTt']);
   if (frame.input !== 'host-centred-icrf-km') throw new TypeError(`${at('frame.input')} must be host-centred-icrf-km, got ${JSON.stringify(frame.input)}.`);
   if (typeof frame.epochJdTt !== 'number' || !Number.isFinite(frame.epochJdTt)) throw new TypeError(`${at('frame.epochJdTt')} must be a finite Julian date, got ${JSON.stringify(frame.epochJdTt)}.`);
   const appearance = record(recipe.appearance, 'appearance', ['colorCss', 'radiusPx', 'opacity']);
-  const colorCss = text(appearance.colorCss, 'appearance.colorCss');
+  const colorCss = readNonemptyText(appearance.colorCss, 'appearance.colorCss', () => { throw new TypeError(`${at('appearance.colorCss')} must be text, got ${JSON.stringify(appearance.colorCss)}.`); });
   if (!/^#[0-9a-f]{6}$/u.test(colorCss)) throw new TypeError(`${at('appearance.colorCss')} must be #rrggbb, got ${JSON.stringify(colorCss)}.`);
   const opacity = positive(appearance.opacity, 'appearance.opacity');
   if (opacity > 1) throw new TypeError(`${at('appearance.opacity')} must be at most 1, got ${opacity}.`);
-  return Object.freeze({ id, host, source: text(recipe.source, 'source'), meaning: text(recipe.meaning, 'meaning'),
-    table: Object.freeze({ path: text(table.path, 'table.path'), origin: text(table.origin, 'table.origin'), generator: text(table.generator, 'table.generator') }),
-    frame: Object.freeze({ input: 'host-centred-icrf-km' as const, output: text(frame.output, 'frame.output'), epochJdTt: frame.epochJdTt }),
+  return Object.freeze({ id, host, source: readNonemptyText(recipe.source, 'source', () => { throw new TypeError(`${at('source')} must be text, got ${JSON.stringify(recipe.source)}.`); }), meaning: readNonemptyText(recipe.meaning, 'meaning', () => { throw new TypeError(`${at('meaning')} must be text, got ${JSON.stringify(recipe.meaning)}.`); }),
+    table: Object.freeze({ path: readNonemptyText(table.path, 'table.path', () => { throw new TypeError(`${at('table.path')} must be text, got ${JSON.stringify(table.path)}.`); }), origin: readNonemptyText(table.origin, 'table.origin', () => { throw new TypeError(`${at('table.origin')} must be text, got ${JSON.stringify(table.origin)}.`); }), generator: readNonemptyText(table.generator, 'table.generator', () => { throw new TypeError(`${at('table.generator')} must be text, got ${JSON.stringify(table.generator)}.`); }) }),
+    frame: Object.freeze({ input: 'host-centred-icrf-km' as const, output: readNonemptyText(frame.output, 'frame.output', () => { throw new TypeError(`${at('frame.output')} must be text, got ${JSON.stringify(frame.output)}.`); }), epochJdTt: frame.epochJdTt }),
     appearance: Object.freeze({ colorCss, radiusPx: positive(appearance.radiusPx, 'appearance.radiusPx'), opacity }) });
 }
 
