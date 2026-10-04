@@ -1,12 +1,12 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { globSync, readdirSync, readFileSync, mkdtempSync, rmSync } from 'node:fs';
+import { existsSync, globSync, readdirSync, readFileSync, mkdtempSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { execFileSync } from 'node:child_process';
 import { pathToFileURL } from 'node:url';
 import { parse } from 'yaml';
 import { resolve, matchesGlob } from 'node:path';
-import { affectedTests, pinnedSourceOwners, TOOL_OBJECT_TEST_LIMIT, testLaneFiles, testOwners } from './affected-tests.mts';
+import { affectedTests, pinnedSourceOwners, importsChangedObjects, TOOL_OBJECT_TEST_LIMIT, testLaneFiles, testOwners } from './affected-tests.mts';
 
 const packages = [
   { directory: 'core', name: '@cssearth/core', dependencies: [] },
@@ -96,13 +96,24 @@ test('real-tree discovery keeps offline tools bounded for objects and runs them 
   const bounded = new Map(toolTests.slice(0, TOOL_OBJECT_TEST_LIMIT));
   const boundedResult = affectedTests(['packages/objects/src/index.ts'], workspaces, site, bounded, new Map());
   assert.deepEqual(boundedResult.files, [...bounded.keys()].sort(), 'real discovered imports run at the bounded count');
-  assert.deepEqual(objects.files.filter(file => /^packages\/(bake|telescope-cli)\//u.test(file)), []);
+  assert.ok(objects.files.includes('packages/bake/src/presentation/depth-partition-contract.test.ts'));
+  assert.ok(objects.files.filter(file => /^packages\/(bake|telescope-cli)\//u.test(file)).length <= toolTests.length);
   const bake = affectedTests(['packages/bake/src/stars/point-field-bank.ts'], workspaces, site, discovered);
   assert.ok(bake.packages.includes('bake') && bake.packages.includes('telescope-cli'));
   assert.ok(bake.files.includes(mount));
   assert.ok(!bake.files.some(file => file.startsWith('packages/bake/')), 'bake runs through its package glob');
-  assert.deepEqual(affectedTests(['src/objects/venus/object.json'], workspaces, site, discovered).files, [],
-    'eclipse-map uses injected inputs, not object files');
+  assert.deepEqual(affectedTests(['src/objects/venus/object.json'], workspaces, site, discovered).files,
+    ['packages/bake/src/presentation/venus-descriptor-pin.test.mts'], 'only the declared descriptor reader joins');
+});
+
+test('objects depth-partition changes retain the bake producer consumer contract above the count limit', () => {
+  const files = affectedTests(['packages/objects/src/prepared-data/runtime-validation/depth-partitions.ts'], packages, site).files;
+  assert.ok(files.includes('packages/bake/src/presentation/depth-partition-contract.test.ts'));
+});
+
+test('foreign fixtures outside test folders select their bake reader', () => {
+  const files = affectedTests(['packages/renderer/src/universe/batched-spatial-points.cells.json'], packages, site).files;
+  assert.ok(files.includes('packages/bake/src/volume/catalogue-points.test.ts'));
 });
 
 test('internal raster and surface geometry changes select bake and its direct consumers', () => {
@@ -188,6 +199,19 @@ test('real sparse clone preserves objects-only foreign test selection', { timeou
     const actual = affectedTests(changed, workspaces, site, sparseOwners, pinnedSourceOwners(sparse, sparseOwners));
     assert.ok(full.files.length > 0);
     assert.deepEqual(actual.files, full.files);
+    const extractor = 'src/objects/heliosphere/source/ibex/extract.py';
+    assert.equal(existsSync(resolve(sparse, extractor)), false, 'real workflow patterns omit the pinned extractor');
+    const fullExtractor = affectedTests([extractor], workspaces, site, fullOwners, pinnedSourceOwners(root, fullOwners));
+    const sparseExtractor = affectedTests([extractor], workspaces, site, sparseOwners, pinnedSourceOwners(sparse, sparseOwners));
+    assert.ok(fullExtractor.packages.includes('bake'));
+    assert.deepEqual(sparseExtractor, fullExtractor, 'extractor-only routing survives the real sparse checkout');
     t.diagnostic(`Sparse probe: ${sparseOwners.size} owners; ${actual.files.length} extra files equal full tree: ${actual.files.join(', ')}`);
   } finally { rmSync(temp, { recursive: true, force: true }); }
+});
+
+test('above-limit import discovery distinguishes objects root and subpath entries', () => {
+  const changed = ['packages/objects/src/prepared-data/runtime-validation/depth-partitions.ts'];
+  assert.ok(importsChangedObjects("import { parsePreparedObjectRuntime } from '@cssearth/objects';", changed));
+  assert.ok(!importsChangedObjects("import { x } from '@cssearth/objects/sources';", changed));
+  assert.ok(importsChangedObjects("await import('@cssearth/objects/node');", ['packages/objects/src/node/contract.ts']));
 });
