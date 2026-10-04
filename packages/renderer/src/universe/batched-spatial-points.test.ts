@@ -373,6 +373,40 @@ test('a layer\'s fields turn by one warp, and all repaint when one of them must'
   far.destroy(); near.destroy();
 });
 
+test('a field hidden during a turn does not repaint the layer from the camera it last saw', async () => {
+  const frame = { referenceFrame: 'sun-icrf', epochJdTt: 2451545, originM: [0, 0, 0] as const, localToReferenceXyzw: [0, 0, 0, 1] as const,
+    metersPerUnit: 1, boundsUnits: { min: [-2e6, -2e6, -2e6] as const, max: [2e6, 2e6, 2e6] as const } };
+  const viewport = { focalPixels: 900, principalOffsetPixels: [0, 0] as const, widthPixels: 1000, heightPixels: 800 };
+  const at = (degrees: number) => { const half = degrees * Math.PI / 360;
+    return { world: { referenceFrame: 'sun-icrf', epochJdTt: 2451545, pose: { positionM: [0, 0, 0] as const, orientationXyzw: [0, Math.sin(half), 0, Math.cos(half)] as const } }, viewport }; };
+  const grid = (shift: number) => Array.from({ length: 30 }, (_, index) => ({ positionUnits: [((index % 6) - 2.5 + shift) * 1e5, (Math.floor(index / 6) - 2) * 1e5, -1e6] as const }));
+  const mountIn = (host: HTMLElement, shift: number) => mountBatchedSpatialPoints({ host, frame, points: grid(shift), className: 'test-points',
+    stylePoint: () => ({ colorCss: '#ffffff', opacity: 1, radiusPx: 1 }), paintPalette: ['#ffffffff@1'] });
+  const { document } = parseHTML('<div id="host"></div>'), host = document.getElementById('host')!;
+  const kept = mountIn(host, 0), hidden = mountIn(host, .5);
+  const d = (field: typeof kept) => field.root.querySelector('path')!.getAttribute('d');
+  const exact = (degrees: number) => { const fresh = mountIn(parseHTML('<div id="host"></div>').document.getElementById('host')!, 0);
+    fresh.publish(at(degrees)); const text = d(fresh); fresh.destroy(); return text; };
+  kept.publish(at(0)); hidden.publish(at(0));
+  kept.publish(at(.5)); hidden.publish(at(.5));
+  assert.match(kept.svg.style.transform, /^matrix3d/, 'both turn by the warp');
+  // One field is hidden; the camera turns on for 60 ms and stops, inside the hidden field's pause.
+  hidden.hide();
+  await new Promise(resolve => setTimeout(resolve, 30));
+  kept.publish(at(1));
+  await new Promise(resolve => setTimeout(resolve, 30));
+  kept.publish(at(1.5));
+  await new Promise(resolve => setTimeout(resolve, 300));
+  assert.equal(kept.svg.style.transform, '');
+  assert.equal(d(kept), exact(1.5), 'the showing dots are painted from where the camera stopped');
+  // Shown again, the hidden field repaints from the camera it is given.
+  hidden.publish(at(1.5));
+  const shownAgain = mountIn(parseHTML('<div id="host"></div>').document.getElementById('host')!, .5);
+  shownAgain.publish(at(1.5));
+  assert.equal(d(hidden), d(shownAgain));
+  kept.destroy(); hidden.destroy(); shownAgain.destroy();
+});
+
 test('a field left unresolved at mount resolves its points in slices and draws a part only once it is whole', () => {
   const { document } = parseHTML('<div id="host"></div>');
   const frame = { referenceFrame: 'sun-icrf', epochJdTt: 2451545, originM: [0, 0, 0] as const, localToReferenceXyzw: [0, 0, 0, 1] as const,

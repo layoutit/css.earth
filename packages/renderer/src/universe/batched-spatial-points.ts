@@ -361,8 +361,12 @@ export function mountBatchedSpatialPoints<T extends BatchedSpatialPoint>(options
     /** Each part's group, whose opacity dims it, and its counts from the last paint. */
     parts: Object.freeze(parts.map(part => Object.freeze({ group: part.paint.part, stats: () => Object.freeze({ ...part.last }) }))),
     publish: (publication: VolumeCameraPublication) => { shown = true; publish(publication); },
-    /** The owner hid these dots: until the next publication the layer's other fields do not repaint them. */
-    hide() { shown = false; },
+    /** The owner hid these dots: until the next publication the layer's other fields do not repaint them, and the paints
+     * this field still owed (the exact one after a pause, the dots a zoom added) are dropped. Made after the hiding, they
+     * were made from the camera the field last saw, and took the layer's showing fields back to that camera with them:
+     * a field hidden during a turn that stopped within the pause left the others painted a degree behind, 16 px at a
+     * 900 px focal length, until the camera next moved. */
+    hide() { shown = false; arriving = false; if (settle !== null) { clearTimeout(settle); settle = null; } },
     /** Resolve up to `limit` more points of the parts still waiting (deferFill), in part order; 0 once every part is
      * ready. A part that becomes ready draws on the next publication. */
     fill(limit: number): number {
