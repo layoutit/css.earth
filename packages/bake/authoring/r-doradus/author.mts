@@ -89,7 +89,7 @@ export async function authorRDoradus({ check = false } = {}) {
 
   const marker = await contextMarker(readReconstruction(frame), PALETTE, PERCENTILES, BACKGROUND_MAXIMUM);
   const outputs: [string, Buffer][] = [[FRAME_PATH, frame], [CONTEXT_PATH, marker]];
-  await writeOrCheckAuthoredOutputs(root, outputs, { check, missingFile: 'propagate-read-error', mkdir: 'none' });
+  await writeOrCheckAuthoredOutputs(root, outputs, { check, readError: 'propagate-read-error', mkdir: 'none' });
   const beamMas = number('BMAJ') * 3.6e6, minorMas = number('BMIN') * 3.6e6;
   return { size, pixelMas: Math.abs(number('CDELT1')) * 3.6e6 / UPSAMPLE, peak: star.peak, beamMas, minorMas,
     centre: [(star.centreX - originX) * UPSAMPLE + (UPSAMPLE - 1) / 2, (star.centreY - originY) * UPSAMPLE + (UPSAMPLE - 1) / 2] as [number, number] };

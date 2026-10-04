@@ -1,5 +1,4 @@
-export { normalize3Unchecked as normalizeVector } from '@cssearth/core';
-import { normalize3Unchecked as normalizeVector } from '@cssearth/core';
+import { normalize3Unchecked } from '@cssearth/core';
 import type {Vec3} from '@layoutit/polycss';
 import { worldPositionToCss } from "@layoutit/polycss";
 import type { AtmosphereConfiguration } from './atmosphere.ts';
@@ -214,9 +213,9 @@ export function prepareScreenMaterialPlane(ctx: PagedSceneContext, {
 }: MaterialPlaneOptions) {
   const { attitude, EQUATORIAL_RADIUS, POLAR_RADIUS } = ctx;
   const screenToObject = (vector: Vec3) => attitude.screenToObject(vector, scenePitchDegrees) as unknown as Vec3;
-  const right = normalizeVector(screenToObject([0, 1, 0]));
-  const down = normalizeVector(screenToObject([1, 0, 0]));
-  const view = normalizeVector(screenToObject([0, 0, 1]));
+  const right = normalize3Unchecked(screenToObject([0, 1, 0]));
+  const down = normalize3Unchecked(screenToObject([1, 0, 0]));
+  const view = normalize3Unchecked(screenToObject([0, 0, 1]));
   const planeRadius = physicalRadius * outputSize / (contentRadius * 2);
   const projectedRadius = (direction: Vec3) => Math.sqrt(
     EQUATORIAL_RADIUS ** 2 * (direction[0] ** 2 + direction[1] ** 2) +

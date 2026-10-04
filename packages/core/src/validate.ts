@@ -135,3 +135,14 @@ export function checks(fail: Fail) {
   };
 }
 export type Checks = ReturnType<typeof checks>;
+
+/** Nonempty strings, preserving the original value and the legacy string diagnostic. */
+export function requireNonemptyString(value: unknown, label: string): string {
+  if (!isNonemptyText(value)) report(`${label} must be a string`);
+  return value;
+}
+/** Exactly three finite components; tuple shape and component failures retain distinct diagnostics. */
+export function requireFiniteTriple(value: unknown, label: string): [number, number, number] {
+  if (!Array.isArray(value) || value.length !== 3) report(`${label} must contain three numbers`);
+  return [requireFiniteNumber(value[0], label), requireFiniteNumber(value[1], label), requireFiniteNumber(value[2], label)];
+}

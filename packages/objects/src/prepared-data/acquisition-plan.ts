@@ -1,4 +1,4 @@
-import { ACQUISITION_PLAN_SCHEMA } from './source-schema-identifiers.ts';
+import { ACQUISITION_PLAN_SCHEMA } from './source-schema-identifiers.js';
 
 interface HriiFacets extends OperationBase {kind:'hrii-facets';path:string;recipePath:string;product:'fields'|'report';}
 interface SpectralBandMaps extends OperationBase {kind:'spectral-band-maps';path:string;recipePath:string;product:string;}

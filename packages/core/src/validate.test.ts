@@ -107,3 +107,14 @@ describe('labelled checks (the renderer dialect)', () => {
     assert.equal(message(() => plain.finite(null, 'Scale')), 'Scale must be finite.');
   });
 });
+
+describe('composite finite and nonempty-string readers', () => {
+  it('preserves exact tuple dimensions, finite admission and legacy diagnostics', async () => {
+    const { requireFiniteTriple, requireNonemptyString } = await import('./index.js');
+    assert.deepEqual(requireFiniteTriple([1, 2, 3], 'point'), [1, 2, 3]);
+    assert.equal(requireNonemptyString(' ', 'title'), ' ');
+    for (const bad of [[], [1, 2], [1, 2, 3, 4], null]) assert.throws(() => requireFiniteTriple(bad, 'point'), { message: 'point must contain three numbers.' });
+    for (const bad of [[1, NaN, 3], [1, '2', 3]]) assert.throws(() => requireFiniteTriple(bad, 'point'), { message: 'point must be finite.' });
+    for (const bad of ['', null, 1]) assert.throws(() => requireNonemptyString(bad, 'title'), { message: 'title must be a string.' });
+  });
+});

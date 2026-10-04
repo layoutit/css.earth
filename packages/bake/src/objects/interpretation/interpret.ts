@@ -1,5 +1,5 @@
 import { readPublishedLimbDarkening } from '@cssearth/objects';
-import { isRecord as coreIsRecord } from '@cssearth/core';
+import { isRecord as plainRecord } from '@cssearth/core';
 import { prepareDefaultCameraAngles, prepareSkyNorthScreenAngleDegrees, type SolarGeometry } from '../scene/index.ts';
 // One `science` adapter for the generic raster lane that dispatches by `science.kind` to the existing
 // decoders. Nothing is re-implemented: `./raster.mts` keeps `observationRaster`, the terrestrial lane
@@ -37,8 +37,6 @@ interface Options { readonly objectId: string; readonly displayName: string; rea
   /** Partial restores verify selected source pins and decoder groups; photographs additionally forbid scientific/model changes.
    * Full preparation (and solar synoptic preparation) verifies the entire package. */
   readonly sourceVerification?: 'complete' | 'photographs' | 'selected-surfaces'; }
-
-const plainRecord = coreIsRecord;
 const emissionSchema = object({ offLimbSize: number, limbSize: number, bodyDiameter: number, offLimbOutput: string, limbOutput: string, metadata: plainRecord });
 /** Validate a raw raster recipe down to the facts the interpreter needs; the lane validates the rest when it packs. */
 export function parseInterpreterRecipe(value: unknown): InterpreterRecipe {

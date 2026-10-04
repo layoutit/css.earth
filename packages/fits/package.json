@@ -12,6 +12,7 @@
   ],
   "sideEffects": false,
   "exports": {
+    "./test-support": "./src/node/fixtures/bytes.ts",
     ".": {
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
@@ -33,6 +34,6 @@
   "devDependencies": {
     "@types/node": "^26.4.0",
     "tsup": "^8.0.1",
-    "typescript": "^5.3.3"
+    "typescript": "5.9.3"
   }
 }

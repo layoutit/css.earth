@@ -89,7 +89,7 @@ export async function contextMarker(image: ReturnType<typeof readReconstruction>
 export async function authorUniformDiscSphere(sourceRoot: string, label: string, { check = false } = {}) {
   const measurements = parseUniformDiscStarMeasurements(JSON.parse(await readFile(resolve(sourceRoot, 'measurements.json'), 'utf8')), label, SPHERE_PATH);
   const bytes = Buffer.from(uniformDiscTable(measurements.radiusKm, measurements.shape.stepDegrees), 'latin1');
-  await writeOrCheckAuthoredOutputs(sourceRoot, [[SPHERE_PATH, bytes]], { check, missingFile: 'propagate-read-error', mkdir: 'none' });
+  await writeOrCheckAuthoredOutputs(sourceRoot, [[SPHERE_PATH, bytes]], { check, readError: 'propagate-read-error', mkdir: 'none' });
   return measurements;
 }
 
@@ -113,7 +113,7 @@ export async function authorBetelgeuse({ check = false } = {}) {
     if (epoch.id === '2020-02') outputs.push([CONTEXT_PATH, await contextMarker(readReconstruction(beam), palette, [percentiles[0]!, percentiles[1]!], requireFiniteNumber(frame.backgroundMaximum))]);
     counts[epoch.id] = { vis2: merged.vis2.length, t3: merged.t3.length, files: merged.files.length };
   }
-  await writeOrCheckAuthoredOutputs(root, outputs, { check, missingFile: 'propagate-read-error', mkdir: 'none' });
+  await writeOrCheckAuthoredOutputs(root, outputs, { check, readError: 'propagate-read-error', mkdir: 'none' });
   return counts;
 }
 

@@ -1,6 +1,6 @@
 /** Source-qualified observational histograms; no missing sky cell becomes empty physical space. */
 import {gunzipSync} from 'node:zlib';
-import {median} from '@cssearth/core';
+import {medianAveraged} from '@cssearth/core';
 import {parseDensityVolumeObjectDescriptor} from '@cssearth/objects';
 import { cataloguePosition } from '@cssearth/bake/volume';
 import { sourceBytes } from '@cssearth/bake/volume/node';
@@ -63,12 +63,12 @@ export async function forwardFitData(root:string,config:Record<string,unknown>){
   const ix=cell%x.bins,iy=Math.floor(cell/x.bins);split[cell]=(Math.floor(ix/2)+3*Math.floor(iy/2))%4===0?2:1;
   if(split[cell]===1)trainCells++;else testCells++;
  }
- const simulation=unpackPoints(simBytes),center={x:median(simulation.map(p=>p.x)),y:median(simulation.map(p=>p.y)),z:median(simulation.map(p=>p.z))};
+ const simulation=unpackPoints(simBytes),center={x:medianAveraged(simulation.map(p=>p.x)),y:medianAveraged(simulation.map(p=>p.y)),z:medianAveraged(simulation.map(p=>p.z))};
  for(const p of simulation){p.x-=center.x;p.y-=center.y;p.z-=center.z;}
- const photometricSigmaMag=median(errors);
+ const photometricSigmaMag=medianAveraged(errors);
  forward.sigmaMag=Math.hypot(forward.sigmaMag,photometricSigmaMag);
  const observations:ForwardObservations={counts,footprint,split};
- return {forward,observations,simulation,frame,center,observedCenter:centers.map(median),
+ return {forward,observations,simulation,frame,center,observedCenter:centers.map(medianAveraged),
   diagnostics:{rows:lines.length,outsideHistogram:outside,excludedLowCoverage:excludedCount,trainCells,testCells,
    medianPhotometricErrorMag:photometricSigmaMag,effectiveSigmaMag:forward.sigmaMag,selection:'Published-catalogue footprint and retained/published row ratio; duplicate measurements, source selection and magnitude-dependent incompleteness are not fully modelled.',
    split:'2x2-sky-cell checkerboard blocks, one quarter held out before optimizing any model.'}};

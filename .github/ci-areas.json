@@ -66,5 +66,6 @@
     { "id": "oracles", "patterns": ["packages/fits/**", "packages/objects/src/node/**", "packages/objects/src/provenance/**", "packages/core/src/node/oracle/**", "packages/bake/src/objects/layers/terrestrial/fixtures/**", "packages/bake/src/objects/layers/terrestrial/missions/**", "packages/bake/src/objects/layers/terrestrial/registration/fixtures/comet-19p/**", "packages/bake/src/objects/raster/fixtures/**", "packages/bake/src/objects/raster/numpy/**", "packages/bake/src/objects/scene/fixtures/**", "packages/bake/src/photometry/fixtures/**"], "jobs": ["typecheck", "universe", "nebula"] },
     { "id": "architecture", "patterns": [".github/scripts/architecture/**"], "jobs": ["typecheck", "universe"] },
     { "id": "nebula", "patterns": ["labs/nebula/**", "packages/volume-viewer/**"], "jobs": ["typecheck", "nebula"] }
-  ]
+  ],
+  "astroquery": ["packages/telescope/**", "packages/telescope-cli/src/toolchains/**", "packages/telescope-cli/**/toolchain*.mts", "packages/telescope-cli/**/toolchain.json", "packages/telescope-cli/**/toolchains.json", "packages/telescope-cli/**/requirements*", "packages/telescope-cli/src/families/f07-dynamic-spectrum.test.mts", "packages/telescope-cli/src/vo/package.test.mts", ".github/workflows/universe.yml", ".github/scripts/ci/astroquery-tests*", ".github/scripts/ci/ci-affected.mts", ".github/ci-areas.json", "packages/telescope-cli/src/vo/package.mts", "packages/telescope-cli/src/families/f07-dynamic-spectrum.mts"]
 }

@@ -7,7 +7,7 @@ import {readFile,mkdtemp,writeFile,rm} from 'node:fs/promises';
 import {join} from 'node:path';
 import {tmpdir} from 'node:os';
 import sharp from 'sharp';
-import {imageFixture} from '../../geometry/fixtures/fits-helpers.mts';
+import {imageFixture} from '@cssearth/fits/test-support';
 import {parseObservedPolarRecipe,prepareObservedPolarSurfaces,measureRgbCoverage} from '@cssearth/bake/objects/layers/giant';
 import {measureScalarCoverage,finitePercentiles,falseColorMap} from '@cssearth/bake/objects/layers/observed-surfaces';
 const sourceDirectory=new URL('src/objects/jupiter/source/', pathToFileURL(findProjectRoot(import.meta.url) + '/')).pathname;

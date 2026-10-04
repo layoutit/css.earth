@@ -1,7 +1,7 @@
 import { PREPARED_WORLD_CONTEXT_SUMMARY_SCHEMA, PREPARED_WORLD_SYSTEM_SCHEMA } from './world-schemas.js';
 import { checks, failure } from '@cssearth/core';
 
-const { array, positive, record, text, unique } = checks(failure('Prepared presentation: '));
+const { array, positive, record, text, unique } = checks(failure('Prepared data: '));
 
 /** `world-context-summary.json` and each holder's `members.json` write what many bodies repeat once
  * (`summarizeWorldContext` in @cssearth/bake). These put each body back in the shape `parsePreparedWorldContextSummary`

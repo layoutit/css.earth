@@ -4,3 +4,4 @@
 export * from './object-test-data.js';
 export * from './test-values.js';
 export * from './test-environment.js';
+export * from './source-test.js';

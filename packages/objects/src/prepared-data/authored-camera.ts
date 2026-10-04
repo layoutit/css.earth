@@ -1,4 +1,4 @@
-import {object, string, number, boolean, optional} from '@cssearth/core/schema';
+import {object, literal, string, number, boolean, optional} from '@cssearth/core/schema';
 export const responsiveFit = object({model: string, portraitBaseWidthShare: number, narrowPortraitWidthShareGain: number,
   landscapeWidthShareGain: number, narrowPortraitAspectRatio: number, portraitAspectRatio: number, squareAspectRatio: number,
   maximumHeightShare: number, maximumMobilePreviewShare: number, minimumZoom: number, maximumZoom: number});
@@ -9,7 +9,7 @@ export const cameraFields = {cameraModel: string, minimumControlPitchDegrees: nu
   pitchBounded: boolean, yawBounded: boolean, responsiveFit, style: optional(string),
   projection: optional(object({model: string, cssPerspective: string})),
   dolly: optional(object({model: string, wheelStepPerDelta: number, minimumDistanceRadii: number, maximumDistanceOverOrbitExtent: number})),
-  levelOfDetail: optional(object({model: string, billboardFadeStartDiscPixels: number, billboardFullDiscPixels: number, markerFadeStartDiscPixels: number, markerFullDiscPixels: number})),
+  levelOfDetail: optional(object({model: literal('silhouette-diameter-crossfade'), billboardFadeStartDiscPixels: number, billboardFullDiscPixels: number, markerFadeStartDiscPixels: number, markerFullDiscPixels: number})),
   orbitLineFade: optional(object({visibleBelowDiscHeightShare: number, hiddenAboveDiscHeightShare: number})),
   drag: optional(object({model: string}))};
 export const camera = object(cameraFields);

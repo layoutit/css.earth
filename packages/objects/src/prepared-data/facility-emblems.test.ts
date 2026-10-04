@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { readFile } from 'node:fs/promises';
-import { FACILITY_EMBLEMS_SCHEMA, parseFacilityEmblemLibrary, parseFacilityEmblemImage } from './facility-emblems.js';
+import { FACILITY_EMBLEMS_SCHEMA, parseFacilityEmblemLibrary, parseFacilityEmblemImage, readFacilityEmblemSource } from './facility-emblems.js';
 import { explorationRecord } from '../provenance/exploration-catalog.js';
 
 test('real emblem records retain entry ordering and artwork projection', async () => {
@@ -28,4 +28,11 @@ test('emblem structural stages retain exact errors without resolving sources ear
 
 test('serialized identifiers stay byte-identical', () => {
   assert.equal(FACILITY_EMBLEMS_SCHEMA, 'cssearth-facility-emblems@3');
+});
+
+test('emblem writer source admission validates promised strings and preserves metadata', () => {
+  const source = { credit: 'Credit', sourceUrl: 'https://example.org/image', inputBytes: 7 };
+  assert.deepEqual(readFacilityEmblemSource(source), source);
+  assert.throws(() => readFacilityEmblemSource({ ...source, credit: null }), { message: 'artwork credit must be a string.' });
+  assert.throws(() => readFacilityEmblemSource({ ...source, sourceUrl: 7 }), { message: 'artwork source URL must be a string.' });
 });
