@@ -17,6 +17,7 @@ import { HELP, SHORT_HELP, VERSION } from './help.mts';
 import { importLocalArtifact } from './local-import.mts';
 import { formatPapers, searchPapers } from './papers.mts';
 import { formatSimulations, searchSimulations } from './simulations/simulations.mts';
+import { formatStars, surveyStars } from './stars/stars.mts';
 import { formatAscl, matchProductSoftware, searchAscl } from './ascl.mts';
 import { familyCoverageLedger } from './family-handlers.mts';
 import { executeFamilyOperation, familyOperationNeedsParameters, type FamilyOperationParameters } from './family-operation.mts';
@@ -246,6 +247,9 @@ export async function main(args: readonly string[], root = WORKSPACE, output: (t
       }else if(options.command==='simulations'){
         const result=await searchSimulations(root,{target:options.target,...(options.directory?{directory:options.directory}:{}),progress:line=>io.error(`${line}\n`)});
         text=options.json?`${JSON.stringify(result)}\n`:formatSimulations(result,options.directory);code=result.records.length?0:3;
+      }else if(options.command==='stars'){
+        const result=await surveyStars(root,{target:options.target,...(options.directory?{directory:options.directory}:{}),progress:line=>io.error(`${line}\n`)});
+        text=options.json?`${JSON.stringify(result)}\n`:formatStars(result,options.directory);code=result.leads.length?0:3;
       }else if(options.command==='candidates'){
         const {runCandidates,epochMjd}=await import('./sky/association.mts'),result=await runCandidates(options.system,epochMjd(options.epoch),options.directory,{...(options.figureBackground?{figureBackground:options.figureBackground}:{}),...(options.orbitDraws?{orbitDraws:options.orbitDraws}:{})});
         text=options.json?`${JSON.stringify(result.set)}\n`:`${result.set.candidates.map(candidate=>`${candidate.id}  east ${candidate.eastMas.toFixed(2)} mas  north ${candidate.northMas.toFixed(2)} mas  ${candidate.sigmaEastMas===undefined?'reference':`± ${candidate.sigmaEastMas.toFixed(2)}, ${candidate.sigmaNorthMas!.toFixed(2)} mas (${candidate.predictedFrom!.tool} ${candidate.predictedFrom!.planet})`}`).join('\n')}\nSaved: ${options.directory}\n`;code=0;

@@ -1,0 +1,187 @@
+/** Draft specs for the stars of another galaxy from any VizieR table that lists them one by one:
+ * `new-object --from-table CLASS:GALAXY=TABLE[#ROW] --out spec.json`.
+ *
+ * CLASS is what the stars are (TABLE_CLASSES): it says which of the table's columns the draft needs and which published relation
+ * turns them into a radius and a temperature, as sh0es.mts does for the Cepheids of one paper. GALAXY is the id of the galaxy's
+ * object: the star is placed inside it as the app draws it, where its sight line crosses the midplane of the galaxy's own
+ * image-layer disc, and moves with SIMBAD's radial velocity of the galaxy. TABLE is the VizieR table (J/ApJ/743/176/table1); its
+ * columns are found by vizier-tables.mts and its paper is cited from the head of the catalogue's ReadMe.
+ *
+ * ROW picks the stars, as comma-separated parts. `COLUMN=VALUE` keeps the rows with that cell; a bare value keeps the row the table
+ * names so; `all` drafts every row kept. With neither, one star is drafted: the longest period the class's relation covers. A table
+ * of several galaxies is narrowed to this one by the column that holds its name (NGC3351), when a cell matches a name the galaxy's
+ * package lists. Each star's `position.row` is the fewest cells that pick its row again: its name in the table, else its period and
+ * the cells after it.
+ *
+ * A table whose rows have no position of their own (a reanalysis that gives every star its galaxy's centre) places its stars by
+ * SIMBAD instead, through the SIMBAD name CDS added to each row. The star is named as SIMBAD names it when SIMBAD holds a star at
+ * its position, and as its table writes it otherwise.
+ *
+ * `telescope stars GALAXY` lists the tables worth trying (stars/stars.mts). */
+import { readFile } from 'node:fs/promises';
+import { resolve } from 'node:path';
+import { imageLayerDisc, imageLayerDiscDistanceKpc } from '@cssearth/bake/image-layers';
+import { VIZIER_ASU, type Archive } from './archives.mts';
+import { preferredName, simbadIdentifiers } from '../display-name.mts';
+import { slug } from '../identity.mts';
+import type { CataloguePosition } from '../spec.mts';
+import { GROENEWEGEN_2020, galaxyVelocity, relationCepheidDraft } from './sh0es.mts';
+import { simbadAt, simbadQuoted, simbadRows } from './simbad-tap.mts';
+import { catalogueOf, DECIMAL_POSITION, parseVizierReadMe, starColumns, vizierDataRows, vizierReadMeUrl, vizierTables, type StarColumns } from './vizier-tables.mts';
+
+/** A star SIMBAD lists within this of a row's position is that row's star: the tables give positions to a tenth of an arcsecond. */
+export const SIMBAD_MATCH_ARCSEC = 1;
+const PARSEC_M = 3.0856775814913673e16, KEY_CELLS = 3;
+type Cells = Readonly<Record<string, string>>;
+
+/** What a class of star needs from its table and how its draft is made. */
+interface TableClass {
+  /** The star as a reader meets it: "A Cepheid in the galaxy M81". */
+  readonly noun: string;
+  /** The longest period the class's relation was fitted to; the default star is chosen under it. */
+  readonly longestPeriodDays: number;
+  readonly relation: string;
+}
+export const TABLE_CLASSES: Readonly<Record<string, TableClass>> = {
+  // Radius and temperature from Groenewegen's (2020) period relations for Galactic fundamental-mode Cepheids (sh0es.mts).
+  cepheid: { noun: 'Cepheid', longestPeriodDays: GROENEWEGEN_2020.longestPeriodDays, relation: `${GROENEWEGEN_2020.credit}'s period relations` },
+};
+
+export interface TableRequest { readonly starClass: string; readonly galaxy: string; readonly table: string; readonly filters: Cells; readonly named?: string; readonly all: boolean }
+export function parseTableRequest(name: string): TableRequest {
+  const match = /^([a-z][a-z-]*):([a-z][a-z0-9-]*)=([A-Z]+\/[\w+/.-]+?)(?:#(.+))?$/u.exec(name.trim());
+  if (!match) throw new TypeError(`${name} is not CLASS:GALAXY=TABLE[#ROW] (cepheid:m81=J/ApJ/743/176/table1); the classes are ${Object.keys(TABLE_CLASSES).join(', ')}.`);
+  if (!TABLE_CLASSES[match[1]!]) throw new TypeError(`${name}: no class ${match[1]}; the classes are ${Object.keys(TABLE_CLASSES).join(', ')}.`);
+  const parts = (match[4] ?? '').split(',').map(part => part.trim()).filter(Boolean), bare = parts.filter(part => !part.includes('=') && part !== 'all');
+  if (bare.length > 1) throw new TypeError(`${name}: ROW names one star (${bare.join(', ')} are ${bare.length}); the other parts are COLUMN=VALUE or all.`);
+  return { starClass: match[1]!, galaxy: match[2]!, table: match[3]!, all: parts.includes('all'), ...(bare[0] ? { named: bare[0] } : {}),
+    filters: Object.fromEntries(parts.filter(part => part.includes('=')).map(part => { const at = part.indexOf('='); return [part.slice(0, at).trim(), part.slice(at + 1).trim()]; })) };
+}
+
+/** A bibcode's journal reference as a reader meets it: 2012A&A...539A.138F is "A&A 539, A138". */
+export function bibcodeReference(bibcode: string) {
+  const match = /^(\d{4})([A-Za-z&.]{5})([\d.]{4})([A-Za-z.])([\d.]{4})[A-Z]$/u.exec(bibcode);
+  if (!match) throw new TypeError(`${bibcode} is not a 19-character bibcode.`);
+  const plain = (part: string) => part.replaceAll('.', '');
+  return { year: match[1]!, reference: `${plain(match[2]!)} ${plain(match[3]!)}, ${match[4] === '.' ? '' : match[4]}${plain(match[5]!)}` };
+}
+/** "Gerke et al. (2011), ApJ 743, 176": the authors' surnames as the catalogue's ReadMe lists them, the reference from the bibcode. */
+export function paperCredit(names: readonly string[], bibcode: string) {
+  const { year, reference } = bibcodeReference(bibcode);
+  if (!names.length) throw new Error(`${bibcode}: no author is named, so the paper cannot be credited.`);
+  const authors = `${names.length === 1 ? names[0] : names.length === 2 ? `${names[0]} & ${names[1]}` : `${names[0]} et al.`} (${year})`;
+  return { authors, credit: `${authors}, ${reference}` };
+}
+
+interface GalaxyRecord { readonly classification?: string; readonly physical?: { readonly name?: string }; readonly star?: { readonly distanceParsecs?: number; readonly sources?: { readonly distance?: string } } }
+interface GalaxyDescriptor { readonly properties?: { readonly worldFrame?: { readonly bodyRadiusM?: number }; readonly catalog?: { readonly aliases?: readonly string[] } } }
+/** The galaxy a star is drafted into: its record, its names, its drawn disc and the radius its package frames. */
+export async function readGalaxy(root: string, id: string) {
+  const path = `packages/astronomy/data/bodies/${id}.json`, record = JSON.parse(await readFile(resolve(root, path), 'utf8').catch(() => { throw new Error(`${id}: no astronomy record ${path}; GALAXY is the id of a galaxy already in the universe.`); })) as GalaxyRecord;
+  if (record.classification !== 'galaxy') throw new TypeError(`${id}: ${path} classification is ${JSON.stringify(record.classification)}, not "galaxy".`);
+  const name = record.physical?.name, parsecs = record.star?.distanceParsecs, distance = record.star?.sources?.distance, url = /https:\/\/[^\s)]+/u.exec(distance ?? '')?.[0];
+  if (!name || !(Number(parsecs) > 0) || !distance || !url) throw new TypeError(`${id}: ${path} needs physical.name, star.distanceParsecs and a star.sources.distance that cites an https URL.`);
+  const recipePath = `src/objects/${id}-layers/source/recipe.json`, recipe = JSON.parse(await readFile(resolve(root, recipePath), 'utf8').catch(() => { throw new Error(`${id}: no ${recipePath}; a star is placed on the disc its galaxy is drawn as, and ${name} has none.`); })) as Parameters<typeof imageLayerDisc>[0];
+  const objectPath = `src/objects/${id}/object.json`, properties = (JSON.parse(await readFile(resolve(root, objectPath), 'utf8')) as GalaxyDescriptor).properties, frame = properties?.worldFrame?.bodyRadiusM;
+  if (!(Number(frame) > 0)) throw new TypeError(`${id}: ${objectPath} properties.worldFrame.bodyRadiusM is ${JSON.stringify(frame)}; it bounds where a star of the galaxy can be placed.`);
+  return { id, name, names: [name, ...properties?.catalog?.aliases ?? []], reader: /galaxy/iu.test(name) ? `the ${name}` : `the galaxy ${name}`, parsecs: parsecs!, distance, url, recipe, recipePath, disc: imageLayerDisc(recipe), radiusPc: frame! / PARSEC_M };
+}
+export type Galaxy = Awaited<ReturnType<typeof readGalaxy>>;
+
+const unit = (raDeg: number, decDeg: number) => { const ra = raDeg * Math.PI / 180, dec = decDeg * Math.PI / 180; return [Math.cos(dec) * Math.cos(ra), Math.cos(dec) * Math.sin(ra), Math.sin(dec)] as const; };
+/** Where the star sits in the galaxy as it is drawn: the midplane crossing of its sight line. A crossing outside the radius the
+ * galaxy's package frames is refused: a star of another galaxy, or one far off the major axis of a steeply inclined disc. */
+export function placeInGalaxy(galaxy: Pick<Galaxy, 'id' | 'name' | 'distance' | 'url' | 'recipe' | 'recipePath' | 'disc' | 'radiusPc'>, raDeg: number, decDeg: number, star: string) {
+  const { target, geometry } = galaxy.recipe, outside = (found: string) => new RangeError(`${star}: its sight line ${found}, outside the ${Math.round(galaxy.radiusPc).toLocaleString('en-US')} pc src/objects/${galaxy.id}/object.json frames (worldFrame.bodyRadiusM); the star is not in ${galaxy.name} as drawn (${galaxy.recipePath}: inclination ${geometry.inclinationDeg} deg).`);
+  let kiloparsecs: number;
+  try { kiloparsecs = imageLayerDiscDistanceKpc(galaxy.disc, raDeg, decDeg); } catch { throw outside('never meets the disc'); }
+  const parsecs = Math.round(kiloparsecs * 1000), here = unit(raDeg, decDeg), centre = unit(target.centerRaDeg, target.centerDecDeg);
+  const fromCentre = Math.hypot(...here.map((axis, index) => axis * parsecs - centre[index]! * target.distancePc));
+  if (fromCentre > galaxy.radiusPc) throw outside(`meets the disc ${Math.round(fromCentre).toLocaleString('en-US')} pc from the centre`);
+  return { value: parsecs, url: galaxy.url,
+    source: `Placed in ${galaxy.name} as the app draws it, where the star's sight line crosses the disc's midplane: ${parsecs.toLocaleString('en-US')} pc (${galaxy.recipePath}: centre ${Math.round(target.distancePc).toLocaleString('en-US')} pc, inclination ${geometry.inclinationDeg} deg, line of nodes ${geometry.lineOfNodesPaDeg} deg). The galaxy's distance, which places the galaxy and not a star within it: ${galaxy.distance}` };
+}
+
+const plain = (name: string) => name.toLowerCase().replace(/[^a-z0-9]/gu, '');
+const own = (column: string) => column !== 'recno' && !column.startsWith('_') && !/^(?:RA|DE)(?:J2000|B1950|deg)?$/u.test(column);
+const unique = (rows: readonly Cells[], column: string) => rows.every(cells => cells[column]) && new Set(rows.map(cells => cells[column])).size === rows.length;
+
+/** The rows the request keeps, each with the fewest cells that pick it out of the whole table again (the spec's `position.row`). */
+export function pickRows(rows: readonly Cells[], columns: StarColumns, request: TableRequest, galaxyNames: readonly string[], period: (cells: Cells) => number, longestPeriodDays: number) {
+  const header = Object.keys(rows[0] ?? {}).filter(own), absent = Object.keys(request.filters).filter(column => !header.includes(column));
+  if (absent.length) throw new Error(`${request.table} has no column ${absent.join(', ')}; its columns are ${header.join(', ')}.`);
+  // A table of several galaxies names each row's galaxy: the column whose cells match a name of this one narrows it.
+  const names = new Set(galaxyNames.map(plain)), galaxyColumn = Object.keys(request.filters).length ? undefined : header.find(column => new Set(rows.map(cells => cells[column])).size > 1 && rows.some(cells => names.has(plain(cells[column] ?? ''))));
+  const filters: Cells = galaxyColumn ? { [galaxyColumn]: rows.find(cells => names.has(plain(cells[galaxyColumn] ?? '')))![galaxyColumn]! } : request.filters;
+  const kept = rows.filter(cells => Object.entries(filters).every(([column, cell]) => cells[column] === cell));
+  if (!kept.length) throw new Error(`${request.table}: no row has ${Object.entries(filters).map(([column, cell]) => `${column} = ${cell}`).join(', ')}; cells are compared as VizieR writes them.`);
+  const named = [columns.identifier, ...header].find((column): column is string => !!column && !(column in filters) && column !== columns.simbadName && unique(kept, column) && kept.every(cells => !Number.isFinite(Number(cells[column]))));
+  const keyOf = (cells: Cells): Cells => {
+    const tried: Record<string, string> = { ...filters }, match = () => rows.filter(row => Object.entries(tried).every(([column, cell]) => row[column] === cell)).length;
+    for (const column of [named, columns.period?.column, ...header].filter((candidate): candidate is string => !!candidate && cells[candidate] !== '')) {
+      if (match() === 1 || Object.keys(tried).length >= Object.keys(filters).length + KEY_CELLS) break;
+      tried[column] ??= cells[column]!;
+    }
+    if (match() !== 1) throw new Error(`${request.table}: no ${KEY_CELLS} cells of the row ${JSON.stringify(cells)} pick it alone; give them as #COLUMN=VALUE,COLUMN=VALUE.`);
+    return tried;
+  };
+  const one = (found: readonly Cells[], what: string) => { if (found.length !== 1) throw new Error(`${request.table}: ${what} matches ${found.length} rows, not one.`); return found; };
+  const picked = request.named ? one(named ? kept.filter(cells => cells[named] === request.named) : [], `${named ?? 'no naming column'} = ${request.named}`)
+    : request.all || kept.length === 1 ? kept
+    : [kept.filter(cells => period(cells) <= longestPeriodDays).reduce<Cells | undefined>((longest, cells) => !longest || period(cells) > period(longest) ? cells : longest, undefined)].filter((cells): cells is Cells => !!cells);
+  if (!picked.length) throw new Error(`${request.table}: none of its ${kept.length} rows has a period within the ${longestPeriodDays} d the relation covers.`);
+  return { named, kept, rows: picked.map(cells => ({ cells, key: keyOf(cells) })) };
+}
+
+/** SIMBAD's object of a name, as it writes the name (spaces kept: the spec's `row.main_id` must equal it), with its position. */
+async function simbadObject(archive: Archive, name: string) {
+  const [row] = await simbadRows(archive, `SELECT b.main_id, b.ra, b.dec, b.coo_bibcode FROM basic AS b JOIN ident AS n ON b.oid = n.oidref WHERE n.id = ${simbadQuoted(name)}`);
+  const raDeg = Number(row?.ra), decDeg = Number(row?.dec);
+  return row?.main_id && row.ra && row.dec && Number.isFinite(raDeg) && Number.isFinite(decDeg) ? { mainId: row.main_id, raDeg, decDeg, bibcode: row.coo_bibcode || undefined } : undefined;
+}
+
+/** `new-object --from-table CLASS:GALAXY=TABLE[#ROW]... --out spec.json`. */
+export async function draftsFromTable(names: readonly string[], archive: Archive, root: string) {
+  const stars: Record<string, unknown>[] = [], report: string[] = [];
+  for (const name of names) {
+    const request = parseTableRequest(name), starClass = TABLE_CLASSES[request.starClass]!, galaxy = await readGalaxy(root, request.galaxy);
+    const table = (await vizierTables(archive, request.table))?.tables.find(candidate => candidate.name === request.table);
+    if (!table) throw new Error(`VizieR holds no table ${request.table}; \`telescope stars ${request.galaxy}\` lists the tables of the papers on its stars.`);
+    const published = parseVizierReadMe(await archive.text(vizierReadMeUrl(catalogueOf(request.table))), catalogueOf(request.table)), cited = paperCredit(published.authors, published.bibcode);
+    const paper = { url: `https://ui.adsabs.harvard.edu/abs/${encodeURIComponent(published.bibcode)}`, credit: cited.credit }, columns = starColumns(table);
+    if (!columns.period) throw new Error(`${request.table} has no period column (${table.columns.map(column => column.name).join(', ')}); a ${starClass.noun} is drafted from its period.`);
+    const rows = vizierDataRows(await archive.text(VIZIER_ASU, { '-source': request.table, '-out.all': '', '-out.add': `${DECIMAL_POSITION.ra},${DECIMAL_POSITION.dec}`, '-out.max': '99999' }), request.table);
+    const degrees = (cells: Cells, column: string) => { const value = Number(cells[column]); return cells[column] && Number.isFinite(value) ? value : undefined; };
+    const period = (cells: Cells) => { const value = Number(cells[columns.period!.column]); return cells[columns.period!.column] && Number.isFinite(value) ? columns.period!.log ? Number((10 ** value).toPrecision(4)) : value : Number.NaN; };
+    const picked = pickRows(rows, columns, request, galaxy.names, period, starClass.longestPeriodDays);
+    // A position is the star's own when the galaxy's rows do not repeat one: a reanalysis lists every star at its galaxy's centre.
+    // One row alone cannot say, so the whole table is asked.
+    const judged = picked.kept.length > 1 ? picked.kept : rows, places = new Set(judged.map(cells => `${cells[DECIMAL_POSITION.ra]} ${cells[DECIMAL_POSITION.dec]}`)).size;
+    const ownPositions = places > judged.length / 2 && judged.every(cells => degrees(cells, DECIMAL_POSITION.ra) !== undefined);
+    if (!ownPositions && !columns.simbadName) throw new Error(`${request.table} gives its rows no position of their own (${DECIMAL_POSITION.ra}, ${DECIMAL_POSITION.dec} are empty or one place for every row) and no SIMBAD name; its stars cannot be placed from it.`);
+    const velocity = await galaxyVelocity(archive, galaxy.name), kiloparsecs = galaxy.parsecs / 1000, far = kiloparsecs >= 1000 ? `${(kiloparsecs / 1000).toFixed(1)} million parsecs` : `${Math.round(kiloparsecs)} kiloparsecs`;
+    for (const { cells, key } of picked.rows) {
+      const days = period(cells), where = `${request.table} ${Object.entries(key).map(([column, cell]) => `${column} = ${cell}`).join(', ')}`;
+      if (!(days > 0)) throw new Error(`${where}: ${columns.period.column} is ${JSON.stringify(cells[columns.period.column])}, not a period.`);
+      const listedName = ownPositions ? undefined : cells[columns.simbadName!], held = listedName ? await simbadObject(archive, listedName) : undefined;
+      if (!ownPositions && !held) throw new Error(`${where}: SIMBAD holds no position for ${columns.simbadName} = ${JSON.stringify(listedName)}, and the table gives the row none of its own.`);
+      const raDeg = held?.raDeg ?? degrees(cells, DECIMAL_POSITION.ra)!, decDeg = held?.decDeg ?? degrees(cells, DECIMAL_POSITION.dec)!;
+      const simbadName = (held?.mainId ?? (await simbadAt(archive, raDeg, decDeg, SIMBAD_MATCH_ARCSEC))?.name)?.replace(/\s+/gu, ' ');
+      const written = picked.named ? `${galaxy.name} ${starClass.noun} ${cells[picked.named]}` : undefined;
+      const starName = (simbadName ? preferredName(await simbadIdentifiers(archive, simbadName))?.name ?? simbadName : undefined) ?? written;
+      if (!starName) throw new Error(`${where}: SIMBAD lists no star within ${SIMBAD_MATCH_ARCSEC}" of RA ${raDeg}, Dec ${decDeg} and the table names none, so the star has no name.`);
+      const position: CataloguePosition = held
+        ? { archive: 'simbad', catalogue: 'basic', row: { main_id: held.mainId }, url: `https://simbad.cds.unistra.fr/simbad/sim-id?Ident=${encodeURIComponent(simbadName!)}`,
+          credit: `${paper.credit}, VizieR ${where}, names the star in SIMBAD (${columns.simbadName}); SIMBAD holds its position${held.bibcode ? `, from ${held.bibcode}` : ' and names no paper for it'}` }
+        : { catalogue: request.table, row: key, columns: DECIMAL_POSITION, credit: paper.credit, url: paper.url };
+      const shown = days.toFixed(days < 10 ? 2 : 1);
+      stars.push(relationCepheidDraft({ id: slug(starName), name: starName, target: simbadName ?? starName, galaxy: galaxy.name, inside: galaxy.id, periodDays: days, paper, position,
+        periodSource: `${paper.credit}, VizieR ${where} (${columns.period.column}${columns.period.log ? ` ${cells[columns.period.column]}` : ''})`,
+        description: `A ${starClass.noun} in ${galaxy.reader} that pulsates every ${shown} days.`, distance: placeInGalaxy(galaxy, raDeg, decDeg, where), velocity,
+        text: { card: `A ${starClass.noun} in ${galaxy.reader}, ${far} away, that swells and shrinks every ${shown} days.`, introduction: `${cited.authors} list its pulsation at ${shown} days.`,
+          locator: `VizieR ${where}: ${columns.period.column}` } }));
+    }
+    report.push(`${name}: ${picked.rows.length} ${starClass.noun}${picked.rows.length === 1 ? '' : 's'} of ${paper.credit} in ${galaxy.name}${ownPositions ? '' : ', placed by SIMBAD'}; radius and temperature from ${starClass.relation}.`);
+  }
+  return { stars, report };
+}
