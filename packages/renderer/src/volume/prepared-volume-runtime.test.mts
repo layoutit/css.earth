@@ -229,6 +229,37 @@ for (const bounds of ['leaf', 'frame']) test(`prepared ${bounds} bounds defer of
   assert.equal(resolver.mock.callCount(), 9);
 });
 
+test('a stack the camera turns to joins a share a frame, every eighth slice first, and leaves whole at rest', () => {
+  const frames: ((time: number) => void)[] = [];
+  let now = 0;
+  const frame = () => { now += 16; frames.shift()!(now); };
+  stubGlobal('requestAnimationFrame', (callback: (time: number) => void) => frames.push(callback));
+  stubGlobal('cancelAnimationFrame', () => {});
+  stubGlobal('performance', { now: () => now });
+  mock.timers.enable({ apis: ['setTimeout'] });
+  try {
+    const { runtime, roots, meshes } = mount(payload(100));
+    const slices = meshes[2]!.children.filter((_, index) => index % 3 === 0), shown = () => slices.filter(node => node.style.display === '').length;
+    runtime.publish(publication([0, 0, 1]));
+    assert.equal(roots[2]!.style.display, 'block'); assert.equal(shown(), 0);
+    frame();
+    assert.equal(shown(), 8);
+    for (const index of [0, 8, 56]) assert.equal(slices[index]!.style.display, '');
+    for (const index of [1, 4, 64]) assert.equal(slices[index]!.style.display, 'none');
+    let joining = 1;
+    while (shown() < 100) { frame(); joining++; }
+    assert.ok(joining > 3 && joining < 8, `${joining} frames`);
+    // Turned away, the stack stays while the camera moves, then leaves in one frame.
+    runtime.publish(publication([1, 0, 0]));
+    while (frames.length) frame();
+    assert.equal(shown(), 100); assert.equal(roots[2]!.style.display, 'block');
+    now += 1000; mock.timers.tick(1000);
+    frame();
+    assert.equal(shown(), 0); assert.equal(roots[2]!.style.display, 'none');
+    runtime.destroy();
+  } finally { mock.timers.reset(); }
+});
+
 test('material replacement survives first visibility of every deferred axis', () => {
   const { runtime, meshes } = mount(payload(3));
   runtime.publish(publication([0, 0, 1]));
