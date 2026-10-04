@@ -153,20 +153,34 @@ not arbitrary raw science files.
 
 ### Papers that already used the data
 
-Before reducing archive frames yourself, check whether a paper already did it:
+Before reducing archive frames yourself, or using a number a paper prints, check what the literature holds:
 
 ```sh
 pnpm -s telescope papers io --instrument JIRAM
 pnpm -s telescope papers io --instrument JIRAM --json --out output/io-papers
+pnpm -s telescope papers ngc-6946 --about "red supergiant,luminous blue variable"
+pnpm -s telescope papers m58 m63 m64 --about Cepheid --fulltext
 ```
 
-`papers` resolves a catalogue name the same way as `explore`; any other name is searched as written. It then asks OpenAlex for articles,
-reviews, letters and preprints whose title or abstract names the target and, if given, the
-instrument. If OpenAlex returns HTTP 429 or a temporary server error, it searches [arXiv's Atom API](https://info.arxiv.org/help/api/user-manual.html) instead. The report names the index that answered and the reason for switching; arXiv covers only its own preprints.
-A body on a hosted orbit is searched together with any one of its host's names, so a short name such as a star's
-"S2" is not matched to papers about the Drosophila S2 cell line. For a name outside the catalogue, `--host NAME` adds the host by hand: `papers S301 --host "Sgr A*"`. A `*` in a name, as in Sagittarius A*, is dropped from the query because
-OpenAlex rejects it. It keeps up to 20, open access first, then by OpenAlex relevance, then newest first.
-Each work shows its title, year, DOI, first three authors, licence and open-access link.
+`papers` resolves a catalogue name the same way as `explore`; any other name is searched as written. It asks OpenAlex for
+articles, reviews, letters and preprints whose title or abstract names the target and, if given, the instrument. A catalogue
+target is asked for by its name and aliases, each in every spelling a paper uses ("NGC 4303" and "NGC4303", "M 61" and "M61").
+`--about` takes subject phrases, comma separated: a work must name any one of them, singular or plural. `--fulltext` asks for
+the works whose indexed full text names all of it, which finds a galaxy that a survey paper mentions only in its tables and
+text; OpenAlex indexes the full text of part of its works, not all.
+
+A body on a hosted orbit is searched together with any one of its host's names, so a short name such as a star's "S2" is not
+matched to papers about the Drosophila S2 cell line. For a name outside the catalogue, `--host NAME` adds the host by hand:
+`papers S301 --host "Sgr A*"`. A `*` in a name, as in Sagittarius A*, is dropped from the query because OpenAlex rejects it.
+The command keeps up to 20 works: those whose title names a subject phrase first, then open access, OpenAlex relevance and the
+newest. Each work shows its title, year, DOI, first three authors, licence and open-access link.
+
+OpenAlex meters its API. A search costs 10 credits and a list with no search 1, and a network without an API key has 1,000 credits a day, shared by
+everyone on it, until midnight UTC ([its example costs](https://help.openalex.org/access/example-costs/), read 2026-10-04). A
+free key has ten times that: put it in the `OPENALEX_API_KEY` environment variable and the command sends it as a header. The
+report prints the credits left. When the budget is spent, or OpenAlex returns a temporary server error, the command searches
+[arXiv's Atom API](https://info.arxiv.org/help/api/user-manual.html) instead, which reads titles and abstracts of its own
+preprints only. The report names the index that answered and the reason for switching.
 
 For each open copy the command makes one plain request and reports the result:
 
@@ -175,14 +189,34 @@ For each open copy the command makes one plain request and reports the result:
   does not try to get past it. Open the link in a browser instead.
 - `failed`, `closed` or `skipped`: an error, no open copy, or the request limit was reached.
 
-For HTML texts it prints figure captions and table titles that mention a map, mosaic, radiance,
-scale or color bar, or that list orbits, times or distances. They are quoted as written, cut at
-300 characters. That is usually enough to see whether the paper made the map you want and which
-frames it used. For Io with JIRAM, Mura et al. (2024) shows up as fetchable with its list of
-observations (Table 1) and radiance maps (Figure 2).
+When the open copy is not HTML and the work has an arXiv preprint, the preprint is read as HTML from
+[ar5iv](https://ar5iv.labs.arxiv.org/), arXiv Labs' rendering; the report says so, because the published text may differ.
 
-Requests run one at a time, with a 20 second timeout and at most 25 per run. Nothing is written to
-disk unless you pass `--out`. Then the command saves `papers.json` and the downloaded HTML texts.
+From an HTML text the command quotes, as written and cut at 300 characters:
+
+- with `--about` or `--fulltext`, up to five sentences that name a subject phrase, those that also name the target first. A
+  sentence that names the subject alone is quoted only when the paper's title names the target;
+- the figure captions and table titles that name a subject phrase or, with no subject, that mention a map, mosaic, radiance,
+  scale or color bar, or list orbits, times or distances.
+
+That is usually enough to see whether the paper measured what you want. For Io with JIRAM, Mura et al. (2024) shows up as
+fetchable with its list of observations (Table 1) and radiance maps (Figure 2).
+
+Each work then lists what followed it, which is read before its numbers are used:
+
+- the other works Crossref holds under its title. A publisher prints an erratum that way, with a DOI of its own, and the
+  indexes do not link the two: Comerón et al. (2003) and its erratum, which corrects the star's position by 8″, are two
+  articles with one title;
+- whether OpenAlex marks it retracted;
+- the later works that cite it and name the target, the newest five. One OpenAlex list covers every work of the report and
+  costs 1 credit; it holds the newest 100 citing works, and the report says when there are more.
+
+Several targets are a sweep: one search each, the five first works named for each, no copy fetched and nothing followed up.
+Run the single-target command on the targets a sweep finds works for.
+
+Requests run one at a time, a second apart for one host and three for the arXiv API, with a 20 second timeout and at most 63
+for one target. Nothing is written to disk unless you pass `--out`. Then the command saves `papers.json` and the downloaded
+HTML texts.
 
 ### Software discovery with ASCL
 

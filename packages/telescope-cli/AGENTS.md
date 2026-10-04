@@ -45,8 +45,16 @@ The star survey behind `telescope stars GALAXY` is `src/stars/`. It and the gene
 list of types kept here. A star listed by detector pixel is placed by `src/new-object/archives/images/image-pixel.mts`: it reads
 header records of the archived exposure by byte range, keeps the one extension header as the package's ranged source input,
 and takes the sky position from `@cssearth/fits` `skyProjection`, which owns the projection and its SIP distortion.
-The survey ends by asking the papers API (`src/papers.mts`, OpenAlex) for works that name the galaxy and a kind of star: a
-literature claim about a galaxy's stars is checked there before it is made, never from SIMBAD and VizieR alone.
+The survey ends by asking the papers API for works that name the galaxy and a kind of star: a literature claim about a
+galaxy's stars is checked there before it is made, never from SIMBAD and VizieR alone.
+
+The papers API behind `telescope papers` is `src/papers.mts` and `src/papers/`. There is one search path: `findWorks`
+(`papers/works.mts`) asks OpenAlex, then arXiv when OpenAlex refuses, and the command and the star survey both call it; a
+second query builder is not added beside it. `papers/names.mts` owns how a target and a subject are written (every spelling,
+singular and plural), `papers/text.mts` the sentences quoted from a full text, and `papers/follow-ups.mts` what was
+published after a paper (the works under its title, which is how an erratum is found, and the works that cite it). OpenAlex
+meters searches by a daily budget, so a new feature spends one search where it can, never one for each work; the key is read
+from `OPENALEX_API_KEY` and sent as a header, never written to a URL, a report or a fixture.
 
 The sky band composer is `src/sky/` (exported as `./sky/*`): `sky-band-composite.mts` composes pinned hips2fits, AllWISE
 atlas and JWST level-3 bands on one TAN grid, and `author-sky-bands.mts` acquires and pins those bands. It moved from

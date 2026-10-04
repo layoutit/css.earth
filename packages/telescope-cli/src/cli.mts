@@ -15,7 +15,7 @@ import { exportSphere } from './sphere/sphere.mts';
 import type { DeliveryContext } from './delivery-context.mts';
 import { HELP, SHORT_HELP, VERSION } from './help.mts';
 import { importLocalArtifact } from './local-import.mts';
-import { formatPapers, searchPapers } from './papers.mts';
+import { formatPapers, formatSweep, searchPapers, sweepPapers } from './papers.mts';
 import { formatSimulations, searchSimulations } from './simulations/simulations.mts';
 import { formatStars, surveyStars } from './stars/stars.mts';
 import { formatLeads, formatSurvey, searchLeads, surveyLeads } from './simulations/leads.mts';
@@ -243,8 +243,14 @@ export async function main(args: readonly string[], root = WORKSPACE, output: (t
       }else if(options.command==='new-object'){
         ({text,code}=await runWorkspaceCommand(root,NEW_OBJECT_COMMAND,[JSON.stringify(options)]));
       }else if(options.command==='papers'){
-        const result=await searchPapers(root,{target:options.target,...(options.instrument?{instrument:options.instrument}:{}),...(options.host?{host:options.host}:{}),...(options.directory?{directory:options.directory}:{}),progress:line=>io.error(`${line}\n`)});
-        text=options.json?`${JSON.stringify(result)}\n`:formatPapers(result,options.directory);code=result.works.length?0:3;
+        const asked={...(options.instrument?{instrument:options.instrument}:{}),...(options.about?{about:options.about}:{}),...(options.fulltext?{fulltext:true}:{}),...(options.directory?{directory:options.directory}:{}),progress:(line:string)=>io.error(`${line}\n`)};
+        if(options.targets.length>1){
+          const result=await sweepPapers(root,{targets:options.targets,...asked});
+          text=options.json?`${JSON.stringify(result)}\n`:formatSweep(result,options.directory);code=result.targets.some(entry=>entry.works.length)?0:3;
+        }else{
+          const result=await searchPapers(root,{target:options.targets[0]!,...(options.host?{host:options.host}:{}),...asked});
+          text=options.json?`${JSON.stringify(result)}\n`:formatPapers(result,options.directory);code=result.works.length?0:3;
+        }
       }else if(options.command==='simulations'){
         const result=await searchSimulations(root,{target:options.target,...(options.directory?{directory:options.directory}:{}),progress:line=>io.error(`${line}\n`)});
         text=options.json?`${JSON.stringify(result)}\n`:formatSimulations(result,options.directory);code=result.records.length?0:3;

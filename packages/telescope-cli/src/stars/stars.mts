@@ -7,7 +7,7 @@
  * survey calls ready is a lead for `new-object --from-table`, and so is one that lists each star by its detector pixel, once its
  * paper has said which exposure the pixels are of. The single stars of no class that SIMBAD holds there with no parallax and no
  * proper motion are named too, the most cited first: a star a paper studied alone is often typed a plain star. Last, the papers
- * API (papers.mts, OpenAlex) is asked for the works whose title or abstract names the galaxy and a kind of star, the newest first:
+ * API (papers/works.mts: OpenAlex, then arXiv) is asked for the works whose title or abstract names the galaxy and a kind of star, the newest first:
  * SIMBAD and VizieR take months to hold a new paper, and a paper they never took in is found only there; a star SIMBAD lists inside the outline may still be a
  * foreground star of the Milky Way, which only its paper says. */
 import { mkdir, writeFile } from 'node:fs/promises';
@@ -16,7 +16,10 @@ import { SIMBAD_TAP } from '../new-object/companions.mts';
 import { parseSimbadTsv, simbadQuoted as quoted, simbadTsvForm } from '../new-object/archives/tables/simbad-tap.mts';
 import { VIZIER_ASU } from '../new-object/archives/archives.mts';
 import { DECIMAL_POSITION, parseVizierMeta, starColumns, vizierDataRows, type StarColumns } from '../new-object/archives/tables/vizier-tables.mts';
-import { displayName, OPENALEX_WORKS, parseOpenAlexResponse } from '../papers.mts';
+import { displayName } from '../papers.mts';
+import { forms, spellings } from '../papers/names.mts';
+import { mentionsAny } from '../papers/text.mts';
+import { findWorks, openSession } from '../papers/works.mts';
 import { loadTargetCatalogue } from '../query.mts';
 
 export const STARS_SCHEMA = 'cssearth-telescope-stars@1';
@@ -27,8 +30,8 @@ const PAPERS_PER_CLASS = 4, ROWS_SAMPLED = 3;
 /** Stars outside every class named for the reader, when at least this many papers cite them. */
 const OTHERS_NAMED = 8, OTHERS_PAPERS = 2;
 /** Works the papers API is asked for and named, and the words that make a work one about single stars. */
-const WORKS_ASKED = 100, WORKS_NAMED = 10;
-export const STAR_WORDS = ['Cepheid', 'Cepheids', 'supergiant', 'supergiants', 'hypergiant', 'luminous blue variable', 'Wolf-Rayet', 'Mira', 'Miras', 'RR Lyrae', 'early-type star', 'massive star'];
+const WORKS_NAMED = 10;
+export const STAR_WORDS = ['Cepheid', 'supergiant', 'hypergiant', 'luminous blue variable', 'Wolf-Rayet', 'Mira', 'RR Lyrae', 'early-type star', 'massive star'];
 
 /** The star classes the survey reports, each by the root of its branch in SIMBAD's type tree. `route` names the
  * `new-object --from-table` class that drafts such a star from a table row; a class without one is counted only. */
@@ -64,17 +67,8 @@ export interface StarSurvey {
    * the galaxy, the most cited first: M51-DS1 is typed a plain star. Each is a lead for a spec written by hand from its paper. */
   readonly others: readonly { readonly name: string; readonly otype: string; readonly papers: number }[];
   /** Works whose title or abstract names the galaxy and a kind of star (STAR_WORDS), from the papers API: those whose title names the kind of star first, each group
-   * the newest first; `worksIssue` when it did not answer. */
+   * the newest first; `worksIssue` when OpenAlex did not answer, and the works are then arXiv's, or none. */
   readonly works: readonly { readonly year: number | null; readonly title: string; readonly doi: string | null }[]; readonly worksIssue?: string;
-}
-
-/** Every way a paper writes a catalogue name: "NGC 4303" and "NGC4303", "M 61" and "M61". */
-export const spellings = (names: readonly string[]): string[] => [...new Set(names.flatMap(name => { const match = /^(NGC|IC|M|Messier|UGC|ESO)\s*([\d-]+[A-Z]?)$/iu.exec(name.trim()); return match ? [`${match[1]} ${match[2]}`, `${match[1]}${match[2]}`] : [name.trim()]; }))];
-/** The papers API request: works naming the galaxy by any spelling and a kind of star, the newest first. */
-export function starWorksQuery(names: readonly string[]): string {
-  const phrases = (values: readonly string[]) => `(${values.map(value => `"${value.replace(/[,:|*"()]/gu, ' ').trim()}"`).join(' OR ')})`;
-  return `${OPENALEX_WORKS}?${new URLSearchParams({ filter: `title_and_abstract.search:${phrases(spellings(names))} AND ${phrases(STAR_WORDS)},type:article|review|preprint|letter`, 'per-page': String(WORKS_ASKED), sort: 'publication_year:desc',
-    select: 'id,doi,title,display_name,publication_year,type,authorships,open_access,best_oa_location,primary_location,relevance_score,abstract_inverted_index' })}`;
 }
 
 /** SIMBAD's type tree: each type with its path from the root ("* > Ev* > Ce* > cC*"). */
@@ -95,6 +89,8 @@ export const simbadQueries = {
 };
 
 export interface StarSurveyOptions { readonly target: string; readonly directory?: string; readonly progress?: (line: string) => void; readonly fetcher?: typeof fetch;
+  /** The wait between requests to one paper index (tests pass none). */
+  readonly pause?: (ms: number) => Promise<void>;
   /** The target catalogue, when the caller has read it already (it is every object package's descriptor). */
   readonly catalogue?: Awaited<ReturnType<typeof loadTargetCatalogue>> }
 
@@ -153,15 +149,17 @@ export async function surveyStars(root: string, options: StarSurveyOptions): Pro
   const named = new Set([...STAR_CLASSES, ...TRANSIENTS].flatMap(kind => typesUnder(types, kind.roots))), plain = typesUnder(types, ['*']).filter(otype => !named.has(otype) && counts.has(otype));
   if (plain.length) progress('Reading the other single stars SIMBAD holds there…');
   const others = plain.length ? (await simbad(simbadQueries.others(raDeg, decDeg, radiusDeg, plain))).map(row => ({ name: (row.main_id ?? '').replace(/\s+/gu, ' '), otype: row.otype ?? '', papers: Number(row.nbref) })) : [];
-  // OpenAlex stems and matches loosely ("M 82" in any language): a work is kept when its own words name the galaxy and a kind of star.
+  // One search path: the same question `telescope papers` asks, with the kinds of star as its subject. A work is kept when its own
+  // words also speak of stars or a galaxy ("M 82" names other things).
   progress('Asking the papers API for works that name it with a kind of star…');
   let works: StarSurvey['works'] = [], worksIssue: string | undefined;
   try {
-    const found = parseOpenAlexResponse(JSON.parse(await read(starWorksQuery(names), 'OpenAlex'))), named = new RegExp(spellings(names).map(name => name.replace(/[.*+?^${}()|[\]\\]/gu, '\\$&').replace(/\s+/gu, '\\s*')).join('|'), 'iu');
-    const starry = new RegExp(STAR_WORDS.map(word => word.replace(/[- ]/gu, '[- ]')).join('|'), 'iu'), seen = new Set<string>();
-    const kept = found.filter(work => { const text = `${work.title} ${work.abstract}`, key = work.title.toLowerCase(); return named.test(text) && starry.test(text) && /galax|stellar|\bstars?\b/iu.test(text) && !seen.has(key) && !!seen.add(key); });
+    const answer = await findWorks(openSession(2, { fetcher, ...options.pause ? { pause: options.pause } : {} }), { names: spellings(names), about: STAR_WORDS, newestFirst: true }, progress);
+    const seen = new Set<string>(), titled = (work: { readonly title: string }) => mentionsAny({ title: work.title, abstract: '' }, forms(STAR_WORDS));
+    const kept = answer.works.filter(work => { const key = work.title.toLowerCase(); return /galax|stellar|\bstars?\b/iu.test(`${work.title} ${work.abstract}`) && !seen.has(key) && !!seen.add(key); });
     // A paper about a star says so in its title; one that mentions a kind of star in passing comes after.
-    works = [...kept.filter(work => starry.test(work.title)), ...kept.filter(work => !starry.test(work.title))].slice(0, WORKS_NAMED).map(work => ({ year: work.year, title: work.title, doi: work.doi }));
+    works = [...kept.filter(titled), ...kept.filter(work => !titled(work))].slice(0, WORKS_NAMED).map(work => ({ year: work.year, title: work.title, doi: work.doi }));
+    worksIssue = answer.sourceIssue;
   } catch (error) { worksIssue = (error as Error).message; }
   const result: StarSurvey = { schema: STARS_SCHEMA, target, simbad: { name: (galaxy.main_id ?? '').replace(/\s+/gu, ' '), raDeg, decDeg, majorAxisArcmin, radiusDeg },
     objects: [...counts.values()].reduce((sum, n) => sum + n, 0), stars: count(['*']) - TRANSIENTS.reduce((sum, kind) => sum + count(kind.roots), 0),
@@ -195,8 +193,8 @@ export function formatStars(result: StarSurvey, directory?: string): string {
     : `Placed by pixel, once the paper says which exposure its pixels are of and how its software counts them (FILE, N): ${lead.command}`);
   if (result.others.length) lines.push('', `Other single stars SIMBAD holds here with no parallax or proper motion, most cited first: ${result.others.map(star => `${star.name} (${star.otype}, ${star.papers} papers)`).join('; ')}.`,
     'One whose paper prints a temperature and a luminosity can be drafted by hand (spec.mts).');
-  if (result.works.length) lines.push('', 'Works that name it with a kind of star (papers API), the star in the title first, each newest first:', ...result.works.map(work => `  ${work.year ?? '    '}  ${work.title}${work.doi ? `  ${work.doi}` : ''}`));
-  if (result.worksIssue) lines.push('', `The papers API did not answer (${result.worksIssue}); run \`telescope papers\` for it later.`);
+  if (result.works.length) lines.push('', `Works that name it with a kind of star (papers API${result.worksIssue ? ', from arXiv alone' : ''}), the star in the title first, each newest first:`, ...result.works.map(work => `  ${work.year ?? '    '}  ${work.title}${work.doi ? `  ${work.doi}` : ''}`));
+  if (result.worksIssue) lines.push('', `${result.works.length ? 'OpenAlex' : 'The papers API'} did not answer (${result.worksIssue}); run \`telescope papers\` for it later.`);
   lines.push('', 'A lead is not a star: read the paper, and check a star is in the galaxy and not in front of it.');
   if (directory) lines.push('', `Saved: ${resolve(directory, 'stars.json')}`);
   return `${lines.join('\n')}\n`;

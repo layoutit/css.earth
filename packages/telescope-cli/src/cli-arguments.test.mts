@@ -10,7 +10,7 @@ const cases = [
   { args: ['wwt-image','input','--pick','1','--level','0','--out','out'], option: '--pick', expected: { command:'wwt-image', exploration:resolve('input'), pick:1, level:0, directory:resolve('out'), ...common } },
   { args: ['family-run','input','operation','--out','out'], option: '--out', expected: { command:'family-run', descriptor:resolve('input'), operationId:'operation', directory:resolve('out'), ...common } },
   { args: ['family-assess','request','descriptor','--out','out'], option: '--out', expected: { command:'family-assess', request:resolve('request'), descriptor:resolve('descriptor'), directory:resolve('out'), ...common } },
-  { args: ['papers','input','--host','star'], option: '--host', expected: { command:'papers', target:'input', host:'star', ...common } },
+  { args: ['papers','input','--host','star'], option: '--host', expected: { command:'papers', targets:['input'], host:'star', ...common } },
   { args: ['simulations','input','--out','out'], option: '--out', expected: { command:'simulations', target:'input', directory:resolve('out'), ...common } },
   { args: ['leads','input','--out','out'], option: '--out', expected: { command:'leads', target:'input', directory:resolve('out'), ...common } },
   { args: ['leads','--class','exoplanet'], option: '--class', expected: { command:'leads', archiveClass:'exoplanet', ...common } },
