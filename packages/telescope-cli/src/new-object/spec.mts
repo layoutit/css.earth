@@ -51,6 +51,10 @@
  * "catalogue": "mast:HST/product/u6fv0101m_c0m.fits", "row": { "extension": "SCI,1", "x": "584.5", "y": "490.2" }, "firstPixel": 0.5,
  * "credit", "url" }, where `row` is the extension (name and version) and the pixel as the paper prints it, and `firstPixel` is the
  * coordinate the paper's software gives the centre of the first pixel (archives/images/image-pixel.mts).
+ * A star whose paper prints its coordinates in a table that no archive holds yet is placed at them, cited by the paper's DOI and
+ * with nothing archived: { "archive": "paper", "catalogue": "10.3847/1538-4357/ae47d8", "row": { "ID": "124", "RA": "12:21:55.068",
+ * "Dec": "+04:29:12.310" }, "columns": { "ra": "RA", "dec": "Dec" }, "credit", "url" }, where `row` is the cells as printed (right
+ * ascension in hours, declination in degrees, both sexagesimal).
  * `distance` (parsecs) places the star at a cited distance instead of Gaia DR3's parallax: for a star Gaia gives no parallax (a
  * two-parameter solution, as in other galaxies) or one under the placement floor (generate.mts PARALLAX_FLOOR_SIGMA), or when the
  * paper's own distance is the one its radius and mass assume. The README names the Gaia parallax it replaces.
@@ -137,7 +141,7 @@ export interface CataloguePosition { readonly catalogue: string; readonly row: R
   readonly columns?: { readonly ra: string; readonly dec: string };
   /** `simbad` places the star at SIMBAD's position of the object whose `main_id` is `row.main_id` (catalogue `basic`): for a star whose
    * own table gives each row no position, and whose rows CDS has matched to SIMBAD by name. */
-  readonly archive?: 'simbad' | 'mast';
+  readonly archive?: 'simbad' | 'mast' | 'paper';
   /** With `mast`: `catalogue` is the MAST product, `row` its { extension, x, y }, and this the coordinate of the first pixel's centre in the
    * paper's convention: 0.5 (HSTphot, DOLPHOT), 1 (DAOPHOT, IRAF, FITS) or 0. */
   readonly firstPixel?: number;
@@ -294,8 +298,9 @@ function cited(value: unknown, label: string, range: readonly [number, number]):
 }
 function cataloguePosition(value: unknown, label: string): CataloguePosition {
   const input = requireRecord(value, label), catalogue = requireString(input.catalogue, `${label}.catalogue`), row = requireRecord(input.row, `${label}.row`);
-  if (input.archive !== undefined && input.archive !== 'simbad' && input.archive !== 'mast') throw new TypeError(`${label}.archive is "simbad", "mast" or absent (a VizieR table), not ${JSON.stringify(input.archive)}.`);
+  if (input.archive !== undefined && input.archive !== 'simbad' && input.archive !== 'mast' && input.archive !== 'paper') throw new TypeError(`${label}.archive is "simbad", "mast", "paper" or absent (a VizieR table), not ${JSON.stringify(input.archive)}.`);
   if (input.archive === 'mast') return imagePosition(input, label);
+  if (input.archive === 'paper') return paperPosition(input, label);
   if (input.firstPixel !== undefined) throw new TypeError(`${label}.firstPixel belongs to a pixel on an archived image ("archive": "mast").`);
   const simbad = input.archive === 'simbad', entries = Object.entries(row).map(([column, cell]) => [column, requireString(cell, `${label}.row.${column}`)] as const);
   if (simbad ? catalogue !== 'basic' || entries.length !== 1 || entries[0]![0] !== 'main_id' || input.columns !== undefined || input.motion !== undefined : !/^[A-Z]+\/[\w+/.-]+$/u.test(catalogue))
@@ -309,6 +314,16 @@ function cataloguePosition(value: unknown, label: string): CataloguePosition {
   return { catalogue, row: Object.fromEntries(entries), credit: requireString(input.credit, `${label}.credit`), url, ...(simbad ? { archive: 'simbad' as const } : {}),
     ...(columns ? { columns: { ra: requireString(columns.ra, `${label}.columns.ra`), dec: requireString(columns.dec, `${label}.columns.dec`) } } : {}),
     ...(motion ? { motion: { epoch: epoch!, ra: requireString(motion.ra, `${label}.motion.ra`), dec: requireString(motion.dec, `${label}.motion.dec`) } } : {}) };
+}
+/** Coordinates as a paper prints them in a table: sexagesimal right ascension (hours) and declination (degrees), cited by the paper's DOI. */
+function paperPosition(input: Record<string, unknown>, label: string): CataloguePosition {
+  const catalogue = requireString(input.catalogue, `${label}.catalogue`), row = requireRecord(input.row, `${label}.row`), url = requireString(input.url, `${label}.url`), columns = requireRecord(input.columns, `${label}.columns`);
+  const ra = requireString(columns.ra, `${label}.columns.ra`), dec = requireString(columns.dec, `${label}.columns.dec`), cells = Object.fromEntries(Object.entries(row).map(([column, cell]) => [column, requireString(cell, `${label}.row.${column}`)]));
+  if (!/^10\.\d{4,9}\/\S+$/u.test(catalogue)) throw new TypeError(`${label}.catalogue is the paper's DOI (10.3847/1538-4357/ae47d8), not ${catalogue}.`);
+  if (!/^\d{1,2}:\d{2}:\d{2}(?:\.\d+)?$/u.test(cells[ra] ?? '') || !/^[+-]\d{1,2}:\d{2}:\d{2}(?:\.\d+)?$/u.test(cells[dec] ?? '') || Object.keys(cells).length < 3 || input.motion !== undefined || input.firstPixel !== undefined)
+    throw new TypeError(`${label}: a paper's position is { "archive": "paper", "catalogue": DOI, "row": { "ID": "124", "RA": "12:21:55.068", "Dec": "+04:29:12.310" }, "columns": { "ra": "RA", "dec": "Dec" } }: the row's name and its coordinates as printed (hh:mm:ss.s and a signed dd:mm:ss.s), with no motion.`);
+  if (!URL_PATTERN.test(url)) throw new TypeError(`${label}.url must be an https URL, not ${url}.`);
+  return { catalogue, row: cells, columns: { ra, dec }, credit: requireString(input.credit, `${label}.credit`), url, archive: 'paper' };
 }
 /** A pixel of one extension of a MAST product, as its paper prints it. */
 function imagePosition(input: Record<string, unknown>, label: string): CataloguePosition {

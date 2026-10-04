@@ -1,0 +1,142 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "m61-cepheid-124",
+  "parent": "m61",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "M61 Cepheid 124",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 176777370
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/m61-cepheid-124-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "M61 Cepheid 124",
+      "classification": "star",
+      "color": "#ffe1c4",
+      "distanceAu": 3504165766091.8,
+      "description": "A Cepheid in the galaxy M61, 17.0 million parsecs away, that swells and shrinks every 68.2 days.",
+      "systemName": "M61 Cepheid 124 system",
+      "order": 5773,
+      "context": {
+        "order": 5770
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -5.202211932152559e+23,
+        -4.990329488405356e+22,
+        4.100866254937268e+22
+      ],
+      "presentationToReference": [
+        -0.9923799617437312,
+        -0.07787113399311729,
+        -0.09548873242501638,
+        -0.09519610218461795,
+        -0.007469949731567818,
+        0.9954305108744977,
+        0.07822859872429122,
+        -0.9969354474295885,
+        4.790120151474298e-18
+      ],
+      "orbitUpReference": [
+        0.07787113399311729,
+        0.007469949731567818,
+        0.9969354474295885
+      ],
+      "metersPerUnit": 570249580.6451613,
+      "bodyRadiusM": 176777370000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

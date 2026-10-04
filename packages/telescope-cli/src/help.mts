@@ -67,6 +67,7 @@ shown: new-object --phase-curve draws a paper's fitted table and new-object --si
 Stars counts the stars SIMBAD lists inside a galaxy's outline by class, names the papers they come from, and says which of
 VizieR's tables of those papers give each star a period and a place. It downloads nothing. A table it calls ready is a lead
 for new-object --from-table, and so is one that lists detector pixels, once its paper has said which exposure they are of.
+It also names the single stars of no class that SIMBAD holds there with no parallax or proper motion, the most cited first.
 ASCL searches its live software catalog by title or matches the exact software names in a verified
 product receipt. It reports citable code entries and preferred citations when provided by ASCL.
 Only the receipt establishes what this run recorded as used; an ASCL match is a citation lead, not
