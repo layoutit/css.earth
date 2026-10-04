@@ -50,6 +50,32 @@ export function parseCataloguePoints(value: unknown, at = 'catalogue points'): P
 export function* parseCataloguePointSteps(value: unknown, at: string, chunk: number): Generator<void, PreparedCataloguePointBank, void> {
   if (!value || typeof value !== 'object' || Array.isArray(value)) throw new TypeError(`${at} must be an object.`);
   const data = value as Record<string, unknown>;
+  if (!Array.isArray(data.points)) throw new TypeError(`${String(data.id)}: a catalogue point bank holds 1 to ${MAX_CATALOGUE_POINTS} points, got none.`);
+  const { id, frame, appearance, palette, paletteRadiusPx, colorCss, radiusPx, levelPoints, spread } = parseCataloguePointHeader(data, data.points.length, at);
+  const width = palette ? 4 : 3;
+  const rows = data.points as unknown[], points = new Array<PreparedCataloguePointBank['points'][number]>(rows.length);
+  for (let index = 0; index < rows.length; index++) {
+    if (index && index % chunk === 0) yield;
+    const point = rows[index];
+    if (!Array.isArray(point) || point.length !== width || !point.every(axis => typeof axis === 'number' && Number.isFinite(axis))) {
+      throw new TypeError(`${id}: point ${index} must be ${width} finite numbers${palette ? ' (x, y, z and a palette index)' : ''}.`);
+    }
+    // Every palette entry was checked above, so an index names a color or nothing.
+    const color: unknown = palette ? palette[point[3]] : colorCss;
+    if (typeof color !== 'string') throw new TypeError(`${id}: point ${index} names palette color ${point[3]}, which the palette of ${palette!.length} lacks.`);
+    // A point and its position are plain values, read-only by type: freezing each of a bank's tens of thousands was
+    // 80,000 freezes in one zoom out of Earth, which Safari pays for one array at a time (2026-10-04).
+    points[index] = { positionUnits: [point[0], point[1], point[2]] as unknown as VolumeVector, colorCss: color,
+      radiusPx: paletteRadiusPx ? paletteRadiusPx[point[3]]! : radiusPx };
+  }
+  if (rows.length > chunk) yield;
+  const cells = parseCatalogueCells(data.cells, data.points as number[][], levelPoints, `${id} (${at})`);
+  return Object.freeze({ id, frame, appearance, points, spread, cells });
+}
+
+/** A bank's fields but its points and cells, checked: what the JSON form and the columns share (catalogue-point-columns.ts).
+ * `count` is how many points the bank holds. */
+export function parseCataloguePointHeader(data: Readonly<Record<string, unknown>>, count: number, at: string) {
   if (data.schema !== CATALOGUE_POINTS_SCHEMA || typeof data.id !== 'string' || !data.id) throw new TypeError(`${at}: expected a ${CATALOGUE_POINTS_SCHEMA} bank with an id.`);
   const frame = parseDensityVolumeFrame(data.frame);
   const appearance = data.appearance as Record<string, unknown> | undefined;
@@ -80,39 +106,22 @@ export function* parseCataloguePointSteps(value: unknown, at: string, chunk: num
       || !paletteRadiusPx.every(value => typeof value === 'number' && value > 0 && Number.isFinite(value)))) {
     throw new TypeError(`${data.id}: paletteRadiusPx holds one positive radius per palette color.`);
   }
-  if (!Array.isArray(data.points) || !data.points.length || data.points.length > MAX_CATALOGUE_POINTS) {
-    throw new TypeError(`${data.id}: a catalogue point bank holds 1 to ${MAX_CATALOGUE_POINTS} points, got ${Array.isArray(data.points) ? data.points.length : 'none'}.`);
+  if (!Number.isSafeInteger(count) || count < 1 || count > MAX_CATALOGUE_POINTS) {
+    throw new TypeError(`${data.id}: a catalogue point bank holds 1 to ${MAX_CATALOGUE_POINTS} points, got ${count || 'none'}.`);
   }
-  const parsedLevels = levels === undefined ? undefined : parseLevels(levels, data.points.length, data.id);
+  const parsedLevels = levels === undefined ? undefined : parseLevels(levels, count, data.id);
   if (parsedLevels?.some(level => level.screenBudget !== undefined) && screenBudget === undefined) {
     throw new TypeError(`${data.id}: a level's screenBudget moves the bank's, so the bank needs a screenBudget too.`);
   }
   const spread = parseCataloguePointSpread(data.spread, `${data.id} (${at})`);
-  const width = palette ? 4 : 3;
-  const rows = data.points as unknown[], points = new Array<PreparedCataloguePointBank['points'][number]>(rows.length);
-  for (let index = 0; index < rows.length; index++) {
-    if (index && index % chunk === 0) yield;
-    const point = rows[index];
-    if (!Array.isArray(point) || point.length !== width || !point.every(axis => typeof axis === 'number' && Number.isFinite(axis))) {
-      throw new TypeError(`${data.id}: point ${index} must be ${width} finite numbers${palette ? ' (x, y, z and a palette index)' : ''}.`);
-    }
-    // Every palette entry was checked above, so an index names a color or nothing.
-    const color: unknown = palette ? palette[point[3]] : colorCss;
-    if (typeof color !== 'string') throw new TypeError(`${data.id}: point ${index} names palette color ${point[3]}, which the palette of ${palette!.length} lacks.`);
-    // A point and its position are plain values, read-only by type: freezing each of a bank's tens of thousands was
-    // 80,000 freezes in one zoom out of Earth, which Safari pays for one array at a time (2026-10-04).
-    points[index] = { positionUnits: [point[0], point[1], point[2]] as unknown as VolumeVector, colorCss: color,
-      radiusPx: paletteRadiusPx ? (paletteRadiusPx as number[])[point[3]]! : radiusPx };
-  }
-  if (rows.length > chunk) yield;
-  const cells = parseCatalogueCells(data.cells, data.points as number[][], parsedLevels?.map(level => level.points) ?? [points.length], `${data.id} (${at})`);
-  return Object.freeze({ id: data.id, frame, appearance: Object.freeze({ colorCss, radiusPx, opacity,
-    ...(palette ? { palette: Object.freeze([...palette]) } : {}), ...(paletteRadiusPx ? { paletteRadiusPx: Object.freeze([...paletteRadiusPx as number[]]) } : {}), ...(parsedLevels ? { levels: parsedLevels } : {}),
-    ...(screenBudget === undefined ? {} : { screenBudget: screenBudget as number }),
-    ...(fullDetailUnits === undefined ? {} : { fullDetailUnits: fullDetailUnits as number }),
-    ...(outsidePixelsPerDot === undefined ? {} : { outsidePixelsPerDot }),
-    ...(fadeOutUnits === undefined ? {} : { fadeOutUnits: Object.freeze([...fadeOutUnits as number[]]) as unknown as readonly [number, number] }) }),
-    points, spread, cells });
+  return { id: data.id, frame, colorCss, radiusPx, palette: palette as readonly string[] | undefined, paletteRadiusPx: paletteRadiusPx as readonly number[] | undefined,
+    levelPoints: parsedLevels?.map(level => level.points) ?? [count], spread,
+    appearance: Object.freeze({ colorCss, radiusPx, opacity,
+      ...(palette ? { palette: Object.freeze([...palette as string[]]) } : {}), ...(paletteRadiusPx ? { paletteRadiusPx: Object.freeze([...paletteRadiusPx as number[]]) } : {}), ...(parsedLevels ? { levels: parsedLevels } : {}),
+      ...(screenBudget === undefined ? {} : { screenBudget: screenBudget as number }),
+      ...(fullDetailUnits === undefined ? {} : { fullDetailUnits: fullDetailUnits as number }),
+      ...(outsidePixelsPerDot === undefined ? {} : { outsidePixelsPerDot }),
+      ...(fadeOutUnits === undefined ? {} : { fadeOutUnits: Object.freeze([...fadeOutUnits as number[]]) as unknown as readonly [number, number] }) }) as PreparedCataloguePointBank['appearance'] };
 }
 
 function parseLevels(value: unknown, total: number, id: string): readonly CataloguePointLevel[] {

@@ -2,8 +2,8 @@ import { samePreparedCatalogueGeometry, validatePreparedVolumeDatasets, PREPARED
 import { PREPARED_VOLUME_DATASET_INDEX_SCHEMA, splitPreparedVolumeDatasets, trustPreparedCataloguePoints, trustPreparedCssVolume, validatePreparedVolumeDatasetIndex,
   type DensityVolumeFrame, type PreparedCataloguePoints, type PreparedVolumeDatasetEntry, type PreparedVolumeDatasetIndex } from '@cssearth/objects';
 import { readPrepared } from '../prepared-data-worker-client.js';
-import { readPreparedHere } from '../prepared-data/prepared-readers.js';
-import { PREPARED_CSS_VOLUME_READER, PREPARED_VOLUME_STARS_READER } from './prepared-volume-readers.js';
+import { readPreparedHere } from '../prepared-data/readers.js';
+import { cssVolumeReader, volumeStarsReader } from './prepared-volume-readers.js';
 import { writeData, writeStyle } from '../rendering/retained-write.js';
 import { preparedVolumeTexturePaths } from './prepared-volume-runtime.js';
 import { projectVolumeImpostors } from './volume-impostor-projection.js';
@@ -75,7 +75,7 @@ export async function loadPreparedVolumeDatasets(input: unknown, transport: Prep
   const readStars = (file: string) => {
     let reading = starFiles.get(file);
     if (!reading) {
-      starFiles.set(file, reading = read<PreparedCataloguePoints>(PREPARED_VOLUME_STARS_READER, resolve(directory + file)).then(trustPreparedCataloguePoints));
+      starFiles.set(file, reading = read<PreparedCataloguePoints>(volumeStarsReader.kind, resolve(directory + file)).then(trustPreparedCataloguePoints));
       reading.catch(() => { if (starFiles.get(file) === reading) starFiles.delete(file); });
     }
     return reading;
@@ -85,7 +85,7 @@ export async function loadPreparedVolumeDatasets(input: unknown, transport: Prep
     if (!entry) return Promise.reject(new TypeError(`Volume dataset bank ${index.id} has no dataset ${id}.`));
     let loading = loads.get(id);
     if (!loading) {
-      const reading = loading = Promise.all([read<PreparedCssVolume>(PREPARED_CSS_VOLUME_READER, resolve(directory + entry.volume)), readStars(entry.stars)]).then(([volume, points]) => {
+      const reading = loading = Promise.all([read<PreparedCssVolume>(cssVolumeReader.kind, resolve(directory + entry.volume)), readStars(entry.stars)]).then(([volume, points]) => {
         if (JSON.stringify(volume.frame) !== JSON.stringify(frame)) throw new TypeError(`Volume dataset bank ${index.id}: dataset ${id} is not in its descriptor's frame.`);
         volumes.set(id, trustPreparedCssVolume(volume)); stars.set(id, points);
       });

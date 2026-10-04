@@ -1,8 +1,6 @@
 import { decodePreparedCssObject } from './prepared-object-decoder.js';
-import { readPreparedHere } from './prepared-data/prepared-readers.js';
+import { readPreparedHere } from './prepared-data/readers.js';
 import type { PreparedDataRequest, PreparedDataResult } from './prepared-data-worker-client.js';
-// Every format's reader, registered as its module loads.
-import './prepared-data/readers.js';
 
 const scope = globalThis as unknown as {
   onmessage: ((event: MessageEvent<PreparedDataRequest>) => void) | null;

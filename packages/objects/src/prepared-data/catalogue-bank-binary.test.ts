@@ -14,5 +14,5 @@ test('a catalogue bank decodes to exactly the JSON it was, and refuses positions
   assert.equal(JSON.stringify(decoded.points), JSON.stringify(points));
   assert.throws(() => encodeCatalogueBankBinary({ ...bank, points: [[1.23456, 0, 0, 0], ...points.slice(1)] }, 'm31: bank dots'), /m31: bank dots: point 0 axis x is 1.23456, which is not a whole number of 1e-4 units/u);
   assert.throws(() => encodeCatalogueBankBinary({ ...bank, cells: { ...bank.cells, of: [0] } }, 'b'), /b: a published bank needs its cells, one per point/u);
-  assert.throws(() => decodeCatalogueBankBinary(new ArrayBuffer(16), 'b.bin'), /b.bin: not a catalogue point bank/u);
+  assert.throws(() => decodeCatalogueBankBinary(new ArrayBuffer(16), 'b.bin'), /b.bin: not a prepared bank/u);
 });

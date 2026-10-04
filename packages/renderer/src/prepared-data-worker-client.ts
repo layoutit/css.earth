@@ -1,6 +1,5 @@
 import { type ObjectRuntimeDefinition } from '@cssearth/objects';
-import { readPreparedHere } from './prepared-data/prepared-readers.js';
-import './prepared-data/readers.js';
+import { readPreparedHere } from './prepared-data/readers.js';
 
 export interface PreparedObjectDecodeRequest { descriptor: unknown; bytes: ArrayBuffer; }
 /** What the page asks of the data worker: an object's runtime from its bytes, or a file read by its kind's reader. */

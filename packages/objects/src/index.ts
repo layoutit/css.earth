@@ -60,7 +60,9 @@ export type { PreparedOrbitCenter } from './prepared-data/prepared-orbit-centers
 
 export { PREPARED_WORLD_CONTEXT_SCHEMA, PREPARED_WORLD_CONTEXT_SUMMARY_SCHEMA, PREPARED_WORLD_SYSTEM_SCHEMA, PREPARED_WORLD_SYSTEM_VIEW_SCHEMA, PREPARED_WORLD_ORBITS_SCHEMA } from './prepared-data/world-schemas.js';
 
-export { CATALOGUE_POINTS_BINARY_SCHEMA, CATALOGUE_BANK_BINARY_MAGIC, CATALOGUE_POSITION_SCALE, encodeCatalogueBankBinary, decodeCatalogueBankBinary } from './prepared-data/catalogue-bank-binary.js';
+export { CATALOGUE_POINTS_BINARY_SCHEMA, CATALOGUE_POSITION_SCALE, catalogueBankColumns, encodeCatalogueBankBinary, decodeCatalogueBankBinary } from './prepared-data/catalogue-bank-binary.js';
+export { readCataloguePointColumns, cataloguePointColumns, cataloguePointColumnBuffers } from './prepared-data/catalogue-point-columns.js';
+export type { PreparedCataloguePointColumns, CataloguePointStyle } from './prepared-data/catalogue-point-columns.js';
 export { PREPARED_CSS_POINT_FIELD_SCHEMA, PREPARED_CSS_POINT_FIELD_MANIFEST_SCHEMA, POINT_FIELD_BANK_ENCODING } from './stars/point-field-schemas.js';
 export { POINT_FIELD_BANK_MAGIC, POINT_FIELD_BANK_VERSION, POINT_FIELD_BANK_HEADER_BYTES, POINT_FIELD_MAGNITUDE_DIVISOR, POINT_FIELD_MAGNITUDE_BOUND, POINT_FIELD_BANK_QUANTIZATION, decodeStarMagnitude, pointFieldBankLayout, pointFieldBankHeader, pointFieldBankRegions, decodePointFieldBank } from './stars/point-field-bank.js';
 export { parsePreparedCssPointFieldManifest, decodePreparedCssPointField } from './stars/point-field-validation.js';
@@ -122,7 +124,7 @@ export { validatePreparedCssSurfaceShell } from './prepared-data/css-surface-she
 export { PREPARED_CSS_VOLUME_SCHEMA, PREPARED_VOLUME_IMPOSTORS_SCHEMA, PREPARED_VOLUME_DATASETS_SCHEMA, PREPARED_IMAGE_LAYER_BANK_SCHEMA, DENSITY_VOLUME_FORMAT } from './volume/volume-schemas.js';
 export { PREPARED_CSS_SURFACE_SHELL_SCHEMA, SURFACE_SHELL_FORMAT, SHELL_CORNER_PERMUTATIONS } from './prepared-data/css-surface-shell-types.js';
 
-export { parseCataloguePoints, parseCataloguePointSteps } from './prepared-data/catalogue-point-bank.js';
+export { parseCataloguePoints, parseCataloguePointSteps, parseCataloguePointHeader } from './prepared-data/catalogue-point-bank.js';
 export type { CataloguePointLevel, PreparedCataloguePointBank } from './prepared-data/catalogue-point-bank.js';
 export { GALAXY_BACKING_SCHEMA, parseGalaxyBacking } from './prepared-data/galaxy-backing.js';
 export type { BackingNearFade, PreparedGalaxyBacking } from './prepared-data/galaxy-backing.js';

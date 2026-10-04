@@ -44,14 +44,28 @@ export interface BatchedSpatialPointOccluder { readonly centreUnits: VolumeVecto
 const parallaxPixels = (focalPixels: number, shift: number, nearestUnits: number) =>
   nearestUnits > shift ? focalPixels * shift / (nearestUnits - shift) : Infinity;
 
-/** One part of a field: its points, their cells and styles, and how many of them it draws. */
+/** A part's points as columns: where each is and which style it has, with no object for each point. A bank of tens of
+ * thousands arrives this way from the data worker (catalogue-points.ts), and the field reads its places where they are. */
+export interface BatchedSpatialPointColumns {
+  readonly count: number;
+  /** Each point's x, y and z, in the field's units. */
+  readonly positions: Float64Array;
+  /** The styles the points have; a null style draws nothing. */
+  readonly styles: readonly (BatchedSpatialPointStyle | null)[];
+  /** Each point's style, where they do not all have the first. */
+  readonly styleOf: ArrayLike<number> | null;
+}
+
+/** One part of a field: its points, their cells and styles, and how many of them it draws. The points are `columns`, or
+ * a list of point objects with the style of each (`points` and `stylePoint`), which the field turns into columns. */
 export interface BatchedSpatialPointPart<T extends BatchedSpatialPoint> {
-  points: readonly T[];
+  points?: readonly T[];
+  columns?: BatchedSpatialPointColumns;
   /** The points' prepared cells (@cssearth/objects CatalogueCells): `of[i]` is point i's box in `boxes`, six bounds each.
    * A cell out of view is skipped whole; without cells every point is visited. */
   cells?: { readonly boxes: Float64Array; readonly of: ArrayLike<number> };
   /** A point's fixed style, read once when the field mounts. */
-  stylePoint(point: T): BatchedSpatialPointStyle | null;
+  stylePoint?(point: T): BatchedSpatialPointStyle | null;
   drawnCount?(cameraDistanceUnits: number, cameraUnits: VolumeVector): number;
   /** Every paint color a style can give (`pointPaint`): one retained path each. */
   paintPalette: readonly string[];
@@ -104,18 +118,38 @@ export function mountBatchedSpatialPoints<T extends BatchedSpatialPoint>(options
   const dimmed = (style: BatchedSpatialPointStyle, factor: number) => pointPaint({ ...style, opacity: style.opacity * factor });
   // One set of paths for each paint group, in the order the groups first appear, holding every paint its parts use.
   const groupOf = inputs.map((input, index) => input.paintGroup === undefined ? `part ${index}` : `group ${input.paintGroup}`);
-  const paints = new Map([...new Set(groupOf)].map(group => [group, mountPointPaths(root, inputs.flatMap(({ points, stylePoint, paintPalette }, index) => {
+  // Every part as columns: point objects are read once here, into a place and a style index each.
+  const columnsOf = ({ points, columns, stylePoint }: BatchedSpatialPointPart<T>): BatchedSpatialPointColumns => {
+    if (columns) return columns;
+    if (!points || !stylePoint) throw new TypeError(`${className}: a part needs its columns, or its points and the style of each.`);
+    const positions = new Float64Array(points.length * 3), styles: (BatchedSpatialPointStyle | null)[] = [], indexOf = new Map<BatchedSpatialPointStyle | null, number>();
+    const styleOf = new Uint32Array(points.length);
+    points.forEach((point, index) => {
+      positions.set(point.positionUnits, index * 3);
+      const style = stylePoint(point);
+      let at = indexOf.get(style);
+      if (at === undefined) { indexOf.set(style, at = styles.length); styles.push(style); }
+      styleOf[index] = at;
+    });
+    return { count: points.length, positions, styles, styleOf };
+  };
+  const columns = inputs.map(columnsOf);
+  const paints = new Map([...new Set(groupOf)].map(group => [group, mountPointPaths(root, inputs.flatMap(({ paintPalette }, index) => {
     if (groupOf[index] !== group) return [];
     if (!occluder) return paintPalette;
     // The fainter paints, built once for each style the points have and not once for each point: 39,916 galaxies share
     // 123 styles, and five paints for each point were 58 ms of the frame their bank mounted in (iPad, 2026-10-03).
-    const drawn = new Set<BatchedSpatialPointStyle>();
-    for (const point of points) { const style = stylePoint(point); if (style && style.opacity > 0 && style.radiusPx > 0) drawn.add(style); }
-    return [...paintPalette, ...OCCLUDED_OPACITIES.flatMap(factor => [...drawn].map(style => dimmed(style, factor)))];
+    const { count, styles, styleOf } = columns[index]!, has = new Uint8Array(styles.length);
+    if (styleOf) for (let point = 0; point < count; point++) has[styleOf[point]!] = 1; else if (count) has[0] = 1;
+    const drawn = styles.filter((style, at): style is BatchedSpatialPointStyle => has[at] === 1 && style !== null && style.opacity > 0 && style.radiusPx > 0);
+    return [...paintPalette, ...OCCLUDED_OPACITIES.flatMap(factor => drawn.map(style => dimmed(style, factor)))];
   }))] as const));
-  const parts = inputs.map(({ points, cells, stylePoint, drawnCount, keepFraction, hidden }, partIndex) => {
+  const parts = inputs.map(({ cells, drawnCount, keepFraction, hidden }, partIndex) => {
     const paint = paints.get(groupOf[partIndex]!)!;
-    const positions = new Float64Array(points.length * 3), paths = new Int32Array(points.length), margins = new Float64Array(points.length);
+    const { count, positions, styles, styleOf } = columns[partIndex]!;
+    if (positions.length !== count * 3 || (styleOf && styleOf.length !== count)) throw new TypeError(`${className}: a part of ${count} points holds ${positions.length} coordinates${styleOf ? ` and ${styleOf.length} styles` : ''}.`);
+    const points = { length: count };
+    const paths = new Int32Array(points.length), margins = new Float64Array(points.length);
     const occludedPaths = OCCLUDED_OPACITIES.map(() => new Int32Array(occluder ? points.length : 0));
     const ranks = new Float64Array(points.length);
     // A bank hands out one style object for each of its paints: its path is looked up once, not for each of its points
@@ -131,10 +165,8 @@ export function mountBatchedSpatialPoints<T extends BatchedSpatialPoint>(options
       resolve(limit: number): number {
         const from = resolved, end = Math.min(points.length, from + Math.max(1, Math.floor(limit)));
         for (let index = from; index < end; index++) {
-          const point = points[index]!;
-          positions.set(point.positionUnits, index * 3);
           ranks[index] = (index * 0.6180339887498949) % 1;
-          const style = stylePoint(point);
+          const style = styles[styleOf ? styleOf[index]! : 0] ?? null;
           if (!style || !(style.opacity > 0) || !(style.radiusPx > 0)) { paths[index] = -1; continue; }
           let path = pathOf.get(style);
           if (path === undefined) pathOf.set(style, path = paint.entry(pointPaint(style), Math.max(.5, style.radiusPx)));
