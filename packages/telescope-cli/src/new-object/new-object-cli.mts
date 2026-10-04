@@ -5,7 +5,7 @@
  *   node packages/telescope-cli/src/new-object/new-object-cli.mts --bake <id>...
  *   node packages/telescope-cli/src/new-object/new-object-cli.mts --refresh <id>... [--check | --bake]
  *   node packages/telescope-cli/src/new-object/new-object-cli.mts --thermal <id>... | --host-light <id>... | --photometry entries.json | --phase-curve entries.json
- *   node packages/telescope-cli/src/new-object/new-object-cli.mts --simulation entries.json
+ *   node packages/telescope-cli/src/new-object/new-object-cli.mts --simulation entries.json | --rock-eclipse entries.json
  *   node packages/telescope-cli/src/new-object/new-object-cli.mts --rename <star id>...
  *   node packages/telescope-cli/src/new-object/new-object-cli.mts --retext <host id>... | --charts <host id>... | --retime <host id>...
  *   node packages/telescope-cli/src/new-object/new-object-cli.mts --star-limb <id>... [--bake]
@@ -89,6 +89,12 @@ if (process.argv[1] && import.meta.url === pathToFileURL(realpathSync(process.ar
     const { readFile } = await import('node:fs/promises'), { parseSimulationEntries } = await import('./simulation/simulation-dataset.mts'), { rebuildExistingDatasets } = await import('./planet-datasets.mts'), { liveArchive } = await import('./archives/archives.mts');
     const entries = parseSimulationEntries(JSON.parse(await readFile(option('simulation')!, 'utf8')));
     const lines = await rebuildExistingDatasets(process.cwd(), [...entries.keys()], 'simulation', liveArchive, line => process.stdout.write(`${line}\n`), new Map(), new Map(), entries);
+    process.stdout.write(`${lines.length} dataset${lines.length === 1 ? '' : 's'} written. Bake: node packages/bake/cli/prepare-object.mts ${[...entries.keys()].join(' ')}\n`);
+  } else if (option('rock-eclipse') !== undefined && !specPath) {
+    // Bare-rock models from published eclipse depths for rocky planets already in the tree: `--rock-eclipse entries.json` (new-object/rock/rock-eclipse-dataset.mts).
+    const { readFile } = await import('node:fs/promises'), { addRockEclipseDatasets, parseRockEclipseEntries } = await import('./rock/rock-eclipse-dataset.mts'), { liveArchive } = await import('./archives/archives.mts');
+    const entries = parseRockEclipseEntries(JSON.parse(await readFile(option('rock-eclipse')!, 'utf8')));
+    const lines = await addRockEclipseDatasets(checkoutProjectRoot(import.meta.url), entries, liveArchive, line => process.stdout.write(`${line}\n`));
     process.stdout.write(`${lines.length} dataset${lines.length === 1 ? '' : 's'} written. Bake: node packages/bake/cli/prepare-object.mts ${[...entries.keys()].join(' ')}\n`);
   } else if (option('photometry') !== undefined && !specPath) {
     // Band photometry for imaged planets already in the tree: `--photometry entries.json`, a list of { id, photometry } (spec.mts PhotometrySpec).

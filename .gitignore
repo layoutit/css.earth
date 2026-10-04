@@ -418,6 +418,16 @@ src/objects/r-doradus/source/observations/*
 src/objects/rhea/source/vims/data/**/*.img
 src/objects/titan/source/geology/*.shp
 src/objects/titan/source/geology/*.lyr
+src/objects/toi-1468b/source/science/svo/JWST_MIRI.F1500W.xml
+src/objects/toi-1468b/source/science/bt-settl-cifist/bt-settl-cifist-3400-5.0-0.0.xml
+src/objects/ltt-3780b/source/science/svo/JWST_MIRI.F1500W.xml
+src/objects/ltt-3780b/source/science/bt-settl-cifist/bt-settl-cifist-3400-5.0-0.0.xml
+src/objects/lhs-1140c/source/science/svo/JWST_MIRI.F1500W.xml
+src/objects/lhs-1140c/source/science/bt-settl-cifist/bt-settl-cifist-3100-5.0-0.0.xml
+src/objects/gj-3929b/source/science/svo/JWST_MIRI.F1500W.xml
+src/objects/gj-3929b/source/science/bt-settl-cifist/bt-settl-cifist-3400-5.0-0.0.xml
+src/objects/gj-1252b/source/science/svo/Spitzer_IRAC.I2.xml
+src/objects/gj-1252b/source/science/bt-settl-cifist/bt-settl-cifist-3500-5.0-0.0.xml
 src/objects/trappist-1b/source/science/svo/JWST_MIRI.F1500W.xml
 src/objects/trappist-1b/source/science/bt-settl-cifist/bt-settl-cifist-2600-5.0-0.0.xml
 src/objects/trappist-1b/source/illustration/TRAPPIST-1_b.jpg

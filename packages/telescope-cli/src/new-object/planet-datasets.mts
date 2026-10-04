@@ -206,7 +206,7 @@ export function installHostLight(files: PackageFiles, id: string, light: HostLig
 }
 
 /** The package files the dataset installers rewrite, read from the tree so a planet already in the universe can take a dataset. */
-const DATASET_REBUILD_FILES = ['object.json', 'text.json', 'source/preparation/raster.json', 'source/preparation/geometry.json', 'source/preparation/acquisition.json', 'source/content/object.json', 'source/manifest.json'] as const;
+export const DATASET_REBUILD_FILES = ['object.json', 'text.json', 'source/preparation/raster.json', 'source/preparation/geometry.json', 'source/preparation/acquisition.json', 'source/content/object.json', 'source/manifest.json'] as const;
 
 /** Give planets already in the tree their color from what is measured: `thermal` reads the archive's emission table and
  * installs the "Thermal glow" dataset where a dayside temperature is measured; `host-light` lights a neutral gray with the
@@ -285,7 +285,7 @@ export async function rebuildExistingDatasets(root: string, ids: readonly string
 }
 
 /** Write a package whose datasets changed. When its default dataset changed too, the marker is drawn again from the new one. */
-async function writeWithMarker(root: string, files: PackageFiles, id: string, defaultChanged: boolean) {
+export async function writeWithMarker(root: string, files: PackageFiles, id: string, defaultChanged: boolean) {
   const { mkdir, writeFile } = await import('node:fs/promises');
   if (defaultChanged) datasetMarkerEntry(files, id);
   for (const [path, value] of files) { await mkdir(dirname(resolve(root, path)), { recursive: true }); await writeFile(resolve(root, path), value); }
