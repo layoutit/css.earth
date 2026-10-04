@@ -45,6 +45,11 @@ export interface RockEclipseEntry {
   readonly star: { readonly teffK: number; readonly logg: number; readonly fid: number };
   /** The paper's verdict, as the rest of the sentence "The paper finds the day side ...": "consistent with a bare rock". */
   readonly verdict: string;
+  /** The radius ratio the paper fitted with the depth, when it prints one: the two belong to one fit. */
+  readonly radiusRatio?: { readonly value: number; readonly cell: string; readonly where: string };
+  /** The dayside brightness temperature the paper prints, with its one-sigma errors: the check, never an input. A model whose
+   * uniform day side is more than two sigma from it is refused. */
+  readonly dayside?: { readonly kelvin: number; readonly minus: number; readonly plus: number; readonly where: string };
 }
 
 const SVO = 'https://svo2.cab.inta-csic.es/theory';
@@ -59,7 +64,7 @@ export function rockEclipseEntry(value: unknown, label: string): RockEclipseEntr
     if (!words) throw new TypeError(`${label}.${key} is empty.`);
     return words;
   };
-  const known = new Set(['id', 'dataset', 'label', 'path', 'url', 'credit', 'observed', 'depth', 'filter', 'throughput', 'band', 'star', 'verdict']), unknown = Object.keys(input).filter(key => !known.has(key));
+  const known = new Set(['id', 'dataset', 'label', 'path', 'url', 'credit', 'observed', 'depth', 'filter', 'throughput', 'band', 'star', 'verdict', 'radiusRatio', 'dayside']), unknown = Object.keys(input).filter(key => !known.has(key));
   if (unknown.length) throw new TypeError(`${label}: unknown fields ${unknown.join(', ')}.`);
   const dataset = text('dataset'), path = text('path'), url = text('url'), filter = input.filter === undefined ? undefined : text('filter'), verdict = text('verdict');
   if ((filter === undefined) === (input.throughput === undefined)) throw new TypeError(`${label} names the band once: an SVO filter id (field filter) or a released throughput table (field throughput).`);
@@ -84,8 +89,19 @@ export function rockEclipseEntry(value: unknown, label: string): RockEclipseEntr
     if (!/^science\/[a-z0-9-]+\/[A-Za-z0-9._-]+$/u.test(throughput.path)) throw new TypeError(`${label}.throughput.path ${throughput.path}: the table lives at science/<paper>/<name>.`);
     if (!(throughput.minimumMicrons > 0 && throughput.maximumMicrons > throughput.minimumMicrons)) throw new RangeError(`${label}.throughput sums from minimumMicrons to a larger maximumMicrons.`);
   }
+  let radiusRatio: RockEclipseEntry['radiusRatio'], dayside: RockEclipseEntry['dayside'];
+  if (input.radiusRatio !== undefined) {
+    const ratio = requireRecord(input.radiusRatio, `${label}.radiusRatio`);
+    radiusRatio = { value: requireFiniteNumber(ratio.value, `${label}.radiusRatio.value`), cell: requireString(ratio.cell, `${label}.radiusRatio.cell`), where: requireString(ratio.where, `${label}.radiusRatio.where`) };
+    if (!(radiusRatio.value > 0 && radiusRatio.value < 1)) throw new RangeError(`${label}.radiusRatio.value is the planet's radius in stellar radii, between 0 and 1.`);
+  }
+  if (input.dayside !== undefined) {
+    const day = requireRecord(input.dayside, `${label}.dayside`), value = (key: string) => requireFiniteNumber(day[key], `${label}.dayside.${key}`);
+    dayside = { kelvin: value('kelvin'), minus: value('minus'), plus: value('plus'), where: requireString(day.where, `${label}.dayside.where`) };
+    if (!(dayside.kelvin > 0 && dayside.minus > 0 && dayside.plus > 0)) throw new RangeError(`${label}.dayside is the printed temperature in K with its positive one-sigma errors.`);
+  }
   return { dataset, label: text('label'), path, url, credit: text('credit'), observed: text('observed'), depth: { low, high, cell: requireString(depth.cell, `${label}.depth.cell`), where: requireString(depth.where, `${label}.depth.where`) },
-    ...(filter ? { filter } : {}), ...(throughput ? { throughput } : {}), band: text('band'), star: { teffK, logg, fid }, verdict };
+    ...(filter ? { filter } : {}), ...(throughput ? { throughput } : {}), band: text('band'), star: { teffK, logg, fid }, verdict, ...(radiusRatio ? { radiusRatio } : {}), ...(dayside ? { dayside } : {}) };
 }
 
 /** `--rock-eclipse entries.json`: the entries for planets already in the tree, by planet id. */
@@ -120,9 +136,9 @@ export async function hostAtmosphere(root: string, host: string): Promise<{ read
   return { teffK: requireFiniteNumber(measured.effectiveTemperatureK, `${host} effectiveTemperatureK`), logg: requireFiniteNumber(measured.surfaceGravityLogg, `${host} surfaceGravityLogg`) };
 }
 
-/** The filter curve and the model spectrum in the source directory, fetched from the SVO when absent. Refused: a model
- * spectrum that is not the grid point nearest the star's cited values, and a file that states another grid point than the
- * entry names. Returns the bytes fetched. */
+/** The band's curve and the model spectrum in the source directory, fetched when absent: from the SVO, or the throughput table
+ * from its Zenodo release. Refused: a model spectrum that is not the grid point nearest the star's cited values, a file that
+ * states another grid point than the entry names, and a table that does not span the wavelengths summed. Returns the bytes fetched. */
 export async function restoreRockInputs(sourceRoot: string, id: string, host: { readonly id: string; readonly teffK: number; readonly logg: number }, entry: RockEclipseEntry, archive: Archive): Promise<number> {
   const where = `${id}, dataset ${entry.dataset}`, { teffK, logg } = entry.star;
   if (Math.abs(teffK - host.teffK) > HALF_STEP_K || Math.abs(logg - host.logg) > HALF_STEP_LOGG)
@@ -162,6 +178,19 @@ export async function throughputRelease(archive: Archive, where: string, table: 
   return { doi: table.record, recordUrl: record.url, title: record.title, license, fileUrl: file.url };
 }
 
+/** The transcribed record the bake reads: the depth's range, the radius ratio fitted with it when the paper prints one, and where both are printed. */
+export const depthRecord = (id: string, entry: RockEclipseEntry) => ({ schema: ECLIPSE_DEPTH_SCHEMA, planet: id, eclipseDepthPpm: { low: entry.depth.low, high: entry.depth.high },
+  ...(entry.radiusRatio ? { radiusRatio: entry.radiusRatio.value } : {}),
+  source: `${entry.credit}: ${entry.observed}. Eclipse depth ${entry.depth.cell} (${entry.depth.where}); the range is its one-sigma interval.${entry.radiusRatio ? ` Radius ratio ${entry.radiusRatio.cell} (${entry.radiusRatio.where}), fitted with the depth.` : ''} The paper finds the day side ${entry.verdict}. ${entry.url}` });
+
+/** Refuse a model whose uniform day side is more than two sigma from the dayside temperature the paper prints. */
+export function checkDayside(where: string, entry: RockEclipseEntry, uniformDaysideK: number): string {
+  if (!entry.dayside) return '';
+  const { kelvin, minus, plus } = entry.dayside, sigma = (uniformDaysideK - kelvin) / (uniformDaysideK < kelvin ? minus : plus);
+  if (!(Math.abs(sigma) <= 2)) throw new RangeError(`${where}: the uniform day side that shows the depth is ${Math.round(uniformDaysideK)} K, ${Math.abs(sigma).toFixed(1)} sigma from the ${kelvin} K the paper prints (${entry.dayside.where}); the depth, band, star or radius ratio is not read as the paper read it (fields depth, filter or throughput, star, radiusRatio).`);
+  return `, uniform day side ${Math.round(uniformDaysideK)} K (paper ${kelvin} +${plus}/-${minus}, ${sigma >= 0 ? '+' : '-'}${Math.abs(sigma).toFixed(1)} sigma)`;
+}
+
 export interface RockReport { readonly substellarK: number; readonly substellarRangeK: readonly [number, number] }
 
 /** Add the dataset to the package in `files`. It becomes the default where the default was one color or the neutral shape.
@@ -175,8 +204,7 @@ export function installRockEclipseDataset(files: PackageFiles, id: string, name:
   const minimum = 50, maximum = Math.ceil(report.substellarRangeK[1] / 100) * 100, labels = [`≤ ${minimum}`, String((minimum + maximum) / 2), String(maximum)];
   const consumer = `${id}-bare-rock-model`, input = `${id}-${entry.dataset}-eclipse-depth`, table = entry.throughput,
     filterId = `${id}-${(table ? table.instrument : entry.filter!).toLowerCase().replace(/[^a-z0-9]+/gu, '-')}-${table ? 'throughput' : 'filter'}`, starId = `${id}-bt-settl-cifist-${entry.star.teffK}`;
-  files.set(`${s}/${entry.path}`, json({ schema: ECLIPSE_DEPTH_SCHEMA, planet: id, eclipseDepthPpm: { low, high },
-    source: `${entry.credit}: ${entry.observed}. Eclipse depth ${entry.depth.cell} (${entry.depth.where}); the range is its one-sigma interval. The paper finds the day side ${entry.verdict}. ${entry.url}` }));
+  files.set(`${s}/${entry.path}`, json(depthRecord(id, entry)));
 
   const raster = read(`${s}/preparation/raster.json`), lit = raster.emission === undefined;
   const science = { kind: 'terrestrial-scientific', id: entry.dataset, label: entry.label, ...rockRecipe(id, host, entry), consumer, displaySampling: 'bilinear', outputLongitudeOrigin: 0, minimum, maximum, colors: PLASMA, labels,
@@ -212,7 +240,7 @@ export function installRockEclipseDataset(files: PackageFiles, id: string, name:
     table && release ? { id: filterId, path: inputs.filter.path, origin: release.fileUrl, productId: table.member ?? table.file, version: release.doi, title: `${table.instrument} throughput, from the release of ${table.credit}`,
       sourceUrl: release.recordUrl, credit: `${table.credit}: ${release.title}`, displayCredit: `${table.credit} · ${table.instrument} throughput`, license: release.license.name, licenseEvidence: [release.recordUrl, release.license.url],
       acquisition: `Restored through source/preparation/acquisition.json from Zenodo record ${release.doi}${table.member ? `, the member ${table.member} of ${table.file}` : ''}, unchanged. The model sums it from ${table.minimumMicrons} to ${table.maximumMicrons} µm, the wavelengths ${entry.credit} summed.`,
-      redistribution: `Exact bytes of the release; ${release.license.name} with attribution.`, consumers: [consumer], ...pinned('throughput table') }
+      redistribution: `Not redistributed in git; restored from Zenodo. ${release.license.name} with attribution.`, consumers: [consumer], ...pinned('throughput table') }
     : { id: filterId, path: inputs.filter.path, origin: inputs.filter.url, productId: entry.filter, version: 'SVO Filter Profile Service', title: `${entry.filter} filter response`,
       sourceUrl: `${SVO}/fps/index.php?id=${entry.filter}`, credit: 'Spanish Virtual Observatory Filter Profile Service (Rodrigo & Solano 2020)', displayCredit: 'SVO Filter Profile Service',
       license: 'Filter profiles served openly by the SVO for research use with citation', licenseEvidence: [svoUse],
@@ -251,11 +279,12 @@ export async function addRockEclipseDatasets(root: string, entries: ReadonlyMap<
       // The reader takes the depth record from the source directory, as the bake will.
       const record = resolve(o, 'source', entry.path);
       await mkdir(dirname(record), { recursive: true });
-      await writeFile(record, json({ schema: ECLIPSE_DEPTH_SCHEMA, planet: id, eclipseDepthPpm: { low: entry.depth.low, high: entry.depth.high }, source: entry.credit }));
+      await writeFile(record, json(depthRecord(id, entry)));
       const rock = await loadBareRockEclipse(resolve(o, 'source'), rockRecipe(id, host, entry));
+      const checked = checkDayside(`${id}, dataset ${entry.dataset}`, entry, rock.uniformDaysideK);
       const installed = installRockEclipseDataset(files, id, name, host, entry, { substellarK: rock.substellarK, substellarRangeK: [rock.lowerK, rock.upperK] }, release);
       promoted ||= installed.promoted;
-      lines.push(`${id}: ${entry.dataset} rock model from ${entry.credit}, ${installed.underStar} K under the star, drawn ${installed.minimum}-${installed.maximum} K${installed.promoted ? '; the page now opens on it' : ''}`); progress(lines.at(-1)!);
+      lines.push(`${id}: ${entry.dataset} rock model from ${entry.credit}, ${installed.underStar} K under the star, drawn ${installed.minimum}-${installed.maximum} K${checked}${installed.promoted ? '; the page now opens on it' : ''}`); progress(lines.at(-1)!);
     }
     await writeWithMarker(root, files, id, promoted);
   }

@@ -1,0 +1,10 @@
+{
+  "schema": "cssearth-eclipse-depth@1",
+  "planet": "gj-367b",
+  "eclipseDepthPpm": {
+    "low": 75,
+    "high": 83
+  },
+  "radiusRatio": 0.01364,
+  "source": "Zhang et al. (2024): a JWST MIRI LRS phase curve of 12.7 hours with two eclipses (GO 2508). Eclipse depth 79 +/- 4 ppm, white light, 5 to 12 um (abstract and the table of white-light phase-curve parameters, F_p,day/F_*); the range is its one-sigma interval. Radius ratio 0.01364 +/- 0.00023 (table of white-light phase-curve parameters, R_p/R_s), fitted with the depth. The paper finds the day side fully consistent with a zero-albedo planet with no heat recirculation: a dark, hot, airless sub-Earth. https://arxiv.org/abs/2401.01400"
+}

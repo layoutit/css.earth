@@ -8,7 +8,7 @@ import { resolve } from 'node:path';
 import test from 'node:test';
 import { WORKSPACE } from '@cssearth/telescope/node';
 import type { Archive } from '../archives/archives.mts';
-import { hostAtmosphere, installRockEclipseDataset, parseRockEclipseEntries, restoreRockInputs, rockInputs, rockRecipe, throughputRelease } from './rock-eclipse-dataset.mts';
+import { checkDayside, depthRecord, hostAtmosphere, installRockEclipseDataset, parseRockEclipseEntries, restoreRockInputs, rockInputs, rockRecipe, throughputRelease } from './rock-eclipse-dataset.mts';
 
 const id = 'trappist-1f', o = `src/objects/${id}`;
 const written = { id, dataset: 'temperature', label: 'Rock model', path: 'science/allen-2025/dayside-15um.json', url: 'https://arxiv.org/abs/2508.14210', credit: 'Allen et al. (2025)',
@@ -125,4 +125,19 @@ test('a depth summed over a spectrograph takes a released throughput table as it
   assert.deepEqual(after('source/preparation/acquisition.json').operations.at(-2),
     { kind: 'zip-member', groups: ['restore', 'refresh'], path: 'science/valentine-2024/miri_throughput.dat', url: 'https://zenodo.org/records/12571830/files/ThERESA.zip?download=1', member: 'ThERESA/miri_throughput.dat' });
   assert.equal(after('source/preparation/raster.json').surfaces.at(-1).science.band.encoding, 'throughput-columns');
+});
+
+test('the depth is read with the radius ratio its paper fitted, and the paper\'s printed day side is the check', () => {
+  const entry = entryOf({ radiusRatio: { value: 0.04943, cell: '0.04943 +/- 0.00015', where: 'Table 1, R_P/R_*' }, dayside: { kelvin: 709, minus: 31, plus: 31, where: 'abstract' } });
+  const record = depthRecord(id, entry);
+  assert.deepEqual([record.schema, record.radiusRatio, record.eclipseDepthPpm], ['cssearth-eclipse-depth@1', 0.04943, { low: 274, high: 350 }]);
+  assert.match(record.source, /Radius ratio 0\.04943 \+\/- 0\.00015 \(Table 1, R_P\/R_\*\), fitted with the depth\. The paper finds the day side/u);
+  assert.equal('radiusRatio' in depthRecord(id, entryOf()), false, 'a paper that prints no ratio leaves the bodies\' own');
+  // Inside two sigma the line says how far; outside, the entry is refused with the fields that could be wrong.
+  assert.equal(checkDayside('trappist-1f, dataset temperature', entry, 665.4), ', uniform day side 665 K (paper 709 +31/-31, -1.4 sigma)');
+  assert.equal(checkDayside('trappist-1f, dataset temperature', entryOf(), 665.4), '', 'an entry without the printed day side is not checked');
+  assert.throws(() => checkDayside('trappist-1f, dataset temperature', entry, 640),
+    /trappist-1f, dataset temperature: the uniform day side that shows the depth is 640 K, 2\.2 sigma from the 709 K the paper prints \(abstract\); the depth, band, star or radius ratio is not read as the paper read it \(fields depth, filter or throughput, star, radiusRatio\)/u);
+  assert.throws(() => entryOf({ radiusRatio: { value: 1.2, cell: '', where: '' } }), /radiusRatio\.value is the planet's radius in stellar radii, between 0 and 1/u);
+  assert.throws(() => entryOf({ dayside: { kelvin: 709, minus: 0, plus: 31, where: '' } }), /dayside is the printed temperature in K with its positive one-sigma errors/u);
 });

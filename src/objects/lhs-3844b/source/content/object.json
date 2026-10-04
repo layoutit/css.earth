@@ -124,7 +124,7 @@
           "meta": "K",
           "sourceUrl": "https://arxiv.org/abs/1908.06834"
         },
-        "notes": "Brightness temperature at 4.5 µm of LHS 3844 b from Kreidberg et al. (2019)'s published fit to a Spitzer IRAC 4.5 µm phase curve (program 14204). Their Fourier series becomes a map of longitude through the Cowan & Agol (2008) inversion, so there is no north-south detail and every latitude is drawn alike. The hottest longitude is 6° west of noon. Longitudes where the fit gives no emission are left blank. The false color runs from 350 to 1,100 K. With shadows on, the star's light darkens the night half."
+        "notes": "Brightness temperature at 4.5 µm of LHS 3844 b from Kreidberg et al. (2019)'s published fit to a Spitzer IRAC 4.5 µm phase curve (program 14204). Their Fourier series becomes a map of longitude through the Cowan & Agol (2008) inversion, so there is no north-south detail and every latitude is drawn alike. The hottest longitude is within 6° of noon, which the paper finds consistent with noon itself. Longitudes where the fit gives no emission are left blank. The false color runs from 350 to 1,100 K. With shadows on, the star's light darkens the night half."
       }
     ]
   },

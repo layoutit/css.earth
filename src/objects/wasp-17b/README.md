@@ -20,6 +20,8 @@ Generated 2026-10-03 by [new-object-cli.mts](../../../packages/telescope-cli/src
 
 - Run of 2026-10-04: [`new-object --published-map`](../../../packages/telescope-cli/src/new-object/map/published-map-dataset.mts) wrote the dataset from the release. The paper's hot-spot longitude was not an input: the map's hottest cell is at 18.75° east, the paper prints 18.7° (+11.1, −3.8) in Section 4.3. A grid read mirrored or shifted would put it elsewhere. The shown cells run from 549 to 2,165 K.
 
+![Five planets as their pages open, gray before and on a measured map or a rock model after: LTT 9779 b, LHS 3844 b, WASP-17 b, GJ 367 b and GJ 1132 b](evidence/2026-10-04/second-pass.jpg)
+
 
 ## Known problems
 

@@ -11,7 +11,7 @@ import type { Archive } from '../archives/archives.mts';
 import { installPublishedMapDataset, mapRelease, parsePublishedMapEntries, publishedMapRecipe, publishedMapReport, restorePublishedMap } from './published-map-dataset.mts';
 
 const id = 'trappist-1f', o = `src/objects/${id}`;
-const written = { id, dataset: 'temperature', label: 'Temperature', record: '10.5281/zenodo.12571830', file: 'maps.npy', path: 'science/valentine-2024/maps.npy', values: ['tmap'],
+const written = { id, dataset: 'temperature', label: 'JWST', record: '10.5281/zenodo.12571830', file: 'maps.npy', path: 'science/valentine-2024/maps.npy', values: ['tmap'],
   instrument: 'JWST MIRI', band: '5 to 12 µm', credit: 'Valentine et al. (2024)', url: 'https://arxiv.org/abs/2410.08148', observed: 'one eclipse on 14 March 2023',
   shown: { west: -110, east: 110, where: 'Figure 5 caption' }, hotspot: { degreesEast: 18.7, minus: 3.8, plus: 11.1, where: 'Section 4.3' } };
 const entryOf = (change: Record<string, unknown> = {}) => parsePublishedMapEntries([{ ...written, ...change }]).get(id)![0]!;

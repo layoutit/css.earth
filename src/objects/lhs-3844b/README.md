@@ -25,7 +25,7 @@ Generated 2026-10-03 by [new-object-cli.mts](../../../packages/telescope-cli/src
 
 - **The map is a fit, not an image.** One sinusoid in orbital phase fixes one number per longitude; nothing is known north to south.
 - **The night side is not detected.** The paper finds its brightness consistent with zero, so 45° of longitude come out with no emission in the fit and are left blank.
-- **Which way the offset runs is not stated.** The paper prints the longitude of peak brightness as −6 ± 6° without saying whether east is positive. East-positive is assumed, which puts the hottest longitude 6° west of noon; the value is one sigma from zero.
+- **Which way the offset runs is not stated.** The paper prints the longitude of peak brightness as −6 ± 6° without saying whether east is positive. East-positive is assumed, which puts the hottest longitude 6° west of noon; the value is one sigma from zero, and the sidebar says only that it is within 6° of noon.
 - **Quoted text.** The introduction quotes sentences of the Wikipedia article "LHS 3844 b" (revision 1374087489) verbatim, CC BY-SA 4.0.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

@@ -1,0 +1,35 @@
+{
+  "id": "source-gj-1132b-temperature-eclipse-depth",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "GJ 1132 b · gj 1132b temperature eclipse depth",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/2408.13340",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/gj-1132b/source/manifest.json",
+      "locator": "/inputs/10"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Xue et al. (2024); one JWST MIRI LRS eclipse on 1 July 2023 (GTO 1274)",
+      "scope": "The gj 1132b temperature eclipse depth input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "Factual numerical measurement; source attribution retained",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

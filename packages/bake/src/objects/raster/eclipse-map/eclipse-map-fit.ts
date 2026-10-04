@@ -2,7 +2,7 @@ import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { BODIES, HOSTED_PLANET_IDS, STAR_IDS, hostedOrbit, starAstrometry } from '@cssearth/astronomy';
 import { binAverage, bandTemperatureTable, fitLightCurveMap, lightCurveSamples, temperatureGrid, type LightCurve, type Systematic } from './light-curve-map.ts';
-import { bareRockFromEclipseDepth, bareRockTemperature, fitBareRock } from './bare-rock.ts';
+import { bareRockDaysideFlux, bareRockFromEclipseDepth, bareRockTemperature, fitBareRock } from './bare-rock.ts';
 import { measureTransitShift } from './transit-timing.ts';
 import { readTarMember } from '../numpy/tar-member.ts';
 import { array, boolean, number, optional, shape, text } from '@cssearth/core';
@@ -87,6 +87,16 @@ async function loadBand(read: (path: string) => Promise<Buffer>, recipe: { band:
     const rows = Array.from(wavelength.keys()).filter(i => wavelength[i]! >= spec.minimumMicrons && wavelength[i]! <= spec.maximumMicrons && Number.isFinite(counts[i]!));
     const centres = Float64Array.from(rows, i => wavelength[i]!);
     band = { wavelengthMicrons: centres, stellarIntensity: binAverage(stellar, centres), counts: Float64Array.from(rows, i => Math.max(0, counts[i]!)) };
+  } else if (recipe.band.encoding === 'throughput-columns') {
+    // A spectrograph's throughput table (wavelength in microns, throughput), cut to the wavelengths the light curve summed.
+    // Counted photons scale with throughput times lambda times the star's intensity, as for a filter.
+    const spec = shape({ minimumMicrons: number, maximumMicrons: number })(recipe.band);
+    const rows = (await read(recipe.band.path)).toString('utf8').split(/\r?\n/u).filter(line => line.trim() && !line.startsWith('#')).map(line => line.trim().split(/\s+/u).map(Number));
+    if (rows.some(row => row.length !== 2 || !row.every(Number.isFinite)) || rows.some((row, i) => i > 0 && row[0]! <= rows[i - 1]![0]!)) throw new TypeError('A throughput table is two numeric columns with increasing wavelengths.');
+    const kept = rows.filter(row => row[0]! >= spec.minimumMicrons && row[0]! <= spec.maximumMicrons);
+    if (kept.length < 2) throw new TypeError(`The throughput table has no rows between ${spec.minimumMicrons} and ${spec.maximumMicrons} microns.`);
+    const centres = Float64Array.from(kept, row => row[0]!), intensity = binAverage(stellar, centres), spacing = centres.map((w, i, all) => ((all[Math.min(all.length - 1, i + 1)]! - all[Math.max(0, i - 1)]!) / 2));
+    band = { wavelengthMicrons: centres, stellarIntensity: intensity, counts: centres.map((w, i) => Math.max(0, kept[i]![1]!) * w * intensity[i]! * spacing[i]!) };
   } else throw new TypeError(`Unknown band encoding ${recipe.band.encoding}.`);
   return band;
 }
@@ -186,12 +196,14 @@ export async function loadBareRockFit(root: string, value: unknown) {
   };
 }
 
-const depthRecord = shape({ schema: text, planet: text, eclipseDepthPpm: shape({ low: number, high: number }), source: text });
+const depthRecord = shape({ schema: text, planet: text, eclipseDepthPpm: shape({ low: number, high: number }), radiusRatio: optional(number), source: text });
 const bareRockEclipseProfile = shape({ path: text, sampling: text, units: text, planet: text, host: text, band: shape({ encoding: text, path: text }), star: shape({ encoding: text, path: text }) });
 
 /** A bare rock drawn from a measured eclipse depth, for a planet whose day-night pattern is not measured: the substellar temperature
  * whose rock shows the depth at secondary eclipse (see `bare-rock.ts`). The record gives the depth as a
- * range; the rock is drawn at its middle and the range is reported. */
+ * range; the rock is drawn at its middle and the range is reported. A record that carries the radius ratio its paper fitted with
+ * the depth is read with that ratio, since the two belong to one fit; otherwise the ratio is the bodies' own. The report also
+ * gives the uniform day side that shows the same depth, the brightness temperature a paper prints. */
 export async function loadBareRockEclipse(root: string, value: unknown) {
   const recipe = bareRockEclipseProfile(value);
   if (recipe.sampling !== 'bilinear') throw new TypeError('A bare rock samples bilinearly.');
@@ -203,15 +215,19 @@ export async function loadBareRockEclipse(root: string, value: unknown) {
   if (!(low > 0 && high >= low)) throw new TypeError('An eclipse depth range needs 0 < low <= high.');
   const objectId = HOSTED_PLANET_IDS.find(id => id === recipe.planet), hostId = STAR_IDS.find(id => id === recipe.host);
   if (!objectId || !hostId) throw new TypeError(`${recipe.planet} is not a hosted planet or ${recipe.host} is not a placed star.`);
-  const radiusRatio = BODIES[objectId].meanRadiusKm / BODIES[hostId].meanRadiusKm, band = await loadBand(read, recipe), table = bandTemperatureTable(band, { minimumK: 20 });
-  const at = (ppm: number) => bareRockFromEclipseDepth(ppm * 1e-6, table, radiusRatio);
+  if (record.radiusRatio !== undefined && !(record.radiusRatio > 0 && record.radiusRatio < 1)) throw new TypeError('An eclipse depth record\'s radius ratio is between 0 and 1.');
+  const radiusRatio = record.radiusRatio ?? BODIES[objectId].meanRadiusKm / BODIES[hostId].meanRadiusKm, band = await loadBand(read, recipe), table = bandTemperatureTable(band, { minimumK: 20 });
+  // A rock hotter than 2,000 K under the star is searched up to 4,000 K; cooler ones keep the bracket their maps were made with.
+  const at = (ppm: number) => bareRockFromEclipseDepth(ppm * 1e-6, table, radiusRatio, bareRockDaysideFlux(2000, table, radiusRatio) > ppm * 1e-6 ? {} : { maximumK: 4000 });
   const substellarK = at((low + high) / 2), lowerK = at(low), upperK = at(high);
+  // A uniform day side shows the flux ratio(T) rp^2, so its temperature is the table's at depth / pi.
+  const uniformDaysideK = table.temperature((low + high) / 2 * 1e-6 / Math.PI, radiusRatio);
   return {
-    substellarK, lowerK, upperK, radiusRatio, band,
+    substellarK, lowerK, upperK, radiusRatio, uniformDaysideK, band,
     sample(longitude: number, latitude: number) {
       if (!Number.isFinite(longitude) || !Number.isFinite(latitude) || latitude < -90 || latitude > 90) return null;
       return bareRockTemperature(substellarK, longitude, latitude);
     },
-    report: { format: 'bare-rock-eclipse', units: 'K', eclipseDepthPpm: [low, high], substellarK, substellarRangeK: [lowerK, upperK] },
+    report: { format: 'bare-rock-eclipse', units: 'K', eclipseDepthPpm: [low, high], substellarK, substellarRangeK: [lowerK, upperK], ...(record.radiusRatio === undefined ? {} : { radiusRatio }) },
   };
 }

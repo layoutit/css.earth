@@ -207,6 +207,77 @@
           }
         ]
       }
+    },
+    {
+      "id": "gj-1132b-temperature-eclipse-depth",
+      "path": "science/xue-2024/dayside-5-12um.json",
+      "origin": "https://arxiv.org/abs/2408.13340",
+      "credit": "Xue et al. (2024); one JWST MIRI LRS eclipse on 1 July 2023 (GTO 1274)",
+      "license": "Factual numerical measurement; source attribution retained",
+      "acquisition": "Transcribed from the paper: the eclipse depth and its one-sigma range, with the cell and its location",
+      "redistribution": "A two-number measurement record",
+      "consumers": [
+        "gj-1132b-bare-rock-model"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-gj-1132b-temperature-eclipse-depth",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "gj-1132b-jwst-miri-lrs-throughput",
+      "path": "science/valentine-2024/miri_throughput.dat",
+      "origin": "https://zenodo.org/records/12571830/files/ThERESA.zip?download=1",
+      "productId": "ThERESA/miri_throughput.dat",
+      "version": "10.5281/zenodo.12571830",
+      "title": "JWST MIRI LRS throughput, from the release of Valentine et al. (2024)",
+      "sourceUrl": "https://zenodo.org/records/12571830",
+      "credit": "Valentine et al. (2024): JWST-TST DREAMS: Non-Uniform Dayside Emission for WASP-17b from MIRI/LRS",
+      "displayCredit": "Valentine et al. (2024) · JWST MIRI LRS throughput",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/12571830",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "acquisition": "Restored through source/preparation/acquisition.json from Zenodo record 10.5281/zenodo.12571830, the member ThERESA/miri_throughput.dat of ThERESA.zip, unchanged. The model sums it from 5 to 12 µm, the wavelengths Xue et al. (2024) summed.",
+      "redistribution": "Not redistributed in git; restored from Zenodo. CC BY 4.0 with attribution.",
+      "consumers": [
+        "gj-1132b-bare-rock-model"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "A throughput table many planets share; each package pins its own copy."
+      }
+    },
+    {
+      "id": "gj-1132b-bt-settl-cifist-3200",
+      "path": "science/bt-settl-cifist/bt-settl-cifist-3200-5.0-0.0.xml",
+      "origin": "https://svo2.cab.inta-csic.es/theory/newov2/ssap.php?model=bt-settl-cifist&fid=179",
+      "productId": "bt-settl-cifist fid 179",
+      "version": "BT-Settl (CIFIST2011) through the SVO Theoretical Spectra service",
+      "title": "BT-Settl CIFIST model spectrum, Teff 3200 K, log g 5.0, [M/H] 0",
+      "sourceUrl": "https://svo2.cab.inta-csic.es/theory/newov2/index.php?models=bt-settl-cifist",
+      "credit": "F. Allard, D. Homeier, B. Freytag (2012), BT-Settl CIFIST2011; Spanish Virtual Observatory Theoretical Spectra service",
+      "displayCredit": "BT-Settl · SVO",
+      "license": "Model spectra served openly by the SVO for research use with citation",
+      "licenseEvidence": [
+        "https://svo2.cab.inta-csic.es/theory/newov2/index.php?models=bt-settl-cifist"
+      ],
+      "acquisition": "Restored through source/preparation/acquisition.json from the SVO SSAP access reference for Teff 3200 K, log g 5.0, [M/H] 0, the grid point nearest gj-1132's cited temperature and gravity.",
+      "redistribution": "Not redistributed in git; restored from the SVO.",
+      "consumers": [
+        "gj-1132b-bare-rock-model"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Pinned SVO model spectrum; the service has no catalogue record in this repository yet."
+      }
     }
   ],
   "generatedIntermediates": [
@@ -223,7 +294,8 @@
         "generator": "packages/telescope-cli/src/source-authoring/context-markers.mts",
         "inputs": [
           "gj-1132b-observational-measurements",
-          "gj-1132b-preparation-raster"
+          "gj-1132b-preparation-raster",
+          "gj-1132b-temperature-eclipse-depth"
         ]
       },
       "generator": "packages/telescope-cli/src/source-authoring/context-markers.mts",

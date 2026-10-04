@@ -43,7 +43,7 @@
       "science": {
         "kind": "terrestrial-scientific",
         "id": "temperature",
-        "label": "Temperature",
+        "label": "JWST",
         "format": "npy-dictionary-map",
         "path": "science/valentine-2024/tmap.pkl",
         "sampling": "bilinear",

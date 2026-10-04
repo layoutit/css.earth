@@ -89,3 +89,34 @@ function solveSmall(matrix: Float64Array, rhs: Float64Array, n: number) {
   for (let i = n - 1; i >= 0; i--) { let s = b[i]!; for (let j = i + 1; j < n; j++) s -= a[i * n + j]! * x[j]!; x[i] = s / a[i * n + i]!; }
   return x;
 }
+
+test('a rock set by a depth summed over a spectrograph reads a throughput table, the record\'s radius ratio and reports the uniform day side', async () => {
+  const { mkdtemp, mkdir, rm, writeFile } = await import('node:fs/promises'), { tmpdir } = await import('node:os'), { join } = await import('node:path');
+  const { loadBareRockEclipse } = await import('@cssearth/bake/objects/raster');
+  const root = await mkdtemp(join(tmpdir(), 'rock-band-'));
+  try {
+    // A blackbody star at 3,000 K as an SVO model spectrum (surface flux, erg/cm2/s/A, on a 50 A grid), and a throughput that is flat
+    // from 5 to 12 microns with rows outside the band a recipe must cut.
+    const starK = 3000, ratio = 0.05, rows: string[] = [];
+    for (let angstrom = 5000; angstrom <= 300000; angstrom += 50) rows.push(`<TR><TD>${angstrom}</TD><TD>${Math.PI * planckRadiance(angstrom / 1e4, starK) * 1e-7}</TD></TR>`);
+    await mkdir(join(root, 'science'), { recursive: true });
+    await writeFile(join(root, 'science/star.xml'), `<VOTABLE><FIELD name="WAVELENGTH" unit="ANGSTROM"/><FIELD name="FLUX" unit="ERG/CM2/S/A"/><TABLEDATA>${rows.join('')}</TABLEDATA></VOTABLE>`);
+    const band = Array.from({ length: 141 }, (_, i) => 4 + i * 0.1), table = band.map(w => `${w.toFixed(1)}\t${w < 4.95 || w > 12.05 ? 9 : 0.3}`).join('\n');
+    await writeFile(join(root, 'science/throughput.dat'), `${table}\n`);
+    // The depth a uniform 1,000 K day side shows over that band: rp^2 times the photon-counted band ratio.
+    const kept = band.filter(w => w >= 5 && w <= 12), sum = (kelvin: number) => kept.reduce((total, w) => total + planckRadiance(w, kelvin) * w, 0);
+    const depthPpm = ratio ** 2 * sum(1000) / sum(starK) * 1e6;
+    await writeFile(join(root, 'science/depth.json'), JSON.stringify({ schema: 'cssearth-eclipse-depth@1', planet: 'gj-1132b', eclipseDepthPpm: { low: depthPpm * 0.9, high: depthPpm * 1.1 }, radiusRatio: ratio, source: 'test' }));
+    const recipe = { format: 'bare-rock-eclipse', path: 'science/depth.json', sampling: 'bilinear', units: 'K', planet: 'gj-1132b', host: 'gj-1132',
+      band: { encoding: 'throughput-columns', path: 'science/throughput.dat', minimumMicrons: 5, maximumMicrons: 12 }, star: { encoding: 'svo-model-spectrum', path: 'science/star.xml' } };
+    const rock = await loadBareRockEclipse(root, recipe);
+    assert.equal(rock.radiusRatio, ratio, 'the record\'s ratio, not the bodies\' own');
+    // The band's end rows count for half a step, so the table's sum differs from the plain one by a few kelvin.
+    assert.ok(Math.abs(rock.uniformDaysideK - 1000) < 5, `uniform day side ${rock.uniformDaysideK}`);
+    // The same flux from a rock with no heat transport needs a hotter point under the star.
+    assert.ok(rock.substellarK > 1080 && rock.substellarK < 1160 && rock.lowerK < rock.substellarK && rock.upperK > rock.substellarK, `substellar ${rock.substellarK}`);
+    assert.equal((rock.report as { radiusRatio?: number }).radiusRatio, ratio);
+    await assert.rejects(loadBareRockEclipse(root, { ...recipe, band: { ...recipe.band, minimumMicrons: 20, maximumMicrons: 25 } }), /no rows between 20 and 25 microns/u);
+    await assert.rejects(loadBareRockEclipse(root, { ...recipe, band: { ...recipe.band, encoding: 'grism' } }), /Unknown band encoding grism/u);
+  } finally { await rm(root, { recursive: true, force: true }); }
+});
