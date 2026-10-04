@@ -146,9 +146,11 @@ export function loadApplicationUniverse(): Promise<ApplicationUniverse> {
     const volumeDatasetIds = new Set(volumeDatasetDescriptors.map(descriptor => descriptor.id));
     const volumeDatasetBanks = volumeDatasetDescriptors.map(descriptor => ({ id: descriptor.id, frame: parseDensityVolumeFrame(descriptor.properties.frame) }));
     // Every bank's context visibility and Sun-facing billboard, prepared from those same payloads.
-    // Each bank's billboard image is a public file named by its id (prepare-dataset-billboards.ts).
+    // Each bank's billboard image is a public file named by its id, and by its dataset's when it pictures a dataset
+    // other than the bank's default (prepare-dataset-billboards.ts).
     const datasetBillboards = { plan: parseDatasetBillboards(JSON.parse(datasetBillboardText)),
-      imageUrl: (id: string) => `/navigation/dataset-billboards/${encodeURIComponent(id)}.webp` };
+      imageUrl: (id: string, dataset?: string) =>
+        `/navigation/dataset-billboards/${encodeURIComponent(dataset === undefined ? id : `${id}.${dataset}`)}.webp` };
     const loadVolumeDataset = createInFlightLoader(async (id: string) => {
       if (!volumeDatasetIds.has(id)) throw new TypeError(`Unknown prepared volume dataset bank: ${id}.`);
       const set = await bankSet(id), payload = await loadPreparedVolumeDatasets(set.descriptor, set.transport);
