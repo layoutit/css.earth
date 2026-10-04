@@ -29,7 +29,8 @@ test('a Zenodo record is validated and reduced to what the report says of it', a
 
 test('a planet is matched with and without the space before its letter, as a phrase and never inside another word', () => {
   assert.deepEqual(nameForms(['TRAPPIST-1e', 'TRAPPIST-1 e', 'Proxima Centauri']), ['TRAPPIST-1e', 'TRAPPIST-1 e', 'Proxima Centauri']);
-  assert.deepEqual(nameForms(['HD 189733 b']), ['HD 189733b', 'HD 189733 b']);
+  // A catalogue number is also written without the space after its letters.
+  assert.deepEqual(nameForms(['HD 189733 b']), ['HD 189733b', 'HD189733b', 'HD 189733 b', 'HD189733 b']);
   // A star's own name does not end in a planet letter after a digit: "Proxima b" is left as written.
   assert.deepEqual(nameForms(['Proxima b', ' ']), ['Proxima b']);
   assert.equal(namesObject({ title: 'Simulations of TRAPPIST-1 e', description: '' }, ['TRAPPIST-1e']), true);

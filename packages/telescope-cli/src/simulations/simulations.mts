@@ -73,11 +73,13 @@ export function parseZenodoSearch(value: unknown): readonly ZenodoRecord[] {
 }
 
 const words = (value: string): string => ` ${value.normalize('NFKD').replace(/\p{Diacritic}/gu, '').toLowerCase().replace(/[^\p{L}\p{N}]+/gu, ' ').trim()} `;
-/** A planet is written with and without a space before its letter ("TRAPPIST-1e", "TRAPPIST-1 e"): both are searched and matched. */
+/** A planet is written with and without a space before its letter ("TRAPPIST-1e", "TRAPPIST-1 e"), and a catalogue number
+ * with and without one after its letters ("GJ 1214b", "GJ1214b"): every spelling is searched and matched. */
 export function nameForms(names: readonly string[]): string[] {
   return [...new Set(names.map(name => name.trim()).filter(Boolean).flatMap(name => {
     const planet = /^(.*[^\s])\s?([b-z])$/u.exec(name);
-    return planet && /\d$/u.test(planet[1]!) ? [`${planet[1]}${planet[2]}`, `${planet[1]} ${planet[2]}`] : [name];
+    const forms = planet && /\d$/u.test(planet[1]!) ? [`${planet[1]}${planet[2]}`, `${planet[1]} ${planet[2]}`] : [name];
+    return forms.flatMap(form => /^[A-Za-z]+ \d/u.test(form) ? [form, form.replace(' ', '')] : [form]);
   }))];
 }
 /** Whether the record's title or description names the object by any of its names. A planet is also named by its letter in
