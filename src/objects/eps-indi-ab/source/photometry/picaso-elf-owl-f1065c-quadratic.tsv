@@ -1,0 +1,13 @@
+# PICASO 4.1 (Batalha et al. 2019, ApJ 878, 70): the JWST/MIRI F1065C (SVO JWST/MIRI.F1065C) intensity of Sonora Elf Owl cloud-free (Mukherjee et al. 2024, ApJ 963, 73; [M/H] +0.7, C/O 2.5 times solar, log Kzz 4) structures (https://doi.org/10.5281/zenodo.10381250) and the abundances the release states,
+# with PICASO's resampled opacity database opacities.db (https://doi.org/10.5281/zenodo.3759675), energy-weighted over PICASO's bins,
+# at the emission cosines of its eight Gauss points; a and b are the least-squares quadratic law with the centre intensity free.
+# spectra_logzz_4.0_teff_275.0_grav_100.0_mh_0.7_co_2.5: mu 0.9990 0.9895 0.9580 0.8906 0.7782 0.6186 0.4175 0.1877; I/I0 1.0016 0.9955 0.9750 0.9300 0.8513 0.7302 0.5559 0.3077; rms 0.00300; band flux 1.043 of the release's own spectrum
+# spectra_logzz_4.0_teff_275.0_grav_178.0_mh_0.7_co_2.5: mu 0.9990 0.9895 0.9580 0.8906 0.7782 0.6186 0.4175 0.1877; I/I0 1.0017 0.9955 0.9747 0.9291 0.8494 0.7270 0.5515 0.3012; rms 0.00311; band flux 1.044 of the release's own spectrum
+# spectra_logzz_4.0_teff_300.0_grav_100.0_mh_0.7_co_2.5: mu 0.9990 0.9895 0.9580 0.8906 0.7782 0.6186 0.4175 0.1877; I/I0 1.0021 0.9966 0.9782 0.9376 0.8662 0.7551 0.5923 0.3510; rms 0.00360; band flux 1.039 of the release's own spectrum
+# spectra_logzz_4.0_teff_300.0_grav_178.0_mh_0.7_co_2.5: mu 0.9990 0.9895 0.9580 0.8906 0.7782 0.6186 0.4175 0.1877; I/I0 1.0022 0.9968 0.9784 0.9380 0.8669 0.7562 0.5935 0.3509; rms 0.00378; band flux 1.039 of the release's own spectrum
+Teff	logg	a	b	Profile
+K	[cgs]			
+275	4	0.579113	0.332371	spectra_logzz_4.0_teff_275.0_grav_100.0_mh_0.7_co_2.5
+275	4.25	0.587259	0.332054	spectra_logzz_4.0_teff_275.0_grav_178.0_mh_0.7_co_2.5
+300	4	0.502455	0.360309	spectra_logzz_4.0_teff_300.0_grav_100.0_mh_0.7_co_2.5
+300	4.25	0.497012	0.367024	spectra_logzz_4.0_teff_300.0_grav_178.0_mh_0.7_co_2.5

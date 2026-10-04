@@ -1,8 +1,10 @@
 /** An imaged planet's limb law (imaged-limb.mts), offline: lines of the published table as the CDS serves them, and a small
  * package in memory with the documents a planet had while it was still a gray sphere. */
 import assert from 'node:assert/strict';
+import { readFile } from 'node:fs/promises';
+import { resolve } from 'node:path';
 import test from 'node:test';
-import { diamondbackGrid, diamondbackNodes, picasoInstalled, picasoLimbNodes, picasoPassband, picasoToolchainSync } from '@cssearth/telescope/node';
+import { diamondbackGrid, diamondbackNodes, picasoInstalled, picasoLimbNodes, picasoPassband, picasoToolchainSync, WORKSPACE } from '@cssearth/telescope/node';
 import type { PackageFiles } from '../dataset.mts';
 import { ATMOSPHERE_FIT, CLARET_2012, claret2012Grid, claretBand, documentImagedColor, fittedImagedLimb, imagedLimb, installImagedLimb, parseAtmosphereFit, type ImagedLimb } from './imaged-limb.mts';
 
@@ -74,7 +76,7 @@ test('the law goes on the color dataset with its texts, nodes and manifest entry
   // named here gets no computed law, and the toolchain is not asked.
   const fit = parseAtmosphereFit({ schema: ATMOSPHERE_FIT.schema, grid: 'sonora-diamondback', teffK: 1100, logg: 3.5, metallicity: 0.5, fsed: 2, source: { citation: 'Someone et al. (2024)', url: 'https://example.org/fit', locator: 'Table 9' } }, 'x-b fit');
   assert.deepEqual([fit.teffK, fit.logg, fit.metallicity, fit.fsed], [1100, 3.5, 0.5, 2]);
-  assert.throws(() => parseAtmosphereFit({ schema: ATMOSPHERE_FIT.schema, grid: 'exo-rem', teffK: 1100, logg: 3.5, metallicity: 0.5, fsed: 2, source: fit.source }, 'x-b fit'), /x-b fit: grid is exo-rem; a law is computed from sonora-diamondback models only/u);
+  assert.throws(() => parseAtmosphereFit({ schema: ATMOSPHERE_FIT.schema, grid: 'exo-rem', teffK: 1100, logg: 3.5, metallicity: 0.5, fsed: 2, source: fit.source }, 'x-b fit'), /x-b fit: grid is exo-rem; a law is computed from sonora-diamondback or sonora-elf-owl models only/u);
   assert.deepEqual(fittedImagedLimb('x-b', fit, 'L′'), { why: 'no law is computed in L′, the middle band of its color' });
   // A planet lit by its star, or with no infrared color, has no flat disc to darken.
   const lit = scaffold(), plain = read(lit, 'source/preparation/raster.json');
@@ -104,6 +106,14 @@ test('the documents of a planet that was a gray sphere are brought in line with 
   assert.ok(kept.includes('**NIRCam color dataset.** Written by hand.') && !kept.includes('**Infrared color dataset.**') && !kept.includes('Model limb'));
   assert.ok(kept.includes('**Limb.** No limb darkening is drawn: at 800 K it is outside the table.\n\n**Rotation.**'));
   assert.ok(!String(cool.get(`${o}/NOTICE.md`)).includes('Limb darkening'));
+  // A reason recorded in the ledger, with the papers checked, is the one the README gives, and a rerun keeps it.
+  const reasoned = read(cool, 'investigations.json');
+  reasoned.entries.push({ id: 'limb-darkening', subject: 'Limb darkening', status: 'unresolved', finding: 'No limb darkening is drawn: its published fits are of a cloudy model whose clouds are not released.', evidence: ['https://example.org/fit'] });
+  cool.set(`${o}/investigations.json`, json(reasoned));
+  documentImagedColor(cool, 'x-b', RECORD, 'photometry/band-color.json', undefined, 'at 800 K it is outside the table');
+  documentImagedColor(cool, 'x-b', RECORD, 'photometry/band-color.json', undefined, 'at 800 K it is outside the table');
+  assert.ok(String(cool.get(`${o}/README.md`)).includes('**Limb.** No limb darkening is drawn: its published fits are of a cloudy model whose clouds are not released.\n'));
+  assert.equal(read(cool, 'investigations.json').entries.filter((entry: { id: string }) => entry.id === 'limb-darkening').length, 1);
 });
 
 // The check that PICASO reads the cloudy release as its authors' own code did: the release publishes synthetic photometry of every
@@ -121,4 +131,13 @@ test('PICASO on the Diamondback release reproduces how its published colors chan
   const jh = color(1, 'MKO/NSFCam.J', 'MKO/NSFCam.H') - color(2, 'MKO/NSFCam.J', 'MKO/NSFCam.H'), hk = color(1, 'MKO/NSFCam.H', 'MKO/NSFCam.K') - color(2, 'MKO/NSFCam.H', 'MKO/NSFCam.K');
   assert.ok(Math.abs(jh - 0.366) < 0.05, `J-H changes by ${jh.toFixed(3)} mag, published 0.366`);
   assert.ok(Math.abs(hk - 0.373) < 0.05, `H-K changes by ${hk.toFixed(3)} mag, published 0.373`);
+});
+
+// A law computed from a release file (Sonora Elf Owl) carries its own check: the file holds the spectrum its authors computed,
+// and each node records the band flux computed here over theirs.
+test("Epsilon Indi Ab's nodes record that the Elf Owl release's own flux was reproduced within 5%", async () => {
+  const nodes = await readFile(resolve(WORKSPACE, 'src/objects/eps-indi-ab/source/photometry/picaso-elf-owl-f1065c-quadratic.tsv'), 'utf8');
+  const ratios = [...nodes.matchAll(/band flux ([\d.]+) of the release's own spectrum/gu)].map(match => Number(match[1]));
+  assert.equal(ratios.length, 4);
+  assert.ok(ratios.every(ratio => Math.abs(ratio - 1) < 0.05), ratios.join(', '));
 });

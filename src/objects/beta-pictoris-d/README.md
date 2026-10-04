@@ -12,7 +12,7 @@ Beta Pictoris d is a cool giant planet about 26 au from [Beta Pictoris](../beta-
 
 **Infrared color dataset.** The default dataset paints the sphere one false color from its measured flux in three infrared bands: red F444W 4.35 µm (242.7 ± 45 µJy), green F410M 4.072 µm (173.6 ± 32 µJy), blue ERIS L′ 3.78 µm (141.5 ± 21 µJy) (Sutlieff, Bonse et al. (2026), arXiv:2606.23801; zero points from the SVO Filter Profile Service; [record](source/photometry/band-color.json)). Display range: this planet alone, from zero to its brightest band (F444W), so the color shows its band ratios; brightness is not compared across planets at different distances. Not a natural color; nobody has resolved its disc.
 
-**Limb.** No limb darkening is drawn: its color's middle band, F410M, is not in the J, H or K of the published table; and no paper's fit of a cloudy model grid is recorded for it (source/photometry/atmosphere-fit.json).
+**Limb.** No limb darkening is drawn: the published limb table (Claret, Hauschildt & Witte 2012) starts at 1,500 K, and at 600 K the planet is below it. The model its discovery paper shows as the closest match is an Exo-REM one (Sutlieff, Bonse et al. 2026, section III.5). Exo-REM's public grid releases temperature and gas profiles and spectra, but no cloud properties, so the limb of a cloudy Exo-REM model cannot be computed from it.
 
 **Rotation.** Not measured; the display axis is the orbit normal and nothing turns.
 

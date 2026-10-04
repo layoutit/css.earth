@@ -22,6 +22,16 @@
       "evidence": [
         "https://arxiv.org/abs/2511.20091"
       ]
+    },
+    {
+      "id": "limb-darkening",
+      "subject": "Limb darkening",
+      "status": "unresolved",
+      "finding": "No limb darkening is drawn: the published limb table (Claret, Hauschildt & Witte 2012) starts at 1,500 K. That table is computed from PHOENIX models, and the planet's fit with a PHOENIX model, DRIFT-PHOENIX, is 1,444 +12/-11 K (Kammerer et al. 2021, Table 6), below the table; the law is not extrapolated. Its other fits are Exo-REM (1,347 K in the same table; 1,162 K in Kral et al. 2026, the temperature on record). Exo-REM's public grid releases temperature and gas profiles and spectra, but no cloud properties, so the limb of a cloudy Exo-REM model cannot be computed from it.",
+      "evidence": [
+        "https://arxiv.org/abs/2106.08249",
+        "https://lesia.obspm.fr/exorem/YGP_grids/"
+      ]
     }
   ]
 }
