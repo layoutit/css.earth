@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "tres-3",
+  "card": {
+    "text": "TrES-3 b crosses Pipoltr as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1088-0004-637x-691-2-1145",
+        "url": "https://ui.adsabs.harvard.edu/abs/2009ApJ...691.1145S/abstract",
+        "label": "Sozzetti et al. (2009), The Astrophysical Journal 691 1145-1158",
+        "checked": "2026-10-03",
+        "locator": "NASA Exoplanet Archive ps table (st_refname SOZZETTI_ET_AL__2009): st_teff 5650, st_rad 0.829, st_mass 0.928"
+      },
+      {
+        "catalogueId": "wikipedia-tres-3b",
+        "url": "https://en.wikipedia.org/wiki/TrES-3b",
+        "label": "Wikipedia, \"TrES-3b\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374222310",
+        "quote": "TrES-3b is an extrasolar planet orbiting the star GSC 03089-00929."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Sozzetti et al. 2009.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1088-0004-637x-691-2-1145",
+        "url": "https://ui.adsabs.harvard.edu/abs/2009ApJ...691.1145S/abstract",
+        "label": "Sozzetti et al. (2009), The Astrophysical Journal 691 1145-1158",
+        "checked": "2026-10-03",
+        "locator": "NASA Exoplanet Archive ps table (st_refname SOZZETTI_ET_AL__2009): st_teff 5650, st_rad 0.829, st_mass 0.928"
+      },
+      {
+        "catalogueId": "wikipedia-tres-3b",
+        "url": "https://en.wikipedia.org/wiki/TrES-3b",
+        "label": "Wikipedia, \"TrES-3b\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374222310",
+        "quote": "It has an orbital period of just 31 hours and nearly twice the mass of Jupiter."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its Gaia spectrum",
+      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

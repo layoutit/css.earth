@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "angetenar",
+  "card": {
+    "text": "A star 57 parsecs away, 8.4 times the Sun's width, measured from its light.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 13288: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-tau2-eridani",
+        "url": "https://en.wikipedia.org/wiki/Tau2_Eridani",
+        "label": "Wikipedia, \"Tau2 Eridani\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374546800",
+        "quote": "Tau2 Eridani, formally named Angetenar, is a star in the constellation of Eridanus."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its brightness, measured band by band, gives 41 times the Sun's luminosity at 5,038 K, so 8.385 solar radii.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 13288: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-tau2-eridani",
+        "url": "https://en.wikipedia.org/wiki/Tau2_Eridani",
+        "label": "Wikipedia, \"Tau2 Eridani\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374546800",
+        "quote": "It is visible to the naked eye with an apparent visual magnitude of 4.78."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its temperature",
+      "summary": "The color of the star's light."
+    }
+  }
+}

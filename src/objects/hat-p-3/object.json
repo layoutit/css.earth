@@ -6,7 +6,7 @@
   "properties": {
     "preparation": {
       "schema": "cssearth-object-preparation@1",
-      "label": "HAT-P-3",
+      "label": "Dombay",
       "steps": [
         "verify-sources",
         "assets",
@@ -95,12 +95,15 @@
       }
     },
     "catalog": {
-      "name": "HAT-P-3",
+      "name": "Dombay",
       "classification": "star",
       "color": "#ffe0cb",
       "distanceAu": 27813731.9,
       "description": "HAT-P-3 b crosses HAT-P-3 as seen from Earth, which is how it was found.",
-      "systemName": "HAT-P-3 system",
+      "systemName": "Dombay system",
+      "aliases": [
+        "HAT-P-3"
+      ],
       "order": 3031,
       "context": {
         "order": 3028

@@ -1,4 +1,4 @@
-# WASP-80 credits
+# Petra credits
 
 Radius, mass and temperature: Radius 0.586 +/- 0.017 solar radii from Triaud et al. 2015, the stellar radius of the default parameter set of WASP-80 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2015MNRAS.450.2279T/abstract); Mass 0.577 +/- 0.051 solar masses from Triaud et al. 2015, the stellar mass of the default parameter set of WASP-80 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2015MNRAS.450.2279T/abstract); temperature from Triaud et al. 2015, the stellar temperature of the default parameter set of WASP-80 b in the NASA Exoplanet Archive.
 

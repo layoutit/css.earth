@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "wasp-161b",
+  "radiusKm": 81715.4,
+  "radiusSource": "Radius 1.143 Jupiter radii from Barkaoui et al. 2019 (2019AJ....157...43B), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2019AJ....157...43B/abstract): 81,715.4 km at 71,492 km per Jupiter radius. GM from the mass 2.49 Jupiter masses (Barkaoui et al. 2019, the mass the NASA Exoplanet Archive's composite table adopts (2019AJ....157...43B), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2019AJ....157...43B/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 5.4056202,
+  "orbitalPeriodSource": "Kokori et al. 2023 (2023ApJS..265....4K), via the NASA Exoplanet Archive ps table (pl_refname KOKORI_ET_AL__2023): P 5.4056202 d",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, color, map or oblateness of WASP-161 b is measured; only its size, mass and orbit are."
+  },
+  "massSource": "2.49 Jupiter masses: Barkaoui et al. 2019, the mass the NASA Exoplanet Archive's composite table adopts (2019AJ....157...43B), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2019AJ....157...43B/abstract)."
+}

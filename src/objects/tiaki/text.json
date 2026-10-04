@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "tiaki",
+  "card": {
+    "text": "A star 54 parsecs away, 154 times the Sun's width, measured from its light.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 112122: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-beta-gruis",
+        "url": "https://en.wikipedia.org/wiki/Beta_Gruis",
+        "label": "Wikipedia, \"Beta Gruis\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1376496665",
+        "quote": "Beta Gruis, formally named Tiaki, is the second brightest star in the southern constellation of Grus."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its brightness, measured band by band, gives 3,221 times the Sun's luminosity at 3,508 K, so 153.871 solar radii.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 112122: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-beta-gruis",
+        "url": "https://en.wikipedia.org/wiki/Beta_Gruis",
+        "label": "Wikipedia, \"Beta Gruis\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1376496665",
+        "quote": "It was once considered the rear star in the tail of the constellation of the (Southern) Fish, Piscis Austrinus: it, with Alpha, Delta, Theta, Iota, and Lambda Gruis, belonged to Piscis Austrinus in medieval Arabic astronomy."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its temperature",
+      "summary": "The color of the star's light."
+    }
+  }
+}

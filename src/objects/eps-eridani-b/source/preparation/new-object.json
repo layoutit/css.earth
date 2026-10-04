@@ -4,7 +4,8 @@
     {
       "id": "eps-eridani-b",
       "name": "ε Eridani b",
-      "description": "Planet of ε Eridani found by radial velocity, with a 2680-day year, found in 2000.",
+      "description": "Planet of Ran found by radial velocity, with a 2680-day year, found in 2000.",
+      "order": 1842,
       "paper": {
         "url": "https://ui.adsabs.harvard.edu/abs/2025AJ....170..301T/abstract",
         "credit": "Thompson et al. (2025), AJ 170, 301"
@@ -43,8 +44,7 @@
           "card": "Epsilon Eridani b, formally named AEgir [sic], is an exoplanet approximately 10.5 light-years away orbiting the star Epsilon Eridani, in the constellation of Eridanus.",
           "introduction": "The planet was discovered in 2000, and as of 2025 remains the only confirmed planet in its planetary system."
         }
-      },
-      "order": 1842
+      }
     }
   ]
 }

@@ -1,0 +1,148 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "gomeisa",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Gomeisa",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 3945314.7
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/gomeisa-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Gomeisa",
+      "classification": "star",
+      "color": "#acc0ff",
+      "distanceAu": 10226452.4,
+      "description": "A star 50 parsecs away, 5.7 times the Sun's width, measured from its light.",
+      "systemName": "Gomeisa system",
+      "aliases": [
+        "HD 58715",
+        "HIP 36188",
+        "HR 2845",
+        "Beta Canis Minoris"
+      ],
+      "order": 5552,
+      "context": {
+        "order": 5549
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -561895704815294460,
+        1405733085552825300,
+        220557360453172670
+      ],
+      "presentationToReference": [
+        -0.36728678368801015,
+        -0.05351029370162101,
+        0.9285672118894158,
+        0.9188665784271107,
+        0.1338703777754346,
+        0.37116429381598237,
+        0.14416875381916608,
+        -0.9895531165239331,
+        -2.3184103839225606e-17
+      ],
+      "orbitUpReference": [
+        0.05351029370162101,
+        -0.1338703777754346,
+        0.9895531165239331
+      ],
+      "metersPerUnit": 12726821.612903226,
+      "bodyRadiusM": 3945314700
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

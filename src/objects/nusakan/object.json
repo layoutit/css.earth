@@ -1,0 +1,148 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "nusakan",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Nusakan",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 1933350.3
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/nusakan-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Nusakan",
+      "classification": "star",
+      "color": "#d0ddff",
+      "distanceAu": 7071109.5,
+      "description": "A star 34 parsecs away, 2.8 times the Sun's width, measured from its light.",
+      "systemName": "Nusakan system",
+      "aliases": [
+        "HD 137909",
+        "HIP 75695",
+        "HR 5747",
+        "Beta Coronae Borealis"
+      ],
+      "order": 5652,
+      "context": {
+        "order": 5649
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -569582637768823230,
+        -727869075443949200,
+        514559597424185660
+      ],
+      "presentationToReference": [
+        -0.5384494299966079,
+        -0.29976765980377135,
+        -0.7875351176119694,
+        -0.6880839808353456,
+        -0.38308223244590645,
+        0.6162697773719268,
+        0.4864284599549164,
+        -0.8737204091241264,
+        -0.000005085018851749572
+      ],
+      "orbitUpReference": [
+        0.29976765980377135,
+        0.38308223244590645,
+        0.8737204091241264
+      ],
+      "metersPerUnit": 6236613.870967742,
+      "bodyRadiusM": 1933350300
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

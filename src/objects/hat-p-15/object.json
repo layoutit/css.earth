@@ -6,7 +6,7 @@
   "properties": {
     "preparation": {
       "schema": "cssearth-object-preparation@1",
-      "label": "HAT-P-15",
+      "label": "Berehynia",
       "steps": [
         "verify-sources",
         "assets",
@@ -95,12 +95,15 @@
       }
     },
     "catalog": {
-      "name": "HAT-P-15",
+      "name": "Berehynia",
       "classification": "star",
       "color": "#ffdec1",
       "distanceAu": 39776496,
       "description": "HAT-P-15 b crosses HAT-P-15 as seen from Earth, which is how it was found.",
-      "systemName": "HAT-P-15 system",
+      "systemName": "Berehynia system",
+      "aliases": [
+        "HAT-P-15"
+      ],
       "order": 3114,
       "context": {
         "order": 3111

@@ -1,0 +1,148 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "tiaki",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Tiaki",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 107048054.7
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/tiaki-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Tiaki",
+      "classification": "star",
+      "color": "#ffc78c",
+      "distanceAu": 11191719.9,
+      "description": "A star 54 parsecs away, 154 times the Sun's width, measured from its light.",
+      "systemName": "Tiaki system",
+      "aliases": [
+        "Beta Gruis",
+        "HD 214952",
+        "HIP 112122",
+        "HR 8636"
+      ],
+      "order": 5722,
+      "context": {
+        "order": 5719
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1079786543900448000,
+        -378805850908005500,
+        -1222172329447969000
+      ],
+      "presentationToReference": [
+        0.6449351238819864,
+        -0.6888124870654286,
+        -0.3310529317889596,
+        -0.22625323475714626,
+        0.24167233539323985,
+        -0.9436121852050795,
+        -0.7299781912805715,
+        -0.6834704382548787,
+        -0.000016924226019920908
+      ],
+      "orbitUpReference": [
+        0.6888124870654286,
+        -0.24167233539323985,
+        0.6834704382548787
+      ],
+      "metersPerUnit": 345316305.483871,
+      "bodyRadiusM": 107048054700
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

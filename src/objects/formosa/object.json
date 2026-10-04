@@ -1,0 +1,146 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "formosa",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Formosa",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 6766378.2
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/formosa-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Formosa",
+      "classification": "star",
+      "color": "#ffe3c8",
+      "distanceAu": 28039213.6,
+      "description": "A star 136 parsecs away, 9.7 times the Sun's width, measured from its light.",
+      "systemName": "Formosa system",
+      "aliases": [
+        "HD 100655",
+        "HIP 56508"
+      ],
+      "order": 5544,
+      "context": {
+        "order": 5541
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -3907219979576165000,
+        426863663815228100,
+        1464972496281424600
+      ],
+      "presentationToReference": [
+        -0.9314866036317817,
+        -0.3471858518744477,
+        0.10860336787016431,
+        0.10176488308816208,
+        0.037928881923491344,
+        0.9940851615863134,
+        0.3492515079775332,
+        -0.9370290199210737,
+        -0.0000010822234033005492
+      ],
+      "orbitUpReference": [
+        0.3471858518744477,
+        -0.037928881923491344,
+        0.9370290199210737
+      ],
+      "metersPerUnit": 21827026.451612905,
+      "bodyRadiusM": 6766378200
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

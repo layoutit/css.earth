@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "wasp-21b",
+  "card": {
+    "text": "WASP-21 b was found in 2010 by SuperWASP as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-1006-2605",
+        "url": "https://ui.adsabs.harvard.edu/abs/2010arXiv1006.2605B/abstract",
+        "label": "Bouchy et al. 2010",
+        "checked": "2026-10-03",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname BOUCHY_ET_AL__2010): disc_year 2010, disc_facility SuperWASP, sy_pnum 1; pl_orbper 4.32250416, pl_radj 1.07, pl_bmassj 0.3"
+      },
+      {
+        "catalogueId": "wikipedia-wasp-21",
+        "url": "https://en.wikipedia.org/wiki/WASP-21",
+        "label": "Wikipedia, \"WASP-21\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1370791513",
+        "quote": "Kinematically, WASP-21 belongs to the thick disk of the Milky Way."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is the only planet known around Tangra. Its orbit and size follow Bouchy et al. 2010's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-1006-2605",
+        "url": "https://ui.adsabs.harvard.edu/abs/2010arXiv1006.2605B/abstract",
+        "label": "Bouchy et al. 2010",
+        "checked": "2026-10-03",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname BOUCHY_ET_AL__2010): disc_year 2010, disc_facility SuperWASP, sy_pnum 1; pl_orbper 4.32250416, pl_radj 1.07, pl_bmassj 0.3"
+      },
+      {
+        "catalogueId": "wikipedia-wasp-21",
+        "url": "https://en.wikipedia.org/wiki/WASP-21",
+        "label": "Wikipedia, \"WASP-21\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1370791513",
+        "quote": "It has an exoplanet named WASP-21b."
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

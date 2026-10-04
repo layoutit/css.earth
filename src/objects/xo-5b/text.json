@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "xo-5b",
+  "card": {
+    "text": "XO-5 b was found in 2008 by XO as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-1412-0451",
+        "url": "https://ui.adsabs.harvard.edu/abs/2015AcA....65..117S/abstract",
+        "label": "Smith 2015",
+        "checked": "2026-10-03",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname SMITH_2015): disc_year 2008, disc_facility XO, sy_pnum 1; pl_orbper 4.18775631, pl_radj 1.14, pl_bmassj 1.19"
+      },
+      {
+        "catalogueId": "wikipedia-xo-5b",
+        "url": "https://en.wikipedia.org/wiki/XO-5b",
+        "label": "Wikipedia, \"XO-5b\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1376696343",
+        "quote": "XO-5b, formally named Makropulos, is an extrasolar planet approximately 910 light years away in the constellation of Lynx."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is the only planet known around Absolutno. Its orbit and size follow Smith 2015's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-1412-0451",
+        "url": "https://ui.adsabs.harvard.edu/abs/2015AcA....65..117S/abstract",
+        "label": "Smith 2015",
+        "checked": "2026-10-03",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname SMITH_2015): disc_year 2008, disc_facility XO, sy_pnum 1; pl_orbper 4.18775631, pl_radj 1.14, pl_bmassj 1.19"
+      },
+      {
+        "catalogueId": "wikipedia-xo-5b",
+        "url": "https://en.wikipedia.org/wiki/XO-5b",
+        "label": "Wikipedia, \"XO-5b\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1376696343",
+        "quote": "This planet was found by the transit method using the XO Telescope and announced in May 2008."
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

@@ -6,7 +6,7 @@
   "properties": {
     "preparation": {
       "schema": "cssearth-object-preparation@1",
-      "label": "Zeta Aquilae A",
+      "label": "Okab",
       "steps": [
         "verify-sources",
         "assets",
@@ -95,14 +95,15 @@
       }
     },
     "catalog": {
-      "name": "Zeta Aquilae A",
+      "name": "Okab",
       "classification": "star",
       "color": "#b8cbff",
       "distanceAu": 5252477,
       "description": "A naked-eye star 25 parsecs away whose disc the CHARA Array measured: 2.4 times the Sun's width.",
-      "systemName": "Zeta Aquilae A system",
+      "systemName": "Okab system",
       "aliases": [
-        "HD 177724"
+        "HD 177724",
+        "Zeta Aquilae A"
       ],
       "order": 5358,
       "context": {

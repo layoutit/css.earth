@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "cervantes",
+  "angularDiameterMas": 0.87,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 1,020,357 km at 15.60 pc = 0.87 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 15.604203941564691,
+  "distanceSource": "Gaia DR3 parallax 64.0853 +/- 0.0904 mas (same row, RUWE 0.86): 15.60 pc, no zero-point correction",
+  "radiusKm": 1020357.2,
+  "radiusSource": "Radius 1.467 (1.437 to 1.496) from Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26; astrophysical_parameters of the same source): 1,020,357 km at 695,700 km per solar radius. Mass 0.970 (0.930 to 1.010) from Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26; astrophysical_parameters of the same source); GM is that mass times the JPL solar GM. Temperature 5591 +/- 1.4 K from Andrae et al. (2023), A&A 674, A27 (Gaia DR3 GSP-Phot), astrophysical_parameters of Gaia DR3 5945941905576552064: teff_gspphot 5590.9136 K (16th-84th percentiles 5589.6675-5592.4976), the temperature FLAME used (https://doi.org/10.1051/0004-6361/202243462). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 5591,
+  "effectiveTemperatureSource": "Andrae et al. (2023), A&A 674, A27 (Gaia DR3 GSP-Phot), astrophysical_parameters of Gaia DR3 5945941905576552064: teff_gspphot 5590.9136 K (16th-84th percentiles 5589.6675-5592.4976), the temperature FLAME used (https://doi.org/10.1051/0004-6361/202243462)",
+  "surfaceGravityLogg": 4.09,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/cervantes.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 4.092, rounded to two decimals",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

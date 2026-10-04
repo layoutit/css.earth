@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "gomeisa",
+  "card": {
+    "text": "A star 50 parsecs away, 5.7 times the Sun's width, measured from its light.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 36188: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-beta-canis-minoris",
+        "url": "https://en.wikipedia.org/wiki/Beta_Canis_Minoris",
+        "label": "Wikipedia, \"Beta Canis Minoris\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374811072",
+        "quote": "Beta Canis Minoris is a variable star in the constellation of Canis Minor."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its brightness, measured band by band, gives 130 times the Sun's luminosity at 8,197 K, so 5.671 solar radii.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 36188: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-beta-canis-minoris",
+        "url": "https://en.wikipedia.org/wiki/Beta_Canis_Minoris",
+        "label": "Wikipedia, \"Beta Canis Minoris\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374811072",
+        "quote": "In the night sky it is notable for its proximity to the prominent star Procyon."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its spectrum",
+      "summary": "The color of the star's light."
+    }
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "id": "cursa",
+  "name": "Cursa",
+  "system": "Cursa system",
+  "description": "A star 27 parsecs away, 3.4 times the Sun's width, measured from its light.",
+  "aliases": [
+    "HD 33111",
+    "HIP 23875",
+    "HR 1666",
+    "Beta Eridani"
+  ],
+  "featured": true,
+  "target": "HIP 23875",
+  "paper": {
+    "url": "https://doi.org/10.1093/mnras/stx1433",
+    "credit": "McDonald, Zijlstra & Watson (2017), MNRAS 471, 770"
+  },
+  "radius": {
+    "value": 3.439,
+    "source": "McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 23875: radius 3.439 solar radii, implied by the fitted luminosity 43.469 solar luminosities (fractional uncertainty 0.035) and temperature",
+    "url": "https://doi.org/10.1093/mnras/stx1433"
+  },
+  "mass": "unmeasured",
+  "temperature": {
+    "value": 7997,
+    "source": "McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 23875: effective temperature 7997 +/- 144 K, from the fit of a model atmosphere to the star's spectral energy distribution (goodness of fit Q 0.028)",
+    "url": "https://doi.org/10.1093/mnras/stx1433",
+    "uncertainty": 144
+  },
+  "distance": {
+    "value": 27.397,
+    "source": "McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 23875: distance 27.397 pc, the paper's parallax inverted (Gaia DR1's where it revised the star's, else the Hipparcos reduction of van Leeuwen 2007; section 2.3; fractional uncertainty 0.012), at which the luminosity and radius hold",
+    "url": "https://doi.org/10.1093/mnras/stx1433",
+    "uncertainty": 0.329
+  },
+  "limb": {
+    "none": "no mass is measured and no spectroscopic surface gravity is published with this radius: McDonald, Zijlstra & Watson (2017), MNRAS 471, 770 assume the gravity of their fit (table column 15)"
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A star 27 parsecs away, 3.4 times the Sun's width, measured from its light.",
+    "introduction": "Its brightness, measured band by band, gives 43 times the Sun's luminosity at 7,997 K, so 3.439 solar radii.",
+    "locator": "Table 2, HIP 23875: D, Teff, L, Rad, Q",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/Beta_Eridani",
+      "title": "Beta Eridani",
+      "revision": "1377343599",
+      "card": "Beta Eridani, formally named Cursa, is the second-brightest star in the barely equatorial-southern constellation of Eridanus, located in the northeast end of this constellation near the shared border with Orion.",
+      "introduction": "The apparent visual magnitude of this star is 2.796, so it can be viewed with the naked eye in dark skies."
+    }
+  },
+  "notes": [],
+  "radialVelocity": {
+    "value": -6,
+    "uncertainty": 0.8,
+    "source": "SIMBAD's radial velocity for Gaia DR3 3211922645854328832 (quality A), from 2006AstL...32..759G; Gaia DR3 measures none",
+    "url": "https://ui.adsabs.harvard.edu/abs/2006AstL...32..759G/abstract"
+  },
+  "order": 5523
+}

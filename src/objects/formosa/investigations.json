@@ -1,0 +1,34 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "formosa",
+  "entries": [
+    {
+      "id": "placement",
+      "subject": "Placement",
+      "status": "included",
+      "finding": "Gaia DR3 source 3979226627820659072: position at J2016.0. Distance: McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 56508: distance 135.938 pc, the paper's parallax inverted (Gaia DR1's where it revised the star's, else the Hipparcos reduction of van Leeuwen 2007; section 2.3; fractional uncertainty 0.082), at which the luminosity and radius hold (https://doi.org/10.1093/mnras/stx1433): 135.938 +/- 11.147 pc; Gaia DR3 parallax 7.2345 +/- 0.0294 mas (same row, RUWE 1.18), 245.7 standard errors, is not used. Proper motion: Gaia DR3 (same row): -59.897, -0.996 mas/yr. Radial velocity from the same row.",
+      "evidence": [
+        "https://gea.esac.esa.int/archive/",
+        "https://doi.org/10.1093/mnras/stx1433"
+      ]
+    },
+    {
+      "id": "radius-mass-and-temperature",
+      "subject": "Radius, mass and temperature",
+      "status": "included",
+      "finding": "Radius 9.726 solar radii from McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 56508: radius 9.726 solar radii, implied by the fitted luminosity 45.227 solar luminosities (fractional uncertainty 0.097) and temperature (https://doi.org/10.1093/mnras/stx1433). No mass is measured, so GM is 0, the records' unpublished value. Temperature 4803 +/- 125 K from McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 56508: effective temperature 4803 +/- 125 K, from the fit of a model atmosphere to the star's spectral energy distribution (goodness of fit Q 0.132).",
+      "evidence": [
+        "https://doi.org/10.1093/mnras/stx1433"
+      ]
+    },
+    {
+      "id": "color",
+      "subject": "Color",
+      "status": "included",
+      "finding": "A Planck spectrum at 4,803 K, because no archive holds a spectrum of this star (stis-ngsl: HD 100655 is not in the library; gaia-xp: Gaia DR3 published no sampled BP/RP spectrum of it; pulkovo: HR 4459 is not in the catalogue; kiehling: HR 4459 is not among its 60 stars; kharitonov: HR 4459 is not in the catalogue; burnashev: BS 4459 is not in part2), through the CIE 1931 2-degree observer: #ffe3c8. Routes tried in order: stis-ngsl: HD 100655 is not in the library; gaia-xp: Gaia DR3 published no sampled BP/RP spectrum of it; pulkovo: HR 4459 is not in the catalogue; kiehling: HR 4459 is not among its 60 stars; kharitonov: HR 4459 is not in the catalogue; burnashev: BS 4459 is not in part2; planck: used.",
+      "evidence": [
+        "https://doi.org/10.1093/mnras/stx1433"
+      ]
+    }
+  ]
+}

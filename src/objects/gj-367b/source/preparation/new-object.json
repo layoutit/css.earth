@@ -4,7 +4,8 @@
     {
       "id": "gj-367b",
       "name": "GJ 367 b",
-      "description": "Transiting planet of GJ 367 with a 0.322-day year, found in 2021.",
+      "description": "Transiting planet of Añañuca with a 0.322-day year, found in 2021.",
+      "order": 3094,
       "paper": {
         "url": "https://ui.adsabs.harvard.edu/abs/2026arXiv260618355L/abstract",
         "credit": "Lee et al. 2026"
@@ -15,7 +16,7 @@
       },
       "text": {
         "card": "GJ 367 b was found in 2021 by TESS as it crossed its star.",
-        "introduction": "It is one of 3 planets known around GJ 367. Its orbit and size follow Lee et al. 2026's fit, the archive's default.",
+        "introduction": "It is one of 3 planets known around Añañuca. Its orbit and size follow Lee et al. 2026's fit, the archive's default.",
         "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname LEE_ET_AL_2026): disc_year 2021, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 3; pl_orbper 0.3219233, pl_radj 0.06566164, pl_bmassj 0.00158261",
         "quotes": {
           "url": "https://en.wikipedia.org/wiki/Gliese_367_b",
@@ -24,8 +25,7 @@
           "card": "Gliese 367 b, formally named Tahay, is a sub-Earth exoplanet orbiting the red dwarf star Gliese 367, 30.7 light-years from Earth in the constellation of Vela.",
           "introduction": "The exoplanet takes just 7.7 hours to orbit its star, one of the shortest orbits of any planet."
         }
-      },
-      "order": 3094
+      }
     }
   ]
 }

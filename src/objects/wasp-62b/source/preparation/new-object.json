@@ -4,7 +4,8 @@
     {
       "id": "wasp-62b",
       "name": "WASP-62 b",
-      "description": "Transiting planet of WASP-62 with a 4.41-day year, found in 2012.",
+      "description": "Transiting planet of Naledi with a 4.41-day year, found in 2012.",
+      "order": 4829,
       "paper": {
         "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
         "credit": "Stassun et al. 2017"
@@ -15,7 +16,7 @@
       },
       "text": {
         "card": "WASP-62 b was found in 2012 by SuperWASP as it crossed its star.",
-        "introduction": "It is the only planet known around WASP-62. Its orbit and size follow Stassun et al. 2017's fit, the archive's default.",
+        "introduction": "It is the only planet known around Naledi. Its orbit and size follow Stassun et al. 2017's fit, the archive's default.",
         "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname STASSUN_ET_AL__2017): disc_year 2012, disc_facility SuperWASP, sy_pnum 1; pl_orbper 4.41193868, pl_radj 1.32, pl_bmassj 0.52",
         "quotes": {
           "url": "https://en.wikipedia.org/wiki/WASP-62",
@@ -24,8 +25,7 @@
           "card": "It is an F-class main-sequence star, orbited by a planet, WASP-62b.",
           "introduction": "The age of WASP-62 is much younger than the Sun at 0.8±0.6 billion years, and it has a metal abundance similar to the Sun."
         }
-      },
-      "order": 4829
+      }
     }
   ]
 }

@@ -1,0 +1,148 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "veritate",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Veritate",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 9447606
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/veritate-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Veritate",
+      "classification": "star",
+      "color": "#ffe2c4",
+      "distanceAu": 16331293.9,
+      "description": "A star 79 parsecs away, 14 times the Sun's width, measured from its light.",
+      "systemName": "Veritate system",
+      "aliases": [
+        "HD 221345",
+        "HIP 116076",
+        "HR 8930",
+        "14 Andromedae"
+      ],
+      "order": 5744,
+      "context": {
+        "order": 5741
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1877511475538356700,
+        -236342644818413700,
+        1545303003508202500
+      ],
+      "presentationToReference": [
+        0.7684843904287507,
+        0.6275595941535157,
+        -0.12490275198419686,
+        -0.09673742909283448,
+        -0.07900991933845018,
+        -0.9921689888615952,
+        0.6325137243411086,
+        -0.7745491517211843,
+        0.000009387959679959839
+      ],
+      "orbitUpReference": [
+        -0.6275595941535157,
+        0.07900991933845018,
+        0.7745491517211843
+      ],
+      "metersPerUnit": 30476148.387096774,
+      "bodyRadiusM": 9447606000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

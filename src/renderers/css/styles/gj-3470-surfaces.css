@@ -1,4 +1,4 @@
-/* GJ 3470: the Sun's emissive presentation (body-surfaces.css, SUN block) scoped to this object, loaded after the shared
+/* Kaewkosin: the Sun's emissive presentation (body-surfaces.css, SUN block) scoped to this object, loaded after the shared
    body-surfaces.css base rules. No spin: the rotation axis and period are unmeasured. Both plates are transparent: no observation is cast. */
 .object-stage[data-object-id="gj-3470"] > :is(.polycss-camera, .gj-3470-corona-layer, .gj-3470-limb-layer) {
   --gj-3470-scene-side-padding: 16px;

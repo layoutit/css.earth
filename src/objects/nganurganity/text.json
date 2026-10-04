@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "nganurganity",
+  "card": {
+    "text": "A star 344 parsecs away, 257 times the Sun's width, measured from its light.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 33856: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-sigma-canis-majoris",
+        "url": "https://en.wikipedia.org/wiki/Sigma_Canis_Majoris",
+        "label": "Wikipedia, \"Sigma Canis Majoris\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1370789123",
+        "quote": "Sigma Canis Majoris is a variable star in the southern constellation of Canis Major."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its brightness, measured band by band, gives 12,254 times the Sun's luminosity at 3,792 K, so 256.839 solar radii.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 33856: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-sigma-canis-majoris",
+        "url": "https://en.wikipedia.org/wiki/Sigma_Canis_Majoris",
+        "label": "Wikipedia, \"Sigma Canis Majoris\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1370789123",
+        "quote": "It has the proper name Nganurganity ; Sigma Canis Majoris is its Bayer designation."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its spectrum",
+      "summary": "The color of the star's light."
+    }
+  }
+}

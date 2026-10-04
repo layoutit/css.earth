@@ -22,6 +22,10 @@ export const DRAFT_ROUTES: Readonly<Record<string, { readonly names: string; rea
   tess: { names: 'TIC', draft: async (names, { archive }) => (await import('./k2.mts')).draftsFromTess(names, archive) },
   // A star anywhere on the sky from Gaia DR3 alone: FLAME radius and mass, GSP-Phot temperature, its parallax (gaia.mts).
   gaia: { names: 'SOURCE_ID', draft: async (names, { archive }) => (await import('./gaia.mts')).draftsFromGaia(names, archive) },
+  // A Hipparcos star from the model-atmosphere fit to its light (McDonald, Zijlstra & Watson 2017), inside the paper's well-fit subset (hipparcos.mts).
+  hipparcos: { names: 'HIP', draft: async (names, { archive }) => (await import('./hipparcos.mts')).draftsFromHipparcos(names, archive) },
+  // The stars the IAU has named that the universe lacks, each by the first route that measures it (iau.mts).
+  iau: { names: 'all | NAME', draft: async (names, context) => (await import('./iau.mts')).draftsFromIau(names, context) },
   // A nearby A, F or G star whose disc the CHARA Array measured (Boyajian et al. 2012) (chara.mts).
   chara: { names: 'HD', draft: async (names, { archive }) => (await import('./chara.mts')).draftsFromChara(names, archive) },
   // A bright star whose disc the Navy Precision Optical Interferometer measured (Baines et al. 2018, 2021) (npoi.mts).

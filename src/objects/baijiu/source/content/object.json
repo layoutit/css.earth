@@ -1,0 +1,81 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "baijiu",
+  "displayName": "Baijiu",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "3 solar radii",
+        "source": {
+          "catalogueId": "gaia-dr3-baijiu",
+          "url": "https://gea.esac.esa.int/archive/",
+          "label": "Gaia DR3 FLAME",
+          "checked": "2026-10-03",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "65.2 parsecs",
+        "source": {
+          "catalogueId": "gaia-dr3-baijiu",
+          "url": "https://gea.esac.esa.int/archive/",
+          "label": "Gaia DR3 parallax",
+          "checked": "2026-10-03",
+          "path": "source/measurements.json",
+          "locator": "distanceParsecs; distanceSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "color",
+    "controls": [
+      {
+        "id": "color",
+        "label": "Color",
+        "qualification": "Color of a blackbody at the star's temperature; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
+        "thumbnail": "baijiu-dataset-color.webp",
+        "surface": "baijiu-surface-color@2x.webp",
+        "poles": "baijiu-poles-color@2x.webp",
+        "source": {
+          "id": "baijiu-stellar-color",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.1051/0004-6361/202243462"
+        },
+        "falseColor": false,
+        "notes": "The color of a blackbody at the star's published temperature. The darkening toward the edge is the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 10,048 K and log g 3.92 (u1 0.226, u2 0.327): a model, because no fit of this star's limb is used. The spin axis's direction on the sky is a display convention."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Creevey et al. (2023), A&A 674, A26 (Gaia DR3 FLAME)",
+      "href": "https://doi.org/10.1051/0004-6361/202243688"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://doi.org/10.1051/0004-6361/202243688",
+      "credit": "Creevey et al. (2023), A&A 674, A26 (Gaia DR3 FLAME)"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/baijiu.json",
+      "credit": "Gaia DR3 FLAME radius; Gaia DR3 astrometry; no measured rotation axis (display convention)"
+    }
+  }
+}

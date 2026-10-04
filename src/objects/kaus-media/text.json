@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "kaus-media",
+  "card": {
+    "text": "A star 107 parsecs away, 66 times the Sun's width, measured from its light.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 89931: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-delta-sagittarii",
+        "url": "https://en.wikipedia.org/wiki/Delta_Sagittarii",
+        "label": "Wikipedia, \"Delta Sagittarii\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374877320",
+        "quote": "Delta Sagittarii, formally named Kaus Media, is a star in the southern zodiac constellation of Sagittarius."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its brightness, measured band by band, gives 1,393 times the Sun's luminosity at 4,333 K, so 66.322 solar radii.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 89931: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-delta-sagittarii",
+        "url": "https://en.wikipedia.org/wiki/Delta_Sagittarii",
+        "label": "Wikipedia, \"Delta Sagittarii\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374877320",
+        "quote": "The apparent visual magnitude of this star is +2.70, making it easily visible to the naked eye."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its spectrum",
+      "summary": "The color of the star's light."
+    }
+  }
+}

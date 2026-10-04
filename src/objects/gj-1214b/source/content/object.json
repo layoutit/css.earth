@@ -13,7 +13,7 @@
           "catalogueId": "doi-10-3847-2041-8213-ad29f3",
           "url": "https://ui.adsabs.harvard.edu/abs/2024ApJ...963L..37M",
           "label": "Mahajan et al. 2024",
-          "checked": "2026-09-29",
+          "checked": "2026-10-03",
           "path": "source/measurements.json",
           "locator": "radiusKm; radiusSource"
         }
@@ -26,7 +26,7 @@
           "catalogueId": "doi-10-3847-2041-8213-ad29f3",
           "url": "https://ui.adsabs.harvard.edu/abs/2024ApJ...963L..37M",
           "label": "Mahajan et al. 2024",
-          "checked": "2026-09-29",
+          "checked": "2026-10-03",
           "path": "source/measurements.json",
           "locator": "orbitalPeriodDays; orbitalPeriodSource"
         }
@@ -39,7 +39,7 @@
           "catalogueId": "doi-10-3847-2041-8213-ad29f3",
           "url": "https://ui.adsabs.harvard.edu/abs/2024ApJ...963L..37M",
           "label": "Mahajan et al. 2024",
-          "checked": "2026-09-29",
+          "checked": "2026-10-03",
           "path": "source/measurements.json",
           "locator": "massSource"
         }
@@ -54,7 +54,7 @@
       {
         "id": "shape",
         "label": "Shape",
-        "qualification": "A sphere of the published radius, lit by GJ 1214; the neutral gray is a display convention, not a measured color.",
+        "qualification": "A sphere of the published radius, lit by Orkaria; the neutral gray is a display convention, not a measured color.",
         "thumbnail": "gj-1214b-dataset-shape.webp",
         "surface": "gj-1214b-surface-shape@2x.webp",
         "poles": "gj-1214b-poles-shape@2x.webp",
@@ -84,7 +84,7 @@
       "id": "gj-1214b-orbits",
       "titleKey": "systemOrbits",
       "src": "/scenes/gj-1214b/gj-1214b-system-orbits.svg",
-      "alt": "The orbits of GJ 1214's planets in this map from above, to scale, with GJ 1214 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "alt": "The orbits of Orkaria's planets in this map from above, to scale, with GJ 1214 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
       "source": {
         "id": "gj-1214b-observational-measurements",
         "path": "../manifest.json",

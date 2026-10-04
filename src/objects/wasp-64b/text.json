@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "wasp-64b",
+  "card": {
+    "text": "WASP-64 b was found in 2012 by SuperWASP as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-201220561",
+        "url": "https://ui.adsabs.harvard.edu/abs/2013A%26A...552A..82G/abstract",
+        "label": "Gillon et al. 2013",
+        "checked": "2026-10-03",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname GILLON_ET_AL__2013): disc_year 2012, disc_facility SuperWASP, sy_pnum 1; pl_orbper 1.573290273, pl_radj 1.271, pl_bmassj 1.271"
+      },
+      {
+        "catalogueId": "wikipedia-wasp-64",
+        "url": "https://en.wikipedia.org/wiki/WASP-64",
+        "label": "Wikipedia, \"WASP-64\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1370791684",
+        "quote": "It is a G7 class main-sequence star, orbited by a planet WASP-64b."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is the only planet known around Atakoraka. Its orbit and size follow Gillon et al. 2013's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-201220561",
+        "url": "https://ui.adsabs.harvard.edu/abs/2013A%26A...552A..82G/abstract",
+        "label": "Gillon et al. 2013",
+        "checked": "2026-10-03",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname GILLON_ET_AL__2013): disc_year 2012, disc_facility SuperWASP, sy_pnum 1; pl_orbper 1.573290273, pl_radj 1.271, pl_bmassj 1.271"
+      },
+      {
+        "catalogueId": "wikipedia-wasp-64",
+        "url": "https://en.wikipedia.org/wiki/WASP-64",
+        "label": "Wikipedia, \"WASP-64\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1370791684",
+        "quote": "It is younger than the Sun at 3.6±1.6 billion years, and it has a metal abundance similar to the Sun."
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

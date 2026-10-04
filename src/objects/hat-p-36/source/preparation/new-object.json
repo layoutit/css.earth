@@ -1,0 +1,51 @@
+{
+  "id": "hat-p-36",
+  "name": "Tuiren",
+  "system": "Tuiren system",
+  "description": "Star of 5,620 K, 294 parsecs away, with 1 transiting planet.",
+  "aliases": [
+    "HAT-P-36",
+    "TOI-1810"
+  ],
+  "featured": true,
+  "target": "HAT-P-36",
+  "gaia": "1541532207133249920",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2019AJ....158...39C/abstract",
+    "credit": "Chakrabarty & Sengupta 2019"
+  },
+  "radius": {
+    "value": 1.041,
+    "source": "Chakrabarty & Sengupta 2019, the stellar radius of the default parameter set of HAT-P-36 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2019AJ....158...39C/abstract",
+    "uncertainty": 0.013
+  },
+  "mass": {
+    "value": 1.03,
+    "source": "Chakrabarty & Sengupta 2019, the stellar mass of the default parameter set of HAT-P-36 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2019AJ....158...39C/abstract",
+    "uncertainty": 0.03
+  },
+  "temperature": {
+    "value": 5620,
+    "source": "Chakrabarty & Sengupta 2019, the stellar temperature of the default parameter set of HAT-P-36 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2019AJ....158...39C/abstract",
+    "uncertainty": 40
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "HAT-P-36 b crosses Tuiren as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Chakrabarty & Sengupta 2019.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname CHAKRABARTY__AMP__SENGUPTA_2019): st_teff 5620, st_rad 1.041, st_mass 1.03",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/HAT-P-36",
+      "title": "HAT-P-36",
+      "revision": "1374405757",
+      "card": "HAT-P-36, also referred to as Tuiren is a 12th magnitude G-type main-sequence star estimated to be approximately 958 light-years away from Earth in the constellation Canes Venatici.",
+      "introduction": "HAT-P-36 is too faint to be seen with the naked eye, but it is possible to view it with binoculars or a small telescope."
+    }
+  },
+  "notes": [],
+  "order": 5735
+}

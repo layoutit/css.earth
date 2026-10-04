@@ -1,0 +1,148 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "enif",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Enif",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 123829034.4
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/enif-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Enif",
+      "classification": "star",
+      "color": "#ffce8a",
+      "distanceAu": 43607705.6,
+      "description": "A star 211 parsecs away, 178 times the Sun's width, measured from its light.",
+      "systemName": "Enif system",
+      "aliases": [
+        "HD 206778",
+        "HIP 107315",
+        "HR 8308",
+        "Epsilon Pegasi"
+      ],
+      "order": 5540,
+      "context": {
+        "order": 5537
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        5331124076964235000,
+        -3589571765001511000,
+        1118797249666727000
+      ],
+      "presentationToReference": [
+        0.8172033663295534,
+        0.14225707564163484,
+        -0.55851730724261,
+        -0.5502423293272042,
+        -0.09578601936993215,
+        -0.8294928676666459,
+        0.17149937922983363,
+        -0.9851842279102692,
+        7.928120869256137e-7
+      ],
+      "orbitUpReference": [
+        -0.14225707564163484,
+        0.09578601936993215,
+        0.9851842279102692
+      ],
+      "metersPerUnit": 399448498.0645161,
+      "bodyRadiusM": 123829034400
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

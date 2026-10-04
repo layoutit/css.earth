@@ -4,7 +4,8 @@
     {
       "id": "lhs-3844b",
       "name": "LHS 3844 b",
-      "description": "Transiting planet of LHS 3844 with a 0.463-day year, found in 2019.",
+      "description": "Transiting planet of Batsũ̀ with a 0.463-day year, found in 2019.",
+      "order": 3820,
       "paper": {
         "url": "https://ui.adsabs.harvard.edu/abs/2026A&A...710A.311N/abstract",
         "credit": "Nagel et al. 2026"
@@ -15,7 +16,7 @@
       },
       "text": {
         "card": "LHS 3844 b was found in 2019 by TESS as it crossed its star.",
-        "introduction": "It is the only planet known around LHS 3844. Its orbit and size follow Nagel et al. 2026's fit, the archive's default.",
+        "introduction": "It is the only planet known around Batsũ̀. Its orbit and size follow Nagel et al. 2026's fit, the archive's default.",
         "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname NAGEL_ET_AL_2026): disc_year 2019, disc_facility Transiting Exoplanet Survey Satellite (TESS), sy_pnum 1; pl_orbper 0.462929709, pl_radj 0.11472943, pl_bmassj 0.00745685",
         "quotes": {
           "url": "https://en.wikipedia.org/wiki/LHS_3844_b",
@@ -24,8 +25,7 @@
           "card": "LHS 3844 b, formally named Kuaꞌkua, is an exoplanet orbiting the red dwarf star LHS 3844, about 48.5 light-years away in the constellation Indus.",
           "introduction": "It was discovered in 2018 using the Transiting Exoplanet Survey Satellite."
         }
-      },
-      "order": 3820
+      }
     }
   ]
 }

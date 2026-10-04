@@ -1,0 +1,146 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "hat-p-40",
+  "parent": "hat-p-40-system",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Taika",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 1349658
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/hat-p-40-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Taika",
+      "classification": "star",
+      "color": "#fff2ef",
+      "distanceAu": 100449437.4,
+      "description": "HAT-P-40 b crosses Taika as seen from Earth, which is how it was found.",
+      "systemName": "Taika system",
+      "aliases": [
+        "HAT-P-40",
+        "TOI-5959"
+      ],
+      "order": 5706,
+      "context": {
+        "order": 5703
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        9592488891351706000,
+        -4368929000715326000,
+        10710182301343883000
+      ],
+      "presentationToReference": [
+        0.6383491099664186,
+        0.6486218827845505,
+        -0.41448771631751186,
+        -0.2907380942214134,
+        -0.2954173785455351,
+        -0.9100549065972804,
+        0.712728401548291,
+        -0.7014401083672852,
+        3.3059206976244753e-7
+      ],
+      "orbitUpReference": [
+        -0.6486218827845505,
+        0.2954173785455351,
+        0.7014401083672852
+      ],
+      "metersPerUnit": 4353735.483870967,
+      "bodyRadiusM": 1349658000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

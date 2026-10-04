@@ -1,0 +1,148 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "xuange",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Xuange",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 1305133.2
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/xuange-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Xuange",
+      "classification": "star",
+      "color": "#b9cdff",
+      "distanceAu": 6261783.3,
+      "description": "A star 30 parsecs away, 1.9 times the Sun's width, measured from its light.",
+      "systemName": "Xuange system",
+      "aliases": [
+        "Lambda Bootis",
+        "HD 125162",
+        "HIP 69732",
+        "HR 5351"
+      ],
+      "order": 5750,
+      "context": {
+        "order": 5747
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -538002748696816830,
+        -364171784755838700,
+        674856630595510800
+      ],
+      "presentationToReference": [
+        -0.5743343204374723,
+        -0.5965869808223163,
+        -0.5605569218919165,
+        -0.38876447207915676,
+        -0.4038393838878165,
+        0.8281158960375797,
+        0.7204181241589092,
+        -0.6935399962038397,
+        -0.000006995462410782823
+      ],
+      "orbitUpReference": [
+        0.5965869808223163,
+        0.4038393838878165,
+        0.6935399962038397
+      ],
+      "metersPerUnit": 4210107.096774193,
+      "bodyRadiusM": 1305133200
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

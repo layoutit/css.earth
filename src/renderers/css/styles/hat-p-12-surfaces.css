@@ -1,4 +1,4 @@
-/* HAT-P-12: the Sun's emissive presentation (body-surfaces.css, SUN block) scoped to this object, loaded after the shared
+/* Komondor: the Sun's emissive presentation (body-surfaces.css, SUN block) scoped to this object, loaded after the shared
    body-surfaces.css base rules. No spin: the rotation axis and period are unmeasured. Both plates are transparent: no observation is cast. */
 .object-stage[data-object-id="hat-p-12"] > :is(.polycss-camera, .hat-p-12-corona-layer, .hat-p-12-limb-layer) {
   --hat-p-12-scene-side-padding: 16px;

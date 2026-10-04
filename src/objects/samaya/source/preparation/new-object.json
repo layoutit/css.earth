@@ -1,0 +1,53 @@
+{
+  "id": "samaya",
+  "name": "Sāmaya",
+  "system": "Sāmaya system",
+  "description": "A star 1.4 solar radii and 1.18 solar masses, about 93 parsecs away, measured by Gaia.",
+  "aliases": [
+    "Gaia DR3 6592695123423391616",
+    "HD 205739",
+    "HIP 106824"
+  ],
+  "featured": true,
+  "target": "HD 205739",
+  "gaia": "6592695123423391616",
+  "paper": {
+    "url": "https://doi.org/10.1051/0004-6361/202243688",
+    "credit": "Creevey et al. (2023), A&A 674, A26 (Gaia DR3 FLAME)"
+  },
+  "radius": "gaia-flame",
+  "mass": "gaia-flame",
+  "temperature": {
+    "value": 6117,
+    "source": "Andrae et al. (2023), A&A 674, A27 (Gaia DR3 GSP-Phot), astrophysical_parameters of Gaia DR3 6592695123423391616: teff_gspphot 6116.9478 K (16th-84th percentiles 6116.1553-6117.8145), the temperature FLAME used",
+    "url": "https://doi.org/10.1051/0004-6361/202243462",
+    "uncertainty": 0.8
+  },
+  "color": {
+    "skip": [
+      "stis-ngsl",
+      "gaia-xp",
+      "pulkovo",
+      "kiehling",
+      "kharitonov",
+      "burnashev"
+    ],
+    "reason": "GSP-Phot fits an extinction A_G = 0.00 mag toward this star (Andrae et al. (2023), A&A 674, A27 (Gaia DR3 GSP-Phot), ag_gspphot), and the color routes do not remove extinction; GSP-Phot measured its temperature"
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A star about 93 parsecs away, 1.4 times the Sun's width, measured by Gaia.",
+    "introduction": "Gaia's parallax, brightness and spectrum give it 1.4 solar radii and 1.18 solar masses (FLAME) and 6,117 K at its surface (GSP-Phot).",
+    "locator": "gaiadr3.astrophysical_parameters, Gaia DR3 6592695123423391616: radius_flame, mass_flame, teff_gspphot",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/HD_205739",
+      "title": "HD 205739",
+      "revision": "1374435359",
+      "card": "HD 205739 is a yellow-white hued star in the southern constellation of Piscis Austrinus, positioned near the western constellation boundary with Microscopium.",
+      "introduction": "It has the proper name Sāmaya, which was selected in the NameExoWorlds campaign by Sri Lanka, during the 100th anniversary of the IAU."
+    }
+  },
+  "notes": [],
+  "order": 5685
+}

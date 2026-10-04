@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "hat-p-40-system",
+  "parent": "milky-way",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "hat-p-40"
+    },
+    "catalog": {
+      "name": "Taika system",
+      "systemName": "Taika system",
+      "classification": "planetary-system",
+      "color": "#fff2ef",
+      "distanceAu": 100449437.4,
+      "description": "HAT-P-40 b crosses Taika as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        9592488891351706000,
+        -4368929000715326000,
+        10710182301343883000
+      ],
+      "presentationToReference": [
+        0.6383491099664186,
+        0.6486218827845505,
+        -0.41448771631751186,
+        -0.2907380942214134,
+        -0.2954173785455351,
+        -0.9100549065972804,
+        0.712728401548291,
+        -0.7014401083672852,
+        3.3059206976244753e-7
+      ],
+      "orbitUpReference": [
+        -0.6486218827845505,
+        0.2954173785455351,
+        0.7014401083672852
+      ],
+      "metersPerUnit": 4353735.483870967,
+      "bodyRadiusM": 1349658000
+    }
+  }
+}

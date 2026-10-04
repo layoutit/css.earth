@@ -1,4 +1,4 @@
-# GJ 486
+# Gar
 
 ## Sources
 
@@ -12,7 +12,8 @@ Its radius and temperature follow Weiner Mansfield et al. 2024. It is also HIP 6
 
 ## Evidence
 
-Generated 2026-09-29 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts) from Gaia DR3, SIMBAD and the archives named above; each choice was read with the dataset's own reader.
+Generated 2026-10-03 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts) from Gaia DR3, SIMBAD and the archives named above; each choice was read with the dataset's own reader.
+
 
 ## Known problems
 

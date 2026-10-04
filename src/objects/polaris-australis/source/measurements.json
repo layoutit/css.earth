@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "polaris-australis",
+  "angularDiameterMas": 0.44,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 2,960,739 km at 90.09 pc = 0.44 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 90.08622371450132,
+  "distanceSource": "Gaia DR3 parallax 11.1005 +/- 0.0616 mas (same row, RUWE 1.30): 90.09 pc, no zero-point correction",
+  "radiusKm": 2960739.2,
+  "radiusSource": "Radius 4.256 (4.167 to 4.344) from Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26; astrophysical_parameters of the same source): 2,960,739 km at 695,700 km per solar radius. Mass 2.258 (2.218 to 2.298) from Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26; astrophysical_parameters of the same source); GM is that mass times the JPL solar GM. Temperature 7192 +/- 15.2 K from Andrae et al. (2023), A&A 674, A27 (Gaia DR3 GSP-Phot), astrophysical_parameters of Gaia DR3 6341181494973204096: teff_gspphot 7191.9404 K (16th-84th percentiles 7167.743-7198.1304), the temperature FLAME used (https://doi.org/10.1051/0004-6361/202243462). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 7192,
+  "effectiveTemperatureSource": "Andrae et al. (2023), A&A 674, A27 (Gaia DR3 GSP-Phot), astrophysical_parameters of Gaia DR3 6341181494973204096: teff_gspphot 7191.9404 K (16th-84th percentiles 7167.743-7198.1304), the temperature FLAME used (https://doi.org/10.1051/0004-6361/202243462)",
+  "surfaceGravityLogg": 3.53,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/polaris-australis.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 3.534, rounded to two decimals",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

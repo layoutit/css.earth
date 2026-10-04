@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hat-p-34",
+  "card": {
+    "text": "HAT-P-34 b crosses Sansuna as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-201629882",
+        "url": "https://ui.adsabs.harvard.edu/abs/2017A&A...602A.107B/abstract",
+        "label": "Bonomo et al. (2017), Astronomy & Astrophysics 602 A107",
+        "checked": "2026-10-03",
+        "locator": "NASA Exoplanet Archive ps table (st_refname BONOMO_ET_AL__2017): st_teff 6442, st_rad 1.53, st_mass 1.392"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Bonomo et al. 2017.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-201629882",
+        "url": "https://ui.adsabs.harvard.edu/abs/2017A&A...602A.107B/abstract",
+        "label": "Bonomo et al. (2017), Astronomy & Astrophysics 602 A107",
+        "checked": "2026-10-03",
+        "locator": "NASA Exoplanet Archive ps table (st_refname BONOMO_ET_AL__2017): st_teff 6442, st_rad 1.53, st_mass 1.392"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its Gaia spectrum",
+      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

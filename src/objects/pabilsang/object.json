@@ -1,0 +1,148 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "pabilsang",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Pabilsang",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 14054531.4
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/pabilsang-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Pabilsang",
+      "classification": "star",
+      "color": "#ffd7ae",
+      "distanceAu": 17318358.6,
+      "description": "A star 84 parsecs away, 20 times the Sun's width, measured from its light.",
+      "systemName": "Pabilsang system",
+      "aliases": [
+        "Nu2 Sagittarii",
+        "HD 175190",
+        "HIP 92845",
+        "HR 7120"
+      ],
+      "order": 5655,
+      "context": {
+        "order": 5652
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        569450955395024200,
+        -2321785950409632300,
+        -998612131745155800
+      ],
+      "presentationToReference": [
+        0.21979836317586426,
+        -0.09181261055682487,
+        -0.9712152820502528,
+        -0.8961698048231731,
+        0.3743511787286149,
+        -0.2382034338704892,
+        -0.38544566474200587,
+        -0.9227305346238616,
+        -0.0000020870544892329216
+      ],
+      "orbitUpReference": [
+        0.09181261055682487,
+        -0.3743511787286149,
+        0.9227305346238616
+      ],
+      "metersPerUnit": 45337198.06451613,
+      "bodyRadiusM": 14054531400
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

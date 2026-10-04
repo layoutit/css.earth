@@ -1,0 +1,147 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "belenos",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Bélénos",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 1000315.4
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/belenos-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Bélénos",
+      "classification": "star",
+      "color": "#fff3ef",
+      "distanceAu": 9247272,
+      "description": "A star about 45 parsecs away, 1.4 times the Sun's width, measured by Gaia.",
+      "systemName": "Bélénos system",
+      "aliases": [
+        "Gaia DR3 297045096447719040",
+        "HD 8574",
+        "HIP 6643"
+      ],
+      "order": 5504,
+      "context": {
+        "order": 5501
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1131949077860435100,
+        441425653657592640,
+        661478137933348400
+      ],
+      "presentationToReference": [
+        0.8182498191502927,
+        0.44549706811670914,
+        0.3633174861741858,
+        0.31909250019129554,
+        0.17372268740792943,
+        -0.9316653928323383,
+        0.4781706910530816,
+        -0.8782669242201844,
+        0.000006215739411530105
+      ],
+      "orbitUpReference": [
+        -0.44549706811670914,
+        -0.17372268740792943,
+        0.8782669242201844
+      ],
+      "metersPerUnit": 3226823.870967742,
+      "bodyRadiusM": 1000315400
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

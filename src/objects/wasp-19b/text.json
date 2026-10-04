@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "wasp-19b",
+  "card": {
+    "text": "WASP-19 b was found in 2009 by SuperWASP as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-2001-11112",
+        "url": "https://ui.adsabs.harvard.edu/abs/2020A&A...636A..98C/abstract",
+        "label": "Cortés-Zuleta et al. 2020",
+        "checked": "2026-10-03",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname CORT_EACUTE_S_ZULETA_ET_AL__2020): disc_year 2009, disc_facility SuperWASP, sy_pnum 1; pl_orbper 0.78883900702, pl_radj 1.415, pl_bmassj 1.154"
+      },
+      {
+        "catalogueId": "wikipedia-wasp-19b",
+        "url": "https://en.wikipedia.org/wiki/WASP-19b",
+        "label": "Wikipedia, \"WASP-19b\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374844406",
+        "quote": "WASP-19b, formally named Banksia, is an exoplanet, notable for possessing one of the shortest orbital periods of any known planetary body: 0.79 days or approximately 18.932 hours."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is the only planet known around Wattle. Its orbit and size follow Cortés-Zuleta et al. 2020's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-2001-11112",
+        "url": "https://ui.adsabs.harvard.edu/abs/2020A&A...636A..98C/abstract",
+        "label": "Cortés-Zuleta et al. 2020",
+        "checked": "2026-10-03",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname CORT_EACUTE_S_ZULETA_ET_AL__2020): disc_year 2009, disc_facility SuperWASP, sy_pnum 1; pl_orbper 0.78883900702, pl_radj 1.415, pl_bmassj 1.154"
+      },
+      {
+        "catalogueId": "wikipedia-wasp-19b",
+        "url": "https://en.wikipedia.org/wiki/WASP-19b",
+        "label": "Wikipedia, \"WASP-19b\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374844406",
+        "quote": "It has a mass close to that of Jupiter, but by comparison has a much larger radius ; making it nearly the size of a low-mass star."
+      }
+    ]
+  },
+  "datasets": {
+    "thermal": {
+      "title": "Dayside heat",
+      "detail": "From its dayside temperature",
+      "summary": "The color of a black body at the 2,346 K day side measured in eclipse."
+    }
+  }
+}

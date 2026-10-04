@@ -1,0 +1,149 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "chalawan",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Chalawan",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 885642.8
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/chalawan-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Chalawan",
+      "classification": "star",
+      "color": "#fff1e9",
+      "distanceAu": 2864537.3,
+      "description": "A star about 14 parsecs away, 1.3 times the Sun's width, measured by Gaia.",
+      "systemName": "Chalawan system",
+      "aliases": [
+        "Gaia DR3 777254360337133312",
+        "HR 4277",
+        "47 Ursae Majoris",
+        "HIP 53721",
+        "HD 95128"
+      ],
+      "order": 5516,
+      "context": {
+        "order": 5513
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -314875513231415040,
+        85175345424435710,
+        277912585617834780
+      ],
+      "presentationToReference": [
+        -0.7347846021743465,
+        -0.6260291430669227,
+        0.261111279799211,
+        0.19876277976482654,
+        0.16932943610472798,
+        0.9653087068128072,
+        0.6485252082900452,
+        -0.7611931779117238,
+        -0.000010630345154864111
+      ],
+      "orbitUpReference": [
+        0.6260291430669227,
+        -0.16932943610472798,
+        0.7611931779117238
+      ],
+      "metersPerUnit": 2856912.2580645164,
+      "bodyRadiusM": 885642800
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

@@ -1,0 +1,145 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "wasp-64",
+  "parent": "wasp-64-system",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Atakoraka",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 736050.6
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/wasp-64-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Atakoraka",
+      "classification": "star",
+      "color": "#ffeee5",
+      "distanceAu": 74406274.7,
+      "description": "WASP-64 b crosses Atakoraka as seen from Earth, which is how it was found.",
+      "systemName": "Atakoraka system",
+      "aliases": [
+        "WASP-64"
+      ],
+      "order": 5492,
+      "context": {
+        "order": 5489
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -1802499787922254600,
+        9174829504993798000,
+        -6039297157912079000
+      ],
+      "presentationToReference": [
+        -0.16193482806849582,
+        0.10459421929523749,
+        0.9812426615004297,
+        0.8242577604745227,
+        -0.5323873637176822,
+        0.19277665639610295,
+        -0.5425645175976325,
+        -0.8400141333595263,
+        5.407454109365534e-7
+      ],
+      "orbitUpReference": [
+        -0.10459421929523749,
+        0.5323873637176822,
+        0.8400141333595263
+      ],
+      "metersPerUnit": 2374356.7741935486,
+      "bodyRadiusM": 736050600
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

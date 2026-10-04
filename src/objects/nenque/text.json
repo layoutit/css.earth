@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "nenque",
+  "card": {
+    "text": "A star about 42 parsecs away, 1.1 times the Sun's width, measured by Gaia.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202243688",
+        "url": "https://doi.org/10.1051/0004-6361/202243688",
+        "label": "Creevey et al. (2023), Astronomy & Astrophysics 674 A26",
+        "checked": "2026-10-03",
+        "locator": "gaiadr3.astrophysical_parameters, Gaia DR3 4988158666636598272: radius_flame, mass_flame, teff_gspphot"
+      },
+      {
+        "catalogueId": "wikipedia-hd-6434",
+        "url": "https://en.wikipedia.org/wiki/HD_6434",
+        "label": "Wikipedia, \"HD 6434\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1370779048",
+        "quote": "HD 6434, also named Nenque, is a star in the southern constellation of Phoenix."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Gaia's parallax, brightness and spectrum give it 1.1 solar radii and 0.98 solar masses (FLAME) and 5,777 K at its surface (GSP-Phot).",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202243688",
+        "url": "https://doi.org/10.1051/0004-6361/202243688",
+        "label": "Creevey et al. (2023), Astronomy & Astrophysics 674 A26",
+        "checked": "2026-10-03",
+        "locator": "gaiadr3.astrophysical_parameters, Gaia DR3 4988158666636598272: radius_flame, mass_flame, teff_gspphot"
+      },
+      {
+        "catalogueId": "wikipedia-hd-6434",
+        "url": "https://en.wikipedia.org/wiki/HD_6434",
+        "label": "Wikipedia, \"HD 6434\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1370779048",
+        "quote": "Yellow dwarfs such as this are not very luminous, so at a distance of 138 light-years it is not visible to the unaided eye."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its temperature",
+      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

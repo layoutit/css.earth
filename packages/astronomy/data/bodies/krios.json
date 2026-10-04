@@ -1,0 +1,30 @@
+{
+ "id": "krios",
+ "classification": "star",
+ "order": 5592,
+ "physical": {
+  "name": "Krios",
+  "horizonsCode": null,
+  "meanRadiusKm": 738361.1,
+  "gravitationalParameterKm3PerS2": 131280273745.22679,
+  "parent": null,
+  "effectiveTemperatureK": 5789
+ },
+ "physicalNotes": "Radius 1.061 (1.040 to 1.083) from Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26; astrophysical_parameters of the same source): 738,361 km at 695,700 km per solar radius. Mass 0.989 (0.949 to 1.029) from Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26; astrophysical_parameters of the same source); GM is that mass times the JPL solar GM. Temperature 5789 +/- 5.9 K from Andrae et al. (2023), A&A 674, A27 (Gaia DR3 GSP-Phot), astrophysical_parameters of Gaia DR3 1999551612692096128: teff_gspphot 5789.4478 K (16th-84th percentiles 5785.1587-5797.017), the temperature FLAME used (https://doi.org/10.1051/0004-6361/202243462). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 357.9800733331698,
+  "declinationDegrees": 59.713369934750304,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 102.50225681039431,
+  "properMotionRaMasPerYear": 89.33190047512153,
+  "properMotionDecMasPerYear": -29.318682815361083,
+  "radialVelocityKmPerS": -20.7,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 1999551612692096128 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/krios/source/photometry/gaia-dr3-source.csv; cross-identification HD 240429: https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia+DR3+1999551612692096128",
+   "distance": "Gaia DR3 parallax 9.7559 +/- 0.0111 mas (same row, RUWE 0.86): 102.50 pc, no zero-point correction",
+   "properMotion": "Gaia DR3 (same row): 89.332, -29.319 mas/yr",
+   "radialVelocity": "SIMBAD's radial velocity for Gaia DR3 1999551612692096128 (quality D), from 2018ApJS..237...38B; Gaia DR3 measures none (https://ui.adsabs.harvard.edu/abs/2018ApJS..237...38B/abstract)"
+  }
+ }
+}

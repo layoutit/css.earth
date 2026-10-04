@@ -1,0 +1,147 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "amadioha",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Amadioha",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 751149
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/amadioha-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Amadioha",
+      "classification": "star",
+      "color": "#ffecdd",
+      "distanceAu": 12877948.2,
+      "description": "A star about 62 parsecs away, 1.1 times the Sun's width, measured by Gaia.",
+      "systemName": "Amadioha system",
+      "aliases": [
+        "Gaia DR3 2896745747966986240",
+        "HD 43197",
+        "HIP 29550"
+      ],
+      "order": 5483,
+      "context": {
+        "order": 5480
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -99045408929292670,
+        1667196842255987700,
+        -960260097318340100
+      ],
+      "presentationToReference": [
+        -0.051411710044360376,
+        0.02955530612162863,
+        0.9982401113711928,
+        0.8653953934990473,
+        -0.4975682193182117,
+        0.0593016022981962,
+        -0.49844523167640403,
+        -0.8669211907691269,
+        -0.000003807247765004634
+      ],
+      "orbitUpReference": [
+        -0.02955530612162863,
+        0.4975682193182117,
+        0.8669211907691269
+      ],
+      "metersPerUnit": 2423061.290322581,
+      "bodyRadiusM": 751149000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

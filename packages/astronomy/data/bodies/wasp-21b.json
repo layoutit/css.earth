@@ -1,0 +1,28 @@
+{
+ "id": "wasp-21b",
+ "classification": "exoplanet",
+ "order": 5711,
+ "physical": {
+  "name": "WASP-21 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 76496.4,
+  "gravitationalParameterKm3PerS2": 38005959.57,
+  "parent": "wasp-21"
+ },
+ "physicalNotes": "Radius 1.07 Jupiter radii from Bouchy et al. 2010 (2010arXiv1006.2605B), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2010arXiv1006.2605B/abstract): 76,496.4 km at 71,492 km per Jupiter radius. GM from the mass 0.3 Jupiter masses (Bouchy et al. 2010, the mass the NASA Exoplanet Archive's composite table adopts (2010arXiv1006.2605B), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2010arXiv1006.2605B/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 4.32250416,
+  "semiMajorAxisStellarRadii": 10.54,
+  "inclinationDegrees": 88.75,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 57738.04027,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Kokori et al. 2023 (2023ApJS..265....4K), via the NASA Exoplanet Archive ps table (pl_refname KOKORI_ET_AL__2023): P 4.32250416 d",
+   "shape": "Kokori et al. 2023 (2023ApJS..265....4K), via the NASA Exoplanet Archive ps table (pl_refname KOKORI_ET_AL__2023): a/R* 10.54; Bouchy et al. 2010 (2010arXiv1006.2605B), via the NASA Exoplanet Archive ps table (pl_refname BOUCHY_ET_AL__2010): inclination 88.75 degrees",
+   "eccentricity": "Bouchy et al. 2010 (2010arXiv1006.2605B), via the NASA Exoplanet Archive ps table (pl_refname BOUCHY_ET_AL__2010): e 0",
+   "phase": "Kokori et al. 2023 (2023ApJS..265....4K), via the NASA Exoplanet Archive ps table (pl_refname KOKORI_ET_AL__2023): transit mid-time 2457738.54027 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

@@ -49,12 +49,17 @@ export function sentences(extract: string): string[] {
  * and the sentence after it for the introduction. Without a naming sentence, the lead's first two when the article is the
  * body's own (`mustName` false), and nothing when it is another body's article. Sentences over the quote budget are skipped. */
 export function pickQuotes(extract: string, names: readonly string[], mustName = false): { card?: string; introduction?: string } {
-  const all = sentences(extract).filter(s => s.length <= QUOTE_BUDGET), lower = names.map(n => n.toLowerCase());
+  // The summary API drops a pronunciation's IPA and leaves its frame ("pronounced ;", "pronounced ."): such a sentence is not quoted.
+  const all = sentences(extract).filter(s => s.length <= QUOTE_BUDGET && !/\bpronounced\s*[;,.)]/u.test(s)), lower = names.map(n => n.toLowerCase());
   const at = all.findIndex(s => lower.some(n => s.toLowerCase().includes(n)));
   if (at < 0 && mustName) return {};
   const first = at >= 0 ? at : 0;
   return { ...(all[first] ? { card: all[first] } : {}), ...(all[first + 1] ? { introduction: all[first + 1] } : {}) };
 }
+
+/** A radius in solar radii as a width a reader compares with the Sun's: "6.2 times", "85% of", or "the Sun's width" itself. */
+export const sunWidth = (radius: number) => radius >= 1.05 ? `${radius >= 10 ? Math.round(radius) : radius.toFixed(1)} times the Sun's width`
+  : radius <= 0.95 ? `${Math.round(radius * 100)}% of the Sun's width` : `the Sun's width`;
 
 /** Quotes for a body: its own article by `titles` in order (a planet's, then its host's, whose lead names the planet), or
  * none. */

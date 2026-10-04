@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "schedar",
+  "card": {
+    "text": "A star 70 parsecs away, 41 times the Sun's width, measured from its light.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 3179: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-alpha-cassiopeiae",
+        "url": "https://en.wikipedia.org/wiki/Alpha_Cassiopeiae",
+        "label": "Wikipedia, \"Alpha Cassiopeiae\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374937488",
+        "quote": "Alpha Cassiopeiae is a star in the northern constellation of Cassiopeia."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its brightness, measured band by band, gives 734 times the Sun's luminosity at 4,690 K, so 41.078 solar radii.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 3179: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-alpha-cassiopeiae",
+        "url": "https://en.wikipedia.org/wiki/Alpha_Cassiopeiae",
+        "label": "Wikipedia, \"Alpha Cassiopeiae\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374937488",
+        "quote": "Though listed as the \"alpha star\" by Johann Bayer, α Cas's visual brightness closely matches the 'beta' (β) star in the constellation and it may appear marginally brighter or dimmer, depending on which passband is used."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its spectrum",
+      "summary": "The color of the star's light."
+    }
+  }
+}

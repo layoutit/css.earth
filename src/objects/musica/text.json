@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "musica",
+  "card": {
+    "text": "A star 75 parsecs away, 7.8 times the Sun's width, measured from its light.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 103527: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-18-delphini",
+        "url": "https://en.wikipedia.org/wiki/18_Delphini",
+        "label": "Wikipedia, \"18 Delphini\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1360898586",
+        "quote": "18 Delphini, also named Musica, is a binary star in the constellation of Delphinus of the low northern hemisphere."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its brightness, measured band by band, gives 34 times the Sun's luminosity at 5,020 K, so 7.775 solar radii.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 103527: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-18-delphini",
+        "url": "https://en.wikipedia.org/wiki/18_Delphini",
+        "label": "Wikipedia, \"18 Delphini\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1360898586",
+        "quote": "The primary has a Sun-like golden hue and is faintly visible to the naked eye with an apparent visual magnitude of 5.506."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its Gaia spectrum",
+      "summary": "The color of the star's light."
+    }
+  }
+}

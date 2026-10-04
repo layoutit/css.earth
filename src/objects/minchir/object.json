@@ -1,0 +1,148 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "minchir",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Minchir",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 17958799.8
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/minchir-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Minchir",
+      "classification": "star",
+      "color": "#ffdcb3",
+      "distanceAu": 23573240,
+      "description": "A star 114 parsecs away, 26 times the Sun's width, measured from its light.",
+      "systemName": "Minchir system",
+      "aliases": [
+        "Sigma Hydrae",
+        "HD 73471",
+        "HIP 42402",
+        "HR 3418"
+      ],
+      "order": 5618,
+      "context": {
+        "order": 5615
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -2248277936446034200,
+        2709104722958016000,
+        205538637163843400
+      ],
+      "presentationToReference": [
+        -0.6375368419354377,
+        -0.037221998807211235,
+        0.7695201738614686,
+        0.7682119908526087,
+        0.0448512551670494,
+        0.6386225035341394,
+        0.05828475173885894,
+        -0.9982999988554223,
+        -5.823116000924714e-8
+      ],
+      "orbitUpReference": [
+        0.037221998807211235,
+        -0.0448512551670494,
+        0.9982999988554223
+      ],
+      "metersPerUnit": 57931612.258064516,
+      "bodyRadiusM": 17958799800
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

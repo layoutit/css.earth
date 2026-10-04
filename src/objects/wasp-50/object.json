@@ -6,7 +6,7 @@
   "properties": {
     "preparation": {
       "schema": "cssearth-object-preparation@1",
-      "label": "WASP-50",
+      "label": "Chaophraya",
       "steps": [
         "verify-sources",
         "assets",
@@ -95,12 +95,15 @@
       }
     },
     "catalog": {
-      "name": "WASP-50",
+      "name": "Chaophraya",
       "classification": "star",
       "color": "#ffebde",
       "distanceAu": 37595044.2,
       "description": "WASP-50 b crosses WASP-50 as seen from Earth, which is how it was found.",
-      "systemName": "WASP-50 system",
+      "systemName": "Chaophraya system",
+      "aliases": [
+        "WASP-50"
+      ],
       "order": 4820,
       "context": {
         "order": 4817

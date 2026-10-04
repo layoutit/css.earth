@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "bubup",
+  "card": {
+    "text": "A star about 38 parsecs away, 1.6 times the Sun's width, measured by Gaia.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202243688",
+        "url": "https://doi.org/10.1051/0004-6361/202243688",
+        "label": "Creevey et al. (2023), Astronomy & Astrophysics 674 A26",
+        "checked": "2026-10-03",
+        "locator": "gaiadr3.astrophysical_parameters, Gaia DR3 4650314511916109696: radius_flame, mass_flame, teff_gspphot"
+      },
+      {
+        "catalogueId": "wikipedia-hd-38283",
+        "url": "https://en.wikipedia.org/wiki/HD_38283",
+        "label": "Wikipedia, \"HD 38283\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1367126879",
+        "quote": "HD 38283, or Bubup, is a star in the southern circumpolar constellation Mensa."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Gaia's parallax, brightness and spectrum give it 1.6 solar radii and 1.08 solar masses (FLAME) and 5,873 K at its surface (GSP-Phot).",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202243688",
+        "url": "https://doi.org/10.1051/0004-6361/202243688",
+        "label": "Creevey et al. (2023), Astronomy & Astrophysics 674 A26",
+        "checked": "2026-10-03",
+        "locator": "gaiadr3.astrophysical_parameters, Gaia DR3 4650314511916109696: radius_flame, mass_flame, teff_gspphot"
+      },
+      {
+        "catalogueId": "wikipedia-hd-38283",
+        "url": "https://en.wikipedia.org/wiki/HD_38283",
+        "label": "Wikipedia, \"HD 38283\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1367126879",
+        "quote": "With a magnitude of 6.70, it's invisible to the naked eye but can be seen with binoculars."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its temperature",
+      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

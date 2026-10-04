@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1051-0004-6361-202244429",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Gressier et al. (2023): The <i>Hubble</i> PanCET program: The near-ultraviolet transmission spectrum of WASP-79b",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2302.08962"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/202244429"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2023A&A...672A..34G"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...672A..34G",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/202244429",
+      "label": "Astronomy & Astrophysics 672 A34"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...672A..34G",
+      "checkedOn": "2026-10-03",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Gressier et al. (2023), Astronomy & Astrophysics 672 A34",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2023A&A...672A..34G"
+    }
+  ],
+  "publisher": "Astronomy & Astrophysics 672 A34",
+  "creators": [
+    "A. Gressier",
+    "A. Lecavelier des Etangs",
+    "D. K. Sing",
+    "et al."
+  ],
+  "publicationDate": "2023"
+}

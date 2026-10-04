@@ -1,0 +1,148 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "alterf",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Alterf",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 32238738
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/alterf-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Alterf",
+      "classification": "star",
+      "color": "#ffc889",
+      "distanceAu": 20813823.7,
+      "description": "A star 101 parsecs away, 46 times the Sun's width, measured from its light.",
+      "systemName": "Alterf system",
+      "aliases": [
+        "HD 82308",
+        "HIP 46750",
+        "HR 3773",
+        "Lambda Leonis"
+      ],
+      "order": 5481,
+      "context": {
+        "order": 5478
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -2287469478461584000,
+        1728119076544371700,
+        1215005603115255000
+      ],
+      "presentationToReference": [
+        -0.7346452563276725,
+        -0.3113518139759113,
+        0.602790506966689,
+        0.5550039001214065,
+        0.2352170617521705,
+        0.7978994953693751,
+        0.39021406715452506,
+        -0.9207241616220273,
+        -3.724429401644924e-7
+      ],
+      "orbitUpReference": [
+        0.3113518139759113,
+        -0.2352170617521705,
+        0.9207241616220273
+      ],
+      "metersPerUnit": 103995929.03225806,
+      "bodyRadiusM": 32238738000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

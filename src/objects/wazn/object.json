@@ -1,0 +1,148 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "wazn",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Wazn",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 7295805.9
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/wazn-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Wazn",
+      "classification": "star",
+      "color": "#ffdcb1",
+      "distanceAu": 5513865.8,
+      "description": "A star 27 parsecs away, 10 times the Sun's width, measured from its light.",
+      "systemName": "Wazn system",
+      "aliases": [
+        "HD 39425",
+        "HIP 27628",
+        "HR 2040",
+        "Beta Columbae"
+      ],
+      "order": 5748,
+      "context": {
+        "order": 5745
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        26388214077691860,
+        668787796185046500,
+        -482104574481592800
+      ],
+      "presentationToReference": [
+        0.03199056043712894,
+        -0.02304593529009958,
+        0.9992224421566618,
+        0.8107747033924579,
+        -0.584028996926613,
+        -0.03942728861799069,
+        -0.58448351934147,
+        -0.8114055802220606,
+        -0.00000164642601566048
+      ],
+      "orbitUpReference": [
+        0.02304593529009958,
+        0.584028996926613,
+        0.8114055802220606
+      ],
+      "metersPerUnit": 23534857.741935484,
+      "bodyRadiusM": 7295805900
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

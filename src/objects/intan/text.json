@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "intan",
+  "card": {
+    "text": "A star 48 parsecs away, 77% of the Sun's width, measured from its light.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 15578: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-hd-20868",
+        "url": "https://en.wikipedia.org/wiki/HD_20868",
+        "label": "Wikipedia, \"HD 20868\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1367951650",
+        "quote": "HD 20868 is a star in the southern constellation Fornax."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its brightness, measured band by band, gives 0.267 times the Sun's luminosity at 4,729 K, so 0.771 solar radii.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 15578: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-hd-20868",
+        "url": "https://en.wikipedia.org/wiki/HD_20868",
+        "label": "Wikipedia, \"HD 20868\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1367951650",
+        "quote": "With an apparent visual magnitude of 9.92, it is much too dim to be visible to the naked eye."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its Gaia spectrum",
+      "summary": "The color of the star's light."
+    }
+  }
+}

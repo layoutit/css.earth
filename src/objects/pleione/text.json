@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "pleione",
+  "card": {
+    "text": "A star 117 parsecs away, 5.7 times the Sun's width, measured from its light.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 17851: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-pleione-star",
+        "url": "https://en.wikipedia.org/wiki/Pleione_(star)",
+        "label": "Wikipedia, \"Pleione (star)\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374878234",
+        "quote": "It has the variable star designation BU Tauri and the Flamsteed designation 28 Tauri."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its brightness, measured band by band, gives 95 times the Sun's luminosity at 7,548 K, so 5.695 solar radii.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 17851: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-pleione-star",
+        "url": "https://en.wikipedia.org/wiki/Pleione_(star)",
+        "label": "Wikipedia, \"Pleione (star)\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374878234",
+        "quote": "Pleione is located close on the sky to the brighter star Atlas, so is difficult for stargazers to distinguish with the naked eye despite being a fifth magnitude star."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its spectrum",
+      "summary": "The color of the star's light."
+    }
+  }
+}

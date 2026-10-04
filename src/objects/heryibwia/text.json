@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "heryibwia",
+  "card": {
+    "text": "A star 45 parsecs away, 58 times the Sun's width, measured from its light.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 89642: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-eta-sagittarii",
+        "url": "https://en.wikipedia.org/wiki/Eta_Sagittarii",
+        "label": "Wikipedia, \"Eta Sagittarii\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374782343",
+        "quote": "Eta Sagittarii, also named Heryibwia, is a binary star system in the southern zodiac constellation of Sagittarius."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its brightness, measured band by band, gives 526 times the Sun's luminosity at 3,638 K, so 57.827 solar radii.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 89642: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-eta-sagittarii",
+        "url": "https://en.wikipedia.org/wiki/Eta_Sagittarii",
+        "label": "Wikipedia, \"Eta Sagittarii\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374782343",
+        "quote": "Based upon parallax measurements, it is located at a distance of 146 light-years from Earth."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its spectrum",
+      "summary": "The color of the star's light."
+    }
+  }
+}

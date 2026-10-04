@@ -1,0 +1,149 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "celaeno",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Celaeno",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 2385755
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/celaeno-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Celaeno",
+      "classification": "star",
+      "color": "#c2d2ff",
+      "distanceAu": 27929341.2,
+      "description": "A star about 140 parsecs away, 3.4 times the Sun's width, measured by Gaia.",
+      "systemName": "Celaeno system",
+      "aliases": [
+        "Gaia DR3 65287458566524928",
+        "HR 1140",
+        "16 Tauri",
+        "HIP 17489",
+        "HD 23288"
+      ],
+      "order": 5514,
+      "context": {
+        "order": 5511
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        2118495455864436000,
+        3164697011708754400,
+        1718654761045288700
+      ],
+      "presentationToReference": [
+        0.5070385463781107,
+        0.22882273949597956,
+        0.8309946247577825,
+        0.757435362018895,
+        0.34182413422666896,
+        -0.5562804451205292,
+        0.411343633535367,
+        -0.911480342711648,
+        4.223930461768376e-7
+      ],
+      "orbitUpReference": [
+        -0.22882273949597956,
+        -0.34182413422666896,
+        0.911480342711648
+      ],
+      "metersPerUnit": 7695983.870967742,
+      "bodyRadiusM": 2385755000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

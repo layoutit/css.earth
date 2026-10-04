@@ -1,0 +1,31 @@
+{
+  "schema": "cssearth-stellar-photometric-color@1",
+  "objectId": "rukbat",
+  "spectrum": "measured",
+  "measuredSpectrum": {
+    "source": "Burnashev (1985), Abastumani Astrophys. Obs. Bull. 59, 83; VizieR III/126, part2 record 261 (BS 7348)",
+    "path": "photometry/III_126_part2.dat.gz",
+    "format": "burnashev-records",
+    "wavelength": {
+      "column": "lambda",
+      "unit": "angstrom"
+    },
+    "flux": {
+      "column": "261",
+      "kind": "log10",
+      "missing": -9.999999
+    },
+    "service": "https://cdsarc.cds.unistra.fr/ftp/III/126/part2.dat.gz",
+    "checked": "2026-10-03",
+    "gaps": [
+      {
+        "fromNm": 737.5,
+        "toNm": 780,
+        "reason": "the spectrum ends at 737.5 nm; the last value is held to 780 nm, where the observer adds little"
+      }
+    ],
+    "note": "Ground-based scans of the Chilean catalogue in Burnashev's compilation, as log10 flux."
+  },
+  "whitePoint": "sRGB D65",
+  "normalization": "brightest linear sRGB channel = 1"
+}

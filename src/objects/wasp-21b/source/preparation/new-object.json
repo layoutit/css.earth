@@ -1,0 +1,31 @@
+{
+  "host": "wasp-21",
+  "planets": [
+    {
+      "id": "wasp-21b",
+      "name": "WASP-21 b",
+      "description": "Transiting planet of Tangra with a 4.32-day year, found in 2010.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2010arXiv1006.2605B/abstract",
+        "credit": "Bouchy et al. 2010"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "BOUCHY_ET_AL__2010"
+      },
+      "text": {
+        "card": "WASP-21 b was found in 2010 by SuperWASP as it crossed its star.",
+        "introduction": "It is the only planet known around Tangra. Its orbit and size follow Bouchy et al. 2010's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname BOUCHY_ET_AL__2010): disc_year 2010, disc_facility SuperWASP, sy_pnum 1; pl_orbper 4.32250416, pl_radj 1.07, pl_bmassj 0.3",
+        "quotes": {
+          "url": "https://en.wikipedia.org/wiki/WASP-21",
+          "title": "WASP-21",
+          "revision": "1370791513",
+          "card": "Kinematically, WASP-21 belongs to the thick disk of the Milky Way.",
+          "introduction": "It has an exoplanet named WASP-21b."
+        }
+      },
+      "order": 5711
+    }
+  ]
+}

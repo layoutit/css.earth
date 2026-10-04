@@ -1,0 +1,51 @@
+{
+  "id": "xo-5",
+  "name": "Absolutno",
+  "system": "Absolutno system",
+  "description": "Star of 5,430 K, 276 parsecs away, with 1 transiting planet.",
+  "aliases": [
+    "XO-5",
+    "TOI-5373"
+  ],
+  "featured": true,
+  "target": "XO-5",
+  "gaia": "920308932010648448",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2015AcA....65..117S/abstract",
+    "credit": "Smith 2015"
+  },
+  "radius": {
+    "value": 1.13,
+    "source": "Smith 2015, the stellar radius of the default parameter set of XO-5 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2015AcA....65..117S/abstract",
+    "uncertainty": 0.03
+  },
+  "mass": {
+    "value": 1.04,
+    "source": "Smith 2015, the stellar mass of the default parameter set of XO-5 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2015AcA....65..117S/abstract",
+    "uncertainty": 0.03
+  },
+  "temperature": {
+    "value": 5430,
+    "source": "Smith 2015, the stellar temperature of the default parameter set of XO-5 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2015AcA....65..117S/abstract",
+    "uncertainty": 70
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "XO-5 b crosses Absolutno as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Smith 2015.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname SMITH_2015): st_teff 5430, st_rad 1.13, st_mass 1.04",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/XO-5",
+      "title": "XO-5",
+      "revision": "1374514051",
+      "card": "XO-5, formally named Absolutno, is a likely binary star system, made up of a G-type dwarf and a red dwarf companion, located approximately 893 light-years away from Earth in the Lynx constellation.",
+      "introduction": "It has a magnitude of about 12 and cannot be seen with the naked eye but is visible through a small telescope."
+    }
+  },
+  "notes": [],
+  "order": 5460
+}

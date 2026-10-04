@@ -1,0 +1,148 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "musica",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Musica",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 5409067.5
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/musica-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Musica",
+      "classification": "star",
+      "color": "#ffe8d2",
+      "distanceAu": 15531955.6,
+      "description": "A star 75 parsecs away, 7.8 times the Sun's width, measured from its light.",
+      "systemName": "Musica system",
+      "aliases": [
+        "HD 199665",
+        "HIP 103527",
+        "HR 8030",
+        "18 Delphini"
+      ],
+      "order": 5634,
+      "context": {
+        "order": 5631
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1602597015009827300,
+        -1624695532750611200,
+        436944077197035600
+      ],
+      "presentationToReference": [
+        0.6897196983463376,
+        0.13205970524347072,
+        -0.7119318590736371,
+        -0.69923037560914,
+        -0.1338799977210259,
+        -0.7022485514657324,
+        0.18805217238452318,
+        -0.9821590403092697,
+        -4.85657469985962e-7
+      ],
+      "orbitUpReference": [
+        -0.13205970524347072,
+        0.1338799977210259,
+        0.9821590403092697
+      ],
+      "metersPerUnit": 17448604.83870968,
+      "bodyRadiusM": 5409067500
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

@@ -2,7 +2,7 @@
   "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "wasp-69",
-  "displayName": "WASP-69",
+  "displayName": "Wouri",
   "panel": {
     "facts": [
       {
@@ -13,7 +13,7 @@
           "catalogueId": "doi-10-1051-0004-6361-202452525",
           "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...700A...7A",
           "label": "Allart et al. (2025), Astronomy & Astrophysics 700 A7",
-          "checked": "2026-09-29",
+          "checked": "2026-10-03",
           "path": "source/measurements.json",
           "locator": "radiusKm; radiusSource"
         }
@@ -26,7 +26,7 @@
           "catalogueId": "gaia-dr3-wasp-69",
           "url": "https://gea.esac.esa.int/archive/",
           "label": "Gaia DR3 parallax",
-          "checked": "2026-09-29",
+          "checked": "2026-10-03",
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }

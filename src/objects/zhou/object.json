@@ -1,0 +1,149 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "zhou",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Zhou",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 2540000.7
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/zhou-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Zhou",
+      "classification": "star",
+      "color": "#bfcfff",
+      "distanceAu": 9808099.2,
+      "description": "A star 48 parsecs away, 3.7 times the Sun's width, measured from its light.",
+      "systemName": "Zhou system",
+      "aliases": [
+        "Chow",
+        "HD 141003",
+        "HIP 77233",
+        "HR 5867",
+        "Beta Serpentis"
+      ],
+      "order": 5758,
+      "context": {
+        "order": 5755
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -779707246784058600,
+        -1180129381898884400,
+        390172656238748700
+      ],
+      "presentationToReference": [
+        -0.531399345098854,
+        -0.14658817470085794,
+        -0.8343420420105773,
+        -0.8043018495247567,
+        -0.2218674782798476,
+        0.5512470924483837,
+        0.26591966997490907,
+        -0.963995191440088,
+        9.073737129601964e-7
+      ],
+      "orbitUpReference": [
+        0.14658817470085794,
+        0.2218674782798476,
+        0.963995191440088
+      ],
+      "metersPerUnit": 8193550.645161291,
+      "bodyRadiusM": 2540000700
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

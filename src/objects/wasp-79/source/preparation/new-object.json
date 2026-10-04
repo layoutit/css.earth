@@ -1,0 +1,50 @@
+{
+  "id": "wasp-79",
+  "name": "Montuno",
+  "system": "Montuno system",
+  "description": "Star of 6,600 K, 247 parsecs away, with 1 transiting planet.",
+  "aliases": [
+    "WASP-79"
+  ],
+  "featured": true,
+  "target": "WASP-79",
+  "gaia": "4884779765893739904",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...672A..34G/abstract",
+    "credit": "Gressier et al. 2023"
+  },
+  "radius": {
+    "value": 1.51,
+    "source": "Gressier et al. 2023, the stellar radius of the default parameter set of WASP-79 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...672A..34G/abstract",
+    "uncertainty": 0.04
+  },
+  "mass": {
+    "value": 1.39,
+    "source": "Gressier et al. 2023, the stellar mass of the default parameter set of WASP-79 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...672A..34G/abstract",
+    "uncertainty": 0.06
+  },
+  "temperature": {
+    "value": 6600,
+    "source": "Gressier et al. 2023, the stellar temperature of the default parameter set of WASP-79 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...672A..34G/abstract",
+    "uncertainty": 100
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "WASP-79 b crosses Montuno as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Gressier et al. 2023.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname GRESSIER_ET_AL__2023): st_teff 6600, st_rad 1.51, st_mass 1.39",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/WASP-79",
+      "title": "WASP-79",
+      "revision": "1375774697",
+      "card": "WASP-79, also named Montuno, is an F-type main-sequence star about 801 light-years away in the constellation Eridanus.",
+      "introduction": "With an apparent magnitude of 10, it is much too faint to be visible to the naked eye."
+    }
+  },
+  "notes": [],
+  "order": 5623
+}

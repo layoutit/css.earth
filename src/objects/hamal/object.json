@@ -1,0 +1,148 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "hamal",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Hamal",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 11055368.7
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/hamal-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Hamal",
+      "classification": "star",
+      "color": "#ffdaab",
+      "distanceAu": 4161901.9,
+      "description": "A star 20 parsecs away, 16 times the Sun's width, measured from its light.",
+      "systemName": "Hamal system",
+      "aliases": [
+        "HD 12929",
+        "HIP 9884",
+        "HR 617",
+        "Alpha Arietis"
+      ],
+      "order": 5557,
+      "context": {
+        "order": 5554
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        485434405410560000,
+        300922030508472700,
+        247880307374372740
+      ],
+      "presentationToReference": [
+        0.7796658494475439,
+        0.33841365732476775,
+        0.5268750893155932,
+        0.48331685624869225,
+        0.20976695729642367,
+        -0.8499427275366742,
+        0.398153211303288,
+        -0.917318930450405,
+        0.000012892023286163287
+      ],
+      "orbitUpReference": [
+        -0.33841365732476775,
+        -0.20976695729642367,
+        0.917318930450405
+      ],
+      "metersPerUnit": 35662479.67741936,
+      "bodyRadiusM": 11055368700
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

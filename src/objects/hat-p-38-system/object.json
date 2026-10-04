@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "hat-p-38-system",
+  "parent": "milky-way",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "hat-p-38"
+    },
+    "catalog": {
+      "name": "Horna system",
+      "systemName": "Horna system",
+      "classification": "planetary-system",
+      "color": "#ffe5d2",
+      "distanceAu": 51894170.9,
+      "description": "HAT-P-38 b crosses Horna as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        5353126325677590000,
+        3801972944003075600,
+        4142125868904636000
+      ],
+      "presentationToReference": [
+        0.6895459256044739,
+        0.43500536929222816,
+        0.5790481371779048,
+        0.4897390409473173,
+        0.3089537456366811,
+        -0.815293355074765,
+        0.5335560778908542,
+        -0.8457646905280435,
+        0.0000013158600949699354
+      ],
+      "orbitUpReference": [
+        -0.43500536929222816,
+        -0.3089537456366811,
+        0.8457646905280435
+      ],
+      "metersPerUnit": 2071390.6451612904,
+      "bodyRadiusM": 642131100
+    }
+  }
+}

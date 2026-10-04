@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "botein",
+  "card": {
+    "text": "A star 52 parsecs away, 9.7 times the Sun's width, measured from its light.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 14838: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-delta-arietis",
+        "url": "https://en.wikipedia.org/wiki/Delta_Arietis",
+        "label": "Wikipedia, \"Delta Arietis\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1375700532",
+        "quote": "Delta Arietis is a star in the northern constellation of Aries, positioned 1.8 degrees north of the ecliptic."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its brightness, measured band by band, gives 50 times the Sun's luminosity at 4,921 K, so 9.745 solar radii.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 14838: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-delta-arietis",
+        "url": "https://en.wikipedia.org/wiki/Delta_Arietis",
+        "label": "Wikipedia, \"Delta Arietis\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1375700532",
+        "quote": "Its identifier is a Bayer designation that is Latinized from δ Arietis, and abbreviated Delta Ari or δ Ari."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its spectrum",
+      "summary": "The color of the star's light."
+    }
+  }
+}

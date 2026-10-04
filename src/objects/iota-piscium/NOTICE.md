@@ -1,4 +1,4 @@
-# Iota Piscium credits
+# Puwuh Atarung credits
 
 Radius, mass and temperature: Radius 1.595 +/- 0.014 solar radii from Boyajian et al. (2012), ApJ 746, 101, HD 222368: radius in solar radii, from the limb-darkened angular diameter 1.082 +/- 0.009 mas (CHARA) and the Hipparcos parallax, 1.595 +/- 0.014 (https://doi.org/10.1088/0004-637X/746/1/101); Mass 1.268 +/- 0.009 solar masses from Boyajian et al. (2012), ApJ 746, 101, HD 222368: mass in solar masses, from Yonsei-Yale isochrones at the measured radius and temperature (a model value), 1.268 +/- 0.009 (https://doi.org/10.1088/0004-637X/746/1/101); temperature from Boyajian et al. (2012), ApJ 746, 101, HD 222368: effective temperature in K, from the angular diameter and the bolometric flux, 6288 +/- 37.
 

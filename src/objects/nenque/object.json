@@ -1,0 +1,147 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "nenque",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Nenque",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 788450
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/nenque-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Nenque",
+      "classification": "star",
+      "color": "#fff1ea",
+      "distanceAu": 8715248,
+      "description": "A star about 42 parsecs away, 1.1 times the Sun's width, measured by Gaia.",
+      "systemName": "Nenque system",
+      "aliases": [
+        "Gaia DR3 4988158666636598272",
+        "HD 6434",
+        "HIP 5054"
+      ],
+      "order": 5643,
+      "context": {
+        "order": 5640
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        966362343756716400,
+        280126260717360260,
+        -829169468268679400
+      ],
+      "presentationToReference": [
+        0.7412157055485273,
+        -0.6108040705363214,
+        0.27841994408529636,
+        0.2148614187224165,
+        -0.1770656263658845,
+        -0.9604594393852597,
+        -0.6359511369537674,
+        -0.771729325201471,
+        0.000005594018320060999
+      ],
+      "orbitUpReference": [
+        0.6108040705363214,
+        0.1770656263658845,
+        0.771729325201471
+      ],
+      "metersPerUnit": 2543387.0967741935,
+      "bodyRadiusM": 788450000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

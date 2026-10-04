@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hat-p-42b",
+  "card": {
+    "text": "HAT-P-42 b was found in 2012 by HATNet as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-201220993",
+        "url": "https://ui.adsabs.harvard.edu/abs/2013A%26A...558A..86B/abstract",
+        "label": "Boisse et al. 2013",
+        "checked": "2026-10-03",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname BOISSE_ET_AL__2013): disc_year 2012, disc_facility HATNet, sy_pnum 1; pl_orbper 4.64183885, pl_radj 1.28, pl_bmassj 1.044"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is the only planet known around Lerna. Its orbit and size follow Boisse et al. 2013's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-201220993",
+        "url": "https://ui.adsabs.harvard.edu/abs/2013A%26A...558A..86B/abstract",
+        "label": "Boisse et al. 2013",
+        "checked": "2026-10-03",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname BOISSE_ET_AL__2013): disc_year 2012, disc_facility HATNet, sy_pnum 1; pl_orbper 4.64183885, pl_radj 1.28, pl_bmassj 1.044"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

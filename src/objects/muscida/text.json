@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "muscida",
+  "card": {
+    "text": "A star about 56 parsecs away, 15 times the Sun's width, measured by Gaia.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202243688",
+        "url": "https://doi.org/10.1051/0004-6361/202243688",
+        "label": "Creevey et al. (2023), Astronomy & Astrophysics 674 A26",
+        "checked": "2026-10-03",
+        "locator": "gaiadr3.astrophysical_parameters, Gaia DR3 1041808368494264576: radius_flame, mass_flame, teff_gspphot"
+      },
+      {
+        "catalogueId": "wikipedia-omicron-ursae-majoris",
+        "url": "https://en.wikipedia.org/wiki/Omicron_Ursae_Majoris",
+        "label": "Wikipedia, \"Omicron Ursae Majoris\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374590787",
+        "quote": "Omicron Ursae Majoris, formally named Muscida, is a star system in the northern circumpolar constellation of Ursa Major."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Gaia's parallax, brightness and spectrum give it 14.9 solar radii and 3.30 solar masses (FLAME) and 5,114 K at its surface (GSP-Phot).",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202243688",
+        "url": "https://doi.org/10.1051/0004-6361/202243688",
+        "label": "Creevey et al. (2023), Astronomy & Astrophysics 674 A26",
+        "checked": "2026-10-03",
+        "locator": "gaiadr3.astrophysical_parameters, Gaia DR3 1041808368494264576: radius_flame, mass_flame, teff_gspphot"
+      },
+      {
+        "catalogueId": "wikipedia-omicron-ursae-majoris",
+        "url": "https://en.wikipedia.org/wiki/Omicron_Ursae_Majoris",
+        "label": "Wikipedia, \"Omicron Ursae Majoris\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374590787",
+        "quote": "It has an apparent visual magnitude of +3.35 and is located at a distance of around 179 light-years from the Sun."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its temperature",
+      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "telum",
+  "entries": [
+    {
+      "id": "placement",
+      "subject": "Placement",
+      "status": "included",
+      "finding": "Gaia DR3 source 1823067317695766784: position at J2016.0. Distance: McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 98337: distance 79.239 pc, the paper's parallax inverted (Gaia DR1's where it revised the star's, else the Hipparcos reduction of van Leeuwen 2007; section 2.3; fractional uncertainty 0.014), at which the luminosity and radius hold (https://doi.org/10.1093/mnras/stx1433): 79.239 +/- 1.109 pc; Gaia DR3 parallax 11.3375 +/- 0.1652 mas (same row, RUWE 8.19), 68.6 standard errors, is not used. Proper motion: Gaia DR3 (same row): 65.005, 22.721 mas/yr. Radial velocity from SIMBAD's radial velocity for Gaia DR3 1823067317695766784 (quality A), from 2022A&A...658A..14C; Gaia DR3 measures none.",
+      "evidence": [
+        "https://gea.esac.esa.int/archive/",
+        "https://doi.org/10.1093/mnras/stx1433",
+        "https://ui.adsabs.harvard.edu/abs/2022A&A...658A..14C/abstract"
+      ]
+    },
+    {
+      "id": "radius-mass-and-temperature",
+      "subject": "Radius, mass and temperature",
+      "status": "included",
+      "finding": "Radius 50.917 solar radii from McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 98337: radius 50.917 solar radii, implied by the fitted luminosity 559.03 solar luminosities (fractional uncertainty 0.065) and temperature (https://doi.org/10.1093/mnras/stx1433). No mass is measured, so GM is 0, the records' unpublished value. Temperature 3936 +/- 125 K from McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 98337: effective temperature 3936 +/- 125 K, from the fit of a model atmosphere to the star's spectral energy distribution (goodness of fit Q 0.093).",
+      "evidence": [
+        "https://doi.org/10.1093/mnras/stx1433"
+      ]
+    },
+    {
+      "id": "color",
+      "subject": "Color",
+      "status": "included",
+      "finding": "Kharitonov, Tereshchenko & Knyazeva (1988), Spectrophotometric Catalogue of Stars (Alma-Ata), record 908: HR 7635; VizieR III/202, cross-checked against Gaia DR3 XP spectrum, source 1823067317695766784 (36 levels apart at most, the threshold is 12), through the CIE 1931 2-degree observer: #ffcb8a. Routes tried in order: stis-ngsl: HD 189319 is not in the library; pulkovo: the spectrum was found but gives no color (Pulkovo flux must be finite.); kiehling: HR 7635 is not among its 60 stars; burnashev: BS 7635 is not in part2; kharitonov: used.",
+      "evidence": [
+        "https://cdsarc.cds.unistra.fr/ftp/III/202/catalog.dat",
+        "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=1823067317695766784&FORMAT=csv&DATA_STRUCTURE=RAW&RELEASE=Gaia+DR3"
+      ]
+    }
+  ]
+}

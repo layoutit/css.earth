@@ -1,0 +1,220 @@
+{
+  "schema": "cssearth-measured-spectrum@1",
+  "source": "NASA Exoplanet Archive transitspec, Sotzen et al. 2020",
+  "units": {
+    "x": "um",
+    "y": "%"
+  },
+  "uncertainty": "published 1-sigma, asymmetric (err1, err2)",
+  "observation": "Magellan II Landon Clay Telescope, LDSS-3C; Transiting Exoplanet Survey Satellite, TESS CCD Array; Hubble Space Telescope satellite, Wide Field Camera 3; Spitzer Space Telescope satellite, Infrared Array Camera (IRAC)",
+  "measurements": [
+    {
+      "x": 0.647,
+      "xLow": 0.6245,
+      "xHigh": 0.6695,
+      "y": 1.0725,
+      "minus": 0.0316,
+      "plus": 0.0316
+    },
+    {
+      "x": 0.7,
+      "xLow": 0.675,
+      "xHigh": 0.725,
+      "y": 1.0955,
+      "minus": 0.0206,
+      "plus": 0.0206
+    },
+    {
+      "x": 0.741,
+      "xLow": 0.725,
+      "xHigh": 0.757,
+      "y": 1.1026,
+      "minus": 0.0101,
+      "plus": 0.0101
+    },
+    {
+      "x": 0.797,
+      "xLow": 0.7695,
+      "xHigh": 0.8245,
+      "y": 1.1175,
+      "minus": 0.0073,
+      "plus": 0.0073
+    },
+    {
+      "x": 0.808,
+      "xLow": 0.5855,
+      "xHigh": 1.0305,
+      "y": 1.1396,
+      "minus": 0.014,
+      "plus": 0.014
+    },
+    {
+      "x": 0.85,
+      "xLow": 0.825,
+      "xHigh": 0.875,
+      "y": 1.1209,
+      "minus": 0.0204,
+      "plus": 0.0204
+    },
+    {
+      "x": 0.9,
+      "xLow": 0.875,
+      "xHigh": 0.925,
+      "y": 1.161,
+      "minus": 0.0205,
+      "plus": 0.0205
+    },
+    {
+      "x": 0.95,
+      "xLow": 0.925,
+      "xHigh": 0.975,
+      "y": 1.2071,
+      "minus": 0.0215,
+      "plus": 0.0215
+    },
+    {
+      "x": 1,
+      "xLow": 0.975,
+      "xHigh": 1.025,
+      "y": 1.1282,
+      "minus": 0.0332,
+      "plus": 0.0332
+    },
+    {
+      "x": 1.143,
+      "xLow": 1.1255,
+      "xHigh": 1.1605,
+      "y": 1.1486,
+      "minus": 0.005,
+      "plus": 0.005
+    },
+    {
+      "x": 1.177,
+      "xLow": 1.1595,
+      "xHigh": 1.1945,
+      "y": 1.1514,
+      "minus": 0.0053,
+      "plus": 0.0053
+    },
+    {
+      "x": 1.212,
+      "xLow": 1.1945,
+      "xHigh": 1.2295,
+      "y": 1.1398,
+      "minus": 0.0051,
+      "plus": 0.0051
+    },
+    {
+      "x": 1.248,
+      "xLow": 1.2305,
+      "xHigh": 1.2655,
+      "y": 1.1395,
+      "minus": 0.0047,
+      "plus": 0.0047
+    },
+    {
+      "x": 1.282,
+      "xLow": 1.2645,
+      "xHigh": 1.2995,
+      "y": 1.1385,
+      "minus": 0.0061,
+      "plus": 0.0061
+    },
+    {
+      "x": 1.317,
+      "xLow": 1.2995,
+      "xHigh": 1.3345,
+      "y": 1.1431,
+      "minus": 0.0052,
+      "plus": 0.0052
+    },
+    {
+      "x": 1.353,
+      "xLow": 1.3355,
+      "xHigh": 1.3705,
+      "y": 1.1418,
+      "minus": 0.0051,
+      "plus": 0.0051
+    },
+    {
+      "x": 1.388,
+      "xLow": 1.3705,
+      "xHigh": 1.4055,
+      "y": 1.1634,
+      "minus": 0.0053,
+      "plus": 0.0053
+    },
+    {
+      "x": 1.422,
+      "xLow": 1.4045,
+      "xHigh": 1.4395,
+      "y": 1.1524,
+      "minus": 0.0051,
+      "plus": 0.0051
+    },
+    {
+      "x": 1.458,
+      "xLow": 1.4405,
+      "xHigh": 1.4755,
+      "y": 1.1533,
+      "minus": 0.0061,
+      "plus": 0.0061
+    },
+    {
+      "x": 1.493,
+      "xLow": 1.4755,
+      "xHigh": 1.5105,
+      "y": 1.1532,
+      "minus": 0.0053,
+      "plus": 0.0053
+    },
+    {
+      "x": 1.527,
+      "xLow": 1.5095,
+      "xHigh": 1.5445,
+      "y": 1.1412,
+      "minus": 0.0054,
+      "plus": 0.0054
+    },
+    {
+      "x": 1.562,
+      "xLow": 1.5445,
+      "xHigh": 1.5795,
+      "y": 1.142,
+      "minus": 0.0065,
+      "plus": 0.0065
+    },
+    {
+      "x": 1.598,
+      "xLow": 1.5805,
+      "xHigh": 1.6155,
+      "y": 1.1287,
+      "minus": 0.0056,
+      "plus": 0.0056
+    },
+    {
+      "x": 1.632,
+      "xLow": 1.6145,
+      "xHigh": 1.6495,
+      "y": 1.1201,
+      "minus": 0.0072,
+      "plus": 0.0072
+    },
+    {
+      "x": 3.56,
+      "xLow": 3.18,
+      "xHigh": 3.94,
+      "y": 1.1224,
+      "minus": 0.008,
+      "plus": 0.008
+    },
+    {
+      "x": 4.5,
+      "xLow": 3.94,
+      "xHigh": 5.06,
+      "y": 1.1396,
+      "minus": 0.0103,
+      "plus": 0.0103
+    }
+  ]
+}

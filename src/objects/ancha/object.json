@@ -1,0 +1,148 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "ancha",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Ancha",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 7743836.7
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/ancha-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Ancha",
+      "classification": "star",
+      "color": "#ffecc8",
+      "distanceAu": 11854212.9,
+      "description": "A star 57 parsecs away, 11 times the Sun's width, measured from its light.",
+      "systemName": "Ancha system",
+      "aliases": [
+        "HD 211391",
+        "HIP 110003",
+        "HR 8499",
+        "Theta Aquarii"
+      ],
+      "order": 5484,
+      "context": {
+        "order": 5481
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1582009497937940000,
+        -764453932990310400,
+        -240165773807229250
+      ],
+      "presentationToReference": [
+        0.8920948211188872,
+        -0.12193790372600587,
+        -0.43508387440557705,
+        -0.43107541104854324,
+        0.0589234058570253,
+        -0.9003899278821025,
+        -0.13542828405540003,
+        -0.9907871516512089,
+        -8.332366529077356e-7
+      ],
+      "orbitUpReference": [
+        0.12193790372600587,
+        -0.0589234058570253,
+        0.9907871516512089
+      ],
+      "metersPerUnit": 24980118.387096774,
+      "bodyRadiusM": 7743836700
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

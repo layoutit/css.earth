@@ -1,8 +1,12 @@
 {
   "id": "gj-486",
-  "name": "GJ 486",
-  "system": "GJ 486 system",
+  "name": "Gar",
+  "system": "Gar system",
   "description": "Star of 3,317 K, 8.07 parsecs away, with 1 transiting planet.",
+  "aliases": [
+    "GJ 486"
+  ],
+  "order": 3099,
   "target": "GJ 486",
   "gaia": "3735000631158990976",
   "paper": {
@@ -30,7 +34,7 @@
   "planets": [],
   "companions": [],
   "text": {
-    "card": "GJ 486 b crosses GJ 486 as seen from Earth, which is how it was found.",
+    "card": "GJ 486 b crosses Gar as seen from Earth, which is how it was found.",
     "introduction": "Its radius and temperature follow Weiner Mansfield et al. 2024.",
     "locator": "NASA Exoplanet Archive ps table (st_refname WEINER_MANSFIELD_ET_AL__2024): st_teff 3317, st_rad 0.3243, st_mass 0.312",
     "quotes": {
@@ -41,6 +45,5 @@
       "introduction": "It hosts one known exoplanet, Gliese 486 b."
     }
   },
-  "notes": [],
-  "order": 3099
+  "notes": []
 }

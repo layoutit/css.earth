@@ -1,0 +1,146 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "hat-p-34",
+  "parent": "hat-p-34-system",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Sansuna",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 1064421
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/hat-p-34-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Sansuna",
+      "classification": "star",
+      "color": "#f0eeff",
+      "distanceAu": 52249145.5,
+      "description": "HAT-P-34 b crosses Sansuna as seen from Earth, which is how it was found.",
+      "systemName": "Sansuna system",
+      "aliases": [
+        "HAT-P-34",
+        "HD 351766"
+      ],
+      "order": 5686,
+      "context": {
+        "order": 5683
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        4067562149763561000,
+        -6216954618171966000,
+        2428973325429844000
+      ],
+      "presentationToReference": [
+        0.5203906639600617,
+        0.17013766417775042,
+        -0.83680746417043,
+        -0.7953769413816407,
+        -0.2600427911129279,
+        -0.5474972766220707,
+        0.3107556563951688,
+        -0.9504898326748883,
+        2.657777683033464e-7
+      ],
+      "orbitUpReference": [
+        -0.17013766417775042,
+        0.2600427911129279,
+        0.9504898326748883
+      ],
+      "metersPerUnit": 3433616.129032258,
+      "bodyRadiusM": 1064421000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

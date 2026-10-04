@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "tianfu",
+  "card": {
+    "text": "A star 142 parsecs away, 17 times the Sun's width, measured from its light.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 98823: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-tau-aquilae",
+        "url": "https://en.wikipedia.org/wiki/Tau_Aquilae",
+        "label": "Wikipedia, \"Tau Aquilae\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374546243",
+        "quote": "Tau Aquilae is a star in the equatorial constellation of Aquila."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its brightness, measured band by band, gives 126 times the Sun's luminosity at 4,742 K, so 16.621 solar radii.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 98823: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-tau-aquilae",
+        "url": "https://en.wikipedia.org/wiki/Tau_Aquilae",
+        "label": "Wikipedia, \"Tau Aquilae\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374546243",
+        "quote": "Its identifier is a Bayer designation that is Latinized from τ Aquilae, and abbreviated Tau Aql or τ Aql."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its Gaia spectrum",
+      "summary": "The color of the star's light."
+    }
+  }
+}

@@ -1,0 +1,148 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "grumium",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Grumium",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 7969939.2
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/grumium-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Grumium",
+      "classification": "star",
+      "color": "#ffddb1",
+      "distanceAu": 7117520.9,
+      "description": "A star 35 parsecs away, 11 times the Sun's width, measured from its light.",
+      "systemName": "Grumium system",
+      "aliases": [
+        "HD 163588",
+        "HIP 87585",
+        "HR 6688",
+        "Xi Draconis"
+      ],
+      "order": 5554,
+      "context": {
+        "order": 5551
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -16414996116220232,
+        -581655951687084400,
+        891702578459543600
+      ],
+      "presentationToReference": [
+        -0.015416625992950865,
+        -0.02363213240026553,
+        -0.9996018457171885,
+        -0.5462792791785439,
+        -0.8371277077709586,
+        0.028216130533984966,
+        0.8374612091214517,
+        -0.5464967732753385,
+        0.000004059474027829508
+      ],
+      "orbitUpReference": [
+        0.02363213240026553,
+        0.8371277077709586,
+        0.5464967732753385
+      ],
+      "metersPerUnit": 25709481.29032258,
+      "bodyRadiusM": 7969939200
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

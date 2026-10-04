@@ -1,0 +1,148 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "buranun",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Buranun",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 10164177
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/buranun-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Buranun",
+      "classification": "star",
+      "color": "#ffe2c2",
+      "distanceAu": 32060341.2,
+      "description": "A star 155 parsecs away, 15 times the Sun's width, measured from its light.",
+      "systemName": "Buranun system",
+      "aliases": [
+        "88 Piscium",
+        "HD 7446",
+        "HIP 5824",
+        "HR 367"
+      ],
+      "order": 5512,
+      "context": {
+        "order": 5509
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        4509781617308509000,
+        1524418604186441700,
+        584086239999322800
+      ],
+      "presentationToReference": [
+        0.9402901670418947,
+        0.11537035003089362,
+        0.32022505226492676,
+        0.3178415155337885,
+        0.03899814227968346,
+        -0.9473414990920215,
+        0.12178330249878468,
+        -0.9925567123507264,
+        -8.281700425701364e-8
+      ],
+      "orbitUpReference": [
+        -0.11537035003089362,
+        -0.03899814227968346,
+        0.9925567123507264
+      ],
+      "metersPerUnit": 32787667.741935484,
+      "bodyRadiusM": 10164177000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

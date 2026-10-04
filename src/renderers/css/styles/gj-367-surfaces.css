@@ -1,4 +1,4 @@
-/* GJ 367: the Sun's emissive presentation (body-surfaces.css, SUN block) scoped to this object, loaded after the shared
+/* Añañuca: the Sun's emissive presentation (body-surfaces.css, SUN block) scoped to this object, loaded after the shared
    body-surfaces.css base rules. No spin: the rotation axis and period are unmeasured. Both plates are transparent: no observation is cast. */
 .object-stage[data-object-id="gj-367"] > :is(.polycss-camera, .gj-367-corona-layer, .gj-367-limb-layer) {
   --gj-367-scene-side-padding: 16px;

@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-stellar-photometric-color@1",
+  "objectId": "ninnisig",
+  "spectrum": "measured",
+  "measuredSpectrum": {
+    "source": "Kharitonov, Tereshchenko & Knyazeva (1988), Spectrophotometric Catalogue of Stars (Alma-Ata), record 848: HR 7314; VizieR III/202",
+    "path": "photometry/kharitonov-catalog.dat",
+    "format": "kharitonov-records",
+    "wavelength": {
+      "column": "lambda",
+      "unit": "nm"
+    },
+    "flux": {
+      "column": "848",
+      "kind": "flux",
+      "missing": 0
+    },
+    "service": "https://cdsarc.cds.unistra.fr/ftp/III/202/catalog.dat",
+    "checked": "2026-10-03",
+    "gaps": [
+      {
+        "fromNm": 757.5,
+        "toNm": 780,
+        "reason": "the spectrum ends at 757.5 nm; the last value is held to 780 nm, where the observer adds little"
+      }
+    ],
+    "note": "Ground-based photoelectric scans from Alma-Ata, 322.5 to 757.5 nm in 5 nm steps, in absolute flux. The catalogue gives no observation dates."
+  },
+  "whitePoint": "sRGB D65",
+  "normalization": "brightest linear sRGB channel = 1",
+  "crossCheck": {
+    "source": "Gaia DR3 XP spectrum, source 2099385000742174592",
+    "spectrum": {
+      "path": "photometry/crosscheck-gaia-dr3-xp-sampled.csv",
+      "format": "gaia-xp-sampled",
+      "wavelength": {
+        "column": "lambda",
+        "unit": "nm"
+      },
+      "flux": {
+        "column": "2099385000742174592",
+        "kind": "flux"
+      },
+      "gaps": []
+    }
+  }
+}

@@ -6,7 +6,7 @@
   "properties": {
     "preparation": {
       "schema": "cssearth-object-preparation@1",
-      "label": "HAT-P-12",
+      "label": "Komondor",
       "steps": [
         "verify-sources",
         "assets",
@@ -95,12 +95,15 @@
       }
     },
     "catalog": {
-      "name": "HAT-P-12",
+      "name": "Komondor",
       "classification": "star",
       "color": "#ffd1b6",
       "distanceAu": 29278833.9,
       "description": "HAT-P-12 b crosses HAT-P-12 as seen from Earth, which is how it was found.",
-      "systemName": "HAT-P-12 system",
+      "systemName": "Komondor system",
+      "aliases": [
+        "HAT-P-12"
+      ],
       "order": 3112,
       "context": {
         "order": 3109

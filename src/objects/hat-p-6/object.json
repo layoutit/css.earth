@@ -1,0 +1,146 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "hat-p-6",
+  "parent": "hat-p-6-system",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Sterrennacht",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 1127034
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/hat-p-6-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Sterrennacht",
+      "classification": "star",
+      "color": "#ededff",
+      "distanceAu": 56574526.4,
+      "description": "HAT-P-6 b crosses Sterrennacht as seen from Earth, which is how it was found.",
+      "systemName": "Sterrennacht system",
+      "aliases": [
+        "HAT-P-6",
+        "TOI-1373"
+      ],
+      "order": 5702,
+      "context": {
+        "order": 5699
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        6217334260229590000,
+        -568665832501298000,
+        5714105257152338000
+      ],
+      "presentationToReference": [
+        0.7346118668140843,
+        0.6723460116344923,
+        -0.09108372947523322,
+        -0.06719096180471593,
+        -0.0614948813103382,
+        -0.9958432377760994,
+        0.6751524122653222,
+        -0.7376782633450837,
+        -7.056283881728708e-7
+      ],
+      "orbitUpReference": [
+        -0.6723460116344923,
+        0.0614948813103382,
+        0.7376782633450837
+      ],
+      "metersPerUnit": 3635593.5483870967,
+      "bodyRadiusM": 1127034000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

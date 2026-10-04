@@ -1,0 +1,148 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "arneb",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Arneb",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 84139349.4
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/arneb-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Arneb",
+      "classification": "star",
+      "color": "#d6dfff",
+      "distanceAu": 140316359.8,
+      "description": "A star 680 parsecs away, 121 times the Sun's width, measured from its light.",
+      "systemName": "Arneb system",
+      "aliases": [
+        "HD 36673",
+        "HIP 25985",
+        "HR 1865",
+        "Alpha Leporis"
+      ],
+      "order": 5490,
+      "context": {
+        "order": 5487
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        2372174608597843000,
+        19842383818023380000,
+        -6424630416585416000
+      ],
+      "presentationToReference": [
+        0.11300896650573455,
+        -0.03633191191078754,
+        0.9929294867543278,
+        0.9452791882007198,
+        -0.30390166505110816,
+        -0.11870566260188456,
+        -0.3060657279799458,
+        -0.9520103834287055,
+        -1.8711001165281494e-7
+      ],
+      "orbitUpReference": [
+        0.03633191191078754,
+        0.30390166505110816,
+        0.9520103834287055
+      ],
+      "metersPerUnit": 271417256.12903225,
+      "bodyRadiusM": 84139349400
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

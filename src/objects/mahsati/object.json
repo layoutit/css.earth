@@ -1,0 +1,146 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "mahsati",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Mahsati",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 3421452.6
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/mahsati-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Mahsati",
+      "classification": "star",
+      "color": "#ffe8d4",
+      "distanceAu": 34629806.9,
+      "description": "A star 168 parsecs away, 4.9 times the Sun's width, measured from its light.",
+      "systemName": "Mahsati system",
+      "aliases": [
+        "HD 152581",
+        "HIP 82651"
+      ],
+      "order": 5608,
+      "context": {
+        "order": 5605
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -1445135274133292500,
+        -4857418696570699000,
+        1074764191097400300
+      ],
+      "presentationToReference": [
+        -0.2789542280966433,
+        -0.059159756530119116,
+        -0.9584803919926078,
+        -0.9376267449130162,
+        -0.19884855809922244,
+        0.2851584439670018,
+        0.20746234803170302,
+        -0.9782430036290355,
+        1.2391248302390198e-7
+      ],
+      "orbitUpReference": [
+        0.059159756530119116,
+        0.19884855809922244,
+        0.9782430036290355
+      ],
+      "metersPerUnit": 11036943.870967742,
+      "bodyRadiusM": 3421452600
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "host": "hat-p-36",
+  "planets": [
+    {
+      "id": "hat-p-36b",
+      "name": "HAT-P-36 b",
+      "description": "Transiting planet of Tuiren with a 1.33-day year, found in 2011.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2019AJ....158...39C/abstract",
+        "credit": "Chakrabarty & Sengupta 2019"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "CHAKRABARTY__AMP__SENGUPTA_2019"
+      },
+      "text": {
+        "card": "HAT-P-36 b was found in 2011 by HATNet as it crossed its star.",
+        "introduction": "It is the only planet known around Tuiren. Its orbit and size follow Chakrabarty & Sengupta 2019's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname CHAKRABARTY__AMP__SENGUPTA_2019): disc_year 2011, disc_facility HATNet, sy_pnum 1; pl_orbper 1.327346813, pl_radj 1.277, pl_bmassj 1.8482",
+        "quotes": {
+          "url": "https://en.wikipedia.org/wiki/HAT-P-36",
+          "title": "HAT-P-36",
+          "revision": "1374405757",
+          "card": "In December 2019, HAT-P-36 was named Tuiren and its planetary companion, HAT-P-36b, was named Bran as a result of Ireland's contribution to the 2019 NameExoWorlds campaign.",
+          "introduction": "Bran has a mass approximately 1.8 times that of Jupiter and a radius 1.2 times larger."
+        }
+      },
+      "order": 5736
+    }
+  ]
+}

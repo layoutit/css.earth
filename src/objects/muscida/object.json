@@ -1,0 +1,149 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "muscida",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Muscida",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 10355066.6
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/muscida-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Muscida",
+      "classification": "star",
+      "color": "#ffe8d4",
+      "distanceAu": 11501722.8,
+      "description": "A star about 56 parsecs away, 15 times the Sun's width, measured by Gaia.",
+      "systemName": "Muscida system",
+      "aliases": [
+        "Gaia DR3 1041808368494264576",
+        "HR 3323",
+        "Omicron Ursae Majoris",
+        "HIP 41704",
+        "HD 71369"
+      ],
+      "order": 5633,
+      "context": {
+        "order": 5630
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -513075875006392300,
+        667106822372999300,
+        1500766589681938400
+      ],
+      "presentationToReference": [
+        -0.29818718422611196,
+        -0.5317577036656829,
+        0.7926652179549085,
+        0.38770621401122796,
+        0.6913769155887025,
+        0.6096571595643999,
+        0.8722203246774195,
+        -0.4891131823854801,
+        -0.000006030361196888318
+      ],
+      "orbitUpReference": [
+        0.5317577036656829,
+        -0.6913769155887025,
+        0.4891131823854801
+      ],
+      "metersPerUnit": 33403440.64516129,
+      "bodyRadiusM": 10355066600
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

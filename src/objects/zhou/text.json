@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "zhou",
+  "card": {
+    "text": "A star 48 parsecs away, 3.7 times the Sun's width, measured from its light.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 77233: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-beta-serpentis",
+        "url": "https://en.wikipedia.org/wiki/Beta_Serpentis",
+        "label": "Wikipedia, \"Beta Serpentis\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374787335",
+        "quote": "Beta Serpentis, Latinized from β Serpentis, also named Zhou, is a binary star system in the constellation Serpens, in its head."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its brightness, measured band by band, gives 60 times the Sun's luminosity at 8,399 K, so 3.651 solar radii.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 77233: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-beta-serpentis",
+        "url": "https://en.wikipedia.org/wiki/Beta_Serpentis",
+        "label": "Wikipedia, \"Beta Serpentis\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374787335",
+        "quote": "It is visible to the naked eye with a combined apparent visual magnitude of +3.65."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its spectrum",
+      "summary": "The color of the star's light."
+    }
+  }
+}

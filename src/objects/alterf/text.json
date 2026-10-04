@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "alterf",
+  "card": {
+    "text": "A star 101 parsecs away, 46 times the Sun's width, measured from its light.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 46750: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-lambda-leonis",
+        "url": "https://en.wikipedia.org/wiki/Lambda_Leonis",
+        "label": "Wikipedia, \"Lambda Leonis\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1377348892",
+        "quote": "Lambda Leonis, formally named Alterf, is a star in the constellation of Leo."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its brightness, measured band by band, gives 454 times the Sun's luminosity at 3,917 K, so 46.34 solar radii.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 46750: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-lambda-leonis",
+        "url": "https://en.wikipedia.org/wiki/Lambda_Leonis",
+        "label": "Wikipedia, \"Lambda Leonis\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1377348892",
+        "quote": "The star is bright enough to be seen with the naked eye, having an apparent visual magnitude of 4.32 Based upon an annual parallax shift of 0.00991 arcseconds, it is located about 329 light-years from the Sun."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its spectrum",
+      "summary": "The color of the star's light."
+    }
+  }
+}

@@ -1,0 +1,146 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "nosaxa",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Nosaxa",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 1490885.1
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/nosaxa-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Nosaxa",
+      "classification": "star",
+      "color": "#fff1ec",
+      "distanceAu": 18515825.8,
+      "description": "A star 90 parsecs away, 2.1 times the Sun's width, measured from its light.",
+      "systemName": "Nosaxa system",
+      "aliases": [
+        "HD 48265",
+        "HIP 31895"
+      ],
+      "order": 5650,
+      "context": {
+        "order": 5647
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -318689263356990500,
+        1805995549932586200,
+        -2075889924197512700
+      ],
+      "presentationToReference": [
+        -0.11505306094215538,
+        0.13023373993339954,
+        0.9847852385930652,
+        0.6519997375327764,
+        -0.7380367933978954,
+        0.17377581491146304,
+        -0.7494392139627013,
+        -0.6620731565121123,
+        -0.000001027913872647537
+      ],
+      "orbitUpReference": [
+        -0.13023373993339954,
+        0.7380367933978954,
+        0.6620731565121123
+      ],
+      "metersPerUnit": 4809306.774193549,
+      "bodyRadiusM": 1490885100
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

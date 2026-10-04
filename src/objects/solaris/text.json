@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "solaris",
+  "card": {
+    "text": "A star 50 parsecs away, 87% of the Sun's width, measured from its light.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 104780: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-bd-14-4559",
+        "url": "https://en.wikipedia.org/wiki/BD%2B14_4559",
+        "label": "Wikipedia, \"BD+14 4559\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374437742",
+        "quote": "BD+14 4559 is a star with an exoplanetary companion in the northern constellation of Pegasus."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its brightness, measured band by band, gives 0.364 times the Sun's luminosity at 4,814 K, so 0.868 solar radii.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 104780: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-bd-14-4559",
+        "url": "https://en.wikipedia.org/wiki/BD%2B14_4559",
+        "label": "Wikipedia, \"BD+14 4559\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374437742",
+        "quote": "During the 2019 NameExoWorlds campaign, the star was named Solaris by Poland after a 1961 science fiction novel about an ocean-covered exoplanet by Polish writer Stanisław Lem."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its Gaia spectrum",
+      "summary": "The color of the star's light."
+    }
+  }
+}

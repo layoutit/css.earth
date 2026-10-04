@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "hat-p-42-system",
+  "parent": "milky-way",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "hat-p-42"
+    },
+    "catalog": {
+      "name": "Lerna system",
+      "systemName": "Lerna system",
+      "classification": "planetary-system",
+      "color": "#fff1ed",
+      "distanceAu": 85379148.6,
+      "description": "HAT-P-42 b crosses Lerna as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -9034272511641267000,
+        8926327654101463000,
+        1356592471974091800
+      ],
+      "presentationToReference": [
+        -0.7073198967062074,
+        -0.07555422116393828,
+        0.7028443094938104,
+        0.6988685747667523,
+        0.07465144734912839,
+        0.7113437120071905,
+        0.10621336510537979,
+        -0.9943433617583973,
+        -1.6834499176715502e-8
+      ],
+      "orbitUpReference": [
+        0.07555422116393828,
+        -0.07465144734912839,
+        0.9943433617583973
+      ],
+      "metersPerUnit": 3433616.129032258,
+      "bodyRadiusM": 1064421000
+    }
+  }
+}

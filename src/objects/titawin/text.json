@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "titawin",
+  "card": {
+    "text": "A star 13 parsecs away, 1.6 times the Sun's width, measured from its light.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 7513: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-upsilon-andromedae",
+        "url": "https://en.wikipedia.org/wiki/Upsilon_Andromedae",
+        "label": "Wikipedia, \"Upsilon Andromedae\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1370790660",
+        "quote": "Upsilon Andromedae is a binary star located 44 light-years from Earth in the constellation of Andromeda."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its brightness, measured band by band, gives 3.345 times the Sun's luminosity at 6,232 K, so 1.571 solar radii.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 7513: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-upsilon-andromedae",
+        "url": "https://en.wikipedia.org/wiki/Upsilon_Andromedae",
+        "label": "Wikipedia, \"Upsilon Andromedae\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1370790660",
+        "quote": "The system consists of an F-type main-sequence star and a smaller red dwarf."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its spectrum",
+      "summary": "The color of the star's light."
+    }
+  }
+}

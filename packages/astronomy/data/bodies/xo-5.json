@@ -1,0 +1,30 @@
+{
+ "id": "xo-5",
+ "classification": "star",
+ "order": 5460,
+ "physical": {
+  "name": "Absolutno",
+  "horizonsCode": null,
+  "meanRadiusKm": 786141,
+  "gravitationalParameterKm3PerS2": 138020937643.61694,
+  "parent": null,
+  "effectiveTemperatureK": 5430
+ },
+ "physicalNotes": "Radius 1.13 +/- 0.03 solar radii from Smith 2015, the stellar radius of the default parameter set of XO-5 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2015AcA....65..117S/abstract): 786,141 km at 695,700 km per solar radius. Mass 1.04 +/- 0.03 solar masses from Smith 2015, the stellar mass of the default parameter set of XO-5 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2015AcA....65..117S/abstract); GM is that mass times the JPL solar GM. Temperature 5430 +/- 70 K from Smith 2015, the stellar temperature of the default parameter set of XO-5 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2015AcA....65..117S/abstract). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 116.71638297929114,
+  "declinationDegrees": 39.0944661950009,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 273.84425250797193,
+  "properMotionRaMasPerYear": -21.508735209510398,
+  "properMotionDecMasPerYear": -23.90958928175953,
+  "radialVelocityKmPerS": -9.467062,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 920308932010648448 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/xo-5/source/photometry/gaia-dr3-source.csv",
+   "distance": "Gaia DR3 parallax 3.6517 +/- 0.0173 mas (same row, RUWE 1.12): 273.84 pc, no zero-point correction",
+   "properMotion": "Gaia DR3 (same row): -21.509, -23.910 mas/yr",
+   "radialVelocity": "Gaia DR3 (same row): -9.47 +/- 0.65 km/s"
+  }
+ }
+}

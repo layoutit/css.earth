@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "lilii-borea",
+  "card": {
+    "text": "A star 53 parsecs away, 10 times the Sun's width, measured from its light.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 13061: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-39-arietis",
+        "url": "https://en.wikipedia.org/wiki/39_Arietis",
+        "label": "Wikipedia, \"39 Arietis\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1334126839",
+        "quote": "39 Arietis, officially named Lilii Borea, is a star in the northern constellation of Aries."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its brightness, measured band by band, gives 47 times the Sun's luminosity at 4,724 K, so 10.224 solar radii.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 13061: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-39-arietis",
+        "url": "https://en.wikipedia.org/wiki/39_Arietis",
+        "label": "Wikipedia, \"39 Arietis\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1334126839",
+        "quote": "It is visible to the naked eye with an apparent visual magnitude of +4.5."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its spectrum",
+      "summary": "The color of the star's light."
+    }
+  }
+}

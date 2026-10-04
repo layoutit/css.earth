@@ -1,0 +1,55 @@
+{
+  "id": "botein",
+  "name": "Botein",
+  "system": "Botein system",
+  "description": "A star 52 parsecs away, 9.7 times the Sun's width, measured from its light.",
+  "aliases": [
+    "HD 19787",
+    "HIP 14838",
+    "HR 951",
+    "Delta Arietis"
+  ],
+  "featured": true,
+  "target": "HIP 14838",
+  "paper": {
+    "url": "https://doi.org/10.1093/mnras/stx1433",
+    "credit": "McDonald, Zijlstra & Watson (2017), MNRAS 471, 770"
+  },
+  "radius": {
+    "value": 9.745,
+    "source": "McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 14838: radius 9.745 solar radii, implied by the fitted luminosity 50.038 solar luminosities (fractional uncertainty 0.052) and temperature",
+    "url": "https://doi.org/10.1093/mnras/stx1433"
+  },
+  "mass": "unmeasured",
+  "temperature": {
+    "value": 4921,
+    "source": "McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 14838: effective temperature 4921 +/- 125 K, from the fit of a model atmosphere to the star's spectral energy distribution (goodness of fit Q 0.056)",
+    "url": "https://doi.org/10.1093/mnras/stx1433",
+    "uncertainty": 125
+  },
+  "distance": {
+    "value": 52.029,
+    "source": "McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 14838: distance 52.029 pc, the paper's parallax inverted (Gaia DR1's where it revised the star's, else the Hipparcos reduction of van Leeuwen 2007; section 2.3; fractional uncertainty 0.01), at which the luminosity and radius hold",
+    "url": "https://doi.org/10.1093/mnras/stx1433",
+    "uncertainty": 0.52
+  },
+  "limb": {
+    "none": "no mass is measured and no spectroscopic surface gravity is published with this radius: McDonald, Zijlstra & Watson (2017), MNRAS 471, 770 assume the gravity of their fit (table column 15)"
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A star 52 parsecs away, 9.7 times the Sun's width, measured from its light.",
+    "introduction": "Its brightness, measured band by band, gives 50 times the Sun's luminosity at 4,921 K, so 9.745 solar radii.",
+    "locator": "Table 2, HIP 14838: D, Teff, L, Rad, Q",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/Delta_Arietis",
+      "title": "Delta Arietis",
+      "revision": "1375700532",
+      "card": "Delta Arietis is a star in the northern constellation of Aries, positioned 1.8 degrees north of the ecliptic.",
+      "introduction": "Its identifier is a Bayer designation that is Latinized from δ Arietis, and abbreviated Delta Ari or δ Ari."
+    }
+  },
+  "notes": [],
+  "order": 5508
+}

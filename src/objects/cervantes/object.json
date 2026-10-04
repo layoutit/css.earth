@@ -1,0 +1,149 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "cervantes",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Cervantes",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 1020357.2
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/cervantes-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Cervantes",
+      "classification": "star",
+      "color": "#ffeee4",
+      "distanceAu": 3218576.6,
+      "description": "A star about 16 parsecs away, 1.5 times the Sun's width, measured by Gaia.",
+      "systemName": "Cervantes system",
+      "aliases": [
+        "Gaia DR3 5945941905576552064",
+        "HR 6585",
+        "Mu Arae",
+        "HIP 86796",
+        "HD 160691"
+      ],
+      "order": 5515,
+      "context": {
+        "order": 5512
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -20567344561687252,
+        -296812794758556350,
+        -378568218987316900
+      ],
+      "presentationToReference": [
+        -0.0427163776040094,
+        0.0543499391773244,
+        -0.9976078363745009,
+        -0.6164513548887371,
+        0.784352677213527,
+        0.06912745332943532,
+        -0.786233450153472,
+        -0.6179295767799062,
+        6.114905866449014e-7
+      ],
+      "orbitUpReference": [
+        -0.0543499391773244,
+        -0.784352677213527,
+        0.6179295767799062
+      ],
+      "metersPerUnit": 3291474.8387096776,
+      "bodyRadiusM": 1020357200
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

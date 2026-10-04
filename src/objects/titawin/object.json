@@ -1,0 +1,148 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "titawin",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Titawin",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 1092944.7
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/titawin-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Titawin",
+      "classification": "star",
+      "color": "#f8f7ff",
+      "distanceAu": 2782860.1,
+      "description": "A star 13 parsecs away, 1.6 times the Sun's width, measured from its light.",
+      "systemName": "Titawin system",
+      "aliases": [
+        "HD 9826",
+        "HIP 7513",
+        "HR 458",
+        "Upsilon Andromedae"
+      ],
+      "order": 5729,
+      "context": {
+        "order": 5726
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        284829419473582820,
+        127993326812592130,
+        275325036513929000
+      ],
+      "presentationToReference": [
+        0.6841644453545109,
+        0.6032487180644753,
+        0.4098902241653509,
+        0.3074418490944301,
+        0.2710894784500298,
+        -0.9121348606971936,
+        0.6613611125082517,
+        -0.7500676495005353,
+        -0.000005881319621426985
+      ],
+      "orbitUpReference": [
+        -0.6032487180644753,
+        -0.2710894784500298,
+        0.7500676495005353
+      ],
+      "metersPerUnit": 3525628.064516129,
+      "bodyRadiusM": 1092944700
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}
