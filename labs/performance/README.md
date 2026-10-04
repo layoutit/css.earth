@@ -178,6 +178,6 @@ need an actual second host and a defined public API before extraction is useful.
 
 ## Device-bound accepted limits
 
-The iPad runner's eager prepared-registry load is accepted because this command starts a device journey against a prepared checkout, rather than exposing an importable host-neutral library (A66). Change it when a second non-device host needs the runner; device/browser lifecycle behavior can only be qualified on the actual device.
+The iPad runner's eager prepared-registry load is accepted because this command starts a device journey against a prepared checkout, rather than exposing an importable host-neutral library. Change it when a second non-device host needs the runner; device/browser lifecycle behavior can only be qualified on the actual device.
 
-The navigation capture harness's preview port/readiness and shutdown lifecycle remain accepted device/browser-bound limits (A77): local mocks cannot establish Safari or browser-process lifecycle correctness. Change these defaults only with a real capture showing readiness and bounded cleanup on the target device/browser; a launched process alone is insufficient evidence.
+The navigation capture harness's preview port/readiness and shutdown lifecycle remain accepted device/browser-bound limits: local mocks cannot establish Safari or browser-process lifecycle correctness. Change these defaults only with a real capture showing readiness and bounded cleanup on the target device/browser; a launched process alone is insufficient evidence.

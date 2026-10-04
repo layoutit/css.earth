@@ -20,7 +20,7 @@ export const headerCommentFirst: Rule.RuleModule = {
         for (const comment of source.getAllComments()) {
           if (comment.type !== 'Block' || !comment.loc || comment.loc.start.column !== 0 || !comment.range) continue;
           // Directive comments belong to their statement, rather than to the module header.
-          if (/^\s*\*?\s*(?:eslint|prettier|@ts-|@vite-)/u.test(comment.value)) continue;
+          if (/^\s*\*?\s*(?:eslint|prettier|@ts-|@vite-|@vitest|@jsx)/u.test(comment.value)) continue;
           // An attached declaration JSDoc is API documentation, not a module header.
           if (comment.range[0] >= end && node.body[imports.length] && !/\n\s*\n/u.test(source.text.slice(comment.range[1], next))) continue;
           if (comment.range[0] > start && comment.range[0] < next && comment.range[0] <= Math.max(end, next)) {

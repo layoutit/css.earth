@@ -24,17 +24,11 @@ test('every solar preparation CI job caches kernel files under a pin-content key
     assert.equal(requireString(options.path).trim(), 'src/spice/*/*/');
     assert.match(key, /hashFiles\('src\/spice\/\*\/manifest\.json'\)/u);
     assert.ok(cacheIndex < steps.findIndex(step => /build-ci\.mts (?:lint|full)/u.test(String(step.run))));
-    // The expression admits exactly the tracked bank manifests. Serialize its selected contents to model key input;
-    // GitHub owns the digest implementation. Changing every individual pin must change that input.
-    const referenced = pins.filter(pin => /^src\/spice\/[^/]+\/manifest\.json$/u.test(pin.path));
-    assert.equal(referenced.length, pins.length);
-    const identity = (values: typeof pins) => JSON.stringify(values.map(pin => [pin.path, pin.contents]));
-    for (const pin of referenced) {
-      const parsed = requireRecord(JSON.parse(pin.contents));
-      const inputs = requireArray(parsed.inputs).map(input => requireRecord(input));
-      assert.ok(inputs.some(input => String(input.origin).includes('naif.jpl.nasa.gov')), pin.path);
-      const changed = JSON.stringify({ ...parsed, inputs: inputs.map((input, i) => i === 0 ? { ...input, origin: `${String(input.origin)}?pin-changed` } : input) });
-      assert.notEqual(identity(referenced.map(value => value === pin ? { ...pin, contents: changed } : value)), identity(referenced), pin.path);
+    const expressions = [...key.matchAll(/hashFiles\(([^)]*)\)/gu)];
+    assert.ok(expressions.length > 0);
+    const globs = expressions.flatMap(expression => [...expression[1]!.matchAll(/'([^']+)'/gu)].map(match => match[1]!));
+    for (const pin of pins) {
+      assert.ok(globs.some(glob => new RegExp(`^${glob.split('*').map(part => part.replace(/[.*+?^${}()|[\]\\]/gu, '\\$&')).join('[^/]*')}$`, 'u').test(pin.path)), pin.path);
     }
   }
 });

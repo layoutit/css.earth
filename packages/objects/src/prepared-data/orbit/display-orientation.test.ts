@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { DISPLAY_ORIENTATION_SCHEMA, parseAuthoredOrientation } from '@cssearth/objects';
+import { DISPLAY_ORIENTATION_SCHEMA, parseAuthoredOrientation } from './display-orientation.js';
 
 const record = { schema: DISPLAY_ORIENTATION_SCHEMA, rightAscensionDegrees: 10, declinationDegrees: -90,
   displayMeridianDegrees: 0, phase: 'arbitrary-display-phase', qualification: 'illustrative' };

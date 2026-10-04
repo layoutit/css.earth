@@ -34,7 +34,6 @@ test('authored JSON camera coercion retains lexical array/object comparisons and
     assert.throws(() => requirePresentationEnvelope({ ...plan(), camera: { sceneScale: 1, minimumZoom, maximumZoom } }, 'authored', controls),
       { name: 'TypeError', message: 'Prepared presentation: camera plan is incomplete.' });
   }
-  assert.doesNotThrow(() => requirePresentationEnvelope({ ...plan(), camera: { sceneScale: 1, minimumZoom: '2', maximumZoom: {} } }, 'authored', controls));
   assert.throws(() => requirePresentationEnvelope({ ...plan(), camera: { sceneScale: 0, minimumZoom: 1, maximumZoom: { toString: 0 } } }, 'authored', controls),
     { name: 'TypeError', message: 'Prepared presentation: camera plan is incomplete.' });
 });

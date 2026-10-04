@@ -1,3 +1,4 @@
+// Entry script: node packages/bake/authoring/galaxy-clusters/members.mts <hydra|centaurus|perseus|coma>
 /**
  * A galaxy cluster's member dots: the members a published catalogue lists that Cosmicflows-4 does not already hold, since
  * the Nearby Universe field draws those. A galaxy within 10 arcsec of a Cosmicflows-4 position is the same galaxy. Each
@@ -28,7 +29,6 @@
  */
 import { catalogueSeparationArcsec, createRaDecCatalogueMatcher } from '@cssearth/astronomy';
 import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
-// Entry script: node packages/bake/authoring/galaxy-clusters/members.mts <hydra|centaurus|perseus|coma>
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { gunzipSync, gzipSync } from 'node:zlib';

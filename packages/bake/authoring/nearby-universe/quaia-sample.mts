@@ -1,3 +1,4 @@
+// Entry script: node packages/bake/authoring/nearby-universe/quaia-sample.mts [quaia csv]
 /**
  * The Nearby Universe's Quaia sample: the Gaia-unWISE quasars (Storey-Fisher et al. 2024, G < 20.0) that lie outside
  * DESI's footprint, thinned to the tracked DESI sample's density on the sky, so the quasar shell is one even sphere
@@ -13,7 +14,6 @@
  * `keepEvery` is the ratio of the median per-cell counts of the two samples on their own cells.
  */
 import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
-// Entry script: node packages/bake/authoring/nearby-universe/quaia-sample.mts [quaia csv]
 import { medianUpperMiddle as median } from '@cssearth/core';
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';

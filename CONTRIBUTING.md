@@ -310,9 +310,8 @@ job, so reword a rejected commit with `git rebase -i` rather than skipping the h
 
 ## Accepted checkout boundaries
 
-Root dependencies remain where root-owned preparation, site and verification tools import them; a package must still declare its own runtime imports (A9). The duplicate bake dependencies removed in #1244 stay removed; split the root tools into a package only when that creates a real owner, rather than hiding their dependency requirements.
+Root keeps third-party dependencies that root-level tools import (site, labs and CI scripts). They leave root only when those tools move into packages; each package must declare its own runtime imports.
 
-An implementer sandbox may lack outbound network access (A258), so source/prepared restoration and restore-dependent parity checks belong to the network-enabled orchestrator. Report the implementer's actual exits separately and require the orchestrator's restore/parity evidence before release; remove this limitation when the implementer environment can run those same checks with the required inputs.
 
 ## Pull requests
 

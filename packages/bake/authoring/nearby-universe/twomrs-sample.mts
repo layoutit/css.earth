@@ -1,3 +1,4 @@
+// Entry script: node packages/bake/authoring/nearby-universe/twomrs-sample.mts [table3.dat.gz]
 /**
  * The Nearby Universe's 2MASS Redshift Survey sample: the 2MRS galaxies (Huchra et al. 2012, ApJS 199, 26, table 3) that
  * Cosmicflows-4 does not hold, so the field reaches the sky Cosmicflows-4's surveys leave empty, down to 5 degrees from
@@ -17,7 +18,6 @@
  *   (20) or an unexamined one (98) has none.
  */
 import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
-// Entry script: node packages/bake/authoring/nearby-universe/twomrs-sample.mts [table3.dat.gz]
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { gunzipSync, gzipSync } from 'node:zlib';

@@ -199,4 +199,4 @@ validation position. Bake supplies them through `readBodyMapProduct` and `readRa
 angular-to-surface conversion, sampled map combination, lighting banks and photometric evaluation stay in bake.
 Contract and duplicate-ownership tests use node:test beside the formats.
 
-The cross-domain schema-identifier conformance test stays in `src/prepared-data/` because that owner maintains the public identifier admission surface, including source and volume identifiers (A208). Move it to a package-wide test owner when such an owner has a distinct suite contract; its current location does not narrow coverage.
+The cross-domain schema-identifier conformance test stays in `src/prepared-data/` because that owner maintains the public identifier admission surface, including source and volume identifiers. Move it to a package-wide test owner when such an owner has a distinct suite contract; its current location does not narrow coverage.

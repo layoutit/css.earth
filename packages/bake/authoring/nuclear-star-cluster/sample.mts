@@ -1,3 +1,4 @@
+// Entry script: node packages/bake/authoring/nuclear-star-cluster/sample.mts [central.tsv]
 /**
  * The Milky Way's nuclear star cluster sample: the stars of the GALACTICNUCLEUS survey (Nogueras-Lara et al. 2019, A&A
  * 631, A20, central field) around Sagittarius A*, thinned to the cluster's own share of the star counts.
@@ -24,7 +25,6 @@
  *   where the cluster's share is down to about a tenth.
  */
 import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
-// Entry script: node packages/bake/authoring/nuclear-star-cluster/sample.mts [central.tsv]
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { gzipSync } from 'node:zlib';

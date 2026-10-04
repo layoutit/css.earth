@@ -1,3 +1,4 @@
+// Entry script: node packages/bake/authoring/fornax-cluster/members.mts [fcc p2tbl2.dat.gz]
 /**
  * The Fornax Cluster's member dots: the Fornax Cluster Catalog's definite members (Ferguson 1989, AJ 98, 367, through
  * CDS VII/180, table p2tbl2, membership code 1) that Cosmicflows-4 does not already hold, since the Nearby Universe
@@ -17,7 +18,6 @@
  * Output: `src/objects/fornax-cluster-members/source/dots/fcc-members.csv.gz`. It prints what it kept.
  */
 import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
-// Entry script: node packages/bake/authoring/fornax-cluster/members.mts [fcc p2tbl2.dat.gz]
 import { spawnSync } from 'node:child_process';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';

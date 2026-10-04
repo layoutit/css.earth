@@ -274,7 +274,7 @@ The focused tests compare decoder results with Astropy and NASA's PDS4 reader;
 neither runs in the application. The shared oracle reader checks declared paths
 and recorded byte counts, not manifest hashes. The Charon spectral-map test
 also compares regenerated maps with its retained reference outputs.
-The [test-only Pallas acquisition record](../packages/bake/src/objects/layers/observation/fixtures/fits/archive-inputs.json)
+The [test-only Pallas acquisition record](../packages/fits/src/node/fixtures/fits/archive-inputs.json)
 names the four native files, sizes and source URLs independently of production
 body acquisition. They are restored under ignored `.local/fits-reference/`;
 no Pallas body recipe or surface output changes here.

@@ -65,7 +65,7 @@ export function cleanModule(text: string, name: string): string {
       if (token !== ts.SyntaxKind.MultiLineCommentTrivia || start <= first) continue;
       if (start !== 0 && text[start - 1] !== '\n') continue;
       const value = text.slice(start, end);
-      if (/^\/\*\*?\s*(?:eslint|prettier|@ts-|@vite-)/u.test(value)) continue;
+      if (/^\/\*\*?\s*(?:eslint|prettier|@ts-|@vite-|@vitest|@jsx)/u.test(value)) continue;
       headers.push({ start, end: text[end] === '\n' ? end + 1 : end, value });
     }
     for (const header of [...headers].reverse()) text = text.slice(0, header.start) + text.slice(header.end);

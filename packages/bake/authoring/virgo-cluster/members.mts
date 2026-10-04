@@ -1,3 +1,4 @@
+// Entry script: node packages/bake/authoring/virgo-cluster/members.mts [evcc table2.dat]
 /**
  * The Virgo Cluster's member dots: the Extended Virgo Cluster Catalog's certain members (Kim et al. 2014, ApJS 215, 22,
  * table 2, `MmI` = M, by redshift against the Virgo infall model) that Cosmicflows-4 does not already hold, since the
@@ -16,7 +17,6 @@
  * Output: `src/objects/virgo-cluster-members/source/dots/evcc-members.csv.gz`. It prints what it kept.
  */
 import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
-// Entry script: node packages/bake/authoring/virgo-cluster/members.mts [evcc table2.dat]
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { gunzipSync, gzipSync } from 'node:zlib';
