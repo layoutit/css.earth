@@ -1,4 +1,4 @@
-import { PREPARED_CONTENT_SCHEMA } from '@cssearth/objects';
+import { PREPARED_CONTENT_SCHEMA, readChartAssetRecipe, readPreparedChartContentRecord } from '@cssearth/objects';
 import { mkdtemp, readFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
@@ -16,7 +16,7 @@ import { parseChartAssetRecipe, prepareChartAssets } from '../charts/charts.ts';
 export async function refreshObjectCharts(root: string, id: string, write = false) {
   if (!/^[a-z][a-z0-9-]*$/.test(id)) throw new TypeError('Unsafe chart object id.');
   const objectDirectory = resolve(root, 'src/objects', id), sourceDirectory = resolve(objectDirectory, 'source');
-  const recipe = parseChartAssetRecipe(JSON.parse(await readFile(resolve(sourceDirectory, 'content/charts.json'), 'utf8')));
+  const recipe = parseChartAssetRecipe(readChartAssetRecipe(JSON.parse(await readFile(resolve(sourceDirectory, 'content/charts.json'), 'utf8'))));
   if (recipe.publicBase !== `/scenes/${id}/` || !recipe.charts.length ||
       new Set(recipe.charts.map(c => c.output)).size !== recipe.charts.length ||
       recipe.charts.some(c => !/^[a-z0-9][a-z0-9._-]*\.svg$/.test(c.output))) throw new TypeError('Invalid chart output set.');
@@ -36,7 +36,7 @@ export async function refreshObjectCharts(root: string, id: string, write = fals
       return readFile(contentAsset.file);
     });
     if (previous.length !== contentAsset.bytes || sha256(previous) !== contentAsset.sha256) throw new Error(`${id}: local content differs from inventory.`);
-    const content = requireRecord(JSON.parse(previous.toString('utf8')));
+    const content = readPreparedChartContentRecord(JSON.parse(previous.toString('utf8')));
     if (content.schema !== PREPARED_CONTENT_SCHEMA || content.objectId !== id) throw new TypeError('Incompatible prepared chart content.');
     const charts = requireArray(content.charts).map(value => {
       const chart = requireRecord(value), src = requireString(chart.src);

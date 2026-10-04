@@ -1,3 +1,4 @@
+import { readWorldContextSourceSelection, readStellarDotMeasurements } from '@cssearth/objects';
 import { mkdir, readFile, readdir, rm, writeFile } from 'node:fs/promises';
 import { basename, dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -5,7 +6,6 @@ import { gunzipSync } from 'node:zlib';
 import { BODIES, EXOPLANET_IDS, HOSTED_PLANET_IDS, M_PER_AU, M_PER_KM, SOLAR_EFFECTIVE_TEMPERATURE_K, SOLAR_RADIUS_M, STAR_IDS, isSceneSatellite, sceneSatelliteStateKm, starAstrometry } from '@cssearth/astronomy';
 import type { StarId } from '@cssearth/astronomy';
 import { isPlacedClassification, mapLabel, NEUTRAL_CATALOGUE_COLOR, OBJECT_TREE_ROOT, parseObjectDescriptor } from '@cssearth/objects';
-import { isRecord } from '@cssearth/core';
 import { packPreparedBinary, readCatalog, readPreparedObjects } from '@cssearth/objects/node';
 import { worldOrbitBankRegions } from '@cssearth/objects';
 import { prepareSceneDistance } from '@cssearth/bake/navigation';
@@ -56,7 +56,7 @@ async function planckHex(kelvin: number): Promise<string> {
 
 /** Prepares a renderer-neutral solar context from a pinned source document and epoch geometry adapter. */
 export async function prepareSpatialContext(options: SpatialContextPreparationOptions): Promise<void> {
-  const input = JSON.parse(await readFile(options.sourcePath, 'utf8'));
+  const input = readWorldContextSourceSelection(JSON.parse(await readFile(options.sourcePath, 'utf8')));
   if (input.bodies === 'catalog') {
     const objects = await readCatalog(options.objectsDirectory ?? resolve(process.cwd(), 'src/objects'), prepareSceneDistance);
     input.bodies = objects.filter(body => body.context && body.id !== input.focus.id)
@@ -72,7 +72,6 @@ export async function prepareSpatialContext(options: SpatialContextPreparationOp
     // later makes it an ordinary, clickable body.
     const packaged = new Set(objects.map(object => object.id));
     const records = BODIES as Readonly<Record<string, { readonly name: string; readonly parent: string | null; readonly effectiveTemperatureK?: number }>>;
-    const objectsRoot = options.objectsDirectory ?? dirname(dirname(dirname(dirname(options.sourcePath))));
     for (const id of HOSTED_PLANET_IDS as readonly string[]) {
       const record = records[id], parent = record?.parent;
       if (packaged.has(id) || !parent || !packaged.has(parent)) continue;
@@ -117,7 +116,7 @@ export async function prepareSpatialContext(options: SpatialContextPreparationOp
       // its package cites, against the IAU 2015 nominal solar values. Baked here, so the map writes nothing per frame for it.
       // A star whose package cites neither keeps its full color.
       if (object.classification === 'star' && body !== input.focus && typeof body.color === 'string') {
-        const measured = await readFile(resolve(objectsRoot, object.id, 'source/measurements.json'), 'utf8').then(text => JSON.parse(text) as Record<string, unknown>,
+        const measured = await readFile(resolve(objectsRoot, object.id, 'source/measurements.json'), 'utf8').then(text => readStellarDotMeasurements(JSON.parse(text)),
           (error: unknown) => { if (isMissingFile(error)) return undefined; throw error; });
         const radiusKm = measured?.radiusKm, temperatureK = measured?.effectiveTemperatureK;
         if (typeof radiusKm === 'number' && typeof temperatureK === 'number') {
@@ -380,7 +379,7 @@ async function writeIfChanged(path: string, contents: string | Uint8Array): Prom
 async function preparedRadius(id: string, originM: Vector3, referenceFrame: string, epochJdTt: number,
   descriptorPath: string): Promise<number | undefined> {
   let raw: unknown;
-  try { raw = JSON.parse(await readFile(descriptorPath, 'utf8')); }
+  try { raw = parseObjectDescriptor(JSON.parse(await readFile(descriptorPath, 'utf8'))); }
   catch (error: unknown) {
     if (isMissingFile(error)) return undefined;
     throw error;

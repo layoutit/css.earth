@@ -1,7 +1,7 @@
 import { readFile } from 'node:fs/promises';
 import { relative, resolve, sep } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { parseObjectDescriptor } from '@cssearth/objects';
+import { parseObjectDescriptor, readSourceManifestInputs, readVolumePresentationPreviews } from '@cssearth/objects';
 import { loadPreparedVolumeDatasets } from '@cssearth/renderer/universe';
 import { lineageSource } from '@cssearth/objects/provenance';
 import type { ContextAvailability } from '@cssearth/objects/provenance';
@@ -41,8 +41,8 @@ export async function inspectContextAvailability(projectRoot = root, { publicAss
     try {
       const descriptor = parseObjectDescriptor(JSON.parse((await read(directory, 'object.json')).toString()));
       const bank = await loadPreparedVolumeDatasets(descriptor, { read: async path => new Uint8Array(await read(directory, path)).buffer });
-      const sources = sourceArray(sourceObject(JSON.parse((await read(directory, 'source/manifest.json')).toString())).inputs, raw => lineageSource(raw));
-      const presentation = parsePreparedVolumePresentation(JSON.parse((await read(directory, 'prepared/presentation.json')).toString()), bank, sources);
+      const sources = sourceArray(readSourceManifestInputs(JSON.parse((await read(directory, 'source/manifest.json')).toString())).inputs, raw => lineageSource(raw));
+      const presentation = parsePreparedVolumePresentation(readVolumePresentationPreviews(JSON.parse((await read(directory, 'prepared/presentation.json')).toString())), bank, sources);
       for (const dataset of bank.datasets) for (const resource of dataset.volume.resources)
         await verify(resolve(directory, 'prepared'), resource.path);
       const published = publicAssets === 'manifest'

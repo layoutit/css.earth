@@ -1,3 +1,6 @@
+import { readPreparedPanelContentRecord } from '@cssearth/objects';
+import { requireInventory } from '@cssearth/objects/node';
+import { parsePreparedObjectRuntime } from '@cssearth/objects';
 // Reprepare selected photographs and their small previews, preserving the existing scene,
 // lighting banks and scientific maps. Full preparation uses these same raster/interpreter owners.
 import { updateInventory } from '@cssearth/objects/node';
@@ -36,7 +39,7 @@ export async function refreshPhotographs(id: string, datasetIds: readonly string
   sharp.concurrency(1); sharp.cache(false);
   const start = Date.now();
   const assets = await prepareRasterAssets({ sourceDirectory, publicDirectory: stage, outputDirectory: stage, config: selected, interpret });
-  const manifest = parseRuntimeManifest(JSON.parse(await readFile(resolve(objectDirectory, 'inventory.json'), 'utf8')), id);
+  const manifest = parseRuntimeManifest(requireInventory(id, JSON.parse(await readFile(resolve(objectDirectory, 'inventory.json'), 'utf8'))), id);
   // The stage holds the refreshed images and their assets.json. Each image replaces one inventoried public file,
   // whose entry gets the new bytes' R2 content address.
   const replacements = new Map<string, { filename: string; bytes: number; sha256: string }>();
@@ -73,7 +76,7 @@ export async function refreshSurfaceContent(id: string, datasetIds: readonly str
   const content = (await readAuthoredSources(objectDirectory)).sources.get('content')?.reference;
   if (!content?.path.startsWith('source/')) throw new TypeError('Photographic refresh needs authored content.');
   const previousDatasets = requireRecord(JSON.parse(await readFile(resolve(outputDirectory, 'datasets.json'), 'utf8')));
-  const previousContent = requireRecord(JSON.parse(await readFile(resolve(outputDirectory, 'content.json'), 'utf8')));
+  const previousContent = readPreparedPanelContentRecord(JSON.parse(await readFile(resolve(outputDirectory, 'content.json'), 'utf8')));
   await prepareObjectContentAssets({ sourceDirectory, publicDirectory, outputDirectory, config: { contentPath: content.path.slice(7) } });
   const datasetPath = resolve(outputDirectory, 'datasets.json'), preparedDatasets = requireRecord(JSON.parse(await readFile(datasetPath, 'utf8')));
   const replacementsById = new Map(requireArray(preparedDatasets.controls).map(value => { const dataset = requireRecord(value); return [requireString(dataset.id), dataset] as const; }));
@@ -85,11 +88,11 @@ export async function refreshSurfaceContent(id: string, datasetIds: readonly str
   if (previousContent.features !== undefined) {
     const features = requireRecord(previousContent.features);
     const path = resolve(outputDirectory, 'content.json');
-    const content = requireRecord(JSON.parse(await readFile(path, 'utf8')));
+    const content = readPreparedPanelContentRecord(JSON.parse(await readFile(path, 'utf8')));
     await writeFile(path, JSON.stringify({ ...content, features: { searchLabel: requireString(features.searchLabel), description: requireString(features.description) } }) + '\n');
   }
   // Asset URLs and the scene are retained. The writer updates the descriptor/page transport from the new content.
-  const runtime = requireRecord(JSON.parse(await readFile(resolve(outputDirectory, 'runtime.json'), 'utf8')));
+  const runtime = requireRecord(parsePreparedObjectRuntime(JSON.parse(await readFile(resolve(outputDirectory, 'runtime.json'), 'utf8')), { parsedJson: true }));
   const { repinObjectJson } = await import('@cssearth/bake/contract');
   const updatedControls = requireRecord(JSON.parse(await readFile(resolve(outputDirectory, 'controls.json'), 'utf8')));
   const labels = new Map(requireArray(requireRecord(updatedControls.datasets).controls).map(value => { const dataset = requireRecord(value); return [requireString(dataset.id), dataset] as const; }));

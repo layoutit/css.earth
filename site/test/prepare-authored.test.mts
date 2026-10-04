@@ -4,7 +4,7 @@ import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import test from 'node:test';
 import { readAuthoredSources } from '@cssearth/bake/objects/sources';
-import { redrawOnlyDecision } from '../build/prepare/prepare-authored.ts';
+import { redrawOnlyDecision, readPublishedSun } from '../build/prepare/prepare-authored.ts';
 
 // A published copy of Iapetus whose recipes match the working tree, so only the feature record's left edge can decide.
 async function publishedIapetus(publishedEdge: number) {
@@ -31,4 +31,21 @@ test('a redraw carries feature anchors only while the surface map keeps their le
   } finally {
     await Promise.all([same, moved].map(directory => rm(directory, { recursive: true, force: true })));
   }
+});
+
+test('reuse-images preserves a null Sun for stars and unlit bodies', () => {
+  assert.equal(readPublishedSun(null), null);
+  assert.throws(() => readPublishedSun({ schema: 'wrong' }));
+});
+test('a changed published recipe schema falls through to full preparation', async () => {
+  const directory = await publishedIapetus(0);
+  try {
+    const result = await redrawOnlyDecision(directory, async file => {
+      const value = JSON.parse(await readFile(file, 'utf8'));
+      if (file.endsWith('raster.json')) value.schema = 'historical-raster-schema';
+      return Buffer.from(JSON.stringify(value));
+    });
+    assert.equal(result.redraw, false);
+    assert.match(result.reason, /changed outside|recipe source/u);
+  } finally { await rm(directory, { recursive: true, force: true }); }
 });

@@ -1,4 +1,4 @@
-import { OBJECT_SCHEMA, OBJECT_RUNTIME_SCHEMA, parseObjectDescriptor } from '@cssearth/objects';
+import { OBJECT_SCHEMA, OBJECT_RUNTIME_SCHEMA, parseObjectDescriptor, parsePreparedObjectRuntime, readObjectDescriptorRecord } from '@cssearth/objects';
 
 // Entry script: node site/build/prepare/prepare-object-json.mts [<object-id>...] [--keep-bindings].
 
@@ -56,7 +56,7 @@ export async function finalizeObjectJson(id: string, definitionValue: unknown, t
     throw new TypeError('Prepared object identity does not match the application registry.');
   }
   const { projectRoot, objectDirectory, preparedDirectory } = target;
-  const originalDescriptor = requireRecord(JSON.parse(await readFile(resolve(objectDirectory, 'object.json'), 'utf8')));
+  const originalDescriptor = readObjectDescriptorRecord(JSON.parse(await readFile(resolve(objectDirectory, 'object.json'), 'utf8')));
   let descriptor = parseObjectDescriptor(originalDescriptor);
   if (descriptor.schema !== OBJECT_SCHEMA || descriptor.id !== id || typeof descriptor.type !== 'string') {
     throw new TypeError('Prepared object descriptor identity is invalid.');
@@ -103,7 +103,7 @@ export async function prepareObjectJson(ids?:readonly string[]|null, options?:Bi
     try { await access(resolve(root, 'src/objects', object.id, 'object.json')); }
     catch (error) { if (hasErrorCode(error,'ENOENT') && !ids) continue; throw error; }
     const runtimeDefinition:unknown = await authoredObject(object.id, root)
-      ? JSON.parse(await readFile(resolve(root, 'src/objects', object.id, 'prepared/runtime.json'), 'utf8'))
+      ? parsePreparedObjectRuntime(JSON.parse(await readFile(resolve(root, 'src/objects', object.id, 'prepared/runtime.json'), 'utf8')), { parsedJson: true })
       : requireRecord(await import(pathToFileURL(resolve(root, `src/objects/${object.id}/runtime/definition.mjs`)).href)).runtimeDefinition;
     results.push(await writeObjectJson(object.id, runtimeDefinition, options));
   }
