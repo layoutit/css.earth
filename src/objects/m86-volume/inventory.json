@@ -10,8 +10,8 @@
     {
       "location": "prepared",
       "filename": "datasets.json",
-      "bytes": 169976,
-      "sha256": "d33f8b66e410fcc464f3bf8aa928134ce447e773d665a690aa131b3d76d74504"
+      "bytes": 3342,
+      "sha256": "bb3c43328b2b61779efaf282e015850e241586483b1ed35e2e02517817308d6e"
     },
     {
       "location": "prepared",
@@ -22,8 +22,8 @@
     {
       "location": "prepared",
       "filename": "dots.bin",
-      "bytes": 4369,
-      "sha256": "b1cb1d0c6686b63df6a410c9406bf1ded4b41ffe3500634ec37516ff2a5437fb"
+      "bytes": 4431,
+      "sha256": "e90807736e8d6b83ec3bc86f2252739fd04dc88cc3ee7883f307edc7467636c2"
     },
     {
       "location": "prepared",
@@ -201,9 +201,27 @@
     },
     {
       "location": "prepared",
+      "filename": "optical/volume.json",
+      "bytes": 56632,
+      "sha256": "81674ee60f7caa32e6f4567a9bc778657389459ecd2a6546d493269b540101cb"
+    },
+    {
+      "location": "prepared",
       "filename": "presentation.json",
       "bytes": 1272,
       "sha256": "dc7722a0e9cdcd205556a874dd4d587ea9c71ca9ab88c383f3836c66374875e8"
+    },
+    {
+      "location": "prepared",
+      "filename": "record.json",
+      "bytes": 11465,
+      "sha256": "306a2832df0eb407f423b45c173c02c051cd36fdb10ef6025f3e78c935ac89e1"
+    },
+    {
+      "location": "prepared",
+      "filename": "stars.bin",
+      "bytes": 386,
+      "sha256": "fdcb2481d63fb0031ac8f46233316efe207bfcb3ab3bdd168dbb6f96024d0a09"
     }
   ]
 }

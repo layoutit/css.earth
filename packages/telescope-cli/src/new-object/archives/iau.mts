@@ -51,7 +51,6 @@ export function named(spec: Spec, row: IauName, id: string | undefined, identifi
   const designation = identifiers.includes(row.designation) ? [readable(row.designation)] : [];
   out.name = row.name; out.system = `${row.name} system`;
   out.aliases = [...new Set([...(out.aliases ?? []).map(String).map(readable), old, ...designation, ...bayer ? [bayer] : [], ...catalogue])].filter(alias => alias !== row.name);
-  out.featured = true;
   if (id) out.id = id;
   return out;
 }

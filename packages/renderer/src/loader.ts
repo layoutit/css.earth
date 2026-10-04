@@ -1,7 +1,7 @@
 import { type ObjectRuntimeDefinition, preparedDatasetReference } from '@cssearth/objects';
 
 import { decodePreparedCssObject, requirePreparedCssDescriptor } from './prepared-object-decoder.js';
-import { decodePreparedObjectInWorker } from './prepared-object-worker-client.js';
+import { decodePreparedObjectInWorker } from './prepared-data-worker-client.js';
 import { adoptPreparedDatasetTables } from './prepared-data/dataset-tables.js';
 
 export interface PreparedCssTransport {

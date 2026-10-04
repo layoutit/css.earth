@@ -10,8 +10,8 @@
     {
       "location": "prepared",
       "filename": "datasets.json",
-      "bytes": 307868,
-      "sha256": "4970ed7cc945a173b9105ac2d6f7fab1e33c5849bdb18a0f19d0bdfbcf1296fc"
+      "bytes": 3635,
+      "sha256": "242e0d3d436e8e94c214e7c8eef059d7e83dfd7311407a25159882e72fe15e67"
     },
     {
       "location": "prepared",
@@ -24,6 +24,12 @@
       "filename": "presentation.json",
       "bytes": 3089,
       "sha256": "5d0bd982aa32b482cb3632bd9ac9762ed07d5d04f1c47789c06673c8633d9f8d"
+    },
+    {
+      "location": "prepared",
+      "filename": "record.json",
+      "bytes": 18109,
+      "sha256": "f9afc1a5c057834da414d1fbdfda76487f75dd6e5551a0d58398af4442b8eee3"
     },
     {
       "location": "prepared",
@@ -198,6 +204,18 @@
       "filename": "reflectance/impostors/view-ppp.png",
       "bytes": 46809,
       "sha256": "460430ec50aa687344fa296e7a04295c5f645679027149d505d3b4ebc54efba1"
+    },
+    {
+      "location": "prepared",
+      "filename": "reflectance/volume.json",
+      "bytes": 114152,
+      "sha256": "e1853bd43192915f1cfdd41ea687d5afbedeb7279003ce013acc8c4cbf8ce099"
+    },
+    {
+      "location": "prepared",
+      "filename": "stars.bin",
+      "bytes": 380,
+      "sha256": "f4e8a1484efe530169a5138d857ccaa002ab3804f8cbe22f073ec41a64dc5023"
     }
   ]
 }

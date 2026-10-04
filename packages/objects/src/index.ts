@@ -16,6 +16,8 @@ export type { ObjectPreparation } from './preparation.js';
 export * from './registry/index.js';
 export { PREPARED_BINARY_MAGIC, shufflePreparedBinary, unshufflePreparedBinary } from './prepared-binary.js';
 export type { PreparedBinaryRegion } from './prepared-binary.js';
+export { PREPARED_BANK_MAGIC, encodePreparedBank, decodePreparedBank, preparedBankColumn } from './prepared-bank.js';
+export type { PreparedBank, PreparedBankColumn, PreparedBankColumnType } from './prepared-bank.js';
 export * from './volume/emission/cloud-density-filter.js';
 export * from './volume/compiler/compiler-bake.js';
 export * from './volume/emission/coordinates.js';
@@ -58,7 +60,9 @@ export type { PreparedOrbitCenter } from './prepared-data/orbit/prepared-orbit-c
 
 export { PREPARED_WORLD_CONTEXT_SCHEMA, PREPARED_WORLD_CONTEXT_SUMMARY_SCHEMA, PREPARED_WORLD_SYSTEM_SCHEMA, PREPARED_WORLD_SYSTEM_VIEW_SCHEMA, PREPARED_WORLD_ORBITS_SCHEMA } from './prepared-data/world/world-schemas.js';
 
-export { CATALOGUE_POINTS_BINARY_SCHEMA, CATALOGUE_BANK_BINARY_MAGIC, CATALOGUE_POSITION_SCALE, encodeCatalogueBankBinary, decodeCatalogueBankBinary } from './prepared-data/catalogue/catalogue-bank-binary.js';
+export { CATALOGUE_POINTS_BINARY_SCHEMA, CATALOGUE_POSITION_SCALE, catalogueBankColumns, encodeCatalogueBankBinary, decodeCatalogueBankBinary } from './prepared-data/catalogue/catalogue-bank-binary.js';
+export { readCataloguePointColumns, cataloguePointColumns, cataloguePointColumnBuffers } from './prepared-data/catalogue/catalogue-point-columns.js';
+export type { PreparedCataloguePointColumns, CataloguePointStyle } from './prepared-data/catalogue/catalogue-point-columns.js';
 export { PREPARED_CSS_POINT_FIELD_SCHEMA, PREPARED_CSS_POINT_FIELD_MANIFEST_SCHEMA, POINT_FIELD_BANK_ENCODING } from './stars/point-field-schemas.js';
 export { POINT_FIELD_BANK_MAGIC, POINT_FIELD_BANK_VERSION, POINT_FIELD_BANK_HEADER_BYTES, POINT_FIELD_MAGNITUDE_DIVISOR, POINT_FIELD_MAGNITUDE_BOUND, POINT_FIELD_BANK_QUANTIZATION, decodeStarMagnitude, pointFieldBankLayout, pointFieldBankHeader, pointFieldBankRegions, decodePointFieldBank } from './stars/point-field-bank.js';
 export { parsePreparedCssPointFieldManifest, decodePreparedCssPointField } from './stars/point-field-validation.js';
@@ -102,14 +106,17 @@ export { DIRECTIONAL_SUN_PRESENTATION_STANDARD_SCHEMA } from './prepared-data/ca
 export { validatePreparedCubicSky, validateDirectionalSunPlan } from './prepared-data/sky/sky-contract.js';
 
 export type { VolumeAxis, PreparedVolumeLeafStyle, PreparedVolumeLeaf, PreparedVolumeStack, PreparedVolumeImpostors, PreparedCssVolume } from './volume/delivery/css-volume-types.js';
-export { validatePreparedCssVolume } from './volume/delivery/css-volume-validation.js';
+export { validatePreparedCssVolume, trustPreparedCssVolume } from './volume/delivery/css-volume-validation.js';
 export { validateVolumeImpostors } from './volume/delivery/volume-impostor-validation.js';
-export { validatePreparedCataloguePoints } from './volume/catalogue/prepared-catalogue-points.js';
+export { validatePreparedCataloguePoints, trustPreparedCataloguePoints } from './volume/catalogue/prepared-catalogue-points.js';
 export type { PreparedCataloguePoint, PreparedCataloguePoints } from './volume/catalogue/prepared-catalogue-points.js';
 export { DEFAULT_POINT_VISIBILITY } from './volume/catalogue/point-visibility.js';
 export type { PreparedPointVisibility } from './volume/catalogue/point-visibility.js';
 export { validatePreparedVolumeDatasets, samePreparedCatalogueGeometry, samePreparedPhysicalFrame } from './volume/delivery/prepared-volume-datasets.js';
 export type { PreparedVolumeDatasetBrightness, PreparedVolumeDataset, PreparedVolumeDatasets, PreparedVolumeDatasetBank } from './volume/delivery/prepared-volume-datasets.js';
+export { PREPARED_VOLUME_DATASET_INDEX_SCHEMA, PREPARED_VOLUME_DATASET_RECORD_SCHEMA, PREPARED_VOLUME_STARS_SCHEMA, VOLUME_DATASET_INDEX_FILE, VOLUME_DATASET_RECORD_FILE,
+  encodeVolumeStars, decodeVolumeStars, splitPreparedVolumeDatasets, joinPreparedVolumeDatasets, validatePreparedVolumeDatasetIndex } from './volume/delivery/volume-dataset-bank-files.js';
+export type { PreparedVolumeDatasetEntry, PreparedVolumeDatasetIndex, PreparedVolumeDatasetFiles } from './volume/delivery/volume-dataset-bank-files.js';
 export type { PreparedImageLayerBank, PreparedImageLayerLeaf, PreparedImageLayerView, PreparedCssImageLayers } from './volume/delivery/image-layer-bank-types.js';
 export { validatePreparedImageLayerBank } from './volume/delivery/image-layer-bank-validation.js';
 export type { PreparedCssSurfaceShell } from './prepared-data/surface/css-surface-shell-types.js';
@@ -117,7 +124,7 @@ export { validatePreparedCssSurfaceShell } from './prepared-data/surface/css-sur
 export { PREPARED_CSS_VOLUME_SCHEMA, PREPARED_VOLUME_IMPOSTORS_SCHEMA, PREPARED_VOLUME_DATASETS_SCHEMA, PREPARED_IMAGE_LAYER_BANK_SCHEMA, DENSITY_VOLUME_FORMAT } from './volume/delivery/volume-schemas.js';
 export { PREPARED_CSS_SURFACE_SHELL_SCHEMA, SURFACE_SHELL_FORMAT, SHELL_CORNER_PERMUTATIONS } from './prepared-data/surface/css-surface-shell-types.js';
 
-export { readCataloguePointBank, parseCataloguePointSteps } from './prepared-data/catalogue/catalogue-point-bank.js';
+export { readCataloguePointBank, parseCataloguePointSteps, parseCataloguePointHeader } from './prepared-data/catalogue/catalogue-point-bank.js';
 export type { CataloguePointLevel, PreparedCataloguePointBank } from './prepared-data/catalogue/catalogue-point-bank.js';
 export { GALAXY_BACKING_SCHEMA, parseGalaxyBacking } from './prepared-data/catalogue/galaxy-backing.js';
 export type { BackingNearFade, PreparedGalaxyBacking } from './prepared-data/catalogue/galaxy-backing.js';
@@ -136,6 +143,8 @@ export { PREPARED_SURFACE_FEATURES_SCHEMA } from './prepared-data/surface/surfac
 export type { SurfaceFeatureKind, SurfaceFeatureOutline, SurfaceFeatureAxes, PreparedSurfaceFeature, PreparedSurfaceFeatureCatalog, ParsedSurfaceFeature, ParsedSurfaceFeatureCatalog, TraceSummary, SurfaceFeatureLandmarkEvidence } from './prepared-data/surface/surface-feature-types.js';
 export { parsePreparedSurfaceFeatureCatalog } from './prepared-data/surface/surface-feature-catalog.js';
 export { GALAXY_DISPLAY_SAMPLE_SCHEMA, parseGalaxyDisplaySample } from './prepared-data/catalogue/galaxy-display-sample.js';
+export { PREPARED_CATALOGUE_DOTS_SCHEMA, catalogueDots, encodeCatalogueDots, decodeCatalogueDots } from './prepared-data/catalogue/catalogue-dots.js';
+export type { PreparedCatalogueDots } from './prepared-data/catalogue/catalogue-dots.js';
 export type { PreparedGalaxyDisplaySample, GalaxyDisplaySample } from './prepared-data/catalogue/galaxy-display-sample.js';
 
 export { EMISSION_FIELD_SCHEMA } from './volume/emission/emission-field-types.js';

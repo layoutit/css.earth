@@ -74,3 +74,26 @@ test('owners of one document share one frame budget and take turns', () => {
   assert.equal(taken.filter(([name]) => name === 'b').reduce((sum, [, wrote]) => sum + wrote, 0), 40);
   a.destroy(); b.destroy();
 });
+
+test("a frame's own work takes a share of the budget, split by what each asked the frame before, and paces the next frame", () => {
+  const frames: ((now?: number) => void)[] = [];
+  const pacer = createFramePacer(callback => frames.push(callback));
+  const run = (now: number) => { const due = frames.splice(0); for (const callback of due) callback(now); };
+  const start = SETTLE_PACING.startUnits;
+  // The first to ask may spend the whole budget; the frame is watched from then on.
+  assert.equal(pacer.take(start * 4), start);
+  assert.equal(pacer.take(start / 4), start / 4, 'work within the budget is granted whole');
+  assert.equal(frames.length, 1);
+  run(0);
+  // The next frame knows what was asked: two takers share the budget in that proportion.
+  assert.equal(pacer.take(start * 4), start * 4 * start / (start * 4 + start / 4));
+  assert.equal(pacer.take(start / 4), start / 4 * start / (start * 4 + start / 4));
+  // A frame over the slow limit halves the budget; quick ones grow it back to the maximum.
+  run(SETTLE_PACING.slowFrameMs + 10);
+  run(SETTLE_PACING.slowFrameMs + 20);
+  assert.equal(pacer.take(start * 4), start / 2);
+  let now = SETTLE_PACING.slowFrameMs + 20;
+  for (let frame = 0; frame < 12; frame++) { run(now += 16); pacer.take(1000); }
+  assert.equal(pacer.take(1000), SETTLE_PACING.maximumUnits);
+  assert.equal(pacer.take(0), 0);
+});

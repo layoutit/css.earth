@@ -16,8 +16,8 @@
     {
       "location": "prepared",
       "filename": "datasets.json",
-      "bytes": 186577,
-      "sha256": "2b6019c97b81eff5fbc1402fac449dc7c70bee0e7c2bb8c42400d4487f064a0d"
+      "bytes": 6495,
+      "sha256": "a36c51916d0f0d798712f27bbf51b4f444f3f9b506c97948107c48ce7aad8fe5"
     },
     {
       "location": "prepared",
@@ -201,6 +201,12 @@
     },
     {
       "location": "prepared",
+      "filename": "eso0844a/volume.json",
+      "bytes": 83230,
+      "sha256": "14f3aa1b832fd8929dc991653785705d7a8b0a86a08314368cf33f573203c3b0"
+    },
+    {
+      "location": "prepared",
       "filename": "eso1119b/atlases/x.webp",
       "bytes": 717392,
       "sha256": "7c140e5355dae4ee747b5033fbebbeb1e3065a60fbfab907c9a497c195c36ca8"
@@ -375,9 +381,27 @@
     },
     {
       "location": "prepared",
+      "filename": "eso1119b/volume.json",
+      "bytes": 83230,
+      "sha256": "62adb40f9d821368ff64613c24fcf0207f93558356b6e38075adba472a26fdc5"
+    },
+    {
+      "location": "prepared",
       "filename": "presentation.json",
       "bytes": 4018,
       "sha256": "1208d328bbaab4c3d4ec55b9f6be8b14072ec4a2f8fc2b604ea67b9d9b66ec0f"
+    },
+    {
+      "location": "prepared",
+      "filename": "record.json",
+      "bytes": 17718,
+      "sha256": "5bee2804f2c1b6fcdb201d4bed9b939af7996ff8ba9c668d8c518234d573be44"
+    },
+    {
+      "location": "prepared",
+      "filename": "stars.bin",
+      "bytes": 416,
+      "sha256": "f46f4e80dceca8ced2b9cca82709a11fdb5c4c527705f6dac3af3888ec57c6c3"
     }
   ]
 }

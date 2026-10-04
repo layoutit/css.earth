@@ -9,8 +9,10 @@ import type { WorldPlannerSource } from './world-context/world-context-planner-c
 export type PreparedImageLayerMount = { payload: PreparedCssImageLayers; resolveResource(path: string): string;
   /** Published catalogues placed in the bank's own frame, drawn as dots over its layers and faded with them. */
   cataloguePointUrls?: readonly string[] };
+/** `payload` is the catalogue's dots as the data worker reads them (@cssearth/objects catalogue-dots.ts); a caller that
+ * holds the catalogues whole passes the galaxy catalogue with its sample and the other two. */
 export type PreparedCatalogBank = { payload: unknown; galaxySample?: unknown; nebulae?: unknown; fadeStartDistanceM: number; fullDistanceM: number;
-  clusters?: { payload: unknown; fadeStartDistanceM: number; fullDistanceM: number } };
+  clusters?: { payload?: unknown; fadeStartDistanceM: number; fullDistanceM: number } };
 
 export interface PreparedUniverseOptions {
   /** Prepared catalogue point banks of the galaxies beyond the Local Group (background-points.ts). */

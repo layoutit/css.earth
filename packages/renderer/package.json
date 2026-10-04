@@ -42,10 +42,10 @@
       "import": "./dist/world-context-planner-worker.js",
       "default": "./dist/world-context-planner-worker.js"
     },
-    "./prepared-object-worker": {
-      "types": "./dist/prepared-object-worker.d.ts",
-      "import": "./dist/prepared-object-worker.js",
-      "default": "./dist/prepared-object-worker.js"
+    "./prepared-data-worker": {
+      "types": "./dist/prepared-data-worker.d.ts",
+      "import": "./dist/prepared-data-worker.js",
+      "default": "./dist/prepared-data-worker.js"
     },
     "./platform/*": {
       "types": "./dist/platform/*.d.ts",

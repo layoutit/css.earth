@@ -10,8 +10,8 @@
     {
       "location": "prepared",
       "filename": "datasets.json",
-      "bytes": 167554,
-      "sha256": "fe5ca9058c9e13ad81bda8b2ef723397f3e88a5139598d7eae4751cfe21eda89"
+      "bytes": 3599,
+      "sha256": "2bc6822a4cd46f0ecb14cc194839020b28441b37eae01980c7c799ca650b1327"
     },
     {
       "location": "prepared",
@@ -195,9 +195,27 @@
     },
     {
       "location": "prepared",
+      "filename": "legacy-optical/volume.json",
+      "bytes": 61648,
+      "sha256": "f22af2edc0ebd3e44b99ee445b52c6be197432d9ef543ed79477b5ab110baa05"
+    },
+    {
+      "location": "prepared",
       "filename": "presentation.json",
       "bytes": 1426,
       "sha256": "4c85b163db5ee4e01ac2a2570e05705798cd8efbb805803fd48ee50f55053451"
+    },
+    {
+      "location": "prepared",
+      "filename": "record.json",
+      "bytes": 7081,
+      "sha256": "5d7ed0509ce5856ef2b18d54f8f6e174b0b69af1ded1f4e9c4148f5a99813c3f"
+    },
+    {
+      "location": "prepared",
+      "filename": "stars.bin",
+      "bytes": 386,
+      "sha256": "834d9158dd30ce5952a02af4121579b7b14e4f8c530e83ca78a18a8ef0f25353"
     }
   ]
 }

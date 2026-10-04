@@ -2,7 +2,8 @@ import { afterEach, test, mock } from 'node:test';
 import assert from 'node:assert/strict';
 import { isDeepStrictEqual } from 'node:util';
 import { parseObjectDescriptor, prepareObject, validatePreparedVolumeDatasets, validatePreparedCataloguePoints, createRenderElementBudget, samePreparedVolumeTopology, CSS_COMPILER_RENDER_BUDGET, type PreparedVolumeDatasets, type PreparedCssVolume, type VolumeVector, type PreparedCataloguePoints } from '@cssearth/objects';
-import { createPreparedVolumeDatasets, loadPreparedVolumeDatasets, volumeDatasetCompositeOpacity } from './prepared-volume-datasets.js';
+import { createPreparedVolumeDatasets, loadPreparedVolumeDatasets, preparedTransportReader, volumeDatasetCompositeOpacity } from './prepared-volume-datasets.js';
+import { volumeDatasetBankFiles } from '@cssearth/objects/node';
 
 import { mountPreparedVolumeLod } from './prepared-volume-lod.js';
 
@@ -340,21 +341,42 @@ test('declared dataset resources do not download at startup or for inactive data
   runtime.destroy(); lease.destroy();
 });
 
-async function transportFixture(data = payload()) {
-  const descriptor = parseObjectDescriptor({ schema: 'cssearth-object@2', id: data.id, type: 'volume-dataset-bank',
-    properties: { frame, preparation: { source: 'source/lenses.json' } } });
-  const wrapped = await prepareObject(descriptor, { type: descriptor.type, format: 'cssearth-volume-datasets@1', parse: value => value, bake: () => data }, {});
-  const bytes = new TextEncoder().encode(JSON.stringify(wrapped)).buffer;
-  return { bytes, descriptor: { ...descriptor, prepared: { format: 'cssearth-volume-datasets@1', url: 'prepared/datasets.json' } } };
+function transportFixture(data = payload()) {
+  const descriptor = { ...parseObjectDescriptor({ schema: 'cssearth-object@2', id: data.id, type: 'volume-dataset-bank',
+    properties: { frame, preparation: { source: 'source/lenses.json' } } }), prepared: { format: 'cssearth-volume-dataset-index@1', url: 'prepared/datasets.json' } };
+  // The bank as a preparation stores it: its index, one volume a dataset and its stars (volume-dataset-bank-files.ts).
+  const files = volumeDatasetBankFiles(data);
+  const read = mock.fn(async (path: string) => {
+    const bytes = files.get(path.replace(/^prepared\//u, ''));
+    if (!bytes) throw new Error(`${path} is not in the bank`);
+    return bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.byteLength) as ArrayBuffer;
+  });
+  const asked = () => read.mock.calls.map(call => call.arguments[0]);
+  return { descriptor, transport: { read }, asked, options: { resolve: (path: string) => path, read: preparedTransportReader({ read }) } };
 }
-test('generic descriptor loader verifies wrapper identity and all volume frames', async () => {
-  const f = await transportFixture(), read = mock.fn(async () => f.bytes);
-  const loaded = await loadPreparedVolumeDatasets(f.descriptor, { read });
-  assert.equal(loaded.id, 'fixture'); assert.equal(loaded.datasets.length, 3);
-  assert.equal(read.mock.callCount(), 1); assert.deepEqual(read.mock.calls[0]!.arguments, ['prepared/datasets.json']);
+test('the loader reads the index and one dataset; another dataset is read when it is first selected, and the stars once', async () => {
+  const f = transportFixture();
+  const source = await loadPreparedVolumeDatasets(f.descriptor, f.transport, f.options);
+  assert.equal(source.index.id, 'fixture'); assert.equal(source.index.datasets.length, 3);
+  assert.deepEqual(f.asked().sort(), ['prepared/datasets.json', 'prepared/first/volume.json', 'prepared/stars.bin']);
+  assert.equal(source.volume('first')!.id, 'first'); assert.equal(source.stars('first')!.points.length, 3);
+  assert.equal(source.volume('second'), undefined, 'a dataset that was never shown is not read');
+  // A mount shows the dataset it has, and the next one when its file arrives.
+  const d = dom(), runtime = createPreparedVolumeDatasets({ payload: source, resolveResource: path => path }).mount({ host: d.host as unknown as HTMLElement, before: d.before as unknown as Element });
+  runtime.selectDataset('second');
+  assert.equal(runtime.state().selectedDataset, 'first', 'the bank keeps what it shows while the file is read');
+  await source.load('second');
+  await Promise.resolve();
+  assert.equal(runtime.state().selectedDataset, 'second');
+  assert.deepEqual(f.asked().filter(path => path.includes('second') || path.includes('stars')), ['prepared/stars.bin', 'prepared/second/volume.json'].sort((a, b) => f.asked().indexOf(a) - f.asked().indexOf(b)));
+  await Promise.all([source.load('second'), source.load('second')]);
+  assert.equal(f.asked().length, 4, 'a dataset is read once');
+  runtime.destroy();
   const drift = { ...f.descriptor, properties: { ...f.descriptor.properties, frame: { ...frame, originM: [1, 0, 0] } } };
-  await assert.rejects(loadPreparedVolumeDatasets(drift, { read }), /identity\/frame/);
-  await assert.rejects(loadPreparedVolumeDatasets({ ...f.descriptor, id: 'different' }, { read }), /identity/);
+  await assert.rejects(loadPreparedVolumeDatasets(drift, f.transport, f.options), /dataset first is not in its descriptor's frame/u);
+  await assert.rejects(loadPreparedVolumeDatasets({ ...f.descriptor, id: 'different' }, f.transport, f.options), /does not match|identity|different/u);
+  await assert.rejects(loadPreparedVolumeDatasets({ ...f.descriptor, prepared: { ...f.descriptor.prepared, format: 'cssearth-volume-datasets@1' } }, f.transport, f.options),
+    /Volume dataset bank fixture requires its cssearth-volume-dataset-index@1 index/u);
 });
 
 test('angular compact-light footprints zoom and change dataset material without changing their positions or nodes', () => {

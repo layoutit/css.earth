@@ -28,27 +28,45 @@ let moveText: readonly string[] | null = null, lineText: readonly string[] | nul
 const moveTable = () => moveText ??= Array.from({ length: 2 * TABLE_REACH + 1 }, (_, index) => `M${pixels(index - TABLE_REACH)} `);
 const lineTable = () => lineText ??= Array.from({ length: 2 * TABLE_REACH + 1 }, (_, index) => `${pixels(index - TABLE_REACH)}${DOT}`);
 
+/** A travelling camera's frame may write only a share of the dots (batched-spatial-points.ts): the dots are dealt into
+ * this many slots, and a frame writes whole slots, in turn. */
+export const DOT_SLOTS = 8;
+/** A path is written whole, so a paint with more points than this is drawn through a path for each slot, its points
+ * dealt over them in order; a smaller paint is one path in one slot. Overlapping dots of one paint in two of its paths
+ * add up where one path would draw them once. */
+export const SPLIT_POINTS = 2000;
+/** Where a paint's dots go: one path in `slot`, or a path for each slot. */
+export interface PointPaintSlots { readonly split: boolean; readonly slot: number }
+
 /** A fixed palette of retained paths. Each projected point remains a circular
  * disc; no per-point elements or native drop-shadow commands are needed. A dot is a near-zero-length line with round caps,
  * `M x y h.01` (DOT), stroked as wide as the dot: a fifth of the text of two arcs, and no curve to rasterise. Each part of a
  * field is its own group in the field's group of a dot layer's svg (point-layer.ts); the group's opacity dims its part. */
-export function mountPointPaths(host: SVGElement, palette: readonly string[]) {
+export function mountPointPaths(host: SVGElement, palette: readonly string[], slotsOf: (color: string) => PointPaintSlots = () => ({ split: false, slot: 0 })) {
   const document = host.ownerDocument;
   const part = document.createElementNS(SVG_NS, 'g'), group = document.createElementNS(SVG_NS, 'g');
   part.append(group); host.append(part);
-  const paths = new Map([...new Set(palette)].map(color => {
-    const path = document.createElementNS(SVG_NS, 'path');
-    // A paint is `#rrggbbaa@radius` (batched-spatial-points.ts pointPaint): the path strokes its color.
-    path.setAttribute('fill', 'none'); path.setAttribute('stroke', color.split('@')[0]!); path.setAttribute('stroke-linecap', 'round'); group.append(path);
-    const entry = { path, text: '', published: '', width: 0 };
-    return [color, entry] as const;
-  }));
-  const entries = [...paths.values()], indexOf = new Map([...paths.keys()].map((color, index) => [color, index]));
+  // A split paint's paths are neighbours, one for each slot in order: `first` is its first, and a point's slot is an
+  // offset from it. `dots` is how many dots a path held when it was last written.
+  const entries: { path: SVGPathElement; text: string; published: string; width: number; first: number; split: boolean; slot: number; count: number; dots: number }[] = [];
+  const indexOf = new Map<string, number>();
+  for (const color of new Set(palette)) {
+    const first = entries.length, { split, slot } = slotsOf(color);
+    indexOf.set(color, first);
+    for (let band = 0; band < (split ? DOT_SLOTS : 1); band++) {
+      const path = document.createElementNS(SVG_NS, 'path');
+      // A paint is `#rrggbbaa@radius` (batched-spatial-points.ts pointPaint): the path strokes its color.
+      path.setAttribute('fill', 'none'); path.setAttribute('stroke', color.split('@')[0]!); path.setAttribute('stroke-linecap', 'round'); group.append(path);
+      entries.push({ path, text: '', published: '', width: 0, first, split, slot: split ? band : slot, count: 0, dots: 0 });
+    }
+  }
   let origin = '', move: readonly string[] = [], line: readonly string[] = [];
+  // The slots this paint writes: every one when null.
+  let due: ArrayLike<number> | null = null;
   return {
     /** This palette's group: its opacity dims these paths alone. */
     part,
-    residentElements: paths.size + 2,
+    residentElements: entries.length + 2,
     /** A dot color's path, stroked as wide as its dots: resolved once for each point before any frame, so a frame only
      * adds positions. One path strokes all its dots at one width, so a paint (a color at a radius) is one size. */
     entry(color: string, radius: number) {
@@ -56,25 +74,36 @@ export function mountPointPaths(host: SVGElement, palette: readonly string[]) {
       if (index === undefined) throw new TypeError(`Point color ${color} is absent from the prepared paint palette.`);
       const entry = entries[index]!, width = radius * 2;
       if (entry.width && entry.width !== width) throw new TypeError(`Point color ${color} is drawn ${entry.width} px wide; a dot of it asks for ${width} px.`);
-      if (!entry.width) { entry.width = width; entry.path.setAttribute('stroke-width', String(width)); }
+      if (!entry.width) for (let band = 0; band < (entry.split ? DOT_SLOTS : 1); band++) { entries[index + band]!.width = width; entries[index + band]!.path.setAttribute('stroke-width', String(width)); }
       return index;
     },
-    begin(viewport: WorldCameraViewport) {
+    /** Whether the paint whose first path is `index` has a path for each slot, and the slot of the path at `index`. */
+    split: (index: number) => entries[index]!.split,
+    slot: (index: number) => entries[index]!.slot,
+    /** The dots the paths held when each was last written. */
+    dots: () => entries.reduce((sum, entry) => sum + entry.dots, 0),
+    /** Starts a paint of the slots flagged in `slots`, or of every slot: the paths of the other slots keep their last
+     * paint, and the caller adds no dot to them. */
+    begin(viewport: WorldCameraViewport, slots: ArrayLike<number> | null = null) {
       const next = `translate(${(viewport.widthPixels ?? 0) / 2} ${(viewport.heightPixels ?? 0) / 2})`;
       if (origin !== next) { group.setAttribute('transform', next); origin = next; }
-      for (const entry of paths.values()) entry.text = '';
+      due = slots;
+      for (const entry of entries) if (!due || due[entry.slot]) { entry.text = ''; entry.count = 0; }
       move = moveTable(); line = lineTable();
     },
     /** A dot of the path `entry` returned, at x, y pixels from the view's centre. */
     add(index: number, x: number, y: number) {
       const ix = Math.round(x * SUBPIXELS), iy = Math.round(y * SUBPIXELS);
-      entries[index]!.text += ix >= -TABLE_REACH && ix <= TABLE_REACH && iy >= -TABLE_REACH && iy <= TABLE_REACH
+      const entry = entries[index]!;
+      entry.text += ix >= -TABLE_REACH && ix <= TABLE_REACH && iy >= -TABLE_REACH && iy <= TABLE_REACH
         ? move[ix + TABLE_REACH]! + line[iy + TABLE_REACH]! : `M${pixels(ix)} ${pixels(iy)}${DOT}`;
+      entry.count++;
     },
     commit() {
-      for (const entry of paths.values()) {
-        const next = entry.text;
-        if (entry.published !== next) { entry.path.setAttribute('d', next); entry.published = next; }
+      for (const entry of entries) {
+        if (due && !due[entry.slot]) continue;
+        entry.dots = entry.count;
+        if (entry.published !== entry.text) { entry.path.setAttribute('d', entry.text); entry.published = entry.text; }
       }
     },
   };

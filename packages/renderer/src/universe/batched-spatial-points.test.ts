@@ -6,6 +6,7 @@ import { isDeepStrictEqual } from 'node:util';
 import { parseHTML } from 'linkedom';
 import { mountBatchedSpatialPoints, pointPaint } from './batched-spatial-points.js';
 import { reservePointLayer } from './point-layer.js';
+import { DOT_SLOTS } from './point-paths.js';
 
 test('a spatial point field reprojects through one retained SVG path per paint color', () => {
   const {document}=parseHTML('<div id="host"><b></b></div>'),host=document.getElementById('host')!,before=host.firstElementChild!;
@@ -448,4 +449,69 @@ test('a field left unresolved at mount resolves its points in slices and draws a
   whole.publish(publication);
   assert.deepEqual([...field.root.querySelectorAll('path')].map(path => path.getAttribute('d')), [...whole.root.querySelectorAll('path')].map(path => path.getAttribute('d')));
   field.destroy(); whole.destroy();
+});
+
+test('a travelling camera writes the dots a slot at a time from rest, doubling each frame; skipped slots keep their paint', async () => {
+  const frame = { referenceFrame: 'sun-icrf', epochJdTt: 2451545, originM: [0, 0, 0] as const, localToReferenceXyzw: [0, 0, 0, 1] as const,
+    metersPerUnit: 1, boundsUnits: { min: [-20, -20, -20] as const, max: [20, 20, 20] as const } };
+  // One paint with more dots in view than a frame starts with: it is drawn through a path for each slot.
+  const count = 10_000, side = Math.ceil(Math.sqrt(count));
+  const points = Array.from({ length: count }, (_, index) => ({ positionUnits: [(index % side) / side * 8 - 4, Math.floor(index / side) / side * 6 - 3, -10] as const }));
+  const viewport = { focalPixels: 400, principalOffsetPixels: [0, 0] as const, widthPixels: 1000, heightPixels: 800 };
+  const at = (z: number) => ({ world: { referenceFrame: 'sun-icrf', epochJdTt: 2451545, pose: { positionM: [0, 0, z] as const, orientationXyzw: [0, 0, 0, 1] as const } }, viewport });
+  const mount = () => { const { document } = parseHTML('<div id="host"></div>');
+    return mountBatchedSpatialPoints({ host: document.getElementById('host')!, frame, points, className: 'test-points',
+      stylePoint: () => ({ colorCss: '#ffffff', opacity: 1, radiusPx: 1 }), paintPalette: ['#ffffffff@1'] }); };
+  const textsOf = (field: ReturnType<typeof mount>) => [...field.root.querySelectorAll('path')].map(path => path.getAttribute('d') ?? '');
+  const dots = (text: string) => text.split('M').length - 1;
+  const field = mount(), texts = () => textsOf(field);
+  assert.equal(texts().length, DOT_SLOTS, 'the paint has a path for each slot');
+  field.publish(at(0));
+  assert.deepEqual(texts().map(dots), Array.from({ length: DOT_SLOTS }, (_, slot) => Math.ceil((count - slot) / DOT_SLOTS)), 'and its points are dealt over them in order');
+  const whole = field.stats().visiblePoints;
+  assert.equal(whole, count);
+  // From rest a frame writes one slot, then two, then four, then all of them: the others keep the paint they had.
+  let z = 0;
+  for (const slots of [1, 2, 4, DOT_SLOTS, DOT_SLOTS]) {
+    const before = texts();
+    field.publish(at(z -= .5));
+    const fresh = mount(); fresh.publish(at(z));
+    const changed = texts().flatMap((text, index) => text === before[index] ? [] : [index]);
+    assert.equal(changed.length, slots, `the frame at ${z} writes ${slots} of the slots`);
+    for (const index of changed) assert.equal(texts()[index], textsOf(fresh)[index], 'each from the frame\'s own camera');
+    assert.equal(texts().reduce((sum, text) => sum + dots(text), 0), count, 'and no dot leaves the view');
+    assert.equal(field.stats().visiblePoints, whole, 'the counts stay those of a whole paint');
+    fresh.destroy();
+  }
+  // A camera that stops while some slots are behind paints them all on its first still frame.
+  field.publish(at(0));
+  await new Promise(resolve => setTimeout(resolve, 200));
+  field.publish(at(-.5));
+  const stopped = mount(); stopped.publish(at(-.5));
+  assert.notDeepEqual(texts(), textsOf(stopped), 'one slot is from this camera and the rest from the last');
+  field.publish(at(-.5));
+  assert.deepEqual(texts(), textsOf(stopped), 'a still frame leaves no dot where an earlier frame put it');
+  field.destroy(); stopped.destroy();
+});
+
+test('paints with few points are one path each, dealt over the slots; a field a frame can afford is written whole', () => {
+  const frame = { referenceFrame: 'sun-icrf', epochJdTt: 2451545, originM: [0, 0, 0] as const, localToReferenceXyzw: [0, 0, 0, 1] as const,
+    metersPerUnit: 1, boundsUnits: { min: [-20, -20, -20] as const, max: [20, 20, 20] as const } };
+  const styles = ['#ff0000', '#00ff00', '#0000ff', '#ffffff'].map(colorCss => ({ colorCss, opacity: 1, radiusPx: 1 }));
+  const points = Array.from({ length: 1200 }, (_, index) => ({ positionUnits: [(index % 40) / 8 - 2.5, Math.floor(index / 40) / 8 - 2, -10] as const, style: styles[index % 4]! }));
+  const viewport = { focalPixels: 400, principalOffsetPixels: [0, 0] as const, widthPixels: 1000, heightPixels: 800 };
+  const at = (z: number) => ({ world: { referenceFrame: 'sun-icrf', epochJdTt: 2451545, pose: { positionM: [0, 0, z] as const, orientationXyzw: [0, 0, 0, 1] as const } }, viewport });
+  const mount = () => { const { document } = parseHTML('<div id="host"></div>');
+    return mountBatchedSpatialPoints({ host: document.getElementById('host')!, frame, points, className: 'test-points',
+      stylePoint: point => point.style, paintPalette: styles.map(pointPaint) }); };
+  const field = mount(), texts = () => [...field.root.querySelectorAll('path')].map(path => path.getAttribute('d') ?? '');
+  assert.equal(texts().length, 4, 'one path a paint');
+  field.publish(at(0));
+  for (const z of [-1, -2, -3]) {
+    field.publish(at(z));
+    const fresh = mount(); fresh.publish(at(z));
+    assert.deepEqual(texts(), [...fresh.root.querySelectorAll('path')].map(path => path.getAttribute('d') ?? ''), `every paint is written at ${z}`);
+    fresh.destroy();
+  }
+  field.destroy();
 });

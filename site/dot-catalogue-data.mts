@@ -1,7 +1,6 @@
 import { PREPARED_NEBULA_CATALOG_SCHEMA, parsePreparedGalaxyCatalog, parsePreparedClusterCatalog, parsePreparedNebulaCatalog } from '@cssearth/objects';
 import { nodeProjectFileUrl } from './prepared/prepared-world-context-node-source.mts';
-// Build-owned catalogue transport. The browser and native requests read the
-// same authenticated files; catalogue contents are not application JavaScript.
+// Build-owned catalogues: their contents are not application JavaScript, and no page fetches one whole.
 // Each dot layer's catalogue is the one context object of its type (site/build/prepare/prepare-catalog.mts dotCatalogueIds).
 import catalogueIds from './prepared-dot-catalogues.json' with { type: 'json' };
 
@@ -15,10 +14,6 @@ const parts = Object.values(import.meta.glob('../src/objects/*/source/nebula.jso
 const nebulae = parsePreparedNebulaCatalog({ schema: PREPARED_NEBULA_CATALOG_SCHEMA, frame: galaxies.frame,
   sources: [...new Map(parts.flatMap(part => part.sources).map(source => [source.id, source])).values()],
   objects: parts.flatMap(part => part.objects) });
-export const DOT_CATALOGUE_DATA = [
-  { id: 'galaxies', data: galaxies },
-  { id: 'clusters', data: clusters },
-  { id: 'nebulae', data: nebulae },
-].map(({ id, data }) => {
-  return { id, data, text: JSON.stringify(data) };
-});
+/** The three spatial catalogues, whole: what the build reads. The page receives only the dots it draws from them
+ * (`pages/catalogues/dots.bin.ts`). */
+export const DOT_CATALOGUES = { galaxies, clusters, nebulae };
