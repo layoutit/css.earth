@@ -1,0 +1,32 @@
+{
+  "id": "usgs-sim-3168",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Geologic Map of Io: U.S. Geological Survey Scientific Investigations Map 3168",
+  "identifiers": [
+    {
+      "type": "USGS series number",
+      "value": "SIM 3168"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://pubs.usgs.gov/sim/3168/",
+      "label": "Publication"
+    },
+    {
+      "role": "original",
+      "url": "https://pubs.usgs.gov/sim/3168/sim3168_pamphlet.pdf",
+      "label": "Pamphlet"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/io/source/manifest.json",
+      "locator": "/documents/29"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

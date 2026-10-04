@@ -665,14 +665,21 @@ same published law, so the limb in the app is the limb the instrument saw.
   | Earth | Minnaert per channel | fitted here to six [DSCOVR EPIC](https://epic.gsfc.nasa.gov/about) Level 1B frames ([fit-epic-limb.mts](../packages/bake/cli/fit-epic-limb.mts)) |
   | Moon | Hapke at 643 nm | [Sato et al. 2014](https://doi.org/10.1002/2013JE004580), the correction of the LROC WAC mosaic; w, b and h_S are medians of its PDS parameter map |
   | Ceres (dwarf planet) | Hapke at 749 nm | [Li et al. 2019](https://doi.org/10.1016/j.icarus.2018.12.038), Dawn Framing Camera |
+  | Io | Lunar-Lambert, weight 0.7 | the [USGS mosaics'](https://astrogeology.usgs.gov/search/map/io_voyager_galileo_ssi_global_mosaic_1km) own limb-darkening correction, at the phase [SIM 3168](https://pubs.usgs.gov/sim/3168/) gives; the limb limit is the outermost pixel of the finest full-disc Galileo frame at that phase, derived here |
   | Europa | Lommel–Seeliger plus Lambert, coefficients linear in phase | [Dhingra et al. 2021](https://doi.org/10.3847/PSJ/ac06d6), Voyager 2, Galileo and New Horizons clear-filter images, ridged-plains row; the limb limit is the outermost pixel of the finest full-disc image in its Table 1, derived here |
   | Pluto, Charon | Lunar-Lambert, A 0.70 | [Buratti et al. 2017](https://doi.org/10.1016/j.icarus.2016.11.012), LORRI approach images; the limb limit is the outermost pixel of the finest image in its Table 1, derived here |
 
-  Io, Ganymede, Callisto, Titan, Iapetus, the five large Uranian moons, Triton,
+  Ganymede, Callisto, Titan, Iapetus, the five large Uranian moons, Triton,
   Eris and Makemake keep the shared `sphere` bank. Each
   has a `limb-law` entry in its `investigations.json` that says what was found
   and what is missing: no law exists, the published one could not be read, it
   states no emission range, or it covers regions rather than the whole body.
+
+  The moons the terrestrial lane prepares, from Rhea to the small irregulars,
+  are lit by that lane's authored constants, the same 0.35 flood floor and
+  0.05 ambient term, and the lane cannot yet take a model record. Phobos,
+  Deimos, Rhea, Dione, Tethys and Enceladus have `limb-law` entries naming
+  the published laws that wait on it.
 
   ![Each planet's default view in the app, before (authored lighting) and after (published laws), 25 September 2026](images/planet-limbs/before-after.png)
 
@@ -693,6 +700,11 @@ same published law, so the limb in the app is the limb the instrument saw.
   overlay alpha of 0.06 at 0.98 of the radius.
 
   ![Europa before and after](images/planet-limbs/europa-before-after.webp)
+
+  Io, the same day, with the limb-darkening correction USGS applied to its
+  mosaics. It gives an overlay alpha of 0.12 at 0.98 of the radius.
+
+  ![Io before and after](images/planet-limbs/io-before-after.webp)
 - **One overlay per pixel.** A CSS overlay has one color and one alpha, and
   blend modes are not used. The overlay is exact for the map's mean color,
   measured at bake, and for every pixel in the channel that sets its alpha. A
