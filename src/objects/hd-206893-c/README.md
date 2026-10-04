@@ -12,7 +12,7 @@ HD 206893 c is a giant planet circling about 3.5 au from its star, inside the or
 
 **Its own light.** It is drawn self-luminous, as the other imaged companions are: its glow is its own heat.
 
-**Shape dataset.** A sphere of the model radius in the shared neutral gray ([ledger](investigations.json)).
+**Shape dataset.** A sphere of the model radius in the shared neutral gray ([ledger](investigations.json)). Its light is measured in one band, as a K-band contrast with GRAVITY (about 8.2 × 10⁻⁵ of the star, Hinkley et al. [2023](https://arxiv.org/abs/2208.04867)); a false color needs three measured bands, so it stays gray.
 
 **Rotation.** No rotation period or spin axis of HD 206893 c on the sky is measured; the papers cited in the README were checked. The display axis is the orbit normal ([rotation.json](source/preparation/rotation.json)).
 
@@ -25,6 +25,6 @@ Run of 2026-09-23 (this version):
 ## Known problems
 
 - The radius and temperature are model values; the planet is a point in every image.
-- No color is measured in bands comparable with HR 8799's, and no spin axis is measured.
+- Only one band of its light is measured, so it has no color; no spin axis is measured.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
