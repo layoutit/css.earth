@@ -11,10 +11,14 @@ import {
   orbitLineOpacity,
   validatePerspectiveCameraPlan,
 } from "@cssearth/renderer/platform/perspective-dolly";
-import PREPARED_MERCURY_SCENE from "./fixtures/perspective-scene.json" with {type: "json"};
+import PREPARED_MERCURY_SCENE_JSON from "./fixtures/perspective-scene.json" with {type: "json"};
+
+// The JSON import widens the level-of-detail model to string; the plan type names the one admitted model.
+const PREPARED_MERCURY_SCENE = { ...PREPARED_MERCURY_SCENE_JSON, camera: { ...PREPARED_MERCURY_SCENE_JSON.camera,
+  levelOfDetail: { ...PREPARED_MERCURY_SCENE_JSON.camera.levelOfDetail, model: "silhouette-diameter-crossfade" as const } } };
 
 const levelOfDetail = Object.freeze({
-  model: "silhouette-diameter-crossfade",
+  model: "silhouette-diameter-crossfade" as const,
   billboardFadeStartDiscPixels: 20,
   billboardFullDiscPixels: 14,
   markerFadeStartDiscPixels: 8,
