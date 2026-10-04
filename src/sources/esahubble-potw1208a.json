@@ -1,0 +1,52 @@
+{
+  "id": "esahubble-potw1208a",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Preview of a forthcoming supernova",
+  "identifiers": [
+    {
+      "type": "ESA/Hubble image",
+      "value": "potw1208a"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://esahubble.org/images/potw1208a/",
+      "label": "Published source"
+    },
+    {
+      "role": "original",
+      "url": "https://cdn.esahubble.org/archives/images/large/potw1208a.jpg",
+      "label": "JPEG, 1089 x 1033 px"
+    },
+    {
+      "role": "rights",
+      "url": "https://esahubble.org/copyright/",
+      "label": "Reuse terms"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://esahubble.org/images/potw1208a/",
+      "checkedOn": "2026-10-04",
+      "locator": "1089 x 1033 px over 27.0 × 25.6 arcsec; ACS 220, 250, 330, 550 and 660 nm; released 20 February 2012. The file's embedded sky tags for scale and direction, 0.0248 arcsec per pixel and north 34.98° left of vertical, and the star for place: the middle of the picture's saturated pixels, pixel 627, 525, is set at Eta Carinae's catalogued place, so the frame's centre is 161.2656327°, -59.684052°."
+    }
+  ],
+  "publisher": "ESA/Hubble",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "ESA/Hubble & NASA",
+      "scope": "Published source",
+      "evidence": "https://esahubble.org/images/potw1208a/"
+    },
+    {
+      "kind": "rights",
+      "text": "Creative Commons Attribution 4.0 International; the full credit must be shown.",
+      "scope": "Published source",
+      "evidence": "https://esahubble.org/copyright/"
+    }
+  ]
+}

@@ -1,0 +1,91 @@
+{
+  "schema": "cssearth-image-layer-recipe@1",
+  "id": "homunculus-nebula-layers",
+  "source": {
+    "path": "source.jpg",
+    "dimensions": [
+      1089,
+      1033
+    ],
+    "originalDimensions": [
+      1089,
+      1033
+    ],
+    "publisherUrl": "https://esahubble.org/images/potw1208a/",
+    "downloadUrl": "https://cdn.esahubble.org/archives/images/large/potw1208a.jpg",
+    "credit": "ESA/Hubble & NASA",
+    "license": "CC-BY-4.0"
+  },
+  "observation": {
+    "centerRaDeg": 161.2656327,
+    "centerDecDeg": -59.684052,
+    "fieldOfViewDeg": [
+      0.007508733,
+      0.007122609
+    ],
+    "northClockwiseDeg": -34.98
+  },
+  "target": {
+    "centerRaDeg": 161.2647742,
+    "centerDecDeg": -59.6844309,
+    "distancePc": 2350
+  },
+  "geometry": {
+    "kind": "inclined-disk",
+    "inclinationDeg": 41,
+    "lineOfNodesPaDeg": 220,
+    "thicknessKpc": 1.54e-7,
+    "depthWeights": [
+      0.25,
+      0.5,
+      0.25
+    ],
+    "supportRadiusKpc": 0.00012988,
+    "supportTaperFraction": 0.9,
+    "depthScales": [
+      1,
+      1,
+      1
+    ],
+    "unit": "pc",
+    "surface": {
+      "source": "nasa-3d-homunculus-nebula",
+      "basis": "Steffen et al. (2014) made a closed surface of the Homunculus from VLT/X-shooter H2 spectra that map the whole nebula: one continuous surface for each lobe, with its polar holes, trenches and protrusions. NASA publishes that model as a file for printing (17101 triangles), its z axis the nebula's pole. Smith (2006) gives the pole: an inclination of 41 degrees, the tilt of the polar axis out of the line of sight, along position angle 310 degrees; the south-east lobe approaches. The file gives neither its unit on the sky, its turn about the pole, the star's place in it, nor which end recedes: measured here on this picture (packages/bake/authoring/homunculus-nebula/model-fit.mts), the +z end recedes, the file is turned 328 degrees about the pole, a unit is 2.72 arcsec and the star is at (0.96, 0, -0.08); the model's outline then shares 86.8% with the picture's lit pixels. The same script measures where the star's own light ends in this picture, 2.9 arcsec from it: all of the light within half of that, and less and less out to it, stays at the star. The patches follow the surface within 0.1 arcsec, a presentation value.",
+      "path": "homunculus.stl",
+      "arcsecPerUnit": 2.72,
+      "originUnits": [
+        0.96,
+        0,
+        -0.08
+      ],
+      "pole": {
+        "tiltDeg": 41,
+        "paDeg": 310,
+        "rollDeg": 328,
+        "receding": "+z"
+      },
+      "starRadiusArcsec": 1.45,
+      "fitArcsec": 0.1
+    }
+  },
+  "bake": {
+    "maxFacePixels": 1089,
+    "crossAxisSlices": 32,
+    "crossAxisDepthPixels": 97,
+    "backgroundFloor": 0.03,
+    "encoding": {
+      "format": "webp",
+      "quality": 70,
+      "alphaQuality": 80
+    },
+    "diffuseFacePixels": 80,
+    "crossAxisAlongPixels": 384,
+    "edgeTaperFraction": 0.04,
+    "diffuseFraction": 0.65,
+    "diffuseSigmaPixels": 2,
+    "flat": true
+  },
+  "provenance": {
+    "path": "provenance.json"
+  }
+}
