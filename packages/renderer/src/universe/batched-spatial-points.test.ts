@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import { isDeepStrictEqual } from 'node:util';
 import { parseHTML } from 'linkedom';
 import { mountBatchedSpatialPoints, pointPaint } from './batched-spatial-points.js';
+import { reservePointLayer } from './point-layer.js';
 
 test('a spatial point field reprojects through one retained SVG path per paint color', () => {
   const {document}=parseHTML('<div id="host"><b></b></div>'),host=document.getElementById('host')!,before=host.firstElementChild!;
@@ -285,7 +286,7 @@ test('a dot seen through an occluding disc is painted by a fainter path of its c
   field.destroy();
 });
 
-test('fields mounted next to each other paint into one layer; another element between them starts a new one', () => {
+test("every field of a host paints into the host's one layer, wherever it asks to mount, in the place its owner reserves", () => {
   const { document } = parseHTML('<div id="host"><b></b></div>'), host = document.getElementById('host')!, end = host.firstElementChild!;
   const frame = { referenceFrame: 'sun-icrf', epochJdTt: 2451545, originM: [0, 0, 0] as const, localToReferenceXyzw: [0, 0, 0, 1] as const,
     metersPerUnit: 1, boundsUnits: { min: [-20, -20, -20] as const, max: [20, 20, 20] as const } };
@@ -295,15 +296,22 @@ test('fields mounted next to each other paint into one layer; another element be
   assert.equal(first.svg, second.svg, 'one svg, so one compositing layer and one raster');
   assert.deepEqual([...first.svg.children].map(group => group.getAttribute('class')), ['first', 'second'], 'in mount order');
   assert.equal(host.children.length, 2, 'the layer and the marker');
-  // Something else mounted before the marker sits above those dots; dots mounted after it must paint above it.
-  host.insertBefore(document.createElement('i'), end);
+  // Something else mounted since does not split the dots: a second layer was a second view-sized backing store.
+  const picture = host.insertBefore(document.createElement('i'), end);
   const third = mount('third');
-  assert.notEqual(third.svg, first.svg);
-  assert.deepEqual([...host.children].map(child => child.tagName), ['DIV', 'I', 'DIV', 'B']);
-  first.destroy();
-  assert.equal(host.children.length, 4, 'a layer stays while a field paints into it');
-  second.destroy(); third.destroy();
-  assert.deepEqual([...host.children].map(child => child.tagName), ['I', 'B'], 'and goes with its last field');
+  assert.equal(third.svg, first.svg);
+  assert.deepEqual([...host.children].map(child => child.tagName), ['DIV', 'I', 'B']);
+  // The owner of the stacking order says where the dots paint: over the picture, under the marker.
+  reservePointLayer(host, end);
+  assert.deepEqual([...host.children].map(child => child.tagName), ['I', 'DIV', 'B']);
+  assert.equal(picture.nextElementSibling, first.svg.parentElement);
+  first.destroy(); second.destroy(); third.destroy();
+  assert.deepEqual([...host.children].map(child => child.tagName), ['I', 'B'], 'the layer goes with its last field');
+  // A field that asks later makes the layer in the reserved place, whatever place it names itself.
+  const later = mountBatchedSpatialPoints({ host, before: picture, frame, points: [{ positionUnits: [0, 0, -10] as const }], className: 'later',
+    stylePoint: () => ({ colorCss: '#ffffff', opacity: 1, radiusPx: 1 }), paintPalette: ['#ffffffff@1'] });
+  assert.deepEqual([...host.children].map(child => child.tagName), ['I', 'DIV', 'B']);
+  later.destroy();
 });
 
 test('a layer\'s fields turn by one warp, and all repaint when one of them must', async () => {
