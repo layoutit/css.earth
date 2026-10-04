@@ -116,6 +116,23 @@ objects as one `?url` module each. Safari needed about 4 s to resolve them, and 
 `site/prepared-context-objects.mts` now lists those files from each object's inventory, as the asset-origin build
 always did. The load takes 3.3 s with 263 requests instead of 2,335.
 
+### Counting late frames: the page times itself
+
+A capture that records the device changes what it measures: with the native recorder attached, the capture's own
+processes (the tunnel, the Instruments hub, the system monitor, the Inspector's samplers) used 16 to 17 ms of the iPad's
+CPU a frame, against 5.4 ms for the page's main thread, and some of the late frames in such a capture were theirs
+(2026-10-04). So late frames are counted with nothing attached:
+
+```sh
+pnpm ipad:timed --open /earth/ --origin http://192.168.0.8:4293 --name far-zoom
+```
+
+It installs a wheel program in the page (out of the subject and back, twice, unless `--program` gives another), leaves
+for the run, and comes back for the record: every frame's time, how long the page's frame callbacks ran, and for each
+frame over 25 ms the hand-over, the files that arrived and the timers over 8 ms in it. It prints the summary and saves
+it as `self-timed.json` beside the reading capture. Use a profiled capture to name what runs in a frame; never to count
+late frames, or to judge a change by their count.
+
 ### Repeatable journeys on the connected iPad
 
 `pnpm ipad:run` opens the start route in visible Safari, attaches Web Inspector, and runs ordered actions while WebKit tracing and native iPad screen grabs are active. It targets this checkout's dev server on the Mac LAN (port 4210, launch.json `ipad-root`) and starts it when none listens, so a code change is one reload away. `--built` targets a performance build instead (port 4212, rebuilt when stale, about 4 minutes): use it for load and byte questions, not frames. Safari needs Remote Automation (Settings → Apps → Safari → Advanced):
