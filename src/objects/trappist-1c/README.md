@@ -20,7 +20,9 @@ Every number in this package comes from Agol et al. (2021, PSJ 2, 1), who fitted
 
 The day-night pattern of c is not measured: the phase-curve fit cannot constrain it, so no map is fitted ([ledger](investigations.json)). The Rock model draws the simplest surface the one measurement allows: a bare rock with no atmosphere, T cos(z)^(1/4) at an angle z from the point under the star and nothing at night (the equilibrium temperature of [Cowan & Agol 2011](https://doi.org/10.1088/0004-637X/726/2/82), eq. 3). Its one number is set so the rock shows c's eclipse depth ([`c-dayside-15um.json`](source/science/jwst-trappist-1/c-dayside-15um.json)) through the F1500W response and a BT-Settl model of the star, with [`bare-rock.ts`](../../../packages/bake/src/objects/raster/eclipse-map/bare-rock.ts): 392 to 421 K under the star, drawn at 407 K. A perfectly black rock at c's distance would reach 480 K, so the measured day side is dimmer than a black rock's.
 
-The Illustration is resized unchanged onto the sphere with its left edge at 0° longitude ([`equirectangular-illustration`](../../../packages/bake/src/objects/interpretation/interpret.ts)). It never counts as imagery. The planet is drawn self-luminous, so both datasets are shown evenly bright.
+The Illustration is resized unchanged onto the sphere with its left edge at 0° longitude ([`equirectangular-illustration`](../../../packages/bake/src/objects/interpretation/interpret.ts)). It never counts as imagery.
+
+**Lighting.** The planet is drawn lit by its star, as every planet with a map is: a sphere under the shared lighting bank. The shading is a display convention, not data; the map's colors are read against the legend where the disc is fully lit.
 
 ## Evidence
 

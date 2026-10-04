@@ -28,10 +28,10 @@
     ]
   },
   "datasets": {
-    "shape": {
-      "title": "Shape only",
-      "detail": "Model radius",
-      "summary": "A sphere of the model radius, glowing its own heat. No surface, color or spin is measured; the orbit is circular here."
+    "infrared": {
+      "title": "Infrared brightness",
+      "detail": "From its band fluxes",
+      "summary": "False color from flux densities in three infrared bands, longest wavelength red."
     }
   }
 }

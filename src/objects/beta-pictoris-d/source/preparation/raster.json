@@ -19,14 +19,14 @@
   },
   "surfaces": [
     {
-      "id": "shape",
+      "id": "infrared",
       "output": "beta-pictoris-d-surface-{id}{suffix}.webp",
       "thumbnail": "beta-pictoris-d-dataset-{id}.webp",
-      "source": "measurements.json",
-      "falseColor": false,
+      "source": "photometry/band-color.json",
+      "falseColor": true,
       "science": {
-        "kind": "neutral-shape",
-        "qualification": "Shared neutral gray display convention for a self-luminous planet with no image or measured visible color in this package; a sphere of the published radius that glows with its own heat (600 K), so no lighting."
+        "kind": "disc-integrated-band-color",
+        "qualification": "Infrared false color of the whole disc from published flux densities (Sutlieff, Bonse et al. (2026), arXiv:2606.23801; zero points from the SVO Filter Profile Service, Table 1, apparent magnitude of the detections: JWST/NIRCam F444W 14.7 +/- 0.2 (2023-03-18), JWST/NIRCam F410M 15.2 +/- 0.2 (2025-03-22), VLT/ERIS L′ 15.57 +/- 0.16 (2025-12-03); SVO JWST/NIRCam.F444W 184.1 Jy, JWST/NIRCam.F410M 208.8 Jy, Paranal/ERIS.Lp 239.2 Jy): red F444W 4.35 µm, green F410M 4.072 µm, blue ERIS L′ 3.78 µm, on one range shared with the bodies the record names. The planet is unresolved, so no map is implied. It glows with its own heat, so no lighting."
       }
     }
   ],

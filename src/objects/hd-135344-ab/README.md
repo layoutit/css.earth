@@ -12,7 +12,9 @@ HD 135344 Ab orbits 15 to 20 au from its star, found by SPHERE and confirmed by 
 
 **Its own light.** It is drawn self-luminous, as the other imaged companions are: its glow is its own heat.
 
-**Shape dataset.** A sphere of the model radius in the shared neutral gray ([ledger](investigations.json)).
+**Infrared color dataset.** The default dataset paints the sphere one false color from its measured flux in three infrared bands: red SPHERE K2 2.253 µm (159.7 ± 19 µJy), green SPHERE K1 2.102 µm (122.4 ± 11 µJy), blue SPHERE H3 1.666 µm (110.7 ± 9.2 µJy) (Stolker et al. (2025), arXiv:2507.06206; zero points from the SVO Filter Profile Service; [record](source/photometry/band-color.json)). Display range: this planet alone, from zero to its brightest band (SPHERE K2), so the color shows its band ratios; brightness is not compared across planets at different distances. Not a natural color; nobody has resolved its disc.
+
+**Limb.** The disc is dimmed toward the limb by the quadratic law Claret, Hauschildt & Witte (2012), A&A 546, A14 compute from PHOENIX model atmospheres for the K band at 1,510 K and log g 3.99 (u1 0.608, u2 0.042): a model, not a measurement of this planet ([nodes](source/photometry/claret-2012-k-quadratic.tsv)). Its temperature is the 1,510 K of its measurements record; log g 3.99 follows from the mass and radius of its astronomy record (packages/astronomy/data/bodies/hd-135344-ab.json).
 
 **Rotation.** No rotation period or spin axis of HD 135344 Ab on the sky is measured; the papers cited in the README were checked. The display axis is the orbit normal ([rotation.json](source/preparation/rotation.json)).
 
@@ -26,5 +28,6 @@ Run of 2026-09-23 (this version):
 
 - Three years of positions allow a range of orbits; the one drawn is wider than the paper's median.
 - The radius and mass are model values; the planet is a point in every image.
+- **Model limb.** The limb darkening is a model atmosphere at the planet's temperature and gravity, in the middle band of its color, not a measurement of this planet.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

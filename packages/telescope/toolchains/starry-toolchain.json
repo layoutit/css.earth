@@ -9,11 +9,14 @@
       "numpy=1.21.6",
       "scipy=1.7.3",
       "pip=23.3.2",
-      "setuptools=65.6.3"
+      "setuptools=65.6.3",
+      "pybind11=2.11.1"
     ]
   },
   "requirements": "starry-requirements.lock",
   "starry": "1.2.0",
+  "sourceBuilds": ["starry", "exoplanet_core"],
+  "build": "starry 1.2.0 and exoplanet_core 0.1.2 have no wheel for macOS arm64, so pip builds them from their source releases. The lock installs without build isolation, so their build needs come first: pybind11 from the environment, and setuptools-scm from the lock, without which exoplanet_core's source release reports version 0.0.0 and pip discards it. The packages named in sourceBuilds are therefore installed in a second pass, after the rest of the lock.",
   "platform": "The lock pins the versions pip resolves on macOS arm64 with Python 3.9; another platform may resolve other versions and needs its own lock.",
   "why": "starry 1.2.0 is the last release on the Theano backend that published fits used. It needs Theano-PyMC 1.1.2 and PyMC3 3.11.5, which need NumPy below 1.22, so it has its own environment rather than the astroquery toolchain's Python 3.12 and NumPy 2.",
   "compilerFlag": "PyMC3 3.11.5 adds -fno-exceptions to Theano's C++ flags on every platform (a workaround for old GCC on Windows); starry's compiled operators throw C++ exceptions, so Apple clang refuses them. The runner removes that one flag from theano.config.gcc__cxxflags after importing starry. No starry code is changed or bypassed. Theano compiles into the toolchain directory and HOME is an empty directory there."

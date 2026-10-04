@@ -13,6 +13,7 @@
         "panel-content",
         "datasets",
         "starfield",
+        "sky-sun",
         "system-markers",
         "scene",
         "controls",
@@ -31,37 +32,37 @@
             {
               "id": "temperature-p0",
               "source": "content",
-              "material": "emission"
+              "material": "lighting"
             },
             {
               "id": "temperature-p1",
               "source": "content",
-              "material": "emission"
+              "material": "lighting"
             },
             {
               "id": "temperature-p2",
               "source": "content",
-              "material": "emission"
+              "material": "lighting"
             },
             {
               "id": "temperature-p3",
               "source": "content",
-              "material": "emission"
+              "material": "lighting"
             },
             {
               "id": "temperature-p4",
               "source": "content",
-              "material": "emission"
+              "material": "lighting"
             },
             {
               "id": "temperature-p5",
               "source": "content",
-              "material": "emission"
+              "material": "lighting"
             },
             {
               "id": "temperature-p6",
               "source": "content",
-              "material": "emission"
+              "material": "lighting"
             }
           ]
         }
@@ -72,9 +73,9 @@
       },
       "materials": [
         {
-          "id": "emission",
+          "id": "lighting",
           "source": "raster",
-          "model": "emissive"
+          "model": "lit"
         }
       ],
       "sources": [
@@ -110,16 +111,12 @@
           "id": "acquisition",
           "path": "source/preparation/acquisition.json"
         }
-      ],
-      "emission": {
-        "source": "raster",
-        "material": "emission"
-      }
+      ]
     },
     "page": {
       "stylesheets": [
         "src/renderers/css/styles/body-surfaces.css",
-        "src/renderers/css/styles/wasp-103b-surfaces.css"
+        "src/renderers/css/styles/templates/composite-planet.css"
       ],
       "metadata": {
         "url": "prepared/page.json"

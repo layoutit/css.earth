@@ -19,14 +19,14 @@
   },
   "surfaces": [
     {
-      "id": "shape",
+      "id": "infrared",
       "output": "eps-indi-ab-surface-{id}{suffix}.webp",
       "thumbnail": "eps-indi-ab-dataset-{id}.webp",
-      "source": "measurements.json",
-      "falseColor": false,
+      "source": "photometry/band-color.json",
+      "falseColor": true,
       "science": {
-        "kind": "neutral-shape",
-        "qualification": "Shared neutral gray display convention for a self-luminous planet with no image or measured visible color in this package; a sphere of the published radius that glows with its own heat (275 K), so no lighting."
+        "kind": "disc-integrated-band-color",
+        "qualification": "Infrared false color of the whole disc from published flux densities (Sanghi et al. (2026), arXiv:2603.08787, with the MIRI fluxes of Matthews et al. (2024), Nature 633, 789, Table 2, flux density in Jy: JWST/MIRI F1550C (5.25 +/- 0.16)e-4, JWST/MIRI F1065C (1.88 +/- 0.06)e-4, JWST/NIRCam F430M (8.4 +/- 0.4)e-5): red F1550C 15.51 µm, green F1065C 10.55 µm, blue F430M 4.278 µm, on one range shared with the bodies the record names. The planet is unresolved, so no map is implied. It glows with its own heat, so no lighting."
       }
     }
   ],

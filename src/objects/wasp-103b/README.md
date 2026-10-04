@@ -18,6 +18,8 @@ The simulation solves on a sphere. We preserve that geometry, scaled to Gillon e
 
 The paper's nominal assumptions include solar composition, cloud-free gas and TiO/VO opacity, with Rayleigh drag in the selected comparison. The simulation does not uniquely reproduce the observations: section 6 describes a nightside that is too cold. The pressure slider explores this published model, including levels outside the observations' sensitive range. It is not a time sequence or a set of independently observed atmospheric layers.
 
+**Lighting.** The planet is drawn lit by its star, as every planet with a map is: a sphere under the shared lighting bank. The shading is a display convention, not data; the map's colors are read against the legend where the disc is fully lit.
+
 ## Evidence
 
 The [reader tests](../../../site/test/lonlat-slice-table.test.mts) check all 1,920 native nodes of the reference slice, the paper's independent temperature anchors, coordinate interpolation, the longitude seam, missing polar coverage and rejection of malformed grids.

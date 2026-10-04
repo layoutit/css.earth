@@ -21,7 +21,7 @@ HD 189733b is a hot Jupiter that orbits the K dwarf [HD 189733 A](../hd-189733/R
 
 ## Processing
 
-**Map.** [npy-pickle.ts](../../../packages/bake/src/objects/raster/numpy/npy-pickle.ts) reads the deposit in place. It has no grid arrays, so the recipe states ThERESA's layout: south to north and west to east from −180°, values at cell centres. [npy-dictionary-map.ts](../../../packages/bake/src/objects/raster/numpy/npy-dictionary-map.ts) samples it bilinearly onto a 950 to 1,350 K plasma palette, false color, on an emissive body.
+**Map.** [npy-pickle.ts](../../../packages/bake/src/objects/raster/numpy/npy-pickle.ts) reads the deposit in place. It has no grid arrays, so the recipe states ThERESA's layout: south to north and west to east from −180°, values at cell centres. [npy-dictionary-map.ts](../../../packages/bake/src/objects/raster/numpy/npy-dictionary-map.ts) samples it bilinearly onto a 950 to 1,350 K plasma palette, false color.
 
 **Only observed longitudes.** ThERESA shows only cells within 90° of a sub-observer longitude seen during the observations ([`utils.vislon`](https://github.com/rychallener/ThERESA/blob/74a8fec0462f4583e336bbc44e2f2441b263a49f/theresa/lib/utils.py)). Preparation applies the same rule to the saved observation times: the range is −109.9° to +179.6°, so the four columns from −180° to −120° are missing data.
 
@@ -29,9 +29,11 @@ HD 189733b is a hot Jupiter that orbits the K dwarf [HD 189733 A](../hd-189733/R
 
 **Orbit and frame.** The planet follows the deposited circular orbit ([hostedOrbits.ts](../../../packages/astronomy/src/hostedOrbits.ts)). Rotation assumes tidal locking, as the paper does: the pole is the orbit normal and longitude 0 faces the star. The navigation marker is the map seen from the star, rendered by [author.mts](../../../packages/telescope-cli/authoring/hd-189733/author.mts).
 
-**Illustration.** The artwork is resized unchanged with its left edge at 0° longitude ([`equirectangular-illustration`](../../../packages/bake/src/objects/interpretation/interpret.ts)), shown evenly bright, and never counts as imagery.
+**Illustration.** The artwork is resized unchanged with its left edge at 0° longitude ([`equirectangular-illustration`](../../../packages/bake/src/objects/interpretation/interpret.ts)), and never counts as imagery.
 
 **Charts.** Three prepared SVGs come from the shared [measured-spectrum renderer](../../../packages/bake/src/objects/charts/measured-spectrum.ts) and their [recipes](source/content/charts.json). Hubble's six bins from 290 to 570 nm keep their signed estimates and asymmetric errors; −0.11 at 502 nm is a noisy fit, not negative reflectivity. The CHEOPS value spans its whole 350–1100 nm passband. The Webb chart shows depths as percent of starlight blocked, with no refitting or offsets. The retrieval identifies H₂O, CO₂, CO and H₂S; these interpret the spectrum and are not maps of gases.
+
+**Lighting.** The planet is drawn lit by its star, as every planet with a map is: a sphere under the shared lighting bank. The shading is a display convention, not data; the map's colors are read against the legend where the disc is fully lit.
 
 ## Evidence
 

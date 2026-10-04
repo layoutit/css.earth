@@ -18,9 +18,11 @@ KELT-9b is the hottest known giant planet. It orbits the fast-spinning A star [K
 
 **Temperature.** The planet's intensity relative to the star's is 2J/rp², with J the Cowan & Agol map and rp = 0.08004. It becomes a brightness temperature at 4.5 µm against the star's 4.5 µm brightness temperature. The paper says its temperatures come from PHOENIX models but prints no number for them. The value its own eclipse depth, radius ratio and day side imply is 7,942 K. The paper's night side and hottest hemisphere then follow from the curve within their uncertainties, as the table shows. The one stellar temperature the paper does print, 8,287 K for its energy-balance model, would put the day side at 4,739 K ([ledger](investigations.json)). The constant of the sinusoid fit is not printed. The planet's flux at mid-eclipse is taken to be the eclipse depth, and the amplitude check confirms it.
 
-**Orbit and rotation.** Gaudi et al. (2017, [Nature 546, 514](https://doi.org/10.1038/nature22392), Extended Data Table 3, adopted Model 1) give the period, 0.03462 au, 86.79° inclination and the transit time. Their mass is 2.88 Jupiter masses. The radius is Ahlers et al. (2020)'s 1.84 Jupiter radii. The orbit sits on the volume-equivalent radius of the flattened star, so a/R* is 3.2046 here rather than the paper's 3.153 for its 2.362 solar-radius sphere. The rotation record, `cssearth-synchronous-rotation@1`, assumes the planet is tidally locked, as the papers do. The planet is drawn emissive: the map is its own heat, not lit by its star.
+**Orbit and rotation.** Gaudi et al. (2017, [Nature 546, 514](https://doi.org/10.1038/nature22392), Extended Data Table 3, adopted Model 1) give the period, 0.03462 au, 86.79° inclination and the transit time. Their mass is 2.88 Jupiter masses. The radius is Ahlers et al. (2020)'s 1.84 Jupiter radii. The orbit sits on the volume-equivalent radius of the flattened star, so a/R* is 3.2046 here rather than the paper's 3.153 for its 2.362 solar-radius sphere. The rotation record, `cssearth-synchronous-rotation@1`, assumes the planet is tidally locked, as the papers do.
 
 **Catalogue color.** #f6aa3a, the dataset palette at the paper's 4,566 K day side, the rule WASP-43b's color follows.
+
+**Lighting.** The planet is drawn lit by its star, as every planet with a map is: a sphere under the shared lighting bank. The shading is a display convention, not data; the map's colors are read against the legend where the disc is fully lit.
 
 ## Evidence
 

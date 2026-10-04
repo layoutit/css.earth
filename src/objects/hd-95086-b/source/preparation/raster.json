@@ -19,14 +19,14 @@
   },
   "surfaces": [
     {
-      "id": "shape",
+      "id": "infrared",
       "output": "hd-95086-b-surface-{id}{suffix}.webp",
       "thumbnail": "hd-95086-b-dataset-{id}.webp",
-      "source": "measurements.json",
-      "falseColor": false,
+      "source": "photometry/band-color.json",
+      "falseColor": true,
       "science": {
-        "kind": "neutral-shape",
-        "qualification": "Shared neutral gray display convention for a self-luminous planet with no image or measured visible color in this package; a sphere of the published radius that glows with its own heat (936 K), so no lighting."
+        "kind": "disc-integrated-band-color",
+        "qualification": "Infrared false color of the whole disc from published flux densities (De Rosa et al. (2016), ApJ 824, 121; zero points from the SVO Filter Profile Service, Table 2, HD 95086 b, apparent magnitude: NaCo L′ 16.27 +/- 0.19, GPI K1 18.99 +/- 0.2, GPI H 20.51 +/- 0.25; SVO Paranal/NACO.Lp 240.8 Jy, Gemini/GPI.K1 721.7 Jy, Gemini/GPI.H 1018.2 Jy): red NaCo L′ 3.77 µm, green GPI K1 2.029 µm, blue GPI H 1.632 µm, on one range shared with the bodies the record names. The planet is unresolved, so no map is implied. It glows with its own heat, so no lighting."
       }
     }
   ],

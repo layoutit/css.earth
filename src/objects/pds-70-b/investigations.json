@@ -16,10 +16,19 @@
       "id": "radius-and-temperature",
       "subject": "Radius and temperature",
       "status": "included",
-      "finding": "The atmosphere fits of Wang et al. (2021), AJ 161, 148. No image or color of the planet's surface exists: it is drawn as a sphere of the model radius in the shared neutral gray.",
+      "finding": "The atmosphere fits of Wang et al. (2021), AJ 161, 148. No image resolves the planet.",
       "evidence": [
         "https://arxiv.org/abs/2101.04187",
         "https://doi.org/10.3847/1538-3881/abdb2d"
+      ]
+    },
+    {
+      "id": "band-color",
+      "subject": "A false color from three measured bands",
+      "status": "included",
+      "finding": "Shown in infrared false color from its measured flux in NACO L′ 3.77 µm, SPHERE K1 2.102 µm, SPHERE H3 1.666 µm (Stolker et al. (2020), A&A 644, A13; zero points from the SVO Filter Profile Service).",
+      "evidence": [
+        "https://arxiv.org/abs/2009.04483"
       ]
     }
   ]

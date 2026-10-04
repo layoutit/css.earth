@@ -20,7 +20,7 @@
     {
       "id": "wasp-18b-preparation-raster",
       "path": "preparation/raster.json",
-      "origin": "Repository-authored raster recipe: the shared neutral gray on the reference sphere, self-luminous with transparent plates",
+      "origin": "Repository-authored raster recipe: the shared neutral gray on the reference sphere, lit by its own star",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
@@ -37,7 +37,7 @@
     {
       "id": "wasp-18b-preparation-geometry",
       "path": "preparation/geometry.json",
-      "origin": "Repository-authored CSS geometry profile: 248-unit sphere, 16 x 32 leaves, emissive material",
+      "origin": "Repository-authored CSS geometry profile: 248-unit sphere, 16 x 32 leaves, lit material",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
@@ -54,7 +54,7 @@
     {
       "id": "wasp-18b-preparation-presentation",
       "path": "preparation/presentation.json",
-      "origin": "Repository-authored presentation profile: emissive mode",
+      "origin": "Repository-authored presentation profile: composite mode",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."

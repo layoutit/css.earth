@@ -14,6 +14,7 @@
         "panel-content",
         "datasets",
         "starfield",
+        "sky-sun",
         "scene",
         "controls",
         "presentation",
@@ -31,17 +32,17 @@
             {
               "id": "temperature",
               "source": "content",
-              "material": "emission"
+              "material": "lighting"
             },
             {
               "id": "uncertainty",
               "source": "content",
-              "material": "emission"
+              "material": "lighting"
             },
             {
               "id": "illustration",
               "source": "content",
-              "material": "emission"
+              "material": "lighting"
             }
           ]
         }
@@ -52,9 +53,9 @@
       },
       "materials": [
         {
-          "id": "emission",
+          "id": "lighting",
           "source": "raster",
-          "model": "emissive"
+          "model": "lit"
         }
       ],
       "sources": [
@@ -94,16 +95,12 @@
           "id": "charts",
           "path": "source/content/charts.json"
         }
-      ],
-      "emission": {
-        "source": "raster",
-        "material": "emission"
-      }
+      ]
     },
     "page": {
       "stylesheets": [
         "src/renderers/css/styles/body-surfaces.css",
-        "src/renderers/css/styles/hd-189733b-surfaces.css"
+        "src/renderers/css/styles/templates/composite-planet.css"
       ],
       "metadata": {
         "url": "prepared/page.json"

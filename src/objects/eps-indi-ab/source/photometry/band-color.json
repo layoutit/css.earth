@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-disc-band-color@1",
+  "objectId": "eps-indi-ab",
+  "unit": "µJy",
+  "source": {
+    "citation": "Sanghi et al. (2026), arXiv:2603.08787, with the MIRI fluxes of Matthews et al. (2024), Nature 633, 789",
+    "url": "https://arxiv.org/abs/2603.08787",
+    "locator": "Table 2, flux density in Jy: JWST/MIRI F1550C (5.25 +/- 0.16)e-4, JWST/MIRI F1065C (1.88 +/- 0.06)e-4, JWST/NIRCam F430M (8.4 +/- 0.4)e-5"
+  },
+  "bands": [
+    {
+      "band": "F1550C",
+      "wavelengthMicrometres": 15.51,
+      "value": 525,
+      "error": 16
+    },
+    {
+      "band": "F1065C",
+      "wavelengthMicrometres": 10.55,
+      "value": 188,
+      "error": 6
+    },
+    {
+      "band": "F430M",
+      "wavelengthMicrometres": 4.278,
+      "value": 84,
+      "error": 4
+    }
+  ],
+  "displayRange": [
+    0,
+    525
+  ],
+  "displayRangeSource": "This planet alone, from zero to its brightest band (F1550C), so the color shows its band ratios; brightness is not compared across planets at different distances."
+}

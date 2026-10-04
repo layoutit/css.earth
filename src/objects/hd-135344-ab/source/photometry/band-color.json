@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-disc-band-color@1",
+  "objectId": "hd-135344-ab",
+  "unit": "µJy",
+  "source": {
+    "citation": "Stolker et al. (2025), arXiv:2507.06206; zero points from the SVO Filter Profile Service",
+    "url": "https://arxiv.org/abs/2507.06206",
+    "locator": "Table 4, apparent magnitude at the epochs the paper adopts (K12 on 2022 May 04, H23 on 2021 Jul 16): SPHERE K2 16.45 +/- 0.13, SPHERE K1 16.87 +/- 0.1, SPHERE H3 17.37 +/- 0.09; SVO Paranal/SPHERE.IRDIS_D_K12_2 607.2 Jy, Paranal/SPHERE.IRDIS_D_K12_1 684.9 Jy, Paranal/SPHERE.IRDIS_D_H23_3 982.4 Jy"
+  },
+  "bands": [
+    {
+      "band": "SPHERE K2",
+      "wavelengthMicrometres": 2.253,
+      "value": 159.7,
+      "error": 19
+    },
+    {
+      "band": "SPHERE K1",
+      "wavelengthMicrometres": 2.102,
+      "value": 122.4,
+      "error": 11
+    },
+    {
+      "band": "SPHERE H3",
+      "wavelengthMicrometres": 1.666,
+      "value": 110.7,
+      "error": 9.2
+    }
+  ],
+  "displayRange": [
+    0,
+    159.7
+  ],
+  "displayRangeSource": "This planet alone, from zero to its brightest band (SPHERE K2), so the color shows its band ratios; brightness is not compared across planets at different distances."
+}

@@ -14,6 +14,7 @@
         "panel-content",
         "datasets",
         "starfield",
+        "sky-sun",
         "system-markers",
         "scene",
         "controls",
@@ -32,127 +33,127 @@
             {
               "id": "temperature-0-89um",
               "source": "content",
-              "material": "emission"
+              "material": "lighting"
             },
             {
               "id": "temperature-0-97um",
               "source": "content",
-              "material": "emission"
+              "material": "lighting"
             },
             {
               "id": "temperature-1-05um",
               "source": "content",
-              "material": "emission"
+              "material": "lighting"
             },
             {
               "id": "temperature-1-13um",
               "source": "content",
-              "material": "emission"
+              "material": "lighting"
             },
             {
               "id": "temperature-1-21um",
               "source": "content",
-              "material": "emission"
+              "material": "lighting"
             },
             {
               "id": "temperature-1-29um",
               "source": "content",
-              "material": "emission"
+              "material": "lighting"
             },
             {
               "id": "temperature-1-37um",
               "source": "content",
-              "material": "emission"
+              "material": "lighting"
             },
             {
               "id": "temperature-1-45um",
               "source": "content",
-              "material": "emission"
+              "material": "lighting"
             },
             {
               "id": "temperature-1-53um",
               "source": "content",
-              "material": "emission"
+              "material": "lighting"
             },
             {
               "id": "temperature-1-60um",
               "source": "content",
-              "material": "emission"
+              "material": "lighting"
             },
             {
               "id": "temperature-1-68um",
               "source": "content",
-              "material": "emission"
+              "material": "lighting"
             },
             {
               "id": "temperature-1-76um",
               "source": "content",
-              "material": "emission"
+              "material": "lighting"
             },
             {
               "id": "temperature-1-84um",
               "source": "content",
-              "material": "emission"
+              "material": "lighting"
             },
             {
               "id": "temperature-1-92um",
               "source": "content",
-              "material": "emission"
+              "material": "lighting"
             },
             {
               "id": "temperature-2-00um",
               "source": "content",
-              "material": "emission"
+              "material": "lighting"
             },
             {
               "id": "temperature-2-08um",
               "source": "content",
-              "material": "emission"
+              "material": "lighting"
             },
             {
               "id": "temperature-2-16um",
               "source": "content",
-              "material": "emission"
+              "material": "lighting"
             },
             {
               "id": "temperature-2-24um",
               "source": "content",
-              "material": "emission"
+              "material": "lighting"
             },
             {
               "id": "temperature-2-31um",
               "source": "content",
-              "material": "emission"
+              "material": "lighting"
             },
             {
               "id": "temperature-2-39um",
               "source": "content",
-              "material": "emission"
+              "material": "lighting"
             },
             {
               "id": "temperature-2-47um",
               "source": "content",
-              "material": "emission"
+              "material": "lighting"
             },
             {
               "id": "temperature-2-55um",
               "source": "content",
-              "material": "emission"
+              "material": "lighting"
             },
             {
               "id": "temperature-2-63um",
               "source": "content",
-              "material": "emission"
+              "material": "lighting"
             },
             {
               "id": "temperature-2-71um",
               "source": "content",
-              "material": "emission"
+              "material": "lighting"
             },
             {
               "id": "temperature-2-79um",
               "source": "content",
-              "material": "emission"
+              "material": "lighting"
             }
           ]
         }
@@ -163,9 +164,9 @@
       },
       "materials": [
         {
-          "id": "emission",
+          "id": "lighting",
           "source": "raster",
-          "model": "emissive"
+          "model": "lit"
         }
       ],
       "sources": [
@@ -205,16 +206,12 @@
           "id": "charts",
           "path": "source/content/charts.json"
         }
-      ],
-      "emission": {
-        "source": "raster",
-        "material": "emission"
-      }
+      ]
     },
     "page": {
       "stylesheets": [
         "src/renderers/css/styles/body-surfaces.css",
-        "src/renderers/css/styles/wasp-18b-surfaces.css"
+        "src/renderers/css/styles/templates/composite-planet.css"
       ],
       "metadata": {
         "url": "prepared/page.json"

@@ -5,11 +5,12 @@
     {
       "id": "band-color",
       "subject": "A false color from three measured bands, as the HR 8799 planets have",
-      "status": "unresolved",
-      "finding": "Malin et al. (2024) measured this planet with JWST/MIRI at 10.6 and 11.3 microns, not in the NIRCam F410M, F430M and F460M bands that color HR 8799's planets, so no comparable color exists and it is the shared neutral gray.",
+      "status": "included",
+      "finding": "Shown in infrared false color from its measured flux in NaCo L′ 3.77 µm, GPI K1 2.029 µm, GPI H 1.632 µm (De Rosa et al. (2016), ApJ 824, 121; zero points from the SVO Filter Profile Service). Malin et al. (2024) measured this planet with JWST/MIRI at 10.6 and 11.3 microns, not in the NIRCam F410M, F430M and F460M bands that color HR 8799's planets. Its color is from the three bands it is firmly detected in, on its own range, so it is not compared with theirs.",
       "revisitWhen": "Flux densities in three bands comparable with HR 8799's are published.",
       "evidence": [
-        "https://arxiv.org/abs/2408.16843"
+        "https://arxiv.org/abs/2408.16843",
+        "https://arxiv.org/abs/1604.01411"
       ]
     }
   ]

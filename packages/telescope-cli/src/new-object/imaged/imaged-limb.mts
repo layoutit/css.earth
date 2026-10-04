@@ -31,16 +31,22 @@ import { diamondback, DIAMONDBACK, fromPicaso, PICASO, type PicasoBand } from '.
 
 export const CLARET_2012 = { table: 'https://cdsarc.cds.unistra.fr/ftp/J/A+A/546/A14/tableab.dat', cite: 'Claret, Hauschildt & Witte (2012), A&A 546, A14', catalogue: 'J/A+A/546/A14',
   band: 'H', file: 'photometry/claret-2012-h-quadratic.tsv', input: 'claret-2012-limb-darkening' } as const;
-const MODELS = { Filt: CLARET_2012.band, Met: 'L', Mod: 'qs' }, COLUMNS = { teff: 'Teff', logg: 'logg', u1: 'a', u2: 'b' };
+/** The table's Johnson J, H and K laws: the band that holds the middle band of a planet's color (SPHERE's K1 and K2 are parts of
+ * K, its H2 and H3 of H), or undefined for a color in other bands. */
+export type ClaretBand = 'J' | 'H' | 'K';
+export const claretBand = (middleBand: string): ClaretBand | undefined => /(?:^|\s)H[23]?$/u.test(middleBand) ? 'H' : /(?:^|\s)K[12s]?$/u.test(middleBand) ? 'K' : /(?:^|\s)J$/u.test(middleBand) ? 'J' : undefined;
+const claretFile = (band: ClaretBand) => `photometry/claret-2012-${band.toLowerCase()}-quadratic.tsv`;
+const models = (band: ClaretBand) => ({ Filt: band, Met: 'L', Mod: 'qs' }), COLUMNS = { teff: 'Teff', logg: 'logg', u1: 'a', u2: 'b' };
 const HEADER = ['logg\tTeff\tZ\txi\ta\tb\tFilt\tMet\tMod', '[cm/s2]\tK\t[Sun]\tkm/s\t \t \t \t \t ', '-----\t------\t----\t----\t--------\t--------\t--\t-\t--'];
 // The table's fixed columns (its ReadMe, "Byte-by-byte Description of file: tableab.dat"), as zero-based slices.
 const FIELDS = [[0, 5], [6, 12], [13, 17], [18, 22], [23, 31], [32, 40], [41, 43], [44, 45], [46, 48]] as const;
 const PACKAGE_FILES = ['README.md', 'NOTICE.md', 'investigations.json', 'source/preparation/raster.json', 'source/content/object.json', 'source/manifest.json'] as const;
 
-/** The table's H-band least-squares rows as the tab-separated text the grid reader takes, each cell as printed. */
-export function claret2012Grid(table: string) {
+/** The table's least-squares rows of one band as the tab-separated text the grid reader takes, each cell as printed. */
+export function claret2012Grid(table: string, band: ClaretBand = CLARET_2012.band) {
+  const MODELS = models(band);
   const rows = table.split(/\r?\n/u).map(line => FIELDS.map(([from, to]) => line.slice(from, to).trim())).filter(cells => cells[6] === MODELS.Filt && cells[7] === MODELS.Met && cells[8] === MODELS.Mod);
-  if (!rows.length) throw new TypeError(`${CLARET_2012.catalogue} tableab.dat holds no ${CLARET_2012.band}-band rows: its layout has changed (${CLARET_2012.table}).`);
+  if (!rows.length) throw new TypeError(`${CLARET_2012.catalogue} tableab.dat holds no ${band}-band rows: its layout has changed (${CLARET_2012.table}).`);
   return [...HEADER, ...rows.map(cells => cells.join('\t'))].join('\n') + '\n';
 }
 
@@ -85,8 +91,9 @@ export function fittedImagedLimb(id: string, fit: AtmosphereFit, middleBand: str
 
 /** The law at a planet's temperature and gravity, with the nodes it is read between as the file kept beside the planet, or
  * why the grid does not reach it. */
-export function imagedLimb(grid: string, teffK: number, logg: number): { limb?: ImagedLimb; why?: string } {
-  const recipe = { law: 'quadratic' as const, source: 'grid' as const, path: CLARET_2012.file, teffK, logg, models: MODELS, columns: COLUMNS };
+export function imagedLimb(grid: string, teffK: number, logg: number, band: ClaretBand = CLARET_2012.band): { limb?: ImagedLimb; why?: string } {
+  const MODELS = models(band), file = claretFile(band);
+  const recipe = { law: 'quadratic' as const, source: 'grid' as const, path: file, teffK, logg, models: MODELS, columns: COLUMNS };
   const [header, units, rule, ...rows] = grid.trimEnd().split('\n'), nodes = rows.map(row => row.split('\t')), span = (column: number) => { const values = nodes.map(cells => Number(cells[column])); return [Math.min(...values), Math.max(...values)] as const; };
   const [coolest, hottest] = span(1), [lowest, highest] = span(0);
   if (teffK < coolest || teffK > hottest) return { why: `at ${teffK.toLocaleString('en-US')} K it is outside the ${coolest.toLocaleString('en-US')} to ${hottest.toLocaleString('en-US')} K of the models ${CLARET_2012.cite} tabulate` };
@@ -94,13 +101,13 @@ export function imagedLimb(grid: string, teffK: number, logg: number): { limb?: 
   const { corners } = readLimbGrid(grid, recipe);
   const text = [header, units, rule, ...rows.filter(row => { const cells = row.split('\t'); return corners.some(corner => corner.logg === Number(cells[0]) && corner.teff === Number(cells[1])); })].join('\n') + '\n';
   const { u1, u2 } = readLimbGrid(text, recipe);
-  return { limb: { limbDarkening: { law: 'quadratic', path: CLARET_2012.file, grid: { teffK, logg, models: MODELS }, columns: COLUMNS }, file: CLARET_2012.file, text, u1, u2,
-    input: { path: CLARET_2012.file, origin: CLARET_2012.table, credit: `${CLARET_2012.cite} (CDS ${CLARET_2012.catalogue})`, license: 'CDS catalogue data, public with citation of the paper and CDS', licenseEvidence: ['https://cds.unistra.fr/vizier-org/licences_vizier.html'],
-      acquisition: `Rows of tableab.dat: the quadratic ${CLARET_2012.band} coefficients (least-squares fits, quasi-spherical models) of the grid nodes the planet's temperature and gravity lie between, each cell as printed, the fixed columns rewritten as tabs.`,
+  return { limb: { limbDarkening: { law: 'quadratic', path: file, grid: { teffK, logg, models: MODELS }, columns: COLUMNS }, file, text, u1, u2,
+    input: { path: file, origin: CLARET_2012.table, credit: `${CLARET_2012.cite} (CDS ${CLARET_2012.catalogue})`, license: 'CDS catalogue data, public with citation of the paper and CDS', licenseEvidence: ['https://cds.unistra.fr/vizier-org/licences_vizier.html'],
+      acquisition: `Rows of tableab.dat: the quadratic ${band} coefficients (least-squares fits, quasi-spherical models) of the grid nodes the planet's temperature and gravity lie between, each cell as printed, the fixed columns rewritten as tabs.`,
       redistribution: 'Catalogue rows retained with their citation.', consumers: ['assets', 'datasets'] },
     credit: `Limb darkening: ${CLARET_2012.cite}, CDS ${CLARET_2012.catalogue}.`, evidence: [CLARET_2012.table],
     problem: '- **Model limb.** The limb darkening is a model atmosphere at the planet\'s temperature and gravity, in the middle band of its color, not a measurement of this planet.',
-    sentence: `dimmed toward the limb by the quadratic law ${CLARET_2012.cite} compute from PHOENIX model atmospheres for the ${CLARET_2012.band} band at ${Math.round(teffK).toLocaleString('en-US')} K and log g ${logg} (u1 ${u1.toFixed(3)}, u2 ${u2.toFixed(3)}): a model, not a measurement of this planet` } };
+    sentence: `dimmed toward the limb by the quadratic law ${CLARET_2012.cite} compute from PHOENIX model atmospheres for the ${band} band at ${Math.round(teffK).toLocaleString('en-US')} K and log g ${logg} (u1 ${u1.toFixed(3)}, u2 ${u2.toFixed(3)}): a model, not a measurement of this planet` } };
 }
 
 const COLOR_CREDIT = 'Color: infrared false color from the flux densities of';
@@ -188,7 +195,7 @@ export function documentImagedColor(files: PackageFiles, id: string, record: Rec
  * where it reaches and PICASO's where it does not, and bring its documents in line with its color. Returns one line per planet;
  * nothing is baked here. */
 export async function addImagedLimbs(root: string, ids: readonly string[], archive: Archive, progress = (_line: string) => {}, computed: typeof fittedImagedLimb = fittedImagedLimb): Promise<string[]> {
-  const grid = claret2012Grid(await archive.text(CLARET_2012.table)), lines: string[] = [], say = (line: string) => { lines.push(line); progress(line); };
+  const table = await archive.text(CLARET_2012.table), grids = new Map<ClaretBand, string>(), lines: string[] = [], say = (line: string) => { lines.push(line); progress(line); };
   for (const id of ids) {
     const o = resolve(root, 'src/objects', id), files: PackageFiles = new Map();
     for (const path of PACKAGE_FILES) files.set(`src/objects/${id}/${path}`, await readFile(resolve(o, path), 'utf8'));
@@ -197,15 +204,15 @@ export async function addImagedLimbs(root: string, ids: readonly string[], archi
     let recordPath: string;
     try { recordPath = requireString(bandColorSurface(requireRecord(JSON.parse(String(files.get(`src/objects/${id}/source/preparation/raster.json`))), `${id} raster`), id).source, `${id} band color path`); } catch (error) { say(`${id}: ${(error as Error).message}`); continue; }
     const record = requireRecord(JSON.parse(await readFile(resolve(o, 'source', recordPath), 'utf8')), `${id} band color`);
-    const middleBand = requireString(requireRecord(requireArray(record.bands, `${id} bands`)[1], `${id} middle band`).band, `${id} middle band name`), tabulated = new RegExp(`(?:^|\\s)${CLARET_2012.band}$`, 'u').test(middleBand);
+    const middleBand = requireString(requireRecord(requireArray(record.bands, `${id} bands`)[1], `${id} middle band`).band, `${id} middle band name`), band = claretBand(middleBand);
     const gm = Number(physical.gravitationalParameterKm3PerS2), radiusKm = requireFiniteNumber(physical.meanRadiusKm, `${id} meanRadiusKm`), teffK = Number(measurements.effectiveTemperatureK);
     // log g in cgs from GM (km^3/s^2) and the radius (km).
     const logg = Number(Math.log10(gm * 1e15 / (radiusKm * 1e5) ** 2).toFixed(2));
     const why = !(teffK > 0) ? 'its measurements record cites no temperature' : !(gm > 0) ? 'its astronomy record has no mass, so its gravity is unknown' : undefined;
     // The published table where it reaches the planet in the middle band of its color; else the law computed from the model a paper
     // fitted to the planet; and why if neither.
-    const published = why || !tabulated ? undefined : imagedLimb(grid, teffK, logg);
-    let limb = published?.limb, outside = why ?? published?.why ?? `its color's middle band, ${middleBand}, is not the ${CLARET_2012.band} of the published table`;
+    const published = why || !band ? undefined : imagedLimb(grids.get(band) ?? grids.set(band, claret2012Grid(table, band)).get(band)!, teffK, logg, band);
+    let limb = published?.limb, outside = why ?? published?.why ?? `its color's middle band, ${middleBand}, is not in the J, H or K of the published table`;
     const fit = await readFile(resolve(o, 'source', ATMOSPHERE_FIT.path), 'utf8').then(record => parseAtmosphereFit(JSON.parse(record), `${id} ${ATMOSPHERE_FIT.path}`), (error: NodeJS.ErrnoException) => { if (error.code === 'ENOENT') return undefined; throw error; });
     if (!why && !limb && !fit) outside = `${outside}; and no paper's fit of a cloudy model grid is recorded for it (source/${ATMOSPHERE_FIT.path})`;
     if (!why && !limb && fit) try { const answer = computed(id, fit, middleBand); limb = answer.limb; outside = [outside, answer.why].filter(Boolean).join('; '); } catch (error) { outside = `${outside}; ${(error as Error).message}`; }

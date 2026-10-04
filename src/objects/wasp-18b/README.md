@@ -17,9 +17,11 @@ The Eigenspectra method (Mansfield et al. 2020) sorts every day-side point by th
 
 [eigenspectra-map.ts](../../../packages/bake/src/objects/raster/eclipse-map/eigenspectra-map.ts) reads `eigenspectra/Figure1/temp_wave_*.npz` and `eigenspectra/eigenspectra_25_bins_3_groups.npz` through a small [.npz reader](../../../packages/bake/src/objects/raster/numpy/npz.ts). The [acquisition plan](source/preparation/acquisition.json) streams these members out of the 1.4 GB archive. The grids have nodes every 1°, rows south to north. Only the longitudes the eclipse saw, −150.9° to +133.9°, are drawn; the rest shows the no-data grid.
 
-**Orbit and rotation.** The orbit is the one the maps were fitted with: period 0.941452382 days, a/R* 3.48023, inclination 84.3532°, circular, transit at 2459802.40788 BJD_TDB. The radius ratio is 0.09783 (Coulombe et al. 2023, Table 3). Rotation assumes tidal locking, as the fit does. The planet is drawn emissive. The catalogue color, #cf533c, is the palette at the 2,781 K day-side plateau of Coulombe et al. (2023).
+**Orbit and rotation.** The orbit is the one the maps were fitted with: period 0.941452382 days, a/R* 3.48023, inclination 84.3532°, circular, transit at 2459802.40788 BJD_TDB. The radius ratio is 0.09783 (Coulombe et al. 2023, Table 3). Rotation assumes tidal locking, as the fit does. The catalogue color, #cf533c, is the palette at the 2,781 K day-side plateau of Coulombe et al. (2023).
 
 **Temperature with depth.** Following Figure 4 of Challener et al., the chart compares the hotspot's HyDRA and Pyrat Bay retrievals with the whole-dayside HyDRA retrieval. The shared [profile preparer](../../../packages/bake/src/objects/charts/retrieved-profile.ts) converts Pa to bar and draws the medians and 1σ credible intervals on a logarithmic axis from 0.01 to 10 bar. It keeps native samples and interpolates only where a curve crosses the plot edge; it does not refit or extrapolate. The dashed 0.1 and 1 bar levels mark the pressures this observation probes. The temperature rise there is a thermal inversion.
+
+**Lighting.** The planet is drawn lit by its star, as every planet with a map is: a sphere under the shared lighting bank. The shading is a display convention, not data; the map's colors are read against the legend where the disc is fully lit.
 
 ## Evidence
 

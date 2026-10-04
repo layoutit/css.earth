@@ -4,7 +4,7 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import { diamondbackGrid, diamondbackNodes, picasoInstalled, picasoLimbNodes, picasoPassband, picasoToolchainSync } from '@cssearth/telescope/node';
 import type { PackageFiles } from '../dataset.mts';
-import { ATMOSPHERE_FIT, CLARET_2012, claret2012Grid, documentImagedColor, fittedImagedLimb, imagedLimb, installImagedLimb, parseAtmosphereFit, type ImagedLimb } from './imaged-limb.mts';
+import { ATMOSPHERE_FIT, CLARET_2012, claret2012Grid, claretBand, documentImagedColor, fittedImagedLimb, imagedLimb, installImagedLimb, parseAtmosphereFit, type ImagedLimb } from './imaged-limb.mts';
 
 // The four H-band nodes around 1,727 K and log g 3.59, with a flux-conservation row and a K-band row the reader must pass over.
 const TABLE = [' 3.50  1700.  0.0  2.0   0.8063  -0.0477 H  L qs', ' 4.00  1700.  0.0  2.0   0.8337  -0.0830 H  L qs', ' 3.50  1800.  0.0  2.0   0.7296   0.0478 H  L qs',
@@ -26,6 +26,9 @@ test('the published table is read by its fixed columns, and only the H band\'s l
   const grid = claret2012Grid(TABLE);
   assert.deepEqual(grid.trimEnd().split('\n').slice(3), ['3.50\t1700.\t0.0\t2.0\t0.8063\t-0.0477\tH\tL\tqs', '4.00\t1700.\t0.0\t2.0\t0.8337\t-0.0830\tH\tL\tqs', '3.50\t1800.\t0.0\t2.0\t0.7296\t0.0478\tH\tL\tqs', '4.00\t1800.\t0.0\t2.0\t0.7643\t0.0021\tH\tL\tqs']);
   assert.throws(() => claret2012Grid('3.50 1700. 0.0 2.0 0.8063 -0.0477 H L qs'), /tableab\.dat holds no H-band rows: its layout has changed/u);
+  // The band read is the one that holds the middle band of the planet's color; a color in other bands has none.
+  assert.deepEqual(['MKO H', '2MASS H', 'SPHERE H3', 'SPHERE K1', '2MASS Ks', 'MKO K', 'MKO J', 'F430M', 'NACO L′'].map(claretBand), ['H', 'H', 'H', 'K', 'K', 'K', 'J', undefined, undefined]);
+  assert.deepEqual(claret2012Grid(TABLE, 'K').trimEnd().split('\n').slice(3), ['3.50\t1700.\t0.0\t2.0\t0.6000\t0.1000\tK\tL\tqs']);
 });
 
 test('the law is read between the nodes around the planet, and a planet the grid does not reach gets none', () => {

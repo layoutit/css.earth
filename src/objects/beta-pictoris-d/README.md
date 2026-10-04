@@ -10,9 +10,11 @@ Beta Pictoris d is a cool giant planet about 26 au from [Beta Pictoris](../beta-
 
 **Radius and mass.** 1.26 ± 0.03 Jupiter radii and 2.4 ± 0.6 Jupiter masses, evolutionary-model estimates from the planet's photometry (Sutlieff et al. 2026, Table 2), at 600 K. Neither is measured directly.
 
-**Rotation.** Not measured; the display axis is the orbit normal and nothing turns.
+**Infrared color dataset.** The default dataset paints the sphere one false color from its measured flux in three infrared bands: red F444W 4.35 µm (242.7 ± 45 µJy), green F410M 4.072 µm (173.6 ± 32 µJy), blue ERIS L′ 3.78 µm (141.5 ± 21 µJy) (Sutlieff, Bonse et al. (2026), arXiv:2606.23801; zero points from the SVO Filter Profile Service; [record](source/photometry/band-color.json)). Display range: this planet alone, from zero to its brightest band (F444W), so the color shows its band ratios; brightness is not compared across planets at different distances. Not a natural color; nobody has resolved its disc.
 
-**Shape dataset.** A sphere of the model radius in the shared neutral gray, self-luminous.
+**Limb.** No limb darkening is drawn: its color's middle band, F410M, is not in the J, H or K of the published table; and no paper's fit of a cloudy model grid is recorded for it (source/photometry/atmosphere-fit.json).
+
+**Rotation.** Not measured; the display axis is the orbit normal and nothing turns.
 
 ## Evidence
 

@@ -136,7 +136,7 @@
           "meta": "K",
           "sourceUrl": "https://zenodo.org/records/15103479"
         },
-        "notes": "Brightness temperature fitted to eclipses; large patterns only, and blank where the data never looked. The hot spot sits 33° east of noon, 22° to 36° across the models the paper compares. Eclipse maps depend on timing: a few seconds' error moves it by degrees."
+        "notes": "Brightness temperature fitted to eclipses; large patterns only, and blank where the data never looked. The hot spot sits 33° east of noon, 22° to 36° across the models the paper compares. Eclipse maps depend on timing: a few seconds' error moves it by degrees. The shading is its star's light, a display convention: read the colors against the legend where the disc is lit."
       },
       {
         "id": "uncertainty",
@@ -196,7 +196,7 @@
           "meta": "K",
           "sourceUrl": "https://zenodo.org/records/15103479"
         },
-        "notes": "Standard deviation of sampled brightness-temperature maps, conditional on the authors’ chosen model. It excludes timing and model-choice uncertainty; neighbouring cells are correlated. The temperature map’s observed-longitude mask is retained."
+        "notes": "Standard deviation of sampled brightness-temperature maps, conditional on the authors’ chosen model. It excludes timing and model-choice uncertainty; neighbouring cells are correlated. The temperature map’s observed-longitude mask is retained. The shading is its star's light, a display convention: read the colors against the legend where the disc is lit."
       },
       {
         "id": "illustration",
@@ -211,13 +211,20 @@
           "url": "https://eyes.nasa.gov/apps/exo/"
         },
         "falseColor": false,
-        "notes": "NASA's artist's concept of HD 189733b: the map its Eyes on Exoplanets app wraps around the planet. Nobody has resolved this planet's disc, so none of the color, clouds or terrain in it was observed. Its longitudes are arbitrary."
+        "notes": "NASA's artist's concept of HD 189733b: the map its Eyes on Exoplanets app wraps around the planet. Nobody has resolved this planet's disc, so none of the color, clouds or terrain in it was observed. Its longitudes are arbitrary. The shading is its star's light, a display convention: read the colors against the legend where the disc is lit."
       }
     ]
   },
   "settings": {
     "titleKey": "settings",
-    "controls": []
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
   },
   "charts": [
     {

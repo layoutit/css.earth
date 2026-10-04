@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-disc-band-color@1",
+  "objectId": "hd-95086-b",
+  "unit": "µJy",
+  "source": {
+    "citation": "De Rosa et al. (2016), ApJ 824, 121; zero points from the SVO Filter Profile Service",
+    "url": "https://arxiv.org/abs/1604.01411",
+    "locator": "Table 2, HD 95086 b, apparent magnitude: NaCo L′ 16.27 +/- 0.19, GPI K1 18.99 +/- 0.2, GPI H 20.51 +/- 0.25; SVO Paranal/NACO.Lp 240.8 Jy, Gemini/GPI.K1 721.7 Jy, Gemini/GPI.H 1018.2 Jy"
+  },
+  "bands": [
+    {
+      "band": "NaCo L′",
+      "wavelengthMicrometres": 3.77,
+      "value": 74.75,
+      "error": 13
+    },
+    {
+      "band": "GPI K1",
+      "wavelengthMicrometres": 2.029,
+      "value": 18.3,
+      "error": 3.4
+    },
+    {
+      "band": "GPI H",
+      "wavelengthMicrometres": 1.632,
+      "value": 6.366,
+      "error": 1.5
+    }
+  ],
+  "displayRange": [
+    0,
+    74.75
+  ],
+  "displayRangeSource": "This planet alone, from zero to its brightest band (NaCo L′), so the color shows its band ratios; brightness is not compared across planets at different distances."
+}

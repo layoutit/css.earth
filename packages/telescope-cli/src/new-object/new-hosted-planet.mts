@@ -37,6 +37,15 @@ const NEUTRAL_GRAY = NEUTRAL_CATALOGUE_COLOR;
 /** A lit hosted planet's page stylesheet: the shared lane template that sizes its 460px lighting frames. It names no dataset
  * image: each dataset's variant writes the textures every leaf reads (scene/projector.ts, presentation/composite.ts). */
 export const HOSTED_PLANET_STYLESHEET = 'src/renderers/css/styles/templates/composite-planet.css';
+/** A lit hosted planet's lighting recipe: the shared sphere bank under its own star's light. */
+export const hostedPlanetLighting = (id: string) => ({ bank: 'sphere', presentationSize: 460, defaultFrame: 230, bankSchema: `css${id}-prepared-lighting-bank@1`, billboardSchema: `css${id}-prepared-lighting-billboard@1`,
+  metadata: { schema: `css${id}-prepared-lighting@1`, storageModel: 'prepared-full-resolution-density-row-shards',
+    model: 'prepared-full-phase-lambert-cubic-sky-sun-no-atmosphere',
+    sourceRadius: 'measurements.json#radiusKm',
+    limbMeaning: 'The adopted source-radius opaque-sphere silhouette and prepared phase lighting define the limb; no atmospheric rim is inferred.',
+    sourceRenderer: 'OpenSpace@56e29b54/modules/globebrowsing/shaders/texturetilemapping.glsl', ambientIntensity: 0.05,
+    shadowlessFloodLimbFloor: 0.35, orenNayarRoughness: 0, terminatorSmoothstep: [0, 0.1], minimumLightViewZ: -1, maximumLightViewZ: 1,
+    baseLightAzimuthDegrees: 0, cameraContract: 'unbounded-accumulated-matrix3d-phase-and-roll', runtimeRasterization: false } });
 
 export interface HostedPlanetScaffold {
   readonly id: string; readonly name: string; readonly system: string; readonly description: string;
@@ -112,14 +121,7 @@ export function scaffoldHostedPlanetFiles(spec: HostedPlanetScaffold, bodyRecord
       schema: `css${id}-prepared-emission@1`, presentation: 'prepared-emissive-surface-with-stationary-off-limb-context-and-limb-plate',
       offLimbContext: { logicalSize: 600, source: 'none: no observation, a transparent plate', composition: 'transparent', rotation: 'none', runtimeAlphaProcessing: false },
       limbMaterial: { logicalSize: 496, composition: 'transparent: the adopted source-radius opaque-sphere silhouette is the limb; no off-limb or radial-brightness source is selected', sourceRadius: 'measurements.json#radiusKm', surfaceReplacement: false, runtimeAlphaProcessing: false },
-      lighting: false, shadows: false, runtimeLighting: false } } } : { lighting: { bank: 'sphere', presentationSize: 460, defaultFrame: 230, bankSchema: `css${id}-prepared-lighting-bank@1`, billboardSchema: `css${id}-prepared-lighting-billboard@1`,
-      metadata: { schema: `css${id}-prepared-lighting@1`, storageModel: 'prepared-full-resolution-density-row-shards',
-        model: 'prepared-full-phase-lambert-cubic-sky-sun-no-atmosphere',
-        sourceRadius: 'measurements.json#radiusKm',
-        limbMeaning: 'The adopted source-radius opaque-sphere silhouette and prepared phase lighting define the limb; no atmospheric rim is inferred.',
-        sourceRenderer: 'OpenSpace@56e29b54/modules/globebrowsing/shaders/texturetilemapping.glsl', ambientIntensity: 0.05,
-        shadowlessFloodLimbFloor: 0.35, orenNayarRoughness: 0, terminatorSmoothstep: [0, 0.1], minimumLightViewZ: -1, maximumLightViewZ: 1,
-        baseLightAzimuthDegrees: 0, cameraContract: 'unbounded-accumulated-matrix3d-phase-and-roll', runtimeRasterization: false } } }) });
+      lighting: false, shadows: false, runtimeLighting: false } } } : { lighting: hostedPlanetLighting(id) }) });
 
   put(`${o}/source/preparation/geometry.json`, { schema: CSS_GEOMETRY_PROFILE_SCHEMA, namespace: id,
     surface: { radius: BODY_RADIUS_UNITS, polarRadius: BODY_RADIUS_UNITS, latitudeSegments: 16, longitudeSegments: 32,

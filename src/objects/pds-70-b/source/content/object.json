@@ -76,22 +76,22 @@
   },
   "datasets": {
     "titleKey": "datasets",
-    "defaultDataset": "shape",
+    "defaultDataset": "infrared",
     "controls": [
       {
-        "id": "shape",
-        "label": "Shape",
-        "qualification": "A sphere of the published radius, glowing with its own heat; the neutral gray is a display convention, not a measured color.",
-        "thumbnail": "pds-70-b-dataset-shape.webp",
-        "surface": "pds-70-b-surface-shape@2x.webp",
-        "poles": "pds-70-b-poles-shape@2x.webp",
+        "id": "infrared",
+        "label": "Infrared color",
+        "qualification": "False color from its measured flux in three infrared bands (Stolker et al. (2020), A&A 644, A13; zero points from the SVO Filter Profile Service). The disc itself is unresolved.",
+        "thumbnail": "pds-70-b-dataset-infrared.webp",
+        "surface": "pds-70-b-surface-infrared@2x.webp",
+        "poles": "pds-70-b-poles-infrared@2x.webp",
         "source": {
-          "id": "pds-70-b-observational-measurements",
+          "id": "pds-70-b-band-color",
           "path": "../manifest.json",
-          "url": "https://arxiv.org/abs/2504.11210"
+          "url": "https://arxiv.org/abs/2009.04483"
         },
-        "falseColor": false,
-        "notes": "No image or color of this planet's surface exists: it is a point of light in every image. Its size is the radius the best-supported atmosphere model of Wang et al. (2021) needs for its spectrum; their other models give sizes from under one to over three Jupiter radii. No spin is measured; the display axis is its orbit normal. The gray marks an unresolved surface."
+        "falseColor": true,
+        "notes": "PDS 70 b's brightness in three infrared bands as one color: red NACO L′ 3.77 µm, green SPHERE K1 2.102 µm, blue SPHERE H3 1.666 µm (Stolker et al. (2020), A&A 644, A13; zero points from the SVO Filter Profile Service), on a range shared with this planet alone, from zero to its brightest band (naco l′), so the color shows its band ratios; brightness is not compared across planets at different distances. Not a natural color; nobody has resolved its disc."
       }
     ]
   },

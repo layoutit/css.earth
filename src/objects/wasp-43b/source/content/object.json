@@ -122,7 +122,7 @@
           "meta": "K",
           "sourceUrl": "https://zenodo.org/records/12627524"
         },
-        "notes": "Brightness temperature fitted to JWST light curves; large patterns only. The hot spot sits about 7° east of noon and south of the equator; how far south depends on the model, 4° to 16°."
+        "notes": "Brightness temperature fitted to JWST light curves; large patterns only. The hot spot sits about 7° east of noon and south of the equator; how far south depends on the model, 4° to 16°. The shading is its star's light, a display convention: read the colors against the legend where the disc is lit."
       },
       {
         "id": "miri",
@@ -182,13 +182,20 @@
           "meta": "K",
           "sourceUrl": "https://mast.stsci.edu/search/ui/#/jwst/results?proposal_id=1366"
         },
-        "notes": "Dayside and nightside agree with Bell et al. (2024). The hot spot sits about 6° east of noon; Hammond et al. (2024) place it 7.75 ± 0.36° east in the same data."
+        "notes": "Dayside and nightside agree with Bell et al. (2024). The hot spot sits about 6° east of noon; Hammond et al. (2024) place it 7.75 ± 0.36° east in the same data. The shading is its star's light, a display convention: read the colors against the legend where the disc is lit."
       }
     ]
   },
   "settings": {
     "titleKey": "settings",
-    "controls": []
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
   },
   "charts": [],
   "resources": [

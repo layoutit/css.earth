@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-disc-band-color@1",
+  "objectId": "beta-pictoris-d",
+  "unit": "µJy",
+  "source": {
+    "citation": "Sutlieff, Bonse et al. (2026), arXiv:2606.23801; zero points from the SVO Filter Profile Service",
+    "url": "https://arxiv.org/abs/2606.23801",
+    "locator": "Table 1, apparent magnitude of the detections: JWST/NIRCam F444W 14.7 +/- 0.2 (2023-03-18), JWST/NIRCam F410M 15.2 +/- 0.2 (2025-03-22), VLT/ERIS L′ 15.57 +/- 0.16 (2025-12-03); SVO JWST/NIRCam.F444W 184.1 Jy, JWST/NIRCam.F410M 208.8 Jy, Paranal/ERIS.Lp 239.2 Jy"
+  },
+  "bands": [
+    {
+      "band": "F444W",
+      "wavelengthMicrometres": 4.35,
+      "value": 242.7,
+      "error": 45
+    },
+    {
+      "band": "F410M",
+      "wavelengthMicrometres": 4.072,
+      "value": 173.6,
+      "error": 32
+    },
+    {
+      "band": "ERIS L′",
+      "wavelengthMicrometres": 3.78,
+      "value": 141.5,
+      "error": 21
+    }
+  ],
+  "displayRange": [
+    0,
+    242.7
+  ],
+  "displayRangeSource": "This planet alone, from zero to its brightest band (F444W), so the color shows its band ratios; brightness is not compared across planets at different distances."
+}
