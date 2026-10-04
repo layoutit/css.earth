@@ -1,0 +1,55 @@
+{
+  "schema": "cssearth-image-layer-provenance@1",
+  "title": "NGC 2392",
+  "publisher": "ESA/Hubble",
+  "sourceId": "heic9910a",
+  "sourcePage": "https://esahubble.org/images/heic9910a/",
+  "download": "https://cdn.esahubble.org/archives/images/large/heic9910a.jpg",
+  "credit": "NASA, ESA, Andrew Fruchter (STScI), and the ERO team (STScI + ST-ECF)",
+  "license": "CC-BY-4.0",
+  "original": {
+    "dimensions": [
+      1500,
+      1500
+    ],
+    "bands": [
+      "Hubble",
+      "WFPC2",
+      "F469N",
+      "F502N",
+      "F656N",
+      "F658N"
+    ],
+    "fieldOfViewDeg": [
+      0.0207892,
+      0.0207892
+    ]
+  },
+  "checkedSource": {
+    "kind": "Published JPEG",
+    "dimensions": [
+      1500,
+      1500
+    ]
+  },
+  "geometryEvidence": {
+    "inclinationDeg": 0.001,
+    "lineOfNodesPaDeg": 164.065,
+    "reference": "A picture of the sky: the plane is the picture's own tangent plane, perpendicular to the sight line through the picture's centre, so it faces the Sun. That centre is 1.4 arcsec from the central star, which is the whole of the recipe's inclination. Not a measured orientation of the nebula."
+  },
+  "registration": {
+    "method": "The file's embedded sky tags for scale and direction, 0.0499 arcsec per pixel and north 168.4° left of vertical, and the central star for place: the tags alone put the star 0.45 arcsec from where the picture shows it, so the frame's centre is set at 112.2952649°, 20.9119113°, where the star in the picture is at its Gaia place.",
+    "pixelArcsec": 0.04989,
+    "northClockwiseDeg": -168.4
+  },
+  "displayModel": "Inside the outer shell's outline, a circle of 23 arcsec, the picture's light lies on two walls, in front of the star and behind it: the outer shell's, a sphere, and inside the inner shell's outline that shell's, a prolate spheroid pointed almost at the Sun. Measured radial velocities say which of the inner shell's walls a feature is on. The fine detail between the two shells lies on one surface: the shells' equatorial plane where the measured structures are at rest, bent toward the outer shell's near wall or its far wall where they approach or recede. Outside the outer shell the picture lies on one plane facing the Sun.",
+  "coverage": "The published frame inside a circle: the picture fades out between 70% and 98% of half its short side, so its corners are not drawn and no straight edge shows. The central star's own light stays at the star.",
+  "acquisition": {
+    "url": "https://cdn.esahubble.org/archives/images/large/heic9910a.jpg",
+    "dimensions": [
+      1500,
+      1500
+    ],
+    "operation": "Download the publisher's JPEG; no crop or resample."
+  }
+}

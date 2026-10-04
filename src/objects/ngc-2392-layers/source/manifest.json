@@ -1,0 +1,113 @@
+{
+  "schema": "cssearth-volume-source-manifest@2",
+  "pathBase": "repository",
+  "inputs": [
+    {
+      "id": "optical",
+      "path": "src/objects/ngc-2392-layers/source/source.jpg",
+      "origin": "https://cdn.esahubble.org/archives/images/large/heic9910a.jpg",
+      "sourceUrl": "https://esahubble.org/images/heic9910a/",
+      "title": "NGC 2392",
+      "credit": "NASA, ESA, Andrew Fruchter (STScI), and the ERO team (STScI + ST-ECF)",
+      "displayCredit": "ESA/Hubble",
+      "acquisition": "The publisher's JPEG (1500 x 1500 px), downloaded unchanged; not tracked. Its place on the sky is the file's embedded tags (recipe observation). A display composite, not a calibrated scientific array.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "esahubble-heic9910a",
+            "role": "material",
+            "evidence": "src/objects/ngc-2392-layers/source/provenance.json"
+          }
+        ]
+      },
+      "dependencies": [],
+      "datasetId": "optical",
+      "license": "CC-BY-4.0; retain the complete recorded credit.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "hubble",
+            "evidence": "https://esahubble.org/images/heic9910a/"
+          }
+        ]
+      }
+    },
+    {
+      "id": "measured-speeds",
+      "path": "src/objects/ngc-2392-layers/source/proper-motions.dat",
+      "origin": "https://cdsarc.cds.unistra.fr/ftp/J/ApJ/798/129/table3.dat",
+      "sourceUrl": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/798/129",
+      "title": "García-Díaz et al. (2015), Table 3: proper motions and radial velocities of 536 structures of NGC 2392",
+      "credit": "García-Díaz, Gutiérrez, Steffen, López & Beckman (2015); table served by CDS",
+      "displayCredit": "García-Díaz et al. (2015)",
+      "acquisition": "The table as CDS serves it, downloaded unchanged; read by the image-layer bake for each structure's place and radial velocity.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "publication-garcia-diaz-2015-ngc-2392-proper-motions",
+            "role": "material",
+            "evidence": "https://cdsarc.cds.unistra.fr/ftp/J/ApJ/798/129/ReadMe"
+          }
+        ]
+      },
+      "license": "CDS catalogue terms: free for scientific use with the paper cited.",
+      "dependencies": [],
+      "datasetId": "optical",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "unresolved",
+            "label": "Published table",
+            "evidence": "https://arxiv.org/abs/1411.0042",
+            "reason": "A table, not an observation of its own."
+          }
+        ]
+      }
+    }
+  ],
+  "documents": [
+    {
+      "id": "recipe",
+      "path": "src/objects/ngc-2392-layers/source/recipe.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned processing, source interpretation or presentation record; the published image is separately bound as a material input."
+      },
+      "kind": "authored-document",
+      "origin": "cssEarth project-authored record",
+      "credit": "cssEarth contributors",
+      "title": "Image-layer preparation recipe",
+      "acquisition": "Checked-in project-authored JSON. This pin identifies local processing or interpretation metadata, not an original publisher document; the published image is separately bound in inputs."
+    },
+    {
+      "id": "provenance",
+      "path": "src/objects/ngc-2392-layers/source/provenance.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned processing, source interpretation or presentation record; the published image is separately bound as a material input."
+      },
+      "kind": "authored-document",
+      "origin": "cssEarth project-authored record",
+      "credit": "cssEarth contributors",
+      "title": "Published image interpretation and acquisition record",
+      "acquisition": "Checked-in project-authored JSON. This pin identifies local processing or interpretation metadata, not an original publisher document; the published image is separately bound in inputs."
+    },
+    {
+      "id": "presentation",
+      "path": "src/objects/ngc-2392-layers/source/presentation.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned processing, source interpretation or presentation record; the published image is separately bound as a material input."
+      },
+      "kind": "authored-document",
+      "origin": "cssEarth project-authored record",
+      "credit": "cssEarth contributors",
+      "title": "Dataset presentation and prepared-bank bindings",
+      "acquisition": "Checked-in project-authored JSON. This pin identifies local processing or interpretation metadata, not an original publisher document; the published image is separately bound in inputs."
+    }
+  ],
+  "generatedIntermediates": []
+}

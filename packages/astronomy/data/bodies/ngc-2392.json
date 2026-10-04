@@ -1,0 +1,28 @@
+{
+  "id": "ngc-2392",
+  "classification": "nebula",
+  "order": 5385,
+  "physical": {
+    "name": "NGC 2392",
+    "horizonsCode": null,
+    "meanRadiusKm": 0,
+    "gravitationalParameterKm3PerS2": 0,
+    "parent": null
+  },
+  "physicalNotes": "No radius or mass of NGC 2392 is recorded: it is an extended nebula, and its package frames it at 0.33 pc (object.json worldFrame.bodyRadiusM), half its picture's short side, a presentation value.",
+  "star": {
+    "rightAscensionDegrees": 112.29485540704,
+    "declinationDegrees": 20.91180208706,
+    "positionEpochJulianYear": 2000,
+    "distanceParsecs": 1795.0308872481207,
+    "properMotionRaMasPerYear": 0,
+    "properMotionDecMasPerYear": 0,
+    "radialVelocityKmPerS": 0,
+    "sources": {
+      "position": "Chornay & Walton (2021), PN G197.8+17.3: its central star, Gaia EDR3 865037169677723904",
+      "distance": "Chornay & Walton (2021), A&A 656, A110; CDS J/A+A/656/A110, Table A.1, PN G197.8+17.3: distance 1,795 pc (1,666 to 1,942) from the Gaia EDR3 parallax of its central star (https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/656/A110)",
+      "properMotion": "Zero: the nebula is held at its catalogued position; no motion across the sky is applied.",
+      "radialVelocity": "Zero: no radial velocity is recorded for the nebula here."
+    }
+  }
+}
