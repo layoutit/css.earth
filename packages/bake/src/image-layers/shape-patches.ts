@@ -107,8 +107,8 @@ function surfacePatches(layer: ShapeLayer, width: number, height: number, facePi
       lit[p] = 1; x0 = Math.min(x0, x); x1 = Math.max(x1, x); y0 = Math.min(y0, y); y1 = Math.max(y1, y); }
     if (x1 < x0) return { patches, scenes };
     const tolerance = fit, flat = PATCH_FLAT_PIXELS * facePixel, least = PATCH_LEAST_PIXELS;
-    // The surface's depth beyond its own pixels: that of its nearest pixel, found in two sweeps, so a corner outside the
-    // surface stands where its edge is.
+    // The surface's depth beyond its own pixels: what the layer says of it there (`around`), else that of its nearest
+    // pixel, found in two sweeps, so a corner outside the surface stands where its edge is.
     const nearest = new Int32Array(count).fill(-1);
     for (let p = 0; p < count; p++) if (lit[p]) nearest[p] = p;
     const closer = (p: number, x: number, y: number, dx: number, dy: number) => { const nx = x + dx, ny = y + dy; if (nx < 0 || ny < 0 || nx >= width || ny >= height) return;
@@ -116,7 +116,7 @@ function surfacePatches(layer: ShapeLayer, width: number, height: number, facePi
       if (held < 0 || (found % width - x) ** 2 + (Math.floor(found / width) - y) ** 2 < (held % width - x) ** 2 + (Math.floor(held / width) - y) ** 2) nearest[p] = found; };
     for (let y = 0; y < height; y++) for (let x = 0; x < width; x++) { const p = y * width + x; if (lit[p]) continue; closer(p, x, y, -1, 0); closer(p, x, y, 0, -1); closer(p, x, y, -1, -1); closer(p, x, y, 1, -1); }
     for (let y = height - 1; y >= 0; y--) for (let x = width - 1; x >= 0; x--) { const p = y * width + x; if (lit[p]) continue; closer(p, x, y, 1, 0); closer(p, x, y, 0, 1); closer(p, x, y, 1, 1); closer(p, x, y, -1, 1); }
-    const beyond = (x: number, y: number) => layer.depth[nearest[y * width + x]!]!;
+    const beyond = (x: number, y: number) => { const p = y * width + x, known = lit[p] ? NaN : layer.around?.[p] ?? NaN; return Number.isNaN(known) ? layer.depth[nearest[p]!]! : known; };
     // The surface's depth at a corner between four pixels.
     const corner = (x: number, y: number) => { let sum = 0; for (const [dx, dy] of [[-1, -1], [0, -1], [-1, 0], [0, 0]] as const) sum += beyond(Math.max(0, Math.min(width - 1, x + dx)), Math.max(0, Math.min(height - 1, y + dy))); return sum / 4; };
     // How far the surface stands at most from a square's patches where the square is lit, across the surface; null where it is not lit.

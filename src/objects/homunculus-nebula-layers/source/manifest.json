@@ -1,0 +1,118 @@
+{
+  "schema": "cssearth-volume-source-manifest@2",
+  "pathBase": "repository",
+  "inputs": [
+    {
+      "id": "optical",
+      "path": "src/objects/homunculus-nebula-layers/source/source.jpg",
+      "origin": "https://cdn.esahubble.org/archives/images/large/potw1208a.jpg",
+      "sourceUrl": "https://esahubble.org/images/potw1208a/",
+      "title": "Preview of a forthcoming supernova",
+      "credit": "ESA/Hubble & NASA",
+      "displayCredit": "ESA/Hubble",
+      "acquisition": "The publisher's JPEG (1089 x 1033 px), downloaded unchanged; not tracked. Its scale and direction on the sky are the file's embedded tags; its place is set by the star (recipe observation). A display composite, not a calibrated scientific array.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "esahubble-potw1208a",
+            "role": "material",
+            "evidence": "src/objects/homunculus-nebula-layers/source/provenance.json"
+          }
+        ]
+      },
+      "dependencies": [],
+      "datasetId": "optical",
+      "license": "CC-BY-4.0; retain the complete recorded credit.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "hubble",
+            "evidence": "https://esahubble.org/images/potw1208a/"
+          }
+        ]
+      }
+    },
+    {
+      "id": "surface-model",
+      "path": "src/objects/homunculus-nebula-layers/source/homunculus.stl",
+      "origin": "https://raw.githubusercontent.com/nasa/NASA-3D-Resources/master/3D%20Printing/Eta%20Carinae%20Homunculus%20Nebula/Eta%20Carinae%20Homunculus%20Nebula.stl",
+      "sourceUrl": "https://github.com/nasa/NASA-3D-Resources/tree/master/3D%20Printing/Eta%20Carinae%20Homunculus%20Nebula",
+      "title": "Eta Carinae Homunculus Nebula: the model of Steffen et al. (2014) as a printable surface, 17101 triangles",
+      "credit": "NASA 3D Resources; Steffen et al. (2014)",
+      "displayCredit": "Steffen et al. (2014)",
+      "acquisition": "The binary STL as NASA 3D Resources serves it, downloaded unchanged; not tracked. Read by the image-layer bake for where each sight line crosses the surface.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "nasa-3d-homunculus-nebula",
+            "role": "material",
+            "evidence": "https://github.com/nasa/NASA-3D-Resources/tree/master/3D%20Printing/Eta%20Carinae%20Homunculus%20Nebula"
+          },
+          {
+            "catalogueId": "publication-steffen-2014-homunculus-3d",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/1407.4096"
+          }
+        ]
+      },
+      "license": "NASA 3D Resources: free and without copyright, under NASA's media usage guidelines.",
+      "dependencies": [],
+      "datasetId": "optical",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "unresolved",
+            "label": "VLT/X-shooter",
+            "evidence": "https://arxiv.org/abs/1407.4096",
+            "reason": "A model made from ESO VLT/X-shooter spectra (programme 088.D-0873), not an observation of its own."
+          }
+        ]
+      }
+    }
+  ],
+  "documents": [
+    {
+      "id": "recipe",
+      "path": "src/objects/homunculus-nebula-layers/source/recipe.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned processing, source interpretation or presentation record; the published image is separately bound as a material input."
+      },
+      "kind": "authored-document",
+      "origin": "cssEarth project-authored record",
+      "credit": "cssEarth contributors",
+      "title": "Image-layer preparation recipe",
+      "acquisition": "Checked-in project-authored JSON. This pin identifies local processing or interpretation metadata, not an original publisher document; the published image is separately bound in inputs."
+    },
+    {
+      "id": "provenance",
+      "path": "src/objects/homunculus-nebula-layers/source/provenance.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned processing, source interpretation or presentation record; the published image is separately bound as a material input."
+      },
+      "kind": "authored-document",
+      "origin": "cssEarth project-authored record",
+      "credit": "cssEarth contributors",
+      "title": "Published image interpretation and acquisition record",
+      "acquisition": "Checked-in project-authored JSON. This pin identifies local processing or interpretation metadata, not an original publisher document; the published image is separately bound in inputs."
+    },
+    {
+      "id": "presentation",
+      "path": "src/objects/homunculus-nebula-layers/source/presentation.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned processing, source interpretation or presentation record; the published image is separately bound as a material input."
+      },
+      "kind": "authored-document",
+      "origin": "cssEarth project-authored record",
+      "credit": "cssEarth contributors",
+      "title": "Dataset presentation and prepared-bank bindings",
+      "acquisition": "Checked-in project-authored JSON. This pin identifies local processing or interpretation metadata, not an original publisher document; the published image is separately bound in inputs."
+    }
+  ],
+  "generatedIntermediates": []
+}
