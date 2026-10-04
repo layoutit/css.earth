@@ -126,7 +126,7 @@ export function astronomyRecord(spec: StarSpec, row: GaiaRow | CatalogueRow, ids
       ...(spec.boundTo ? { boundTo: spec.boundTo.host } : {}),
       sources: {
         position: gaia ? `Gaia DR3 source ${gaia.sourceId} (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/${spec.id}/source/photometry/gaia-dr3-source.csv${cross ? `; cross-identification ${cross}: https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia+DR3+${gaia.sourceId}` : ''}`
-          : `${spec.position!.credit} (${spec.position!.url}), ${catalogue!.archive} ${catalogue!.words}: ${catalogue!.columns.ra} ${row.ra}, ${catalogue!.columns.dec} ${row.dec}${catalogue!.epoch === 2000 ? '' : ` (ICRS at epoch J${catalogue!.epoch})`}, from the archived ${catalogue!.image ? 'header' : 'row'} src/objects/${spec.id}/source/${rowArchive(catalogue!).path}${spec.target ? `; SIMBAD names it ${spec.target}` : ''}`,
+          : `${spec.position!.credit} (${spec.position!.url}), ${catalogue!.archive} ${catalogue!.words}: ${catalogue!.columns.ra} ${row.ra}, ${catalogue!.columns.dec} ${row.dec}${catalogue!.epoch === 2000 ? '' : ` (ICRS at epoch J${catalogue!.epoch})`}${catalogue!.paper ? ', as the paper prints them' : `, from the archived ${catalogue!.image ? 'header' : 'row'} src/objects/${spec.id}/source/${rowArchive(catalogue!).path}`}${spec.target ? `; SIMBAD names it ${spec.target}` : ''}`,
         distance: place.source,
         properMotion: place.properMotion.source,
         radialVelocity: gaia?.radialVelocity !== undefined ? `Gaia DR3 (same row): ${gaia.radialVelocity.toFixed(2)}${gaia.radialVelocityError ? ` +/- ${gaia.radialVelocityError.toFixed(2)}` : ''} km/s` : `${spec.radialVelocity!.source} (${spec.radialVelocity!.url})`,
@@ -217,7 +217,7 @@ export async function generateStar(spec: StarSpec, { archive = liveArchive, root
   const files = withParent(new Map<string, string | Buffer>(scaffold), id, await packageParent(root, id, spec)), read = (path: string) => JSON.parse(String(files.get(path))) as Record<string, any>;
   files.set(`packages/astronomy/data/bodies/${id}.json`, `${JSON.stringify(body, null, 1)}\n`);
   if (gaiaRead) files.set(`${s}/photometry/gaia-dr3-source.csv`, gaiaRead.csv);
-  if (catalogueRow) files.set(`${s}/${rowHeld!.path}`, catalogueRow.tsv);
+  if (rowHeld?.path) files.set(`${s}/${rowHeld.path}`, catalogueRow!.tsv);
   const { hex: colorHex, words: colorWords } = await installColorDataset(files, id, color, limb);
 
   const measurements = read(`${s}/measurements.json`), distance = place.parsecs, out: Record<string, unknown> = {};
@@ -278,15 +278,15 @@ export async function generateStar(spec: StarSpec, { archive = liveArchive, root
   const placementInput = gaia ? { id: `${id}-gaia-dr3-source`, path: 'photometry/gaia-dr3-source.csv', origin: GAIA_TAP, credit: 'ESA/Gaia/DPAC; Gaia Collaboration (2023), A&A 674, A1; Creevey et al. (2023), A&A 674, A26 (FLAME)', ...GAIA_LICENSE,
     acquisition: `Gaia Archive TAP query in source/preparation/acquisition.json: the gaia_source row of source_id ${gaia.sourceId} (position${gaia.parallax === undefined ? '' : ', parallax, proper motion'}, radial velocity) with its FLAME mass and radius.`,
     redistribution: 'One catalogue row, retained unchanged with its credit.', consumers: ['placement'] }
-    : { id: `${id}-${rowHeld!.input}`, path: rowHeld!.path, ...rowHeld!.range ? { range: rowHeld!.range } : {}, origin: rowHeld!.origin, credit: `${spec.position!.credit}; ${rowHeld!.credit}`, license: rowHeld!.license, licenseEvidence: rowHeld!.licenseEvidence,
+    : !rowHeld!.path ? undefined : { id: `${id}-${rowHeld!.input}`, path: rowHeld!.path, ...rowHeld!.range ? { range: rowHeld!.range } : {}, origin: rowHeld!.origin, credit: `${spec.position!.credit}; ${rowHeld!.credit}`, license: rowHeld!.license, licenseEvidence: rowHeld!.licenseEvidence,
       acquisition: rowHeld!.acquisition,
       redistribution: rowHeld!.redistribution, consumers: ['placement'] };
-  manifest.inputs = [...manifest.inputs, placementInput];
+  manifest.inputs = [...manifest.inputs, ...placementInput ? [placementInput] : []];
   files.set(`${s}/manifest.json`, json(manifest));
   const plan = read(`${s}/preparation/acquisition.json`);
   plan.operations = [...plan.operations, gaia ? { kind: 'request-download', groups: ['restore', 'refresh'], path: 'photometry/gaia-dr3-source.csv', url: GAIA_TAP, form: gaiaRowForm(gaia.sourceId), requiredPrefix: 'source_id,' }
     : rowHeld!.operation,
-  ];
+  ].filter(Boolean);
   files.set(`${s}/preparation/acquisition.json`, json(plan));
   // The spec this package was made from, so `--refresh` can make it again (refresh.mts).
   files.set(`${s}/preparation/new-object.json`, storedStarSpec(spec, order));
