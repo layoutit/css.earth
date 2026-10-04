@@ -6,17 +6,18 @@ import type { BrowserWindow } from '../browser/browser-types.mts';
  * fragment. Selection intent fetches it ahead of a click, and the destination
  * load reuses that response. This is not a card bank: only a few recently
  * requested fragments stay resident, and none is fetched until it is wanted.
- * Encoded HTML is shared. Each consumer owns a short-lived parsed document lease
- * and releases it after importing the nodes it needs.
+ * Encoded HTML is shared, and so is its parsed document among the consumers that
+ * hold it at the same time: none of them changes it. Each reads it, imports the
+ * nodes it needs and releases its lease; the document goes with its last lease.
  */
 export interface NavigationFragments {
   /** Start fetching without waiting. A failure is dropped so demand retries it. */
   prefetch(id: string): void;
   /** Whether encoded fragment bytes have already arrived. */
   ready(id: string): boolean;
-  /** A caller-owned parsed document when encoded bytes have already arrived. */
+  /** A lease on the parsed document when encoded bytes have already arrived. */
   peek(id: string): NavigationFragmentLease | null;
-  /** Parse a caller-owned document from the shared encoded fragment bytes. */
+  /** A lease on the document parsed from the shared encoded fragment bytes. */
   get(id: string, signal?: AbortSignal): Promise<NavigationFragmentLease>;
   inspect(): NavigationFragmentResidency;
 }
@@ -65,21 +66,32 @@ export function createNavigationFragments({ windowTarget, fetchPage = url => win
     }
     return source;
   }
+  // The leases of one page that are alive together read one parsed document. A hand-over's content and its descriptor
+  // lease the page in the same turn: parsed for each, a 250 to 400 KB page was parsed twice in the frame it was handed
+  // over in, about 4 ms a parse on an iPad (2026-10-04).
+  const parsed = new Map<string, { html: string; document: Document; leases: number }>();
   function lease(id: string, html: string): NavigationFragmentLease {
-    let document: Document | null;
-    // A page that is not the object's own is dropped, so the next demand asks for it again.
-    try { document = parse(id, html); } catch (error) { if (entries.get(id)?.html === html) entries.delete(id); throw error; }
-    activeDocuments++; parsedDocuments++;
+    let held = parsed.get(id);
+    if (!held || held.html !== html) {
+      let document: Document;
+      // A page that is not the object's own is dropped, so the next demand asks for it again.
+      try { document = parse(id, html); } catch (error) { if (entries.get(id)?.html === html) entries.delete(id); throw error; }
+      parsedDocuments++;
+      parsed.set(id, held = { html, document, leases: 0 });
+    }
+    let shared: typeof held | null = held;
+    shared.leases++; activeDocuments++;
     return Object.freeze({
       get document() {
-        if (!document) throw new Error('Navigation fragment document has been released.');
-        return document;
+        if (!shared) throw new Error('Navigation fragment document has been released.');
+        return shared.document;
       },
       release() {
-        if (!document) return;
+        if (!shared) return;
         // Content callbacks can outlive their transition. A released lease must
         // stop retaining the parsed DOM, not merely lower the ownership counter.
-        document = null;
+        if (--shared.leases === 0 && parsed.get(id) === shared) parsed.delete(id);
+        shared = null;
         activeDocuments--;
       },
     });
