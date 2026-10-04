@@ -1,4 +1,3 @@
-import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 // Entry script: node packages/bake/authoring/fornax-cluster/members.mts [fcc p2tbl2.dat.gz]
 /**
  * The Fornax Cluster's member dots: the Fornax Cluster Catalog's definite members (Ferguson 1989, AJ 98, 367, through
@@ -18,6 +17,7 @@ import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
  * `src/objects/nearby-universe-galaxies/source/galaxies/cf4-hyperleda.csv.gz`.
  * Output: `src/objects/fornax-cluster-members/source/dots/fcc-members.csv.gz`. It prints what it kept.
  */
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 import { spawnSync } from 'node:child_process';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';

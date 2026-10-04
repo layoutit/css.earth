@@ -14,9 +14,8 @@ import sharp from 'sharp';
 import { requireArray, requireRecord } from '@cssearth/core';
 import { readPdfImage } from '../../sources/index.ts';
 import { lamBytes } from './lam.ts';
-import { deriveObserverCameras, loadObserverCameraInputs, loadOrientation, type DerivedCamera, radialTerrainForDataset, observerCaster, turnedOrientation, type TurnableCaster } from '../layers/terrestrial/index.ts';
+import { deriveObserverCameras, loadObserverCameraInputs, loadOrientation, type DerivedCamera, radialTerrainForDataset, observerCaster, turnedOrientation, type TurnableCaster, COMPARISON_EVIDENCE_SCHEMA, COMPARISON_SPEC_FILE, PHASE_SWEEP_STEP_DEGREES, axisDifferenceDegrees, bestImageTurnDegrees, columnCells, outlineOverlap, panelAxisDegrees, panelDisc, parseComparisonSpec, type Mask, type Raster } from '../layers/terrestrial/index.ts';
 import { decodeCalibratedCamera, loadCameraShape } from '../geometry/index.ts';
-import { COMPARISON_EVIDENCE_SCHEMA, COMPARISON_SPEC_FILE, PHASE_SWEEP_STEP_DEGREES, axisDifferenceDegrees, bestImageTurnDegrees, columnCells, outlineOverlap, panelAxisDegrees, panelDisc, parseComparisonSpec, type Mask, type Raster } from '../layers/terrestrial/index.ts';
 
 const SWEEP = { from: -30, to: 30, step: 2 };
 const round = (value: number, digits = 3) => Number(value.toFixed(digits));

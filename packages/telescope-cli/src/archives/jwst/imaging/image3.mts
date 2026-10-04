@@ -22,16 +22,13 @@ import { totalmem } from 'node:os';
 import { basename, dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { readFitsFileHdus } from '@cssearth/fits/node';
-import { requireRecord } from '@cssearth/core';
-import { addProductEvidence, readProductRecord, sameRun, writeProductRecord, WORKSPACE } from '@cssearth/telescope/node';
+import { requireRecord, MissingSourceInputError } from '@cssearth/core';
+import { addProductEvidence, readProductRecord, sameRun, writeProductRecord, WORKSPACE, mastFile, type MastFile, freeMemoryPercent, toolchainPython } from '@cssearth/telescope/node';
 import { productRecordPath } from '@cssearth/telescope';
 import { type EvidenceKind, type ProductInput, type ProductRun, type ProductSoftware } from '@cssearth/objects';
 import { EUREKA_ROOT, eurekaToolchain } from '../toolchain.mts';
-import { mastFile, type MastFile } from '@cssearth/telescope/node';
-import { freeMemoryPercent, toolchainPython } from '@cssearth/telescope/node';
 import { parseImagingProgram, PROGRAMS, type ImagingBand, type ImagingProgram } from './archive.mts';
 import { gridWcs, parseSkyGrid, type SkyGrid } from '@cssearth/bake/objects/raster';
-import { MissingSourceInputError } from '@cssearth/core';
 
 const IMAGE3 = `
 import json, sys, time

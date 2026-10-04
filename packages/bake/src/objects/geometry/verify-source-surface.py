@@ -6,7 +6,7 @@ import json, gzip, sys
 from pathlib import Path
 import numpy as np
 
-ROOT=Path.cwd()
+ROOT=next(parent for parent in Path(__file__).resolve().parents if (parent/'pnpm-workspace.yaml').is_file())
 OUT=ROOT/'output/faithfulness-fixes/source-surface'
 
 def read_mesh(id):

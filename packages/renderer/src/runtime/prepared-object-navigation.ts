@@ -1,6 +1,6 @@
 import { type ObjectRuntimeDefinition, type PreparedWorldCameraFrame } from '@cssearth/objects';
 import type { WorldRotation } from '@cssearth/core';
-import { worldCameraFromCenteredPresentation, type WorldCameraPose } from '@cssearth/engine';
+import { worldCameraFromCenteredPresentation, type WorldCameraPose, viewSunDirectionToPhysicalLightDirection } from '@cssearth/engine';
 
 import { initialStageSelection } from './initial-stage-selection.js';
 import { savedWorldCamera } from '../navigation/saved-world-camera.js';
@@ -14,7 +14,6 @@ import type { WorldCameraViewport } from '../navigation/world-camera.js';
 import { presentWorldCamera, worldCameraSilhouetteDiameter, worldCameraViewport } from '../navigation/world-camera.js';
 import { createCameraOrientation } from '../navigation/camera-orientation.js';
 import { levelOfDetailFor } from '../navigation/perspective-dolly.js';
-import { viewSunDirectionToPhysicalLightDirection } from '@cssearth/engine';
 import { initialObjectSelection } from './object-contract.js';
 import { resolvePreparedPresentation } from '../rendering/prepared-presentation.js';
 import { prepareObjectResources } from './prepared-resource-lease.js';

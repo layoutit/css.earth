@@ -1,5 +1,5 @@
-import { isRecord as coreIsRecord } from '@cssearth/core';
 /** Node worker transport. Domain adapters validate progress and completion payloads. */
+import { isRecord as coreIsRecord } from '@cssearth/core';
 import { spawn } from 'node:child_process';
 import { resolve } from 'node:path';
 import { buildLabModule as build } from '../../cli/build.ts';

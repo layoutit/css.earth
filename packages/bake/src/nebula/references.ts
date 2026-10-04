@@ -1,5 +1,5 @@
-import { isRecord as record } from '@cssearth/core';
 /** Local copies retain historical research JSON pins without making application replay load lab models. */
+import { isRecord as record } from '@cssearth/core';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';

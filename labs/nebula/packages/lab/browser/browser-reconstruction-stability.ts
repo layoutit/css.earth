@@ -1,5 +1,5 @@
-import { gestureCamera } from './browser-camera.ts';
 /** Saved-output acceptance only. Args: [result-ledger.json] [base-url] [output-directory]. */
+import { gestureCamera } from './browser-camera.ts';
 import assert from 'node:assert/strict';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';

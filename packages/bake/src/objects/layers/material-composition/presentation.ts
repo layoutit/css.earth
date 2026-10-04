@@ -1,4 +1,4 @@
-import type {MaterialSourceTrack} from '../../../presentation/index.ts';
+import type { MaterialSourceTrack, prepareCubicSky, prepareDirectionalSun, PreparedNode } from '../../../presentation/index.ts';
 import {parse} from '@cssearth/core/schema';
 import { layeredPresentationRecipe } from './presentation-recipe.ts';
 import { parseLayeredDatasets, parseLayeredAtlas } from './presentation-source.ts';
@@ -7,8 +7,6 @@ import { requireString, multiplyPreparedMatrix4, preparedRotationMatrix4, readPr
 import type {createLayeredOblatePreparation} from './layered-oblate.ts';
 import type {prepareLayeredLeafLayouts} from './leaf-layouts.ts';
 import type {prepareCutawayMaterials} from './cutaway-materials.ts';
-import type { prepareCubicSky, prepareDirectionalSun } from '../../../presentation/index.ts';
-import type { PreparedNode } from '../../../presentation/index.ts';
 type LayeredScene = Awaited<ReturnType<Awaited<ReturnType<typeof createLayeredOblatePreparation>>['prepareLayeredScene']>>['runtimeScene'];
 
 import { canonicalPreparedAsset, preparedResourcePool, PREPARED_PRESENTATION_SCHEMA } from '@cssearth/objects';

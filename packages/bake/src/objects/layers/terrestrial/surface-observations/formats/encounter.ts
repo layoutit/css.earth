@@ -1,5 +1,5 @@
-import assert from 'node:assert/strict';
 /** Encounter FITS photographs: calibrated flyby images whose cameras come from a registered control network. */
+import assert from 'node:assert/strict';
 import type { ObservationCamera, ObservationFrame, ObservationImage, SurfaceObservationFormat } from '../contract.ts';
 import type { SourceMesh } from '../../../../geometry/index.ts';
 import { decodeProfile, publishedOr, parseLevelMatching, parseSurfaceGeometry, parseEncounterSourceControl, surfaceTransfer, checkKeys } from '../../../../raster/index.ts';

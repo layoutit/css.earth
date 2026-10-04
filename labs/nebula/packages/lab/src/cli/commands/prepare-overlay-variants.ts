@@ -1,5 +1,5 @@
-import { parseLabModelJson } from '../../resources/model-paths.ts';
 /** Deliver existing native-grid separation products; never separates sources or bakes a volume. */
+import { parseLabModelJson } from '../../resources/model-paths.ts';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import sharp from 'sharp';

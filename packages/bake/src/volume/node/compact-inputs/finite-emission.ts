@@ -1,4 +1,3 @@
-import { readCompactFiniteEmission, readSimulationEnvelopeRecord, type EmissionFieldModel, type VolumeSlices, type Vector3 } from '@cssearth/objects';
 /**
  * Offline replay of an accepted simulation-guided finite-emission delivery.
  *
@@ -8,6 +7,7 @@ import { readCompactFiniteEmission, readSimulationEnvelopeRecord, type EmissionF
  * plus envelope emission through the same perspective transform, and the same alpha-limited slab
  * material recoloring the same neutral textures at the same encoder settings.
  */
+import { readCompactFiniteEmission, readSimulationEnvelopeRecord, type EmissionFieldModel, type VolumeSlices, type Vector3 } from '@cssearth/objects';
 import assert from 'node:assert/strict';
 import { readFile, mkdir } from 'node:fs/promises';
 import { gunzipSync } from 'node:zlib';

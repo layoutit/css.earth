@@ -5,13 +5,7 @@ import {
   formatCssLength,
   resolvePolyTextureLeafGeometry,
 } from "@layoutit/polycss";
-import {
-  createProjectiveSurfaceRasterPresentation,
-  fitTextureGeometry,
-  fitProjectiveTextureGeometryToStableLayout,
-  prepareProjectiveTextureLayer,
-} from "../../../../scene/index.ts";
-import { prepareLeafSeamOutset, POLAR_CAP_STYLE, requireOutwardCap } from "../../../../scene/index.ts";
+import { createProjectiveSurfaceRasterPresentation, fitTextureGeometry, fitProjectiveTextureGeometryToStableLayout, prepareProjectiveTextureLayer, prepareLeafSeamOutset, POLAR_CAP_STYLE, requireOutwardCap } from "../../../../scene/index.ts";
 import type { SphereConfiguration, SpherePolygon, RasterPolygon } from '../scene-contract.ts';
 import type { PagedSceneContext } from './scene-context.ts';
 // Earth keeps full leaf boxes for now: its paged surface levels are being reworked on their own branch, and its leaves

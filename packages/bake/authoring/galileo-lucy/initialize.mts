@@ -1,13 +1,10 @@
-import { refreshSourceRecord } from '../source-authoring-templates.mts';
+import { refreshSourceRecord, parseAuthoringSolid, parseAuthoringManifest } from '../source-authoring-templates.mts';
 import assert from 'node:assert/strict';
-import { parseAuthoringSolid, parseAuthoringManifest } from '../source-authoring-templates.mts';
 import { shape, text, number, array, requireRecord, requireString } from '@cssearth/core';
 import { bodies } from './catalog.mts';
 import { readFile, writeFile, mkdir, readdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { loadRadialTerrain } from '@cssearth/bake/objects/layers/terrestrial';
-import { prepareSolidRasters } from '@cssearth/bake/objects/layers/terrestrial';
-import { renderRadialSnapshot } from '@cssearth/bake/objects/layers/terrestrial';
+import { loadRadialTerrain, prepareSolidRasters, renderRadialSnapshot } from '@cssearth/bake/objects/layers/terrestrial';
 import { createSourceManifest } from '@cssearth/objects/node';
 const parseNavigation = (v: unknown) => { const raw=requireRecord(v); return {...raw,source:shape({path:text})(raw.source)}; };
 const parseSnapshotRecipe=shape({size:number,longitudeDegrees:number,latitudeDegrees:number,ambient:number,diffuse:number,inputs:array(text)});

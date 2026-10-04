@@ -2,11 +2,8 @@ import { required } from '@cssearth/objects/node/contract';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import assert from 'node:assert/strict';
-import {sampleFootprint} from '@cssearth/bake/objects/layers/terrestrial';
-import {castSourceRays} from '@cssearth/bake/objects/layers/terrestrial';
-import {validateEncounterImageReference} from '@cssearth/bake/objects/layers/terrestrial';
+import { sampleFootprint, castSourceRays, validateEncounterImageReference, validateEncounterControls, encounterCamera } from '@cssearth/bake/objects/layers/terrestrial';
 import type {PixelGeometry} from '@cssearth/bake/objects/layers/terrestrial';
-import { validateEncounterControls, encounterCamera } from '@cssearth/bake/objects/layers/terrestrial';
 const sample=()=>{
  const accepted=new Uint8Array([1,1,1,1]),xyz=new Float64Array([0,0,0,1,0,0,0,1,0,1,1,0]),emissions=[0,10,20,30];
  const geometry: PixelGeometry={source:'source-mesh-rays',report:{},reject:i=>accepted[i]?null:'no-geometry',

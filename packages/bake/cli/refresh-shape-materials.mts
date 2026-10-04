@@ -1,8 +1,7 @@
-import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
+import { projectRoot as checkoutProjectRoot, sha256 } from '@cssearth/core/node';
 // Entry script: node packages/bake/cli/refresh-shape-materials.mts <object-id>... | --all [--resume] [--descriptions-only]
 // [--source-root=<path>] [--shard=<index>/<count>]. The work is in @cssearth/bake/refresh-shape-materials, with the
 // generated solar geometry this entry loads from the checkout.
-import { sha256 } from '@cssearth/core/node';
 import { readFile, stat } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';

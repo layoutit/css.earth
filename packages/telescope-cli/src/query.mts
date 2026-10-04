@@ -1,25 +1,3 @@
-import { validateCapabilityRequest, PRODUCT_KINDS, REQUESTED_RESULTS, type ProductKind, type RequestedResult, type CapabilityRequest } from './recipe-request.mts';
-import { inputWavelengths } from './recipe-request.mts';
-import { skyCatalogueEntry, WORKSPACE } from '@cssearth/telescope/node';
-import { parseLimits } from '@cssearth/telescope/node';
-import { parseRegion } from '@cssearth/objects';
-import { loadVoInputs, voCandidates } from './vo/bridge.mts';
-import type { DiscoveryRequest } from './vo/discovery.mts';
-import { loadQualifiedObservations, matchingProduct } from './qualified-observations.mts';
-import { assessInput, assessRequest } from './request-satisfaction.mts';
-import { parseAcceptedAssumptions } from '@cssearth/objects';
-import { readdir } from 'node:fs/promises';
-import { resolve } from 'node:path';
-import { flagValue, hasErrorCode, requireArray, requireRecord, requireString } from '@cssearth/core';
-import { readJsonSource } from '@cssearth/bake/objects/sources';
-import { readBodyMapProduct, resolutionElementsAcrossDisc, surfaceResolutionKm } from '@cssearth/bake/objects/layers/observation';
-
-import type { SourceIntakeIssue } from './source-intake.mts';
-import { loadSourceProducts, sourceQualifiedObservations } from './source-products.mts';
-import { loadTargetAssociations, parseTargetAssociationSources } from '@cssearth/telescope/node';
-import { canonicalTargetRequest, resolveTarget, withRequestedTargetName, type TargetCatalogueEntry } from '@cssearth/telescope';
-import { ARCSEC_PER_RADIAN, type Candidate, type CapabilityAnswer, type ConstraintAnswer, type ConstraintVerdict, type ModeCapability, OBSERVATION_SELECTION_SCHEMA, type ObservationSelection, ObservationSelectionError, type QueryInputs, type ReportedResolution, type SelectionAssessment, type SelectionBlocker, TARGET_ASSOCIATIONS_PATH, type TargetCoverage, type ToolkitLevel, type ToolkitSupport, type UnassignedEvidence, assessSearchCoverage } from './query-contract.mts';
-import { ADAPTERS, EVIDENCE_TELESCOPE_NAMES, type TargetMode, forTarget, intersectIntervals, intervalWords, mergeIntervals, missingRequestFields, parseModeCapabilities, sourceModes, stringList, targetCoverage, workflowAssessment } from './query-modes.mts';
 /** Which observations in the archives might measure a quantity on a target, and what stays unknown until one is read.
  *
  * The ledgers hold what each archive has per object and per mode: how many observations, which programmes, which programs are
@@ -42,6 +20,24 @@ import { ADAPTERS, EVIDENCE_TELESCOPE_NAMES, type TargetMode, forTarget, interse
  *
  * Mode capabilities are the one authored input, in `modes.json`, each with the citation it was read from. A mode with no entry
  * is reported as "capabilities not recorded" rather than guessed. */
+import { validateCapabilityRequest, PRODUCT_KINDS, REQUESTED_RESULTS, type ProductKind, type RequestedResult, type CapabilityRequest, inputWavelengths } from './recipe-request.mts';
+import { skyCatalogueEntry, WORKSPACE, parseLimits, loadTargetAssociations, parseTargetAssociationSources } from '@cssearth/telescope/node';
+import { parseRegion, parseAcceptedAssumptions } from '@cssearth/objects';
+import { loadVoInputs, voCandidates } from './vo/bridge.mts';
+import type { DiscoveryRequest } from './vo/discovery.mts';
+import { loadQualifiedObservations, matchingProduct } from './qualified-observations.mts';
+import { assessInput, assessRequest } from './request-satisfaction.mts';
+import { readdir } from 'node:fs/promises';
+import { resolve } from 'node:path';
+import { flagValue, hasErrorCode, requireArray, requireRecord, requireString } from '@cssearth/core';
+import { readJsonSource } from '@cssearth/bake/objects/sources';
+import { readBodyMapProduct, resolutionElementsAcrossDisc, surfaceResolutionKm } from '@cssearth/bake/objects/layers/observation';
+
+import type { SourceIntakeIssue } from './source-intake.mts';
+import { loadSourceProducts, sourceQualifiedObservations } from './source-products.mts';
+import { canonicalTargetRequest, resolveTarget, withRequestedTargetName, type TargetCatalogueEntry } from '@cssearth/telescope';
+import { ARCSEC_PER_RADIAN, type Candidate, type CapabilityAnswer, type ConstraintAnswer, type ConstraintVerdict, type ModeCapability, OBSERVATION_SELECTION_SCHEMA, type ObservationSelection, ObservationSelectionError, type QueryInputs, type ReportedResolution, type SelectionAssessment, type SelectionBlocker, TARGET_ASSOCIATIONS_PATH, type TargetCoverage, type ToolkitLevel, type ToolkitSupport, type UnassignedEvidence, assessSearchCoverage } from './query-contract.mts';
+import { ADAPTERS, EVIDENCE_TELESCOPE_NAMES, type TargetMode, forTarget, intersectIntervals, intervalWords, mergeIntervals, missingRequestFields, parseModeCapabilities, sourceModes, stringList, targetCoverage, workflowAssessment } from './query-modes.mts';
 
 const verdict = (answer: ConstraintAnswer, reason: string): ConstraintVerdict => ({ answer, reason });
 const round = (value: number): number => Number(value.toPrecision(3));

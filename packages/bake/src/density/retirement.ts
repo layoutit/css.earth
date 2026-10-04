@@ -1,9 +1,8 @@
-import { requireNonemptyString as text } from '@cssearth/core';
 /** Retire only obsolete textures owned by the previous successful volume manifest. */
+import { requireNonemptyString as text, requireRecord as record } from '@cssearth/core';
 import { readFile, rm } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { containedPath } from '../volume/node/index.ts';
-import { requireRecord as record } from '@cssearth/core';
 
 function texturePath(outputDirectory: string, value: unknown): string {
   const path = text(value, 'prepared texture path');

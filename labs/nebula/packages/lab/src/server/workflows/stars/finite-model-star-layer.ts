@@ -1,4 +1,3 @@
-import { isRecord as coreIsRecord } from '@cssearth/core';
 /**
  * One owner for placing a pinned published star catalogue inside a saved simulation-guided finite
  * emission model, shared by every body that has such a model (SMC, LMC).
@@ -8,6 +7,7 @@ import { isRecord as coreIsRecord } from '@cssearth/core';
  * explicit zero-support guards. Each body keeps its own catalogue columns, footprint facts and
  * provenance prose; nothing about a single body belongs here.
  */
+import { isRecord as coreIsRecord } from '@cssearth/core';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { basename, dirname, resolve } from 'node:path';
 import { sampleJointDepth } from '@cssearth/nebula-reconstruction/stars/joint-depth';

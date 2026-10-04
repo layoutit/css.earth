@@ -1,5 +1,5 @@
-import { cross3 as cross } from '@cssearth/core';
 /** The shared surface transfer: from qualified frames to the atlas sampler, the flat preview and the report. */
+import { cross3 as cross } from '@cssearth/core';
 import type { RadialSurface, SurfaceColorSample, SurfaceConfig } from '../contracts.ts';
 import type { SourceInput } from '@cssearth/objects/node';
 import type { FootprintSample, ObservationFrame, SurfacePolicy } from './contract.ts';

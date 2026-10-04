@@ -1,10 +1,9 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { execFileSync } from 'node:child_process';
-import { mkdtempSync, rmSync, writeFileSync } from 'node:fs';
+import { mkdtempSync, rmSync, writeFileSync, readFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { readFileSync } from 'node:fs';
 import { checkStaleReferences, staleReferenceLines } from './check-stale-references.mts';
 
 const bytes = (value: string) => new TextEncoder().encode(value);
@@ -88,4 +87,15 @@ test('live GitHub JWST links fail but commit-pinned evidence remains historical'
   assert.equal(staleReferenceLines('src/objects/body/investigations.json', bytes(`"https://github.com/org/repo/blob/main/${old}"`)).length, 1);
   assert.deepEqual(staleReferenceLines('src/objects/body/investigations.json', bytes(`"https://github.com/org/repo/blob/abcdef1/${old}"`)), []);
   assert.equal(staleReferenceLines('src/objects/body/investigations.json', bytes(`  "finding": "The reduction used ${old}."`)).length, 1);
+});
+
+test('every relocated CI root owner rejects a caller cwd while its module-relative root passes', () => {
+  for (const path of [
+    '.github/scripts/ci/build-ci.mts',
+    '.github/scripts/ci/ci-cache-key.mts',
+    '.github/scripts/ci/check-ci.mts',
+  ]) {
+    assert.equal(staleReferenceLines(path, bytes('const root = process.cwd();')).length, 1, path);
+    assert.deepEqual(staleReferenceLines(path, bytes('const root = resolve(import.meta.dirname, "../../..");')), [], path);
+  }
 });

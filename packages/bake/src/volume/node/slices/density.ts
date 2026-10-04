@@ -3,9 +3,7 @@ import { mkdir, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { encodeVolumeRaster } from './raster.ts';
 import { gradePremultipliedDisplayRgb } from '../../materials/display-color.ts';
-import type { DisplayColorMatrix, RadialEmission, VolumeRecipe } from '@cssearth/objects';
-import type { Axis, Bounds3, Vector3 } from '@cssearth/objects';
-import type { VolumeSlices, VolumeSliceQuad } from '@cssearth/objects';
+import type { DisplayColorMatrix, RadialEmission, VolumeRecipe, Axis, Bounds3, Vector3, VolumeSlices, VolumeSliceQuad } from '@cssearth/objects';
 import { loadVolumeSource, sampleEncoded, type VolumeSource } from '../compact-inputs/density-grid.ts';
 
 const clamp = (value: number): number => Math.max(0, Math.min(1, value));

@@ -1,5 +1,4 @@
-import { TRACKBALL_DRAG_INERTIA } from "@cssearth/engine";
-import { SURFACE_FLY_TO } from '@cssearth/engine';
+import { TRACKBALL_DRAG_INERTIA, SURFACE_FLY_TO } from "@cssearth/engine";
 export type ActiveMode = 'idle' | 'drag' | 'inertia' | 'fly-to';
 export type InterruptionMode = 'drag' | 'pointer' | 'wheel' | 'fly-to' | 'programmatic' | 'disabled' | 'destroy';
 interface DragDiagnostics {

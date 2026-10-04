@@ -1,7 +1,4 @@
 #!/usr/bin/env node
-import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
-import { VOLUME_PROVENANCE_SCHEMA } from '@cssearth/bake/volume';
-import { VOLUME_SOURCE_MANIFEST_SCHEMA, VOLUME_PRESENTATION_SOURCE_SCHEMA, VOLUME_RECIPE_SCHEMA, NEBULA_DELIVERY_SCHEMA } from '@cssearth/objects';
 /** Betelgeuse's circumstellar material, as four density grids the shared slab baker turns into one dataset bank.
  *
  *   node packages/bake/authoring/betelgeuse-shell/author.mts [--check]
@@ -19,6 +16,9 @@ import { VOLUME_SOURCE_MANIFEST_SCHEMA, VOLUME_PRESENTATION_SOURCE_SCHEMA, VOLUM
  * extinction it causes and the starlight it scatters.
  *
  * Every grid shares one frame anchored on Betelgeuse's prepared scene origin, so one volume unit is one stellar radius. */
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
+import { VOLUME_PROVENANCE_SCHEMA } from '@cssearth/bake/volume';
+import { VOLUME_SOURCE_MANIFEST_SCHEMA, VOLUME_PRESENTATION_SOURCE_SCHEMA, VOLUME_RECIPE_SCHEMA, NEBULA_DELIVERY_SCHEMA } from '@cssearth/objects';
 import { access, readFile, readdir } from 'node:fs/promises';
 import sharp from 'sharp';
 import { resolve } from 'node:path';

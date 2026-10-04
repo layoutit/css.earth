@@ -77,3 +77,9 @@ See the [shared source-format ownership contract](../objects/AGENTS.md) for WISE
 The architecture rule names this metadata reader separately from runtime consumers; its guard rejects an unlisted reader.
 
 Sphere export runs the built `@cssearth/telescope-cli/sphere/lane` entry from `dist`. After editing `src/sphere/`, rebuild with `pnpm --filter @cssearth/telescope-cli build` before exporting again.
+
+The library/command split is accepted: bake imports the light telescope library, while telescope-cli depends on bake for preparation; merging them would create a cycle. Reconsider only when the command no longer needs bake.
+
+Fixture homes follow their test owner: shared command fixtures stay in `src/fixtures/`, while family, VO and archive fixtures stay beside their tests. This split is accepted to keep archive-specific inputs local; promote a fixture only when a second owner consumes it.
+
+Interferometry intentionally keeps seven toolchains in one descriptor and one installer because the reduction workflow coordinates their install/verify policy. Split only when a toolchain gains an independent owner or installer contract.

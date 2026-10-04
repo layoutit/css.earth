@@ -1,9 +1,9 @@
-import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 /** Generate a complete placed-star package from a star spec (spec.mts): the astronomy record from Gaia DR3 and SIMBAD, the color
  * dataset from the best archived spectrum (color.mts) with its limb-darkening law (limb.mts), the catalogue color and navigation
  * marker from that dataset, the manifest, acquisition plan, source records, credits and the README sections the data determine. Prose
  * only a person can write (the reader card and introduction, the README's account of the star) is marked TODO(new-object), which
  * src/objects/object-package-consistency.test.mts refuses. The package's own readers check every choice as it is made. */
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 import { execFileSync } from 'node:child_process';
 import { mkdir, readFile, stat, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';

@@ -17,3 +17,5 @@ The sampled rows hold magnitudes that were already decoded from the full bank, s
 re-encoding them loses nothing and the magnitude quantization error measures 0;
 the full bank measures about 0.0005. The check therefore asserts the bound
 (`measured <= bound`), not a positive error.
+
+The sampling generator ran in ignored scratch output and is not preserved; this accepted fixture is a saved runtime regression sample, not a reproducible source bake. A source-regeneration or full-catalogue qualification requirement must add a checked-in generator before changing the sample.

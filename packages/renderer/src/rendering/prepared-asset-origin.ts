@@ -1,9 +1,9 @@
-import { type PreparedAssetOrigin } from '@cssearth/objects';
-
 /** Runtime resolution of a prepared `/scenes/<id>/<file>` address to a published
  * `<origin>/runtime-assets/<sha256>/<file>` URL, mirroring `paging/city-index.ts`'s
  * `new URL(ref.url, plan.geometryOrigin)`: prepared data keeps its `/scenes/` address
  * unchanged, and only the value handed to a network read or a CSS `url()` is resolved. */
+import { type PreparedAssetOrigin } from '@cssearth/objects';
+
 
 const INDEX_SEGMENT = /:\d+(?=:|$)/u;
 

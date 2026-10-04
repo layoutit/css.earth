@@ -1,19 +1,16 @@
+/** Format admission entry points and generated addresses. Source addresses are discovered from schema-bearing data. */
 import { MAP_SPHERE_DATASETS_SCHEMA } from '../surface/map-sphere-datasets.js';
 import { COMPACT_DENSITY_DELIVERY_SCHEMA } from '../../volume/compact/compact-density-delivery.js';
-import { HOSTED_PLANET_MEASUREMENTS_SCHEMA, NEUTRON_STAR_MEASUREMENTS_SCHEMA } from '../presentation/build-projections.js';
-import { PACKAGED_POINTS_SOURCE_SCHEMA } from '../presentation/build-projections.js';
+import { HOSTED_PLANET_MEASUREMENTS_SCHEMA, NEUTRON_STAR_MEASUREMENTS_SCHEMA, PACKAGED_POINTS_SOURCE_SCHEMA, WORLD_CONTEXT_SOURCE_SCHEMA, STELLAR_EXTENT_SOURCE_SCHEMA, PREPARED_VOLUME_PRESENTATION_SCHEMA, DENSITY_VOLUME_DATASET_BANK_SOURCE_SCHEMA, SYSTEM_TEXT_SCHEMA } from '../presentation/build-projections.js';
 import { OBJECT_TEXT_SCHEMA, PREPARED_TEXT_SCHEMA } from '../content/object-text.js';
 import { PREPARED_EXPLORATION_SCHEMA } from '../../provenance/prepared-exploration.js';
 import { UNIFORM_DISC_STAR_SCHEMA } from '../photometry/uniform-disc-star.js';
 import { PREPARED_CONTENT_SCHEMA } from '../content/prepared-content.js';
 import { AUTHORED_PREPARATION_SCHEMA } from './authored-preparation.js';
-import { WORLD_CONTEXT_SOURCE_SCHEMA, STELLAR_EXTENT_SOURCE_SCHEMA } from '../presentation/build-projections.js';
-import { PREPARED_VOLUME_PRESENTATION_SCHEMA, DENSITY_VOLUME_DATASET_BANK_SOURCE_SCHEMA } from '../presentation/build-projections.js';
 import { GALAXY_BACKING_SCHEMA } from '../catalogue/galaxy-backing.js';
 import { PREPARED_GALAXY_CATALOG_SCHEMA } from '../catalogue/galaxy-catalog.js';
 import { NEBULA_DELIVERY_SCHEMA } from '../../volume/nebula/nebula-delivery.js';
 import { PREPARED_IMAGE_LAYER_BANK_SCHEMA } from '../../volume/delivery/volume-schemas.js';
-/** Format admission entry points and generated addresses. Source addresses are discovered from schema-bearing data. */
 import { OBJECT_SCHEMA } from '../../descriptor.js';
 import { OBJECT_CONTENT_SCHEMA } from '../content/object-content.js';
 import { OBJECT_RUNTIME_SCHEMA } from '../runtime/object-controls.js';
@@ -27,7 +24,6 @@ import { SHAPE_MODEL_SCHEMA } from './discovery-readers.js';
 import { VOLUME_SOURCE_MANIFEST_SCHEMA } from './volume-source-manifest.js';
 import { VOLUME_PRESENTATION_SOURCE_SCHEMA } from './volume-presentation-source.js';
 import { SOURCE_MANIFEST_SCHEMA } from '../../sources/source-manifest-schema.js';
-import { SYSTEM_TEXT_SCHEMA } from '../presentation/build-projections.js';
 import { FACILITY_CATALOG_SCHEMA } from '../../provenance/exploration-catalog.js';
 import { PREPARED_CUBIC_SKY_SCHEMA, PREPARED_DIRECTIONAL_SUN_SCHEMA } from '../camera/runtime-camera-types.js';
 

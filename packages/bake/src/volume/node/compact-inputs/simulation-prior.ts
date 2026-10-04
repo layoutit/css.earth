@@ -7,11 +7,10 @@
 import { resolve, dirname } from 'node:path';
 import { fieldToPhysical, angularScale } from '../../coordinates/observer-tangent.ts';
 import { parseVolumeRecipe } from '@cssearth/objects';
-import type { SimulationDepthPrior } from '@cssearth/objects';
+import type { SimulationDepthPrior, CompilerPin } from '@cssearth/objects';
 import { loadVolumeSource, sampleEncoded, sourceBytes } from './density-grid.ts';
 import { channelDensity } from '../slices/density.ts';
 
-import type { CompilerPin } from '@cssearth/objects';
 const isPin = (value: unknown): value is CompilerPin => !!value && typeof value === 'object' &&
   typeof (value as { path?: unknown }).path === 'string';
 

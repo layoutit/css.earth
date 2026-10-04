@@ -7,12 +7,10 @@ import sharp from 'sharp';
 import {packProjectiveSurfaceRaster} from '../../../scene/index.ts';
 import {planetographicRowsToMeshLatitude} from '../../geometry/index.ts';
 import { readFitsPrimary } from '@cssearth/fits';
-import {verifyObservationSources} from '../observed-surfaces/index.ts';
+import { verifyObservationSources, measureScalarCoverage, finitePercentiles, falseColorMap, resizeObservedRgb, prepareMeasuredPolarAtlas } from '../observed-surfaces/index.ts';
 import { latitudeRasterBands } from './geometry.ts';
 import { compositePolarOverlay, layoutPolarAtlasForCaps, writeDomeRings, type DomeRingWarp, type PoleProjection } from './polar-dome.ts';
 import { validateRelativePath } from './relative-path.ts';
-import {measureScalarCoverage,finitePercentiles,falseColorMap} from '../observed-surfaces/index.ts';
-import {resizeObservedRgb,prepareMeasuredPolarAtlas} from '../observed-surfaces/index.ts';
 
 /** Polar recipes retain their own address and raster limits; these are not the material lane's policies. */
 const POLAR_RECIPE_POLICY = { identifier: /^[a-z][a-z0-9-]*$/, publicPrefix: /^\/[a-z0-9/-]+\/$/, minimumRasterDimension: 16,

@@ -1,7 +1,6 @@
 /** Fit the colors of finite emitters with a fixed, depth-aware Beer–Lambert transport operator. */
 import { type MaterialImage as CompilerImage, type PreparedSampledField, prepareSampledMaterial, diffuseMaterialColors, type SampledMaterialFit } from '@cssearth/bake/volume';
-import { type SampledRecipe, type ComponentWeights } from '@cssearth/objects';
-import { type EmissionVector3 } from '@cssearth/objects';
+import { type SampledRecipe, type ComponentWeights, type EmissionVector3 } from '@cssearth/objects';
 import { diffuseAtomEmission } from '@cssearth/nebula-reconstruction/methods/sampled/emission-fit';
 import { fitMaterialColors, type MaterialColumn } from '@cssearth/nebula-reconstruction/methods/sampled/material-solver';
 

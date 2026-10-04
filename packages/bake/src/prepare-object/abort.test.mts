@@ -159,5 +159,36 @@ process.kill(process.pid, 'SIGHUP'); await running;`;
       assert.equal(await readFile(resolve(root, `${id}.cleanup`), 'utf8'), 'SIGTERM');
       assert.equal(alive(Number(await readFile(resolve(root, `${id}.pid`), 'utf8'))), false);
     }
+  } finally {
+    // A failing cleanup assertion must not leave the mutation's detached command alive.
+    for (const id of ['first', 'second']) {
+      const pid = Number(await readFile(resolve(root, `${id}.pid`), 'utf8').catch(() => '0'));
+      if (pid && alive(pid)) process.kill(-pid, 'SIGKILL');
+    }
+    await rm(root, { recursive: true, force: true });
+  }
+});
+
+test('a normally completed step fails when process-group cleanup is denied', { timeout: 10_000 }, async () => {
+  const root = await mkdtemp(resolve(tmpdir(), 'prepare-completed-signal-error-'));
+  try {
+    await mkdir(resolve(root, 'src/objects/fixture'), { recursive: true });
+    await writeFile(resolve(root, 'src/objects/fixture/object.json'), '{}');
+    await mkdir(resolve(root, 'packages/bake/cli'), { recursive: true });
+    await writeFile(resolve(root, 'packages/bake/cli/check-stale-builds.mts'), 'export {};');
+    const entry = new URL('./index.ts', import.meta.url).href;
+    const code = `import assert from 'node:assert/strict'; import { prepareObjects } from ${JSON.stringify(entry)};
+const originalKill = process.kill.bind(process);
+process.kill = (pid, signal) => {
+  if (pid < 0 && signal === 'SIGTERM') throw Object.assign(new Error('completed group cleanup denied'), { code: 'EPERM' });
+  return originalKill(pid, signal);
+};
+const ok = await prepareObjects(['fixture'], { root: ${JSON.stringify(root)}, from: 'builds', to: 'builds', progress: () => {} });
+assert.equal(ok, false, 'successful command exit cannot hide a cleanup error');
+console.log('COMPLETED_GROUP_ERROR_VERIFIED');`;
+    const result = spawnSync(process.execPath, ['--input-type=module', '-e', code], { encoding: 'utf8', timeout: 7000 });
+    assert.equal(result.status, 0, result.stderr);
+    assert.match(result.stdout, /COMPLETED_GROUP_ERROR_VERIFIED/u);
+    assert.match(result.stderr, /completed group cleanup denied/u);
   } finally { await rm(root, { recursive: true, force: true }); }
 });

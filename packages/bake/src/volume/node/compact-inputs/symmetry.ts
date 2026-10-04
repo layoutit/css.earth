@@ -1,6 +1,6 @@
+/** Losslessly retained RGB emission voxels; runtime slice images remain disposable. */
 import { PREPARED_OBJECT_SCHEMA, readCompactSymmetry, decodeCompactSymmetryField, DENSITY_VOLUME_FORMAT, type VolumeSlices, type DensityVolumeFrame, type CompilerPin } from '@cssearth/objects';
 import type { CompiledVolumeArtifact } from '../compiler/bake.ts';
-/** Losslessly retained RGB emission voxels; runtime slice images remain disposable. */
 import { readFile, writeFile, mkdir } from "node:fs/promises";
 import { resolve, dirname } from "node:path";
 import { gunzipSync } from "node:zlib";

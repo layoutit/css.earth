@@ -1,4 +1,3 @@
-import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 // Entry script: node packages/bake/authoring/nearby-universe/quaia-sample.mts [quaia csv]
 /**
  * The Nearby Universe's Quaia sample: the Gaia-unWISE quasars (Storey-Fisher et al. 2024, G < 20.0) that lie outside
@@ -14,6 +13,7 @@ import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
  * `keepEvery` in source id order (Gaia's source ids follow position, so the share is even across the sky), where
  * `keepEvery` is the ratio of the median per-cell counts of the two samples on their own cells.
  */
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 import { medianUpperMiddle as median } from '@cssearth/core';
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';

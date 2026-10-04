@@ -1,6 +1,5 @@
 /** Mode capabilities per archive: each ledger read into the modes it holds for a target, with their recorded capabilities. */
-import { PRODUCT_KINDS, type ProductKind, type CapabilityRequest } from './recipe-request.mts';
-import { inputWavelengths } from './recipe-request.mts';
+import { PRODUCT_KINDS, type ProductKind, type CapabilityRequest, inputWavelengths } from './recipe-request.mts';
 import { matchingProduct, type QualifiedObservation } from './qualified-observations.mts';
 import { assessInput, assessRequest } from './request-satisfaction.mts';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';

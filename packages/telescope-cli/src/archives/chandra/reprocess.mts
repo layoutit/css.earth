@@ -26,10 +26,9 @@ import { totalmem } from 'node:os';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { requireFiniteNumber, requireRecord } from '@cssearth/core';
-import { freeMemoryPercent, toolchainPython } from '@cssearth/telescope/node';
+import { freeMemoryPercent, toolchainPython, readProductRecord, sameRun, writeProductRecord } from '@cssearth/telescope/node';
 import { productRecordPath } from '@cssearth/telescope';
 import { type ProductRun } from '@cssearth/objects';
-import { readProductRecord, sameRun, writeProductRecord } from '@cssearth/telescope/node';
 import { chandraFile, parseChandraProgram, PROGRAMS, type ChandraFile, type ChandraObservation, type ChandraProgram } from './archive.mts';
 import { chandraToolchain, chandraVersions, CHANDRA_ROOT } from './toolchain.mts';
 

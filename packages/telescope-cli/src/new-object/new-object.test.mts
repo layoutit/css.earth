@@ -936,4 +936,3 @@ test('a binary whose primary Gaia sees eclipsing on another period is refused; l
   assert.equal(eclipsingPeriodAgrees(214.3655, 2.998979), true, 'a long orbit Gaia saw twice is not checked');
   assert.ok(GAIA_EB_CHECKED_DAYS > 100 && GAIA_EB_CHECKED_DAYS < 110);
 });
-

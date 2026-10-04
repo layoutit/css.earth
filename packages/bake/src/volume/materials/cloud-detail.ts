@@ -1,6 +1,5 @@
 /** Offline, coverage-normalized local contrast on the registered starless image. */
-import type { ObservationMapping } from '@cssearth/objects';
-import type { ObservationPhoto } from '@cssearth/objects';
+import type { ObservationMapping, ObservationPhoto } from '@cssearth/objects';
 import { parseCloudAppearance, type CloudAppearance } from './cloud-appearance.ts';
 
 export const CLOUD_DETAIL_METHOD = 'masked-local-material-contrast@1';

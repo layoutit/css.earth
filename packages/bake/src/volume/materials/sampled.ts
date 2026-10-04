@@ -1,10 +1,8 @@
 /** Attach chromaticity to finite 3D emitters before splatting; never project a photograph through a finished volume. */
-import type { EmissionVector3 } from '@cssearth/objects';
+import type { EmissionVector3, Cancellation, SampledRecipe, ComponentWeights, SampleTerm } from '@cssearth/objects';
 import type { MaterialImage } from './component-material.ts';
-import type { Cancellation } from '@cssearth/objects';
 import { analyticEmission, mapSample, type PreparedSampledField } from '../fields/sampled.ts';
 import { diffuseAtomEmission, diffuseAtomProjection, type DiffuseAtom } from '../fields/diffuse-atoms.ts';
-import type { SampledRecipe, ComponentWeights, SampleTerm } from '@cssearth/objects';
 
 type Image = MaterialImage;
 export type SampledColor = { rgb: EmissionVector3; covered: boolean };

@@ -1,9 +1,8 @@
 import { WORLD_CONTEXT_SOURCE_SCHEMA, PREPARED_WORLD_CONTEXT_SCHEMA, PREPARED_WORLD_SYSTEM_VIEW_SCHEMA } from '@cssearth/objects';
-import type { PreparedWorldCameraFrame, PreparedContextCameraPresentation as WorldContextCameraPresentation, PreparedContextPointSource as WorldContextPointSource, PreparedVolumeOpacityProfile as VolumeOpacityProfile, PreparedOrbitCenter as WorldContextOrbitCenter, PreparedWorldContextData, PreparedOrbitDataLod as PreparedOrbitLod } from '@cssearth/objects';
+import type { PreparedWorldCameraFrame, PreparedContextCameraPresentation as WorldContextCameraPresentation, PreparedContextPointSource as WorldContextPointSource, PreparedVolumeOpacityProfile as VolumeOpacityProfile, PreparedOrbitCenter as WorldContextOrbitCenter, PreparedWorldContextData, PreparedOrbitDataLod as PreparedOrbitLod, PreparedSystemView } from '@cssearth/objects';
 import { cross3 as cross, dot3 as dot } from '@cssearth/core';
 import { prepareBoundView, prepareGroupView, prepareSystemView } from './system-view.ts';
 import type { SystemViewPolicy } from './system-view.ts';
-import type { PreparedSystemView } from '@cssearth/objects';
 import { M_PER_AU } from '@cssearth/astronomy';
 import { prepareHyperbolicPath } from './hyperbolic-path.ts';
 

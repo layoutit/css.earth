@@ -50,4 +50,3 @@ const content = object({
 export function parseCompleteObjectContentSource(value: unknown, label = 'object content fixture'): ObjectContentSource {
   return parse(value, content, label);
 }
-

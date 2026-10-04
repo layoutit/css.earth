@@ -1,5 +1,5 @@
-import { parseLabModelJson } from '../../../resources/model-paths.ts';
 /** Offline verified reconstruction context for cloud-conditioned catalogue depths. */
+import { parseLabModelJson } from '../../../resources/model-paths.ts';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, posix } from 'node:path';
 import { gunzipSync } from 'node:zlib';

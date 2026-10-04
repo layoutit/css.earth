@@ -1,4 +1,3 @@
-import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 // Entry script: node packages/bake/authoring/nearby-universe/cf4-groups.mts [table2.dat.gz] [table3.dat.gz]
 /**
  * Adds each Cosmicflows-4 galaxy's group to the tracked galaxy table: the PGC number of the group's dominant galaxy
@@ -11,6 +10,7 @@ import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
  * Output: the same table with two more columns, `G1PGC` and `GDMzp`, written in place; `GDMzp` is empty for a group table 3
  * does not list. It prints what it joined.
  */
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { gunzipSync, gzipSync } from 'node:zlib';

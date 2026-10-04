@@ -1,4 +1,3 @@
-import { DATASET_TONE_CURVE_SCHEMA, type DatasetToneCurve } from '@cssearth/objects';
 /**
  * Pure pieces of the dataset tone fit: paired pixels, the monotone correction they imply, and its composition
  * onto the dataset's current tone curve. `dataset-tone-fit.ts` owns the loop, bakes and measurements.
@@ -11,6 +10,7 @@ import { DATASET_TONE_CURVE_SCHEMA, type DatasetToneCurve } from '@cssearth/obje
  * that rides the opacity shoulder. Exposure is solved jointly: the projection is re-exposed analytically from
  * the exposure-free integral, the curve re-fitted, and the whole range (p99, p99.9, core) scored.
  */
+import { DATASET_TONE_CURVE_SCHEMA, type DatasetToneCurve } from '@cssearth/objects';
 import { datasetToneRender, datasetToneValue } from '@cssearth/bake/volume';
 import { datasetLevelPairs, datasetLevelStatistics, untonedRender, type DatasetLevelGrid, type DatasetLevelMaterial } from '../../server/services/dataset-levels.ts';
 

@@ -5,4 +5,3 @@ import { resolve } from 'node:path';
 export function shapeLightingPath(...parts: string[]): string {
   return resolve(projectRoot(import.meta.url), ...parts);
 }
-

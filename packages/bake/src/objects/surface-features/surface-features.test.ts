@@ -4,10 +4,7 @@ import { mkdtemp, readFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { sourceTest } from '@cssearth/objects/node/source-test';
-import { parseDbf } from '@cssearth/bake/objects/surface-features';
-import { budgetTracePaths, nodeIndex as nodeIndexForTest, parseSurfaceAxes, parseSurfaceFeaturesConfig, prepareSurfaceFeatures, selectTraces } from '@cssearth/bake/objects/surface-features';
-import { extentPolygon, meshRadiusBand, normalizeExtent, projectRadial, rimVectors, surfaceDirection, triaxialSurfacePoint } from '@cssearth/bake/objects/surface-features';
-import { parseShpPolylines } from '@cssearth/bake/objects/surface-features';
+import { parseDbf, budgetTracePaths, nodeIndex as nodeIndexForTest, parseSurfaceAxes, parseSurfaceFeaturesConfig, prepareSurfaceFeatures, selectTraces, extentPolygon, meshRadiusBand, normalizeExtent, projectRadial, rimVectors, surfaceDirection, triaxialSurfacePoint, parseShpPolylines } from '@cssearth/bake/objects/surface-features';
 import { dot3 as dot } from '@cssearth/core';
 const test = sourceTest();
 

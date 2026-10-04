@@ -71,3 +71,7 @@ Shared resource/address and image-density conventions, tile styles, interior-dis
 
 Presentation-to-world conversion, camera pose/viewport shapes, default-view rotation, silhouette walking and
 surface fly-to calibration belong to `@cssearth/engine`. Renderer extends the engine viewport with layout fields. Runtime viewport/layout and world-to-presentation projection stay here.
+
+## Accepted test boundaries
+
+Node tests beside `src/node/` verify private implementation details; `test/node/` verifies package integration. The public `./test/*` source export intentionally shares deterministic fixture helpers with preparation tests; consolidate these homes or remove the export when those consumers move to an independent fixture owner.

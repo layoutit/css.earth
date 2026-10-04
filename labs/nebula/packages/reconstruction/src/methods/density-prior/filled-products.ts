@@ -1,5 +1,4 @@
-import type { ObservationMapping } from '@cssearth/objects';
-import type { ObservationPhoto } from '@cssearth/objects';
+import type { ObservationMapping, ObservationPhoto } from '@cssearth/objects';
 export type { ObservationPhoto } from '@cssearth/objects';
 /** Offline photographic targets and independent projection checks for the filled-volume experiment. */
 import sharp from 'sharp';

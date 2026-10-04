@@ -51,4 +51,3 @@ export interface PreparedOrbitDataLod {
   readonly bounds: { readonly centerM: Vector3; readonly radiusM: number };
   readonly levels: readonly PreparedOrbitDataLodLevel[];
 }
-

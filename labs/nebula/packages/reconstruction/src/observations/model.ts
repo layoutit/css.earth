@@ -1,5 +1,4 @@
-import { isFiniteNumber as coreIsFiniteNumber } from '@cssearth/core';
-import { isRecord as record } from '@cssearth/core';
+import { isFiniteNumber as coreIsFiniteNumber, isRecord as record } from '@cssearth/core';
 /** Read-only archive discovery. An image candidate is not an accepted reconstruction input. */
 export const archiveProviders = ['mast', 'irsa', 'eso'] as const;
 export type ArchiveProvider = typeof archiveProviders[number];

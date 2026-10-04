@@ -1,6 +1,5 @@
-import { presentPhysicalPoseInVolume } from '@cssearth/engine';
+import { presentPhysicalPoseInVolume, cssCameraAxesFromOrientation } from '@cssearth/engine';
 import { type DensityVolumeFrame, type VolumeVector } from '@cssearth/objects';
-import { cssCameraAxesFromOrientation } from '@cssearth/engine';
 import type { VolumeCameraPublication } from '../volume/types.js';
 
 import { mountPointPaths } from './point-paths.js';

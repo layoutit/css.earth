@@ -1,12 +1,12 @@
 #!/usr/bin/env node
-import { PRODUCT_RECORD_SCHEMA } from '@cssearth/objects';
-import { selectedProductInput } from './selected-product.mts';
-import { assessRequest, summarizeSatisfaction, type RequestSatisfaction } from './request-satisfaction.mts';
 /** Bind one scientific question and selected archive program to the exact body-map bytes published for it.
  *
  * The instrument-specific stages still do the science. This module supplies the missing boundary between them: a body map is
  * publishable only when its plane and metadata are outputs of one current product record, and when its observations name the
  * exact ledger mode and pinned program selected by the capability query. */
+import { PRODUCT_RECORD_SCHEMA, parseProductRecord, supportsMeasuredResolution, type BodyMapProduct, type ProductInput, type ProductRecord, type ProductRun, type ProductSoftware } from '@cssearth/objects';
+import { selectedProductInput } from './selected-product.mts';
+import { assessRequest, summarizeSatisfaction, type RequestSatisfaction } from './request-satisfaction.mts';
 import { readFile, writeFile } from 'node:fs/promises';
 import { basename, dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -14,7 +14,6 @@ import { flagValue, hasErrorCode, requireRecord, requireArray } from '@cssearth/
 import { readFitsHdus, fitsImageAccessor } from '@cssearth/fits';
 import { readBodyMapProduct, resolutionElementsAcrossDisc, surfaceResolutionKm } from '@cssearth/bake/objects/layers/observation';
 import { productRecordPath } from '@cssearth/telescope';
-import { parseProductRecord, supportsMeasuredResolution, type BodyMapProduct, type ProductInput, type ProductRecord, type ProductRun, type ProductSoftware } from '@cssearth/objects';
 import { runKey, sameRun, WORKSPACE } from '@cssearth/telescope/node';
 import { loadQueryInputs, queryCapabilities, requestFromArguments, selectObservation } from './query.mts';
 import { type ConstraintVerdict, type ObservationSelection } from './query-contract.mts';

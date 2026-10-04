@@ -1,4 +1,3 @@
-import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 /**
  * Cut this package's two ALMA inputs out of the archive's own products for member uid://A001/X360d/Xae. Nothing here is
  * science: both are boxes about the observation's phase centre, and the author finds the star in the continuum.
@@ -18,6 +17,7 @@ import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
  * writes both files under .local/betelgeuse-shell/observations/, beside the package's other downloads, and fails unless
  * each has the length the author declares. Pass --check to compare without writing.
  */
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';

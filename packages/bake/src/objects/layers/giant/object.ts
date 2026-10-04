@@ -10,9 +10,9 @@ import { prepareGiantLayers, parseRadialLayerRecipe } from './giant-layers.ts';
 import { rasterAnnularField } from './rings.ts';
 import { prepareBandedEllipsoid, domeRingWarp, type BandedImagePixels } from './geometry.ts';
 import { prepareNormalizedDiscPresentation } from './normalized-disc-presentation.ts';
-import { parseEllipsoidMaterialRecipe } from './ellipsoid-materials.ts';
+import { parseEllipsoidMaterialRecipe, prepareEllipsoidMaterials } from './ellipsoid-materials.ts';
 import { parseObservedSurfaceRecipe, prepareObservedSurfaces } from '../observed-surfaces/index.ts';
-import { parseObservedPolarRecipe } from './observed-polar.ts';
+import { parseObservedPolarRecipe, prepareObservedPolarSurfaces, polarImageProjection } from './observed-polar.ts';
 import { shape, text, number, optional, array, isRecord, requireRecord, requireFiniteNumber } from '@cssearth/core';
 import { createSourceManifest } from '@cssearth/objects/node';
 import type { ContentPreparationContext, PreparedObjectContentAssets } from '../../content/index.ts';
@@ -20,12 +20,8 @@ import { mkdir, readFile, writeFile, realpath } from 'node:fs/promises';
 import { resolve, relative } from 'node:path';
 
 import { BANDED_ELLIPSOID_SCHEMA, withFocusedCamera } from '../../scene/index.ts';
-import { prepareCubicSky, prepareDirectionalSun } from '../../../presentation/index.ts';
-import { CUBIC_SKY_CAMERA_PRESENTATION_STANDARD } from '../../../presentation/index.ts';
-import { requirePreparedPresentation } from '../../../presentation/index.ts';
-import { prepareEllipsoidMaterials } from './ellipsoid-materials.ts';
+import { prepareCubicSky, prepareDirectionalSun, CUBIC_SKY_CAMERA_PRESENTATION_STANDARD, requirePreparedPresentation } from '../../../presentation/index.ts';
 import { prepareLayeredSurfacePresentation } from './layered-surface-presentation.ts';
-import { prepareObservedPolarSurfaces, polarImageProjection } from './observed-polar.ts';
 
 const readJson=async (path:string):Promise<unknown>=>JSON.parse(await readFile(path,'utf8'));
 const writeJson=(path:string,value:unknown)=>writeFile(path,`${JSON.stringify(value)}\n`);

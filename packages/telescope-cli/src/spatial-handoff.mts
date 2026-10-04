@@ -10,6 +10,10 @@ import { VERSION } from './help.mts';
 import { writeProductRecord, WORKSPACE } from '@cssearth/telescope/node';
 import type { ProductInput } from '@cssearth/objects';
 
+type SpatialLoader = Partial<Pick<typeof import('@cssearth/renderer/stars/loader.ts'), 'loadPreparedCssPointField'>
+  & Pick<typeof import('@cssearth/renderer/volume/loader.ts'), 'loadPreparedCssVolume'>
+  & Pick<typeof import('@cssearth/renderer/volume/prepared-volume-datasets.ts'), 'loadPreparedVolumeDatasets'>>;
+
 export type SpatialKind='points'|'volume'|'volume-dataset-bank';
 type SpatialPayload =
   | {kind:'points';payload:PreparedCssPointField}
@@ -48,7 +52,7 @@ async function validateSpatialObject(objectPath:string,expected:SpatialKind|unde
   await mkdir(resolve(workspaceRoot,'work'),{recursive:true});const scratch=await mkdtemp(resolve(workspaceRoot,'work/telescope-spatial-loader-'));
   const moduleFile=resolve(scratch,'loader.mjs');await writeFile(moduleFile,compiled.outputFiles[0].text);
   try{
-    const loader: {loadPreparedCssPointField?:(input: unknown, transport: {read(path: string): Promise<ArrayBuffer>}) => Promise<PreparedCssPointField>;loadPreparedCssVolume?:(input: unknown, transport: {read(path: string): Promise<ArrayBuffer>}) => Promise<PreparedCssVolume>;loadPreparedVolumeDatasets?:(input: unknown, transport: {read(path: string): Promise<ArrayBuffer>}) => Promise<PreparedVolumeDatasets>}=await import(`${pathToFileURL(moduleFile).href}?${randomUUID()}`);
+    const loader: SpatialLoader=await import(`${pathToFileURL(moduleFile).href}?${randomUUID()}`);
     const transport={read:async(path:string)=>Uint8Array.from(await read(path)).buffer};
     const value:SpatialPayload=kind==='points'?{kind,payload:await loader.loadPreparedCssPointField!(descriptor,transport)}
       :kind==='volume'?{kind,payload:await loader.loadPreparedCssVolume!(descriptor,transport)}

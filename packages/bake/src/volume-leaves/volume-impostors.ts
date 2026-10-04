@@ -1,6 +1,6 @@
+/** Bounded offline views of the accepted PolyCSS leaves; no density reconstruction. */
 import { PREPARED_VOLUME_IMPOSTORS_SCHEMA, validatePreparedCssVolume, type PreparedCssVolume, type PreparedVolumeImpostors, type PreparedVolumeLeaf, type VolumeAxis, type VolumeVector, type PreparedVolumeDatasetBrightness } from '@cssearth/objects';
 import { cross3 as cross, dot3 as dot } from '@cssearth/core';
-/** Bounded offline views of the accepted PolyCSS leaves; no density reconstruction. */
 import sharp from 'sharp';
 
 const SIZE = 256;
