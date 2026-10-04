@@ -1,10 +1,13 @@
 import assert from 'node:assert/strict';
-import test from 'node:test';
+import { sourceTest } from '@cssearth/objects/node/source-test';
+const test = sourceTest();
+import { projectRoot } from '@cssearth/core/node';
+import { resolve } from 'node:path';
 import { readFile } from 'node:fs/promises';
-import { authoredDatasetMetadata, OBJECT_CONTENT_SCHEMA, OBJECT_CONTENT_VERSION, parseCompleteObjectContentSource, validateObjectContentEnvelope } from './object-content.js';
+import { authoredDatasetMetadata, OBJECT_CONTENT_SCHEMA, OBJECT_CONTENT_VERSION, parseCompleteObjectContentSource, validateObjectContentEnvelope } from '@cssearth/objects';
 
 test('dataset source links come from the authored dataset records', async () => {
-  const source: unknown = JSON.parse(await readFile(new URL('../../../../src/objects/earth/source/content/object.json', import.meta.url), 'utf8'));
+  const source: unknown = JSON.parse(await readFile(resolve(projectRoot(import.meta.url), 'src/objects/earth/source/content/object.json'), 'utf8'));
   const { sourceUrls: urls } = authoredDatasetMetadata(source, 'earth');
   assert.equal(urls.get('normal'), 'https://assets.science.nasa.gov/content/dam/science/esd/eo/images/bmng/bmng-base/july/world.200407.3x21600x10800.jpg');
   assert.equal(urls.get('clouds'), 'https://eoimages.gsfc.nasa.gov/images/imagerecords/57000/57747/cloud_combined_8192.tif');
@@ -12,7 +15,7 @@ test('dataset source links come from the authored dataset records', async () => 
 });
 
 test('a dataset without a direct source link is omitted from source URLs', async () => {
-  const source: unknown = JSON.parse(await readFile(new URL('../../../../src/objects/sun/source/content/object.json', import.meta.url), 'utf8'));
+  const source: unknown = JSON.parse(await readFile(resolve(projectRoot(import.meta.url), 'src/objects/sun/source/content/object.json'), 'utf8'));
   const { sourceUrls: urls, systemDatasetIds } = authoredDatasetMetadata(source, 'sun');
   assert.equal(urls.get('cor1-density'), undefined);
   assert.ok(urls.get('photosphere'));
@@ -20,7 +23,7 @@ test('a dataset without a direct source link is omitted from source URLs', async
 });
 
 test('Betelgeuse atmosphere volumes remain on its body card', async () => {
-  const source: unknown = JSON.parse(await readFile(new URL('../../../../src/objects/betelgeuse/source/content/object.json', import.meta.url), 'utf8'));
+  const source: unknown = JSON.parse(await readFile(resolve(projectRoot(import.meta.url), 'src/objects/betelgeuse/source/content/object.json'), 'utf8'));
   assert.equal(authoredDatasetMetadata(source, 'betelgeuse').systemDatasetIds.size, 0);
 });
 
@@ -30,7 +33,7 @@ test('debris discs stay with their host system card', async () => {
     ['hd-181327', ['debris-ring']],
     ['pds-70', ['dust-ring']],
   ] as const) {
-    const source: unknown = JSON.parse(await readFile(new URL(`../../../../src/objects/${id}/source/content/object.json`, import.meta.url), 'utf8'));
+    const source: unknown = JSON.parse(await readFile(resolve(projectRoot(import.meta.url), `src/objects/${id}/source/content/object.json`), 'utf8'));
     const { systemDatasetIds } = authoredDatasetMetadata(source, id);
     assert.deepEqual([...systemDatasetIds], datasets);
   }
@@ -43,7 +46,7 @@ test('authored envelope retains preparation admission and diagnostics', () => {
 });
 
 test('source parser validates nested wire fields and preserves original metadata', async () => {
-  const raw: unknown = JSON.parse(await readFile(new URL('../../../../src/objects/earth/source/content/object.json', import.meta.url), 'utf8'));
+  const raw: unknown = JSON.parse(await readFile(resolve(projectRoot(import.meta.url), 'src/objects/earth/source/content/object.json'), 'utf8'));
   const parsed = parseCompleteObjectContentSource(raw);
   assert.equal(parsed, raw);
   const invalid = structuredClone(parsed);

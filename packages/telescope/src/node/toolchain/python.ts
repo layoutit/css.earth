@@ -6,6 +6,13 @@ import { writeFile } from 'node:fs/promises';
 /** The Python an installed toolchain runs with and the variables a reduction needs beside it. */
 export interface PythonToolchain { readonly python: string; readonly env: NodeJS.ProcessEnv }
 
+/** A successful ps sample contains one positive integral RSS value in KiB. */
+export function processRssBytes(result: { readonly status: number | null; readonly stdout: string | null; readonly error?: Error }): number | undefined {
+  if (result.error || result.status !== 0 || typeof result.stdout !== 'string' || !/^\s*\d+\s*$/u.test(result.stdout)) return undefined;
+  const kib = Number(result.stdout.trim());
+  return Number.isSafeInteger(kib) && kib > 0 && Number.isSafeInteger(kib * 1024) ? kib * 1024 : undefined;
+}
+
 /** The free-memory percentage macOS reports; a heavy stage does not start below half. */
 export function freeMemoryPercent() {
   const output = spawnSync('memory_pressure', { encoding: 'utf8' }).stdout ?? '';
@@ -19,7 +26,7 @@ export function freeMemoryPercent() {
 export async function toolchainPython(toolchain: PythonToolchain, cwd: string, script: string, args: readonly string[], log: string,
   options: { maxRssBytes?: number; progressLabel?: string } = {}): Promise<{ lastLine: string; peakRssBytes: number }> {
   const child = spawn(toolchain.python, ['-c', script, ...args], { cwd, env: { ...process.env, ...toolchain.env } });
-  let output = '', stdout = '', peak = 0, killed = false, stderrLine = '', lastRssReport = 0;
+  let output = '', stdout = '', peak = 0, killed = false, stderrLine = '', lastRssReport = 0, monitorFailed = false;
   if (options.progressLabel) process.stderr.write(`${options.progressLabel}: started\n`);
   child.stdout.on('data', chunk => { output += String(chunk); stdout += String(chunk); });
   child.stderr.on('data', chunk => {
@@ -30,8 +37,12 @@ export async function toolchainPython(toolchain: PythonToolchain, cwd: string, s
       process.stderr.write(`${options.progressLabel}: ${line.replace(/^.*? - INFO - /u, '')}\n`);
   });
   const watch = setInterval(() => {
-    const rss = Number(spawnSync('ps', ['-o', 'rss=', '-p', String(child.pid)], { encoding: 'utf8' }).stdout.trim()) * 1024;
-    if (Number.isFinite(rss)) peak = Math.max(peak, rss);
+    const rss = processRssBytes(spawnSync('ps', ['-o', 'rss=', '-p', String(child.pid)], { encoding: 'utf8' }));
+    if (rss === undefined) {
+      if (options.maxRssBytes !== undefined && child.exitCode === null && child.signalCode === null) { monitorFailed = true; child.kill('SIGKILL'); }
+      return;
+    }
+    peak = Math.max(peak, rss);
     if (options.progressLabel && rss > 0 && Date.now() - lastRssReport >= 10_000) {
       process.stderr.write(`${options.progressLabel}: ${(rss / 2 ** 30).toFixed(1)} GiB RSS${options.maxRssBytes ? ` / ${(options.maxRssBytes / 2 ** 30).toFixed(1)} GiB limit` : ''}\n`);
       lastRssReport = Date.now();
@@ -41,6 +52,7 @@ export async function toolchainPython(toolchain: PythonToolchain, cwd: string, s
   const status = await new Promise<number>(done => child.on('close', code => done(code ?? 1)));
   clearInterval(watch);
   await writeFile(log, output);
+  if (monitorFailed) throw new Error(`Python RSS monitor failed; see ${log}.`);
   if (killed) throw new Error(`Python ${args[0] ?? ''} passed its ${(options.maxRssBytes! / 2 ** 30).toFixed(1)} GiB memory ceiling and was stopped; see ${log}.`);
   if (status !== 0) throw new Error(`Python ${args[0] ?? ''} failed; see ${log}.`);
   if (options.progressLabel) process.stderr.write(`${options.progressLabel}: complete; peak ${(peak / 2 ** 30).toFixed(1)} GiB RSS\n`);

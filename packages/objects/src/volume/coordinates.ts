@@ -1,3 +1,4 @@
+export type Vector2 = [number, number];
 export type Vector3 = [number, number, number];
 export type Axis = 'x' | 'y' | 'z';
 export interface Bounds3 { min: Vector3; max: Vector3; }

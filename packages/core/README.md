@@ -49,3 +49,5 @@ pnpm --filter @cssearth/core test
 ```
 
 Shared world rotation/reflection types and validation live in `src/math/world-rotation.ts`, used by objects parsers and engine navigation.
+
+Normalization policies preserve each caller’s historical zero, NaN and component-count behavior: `normalizeOrZero` keeps array length and signed zeros; `normalize3OrZero` returns exactly three components; `normalize3OrZeroNonPositive` uses positive zero for non-positive/NaN lengths; `normalizeOrThrow` keeps caller diagnostics; `normalize3Unchecked` is for admitted nonzero vectors. Tests pin these differences. The two median policies likewise distinguish an averaged middle pair from a copied upper-middle sample.

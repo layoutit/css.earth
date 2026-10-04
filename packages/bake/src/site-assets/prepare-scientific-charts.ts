@@ -141,4 +141,3 @@ function polynomial(coefficients:readonly number[], value:number) {
 function titleCase(value:string) {
   return value[0].toUpperCase() + value.slice(1);
 }
-

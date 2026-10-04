@@ -1,4 +1,4 @@
-import type { PreparedSystemViewCandidate, PreparedSystemView, PreparedWorldContextData as PreparedWorldContext } from '@cssearth/objects';
+import type { PreparedSystemViewCandidate, PreparedSystemView, PreparedWorldContextData } from '@cssearth/objects';
 import { cross3 as cross, dot3 as dot } from '@cssearth/core';
 import type { OrbitalState, Vector3 } from './spatial-context.ts';
 
@@ -9,8 +9,8 @@ export interface SystemViewPolicy {
 }
 
 /** Bake candidate views, member positions and complete-orbit bounds. Runtime only projects these. */
-export function prepareSystemView(parent: Pick<PreparedWorldContext['focus'], 'id' | 'positionM' | 'radiusM'>,
-  bodies: PreparedWorldContext['bodies'], states: Readonly<Record<string, OrbitalState>>,
+export function prepareSystemView(parent: Pick<PreparedWorldContextData['focus'], 'id' | 'positionM' | 'radiusM'>,
+  bodies: PreparedWorldContextData['bodies'], states: Readonly<Record<string, OrbitalState>>,
   policy: SystemViewPolicy, orbitCenters: Readonly<Record<string, { readonly centerBodyId: string }>> = {}): PreparedSystemView | undefined {
   validatePolicy(policy);
   // A placed body carries no orbit and belongs to no system view. A body orbiting a named centre placed off the parent (a
@@ -27,7 +27,7 @@ export function prepareSystemView(parent: Pick<PreparedWorldContext['focus'], 'i
  * the stars at their prepared positions. The pair's orbital plane is not in the record, so the candidate angles stand
  * about a plane through the farthest companion that holds the frame's pole as nearly as it can: a camera choice, not a
  * measurement. Members are listed farthest first. */
-export function prepareBoundView(parent: ViewParent, companions: PreparedWorldContext['bodies'], policy: SystemViewPolicy): PreparedSystemView | undefined {
+export function prepareBoundView(parent: ViewParent, companions: PreparedWorldContextData['bodies'], policy: SystemViewPolicy): PreparedSystemView | undefined {
   validatePolicy(policy);
   if (!companions.length) return undefined;
   const offset = (body: ViewMember) => body.positionM.map((value, axis) => value - parent.positionM[axis]!) as unknown as Vector3;
@@ -41,8 +41,8 @@ export function prepareBoundView(parent: ViewParent, companions: PreparedWorldCo
 
 /** Frame a group by its members' prepared positions, from the plane bodies' candidate angles.
  * Positions, not orbits: an open trajectory would otherwise fit hundreds of AU. */
-export function prepareGroupView(parent: ViewParent, planeBodies: PreparedWorldContext['bodies'],
-  members: PreparedWorldContext['bodies'], states: Readonly<Record<string, OrbitalState>>,
+export function prepareGroupView(parent: ViewParent, planeBodies: PreparedWorldContextData['bodies'],
+  members: PreparedWorldContextData['bodies'], states: Readonly<Record<string, OrbitalState>>,
   policy: SystemViewPolicy): PreparedSystemView | undefined {
   validatePolicy(policy);
   const plane = orderMembers(planeBodies, states), group = orderMembers(members, states);
@@ -50,8 +50,8 @@ export function prepareGroupView(parent: ViewParent, planeBodies: PreparedWorldC
   return bakeView(parent, candidateFrames(parent, plane, states, policy), group, member => [member.positionM]);
 }
 
-type ViewParent = Pick<PreparedWorldContext['focus'], 'id' | 'positionM' | 'radiusM'>;
-type ViewMember = PreparedWorldContext['bodies'][number];
+type ViewParent = Pick<PreparedWorldContextData['focus'], 'id' | 'positionM' | 'radiusM'>;
+type ViewMember = PreparedWorldContextData['bodies'][number];
 interface CandidateFrame { readonly cameraToReference: readonly number[]; project(position: Vector3): Vector3; }
 
 function validatePolicy(policy: SystemViewPolicy) {

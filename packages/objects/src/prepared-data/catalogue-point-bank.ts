@@ -40,7 +40,7 @@ export interface PreparedCataloguePointBank {
 }
 
 /** A prepared catalogue-point bank: fixed 3D positions of a published catalogue and how to draw them. */
-export function parseCataloguePoints(value: unknown, at = 'catalogue points'): PreparedCataloguePointBank {
+export function readCataloguePointBank(value: unknown, at = 'catalogue points'): PreparedCataloguePointBank {
   const steps = parseCataloguePointSteps(value, at, Infinity);
   for (;;) { const step = steps.next(); if (step.done) return step.value; }
 }
@@ -146,3 +146,6 @@ function parseLevels(value: unknown, total: number, id: string): readonly Catalo
   if (sum !== total) throw new TypeError(`${id}: the levels hold ${sum} points, the bank ${total}.`);
   return Object.freeze(parsed);
 }
+
+// Main-entry spelling is frozen until the concurrent barrel change lands.
+export { readCataloguePointBank as parseCataloguePoints };

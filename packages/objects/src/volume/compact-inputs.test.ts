@@ -93,3 +93,16 @@ test('simulation-envelope, tone and material records reject corrupted retained d
   const corrupt = structuredClone(material); corrupt.components[0].rgb[1] = Infinity;
   assert.throws(() => readComponentMaterialReceipt(corrupt, 'image', 'field'), /component differs/);
 });
+
+test('simulation envelope failures retain field-specific replay diagnostics', () => {
+  const valid = { schema: SIMULATION_ENVELOPE_SCHEMA, settings: { scalePixels: 2, fraction: .5, floor: 0, depthSamples: 16, depthTrim: .005 }, width: 1, height: 1, bounds: { min: [0, 0], max: [1, 1] }, zRange: [-1, 1], gain: [1] };
+  for (const [patch, message] of [
+    [{ width: .5 }, 'Envelope grid must be integral.'], [{ gain: [] }, 'Invalid simulation envelope record'],
+    [{ bounds: { min: [NaN, 0], max: [1, 1] } }, 'Invalid envelope bounds minimum'],
+    [{ bounds: { min: [0, 0], max: [1] } }, 'Invalid envelope bounds maximum'],
+    [{ bounds: { min: [1, 0], max: [0, 1] } }, 'Invalid envelope bounds'], [{ zRange: [] }, 'Invalid envelope depth range'],
+  ] as const) {
+    assert.throws(() => readSimulationEnvelopeRecord({ ...valid, ...patch }), { name: 'TypeError', message });
+    assert.throws(() => readSimulationEnvelopeRecord({ ...valid, ...patch }, detail => assert.fail(detail)), { name: 'AssertionError', message });
+  }
+});

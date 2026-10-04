@@ -1,7 +1,7 @@
 /** AllWISE Atlas Images -> one background-matched TAN mosaic in DN, on a hips2fits-convention grid.
  * The atlas tiles are only background-matched within themselves (Explanatory Supplement IV.4.f),
  * so each tile keeps an unknown additive level. As Montage's mBgModel does (Berriman et al.), every
- * pair of overlapping tiles contributes the median of their difference, and one constant per tile
+ * pair of overlapping tiles contributes the medianAveraged of their difference, and one constant per tile
  * is solved by least squares with a zero-mean gauge. No pixel is interpolated: each tile pixel
  * centre lands in exactly one output pixel, whose value is the mean of what lands in it. */
 import type { TilePins, WiseBand } from '@cssearth/objects';
@@ -9,7 +9,7 @@ import { mkdir, readFile, rename, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { gunzipSync } from 'node:zlib';
 import { readFitsImage } from '@cssearth/fits';
-import { hasErrorCode, median, requireArray, requireFiniteNumber, requireRecord } from '@cssearth/core';
+import { hasErrorCode, medianAveraged, requireArray, requireFiniteNumber, requireRecord } from '@cssearth/core';
 import { offsetComponents, solveConstantOffsets } from './background-offsets.ts';
 
 export const WISE_ATLAS_BANDS = { W1: { band: 1, magzp: 20.5 }, W2: { band: 2, magzp: 19.5 }, W3: { band: 3, magzp: 18 }, W4: { band: 4, magzp: 13 } } as const;
@@ -138,7 +138,7 @@ export function matchTileBackgrounds(tiles: readonly Binned[], minimumOverlap = 
       const ca = (y - a.y0) * a.width + x - a.x0, cb = (y - b.y0) * b.width + x - b.x0;
       if (a.count[ca]! && b.count[cb]!) differences.push(a.sum[ca]! / a.count[ca]! - b.sum[cb]! / b.count[cb]!);
     }
-    if (differences.length >= minimumOverlap) pairs.push({ i, j, pixels: differences.length, difference: median(differences) });
+    if (differences.length >= minimumOverlap) pairs.push({ i, j, pixels: differences.length, difference: medianAveraged(differences) });
   }
   const n = tiles.length;
   const component = offsetComponents(n, pairs), sizes: number[] = [];

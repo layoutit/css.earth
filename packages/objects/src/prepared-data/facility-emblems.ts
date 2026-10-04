@@ -1,4 +1,5 @@
 /** Facility emblem wire records; source resolution and image byte inspection stay with callers. */
+import { requireString } from '@cssearth/core';
 import { explorationArray, explorationRecord } from '../provenance/exploration-catalog.js';
 import { parseExplorationImage, type ExplorationImage, type ExplorationSubject } from '../provenance/prepared-exploration.js';
 import type { SourceBinding } from '../sources/catalog.js';
@@ -25,6 +26,12 @@ export interface FacilityEmblemLibrary {
   readonly schema: typeof FACILITY_EMBLEMS_SCHEMA;
   readonly normalBuildPolicy: string;
   readonly entries: readonly FacilityEmblemEntry[];
+}
+
+/** Source fields the emblem writer promises, retaining all catalogued metadata. */
+export function readFacilityEmblemSource(value: unknown): FacilityEmblemSource {
+  const source = explorationRecord(value);
+  return { ...source, credit: requireString(source.credit, 'artwork credit'), sourceUrl: requireString(source.sourceUrl, 'artwork source URL') };
 }
 
 /** Envelope admission precedes per-entry source resolution, preserving artwork diagnostic order. */

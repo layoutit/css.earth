@@ -51,4 +51,3 @@ export async function prepareDatasetSprites(root = process.cwd()) {
   await Promise.all(Array.from({ length: 16 }, async () => { while (next < folders.length) await drawBody(folders[next++]!); }));
   return count;
 }
-

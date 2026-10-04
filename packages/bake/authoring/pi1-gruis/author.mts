@@ -43,7 +43,7 @@ export async function authorPi1Gruis({ check = false } = {}) {
   const palette = requireArray(display.palette).map(value => requireString(value)), percentiles = requireArray(display.percentiles).map(value => requireFiniteNumber(value));
   const marker = await contextMarker(readReconstruction(beam), palette, [percentiles[0]!, percentiles[1]!], requireFiniteNumber(frame.backgroundMaximum));
   const outputs: [string, Buffer][] = [[BEAM_IMAGE_PATH, beam], [CONTEXT_PATH, marker]];
-  await writeOrCheckAuthoredOutputs(root, outputs, { check, missingFile: 'propagate-read-error', mkdir: 'none' });
+  await writeOrCheckAuthoredOutputs(root, outputs, { check, readError: 'propagate-read-error', mkdir: 'none' });
   return { vis2: rows.vis2.length, t3: rows.t3.length, flagged: rows.flagged, channels: rows.wavelengthsMetres.length, longestBaselineMetres: longest, beamMas };
 }
 

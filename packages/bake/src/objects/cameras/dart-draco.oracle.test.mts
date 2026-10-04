@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { sourceLoad, sourceTest } from '@cssearth/objects/node/source-test';
+import { sourceLoad, sourceTest, sourceValues } from '@cssearth/objects/node/source-test';
 import { readFile } from 'node:fs/promises';
 import { relative, resolve } from 'node:path';
 import { loadKernelSet } from '@cssearth/spice/node';
@@ -25,8 +25,8 @@ const loaded = await sourceLoad(async () => {
   return { fixture, cases, kernels, numbers, set, clock, close };
 });
 const test = sourceTest(null, loaded);
-const { fixture, cases, kernels, numbers, set, clock, close } = loaded.values;
 test('the fixture was generated from the pinned kernels by a named SPICE toolkit', async () => {
+  const { fixture, cases, kernels, numbers, set, clock, close } = sourceValues(loaded);
   assert.equal(fixture.oracle, 'spiceypy');
   assert.match(requireString(fixture.tool.cspice), /^CSPICE_N\d{4}$/);
   await assertPinnedInputs(fixture.inputs);
@@ -36,6 +36,7 @@ test('the fixture was generated from the pinned kernels by a named SPICE toolkit
 });
 
 test('leap seconds, TDB and the spacecraft clock agree with CSPICE to a microsecond', () => {
+  const { fixture, cases, kernels, numbers, set, clock, close } = sourceValues(loaded);
   for (const raw of requireArray(cases.times)) {
     const entry = requireRecord(raw), et = requireFiniteNumber(entry.et), utc = requireString(entry.utc);
     assert.ok(Math.abs(utcToEt(set.leapSeconds, utc) - et) < 1e-6, `utc ${utc} -> ${utcToEt(set.leapSeconds, utc)} vs ${et}`);
@@ -50,6 +51,7 @@ test('leap seconds, TDB and the spacecraft clock agree with CSPICE to a microsec
 });
 
 test('geometric, light-time and aberrated states agree with CSPICE in J2000 and in the body frame', () => {
+  const { fixture, cases, kernels, numbers, set, clock, close } = sourceValues(loaded);
   let checked = 0;
   for (const raw of requireArray(cases.states)) {
     const entry = requireRecord(raw), target = requireFiniteNumber(entry.target), observer = requireFiniteNumber(entry.observer), et = requireFiniteNumber(entry.et);
@@ -69,6 +71,7 @@ test('geometric, light-time and aberrated states agree with CSPICE in J2000 and 
 });
 
 test('every frame class in the DART set agrees with CSPICE to a nanoradian', () => {
+  const { fixture, cases, kernels, numbers, set, clock, close } = sourceValues(loaded);
   let checked = 0;
   for (const raw of requireArray(cases.frames)) {
     const entry = requireRecord(raw), frame = requireString(entry.frame), et = requireFiniteNumber(entry.et), matrix = requireArray(entry.matrix).map(row => numbers(row));
@@ -80,6 +83,7 @@ test('every frame class in the DART set agrees with CSPICE to a nanoradian', () 
 });
 
 test('archived DRACO intercepts appear where CSPICE places them through the DART_DRACO frame with LT+S', () => {
+  const { fixture, cases, kernels, numbers, set, clock, close } = sourceValues(loaded);
   const exposure = requireRecord(cases.exposure), et = requireFiniteNumber(exposure.et);
   const pixels = { focalLength: { key: 'FOCAL_LENGTH', unit: 'mm' as const }, pixelPitch: { key: 'PIXEL_SIZE', unit: 'micrometre' as const }, center: 'DETECTOR_CENTER', boresight: 'BORESIGHT', samples: 'PIXEL_SAMPLES', lines: 'PIXEL_LINES', frame: 'FOV_FRAME', origin: 0, column: '-X', row: '-Y' };
   const camera = spiceCamera({ pool: set.pool, ephemeris: set.ephemeris, rotation: set.rotation, observer: -135, target: 120065803, bodyFrame: 'DIMORPHOS_FIXED', instrument: -135102, et, aberration: 'LT+S', pixels });

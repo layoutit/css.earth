@@ -41,7 +41,7 @@ test('preparation metadata and runtime camera qualification retain their existin
   for (const value of authoredOnly) {
     assert.equal(validatePreparedCubicSky(value), value);
     assert.equal(validatePreparedCubicSky(value, 'authored'), value);
-    assert.throws(() => validatePreparedCubicSky(value, 'runtime'), /Prepared presentation:/);
+    assert.throws(() => validatePreparedCubicSky(value, 'runtime'), /Prepared data:/);
   }
   const registered = { ...sky, cameraContract: 'scene-locked-unbounded-accumulated-matrix3d',
     sceneRegistration: 'matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)' };

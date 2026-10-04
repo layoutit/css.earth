@@ -14,7 +14,7 @@ export const CONTEXT_SIZE = 512;
 
 export async function authorAntares({ check = false } = {}) {
   const marker = await neutralDiscMarker(CONTEXT_SIZE);
-  await writeOrCheckAuthoredOutputs(root, [[CONTEXT_PATH, marker]], { check, missingFile: 'propagate-read-error', mkdir: 'none' });
+  await writeOrCheckAuthoredOutputs(root, [[CONTEXT_PATH, marker]], { check, readError: 'propagate-read-error', mkdir: 'none' });
   return { size: CONTEXT_SIZE };
 }
 

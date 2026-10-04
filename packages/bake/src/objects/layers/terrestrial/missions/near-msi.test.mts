@@ -1,4 +1,4 @@
-import { sourceLoad, sourceTest } from '@cssearth/objects/node/source-test';
+import { sourceLoad, sourceTest, sourceValues } from '@cssearth/objects/node/source-test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { decodeNearMsi, mathildeImageCamera, readMathildeImageGeometry } from '@cssearth/bake/objects/layers/terrestrial';
@@ -8,8 +8,8 @@ const loaded = await sourceLoad(async () => ({
   table: readFileSync(new URL('../../../../../../../src/objects/mathilde/source/reference/253mathimg.tab', import.meta.url), 'utf8'),
 }));
 const test = sourceTest(null, loaded);
-const { table } = loaded.values;
 test('released Mathilde table selects a reconstructed camera and rejects missing or ambiguous images', () => {
+  const { table } = sourceValues(loaded);
   const g = readMathildeImageGeometry(table, 42826360);
   assert.equal(g.latitude, 84.87); assert.equal(g.longitudeWest, 63.77); assert.equal(g.rangeKm, 1209.73);
   assert.throws(() => readMathildeImageGeometry(table, 42826361), /No reconstructed/);
@@ -18,6 +18,7 @@ test('released Mathilde table selects a reconstructed camera and rejects missing
 });
 
 test('table camera preserves west longitude, rectangular pixels and projected centre', () => {
+  const { table } = sourceValues(loaded);
   const closure = mathildeImageCamera(table, 42826360), camera = matrixCamera('archived-closure', closure);
   const projected = camera.project([0, 0, 0]);
   assert.ok(projected);
@@ -54,6 +55,7 @@ function fits(raw: boolean, overrides: Record<string, string | number | boolean>
 const identity = { met: 42826360, filter: '0', startTime: '1997-06-27T12:55:52.899Z' };
 
 test('paired raw DN, not photograph brightness, masks telemetry loss and saturation', () => {
+  const { table } = sourceValues(loaded);
   const image = fits(false), raw = fits(true), decoded = decodeNearMsi(image, raw, identity);
   for (const i of [-1, 0, 1, 2, 3, 537 * 244]) assert.equal(decoded.acceptPixel(i), false);
   assert.equal(decoded.acceptPixel(4), true, 'a finite negative calibrated noise sample is not a missing pixel');
@@ -64,6 +66,7 @@ test('paired raw DN, not photograph brightness, masks telemetry loss and saturat
 });
 
 test('calibration, raw exposure identity, compression and saturation totals fail closed', () => {
+  const { table } = sourceValues(loaded);
   const image = fits(false), raw = fits(true);
   assert.throws(() => decodeNearMsi(image, raw, { ...identity, met: 42826370 }), /identity/);
   assert.throws(() => decodeNearMsi(image, raw, { ...identity, filter: '1' }), /identity/);

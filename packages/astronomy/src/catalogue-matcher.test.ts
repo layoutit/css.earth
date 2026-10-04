@@ -91,3 +91,10 @@ test('validates external shapes, numbers, radius and comparison without coercion
   assert.throws(() => Reflect.apply(matches, undefined, ['0', 0]), TypeError);
   assert.throws(() => Reflect.apply(matches, undefined, [0, undefined]), TypeError);
 });
+
+test('radius-aware separation retains asymmetric tangent and explicit seam policies', async () => {
+  const { catalogueSeparationArcsec } = await import('./catalogue-matcher.js');
+  assert.equal(catalogueSeparationArcsec(10, 60, 10.001, 60, false), 3600 * Math.hypot((10 - 10.001) * Math.cos(60 * Math.PI / 180), 0));
+  assert.ok(catalogueSeparationArcsec(359.999, 0, .001, 0) < 8);
+  assert.ok(catalogueSeparationArcsec(359.999, 0, .001, 0, false) > 1_000_000);
+});

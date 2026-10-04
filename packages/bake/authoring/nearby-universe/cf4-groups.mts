@@ -15,7 +15,7 @@ import { resolve } from 'node:path';
 import { gunzipSync, gzipSync } from 'node:zlib';
 
 const repository = resolve(import.meta.dirname, '../../../..');
-const tablePath = resolve(repository, 'src/objects/nearby-universe-galaxies/source/galaxies/cf4-hyperleda.csv.gz');
+const tablePath = resolve(process.argv[4] ?? resolve(repository, 'src/objects/nearby-universe-galaxies/source/galaxies/cf4-hyperleda.csv.gz'));
 const table2Path = resolve(process.argv[2] ?? resolve(repository, 'output/cf4/table2.dat.gz'));
 const table3Path = resolve(process.argv[3] ?? resolve(repository, 'output/cf4/table3.dat.gz'));
 
@@ -35,16 +35,21 @@ const groupModulus = new Map((await lines(table3Path)).map(line => {
 
 const [header, ...rows] = gunzipSync(await readFile(tablePath)).toString('utf8').trim().split('\n');
 const names = header!.split(',');
-if (names.includes('G1PGC')) throw new TypeError(`${tablePath}: already holds the group columns ("${header}").`);
+const hasGroups = names.slice(-2).join(',') === 'G1PGC,GDMzp';
+const baseNames = hasGroups ? names.slice(0, -2) : names;
+if (baseNames.includes('G1PGC') || baseNames.includes('GDMzp')) throw new TypeError(`${tablePath}: group columns must be the trailing G1PGC,GDMzp pair.`);
 if (names[0] !== 'PGC') throw new TypeError(`${tablePath}: the first column must be PGC, not "${names[0]}".`);
 const joined = rows.map(row => {
-  const pgc = Number(row.split(',')[0]), group = groupOf.get(pgc);
+  const cells = row.split(',');
+  if (cells.length !== names.length) throw new TypeError(`${tablePath}: row width differs from the header.`);
+  const base = (hasGroups ? cells.slice(0, -2) : cells).join(',');
+  const pgc = Number(cells[0]), group = groupOf.get(pgc);
   if (group === undefined) throw new TypeError(`${tablePath}: PGC ${pgc} has no row in ${table2Path}.`);
   // A group table 3 does not list has no group distance: its galaxies keep their own (an empty GDMzp).
   const modulus = groupModulus.get(group) ?? '';
-  return `${row},${group},${modulus}`;
+  return `${base},${group},${modulus}`;
 });
-await writeFile(tablePath, gzipSync([`${header},G1PGC,GDMzp`, ...joined].join('\n') + '\n', { level: 9 }));
+await writeFile(tablePath, gzipSync([`${baseNames.join(',')},G1PGC,GDMzp`, ...joined].join('\n') + '\n', { level: 9 }));
 const sizes = new Map<number, number>();
 for (const row of joined) { const group = Number(row.split(',').at(-2)); sizes.set(group, (sizes.get(group) ?? 0) + 1); }
 console.log(JSON.stringify({ rows: joined.length, withoutGroupDistance: joined.filter(row => row.endsWith(',')).length, groups: sizes.size, inGroupsOfTwoOrMore: [...sizes.values()].filter(size => size > 1).reduce((sum, size) => sum + size, 0),

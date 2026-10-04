@@ -42,3 +42,14 @@ test('mixed source and built exports retain their own bundling policy', () => {
   assert.equal(externalWorkspaceSpecifier([pkg], [pkg.name], pkg.name), true);
   assert.equal(externalWorkspaceSpecifier([pkg], [pkg.name], pkg.name + '/source'), false);
 });
+
+test('CLI-only workspace dependencies are dev dependencies without losing build order', async () => {
+  const { declaredPackage, undeclaredImports } = await import('./declared-dependencies.mts');
+  const astronomy = declaredPackage('packages/astronomy/package.json', { name: '@cssearth/astronomy', devDependencies: { '@cssearth/objects': 'workspace:*' } }, true);
+  const objects = declaredPackage('packages/objects/package.json', { name: '@cssearth/objects' }, true);
+  const code = "import { readObject } from '@cssearth/objects';";
+  assert.deepEqual(undeclaredImports([astronomy, objects], new Map([['packages/astronomy/cli/read.mts', code]])), []);
+  assert.equal(undeclaredImports([astronomy, objects], new Map([['packages/astronomy/src/read.ts', code]])).length, 1);
+  const undeclared = declaredPackage('packages/astronomy/package.json', { name: '@cssearth/astronomy' }, true);
+  assert.equal(undeclaredImports([undeclared, objects], new Map([['packages/astronomy/cli/read.mts', code]])).length, 1);
+});
