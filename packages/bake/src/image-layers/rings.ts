@@ -14,6 +14,9 @@ type Rings = NonNullable<ImageLayerRecipe['geometry']['rings']>;
  * belongs to, so each plane's claim changes in proportion to the radius, and where both claim a sight line they share
  * it by their claims. No width is chosen here: the two radii are the paper's.
  *
+ * With `lineOfSightThicknessArcsec` a structure is not a sheet: the smooth part of its light lies about its plane, in
+ * front of it and behind, through that much depth along the sight line (./rings-volume.ts).
+ *
  * The frame is the bake's: x east, y north, z along the sight line away from the Sun, in arcseconds from the star. */
 export function imageLayerRingsModel(rings: Rings) {
   const plane = (tiltDeg: number, farAxisPaDeg: number) => {
@@ -22,6 +25,7 @@ export function imageLayerRingsModel(rings: Rings) {
     const depth = (east: number, north: number) => -(east * normal[0] + north * normal[1]) / normal[2];
     return { normal, depth, radius: (east: number, north: number) => Math.hypot(east, north, depth(east, north)) };
   };
+
   const disc = plane(rings.disc.tiltDeg, rings.disc.farAxisPaDeg), ring = plane(rings.ring.tiltDeg, rings.ring.farAxisPaDeg);
   /** How far a radius is from the disc's toward the ring's: 0 at the disc's radius and inside it, 1 at the ring's and beyond. */
   const outward = (radius: number) => Math.max(0, Math.min(1, (radius - rings.disc.radiusArcsec) / (rings.ring.radiusArcsec - rings.disc.radiusArcsec)));
@@ -30,7 +34,7 @@ export function imageLayerRingsModel(rings: Rings) {
     const discClaim = 1 - outward(disc.radius(east, north)), ringClaim = outward(ring.radius(east, north));
     return discClaim + ringClaim > 0 ? discClaim / (discClaim + ringClaim) : 0;
   };
-  return { rings, planes: [
+  return { rings, thickness: rings.lineOfSightThicknessArcsec ?? 0, planes: [
     { id: 'disc', normal: disc.normal, depth: disc.depth, radius: disc.radius, share: onDisc },
     { id: 'ring', normal: ring.normal, depth: ring.depth, radius: ring.radius, share: (east: number, north: number) => 1 - onDisc(east, north) },
   ] as const };
@@ -50,12 +54,10 @@ export const RINGS_OPACITY_REACH_PIXELS = 8;
  * the cover does not rise to it. A cover that did would darken a patch of sky around every star. */
 const RINGS_POINT_FACTOR = 2;
 
-/** A picture's RGBA with its opacity evened out (`RINGS_OPACITY_REACH_PIXELS`): no pixel less opaque than before, and
- * each pixel's color times its opacity unchanged to rounding. Points of light keep their own opacity. */
-export function imageLayerRingsSheet(rgba: Buffer, width: number, height: number): Buffer {
+/** A smooth cover over a picture's opacity (0 to 255, `RINGS_OPACITY_REACH_PIXELS`): what each pixel's opacity becomes,
+ * never less than its own. Points of light keep their own. */
+export function imageLayerRingsCover(own: Float32Array, width: number, height: number): Float32Array {
   const reach = RINGS_OPACITY_REACH_PIXELS, count = width * height, line = new Float32Array(Math.max(width, height));
-  const own = new Float32Array(count);
-  for (let p = 0; p < count; p++) own[p] = rgba[4 * p + 3]!;
   /** Over each pixel's square of `radius`, rows then columns: the largest value, or the mean. */
   const pass = (from: Float32Array, radius: number, most: boolean) => {
     const out = new Float32Array(count);
@@ -74,9 +76,19 @@ export function imageLayerRingsSheet(rgba: Buffer, width: number, height: number
   let glow = own;
   for (let round = 0; round < 2; round++) { const mean = pass(glow, reach, false), held = new Float32Array(count); for (let p = 0; p < count; p++) held[p] = Math.min(own[p]!, RINGS_POINT_FACTOR * mean[p]!); glow = held; }
   // The cover: the most opaque glow within twice the reach, then two means over the reach.
-  const cover = pass(pass(pass(glow, 2 * reach, true), reach, false), reach, false), out = Buffer.alloc(rgba.length);
+  const cover = pass(pass(pass(glow, 2 * reach, true), reach, false), reach, false);
+  for (let p = 0; p < count; p++) cover[p] = Math.max(own[p]!, Math.min(255, Math.ceil(cover[p]!)));
+  return cover;
+}
+
+/** A picture's RGBA with its opacity evened out (`imageLayerRingsCover`): no pixel less opaque than before, and each
+ * pixel's color times its opacity unchanged to rounding. */
+export function imageLayerRingsSheet(rgba: Buffer, width: number, height: number): Buffer {
+  const count = width * height, own = new Float32Array(count);
+  for (let p = 0; p < count; p++) own[p] = rgba[4 * p + 3]!;
+  const cover = imageLayerRingsCover(own, width, height), out = Buffer.alloc(rgba.length);
   for (let p = 0; p < count; p++) {
-    const i = 4 * p, alpha = Math.max(own[p]!, Math.min(255, Math.ceil(cover[p]!)));
+    const i = 4 * p, alpha = cover[p]!;
     out[i + 3] = alpha;
     for (let c = 0; c < 3; c++) out[i + c] = alpha ? Math.min(255, Math.round(rgba[i + c]! * own[p]! / alpha)) : 0;
   }

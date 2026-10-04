@@ -141,3 +141,78 @@ test('a bank on rings puts the picture on its two planes, and from the Sun shows
     assert.throws(() => parseImageLayerRecipe({ ...ringed, bake: { ...ringed.bake, flat: false } }), /geometry\.rings is for a flat bank/u);
   } finally { await rm(root, { recursive: true, force: true }); }
 });
+
+test('rings with a thickness keep their detail on the sheets and spread their glow through the depth, and from the Sun still show the picture', async () => {
+  const root = await mkdtemp(join(tmpdir(), 'image-layer-rings-thick-')), source = join(root, 'source');
+  try {
+    await mkdir(source);
+    // A smooth glow 290 arcsec in radius with a bright knot and a dark one: 720 arcsec across 64 pixels.
+    const glow = Buffer.alloc(SIZE * SIZE * 3);
+    for (let y = 0; y < SIZE; y++) for (let x = 0; x < SIZE; x++) {
+      const radius = Math.hypot(x - 31.5, y - 31.5), at = 3 * (y * SIZE + x), knot = x === 38 && y === 30 ? 1.25 : x === 24 && y === 35 ? 0.6 : 1, lit = radius < 26 ? 180 * (1 - radius / 26) * knot : 0;
+      glow[at] = 0.4 * lit; glow[at + 1] = 0.8 * lit; glow[at + 2] = lit;
+    }
+    await writeFile(join(source, 'source.png'), await sharp(glow, { raw: { width: SIZE, height: SIZE, channels: 3 } }).png().toBuffer());
+    await writeFile(join(source, 'provenance.json'), '{}\n');
+    const THICKNESS = 60, LAYERS = 6, rings = { source: 'fixture', basis: 'fixture', disc: { radiusArcsec: 120, tiltDeg: 30, farAxisPaDeg: 90 }, ring: { radiusArcsec: 200, tiltDeg: 60, farAxisPaDeg: 0 }, lineOfSightThicknessArcsec: THICKNESS };
+    const flat = { schema: 'cssearth-image-layer-recipe@1', id: 'fixture', source: { path: 'source.png', dimensions: [SIZE, SIZE], originalDimensions: [SIZE, SIZE], publisherUrl: 'https://example.test', downloadUrl: 'https://example.test/a', credit: 'Fixture', license: 'CC-BY-4.0' },
+      observation: { centerRaDeg: 10, centerDecDeg: 20, fieldOfViewDeg: [0.2, 0.2], northClockwiseDeg: 0 }, target: { centerRaDeg: 10, centerDecDeg: 20, distancePc: 1000 },
+      geometry: { kind: 'inclined-disk', inclinationDeg: 0.001, lineOfNodesPaDeg: 0, thicknessKpc: 1e-7, supportRadiusKpc: 0.003, supportTaperFraction: 0.9, depthWeights: [0.25, 0.5, 0.25], depthScales: [1, 1, 1], unit: 'pc' },
+      bake: { maxFacePixels: SIZE, diffuseFacePixels: 16, crossAxisSlices: 3, crossAxisAlongPixels: 16, crossAxisDepthPixels: 9, backgroundFloor: 0, edgeTaperFraction: 0.01, diffuseFraction: 0.6, diffuseSigmaPixels: 1, flat: true, encoding: { format: 'webp', quality: 100 } },
+      provenance: { path: 'provenance.json' } };
+    const thick = { ...flat, geometry: { ...flat.geometry, rings }, bake: { ...flat.bake, bulgeFacePixels: 32, bulgeSlices: LAYERS, bulgeCrossSlices: 8 } };
+    const reference = await prepareImageLayers({ sourceDirectory: source, outputDirectory: join(root, 'flat'), recipe: parseImageLayerRecipe(flat) });
+    const bank = await prepareImageLayers({ sourceDirectory: source, outputDirectory: join(root, 'thick'), recipe: parseImageLayerRecipe(thick) });
+    const { planes } = imageLayerRingsModel(rings), arcsec = 1000 * Math.PI / 648000, pixel = 720 / SIZE;
+    const faceOn = bank.banks.find(entry => entry.axis === 'z')!, leaves = faceOn.leaves as Leaf[], layers = leaves.filter(leaf => leaf.id.startsWith('shape-z-')), sheets = leaves.filter(leaf => !leaf.id.startsWith('shape-'));
+    assert.deepEqual(sheets.map(leaf => leaf.id), ['z-disc', 'z-ring']);
+    assert.equal(layers.length, 2 * LAYERS);
+    // A drawing as far in front of its plane as another is behind it shows the same picture, which counts once.
+    assert.deepEqual([...new Set(layers.map(leaf => leaf.texturePath))].sort(), ['disc', 'ring'].flatMap(id => [0, 1, 2].map(m => `layers/glow-${id}-0${m}.webp`)));
+    assert.equal(layers.filter(leaf => leaf.bytes > 0).length, LAYERS);
+    const sides = (['x', 'y'] as const).map(axis => bank.banks.find(entry => entry.axis === axis)!);
+    for (const side of sides) { const own = side.leaves as Leaf[];
+      assert.ok(own.filter(leaf => leaf.id.startsWith(`shape-${side.axis}-`)).length >= 4 && own.some(leaf => leaf.id === `${side.axis}-disc`) && own.some(leaf => leaf.id === `${side.axis}-ring`), `${side.axis}: sheets and curtains`);
+      // A curtain stands across the picture, and the views from the sides are told by the curtains' spacing.
+      assert.ok(Math.abs(Math.abs((side as { normalUnits: number[] }).normalUnits[side.axis === 'x' ? 0 : 1]!) - 1) < 1e-3, `${side.axis}: the curtains' normal`);
+      assert.ok((faceOn as { samplingStepUnits: number }).samplingStepUnits > 1.5 * (side as { samplingStepUnits: number }).samplingStepUnits, 'the face-on drawing gives way to the curtains before a ring is edge-on'); }
+    // Each drawing of the glow is the ring's plane moved along the sight line, no farther than the thickness, never on the plane.
+    const drawn = await Promise.all(layers.map(async leaf => { const plane = planes.find(entry => leaf.id.includes(`-${entry.id}-`))!, offsets = leaf.verticesUnits.map(vertex => (plane.normal[0] * vertex[0]! + plane.normal[1] * vertex[1]! + plane.normal[2] * vertex[2]!) / plane.normal[2] / arcsec);
+      assert.ok(offsets.every(offset => Math.abs(offset - offsets[0]!) < 1e-3), `${leaf.id} is parallel to its plane`);
+      assert.ok(Math.abs(offsets[0]!) > 1 && Math.abs(offsets[0]!) < THICKNESS, `${leaf.id} at ${offsets[0]} arcsec from its plane`);
+      return { ...(await texture(join(root, 'thick'), leaf)), plane, offset: offsets[0]! }; }));
+    for (const plane of planes) { const offsets = drawn.filter(entry => entry.plane === plane).map(entry => entry.offset).sort((a, b) => a - b); assert.ok(Math.abs(offsets[0]! + offsets[offsets.length - 1]!) < 1e-3 && offsets.filter(offset => offset < 0).length === LAYERS / 2, `${plane.id}: as many in front as behind`); }
+    // A browser stretches the glow's picture over the nebula, blending its cells; what it holds is color times opacity, rounded down.
+    const blended = (glowing: Texture, x: number, y: number, depth: number) => { const sx = x * (1000 + depth * arcsec) / 1000, sy = y * (1000 + depth * arcsec) / 1000, dx = sx - glowing.origin[0]!, dy = sy - glowing.origin[1]!, det = glowing.right[0]! * glowing.down[1]! - glowing.right[1]! * glowing.down[0]!;
+      const fx = (dx * glowing.down[1]! - dy * glowing.down[0]!) / det * glowing.width - .5, fy = (glowing.right[0]! * dy - glowing.right[1]! * dx) / det * glowing.height - .5, i0 = Math.floor(fx), j0 = Math.floor(fy), out = [0, 0, 0, 0];
+      for (const [i, j, w] of [[i0, j0, (1 - fx + i0) * (1 - fy + j0)], [i0 + 1, j0, (fx - i0) * (1 - fy + j0)], [i0, j0 + 1, (1 - fx + i0) * (fy - j0)], [i0 + 1, j0 + 1, (fx - i0) * (fy - j0)]] as const) {
+        const o = 4 * (Math.max(0, Math.min(glowing.height - 1, j)) * glowing.width + Math.max(0, Math.min(glowing.width - 1, i))), a = glowing.data[o + 3]!; out[3]! += w * a / 255; for (let c = 0; c < 3; c++) out[c]! += w * Math.floor(glowing.data[o + c]! * a / 255); }
+      return out; };
+    // The Sun's view at the picture's pixel centres: every layer on the sight line, nearest first.
+    const [disc, ring] = await Promise.all(sheets.map(leaf => texture(join(root, 'thick'), leaf)));
+    const whole = await texture(join(root, 'flat'), (reference.banks.find(entry => entry.axis === 'z')!.leaves as Leaf[]).find(leaf => leaf.id === 'z-detail')!);
+    let lit = 0, glowing = 0, worst = 0, off = 0;
+    for (let py = 1; py < SIZE; py += 2) for (let px = 1; px < SIZE; px += 2) {
+      const east = (SIZE / 2 - 0.5 - px) * pixel, north = (SIZE / 2 - 0.5 - py) * pixel, x = east * arcsec, y = north * arcsec, expected = light(whole, x, y);
+      const onSight = [...drawn.map(entry => ({ depth: entry.plane.depth(east, north) + entry.offset, value: blended(entry, x, y, 0), glow: true })), { depth: planes[0].depth(east, north), value: light(disc!, x, y), glow: false }, { depth: planes[1].depth(east, north), value: light(ring!, x, y), glow: false }].sort((a, b) => a.depth - b.depth);
+      const seen = [0, 0, 0]; let clear = 1, fromGlow = 0;
+      for (const layer of onSight) { for (let c = 0; c < 3; c++) seen[c]! += clear * layer.value[c]!; clear *= 1 - layer.value[3]!; if (layer.glow && layer.value[3]! > 0) fromGlow++; }
+      // The sheets are lossy pictures of what the glow leaves: a texel may be several levels off, the picture as a whole is not.
+      for (let c = 0; c < 3; c++) { const difference = Math.abs(seen[c]! - expected[c]!); worst = Math.max(worst, difference); off += difference / 3; assert.ok(difference < 12, `${east}, ${north}: channel ${c} shows ${seen[c]} for ${expected[c]}`); }
+      if (expected[3]) lit++; if (fromGlow > 1) glowing++;
+    }
+    assert.ok(lit > 200 && glowing > 100 && off / lit < 2, `${lit} lit, ${glowing} with glow at more than one depth; worst ${worst}, ${off / lit} off on average`);
+    // The knots are on the sheets, not in the glow: the glow under the bright knot is no brighter than across the star
+    // from it, where the picture is the same but for the knot.
+    const knot = [(SIZE / 2 - 0.5 - 38) * pixel * arcsec, (SIZE / 2 - 0.5 - 30) * pixel * arcsec] as const, beside = [-knot[0], -knot[1]] as const;
+    const through = (place: readonly [number, number]) => drawn.reduce((sum, entry) => sum + blended(entry, place[0], place[1], 0)[2]!, 0);
+    assert.ok(through(knot) <= through(beside) * 1.1 && light(disc!, knot[0], knot[1])[2] > light(disc!, beside[0], beside[1])[2] + 10, `the knot is on the disc's sheet: glow ${through(knot)} and ${through(beside)}, sheet ${light(disc!, knot[0], knot[1])[2]} and ${light(disc!, beside[0], beside[1])[2]}`);
+    // The glow is a bell about the plane: the drawings nearest it hold the most.
+    const strength = (leaf: Texture) => { let sum = 0; for (let o = 3; o < leaf.data.length; o += 4) sum += leaf.data[o]!; return sum; }, ofRing = drawn.filter(entry => entry.plane === planes[1]).sort((a, b) => Math.abs(a.offset) - Math.abs(b.offset));
+    assert.ok(strength(ofRing[0]!) > strength(ofRing[2]!) && strength(ofRing[2]!) > strength(ofRing[4]!) && strength(ofRing[4]!) > 0, 'a bell through the depth');
+    // A curtain is a strip along its ring's plane, through the glow's depth on either side of it.
+    for (const side of sides) for (const leaf of (side.leaves as Leaf[]).filter(entry => entry.id.startsWith('shape-'))) { const plane = planes.find(entry => leaf.id.includes(`-${entry.id}-`))!, [a, b, c, d] = leaf.verticesUnits as [number[], number[], number[], number[]];
+      const from = (vertex: number[]) => (plane.normal[0] * vertex[0]! + plane.normal[1] * vertex[1]! + plane.normal[2] * vertex[2]!) / plane.normal[2] / arcsec;
+      assert.ok(Math.abs(from(a) + THICKNESS) < 0.5 && Math.abs(from(b) + THICKNESS) < 0.5 && Math.abs(from(c) - THICKNESS) < 0.5 && Math.abs(from(d) - THICKNESS) < 0.5, `${leaf.id}: ${[a, b, c, d].map(from)}`); }
+  } finally { await rm(root, { recursive: true, force: true }); }
+});

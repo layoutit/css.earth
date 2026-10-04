@@ -58,7 +58,7 @@
     "unit": "pc",
     "rings": {
       "source": "publication-odell-2004-helix-structure",
-      "basis": "O'Dell, McCullough & Meixner (2004): the main ring is two rings. The inner ring is an ellipse of 499 by 459 arcsec, a circle of radius 250 arcsec tilted 23 degrees out of the plane of the sky, the edge of an inner disc; the outer ring is an ellipse of 742 by 446 arcsec, a circle of radius 371 arcsec tilted 53 degrees (Sect. III.1). The more distant side of each symmetry axis: the inner disc's at position angle 288 degrees by its ring's orientation and radial-velocity pattern (303 by its plumes), the outer ring's at about 168 degrees (Sect. IV). The outer features share the outer ring's orientation. The disc's value here is the kinematic one, 288 degrees.",
+      "basis": "O'Dell, McCullough & Meixner (2004): the main ring is two rings. The inner ring is an ellipse of 499 by 459 arcsec, a circle of radius 250 arcsec tilted 23 degrees out of the plane of the sky, the edge of an inner disc; the outer ring is an ellipse of 742 by 446 arcsec, a circle of radius 371 arcsec tilted 53 degrees (Sect. III.1). The more distant side of each symmetry axis: the inner disc's at position angle 288 degrees by its ring's orientation and radial-velocity pattern (303 by its plumes), the outer ring's at about 168 degrees (Sect. IV). The outer features share the outer ring's orientation. The disc's value here is the kinematic one, 288 degrees. Most of the main ring's emission comes from a disc about 100 arcsec in line-of-sight thickness (Sect. IV.3.1, citing O'Dell 1998).",
       "disc": {
         "radiusArcsec": 250,
         "tiltDeg": 23,
@@ -68,7 +68,8 @@
         "radiusArcsec": 371,
         "tiltDeg": 53,
         "farAxisPaDeg": 168
-      }
+      },
+      "lineOfSightThicknessArcsec": 100
     }
   },
   "bake": {
@@ -78,7 +79,7 @@
     "backgroundFloor": 0.02,
     "encoding": {
       "format": "webp",
-      "quality": 80,
+      "quality": 70,
       "alphaQuality": 80
     },
     "diffuseFacePixels": 80,
@@ -86,7 +87,10 @@
     "edgeTaperFraction": 0.04,
     "diffuseFraction": 0.65,
     "diffuseSigmaPixels": 2,
-    "flat": true
+    "flat": true,
+    "bulgeSlices": 8,
+    "bulgeFacePixels": 384,
+    "bulgeCrossSlices": 64
   },
   "provenance": {
     "path": "provenance.json"

@@ -42,7 +42,7 @@
     "pixelArcsec": 0.26617,
     "northClockwiseDeg": -0.3
   },
-  "displayModel": "The picture's light lies on two tilted planes through the central star: an inner disc of radius 250 arcsec tilted 23 degrees and the plane of the outer ring, radius 371 arcsec, tilted 53 degrees about another axis. Inside the disc's radius a sight line's light is on the disc, beyond the ring's radius on the ring's plane; between the two radii the planes share it in proportion. Which plane holds a patch of light there is not measured, and neither structure has a thickness here.",
+  "displayModel": "The picture's light lies on two tilted planes through the central star: an inner disc of radius 250 arcsec tilted 23 degrees and the plane of the outer ring, radius 371 arcsec, tilted 53 degrees about another axis. Inside the disc's radius a sight line's light is on the disc, beyond the ring's radius on the ring's plane; between the two radii the planes share it in proportion. Which plane holds a patch of light there is not measured. Each structure is about 100 arcsec deep along the sight line: the smooth part of its light is a glow of that depth about its plane, and the rest, with every detail, lies on the plane.",
   "coverage": "The published frame inside a circle of 770 arcsec about the central star, fading out over its last 7%. The stars Gaia lists in the field are removed before the bake, all but the central star; fainter stars and background galaxies remain, on the nebula's planes whatever their own distances.",
   "acquisition": {
     "url": "https://cdn.esahubble.org/archives/images/large/opo0432d.jpg",

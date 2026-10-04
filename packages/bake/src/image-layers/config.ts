@@ -39,8 +39,10 @@ export interface ImageLayerRecipe {
      * elsewhere. Every value is one a paper prints or states. */
     /** A nebula's published rings (./rings.ts): a filled disc and the ring around it, circles of `radiusArcsec` in two
      * planes through the star, each tilted its own way: the axis `tiltDeg` from the sight line, its far end leaning to
-     * position angle `farAxisPaDeg`. Every value is one a paper prints. */
-    rings?: { source: string; basis: string; disc: { radiusArcsec: number; tiltDeg: number; farAxisPaDeg: number }; ring: { radiusArcsec: number; tiltDeg: number; farAxisPaDeg: number } };
+     * position angle `farAxisPaDeg`. With `lineOfSightThicknessArcsec` each has that much depth along the sight line.
+     * Every value is one a paper prints. */
+    rings?: { source: string; basis: string; disc: { radiusArcsec: number; tiltDeg: number; farAxisPaDeg: number }; ring: { radiusArcsec: number; tiltDeg: number; farAxisPaDeg: number };
+      lineOfSightThicknessArcsec?: number };
     body?: { source: string; basis: string; semiPolarArcsec: number; semiEquatorialArcsec: number; polarTiltDeg: number; polarLeansToPaDeg: number;
       envelope?: { source: string; radiusArcsec: number };
       cavities?: { source: string; emission: number; sizeArcsec: number; farBetweenPaDeg: [number, number] } };
@@ -125,7 +127,8 @@ const ringsOf = (v: unknown): NonNullable<ImageLayerRecipe['geometry']['rings']>
   const r = object(v, 'geometry.rings'), plane = (value: unknown, name: string) => { const q = object(value, name), tilt = finite(q.tiltDeg, `${name}.tiltDeg`); if (!(tilt >= 0 && tilt < 90)) throw new TypeError(`${name}.tiltDeg must be from 0 to under 90; got ${tilt}.`); return { radiusArcsec: positive(q.radiusArcsec, `${name}.radiusArcsec`), tiltDeg: tilt, farAxisPaDeg: finite(q.farAxisPaDeg, `${name}.farAxisPaDeg`) }; };
   const disc = plane(r.disc, 'geometry.rings.disc'), ring = plane(r.ring, 'geometry.rings.ring');
   if (!(ring.radiusArcsec > disc.radiusArcsec)) throw new TypeError(`geometry.rings.ring.radiusArcsec (${ring.radiusArcsec}) must be over the disc's (${disc.radiusArcsec}).`);
-  return { source: text(r.source, 'geometry.rings.source'), basis: text(r.basis, 'geometry.rings.basis'), disc, ring };
+  return { source: text(r.source, 'geometry.rings.source'), basis: text(r.basis, 'geometry.rings.basis'), disc, ring,
+    ...(r.lineOfSightThicknessArcsec === undefined ? {} : { lineOfSightThicknessArcsec: positive(r.lineOfSightThicknessArcsec, 'geometry.rings.lineOfSightThicknessArcsec') }), };
 };
 const bodyOf = (v: unknown): NonNullable<ImageLayerRecipe['geometry']['body']> => {
   const b = object(v, 'geometry.body'), tilt = finite(b.polarTiltDeg, 'geometry.body.polarTiltDeg'), fraction = (value: unknown, name: string) => { const n = finite(value, name); if (!(n > 0 && n < 1)) throw new TypeError(`${name} is a fraction above 0 and under 1; got ${n}.`); return n; };
@@ -221,7 +224,7 @@ export function parseImageLayerRecipe(value: unknown): ImageLayerRecipe {
     bake: { maxFacePixels: positive(b.maxFacePixels, 'maxFacePixels', true), diffuseFacePixels: positive(b.diffuseFacePixels,'diffuseFacePixels',true),
       ...(b.levels===undefined?{}:{levels:levelsOf(b.levels)}),
       ...(b.colorTie===undefined?{}:{colorTie:colorTieOf(b.colorTie)}),
-      ...(g.bulge===undefined&&g.shape===undefined&&g.body===undefined?{}:{bulgeSlices:positive(b.bulgeSlices,'bulgeSlices',true),bulgeFacePixels:positive(b.bulgeFacePixels,'bulgeFacePixels',true),bulgeCrossSlices:positive(b.bulgeCrossSlices,'bulgeCrossSlices',true)}), crossAxisSlices: positive(b.crossAxisSlices, 'crossAxisSlices', true),
+      ...(g.bulge===undefined&&g.shape===undefined&&g.body===undefined&&(g.rings as {lineOfSightThicknessArcsec?:unknown}|undefined)?.lineOfSightThicknessArcsec===undefined?{}:{bulgeSlices:positive(b.bulgeSlices,'bulgeSlices',true),bulgeFacePixels:positive(b.bulgeFacePixels,'bulgeFacePixels',true),bulgeCrossSlices:positive(b.bulgeCrossSlices,'bulgeCrossSlices',true)}), crossAxisSlices: positive(b.crossAxisSlices, 'crossAxisSlices', true),
       crossAxisAlongPixels:positive(b.crossAxisAlongPixels,'crossAxisAlongPixels',true),crossAxisDepthPixels: positive(b.crossAxisDepthPixels, 'crossAxisDepthPixels', true), backgroundFloor,edgeTaperFraction,diffuseFraction,diffuseSigmaPixels:positive(b.diffuseSigmaPixels,'diffuseSigmaPixels'),
       ...(b.flat===undefined?{}:{flat:flatOf(b.flat)}),
       encoding: { format: 'webp', quality, ...(e.alphaQuality===undefined?{}:{alphaQuality:alphaQualityOf(e.alphaQuality)}) } }, provenance: { path: path(p.path) } };
