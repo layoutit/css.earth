@@ -74,8 +74,8 @@ before substituting image-header pointing for such companion tables.
 
 | Source | What to look for | Selection detail |
 | --- | --- | --- |
-| [Zenodo](https://zenodo.org/) | Model output released with a paper: climate-model runs of a named exoplanet, whole-star convection runs of a named supergiant. Search by the object's name. | Read the record's file list and license before downloading. Outputs run from megabytes to tens of gigabytes; take the one field and time mean the view needs. |
-| [THAI, Part II](https://arxiv.org/abs/2109.11459) with the [ExoCAM release](https://doi.org/10.5281/zenodo.5532765) | TRAPPIST-1e under one protocol in four climate models, with one model's mean climate states released as NetCDF. | The four models differ on the same case. The scenario assumes an atmosphere nobody has detected. |
+| [Zenodo](https://zenodo.org/) | Model output released with a paper: climate-model runs of a named exoplanet, whole-star convection runs of a named supergiant. `telescope simulations OBJECT` searches it by the object's names. Zenodo takes any deposit: a listed record is a lead until its paper is read. | Read the record's file list and license before downloading. Outputs run from megabytes to tens of gigabytes; take the one field and time mean the view needs. |
+| [THAI, Part II](https://arxiv.org/abs/2109.11459) with the [ExoCAM release](https://doi.org/10.5281/zenodo.5532765) | TRAPPIST-1e under one protocol in four climate models, with one model's mean climate states released as NetCDF. | The four models differ on the same case. The scenario assumes an atmosphere nobody has detected. The release also holds runs with other radiative transfer and tuning: name the run the paper's figure shows. |
 
 A public code repository usually holds the simulation program and its analysis
 scripts, not the output. Use it to read how a result was made. Apply the
