@@ -13,7 +13,12 @@
  *   from mid-eclipse (Bell et al. 2019, section 3.1; the SPCA form of Bell et al. 2021, section 4.1). F_day is the eclipse depth.
  * - `eclipse-fourier`: F_p = E + C1 (cos psi - 1) + D1 sin psi + C2 (cos 2psi - 1) + D2 sin 2psi with psi counted from mid-eclipse and
  *   every term a fraction of the star's flux (Kempton et al. 2023, Methods eq. 5). E is the eclipse depth.
- *   The last three are the same Fourier series as the first, written from another phase origin or scale, and take the same Cowan &
+ * - `amplitude-offset`: a first-order sinusoid printed as its semi-amplitude A, a fraction of the star's flux, and the offset
+ *   east of its maximum, phi: F_p = E + A [cos(psi + phi) - cos phi] with psi counted from mid-eclipse, so the maximum comes phi
+ *   before eclipse. Bell et al. (2021, section 4.1) print A = F_day sqrt(C1^2 + D1^2) and phi = -atan2(D1, C1) for their
+ *   first-order fits; May et al. (2022, their fit results table) print (max - min)/2 and the offset, positive east. A fit with
+ *   a second-order term is not this form: its printed amplitude and offset do not determine it.
+ *   The last four are the same Fourier series as the first, written from another phase origin or scale, and take the same Cowan &
  *   Agol map.
  * - `spiderman-spherical`: the fit's SPIDERMAN spherical-harmonic coefficients, evaluated by SPIDERMAN itself
  *   (`@cssearth/telescope/node`, spiderman.ts).
@@ -52,7 +57,9 @@ export interface FourierFromTransit { readonly kind: 'fourier-from-transit'; rea
 export interface EclipseNormalizedFourier { readonly kind: 'eclipse-normalized-fourier'; readonly c1: number; readonly d1: number; readonly c2: number; readonly d2: number }
 /** Kempton et al. (2023)'s form: the same terms as Bell's, each a fraction of the star's flux rather than of the eclipse depth. */
 export interface EclipseFourier { readonly kind: 'eclipse-fourier'; readonly c1: number; readonly d1: number; readonly c2: number; readonly d2: number }
-export type FourierPhaseCurve = TwoTermSinusoid | FourierFromTransit | EclipseNormalizedFourier | EclipseFourier;
+/** A first-order sinusoid by its printed semi-amplitude (a fraction of the star's flux) and the offset east of its maximum, in degrees. */
+export interface AmplitudeOffset { readonly kind: 'amplitude-offset'; readonly semiAmplitude: number; readonly offsetDegreesEast: number }
+export type FourierPhaseCurve = TwoTermSinusoid | FourierFromTransit | EclipseNormalizedFourier | EclipseFourier | AmplitudeOffset;
 export interface SpidermanModel { readonly kind: 'spiderman-spherical'; readonly map: SpidermanSphericalMap; readonly dilution: number;
   readonly orbit: { readonly periodDays: number; readonly semiMajorAxisAu: number; readonly semiMajorAxisStellarRadii: number; readonly inclinationDegrees: number } }
 export interface PublishedPhaseCurve {
@@ -122,6 +129,10 @@ export function parsePublishedPhaseCurve(value: unknown): PublishedPhaseCurve {
     parsed = { kind: 'fourier-from-transit', cos1: cell(model.cos1, 'model.cos1'), sin1: cell(model.sin1, 'model.sin1'), cos2: second('cos2'), sin2: second('sin2') };
   } else if (model.kind === 'eclipse-normalized-fourier' || model.kind === 'eclipse-fourier') {
     parsed = { kind: model.kind, c1: cell(model.c1, 'model.c1'), d1: cell(model.d1, 'model.d1'), c2: second('c2'), d2: second('d2') };
+  } else if (model.kind === 'amplitude-offset') {
+    parsed = { kind: 'amplitude-offset', semiAmplitude: cell(model.semiAmplitude, 'model.semiAmplitude'), offsetDegreesEast: cell(model.offsetDegreesEast, 'model.offsetDegreesEast') };
+    if (!(parsed.semiAmplitude > 0)) throw new RangeError('model.semiAmplitude is a positive fraction of the star\'s flux.');
+    if (Math.abs(parsed.offsetDegreesEast) > 90) throw new RangeError('model.offsetDegreesEast lies between -90 and 90 degrees.');
   } else if (model.kind === 'spiderman-spherical') {
     const map = requireRecord(model.spiderman, 'model.spiderman'), orbit = requireRecord(model.orbit, 'model.orbit');
     parsed = { kind: 'spiderman-spherical', dilution: cell(model.dilution, 'model.dilution'),
@@ -190,6 +201,8 @@ function eclipseFourierTerms(model: FourierPhaseCurve, eclipseDepth: number) {
   // The angle from mid-transit is xi + pi, so its first-order cosine and sine change sign and its second-order ones do not.
   if (model.kind === 'fourier-from-transit') return { c1: -model.cos1, d1: -model.sin1, c2: model.cos2, d2: model.sin2 };
   if (model.kind === 'eclipse-fourier') return { c1: model.c1, d1: model.d1, c2: model.c2, d2: model.d2 };
+  // A cos(xi + phi) = A cos phi cos xi - A sin phi sin xi: the maximum lies phi before eclipse, the hot spot phi east of noon.
+  if (model.kind === 'amplitude-offset') { const phi = model.offsetDegreesEast * Math.PI / 180; return { c1: model.semiAmplitude * Math.cos(phi), d1: -model.semiAmplitude * Math.sin(phi), c2: 0, d2: 0 }; }
   return { c1: eclipseDepth * model.c1, d1: eclipseDepth * model.d1, c2: eclipseDepth * model.c2, d2: eclipseDepth * model.d2 };
 }
 
