@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-3847-1538-4365-ac650b",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Koss et al. (2022): BASS. XXVI. DR2 Host Galaxy Stellar Velocity Dispersions",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2207.12435"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-4365/ac650b"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2022ApJS..261....6K"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2022ApJS..261....6K",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-4365/ac650b",
+      "label": "The Astrophysical Journal Supplement Series 261 6"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2022ApJS..261....6K",
+      "checkedOn": "2026-10-04",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Koss et al. (2022), The Astrophysical Journal Supplement Series 261 6",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2022ApJS..261....6K"
+    }
+  ],
+  "publisher": "The Astrophysical Journal Supplement Series 261 6",
+  "creators": [
+    "Michael J. Koss",
+    "Benny Trakhtenbrot",
+    "Claudio Ricci",
+    "et al."
+  ],
+  "publicationDate": "2022"
+}

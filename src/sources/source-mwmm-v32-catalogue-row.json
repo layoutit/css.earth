@@ -1,0 +1,35 @@
+{
+  "id": "source-mwmm-v32-catalogue-row",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "MWMM V32 · mwmm v32 catalogue row",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/mwmm-v32/source/manifest.json",
+      "locator": "/inputs/7"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Gieren et al. (2004), AJ 128, 1167; VizieR J/AJ/128/1167/table1 (CDS)",
+      "scope": "The mwmm v32 catalogue row input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "CDS VizieR catalogue: free use with citation",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

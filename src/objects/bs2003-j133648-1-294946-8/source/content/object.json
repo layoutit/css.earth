@@ -1,0 +1,81 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "bs2003-j133648-1-294946-8",
+  "displayName": "[BS2003] J133648.1-294946.8",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "217 solar radii",
+        "source": {
+          "catalogueId": "arxiv-2002-02186",
+          "url": "https://arxiv.org/abs/2002.02186",
+          "label": "Groenewegen (2020), A&A 635, A33 (2020)",
+          "checked": "2026-10-04",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "4,899,985 parsecs",
+        "source": {
+          "catalogueId": "doi-10-1088-0004-6256-138-2-323",
+          "url": "https://ui.adsabs.harvard.edu/abs/2009AJ....138..323T",
+          "label": "Placed in M83 as the app draws it, where the star's sight line crosses the disc's midplane: 4,899,985 pc (src/objects/m83-layers/source/recipe.json: centre 4,897,788 pc, inclination 24 deg, line of nodes 45 deg). The galaxy's distance, which places the galaxy and not a star within it: Tully2009AJ....138..323T: The Extragalactic Distance Database (https://ui.adsabs.harvard.edu/abs/2009AJ....138..323T); catalogue reference Tully2009AJ....138..323T: 4897788.19368 pc (-67200.1732867/+68135.0208189); unspecified",
+          "checked": "2026-10-04",
+          "path": "source/measurements.json",
+          "locator": "distanceParsecs; distanceSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "color",
+    "controls": [
+      {
+        "id": "color",
+        "label": "Color",
+        "qualification": "Color of a blackbody at the star's temperature; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
+        "thumbnail": "bs2003-j133648-1-294946-8-dataset-color.webp",
+        "surface": "bs2003-j133648-1-294946-8-surface-color@2x.webp",
+        "poles": "bs2003-j133648-1-294946-8-poles-color@2x.webp",
+        "source": {
+          "id": "bs2003-j133648-1-294946-8-stellar-color",
+          "path": "../manifest.json",
+          "url": "https://arxiv.org/abs/2002.02186"
+        },
+        "falseColor": false,
+        "notes": "The color of a blackbody at the star's published temperature. The darkening toward the edge is the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 4,760 K and log g 0.65 (u1 0.695, u2 0.084): a model, because no fit of this star's limb is used. The spin axis's direction on the sky is a display convention."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Bonanos & Stanek (2003), ApJ 591, L111",
+      "href": "https://doi.org/10.26093/cds/vizier.15919111"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://doi.org/10.26093/cds/vizier.15919111",
+      "credit": "Bonanos & Stanek (2003), ApJ 591, L111"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/bs2003-j133648-1-294946-8.json",
+      "credit": "Groenewegen radius; Bonanos & Stanek (2003), ApJ 591, L111 position; cited distance; no measured rotation axis (display convention)"
+    }
+  }
+}
