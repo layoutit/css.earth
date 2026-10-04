@@ -54,3 +54,25 @@ test('a selected satellite overview retains its selected host locator', () => {
   assert.deepEqual([highlighted('saturn'), highlighted('jupiter'), highlighted('mars')], [1, .3, 1]);
   assert.ok(Math.abs(highlighted(other) - .09) < 1e-12);
 });
+
+test('a selected satellite system keeps its host orbit while the host caption is the close-up one', () => {
+  const points = [plan.focus, ...plan.bodies], index = points.findIndex(body => body.id === 'earth'), host = points[index]!;
+  // From where the host's disc resolves (its marker caption fades) to where its marker returns.
+  for (const distanceM of [4e8, 6e8, 8e8, 1.1e9, 1.5e9]) {
+    const view: WorldContextView = {
+      world: { referenceFrame: plan.frame.referenceFrame, epochJdTt: plan.frame.epochJdTt,
+        pose: { positionM: [host.positionM[0], host.positionM[1], host.positionM[2] + distanceM], orientationXyzw: [0, 0, 0, 1] } },
+      viewport: { focalPixels: 1727, widthPixels: 1995, heightPixels: 1236, principalOffsetPixels: [170, 0] },
+      selectedId: host.id, overview: true, overviewSelection: true, navigationInFlight: false, anchorOnly: false,
+      bodies: points.map((body, at) => ({ hovered: false, orbitHidden: false, labelHidden: false, labelSuppressed: at === index,
+        labelSize: { width: body.name.length * 6, height: 14 }, labelShown: false, labelPlacement: 0,
+        indicatorShown: false, indicatorRadius: 8, orbitAppearance: { width: 1, opacity: 1 } })),
+    };
+    const own = createWorldContextPlanner(plan)(view).projectedBodies.find(body => body.index === index)!;
+    assert.equal(own.labelShown, false, `${distanceM} m`);
+    assert.ok(own.orbitVisibility > 0 && own.segments.length > 0, `host orbit at ${distanceM} m`);
+    // A plain overview selects no body: an unnamed body's on-screen path still retires with its caption.
+    const plain = createWorldContextPlanner(plan)({ ...view, overviewSelection: false }).projectedBodies.find(body => body.index === index)!;
+    assert.equal(plain.orbitVisibility, 0, `plain overview at ${distanceM} m`);
+  }
+});
