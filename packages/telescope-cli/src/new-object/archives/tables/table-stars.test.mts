@@ -5,7 +5,9 @@
 import assert from 'node:assert/strict';
 import { resolve } from 'node:path';
 import { sourceTest } from '@cssearth/objects/node/source-test';
-import { catalogueRowForm, catalogueRowUrl, parseCatalogueRow, rowArchive, SIMBAD_TAP, VIZIER_ASU, type Archive } from '../archives.mts';
+import { catalogueRowForm, catalogueRowUrl, parseCatalogueRow, rowArchive, sexagesimal, SIMBAD_TAP, VIZIER_ASU, type Archive } from '../archives.mts';
+import { relationCepheidDraft } from '../sh0es.mts';
+import { loadSolarEpoch } from '../../solar-epoch.mts';
 import { citedRow } from '../../identity.mts';
 import { parseStarSpec } from '../../spec.mts';
 import { bibcodeReference, draftsFromTable, paperCredit, parseTableRequest, pickRows, placeInGalaxy, readGalaxy, TABLE_CLASSES } from './table-stars.mts';
@@ -171,12 +173,44 @@ test('a table that gives every row its galaxy\'s centre places its stars by the 
   assert.deepEqual(held, { origin: SIMBAD_TAP, credit: 'SIMBAD (CDS; Wenger et al. 2000, A&AS 143, 9)', license: 'CDS SIMBAD database: free use with acknowledgement', licenseEvidence: ['https://cds.unistra.fr/help/acknowledgement/'],
     page: 'https://simbad.cds.unistra.fr/simbad/sim-id?Ident=%5BGPF97%5D%20c01', acquisition: 'SIMBAD TAP query in source/preparation/acquisition.json: basic row main_id = [GPF97] c01, its position and the paper SIMBAD names for it.',
     path: 'photometry/catalogue-row.tsv', input: 'catalogue-row', kept: 'row', keeper: 'CDS, Strasbourg', redistribution: 'One catalogue row, retained unchanged with its credit.' });
-  assert.deepEqual([operation.kind, operation.url, operation.requiredText], ['request-download', SIMBAD_TAP, ['ra', '[GPF97] c01']]);
+  assert.deepEqual([operation!.kind, operation!.url, operation!.requiredText], ['request-download', SIMBAD_TAP, ['ra', '[GPF97] c01']]);
   assert.throws(() => parseCatalogueRow('main_id\tra\tdec\tcoo_bibcode\n', spec.position!, 'test'), /test: SIMBAD basic row main_id = \[GPF97\] c01 matches 0 rows, not one; main_id is the name as SIMBAD writes it, spaces included/u);
   assert.deepEqual(citedRow('Kanbur et al. (2003) (https://x), SIMBAD basic row main_id = [GPF97] c01: ra 160.97075, dec 11.68'), { table: 'basic', key: 'main_id = [GPF97] c01' }, 'a second package for the same SIMBAD object is a duplicate');
   assert.throws(() => parseStarSpec({ ...stars[0] as object, position: { ...spec.position, catalogue: 'J/A+A/411/361/table1' } }), /a SIMBAD position is \{ "archive": "simbad", "catalogue": "basic", "row": \{ "main_id": NAME \} \}, with no columns or motion/u);
-  assert.throws(() => parseStarSpec({ ...stars[0] as object, position: { ...spec.position, archive: 'ned' } }), /position\.archive is "simbad", "mast" or absent \(a VizieR table\), not "ned"/u);
+  assert.throws(() => parseStarSpec({ ...stars[0] as object, position: { ...spec.position, archive: 'ned' } }), /position\.archive is "simbad", "mast", "paper" or absent \(a VizieR table\), not "ned"/u);
   // SIMBAD does not know the name the table gives: the row cannot be placed.
   const unknown = answering([['-meta.all', kanburMeta], ['/ReadMe', kanburReadMe], ['rvz_radvel', 'rvz_radvel,rvz_err,rvz_bibcode\n779.0,3.0,"2022ApJS..261...21Y"\n'], ["n.id = '[GPF97] c1'", 'main_id\tra\tdec\tcoo_bibcode\n'], [KANBUR, kanburRows]]);
   await assert.rejects(draftsFromTable([`cepheid:m95=${KANBUR}`], unknown, root), /Galaxy = NGC3351, Cepheid = C1: SIMBAD holds no position for SName = "\[GPF97\] c1", and the table gives the row none of its own/u);
+});
+
+test('a star whose paper prints its coordinates in a table no archive holds is placed at them, cited by its DOI, with nothing archived', async () => {
+  // Markham et al. (2026), ApJ 1000, 78, Appendix A, as its arXiv source (2602.22407) prints the row of ID 124: neither VizieR nor SIMBAD held it on 2026-10-04.
+  const paper = { url: 'https://doi.org/10.3847/1538-4357/ae47d8', credit: 'Markham et al. (2026), ApJ 1000, 78' };
+  const position = { archive: 'paper' as const, catalogue: '10.3847/1538-4357/ae47d8', row: { ID: '124', RA: '12:21:55.068', Dec: '+04:29:12.310' }, columns: { ra: 'RA', dec: 'Dec' }, credit: `${paper.credit}, Appendix A`, url: paper.url };
+  assert.ok(Math.abs(sexagesimal('12:21:55.068') * 15 - 185.47945) < 1e-9 && Math.abs(sexagesimal('+04:29:12.310') - 4.48675278) < 1e-8);
+  assert.ok(Math.abs(sexagesimal('-00:01:22.600') + 0.02294444) < 1e-8, 'a declination of -00 degrees stays south');
+  const galaxy = await readGalaxy(root, 'm61'), velocity = { value: 1566, uncertainty: 2, source: "SIMBAD's radial velocity of M61", url: 'https://ui.adsabs.harvard.edu/abs/2022ApJS..261....6K/abstract' };
+  const draft = relationCepheidDraft({ id: 'ngc-4303-cepheid-124', name: 'NGC 4303 Cepheid 124', galaxy: galaxy.name, inside: galaxy.id, periodDays: 68.17, paper, position, periodSource: `${paper.credit}, Appendix A (ID 124: P 68.17 d)`,
+    description: 'A Cepheid in the galaxy M61 that pulsates every 68.2 days.', distance: placeInGalaxy(galaxy, 185.47945, 4.48675278, 'NGC 4303 Cepheid 124'), velocity,
+    text: { card: 'A Cepheid in the galaxy M61 that swells and shrinks every 68.2 days.', introduction: 'Markham et al. (2026) list its pulsation at 68.2 days.', locator: 'Appendix A, ID 124: P' } });
+  const spec = parseStarSpec({ ...draft, limb: { none: 'a test fixture' } });
+  assert.deepEqual([spec.position, spec.target], [position, undefined]);
+  const wrong = (change: Record<string, unknown>) => () => parseStarSpec({ ...draft, position: { ...position, ...change } });
+  assert.throws(wrong({ row: { ID: '124', RA: '185.47945', Dec: '+04:29:12.310' } }), /a paper's position is \{ "archive": "paper", "catalogue": DOI, .* as printed \(hh:mm:ss\.s and a signed dd:mm:ss\.s\)/u);
+  assert.throws(wrong({ row: { RA: '12:21:55.068', Dec: '+04:29:12.310' } }), /the row's name and its coordinates as printed/u);
+  assert.throws(wrong({ catalogue: 'J/ApJ/1000/78' }), /position\.catalogue is the paper's DOI \(10\.3847\/1538-4357\/ae47d8\), not J\/ApJ\/1000\/78/u);
+  const crossref = JSON.stringify({ message: { title: ['Cepheid-based Distances to NGC 4303 and NGC 1068'], issued: { 'date-parts': [[2026, 3, 13]] }, author: [{ given: 'M.', family: 'Markham' }], 'container-title': ['The Astrophysical Journal'], volume: '1000', page: '78' } });
+  const archive = answering([['api.crossref.org', crossref], ['export.arxiv.org', '<feed><entry><title>A paper</title><published>2020-02-06T00:00:00Z</published><author><name>M Groenewegen</name></author></entry></feed>']]);
+  const { generateStar } = await import('../../generate.mts');
+  const generated = await generateStar(spec, { archive, root, order: 9995, universe: { ids: new Set(), names: new Map(), stars: [] }, solarEpoch: await loadSolarEpoch(root), resolver: async () => { throw new Error('a star placed by its paper is not resolved through SIMBAD'); } });
+  const o = `src/objects/${spec.id}`, files = generated.files, manifest = JSON.parse(String(files.get(`${o}/source/manifest.json`))), plan = JSON.parse(String(files.get(`${o}/source/preparation/acquisition.json`)));
+  assert.ok(!manifest.inputs.some((input: { consumers?: string[] }) => input.consumers?.includes('placement')), 'no file is kept for the placement');
+  assert.ok(!plan.operations.some((operation: { path?: string } | null) => !operation || /catalogue-row|exposure-header/u.test(operation.path ?? '')), 'and nothing is fetched again for it');
+  assert.ok(![...files.keys()].some(file => /catalogue-row|exposure-header|gaia-dr3-source/u.test(file)));
+  const body = JSON.parse(String(files.get(`packages/astronomy/data/bodies/${spec.id}.json`)));
+  assert.ok(Math.abs(body.star.rightAscensionDegrees - 185.47945) < 1e-9 && Math.abs(body.star.declinationDegrees - 4.48675278) < 1e-8);
+  assert.match(body.star.sources.position, /^Markham et al\. \(2026\), ApJ 1000, 78, Appendix A \(https:\/\/doi\.org\/10\.3847\/1538-4357\/ae47d8\), DOI 10\.3847\/1538-4357\/ae47d8 row ID = 124, RA = 12:21:55\.068, Dec = \+04:29:12\.310: RA 185\.4794\d+, Dec 4\.4867\d+, as the paper prints them$/u);
+  // The row's key holds colons of its own: it ends at the colon a space follows, so the same row twice is one star.
+  assert.deepEqual(citedRow(body.star.sources.position), { table: '10.3847/1538-4357/ae47d8', key: 'ID = 124, RA = 12:21:55.068, Dec = +04:29:12.310' });
+  assert.match(String(files.get(`${o}/NOTICE.md`)), /Placement: position from Markham et al\. \(2026\), ApJ 1000, 78, Appendix A, DOI 10\.3847\/1538-4357\/ae47d8 row [^(]+\(as the paper prints them\); distance:/u);
 });

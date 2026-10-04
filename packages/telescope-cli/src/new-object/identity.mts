@@ -47,8 +47,9 @@ const normal = (name: string) => name.normalize('NFKD').replace(/[̀-ͯ]/gu, '')
 /** `row` is the VizieR table and row a catalogue-placed star cites (CatalogueRow.words without its "VizieR"), or the archived image and pixel. */
 interface Placed { readonly id: string; readonly ra: number; readonly dec: number; readonly epoch: number; readonly pmra: number; readonly pmdec: number; readonly row?: { readonly table: string; readonly key: string } }
 /** The table and row an astronomy record's position cites, as generate.mts writes it ("VizieR J/ApJ/830/10/table5 row Gal = N4536, ID = 38676:"),
- * or the image and pixel ("MAST mast:HST/product/u6fv0101m_c0m.fits pixel extension = SCI,1, x = 584.5, y = 490.2, first pixel centre = 0.5:"). */
-export const citedRow = (position: string) => { const match = /(?:VizieR|SIMBAD|MAST) (\S+) (?:row|pixel) ([^:]+):/u.exec(position); return match ? { table: match[1]!, key: match[2]! } : undefined; };
+ * or the image and pixel ("MAST mast:HST/product/u6fv0101m_c0m.fits pixel extension = SCI,1, x = 584.5, y = 490.2, first pixel centre = 0.5:"),
+ * or a paper's row ("DOI 10.3847/1538-4357/ae47d8 row ID = 124, RA = 12:21:55.068, Dec = +04:29:12.310:": its key ends at the colon a space follows). */
+export const citedRow = (position: string) => { const match = /(?:VizieR|SIMBAD|MAST|DOI) (\S+) (?:row|pixel) (.+?):(?: |$)/u.exec(position); return match ? { table: match[1]!, key: match[2]! } : undefined; };
 /** What the universe already holds: ids, the normalized names of every record, and where every placed star is. */
 export interface Existing { readonly ids: ReadonlySet<string>; readonly names: ReadonlyMap<string, string>; readonly stars: readonly Placed[];
   /** Placed stars by the Gaia DR3 source their position cites, and every package's system name. */

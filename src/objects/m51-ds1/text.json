@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "m51-ds1",
+  "card": {
+    "text": "A cool supergiant in the Whirlpool Galaxy that dimmed more than sixfold by 2019 and then recovered.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-4357-ac626c",
+        "url": "https://doi.org/10.3847/1538-4357/ac626c",
+        "label": "Jencson et al. (2022), The Astrophysical Journal 930 81",
+        "checked": "2026-10-04",
+        "locator": "abstract (the dimming and the rebrightening); section 4.4.1: T_eff, log(L/L_sun)"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Jencson et al. (2022) found it in a Hubble search for stars that vanish. Its light fits a star of 4,300 K, about 400,000 times as luminous as the Sun.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-4357-ac626c",
+        "url": "https://doi.org/10.3847/1538-4357/ac626c",
+        "label": "Jencson et al. (2022), The Astrophysical Journal 930 81",
+        "checked": "2026-10-04",
+        "locator": "abstract (the dimming and the rebrightening); section 4.4.1: T_eff, log(L/L_sun)"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its temperature",
+      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

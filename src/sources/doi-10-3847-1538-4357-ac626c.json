@@ -1,0 +1,43 @@
+{
+  "id": "doi-10-3847-1538-4357-ac626c",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Jencson et al. (2022): An Exceptional Dimming Event for a Massive, Cool Supergiant in M51",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-4357/ac626c"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://doi.org/10.3847/1538-4357/ac626c",
+      "label": "Publisher"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://doi.org/10.3847/1538-4357/ac626c",
+      "checkedOn": "2026-10-04",
+      "locator": "Crossref record: title, authors, container"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Jencson et al. (2022), The Astrophysical Journal 930 81",
+      "scope": "citation",
+      "evidence": "https://doi.org/10.3847/1538-4357/ac626c"
+    }
+  ],
+  "publisher": "The Astrophysical Journal 930 81",
+  "creators": [
+    "Jacob E. Jencson",
+    "David J. Sand",
+    "Jennifer E. Andrews",
+    "et al."
+  ],
+  "publicationDate": "2022"
+}
