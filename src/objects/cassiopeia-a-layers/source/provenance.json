@@ -1,0 +1,54 @@
+{
+  "schema": "cssearth-image-layer-provenance@1",
+  "title": "Cas A (NIRCam image)",
+  "publisher": "ESA/Webb",
+  "sourceId": "weic2330a",
+  "sourcePage": "https://esawebb.org/images/weic2330a/",
+  "download": "https://cdn.esawebb.org/archives/images/publicationjpg/weic2330a.jpg",
+  "credit": "NASA, ESA, CSA, STScI, D. Milisavljevic (Purdue University), T. Temim (Princeton University), I. De Looze (University of Gent)",
+  "license": "CC-BY-4.0",
+  "original": {
+    "dimensions": [
+      11694,
+      13392
+    ],
+    "bands": [
+      "Webb",
+      "NIRCam",
+      "1.62 µm",
+      "3.56 µm",
+      "4.44 µm"
+    ],
+    "fieldOfViewDeg": [
+      0.1014261,
+      0.1161534
+    ]
+  },
+  "checkedSource": {
+    "kind": "Published JPEG",
+    "dimensions": [
+      3493,
+      4000
+    ]
+  },
+  "geometryEvidence": {
+    "inclinationDeg": 0.008361,
+    "lineOfNodesPaDeg": 9.165,
+    "reference": "A picture of the sky: the plane is the picture's own tangent plane, perpendicular to the sight line through the picture's centre, so it faces the Sun. That centre is 30.1 arcsec from the expansion centre, which is the whole of the recipe's inclination. Not a measured orientation of the remnant."
+  },
+  "registration": {
+    "method": "The file's embedded sky tags: 0.0312 arcsec per pixel of the 11694 × 13392 px original (0.1045 of the 3493 × 4000 px file drawn), north 27.16° right of vertical, the frame's centre at 350.8497673°, 58.815054°.",
+    "pixelArcsec": 0.1045,
+    "northClockwiseDeg": 27.16
+  },
+  "displayModel": "The picture's smooth light, the picture blurred over 4.6 arcsec, lies on the forward shock, a sphere of 153 arcsec about the expansion centre. One picture cannot tell the sphere's two halves apart, and two copies of one picture come apart from any camera nearer than the Sun: so the halves share only the light's broad part, the picture blurred over 37 arcsec, half each, and the half behind the picture's plane holds the rest. The plane faces the Sun through the centre of the shell DeLaney et al. (2010) fit to the [Ar II] ejecta. Where that paper's model has [Ar II] ejecta within about 9 arcsec, the picture's fine detail lies on two surfaces of its own: one in front of the plane at the depth of the approaching ejecta there, one behind it at the depth of the receding ones, each taking the share of the detail that the measurements on its side hold. A depth is a speed times 0.022 arcsec per km/s. The fine detail nothing measures stays on the plane. The surfaces are meshes of flat patches.",
+  "coverage": "The published frame inside a circle about the expansion centre: the picture fades out between 147 and 153 arcsec, the largest circle the frame holds, so no straight edge shows. The circle is the forward shock's outline (DeLaney et al. 2010, Sect. IV.1); the north-east jet beyond it is not drawn. Its stars are removed before the bake by NOX, which predicts the light under a star and does not measure it; the brightest stars stay, with their spikes.",
+  "acquisition": {
+    "url": "https://cdn.esawebb.org/archives/images/publicationjpg/weic2330a.jpg",
+    "dimensions": [
+      3493,
+      4000
+    ],
+    "operation": "Download the publisher's publication JPEG; no crop or resample. Stars removed by NOX, the remnant's knots kept by their color."
+  }
+}

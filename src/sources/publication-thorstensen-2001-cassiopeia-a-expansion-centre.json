@@ -1,0 +1,39 @@
+{
+  "id": "publication-thorstensen-2001-cassiopeia-a-expansion-centre",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "The Expansion Center and Dynamical Age of the Galactic Supernova Remnant Cassiopeia A",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "astro-ph/0104188"
+    },
+    {
+      "type": "doi",
+      "value": "10.1086/321138"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/astro-ph/0104188",
+      "label": "Published reference"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/astro-ph/0104188",
+      "checkedOn": "2026-10-04",
+      "locator": "Abstract: expansion center alpha = 23h 23m 27.77s ± 0.05s, delta = 58° 48' 49.4\" ± 0.4\" (ICRS), from the proper motions of 21 main-shell and 17 outer knots; it lies 6.6 ± 1.5 arcsec almost due north of the central X-ray point source; a distance of 3.4 kpc; knot convergent date A.D. 1671.3 ± 0.9, assuming no deceleration."
+    }
+  ],
+  "creators": [
+    "Thorstensen, J. R.",
+    "Fesen, R. A.",
+    "van den Bergh, S."
+  ],
+  "publisher": "AJ 122, 297",
+  "publicationDate": "2001",
+  "relations": [],
+  "statements": []
+}

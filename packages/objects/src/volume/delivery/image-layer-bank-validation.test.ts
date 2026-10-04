@@ -34,3 +34,21 @@ test('rejects an image-layer bank without a positive sampling interval', () => {
   input.banks[0]!.samplingStepUnits = 0;
   assert.throws(() => validatePreparedImageLayerBank(input), /prepared plane normals and sampling intervals/);
 });
+
+test('a stack names the runs of its leaves that share a 3D scene, and they add up to its leaves', () => {
+  const input = valid();
+  (input.banks[2] as { scenes?: number[] }).scenes = [1];
+  assert.deepEqual(validatePreparedImageLayerBank(input).bankViews[2], { axis: 'z', normalUnits: [0, 0, 1], samplingStepUnits: 0.5, sceneSizes: [1] });
+  assert.equal(validatePreparedImageLayerBank(input).bankViews[0]!.sceneSizes, undefined);
+  for (const scenes of [[2], [], [0, 1], [0.5, 0.5], 'one']) {
+    const wrong = valid();
+    (wrong.banks[2] as { scenes?: unknown }).scenes = scenes;
+    assert.throws(() => validatePreparedImageLayerBank(wrong), /Image-layer stack z: its scenes are positive whole numbers of leaves that add up to its 1 leaves/);
+  }
+});
+
+test('a stack may hold no leaves', () => {
+  const input = valid();
+  input.banks[0]!.leaves = [];
+  assert.deepEqual(validatePreparedImageLayerBank(input).stacks[0], { axis: 'x', leaves: [] });
+});

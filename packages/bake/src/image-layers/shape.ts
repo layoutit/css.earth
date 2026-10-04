@@ -89,13 +89,21 @@ export function imageLayerShapeModel(shape: Shape, speeds: readonly (readonly [n
   const tilt = rad(ring.polarTiltDeg), lean = rad(ring.polarLeansToPaDeg);
   /** How far along the sight line, from the star, the shells' equatorial plane is met at a sky offset. */
   const flatDepth = (east: number, north: number) => Math.tan(tilt) * (east * Math.sin(lean) + north * Math.cos(lean));
+  // The measurements by place, in squares as wide as a bell reaches: a table may hold thousands of them.
+  const cell = shape.speeds ? 3 * shape.speeds.reachArcsec : 1, cellKey = (i: number, j: number) => (i + 32768) * 65536 + j + 32768, cells = new Map<number, (readonly [number, number, number])[]>();
+  for (const row of speeds) { const at = cellKey(Math.floor(row[0] / cell), Math.floor(row[1] / cell)), held = cells.get(at); if (held) held.push(row); else cells.set(at, [row]); }
   /** The mean of the measured speeds around a place, each weighted by a bell of `reachArcsec`, and how well the place
-   * is known: farther than twice that reach from every measurement nothing is. */
-  const measuredAt = (east: number, north: number, reaches = 1): { speed: number; known: number } => {
-    const measured = shape.speeds; if (!measured || !speeds.length) return { speed: 0, known: 0 };
-    const reach2 = (reaches * measured.reachArcsec) ** 2; let sum = 0, weight = 0;
-    for (const [e, n, speed] of speeds) { const apart = (e - east) * (e - east) + (n - north) * (n - north); if (apart > 9 * reach2) continue; const bell = Math.exp(-apart / (2 * reach2)); sum += bell * speed; weight += bell; }
-    return weight > 0 ? { speed: sum / weight, known: Math.min(1, weight / Math.exp(-2)) } : { speed: 0, known: 0 };
+   * is known: farther than twice that reach from every measurement nothing is. With it, the mean of the approaching
+   * speeds alone and of the receding ones alone (null where there is none), and the receding ones' share of the weight. */
+  type Measured = { speed: number; known: number; toward: number | null; away: number | null; back: number };
+  const nothing: Measured = { speed: 0, known: 0, toward: null, away: null, back: 0 }; let last: { east: number; north: number; reaches: number; found: Measured } | null = null;
+  const measuredAt = (east: number, north: number, reaches = 1): Measured => {
+    const measured = shape.speeds; if (!measured || !speeds.length) return nothing;
+    if (last && last.east === east && last.north === north && last.reaches === reaches) return last.found;
+    const reach2 = (reaches * measured.reachArcsec) ** 2, i = Math.floor(east / cell), j = Math.floor(north / cell); let sum = 0, weight = 0, behind = 0, behindWeight = 0;
+    for (let dj = -reaches; dj <= reaches; dj++) for (let di = -reaches; di <= reaches; di++) for (const [e, n, speed] of cells.get(cellKey(i + di, j + dj)) ?? []) { const apart = (e - east) * (e - east) + (n - north) * (n - north); if (apart > 9 * reach2) continue; const bell = Math.exp(-apart / (2 * reach2)); sum += bell * speed; weight += bell; if (speed >= 0) { behind += bell * speed; behindWeight += bell; } }
+    const found: Measured = weight > 0 ? { speed: sum / weight, known: Math.min(1, weight / Math.exp(-2)), toward: weight > behindWeight ? (sum - behind) / (weight - behindWeight) : null, away: behindWeight > 0 ? behind / behindWeight : null, back: behindWeight / weight } : nothing;
+    last = { east, north, reaches, found }; return found;
   };
   /** Whether the walls need a place for detail between them: measured speeds or a star say where it is. */
   const between = Boolean(shape.speeds && speeds.length) || shape.starRadiusArcsec !== undefined;
@@ -114,11 +122,16 @@ export function imageLayerShapeModel(shape: Shape, speeds: readonly (readonly [n
   const innerTurn = inner ? rad(inner.majorPaDeg) : 0;
   /** How far a sky offset is from the star against the inner shell's outline: 1 on it. */
   const innerRadii = (east: number, north: number) => inner ? Math.hypot((east * Math.sin(innerTurn) + north * Math.cos(innerTurn)) / inner.semiMajorArcsec, (east * Math.cos(innerTurn) - north * Math.sin(innerTurn)) / inner.semiMinorArcsec) : Infinity;
-  const detail = (east: number, north: number, near: number, far: number): { near: number; far: number; mid: number; at: number; walls: number } => {
+  const detail = (east: number, north: number, near: number, far: number): { near: number; far: number; mid: number; at: number; walls: number; lifted?: { near: number; far: number } } => {
     const plane = Math.max(near, Math.min(far, flatDepth(east, north)));
     // The star's light is all its own out to its radius, and less and less so out to twice that.
     const from = shape.starRadiusArcsec ? Math.hypot(east, north) / shape.starRadiusArcsec : Infinity, t = Math.max(0, Math.min(1, 2 - from)), star = t * t * (3 - 2 * t);
-    const measured = shape.speeds, inside = !measured || Boolean(innerWalls && innerWalls[0]!.span(east, north)), { speed, known } = measuredAt(east, north, inside ? 1 : SURFACE_REACH);
+    const measured = shape.speeds;
+    // A speed that is its own depth: what is measured at a place lies on two surfaces of its own (`lifted`), in front of
+    // the star's plane at the depth of the approaching speeds there and behind it at the depth of the receding ones, in
+    // the shares of the two. What no speed places is the shell's: its smooth light on the walls, its detail on the plane.
+    if (measured?.depth === 'speed') { const found = measuredAt(east, north); return { near: found.known * (1 - found.back), far: found.known * found.back, mid: 1 - found.known, at: plane, walls: 1, lifted: { near: found.toward === null ? 0 : depth(found.toward), far: found.away === null ? 0 : depth(found.away) } }; }
+    const inside = !measured || Boolean(innerWalls && innerWalls[0]!.span(east, north)), { speed, known } = measuredAt(east, north, inside ? 1 : SURFACE_REACH);
     if (!measured || inside) {
       const behind = measured ? known * Math.max(0, Math.min(1, (speed + measured.restKmS) / (2 * measured.restKmS))) : 0;
       return { near: (1 - behind) * (1 - star), far: behind * (1 - star), mid: star, at: plane, walls: 1 };
@@ -156,4 +169,18 @@ export function lowerEnvelope(values: Float32Array, width: number, height: numbe
   if (!(Number.isInteger(radius) && radius >= 1)) throw new RangeError(`The envelope's radius is a whole number of pixels, at least 1; got ${radius}.`);
   const smallest: Fold = read => { let value = Infinity; for (let offset = -radius; offset <= radius; offset++) value = Math.min(value, read(offset)); return value; };
   return smoothed(pass(pass(values, width, height, true, smallest), width, height, false, smallest), width, height, radius);
+}
+
+/** A map blurred `BROAD_TIMES` times farther than `radius` pixels: the means of squares `BROAD_TIMES` pixels across, blurred over
+ * `radius` of them, read back between the squares' middles. */
+export const BROAD_TIMES = 8;
+export function broadLight(values: Float32Array, width: number, height: number, radius: number): Float32Array {
+  const columns = Math.ceil(width / BROAD_TIMES), rows = Math.ceil(height / BROAD_TIMES), small = new Float32Array(columns * rows);
+  for (let row = 0; row < rows; row++) for (let column = 0; column < columns; column++) { let sum = 0, count = 0;
+    for (let y = row * BROAD_TIMES; y < Math.min(height, (row + 1) * BROAD_TIMES); y++) for (let x = column * BROAD_TIMES; x < Math.min(width, (column + 1) * BROAD_TIMES); x++) { sum += values[y * width + x]!; count++; }
+    small[row * columns + column] = sum / count; }
+  const blurred = smoothed(small, columns, rows, radius), output = new Float32Array(width * height);
+  for (let y = 0; y < height; y++) for (let x = 0; x < width; x++) { const u = Math.max(0, Math.min(columns - 1, (x + .5) / BROAD_TIMES - .5)), v = Math.max(0, Math.min(rows - 1, (y + .5) / BROAD_TIMES - .5)), i = Math.min(columns - 2, Math.floor(u)), j = Math.min(rows - 2, Math.floor(v)), a = u - i, b = v - j;
+    output[y * width + x] = (1 - b) * ((1 - a) * blurred[j * columns + i]! + a * blurred[j * columns + i + 1]!) + b * ((1 - a) * blurred[(j + 1) * columns + i]! + a * blurred[(j + 1) * columns + i + 1]!); }
+  return output;
 }

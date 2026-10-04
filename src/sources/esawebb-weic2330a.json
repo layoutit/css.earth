@@ -1,0 +1,52 @@
+{
+  "id": "esawebb-weic2330a",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Cas A (NIRCam image)",
+  "identifiers": [
+    {
+      "type": "ESA/Webb image",
+      "value": "weic2330a"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://esawebb.org/images/weic2330a/",
+      "label": "Published source"
+    },
+    {
+      "role": "original",
+      "url": "https://cdn.esawebb.org/archives/images/publicationjpg/weic2330a.jpg",
+      "label": "Publication JPEG, 3493 x 4000 px"
+    },
+    {
+      "role": "rights",
+      "url": "https://esawebb.org/copyright/",
+      "label": "Reuse terms"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://esawebb.org/images/weic2330a/",
+      "checkedOn": "2026-10-04",
+      "locator": "11694 x 13392 px over 6.09 × 6.97 arcmin; NIRCam 1.62, 3.56 and 4.44 µm; released 11 December 2023. The file's embedded sky tags: 0.0312 arcsec per pixel of the 11694 × 13392 px original (0.1045 of the 3493 × 4000 px file drawn), north 27.16° right of vertical, the frame's centre at 350.8497673°, 58.815054°."
+    }
+  ],
+  "publisher": "ESA/Webb",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "NASA, ESA, CSA, STScI, D. Milisavljevic (Purdue University), T. Temim (Princeton University), I. De Looze (University of Gent)",
+      "scope": "Published source",
+      "evidence": "https://esawebb.org/images/weic2330a/"
+    },
+    {
+      "kind": "rights",
+      "text": "Creative Commons Attribution 4.0 International; the full credit must be shown.",
+      "scope": "Published source",
+      "evidence": "https://esawebb.org/copyright/"
+    }
+  ]
+}

@@ -28,6 +28,8 @@ output/playwright/
 src/objects/*/source/**/*.csv
 # LGGS M31 star table (12.5 MB); restored from its CDS origin (src/objects/m31-layers/source/lggs-stars/points.json).
 src/objects/m31-layers/source/lggs-stars/table4.dat.gz
+# Cassiopeia A's depth table (10,632 rows); built by packages/bake/authoring/cassiopeia-a/ejecta-speeds.mts, restored from the source mirror.
+src/objects/cassiopeia-a-layers/source/ejecta-speeds.dat
 # Earth's dated NASA MUR tile archives (45 MB a day); restored from the source mirror (src/objects/earth/source/manifest.json).
 src/objects/earth/source/science/mur/*/tiles.tar.gz
 src/objects/*/source/**/*.fits
