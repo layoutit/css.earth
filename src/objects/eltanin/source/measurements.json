@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "eltanin",
+  "angularDiameterMas": 10.18,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 36,037,260 km at 47.30 pc = 10.18 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 47.304,
+  "distanceSource": "Baines et al. (2021), AJ 162, 198, HD 164058: the Hipparcos (van Leeuwen 2007) parallax the radius was computed with (Table 1), 21.14 +/- 0.1 mas, inverted (https://doi.org/10.3847/1538-3881/ac2431): 47.304 +/- 0.224 pc; Gaia DR3 cannot see the star",
+  "radiusKm": 36037260,
+  "radiusSource": "Radius 51.8 +/- 0.26 solar radii from Baines et al. (2021), AJ 162, 198, HD 164058: radius 51.8 +/- 0.26 solar radii (Table 5), from the limb-darkened angular diameter 10.19 +/- 0.015 mas (NPOI, Table 4) and the Hipparcos (van Leeuwen 2007) parallax (https://doi.org/10.3847/1538-3881/ac2431): 36,037,260 km at 695,700 km per solar radius. No mass is measured, so GM is 0, the records' unpublished value. Temperature 3964 +/- 34 K from Baines et al. (2021), AJ 162, 198, HD 164058: effective temperature 3964 +/- 34 K (Table 5), from the angular diameter and the bolometric flux of the SED fit (https://doi.org/10.3847/1538-3881/ac2431). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 3964,
+  "effectiveTemperatureSource": "Baines et al. (2021), AJ 162, 198, HD 164058: effective temperature 3964 +/- 34 K (Table 5), from the angular diameter and the bolometric flux of the SED fit (https://doi.org/10.3847/1538-3881/ac2431)",
+  "surfaceGravityLogg": 1.64,
+  "surfaceGravitySource": "Baines et al. (2021), AJ 162, 198, HD 164058: log g 1.64, from Prugniel et al. (2011), as the paper lists it beside the diameter (Table 4) (https://doi.org/10.3847/1538-3881/ac2431)",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, colored from the star's measured spectrum (HST/STIS Next Generation Spectral Library v2 (Heap & Lindler; MAST high-level science product), HD 164058) (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

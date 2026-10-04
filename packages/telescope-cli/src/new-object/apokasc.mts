@@ -33,7 +33,8 @@ export function draftFromApokasc(row: ReturnType<typeof parseApokascRow>) {
     source: `${APOKASC.credit}, table4, KIC ${row.kic} (${row.category}): ${what} ${value} +/- ${uncertainty}`, url: APOKASC.paper });
   const radius = cite(row.radius, 'Radius (Mosser scale, solar radii)'), mass = cite(row.mass, 'Mass (Mosser scale, solar masses)');
   return {
-    id: `kic-${row.kic}`, name: `KIC ${row.kic}`, system: `KIC ${row.kic} system`, target: `KIC ${row.kic}`, gaia: row.gaia,
+    // The Kepler field's giants are stars of the Milky Way.
+    id: `kic-${row.kic}`, name: `KIC ${row.kic}`, system: `KIC ${row.kic} system`, parent: 'milky-way', target: `KIC ${row.kic}`, gaia: row.gaia,
     description: `${STATE[row.state] ?? 'A giant'} in the Kepler field, ${radius.value.toFixed(1)} solar radii and ${mass.value.toFixed(2)} solar masses, weighed by its oscillations.`.replace(/^./u, letter => letter.toUpperCase()),
     paper: { url: APOKASC.paper, credit: APOKASC.credit },
     radius, mass, temperature: { ...cite(row.teff, 'APOGEE effective temperature (K)'), value: Math.round(row.teff[0]), uncertainty: Math.round(row.teff[1]) },

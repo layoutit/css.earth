@@ -67,7 +67,7 @@ allocates large backing surfaces for tiny projected faces. `createLeafBoxBlocks.
 prepared levels while detached; after connection, `publish()` keeps the existing motion freeze and paced settling.
 No new geometry, texture or device-specific level policy is introduced.
 
-The connection-order regression uses Neptune's real prepared groups in `integration/renderer-bake/src/contract/object-selection-runtime.test.mts`.
+The connection-order regression uses Neptune's real prepared groups in `packages/renderer/src/rendering/object-selection-runtime.test.mts`.
 The leaf-box unit test checks initial selection, unchanged repeated preparation and the subsequent motion freeze.
 Matched iPad captures record the reduced layer allocation, remaining first-paint
 stalls and measurement limits.
@@ -77,7 +77,7 @@ stalls and measurement limits.
 The move from `src/renderers/css` left the site's `astro build` output byte-identical: all 9,508 files outside
 `dist/scenes` were byte-identical before and after. The package's built JavaScript matched `src/renderers/css/dist` except for
 source-path comments and the content-hashed chunk names that follow from them, and its declarations differ only in how
-the shared declaration chunks are split and named. The preparation bundle in `tools/objects/dist` differed only in the
+the shared declaration chunks are split and named. The preparation bundle in `tools/objects/dist` (now `packages/bake/dist`) differed only in the
 source-path comments.
 
 Most tests read prepared object data, so restore it first with `pnpm setup:assets`. From the repository root:
@@ -120,7 +120,7 @@ The complete catalogue bank is `PreparedCataloguePointBank`; embedded volume sta
 Counting, projection, transport and retained mounting stay in renderer; image/geometry preparation and file I/O stay in bake.
 Contract tests use node:test in the packages lane.
 
-Shared prepared resource addresses, texture tile styles, silhouette thresholds, shell material addresses, feature-bank addresses, marker validation, fly-to conventions and volume topology equality live in `@cssearth/objects`. Numeric camera orientation and solar geometry live in `@cssearth/engine`.
+Shared prepared resource addresses, texture tile styles, silhouette thresholds, shell material addresses, feature-bank addresses, marker validation, volume topology equality live in `@cssearth/objects`. Numeric camera orientation and solar geometry live in `@cssearth/engine`.
 
-Validated presentation-to-world camera conversion, its pose/presentation data shapes and the default-view reader
-belong to `@cssearth/objects`, using engine math. Runtime viewport/layout and world-to-presentation projection stay here.
+Presentation-to-world conversion, camera pose/viewport shapes, default-view rotation, silhouette walking and
+surface fly-to calibration belong to `@cssearth/engine`. Renderer extends the engine viewport with layout fields. Runtime viewport/layout and world-to-presentation projection stay here.

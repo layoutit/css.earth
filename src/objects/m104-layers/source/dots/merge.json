@@ -1,0 +1,23 @@
+{
+  "schema": "cssearth-catalogue-points-merge@1",
+  "id": "dots",
+  "published": true,
+  "meaning": "Sombrero Galaxy's catalogued objects as dots on its photograph's plane: globular clusters, planetary nebulae. Old objects near the centre can sit in the bulge.",
+  "centreOnGalaxy": true,
+  "banks": [
+    {
+      "bank": "spitler-gc",
+      "withinPcOfCentre": 18060,
+      "basis": "Presentation choice: a dot is drawn only where the photograph is, inside the image layers' 18.06 kpc support radius (recipe.json)."
+    },
+    {
+      "bank": "ford-pne",
+      "withinPcOfCentre": 18060,
+      "basis": "Presentation choice: a dot is drawn only where the photograph is, inside the image layers' 18.06 kpc support radius (recipe.json)."
+    }
+  ],
+  "colorTowardWhite": 0.5,
+  "colorTowardWhiteBasis": "Presentation choice: the Milky Way dots' value (milky-way/source/local-3kpc/merge.json), so both galaxies' dots read as the same tints of starlight.",
+  "colorGamma": 1.6,
+  "colorGammaBasis": "Presentation choice: the Milky Way dots' value (milky-way/source/local-3kpc/merge.json), picked there from three renders over its backing."
+}

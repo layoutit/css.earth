@@ -1,8 +1,10 @@
 import { mkdir, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { buildPolyMeshTransform, buildSeamBleedPolygonEdges } from '@layoutit/polycss';
-import { createSurfacePatches, createPolarPatch, CANONICAL_PREPARED_IMAGE_DENSITY as RASTER_DENSITY, type Pole } from '@cssearth/objects';
-import type { prepareAtmosphere, RasterRecipe } from '../raster/index.ts';
+import { createSurfacePatches, createPolarPatch, type Pole } from '../surface-geometry/index.ts';
+import { CANONICAL_PREPARED_IMAGE_DENSITY as RASTER_DENSITY } from '@cssearth/objects';
+import type { prepareAtmosphere } from '../raster/index.ts';
+import type { RasterRecipe } from '@cssearth/objects';
 import { rasterPagePlan } from '../raster/index.ts';
 import type { GeometryProfile } from './profile.ts';
 import { createLeafProjector, rendererPolygon, type LeafImagePixels } from './projector.ts';
@@ -19,7 +21,8 @@ export { leafImageCandidates, widestLeafImages } from './leaf-images.ts';
 export interface PhysicalScene {
  camera:unknown;systemTransform:unknown;presentationFrame:unknown;worldFrame:unknown;starfield:unknown;
 }
-export interface SolarSceneSource extends Record<string, unknown> { bodyId:string;bodyRadiusUnits:number;bodyRadiusKilometers:number;displayName:string; }
+export type { SolarSceneSource } from '@cssearth/objects';
+import type { SolarSceneSource } from '@cssearth/objects';
 export interface ScenePreparationAdapters {
  preparePhysicalScene(input:SolarSceneSource & {starfield:Record<string,unknown>;sun:Record<string,unknown>|null;worldContext?:unknown}):Promise<PhysicalScene>;
  bodyFixedSunDirection(id:string):[number,number,number];

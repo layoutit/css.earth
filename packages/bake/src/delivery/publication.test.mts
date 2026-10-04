@@ -6,7 +6,7 @@ import { syncBuiltinESMExports } from 'node:module';
 import { tmpdir } from 'node:os';
 import { dirname, join } from 'node:path';
 import { createHash } from 'node:crypto';
-import { preparedAssetWrites, publishPreparedObject, readPreparedBinaryOutputs, readPreparedJsonOutputs } from '@cssearth/bake/delivery';
+import { preparedAssetWrites, publishPreparedObject, readPreparedJsonOutputs, unownedPreparedFiles } from '@cssearth/bake/delivery';
 import { inventoryPreparedAssets } from '@cssearth/objects/node';
 import { writePreparedSet } from '@cssearth/bake/delivery';
 const manifest = (values: Record<string,string>) => ({ schema: 'cssearth-inventory@1', assets: Object.entries(values).map(([filename,text]) => ({location:'public',filename,bytes:Buffer.byteLength(text),sha256:createHash('sha256').update(text).digest('hex')})) });
@@ -27,18 +27,12 @@ test('private material masters stay staged while all consumer JSON is preflighte
   await writeFile(join(root,'unexpected.mjs'),'export default null;');
   await assert.rejects(readPreparedJsonOutputs(root),/only regular JSON/);
   await rm(join(root,'unexpected.mjs'));
-  // World orbit banks and system views are published per centre and per system beside the world context that owns them,
-  // and refused without it; a folder holds only its own kind of file.
-  await mkdir(join(root,'world-orbits')); await mkdir(join(root,'system-views'));
-  await writeFile(join(root,'world-orbits','sun.bin'),'orbits'); await writeFile(join(root,'system-views','sun.json'),'{}\n');
-  await assert.rejects(readPreparedBinaryOutputs(root),/beside world-context\.json/);
-  await writeFile(join(root,'world-context.json'),'{}\n');
-  assert.deepEqual((await readPreparedJsonOutputs(root)).map(output=>output.filename),['content.json','runtime.json','world-context.json']);
-  assert.deepEqual(await readPreparedBinaryOutputs(root),[{filename:'system-views/sun.json',path:join(root,'system-views','sun.json')},
-    {filename:'world-orbits/sun.bin',path:join(root,'world-orbits','sun.bin')}]);
-  await writeFile(join(root,'world-orbits','notes.txt'),'x');
-  await assert.rejects(readPreparedBinaryOutputs(root),/must hold only \.bin files; found notes\.txt/);
-  await rm(join(root,'world-orbits'),{recursive:true}); await rm(join(root,'system-views'),{recursive:true}); await rm(join(root,'world-context.json'));
+  // A prepared set is JSON only: a folder beside it is another step's (a system's views and its bodies' orbit banks are
+  // written into their own packages by the world step, src/objects/<object>/prepared/views/ and orbits/).
+  await mkdir(join(root,'orbits'));
+  await writeFile(join(root,'orbits','sun.bin'),'orbits');
+  assert.deepEqual((await readPreparedJsonOutputs(root)).map(output=>output.filename),['content.json','runtime.json']);
+  await rm(join(root,'orbits'),{recursive:true});
   await symlink(join(root,'runtime.json'),join(root,'linked.json'));
   await assert.rejects(readPreparedJsonOutputs(root),/only regular JSON/);
  }finally{await rm(root,{recursive:true,force:true});}
@@ -141,4 +135,18 @@ test('invalid staged metadata or missing previews fail without changing canonica
     await assert.rejects(publishPreparedObject(fixture.args), /ENOENT/);
     assert.deepEqual(await snapshot(fixture.canonical), before);
   } finally { await rm(fixture.root, { recursive: true, force: true }); }
+});
+
+test('a bake names the prepared files its inventory does not list, apart from regenerated, retired and shared ones', async t => {
+  const root = await mkdtemp(join(tmpdir(), 'cssearth-prepared-leftovers-')), objectDirectory = join(root, 'object'), prepared = join(objectDirectory, 'prepared');
+  t.after(() => rm(root, { recursive: true, force: true }));
+  // A first bake has published nothing to compare with.
+  await put(join(prepared, 'runtime.json'), '{}');
+  assert.deepEqual(await unownedPreparedFiles('fixture', objectDirectory, prepared), []);
+  await inventoryPreparedAssets({ objectId: 'fixture', objectDirectory, gitTrackedPaths: async () => new Set() });
+  // What an old checkout holds beside the published set: a moved dataset's folder, the transport and page a checkout regenerates,
+  // the two files no preparation writes now, and the world's member list, which the world step pins itself.
+  for (const name of ['layers/a/atlas.webp', 'old-report.json', 'object.json', 'page.json', 'provenance.json', 'lenses.json', 'members.json']) await put(join(prepared, name), 'x');
+  assert.deepEqual(await unownedPreparedFiles('fixture', objectDirectory, prepared, name => name === 'members.json'), ['layers/a/atlas.webp', 'old-report.json']);
+  assert.deepEqual(await unownedPreparedFiles('fixture', objectDirectory, join(root, 'absent')), []);
 });

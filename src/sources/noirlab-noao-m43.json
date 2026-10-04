@@ -1,0 +1,52 @@
+{
+  "id": "noirlab-noao-m43",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "M43, NGC 1982",
+  "identifiers": [
+    {
+      "type": "NOIRLab image",
+      "value": "noao-m43"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://noirlab.edu/public/images/noao-m43/",
+      "label": "Published source"
+    },
+    {
+      "role": "original",
+      "url": "https://storage.noirlab.edu/media/archives/images/large/noao-m43.jpg",
+      "label": "JPEG, 1400 x 1400 px"
+    },
+    {
+      "role": "rights",
+      "url": "https://noirlab.edu/public/copyright/",
+      "label": "Reuse terms"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://noirlab.edu/public/images/noao-m43/",
+      "checkedOn": "2026-10-02",
+      "locator": "1400 x 1400 px; a color composite; its page names no filters. The file's embedded sky tags, used as they are: 0.2979 arcsec per pixel, north 0.4° right of vertical, the frame's centre at 83.8792279°, -5.2667566°. Not measured against Gaia here."
+    }
+  ],
+  "publisher": "NOIRLab",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "N.A.Sharp/NOIRLab/NSF/AURA",
+      "scope": "Published source",
+      "evidence": "https://noirlab.edu/public/images/noao-m43/"
+    },
+    {
+      "kind": "rights",
+      "text": "Creative Commons Attribution 4.0 International; the full credit must be shown.",
+      "scope": "Published source",
+      "evidence": "https://noirlab.edu/public/copyright/"
+    }
+  ]
+}

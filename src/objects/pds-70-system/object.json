@@ -1,12 +1,12 @@
 {
   "schema": "cssearth-object@2",
   "id": "pds-70-system",
+  "parent": "milky-way",
   "type": "system",
   "generator": "site/build/prepare/system-packages.mts",
   "properties": {
     "system": {
-      "host": "pds-70",
-      "members": "planets"
+      "host": "pds-70"
     },
     "catalog": {
       "name": "PDS 70 system",

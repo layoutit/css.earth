@@ -1,4 +1,5 @@
 import type { MotionCompletion } from './types.js';
+import { createSteadyFrameTime } from '../stars/steady-frame-time.js';
 
 type FlightFrame = 'presented' | 'idle' | 'complete';
 interface Options {
@@ -13,6 +14,8 @@ interface Options {
 export function createCameraFlight({ windowTarget, signal, paused = false, advance, onFinish = () => {} }: Options) {
   const controller = new AbortController();
   let frame: number | null = null, previousTime: number | null = null;
+  // The flight's own frame times, steadied like the frame clock's: Safari reports both in whole milliseconds.
+  const steadyTime = createSteadyFrameTime();
   let elapsedS = 0, speed = 1, settled = false, publishing = false;
   let resolve!: (result: MotionCompletion) => void, reject!: (error: unknown) => void;
   const finished = new Promise<MotionCompletion>((done, fail) => { resolve = done; reject = fail; });
@@ -47,9 +50,10 @@ export function createCameraFlight({ windowTarget, signal, paused = false, advan
     if (asynchronous && result === 'presented' && !paused) paint(windowTarget.performance.now());
     else schedule();
   }
-  function paint(time: number) {
+  function paint(reported: number) {
     frame = null;
     if (settled || paused) return;
+    const time = steadyTime(reported);
     const stepS = previousTime === null ? 0 : Math.max(0, time - previousTime) / 1000 * speed;
     previousTime = time;
     elapsedS += stepS;

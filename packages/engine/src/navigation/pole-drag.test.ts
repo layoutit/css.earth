@@ -117,4 +117,34 @@ describe('pole grab', () => {
     const landed = project(rotateVector(poleTurnRotation(turn, opening), under(pointer.previousX, pointer.previousY)));
     assert.ok(Math.hypot(landed[0]! - pointer.currentX, landed[1]! - pointer.currentY) > 1, 'the stroke was reachable after all');
   });
+
+  // A straight drag down a body whose pole starts 17 degrees from the eye, leaning 8 degrees: the pole comes to the line
+  // of sight, is held there, and the pointer goes on across it. The spin that kept the ground under the pointer turned
+  // the body 172 degrees in one 3 px step there (Earth, 2026-10-02).
+  const facing = { center: [0, 0, -1000], radius: 120, opticalCenterX: 640, opticalCenterY: 400, focalLength: 1829 };
+  const dragDown = (x: number) => {
+    let pole: Vector3 = [Math.sin(17 * degrees) * Math.sin(-8 * degrees), -Math.sin(17 * degrees) * Math.cos(-8 * degrees), Math.cos(17 * degrees)], worst = 0;
+    for (let y = -135; y < 135; y += 3) {
+      const turn = poleGrabTurn({ previousX: 640 + x, previousY: 400 + y, currentX: 640 + x, currentY: 403 + y }, facing, pole);
+      assert.ok(turn);
+      const rotation = poleTurnRotation(turn, pole);
+      worst = Math.max(worst, 2 * Math.acos(Math.min(1, Math.abs(rotation[3]!))) / degrees);
+      pole = rotateVector(rotation, pole);
+    }
+    return { worst, pole };
+  };
+  it('stops at a held pole instead of spinning the body round as the pointer crosses it', () => {
+    for (const x of [0, 2, -6]) {
+      const { worst, pole } = dragDown(x);
+      assert.ok(pole[2]! > 1 - 1e-9, 'the drag did not hold the pole at the line of sight');
+      assert.ok(worst < 2, `one 3 px step turned the body ${worst} degrees with the pointer ${x} px beside the pole`);
+    }
+  });
+  it('still turns the body with a pointer that circles a held pole', () => {
+    const { pole } = dragDown(0);
+    const around = (degreesRound: number) => [640 + 60 * Math.cos(degreesRound * degrees), 400 + 60 * Math.sin(degreesRound * degrees)];
+    const [previousX, previousY] = around(0), [currentX, currentY] = around(10);
+    const turn = poleGrabTurn({ previousX: previousX!, previousY: previousY!, currentX: currentX!, currentY: currentY! }, facing, pole);
+    assert.ok(turn && Math.abs(Math.abs(turn.spin) / degrees - 10) < .5, `a 10 degree sweep round the pole spun ${turn && turn.spin / degrees}`);
+  });
 });

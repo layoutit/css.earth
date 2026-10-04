@@ -2,9 +2,9 @@ import { existsSync } from 'node:fs';
 import { copyFile } from 'node:fs/promises';
 import { availableParallelism } from 'node:os';
 import { resolve } from 'node:path';
-import { lightingFrame, CANONICAL_PREPARED_IMAGE_DENSITY as RASTER_DENSITY, type LambertRasterConfig } from '@cssearth/objects';
+import { lightingFrame } from '../baking/index.ts';
+import { type LambertRasterConfig, CANONICAL_PREPARED_IMAGE_DENSITY as RASTER_DENSITY, type RasterRecipe, type LightingRecipe } from '@cssearth/objects';
 import { limbSphereFrame, type Channels, type LimbLaw } from '../photometry/index.ts';
-import { type RasterRecipe, type LightingRecipe } from './config.ts';
 import { raster, fileBytes, outputName } from './io.ts';
 import { LIGHTING_BANK_ROOT } from './lighting-banks.ts';
 /** Rows encoding at once. Each waiting row holds its RGBA, so this stays below the thread pool (`src/thread-pool/`). */

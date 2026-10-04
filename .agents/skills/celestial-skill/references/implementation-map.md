@@ -2,6 +2,8 @@
 
 Paths are relative to the selected repository. The documentation links were
 checked on 2026-09-09.
+Camera conversion, default-view rotation, silhouette walking and fly-to calibration belong to `@cssearth/engine`.
+Objects owns parsed formats and depends only on core; parse camera records with `requireCamera` before calling engine.
 Code examples below name the revisions where they were checked. Inspect the
 current checkout before using them.
 
@@ -419,7 +421,7 @@ purposes; run those needed for the task, not every preparation step by default.
 
 | Purpose | Current entry point |
 | --- | --- |
-| Build shared tool bundles when needed | `pnpm build:tools` |
+| Build shared tool bundles when needed | `pnpm build:preparation` |
 | Install already published prepared files | `pnpm setup:assets --object=<id>` |
 | Restore missing declared source files | `node packages/bake/cli/object-operations.mts acquire <id>` |
 | Check declared source-file coverage without acquiring | `node packages/bake/cli/object-operations.mts acquire <id> --verify-only`; this does not verify source digests |
@@ -470,3 +472,7 @@ interaction, raster appearance or line wrapping. The old Playwright conformance
 profiles are retired; inspect changed browser views and interactions as required
 by [qualification](qualification.md). Report unavailable assets and skipped tests
 separately from executed checks.
+
+Shared polar, lighting, coverage, atmosphere and interior raster operators are internal to
+`packages/bake/src/baking/`; shared surface patches are internal to
+`packages/bake/src/surface-geometry/`. Objects supplies format contracts, not these algorithms.

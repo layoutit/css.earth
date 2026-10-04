@@ -6,6 +6,8 @@ export function createSearchPresentation(documentTarget: Document) {
   // The browser is mounted only while search is open (detached-sections.ts).
   const browser = requiredSection(documentTarget, '.object-browser');
   const selectedContent = requiredElement<HTMLElement>(documentTarget, '.object-selected-content');
+  // The drawer holding the browser shows the result list on the sheet's own ground, so it carries the same state.
+  const drawer = requiredElement<HTMLElement>(documentTarget, '.object-drawer-content');
   const results = requiredElement<HTMLElement>(browser, '#object-category-results');
   // Named, not the first `.object-empty`: that is the "Searching…" line, which this hid while a search was pending and
   // showed in place of "No matching results" (2026-10-02).
@@ -17,6 +19,7 @@ export function createSearchPresentation(documentTarget: Document) {
       setPanelHidden(selectedContent, open);
       browser.setAttribute('aria-label', searching ? 'Search results' : 'Celestial bodies');
       browser.toggleAttribute('data-search-results', searching);
+      drawer.toggleAttribute('data-search-results', open && searching);
       results.hidden = !searching;
     },
     markCategory(classification: string | null | undefined = null) {

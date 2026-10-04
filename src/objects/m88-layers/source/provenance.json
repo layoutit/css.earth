@@ -1,0 +1,48 @@
+{
+  "schema": "cssearth-image-layer-provenance@1",
+  "title": "SDSS9 color",
+  "publisher": "CDS (CNRS/Unistra)",
+  "sourceId": "CDS/P/SDSS9/color",
+  "sourcePage": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record",
+  "download": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FSDSS9%2Fcolor&width=3000&height=3000&fov=0.231&projection=TAN&coordsys=icrs&ra=187.997064&dec=14.420035&format=jpg",
+  "credit": "Sloan Digital Sky Survey; color HiPS CDS/P/SDSS9/color by T. Boch (CDS), cut out by the CDS hips2fits service",
+  "license": "CC-BY",
+  "original": {
+    "dimensions": [
+      3000,
+      3000
+    ],
+    "bands": [
+      "SDSS",
+      "g",
+      "r",
+      "i"
+    ],
+    "fieldOfViewDeg": [
+      0.231,
+      0.231
+    ]
+  },
+  "checkedSource": {
+    "kind": "CDS hips2fits cutout (JPEG)",
+    "dimensions": [
+      3000,
+      3000
+    ]
+  },
+  "geometryEvidence": {
+    "inclinationDeg": 62.95,
+    "lineOfNodesPaDeg": 138.25,
+    "reference": "HyperLEDA (Makarov et al. 2014), NGC4501 = PGC 41517: inclination 62.95°, major-axis position angle 138.25°, from its outline at 25 mag per square arcsecond. Which edge of the disc is nearer is not in the source: the disc is drawn with the edge at position angle 228° nearer, an assumption."
+  },
+  "displayModel": "The photograph lies on one flat plane, the disc's midplane, as the Milky Way's backing image does. The bulge of S4G's published fit, scaled to the photograph, fills a spheroid through that plane; its depth is modelled, not measured.",
+  "coverage": "Stars are removed from the picture before the bake by NOX, which predicts the light under a star and does not measure it; 4 of the 5 Gaia stars brighter than G 14 in the picture had a glow, filled out to at most 214 px (59″).",
+  "acquisition": {
+    "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FSDSS9%2Fcolor&width=3000&height=3000&fov=0.231&projection=TAN&coordsys=icrs&ra=187.997064&dec=14.420035&format=jpg",
+    "dimensions": [
+      3000,
+      3000
+    ],
+    "operation": "Request the cutout from the CDS hips2fits service: 3000 x 3000 px, 0.231 degrees wide, tangent projection on 187.997064, +14.420035, north up; no crop or resample."
+  }
+}

@@ -13,6 +13,7 @@ import { CONTEXT_AVAILABILITY } from './context-availability.mts';
 import { suppressMinorMoonOrbitPaint } from './moon-orbit-policy.mts';
 import { mountCatalogueMoonLabels } from './catalogue-moon-labels.mts';
 import { loadApplicationUniverse } from './application-world-resources.mts';
+import { ancestorIds, knownAncestors } from './object-directory.mts';
 
 /** The world's prepared data and planner worker, which `startup-boot.mts` starts while the first body still loads. */
 export { loadApplicationUniverse };
@@ -45,6 +46,8 @@ export function createApplicationWorldContext() {
         const resources = own(prepareObjectResources(prepared.assets, { signal }));
         if ((await lifetime.wait(resources.ready)).cancelled || lifetime.disposed) throw cancelled();
         let refreshWorld = () => false;
+        // The body the world last selected: its holders are published again once the page has read what it is inside.
+        let selectedId: string | null = null;
         // World presentation lives beside the detail stage, outside its changing object scope.
         const presentationHost = stage.closest<HTMLElement>('.object-world-stage') ?? stage;
         const layer = own(prepared.mount(stage, { presentationHost,
@@ -60,7 +63,7 @@ export function createApplicationWorldContext() {
         // first view (startup-gate.ts).
         const approach = createWorldApproach();
         afterStartup(target, () => { if (!lifetime.disposed) approach.start(); });
-        const moonLabels = own(mountCatalogueMoonLabels(presentationHost, applicationContext.bodies, applicationContext.focus, layer.opacityClock, () => refreshWorld(), layer.depthBase));
+        const moonLabels = own(mountCatalogueMoonLabels(presentationHost, () => applicationContext.bodies, applicationContext.focus, layer.opacityClock, () => refreshWorld(), layer.depthBase));
         let heliosphereEnabled = false, shellsMounted = false;
         const frames = own(createApplicationWorldFrames({ layer, planner, moonLabels, lifetime,
           heliosphereEnabled: () => heliosphereEnabled, onFrame: world => approach.observe(world.pose.positionM) }));
@@ -100,6 +103,11 @@ export function createApplicationWorldContext() {
             visibility.selectObject(id);
             layer.selectObject(id, frame, framingScale, edge);
             moonLabels.selectObject(id);
+            // The objects the body is inside, by the object tree, as its own entry names them: a bank of plain-dot stars one of
+            // them hosts (another galaxy's) draws around the body. No other entry is read for this.
+            selectedId = id;
+            layer.setSelectionHolders(knownAncestors(id).map(object => object.id));
+            void ancestorIds(id).then(ids => { if (!lifetime.disposed && selectedId === id) layer.setSelectionHolders(ids); }, () => {});
           },
           setIllustrationModelsEnabled: visibility.setIllustrationModelsEnabled,
           setHighlightedClassification: visibility.setHighlightedClassification,

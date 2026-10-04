@@ -1,12 +1,12 @@
 {
   "schema": "cssearth-object@2",
   "id": "ross-176-system",
+  "parent": "milky-way",
   "type": "system",
   "generator": "site/build/prepare/system-packages.mts",
   "properties": {
     "system": {
-      "host": "ross-176",
-      "members": "planets"
+      "host": "ross-176"
     },
     "catalog": {
       "name": "Ross 176 system",

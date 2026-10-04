@@ -50,6 +50,15 @@ are addressed by their source paths and origin URLs; manifests do not verify
 source digests. Some conversions need the documented Python/native toolchains.
 Source acquisition and baking are separate from working on the shell, renderer or docs.
 
+## Fresh checkout for tests and typecheck
+
+With Node.js 24 (or 22.18+) and pnpm 10 installed, run `pnpm setup:checkout`
+from the checkout root. It installs the frozen lockfile without prompts, builds
+workspace packages and generated compiler inputs, restores prepared assets and
+the inventoried Earth places catalogue, and prepares typecheck metadata. It is
+safe to repeat and requires access to the asset host. Then run
+`pnpm test:run <test-file>` or `pnpm typecheck`.
+
 ## Checklist: a change that bakes or rebakes assets
 
 Does your change add a body, rebake one, or alter anything under a `prepared/`
@@ -61,6 +70,9 @@ inventory; R2 holds the bytes.
    `pnpm prepare:volume src/objects/<id>` for a volume field. From a clean
    checkout, restore that object's sources with
    `node packages/bake/cli/restore-source-inputs.mts --object=<id>` first.
+   An older checkout can hold files a later change moved or stopped writing.
+   The bake names any under `prepared/` or `public/scenes/<id>/` that the
+   inventory does not list and stops; delete them and run again.
 2. Publish the bytes: `node packages/bake/cli/publish-runtime-assets.mts --object=<id>`.
    Safe to repeat — keys are content-addressed, so it uploads only what is
    missing.
@@ -167,12 +179,12 @@ Full-universe integrity and production-build checks remain distinct and can
 still expose unrelated package defects. Report those failures; do not bypass pins.
 
 Every test runs under `node --test` through one command, `pnpm test:run`. The
-lanes are folders: `test:packages` runs `packages/`, and `test:site` runs `site/`,
-`src/`, `integration/` and `.github/`. A new test file runs without a workflow edit.
+lanes are folders: `test:packages` runs `packages/` and `integration/`, and `test:site` runs `site/`,
+`src/` and `.github/`. A new test file runs without a workflow edit.
 A test that needs an input CI does not restore skips through `sourceTest()`.
 Tests stay beside their owners.
 
-The required universe matrix runs the two lanes; both must pass. A pull request tests only what it can break: the packages it changed and every package that depends on them (the offline tools `bake` and `telescope-cli` only when a tool changed, except the bake tests listed in `FOREIGN_TESTS` that exercise the renderer, which run whenever it changes), and the site when it or a package it imports changed (`.github/scripts/ci/affected-tests.mts`). A push to main, or a change to shared configuration, tests everything. The preparation gate checks publication. Source
+The required universe matrix runs the two lanes; both must pass. A pull request tests only what it can break: the packages it changed and every package that depends on them (the offline tools `bake` and `telescope-cli` only when a tool changed, except the depth-partition producer contract on objects changes; foreign runtime and integration tests follow their imported owners), and the site when it or a package it imports changed (`.github/scripts/ci/affected-tests.mts`). A push to main, or a change to shared configuration, tests everything. The preparation gate checks publication. Source
 catalogue reconciliation and broad bake reproduction run in the separate advisory
 audit. Native tests needing unavailable sources, prepared outputs or toolchains
 can skip through `@cssearth/objects/node/source-test`; a pass with skips does not prove

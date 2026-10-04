@@ -43,3 +43,13 @@ Bake recipe lane identifiers remain bake-owned when site only delegates preparat
 The lab molecular catalogue envelope is lab-owned, separate from reconstruction table data. Preserved Python
 registration and native processing protocols keep specific ledger reasons, with source/fixture conformance in
 `schema-protocols.test.ts` and `shell-grid-schema.test.ts`; scientific processing is not relocated.
+
+VO snapshot validation in objects rebuilds the ADQL `obs_id IN (...)` clause from the
+selected IDs, including quote escaping, to check that the retained query matches its
+spatial selection. Query planning and execution remain in telescope.
+
+The moved-format ownership test scans git-tracked TypeScript and JavaScript with the
+TypeScript AST, relative to the test's repository location. Schema references outside
+objects are limited to imports/re-exports, named publishers, and exact retained
+routing or scientific checks. Distinctive parser diagnostics also reject renamed
+copies. Generic record/text checks are not format-specific diagnostics.

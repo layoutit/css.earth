@@ -1,12 +1,12 @@
 {
   "schema": "cssearth-object@2",
   "id": "toi-1759-system",
+  "parent": "milky-way",
   "type": "system",
   "generator": "site/build/prepare/system-packages.mts",
   "properties": {
     "system": {
-      "host": "toi-1759",
-      "members": "planets"
+      "host": "toi-1759"
     },
     "catalog": {
       "name": "TOI-1759 system",

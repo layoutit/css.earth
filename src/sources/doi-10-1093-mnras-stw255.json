@@ -1,0 +1,43 @@
+{
+  "id": "doi-10-1093-mnras-stw255",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Tkachenko et al. (2016): Stellar modelling of Spica, a high-mass spectroscopic binary with a β Cep variable primary component",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.1093/mnras/stw255"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://doi.org/10.1093/mnras/stw255",
+      "label": "Publisher"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://doi.org/10.1093/mnras/stw255",
+      "checkedOn": "2026-10-03",
+      "locator": "Crossref record: title, authors, container"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Tkachenko et al. (2016), Monthly Notices of the Royal Astronomical Society 458 1964-1976",
+      "scope": "citation",
+      "evidence": "https://doi.org/10.1093/mnras/stw255"
+    }
+  ],
+  "publisher": "Monthly Notices of the Royal Astronomical Society 458 1964-1976",
+  "creators": [
+    "A. Tkachenko",
+    "J. M. Matthews",
+    "C. Aerts",
+    "et al."
+  ],
+  "publicationDate": "2016"
+}

@@ -1,0 +1,145 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "tarazed",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Tarazed",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 63872217
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/tarazed-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Tarazed",
+      "classification": "star",
+      "color": "#ffcf8a",
+      "distanceAu": 24971442.7,
+      "description": "A bright giant of type K3 II, 121 parsecs away: 91.8 times the Sun's width and 2,146 times its light.",
+      "systemName": "Tarazed system",
+      "aliases": [
+        "HD 186791"
+      ],
+      "order": 5471,
+      "context": {
+        "order": 5468
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1642063477626804200,
+        -3284129321609762000,
+        688031451825388400
+      ],
+      "presentationToReference": [
+        0.43956275820562646,
+        0.08236703126256995,
+        -0.8944273328558631,
+        -0.8791261498593572,
+        -0.16473453309230496,
+        -0.4472133117879244,
+        0.18417870189607963,
+        -0.9828927742983214,
+        1.5466856118214347e-7
+      ],
+      "orbitUpReference": [
+        -0.08236703126256995,
+        0.16473453309230496,
+        0.9828927742983214
+      ],
+      "metersPerUnit": 206039409.67741936,
+      "bodyRadiusM": 63872217000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

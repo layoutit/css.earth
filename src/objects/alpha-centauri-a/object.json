@@ -1,6 +1,7 @@
 {
   "schema": "cssearth-object@2",
   "id": "alpha-centauri-a",
+  "parent": "alpha-centauri-a-system",
   "type": "layered-body",
   "properties": {
     "preparation": {
@@ -99,7 +100,7 @@
       "color": "#fff5f4",
       "distanceAu": 275979,
       "description": "Sun-like star 1.34 parsecs away; its photosphere is not imaged here.",
-      "systemName": "Centaurus",
+      "systemName": "Alpha Centauri system",
       "order": 1100,
       "context": {
         "order": 1097

@@ -1,0 +1,136 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "m98",
+  "displayName": "M98",
+  "panel": {
+    "facts": [
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "17.62 Mpc (14.32 to 21.68)",
+        "source": {
+          "catalogueId": "publication-tully2016aj-152-50t",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/AJ/152/50",
+          "label": "Tully, Courtois & Sorce (2016), Cosmicflows-3, AJ 152, 50; CDS J/AJ/152/50, table 3, PGC 39028: distance modulus 31.23 ± 0.45 mag",
+          "checked": "2026-10-02"
+        }
+      },
+      {
+        "id": "position",
+        "label": "Sky position (J2000)",
+        "value": "RA 183.451°, Dec 14.900°",
+        "source": {
+          "catalogueId": "hyperleda-2014",
+          "url": "http://atlas.obs-hp.fr/hyperleda/",
+          "label": "HyperLEDA (Makarov et al. 2014), NGC4192 = PGC 39028: centre, type SABb, D25 diameter 11.0 arcmin",
+          "checked": "2026-10-02"
+        }
+      },
+      {
+        "id": "type",
+        "label": "Type",
+        "value": "SABb (spiral galaxy)",
+        "source": {
+          "catalogueId": "hyperleda-2014",
+          "url": "http://atlas.obs-hp.fr/hyperleda/",
+          "label": "HyperLEDA (Makarov et al. 2014), NGC4192 = PGC 39028: centre, type SABb, D25 diameter 11.0 arcmin",
+          "checked": "2026-10-02"
+        }
+      },
+      {
+        "id": "tilt",
+        "label": "Tilt of its disc",
+        "value": "90° from face-on",
+        "source": {
+          "catalogueId": "hyperleda-2014",
+          "url": "http://atlas.obs-hp.fr/hyperleda/",
+          "label": "HyperLEDA (Makarov et al. 2014), NGC4192 = PGC 39028: inclination 90°, major-axis position angle 152.4°, from its outline at 25 mag per square arcsecond",
+          "checked": "2026-10-02"
+        }
+      },
+      {
+        "id": "size",
+        "label": "Diameter",
+        "value": "56.6 kpc (11.0 arcmin at 25 mag per square arcsecond)",
+        "source": {
+          "catalogueId": "hyperleda-2014",
+          "url": "http://atlas.obs-hp.fr/hyperleda/",
+          "label": "HyperLEDA (Makarov et al. 2014), NGC4192 = PGC 39028: centre, type SABb, D25 diameter 11.0 arcmin",
+          "checked": "2026-10-02"
+        }
+      },
+      {
+        "id": "membership",
+        "label": "Membership",
+        "value": "Galaxy cluster, Virgo",
+        "source": {
+          "catalogueId": "publication-binggeli1985aj-90-1681b",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/AJ/90/1681",
+          "label": "Binggeli, Sandage & Tammann (1985), AJ 90, 1681: the Virgo Cluster Catalog, VCC 92 = NGC 4192, membership M (member).",
+          "checked": "2026-10-03"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "optical",
+    "controls": [
+      {
+        "id": "optical",
+        "label": "SDSS · optical",
+        "thumbnail": "m98-dataset-optical.webp",
+        "volume": {
+          "objectId": "m98-layers",
+          "datasetId": "optical",
+          "surface": "optical"
+        },
+        "source": {
+          "id": "m98-layers-optical",
+          "path": "../../m98-layers/source/manifest.json",
+          "url": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record"
+        },
+        "falseColor": false
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Tully, Courtois & Sorce (2016), Cosmicflows-3, AJ 152, 50; CDS J/AJ/152/50, table 3, PGC 39028: distance modulus 31.23 ± 0.45 mag",
+      "href": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/AJ/152/50"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "HyperLEDA (Makarov et al. 2014), NGC4192 = PGC 39028: centre, type SABb, D25 diameter 11.0 arcmin",
+      "href": "http://atlas.obs-hp.fr/hyperleda/"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "HyperLEDA (Makarov et al. 2014), NGC4192 = PGC 39028: inclination 90°, major-axis position angle 152.4°, from its outline at 25 mag per square arcsecond",
+      "href": "http://atlas.obs-hp.fr/hyperleda/"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Binggeli, Sandage & Tammann (1985), AJ 90, 1681: the Virgo Cluster Catalog, VCC 92 = NGC 4192, membership M (member).",
+      "href": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/AJ/90/1681"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/AJ/152/50",
+      "credit": "Tully, Courtois & Sorce (2016), Cosmicflows-3, AJ 152, 50; CDS J/AJ/152/50, table 3, PGC 39028: distance modulus 31.23 ± 0.45 mag"
+    }
+  }
+}

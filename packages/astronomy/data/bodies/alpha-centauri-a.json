@@ -6,10 +6,10 @@
   "name": "Rigil Kentaurus",
   "horizonsCode": null,
   "meanRadiusKm": 851119,
-  "gravitationalParameterKm3PerS2": 0,
+  "gravitationalParameterKm3PerS2": 143170180317.24423,
   "parent": null
  },
- "physicalNotes": "Radius: Limb-darkened angular diameter 8.502 \u00b1 0.038 mas measured with VLTI/PIONIER by Kervella et al. (2017), A&A 597, A137, who derive 1.2234 \u00b1 0.0053 solar radii with the parallax 747.17 \u00b1 0.61 mas. Adopted 851,119 km, 1.2234 solar radii at 695700 km per solar radius. No gravitational parameter is adopted. presentationUp: the display axis (celestial north at the star) is up; no spin axis is adopted.",
+ "physicalNotes": "Radius: Limb-darkened angular diameter 8.502 \u00b1 0.038 mas measured with VLTI/PIONIER by Kervella et al. (2017), A&A 597, A137, who derive 1.2234 \u00b1 0.0053 solar radii with the parallax 747.17 \u00b1 0.61 mas. Adopted 851,119 km, 1.2234 solar radii at 695700 km per solar radius. Mass 1.0788 \u00b1 0.0029 solar masses from Akeson et al. (2021), AJ 162, 14 (https://arxiv.org/abs/2104.10086), from the orbit of Alpha Centauri A and B: gravitational parameter 143,170,180,317 km^3/s^2 at 132,712,440,041.94 km^3/s^2 per solar mass. presentationUp: the display axis (celestial north at the star) is up; no spin axis is adopted.",
  "star": {
   "rightAscensionDegrees": 219.90205833170774,
   "declinationDegrees": -60.83399268831004,

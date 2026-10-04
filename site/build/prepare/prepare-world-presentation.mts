@@ -4,27 +4,37 @@ import { pathToFileURL } from 'node:url';
  * the default view hides, which objects are default features, the galaxy and cluster fade distances, and which bodies each
  * planetary system holds (read from the world context's orbit graph once here, not by walking it in the browser), and the box
  * each header pill frames. */
+import { readFileSync } from 'node:fs';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import majorMoons from '../../source/major-moons.json' with { type: 'json' };
-import galaxies from '../../../src/objects/local-group-galaxies/source/presentation.json' with { type: 'json' };
-import clusters from '../../../src/objects/galaxy-clusters/source/presentation.json' with { type: 'json' };
+import catalogueIds from '../../prepared-dot-catalogues.json' with { type: 'json' };
 import { discoveryVisibility, type ObjectDiscovery } from '@cssearth/objects';
 import { WORLD_OBJECTS } from '../../world-objects.mts';
 import { APPLICATION_WORLD_CONTEXT } from '../../world-context-plan.mts';
-import { worldHolderFilesOf } from '../../world-places.mts';
+import { worldFilesOf } from '../../world-places.mts';
 import { sourceArray, sourceId, sourceObject, sourceUnique } from '@cssearth/objects/sources';
 import { isJplMissionTarget } from './jpl-mission-targets.mts';
-import systemText from '../../../src/navigation/system-text.json' with { type: 'json' };
-import { allSatelliteSystems } from '../../satellite-systems.mts';
-import { readSourceCatalog } from '@cssearth/bake/sources';
-import { prepareSystemIntroductions } from './system-text.mts';
 import { readPreparedObjects } from '@cssearth/objects/node';
 import { isExtremeTransNeptunian } from '@cssearth/astronomy';
 
 const SCENE_OBJECTS = readPreparedObjects(resolve(import.meta.dirname, '../../..')).sceneObjects;
 
 const output = resolve(import.meta.dirname, '../../prepared-world-presentation.json');
+
+/** A dot layer's presentation record, with the distances named in `fields`. Its catalogue is the one context object of its
+ * type (prepare-catalog.mts dotCatalogueIds), so no catalogue is named here. */
+function layerPresentation<Field extends string>(layer: 'galaxies' | 'clusters', fields: readonly Field[]): Record<Field, number> {
+  const id: unknown = (catalogueIds as Record<string, unknown>)[layer];
+  if (typeof id !== 'string') throw new TypeError(`site/prepared-dot-catalogues.json names no catalogue for the ${layer} dot layer. Run pnpm prepare:catalog.`);
+  const path = `src/objects/${id}/source/presentation.json`;
+  const record = sourceObject(JSON.parse(readFileSync(resolve(import.meta.dirname, '../../..', path), 'utf8')));
+  return Object.fromEntries(fields.map(field => {
+    const value = record[field];
+    if (typeof value !== 'number' || !(value > 0) || !Number.isFinite(value)) throw new TypeError(`${path}: ${field} must be a positive number, not ${JSON.stringify(value)}.`);
+    return [field, value];
+  })) as Record<Field, number>;
+}
 
 const majorByParent = new Map(sourceArray(majorMoons.systems, input => {
   const system = sourceObject(input), ids = sourceArray(system.moons, sourceId);
@@ -136,31 +146,27 @@ function orbitCentres(context: typeof APPLICATION_WORLD_CONTEXT): ReadonlyMap<st
     ...Object.entries(context.orbitCenters ?? {}).map(([id, centre]) => [id, centre.centerBodyId] as const)]);
 }
 
-export function prepareWorldPresentation(satelliteSystemIntroductions: Readonly<Record<string, string>>) {
+export function prepareWorldPresentation() {
   const minor = minorMoonOrbitIds(APPLICATION_WORLD_CONTEXT.bodies);
   const defaultFeatureIds = SCENE_OBJECTS.filter(isDefaultContextFeature).map(object => object.id);
   const orbitFeatureIds = SCENE_OBJECTS.filter(orbitFeature).map(object => object.id);
   return {
-    schema: 'cssearth-world-presentation@5',
-    satelliteSystemIntroductions,
+    schema: 'cssearth-world-presentation@6',
     moons: { major: majorMoonIds(), minor },
     defaultFeatureIds,
     orbitFeatureIds,
     hiddenOrbitIds: [...SCENE_OBJECTS.filter(object => !showsDefaultContextOrbit(object)).map(object => object.id), ...minor],
-    galaxies: { fadeStartDistanceM: galaxies.fadeStartDistanceM, fullDistanceM: galaxies.fullDistanceM, maximumDistanceM: galaxies.maximumDistanceM,
-      minimumDistanceRadii: galaxies.minimumDistanceRadii, defaultFocusRadiusM: galaxies.defaultFocusRadiusM, metersPerParsec: galaxies.metersPerParsec },
-    clusters: { fadeStartDistanceM: clusters.fadeStartDistanceM, fullDistanceM: clusters.fullDistanceM },
+    galaxies: layerPresentation('galaxies', ['fadeStartDistanceM', 'fullDistanceM', 'maximumDistanceM', 'minimumDistanceRadii', 'defaultFocusRadiusM', 'metersPerParsec']),
+    clusters: layerPresentation('clusters', ['fadeStartDistanceM', 'fullDistanceM']),
     categoryFrames: prepareCategoryFrames(WORLD_OBJECTS, new Set(defaultFeatureIds), new Set(orbitFeatureIds),
       notableBodies(WORLD_OBJECTS, new Set(defaultFeatureIds), orbitCentres(APPLICATION_WORLD_CONTEXT)), orbitCentres(APPLICATION_WORLD_CONTEXT),
-      APPLICATION_WORLD_CONTEXT.focus.id, worldHolderFilesOf),
+      APPLICATION_WORLD_CONTEXT.focus.id, worldFilesOf),
   };
 }
 
 /** Write site/prepared-world-presentation.json, leaving an unchanged file untouched. */
 export async function writeWorldPresentation() {
-  const catalogue = await readSourceCatalog(resolve(import.meta.dirname, '../../..'));
-  const introductions = prepareSystemIntroductions(systemText, allSatelliteSystems().map(system => system.hostId), new Set(catalogue.records.map(record => record.id)));
-  const text = `${JSON.stringify(prepareWorldPresentation(introductions))}\n`;
+  const text = `${JSON.stringify(prepareWorldPresentation())}\n`;
   await mkdir(dirname(output), { recursive: true });
   if (await readFile(output, 'utf8').catch(() => null) !== text) await writeFile(output, text);
 }

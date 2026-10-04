@@ -1,12 +1,12 @@
 {
   "schema": "cssearth-object@2",
   "id": "wasp-67-system",
+  "parent": "milky-way",
   "type": "system",
   "generator": "site/build/prepare/system-packages.mts",
   "properties": {
     "system": {
-      "host": "wasp-67",
-      "members": "planets"
+      "host": "wasp-67"
     },
     "catalog": {
       "name": "WASP-67 system",

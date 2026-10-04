@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "capella",
+  "card": {
+    "text": "Two yellow giants 13 parsecs away that circle each other every 104 days.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1088-0004-637x-807-1-26",
+        "url": "https://doi.org/10.1088/0004-637X/807/1/26",
+        "label": "Torres et al. (2015), The Astrophysical Journal 807 26",
+        "checked": "2026-10-03",
+        "locator": "Tables 4 and 5"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its stars weigh 2.57 and 2.48 solar masses, from their orbit; the larger is 11.98 solar radii and 4,970 K at its surface.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1088-0004-637x-807-1-26",
+        "url": "https://doi.org/10.1088/0004-637X/807/1/26",
+        "label": "Torres et al. (2015), The Astrophysical Journal 807 26",
+        "checked": "2026-10-03",
+        "locator": "Tables 4 and 5"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its temperature",
+      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

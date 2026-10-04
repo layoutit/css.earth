@@ -1,7 +1,7 @@
 /** Offline Gaia/Bailer-Jones neighbourhoods in the shared physical volume frame. */
 import { readFile, realpath } from 'node:fs/promises';
 import { isAbsolute, relative, resolve, sep } from 'node:path';
-import { parseDensityVolumeFrame, type DensityVolumeFrame, validatePreparedCataloguePoints, type PreparedCataloguePoint, GAIA_NEBULA_FIELD_SCHEMA } from '@cssearth/objects';
+import { parseDensityVolumeFrame, type DensityVolumeFrame, validatePreparedCataloguePoints, type PreparedCataloguePoint, parseGaiaNebulaField, type GaiaNebulaFieldStar } from '@cssearth/objects';
 import { rotateWorldPosition, transposeWorldRotation, worldRotationFromQuaternion } from '@cssearth/engine';
 
 import { ARCSECOND_RADIANS, METERS_PER_PARSEC } from './nebula-frame.ts';
@@ -12,58 +12,8 @@ function record(v: unknown): Record<string, unknown> {
   if (!isRecord(v)) throw new TypeError('Catalogue field requires an object.');
   return v;
 }
-function number(v: unknown): number {
-  if (typeof v !== 'number' || !Number.isFinite(v)) throw new TypeError('Catalogue field requires finite numbers.');
-  return v;
-}
-function positive(v: unknown): number {
-  const n = number(v); if (!(n > 0)) throw new TypeError('Catalogue field requires positive values.'); return n;
-}
-function nullable(v: unknown): number | null { return v === null ? null : number(v); }
 function text(v: unknown): string {
   if (typeof v !== 'string' || !v.trim()) throw new TypeError('Catalogue field requires nonempty text.'); return v;
-}
-function sky(raValue: unknown, decValue: unknown): [number, number] {
-  const ra = number(raValue), dec = number(decValue);
-  if (ra < 0 || ra >= 360 || Math.abs(dec) > 90) throw new TypeError('Catalogue field ICRS coordinates are invalid.');
-  return [ra, dec];
-}
-function parseField(input: unknown) {
-  const value = record(input), selection = record(value.selection);
-  if (value.schema !== GAIA_NEBULA_FIELD_SCHEMA || !/^[a-z][a-z0-9-]*$/.test(text(value.id))) {
-    throw new TypeError('Invalid Gaia catalogue field schema or identity.');
-  }
-  const center = selection.centerIcrsDegrees;
-  if (!Array.isArray(center) || center.length !== 2) throw new TypeError('Catalogue field needs a two-coordinate centre.');
-  const centerIcrsDegrees = sky(center[0], center[1]), distancePc = positive(selection.distancePc);
-  const outerRadiusPc = positive(selection.outerRadiusPc), featherStartPc = number(selection.featherStartPc);
-  const maximumStars = number(selection.maximumStars), retainedMatchArcsec = number(selection.retainedMatchArcsec ?? 0);
-  if (featherStartPc < 0 || featherStartPc >= outerRadiusPc || !Number.isInteger(maximumStars) ||
-      maximumStars < 1 || maximumStars > 2000 || retainedMatchArcsec < 0 || retainedMatchArcsec > 180 * 3600) {
-    throw new TypeError('Invalid catalogue field sphere, fade, match radius or budget.');
-  }
-  if (!Array.isArray(selection.retainIds)) throw new TypeError('Catalogue field needs explicit retained identities.');
-  const retainIds = selection.retainIds.map(text);
-  const retainedAppearance = selection.retainedAppearance ?? 'dataset';
-  if (retainedAppearance !== 'dataset' && retainedAppearance !== 'anchor') throw new TypeError('Invalid retained star appearance policy.');
-  if (new Set(retainIds).size !== retainIds.length || retainIds.length > maximumStars) throw new TypeError('Invalid retained catalogue identities or budget.');
-  if (!Array.isArray(value.stars)) throw new TypeError('Catalogue field requires source rows.');
-  const ids = new Set<string>();
-  const stars = value.stars.map(inputStar => {
-    const s = record(inputStar), sourceId = text(s.sourceId), [raDeg, decDeg] = sky(s.raDeg, s.decDeg);
-    if (!/^\d{10,20}$/.test(sourceId) || ids.has(sourceId)) throw new TypeError('Gaia source identities must be unique decimal strings.');
-    ids.add(sourceId);
-    const distancePc = positive(s.distancePc), distanceLowerPc = positive(s.distanceLowerPc), distanceUpperPc = positive(s.distanceUpperPc);
-    if (distanceLowerPc > distancePc || distancePc > distanceUpperPc) throw new TypeError('Invalid Gaia distance posterior quantiles.');
-    return { sourceId, raDeg, decDeg, distancePc, distanceLowerPc, distanceUpperPc,
-      pmRaMasYr: nullable(s.pmRaMasYr), pmDecMasYr: nullable(s.pmDecMasYr), photGMeanMag: number(s.photGMeanMag),
-      bpRp: nullable(s.bpRp), parallaxMas: number(s.parallaxMas), parallaxErrorMas: positive(s.parallaxErrorMas), ruwe: positive(s.ruwe) };
-  });
-  return { id: text(value.id), coordinateEpochJulianYear: number(value.coordinateEpochJulianYear), stars,
-    selection: { centerIcrsDegrees, distancePc, outerRadiusPc, featherStartPc, maximumStars, retainedMatchArcsec, retainIds, retainedAppearance,
-      limitingMagnitude: number(selection.limitingMagnitude), fadeMagnitude: positive(selection.fadeMagnitude),
-      referenceMagnitude: number(selection.referenceMagnitude), referenceDiameterPx: positive(selection.referenceDiameterPx),
-      referenceFocalPixels: positive(selection.referenceFocalPixels) } };
 }
 
 function outside(root: string, path: string): boolean {
@@ -76,7 +26,7 @@ async function readPinned(root: string, inputPin: unknown) {
   const owner = await realpath(root), target = await realpath(resolve(owner, path));
   if (outside(owner, target)) throw new TypeError('Catalogue field source escapes its repository owner.');
   const bytes = await readFile(target);
-  return { input: { path, bytes: bytes.length }, field: parseField(JSON.parse(bytes.toString()) as unknown) };
+  return { input: { path, bytes: bytes.length }, field: parseGaiaNebulaField(JSON.parse(bytes.toString()) as unknown, { subset: 'catalogue-selection' }) };
 }
 
 function direction(raDeg: number, decDeg: number): Vector {
@@ -90,7 +40,7 @@ function normalize(v: Vector): Vector {
   if (!(length > 0) || !Number.isFinite(length)) throw new TypeError('Invalid catalogue field physical direction.');
   return scale(v, 1 / length);
 }
-function propagatedDirection(star: ReturnType<typeof parseField>['stars'][number], years: number): Vector {
+function propagatedDirection(star: GaiaNebulaFieldStar, years: number): Vector {
   const ra = star.raDeg * Math.PI / 180, dec = star.decDeg * Math.PI / 180;
   const n = direction(star.raDeg, star.decDeg), k = years * ARCSECOND_RADIANS / 1000;
   const east = (star.pmRaMasYr ?? 0) * k, north = (star.pmDecMasYr ?? 0) * k;
@@ -110,8 +60,12 @@ const RGB_COEFFICIENTS = [
   [-0.02330159, 0.12884074, 0.22149167, -0.14550480, 0.10635149, -0.02363990],
   [-0.13748689, 0.44265552, 0.37878846, -0.14923841, 0.09172474, -0.02594726],
 ];
-function color(bpRp: number | null): { colorCss: string; fallback: boolean } {
-  if (bpRp === null || bpRp <= -0.5 || bpRp >= 2) return { colorCss: '#ffffff', fallback: true };
+/** The polynomials' domain in Gaia BP-RP: the colors they are fitted over. */
+export const GAIA_BP_RP_DISPLAY_DOMAIN = [-0.5, 2] as const;
+/** A Gaia BP-RP color as display chromaticity: neutral white outside the domain or without a value. The catalogue point
+ * banks (packages/bake/cli/prepare-catalogue-points.mts, `appearance.colorByBpRp`) color Gaia stars with the same fit. */
+export function gaiaBpRpDisplayColor(bpRp: number | null): { colorCss: string; fallback: boolean } {
+  if (bpRp === null || bpRp <= GAIA_BP_RP_DISPLAY_DOMAIN[0] || bpRp >= GAIA_BP_RP_DISPLAY_DOMAIN[1]) return { colorCss: '#ffffff', fallback: true };
   const linear = RGB_COEFFICIENTS.map(coefficients => 10 ** (-0.4 * coefficients.reduceRight((sum, a) => sum * bpRp + a, 0)));
   const maximum = Math.max(...linear);
   const channels = linear.map(channel => {
@@ -161,7 +115,7 @@ export async function prepareNebulaCatalogueField(root: string, pin: { path: str
       scale(subtract(scale(positionPc, METERS_PER_PARSEC), frame.originM), 1 / frame.metersPerUnit));
     const sizePx = s.referenceDiameterPx * 10 ** (-0.2 * (star.photGMeanMag - s.referenceMagnitude));
     const diameterUnits = star.distancePc * METERS_PER_PARSEC / frame.metersPerUnit * sizePx / s.referenceFocalPixels;
-    const presentation = color(star.bpRp);
+    const presentation = gaiaBpRpDisplayColor(star.bpRp);
     const opacity = taper(separationPc, s.featherStartPc, s.outerRadiusPc) *
       taper(star.photGMeanMag, s.limitingMagnitude - s.fadeMagnitude, s.limitingMagnitude);
     candidates.push({ point: { id: `gaia-dr3:${star.sourceId}`, positionUnits, sizePx, diameterUnits,

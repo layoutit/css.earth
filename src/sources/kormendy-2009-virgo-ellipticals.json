@@ -30,6 +30,11 @@
       "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/182/216",
       "checkedOn": "2026-10-01",
       "locator": "Table 1, row NGC 4472 = VCC 1226 (arXiv:0810.1681, page 6): D = 17.14 Mpc, major-axis Sérsic fit n = 5.99 (+0.31, -0.29), mu_e = 23.37 V mag per square arcsec, r_e = 269.29 (+23.6, -18.6) arcsec. Table 3 (CDS J/ApJS/182/216 table3.dat), 84 rows NGC4472: the profile ends at r = 1051.962 arcsec (mu_V = 26.771); the rows at 262.623 and 286.748 arcsec give ellipticity 0.203 and 0.209, position angle 154.00 and 154.57 degrees."
+    },
+    {
+      "url": "https://arxiv.org/abs/0810.1681",
+      "checkedOn": "2026-10-03",
+      "locator": "Table 1, major-axis Sérsic fits, and Table 3 (CDS J/ApJS/182/216 table3.dat), where each profile ends, for the Messier ellipticals drawn as volumes: NGC 4621 = VCC 1903 (M59): n = 5.36 (+0.3, -0.28), r_e = 74.63 (+4.62, -3.96) arcsec, profile to 511.682 arcsec; NGC 4649 = VCC 1978 (M60): n = 5.36 (+0.38, -0.32), r_e = 132.05 (+11.6, -9.3) arcsec, profile to 693.426 arcsec; NGC 4374 = VCC 763 (M84): n = 7.98 (+0.71, -0.56), r_e = 142.08 (+19.3, -13.3) arcsec, profile to 486.407 arcsec; NGC 4406 = VCC 881 (M86): n = 10.27 (+0.49, -0.35), r_e = 2341.62 (+625, -357) arcsec, profile to 799.834 arcsec; NGC 4552 = VCC 1632 (M89): n = 9.22 (+1.13, -0.83), r_e = 138.6 (+33.4, -21.5) arcsec, profile to 530.884 arcsec. Section 7.5 (comments on individual ellipticals) calls NGC 4406's n unusually large and its outermost profile uncertain, because its isophotes overlap its neighbours'."
     }
   ],
   "creators": [

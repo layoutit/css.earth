@@ -192,9 +192,33 @@ export function isRegeneratedPreparedFile(filename: string): boolean {
     /^terrain(-[a-z0-9-]+)?\.json$/u.test(filename) || /-source-index\.json$/u.test(filename);
 }
 
+/**
+ * Files an earlier preparation wrote at the top of `prepared/` and none writes now. A checkout baked before the retirement
+ * still holds them, so a rebake there would list and publish them: the generated lineage record (lineage is read from the
+ * source records since 2026-09-29) and the lens list (`datasets.json` since the same day). Add a name here when a
+ * preparation stops writing it.
+ */
+export function isRetiredPreparedFile(filename: string): boolean {
+  return ['provenance.json', 'lenses.json'].includes(filename);
+}
+
 /** Every baked file under an object's `prepared/`: what the inventory publishes and `setup:assets` restores. */
 export async function bakedPreparedFiles(preparedRoot: string, objectId: string): Promise<string[]> {
-  return (await runtimeFiles(preparedRoot, objectId, true)).filter(name => !isRegeneratedPreparedFile(name));
+  return (await runtimeFiles(preparedRoot, objectId, true)).filter(name => !isRegeneratedPreparedFile(name) && !isRetiredPreparedFile(name));
+}
+
+/** Re-inventory part of an object's `prepared/`: the rows `owns` selects are replaced by the baked files it selects, and
+ * every other row stays as it is, so a file that is not restored on this machine keeps its row. For files a shared step
+ * writes into many packages (the world's members, places and system views). */
+export async function inventoryPreparedSubset({ objectId, objectDirectory, owns }: { objectId: string; objectDirectory: string; owns(filename: string): boolean }) {
+  const preparedRoot = resolve(objectDirectory, 'prepared');
+  const baked = await bakedPreparedFiles(preparedRoot, objectId).catch((error: unknown) => {
+    if (typeof error === 'object' && error !== null && 'code' in error && error.code === 'ENOENT') return [] as string[];
+    throw error;
+  });
+  const names = baked.filter(owns).sort((left, right) => left.localeCompare(right));
+  const kept = ((await readInventory(objectId, objectDirectory))?.assets ?? []).filter(asset => asset.location === 'prepared' && !owns(asset.filename));
+  return updateInventory({ objectId, objectDirectory, location: 'prepared', assets: [...kept, ...await hashedAssets(preparedRoot, names, objectId)] });
 }
 
 /** Inventory the object's baked `prepared/` files: an explicit list, or everything baked under `preparedRoot`. */

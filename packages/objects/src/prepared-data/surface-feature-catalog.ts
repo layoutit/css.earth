@@ -1,5 +1,5 @@
 import type { PreparedSurfaceFeaturePlan, SurfaceFeatureCatalogDescriptor } from './runtime-presentation-types.js';
-import { PREPARED_SURFACE_FEATURES_SCHEMA, type ParsedSurfaceFeature as PreparedSurfaceFeature, type ParsedSurfaceFeatureCatalog as PreparedSurfaceFeatureCatalog, type SurfaceFeatureKind, type SurfaceFeatureOutline } from './surface-feature-types.js';
+import { PREPARED_SURFACE_FEATURES_SCHEMA, type ParsedSurfaceFeature, type ParsedSurfaceFeatureCatalog, type SurfaceFeatureKind, type SurfaceFeatureOutline } from './surface-feature-types.js';
 
 const KINDS: readonly SurfaceFeatureKind[] = ['point', 'linear', 'region'];
 function object(value: unknown, label: string): Record<string, unknown> {
@@ -72,7 +72,7 @@ function zoomShare(value: unknown): number {
 }
 
 /** An optional caption note: short text with the article it summarises. */
-function parseNote(value: unknown): PreparedSurfaceFeature['note'] {
+function parseNote(value: unknown): ParsedSurfaceFeature['note'] {
   if (value === undefined) return null;
   const note = object(value, 'feature note');
   const noteText = text(note.text, 'feature note text'), title = text(note.title, 'feature note title'), url = text(note.url, 'feature note url'), credit = note.credit === '' ? '' : text(note.credit, 'feature note credit');
@@ -81,12 +81,12 @@ function parseNote(value: unknown): PreparedSurfaceFeature['note'] {
 }
 
 export function parsePreparedSurfaceFeatureCatalog(value: unknown, plan: PreparedSurfaceFeaturePlan, objectId: string,
-  descriptor: SurfaceFeatureCatalogDescriptor = plan.catalog): PreparedSurfaceFeatureCatalog {
+  descriptor: SurfaceFeatureCatalogDescriptor = plan.catalog): ParsedSurfaceFeatureCatalog {
   const catalog = object(value, 'surface feature catalogue');
   if (catalog.schema !== PREPARED_SURFACE_FEATURES_SCHEMA || catalog.objectId !== objectId) throw new TypeError('Surface feature catalogue is incompatible.');
   if (!Array.isArray(catalog.features) || catalog.features.length !== descriptor.count) throw new TypeError('Surface feature catalogue count differs from its plan.');
   const ids = new Set<string>();
-  const features: PreparedSurfaceFeature[] = catalog.features.map((input, index) => {
+  const features: ParsedSurfaceFeature[] = catalog.features.map((input, index) => {
     const feature = object(input, `surface feature ${index}`);
     const id = text(feature.id, 'feature id'), kind = text(feature.kind, 'feature kind');
     if (!/^[0-9]+$/u.test(id) || ids.has(id) || !KINDS.includes(kind as SurfaceFeatureKind)) throw new TypeError('Surface feature identity or kind is invalid.');

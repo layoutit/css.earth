@@ -1,3 +1,4 @@
+import { RASTER_RECIPE_SCHEMA } from '@cssearth/objects';
 import { alternativeForDataset } from '../layers/terrestrial/index.ts';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
 import type { InputRole } from '@cssearth/objects/provenance';
@@ -60,8 +61,8 @@ export function lineageProducts({ id, recipes, inputs, paths: declared, controls
   const addObservationDatasets = () => namedRecords(record(recipe('observations')).datasets).forEach(plan => add(plan.id,
     [...paths(plan), ...paths(maybeRecord(plan.coverage)?.sources)]));
   // A body on the shared sphere lane takes only its lighting bank from the raster recipe; its datasets are observations.
-  const lightingOnlyRaster = raster?.schema === 'cssearth-raster-recipe@2' && Array.isArray(raster.surfaces) && !raster.surfaces.length;
-  if (raster?.schema === 'cssearth-raster-recipe@2') {
+  const lightingOnlyRaster = raster?.schema === RASTER_RECIPE_SCHEMA && Array.isArray(raster.surfaces) && !raster.surfaces.length;
+  if (raster?.schema === RASTER_RECIPE_SCHEMA) {
     namedRecords(raster.surfaces).forEach((plan, index) => {
       // A science block names its pinned inputs (continuum frames, off-limb context images) beside the surface source.
       // An HMI continuum mosaic names its frames under the science block; its `source` is their directory, not an input.

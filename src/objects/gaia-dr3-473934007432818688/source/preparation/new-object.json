@@ -2,6 +2,10 @@
   "id": "gaia-dr3-473934007432818688",
   "name": "2MASS J04014299+6053457",
   "system": "TOI-6383 system",
+  "boundTo": {
+    "host": "toi-6383-a",
+    "source": "El-Badry, Rix & Heintz (2021, MNRAS 506, 2269) list TOI-6383 A and 2MASS J04014299+6053457 in their Gaia EDR3 wide-binary catalogue (VizieR J/MNRAS/506/2269, source_id 473934011733049856 and 473934007432818688), 3,107 AU apart on the sky, with a chance-alignment probability of 9.5e-5: the pair is bound. No orbit of the pair is published, and the Gaia astrometry alone does not constrain one, so the star is placed by its own astrometry and carries no orbit."
+  },
   "description": "Star bound to TOI-6383 A, 3,107 AU away.",
   "gaia": "473934007432818688",
   "paper": {

@@ -1,12 +1,12 @@
 {
   "schema": "cssearth-object@2",
   "id": "wasp-50-system",
+  "parent": "milky-way",
   "type": "system",
   "generator": "site/build/prepare/system-packages.mts",
   "properties": {
     "system": {
-      "host": "wasp-50",
-      "members": "planets"
+      "host": "wasp-50"
     },
     "catalog": {
       "name": "Chaophraya system",

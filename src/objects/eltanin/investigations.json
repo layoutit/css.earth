@@ -1,0 +1,45 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "eltanin",
+  "entries": [
+    {
+      "id": "placement",
+      "subject": "Placement",
+      "status": "included",
+      "finding": "Anderson & Francis (2012), Astronomy Letters 38, 331 (XHIP), Hipparcos astrometry, VizieR V/137D/XHIP row HIP = 87833: position at J1991.25; Gaia cannot see the star. Distance: Baines et al. (2021), AJ 162, 198, HD 164058: the Hipparcos (van Leeuwen 2007) parallax the radius was computed with (Table 1), 21.14 +/- 0.1 mas, inverted (https://doi.org/10.3847/1538-3881/ac2431): 47.304 +/- 0.224 pc; Gaia DR3 cannot see the star. Proper motion: VizieR V/137D/XHIP row HIP = 87833 (same row): -8.48, -22.79 mas/yr. Radial velocity from Anderson & Francis (2012), Astronomy Letters 38, 331, XHIP, HIP 87833: RV -27.91 +/- 0.19 km/s (quality A).",
+      "evidence": [
+        "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=V/137D/XHIP",
+        "https://doi.org/10.3847/1538-3881/ac2431",
+        "https://doi.org/10.1134/S1063773712050015"
+      ]
+    },
+    {
+      "id": "radius-mass-and-temperature",
+      "subject": "Radius, mass and temperature",
+      "status": "included",
+      "finding": "Radius 51.8 +/- 0.26 solar radii from Baines et al. (2021), AJ 162, 198, HD 164058: radius 51.8 +/- 0.26 solar radii (Table 5), from the limb-darkened angular diameter 10.19 +/- 0.015 mas (NPOI, Table 4) and the Hipparcos (van Leeuwen 2007) parallax (https://doi.org/10.3847/1538-3881/ac2431). No mass is measured, so GM is 0, the records' unpublished value. Temperature 3964 +/- 34 K from Baines et al. (2021), AJ 162, 198, HD 164058: effective temperature 3964 +/- 34 K (Table 5), from the angular diameter and the bolometric flux of the SED fit.",
+      "evidence": [
+        "https://doi.org/10.3847/1538-3881/ac2431"
+      ]
+    },
+    {
+      "id": "color",
+      "subject": "Color",
+      "status": "included",
+      "finding": "HST/STIS Next Generation Spectral Library v2 (Heap & Lindler; MAST high-level science product), HD 164058: 168-1020 nm, cross-checked against Pulkovo spectrophotometric catalogue, table 5 (320-1080 nm, 2.5 nm steps, 10 nm resolution, absolute flux in W m^-2 m^-1): Alekseeva et al. (1996, 1997), Baltic Astronomy 5, 603 and 6, 481; VizieR III/201. Eltanin is HR 6705. (5 levels apart at most, the threshold is 12), through the CIE 1931 2-degree observer: #ffcd8e. Routes tried in order: gaia-xp: the star is placed by a catalogue row, so no Gaia DR3 source is read for it; kiehling: HR 6705 is not among its 60 stars; kharitonov: found, not needed after the color and its cross-check; burnashev: BS 6705 is not in part2; stis-ngsl: used.",
+      "evidence": [
+        "https://archive.stsci.edu/pub/hlsp/stisngsl/v2/hd164058/h_stis_ngsl_hd164058_v2.fits",
+        "https://cdsarc.cds.unistra.fr/ftp/III/201/table5.dat"
+      ]
+    },
+    {
+      "id": "limb-darkening",
+      "subject": "Limb darkening",
+      "status": "included",
+      "finding": "The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 3,964 K and log g 1.64 (u1 0.942, u2 -0.104): a model, because no fit of this star's limb is used.",
+      "evidence": [
+        "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=J/A+A/529/A75"
+      ]
+    }
+  ]
+}

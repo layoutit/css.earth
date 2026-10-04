@@ -2,7 +2,8 @@
 
 Own the runtime validation and the small helpers every other layer shares: predicates, throwing getters, labelled checks,
 decoders and structural guards for values that arrive from outside the type system, plus vector, matrix and scalar math,
-`median`, `isArray`, `canonical` and CLI argument parsing.
+`median`, `isArray`, `canonical` and CLI argument parsing. Shared world rotation/reflection types and validation live in `src/math/world-rotation.ts`; objects parsers and engine navigation import this single definition.
+Convex footprint edge admission and stellar limb-intensity arithmetic live in `src/math/`; format validation and sampling stay with callers.
 Keep the main and `schema` entries dependency-free and host-neutral: no Node built-ins, DOM globals or file I/O, so the
 browser runtime and the preparation tools import the same module. `src/node/` is the one exception: it is published as
 `@cssearth/core/node`, may import `node:*` (the runtime asset content address, the project root), and nothing outside `src/node/` may import it.

@@ -6,7 +6,7 @@ import { parsePreparedWorldContextSummary } from '@cssearth/objects';
 import { createWorldContextPlanner, type WorldContextView } from './world-context-planner.js';
 
 const plan = parsePreparedWorldContextSummary(JSON.parse(await readFile(
-  new URL('../../../../../src/objects/sun/prepared/world-context-summary.json', import.meta.url), 'utf8')));
+  new URL('../../../../../src/objects/observable-universe/prepared/world.json', import.meta.url), 'utf8')));
 const bodies = [plan.focus, ...plan.bodies];
 
 // The first two hosts, the Sun's system first: the planner is one code path, and every host once (~1,000) is the same test a thousand times.

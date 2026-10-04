@@ -51,7 +51,7 @@
           "url": "https://gea.esac.esa.int/archive/"
         },
         "falseColor": false,
-        "notes": "The color of Gaia DR3's measured spectrum of the star: a slightly blue-white F-type dwarf. The darkening toward the edge is the quadratic law Claret (2017) computes from model atmospheres for a star of its Gaia temperature and gravity (6375 K, log g 4.25): a model, because no transit or image measures this star's limb. The spin axis is not measured; the display axis is celestial north."
+        "notes": "The color of Gaia DR3's measured spectrum of the star: a slightly blue-white F-type dwarf. The spin axis is not measured; the display axis is celestial north. The darkening toward the edge is the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 6,375 K and log g 4.25 (u1 0.363, u2 0.310): a model, because no fit of this star's limb is used."
       },
       {
         "id": "debris-ring",

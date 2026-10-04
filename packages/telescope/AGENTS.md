@@ -36,3 +36,7 @@ to reinstall it.
 - Every source file, test, tool, and generated source is limited to 600 physical lines, including blanks/comments.
 - `pnpm lint:packages` enforces the limit. Split code by responsibility.
 - Maintain README.md and CLAUDE.md as a symlink to this guide. Test behavior and package boundaries.
+
+Product record data, evidence kinds and parsing live in `@cssearth/objects`. This package retains product paths,
+evidence queries, Node run identity and file transport. VO metadata, pins, regions, JSON admission and discovery
+snapshots also come from objects; archive/network operations and row identity queries stay here.

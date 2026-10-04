@@ -1,0 +1,41 @@
+{
+  "schema": "cssearth-inventory@1",
+  "assets": [
+    {
+      "location": "prepared",
+      "filename": "members.json",
+      "bytes": 1715,
+      "sha256": "4004b2d8a333033b625f99d9780e0a265436694f22173972bd4bb9d554421b48"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/hr-8799-b.bin",
+      "bytes": 1947,
+      "sha256": "b1256249ceedbd474df023b655334585a9fe2729e079b698111f0dada9874c80"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/hr-8799-c.bin",
+      "bytes": 1939,
+      "sha256": "f2f507611db54bff83b386da2946eb12cb2fc82057607e411d7cc23d3b7058d5"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/hr-8799-d.bin",
+      "bytes": 1926,
+      "sha256": "237aaa3baa6d0de265ddba64b779278486f7f0d9a434e0a0a6b8b9e4b6ee8bd8"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/hr-8799-e.bin",
+      "bytes": 1943,
+      "sha256": "5c95335aa3fa3a7ea2607fb01a225e8b186b87a70ef2d7843ea00fd35f852639"
+    },
+    {
+      "location": "prepared",
+      "filename": "views/hr-8799.json",
+      "bytes": 42947,
+      "sha256": "66cfcac887567bf72193f73883b19efae7ce6b7b3ec4047fe2a83bd38d8c128a"
+    }
+  ]
+}

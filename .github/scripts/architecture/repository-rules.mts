@@ -1,9 +1,10 @@
 /** Rules the architecture check applies to the repository itself rather than to the import graph. They have no
  * baseline: the repository satisfies each of them today, so every finding fails the check, and
  * `--update-baseline` never records one. */
+import ts from 'typescript';
 import { checkBakeWithoutRenderer } from './bake-without-renderer.mts';
 import { checkFormatSchemaOwnership } from './format-schema-ownership.mts';
-import { existsSync, readFileSync } from 'node:fs';
+import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { dirname, posix, resolve } from 'node:path';
 import { declaredPackage, importedSpecifiers } from './declared-dependencies.mts';
 import { isTestPath } from './zones.mts';
@@ -43,12 +44,22 @@ export function objectCodeFiles(files: readonly string[]): string[] {
   return files.filter(file => OBJECT_CODE.test(file) && !isTestPath(file)).map(file => `${file}: object packages hold data only; put code in packages/ or site/`);
 }
 
+/** Only established format owners may be top-level objects source folders. */
+export const OBJECT_FORMAT_FOLDERS: readonly string[] = ["node", "prepared-data", "provenance", "registry", "sources", "stars", "volume"];
+export function objectFormatFolders(root: string): string[] {
+  const directory = resolve(root, 'packages/objects/src');
+  if (!existsSync(directory)) return [];
+  return readdirSync(directory, { withFileTypes: true })
+    .filter(entry => entry.isDirectory() && !OBJECT_FORMAT_FOLDERS.includes(entry.name))
+    .map(entry => `packages/objects/src/${entry.name}/: objects holds formats only; put algorithms in their owning package`);
+}
+
 export const REPOSITORY_RULES: readonly RepositoryRule[] = [
   { id: 'bake-without-renderer', description: 'bake declares no renderer dependency and permits no renderer exception', check: checkBakeWithoutRenderer },
   { id: 'format-schema-ownership', description: 'shared raw schema literals and duplicates of objects definitions fail; schema/owner exceptions must remain current and justified', check: checkFormatSchemaOwnership },
   { id: 'preparation-without-renderer', description: 'preparation packages reach renderer only through named, file-scoped runtime consumers; stale exceptions fail', check: checkPreparationWithoutRenderer },
   { id: 'workspace-package-cycles', description: 'workspace packages have no dependency cycles, including dev and peer dependencies', check: checkPackageCycles },
-  { id: 'integration-owners', description: 'integration files import at least two owners with no transitive workspace dependency between them', check: checkIntegrationOwners },
+  { id: 'integration-owners', description: 'integration files import public entries only and at least two owners with no transitive workspace dependency between them', check: checkIntegrationOwners },
   {
     id: 'retired-folders',
     description: 'no file lives under a tools/ folder or root tests/ folder (RETIRED_FOLDERS in repository-rules.mts)',
@@ -56,8 +67,8 @@ export const REPOSITORY_RULES: readonly RepositoryRule[] = [
   },
   {
     id: 'objects-hold-data',
-    description: 'src/objects/ holds no script or Astro module: object content reaches the runtime as data (objectCodeFiles in repository-rules.mts)',
-    check: (_root, files) => objectCodeFiles(files),
+    description: 'src/objects/ holds no script or Astro module; packages/objects/src/ permits only listed format folders',
+    check: (root, files) => [...objectCodeFiles(files), ...objectFormatFolders(root)],
   },
   {
     id: 'nebula-boundaries',
@@ -88,7 +99,9 @@ export function isBroken(findings: ReadonlyMap<string, readonly string[]>): bool
 }
 
 /** Count static import owners and require an independent pair. All declared workspace dependencies count;
- * nested lab packages belong to the labs owner, including their dependencies. */
+ * nested lab packages belong to the labs owner, including their dependencies. Only source files are checked;
+ * instruction and fixture data files such as `AGENTS.md` import nothing. Literal new URL paths are checked too;
+ * computed paths and import(variable) cannot be resolved statically. */
 export function checkIntegrationOwners(root: string, files: readonly string[]): string[] {
   const packages = files.filter(file => /^(?:packages\/[^/]+|labs\/[^/]+(?:\/packages\/[^/]+)?)\/package\.json$/u.test(file))
     .map(file => declaredPackage(file, JSON.parse(readFileSync(resolve(root, file), 'utf8'))));
@@ -108,16 +121,35 @@ export function checkIntegrationOwners(root: string, files: readonly string[]): 
       return dependency !== undefined && reaches(owner(`${dependency.directory}/index.ts`) ?? dependency.directory, to, seen);
     });
   };
-  return files.filter(file => file.startsWith('integration/')).flatMap(file => {
+  return files.filter(file => file.startsWith('integration/') && /\.[cm]?[jt]sx?$/u.test(file)).flatMap(file => {
     if (!existsSync(resolve(root, file))) return [`${file}: integration file is missing`];
-    const owners = new Set(importedSpecifiers(readFileSync(resolve(root, file), 'utf8'), file).flatMap(specifier => {
+    const findings: string[] = [];
+    const text = readFileSync(resolve(root, file), 'utf8');
+    const specifiers = importedSpecifiers(text, file);
+    const visit = (node: ts.Node): void => {
+      if (ts.isNewExpression(node) && ts.isIdentifier(node.expression) && node.expression.text === 'URL'
+        && node.arguments?.[0] && ts.isStringLiteralLike(node.arguments[0])) specifiers.push(node.arguments[0].text);
+      ts.forEachChild(node, visit);
+    };
+    visit(ts.createSourceFile(file, text, ts.ScriptTarget.Latest, true));
+    const owners = new Set(specifiers.flatMap(specifier => {
       const pkg = packages.find(item => specifier === item.name || specifier.startsWith(`${item.name}/`));
       const path = specifier.startsWith('.') ? posix.normalize(posix.join(dirname(file), specifier)) : specifier.replace(/^\//u, '');
+      if (pkg) {
+        const manifest: unknown = JSON.parse(readFileSync(resolve(root, `${pkg.directory}/package.json`), 'utf8'));
+        const exports = manifest && typeof manifest === 'object' && 'exports' in manifest ? manifest.exports : undefined;
+        const entry = specifier === pkg.name ? '.' : `.${specifier.slice(pkg.name.length)}`;
+        const entries = exports && typeof exports === 'object' ? Object.keys(exports) : ['.'];
+        const published = entries.some(key => key === entry || key.includes('*') && entry.startsWith(key.split('*')[0]!) && entry.endsWith(key.split('*')[1]!));
+        if (!published || /\.[cm]?[jt]sx?$/u.test(entry)) findings.push(`${file}: integration imports public package entries only; private source import ${specifier}`);
+      } else if (specifier.startsWith('.') || specifier.startsWith('/')) {
+        if (owner(path)) findings.push(`${file}: integration imports public package entries only; relative owner import ${specifier}`);
+      }
       const imported = pkg ? owner(`${pkg.directory}/index.ts`) : owner(path);
       return imported ? [imported] : [];
     }));
     const list = [...owners];
     const independent = list.some((left, i) => list.slice(i + 1).some(right => !reaches(left, right) && !reaches(right, left)));
-    return independent ? [] : [`${file}: integration must import at least two independent owners; found ${list.join(', ') || 'none'}`];
+    return independent ? findings : [...findings, `${file}: integration must import at least two independent owners; found ${list.join(', ') || 'none'}`];
   });
 }

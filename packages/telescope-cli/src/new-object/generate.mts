@@ -26,6 +26,7 @@ import { gaiaCepheidClass } from '@cssearth/bake/photometry';
 import { CEPHEID_GRAVITIES } from './cepheids.mts';
 import { writeLedger } from './ledger.mts';
 import { adql, csv, SIMBAD_TAP } from './companions.mts';
+import { packageParent, withParent } from './package-parent.mts';
 
 const SOLAR_RADIUS_KM = 695700, GM_SUN = 132712440041.93938;
 const GAIA_LICENSE = { license: 'Gaia data are public under the ESA Gaia data policy; the Gaia/DPAC credit is retained', licenseEvidence: ['https://www.cosmos.esa.int/web/gaia-users/credits'] };
@@ -123,12 +124,14 @@ export function astronomyRecord(spec: StarSpec, row: GaiaRow | CatalogueRow, ids
       + ' presentationUp: the display axis is a sky-plane convention; the spin axis\'s position angle on the sky is not measured.',
     star: { rightAscensionDegrees: row.ra, declinationDegrees: row.dec, positionEpochJulianYear: gaia ? 2016 : catalogue!.epoch, distanceParsecs: place.parsecs,
       properMotionRaMasPerYear: place.properMotion.ra, properMotionDecMasPerYear: place.properMotion.dec, radialVelocityKmPerS: rv, presentationUp: 'display-axis',
+      ...(spec.boundTo ? { boundTo: spec.boundTo.host } : {}),
       sources: {
         position: gaia ? `Gaia DR3 source ${gaia.sourceId} (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/${spec.id}/source/photometry/gaia-dr3-source.csv${cross ? `; cross-identification ${cross}: https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia+DR3+${gaia.sourceId}` : ''}`
           : `${spec.position!.credit} (${spec.position!.url}), VizieR ${catalogue!.words}: RAJ2000 ${row.ra}, DEJ2000 ${row.dec}${catalogue!.epoch === 2000 ? '' : ` (ICRS at epoch J${catalogue!.epoch})`}, from the archived row src/objects/${spec.id}/source/${CATALOGUE_ROW_PATH}${spec.target ? `; SIMBAD names it ${spec.target}` : ''}`,
         distance: place.source,
         properMotion: place.properMotion.source,
-        radialVelocity: gaia?.radialVelocity !== undefined ? `Gaia DR3 (same row): ${gaia.radialVelocity.toFixed(2)}${gaia.radialVelocityError ? ` +/- ${gaia.radialVelocityError.toFixed(2)}` : ''} km/s` : `${spec.radialVelocity!.source} (${spec.radialVelocity!.url})` } } };
+        radialVelocity: gaia?.radialVelocity !== undefined ? `Gaia DR3 (same row): ${gaia.radialVelocity.toFixed(2)}${gaia.radialVelocityError ? ` +/- ${gaia.radialVelocityError.toFixed(2)}` : ''} km/s` : `${spec.radialVelocity!.source} (${spec.radialVelocity!.url})`,
+        ...(spec.boundTo ? { binary: spec.boundTo.source } : {}) } } };
 }
 
 /** A publication record in src/sources for a cited arXiv or DOI link. */
@@ -175,7 +178,7 @@ export async function generateStar(spec: StarSpec, { archive = liveArchive, root
   const bright = spec.position?.motion && spec.target ? await resolver(spec.target) : undefined;
   const ids: Identifiers = bright ? readIdentifiers(bright.mainId, bright.identifiers) : spec.position ? { main: spec.target ?? spec.name } : await identify(resolver, spec.target, spec.gaia, spec.id);
   const cmf = parseCieTable((await readCie1931ColorMatching()).toString('utf8'), 3);
-  const urls = [...new Set([spec.paper.url, ...(spec.text?.quotes ? [spec.text.quotes.url] : []), ...spec.position ? [spec.position.url] : [], ...[spec.radius, spec.mass, spec.temperature, spec.gravity, spec.radialVelocity, spec.distance, spec.spin].flatMap(value => value && value !== 'gaia-flame' && value !== 'unmeasured' ? [value.url] : [])])];
+  const urls = [...new Set([spec.paper.url, ...(spec.text?.quotes ? [spec.text.quotes.url] : []), ...spec.position ? [spec.position.url] : [], ...[spec.radius, spec.mass, spec.temperature, spec.gravity, spec.radialVelocity, spec.distance, spec.spin, spec.gravityDarkening].flatMap(value => value && value !== 'gaia-flame' && value !== 'unmeasured' ? [value.url] : [])])];
   const [gaiaRead, catalogueRow, found] = await Promise.all([spec.position ? undefined : fetchGaiaRow(archive, ids.gaia!), spec.position ? fetchCatalogueRow(archive, spec.position, spec.id) : undefined,
     Promise.all(urls.map(async url => [url, await fetchPublication(archive, url)] as const))]);
   const gaia = gaiaRead?.row, row: GaiaRow | CatalogueRow = gaia ?? catalogueRow!, label = gaia ? `Gaia DR3 ${gaia.sourceId}` : `VizieR ${catalogueRow!.words}`;
@@ -204,7 +207,7 @@ export async function generateStar(spec: StarSpec, { archive = liveArchive, root
   const gravity = Number.isFinite(physical.logg) || spec.limb?.none ? null
     : await chooseGravity({ archive, ...simbadPosition(row, place.properMotion), teffK: spec.temperature.value, ...(gravityRange ? { range: gravityRange } : {}), where: id });
   const limbLogg = gravity?.logg ?? physical.logg;
-  const [color, limb] = await Promise.all([chooseColor(spec, gaia, ids, archive, cmf), chooseLimb(id, spec.temperature.value, limbLogg, archive, spec.limb?.none ?? (Number.isFinite(limbLogg) ? undefined : 'no surface gravity is known: the mass is unmeasured, no spectroscopic log g is published and the spec gives no range for its class'), physical.gm > 0 ? Number((physical.gm / GM_SUN).toFixed(3)) : undefined)]);
+  const [color, limb] = await Promise.all([chooseColor(spec, gaia, ids, archive, cmf, row), chooseLimb(id, spec.temperature.value, limbLogg, archive, spec.limb?.none ?? (Number.isFinite(limbLogg) ? undefined : 'no surface gravity is known: the mass is unmeasured, no spectroscopic log g is published and the spec gives no range for its class'), physical.gm > 0 ? Number((physical.gm / GM_SUN).toFixed(3)) : undefined, spec.whiteDwarf?.atmosphere)]);
   const publications = new Map<string, Publication>(found.flatMap(([url, publication]) => publication ? [[url, publication]] : []));
   const catalogueOf = (url: string) => { const publication = publications.get(url); if (!publication) throw new TypeError(`${id}: no publication record was read for ${url}; cite the paper by arXiv, DOI or ADS link, or a web page by its address.`); return publication; };
   const paper = catalogueOf(spec.paper.url);
@@ -212,7 +215,7 @@ export async function generateStar(spec: StarSpec, { archive = liveArchive, root
   // The package the scaffold writes, then every file the data decide.
   const scaffold = scaffoldStarFiles({ id, name: spec.name, system: spec.system, temperatureK: spec.temperature.value, temperatureSource: `${spec.temperature.source} (${spec.temperature.url})`,
     description: spec.description, paper: spec.paper.url, paperCredit: spec.paper.credit, order, ...(spec.aliases ? { aliases: spec.aliases } : {}), ...(spec.featured ? { featured: true as const } : {}) }, body, solarEpoch.SOLAR_GEOMETRY_EPOCH_JD_TT);
-  const files = new Map<string, string | Buffer>(scaffold), read = (path: string) => JSON.parse(String(files.get(path))) as Record<string, any>;
+  const files = withParent(new Map<string, string | Buffer>(scaffold), id, await packageParent(root, id, spec)), read = (path: string) => JSON.parse(String(files.get(path))) as Record<string, any>;
   files.set(`packages/astronomy/data/bodies/${id}.json`, `${JSON.stringify(body, null, 1)}\n`);
   if (gaiaRead) files.set(`${s}/photometry/gaia-dr3-source.csv`, gaiaRead.csv);
   if (catalogueRow) files.set(`${s}/${CATALOGUE_ROW_PATH}`, catalogueRow.tsv);
@@ -344,6 +347,7 @@ export async function generateStar(spec: StarSpec, { archive = liveArchive, root
     ...lightCurve ? [lightCurve.decision] : [],
   ]);
 
+  if (spec.gravityDarkening) (await import('./roche-shape.mts')).installRocheShape(files, spec, row, catalogueOf(spec.gravityDarkening.url).id);
   const todo = [...color.todo ? [color.todo] : [], ...spec.text ? ['review the drafted card, introduction and README'] : ['reader card and introduction with quotes (text.json)', 'the README account of the star and its evidence']];
   return { id, files, color, limb, hex: colorHex, todo };
 }
@@ -488,6 +492,7 @@ export async function runNewObject(specPath: string, { root = process.cwd(), pro
     progress(`[${++done}/${total}] ${pulsar.id}: writing the pulsar from its cited values`);
     try {
       const { generatePulsar } = await import('./pulsar.mts'), generated = await generatePulsar(pulsar, { order: pulsar.order ?? next++, epochJdTt: solarEpoch.SOLAR_GEOMETRY_EPOCH_JD_TT });
+      withParent(generated.files, pulsar.id, await packageParent(root, pulsar.id, pulsar));
       results.push({ id: pulsar.id, kind: 'star', files: (await writeGenerated(generated, root)).written.length, color: `${generated.regions} hot regions`, todo: ['review the drafted card, introduction and README'] });
     } catch (error) { failed(pulsar.id, 'star', error); }
   }

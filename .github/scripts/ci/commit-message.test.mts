@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { execFile } from 'node:child_process';
-import { copyFile, mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
+import { chmod, copyFile, mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { dirname, resolve } from 'node:path';
 import { promisify } from 'node:util';
@@ -145,4 +145,17 @@ test('the installer overwrites only its own dispatcher, and the dispatcher fails
   } finally {
     await rm(root, { recursive: true, force: true });
   }
+});
+
+test('tracked hook fails loudly when its checker disappears', async () => {
+  const { root, git } = await hookClone();
+  try {
+    await chmod(resolve(root, '.githooks/commit-msg'), 0o755);
+    await git('config', 'core.hooksPath', '.githooks');
+    await rm(resolve(root, '.github/scripts/ci/commit-message.mts'));
+    await assert.rejects(git('commit', '-q', '--allow-empty', '-m', 'chore: missing checker'),
+      /commit-message\.mts is missing; restore it/u);
+    await copyFile(resolve(import.meta.dirname, 'commit-message.mts'), resolve(root, '.github/scripts/ci/commit-message.mts'));
+    await git('commit', '-q', '--allow-empty', '-m', 'chore: restored checker');
+  } finally { await rm(root, { recursive: true, force: true }); }
 });

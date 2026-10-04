@@ -13,6 +13,7 @@ For a body's sources, processing, evidence and known problems, read its
 | PR feedback budget, check selection, failure recovery and deployment | [CI/CD maintenance](ci-cd.md) |
 | Galaxies, LMC image datasets and extragalactic datasets | [Galaxies and the nearby universe](galaxies/README.md) |
 | Nebula reconstruction, spectral datasets and reproducible delivery | [Prepared nebulae](nebulae/README.md) |
+| The Messier catalogue: clusters as member stars, galaxies and nebulae as pictures | [The Messier catalogue](messier/README.md) |
 | Recording sources and evidence | [Provenance contract](provenance/CONTRACT.md) |
 | Catalog-wide image-to-shape faithfulness review | [Surface-registration review](provenance/surface-registration-review.md) |
 | Decoding images, reducing meshes, mapping UVs and baking atlases | [Image and surface preparation](surface-preparation.md) |

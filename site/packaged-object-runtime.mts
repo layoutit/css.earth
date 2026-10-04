@@ -12,7 +12,7 @@ import { startupFetch } from './startup-requests.mts';
 /** Started at boot (`startup-boot.mts`), so the decoding worker's script loads beside the first object's bytes. */
 export { prestartPreparedObjectDecoding as prestartObjectDecoding } from '@cssearth/renderer';
 import { preparedObjectUrl } from './prepared-object-path.mts';
-import { levelViewDescriptor } from './level-view.mts';
+import { insideViewDescriptor } from './inside-view.mts';
 
 // The application supplies its shell nodes and authoritative input policy.
 // The CSS renderer consumes prepared content; the engine supplies numeric behavior.
@@ -39,8 +39,8 @@ function adoptsServerMarkup(id: string) {
 }
 
 export async function loadPackagedObject(input: unknown, signal?: AbortSignal) {
-  // A level of the zoom ladder is seen from the star it is centred on (level-view.mts).
-  const descriptorInput = parseObjectDescriptor(await levelViewDescriptor(input));
+  // An object seen from inside is seen around the star the zoom is centred on (inside-view.mts).
+  const descriptorInput = parseObjectDescriptor(await insideViewDescriptor(input));
   return loadNavigableObject(descriptorInput, {
     async read(reference, signal) {
       // Static endpoints copy the transport bytes during the build.

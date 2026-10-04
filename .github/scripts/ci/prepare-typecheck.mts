@@ -10,6 +10,7 @@ import { type RuntimeAssetLocation, inventoryAssets } from '@cssearth/bake/deliv
 import { installRuntimeAssets } from '@cssearth/bake/asset-publication';
 import { volumeMetadataAssets } from '@cssearth/bake/delivery';
 import { hasErrorCode, requireArray, requireRecord, requireString } from '@cssearth/core';
+import { OBJECT_TREE_ROOT, parsePreparedWorldIndex } from '@cssearth/objects';
 import { readPreparedObjects } from '@cssearth/objects/node';
 
 const SCENE_OBJECTS = readPreparedObjects(resolve(import.meta.dirname, '../../..')).sceneObjects;
@@ -43,12 +44,17 @@ export function preparedJsonImports(file: string, source: string, root: string):
   return [...paths].sort();
 }
 
+/** Generated modules that import prepared JSON found by rule, so that no authored file names its object: the application's
+ * context objects import the galaxy catalogue's display sample (site/build/prepare/prepare-catalog.mts contextObjectModule).
+ * The preparation build writes them before this scan; git ignores them, so the listing below does not find them. */
+const GENERATED_IMPORTERS = ['site/prepared-context-objects.mts'];
+
 /** Scan maintained source, including test imports. Generated declarations are not an alternate data contract.
  * All authored TypeScript/Astro is a conservative superset of the application and test compiler programs, so a
  * newly introduced literal import automatically joins the plan without another hand-maintained body list. */
 export async function collectTypecheckPreparedImports(root = projectRoot) {
   const { stdout } = await exec('git', ['ls-files', '--cached', '--others', '--exclude-standard', '-z'], { cwd: root, maxBuffer: 32 * 1024 * 1024 });
-  const files = [...new Set(stdout.split('\0').filter(path => /\.(?:[cm]?ts|tsx|astro)$/u.test(path)))];
+  const files = [...new Set([...stdout.split('\0').filter(path => /\.(?:[cm]?ts|tsx|astro)$/u.test(path)), ...GENERATED_IMPORTERS])];
   const paths = new Set<string>();
   for (const file of files) {
     const source = await readFile(resolve(root, file), 'utf8').catch((error: unknown) => {
@@ -81,7 +87,7 @@ export async function typecheckAssetsForPaths(paths: readonly string[], root = p
       const matches = candidates.filter(asset => asset.file === file);
       if (matches.length > 1) throw new TypeError(`Ambiguous typecheck inventory: ${id}/${filename}`);
       if (matches.length === 1) assets.push(matches[0]!);
-      else await access(file); // Tracked/generated inputs are supplied by checkout and build:tools.
+      else await access(file); // Tracked/generated inputs are supplied by checkout and build:preparation.
     }
   }
   return assets;
@@ -127,14 +133,21 @@ export async function restoreTypecheckInputs({ root = projectRoot, fetcher = fet
   const imports = await collectTypecheckPreparedImports(root);
   const catalogue = await volumeMetadataAssets(root);
   const features = await typecheckFeatureAssets(root);
-  // The world summary names the files that hold its other bodies, which Node reads by computed path. They restore with it:
-  // the world step of build:tools bakes without the bodies' imagery, so its own copies place stars in different files.
-  const summary = resolve(root, 'src/objects/sun/prepared/world-context-summary.json');
-  const world = imports.includes(summary)
-    ? (await inventoryAssets(root, ['sun'], { location: 'prepared' })).filter(asset => /^(?:world-systems\/.+|world-(?:stars|index|hosts))\.json$/u.test(relative(dirname(summary), asset.file).split(sep).join('/')))
-    : [];
-  const initial = uniqueAssets([...await typecheckAssetsForPaths(imports, root), ...world, ...catalogue.assets, ...features.assets]);
+  // The world index names every object with a file of world bodies, which Node reads by computed path: each object's
+  // `members.json` and `places.json` in its own package. They restore with the summary, after the index that names them:
+  // the world step of build:preparation bakes without the bodies' imagery, so its own copies place stars in different files.
+  const summary = resolve(root, `src/objects/${OBJECT_TREE_ROOT}/prepared/world.json`);
+  const world = imports.includes(summary) ? await inventoryAssets(root, [OBJECT_TREE_ROOT], { location: 'prepared', filenames: ['world-index.json'] }) : [];
+  const earthPlaces = await inventoryAssets(root, ['earth'], { location: 'public', filenames: ['earth-places.json'] });
+  if (earthPlaces.length !== 1) throw new TypeError('Typecheck preparation requires the inventoried public earth-places.json.');
+  const initial = uniqueAssets([...earthPlaces, ...await typecheckAssetsForPaths(imports, root), ...world, ...catalogue.assets, ...features.assets]);
   const first = await installRuntimeAssets(initial, { fetcher });
+  const index = world.length ? parsePreparedWorldIndex(JSON.parse(await readFile(world[0]!.file, 'utf8'))) : null;
+  const holders = index ? index.files : [];
+  const members = uniqueAssets(holders.length ? await inventoryAssets(root, holders, { location: 'prepared', filenames: ['members.json', 'places.json'] }) : []);
+  const memberFiles = members.filter(asset => asset.filename === 'members.json').length;
+  if (memberFiles !== holders.length) throw new TypeError(`The world index names ${holders.length} objects with files and their packages' inventories publish ${memberFiles} members.json files.`);
+  const held = await installRuntimeAssets(members, { fetcher });
   const landmarkRuntimes: string[] = [];
   for (const asset of features.catalogues) {
     const data = requireRecord(JSON.parse(await readFile(asset.file, 'utf8')));
@@ -143,9 +156,9 @@ export async function restoreTypecheckInputs({ root = projectRoot, fetcher = fet
   const followup = uniqueAssets(await typecheckAssetsForPaths(landmarkRuntimes, root))
     .filter(asset => !initial.some(previous => previous.file === asset.file));
   const second = await installRuntimeAssets(followup, { fetcher });
-  const assets = uniqueAssets([...initial, ...followup]);
+  const assets = uniqueAssets([...initial, ...followup, ...members]);
   return { files: assets.length, bytes: assets.reduce((sum, asset) => sum + asset.bytes, 0),
-    installed: first.installed + second.installed, reused: first.reused + second.reused };
+    installed: first.installed + second.installed + held.installed, reused: first.reused + second.reused + held.reused };
 }
 
 async function run(root: string, args: string[]) {
@@ -166,7 +179,7 @@ export async function prepareTypecheck() {
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
-  // Entry script: `pnpm prepare:typecheck` (after pnpm build:tools).
-  if (process.argv.length !== 2) throw new TypeError('Usage: node .github/scripts/ci/prepare-typecheck.mts (after pnpm build:tools)');
+  // Entry script: `pnpm prepare:typecheck` (after pnpm build:preparation).
+  if (process.argv.length !== 2) throw new TypeError('Usage: node .github/scripts/ci/prepare-typecheck.mts (after pnpm build:preparation)');
   await prepareTypecheck();
 }

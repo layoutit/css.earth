@@ -1,0 +1,28 @@
+{
+  "id": "m34",
+  "classification": "open-cluster",
+  "order": 5234,
+  "physical": {
+    "name": "M34",
+    "horizonsCode": null,
+    "meanRadiusKm": 0,
+    "gravitationalParameterKm3PerS2": 0,
+    "parent": null
+  },
+  "physicalNotes": "No radius or mass of M34 is recorded: it is an extended star cluster, and its package frames it at 11.4 pc (object.json worldFrame.bodyRadiusM), Hunt & Reffert's tidal radius estimate, a presentation value.",
+  "star": {
+    "rightAscensionDegrees": 40.54817559,
+    "declinationDegrees": 42.72207819,
+    "positionEpochJulianYear": 2000,
+    "distanceParsecs": 489.73176952,
+    "properMotionRaMasPerYear": 0,
+    "properMotionDecMasPerYear": 0,
+    "radialVelocityKmPerS": -7.07770846,
+    "sources": {
+      "position": "Hunt & Reffert (2023), Improving the open cluster census. II. An all-sky cluster catalogue with Gaia DR3, A&A 673, A114; CDS J/A+A/673/A114, Table 3 (clusters), NGC_1039: RA_ICRS 40.54817559, DE_ICRS 42.72207819, the densest point of its members (epoch 2016.0) (https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114)",
+      "distance": "Hunt & Reffert (2023), Improving the open cluster census. II. An all-sky cluster catalogue with Gaia DR3, A&A 673, A114; CDS J/A+A/673/A114, Table 3 (clusters), NGC_1039: dist50, the median of the maximum-likelihood distance, 489.73176952 pc (16th to 84th percentile 489 to 490) (https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114)",
+      "properMotion": "Zero: the cluster is held at its catalogued position; no motion across the sky is applied.",
+      "radialVelocity": "Hunt & Reffert (2023), Table 3, NGC_1039: mean Gaia DR3 radial velocity -7.07770846 km/s of 228 members (https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114)"
+    }
+  }
+}

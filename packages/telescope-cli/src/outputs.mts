@@ -6,7 +6,7 @@ import { dirname, resolve, relative, isAbsolute } from 'node:path';
 import { randomUUID } from 'node:crypto';
 import { requireRecord, requireArray, requireString, requireFiniteNumber } from '@cssearth/core';
 import { writeProductRecord } from '@cssearth/telescope/node';
-import { parseProductRecord } from '@cssearth/telescope';
+import { parseProductRecord } from '@cssearth/objects';
 import { VERSION } from './help.mts';
 import { sciencePackage } from '@cssearth/telescope/node';
 import { plotProduct } from '@cssearth/telescope/node';

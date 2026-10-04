@@ -10,12 +10,12 @@ export type CiInputMode = 'universe' | 'universe-preparation';
 
 export function requireCiInputMode(args: readonly string[]): CiInputMode {
   if (args.length !== 1 || (args[0] !== 'universe' && args[0] !== 'universe-preparation')) {
-    throw new TypeError('Usage: node .github/scripts/ci/prepare-ci-inputs.mts <universe|universe-preparation> (run pnpm build:tools first).');
+    throw new TypeError('Usage: node .github/scripts/ci/prepare-ci-inputs.mts <universe|universe-preparation> (run pnpm build:preparation first).');
   }
   return args[0];
 }
 
-/** Inputs consumed by the preparation job, after build:tools has generated the registry and world context.
+/** Inputs consumed by the preparation job, after build:preparation has generated the registry and world context.
  * Registry-wide navigation tests require every prepared runtime. Real volume/shell tests require their full
  * prepared banks. Only the Mimas finalization fixture reads body textures, through interior-fill sampling;
  * other bodies' public texture banks are not inputs to this job. This is a test-fixture selection, not a registry.

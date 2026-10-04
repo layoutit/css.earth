@@ -1,4 +1,5 @@
-import { type DatasetVolume, type WorldCameraPose } from '@cssearth/objects';
+import { type DatasetVolume } from '@cssearth/objects';
+import { type WorldCameraPose } from '@cssearth/engine';
 
 import type { ObjectSelection } from './object-contract.js';
 

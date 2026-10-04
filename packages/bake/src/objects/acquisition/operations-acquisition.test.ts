@@ -22,6 +22,16 @@ const temporary = async (work: (directory: string) => Promise<void>) => {
   try { await work(directory); } finally { await rm(directory,{recursive:true,force:true}); }
 };
 
+test('the default transport names this project and keeps a step\'s own headers',t=>temporary(async directory=>{
+  // Zenodo refused the runtime's default user agent with 403 (2026-10-03); a request that names who asks is served.
+  const data=new TextEncoder().encode('source bytes'),manifest=rawManifest(data),asked:Headers[]=[];
+  t.mock.method(globalThis,'fetch',async(_url:unknown,init?:RequestInit)=>{asked.push(new Headers(init?.headers));return new Response(data);});
+  await executeAcquisition({sourceRoot:directory,manifest,plan:rawPlan});
+  assert.match(asked[0]!.get('user-agent')??'',/^cssEarth\/[\d.]+ \(https:\/\/github\.com\/layoutit\/css\.earth; source restore\)$/u);
+  assert.equal(asked[0]!.get('x-source'),'fixture');
+  assert.deepEqual(await readFile(join(directory,'source.img')),Buffer.from(data));
+}));
+
 test('an empty acquisition plan is valid when every source input is already tracked',()=>{
   const plan=parseAcquisitionPlan({schema:'cssearth-acquisition-plan@1',operations:[]});
   assert.deepEqual(plan.operations,[]);

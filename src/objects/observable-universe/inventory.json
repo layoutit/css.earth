@@ -39,6 +39,12 @@
     },
     {
       "location": "prepared",
+      "filename": "members.json",
+      "bytes": 2980,
+      "sha256": "276a7b8afc29842495ddd5eee38669a330d37689156ae274af147447dabda254"
+    },
+    {
+      "location": "prepared",
       "filename": "runtime.json",
       "bytes": 5232,
       "sha256": "0db6c4581ab701f2651dec2c997c1bb8830b465609cd858d3a3ee96e020ebbf9"
@@ -57,9 +63,21 @@
     },
     {
       "location": "prepared",
+      "filename": "world-index.json",
+      "bytes": 1266302,
+      "sha256": "4eb57c7a2d08d4716d752d37ccf22e3408ab31c9bc5f6241e4bf2bcde1c420e3"
+    },
+    {
+      "location": "prepared",
       "filename": "world-navigation.json",
       "bytes": 512,
       "sha256": "b36a4f2317acb8e1c640491e88468a7bbd9a714d17a2f700cf4db0a5a43ed19b"
+    },
+    {
+      "location": "prepared",
+      "filename": "world.json",
+      "bytes": 2534,
+      "sha256": "4f0618f758caf2c856df0cc4f53b9ead4e942e24e817647126e0fc0dcaf806bc"
     }
   ]
 }

@@ -1,0 +1,102 @@
+{
+  "schema": "cssearth-image-layer-recipe@1",
+  "id": "m57-layers",
+  "source": {
+    "path": "starless.jpg",
+    "dimensions": [
+      3179,
+      3179
+    ],
+    "originalDimensions": [
+      3179,
+      3179
+    ],
+    "publisherUrl": "https://esahubble.org/images/heic1310a/",
+    "downloadUrl": "https://cdn.esahubble.org/archives/images/large/heic1310a.jpg",
+    "credit": "NASA, ESA, and C. Robert O'Dell (Vanderbilt University)",
+    "license": "CC-BY-4.0"
+  },
+  "observation": {
+    "centerRaDeg": 283.3967177,
+    "centerDecDeg": 33.0289252,
+    "fieldOfViewDeg": [
+      0.03499928,
+      0.03499928
+    ],
+    "northClockwiseDeg": -11.7
+  },
+  "target": {
+    "centerRaDeg": 283.39624524513,
+    "centerDecDeg": 33.02914523473,
+    "distancePc": 790.014153719229
+  },
+  "geometry": {
+    "kind": "inclined-disk",
+    "inclinationDeg": 0.001,
+    "lineOfNodesPaDeg": 209.052,
+    "thicknessKpc": 2.41e-7,
+    "depthWeights": [
+      0.25,
+      0.5,
+      0.25
+    ],
+    "supportRadiusKpc": 0.00023647,
+    "supportTaperFraction": 0.7,
+    "depthScales": [
+      1,
+      1,
+      1
+    ],
+    "unit": "pc",
+    "shape": {
+      "source": "publication-odell-2013-ring-nebula-structure",
+      "basis": "O'Dell et al. (2013, Sect. III.1 and III.3): the Main Ring's semi-axes on the sky are 44 arcsec along position angle 60 degrees and 30 arcsec across it, its pole tipped 6.5 +/- 2 degrees from the line of sight with the south-west end moving away; velocity ellipses fitted to the long-slit spectra give the Main Ring 19 +/- 2 km/s in [N II] and [S II] and 9 +/- 2 km/s in [O III], and the central region (the polar Lobes) 36 km/s in [N II], 28 km/s in [O III] and 20 km/s in He II; O'Dell, Sabbadin & Henney (2007), as restated there, find expansion of 0.65 km/s per arcsec from the star. The display's red channel is [N II] and [S II] with H-alpha, its green [O III], its blue He II; in the Main Ring, where there is no He II, the blue channel takes the [O III] speed. The Lobe's radius is that of the elongated ellipsoid through the molecular shell's polar openings in Kastner et al. (2025, Sect. IV): 2.3e17 cm at 782 pc, 19.7 arcsec.",
+      "expansionKmSPerArcsec": 0.65,
+      "ring": {
+        "semiMajorArcsec": 44,
+        "semiMinorArcsec": 30,
+        "majorPaDeg": 60,
+        "polarTiltDeg": 6.5,
+        "polarLeansToPaDeg": 240,
+        "expansionKmS": [
+          19,
+          9,
+          9
+        ]
+      },
+      "lobe": {
+        "source": "publication-kastner-2025-ring-nebula-molecular-envelope",
+        "radiusArcsec": 19.7,
+        "expansionKmS": [
+          36,
+          28,
+          20
+        ]
+      },
+      "smoothPixels": 16
+    }
+  },
+  "bake": {
+    "maxFacePixels": 1024,
+    "crossAxisSlices": 32,
+    "crossAxisDepthPixels": 97,
+    "backgroundFloor": 0.03,
+    "encoding": {
+      "format": "webp",
+      "quality": 70,
+      "alphaQuality": 80
+    },
+    "diffuseFacePixels": 80,
+    "crossAxisAlongPixels": 384,
+    "edgeTaperFraction": 0.04,
+    "diffuseFraction": 0.65,
+    "diffuseSigmaPixels": 2,
+    "flat": true,
+    "bulgeSlices": 56,
+    "bulgeFacePixels": 256,
+    "bulgeCrossSlices": 56
+  },
+  "provenance": {
+    "path": "provenance.json"
+  }
+}

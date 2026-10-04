@@ -1678,6 +1678,6 @@
   "environment": {
     "astropy": "8.0.1",
     "numpy": "2.5.3",
-    "pins": "tools/oracles/requirements.txt"
+    "pins": "packages/core/src/node/oracle/requirements.txt"
   }
 }

@@ -1,7 +1,9 @@
 import type { OrientationXyzw, PhysicalCameraPose } from '@cssearth/engine';
-import { decodeWorldOrbitBank, decodeWorldOrbits, orbitVertices, parseCompleteWorldContext, parsePreparedWorldContext, parsePreparedWorldContextSummary, worldContextGeometry, isPlacedClassification, type WorldCameraPose } from '@cssearth/objects';
+import { readSystemViewFile } from './system-view-file.mts';
+import { decodeWorldOrbitBank, decodeWorldOrbits, orbitVertices, parseCompleteWorldContext, parsePreparedWorldContext, parsePreparedWorldContextSummary, worldContextGeometry, isPlacedClassification } from '@cssearth/objects';
+import { type WorldCameraPose } from '@cssearth/engine';
 import { required } from '@cssearth/objects/node/contract';
-import { readFile } from 'node:fs/promises';
+import { readFile, readdir } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import { test, mock } from 'node:test';
 import assert from 'node:assert/strict';
@@ -22,7 +24,7 @@ import { SYSTEM_RANGES, SYSTEM_VIEWS, SYSTEM_VIEW_HOSTS, loadSystemView, systemF
 import { stubGlobal, unstubAllGlobals } from '@cssearth/objects/node/contract';
 import { unpackPreparedBinary } from '@cssearth/objects/node';
 // System framing's candidates load after the first body mounts in the app; these tests need them loaded.
-await Promise.all([...SYSTEM_VIEW_HOSTS].map(id => loadSystemView(id, async host => JSON.parse(await (await import('node:fs/promises')).readFile(new URL(`../../src/objects/sun/prepared/system-views/${host}.json`, import.meta.url), 'utf8')))));
+await Promise.all([...SYSTEM_VIEW_HOSTS].map(id => loadSystemView(id, readSystemViewFile)));
 
 // The production publisher only accepts encoded frames. Tests run the actual
 // planner inline and supply that same protocol without starting a browser worker.
@@ -342,7 +344,7 @@ test('open world trajectories validate their epoch vertex and never accept a clo
   }
 });
 
-test('semantic changes invalidate worker snapshots without synchronously republishing geometry', () => {
+test('semantic changes reach the next worker snapshot: the plan in flight is still drawn, and nothing is republished synchronously', () => {
   const request = mock.fn(() => true), root = mount(1, request), layer = mounted.get(root)!;
   const clock = root.ownerDocument.defaultView;
   clock.advance(1000);
@@ -355,7 +357,9 @@ test('semantic changes invalidate worker snapshots without synchronously republi
     () => layer.setBodyVisibility({ labelHidden: ['venus'] }), () => layer.previewSelection('mercury')]) {
     const stale = layer.captureFrame(world, viewport), before = drawing(), calls = request.mock.calls.length;
     change();
-    assert.equal(stale.current(), false);
+    // The plan in flight is the frame the camera asked for a moment before the change: it is drawn, and the frame the
+    // change asks for carries it. Thrown away, the camera waited a frame at every change of selection or visibility.
+    assert.equal(stale.current(), true);
     assert.equal(request.mock.calls.length, calls + 1);
     assert.equal(drawing(), before);
     const fresh = layer.captureFrame(world, viewport);
@@ -784,7 +788,7 @@ test('accepts the generated Sun context and rejects detached or malformed prepar
   const source = JSON.parse(await readFile(fileURLToPath(new URL('../../src/objects/sun/prepared/world-context.json', import.meta.url)), 'utf8')) as Record<string, unknown>;
   const [{ readCatalog }, { parseNavigationDistance }] = await Promise.all([import('@cssearth/objects/node'), import('@cssearth/objects')]);
   // Each entry's distance as `prepare:catalog` placed it in the registry.
-  // Every body of the world: the scenes, the packages the host draws (galaxies, clusters, nebulae) and the levels that are bodies.
+  // Every body of the world: the scenes, the packages the host draws (galaxies, clusters, nebulae) and the objects seen from inside.
   const worldObjects = (await import('@cssearth/objects/node')).readPreparedObjects(fileURLToPath(new URL('../..', import.meta.url))).objects;
   const distance = (descriptor: unknown) => parseNavigationDistance(worldObjects.find(object => object.id === (descriptor as { id: string }).id)?.distance);
   const contextEntries = (await readCatalog(fileURLToPath(new URL('../../src/objects', import.meta.url)), distance)).filter(body => body.context && body.id !== 'sun')
@@ -2770,13 +2774,18 @@ test('CSSOM transform serialization cannot turn an unchanged publication into an
 });
 
 test('the orbit banks decode to the orbits of the full prepared file, each vertex within half an Int32 step', { timeout: 30_000 }, async () => {
-  const prepared = new URL('../../src/objects/sun/prepared/', import.meta.url);
-  const full = parsePreparedWorldContext(JSON.parse(await readFile(new URL('world-context.json', prepared), 'utf8')));
-  // Every system's file read, as Node reads the world (site/world-context-plan.mts).
-  const summary = await parseCompleteWorldContext(JSON.parse(await readFile(new URL('world-context-summary.json', prepared), 'utf8')),
-    async id => JSON.parse(await readFile(new URL(`world-systems/${id}.json`, prepared), 'utf8')),
-    JSON.parse(await readFile(new URL('world-index.json', prepared), 'utf8')));
-  const bankOf = async (id: string) => unpackPreparedBinary(await readFile(new URL(`world-orbits/${id}.bin`, prepared)), `world-orbits/${id}.bin`);
+  const objects = new URL('../../src/objects/', import.meta.url);
+  const full = parsePreparedWorldContext(JSON.parse(await readFile(new URL('sun/prepared/world-context.json', objects), 'utf8')));
+  // Every object's file read, as Node reads the world (site/world-context-plan.mts): the summary and the index are the root object's.
+  const index = JSON.parse(await readFile(new URL('observable-universe/prepared/world-index.json', objects), 'utf8')) as { files: string[] };
+  const summary = await parseCompleteWorldContext(JSON.parse(await readFile(new URL('observable-universe/prepared/world.json', objects), 'utf8')),
+    async id => JSON.parse(await readFile(new URL(`${id}/prepared/members.json`, objects), 'utf8')), index);
+  // A body's bank is in the package of the object whose file has the body.
+  const bankFiles = new Map((await Promise.all(index.files.map(async holder => {
+    const directory = new URL(`${holder}/prepared/orbits/`, objects);
+    return (await readdir(directory).catch(() => [] as string[])).map(name => [name.replace(/\.bin$/u, ''), new URL(name, directory)] as const);
+  }))).flat());
+  const bankOf = async (id: string) => unpackPreparedBinary(await readFile(bankFiles.get(id) ?? new URL(`missing/${id}.bin`, objects)), `orbits/${id}.bin`);
   const banks = new Map(await Promise.all(Object.keys(summary.orbitBanks!).map(async id => [id, await bankOf(id)] as const)));
   const decoded = decodeWorldOrbits(summary, banks);
   assert.deepEqual(decoded.bodies.map(body => body.id), full.bodies.map(body => body.id));

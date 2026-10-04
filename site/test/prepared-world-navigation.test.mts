@@ -1,4 +1,5 @@
 import { sourceTest } from '@cssearth/objects/node/source-test';
+import { readSystemViewFile } from './system-view-file.mts';
 const test = sourceTest();
 import assert from 'node:assert/strict';
 import { getEventListeners } from 'node:events';
@@ -10,7 +11,8 @@ import { presentWorldCamera } from '@cssearth/renderer/navigation/world-camera.t
 import { createPreparedWorldNavigation } from '../prepared-world-navigation.mts';
 
 import { required, position, navigationFixture, unusedSharedView } from './navigation-test-values.mts';
-import { type WorldCameraPose, type PreparedWorldCameraFrame, type PreparedArrivalView } from '@cssearth/objects';
+import { type PreparedWorldCameraFrame, type PreparedArrivalView } from '@cssearth/objects';
+import { type WorldCameraPose } from '@cssearth/engine';
 import type { WorldCameraPresentation } from '@cssearth/renderer/navigation/world-camera.ts';
 import type { ObjectWorldNavigation } from '@cssearth/renderer/runtime/world-navigation-types.ts';
 import type { ObjectSceneLifecycle } from '@cssearth/renderer/runtime/object-scene.ts';
@@ -19,7 +21,7 @@ import type { SceneFactory } from '../browser/browser-types.mts';
 import type { WorldHandoff } from '../prepared-world-navigation.mts';
 import { SYSTEM_VIEW_HOSTS, loadSystemView } from '../system-framing.mts';
 // System framing's candidates load after the first body mounts in the app; these tests need them loaded.
-await Promise.all([...SYSTEM_VIEW_HOSTS].map(id => loadSystemView(id, async host => JSON.parse(await (await import('node:fs/promises')).readFile(new URL(`../../src/objects/sun/prepared/system-views/${host}.json`, import.meta.url), 'utf8')))));
+await Promise.all([...SYSTEM_VIEW_HOSTS].map(id => loadSystemView(id, readSystemViewFile)));
 type Mutable<T> = { -readonly [K in keyof T]: T[K] };
 type Resources = { destroyed: number; destroy(): void };
 type MockLease = { resources: Resources; destroy(): void; projection(): undefined; prepareView(getView: () => ObjectPreparationView): Promise<void> };

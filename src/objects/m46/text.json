@@ -1,0 +1,60 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "m46",
+  "card": {
+    "text": "M46 is an open star cluster in the Milky Way, about 1,555 parsecs away.",
+    "sources": [
+      {
+        "catalogueId": "hunt-reffert-2023-open-clusters",
+        "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114",
+        "label": "Hunt & Reffert (2023), Improving the open cluster census. II. An all-sky cluster catalogue with Gaia DR3, A&A 673, A114; CDS J/A+A/673/A114, Table 3 (clusters), NGC_2437: dist50, the median of the maximum-likelihood distance, 1554.53783049 pc (16th to 84th percentile 1553 to 1556)",
+        "checked": "2026-10-02",
+        "locator": "NGC_2437: dist50 1554.5 pc"
+      },
+      {
+        "catalogueId": "wikipedia-messier-46",
+        "url": "https://en.wikipedia.org/wiki/Messier_46",
+        "label": "Wikipedia, \"Messier 46\"",
+        "checked": "2026-10-02",
+        "locator": "Lead section, revision 1375128804",
+        "quote": "Messier 46 or M46, also known as NGC 2437, is an open cluster of stars in the slightly southern constellation of Puppis."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "M46 is drawn as 1,657 of its member stars, measured by Gaia; each dot sits at its sky position, at the cluster's distance.",
+    "sources": [
+      {
+        "catalogueId": "hunt-reffert-2023-open-clusters",
+        "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114",
+        "label": "Hunt & Reffert (2023), A&A 673, A114; CDS J/A+A/673/A114, Table members, NGC_2437: members inside the tidal radius (inrt) with a Gaia DR3 color",
+        "checked": "2026-10-02",
+        "locator": "NGC_2437: 1,657 members inside the tidal radius with a color"
+      },
+      {
+        "catalogueId": "wikipedia-messier-46",
+        "url": "https://en.wikipedia.org/wiki/Messier_46",
+        "label": "Wikipedia, \"Messier 46\"",
+        "checked": "2026-10-02",
+        "locator": "Lead section, revision 1375128804",
+        "quote": "It was discovered by Charles Messier in 1771."
+      }
+    ]
+  },
+  "datasets": {
+    "members": {
+      "title": "Hunt & Reffert 2023 members",
+      "detail": "1,657 stars",
+      "summary": "One dot per member star inside the tidal radius, in its Gaia color. Its depth in the cluster is assumed, not measured.",
+      "sources": [
+        {
+          "catalogueId": "hunt-reffert-2023-open-clusters",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114",
+          "label": "Hunt & Reffert (2023), A&A 673, A114; CDS J/A+A/673/A114, Table members, NGC_2437: members inside the tidal radius (inrt) with a Gaia DR3 color",
+          "checked": "2026-10-02",
+          "locator": "NGC_2437, inrt = True"
+        }
+      ]
+    }
+  }
+}

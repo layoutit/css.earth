@@ -1,0 +1,60 @@
+{
+  "id": "matar",
+  "name": "Matar",
+  "system": "Matar system",
+  "parent": "milky-way",
+  "description": "A bright giant of type G8 II 65.7 parsecs away, 24.5 times the Sun's width: its disc was measured with the Navy Precision Optical Interferometer.",
+  "aliases": [
+    "HD 215182"
+  ],
+  "featured": true,
+  "order": 5474,
+  "target": "HD 215182",
+  "paper": {
+    "url": "https://doi.org/10.3847/1538-3881/aa9d8b",
+    "credit": "Baines et al. (2018), AJ 155, 30"
+  },
+  "radius": {
+    "value": 24.51,
+    "source": "Baines et al. (2018), AJ 155, 30, HD 215182: radius 24.51 +1.21/-1.11 solar radii (Table 5), from the limb-darkened angular diameter 3.471 +/- 0.027 mas (NPOI, Table 4) and the Hipparcos (van Leeuwen 2007) parallax",
+    "url": "https://doi.org/10.3847/1538-3881/aa9d8b",
+    "uncertainty": 1.21
+  },
+  "mass": {
+    "value": 3.51,
+    "source": "Baines et al. (2018), AJ 155, 30, HD 215182: mass 3.51 +/- 0.13 solar masses (Table 6), from the PARAM Bayesian fit to PARSEC isochrones at the measured temperature; the paper calls its masses estimates only",
+    "url": "https://doi.org/10.3847/1538-3881/aa9d8b",
+    "uncertainty": 0.13
+  },
+  "temperature": {
+    "value": 4970,
+    "source": "Baines et al. (2018), AJ 155, 30, HD 215182: effective temperature 4970 +/- 65 K (Table 5), from the angular diameter and the bolometric flux of the SED fit",
+    "url": "https://doi.org/10.3847/1538-3881/aa9d8b",
+    "uncertainty": 65
+  },
+  "radialVelocity": {
+    "value": 4.17,
+    "source": "SIMBAD's radial velocity for Gaia DR3 1887953690728237568 (quality A), from 2004A&A...424..727P; Gaia DR3 measures none",
+    "url": "https://ui.adsabs.harvard.edu/abs/2004A&A...424..727P/abstract",
+    "uncertainty": 0.35
+  },
+  "distance": {
+    "value": 65.703,
+    "source": "Baines et al. (2018), AJ 155, 30, HD 215182: the Hipparcos (van Leeuwen 2007) parallax the radius was computed with (Table 1), 15.22 +/- 0.71 mas, inverted",
+    "url": "https://doi.org/10.3847/1538-3881/aa9d8b",
+    "uncertainty": 3.065
+  },
+  "color": {
+    "skip": [],
+    "reason": "",
+    "companion": "the spectrum includes Matar's close companion, which is not drawn: Washington Double Star catalogue (Mason et al. 2001, AJ 122, 3466; VizieR B/wds/wds) lists WDS 22430+3013 BLA 11 Aa,Ab at magnitudes 4.1 and 6.9, so it gives 7.0% of the light and can move a color channel by 18 levels of 255 at most; the measurement is kept, since a model color would replace all of it"
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A bright giant of type G8 II, 66 parsecs away: 24.5 times the Sun's width and 331 times its light.",
+    "introduction": "Its disc spans 3.471 milliarcseconds, which gives 24.51 solar radii and 4,970 K at its surface.",
+    "locator": "Tables 1, 4 and 5, HD 215182: parallax, limb-darkened diameter, radius, Teff"
+  },
+  "notes": []
+}

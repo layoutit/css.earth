@@ -2,6 +2,10 @@
   "id": "hd-275354-b",
   "name": "HD 275354B",
   "system": "TOI-6038 system",
+  "boundTo": {
+    "host": "toi-6038-a",
+    "source": "El-Badry, Rix & Heintz (2021, MNRAS 506, 2269) list TOI-6038 A and HD 275354B in their Gaia EDR3 wide-binary catalogue (VizieR J/MNRAS/506/2269, source_id 237640407346340736 and 237640407346341376), 3,183 AU apart on the sky, with a chance-alignment probability of 5.2e-5: the pair is bound. No orbit of the pair is published, and the Gaia astrometry alone does not constrain one, so the star is placed by its own astrometry and carries no orbit."
+  },
   "description": "Star bound to TOI-6038 A, 3,183 AU away.",
   "gaia": "237640407346341376",
   "paper": {

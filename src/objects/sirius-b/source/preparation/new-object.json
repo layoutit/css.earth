@@ -46,7 +46,12 @@
         "introduction": "Hubble and 150 years of measurements give its orbit and a mass of 1.018 solar masses; its surface is 25,369 K.",
         "locator": "Tables 4 and 6; section 8"
       },
-      "order": 5427
+      "order": 5427,
+      "whiteDwarf": {
+        "atmosphere": "DA",
+        "source": "Bond et al. (2017), ApJ 840, 70, section 8: the STIS spectra show only the Balmer lines, confirming a DA2 white dwarf with a pure hydrogen atmosphere",
+        "url": "https://doi.org/10.3847/1538-4357/aa6af8"
+      }
     }
   ]
 }

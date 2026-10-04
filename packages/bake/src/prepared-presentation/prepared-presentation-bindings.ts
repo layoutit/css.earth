@@ -5,11 +5,11 @@ import { interiorFillInset, withPreparedInteriorFill, withoutPreparedInteriorFil
 import { MISSING_COVERAGE_STYLES, isMissingCoverageStyle } from '../raster/index.ts';
 import { isRecord } from '@cssearth/core';
 
-import type { PresentationSource, DepthSurface } from './prepared-depth-partitions.ts';
+import type { PresentationSource, PreparedDepthPartitionSurface } from './prepared-depth-partitions.ts';
 /** A leaf's fixed plane in scene space, which the depth preparation needs to prove a surface static. */
 type FacingBinding = { plane: [number, number, number, number]; tolerance: number };
 type MotionTrack = Omit<NonNullable<PreparedPresentationDefinition['motion']>[number], 'timings'> & {timings: {when: PreparedVariant['when']; duration: number}[]};
-interface DepthResult {id: string; source: PresentationSource; compiled: PresentationSource; surface: DepthSurface | null; reason: string | null | undefined;}
+interface DepthResult {id: string; source: PresentationSource; compiled: PresentationSource; surface: PreparedDepthPartitionSurface | null; reason: string | null | undefined;}
 
 import { readFile } from 'node:fs/promises';
 import { basename, resolve } from 'node:path';
@@ -137,7 +137,7 @@ export async function preparePresentationBindings<T extends PresentationSource>(
       }
       let depthReason: string | null | undefined;
       const rejectDepth = (reason: string): null => { depthReason = reason; return null; };
-      function depthSurface(): DepthSurface | null {
+      function depthSurface(): PreparedDepthPartitionSurface | null {
         depthReason = null;
         const source = definition.surfaceHit;
         if (!source) return rejectDepth('no triangle surface contract');
@@ -328,7 +328,7 @@ export async function preparePresentationBindings<T extends PresentationSource>(
       // Preserve the default CSS animation order for existing saved playback
       // times. Hidden variants may expose additional prepared motion handles.
       const selections = [null, ...definition.variants];
-      let motionIdentities: string[] | undefined, surface: DepthSurface | null | undefined, variableSurface = false;
+      let motionIdentities: string[] | undefined, surface: PreparedDepthPartitionSurface | null | undefined, variableSurface = false;
       for (const variant of selections) {
         if (variant) for (const binding of variant.writes) {
           const node = binding.target < 0 ? stage : nodes[binding.target];

@@ -2,6 +2,10 @@
   "id": "toi-1760",
   "name": "TOI-1760",
   "system": "TOI-1452 system",
+  "boundTo": {
+    "host": "toi-1452",
+    "source": "El-Badry, Rix & Heintz (2021, MNRAS 506, 2269) list TOI-1452 and TOI-1760 in their Gaia EDR3 wide-binary catalogue (VizieR J/MNRAS/506/2269, source_id 2264839957167921024 and 2264839952875245696), 97 AU apart on the sky, with a chance-alignment probability of 4.8e-8: the pair is bound. No orbit of the pair is published, and the Gaia astrometry alone does not constrain one, so the star is placed by its own astrometry and carries no orbit."
+  },
   "description": "Star bound to TOI-1452, 97 AU away.",
   "gaia": "2264839952875245696",
   "paper": {

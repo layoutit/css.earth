@@ -1,0 +1,43 @@
+{
+  "id": "doi-10-1088-0004-637x-807-1-26",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Torres et al. (2015): CAPELLA ( <i>α</i> AURIGAE) REVISITED: NEW BINARY ORBIT, PHYSICAL PROPERTIES, AND EVOLUTIONARY STATE",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.1088/0004-637X/807/1/26"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://doi.org/10.1088/0004-637X/807/1/26",
+      "label": "Publisher"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://doi.org/10.1088/0004-637X/807/1/26",
+      "checkedOn": "2026-10-03",
+      "locator": "Crossref record: title, authors, container"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Torres et al. (2015), The Astrophysical Journal 807 26",
+      "scope": "citation",
+      "evidence": "https://doi.org/10.1088/0004-637X/807/1/26"
+    }
+  ],
+  "publisher": "The Astrophysical Journal 807 26",
+  "creators": [
+    "Guillermo Torres",
+    "Antonio Claret",
+    "Krešimir Pavlovski",
+    "et al."
+  ],
+  "publicationDate": "2015"
+}

@@ -12,8 +12,8 @@ import { markerStyle, resolveMarkerStyle } from '@cssearth/renderer/navigation/m
 import { validateMarkerPresentation } from '@cssearth/objects';
 import { PREPARED_NAVIGATION_MARKERS } from "../prepared-navigation-markers.mjs";
 
-test("search contains every object but the overviews, including the Sun; only planets enter the scale", () => {
-  // The levels of the zoom ladder are not objects; search lists them in their own rows (CatalogueOverviewRows.astro).
+test("search contains every object, including the Sun and the objects seen from inside; only planets enter the scale", () => {
+  // An object seen from inside (the Milky Way, the Local Group) is an object like any other, with one search row.
   assert.deepEqual(new Set(SEARCH_OBJECTS), new Set(OBJECTS));
   assert.ok(SEARCH_OBJECTS.some(({ id }) => id === "sun"));
   assert.ok(PLANET_NAVIGATION_OBJECTS.every(({ classification }) => classification === "planet"));

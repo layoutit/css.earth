@@ -1,0 +1,52 @@
+{
+  "id": "eso-eso0926a",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "The Eagle Nebula",
+  "identifiers": [
+    {
+      "type": "ESO image",
+      "value": "eso0926a"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://www.eso.org/public/images/eso0926a/",
+      "label": "Published source"
+    },
+    {
+      "role": "original",
+      "url": "https://cdn.eso.org/images/publicationjpg/eso0926a.jpg",
+      "label": "JPEG, 4000 x 4000 px"
+    },
+    {
+      "role": "rights",
+      "url": "https://www.eso.org/public/outreach/copyright/",
+      "label": "Reuse terms"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://www.eso.org/public/images/eso0926a/",
+      "checkedOn": "2026-10-02",
+      "locator": "4000 x 4000 px; B (451 nm), V (539 nm) and R (651 nm). The file's embedded sky tags, used as they are: 0.4811 arcsec per pixel, north 0.0° left of vertical, the frame's centre at 274.7059174°, -13.7638973°. Not measured against Gaia here."
+    }
+  ],
+  "publisher": "ESO",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "ESO",
+      "scope": "Published source",
+      "evidence": "https://www.eso.org/public/images/eso0926a/"
+    },
+    {
+      "kind": "rights",
+      "text": "Creative Commons Attribution 4.0 International; the full credit must be shown.",
+      "scope": "Published source",
+      "evidence": "https://www.eso.org/public/outreach/copyright/"
+    }
+  ]
+}

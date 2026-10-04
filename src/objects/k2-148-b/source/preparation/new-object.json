@@ -2,6 +2,10 @@
   "id": "k2-148-b",
   "name": "K2-148B",
   "system": "K2-148 system",
+  "boundTo": {
+    "host": "k2-148",
+    "source": "El-Badry, Rix & Heintz (2021, MNRAS 506, 2269) list K2-148 and K2-148B in their Gaia EDR3 wide-binary catalogue (VizieR J/MNRAS/506/2269, source_id 2536443724641751808 and 2536443724641751680), 1,163 AU apart on the sky, with a chance-alignment probability of 7.1e-7: the pair is bound. No orbit of the pair is published, and the Gaia astrometry alone does not constrain one, so the star is placed by its own astrometry and carries no orbit."
+  },
   "description": "Star bound to K2-148, 1,163 AU away.",
   "gaia": "2536443724641751680",
   "paper": {

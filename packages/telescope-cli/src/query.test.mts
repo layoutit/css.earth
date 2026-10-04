@@ -3,7 +3,7 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
-import { BODY_MAP_SCHEMA } from '@cssearth/bake/objects/layers/observation';
+import { BODY_MAP_SCHEMA } from '@cssearth/objects';
 import { JWST_CUBE_COVERAGE } from './archives/jwst/imaging/bands.mts';
 import { assessObservationSelection, formatAnswer, QUERY_HELP, queryCapabilities, selectObservation } from './query.mts';
 import { mergeIntervals, parseModeCapabilities } from './query-modes.mts';

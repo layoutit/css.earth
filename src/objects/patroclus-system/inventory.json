@@ -1,0 +1,23 @@
+{
+  "schema": "cssearth-inventory@1",
+  "assets": [
+    {
+      "location": "prepared",
+      "filename": "members.json",
+      "bytes": 775,
+      "sha256": "8e1e497cf4afb17f3f5026b06e1733f700474448d078d69e26e37cd3341e8899"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/menoetius.bin",
+      "bytes": 2264,
+      "sha256": "a8337ad96e07871a60772b216ec8c9b4b908ebf83d6f3baec935b27e4e96f8f9"
+    },
+    {
+      "location": "prepared",
+      "filename": "views/patroclus.json",
+      "bytes": 30235,
+      "sha256": "a1e81b1392a1817bfdf89144d5b95bd9d86139fb41704d7696647068ea4e4261"
+    }
+  ]
+}

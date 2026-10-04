@@ -1,0 +1,23 @@
+{
+  "schema": "cssearth-catalogue-points-merge@1",
+  "id": "dots",
+  "published": true,
+  "meaning": "NGC 1365's catalogued objects as dots on its photograph's disc: planetary nebulae, supernova remnants. Old objects near the centre can sit in the bulge.",
+  "centreOnGalaxy": true,
+  "banks": [
+    {
+      "bank": "scheuermann-pne",
+      "withinPcOfCentre": 37900,
+      "basis": "Presentation choice: a dot is drawn only where the photograph is, inside the image layers' 37.9 kpc support radius (recipe.json)."
+    },
+    {
+      "bank": "scheuermann-snr",
+      "withinPcOfCentre": 37900,
+      "basis": "Presentation choice: a dot is drawn only where the photograph is, inside the image layers' 37.9 kpc support radius (recipe.json)."
+    }
+  ],
+  "colorTowardWhite": 0.5,
+  "colorTowardWhiteBasis": "Presentation choice: the Milky Way dots' value (milky-way/source/local-3kpc/merge.json), so both galaxies' dots read as the same tints of starlight.",
+  "colorGamma": 1.6,
+  "colorGammaBasis": "Presentation choice: the Milky Way dots' value (milky-way/source/local-3kpc/merge.json), picked there from three renders over its backing."
+}

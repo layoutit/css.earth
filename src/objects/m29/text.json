@@ -1,0 +1,60 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "m29",
+  "card": {
+    "text": "M29 is an open star cluster in the Milky Way, about 1,709 parsecs away.",
+    "sources": [
+      {
+        "catalogueId": "hunt-reffert-2023-open-clusters",
+        "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114",
+        "label": "Hunt & Reffert (2023), Improving the open cluster census. II. An all-sky cluster catalogue with Gaia DR3, A&A 673, A114; CDS J/A+A/673/A114, Table 3 (clusters), NGC_6913: dist50, the median of the maximum-likelihood distance, 1708.8526597 pc (16th to 84th percentile 1703 to 1715)",
+        "checked": "2026-10-02",
+        "locator": "NGC_6913: dist50 1708.9 pc"
+      },
+      {
+        "catalogueId": "wikipedia-messier-29",
+        "url": "https://en.wikipedia.org/wiki/Messier_29",
+        "label": "Wikipedia, \"Messier 29\"",
+        "checked": "2026-10-02",
+        "locator": "Lead section, revision 1373100704",
+        "quote": "Messier 29 or M29, also known as NGC 6913 or the Cooling Tower Cluster, is a quite small, bright open cluster of stars just south of the central bright star Gamma Cygni of a northerly zone of the sky, Cygnus."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "M29 is drawn as 57 of its member stars, measured by Gaia; each dot sits at its sky position, at the cluster's distance.",
+    "sources": [
+      {
+        "catalogueId": "hunt-reffert-2023-open-clusters",
+        "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114",
+        "label": "Hunt & Reffert (2023), A&A 673, A114; CDS J/A+A/673/A114, Table members, NGC_6913: members inside the tidal radius (inrt) with a Gaia DR3 color",
+        "checked": "2026-10-02",
+        "locator": "NGC_6913: 57 members inside the tidal radius with a color"
+      },
+      {
+        "catalogueId": "wikipedia-messier-29",
+        "url": "https://en.wikipedia.org/wiki/Messier_29",
+        "label": "Wikipedia, \"Messier 29\"",
+        "checked": "2026-10-02",
+        "locator": "Lead section, revision 1373100704",
+        "quote": "It was discovered by Charles Messier in 1764, and can be seen from Earth by using binoculars."
+      }
+    ]
+  },
+  "datasets": {
+    "members": {
+      "title": "Hunt & Reffert 2023 members",
+      "detail": "57 stars",
+      "summary": "One dot per member star inside the tidal radius, in its Gaia color. Its depth in the cluster is assumed, not measured.",
+      "sources": [
+        {
+          "catalogueId": "hunt-reffert-2023-open-clusters",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114",
+          "label": "Hunt & Reffert (2023), A&A 673, A114; CDS J/A+A/673/A114, Table members, NGC_6913: members inside the tidal radius (inrt) with a Gaia DR3 color",
+          "checked": "2026-10-02",
+          "locator": "NGC_6913, inrt = True"
+        }
+      ]
+    }
+  }
+}

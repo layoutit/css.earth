@@ -19,8 +19,9 @@
 import { execFile, spawnSync } from 'node:child_process';
 import { access } from 'node:fs/promises';
 import { resolve } from 'node:path';
+import { projectRoot } from '@cssearth/core/node';
 
-export interface PreparationOptions { readonly reuseImages?: boolean }
+export interface PreparationOptions { readonly reuseImages?: boolean; readonly root?: string }
 /** `once`: the command does not name an object. `ids`: the tool takes every id in one call. `each`: one command per object,
  * run PREPARATIONS_AT_ONCE at a time when `parallel`. */
 export interface PreparationStep {
@@ -46,8 +47,8 @@ export const PREPARATION_STEPS: readonly PreparationStep[] = Object.freeze<Prepa
   { name: 'inputs', purpose: "check the reader text budgets and restore the Sun's stale files before the long bake", scope: 'ids', commands: async ids =>
     [node('site/build/prepare/check-preparation-inputs.mts', ...ids)] },
   { name: 'catalogue', purpose: 'register the object; a never-prepared package is discoverable as shape only', scope: 'once', commands: async () => [node('site/build/prepare/prepare-catalog.mts')] },
-  { name: 'geometry', purpose: 'place a body with an astronomy record in the solar geometry the scene frame reads', scope: 'once', commands: async ids =>
-    (await Promise.all(ids.map(id => exists(resolve('packages/astronomy/data/bodies', `${id}.json`))))).some(Boolean) ? [node('packages/bake/cli/prepare-solar-geometry.mts')] : [] },
+  { name: 'geometry', purpose: 'place a body with an astronomy record in the solar geometry the scene frame reads', scope: 'once', commands: async (ids, { root = projectRoot(import.meta.url) } = {}) =>
+    (await Promise.all(ids.map(id => exists(resolve(root, 'packages/astronomy/data/bodies', `${id}.json`))))).some(Boolean) ? [node('packages/bake/cli/prepare-solar-geometry.mts')] : [] },
   { name: 'prepare', purpose: 'prepare datasets, scene and presentation; refresh derived legend labels and the world frame', scope: 'each', parallel: true, commands: async ([id], { reuseImages = false } = {}) =>
     [node('site/build/prepare/prepare-authored.ts', id!, '--write', ...(reuseImages ? ['--reuse-images'] : []))] },
   { name: 'discovery', purpose: 'recompute discovery now that prepared datasets exist', scope: 'once', commands: async () => [node('site/build/prepare/prepare-catalog.mts')] },
@@ -73,20 +74,26 @@ export const PREPARATION_STEPS: readonly PreparationStep[] = Object.freeze<Prepa
     return [node('packages/bake/cli/prepare-arrival-billboard.mts', ...ids, '--origin', origin), node('site/build/prepare/prepare-catalog.mts')];
   } },
   { name: 'world', purpose: 'place the object in the world context', scope: 'once', commands: async () => [['pnpm', 'prepare:world-context']] },
+  // A star or planet that gains orbiting bodies hosts a system, an object of its own whose page its members link to; its package is read
+  // from the world's orbit graph, so it follows the world step. Every system is rewritten: unchanged ones come out the same, in a second.
+  // The systems step moves each host inside its system in the object tree, and the world files follow the tree, so the world is placed again.
+  { name: 'systems', purpose: 'write the package of every system, so a new host has its system page, and place the world by the tree they change', scope: 'once', commands: async () => [node('site/build/prepare/system-packages.mts'), ['pnpm', 'prepare:world-context']] },
   { name: 'catalogues', purpose: 'rebuild the shared sources and facilities catalogues from the object\'s source records', scope: 'once', commands: async () => [node('site/build/prepare/prepare-facilities.mts', '--catalog-only')] },
-  // The world context is written under the Sun's prepared/; without this its inventory still pins the bytes from before the object existed.
+  // The world context is written under the Sun's prepared/ and into the package of each object that holds bodies; without this
+  // their inventories still pin the bytes from before the object existed.
   // The catalogue carries every descriptor as the pins leave it (prepared-registry.ts preparedCatalogueModule).
-  { name: 'pins', purpose: "pin the Sun's regenerated world files into its inventory", scope: 'once', commands: async () => [node('site/build/prepare/prepare-object-json.mts', 'sun'), node('site/build/prepare/prepare-catalog.mts')] },
+  { name: 'pins', purpose: "pin the regenerated world files into the Sun's inventory and into each object's that holds them", scope: 'once', commands: async () => [node('site/build/prepare/prepare-object-json.mts', 'sun'), node('site/build/prepare/pin-world-files.mts'), node('site/build/prepare/prepare-catalog.mts')] },
 ]);
 
 export type Progress = (line: string) => void;
 
 /** Prepare `ids` through the chain from `from` to `to` (inclusive; the whole chain by default). Returns false after naming
  * the failed step and the command that resumes. */
-export async function prepareObjects(ids: readonly string[], { from, to, reuseImages = false, atOnce = PREPARATIONS_AT_ONCE, progress = line => console.log(line) }:
-  { from?: string; to?: string; reuseImages?: boolean; atOnce?: number; progress?: Progress } = {}) {
+export async function prepareObjects(ids: readonly string[], { from, to, reuseImages = false, root = projectRoot(import.meta.url), atOnce = PREPARATIONS_AT_ONCE, progress = line => console.log(line) }:
+  { from?: string; to?: string; reuseImages?: boolean; root?: string; atOnce?: number; progress?: Progress } = {}) {
+  root = resolve(root);
   if (!ids.length || new Set(ids).size !== ids.length) throw new TypeError('prepare-object: name each object once.');
-  for (const id of ids) if (!/^[a-z][a-z0-9-]*$/u.test(id) || !await exists(resolve('src/objects', id, 'object.json'))) throw new TypeError(`No object package: src/objects/${id}/object.json.`);
+  for (const id of ids) if (!/^[a-z][a-z0-9-]*$/u.test(id) || !await exists(resolve(root, 'src/objects', id, 'object.json'))) throw new TypeError(`No object package: src/objects/${id}/object.json.`);
   const index = (name: string | undefined, fallback: number) => { if (name === undefined) return fallback; const at = PREPARATION_STEPS.findIndex(step => step.name === name); if (at < 0) throw new TypeError(`Unknown step ${name}; steps are ${PREPARATION_STEPS.map(step => step.name).join(', ')}.`); return at; };
   // A reuse-images run changes nothing the later steps read, and they read raw imagery a checkout may not have;
   // its prepare step already pins the page data and publishes the set.
@@ -101,8 +108,8 @@ export async function prepareObjects(ids: readonly string[], { from, to, reuseIm
         for (let next = queue.shift(); next && !failures.length; next = queue.shift()) {
           const [id, at] = next;
           progress(`  [${at + 1}/${ids.length}] ${id} (${elapsed()})`);
-          for (const [command, ...args] of await step.commands([id], { reuseImages })) {
-            const failure = await new Promise<string | null>(done => execFile(command!, args, { maxBuffer: 64 * 1024 * 1024 }, (error, _stdout, stderr) =>
+          for (const [command, ...args] of await step.commands([id], { reuseImages, root })) {
+            const failure = await new Promise<string | null>(done => execFile(command!, args, { cwd: root, maxBuffer: 64 * 1024 * 1024 }, (error, _stdout, stderr) =>
               done(error ? `${[command, ...args].join(' ')}\n${stderr.toString().split('\n').filter(line => line.trim() && !line.startsWith('    at')).slice(-6).join('\n')}` : null)));
             if (failure) { failures.push(failure); break; }
           }
@@ -112,11 +119,11 @@ export async function prepareObjects(ids: readonly string[], { from, to, reuseIm
       continue;
     }
     // A step may refuse while it plans, before running anything (the billboard step with no site answering).
-    const commands = await step.commands(ids, { reuseImages }).catch((error: unknown) => error instanceof Error ? error : new Error(String(error)));
+    const commands = await step.commands(ids, { reuseImages, root }).catch((error: unknown) => error instanceof Error ? error : new Error(String(error)));
     if (commands instanceof Error) { console.error(`\nStep "${step.name}" refused: ${commands.message}\nFix it, then resume: ${resume(step)}`); return false; }
     progress(`\n[${step.name}] ${step.purpose}${commands.length ? '' : ' (nothing to do)'} (${elapsed()})`);
     for (const [command, ...args] of commands) {
-      const run = spawnSync(command!, args, { stdio: 'inherit' });
+      const run = spawnSync(command!, args, { cwd: root, stdio: 'inherit' });
       if (run.status !== 0) { console.error(`\nStep "${step.name}" failed running: ${[command, ...args].join(' ')}\nFix it, then resume: ${resume(step)}`); return false; }
     }
   }
@@ -125,4 +132,4 @@ export async function prepareObjects(ids: readonly string[], { from, to, reuseIm
 }
 
 /** One object, as before. */
-export const prepareObject = (id: string, options: { from?: string; reuseImages?: boolean } = {}) => prepareObjects([id], options);
+export const prepareObject = (id: string, options: { from?: string; reuseImages?: boolean; root?: string } = {}) => prepareObjects([id], options);

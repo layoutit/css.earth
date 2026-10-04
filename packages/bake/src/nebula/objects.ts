@@ -1,5 +1,5 @@
 /** Reproducible offline handoff from the two lab methods to the shared application volume capability. */
-import { OBJECT_SCHEMA, PREPARED_OBJECT_SCHEMA, DENSITY_VOLUME_FORMAT, PREPARED_VOLUME_DATASETS_SCHEMA, parseVolumeRecipe, type CompilerBakeResult, type DensityVolumeFrame, validatePreparedCssVolume, validatePreparedVolumeDatasets, type PreparedVolumeDataset, parsePreparedNebulaCatalog, NEBULA_DELIVERY_SCHEMA } from '@cssearth/objects';
+import { OBJECT_SCHEMA, PREPARED_OBJECT_SCHEMA, DENSITY_VOLUME_FORMAT, PREPARED_VOLUME_DATASETS_SCHEMA, parseVolumeRecipe, type CompilerBakeResult, type DensityVolumeFrame, validatePreparedCssVolume, validatePreparedVolumeDatasets, type PreparedVolumeDataset, parsePreparedNebulaCatalog, readNebulaDelivery, type NebulaSkyFrame } from '@cssearth/objects';
 import { nebulaBakeBackend } from './backend.ts';
 import { verifyReplayReferences } from './references.ts';
 
@@ -12,13 +12,12 @@ import { prepareNebulaCatalogueField } from './catalogue-field.ts';
 
 import { prepareVolumeAtlases } from '../density/index.ts';
 
-import { embedNebulaFrame, embedNebulaVolume, reflectNebulaPoint, type NebulaSkyFrame } from './nebula-frame.ts';
+import { embedNebulaFrame, embedNebulaVolume, reflectNebulaPoint } from './nebula-frame.ts';
 import { sanitizeVolumeProvenance } from './volume-provenance.ts';
 import { assertCompilerDeliveryElementBudget } from './element-budget.ts';
 const json = (v: unknown) => JSON.stringify(v, null, 2) + '\n';
 const record = (v: unknown): Record<string, unknown> => { if (!v || typeof v !== 'object' || Array.isArray(v)) throw new TypeError('Expected nebula delivery object.'); return v as Record<string, unknown>; };
 const text = (v: unknown) => { if (typeof v !== 'string' || !v) throw new TypeError('Expected nebula delivery text.'); return v; };
-const finite = (v: unknown) => { if (typeof v !== 'number' || !Number.isFinite(v)) throw new TypeError('Expected finite nebula delivery value.'); return v; };
 export interface NebulaResearchBackend {
   compiler(root: string, recipe: ReturnType<typeof readNebulaDelivery>, progress: (message: string, fraction?: number) => void): Promise<{
     id: string; scene: CompilerBakeResult; sources: {id: string; label: string; credit: string; page: string}[];
@@ -38,46 +37,6 @@ function pin(v: unknown): Pin {
   return { path };
 }
 async function pinned(root: string, p: Pin) { const bytes = await readFile(local(root,p.path)); return bytes; }
-export function readNebulaDelivery(v: unknown) {
-  const r = record(v), frame = record(r.sky), center = frame.centerIcrsDegrees;
-  if (r.schema !== NEBULA_DELIVERY_SCHEMA || !/^[a-z][a-z0-9-]*$/.test(text(r.id)) ||
-      !['compiler','axial-symmetry','density-grid'].includes(text(r.method)) || !Array.isArray(center) || center.length !== 2 || !Array.isArray(r.inputPins)) throw new TypeError('Invalid nebula delivery recipe.');
-  if (!(finite(r.framingRadiusUnits)>0) || !/^https:\/\//.test(text(r.sourceUrl))) throw new TypeError('Invalid nebula framing/source URL.');
-  if (r.attachedTo !== undefined && !/^[a-z][a-z0-9-]*$/.test(text(r.attachedTo))) throw new TypeError('Invalid attached body id.');
-  if (r.compositeRecipe !== undefined && r.method !== 'compiler') throw new TypeError('Optical composite requires compiler delivery.');
-  if (r.compactInputs !== undefined && !['compiler','sampled','symmetry','density-grid'].includes(text(r.compactMethod))) throw new TypeError('Invalid compact bake method.');
-  if (r.compactInputs !== undefined && ((r.compactMethod === 'symmetry') !== (r.method === 'axial-symmetry'))) throw new TypeError('Compact method and delivery method differ.');
-  // A density-grid delivery bakes checked-in volume recipes and their grids, one per dataset.
-  if ((r.compactMethod === 'density-grid') !== (r.method === 'density-grid')) throw new TypeError('Density-grid delivery names its own compact method.');
-  let grids: { id: string; label: string; recipe: Pin; sourceUrl?: string; occultingCentreUnits?: [number,number,number] }[] | undefined;
-  if (r.method === 'density-grid') {
-    if (!Array.isArray(r.grids) || !r.grids.length) throw new TypeError('A density-grid delivery lists its grids.');
-    grids = r.grids.map(value => {
-      const row = record(value);
-      if (!/^[a-z][a-z0-9-]*$/.test(text(row.id))) throw new TypeError('Invalid density-grid dataset id.');
-      if (row.sourceUrl !== undefined && !/^https:\/\//.test(text(row.sourceUrl))) throw new TypeError('Invalid density-grid source URL.');
-      const centre = row.occultingCentreUnits;
-      if (centre !== undefined && (!Array.isArray(centre) || centre.length !== 3 || !centre.every(value => typeof value === 'number' && Number.isFinite(value))))
-        throw new TypeError('Invalid density-grid occulting centre.');
-      return { id: text(row.id), label: text(row.label), recipe: pin(row.recipe),
-        ...(row.sourceUrl === undefined ? {} : { sourceUrl: text(row.sourceUrl) }),
-        ...(centre === undefined ? {} : { occultingCentreUnits: [centre[0], centre[1], centre[2]] as [number,number,number] }) };
-    });
-    if (new Set(grids.map(grid => grid.id)).size !== grids.length) throw new TypeError('Duplicate density-grid dataset id.');
-    if (!grids.some(grid => grid.id === text(r.defaultDataset))) throw new TypeError('The default dataset names no density grid.');
-  }
-  const sky: NebulaSkyFrame = { centerIcrsDegrees: [finite(center[0]),finite(center[1])], distancePc: finite(frame.distancePc),
-    imageRotationDegrees: finite(frame.imageRotationDegrees), arcsecPerUnit: finite(frame.arcsecPerUnit) };
-  return { id: text(r.id), method: text(r.method), request: pin(r.request), inputPins: r.inputPins.map(pin), sky,
-    sourceUrl: text(r.sourceUrl), description: text(r.description), defaultDataset: text(r.defaultDataset),
-    framingRadiusUnits: finite(r.framingRadiusUnits), acceptedLabResult: text(r.acceptedLabResult),
-    ...(r.compactInputs === undefined ? {} : { compactInputs: pin(r.compactInputs), compactMethod: text(r.compactMethod) }),
-    ...(grids === undefined ? {} : { grids }),
-    ...(r.attachedTo === undefined ? {} : { attachedTo: text(r.attachedTo) }),
-    ...(r.compositeRecipe === undefined ? {} : { compositeRecipe: pin(r.compositeRecipe) }),
-    ...(r.fieldStars === undefined ? {} : { fieldStars: pin(r.fieldStars) }),
-    ...(r.symmetryDirectory === undefined ? {} : { symmetryDirectory: text(r.symmetryDirectory) }) };
-}
 /** Reuse an installed bank only when its receipt records the current recipe and its descriptor and every resource it
  * names are present. The receipt keeps the whole recipe, so a changed recipe is compared, not trusted. */
 async function installed(directory: string, recipe: unknown): Promise<boolean> {
@@ -233,11 +192,13 @@ export async function prepareNebulaObject(root: string, directory: string, ifMis
     // Install complete generated files only. Authored source inputs stay untouched.
     await mkdir(resolve(directory,'prepared'),{recursive:true});
     for (const entry of await readdir(staging)) { await rm(resolve(directory,'prepared',entry),{recursive:true,force:true}); await rename(resolve(staging,entry),resolve(directory,'prepared',entry)); }
-    // The descriptor names the object that hosts the bank (`properties.host`); a rebake keeps it.
-    const host = await read(directory,'object.json').then(value => record(record(value).properties).host, (error: unknown) => {
-      if (error instanceof SyntaxError || error instanceof Error && 'code' in error && error.code === 'ENOENT') return undefined; throw error; });
+    // The descriptor names the object that hosts the bank (`properties.host`) and the catalogues drawn with it
+    // (`properties.cataloguePoints`); a rebake keeps both.
+    const authored = await read(directory,'object.json').then(value => record(record(value).properties), (error: unknown) => {
+      if (error instanceof SyntaxError || error instanceof Error && 'code' in error && error.code === 'ENOENT') return {} as Record<string, unknown>; throw error; });
+    const host = authored.host, cataloguePoints = authored.cataloguePoints;
     await put(resolve(directory,'object.json'),json({schema:OBJECT_SCHEMA,id:recipe.id,type:'volume-dataset-bank',properties:{frame:datasets[0]!.volume.frame,
-      preparation:{source:'source/delivery.json'},...(host === undefined ? {} : {host:text(host)})},prepared:{format:PREPARED_VOLUME_DATASETS_SCHEMA,url:'prepared/datasets.json'}}));
+      preparation:{source:'source/delivery.json'},...(host === undefined ? {} : {host:text(host)}),...(cataloguePoints === undefined ? {} : {cataloguePoints})},prepared:{format:PREPARED_VOLUME_DATASETS_SCHEMA,url:'prepared/datasets.json'}}));
     return { id:recipe.id,status:'prepared',sourceResult,datasets:datasets.map(l=>({id:l.id,stars:l.stars.points.length,leaves:l.volume.resources.length})) };
   } finally { await rm(staging,{recursive:true,force:true}); }
 }

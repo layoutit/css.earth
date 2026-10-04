@@ -7,7 +7,7 @@ import { sourceArray, sourceId, sourceObject, sourceText, sourceUnique } from '@
 import { cssViewFromOrientation, rotateWorldPosition } from '@cssearth/engine';
 import { rayHitsSphereBefore } from '@cssearth/engine';
 import type { LabelScreenRect } from '@cssearth/renderer/labels/screen-label-layout.ts';
-import type { WorldCameraPose } from '@cssearth/objects';
+import type { WorldCameraPose } from '@cssearth/engine';
 import type { WorldCameraViewport } from '@cssearth/renderer/navigation/world-camera.ts';
 import { createLabelBudget, labelExtentOpacity, type LabelBudget } from '@cssearth/renderer/labels/universe-label-policy.ts';
 
@@ -79,7 +79,9 @@ export function projectMoonLabels(moons: readonly Moon[], widths: readonly numbe
   return placements.filter(point => admitted.has(moons[point.index].id));
 }
 
-export function mountCatalogueMoonLabels(host: HTMLElement, bodies: readonly Point[], focus: Point, clock?: OpacityClock, requestPublication?: () => boolean, depthBase = 0) {
+/** `bodies` gives the world's bodies as they stand: a moon joins when its planet's system is read. */
+export function mountCatalogueMoonLabels(host: HTMLElement, worldBodies: readonly Point[] | (() => readonly Point[]), focus: Point, clock?: OpacityClock, requestPublication?: () => boolean, depthBase = 0) {
+  const bodiesNow = typeof worldBodies === 'function' ? worldBodies : () => worldBodies, bodies = bodiesNow();
   const moons = parseMoonLabels(prepared), parents = new Map(bodies.filter(body => moons.some(moon => moon.parentId === body.id)).map(body => [body.id, body]));
   const root = host.ownerDocument.createElement('div');
   root.className = 'catalogue-moon-labels';
@@ -111,7 +113,7 @@ export function mountCatalogueMoonLabels(host: HTMLElement, bodies: readonly Poi
   const last = labels.map(() => ({ shown: false, transform: '' }));
   let selected = focus, previous: ReadonlySet<number> = new Set(), coasting = false;
   return {
-    selectObject(id: string) { selected = bodies.find(body => body.id === id) ?? focus; },
+    selectObject(id: string) { selected = bodiesNow().find(body => body.id === id) ?? focus; },
     /** While the camera coasts the shown captions only move: none is admitted, retired or measured until it stops
      * (docs/performance/motion-freezes-membership.md). */
     setCoasting(active: boolean) { coasting = active; fader.holdHiding(active); },

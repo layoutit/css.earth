@@ -1,5 +1,5 @@
 /** Prepared content records and the historical panel field projection. */
-import { isRecord } from '@cssearth/core';
+import { object, text, number, optionalText, optionalBoolean, array } from './panel-readers.js';
 import type { ObjectContentSource, Fact, ContentDatasetRecipe, ChartRecipe, GalleryRecipe } from './object-content.js';
 export const PREPARED_CONTENT_SCHEMA = 'cssearth-prepared-content@2';
 
@@ -87,27 +87,6 @@ export interface PreparedPanelContent {
   features?: { searchLabel: string; description: string };
 }
 
-const object = (value: unknown, label: string): Record<string, unknown> => {
-  if (!isRecord(value)) throw new TypeError(`Prepared ${label} must be an object.`);
-  return value;
-};
-const text = (value: unknown, label: string): string => {
-  if (typeof value !== 'string') throw new TypeError(`Prepared ${label} must be text.`);
-  return value;
-};
-const number = (value: unknown, label: string): number => {
-  if (typeof value !== 'number' || !Number.isFinite(value)) throw new TypeError(`Prepared ${label} must be finite.`);
-  return value;
-};
-const optionalText = (value: unknown, label: string) => value === undefined ? undefined : text(value, label);
-const optionalBoolean = (value: unknown, label: string) => {
-  if (value !== undefined && typeof value !== 'boolean') throw new TypeError(`Prepared ${label} must be boolean.`);
-  return value;
-};
-const array = (value: unknown, label: string): readonly unknown[] => {
-  if (!Array.isArray(value)) throw new TypeError(`Prepared ${label} must be an array.`);
-  return value;
-};
 function rasterTitle(value: unknown): PreparedTitle {
   const title = object(value, 'raster title');
   return { label: text(title.label, 'title label'), src: text(title.src, 'title image'), width: number(title.width, 'title width'), height: number(title.height, 'title height') };

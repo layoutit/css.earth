@@ -5,7 +5,8 @@
   "properties": {
     "preparation": {
       "source": "source/catalogue.json"
-    }
+    },
+    "host": "nearby-universe"
   },
   "prepared": {
     "format": "cssearth-cluster-catalog@1",

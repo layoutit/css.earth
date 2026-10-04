@@ -1,4 +1,4 @@
-import type { RasterRecipe } from '../raster/index.ts';
+import type { RasterRecipe } from '@cssearth/objects';
 import { CANONICAL_PREPARED_IMAGE_DENSITY as RASTER_DENSITY } from '@cssearth/objects';
 import { rasterPageName, rasterPagePlan } from '../raster/index.ts';
 import type { GeometryProfile } from './profile.ts';

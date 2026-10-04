@@ -1,15 +1,13 @@
 import { importPackagedObjectRuntime } from './import-queue.mts';
-import { catalogueObject, levelOf, objectSystem } from '@cssearth/objects';
-import type { OverviewObject } from '@cssearth/objects';
+import { catalogueObject, objectSystem, systemHostId } from '@cssearth/objects';
 import type { NavigableObject, ObjectEntry } from './objects.mts';
-import overviews from './prepared-overview-objects.json' with { type: 'json' };
 import { readObjectEntry } from './object-entries.mts';
 
 /** The objects a page knows, read one at a time from their prepared entries (`pages/objects/[id]/entry.json.ts`) the first
- * time the page needs them: its own, the Sun's, and whatever it navigates to. A page never loads the whole registry, so an
- * object added to the universe costs nothing on any other page. The overviews are the exception: every URL is read against
- * them (a path names either an object or a level), so the directory starts with their few entries. Both lists are live: consumers that search them find
- * every object loaded so far. The build and the search function seed them from the full registry (`seedObjectDirectory`). */
+ * time the page needs them: its own, the objects it is inside, the Sun's, and whatever it navigates to. A page never loads
+ * the whole registry, so an object added to the universe costs nothing on any other page. Both lists are live: consumers
+ * that search them find every object loaded so far. The build and the search function seed them from the full registry
+ * (`seedObjectDirectory`). */
 export const NAVIGABLE_OBJECTS: NavigableObject[] = [];
 /** The same live list, under the name the scene code reads: it only ever holds the objects a page mounted or loaded,
  * and the scene code asks it for hosts (a system mounts its host's scene). */
@@ -20,16 +18,43 @@ function add(object: NavigableObject) {
   if (NAVIGABLE_OBJECTS.some(known => known.id === object.id)) return;
   NAVIGABLE_OBJECTS.push(object);
 }
-/** The overviews, from the nearest level of the zoom ladder out: every page knows them (see above). The build's registry
- * holds the same entries (objects.mts OVERVIEWS). */
-const levelObjects = overviews.map(objectFromEntry);
-// A level is an object: every page knows the levels as objects from the start, each from its catalogue row.
-for (const object of levelObjects) add(object);
-export const KNOWN_OVERVIEWS: readonly OverviewObject[] = Object.freeze(levelObjects.map(levelOf).sort((a, b) => a.order - b.order));
-/** The level with `id`, when `id` names one. */
-export const knownLevel = (id: string | null | undefined): OverviewObject | undefined => KNOWN_OVERVIEWS.find(level => level.id === id);
 /** The object with `id` if the page has loaded it. */
 export const knownObject = (id: string): NavigableObject | undefined => NAVIGABLE_OBJECTS.find(object => object.id === id);
+/** The objects `id` is inside that the page has loaded, nearest first: its parent, that one's, out to the Observable Universe. */
+export function knownAncestors(id: string): readonly NavigableObject[] {
+  const chain: NavigableObject[] = [];
+  for (let parent = knownObject(id)?.parent; parent !== undefined; parent = knownObject(parent)?.parent) {
+    const object = knownObject(parent);
+    if (!object) break;
+    chain.push(object);
+  }
+  return chain;
+}
+/** The ids of the objects `id` is inside, nearest first, as its own entry names them (`ancestors`): no other entry is read. */
+export async function ancestorIds(id: string, read: (id: string) => Promise<unknown | null> = fetchEntry): Promise<readonly string[]> {
+  const entry = await read(id);
+  const listed: unknown = entry && typeof entry === 'object' && 'ancestors' in entry ? entry.ancestors : [];
+  if (!Array.isArray(listed) || !listed.every((value): value is string => typeof value === 'string')) {
+    throw new TypeError(`/objects/${id}/entry.json: ancestors must be a list of object ids; got ${JSON.stringify(listed)}.`);
+  }
+  return listed;
+}
+/** Loads the objects `id` is inside, together: its entry names them (`ancestors`), so none waits for another. `id` is
+ * loaded too, from the entry just read: the chain starts at its parent (`knownAncestors`), so without it the chain of a
+ * star the page has not mounted (the Sun, on a planet's page) was empty and a zoom out of that planet followed nothing
+ * past the star's system until the camera rested (2026-10-03). */
+export async function loadAncestors(id: string, read: (id: string) => Promise<unknown | null> = fetchEntry): Promise<readonly NavigableObject[]> {
+  const ids = await ancestorIds(id, read);
+  await Promise.all([id, ...ids].map(each => loadObject(each, read)));
+  return knownAncestors(id);
+}
+/** Loads the object `id`, with any system it hosts, is inside: the nearest one that is no system (its galaxy; the Milky
+ * Way's is read at startup). Zooming out of `id` hands the view to it when it has a scene of its own (inside-view.mts
+ * `insideBody`), and nothing else it is inside is read for that. */
+export async function loadHolder(id: string, read: (id: string) => Promise<unknown | null> = fetchEntry): Promise<NavigableObject | null> {
+  const holder = (await ancestorIds(id, read)).find(ancestor => systemHostId(ancestor) === null);
+  return holder === undefined ? null : loadObject(holder, read);
+}
 
 /** A prepared catalogue entry as the directory serves it (`@cssearth/objects` catalogueObject), bound to the shell's scene loader. */
 export function objectFromEntry(value: unknown): NavigableObject {
@@ -64,7 +89,7 @@ export function loadObject(id: string, read: (id: string) => Promise<unknown | n
   }
   return pending;
 }
-const fetchEntry = readObjectEntry;
+function fetchEntry(id: string) { return readObjectEntry(id); }
 
 /** The build, the search function and tests hold the full registry; they seed the directory with it. */
 export function seedObjectDirectory(objects: readonly NavigableObject[]) {

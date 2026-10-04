@@ -1,8 +1,8 @@
 // `CSSEARTH_BUILD_PAGES=/,/earth/ astro build`: a production build that prerenders only the named object pages and the
 // scene routes they mount, for a cold test that opens a few pages, not all of them. Unset, every route builds as before.
 
-/** A page: an object's mounts its own scene; a level's mounts the scene of `sceneHostId`, the world host, with it selected. */
-interface PageObject { readonly id: string; readonly sceneHostId?: string }
+/** A page: an object's mounts its own scene, or `sceneId`'s when it shows another's (a system's mounts its host's). */
+interface PageObject { readonly id: string; readonly sceneId?: string }
 interface IdPath { readonly params: { readonly id: string } }
 
 /** The page paths `CSSEARTH_BUILD_PAGES` names (`/` and `/<id>/`, comma-separated), or null when every page builds. */
@@ -47,7 +47,7 @@ export function builtScenePaths<Path extends IdPath>(paths: Path[], objects: rea
   if (!named) return paths;
   const root = objects.find(object => object.id === rootId);
   if (!root) throw new TypeError(`The root object ${rootId} is not in OBJECTS.`);
-  const scene = (object: PageObject) => object.sceneHostId ?? object.id;
+  const scene = (object: PageObject) => object.sceneId ?? object.id;
   const mounted = new Set([...named, ...(namedPages(env)?.has('/') ? [root] : [])].map(scene));
   return paths.filter(path => mounted.has(path.params.id));
 }

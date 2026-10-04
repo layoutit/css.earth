@@ -1,0 +1,41 @@
+{
+  "host": "sgr-a-star",
+  "companions": [
+    {
+      "id": "s4",
+      "name": "S4",
+      "description": "A hot young star on a 77-year orbit around Sagittarius A*, the Milky Way's central black hole.",
+      "order": 1256,
+      "paper": {
+        "url": "https://arxiv.org/abs/1611.09144",
+        "credit": "Gillessen et al. (2017), ApJ 837, 30"
+      },
+      "radius": {
+        "value": 5.23,
+        "source": "Habibi et al. (2017), ApJ 847, 120, Table 3: 5.23 (+1.21/-0.85) solar radii, model-atmosphere fit to SINFONI spectra",
+        "url": "https://arxiv.org/abs/1708.06353"
+      },
+      "mass": {
+        "value": 12.2,
+        "source": "Habibi et al. (2017), ApJ 847, 120, Table 3: 12.20 (+1.9/-1.7) solar masses",
+        "url": "https://arxiv.org/abs/1708.06353"
+      },
+      "temperature": {
+        "value": 27288,
+        "source": "Habibi et al. (2017), ApJ 847, 120, Table 3: Teff 27,288 K",
+        "url": "https://arxiv.org/abs/1708.06353"
+      },
+      "orbit": {
+        "record": true,
+        "source": "Gillessen et al. (2017), ApJ 837, 30, table3 (VizieR J/ApJ/837/30)",
+        "url": "https://arxiv.org/abs/1611.09144"
+      },
+      "text": {
+        "card": "A hot young star that swings around the Milky Way's central black hole every 77 years.",
+        "introduction": "At its closest it passes 1,800 au from Sagittarius A*; it was last there in 1957.",
+        "locator": "table3: P, a, e and Tp"
+      },
+      "colorReason": "S4 is observed only in the near-infrared (the SINFONI H- and K-band spectra of Habibi et al. 2017); no spectrum of it covers visible light"
+    }
+  ]
+}

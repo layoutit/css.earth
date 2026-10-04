@@ -1,0 +1,30 @@
+{
+ "id": "alkaid",
+ "classification": "star",
+ "order": 5466,
+ "physical": {
+  "name": "Alkaid",
+  "horizonsCode": null,
+  "meanRadiusKm": 2365380,
+  "gravitationalParameterKm3PerS2": 0,
+  "parent": null,
+  "effectiveTemperatureK": 15540
+ },
+ "physicalNotes": "Radius 3.4 +/- 0.5 solar radii from Baines et al. (2018), AJ 155, 30, HD 120315: radius 3.4 +/- 0.5 solar radii (Table 5), from the limb-darkened angular diameter 0.981 +/- 0.144 mas (NPOI, Table 4) and the Hipparcos (van Leeuwen 2007) parallax (https://doi.org/10.3847/1538-3881/aa9d8b): 2,365,380 km at 695,700 km per solar radius. No mass is measured, so GM is 0, the records' unpublished value. Temperature 15540 +/- 1157 K from Baines et al. (2018), AJ 155, 30, HD 120315: effective temperature 15540 +/- 1157 K (Table 5), from the angular diameter and the bolometric flux of the SED fit (https://doi.org/10.3847/1538-3881/aa9d8b). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 206.8843267438112,
+  "declinationDegrees": 49.313201807217496,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 31.867,
+  "properMotionRaMasPerYear": 0,
+  "properMotionDecMasPerYear": 0,
+  "radialVelocityKmPerS": -13.4,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 1510374147844219904 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/alkaid/source/photometry/gaia-dr3-source.csv; cross-identification HD 120315, HR 5191, HIP 67301: https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia+DR3+1510374147844219904",
+   "distance": "Baines et al. (2018), AJ 155, 30, HD 120315: the Hipparcos (van Leeuwen 2007) parallax the radius was computed with (Table 1), 31.38 +/- 0.24 mas, inverted (https://doi.org/10.3847/1538-3881/aa9d8b): 31.867 +/- 0.244 pc; Gaia DR3 gives this source no parallax (a two-parameter solution)",
+   "properMotion": "Gaia DR3 source 1510374147844219904 is a two-parameter solution with no proper motion; zero is assumed (at 32 pc, 1 mas/yr would be 0 km/s across the sky)",
+   "radialVelocity": "SIMBAD's radial velocity for Gaia DR3 1510374147844219904 (quality A), from 2006AstL...32..759G; Gaia DR3 measures none (https://ui.adsabs.harvard.edu/abs/2006AstL...32..759G/abstract)"
+  }
+ }
+}

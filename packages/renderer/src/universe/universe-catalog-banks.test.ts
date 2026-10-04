@@ -82,3 +82,48 @@ test('a bank that belongs to a body draws while that body or one of its system i
   assert.equal(layer()?.style.display, 'none', 'another system hides them');
   lifetime.destroy();
 });
+
+test('a bank of plain-dot stars draws while the selected body is inside its host, dimmed as the other stars are', () => {
+  const { document } = parseHTML('<div id="root"><span></span></div>');
+  const root = document.getElementById('root')!, lifetime = createSceneLifetime();
+  const banks = createUniverseCatalogBanks({ prepareBillboardAtlas: () => true, root, end: root.firstElementChild!, stage: root, lifetime, declarations: [],
+    initialImages: new Map(), volumeDeclarations: [], catalogBank: undefined, loadCatalog: undefined, loadImageLayer: undefined,
+    pointBanks: [{ id: 'cloud/plain-stars', url: '/world/dots/cloud.bin', host: 'cloud', stars: true }, { id: 'group-members', url: '/group/dots.bin', host: 'group' }] });
+  let asked = 0;
+  // The selected body, then the objects it is inside as the host read them from the object tree.
+  const publish = (selected: string, ...inside: string[]) => banks.publishPoints({ referenceFrame: 'fixture', epochJdTt: 1,
+    pose: { positionM: [0, 0, 10], orientationXyzw: [0, 0, 0, 1] } },
+  { focalPixels: 1000, principalOffsetPixels: [0, 0], widthPixels: 400, heightPixels: 300 }, undefined, [selected], { inside, look: () => { asked++; return { opacity: .5, hiddenAtM: [] }; } });
+  const layer = () => root.querySelector<HTMLElement>('[data-catalogue-points]');
+  publish('sun');
+  assert.equal(layer(), null, 'a page outside the object never asks for its dots');
+  assert.equal(asked, 0);
+  publish('cepheid', 'cepheid-system', 'cloud', 'group');
+  assert.equal(layer()?.style.display, '', 'a star inside it selected, the dots draw');
+  assert.equal(asked, 1, 'and take the look every star dot has');
+  assert.equal(root.querySelectorAll('[data-catalogue-points]').length, 1, 'a bank of members draws for its host and its system only, not for what is inside it');
+  publish('cloud', 'group');
+  assert.equal(layer()?.style.display, '', 'the object itself selected, they stay');
+  publish('sun');
+  assert.equal(layer()?.style.display, 'none', 'outside it they hide');
+  assert.equal(asked, 2);
+  lifetime.destroy();
+});
+
+test('a package of catalogue dots declared after mount draws while its host is selected, mounted once', () => {
+  const { document } = parseHTML('<div id="root"><span></span></div>');
+  const root = document.getElementById('root')!, lifetime = createSceneLifetime();
+  const banks = createUniverseCatalogBanks({ prepareBillboardAtlas: () => true, root, end: root.firstElementChild!, stage: root, lifetime, declarations: [],
+    initialImages: new Map(), volumeDeclarations: [], catalogBank: undefined, loadCatalog: undefined, loadImageLayer: undefined });
+  const publish = (...system: string[]) => banks.publishPoints({ referenceFrame: 'fixture', epochJdTt: 1,
+    pose: { positionM: [0, 0, 10], orientationXyzw: [0, 0, 0, 1] } },
+  { focalPixels: 1000, principalOffsetPixels: [0, 0], widthPixels: 400, heightPixels: 300 }, undefined, system);
+  assert.equal(banks.focusBank('minor-moons'), null, 'unknown before its host brings it');
+  banks.addPointBanks([{ id: 'minor-moons', url: '/minor-moons/dots.bin', host: 'planet' }]);
+  banks.addPointBanks([{ id: 'minor-moons', url: '/minor-moons/dots.bin', host: 'planet' }]);
+  assert.notEqual(banks.focusBank('minor-moons'), null);
+  publish('moon', 'planet');
+  assert.equal(root.querySelectorAll('[data-catalogue-points]').length, 1, 'mounted once, drawn for a body of its host');
+  lifetime.destroy();
+  assert.equal(root.querySelector('[data-catalogue-points]'), null);
+});

@@ -15,7 +15,7 @@ import { stelab, type Ephemeris } from './geometry.js';
 import { frameDefinition } from './frames.js';
 
 /** SPICE aberration corrections: one light-time iteration (LT), converged (CN), each with or without stellar aberration (+S), or none. */
-export type Aberration = 'LT+S' | 'LT' | 'CN+S' | 'CN' | 'NONE';
+export type Aberration = SpiceCamera['report']['aberration'];
 export interface PixelModelKeys {
   /** INS<id>_ variable suffixes: focal length, pixel pitch, detector centre (sample, line), boresight, samples, lines, frame. */
   readonly focalLength: { readonly key: string; readonly unit: 'mm' };

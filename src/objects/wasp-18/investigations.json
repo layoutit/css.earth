@@ -21,6 +21,15 @@
       "evidence": [
         "https://arxiv.org/abs/2001.11112"
       ]
+    },
+    {
+      "id": "limb-darkening",
+      "subject": "Limb darkening",
+      "status": "included",
+      "finding": "The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 6,432 K and log g 4.37 (u1 0.357, u2 0.312): a model, because no fit of this star's limb is used. Gravity: log g from the mass and radius in packages/astronomy/data/bodies/wasp-18.json: 4.372.",
+      "evidence": [
+        "https://vizier.cds.unistra.fr/viz-bin/asu-tsv"
+      ]
     }
   ]
 }

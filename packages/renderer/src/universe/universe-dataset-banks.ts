@@ -2,13 +2,15 @@ import { writeStyle } from '../rendering/retained-write.js';
 import { createVolumeTextureReadiness } from '../volume/volume-texture-readiness.js';
 import type { PreparedFocusBank } from './prepared-focus-bank.js';
 import type { SceneLifetime } from '@cssearth/engine';
-import { type DensityVolumeFrame, type PreparedPointVisibility, type DatasetBankBillboard, type DatasetBillboards, type WorldCameraPose } from '@cssearth/objects';
+import { type DensityVolumeFrame, type PreparedPointVisibility, type DatasetBankBillboard, type DatasetBillboards } from '@cssearth/objects';
+import { type WorldCameraPose } from '@cssearth/engine';
 import type { WorldCameraViewport } from '../navigation/world-camera.js';
 import { createPreparedVolumeDatasets } from '../volume/prepared-volume-datasets.js';
 import { projectedVolumeOpacity, projectVolumeSphere, volumeFramingRadiusUnits } from '../volume/projected-volume-visibility.js';
 
 import { mountDatasetBillboards } from './dataset-billboards.js';
-import { fetchPreparedCatalogueBank, mountCataloguePoints } from './catalogue-points.js';
+import { mountCataloguePoints } from './catalogue-points.js';
+import { fetchPreparedCatalogueBank } from './catalogue-point-transport.js';
 import type { PreparedUniverseOptions } from './prepared-universe-types.js';
 
 type DatasetMount = ReturnType<ReturnType<typeof createPreparedVolumeDatasets>['mount']>;
@@ -48,17 +50,18 @@ export function createUniverseDatasetBanks({ root, end, frontRoot, frontEnd, lif
   prepareBillboardAtlas: () => boolean;
 }) {
   let billboardCount = 0, useClock = 0, coasting = false;
-  const banks: DatasetBank[] = declarations.map((declared, index) => ({
-    id: declared.id, facts: facts[index]!, billboardIndex: facts[index]!.billboard ? billboardCount++ : -1,
+  const record = (declared: { id: string; frame: DensityVolumeFrame }, bankFacts: DatasetBankBillboard): DatasetBank => ({
+    id: declared.id, facts: bankFacts, billboardIndex: bankFacts.billboard ? billboardCount++ : -1,
     mounted: null, points: [], textures: null, loading: null, generation: 0, explicitEnabled: undefined,
     // A bank's own star points stay hidden unless a caller shows them.
     pendingSelection: undefined, pendingStarsVisible: false,
     framing: { frame: declared.frame, radiusUnits: volumeFramingRadiusUnits(declared.frame), visibility },
     residentNodes: 0, visible: false, lastUsed: 0, subscribers: 0,
-    enabled: !facts[index]!.attached,
-  }));
+    enabled: !bankFacts.attached,
+  });
+  const banks: DatasetBank[] = declarations.map((declared, index) => record(declared, facts[index]!));
   const byId = new Map(banks.map(bank => [bank.id, bank]));
-  for (const bank of banks) lifetime.onDispose(() => {
+  const release = (bank: DatasetBank) => lifetime.onDispose(() => {
     bank.generation++;
     const mounted = bank.mounted;
     bank.mounted = null;
@@ -68,11 +71,16 @@ export function createUniverseDatasetBanks({ root, end, frontRoot, frontEnd, lif
     mounted?.destroy();
     bank.textures?.destroy(); bank.textures = null;
   });
-  const billboardEntries = banks.flatMap(bank => bank.facts.billboard
-    ? [{ id: bank.id, frame: bank.framing.frame, billboard: bank.facts.billboard }] : []);
-  const billboards = billboardEntries.length ? mountDatasetBillboards({ host: root, before: end,
-    atlasUrl: preparedBillboards!.atlasUrl, atlas: preparedBillboards!.plan.atlas, entries: billboardEntries, prepareAtlas: prepareBillboardAtlas }) : null;
-  if (billboards) lifetime.onDispose(() => billboards.destroy());
+  for (const bank of banks) release(bank);
+  const billboardEntry = (bank: DatasetBank) => ({ id: bank.id, frame: bank.framing.frame, billboard: bank.facts.billboard! });
+  const mountBillboards = (entries: ReturnType<typeof billboardEntry>[]) => {
+    const mounted = mountDatasetBillboards({ host: root, before: end, atlasUrl: preparedBillboards!.atlasUrl,
+      atlas: preparedBillboards!.plan.atlas, entries, prepareAtlas: prepareBillboardAtlas });
+    lifetime.onDispose(() => mounted.destroy());
+    return mounted;
+  };
+  const billboardEntries = banks.filter(bank => bank.facts.billboard).map(billboardEntry);
+  let billboards = billboardEntries.length ? mountBillboards(billboardEntries) : null;
 
   function publishResidency() {
     if (lifetime.disposed) return;
@@ -198,6 +206,18 @@ export function createUniverseDatasetBanks({ root, end, frontRoot, frontEnd, lif
 
   return {
     publishResidency,
+    /** Declare a bank after mount, as one declared with it is: its host's entry brought it. A known id is ignored. */
+    declare(declared: { id: string; frame: DensityVolumeFrame }, bankFacts: DatasetBankBillboard) {
+      if (lifetime.disposed || byId.has(declared.id)) return;
+      const bank = record(declared, bankFacts);
+      banks.push(bank); byId.set(bank.id, bank); release(bank);
+      // Its billboard joins the mounted layer; the first one makes it, after what the universe mounted since.
+      if (bank.facts.billboard) {
+        if (billboards) billboards.add(billboardEntry(bank)); else billboards = mountBillboards([billboardEntry(bank)]);
+        billboards.setCoasting(coasting);
+      }
+      publishResidency();
+    },
     select,
     focusBank(id: string): PreparedFocusBank | null {
       const bank = byId.get(id);

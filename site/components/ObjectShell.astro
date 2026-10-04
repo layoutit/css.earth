@@ -2,7 +2,7 @@
 import { DIAGNOSTICS_ENABLED } from "../diagnostics-policy.mts";
 import ObjectInformationPanel from "./ObjectInformationPanel.astro";
 import type { Props } from "../object-shell-types";
-import { OVERVIEWS, SCENE_OBJECTS } from "../objects.mts";
+import { SCENE_OBJECTS } from "../objects.mts";
 import { PREPARED_SHELL_TITLES } from "../prepared-shell-titles.mjs";
 import { requireObjectControls } from "@cssearth/objects";
 import SourcesLink from './SourcesLink.astro';
@@ -11,7 +11,6 @@ import MaterialSymbol from "./MaterialSymbol.astro";
 import GitHubIcon from "./GitHubIcon.astro";
 import CssEarthWordmark from "./CssEarthWordmark.astro";
 import ObjectCard from './ObjectCard.astro';
-import SystemBodies from './SystemBodies.astro';
 import ObjectBreadcrumbs from './ObjectBreadcrumbs.astro';
 import Accordion from './Accordion.astro';
 import { SOLAR_SYSTEM_ID, systemOfObject } from '../object-systems.mts';
@@ -109,8 +108,8 @@ import Detached from './Detached.astro';
     ><MaterialSymbol name={category.icon} /><span>{category.label}</span></button>)}
   </div>
   <div class="object-header-actions" role="group" aria-label="App actions">
-    <button class="object-showcase-action" type="button" aria-pressed="false" aria-label="Showcase"
-      title="Showcase: fly between featured bodies until you take over"><MaterialSymbol name="play_arrow" /><span>Showcase</span></button>
+    <button class="object-showcase-action" type="button" aria-pressed="false" aria-label="Slideshow"
+      title="Slideshow: fly between featured bodies until you take over"><MaterialSymbol name="play_arrow" /><span>Slideshow</span></button>
     <a class="object-header-link" href="https://github.com/layoutit/cssEarth" target="_blank" rel="noopener noreferrer" aria-label="GitHub" title="GitHub">
       <GitHubIcon />
     </a>
@@ -124,7 +123,6 @@ import Detached from './Detached.astro';
     </label>
   </div>
 </header>
-<div class="object-dataset-context-dock">
 <form id="object-settings-form" action={pageRoute ?? `/${objectId}/`} method="get" data-settings-form hidden>
   <input type="hidden" name="settings" value="1" />
   {['v', 'dataset', 'feature'].map(name => <input type="hidden" name={name} data-view-context disabled />)}
@@ -204,7 +202,6 @@ import Detached from './Detached.astro';
     <button class="object-setting-control object-settings-submit" type="submit" form="object-settings-form">Apply settings</button>
   </div>
 </section>
-</div>
 <div class="object-sidebar-frame">
 <aside id={`${objectId}-sidebar`} class="object-sidebar" data-has-destinations={destinations ? "true" : undefined} aria-label="Object information">
   <div class="object-drawer-content" id={`${objectId}-information`}>

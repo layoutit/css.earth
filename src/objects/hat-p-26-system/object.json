@@ -1,12 +1,12 @@
 {
   "schema": "cssearth-object@2",
   "id": "hat-p-26-system",
+  "parent": "milky-way",
   "type": "system",
   "generator": "site/build/prepare/system-packages.mts",
   "properties": {
     "system": {
-      "host": "hat-p-26",
-      "members": "planets"
+      "host": "hat-p-26"
     },
     "catalog": {
       "name": "Guahayona system",

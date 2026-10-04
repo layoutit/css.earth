@@ -19,10 +19,11 @@
  *   cell, a fixed share of each bin chosen by each galaxy's WISE id, so the ball's depth follows DESI's.
  * - This catalogue has no g, r and z fluxes to color a galaxy as DESI's are colored, so each row carries its redshift
  *   bin (column C), and the script prints the median color DESI's own galaxies show in each bin (each channel's median
- *   over the prepared DESI bank's untoned palette colors, `output/catalogue-points/nearby-universe/desi-bright-galaxies.json`,
+ *   over the prepared DESI bank's untoned palette colors, `output/catalogue-points/nearby-universe-galaxies/desi-bright-galaxies.json`,
  *   which `prepare-catalogue-points.mts src/objects/nearby-universe-galaxies desi-bright-galaxies` writes): the recipe's color
  *   stops.
  */
+import { catalogueBankInputPath } from '@cssearth/bake/volume/node';
 import { medianUpperMiddle as median } from '@cssearth/core';
 import { createReadStream } from 'node:fs';
 import { readFile, writeFile } from 'node:fs/promises';
@@ -109,7 +110,7 @@ const kept = homes.flatMap((home, index) => covered[home] && share(ids[index]!) 
   ? [`${ids[index]},${ras[index]},${decs[index]},${zs[index]},${rs[index]},${bin(zs[index]!)}`] : []);
 const csv = ['wiseID,RA,DEC,Z,R,C', ...kept].join('\n') + '\n';
 // DESI's median color per bin, from its prepared bank (points in the sample's row order).
-const bankPath = resolve(repository, 'output/catalogue-points/nearby-universe/desi-bright-galaxies.json');
+const bankPath = catalogueBankInputPath(resolve(sourceDirectory, '..'), 'desi-bright-galaxies', repository);
 const bank = JSON.parse(await readFile(bankPath, 'utf8')) as { points?: number[][]; appearance?: { palette?: string[] } };
 if (!bank.points || bank.points.length !== desi.length || !bank.appearance?.palette) throw new TypeError(`${bankPath}: expected ${desi.length} points with a palette, in the sample's order.`);
 const channels = Array.from({ length: BINS }, () => [[], [], []] as number[][]);

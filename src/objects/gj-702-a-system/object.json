@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "gj-702-a-system",
+  "parent": "milky-way",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "gj-702-a"
+    },
+    "catalog": {
+      "name": "70 Ophiuchi system",
+      "systemName": "70 Ophiuchi system",
+      "classification": "star-system",
+      "color": "#ffede1",
+      "distanceAu": 1054686.7,
+      "description": "70 Ophiuchi A and 70 Ophiuchi B are two stars bound to each other by gravity."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        3755156988471439,
+        -157584942291912500,
+        6860047572046097
+      ],
+      "presentationToReference": [
+        0.023800064900354873,
+        0.0010366801748077417,
+        -0.9997162008314932,
+        -0.9987683234484145,
+        -0.043523766854604476,
+        -0.023822631987871823,
+        0.04353611129605442,
+        -0.9990518540160972,
+        4.651557025635075e-7
+      ],
+      "orbitUpReference": [
+        -0.0010366801748077417,
+        0.043523766854604476,
+        0.9990518540160972
+      ],
+      "metersPerUnit": 1864924.8387096773,
+      "bodyRadiusM": 578126700
+    }
+  }
+}

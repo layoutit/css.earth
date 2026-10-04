@@ -1,17 +1,17 @@
 {
   "schema": "cssearth-object@2",
   "id": "m4-v66-a-system",
+  "parent": "milky-way",
   "type": "system",
   "generator": "site/build/prepare/system-packages.mts",
   "properties": {
     "system": {
-      "host": "m4-v66-a",
-      "members": "planets"
+      "host": "m4-v66-a"
     },
     "catalog": {
       "name": "M4 V66 system",
       "systemName": "M4 V66 system",
-      "classification": "planetary-system",
+      "classification": "star-system",
       "color": "#fff5f5",
       "distanceAu": 375401947.4,
       "description": "The primary star of M4 V66, a pair that eclipse each other every 8.111 days."

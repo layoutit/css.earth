@@ -14,7 +14,7 @@ export interface PlanetarySystem {
   /** The prepared framing radius: the farthest framed orbit plus its body. */
   readonly radiusM: number;
   /** Leaving this far from the star opens the system overview: the Sun's 100 AU, scaled by the system's prepared size, and
-   * no farther than a quarter of the distance where its orbits are gone, where the overview gives way (overview-context.mts).
+   * no farther than a quarter of the distance where its orbits are gone, where the overview gives way (zoom-scope.mts).
    * It then lasts at least two doublings of distance, wider than a mouse-wheel step at these scales, so zooming out
    * shows it rather than stepping over it. Only Sgr A* is held by this: its
    * S-star orbits are gone at 3.2 ly, so its overview opens at 0.8 ly, not at the scaled 3.6 ly. */
@@ -45,10 +45,9 @@ export function planetarySystems(objects: readonly (Pick<ObjectEntry, 'id' | 'na
     if (!star || !radiusM) throw new TypeError(`Planetary system ${id} requires a registered star and a framing radius.`);
     for (const memberId of memberIds) {
       if (!points.has(memberId)) throw new TypeError(`Planetary system ${id} lists ${memberId}, which the world context does not place; run pnpm prepare:world-context.`);
-      const member = registry.get(memberId);
-      if (member && member.systemName !== star.systemName) throw new TypeError(`${memberId} orbits ${star.name} but names its system ${member.systemName}, not ${star.systemName}.`);
     }
     const fade = systemFadeDistances(plan.system, 'orbitsWithinM' in host ? host.orbitsWithinM : undefined);
+    // Its name is its star's system name: the Solar System, the TRAPPIST-1 system, the Galactic Centre.
     return Object.freeze({ id, name: star.systemName, route: star.route, originM: star.worldFrame?.originM ?? host.positionM,
       memberIds: Object.freeze([...memberIds]), radiusM,
       exitDistanceM: Math.min(policy.exitSunDistanceM * radiusM / solarRadiusM, fade.hiddenDistanceM / SYSTEM_OVERVIEW_SPAN) });
@@ -62,8 +61,12 @@ const indexOf = (objects: Parameters<typeof planetarySystems>[0]) => {
   if (!index) {
     const systems = planetarySystems(objects);
     const byMember = new Map<string, PlanetarySystem>();
-    // The first system to list an id wins, as a scan in system order found it.
-    for (const system of systems) for (const id of [system.id, ...system.memberIds]) if (!byMember.has(id)) byMember.set(id, system);
+    // A body is in the nearest system: the first to list it, unless a later one's host is itself inside that one (a
+    // system inside another: Epsilon Indi Bb is in Epsilon Indi B, which is inside Epsilon Indi A's system).
+    for (const system of systems) for (const id of [system.id, ...system.memberIds]) {
+      const listed = byMember.get(id);
+      if (!listed || listed.memberIds.includes(system.id)) byMember.set(id, system);
+    }
     const byId = new Map<string, PlanetarySystem>();
     for (const system of systems) if (!byId.has(system.id)) byId.set(system.id, system);
     cache.set(objects, index = { systems, byId, byMember });
@@ -81,9 +84,3 @@ export function systemById(objects: Parameters<typeof planetarySystems>[0], syst
 export const allPlanetarySystems = systemsOf;
 /** The objects systems are built from: the world's bodies (`world-objects.mts`) or the registry. */
 export type SystemObjects = Parameters<typeof planetarySystems>[0];
-
-/** Whether a system's card lists a member: its star, its planets and its featured bodies. Search reaches the rest; the
- * Solar System's card listed all 545 of its bodies, 4,900 elements (2026-10-01). */
-export function listedInSystemCard(object: { readonly id: string; readonly classification: string; readonly discovery: { readonly featured: boolean } }, systemId: string): boolean {
-  return object.id === systemId || object.classification === 'planet' || object.classification === 'exoplanet' || object.discovery.featured;
-}

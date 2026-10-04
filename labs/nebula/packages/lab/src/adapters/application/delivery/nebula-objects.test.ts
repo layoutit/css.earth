@@ -6,7 +6,8 @@ import { test } from 'node:test';
 import sharp from 'sharp';
 import { type PreparedCssVolume, type VolumeAxis, validatePreparedVolumeDatasets } from '@cssearth/objects';
 
-import { prepareNebulaObject, readNebulaDelivery } from './nebula-objects.ts';
+import { prepareNebulaObject } from './nebula-objects.ts';
+import { readNebulaDelivery } from '@cssearth/objects';
 
 test('a pinned optical composite is a compiler delivery stage, never a symmetry fallback', async () => {
   const recipe: unknown = JSON.parse(await readFile('src/objects/m45-volume/source/delivery.json', 'utf8'));

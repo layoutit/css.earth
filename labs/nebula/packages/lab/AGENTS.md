@@ -12,4 +12,4 @@ Shared compact delivery, material receipt, simulation-envelope and cloud-parts f
 `@cssearth/objects`; lab owns orchestration, file I/O and publication adapters.
 
 Kinematics owns the molecular catalogue envelope; reconstruction returns scientific table data without that envelope.
-`schema-protocols.test.ts` pins preserved Python registration/native schema checks and retained fixtures; CI selects it explicitly.
+`schema-protocols.test.ts` pins preserved Python registration/native schema checks and retained fixtures; CI discovers it with every lab test.

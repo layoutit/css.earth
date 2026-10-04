@@ -1,3 +1,4 @@
+import type { EdgeOnReconstruction } from '@cssearth/objects';
 /** Research command: reconstruct the emission of an edge-on circumstellar disc in three dimensions from its images, with the
  * axially symmetric method of Wenger, Lorenz & Magnor (2013) (methods/symmetry/solver). The symmetry axis is the disc's normal,
  * so the voxels grouped together are those at one height above the midplane and one radius from the star.
@@ -16,7 +17,7 @@ import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { inferEmission, type InferenceGrid } from '@cssearth/nebula-reconstruction/methods/symmetry/solver';
-import { circumstellarAuthor, type EdgeOnReconstruction, type EdgeOnSolveInputs } from '../../../adapters/preparation/circumstellar.ts';
+import { circumstellarAuthor, type EdgeOnSolveInputs } from '../../../adapters/preparation/circumstellar.ts';
 import { densityEncoder } from '../../../adapters/preparation/density-encoding.ts';
 
 /** The record's digests are the contract of its reader, packages/telescope-cli/authoring/circumstellar (EdgeOnReconstruction). */

@@ -1,0 +1,119 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "m61",
+  "displayName": "M61",
+  "panel": {
+    "facts": [
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "16.99 Mpc (13.97 to 20.01)",
+        "source": {
+          "catalogueId": "leroy-2021-phangs-alma",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/257/43",
+          "label": "Leroy et al. (2021), PHANGS-ALMA, ApJS 257, 43, table of galaxies, row NGC4303: distance 16.99 ± 3.02 Mpc, from the compilation of Anand et al. (2021)",
+          "checked": "2026-10-02"
+        }
+      },
+      {
+        "id": "position",
+        "label": "Sky position (J2000)",
+        "value": "RA 185.478°, Dec 4.474°",
+        "source": {
+          "catalogueId": "hyperleda-2014",
+          "url": "http://atlas.obs-hp.fr/hyperleda/",
+          "label": "HyperLEDA (Makarov et al. 2014), NGC4303 = PGC 40001: centre, type Sbc, D25 diameter 6.9 arcmin",
+          "checked": "2026-10-02"
+        }
+      },
+      {
+        "id": "type",
+        "label": "Type",
+        "value": "Sbc (spiral galaxy)",
+        "source": {
+          "catalogueId": "hyperleda-2014",
+          "url": "http://atlas.obs-hp.fr/hyperleda/",
+          "label": "HyperLEDA (Makarov et al. 2014), NGC4303 = PGC 40001: centre, type Sbc, D25 diameter 6.9 arcmin",
+          "checked": "2026-10-02"
+        }
+      },
+      {
+        "id": "tilt",
+        "label": "Tilt of its disc",
+        "value": "24° from face-on",
+        "source": {
+          "catalogueId": "leroy-2021-phangs-alma",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/257/43",
+          "label": "Leroy et al. (2021), PHANGS-ALMA, ApJS 257, 43, table of galaxies (orientations from Lang et al. 2020), row NGC4303: inclination 23.5 ± 9.2°, position angle 312.4 ± 2.5°",
+          "checked": "2026-10-02"
+        }
+      },
+      {
+        "id": "size",
+        "label": "Diameter",
+        "value": "34.0 kpc (6.9 arcmin at 25 mag per square arcsecond)",
+        "source": {
+          "catalogueId": "hyperleda-2014",
+          "url": "http://atlas.obs-hp.fr/hyperleda/",
+          "label": "HyperLEDA (Makarov et al. 2014), NGC4303 = PGC 40001: centre, type Sbc, D25 diameter 6.9 arcmin",
+          "checked": "2026-10-02"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "optical",
+    "controls": [
+      {
+        "id": "optical",
+        "label": "SDSS · optical",
+        "thumbnail": "m61-dataset-optical.webp",
+        "volume": {
+          "objectId": "m61-layers",
+          "datasetId": "optical",
+          "surface": "optical"
+        },
+        "source": {
+          "id": "m61-layers-optical",
+          "path": "../../m61-layers/source/manifest.json",
+          "url": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record"
+        },
+        "falseColor": false
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Leroy et al. (2021), PHANGS-ALMA, ApJS 257, 43, table of galaxies, row NGC4303: distance 16.99 ± 3.02 Mpc, from the compilation of Anand et al. (2021)",
+      "href": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/257/43"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "HyperLEDA (Makarov et al. 2014), NGC4303 = PGC 40001: centre, type Sbc, D25 diameter 6.9 arcmin",
+      "href": "http://atlas.obs-hp.fr/hyperleda/"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Leroy et al. (2021), PHANGS-ALMA, ApJS 257, 43, table of galaxies (orientations from Lang et al. 2020), row NGC4303: inclination 23.5 ± 9.2°, position angle 312.4 ± 2.5°",
+      "href": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/257/43"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/257/43",
+      "credit": "Leroy et al. (2021), PHANGS-ALMA, ApJS 257, 43, table of galaxies, row NGC4303: distance 16.99 ± 3.02 Mpc, from the compilation of Anand et al. (2021)"
+    }
+  }
+}

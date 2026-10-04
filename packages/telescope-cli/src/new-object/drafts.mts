@@ -28,6 +28,8 @@ export const DRAFT_ROUTES: Readonly<Record<string, { readonly names: string; rea
   iau: { names: 'all | NAME', draft: async (names, context) => (await import('./iau.mts')).draftsFromIau(names, context) },
   // A nearby A, F or G star whose disc the CHARA Array measured (Boyajian et al. 2012) (chara.mts).
   chara: { names: 'HD', draft: async (names, { archive }) => (await import('./chara.mts')).draftsFromChara(names, archive) },
+  // A bright star whose disc the Navy Precision Optical Interferometer measured (Baines et al. 2018, 2021) (npoi.mts).
+  npoi: { names: 'HD', draft: async (names, { archive }) => (await import('./npoi.mts')).draftsFromNpoi(names, archive) },
   // A Cepheid Hubble found in another galaxy (Hoffmann et al. 2016), placed by its catalogue row: HOST (N4536) or HOST/ID (sh0es.mts).
   sh0es: { names: 'HOST[/ID]', draft: async (names, { archive }) => (await import('./sh0es.mts')).draftsFromSh0es(names, archive) },
   // A Cepheid in the Andromeda Galaxy: Hubble's V1, or those Hubble measured for its distance (Li et al. 2021) (m31-cepheids.mts).

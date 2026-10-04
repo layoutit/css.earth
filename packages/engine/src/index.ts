@@ -20,7 +20,7 @@ export { cssDirectionToViewDirection } from './solar-system/solar-view-direction
 
 export { viewSunDirectionToPreparedLightDirection, viewSunDirectionToPhysicalLightDirection } from './solar-system/directional-sun-coordinate.js';
 
-export { distanceForSilhouetteRadius, silhouetteRadiusAtDistance, offAxisFrame, silhouetteEllipse, rotationFromMatrix3d, rayHitsSphereBefore, splitVisible, clipSegmentToRectangle, eyeFraction, lerp, determinant, add, scale, magnitude, normalize, round, positive, vector, unit } from './solar-system/heliocentric-geometry.js';
+export { distanceForSilhouetteRadius, silhouetteRadiusAtDistance, offAxisFrame, silhouetteEllipse, rotationFromMatrix3d, rayHitsSphereBefore, splitVisible, clipSegmentToRectangle, eyeFraction, lerp } from './solar-system/heliocentric-geometry.js';
 export type { OffAxisFrame } from './solar-system/heliocentric-geometry.js';
 
 export { cssViewFromOrientation, cssCameraAxesFromOrientation, flipWorldRotationY, referenceRotationFromPresentation, validateWorldPosition, transposeWorldRotation, rotateWorldPosition, scaleWorldPosition, worldQuaternionFromRotation, worldRotationFromQuaternion, worldRotationCss, nearestWorldRotation } from './navigation/world-camera-math.js';
@@ -28,3 +28,9 @@ export { cssViewFromOrientation, cssCameraAxesFromOrientation, flipWorldRotation
 export type { Matrix3dLike, SilhouetteEllipse, BodyProjection, OrbitSegment } from './solar-system/types.js';
 
 export { preparedSceneMatrix } from './navigation/prepared-scene-matrix.js';
+
+export { cameraProjectionScale, worldCameraFromCenteredPresentation, worldCameraFromPresentation, worldCameraFocusFrame, validateWorldCameraViewport } from './navigation/world-camera-conversion.js';
+export type { WorldCameraFrame, WorldCameraPose, LocalWorldCameraPresentation, PreparedWorldCameraViewport } from './navigation/world-camera-conversion.js';
+export { preparedDefaultViewRotation } from './navigation/prepared-arrival-view.js';
+export { walkSilhouetteLevels } from './navigation/prepared-silhouette-steps.js';
+export { SURFACE_FLY_TO_SCHEMA, SURFACE_FLY_TO } from './navigation/surface-fly-to.js';

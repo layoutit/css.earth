@@ -15,8 +15,12 @@ export interface PreparedCataloguePoints {
   readonly points: readonly PreparedCataloguePoint[];
 }
 
+/** The catalogues this validator has returned: frozen through, so one handed back is answered as it is (css-volume-validation.ts). */
+const validated = new WeakSet<object>();
+
 export function validatePreparedCataloguePoints(input: unknown): PreparedCataloguePoints {
   if (!input || typeof input !== 'object' || Array.isArray(input)) throw new TypeError('Prepared catalogue points must be an object.');
+  if (validated.has(input)) return input as PreparedCataloguePoints;
   const value = input as PreparedCataloguePoints;
   const frame = parseDensityVolumeFrame(value.frame);
   if (!Array.isArray(value.points)) throw new TypeError('Prepared catalogue points need a fixed point array.');
@@ -33,5 +37,7 @@ export function validatePreparedCataloguePoints(input: unknown): PreparedCatalog
     return Object.freeze({ id: point.id, positionUnits: Object.freeze([...point.positionUnits]) as VolumeVector,
       sizePx: point.sizePx, ...(point.diameterUnits === undefined ? {} : { diameterUnits: point.diameterUnits }), colorCss: point.colorCss, opacity: point.opacity });
   });
-  return Object.freeze({ frame, points: Object.freeze(points) });
+  const catalogue = Object.freeze({ frame, points: Object.freeze(points) });
+  validated.add(catalogue);
+  return catalogue;
 }

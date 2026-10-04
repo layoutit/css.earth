@@ -1,0 +1,52 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "m84-volume",
+  "entries": [
+    {
+      "id": "sdss-color",
+      "subject": "SDSS DR9 color HiPS",
+      "status": "included",
+      "finding": "A 1950 x 1950 px hips2fits cutout of CDS/P/SDSS9/color, 16.2 arcmin wide on the HyperLEDA position. The red channel reaches 255 at the nucleus (brightest pixel 255, 230, 147 of 255). In 20 arcsec elliptical annuli the cleaned light comes within one count of the corner sky at 460 arcsec, inside the 486.407 arcsec the spheroid reaches.",
+      "evidence": [
+        "https://www.sdss.org/",
+        "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record"
+      ]
+    },
+    {
+      "id": "flat-picture",
+      "subject": "A flat picture facing the Sun",
+      "status": "excluded",
+      "finding": "M84 was first drawn as one flat Sloan picture facing the Sun, the route of the Messier galaxies with no published shape. Seen from the side that picture is a line. Kormendy et al. publish M84's profile and shape, so the volume replaces it."
+    },
+    {
+      "id": "mask-catalogues",
+      "subject": "Catalogues for the masks",
+      "status": "included",
+      "finding": "HyperLEDA PGC sizes 10 neighbours; the 2MASS Extended Source Catalog sizes 6 that HyperLEDA lists without a D25. NOX leaves the haloes of bright stars, so 13 Gaia DR3 stars brighter than G = 15 are masked too. At M87's three D25 radii a close neighbour's mask covers M84's own centre, so each mask stops at nine tenths of its distance from the centre. M86, 1022 arcsec to the east, is masked to 920 arcsec, so most of the eastern half of the cutout is filled from M84's own isophotes.",
+      "evidence": [
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/VII/237",
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/VII/233",
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/I/355"
+      ]
+    },
+    {
+      "id": "sersic-fit",
+      "subject": "Spheroid",
+      "status": "included",
+      "finding": "Kormendy et al. (2009), Table 1, row NGC 4374: major-axis Sérsic fit n = 7.98 (+0.71, -0.56), r_e = 142.08 (+19.3, -13.3) arcsec. Table 3 rows at 139.53 and 149.969 arcsec, interpolated to the half-light radius: ellipticity 0.033, position angle 156.55 degrees. Used as published; no fit was made here.",
+      "evidence": [
+        "https://arxiv.org/abs/0810.1681",
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/182/216"
+      ]
+    },
+    {
+      "id": "globular-clusters",
+      "subject": "Globular cluster dots",
+      "status": "included",
+      "finding": "Jordán et al. (2009), Table 4, VCC 763: the 506 sources with a probability of being a globular cluster of at least 0.5, the authors' own cut, drawn as dots through the same spheroid. They fill only the Hubble field on the centre.",
+      "evidence": [
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/180/54"
+      ]
+    }
+  ]
+}

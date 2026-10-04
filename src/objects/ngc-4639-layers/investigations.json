@@ -1,0 +1,68 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "ngc-4639-layers",
+  "entries": [
+    {
+      "id": "sdss-color",
+      "subject": "SDSS DR9 color HiPS",
+      "status": "included",
+      "finding": "A 900 x 900 px hips2fits cutout of CDS/P/SDSS9/color, 6 arcmin wide at the HiPS's 0.40 arcsec per pixel. 8 of the 10 Gaia DR3 stars brighter than G = 19 in it have a star within 4 px of their requested places. Shallow: the outer arms are faint.",
+      "evidence": [
+        "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record",
+        "https://www.sdss.org/collaboration/#image-use"
+      ]
+    },
+    {
+      "id": "press-images",
+      "subject": "Observatory press images of NGC 4639",
+      "status": "excluded",
+      "finding": "ESA/Hubble potw1541a covers 2.40 x 2.51 arcmin, rotated 58.5 deg; the disc's light reaches the SDSS sky level 2.0 arcmin from the centre, so that field cuts the outer arms. The ESO and NOIRLab image archives return nothing for NGC 4639.",
+      "evidence": [
+        "https://esahubble.org/images/potw1541a/"
+      ],
+      "revisitWhen": "A whole-disc photograph is published under an attribution licence."
+    },
+    {
+      "id": "legacy-surveys",
+      "subject": "DESI Legacy Surveys DR10 color HiPS",
+      "status": "excluded",
+      "finding": "Deeper than SDSS, but it draws the G = 13.2 foreground star on the disc with a purple saturation bar and burns out the centre.",
+      "evidence": [
+        "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FDESI-Legacy-Surveys%2FDR10%2Fcolor&get=record"
+      ],
+      "revisitWhen": "A later release repairs the saturated sources."
+    },
+    {
+      "id": "orientation",
+      "subject": "Disc tilt, position angle and near side",
+      "status": "included",
+      "finding": "HyperLEDA gives inclination 51.02 deg and position angle 138.01 deg (meandata, PGC 42741). NGC 4639 is not in Leroy et al. (2021) or Lang et al. (2020). Salo et al. (2015) fit its 3.6 micron disc with axis ratio 0.653 at 134.5 deg, in line. No kinematic position angle was found, so the near side drawn is one of two.",
+      "evidence": [
+        "http://atlas.obs-hp.fr/hyperleda/",
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/219/4",
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/257/43",
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/897/122"
+      ],
+      "revisitWhen": "A velocity field with its receding side is found."
+    },
+    {
+      "id": "dot-catalogues",
+      "subject": "Catalogues of NGC 4639's nebulae and clusters",
+      "status": "unresolved",
+      "finding": "The PHANGS-MUSE nebular catalogue (Groves et al. 2023, J/MNRAS/520/4902/catalog) has no rows for NGC 4639. No other catalogue of its nebulae or clusters was searched for in this change, so the bank has no dots.",
+      "evidence": [
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/MNRAS/520/4902"
+      ],
+      "revisitWhen": "CDS is searched for its HII regions, clusters or remnants with sky positions."
+    },
+    {
+      "id": "bulge",
+      "subject": "Bulge",
+      "status": "included",
+      "finding": "Salo et al. (2015), S4G Pipeline 4, table 7, NGC4639, model _bdbarf: a Sérsic bulge (11.2% of the light, magnitude 13.594, half-light radius 1.6″ = 0.16 kpc, n = 2.14, axis ratio 0.708, PA 122.51°) and an exponential disc (81.5% of the light, scale length 17.53″ = 1.72 kpc, axis ratio 0.653, PA 134.51°, face-on central surface brightness 19.655, 19.192 as projected on the sky) and a Ferrers bar (7.2% of the light, radius 24.00″ = 2.36 kpc, axis ratio 0.426, PA 178.81°, central surface brightness 20.094 on the sky). Used as published; the half-light surface brightness the bake needs, 17.305 mag per square arcsecond, follows from the bulge's magnitude, radius, index and axis ratio. At the disc's 51.02° the bulge's axis ratio is one an oblate spheroid in the disc plane can show (intrinsic 0.42).",
+      "evidence": [
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/219/4"
+      ]
+    }
+  ]
+}

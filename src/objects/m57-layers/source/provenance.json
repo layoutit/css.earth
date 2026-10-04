@@ -1,0 +1,58 @@
+{
+  "schema": "cssearth-image-layer-provenance@1",
+  "title": "Hubble image of the Ring Nebula (Messier 57)",
+  "publisher": "ESA/Hubble",
+  "sourceId": "heic1310a",
+  "sourcePage": "https://esahubble.org/images/heic1310a/",
+  "download": "https://cdn.esahubble.org/archives/images/large/heic1310a.jpg",
+  "credit": "NASA, ESA, and C. Robert O'Dell (Vanderbilt University)",
+  "license": "CC-BY-4.0",
+  "original": {
+    "dimensions": [
+      3179,
+      3179
+    ],
+    "bands": [
+      "Hubble",
+      "WFC3",
+      "F469N",
+      "F487N",
+      "F502N",
+      "F645N",
+      "F656N",
+      "F658N",
+      "F673N"
+    ],
+    "fieldOfViewDeg": [
+      0.03499928,
+      0.03499928
+    ]
+  },
+  "checkedSource": {
+    "kind": "Published JPEG",
+    "dimensions": [
+      3179,
+      3179
+    ]
+  },
+  "geometryEvidence": {
+    "inclinationDeg": 0.001,
+    "lineOfNodesPaDeg": 209.052,
+    "reference": "A picture of the sky: the plane is the picture's own tangent plane, perpendicular to the sight line through the picture's centre, so it faces the Sun. That centre is 1.6 arcsec from the nebula's position, which is the whole of the recipe's inclination. Not a measured orientation of the nebula."
+  },
+  "registration": {
+    "method": "The file's embedded sky tags, used as they are: 0.0396 arcsec per pixel, north 11.7° left of vertical, the frame's centre at 283.3967177°, 33.0289252°. Not measured against Gaia here.",
+    "pixelArcsec": 0.03963,
+    "northClockwiseDeg": -11.7
+  },
+  "displayModel": "Inside the Main Ring's outline the picture's light lies on two walls, in front of the star and behind it, at the depths published expansion speeds give: a shell seen almost pole-on and a lobe through its opening. Which wall holds a patch of light is not measured. Outside the outline the picture lies on one plane facing the Sun.",
+  "coverage": "The published frame inside a circle: the picture fades out between 70% and 98% of half its short side, so its corners are not drawn and no straight edge shows. Its stars are removed before the bake by NOX, which predicts the light under a star and does not measure it.",
+  "acquisition": {
+    "url": "https://cdn.esahubble.org/archives/images/large/heic1310a.jpg",
+    "dimensions": [
+      3179,
+      3179
+    ],
+    "operation": "Download the publisher's JPEG; no crop or resample."
+  }
+}

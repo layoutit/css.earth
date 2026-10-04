@@ -1,0 +1,209 @@
+{
+  "schema": "cssearth-inventory@1",
+  "assets": [
+    {
+      "location": "public",
+      "filename": "datasets/optical.webp",
+      "bytes": 5446,
+      "sha256": "b7c8b4ad431e13841114ca88fefb875b199684c293b98853cb7b6bcf92a161af"
+    },
+    {
+      "location": "prepared",
+      "filename": "datasets.json",
+      "bytes": 170574,
+      "sha256": "93234e54fabd89273e0e26df4e53a7c4720fea668d6f199ae15bb448ebe00f7c"
+    },
+    {
+      "location": "prepared",
+      "filename": "delivery.json",
+      "bytes": 1369,
+      "sha256": "00ba9a221047e67be438921e189852592fada796a27a9950ad29a2a605959890"
+    },
+    {
+      "location": "prepared",
+      "filename": "dots.bin",
+      "bytes": 8345,
+      "sha256": "bd9770a51b08f7880492a47c8ac104a79cc2e175750594753dd22a482d512bad"
+    },
+    {
+      "location": "prepared",
+      "filename": "optical/atlases/x.webp",
+      "bytes": 167794,
+      "sha256": "787a5b252238a28ea38ac529b32b042a81ddfa833f61f2d09a399f8d01d4abab"
+    },
+    {
+      "location": "prepared",
+      "filename": "optical/atlases/y.webp",
+      "bytes": 148410,
+      "sha256": "f0ced3a28b25394bc67523548775c89288e49ea9afb1801fdc6e6f8ee71cfb34"
+    },
+    {
+      "location": "prepared",
+      "filename": "optical/atlases/z.webp",
+      "bytes": 222054,
+      "sha256": "c0625bbd538cf206810a1bde418537161e6a0d78649de0f95e6419b939d33c8b"
+    },
+    {
+      "location": "prepared",
+      "filename": "optical/impostors/view-00n.png",
+      "bytes": 36879,
+      "sha256": "5395a469368a97f5b54d68458a891c69175cb9bd5065041b58a38f9ef22cf6f2"
+    },
+    {
+      "location": "prepared",
+      "filename": "optical/impostors/view-00p.png",
+      "bytes": 36914,
+      "sha256": "0ce233fd6ac9af02d4cd29efc8860035eb9fd92e7ccd457bf8e5bba1010c8eeb"
+    },
+    {
+      "location": "prepared",
+      "filename": "optical/impostors/view-0n0.png",
+      "bytes": 40217,
+      "sha256": "9a22608f4e1e7299686db1428a4e8876e459fbf7c0f62a38c2d798048bed32f3"
+    },
+    {
+      "location": "prepared",
+      "filename": "optical/impostors/view-0nn.png",
+      "bytes": 48376,
+      "sha256": "0b86ea50062145b712d59545c13641cf32d72e1e3e3185aba783039e7466554a"
+    },
+    {
+      "location": "prepared",
+      "filename": "optical/impostors/view-0np.png",
+      "bytes": 46976,
+      "sha256": "c722948685c9e93f0005133ddd4553779e14648286a3f1bf333a1c343ca9da06"
+    },
+    {
+      "location": "prepared",
+      "filename": "optical/impostors/view-0p0.png",
+      "bytes": 39962,
+      "sha256": "64a72cc0f379eb311b80cf6fa2960c61f86dc347e591f72a26e9391d3459e5db"
+    },
+    {
+      "location": "prepared",
+      "filename": "optical/impostors/view-0pn.png",
+      "bytes": 46958,
+      "sha256": "5bf6515572fad8ad1479339b96912104e73b4fafb5416282136637f322361e8b"
+    },
+    {
+      "location": "prepared",
+      "filename": "optical/impostors/view-0pp.png",
+      "bytes": 48361,
+      "sha256": "d7bd3bc08b88e0e28165787e0bb38c7042795349b4c17e7eca8e816b7ffbfcc7"
+    },
+    {
+      "location": "prepared",
+      "filename": "optical/impostors/view-n00.png",
+      "bytes": 30530,
+      "sha256": "ceed49a4be96ed204b6ddc61c5b2d002ec456e77df9ba8e15f8b70661fad5762"
+    },
+    {
+      "location": "prepared",
+      "filename": "optical/impostors/view-n0n.png",
+      "bytes": 42139,
+      "sha256": "7b9af8a64e97a737cc59add9af69577288e60e026867ff7d92b9b2ea74022a1a"
+    },
+    {
+      "location": "prepared",
+      "filename": "optical/impostors/view-n0p.png",
+      "bytes": 43265,
+      "sha256": "4a5a46357f57c7922a042df6facc862fbe549301a847559a15b9272d1956b5b3"
+    },
+    {
+      "location": "prepared",
+      "filename": "optical/impostors/view-nn0.png",
+      "bytes": 37832,
+      "sha256": "6eb413b1deac34cc85c280026f436514a0f465ca09f2db3b1b7f7acd7f6f7326"
+    },
+    {
+      "location": "prepared",
+      "filename": "optical/impostors/view-nnn.png",
+      "bytes": 50288,
+      "sha256": "795499a7d9f4d1737de93acae64d42b3d0fadff1cfd56d427fd6b8183e9cf4e4"
+    },
+    {
+      "location": "prepared",
+      "filename": "optical/impostors/view-nnp.png",
+      "bytes": 50271,
+      "sha256": "0ed33b41432656c690c06c057234ee7218cefa97790010ada555af4ec5e55ebf"
+    },
+    {
+      "location": "prepared",
+      "filename": "optical/impostors/view-np0.png",
+      "bytes": 35912,
+      "sha256": "239b8fdb9fdbc57de9532b7b0599599ac4d9ce3ad0e1cd7a8569018a605928d2"
+    },
+    {
+      "location": "prepared",
+      "filename": "optical/impostors/view-npn.png",
+      "bytes": 47277,
+      "sha256": "649a98af74c9973305fc18eaf3c4317f66cbd445f5ccc45e2370f041615b64f4"
+    },
+    {
+      "location": "prepared",
+      "filename": "optical/impostors/view-npp.png",
+      "bytes": 47583,
+      "sha256": "ae23593a231d78f34f0f1863fe76def4a28f5faf64f96d80d68495243ad62601"
+    },
+    {
+      "location": "prepared",
+      "filename": "optical/impostors/view-p00.png",
+      "bytes": 30541,
+      "sha256": "c6397cb7e0ef2155b9e1d5d45fd784da0a9bc23a078b67939ee4f69430fc94e8"
+    },
+    {
+      "location": "prepared",
+      "filename": "optical/impostors/view-p0n.png",
+      "bytes": 43480,
+      "sha256": "44ff2889b4d9558d54e6cada1bde4cfc0c38a818b9dbade0551dee755311cdcf"
+    },
+    {
+      "location": "prepared",
+      "filename": "optical/impostors/view-p0p.png",
+      "bytes": 42299,
+      "sha256": "8e7b74eecf432e49cac48e4784ded8514265c705f520ae7bf3ef1d492b91ae5e"
+    },
+    {
+      "location": "prepared",
+      "filename": "optical/impostors/view-pn0.png",
+      "bytes": 36122,
+      "sha256": "d962cfffcb22e837c0439aa6dc8a7de412398a8954f4e265dcdd3192c4b3396f"
+    },
+    {
+      "location": "prepared",
+      "filename": "optical/impostors/view-pnn.png",
+      "bytes": 47622,
+      "sha256": "ce53d55de5f1a197ea85824b51e9701a1ed6baae751201b9c5f36f77e4605951"
+    },
+    {
+      "location": "prepared",
+      "filename": "optical/impostors/view-pnp.png",
+      "bytes": 47490,
+      "sha256": "dcb24dade7da004f92f5b89c9d6bebb8d06448a7ab8144a6c766835ea0160d18"
+    },
+    {
+      "location": "prepared",
+      "filename": "optical/impostors/view-pp0.png",
+      "bytes": 37773,
+      "sha256": "6b1b8b2da7e5182c002c0d6e9ca6bb64f10136325edce1bf343cb184eda1228b"
+    },
+    {
+      "location": "prepared",
+      "filename": "optical/impostors/view-ppn.png",
+      "bytes": 50285,
+      "sha256": "dae8304859ca53d638ca8124d10b6ba395d8d6e3ae7119610d88baea6632d7a0"
+    },
+    {
+      "location": "prepared",
+      "filename": "optical/impostors/view-ppp.png",
+      "bytes": 50287,
+      "sha256": "626ec75883b65b23ad174d89fe2638491ce020ee4b431aeaaa090a1d4db92121"
+    },
+    {
+      "location": "prepared",
+      "filename": "presentation.json",
+      "bytes": 1272,
+      "sha256": "2c408a039f19595325f3dd8e269810009d30097ccc91e5d2f8daf1adc195b51e"
+    }
+  ]
+}

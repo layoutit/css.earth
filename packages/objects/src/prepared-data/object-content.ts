@@ -1,6 +1,6 @@
 /** Authored object content wire records; asset preparation stays with bake/site. */
 import type { DatasetVolume } from './object-controls.js';
-import { isRecord } from '@cssearth/core';
+import { object as preparedObject, text as preparedText, array as preparedArray } from './panel-readers.js';
 import { parse, object, array, dictionary, union, optional, literal, number, string, boolean, json } from '@cssearth/core/schema';
 import { sourceUrl } from '../sources/catalog.js';
 
@@ -172,6 +172,8 @@ const content = object({
       qualification: optional(string), surface: optional(string), poles: optional(string), material: optional(string),
       legendNote: optional(string), falseColor: optional(boolean), view: optional(literal('exterior', 'interior')),
       notes: optional(string), noData: optional(boolean), legend: optional(legend), facts: optional(array(fact)), source,
+      scope: optional(literal('system')), volume: optional(object({objectId: string, datasetId: string, surface: string})),
+      step: optional(object({group: string, label: string, autoplay: optional(boolean), opens: optional(literal('first', 'last'))})),
     })),
   }),
   settings: object({titleKey: literal('settings'), controls: array(object({kind: literal('cycle', 'toggle'),
@@ -200,18 +202,6 @@ export function validateObjectContentEnvelope(source: { schema: unknown; version
   }
 }
 
-const preparedObject = (value: unknown, label: string): Record<string, unknown> => {
-  if (!isRecord(value)) throw new TypeError(`Prepared ${label} must be an object.`);
-  return value;
-};
-const preparedText = (value: unknown, label: string): string => {
-  if (typeof value !== 'string') throw new TypeError(`Prepared ${label} must be text.`);
-  return value;
-};
-const preparedArray = (value: unknown, label: string): readonly unknown[] => {
-  if (!Array.isArray(value)) throw new TypeError(`Prepared ${label} must be an array.`);
-  return value;
-};
 /** Join authored dataset links and scope while building the page; no source lookup runs in the browser. */
 export function authoredDatasetMetadata(input: unknown, objectId: string): {
   sourceUrls: ReadonlyMap<string, string>; systemDatasetIds: ReadonlySet<string>;

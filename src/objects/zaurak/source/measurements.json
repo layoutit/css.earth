@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "zaurak",
+  "angularDiameterMas": 9.28,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 40,837,590 km at 58.82 pc = 9.28 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 58.824,
+  "distanceSource": "Baines et al. (2021), AJ 162, 198, HD 25025: the Gaia EDR3 (Gaia Collaboration 2021) parallax the radius was computed with (Table 1), 17 +/- 0.23 mas, inverted (https://doi.org/10.3847/1538-3881/ac2431): 58.824 +/- 0.796 pc; Gaia DR3 parallax 17.0016 +/- 0.2254 mas (same row, RUWE 1.61), 75.4 standard errors, is not used",
+  "radiusKm": 40837590,
+  "radiusSource": "Radius 58.7 +/- 0.82 solar radii from Baines et al. (2021), AJ 162, 198, HD 25025: radius 58.7 +0.8/-0.82 solar radii (Table 5), from the limb-darkened angular diameter 9.286 +/- 0.028 mas (NPOI, Table 4) and the Gaia EDR3 (Gaia Collaboration 2021) parallax (https://doi.org/10.3847/1538-3881/ac2431): 40,837,590 km at 695,700 km per solar radius. No mass is measured, so GM is 0, the records' unpublished value. Temperature 3779 +/- 34 K from Baines et al. (2021), AJ 162, 198, HD 25025: effective temperature 3779 +/- 34 K (Table 5), from the angular diameter and the bolometric flux of the SED fit (https://doi.org/10.3847/1538-3881/ac2431). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 3779,
+  "effectiveTemperatureSource": "Baines et al. (2021), AJ 162, 198, HD 25025: effective temperature 3779 +/- 34 K (Table 5), from the angular diameter and the bolometric flux of the SED fit (https://doi.org/10.3847/1538-3881/ac2431)",
+  "surfaceGravityLogg": 1,
+  "surfaceGravitySource": "log g 1 from 2008AJ....135..209M; the 1 published value span log g 1 to 1, across which the limb law changes by at most 0.0% of the centre brightness (https://ui.adsabs.harvard.edu/abs/2008AJ....135..209M)",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, colored from the star's measured spectrum (Pulkovo spectrophotometric catalogue, table 5 (320-1080 nm, 2.5 nm steps, 10 nm resolution, absolute flux in W m^-2 m^-1)) (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

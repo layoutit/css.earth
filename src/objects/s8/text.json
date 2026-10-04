@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "s8",
+  "card": {
+    "text": "A hot young star that swings around the Milky Way's central black hole every 93 years.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-1611-09144",
+        "url": "https://arxiv.org/abs/1611.09144",
+        "label": "Gillessen et al. 2016",
+        "checked": "2026-10-03",
+        "locator": "table3: P, a, e and Tp"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "At its closest it passes 660 au from Sagittarius A*; it was last there in 1983.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-1611-09144",
+        "url": "https://arxiv.org/abs/1611.09144",
+        "label": "Gillessen et al. 2016",
+        "checked": "2026-10-03",
+        "locator": "table3: P, a, e and Tp"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its temperature",
+      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

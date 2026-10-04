@@ -48,7 +48,7 @@ body[data-object-shell] {
 
 :is(
   .object-card,
-  .object-dataset-context-dock > .explorer-settings-panel
+  .object-ui-layer > .explorer-settings-panel
 ) {
   --explorer-card-padding-inline-start: var(--explorer-card-padding-left, 20px);
   --explorer-card-padding-inline-end: var(--explorer-card-padding-inline-start);
@@ -67,7 +67,8 @@ body[data-object-shell] {
   font: 14px/1.4 var(--shell-ui-font);
 }
 
-.object-card:has(> .object-selected-panel > .object-breadcrumbs) {
+/* The body's card opens on its breadcrumbs (ObjectInformationPanel.astro). */
+.object-card.object-information-panel {
   padding-block-start: 16px;
 }
 
@@ -268,8 +269,8 @@ body[data-sidebar-collapsed="true"] .object-sidebar { display: none; }
   background: var(--explorer-header-control-hover);
 }
 .explorer-shell-header .object-sidebar-search-clear:focus-visible { outline: 2px solid var(--shell-focus); outline-offset: 1px; }
-.explorer-shell-header .object-sidebar-search-card:has(.object-sidebar-search:placeholder-shown) .object-sidebar-search-clear { display: none; }
-.explorer-shell-header .object-sidebar-search-card:not(:has(.object-sidebar-search:placeholder-shown)) .object-sidebar-search { padding-inline-end: 24px; }
+.explorer-shell-header .object-sidebar-search-card .object-sidebar-search:placeholder-shown ~ .object-sidebar-search-clear { display: none; }
+.explorer-shell-header .object-sidebar-search-card .object-sidebar-search:not(:placeholder-shown) { padding-inline-end: 24px; }
 /* The custom clear replaces the browser's own search cancel control. */
 .explorer-shell-header .object-sidebar-search::-webkit-search-cancel-button { appearance: none; display: none; }
 
@@ -421,15 +422,16 @@ body[data-sidebar-collapsed="true"] .object-sidebar { display: none; }
 .object-showcase-action:focus-visible { outline: 2px solid var(--shell-focus); outline-offset: 2px; }
 .object-search-category .material-symbol,
 .object-showcase-action .material-symbol { flex-basis: 18px; width: 18px; height: 18px; }
-/* Showcase sits with the app actions. Where the header row is short (landscape under 1440 px, phones) it is an icon-only
-   circle like them; its word fits beside the eight category pills only on wide screens. */
-@media (max-width: 1439px) {
-  .object-showcase-action { width: var(--explorer-category-height); padding: 0; }
-  .object-showcase-action span { display: none; }
+/* Slideshow sits with the app actions and is an icon-only circle like them; its name is its label and tooltip. */
+.object-showcase-action { width: var(--explorer-category-height); padding: 0; }
+.object-showcase-action span { display: none; }
+/* Eight pills with icons need 840 px of header row. The row runs from the wordmark to the app actions, the window's width
+   less 488 px, so they fit from 1328 px. Narrower landscape screens get tighter pills, 792 px, which fit from 1280 px; below
+   that the pills are words alone. */
+@media (min-width: 821px) and (max-width: 1327px) and (orientation: landscape) {
+  .object-search-category { gap: 6px; padding-inline: 8px 10px; }
 }
-/* Eight pills with icons need 840 px of header row, which a landscape screen narrower than 1440 px does not have (732 px at
-   1280): there the pills are words alone, 648 px. */
-@media (min-width: 821px) and (max-width: 1439px) and (orientation: landscape) {
+@media (min-width: 821px) and (max-width: 1279px) and (orientation: landscape) {
   .object-search-category .material-symbol { display: none; }
 }
 /* GitHub is an icon-only circle, like the panel toggles. */
@@ -466,9 +468,8 @@ body[data-sidebar-collapsed="true"] .object-sidebar { display: none; }
   touch-action: manipulation;
 }
 .object-header-action:hover { color: var(--shell-text); background: var(--explorer-header-control-hover); }
-.object-header-action[aria-pressed="true"],
-.object-facility-action:has(:checked),
-.object-ui-layer:has(.object-settings-panel:popover-open) .object-settings-action {
+/* The gear carries its open panel as `aria-expanded` (shell-settings.mts). */
+.object-header-action:is([aria-pressed="true"], [aria-expanded="true"]) {
   color: var(--shell-text);
   background: var(--explorer-header-control-selected);
 }
@@ -516,7 +517,10 @@ body[data-sidebar-collapsed="true"] .object-sidebar { display: none; }
 
 .object-sidebar::-webkit-scrollbar { display: none; }
 
-.object-facility-action { position: relative; }
+/* The Machines checkbox fills its label and paints the label's states itself: ground, hover, pressed and focus ring.
+   The label paints none, so one shape draws under the icon. */
+.object-facility-action,
+.object-facility-action:hover { position: relative; background: none; }
 .object-facility-toggle {
   appearance: none;
   position: absolute;
@@ -524,14 +528,19 @@ body[data-sidebar-collapsed="true"] .object-sidebar { display: none; }
   width: 100%;
   height: 100%;
   margin: 0;
-  opacity: 0;
+  border-radius: inherit;
+  background: var(--explorer-header-control-background);
   cursor: pointer;
 }
-.object-facility-action:has(:focus-visible) { outline: 2px solid var(--shell-focus); outline-offset: 2px; }
+.object-facility-toggle:hover { background: var(--explorer-header-control-hover); }
+.object-facility-toggle:checked { background: var(--explorer-header-control-selected); }
+.object-facility-toggle:focus-visible { outline: 2px solid var(--shell-focus); outline-offset: 2px; }
+.object-facility-toggle + .material-symbol { position: relative; pointer-events: none; }
+.object-facility-toggle:checked + .material-symbol { color: var(--shell-text); }
 .object-settings-panel[popover]:not(:popover-open) { display: none; }
 .object-settings-panel[popover] { color: var(--shell-text-secondary); }
 .object-ui-layer:has(.object-facility-toggle:not(:checked)) .object-dataset-context-rail,
-.object-ui-layer:has(.object-settings-panel:popover-open) .object-dataset-context-rail,
+.object-settings-panel:popover-open ~ .object-sidebar-frame .object-dataset-context-rail,
 .object-information-panel:is([aria-busy="true"], [data-card-view="overview"]) > .object-dataset-context-rail,
 .object-information-panel > .object-dataset-content:not([open]) ~ .object-dataset-context-rail,
 .object-dataset-context-rail:not(:has([data-dataset-context]:not([hidden]) > *)) { display: none; }
@@ -555,7 +564,6 @@ body[data-sidebar-collapsed="true"] .object-sidebar { display: none; }
 }
 
 /* Dataset context uses the same cards as the left sidebar. */
-.object-dataset-context-dock { display: contents; }
 .object-dataset-context-rail {
   --explorer-card-padding-left: var(--explorer-content-inset);
   width: 100%;
@@ -572,7 +580,7 @@ body[data-sidebar-collapsed="true"] .object-sidebar { display: none; }
 @media (min-width: 821px) and (orientation: landscape) {
   /* Settings and the spacecraft card take turns in this slot. */
   .object-dataset-context-rail,
-  .object-dataset-context-dock > .object-settings-panel {
+  .object-ui-layer > .object-settings-panel {
     inset: auto;
     --dataset-context-top: calc(var(--explorer-header-top) + var(--explorer-header-bar-height) + var(--explorer-header-panel-gap));
     position: fixed;
@@ -593,7 +601,7 @@ body[data-sidebar-collapsed="true"] .object-sidebar { display: none; }
     --explorer-header-height: calc(var(--explorer-header-bar-height) + var(--explorer-header-row-gap) + var(--explorer-search-height));
   }
 
-  .object-card:has(> .object-selected-panel > .object-breadcrumbs) { padding-block-start: 14px; }
+  .object-card.object-information-panel { padding-block-start: 14px; }
 
   .object-ui-layer {
     position: fixed;
@@ -625,13 +633,14 @@ body[data-sidebar-collapsed="true"] .object-sidebar { display: none; }
     isolation: isolate;
   }
 
-  /* Search sits over the sidebar; the other controls share the top row. */
+  /* Search sits over the sidebar; the other controls share the top row. The first column is the wordmark's own width, so
+     the category pills can start beside it; search spans the row at the sidebar's width. */
   .explorer-shell-header {
     position: relative;
     inset: auto;
     margin: var(--explorer-header-top) calc(-1 * var(--explorer-panel-left)) var(--explorer-header-panel-gap);
     display: grid;
-    grid-template-columns: var(--explorer-panel-width) minmax(0, 1fr) minmax(0, max-content) max-content;
+    grid-template-columns: max-content minmax(0, 1fr) minmax(0, max-content) max-content;
     grid-template-rows: var(--explorer-header-bar-height) var(--explorer-search-height);
     /* One gap between every header control, matching the gap inside the pill groups. */
     column-gap: 8px;
@@ -642,7 +651,7 @@ body[data-sidebar-collapsed="true"] .object-sidebar { display: none; }
   }
 
   .explorer-brand-row { grid-row: 1; grid-column: 1; justify-self: start; pointer-events: auto; }
-  .object-search-toolbar { grid-row: 2; grid-column: 1; pointer-events: auto; }
+  .object-search-toolbar { grid-row: 2; grid-column: 1 / -1; justify-self: start; width: var(--explorer-panel-width); pointer-events: auto; }
   .object-search-categories { grid-row: 1; grid-column: 3; }
   .object-header-actions { grid-row: 1; grid-column: 4; }
 
@@ -729,7 +738,6 @@ body[data-sidebar-collapsed="true"] .object-sidebar { display: none; }
   body[data-object-shell] :is(.object-sidebar, .object-search-toolbar, .object-search-categories) {
     --sheet-rest: calc(var(--sheet-height) - var(--sheet-peek));
   }
-  body[data-object-shell]:where(:has(.object-sheet-handle:checked)) :is(.object-sidebar, .object-search-toolbar, .object-search-categories),
   body[data-object-shell][data-sheet="full"] :is(.object-sidebar, .object-search-toolbar, .object-search-categories) { --sheet-rest: 0px; }
   body[data-object-shell][data-sheet="half"] :is(.object-sidebar, .object-search-toolbar, .object-search-categories) {
     --sheet-rest: calc(var(--sheet-height) - var(--sheet-half));
@@ -766,7 +774,7 @@ body[data-sidebar-collapsed="true"] .object-sidebar { display: none; }
   }
   .object-search-toolbar,
   .object-search-categories { touch-action: pan-x; }
-  body:has(.object-sidebar.is-dragging) .object-search-toolbar { transition: none; }
+  .object-search-toolbar.is-dragging { transition: none; }
   .explorer-shell-header .object-sidebar-search-card {
     /* Settings has its own slot in the brand bar; only Clear sits inside the field. */
     padding-inline-end: 10px;
@@ -823,7 +831,6 @@ body[data-sidebar-collapsed="true"] .object-sidebar { display: none; }
   .object-sidebar.is-dragging {
     will-change: transform;
   }
-  .object-sidebar:has(:where(.object-sheet-handle:checked)),
   body[data-sheet="full"] .object-sidebar {
     overflow-y: auto;
     touch-action: pan-y;
@@ -864,7 +871,7 @@ body[data-sidebar-collapsed="true"] .object-sidebar { display: none; }
 
   /* Settings opens as a secondary sheet over the information. The spacecraft
      card needs no rule here: phones move it into the sheet's own flow. */
-  .object-dataset-context-dock > .object-settings-panel {
+  .object-ui-layer > .object-settings-panel {
     position: fixed;
     z-index: 230;
     inset: auto 0 0;
@@ -913,6 +920,6 @@ body[data-sidebar-collapsed="true"] .object-sidebar { display: none; }
     transform: translate3d(0, var(--sheet-rest), 0);
     transition: transform var(--sheet-snap-duration) cubic-bezier(.2, .9, .3, 1);
   }
-  body:has(.object-sidebar.is-dragging) .object-search-categories { transition: none; }
+  .object-search-categories.is-dragging { transition: none; }
   :is(.object-search-category, .object-showcase-action, .object-header-link, .object-header-action) { box-shadow: var(--explorer-float-shadow); }
 }

@@ -1,8 +1,8 @@
-import { worldSubject, worldSubjectFrame } from '../level-view.mts';
+import { worldSubject, worldSubjectFrame } from '../inside-view.mts';
 import type { createApplicationWorldContext } from '../application-world-context.mts';
 import type { BrowserWindow } from '../browser/browser-types.mts';
 import type { SceneSession } from './scene-session.mts';
-import type { WorldCameraPose } from '@cssearth/objects';
+import type { WorldCameraPose } from '@cssearth/engine';
 
 /** The world's code loads when the world does (`scene-router.mts`); its viewport exists from the start. */
 export type WorldContextOwner = Pick<ReturnType<typeof createApplicationWorldContext>, 'mount'> & {
@@ -97,13 +97,14 @@ export function createSceneWorld({ owner, stage, windowTarget, isCurrent, onMoun
     };
   }
 
-  /** The world's selection for a session: the star a level is seen around, or the body itself, with its caption's framing.
+  /** The world's selection for a session: the star an object seen from inside is seen around, or the body itself, with its caption's framing.
    * A cold startup selects as soon as its detail's navigation facts exist, so the world's first plan can be made behind
    * the paint gate (`SceneFramePresenter.warm`); `connect` selects again, which changes nothing when it is the same. */
   function select(session: SceneSession, navigation: NonNullable<NonNullable<SceneSession['mount']>['navigation']>) {
     const world = mounted();
     if (!world || !isCurrent(session)) return;
-    // A level is the world seen around its centre: the world selects that star, and the level is its overview scope.
+    // An object seen from inside is the world seen around its centre: the world selects that star, and the object is its
+    // overview scope.
     world.selectObject?.(worldSubject(session.objectId), worldSubjectFrame(session.objectId, navigation.frame), navigation.framingScale, navigation.labelEdge);
   }
 

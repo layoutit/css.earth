@@ -1,0 +1,72 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "ngc-1365",
+  "card": {
+    "text": "A barred spiral galaxy 18.3 million parsecs away, tilted 55° to our line of sight.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-1604-01424",
+        "url": "https://arxiv.org/abs/1604.01424",
+        "label": "Riess et al. (2016): A 2.4% Determination of the Local Value of the Hubble Constant",
+        "checked": "2026-10-02",
+        "locator": "table 5, row N1365 (SN 2012fr): mu_Ceph 31.307 +/- 0.057 mag; 10^(mu/5 + 1) pc = 18.256 Mpc"
+      },
+      {
+        "catalogueId": "leroy-2021-phangs-alma",
+        "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/257/43",
+        "label": "Leroy et al. (2021), ApJS 257, 43, galaxies table",
+        "checked": "2026-10-02",
+        "locator": "row NGC1365: inclination 55.4 +/- 6.0 deg"
+      },
+      {
+        "catalogueId": "rc3-1991",
+        "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/VII/155",
+        "label": "Third Reference Catalogue of Bright Galaxies (RC3), CDS VII/155",
+        "checked": "2026-10-02",
+        "locator": "VII/155/rc3 row NGC 1365 (PGC 13179): type .SBS3.. (SB: barred)"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its distance comes from Cepheids the Hubble Space Telescope timed in it. They set the true brightness of its supernova, SN 2012fr, a step toward the Hubble constant.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-1607-08658",
+        "url": "https://arxiv.org/abs/1607.08658",
+        "label": "Hoffmann et al. (2016): Optical Identification of Cepheids in 19 Host Galaxies of Type Ia Supernovae and NGC 4258 with the Hubble Space Telescope",
+        "checked": "2026-10-02",
+        "locator": "table 5, Gal N1365: the Cepheids found in NGC 1365"
+      },
+      {
+        "catalogueId": "arxiv-1604-01424",
+        "url": "https://arxiv.org/abs/1604.01424",
+        "label": "Riess et al. (2016): A 2.4% Determination of the Local Value of the Hubble Constant",
+        "checked": "2026-10-02",
+        "locator": "table 5, row N1365: SN 2012fr, mu_Ceph 31.307 +/- 0.057 mag"
+      }
+    ]
+  },
+  "datasets": {
+    "optical": {
+      "title": "NGC 1365 in visible light",
+      "detail": "3383 × 3263 px",
+      "summary": "Flat picture on the measured disc; the bulge of a published fit stands through it. Depth is modelled.",
+      "sources": [
+        {
+          "catalogueId": "noirlab-iotw2127a",
+          "url": "https://noirlab.edu/public/images/iotw2127a/",
+          "label": "Portrait of the Great Barred Spiral; Dark Energy Survey/DOE/FNAL/DECam/CTIO/NOIRLab/NSF/AURA",
+          "checked": "2026-10-02",
+          "locator": "Portrait of the Great Barred Spiral"
+        },
+        {
+          "catalogueId": "salo-2015-s4g-decompositions",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/219/4",
+          "label": "Salo et al. (2015), ApJS 219, 4: S4G Pipeline 4 decompositions, table 7",
+          "checked": "2026-10-03",
+          "locator": "NGC1365, model _bdbarfn: bulge 25.0% of the light, Re 12.64 arcsec, n 0.857"
+        }
+      ]
+    }
+  }
+}

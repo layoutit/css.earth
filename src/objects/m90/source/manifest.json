@@ -1,0 +1,40 @@
+{
+  "schema": "cssearth-authoritative-sources@3",
+  "inputs": [],
+  "generatedIntermediates": [
+    {
+      "id": "companion-context-marker",
+      "path": "presentation/context.png",
+      "origin": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record",
+      "credit": "Sloan Digital Sky Survey; color HiPS CDS/P/SDSS9/color by T. Boch (CDS), cut out by the CDS hips2fits service; the default dataset's picture as the M90 bank publishes it, saved by site/build/prepare/companion-context.mts",
+      "license": "SDSS images: CC-BY (https://www.sdss.org/collaboration/#image-use); the CDS HiPS distribution: ODbL-1.0. Retain the complete recorded credit.",
+      "consumers": [
+        "navigation"
+      ],
+      "generator": "site/build/prepare/companion-context.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "A picture of the bank the default dataset shows; its sources are that bank's (src/objects/m90-layers/source/manifest.json)."
+      }
+    }
+  ],
+  "documents": [
+    {
+      "path": "content/object.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored factsheet and dataset list."
+      }
+    },
+    {
+      "path": "presentation/solar-system.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored framing: the radius the page frames the object at, a presentation value."
+      }
+    },
+    {
+      "path": "preparation/navigation.json"
+    }
+  ]
+}

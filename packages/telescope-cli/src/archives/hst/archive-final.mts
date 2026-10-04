@@ -49,7 +49,8 @@ import type { FitsHeader } from '@cssearth/fits';
 import { readFitsFileRegion, type FitsFileHdu } from '@cssearth/fits/node';
 import { mastFile, mastRequest, type MastFile, WORKSPACE } from '@cssearth/telescope/node';
 import { assertInputs, writeProductRecord } from '@cssearth/telescope/node';
-import { productRecordPath, type ProductEvidence, type ProductInput, type ProductRecord, type ProductRun } from '@cssearth/telescope';
+import { productRecordPath } from '@cssearth/telescope';
+import { type ProductEvidence, type ProductInput, type ProductRecord, type ProductRun } from '@cssearth/objects';
 import { PROGRAMS } from './archive.mts';
 import { readHstFileHdus, type HstFileHdu } from './product-file.mts';
 

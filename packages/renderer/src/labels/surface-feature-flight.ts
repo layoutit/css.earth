@@ -2,7 +2,7 @@ import { cross3 as cross, dot3 as dot } from '@cssearth/core';
 import { composeDragRotation, eyeDistanceM, fromEyeM } from '@cssearth/engine';
 import type { OrientationXyzw, PositionM } from '@cssearth/engine';
 import { rotateWorldPosition, worldRotationFromQuaternion } from '@cssearth/engine';
-import type { WorldCameraPose } from '@cssearth/objects';
+import type { WorldCameraPose } from '@cssearth/engine';
 import type { ObjectWorldNavigation } from '../runtime/world-navigation-types.js';
 
 const unit = (v: PositionM): PositionM => { const length = Math.hypot(...v); return [v[0] / length, v[1] / length, v[2] / length]; };

@@ -131,7 +131,7 @@ cycle. Share anything else through `@cssearth/core` or another package. Prepared
   three layers).
 - `src/preparation/` is published as `@cssearth/bake/preparation` (Node only). It holds the stale-build check (`stale-builds.ts`) that `pnpm dev:prepare` and `packages/bake/cli/prepare-object.mts` run through
   `packages/bake/cli/check-stale-builds.mts`: that command imports the module from source, the one bake command that does,
-  because it must run, and `--run` must rebuild, while this package is unbuilt, so the module imports only Node built-ins.
+  because it must run, and `--run` must rebuild, while this package is unbuilt, so its source closure imports only Node built-ins. The workspace graph reader is also exported as `@cssearth/bake/preparation/workspace-graph` directly from source for bootstrap-safe CI discovery.
   Its tests are `node --test` suites in `src/preparation/`.
 - `src/run-implemented-objects/` is published as `@cssearth/bake/run-implemented-objects` (Node only): runs a registered
   scene object's acquire, prepare, test, browser or assemble command, and the concurrency-limited, memory-budgeted
@@ -141,7 +141,7 @@ cycle. Share anything else through `@cssearth/core` or another package. Prepared
   `run-implemented-objects`. `packages/bake/cli/prepare-objects.mts` is its command.
 - `src/prepare-object/` is published as `@cssearth/bake/prepare-object` (Node only): the ordered preparation chain for one
   or more authored objects end to end (builds, catalogue, geometry, the authored preparation, page data, text, markers,
-  billboard, world context, provenance), naming the step that failed and how to resume. It imports no topic; its steps
+  billboard, world context, system packages, provenance), naming the step that failed and how to resume. It imports no topic; its steps
   shell out to the other bake and site-owned preparation commands by path. `packages/bake/cli/prepare-object.mts` is its
   command; its tests are in `src/prepare-object/`.
 - `src/thread-pool/` is published as `@cssearth/bake/thread-pool` (Node only) and imported for its side effect: it sizes
@@ -162,7 +162,7 @@ cycle. Share anything else through `@cssearth/core` or another package. Prepared
     camera; also the authored presentation basis and drawn node chain the world-navigation stage solves, the physical
     projection it adds to rotating material tracks, a recipe's camera source, and the seams and projection block every generated
     sphere is written with. The solar geometry is generated into the checkout (`src/platform/solar-geometry.mts`) after the packages build,
-    so the host passes it in (`SolarGeometry`). The prepared sky and Sun contracts belong to `@cssearth/objects`; their authored standards and preparers
+    so callers pass `SolarGeometry` or use `loadSolarGeometry` from `@cssearth/bake/objects/scene` to load and validate the generated file. The prepared sky and Sun contracts belong to `@cssearth/objects`; their authored standards and preparers
     belong to `presentation`, which the scene imports as a lower topic.
   - `objects/raster`: scientific surfaces from PDS, ISIS, FITS, GeoTIFF, VTK, NumPy, HEALPix and Tecplot products,
     categorical geology and symbols, exoplanet eclipse and published phase-curve maps, observed color rasters and their
@@ -339,12 +339,12 @@ Scientific catalogue interpretation remains in catalog; sampling, feature geomet
 Retained emission, photometric recipes/envelopes, windows, tone curves and compact input parsers belong to
 `@cssearth/objects`; volume retains sampling, material arithmetic, decompression, restoration and compilation.
 
-Renderer-behavior runtime, selection, material and feature transport suites and their DOM harness live in
-`integration/renderer-bake/src/contract/`; immutable material and feature JSON inputs remain in
-`src/contract/fixtures/`. Leaf-box bake checks stay in `src/presentation/`; renderer visibility conformance
-lives in `integration/renderer-bake/src/presentation/leaf-box.test.mts`. These node:test suites run in
-the packages CI lane on changes to either owner. Shell facing/material conformance lives in
-`integration/renderer-bake/src/shell/shell.test.ts`; bake-owned shell assertions stay in `src/shell/`. Validated camera conversions come from `@cssearth/objects`; bake has no renderer imports or dependency. Pure prepared volume envelope/frame validation comes from objects; labs own their renderer bundlers.
+Renderer runtime, selection, material and feature transport tests and their DOM harness live in
+`packages/renderer/`; immutable material and feature JSON inputs live in `packages/renderer/test/fixtures/`.
+Bake output tests stay beside their producers and validate the objects contract; renderer tests read
+objects-built fixtures. The end-to-end mount test lives in `integration/prepared-object-mount/`.
+All run in the packages CI lane. Validated camera conversions come from `@cssearth/objects`;
+bake has no renderer imports or dependency.
 
 Archived-camera data (including `SpiceCamera`), cited object/prepared-text records and prepared destinations
 are browser-safe contracts in `packages/objects/src/prepared-data/`, exported from `@cssearth/objects`.
@@ -361,11 +361,7 @@ Historical source-list and index/pre-build admission policies retain their accep
 Frame/source auditing, camera solving, geometry, file I/O and inventory lookup stay with bake/site/tooling.
 Contract tests use node:test in the packages CI lane.
 
-WISE tile pins, authored display/synchronous rotation records and cited published limb coefficients have
-browser-safe schema identifiers, data types and pure validation in `packages/objects/src/prepared-data/`.
-Contract tests use node:test in the packages lane. WISE photometry, FITS/mosaicking, orbit/rotation evaluation,
-limb intensity, model-grid interpolation and file I/O remain with their scientific owners. The preserved
-Python display-orientation writer has a literal conformance test and a specific schema-ledger exception.
+See the [shared source-format ownership contract](../objects/AGENTS.md) for WISE pins, rotation records and published limb coefficients.
 
 Photometric color/stellar measurement records and measured-spectrum documents are parsed by `@cssearth/objects`.
 The color and stellar topics retain CIE/Planck evaluation, spectrum I/O and binning; charts retain recipes and drawing;
@@ -373,3 +369,13 @@ uniform-disc authoring retains geometry generation and its expected sphere path.
 
 Authored and prepared content wire records and their pure parsers live in `@cssearth/objects`;
 `objects/content` retains dataset preparation and filesystem/callback APIs.
+
+Surface geometry and ellipsoid patches live in internal `src/surface-geometry/`; polar sprites, lighting,
+coverage, atmosphere and interior raster algorithms live in internal `src/baking/`. Tests stay beside them.
+
+Body-map and raster recipe contracts, resolution evidence and limb-model reference validation belong to
+`@cssearth/objects`. `readBodyMapProduct` and `readRasterRecipe` supply the surface-resolution calculation
+and lighting-bank resolution to those shared parsers. Keep scientific calculations, sampled maps and preparation here.
+
+The public `@cssearth/bake/run-implemented-objects/source` entry runs discovery guards
+against the current source, independent of a previous package build.

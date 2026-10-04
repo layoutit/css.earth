@@ -167,3 +167,11 @@ node labs/performance/navigation-capture.mts unique-capture-name
 ```
 
 For a frozen baseline, set `CSSEARTH_CAPTURE_DIST` to the directory its server actually serves. The tool exits unsuccessfully if synchronization, source-file collection, retained ownership or trace completeness fails. Do not compare frame rates from an invalidation-heavy capture with an ordinary trace.
+
+## Subsystem boundary
+
+The lab owns capture orchestration and local trace analysis (A4). The site build
+uses its source-map and package-source helpers so captures can recover authored
+source locations. This is an intentional build-time dependency; capture and trace
+processing do not belong in the running application. A standalone package would
+need an actual second host and a defined public API before extraction is useful.

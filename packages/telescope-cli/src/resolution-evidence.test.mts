@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
-import { parseResolutionEvidence, parseAcceptedAssumptions, supportsMeasuredResolution, PROFILE_ASSUMPTIONS } from '@cssearth/bake/objects/layers/observation';
+import { parseResolutionEvidence, parseAcceptedAssumptions, supportsMeasuredResolution, PROFILE_ASSUMPTIONS } from '@cssearth/objects';
 import { requestFromArguments } from '@cssearth/telescope-cli/query';
 test('evidence and explicit acceptance are validated without inferring meaning from prose', () => {
   assert.equal(supportsMeasuredResolution({ kind: 'measured' }), false);

@@ -55,7 +55,7 @@ every frame class and the DRACO camera),
 [`new-horizons-approach.oracle.test.mts`](../bake/src/objects/default-view/fixtures/new-horizons-approach.oracle.test.mts)
 (the approach sides of Pluto and Charon). They need the kernels restored first.
 
-The package replaced the modules under `tools/spice/`. Its outputs were compared byte for byte with theirs
+The package replaced the modules under `tools/spice/` (now `packages/spice/src/`). Its outputs were compared byte for byte with theirs
 on every restored kernel of the six banks and on the DART oracle kernels: DAF summaries, SPK states and CK pointing at
 ten epochs per segment, leap-second and clock conversions, every kernel frame and PCK body, apparent states, the recipe
 cameras of Tethys, Phoebe and Didymos, the Voyager ISS rotations and the Pluto and Charon approaches.

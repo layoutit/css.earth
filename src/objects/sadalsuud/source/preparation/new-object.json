@@ -1,0 +1,55 @@
+{
+  "id": "sadalsuud",
+  "name": "Sadalsuud",
+  "system": "Sadalsuud system",
+  "parent": "milky-way",
+  "description": "A supergiant of type G0 I 165 parsecs away, 47.9 times the Sun's width: its disc was measured with the Navy Precision Optical Interferometer.",
+  "aliases": [
+    "HD 204867"
+  ],
+  "featured": true,
+  "target": "HD 204867",
+  "paper": {
+    "url": "https://doi.org/10.3847/1538-3881/aa9d8b",
+    "credit": "Baines et al. (2018), AJ 155, 30"
+  },
+  "radius": {
+    "value": 47.88,
+    "source": "Baines et al. (2018), AJ 155, 30, HD 204867: radius 47.88 +1.81/-1.68 solar radii (Table 5), from the limb-darkened angular diameter 2.704 +/- 0.009 mas (NPOI, Table 4) and the Hipparcos (van Leeuwen 2007) parallax",
+    "url": "https://doi.org/10.3847/1538-3881/aa9d8b",
+    "uncertainty": 1.81
+  },
+  "mass": {
+    "value": 4.97,
+    "source": "Baines et al. (2018), AJ 155, 30, HD 204867: mass 4.97 +/- 0.1 solar masses (Table 6), from the PARAM Bayesian fit to PARSEC isochrones at the measured temperature; the paper calls its masses estimates only",
+    "url": "https://doi.org/10.3847/1538-3881/aa9d8b",
+    "uncertainty": 0.1
+  },
+  "temperature": {
+    "value": 5608,
+    "source": "Baines et al. (2018), AJ 155, 30, HD 204867: effective temperature 5608 +/- 71 K (Table 5), from the angular diameter and the bolometric flux of the SED fit",
+    "url": "https://doi.org/10.3847/1538-3881/aa9d8b",
+    "uncertainty": 71
+  },
+  "distance": {
+    "value": 164.745,
+    "source": "Baines et al. (2018), AJ 155, 30, HD 204867: the Hipparcos (van Leeuwen 2007) parallax the radius was computed with (Table 1), 6.07 +/- 0.22 mas, inverted",
+    "url": "https://doi.org/10.3847/1538-3881/aa9d8b",
+    "uncertainty": 5.971
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A supergiant of type G0 I, 165 parsecs away: 47.9 times the Sun's width and 2,046 times its light.",
+    "introduction": "Its disc spans 2.704 milliarcseconds, which gives 47.88 solar radii and 5,608 K at its surface.",
+    "locator": "Tables 1, 4 and 5, HD 204867: parallax, limb-darkened diameter, radius, Teff"
+  },
+  "notes": [],
+  "radialVelocity": {
+    "value": 6.451,
+    "uncertainty": 0.0014,
+    "source": "SIMBAD's radial velocity for Gaia DR3 2671038928727970944 (quality A), from 2018A&A...616A...7S; Gaia DR3 measures none",
+    "url": "https://ui.adsabs.harvard.edu/abs/2018A&A...616A...7S/abstract"
+  },
+  "order": 5472
+}

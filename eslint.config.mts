@@ -22,7 +22,7 @@ export default [
     },
   },
   {
-    files: ['integration/renderer-bake/**/*.{ts,mts}', 'packages/**/*.{js,mjs,cjs,ts,tsx,mts}', 'labs/nebula/packages/**/*.{ts,tsx,mts}'],
+    files: ['integration/**/*.{ts,mts}', 'packages/**/*.{js,mjs,cjs,ts,tsx,mts}', 'labs/nebula/packages/**/*.{ts,tsx,mts}'],
     languageOptions: { parser: typescriptParser },
     rules: {
       'max-lines': ['error', { max: packageLineLimit, skipBlankLines: false, skipComments: false }],
@@ -139,7 +139,7 @@ export default [
         message: 'Do not compare with a style value read back from the page. Write it with writeStyle (rendering/retained-write.ts), which remembers what it wrote.',
       }],
       'no-restricted-imports': ['error', {
-        patterns: [{ group: ['**/src/platform/**', '**/src/objects/**', '**/site/**', '**/tools/**', '**/labs/**', '**/renderers/**',
+        patterns: [{ group: ['**/src/platform/**', '**/src/objects/**', '**/site/**', '**/labs/**', '**/renderers/**',
           'node:*', '@cssearth/bake', '@cssearth/bake/*', '@cssearth/renderer', '@cssearth/renderer/*'],
           message: 'The renderer runtime imports packages and its own modules only, never the application, preparation code or Node built-ins.' },
         { group: ['@wwtelescope/*'], message: noCanvas }],

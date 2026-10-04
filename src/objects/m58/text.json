@@ -1,0 +1,74 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "m58",
+  "card": {
+    "text": "A spiral galaxy 19.5 million parsecs away, tilted 40° to our line of sight.",
+    "sources": [
+      {
+        "catalogueId": "cosmicflows-4",
+        "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/944/94",
+        "label": "Tully et al. (2023), Cosmicflows-4, ApJ 944, 94; CDS J/ApJ/944/94, table 2 (distances of individual galaxies), PGC 42168: distance modulus 31.452 ± 0.14 mag",
+        "checked": "2026-10-02",
+        "locator": "distance: 19.52 Mpc (18.30 to 20.82)"
+      },
+      {
+        "catalogueId": "leroy-2021-phangs-alma",
+        "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/257/43",
+        "label": "Leroy et al. (2021), PHANGS-ALMA, ApJS 257, 43, table of galaxies (orientations from Lang et al. 2020), row NGC4579: inclination 40.2 ± 5.6°, position angle 91.3 ± 1.6°",
+        "checked": "2026-10-02",
+        "locator": "inclination 40.2 deg"
+      },
+      {
+        "catalogueId": "wikipedia-messier-58",
+        "url": "https://en.wikipedia.org/wiki/Messier_58",
+        "label": "Wikipedia, \"Messier 58\"",
+        "checked": "2026-10-02",
+        "locator": "Lead section, revision 1372953558",
+        "quote": "Messier 58 is an intermediate barred spiral galaxy with a weak inner ring structure located within the constellation Virgo, approximately 68 million light-years away from Earth."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its picture is the Sloan Digital Sky Survey's, with foreground stars removed, laid flat on its measured disc; its bulge stands through it, from a published fit.",
+    "sources": [
+      {
+        "catalogueId": "sdss-dr9-color-hips",
+        "url": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record",
+        "label": "Sloan Digital Sky Survey; color HiPS CDS/P/SDSS9/color by T. Boch (CDS), cut out by the CDS hips2fits service",
+        "checked": "2026-10-02",
+        "locator": "hips2fits cutout, 8.04 arcmin wide"
+      },
+      {
+        "catalogueId": "salo-2015-s4g-decompositions",
+        "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/219/4",
+        "label": "Salo et al. (2015), ApJS 219, 4: S4G Pipeline 4 decompositions, table 7",
+        "checked": "2026-10-03",
+        "locator": "NGC4579, model _bdbarf: bulge 11.3% of the light, Re 3.91 arcsec, n 2.655"
+      },
+      {
+        "catalogueId": "wikipedia-messier-58",
+        "url": "https://en.wikipedia.org/wiki/Messier_58",
+        "label": "Wikipedia, \"Messier 58\"",
+        "checked": "2026-10-02",
+        "locator": "Lead section, revision 1372953558",
+        "quote": "It was discovered by Charles Messier on April 15, 1779 and is one of four barred spiral galaxies that appear in Messier's catalogue."
+      }
+    ]
+  },
+  "datasets": {
+    "optical": {
+      "title": "M58 in visible light",
+      "detail": "3000 × 3000 px",
+      "summary": "Flat picture on the measured disc; the bulge of a published fit stands through it. Depth is modelled.",
+      "sources": [
+        {
+          "catalogueId": "sdss-dr9-color-hips",
+          "url": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record",
+          "label": "Sloan Digital Sky Survey; color HiPS CDS/P/SDSS9/color by T. Boch (CDS), cut out by the CDS hips2fits service",
+          "checked": "2026-10-02",
+          "locator": "CDS/P/SDSS9/color, 8.04 × 8.04 arcmin on NGC 4579"
+        }
+      ]
+    }
+  }
+}

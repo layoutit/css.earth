@@ -1,0 +1,57 @@
+{
+  "schema": "cssearth-volume-presentation-source@2",
+  "objectId": "ngc-1365-layers",
+  "name": "NGC 1365",
+  "defaultDataset": "optical",
+  "bank": {
+    "path": "src/objects/ngc-1365-layers/prepared/image-layers.json"
+  },
+  "recipes": [
+    {
+      "id": "image-layer-recipe",
+      "path": "src/objects/ngc-1365-layers/source/recipe.json"
+    },
+    {
+      "id": "source-evidence",
+      "path": "src/objects/ngc-1365-layers/source/provenance.json"
+    }
+  ],
+  "sharedInputs": [],
+  "datasets": [
+    {
+      "id": "optical",
+      "label": "NOIRLab · optical",
+      "title": "NGC 1365 in visible light",
+      "description": "The Dark Energy Camera view of NGC 1365 from the Dark Energy Survey, with Milky Way foreground stars removed and the whole-galaxy color tied to RC3's measured B-V of 0.69, on a disc tilted 55°, with the bulge of S4G's fit as a spheroid through it.",
+      "summary": "Flat picture on the measured disc; the bulge of a published fit stands through it. Depth is modelled.",
+      "detail": "3383 × 3263 px",
+      "facts": [
+        {
+          "id": "bands",
+          "label": "Bands",
+          "value": "DECam (Dark Energy Survey)"
+        },
+        {
+          "id": "source-pixels",
+          "label": "Source pixels",
+          "value": "3383 × 3263"
+        },
+        {
+          "id": "coverage",
+          "label": "Field",
+          "value": "14.82 × 14.30 arcmin"
+        },
+        {
+          "id": "license",
+          "label": "License",
+          "value": "CC-BY-4.0"
+        }
+      ],
+      "input": "optical",
+      "preview": {
+        "path": "src/objects/ngc-1365-layers/source/source.jpg",
+        "url": "https://storage.noirlab.edu/media/archives/images/large/iotw2127a.jpg"
+      }
+    }
+  ]
+}

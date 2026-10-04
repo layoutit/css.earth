@@ -20,11 +20,13 @@
   "properMotionDecMasPerYear": -1068.353909555673,
   "radialVelocityKmPerS": -9.467006,
   "presentationUp": "display-axis",
+  "boundTo": "gj-702-a",
   "sources": {
    "position": "Gaia DR3 source 4468557611977674496 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/gj-702-b/source/photometry/gaia-dr3-source.csv",
    "distance": "Gaia DR3 parallax 195.8563 +/- 0.2535 mas (same row, RUWE 3.71): 5.11 pc, no zero-point correction; the RUWE is high, so the astrometry fits a single star poorly, and the parallax is used as published",
    "properMotion": "Gaia DR3 (same row): 333.292, -1068.354 mas/yr",
-   "radialVelocity": "Gaia DR3 (same row): -9.47 +/- 0.22 km/s"
+   "radialVelocity": "Gaia DR3 (same row): -9.47 +/- 0.22 km/s",
+   "binary": "El-Badry, Rix & Heintz (2021, MNRAS 506, 2269) list 70 Ophiuchi A and 70 Ophiuchi B in their Gaia EDR3 wide-binary catalogue (VizieR J/MNRAS/506/2269, source_id 4468557611984384512 and 4468557611977674496), 33 AU apart on the sky, with a chance-alignment probability of 3.0e-6: the pair is bound. This record adopts no orbit of the pair, so the star is placed by its own astrometry and carries no orbit."
   }
  }
 }

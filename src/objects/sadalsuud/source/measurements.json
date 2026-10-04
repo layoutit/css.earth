@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "sadalsuud",
+  "angularDiameterMas": 2.7,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 33,310,116 km at 164.75 pc = 2.7 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 164.745,
+  "distanceSource": "Baines et al. (2018), AJ 155, 30, HD 204867: the Hipparcos (van Leeuwen 2007) parallax the radius was computed with (Table 1), 6.07 +/- 0.22 mas, inverted (https://doi.org/10.3847/1538-3881/aa9d8b): 164.745 +/- 5.971 pc; Gaia DR3 parallax 5.9728 +/- 0.2147 mas (same row, RUWE 3.08), 27.8 standard errors, is not used",
+  "radiusKm": 33310116,
+  "radiusSource": "Radius 47.88 +/- 1.81 solar radii from Baines et al. (2018), AJ 155, 30, HD 204867: radius 47.88 +1.81/-1.68 solar radii (Table 5), from the limb-darkened angular diameter 2.704 +/- 0.009 mas (NPOI, Table 4) and the Hipparcos (van Leeuwen 2007) parallax (https://doi.org/10.3847/1538-3881/aa9d8b): 33,310,116 km at 695,700 km per solar radius. Mass 4.97 +/- 0.1 solar masses from Baines et al. (2018), AJ 155, 30, HD 204867: mass 4.97 +/- 0.1 solar masses (Table 6), from the PARAM Bayesian fit to PARSEC isochrones at the measured temperature; the paper calls its masses estimates only (https://doi.org/10.3847/1538-3881/aa9d8b); GM is that mass times the JPL solar GM. Temperature 5608 +/- 71 K from Baines et al. (2018), AJ 155, 30, HD 204867: effective temperature 5608 +/- 71 K (Table 5), from the angular diameter and the bolometric flux of the SED fit (https://doi.org/10.3847/1538-3881/aa9d8b). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 5608,
+  "effectiveTemperatureSource": "Baines et al. (2018), AJ 155, 30, HD 204867: effective temperature 5608 +/- 71 K (Table 5), from the angular diameter and the bolometric flux of the SED fit (https://doi.org/10.3847/1538-3881/aa9d8b)",
+  "surfaceGravityLogg": 1.77,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/sadalsuud.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 1.774, rounded to two decimals",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, colored from the star's measured spectrum (HST/STIS Next Generation Spectral Library v2 (Heap & Lindler; MAST high-level science product), HD 204867) (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

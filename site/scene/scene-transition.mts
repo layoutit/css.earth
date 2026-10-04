@@ -7,6 +7,7 @@ import type { ShellNavigationTransition } from '../shell/object-shell-types.mts'
 import type { createPreparedWorldNavigation } from '../prepared-world-navigation.mts';
 import type { SceneSession } from './scene-session.mts';
 import type { SceneView } from './scene-view.mts';
+import { subjectView } from './scene-subject.mts';
 import type { WorldContextMount } from './scene-world.mts';
 import { selectSceneDataset } from './scene-datasets.mts';
 import { navigationHref } from '../navigation/navigation-history.mts';
@@ -102,7 +103,7 @@ export function prepareSceneReplacement({ fromId, source, object, request, navig
   const factoryTask = contentTransport.descriptor(object, { signal: request.signal })
     .then(descriptor => loadObject(object.id, descriptor, request.signal))
     .then(async factory => {
-      if (factory.navigation && request.subject.view !== 'system') {
+      if (factory.navigation && subjectView(request.subject) !== 'system') {
         const framingScale = await factory.navigation.framingScale(request.signal);
         const edge = await factory.navigation.labelEdge?.(request.signal);
         if (systemTask) await systemTask;

@@ -10,7 +10,8 @@ import { loadQualifiedObservations } from '../qualified-observations.mts';
 import { listArtifactOutputs } from '../artifact-outputs.mts';
 import { executeFamilyOperation } from '../family-operation.mts';
 import { explorationAnswer } from '../exploration.mts';
-import { parseSnapshot, normalizeSnapshot, SERVICES } from './discovery.mts';
+import { normalizeSnapshot, SERVICES } from './discovery.mts';
+import { parseSnapshot } from '@cssearth/objects';
 import { planAccess, nativeQualificationRoute } from './access.mts';
 import { qualifyVoProduct } from './qualify.mts';
 

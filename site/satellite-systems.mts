@@ -1,3 +1,4 @@
+import { systemHostId } from './navigation/system-address.mts';
 import { APPLICATION_WORLD_CONTEXT as context, onWorldSystems } from './world-context-plan.mts';
 
 /** A host and its prepared, navigable satellite children. Framing may select a smaller primary subset. */
@@ -13,10 +14,10 @@ export function satelliteSystems(plan: Pick<typeof context, 'focus' | 'bodies'> 
   const bodies = [plan.focus, ...plan.bodies];
   const byId = new Map(bodies.map(body => [body.id, body]));
   const children = new Map<string, typeof plan.bodies[number][]>();
+  // A planet's or a small body's system holds the bodies inside it in the object tree (`inside` in each world row).
   for (const body of plan.bodies) {
-    if (body.classification !== 'satellite' || !body.orbit) continue;
-    const host = byId.get(body.orbit.centerBodyId);
-    if (!host || host.classification === 'star' || host.classification === 'black-hole') continue;
+    const host = body.inside === undefined ? undefined : byId.get(systemHostId(body.inside) ?? '');
+    if (!host || host.id === body.id || host.classification === 'star' || host.classification === 'black-hole') continue;
     const members = children.get(host.id) ?? [];
     members.push(body);
     children.set(host.id, members);

@@ -2,6 +2,10 @@
   "id": "gj-820-b",
   "name": "61 Cygni B",
   "system": "61 Cygni system",
+  "boundTo": {
+    "host": "gj-820-a",
+    "source": "El-Badry, Rix & Heintz (2021, MNRAS 506, 2269) list 61 Cygni A and 61 Cygni B in their Gaia EDR3 wide-binary catalogue (VizieR J/MNRAS/506/2269, source_id 1872046609345556480 and 1872046574983497216), 110 AU apart on the sky, with a chance-alignment probability of 4.1e-9: the pair is bound. This record adopts no orbit of the pair, so the star is placed by its own astrometry and carries no orbit."
+  },
   "description": "A nearby orange dwarf, 60% of the Sun's width: its disc was measured by interferometry.",
   "aliases": [
     "GJ 820 B"

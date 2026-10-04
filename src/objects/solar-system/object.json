@@ -1,12 +1,12 @@
 {
   "schema": "cssearth-object@2",
   "id": "solar-system",
+  "parent": "milky-way",
   "type": "system",
   "generator": "site/build/prepare/system-packages.mts",
   "properties": {
     "system": {
-      "host": "sun",
-      "members": "planets"
+      "host": "sun"
     },
     "catalog": {
       "name": "Solar System",

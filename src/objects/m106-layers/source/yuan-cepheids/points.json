@@ -1,0 +1,40 @@
+{
+  "schema": "cssearth-catalogue-points-source@1",
+  "id": "yuan-cepheids",
+  "table": {
+    "path": "table2.dat",
+    "origin": "https://cdsarc.cds.unistra.fr/ftp/J/ApJ/940/64/table2.dat",
+    "bytes": 66231,
+    "format": "fixed-width",
+    "columns": {
+      "name": [
+        1,
+        19
+      ],
+      "raDeg": [
+        28,
+        37
+      ],
+      "decDeg": [
+        39,
+        47
+      ]
+    }
+  },
+  "filters": [],
+  "frame": {
+    "input": "icrs",
+    "output": "sun-icrf",
+    "epochJdTt": 2461286.5,
+    "placement": "image-layer-disc",
+    "converter": "Each sky position onto the plane the picture stands on, facing the Sun (recipe.json), through the image-layer bake's own intersection."
+  },
+  "source": "yuan-2022-ngc4258-cepheids",
+  "meaning": "Cepheid variables of M106 from Yuan et al.'s (2022) Hubble catalogue: one dot per star at its catalogue position.",
+  "appearance": {
+    "colorCss": "#ffe2a8",
+    "radiusPx": 0.75,
+    "opacity": 0.9,
+    "note": "Presentation only: the Milky Way Cepheid layer's color, size and opacity. Each dot takes its tone and half its color from the photograph under it (packages/bake/cli/prepare-catalogue-points.mts)."
+  }
+}

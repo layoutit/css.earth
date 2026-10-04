@@ -1,4 +1,5 @@
-import type { WorldCameraPose } from '@cssearth/objects';
+import type { WorldCameraPose } from '@cssearth/engine';
+import { sameEyePlace } from '@cssearth/engine';
 import type { WorldCameraViewport } from '../navigation/world-camera.js';
 import type { ObjectWorldNavigationListener } from './world-navigation-types.js';
 
@@ -34,7 +35,7 @@ export function createWorldNavigationPublicationHub(onError: (error: unknown) =>
 
 function samePublication(a: WorldCameraPose, av: WorldCameraViewport, b: WorldCameraPose, bv: WorldCameraViewport) {
   return a.referenceFrame === b.referenceFrame && a.epochJdTt === b.epochJdTt &&
-    a.pose.positionM.every((value, axis) => value === b.pose.positionM[axis]) &&
+    sameEyePlace(a.pose, b.pose) &&
     a.pose.orientationXyzw.every((value, axis) => value === b.pose.orientationXyzw[axis]) &&
     av.focalPixels === bv.focalPixels && av.widthPixels === bv.widthPixels && av.heightPixels === bv.heightPixels &&
     av.principalOffsetPixels[0] === bv.principalOffsetPixels[0] && av.principalOffsetPixels[1] === bv.principalOffsetPixels[1];

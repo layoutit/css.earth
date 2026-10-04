@@ -1,5 +1,5 @@
 ---
-import { worldPlaceOf } from '../world-places.mts';
+import { worldPlaceOf, worldStartupFiles } from '../world-places.mts';
 import { informationTabStyles } from '../server/information-tab-styles.mts';
 import ObjectSwatchStyles from "../components/ObjectSwatchStyles.astro";
 import { webAnalyticsBootstrap } from "../web-analytics.mts";
@@ -10,7 +10,7 @@ import { defaultDatasetBank } from '../object-page-data.mts';
 import contextBankAssets from '../prepared-context-bank-assets.json';
 import { SYSTEM_VIEW_HOSTS } from '../system-framing.mts';
 import { inlineSceneImage, resolveBuildSceneAddress } from '../asset-origin.mts';
-import { SCENE_OBJECTS, requireObject, requireSceneObject } from "../objects.mts";
+import { SCENE_OBJECTS, requireObject } from "../objects.mts";
 import { breadcrumbJsonLd, homeSeo, objectSeo, websiteJsonLd } from "../seo.mts";
 import { pageTrail } from "../seo-trail.mts";
 import { availableSocialImages, DEFAULT_SOCIAL_IMAGE_ID } from "../social-images.mts";
@@ -27,9 +27,9 @@ import type { loadPreparedSceneMarkup } from '../server/load-prepared-scene.mts'
 import type { ObjectDescriptor } from '@cssearth/objects';
 // The world camera a body mounts with (`site/world-camera.mts`): the summary's frame, focus and camera, so the first
 // body mounts before the world summary itself downloads.
-import worldSummary from '../../src/objects/sun/prepared/world-context-summary.json';
+import worldSummary from '../../src/objects/observable-universe/prepared/world.json';
 // The same hashed file the client's `world-context-plan.mts` fetches, requested by the head (startup-requests.mts).
-import worldSummaryUrl from '../../src/objects/sun/prepared/world-context-summary.json?url';
+import worldSummaryUrl from '../../src/objects/observable-universe/prepared/world.json?url';
 import { worldCameraOf } from '@cssearth/objects';
 import { MOBILE_VIEWPORT_QUERY } from '../runtime-policy.mts';
 import { defaultWidthShare } from '../default-width-share.mts';
@@ -38,7 +38,7 @@ const worldCamera = worldCameraOf(worldSummary);
 
 interface Props {
   objectId: string;
-  /** What the page is: `objectId`, or a level of the zoom ladder its scene shows. */
+  /** What the page is: `objectId`, or an object seen from inside that its scene shows. */
   pageId?: string;
   navigation?: boolean;
   scene?: PreparedSceneMarkup & Pick<Awaited<ReturnType<typeof loadPreparedSceneMarkup>>, 'descriptor' | 'coverPlan'>;
@@ -50,12 +50,20 @@ interface Props {
 const { objectId, pageId = objectId, navigation = false, scene, descriptor, home = false } = Astro.props;
 const objectUi = await Astro.slots.render('object-ui');
 const tabStyles = informationTabStyles(Astro.locals, objectUi);
-const objectRecord = requireSceneObject(objectId);
-// The holder of the page's own body, when the world summary does not hold it whole (site/world-places.mts).
-const worldPlace = worldPlaceOf(objectRecord.id);
+const objectRecord = requireObject(objectId);
+// The world files the page reads at startup, root first, and its body's own row when no file has it (site/world-places.mts).
+const worldFiles = worldStartupFiles(pageId);
+const ownRow = worldPlaceOf(objectRecord.id)?.row !== undefined;
 // Rules for a page without script. The phone sheet waits, hidden, for its controller to publish a snap state
-// (shell-layout.css); without script it rests at its peek, and the checkbox of its handle opens it.
-const sheetWithoutScript = 'body[data-object-shell]:not([data-sheet]) :is(.object-sidebar, .object-search-toolbar, .object-search-categories) { visibility: visible !important; }';
+// (shell-layout.css); without script it rests at its peek, and the checkbox of its handle opens it. Only here does a rule
+// read the handle with `:has()`: with script the controller publishes the state on the body, and a `:has()` on the body
+// made every element added to the page restyle the whole document (shell-sheet.mts). The gear's pressed look is the same
+// case: with script it reads the `aria-expanded` its controller writes (shell-settings.mts).
+const sheetWithoutScript = 'body[data-object-shell]:not([data-sheet]) :is(.object-sidebar, .object-search-toolbar, .object-search-categories) { visibility: visible !important; } '
+  + '.object-ui-layer:has(.object-settings-panel:popover-open) .object-settings-action { color: var(--shell-text); background: var(--explorer-header-control-selected); } '
+  + '@media (max-width: 820px), (orientation: portrait) { '
+  + 'body[data-object-shell]:has(.object-sheet-handle:checked) :is(.object-sidebar, .object-search-toolbar, .object-search-categories) { --sheet-rest: 0px; } '
+  + '.object-sidebar:has(.object-sheet-handle:checked) { overflow-y: auto; touch-action: pan-y; } }';
 
 const startup = !navigation && scene && objectRecord.discovery?.arrival?.billboard ? objectRecord.discovery : undefined;
 const startupImage = startup?.arrival?.billboard ? await resolveBuildSceneAddress(startup.arrival.billboard.url) : undefined;
@@ -100,8 +108,8 @@ const billboardWidthWithoutScript = (() => {
     ? `${share.diameterOverWidth * 100 * billboard.size / 2 / billboardBodyRadiusPixels(billboard, objectRecord.worldFrame.bodyRadiusM)}vw` : '70vmin';
 })();
 const billboardWithoutScript = `.object-stage:not([data-prepared-object]) ~ img[data-startup-billboard] { opacity: 1 !important; width: ${billboardWidthWithoutScript}; height: auto; left: 50%; top: 50%; transform: translate(-50%, -50%); }`;
-// A page that is its own scene places its arrival photograph from the HTML (startup-cover.mts); a level's page, drawn by
-// the world host's scene, leaves it to that scene's startup.
+// A page that is its own scene places its arrival photograph from the HTML (startup-cover.mts); the page of an object seen
+// from inside, drawn by the world host's scene, leaves it to that scene's startup.
 const startupCover = startup?.arrival?.billboard && scene?.coverPlan && pageId === objectId ? {
   plan: scene.coverPlan, mobileQuery: MOBILE_VIEWPORT_QUERY,
   billboard: { size: startup.arrival.billboard.size, focalPixels: startup.arrival.billboard.focalPixels, distanceM: startup.arrival.billboard.distanceM },
@@ -131,8 +139,8 @@ const structuredData = JSON.stringify(home ? websiteJsonLd() : breadcrumbJsonLd(
     <meta charset="UTF-8" />
     {!navigation && <script is:inline set:html={initialShellContextBootstrap(objectId)}></script>}
     {/* The first view's documents download while the HTML parses, beside the modules that read them (startup-requests.mts). */}
-    {!navigation && <script is:inline set:html={startupRequestsBootstrap({ objectId: objectRecord.id, serverMarkup: Boolean(scene && !startup), systemView: SYSTEM_VIEW_HOSTS.has(objectRecord.id), summaryUrl: worldSummaryUrl, ...(worldPlace && worldPlace.row === undefined ? { holder: worldPlace.holder } : {}), ...(bankFiles ? { bankFiles } : {}) })}></script>}
-    {!navigation && worldPlace && <meta name="cssearth-world-holder" content={worldPlace.holder} data-row={worldPlace.row === undefined ? undefined : ''} />}
+    {!navigation && <script is:inline set:html={startupRequestsBootstrap({ objectId: objectRecord.id, serverMarkup: Boolean(scene && !startup), systemView: SYSTEM_VIEW_HOSTS.has(objectRecord.id), summaryUrl: worldSummaryUrl, worldFiles, ...(bankFiles ? { bankFiles } : {}) })}></script>}
+    {!navigation && <meta name="cssearth-world-files" content={worldFiles.join(' ')} data-row={ownRow ? objectRecord.id : undefined} />}
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     {!navigation && <script is:inline set:html={errorReportBootstrap}></script>}
     {/* One connection for the photograph (no CORS) and one for the scene's fetched files (CORS): browsers keep them apart. */}

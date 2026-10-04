@@ -21,7 +21,7 @@ The collaboration released its calibrated 2017 data (release 2022-D02-01) and it
 
 ## The S-stars
 
-The 40 stars are astronomy records in `packages/astronomy/data/bodies/`, each citing its orbit and size. [S2](../s2/README.md) also has its own package. S301 comes from its discovery paper (GRAVITY Collaboration 2026, [arXiv:2607.12664](https://arxiv.org/abs/2607.12664)). The other 39 are written by `packages/astronomy/cli/generate-s-stars.mts`, which reads every value from its publication:
+The 40 stars are astronomy records in `packages/astronomy/data/bodies/`, each citing its orbit and size. The seven with a measured radius, mass and temperature also have their own packages: [S1](../s1/README.md), [S2](../s2/README.md), [S4](../s4/README.md), [S6](../s6/README.md), [S8](../s8/README.md), [S9](../s9/README.md) and [S12](../s12/README.md). The other 33 have no measured temperature, and 32 of them no measured radius or mass, which a star package needs, so they are drawn from their records without a page. S301 comes from its discovery paper (GRAVITY Collaboration 2026, [arXiv:2607.12664](https://arxiv.org/abs/2607.12664)). The other 39 are written by `packages/astronomy/cli/generate-s-stars.mts`, which reads every value from its publication:
 
 | What | Source |
 | --- | --- |

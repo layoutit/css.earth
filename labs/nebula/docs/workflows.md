@@ -81,7 +81,7 @@ Current processing repaints the Alignment density cloud’s exact 144 prepared q
 | Completed reconstruction banks | `.local/nebula-lab/reconstructions/`; descriptors, XYZ textures, provenance and manifest |
 | Compiler jobs and results | `.local/nebula-lab/compiler-jobs/` and `.local/nebula-lab/compiler/<result-id>/`; field, method, comparison images and shared dataset banks |
 | Explicit dataset-settings handoff | **Save dataset settings** in Reconstruction writes `.local/nebula-lab/dataset-settings/latest.json` and an immutable timestamped receipt |
-| Versioned recipes/evidence | `models/lmc/`, `models/smc/`, shared recipe files and `sources/` |
+| Versioned recipes/evidence | `models/lmc/`, `models/smc/`, shared recipe files and `packages/lab/sources/` |
 
 An image-to-density placement change requires **Preview** again to produce a matching bank. Browsing a result does not rewrite it. Promotion into a checked-in model or production object is a separate explicit task, with source credits and replay instructions retained.
 

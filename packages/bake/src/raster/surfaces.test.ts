@@ -6,14 +6,14 @@ import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
 import { isDeepStrictEqual } from 'node:util';
 import { loadNativeSourcePoleSampler, prepareSurfaces } from './surfaces.ts';
-import { parseRasterRecipe, prepareRasterAssets, surfaceCoordinateWidth } from './assets.ts';
+import { readRasterRecipe, prepareRasterAssets, surfaceCoordinateWidth } from './assets.ts';
 import { loadNativeObservationPoleSampler, parseObservationDataset } from '../objects/layers/observation/index.ts';
 
 describe('native source pole sampling', () => {
     it('stores constant opaque lossless surfaces as one exact texel while preserving their coordinate domain and polar alpha', async () => {
         const directory = await mkdtemp(join(tmpdir(), 'cssearth-constant-surface-'));
         try {
-            const config = parseRasterRecipe({ schema: 'cssearth-raster-recipe@2', publicBase: '/scenes/test/', sourceWidth: 64, sourceHeight: 32,
+            const config = readRasterRecipe({ schema: 'cssearth-raster-recipe@2', publicBase: '/scenes/test/', sourceWidth: 64, sourceHeight: 32,
                 width: 64, height: 32, latitudeBands: 4, polarTile: 16, resample: 'density-before-pack',
                 polarProjection: 'orthographic-bilinear', polesOutput: 'poles-{id}{suffix}.webp', surfaceMetadata: { schema: 'test-assets@1' },
                 thumbnail: { size: 8 }, surfaces: [{ id: 'color', source: 'color.json', falseColor: false, output: '{id}{suffix}.webp',
@@ -55,12 +55,12 @@ describe('native source pole sampling', () => {
                 width:64,height:32,latitudeBands:4,polarTile:16,resample:'source-packed',unpackedResizeBeforePack:true,
                 polarProjection:'angular-nearest',polesOutput:'poles-{id}{suffix}.webp',surfaceMetadata:{schema:'test@1'},
                 thumbnail:{size:8,crop:{left:12,top:12,width:16,height:16}},surfaces:[{id:'photo',source:'photo.png',falseColor:false,output:'{id}{suffix}.webp',thumbnail:'thumb-{id}.webp'}]};
-            await prepareSurfaces(parseRasterRecipe(base),directory,directory);
+            await prepareSurfaces(readRasterRecipe(base),directory,directory);
             const names=['photo@2x.webp','poles-photo@2x.webp','thumb-photo.webp'];
             const before=await Promise.all(names.map(name=>readFile(join(directory,name))));
             const science={id:'height',source:'native.tif',falseColor:true,output:'{id}{suffix}.webp',thumbnail:'thumb-{id}.webp',
                 science:{scientific:{displaySampling:'nearest'}}};
-            const recipe={...base,surfaces:[...base.surfaces,science]},config=parseRasterRecipe(recipe);
+            const recipe={...base,surfaces:[...base.surfaces,science]},config=readRasterRecipe(recipe);
             await prepareSurfaces(config,directory,directory,async (_surface,width,height)=>{
                 const data=new Uint8Array(width*height*3);
                 for(let y=0;y<height;y++)for(let x=0;x<width;x++)data.set(y<height/2?[1,73,137]:[199,17,91],(y*width+x)*3);
@@ -72,15 +72,15 @@ describe('native source pole sampling', () => {
                 const rgba=await sharp(bytes).ensureAlpha().raw().toBuffer();
                 for(let i=0;i<rgba.length;i+=4)if(rgba[i+3])assert.ok(([[1,73,137],[199,17,91]]).some(item => isDeepStrictEqual(item, [...rgba.subarray(i,i+3)])));
             }
-            assert.throws(()=>parseRasterRecipe({...recipe,sourceWidth:256}), /canonical source dimensions/);
-            assert.throws(()=>parseRasterRecipe({...recipe,surfaces:[{...science,science:{scientific:{displaySampling:'bilinear'}}}]}), /nearest numeric/);
+            assert.throws(()=>readRasterRecipe({...recipe,sourceWidth:256}), /canonical source dimensions/);
+            assert.throws(()=>readRasterRecipe({...recipe,surfaces:[{...science,science:{scientific:{displaySampling:'bilinear'}}}]}), /nearest numeric/);
         } finally {await rm(directory,{recursive:true,force:true});}
     });
     it('packs a lower-resolution surface without changing the shared layout or pole dimensions', async () => {
         const directory = await mkdtemp(join(tmpdir(), 'cssearth-small-surface-'));
         try {
             await sharp({ create: { width: 128, height: 64, channels: 3, background: '#488ecc' } }).png().toFile(join(directory, 'source.png'));
-            const config = parseRasterRecipe({ schema: 'cssearth-raster-recipe@2', publicBase: '/scenes/test/', sourceWidth: 128, sourceHeight: 64,
+            const config = readRasterRecipe({ schema: 'cssearth-raster-recipe@2', publicBase: '/scenes/test/', sourceWidth: 128, sourceHeight: 64,
                 width: 128, height: 64, latitudeBands: 4, polarTile: 16, resample: 'density-before-pack',
                 polarProjection: 'orthographic-bilinear', polesOutput: 'poles-{id}{suffix}.webp', surfaceMetadata: { schema: 'test-assets@1' },
                 thumbnail: {size: 8}, surfaces: [{id: 'science', source: 'source.png', falseColor: true, output: '{id}{suffix}.webp', thumbnail: 'thumb-{id}.webp', resolutionScale: .5}] });
@@ -95,14 +95,14 @@ describe('native source pole sampling', () => {
             await assert.rejects(readFile(join(directory,'science.webp')));
             await assert.rejects(readFile(join(directory,'poles-science.webp')));
             assert.deepEqual(([prepared.surfaces.science.url, prepared.surfaces.science.url2x]), ['/scenes/test/science@2x.webp', '/scenes/test/science@2x.webp']);
-            assert.throws(() => parseRasterRecipe({...config,densities:[1,2]}), /one canonical density/);
+            assert.throws(() => readRasterRecipe({...config,densities:[1,2]}), /one canonical density/);
             // A lighting recipe naming a shared bank parses to the bank's fields plus its own, and may not restate the bank's.
             const lighting = { bank: 'sphere', presentationSize: 460, defaultFrame: 230, bankSchema: 'test-bank@1', billboardSchema: 'test-billboard@1', metadata: { schema: 'test-lighting@1' } };
-            const banked = parseRasterRecipe({ ...config, lighting }).lighting!;
+            const banked = readRasterRecipe({ ...config, lighting }).lighting!;
             assert.deepEqual(([banked.bank, banked.frameSize, banked.columns, banked.frameCount, banked.rowOutput, banked.terminator, banked.presentationSize]), ['sphere', 512, 8, 256, 'lighting-{density}x-row-{row}.webp', [0, 0.1], 460]);
-            assert.throws(() => parseRasterRecipe({ ...config, lighting: { ...lighting, frameSize: 512 } }), /bank's/);
-            assert.throws(() => parseRasterRecipe({ ...config, lighting: { ...lighting, bank: 'cube' } }), /Unknown lighting bank/);
-            assert.throws(() => parseRasterRecipe({...config,surfaces:[{...config.surfaces[0],resolutionScale:.3}]}), /integer/);
+            assert.throws(() => readRasterRecipe({ ...config, lighting: { ...lighting, frameSize: 512 } }), /bank's/);
+            assert.throws(() => readRasterRecipe({ ...config, lighting: { ...lighting, bank: 'cube' } }), /Unknown lighting bank/);
+            assert.throws(() => readRasterRecipe({...config,surfaces:[{...config.surfaces[0],resolutionScale:.3}]}), /integer/);
         } finally { await rm(directory,{recursive:true,force:true}); }
     });
     it('draws a catalogue dataset over an earlier surface: empty cells take its pixels scaled, feature cells keep their color', async () => {
@@ -117,7 +117,7 @@ describe('native source pole sampling', () => {
                 polarProjection: 'orthographic-bilinear', polesOutput: 'poles-{id}{suffix}.webp', surfaceMetadata: { schema: 'test-assets@1' },
                 thumbnail: { size: 8 }, surfaces: [photo, catalogue] };
             const captured: Uint8Array[] = [];
-            await prepareSurfaces(parseRasterRecipe(recipe), directory, directory, async (_surface, width, height) => {
+            await prepareSurfaces(readRasterRecipe(recipe), directory, directory, async (_surface, width, height) => {
                 // The left half holds a catalogued feature; the right half is empty and painted with a stand-in grid color.
                 const data = new Uint8Array(width * height * 3), missing = new Uint8Array(width * height);
                 for (let y = 0; y < height; y++) for (let x = 0; x < width; x++) {
@@ -134,15 +134,15 @@ describe('native source pole sampling', () => {
             assert.deepEqual([...colors].sort(), ['100,50,25', '223,115,255']);
             assert.equal(captured.length, 1);
             // A grey, 6-bit underlay: Rec. 709 luma of (200, 100, 50) is 117.3, times 0.5 is 59 (58.6 rounded), keeping 6 bits is 56.
-            await prepareSurfaces(parseRasterRecipe({ ...recipe, surfaces: [photo, { ...catalogue, underlay: { surface: 'photo', brightness: 0.5, grayscale: true, bits: 6 } }] }), directory, directory,
+            await prepareSurfaces(readRasterRecipe({ ...recipe, surfaces: [photo, { ...catalogue, underlay: { surface: 'photo', brightness: 0.5, grayscale: true, bits: 6 } }] }), directory, directory,
                 async (_surface, width, height) => ({ data: new Uint8Array(width * height * 3).fill(90), channels: 3, nearest: true, missing: new Uint8Array(width * height).fill(1) }));
             const grey = await sharp(await readFile(join(directory, 'dunes@2x.webp'))).ensureAlpha().raw().toBuffer(); // sharp caches decoded files by path
             const greys = new Set<string>(); for (let i = 0; i < grey.length; i += 4) if (grey[i + 3]) greys.add([...grey.subarray(i, i + 3)].join(','));
             assert.deepEqual(([...greys]), ['56,56,56']);
-            assert.throws(() => parseRasterRecipe({ ...recipe, surfaces: [photo, { ...catalogue, underlay: { surface: 'photo', brightness: 0.5, bits: 9 } }] }), /bits must be an integer from 1 to 8, not 9/);
-            assert.throws(() => parseRasterRecipe({ ...recipe, surfaces: [catalogue, photo] }), /earlier surface photo/);
-            assert.throws(() => parseRasterRecipe({ ...recipe, surfaces: [photo, { ...catalogue, underlay: { surface: 'photo', brightness: 0 } }] }), /brightness must be in \(0, 1\], not 0/);
-            assert.throws(() => parseRasterRecipe({ ...recipe, surfaces: [photo, { ...catalogue, science: undefined }] }), /science dataset/);
+            assert.throws(() => readRasterRecipe({ ...recipe, surfaces: [photo, { ...catalogue, underlay: { surface: 'photo', brightness: 0.5, bits: 9 } }] }), /bits must be an integer from 1 to 8, not 9/);
+            assert.throws(() => readRasterRecipe({ ...recipe, surfaces: [catalogue, photo] }), /earlier surface photo/);
+            assert.throws(() => readRasterRecipe({ ...recipe, surfaces: [photo, { ...catalogue, underlay: { surface: 'photo', brightness: 0 } }] }), /brightness must be in \(0, 1\], not 0/);
+            assert.throws(() => readRasterRecipe({ ...recipe, surfaces: [photo, { ...catalogue, science: undefined }] }), /science dataset/);
         } finally { await rm(directory, { recursive: true, force: true }); }
     });
     it('centres the dataset thumbnail on a declared longitude, wrapping across the map edge', async () => {
@@ -157,7 +157,7 @@ describe('native source pole sampling', () => {
                 polarProjection: 'orthographic-bilinear', polesOutput: 'poles-{id}{suffix}.webp', surfaceMetadata: { schema: 'test-assets@1' },
                 surfaces: [{ id: 'seam', source: 'source.png', falseColor: false, output: '{id}{suffix}.webp', thumbnail: 'thumb-{id}.webp' }] };
             const centre = async (thumbnail: Record<string, unknown>) => {
-                const config = parseRasterRecipe({ ...base, thumbnail });
+                const config = readRasterRecipe({ ...base, thumbnail });
                 await prepareRasterAssets({ config, sourceDirectory: directory, publicDirectory: directory, outputDirectory: directory });
                 // Read the bytes: sharp caches decoded files by path, and the thumbnail is rewritten between calls.
                 const { data } = await sharp(await readFile(join(directory, 'thumb-seam.webp'))).raw().toBuffer({ resolveWithObject: true });
@@ -168,7 +168,7 @@ describe('native source pole sampling', () => {
             assert.ok(defaultBlue > defaultRed + 200);
             const [seamRed, , seamBlue] = await centre({ size: 8, centerLongitudeDegrees: 0 });
             assert.ok(seamRed > seamBlue);
-            assert.throws(() => parseRasterRecipe({ ...base, thumbnail: { size: 8, centerLongitudeDegrees: 'east' } }), /finite/);
+            assert.throws(() => readRasterRecipe({ ...base, thumbnail: { size: 8, centerLongitudeDegrees: 'east' } }), /finite/);
         } finally { await rm(directory, { recursive: true, force: true }); }
     });
     it('uses original image texels in the established wrapped normalized map domain', async () => {

@@ -3,7 +3,8 @@ import { type DensityVolumeFrame, type VolumeVector } from '@cssearth/objects';
 import { cssCameraAxesFromOrientation } from '@cssearth/engine';
 import type { VolumeCameraPublication } from '../volume/types.js';
 
-import { mountPointPathSvg, mountPointPaths } from './point-paths.js';
+import { mountPointPaths } from './point-paths.js';
+import { cameraRest, pointLayerSlot, sameRest, type PointLayerMember, type PointLayerRepaint, type PointLayerSlot } from './point-layer.js';
 import { createSettlePacer } from '../rendering/settle-pacer.js';
 
 export interface BatchedSpatialPoint { readonly positionUnits: VolumeVector }
@@ -22,22 +23,14 @@ export const pointPaint = (style: BatchedSpatialPointStyle) =>
 const MAX_PARALLAX_PIXELS = .25;
 /** Dots are painted this share of the view beyond each edge: a turn warps them into view before the exact repaint, so a
  * drag shows no hole at its leading edge (content is resident a margin before it enters the view,
- * motion-freezes-membership.md). The root clips them, so a settled frame is unchanged. */
+ * motion-freezes-membership.md). The root clips them, so a settled frame is unchanged. A travelling camera repaints
+ * every frame and warps none, so its paints leave the margin out and the pause paints it back. */
 const OVERSCAN = .2;
-/** A warp holds while it changes no dot's size by more than this factor: a turn's projective map stretches the painted discs
- * with its centres, and a larger turn grows the dots on one side of the view past their size. */
-const MAX_WARP_STRETCH = 1.1;
 /** Painted dots per unit of the document's pacer (settle-pacer.ts, where a unit is about 0.6 ms of iPhone-class work):
  * on the four-times-slowed zoom of 2026-09-30, each 1,000 painted dots cost about 5 ms more a frame. */
 const DOTS_PER_PACER_UNIT = 125;
 /** The exact paint follows the last warp once publications have paused this long. */
 const SETTLE_MS = 120;
-/** While the camera travels without turning (a zoom, a pinch), a full repaint waits this long after the last one: every
- * other frame at 60 Hz, every third at 120 Hz. Such a camera moves every drawn dot every frame (2026-09-30: 99.8% of the
- * dots a nearby-universe zoom drew moved more than MAX_PARALLAX_PIXELS a frame), so each repaint projects and rewrites them
- * all; the frames between keep the last paint, a frame behind the travel. A pause repaints exactly (SETTLE_MS), so a
- * still view is unchanged. */
-const MOTION_REPAINT_MS = 25;
 /** A dot seen through an occluding disc (a galaxy's, from outside it) is dimmed by where its sight line crosses the disc:
  * most at the centre, to OCCLUDED_FLOOR of its opacity, and not at all at the disc's edge, along (1 - (r/R)^2)^2, which
  * reaches the edge with no step and no slope, so the disc's outline does not show in the dots. The dimming is painted in
@@ -47,17 +40,6 @@ const OCCLUDED_OPACITIES = Array.from({ length: OCCLUDED_STEPS }, (_, step) => O
 /** A flat disc in a field's own frame: its centre, unit normal and radius, in the field's units. */
 export interface BatchedSpatialPointOccluder { readonly centreUnits: VolumeVector; readonly normal: VolumeVector; readonly radiusUnits: number }
 
-type Matrix3 = [number, number, number, number, number, number, number, number, number];
-const multiply = (a: Matrix3, b: Matrix3): Matrix3 => [0, 1, 2, 3, 4, 5, 6, 7, 8].map(index => {
-  const row = Math.floor(index / 3) * 3, column = index % 3;
-  return a[row]! * b[column]! + a[row + 1]! * b[column + 3]! + a[row + 2]! * b[column + 6]!;
-}) as Matrix3;
-/** Screen pixels (from the view's top left) to a camera direction, and back: `camera = axes · local`. */
-const unproject = (focal: number, cx: number, cy: number): Matrix3 => [1 / focal, 0, -cx / focal, 0, 1 / focal, -cy / focal, 0, 0, -1];
-const project = (focal: number, cx: number, cy: number): Matrix3 => [focal, 0, -cx, 0, focal, -cy, 0, 0, -1];
-/** The camera axes as a matrix taking local directions to camera ones, and its transpose. */
-const axesMatrix = (r: readonly number[]): Matrix3 => [r[0]!, r[3]!, r[6]!, r[1]!, r[4]!, r[7]!, r[2]!, r[5]!, r[8]!];
-const transpose = (m: Matrix3): Matrix3 => [m[0], m[3], m[6], m[1], m[4], m[7], m[2], m[5], m[8]];
 /** The most any point at least `nearestUnits` away can move on screen when the camera translates by `shift`. */
 const parallaxPixels = (focalPixels: number, shift: number, nearestUnits: number) =>
   nearestUnits > shift ? focalPixels * shift / (nearestUnits - shift) : Infinity;
@@ -79,84 +61,128 @@ export interface BatchedSpatialPointPart<T extends BatchedSpatialPoint> {
   /** The indices of the points not to draw now, or null: the dots of stars a body marker draws (catalogue-points.ts). The
    * same set is returned until it changes. */
   hidden?(): ReadonlySet<number> | null;
+  /** Parts with the same key paint into the same paths and share one group: a path is one color, size and alpha, so
+   * parts that never dim apart need no paths of their own. The Milky Way's main bank drew 3,356 dots through 685 paths,
+   * a copy of every paint for each of its five levels, where its dots use 389 paints (2026-10-03). Without a key a part
+   * has its own paths. */
+  paintGroup?: string | number;
 }
 
 export interface BatchedSpatialPointStats { visiblePoints: number; candidates: number; skippedCells: number; residentElements: number; publishMs: number }
 
-/** A field of one or more parts in one svg. The parts share a single layer, painted state and warp: a stacked bank's six
- * levels were six viewport-sized layers that the iPad re-rastered together on every drag frame of Mars (2026-09-30), and
- * one warp can move them only if they were all painted from the same camera. A part keeps its own points, counts, share
- * and palette, and its own group (`parts[i].group`) whose opacity dims it alone, as its own layer's opacity did. */
+/** A field of one or more parts in one group of a dot layer's svg (point-layer.ts). The parts share one painted state: a
+ * stacked bank's six levels were six viewport-sized layers that the iPad re-rastered together on every drag frame of Mars
+ * (2026-09-30), and one warp can move them only if they were all painted from the same camera. A part keeps its own
+ * points, counts, share and palette, and its own group (`parts[i].group`) whose opacity dims it alone, as its own
+ * layer's opacity did. The field joins the layer that ends where it mounts, or the slot its owner took there. */
 export function mountBatchedSpatialPoints<T extends BatchedSpatialPoint>(options: {
-  host: HTMLElement; before?: Element; frame: DensityVolumeFrame; className: string;
-  /** The clock repaints are paced by (MOTION_REPAINT_MS); tests pass their own. */
-  now?(): number;
+  host: HTMLElement | PointLayerSlot; before?: Element; frame: DensityVolumeFrame; className: string;
   /** Called after the exact repaint that follows a pause, so an owner that reads `stats()` (a screen budget) can settle
-   * on it: the counts of the paint before may be a paced frame's. */
+   * on it: the counts of the paint before may be a warped frame's. */
   onSettle?(): void;
   /** A disc that dims the dots behind it (OCCLUDED_FLOOR): a dot whose sight line from the camera crosses the disc
    * before reaching the dot is painted by a fainter path of its own color. */
   occluder?: BatchedSpatialPointOccluder;
+  /** Leave the parts' points unresolved at mount: the owner resolves them in slices (`fill`), and a part draws nothing
+   * until its last slice. Resolving a point (its place, its path, its cell) is a pass over every point of the bank:
+   * all of them in the frame the bank arrived in were one long frame of a zoom. */
+  deferFill?: boolean;
 } & ({ parts: readonly BatchedSpatialPointPart<T>[] } | BatchedSpatialPointPart<T>)) {
-  const { host, before, frame, className, now = () => performance.now(), onSettle, occluder } = options;
+  const { host, before, frame, className, onSettle, occluder, deferFill = false } = options;
   const inputs = 'parts' in options ? options.parts : [options];
   if (!inputs.length) throw new TypeError(`${className}: a point field needs a part.`);
-  const root = host.ownerDocument.createElement('div'); root.className = className; root.ariaHidden = 'true';
-  Object.assign(root.style,{position:'absolute',inset:'0',overflow:'hidden',pointerEvents:'none'});
-  const svg = mountPointPathSvg(root);
-  // The overscan paints past the svg's own box; the root clips it to the view. The dots are their own layer: a rewrite
-  // repaints them alone, not the viewport layer they would otherwise paint into (on M31 the viewport repainted about twice
-  // a frame, 2026-09-30), and a turn's warp moves that layer on the compositor.
-  Object.assign(svg.style, { overflow: 'visible', transformOrigin: '0 0', willChange: 'transform' });
-  if (before) host.insertBefore(root, before); else host.append(root);
+  // Mounted in an element, the field takes its own place in the dot layer there; in an owner's place, a group of its own.
+  const own = 'layer' in host ? null : pointLayerSlot(host, before), { layer, group: parent } = own ?? host as PointLayerSlot;
+  const root = own ? parent : parent.appendChild(layer.svg.ownerDocument.createElementNS('http://www.w3.org/2000/svg', 'g'));
+  root.setAttribute('class', className);
   // Everything about a part's point but where the camera sees it, resolved once: its position in one flat array, its path
   // (-1: not drawn) and its margin past the view's edge; its kept-share rank too: a fixed low-discrepancy value per point
   // spreads the kept share evenly and stably. The cells' points in ascending order, each cell a run of `order` from
   // cellStart to cellStart of the next: the prefix a frame draws ends a run early, and a point keeps its own index for its
   // rank. One cell holds everything without cells.
-  const parts = inputs.map(({ points, cells, stylePoint, drawnCount, paintPalette, keepFraction, hidden }) => {
-    // Behind an occluder a dot is painted by a fainter path of its color, one for each level: more paths, no more dots.
-    const dimmed = (style: BatchedSpatialPointStyle, factor: number) => pointPaint({ ...style, opacity: style.opacity * factor });
-    const drawnStyle = (point: T) => { const style = stylePoint(point); return style && style.opacity > 0 && style.radiusPx > 0 ? style : null; };
-    const paint = mountPointPaths(root, occluder ? [...paintPalette, ...OCCLUDED_OPACITIES.flatMap(factor =>
-      points.flatMap(point => { const style = drawnStyle(point); return style ? [dimmed(style, factor)] : []; }))] : paintPalette, svg);
+  // Behind an occluder a dot is painted by a fainter path of its color, one for each level: more paths, no more dots.
+  const dimmed = (style: BatchedSpatialPointStyle, factor: number) => pointPaint({ ...style, opacity: style.opacity * factor });
+  // One set of paths for each paint group, in the order the groups first appear, holding every paint its parts use.
+  const groupOf = inputs.map((input, index) => input.paintGroup === undefined ? `part ${index}` : `group ${input.paintGroup}`);
+  const paints = new Map([...new Set(groupOf)].map(group => [group, mountPointPaths(root, inputs.flatMap(({ points, stylePoint, paintPalette }, index) => {
+    if (groupOf[index] !== group) return [];
+    if (!occluder) return paintPalette;
+    // The fainter paints, built once for each style the points have and not once for each point: 39,916 galaxies share
+    // 123 styles, and five paints for each point were 58 ms of the frame their bank mounted in (iPad, 2026-10-03).
+    const drawn = new Set<BatchedSpatialPointStyle>();
+    for (const point of points) { const style = stylePoint(point); if (style && style.opacity > 0 && style.radiusPx > 0) drawn.add(style); }
+    return [...paintPalette, ...OCCLUDED_OPACITIES.flatMap(factor => [...drawn].map(style => dimmed(style, factor)))];
+  }))] as const));
+  const parts = inputs.map(({ points, cells, stylePoint, drawnCount, keepFraction, hidden }, partIndex) => {
+    const paint = paints.get(groupOf[partIndex]!)!;
     const positions = new Float64Array(points.length * 3), paths = new Int32Array(points.length), margins = new Float64Array(points.length);
     const occludedPaths = OCCLUDED_OPACITIES.map(() => new Int32Array(occluder ? points.length : 0));
     const ranks = new Float64Array(points.length);
-    points.forEach((point, index) => {
-      positions.set(point.positionUnits, index * 3);
-      ranks[index] = (index * 0.6180339887498949) % 1;
-      const style = stylePoint(point);
-      if (!style || !(style.opacity > 0) || !(style.radiusPx > 0)) { paths[index] = -1; return; }
-      paths[index] = paint.entry(pointPaint(style), Math.max(.5, style.radiusPx));
-      if (occluder) OCCLUDED_OPACITIES.forEach((factor, level) => { occludedPaths[level]![index] = paint.entry(dimmed(style, factor), Math.max(.5, style.radiusPx)); });
-      margins[index] = Math.max(2, style.radiusPx);
-    });
+    // A bank hands out one style object for each of its paints: its path is looked up once, not for each of its points
+    // (39,916 points share 123 paints in the nearby galaxies' bank).
+    const pathOf = new Map<BatchedSpatialPointStyle, number>(), occludedOf = OCCLUDED_OPACITIES.map(() => new Map<BatchedSpatialPointStyle, number>());
     const cellCount = cells ? cells.boxes.length / 6 : 1, cellStart = new Int32Array(cellCount + 1), order = new Int32Array(points.length);
     if (cells && cells.of.length !== points.length) throw new TypeError(`${className}: ${cells.of.length} cells for ${points.length} points.`);
-    for (let index = 0; index < points.length; index++) cellStart[(cells ? cells.of[index]! : 0) + 1]!++;
-    for (let cell = 0; cell < cellCount; cell++) cellStart[cell + 1]! += cellStart[cell]!;
-    { const next = cellStart.slice(0, cellCount); for (let index = 0; index < points.length; index++) order[next[cells ? cells.of[index]! : 0]!++] = index; }
-    // The widest margin a drawn point has: a cell is out of view when even its nearest corner is beyond it.
-    let widestMargin = 0;
-    for (let index = 0; index < points.length; index++) if (paths[index]! >= 0) widestMargin = Math.max(widestMargin, margins[index]!);
-    return { points, cells, drawnCount, keepFraction, hidden, paint, positions, paths, occludedPaths, margins, ranks, cellCount, cellStart, order,
-      boxes: cells?.boxes ?? new Float64Array(6), widestMargin, culled: new Int32Array(cellCount),
+    const part = { points, cells, drawnCount, keepFraction, hidden, paint, positions, paths, occludedPaths, margins, ranks, cellCount, cellStart, order,
+      boxes: cells?.boxes ?? new Float64Array(6), widestMargin: 0, culled: new Int32Array(cellCount), ready: false,
+      /** Resolve up to `limit` more of the part's points, in order; the last slice orders them by cell and readies the part.
+       * A whole number of them, and one or more: the pacer's budget is halved after a slow frame, and half a point left
+       * the next slice starting between two points, so the bank failed to load (2026-10-03). */
+      resolve(limit: number): number {
+        const from = resolved, end = Math.min(points.length, from + Math.max(1, Math.floor(limit)));
+        for (let index = from; index < end; index++) {
+          const point = points[index]!;
+          positions.set(point.positionUnits, index * 3);
+          ranks[index] = (index * 0.6180339887498949) % 1;
+          const style = stylePoint(point);
+          if (!style || !(style.opacity > 0) || !(style.radiusPx > 0)) { paths[index] = -1; continue; }
+          let path = pathOf.get(style);
+          if (path === undefined) pathOf.set(style, path = paint.entry(pointPaint(style), Math.max(.5, style.radiusPx)));
+          paths[index] = path;
+          if (occluder) OCCLUDED_OPACITIES.forEach((factor, level) => {
+            let dim = occludedOf[level]!.get(style);
+            if (dim === undefined) occludedOf[level]!.set(style, dim = paint.entry(dimmed(style, factor), Math.max(.5, style.radiusPx)));
+            occludedPaths[level]![index] = dim;
+          });
+          margins[index] = Math.max(2, style.radiusPx);
+        }
+        resolved = end;
+        if (resolved === points.length && !part.ready) {
+          for (let index = 0; index < points.length; index++) cellStart[(cells ? cells.of[index]! : 0) + 1]!++;
+          for (let cell = 0; cell < cellCount; cell++) cellStart[cell + 1]! += cellStart[cell]!;
+          { const next = cellStart.slice(0, cellCount); for (let index = 0; index < points.length; index++) order[next[cells ? cells.of[index]! : 0]!++] = index; }
+          // The widest margin a drawn point has: a cell is out of view when even its nearest corner is beyond it.
+          for (let index = 0; index < points.length; index++) if (paths[index]! >= 0) part.widestMargin = Math.max(part.widestMargin, margins[index]!);
+          part.ready = true;
+        }
+        return end - from;
+      },
       last: { visiblePoints: 0, candidates: 0, skippedCells: 0, residentElements: 0, publishMs: 0 } as BatchedSpatialPointStats };
+    let resolved = 0;
+    if (!deferFill) part.resolve(Infinity);
+    return part;
   });
-  const residentElements = 2 + parts.reduce((sum, part) => sum + part.paint.residentElements, 0);
+  const residentElements = 1 + [...paints.values()].reduce((sum, paint) => sum + paint.residentElements, 0);
   // The last full paint: the camera's position and everything else it depended on, how many points each part drew and
   // the nearest of them. A camera that only moved (a zoom, a pan around a planet) moves no point by a visible amount while
   // its translation is far below that nearest distance, so the paint is kept (parallaxPixels).
-  let painted: { at: number; position: readonly number[]; rest: readonly number[]; counts: readonly number[]; nearestUnits: number; keeps: readonly number[]; hiddens: readonly (ReadonlySet<number> | null)[];
-    axes: Matrix3; focal: number; cx: number; cy: number; width: number; height: number } | null = null, destroyed = false;
-  // While the camera turns, the last paint is moved by one warp (a compositor transform) instead of repainted; the exact
-  // paint follows once the publications pause.
-  let warp = '', latest: VolumeCameraPublication | null = null, settle: ReturnType<typeof setTimeout> | null = null;
-  // A paced frame (MOTION_REPAINT_MS) left the paint a frame behind the camera's travel: the next still publication
-  // repaints exactly instead of keeping it.
-  let behind = false;
-  const setWarp = (value: string) => { if (warp !== value) { svg.style.transform = value; warp = value; } };
+  let painted: { position: readonly number[]; rest: readonly number[]; counts: readonly number[]; nearestUnits: number; keeps: readonly number[]; hiddens: readonly (ReadonlySet<number> | null)[];
+    width: number; height: number; overscan: number } | null = null, destroyed = false, shown = false;
+  // While the camera turns, the layer moves its paints by one warp (a compositor transform) instead of repainting them;
+  // the exact paint follows once the publications pause.
+  // `owed`: the paint on screen is a warped one (or one kept while its counts changed), so the pause owes the exact paint.
+  let latest: VolumeCameraPublication | null = null, settle: ReturnType<typeof setTimeout> | null = null, settling = false, owed = false;
+  // The pause's exact paint: after a warp, and after a paint that left its margin out. Only the first can change what
+  // the view shows, so only it tells the owner. It repaints the layer's other fields too (`member.repaint`).
+  const settleAfterPause = () => {
+    if (settle !== null) clearTimeout(settle);
+    settle = setTimeout(() => {
+      settle = null;
+      if (!latest) return;
+      if (owed) { settling = true; try { publish(latest, true); } finally { settling = false; } onSettle?.(); }
+      else if (painted && painted.overscan < OVERSCAN) publish(latest, true);
+    }, SETTLE_MS);
+  };
   // A repaint the pacer runs for dots a zoom adds. The dots' paint is a paint exception of the motion contract
   // (docs/performance/motion-freezes-membership.md), so nothing holds it: the pacer only spaces it by the frame budget.
   let arriving = false;
@@ -169,7 +195,7 @@ export function mountBatchedSpatialPoints<T extends BatchedSpatialPoint>(options
   const total = (): BatchedSpatialPointStats => parts.reduce((sum, part) => ({ visiblePoints: sum.visiblePoints + part.last.visiblePoints,
     candidates: sum.candidates + part.last.candidates, skippedCells: sum.skippedCells + part.last.skippedCells, residentElements,
     publishMs: sum.publishMs + part.last.publishMs }), { visiblePoints: 0, candidates: 0, skippedCells: 0, residentElements, publishMs: 0 });
-  const publish = (publication: VolumeCameraPublication, exact = false) => {
+  const publish = (publication: VolumeCameraPublication, exact = false, forced: PointLayerRepaint | null = null) => {
     if (destroyed) return;
     const { world, viewport } = publication;
     latest = publication;
@@ -178,72 +204,59 @@ export function mountBatchedSpatialPoints<T extends BatchedSpatialPoint>(options
     const keeps = parts.map(part => part.keepFraction ? Math.max(0, Math.min(1, part.keepFraction())) : 1);
     const hiddens = parts.map(part => part.hidden ? part.hidden() : null);
     // The camera's turn and lens; the kept shares are part of the paint too (`same` below): a new share repaints at rest.
-    const rest=[...local.orientationXyzw,viewport.focalPixels,...viewport.principalOffsetPixels,viewport.widthPixels??0,viewport.heightPixels??0];
+    const rest = cameraRest(publication);
     const distanceUnits = Math.hypot(...local.positionUnits);
-    const counts = parts.map(part => part.drawnCount ? Math.max(0, Math.min(part.points.length, Math.round(part.drawnCount(distanceUnits, local.positionUnits)))) : part.points.length);
+    // A part whose points are not all resolved yet (deferFill) draws none of them.
+    const counts = parts.map(part => !part.ready ? 0 : part.drawnCount ? Math.max(0, Math.min(part.points.length, Math.round(part.drawnCount(distanceUnits, local.positionUnits)))) : part.points.length);
     const width = viewport.widthPixels ?? 0, height = viewport.heightPixels ?? 0;
-    const cx = width / 2 + viewport.principalOffsetPixels[0], cy = height / 2 + viewport.principalOffsetPixels[1];
+    let travelling = forced?.travelling ?? false;
     if (painted) {
       const shift = Math.hypot(...local.positionUnits.map((value, axis) => value - painted!.position[axis]!));
       const still = shift === 0 || parallaxPixels(viewport.focalPixels, shift, painted.nearestUnits) < MAX_PARALLAX_PIXELS;
       const same = counts.every((count, index) => count === painted!.counts[index]) && keeps.every((keep, index) => keep === painted!.keeps[index])
         && hiddens.every((hidden, index) => hidden === painted!.hiddens[index]);
-      const turned = !rest.every((value, i) => value === painted!.rest[i]);
-      if (still && same && !turned && !behind) { setWarp(''); return; }
+      const turned = !sameRest(rest, painted.rest);
+      // A paint the layer has moved on from (this field was hidden when the others repainted) is neither kept nor warped.
+      const held = !forced && layer.holds(painted.rest);
+      // A paint without its margin is kept like any other; only the pause's exact paint replaces it.
+      if (held && still && same && !turned && !(exact && painted.overscan < OVERSCAN)) { layer.unwarp(); owed = false; return; }
+      travelling ||= !still && !exact;
       // A turn or a zoom of the lens moves every far point by the same projective map of the screen. Warp the paint while
       // what it painted still covers the view. Dots a zoom adds (a longer prefix, a larger share) arrive at once, by a
       // repaint; dots it takes away wait for the pause, so a zoom warps while it only thins the view.
-      // A camera that only travels (a zoom, a pinch) and repainted less than MOTION_REPAINT_MS ago keeps its paint, a frame
-      // behind its travel. One that also turns repaints: the turn's warp is projective and would stretch the painted discs
-      // wherever it magnifies, which a turn of a travelling camera in 25 ms can make large.
-      const paced = !exact && !still && !turned && now() - painted.at < MOTION_REPAINT_MS;
-      if ((still || paced) && !exact && (turned || shift > 0) && painted.width === width && painted.height === height && width > 0 && height > 0) {
-        // Dots the zoom adds come through the pacer while the warp holds: a repaint as soon as the frame budget allows. A
-        // paced frame needs none: its next repaint, within MOTION_REPAINT_MS, draws them.
-        if (still && (counts.some((count, index) => count > painted!.counts[index]!) || keeps.some((keep, index) => keep > painted!.keeps[index]!))) { arriving = true; arrivals.request(true); }
-        const next = axesMatrix(r), turn = multiply(next, transpose(painted.axes));
-        const forward = multiply(project(viewport.focalPixels, cx, cy), multiply(turn, unproject(painted.focal, painted.cx, painted.cy)));
-        const back = multiply(project(painted.focal, painted.cx, painted.cy), multiply(transpose(turn), unproject(viewport.focalPixels, cx, cy)));
-        const source = (x: number, y: number) => { const w = back[6] * x + back[7] * y + back[8];
-          return [(back[0] * x + back[1] * y + back[2]) / w, (back[3] * x + back[4] * y + back[5]) / w, w] as const; };
-        // The warp moves discs as well as centres: where it magnifies, a painted dot grows. It holds only while every dot
-        // in the view keeps its size within MAX_WARP_STRETCH; a projective map's stretch is largest at the view's corners.
-        const covered = [[0, 0], [width, 0], [0, height], [width, height]].every(([x, y]) => {
-          const [px, py, w] = source(x!, y!);
-          if (!(w > 0)) return false;
-          const [ax, ay] = source(x! + 1, y!), [bx, by] = source(x!, y! + 1);
-          const stretch = [Math.hypot(ax - px, ay - py), Math.hypot(bx - px, by - py)];
-          if (stretch.some(value => !(value >= 1 / MAX_WARP_STRETCH && value <= MAX_WARP_STRETCH))) return false;
-          return px >= -OVERSCAN * width && px <= (1 + OVERSCAN) * width && py >= -OVERSCAN * height && py <= (1 + OVERSCAN) * height;
-        });
-        if (covered) {
-          if (paced) behind = true;
-          const f = (value: number) => Number(value.toPrecision(10));
-          setWarp(`matrix3d(${f(forward[0])},${f(forward[3])},0,${f(forward[6])},${f(forward[1])},${f(forward[4])},0,${f(forward[7])},0,0,1,0,${f(forward[2])},${f(forward[5])},0,${f(forward[8])})`);
-          if (settle !== null) clearTimeout(settle);
-          settle = setTimeout(() => { settle = null; if (latest && warp) { publish(latest, true); onSettle?.(); } }, SETTLE_MS);
-          return;
-        }
+      // A camera whose travel moves the dots (a zoom, a pinch at their scale) repaints every frame. Keeping the paint
+      // on alternate frames left the dots at half the display's rate and cost more: on the iPad a slow zoom at the nearby
+      // universe had 72 to 75 frames over 20 ms in 240 that way and 34 to 38 repainting each frame (2026-10-03).
+      if (held && still && !exact && (turned || shift > 0) && painted.width === width && painted.height === height && width > 0 && height > 0) {
+        // Dots the zoom adds come through the pacer while the warp holds: a repaint as soon as the frame budget allows.
+        if (counts.some((count, index) => count > painted!.counts[index]!) || keeps.some((keep, index) => keep > painted!.keeps[index]!)) { arriving = true; arrivals.request(true); }
+        if (layer.warpTo(publication)) { owed = true; settleAfterPause(); return; }
       }
     }
-    if (settle !== null) { clearTimeout(settle); settle = null; }
+    // No warp slides a travelling camera's paint (the next frame repaints), so it paints the view alone. On the iPad's
+    // slow zoom the margin was a third of the dots written; without it 690 frames had 19 to 24 over 20 ms at the nearby
+    // universe against 57 to 81, and 42 to 47 at the Milky Way against 105 to 121 (interleaved runs, 2026-10-03).
+    const overscan = travelling ? 0 : OVERSCAN;
+    owed = false;
+    if (travelling) settleAfterPause(); else if (settle !== null) { clearTimeout(settle); settle = null; }
     let nearestSquared = Infinity;
     const [px, py, pz] = local.positionUnits, focal = viewport.focalPixels, [ox, oy] = viewport.principalOffsetPixels;
     const halfWidth = (viewport.widthPixels ?? Infinity) / 2, halfHeight = (viewport.heightPixels ?? Infinity) / 2;
+    const paintedHalfWidth = halfWidth * (1 + 2 * overscan), paintedHalfHeight = halfHeight * (1 + 2 * overscan);
     const [r0, r1, r2, r3, r4, r5, r6, r7, r8] = r as unknown as [number, number, number, number, number, number, number, number, number];
     // The occluder's plane from the camera: a sight line `camera + t offset` crosses it at t = side / (normal · offset).
     const [onx, ony, onz] = occluder?.normal ?? [0, 0, 0], [ocx, ocy, ocz] = occluder?.centreUnits ?? [0, 0, 0];
     const side = onx * (ocx - px) + ony * (ocy - py) + onz * (ocz - pz), occluderRadius = occluder?.radiusUnits ?? 0;
+    for (const paint of paints.values()) paint.begin(viewport);
     parts.forEach((part, partIndex) => {
       const partStarted = performance.now();
       const { positions, paths, occludedPaths, margins, ranks, cellCount, cellStart, order, boxes, culled, paint, cells } = part;
       const count = counts[partIndex]!, keep = keeps[partIndex]!, hiddenSet = hiddens[partIndex]!;
       let visible = 0, candidates = 0;
-      paint.begin(viewport);
       // A cell is out of view when all of its box is behind the camera or beyond one edge of the painted view and its
       // margins (a plane through the camera for each edge). The test is on the box, so it never drops a point the point
       // test below would keep; a relative tolerance keeps rounding on the box's side.
-      const edgeX = halfWidth * (1 + 2 * OVERSCAN) + part.widestMargin, edgeY = halfHeight * (1 + 2 * OVERSCAN) + part.widestMargin;
+      const edgeX = paintedHalfWidth + part.widestMargin, edgeY = paintedHalfHeight + part.widestMargin;
       const sides = Number.isFinite(edgeX) && Number.isFinite(edgeY);
       // Each edge's plane n, with n · offset >= 0 on the view's side: sx <= edgeX is (edgeX - ox) depth - focal x >= 0, and
       // sx >= -edgeX is focal x + (edgeX + ox) depth >= 0, where depth = -(r2, r5, r8) · offset (likewise for y).
@@ -281,7 +294,7 @@ export function mountBatchedSpatialPoints<T extends BatchedSpatialPoint>(options
           if (depth <= 0) continue;
           const sx = focal * (r0 * x + r3 * y + r6 * z) / depth + ox, sy = focal * (r1 * x + r4 * y + r7 * z) / depth + oy;
           const margin = margins[index]!;
-          if (Math.abs(sx) > halfWidth * (1 + 2 * OVERSCAN) + margin || Math.abs(sy) > halfHeight * (1 + 2 * OVERSCAN) + margin) continue;
+          if (Math.abs(sx) > paintedHalfWidth + margin || Math.abs(sy) > paintedHalfHeight + margin) continue;
           // The share and the counts are of the view; the overscan only paints ahead of a turn.
           const inView = Math.abs(sx) <= halfWidth + margin && Math.abs(sy) <= halfHeight + margin;
           if (inView) candidates++;
@@ -315,20 +328,41 @@ export function mountBatchedSpatialPoints<T extends BatchedSpatialPoint>(options
           if (squared < nearestSquared) nearestSquared = squared;
         }
       }
-      paint.commit();
       part.last = { visiblePoints: visible, candidates, skippedCells: culledCount, residentElements, publishMs: performance.now() - partStarted };
     });
+    for (const paint of paints.values()) paint.commit();
     const nearestUnits = Math.sqrt(nearestSquared);
-    setWarp('');
     // Counts for probes and tests, kept here: a per-frame dataset write is a DOM write (motion-freezes-membership.md).
-    behind = false;
-    painted={at:now(),position:[...local.positionUnits],rest,counts,nearestUnits,keeps,hiddens,axes:axesMatrix(r),focal:viewport.focalPixels,cx,cy,width,height};
+    painted = { position: [...local.positionUnits], rest, counts, nearestUnits, keeps, hiddens, width, height, overscan };
+    layer.painted(member, publication, forced ?? { travelling, settled: settling });
   };
+  const member: PointLayerMember = {
+    shown: () => shown && !destroyed,
+    painted: () => painted,
+    repaint(publication, reason) {
+      if (reason.settled && settle !== null) { clearTimeout(settle); settle = null; }
+      publish(publication, reason.settled, reason);
+      if (reason.settled) onSettle?.();
+    },
+  };
+  const leave = layer.join(member);
   return Object.freeze({ root,
+    /** The layer's svg, which a warp moves; other fields may paint into it too. */
+    svg: layer.svg,
     /** Each part's group, whose opacity dims it, and its counts from the last paint. */
     parts: Object.freeze(parts.map(part => Object.freeze({ group: part.paint.part, stats: () => Object.freeze({ ...part.last }) }))),
-    publish: (publication: VolumeCameraPublication) => publish(publication),
+    publish: (publication: VolumeCameraPublication) => { shown = true; publish(publication); },
+    /** The owner hid these dots: until the next publication the layer's other fields do not repaint them. */
+    hide() { shown = false; },
+    /** Resolve up to `limit` more points of the parts still waiting (deferFill), in part order; 0 once every part is
+     * ready. A part that becomes ready draws on the next publication. */
+    fill(limit: number): number {
+      const whole = Math.max(1, Math.floor(limit));
+      let done = 0;
+      for (const part of parts) { if (part.ready) continue; done += part.resolve(whole - done); if (done >= whole) break; }
+      return done;
+    },
     /** The whole field's counts from the last paint. */
     stats: () => Object.freeze(total()),
-    destroy() { if (destroyed) return; destroyed = true; if (settle !== null) clearTimeout(settle); arrivals.destroy(); root.remove(); } });
+    destroy() { if (destroyed) return; destroyed = true; if (settle !== null) clearTimeout(settle); arrivals.destroy(); leave(); if (own) own.release(); else root.remove(); } });
 }

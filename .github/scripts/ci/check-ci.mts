@@ -1,3 +1,6 @@
+/** Local CI rebuilds dist. Execution shares a fail-fast checkout lock with pnpm typecheck;
+ * concurrent runs must wait, and nested typechecks inherit the owner token. --list needs no lock. */
+import { withCheckoutLock } from './checkout/lock.mts';
 import {readFile, mkdtemp, rm} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import {resolve, join} from 'node:path';
@@ -21,7 +24,7 @@ const LOCAL_EXPRESSION_SUBSTITUTIONS:Record<string,string>={
  '${{ needs.changes.outputs.test_packages }}':'all',
  '${{ needs.changes.outputs.test_files }}':'',
  "${{ (matrix.lane == 'packages' && needs.changes.outputs.test_packages == '' && needs.changes.outputs.test_files == '') || (matrix.lane == 'site' && needs.changes.outputs.test_site != 'true') }}":'false',
- '${{ steps.build-tools-cache.outputs.cache-hit }}':'false',
+ '${{ steps.build-preparation-cache.outputs.cache-hit }}':'false',
  '${{ steps.ci-cache-key.outputs.build_digest }}':'',
  '${{ steps.package-cache.outputs.cache-hit }}':'false',
  '${{ steps.ci-cache-key.outputs.package_digest }}':'',
@@ -146,7 +149,7 @@ export const SHARED_TYPECHECK_STEP:CiStep={
 /** CI jobs have separate disks; the local plan shares one checkout. Reuse only explicit common prerequisites,
  * never tests, audits, or a production build with a different environment. */
 export function reuseLocalPreparation(steps:readonly CiStep[]):CiStep[] {
- const reusable=new Set(['pnpm install --frozen-lockfile --ignore-scripts','pnpm build:tools','node .github/scripts/ci/build-ci.mts full','node .github/scripts/ci/ci-cache-key.mts','pnpm prepare:typecheck']);
+ const reusable=new Set(['pnpm install --frozen-lockfile --ignore-scripts','pnpm build:preparation','node .github/scripts/ci/build-ci.mts full','node .github/scripts/ci/ci-cache-key.mts','pnpm prepare:typecheck']);
  const seen=new Set<string>();
  return steps.filter(step=>{
   if(!reusable.has(step.run.trim()))return true;
@@ -215,6 +218,6 @@ if(process.argv[1]&&import.meta.url===pathToFileURL(resolve(process.argv[1])).hr
   if(major!==22)console.log(`NODE ${process.versions.node}: the CI runner uses Node 22; results may differ.`);
   if(args.includes('--quick'))console.log(`[ci] --quick skips: ${QUICK_SKIPPED_STEPS.join('; ')}.`);
   const temporary=await mkdtemp(join(tmpdir(),'cssearth-ci-'));
-  try{await runCiSteps(steps,root,temporary);}finally{await rm(temporary,{recursive:true,force:true});}
+  try{await withCheckoutLock(root,()=>runCiSteps(steps,root,temporary));}finally{await rm(temporary,{recursive:true,force:true});}
  }
 }

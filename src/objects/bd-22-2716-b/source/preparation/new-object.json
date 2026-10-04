@@ -2,6 +2,10 @@
   "id": "bd-22-2716-b",
   "name": "BD+22 2716B",
   "system": "WASP-14 system",
+  "boundTo": {
+    "host": "wasp-14",
+    "source": "El-Badry, Rix & Heintz (2021, MNRAS 506, 2269) list WASP-14 and BD+22 2716B in their Gaia EDR3 wide-binary catalogue (VizieR J/MNRAS/506/2269, source_id 1242084170974175232 and 1242084166679297920), 1,855 AU apart on the sky, with a chance-alignment probability of 2.4e-5: the pair is bound. No orbit of the pair is published, and the Gaia astrometry alone does not constrain one, so the star is placed by its own astrometry and carries no orbit."
+  },
   "description": "Star bound to WASP-14, 1,855 AU away.",
   "gaia": "1242084166679297920",
   "paper": {

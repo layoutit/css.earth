@@ -1,46 +1,58 @@
-import { APPLICATION_WORLD_CONTEXT, APPLICATION_WORLD_INDEX } from './world-context-plan.mts';
-import { systemHostId, systemObjectId } from '@cssearth/objects';
+import { readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
+import { APPLICATION_WORLD_INDEX, APPLICATION_WORLD_FILE_OF } from './world-context-plan.mts';
+import { OBJECTS } from './objects.mts';
 
-/** The build's reading of the bake's world index (`world-index.json`), in Node only: what each page, object entry and
- * world endpoint says of a body's holder. A page never reads the index. */
+/** The build's reading of the world's files, in Node only: what each page, object entry and world endpoint says of where a
+ * body's row is. Every world body is in the file of the object it is inside (`summarizeWorldContext` in @cssearth/bake);
+ * this reads the files and the object tree, and keeps no table of holders of its own. A page never reads these. */
 function index() {
-  if (!APPLICATION_WORLD_INDEX) throw new TypeError('The world index is the build\'s: only Node reads src/objects/sun/prepared/world-index.json.');
+  if (!APPLICATION_WORLD_INDEX) throw new TypeError('The world index is the build\'s: only Node reads src/objects/observable-universe/prepared/world-index.json.');
   return APPLICATION_WORLD_INDEX;
 }
-/** The rounding of a holder star's place in `/world/hosts.json`, in metres. */
-const APPROACH_ROUNDING_M = 1e12;
-let holders: ReadonlySet<string> | null = null;
-const holderIds = () => holders ??= new Set(Object.values(index().holders));
+const parents = new Map(OBJECTS.map(object => [object.id, object.parent] as const));
+const fileFlags = new Map<string, { readonly anywhere: boolean; readonly places: boolean }>();
+const flagsOf = (id: string) => {
+  let flags = fileFlags.get(id);
+  if (!flags) {
+    const file = JSON.parse(readFileSync(resolve(process.cwd(), `src/objects/${id}/prepared/members.json`), 'utf8')) as { anywhere?: unknown; places?: unknown };
+    fileFlags.set(id, flags = { anywhere: file.anywhere === true, places: file.places === true });
+  }
+  return flags;
+};
 
-/** Every holder that is a file (`world-systems/<id>.json`), in id order: each star something orbits, and the asteroid dot
- * bank. A star that is its own holder of one body has its row in the index and no file. */
-export function worldHolderFiles(): readonly string[] {
-  return [...holderIds()].filter(id => !Object.hasOwn(index().rows, id)).sort();
+/** Every object with a file of world bodies (its own package's `prepared/members.json`), from the root of the tree down. */
+export const worldFiles = (): readonly string[] => index().files;
+/** Every object whose children's files are read on approach (its own package's `prepared/places.json`). */
+export const worldPlaceFiles = (): readonly string[] => worldFiles().filter(id => flagsOf(id).places);
+
+/** The files object `id` needs, root first: its own and those of the objects it is inside (an object's file has its
+ * children; a system's has what orbits its host, Earth's system the Moon), with the file its own row is in. */
+function chainFiles(id: string): readonly string[] {
+  const chain = new Set<string>();
+  for (let at: string | undefined = id; at !== undefined; at = parents.get(at)) chain.add(at);
+  const file = APPLICATION_WORLD_FILE_OF.get(id);
+  if (file !== undefined) chain.add(file);
+  return worldFiles().filter(entry => chain.has(entry));
 }
-/** Where the world keeps `id`: its holder, with its own row when it is a star that is its own holder of one body. Null
- * for a body the summary holds with everything that orbits it, and for an object that is no world body. */
-export function worldPlaceOf(id: string): { readonly holder: string; readonly row?: unknown } | null {
-  // A body outside the summary names its holder; a star the summary holds, with planets, names its system's.
-  const holder = index().holders[id] ?? (holderIds().has(systemObjectId(id)) ? systemObjectId(id) : holderIds().has(id) ? id : undefined);
-  if (holder === undefined) return null;
-  return Object.hasOwn(index().rows, holder) ? { holder, row: index().rows[holder] } : { holder };
+
+/** Where the world keeps body `id`: the files to read for it, root first, and its own row when it is a plain-dot star with
+ * nothing round it (its object entry carries it). Null for an object that is no world body. */
+export function worldPlaceOf(id: string): { readonly files: readonly string[]; readonly row?: unknown } | null {
+  if (Object.hasOwn(index().rows, id)) return { files: chainFiles(id), row: index().rows[id] };
+  return APPLICATION_WORLD_FILE_OF.has(id) ? { files: chainFiles(id) } : null;
 }
-/** Each holder file's star, where it is and the range its orbits are authored to when it has one
- * (`pages/world/hosts.json.ts`), as columns: what the camera's approach is measured against (world-approach.mts). */
-export function worldHolderReaches() {
-  const bodies = new Map(APPLICATION_WORLD_CONTEXT.bodies.map(body => [body.id, body]));
-  // A holder that is no body of the world (a dot bank's object) is never approached: its bodies are its dots until one is
-  // opened or their category is highlighted.
-  const rows = worldHolderFiles().flatMap(id => {
-    // A system's holder is approached at its star.
-    const body = bodies.get(systemHostId(id) ?? id);
-    // To the nearest 1e12 m: an approach is measured against a system's fade distance, 1e16 m or more.
-    return body ? [{ id, positionM: body.positionM.map(value => Math.round(value / APPROACH_ROUNDING_M) * APPROACH_ROUNDING_M), orbitsWithinM: body.orbitsWithinM ?? null }] : [];
-  });
-  return { id: rows.map(row => row.id), positionM: rows.map(row => row.positionM), orbitsWithinM: rows.map(row => row.orbitsWithinM) };
+
+/** Every file whose bodies the map draws from anywhere (or that has places), root first: every page reads them at startup,
+ * together in one response (`pages/world/anywhere.json.ts`). */
+export const worldAnywhereFiles = (): readonly string[] => worldFiles().filter(file => flagsOf(file).anywhere);
+/** The other files page `id` reads at startup, root first: its own object's and those of the objects it is inside. */
+export function worldStartupFiles(id: string): readonly string[] {
+  return chainFiles(id).filter(file => !flagsOf(file).anywhere);
 }
-/** The holder files that have bodies of `ids` (a category's marked members): read when that category is highlighted. */
-export function worldHolderFilesOf(ids: Iterable<string>): readonly string[] {
-  const files = new Set(worldHolderFiles());
-  return [...new Set([...ids].flatMap(id => { const holder = index().holders[id]; return holder !== undefined && files.has(holder) ? [holder] : []; }))].sort();
+
+/** The files a page does not read at startup that have bodies of `ids` (a category's marked members): read when that
+ * category is highlighted. */
+export function worldFilesOf(ids: Iterable<string>): readonly string[] {
+  return [...new Set([...ids].flatMap(id => { const file = APPLICATION_WORLD_FILE_OF.get(id); return file === undefined || flagsOf(file).anywhere ? [] : [file]; }))].sort();
 }

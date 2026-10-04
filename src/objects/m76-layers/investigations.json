@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "m76-layers",
+  "entries": [
+    {
+      "id": "heic2408a",
+      "subject": "ESA/Hubble heic2408a",
+      "status": "included",
+      "finding": "Little Dumbbell Nebula (M76): g 475, [O III] 502, H-alpha 656, [N II] 658 and I 814 nm; 4000 × 2524 px over 5.01 × 3.16 arcmin. The file's embedded sky tags, used as they are: 0.0751 arcsec per pixel, north 19.1° right of vertical, the frame's centre at 25.5822739°, 51.5752397°. Not measured against Gaia here.",
+      "evidence": [
+        "https://esahubble.org/images/heic2408a/",
+        "https://esahubble.org/copyright/"
+      ]
+    },
+    {
+      "id": "volume",
+      "subject": "The shape of the Little Dumbbell Nebula",
+      "status": "deferred",
+      "finding": "The picture is flat. Depth needs the nebula's shape as a paper gives it, which is how the Ring and the Owl took theirs. A search of arXiv on 2026-10-03 found no paper that prints the Little Dumbbell's three-dimensional shape; the kinematic studies of its ring and lobes (Bryce et al. 1996) predate arXiv and were not read.",
+      "evidence": [
+        "https://arxiv.org/abs/1308.2477"
+      ],
+      "revisitWhen": "A kinematic paper with the ring's tilt and the lobes' size is read."
+    },
+    {
+      "id": "star-removal",
+      "subject": "Stars in the picture",
+      "status": "included",
+      "finding": "The photograph first kept its stars, which stood on the nebula's plane whatever their own distances. The Nebula Lab's NOX removes them and keeps the nebula's structure. One pass left the saturated stars, tens of pixels wide; a second pass over a quarter-size copy takes them, and the picture takes that pass's result only where it took a star.",
+      "evidence": [
+        "https://github.com/charvey2718/nox"
+      ]
+    }
+  ]
+}

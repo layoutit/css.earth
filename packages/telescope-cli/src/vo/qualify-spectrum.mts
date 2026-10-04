@@ -2,7 +2,7 @@ import { dirname, resolve } from 'node:path';
 import { readFile, writeFile } from 'node:fs/promises';
 import { readFitsHdus } from '@cssearth/bake/objects/raster';
 import { fileSize, writeProductRecord } from '@cssearth/telescope/node';
-import type { ProductRun, ProductRecord } from '@cssearth/telescope';
+import type { ProductRun, ProductRecord } from '@cssearth/objects';
 import { describeEsoSpectrum, readEsoSpectrum } from '../families/f03-eso-spectrum.mts';
 import { rememberQualification, type QualifiedObservation } from '../qualified-observations.mts';
 import { VERSION } from '../help.mts';

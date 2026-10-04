@@ -1,12 +1,12 @@
 {
   "schema": "cssearth-object@2",
   "id": "wasp-43-system",
+  "parent": "milky-way",
   "type": "system",
   "generator": "site/build/prepare/system-packages.mts",
   "properties": {
     "system": {
-      "host": "wasp-43",
-      "members": "planets"
+      "host": "wasp-43"
     },
     "catalog": {
       "name": "Gnomon system",

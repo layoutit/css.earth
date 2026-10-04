@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "alpha-centauri-a-system",
+  "parent": "milky-way",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "alpha-centauri-a"
+    },
+    "catalog": {
+      "name": "Alpha Centauri system",
+      "systemName": "Alpha Centauri system",
+      "classification": "star-system",
+      "color": "#fff5f4",
+      "distanceAu": 275979,
+      "description": "Alpha Centauri A, Alpha Centauri B and Proxima Centauri are three stars bound to each other by gravity."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -15449447209401668,
+        -12893074769883156,
+        -36050059578623864
+      ],
+      "presentationToReference": [
+        -0.3741655541792754,
+        0.6698772053567211,
+        -0.641299203031771,
+        -0.3122534644673507,
+        0.5601451726291915,
+        0.7672907920132692,
+        -0.8732112642389883,
+        -0.4873416823171216,
+        0.0004155507973042531
+      ],
+      "orbitUpReference": [
+        -0.6698772053567211,
+        -0.5601451726291915,
+        0.4873416823171216
+      ],
+      "metersPerUnit": 2745545.1612903224,
+      "bodyRadiusM": 851119000
+    }
+  }
+}

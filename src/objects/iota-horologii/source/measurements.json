@@ -12,5 +12,7 @@
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 spectrum (photometry/stellar-color.json), because no image of the photosphere exists (see investigations.json)."
-  }
+  },
+  "surfaceGravityLogg": 4.4,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/iota-horologii.json: 4.399"
 }

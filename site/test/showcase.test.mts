@@ -1,12 +1,12 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { parseHTML } from 'linkedom';
-import { createShowcaseController, SHOWCASE_OBJECT_IDS } from '../showcase.mts';
-import { requireSceneObject } from '../objects.mts';
+import { createShowcaseController, SHOWCASE_EXTENDED_TURN_DEGREES, SHOWCASE_OBJECT_IDS, SHOWCASE_TURN_DEGREES } from '../showcase.mts';
+import { requireObject } from '../objects.mts';
 import type { BrowserWindow } from '../browser/browser-types.mts';
 import type { NavigationIntent } from '../navigation/navigation-request.mts';
 
-const markup = '<html><body><header><button class="object-showcase-action" type="button" aria-pressed="false"><span>Showcase</span></button></header><main></main></body></html>';
+const markup = '<html><body><header><button class="object-showcase-action" type="button" aria-pressed="false"><span>Slideshow</span></button></header><main></main></body></html>';
 const wait = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 type Flight = { id: string; intent: NavigationIntent };
 
@@ -23,7 +23,7 @@ function mount(ids: readonly string[], land: (flight: Flight) => Promise<boolean
 
 test('every showcase destination is a registered scene object, listed once', () => {
   assert.equal(new Set(SHOWCASE_OBJECT_IDS).size, SHOWCASE_OBJECT_IDS.length);
-  for (const id of SHOWCASE_OBJECT_IDS) requireSceneObject(id);
+  for (const id of SHOWCASE_OBJECT_IDS) requireObject(id);
 });
 
 test('the pill tours the showcase at random, never the shown body, with one history entry that later hops replace', async () => {
@@ -84,4 +84,37 @@ test('a flight that does not land ends the tour, and a hop stopped in flight sch
   assert.equal(stopped.flights.length, 1, 'the landing of a stopped tour flies no further');
   assert.equal(stopped.controller.playing, false);
   stopped.controller.destroy();
+});
+
+test('each landing turns the camera around the body for its stay, and ending the tour aborts the turn', async () => {
+  const { document, window } = parseHTML(markup);
+  const turns: { degrees: number; durationMilliseconds: number; signal: AbortSignal }[] = [];
+  let objectId = 'earth';
+  const controller = createShowcaseController({ documentTarget: document, windowTarget: window as unknown as BrowserWindow,
+    navigate: async id => { objectId = id; return true; }, readObjectId: () => objectId, ids: ['earth', 'mars', 'moon'], dwellMs: 20,
+    turn: options => { turns.push(options); }, onError: error => { throw error; } });
+  controller.start();
+  await wait(2);
+  assert.equal(turns.length, 1, 'the first landing turns once');
+  assert.deepEqual({ degrees: turns[0]!.degrees, durationMilliseconds: turns[0]!.durationMilliseconds }, { degrees: SHOWCASE_TURN_DEGREES, durationMilliseconds: 20 });
+  assert.equal(turns[0]!.signal.aborted, false);
+  document.querySelector('main')!.dispatchEvent(new window.Event('pointerdown', { bubbles: true }));
+  assert.equal(turns[0]!.signal.aborted, true, 'a takeover stops the turn');
+  await wait(30);
+  assert.equal(turns.length, 1, 'a stopped tour turns no further');
+  controller.destroy();
+});
+
+test('a galaxy or a nebula is turned around only a little', async () => {
+  const { document, window } = parseHTML(markup);
+  const turns: [string, number][] = [];
+  let objectId = 'earth';
+  const controller = createShowcaseController({ documentTarget: document, windowTarget: window as unknown as BrowserWindow,
+    navigate: async id => { objectId = id; return true; }, readObjectId: () => objectId, ids: ['earth', 'mars', 'm31'], dwellMs: 1,
+    isExtended: id => id === 'm31', turn: ({ degrees }) => { turns.push([objectId, degrees]); }, onError: error => { throw error; } });
+  controller.start();
+  while (turns.length < 4) await wait(2);
+  controller.destroy();
+  for (const [id, degrees] of turns) assert.equal(degrees, id === 'm31' ? SHOWCASE_EXTENDED_TURN_DEGREES : SHOWCASE_TURN_DEGREES, id);
+  assert.ok(turns.some(([id]) => id === 'm31'));
 });

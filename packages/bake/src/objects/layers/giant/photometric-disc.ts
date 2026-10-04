@@ -2,7 +2,8 @@ import {parse} from '@cssearth/core/schema';
 import {photometricRecipe, type PhotometricRecipe} from './photometric-contract.ts';
 import type {MaterialAsset} from './material-contract.ts';
 import type {OverlayOptions} from 'sharp';
-import {loadLimbLaw,limbFactors,limbOverlay,meanObservedColor,outsideSilhouette,parseLimbBlock,scatteringAngles,type Channels,type LimbLaw} from '../../../photometry/index.ts';
+import { loadLimbLaw, limbFactors, limbOverlay, meanObservedColor, outsideSilhouette, scatteringAngles, type Channels, type LimbLaw } from '../../../photometry/index.ts';
+import { parseLimbBlock } from '@cssearth/objects';
 /** A recipe with its published models loaded and the overlay's reference color measured from the color map. */
 export type ResolvedPhotometricRecipe = PhotometricRecipe & {law: LimbLaw; reference: Channels<number>};
 import {mkdir,writeFile} from 'node:fs/promises';

@@ -9,7 +9,7 @@ import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
-import { parseProductRecord } from '@cssearth/telescope';
+import { parseProductRecord } from '@cssearth/objects';
 import { WORKSPACE } from '@cssearth/telescope/node';
 import { archivePrograms } from '../programs.mts';
 

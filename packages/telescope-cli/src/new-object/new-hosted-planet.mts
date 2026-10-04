@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { RASTER_RECIPE_SCHEMA } from '@cssearth/objects';
 /** Scaffold a planet of another star from its astronomy record, instead of cloning another planet by find-and-replace.
  *
  *   node packages/telescope-cli/src/new-object/new-hosted-planet.mts <id> --name <display name> --system <system name>
@@ -14,7 +15,7 @@
  * shared neutral gray, lit by its own star: no color of these planets is measured. Prose the scaffold cannot know
  * (reader text, README, credits, ledger) carries the marker TODO(new-hosted-planet).
  * Then run: node packages/bake/cli/prepare-object.mts <id> */
-import { OBJECT_CONTENT_SCHEMA, OBJECT_CONTENT_VERSION, AUTHORED_OBJECT_SCHEMA, OBJECT_SCHEMA, SOURCE_MANIFEST_SCHEMA, NEUTRAL_CATALOGUE_COLOR, PREPARED_CSS_OBJECT_FORMAT, OBJECT_TEXT_SCHEMA, DISPLAY_ORIENTATION_SCHEMA, SYNCHRONOUS_ROTATION_SCHEMA, SOLAR_SYSTEM_PREPARATION_SCHEMA, INVESTIGATION_LEDGER_SCHEMA, ACQUISITION_PLAN_SCHEMA, CSS_PRESENTATION_PROFILE_SCHEMA, CSS_GEOMETRY_PROFILE_SCHEMA, NAVIGATION_MARKER_SCHEMA } from '@cssearth/objects';
+import { OBJECT_CONTENT_SCHEMA, OBJECT_CONTENT_VERSION, AUTHORED_OBJECT_SCHEMA, OBJECT_SCHEMA, SOURCE_MANIFEST_SCHEMA, NEUTRAL_CATALOGUE_COLOR, PREPARED_CSS_OBJECT_FORMAT, OBJECT_TEXT_SCHEMA, DISPLAY_ORIENTATION_SCHEMA, SYNCHRONOUS_ROTATION_SCHEMA, SOLAR_SYSTEM_PREPARATION_SCHEMA, INVESTIGATION_LEDGER_SCHEMA, ACQUISITION_PLAN_SCHEMA, CSS_PRESENTATION_PROFILE_SCHEMA, CSS_GEOMETRY_PROFILE_SCHEMA, NAVIGATION_MARKER_SCHEMA, systemObjectId } from '@cssearth/objects';
 
 import { mkdir, readFile, stat, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
@@ -48,6 +49,9 @@ export interface HostedPlanetScaffold {
   readonly selfLuminous?: { readonly temperatureK: number; readonly source: string };
 }
 
+/** The object a hosted body is inside: the system of the body its orbit record names (`physical.parent`). */
+export const hostedParent = systemObjectId;
+
 /** Every file of a new shape-only planet of another star, keyed by repository path. Pure: the caller writes them. */
 export function scaffoldHostedPlanetFiles(spec: HostedPlanetScaffold, bodyRecord: unknown, hostRecord: unknown, epochJdTt: number): Map<string, string> {
   if (!/^[a-z][a-z0-9-]*$/u.test(spec.id)) throw new TypeError('A planet needs a lowercase id.');
@@ -79,7 +83,7 @@ export function scaffoldHostedPlanetFiles(spec: HostedPlanetScaffold, bodyRecord
   const glow = spec.selfLuminous, material = glow ? 'emission' : 'lighting';
   if (glow && !(glow.temperatureK > 0)) throw new TypeError(`${spec.id}: a self-luminous planet needs a positive effective temperature, not ${glow.temperatureK}.`);
 
-  put(`${o}/object.json`, { schema: OBJECT_SCHEMA, id, type: 'layered-body', properties: {
+  put(`${o}/object.json`, { schema: OBJECT_SCHEMA, id, parent: hostedParent(hostId), type: 'layered-body', properties: {
     preparation: { schema: 'cssearth-object-preparation@1', label: name,
       steps: ['verify-sources', 'assets', 'panel-content', 'datasets', 'starfield', ...(glow ? [] : ['sky-sun']), 'system-markers', 'scene', 'controls', 'presentation', 'runtime-assets'] },
     recipe: { schema: AUTHORED_OBJECT_SCHEMA,
@@ -97,7 +101,7 @@ export function scaffoldHostedPlanetFiles(spec: HostedPlanetScaffold, bodyRecord
     prepared: { format: PREPARED_CSS_OBJECT_FORMAT, url: 'prepared/object.json' } });
 
   if (glow) put(`src/renderers/css/styles/${id}-surfaces.css`, starStylesheet(id, name, 600, 'Both plates are transparent: no observation is cast.'));
-  put(`${o}/source/preparation/raster.json`, { schema: 'cssearth-raster-recipe@2', publicBase: `/scenes/${id}/`, sourceWidth: 1024, sourceHeight: 512, width: 1024, height: 512,
+  put(`${o}/source/preparation/raster.json`, { schema: RASTER_RECIPE_SCHEMA, publicBase: `/scenes/${id}/`, sourceWidth: 1024, sourceHeight: 512, width: 1024, height: 512,
     latitudeBands: 16, polarTile: 256, resample: 'density-before-pack', polarProjection: 'orthographic-bilinear',
     polesOutput: `${id}-poles-{id}{suffix}.webp`, surfaceMetadata: { schema: `css${id}-prepared-assets@1` }, thumbnail: { size: 64, centerLongitudeDegrees: 0 },
     surfaces: [{ id: 'shape', output: `${id}-surface-{id}{suffix}.webp`, thumbnail: `${id}-dataset-{id}.webp`, source: 'measurements.json', falseColor: false,

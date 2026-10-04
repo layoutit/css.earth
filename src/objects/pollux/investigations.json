@@ -1,0 +1,46 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "pollux",
+  "entries": [
+    {
+      "id": "placement",
+      "subject": "Placement",
+      "status": "included",
+      "finding": "Anderson & Francis (2012), Astronomy Letters 38, 331 (XHIP), Hipparcos astrometry, VizieR V/137D/XHIP row HIP = 37826: position at J1991.25; Gaia cannot see the star. Distance: Baines et al. (2018), AJ 155, 30, HD 62509: the Hipparcos (van Leeuwen 2007) parallax the radius was computed with (Table 1), 96.54 +/- 0.27 mas, inverted (https://doi.org/10.3847/1538-3881/aa9d8b): 10.358 +/- 0.029 pc; Gaia DR3 cannot see the star. Proper motion: VizieR V/137D/XHIP row HIP = 37826 (same row): -626.55, -45.8 mas/yr. Radial velocity from Anderson & Francis (2012), Astronomy Letters 38, 331, XHIP, HIP 37826: RV 3.23 +/- 0.02 km/s (quality A).",
+      "evidence": [
+        "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=V/137D/XHIP",
+        "https://doi.org/10.3847/1538-3881/aa9d8b",
+        "https://doi.org/10.1134/S1063773712050015"
+      ]
+    },
+    {
+      "id": "radius-mass-and-temperature",
+      "subject": "Radius, mass and temperature",
+      "status": "included",
+      "finding": "Radius 9.06 +/- 0.03 solar radii from Baines et al. (2018), AJ 155, 30, HD 62509: radius 9.06 +/- 0.03 solar radii (Table 5), from the limb-darkened angular diameter 8.134 +/- 0.013 mas (NPOI, Table 4) and the Hipparcos (van Leeuwen 2007) parallax (https://doi.org/10.3847/1538-3881/aa9d8b). Mass 1.91 +/- 0.09 solar masses from Hatzes et al. (2012), A&A 543, A98, abstract: M = 1.91 +/- 0.09 solar masses from the p-mode frequency spacing (7.14 +/- 0.12 microHz) and the interferometric radius (https://doi.org/10.1051/0004-6361/201219332). Temperature 4586 +/- 57 K from Baines et al. (2018), AJ 155, 30, HD 62509: effective temperature 4586 +/- 57 K (Table 5), from the angular diameter and the bolometric flux of the SED fit.",
+      "evidence": [
+        "https://doi.org/10.3847/1538-3881/aa9d8b",
+        "https://doi.org/10.1051/0004-6361/201219332"
+      ]
+    },
+    {
+      "id": "color",
+      "subject": "Color",
+      "status": "included",
+      "finding": "Pulkovo spectrophotometric catalogue, table 5 (320-1080 nm, 2.5 nm steps, 10 nm resolution, absolute flux in W m^-2 m^-1): Alekseeva et al. (1996, 1997), Baltic Astronomy 5, 603 and 6, 481; VizieR III/201. Pollux is HR 2990., cross-checked against Kharitonov, Tereshchenko & Knyazeva (1988), Spectrophotometric Catalogue of Stars (Alma-Ata), record 488: HR 2990; VizieR III/202 (6 levels apart at most, the threshold is 12), through the CIE 1931 2-degree observer: #ffe4c3. Routes tried in order: stis-ngsl: HD 62509 is not in the library; gaia-xp: the star is placed by a catalogue row, so no Gaia DR3 source is read for it; kiehling: HR 2990 is not among its 60 stars; burnashev: found, not needed after the color and its cross-check; pulkovo: used.",
+      "evidence": [
+        "https://cdsarc.cds.unistra.fr/ftp/III/201/table5.dat",
+        "https://cdsarc.cds.unistra.fr/ftp/III/202/catalog.dat"
+      ]
+    },
+    {
+      "id": "limb-darkening",
+      "subject": "Limb darkening",
+      "status": "included",
+      "finding": "The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 4,586 K and log g 2.8 (u1 0.756, u2 0.049): a model, because no fit of this star's limb is used.",
+      "evidence": [
+        "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=J/A+A/529/A75"
+      ]
+    }
+  ]
+}

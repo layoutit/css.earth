@@ -1,12 +1,12 @@
 {
   "schema": "cssearth-object@2",
   "id": "hd-152843-system",
+  "parent": "milky-way",
   "type": "system",
   "generator": "site/build/prepare/system-packages.mts",
   "properties": {
     "system": {
-      "host": "hd-152843",
-      "members": "planets"
+      "host": "hd-152843"
     },
     "catalog": {
       "name": "HD 152843 system",

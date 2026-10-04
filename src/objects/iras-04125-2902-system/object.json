@@ -1,12 +1,12 @@
 {
   "schema": "cssearth-object@2",
   "id": "iras-04125-2902-system",
+  "parent": "milky-way",
   "type": "system",
   "generator": "site/build/prepare/system-packages.mts",
   "properties": {
     "system": {
-      "host": "iras-04125-2902",
-      "members": "planets"
+      "host": "iras-04125-2902"
     },
     "catalog": {
       "name": "IRAS 04125+2902 system",

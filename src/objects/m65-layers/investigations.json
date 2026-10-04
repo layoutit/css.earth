@@ -1,0 +1,44 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "m65-layers",
+  "entries": [
+    {
+      "id": "sdss-color",
+      "subject": "SDSS DR9 color HiPS",
+      "status": "included",
+      "finding": "A 3000 x 3000 px hips2fits cutout of CDS/P/SDSS9/color, 12.24 arcmin wide, 1.6 times NGC 3623's D25 diameter. Its sky level is (9, 8, 6) of 255.",
+      "evidence": [
+        "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record",
+        "https://www.sdss.org/collaboration/#image-use"
+      ]
+    },
+    {
+      "id": "observatory-photographs",
+      "subject": "Observatory photographs of M65",
+      "status": "deferred",
+      "finding": "Not surveyed: the Messier galaxies of this batch share one survey so that they match. An observatory photograph with sky coordinates would show more detail.",
+      "evidence": [
+        "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record"
+      ],
+      "revisitWhen": "A whole-galaxy photograph with sky coordinates is published under an attribution licence."
+    },
+    {
+      "id": "star-removal",
+      "subject": "Stars in the picture",
+      "status": "included",
+      "finding": "The picture was first cleaned only by the bake's pass over the Gaia foreground stars, which leaves the brightest stars, the faint ones Gaia cannot certify and those it reads as extended. The Nebula Lab's NOX removes them all and keeps the galaxy's arms and dust lanes; it also takes the galaxy's own compact knots and clusters, most visibly in M51, which was looked at and accepted on 2026-10-03; 8 of the 8 Gaia stars brighter than G 14 in the picture had a glow, filled out to at most 156 px (38″). The lab's isophote fill, made for ellipticals, left a dark notch on a spiral, so the glow is filled from the ring around it.",
+      "evidence": [
+        "https://github.com/charvey2718/nox"
+      ]
+    },
+    {
+      "id": "bulge",
+      "subject": "Bulge",
+      "status": "included",
+      "finding": "Salo et al. (2015), S4G Pipeline 4, table 7, NGC3623, model _bd: a Sérsic bulge (26.0% of the light, magnitude 10.03, half-light radius 29.59″ = 1.83 kpc, n = 2.172, axis ratio 0.697, PA 139.87°) and an exponential disc (74.1% of the light, scale length 65.19″ = 4.02 kpc, axis ratio 0.281, PA 173.99°, face-on central surface brightness 19.960, 18.582 as projected on the sky). Used as published; the half-light surface brightness the bake needs, 20.067 mag per square arcsecond, follows from the bulge's magnitude, radius, index and axis ratio. The picture faces the Sun, so the spheroid takes the galaxy's own disc: HyperLEDA, NGC 3623 = PGC 34612: inclination 90°, position angle 173.33°. At that tilt the bulge's axis ratio is one an oblate spheroid in the disc plane can show (intrinsic 0.70).",
+      "evidence": [
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/219/4"
+      ]
+    }
+  ]
+}

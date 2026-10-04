@@ -1,0 +1,23 @@
+{
+  "schema": "cssearth-inventory@1",
+  "assets": [
+    {
+      "location": "prepared",
+      "filename": "members.json",
+      "bytes": 1094,
+      "sha256": "0e161fca7686f65417ba865e7095f3a746d8591f7b60ee9768f4dcc30575b854"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/toi-3082b.bin",
+      "bytes": 1951,
+      "sha256": "2343fcce054ed74f08acfb0e5344323b9d055916c8fed44cb5e0d5ef40c6642d"
+    },
+    {
+      "location": "prepared",
+      "filename": "views/toi-3082.json",
+      "bytes": 30487,
+      "sha256": "ff7afc9a57e169c000d8fe1107ad2584e0d2985be2a45a45b5706c9365a7e24e"
+    }
+  ]
+}

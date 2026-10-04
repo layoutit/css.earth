@@ -1,0 +1,60 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "m39",
+  "card": {
+    "text": "M39 is an open star cluster in the Milky Way, about 296 parsecs away.",
+    "sources": [
+      {
+        "catalogueId": "hunt-reffert-2023-open-clusters",
+        "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114",
+        "label": "Hunt & Reffert (2023), Improving the open cluster census. II. An all-sky cluster catalogue with Gaia DR3, A&A 673, A114; CDS J/A+A/673/A114, Table 3 (clusters), Theia_517: dist50, the median of the maximum-likelihood distance, 295.86999699 pc (16th to 84th percentile 296 to 296)",
+        "checked": "2026-10-02",
+        "locator": "Theia_517: dist50 295.9 pc"
+      },
+      {
+        "catalogueId": "wikipedia-messier-39",
+        "url": "https://en.wikipedia.org/wiki/Messier_39",
+        "label": "Wikipedia, \"Messier 39\"",
+        "checked": "2026-10-02",
+        "locator": "Lead section, revision 1373100774",
+        "quote": "Messier 39 or M39, also known as NGC 7092, is an open cluster of stars in the constellation of Cygnus, sometimes referred to as the Pyramid Cluster."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "M39 is drawn as 284 of its member stars, measured by Gaia; each dot sits at its sky position, at the cluster's distance.",
+    "sources": [
+      {
+        "catalogueId": "hunt-reffert-2023-open-clusters",
+        "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114",
+        "label": "Hunt & Reffert (2023), A&A 673, A114; CDS J/A+A/673/A114, Table members, Theia_517: members inside the tidal radius (inrt) with a Gaia DR3 color",
+        "checked": "2026-10-02",
+        "locator": "Theia_517: 284 members inside the tidal radius with a color"
+      },
+      {
+        "catalogueId": "wikipedia-messier-39",
+        "url": "https://en.wikipedia.org/wiki/Messier_39",
+        "label": "Wikipedia, \"Messier 39\"",
+        "checked": "2026-10-02",
+        "locator": "Lead section, revision 1373100774",
+        "quote": "It is positioned two degrees south of the star Pi Cygni and around 9° east-northeast of Deneb."
+      }
+    ]
+  },
+  "datasets": {
+    "members": {
+      "title": "Hunt & Reffert 2023 members",
+      "detail": "284 stars",
+      "summary": "One dot per member star inside the tidal radius, in its Gaia color. Its depth in the cluster is assumed, not measured.",
+      "sources": [
+        {
+          "catalogueId": "hunt-reffert-2023-open-clusters",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114",
+          "label": "Hunt & Reffert (2023), A&A 673, A114; CDS J/A+A/673/A114, Table members, Theia_517: members inside the tidal radius (inrt) with a Gaia DR3 color",
+          "checked": "2026-10-02",
+          "locator": "Theia_517, inrt = True"
+        }
+      ]
+    }
+  }
+}

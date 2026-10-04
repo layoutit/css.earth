@@ -1,0 +1,55 @@
+{
+  "id": "alkaid",
+  "name": "Alkaid",
+  "system": "Alkaid system",
+  "parent": "milky-way",
+  "description": "A dwarf of type B3 V 31.9 parsecs away, 3.4 times the Sun's width: its disc was measured with the Navy Precision Optical Interferometer.",
+  "aliases": [
+    "HD 120315"
+  ],
+  "featured": true,
+  "target": "HD 120315",
+  "paper": {
+    "url": "https://doi.org/10.3847/1538-3881/aa9d8b",
+    "credit": "Baines et al. (2018), AJ 155, 30"
+  },
+  "radius": {
+    "value": 3.4,
+    "source": "Baines et al. (2018), AJ 155, 30, HD 120315: radius 3.4 +/- 0.5 solar radii (Table 5), from the limb-darkened angular diameter 0.981 +/- 0.144 mas (NPOI, Table 4) and the Hipparcos (van Leeuwen 2007) parallax",
+    "url": "https://doi.org/10.3847/1538-3881/aa9d8b",
+    "uncertainty": 0.5
+  },
+  "mass": "unmeasured",
+  "temperature": {
+    "value": 15540,
+    "source": "Baines et al. (2018), AJ 155, 30, HD 120315: effective temperature 15540 +/- 1157 K (Table 5), from the angular diameter and the bolometric flux of the SED fit",
+    "url": "https://doi.org/10.3847/1538-3881/aa9d8b",
+    "uncertainty": 1157
+  },
+  "gravity": {
+    "value": 3.78,
+    "source": "Baines et al. (2018), AJ 155, 30, HD 120315: log g 3.78, from Allende Prieto & Lambert (1999), as the paper lists it beside the diameter (Table 4)",
+    "url": "https://doi.org/10.3847/1538-3881/aa9d8b"
+  },
+  "distance": {
+    "value": 31.867,
+    "source": "Baines et al. (2018), AJ 155, 30, HD 120315: the Hipparcos (van Leeuwen 2007) parallax the radius was computed with (Table 1), 31.38 +/- 0.24 mas, inverted",
+    "url": "https://doi.org/10.3847/1538-3881/aa9d8b",
+    "uncertainty": 0.244
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A dwarf of type B3 V, 32 parsecs away: 3.4 times the Sun's width and 594 times its light.",
+    "introduction": "Its disc spans 0.981 milliarcseconds, which gives 3.4 solar radii and 15,540 K at its surface.",
+    "locator": "Tables 1, 4 and 5, HD 120315: parallax, limb-darkened diameter, radius, Teff"
+  },
+  "notes": [],
+  "radialVelocity": {
+    "value": -13.4,
+    "uncertainty": 0.6,
+    "source": "SIMBAD's radial velocity for Gaia DR3 1510374147844219904 (quality A), from 2006AstL...32..759G; Gaia DR3 measures none",
+    "url": "https://ui.adsabs.harvard.edu/abs/2006AstL...32..759G/abstract"
+  },
+  "order": 5466
+}

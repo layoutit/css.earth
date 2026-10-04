@@ -7,7 +7,7 @@ import { preparedControlPitch } from '@cssearth/engine';
 import { isRecord } from '@cssearth/core';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { SURFACE_FLY_TO } from '@cssearth/objects';
+import { SURFACE_FLY_TO } from '@cssearth/engine';
 import type { Vector3 } from '@cssearth/engine';
 import { LOPSIDED_COVERAGE, prepareDefaultCameraAngles, type SolarGeometry } from '../scene/index.ts';
 

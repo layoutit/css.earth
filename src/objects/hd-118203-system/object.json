@@ -1,12 +1,12 @@
 {
   "schema": "cssearth-object@2",
   "id": "hd-118203-system",
+  "parent": "milky-way",
   "type": "system",
   "generator": "site/build/prepare/system-packages.mts",
   "properties": {
     "system": {
-      "host": "hd-118203",
-      "members": "planets"
+      "host": "hd-118203"
     },
     "catalog": {
       "name": "Liesma system",

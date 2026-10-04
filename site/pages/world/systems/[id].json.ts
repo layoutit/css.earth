@@ -2,15 +2,16 @@ import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import type { APIRoute, GetStaticPaths } from 'astro';
 import { resolveWorldBillboards } from '../../../asset-origin.mts';
-import { worldHolderFiles } from '../../../world-places.mts';
+import { worldFiles } from '../../../world-places.mts';
 
-// One holder's bodies, copied from the Sun's prepared world files at build (`world-systems/<holder id>.json`: a star's system, `<star>-system`, or the asteroid dot bank's object): a page reads
-// its own body's, navigation the one it flies to and the camera the one it comes near (site/world-context-plan.mts).
-export const getStaticPaths: GetStaticPaths = async () => worldHolderFiles().map(id => ({ params: { id } }));
+// One object's world bodies, copied at build from its own package (`src/objects/<id>/prepared/members.json`: the bodies
+// inside it, a system drawn as its host; or the asteroid dot bank's rows): a page reads the files of the objects it is
+// inside, navigation those of the body it flies to and the camera a system's as it comes near (site/world-context-plan.mts).
+export const getStaticPaths: GetStaticPaths = async () => worldFiles().map(id => ({ params: { id } }));
 
 // Astro renders from the project root; a relative module URL would point into the bundled build instead.
 // Each billboard carries its published address (asset-origin.mts).
-const read = async (id: string) => resolveWorldBillboards(await readFile(resolve(process.cwd(), `src/objects/sun/prepared/world-systems/${id}.json`), 'utf8'));
+const read = async (id: string) => resolveWorldBillboards(await readFile(resolve(process.cwd(), `src/objects/${id}/prepared/members.json`), 'utf8'));
 const json = (body: string) => new Response(body, { headers: {
   'Content-Type': 'application/json; charset=utf-8',
   'Cache-Control': 'public, max-age=0, must-revalidate',
@@ -18,6 +19,6 @@ const json = (body: string) => new Response(body, { headers: {
 
 export const GET: APIRoute = async ({ params }) => {
   const id = typeof params.id === 'string' ? params.id : '';
-  if (!worldHolderFiles().includes(id)) return new Response('Not found', { status: 404 });
+  if (!worldFiles().includes(id)) return new Response('Not found', { status: 404 });
   return json(await read(id));
 };

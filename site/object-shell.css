@@ -379,27 +379,6 @@
   padding-block-start: 0;
 }
 
-.object-card > :is(
-  .object-selected-panel,
-  .object-factsheet-section,
-  .object-gallery-panel,
-  .object-chart-switcher,
-  .object-datasets,
-  .object-dataset-details,
-  .object-accordion,
-  .object-settings-panel
-):has(~ :is(
-  .object-factsheet-section,
-  .object-gallery-panel,
-  .object-chart-switcher,
-  .object-datasets,
-  .object-dataset-details,
-  .object-accordion,
-  .object-settings-panel
-)) {
-  border-bottom: var(--explorer-divider-width) solid var(--explorer-divider);
-}
-
 .object-factsheet-section > .object-factsheet-header {
   display: flex;
   align-items: center;
@@ -1265,11 +1244,6 @@ details:not([open]) > .object-panel-summary:focus-visible .object-panel-heading 
   white-space: nowrap;
 }
 
-.object-observation-control:has(.object-dataset-detail) {
-  grid-template-columns: minmax(0, max-content) minmax(8px, 1fr) max-content 14px;
-}
-
-.object-observation-control:has(.object-dataset-detail)::after,
 .object-factsheet-section .object-facts li::before {
   align-self: center;
   margin-top: 0;
@@ -1280,7 +1254,6 @@ details:not([open]) > .object-panel-summary:focus-visible .object-panel-heading 
   transform: translateY(0.3em);
 }
 
-.object-dataset-picker .object-observation-control:has(.object-dataset-detail)::after,
 .object-factsheet-section .object-facts li::before {
   border-bottom-color: rgb(255 255 255 / 28%);
 }
@@ -1300,13 +1273,9 @@ details:not([open]) > .object-panel-summary:focus-visible .object-panel-heading 
 .object-observation-control.object-thumbnail-leading {
   grid-template-columns: 14px minmax(0, 1fr);
 }
-.object-observation-control.object-thumbnail-leading:has(.object-dataset-detail) {
-  grid-template-columns: 14px minmax(0, max-content) minmax(8px, 1fr) max-content;
-}
 .object-thumbnail-leading > .object-dataset-icon { grid-column: 1; }
 .object-thumbnail-leading > .object-dataset-label { grid-column: 2; }
 .object-thumbnail-leading > .object-dataset-detail { grid-column: 4; }
-.object-observation-control.object-thumbnail-leading:has(.object-dataset-detail)::after { grid-column: 3; }
 
 .object-dataset-empty {
   margin: 2px 0 4px;
@@ -1676,7 +1645,7 @@ details:not([open]) > .object-panel-summary:focus-visible .object-panel-heading 
     box-shadow: none;
   }
   /* Search results are one list, not sections: they sit on the sheet's own background. */
-  .object-drawer-content:has(> [data-search-results]) { background: transparent; }
+  .object-drawer-content[data-search-results] { background: transparent; }
 
   .object-card {
     display: flex;
@@ -2008,7 +1977,6 @@ body:not([data-surface-labels="on"]) .prepared-surface-features [data-feature-la
   :is(.object-information-panel, .object-prepared-information-panel) > .object-native-tabs { display: none; }
   :is(.object-information-panel, .object-prepared-information-panel) > .object-card-tabpanel:not([hidden]) { display: block; }
   /* Section headings: the label each tab used to carry, in the sheet's panel-heading type. */
-  .object-information-panel > .object-dataset-content:not(.atlas-tree-disclosure):has(> .object-datasets)::before,
   :is(.object-information-panel, .object-prepared-information-panel) > .object-card-tabpanel:not(.object-dataset-content, .object-factsheet-content, .object-charts-content, .object-sources-content, .atlas-tree-disclosure)::before {
     content: attr(aria-label);
     display: flex;
@@ -2068,16 +2036,8 @@ body:not([data-surface-labels="on"]) .prepared-surface-features [data-feature-la
     width: calc(100% - var(--tablet-left-column));
     padding-inline: var(--explorer-card-padding-inline-start) var(--explorer-card-padding-inline-end);
   }
-  /* Headings separate the sections; the rule under the title would stop at the column edge. */
-  :is(.object-information-panel, .object-prepared-information-panel).object-card > .object-selected-panel:has(+ .object-native-tabs)::after { content: none; }
 
-  /* A panel with nothing on the right (no datasets) keeps its sections full width. */
-  :is(.object-information-panel, .object-prepared-information-panel):not(:has(> .object-dataset-content > .object-dataset-details, > [data-information-panel="dataset"])) > * {
-    float: none;
-    width: auto;
-  }
-
-  .object-sidebar .object-information-panel[data-card-subject="moons"]:not([hidden]) { display: block; }
+  .object-sidebar .object-information-panel[data-card-subject="system"]:not([hidden]) { display: block; }
   :is(.object-information-panel, .object-prepared-information-panel) > .object-card-tabpanel { max-height: none; overflow: visible; }
 
   /* Moons close the sheet at full width, in columns. */

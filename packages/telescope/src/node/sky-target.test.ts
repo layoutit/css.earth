@@ -4,7 +4,7 @@ import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { it as test } from 'node:test';
 import { parseSkyTarget, readSkyTarget, resolveSkyTarget, simbadObjectQuery, skyCatalogueEntry, skyRegion, skyTargetId } from './sky-target.js';
-import type { MetadataResponse } from './vo-contracts.js';
+import type { MetadataResponse } from '@cssearth/objects';
 
 const field = (name: string, unit: string | null) => ({ name, id: null, datatype: 'char', arraysize: null, unit, ucd: null, utype: null, xtype: null, ref: null });
 const response = (rows: MetadataResponse['rows'], units: Readonly<Record<string, string | null>> = { ra: 'deg', dec: 'deg', coo_err_maj: 'mas' }): MetadataResponse => ({

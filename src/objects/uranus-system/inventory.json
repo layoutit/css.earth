@@ -1,0 +1,161 @@
+{
+  "schema": "cssearth-inventory@1",
+  "assets": [
+    {
+      "location": "prepared",
+      "filename": "members.json",
+      "bytes": 10128,
+      "sha256": "b01d2fb80f629717cb43998bc290a791946fd9f6b77ca07055e52655e6f78895"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/ariel.bin",
+      "bytes": 2265,
+      "sha256": "eee780867275fdbae0539a6b9a63476d6a0ca9a86d08e4509943ae894ff55884"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/belinda.bin",
+      "bytes": 2254,
+      "sha256": "30c56b5e414e4ef1b46c89abaa3798c8b76e1675c023c8798d5591d36e3bc593"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/bianca.bin",
+      "bytes": 2268,
+      "sha256": "28353327b659318d9fc606dda5b80dd5189743e03a78d322e286daf74bb8856a"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/caliban.bin",
+      "bytes": 2262,
+      "sha256": "3dc0a18deb4e3d67a958ea116523eab92e97d325445cfff88f50b74b18ad810a"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/cordelia.bin",
+      "bytes": 2265,
+      "sha256": "4bf846822d6bca88f8dbbda26d35fd9aacd9188e958e1d8f3cccff6b2ccf088f"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/cressida.bin",
+      "bytes": 2264,
+      "sha256": "a2a59e137e09426d99f80b950c2147fe1f7b99c10dc42ab546a41d55d6eee326"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/desdemona.bin",
+      "bytes": 2266,
+      "sha256": "1716c0059fa2f215ba071c032f5d7b269a77a354d6d4a24061657fbb850198d9"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/ferdinand.bin",
+      "bytes": 2262,
+      "sha256": "b236538466fbf49b094a4ba46d3c87b7604e6cbdbc688e8b590e23747b9035fe"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/francisco.bin",
+      "bytes": 2265,
+      "sha256": "9d79959c3510252d937e4898fe1240aad39c90ce5c9eecbd724efa681def98b8"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/juliet.bin",
+      "bytes": 2266,
+      "sha256": "940b84b49e7a33949936866152c8caa7ec590828f55599cb69b22f7763bec0c2"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/margaret.bin",
+      "bytes": 2269,
+      "sha256": "0e238e9a39685d1a5b166cafad6d12928270c0ef96cfbacbfad2994fa0054b17"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/miranda.bin",
+      "bytes": 2260,
+      "sha256": "e70dd2588fce4a008c85d215597fde4cb1b8cac130dd7297143d01ce3c0af2b3"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/oberon.bin",
+      "bytes": 2261,
+      "sha256": "92d5f3ea1c940b77a734e6962816bdcd23a93d35dd1ebcc3f631e84226935884"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/ophelia.bin",
+      "bytes": 2261,
+      "sha256": "d700aa3afe28a7871eda44425e7f8f2c107cd4a6d4adbe935893edae8cda6c8e"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/portia.bin",
+      "bytes": 2260,
+      "sha256": "92ba3a50e8d1244b5ca601cd99aa1825abde204776efb2d79f5ce891e18c7d0c"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/prospero.bin",
+      "bytes": 2267,
+      "sha256": "456b4b6834170da36b9c7a4fa99596b5f281b0f8cacf7caf74b0366d62377185"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/puck.bin",
+      "bytes": 2265,
+      "sha256": "ffb0da0c9a8207b365086b6176a70c9bfac9bbd357b4ef3d1b80f6d30f10bd7b"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/rosalind.bin",
+      "bytes": 2266,
+      "sha256": "547cd7fe9fd2224bbd3b550788f7ed92f0e1f1463e033d3bea1ce2c987e33bcd"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/setebos.bin",
+      "bytes": 2258,
+      "sha256": "738c5fe24c7e2b22451dc05acf48025a7967b9ab635f959abd719ba187f42e91"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/stephano.bin",
+      "bytes": 2266,
+      "sha256": "13cee8f09ec686c40c6392eb3d89e7d3254e6518c1ae03f29f0d0e2d1ceecd03"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/sycorax.bin",
+      "bytes": 2262,
+      "sha256": "f242a90ae8a8638f85fdff9158155d3ecd46b172e1d738f8ff7b51d1af217990"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/titania.bin",
+      "bytes": 2257,
+      "sha256": "dbb7abc8ac123ebce5325a410d2ffd43212222b8eac1b07ec1814cf2fc4e699a"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/trinculo.bin",
+      "bytes": 2251,
+      "sha256": "0bbb0df7458d4f1473792762701eda73ccd7f0509091f38782d002d5d3536a49"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/umbriel.bin",
+      "bytes": 2263,
+      "sha256": "0b4398080af6ab2db1ba00984e0c06d998949ff8242ab48cb453200d1e05b11b"
+    },
+    {
+      "location": "prepared",
+      "filename": "views/uranus.json",
+      "bytes": 47217,
+      "sha256": "03f3f71c303a2d7265124383bdcfe921e3183d59884598207124568e8cabf92a"
+    }
+  ]
+}

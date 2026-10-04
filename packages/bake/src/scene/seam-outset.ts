@@ -1,8 +1,9 @@
-import { walkSilhouetteLevels, type PreparedSilhouetteSteps } from '@cssearth/objects';
+import { type PreparedSilhouetteSteps } from '@cssearth/objects';
+import { walkSilhouetteLevels } from '@cssearth/engine';
 
 
-/** Authored rule: hold `targetPixels` of outset on each leaf edge at every silhouette size. */
-export interface SeamOutsetProfile { targetPixels: number; stepRatio: number; hysteresis: number; firstDiameter: number; lastDiameter: number; }
+export type { SeamOutsetProfile } from '@cssearth/objects';
+import type { SeamOutsetProfile } from '@cssearth/objects';
 export interface PreparedSeamOutset extends PreparedSilhouetteSteps { property: string; targetPixels: number; }
 export interface PreparedLeafSeamOutset { property: string; scale: readonly [number, number]; }
 

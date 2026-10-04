@@ -331,7 +331,9 @@
       "import": "./dist/thread-pool.js",
       "default": "./dist/thread-pool.js"
     },
-    "./package.json": "./package.json"
+    "./package.json": "./package.json",
+    "./run-implemented-objects/source": "./src/run-implemented-objects/index.ts",
+    "./preparation/workspace-graph": "./src/preparation/workspace-graph.ts"
   },
   "scripts": {
     "build": "tsup",

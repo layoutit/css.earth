@@ -41,6 +41,13 @@ export interface PreparedCataloguePointBank {
 
 /** A prepared catalogue-point bank: fixed 3D positions of a published catalogue and how to draw them. */
 export function parseCataloguePoints(value: unknown, at = 'catalogue points'): PreparedCataloguePointBank {
+  const steps = parseCataloguePointSteps(value, at, Infinity);
+  for (;;) { const step = steps.next(); if (step.done) return step.value; }
+}
+
+/** The same reading in steps, for a reader that paces it: each step reads up to `chunk` more points, and the last returns
+ * the bank. Read in one call, the nearby galaxies' 39,916 points were 30 ms of one frame of a zoom on the iPad (2026-10-03). */
+export function* parseCataloguePointSteps(value: unknown, at: string, chunk: number): Generator<void, PreparedCataloguePointBank, void> {
   if (!value || typeof value !== 'object' || Array.isArray(value)) throw new TypeError(`${at} must be an object.`);
   const data = value as Record<string, unknown>;
   if (data.schema !== CATALOGUE_POINTS_SCHEMA || typeof data.id !== 'string' || !data.id) throw new TypeError(`${at}: expected a ${CATALOGUE_POINTS_SCHEMA} bank with an id.`);
@@ -82,15 +89,20 @@ export function parseCataloguePoints(value: unknown, at = 'catalogue points'): P
   }
   const spread = parseCataloguePointSpread(data.spread, `${data.id} (${at})`);
   const width = palette ? 4 : 3;
-  const points = data.points.map((point: unknown, index: number) => {
+  const rows = data.points as unknown[], points = new Array<PreparedCataloguePointBank['points'][number]>(rows.length);
+  for (let index = 0; index < rows.length; index++) {
+    if (index && index % chunk === 0) yield;
+    const point = rows[index];
     if (!Array.isArray(point) || point.length !== width || !point.every(axis => typeof axis === 'number' && Number.isFinite(axis))) {
       throw new TypeError(`${data.id}: point ${index} must be ${width} finite numbers${palette ? ' (x, y, z and a palette index)' : ''}.`);
     }
-    const color = palette ? palette[point[3]] : colorCss;
-    if (!entry(color)) throw new TypeError(`${data.id}: point ${index} names palette color ${point[3]}, which the palette of ${palette!.length} lacks.`);
-    return Object.freeze({ positionUnits: Object.freeze([point[0], point[1], point[2]]) as unknown as VolumeVector, colorCss: color,
+    // Every palette entry was checked above, so an index names a color or nothing.
+    const color: unknown = palette ? palette[point[3]] : colorCss;
+    if (typeof color !== 'string') throw new TypeError(`${data.id}: point ${index} names palette color ${point[3]}, which the palette of ${palette!.length} lacks.`);
+    points[index] = Object.freeze({ positionUnits: Object.freeze([point[0], point[1], point[2]]) as unknown as VolumeVector, colorCss: color,
       radiusPx: paletteRadiusPx ? (paletteRadiusPx as number[])[point[3]]! : radiusPx });
-  });
+  }
+  if (rows.length > chunk) yield;
   const cells = parseCatalogueCells(data.cells, data.points as number[][], parsedLevels?.map(level => level.points) ?? [points.length], `${data.id} (${at})`);
   return Object.freeze({ id: data.id, frame, appearance: Object.freeze({ colorCss, radiusPx, opacity,
     ...(palette ? { palette: Object.freeze([...palette]) } : {}), ...(paletteRadiusPx ? { paletteRadiusPx: Object.freeze([...paletteRadiusPx as number[]]) } : {}), ...(parsedLevels ? { levels: parsedLevels } : {}),

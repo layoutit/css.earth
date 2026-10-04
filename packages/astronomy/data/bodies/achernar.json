@@ -1,0 +1,30 @@
+{
+ "id": "achernar",
+ "classification": "star",
+ "order": 5485,
+ "physical": {
+  "name": "Achernar",
+  "horizonsCode": null,
+  "meanRadiusKm": 5764570.2,
+  "gravitationalParameterKm3PerS2": 794947515851.2169,
+  "parent": null,
+  "effectiveTemperatureK": 15539
+ },
+ "physicalNotes": "Radius 8.286 solar radii from Domiciano de Souza et al. (2014), A&A 569, A10, Table 6: equatorial radius 9.16 +/- 0.23 and polar radius 6.78 solar radii, from the Roche-von Zeipel fit to VLTI/PIONIER data; the record holds the volume-equivalent sphere of the two, 8.286 solar radii, and the scene draws the flattening (https://doi.org/10.1051/0004-6361/201424144): 5,764,570 km at 695,700 km per solar radius. Mass 5.99 +/- 0.6 solar masses from Kervella et al. (2022), A&A 667, A111, Table 4: mass of A 5.99 +/- 0.60 solar masses, the orbit's total mass less B's model mass (https://doi.org/10.1051/0004-6361/202244009); GM is that mass times the JPL solar GM. Temperature 15539 +/- 438 K from Kervella et al. (2022), A&A 667, A111, Table 4: Teff of A 15539 +/- 438 K (https://doi.org/10.1051/0004-6361/202244009). The scene draws the measured flattening (Domiciano de Souza et al. (2014), A&A 569, A10), with the equatorial radius, 9.16 solar radii, on the outline. presentationUp: the display axis, the measured rotation pole, is up.",
+ "star": {
+  "rightAscensionDegrees": 24.42813208,
+  "declinationDegrees": -57.23665985,
+  "positionEpochJulianYear": 1991.25,
+  "distanceParsecs": 42.753,
+  "properMotionRaMasPerYear": 87,
+  "properMotionDecMasPerYear": -38.24,
+  "radialVelocityKmPerS": 10.49,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Anderson & Francis (2012), Astronomy Letters 38, 331 (XHIP), Hipparcos astrometry (https://doi.org/10.1134/S1063773712050015), VizieR V/137D/XHIP row HIP = 7588: RAJ2000 24.42813208, DEJ2000 -57.23665985 (ICRS at epoch J1991.25), from the archived row src/objects/achernar/source/photometry/catalogue-row.tsv; SIMBAD names it HD 10144",
+   "distance": "Kervella et al. (2022), A&A 667, A111, Table 4: the Hipparcos parallax 23.39 +/- 0.57 mas (van Leeuwen 2007) the orbit is scaled with, inverted (https://doi.org/10.1051/0004-6361/202244009): 42.753 +/- 1.042 pc; Gaia DR3 cannot see the star",
+   "properMotion": "VizieR V/137D/XHIP row HIP = 7588 (same row): 87, -38.24 mas/yr",
+   "radialVelocity": "Kervella et al. (2022), A&A 667, A111, Table 4: barycentric radial velocity +10.49 +/- 0.51 km/s (https://doi.org/10.1051/0004-6361/202244009)"
+  }
+ }
+}

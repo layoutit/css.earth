@@ -1,34 +1,43 @@
 # Navigation identity and evidence
 
-`OBJECTS` is the application inventory of navigable subjects. It combines
-registered body packages with subjects from the prepared galaxy, cluster and
-nebula catalogues. Search, aliases and classification tabs use this inventory.
+`OBJECTS` is the application inventory of navigable subjects: every object package with a catalogue entry. Search,
+aliases and classification tabs use this inventory.
 
 | Concept | Meaning and owner |
 | --- | --- |
-| Object | A package with a catalogue entry: a route, a prepared world frame and a scene loader. A planet, a star, a galaxy, a nebula and a cluster of galaxies are all this. `?dataset=` selects one of its datasets. |
-| Level | The Milky Way, the Local Group, the Nearby and the Observable Universe: objects that are also steps of the zoom ladder. Each authors its place on the ladder under `properties.overview` in its package (order, zoom thresholds, what it holds, the context packages the world draws for it). Its scene has no body and is seen from inside, centred on the star the zoom came from (the Sun on a page opened cold). |
-| Rendering resource | A volume, image bank, point field or other prepared content. A resource descriptor alone does not publish a destination. |
+| Object | A package with a catalogue entry: a route, a prepared world frame and a scene loader. A planet, a star, a system, a galaxy, a nebula and a cluster of galaxies are all this. `?dataset=` selects one of its datasets. |
+| Parent | The one object an object is inside (`parent` in its object.json). The Observable Universe is the root, with none. The registry refuses a missing parent, an unknown parent or a loop ([object-tree.ts](../packages/objects/src/registry/object-tree.ts)). |
+| Zoom facts | An object seen from inside (the Milky Way, the Local Group, the Nearby and the Observable Universe) authors when the camera's view hands over to it and how its page frames the camera (`properties.zoom`). Its scene has no body and is seen from inside, centred on the star the zoom came from (the Sun on a page opened cold). |
+| Rendering resource | A volume, image bank, point field or other prepared content, attached to the object it draws for (`properties.host`). A resource descriptor alone does not publish a destination. |
 | Dataset view | A selectable `(objectId, datasetId)` presentation, which may combine several products and published sources. |
 | Published source | A scientific work, release or product identified in the source catalogue; a local file hash identifies retained bytes separately. |
 
 Every page is `/<id>/`, one URL system for every object:
 [`navigation-scope.mts`](../site/navigation/navigation-scope.mts) reads and
-writes them. Every object has a scene of its own, and its page mounts it. A level
-of the zoom ladder (the Milky Way, the Local Group, the nearby and the observable
-universe) is not an object: it is a view of a scene, reached by zooming out of any
-system. Its page, opened cold, mounts the world host, the Sun, at that zoom. A
-level's page carries none of the scene's own selections (`dataset`, `feature`), so
-a cold open never reads them as the host's.
+writes them. Every object has a scene of its own, and its page mounts it, except a
+system, whose page mounts its host's scene seen out to its members. The page of an
+object seen from inside, opened cold, mounts the world host, the Sun, at that zoom.
+Its page carries none of the scene's own selections (`dataset`, `feature`), so a
+cold open never reads them as the host's.
 
 `OBJECTS` has one entry shape and no kinds. Each entry is built from its package's
-own descriptor: a catalogue block, a world frame and a scene. A galaxy, a nebula
-and a cluster of galaxies are objects like any body; their recipe declares no
-surface, and their imagery is a context bank a dataset names. `SCENE_OBJECTS` is
-the same list. The four levels are objects of that list too; `OVERVIEWS` is those
-four as the zoom ladder reads them. Zooming out of a star's system past a level's
-threshold hands the view to that level's scene with the camera kept where it is,
-and zooming back in returns to the star.
+own descriptor: a catalogue block, a parent, a world frame and a scene. A galaxy, a
+nebula and a cluster of galaxies are objects like any body; their recipe declares no
+surface, and their imagery is a context bank a dataset names. The selection is one
+object id, and a search row is one object's. The object tree is the only structure:
+breadcrumbs are an object's ancestors, the card of an object seen from inside lists
+its children, and zooming out hands the view to the objects a body is inside, nearest
+first, with the camera kept where it is. Out of a star's system those are the objects
+seen from inside (the Milky Way and beyond), and zooming back in returns to the star.
+An object with a scene of its own (another galaxy, a cluster of galaxies) shows its
+body from outside, so it takes the view once the camera is outside it: as far from
+the body as that object's centre and its radius. A star of the Large Magellanic Cloud
+zooms out into the Cloud, M87* into M87, M87 into the Virgo Cluster. That scene is
+then left the way any body's is ([overview-selection.mts](../site/overview-selection.mts),
+[inside-view.mts](../site/inside-view.mts)). A system can be inside another: a star
+bound to another, with bodies of its own, hosts its system inside that star's. The
+brown dwarfs Epsilon Indi Ba and Bb are Epsilon Indi B, inside Epsilon Indi A's
+system, and zooming out of Epsilon Indi B hands the view to that system the same way.
 
 One object has one id. The spatial catalogues (Local Group galaxies, galaxy
 clusters, the nearby field) are data the world draws as dots: a row makes no page
@@ -45,27 +54,54 @@ missing hosts, duplicate identities and cycles, including self-hosting.
 
 ## Planetary systems
 
-A planetary system is a star and every prepared body whose orbit chain leads
-back to it. The Solar System is the Sun's; WASP-43 and its planet WASP-43b form
-another. [`planetary-system-members.mts`](../site/planetary-system-members.mts)
-reads each system's members from the prepared world context's orbit graph once,
-when `pnpm prepare:world-context` writes `site/prepared-world-presentation.json`;
-[`object-systems.mts`](../site/object-systems.mts) joins that table with the
-registry, so no list names the systems. Every
-member shares its star's `systemName`, and the derivation fails otherwise. A
-star without orbiting bodies, such as Betelgeuse, belongs to no system.
+A planetary system is a star and every prepared body inside its system in the
+object tree, at any depth. The Solar System is the Sun's; WASP-43 and its planet
+WASP-43b form another. Each world row says which object its body is inside: the
+object whose file the row arrives in.
+[`planetary-system-members.mts`](../site/planetary-system-members.mts) reads each
+system's members from that, and
+[`object-systems.mts`](../site/object-systems.mts) joins them with the registry,
+so no list names the systems and nothing walks orbits or bonds to find them. The
+moon systems ([`satellite-systems.mts`](../site/satellite-systems.mts)) and the
+set of bodies a selected star opens are read the same way. A star without orbiting bodies, such as Betelgeuse, belongs to no
+system. A system is named by its star's system name (the TRAPPIST-1 system, the
+Galactic Centre).
+
+A system's classification says what it holds. A star with a planet is a
+`planetary-system`. A star with only stars inside its system is a `star-system`:
+a companion with an orbit (Sirius B, the S stars of Sgr A*), or one its record
+says is bound with no orbit adopted (`star.boundTo` in the astronomy record, with
+its source in `sources.binary`: 61 Cygni B, Alpha Centauri B and Proxima). A star
+nothing orbits is framed out to the stars bound to it, and the camera aims at the
+nearest pair's centre of mass once it is farther out than their separation. A
+planet's or small body's moons are a `satellite-system`.
+[`system-packages.mts`](../site/build/prepare/system-packages.mts) writes every
+system's package, and puts a bound star inside its host's system.
+
+![The 61 Cygni system: the card lists its two stars, and the view frames both](images/61-cygni-system.png)
+
+A bound star with bodies of its own hosts its system inside its host's. Epsilon Indi B
+is the pair of brown dwarfs Ba and Bb, inside Epsilon Indi A's system: its breadcrumb
+names that system, and zooming out hands the view to it.
+
+![Epsilon Indi B: the card lists its two brown dwarfs, and its breadcrumb names the Epsilon Indi system it is inside](images/epsilon-indi-b-system.png)
 
 Inside a stellar system, every nonstellar host with prepared satellite children
 has a [satellite-system view](satellite-system-navigation.md). Its
-`/<host>-system/` address and `satellite-system:<host-id>` identity name the family;
+`/<host>-system/` address and `object:<host-id>-system` identity name the family;
 the plain host and satellite routes name individual bodies. The family uses the
 host's mounted scene and the same world camera.
 
-There is one selection: an object and how far out it is seen (`site/scene/scene-selection.mts`,
-`{ objectId, view }`). The view is `body`, `moons` (a host out to its moons) or `system` (a star
-out to its planetary system). The two wider views are objects of their own, the host's system
-(`/jupiter-system/`, `/trappist-1-system/`, `/solar-system/`), whose page mounts the host's scene. All three show the same card, the object's:
-its moons and its planetary system are parts of it, mounted while they are the view.
+There is one selection: an object, by its id (`site/scene/scene-subject.mts`, `{ objectId }`). A
+system is an object of its own, the host's system (`/jupiter-system/`, `/trappist-1-system/`,
+`/solar-system/`), whose page mounts the host's scene; how far out that scene is seen (`body`, or
+`system` for a host out to what is inside its system) is read from the selected object. Both show
+the same card, the host's: the system's header, tabs and list are parts of it
+([`SystemCard.astro`](../site/components/SystemCard.astro)), mounted while the system is the view.
+A star's planets, a star's companion stars and a planet's moons are one card, read from the
+system's object and the objects inside it ([`system-card.mts`](../site/system-card.mts)). An address names a
+system by the registry's id rule alone, and whether it is a star's system or a planet's moons is
+what its host is ([`scene-subject.mts`](../site/scene/scene-subject.mts)): no table of systems is asked.
 
 ![The WASP-43 system overview: the star, WASP-43b and its orbit, with the system's card](images/wasp-43-system-overview.png)
 

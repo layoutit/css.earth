@@ -14,10 +14,11 @@ test('a system is named after its host, and only a system is', () => {
   assert.equal(systemObjectId('sun'), 'solar-system');
   assert.equal(systemHostId('solar-system'), 'sun');
   assert.equal(systemHostId('jupiter'), null);
-  assert.equal(catalogueObject(entry('jupiter-system', { classification: 'satellite-system' }, { host: 'jupiter', members: 'moons' }), load).system?.host, 'jupiter');
+  assert.equal(catalogueObject(entry('jupiter-system', { classification: 'satellite-system' }, { host: 'jupiter' }), load).system?.host, 'jupiter');
   // A system named otherwise would have no address; an object named like a system would be read as one.
-  assert.throws(() => catalogueObject(entry('jovian-system', { classification: 'satellite-system' }, { host: 'jupiter', members: 'moons' }), load), /the system of jupiter is jupiter-system, not jovian-system/u);
+  assert.throws(() => catalogueObject(entry('jovian-system', { classification: 'satellite-system' }, { host: 'jupiter' }), load), /the system of jupiter is jupiter-system, not jovian-system/u);
   assert.throws(() => catalogueObject(entry('ring-system', { classification: 'nebula' }), load), /ring-system reads as the system of ring/u);
-  // The classification says what its members are.
-  assert.throws(() => catalogueObject(entry('jupiter-system', { classification: 'planetary-system' }, { host: 'jupiter', members: 'moons' }), load), /satellite-system/u);
+  // A system has a system's classification, and only a system does; what is inside it is the tree's to say.
+  assert.throws(() => catalogueObject(entry('jupiter-system', { classification: 'planet' }, { host: 'jupiter' }), load), /satellite-system/u);
+  assert.throws(() => catalogueObject(entry('jupiter-system', { classification: 'satellite-system' }, { host: 'jupiter', members: 'moons' }), load), /properties\.system must be/u);
 });

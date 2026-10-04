@@ -1,12 +1,12 @@
 {
   "schema": "cssearth-object@2",
   "id": "hats-72-system",
+  "parent": "milky-way",
   "type": "system",
   "generator": "site/build/prepare/system-packages.mts",
   "properties": {
     "system": {
-      "host": "hats-72",
-      "members": "planets"
+      "host": "hats-72"
     },
     "catalog": {
       "name": "Zembra system",

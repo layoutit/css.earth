@@ -2,7 +2,7 @@
 
 ## Sources
 
-Interferometry gives it 0.601 solar radii; with its total light, that makes its surface 3,932 K. It is also HD 201092, HR 8086, HIP 104217. The introduction is generated from Boyajian et al. (2012), ApJ 757, 112's published values; the sections below are the data's own.
+Interferometry gives it 0.601 solar radii; with its total light, that makes its surface 3,932 K. It is also HD 201092, HR 8086, HIP 104217. It is bound to 61 Cygni A: El-Badry, Rix & Heintz (2021), MNRAS 506, 2269 list the pair in their Gaia EDR3 wide-binary catalogue, 110 AU apart on the sky. Each star is placed where Gaia measures it, and no orbit of the pair is drawn. The introduction is generated from Boyajian et al. (2012), ApJ 757, 112's published values; the sections below are the data's own.
 
 **Star.** Placement: Gaia DR3 source 1872046574983497216, parallax 286.005 ± 0.029 mas (3.50 pc). Radius 0.601 +/- 0.0072 solar radii from Boyajian et al. (2012), ApJ 757, 112, Table 6, GJ 820B: radius in solar radii, 0.601 +/- 0.0072, from the weighted mean of the interferometric measurements the table lists (https://doi.org/10.1088/0004-637X/757/2/112). Mass 0.629 solar masses from Boyajian et al. (2012), ApJ 757, 112, Table 6, GJ 820B: mass 0.629 solar masses from the K-band mass-luminosity relation of Henry & McCarthy (1993), not a dynamical mass (https://doi.org/10.1088/0004-637X/757/2/112). Temperature 3,932 K from Boyajian et al. (2012), ApJ 757, 112, Table 6, GJ 820B: effective temperature in K, 3932 +/- 25, from the weighted mean of the interferometric measurements the table lists. log g 4.68 from the mass and radius.
 

@@ -1,0 +1,57 @@
+{
+  "schema": "cssearth-volume-presentation-source@2",
+  "objectId": "m20-layers",
+  "name": "Trifid Nebula",
+  "defaultDataset": "optical",
+  "bank": {
+    "path": "src/objects/m20-layers/prepared/image-layers.json"
+  },
+  "recipes": [
+    {
+      "id": "image-layer-recipe",
+      "path": "src/objects/m20-layers/source/recipe.json"
+    },
+    {
+      "id": "source-evidence",
+      "path": "src/objects/m20-layers/source/provenance.json"
+    }
+  ],
+  "sharedInputs": [],
+  "datasets": [
+    {
+      "id": "optical",
+      "label": "ESO · optical",
+      "title": "Trifid Nebula in visible light",
+      "description": "ESO's photograph of the Trifid Nebula, in B, V, R and H-alpha. It stands as one flat picture facing the Sun at the nebula's distance.",
+      "summary": "A flat picture facing the Sun at the nebula's distance; nothing in it has depth.",
+      "detail": "2432 × 2432 px",
+      "facts": [
+        {
+          "id": "bands",
+          "label": "Colors",
+          "value": "B, V, R and H-alpha"
+        },
+        {
+          "id": "source-pixels",
+          "label": "Source pixels",
+          "value": "2432 × 2432"
+        },
+        {
+          "id": "coverage",
+          "label": "Field",
+          "value": "13.89 × 13.89 arcmin"
+        },
+        {
+          "id": "license",
+          "label": "License",
+          "value": "CC-BY-4.0"
+        }
+      ],
+      "input": "optical",
+      "preview": {
+        "path": "src/objects/m20-layers/source/starless.jpg",
+        "url": "https://cdn.eso.org/images/publicationjpg/eso0930a.jpg"
+      }
+    }
+  ]
+}

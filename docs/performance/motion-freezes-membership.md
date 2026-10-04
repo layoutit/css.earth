@@ -22,6 +22,10 @@ held differently while coasting:
 - **Content** has to appear as it turns into view, or the scene would show holes. It is staged ahead instead: made
   resident a margin before it enters the view (image loaded, `display` on, opacity 0), then faded in. During a coast
   content is only added, never retired; retirement waits for the coast to stop.
+  A nebula's slices follow this (`volume/prepared-volume-runtime.ts`): an axis stack whose weight reached zero, an
+  optical copy whose alpha did and a slice that left the view stay as they are until the camera stops, then leave a
+  paced slice per frame. Hiding them as the camera turned flipped `display` on 2,016 slices in one throw of a drag at
+  the Milky Way (2026-10-03).
 
 ## Why
 
@@ -49,7 +53,8 @@ gesture.
   (`packages/renderer/src/stars/opacity-clock.ts`), and one budget a frame that every owner shares in turn. A frame
   starts at 16 units and can grow to 64; after a frame over 25 ms the pacer waits a frame and halves it. Each owner says
   what holds its work: any motion (leaf-box steps and the seam outset, because a resized leaf repaints), only a coast, or
-  nothing (a mesh's reveal, a mount's activation and a body's feature names, which land during a zoom or a flight).
+  nothing (a mesh's reveal, a mount's activation, a body's feature names and a dot bank's load, which land during a zoom
+  or a flight).
 
 ## Mesh detail survives input reversals
 
@@ -78,7 +83,7 @@ These change paint every frame on purpose, and each has a budget:
 | Exception | What changes | Budget | Why it stays |
 | --- | --- | --- | --- |
 | Orbit strokes (`solar-system/prepared-orbit-lines.ts`) | SVG `points`, `stroke-opacity` | the visible runs | Static 3D chords cost 14 ms against 3.0 ms for the shared SVG ([prepared orbit strokes](prepared-orbit-strokes.md)) |
-| Batched star points (`universe/batched-spatial-points.ts`) | SVG paths of round-capped dots (`M x y h0`), one per prepared paint color with its alpha byte; a turn or a zoom warps the last paint, and dots a zoom adds arrive through the pacer; a camera that travels without turning repaints them at most every 25 ms and keeps the paint between | One retained path per color | Camera motion changes paint, never DOM shape |
+| Batched star points (`universe/batched-spatial-points.ts`, `universe/point-layer.ts`) | SVG paths of round-capped dots (`M x y h.1`: a zero-length cap is painted twice by WebKit), one per prepared paint color with its alpha byte, in one svg layer for the banks mounted next to each other (on the iPad at the Milky Way a layer per bank left 37 and 77 frames over 20 ms in 690 and 202 MB of layers, the shared layers 25 and 25 and 130 MB, 2026-10-03); a bank dims by its strokes' opacity, since a group's opacity is an offscreen pass on each repaint; a turn or a zoom warps the layer's last paint, and dots a zoom adds arrive through the pacer; a bank that arrives during a zoom is read, styled and resolved in the pacer's slices and drawn once it is whole (the nearby galaxies' 39,916 points were one frame of 172 to 218 ms on the iPad and are frames of at most 33 ms, 2026-10-03); a camera whose travel moves the dots repaints them every frame (keeping the paint on alternate frames left more late frames on the iPad: 72 to 75 over 20 ms in 240 against 34 to 38, 2026-10-03), and those paints leave out the margin a turn warps in, a third of the dots written, which the pause paints back | One retained path per color | Camera motion changes paint, never DOM shape |
 | Earth's lighting frame (`rendering/prepared-material.ts`) | `background-position` on one layer | one layer | Pending an iPad measurement |
 | Sky faces (`sky/prepared-sky-runtime.ts`) | `visibility` and the first `background-image` as a face crosses the view edge | the faces in view (at most 3) | A face's layer is about 85 MB at 3x; staging one ahead or keeping one through a spin would multiply memory |
 
@@ -88,6 +93,38 @@ be seen mid-motion.
 
 `node labs/performance/coast-writes.mts --url <page>` flings the camera in headless Chrome and lists every write the
 page makes while it coasts. It exits 1 on anything outside this table.
+
+## A zoom's change of scene waits for rest
+
+A zoom that crosses a threshold (out of a body into its system, from a moon out to its planet's system, into or out of
+an object seen from inside) changes the selection, and often the scene. The world shows the new selection at the
+crossing: its scope is a few policy flags (`setOverview`). The scene, its card and its address are membership, so they
+change when the camera rests (`site/scene/camera-handover.mts`): the settle time after the motion signal reports no
+motion. That holds for every crossing, one that keeps the mounted scene included: a body and its own system share a
+scene, and the card of the one replaces the card of the other at rest too. Until then
+the mounted scene keeps the camera, and its far limit stays open while a wider scene exists (`setZoomOutOpen`). A zoom
+that crosses several thresholds without resting replaces the scene once, with the last. The new scene's files are
+requested as the camera comes to rest, not at each crossing. What the zoom needs to go on is read at the crossing: the
+entries of the objects the crossed system's star is inside, a few kilobytes each. Without them a zoom out of a planet
+followed nothing past its star's system until the camera rested, and out of TRAPPIST-1 e the star's scene was mounted at
+rest only to be replaced by the Observable Universe's (2026-10-03). A camera that comes back before it rests keeps its
+scene.
+A flight's landing is already at rest and hands over at once.
+
+A zoom in toward a body does not wait for rest: the world draws a body it has not mounted as a point, and only the
+body's own scene draws it larger. The pending scene is mounted as soon as its body is a pixel across, moving or not.
+Without that, a zoom from the Nearby Universe in to the Sun showed no Sun until the camera stopped (2026-10-03). A zoom
+out waits for rest all the same: the system the mounted body belongs to is around the camera already, and from a planet
+of TRAPPIST-1 its star is a disc.
+
+Measured 2026-10-03. In headless Chrome, zooming out of Earth with the swap held until rest, the page before and after
+the swap differed in 2 of 2,774,880 pixels at Earth to the Solar System (one channel, by 2) and in 0 at the next four
+crossings, out to the Observable Universe, and in 0 at two crossings coming back in from the Local Group: the shared
+world draws everything in view there, and the arriving scene's stage holds 3 to 5 empty nodes. On the iPad, a steady
+zoom out of Earth across four crossings and back in (interleaved runs) had 81 and 84 frames over 20 ms going out and 6
+and 6 coming in with the scene replaced at each crossing, and 68 and 72 and 3 and 3 with it replaced at rest. Most of
+the frames that remained were one stretch past the Solar System, where Safari redrew the galaxy's backing images on
+every frame; as `img` planes (`universe/galaxy-backing.ts`) the same zoom out has 16 and 8.
 
 ## Object arrival ownership
 

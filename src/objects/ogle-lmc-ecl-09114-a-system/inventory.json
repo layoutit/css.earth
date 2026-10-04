@@ -1,0 +1,23 @@
+{
+  "schema": "cssearth-inventory@1",
+  "assets": [
+    {
+      "location": "prepared",
+      "filename": "members.json",
+      "bytes": 1287,
+      "sha256": "202f9d2f4c231bdb893cdf859538bd1226d3eb4380b796b38e7a09c6442920ac"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/ogle-lmc-ecl-09114-b.bin",
+      "bytes": 2277,
+      "sha256": "6b81e99196363727650983345a929cc6f03d6b39eba242e4380c9ac175247574"
+    },
+    {
+      "location": "prepared",
+      "filename": "views/ogle-lmc-ecl-09114-a.json",
+      "bytes": 30539,
+      "sha256": "4817b95b712af6f17cb09e2617a5d668e610a803bb8c2fa558084b9e7b6e2fbe"
+    }
+  ]
+}

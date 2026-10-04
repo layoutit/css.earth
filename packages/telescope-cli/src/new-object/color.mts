@@ -14,6 +14,7 @@
  * Planck spectrum at the cited temperature. Stretches of 380-780 nm with no sample are declared as gaps with their reason, as
  * the reader requires. */
 import { type MeasuredSpectrumRecord, STELLAR_PHOTOMETRIC_COLOR_SCHEMA } from '@cssearth/objects';
+import { blendingCompanion, blendRefusal } from './companion-blend.mts';
 import { gunzipSync } from 'node:zlib';
 import { CROSS_CHECK_AGREEMENT, measuredSpectrumColor, planckColor, readMeasuredSpectrum, type StellarColor } from '@cssearth/bake/objects/stellar';
 import { ARI_TAP, BURNASHEV_PART2, KHARITONOV_CATALOG, ngslUrl, PULKOVO_TABLE5, VIZIER_ASU, xpSampledMirrorForm, xpSampledUrl, type Archive, type GaiaRow, type Identifiers } from './archives.mts';
@@ -193,7 +194,7 @@ export const XP_SATURATION_G = 4;
 const channelDifference = (a: StellarColor, b: StellarColor) => Math.max(...a.srgb.map((value, i) => Math.abs(value - b.srgb[i]!)));
 
 /** Try every route in order and write the color record for the first, with the second as its cross-check. */
-export async function chooseColor(spec: StarSpec, row: GaiaRow | undefined, ids: Identifiers, archive: Archive, cmf: Map<number, readonly number[]>): Promise<ColorChoice> {
+export async function chooseColor(spec: StarSpec, row: GaiaRow | undefined, ids: Identifiers, archive: Archive, cmf: Map<number, readonly number[]>, at?: { readonly ra: number; readonly dec: number }): Promise<ColorChoice> {
   const context: Context = { spec, row, ids, archive, cmf }, candidates: Candidate[] = [], tried: string[] = [];
   // Every route is probed at once; the candidates are then taken in the routes' quality order.
   const probed = await Promise.all((Object.keys(ROUTES) as ColorRoute[]).map(async route => {
@@ -227,6 +228,9 @@ export async function chooseColor(spec: StarSpec, row: GaiaRow | undefined, ids:
     const why = [skipped ? spec.color!.reason : undefined, searched.length ? `${skipped ? 'no other archive' : 'No archive'} holds a spectrum of this star (${searched.join('; ')})` : undefined].filter(Boolean).join('; and ');
     return planckChoice(id, spec.temperature, why, tried, cmf);
   }
+  // A measured spectrum is the star's own only if no close companion shares the aperture (companion-blend.mts): a person answers,
+  // and the answer is said with the color.
+  if (at && !spec.color?.companion) { const pair = await blendingCompanion(archive, at); if (pair) throw new Error(blendRefusal(id, primary.route, pair)); }
   const primaryPath = `photometry/${primary.file}`;
   addFile(primary, primaryPath, `${id}-${primary.route}`);
   const record: Record<string, unknown> = primary.route === 'gaia-xp' && row
@@ -252,7 +256,7 @@ export async function chooseColor(spec: StarSpec, row: GaiaRow | undefined, ids:
       : { sourceBinding: { kind: 'catalogued', references: [{ catalogueId: primary.catalogue!.id, role: 'material', evidence: `src/objects/${id}/source/photometry/stellar-color.json#/measuredSpectrum` }, CMF_METHOD] } }) });
   return { record, files, acquisition, inputs, catalogue, color: primary.color, route: primary.route, tried, ...(crossCheck ? { crossCheck } : {}), ...(todo ? { todo } : {}),
     credits: [`Color: ${primary.source}, through the CIE 1931 2° color-matching functions (CIE 2019, CC BY-SA 4.0, doi:10.25039/CIE.DS.xvudnb9b).${second ? ` Cross-check: ${second.source}.` : ''}`],
-    summary: `${primary.source}${second ? `, cross-checked against ${second.source} (${crossCheck!.difference} levels apart at most, the threshold is ${CROSS_CHECK_AGREEMENT})` : ''}${spec.color?.skip.length ? ` (the routes marked skipped are not used: ${spec.color.reason})` : ''}` };
+    summary: `${primary.source}${second ? `, cross-checked against ${second.source} (${crossCheck!.difference} levels apart at most, the threshold is ${CROSS_CHECK_AGREEMENT})` : ''}${spec.color?.skip.length ? ` (the routes marked skipped are not used: ${spec.color.reason})` : ''}${spec.color?.companion ? `. Of the companion a double-star catalogue lists: ${spec.color.companion}` : ''}` };
 }
 
 /** The color of a Planck spectrum at the cited temperature: for a star no archive holds a spectrum of, or a companion the archives

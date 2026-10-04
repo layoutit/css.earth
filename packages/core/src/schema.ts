@@ -40,5 +40,5 @@ export function parse<T>(value: unknown, guard: Guard<T>, label = 'recipe'): T {
   }
   return value;
 }
-export type JsonValue = null | boolean | number | string | JsonValue[] | {[key: string]: JsonValue};
+export type JsonValue = null | boolean | number | string | readonly JsonValue[] | {readonly [key: string]: JsonValue};
 export const json: Guard<JsonValue> = (value): value is JsonValue => value === null || string(value) || number(value) || boolean(value) || (isArray(value) ? value.every(item => json(item)) : isRecord(value) && Object.values(value).every(item => json(item)));

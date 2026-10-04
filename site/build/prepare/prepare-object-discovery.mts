@@ -1,7 +1,9 @@
 import { open, readFile } from 'node:fs/promises';
 import { basename, resolve, sep } from 'node:path';
 import { hasErrorCode, isRecord } from '@cssearth/core';
-import { parseArrivalView, parseArrivalBillboard, preparedDefaultViewRotation, type ObjectDiscovery } from '@cssearth/objects';
+import { requireCamera, parseArrivalView, parseArrivalBillboard, type CameraPlan, type ObjectDiscovery } from '@cssearth/objects';
+import { preparedDefaultViewRotation } from '@cssearth/engine';
+import { SHAPE_MODEL_SCHEMA } from '@cssearth/bake/objects/scene';
 import { resolveBuildSceneAddress } from '../../asset-origin.mts';
 
 /** Authored exceptions describe illustrative datasets, not a permanent body blacklist. */
@@ -59,6 +61,7 @@ export function deriveObjectDiscovery(catalog: unknown, controls: unknown, recip
   const illustration = !imagery && !measured.size && (simulated.size > 0 || [...exposed].some(id => policy.illustrationDatasets.includes(id)));
   let arrival;
   if (photographed.size && camera !== undefined) {
+    requireCamera(camera);
     arrival = parseArrivalView({ defaultDataset: controls.datasets.defaultDataset, datasetIds: [...photographed],
       rotation: preparedDefaultViewRotation(camera) });
   }
@@ -123,7 +126,9 @@ export async function prepareObjectDiscovery(descriptor: unknown, objectDirector
     const photographed = controls.flatMap(control => isRecord(control) && typeof control.id === 'string' && isRecord(control.volume) && pictured.has(String(control.volume.objectId)) ? [control.id] : []);
     const defaultDataset = isRecord(content) && isRecord(content.datasets) ? content.datasets.defaultDataset : undefined;
     const camera = photographed.length && typeof defaultDataset === 'string' ? await preparedRuntimeCamera(resolve(objectDirectory, 'prepared', 'runtime.json')) : null;
-    const arrival = camera ? parseArrivalView({ defaultDataset, datasetIds: photographed, rotation: preparedDefaultViewRotation(camera) }) : undefined;
+    let plan: CameraPlan | null = null;
+    if (camera) { requireCamera(camera); plan = camera; }
+    const arrival = plan ? parseArrivalView({ defaultDataset, datasetIds: photographed, rotation: preparedDefaultViewRotation(plan) }) : undefined;
     return { imagery, illustration: false, featured: true, ...(arrival ? { arrival } : {}), ...(policy.orientationReference === undefined ? {} : { orientationReference: policy.orientationReference }) };
   }
   // A system shows its host's scene: it has no imagery, illustration or sources of its own.
@@ -139,7 +144,8 @@ export async function prepareObjectDiscovery(descriptor: unknown, objectDirector
     const recipe: unknown = JSON.parse(await readFile(path, 'utf8'));
     // A shape model names its dataset surfaces by `dataset`; discovery reads them as surfaces like the raster lane's.
     if (source.id === 'shape-model') {
-      if (isRecord(recipe) && Array.isArray(recipe.surfaces))
+      if (!isRecord(recipe) || recipe.schema !== SHAPE_MODEL_SCHEMA) throw new TypeError(`Discovery shape-model recipe has an unexpected schema: ${source.path}.`);
+      if (Array.isArray(recipe.surfaces))
         inputs.push({ surfaces: recipe.surfaces.map(surface => isRecord(surface) ? { id: surface.dataset, science: surface.science } : surface) });
     } else inputs.push(recipe);
   }
@@ -157,6 +163,7 @@ export async function prepareObjectDiscovery(descriptor: unknown, objectDirector
     if (camera === null || !isRecord(controls) || !isRecord(controls.datasets)) throw new TypeError('An arrival billboard requires its prepared runtime and datasets.');
     // Every body can have an arrival image. This does not turn a shape model,
     // measured color or illustration into photographic evidence.
+    requireCamera(camera);
     const view = { defaultDataset: controls.datasets.defaultDataset,
       datasetIds: [...new Set([controls.datasets.defaultDataset, ...(discovery.arrival?.datasetIds ?? [])])],
       rotation: preparedDefaultViewRotation(camera),

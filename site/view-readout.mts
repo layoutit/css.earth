@@ -1,21 +1,21 @@
 import { fromEyeM } from '@cssearth/engine';
 import { formatViewDate, formatViewDistance, formatViewCoordinate, viewScale } from './minimap/view-format.mts';
-import type { WorldCameraPose } from '@cssearth/objects';
+import type { WorldCameraPose } from '@cssearth/engine';
 import type { PositionM } from '@cssearth/engine';
 import type { BrowserWindow, ShellCamera, PlaybackState } from './browser/browser-types.mts';
 import { requiredElement } from './browser/browser-types.mts';
 import { sectionElements } from '@cssearth/renderer';
 import type { SurfaceMapReader } from './minimap/surface-map-context.mts';
 import { parseSurfaceMapConfig } from './minimap/surface-map-context.mts';
-import type { OverviewScope } from './overview-context.mts';
+import type { ZoomScope } from './zoom-scope.mts';
 import { cssCameraAxesFromOrientation, rotateWorldPosition, worldRotationFromQuaternion } from '@cssearth/engine';
 import { measureView } from './minimap/view-measure.mts';
 import { surfaceMapContext, surfaceMapViewport } from './minimap/surface-map-context.mts';
-import { viewDistance } from './overview-context.mts';
+import { viewDistance } from './zoom-scope.mts';
 import { dotN as dot } from '@cssearth/core';
 /** A subject with no surface (a galaxy, a cluster, a nebula): the readout measures to its centre, not above a radius. */
 type ExtendedSubject = { readonly name: string; readonly positionM: readonly [number, number, number] };
-interface ViewReadout { bindObject(): void; setExtendedSubject(record: ExtendedSubject | null): void; setCamera(camera: ShellCamera | null): void; setOverviewScope(scope: OverviewScope): void; setPlaybackState(state: PlaybackState): void; setNavigationInFlight(active: boolean): void; destroy(): void; }
+interface ViewReadout { bindObject(): void; setExtendedSubject(record: ExtendedSubject | null): void; setCamera(camera: ShellCamera | null): void; setOverviewScope(scope: ZoomScope | null): void; setPlaybackState(state: PlaybackState): void; setNavigationInFlight(active: boolean): void; destroy(): void; }
 
 export function measureExtendedSubjectView(world: WorldCameraPose, focus: ExtendedSubject, focalPixels: number) {
   const forward = rotateWorldPosition(worldRotationFromQuaternion(world.pose.orientationXyzw), [0, 0, -1]);
@@ -42,7 +42,8 @@ export function createViewReadout({ drawer, documentTarget, windowTarget, surfac
   const events = new AbortController();
   let camera: ShellCamera | null = null, unsubscribe: (() => void) | null = null, frame: number | null = null; let playing = false, flying = false, moving = false;
   let timer: number | null = null, dateDay: number | null = null, playbackReason: string | null = null; let lastRender = -Infinity;
-  let overviewScope: OverviewScope = 'system';
+  // The scope the zoom frames; null on a body.
+  let overviewScope: ZoomScope | null = null;
   let extendedSubject: ExtendedSubject | null = null;
   const hidden = (element: HTMLElement, value: boolean) => { if (element.hidden !== value) element.hidden = value; };
   const write = (element: HTMLElement, value: string) => { if (element.textContent !== value) element.textContent = value; };

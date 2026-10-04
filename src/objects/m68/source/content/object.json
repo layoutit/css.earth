@@ -1,0 +1,114 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "m68",
+  "displayName": "M68",
+  "panel": {
+    "facts": [
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "10.40 kpc (± 0.10)",
+        "source": {
+          "catalogueId": "baumgardt-vasiliev-2021-gc-distances",
+          "url": "https://people.smp.uq.edu.au/HolgerBaumgardt/globular/orbits_table.txt",
+          "label": "Baumgardt & Vasiliev (2021), Accurate distances to Galactic globular clusters through a combination of Gaia EDR3, HST and literature data, MNRAS 505, 5957; Baumgardt's orbits table, NGC_4590: Rsun 10.4 ± 0.1 kpc",
+          "checked": "2026-10-02"
+        }
+      },
+      {
+        "id": "position",
+        "label": "Sky position (J2000)",
+        "value": "RA 189.867°, Dec -26.744°",
+        "source": {
+          "catalogueId": "baumgardt-vasiliev-2021-gc-distances",
+          "url": "https://people.smp.uq.edu.au/HolgerBaumgardt/globular/orbits_table.txt",
+          "label": "Baumgardt & Vasiliev (2021), Accurate distances to Galactic globular clusters through a combination of Gaia EDR3, HST and literature data, MNRAS 505, 5957; Baumgardt's orbits table, NGC_4590: NGC_4590, RA 189.866577, DEC -26.744057",
+          "checked": "2026-10-02"
+        }
+      },
+      {
+        "id": "half-members",
+        "label": "Half its members within",
+        "value": "6.1 pc of the centre",
+        "source": {
+          "catalogueId": "hunt-reffert-2023-open-clusters",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114",
+          "label": "Hunt & Reffert (2023), Improving the open cluster census. II. An all-sky cluster catalogue with Gaia DR3, A&A 673, A114; CDS J/A+A/673/A114, Table 3 (clusters), NGC_4590: r50pc 6.07, the radius holding half its members inside the tidal radius",
+          "checked": "2026-10-02"
+        }
+      },
+      {
+        "id": "members",
+        "label": "Member stars drawn",
+        "value": "781 Gaia DR3 stars",
+        "source": {
+          "catalogueId": "hunt-reffert-2023-open-clusters",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114",
+          "label": "Hunt & Reffert (2023), A&A 673, A114; CDS J/A+A/673/A114, Table members, NGC_4590: members inside the tidal radius (inrt) with a Gaia DR3 color",
+          "checked": "2026-10-02"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "members",
+    "controls": [
+      {
+        "id": "members",
+        "label": "Gaia DR3 members",
+        "thumbnail": "m68-dataset-members.webp",
+        "volume": {
+          "objectId": "m68-members",
+          "datasetId": "members",
+          "surface": "members"
+        },
+        "source": {
+          "id": "m68-members",
+          "path": "../../m68-members/source/manifest.json",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114"
+        },
+        "falseColor": false
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Baumgardt & Vasiliev (2021), Accurate distances to Galactic globular clusters through a combination of Gaia EDR3, HST and literature data, MNRAS 505, 5957; Baumgardt's orbits table, NGC_4590: Rsun 10.4 ± 0.1 kpc",
+      "href": "https://people.smp.uq.edu.au/HolgerBaumgardt/globular/orbits_table.txt"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Baumgardt & Vasiliev (2021), Accurate distances to Galactic globular clusters through a combination of Gaia EDR3, HST and literature data, MNRAS 505, 5957; Baumgardt's orbits table, NGC_4590: NGC_4590, RA 189.866577, DEC -26.744057",
+      "href": "https://people.smp.uq.edu.au/HolgerBaumgardt/globular/orbits_table.txt"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Hunt & Reffert (2023), Improving the open cluster census. II. An all-sky cluster catalogue with Gaia DR3, A&A 673, A114; CDS J/A+A/673/A114, Table 3 (clusters), NGC_4590: r50pc 6.07, the radius holding half its members inside the tidal radius",
+      "href": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Hunt & Reffert (2023), A&A 673, A114; CDS J/A+A/673/A114, Table members, NGC_4590: members inside the tidal radius (inrt) with a Gaia DR3 color",
+      "href": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://people.smp.uq.edu.au/HolgerBaumgardt/globular/orbits_table.txt",
+      "credit": "Baumgardt & Vasiliev (2021), Accurate distances to Galactic globular clusters through a combination of Gaia EDR3, HST and literature data, MNRAS 505, 5957; Baumgardt's orbits table, NGC_4590: Rsun 10.4 ± 0.1 kpc"
+    }
+  }
+}

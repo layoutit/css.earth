@@ -20,11 +20,13 @@
   "properMotionDecMasPerYear": -154.2332934303602,
   "radialVelocityKmPerS": 46.9394,
   "presentationUp": "display-axis",
+  "boundTo": "xo-2-n",
   "sources": {
    "position": "Gaia DR3 source 934346740559239296 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/bd-50-1471-b/source/photometry/gaia-dr3-source.csv",
    "distance": "Gaia DR3 parallax 6.6721 +/- 0.0151 mas (same row, RUWE 0.89): 149.88 pc, no zero-point correction",
    "properMotion": "Gaia DR3 (same row): -29.308, -154.233 mas/yr",
-   "radialVelocity": "Gaia DR3 (same row): 46.94 +/- 0.27 km/s"
+   "radialVelocity": "Gaia DR3 (same row): 46.94 +/- 0.27 km/s",
+   "binary": "El-Badry, Rix & Heintz (2021, MNRAS 506, 2269) list XO-2 N and BD+50 1471B in their Gaia EDR3 wide-binary catalogue (VizieR J/MNRAS/506/2269, source_id 934346809278715776 and 934346740559239296), 4,677 AU apart on the sky, with a chance-alignment probability of 1.1e-11: the pair is bound. No orbit of the pair is published, and the Gaia astrometry alone does not constrain one, so the star is placed by its own astrometry and carries no orbit."
   }
  }
 }

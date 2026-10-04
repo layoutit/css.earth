@@ -1,17 +1,17 @@
 {
   "schema": "cssearth-object@2",
   "id": "m31v-j00443799-4129236-a-system",
+  "parent": "m31",
   "type": "system",
   "generator": "site/build/prepare/system-packages.mts",
   "properties": {
     "system": {
-      "host": "m31v-j00443799-4129236-a",
-      "members": "planets"
+      "host": "m31v-j00443799-4129236-a"
     },
     "catalog": {
       "name": "DIRECT V12650 M31C system",
       "systemName": "DIRECT V12650 M31C system",
-      "classification": "planetary-system",
+      "classification": "star-system",
       "color": "#a0baff",
       "distanceAu": 158730874993.2,
       "description": "The primary star of an eclipsing pair in the Andromeda Galaxy, one orbit every 3.549694 days."

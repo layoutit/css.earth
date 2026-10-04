@@ -53,7 +53,7 @@ export function labelImportance(kind: string, major = false, orientationReferenc
   // A planet of another star is a planet of its system: the tier is the body's role in the system it belongs to, not whether
   // that system is the Sun's. Without this an imaged exoplanet loses its caption at the scale that frames its own orbit.
   // A galaxy, a nebula or a cluster is a named place of its scale, as a star is of the galaxy's.
-  if (['star', 'black-hole', 'planet', 'exoplanet', 'environment', 'galaxy', 'galaxy-cluster', 'nebula', 'globular-cluster'].includes(kind)) return 3;
+  if (['star', 'black-hole', 'planet', 'exoplanet', 'environment', 'galaxy', 'galaxy-cluster', 'nebula', 'globular-cluster', 'open-cluster'].includes(kind)) return 3;
   if (major || kind === 'dwarf-planet') return 2;
   if (kind === 'asteroid') return 0;
   return 1;

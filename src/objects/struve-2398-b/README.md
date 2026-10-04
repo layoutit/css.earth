@@ -2,7 +2,7 @@
 
 ## Sources
 
-Interferometry gives it 0.3232 solar radii; with its total light, that makes its surface 3,104 K. It is also HD 173740, HIP 91772. The introduction is generated from Boyajian et al. (2012), ApJ 757, 112's published values; the sections below are the data's own.
+Interferometry gives it 0.3232 solar radii; with its total light, that makes its surface 3,104 K. It is also HD 173740, HIP 91772. It is bound to Struve 2398 A: El-Badry, Rix & Heintz (2021), MNRAS 506, 2269 list the pair in their Gaia EDR3 wide-binary catalogue, 41 AU apart on the sky. Each star is placed where Gaia measures it, and no orbit of the pair is drawn. The introduction is generated from Boyajian et al. (2012), ApJ 757, 112's published values; the sections below are the data's own.
 
 **Star.** Placement: Gaia DR3 source 2154880616774131712, parallax 283.838 ± 0.029 mas (3.52 pc). Radius 0.3232 +/- 0.0061 solar radii from Boyajian et al. (2012), ApJ 757, 112, Table 6, GJ 725B: radius in solar radii, 0.3232 +/- 0.0061, from this work (CHARA) (https://doi.org/10.1088/0004-637X/757/2/112). Mass 0.235 solar masses from Boyajian et al. (2012), ApJ 757, 112, Table 6, GJ 725B: mass 0.235 solar masses from the K-band mass-luminosity relation of Henry & McCarthy (1993), not a dynamical mass (https://doi.org/10.1088/0004-637X/757/2/112). Temperature 3,104 K from Boyajian et al. (2012), ApJ 757, 112, Table 6, GJ 725B: effective temperature in K, 3104 +/- 28, from this work (CHARA). log g 4.79 from the mass and radius.
 

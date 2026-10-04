@@ -1,0 +1,43 @@
+{
+  "id": "doi-10-3847-1538-3881-ac2431",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Baines et al. (2021): Angular Diameters and Fundamental Parameters of Forty-four Stars from the Navy Precision Optical Interferometer",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-3881/ac2431"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://doi.org/10.3847/1538-3881/ac2431",
+      "label": "Publisher"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://doi.org/10.3847/1538-3881/ac2431",
+      "checkedOn": "2026-10-03",
+      "locator": "Crossref record: title, authors, container"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Baines et al. (2021), The Astronomical Journal 162 198",
+      "scope": "citation",
+      "evidence": "https://doi.org/10.3847/1538-3881/ac2431"
+    }
+  ],
+  "publisher": "The Astronomical Journal 162 198",
+  "creators": [
+    "Ellyn K. Baines",
+    "J. Thomas Armstrong",
+    "James H. Clark",
+    "et al."
+  ],
+  "publicationDate": "2021"
+}

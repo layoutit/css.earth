@@ -1,0 +1,57 @@
+{
+  "schema": "cssearth-volume-presentation-source@2",
+  "objectId": "m57-layers",
+  "name": "Ring Nebula",
+  "defaultDataset": "optical",
+  "bank": {
+    "path": "src/objects/m57-layers/prepared/image-layers.json"
+  },
+  "recipes": [
+    {
+      "id": "image-layer-recipe",
+      "path": "src/objects/m57-layers/source/recipe.json"
+    },
+    {
+      "id": "source-evidence",
+      "path": "src/objects/m57-layers/source/provenance.json"
+    }
+  ],
+  "sharedInputs": [],
+  "datasets": [
+    {
+      "id": "optical",
+      "label": "Hubble · optical",
+      "title": "Ring Nebula in visible light",
+      "description": "ESA/Hubble's photograph of the Ring Nebula, in He II 469, H-beta 487, [O III] 502, continuum 645, H-alpha 656, [N II] 658 and [S II] 673 nm. It lies on the walls the nebula's spectra give: a shell seen almost pole-on and a lobe through its opening (O'Dell et al. 2013).",
+      "summary": "The photograph on the nebula's walls: a shell and a lobe through it, at depths from published expansion speeds.",
+      "detail": "3179 × 3179 px",
+      "facts": [
+        {
+          "id": "bands",
+          "label": "Colors",
+          "value": "He II 469, H-beta 487, [O III] 502, continuum 645, H-alpha 656, [N II] 658 and [S II] 673 nm"
+        },
+        {
+          "id": "source-pixels",
+          "label": "Source pixels",
+          "value": "3179 × 3179"
+        },
+        {
+          "id": "coverage",
+          "label": "Field",
+          "value": "2.10 × 2.10 arcmin"
+        },
+        {
+          "id": "license",
+          "label": "License",
+          "value": "CC-BY-4.0"
+        }
+      ],
+      "input": "optical",
+      "preview": {
+        "path": "src/objects/m57-layers/source/starless.jpg",
+        "url": "https://cdn.esahubble.org/archives/images/large/heic1310a.jpg"
+      }
+    }
+  ]
+}

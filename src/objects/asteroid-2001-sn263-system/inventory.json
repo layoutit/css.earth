@@ -1,0 +1,29 @@
+{
+  "schema": "cssearth-inventory@1",
+  "assets": [
+    {
+      "location": "prepared",
+      "filename": "members.json",
+      "bytes": 1272,
+      "sha256": "c6a21c9fd2dd1a230075f683ab8a0475fa00155a48855ff9ea742c4e292cca90"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/sn263-beta.bin",
+      "bytes": 2267,
+      "sha256": "b849ed66e049ec58cdb3245b6d22d1dd56f18358f26962562ab3cfc092665551"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/sn263-gamma.bin",
+      "bytes": 2275,
+      "sha256": "9132d5eb0929b09a67f4505ac872eb42147589e0701e13aaa1a8d223b3b47b1a"
+    },
+    {
+      "location": "prepared",
+      "filename": "views/asteroid-2001-sn263.json",
+      "bytes": 34726,
+      "sha256": "42a3f1f3734465f1f9c6aea1ed5b34f452fce2b8e8ba686756f91e388eab2667"
+    }
+  ]
+}

@@ -2,7 +2,8 @@ import { readFileSync } from 'node:fs';
 import { afterEach, beforeEach, test, mock } from 'node:test';
 import assert from 'node:assert/strict';
 import { isDeepStrictEqual } from 'node:util';
-import { type PreparedCssSky, type DensityVolumeFrame, type PreparedCssVolume, type PreparedCssImageLayers, type PreparedVolumeDatasets, type WorldCameraPose } from '@cssearth/objects';
+import { type PreparedCssSky, type DensityVolumeFrame, type PreparedCssVolume, type PreparedCssImageLayers, type PreparedVolumeDatasets } from '@cssearth/objects';
+import { type WorldCameraPose } from '@cssearth/engine';
 
 import { stubGlobal, unstubAllGlobals, waitFor } from '@cssearth/objects/node/contract';
 
@@ -112,6 +113,32 @@ test('cold bootstrap keeps catalogue and image banks descriptor-only, then reuse
   mounted.destroy(); assert.equal(catalogRuntime.destroy.mock.callCount(), 1);
 });
 
+test('banks declared after the universe is made reach its mounted layers and every later mount, as addSystems does', () => {
+  stubGlobal('HTMLElement', FakeElement); stubGlobal('Element', FakeElement);
+  const base = new URL('../../../../src/', import.meta.url);
+  const context = JSON.parse(readFileSync(new URL('objects/sun/prepared/world-context.json', base), 'utf8'));
+  const volume = JSON.parse(readFileSync(new URL('objects/milky-way-volume/prepared/volume.json', base), 'utf8')).data as PreparedCssVolume;
+  const frame = volume.frame;
+  const { datasetBillboards } = datasetBanks([{ id: 'hosted-cloud', frame, attachedTo: 'host' }]);
+  const universe = createPreparedUniverse({ context, volume, pointAppearance: readCanonicalPointField(), sprites: {},
+    resolveResource: path => `/volume/${path}`, resolvePointResource: path => `/stars/${path}`, datasetBillboards,
+    loadVolumeDataset: async () => { throw new Error('not drawn here'); } });
+  const document = new FakeDocument();
+  const first = universe.mount(document.createElement() as unknown as HTMLElement);
+  assert.equal(first.focusBank('hosted-cloud'), null);
+  universe.addBanks({ volumeDatasetBanks: [{ id: 'hosted-cloud', frame }], pointBanks: [{ id: 'hosted-dots', url: '/dots.bin', host: 'host' }] });
+  universe.addBanks({ volumeDatasetBanks: [{ id: 'hosted-cloud', frame }] });
+  const later = universe.mount(document.createElement() as unknown as HTMLElement);
+  for (const mounted of [first, later]) {
+    assert.equal(mounted.focusBank('hosted-cloud')?.objectId, 'hosted-cloud');
+    assert.equal(mounted.focusBank('hosted-dots')?.objectId, 'hosted-dots');
+    assert.equal((mounted.root as unknown as FakeElement).dataset.volumeDatasetDeclaredBankCount, '1');
+  }
+  assert.throws(() => universe.addBanks({ volumeDatasetBanks: [{ id: 'unprepared', frame }] }), /unprepared: dataset billboards are missing/);
+  assert.throws(() => universe.addBanks({ volumeDatasetBanks: [{ id: 'elsewhere', frame: { ...frame, epochJdTt: frame.epochJdTt + 1 } }] }), /elsewhere must share/);
+  first.destroy(); later.destroy();
+});
+
 test('the galaxy is its bulge slices at every overview scope, with no disc plane and no impostor views', () => {
   const base = new URL('../../../../src/', import.meta.url);
   const context = JSON.parse(readFileSync(new URL('objects/sun/prepared/world-context.json', base), 'utf8'));
@@ -127,8 +154,9 @@ test('the galaxy is its bulge slices at every overview scope, with no disc plane
     const radiusM = Math.hypot(...volume.frame.boundsUnits.max) * volume.frame.metersPerUnit;
     const camera: WorldCameraPose = { referenceFrame: volume.frame.referenceFrame, epochJdTt: volume.frame.epochJdTt,
       pose: { positionM: [volume.frame.originM[0], volume.frame.originM[1], volume.frame.originM[2] + 2.5 * radiusM], orientationXyzw: [0, 0, 0, 1] } };
-    for (const scope of ['local-group', 'milky-way', 'system', 'milky-way', undefined]) {
-      mounted.setOverview(scope !== undefined, scope);
+    // Out past the star's own system, back to it, out again, and on the body.
+    for (const [overview, systemRetired] of [[true, true], [true, true], [true, false], [true, true], [false, false]] as const) {
+      mounted.setOverview(overview, systemRetired);
       mounted.publish(camera, viewport, spatialFrame);
       const nodes = descendants(image);
       assert.equal(nodes.filter(node => node.dataset.volumeImpostor !== undefined).length, 0);

@@ -45,7 +45,7 @@ export function draftFromGaia(row: ReturnType<typeof parseGaiaDraftRow>) {
   // Two significant figures at any distance: 43 parsecs for a neighbour, 8,400 for a star across the disc.
   const parsecs = Number((1000 / row.parallax).toPrecision(2));
   return {
-    id: `gaia-dr3-${row.sourceId}`, name, system: `${name} system`, target: name, gaia: row.sourceId,
+    id: `gaia-dr3-${row.sourceId}`, name, system: `${name} system`, parent: 'milky-way', target: name, gaia: row.sourceId,
     description: `A star ${row.radius.toFixed(1)} solar radii and ${row.mass.toFixed(2)} solar masses, about ${parsecs.toLocaleString('en-US')} parsecs away, measured by Gaia.`,
     paper: { url: GAIA_FLAME.paper, credit: GAIA_FLAME.credit },
     radius: 'gaia-flame', mass: 'gaia-flame',

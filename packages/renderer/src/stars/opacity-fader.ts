@@ -3,7 +3,8 @@ export type OpacityFaderWindow = OpacityWindow;
 type Track = { from: number; target: number; started: number; duration: number; ease: boolean };
 /** Whatever carries an inline opacity: a DOM element, or an owner's adapter that maps it elsewhere. */
 export interface FadeTarget { readonly style: { opacity: string; visibility: string } }
-interface Entry { element: FadeTarget; alpha: Track; multiplier: Track; suppression: Track; visible: boolean; written: number; }
+interface Entry { element: FadeTarget; alpha: Track; multiplier: Track; suppression: Track; visible: boolean; written: number;
+  /** With hideAtZero: whether the fader has hidden the element. */ hidden?: boolean }
 const clamp = (value: number) => Number.isFinite(value) ? Math.max(0, Math.min(1, value)) : 0;
 const fixed = (value: number): Track => ({ from: value, target: value, started: 0, duration: 0, ease: false });
 
@@ -55,7 +56,7 @@ export function createOpacityFader(window: OpacityWindow, sharedClock?: OpacityC
       if (entry.written !== alpha) {
         entry.element.style.opacity = String(alpha); entry.written = alpha;
         // A fade that reaches 0 while hiding is held (a coast) keeps its box until the hold ends.
-        if (hideAtZero && !(hidingHeld && alpha === 0)) entry.element.style.visibility = alpha > 0 ? '' : 'hidden';
+        if (hideAtZero && !(hidingHeld && alpha === 0) && entry.hidden !== (alpha === 0)) { entry.hidden = alpha === 0; entry.element.style.visibility = alpha > 0 ? '' : 'hidden'; }
       }
       if (!entry.visible || (entry.suppression.target === 0 && !running(entry.suppression, time)) ||
           !(running(entry.alpha, time) || running(entry.multiplier, time) || running(entry.suppression, time))) pending.delete(entry);
@@ -83,7 +84,7 @@ export function createOpacityFader(window: OpacityWindow, sharedClock?: OpacityC
     holdHiding(held: boolean) {
       if (destroyed || held === hidingHeld) return;
       hidingHeld = held;
-      if (!held && hideAtZero) for (const entry of entries.values()) if (entry.written === 0 && entry.element.style.visibility !== 'hidden') entry.element.style.visibility = 'hidden';
+      if (!held && hideAtZero) for (const entry of entries.values()) if (entry.written === 0 && !entry.hidden) { entry.hidden = true; entry.element.style.visibility = 'hidden'; }
     },
     setAnimationEnabled(enabled: boolean) {
       if (destroyed || enabled === animationEnabled) return;

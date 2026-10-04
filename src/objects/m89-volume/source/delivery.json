@@ -1,0 +1,29 @@
+{
+  "schema": "cssearth-nebula-delivery@2",
+  "id": "m89-volume",
+  "method": "axial-symmetry",
+  "request": {
+    "path": "labs/nebula/models/m89/experiment.json"
+  },
+  "inputPins": [],
+  "sky": {
+    "centerIcrsDegrees": [
+      188.916041,
+      12.556242
+    ],
+    "distancePc": 16099041,
+    "imageRotationDegrees": 0,
+    "arcsecPerUnit": 106.17696
+  },
+  "sourceUrl": "https://www.sdss.org/",
+  "description": "M89's starlight as a volume: the survey image with the Milky Way stars removed (NOX) and neighbouring galaxies masked, its light along each sight line spread in depth by the deprojected density of Kormendy et al.'s Sérsic fit, on an oblate spheroid about M89's minor axis in the plane of the sky. Depth follows that stated shape; it is not measured.",
+  "defaultDataset": "optical",
+  "framingRadiusUnits": 5,
+  "attachedTo": "m89",
+  "acceptedLabResult": "m89-inferred",
+  "symmetryDirectory": ".local/nebula-lab/planetary/m89-inferred",
+  "compactInputs": {
+    "path": "src/objects/m89-volume/source/compact/model.json"
+  },
+  "compactMethod": "symmetry"
+}

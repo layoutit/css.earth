@@ -1,0 +1,60 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "m75",
+  "card": {
+    "text": "M75 is a globular star cluster in the Milky Way, about 20,520 parsecs away.",
+    "sources": [
+      {
+        "catalogueId": "baumgardt-vasiliev-2021-gc-distances",
+        "url": "https://people.smp.uq.edu.au/HolgerBaumgardt/globular/orbits_table.txt",
+        "label": "Baumgardt & Vasiliev (2021), Accurate distances to Galactic globular clusters through a combination of Gaia EDR3, HST and literature data, MNRAS 505, 5957; Baumgardt's orbits table, NGC_6864: Rsun 20.52 ± 0.45 kpc",
+        "checked": "2026-10-02",
+        "locator": "NGC_6864: Rsun 20.52 kpc"
+      },
+      {
+        "catalogueId": "wikipedia-messier-75",
+        "url": "https://en.wikipedia.org/wiki/Messier_75",
+        "label": "Wikipedia, \"Messier 75\"",
+        "checked": "2026-10-02",
+        "locator": "Lead section, revision 1373101318",
+        "quote": "Messier 75 or M75, also known as NGC 6864, is a globular cluster of stars in the southern constellation Sagittarius."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "M75 is drawn as 279 of its member stars, measured by Gaia; each dot sits at its sky position, at the cluster's distance.",
+    "sources": [
+      {
+        "catalogueId": "hunt-reffert-2023-open-clusters",
+        "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114",
+        "label": "Hunt & Reffert (2023), A&A 673, A114; CDS J/A+A/673/A114, Table members, NGC_6864: members inside the tidal radius (inrt) with a Gaia DR3 color",
+        "checked": "2026-10-02",
+        "locator": "NGC_6864: 279 members inside the tidal radius with a color"
+      },
+      {
+        "catalogueId": "wikipedia-messier-75",
+        "url": "https://en.wikipedia.org/wiki/Messier_75",
+        "label": "Wikipedia, \"Messier 75\"",
+        "checked": "2026-10-02",
+        "locator": "Lead section, revision 1373101318",
+        "quote": "It was discovered by Pierre Méchain in 1780 and included in Charles Messier's catalog of comet-like objects that same year."
+      }
+    ]
+  },
+  "datasets": {
+    "members": {
+      "title": "Hunt & Reffert 2023 members",
+      "detail": "279 stars",
+      "summary": "One dot per member star inside the tidal radius, in its Gaia color. Its depth in the cluster is assumed, not measured.",
+      "sources": [
+        {
+          "catalogueId": "hunt-reffert-2023-open-clusters",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114",
+          "label": "Hunt & Reffert (2023), A&A 673, A114; CDS J/A+A/673/A114, Table members, NGC_6864: members inside the tidal radius (inrt) with a Gaia DR3 color",
+          "checked": "2026-10-02",
+          "locator": "NGC_6864, inrt = True"
+        }
+      ]
+    }
+  }
+}

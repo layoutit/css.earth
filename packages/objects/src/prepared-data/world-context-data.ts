@@ -4,6 +4,8 @@ import type { PreparedContextFocus, PreparedWorldContext } from './world-context
 import type { PreparedOrbitCenter } from './prepared-orbit-centers.js';
 import type { PreparedSystemView } from './world-system-view.js';
 
+/** JSON writer transport. parseCompleteWorldContext reads this into PreparedWorldContextGeometry,
+ * flattening orbit vertices into typed arrays; shared camera/system/volume/stars fields link both records. */
 export interface PreparedWorldContextData {
   readonly schema: typeof PREPARED_WORLD_CONTEXT_SCHEMA;
   readonly orbitCenters?: Readonly<Record<string, PreparedOrbitCenter>>;
@@ -28,6 +30,7 @@ export interface PreparedWorldContextData {
     readonly dotColor?: string;
     /** A placed star bound to another with no measured orbit: its host and the pair's centre of mass. */
     readonly boundTo?: { readonly hostId: string; readonly centerM: Vector3 };
+    readonly inside?: string;
     /** Absent for a placed body, which has a position but no orbit to draw. */
     readonly orbit?: { readonly centerBodyId: string; readonly centerPositionM: Vector3; readonly verticesM: readonly Vector3[]; readonly trail: readonly number[];
       readonly bounds: { readonly centerM: Vector3; readonly radiusM: number }; readonly activeChords: readonly number[];

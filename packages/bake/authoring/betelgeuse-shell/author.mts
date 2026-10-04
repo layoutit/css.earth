@@ -5,7 +5,9 @@ import { VOLUME_SOURCE_MANIFEST_SCHEMA, VOLUME_PRESENTATION_SOURCE_SCHEMA, VOLUM
  *
  *   node packages/bake/authoring/betelgeuse-shell/author.mts [--check]
  *
- * --check recomputes every output and fails if any differs from the file on disk.
+ * --check requires the declared ESO images, MATISSE reconstruction and reduced ALMA inputs.
+ * Missing downloads produce a declared SKIP; with sources present every output is recomputed and drift fails.
+ * ALMA acquisition and reduction are recorded in reduce-alma-sio.mts (522 MB SODA cut plus continuum).
  *
  * **zimpol-v**: the SPHERE/ZIMPOL V-band degree of linear polarisation of 3 December 2024 (ESO Phase 3 collection
  * BETELGEUSE-B, Montargès et al. 2026), a sky-plane image given the envelope that best projects to its radial profile.
@@ -16,7 +18,7 @@ import { VOLUME_SOURCE_MANIFEST_SCHEMA, VOLUME_PRESENTATION_SOURCE_SCHEMA, VOLUM
  * extinction it causes and the starlight it scatters.
  *
  * Every grid shares one frame anchored on Betelgeuse's prepared scene origin, so one volume unit is one stellar radius. */
-import { readFile, readdir } from 'node:fs/promises';
+import { access, readFile, readdir } from 'node:fs/promises';
 import sharp from 'sharp';
 import { resolve } from 'node:path';
 import { writeOrCheckAuthoredOutputs } from '../authored-output.mts';
@@ -1019,9 +1021,21 @@ export async function author(defaultDataset = 'zimpol-v') {
 const direct = process.argv[1] !== undefined && import.meta.url === pathToFileURL(resolve(process.argv[1])).href;
 if (direct) {
   const check = process.argv.includes('--check');
-  const selected = process.argv.find(arg => arg.startsWith('--default='))?.slice(10);
-  const result = await author(selected);
-  await writeOrCheckAuthoredOutputs(root, result.outputs, { check, missingFile: 'mismatch-on-read-error',
-    mkdir: 'root-before-write-or-check', mismatchMessage: name => `Authored output differs: ${name}` });
-  console.log(`${check ? 'CHECKED' : 'AUTHORED'} betelgeuse-shell: ${JSON.stringify(result.measured)}; grid ${GRID.size}^3; ${JSON.stringify(result.grids)}`);
+  const required = [PRODUCTS.intensity, PRODUCTS.dolp, EMISSION_2020, ALMA_SIO, ALMA_SIO.continuum];
+  const missing: string[] = [];
+  if (check) for (const product of required) {
+    await access(resolve(downloads, product.path)).catch((error: unknown) => {
+      if (error instanceof Error && 'code' in error && error.code === 'ENOENT') missing.push(product.path);
+      else throw error;
+    });
+  }
+  if (missing.length) {
+    console.log(`SKIP betelgeuse-shell --check: requires sources under ${DOWNLOADS_BASE}: ${missing.join(', ')}. Restore source-cache/betelgeuse-shell/<manifest path> when available; otherwise acquire the declared ESO/MATISSE inputs and run packages/bake/authoring/betelgeuse-shell/reduce-alma-sio.mts for the ALMA products. No outputs compared.`);
+  } else {
+    const selected = process.argv.find(arg => arg.startsWith('--default='))?.slice(10);
+    const result = await author(selected);
+    await writeOrCheckAuthoredOutputs(root, result.outputs, { check, missingFile: 'mismatch-on-read-error',
+      mkdir: 'root-before-write-or-check', mismatchMessage: name => `Authored output differs: ${name}` });
+    console.log(`${check ? 'CHECKED' : 'AUTHORED'} betelgeuse-shell: ${JSON.stringify(result.measured)}; grid ${GRID.size}^3; ${JSON.stringify(result.grids)}`);
+  }
 }

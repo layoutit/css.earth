@@ -1,0 +1,97 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "m97",
+  "displayName": "Owl Nebula",
+  "panel": {
+    "facts": [
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "811 pc (782 to 842)",
+        "source": {
+          "catalogueId": "chornay-walton-2021-pn-central-stars",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/656/A110",
+          "label": "Chornay & Walton (2021), A&A 656, A110; CDS J/A+A/656/A110, Table A.1, PN G148.4+57.0: distance 811 pc (782 to 842) from the Gaia EDR3 parallax of its central star",
+          "checked": "2026-10-02"
+        }
+      },
+      {
+        "id": "position",
+        "label": "Sky position (J2000)",
+        "value": "RA 168.699°, Dec 55.019°",
+        "source": {
+          "catalogueId": "chornay-walton-2021-pn-central-stars",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/656/A110",
+          "label": "Chornay & Walton (2021), PN G148.4+57.0: its central star, Gaia EDR3 843950873117830528",
+          "checked": "2026-10-02"
+        }
+      },
+      {
+        "id": "picture",
+        "label": "Picture width",
+        "value": "7.20 arcmin, 1.70 pc at its distance",
+        "source": {
+          "catalogueId": "sdss-dr9-color-hips",
+          "url": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record",
+          "label": "Sloan Digital Sky Survey; color HiPS CDS/P/SDSS9/color by T. Boch (CDS), cut out by the CDS hips2fits service",
+          "checked": "2026-10-02"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "optical",
+    "controls": [
+      {
+        "id": "optical",
+        "label": "SDSS · optical",
+        "thumbnail": "m97-dataset-optical.webp",
+        "volume": {
+          "objectId": "m97-layers",
+          "datasetId": "optical",
+          "surface": "optical"
+        },
+        "source": {
+          "id": "m97-layers-optical",
+          "path": "../../m97-layers/source/manifest.json",
+          "url": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record"
+        },
+        "falseColor": true
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Chornay & Walton (2021), A&A 656, A110; CDS J/A+A/656/A110, Table A.1, PN G148.4+57.0: distance 811 pc (782 to 842) from the Gaia EDR3 parallax of its central star",
+      "href": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/656/A110"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Chornay & Walton (2021), PN G148.4+57.0: its central star, Gaia EDR3 843950873117830528",
+      "href": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/656/A110"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Sloan Digital Sky Survey; color HiPS CDS/P/SDSS9/color by T. Boch (CDS), cut out by the CDS hips2fits service",
+      "href": "https://alasky.cds.unistra.fr/MocServer/query?ID=CDS%2FP%2FSDSS9%2Fcolor&get=record"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/656/A110",
+      "credit": "Chornay & Walton (2021), A&A 656, A110; CDS J/A+A/656/A110, Table A.1, PN G148.4+57.0: distance 811 pc (782 to 842) from the Gaia EDR3 parallax of its central star"
+    }
+  }
+}

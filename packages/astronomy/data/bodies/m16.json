@@ -1,0 +1,28 @@
+{
+  "id": "m16",
+  "classification": "nebula",
+  "order": 5216,
+  "physical": {
+    "name": "Eagle Nebula",
+    "horizonsCode": null,
+    "meanRadiusKm": 0,
+    "gravitationalParameterKm3PerS2": 0,
+    "parent": null
+  },
+  "physicalNotes": "No radius or mass of Eagle Nebula is recorded: it is an extended nebula, and its package frames it at 7.92 pc (object.json worldFrame.bodyRadiusM), half its picture's short side, a presentation value.",
+  "star": {
+    "rightAscensionDegrees": 274.67526577,
+    "declinationDegrees": -13.78958993,
+    "positionEpochJulianYear": 2000,
+    "distanceParsecs": 1698.44937756,
+    "properMotionRaMasPerYear": 0,
+    "properMotionDecMasPerYear": 0,
+    "radialVelocityKmPerS": 0,
+    "sources": {
+      "position": "Hunt & Reffert (2023), NGC_6611: the densest point of the cluster inside the nebula",
+      "distance": "Hunt & Reffert (2023), A&A 673, A114; CDS J/A+A/673/A114, Table 3 (clusters), NGC_6611, the cluster inside the nebula: dist50 1698.4 pc (16th to 84th percentile 1693.6 to 1703.4) (https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/673/A114)",
+      "properMotion": "Zero: the nebula is held at its catalogued position; no motion across the sky is applied.",
+      "radialVelocity": "Zero: no radial velocity is recorded for the nebula here."
+    }
+  }
+}

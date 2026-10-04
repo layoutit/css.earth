@@ -54,3 +54,13 @@ test('unscoped route styles still leave with their route', async () => {
   assert.equal(route?.parentNode, null);
   assert.equal(document.head.children.length, 3);
 });
+
+test("a destination's no-script styles stay out of the scripted page", async () => {
+  const { document, window } = page(shared + body('earth'));
+  const styles = createNavigationStyles(document, window);
+  // The fetched page is parsed without script: its `<noscript>` holds elements, where the live page's holds text.
+  const destination = shared + body('lutetia') + '<noscript><style>body:has(input:checked) { color: green }</style></noscript>';
+  const incoming = await styles.prepare(page(destination).document, new URL('https://site.test/lutetia/'), new AbortController().signal);
+  incoming.apply();
+  assert.deepEqual([...document.head.querySelectorAll('style')].map(style => style.textContent?.includes(':has(')), [false, false, false]);
+});

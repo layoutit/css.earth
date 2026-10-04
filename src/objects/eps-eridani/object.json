@@ -1,6 +1,7 @@
 {
   "schema": "cssearth-object@2",
   "id": "eps-eridani",
+  "parent": "eps-eridani-system",
   "type": "layered-body",
   "properties": {
     "preparation": {

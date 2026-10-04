@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "capella-ab",
+  "card": {
+    "text": "The hotter giant of Capella, 8.8 times the Sun's width, orbiting its partner every 104 days.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1088-0004-637x-807-1-26",
+        "url": "https://doi.org/10.1088/0004-637X/807/1/26",
+        "label": "Torres et al. 2015",
+        "checked": "2026-10-03",
+        "locator": "Tables 4 and 5"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its orbit weighs it at 2.48 solar masses; it is 8.83 solar radii, 5,730 K at its surface, and spins every 8.5 days.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1088-0004-637x-807-1-26",
+        "url": "https://doi.org/10.1088/0004-637X/807/1/26",
+        "label": "Torres et al. 2015",
+        "checked": "2026-10-03",
+        "locator": "Tables 4 and 5"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its temperature",
+      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}
