@@ -1,0 +1,20 @@
+{
+  "schema": "cssearth-stellar-photometric-color@1",
+  "objectId": "hat-p-26b",
+  "spectrum": "planck",
+  "temperature": {
+    "published": {
+      "kelvin": 1087,
+      "lowerKelvin": 985,
+      "upperKelvin": 1189,
+      "citation": "Wallack et al. 2019, dayside brightness temperature at 4.5 µm, 1087 +91 -102 K, from an eclipse depth of 265 +68 -72 ppm: 1087 +/- 102 K, https://arxiv.org/abs/1908.00014"
+    },
+    "note": "Its day side's brightness temperature is measured in secondary eclipse at 4.5 µm (Spitzer IRAC) and nobody has imaged it, so the color is a Planck spectrum at its published temperature.",
+    "chosen": "the one band with a detected eclipse; the larger of its two errors is kept",
+    "wavelengthMicrometres": 4.5,
+    "facility": "Spitzer IRAC"
+  },
+  "whitePoint": "sRGB D65",
+  "normalization": "brightest linear sRGB channel = 1",
+  "gamut": "desaturate"
+}

@@ -33,6 +33,43 @@
           "source": "the color dataset of wasp-80 (src/objects/wasp-80/source/photometry/stellar-color.json)"
         }
       }
+    },
+    {
+      "id": "dayside",
+      "output": "wasp-80b-surface-{id}{suffix}.webp",
+      "thumbnail": "wasp-80b-dataset-{id}.webp",
+      "source": "photometry/dayside-temperature.json",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "dayside",
+        "label": "Day side",
+        "format": "measured-dayside",
+        "path": "photometry/dayside-temperature.json",
+        "sampling": "bilinear",
+        "units": "K",
+        "planet": "wasp-80b",
+        "consumer": "wasp-80b-measured-dayside",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "minimum": 300,
+        "maximum": 3000,
+        "colors": [
+          "#0d0887",
+          "#7e03a8",
+          "#cc4778",
+          "#f89540",
+          "#f0f921"
+        ],
+        "labels": [
+          "300",
+          "1650",
+          "3000"
+        ],
+        "description": "Measured: the day side's brightness temperature, 888 K at 4.5 µm (Spitzer Space Telescope satellite Infrared Array Camera (IRAC)). One number for the whole day side; the night side is not measured and is left blank.",
+        "title": "Spitzer Space Telescope satellite Infrared Array Camera (IRAC) · measured day side",
+        "sourceUrl": "https://ui.adsabs.harvard.edu/abs/2015MNRAS.450.2279T/abstract"
+      }
     }
   ],
   "lighting": {

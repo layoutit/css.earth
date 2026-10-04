@@ -92,8 +92,8 @@ measured map need not stay a neutral sphere.
   paper and the scenario the run assumes: the atmosphere, surface and rotation it
   was given. When nobody has detected that atmosphere, say so.
 - A planet opens on the best dataset it has: a measured map or image first, then a
-  published simulation, then one color over the whole body, and the neutral shape
-  last. So a simulation is the default view where nothing measured is drawn as a
+  published simulation, then one measured color over the whole body, then an
+  estimated one, and the neutral shape last. So a simulation is the default view where nothing measured is drawn as a
   map, and it says it is a model there as plainly as anywhere. Never blend simulated
   structure into a measured dataset, and never use it to fill a gap in one.
 - Use the released numbers: the quantity, units, grid and time averaging the
@@ -205,3 +205,16 @@ For repairs, show how each confirmed finding was resolved or visibly qualified.
 Add regression cases for demonstrated mechanisms, not tests of prose or one
 declaration per body. Run the relevant [qualification](qualification.md) checks;
 do not call unresolved external restoration or failed aggregate checks green.
+
+## Estimates
+
+An estimate is a number nobody measured for this object: an equilibrium temperature
+computed from an orbit, not a brightness seen in an eclipse.
+
+- Show one only when a published sample tests it. State the test where the estimate
+  is shown: how many objects, and how far the measured values fall from the estimate.
+- Show it only for objects like the ones tested. An estimate tested on hot giants
+  says nothing about a small planet.
+- Call it an estimate in its name, its legend and its description, never "measured"
+  or "observed". The number itself is still one a paper prints.
+- It ranks below every measurement, and a measurement replaces it.

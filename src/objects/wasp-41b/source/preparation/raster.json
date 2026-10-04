@@ -19,19 +19,14 @@
   },
   "surfaces": [
     {
-      "id": "shape",
+      "id": "thermal",
       "output": "wasp-41b-surface-{id}{suffix}.webp",
       "thumbnail": "wasp-41b-dataset-{id}.webp",
-      "source": "measurements.json",
+      "source": "photometry/thermal-color.json",
       "falseColor": false,
       "science": {
-        "kind": "neutral-shape",
-        "qualification": "Shared neutral gray display convention for a planet with no image or measured color in this package; a sphere of the published radius, lit by its own star, whose measured color (#ffebe0, the color dataset of wasp-41 (src/objects/wasp-41/source/photometry/stellar-color.json)) tints the gray at the same brightness.",
-        "hostLight": {
-          "host": "wasp-41",
-          "srgb": "#ffebe0",
-          "source": "the color dataset of wasp-41 (src/objects/wasp-41/source/photometry/stellar-color.json)"
-        }
+        "kind": "equilibrium-thermal-color",
+        "qualification": "An estimate, not a measurement: the color of a black body at the equilibrium temperature 1,242 K (Southworth et al. 2016, equilibrium temperature (NASA Exoplanet Archive planetary systems table)), uniform over the disc. On 120 hot Jupiters whose day side Spitzer measured, the measured temperature is within 20% of this kind of estimate for 83% (Deming et al. 2023). Its black-body color lies outside the sRGB gamut and is shown mixed with 2% white, the least that brings it inside, hue kept."
       }
     }
   ],

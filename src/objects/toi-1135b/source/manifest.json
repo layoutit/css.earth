@@ -169,6 +169,23 @@
           }
         ]
       }
+    },
+    {
+      "id": "toi-1135b-thermal-color",
+      "path": "photometry/thermal-color.json",
+      "origin": "https://ui.adsabs.harvard.edu/abs/2025ApJ...994L..23D/abstract",
+      "credit": "Dugan et al. 2025, equilibrium temperature (NASA Exoplanet Archive planetary systems table); CIE 1931 2° observer",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "Authored method record: names the archive row chosen and the color computation applied",
+      "redistribution": "Method record only",
+      "consumers": [
+        "assets",
+        "datasets"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored color recipe naming the cited equilibrium temperature; repinned when edited."
+      }
     }
   ],
   "generatedIntermediates": [
@@ -185,7 +202,8 @@
         "generator": "packages/telescope-cli/src/source-authoring/context-markers.mts",
         "inputs": [
           "toi-1135b-observational-measurements",
-          "toi-1135b-preparation-raster"
+          "toi-1135b-preparation-raster",
+          "toi-1135b-thermal-color"
         ]
       },
       "generator": "packages/telescope-cli/src/source-authoring/context-markers.mts",

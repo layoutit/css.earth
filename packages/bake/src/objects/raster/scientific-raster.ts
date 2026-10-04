@@ -25,7 +25,7 @@ import { loadNpyDictionaryMap } from './numpy/npy-dictionary-map.ts';
 import { loadNpyLonLatGrid } from './numpy/npy-lonlat-grid.ts';
 import { loadPds3Grid } from './pds/pds3-grid.ts';
 import { loadVicarGrid } from './pds/vicar-grid.ts';
-import { loadBareRockEclipse, loadBareRockFit, loadEclipseMapFit } from './eclipse-map/eclipse-map-fit.ts';
+import { loadBareRockEclipse, loadBareRockFit, loadEclipseMapFit, loadMeasuredDayside } from './eclipse-map/eclipse-map-fit.ts';
 import { loadPublishedPhaseCurveMap } from './eclipse-map/published-phase-curve-map.ts';
 import { loadEigenspectraTemperature } from './eclipse-map/eigenspectra-map.ts';
 import { loadPublishedHotRegionMap } from './hot-region-map.ts';
@@ -183,6 +183,7 @@ export async function loadScienceSurface(root: string, value: unknown, sourceMes
   if (dataset.format === 'pds-equal-area-table') return loadPdsEqualAreaTable(root, value);
   if (dataset.format === 'bare-rock-fit') return loadBareRockFit(root, value);
   if (dataset.format === 'bare-rock-eclipse') return loadBareRockEclipse(root, value);
+  if (dataset.format === 'measured-dayside') return loadMeasuredDayside(root, value);
   if (dataset.format === 'isis3') {
     const grid = parseScienceGrid(dataset.grid);
     const {data, origin, resolution} = await loadIsis3Raster(resolve(root, dataset.path), grid);

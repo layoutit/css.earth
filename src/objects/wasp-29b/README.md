@@ -10,6 +10,8 @@ It is the only planet known around WASP-29. Its orbit and size follow Stassun et
 
 **Color.** No image or measured color exists. The neutral gray is lit by wasp-29's measured color (#ffd3b8, the color dataset of wasp-29 (src/objects/wasp-29/source/photometry/stellar-color.json)) at the gray's own brightness.
 
+**Measured day side.** The page opens on the one thing measured of its surface: a dayside brightness temperature of 913 K at 4.5 µm (Deming et al. 2023, dayside brightness temperature at 4.5 µm (uniform reanalysis of Spitzer's eclipses, CDS J/AJ/165/104 table 2); [record](source/photometry/dayside-temperature.json)). Chosen by rule: 1 measured of 1 rows; the smallest relative uncertainty, then the longest wavelength. The `measured-dayside` format paints the hemisphere under the star in false color at that temperature, on the 300 to 3,000 K scale every measured day side shares, and leaves the night hemisphere blank. It is too cool for a visible glow, so no black-body color is shown.
+
 **Charts.** The orbits of WASP-29's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (96, 103, 105), folded onto its orbit. Upper limits and rows without an error are left out.
 
 ## Evidence

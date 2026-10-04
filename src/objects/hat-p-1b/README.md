@@ -8,13 +8,17 @@ It is the only planet known around HAT-P-1. Its orbit and size follow Nikolov et
 
 **Orbit.** ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 4.4652986 d Nikolov et al. 2014 (2014MNRAS.437...46N), via the NASA Exoplanet Archive ps table (pl_refname NIKOLOV_ET_AL__2014): a/R* 9.853; Nikolov et al. 2014 (2014MNRAS.437...46N), via the NASA Exoplanet Archive ps table (pl_refname NIKOLOV_ET_AL__2014): inclination 85.634 degrees Ment et al. 2018 (2018AJ....156..213M), via the NASA Exoplanet Archive ps table (pl_refname MENT_ET_AL__2018): e 0 ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): transit mid-time 2460606.436882 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min) Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).
 
-**Color.** No image or measured color exists. The neutral gray is lit by hat-p-1's measured color (#fff4f6, the color dataset of hat-p-1 (src/objects/hat-p-1/source/photometry/stellar-color.json)) at the gray's own brightness.
+**Color.** A black body at the 1,733 K dayside brightness temperature measured in secondary eclipse at 3.6 µm (Deming et al. 2023, dayside brightness temperature at 3.6 µm (uniform reanalysis of Spitzer's eclipses, CDS J/AJ/165/104 table 2)): #ff7c00. Chosen from the archive's emission rows by rule: 2 measured of 2 rows; the smallest relative uncertainty, then the longest wavelength. Reflected starlight is not included.
 
 **Charts.** The orbits of HAT-P-1's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (56, 83, 84), folded onto its orbit. Upper limits and rows without an error are left out.
 
 ## Evidence
 
 Generated 2026-09-29 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/hat-p-1b.json).
+
+- Run of 2026-10-04: [`new-object --thermal`](../../../packages/telescope-cli/src/new-object/planet-datasets.mts) gave it the measured glow, with 34 other planets; `--expected-glow` gave 62 unmeasured hot giants an estimated one. Seven of them as their pages open, gray before and after:
+
+![Seven planets, gray before and glowing after: HAT-P-1 b, WASP-79 b, KELT-20 b and K2-141 b at their measured day side, HAT-P-14 b, WASP-99 b and WASP-189 b at an estimated one](evidence/2026-10-04/glow.jpg)
 
 ## Known problems
 

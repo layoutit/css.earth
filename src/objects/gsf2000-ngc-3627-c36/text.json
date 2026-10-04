@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "gsf2000-ngc-3627-c36",
+  "card": {
+    "text": "A Cepheid in the galaxy M66, 10.3 million parsecs away, that swells and shrinks every 53.1 days.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-26093-cds-vizier-15290723",
+        "url": "https://doi.org/10.26093/cds/vizier.15290723",
+        "label": "Gibson et al. (2004), Centre de Donnees Strasbourg (CDS)",
+        "checked": "2026-10-04",
+        "locator": "VizieR J/ApJ/529/723/appen Cluster = NGC 3627, CNN = C36: Per"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Gibson et al. (2000) list its pulsation at 53.1 days.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-26093-cds-vizier-15290723",
+        "url": "https://doi.org/10.26093/cds/vizier.15290723",
+        "label": "Gibson et al. (2004), Centre de Donnees Strasbourg (CDS)",
+        "checked": "2026-10-04",
+        "locator": "VizieR J/ApJ/529/723/appen Cluster = NGC 3627, CNN = C36: Per"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its temperature",
+      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

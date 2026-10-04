@@ -49,22 +49,22 @@
   },
   "datasets": {
     "titleKey": "datasets",
-    "defaultDataset": "shape",
+    "defaultDataset": "thermal",
     "controls": [
       {
-        "id": "shape",
-        "label": "Shape",
-        "qualification": "A sphere of the published radius, lit by HIP 67522; the neutral gray is a display convention, not a measured color.",
-        "thumbnail": "hip-67522b-dataset-shape.webp",
-        "surface": "hip-67522b-surface-shape@2x.webp",
-        "poles": "hip-67522b-poles-shape@2x.webp",
+        "id": "thermal",
+        "label": "Expected glow",
+        "qualification": "An estimate, not a measurement: black-body color at its published equilibrium temperature, 1,175 K.",
+        "thumbnail": "hip-67522b-dataset-thermal.webp",
+        "surface": "hip-67522b-surface-thermal@2x.webp",
+        "poles": "hip-67522b-poles-thermal@2x.webp",
         "source": {
-          "id": "hip-67522b-observational-measurements",
+          "id": "hip-67522b-thermal-color",
           "path": "../manifest.json",
           "url": "https://ui.adsabs.harvard.edu/abs/2024ApJ...973L..30B/abstract"
         },
         "falseColor": false,
-        "notes": "No image or color of HIP 67522 b is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the color of hip-67522's light, as its color dataset measures it."
+        "notes": "Nobody has measured HIP 67522 b's heat. This is the color of a black body at 1,175 K, the equilibrium temperature its paper computes from its star's light (Barber et al. 2024, equilibrium temperature (NASA Exoplanet Archive planetary systems table)). On 120 hot Jupiters whose day side Spitzer measured, the measured temperature is within 20% of this kind of estimate for 83% (Deming et al. 2023). Its star lights the day side. Reflected starlight is not included."
       }
     ]
   },

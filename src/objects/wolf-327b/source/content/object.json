@@ -49,22 +49,22 @@
   },
   "datasets": {
     "titleKey": "datasets",
-    "defaultDataset": "shape",
+    "defaultDataset": "thermal",
     "controls": [
       {
-        "id": "shape",
-        "label": "Shape",
-        "qualification": "A sphere of the published radius, lit by Wolf 327; the neutral gray is a display convention, not a measured color.",
-        "thumbnail": "wolf-327b-dataset-shape.webp",
-        "surface": "wolf-327b-surface-shape@2x.webp",
-        "poles": "wolf-327b-poles-shape@2x.webp",
+        "id": "thermal",
+        "label": "Expected glow",
+        "qualification": "An estimate, not a measurement: black-body color at 1,390 K, the bare-rock maximum for its orbit.",
+        "thumbnail": "wolf-327b-dataset-thermal.webp",
+        "surface": "wolf-327b-surface-thermal@2x.webp",
+        "poles": "wolf-327b-poles-thermal@2x.webp",
         "source": {
-          "id": "wolf-327b-observational-measurements",
+          "id": "wolf-327b-thermal-color",
           "path": "../manifest.json",
-          "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...684A..83M/abstract"
+          "url": "https://arxiv.org/abs/2412.06573"
         },
         "falseColor": false,
-        "notes": "No image or color of Wolf 327 b is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the color of wolf-327's light, as its color dataset measures it."
+        "notes": "Nobody has measured Wolf 327 b's heat. This is the color of a black body at 1,390 K, the hottest day side a dark, airless rock can have on its orbit (computed from wolf-327's temperature, 3542 K, and the orbit's a/R* 5.3, as T* (R*/a)^(1/2) (2/3)^(1/4)). Nine rocky planets of red dwarfs with a measured day side fall within 13% of this kind of estimate (Coy et al. 2025); GJ 357 b, measured since, is 35% above it. Its star lights the day side. Reflected starlight is not included."
       }
     ]
   },

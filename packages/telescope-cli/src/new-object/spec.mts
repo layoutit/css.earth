@@ -156,7 +156,21 @@ function thermalSpec(value: unknown, label: string): ThermalSpec {
   if (!(wavelength > 0)) throw new RangeError(`${label}.wavelengthMicrometres must be positive.`);
   const uncertainty = input.uncertaintyK === undefined ? undefined : requireFiniteNumber(input.uncertaintyK, `${label}.uncertaintyK`);
   return { temperatureK, ...(uncertainty === undefined ? {} : { uncertaintyK: uncertainty }), wavelengthMicrometres: wavelength, facility: requireString(input.facility, `${label}.facility`),
-    source: requireString(input.source, `${label}.source`), url: requireString(input.url, `${label}.url`), chosen: requireString(input.chosen, `${label}.chosen`) };
+    source: requireString(input.source, `${label}.source`), url: requireString(input.url, `${label}.url`), chosen: requireString(input.chosen, `${label}.chosen`),
+    ...(input.where === undefined ? {} : { where: requireString(input.where, `${label}.where`) }) };
+}
+
+/** `--thermal-entries entries.json`: a measured day side read from its paper, for planets neither the archive's emission table
+ * nor the Spitzer eclipse catalogue holds: a list of { id, thermal }, each with `where` the paper prints the temperature. */
+export function parseThermalEntries(value: unknown): Map<string, ThermalSpec> {
+  const entries = requireArray(value, 'thermal entries'), out = new Map<string, ThermalSpec>();
+  for (const [index, entry] of entries.entries()) {
+    const input = requireRecord(entry, `entries[${index}]`), id = requireString(input.id, `entries[${index}].id`), thermal = thermalSpec(input.thermal, `${id}.thermal`);
+    if (out.has(id)) throw new TypeError(`entries[${index}]: ${id} is listed twice.`);
+    if (thermal.where === undefined) throw new TypeError(`${id}.thermal.where: say where the paper prints the temperature (its abstract, a table).`);
+    out.set(id, thermal);
+  }
+  return out;
 }
 function draftText(value: unknown, label: string): DraftText {
   const input = requireRecord(value, label), card = requireString(input.card, `${label}.card`), introduction = requireString(input.introduction, `${label}.introduction`);
@@ -179,7 +193,7 @@ export type OrbitSpec =
   | { readonly elements: Readonly<Record<string, number>>; readonly epoch?: HostedEpoch; readonly source: string; readonly url: string }
   | { readonly record: true; readonly source: string; readonly url: string };
 /** A measured dayside brightness temperature (secondary eclipse) for the "Thermal glow" dataset (planet-datasets.mts). */
-export interface ThermalSpec { readonly temperatureK: number; readonly uncertaintyK?: number; readonly wavelengthMicrometres: number; readonly facility: string; readonly source: string; readonly url: string; readonly chosen: string }
+export interface ThermalSpec { readonly where?: string; readonly temperatureK: number; readonly uncertaintyK?: number; readonly wavelengthMicrometres: number; readonly facility: string; readonly source: string; readonly url: string; readonly chosen: string }
 /** Published flux densities in three infrared bands for the band-color dataset of an imaged planet (planet-datasets.mts): red, green,
  * blue from the longest wavelength, on one display range shared with the bodies it names. */
 export interface PhotometrySpec {

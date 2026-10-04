@@ -49,22 +49,22 @@
   },
   "datasets": {
     "titleKey": "datasets",
-    "defaultDataset": "shape",
+    "defaultDataset": "thermal",
     "controls": [
       {
-        "id": "shape",
-        "label": "Shape",
-        "qualification": "A sphere of the published radius, lit by K2-141; the neutral gray is a display convention, not a measured color.",
-        "thumbnail": "k2-141b-dataset-shape.webp",
-        "surface": "k2-141b-surface-shape@2x.webp",
-        "poles": "k2-141b-poles-shape@2x.webp",
+        "id": "thermal",
+        "label": "Thermal glow",
+        "qualification": "Black-body color at its measured dayside temperature, 2,049 K. The disc itself is unresolved.",
+        "thumbnail": "k2-141b-dataset-thermal.webp",
+        "surface": "k2-141b-surface-thermal@2x.webp",
+        "poles": "k2-141b-poles-thermal@2x.webp",
         "source": {
-          "id": "k2-141b-observational-measurements",
+          "id": "k2-141b-thermal-color",
           "path": "../manifest.json",
-          "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...677A..33B/abstract"
+          "url": "https://arxiv.org/abs/2203.00370"
         },
         "falseColor": false,
-        "notes": "No image or color of K2-141 b is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the color of k2-141's light, as its color dataset measures it."
+        "notes": "The color of K2-141 b's heat: a black body at the dayside brightness temperature measured in secondary eclipse at 4.5 µm (Spitzer IRAC and Kepler). Its star lights the day side; the night side is not measured. Reflected starlight is not included."
       }
     ]
   },

@@ -665,19 +665,21 @@ test('a star beyond Gaia\'s parallax is placed at its cited distance; a weak or 
   assert.match(String(generated.files.get(`src/objects/${spec.id}/README.md`)), /distance 964,000 pc from Bonanos et al\. \(2006\), ApJ 652, 313; Gaia DR3 gives it no parallax/u);
 });
 
-test('an imaged planet\'s K, H and J magnitudes become the band color, each cited to its paper; a planet missing a band is named', async () => {
+test('an imaged planet\'s K, H and J magnitudes become the band color, each cited to its paper; a band the MKO columns lack comes from 2MASS, and a planet missing a band in both is named', async () => {
   const { draftUltracoolPhotometry, readCsv, ULTRACOOL } = await import('./archives/ultracool.mts');
   const { parsePhotometryEntries } = await import('./spec.mts');
   assert.deepEqual(readCsv('a,b\n"x, y",2\n'), [{ a: 'x, y', b: '2' }]);
-  const main = 'name,name_simbad,name_simbadable,J_MKO,Jerr_MKO,ref_J_MKO,H_MKO,Herr_MKO,ref_H_MKO,K_MKO,Kerr_MKO,ref_K_MKO\n51 Eri b,* 51 Eri b,* 51 Eri b,19.04,0.40,Raja17,18.99,0.21,Raja17,18.67,0.19,Raja17\nAF Lep b,null,null,19.22,0.1,X,18.61,0.1,X,NaN,NaN,null\n';
+  const main = 'name,name_simbad,name_simbadable,J_MKO,Jerr_MKO,ref_J_MKO,H_MKO,Herr_MKO,ref_H_MKO,K_MKO,Kerr_MKO,ref_K_MKO,J_2MASS,Jerr_2MASS,ref_J_2MASS,H_2MASS,Herr_2MASS,ref_H_2MASS,Ks_2MASS,Kserr_2MASS,ref_Ks_2MASS\n51 Eri b,* 51 Eri b,* 51 Eri b,19.04,0.40,Raja17,18.99,0.21,Raja17,18.67,0.19,Raja17,NaN,NaN,null,NaN,NaN,null,NaN,NaN,null\nAF Lep b,null,null,19.22,0.1,X,18.61,0.1,X,NaN,NaN,null,NaN,NaN,null,NaN,NaN,null,16.75,0.07,DeRo23\nVHS J125601.92-125723.9 b,null,null,17.136,0.02,X,15.777,0.02,X,14.55,0.02,X,NaN,NaN,null,NaN,NaN,null,NaN,NaN,null\nGhost b,null,null,19,0.1,X,18,0.1,X,NaN,NaN,null,NaN,NaN,null,NaN,NaN,null,NaN,NaN,null\n';
   const refs = 'code_ref,ADSkey_ref,Paperskey_ref,citetext_ref,title_ref,notes_ref\nRaja17,2017AJ....154...10R,k,Rajan et al. (2017),"Characterizing 51 Eri b, 1 to 5 um",\n';
   const svo = (lambda: number, zero: number) => `<PARAM name="WavelengthEff" value="${lambda}"/><PARAM name="ZeroPoint" value="${zero}"/>`;
   const archive: Archive = { async text(url, form) {
     if (form?.QUERY?.includes("'51 Eridani b'")) return 'main_id\n"*  51 Eri b"'; if (form?.QUERY) return 'main_id\n';
     if (url === ULTRACOOL.main) return main; if (url === ULTRACOOL.references) return refs;
     if (url.includes('NSFCam.K')) return svo(21840.23, 638.185); if (url.includes('NSFCam.H')) return svo(16140.31, 1034.805); if (url.includes('NSFCam.J')) return svo(12417.04, 1544.028);
+    if (url.includes('2MASS.Ks')) return svo(21590, 666.8); if (url.includes('2MASS.H')) return svo(16620, 1024); if (url.includes('2MASS.J')) return svo(12350, 1594);
     throw new Error(`unexpected ${url}`); }, async bytes() { throw new Error('none'); }, async exists() { return false; } };
-  const { entries, notes } = await draftUltracoolPhotometry(archive, [{ id: 'hd-29391-b', name: '51 Eridani b' }, { id: 'af-lep-b', name: 'AF Lep b' }, { id: 'x', name: 'Nobody b' }]);
+  const { entries, notes } = await draftUltracoolPhotometry(archive, [{ id: 'hd-29391-b', name: '51 Eridani b' }, { id: 'af-lep-b', name: 'AF Lep b' }, { id: 'x', name: 'Nobody b' },
+    { id: 'vhs-1256-1257-b', name: 'VHS 1256-1257 b', aliases: ['VHS J125601.92-125723.9 b'] }, { id: 'ghost-b', name: 'Ghost b' }]);
   const photometry = entries[0]!.photometry;
   assert.deepEqual(photometry.bands.map(band => band.band), ['MKO K', 'MKO H', 'MKO J'], 'red is the longest wavelength');
   assert.equal(photometry.bands[0]!.value, Number((638.185 * 10 ** (-0.4 * 18.67) * 1e6).toPrecision(4)), 'F = zero point x 10^(-0.4 m)');
@@ -685,8 +687,15 @@ test('an imaged planet\'s K, H and J magnitudes become the band color, each cite
   assert.match(photometry.source.citation, /^Rajan et al\. \(2017\), as compiled in Best/u);
   assert.equal(photometry.displayRange[1], Math.max(...photometry.bands.map(band => band.value)));
   assert.doesNotThrow(() => parsePhotometryEntries(entries), 'the dataset\'s own parser accepts the draft');
-  assert.deepEqual(notes.map(note => note.split(':')[0]), ['af-lep-b', 'x']);
-  assert.match(notes[0]!, /no MKO K magnitude/u);
+  // AF Lep b has no MKO K: its 2MASS Ks is taken, with the 2MASS zero point, and the band says so.
+  const mixed = entries.find(entry => entry.id === 'af-lep-b')!.photometry;
+  assert.deepEqual(mixed.bands.map(band => band.band), ['2MASS Ks', 'MKO H', 'MKO J']);
+  assert.equal(mixed.bands[0]!.value, Number((666.8 * 10 ** (-0.4 * 16.75) * 1e6).toPrecision(4)));
+  assert.match(mixed.source.locator, /2MASS Ks 16\.75 \+\/- 0\.07 \(DeRo23\), MKO H 18\.61/u);
+  // A planet the sheet names another way is found by an alias of its record.
+  assert.deepEqual(entries.map(entry => entry.id), ['hd-29391-b', 'af-lep-b', 'vhs-1256-1257-b']);
+  assert.deepEqual(notes.map(note => note.split(':')[0]), ['x', 'ghost-b']);
+  assert.match(notes[1]!, /no MKO or 2MASS K magnitude for Ghost b/u);
 });
 
 test('a star Gaia gives no radial velocity takes SIMBAD\'s, cited to its paper, else zero with what that costs', async () => {

@@ -63,22 +63,22 @@
   },
   "datasets": {
     "titleKey": "datasets",
-    "defaultDataset": "shape",
+    "defaultDataset": "infrared",
     "controls": [
       {
-        "id": "shape",
-        "label": "Shape",
-        "qualification": "A sphere of the published radius, glowing with its own heat; the neutral gray is a display convention, not a measured color.",
-        "thumbnail": "vhs-1256-1257-b-dataset-shape.webp",
-        "surface": "vhs-1256-1257-b-surface-shape@2x.webp",
-        "poles": "vhs-1256-1257-b-poles-shape@2x.webp",
+        "id": "infrared",
+        "label": "Infrared color",
+        "qualification": "False color from its measured flux in three infrared bands (Best et al. (2021); McMahon et al. (2013), as compiled in Best, Liu, Magnier & Dupuy (2024), The UltracoolSheet v2.1 (Zenodo); zero points from the SVO Filter Profile Service). The disc itself is unresolved.",
+        "thumbnail": "vhs-1256-1257-b-dataset-infrared.webp",
+        "surface": "vhs-1256-1257-b-surface-infrared@2x.webp",
+        "poles": "vhs-1256-1257-b-poles-infrared@2x.webp",
         "source": {
-          "id": "vhs-1256-1257-b-observational-measurements",
+          "id": "vhs-1256-1257-b-band-color",
           "path": "../manifest.json",
-          "url": "https://arxiv.org/abs/2209.00620"
+          "url": "https://ui.adsabs.harvard.edu/abs/2021AJ....161...42B"
         },
-        "falseColor": false,
-        "notes": "No image or color of this planet's surface exists: it is a point of light 8 arcseconds from its stars. JWST measured its spectrum from 1 to 20 micrometres (Miles et al. 2023), but no paper gives its flux in three bands comparable with HR 8799's planets, so it stays gray. Its rotation period, about 22 hours, is measured (Zhou et al. 2020) but not its axis on the sky; the display axis is its orbit normal. The gray marks an unresolved surface."
+        "falseColor": true,
+        "notes": "VHS 1256-1257 b's brightness in three infrared bands as one color: red MKO K 2.184 µm, green MKO H 1.614 µm, blue MKO J 1.2417 µm (Best et al. (2021); McMahon et al. (2013), as compiled in Best, Liu, Magnier & Dupuy (2024), The UltracoolSheet v2.1 (Zenodo); zero points from the SVO Filter Profile Service), on a range shared with this planet alone, from zero to its brightest band (mko k), so the color shows its band ratios; brightness is not compared across planets at different distances. Not a natural color; nobody has resolved its disc."
       }
     ]
   },

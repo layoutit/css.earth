@@ -10,6 +10,8 @@ It is one of 2 planets known around WASP-8. Its orbit and size follow Stassun et
 
 **Color.** No image or measured color exists. The neutral gray is lit by wasp-8's measured color (#ffeee8, the color dataset of wasp-8 (src/objects/wasp-8/source/photometry/stellar-color.json)) at the gray's own brightness.
 
+**Measured day side.** The page opens on the one thing measured of its surface: a dayside brightness temperature of 938 K at 8 µm, at secondary eclipse, (Cubillos et al. 2013, dayside brightness temperature at 8 µm (NASA Exoplanet Archive emission table); [record](source/photometry/dayside-temperature.json)). Chosen by rule: 3 measured of 3 rows; the smallest relative uncertainty, then the longest wavelength. The `measured-dayside` format paints the hemisphere under the star in false color at that temperature, on the 300 to 3,000 K scale every measured day side shares, and leaves the night hemisphere blank. The orbit is eccentric, so this is the day side at the moment of eclipse, not round the orbit. It is too cool for a visible glow, so no black-body color is shown.
+
 **Charts.** The orbits of WASP-8's planets from above, from their hosted-orbit records, and its transit in 3 TESS sectors (69, 96, 106), folded onto its orbit. Upper limits and rows without an error are left out.
 
 ## Evidence

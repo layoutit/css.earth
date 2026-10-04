@@ -484,15 +484,20 @@ export async function createSurfaceInterpreter({ objectId, displayName, sourceDi
           displayRange: color.record.displayRange, displayRangeSource: color.record.displayRangeSource, source: color.record.source,
           meaning: 'Infrared false color, uniform over the body: red, green and blue are the published flux densities in three bands, longest wavelength red, over one range shared with the bodies it names; not a natural color and not a resolved surface map.' } } };
       }
+      case 'equilibrium-thermal-color':
       case 'dayside-thermal-color': {
         // A transiting planet with a measured dayside brightness temperature (secondary eclipse) and no image: the whole disc takes
         // the color of a black body at that temperature, and the lighting bank turns the day side to its star. Reflected starlight
         // is not added: the eclipse depth at the cited wavelength is thermal, and nothing measured says how much light the planet reflects.
+        // A hot giant nobody has measured takes the same color at the equilibrium temperature its paper computes: an estimate, said
+        // as one in every text and in the report.
         const source = await manifest;
         const { temperature, color } = await loadStellarPhotometricColor(async path => { await source.validatePath(path); return readFile(resolve(sourceDirectory, path)); }, surface.science, surface.source);
         if (recipe.emission) throw new TypeError(`${objectId}/${surface.id}: a dayside thermal color belongs to a lit body, not an emissive one.`);
         const data = Buffer.alloc(width * height * 4);
         for (let offset = 0; offset < data.length; offset += 4) data.set([...color.srgb, 255], offset);
+        if (surface.science.kind === 'equilibrium-thermal-color') return { data, channels: 4, nearest: true, report: { equilibriumThermalColor: { srgb: color.srgb, temperature,
+          meaning: 'An estimate, not a measurement: the color of a black body at the published equilibrium temperature, uniform over the disc; no light from the planet is measured, and reflected starlight is not included.' } } };
         return { data, channels: 4, nearest: true, report: { daysideThermalColor: { srgb: color.srgb, temperature,
           meaning: 'Color of a black body at the dayside brightness temperature measured in secondary eclipse at the cited wavelength, uniform over the disc; the planet is unresolved, and reflected starlight is not included.' } } };
       }

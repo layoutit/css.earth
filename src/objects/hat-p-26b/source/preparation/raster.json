@@ -19,19 +19,14 @@
   },
   "surfaces": [
     {
-      "id": "shape",
+      "id": "thermal",
       "output": "hat-p-26b-surface-{id}{suffix}.webp",
       "thumbnail": "hat-p-26b-dataset-{id}.webp",
-      "source": "measurements.json",
+      "source": "photometry/thermal-color.json",
       "falseColor": false,
       "science": {
-        "kind": "neutral-shape",
-        "qualification": "Shared neutral gray display convention for a planet with no image or measured color in this package; a sphere of the published radius, lit by its own star, whose measured color (#ffe1cf, the color dataset of hat-p-26 (src/objects/hat-p-26/source/photometry/stellar-color.json)) tints the gray at the same brightness.",
-        "hostLight": {
-          "host": "hat-p-26",
-          "srgb": "#ffe1cf",
-          "source": "the color dataset of hat-p-26 (src/objects/hat-p-26/source/photometry/stellar-color.json)"
-        }
+        "kind": "dayside-thermal-color",
+        "qualification": "Color of a black body at the dayside brightness temperature 1,087 K measured in secondary eclipse at 4.5 µm (Wallack et al. 2019, dayside brightness temperature at 4.5 µm, 1087 +91 -102 K, from an eclipse depth of 265 +68 -72 ppm), uniform over the disc and lit by its star so the day side faces it. The planet is unresolved: no map is implied, and reflected starlight is not included. Its black-body color lies outside the sRGB gamut and is shown mixed with 2% white, the least that brings it inside, hue kept."
       }
     }
   ],

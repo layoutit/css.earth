@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-disc-band-color@1",
+  "objectId": "vhs-1256-1257-b",
+  "unit": "µJy",
+  "source": {
+    "citation": "Best et al. (2021); McMahon et al. (2013), as compiled in Best, Liu, Magnier & Dupuy (2024), The UltracoolSheet v2.1 (Zenodo); zero points from the SVO Filter Profile Service",
+    "url": "https://ui.adsabs.harvard.edu/abs/2021AJ....161...42B",
+    "locator": "UltracoolSheet Main.csv, VHS J125601.92-125723.9 b: MKO K 14.55 +/- 0.12 (Best21), MKO H 15.777 +/- 0.016 (McMa13), MKO J 17.136 +/- 0.02 (McMa13); SVO MKO/NSFCam.K 638.2 Jy, MKO/NSFCam.H 1034.8 Jy, MKO/NSFCam.J 1544.0 Jy"
+  },
+  "bands": [
+    {
+      "band": "MKO K",
+      "wavelengthMicrometres": 2.184,
+      "value": 965.9,
+      "error": 110
+    },
+    {
+      "band": "MKO H",
+      "wavelengthMicrometres": 1.614,
+      "value": 505.9,
+      "error": 7.5
+    },
+    {
+      "band": "MKO J",
+      "wavelengthMicrometres": 1.2417,
+      "value": 215.9,
+      "error": 4
+    }
+  ],
+  "displayRange": [
+    0,
+    965.9
+  ],
+  "displayRangeSource": "This planet alone, from zero to its brightest band (MKO K), so the color shows its band ratios; brightness is not compared across planets at different distances."
+}
