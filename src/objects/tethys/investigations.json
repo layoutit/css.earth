@@ -84,14 +84,15 @@
     },
     {
       "id": "limb-law",
-      "subject": "Photometric law for the lighting overlays",
+      "subject": "Photometric law for the lighting",
       "status": "unresolved",
-      "finding": "Filacchione et al. (2020), writing on Rhea, say the same Shkuratov photometric correction was applied to disc-resolved Cassini VIMS data of Tethys (Filacchione et al. 2018, not read here). Tethys is prepared by the terrestrial lane, whose lighting constants are authored (0.35 flood floor, 0.05 ambient) and which has no path for a published law, so it keeps them.",
+      "finding": "Filacchione et al. (2022) fitted Akimov's disk function with a quadratic phase curve to Cassini VIMS spectra of Tethys (Table 4), with incidence and emission up to 70 degrees and phase from 10 to 120 degrees. Tethys is a shape-model body. Its flood-lit bank is the map unshaded, and Akimov's function is 1 over the whole disc at zero phase, so the default view already follows the law. Buratti (1984) found from Voyager images significant limb darkening on Tethys at low phase, which that function does not show; the paper's values could not be read. With Shadows on, lighting is baked once in the body frame as 0.12 + 0.88 cos(incidence) with cast shadows, and a law that depends on the viewing direction cannot be baked into one such bank.",
       "evidence": [
-        "https://doi.org/10.1093/mnrasl/slaa162",
-        "https://doi.org/10.1029/2018GL078602"
+        "https://doi.org/10.1016/j.icarus.2021.114803",
+        "https://arxiv.org/abs/2111.15541",
+        "https://ntrs.nasa.gov/citations/19840066644"
       ],
-      "revisitWhen": "The terrestrial lane can light a body from a photometric model record, and the Shkuratov correction's disc function and parameters are read in the paper."
+      "revisitWhen": "Shadow banks keyed by phase angle are prepared for shape-model bodies."
     }
   ]
 }
