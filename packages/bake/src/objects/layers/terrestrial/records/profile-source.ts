@@ -4,6 +4,18 @@ import { parseSciencePalette } from '../../../raster/index.ts';
 import { parseTransform } from '../../../geometry/index.ts';
 import { parseSolidScience, parseSolidRasterConfig } from './solid-source.ts';
 import { parseRadialSource } from './radial-source.ts';
+import { parseLimbBlock } from '@cssearth/objects';
+
+/** A sphere's lighting frames: lit by the body's published photometric models (`limb`, packages/bake/src/photometry/limb.ts) or
+ * by the lane's authored sphere law, never both. */
+const AUTHORED_SPHERE_LAW=['terminatorWidth','directionalAmbient','fullPhaseAmbient','fullPhaseDiffuse','maximumOpacity'] as const;
+export function parseSolidLighting(value:unknown) {
+  const source=requireRecord(value), frames=shape({frameSize:number,frameCount:number,columns:number,logicalSize:number})(value);
+  if(source.limb===undefined) return {...frames,...shape({terminatorWidth:number,directionalAmbient:number,fullPhaseAmbient:number,fullPhaseDiffuse:number,maximumOpacity:number})(value)};
+  const stated=AUTHORED_SPHERE_LAW.filter(key=>key in source);
+  if(stated.length) throw new TypeError(`limb names published models, so the authored sphere law is not stated: remove ${stated.join(', ')}`);
+  return {...frames,limb:parseLimbBlock(source.limb,'limb')};
+}
 
 const grid = shape({width:optional(number),height:optional(number),noData:optional(nullable(number)),
   projection:optional(text),poleLatitude:optional(number),latitudeRange:optional(array(number)),
@@ -34,8 +46,7 @@ export function parseSolidPreparationSource(input:unknown) {
     geometry:shape({radius:number,radiusKm:number,mapUrl:text,polesUrl:text,radialModels:optional(value=>value),
       radialTerrain:optional(parseRadialSource),radialTerrainAlternatives:optional(array(value=>Object.assign({},parseRadialSource(value),shape({datasetId:text,additionalDatasetIds:optional(array(text))})(value)))),
       camera:optional(value=>{const camera=shape({framingScale:optional(number)})(value);refuseAuthoredCameraAngles(camera);return camera;})}),
-    lighting:shape({frameSize:number,frameCount:number,columns:number,logicalSize:number,terminatorWidth:number,
-      directionalAmbient:number,fullPhaseAmbient:number,fullPhaseDiffuse:number,maximumOpacity:number}),
+    lighting:parseSolidLighting,
     presentation:shape({defaultDataset:text}),
     celestial:shape({sunSource:text,sunQualification:optional(text),qualification:optional(text)})})(source);
   const raster=requireRecord(source.raster);
