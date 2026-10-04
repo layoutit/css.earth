@@ -1,0 +1,42 @@
+{
+  "id": "doi-10-1051-0004-6361-20021909",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Comerón et al. (2003): A bright early-type star in the halo of NGC 253: Runaway or in situ formation?",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361:20021909"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://doi.org/10.1051/0004-6361:20021909",
+      "label": "Publisher"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://doi.org/10.1051/0004-6361:20021909",
+      "checkedOn": "2026-10-04",
+      "locator": "Crossref record: title, authors, container"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Comerón et al. (2003), Astronomy & Astrophysics 400 137-143",
+      "scope": "citation",
+      "evidence": "https://doi.org/10.1051/0004-6361:20021909"
+    }
+  ],
+  "publisher": "Astronomy & Astrophysics 400 137-143",
+  "creators": [
+    "F. Comerón",
+    "A. E. Gómez",
+    "J. Torra"
+  ],
+  "publicationDate": "2003"
+}

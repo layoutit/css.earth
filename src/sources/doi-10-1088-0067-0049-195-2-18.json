@@ -1,0 +1,47 @@
+{
+  "id": "doi-10-1088-0067-0049-195-2-18",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Radburn-Smith et al. (2011): THE GHOSTS SURVEY. I. <i>HUBBLE SPACE TELESCOPE</i> ADVANCED CAMERA FOR SURVEYS DATA",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.1088/0067-0049/195/2/18"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2011ApJS..195...18R"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2011ApJS..195...18R",
+      "label": "Publisher"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2011ApJS..195...18R",
+      "checkedOn": "2026-10-04",
+      "locator": "Crossref record: title, authors, container"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Radburn-Smith et al. (2011), The Astrophysical Journal Supplement Series 195 18",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2011ApJS..195...18R"
+    }
+  ],
+  "publisher": "The Astrophysical Journal Supplement Series 195 18",
+  "creators": [
+    "D. J. Radburn-Smith",
+    "R. S. de Jong",
+    "A. C. Seth",
+    "et al."
+  ],
+  "publicationDate": "2011"
+}

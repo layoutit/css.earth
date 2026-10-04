@@ -1,0 +1,81 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "j004805-3-251745",
+  "displayName": "J004805.3-251745",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "24 solar radii",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-20021909",
+          "url": "https://doi.org/10.1051/0004-6361:20021909",
+          "label": "Comerón et al. (2003), Astronomy & Astrophysics 400 137-143",
+          "checked": "2026-10-04",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "3,467,369 parsecs",
+        "source": {
+          "catalogueId": "doi-10-1088-0067-0049-195-2-18",
+          "url": "https://ui.adsabs.harvard.edu/abs/2011ApJS..195...18R",
+          "label": "At NGC 253's own distance, 7,351 pc from its centre on the sky: the star is in the galaxy's halo, its sight line does not cross the disc there, and its depth along that line is not measured (Comerón et al. (2003), A&A 400, 137 also take the galaxy's distance for it). The galaxy's distance: RadburnSmith2011ApJS..195...18R: The GHOSTS Survey. I. Hubble Space Telescope Advanced Camera for Surveys Data (https://ui.adsabs.harvard.edu/abs/2011ApJS..195...18R); catalogue reference RadburnSmith2011ApJS..195...18R: 3467368.50453 pc (-109992.362096/+113595.866501); trgb",
+          "checked": "2026-10-04",
+          "path": "source/measurements.json",
+          "locator": "distanceParsecs; distanceSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "color",
+    "controls": [
+      {
+        "id": "color",
+        "label": "Color",
+        "qualification": "Color of a blackbody at the star's temperature; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
+        "thumbnail": "j004805-3-251745-dataset-color.webp",
+        "surface": "j004805-3-251745-surface-color@2x.webp",
+        "poles": "j004805-3-251745-poles-color@2x.webp",
+        "source": {
+          "id": "j004805-3-251745-stellar-color",
+          "path": "../manifest.json",
+          "url": "https://doi.org/10.1051/0004-6361:20021909"
+        },
+        "falseColor": false,
+        "notes": "The color of a blackbody at the star's published temperature. The darkening toward the edge is the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 15,000 K and log g 2.76 (u1 0.168, u2 0.306): a model, because no fit of this star's limb is used. The spin axis's direction on the sky is a display convention."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Comerón et al. (2003), A&A 400, 137",
+      "href": "https://doi.org/10.1051/0004-6361:20021909"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://doi.org/10.1051/0004-6361:20021909",
+      "credit": "Comerón et al. (2003), A&A 400, 137"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/j004805-3-251745.json",
+      "credit": "Comerón et al. radius; Comerón et al. (2003), A&A 402, 181, the erratum to Comerón et al. (2003), A&A 400, 137, which corrects the coordinates to 0h 48m 05.3s, -25° 17' 45\" (J2000) and the name to J004805.3-251745 position; cited distance; no measured rotation axis (display convention)"
+    }
+  }
+}
