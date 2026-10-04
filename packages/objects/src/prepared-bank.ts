@@ -16,7 +16,7 @@ const TYPES = {
   f64: Float64Array, f32: Float32Array, i32: Int32Array, u32: Uint32Array, i16: Int16Array, u16: Uint16Array, i8: Int8Array, u8: Uint8Array,
 } as const;
 export type PreparedBankColumnType = keyof typeof TYPES;
-export type PreparedBankColumn = InstanceType<(typeof TYPES)[PreparedBankColumnType]>;
+export type PreparedBankColumn = Float64Array | Float32Array | Int32Array | Uint32Array | Int16Array | Uint16Array | Int8Array | Uint8Array;
 /** A decoded bank: its schema, its header fields and its columns by name. */
 export interface PreparedBank {
   readonly schema: string;

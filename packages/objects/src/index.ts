@@ -143,6 +143,8 @@ export { PREPARED_SURFACE_FEATURES_SCHEMA } from './prepared-data/surface-featur
 export type { SurfaceFeatureKind, SurfaceFeatureOutline, SurfaceFeatureAxes, PreparedSurfaceFeature, PreparedSurfaceFeatureCatalog, ParsedSurfaceFeature, ParsedSurfaceFeatureCatalog, TraceSummary, SurfaceFeatureLandmarkEvidence } from './prepared-data/surface-feature-types.js';
 export { parsePreparedSurfaceFeatureCatalog } from './prepared-data/surface-feature-catalog.js';
 export { GALAXY_DISPLAY_SAMPLE_SCHEMA, parseGalaxyDisplaySample } from './prepared-data/galaxy-display-sample.js';
+export { PREPARED_CATALOGUE_DOTS_SCHEMA, catalogueDots, encodeCatalogueDots, decodeCatalogueDots } from './prepared-data/catalogue-dots.js';
+export type { PreparedCatalogueDots } from './prepared-data/catalogue-dots.js';
 export type { PreparedGalaxyDisplaySample, GalaxyDisplaySample } from './prepared-data/galaxy-display-sample.js';
 
 export { EMISSION_FIELD_SCHEMA } from './volume/emission-field-types.js';

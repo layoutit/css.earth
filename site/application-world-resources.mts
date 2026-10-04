@@ -6,12 +6,12 @@ import datasetBillboardText from './prepared-dataset-billboards.json?raw';
 import { createPreparedUniverse, loadPreparedCssVolume, loadPreparedPointAppearance, loadPreparedCssSurfaceShell, loadPreparedCssImageLayers, loadPreparedVolumeDatasets } from '@cssearth/renderer/universe';
 import { APPLICATION_WORLD_CONTEXT as applicationContext, APPLICATION_WORLD_PLANNER_SOURCE, WORLD_DOT_BANKS, onWorldSystems } from './world-context-plan.mts';
 import { preparedBodyBillboards } from '@cssearth/renderer/navigation/prepared-body-billboards.ts';
-import { CONTEXT_GALAXY_SAMPLE, CONTEXT_OBJECT_ASSET_URLS, CONTEXT_OBJECT_DESCRIPTORS } from './prepared-context-objects.mts';
+import { CONTEXT_OBJECT_ASSET_URLS, CONTEXT_OBJECT_DESCRIPTORS } from './prepared-context-objects.mts';
 import { CONTEXT_AVAILABILITY } from './context-availability.mts';
 import { PREPARED_WORLD_PRESENTATION } from './prepared-world-presentation.mts';
 import { createInFlightLoader } from './in-flight-loader.mts';
 import { startupFetch } from './startup-requests.mts';
-import { loadDotCatalogues } from './dot-catalogues.mts';
+import { loadCatalogueDots } from './dot-catalogues.mts';
 import { annotationsForBodies, worldVisibilityPolicy } from './application-world-visibility.mts';
 import { STELLAR_EXTENTS } from './stellar-extents.mts';
 import { CONTEXT_DATASETS } from './context-datasets.mts';
@@ -41,9 +41,9 @@ type ApplicationUniverse = ReturnType<typeof createPreparedUniverse> & {
 let universePromise: Promise<ApplicationUniverse> | null = null;
 export function loadApplicationUniverse(): Promise<ApplicationUniverse> {
   universePromise ??= (async () => {
-    let catalogs: Awaited<ReturnType<typeof loadDotCatalogues>> | null = null;
-    let catalogsLoading: Promise<Awaited<ReturnType<typeof loadDotCatalogues>>> | null = null;
-    const loadCatalogs = () => catalogs ? Promise.resolve(catalogs) : catalogsLoading ??= loadDotCatalogues(location.origin)
+    let catalogs: Awaited<ReturnType<typeof loadCatalogueDots>> | null = null;
+    let catalogsLoading: Promise<Awaited<ReturnType<typeof loadCatalogueDots>>> | null = null;
+    const loadCatalogs = () => catalogs ? Promise.resolve(catalogs) : catalogsLoading ??= loadCatalogueDots(location.origin)
       .then(value => catalogs = value).finally(() => { catalogsLoading = null; });
     // The context objects the world draws from any page are in its code; a bank drawn only for the bodies that hold it
     // comes with their object entries (`banks`, below), and joins these tables then.
@@ -193,9 +193,8 @@ export function loadApplicationUniverse(): Promise<ApplicationUniverse> {
       // Phones draw no celestial sky cube: about 60 MB of layers and 27 MB of decoded faces behind the body.
       sky: !phone,
       loadCatalog: async () => {
-        const { galaxies, clusters, nebulae } = await loadCatalogs();
-        return { payload: galaxies, galaxySample: CONTEXT_GALAXY_SAMPLE, nebulae, ...catalogBank,
-          clusters: { payload: clusters, ...catalogBank.clusters } };
+        // The catalogue's dots alone, read by the data worker: the catalogues themselves stay with the build.
+        return { payload: await loadCatalogs(), ...catalogBank };
       },
       resolveResource: path => volumeSet.resolve(`prepared/${path}`),
       resolvePointResource: path => starSet.resolve(`prepared/${path}`) });

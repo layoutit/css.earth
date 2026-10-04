@@ -25,6 +25,16 @@ Camera projection, star loading and navigation remain here.
   its prepared data. Object page stylesheets (`src/renderers/css/styles/*-surfaces.css`) belong to the objects, not here.
 - Validate every external value where it enters (prepared runtime validators in `@cssearth/objects`); no `any` and no TypeScript suppression comments.
 
+## Reading prepared data
+
+- A prepared data file is read by its kind's reader (`src/prepared-data/prepared-readers.ts`), listed in
+  `src/prepared-data/readers.ts`: it fetches, unpacks and validates, and hands the page the value with its buffers by
+  transfer. In a browser the readers run in the data worker (`src/prepared-data-worker.ts`, asked through
+  `readPrepared(kind, url)`); Node tools and tests run the same reader in place. The page's thread parses no large text
+  and builds no object for each element of a table. A new format adds a reader there, not a fetch and a parse of its own.
+- A value that crossed from the worker has lost its validator's mark: the reader that receives it re-marks it
+  (`trustPreparedCssVolume`), or every later validation walks it again.
+
 ## Entries
 
 - `tsup.config.ts` names the built entries; `package.json#exports` publishes each of them and the TypeScript source

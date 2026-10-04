@@ -61,7 +61,13 @@ Preparation must remain reproducible from source inputs and provenance outside p
 - `pnpm lint:packages` enforces the limit. Split code by responsibility; keep bulk prepared data outside source code.
 - Maintain README.md and CLAUDE.md as a symlink to this guide. Test behavior and package boundaries.
 
-`src/prepared-data/catalogue-bank-binary.ts` owns the catalogue bank magic, position scale and binary codec.
+`src/prepared-bank.ts` owns the one container of the prepared data files a page fetches (magic `CSBANK01`): a JSON header
+and named typed columns, packed by `prepared-binary.ts`. A new data file is a bank on this codec, never a layout of its own.
+`src/prepared-data/catalogue-bank-binary.ts` owns the catalogue point bank's columns and position scale on that container;
+`catalogue-point-columns.ts` owns the form the page holds (columns, no object for a point) and its checks, and
+`catalogue-dots.ts` the galaxy catalogue's dots as the page draws them.
+`src/volume/volume-dataset-bank-files.ts` owns how a volume dataset bank is stored: an index, one volume a dataset, its
+stars once as columns and a record of provenance; `src/node/volume-dataset-bank.ts` writes and reads those files.
 `src/stars/` owns point-field data/manifest schemas, bank layout, quantization, decoding and validation,
 exported through the browser-safe main entry. Hierarchy construction and encoding star rows remain in bake;
 loading, selection and projection remain with their runtime owners. Contract tests run in the packages lane;

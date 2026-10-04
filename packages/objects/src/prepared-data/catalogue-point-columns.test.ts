@@ -23,12 +23,10 @@ test('a bank read as columns is the bank its JSON form parses to: every place, s
   assert.deepEqual([...columns.cells.of], [...parsed.cells.of]);
   assert.deepEqual([...columns.cells.boxes], [...parsed.cells.boxes]);
   assert.deepEqual(columns.appearance, parsed.appearance); assert.deepEqual(columns.spread, parsed.spread); assert.deepEqual(columns.frame, parsed.frame);
-  assert.equal(columns.reachUnits, Math.hypot(3, 4, -12));
   // The JSON form as columns names the same paint for every point, whatever its style table's order.
   const converted = cataloguePointColumns(parsed);
   assert.deepEqual([...converted.positions], [...columns.positions]);
   assert.deepEqual(parsed.points.map((_, index) => converted.styles[converted.styleOf![index]!]), parsed.points.map((_, index) => columns.styles[columns.styleOf![index]!]));
-  assert.equal(converted.reachUnits, columns.reachUnits);
   // The reader hands over the file's buffer and the one the places were computed into.
   assert.equal(cataloguePointColumnBuffers(columns).length, 2);
 });

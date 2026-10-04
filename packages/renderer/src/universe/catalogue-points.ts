@@ -207,7 +207,13 @@ export function mountCataloguePoints({ host, before, url, loadBank, occluder }: 
           for (let index = from; index < end; index++) has[styleOf[index]!] = 1;
           has.forEach((flag, at) => { if (flag) used[run]!.add(styles[at]!); });
         });
-        const reachUnits = bank.reachUnits;
+        // How far the bank reaches from its origin: one pass over its places.
+        let reachSquared = 0;
+        for (let index = 0; index < bank.positions.length; index += 3) {
+          const x = bank.positions[index]!, y = bank.positions[index + 1]!, z = bank.positions[index + 2]!;
+          reachSquared = Math.max(reachSquared, x * x + y * y + z * z);
+        }
+        const reachUnits = Math.sqrt(reachSquared);
         extent = { originM: bank.frame.originM, radiusM: reachUnits * bank.frame.metersPerUnit };
         // Zooming out draws a smaller share of the catalogue, always a prefix of its prepared order (sparse places first,
         // crowds last): points leave and return as the camera moves, and none is swapped for another. From outside the
