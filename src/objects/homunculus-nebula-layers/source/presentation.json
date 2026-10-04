@@ -1,0 +1,57 @@
+{
+  "schema": "cssearth-volume-presentation-source@2",
+  "objectId": "homunculus-nebula-layers",
+  "name": "Homunculus Nebula",
+  "defaultDataset": "optical",
+  "bank": {
+    "path": "src/objects/homunculus-nebula-layers/prepared/image-layers.json"
+  },
+  "recipes": [
+    {
+      "id": "image-layer-recipe",
+      "path": "src/objects/homunculus-nebula-layers/source/recipe.json"
+    },
+    {
+      "id": "source-evidence",
+      "path": "src/objects/homunculus-nebula-layers/source/provenance.json"
+    }
+  ],
+  "sharedInputs": [],
+  "datasets": [
+    {
+      "id": "optical",
+      "label": "Hubble · optical",
+      "title": "The Homunculus, ultraviolet to visible",
+      "description": "ESA/Hubble's picture of the Homunculus Nebula, at 220, 250, 330, 550 and 660 nm: dust lit by the star Eta Carinae inside it. It lies on the surface Steffen et al. (2014) made from spectra of the whole nebula: two hollow lobes, their pole 41° from the sight line (Smith 2006), the south-east one tipped toward the Sun. The picture is on the side of each lobe that faces the Sun; the other sides, which no one has photographed, repeat it.",
+      "summary": "Hubble's picture on the nebula's published 3D surface: two closed lobes, their pole 41° from the sight line.",
+      "detail": "1089 × 1033 px",
+      "facts": [
+        {
+          "id": "bands",
+          "label": "Colors",
+          "value": "220, 250, 330, 550 and 660 nm"
+        },
+        {
+          "id": "source-pixels",
+          "label": "Source pixels",
+          "value": "1089 × 1033"
+        },
+        {
+          "id": "coverage",
+          "label": "Field",
+          "value": "27.0 × 25.6 arcsec"
+        },
+        {
+          "id": "license",
+          "label": "License",
+          "value": "CC-BY-4.0"
+        }
+      ],
+      "input": "optical",
+      "preview": {
+        "path": "src/objects/homunculus-nebula-layers/source/source.jpg",
+        "url": "https://cdn.esahubble.org/archives/images/large/potw1208a.jpg"
+      }
+    }
+  ]
+}

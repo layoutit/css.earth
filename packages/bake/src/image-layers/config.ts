@@ -57,6 +57,15 @@ export interface ImageLayerRecipe {
      * Every value is one a paper prints. */
     rings?: { source: string; basis: string; disc: { radiusArcsec: number; tiltDeg: number; farAxisPaDeg: number }; ring: { radiusArcsec: number; tiltDeg: number; farAxisPaDeg: number };
       lineOfSightThicknessArcsec?: number };
+    /** A nebula's published surface (./surface.ts): a closed mesh a paper made from spectra (`path`, a binary STL whose z
+     * axis is the nebula's pole), placed on the sky. `arcsecPerUnit` is the file's unit on the sky and `originUnits` the
+     * star in the file's units. `pole.tiltDeg` is the pole's angle from the sight line, `pole.paDeg` the position angle
+     * its receding end points to, `pole.rollDeg` the file's turn about the pole and `pole.receding` the end of the file's
+     * z axis that recedes. The picture's light inside the surface's outline lies on the side that faces the Sun.
+     * `starRadiusArcsec` is how far the central star's own light reaches in the picture: that light stays at the star,
+     * on no surface. `fitArcsec` is how closely the drawn patches follow the surface: presentation. */
+    surface?: { source: string; basis: string; path: string; arcsecPerUnit: number; originUnits: [number, number, number];
+      pole: { tiltDeg: number; paDeg: number; rollDeg: number; receding: '+z' | '-z' }; starRadiusArcsec?: number; fitArcsec: number };
     body?: { source: string; basis: string; semiPolarArcsec: number; semiEquatorialArcsec: number; polarTiltDeg: number; polarLeansToPaDeg: number;
       envelope?: { source: string; radiusArcsec: number };
       cavities?: { source: string; emission: number; sizeArcsec: number; farBetweenPaDeg: [number, number] } };
@@ -156,6 +165,15 @@ const ringsOf = (v: unknown): NonNullable<ImageLayerRecipe['geometry']['rings']>
   return { source: text(r.source, 'geometry.rings.source'), basis: text(r.basis, 'geometry.rings.basis'), disc, ring,
     ...(r.lineOfSightThicknessArcsec === undefined ? {} : { lineOfSightThicknessArcsec: positive(r.lineOfSightThicknessArcsec, 'geometry.rings.lineOfSightThicknessArcsec') }), };
 };
+const surfaceOf = (v: unknown): NonNullable<ImageLayerRecipe['geometry']['surface']> => {
+  const s = object(v, 'geometry.surface'), pole = object(s.pole, 'geometry.surface.pole'), tilt = finite(pole.tiltDeg, 'geometry.surface.pole.tiltDeg');
+  if (!(tilt > 0 && tilt < 180)) throw new TypeError(`geometry.surface.pole.tiltDeg is the pole's angle from the sight line, above 0 and below 180; got ${tilt}.`);
+  if (pole.receding !== '+z' && pole.receding !== '-z') throw new TypeError(`geometry.surface.pole.receding says which end of the file's z axis recedes: "+z" or "-z", not ${JSON.stringify(pole.receding)}.`);
+  if (!Array.isArray(s.originUnits) || s.originUnits.length !== 3) throw new TypeError('geometry.surface.originUnits is the star in the file\'s units: x, y and z.');
+  return { source: text(s.source, 'geometry.surface.source'), basis: text(s.basis, 'geometry.surface.basis'), path: path(s.path), arcsecPerUnit: positive(s.arcsecPerUnit, 'geometry.surface.arcsecPerUnit'),
+    originUnits: [finite(s.originUnits[0], 'geometry.surface.originUnits[0]'), finite(s.originUnits[1], 'geometry.surface.originUnits[1]'), finite(s.originUnits[2], 'geometry.surface.originUnits[2]')],
+    pole: { tiltDeg: tilt, paDeg: finite(pole.paDeg, 'geometry.surface.pole.paDeg'), rollDeg: finite(pole.rollDeg, 'geometry.surface.pole.rollDeg'), receding: pole.receding }, ...(s.starRadiusArcsec === undefined ? {} : { starRadiusArcsec: positive(s.starRadiusArcsec, 'geometry.surface.starRadiusArcsec') }), fitArcsec: positive(s.fitArcsec, 'geometry.surface.fitArcsec') };
+};
 const bodyOf = (v: unknown): NonNullable<ImageLayerRecipe['geometry']['body']> => {
   const b = object(v, 'geometry.body'), tilt = finite(b.polarTiltDeg, 'geometry.body.polarTiltDeg'), fraction = (value: unknown, name: string) => { const n = finite(value, name); if (!(n > 0 && n < 1)) throw new TypeError(`${name} is a fraction above 0 and under 1; got ${n}.`); return n; };
   if (!(tilt >= 0 && tilt < 90)) throw new TypeError(`geometry.body.polarTiltDeg must be from 0 to under 90; got ${tilt}.`);
@@ -246,6 +264,7 @@ export function parseImageLayerRecipe(value: unknown): ImageLayerRecipe {
       ...(g.shape===undefined?{}:{shape:(()=>{if(g.bulge!==undefined||b.flat!==true)throw new TypeError('geometry.shape is for a flat bank without a bulge.');return shapeOf(g.shape);})()}),
       ...(g.body===undefined?{}:{body:(()=>{if(g.bulge!==undefined||g.shape!==undefined||b.flat!==true)throw new TypeError('geometry.body is for a flat bank without a bulge or walls.');return bodyOf(g.body);})()}),
       ...(g.rings===undefined?{}:{rings:(()=>{if(g.bulge!==undefined||g.shape!==undefined||g.body!==undefined||b.flat!==true)throw new TypeError('geometry.rings is for a flat bank without a bulge, walls or a body.');return ringsOf(g.rings);})()}),
+      ...(g.surface===undefined?{}:{surface:(()=>{if(g.bulge!==undefined||g.shape!==undefined||g.body!==undefined||g.rings!==undefined||b.flat!==true)throw new TypeError('geometry.surface is for a flat bank without a bulge, walls, a body or rings.');return surfaceOf(g.surface);})()}),
       ...(g.unit===undefined?{}:{unit:parsecUnit(g.unit,g.bulge!==undefined||b.flat!==true)}) },
     bake: { maxFacePixels: positive(b.maxFacePixels, 'maxFacePixels', true), diffuseFacePixels: positive(b.diffuseFacePixels,'diffuseFacePixels',true),
       ...(b.levels===undefined?{}:{levels:levelsOf(b.levels)}),

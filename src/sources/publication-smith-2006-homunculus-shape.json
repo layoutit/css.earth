@@ -1,0 +1,37 @@
+{
+  "id": "publication-smith-2006-homunculus-shape",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "The Structure of the Homunculus: I. Shape and Latitude Dependence from H2 and [Fe II] Velocity Maps of Eta Carinae",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "astro-ph/0602464"
+    },
+    {
+      "type": "doi",
+      "value": "10.1086/503766"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/astro-ph/0602464",
+      "label": "Published reference"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/astro-ph/0602464",
+      "checkedOn": "2026-10-04",
+      "locator": "Abstract: a distance of 2350 ± 50 pc and an inclination angle of 41 degrees (the polar axis is tilted 49 degrees from the plane of the sky). Sect. 2: the slit along the polar axis of the Homunculus at P.A. = 310 degrees. Sect. 4: D = 2350 ± 50 pc and i = 41.0 ± 0.5 degrees, the tilt of the polar axis out of the line of sight; the age of the Homunculus is about 160 yr. Introduction: primarily a reflection nebula at UV, visual and near-IR wavelengths."
+    }
+  ],
+  "creators": [
+    "Smith, N."
+  ],
+  "publisher": "ApJ 644, 1151",
+  "publicationDate": "2006",
+  "relations": [],
+  "statements": []
+}

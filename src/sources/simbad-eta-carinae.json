@@ -1,0 +1,35 @@
+{
+  "id": "simbad-eta-carinae",
+  "kind": "reference-page",
+  "identityLevel": "work",
+  "title": "SIMBAD: eta Car",
+  "identifiers": [
+    {
+      "type": "Archive resource",
+      "value": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=eta+Car"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=eta+Car",
+      "label": "SIMBAD, eta Car"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=eta+Car",
+      "checkedOn": "2026-10-04",
+      "locator": "ICRS coordinates 10 45 03.5455, -59 41 03.951 (161.2647742°, -59.6844309°), error 20 mas, from UCAC4 (Zacharias et al. 2012, 2012yCat.1322....0Z)."
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "SIMBAD, CDS, Strasbourg",
+      "scope": "citation",
+      "evidence": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=eta+Car"
+    }
+  ]
+}
