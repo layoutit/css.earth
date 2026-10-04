@@ -13,7 +13,7 @@ test('Back to the front page returns to the body it shows, not nowhere', () => {
       pushState(value: unknown, _: string, url: string) { state = value; href = new URL(url, href).href; } },
     addEventListener(type: string, listener: (event: PopStateEvent) => void) { listeners.set(type, listener); },
     removeEventListener() {},
-    // History writes wait for rest (REST_WRITE_MS); the test runs them when it needs them.
+    // History writes run in a task of their own; the test runs them when it needs them.
     setTimeout(callback: () => void) { queued.push(callback); return queued.length; }, clearTimeout() {},
   } as unknown as Window;
   const queued: (() => void)[] = [], rest = () => { for (const callback of queued.splice(0)) callback(); };
@@ -27,7 +27,7 @@ test('Back to the front page returns to the body it shows, not nowhere', () => {
   assert.equal(calls[0][0], ROOT_OBJECT_ID);
 });
 
-test('Back within the rest period of an arrival returns to the body the flight left, not the one before it', () => {
+test("Back before an arrival's entry is written returns to the body the flight left, not the one before it", () => {
   const listeners = new Map<string, (event: PopStateEvent) => void>(), calls: [string, { url?: string }][] = [];
   let href = 'https://css.earth/earth/', state: unknown = null, view = '/earth/', forwards = 0;
   const windowTarget = {
@@ -108,57 +108,109 @@ test('settled view checkpoints skip native history writes without losing real en
   history.destroy();
 });
 
-test('history written while the camera moves is held and applied once at rest; the app reads the held URL meanwhile', () => {
-  const writes: { kind: string; url: string }[] = [];
-  let href = 'https://css.earth/venus/?v=a', state: Record<string, unknown> = {}, now = 0, id = 0;
-  const timers = new Map<number, { at: number; callback: () => void }>();
-  const documentTarget = new EventTarget();
+/** A window whose document and root element dispatch real events, with timers the test advances. */
+function readerWindow(start: string) {
+  const writes: { kind: string; url: string }[] = [], timers = new Map<number, { at: number; callback: () => void }>();
+  let href = start, state: Record<string, unknown> = {}, now = 0, id = 0;
+  const events = new EventTarget(), root = new EventTarget();
+  const page = Object.assign(new EventTarget(), { documentElement: root, visibilityState: 'visible' });
+  const write = (kind: string) => (value: Record<string, unknown>, _: string, url: string) => { writes.push({ kind, url }); state = value; href = new URL(url, href).href; };
   const windowTarget = {
-    document: documentTarget,
+    document: page,
     get location() { return { href }; },
-    history: { get state() { return state; },
-      replaceState(value: Record<string, unknown>, _: string, url: string) { writes.push({ kind: 'replace', url }); state = value; href = new URL(url, href).href; },
-      pushState(value: Record<string, unknown>, _: string, url: string) { writes.push({ kind: 'push', url }); state = value; href = new URL(url, href).href; } },
-    addEventListener() {}, removeEventListener() {},
+    history: { get state() { return state; }, replaceState: write('replace'), pushState: write('push') },
+    addEventListener: events.addEventListener.bind(events), removeEventListener: events.removeEventListener.bind(events),
     setTimeout(callback: () => void, delay: number) { timers.set(++id, { at: now + delay, callback }); return id; },
     clearTimeout(timer: number) { timers.delete(timer); },
   } as unknown as Window;
-  const advance = (ms: number) => { now += ms; for (const [key, timer] of [...timers]) if (timer.at <= now) { timers.delete(key); timer.callback(); } };
-  const motion = (active: boolean) => documentTarget.dispatchEvent(new CustomEvent('objectmotionchange', { detail: { active, coasting: false } }));
+  const pointer = (type: string, pointerType: string) => (type === 'pointerdown' ? page : root).dispatchEvent(Object.assign(new Event(type), { pointerType }));
+  return { windowTarget, writes, pointer,
+    advance(ms: number) { now += ms; for (const [key, timer] of [...timers]) if (timer.at <= now) { timers.delete(key); timer.callback(); } },
+    motion: (active: boolean) => page.dispatchEvent(new CustomEvent('objectmotionchange', { detail: { active, coasting: false } })),
+    windowEvent: (type: string, detail: object = {}) => events.dispatchEvent(Object.assign(new Event(type), detail)),
+    visibility(value: string) { page.visibilityState = value; page.dispatchEvent(new Event('visibilitychange')); } };
+}
+
+test('a view is held while the reader uses the page: the app reads it, and the History API hears it when they leave', () => {
+  const { windowTarget, writes, pointer, advance, motion, windowEvent, visibility } = readerWindow('https://css.earth/venus/?v=a');
   const history = createNavigationHistory({ windowTarget, capture: () => '/venus/?v=a', navigate: () => {} });
   writes.length = 0;
-  motion(true);
-  // A pinch hands Venus over to the Solar System overview, then the view keeps changing: nothing reaches the History API.
+  pointer('pointerenter', 'mouse'); motion(true);
+  // A selection flies to the Solar System and the view keeps changing: nothing reaches the History API in flight.
   history.commit('/solar-system/');
   history.commit('/solar-system/?v=b', { history: 'replace' });
+  advance(60_000);
   assert.deepEqual(writes, []);
   assert.equal(navigationHref(windowTarget), 'https://css.earth/solar-system/?v=b', 'the app reads the held URL');
-  motion(false); advance(999);
+  // The navigation's entry is written as soon as the camera rests, in its own task: Back has to find it.
+  motion(false);
+  assert.deepEqual(writes, []);
+  advance(0);
+  assert.deepEqual(writes, [{ kind: 'push', url: '/solar-system/?v=b' }], 'one push, with the final view');
+  // A view is not: with the mouse over the page it waits, however long the camera rests.
+  const view = (token: string) => { writes.length = 0; history.commit(`/solar-system/?v=${token}`, { history: 'replace' }); advance(60_000); assert.deepEqual(writes, [], token); };
+  const written = (token: string, how: string) => assert.deepEqual(writes, [{ kind: 'replace', url: `/solar-system/?v=${token}` }], how);
+  view('c'); pointer('pointerleave', 'mouse'); advance(0); written('c', 'the mouse left the page');
+  pointer('pointerenter', 'mouse');
+  view('d'); windowEvent('blur'); advance(0); written('d', 'the window lost focus');
+  windowEvent('focus');
+  view('e'); windowEvent('keydown', { key: 'a' }); advance(60_000); assert.deepEqual(writes, []);
+  windowEvent('keydown', { key: 'Meta' }); advance(0); written('e', 'a shortcut of the browser starts');
+  // The camera still moves when the reader leaves: the write waits for it to rest.
+  view('f'); motion(true); windowEvent('blur'); advance(60_000); assert.deepEqual(writes, []);
+  motion(false); advance(0); written('f', 'left in motion, written at rest');
+  windowEvent('focus');
+  // A hidden page may never run another task: it writes at once.
+  view('g'); motion(true); visibility('hidden'); written('g', 'the page was hidden');
+  history.destroy();
+});
+
+test('with no mouse over the page a view is written once the page has been still, and any use starts the wait again', () => {
+  const { windowTarget, writes, pointer, advance, motion, windowEvent } = readerWindow('https://css.earth/venus/?v=a');
+  const history = createNavigationHistory({ windowTarget, capture: () => '/venus/?v=a', navigate: () => {} });
+  writes.length = 0;
+  pointer('pointerdown', 'touch');
+  history.commit('/venus/?v=b', { history: 'replace' });
+  advance(2999); pointer('pointerdown', 'touch'); advance(2999);
   assert.deepEqual(writes, []);
   advance(1);
-  assert.deepEqual(writes, [{ kind: 'push', url: '/solar-system/?v=b' }], 'one push for the handoff, with the final view');
-  assert.equal(navigationHref(windowTarget), href);
-  // At rest a write still waits the quiet period, in its own task.
-  history.commit('/solar-system/?v=c', { history: 'replace' });
-  assert.equal(writes.length, 1);
-  advance(1000);
-  assert.deepEqual(writes.at(-1), { kind: 'replace', url: '/solar-system/?v=c' });
-  // Two flights inside one rest period are two entries: Back from the second lands on the first (2026-10-01).
+  assert.deepEqual(writes, [{ kind: 'replace', url: '/venus/?v=b' }]);
+  history.commit('/venus/?v=c', { history: 'replace' });
+  advance(1000); motion(true); advance(60_000); motion(false); advance(2999);
+  assert.equal(writes.length, 1, 'a gesture starts the still period again');
+  advance(1);
+  assert.deepEqual(writes.at(-1), { kind: 'replace', url: '/venus/?v=c' });
+  // A wheel turns under a mouse, though it never moved onto the page (it was there when the page loaded): held again.
+  windowEvent('wheel');
+  history.commit('/venus/?v=d', { history: 'replace' }); advance(60_000);
+  assert.equal(writes.length, 2);
+  windowEvent('blur'); advance(0);
+  assert.deepEqual(writes.at(-1), { kind: 'replace', url: '/venus/?v=d' });
+  history.destroy();
+});
+
+test('two flights before the camera rests are two entries, each left with the view it was departed from', () => {
+  const { windowTarget, writes, advance, motion } = readerWindow('https://css.earth/venus/?v=a');
+  let view = '/venus/?v=a';
+  const history = createNavigationHistory({ windowTarget, capture: () => view, navigate: () => {} });
   writes.length = 0;
-  history.commit('/mars/'); advance(300);
-  motion(true); history.commit('/moon/'); motion(false); advance(1000);
-  assert.deepEqual(writes, [{ kind: 'push', url: '/mars/' }, { kind: 'push', url: '/moon/' }]);
+  // The router checkpoints the view it leaves, then commits the arrival (2026-10-01: Back from the second lands on the first).
+  view = '/venus/?v=left'; history.checkpoint(); history.commit('/mars/'); motion(true);
+  view = '/mars/?v=passing'; history.checkpoint(); history.commit('/moon/'); motion(false);
+  assert.deepEqual(writes, []);
+  advance(0);
+  assert.deepEqual(writes, [{ kind: 'replace', url: '/venus/?v=left' }, { kind: 'push', url: '/mars/?v=passing' }, { kind: 'push', url: '/moon/' }]);
   history.destroy();
 });
 
 test('a view kept for the entry is the one Back returns to after the next push', () => {
   const listeners = new Map<string, (event: PopStateEvent) => void>(), calls: [string, { url?: string }][] = [];
   let href = 'https://css.earth/earth/?v=near', state: unknown = null, view = '/earth/?v=near';
-  const queued: (() => void)[] = [], rest = () => { for (const callback of queued.splice(0)) callback(); };
+  const queued: (() => void)[] = [], rest = () => { for (const callback of queued.splice(0)) callback(); }, writes: string[] = [];
   const windowTarget = {
     get location() { return { href }; },
-    history: { get state() { return state; }, replaceState(value: unknown, _: string, url: string) { state = value; href = new URL(url, href).href; },
-      pushState(value: unknown, _: string, url: string) { state = value; href = new URL(url, href).href; } },
+    history: { get state() { return state; }, replaceState(value: unknown, _: string, url: string) { writes.push(url); state = value; href = new URL(url, href).href; },
+      pushState(value: unknown, _: string, url: string) { writes.push(url); state = value; href = new URL(url, href).href; } },
     addEventListener(type: string, listener: (event: PopStateEvent) => void) { listeners.set(type, listener); },
     removeEventListener() {},
     setTimeout(callback: () => void) { queued.push(callback); return queued.length; }, clearTimeout() {},
@@ -171,8 +223,9 @@ test('a view kept for the entry is the one Back returns to after the next push',
   assert.equal(href, 'https://css.earth/earth/?v=far');
   // The hand-over the flight lands on keeps the view it left, then pushes its own entry.
   history.keep('/earth/?v=near');
-  assert.equal(href, 'https://css.earth/earth/?v=near');
+  assert.equal(navigationHref(windowTarget), 'https://css.earth/earth/?v=near');
   history.commit('/solar-system/'); rest();
+  assert.deepEqual(writes.slice(-2), ['/earth/?v=near', '/solar-system/'], 'the entry left is written with its kept view, then the push');
   assert.equal(href, 'https://css.earth/solar-system/');
   href = 'https://css.earth/earth/?v=near'; state = earth;
   listeners.get('popstate')!({ state: earth } as PopStateEvent);

@@ -89,6 +89,24 @@ test('a released lease drops document access without retiring another consumer o
   next.release();
 });
 
+test("a page requested ahead is parsed only when a consumer leases it; one that is not the object's own is dropped then", async () => {
+  let parses = 0, body = 'ceres';
+  const calls: string[] = [];
+  class CountingParser extends FragmentParser { override parseFromString(text: string) { parses++; return super.parseFromString(text); } }
+  const windowTarget = { ...fixtureWindow().windowTarget, DOMParser: CountingParser } as unknown as BrowserWindow;
+  const fragments = createNavigationFragments({ windowTarget, async fetchPage(url) { calls.push(url); return new Response(body); } });
+  const arrived = async (id: string) => { while (!fragments.ready(id)) await new Promise(resolve => setImmediate(resolve)); };
+  fragments.prefetch('ceres'); await arrived('ceres');
+  assert.equal(parses, 0, 'a page that arrives is not parsed');
+  const ceres = await fragments.get('ceres'); ceres.release();
+  assert.equal(parses, 1);
+  body = 'vesta|mars'; fragments.prefetch('vesta'); await arrived('vesta');
+  assert.equal(fragments.peek('vesta'), null, 'a page of another object is not leased');
+  body = 'vesta';
+  const vesta = await fragments.get('vesta'); vesta.release();
+  assert.deepEqual(calls, ['/navigation/ceres/', '/navigation/vesta/', '/navigation/vesta/'], 'and the next demand asks for it again');
+});
+
 test('failed, mismatched and cancelled requests never poison the shared fragment', async () => {
   const calls: string[] = [];
   let status = 503, body = 'venus';

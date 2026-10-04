@@ -66,7 +66,9 @@ export function createNavigationFragments({ windowTarget, fetchPage = url => win
     return source;
   }
   function lease(id: string, html: string): NavigationFragmentLease {
-    let document: Document | null = parse(id, html);
+    let document: Document | null;
+    // A page that is not the object's own is dropped, so the next demand asks for it again.
+    try { document = parse(id, html); } catch (error) { if (entries.get(id)?.html === html) entries.delete(id); throw error; }
     activeDocuments++; parsedDocuments++;
     return Object.freeze({
       get document() {
@@ -85,9 +87,10 @@ export function createNavigationFragments({ windowTarget, fetchPage = url => win
   async function load(id: string) {
     const response = await fetchPage(`/navigation/${encodeURIComponent(id)}/`);
     if (!response.ok) throw new Error(`Object content request failed: ${response.status}.`);
-    const html = await response.text();
-    parse(id, html); // Validate before the shared encoded entry becomes ready.
-    return html;
+    // The page is parsed, and its identity checked, when a consumer leases it and never as it arrives: most pages are
+    // requested ahead of a hand-over that may not come, and parsing one as it arrived cost 6 to 12 ms of the frame it
+    // arrived in, in the middle of a zoom on an iPad (2026-10-04).
+    return response.text();
   }
   const request = (id: string) => {
     const cached = entries.get(id);
@@ -112,7 +115,7 @@ export function createNavigationFragments({ windowTarget, fetchPage = url => win
       const entry = entries.get(id);
       if (!entry?.html) return null;
       touch(id, entry);
-      return lease(id, entry.html);
+      try { return lease(id, entry.html); } catch { return null; }
     },
     get(id: string, signal?: AbortSignal) {
       const { promise } = request(id);
