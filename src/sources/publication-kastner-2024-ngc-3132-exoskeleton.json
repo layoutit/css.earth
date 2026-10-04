@@ -1,0 +1,43 @@
+{
+  "id": "publication-kastner-2024-ngc-3132-exoskeleton",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "The Molecular Exoskeleton of the Ring-like Planetary Nebula NGC 3132",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2402.11850"
+    },
+    {
+      "type": "doi",
+      "value": "10.3847/1538-4357/ad2848"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/2402.11850",
+      "label": "Published reference"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/2402.11850",
+      "checkedOn": "2026-10-04",
+      "locator": "Sect. 3: SMA 12CO(2-1) maps; the main ring an ellipse of about 25 by 18 arcsec oriented at position angle about 330 degrees east of north, its minor axis along 60 degrees. The declination-collapsed position-velocity image \"shows that its eastern edge is approaching, hence, tilted toward the observer, and its western edge is receding\". The ring's symmetry axis is viewed at 15 to 45 degrees from the line of sight; a second, fainter ring is nearly edge-on."
+    }
+  ],
+  "creators": [
+    "Kastner, J. H.",
+    "Wilner, D. J.",
+    "Moraga Baez, P.",
+    "Bublitz, J.",
+    "De Marco, O.",
+    "Sahai, R.",
+    "Wootten, A."
+  ],
+  "publisher": "ApJ 965, 21",
+  "publicationDate": "2024",
+  "relations": [],
+  "statements": []
+}

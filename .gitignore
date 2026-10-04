@@ -499,3 +499,5 @@ src/objects/m110-layers/source/merrett-pne/table3.dat
 
 # The Cloudflare Worker bundled by site/build/bundle-cloudflare-worker.mts.
 cloudflare/bundled/
+# The Southern Ring's published density grid (39.7 MB); restored from its authors' repository (src/objects/ngc-3132-layers/source/manifest.json).
+src/objects/ngc-3132-layers/source/ngc3132_density_structure_101.dat

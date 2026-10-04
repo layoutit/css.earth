@@ -1,0 +1,57 @@
+{
+  "schema": "cssearth-image-layer-provenance@1",
+  "title": "Southern Ring Nebula (NIRCam Image)",
+  "publisher": "ESA/Webb",
+  "sourceId": "weic2207b",
+  "sourcePage": "https://esawebb.org/images/weic2207b/",
+  "download": "https://cdn.esawebb.org/archives/images/large/weic2207b.jpg",
+  "credit": "NASA, ESA, CSA, STScI, and the Webb ERO Production Team",
+  "license": "CC-BY-4.0",
+  "original": {
+    "dimensions": [
+      4833,
+      4501
+    ],
+    "bands": [
+      "Webb",
+      "NIRCam",
+      "F090W",
+      "F187N",
+      "F212N",
+      "F356W",
+      "F405N",
+      "F470N"
+    ],
+    "fieldOfViewDeg": [
+      0.04028016,
+      0.03751313
+    ]
+  },
+  "checkedSource": {
+    "kind": "Published JPEG",
+    "dimensions": [
+      4833,
+      4501
+    ]
+  },
+  "geometryEvidence": {
+    "inclinationDeg": 0.001144,
+    "lineOfNodesPaDeg": 23.826,
+    "reference": "A picture of the sky: the plane is the picture's own tangent plane, perpendicular to the sight line through the picture's centre, so it faces the Sun. That centre is 4.1 arcsec from the star, which is the whole of the recipe's inclination. Not the orientation of the nebula, which is the density grid's."
+  },
+  "registration": {
+    "method": "The file's embedded sky tags for scale and direction, 0.0300 arcsec per pixel and north 111.99° right of vertical, and the star for place: the middle of the bright central star's saturated pixels, pixel 2411.6, 2112.8, is set at SIMBAD's place for NGC 3132, so the frame's centre is 151.7559818°, -40.435963°.",
+    "pixelArcsec": 0.03,
+    "northClockwiseDeg": 111.989
+  },
+  "displayModel": "Inside the outline of the density grid of Monteiro et al. (2025), each sight line's light lies on two walls: the nearer half of the gas's emission along it and the farther half, each at its own middle. The two share the picture's smooth light; its fine detail is on the nearer one. Over the outer tenth of the way from the star to the gas's outline the walls are led onto the picture's plane, where the picture outside the outline lies. The central star's own light, which ends 3.2 arcsec from it in this picture, stays at the star: all of it within 1.6 arcsec, less and less out to 3.2.",
+  "coverage": "The published frame inside a circle about the star: the picture fades out between 57.0 and 63.3 arcsec, the largest circle the frame holds, so no straight edge shows.",
+  "acquisition": {
+    "url": "https://cdn.esawebb.org/archives/images/large/weic2207b.jpg",
+    "dimensions": [
+      4833,
+      4501
+    ],
+    "operation": "Download the publisher's JPEG; no crop or resample."
+  }
+}

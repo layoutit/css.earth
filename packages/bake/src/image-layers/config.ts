@@ -66,6 +66,15 @@ export interface ImageLayerRecipe {
      * on no surface. `fitArcsec` is how closely the drawn patches follow the surface: presentation. */
     surface?: { source: string; basis: string; path: string; arcsecPerUnit: number; originUnits: [number, number, number];
       pole: { tiltDeg: number; paDeg: number; rollDeg: number; receding: '+z' | '-z' }; starRadiusArcsec?: number; fitArcsec: number };
+    /** A nebula's published density grid (./density-grid.ts): a cube of gas densities a paper made from velocity cubes, a
+     * speed standing for a depth. The file's rows are "x y z density", its first axis outermost. That first axis is the
+     * sight line, toward the Sun at its `toward` end ("high" or "low"); its second axis points to position angle
+     * `secondAxisPaDeg` on the sky and its third to `thirdAxisPaDeg`, a quarter turn from it. `cells` is the cube's
+     * side and `cellArcsec` a cell on the sky; `centreArcsec` is the cube's middle from the star, east and north.
+     * `smoothPixels` is the radius over which the picture's smooth light is read, as for walls; `starRadiusArcsec` is
+     * how far the central star's own light reaches in the picture: that light stays at the star. */
+    densityGrid?: { source: string; basis: string; path: string; cells: number; cellArcsec: number; toward: 'high' | 'low'; secondAxisPaDeg: number; thirdAxisPaDeg: number;
+      centreArcsec?: [number, number]; smoothPixels: number; starRadiusArcsec?: number };
     body?: { source: string; basis: string; semiPolarArcsec: number; semiEquatorialArcsec: number; polarTiltDeg: number; polarLeansToPaDeg: number;
       envelope?: { source: string; radiusArcsec: number };
       cavities?: { source: string; emission: number; sizeArcsec: number; farBetweenPaDeg: [number, number] } };
@@ -174,6 +183,15 @@ const surfaceOf = (v: unknown): NonNullable<ImageLayerRecipe['geometry']['surfac
     originUnits: [finite(s.originUnits[0], 'geometry.surface.originUnits[0]'), finite(s.originUnits[1], 'geometry.surface.originUnits[1]'), finite(s.originUnits[2], 'geometry.surface.originUnits[2]')],
     pole: { tiltDeg: tilt, paDeg: finite(pole.paDeg, 'geometry.surface.pole.paDeg'), rollDeg: finite(pole.rollDeg, 'geometry.surface.pole.rollDeg'), receding: pole.receding }, ...(s.starRadiusArcsec === undefined ? {} : { starRadiusArcsec: positive(s.starRadiusArcsec, 'geometry.surface.starRadiusArcsec') }), fitArcsec: positive(s.fitArcsec, 'geometry.surface.fitArcsec') };
 };
+const densityOf = (v: unknown): NonNullable<ImageLayerRecipe['geometry']['densityGrid']> => {
+  const d = object(v, 'geometry.densityGrid'), second = finite(d.secondAxisPaDeg, 'geometry.densityGrid.secondAxisPaDeg'), third = finite(d.thirdAxisPaDeg, 'geometry.densityGrid.thirdAxisPaDeg'), apart = (((third - second) % 360) + 360) % 360;
+  if (d.toward !== 'high' && d.toward !== 'low') throw new TypeError(`geometry.densityGrid.toward says which end of the grid's first axis is toward the Sun: "high" or "low", not ${JSON.stringify(d.toward)}.`);
+  if (Math.abs(apart - 90) > 1e-6 && Math.abs(apart - 270) > 1e-6) throw new TypeError(`geometry.densityGrid.thirdAxisPaDeg is a quarter turn from secondAxisPaDeg (${second}); got ${third}.`);
+  if (d.centreArcsec !== undefined && (!Array.isArray(d.centreArcsec) || d.centreArcsec.length !== 2)) throw new TypeError('geometry.densityGrid.centreArcsec is the grid\'s middle from the star: east and north.');
+  return { source: text(d.source, 'geometry.densityGrid.source'), basis: text(d.basis, 'geometry.densityGrid.basis'), path: path(d.path), cells: positive(d.cells, 'geometry.densityGrid.cells', true), cellArcsec: positive(d.cellArcsec, 'geometry.densityGrid.cellArcsec'),
+    toward: d.toward, secondAxisPaDeg: second, thirdAxisPaDeg: third, ...(Array.isArray(d.centreArcsec) ? { centreArcsec: [finite(d.centreArcsec[0], 'geometry.densityGrid.centreArcsec[0]'), finite(d.centreArcsec[1], 'geometry.densityGrid.centreArcsec[1]')] as [number, number] } : {}),
+    smoothPixels: positive(d.smoothPixels, 'geometry.densityGrid.smoothPixels', true), ...(d.starRadiusArcsec === undefined ? {} : { starRadiusArcsec: positive(d.starRadiusArcsec, 'geometry.densityGrid.starRadiusArcsec') }) };
+};
 const bodyOf = (v: unknown): NonNullable<ImageLayerRecipe['geometry']['body']> => {
   const b = object(v, 'geometry.body'), tilt = finite(b.polarTiltDeg, 'geometry.body.polarTiltDeg'), fraction = (value: unknown, name: string) => { const n = finite(value, name); if (!(n > 0 && n < 1)) throw new TypeError(`${name} is a fraction above 0 and under 1; got ${n}.`); return n; };
   if (!(tilt >= 0 && tilt < 90)) throw new TypeError(`geometry.body.polarTiltDeg must be from 0 to under 90; got ${tilt}.`);
@@ -265,11 +283,12 @@ export function parseImageLayerRecipe(value: unknown): ImageLayerRecipe {
       ...(g.body===undefined?{}:{body:(()=>{if(g.bulge!==undefined||g.shape!==undefined||b.flat!==true)throw new TypeError('geometry.body is for a flat bank without a bulge or walls.');return bodyOf(g.body);})()}),
       ...(g.rings===undefined?{}:{rings:(()=>{if(g.bulge!==undefined||g.shape!==undefined||g.body!==undefined||b.flat!==true)throw new TypeError('geometry.rings is for a flat bank without a bulge, walls or a body.');return ringsOf(g.rings);})()}),
       ...(g.surface===undefined?{}:{surface:(()=>{if(g.bulge!==undefined||g.shape!==undefined||g.body!==undefined||g.rings!==undefined||b.flat!==true)throw new TypeError('geometry.surface is for a flat bank without a bulge, walls, a body or rings.');return surfaceOf(g.surface);})()}),
+      ...(g.densityGrid===undefined?{}:{densityGrid:(()=>{if(g.bulge!==undefined||g.shape!==undefined||g.body!==undefined||g.rings!==undefined||g.surface!==undefined||b.flat!==true)throw new TypeError('geometry.densityGrid is for a flat bank without a bulge, walls, a body, rings or a surface.');return densityOf(g.densityGrid);})()}),
       ...(g.unit===undefined?{}:{unit:parsecUnit(g.unit,g.bulge!==undefined||b.flat!==true)}) },
     bake: { maxFacePixels: positive(b.maxFacePixels, 'maxFacePixels', true), diffuseFacePixels: positive(b.diffuseFacePixels,'diffuseFacePixels',true),
       ...(b.levels===undefined?{}:{levels:levelsOf(b.levels)}),
       ...(b.colorTie===undefined?{}:{colorTie:colorTieOf(b.colorTie)}),
-      ...(g.bulge===undefined&&g.shape===undefined&&g.body===undefined&&(g.rings as {lineOfSightThicknessArcsec?:unknown}|undefined)?.lineOfSightThicknessArcsec===undefined?{}:{bulgeSlices:positive(b.bulgeSlices,'bulgeSlices',true),bulgeFacePixels:positive(b.bulgeFacePixels,'bulgeFacePixels',true),bulgeCrossSlices:positive(b.bulgeCrossSlices,'bulgeCrossSlices',true)}), crossAxisSlices: positive(b.crossAxisSlices, 'crossAxisSlices', true),
+      ...(g.bulge===undefined&&g.shape===undefined&&g.densityGrid===undefined&&g.body===undefined&&(g.rings as {lineOfSightThicknessArcsec?:unknown}|undefined)?.lineOfSightThicknessArcsec===undefined?{}:{bulgeSlices:positive(b.bulgeSlices,'bulgeSlices',true),bulgeFacePixels:positive(b.bulgeFacePixels,'bulgeFacePixels',true),bulgeCrossSlices:positive(b.bulgeCrossSlices,'bulgeCrossSlices',true)}), crossAxisSlices: positive(b.crossAxisSlices, 'crossAxisSlices', true),
       crossAxisAlongPixels:positive(b.crossAxisAlongPixels,'crossAxisAlongPixels',true),crossAxisDepthPixels: positive(b.crossAxisDepthPixels, 'crossAxisDepthPixels', true), backgroundFloor,edgeTaperFraction,diffuseFraction,diffuseSigmaPixels:positive(b.diffuseSigmaPixels,'diffuseSigmaPixels'),
       ...(b.flat===undefined?{}:{flat:flatOf(b.flat)}),
       encoding: { format: 'webp', quality, ...(e.alphaQuality===undefined?{}:{alphaQuality:alphaQualityOf(e.alphaQuality)}) } }, provenance: { path: path(p.path) } };

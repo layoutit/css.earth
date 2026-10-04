@@ -1,0 +1,35 @@
+{
+  "id": "simbad-ngc-3132",
+  "kind": "reference-page",
+  "identityLevel": "work",
+  "title": "SIMBAD: NGC 3132",
+  "identifiers": [
+    {
+      "type": "Archive resource",
+      "value": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=NGC+3132"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=NGC+3132",
+      "label": "SIMBAD, NGC 3132"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=NGC+3132",
+      "checkedOn": "2026-10-04",
+      "locator": "ICRS coordinates 151.75735684°, -40.43642515° (10 07 01.7656, -40 26 11.131), error 0.02 mas, from Gaia EDR3 (2020yCat.1350....0G); HD 87892 is the same object."
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "SIMBAD, CDS, Strasbourg",
+      "scope": "citation",
+      "evidence": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=NGC+3132"
+    }
+  ]
+}

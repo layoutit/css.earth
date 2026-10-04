@@ -1,0 +1,45 @@
+{
+  "id": "publication-monteiro-2025-ngc-3132-model",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "The planetary nebula NGC 3132 revisited: high definition 3D photoionization model",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2503.20640"
+    },
+    {
+      "type": "doi",
+      "value": "10.1093/mnras/staf488"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/2503.20640",
+      "label": "Published reference"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/2503.20640",
+      "checkedOn": "2026-10-04",
+      "locator": "Abstract: the three-dimensional density structure obtained from SAM-FP data at SOAR by assuming homologous expansion. Sect. 2.1: a field of 180 x 180 arcsec at 0.18 arcsec a pixel; an instrumental line width of 26.8 km/s. Sect. 3.1: velocity cubes of H-alpha and [N II] 6584 turned into density, intensity going as density squared; the main dense inner ring's symmetry axis inclined about 30 degrees to the line of sight, a low-density cavity along an axis about 20 degrees from it. Sect. 1: the bright A star's Gaia DR3 geometric distance, 754 pc (+18, -15), is taken as the nebula's. Sect. 4: a dynamical age of 2061 ± 412 yr from the fitted velocity field. \"All files used in generating the final Mocassin model have been made available at https://github.com/hektor-monteiro/NGC3132_model.\""
+    }
+  ],
+  "creators": [
+    "Monteiro, H.",
+    "Mendes de Oliveira, C.",
+    "Amram, P.",
+    "Stanghellini, L.",
+    "Wesson, R.",
+    "Bouvis, K.",
+    "Akras, S.",
+    "Matsuura, M.",
+    "Quint, B. C."
+  ],
+  "publisher": "MNRAS 539, 1756",
+  "publicationDate": "2025",
+  "relations": [],
+  "statements": []
+}
