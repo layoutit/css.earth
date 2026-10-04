@@ -1,0 +1,46 @@
+{
+  "schema": "cssearth-published-phase-curve@1",
+  "source": "Zhang et al. (2018), AJ 155, 83, 'Phase Curves of WASP-33b and HD 149026b and a New Correlation between Phase Curve Offset and Irradiation Temperature' (doi:10.3847/1538-3881/aaa458; arXiv:1710.07642). Spitzer IRAC 4.5 um phase curve of HD 149026b, 8 April 2011. Values read from the authors' LaTeX source: the table of best-fit parameters (table:all_results), column HD 149026b 4.5 um, and the table of dayside and nightside brightness temperatures (table:toy_model). The model is a first-order sinusoid, L_p = C + c1 cos(2 pi t/P) + c2 sin(2 pi t/P); the table prints its amplitude, sqrt(c1^2 + c2^2), and its phase offset, \"with a negative offset meaning the maximum occurs before the center of the eclipse\", which is a hot spot east of noon. The paper says its 3.6 um amplitude and offset for this planet \"should be treated with skepticism due to data quality issues\", so the 4.5 um fit is the one drawn.",
+  "wavelengthMicrons": 4.5,
+  "radiusRatio": {
+    "value": 0.0503,
+    "cell": "0.0503 +/- 0.0004",
+    "where": "table:all_results, HD 149026b 4.5 um, R_p/R_s"
+  },
+  "eclipseDepth": {
+    "value": 0.000385,
+    "cell": "385 +/- 23 ppm, \"the planetary flux at the center of eclipse divided by the stellar flux\"",
+    "where": "table:all_results, HD 149026b 4.5 um, Eclipse depth"
+  },
+  "model": {
+    "kind": "amplitude-offset",
+    "equation": "L_p = C + c1 cos(2 pi t/P) + c2 sin(2 pi t/P), printed as its amplitude sqrt(c1^2 + c2^2) and its phase offset from the eclipse centre.",
+    "semiAmplitude": {
+      "value": 0.000164,
+      "cell": "164 +22/-24 ppm",
+      "where": "table:all_results, HD 149026b 4.5 um, Amplitude"
+    },
+    "offsetDegreesEast": {
+      "value": 24.3,
+      "cell": "-24.3 +5.5/-4.7 degrees: negative, so the maximum comes before the centre of the eclipse and the hot spot lies 24.3 degrees east",
+      "where": "table:all_results, HD 149026b 4.5 um, Phase offset"
+    }
+  },
+  "reported": {
+    "daysideK": {
+      "value": 1649,
+      "cell": "1649 +/- 49 K",
+      "where": "table:toy_model, HD 149026b 4.5, T_b,day"
+    },
+    "nightsideK": {
+      "value": 1018,
+      "cell": "1018 +115/-116 K",
+      "where": "table:toy_model, HD 149026b 4.5, T_b,night (from F_p - 2 A cos(phi))"
+    },
+    "offsetDegrees": {
+      "value": 24.3,
+      "cell": "-24.3 +5.5/-4.7 degrees, negative before eclipse",
+      "where": "table:all_results, HD 149026b 4.5 um, Phase offset"
+    }
+  }
+}
