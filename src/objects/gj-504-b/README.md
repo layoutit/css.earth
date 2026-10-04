@@ -14,7 +14,7 @@ GJ 504 b glows at about 560 K. JWST's spectrum points to about 25 Jupiter masses
 
 **Infrared color dataset.** The default dataset paints the sphere one false color from its near-infrared photometry: MKO K red, H green and J blue, from Janson et al. (2013) as compiled in the UltracoolSheet v2.1 ([band-color.json](source/photometry/band-color.json)), on a range from zero to its brightest band. Not a natural color; nobody has resolved its disc.
 
-**Limb.** No limb darkening is drawn: the published limb table (Claret, Hauschildt & Witte 2012) starts at 1,500 K, and at 564 K the planet is below it. Its published grid fit is Exo-REM, a cloudy model (512 +/- 10 K, Mâlin et al. 2025). Exo-REM's public grid releases temperature and gas profiles and spectra, but no cloud properties, so the limb of a cloudy Exo-REM model cannot be computed from it.
+**Limb.** The disc is dimmed toward the limb by the quadratic law fitted to the MKO H intensity PICASO 4.1 (Batalha et al. 2019, ApJ 878, 70) computes from Exo-REM cloudy (Charnay et al. 2018, ApJ 854, 172; 3.16 times solar metallicity, C/O 0.70) model atmospheres at 512 K and log g 3.45, read between the models YGP_500K_logg3.0, YGP_500K_logg4.0, YGP_550K_logg3.0, YGP_550K_logg4.0 (u1 1.319, u2 -0.320; the law fits each model's eight angles within 0.36% of the centre): a cloudy model, the one Mâlin et al. (2025), arXiv:2501.00104 fit to this planet, because no table reaches a planet this cold and nobody has resolved its disc ([nodes](source/photometry/picaso-exo-rem-h-quadratic.tsv)). The temperature and gravity are that fit's (Table 4 (best-fit atmospheric parameters, Exo-REM), near- and mid-infrared data: Teff 512 +10/-10 K, log g 3.45 +0.35/-0.25, metallicity 0.54 +0.09/-0.11, C/O 0.70 +0.06/-0.07, radius 1.08 +0.04/-0.03; [record](source/photometry/atmosphere-fit.json)), not the 564 K of its measurements record.
 
 **Rotation.** No rotation period or spin axis of GJ 504 b on the sky is measured; the papers cited in the README were checked. The display axis is the orbit normal ([rotation.json](source/preparation/rotation.json)).
 
@@ -34,5 +34,6 @@ Run of 2026-09-23 (this version):
 - The radius is a model value; the companion is a point in every image.
 
 - **The Illustration dataset is art, not data.** Its colors, clouds and terrain are the artist's, and its longitudes are arbitrary; it is shown as NASA published it, with no color corrected.
+- **Model limb.** The limb darkening is computed from the cloudy model a paper fitted to the planet, in the middle band of its color, not a measurement of this planet; another model grid would give another law. Among the 4 models it is read between, the disc near its edge (the lowest of the eight angles) is 8% to 39% as bright as the centre. PICASO finds 83% to 86% of the band flux the release states for those models.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

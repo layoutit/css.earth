@@ -15,7 +15,8 @@
  * are cloudy, and a cloud-free model's law is not theirs: in the H band near 1,000 K it darkens the limb to black. So the law is
  * computed (picaso-limb.mts) from the cloudy Sonora Diamondback model a paper fitted to the planet, which the package records
  * with its citation in source/photometry/atmosphere-fit.json, in the middle band of the planet's color, at the fit's own
- * temperature and gravity. A planet with no such record gets no law. That route needs the PICASO toolchain.
+ * temperature and gravity. A fit of the cloud-free Sonora Elf Owl grid or of Exo-REM's public cloudy grid is read the same way.
+ * A planet with no such record gets no law. That route needs the PICASO toolchain.
  *
  * The run also brings the package's documents in line with its color: the README's dataset paragraph, the credits and the
  * ledger of a planet that was a gray sphere before its color still said so. */
@@ -27,7 +28,7 @@ import { WORKSPACE } from '@cssearth/telescope/node';
 import { authorContextMarkers, MARKER_PATH } from '../../source-authoring/context-markers.mts';
 import type { Archive } from '../archives/archives.mts';
 import { bindInputs, json, type PackageFiles } from '../dataset.mts';
-import { diamondback, DIAMONDBACK, ELF_OWL, elfOwl, fromPicaso, PICASO } from '../picaso-limb.mts';
+import { diamondback, DIAMONDBACK, ELF_OWL, elfOwl, EXO_REM, exoRem, fromPicaso, PICASO } from '../picaso-limb.mts';
 
 export const CLARET_2012 = { table: 'https://cdsarc.cds.unistra.fr/ftp/J/A+A/546/A14/tableab.dat', cite: 'Claret, Hauschildt & Witte (2012), A&A 546, A14', catalogue: 'J/A+A/546/A14',
   band: 'H', file: 'photometry/claret-2012-h-quadratic.tsv', input: 'claret-2012-limb-darkening' } as const;
@@ -57,9 +58,11 @@ export interface ImagedLimb { readonly limbDarkening: Record<string, unknown>; r
   readonly fit?: Record<string, unknown> }
 
 /** A paper's fit of a public grid of cloudy model atmospheres to the planet: the model a computed law is read from. */
-export const ATMOSPHERE_FIT = { schema: 'cssearth-atmosphere-grid-fit@1', path: 'photometry/atmosphere-fit.json', grids: ['sonora-diamondback', 'sonora-elf-owl'] } as const;
-/** A Diamondback fit states its sedimentation efficiency; an Elf Owl fit its C/O (times solar) and log Kzz. */
-export interface AtmosphereFit { readonly grid: typeof ATMOSPHERE_FIT.grids[number]; readonly teffK: number; readonly logg: number; readonly metallicity: number; readonly fsed?: number; readonly co?: number; readonly logKzz?: number;
+export const ATMOSPHERE_FIT = { schema: 'cssearth-atmosphere-grid-fit@1', path: 'photometry/atmosphere-fit.json', grids: ['sonora-diamondback', 'sonora-elf-owl', 'exo-rem'] } as const;
+/** A Diamondback fit states its sedimentation efficiency; an Elf Owl fit its C/O (times solar) and log Kzz; an Exo-REM fit its
+ * C/O as the number ratio. The metallicity is [M/H]. `note` is what a reader must know of the fit beyond its values: which of a
+ * paper's fits it is and why, or what the fit adds to the model that the law leaves out. */
+export interface AtmosphereFit { readonly grid: typeof ATMOSPHERE_FIT.grids[number]; readonly teffK: number; readonly logg: number; readonly metallicity: number; readonly fsed?: number; readonly co?: number; readonly logKzz?: number; readonly note?: string;
   readonly source: { readonly citation: string; readonly url: string; readonly locator: string } }
 export function parseAtmosphereFit(value: unknown, where: string): AtmosphereFit {
   const record = requireRecord(value, where), source = requireRecord(record.source, `${where} source`);
@@ -67,31 +70,38 @@ export function parseAtmosphereFit(value: unknown, where: string): AtmosphereFit
   const grid = ATMOSPHERE_FIT.grids.find(name => name === record.grid);
   if (!grid) throw new TypeError(`${where}: grid is ${String(record.grid)}; a law is computed from ${ATMOSPHERE_FIT.grids.join(' or ')} models only.`);
   return { grid, teffK: requireFiniteNumber(record.teffK, `${where} teffK`), logg: requireFiniteNumber(record.logg, `${where} logg`), metallicity: requireFiniteNumber(record.metallicity, `${where} metallicity`),
-    ...(grid === 'sonora-diamondback' ? { fsed: requireFiniteNumber(record.fsed, `${where} fsed`) } : { co: requireFiniteNumber(record.co, `${where} co`), logKzz: requireFiniteNumber(record.logKzz, `${where} logKzz`) }),
+    ...(grid === 'sonora-diamondback' ? { fsed: requireFiniteNumber(record.fsed, `${where} fsed`) } : { co: requireFiniteNumber(record.co, `${where} co`), ...(grid === 'exo-rem' ? {} : { logKzz: requireFiniteNumber(record.logKzz, `${where} logKzz`) }) }),
+    ...(record.note === undefined ? {} : { note: requireString(record.note, `${where} note`) }),
     source: { citation: requireString(source.citation, `${where} source.citation`), url: requireString(source.url, `${where} source.url`), locator: requireString(source.locator, `${where} source.locator`) } };
 }
 
 /** The filters PICASO computes a law in, by the name a color record gives its middle band. */
 const PICASO_BANDS: Readonly<Record<string, { readonly name: string; readonly svo: string; readonly slug: string }>> = {
   'MKO H': { name: 'MKO H', svo: 'MKO/NSFCam.H', slug: 'h' }, '2MASS H': { name: '2MASS H', svo: '2MASS/2MASS.H', slug: 'h' },
-  F430M: { name: 'JWST/NIRCam F430M', svo: 'JWST/NIRCam.F430M', slug: 'f430m' }, F1065C: { name: 'JWST/MIRI F1065C', svo: 'JWST/MIRI.F1065C', slug: 'f1065c' } };
-const LIMB_INPUTS = /-(?:claret-2012-limb-darkening|picaso-(?:diamondback|elf-owl)-limb-darkening|atmosphere-fit)$/u;
+  'SPHERE K1': { name: 'SPHERE K1', svo: 'Paranal/SPHERE.IRDIS_D_K12_1', slug: 'k1' }, 'GPI K1': { name: 'GPI K1', svo: 'Gemini/GPI.K1', slug: 'k1' },
+  F410M: { name: 'JWST/NIRCam F410M', svo: 'JWST/NIRCam.F410M', slug: 'f410m' }, F430M: { name: 'JWST/NIRCam F430M', svo: 'JWST/NIRCam.F430M', slug: 'f430m' }, F1065C: { name: 'JWST/MIRI F1065C', svo: 'JWST/MIRI.F1065C', slug: 'f1065c' } };
+const LIMB_INPUTS = /-(?:claret-2012-limb-darkening|picaso-(?:diamondback|elf-owl|exo-rem)-limb-darkening|atmosphere-fit)$/u;
 
 /** The law PICASO computes from the cloudy model a paper fitted to the planet, in the middle band of its color (the toolchain
  * runs here). */
 export function fittedImagedLimb(id: string, fit: AtmosphereFit, middleBand: string): { limb?: ImagedLimb; why?: string } {
   const filter = PICASO_BANDS[middleBand];
   if (!filter) return { why: `no law is computed in ${middleBand}, the middle band of its color` };
-  const cloudy = fit.grid === 'sonora-diamondback', band = { name: filter.name, svo: filter.svo, file: `photometry/picaso-${cloudy ? 'diamondback' : 'elf-owl'}-${filter.slug}-quadratic.tsv` };
+  const cloudy = fit.grid !== 'sonora-elf-owl', band = { name: filter.name, svo: filter.svo, file: `photometry/picaso-${fit.grid.replace(/^sonora-/u, '')}-${filter.slug}-quadratic.tsv` };
   const choice = fromPicaso(id, fit.teffK, fit.logg, band, { flag: '--imaged-limb', because: `the one ${fit.source.citation} fit to this planet, because no table reaches a planet this cold and nobody has resolved its disc` },
-    cloudy ? diamondback(fit.metallicity, fit.fsed!) : elfOwl(fit.metallicity, fit.co!, fit.logKzz!));
+    fit.grid === 'sonora-diamondback' ? diamondback(fit.metallicity, fit.fsed!) : fit.grid === 'exo-rem' ? exoRem(fit.metallicity, fit.co!) : elfOwl(fit.metallicity, fit.co!, fit.logKzz!));
   const file = choice.files![0]!, { u1, u2 } = choice.coefficients!;
+  // How far the models the law is read between differ: each one's intensity at the lowest of the angles computed.
+  const edges = [...file.text.matchAll(/; I\/I0 [\d. -]*?(-?[\d.]+); rms/gu)].map(match => Math.round(Number(match[1]) * 100));
+  // Where the release states each model's spectrum: how much of its band flux PICASO finds.
+  const ratios = [...file.text.matchAll(/band flux ([\d.]+) of the release's own spectrum/gu)].map(match => Math.round(Number(match[1]) * 100));
+  const reproduced = ratios.length ? ` PICASO finds ${Math.min(...ratios) === Math.max(...ratios) ? `${ratios[0]}%` : `${Math.min(...ratios)}% to ${Math.max(...ratios)}%`} of the band flux the release states for those models.` : '';
   return { limb: { limbDarkening: choice.limbDarkening as Record<string, unknown>, file: file.path, text: file.text, u1, u2, sentence: choice.sentence, input: choice.inputs![0]!,
     fit: { id: `${id}-atmosphere-fit`, path: ATMOSPHERE_FIT.path, origin: fit.source.url, credit: `${fit.source.citation}, ${fit.source.locator}`, license: 'Factual numerical values; source attribution retained',
       acquisition: 'Transcribed from the paper: the model of the public grid it fits to the planet, each value as printed', redistribution: 'Factual parameter transcription only; no paper figures', consumers: ['datasets'],
       sourceBinding: { kind: 'local', reason: 'Published fit transcribed with its source; repinned when edited.' } },
-    credit: `${choice.credit} Model fit: ${fit.source.citation}.`, evidence: cloudy ? [DIAMONDBACK.release, PICASO.opacities, fit.source.url] : [ELF_OWL.release, ELF_OWL.opacities, fit.source.url],
-    problem: `- **Model limb.** The limb darkening is computed from the ${cloudy ? 'cloudy' : 'cloud-free'} model a paper fitted to the planet, in the middle band of its color, not a measurement of this planet; another model grid would give another law.` } };
+    credit: `${choice.credit} Model fit: ${fit.source.citation}.`, evidence: fit.grid === 'sonora-diamondback' ? [DIAMONDBACK.release, PICASO.opacities, fit.source.url] : fit.grid === 'exo-rem' ? [EXO_REM.release, EXO_REM.code, ELF_OWL.opacities, fit.source.url] : [ELF_OWL.release, ELF_OWL.opacities, fit.source.url],
+    problem: `- **Model limb.** The limb darkening is computed from the ${cloudy ? 'cloudy' : 'cloud-free'} model a paper fitted to the planet, in the middle band of its color, not a measurement of this planet; another model grid would give another law. Among the ${edges.length} models it is read between, the disc near its edge (the lowest of the eight angles) is ${Math.min(...edges)}% to ${Math.max(...edges)}% as bright as the centre.${reproduced}` } };
 }
 
 /** The law at a planet's temperature and gravity, with the nodes it is read between as the file kept beside the planet, or
@@ -225,7 +235,7 @@ export async function addImagedLimbs(root: string, ids: readonly string[], archi
     if (!why && !limb && fit) try { const answer = computed(id, fit, middleBand); limb = answer.limb; outside = [outside, answer.why].filter(Boolean).join('; '); } catch (error) { outside = `${outside}; ${(error as Error).message}`; }
     if (limb) installImagedLimb(files, id, limb);
     documentImagedColor(files, id, record, recordPath, limb && { law: limb, gravity: limb.fit
-      ? `The temperature and gravity are that fit's (${fit!.source.locator}; [record](source/${ATMOSPHERE_FIT.path})), not the ${teffK.toLocaleString('en-US')} K of its measurements record`
+      ? `The temperature and gravity are that fit's (${fit!.source.locator}; [record](source/${ATMOSPHERE_FIT.path})), not the ${teffK.toLocaleString('en-US')} K of its measurements record${fit!.note ? `. ${fit!.note.replace(/\.$/u, '')}` : ''}`
       : `Its temperature is the ${teffK.toLocaleString('en-US')} K of its measurements record; log g ${logg} follows from the mass and radius of its astronomy record (packages/astronomy/data/bodies/${id}.json)` }, outside);
     for (const [path, value] of files) await writeFile(resolve(root, path), value);
     // The marker author draws in the checkout it runs in; a package written to a scratch root keeps the marker it has.

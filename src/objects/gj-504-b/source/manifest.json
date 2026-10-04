@@ -125,6 +125,39 @@
           }
         ]
       }
+    },
+    {
+      "id": "gj-504-b-picaso-exo-rem-limb-darkening",
+      "path": "photometry/picaso-exo-rem-h-quadratic.tsv",
+      "origin": "https://lesia.obspm.fr/exorem/YGP_grids/old_grids_2021/",
+      "credit": "PICASO 4.1 (Batalha et al. 2019, ApJ 878, 70) on Exo-REM cloudy (Charnay et al. 2018, ApJ 854, 172; 3.16 times solar metallicity, C/O 0.70) profiles",
+      "license": "Project-computed model values; the Exo-REM grid is public and its README asks that its papers be cited, Exo-REM with its cloud optical constants is under the MIT license, PICASO is GPL-3.0",
+      "acquisition": "Computed by node packages/telescope-cli/src/new-object/new-object-cli.mts --imaged-limb gj-504-b (packages/telescope-cli/src/new-object/picaso-limb.mts, @cssearth/telescope/node picasoLimbNodes) at the nodes YGP_500K_logg3.0_met3.16_CO0.70, YGP_500K_logg4.0_met3.16_CO0.70, YGP_550K_logg3.0_met3.16_CO0.70, YGP_550K_logg4.0_met3.16_CO0.70.",
+      "redistribution": "Model coefficients and the intensities they are fitted to, with the model and tool cited.",
+      "consumers": [
+        "assets",
+        "datasets"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Computed with the pinned PICASO toolchain; --imaged-limb recomputes it."
+      }
+    },
+    {
+      "id": "gj-504-b-atmosphere-fit",
+      "path": "photometry/atmosphere-fit.json",
+      "origin": "https://arxiv.org/abs/2501.00104",
+      "credit": "Mâlin et al. (2025), arXiv:2501.00104, Table 4 (best-fit atmospheric parameters, Exo-REM), near- and mid-infrared data: Teff 512 +10/-10 K, log g 3.45 +0.35/-0.25, metallicity 0.54 +0.09/-0.11, C/O 0.70 +0.06/-0.07, radius 1.08 +0.04/-0.03",
+      "license": "Factual numerical values; source attribution retained",
+      "acquisition": "Transcribed from the paper: the model of the public grid it fits to the planet, each value as printed",
+      "redistribution": "Factual parameter transcription only; no paper figures",
+      "consumers": [
+        "datasets"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Published fit transcribed with its source; repinned when edited."
+      }
     }
   ],
   "generatedIntermediates": [
@@ -132,7 +165,7 @@
       "id": "dataset-color-context-marker",
       "path": "presentation/context.png",
       "origin": "https://arxiv.org/abs/2606.19228",
-      "credit": "The default dataset's color as a disc; rendered by packages/telescope-cli/src/source-authoring/context-markers.mts",
+      "credit": "The default dataset's color as a disc, dimmed toward the limb by its law; rendered by packages/telescope-cli/src/source-authoring/context-markers.mts",
       "license": "Project-authored display derivative.",
       "consumers": [
         "navigation"
@@ -142,7 +175,8 @@
         "inputs": [
           "gj-504-b-observational-measurements",
           "gj-504-b-preparation-raster",
-          "gj-504-b-band-color"
+          "gj-504-b-band-color",
+          "gj-504-b-picaso-exo-rem-limb-darkening"
         ]
       },
       "generator": "packages/telescope-cli/src/source-authoring/context-markers.mts",

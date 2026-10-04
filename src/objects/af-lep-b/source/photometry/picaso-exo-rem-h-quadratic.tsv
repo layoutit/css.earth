@@ -1,0 +1,14 @@
+# PICASO 4.1 (Batalha et al. 2019, ApJ 878, 70): the MKO H (SVO MKO/NSFCam.H) intensity of Exo-REM cloudy (Charnay et al. 2018, ApJ 854, 172; 3.16 times solar metallicity, C/O 0.55) structures (https://lesia.obspm.fr/exorem/YGP_grids/old_grids_2021/), the optical depth and particle radius of the iron and silicate clouds the release states for each layer, and Exo-REM's optical constants of both,
+# with PICASO's resampled opacity database opacities.db (https://doi.org/10.5281/zenodo.3759675), energy-weighted over PICASO's bins,
+# solved with four-term spherical harmonics (Rooney, Batalha & Marley 2023, arXiv:2304.04830),
+# at the emission cosines of its eight Gauss points; a and b are the least-squares quadratic law with the centre intensity free.
+# YGP_800K_logg3.5_met3.16_CO0.55: mu 0.9990 0.9895 0.9580 0.8906 0.7782 0.6186 0.4175 0.1877; I/I0 1.0009 0.9948 0.9741 0.9281 0.8456 0.7144 0.5198 0.2492; rms 0.00182; band flux 0.924 of the release's own spectrum
+# YGP_800K_logg4.0_met3.16_CO0.55: mu 0.9990 0.9895 0.9580 0.8906 0.7782 0.6186 0.4175 0.1877; I/I0 1.0000 0.9938 0.9727 0.9259 0.8420 0.7082 0.5093 0.2472; rms 0.00065; band flux 0.946 of the release's own spectrum
+# YGP_850K_logg3.5_met3.16_CO0.55: mu 0.9990 0.9895 0.9580 0.8906 0.7782 0.6186 0.4175 0.1877; I/I0 0.9982 0.9906 0.9652 0.9112 0.8214 0.6964 0.5466 0.3907; rms 0.00115; band flux 0.928 of the release's own spectrum
+# YGP_850K_logg4.0_met3.16_CO0.55: mu 0.9990 0.9895 0.9580 0.8906 0.7782 0.6186 0.4175 0.1877; I/I0 0.9996 0.9931 0.9715 0.9255 0.8492 0.7417 0.6068 0.4507; rms 0.00042; band flux 0.950 of the release's own spectrum
+Teff	logg	a	b	Profile
+K	[cgs]			
+800	3.5	0.595786	0.402133	YGP_800K_logg3.5_met3.16_CO0.55
+800	4	0.627713	0.368029	YGP_800K_logg4.0_met3.16_CO0.55
+850	3.5	0.834676	-0.102633	YGP_850K_logg3.5_met3.16_CO0.55
+850	4	0.678148	-0.002941	YGP_850K_logg4.0_met3.16_CO0.55

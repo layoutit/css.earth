@@ -280,18 +280,33 @@ band, the middle band of a J, H, K color (`new-object --imaged-limb <id>...`,
 [imaged-limb.mts](../packages/telescope-cli/src/new-object/imaged/imaged-limb.mts)). The nodes it is read between are kept
 beside the planet, and every text calls it a model.
 
-No published table reaches a planet cooler than 1,500 K, and a cloud-free model is not an answer: these planets are cloudy, and
-in the H band near 1,000 K a cloud-free Sonora Bobcat atmosphere darkens the limb to black. Where a paper has fitted the public
-cloudy grid, Sonora Diamondback (Morley et al. [2024](https://doi.org/10.3847/1538-4357/ad71d5)), to the planet, the law is
-computed from that fitted model: PICASO takes its structure and the release's cloud optical properties and gives the
-intensity at eight viewing angles in the middle band of the planet's color
+No published table reaches a planet cooler than 1,500 K, and a cloud-free model is not an answer for a cloudy planet. Where a
+paper has fitted a public grid of model atmospheres to the planet, the law is computed from that fitted model: PICASO takes
+its structure and its clouds and gives the intensity at eight viewing angles in the middle band of the planet's color
 ([picaso-limb.mts](../packages/telescope-cli/src/new-object/picaso-limb.mts)). The fit is transcribed with its table in
-`source/photometry/atmosphere-fit.json`. Fed those files, PICASO reproduces the grid's own published J−H and H−K colors
-within 0.11 mag at 1,100 K, log g 3.5 and [M/H] +0.5 (1.29 and 1.04 against 1.20 and 0.97 for f_sed 2), and misses by 0.8 and
-0.3 mag with the clouds left out. A fit on the cloud-free Sonora Elf Owl grid (Mukherjee et al.
-[2024](https://doi.org/10.5281/zenodo.10381250)) is computed the same way from the release's own file, which states the
-abundances of its disequilibrium chemistry and carries the spectrum its authors computed; each node records the band flux
-computed here over theirs (1.04 for Epsilon Indi Ab at 10.65 µm). A planet with no usable fit stays a flat disc, and its
+`source/photometry/atmosphere-fit.json`. Three grids are read:
+
+- **Sonora Diamondback** (Morley et al. [2024](https://doi.org/10.3847/1538-4357/ad71d5)), cloudy, with the release's cloud
+  optical properties. PICASO reproduces how the grid's published J−H and H−K colors change when the clouds thin from f_sed 1
+  to 2 at 1,100 K, log g 3.5 and [M/H] +0.5: 0.369 and 0.345 mag against the published 0.366 and 0.373.
+- **Exo-REM's public grid** for young giant planets (Charnay et al. [2018](https://doi.org/10.3847/1538-4357/aaac7d);
+  [release](https://lesia.obspm.fr/exorem/YGP_grids/old_grids_2021/)), cloudy. Each model's file states, layer by layer, the
+  gas abundances and the optical depth and particle radius of its iron and silicate clouds; their extinction, albedo and
+  asymmetry at each wavelength come from Exo-REM's own optical-constant tables. The grid steps by half a decade in metallicity
+  and 0.05 in C/O, and the law is read at the composition nearest the fit. The release carries the spectrum its authors
+  computed, and each node records the band flux computed here over theirs.
+- **Sonora Elf Owl** (Mukherjee et al. [2024](https://doi.org/10.5281/zenodo.10381250)), cloud-free, from the release's own
+  file, which states the abundances of its disequilibrium chemistry and carries its spectrum; each node records the same
+  ratio (1.04 for Epsilon Indi Ab at 10.65 µm).
+
+A cloudy model is solved with PICASO's four-term spherical harmonics (Rooney, Batalha & Marley
+[2023](https://arxiv.org/abs/2304.04830)), not its two-stream solver. Through a thick scattering cloud the two-stream
+intensities are too flat toward the limb, and the flux says so: for the 850 K, log g 4.0 Exo-REM model in the H band, two
+streams give 78% of the release's flux and an edge-most angle 72% as bright as the centre; four terms give 95% and 45%. A
+cloud-free model's intensities are the same with either solver.
+
+Exo-REM's neighbouring models differ in how deep their cloud tops lie, so a law read between four of them can differ much
+from node to node; each README states that range and the flux ratios. A planet with no usable fit stays a flat disc, and its
 ledger says why, with the fits read in its papers.
 
 **Gravity darkening.** A star that spins fast is flattened and hotter at its poles. Where a paper publishes a Roche-von Zeipel
