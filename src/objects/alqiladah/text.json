@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "alqiladah",
+  "card": {
+    "text": "A star 44 parsecs away, 11 times the Sun's width, measured from its light.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 93683: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-omicron-sagittarii",
+        "url": "https://en.wikipedia.org/wiki/Omicron_Sagittarii",
+        "label": "Wikipedia, \"Omicron Sagittarii\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1369727831",
+        "quote": "Omicron Sagittarii, also named Alqiladah, is a single star in the constellation Sagittarius."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its brightness, measured band by band, gives 61 times the Sun's luminosity at 4,889 K, so 10.921 solar radii.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 93683: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-omicron-sagittarii",
+        "url": "https://en.wikipedia.org/wiki/Omicron_Sagittarii",
+        "label": "Wikipedia, \"Omicron Sagittarii\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1369727831",
+        "quote": "It is yellow in hue and visible to the naked eye with an apparent visual magnitude of +3.77."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its spectrum",
+      "summary": "The color of the star's light."
+    }
+  }
+}

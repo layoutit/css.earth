@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "wasp-161",
+  "card": {
+    "text": "WASP-161 b crosses Tislit as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-aaf422",
+        "url": "https://ui.adsabs.harvard.edu/abs/2019AJ....157...43B/abstract",
+        "label": "Barkaoui et al. (2019), The Astronomical Journal 157 43",
+        "checked": "2026-10-03",
+        "locator": "NASA Exoplanet Archive ps table (st_refname BARKAOUI_ET_AL__2019): st_teff 6400, st_rad 1.712, st_mass 1.39"
+      },
+      {
+        "catalogueId": "wikipedia-wasp-161",
+        "url": "https://en.wikipedia.org/wiki/WASP-161",
+        "label": "Wikipedia, \"WASP-161\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1329892833",
+        "quote": "WASP-161, also named Tislit, is an F-type main-sequence star about 1,162 light-years away in the constellation Puppis."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Barkaoui et al. 2019.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-aaf422",
+        "url": "https://ui.adsabs.harvard.edu/abs/2019AJ....157...43B/abstract",
+        "label": "Barkaoui et al. (2019), The Astronomical Journal 157 43",
+        "checked": "2026-10-03",
+        "locator": "NASA Exoplanet Archive ps table (st_refname BARKAOUI_ET_AL__2019): st_teff 6400, st_rad 1.712, st_mass 1.39"
+      },
+      {
+        "catalogueId": "wikipedia-wasp-161",
+        "url": "https://en.wikipedia.org/wiki/WASP-161",
+        "label": "Wikipedia, \"WASP-161\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1329892833",
+        "quote": "With an apparent magnitude of 11.1, it is much too faint to be visible to the naked eye."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its Gaia spectrum",
+      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

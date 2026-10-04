@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hat-p-36b",
+  "card": {
+    "text": "HAT-P-36 b was found in 2011 by HATNet as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ab24dd",
+        "url": "https://ui.adsabs.harvard.edu/abs/2019AJ....158...39C/abstract",
+        "label": "Chakrabarty 2019",
+        "checked": "2026-10-03",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname CHAKRABARTY__AMP__SENGUPTA_2019): disc_year 2011, disc_facility HATNet, sy_pnum 1; pl_orbper 1.327346813, pl_radj 1.277, pl_bmassj 1.8482"
+      },
+      {
+        "catalogueId": "wikipedia-hat-p-36",
+        "url": "https://en.wikipedia.org/wiki/HAT-P-36",
+        "label": "Wikipedia, \"HAT-P-36\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374405757",
+        "quote": "In December 2019, HAT-P-36 was named Tuiren and its planetary companion, HAT-P-36b, was named Bran as a result of Ireland's contribution to the 2019 NameExoWorlds campaign."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is the only planet known around Tuiren. Its orbit and size follow Chakrabarty & Sengupta 2019's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-ab24dd",
+        "url": "https://ui.adsabs.harvard.edu/abs/2019AJ....158...39C/abstract",
+        "label": "Chakrabarty 2019",
+        "checked": "2026-10-03",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname CHAKRABARTY__AMP__SENGUPTA_2019): disc_year 2011, disc_facility HATNet, sy_pnum 1; pl_orbper 1.327346813, pl_radj 1.277, pl_bmassj 1.8482"
+      },
+      {
+        "catalogueId": "wikipedia-hat-p-36",
+        "url": "https://en.wikipedia.org/wiki/HAT-P-36",
+        "label": "Wikipedia, \"HAT-P-36\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374405757",
+        "quote": "Bran has a mass approximately 1.8 times that of Jupiter and a radius 1.2 times larger."
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

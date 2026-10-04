@@ -5,11 +5,11 @@
     {
       "kind": "system-orbits",
       "id": "l-168-9b-orbits",
-      "title": "L 168-9 b: orbits around L 168-9",
+      "title": "L 168-9 b: orbits around Danfeng",
       "output": "l-168-9b-system-orbits.svg",
       "system": "l-168-9",
       "highlight": "l-168-9b",
-      "description": "The orbits of L 168-9's planets in this map from above, to scale, with L 168-9 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "description": "The orbits of Danfeng's planets in this map from above, to scale, with L 168-9 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
       "metadata": {
         "orbitSource": "Hobson et al. 2024 (2024A&A...688A.216H), via the NASA Exoplanet Archive ps table (pl_refname HOBSON_ET_AL_2024): P 1.40152604 d"
       }

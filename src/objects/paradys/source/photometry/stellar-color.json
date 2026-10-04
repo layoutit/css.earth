@@ -1,0 +1,48 @@
+{
+  "schema": "cssearth-stellar-photometric-color@1",
+  "objectId": "paradys",
+  "spectrum": "measured",
+  "measuredSpectrum": {
+    "source": "Burnashev (1985), Abastumani Astrophys. Obs. Bull. 59, 83; VizieR III/126, part2 record 192 (BS 5470)",
+    "path": "photometry/III_126_part2.dat.gz",
+    "format": "burnashev-records",
+    "wavelength": {
+      "column": "lambda",
+      "unit": "angstrom"
+    },
+    "flux": {
+      "column": "192",
+      "kind": "log10",
+      "missing": -9.999999
+    },
+    "service": "https://cdsarc.cds.unistra.fr/ftp/III/126/part2.dat.gz",
+    "checked": "2026-10-03",
+    "gaps": [
+      {
+        "fromNm": 755,
+        "toNm": 780,
+        "reason": "the spectrum ends at 755 nm; the last value is held to 780 nm, where the observer adds little"
+      }
+    ],
+    "note": "Ground-based scans of the Chilean catalogue in Burnashev's compilation, as log10 flux."
+  },
+  "whitePoint": "sRGB D65",
+  "normalization": "brightest linear sRGB channel = 1",
+  "crossCheck": {
+    "source": "Gaia DR3 XP spectrum, source 5773473920382493440",
+    "spectrum": {
+      "path": "photometry/crosscheck-gaia-dr3-xp-sampled.csv",
+      "format": "gaia-xp-sampled",
+      "wavelength": {
+        "column": "lambda",
+        "unit": "nm"
+      },
+      "flux": {
+        "column": "5773473920382493440",
+        "kind": "flux"
+      },
+      "gaps": []
+    },
+    "disagreement": "The Gaia DR3 XP color differs from the Burnashev color by 21 levels. The star is G 3.36, brighter than the G 4 under which Gaia's spectra can be saturated (De Angeli et al. 2023, A&A 674, A2; color.mts XP_SATURATION_G), so the Burnashev color is used."
+  }
+}

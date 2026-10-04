@@ -1,3 +1,4 @@
+import { requireNonemptyString as text } from '@cssearth/core';
 /** Self-contained preparation entry point for pinned transparent surface objects. */
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { dirname, relative, resolve } from 'node:path';
@@ -52,9 +53,4 @@ export async function prepareSurfaceShellObject(options: { objectDirectory: stri
   }
   console.log(`PREPARED ${descriptor.id}: ${data.faces.length} PolyCSS triangle leaves; ${atlas.width * atlas.height * 4} decoded RGBA bytes; ${outputPath}`);
   return envelope;
-}
-
-function text(value: unknown, at: string): string {
-  if (typeof value !== 'string' || !value) throw new TypeError(`${at} must be a string.`);
-  return value;
 }

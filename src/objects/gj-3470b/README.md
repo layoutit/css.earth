@@ -2,7 +2,7 @@
 
 ## Sources
 
-It is the only planet known around GJ 3470. Its orbit and size follow Awiphan et al. 2016's fit, the archive's default. The introduction is generated from Awiphan et al. 2016's published values; the sections below are the data's own.
+It is the only planet known around Kaewkosin. Its orbit and size follow Awiphan et al. 2016's fit, the archive's default. The introduction is generated from Awiphan et al. 2016's published values; the sections below are the data's own.
 
 **Size and mass.** Radius 0.40770809 Jupiter radii from Awiphan et al. 2016 (2016MNRAS.463.2574A), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2016MNRAS.463.2574A/abstract): 29,147.9 km at 71,492 km per Jupiter radius. GM from the mass 0.04373407 Jupiter masses (Awiphan et al. 2016, the mass the NASA Exoplanet Archive's composite table adopts (2016MNRAS.463.2574A), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2016MNRAS.463.2574A/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.
 
@@ -10,11 +10,12 @@ It is the only planet known around GJ 3470. Its orbit and size follow Awiphan et
 
 **Color.** No image or measured color exists. The neutral gray is lit by gj-3470's measured color (#ffc68b, the color dataset of gj-3470 (src/objects/gj-3470/source/photometry/stellar-color.json)) at the gray's own brightness.
 
-**Charts.** The orbits of GJ 3470's planets from above, from their hosted-orbit records, and its transmission spectrum, 28 bins from Benneke et al. 2019 in the archive's transitspec table; its transit in 3 TESS sectors (46, 71, 72), folded onto its orbit. Upper limits and rows without an error are left out.
+**Charts.** The orbits of Kaewkosin's planets from above, from their hosted-orbit records, and its transmission spectrum, 28 bins from Benneke et al. 2019 in the archive's transitspec table; its transit in 3 TESS sectors (46, 71, 72), folded onto its orbit. Upper limits and rows without an error are left out.
 
 ## Evidence
 
-Generated 2026-09-29 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/gj-3470b.json).
+Generated 2026-10-03 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/gj-3470b.json).
+
 
 ## Known problems
 

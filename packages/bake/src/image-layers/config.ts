@@ -1,3 +1,5 @@
+import { requireNonemptyString as text } from '@cssearth/core';
+import type { PreparedImageLayerBank } from '@cssearth/objects';
 export type Vec3 = [number, number, number];
 export type LayerAxis = 'x' | 'y' | 'z';
 
@@ -13,7 +15,7 @@ export interface ImageLayerRecipe {
     /** Companion galaxies removed the same way, by their rows (key column) in a repository catalogue with the Local Volume
      * Database's columns: ra, dec (deg), rhalf (arcmin), position_angle (deg), ellipticity. */
     companions?: { catalogue: string; keys: string[]; source: string; basis: string } };
-  observation: { centerRaDeg: number; centerDecDeg: number; fieldOfViewDeg: [number, number]; northClockwiseDeg: number };
+  observation: PreparedImageLayerBank['observation'];
   target: { centerRaDeg: number; centerDecDeg: number; distancePc: number };
   geometry: { kind: 'inclined-disk' | 'line-of-sight-envelope'; inclinationDeg: number; lineOfNodesPaDeg: number;
     thicknessKpc: number; supportRadiusKpc: number; supportTaperFraction: number; depthWeights: number[]; depthScales: number[];
@@ -30,6 +32,14 @@ export interface ImageLayerRecipe {
     shape?: { source: string; basis: string; expansionKmSPerArcsec: number;
       ring: { semiMajorArcsec: number; semiMinorArcsec: number; majorPaDeg: number; polarTiltDeg: number; polarLeansToPaDeg: number; expansionKmS: [number, number, number] };
       lobe?: { source: string; radiusArcsec: number; expansionKmS: [number, number, number] }; smoothPixels: number };
+    /** A nebula's published filled body (./body.ts): a spheroid of gas that emits evenly, `semiPolarArcsec` along its pole
+     * and `semiEquatorialArcsec` across it, the pole tipped `polarTiltDeg` from the sight line with its near end leaning to
+     * position angle `polarLeansToPaDeg`. `envelope` is a filled sphere around it, the nebula's outline. `cavities` are regions along the pole that emit `emission` of the body's emissivity, each about
+     * `sizeArcsec` across; they lie behind the star between the position angles `farBetweenPaDeg` and in front of it
+     * elsewhere. Every value is one a paper prints or states. */
+    body?: { source: string; basis: string; semiPolarArcsec: number; semiEquatorialArcsec: number; polarTiltDeg: number; polarLeansToPaDeg: number;
+      envelope?: { source: string; radiusArcsec: number };
+      cavities?: { source: string; emission: number; sizeArcsec: number; farBetweenPaDeg: [number, number] } };
     /** A published bulge-plus-disc fit of the sky light (./bulge.ts): Sérsic bulge, exponential disc, one position angle.
      * Every surface brightness is the component's as projected on the sky, in magnitudes per square arcsecond: a disc's
      * face-on central value (as S4G tabulates it) brightens by 2.5 log10 of its axis ratio. */
@@ -73,9 +83,7 @@ const finite = (v: unknown, at: string): number => {
 const positive = (v: unknown, at: string, integer = false): number => {
   const n = finite(v, at); if (n <= 0 || (integer && !Number.isInteger(n))) throw new TypeError(`${at} must be positive.`); return n;
 };
-const text = (v: unknown, at: string): string => {
-  if (typeof v !== 'string' || !v) throw new TypeError(`${at} must be a string.`); return v;
-};
+
 const path = (v: unknown): string => {
   const p = text(v, 'source path'); if (p.startsWith('/') || p.split('/').includes('..') || /[\\\0]/.test(p)) throw new TypeError('Path must be contained.'); return p;
 };
@@ -108,6 +116,16 @@ const shapeOf = (v: unknown): NonNullable<ImageLayerRecipe['geometry']['shape']>
       polarTiltDeg: tilt, polarLeansToPaDeg: finite(r.polarLeansToPaDeg, 'geometry.shape.ring.polarLeansToPaDeg'), expansionKmS: speeds(r.expansionKmS, 'geometry.shape.ring.expansionKmS') },
     ...(lobe === undefined ? {} : { lobe: { source: text(lobe.source, 'geometry.shape.lobe.source'), radiusArcsec: positive(lobe.radiusArcsec, 'geometry.shape.lobe.radiusArcsec'), expansionKmS: speeds(lobe.expansionKmS, 'geometry.shape.lobe.expansionKmS') } }),
     smoothPixels: smooth };
+};
+const bodyOf = (v: unknown): NonNullable<ImageLayerRecipe['geometry']['body']> => {
+  const b = object(v, 'geometry.body'), tilt = finite(b.polarTiltDeg, 'geometry.body.polarTiltDeg'), fraction = (value: unknown, name: string) => { const n = finite(value, name); if (!(n > 0 && n < 1)) throw new TypeError(`${name} is a fraction above 0 and under 1; got ${n}.`); return n; };
+  if (!(tilt >= 0 && tilt < 90)) throw new TypeError(`geometry.body.polarTiltDeg must be from 0 to under 90; got ${tilt}.`);
+  const envelope = b.envelope === undefined ? undefined : object(b.envelope, 'geometry.body.envelope'), cavities = b.cavities === undefined ? undefined : object(b.cavities, 'geometry.body.cavities');
+  const angles = (value: unknown, name: string): [number, number] => { if (!Array.isArray(value) || value.length !== 2) throw new TypeError(`${name} holds two position angles, from and to through east.`); return [finite(value[0], `${name}[0]`), finite(value[1], `${name}[1]`)]; };
+    return { source: text(b.source, 'geometry.body.source'), basis: text(b.basis, 'geometry.body.basis'), semiPolarArcsec: positive(b.semiPolarArcsec, 'geometry.body.semiPolarArcsec'), semiEquatorialArcsec: positive(b.semiEquatorialArcsec, 'geometry.body.semiEquatorialArcsec'),
+    polarTiltDeg: tilt, polarLeansToPaDeg: finite(b.polarLeansToPaDeg, 'geometry.body.polarLeansToPaDeg'),
+    ...(envelope === undefined ? {} : { envelope: { source: text(envelope.source, 'geometry.body.envelope.source'), radiusArcsec: positive(envelope.radiusArcsec, 'geometry.body.envelope.radiusArcsec') } }),
+    ...(cavities === undefined ? {} : { cavities: { source: text(cavities.source, 'geometry.body.cavities.source'), emission: fraction(cavities.emission, 'geometry.body.cavities.emission'), sizeArcsec: positive(cavities.sizeArcsec, 'geometry.body.cavities.sizeArcsec'), farBetweenPaDeg: angles(cavities.farBetweenPaDeg, 'geometry.body.cavities.farBetweenPaDeg') } }) };
 };
 const parsecUnit = (v: unknown, unsupported: boolean): 'pc' => {
   if (v !== 'pc' || unsupported) throw new TypeError(`geometry.unit is "pc", on a flat bank without a bulge; got ${JSON.stringify(v)}${unsupported ? ' on a bank that is not flat or has a bulge' : ''}.`);
@@ -187,11 +205,12 @@ export function parseImageLayerRecipe(value: unknown): ImageLayerRecipe {
       thicknessKpc: positive(g.thicknessKpc, 'thicknessKpc'), supportRadiusKpc: positive(g.supportRadiusKpc, 'supportRadiusKpc'),
       supportTaperFraction, depthWeights: weights, depthScales: scales, ...(g.bulge===undefined?{}:{bulge:bulgeOf(g.bulge)}),
       ...(g.shape===undefined?{}:{shape:(()=>{if(g.bulge!==undefined||b.flat!==true)throw new TypeError('geometry.shape is for a flat bank without a bulge.');return shapeOf(g.shape);})()}),
+      ...(g.body===undefined?{}:{body:(()=>{if(g.bulge!==undefined||g.shape!==undefined||b.flat!==true)throw new TypeError('geometry.body is for a flat bank without a bulge or walls.');return bodyOf(g.body);})()}),
       ...(g.unit===undefined?{}:{unit:parsecUnit(g.unit,g.bulge!==undefined||b.flat!==true)}) },
     bake: { maxFacePixels: positive(b.maxFacePixels, 'maxFacePixels', true), diffuseFacePixels: positive(b.diffuseFacePixels,'diffuseFacePixels',true),
       ...(b.levels===undefined?{}:{levels:levelsOf(b.levels)}),
       ...(b.colorTie===undefined?{}:{colorTie:colorTieOf(b.colorTie)}),
-      ...(g.bulge===undefined&&g.shape===undefined?{}:{bulgeSlices:positive(b.bulgeSlices,'bulgeSlices',true),bulgeFacePixels:positive(b.bulgeFacePixels,'bulgeFacePixels',true),bulgeCrossSlices:positive(b.bulgeCrossSlices,'bulgeCrossSlices',true)}), crossAxisSlices: positive(b.crossAxisSlices, 'crossAxisSlices', true),
+      ...(g.bulge===undefined&&g.shape===undefined&&g.body===undefined?{}:{bulgeSlices:positive(b.bulgeSlices,'bulgeSlices',true),bulgeFacePixels:positive(b.bulgeFacePixels,'bulgeFacePixels',true),bulgeCrossSlices:positive(b.bulgeCrossSlices,'bulgeCrossSlices',true)}), crossAxisSlices: positive(b.crossAxisSlices, 'crossAxisSlices', true),
       crossAxisAlongPixels:positive(b.crossAxisAlongPixels,'crossAxisAlongPixels',true),crossAxisDepthPixels: positive(b.crossAxisDepthPixels, 'crossAxisDepthPixels', true), backgroundFloor,edgeTaperFraction,diffuseFraction,diffuseSigmaPixels:positive(b.diffuseSigmaPixels,'diffuseSigmaPixels'),
       ...(b.flat===undefined?{}:{flat:flatOf(b.flat)}),
       encoding: { format: 'webp', quality, ...(e.alphaQuality===undefined?{}:{alphaQuality:alphaQualityOf(e.alphaQuality)}) } }, provenance: { path: path(p.path) } };

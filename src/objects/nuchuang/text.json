@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "nuchuang",
+  "card": {
+    "text": "A star 115 parsecs away, 68 times the Sun's width, measured from its light.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 84380: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-pi-herculis",
+        "url": "https://en.wikipedia.org/wiki/Pi_Herculis",
+        "label": "Wikipedia, \"Pi Herculis\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1377637834",
+        "quote": "Pi Herculis, Latinized from π Herculis, formally named Nüchuang, is a third-magnitude star in the constellation Hercules."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its brightness, measured band by band, gives 1,256 times the Sun's luminosity at 4,181 K, so 67.631 solar radii.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 84380: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-pi-herculis",
+        "url": "https://en.wikipedia.org/wiki/Pi_Herculis",
+        "label": "Wikipedia, \"Pi Herculis\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1377637834",
+        "quote": "As one of the four stars in the Keystone asterism, specifically representing the northeastern corner, it is one of the constellation's more easily recognized."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its spectrum",
+      "summary": "The color of the star's light."
+    }
+  }
+}

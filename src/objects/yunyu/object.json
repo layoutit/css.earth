@@ -1,0 +1,148 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "yunyu",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Yunyu",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 7672179.6
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/yunyu-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Yunyu",
+      "classification": "star",
+      "color": "#ffe8cb",
+      "distanceAu": 8725175,
+      "description": "A star 42 parsecs away, 11 times the Sun's width, measured from its light.",
+      "systemName": "Yunyu system",
+      "aliases": [
+        "Gamma Piscium",
+        "HD 219615",
+        "HIP 114971",
+        "HR 8852"
+      ],
+      "order": 5755,
+      "context": {
+        "order": 5752
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1280455991374910500,
+        -242013208262209300,
+        74736640260765060
+      ],
+      "presentationToReference": [
+        0.9809912230962035,
+        0.05626030410011075,
+        -0.18571752311178796,
+        -0.1854127238893412,
+        -0.010635798783849338,
+        -0.9826031760604911,
+        0.05725680770134976,
+        -0.9983594833359337,
+        0.0000022490275292703016
+      ],
+      "orbitUpReference": [
+        -0.05626030410011075,
+        0.010635798783849338,
+        0.9983594833359337
+      ],
+      "metersPerUnit": 24748966.451612905,
+      "bodyRadiusM": 7672179600
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

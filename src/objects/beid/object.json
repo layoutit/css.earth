@@ -1,0 +1,148 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "beid",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Beid",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 2380685.4
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/beid-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Beid",
+      "classification": "star",
+      "color": "#d9e1ff",
+      "distanceAu": 7696383.5,
+      "description": "A star 37 parsecs away, 3.4 times the Sun's width, measured from its light.",
+      "systemName": "Beid system",
+      "aliases": [
+        "HD 26574",
+        "HIP 19587",
+        "HR 1298",
+        "Omicron1 Eridani"
+      ],
+      "order": 5502,
+      "context": {
+        "order": 5499
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        519586296371065200,
+        1018272770519911200,
+        -137063621984346260
+      ],
+      "presentationToReference": [
+        0.45127924208874776,
+        -0.05410916237453962,
+        0.8907408400915113,
+        0.8844062426772891,
+        -0.1060416999127005,
+        -0.4545115573811792,
+        -0.11904891252441388,
+        -0.9928883907201003,
+        -6.302367600804043e-8
+      ],
+      "orbitUpReference": [
+        0.05410916237453962,
+        0.1060416999127005,
+        0.9928883907201003
+      ],
+      "metersPerUnit": 7679630.322580645,
+      "bodyRadiusM": 2380685400
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

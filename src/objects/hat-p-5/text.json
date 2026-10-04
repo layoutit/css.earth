@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hat-p-5",
+  "card": {
+    "text": "HAT-P-5 b crosses Chasoň as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-aa5df3",
+        "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+        "label": "Stassun et al. (2017), The Astronomical Journal 153 136",
+        "checked": "2026-10-03",
+        "locator": "NASA Exoplanet Archive ps table (st_refname STASSUN_ET_AL__2017): st_teff 5960, st_rad 1.12, st_mass 1.04"
+      },
+      {
+        "catalogueId": "wikipedia-hat-p-5",
+        "url": "https://en.wikipedia.org/wiki/HAT-P-5",
+        "label": "Wikipedia, \"HAT-P-5\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374404652",
+        "quote": "HAT-P-5 is a 12th magnitude star in the constellation Lyra, approximately 1,000 light years away from Earth."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Stassun et al. 2017.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-aa5df3",
+        "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+        "label": "Stassun et al. (2017), The Astronomical Journal 153 136",
+        "checked": "2026-10-03",
+        "locator": "NASA Exoplanet Archive ps table (st_refname STASSUN_ET_AL__2017): st_teff 5960, st_rad 1.12, st_mass 1.04"
+      },
+      {
+        "catalogueId": "wikipedia-hat-p-5",
+        "url": "https://en.wikipedia.org/wiki/HAT-P-5",
+        "label": "Wikipedia, \"HAT-P-5\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374404652",
+        "quote": "It is a spectral type G star, about 1.16 solar masses and radii greater than the Sun, and only 200 kelvins hotter."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its Gaia spectrum",
+      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

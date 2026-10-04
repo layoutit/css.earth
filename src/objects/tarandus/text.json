@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "tarandus",
+  "card": {
+    "text": "A star 86 parsecs away, 21 times the Sun's width, measured from its light.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 5372: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-2-ursae-minoris",
+        "url": "https://en.wikipedia.org/wiki/2_Ursae_Minoris",
+        "label": "Wikipedia, \"2 Ursae Minoris\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374618271",
+        "quote": "2 Ursae Minoris, also named Tarandus, is a single star a few degrees away from the northern celestial pole."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its brightness, measured band by band, gives 174 times the Sun's luminosity at 4,563 K, so 21.12 solar radii.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 5372: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-2-ursae-minoris",
+        "url": "https://en.wikipedia.org/wiki/2_Ursae_Minoris",
+        "label": "Wikipedia, \"2 Ursae Minoris\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374618271",
+        "quote": "Despite its Flamsteed designation, the star is actually located in the constellation Cepheus."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its spectrum",
+      "summary": "The color of the star's light."
+    }
+  }
+}

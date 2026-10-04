@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "samaya",
+  "card": {
+    "text": "A star about 93 parsecs away, 1.4 times the Sun's width, measured by Gaia.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202243688",
+        "url": "https://doi.org/10.1051/0004-6361/202243688",
+        "label": "Creevey et al. (2023), Astronomy & Astrophysics 674 A26",
+        "checked": "2026-10-03",
+        "locator": "gaiadr3.astrophysical_parameters, Gaia DR3 6592695123423391616: radius_flame, mass_flame, teff_gspphot"
+      },
+      {
+        "catalogueId": "wikipedia-hd-205739",
+        "url": "https://en.wikipedia.org/wiki/HD_205739",
+        "label": "Wikipedia, \"HD 205739\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374435359",
+        "quote": "HD 205739 is a yellow-white hued star in the southern constellation of Piscis Austrinus, positioned near the western constellation boundary with Microscopium."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Gaia's parallax, brightness and spectrum give it 1.4 solar radii and 1.18 solar masses (FLAME) and 6,117 K at its surface (GSP-Phot).",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202243688",
+        "url": "https://doi.org/10.1051/0004-6361/202243688",
+        "label": "Creevey et al. (2023), Astronomy & Astrophysics 674 A26",
+        "checked": "2026-10-03",
+        "locator": "gaiadr3.astrophysical_parameters, Gaia DR3 6592695123423391616: radius_flame, mass_flame, teff_gspphot"
+      },
+      {
+        "catalogueId": "wikipedia-hd-205739",
+        "url": "https://en.wikipedia.org/wiki/HD_205739",
+        "label": "Wikipedia, \"HD 205739\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374435359",
+        "quote": "It has the proper name Sāmaya, which was selected in the NameExoWorlds campaign by Sri Lanka, during the 100th anniversary of the IAU."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its temperature",
+      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

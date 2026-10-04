@@ -1,0 +1,43 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "tania-borealis",
+  "card": {
+    "text": "A star 42 parsecs away, 3.3 times the Sun's width, measured from its light.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 50372: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-lambda-ursae-majoris",
+        "url": "https://en.wikipedia.org/wiki/Lambda_Ursae_Majoris",
+        "label": "Wikipedia, \"Lambda Ursae Majoris\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374609513",
+        "quote": "Lambda Ursae Majoris, formally named Tania Borealis, is a star in the northern circumpolar constellation of Ursa Major."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its brightness, measured band by band, gives 62 times the Sun's luminosity at 8,901 K, so 3.321 solar radii.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 50372: D, Teff, L, Rad, Q"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its spectrum",
+      "summary": "The color of the star's light."
+    }
+  }
+}

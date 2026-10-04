@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "mago",
+  "card": {
+    "text": "A star about 120 parsecs away, 11 times the Sun's width, measured by Gaia.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202243688",
+        "url": "https://doi.org/10.1051/0004-6361/202243688",
+        "label": "Creevey et al. (2023), Astronomy & Astrophysics 674 A26",
+        "checked": "2026-10-03",
+        "locator": "gaiadr3.astrophysical_parameters, Gaia DR3 497653157602636928: radius_flame, mass_flame, teff_gspphot"
+      },
+      {
+        "catalogueId": "wikipedia-hd-32518",
+        "url": "https://en.wikipedia.org/wiki/HD_32518",
+        "label": "Wikipedia, \"HD 32518\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374547581",
+        "quote": "HD 32518, also named Mago, is a star with an orbiting exoplanet in the northern circumpolar constellation Camelopardalis."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Gaia's parallax, brightness and spectrum give it 10.9 solar radii and 1.36 solar masses (FLAME) and 4,574 K at its surface (GSP-Phot).",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202243688",
+        "url": "https://doi.org/10.1051/0004-6361/202243688",
+        "label": "Creevey et al. (2023), Astronomy & Astrophysics 674 A26",
+        "checked": "2026-10-03",
+        "locator": "gaiadr3.astrophysical_parameters, Gaia DR3 497653157602636928: radius_flame, mass_flame, teff_gspphot"
+      },
+      {
+        "catalogueId": "wikipedia-hd-32518",
+        "url": "https://en.wikipedia.org/wiki/HD_32518",
+        "label": "Wikipedia, \"HD 32518\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374547581",
+        "quote": "It has an apparent magnitude of 6.42, placing it near the limit of naked eye visibility."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its temperature",
+      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

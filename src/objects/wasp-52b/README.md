@@ -2,7 +2,7 @@
 
 ## Sources
 
-It is the only planet known around WASP-52. Its orbit and size follow Hebrard et al. 2013's fit, the archive's default. The introduction is generated from Hebrard et al. 2013's published values; the sections below are the data's own.
+It is the only planet known around Anadolu. Its orbit and size follow Hebrard et al. 2013's fit, the archive's default. The introduction is generated from Hebrard et al. 2013's published values; the sections below are the data's own.
 
 **Size and mass.** Radius 1.27 Jupiter radii from Hebrard et al. 2013 (2013A&A...549A.134H), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2013A%26A...549A.134H/abstract): 90,794.8 km at 71,492 km per Jupiter radius. GM from the mass 0.46 Jupiter masses (Hebrard et al. 2013, the mass the NASA Exoplanet Archive's composite table adopts (2013A&A...549A.134H), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2013A%26A...549A.134H/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.
 
@@ -10,10 +10,11 @@ It is the only planet known around WASP-52. Its orbit and size follow Hebrard et
 
 **Color.** No image or measured color exists. The neutral gray is lit by wasp-52's measured color (#ffe6d0, the color dataset of wasp-52 (src/objects/wasp-52/source/photometry/stellar-color.json)) at the gray's own brightness.
 
-**Charts.** The orbits of WASP-52's planets from above, from their hosted-orbit records, and its transit in 1 TESS sector (83), folded onto its orbit. Upper limits and rows without an error are left out.
+**Charts.** The orbits of Anadolu's planets from above, from their hosted-orbit records, and its transit in 1 TESS sector (83), folded onto its orbit. Upper limits and rows without an error are left out.
 
 ## Evidence
 
-Generated 2026-09-29 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/wasp-52b.json).
+Generated 2026-10-03 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/wasp-52b.json).
+
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

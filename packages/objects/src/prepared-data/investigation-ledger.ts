@@ -1,5 +1,5 @@
 import { isRecord } from '@cssearth/core';
-import { INVESTIGATION_LEDGER_SCHEMA } from './source-schema-identifiers.ts';
+import { INVESTIGATION_LEDGER_SCHEMA } from './source-schema-identifiers.js';
 
 export const INVESTIGATION_STATUSES = ['included', 'excluded', 'unresolved', 'deferred'] as const;
 export type InvestigationStatus = typeof INVESTIGATION_STATUSES[number];

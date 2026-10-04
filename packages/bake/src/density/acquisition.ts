@@ -1,3 +1,4 @@
+import { requireFiniteTriple as triple } from '@cssearth/core';
 /** Offline RGBA volume acquisition, checked against its recorded length, and deterministic encoded-field reduction. */
 import { mkdir, readFile, writeFile, rename, rm } from 'node:fs/promises';
 import { createWriteStream } from 'node:fs';
@@ -99,9 +100,4 @@ export async function acquireVolumeSource(sourceDirectory: string, recipe: Volum
   const bytes = encodeDensityKtx2(reduced, acquisition.compression.level);
   await writeFile(containedPath(sourceDirectory, recipe.grid.path), bytes);
   console.log(`Volume import: ${bytes.length} bytes.`);
-}
-
-function triple(value: unknown, at: string): [number, number, number] {
-  if (!Array.isArray(value) || value.length !== 3) throw new TypeError(`${at} must contain three numbers.`);
-  return [finite(value[0], at), finite(value[1], at), finite(value[2], at)];
 }

@@ -1,8 +1,12 @@
 {
   "id": "gj-3470",
-  "name": "GJ 3470",
-  "system": "GJ 3470 system",
+  "name": "Kaewkosin",
+  "system": "Kaewkosin system",
   "description": "Star of 3,600 K, 29.4 parsecs away, with 1 transiting planet.",
+  "aliases": [
+    "GJ 3470"
+  ],
+  "order": 3086,
   "target": "GJ 3470",
   "gaia": "654687847820642560",
   "paper": {
@@ -30,7 +34,7 @@
   "planets": [],
   "companions": [],
   "text": {
-    "card": "GJ 3470 b crosses GJ 3470 as seen from Earth, which is how it was found.",
+    "card": "GJ 3470 b crosses Kaewkosin as seen from Earth, which is how it was found.",
     "introduction": "Its radius and temperature follow Awiphan et al. 2016.",
     "locator": "NASA Exoplanet Archive ps table (st_refname AWIPHAN_ET_AL__2016): st_teff 3600, st_rad 0.547, st_mass 0.539",
     "quotes": {
@@ -41,6 +45,5 @@
       "introduction": "With a faint apparent magnitude of 12.3, it is not visible to the naked eye."
     }
   },
-  "notes": [],
-  "order": 3086
+  "notes": []
 }

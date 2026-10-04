@@ -1,0 +1,147 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "belel",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Belel",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 3868984.6
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/belel-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Belel",
+      "classification": "star",
+      "color": "#ffe3c7",
+      "distanceAu": 24859676.7,
+      "description": "A star about 120 parsecs away, 5.6 times the Sun's width, measured by Gaia.",
+      "systemName": "Belel system",
+      "aliases": [
+        "Gaia DR3 6770761168986617600",
+        "HD 181342",
+        "HIP 95124"
+      ],
+      "order": 5503,
+      "context": {
+        "order": 5500
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1180320579596025300,
+        -3196435059081347600,
+        -1490057130789830400
+      ],
+      "presentationToReference": [
+        0.3173798780953123,
+        -0.1387908483888887,
+        -0.9380869434032739,
+        -0.8594988403340459,
+        0.37585749540093366,
+        -0.34639989407528304,
+        -0.40066414419640173,
+        -0.9162249961414661,
+        9.67167670492152e-7
+      ],
+      "orbitUpReference": [
+        0.1387908483888887,
+        -0.37585749540093366,
+        0.9162249961414661
+      ],
+      "metersPerUnit": 12480595.483870968,
+      "bodyRadiusM": 3868984600
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

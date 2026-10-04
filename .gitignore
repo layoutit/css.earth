@@ -45,6 +45,8 @@ src/objects/europa/source/photometry/*.lbl
 src/objects/*/source/**/*.ttf
 src/objects/*/source/**/*.webp
 src/objects/*/source/**/*.zip
+# Released model output (NetCDF), megabytes to gigabytes a file; restored from its Zenodo record (source/manifest.json).
+src/objects/*/source/**/*.nc
 # Binary SPICE kernels are restored through each body's acquisition plan; text kernels stay beside the body.
 src/objects/*/source/**/*.bsp
 src/objects/*/source/**/*.bc

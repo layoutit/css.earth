@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "amadioha",
+  "card": {
+    "text": "A star about 62 parsecs away, 1.1 times the Sun's width, measured by Gaia.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202243688",
+        "url": "https://doi.org/10.1051/0004-6361/202243688",
+        "label": "Creevey et al. (2023), Astronomy & Astrophysics 674 A26",
+        "checked": "2026-10-03",
+        "locator": "gaiadr3.astrophysical_parameters, Gaia DR3 2896745747966986240: radius_flame, mass_flame, teff_gspphot"
+      },
+      {
+        "catalogueId": "wikipedia-hd-43197",
+        "url": "https://en.wikipedia.org/wiki/HD_43197",
+        "label": "Wikipedia, \"HD 43197\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1370778768",
+        "quote": "HD 43197 is a star with an exoplanetary companion in the southern constellation of Canis Major."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Gaia's parallax, brightness and spectrum give it 1.1 solar radii and 0.88 solar masses (FLAME) and 5,391 K at its surface (GSP-Phot).",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202243688",
+        "url": "https://doi.org/10.1051/0004-6361/202243688",
+        "label": "Creevey et al. (2023), Astronomy & Astrophysics 674 A26",
+        "checked": "2026-10-03",
+        "locator": "gaiadr3.astrophysical_parameters, Gaia DR3 2896745747966986240: radius_flame, mass_flame, teff_gspphot"
+      },
+      {
+        "catalogueId": "wikipedia-hd-43197",
+        "url": "https://en.wikipedia.org/wiki/HD_43197",
+        "label": "Wikipedia, \"HD 43197\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1370778768",
+        "quote": "It has been given the proper name Amadioha, as selected by Nigeria during the NameExoWorlds campaign that celebrated the 100th anniversary of the IAU."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its temperature",
+      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

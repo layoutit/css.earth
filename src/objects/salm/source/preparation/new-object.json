@@ -1,0 +1,55 @@
+{
+  "id": "salm",
+  "name": "Salm",
+  "system": "Salm system",
+  "description": "A star 3.0 solar radii and 2.05 solar masses, about 48 parsecs away, measured by Gaia.",
+  "aliases": [
+    "Gaia DR3 2840673506807375360",
+    "HR 8880",
+    "Tau Pegasi",
+    "HD 220061",
+    "HIP 115250"
+  ],
+  "featured": true,
+  "target": "HR 8880",
+  "gaia": "2840673506807375360",
+  "paper": {
+    "url": "https://doi.org/10.1051/0004-6361/202243688",
+    "credit": "Creevey et al. (2023), A&A 674, A26 (Gaia DR3 FLAME)"
+  },
+  "radius": "gaia-flame",
+  "mass": "gaia-flame",
+  "temperature": {
+    "value": 7603,
+    "source": "Andrae et al. (2023), A&A 674, A27 (Gaia DR3 GSP-Phot), astrophysical_parameters of Gaia DR3 2840673506807375360: teff_gspphot 7602.5913 K (16th-84th percentiles 7596.5586-7608.508), the temperature FLAME used",
+    "url": "https://doi.org/10.1051/0004-6361/202243462",
+    "uncertainty": 6
+  },
+  "color": {
+    "skip": [
+      "stis-ngsl",
+      "gaia-xp",
+      "pulkovo",
+      "kiehling",
+      "kharitonov",
+      "burnashev"
+    ],
+    "reason": "GSP-Phot fits an extinction A_G = 0.00 mag toward this star (Andrae et al. (2023), A&A 674, A27 (Gaia DR3 GSP-Phot), ag_gspphot), and the color routes do not remove extinction; GSP-Phot measured its temperature"
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A star about 48 parsecs away, 3.0 times the Sun's width, measured by Gaia.",
+    "introduction": "Gaia's parallax, brightness and spectrum give it 3.0 solar radii and 2.05 solar masses (FLAME) and 7,603 K at its surface (GSP-Phot).",
+    "locator": "gaiadr3.astrophysical_parameters, Gaia DR3 2840673506807375360: radius_flame, mass_flame, teff_gspphot",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/Tau_Pegasi",
+      "title": "Tau Pegasi",
+      "revision": "1370789997",
+      "card": "Tau Pegasi, formally named Salm, is a magnitude 4.6 star 162 light-years away in the constellation of Pegasus.",
+      "introduction": "With about twice the mass of the Sun and thirty times as luminous, it is a δ Scuti variable star with its brightness changing by a few hundredths of a magnitude over about an hour."
+    }
+  },
+  "notes": [],
+  "order": 5684
+}

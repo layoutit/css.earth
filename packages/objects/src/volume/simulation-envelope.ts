@@ -69,14 +69,20 @@ export interface SimulationEnvelopeRecord {
   width: number; height: number; bounds: SkyBounds; zRange: [number, number]; gain: number[];
   priorCloud?: unknown;
 }
-export function readSimulationEnvelopeRecord(value: unknown): SimulationEnvelopeRecord {
+/** Caller-owned failure reporting preserves replay assertions without coupling this parser to Node. */
+export function readSimulationEnvelopeRecord(value: unknown, fail: (message: string) => never = message => { throw new TypeError(message); }): SimulationEnvelopeRecord {
   const pair = (v: unknown): v is [number, number] => Array.isArray(v) && v.length === 2 && v.every(n => typeof n === 'number' && Number.isFinite(n));
-  if (!value || typeof value !== 'object' || Array.isArray(value)) throw new TypeError('Invalid simulation envelope record.');
-  const v = value as Record<string, unknown>, bounds = v.bounds;
-  if (v.schema !== SIMULATION_ENVELOPE_SCHEMA || typeof v.width !== 'number' || !Number.isInteger(v.width) || typeof v.height !== 'number' || !Number.isInteger(v.height) ||
-      !Array.isArray(v.gain) || v.gain.length !== v.width * v.height || !v.gain.every(n => typeof n === 'number' && Number.isFinite(n) && n >= 0) ||
-      !bounds || typeof bounds !== 'object' || Array.isArray(bounds) || !('min' in bounds) || !('max' in bounds) || !pair(bounds.min) || !pair(bounds.max) ||
-      bounds.min[0] >= bounds.max[0] || bounds.min[1] >= bounds.max[1] || !pair(v.zRange)) throw new TypeError('Invalid simulation envelope record.');
+  if (!value || typeof value !== 'object' || Array.isArray(value)) return fail('Expected a simulation envelope record.');
+  const v = value as Record<string, unknown>;
+  if (v.schema !== SIMULATION_ENVELOPE_SCHEMA) return fail('Unsupported simulation envelope schema.');
+  if (typeof v.width !== 'number' || !Number.isInteger(v.width) || typeof v.height !== 'number' || !Number.isInteger(v.height)) return fail('Envelope grid must be integral.');
+  if (!Array.isArray(v.gain) || v.gain.length !== v.width * v.height || !v.gain.every(n => typeof n === 'number' && Number.isFinite(n) && n >= 0)) return fail('Invalid simulation envelope record');
+  const bounds = v.bounds;
+  if (!bounds || typeof bounds !== 'object' || Array.isArray(bounds)) return fail('envelope bounds must be an object.');
+  if (!('min' in bounds) || !pair(bounds.min)) return fail('Invalid envelope bounds minimum');
+  if (!('max' in bounds) || !pair(bounds.max)) return fail('Invalid envelope bounds maximum');
+  if (bounds.min[0] >= bounds.max[0] || bounds.min[1] >= bounds.max[1]) return fail('Invalid envelope bounds');
+  if (!pair(v.zRange)) return fail('Invalid envelope depth range');
   return { schema: SIMULATION_ENVELOPE_SCHEMA, settings: validateEnvelopeSettings(v.settings), width: v.width, height: v.height,
     bounds: { min: bounds.min, max: bounds.max }, zRange: v.zRange, gain: v.gain,
     ...(v.priorCloud === undefined ? {} : { priorCloud: v.priorCloud }) };

@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "gakyid",
+  "angularDiameterMas": 0.31,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 1,935,131 km at 83.63 pc = 0.31 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 83.62870874291679,
+  "distanceSource": "Gaia DR3 parallax 11.9576 +/- 0.0254 mas (same row, RUWE 0.95): 83.63 pc, no zero-point correction",
+  "radiusKm": 1935130.6,
+  "radiusSource": "Radius 2.782 (2.723 to 2.842) from Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26; astrophysical_parameters of the same source): 1,935,131 km at 695,700 km per solar radius. Mass 1.070 (1.025 to 1.110) from Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26; astrophysical_parameters of the same source); GM is that mass times the JPL solar GM. Temperature 4888 +/- 19.1 K from Andrae et al. (2023), A&A 674, A27 (Gaia DR3 GSP-Phot), astrophysical_parameters of Gaia DR3 603083781399095936: teff_gspphot 4887.84 K (16th-84th percentiles 4865.079-4903.285), the temperature FLAME used (https://doi.org/10.1051/0004-6361/202243462). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 4888,
+  "effectiveTemperatureSource": "Andrae et al. (2023), A&A 674, A27 (Gaia DR3 GSP-Phot), astrophysical_parameters of Gaia DR3 603083781399095936: teff_gspphot 4887.84 K (16th-84th percentiles 4865.079-4903.285), the temperature FLAME used (https://doi.org/10.1051/0004-6361/202243462)",
+  "surfaceGravityLogg": 3.58,
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/gakyid.json (sources in its physicalNotes), log10(GM/R^2) in cgs: 3.579, rounded to two decimals",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

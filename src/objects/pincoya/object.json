@@ -1,0 +1,147 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "pincoya",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Pincoya",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 545447.3
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/pincoya-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Pincoya",
+      "classification": "star",
+      "color": "#ffe0c2",
+      "distanceAu": 8254995,
+      "description": "A star about 40 parsecs away, 78% of the Sun's width, measured by Gaia.",
+      "systemName": "Pincoya system",
+      "aliases": [
+        "Gaia DR3 4062446910648807168",
+        "HD 164604",
+        "HIP 88414"
+      ],
+      "order": 5664,
+      "context": {
+        "order": 5661
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        14738906139983606,
+        -1084549573736883800,
+        -590411966790519700
+      ],
+      "presentationToReference": [
+        0.011935030771805109,
+        -0.0064975878135831245,
+        -0.9999076639335658,
+        -0.8782288462146528,
+        0.4780475186320869,
+        -0.013589098799565814,
+        -0.4780916739674054,
+        -0.8783099403298982,
+        8.572034424622635e-7
+      ],
+      "orbitUpReference": [
+        0.0064975878135831245,
+        -0.4780475186320869,
+        0.8783099403298982
+      ],
+      "metersPerUnit": 1759507.4193548388,
+      "bodyRadiusM": 545447300
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

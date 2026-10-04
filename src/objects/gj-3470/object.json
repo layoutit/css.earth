@@ -6,7 +6,7 @@
   "properties": {
     "preparation": {
       "schema": "cssearth-object-preparation@1",
-      "label": "GJ 3470",
+      "label": "Kaewkosin",
       "steps": [
         "verify-sources",
         "assets",
@@ -95,12 +95,15 @@
       }
     },
     "catalog": {
-      "name": "GJ 3470",
+      "name": "Kaewkosin",
       "classification": "star",
       "color": "#ffc68b",
       "distanceAu": 6063598.5,
       "description": "GJ 3470 b crosses GJ 3470 as seen from Earth, which is how it was found.",
-      "systemName": "GJ 3470 system",
+      "systemName": "Kaewkosin system",
+      "aliases": [
+        "GJ 3470"
+      ],
       "order": 3086,
       "context": {
         "order": 3083

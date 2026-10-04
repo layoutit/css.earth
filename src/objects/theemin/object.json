@@ -1,0 +1,148 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "theemin",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Theemin",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 10571161.5
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/theemin-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Theemin",
+      "classification": "star",
+      "color": "#ffe9ca",
+      "distanceAu": 13525599.4,
+      "description": "A star 66 parsecs away, 15 times the Sun's width, measured from its light.",
+      "systemName": "Theemin system",
+      "aliases": [
+        "HD 29291",
+        "HIP 21393",
+        "HR 1464",
+        "Upsilon2 Eridani"
+      ],
+      "order": 5721,
+      "context": {
+        "order": 5718
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        627585018259744600,
+        1625346159479563000,
+        -1028852753665632500
+      ],
+      "presentationToReference": [
+        0.3101635805015243,
+        -0.18315417959624283,
+        0.932873571191135,
+        0.8032747272683355,
+        -0.474344613504331,
+        -0.3602039702327116,
+        -0.5084764162303457,
+        -0.8610759165926394,
+        0.000001300052887340402
+      ],
+      "orbitUpReference": [
+        0.18315417959624283,
+        0.474344613504331,
+        0.8610759165926394
+      ],
+      "metersPerUnit": 34100520.96774194,
+      "bodyRadiusM": 10571161500
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

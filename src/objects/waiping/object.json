@@ -1,0 +1,148 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "waiping",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Waiping",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 24230535.3
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/waiping-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Waiping",
+      "classification": "star",
+      "color": "#ffd092",
+      "distanceAu": 19681860.9,
+      "description": "A star 95 parsecs away, 35 times the Sun's width, measured from its light.",
+      "systemName": "Waiping system",
+      "aliases": [
+        "Delta Piscium",
+        "HD 4656",
+        "HIP 3786",
+        "HR 224"
+      ],
+      "order": 5745,
+      "context": {
+        "order": 5742
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        2852999099409047600,
+        615340027703064400,
+        388632158317234940
+      ],
+      "presentationToReference": [
+        0.9689690715198134,
+        0.12902758132730277,
+        0.210833635112752,
+        0.20898900929909203,
+        0.027828325270388823,
+        -0.9775219579655637,
+        0.13199444090648219,
+        -0.9912504565292627,
+        5.598946510135275e-7
+      ],
+      "orbitUpReference": [
+        -0.12902758132730277,
+        -0.027828325270388823,
+        0.9912504565292627
+      ],
+      "metersPerUnit": 78163017.09677419,
+      "bodyRadiusM": 24230535300
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

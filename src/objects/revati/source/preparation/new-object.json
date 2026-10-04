@@ -1,0 +1,54 @@
+{
+  "id": "revati",
+  "name": "Revati",
+  "system": "Revati system",
+  "description": "A star 2.0 solar radii and 1.69 solar masses, about 41 parsecs away, measured by Gaia.",
+  "aliases": [
+    "Gaia DR3 2577061092921353984",
+    "HR 361",
+    "Zeta Piscium A",
+    "HIP 5737",
+    "HD 7344"
+  ],
+  "featured": true,
+  "target": "HR 361",
+  "gaia": "2577061092921353984",
+  "paper": {
+    "url": "https://doi.org/10.1051/0004-6361/202243688",
+    "credit": "Creevey et al. (2023), A&A 674, A26 (Gaia DR3 FLAME)"
+  },
+  "radius": "gaia-flame",
+  "mass": "gaia-flame",
+  "temperature": {
+    "value": 7349,
+    "source": "Andrae et al. (2023), A&A 674, A27 (Gaia DR3 GSP-Phot), astrophysical_parameters of Gaia DR3 2577061092921353984: teff_gspphot 7349.0825 K (16th-84th percentiles 7347.287-7350.8857), the temperature FLAME used",
+    "url": "https://doi.org/10.1051/0004-6361/202243462",
+    "uncertainty": 1.8
+  },
+  "color": {
+    "skip": [
+      "stis-ngsl",
+      "gaia-xp",
+      "pulkovo",
+      "kiehling",
+      "kharitonov",
+      "burnashev"
+    ],
+    "reason": "GSP-Phot fits an extinction A_G = 0.00 mag toward this star (Andrae et al. (2023), A&A 674, A27 (Gaia DR3 GSP-Phot), ag_gspphot), and the color routes do not remove extinction; GSP-Phot measured its temperature"
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A star about 41 parsecs away, 2.0 times the Sun's width, measured by Gaia.",
+    "introduction": "Gaia's parallax, brightness and spectrum give it 2.0 solar radii and 1.69 solar masses (FLAME) and 7,349 K at its surface (GSP-Phot).",
+    "locator": "gaiadr3.astrophysical_parameters, Gaia DR3 2577061092921353984: radius_flame, mass_flame, teff_gspphot"
+  },
+  "notes": [],
+  "radialVelocity": {
+    "value": 15,
+    "uncertainty": 4.9,
+    "source": "SIMBAD's radial velocity for Gaia DR3 2577061092921353984 (quality C), from 2006AstL...32..759G; Gaia DR3 measures none",
+    "url": "https://ui.adsabs.harvard.edu/abs/2006AstL...32..759G/abstract"
+  },
+  "order": 5677
+}

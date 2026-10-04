@@ -1,0 +1,147 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "shama",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Shama",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 685283.6
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/shama-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Shama",
+      "classification": "star",
+      "color": "#ffe9d7",
+      "distanceAu": 11347018.6,
+      "description": "A star about 55 parsecs away, the Sun's width, measured by Gaia.",
+      "systemName": "Shama system",
+      "aliases": [
+        "Gaia DR3 3796826582305099520",
+        "HD 99109",
+        "HIP 55664"
+      ],
+      "order": 5692,
+      "context": {
+        "order": 5689
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -1676320645699079000,
+        263374056741591460,
+        -45331178087534440
+      ],
+      "presentationToReference": [
+        -0.9875293432826815,
+        0.02637309479074132,
+        0.15521036056537724,
+        0.15515504742817063,
+        -0.004143342184449885,
+        0.9878814422657735,
+        -0.026696580553283698,
+        -0.999643582776732,
+        2.4678667988334115e-7
+      ],
+      "orbitUpReference": [
+        -0.02637309479074132,
+        0.004143342184449885,
+        0.999643582776732
+      ],
+      "metersPerUnit": 2210592.2580645164,
+      "bodyRadiusM": 685283600
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

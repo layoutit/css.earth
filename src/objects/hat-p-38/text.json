@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hat-p-38",
+  "card": {
+    "text": "HAT-P-38 b crosses Horna as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-pasj-64-5-97",
+        "url": "https://ui.adsabs.harvard.edu/abs/2012PASJ...64...97S/abstract",
+        "label": "Sato et al. (2012), Publications of the Astronomical Society of Japan 64 97",
+        "checked": "2026-10-03",
+        "locator": "NASA Exoplanet Archive ps table (st_refname SATO_ET_AL__2012): st_teff 5330, st_rad 0.923, st_mass 0.886"
+      },
+      {
+        "catalogueId": "wikipedia-hat-p-38",
+        "url": "https://en.wikipedia.org/wiki/HAT-P-38",
+        "label": "Wikipedia, \"HAT-P-38\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1341758891",
+        "quote": "HAT-P-38, formally named Horna, is a star located in the northern constellation Triangulum."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Sato et al. 2012.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-pasj-64-5-97",
+        "url": "https://ui.adsabs.harvard.edu/abs/2012PASJ...64...97S/abstract",
+        "label": "Sato et al. (2012), Publications of the Astronomical Society of Japan 64 97",
+        "checked": "2026-10-03",
+        "locator": "NASA Exoplanet Archive ps table (st_refname SATO_ET_AL__2012): st_teff 5330, st_rad 0.923, st_mass 0.886"
+      },
+      {
+        "catalogueId": "wikipedia-hat-p-38",
+        "url": "https://en.wikipedia.org/wiki/HAT-P-38",
+        "label": "Wikipedia, \"HAT-P-38\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1341758891",
+        "quote": "It has an apparent magnitude of 12.51, making it readily visible in amateur telescopes but not to the naked eye."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its Gaia spectrum",
+      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

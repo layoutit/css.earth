@@ -1,0 +1,145 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "wasp-21",
+  "parent": "wasp-21-system",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Tangra",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 790315.2
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/wasp-21-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Tangra",
+      "classification": "star",
+      "color": "#fff3f2",
+      "distanceAu": 52767373.3,
+      "description": "WASP-21 b crosses Tangra as seen from Earth, which is how it was found.",
+      "systemName": "Tangra system",
+      "aliases": [
+        "WASP-21"
+      ],
+      "order": 5710,
+      "context": {
+        "order": 5707
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        7312727715020814000,
+        -1622148826793834800,
+        2491203233363667500
+      ],
+      "presentationToReference": [
+        0.9263788994867057,
+        0.308096263031476,
+        -0.2165613707285756,
+        -0.20549437959852024,
+        -0.06834388959768872,
+        -0.9762690063236045,
+        0.3155854789739529,
+        -0.9488971522039142,
+        2.868038721074339e-7
+      ],
+      "orbitUpReference": [
+        -0.308096263031476,
+        0.06834388959768872,
+        0.9488971522039142
+      ],
+      "metersPerUnit": 2549403.870967742,
+      "bodyRadiusM": 790315200
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

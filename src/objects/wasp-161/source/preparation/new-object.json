@@ -1,0 +1,50 @@
+{
+  "id": "wasp-161",
+  "name": "Tislit",
+  "system": "Tislit system",
+  "description": "Star of 6,400 K, 343 parsecs away, with 1 transiting planet.",
+  "aliases": [
+    "WASP-161"
+  ],
+  "featured": true,
+  "target": "WASP-161",
+  "gaia": "5751177095877066496",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2019AJ....157...43B/abstract",
+    "credit": "Barkaoui et al. 2019"
+  },
+  "radius": {
+    "value": 1.712,
+    "source": "Barkaoui et al. 2019, the stellar radius of the default parameter set of WASP-161 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2019AJ....157...43B/abstract",
+    "uncertainty": 0.083
+  },
+  "mass": {
+    "value": 1.39,
+    "source": "Barkaoui et al. 2019, the stellar mass of the default parameter set of WASP-161 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2019AJ....157...43B/abstract",
+    "uncertainty": 0.14
+  },
+  "temperature": {
+    "value": 6400,
+    "source": "Barkaoui et al. 2019, the stellar temperature of the default parameter set of WASP-161 b in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2019AJ....157...43B/abstract",
+    "uncertainty": 100
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "WASP-161 b crosses Tislit as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Barkaoui et al. 2019.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname BARKAOUI_ET_AL__2019): st_teff 6400, st_rad 1.712, st_mass 1.39",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/WASP-161",
+      "title": "WASP-161",
+      "revision": "1329892833",
+      "card": "WASP-161, also named Tislit, is an F-type main-sequence star about 1,162 light-years away in the constellation Puppis.",
+      "introduction": "With an apparent magnitude of 11.1, it is much too faint to be visible to the naked eye."
+    }
+  },
+  "notes": [],
+  "order": 5727
+}

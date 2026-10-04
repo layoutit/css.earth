@@ -1,0 +1,48 @@
+{
+  "schema": "cssearth-stellar-photometric-color@1",
+  "objectId": "seginus",
+  "spectrum": "measured",
+  "measuredSpectrum": {
+    "source": "Kharitonov, Tereshchenko & Knyazeva (1988), Spectrophotometric Catalogue of Stars (Alma-Ata), record 692: HR 5435; VizieR III/202",
+    "path": "photometry/kharitonov-catalog.dat",
+    "format": "kharitonov-records",
+    "wavelength": {
+      "column": "lambda",
+      "unit": "nm"
+    },
+    "flux": {
+      "column": "692",
+      "kind": "flux",
+      "missing": 0
+    },
+    "service": "https://cdsarc.cds.unistra.fr/ftp/III/202/catalog.dat",
+    "checked": "2026-10-03",
+    "gaps": [
+      {
+        "fromNm": 757.5,
+        "toNm": 780,
+        "reason": "the spectrum ends at 757.5 nm; the last value is held to 780 nm, where the observer adds little"
+      }
+    ],
+    "note": "Ground-based photoelectric scans from Alma-Ata, 322.5 to 757.5 nm in 5 nm steps, in absolute flux. The catalogue gives no observation dates."
+  },
+  "whitePoint": "sRGB D65",
+  "normalization": "brightest linear sRGB channel = 1",
+  "crossCheck": {
+    "source": "Gaia DR3 XP spectrum, source 1487434040320076800",
+    "spectrum": {
+      "path": "photometry/crosscheck-gaia-dr3-xp-sampled.csv",
+      "format": "gaia-xp-sampled",
+      "wavelength": {
+        "column": "lambda",
+        "unit": "nm"
+      },
+      "flux": {
+        "column": "1487434040320076800",
+        "kind": "flux"
+      },
+      "gaps": []
+    },
+    "disagreement": "The Gaia DR3 XP color differs from the Kharitonov color by 24 levels. The star is G 3.02, brighter than the G 4 under which Gaia's spectra can be saturated (De Angeli et al. 2023, A&A 674, A2; color.mts XP_SATURATION_G), so the Kharitonov color is used."
+  }
+}

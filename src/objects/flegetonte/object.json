@@ -1,0 +1,147 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "flegetonte",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Flegetonte",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 588694.5
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/flegetonte-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Flegetonte",
+      "classification": "star",
+      "color": "#ffe9d7",
+      "distanceAu": 6055327.4,
+      "description": "A star about 29 parsecs away, 85% of the Sun's width, measured by Gaia.",
+      "systemName": "Flegetonte system",
+      "aliases": [
+        "Gaia DR3 3799626935341796096",
+        "HD 102195",
+        "HIP 57370"
+      ],
+      "order": 5543,
+      "context": {
+        "order": 5540
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -903005784468654300,
+        56419601164951820,
+        44577180835115920
+      ],
+      "presentationToReference": [
+        -0.9968443800740469,
+        -0.04911966985807788,
+        0.06235815863078844,
+        0.06228261581175451,
+        0.0030685038209314255,
+        0.9980538362493009,
+        0.0492154211851786,
+        -0.9987881869131885,
+        -4.807374396515024e-7
+      ],
+      "orbitUpReference": [
+        0.04911966985807788,
+        -0.0030685038209314255,
+        0.9987881869131885
+      ],
+      "metersPerUnit": 1899014.5161290322,
+      "bodyRadiusM": 588694500
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

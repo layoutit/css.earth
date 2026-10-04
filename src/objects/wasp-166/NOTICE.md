@@ -1,4 +1,4 @@
-# WASP-166 credits
+# Filetdor credits
 
 Radius, mass and temperature: Radius 1.22 +/- 0.06 solar radii from Hellier et al. 2019, the stellar radius of the default parameter set of WASP-166 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2019MNRAS.488.3067H/abstract); Mass 1.19 +/- 0.06 solar masses from Hellier et al. 2019, the stellar mass of the default parameter set of WASP-166 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2019MNRAS.488.3067H/abstract); temperature from Hellier et al. 2019, the stellar temperature of the default parameter set of WASP-166 b in the NASA Exoplanet Archive.
 

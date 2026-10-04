@@ -1,0 +1,148 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "safina",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Safina",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 19408638.6
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/safina-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Safina",
+      "classification": "star",
+      "color": "#ffd9a9",
+      "distanceAu": 17117551.7,
+      "description": "A star 83 parsecs away, 28 times the Sun's width, measured from its light.",
+      "systemName": "Safina system",
+      "aliases": [
+        "c2 Aquarii",
+        "HD 218594",
+        "HIP 114341",
+        "HR 8812"
+      ],
+      "order": 5682,
+      "context": {
+        "order": 5679
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        2330043084013214000,
+        -522445934141453400,
+        -924871000727770000
+      ],
+      "presentationToReference": [
+        0.9099062093113063,
+        -0.35242279109961555,
+        -0.21878954858558908,
+        -0.20402060492460078,
+        0.07902189150788051,
+        -0.9757720704287025,
+        -0.36117348050892256,
+        -0.9324986418092379,
+        -9.987251850929803e-7
+      ],
+      "orbitUpReference": [
+        0.35242279109961555,
+        -0.07902189150788051,
+        0.9324986418092379
+      ],
+      "metersPerUnit": 62608511.61290322,
+      "bodyRadiusM": 19408638600
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

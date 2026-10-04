@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "safina",
+  "card": {
+    "text": "A star 83 parsecs away, 28 times the Sun's width, measured from its light.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 114341: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-88-aquarii",
+        "url": "https://en.wikipedia.org/wiki/88_Aquarii",
+        "label": "Wikipedia, \"88 Aquarii\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374547236",
+        "quote": "88 Aquarii is the Flamsteed designation, though it also bears the Bayer designation c2 Aquarii."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its brightness, measured band by band, gives 291 times the Sun's luminosity at 4,516 K, so 27.898 solar radii.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 114341: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-88-aquarii",
+        "url": "https://en.wikipedia.org/wiki/88_Aquarii",
+        "label": "Wikipedia, \"88 Aquarii\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374547236",
+        "quote": "In dark conditions it is visible to the naked eye with an apparent visual magnitude of +3.68."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its spectrum",
+      "summary": "The color of the star's light."
+    }
+  }
+}

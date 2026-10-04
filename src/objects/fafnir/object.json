@@ -1,0 +1,148 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "fafnir",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Fafnir",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 13615544.7
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/fafnir-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Fafnir",
+      "classification": "star",
+      "color": "#ffdab3",
+      "distanceAu": 19909781.9,
+      "description": "A star 97 parsecs away, 20 times the Sun's width, measured from its light.",
+      "systemName": "Fafnir system",
+      "aliases": [
+        "HD 170693",
+        "HIP 90344",
+        "HR 6945",
+        "42 Draconis"
+      ],
+      "order": 5541,
+      "context": {
+        "order": 5538
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        139447383646853710,
+        -1224237113471505000,
+        2711646678234336000
+      ],
+      "presentationToReference": [
+        0.04681846046506157,
+        0.10302356736713181,
+        -0.9935764572123434,
+        -0.41102884383592725,
+        -0.9045714266360455,
+        -0.11316281919663494,
+        0.9104193106995164,
+        -0.4136866914472586,
+        0.0000049837930190842855
+      ],
+      "orbitUpReference": [
+        -0.10302356736713181,
+        0.9045714266360455,
+        0.4136866914472586
+      ],
+      "metersPerUnit": 43921111.93548387,
+      "bodyRadiusM": 13615544700
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

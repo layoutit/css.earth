@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "ligong",
+  "card": {
+    "text": "A star 112 parsecs away, 28 times the Sun's width, measured from its light.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 112440: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-lambda-pegasi",
+        "url": "https://en.wikipedia.org/wiki/Lambda_Pegasi",
+        "label": "Wikipedia, \"Lambda Pegasi\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374618401",
+        "quote": "Lambda Pegasi, also named Ligong, is a fourth-magnitude star in the constellation Pegasus."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its brightness, measured band by band, gives 380 times the Sun's luminosity at 4,820 K, so 27.978 solar radii.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 112440: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-lambda-pegasi",
+        "url": "https://en.wikipedia.org/wiki/Lambda_Pegasi",
+        "label": "Wikipedia, \"Lambda Pegasi\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374618401",
+        "quote": "It lies near Mu Pegasi, to the southwest of the brighter Beta Pegasi (Scheat)."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its spectrum",
+      "summary": "The color of the star's light."
+    }
+  }
+}

@@ -1,4 +1,4 @@
-# HAT-P-12 credits
+# Komondor credits
 
 Radius, mass and temperature: Radius 0.701 +/- 0.017 solar radii from Hartman et al. 2009, the stellar radius of the default parameter set of HAT-P-12 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2009ApJ...706..785H/abstract); Mass 0.733 +/- 0.018 solar masses from Hartman et al. 2009, the stellar mass of the default parameter set of HAT-P-12 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2009ApJ...706..785H/abstract); temperature from Hartman et al. 2009, the stellar temperature of the default parameter set of HAT-P-12 b in the NASA Exoplanet Archive.
 

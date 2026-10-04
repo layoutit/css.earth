@@ -6,7 +6,7 @@
   "properties": {
     "preparation": {
       "schema": "cssearth-object-preparation@1",
-      "label": "Alpha Centauri B",
+      "label": "Toliman",
       "steps": [
         "verify-sources",
         "assets",
@@ -95,7 +95,7 @@
       }
     },
     "catalog": {
-      "name": "Alpha Centauri B",
+      "name": "Toliman",
       "classification": "star",
       "color": "#ffe8d7",
       "distanceAu": 275937.8,
@@ -105,7 +105,10 @@
       "context": {
         "order": 1097
       },
-      "featured": true
+      "featured": true,
+      "aliases": [
+        "Alpha Centauri B"
+      ]
     },
     "worldFrame": {
       "referenceFrame": "sun-icrf",

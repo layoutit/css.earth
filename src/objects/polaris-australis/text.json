@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "polaris-australis",
+  "card": {
+    "text": "A star about 90 parsecs away, 4.3 times the Sun's width, measured by Gaia.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202243688",
+        "url": "https://doi.org/10.1051/0004-6361/202243688",
+        "label": "Creevey et al. (2023), Astronomy & Astrophysics 674 A26",
+        "checked": "2026-10-03",
+        "locator": "gaiadr3.astrophysical_parameters, Gaia DR3 6341181494973204096: radius_flame, mass_flame, teff_gspphot"
+      },
+      {
+        "catalogueId": "wikipedia-sigma-octantis",
+        "url": "https://en.wikipedia.org/wiki/Sigma_Octantis",
+        "label": "Wikipedia, \"Sigma Octantis\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374602615",
+        "quote": "Sigma Octantis is a solitary star in the Octans constellation that forms the pole star of the Southern Hemisphere."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Gaia's parallax, brightness and spectrum give it 4.3 solar radii and 2.26 solar masses (FLAME) and 7,192 K at its surface (GSP-Phot).",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202243688",
+        "url": "https://doi.org/10.1051/0004-6361/202243688",
+        "label": "Creevey et al. (2023), Astronomy & Astrophysics 674 A26",
+        "checked": "2026-10-03",
+        "locator": "gaiadr3.astrophysical_parameters, Gaia DR3 6341181494973204096: radius_flame, mass_flame, teff_gspphot"
+      },
+      {
+        "catalogueId": "wikipedia-sigma-octantis",
+        "url": "https://en.wikipedia.org/wiki/Sigma_Octantis",
+        "label": "Wikipedia, \"Sigma Octantis\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374602615",
+        "quote": "Its name is also written as σ Octantis, abbreviated as Sigma Oct or σ Oct, and it is officially named Polaris Australis."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its temperature",
+      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

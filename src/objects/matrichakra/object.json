@@ -1,0 +1,148 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "matrichakra",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Matrichakra",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 4986081.9
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/matrichakra-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Matrichakra",
+      "classification": "star",
+      "color": "#ffefe3",
+      "distanceAu": 10754188.8,
+      "description": "A star 52 parsecs away, 7.2 times the Sun's width, measured from its light.",
+      "systemName": "Matrichakra system",
+      "aliases": [
+        "Delta Coronae Borealis",
+        "HD 141714",
+        "HIP 77512",
+        "HR 5889"
+      ],
+      "order": 5610,
+      "context": {
+        "order": 5607
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -778647679923838600,
+        -1217438119440828400,
+        706966556759385000
+      ],
+      "presentationToReference": [
+        -0.4839909172007238,
+        -0.2367690210531598,
+        -0.8424329188349243,
+        -0.756733767075805,
+        -0.37019890397894145,
+        0.5388012409600145,
+        0.4394391855927999,
+        -0.898272342979744,
+        -0.0000017938550623482569
+      ],
+      "orbitUpReference": [
+        0.2367690210531598,
+        0.37019890397894145,
+        0.898272342979744
+      ],
+      "metersPerUnit": 16084135.161290323,
+      "bodyRadiusM": 4986081900
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

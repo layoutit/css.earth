@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "wasp-60",
+  "card": {
+    "text": "WASP-60 b crosses Morava as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-aa5df3",
+        "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+        "label": "Stassun et al. (2017), The Astronomical Journal 153 136",
+        "checked": "2026-10-03",
+        "locator": "NASA Exoplanet Archive ps table (st_refname STASSUN_ET_AL__2017): st_teff 5900, st_rad 1.17, st_mass 1.19"
+      },
+      {
+        "catalogueId": "wikipedia-wasp-60",
+        "url": "https://en.wikipedia.org/wiki/WASP-60",
+        "label": "Wikipedia, \"WASP-60\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1341368087",
+        "quote": "WASP-60, also named Morava, is a F-type main-sequence star about 1,400 light-years away in the constellation Pegasus."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Stassun et al. 2017.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-aa5df3",
+        "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+        "label": "Stassun et al. (2017), The Astronomical Journal 153 136",
+        "checked": "2026-10-03",
+        "locator": "NASA Exoplanet Archive ps table (st_refname STASSUN_ET_AL__2017): st_teff 5900, st_rad 1.17, st_mass 1.19"
+      },
+      {
+        "catalogueId": "wikipedia-wasp-60",
+        "url": "https://en.wikipedia.org/wiki/WASP-60",
+        "label": "Wikipedia, \"WASP-60\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1341368087",
+        "quote": "The star's age is much younger than the Sun's at 1.7±0.5 billion years."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its Gaia spectrum",
+      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

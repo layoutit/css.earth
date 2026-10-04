@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-chart-assets@1",
+  "publicBase": "/scenes/wasp-64b/",
+  "charts": [
+    {
+      "kind": "system-orbits",
+      "id": "wasp-64b-orbits",
+      "title": "WASP-64 b: orbits around Atakoraka",
+      "output": "wasp-64b-system-orbits.svg",
+      "system": "wasp-64",
+      "highlight": "wasp-64b",
+      "description": "The orbits of Atakoraka's planets in this map from above, to scale, with WASP-64 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "metadata": {
+        "orbitSource": "Kokori et al. 2023 (2023ApJS..265....4K), via the NASA Exoplanet Archive ps table (pl_refname KOKORI_ET_AL__2023): P 1.573290273 d"
+      }
+    },
+    {
+      "kind": "folded-transit",
+      "id": "wasp-64b-transit",
+      "title": "WASP-64 b: its transit",
+      "description": "WASP-64 b crossing its star, as TESS recorded it: 3 sectors (33, 34, 87) of the SPOC pipeline's 2-minute light curves of TIC 52640302, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 10-minute bins. Error bars are each bin's standard error.",
+      "output": "wasp-64b-transit.svg",
+      "metadata": {
+        "tic": "TIC 52640302",
+        "sectors": [
+          33,
+          34,
+          87
+        ],
+        "pipeline": "TESS SPOC, PDCSAP flux, quality 0"
+      },
+      "planet": "wasp-64b",
+      "sources": [
+        "photometry/tess/tess2020351194500-s0033-0000000052640302-0203-s_lc.fits",
+        "photometry/tess/tess2021014023720-s0034-0000000052640302-0204-s_lc.fits",
+        "photometry/tess/tess2024353092137-s0087-0000000052640302-0284-s_lc.fits"
+      ],
+      "durationHours": 2.39976,
+      "binMinutes": 10,
+      "notes": [
+        "TESS 2-min SPOC · sectors 33, 34, 87",
+        "Folded on the app's orbit; 10-min bins.",
+        "Bars: standard error of each bin."
+      ]
+    }
+  ]
+}

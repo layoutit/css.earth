@@ -1,0 +1,23 @@
+{
+  "schema": "cssearth-inventory@1",
+  "assets": [
+    {
+      "location": "prepared",
+      "filename": "members.json",
+      "bytes": 708,
+      "sha256": "39bc1ee698d53441ae6e9f975a133153acdad7dbf3ba30f6514b786e598f328a"
+    },
+    {
+      "location": "prepared",
+      "filename": "orbits/hat-p-40b.bin",
+      "bytes": 1945,
+      "sha256": "1b0f8c5aec6e38de0e53c7d23b289135c720552cbb81edcc8a87802afad9ed47"
+    },
+    {
+      "location": "prepared",
+      "filename": "views/hat-p-40.json",
+      "bytes": 30213,
+      "sha256": "477b719b0bae8c59a593432d7bfe6be0d0031c96cc7afa1af0805d4cef48ce5c"
+    }
+  ]
+}

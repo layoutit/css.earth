@@ -1,0 +1,61 @@
+{
+  "id": "darlugal",
+  "name": "Darlugal",
+  "system": "Darlugal system",
+  "description": "A star 22 parsecs away, 2.0 times the Sun's width, measured from its light.",
+  "aliases": [
+    "Zeta Leporis",
+    "HD 38678",
+    "HIP 27288",
+    "HR 1998"
+  ],
+  "featured": true,
+  "target": "HIP 27288",
+  "paper": {
+    "url": "https://doi.org/10.1093/mnras/stx1433",
+    "credit": "McDonald, Zijlstra & Watson (2017), MNRAS 471, 770"
+  },
+  "radius": {
+    "value": 2.017,
+    "source": "McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 27288: radius 2.017 solar radii, implied by the fitted luminosity 13.093 solar luminosities (fractional uncertainty 0.681) and temperature",
+    "url": "https://doi.org/10.1093/mnras/stx1433"
+  },
+  "mass": "unmeasured",
+  "temperature": {
+    "value": 7737,
+    "source": "McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 27288: effective temperature 7737 +/- 2877 K, from the fit of a model atmosphere to the star's spectral energy distribution (goodness of fit Q 0.211)",
+    "url": "https://doi.org/10.1093/mnras/stx1433",
+    "uncertainty": 2877
+  },
+  "distance": {
+    "value": 21.608,
+    "source": "McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 27288: distance 21.608 pc, the paper's parallax inverted (Gaia DR1's where it revised the star's, else the Hipparcos reduction of van Leeuwen 2007; section 2.3; fractional uncertainty 0.003), at which the luminosity and radius hold",
+    "url": "https://doi.org/10.1093/mnras/stx1433",
+    "uncertainty": 0.065
+  },
+  "limb": {
+    "none": "no mass is measured and no spectroscopic surface gravity is published with this radius: McDonald, Zijlstra & Watson (2017), MNRAS 471, 770 assume the gravity of their fit (table column 15)"
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A star 22 parsecs away, 2.0 times the Sun's width, measured from its light.",
+    "introduction": "Its brightness, measured band by band, gives 13 times the Sun's luminosity at 7,737 K, so 2.017 solar radii.",
+    "locator": "Table 2, HIP 27288: D, Teff, L, Rad, Q",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/Zeta_Leporis",
+      "title": "Zeta Leporis",
+      "revision": "1345015552",
+      "card": "Zeta Leporis, Latinized from ζ Leporis formally named Darlugal, is a star approximately 70.5 light-years away in the southern constellation of Lepus.",
+      "introduction": "It has an apparent visual magnitude of 3.5, which is bright enough to be seen with the naked eye."
+    }
+  },
+  "notes": [],
+  "radialVelocity": {
+    "value": 24.7,
+    "uncertainty": 1.1,
+    "source": "SIMBAD's radial velocity for Gaia DR3 2996171698248699904 (quality B), from 2006AstL...32..759G; Gaia DR3 measures none",
+    "url": "https://ui.adsabs.harvard.edu/abs/2006AstL...32..759G/abstract"
+  },
+  "order": 5525
+}

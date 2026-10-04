@@ -2,7 +2,7 @@
   "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "gj-486",
-  "displayName": "GJ 486",
+  "displayName": "Gar",
   "panel": {
     "facts": [
       {
@@ -13,7 +13,7 @@
           "catalogueId": "doi-10-3847-2041-8213-ad8161",
           "url": "https://ui.adsabs.harvard.edu/abs/2024ApJ...975L..22W",
           "label": "Mansfield et al. (2024), The Astrophysical Journal Letters 975 L22",
-          "checked": "2026-09-29",
+          "checked": "2026-10-03",
           "path": "source/measurements.json",
           "locator": "radiusKm; radiusSource"
         }
@@ -26,7 +26,7 @@
           "catalogueId": "gaia-dr3-gj-486",
           "url": "https://gea.esac.esa.int/archive/",
           "label": "Gaia DR3 parallax",
-          "checked": "2026-09-29",
+          "checked": "2026-10-03",
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }

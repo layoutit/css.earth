@@ -1,0 +1,148 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "merope",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Merope",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 5389587.9
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/merope-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Merope",
+      "classification": "star",
+      "color": "#b1c6ff",
+      "distanceAu": 24040177.1,
+      "description": "A star 117 parsecs away, 7.7 times the Sun's width, measured from its light.",
+      "systemName": "Merope system",
+      "aliases": [
+        "HD 23480",
+        "HIP 17608",
+        "HR 1156",
+        "23 Tauri"
+      ],
+      "order": 5617,
+      "context": {
+        "order": 5614
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1810175882207770000,
+        2743370249858526700,
+        1459788761251874000
+      ],
+      "presentationToReference": [
+        0.503335099031631,
+        0.22355384294601485,
+        0.8346720657760669,
+        0.7628178841446711,
+        0.3388013179077225,
+        -0.5507472583799558,
+        0.40590966200851364,
+        -0.9139132050080352,
+        2.7456735856377904e-7
+      ],
+      "orbitUpReference": [
+        -0.22355384294601485,
+        -0.3388013179077225,
+        0.9139132050080352
+      ],
+      "metersPerUnit": 17385767.419354837,
+      "bodyRadiusM": 5389587900
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

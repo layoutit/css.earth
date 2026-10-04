@@ -11,7 +11,8 @@ import { resizeRgbaLanczos3 } from './resize-rgba.ts';
 import { imageLayerDisc, imageLayerView, norm, rad } from './disc.ts';
 import { removeCompanionGalaxies, removeForegroundStars, type CompanionEllipse, type ForegroundRemoval } from './foreground.ts';
 import { imageLayerBulgeModel } from './bulge.ts';
-import { imageLayerShapeModel, lowerEnvelope } from './shape.ts';
+import { imageLayerShapeModel, lowerEnvelope, smoothed } from './shape.ts';
+import { imageLayerBodyModel } from './body.ts';
 import { compileVolumeLeaf } from '../volume-leaves/index.ts';
 
 /** Over how many face pixels a wall's light may pass from one terrace to the next: a browser's layers do not line up closer. */
@@ -30,6 +31,22 @@ function quaternionFromBasis(x: Vec3, y: Vec3, z: Vec3): [number, number, number
   return q;
 }
 /** The leaf compiler draws a leaf this many CSS pixels beyond its quad on every side, at LEAF_PIXELS_PER_UNIT. */
+/** How fine, as a share of a cavity's size, the picture's light is read when a cavity's length is taken from it. */
+const CAVITY_EDGE_SHARE=1/8;
+/** Over what share of the longest path through a body, above the half where cavities start to be read, the reading sets in. */
+const CAVITY_FADE_SHARE=.15;
+/** Depths kept per sight line of a body: into and out of its envelope, the body, its cavity and its denser gas. */
+const BODY_DEPTHS=8;
+/** Shells of gas, from the star to a body's outline, whose emissivity is read from the picture. */
+const BODY_SHELLS=64;
+/** The innermost of those shells whose light is taken as it is; over as many again the smoothing sets in. */
+const BODY_CORE_SHELLS=4;
+/** Steps along a sight line within one slab of a body, when the model's light there is summed. */
+const BODY_STEPS=8;
+/** Rounds of matching a body's light to what the Sun sees through the nearer gas, and the most optical depth a channel may take. */
+const BODY_PASSES=8,BODY_MOST_DEPTH=8;
+/** The brightest channel of a body's texel, of full: under it there is room to make up a browser's rounding. */
+const BODY_COLOR_PEAK=240/255;
 const LEAF_OUTSET_PIXELS=0.6,LEAF_PIXELS_PER_UNIT=50;
 /** A leaf's style. The compiler's outset is 12 pc on a kiloparsec bank and unseen; on a parsec bank it is 0.012 pc, 5% of
  * a picture half a parsec across, and leaves that share a picture's light no longer line up. `exact` hands the compiler
@@ -192,6 +209,63 @@ export async function prepareImageLayers(options: { sourceDirectory: string; out
     const kept=[0,0,0];let weight=0;for(let p=0;p<count;p++){const a=base[4*p+3]!;if(!a)continue;weight+=a;for(let c=0;c<3;c++)kept[c]!+=a*base[4*p+c]!;}
     if(weight>0)for(let p=0;p<count;p++)if(!Number.isNaN(found.near[p]!))for(let c=0;c<3;c++)base[4*p+c]=Math.round(kept[c]!/weight);
     shapeWalls=found;}
+  // A nebula's published filled body takes the picture's light inside its outline (./body.ts). The gas is taken to be
+  // the same all around the star at one distance from it, so how much each display channel emits at each distance comes
+  // from the picture itself: the middle of its light around the star at each radius, taken apart shell by shell from
+  // the outside in. Each pixel's light is then spread along its sight line by that emissivity, less inside a cavity.
+  // Where a cavity lies along a sight line comes from the model. How long it is comes from the picture: how far the
+  // light there falls short of the middle at its radius (the dips around the star at one radius, as the paper measures
+  // the cavities), read through the cavity's own emission. Light above that middle is denser gas about the equatorial
+  // plane. Near the body's outline, where the path through it is short, neither is read.
+  const bodyModel=recipe.geometry.body?imageLayerBodyModel(recipe.geometry.body):null;
+  type Along=(channel:number,radius:number,lo:number,hi:number,from:number,to:number,steps:number)=>number;
+  let bodyFill:{spans:Float32Array;tau:Float32Array;dense:Float32Array;hue:Uint8Array;radius:Float32Array;emit:(channel:number,radius:number)=>number;along:Along;pixels:number;carved:number;hollow:number}|null=null;
+  if(bodyModel){const body=recipe.geometry.body!,count=info.width*info.height,arcsec=distanceKpc*Math.PI/648000,hollow=body.cavities?1-body.cavities.emission:0,shell=bodyModel.reach*arcsec/BODY_SHELLS,N=BODY_DEPTHS;
+    // Per sight line, in units: its distance from the star on the sky, and along z where it enters and leaves the
+    // outline, the body, its cavity and its denser gas. `dense` is the share of its light in that denser gas.
+    const spans=new Float32Array(N*count).fill(NaN),tau=new Float32Array(count),dense=new Float32Array(count),hue=new Uint8Array(3*count),radius=new Float32Array(count);
+    const centre=new Float32Array(count),equator=new Float32Array(count),inside=new Float32Array(count),rings=Array.from({length:4},()=>Array.from({length:BODY_SHELLS},():number[]=>[]));let longest=0,pixels=0,carved=0;
+    for(let py=0;py<info.height;py++)for(let px=0;px<info.width;px++){const p=py*info.width+px,o=N*p;if(!base[4*p+3])continue;
+      const ray=rayLocal(2*(px+.5)/info.width-1,1-2*(py+.5)/info.height),east=ray[0]/ray[2]*distanceKpc/arcsec,north=ray[1]/ray[2]*distanceKpc/arcsec,line=bodyModel.along(east,north);if(!line)continue;
+      const outer=line.envelope??line.body!,inner=line.body,ring=Math.min(BODY_SHELLS-1,Math.floor(Math.hypot(east,north)*arcsec/shell));
+      spans[o]=outer[0]*arcsec;spans[o+1]=outer[1]*arcsec;centre[p]=line.cavityAt*arcsec;equator[p]=line.equatorAt*arcsec;radius[p]=Math.hypot(east,north)*arcsec;tau[p]=-Math.log(1-Math.min(base[4*p+3]!/255,.998));inside[p]=1;pixels++;
+      for(let c=0;c<3;c++){hue[3*p+c]=base[4*p+c]!;rings[c]![ring]!.push(tau[p]!*base[4*p+c]!/255);}rings[3]![ring]!.push(tau[p]!);
+      if(inner){spans[o+2]=inner[0]*arcsec;spans[o+3]=inner[1]*arcsec;longest=Math.max(longest,inner[1]-inner[0]);}}
+    if(!pixels)throw new TypeError(`${recipe.id}: the body (${body.source}) holds no light of the picture.`);
+    // Each channel's light by radius (red, green, blue, then the whole opacity), and the emissivity of each shell of gas
+    // that adds up to it: the outermost shell is seen alone at the outline, and each shell inward through those outside
+    // it. The light is smoothed before it is taken apart, never the gas after: shells that no longer add up to the light
+    // put too much of a sight line's light in one place and leave a dark line along the rest of it. For the same reason
+    // the innermost shells, where the light changes within a shell's width around the star, are not smoothed.
+    const soft=(values:Float32Array)=>values.map((_,k)=>(values[Math.max(0,k-1)]!+2*values[k]!+values[Math.min(values.length-1,k+1)]!)/4);
+    const through=(ray:number,of:number)=>2*(Math.sqrt(((of+1)*shell)**2-((ray+.5)*shell)**2)-Math.sqrt(Math.max(0,(of*shell)**2-((ray+.5)*shell)**2)));
+    const levels=rings.map(ring=>{const raw=Float32Array.from(ring,values=>values.length?values.sort((a,b)=>a-b)[values.length>>1]!:0),even=soft(soft(soft(soft(raw))));return raw.map((value,k)=>{const t=Math.max(0,Math.min(1,(k-BODY_CORE_SHELLS)/BODY_CORE_SHELLS));return value+(even[k]!-value)*t;});});
+    const emissivity=levels.map(level=>{const gas=new Float32Array(BODY_SHELLS);for(let ray=BODY_SHELLS-1;ray>=0;ray--){let rest=0;for(let of=ray+1;of<BODY_SHELLS;of++)rest+=gas[of]!*through(ray,of);gas[ray]=Math.max(0,(level[ray]!-rest)/through(ray,ray));}return gas;});
+    const emit=(channel:number,r:number)=>{const at=r/shell-.5,k=Math.floor(at),gas=emissivity[channel]!;return k<0?gas[0]!:k>=BODY_SHELLS-1?(at<BODY_SHELLS-.5?gas[BODY_SHELLS-1]!:0):gas[k]!+(gas[k+1]!-gas[k]!)*(at-k);};
+    // A channel's light along a sight line that passes the star at `r`, from `lo` to `hi`, less inside a cavity from `from` to `to`.
+    const along:Along=(channel,r,lo,hi,from,to,steps)=>{let sum=0;const dz=(hi-lo)/steps;for(let i=0;i<steps;i++){const z=lo+(i+.5)*dz;sum+=emit(channel,Math.hypot(r,z))*(z>=from&&z<to?1-hollow:1);}return sum*dz;};
+    if(body.cavities){const size=body.cavities.sizeArcsec/(recipe.observation.fieldOfViewDeg[0]*3600/info.width),fine=Math.max(1,Math.round(size*CAVITY_EDGE_SHARE)),thick=body.cavities.sizeArcsec*arcsec;
+      // The picture's grain is not a cavity: its light is read no finer than a share of a cavity's size, and compared
+      // with the middle of the same smoothed light at its radius.
+      const light=smoothed(tau,info.width,info.height,fine),cover=smoothed(inside,info.width,info.height,fine),around=Array.from({length:BODY_SHELLS},():number[]=>[]);
+      for(let p=0;p<count;p++)if(inside[p])around[Math.min(BODY_SHELLS-1,Math.floor(radius[p]!/shell))]!.push(light[p]!/cover[p]!);
+      const middle=soft(Float32Array.from(around,values=>values.length?values.sort((a,b)=>a-b)[values.length>>1]!:0));
+      for(let p=0;p<count;p++){const o=N*p,near=spans[o+2]!,far=spans[o+3]!;if(!inside[p]||!(far-near>=longest*arcsec/2))continue;
+        const where=Math.max(0,Math.min(BODY_SHELLS-1,radius[p]!/shell-.5)),below=Math.min(BODY_SHELLS-2,Math.floor(where)),level=middle[below]!+(middle[below+1]!-middle[below]!)*(where-below);
+        if(!(level>0))continue;
+        // Toward the edge of where it is read, the reading fades out, so no edge of its own shows there.
+        const edge=Math.max(0,Math.min(1,((far-near)/(longest*arcsec)-.5)/CAVITY_FADE_SHARE)),fade=edge*edge*(3-2*edge),ratio=1+(light[p]!/cover[p]!/level-1)*fade;
+        if(!(ratio>0))continue;
+        if(ratio>1){const half=Math.min(thick,far-near)/2,at=Math.max(near+half,Math.min(far-half,equator[p]!));dense[p]=1-1/ratio;spans[o+6]=at-half;spans[o+7]=at+half;continue;}
+        // The cavity is as long as takes that much of the sight line's light away, about its place on the pole's line.
+        const wanted=(1-ratio)*along(3,radius[p]!,spans[o]!,spans[o+1]!,NaN,NaN,24)/hollow,place=(length:number):[number,number]=>{const at=Math.max(near+length/2,Math.min(far-length/2,centre[p]!));return [at-length/2,at+length/2];};
+        const taken=(length:number)=>{const [from,to]=place(length);return along(3,radius[p]!,from,to,NaN,NaN,12);};
+        let low=0,high=far-near;if(taken(high)>wanted)for(let i=0;i<14;i++){const mid=(low+high)/2;if(taken(mid)<wanted)low=mid;else high=mid;}
+        if(!(high>0))continue;[spans[o+4],spans[o+5]]=place(high);carved++;}}
+    // Under the body the flat picture is clear; it keeps one color there, the mean of what it still shows.
+    const kept=[0,0,0];let weight=0;for(let p=0;p<count;p++){if(!Number.isNaN(spans[N*p]!))base[4*p+3]=0;const a=base[4*p+3]!;if(!a)continue;weight+=a;for(let c=0;c<3;c++)kept[c]!+=a*base[4*p+c]!;}
+    if(weight>0)for(let p=0;p<count;p++)if(!Number.isNaN(spans[N*p]!))for(let c=0;c<3;c++)base[4*p+c]=Math.round(kept[c]!/weight);
+    bodyFill={spans,tau,dense,hue,radius,emit,along,pixels,carved,hollow};}
   let left=info.width,top=info.height,right=-1,bottom=-1;
   for(let py=0;py<info.height;py++)for(let px=0;px<info.width;px++)if(base[4*(py*info.width+px)+3]){left=Math.min(left,px);right=Math.max(right,px);top=Math.min(top,py);bottom=Math.max(bottom,py);}
   if(right<left)throw new TypeError('Physical support removed the complete observation.');
@@ -338,6 +412,75 @@ export async function prepareImageLayers(options: { sourceDirectory: string; out
         if(!any)continue;
         const quad=(axis==='x'?[intersect(u,bv0,reach),intersect(u,bv1,reach),intersect(u,bv1,-reach),intersect(u,bv0,-reach)]:[intersect(bu0,v,reach),intersect(bu1,v,reach),intersect(bu1,v,-reach),intersect(bu0,v,-reach)]) as Quad['verticesUnits'];
         await push(name(axis,s),axis,rgba,along,depthPx,quad,axis==='x'?(quad[0][0]+quad[1][0])/2:(quad[0][1]+quad[1][1])/2);}}}
+  if(bodyFill){
+    // The body as leaves, from one grid of cells over its outline (`bulgeFacePixels` on its longer side). Face-on (the z
+    // bank): slabs parallel to the picture, each holding the light the model puts between its two faces, so from the
+    // Sun the slabs add up to the photograph. From the side (the x and y banks): curtains through the grid's columns
+    // and rows, each holding the light of the slab of nebula around it.
+    const {spans,tau,dense,hue,radius,emit,along,hollow}=bodyFill,W=info.width,N=BODY_DEPTHS;
+    let bl=W,bt=info.height,br=-1,bb=-1,reach=0;for(let py=0;py<info.height;py++)for(let px=0;px<W;px++){const p=py*W+px;if(Number.isNaN(spans[N*p]!))continue;bl=Math.min(bl,px);br=Math.max(br,px);bt=Math.min(bt,py);bb=Math.max(bb,py);reach=Math.max(reach,-spans[N*p]!,spans[N*p+1]!);}
+    const bw=br-bl+1,bh=bb-bt+1,slices=recipe.bake.bulgeSlices!,step=2*reach/slices,toward=Math.sign(intersect(0,0,1)[2]-intersect(0,0,0)[2])||1;
+    const bu0=2*bl/W-1,bu1=2*(br+1)/W-1,bv0=1-2*bt/info.height,bv1=1-2*(bb+1)/info.height,name=(axis:LayerAxis,index:number)=>`shape-${axis}-${String(index).padStart(2,'0')}`;
+    const push=async(id:string,axis:LayerAxis,rgba:Buffer,width:number,height:number,v:Quad['verticesUnits'],offset:number)=>{const path=`layers/${id}.webp`,bytes=await encode(rgba,width,height,path,true);
+      leaves.push({id,axis,offsetKpc:offset,centerUnits:scale(add(...v),.25),doubleSided:true,texturePath:path,widthPx:width,heightPx:height,verticesUnits:v,uvs:[[0,0],[1,0],[1,1],[0,1]],style:styleOf(v,path,width,height,leaves.length),bytes:bytes.length});};
+    // A texel from its channels' optical depths. Its opacity is its brightest channel's, drawn a little more opaque
+    // and a little less saturated (`BODY_COLOR_PEAK`), which leaves room above every channel: a browser keeps a
+    // layer's color times its opacity in whole numbers, rounded down, and half a step is added back to each channel.
+    // `owed` is the rounding of the opacity carried from the texel in front; the texel's own is returned.
+    const paint=(rgba:Buffer,o:number,each:readonly number[],owed:number)=>{const depth=Math.max(...each),wanted=depth/BODY_COLOR_PEAK+owed,stored=Math.max(0,Math.min(254,Math.round(255*(1-Math.exp(-wanted))))),lift=stored?127.5/stored:0;
+      for(let c=0;c<3;c++)rgba[o+c]=Math.min(255,Math.round(255*BODY_COLOR_PEAK*each[c]!/depth+lift));rgba[o+3]=stored;return wanted+Math.log(1-stored/255);};
+    // The share of a bell between `from` and `to` (most in the middle, none at its ends) that lies between `lo` and `hi`.
+    const upTo=(x:number,from:number,to:number)=>{const t=Math.max(0,Math.min(1,(x-from)/(to-from)));return t-Math.sin(2*Math.PI*t)/(2*Math.PI);},bell=(lo:number,hi:number,from:number,to:number)=>upTo(hi,from,to)-upTo(lo,from,to);
+    // The grid: each cell's light toward the Sun by channel (color times opacity, 0 to 1), its distance from the star
+    // and its depths, averaged over its pixels by their optical depth.
+    const fscale=Math.min(1,recipe.bake.bulgeFacePixels!/Math.max(bw,bh)),sw=Math.max(2,Math.round(bw*fscale)),sh=Math.max(2,Math.round(bh*fscale)),cells=sw*sh;
+    const grid=Array.from({length:cells},(_,t)=>{const i=t%sw,j=Math.floor(t/sw),x0=bl+Math.floor(i*bw/sw),x1=Math.max(x0+1,bl+Math.floor((i+1)*bw/sw)),y0=bt+Math.floor(j*bh/sh),y1=Math.max(y0+1,bt+Math.floor((j+1)*bh/sh));
+      const at=[0,0,0,0,0,0,0,0],light=[0,0,0],sides=[0,0],middles=[0,0];let sum=0,far=0,inBody=0,length=0,thick=0;
+      for(let y=y0;y<y1;y++)for(let x=x0;x<x1;x++){const p=y*W+x,o=N*p,weight=tau[p]!;if(Number.isNaN(spans[o]!)||!(weight>0))continue;sum+=weight;far+=weight*radius[p]!;at[0]!+=weight*spans[o]!;at[1]!+=weight*spans[o+1]!;for(let c=0;c<3;c++)light[c]!+=(1-Math.exp(-weight))*hue[3*p+c]!/255;
+        if(!Number.isNaN(spans[o+2]!)){inBody+=weight;at[2]!+=weight*spans[o+2]!;at[3]!+=weight*spans[o+3]!;}
+        if(!Number.isNaN(spans[o+4]!)){const size=spans[o+5]!-spans[o+4]!,centre=(spans[o+4]!+spans[o+5]!)/2,side=centre<0?0:1;length+=weight*size;sides[side]!+=weight*size;middles[side]!+=weight*size*centre;}
+        if(dense[p]!>0){thick+=weight*dense[p]!;at[6]!+=weight*dense[p]!*spans[o+6]!;at[7]!+=weight*dense[p]!*spans[o+7]!;}}
+      // A cell's cavity: its pixels' mean length, about the mean centre, weighted by length, of those on the side of the
+      // star most of them are on, so a cell across the line between a near lobe and a far one does not put one at the star.
+      const side=sides[0]!>=sides[1]!?0:1,size=inBody>0?length/inBody:0,middle=sides[side]!>0?middles[side]!/sides[side]!:0,area=(x1-x0)*(y1-y0);
+      return {light:light.map(value=>Math.min(.998,value/area)),radius:sum?far/sum:0,thick:sum?thick/sum:0,at:[sum?at[0]!/sum:NaN,sum?at[1]!/sum:NaN,inBody?at[2]!/inBody:NaN,inBody?at[3]!/inBody:NaN,size>0?middle-size/2:NaN,size>0?middle+size/2:NaN,thick?at[6]!/thick:NaN,thick?at[7]!/thick:NaN]};});
+    // Each cell's light by slab: the shares of each channel's light the model puts in each slab, then how much each
+    // channel emits in all, found so that what the Sun sees through the nearer slabs is the cell's own light.
+    const parts=new Float32Array(cells*slices*3),wholes=new Float32Array(cells*3),emission=new Float32Array(cells*3);
+    for(let t=0;t<cells;t++){const cell=grid[t]!,most=Math.max(...cell.light);if(!(most>0))continue;
+      for(let c=0;c<3;c++){let whole=0;for(let k=0;k<slices;k++){const lo=-reach+k*step,from=Math.max(lo,cell.at[0]!),to=Math.min(lo+step,cell.at[1]!),part=to>from?along(c,cell.radius,from,to,cell.at[4]!,cell.at[5]!,BODY_STEPS):0;parts[(t*slices+k)*3+c]=part;whole+=part;}
+        wholes[t*3+c]=whole;
+        for(let k=0;k<slices;k++){const o=(t*slices+k)*3+c,lo=-reach+k*step;parts[o]=whole>0?(1-cell.thick)*parts[o]!/whole+(cell.thick>0?cell.thick*bell(lo,lo+step,cell.at[6]!,cell.at[7]!):0):k===slices>>1?1:0;}
+        emission[t*3+c]=-Math.log(1-most)*cell.light[c]!/most;}
+      for(let pass=0;pass<BODY_PASSES;pass++){const seen=[0,0,0];let clear=1;
+        for(let k=0;k<slices;k++){const o=(t*slices+k)*3,red=emission[t*3]!*parts[o]!,green=emission[t*3+1]!*parts[o+1]!,blue=emission[t*3+2]!*parts[o+2]!,depth=Math.max(red,green,blue);if(!(depth>0))continue;
+          const shown=BODY_COLOR_PEAK*(1-Math.exp(-depth/BODY_COLOR_PEAK))*clear/depth;seen[0]!+=red*shown;seen[1]!+=green*shown;seen[2]!+=blue*shown;clear*=Math.exp(-depth/BODY_COLOR_PEAK);}
+        for(let c=0;c<3;c++)if(seen[c]!>0)emission[t*3+c]=Math.min(BODY_MOST_DEPTH,emission[t*3+c]!*cell.light[c]!/seen[c]!);}}
+    // Every slab is drawn on the same rectangle, so a browser places them all alike: where a cavity ends, the slabs in
+    // front of the star and those behind it change by opposite amounts, and a slab a fraction of a pixel off shows there as a line.
+    const carry=new Float32Array(cells);
+    for(let k=0;k<slices;k++){const lo=-reach+k*step,hi=lo+step,rgba=Buffer.alloc(cells*4);let any=false;
+      for(let t=0;t<cells;t++){const o=4*t,from=(t*slices+k)*3,each=[emission[t*3]!*parts[from]!,emission[t*3+1]!*parts[from+1]!,emission[t*3+2]!*parts[from+2]!],depth=Math.max(...each);
+        // Color is kept under transparent texels too, so the lossy encoding has no dark edge to bleed in.
+        if(!(depth>0)){const most=Math.max(...grid[t]!.light);if(most>0)for(let c=0;c<3;c++)rgba[o+c]=Math.round(255*grid[t]!.light[c]!/most);else{const p=(bt+Math.floor((Math.floor(t/sw)+.5)*bh/sh))*W+bl+Math.floor((t%sw+.5)*bw/sw);for(let c=0;c<3;c++)rgba[o+c]=base[4*p+c]!;}continue;}
+        carry[t]=paint(rgba,o,each,carry[t]!);if(rgba[o+3])any=true;}
+      if(!any)continue;
+      const offset=toward*(lo+hi)/2;
+      await push(name('z',k),'z',rgba,sw,sh,[intersect(bu0,bv0,offset),intersect(bu1,bv0,offset),intersect(bu1,bv1,offset),intersect(bu0,bv1,offset)],offset);}
+    const crossSlices=recipe.bake.bulgeCrossSlices!,depthPx=Math.max(8,Math.round(sh*2*reach/Math.max(1e-9,Math.hypot(...difference3(intersect(bu0,bv0,0),intersect(bu0,bv1,0))))));
+    for(const axis of ['x','y'] as const){const lengthPx=axis==='x'?sh:sw;
+      for(let s=0;s<crossSlices;s++){const fraction=(s+.5)/crossSlices,rgba=Buffer.alloc(lengthPx*depthPx*4),u=bu0+(bu1-bu0)*fraction,v=bv0+(bv1-bv0)*fraction;
+        const spacing=Math.hypot(...difference3(axis==='x'?intersect(bu0,v,0):intersect(u,bv0,0),axis==='x'?intersect(bu1,v,0):intersect(u,bv1,0)))/crossSlices;let any=false;
+        const across=axis==='x'?sw:sh,first=Math.floor(s*across/crossSlices),last=Math.max(first+1,Math.floor((s+1)*across/crossSlices)),half=reach/depthPx;
+        for(let a=0;a<lengthPx;a++)for(let d=0;d<depthPx;d++){const z=toward*(reach-(d+.5)/depthPx*2*reach),o=4*(d*lengthPx+a),optical=[0,0,0];
+          // Each channel's light in the curtain's slab of cells at this depth, per unit length, times the curtain spacing.
+          for(let i=first;i<last;i++){const t=axis==='x'?a*sw+i:i*sw+a,cell=grid[t]!;if(!(z>=cell.at[0]!&&z<cell.at[1]!))continue;
+            const hole=z>=cell.at[4]!&&z<cell.at[5]!?1-hollow:1,thick=cell.thick>0?cell.thick*bell(z-half,z+half,cell.at[6]!,cell.at[7]!)/(2*half):0,far=Math.hypot(cell.radius,z);
+            for(let c=0;c<3;c++)if(wholes[t*3+c]!>0)optical[c]!+=emission[t*3+c]!*((1-cell.thick)*emit(c,far)*hole/wholes[t*3+c]!+thick)*spacing/(last-first);}
+          if(!(Math.max(...optical)>0))continue;paint(rgba,o,optical,0);if(rgba[o+3])any=true;}
+        if(!any)continue;
+        const quad=(axis==='x'?[intersect(u,bv0,reach),intersect(u,bv1,reach),intersect(u,bv1,-reach),intersect(u,bv0,-reach)]:[intersect(bu0,v,reach),intersect(bu1,v,reach),intersect(bu1,v,-reach),intersect(bu0,v,-reach)]) as Quad['verticesUnits'];
+        await push(name(axis,s),axis,rgba,lengthPx,depthPx,quad,axis==='x'?(quad[0][0]+quad[1][0])/2:(quad[0][1]+quad[1][1])/2);}}}
   const provenanceBytes=await readFile(resolve(options.sourceDirectory,recipe.provenance.path));
   const provenance=JSON.parse(provenanceBytes.toString('utf8')) as unknown;
   const allVertices=leaves.flatMap(l=>l.verticesUnits),bounds={min:[0,1,2].map(i=>Math.min(...allVertices.map(v=>v[i]))) as Vec3,max:[0,1,2].map(i=>Math.max(...allVertices.map(v=>v[i]))) as Vec3};
@@ -350,6 +493,6 @@ export async function prepareImageLayers(options: { sourceDirectory: string; out
     else if(flat&&axis!=='z')samplingStepUnits=recipe.geometry.supportRadiusKpc*2;else if(axis!=='z'){const values=sampled.map(l=>dot(l.centerUnits,normal)),span=Math.max(...values)-Math.min(...values);samplingStepUnits=sampled.length>1?span/(sampled.length-1):recipe.geometry.supportRadiusKpc*2;}
     return {axis,normalUnits:normal,samplingStepUnits,leaves:selected};};
   const result:PreparedImageLayerBank={schema:PREPARED_IMAGE_LAYER_BANK_SCHEMA,id:recipe.id,frame:{referenceFrame:'sun-icrf',epochJdTt:2461286.5,originM:origin,localToReferenceXyzw:q,metersPerUnit:M_PER_KPC/unitsPerKpc,boundsUnits:bounds},observation:recipe.observation,
-    banks:(['x','y','z'] as LayerAxis[]).map(bank),resources,provenance,approximation:{model:shapeModel?`The observed display RGB inside the published outline lies on two walls, in front of the star and behind it, at the depths the published expansion speeds give; outside the outline it lies on one plane.`:flat?`The observed display RGB lies on one plane, the ${recipe.geometry.kind}'s midplane; nothing in it has depth.`:`A low-frequency fraction of the observed display RGB is distributed through one normalized ${recipe.geometry.kind} depth profile; the compact residual remains on the physical midplane.`,canonicalRecomposition:'The source-facing diffuse slabs use optical-depth weights and composite with the residual layer to reproduce the prepared observation within resampling and encoding error.',limitations:['Depth is parametric and is not measured per pixel.','Compact residuals are image-frequency features, not classified stars or measured 3D positions.','Cross-axis banks are sampled projections of the separable display model; finite slices and bank handoffs remain visible.',foreground?`Milky Way foreground stars from ${recipe.source.foregroundStars!.source} were removed where they show (${foreground.removed} of the ${foreground.inImage} catalogued in the image; ${foreground.extended} left where the light is an extended object); fainter ones and uncatalogued stars remain.`:'Released foreground stars remain because blanket removal would also erase intrinsic galaxy stars.',...(colorTie?[`Whole-galaxy color tied to B-V ${colorTie.bv} (${colorTie.source}): red/green and blue/green in linear light measured ${colorTie.measured[0]}, ${colorTie.measured[2]}, target ${colorTie.target[0]}, ${colorTie.target[2]}; gains red ${colorTie.gains[0]}, blue ${colorTie.gains[2]}.`]:[]),...(bulgeModel?[`The bulge fit (${recipe.geometry.bulge!.source}) stands in for ${saturatedPixels} saturated pixels, scaled by ${lightScale.toPrecision(4)} optical depth per unit fitted light.`]:[]),...(shapeModel&&shapeWalls?[`The walls (${recipe.geometry.shape!.source}) are ellipsoids from published expansion speeds and a published expansion law, out to ${shapeModel.reach.toFixed(1)} arcsec along the sight line; ${shapeWalls.pixels} face pixels lie on them. One picture cannot tell the near wall from the far one: the far wall holds half the optical depth of the light smooth over ${recipe.geometry.shape!.smoothPixels} face pixels, the near wall the rest. A pixel's depth is its channels' walls weighted by its smooth light in each.`]:[]),...(companions?[`Companion galaxies ${companions.keys.join(', ')} from ${recipe.source.companions!.source} were replaced by the light around them, out to ${companions.extentHalfLight.join(', ')} half-light radii.`]:[])]}};
+    banks:(['x','y','z'] as LayerAxis[]).map(bank),resources,provenance,approximation:{model:bodyModel?`The observed display RGB inside the published outline is spread along each sight line through a filled body, its envelope and its cavities; outside the outline it lies on one plane.`:shapeModel?`The observed display RGB inside the published outline lies on two walls, in front of the star and behind it, at the depths the published expansion speeds give; outside the outline it lies on one plane.`:flat?`The observed display RGB lies on one plane, the ${recipe.geometry.kind}'s midplane; nothing in it has depth.`:`A low-frequency fraction of the observed display RGB is distributed through one normalized ${recipe.geometry.kind} depth profile; the compact residual remains on the physical midplane.`,canonicalRecomposition:'The source-facing diffuse slabs use optical-depth weights and composite with the residual layer to reproduce the prepared observation within resampling and encoding error.',limitations:['Depth is parametric and is not measured per pixel.','Compact residuals are image-frequency features, not classified stars or measured 3D positions.','Cross-axis banks are sampled projections of the separable display model; finite slices and bank handoffs remain visible.',foreground?`Milky Way foreground stars from ${recipe.source.foregroundStars!.source} were removed where they show (${foreground.removed} of the ${foreground.inImage} catalogued in the image; ${foreground.extended} left where the light is an extended object); fainter ones and uncatalogued stars remain.`:'Released foreground stars remain because blanket removal would also erase intrinsic galaxy stars.',...(colorTie?[`Whole-galaxy color tied to B-V ${colorTie.bv} (${colorTie.source}): red/green and blue/green in linear light measured ${colorTie.measured[0]}, ${colorTie.measured[2]}, target ${colorTie.target[0]}, ${colorTie.target[2]}; gains red ${colorTie.gains[0]}, blue ${colorTie.gains[2]}.`]:[]),...(bulgeModel?[`The bulge fit (${recipe.geometry.bulge!.source}) stands in for ${saturatedPixels} saturated pixels, scaled by ${lightScale.toPrecision(4)} optical depth per unit fitted light.`]:[]),...(shapeModel&&shapeWalls?[`The walls (${recipe.geometry.shape!.source}) are ellipsoids from published expansion speeds and a published expansion law, out to ${shapeModel.reach.toFixed(1)} arcsec along the sight line; ${shapeWalls.pixels} face pixels lie on them. One picture cannot tell the near wall from the far one: the far wall holds half the optical depth of the light smooth over ${recipe.geometry.shape!.smoothPixels} face pixels, the near wall the rest. A pixel's depth is its channels' walls weighted by its smooth light in each.`]:[]),...(bodyModel&&bodyFill?[`The body (${recipe.geometry.body!.source}) is a published outline, pole and cavity emission, out to ${bodyModel.reach.toFixed(1)} arcsec along the sight line; ${bodyFill.pixels} face pixels lie in it. How much the gas emits at each distance from the star is read from the picture, taken as the same all around the star. A cavity's place along a sight line is the model's; its length is read from how dim the picture is there (${bodyFill.carved} sight lines carved), not from spectra.`]:[]),...(companions?[`Companion galaxies ${companions.keys.join(', ')} from ${recipe.source.companions!.source} were replaced by the light around them, out to ${companions.extentHalfLight.join(', ')} half-light radii.`]:[])]}};
   await writeFile(resolve(options.outputDirectory,'image-layers.json'),JSON.stringify(result,null,2)+'\n');return result;
 }

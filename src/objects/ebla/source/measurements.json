@@ -1,0 +1,16 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "ebla",
+  "angularDiameterMas": 0.33,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 714,484 km at 28.73 pc = 0.33 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 28.726,
+  "distanceSource": "McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 114322: distance 28.726 pc, the paper's parallax inverted (Gaia DR1's where it revised the star's, else the Hipparcos reduction of van Leeuwen 2007; section 2.3; fractional uncertainty 0.007), at which the luminosity and radius hold (https://doi.org/10.1093/mnras/stx1433): 28.726 +/- 0.201 pc; Gaia DR3 parallax 34.6958 +/- 0.0287 mas (same row, RUWE 1.00), 1207.7 standard errors, is not used",
+  "radiusKm": 714483.9,
+  "radiusSource": "Radius 1.027 solar radii from McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 114322: radius 1.027 solar radii, implied by the fitted luminosity 0.404 solar luminosities (fractional uncertainty 0.055) and temperature (https://doi.org/10.1093/mnras/stx1433): 714,484 km at 695,700 km per solar radius. No mass is measured, so GM is 0, the records' unpublished value. Temperature 4543 +/- 125 K from McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 114322: effective temperature 4543 +/- 125 K, from the fit of a model atmosphere to the star's spectral energy distribution (goodness of fit Q 0.106) (https://doi.org/10.1093/mnras/stx1433). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 4543,
+  "effectiveTemperatureSource": "McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 114322: effective temperature 4543 +/- 125 K, from the fit of a model atmosphere to the star's spectral energy distribution (goodness of fit Q 0.106) (https://doi.org/10.1093/mnras/stx1433)",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

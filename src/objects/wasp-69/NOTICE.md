@@ -1,4 +1,4 @@
-# WASP-69 credits
+# Wouri credits
 
 Radius, mass and temperature: Radius 0.801 +/- 0.015 solar radii from Allart et al. 2025, the stellar radius of the default parameter set of WASP-69 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025A&A...700A...7A/abstract); Mass 0.83 +/- 0.05 solar masses from Allart et al. 2025, the stellar mass of the default parameter set of WASP-69 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2025A&A...700A...7A/abstract); temperature from Allart et al. 2025, the stellar temperature of the default parameter set of WASP-69 b in the NASA Exoplanet Archive.
 

@@ -1,0 +1,135 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "wasp-19b",
+  "displayName": "WASP-19 b",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "1.4 Jupiter radii",
+        "source": {
+          "catalogueId": "arxiv-2001-11112",
+          "url": "https://ui.adsabs.harvard.edu/abs/2020A&A...636A..98C",
+          "label": "Cortés-Zuleta et al. 2020",
+          "checked": "2026-10-03",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "19 hours",
+        "source": {
+          "catalogueId": "arxiv-2001-11112",
+          "url": "https://ui.adsabs.harvard.edu/abs/2020A&A...636A..98C",
+          "label": "Cortés-Zuleta et al. 2020",
+          "checked": "2026-10-03",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "1.2 Jupiter masses",
+        "source": {
+          "catalogueId": "arxiv-2001-11112",
+          "url": "https://ui.adsabs.harvard.edu/abs/2020A&A...636A..98C",
+          "label": "Cortés-Zuleta et al. 2020",
+          "checked": "2026-10-03",
+          "path": "source/measurements.json",
+          "locator": "massSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "thermal",
+    "controls": [
+      {
+        "id": "thermal",
+        "label": "Thermal glow",
+        "qualification": "Black-body color at its measured dayside temperature, 2,346 K. The disc itself is unresolved.",
+        "thumbnail": "wasp-19b-dataset-thermal.webp",
+        "surface": "wasp-19b-surface-thermal@2x.webp",
+        "poles": "wasp-19b-poles-thermal@2x.webp",
+        "source": {
+          "id": "wasp-19b-thermal-color",
+          "path": "../manifest.json",
+          "url": "https://ui.adsabs.harvard.edu/abs/2013MNRAS.430.3422A/abstract"
+        },
+        "falseColor": false,
+        "notes": "The color of WASP-19 b's heat: a black body at the dayside brightness temperature measured in secondary eclipse at 3.6 µm (Spitzer Space Telescope satellite Infrared Array Camera (IRAC)). Its star lights the day side; the night side is not measured. Reflected starlight is not included."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [
+    {
+      "id": "wasp-19b-orbits",
+      "titleKey": "systemOrbits",
+      "src": "/scenes/wasp-19b/wasp-19b-system-orbits.svg",
+      "alt": "The orbits of Wattle's planets in this map from above, to scale, with WASP-19 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "source": {
+        "id": "wasp-19b-observational-measurements",
+        "path": "../manifest.json",
+        "url": "https://ui.adsabs.harvard.edu/abs/2020A&A...636A..98C"
+      }
+    },
+    {
+      "id": "wasp-19b-transmission",
+      "titleKey": "transmissionSpectrum",
+      "src": "/scenes/wasp-19b/wasp-19b-transmission.svg",
+      "alt": "WASP-19 b's transmission spectrum: the fraction of starlight the planet blocks as it crosses its star, larger where its atmosphere absorbs. 9 measured bins from Bean et al. 2013 (Magellan II Landon Clay Telescope, MMIRS), as the NASA Exoplanet Archive lists them. Horizontal bars are wavelength bins; vertical bars are the published 1-sigma errors. The archive holds 1 other paper for this planet; this chart draws the one with the most bins.",
+      "source": {
+        "id": "wasp-19b-archive-transmission",
+        "path": "../manifest.json",
+        "url": "https://ui.adsabs.harvard.edu/abs/2013ApJ...771..108B/abstract"
+      }
+    },
+    {
+      "id": "wasp-19b-transit",
+      "titleKey": "transitLightCurve",
+      "src": "/scenes/wasp-19b/wasp-19b-transit.svg",
+      "alt": "WASP-19 b crossing its star, as TESS recorded it: 3 sectors (89, 90, 99) of the SPOC pipeline's 2-minute light curves of TIC 35516889, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 6-minute bins. Error bars are each bin's standard error.",
+      "source": {
+        "id": "wasp-19b-tess-sector-89",
+        "path": "../manifest.json",
+        "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2025042113628-s0089-0000000035516889-0286-s_lc.fits"
+      }
+    }
+  ],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Cortés-Zuleta et al. 2020",
+      "href": "https://ui.adsabs.harvard.edu/abs/2020A&A...636A..98C/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2020A&A...636A..98C/abstract",
+      "credit": "Cortés-Zuleta et al. 2020"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/wasp-19b.json",
+      "credit": "Radius from Cortés-Zuleta et al. 2020 (2020A&A...636A..98C), via the NASA Exoplanet Archive; mass from Cortés-Zuleta et al. 2020, the mass the NASA Exoplanet Archive's composite table adopts (2020A&A...636A..98C), via the NASA Exoplanet Archive; orbit from Cortés-Zuleta et al. 2020 (2020A&A...636A..98C), via the NASA Exoplanet Archive"
+    }
+  }
+}

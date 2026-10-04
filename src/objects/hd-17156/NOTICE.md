@@ -1,4 +1,4 @@
-# HD 17156 credits
+# Nushagak credits
 
 Radius, mass and temperature: Radius 1.517 +/- 0.038 solar radii from Kane et al. 2023, the stellar radius of the default parameter set of HD 17156 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....165..252K/abstract); Mass 1.285 +/- 0.064 solar masses from Kane et al. 2023, the stellar mass of the default parameter set of HD 17156 b in the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2023AJ....165..252K/abstract); temperature from Kane et al. 2023, the stellar temperature of the default parameter set of HD 17156 b in the NASA Exoplanet Archive.
 

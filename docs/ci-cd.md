@@ -11,11 +11,13 @@ timings before claiming it is met. Report cold and warm-cache runs separately.
 
 | Workflow | Trigger and responsibility |
 | --- | --- |
-| [Shared universe](../.github/workflows/universe.yml) | PRs run classification and contract lint; changed ownership selects application/test types, runtime/shell/renderer, preparation/publication and nebula checks. Main runs every lane. |
+| [Shared universe](../.github/workflows/universe.yml) | PRs run classification and contract lint; changed ownership selects application/test types, runtime/shell/renderer, preparation/publication and nebula checks. Main runs every shared lane. The path-filtered astroquery job installs pinned Python tools and requires all 13 archive-safety/CDF tests without skips. |
 | [Repository audit](../.github/workflows/audit.yml) | Main pushes, scheduled runs and manual dispatch: documentation, repository completeness, source-catalogue reconciliation and bake reproduction. Advisory; does not run on PRs or gate deployment. |
 | [Object-scope gate](../.github/workflows/object-scope.yml) | Every PR: more than 12 changed object directories needs the `pipeline-change` label. Labels re-evaluate this gate. |
 | [Nightly asset sweep](../.github/workflows/nightly.yml) | Scheduled/manual runs check published keys, test types and a production build/browser probe. They do not publish the site or run on PRs. |
 | [Deploy](../.github/workflows/deploy.yml) | Manual dispatch only. The default R2 deployment checks build asset references and requires verified published keys before shipping. Merging validates the gate; it does not deploy. |
+
+The astroquery filter in the affected-path map covers telescope code, CLI toolchain pins and installer, its two protected test files and the workflow. Its pip and toolchain caches are keyed on the pinned requirements and toolchain record. A skipped test or fewer than 13 completed tests fails the lane.
 
 The universe and preparation status jobs aggregate their matrix lanes: every
 selected lane must pass. Lint failures do not cancel unrelated checks or conceal

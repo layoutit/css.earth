@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hat-p-14",
+  "card": {
+    "text": "HAT-P-14 b crosses Franz as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-aa5df3",
+        "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+        "label": "Stassun et al. (2017), The Astronomical Journal 153 136",
+        "checked": "2026-10-03",
+        "locator": "NASA Exoplanet Archive ps table (st_refname STASSUN_ET_AL__2017): st_teff 6600, st_rad 1.82, st_mass 2.65"
+      },
+      {
+        "catalogueId": "wikipedia-hat-p-14b",
+        "url": "https://en.wikipedia.org/wiki/HAT-P-14b",
+        "label": "Wikipedia, \"HAT-P-14b\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374169060",
+        "quote": "HAT-P-14b, officially named Sissi and also known as WASP-27b, is an extrasolar planet located approximately 224.2 ± 0.6 parsecs (731.2 ± 2.0 ly) away in the constellation of Hercules, orbiting the 10th magnitude F-type main-sequence star HAT-P-14."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Stassun et al. 2017.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-aa5df3",
+        "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+        "label": "Stassun et al. (2017), The Astronomical Journal 153 136",
+        "checked": "2026-10-03",
+        "locator": "NASA Exoplanet Archive ps table (st_refname STASSUN_ET_AL__2017): st_teff 6600, st_rad 1.82, st_mass 2.65"
+      },
+      {
+        "catalogueId": "wikipedia-hat-p-14b",
+        "url": "https://en.wikipedia.org/wiki/HAT-P-14b",
+        "label": "Wikipedia, \"HAT-P-14b\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374169060",
+        "quote": "This planet was discovered in 2010 by the HATNet Project using the transit method."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its Gaia spectrum",
+      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

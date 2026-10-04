@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "aspidiske",
+  "card": {
+    "text": "A star 235 parsecs away, 47 times the Sun's width, measured from its light.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 45556: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-iota-carinae",
+        "url": "https://en.wikipedia.org/wiki/Iota_Carinae",
+        "label": "Wikipedia, \"Iota Carinae\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1370780415",
+        "quote": "Iota Carinae is a star in the southern constellation of Carina."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its brightness, measured band by band, gives 5,027 times the Sun's luminosity at 7,098 K, so 46.95 solar radii.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 45556: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-iota-carinae",
+        "url": "https://en.wikipedia.org/wiki/Iota_Carinae",
+        "label": "Wikipedia, \"Iota Carinae\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1370780415",
+        "quote": "With an apparent visual magnitude of 2.2, it is one of the brighter stars in the night sky."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its temperature",
+      "summary": "The color of the star's light."
+    }
+  }
+}

@@ -1,5 +1,6 @@
 import { parseSourceCitation } from '../sources/catalog.js';
 import type { SourceCitation, SourceResolver } from '../sources/catalog.js';
+export const FACILITY_CATALOG_SCHEMA = 'cssearth-facility-catalog@4';
 // The WHATWG URL parser both hosts provide; the package compiles against ES2022 alone, which does not declare it.
 declare const URL: new (input: string) => { readonly protocol: string };
 /** Shared runtime validation for the authored and prepared exploration catalogues. */
@@ -27,7 +28,7 @@ export interface MissionRecord {
 }
 export interface Agency { readonly name: string; readonly sourceUrl: string; readonly src?: string; readonly assetUrl?: string; readonly bytes?: number; }
 export interface ExplorationCatalog {
-  readonly schema: 'cssearth-facility-catalog@4';
+  readonly schema: typeof FACILITY_CATALOG_SCHEMA;
   readonly facilities: readonly FacilityRecord[]; readonly missions: readonly MissionRecord[];
 }
 export type CaptureAttribution =
@@ -121,7 +122,7 @@ export function parseAgencies(input: unknown): Readonly<Record<string, Agency>> 
 }
 export function parseExplorationCatalog(input: unknown, agencies: Readonly<Record<string, Agency>>, sources: SourceResolver | undefined): ExplorationCatalog {
   const value = explorationRecord(input, ['schema', 'facilities', 'missions']);
-  if (value.schema !== 'cssearth-facility-catalog@4') throw new TypeError('Unsupported facility catalogue schema.');
+  if (value.schema !== FACILITY_CATALOG_SCHEMA) throw new TypeError('Unsupported facility catalogue schema.');
   const refs = (raw: unknown) => {
     const citations = explorationArray(raw, value => parseSourceCitation(value, sources));
     unique(citations.map(citation => JSON.stringify(citation)), 'citation');
@@ -188,7 +189,7 @@ export function parseExplorationCatalog(input: unknown, agencies: Readonly<Recor
       ...(record.emblemId === undefined ? {} : { emblemId: explorationId(record.emblemId) }) });
   });
   unique(missions.map(record => record.id), 'mission ID');
-  return Object.freeze({ schema: 'cssearth-facility-catalog@4', facilities, missions });
+  return Object.freeze({ schema: FACILITY_CATALOG_SCHEMA, facilities, missions });
 }
 
 export function parseCapture(input: unknown): Capture {

@@ -6,7 +6,7 @@
   "properties": {
     "preparation": {
       "schema": "cssearth-object-preparation@1",
-      "label": "WASP-43",
+      "label": "Gnomon",
       "steps": [
         "verify-sources",
         "assets",
@@ -95,16 +95,19 @@
       }
     },
     "catalog": {
-      "name": "WASP-43",
+      "name": "Gnomon",
       "classification": "star",
       "color": "#ffdcb8",
       "distanceAu": 17976692.3,
       "description": "K dwarf in Sextans that hosts the hot Jupiter WASP-43b.",
-      "systemName": "WASP-43 system",
+      "systemName": "Gnomon system",
       "order": 905,
       "context": {
         "order": 902
-      }
+      },
+      "aliases": [
+        "WASP-43"
+      ]
     },
     "worldFrame": {
       "referenceFrame": "sun-icrf",

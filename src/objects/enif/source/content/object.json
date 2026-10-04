@@ -1,0 +1,81 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "enif",
+  "displayName": "Enif",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "178 solar radii",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stx1433",
+          "url": "https://doi.org/10.1093/mnras/stx1433",
+          "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+          "checked": "2026-10-03",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "211 parsecs",
+        "source": {
+          "catalogueId": "doi-10-1093-mnras-stx1433",
+          "url": "https://doi.org/10.1093/mnras/stx1433",
+          "label": "McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 107315: distance 211.416 pc, the paper's parallax inverted (Gaia DR1's where it revised the star's, else the Hipparcos reduction of van Leeuwen 2007; section 2.3; fractional uncertainty 0.036), at which the luminosity and radius hold",
+          "checked": "2026-10-03",
+          "path": "source/measurements.json",
+          "locator": "distanceParsecs; distanceSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "color",
+    "controls": [
+      {
+        "id": "color",
+        "label": "Color",
+        "qualification": "Color from its measured spectrum. The disc itself is unresolved.",
+        "thumbnail": "enif-dataset-color.webp",
+        "surface": "enif-surface-color@2x.webp",
+        "poles": "enif-poles-color@2x.webp",
+        "source": {
+          "id": "enif-stellar-color",
+          "path": "../manifest.json",
+          "url": "https://archive.stsci.edu/pub/hlsp/stisngsl/v2/hd206778/h_stis_ngsl_hd206778_v2.fits"
+        },
+        "falseColor": false,
+        "notes": "The color of the star's measured spectrum (HST/STIS Next Generation Spectral Library v2 (Heap & Lindler; MAST high-level science product), HD 206778). No limb darkening is drawn: no mass is measured and no spectroscopic surface gravity is published with this radius: McDonald, Zijlstra & Watson (2017), MNRAS 471, 770 assume the gravity of their fit (table column 15). The spin axis's direction on the sky is a display convention."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "McDonald, Zijlstra & Watson (2017), MNRAS 471, 770",
+      "href": "https://doi.org/10.1093/mnras/stx1433"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://doi.org/10.1093/mnras/stx1433",
+      "credit": "McDonald, Zijlstra & Watson (2017), MNRAS 471, 770"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/enif.json",
+      "credit": "McDonald, Zijlstra & Watson radius; Anderson & Francis (2012), Astronomy Letters 38, 331 (XHIP), Hipparcos astrometry position; cited distance; no measured rotation axis (display convention)"
+    }
+  }
+}

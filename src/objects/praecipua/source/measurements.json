@@ -1,0 +1,16 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "praecipua",
+  "angularDiameterMas": 2.53,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 5,502,291 km at 29.09 pc = 2.53 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 29.087,
+  "distanceSource": "McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 53229: distance 29.087 pc, the paper's parallax inverted (Gaia DR1's where it revised the star's, else the Hipparcos reduction of van Leeuwen 2007; section 2.3; fractional uncertainty 0.006), at which the luminosity and radius hold (https://doi.org/10.1093/mnras/stx1433): 29.087 +/- 0.175 pc; Gaia DR3 parallax 32.9210 +/- 0.1775 mas (same row, RUWE 2.17), 185.5 standard errors, is not used",
+  "radiusKm": 5502291.3,
+  "radiusSource": "Radius 7.909 solar radii from McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 53229: radius 7.909 solar radii, implied by the fitted luminosity 28.492 solar luminosities (fractional uncertainty 0.053) and temperature (https://doi.org/10.1093/mnras/stx1433): 5,502,291 km at 695,700 km per solar radius. No mass is measured, so GM is 0, the records' unpublished value. Temperature 4745 +/- 125 K from McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 53229: effective temperature 4745 +/- 125 K, from the fit of a model atmosphere to the star's spectral energy distribution (goodness of fit Q 0.063) (https://doi.org/10.1093/mnras/stx1433). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 4745,
+  "effectiveTemperatureSource": "McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 53229: effective temperature 4745 +/- 125 K, from the fit of a model atmosphere to the star's spectral energy distribution (goodness of fit Q 0.063) (https://doi.org/10.1093/mnras/stx1433)",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

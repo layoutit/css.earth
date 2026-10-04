@@ -1,0 +1,148 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "kang",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Kang",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 18557101.8
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/kang-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Kang",
+      "classification": "star",
+      "color": "#ffd5a2",
+      "distanceAu": 16114428.1,
+      "description": "A star 78 parsecs away, 27 times the Sun's width, measured from its light.",
+      "systemName": "Kang system",
+      "aliases": [
+        "Kappa Virginis",
+        "HD 124294",
+        "HIP 69427",
+        "HR 5315"
+      ],
+      "order": 5581,
+      "context": {
+        "order": 5578
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -1984295617824327200,
+        -1299673460053813800,
+        -429904408277447600
+      ],
+      "presentationToReference": [
+        -0.823124441141156,
+        0.14918770537616458,
+        -0.5479134812729601,
+        -0.5391298458073629,
+        0.09771485209725025,
+        0.8365350064637713,
+        -0.17834002286584186,
+        -0.9839689203649713,
+        -6.157206603995861e-8
+      ],
+      "orbitUpReference": [
+        -0.14918770537616458,
+        -0.09771485209725025,
+        0.9839689203649713
+      ],
+      "metersPerUnit": 59861618.70967742,
+      "bodyRadiusM": 18557101800
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

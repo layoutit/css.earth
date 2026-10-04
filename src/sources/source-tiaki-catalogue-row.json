@@ -1,0 +1,35 @@
+{
+  "id": "source-tiaki-catalogue-row",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Tiaki · tiaki catalogue row",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/tiaki/source/manifest.json",
+      "locator": "/inputs/6"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Anderson & Francis (2012), Astronomy Letters 38, 331 (XHIP), Hipparcos astrometry; VizieR V/137D/XHIP (CDS)",
+      "scope": "The tiaki catalogue row input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "CDS VizieR catalogue: free use with citation",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

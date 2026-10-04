@@ -1,0 +1,30 @@
+{
+ "id": "zhang",
+ "classification": "star",
+ "order": 5757,
+ "physical": {
+  "name": "Zhang",
+  "horizonsCode": null,
+  "meanRadiusKm": 10667168.1,
+  "gravitationalParameterKm3PerS2": 0,
+  "parent": null,
+  "effectiveTemperatureK": 5079
+ },
+ "physicalNotes": "Radius 15.333 solar radii from McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 48356: radius 15.333 solar radii, implied by the fitted luminosity 140.555 solar luminosities (fractional uncertainty 0.054) and temperature (https://doi.org/10.1093/mnras/stx1433): 10,667,168 km at 695,700 km per solar radius. No mass is measured, so GM is 0, the records' unpublished value. Temperature 5079 +/- 125 K from McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 48356: effective temperature 5079 +/- 125 K, from the fit of a model atmosphere to the star's spectral energy distribution (goodness of fit Q 0.04) (https://doi.org/10.1093/mnras/stx1433). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 147.86962124048864,
+  "declinationDegrees": -14.84674778224562,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 80.906,
+  "properMotionRaMasPerYear": 0,
+  "properMotionDecMasPerYear": 0,
+  "radialVelocityKmPerS": -13.883874,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 5687035813759862272 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/zhang/source/photometry/gaia-dr3-source.csv; cross-identification HD 85444, HR 3903, HIP 48356: https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia+DR3+5687035813759862272",
+   "distance": "McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 48356: distance 80.906 pc, the paper's parallax inverted (Gaia DR1's where it revised the star's, else the Hipparcos reduction of van Leeuwen 2007; section 2.3; fractional uncertainty 0.021), at which the luminosity and radius hold (https://doi.org/10.1093/mnras/stx1433): 80.906 +/- 1.699 pc; Gaia DR3 gives this source no parallax (a two-parameter solution)",
+   "properMotion": "Gaia DR3 source 5687035813759862272 is a two-parameter solution with no proper motion; zero is assumed (at 81 pc, 1 mas/yr would be 0 km/s across the sky)",
+   "radialVelocity": "Gaia DR3 (same row): -13.88 +/- 0.65 km/s"
+  }
+ }
+}

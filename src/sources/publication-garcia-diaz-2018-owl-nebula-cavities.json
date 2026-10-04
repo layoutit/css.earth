@@ -1,0 +1,43 @@
+{
+  "id": "publication-garcia-diaz-2018-owl-nebula-cavities",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "The Owl and other strigiform nebulae: multipolar cavities within a filled shell",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1806.04676"
+    },
+    {
+      "type": "doi",
+      "value": "10.1093/mnras/sty1590"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/1806.04676",
+      "label": "Published reference"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/1806.04676",
+      "checkedOn": "2026-10-03",
+      "locator": "Sect. 1: an inner shell of radius about 70 arcsec, most prominent in high-ionization lines, and a fainter outer shell of radius about 100 arcsec, most prominent in low-ionization lines; densities of about 50 and 30 per cubic cm times the same power of the filling factor. Sect. 2.3: the blue-shifted velocity channels show cavities on both sides of the central star, north-west and south-east, the red-shifted channels a single cavity on the south-east side, so at least three cavity lobes are required: one to the north-west pointing toward us, and two to the south-east, the more easterly toward us and the more southerly away. Sect. 3: a simple shell model was unsuitable; the H-alpha outline is modelled as a slightly prolate spheroid filled with uniform emission, the ratio of its axes about 1.13, at a position angle of about 60 degrees and an inclination of about 25 degrees with the north-west half pointing toward Earth; the multipolar cavity is a volume that multiplies the emission inside it by 0.3."
+    }
+  ],
+  "creators": [
+    "García-Díaz, Ma. T.",
+    "Steffen, W.",
+    "Henney, W. J.",
+    "López, J. A.",
+    "García-López, F.",
+    "González-Buitrago, D.",
+    "Áviles, A."
+  ],
+  "publisher": "MNRAS 479, 3909",
+  "publicationDate": "2018",
+  "relations": [],
+  "statements": []
+}

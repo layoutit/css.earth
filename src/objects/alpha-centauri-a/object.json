@@ -6,7 +6,7 @@
   "properties": {
     "preparation": {
       "schema": "cssearth-object-preparation@1",
-      "label": "Alpha Centauri A",
+      "label": "Rigil Kentaurus",
       "steps": [
         "verify-sources",
         "assets",
@@ -95,7 +95,7 @@
       }
     },
     "catalog": {
-      "name": "Alpha Centauri A",
+      "name": "Rigil Kentaurus",
       "classification": "star",
       "color": "#fff5f4",
       "distanceAu": 275979,
@@ -105,7 +105,10 @@
       "context": {
         "order": 1097
       },
-      "featured": true
+      "featured": true,
+      "aliases": [
+        "Alpha Centauri A"
+      ]
     },
     "worldFrame": {
       "referenceFrame": "sun-icrf",

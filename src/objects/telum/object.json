@@ -1,0 +1,148 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "telum",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Telum",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 35422956.9
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/telum-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Telum",
+      "classification": "star",
+      "color": "#ffcb8a",
+      "distanceAu": 16344141.4,
+      "description": "A star 79 parsecs away, 51 times the Sun's width, measured from its light.",
+      "systemName": "Telum system",
+      "aliases": [
+        "Gamma Sagittae",
+        "HD 189319",
+        "HIP 98337",
+        "HR 7635"
+      ],
+      "order": 5716,
+      "context": {
+        "order": 5713
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        1141632938251387800,
+        -2002324179144930300,
+        815864873811297400
+      ],
+      "presentationToReference": [
+        0.46691642222910845,
+        0.16527164340489273,
+        -0.8687199425240653,
+        -0.8189305078253999,
+        -0.28987438985378994,
+        -0.4953036053368943,
+        0.33367930413137975,
+        -0.9426866510103656,
+        0.0000011221436701900533
+      ],
+      "orbitUpReference": [
+        -0.16527164340489273,
+        0.28987438985378994,
+        0.9426866510103656
+      ],
+      "metersPerUnit": 114267602.90322581,
+      "bodyRadiusM": 35422956900
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

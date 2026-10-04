@@ -1,0 +1,16 @@
+{
+  "schema": "cssearth-stellar-photometric-color@1",
+  "objectId": "alsciaukat",
+  "spectrum": "planck",
+  "temperature": {
+    "published": {
+      "kelvin": 3900,
+      "lowerKelvin": 3775,
+      "upperKelvin": 4025,
+      "citation": "McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 41075: effective temperature 3900 +/- 125 K, from the fit of a model atmosphere to the star's spectral energy distribution (goodness of fit Q 0.165): 3900 +/- 125 K, https://doi.org/10.1093/mnras/stx1433"
+    },
+    "note": "No archive holds a spectrum of this star (stis-ngsl: HD 70272 is not in the library; pulkovo: HR 3275 is not in the catalogue; kiehling: HR 3275 is not among its 60 stars; kharitonov: HR 3275 is not in the catalogue; burnashev: BS 3275 is not in part2; gaia-xp: Gaia DR3 published no sampled BP/RP spectrum of it), so the color is a Planck spectrum at its published temperature."
+  },
+  "whitePoint": "sRGB D65",
+  "normalization": "brightest linear sRGB channel = 1"
+}

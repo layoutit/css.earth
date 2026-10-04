@@ -2,7 +2,8 @@ import { containedPath } from '@cssearth/core/node';
 /** Pinned local bake inputs. No acquisition, repository models, jobs or application path rewriting. */
 import { mkdir, readFile, rename, rm, writeFile } from 'node:fs/promises';
 import { dirname, isAbsolute, join, resolve } from 'node:path';
-export interface Pin { path: string }
+import type { CompilerPin } from '@cssearth/objects';
+export type { CompilerPin } from '@cssearth/objects';
 /** Where a download of `url` is kept in a throwaway local cache: the escaped URL itself, cut into directory names short
  * enough for any file system. The caller creates the parent directory. */
 export function urlCachePath(directory: string, url: string, extension: string): string {
@@ -15,13 +16,13 @@ export function localPath(root: string, path: string) {
     parentSeparator: 'posix', absoluteOffset: 'allow' }) === undefined) throw new Error(`Invalid recipe path: ${path}`);
   return full;
 }
-export async function pinned(root: string, pin: Pin) {
+export async function pinned(root: string, pin: CompilerPin) {
   const bytes = await readFile(localPath(root, pin.path));
   return bytes;
 }
 
 /** Compact source pins resolve symlinks and must remain within their real root. */
-export async function readCompactPin(root: string, p: Pin) {
+export async function readCompactPin(root: string, p: CompilerPin) {
   if (p.path.startsWith("/") || p.path.split("/").includes(".."))
     throw new Error("Invalid compact source path");
   const actual = await containedPath(root, resolve(root, p.path), { policy: 'realpath', rootPath: 'allow',

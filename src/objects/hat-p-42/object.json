@@ -1,0 +1,146 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "hat-p-42",
+  "parent": "hat-p-42-system",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Lerna",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 1064421
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/hat-p-42-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Lerna",
+      "classification": "star",
+      "color": "#fff1ed",
+      "distanceAu": 85379148.6,
+      "description": "HAT-P-42 b crosses Lerna as seen from Earth, which is how it was found.",
+      "systemName": "Lerna system",
+      "aliases": [
+        "HAT-P-42",
+        "TOI-571"
+      ],
+      "order": 5596,
+      "context": {
+        "order": 5593
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -9034272511641267000,
+        8926327654101463000,
+        1356592471974091800
+      ],
+      "presentationToReference": [
+        -0.7073198967062074,
+        -0.07555422116393828,
+        0.7028443094938104,
+        0.6988685747667523,
+        0.07465144734912839,
+        0.7113437120071905,
+        0.10621336510537979,
+        -0.9943433617583973,
+        -1.6834499176715502e-8
+      ],
+      "orbitUpReference": [
+        0.07555422116393828,
+        -0.07465144734912839,
+        0.9943433617583973
+      ],
+      "metersPerUnit": 3433616.129032258,
+      "bodyRadiusM": 1064421000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

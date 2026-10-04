@@ -6,7 +6,7 @@
   "properties": {
     "preparation": {
       "schema": "cssearth-object-preparation@1",
-      "label": "HATS-72",
+      "label": "Zembra",
       "steps": [
         "verify-sources",
         "assets",
@@ -95,12 +95,15 @@
       }
     },
     "catalog": {
-      "name": "HATS-72",
+      "name": "Zembra",
       "classification": "star",
       "color": "#ffceaf",
       "distanceAu": 26149098.8,
       "description": "HATS-72 b crosses HATS-72 as seen from Earth, which is how it was found.",
-      "systemName": "HATS-72 system",
+      "systemName": "Zembra system",
+      "aliases": [
+        "HATS-72"
+      ],
       "order": 3137,
       "context": {
         "order": 3134

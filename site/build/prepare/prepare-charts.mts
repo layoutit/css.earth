@@ -1,3 +1,4 @@
+import { readChartAssetRecipe } from '@cssearth/objects';
 import { access, readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -13,7 +14,7 @@ export async function prepareCharts(args: readonly string[] = [], root = resolve
     const path = resolve(root, 'src/objects', id, 'source/content/charts.json');
     const exists = await access(path).then(() => true, () => false);
     if (!exists) { if (explicit) throw new Error(`${id} has no chart recipe.`); continue; }
-    const recipe = parseChartAssetRecipe(JSON.parse(await readFile(path, 'utf8')));
+    const recipe = parseChartAssetRecipe(readChartAssetRecipe(JSON.parse(await readFile(path, 'utf8'))));
     if (!recipe.charts.length) continue;
     const charts = await refreshObjectCharts(root, id, write);
     count += charts.length;

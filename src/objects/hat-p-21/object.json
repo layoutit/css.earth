@@ -1,0 +1,146 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "hat-p-21",
+  "parent": "hat-p-21-system",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Mazaalai",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 841797
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/hat-p-21-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Mazaalai",
+      "classification": "star",
+      "color": "#fff0eb",
+      "distanceAu": 58614199.1,
+      "description": "HAT-P-21 b crosses Mazaalai as seen from Earth, which is how it was found.",
+      "systemName": "Mazaalai system",
+      "aliases": [
+        "HAT-P-21",
+        "TOI-1800"
+      ],
+      "order": 5611,
+      "context": {
+        "order": 5608
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -6538347196202978000,
+        1003435767498903200,
+        5755933123569230000
+      ],
+      "presentationToReference": [
+        -0.7456585393837433,
+        -0.6488316333451977,
+        0.15169328994621153,
+        0.11443571690302932,
+        0.09957570442430541,
+        0.988427612820126,
+        0.6564280686724114,
+        -0.7543886204463892,
+        -3.8792086252281235e-8
+      ],
+      "orbitUpReference": [
+        0.6488316333451977,
+        -0.09957570442430541,
+        0.7543886204463892
+      ],
+      "metersPerUnit": 2715474.193548387,
+      "bodyRadiusM": 841797000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

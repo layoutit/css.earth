@@ -15,7 +15,8 @@ const execFileAsync = promisify(execFile);
 /** Jobs every change runs regardless of what it touched: the merge gate and the advisory repository audit. */
 export const ALWAYS_JOBS = ['lint', 'audit'] as const;
 export const HEAVY_JOBS = ['typecheck', 'universe', 'universePreparation', 'nebula'] as const;
-export type HeavyJob = typeof HEAVY_JOBS[number];
+export const FILTERED_JOBS = ['astroquery'] as const;
+export type HeavyJob = typeof HEAVY_JOBS[number] | typeof FILTERED_JOBS[number];
 
 function isHeavyJob(value: unknown): value is HeavyJob {
   return typeof value === 'string' && (HEAVY_JOBS as readonly string[]).includes(value);
@@ -31,6 +32,7 @@ export interface CiAreasConfig {
   readonly shared: readonly string[];
   readonly areas: readonly CiArea[];
   readonly production?: readonly string[];
+  readonly astroquery?: readonly string[];
 }
 
 /** Parses and validates `.github/ci-areas.json`. Every job id an area declares must be one of the four heavy jobs —
@@ -51,7 +53,8 @@ export function parseCiAreasConfig(raw: unknown): CiAreasConfig {
   });
   const production = root.production === undefined ? [] : requireArray(root.production, 'ci-areas.json production')
     .map((value, index) => requireString(value, `ci-areas.json production[${index}]`));
-  return { shared, areas, production };
+  const astroquery = requireArray(root.astroquery ?? [], 'ci-areas.json astroquery').map(value => requireString(value, 'astroquery path'));
+  return { shared, areas, production, astroquery };
 }
 
 export async function loadCiAreasConfig(path = resolve(import.meta.dirname, '../../..', '.github', 'ci-areas.json')): Promise<CiAreasConfig> {
@@ -94,7 +97,7 @@ export function needsProductionBuild(paths: readonly string[], config: CiAreasCo
 export function affectedJobNames(result: AffectedAreas): string[] {
   // `lint` gates the merge; `audit` reports repository completeness without gating it. Both run on every change,
   // so a local plan shows the same two always-run jobs GitHub schedules (docs/ci-cd.md, "Gate on what ships").
-  return [...ALWAYS_JOBS, ...HEAVY_JOBS.flatMap(job => !result.jobs.has(job) ? [] :
+  return [...ALWAYS_JOBS, ...[...HEAVY_JOBS, ...FILTERED_JOBS].flatMap(job => !result.jobs.has(job) ? [] :
     job === 'typecheck' ? ['typecheck', 'typecheck-tests'] :
       job === 'universePreparation' ? ['universe-preparation'] : [job])];
 }
@@ -112,7 +115,7 @@ export interface AffectedAreas {
 }
 
 /** Pure decision: given the changed paths and the areas config, which heavy jobs does this change need? */
-export function classifyAffectedPaths(paths: readonly string[], config: CiAreasConfig): AffectedAreas {
+function classifyBasePaths(paths: readonly string[], config: CiAreasConfig): AffectedAreas {
   if (paths.length === 0) return { paths, shared: true, areaIds: [], jobs: new Set(HEAVY_JOBS) };
   if (paths.some(path => matchesAny(path, config.shared))) return { paths, shared: true, areaIds: [], jobs: new Set(HEAVY_JOBS) };
   const areaIds = new Set<string>();
@@ -124,6 +127,13 @@ export function classifyAffectedPaths(paths: readonly string[], config: CiAreasC
     for (const job of area.jobs) jobs.add(job);
   }
   return { paths, shared: false, areaIds: [...areaIds].sort((left, right) => left.localeCompare(right)), jobs };
+}
+
+export function classifyAffectedPaths(paths: readonly string[], config: CiAreasConfig): AffectedAreas {
+  const base = classifyBasePaths(paths, config);
+  const jobs = new Set(base.jobs);
+  if (paths.some(path => matchesAny(path, config.astroquery ?? []))) jobs.add('astroquery');
+  return { ...base, jobs };
 }
 
 async function gitChangedPaths(mode: ChangeMode, ref: string, root: string): Promise<readonly string[] | undefined> {
@@ -171,7 +181,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
     : `Areas: ${result.areaIds.join(', ') || '(none)'}; heavy jobs: ${[...result.jobs].sort().join(', ') || '(none)'}.`);
   const outputPath = process.env.GITHUB_OUTPUT;
   if (outputPath) {
-    for (const job of HEAVY_JOBS) appendFileSync(outputPath, `run_${job.replace(/[A-Z]/gu, letter => `_${letter.toLowerCase()}`)}=${result.jobs.has(job)}\n`);
+    for (const job of [...HEAVY_JOBS, ...FILTERED_JOBS]) appendFileSync(outputPath, `run_${job.replace(/[A-Z]/gu, letter => `_${letter.toLowerCase()}`)}=${result.jobs.has(job)}\n`);
     appendFileSync(outputPath, `docs_only=${!result.shared && result.areaIds.length > 0 && result.areaIds.every(id => id === 'docs')}\n`);
     appendFileSync(outputPath, `run_production=${production}\n`);
   }

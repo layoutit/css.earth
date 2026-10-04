@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "wasp-79",
+  "card": {
+    "text": "WASP-79 b crosses Montuno as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202244429",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...672A..34G/abstract",
+        "label": "Gressier et al. (2023), Astronomy & Astrophysics 672 A34",
+        "checked": "2026-10-03",
+        "locator": "NASA Exoplanet Archive ps table (st_refname GRESSIER_ET_AL__2023): st_teff 6600, st_rad 1.51, st_mass 1.39"
+      },
+      {
+        "catalogueId": "wikipedia-wasp-79",
+        "url": "https://en.wikipedia.org/wiki/WASP-79",
+        "label": "Wikipedia, \"WASP-79\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1375774697",
+        "quote": "WASP-79, also named Montuno, is an F-type main-sequence star about 801 light-years away in the constellation Eridanus."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Gressier et al. 2023.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202244429",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...672A..34G/abstract",
+        "label": "Gressier et al. (2023), Astronomy & Astrophysics 672 A34",
+        "checked": "2026-10-03",
+        "locator": "NASA Exoplanet Archive ps table (st_refname GRESSIER_ET_AL__2023): st_teff 6600, st_rad 1.51, st_mass 1.39"
+      },
+      {
+        "catalogueId": "wikipedia-wasp-79",
+        "url": "https://en.wikipedia.org/wiki/WASP-79",
+        "label": "Wikipedia, \"WASP-79\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1375774697",
+        "quote": "With an apparent magnitude of 10, it is much too faint to be visible to the naked eye."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its Gaia spectrum",
+      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

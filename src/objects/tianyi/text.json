@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "tianyi",
+  "card": {
+    "text": "A star 246 parsecs away, 72 times the Sun's width, measured from its light.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 62423: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-7-draconis",
+        "url": "https://en.wikipedia.org/wiki/7_Draconis",
+        "label": "Wikipedia, \"7 Draconis\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374551081",
+        "quote": "7 Draconis, also named Tianyi, is a single star in the northern circumpolar constellation of Draco."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its brightness, measured band by band, gives 1,017 times the Sun's luminosity at 3,837 K, so 72.281 solar radii.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 62423: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-7-draconis",
+        "url": "https://en.wikipedia.org/wiki/7_Draconis",
+        "label": "Wikipedia, \"7 Draconis\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374551081",
+        "quote": "It is visible to the naked eye as a faint orange-hued star with a stellar classification of 5.43."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its Gaia spectrum",
+      "summary": "The color of the star's light."
+    }
+  }
+}

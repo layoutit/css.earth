@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hat-p-29",
+  "card": {
+    "text": "HAT-P-29 b crosses Muspelheim as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-aa5df3",
+        "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+        "label": "Stassun et al. (2017), The Astronomical Journal 153 136",
+        "checked": "2026-10-03",
+        "locator": "NASA Exoplanet Archive ps table (st_refname STASSUN_ET_AL__2017): st_teff 6087, st_rad 1.3, st_mass 1.45"
+      },
+      {
+        "catalogueId": "wikipedia-hat-p-29",
+        "url": "https://en.wikipedia.org/wiki/HAT-P-29",
+        "label": "Wikipedia, \"HAT-P-29\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374864362",
+        "quote": "HAT-P-29, also known as Muspelheim since 2019, is a star about 1,040 light-years away."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Stassun et al. 2017.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-aa5df3",
+        "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+        "label": "Stassun et al. (2017), The Astronomical Journal 153 136",
+        "checked": "2026-10-03",
+        "locator": "NASA Exoplanet Archive ps table (st_refname STASSUN_ET_AL__2017): st_teff 6087, st_rad 1.3, st_mass 1.45"
+      },
+      {
+        "catalogueId": "wikipedia-hat-p-29",
+        "url": "https://en.wikipedia.org/wiki/HAT-P-29",
+        "label": "Wikipedia, \"HAT-P-29\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374864362",
+        "quote": "It is an F-type main-sequence star."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its Gaia spectrum",
+      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

@@ -6,7 +6,7 @@
   "properties": {
     "preparation": {
       "schema": "cssearth-object-preparation@1",
-      "label": "WASP-166",
+      "label": "Filetdor",
       "steps": [
         "verify-sources",
         "assets",
@@ -95,12 +95,15 @@
       }
     },
     "catalog": {
-      "name": "WASP-166",
+      "name": "Filetdor",
       "classification": "star",
       "color": "#fff7ff",
       "distanceAu": 23567068.9,
       "description": "WASP-166 b crosses WASP-166 as seen from Earth, which is how it was found.",
-      "systemName": "WASP-166 system",
+      "systemName": "Filetdor system",
+      "aliases": [
+        "WASP-166"
+      ],
       "order": 4798,
       "context": {
         "order": 4795

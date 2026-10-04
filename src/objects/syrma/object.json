@@ -1,0 +1,148 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "syrma",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Syrma",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 1837343.7
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/syrma-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Syrma",
+      "classification": "star",
+      "color": "#f9f6ff",
+      "distanceAu": 4586737.4,
+      "description": "A star 22 parsecs away, 2.6 times the Sun's width, measured from its light.",
+      "systemName": "Syrma system",
+      "aliases": [
+        "HD 124850",
+        "HIP 69701",
+        "HR 5338",
+        "Iota Virginis"
+      ],
+      "order": 5705,
+      "context": {
+        "order": 5702
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -565714717465908540,
+        -381628522189064900,
+        -71767014803435320
+      ],
+      "presentationToReference": [
+        -0.8244592079270336,
+        0.08668885812651834,
+        -0.5592423949782855,
+        -0.5561763542901663,
+        0.058480075834157756,
+        0.8290041879622386,
+        -0.10456996410455419,
+        -0.994517532579065,
+        1.439313581384018e-7
+      ],
+      "orbitUpReference": [
+        -0.08668885812651834,
+        -0.058480075834157756,
+        0.994517532579065
+      ],
+      "metersPerUnit": 5926915.161290322,
+      "bodyRadiusM": 1837343700
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

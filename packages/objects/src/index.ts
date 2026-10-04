@@ -196,7 +196,7 @@ export { OBJECT_SCHEMA, PREPARED_OBJECT_SCHEMA } from './descriptor.js';
 
 export { OBJECT_TEXT_SCHEMA, PREPARED_TEXT_SCHEMA, parseCitedText, parseObjectText, parsePreparedText, type TextCitation, type CitedText, type ObjectTextDataset, type ObjectText, type PreparedObjectText } from './prepared-data/object-text.js';
 export { ARCHIVED_CAMERA_SCHEMA, archivedCameraFields, parseArchivedCamera, parseMatrixArchivedCamera, type ArchivedCamera, type SpiceCamera } from './prepared-data/archived-camera.js';
-export { PREPARED_DESTINATIONS_SCHEMA, parsePreparedDestinations, type PreparedDestination, type PreparedDestinations, type DestinationSearchRecord } from './prepared-data/prepared-destinations.js';
+export { PREPARED_DESTINATIONS_SCHEMA, parsePreparedDestinations, readDestinationSettlements, type PreparedDestination, type PreparedDestinations, type DestinationSearchRecord } from './prepared-data/prepared-destinations.js';
 export { AUTHORED_PREPARATION_SCHEMA, type AuthoredPreparationReceipt, readAuthoredPreparationSources, readPublishedPreparationSources } from './prepared-data/authored-preparation.js';
 export { WORLD_NAVIGATION_PREPARATION_SCHEMA, type WorldNavigationPreparationReceipt, samePreparedWorldFrame, requireWorldNavigationReceiptIdentity, requireWorldNavigationReceiptContext } from './prepared-data/world-navigation-preparation.js';
 export { PREPARED_FEATURES_SCHEMA, type PreparedFeaturesDescriptor, readPreparedFeaturePins } from './prepared-data/prepared-features.js';
@@ -263,3 +263,22 @@ export { validateChannelGain, type ChannelGain } from './volume/channel-gain.js'
 export { sourceRecordReaders } from './prepared-data/source-record-readers.js';
 
 export type { DeliveryAssertion, DeliveryValidationPolicy } from './volume/delivery-validation-policy.js';
+
+export { SHAPE_MODEL_SCHEMA, readShapeModelDiscovery, readRuntimeCamera, readRuntimeCameraPrefix } from './prepared-data/discovery-readers.js';
+export { parseVolumePresentationSource } from './prepared-data/volume-presentation-source.js';
+export { readChartAssetRecipe, readSourceManifestInputs, readFeatureSearchCatalog, readRuntimeFeatureDatasets, readRasterDiscovery } from './prepared-data/build-projections.js';
+export { SYSTEM_TEXT_SCHEMA, readSystemText } from './prepared-data/build-projections.js';
+export { readObjectContentDatasets, readObjectContentPanel } from './prepared-data/object-content.js';
+export { readCataloguePresentationDistances } from './prepared-data/build-projections.js';
+export { type FormatReaderPolicy } from './prepared-data/format-reader-ledger.js';
+export { PREPARED_VOLUME_PRESENTATION_SCHEMA, DENSITY_VOLUME_DATASET_BANK_SOURCE_SCHEMA, readVolumePresentationPreviews, readVolumeAttachment, readGalaxyBackingSource } from './prepared-data/build-projections.js';
+export { hasVolumePresentationSource } from './prepared-data/volume-presentation-source.js';
+export { WORLD_CONTEXT_SOURCE_SCHEMA, readWorldContextSourceSelection, STELLAR_EXTENT_SOURCE_SCHEMA, readStellarExtent } from './prepared-data/build-projections.js';
+export { readPreparedPanelContentRecord, readComparableSource, readObjectDescriptorRecord } from './prepared-data/build-projections.js';
+export { readStellarDotMeasurements, readFeatureMapLongitude } from './prepared-data/build-projections.js';
+
+export { PACKAGED_POINTS_SOURCE_SCHEMA, readPackagedPointsFrame } from './prepared-data/build-projections.js';
+
+export { HOSTED_PLANET_MEASUREMENTS_SCHEMA, NEUTRON_STAR_MEASUREMENTS_SCHEMA, readPreparedChartContentRecord } from './prepared-data/build-projections.js';
+
+export { MAP_SPHERE_DATASETS_SCHEMA, readMapSphereDatasetPreviews } from './prepared-data/map-sphere-datasets.js';

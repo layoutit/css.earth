@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "xo-4b",
+  "card": {
+    "text": "XO-4 b was found in 2010 by Lowell Observatory as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-aa5df3",
+        "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+        "label": "Stassun et al. 2017",
+        "checked": "2026-10-03",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname STASSUN_ET_AL__2017): disc_year 2010, disc_facility Lowell Observatory, sy_pnum 1; pl_orbper 4.12506679, pl_radj 1.25, pl_bmassj 1.42"
+      },
+      {
+        "catalogueId": "wikipedia-xo-4b",
+        "url": "https://en.wikipedia.org/wiki/XO-4b",
+        "label": "Wikipedia, \"XO-4b\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374245034",
+        "quote": "XO-4b is an extrasolar planet approximately 956 light years away in the constellation of Lynx."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is the only planet known around Koit. Its orbit and size follow Stassun et al. 2017's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-aa5df3",
+        "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+        "label": "Stassun et al. 2017",
+        "checked": "2026-10-03",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname STASSUN_ET_AL__2017): disc_year 2010, disc_facility Lowell Observatory, sy_pnum 1; pl_orbper 4.12506679, pl_radj 1.25, pl_bmassj 1.42"
+      },
+      {
+        "catalogueId": "wikipedia-xo-4b",
+        "url": "https://en.wikipedia.org/wiki/XO-4b",
+        "label": "Wikipedia, \"XO-4b\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374245034",
+        "quote": "This planet was found by the transit method by McCullough in May 2008."
+      }
+    ]
+  },
+  "datasets": {
+    "thermal": {
+      "title": "Dayside heat",
+      "detail": "From its dayside temperature",
+      "summary": "The color of a black body at the 1,961 K day side measured in eclipse."
+    }
+  }
+}

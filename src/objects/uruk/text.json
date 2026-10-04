@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "uruk",
+  "card": {
+    "text": "A star about 110 parsecs away, 1.4 times the Sun's width, measured by Gaia.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202243688",
+        "url": "https://doi.org/10.1051/0004-6361/202243688",
+        "label": "Creevey et al. (2023), Astronomy & Astrophysics 674 A26",
+        "checked": "2026-10-03",
+        "locator": "gaiadr3.astrophysical_parameters, Gaia DR3 4321678767076043264: radius_flame, mass_flame, teff_gspphot"
+      },
+      {
+        "catalogueId": "wikipedia-hd-231701",
+        "url": "https://en.wikipedia.org/wiki/HD_231701",
+        "label": "Wikipedia, \"HD 231701\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374435751",
+        "quote": "HD 231701 is a yellow-white hued star in the northern constellation of Sagitta, near the southern constellation border with Aquila."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Gaia's parallax, brightness and spectrum give it 1.4 solar radii and 1.17 solar masses (FLAME) and 6,054 K at its surface (GSP-Phot).",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202243688",
+        "url": "https://doi.org/10.1051/0004-6361/202243688",
+        "label": "Creevey et al. (2023), Astronomy & Astrophysics 674 A26",
+        "checked": "2026-10-03",
+        "locator": "gaiadr3.astrophysical_parameters, Gaia DR3 4321678767076043264: radius_flame, mass_flame, teff_gspphot"
+      },
+      {
+        "catalogueId": "wikipedia-hd-231701",
+        "url": "https://en.wikipedia.org/wiki/HD_231701",
+        "label": "Wikipedia, \"HD 231701\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374435751",
+        "quote": "With an apparent visual magnitude of 8.97, it is too dim to be viewed with the naked eye, but can be seen with powerful binoculars or a small telescope."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its temperature",
+      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

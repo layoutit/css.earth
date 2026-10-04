@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "wasp-72b",
+  "card": {
+    "text": "WASP-72 b was found in 2012 by SuperWASP as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-aa5df3",
+        "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+        "label": "Stassun et al. 2017",
+        "checked": "2026-10-03",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname STASSUN_ET_AL__2017): disc_year 2012, disc_facility SuperWASP, sy_pnum 1; pl_orbper 2.21674331, pl_radj 1.29, pl_bmassj 2.3"
+      },
+      {
+        "catalogueId": "wikipedia-wasp-72",
+        "url": "https://en.wikipedia.org/wiki/WASP-72",
+        "label": "Wikipedia, \"WASP-72\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374785622",
+        "quote": "It is orbited by a planet, WASP-72b."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is the only planet known around Diya. Its orbit and size follow Stassun et al. 2017's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-aa5df3",
+        "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+        "label": "Stassun et al. 2017",
+        "checked": "2026-10-03",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname STASSUN_ET_AL__2017): disc_year 2012, disc_facility SuperWASP, sy_pnum 1; pl_orbper 2.21674331, pl_radj 1.29, pl_bmassj 2.3"
+      },
+      {
+        "catalogueId": "wikipedia-wasp-72",
+        "url": "https://en.wikipedia.org/wiki/WASP-72",
+        "label": "Wikipedia, \"WASP-72\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374785622",
+        "quote": "The age of WASP-72 is younger than the Sun at 3.55±0.82 billion years."
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

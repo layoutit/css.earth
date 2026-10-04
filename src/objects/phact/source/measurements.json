@@ -1,0 +1,16 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "phact",
+  "angularDiameterMas": 1.21,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 7,259,630 km at 80.13 pc = 1.21 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 80.128,
+  "distanceSource": "McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 26634: distance 80.128 pc, the paper's parallax inverted (Gaia DR1's where it revised the star's, else the Hipparcos reduction of van Leeuwen 2007; section 2.3; fractional uncertainty 0.029), at which the luminosity and radius hold (https://doi.org/10.1093/mnras/stx1433): 80.128 +/- 2.324 pc; Gaia DR3 parallax 11.4008 +/- 0.4452 mas (same row, RUWE 2.12), 25.6 standard errors, is not used",
+  "radiusKm": 7259629.5,
+  "radiusSource": "Radius 10.435 solar radii from McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 26634: radius 10.435 solar radii, implied by the fitted luminosity 411.675 solar luminosities (fractional uncertainty 0.874) and temperature (https://doi.org/10.1093/mnras/stx1433): 7,259,630 km at 695,700 km per solar radius. No mass is measured, so GM is 0, the records' unpublished value. Temperature 8054 +/- 3803 K from McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 26634: effective temperature 8054 +/- 3803 K, from the fit of a model atmosphere to the star's spectral energy distribution (goodness of fit Q 0.31) (https://doi.org/10.1093/mnras/stx1433). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 8054,
+  "effectiveTemperatureSource": "McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 26634: effective temperature 8054 +/- 3803 K, from the fit of a model atmosphere to the star's spectral energy distribution (goodness of fit Q 0.31) (https://doi.org/10.1093/mnras/stx1433)",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, colored from the star's measured spectrum (Burnashev (1985), Abastumani Astrophys. Obs. Bull. 59, 83; VizieR III/126, part2 record 69 (BS 1956)) (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

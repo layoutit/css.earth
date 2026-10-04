@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "hat-p-29-system",
+  "parent": "milky-way",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "hat-p-29"
+    },
+    "catalog": {
+      "name": "Muspelheim system",
+      "systemName": "Muspelheim system",
+      "classification": "planetary-system",
+      "color": "#fff1ec",
+      "distanceAu": 65776404.7,
+      "description": "HAT-P-29 b crosses Muspelheim as seen from Earth, which is how it was found."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        5098236431038662000,
+        3327435871029098000,
+        7730585643611035000
+      ],
+      "presentationToReference": [
+        0.5181129880716734,
+        0.6579021799248664,
+        0.546556175741845,
+        0.3381537449421308,
+        0.4293899137419593,
+        -0.8374224422346737,
+        0.7856277594211234,
+        -0.6186994614728393,
+        -4.053094994970308e-7
+      ],
+      "orbitUpReference": [
+        -0.6579021799248664,
+        -0.4293899137419593,
+        0.6186994614728393
+      ],
+      "metersPerUnit": 2917451.6129032257,
+      "bodyRadiusM": 904410000
+    }
+  }
+}

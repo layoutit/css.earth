@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "yunyu",
+  "card": {
+    "text": "A star 42 parsecs away, 11 times the Sun's width, measured from its light.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 114971: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-gamma-piscium",
+        "url": "https://en.wikipedia.org/wiki/Gamma_Piscium",
+        "label": "Wikipedia, \"Gamma Piscium\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1375892483",
+        "quote": "Gamma Piscium, also named Yunyu, is a star approximately 135 light-years away from Earth in the equatorial-northern zodiac constellation of Pisces."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its brightness, measured band by band, gives 63 times the Sun's luminosity at 4,896 K, so 11.028 solar radii.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 114971: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-gamma-piscium",
+        "url": "https://en.wikipedia.org/wiki/Gamma_Piscium",
+        "label": "Wikipedia, \"Gamma Piscium\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1375892483",
+        "quote": "It is a yellow star with a spectral type of G8 III, meaning it has a surface temperature of 4,833 K and is a giant star."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its spectrum",
+      "summary": "The color of the star's light."
+    }
+  }
+}

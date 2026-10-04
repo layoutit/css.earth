@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "wasp-71",
+  "card": {
+    "text": "WASP-71 b crosses Mpingo as seen from Earth, which is how it was found.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-aa5df3",
+        "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+        "label": "Stassun et al. (2017), The Astronomical Journal 153 136",
+        "checked": "2026-10-03",
+        "locator": "NASA Exoplanet Archive ps table (st_refname STASSUN_ET_AL__2017): st_teff 6050, st_rad 1.82, st_mass 0.76"
+      },
+      {
+        "catalogueId": "wikipedia-wasp-71",
+        "url": "https://en.wikipedia.org/wiki/WASP-71",
+        "label": "Wikipedia, \"WASP-71\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1360400454",
+        "quote": "WASP-71, also named Mpingo, is an ordinary star with a close-orbiting planetary companion in the equatorial constellation of Cetus."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its radius and temperature follow Stassun et al. 2017.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-aa5df3",
+        "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+        "label": "Stassun et al. (2017), The Astronomical Journal 153 136",
+        "checked": "2026-10-03",
+        "locator": "NASA Exoplanet Archive ps table (st_refname STASSUN_ET_AL__2017): st_teff 6050, st_rad 1.82, st_mass 0.76"
+      },
+      {
+        "catalogueId": "wikipedia-wasp-71",
+        "url": "https://en.wikipedia.org/wiki/WASP-71",
+        "label": "Wikipedia, \"WASP-71\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1360400454",
+        "quote": "With an apparent visual magnitude of 10.56, it is too faint to be visible to the naked eye."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its Gaia spectrum",
+      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "tengshe",
+  "card": {
+    "text": "A star 490 parsecs away, 212 times the Sun's width, measured from its light.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 113288: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-v424-lacertae",
+        "url": "https://en.wikipedia.org/wiki/V424_Lacertae",
+        "label": "Wikipedia, \"V424 Lacertae\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1367909073",
+        "quote": "V424 Lacertae, also named Tengshe, is a red supergiant and a variable star in the constellation Lacerta."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its brightness, measured band by band, gives 7,747 times the Sun's luminosity at 3,724 K, so 211.738 solar radii.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 113288: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-v424-lacertae",
+        "url": "https://en.wikipedia.org/wiki/V424_Lacertae",
+        "label": "Wikipedia, \"V424 Lacertae\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1367909073",
+        "quote": "It is a member of the Lacerta OB1 stellar association."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its Gaia spectrum",
+      "summary": "The color of the star's light."
+    }
+  }
+}

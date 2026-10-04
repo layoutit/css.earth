@@ -1,0 +1,55 @@
+{
+  "id": "veritate",
+  "name": "Veritate",
+  "system": "Veritate system",
+  "description": "A star 79 parsecs away, 14 times the Sun's width, measured from its light.",
+  "aliases": [
+    "HD 221345",
+    "HIP 116076",
+    "HR 8930",
+    "14 Andromedae"
+  ],
+  "featured": true,
+  "target": "HIP 116076",
+  "paper": {
+    "url": "https://doi.org/10.1093/mnras/stx1433",
+    "credit": "McDonald, Zijlstra & Watson (2017), MNRAS 471, 770"
+  },
+  "radius": {
+    "value": 13.58,
+    "source": "McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 116076: radius 13.58 solar radii, implied by the fitted luminosity 68.489 solar luminosities (fractional uncertainty 0.059) and temperature",
+    "url": "https://doi.org/10.1093/mnras/stx1433"
+  },
+  "mass": "unmeasured",
+  "temperature": {
+    "value": 4509,
+    "source": "McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 116076: effective temperature 4509 +/- 125 K, from the fit of a model atmosphere to the star's spectral energy distribution (goodness of fit Q 0.131)",
+    "url": "https://doi.org/10.1093/mnras/stx1433",
+    "uncertainty": 125
+  },
+  "distance": {
+    "value": 79.177,
+    "source": "McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 116076: distance 79.177 pc, the paper's parallax inverted (Gaia DR1's where it revised the star's, else the Hipparcos reduction of van Leeuwen 2007; section 2.3; fractional uncertainty 0.021), at which the luminosity and radius hold",
+    "url": "https://doi.org/10.1093/mnras/stx1433",
+    "uncertainty": 1.663
+  },
+  "limb": {
+    "none": "no mass is measured and no spectroscopic surface gravity is published with this radius: McDonald, Zijlstra & Watson (2017), MNRAS 471, 770 assume the gravity of their fit (table column 15)"
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A star 79 parsecs away, 14 times the Sun's width, measured from its light.",
+    "introduction": "Its brightness, measured band by band, gives 68 times the Sun's luminosity at 4,509 K, so 13.58 solar radii.",
+    "locator": "Table 2, HIP 116076: D, Teff, L, Rad, Q",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/14_Andromedae",
+      "title": "14 Andromedae",
+      "revision": "1374546255",
+      "card": "14 Andromedae, abbreviated 14 And, also named Veritate, is a single, orange-hued giant star situated 248 light-years away in the northern constellation of Andromeda.",
+      "introduction": "It is dimly visible to the naked eye with an apparent visual magnitude of 5.22."
+    }
+  },
+  "notes": [],
+  "order": 5744
+}

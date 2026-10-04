@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hat-p-14b",
+  "card": {
+    "text": "HAT-P-14 b was found in 2010 by HATNet as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-aa5df3",
+        "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+        "label": "Stassun et al. 2017",
+        "checked": "2026-10-03",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname STASSUN_ET_AL__2017): disc_year 2010, disc_facility HATNet, sy_pnum 1; pl_orbper 4.62766098, pl_radj 1.42, pl_bmassj 3.44"
+      },
+      {
+        "catalogueId": "wikipedia-hat-p-14b",
+        "url": "https://en.wikipedia.org/wiki/HAT-P-14b",
+        "label": "Wikipedia, \"HAT-P-14b\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374169060",
+        "quote": "HAT-P-14b, officially named Sissi and also known as WASP-27b, is an extrasolar planet located approximately 224.2 ± 0.6 parsecs (731.2 ± 2.0 ly) away in the constellation of Hercules, orbiting the 10th magnitude F-type main-sequence star HAT-P-14."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is the only planet known around Franz. Its orbit and size follow Stassun et al. 2017's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-aa5df3",
+        "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+        "label": "Stassun et al. 2017",
+        "checked": "2026-10-03",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname STASSUN_ET_AL__2017): disc_year 2010, disc_facility HATNet, sy_pnum 1; pl_orbper 4.62766098, pl_radj 1.42, pl_bmassj 3.44"
+      },
+      {
+        "catalogueId": "wikipedia-hat-p-14b",
+        "url": "https://en.wikipedia.org/wiki/HAT-P-14b",
+        "label": "Wikipedia, \"HAT-P-14b\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374169060",
+        "quote": "This planet was discovered in 2010 by the HATNet Project using the transit method."
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Published radius",
+      "summary": "A sphere at the published size. No picture of its surface exists."
+    }
+  }
+}

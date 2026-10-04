@@ -14,11 +14,12 @@ import { assetOrigin, resolveWorldBillboards } from "./site/asset-origin.mts";
 
 function cssEarthVersion() {
   try {
-    const commitCount = execSync("git rev-list --count HEAD", {
+    const commitCount = Number(execSync("git rev-list --count HEAD", {
       encoding: "utf8",
       stdio: ["ignore", "pipe", "ignore"],
-    }).trim();
-    return `0.${commitCount}`;
+    }).trim());
+    // Every 10,000 commits start a major version: commit 9,999 is 0.9999, 10,000 is 1.0 and 10,001 is 1.1.
+    return `${Math.floor(commitCount / 10000)}.${commitCount % 10000}`;
   } catch {
     return "0.0";
   }

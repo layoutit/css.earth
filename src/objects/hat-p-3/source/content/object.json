@@ -2,7 +2,7 @@
   "schema": "cssearth-object-content@2",
   "version": 1,
   "id": "hat-p-3",
-  "displayName": "HAT-P-3",
+  "displayName": "Dombay",
   "panel": {
     "facts": [
       {
@@ -13,7 +13,7 @@
           "catalogueId": "doi-10-3847-1538-3881-aa5df3",
           "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S",
           "label": "Stassun et al. (2017), The Astronomical Journal 153 136",
-          "checked": "2026-09-29",
+          "checked": "2026-10-03",
           "path": "source/measurements.json",
           "locator": "radiusKm; radiusSource"
         }
@@ -26,7 +26,7 @@
           "catalogueId": "gaia-dr3-hat-p-3",
           "url": "https://gea.esac.esa.int/archive/",
           "label": "Gaia DR3 parallax",
-          "checked": "2026-09-29",
+          "checked": "2026-10-03",
           "path": "source/measurements.json",
           "locator": "distanceParsecs; distanceSource"
         }

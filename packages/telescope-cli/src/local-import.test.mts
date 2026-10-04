@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
-import { astroqueryToolchain } from '@cssearth/telescope/node';
+import { WORKSPACE, astroqueryToolchain } from '@cssearth/telescope/node';
 test.before(async () => { await astroqueryToolchain(); });
 import { copyFile, mkdtemp, mkdir, readFile, rm, symlink, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
@@ -34,7 +34,7 @@ test('local import specification is data-only and exact',()=>{
 test('one pinned local FITS science member uses the shared image output route without claiming archive calibration',async()=>{
   const root=await mkdtemp(resolve(tmpdir(),'telescope-import-fits-'));
   try{
-    const file=resolve(import.meta.dirname,'fixtures/fits/float32.fits');
+    const file=resolve(WORKSPACE,'packages/fits/src/node/fixtures/fits/float32.fits');
     const imported=await importLocalArtifact({schema:'cssearth-telescope-local-import-spec@1',datasetId:'generic-fits',
       sources:[{path:file,role:'science'}],limits:{maxMembers:1,maxBytes:10000,maxFileBytes:10000}},resolve(root,'imported'));
     const offered=await listArtifactOutputs(imported.receipt);

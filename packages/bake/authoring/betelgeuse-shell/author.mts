@@ -1041,7 +1041,7 @@ if (direct) {
   } else {
     const selected = process.argv.find(arg => arg.startsWith('--default='))?.slice(10);
     const result = await author(selected);
-    await writeOrCheckAuthoredOutputs(root, result.outputs, { check, missingFile: 'mismatch-on-read-error',
+    await writeOrCheckAuthoredOutputs(root, result.outputs, { check, readError: 'mismatch-on-read-error',
       mkdir: 'root-before-write-or-check', mismatchMessage: name => `Authored output differs: ${name}` });
     console.log(`${check ? 'CHECKED' : 'AUTHORED'} betelgeuse-shell: ${JSON.stringify(result.measured)}; grid ${GRID.size}^3; ${JSON.stringify(result.grids)}`);
   }

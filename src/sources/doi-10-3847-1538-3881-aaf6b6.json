@@ -1,0 +1,47 @@
+{
+  "id": "doi-10-3847-1538-3881-aaf6b6",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Wang et al. (2019): Transiting Exoplanet Monitoring Project (TEMP). V. Transit Follow Up for HAT-P-9b, HAT-P-32b, and HAT-P-36b",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-3881/aaf6b6"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2019AJ....157...82W"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2019AJ....157...82W",
+      "label": "Publisher"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2019AJ....157...82W",
+      "checkedOn": "2026-10-03",
+      "locator": "Crossref record: title, authors, container"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Wang et al. (2019), The Astronomical Journal 157 82",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2019AJ....157...82W"
+    }
+  ],
+  "publisher": "The Astronomical Journal 157 82",
+  "creators": [
+    "Yong-Hao Wang",
+    "Songhu Wang",
+    "Tobias C. Hinse",
+    "et al."
+  ],
+  "publicationDate": "2019"
+}

@@ -1,0 +1,145 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "wasp-19",
+  "parent": "wasp-19-system",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Wattle",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 699874.2
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/wasp-19-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Wattle",
+      "classification": "star",
+      "color": "#ffeade",
+      "distanceAu": 54980345,
+      "description": "WASP-19 b crosses Wattle as seen from Earth, which is how it was found.",
+      "systemName": "Wattle system",
+      "aliases": [
+        "WASP-19"
+      ],
+      "order": 5746,
+      "context": {
+        "order": 5743
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -4897136801223669000,
+        3010782039188641300,
+        -5882424877419734000
+      ],
+      "presentationToReference": [
+        -0.5954001833601302,
+        0.6092596404289257,
+        0.5237378277336281,
+        0.36605474810343774,
+        -0.3745734021414085,
+        0.8518795030983781,
+        -0.7151940597108257,
+        -0.6989259309487857,
+        0.000001311889979030906
+      ],
+      "orbitUpReference": [
+        -0.6092596404289257,
+        0.3745734021414085,
+        0.6989259309487857
+      ],
+      "metersPerUnit": 2257658.709677419,
+      "bodyRadiusM": 699874200
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

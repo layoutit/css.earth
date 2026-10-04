@@ -1,0 +1,135 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "wasp-79b",
+  "displayName": "WASP-79 b",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "1.5 Jupiter radii",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202244429",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...672A..34G",
+          "label": "Gressier et al. 2023",
+          "checked": "2026-10-03",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "3.66 days",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202244429",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...672A..34G",
+          "label": "Gressier et al. 2023",
+          "checked": "2026-10-03",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.85 Jupiter masses",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-202244429",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...672A..34G",
+          "label": "Gressier et al. 2023",
+          "checked": "2026-10-03",
+          "path": "source/measurements.json",
+          "locator": "massSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "shape",
+    "controls": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "qualification": "A sphere of the published radius, lit by Montuno; the neutral gray is a display convention, not a measured color.",
+        "thumbnail": "wasp-79b-dataset-shape.webp",
+        "surface": "wasp-79b-surface-shape@2x.webp",
+        "poles": "wasp-79b-poles-shape@2x.webp",
+        "source": {
+          "id": "wasp-79b-observational-measurements",
+          "path": "../manifest.json",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...672A..34G/abstract"
+        },
+        "falseColor": false,
+        "notes": "No image or color of WASP-79 b is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the color of wasp-79's light, as its color dataset measures it."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [
+    {
+      "id": "wasp-79b-orbits",
+      "titleKey": "systemOrbits",
+      "src": "/scenes/wasp-79b/wasp-79b-system-orbits.svg",
+      "alt": "The orbits of Montuno's planets in this map from above, to scale, with WASP-79 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "source": {
+        "id": "wasp-79b-observational-measurements",
+        "path": "../manifest.json",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...672A..34G"
+      }
+    },
+    {
+      "id": "wasp-79b-transmission",
+      "titleKey": "transmissionSpectrum",
+      "src": "/scenes/wasp-79b/wasp-79b-transmission.svg",
+      "alt": "WASP-79 b's transmission spectrum: the fraction of starlight the planet blocks as it crosses its star, larger where its atmosphere absorbs. 26 measured bins from Sotzen et al. 2020 (Magellan II Landon Clay Telescope, LDSS-3C; Transiting Exoplanet Survey Satellite, TESS CCD Array; Hubble Space Telescope satellite, Wide Field Camera 3; Spitzer Space Telescope satellite, Infrared Array Camera (IRAC)), as the NASA Exoplanet Archive lists them. Horizontal bars are wavelength bins; vertical bars are the published 1-sigma errors.",
+      "source": {
+        "id": "wasp-79b-archive-transmission",
+        "path": "../manifest.json",
+        "url": "https://ui.adsabs.harvard.edu/abs/2020AJ....159....5S/abstract"
+      }
+    },
+    {
+      "id": "wasp-79b-transit",
+      "titleKey": "transitLightCurve",
+      "src": "/scenes/wasp-79b/wasp-79b-transit.svg",
+      "alt": "WASP-79 b crossing its star, as TESS recorded it: 3 sectors (32, 106, 107) of the SPOC pipeline's 2-minute light curves of TIC 170634116, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 15-minute bins. Error bars are each bin's standard error.",
+      "source": {
+        "id": "wasp-79b-tess-sector-32",
+        "path": "../manifest.json",
+        "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2020324010417-s0032-0000000170634116-0200-s_lc.fits"
+      }
+    }
+  ],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Gressier et al. 2023",
+      "href": "https://ui.adsabs.harvard.edu/abs/2023A&A...672A..34G/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...672A..34G/abstract",
+      "credit": "Gressier et al. 2023"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/wasp-79b.json",
+      "credit": "Radius from Gressier et al. 2023 (2023A&A...672A..34G), via the NASA Exoplanet Archive; mass from Gressier et al. 2023, the mass the NASA Exoplanet Archive's composite table adopts (2023A&A...672A..34G), via the NASA Exoplanet Archive; orbit from Gressier et al. 2023 (2023A&A...672A..34G), via the NASA Exoplanet Archive"
+    }
+  }
+}

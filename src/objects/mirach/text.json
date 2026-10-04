@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "mirach",
+  "card": {
+    "text": "A star 61 parsecs away, 86 times the Sun's width, measured from its light.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 5447: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-mirach",
+        "url": "https://en.wikipedia.org/wiki/Mirach",
+        "label": "Wikipedia, \"Mirach\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374584335",
+        "quote": "It is pronounced and has the Bayer designation Beta Andromedae, which is Latinized from β Andromedae."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its brightness, measured band by band, gives 1,404 times the Sun's luminosity at 3,802 K, so 86.471 solar radii.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 5447: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-mirach",
+        "url": "https://en.wikipedia.org/wiki/Mirach",
+        "label": "Wikipedia, \"Mirach\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374584335",
+        "quote": "This star is positioned northeast of the Great Square of Pegasus and is potentially visible to all observers north of latitude 54° S. It is commonly used by stargazers to find the Andromeda Galaxy."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its spectrum",
+      "summary": "The color of the star's light."
+    }
+  }
+}

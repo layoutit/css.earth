@@ -1,0 +1,30 @@
+{
+ "id": "lucilinburhuc",
+ "classification": "star",
+ "order": 5602,
+ "physical": {
+  "name": "Lucilinburhuc",
+  "horizonsCode": null,
+  "meanRadiusKm": 884373.7,
+  "gravitationalParameterKm3PerS2": 121960184319.69348,
+  "parent": null,
+  "effectiveTemperatureK": 5502
+ },
+ "physicalNotes": "Radius 1.271 (1.246 to 1.297) from Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26; astrophysical_parameters of the same source): 884,374 km at 695,700 km per solar radius. Mass 0.919 (0.879 to 0.959) from Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26; astrophysical_parameters of the same source); GM is that mass times the JPL solar GM. Temperature 5502 +/- 1.6 K from Andrae et al. (2023), A&A 674, A27 (Gaia DR3 GSP-Phot), astrophysical_parameters of Gaia DR3 955758320761687680: teff_gspphot 5502.319 K (16th-84th percentiles 5501.28-5504.5), the temperature FLAME used (https://doi.org/10.1051/0004-6361/202243462). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 97.19021847783753,
+  "declinationDegrees": 38.9627241037441,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 46.96817424709723,
+  "properMotionRaMasPerYear": -42.748105584726815,
+  "properMotionDecMasPerYear": -53.73572876980411,
+  "radialVelocityKmPerS": -20.82253,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 955758320761687680 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/lucilinburhuc/source/photometry/gaia-dr3-source.csv; cross-identification HD 45350, HIP 30860: https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia+DR3+955758320761687680",
+   "distance": "Gaia DR3 parallax 21.2910 +/- 0.0285 mas (same row, RUWE 0.99): 46.97 pc, no zero-point correction",
+   "properMotion": "Gaia DR3 (same row): -42.748, -53.736 mas/yr",
+   "radialVelocity": "Gaia DR3 (same row): -20.82 +/- 0.13 km/s"
+  }
+ }
+}

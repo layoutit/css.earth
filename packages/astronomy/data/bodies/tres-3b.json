@@ -1,0 +1,28 @@
+{
+ "id": "tres-3b",
+ "classification": "exoplanet",
+ "order": 5667,
+ "physical": {
+  "name": "TrES-3 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 95513.3,
+  "gravitationalParameterKm3PerS2": 241971275.93,
+  "parent": "tres-3"
+ },
+ "physicalNotes": "Radius 1.336 Jupiter radii from Sozzetti et al. 2009 (2009ApJ...691.1145S), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2009ApJ...691.1145S/abstract): 95,513.3 km at 71,492 km per Jupiter radius. GM from the mass 1.91 Jupiter masses (Sozzetti et al. 2009, the mass the NASA Exoplanet Archive's composite table adopts (2009ApJ...691.1145S), via the NASA Exoplanet Archive, https://ui.adsabs.harvard.edu/abs/2009ApJ...691.1145S/abstract) times JPL's Jupiter GM. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 1.30618626966,
+  "semiMajorAxisStellarRadii": 5.926,
+  "inclinationDegrees": 81.85,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 54185.411135,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Sodickson & Grunblatt 2025 (2025ApJ...993...78S), via the NASA Exoplanet Archive ps table (pl_refname SODICKSON__AMP__GRUNBLATT_2025): P 1.30618626966 d",
+   "shape": "Sozzetti et al. 2009 (2009ApJ...691.1145S), via the NASA Exoplanet Archive ps table (pl_refname SOZZETTI_ET_AL__2009): a/R* 5.926; Sozzetti et al. 2009 (2009ApJ...691.1145S), via the NASA Exoplanet Archive ps table (pl_refname SOZZETTI_ET_AL__2009): inclination 81.85 degrees",
+   "eccentricity": "Sozzetti et al. 2009 (2009ApJ...691.1145S), via the NASA Exoplanet Archive ps table (pl_refname SOZZETTI_ET_AL__2009): e 0",
+   "phase": "Sodickson & Grunblatt 2025 (2025ApJ...993...78S), via the NASA Exoplanet Archive ps table (pl_refname SODICKSON__AMP__GRUNBLATT_2025): transit mid-time 2454185.91113531 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min)",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

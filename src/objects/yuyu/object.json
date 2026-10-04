@@ -1,0 +1,148 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "yuyu",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Yuyu",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 14855282.1
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/yuyu-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Yuyu",
+      "classification": "star",
+      "color": "#ffe8ca",
+      "distanceAu": 20940657.2,
+      "description": "A star 102 parsecs away, 21 times the Sun's width, measured from its light.",
+      "systemName": "Yuyu system",
+      "aliases": [
+        "Iota Cancri",
+        "HD 74739",
+        "HIP 43103",
+        "HR 3475"
+      ],
+      "order": 5756,
+      "context": {
+        "order": 5753
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -1825960997308704000,
+        2051282340594983200,
+        1507241494753829400
+      ],
+      "presentationToReference": [
+        -0.582874745529645,
+        -0.3199048808375572,
+        0.7469390190906215,
+        0.6548007728806412,
+        0.359379807550837,
+        0.6648925490330286,
+        0.4811371726011892,
+        -0.8766453223174305,
+        -5.493460349288357e-7
+      ],
+      "orbitUpReference": [
+        0.3199048808375572,
+        -0.359379807550837,
+        0.8766453223174305
+      ],
+      "metersPerUnit": 47920264.838709675,
+      "bodyRadiusM": 14855282100
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

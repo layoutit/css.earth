@@ -1,0 +1,50 @@
+{
+  "id": "wasp-21",
+  "name": "Tangra",
+  "system": "Tangra system",
+  "description": "Star of 5,800 K, 258 parsecs away, with 1 transiting planet.",
+  "aliases": [
+    "WASP-21"
+  ],
+  "featured": true,
+  "target": "WASP-21",
+  "gaia": "2831084391023184128",
+  "paper": {
+    "url": "https://ui.adsabs.harvard.edu/abs/2010arXiv1006.2605B/abstract",
+    "credit": "Bouchy et al. 2010"
+  },
+  "radius": {
+    "value": 1.136,
+    "source": "Chen et al. 2020, the stellar radius of WASP-21 b's parameter set from Chen et al. 2020 (the default leaves it empty) in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2020A&A...642A..54C/abstract",
+    "uncertainty": 0.051
+  },
+  "mass": {
+    "value": 0.89,
+    "source": "Chen et al. 2020, the stellar mass of WASP-21 b's parameter set from Chen et al. 2020 (the default leaves it empty) in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2020A&A...642A..54C/abstract",
+    "uncertainty": 0.079
+  },
+  "temperature": {
+    "value": 5800,
+    "source": "Chen et al. 2020, the stellar temperature of WASP-21 b's parameter set from Chen et al. 2020 (the default leaves it empty) in the NASA Exoplanet Archive",
+    "url": "https://ui.adsabs.harvard.edu/abs/2020A&A...642A..54C/abstract",
+    "uncertainty": 100
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "WASP-21 b crosses Tangra as seen from Earth, which is how it was found.",
+    "introduction": "Its radius and temperature follow Chen et al. 2020.",
+    "locator": "NASA Exoplanet Archive ps table (st_refname CHEN_ET_AL__2020): st_teff 5800, st_rad 1.136, st_mass 0.89",
+    "quotes": {
+      "url": "https://en.wikipedia.org/wiki/WASP-21",
+      "title": "WASP-21",
+      "revision": "1370791513",
+      "card": "WASP-21, also named Tangra, is a G-type star that has reached the end of its main sequence lifetime.",
+      "introduction": "It lies approximately 834 light-years away, in the constellation of Pegasus."
+    }
+  },
+  "notes": [],
+  "order": 5710
+}

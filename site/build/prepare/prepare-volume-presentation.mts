@@ -1,6 +1,7 @@
-import { parseVolumeSourcePreview, isTrackedVolumeSourcePreview, parseVolumeSourceManifest, VOLUME_PRESENTATION_SOURCE_SCHEMA, type VolumeSourcePreview as Preview, type VolumePresentationSource as Presentation, PREPARED_VOLUME_DATASETS_SCHEMA, PREPARED_IMAGE_LAYER_BANK_SCHEMA, parseObjectDescriptor } from '@cssearth/objects';
+import { readVolumeAttachment, readVolumePresentationPreviews, hasVolumePresentationSource, PREPARED_VOLUME_PRESENTATION_SCHEMA, validatePreparedImageLayerBank } from '@cssearth/objects';
+import { parseVolumePresentationSource, parseVolumeSourceManifest, readObjectContentDatasets } from '@cssearth/objects';
+import { isTrackedVolumeSourcePreview, type VolumeSourcePreview as Preview, type VolumePresentationSource as Presentation, PREPARED_VOLUME_DATASETS_SCHEMA, PREPARED_IMAGE_LAYER_BANK_SCHEMA, parseObjectDescriptor } from '@cssearth/objects';
 import { sha256 } from '@cssearth/core/node';
-import { parseProductInputEvidence } from '@cssearth/objects/provenance';
 import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -26,23 +27,14 @@ export const volumePresentationCompilerClosure = ['site/build/prepare/prepare-vo
 
 const json = (bytes: Buffer): unknown => JSON.parse(bytes.toString('utf8'));
 const stringify = (value: unknown) => JSON.stringify(value, null, 2) + '\n';
+/** A preview is a publisher image downloaded by URL, a composite of a pinned sky band recipe, or an image this package
+ * draws itself from one of its own declared inputs. The third kind exists for a dataset whose source is the package's
+ * own product rather than a figure someone published: there is nothing to download, and a publisher figure of some
+ * other observation would misrepresent it. */
 function presentation(raw: unknown): Presentation {
-  const value = sourceObject(raw, ['schema', 'objectId', 'name', 'defaultDataset', 'bank', 'recipes', 'sharedInputs', 'inputEvidence', 'datasets']);
-  if (value.schema !== VOLUME_PRESENTATION_SOURCE_SCHEMA) throw new TypeError('Invalid volume presentation source.');
-  const datasets = sourceArray(value.datasets, raw => {
-    const dataset = sourceObject(raw, ['id', 'label', 'title', 'description', 'summary', 'detail', 'facts', 'input', 'preview', 'inputEvidence']);
-    const result = { id: sourceId(dataset.id), label: sourceText(dataset.label), title: sourceText(dataset.title), description: sourceText(dataset.description),
-      summary: sourceText(dataset.summary), detail: sourceText(dataset.detail), input: sourceId(dataset.input), preview: parseVolumeSourcePreview(dataset.preview),
-      inputEvidence: [...sourceArray(dataset.inputEvidence ?? [], parseProductInputEvidence)],
-      facts: [...sourceArray(dataset.facts, raw => { const fact = sourceObject(raw, ['id', 'label', 'value']); return { id: sourceId(fact.id), label: sourceText(fact.label), value: sourceText(fact.value) }; })] };
-    validateDatasetText(result);
-    return result;
-  });
-  sourceUnique(datasets.map(dataset => dataset.id), 'volume dataset');
-  const defaultDataset = sourceId(value.defaultDataset);
-  if (!datasets.length || !datasets.some(dataset => dataset.id === defaultDataset)) throw new TypeError('Invalid volume default dataset.');
-  return { objectId: sourceId(value.objectId), name: sourceText(value.name), defaultDataset, bank: { path: sourcePath(sourceObject(value.bank, ['path']).path) }, datasets: [...datasets],
-    sharedInputs: [...sourceArray(value.sharedInputs, sourceId)], inputEvidence: [...sourceArray(value.inputEvidence ?? [], parseProductInputEvidence)] };
+  const record = parseVolumePresentationSource(raw);
+  for (const dataset of record.datasets) validateDatasetText(dataset);
+  return record;
 }
 /** Which manifest sources each dataset reads: its own image, its further inputs and the shared inputs. */
 function volumeLineage(record: Presentation, manifest: Record<string, unknown>, imageLayer: boolean): ObjectLineage {
@@ -74,10 +66,10 @@ async function hostedDatasets(root: string, base: string, objectId: string, data
   // The bank's descriptor names its host (`properties.host`); a bank attached to a body is hosted by that body.
   const deliveryPath = `${base}/source/delivery.json`;
   const attached = declared !== undefined ? undefined : await readFile(resolve(root, deliveryPath)).then(() => true, (error: unknown) => { if (hasErrorCode(error, 'ENOENT')) return false; throw error; })
-    ? sourceObject(json(await input(deliveryPath))).attachedTo : undefined;
+    ? readVolumeAttachment(json(await input(deliveryPath))).attachedTo : undefined;
   const host = declared ?? attached;
   if (host === undefined) return undefined;
-  const hostId = sourceId(host), content = sourceObject(json(await input(`src/objects/${hostId}/source/content/object.json`)));
+  const hostId = sourceId(host), content = readObjectContentDatasets(json(await input(`src/objects/${hostId}/source/content/object.json`)));
   const datasets: Record<string, { datasetId: string; label: string }> = {};
   for (const raw of sourceArray(sourceObject(content.datasets).controls, sourceObject)) {
     if (raw.volume === undefined) continue;
@@ -99,7 +91,7 @@ export async function readPreparedVolumes({ root = process.cwd(), input = path =
   const results: PreparedVolume[] = [];
   for (const { base, record, manifest, descriptor } of await volumeSources(root, input)) {
     const lineage = volumeLineage(record, manifest, descriptor.type === 'image-layer-bank');
-    const prepared = parsePreparedVolumePresentation(json(await input(`${base}/prepared/presentation.json`)),
+    const prepared = parsePreparedVolumePresentation(readVolumePresentationPreviews(json(await input(`${base}/prepared/presentation.json`))),
       { id: record.objectId, defaultDataset: record.defaultDataset, datasets: record.datasets }, lineage.sources);
     const hostedBy = await hostedDatasets(root, base, record.objectId, prepared.controls.map(control => control.id), input, typeof descriptor.properties.host === 'string' ? descriptor.properties.host : undefined);
     results.push({ id: record.objectId, name: record.name, route: hostedBy?.route ?? `/${record.objectId}/`, base,
@@ -115,11 +107,10 @@ async function volumeSources(root: string, input: (path: string) => Promise<Buff
     const base = `src/objects/${folder.name}`, presentationPath = `${base}/source/presentation.json`;
     const presentationBytes = await readFile(resolve(root, presentationPath)).catch((error: unknown) => { if (hasErrorCode(error, 'ENOENT')) return null; throw error; });
     // The source-only catalogue contexts use source/presentation.json too, but are not prepared dataset packages.
-    if (presentationBytes === null || sourceObject(json(presentationBytes)).schema !== VOLUME_PRESENTATION_SOURCE_SCHEMA) continue;
+    if (presentationBytes === null || !hasVolumePresentationSource(json(presentationBytes))) continue;
     const record = presentation(json(await input(presentationPath)));
     if (record.objectId !== folder.name) throw new TypeError(`Mismatched volume presentation object: ${folder.name}.`);
-    const manifest = sourceObject(json(await input(`${base}/source/manifest.json`)), ['schema', 'pathBase', 'inputs', 'documents', 'generatedIntermediates']);
-    parseVolumeSourceManifest(manifest, { reader: 'presentation', objectId: record.objectId });
+    const manifest = parseVolumeSourceManifest(json(await input(`${base}/source/manifest.json`)), { reader: 'presentation', objectId: record.objectId, policy: 'presentation-source' });
     const descriptor = parseObjectDescriptor(json(await input(`${base}/object.json`)));
     const format = descriptor.prepared?.format;
     if (descriptor.id !== record.objectId || !((descriptor.type === 'volume-dataset-bank' && format === PREPARED_VOLUME_DATASETS_SCHEMA) ||
@@ -189,7 +180,7 @@ export async function prepareVolumePresentations({ root = process.cwd(), objectI
     if (descriptor.type === 'image-layer-bank') {
       if (!bankPath.startsWith(`${base}/prepared/`)) throw new TypeError(`Image-layer delivery must be prepared: ${record.objectId}`);
       if (installedBank === null) throw new Error(`Image-layer bank required for complete delivery inventory: ${record.objectId}`);
-      const bank = sourceObject(json(await input(bankPath))); // Retained small resource receipt, not image bytes.
+      const bank = validatePreparedImageLayerBank(json(await input(bankPath))); // Retained small resource receipt, not image bytes.
       const resources = sourceArray(bank.resources, raw => sourcePath(sourceObject(raw).path));
       if (!resources.length) throw new Error(`Empty image-layer resource inventory: ${record.objectId}`);
       sourceUnique(resources, 'image-layer resource');
@@ -210,7 +201,7 @@ export async function prepareVolumePresentations({ root = process.cwd(), objectI
         texture: { url: previewUrl, width: image.width, height: image.height, attribution: { label: sourceText(own.displayCredit ?? own.credit), url: sourceUrl(own.sourceUrl) } },
         description: dataset.description, summary: dataset.summary, detail: dataset.detail, facts: dataset.facts });
     }
-    outputs.push({ path: resolve(root, `${base}/prepared/presentation.json`), text: stringify({ schema: 'cssearth-volume-presentation@2', objectId: record.objectId, controls, defaultDataset: record.defaultDataset }) });
+    outputs.push({ path: resolve(root, `${base}/prepared/presentation.json`), text: stringify({ schema: PREPARED_VOLUME_PRESENTATION_SCHEMA, objectId: record.objectId, controls, defaultDataset: record.defaultDataset }) });
     const publicPrefix = resolve(root, `public/scenes/${record.objectId}`) + '/';
     const publicAssets = outputs.filter(output => output.path.startsWith(publicPrefix)).map(output => {
       const bytes = Buffer.from(output.text);

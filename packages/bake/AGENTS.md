@@ -164,14 +164,14 @@ cycle. Share anything else through `@cssearth/core` or another package. Prepared
     sphere is written with. The solar geometry is generated into the checkout (`src/platform/solar-geometry.mts`) after the packages build,
     so callers pass `SolarGeometry` or use `loadSolarGeometry` from `@cssearth/bake/objects/scene` to load and validate the generated file. The prepared sky and Sun contracts belong to `@cssearth/objects`; their authored standards and preparers
     belong to `presentation`, which the scene imports as a lower topic.
-  - `objects/raster`: scientific surfaces from PDS, ISIS, FITS, GeoTIFF, VTK, NumPy, HEALPix and Tecplot products,
+  - `objects/raster`: scientific surfaces from PDS, ISIS, FITS, GeoTIFF, VTK, NumPy, HEALPix, Tecplot and classic NetCDF products,
     categorical geology and symbols, exoplanet eclipse and published phase-curve maps, observed color rasters and their
     photometric composition, a planet's whole-disc color record and the band-ratio tie to it, the source records they read, the WISE atlas mosaic grid, FITS binary tables (OIFITS and archive
     tables) and a star's limb darkening fitted to TESS transits. It imports `objects/scene`,
     `objects/geometry`, `objects/color`, `objects/cameras`, `raster` and `photometry`.
   - `objects/sources`: an object's authored source references read through its source manifest, and the pinned source
     files (bindings, byte ranges, contained paths, atomic publication) preparation reads and writes; JSON source values
-    left unchecked for their consumer; the shared reference banks under `src/references/` (the CIE 1931 table), whose
+    left unchecked for their consumer; the shared reference banks under `src/references/` (the CIE 1931 table, the IAU star names), whose
     directory is found on first use; and the
     idle-timeout stream relay pinned downloads go through.
   - `objects/charts`: the chart renderers and readers a content recipe names (measured spectra, retrieved profiles,

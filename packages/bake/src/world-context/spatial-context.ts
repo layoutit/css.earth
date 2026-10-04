@@ -1,5 +1,5 @@
-import { PREPARED_WORLD_CONTEXT_SCHEMA, PREPARED_WORLD_SYSTEM_VIEW_SCHEMA } from '@cssearth/objects';
-import type { PreparedWorldCameraFrame, PreparedContextCameraPresentation as WorldContextCameraPresentation, PreparedContextPointSource as WorldContextPointSource, PreparedVolumeOpacityProfile as VolumeOpacityProfile, PreparedOrbitCenter as WorldContextOrbitCenter, PreparedWorldContextData as PreparedWorldContext, PreparedOrbitDataLod as PreparedOrbitLod } from '@cssearth/objects';
+import { WORLD_CONTEXT_SOURCE_SCHEMA, PREPARED_WORLD_CONTEXT_SCHEMA, PREPARED_WORLD_SYSTEM_VIEW_SCHEMA } from '@cssearth/objects';
+import type { PreparedWorldCameraFrame, PreparedContextCameraPresentation as WorldContextCameraPresentation, PreparedContextPointSource as WorldContextPointSource, PreparedVolumeOpacityProfile as VolumeOpacityProfile, PreparedOrbitCenter as WorldContextOrbitCenter, PreparedWorldContextData, PreparedOrbitDataLod as PreparedOrbitLod } from '@cssearth/objects';
 import { cross3 as cross, dot3 as dot } from '@cssearth/core';
 import { prepareBoundView, prepareGroupView, prepareSystemView } from './system-view.ts';
 import type { SystemViewPolicy } from './system-view.ts';
@@ -24,7 +24,7 @@ type WorldContextPresentation = { readonly contextColor?: string; readonly label
 type WorldContextFocus = { readonly id: string; readonly name: string; readonly color: string; readonly pointSource?: WorldContextPointSource } & WorldContextPresentation;
 
 export interface WorldContextSource {
-  readonly schema: 'cssearth-world-context-source@1';
+  readonly schema: typeof WORLD_CONTEXT_SOURCE_SCHEMA;
   readonly sky: SkyBaseline;
   readonly frame: PreparedWorldCameraFrame;
   readonly focus: WorldContextFocus;
@@ -62,7 +62,7 @@ export interface WorldContextBodyFact { readonly radiusM: number; readonly orbit
 /** Validates authored numeric data without binding it to an ephemeris or renderer. */
 export function parseWorldContextSource(value: unknown): WorldContextSource {
   const input = record(value, 'world context'); keys(input, ['schema', 'frame', 'focus', 'bodies', 'orbit', 'camera', 'system', 'volume', 'sky', 'stars'], 'world context');
-  if (input.schema !== 'cssearth-world-context-source@1') throw new TypeError('Unsupported world context source schema.');
+  if (input.schema !== WORLD_CONTEXT_SOURCE_SCHEMA) throw new TypeError('Unsupported world context source schema.');
   const frame = parseFrame(input.frame);
   // The prepared presentation a body carries into the world: its context color and caption case.
   const presentation = (value: Record<string, unknown>, label: string) => {
@@ -118,7 +118,7 @@ function parseVolumeOpacityProfile(value: unknown): VolumeOpacityProfile {
 export function prepareWorldContext(source: WorldContextSource, facts: Readonly<Record<string, WorldContextBodyFact>>,
   states: Readonly<Record<string, OrbitalState>>,
   orbitCenters: Readonly<Record<string, WorldContextOrbitCenter>> = {},
-  systemViewPolicy?: SystemViewPolicy): PreparedWorldContext {
+  systemViewPolicy?: SystemViewPolicy): PreparedWorldContextData {
   for (const [id, center] of Object.entries(orbitCenters)) {
     identifier(id, 'Orbit center id'); identifier(center.centerBodyId, `${id} orbit center parent`);
     if (!Array.isArray(center.positionM) || center.positionM.length !== 3 || center.positionM.some(value => !Number.isFinite(value))) {
@@ -247,7 +247,7 @@ export function outwardSphere(sphere: { readonly centerM: Vector3; readonly radi
 
 /** Each system's camera candidates, one document per host: system framing reads the one it frames, so a page never
  * downloads the candidates of systems it does not open (all 74 were 635 KB brotli on every page). */
-export function worldSystemViews(prepared: PreparedWorldContext) {
+export function worldSystemViews(prepared: PreparedWorldContextData) {
   return freeze([prepared.focus, ...prepared.bodies].flatMap(body => body.systemView
     ? [freeze({ schema: PREPARED_WORLD_SYSTEM_VIEW_SCHEMA as typeof PREPARED_WORLD_SYSTEM_VIEW_SCHEMA, id: body.id, candidates: body.systemView.candidates })] : []));
 }

@@ -1,0 +1,148 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "solitaire",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Solitaire",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 24110874.9
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/solitaire-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Solitaire",
+      "classification": "star",
+      "color": "#ffd6ab",
+      "distanceAu": 20940602.3,
+      "description": "A star 102 parsecs away, 35 times the Sun's width, measured from its light.",
+      "systemName": "Solitaire system",
+      "aliases": [
+        "58 Hydrae",
+        "HD 130694",
+        "HIP 72571",
+        "HR 5526"
+      ],
+      "order": 5699,
+      "context": {
+        "order": 5696
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -2037748335747879700,
+        -1871845103400721700,
+        -1468807666388435200
+      ],
+      "presentationToReference": [
+        -0.6504841370548461,
+        0.34529111929881984,
+        -0.6764942205025706,
+        -0.5975249865178522,
+        0.3171881474672569,
+        0.7364479408574176,
+        -0.46886488237748514,
+        -0.8832699032796588,
+        0.000005786985502461108
+      ],
+      "orbitUpReference": [
+        -0.34529111929881984,
+        -0.3171881474672569,
+        0.8832699032796588
+      ],
+      "metersPerUnit": 77777015.80645162,
+      "bodyRadiusM": 24110874900
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

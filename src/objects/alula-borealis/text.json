@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "alula-borealis",
+  "card": {
+    "text": "A star 122 parsecs away, 62 times the Sun's width, measured from its light.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 55219: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-nu-ursae-majoris",
+        "url": "https://en.wikipedia.org/wiki/Nu_Ursae_Majoris",
+        "label": "Wikipedia, \"Nu Ursae Majoris\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374549558",
+        "quote": "Nu Ursae Majoris, formally named Alula Borealis, is a double star in the northern circumpolar constellation of Ursa Major."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its brightness, measured band by band, gives 1,057 times the Sun's luminosity at 4,183 K, so 61.994 solar radii.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 55219: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-nu-ursae-majoris",
+        "url": "https://en.wikipedia.org/wiki/Nu_Ursae_Majoris",
+        "label": "Wikipedia, \"Nu Ursae Majoris\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1374549558",
+        "quote": "At an apparent visual magnitude of +3.490, it is bright enough to be seen with the naked eye."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its spectrum",
+      "summary": "The color of the star's light."
+    }
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "shangcheng",
+  "card": {
+    "text": "A star about 51 parsecs away, 2.2 times the Sun's width, measured by Gaia.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202243688",
+        "url": "https://doi.org/10.1051/0004-6361/202243688",
+        "label": "Creevey et al. (2023), Astronomy & Astrophysics 674 A26",
+        "checked": "2026-10-03",
+        "locator": "gaiadr3.astrophysical_parameters, Gaia DR3 547825694242685184: radius_flame, mass_flame, teff_gspphot"
+      },
+      {
+        "catalogueId": "wikipedia-hd-19275",
+        "url": "https://en.wikipedia.org/wiki/HD_19275",
+        "label": "Wikipedia, \"HD 19275\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1336845968",
+        "quote": "HD 19275, also named Shangcheng, is a single star in the northern constellation of Cassiopeia."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Gaia's parallax, brightness and spectrum give it 2.2 solar radii and 2.13 solar masses (FLAME) and 8,935 K at its surface (GSP-Phot).",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202243688",
+        "url": "https://doi.org/10.1051/0004-6361/202243688",
+        "label": "Creevey et al. (2023), Astronomy & Astrophysics 674 A26",
+        "checked": "2026-10-03",
+        "locator": "gaiadr3.astrophysical_parameters, Gaia DR3 547825694242685184: radius_flame, mass_flame, teff_gspphot"
+      },
+      {
+        "catalogueId": "wikipedia-hd-19275",
+        "url": "https://en.wikipedia.org/wiki/HD_19275",
+        "label": "Wikipedia, \"HD 19275\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1336845968",
+        "quote": "It has a white hue and is faintly visible to the naked eye with an apparent visual magnitude of 4.85."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its temperature",
+      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

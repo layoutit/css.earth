@@ -4,7 +4,8 @@
     {
       "id": "hd-118203b",
       "name": "HD 118203 b",
-      "description": "Transiting planet of HD 118203 with a 6.13-day year, found in 2005.",
+      "description": "Transiting planet of Liesma with a 6.13-day year, found in 2005.",
+      "order": 3158,
       "paper": {
         "url": "https://ui.adsabs.harvard.edu/abs/2024AJ....168..295Z/abstract",
         "credit": "Zhang et al. 2024"
@@ -15,7 +16,7 @@
       },
       "text": {
         "card": "HD 118203 b was found in 2005 by Haute-Provence Observatory as it crossed its star.",
-        "introduction": "It is one of 2 planets known around HD 118203. Its orbit and size follow Zhang et al. 2024's fit, the archive's default.",
+        "introduction": "It is one of 2 planets known around Liesma. Its orbit and size follow Zhang et al. 2024's fit, the archive's default.",
         "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname ZHANG_ET_AL__2024): disc_year 2005, disc_facility Haute-Provence Observatory, sy_pnum 2; pl_orbper 6.1349847, pl_radj 1.14, pl_bmassj 2.14",
         "quotes": {
           "url": "https://en.wikipedia.org/wiki/HD_118203_b",
@@ -24,8 +25,7 @@
           "card": "HD 118203 b, formally named Staburags, is a jovian planet that takes only 6.13 days or 147 hours to orbit the parent star HD 118203 at a distance of 0.07 astronomical units.",
           "introduction": "The exact mass was not known since inclination was not known until TESS detected the planet."
         }
-      },
-      "order": 3158
+      }
     }
   ]
 }

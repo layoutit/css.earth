@@ -1,0 +1,30 @@
+{
+ "id": "meleph",
+ "classification": "star",
+ "order": 5615,
+ "physical": {
+  "name": "Meleph",
+  "horizonsCode": null,
+  "meanRadiusKm": 3390628.9,
+  "gravitationalParameterKm3PerS2": 348348708779.78,
+  "parent": null,
+  "effectiveTemperatureK": 7873
+ },
+ "physicalNotes": "Radius 4.874 (4.769 to 4.978) from Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26; astrophysical_parameters of the same source): 3,390,629 km at 695,700 km per solar radius. Mass 2.625 (2.579 to 2.665) from Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26; astrophysical_parameters of the same source); GM is that mass times the JPL solar GM. Temperature 7873 +/- 2.2 K from Andrae et al. (2023), A&A 674, A27 (Gaia DR3 GSP-Phot), astrophysical_parameters of Gaia DR3 661291136701346304: teff_gspphot 7873.0146 K (16th-84th percentiles 7870.888-7875.3013), the temperature FLAME used (https://doi.org/10.1051/0004-6361/202243462). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 130.11237090028794,
+  "declinationDegrees": 19.544758383359664,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 185.74820109774154,
+  "properMotionRaMasPerYear": -36.29259374222769,
+  "properMotionDecMasPerYear": -12.133351601756733,
+  "radialVelocityKmPerS": 29.9,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 661291136701346304 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/meleph/source/photometry/gaia-dr3-source.csv; cross-identification HD 73731, HR 3429, HIP 42556: https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia+DR3+661291136701346304",
+   "distance": "Gaia DR3 parallax 5.3836 +/- 0.0474 mas (same row, RUWE 0.98): 185.75 pc, no zero-point correction",
+   "properMotion": "Gaia DR3 (same row): -36.293, -12.133 mas/yr",
+   "radialVelocity": "SIMBAD's radial velocity for Gaia DR3 661291136701346304 (quality B), from 2004A&A...424..727P; Gaia DR3 measures none (https://ui.adsabs.harvard.edu/abs/2004A&A...424..727P/abstract)"
+  }
+ }
+}

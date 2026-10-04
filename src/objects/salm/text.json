@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "salm",
+  "card": {
+    "text": "A star about 48 parsecs away, 3.0 times the Sun's width, measured by Gaia.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202243688",
+        "url": "https://doi.org/10.1051/0004-6361/202243688",
+        "label": "Creevey et al. (2023), Astronomy & Astrophysics 674 A26",
+        "checked": "2026-10-03",
+        "locator": "gaiadr3.astrophysical_parameters, Gaia DR3 2840673506807375360: radius_flame, mass_flame, teff_gspphot"
+      },
+      {
+        "catalogueId": "wikipedia-tau-pegasi",
+        "url": "https://en.wikipedia.org/wiki/Tau_Pegasi",
+        "label": "Wikipedia, \"Tau Pegasi\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1370789997",
+        "quote": "Tau Pegasi, formally named Salm, is a magnitude 4.6 star 162 light-years away in the constellation of Pegasus."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Gaia's parallax, brightness and spectrum give it 3.0 solar radii and 2.05 solar masses (FLAME) and 7,603 K at its surface (GSP-Phot).",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-202243688",
+        "url": "https://doi.org/10.1051/0004-6361/202243688",
+        "label": "Creevey et al. (2023), Astronomy & Astrophysics 674 A26",
+        "checked": "2026-10-03",
+        "locator": "gaiadr3.astrophysical_parameters, Gaia DR3 2840673506807375360: radius_flame, mass_flame, teff_gspphot"
+      },
+      {
+        "catalogueId": "wikipedia-tau-pegasi",
+        "url": "https://en.wikipedia.org/wiki/Tau_Pegasi",
+        "label": "Wikipedia, \"Tau Pegasi\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1370789997",
+        "quote": "With about twice the mass of the Sun and thirty times as luminous, it is a δ Scuti variable star with its brightness changing by a few hundredths of a magnitude over about an hour."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its temperature",
+      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

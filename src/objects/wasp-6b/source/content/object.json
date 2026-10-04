@@ -13,7 +13,7 @@
           "catalogueId": "doi-10-3847-2041-8213-acb154",
           "url": "https://ui.adsabs.harvard.edu/abs/2023ApJ...944L..56M",
           "label": "McGruder et al. 2023",
-          "checked": "2026-09-29",
+          "checked": "2026-10-03",
           "path": "source/measurements.json",
           "locator": "radiusKm; radiusSource"
         }
@@ -26,7 +26,7 @@
           "catalogueId": "doi-10-3847-2041-8213-acb154",
           "url": "https://ui.adsabs.harvard.edu/abs/2023ApJ...944L..56M",
           "label": "McGruder et al. 2023",
-          "checked": "2026-09-29",
+          "checked": "2026-10-03",
           "path": "source/measurements.json",
           "locator": "orbitalPeriodDays; orbitalPeriodSource"
         }
@@ -39,7 +39,7 @@
           "catalogueId": "doi-10-3847-2041-8213-acb154",
           "url": "https://ui.adsabs.harvard.edu/abs/2023ApJ...944L..56M",
           "label": "McGruder et al. 2023",
-          "checked": "2026-09-29",
+          "checked": "2026-10-03",
           "path": "source/measurements.json",
           "locator": "massSource"
         }
@@ -84,7 +84,7 @@
       "id": "wasp-6b-orbits",
       "titleKey": "systemOrbits",
       "src": "/scenes/wasp-6b/wasp-6b-system-orbits.svg",
-      "alt": "The orbits of WASP-6's planets in this map from above, to scale, with WASP-6 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "alt": "The orbits of Márohu's planets in this map from above, to scale, with WASP-6 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
       "source": {
         "id": "wasp-6b-observational-measurements",
         "path": "../manifest.json",

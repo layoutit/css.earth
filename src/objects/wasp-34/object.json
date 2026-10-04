@@ -6,7 +6,7 @@
   "properties": {
     "preparation": {
       "schema": "cssearth-object-preparation@1",
-      "label": "WASP-34",
+      "label": "Amansinaya",
       "steps": [
         "verify-sources",
         "assets",
@@ -95,12 +95,15 @@
       }
     },
     "catalog": {
-      "name": "WASP-34",
+      "name": "Amansinaya",
       "classification": "star",
       "color": "#fff1ed",
       "distanceAu": 27065134,
       "description": "WASP-34 b crosses WASP-34 as seen from Earth, which is how it was found.",
-      "systemName": "WASP-34 system",
+      "systemName": "Amansinaya system",
+      "aliases": [
+        "WASP-34"
+      ],
       "order": 4810,
       "context": {
         "order": 4807

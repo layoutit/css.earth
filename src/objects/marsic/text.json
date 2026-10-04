@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "marsic",
+  "card": {
+    "text": "A star 113 parsecs away, 16 times the Sun's width, measured from its light.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 79043: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-kappa-herculis",
+        "url": "https://en.wikipedia.org/wiki/Kappa_Herculis",
+        "label": "Wikipedia, \"Kappa Herculis\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1370780906",
+        "quote": "The two components, Kappa Herculis A and B, were 27.3 arc seconds apart in 2000."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its brightness, measured band by band, gives 132 times the Sun's luminosity at 4,934 K, so 15.773 solar radii.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 79043: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-kappa-herculis",
+        "url": "https://en.wikipedia.org/wiki/Kappa_Herculis",
+        "label": "Wikipedia, \"Kappa Herculis\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1370780906",
+        "quote": "Based on parallax measurements from the Hipparcos mission, κ Her A is about 113 parsecs from the Sun and κ Her B is 600 parsecs ; more recent parallax measurements suggest that B is around 5% more distant than A."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its Gaia spectrum",
+      "summary": "The color of the star's light."
+    }
+  }
+}

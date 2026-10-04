@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "taiyangshou",
+  "card": {
+    "text": "A star 56 parsecs away, 19 times the Sun's width, measured from its light.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 57399: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-chi-ursae-majoris",
+        "url": "https://en.wikipedia.org/wiki/Chi_Ursae_Majoris",
+        "label": "Wikipedia, \"Chi Ursae Majoris\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1354409065",
+        "quote": "Chi Ursae Majoris or χ Ursae Majoris, formally named Taiyangshou, is a single star in the northern circumpolar constellation of Ursa Major."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Its brightness, measured band by band, gives 137 times the Sun's luminosity at 4,482 K, so 19.432 solar radii.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1093-mnras-stx1433",
+        "url": "https://doi.org/10.1093/mnras/stx1433",
+        "label": "McDonald et al. (2017), Monthly Notices of the Royal Astronomical Society 471 770-791",
+        "checked": "2026-10-03",
+        "locator": "Table 2, HIP 57399: D, Teff, L, Rad, Q"
+      },
+      {
+        "catalogueId": "wikipedia-chi-ursae-majoris",
+        "url": "https://en.wikipedia.org/wiki/Chi_Ursae_Majoris",
+        "label": "Wikipedia, \"Chi Ursae Majoris\"",
+        "checked": "2026-10-03",
+        "locator": "Lead section, revision 1354409065",
+        "quote": "The star has an orange hue and is visible to the naked eye at night with an apparent visual magnitude of 3.72."
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its spectrum",
+      "summary": "The color of the star's light."
+    }
+  }
+}

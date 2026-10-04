@@ -1,0 +1,148 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "shatabhisha",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Shatabhisha",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 68390092.8
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/shatabhisha-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Shatabhisha",
+      "classification": "star",
+      "color": "#ffce85",
+      "distanceAu": 24352424.5,
+      "description": "A star 118 parsecs away, 98 times the Sun's width, measured from its light.",
+      "systemName": "Shatabhisha system",
+      "aliases": [
+        "Lambda Aquarii",
+        "HD 216386",
+        "HIP 112961",
+        "HR 8698"
+      ],
+      "order": 5694,
+      "context": {
+        "order": 5691
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        3456268613823670300,
+        -1046553784184813300,
+        -480518177072528400
+      ],
+      "presentationToReference": [
+        0.9487237470883094,
+        -0.1262404527945506,
+        -0.2898044164414072,
+        -0.28727235599961115,
+        0.038225557777325815,
+        -0.9570858896729412,
+        -0.13190089154039258,
+        -0.9912629090260763,
+        -1.0211229697993671e-7
+      ],
+      "orbitUpReference": [
+        0.1262404527945506,
+        -0.038225557777325815,
+        0.9912629090260763
+      ],
+      "metersPerUnit": 220613202.58064517,
+      "bodyRadiusM": 68390092800
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

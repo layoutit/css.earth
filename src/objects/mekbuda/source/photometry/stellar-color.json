@@ -1,0 +1,48 @@
+{
+  "schema": "cssearth-stellar-photometric-color@1",
+  "objectId": "mekbuda",
+  "spectrum": "measured",
+  "measuredSpectrum": {
+    "source": "HST/STIS Next Generation Spectral Library v2 (Heap & Lindler; MAST high-level science product), HD 52973: 168-1020 nm",
+    "path": "photometry/h_stis_ngsl_hd052973_v2.fits",
+    "format": "fits-table",
+    "extension": "1",
+    "wavelength": {
+      "column": "WAVELENGTH",
+      "unit": "angstrom"
+    },
+    "flux": {
+      "column": "FLUX",
+      "kind": "flux"
+    },
+    "service": "https://archive.stsci.edu/pub/hlsp/stisngsl/v2/hd052973/h_stis_ngsl_hd052973_v2.fits",
+    "checked": "2026-10-03",
+    "gaps": [],
+    "note": "Space spectrophotometry from the Hubble Space Telescope; the file header marks it DATAQUAL good."
+  },
+  "whitePoint": "sRGB D65",
+  "normalization": "brightest linear sRGB channel = 1",
+  "crossCheck": {
+    "source": "Burnashev (1985), Abastumani Astrophys. Obs. Bull. 59, 83; VizieR III/126, part2 record 478 (BS 2650), the widest of its 4 scans",
+    "spectrum": {
+      "path": "photometry/crosscheck-III_126_part2.dat.gz",
+      "format": "burnashev-records",
+      "wavelength": {
+        "column": "lambda",
+        "unit": "angstrom"
+      },
+      "flux": {
+        "column": "478",
+        "kind": "log10",
+        "missing": -9.999999
+      },
+      "gaps": [
+        {
+          "fromNm": 755,
+          "toNm": 780,
+          "reason": "the spectrum ends at 755 nm; the last value is held to 780 nm, where the observer adds little"
+        }
+      ]
+    }
+  }
+}

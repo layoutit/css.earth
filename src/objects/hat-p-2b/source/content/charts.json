@@ -5,11 +5,11 @@
     {
       "kind": "system-orbits",
       "id": "hat-p-2b-orbits",
-      "title": "HAT-P-2 b: orbits around HAT-P-2",
+      "title": "HAT-P-2 b: orbits around Hunor",
       "output": "hat-p-2b-system-orbits.svg",
       "system": "hat-p-2",
       "highlight": "hat-p-2b",
-      "description": "The orbits of HAT-P-2's planets in this map from above, to scale, with HAT-P-2 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "description": "The orbits of Hunor's planets in this map from above, to scale, with HAT-P-2 b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
       "metadata": {
         "orbitSource": "ExoFOP, via the NASA Exoplanet Archive ps table (pl_refname EXOFOP): P 5.633477 d"
       }
