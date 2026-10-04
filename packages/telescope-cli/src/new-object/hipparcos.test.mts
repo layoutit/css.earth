@@ -1,8 +1,9 @@
-/** The McDonald, Zijlstra & Watson (2017) draft route (hipparcos.mts), offline on VizieR answers as served 2026-10-02. */
+/** The McDonald, Zijlstra & Watson (2017) draft route (hipparcos.mts), offline on VizieR and SIMBAD answers as served 2026-10-02 and
+ * 2026-10-03. */
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import type { Archive } from './archives.mts';
-import { draftFromMcDonald, parseMcDonaldRow, parseXhipVelocity, requireOneStar, starQuotes } from './hipparcos.mts';
+import { draftFromMcDonald, draftsFromHipparcos, parseMcDonaldRow, parseSimbadStar, parseXhipVelocity, requireOneStar, starQuotes } from './hipparcos.mts';
 
 const answer = (header: string, row: string) => `#\n# VizieR answer\n${header}\n${header.replace(/[^\t]+/gu, 'unit')}\n${header.replace(/[^\t]+/gu, '---')}\n${row}\n`;
 const MCDONALD = 'HIP\tD\tdplx\tAV\tTeff\te_Teff\tL\te_L/L\tRad\tQ';
@@ -18,6 +19,8 @@ test('a table 2 row inside the paper\'s well-fit subset is drafted at its distan
   assert.equal(spec.parent, 'milky-way', 'a star Hipparcos places is inside the Milky Way');
   assert.equal(spec.featured, true);
   assert.equal(spec.mass, 'unmeasured');
+  assert.match(spec.limb?.none ?? '', /^no mass is measured and no spectroscopic surface gravity is published/u, 'with no published gravity no limb law is chosen');
+  assert.equal(spec.gravity, undefined);
   assert.equal(spec.distance.value, 49.431);
   assert.match(spec.radius.source, /table 2, HIP 13847: radius 6\.238 solar radii/u);
   assert.equal(spec.position?.catalogue, 'V/137D/XHIP');
@@ -57,4 +60,48 @@ test('a row outside the well-fit subset is refused with the paper\'s reason', ()
   assert.throws(() => requireOneStar('14576', 'SB*'), /a spectroscopic binary/u);
   assert.doesNotThrow(() => requireOneStar('21421', 'LP*'));
   assert.throws(() => parseXhipVelocity(answer('HIP\tRV\te_RV\tq_RV', '1\t\t\t'), '1'), /no radial velocity/u);
+});
+
+// HIP 57632 (β Leonis, Denebola): SIMBAD holds two published gravities at its position. HIP 44066 (α Cancri, Acubens): none.
+const DENEBOLA = answer(MCDONALD, ' 57632\t  11.000\t 0.006\t  0.225\t 8730\t  612\t    13.535\t 0.133\t    1.610\t 0.054');
+const ACUBENS = answer(MCDONALD, ' 44066\t  57.737\t 0.056\t  0.281\t 7999\t  243\t    49.134\t 0.079\t    3.655\t 0.047');
+const NO_GRAVITIES = 'main_id\tlog_g\tbibcode\ttitle\n';
+const GRAVITIES = `${NO_GRAVITIES}"* bet Leo"\t4.26\t"2003A&A...398.1121E"\t"Automated spectroscopic abundances of A and F-type stars using echelle spectrographs II. Abundances of 140 A-F stars from  ELODIE and CORALIE."\n` +
+  '"* bet Leo"\t4.22\t"2003AJ....126.2048G"\t"Contributions to the nearby stars (NStars) project: spectroscopy of stars earlier than M0 within 40 parsecs: the northern  sample. I."\n';
+// Claret & Bloemen (2011), J/A+A/529/A75 table-af: the Johnson V nodes around 8,730 K and log g 4.22 to 4.26.
+const ATLAS = ['logg\tTeff\tZ\txi\ta\tb\tFilt\tMet\tMod', '[cm/s2]\tK\t[Sun]\tkm/s\t \t \t \t \t', '-----\t------\t----\t----\t-------\t-------\t--\t-\t-',
+  ' 4.00\t  8500\t 0.0\t 2.0\t 0.3166\t 0.3073\tV \tL\tA', ' 4.50\t  8500\t 0.0\t 2.0\t 0.2919\t 0.3301\tV \tL\tA', ' 4.00\t  8750\t 0.0\t 2.0\t 0.2947\t 0.3130\tV \tL\tA',
+  ' 4.50\t  8750\t 0.0\t 2.0\t 0.2975\t 0.3118\tV \tL\tA', ' 4.00\t  9000\t 0.0\t 2.0\t 0.2752\t 0.3179\tV \tL\tA', ' 4.50\t  9000\t 0.0\t 2.0\t 0.2817\t 0.3125\tV \tL\tA'].join('\n');
+const STARS: Readonly<Record<string, { table2: string; simbad: string; identifiers: readonly string[]; gravities: string }>> = {
+  57632: { table2: DENEBOLA, simbad: 'otype,ra,dec\n"dS*",177.26490975591017,14.572058064829658\n', identifiers: ['HIP 57632', '* bet Leo', 'HD 102647', 'HR  4534', 'NAME Denebola'], gravities: GRAVITIES },
+  44066: { table2: ACUBENS, simbad: 'otype,ra,dec\n"PM*",134.62168421127,11.8576804028\n', identifiers: ['HIP 44066', 'Gaia DR3 604789257076233728', '* alf Cnc', 'HD  76756', 'NAME Acubens'], gravities: NO_GRAVITIES },
+};
+
+test('a draft cites the gravity published at SIMBAD\'s position of the star; only with none published is no limb law chosen', async () => {
+  const asked: string[] = [];
+  const archive: Archive = { exists: async () => false, bytes: async () => Buffer.alloc(0),
+    async text(url, form) {
+      const query = form?.QUERY ?? '', source = form?.['-source'] ?? '', hip = /HIP (\d+)/u.exec(query)?.[1] ?? form?.HIP?.slice(1) ?? '';
+      if (url.includes('wikipedia')) throw new Error('offline: no article');
+      if (query.includes('mesFe_h')) { asked.push(query); return Object.values(STARS).find(star => query.includes(star.simbad.split('\n')[1]!.split(',')[1]!))!.gravities; }
+      if (query.includes('b.otype')) return STARS[hip]!.simbad;
+      if (query) return `id\n${STARS[hip]!.identifiers.map(id => `"${id}"`).join('\n')}\n`;
+      return source === 'J/MNRAS/471/770/table2' ? STARS[hip]!.table2 : source === 'V/137D/XHIP' ? answer('HIP\tRV\te_RV\tq_RV', ' 57632\t  -0.20\t  0.50\tA') : source === 'J/A+A/529/A75/table-af' ? ATLAS : '#\n';
+    } };
+  const { stars, report } = await draftsFromHipparcos(['57632', '44066'], archive), [denebola, acubens] = stars as ReturnType<typeof draftFromMcDonald>[];
+  // The cone is SIMBAD's own J2000 position of the Hipparcos number, so a star's proper motion since cannot move it out.
+  assert.match(asked[0]!, /CIRCLE\('ICRS', 177\.26490975591017, 14\.572058064829658, /u);
+  // The more recent paper's value, cited by its bibcode; both papers analysed the star's own spectra.
+  assert.deepEqual(denebola!.gravity, { value: 4.26, url: 'https://ui.adsabs.harvard.edu/abs/2003A%26A...398.1121E',
+    source: 'SIMBAD\'s compilation of spectroscopic measurements (mesFe_h): log g 4.26 from 2003A&A...398.1121E; the 2 published values span log g 4.22 to 4.26, across which the limb law changes by at most 0.0% of the centre brightness' });
+  assert.equal(denebola!.limb, undefined, 'a star with a cited gravity declines no law: the generator reads one at it');
+  assert.equal(denebola!.mass, 'unmeasured');
+  assert.equal(acubens!.gravity, undefined);
+  assert.equal(acubens!.limb?.none, 'no mass is measured and no spectroscopic surface gravity is published with this radius: McDonald, Zijlstra & Watson (2017), MNRAS 471, 770 assume the gravity of their fit (table column 15)');
+  assert.match(report[0]!, /at the paper's distance; log g 4\.26 from 2003A&A\.\.\.398\.1121E; /u);
+  assert.match(report[1]!, /at the paper's distance; no spectroscopic gravity is published, so no limb law; /u);
+  // Both drafts are specs the generator accepts.
+  const { parseStarSpec } = await import('./spec.mts');
+  for (const star of stars) assert.doesNotThrow(() => parseStarSpec(star));
+  assert.throws(() => parseSimbadStar('otype,ra,dec\n', '1'), /HIP 1: SIMBAD gives no J2000 position for it/u);
 });

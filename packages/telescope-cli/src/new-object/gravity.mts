@@ -8,11 +8,15 @@
  *    the gravity whose law is closest to all the others. The largest difference to any of them is recorded; the gravity is
  *    marked unmeasured and never becomes a fact of the star.
  *
- * Either way the README states the spread of limb laws across the published values or the range, measured on the same grid. */
+ * Either way the README states the spread of limb laws across the published values or the range, measured on the same grid.
+ *
+ * A draft route whose paper measures no mass cites the published value as the spec's `gravity` (citedGravity), so the generator
+ * reads the limb law at it as at any cited gravity. */
 import { interpolateQuadraticLimbDarkening } from '@cssearth/bake/objects/stellar';
 import { VIZIER_ASU, type Archive } from './archives.mts';
 import { SIMBAD_TAP } from './companions.mts';
 import { GRIDS } from './limb.mts';
+import type { Cited } from './spec.mts';
 
 /** Survey pipelines, which fit gravities for large samples with one automated model; a star's own analysis comes first. */
 export const SURVEY_PIPELINES: Readonly<Record<string, string>> = {
@@ -47,6 +51,14 @@ export async function publishedGravities(archive: Archive, ra: number, dec: numb
   return rows.map(row => ({ logg: Number(row.log_g), bibcode: String(row.bibcode), title: String(row.title ?? '') })).filter(row => Number.isFinite(row.logg));
 }
 
+/** The largest mass inferred for any star: an initial 320 solar masses, in the cluster R136 (Crowther et al. 2010, MNRAS 408, 731,
+ * https://arxiv.org/abs/1007.3284). A published gravity that implies more, with the star's own published radius, contradicts that
+ * radius and is not used: Beta Gruis's one value, log g 3.47, would give a giant of 154 solar radii 2,500 solar masses. */
+export const LARGEST_STELLAR_MASS_SOLAR = 320;
+const GM_SUN_KM3_S2 = 132712440041.93938, SOLAR_RADIUS_KM = 695700;
+/** The mass, in solar masses, of a star of `radiusSolar` whose surface gravity is `logg` (cgs): g R^2 / G. */
+export const impliedMassSolar = (logg: number, radiusSolar: number): number => 10 ** logg * (radiusSolar * SOLAR_RADIUS_KM * 1e5) ** 2 / (GM_SUN_KM3_S2 * 1e15);
+
 const median = (values: readonly number[]) => { const sorted = [...values].sort((a, b) => a - b), mid = sorted.length >> 1; return sorted.length % 2 ? sorted[mid]! : (sorted[mid - 1]! + sorted[mid]!) / 2; };
 
 /** The published value the rule chooses, or null when none is usable. */
@@ -76,13 +88,23 @@ async function lawsAcross(archive: Archive, teffK: number, loggs: readonly numbe
   throw new Error(`${where}: no limb grid covers ${teffK} K ${all ? 'across' : 'anywhere in'} log g ${lo}..${hi} (${reasons.slice(0, 3).join('; ')}).`);
 }
 
+/** A published choice as a spec's cited `gravity` (spec.mts): the value, the rule's sentence under the compilation it was read from, and the paper. */
+export function citedGravity(choice: GravityChoice): Cited {
+  if (choice.kind !== 'published') throw new TypeError(`A spec cites a published gravity; log g ${choice.logg} is a display choice inside a range.`);
+  return { value: choice.logg, source: `SIMBAD's compilation of spectroscopic measurements (mesFe_h): ${choice.sentence}`, url: choice.url };
+}
+
 /** Intensity relative to the centre across the disc, mu from 0 to 1, for a quadratic law. */
 const profile = ({ u1, u2 }: { u1: number; u2: number }) => Array.from({ length: 101 }, (_, i) => { const x = 1 - i / 100; return 1 - u1 * x - u2 * x * x; });
 const difference = (a: readonly number[], b: readonly number[]) => Math.max(...a.map((value, i) => Math.abs(value - b[i]!)));
 
 /** Choose the gravity a star's limb is read at (header). Null when the star has no published value and the spec gives no range. */
-export async function chooseGravity({ archive, ra, dec, teffK, range, where }: { archive: Archive; ra: number; dec: number; teffK: number; range?: GravityRange; where: string }): Promise<GravityChoice | null> {
-  const rows = await publishedGravities(archive, ra, dec, where), published = choosePublished(rows, range);
+export async function chooseGravity({ archive, ra, dec, teffK, range, where, radiusSolar, contradicted }: { archive: Archive; ra: number; dec: number; teffK: number; range?: GravityRange; where: string;
+  /** The star's published radius: a gravity that with it implies more than any star's mass is left out, and `contradicted` is told why. */
+  radiusSolar?: number; contradicted?: (sentence: string) => void }): Promise<GravityChoice | null> {
+  const every = await publishedGravities(archive, ra, dec, where), tooMassive = radiusSolar === undefined ? [] : every.filter(row => impliedMassSolar(row.logg, radiusSolar) > LARGEST_STELLAR_MASS_SOLAR);
+  const rows = every.filter(row => !tooMassive.includes(row)), published = choosePublished(rows, range);
+  if (tooMassive.length && !rows.length) contradicted?.(`the published gravit${tooMassive.length === 1 ? 'y' : 'ies'}, ${tooMassive.map(row => `log g ${row.logg} (${row.bibcode})`).join(', ')}, would give this star of ${Number(radiusSolar!.toFixed(1))} solar radii ${Math.round(Math.min(...tooMassive.map(row => impliedMassSolar(row.logg, radiusSolar!)))).toLocaleString('en-US')} solar masses or more, above the ${LARGEST_STELLAR_MASS_SOLAR} that Crowther et al. (2010) infer for the most massive star, so ${tooMassive.length === 1 ? 'it contradicts' : 'they contradict'} the radius and ${tooMassive.length === 1 ? 'is' : 'are'} not used`);
   if (published) {
     const values = rows.filter(row => !range || (row.logg >= range.min && row.logg <= range.max)).map(row => row.logg);
     const gravities = [...new Set([...values, published.logg])], span = [Math.min(...values), Math.max(...values)] as const;
@@ -90,8 +112,9 @@ export async function chooseGravity({ archive, ra, dec, teffK, range, where }: {
     // reach) it is not measured, and the sentence says nothing of it.
     const laws = await lawsAcross(archive, teffK, gravities, where, true).then(found => found.map(law => profile(law!)), () => null);
     const spread = laws ? Math.max(0, ...laws.map(law => difference(law, laws[gravities.indexOf(published.logg)]!))) : Number.NaN;
+    // A label that already says what the paper is (the comparison of pipelines) stands as written; a survey's name is called its pipeline.
     const pipeline = SURVEY_PIPELINES[published.bibcode];
-    return { logg: published.logg, kind: 'published', source: `${published.bibcode}${published.title ? ` ("${published.title}")` : ''}${pipeline ? `, the ${pipeline} pipeline` : ''}`,
+    return { logg: published.logg, kind: 'published', source: `${published.bibcode}${published.title ? ` ("${published.title}")` : ''}${pipeline ? `, ${/^an? /u.test(pipeline) ? pipeline : `the ${pipeline} pipeline`}` : ''}`,
       url: `https://ui.adsabs.harvard.edu/abs/${encodeURIComponent(published.bibcode)}`, span, spread,
       sentence: `log g ${published.logg} from ${published.bibcode}${published.measurements > 1 ? `, the median of its ${published.measurements} spectra` : ''}${pipeline ? ` (${pipeline}, a survey pipeline: no analysis of this star's own spectra is published)` : ''}; ` +
         `the ${values.length} published value${values.length === 1 ? '' : 's'} span log g ${span[0]} to ${span[1]}${Number.isFinite(spread) ? `, across which the limb law changes by at most ${(spread * 100).toFixed(1)}% of the centre brightness` : ''}` };

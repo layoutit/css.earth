@@ -4,20 +4,26 @@
     {
       "location": "public",
       "filename": "tania-borealis-arrival.webp",
-      "bytes": 17612,
-      "sha256": "335f8128e42049714e9381399e03eeeb89f4a1d830c9bc415d2dfe948d897274"
+      "bytes": 28792,
+      "sha256": "85cef77e24ce6310b865da1f5041b729ce32d6cbe4148f25fecd3d64402cb8c2"
     },
     {
       "location": "public",
       "filename": "tania-borealis-billboard.webp",
-      "bytes": 3078,
-      "sha256": "a277c28b37c163ffa88438fd676a396ddc42e217e11da73fd3f3022d61e8c2e2"
+      "bytes": 5168,
+      "sha256": "296a3045e37d3ebdca4b3da8d60d637ddbece90c3ad631d19c68860dba2fe1a1"
     },
     {
       "location": "public",
       "filename": "tania-borealis-dataset-color.webp",
       "bytes": 44,
       "sha256": "349837e1b7b9b12d5df5343c701a7750fc14835ab95cc51f87f70fcc2c4130b2"
+    },
+    {
+      "location": "public",
+      "filename": "tania-borealis-limb-color@2x.webp",
+      "bytes": 93520,
+      "sha256": "c5e8ac521b6b3de3d1386488536334767eb69f74a858ab9872f9b0aee94c30a5"
     },
     {
       "location": "public",
@@ -40,8 +46,8 @@
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 1723,
-      "sha256": "02b7672a742c39a65426eb8011de71645b8f56b439463c4b02900ef004619646"
+      "bytes": 2051,
+      "sha256": "4ce5744eb1f54eda8057dd6d33808f31e18de37f802fb3e78199970f0e0ced9a"
     },
     {
       "location": "prepared",
@@ -64,8 +70,8 @@
     {
       "location": "prepared",
       "filename": "datasets.json",
-      "bytes": 877,
-      "sha256": "cec68ef5a8d67e81b500c3446d22eb24c70a4811243e6cffa0f95ea51b6e8762"
+      "bytes": 1068,
+      "sha256": "68cfcdc7f28a61a8c21be02ebc8334b432857925463a0804353a35dd82197746"
     },
     {
       "location": "prepared",
@@ -82,14 +88,14 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 273624,
-      "sha256": "2a25d854b78536c8144db3b3bb59cfe17b3097c7b124209db647cb1111f606fe"
+      "bytes": 273762,
+      "sha256": "0f81cb612d0a1f533ead33f0bb7345de239b4af3614b4d57bcea869573b0655f"
     },
     {
       "location": "prepared",
       "filename": "scene.json",
-      "bytes": 396100,
-      "sha256": "1d802e5d8671c3aef1ade3de12f219309e118e285a56f3ae8343a9fecadc0c43"
+      "bytes": 396112,
+      "sha256": "3b6697c359add03cd989898ee7d1065bcd55e69c880ae34224ab1fb5e25001a4"
     },
     {
       "location": "prepared",
