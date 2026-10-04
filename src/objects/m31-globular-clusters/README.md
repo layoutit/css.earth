@@ -28,6 +28,12 @@ position on the sky. **Its depth is modelled, not measured.** The bank is writte
 Values chosen here, not measured: the dots' color is the Milky Way globular clusters'; the bank is whole within
 1.5 Mpc of M31.
 
+## Evidence
+
+![M31 as its page opens, and pulled back to the Local Group](evidence/2026-10-04/app-views.jpg)
+
+The M31 page in the app on 2026-10-04: as it opens (left) and pulled back one wheel step, where the Local Group is selected (right). The orange dots are the clusters.
+
 ## Known problems
 
 - No cluster's depth is measured. Two clusters side by side on the sky can be drawn tens of kiloparsecs apart in depth.
