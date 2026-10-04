@@ -7,8 +7,9 @@ import { lineageSource } from '@cssearth/objects/provenance';
 import type { ContextAvailability } from '@cssearth/objects/provenance';
 import { sourceArray, sourceObject } from '@cssearth/objects/sources';
 import { parsePreparedVolumePresentation } from '../../volume-presentation.mts';
-import { readContextObjects, requireInventory } from '@cssearth/objects/node';
+import { readContextObjects } from '@cssearth/objects/node';
 import { hasErrorCode } from '@cssearth/core';
+import { requireInventory } from '@cssearth/objects/node';
 
 const root = resolve(import.meta.dirname, '../../..');
 type PublicAssetAvailability = 'local' | 'manifest';

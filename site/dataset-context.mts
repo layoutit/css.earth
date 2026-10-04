@@ -1,4 +1,6 @@
-import type { ContributionGraph, ExplorationCatalog, LineageSource } from '@cssearth/objects/provenance';
+import type { ContributionGraph } from '@cssearth/objects/provenance';
+import type { ExplorationCatalog } from '@cssearth/objects/provenance';
+import type { LineageSource } from '@cssearth/objects/provenance';
 
 const datasetFacilityLabels: Readonly<Record<string, string>> = Object.freeze({ vst: 'VLT' });
 

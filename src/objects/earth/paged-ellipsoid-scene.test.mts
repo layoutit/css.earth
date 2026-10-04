@@ -6,7 +6,8 @@ import { resolve } from 'node:path';
 import { validateSourceManifest } from '@cssearth/objects/node';
 import { prepareDirectionalSun } from '@cssearth/bake/presentation';
 import { assertPolarCaps, poleOfClass } from './fixtures/polar-caps.mts';
-import { parsePagedProfile, parseInteriorSource, createPagedSurfaceRaster, createAtmospherePreparation, prepareEllipsoidAttitude, preparePagedEllipsoidScene } from '@cssearth/bake/objects/layers/paged-ellipsoid';
+import { parsePagedProfile, parseInteriorSource, createPagedSurfaceRaster, createAtmospherePreparation, prepareEllipsoidAttitude } from '@cssearth/bake/objects/layers/paged-ellipsoid';
+import { preparePagedEllipsoidScene } from '@cssearth/bake/objects/layers/paged-ellipsoid';
 import * as solarGeometry from '../../platform/solar-geometry.mts';
 
 const source = resolve(import.meta.dirname, './source');

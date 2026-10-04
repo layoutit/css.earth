@@ -7,9 +7,10 @@ import { objectAdapter } from '../object-adapter.mts';
 import { SEARCH_OBJECTS } from '../search/search-objects.mts';
 import { prepareSceneDistance } from '@cssearth/bake/navigation';
 import { readObjectDescriptors } from '@cssearth/objects/node';
-import { distanceDescription, isExtendedClassification, normalizeDestinationQuery, parseNavigationDistance, parsePreparedGalaxyCatalog } from '@cssearth/objects';
+import { distanceDescription, isExtendedClassification, normalizeDestinationQuery, parseNavigationDistance } from '@cssearth/objects';
 import { isRecord } from '@cssearth/core';
 import { resolveSpatialCitation } from '@cssearth/catalog';
+import { parsePreparedGalaxyCatalog } from '@cssearth/objects';
 import { resolve } from 'node:path';
 import { systemHostId, systemObjectId } from '../navigation/system-address.mts';
 

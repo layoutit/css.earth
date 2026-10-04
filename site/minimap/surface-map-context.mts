@@ -1,4 +1,4 @@
-import { fromEyeM, rotateWorldPosition } from '@cssearth/engine';
+import { fromEyeM } from '@cssearth/engine';
 import type { PositionM } from '@cssearth/engine';
 import type { ObjectWorldNavigation } from '@cssearth/renderer/runtime/world-navigation-types.ts';
 import type { BrowserWindow } from '../browser/browser-types.mts';
@@ -25,6 +25,7 @@ interface MapEntry {
   stage: Element | null; frame: ObjectWorldNavigation['frame']; axes: SurfaceAxes | null;
   animations: (Animation & { effect: KeyframeEffect })[] | null; times: (CSSNumberish | null | undefined)[];
 }
+import { rotateWorldPosition } from '@cssearth/engine';
 
 // Read the package's prepared map axes in the current shared world frame.
 export function surfaceMapContext(config: SurfaceMapConfig | undefined, camera: SurfaceCamera | null, documentTarget: Document, windowTarget: BrowserWindow) {

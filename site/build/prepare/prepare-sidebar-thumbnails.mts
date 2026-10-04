@@ -1,4 +1,5 @@
-import { readVolumePresentationPreviews, readGalaxyBackingSource, parsePreparedGalaxyCatalog, parseObjectDescriptor } from '@cssearth/objects';
+import { readVolumePresentationPreviews, readGalaxyBackingSource, parsePreparedGalaxyCatalog } from '@cssearth/objects';
+import { parseObjectDescriptor } from '@cssearth/objects';
 import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import sharp from 'sharp';

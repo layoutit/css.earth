@@ -245,3 +245,4 @@ export function loadApplicationUniverse(): Promise<ApplicationUniverse> {
   })().catch(error => { universePromise = null; throw error; });
   return universePromise;
 }
+

@@ -2,7 +2,8 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import test from 'node:test';
 import { contextLineages } from '@cssearth/bake/sources';
-import { productSourceIds, CONTEXT_ROUTE } from '@cssearth/objects/provenance';
+import { productSourceIds } from '@cssearth/objects/provenance';
+import { CONTEXT_ROUTE } from '@cssearth/objects/provenance';
 
 test('each catalogue context reads its products and sources from its source records alone', async () => {
   const read: string[] = [];

@@ -79,7 +79,9 @@ export function cleanModule(text: string, name: string): string {
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
   const files = execFileSync('git', ['ls-files', '-z'], { encoding: 'utf8', maxBuffer: 32 * 1024 * 1024 }).split('\0')
-    .filter(path => /\.(?:[cm]?[jt]sx?)$/u.test(path) && !/(?:^|\/)(?:dist|prepared|generated|node_modules)\//u.test(path));
+    .filter(path => /\.(?:[cm]?[jt]sx?)$/u.test(path) && !/(?:^|\/)(?:dist|prepared|generated|node_modules)\//u.test(path)
+      // `site/` and the root `src/` are out of scope until plan 7 (site architecture), as in the lint gate's ignores.
+      && !/^(?:site|src)\//u.test(path));
   let changed = 0;
   for (const path of files) {
     if (!existsSync(path)) continue;

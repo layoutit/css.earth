@@ -11,12 +11,14 @@ import { STELLAR_SYSTEMS, SYSTEM_FRAMING_RADII, SYSTEM_VIEWS, SYSTEM_VIEW_HOSTS,
 import { bodyViewAtCamera } from '../zoom-scope.mts';
 import { createPreparedWorldNavigation } from '../prepared-world-navigation.mts';
 import { createWorldSelectionTarget, parseSharedView, savedWorldCamera } from '@cssearth/renderer/navigation';
-import { worldQuaternionFromRotation, worldRotationFromQuaternion, createSelectionFlight, sampleSelectionFlight, type WorldCameraPose } from '@cssearth/engine';
+import { worldQuaternionFromRotation, worldRotationFromQuaternion } from '@cssearth/engine';
 import { presentWorldCamera } from '@cssearth/renderer/navigation/world-camera.ts';
 import { SYSTEM_FRAMING_ANGLES } from '../runtime-policy.mts';
+import { createSelectionFlight, sampleSelectionFlight } from '@cssearth/engine';
 
 import { required, position, quaternion, navigationFixture, unusedSharedView } from './navigation-test-values.mts';
 import { parsePreparedWorldContext } from '@cssearth/objects';
+import { type WorldCameraPose } from '@cssearth/engine';
 import type { ObjectWorldNavigation } from '@cssearth/renderer/runtime/world-navigation-types.ts';
 // System framing's candidates load after the first body mounts in the app; these tests need them loaded.
 await Promise.all([...SYSTEM_VIEW_HOSTS].map(id => loadSystemView(id, readSystemViewFile)));

@@ -1,4 +1,5 @@
-import { parseCompleteWorldContext, parsePreparedWorldIndex, systemObjectId, extendWorldContext, parsePreparedWorldContextSummary, parsePreparedWorldSystem } from '@cssearth/objects';
+import { parseCompleteWorldContext, parsePreparedWorldIndex, systemObjectId } from '@cssearth/objects';
+import { extendWorldContext, parsePreparedWorldContextSummary, parsePreparedWorldSystem } from '@cssearth/objects';
 import { WORLD_ANYWHERE_SOURCE, WORLD_SUMMARY_SOURCE, anywhereFiles, pageWorldFiles, startupWorld } from './startup-world.mts';
 import { readWorldPlace } from './object-entries.mts';
 import type { PreparedWorldContext, PreparedWorldIndex, PreparedWorldSystem } from '@cssearth/objects';

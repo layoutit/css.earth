@@ -7,13 +7,14 @@ import { datasetContributors } from '../../dataset-context.mts';
 import { catalogueTextWarnings, compositionWarnings, readerTextErrors, readerTextWarnings } from '../../object-text.mts';
 import type { TextContext, TextFinding } from '../../object-text.mts';
 import { bodyLineage } from '@cssearth/bake/objects/lineage';
-import { parsePreparedExploration, DATASET_ROUTES } from '@cssearth/objects/provenance';
+import { parsePreparedExploration } from '@cssearth/objects/provenance';
 import { sourceResolver } from '@cssearth/objects/sources';
 import { readSourceCatalog } from '@cssearth/bake/sources';
 import { hasErrorCode, requireArray, requireRecord, requireString } from '@cssearth/core';
 import { writePreparedText } from '@cssearth/bake/delivery';
 import { refreshPreparedInventory } from '@cssearth/bake/contract';
 import { readPreparedObjects } from '@cssearth/objects/node';
+import { DATASET_ROUTES } from '@cssearth/objects/provenance';
 
 const SCENE_OBJECTS = readPreparedObjects(resolve(import.meta.dirname, '../../..')).sceneObjects;
 

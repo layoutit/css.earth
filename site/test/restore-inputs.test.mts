@@ -10,7 +10,8 @@ import { validateObjectPackageFiles } from '../build/object-package-contract.mts
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
 import { parseAcquisitionPlan } from '@cssearth/bake/objects/acquisition';
 import { sourceFormatProblem } from '@cssearth/bake/objects/sources';
-import { requireInventory, readPreparedObjects } from '@cssearth/objects/node';
+import { requireInventory } from '@cssearth/objects/node';
+import { readPreparedObjects } from '@cssearth/objects/node';
 
 const SCENE_OBJECTS = readPreparedObjects(resolve(import.meta.dirname, '../..')).sceneObjects;
 

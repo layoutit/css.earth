@@ -14,3 +14,4 @@ test('--keep-bindings refuses when the solved system transform moved', () => {
   assert.throws(() => refuseStaleKeptBindings('mimas', moved), /--keep-bindings refused/);
   assert.throws(() => refuseStaleKeptBindings('mimas', moved), /mimas/);
 });
+

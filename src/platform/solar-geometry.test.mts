@@ -9,7 +9,8 @@ import { loadSceneEpochEphemeris, SCENE_EPHEMERIS_DIRECTORY } from '../../packag
 import { loadAstronomyPackage } from '@cssearth/bake/astronomy';
 import * as geometry from './solar-geometry.mts';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { parseSolidPreparationSource, parseSolidReplayScene } from '@cssearth/bake/objects/layers/terrestrial';
+import { parseSolidPreparationSource } from '@cssearth/bake/objects/layers/terrestrial';
+import { parseSolidReplayScene } from '@cssearth/bake/objects/layers/terrestrial';
 import { requireObjectRuntimeDefinition } from '@cssearth/bake/contract';
 import { readPreparedObjects } from '@cssearth/objects/node';
 

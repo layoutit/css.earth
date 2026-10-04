@@ -1,4 +1,4 @@
-import { testDistance, required, objectFixture, navigationFixture } from './navigation-test-values.mts';
+import { testDistance } from './navigation-test-values.mts';
 import { readSystemViewFile } from './system-view-file.mts';
 import assert from 'node:assert/strict';
 import { sourceTest } from '@cssearth/objects/node/source-test';
@@ -9,6 +9,7 @@ import { systemById } from '../object-systems.mts';
 import { type PreparedWorldCameraFrame } from '@cssearth/objects';
 import { worldCameraFromCenteredPresentation, type WorldCameraPose } from '@cssearth/engine';
 
+import { required, objectFixture, navigationFixture } from './navigation-test-values.mts';
 import type { ObjectWorldNavigationListener } from '@cssearth/renderer/runtime/world-navigation-types.ts';
 import { SYSTEM_VIEW_HOSTS, loadSystemView } from '../system-framing.mts';
 // System framing's candidates load after the first body mounts in the app; these tests need them loaded.
