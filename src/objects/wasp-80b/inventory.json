@@ -214,14 +214,20 @@
     {
       "location": "public",
       "filename": "wasp-80b-arrival.webp",
-      "bytes": 34656,
-      "sha256": "c0a6ceb5a419c484af276fc71793c7928e3f1070b1398992aacfd9628cacd9b4"
+      "bytes": 31400,
+      "sha256": "2667079e35104ef7f8766406387804f5e38a3dbe99d2ee820db8d76cd93e99a7"
     },
     {
       "location": "public",
       "filename": "wasp-80b-billboard.webp",
-      "bytes": 5480,
-      "sha256": "c6cbb60b461b7cf3b300da2ce73b199676cf2361c155048a56b79d31ec863223"
+      "bytes": 5040,
+      "sha256": "eac90239288998c3efdd7851be8e8dcde5435748dc76a84e76293fb88a4b0195"
+    },
+    {
+      "location": "public",
+      "filename": "wasp-80b-dataset-dayside.webp",
+      "bytes": 88,
+      "sha256": "253bf3cf7a0729262c686aff44355b1f44c9823e20d79f842a23862b5fba03a0"
     },
     {
       "location": "public",
@@ -231,9 +237,21 @@
     },
     {
       "location": "public",
+      "filename": "wasp-80b-poles-dayside@2x.webp",
+      "bytes": 10166,
+      "sha256": "61308bd05a0edf7c5504ce04f2d0ea0b73208dc8e24bc67a0bfbee4c559ed3c9"
+    },
+    {
+      "location": "public",
       "filename": "wasp-80b-poles-shape@2x.webp",
       "bytes": 1340,
       "sha256": "62d22fa0881300e8dab6ecc91ba26926c1729a8ad3d738360a6a410a6eb41d3d"
+    },
+    {
+      "location": "public",
+      "filename": "wasp-80b-surface-dayside@2x.webp",
+      "bytes": 11164,
+      "sha256": "bdb28f365fc3b2ada40a23b374825d0b874eec603afa52554f36a547accc1204"
     },
     {
       "location": "public",
@@ -256,14 +274,14 @@
     {
       "location": "prepared",
       "filename": "arrival-billboard.json",
-      "bytes": 309,
-      "sha256": "6e643504b91bb9f35e1abb4ea7adcaa4b9b3e89e5778d16b8539d0765b0c0aea"
+      "bytes": 311,
+      "sha256": "786f7ac7edf5aafe635b7570606c589fdb295ac5bbd8692a1f64341368b338a5"
     },
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 82895,
-      "sha256": "8951b41296d917bbe489cfeac400b83f387d615e7a38679650e8a9f885098772"
+      "bytes": 83058,
+      "sha256": "e8c98d37a2fd76478bf76fd252a1c66cfbc6188a40752043d80da3ccea6047e2"
     },
     {
       "location": "prepared",
@@ -280,20 +298,26 @@
     {
       "location": "prepared",
       "filename": "controls.json",
-      "bytes": 434,
-      "sha256": "08bc26745d62c3e39de77603b10d5de48ee08112c0e0f3a24056c7b3214f51f9"
+      "bytes": 1846,
+      "sha256": "8889fb44c4baeb93806e70c46aaa548d7e11924b639f3d389c30157371d46a20"
     },
     {
       "location": "prepared",
       "filename": "datasets.json",
-      "bytes": 874,
-      "sha256": "db200866aa3c70109fcb1a7a935c55f23441ee97285549a921cc4c51f56cee1c"
+      "bytes": 2872,
+      "sha256": "37fe86881ffdb58317bb6ba40bd4c28a1cc3085b59f2d9900a0ade1893a2ad48"
     },
     {
       "location": "prepared",
       "filename": "minimaps.json",
-      "bytes": 101,
-      "sha256": "3381e54c0e18ef1a8f3c30f3a4a38b83ca3e7004b040bda259dbae84de1c07b3"
+      "bytes": 195,
+      "sha256": "214ccd5d12729d35b382d1760b003cc41fde4b1bfc61c86d8bac4b69918549f5"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/dayside.webp",
+      "bytes": 1164,
+      "sha256": "04736f774962815fe8efa946703ecdbd21155361d07af3aae9b1e28033d28f56"
     },
     {
       "location": "prepared",
@@ -304,8 +328,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 359241,
-      "sha256": "8e5599cec6d836427bf1b922d72d26b2c8ded58706b88220e76caee1aa141a27"
+      "bytes": 363020,
+      "sha256": "7ebed707ff63f17715b63b2633c283f99dcbeeb9cf9c596da14aa9d09041f95e"
     },
     {
       "location": "prepared",
@@ -328,8 +352,8 @@
     {
       "location": "prepared",
       "filename": "text.json",
-      "bytes": 1204,
-      "sha256": "2475f972a6d3c9cb49a6e57b0737ea4a7f87f4023e67554ecfcb53c1853ccd89"
+      "bytes": 1363,
+      "sha256": "bddb72bfe3f6f5a10c0fdd8ee0f34b492c7f6412366897a19e05bdc06395e911"
     },
     {
       "location": "prepared",

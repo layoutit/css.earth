@@ -1,0 +1,35 @@
+{
+  "id": "source-wasp-8b-dayside-temperature",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "WASP-8 b · wasp 8b dayside temperature",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://ui.adsabs.harvard.edu/abs/2013ApJ...768...42C/abstract",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/wasp-8b/source/manifest.json",
+      "locator": "/inputs/8"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cubillos et al. 2013, dayside brightness temperature at 8 µm (NASA Exoplanet Archive emission table)",
+      "scope": "The wasp 8b dayside temperature input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "Factual numerical measurement; source attribution retained",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

@@ -26,10 +26,10 @@
     ]
   },
   "datasets": {
-    "shape": {
-      "title": "Shape only",
-      "detail": "Published radius",
-      "summary": "A sphere at the published size. No picture of its surface exists."
+    "thermal": {
+      "title": "Estimated heat",
+      "detail": "An estimate, not measured",
+      "summary": "Not measured: the color of a black body at the 1,391 K its paper computes from its star's light."
     }
   }
 }

@@ -1,0 +1,20 @@
+{
+  "schema": "cssearth-stellar-photometric-color@1",
+  "objectId": "toi-1685b",
+  "spectrum": "planck",
+  "temperature": {
+    "published": {
+      "kelvin": 1360,
+      "lowerKelvin": 1260,
+      "upperKelvin": 1460,
+      "citation": "Luque et al. 2024, dayside brightness temperature from the NIRSpec G395H white light of detector NRS2, 1360 +/- 100 K: 1360 +/- 100 K, https://arxiv.org/abs/2412.03411"
+    },
+    "note": "Its day side's brightness temperature is measured in secondary eclipse at 4.5 µm (JWST NIRSpec) and nobody has imaged it, so the color is a Planck spectrum at its published temperature.",
+    "chosen": "of the two detectors, the one with the smaller relative uncertainty and the longer wavelength, 3.8 to 5.2 µm",
+    "wavelengthMicrometres": 4.5,
+    "facility": "JWST NIRSpec"
+  },
+  "whitePoint": "sRGB D65",
+  "normalization": "brightest linear sRGB channel = 1",
+  "gamut": "desaturate"
+}

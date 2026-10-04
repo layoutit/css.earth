@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-disc-band-color@1",
+  "objectId": "hip-65426-b",
+  "unit": "µJy",
+  "source": {
+    "citation": "Chauvin et al. (2017); Cheetham et al. (2019), as compiled in Best, Liu, Magnier & Dupuy (2024), The UltracoolSheet v2.1 (Zenodo); zero points from the SVO Filter Profile Service",
+    "url": "https://ui.adsabs.harvard.edu/abs/2017A&A...605L...9C",
+    "locator": "UltracoolSheet Main.csv, HIP 65426 b: 2MASS Ks 16.9 +/- 0.06 (Chau17), 2MASS H 17.79 +/- 0.04 (Chee19), 2MASS J 19.5 +/- 0.42 (Chau17); SVO 2MASS/2MASS.Ks 666.8 Jy, 2MASS/2MASS.H 1024.0 Jy, 2MASS/2MASS.J 1594.0 Jy"
+  },
+  "bands": [
+    {
+      "band": "2MASS Ks",
+      "wavelengthMicrometres": 2.159,
+      "value": 115.9,
+      "error": 6.4
+    },
+    {
+      "band": "2MASS H",
+      "wavelengthMicrometres": 1.662,
+      "value": 78.4,
+      "error": 2.9
+    },
+    {
+      "band": "2MASS J",
+      "wavelengthMicrometres": 1.235,
+      "value": 25.26,
+      "error": 9.8
+    }
+  ],
+  "displayRange": [
+    0,
+    115.9
+  ],
+  "displayRangeSource": "This planet alone, from zero to its brightest band (2MASS Ks), so the color shows its band ratios; brightness is not compared across planets at different distances."
+}

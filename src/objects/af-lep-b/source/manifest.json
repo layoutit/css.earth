@@ -82,28 +82,47 @@
       "consumers": [
         "scene"
       ]
+    },
+    {
+      "id": "af-lep-b-band-color",
+      "path": "photometry/band-color.json",
+      "origin": "https://ui.adsabs.harvard.edu/abs/2023A&A...672A..94D",
+      "credit": "De Rosa et al. (2023); Mesa et al. (2023), as compiled in Best, Liu, Magnier & Dupuy (2024), The UltracoolSheet v2.1 (Zenodo); zero points from the SVO Filter Profile Service, UltracoolSheet Main.csv, AF Lep b: 2MASS Ks 16.75 +/- 0.07 (DeRo23), MKO H 18.61 +/- 0.36 (Mesa23), MKO J 19.22 +/- 0.33 (Mesa23); SVO 2MASS/2MASS.Ks 666.8 Jy, MKO/NSFCam.H 1034.8 Jy, MKO/NSFCam.J 1544.0 Jy",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "Authored method record: the published flux densities transcribed with their bands and the shared display range",
+      "redistribution": "Method record only",
+      "consumers": [
+        "assets",
+        "datasets"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored color recipe transcribing the cited photometry; repinned when edited."
+      }
     }
   ],
   "generatedIntermediates": [
     {
-      "id": "neutral-disc-context-marker",
+      "id": "dataset-color-context-marker",
       "path": "presentation/context.png",
       "origin": "https://arxiv.org/abs/2411.05917",
-      "credit": "Sphere of the published radius; marker written by packages/telescope-cli/src/new-object/new-hosted-planet.mts",
+      "credit": "The default dataset's color as a disc; rendered by packages/telescope-cli/src/source-authoring/context-markers.mts",
       "license": "Project-authored display derivative.",
       "consumers": [
         "navigation"
       ],
       "recipe": {
-        "generator": "packages/telescope-cli/src/new-object/new-hosted-planet.mts",
+        "generator": "packages/telescope-cli/src/source-authoring/context-markers.mts",
         "inputs": [
-          "af-lep-b-observational-measurements"
+          "af-lep-b-observational-measurements",
+          "af-lep-b-preparation-raster",
+          "af-lep-b-band-color"
         ]
       },
-      "generator": "packages/telescope-cli/src/new-object/new-hosted-planet.mts",
+      "generator": "packages/telescope-cli/src/source-authoring/context-markers.mts",
       "sourceBinding": {
         "kind": "local",
-        "reason": "A flat neutral gray disc, the marker of an unresolved surface."
+        "reason": "The default dataset drawn as a disc; `context-markers.mts --check` recomputes it."
       }
     }
   ],

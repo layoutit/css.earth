@@ -202,6 +202,44 @@ color instead of a white lamp: the gray's brightness with the host color dataset
 [color-transfer.ts](../packages/bake/src/objects/color/color-transfer.ts)). `telescope new-object --from-archive` does both; `node packages/telescope-cli/src/new-object/new-object-cli.mts --thermal <id>...`
 and `--host-light <id>...` (that entry only) give them to planets already in the tree.
 
+The archive's emission table stopped growing, so a planet it lacks is looked up in the Spitzer eclipse catalogue of Deming et
+al. (2023, AJ 165, 104; CDS `J/AJ/165/104`, table 2): one uniform reanalysis of every Spitzer eclipse of 122 hot Jupiters, with
+a dayside brightness temperature at 3.6 and 4.5 µm. The same rule picks the band. A band Spitzer never observed is printed
+as 0 and a temperature whose lower error reaches it is not a detection; neither is used. A planet on an orbit with an
+eccentricity of 0.3 or more gets no glow: one eclipse catches it near its closest approach, not its day side round the orbit.
+
+A measured day side that cannot be a glow is still shown, as a dataset of its own
+([dayside-dataset.mts](../packages/telescope-cli/src/new-object/thermal/dayside-dataset.mts)). Under 1,000 K a black body has no
+visible color, and on an eccentric orbit the temperature holds for one moment. In both cases the `measured-dayside` format
+paints the hemisphere under the star in false color at the one printed brightness temperature and leaves the night hemisphere
+blank, because an eclipse says nothing of it. Every planet drawn this way shares one scale, 300 to 3,000 K, so their colors
+compare. An eccentric planet's texts say "at secondary eclipse"; past an eccentricity of 0.6 (HD 80606 b) nothing is drawn.
+`--thermal-entries entries.json` takes a day side read from its own paper, for a planet neither table holds.
+
+### The expected glow of a hot giant
+
+A hot giant nobody has measured still gets a color, said to be an estimate wherever it is shown: the "Expected glow"
+dataset, a black body at the equilibrium temperature a paper prints for it (`--expected-glow <id>...`). The temperature is
+the archive's default parameter set's when that set prints one, the most recently published paper's otherwise; the TESS
+candidate list is not a paper and is not used.
+
+It is an estimate with a measured error. The catalogue above holds both numbers for 120 hot Jupiters on near-circular
+orbits: the measured 4.5 µm day side (table 2) and the equilibrium temperature (table 3). Measured over estimated has a
+median of 1.08, 68% of the planets between 0.95 and 1.20, and 83% within 20%. Taken with the archive's own
+equilibrium temperatures, the ones the estimate uses, on the 107 of those planets the archive has one for: a median of 1.08,
+85% within 20% and 95% within 30%. So the estimate is shown only where that test
+reaches: a planet of at least 0.77 Jupiter radii, the smallest in the sample, hotter than the 1,000 K a black body needs to
+glow, on an orbit rounder than 0.3. A measured day side replaces it: `--thermal` rebuilds an expected glow as a thermal glow.
+
+A small planet is covered by a second, separate test, and only where that test reaches. Coy et al. (2025, ApJ 987, 22,
+Table 2) print, for nine rocky planets of red dwarfs, the measured day side over the hottest a dark, airless rock can be:
+0.88 to 1.07. For a gray planet like those nine (at most 1.5 Earth radii, a star no hotter than 3,600 K, an irradiation
+temperature of 480 to 1,930 K) the expected glow is that maximum, the star's temperature over the square root of a/R*, times
+(2/3)^(1/4), from the star's and the orbit's own records, and its texts state the test and its one outlier since (GJ 357 b,
+35% above). The archive's insolation, printed in another column and often by another paper, is the check: seven planets
+agree within 1%; TOI-6324 b disagrees by 13% and is left gray. Hot rocks of Sun-like stars and hot sub-Neptunes have no
+such test and stay gray.
+
 ![Dataset thumbnails: HD 219134 c gray, HD 219134 b the same gray under its host's light, HD 209458 b and WASP-39 b glowing at their measured dayside temperatures](images/planet-color-routes.png)
 
 ![Before and after on the page: TRAPPIST-1 e, Kepler-186 f and HD 219134 b under their stars' light, HD 209458 b at its measured dayside heat; the flat gray discs on main had no stylesheet sizing their lighting frame](images/planet-color-before-after.png)

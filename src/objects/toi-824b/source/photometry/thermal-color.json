@@ -1,0 +1,20 @@
+{
+  "schema": "cssearth-stellar-photometric-color@1",
+  "objectId": "toi-824b",
+  "spectrum": "planck",
+  "temperature": {
+    "published": {
+      "kelvin": 1463,
+      "lowerKelvin": 1267,
+      "upperKelvin": 1659,
+      "citation": "Roy et al. 2022, dayside brightness temperature at 3.6 µm, 1463 +183 -196 K: 1463 +/- 196 K, https://arxiv.org/abs/2211.11793"
+    },
+    "note": "Its day side's brightness temperature is measured in secondary eclipse at 3.6 µm (Spitzer IRAC) and nobody has imaged it, so the color is a Planck spectrum at its published temperature.",
+    "chosen": "of the two bands, the one with the smaller relative uncertainty; the larger of its two errors is kept",
+    "wavelengthMicrometres": 3.6,
+    "facility": "Spitzer IRAC"
+  },
+  "whitePoint": "sRGB D65",
+  "normalization": "brightest linear sRGB channel = 1",
+  "gamut": "desaturate"
+}

@@ -49,22 +49,22 @@
   },
   "datasets": {
     "titleKey": "datasets",
-    "defaultDataset": "shape",
+    "defaultDataset": "infrared",
     "controls": [
       {
-        "id": "shape",
-        "label": "Shape",
-        "qualification": "A sphere of the published radius, glowing with its own heat; the neutral gray is a display convention, not a measured color.",
-        "thumbnail": "hip-65426-b-dataset-shape.webp",
-        "surface": "hip-65426-b-surface-shape@2x.webp",
-        "poles": "hip-65426-b-poles-shape@2x.webp",
+        "id": "infrared",
+        "label": "Infrared color",
+        "qualification": "False color from its measured flux in three infrared bands (Chauvin et al. (2017); Cheetham et al. (2019), as compiled in Best, Liu, Magnier & Dupuy (2024), The UltracoolSheet v2.1 (Zenodo); zero points from the SVO Filter Profile Service). The disc itself is unresolved.",
+        "thumbnail": "hip-65426-b-dataset-infrared.webp",
+        "surface": "hip-65426-b-surface-infrared@2x.webp",
+        "poles": "hip-65426-b-poles-infrared@2x.webp",
         "source": {
-          "id": "hip-65426-b-observational-measurements",
+          "id": "hip-65426-b-band-color",
           "path": "../manifest.json",
-          "url": "https://arxiv.org/abs/2208.14990"
+          "url": "https://ui.adsabs.harvard.edu/abs/2017A&A...605L...9C"
         },
-        "falseColor": false,
-        "notes": "No image or color of this planet's surface exists: it is a point of light 0.8 arcseconds from its star. No paper gives its flux in three bands comparable with HR 8799's planets, so it stays gray. No spin axis is measured; the display axis is its orbit normal. The gray marks an unresolved surface."
+        "falseColor": true,
+        "notes": "HIP 65426 b's brightness in three infrared bands as one color: red 2MASS Ks 2.159 µm, green 2MASS H 1.662 µm, blue 2MASS J 1.235 µm (Chauvin et al. (2017); Cheetham et al. (2019), as compiled in Best, Liu, Magnier & Dupuy (2024), The UltracoolSheet v2.1 (Zenodo); zero points from the SVO Filter Profile Service), on a range shared with this planet alone, from zero to its brightest band (2mass ks), so the color shows its band ratios; brightness is not compared across planets at different distances. Not a natural color; nobody has resolved its disc."
       }
     ]
   },

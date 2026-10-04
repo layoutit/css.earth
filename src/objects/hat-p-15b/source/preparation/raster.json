@@ -33,6 +33,43 @@
           "source": "the color dataset of hat-p-15 (src/objects/hat-p-15/source/photometry/stellar-color.json)"
         }
       }
+    },
+    {
+      "id": "dayside",
+      "output": "hat-p-15b-surface-{id}{suffix}.webp",
+      "thumbnail": "hat-p-15b-dataset-{id}.webp",
+      "source": "photometry/dayside-temperature.json",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "dayside",
+        "label": "Day side",
+        "format": "measured-dayside",
+        "path": "photometry/dayside-temperature.json",
+        "sampling": "bilinear",
+        "units": "K",
+        "planet": "hat-p-15b",
+        "consumer": "hat-p-15b-measured-dayside",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "minimum": 300,
+        "maximum": 3000,
+        "colors": [
+          "#0d0887",
+          "#7e03a8",
+          "#cc4778",
+          "#f89540",
+          "#f0f921"
+        ],
+        "labels": [
+          "300",
+          "1650",
+          "3000"
+        ],
+        "description": "Measured: the day side's brightness temperature, 888 K at 4.5 µm (Spitzer IRAC). One number for the whole day side; the night side is not measured and is left blank.",
+        "title": "Spitzer IRAC · measured day side",
+        "sourceUrl": "https://ui.adsabs.harvard.edu/abs/2023AJ....165..104D/abstract"
+      }
     }
   ],
   "lighting": {

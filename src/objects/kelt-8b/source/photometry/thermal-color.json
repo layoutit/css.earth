@@ -1,0 +1,19 @@
+{
+  "schema": "cssearth-stellar-photometric-color@1",
+  "objectId": "kelt-8b",
+  "spectrum": "planck",
+  "temperature": {
+    "published": {
+      "kelvin": 1675,
+      "lowerKelvin": 1614,
+      "upperKelvin": 1736,
+      "citation": "Fulton et al. 2015, equilibrium temperature (NASA Exoplanet Archive planetary systems table): 1675 +/- 61 K, https://ui.adsabs.harvard.edu/abs/2015ApJ...810...30F/abstract"
+    },
+    "note": "Nobody has measured its heat or imaged it; this is the equilibrium temperature its paper computes from its star's light, an estimate, so the color is a Planck spectrum at its published temperature.",
+    "chosen": "1 paper in the archive prints one; the most recently published",
+    "estimate": true
+  },
+  "whitePoint": "sRGB D65",
+  "normalization": "brightest linear sRGB channel = 1",
+  "gamut": "desaturate"
+}

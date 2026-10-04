@@ -1,0 +1,35 @@
+{
+  "id": "source-wasp-80b-dayside-temperature",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "WASP-80 b · wasp 80b dayside temperature",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://ui.adsabs.harvard.edu/abs/2015MNRAS.450.2279T/abstract",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/wasp-80b/source/manifest.json",
+      "locator": "/inputs/6"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Triaud et al. 2015, dayside brightness temperature at 4.5 µm (NASA Exoplanet Archive emission table)",
+      "scope": "The wasp 80b dayside temperature input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "Factual numerical measurement; source attribution retained",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

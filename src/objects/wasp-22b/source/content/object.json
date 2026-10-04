@@ -49,22 +49,22 @@
   },
   "datasets": {
     "titleKey": "datasets",
-    "defaultDataset": "shape",
+    "defaultDataset": "thermal",
     "controls": [
       {
-        "id": "shape",
-        "label": "Shape",
-        "qualification": "A sphere of the published radius, lit by Tojil; the neutral gray is a display convention, not a measured color.",
-        "thumbnail": "wasp-22b-dataset-shape.webp",
-        "surface": "wasp-22b-surface-shape@2x.webp",
-        "poles": "wasp-22b-poles-shape@2x.webp",
+        "id": "thermal",
+        "label": "Expected glow",
+        "qualification": "An estimate, not a measurement: black-body color at its published equilibrium temperature, 1,502 K.",
+        "thumbnail": "wasp-22b-dataset-thermal.webp",
+        "surface": "wasp-22b-surface-thermal@2x.webp",
+        "poles": "wasp-22b-poles-thermal@2x.webp",
         "source": {
-          "id": "wasp-22b-observational-measurements",
+          "id": "wasp-22b-thermal-color",
           "path": "../manifest.json",
-          "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract"
+          "url": "https://ui.adsabs.harvard.edu/abs/2016MNRAS.457.4205S/abstract"
         },
         "falseColor": false,
-        "notes": "No image or color of WASP-22 b is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the color of wasp-22's light, as its color dataset measures it."
+        "notes": "Nobody has measured WASP-22 b's heat. This is the color of a black body at 1,502 K, the equilibrium temperature its paper computes from its star's light (Southworth et al. 2016, equilibrium temperature (NASA Exoplanet Archive planetary systems table)). On 120 hot Jupiters whose day side Spitzer measured, the measured temperature is within 20% of this kind of estimate for 83% (Deming et al. 2023). Its star lights the day side. Reflected starlight is not included."
       }
     ]
   },

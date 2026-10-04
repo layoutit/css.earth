@@ -1,0 +1,11 @@
+{
+  "schema": "cssearth-dayside-temperature@1",
+  "planet": "wasp-8b",
+  "temperatureK": {
+    "value": 938,
+    "lower": 938,
+    "upper": 938
+  },
+  "wavelengthMicrons": 8,
+  "source": "Cubillos et al. 2013, dayside brightness temperature at 8 µm (NASA Exoplanet Archive emission table). 3 measured of 3 rows; the smallest relative uncertainty, then the longest wavelength. https://ui.adsabs.harvard.edu/abs/2013ApJ...768...42C/abstract"
+}

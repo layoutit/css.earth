@@ -103,7 +103,7 @@ export async function planetMarker(id: string) {
 async function flatDatasetColor(id: string, science: Record<string, unknown>, surfaceSource: string): Promise<readonly [number, number, number] | undefined> {
   const source = resolve(objects, id, 'source'), read = (path: string) => readFile(resolve(source, path));
   if (science.kind === 'neutral-shape') return science.hostLight === undefined ? [128, 128, 128] : hostLitGray(requireString(requireRecord(science.hostLight).srgb, `${id} hostLight.srgb`));
-  if (science.kind === 'dayside-thermal-color') return (await loadStellarPhotometricColor(read, science, surfaceSource)).color.srgb;
+  if (science.kind === 'dayside-thermal-color' || science.kind === 'equilibrium-thermal-color') return (await loadStellarPhotometricColor(read, science, surfaceSource)).color.srgb;
   if (science.kind === 'disc-integrated-band-color') return (await loadDiscBandColor(read, surfaceSource)).srgb;
   return undefined;
 }

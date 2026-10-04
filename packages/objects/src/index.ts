@@ -227,7 +227,7 @@ export { PREPARED_CONTENT_SCHEMA, parsePreparedPanelContent, type PreparedObject
 export { FACILITY_EMBLEMS_SCHEMA, readFacilityEmblemSource, parseFacilityEmblemLibrary, parseFacilityEmblemImage, type FacilityEmblemEntry, type FacilityEmblemLibrary } from './prepared-data/content/facility-emblems.js';
 
 // E2-rest: P1
-export { PUBLISHED_MUTUAL_ORBIT_SCHEMA, PUBLISHED_BODY_EPOCH_EPHEMERIS_SCHEMA, SOLAR_SYSTEM_PREPARATION_SCHEMA, INVESTIGATION_LEDGER_SCHEMA, ACQUISITION_PLAN_SCHEMA, ECLIPSE_DEPTH_SCHEMA } from './prepared-data/source/source-schema-identifiers.js';
+export { PUBLISHED_MUTUAL_ORBIT_SCHEMA, PUBLISHED_BODY_EPOCH_EPHEMERIS_SCHEMA, SOLAR_SYSTEM_PREPARATION_SCHEMA, INVESTIGATION_LEDGER_SCHEMA, ACQUISITION_PLAN_SCHEMA, ECLIPSE_DEPTH_SCHEMA, DAYSIDE_TEMPERATURE_SCHEMA } from './prepared-data/source/source-schema-identifiers.js';
 export type { AcquisitionOperation, AcquisitionPlan } from './prepared-data/source/acquisition-plan.js';
 export { INVESTIGATION_STATUSES, type InvestigationStatus, type InvestigationEntry, type InvestigationLedger, type FacilityInvestigationLedger } from './prepared-data/source/investigation-ledger.js';
 // E2-rest: P2

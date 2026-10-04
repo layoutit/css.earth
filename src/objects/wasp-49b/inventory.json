@@ -214,32 +214,32 @@
     {
       "location": "public",
       "filename": "wasp-49b-arrival.webp",
-      "bytes": 29168,
-      "sha256": "4597930e098e7f3aac07283f0e47549c944eedbd488b81a2d2e84888b8b5857d"
+      "bytes": 35518,
+      "sha256": "69cb65e547b8c9084caf85a667447c2c6dd7d02396e709c66f8880dbb89990b7"
     },
     {
       "location": "public",
       "filename": "wasp-49b-billboard.webp",
-      "bytes": 4748,
-      "sha256": "43109238a099c84d9638a83c630ef7e1d1f1d6ce037ff882e13d621f022ddf76"
+      "bytes": 6072,
+      "sha256": "62e5fcfa3e5f37ee379e2d66ed259c89cd27acc35ee6afce31b490f6331f9f03"
     },
     {
       "location": "public",
-      "filename": "wasp-49b-dataset-shape.webp",
-      "bytes": 44,
-      "sha256": "c26fc6a218ea8122dce1699eb0b85b392e980a85d959422e60c0c2e03688e75e"
+      "filename": "wasp-49b-dataset-thermal.webp",
+      "bytes": 42,
+      "sha256": "e96ee923fb98a5c6cf4c3fabf594f13faf90d46f8027294923b7ac1eaccce67f"
     },
     {
       "location": "public",
-      "filename": "wasp-49b-poles-shape@2x.webp",
+      "filename": "wasp-49b-poles-thermal@2x.webp",
       "bytes": 1340,
-      "sha256": "3e4b6b461d4a9c0134c67e17a45ca337c9999a87f1c6e2e368894b5d45a82ff8"
+      "sha256": "29b6c6e272d217852486862d533a6bc292ef2fe53ccaddd4c7a650931d191aa8"
     },
     {
       "location": "public",
-      "filename": "wasp-49b-surface-shape@2x.webp",
-      "bytes": 178,
-      "sha256": "88ec9bf580b1ce2a35038e0837f0d094d90127078df9244d4b0791bcc421a64f"
+      "filename": "wasp-49b-surface-thermal@2x.webp",
+      "bytes": 36,
+      "sha256": "cb665f819dd0e74aa7ad186273ba4ab00afc362df8399870ee8e76871f646bdd"
     },
     {
       "location": "public",
@@ -256,20 +256,20 @@
     {
       "location": "prepared",
       "filename": "arrival-billboard.json",
-      "bytes": 307,
-      "sha256": "8f54963f3bf1bf2f538cf4f409718229d1d2ad593b5bcca54ad3caaafc5dc0b0"
+      "bytes": 309,
+      "sha256": "2a1a49fe46e6eb4df315f5eb7046c2a2f773243fcc7b22656bde99592fb36c6a"
     },
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 84331,
-      "sha256": "a2c14eef11ed689b89ee5755dadae1c5849302e4f6e0c378aa5ac88ae2e73e53"
+      "bytes": 83479,
+      "sha256": "d8ab06370ae6202e32d7a16bc84658b21704f09d4e77b93b87214d90bdb63b1e"
     },
     {
       "location": "prepared",
       "filename": "authored-preparation.json",
-      "bytes": 723,
-      "sha256": "670166a669e44b54d63c105779aeee01c5732099d3e24576f42f97dda4e977d5"
+      "bytes": 661,
+      "sha256": "98faa0ddce3acb556e5f3e73a448c7573363345d3f3e6fb229d2d55de53695a8"
     },
     {
       "location": "prepared",
@@ -280,32 +280,32 @@
     {
       "location": "prepared",
       "filename": "controls.json",
-      "bytes": 434,
-      "sha256": "47eec25a6c410d600d6fef35cc9942516e340f706245e3f6e3d96681c43545c1"
+      "bytes": 447,
+      "sha256": "f81f285b4018e43c19651c8d37b1d51c1e5ab600fed5ed1b23d05e44509dd1b3"
     },
     {
       "location": "prepared",
       "filename": "datasets.json",
-      "bytes": 876,
-      "sha256": "76ce671c51598162a4d5b16d8e72fb674fdfed065bfb2718a07f2490cb1ac17b"
+      "bytes": 864,
+      "sha256": "0475ae92534e93bd81de9cf05113e6defd37a8d76047ad5d81b989d9e48fc501"
     },
     {
       "location": "prepared",
       "filename": "minimaps.json",
-      "bytes": 101,
-      "sha256": "3381e54c0e18ef1a8f3c30f3a4a38b83ca3e7004b040bda259dbae84de1c07b3"
+      "bytes": 105,
+      "sha256": "0329ce05b6c076dedc8654dde581417112c5b6e48b98dd4c45917eab12308ad6"
     },
     {
       "location": "prepared",
-      "filename": "minimaps/shape.webp",
-      "bytes": 442,
-      "sha256": "5b8492c965b6c4cefe45a97110a9828d65989a9dbab120e7295123c88056fd98"
+      "filename": "minimaps/thermal.webp",
+      "bytes": 452,
+      "sha256": "e936fa369b34f010cfb1ed2066335e0046266ac3fbce37ed43f2ad8f592e30e0"
     },
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 359232,
-      "sha256": "3ed71e7475f21b30ca5957889523172911407022fae913da1fe941d991edca2c"
+      "bytes": 359277,
+      "sha256": "ee380cc5d8f5fe08f2d3d94b85afc890af4870fcb2449861df56b672294b0fe7"
     },
     {
       "location": "prepared",
@@ -328,8 +328,8 @@
     {
       "location": "prepared",
       "filename": "text.json",
-      "bytes": 1213,
-      "sha256": "9388131bd2aad47197795c9bd4c54640aae41de6a0c986c73030a699140ea3fb"
+      "bytes": 1234,
+      "sha256": "d245b2603039635585e66e76df08db57661a29002020fc71e0129e0286a44dd3"
     },
     {
       "location": "prepared",

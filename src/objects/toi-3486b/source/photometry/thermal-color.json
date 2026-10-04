@@ -1,0 +1,19 @@
+{
+  "schema": "cssearth-stellar-photometric-color@1",
+  "objectId": "toi-3486b",
+  "spectrum": "planck",
+  "temperature": {
+    "published": {
+      "kelvin": 1190,
+      "lowerKelvin": 1162,
+      "upperKelvin": 1218,
+      "citation": "Yee et al. 2025, equilibrium temperature (NASA Exoplanet Archive planetary systems table): 1190 +/- 28 K, https://ui.adsabs.harvard.edu/abs/2025ApJS..280...30Y/abstract"
+    },
+    "note": "Nobody has measured its heat or imaged it; this is the equilibrium temperature its paper computes from its star's light, an estimate, so the color is a Planck spectrum at its published temperature.",
+    "chosen": "1 paper in the archive prints one; the archive's default parameter set",
+    "estimate": true
+  },
+  "whitePoint": "sRGB D65",
+  "normalization": "brightest linear sRGB channel = 1",
+  "gamut": "desaturate"
+}

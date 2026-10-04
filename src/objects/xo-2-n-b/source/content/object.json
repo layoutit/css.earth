@@ -49,22 +49,22 @@
   },
   "datasets": {
     "titleKey": "datasets",
-    "defaultDataset": "shape",
+    "defaultDataset": "thermal",
     "controls": [
       {
-        "id": "shape",
-        "label": "Shape",
-        "qualification": "A sphere of the published radius, lit by XO-2 N; the neutral gray is a display convention, not a measured color.",
-        "thumbnail": "xo-2-n-b-dataset-shape.webp",
-        "surface": "xo-2-n-b-surface-shape@2x.webp",
-        "poles": "xo-2-n-b-poles-shape@2x.webp",
+        "id": "thermal",
+        "label": "Thermal glow",
+        "qualification": "Black-body color at its measured dayside temperature, 1,606 K. The disc itself is unresolved.",
+        "thumbnail": "xo-2-n-b-dataset-thermal.webp",
+        "surface": "xo-2-n-b-surface-thermal@2x.webp",
+        "poles": "xo-2-n-b-poles-thermal@2x.webp",
         "source": {
-          "id": "xo-2-n-b-observational-measurements",
+          "id": "xo-2-n-b-thermal-color",
           "path": "../manifest.json",
-          "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...684A.116R/abstract"
+          "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....165..104D/abstract"
         },
         "falseColor": false,
-        "notes": "No image or color of XO-2 N b is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the color of xo-2-n's light, as its color dataset measures it."
+        "notes": "The color of XO-2 N b's heat: a black body at the dayside brightness temperature measured in secondary eclipse at 3.6 µm (Spitzer IRAC). Its star lights the day side; the night side is not measured. Reflected starlight is not included."
       }
     ]
   },

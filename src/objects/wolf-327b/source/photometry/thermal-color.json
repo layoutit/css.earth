@@ -1,0 +1,19 @@
+{
+  "schema": "cssearth-stellar-photometric-color@1",
+  "objectId": "wolf-327b",
+  "spectrum": "planck",
+  "temperature": {
+    "published": {
+      "kelvin": 1390,
+      "lowerKelvin": 1390,
+      "upperKelvin": 1390,
+      "citation": "computed from wolf-327's temperature, 3542 K, and the orbit's a/R* 5.3, as T* (R*/a)^(1/2) (2/3)^(1/4): 1390 K; the source gives no uncertainty, so the range is the value itself, https://arxiv.org/abs/2412.06573"
+    },
+    "note": "Nobody has measured its heat or imaged it; this is the hottest day side a dark, airless rock can have on its orbit, an estimate, so the color is a Planck spectrum at its published temperature.",
+    "chosen": "the bare-rock maximum, no light reflected and no heat carried to the night side; the star's temperature is Murgas et al. 2024, the stellar temperature of the default parameter set of Wolf 327 b in the NASA Exoplanet Archive, a/R* is Murgas et al. 2024",
+    "estimate": true
+  },
+  "whitePoint": "sRGB D65",
+  "normalization": "brightest linear sRGB channel = 1",
+  "gamut": "desaturate"
+}
