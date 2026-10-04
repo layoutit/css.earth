@@ -74,21 +74,23 @@ flight from Earth to the Moon took 22.4 s and 9.96 MB of the Moon's images befor
 7.2 s and 1.17 MB after (a phone-sized view, 2026-10-02). A dataset drawn at a `resolutionScale` steps through the same list
 shifted by its scale. Below, the Moon on a phone before and after.
 
-How many faces share an image decides what a dataset switch costs: every face is painted again in the one frame that
-draws the new dataset, and a face cut from a large image costs more than one cut from a small one. Saturn's 448 faces,
-switched between two datasets on an iPad with each layout cut from the same atlases (2026-10-04, the page timing its
-own frames):
+What a dataset switch costs is the repaint of the faces. Each face is its own layer, and every one is painted again in
+the frame that draws the new dataset; that frame grows with the area of the faces' boxes
+([leaf boxes](#leaf-boxes-follow-the-body-on-screen)). On an iPad, through the published bucket (2026-10-04, the page
+timing its own frames):
 
-| The faces' images | Frame of the switch |
-| --- | --- |
-| One atlas, 4160 × 3072 (as published) | 304 to 318 ms |
-| 14 pages of one atlas row each, 4160 × 128 | 172 to 190 ms |
-| 28 pages of 16 faces, 512 × 512 | 132 to 153 ms |
-| 112 pages of 4 faces, 256 × 256 | 138 to 155 ms |
-| An image a face, 448 of 128 × 128 | 202 to 205 ms |
+| Body, at its default view | Face boxes | Frame of a switch | All faces repainted, nothing loaded |
+| --- | --- | --- | --- |
+| Mercury | 65 px | 56 to 74 ms | 85 to 101 ms |
+| Io | 104 to 128 px | 182 to 328 ms | 350 to 497 ms |
+| Io, its boxes shrunk in place to 65 px | 65 px | 95 to 144 ms | |
 
-Earth's pages hold four faces (`pageCells`) and its switch is about 100 ms; the Moon's four pages hold 96 to 128
-faces each, and its switch is 174 to 321 ms. Pages of about 16 faces are the fastest layout measured.
+How the surface is cut into images matters less. Io and Mercury baked as square pages of four faces, 112 pages a
+surface, switched in 158 to 298 ms and 129 to 146 ms at their default views: no gain for Io, and twice Mercury's time
+on its one page. Zoomed in, where only the pages in view are decoded, Io took 75 to 108 ms against 108 to 178 ms.
+Time a switch through a server whose images come from the bucket: one that serves them itself answers `no-cache`, each
+image is then requested again when a face first uses it, and many small images spread one repaint over several frames
+(see [the performance lab](../labs/performance/README.md)).
 
 ![The Moon on a phone: the whole atlas, left, and the level its silhouette picks, right](images/raster-levels-moon-phone.jpg)
 

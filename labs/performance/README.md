@@ -139,6 +139,13 @@ ones for a hot interaction, `drag` (two throws and a held turn, 6.5 s), `zoom` (
 gives another: `["wheel", frames, deltaY]`, `["wait", frames]`, `["drag", frames, dx, dy, "fling"|"hold"]`,
 `["fly", "<object id>"]`, `["click", "<selector>", index]`, `["pick", "<select's selector>", option index]`.
 
+Time anything that loads images through a server started with `ASSET_ORIGIN` set to the published bucket. A dev
+server that serves `/scenes/` itself answers with `Cache-Control: no-cache`; the bucket answers `immutable`. Without
+it every image is requested again when a face first uses it, and the faces repaint as the answers arrive: Io, baked
+for a test as small pages with 73 in view, painted its 454 faces, then 232 and 146 of them again in the next two
+frames (2026-10-04).
+Publish the files under test first; a request for a file the bucket lacks is answered 404 and cached for four hours.
+
 `--trace` runs the program once with the Inspector's timeline attached instead, and writes `trace.devtools.json` for
 Chrome DevTools' Performance panel: cut to the run, with a time stamp at each step, every frame in the Frames track and
 the iPad's screen as the filmstrip. It is the chart to look at; the count comes from the run without it.
