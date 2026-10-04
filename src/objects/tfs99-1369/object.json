@@ -1,0 +1,142 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "tfs99-1369",
+  "parent": "m96",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "[TFS99] 1369",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 97954560
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/tfs99-1369-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "[TFS99] 1369",
+      "classification": "star",
+      "color": "#ffe5ce",
+      "distanceAu": 2156741946747.1,
+      "description": "A Cepheid in the galaxy M96, 10.5 million parsecs away, that swells and shrinks every 30.1 days.",
+      "systemName": "[TFS99] 1369 system",
+      "order": 5771,
+      "context": {
+        "order": 5768
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -2.9973530917672776e+23,
+        9.927018292427919e+22,
+        6.6357575385969525e+22
+      ],
+      "presentationToReference": [
+        -0.928996995136055,
+        -0.19523889143095266,
+        0.31439840696319205,
+        0.3076771365261036,
+        0.0646617194334507,
+        0.9492911258928985,
+        0.20566808864594824,
+        -0.978621805046629,
+        1.2593538322350731e-17
+      ],
+      "orbitUpReference": [
+        0.19523889143095266,
+        -0.0646617194334507,
+        0.978621805046629
+      ],
+      "metersPerUnit": 315982451.61290324,
+      "bodyRadiusM": 97954560000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

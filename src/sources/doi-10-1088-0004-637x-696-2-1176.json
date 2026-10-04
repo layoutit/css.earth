@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1088-0004-637x-696-2-1176",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Jones et al. (2009): DISTANCE DETERMINATION TO 12 TYPE II SUPERNOVAE USING THE EXPANDING PHOTOSPHERE METHOD",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "0810.5538"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1088/0004-637X/696/2/1176"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2009ApJ...696.1176J"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2009ApJ...696.1176J",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1088/0004-637X/696/2/1176",
+      "label": "The Astrophysical Journal 696 1176-1194"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2009ApJ...696.1176J",
+      "checkedOn": "2026-10-04",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Jones et al. (2009), The Astrophysical Journal 696 1176-1194",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2009ApJ...696.1176J"
+    }
+  ],
+  "publisher": "The Astrophysical Journal 696 1176-1194",
+  "creators": [
+    "M. I. Jones",
+    "Mario Hamuy",
+    "P. Lira",
+    "et al."
+  ],
+  "publicationDate": "2009"
+}
