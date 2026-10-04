@@ -1,7 +1,7 @@
 import { surfaceFeatureBankIndex, type PreparedSurfaceFeaturePlan, type ParsedSurfaceFeature, type ParsedSurfaceFeatureCatalog } from '@cssearth/objects';
 
 import { writeData, writeStyle } from '../rendering/retained-write.js';
-import { eyeDistanceM } from '@cssearth/engine';
+import { eyeDistanceM, rotateWorldPosition } from '@cssearth/engine';
 import { bindInputEvent } from '../navigation/shared-input-surface.js';
 import type { SceneLifetime } from '@cssearth/engine';
 import { requirePhysicalProjection } from '../prepared-data/physical-projection.js';
@@ -18,7 +18,6 @@ import type { SurfaceLabelCandidate } from './surface-feature-layout.js';
 import { loadPreparedSurfaceFeatureBank, loadPreparedSurfaceFeatureCatalog } from './surface-feature-catalog.js';
 import { flyToSurfaceDirection } from './surface-feature-flight.js';
 import type { SurfaceFlightHandle } from './surface-feature-flight.js';
-import { rotateWorldPosition } from '@cssearth/engine';
 import type { ObjectWorldNavigation } from '../runtime/world-navigation-types.js';
 import type { SurfaceFeatureLayerRuntime, SurfaceFeatureLayerStats } from './surface-feature-types.js';
 

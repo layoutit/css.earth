@@ -1,5 +1,5 @@
-import { parseLabModelJson } from '../../resources/model-paths.ts';
 /** Generic lab-only experiment: frozen image + automatic supports → finite 3D → prepared PolyCSS. */
+import { parseLabModelJson } from '../../resources/model-paths.ts';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { gunzipSync } from 'node:zlib';

@@ -61,4 +61,3 @@ export function parseMeasuredSpectrum(value: unknown): MeasuredSpectrumRecipe {
   }
   return chart;
 }
-

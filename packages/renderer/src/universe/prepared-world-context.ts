@@ -1,7 +1,6 @@
 import { writeStyle } from '../rendering/retained-write.js';
-import { eyeAnchor } from '@cssearth/engine';
+import { eyeAnchor, type WorldCameraPose, cssViewFromOrientation } from '@cssearth/engine';
 import { isExtendedClassification, type PreparedWorldContext, type PreparedContextBody } from '@cssearth/objects';
-import { type WorldCameraPose } from '@cssearth/engine';
 import { createContextLocator } from './context-locator.js';
 import { ContextChange, createWorldContextFrameReceiver } from './world-context/world-context-frame.js';
 import { createWorldContextBodyInteraction, createWorldContextInteractions } from './world-context/world-context-interactions.js';
@@ -14,7 +13,6 @@ import { createSystemFade, indicatorDotDiameter, BODY_INDICATOR_DIAMETER, CONTEX
 import type { WorldCameraViewport } from '../navigation/world-camera.js';
 import { MINIMUM_BODY_MARKER_DIAMETER_PIXELS } from '../solar-system/heliocentric-sprites.js';
 import type { OrientationXyzw } from '@cssearth/engine';
-import { cssViewFromOrientation } from '@cssearth/engine';
 import { mountPreparedOrbitLines, ORBIT_RENDERER_LOD_PIXELS, type OrbitRenderer } from '../solar-system/prepared-orbit-lines.js';
 import { orbitProjectionCapacity } from '../solar-system/prepared-ring-projection.js';
 import type { SpriteWithUrl } from '../solar-system/heliocentric-sprites.js';

@@ -1,11 +1,10 @@
 import { PREPARED_WORLD_CONTEXT_SCHEMA, PREPARED_WORLD_CONTEXT_SUMMARY_SCHEMA } from './world-schemas.js';
 import { parsePresentation } from '../camera/world-camera.js';
-import type { WorldPosition as PositionM } from './world-frame.js';
+import type { WorldPosition as PositionM, PreparedWorldCameraFrame } from './world-frame.js';
 import { parsePreparedOrbitCenters } from '../orbit/prepared-orbit-centers.js';
 import type { PreparedOrbitCenter } from '../orbit/prepared-orbit-centers.js';
 import { parsePreparedWorldCameraFrame } from './world-frame.js';
 import { array, finite, numbers, positive, record, text, unique } from './world-guards.js';
-import type { PreparedWorldCameraFrame } from './world-frame.js';
 import { validateWorldRotation } from '@cssearth/core';
 import type { LevelOfDetailPlan, OrbitLineFade } from '../presentation/world-presentation.js';
 import type { PreparedOrbitStrokes } from '../orbit/prepared-orbit-strokes.js';

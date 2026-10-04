@@ -1,5 +1,5 @@
-import {applyIsophoteMasks,applyRecordedPointMasks,emissionInputChannels,emissionRasterPixels,createInferredEmissionSampler} from '@cssearth/nebula-reconstruction/methods/symmetry/processing';
 /** Offline planetary-nebula experiment; never runs from a browser mount. */
+import {applyIsophoteMasks,applyRecordedPointMasks,emissionInputChannels,emissionRasterPixels,createInferredEmissionSampler} from '@cssearth/nebula-reconstruction/methods/symmetry/processing';
 import { readFile, writeFile, mkdir, rename } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import sharp from 'sharp';

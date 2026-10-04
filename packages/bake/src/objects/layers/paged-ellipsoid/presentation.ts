@@ -2,8 +2,7 @@ import { OBJECT_RUNTIME_SCHEMA, PREPARED_PRESENTATION_SCHEMA, canonicalPreparedA
 
 import type { prepareTextureLevels, TextureLevelConfiguration } from './texture-levels.ts';
 import type { SurfaceBankDatasets } from './contracts.ts';
-import type { PreparedNode } from '../../../presentation/index.ts';
-import type { MaterialSourceTrack } from '../../../presentation/index.ts';
+import type { PreparedNode, MaterialSourceTrack } from '../../../presentation/index.ts';
 import type { preparePagedEllipsoidScene } from './globe/scene.ts';
 import type { preparePlaces } from './geographic/places.ts';
 
@@ -17,10 +16,8 @@ export interface PagedPresentationInput { config: PresentationConfiguration; pla
   textureLevels?: Awaited<ReturnType<typeof prepareTextureLevels>>; sky: PreparedCubicSkyPlan; sun: PreparedDirectionalSunPlan; controls: ShellObjectControls;
   catalog?: Awaited<ReturnType<typeof preparePlaces>>; }
 const materialIds = ['atmosphere'] as const;
-import { prepareCssomDeclarationReads, createPreparedNodeTree } from "../../../presentation/index.ts";
+import { prepareCssomDeclarationReads, createPreparedNodeTree, textureTileVariables, prepareMaterialTracks } from "../../../presentation/index.ts";
 import { seamOutsetBinding, seamOutsetInitialValue } from "../../../scene/index.ts";
-import { textureTileVariables } from "../../../presentation/index.ts";
-import { prepareMaterialTracks } from "../../../presentation/index.ts";
 import { surfaceBankInventory } from "./surface-banks.ts";
 
 export async function preparePagedEllipsoidPresentation({ config, plan, datasets, sky, sun, catalog, textureLevels, controls }: PagedPresentationInput) {

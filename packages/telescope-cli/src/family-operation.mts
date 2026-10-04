@@ -5,7 +5,7 @@ import { randomUUID } from 'node:crypto';
 import { constants } from 'node:fs';
 import { copyFile, mkdir, readFile, rename, rm, stat, writeFile } from 'node:fs/promises';
 import { basename, dirname, isAbsolute, resolve } from 'node:path';
-import { fileSize, writeProductRecord } from '@cssearth/telescope/node';
+import { fileSize, writeProductRecord, pyuvdataUvfits, figureBackground, type FigureBackground, type FigureOptions } from '@cssearth/telescope/node';
 import type { ProductInput } from '@cssearth/objects';
 import { VERSION } from './help.mts';
 import { operationsForDescriptor, type FamilyOperation } from './family-handlers.mts';
@@ -20,8 +20,7 @@ import { readTessLightCurve } from '@cssearth/bake/objects/raster';
 import { dynamicSpectrumSpectrum, dynamicSpectrumTimeSeries, exportDynamicSpectrumCsv, inspectWindRad1, selectDynamicSpectrum } from './families/f07-dynamic-spectrum.mts';
 import { extractSlitRegionSpectrum, slitProfileTable, slitScanSummary } from './families/f04-slit-profile.mts';
 import { dolpPreview, extractStokesFits, inspectIntensityDolp, inspectStokesFits, previewStokesExtraction } from './families/f13-polarimetry.mts';
-import { readChannelRows } from '@cssearth/bake/objects/layers/observation';
-import { subsetOifits, type OifitsRowSelection } from '@cssearth/bake/objects/layers/observation';
+import { readChannelRows, subsetOifits, type OifitsRowSelection } from '@cssearth/bake/objects/layers/observation';
 import { delayDopplerCoordinateView, delayDopplerProfile, inspectDelayDopplerFits, previewDelayDoppler } from './families/f15-radar.mts';
 import { selectSpatialComponents } from './families/f16/f16-spatial-physical.mts';
 import { contextFromPhysicalGridDescriptor, cropPhysicalCartesianGrid, exportPhysicalCartesianNative, inspectPhysicalCartesianGrid, preparePhysicalCartesianVolume, slicePhysicalCartesianGrid, type GridCrop, type GridSlice, type PhysicalGridPlacement, type PhysicalGridTransfer } from './families/f16/f16-cartesian-grid.mts';
@@ -32,11 +31,9 @@ import { exportSpatialObject, inspectSpatialObject } from './spatial-handoff.mts
 import { extractMixedNd, inspectMixedNd } from './families/f02-mixed-nd.mts';
 import { inspectHealpix, selectHealpix } from './families/f14-healpix.mts';
 import { previewUvfitsSelection } from './families/f11-measurement-set.mts';
-import { pyuvdataUvfits } from '@cssearth/telescope/node';
 
 import { verifiedProduct } from './verified-product.mts';
 
-import { figureBackground, type FigureBackground, type FigureOptions } from '@cssearth/telescope/node';
 export const FAMILY_OPERATION_STAGE='telescope-family-operation' as const;
 type FamilyOperationArguments=
   |{readonly operationId:'spectrum-export'|'spectrum-chart-data'|'photometry-export'|'sed-table'|'sed-plot-data'|'time-series-export'|'time-series-plot-data'|'astrometry-inspect'|'astrometry-export'|'astrometry-track-data'|'slit-profile-table'|'radar-coordinate-view'}

@@ -1,11 +1,10 @@
 /** One readback owner for native source files and reducer products. */
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { sciencePackage } from '@cssearth/telescope/node';
+import { sciencePackage, fileSize } from '@cssearth/telescope/node';
 import { isisMetadata, pdsMetadata, parseNativeMetadata, type NativeMetadata } from './native-metadata.mts';
 import { calibrationDependencies, verifyCalibrationDependencies } from './calibration-dependencies.mts';
 import { parseProductFacts } from './qualified-observations.mts';
-import { fileSize } from '@cssearth/telescope/node';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
 import { decodeIsis3Core } from '@cssearth/bake/objects/raster';
 import type { ProductFacts } from './request-satisfaction.mts';

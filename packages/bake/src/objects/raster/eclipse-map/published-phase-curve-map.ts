@@ -44,8 +44,7 @@ import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { planckRadiance } from './eigenmap-fit.ts';
-import { spidermanMapGrid, spidermanPhaseCurve, type SpidermanSphericalMap } from '@cssearth/telescope/node';
-import { starryMapGrid, type StarryMap, type StarrySystem } from '@cssearth/telescope/node';
+import { spidermanMapGrid, spidermanPhaseCurve, type SpidermanSphericalMap, starryMapGrid, type StarryMap, type StarrySystem } from '@cssearth/telescope/node';
 
 const cell = (value: unknown, label: string) => requireFiniteNumber(requireRecord(value, label).value, `${label}.value`);
 

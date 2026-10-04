@@ -3,11 +3,10 @@
  * the data lies comes from the minimap step, which records each dataset's coverage direction before its lossy encoding. A dataset
  * whose recipe authors a focus keeps it: a focus chooses one region of scattered data and the zoom it needs (Europa's
  * Agenor terrain model), which coverage alone cannot. */
-import { preparedControlPitch } from '@cssearth/engine';
+import { preparedControlPitch, SURFACE_FLY_TO } from '@cssearth/engine';
 import { isRecord } from '@cssearth/core';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { SURFACE_FLY_TO } from '@cssearth/engine';
 import type { Vector3 } from '@cssearth/engine';
 import { LOPSIDED_COVERAGE, prepareDefaultCameraAngles, type SolarGeometry } from '../scene/index.ts';
 

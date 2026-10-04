@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 /** Betelgeuse authored inputs: the uniform-disc reference sphere from the retained measurements, the monochromatic continuum
  * OIFITS merged from the pinned VLT/MATISSE files, the beam-convolved reconstruction and the navigation marker rendered from it.
  * All are deterministic functions of checked-in or pinned inputs.
@@ -7,12 +6,12 @@ import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
  *   node packages/bake/authoring/betelgeuse/author.mts [--check]
  *
  * --check recomputes both outputs and fails if either differs from the file on disk. */
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 import { readFile, readdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { runAuthor } from '../authored-output.mts';
 import { pathToFileURL } from 'node:url';
-import { mergeContinuum, mergedOifits, type ContinuumRecipe } from '@cssearth/bake/objects/layers/observation';
-import { convolveGaussian, readReconstruction, writeReconstruction } from '@cssearth/bake/objects/layers/observation';
+import { mergeContinuum, mergedOifits, type ContinuumRecipe, convolveGaussian, readReconstruction, writeReconstruction } from '@cssearth/bake/objects/layers/observation';
 import { skyDisplayRaster } from '@cssearth/fits';
 import { requireArray, requireRecord, requireFiniteNumber, requireString } from '@cssearth/core';
 import sharp from 'sharp';

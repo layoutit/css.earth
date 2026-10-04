@@ -1,6 +1,4 @@
 #!/usr/bin/env node
-import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
-import { BODY_MAP_SCHEMA } from '@cssearth/objects';
 /** Write a body's JWST band maps from its record, src/objects/<id>/source/preparation/jwst-band-maps.json.
  *
  *   node packages/telescope-cli/authoring/jwst/cubes/author-body-maps.mts <object id> [--check] [--raw <dir>]...
@@ -19,21 +17,18 @@ import { BODY_MAP_SCHEMA } from '@cssearth/objects';
  *    judge it in evidence/jwst-band-maps.json.
  *
  * --check writes nothing and fails if any file would change. */
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
+import { BODY_MAP_SCHEMA, type BodyMapFrame, type BodyMapObservation, type CombinationPolicy, type MeasurementDefinition } from '@cssearth/objects';
 import { selectedProductInput } from '@cssearth/telescope-cli/selected-product';
 import type { ObservationSelection } from '@cssearth/telescope-cli/query-contract';
 import { mkdir, readFile, stat, writeFile } from 'node:fs/promises';
 import { dirname, resolve, relative } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { hasErrorCode, requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { horizonsTables } from '@cssearth/bake/objects/layers/terrestrial';
-import { horizonsRows, loadOrientation, observerRowValues, rowJd } from '@cssearth/bake/objects/layers/terrestrial';
-import { placeResolvedDisc } from '@cssearth/bake/objects/layers/observation';
+import { horizonsTables, horizonsRows, loadOrientation, observerRowValues, rowJd } from '@cssearth/bake/objects/layers/terrestrial';
+import { placeResolvedDisc, bandDepth, openSpectralCube, type Window, combineUnderPolicy, renderBodyMapProduct, bodyMapFits, type BodyMap } from '@cssearth/bake/objects/layers/observation';
 import { mastFile } from '@cssearth/telescope/node';
 import { readImagingProgram } from '@cssearth/telescope-cli/archives/jwst/imaging/image3';
-import { bandDepth, openSpectralCube, type Window } from '@cssearth/bake/objects/layers/observation';
-import { combineUnderPolicy, renderBodyMapProduct } from '@cssearth/bake/objects/layers/observation';
-import { type BodyMapFrame, type BodyMapObservation, type CombinationPolicy, type MeasurementDefinition } from '@cssearth/objects';
-import { bodyMapFits, type BodyMap } from '@cssearth/bake/objects/layers/observation';
 import { bindMapResolution, bodyMapProductRecord, formatProductRecord } from '@cssearth/telescope-cli/body-map-publication';
 import type { ProductInput, ProductSoftware } from '@cssearth/objects';
 

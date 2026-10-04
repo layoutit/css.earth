@@ -10,8 +10,7 @@ import { writeProductRecord, WORKSPACE, fileSize } from '@cssearth/telescope/nod
 import { exportSphere } from './sphere/sphere.mts';
 import { listArtifactOutputs } from './artifact-outputs.mts';
 import { inspectMeasurementSphere } from '@cssearth/telescope-cli/sphere/lane';
-import { bodyMapFits } from '@cssearth/bake/objects/layers/observation';
-import { renderBodyMapProduct } from '@cssearth/bake/objects/layers/observation';
+import { bodyMapFits, renderBodyMapProduct } from '@cssearth/bake/objects/layers/observation';
 import { type BodyMapProduct } from '@cssearth/objects';
 import sharp from 'sharp';
 import type { SolarGeometry } from '@cssearth/bake/objects/scene';

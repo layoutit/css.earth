@@ -52,4 +52,3 @@ export function parseRetrievedProfile(value: unknown): RetrievedProfileRecipe {
   return { kind: 'retrieved-profile', id, title: requireString(r.title), description: requireString(r.description), output: localPath(r.output),
     metadata: requireRecord(r.metadata), series, pressure, temperature: axis(r.temperature), probedPressure, notes };
 }
-

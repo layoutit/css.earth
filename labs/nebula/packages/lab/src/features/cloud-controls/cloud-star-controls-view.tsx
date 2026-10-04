@@ -1,9 +1,9 @@
+/** Visible lab controls for the independently prepared bright-star layer. */
 import { useEffect, useState, useSyncExternalStore } from 'react';
 import { createPortal } from 'react-dom';
 import { ImageAppearanceCheckbox } from '../../ui/image-appearance-panel';
 import type { ControlPortals } from '../../ui/control-portals';
 import { createControlStore } from '../../state/control-store.ts';
-/** Visible lab controls for the independently prepared bright-star layer. */
 import type { CloudStarOptions, CloudStarContext } from '@cssearth/volume-viewer/scene/cloud-types';
 export type { CloudStarOptions, CloudStarContext } from '@cssearth/volume-viewer/scene/cloud-types';
 const KEY = 'cssearth-nebula-bright-stars@1';

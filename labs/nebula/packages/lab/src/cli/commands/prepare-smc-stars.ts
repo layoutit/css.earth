@@ -1,6 +1,6 @@
+/** Offline preparation of the published Bonanos et al. (2010) massive SMC star sample inside the current finite SMC model. */
 import { PREPARED_CATALOGUE_STARS_SCHEMA, type PreparedLmcStars } from '@cssearth/objects';
 import { isRecord as coreIsRecord } from '@cssearth/core';
-/** Offline preparation of the published Bonanos et al. (2010) massive SMC star sample inside the current finite SMC model. */
 import { readFile } from 'node:fs/promises';
 import { basename, resolve } from 'node:path';
 import { STAR_PHOTOMETRY } from '@cssearth/bake/volume';

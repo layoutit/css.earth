@@ -1,5 +1,4 @@
-import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
-import { containedPath } from '@cssearth/core/node';
+import { projectRoot as checkoutProjectRoot, containedPath } from '@cssearth/core/node';
 import { readNonArrayRecord, readNonblankText, readFiniteNumber, readPositiveNumber } from '@cssearth/core';
 import { existsSync } from 'node:fs';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';

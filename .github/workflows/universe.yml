@@ -149,6 +149,13 @@ jobs:
         with:
           path: packages/*/dist
           key: compiled-packages-v2-${{ steps.ci-cache-key.outputs.package_digest }}
+      - name: Cache pinned NAIF kernel banks
+        # A miss restores from each manifest's NAIF origin; no external mirror is written.
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          path: |
+            src/spice/*/*/
+          key: naif-kernels-${{ runner.os }}-${{ hashFiles('src/spice/*/manifest.json') }}
       - name: Generate the registry and renderer
         env:
           CI_PACKAGE_CACHE_HIT: ${{ steps.package-cache.outputs.cache-hit }}
@@ -218,6 +225,13 @@ jobs:
           restore-keys: |
             tsbuildinfo-app-${{ steps.ci-cache-key.outputs.tsconfig_digest }}-${{ github.head_ref || github.ref_name }}-
             tsbuildinfo-app-${{ steps.ci-cache-key.outputs.tsconfig_digest }}-main-
+      - name: Cache pinned NAIF kernel banks
+        # A miss restores from each manifest's NAIF origin; no external mirror is written.
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          path: |
+            src/spice/*/*/
+          key: naif-kernels-${{ runner.os }}-${{ hashFiles('src/spice/*/manifest.json') }}
       - name: Build shared packages and affected entry points
         env:
           CI_PACKAGE_CACHE_HIT: ${{ steps.package-cache.outputs.cache-hit }}
@@ -277,6 +291,13 @@ jobs:
           restore-keys: |
             tsbuildinfo-tests-${{ steps.ci-cache-key.outputs.tsconfig_digest }}-${{ github.head_ref || github.ref_name }}-
             tsbuildinfo-tests-${{ steps.ci-cache-key.outputs.tsconfig_digest }}-main-
+      - name: Cache pinned NAIF kernel banks
+        # A miss restores from each manifest's NAIF origin; no external mirror is written.
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          path: |
+            src/spice/*/*/
+          key: naif-kernels-${{ runner.os }}-${{ hashFiles('src/spice/*/manifest.json') }}
       - name: Build shared packages and affected entry points
         env:
           CI_PACKAGE_CACHE_HIT: ${{ steps.package-cache.outputs.cache-hit }}
@@ -337,6 +358,13 @@ jobs:
         with:
           path: packages/*/dist
           key: compiled-packages-v2-${{ steps.ci-cache-key.outputs.package_digest }}
+      - name: Cache pinned NAIF kernel banks
+        # A miss restores from each manifest's NAIF origin; no external mirror is written.
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          path: |
+            src/spice/*/*/
+          key: naif-kernels-${{ runner.os }}-${{ hashFiles('src/spice/*/manifest.json') }}
       - name: Build shared packages and affected entry points
         env:
           CI_PACKAGE_CACHE_HIT: ${{ steps.package-cache.outputs.cache-hit }}
@@ -458,6 +486,13 @@ jobs:
         with:
           path: packages/*/dist
           key: compiled-packages-v2-${{ steps.ci-cache-key.outputs.package_digest }}
+      - name: Cache pinned NAIF kernel banks
+        # A miss restores from each manifest's NAIF origin; no external mirror is written.
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          path: |
+            src/spice/*/*/
+          key: naif-kernels-${{ runner.os }}-${{ hashFiles('src/spice/*/manifest.json') }}
       - name: Build shared packages and affected entry points
         env:
           CI_PACKAGE_CACHE_HIT: ${{ steps.package-cache.outputs.cache-hit }}

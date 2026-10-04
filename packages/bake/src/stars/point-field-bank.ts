@@ -1,10 +1,6 @@
-import type { DensityVolumeFrame } from '@cssearth/objects';
-import type { PreparedPointFieldStar, PreparedPointFieldNode } from '@cssearth/objects';
+import type { DensityVolumeFrame, PreparedPointFieldStar, PreparedPointFieldNode, PreparedCssPointField, PreparedPointFieldBank, PreparedPointFieldQuantization } from '@cssearth/objects';
 import type { StarsRecipe } from './types.ts';
-import type { PreparedCssPointField, PreparedPointFieldBank, PreparedPointFieldQuantization } from '@cssearth/objects';
-import { POINT_FIELD_BANK_ENCODING, POINT_FIELD_BANK_QUANTIZATION, POINT_FIELD_MAGNITUDE_BOUND, POINT_FIELD_MAGNITUDE_DIVISOR,
-  decodePointFieldBank, decodeStarMagnitude, pointFieldBankHeader, pointFieldBankLayout } from '@cssearth/objects';
-import { IMPERCEPTIBLE_LUMINANCE } from '@cssearth/objects';
+import { POINT_FIELD_BANK_ENCODING, POINT_FIELD_BANK_QUANTIZATION, POINT_FIELD_MAGNITUDE_BOUND, POINT_FIELD_MAGNITUDE_DIVISOR, decodePointFieldBank, decodeStarMagnitude, pointFieldBankHeader, pointFieldBankLayout, IMPERCEPTIBLE_LUMINANCE } from '@cssearth/objects';
 
 type Photometry = PreparedCssPointField['photometry'];
 

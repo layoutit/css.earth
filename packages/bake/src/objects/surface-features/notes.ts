@@ -1,4 +1,4 @@
-import { requireRecord, requireString } from '@cssearth/core';
+import { requireRecord, requireString, isRecord } from '@cssearth/core';
 // Pin source-backed notes for named surface features: each IAU Gazetteer feature id is joined to its Wikidata item
 // (property P2824) and, when an English Wikipedia article exists, to that article's lead summary. The result is a
 // repository-pinned document beside the Gazetteer archive; preparation merges it into the feature catalogue and the
@@ -9,7 +9,6 @@ import { parseDbf } from './dbf.ts';
 import { parseSurfaceFeaturesConfig } from './surface-features.ts';
 import { unzipMember } from './archive.ts';
 import { FEATURE_NOTES_SCHEMA, parseFeatureNotes, trimExtract, type FeatureNote, type FeatureNotes } from './notes-schema.ts';
-import { isRecord } from '@cssearth/core';
 
 
 const requireArray = (value: unknown, label = 'Source value'): unknown[] => { if (!Array.isArray(value)) throw new TypeError(`${label} must be an array.`); return value; };

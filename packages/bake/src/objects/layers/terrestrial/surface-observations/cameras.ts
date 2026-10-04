@@ -1,5 +1,5 @@
-import { cross3 as cross, dotN as dot } from '@cssearth/core';
 /** Camera providers. Each turns what an archive or a kernel set gives into the one ObservationCamera contract. */
+import { cross3 as cross, dotN as dot } from '@cssearth/core';
 import type { ObservationCamera } from './contract.ts';
 import { parseMatrixArchivedCamera } from '@cssearth/objects';
 import { fitCamera, project } from '../missions/osiris-geo.ts';

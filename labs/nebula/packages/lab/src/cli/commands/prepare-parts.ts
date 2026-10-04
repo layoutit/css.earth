@@ -1,7 +1,7 @@
+/** Offline preparation of frozen cloud-component inspection banks. */
 import { OBJECT_SCHEMA, CLOUD_PARTS_SCHEMA, DENSITY_VOLUME_FORMAT, type VolumeRecipe, type DensityVolumeFrame, type VolumeSlices, type PreparedCssVolume } from '@cssearth/objects';
 import { observationEnvelope as envelope, type ImageWcs } from '@cssearth/bake/volume';
 import { parseLabModelJson } from '../../resources/model-paths.ts';
-/** Offline preparation of frozen cloud-component inspection banks. */
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 

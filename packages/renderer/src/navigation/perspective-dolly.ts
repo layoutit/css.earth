@@ -6,8 +6,7 @@ import { createSettlePacer, framePacerFor } from '../rendering/settle-pacer.js';
 import { showSection } from '../rendering/detached-sections.js';
 import type { Vector3 } from './types.js';
 
-import type { BodyProjection } from '@cssearth/engine';
-import type { VisibleRect } from '@cssearth/engine';
+import type { BodyProjection, VisibleRect } from '@cssearth/engine';
 import type { CameraViewport } from './camera-viewport.js';
 import { presentWorldCamera, worldCameraSilhouetteDiameter, worldCameraViewport } from './world-camera.js';
 import type { WorldCameraViewport } from './world-camera.js';

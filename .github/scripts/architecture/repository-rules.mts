@@ -1,16 +1,15 @@
-import { checkAuthoringPolicies } from './authoring-policy.mts';
-import { checkSiteBuildFormatReaders } from './site-build-format-readers.mts';
 /** Rules the architecture check applies to the repository itself rather than to the import graph. They have no
  * baseline: the repository satisfies each of them today, so every finding fails the check, and
  * `--update-baseline` never records one. */
+import { checkAuthoringPolicies } from './authoring-policy.mts';
+import { checkSiteBuildFormatReaders } from './site-build-format-readers.mts';
 import ts from 'typescript';
 import { checkBakeWithoutRenderer } from './bake-without-renderer.mts';
 import { checkFormatSchemaOwnership } from './format-schema-ownership.mts';
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { dirname, posix, resolve } from 'node:path';
-import { declaredPackage, importedSpecifiers } from './declared-dependencies.mts';
+import { declaredPackage, importedSpecifiers, checkDeclaredDependencies } from './declared-dependencies.mts';
 import { isTestPath } from './zones.mts';
-import { checkDeclaredDependencies } from './declared-dependencies.mts';
 import { checkNebulaBoundaries } from './nebula-packages.mts';
 import { checkPackageCycles } from './package-cycles.mts';
 import { checkPreparationWithoutRenderer } from './preparation-without-renderer.mts';

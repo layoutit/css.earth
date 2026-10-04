@@ -1,5 +1,4 @@
-import type { PointFieldVector, PointFieldRgb } from '@cssearth/objects';
-import type { PreparedPointFieldStar, PreparedPointFieldNode } from '@cssearth/objects';
+import type { PointFieldVector, PointFieldRgb, PreparedPointFieldStar, PreparedPointFieldNode } from '@cssearth/objects';
 
 import { nearestColor } from './color.ts';
 import { hierarchyPosition, hierarchyMagnitude, hierarchyRadius } from './precision.ts';

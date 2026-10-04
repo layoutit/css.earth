@@ -1,7 +1,6 @@
 import { validatePreparedCataloguePoints, type PreparedCataloguePoints, samePreparedCatalogueGeometry } from '@cssearth/objects';
 import { writeStyle } from '../rendering/retained-write.js';
-import { presentPhysicalPoseInVolume } from '@cssearth/engine';
-import { cssViewFromOrientation } from '@cssearth/engine';
+import { presentPhysicalPoseInVolume, cssViewFromOrientation } from '@cssearth/engine';
 import type { VolumeCameraPublication } from '../volume/types.js';
 import { nativeProjectedLength } from '../rendering/native-projection.js';
 

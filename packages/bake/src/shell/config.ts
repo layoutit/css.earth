@@ -1,8 +1,6 @@
-import { requireFiniteTriple as triple } from '@cssearth/core';
-import { requireNonemptyString as text } from '@cssearth/core';
 /** Data-only deformation and material recipe for a prepared transparent surface. */
+import { requireFiniteTriple as triple, requireNonemptyString as text, requireFiniteNumber as finite, requireRecord as record } from '@cssearth/core';
 import { parseDensityVolumeFrame, type DensityVolumeFrame, type Vector3 } from '@cssearth/objects';
-import { requireFiniteNumber as finite, requireRecord as record } from '@cssearth/core';
 
 export interface ShellDisplaySubdivision { method: 'radial-linear'; segmentsPerEdge: number; }
 interface ShellShapeSource { path: string; displaySubdivision?: ShellDisplaySubdivision; }

@@ -1,10 +1,8 @@
-import { SURFACE_FLY_TO } from '@cssearth/engine';
+import { SURFACE_FLY_TO, projectTrackballDelta } from '@cssearth/engine';
 import { cross3 } from '@cssearth/core';
 import type { TrackballMetrics, Vector3, Quaternion, Matrix3 } from './types.js';
 export interface SurfaceFlyToInput { clientX: number; clientY: number; trackball: TrackballMetrics; currentZoom: number; minimumZoom: number; maximumZoom: number; }
 export type SurfaceFlyToPlan = NonNullable<ReturnType<typeof planSurfaceFlyTo>>;
-import { projectTrackballDelta } from
-  "@cssearth/engine";
 
 // Prepared from the complete 123-frame rest trace. The third channel is
 // normalized camera distance, recovered from the reference projection.

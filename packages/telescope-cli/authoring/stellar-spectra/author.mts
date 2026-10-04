@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 /** Placed stars whose color dataset is a measured spectrum (the `measured` spectrum of stellar-photometric-color.mts): the navigation
  * marker is that color as a uniform disc, and the catalogue and surface colors are its hex. All three are deterministic
  * functions of the pinned spectrum, its record and the CIE observer.
@@ -7,6 +6,7 @@ import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
  *   node packages/telescope-cli/authoring/stellar-spectra/author.mts [--check] [<id> ...]
  *
  * --check recomputes everything and fails where a file differs. */
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';

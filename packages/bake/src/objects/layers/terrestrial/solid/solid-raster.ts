@@ -9,10 +9,9 @@ import { lambertAttenuationAtlas, type LambertAttenuationParameters, requireTerr
 import type { WebpOptions } from 'sharp';
 import { writeLossyWebp, paintMissingCoverage, applyUnderlay } from '../../../../raster/index.ts';
 import type { createSourceManifest } from '@cssearth/objects/node';
-import type { RadialState } from './solid-contract.ts';
+import type { RadialState, SolidSurface } from './solid-contract.ts';
 import { encodeBandColor, interpolatePalette } from '../../../color/index.ts';
 import { shape, text, number, requireRecord, requireString } from '@cssearth/core';
-import type { SolidSurface } from './solid-contract.ts';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import sharp from 'sharp';

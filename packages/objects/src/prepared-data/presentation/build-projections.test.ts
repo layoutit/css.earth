@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { readChartAssetRecipe, readSourceManifestInputs, readFeatureSearchCatalog, readRuntimeFeatureDatasets, readRasterDiscovery, readSystemText, readCataloguePresentationDistances, SYSTEM_TEXT_SCHEMA } from './build-projections.js';
+import { readChartAssetRecipe, readSourceManifestInputs, readFeatureSearchCatalog, readRuntimeFeatureDatasets, readRasterDiscovery, readSystemText, readCataloguePresentationDistances, SYSTEM_TEXT_SCHEMA, readVolumePresentationPreviews, readVolumeAttachment, readGalaxyBackingSource, readWorldContextSourceSelection, readStellarExtent, readPreparedPanelContentRecord, readComparableSource, readStellarDotMeasurements, readFeatureMapLongitude, PREPARED_VOLUME_PRESENTATION_SCHEMA, WORLD_CONTEXT_SOURCE_SCHEMA, STELLAR_EXTENT_SOURCE_SCHEMA, PACKAGED_POINTS_SOURCE_SCHEMA, readPackagedPointsFrame, HOSTED_PLANET_MEASUREMENTS_SCHEMA, NEUTRON_STAR_MEASUREMENTS_SCHEMA, readPreparedChartContentRecord, readObjectDescriptorRecord, DENSITY_VOLUME_DATASET_BANK_SOURCE_SCHEMA } from './build-projections.js';
 import { CHART_ASSETS_SCHEMA } from './presentation-recipe-schemas.js';
 import { SOURCE_MANIFEST_SCHEMA } from '../../sources/source-manifest-schema.js';
 import { PREPARED_SURFACE_FEATURES_SCHEMA } from '../surface/surface-feature-types.js';
@@ -64,7 +64,6 @@ test('volume source presentation validates a dataset and its preview without edi
   assert.throws(() => readCataloguePresentationDistances({ distanceM: Infinity }, ['distanceM']));
 });
 
-import { readVolumePresentationPreviews, readVolumeAttachment, readGalaxyBackingSource, readWorldContextSourceSelection, readStellarExtent, readPreparedPanelContentRecord, readComparableSource, readStellarDotMeasurements, readFeatureMapLongitude, PREPARED_VOLUME_PRESENTATION_SCHEMA, WORLD_CONTEXT_SOURCE_SCHEMA, STELLAR_EXTENT_SOURCE_SCHEMA } from './build-projections.js';
 import { GALAXY_BACKING_SCHEMA } from '../catalogue/galaxy-backing.js';
 import { NEBULA_DELIVERY_SCHEMA } from '../../volume/nebula/nebula-delivery.js';
 import { PREPARED_FEATURES_SCHEMA } from '../surface/prepared-features.js';
@@ -101,7 +100,6 @@ test('additional shared build projections validate fields before exposing them',
   assert.throws(() => readFeatureMapLongitude({ schema: PREPARED_FEATURES_SCHEMA, mapLeftEdgeLongitudeDeg: Infinity }));
 });
 
-import { PACKAGED_POINTS_SOURCE_SCHEMA, readPackagedPointsFrame } from './build-projections.js';
 test('packaged points frame admits only its schema and finite frame', () => {
   const value = { schema: PACKAGED_POINTS_SOURCE_SCHEMA, frame: { referenceFrame: 'sun-icrf', epochJdTt: 2451545 } };
   assert.deepEqual(readPackagedPointsFrame(value).frame, value.frame);
@@ -109,7 +107,6 @@ test('packaged points frame admits only its schema and finite frame', () => {
   assert.throws(() => readPackagedPointsFrame({ ...value, frame: { ...value.frame, epochJdTt: NaN } }));
 });
 
-import { HOSTED_PLANET_MEASUREMENTS_SCHEMA, NEUTRON_STAR_MEASUREMENTS_SCHEMA, readPreparedChartContentRecord } from './build-projections.js';
 test('subset admission preserves legacy feature metadata and partial chart content', () => {
   assert.equal(readFeatureMapLongitude({ mapLeftEdgeLongitudeDeg: 90 }), 90);
   for (const schema of [HOSTED_PLANET_MEASUREMENTS_SCHEMA, NEUTRON_STAR_MEASUREMENTS_SCHEMA])
@@ -121,7 +118,6 @@ test('subset admission preserves legacy feature metadata and partial chart conte
 });
 
 import { COMPACT_DENSITY_DELIVERY_SCHEMA } from '../../volume/compact/compact-density-delivery.js';
-import { readObjectDescriptorRecord } from './build-projections.js';
 import { OBJECT_SCHEMA } from '../../descriptor.js';
 test('descriptor rewrites admit the schema and preserve source generator metadata', () => {
   const value = { schema: OBJECT_SCHEMA, id: 'body', type: 'surface', properties: {}, generator: 'site/build/generate.mts' };
@@ -156,7 +152,6 @@ test('build subset schema identifiers retain their historical spellings', () => 
   assert.equal(WORLD_CONTEXT_SOURCE_SCHEMA, 'cssearth-world-context-source@1');
 });
 
-import { DENSITY_VOLUME_DATASET_BANK_SOURCE_SCHEMA } from './build-projections.js';
 import { VOLUME_DATASET_MANIFEST_SCHEMA } from '../../volume/delivery/volume-dataset-manifest.js';
 test('attachment projections admit the historical dataset-bank envelopes', () => {
   assert.equal(DENSITY_VOLUME_DATASET_BANK_SOURCE_SCHEMA, 'cssearth-density-volume-dataset-bank-source@1');

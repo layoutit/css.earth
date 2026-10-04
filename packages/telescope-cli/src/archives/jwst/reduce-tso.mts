@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-import { findOne } from './find-product.mts';
 /** Reduce a JWST time-series observation from raw exposures with Eureka!, for eclipse mapping from raw data.
  *
  *   node packages/telescope-cli/src/archives/jwst/reduce-tso.mts <program directory> <work directory> [--raw <directory>]
@@ -21,6 +20,7 @@ import { findOne } from './find-product.mts';
  *    per detector column (ours-stellar-counts.csv) are the band response an eclipse map's temperature conversion needs.
  *
  * Finished batches and stages are recorded in the work directory and skipped on a rerun. */
+import { findOne } from './find-product.mts';
 import { spawnSync } from 'node:child_process';
 import { access, lstat, mkdir, readdir, readFile, rm, stat, symlink, writeFile } from 'node:fs/promises';
 import { totalmem } from 'node:os';
@@ -30,8 +30,7 @@ import { pathToFileURL } from 'node:url';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { archivePrograms } from '../programs.mts';
 import { eurekaToolchain, type EurekaToolchain } from './toolchain.mts';
-import { mastFile } from '@cssearth/telescope/node';
-import { freeMemoryPercent, toolchainPython } from '@cssearth/telescope/node';
+import { mastFile, freeMemoryPercent, toolchainPython } from '@cssearth/telescope/node';
 
 /** The pinned time-series programs, one directory each, and the joint fits of several visits, sit beside this code. */
 export const JWST_PROGRAMS = archivePrograms('jwst');

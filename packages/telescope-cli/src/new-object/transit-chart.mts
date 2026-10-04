@@ -118,4 +118,3 @@ export async function installTransitChart(files: PackageFiles, id: string, name:
   const operations = lightCurves.map((file, i) => ({ kind: 'download', groups: ['restore', 'refresh'], path: paths[i], url: `https://mast.stsci.edu/api/v0.1/Download/file?uri=${file.uri}` }));
   return { report: `${id}: transit from TESS sectors ${sectors}${align ? `, aligned ${align} min (1 sigma ${sigmaText} min)` : ''}`, readme: `its transit in ${lightCurves.length} TESS sector${lightCurves.length === 1 ? '' : 's'} (${sectors}), folded onto its orbit`, recipe, control, inputs, operations };
 }
-

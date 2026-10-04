@@ -1,5 +1,5 @@
-import { isRecord as coreIsRecord } from '@cssearth/core';
 /** Explicit local jobs: validate the registered evidence, then bake and atomically publish one cloud. */
+import { isRecord as coreIsRecord } from '@cssearth/core';
 import { readFile, mkdir, realpath, rename, rm, writeFile } from 'node:fs/promises';
 import { resolve, relative, dirname, isAbsolute } from 'node:path';
 import type { Plugin } from 'vite';

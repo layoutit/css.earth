@@ -1,6 +1,6 @@
+/** Explicitly promote an already inspected compiler result to small, source-backed bake inputs. */
 import { COMPACT_COMPILER_SCHEMA, readComponentMaterialReceipt, validatePreparedCssVolume, readCompactCompiler } from '@cssearth/objects';
 import { isRecord as coreIsRecord } from '@cssearth/core';
-/** Explicitly promote an already inspected compiler result to small, source-backed bake inputs. */
 import { readFile } from 'node:fs/promises';
 import { gzipSync } from 'node:zlib';
 import { readCompilerResult } from '../../../features/compiler/result.ts';

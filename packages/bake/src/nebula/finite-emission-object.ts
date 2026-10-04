@@ -1,6 +1,6 @@
+/** Restore a delivered finite-emission dataset bank from its checked-in compact inputs; no lab, no research services. */
 import { OBJECT_SCHEMA, PREPARED_OBJECT_SCHEMA, PREPARED_VOLUME_DATASETS_SCHEMA, parsePreparedLmcStars, cloudDensityWeight, validateCloudDensityFilter, type CloudDensityFilter, validatePreparedVolumeDatasets } from '@cssearth/objects';
 import { isRecord, isNonemptyText } from '@cssearth/core';
-/** Restore a delivered finite-emission dataset bank from its checked-in compact inputs; no lab, no research services. */
 import assert from 'node:assert/strict';
 import { mkdir, readFile, rename, rm, readdir } from 'node:fs/promises';
 import { gunzipSync } from 'node:zlib';

@@ -1,5 +1,5 @@
-import {realizeRegisteredStars} from '@cssearth/nebula-reconstruction/stars/registered-realization';
 /** Offline, image-independent catalogue realization in the accepted Alignment density cloud. */
+import {realizeRegisteredStars} from '@cssearth/nebula-reconstruction/stars/registered-realization';
 import type { DensityVolumeFrame } from '@cssearth/objects';
 import { rayToOverlayPlane, type ImageWcs, createAlignedObservationMapping, type ReconstructionAlignment } from '@cssearth/bake/volume';
 import { parsePreparedLmcStars, type PreparedLmcStars } from '@cssearth/objects';

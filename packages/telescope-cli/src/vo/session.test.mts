@@ -7,19 +7,16 @@ import { mkdtemp, readFile, rm, appendFile, readdir, writeFile } from 'node:fs/p
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { astroquery } from '@cssearth/telescope/node';
-import { saveSession, getSession, type SessionServices } from '../session.mts';
-import { saveExploration } from '../session.mts';
+import { saveSession, getSession, type SessionServices, saveExploration, sessionRequest } from '../session.mts';
 import { loadQualifiedObservations } from '../qualified-observations.mts';
 import { delivery, listOutputs, exportOutput } from '../outputs.mts';
 import { listArtifactOutputs } from '../artifact-outputs.mts';
 import { executeFamilyOperation } from '../family-operation.mts';
 import { explorationAnswer } from '../exploration.mts';
 import { binaryTableHdu, primaryHdu } from '@cssearth/bake/objects/raster';
-import { sessionRequest } from '../session.mts';
 import { normalizeSnapshot, SERVICES } from './discovery.mts';
-import { parseSnapshot } from '@cssearth/objects';
+import { parseSnapshot, jsonValue } from '@cssearth/objects';
 import { planAccess } from './access.mts';
-import { jsonValue } from '@cssearth/objects';
 import { qualifyVoProduct } from './qualify.mts';
 import type { QueryInputs } from '../query-contract.mts';
 

@@ -3,14 +3,12 @@ import { refreshSourceRecord } from '../source-authoring-templates.mts';
 import { requireRecord, requireArray, requireString, requireFiniteNumber } from '@cssearth/core';
 import { createSourceManifest } from '@cssearth/objects/node';
 import { requireTerrainMesh } from '@cssearth/bake/objects/geometry';
-import { mkdir as ensureReportDirectory } from 'node:fs/promises';
+import { mkdir as ensureReportDirectory, readFile, writeFile, readdir } from 'node:fs/promises';
 await ensureReportDirectory(authorPath('output/distant-worlds'), {recursive:true});
 // Use the common source-mesh snapshot owner; no scene technique lives here.
-import { readFile, writeFile, readdir } from 'node:fs/promises';
 import { resolve, relative } from 'node:path';
 import sharp from 'sharp';
-import { loadRadialTerrain } from '@cssearth/bake/objects/layers/terrestrial';
-import { renderRadialSnapshot } from '@cssearth/bake/objects/layers/terrestrial';
+import { loadRadialTerrain, renderRadialSnapshot } from '@cssearth/bake/objects/layers/terrestrial';
 import { paintMissingCoverage } from '@cssearth/bake/raster';
 const read = async (path: string) => requireRecord(JSON.parse(await readFile(path, 'utf8')));
 const records = (value: unknown) => requireArray(value).map(entry => requireRecord(entry));

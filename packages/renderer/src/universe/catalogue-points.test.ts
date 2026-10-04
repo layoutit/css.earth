@@ -3,8 +3,7 @@ import assert from 'node:assert/strict';
 import { isDeepStrictEqual } from 'node:util';
 import { parseHTML } from 'linkedom';
 import { mountCataloguePoints } from './catalogue-points.js';
-import { readCataloguePointBank } from '@cssearth/objects';
-import { catalogueCells, cataloguePointSpread } from '@cssearth/objects';
+import { readCataloguePointBank, catalogueCells, cataloguePointSpread } from '@cssearth/objects';
 import { holdStartup, releaseStartup } from '../rendering/startup-gate.js';
 
 /** What the bake adds to a published bank (catalogue-banks.ts): its spread and its cells, per level. */

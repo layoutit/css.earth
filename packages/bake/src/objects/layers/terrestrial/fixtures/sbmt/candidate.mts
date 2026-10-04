@@ -1,7 +1,7 @@
-import { cross3 as cross, dotN as dot } from '@cssearth/core';
 /** Test-side binding from archived camera fields to the repository's shared
  * projective camera. This module never imports native reference results. It
  * does not qualify a production mosaic or solve an unknown camera. */
+import { cross3 as cross, dotN as dot } from '@cssearth/core';
 import { project } from '../../missions/osiris-geo.ts';
 import type { Case } from './cases.mts';
 

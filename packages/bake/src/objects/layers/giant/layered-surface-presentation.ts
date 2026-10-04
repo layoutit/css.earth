@@ -4,14 +4,11 @@ import { bandedGeometryRecipe } from './geometry-contract.ts';
 import { prepareFixedSpanMaterialPlane } from './geometry.ts';
 import type { prepareBandedEllipsoid } from './geometry.ts';
 import {parseObservedSurfaceRecipe} from '../observed-surfaces/index.ts';
-import {parseEllipsoidMaterialRecipe} from './ellipsoid-materials.ts';
-import type { PreparedNode, PreparedProjectiveTextureLeaf } from '../../../presentation/index.ts';
-import type {MaterialSourceTrack} from '../../../presentation/index.ts';
+import { parseEllipsoidMaterialRecipe, rasterEllipsoidMaterial } from './ellipsoid-materials.ts';
+import type { PreparedNode, PreparedProjectiveTextureLeaf, MaterialSourceTrack } from '../../../presentation/index.ts';
 import { PREPARED_PRESENTATION_SCHEMA, preparedResourcePool, type PreparedCubicSkyPlan, type PreparedDirectionalSunPlan } from '@cssearth/objects';
 import {createPolyCamera,buildPolyCameraSceneTransform,buildPolyMeshTransform} from '@layoutit/polycss';
-import { prepareCssomDeclarationReads, createPreparedNodeTree } from '../../../presentation/index.ts';
-import {rasterEllipsoidMaterial} from './ellipsoid-materials.ts';
-import {prepareMaterialTracks} from '../../../presentation/index.ts';
+import { prepareCssomDeclarationReads, createPreparedNodeTree, prepareMaterialTracks } from '../../../presentation/index.ts';
 
 const url=(prefix:string,filename:string)=>`${prefix}${filename}`;
 function authoredTransform(config:LayeredPresentationRecipe['meshTransform']|LayeredPresentationRecipe['systemTransform']){return config.kind==='literal'?config.value:`transform:${config.rotations.map(rotation=>buildPolyMeshTransform({rotation})).join(' ')}`;}

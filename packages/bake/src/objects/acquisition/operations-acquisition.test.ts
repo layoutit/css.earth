@@ -5,10 +5,9 @@ import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 import { execFileSync } from 'node:child_process';
 import { randomUUID } from 'node:crypto';
-import { executeAcquisition, parseAcquisitionPlan } from '@cssearth/bake/objects/acquisition';
+import { executeAcquisition, parseAcquisitionPlan, convertMappedComposition, parseMappedCompositionRecipe } from '@cssearth/bake/objects/acquisition';
 import { acquirePinnedDownloads, verifySources, type SourceManifest } from '@cssearth/bake/objects/sources';
 import { gzipSync } from 'node:zlib';
-import { convertMappedComposition, parseMappedCompositionRecipe } from '@cssearth/bake/objects/acquisition';
 const test = sourceTest();
 
 const rawSource = (_bytes: Uint8Array) => ({path:'source.img',origin:'https://example.test/source.img'});

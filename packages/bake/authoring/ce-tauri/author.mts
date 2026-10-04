@@ -1,10 +1,10 @@
 #!/usr/bin/env node
-import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 /** CE Tauri authored inputs: the uniform-disc reference sphere from the retained measurements and the navigation marker
  * rendered from the published December 2016 image. The images themselves are the authors' (Montargès et al. 2018, CDS
  * J/A+A/614/A12) and are restored by the acquisition plan, not written here.
  *
  *   node packages/bake/authoring/ce-tauri/author.mts [--check] */
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { runAuthor } from '../authored-output.mts';

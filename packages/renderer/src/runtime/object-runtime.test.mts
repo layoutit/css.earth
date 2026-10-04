@@ -12,10 +12,8 @@ import type { ObjectMountOptions } from '@cssearth/renderer/runtime/object-runti
 import type { PreparedImage } from "@cssearth/renderer/rendering/prepared-image-store.ts";
 import type { RuntimePolicy } from "@cssearth/renderer/navigation/runtime-policy.ts";
 import type { OrbitPublication } from "@cssearth/renderer/navigation/object-orbit.ts";
-import { createPreparedResidency } from '@cssearth/renderer/testing';
-import { createPreparedPlayback } from '@cssearth/renderer/testing';
+import { createPreparedResidency, createPreparedPlayback, createObjectSelectionRuntime } from '@cssearth/renderer/testing';
 import { createSceneLifetime } from "@cssearth/engine";
-import { createObjectSelectionRuntime } from '@cssearth/renderer/testing';
 import { retainedPresentationFixture, fixtureObjectCapabilities, objectView } from "../../test/object-runtime-package.mts";
 const moonDefinition = parsePreparedObjectRuntime(await loadObjectTestDefinition("moon"));
 const earthDefinition = parsePreparedObjectRuntime(await loadObjectTestDefinition("earth"));

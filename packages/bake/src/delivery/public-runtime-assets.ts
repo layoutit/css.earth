@@ -1,7 +1,6 @@
-import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 /** Public asset closure and assembly, independent of source acquisition or CLI dispatch. */
+import { projectRoot as checkoutProjectRoot, sha256 } from '@cssearth/core/node';
 import { containedPath } from '../objects/sources/index.ts';
-import { sha256 } from '@cssearth/core/node';
 import { inventoryPublicAssets, requireInventory } from '@cssearth/objects/node';
 import { requireRecord as object } from '@cssearth/core';
 import { readFile, readdir, unlink, lstat } from 'node:fs/promises';

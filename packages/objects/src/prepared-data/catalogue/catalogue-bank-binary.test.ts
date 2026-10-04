@@ -1,8 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { catalogueCells } from '@cssearth/objects';
+import { catalogueCells, decodeCatalogueBankBinary, encodeCatalogueBankBinary } from '@cssearth/objects';
 import { packPreparedBinary, unpackPreparedBinary } from '@cssearth/objects/node';
-import { decodeCatalogueBankBinary, encodeCatalogueBankBinary } from '@cssearth/objects';
 
 test('a catalogue bank decodes to exactly the JSON it was, and refuses positions that would not', () => {
   const points = [[1.2345, -6932.1, 0, 2], [0.0001, 198.4, -25.47, 0], [-1e-4, 3, 4, 300]];

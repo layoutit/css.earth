@@ -5,8 +5,7 @@ import { dirname, join } from 'node:path';
 import { tmpdir } from 'node:os';
 import sharp from 'sharp';
 import { compilerFrame } from '../compiler/bake.ts';
-import { type CompilerStarInput } from '@cssearth/objects';
-import { readCompilerBakeResult, validCompilerStarSprites, type PreparedCompilerStar } from '@cssearth/objects';
+import { type CompilerStarInput, readCompilerBakeResult, validCompilerStarSprites, type PreparedCompilerStar } from '@cssearth/objects';
 import { COMPILER_STAR_PROFILE_PATH, prepareCompilerStarSprites } from '../../../adapters/application/star-sprites.ts';
 import { prepareSampledSceneStars } from './compile.ts';
 

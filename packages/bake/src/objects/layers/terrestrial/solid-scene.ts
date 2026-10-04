@@ -1,11 +1,10 @@
 import { OBJECT_RUNTIME_SCHEMA, PREPARED_PRESENTATION_SCHEMA, requireObjectControls, preparedResourcePool, type PreparedVariant, type PreparedPresentationDefinition, type PreparedCubicSkyPlan, type PreparedDirectionalSunPlan } from '@cssearth/objects';
 
-import type { PreparedProjectiveTextureLeaf } from '../../../presentation/index.ts';
+import type { PreparedProjectiveTextureLeaf, MaterialSourceTrack } from '../../../presentation/index.ts';
 import type { prepareSolidMaterial } from './solid/solid-raster.ts';
 import type { SolidRasterGrid } from './raster-grid.ts';
 import type { combineRadialModels } from './radial/radial-models.ts';
 import type { createSourceManifest } from '@cssearth/objects/node';
-import type { MaterialSourceTrack } from '../../../presentation/index.ts';
 
 import { requireString, requireFiniteNumber, requireRecord } from '@cssearth/core';
 import { prepareScientificNavigation } from './scientific-focus.ts';
@@ -16,9 +15,7 @@ import { BASE_TILE } from '@layoutit/polycss';
 import { prepareSolidBodySurface, preparePerspectiveCamera } from '../../../scene/index.ts';
 import { prepareAstrometricSkySceneRegistration, prepareEclipticPresentationFrame, photographDirections, prepareDefaultCameraAngles, prepareSunReferenceViewDirection, type SolarGeometry } from '../../scene/index.ts';
 import { loadAstronomyPackage } from '../../../astronomy/index.ts';
-import { prepareCssomDeclarationReads, createPreparedNodeTree } from '../../../presentation/index.ts';
-import { prepareMaterialTracks } from '../../../presentation/index.ts';
-import { requirePreparedPresentation } from '../../../presentation/index.ts';
+import { prepareCssomDeclarationReads, createPreparedNodeTree, prepareMaterialTracks, requirePreparedPresentation } from '../../../presentation/index.ts';
 import { requirePreparedResourceCatalog } from '../../../contract/index.ts';
 import { restoreDepthSource } from '../../../prepared-presentation/index.ts';
 import { publishedImageSize } from '../shape-model/index.ts';
