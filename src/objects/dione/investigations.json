@@ -94,6 +94,17 @@
         "https://naif.jpl.nasa.gov/pub/naif/generic_kernels/pck/pck00011.tpc",
         "https://doi.org/10.1007/s10569-017-9805-5"
       ]
+    },
+    {
+      "id": "limb-law",
+      "subject": "Photometric law for the lighting overlays",
+      "status": "unresolved",
+      "finding": "Filacchione et al. (2020), writing on Rhea, say the same Shkuratov photometric correction was applied to disc-resolved Cassini VIMS data of Dione (Filacchione et al. 2018, not read here). Dione is prepared by the terrestrial lane, whose lighting constants are authored (0.35 flood floor, 0.05 ambient) and which has no path for a published law, so it keeps them.",
+      "evidence": [
+        "https://doi.org/10.1093/mnrasl/slaa162",
+        "https://doi.org/10.1002/2017GL076869"
+      ],
+      "revisitWhen": "The terrestrial lane can light a body from a photometric model record, and the Shkuratov correction's disc function and parameters are read in the paper."
     }
   ]
 }

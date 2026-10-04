@@ -84,6 +84,17 @@
         "https://naif.jpl.nasa.gov/pub/naif/generic_kernels/pck/pck00011.tpc",
         "https://doi.org/10.1007/s10569-017-9805-5"
       ]
+    },
+    {
+      "id": "limb-law",
+      "subject": "Photometric law for the lighting overlays",
+      "status": "unresolved",
+      "finding": "Filacchione et al. (2020) corrected disc-resolved Cassini VIMS data of Rhea with the Shkuratov method at 59 wavelengths from 0.35 to 5.05 micrometres, and say the same scheme was applied to Dione and Tethys. Its parameters and angle limits were not transcribed, and whether the photometry library can hold its disc function was not checked. Rhea is prepared by the terrestrial lane, whose lighting constants are authored (0.35 flood floor, 0.05 ambient) and which has no path for a published law, so it keeps them.",
+      "evidence": [
+        "https://doi.org/10.1093/mnrasl/slaa162",
+        "http://hdl.handle.net/20.500.12386/35841"
+      ],
+      "revisitWhen": "The terrestrial lane can light a body from a photometric model record, and the Shkuratov correction's disc function and parameters are read in the paper."
     }
   ]
 }

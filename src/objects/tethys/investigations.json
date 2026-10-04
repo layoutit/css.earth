@@ -81,6 +81,17 @@
         "https://github.com/layoutit/css.earth/blob/main/src/objects/tethys/source/manifest.json",
         "https://vims.univ-nantes.fr/cube/1807469104_1"
       ]
+    },
+    {
+      "id": "limb-law",
+      "subject": "Photometric law for the lighting overlays",
+      "status": "unresolved",
+      "finding": "Filacchione et al. (2020), writing on Rhea, say the same Shkuratov photometric correction was applied to disc-resolved Cassini VIMS data of Tethys (Filacchione et al. 2018, not read here). Tethys is prepared by the terrestrial lane, whose lighting constants are authored (0.35 flood floor, 0.05 ambient) and which has no path for a published law, so it keeps them.",
+      "evidence": [
+        "https://doi.org/10.1093/mnrasl/slaa162",
+        "https://doi.org/10.1029/2018GL078602"
+      ],
+      "revisitWhen": "The terrestrial lane can light a body from a photometric model record, and the Shkuratov correction's disc function and parameters are read in the paper."
     }
   ]
 }

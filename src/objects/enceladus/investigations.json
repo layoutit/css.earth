@@ -169,6 +169,17 @@
         "https://naif.jpl.nasa.gov/pub/naif/generic_kernels/pck/pck00011.tpc",
         "https://doi.org/10.1007/s10569-017-9805-5"
       ]
+    },
+    {
+      "id": "limb-law",
+      "subject": "Photometric law for the lighting overlays",
+      "status": "unresolved",
+      "finding": "Robidel et al. (2020) correct Cassini VIMS infrared mosaics of Enceladus with the Akimov disc function and a linear phase function, for incidence and emergence up to 80 degrees. Those are not the visible wavelengths of this map, and the photometry library has no Akimov disc function. Filacchione et al. (2022), in this ledger, describe a wavelength-dependent correction from 0.35 micrometres whose values were not transcribed. Enceladus is prepared by the terrestrial lane, whose lighting constants are authored (0.35 flood floor, 0.05 ambient) and which has no path for a published law, so it keeps them.",
+      "evidence": [
+        "https://arxiv.org/abs/2006.00146",
+        "https://doi.org/10.1016/j.icarus.2021.114803"
+      ],
+      "revisitWhen": "The terrestrial lane can light a body from a photometric model record, and a disc-resolved law at visible wavelengths is read in the paper."
     }
   ]
 }

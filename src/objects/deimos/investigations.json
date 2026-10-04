@@ -63,6 +63,16 @@
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/deimos/source/manifest.json"
       ]
+    },
+    {
+      "id": "limb-law",
+      "subject": "Photometric law for the lighting overlays",
+      "status": "unresolved",
+      "finding": "Fornasier et al. (2025) fitted Hapke (2012) models to disc-resolved Mars Express SRC images of Deimos at 650 nm, keeping pixels with incidence and emission below 70 degrees, over 10 to 140 degrees phase. Their one-term fit (Table 5) gives single-scattering albedo 0.068, asymmetry -0.275, shadow-hiding amplitude 2.14 and width 0.065, roughness 19.4 degrees and porosity 85.7 percent. The photometry library holds this family. Deimos is prepared by the terrestrial lane, whose lighting constants are authored (0.35 flood floor, 0.05 ambient) and which has no path for a published law, so it keeps them.",
+      "evidence": [
+        "https://arxiv.org/abs/2509.12804"
+      ],
+      "revisitWhen": "The terrestrial lane can light a body from a photometric model record."
     }
   ]
 }
