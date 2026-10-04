@@ -1,0 +1,142 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "fkg2015-12",
+  "parent": "m106",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "[FKG2015] 12",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 156323790
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/fkg2015-12-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "[FKG2015] 12",
+      "classification": "star",
+      "color": "#ffe2c6",
+      "distanceAu": 1556056544559.3,
+      "description": "A Cepheid in the galaxy M106, 7.5 million parsecs away, that swells and shrinks every 57.5 days.",
+      "systemName": "[FKG2015] 12 system",
+      "order": 5764,
+      "context": {
+        "order": 5761
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -1.574700524195994e+23,
+        -1.3130386973821342e+22,
+        1.7093443845540426e+23
+      ],
+      "presentationToReference": [
+        -0.6764678881544752,
+        -0.7317693720560489,
+        -0.08309502040748508,
+        -0.05640618651198463,
+        -0.061017411774800516,
+        0.9965416286254577,
+        0.7343088848836024,
+        -0.6788154841936065,
+        4.4963451272908295e-17
+      ],
+      "orbitUpReference": [
+        0.7317693720560489,
+        0.061017411774800516,
+        0.6788154841936065
+      ],
+      "metersPerUnit": 504270290.32258064,
+      "bodyRadiusM": 156323790000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

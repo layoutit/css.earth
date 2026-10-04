@@ -1,0 +1,142 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "gkp2011-m81c-j095610-62-690732-7",
+  "parent": "m81",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "[GKP2011] M81C J095610.62+690732.7",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 170516070
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/gkp2011-m81c-j095610-62-690732-7-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "[GKP2011] M81C J095610.62+690732.7",
+      "classification": "star",
+      "color": "#ffe1c4",
+      "distanceAu": 747161670526.3,
+      "description": "A Cepheid in the galaxy M81, 3.6 million parsecs away, that swells and shrinks every 64.8 days.",
+      "systemName": "[GKP2011] M81C J095610.62+690732.7 system",
+      "order": 5760,
+      "context": {
+        "order": 5757
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -3.4154257384825527e+22,
+        2.0486064065284116e+22,
+        1.0443748908173576e+23
+      ],
+      "presentationToReference": [
+        -0.3055658742831885,
+        -0.8012782944990203,
+        0.5143759240461123,
+        0.18328145759981157,
+        0.48061470903248515,
+        0.8575648131550805,
+        0.9343647059760118,
+        -0.35631811099965277,
+        5.721333732048903e-17
+      ],
+      "orbitUpReference": [
+        0.8012782944990203,
+        -0.48061470903248515,
+        0.35631811099965277
+      ],
+      "metersPerUnit": 550051838.7096775,
+      "bodyRadiusM": 170516070000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

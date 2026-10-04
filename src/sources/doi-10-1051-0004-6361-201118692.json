@@ -1,0 +1,56 @@
+{
+  "id": "doi-10-1051-0004-6361-201118692",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Sabater et al. (2012): The AMIGA sample of isolated galaxies",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1205.6825"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/201118692"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "2012A&A...545A..15S"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/2012A&A...545A..15S",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/201118692",
+      "label": "Astronomy & Astrophysics 545 A15"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/2012A&A...545A..15S",
+      "checkedOn": "2026-10-04",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Sabater et al. (2012), Astronomy & Astrophysics 545 A15",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/2012A&A...545A..15S"
+    }
+  ],
+  "publisher": "Astronomy & Astrophysics 545 A15",
+  "creators": [
+    "J. Sabater",
+    "L. Verdes-Montenegro",
+    "S. Leon",
+    "et al."
+  ],
+  "publicationDate": "2012"
+}

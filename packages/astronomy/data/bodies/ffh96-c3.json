@@ -1,0 +1,30 @@
+{
+ "id": "ffh96-c3",
+ "classification": "star",
+ "order": 5766,
+ "physical": {
+  "name": "[FFH96] C3",
+  "horizonsCode": null,
+  "meanRadiusKm": 168011550,
+  "gravitationalParameterKm3PerS2": 0,
+  "parent": null,
+  "effectiveTemperatureK": 4720
+ },
+ "physicalNotes": "Radius 241.5 +/- 40.3 solar radii from Groenewegen (2020), A&A 635, A33, period relations for Galactic fundamental-mode Cepheids applied to this star's period, 63.53 d in Kanbur et al. (2003), A&A 411, 361, VizieR J/A+A/411/361/table1 Galaxy = NGC4321, Cepheid = C3 (log(P) 1.803); not a measurement of this star: eq. 2, log R = 0.721 log P + 1.083; the uncertainty is the relation's scatter, 0.067 dex (https://arxiv.org/abs/2002.02186): 168,011,550 km at 695,700 km per solar radius. No mass is measured, so GM is 0, the records' unpublished value. Temperature 4720 +/- 317 K from Groenewegen (2020), A&A 635, A33, period relations for Galactic fundamental-mode Cepheids applied to this star's period, 63.53 d in Kanbur et al. (2003), A&A 411, 361, VizieR J/A+A/411/361/table1 Galaxy = NGC4321, Cepheid = C3 (log(P) 1.803); not a measurement of this star: the luminosity of eq. 1 (M_bol = -2.95 log P - 0.98, with the nominal solar M_bol 4.74) over the radius of eq. 2, through L = 4 pi R^2 sigma T^4 with the nominal solar 5772 K (IAU 2015 Resolutions B2 (Mamajek et al. 2015, arXiv:1510.06262) and B3 (Prsa et al. 2016, arXiv:1605.09788)); the uncertainty is the 317 K by which the two relations miss the paper's own Cepheid temperatures (https://arxiv.org/abs/2002.02186). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 185.75866666666667,
+  "declinationDegrees": 15.824499999999999,
+  "positionEpochJulianYear": 2000,
+  "distanceParsecs": 15215772,
+  "properMotionRaMasPerYear": 0,
+  "properMotionDecMasPerYear": 0,
+  "radialVelocityKmPerS": 1566,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Kanbur et al. (2003), A&A 411, 361, VizieR J/A+A/411/361/table1 Galaxy = NGC4321, Cepheid = C3, names the star in SIMBAD (SName); SIMBAD holds its position and names no paper for it (https://simbad.cds.unistra.fr/simbad/sim-id?Ident=%5BFFH96%5D%20C3), SIMBAD basic row main_id = [FFH96] C3: ra 185.75866666666667, dec 15.824499999999999, from the archived row src/objects/ffh96-c3/source/photometry/catalogue-row.tsv; SIMBAD names it [FFH96] C3",
+   "distance": "Placed in M100 as the app draws it, where the star's sight line crosses the disc's midplane: 15,215,772 pc (src/objects/m100-layers/source/recipe.json: centre 15,210,000 pc, inclination 38.5 deg, line of nodes 156.2 deg). The galaxy's distance, which places the galaxy and not a star within it: Leroy et al. (2021), PHANGS-ALMA, ApJS 257, 43, table of galaxies, row NGC4321: distance 15.21 ± 0.5 Mpc, from the compilation of Anand et al. (2021) (https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/257/43) (https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/257/43): 15215772 pc; Gaia DR3 cannot see the star",
+   "properMotion": "basic row main_id = [FFH96] C3 measures no proper motion; zero is assumed (at 15,215,772 pc, 1 mas/yr would be 72,130 km/s across the sky)",
+   "radialVelocity": "SIMBAD's radial velocity of M100, the Cepheid's galaxy, from 2022ApJS..261...21Y; the star's own motion within the galaxy is not measured (https://ui.adsabs.harvard.edu/abs/2022ApJS..261...21Y/abstract)"
+  }
+ }
+}
