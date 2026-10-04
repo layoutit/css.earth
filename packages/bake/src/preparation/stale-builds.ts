@@ -4,7 +4,7 @@
  *
  * Its bootstrap closure imports only Node built-ins: `packages/bake/cli/check-stale-builds.mts` loads this file from source, so the check still
  * runs, and `--run` still rebuilds, when this package's own build is missing or stale. */
-import { readWorkspaceGraph, workspaceOrder, hasBuild, buildOutput } from './workspace-graph.ts';
+import { readWorkspaceGraph, workspaceOrder, hasBuild, buildOutput, findWorkspaceRoot } from './workspace-graph.ts';
 import { spawn } from 'node:child_process';
 import { readdir, readFile, stat } from 'node:fs/promises';
 import { relative, resolve } from 'node:path';
@@ -43,7 +43,10 @@ export function buildRules(root: string): readonly BuildRule[] {
   });
 }
 
-export const BUILD_RULES = Object.freeze(buildRules(process.cwd()));
+/** The checkout this module lives in, whatever the working directory (A159). */
+const BOOTSTRAP_ROOT = findWorkspaceRoot();
+
+export const BUILD_RULES = Object.freeze(buildRules(BOOTSTRAP_ROOT));
 
 const SOURCE = /\.(?:ts|mts|json)$/u, SKIP = new Set(['dist', 'node_modules']);
 
@@ -73,7 +76,7 @@ async function metafileInputs(root: string, rule: BuildRule): Promise<string[] |
   return Object.keys(inputs).map(path => relative(root, resolve(base, path))).filter(path => !path.startsWith('..') && !path.includes('node_modules'));
 }
 
-export async function staleBuilds(root = process.cwd(), rules: readonly BuildRule[] = BUILD_RULES) {
+export async function staleBuilds(root = BOOTSTRAP_ROOT, rules: readonly BuildRule[] = BUILD_RULES) {
   const stale: { name: string; command: string; reason: string }[] = [];
   for (const rule of rules) {
     const output = await stat(resolve(root, rule.output)).catch(() => null);
@@ -94,7 +97,7 @@ export async function staleBuilds(root = process.cwd(), rules: readonly BuildRul
 /** Rebuild only what is stale, in rule order, so a dependent build never runs before its dependency. */
 /** Run one build command through the shell with the caller's terminal, so a long build streams its output and no output
  * size can fail it; resolves when it exits 0 and rejects with its exit status otherwise. */
-export function runBuildCommand(command: string, cwd = process.cwd()): Promise<void> {
+export function runBuildCommand(command: string, cwd = BOOTSTRAP_ROOT): Promise<void> {
   return new Promise((done, fail) => {
     const child = spawn(command, { cwd, shell: true, stdio: 'inherit' });
     child.once('error', fail);
@@ -102,7 +105,7 @@ export function runBuildCommand(command: string, cwd = process.cwd()): Promise<v
   });
 }
 
-export async function rebuildStale(root = process.cwd(), rules: readonly BuildRule[] = BUILD_RULES,
+export async function rebuildStale(root = BOOTSTRAP_ROOT, rules: readonly BuildRule[] = BUILD_RULES,
   run: (command: string) => Promise<void> = command => runBuildCommand(command, root)) {
   const stale = await staleBuilds(root, rules);
   for (const build of stale) {

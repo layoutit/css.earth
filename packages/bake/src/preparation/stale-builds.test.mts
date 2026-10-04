@@ -6,6 +6,8 @@ const test = sourceTest();
 import { mkdtemp, mkdir, readFile, rm, utimes, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
+import { realpath, symlink } from 'node:fs/promises';
+import { findWorkspaceRoot } from '@cssearth/bake/preparation/workspace-graph';
 import { BUILD_RULES, rebuildStale, staleBuilds } from '@cssearth/bake/preparation';
 
 test('a build is stale when a compiled source is newer than its output or the output is missing', async () => {
@@ -159,4 +161,15 @@ test('a build command streams to the terminal, so no output size fails it, and a
   const failing = runner(`${node} -e "process.exit(3)"`);
   assert.notEqual(failing.status, 0);
   assert.match(failing.stderr, /exited with status 3/u);
+});
+
+test('the bootstrap root is the real checkout whatever the working directory or symlink, so a symlinked checkout agrees with core', async () => {
+  const repository = await realpath(projectRoot(import.meta.url)), scratch = await mkdtemp(join(tmpdir(), 'stale-builds-link-'));
+  try {
+    const link = join(scratch, 'checkout');
+    await symlink(repository, link);
+    assert.equal(findWorkspaceRoot(join(link, 'packages/bake/src/preparation')), repository);
+    assert.equal(findWorkspaceRoot(), repository);
+    assert.equal(projectRoot(pathToFileURL(join(link, 'packages/bake/src/preparation/stale-builds.ts')).href), repository);
+  } finally { await rm(scratch, { recursive: true, force: true }); }
 });
