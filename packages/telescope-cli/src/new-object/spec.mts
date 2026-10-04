@@ -32,6 +32,9 @@
  * temperature required; `colorReason` says why its color is a Planck spectrum when that is not because the archives cannot separate it
  * from its star. A companion with `"blackHole": true` is a black hole: no temperature, a radius only if a source measures one (else the
  * records' unmeasured 0), and an astronomy record only, drawn in its star's system, with no package of its own.
+ * A companion with `"unresolved": true` is a star no source measures a radius or a temperature for (one detected beside a far
+ * brighter star, its size and color still disputed): no radius and no temperature, its cited mass, and likewise an astronomy
+ * record only, drawn as a point on its orbit.
  *
  * `parent` is the object the star is inside, by the object tree (packages/objects/src/registry/object-tree.ts): its galaxy's id,
  * `milky-way` for a star Gaia or Hipparcos places. A new star without one is refused; a package that exists keeps the parent it has,
@@ -182,6 +185,8 @@ export interface HostedSpec {
   readonly phaseCurves?: readonly PhaseCurveEntry[];
   /** A companion that is a black hole: an astronomy record only (spec header). */
   readonly blackHole?: true;
+  /** A companion star with no measured radius or temperature: an astronomy record only (spec header). */
+  readonly unresolved?: true;
   /** Why a companion's color is a Planck spectrum at its temperature, when not because the archives cannot separate it. */
   readonly colorReason?: string;
   /** A white dwarf's cited atmosphere class, which picks the grid its limb law is read from (limb.mts). */
@@ -225,7 +230,7 @@ function orbitSpec(value: unknown, label: string): OrbitSpec {
 function hostedSpec(value: unknown, kind: HostedSpec['kind'], label: string): HostedSpec {
   const input = requireRecord(value, label), id = requireString(input.id, `${label}.id`), at = (name: string) => `${id}.${name}`;
   if (!/^[a-z][a-z0-9-]*$/u.test(id)) throw new TypeError(`${id}: an id is lowercase letters, digits and hyphens.`);
-  const known = new Set(['id', 'name', 'description', 'order', 'paper', 'radius', 'mass', 'temperature', 'orbit', 'text', 'thermal', 'photometry', 'phaseCurves', 'blackHole', 'colorReason', 'whiteDwarf']), unknown = Object.keys(input).filter(key => !known.has(key));
+  const known = new Set(['id', 'name', 'description', 'order', 'paper', 'radius', 'mass', 'temperature', 'orbit', 'text', 'thermal', 'photometry', 'phaseCurves', 'blackHole', 'unresolved', 'colorReason', 'whiteDwarf']), unknown = Object.keys(input).filter(key => !known.has(key));
   if (unknown.length) throw new TypeError(`${id}: unknown fields ${unknown.join(', ')}.`);
   const paper = requireRecord(input.paper, at('paper')), orbit = orbitSpec(input.orbit, at('orbit'));
   const thermal = input.thermal === undefined ? undefined : thermalSpec(input.thermal, at('thermal'));
@@ -238,19 +243,24 @@ function hostedSpec(value: unknown, kind: HostedSpec['kind'], label: string): Ho
   const blackHole = input.blackHole === true;
   if (blackHole && kind !== 'companion') throw new TypeError(`${id}: only a companion may be a black hole.`);
   if (blackHole && input.temperature !== undefined) throw new TypeError(`${id}: a black hole has no effective temperature.`);
-  if (input.colorReason !== undefined && (kind !== 'companion' || blackHole)) throw new TypeError(`${id}: colorReason explains a companion star's Planck color.`);
+  if (input.unresolved !== undefined && input.unresolved !== true) throw new TypeError(`${id}.unresolved is true or absent, not ${JSON.stringify(input.unresolved)}.`);
+  const unresolved = input.unresolved === true;
+  if (unresolved && (kind !== 'companion' || blackHole)) throw new TypeError(`${id}: only a companion star may be unresolved.`);
+  if (unresolved && (input.temperature !== undefined || input.radius !== undefined)) throw new TypeError(`${id}: an unresolved companion has no measured radius or temperature; a star with either takes its package.`);
+  if (input.colorReason !== undefined && (kind !== 'companion' || blackHole || unresolved)) throw new TypeError(`${id}: colorReason explains a companion star's Planck color.`);
   const range = kind === 'planet' ? { radius: [0.01, 5] as const, mass: [0.0001, 100] as const } : { radius: [0.005, 3000] as const, mass: [0.01, 300] as const };
   const out: HostedSpec = { kind, id, name: requireString(input.name, at('name')), description: requireString(input.description, at('description')),
     ...(input.order === undefined ? {} : { order: requireFiniteNumber(input.order, at('order')) }), paper: { url: requireString(paper.url, at('paper.url')), credit: requireString(paper.credit, at('paper.credit')) },
     ...(input.radius === undefined ? {} : { radius: cited(input.radius, at('radius'), range.radius) }), ...(input.mass === undefined ? {} : { mass: cited(input.mass, at('mass'), range.mass) }),
     ...(input.temperature === undefined ? {} : { temperature: cited(input.temperature, at('temperature'), [100, 60000]) }), orbit, ...(input.text === undefined ? {} : { text: draftText(input.text, at('text')) }), ...(thermal ? { thermal } : {}), ...(photometry ? { photometry } : {}), ...(phaseCurves ? { phaseCurves } : {}),
-    ...(blackHole ? { blackHole: true as const } : {}), ...(input.colorReason === undefined ? {} : { colorReason: requireString(input.colorReason, at('colorReason')) }),
+    ...(blackHole ? { blackHole: true as const } : {}), ...(unresolved ? { unresolved: true as const } : {}), ...(input.colorReason === undefined ? {} : { colorReason: requireString(input.colorReason, at('colorReason')) }),
     ...(input.whiteDwarf === undefined ? {} : { whiteDwarf: whiteDwarfSpec(input.whiteDwarf, at('whiteDwarf')) }) };
-  if (out.whiteDwarf && (kind !== 'companion' || blackHole)) throw new TypeError(`${id}: whiteDwarf names a companion star's atmosphere.`);
+  if (out.whiteDwarf && (kind !== 'companion' || blackHole || unresolved)) throw new TypeError(`${id}: whiteDwarf names a companion star's atmosphere.`);
   const fromArchive = 'archive' in orbit;
-  if (blackHole) { if (!out.mass) throw new TypeError(`${id}: a black hole needs its cited mass.`); if ('record' in orbit) throw new TypeError(`${id}: a black hole's record is written here; the record route packages a star another owner records.`); }
+  if (unresolved) { if (!out.mass) throw new TypeError(`${id}: an unresolved companion needs its cited mass.`); if (!('elements' in orbit)) throw new TypeError(`${id}: an unresolved companion's orbit is its cited elements.`); }
+  else if (blackHole) { if (!out.mass) throw new TypeError(`${id}: a black hole needs its cited mass.`); if ('record' in orbit) throw new TypeError(`${id}: a black hole's record is written here; the record route packages a star another owner records.`); }
   else if (!fromArchive && (!out.radius || !out.mass)) throw new TypeError(`${id}: give radius and mass with their sources; only an archive orbit supplies them.`);
-  if (kind === 'companion' && !blackHole && (!out.temperature || !out.radius || !out.mass)) throw new TypeError(`${id}: a companion star needs its cited temperature, radius and mass.`);
+  if (kind === 'companion' && !blackHole && !unresolved && (!out.temperature || !out.radius || !out.mass)) throw new TypeError(`${id}: a companion star needs its cited temperature, radius and mass.`);
   return out;
 }
 

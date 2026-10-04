@@ -1,0 +1,29 @@
+{
+ "id": "siwarha",
+ "classification": "star",
+ "order": 5489,
+ "physical": {
+  "name": "Siwarha",
+  "horizonsCode": null,
+  "meanRadiusKm": 0,
+  "gravitationalParameterKm3PerS2": 79627464025.16,
+  "parent": "betelgeuse"
+ },
+ "physicalNotes": "No source measures a size or a temperature for this star, so the radius is the records' unmeasured 0 and it is drawn as a point. GM from the minimum mass 0.60 +/- 0.14 solar masses (MacLeod et al. 2025, ApJ 978, 50, section II.4: Mb sin(i) from the radial velocities, for a Betelgeuse of 17.5 solar masses, https://arxiv.org/abs/2409.11332) times the JPL solar GM. Other readings are not adopted: Montarges et al. (2026, A&A 711, L12, https://doi.org/10.1051/0004-6361/202661023) read the detected brightness as a coeval star of 2.6 to 3.1 solar masses; Goldberg et al. (2025, https://arxiv.org/abs/2505.18375) exclude masses above about 1.5 solar masses from the far-ultraviolet; Goldberg et al. (2026, https://arxiv.org/abs/2608.11672) argue that the detected light is Betelgeuse's own, reflected where the companion ploughs through its dust.",
+ "hostedOrbit": {
+  "periodDays": 2109.2,
+  "semiMajorAxisStellarRadii": 2.3796,
+  "inclinationDegrees": 98,
+  "eccentricity": 0,
+  "epochDefinition": "inferior-conjunction",
+  "transitTimeBmjdTdb": 59983.5,
+  "ascendingNodePositionAngleDegrees": 117.12,
+  "sources": {
+   "period": "MacLeod et al. (2025, ApJ 978, 50; https://arxiv.org/abs/2409.11332), Table 1: P = 2109.2 (+9.2/-9.1) d, from radial velocities measured between 1896 and 2024.",
+   "shape": "MacLeod et al. (2025), section II.4: a = 1818 +/- 6 solar radii for a Betelgeuse of 17.5 solar masses, over the star's record radius of 764 solar radii (531,514,800 km): 2.3796 stellar radii, 8.45 au. Inclination 98 +/- 5 degrees from their fit to Hipparcos and radio astrometry (Table 4). Montarges et al. (2026, A&A 711, L12; https://doi.org/10.1051/0004-6361/202661023) measure a projected separation of 52.32 +/- 0.18 mas on 6 December 2024, 8.80 (+1.41/-0.79) au at 168 pc and a lower limit to the semi-major axis; the adopted value lies inside that uncertainty.",
+   "eccentricity": "MacLeod et al. (2025), section II.3: the radial velocities are fitted with a circular orbit. e = 0 is their model, not a measurement.",
+   "phase": "MacLeod et al. (2025), equation 3: the companion passes in front of Betelgeuse at JD 2459984 + 2109.2 E (the year 2023.12, +0.34/-0.35), BMJD 59983.5. The paper's JD is taken as BJD_TDB, minutes apart against an uncertainty of about 128 days.",
+   "orientation": "Set by the direct detection, not by an orbit fit. Montarges et al. (2026) found the companion at position angle 117.12 +/- 0.60 degrees east of north on 6 December 2024, about a quarter of a period after the 2023 transit and moving away from the observer (Goldberg et al. 2026, https://arxiv.org/abs/2608.11672: 'near receding quadrature'), where a nearly edge-on orbit crosses its ascending node; Howell et al. (2025, ApJ 988, L47; https://arxiv.org/abs/2507.15749) give 115 +/- 5 degrees three days later. MacLeod et al. (2025), Table 4, fit Omega = 60 +/- 6 degrees to the astrometry; neither that angle nor the one perpendicular to it passes through the detected position, so it is recorded here and not used. With this record the orbit puts the companion 46.1 mas from the star at position angle 113.6 degrees on the night of the detection: 6 mas inside the measured place, within what the transit time's uncertainty allows."
+  }
+ }
+}
