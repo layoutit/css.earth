@@ -77,7 +77,7 @@ stalls and measurement limits.
 The move from `src/renderers/css` left the site's `astro build` output byte-identical: all 9,508 files outside
 `dist/scenes` were byte-identical before and after. The package's built JavaScript matched `src/renderers/css/dist` except for
 source-path comments and the content-hashed chunk names that follow from them, and its declarations differ only in how
-the shared declaration chunks are split and named. The preparation bundle in `tools/objects/dist` differed only in the
+the shared declaration chunks are split and named. The preparation bundle in `tools/objects/dist` (now `packages/bake/dist`) differed only in the
 source-path comments.
 
 Most tests read prepared object data, so restore it first with `pnpm setup:assets`. From the repository root:

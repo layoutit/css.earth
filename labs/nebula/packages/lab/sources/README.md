@@ -1,8 +1,10 @@
 # Nebula Lab source images
 
 These are inspection inputs, not an aligned composite or measured 3D scene.
-The [lab source catalogue](../packages/lab/sources/index.json) records URLs, credits, bands
-and original/derivative AVM/TAN registration. Paths are relative to `labs/nebula`.
+The [lab source catalogue](index.json) records URLs, credits, bands
+and original/derivative AVM/TAN registration. Catalogue paths resolve relative to this catalogue file; `pathBase` selects the lab model root.
+Acquisition records live here; ignored display images remain at the historical lab image paths.
+Historical receipts are preserved and resolved by the lab loader.
 
 - **LMC:** the existing SMASH JPEG is reused without duplication. Credit:
   CTIO/NOIRLab/NSF/AURA/SMASH/D. Nidever (Montana State University);

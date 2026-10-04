@@ -17,6 +17,7 @@ export default defineConfig({
   root: fileURLToPath(new URL('.', import.meta.url)),
   publicDir: false,
   plugins: [tonePreparationPlugin(repositoryRoot), cloudDensityPreparationPlugin(repositoryRoot), starRemovalPlugin(repositoryRoot), reconstructionPlugin(repositoryRoot), shapeCloudPlugin(repositoryRoot), geometryDetectionPlugin(repositoryRoot), evidenceFusionPlugin(repositoryRoot), kinematicsPlugin(repositoryRoot), jointFitPlugin(repositoryRoot), compilerPlugin(repositoryRoot)],
-  define: { __NEBULA_REPO_ROOT__: JSON.stringify(repositoryRoot) },
+  define: { __NEBULA_REPO_ROOT__: JSON.stringify(repositoryRoot),
+    __NEBULA_SOURCE_CATALOGUE_URL__: JSON.stringify(new URL('./packages/lab/sources/index.json', import.meta.url).href) },
   server: { fs: { allow: [repositoryRoot] } },
 });
