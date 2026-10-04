@@ -22,7 +22,9 @@ import { startupFetch } from './startup-requests.mts';
 // on first property access, even when the call site itself is unreachable at
 // runtime. The dynamic import keeps that module's `node:` imports out of the
 // client's static graph; Vite still emits it as a small chunk nothing loads.
-// The JSON-attributed import stays here, so the Node read can only yield data.
+// That module's import is JSON-attributed, so the Node read can only yield data.
+// A host with no file system swaps that one module for its own reader
+// (site/build/bundle-cloudflare-worker.mts).
 // The main thread reads the summary and the files it needs: every body and camera fact, with each orbit reduced to its parent,
 // bounds and size. Only the planner worker projects orbit paths; it reads each orbit centre's binary bank when a frame
 // first needs it. The full JSON is build-time only.
@@ -44,8 +46,8 @@ const node = source.protocol === 'file:';
 const startup = node ? undefined : startupWorld();
 
 async function readNodeJson(path: string): Promise<unknown> {
-  const { nodeProjectFileUrl } = await import('./prepared/prepared-world-context-node-source.mts');
-  return (await import(/* @vite-ignore */ nodeProjectFileUrl(import.meta.url, path), { with: { type: 'json' } })).default;
+  const { readProjectJson } = await import('./prepared/prepared-world-context-node-source.mts');
+  return readProjectJson(import.meta.url, path);
 }
 async function readPreparedWorldContext(): Promise<unknown> {
   // Node tools, tests and the prerender build read the checked-in file directly.

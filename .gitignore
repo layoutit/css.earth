@@ -492,3 +492,6 @@ src/objects/*/source/yuan-*/table*.dat
 src/objects/*/source/gonzalez-gc/table6.dat
 src/objects/m32-layers/source/merrett-pne/table3.dat
 src/objects/m110-layers/source/merrett-pne/table3.dat
+
+# The Cloudflare Worker bundled by site/build/bundle-cloudflare-worker.mts.
+cloudflare/bundled/

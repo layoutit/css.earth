@@ -3,6 +3,7 @@ import { resolve } from 'node:path';
 import { projectRoot } from '@cssearth/core/node';
 import type { FeatureIndexPin } from '../search/feature-search.mts';
 import { parseCatalogueIndex, type CatalogueIndexEntry } from '../search/catalogue-index.mts';
+import { keptLoad } from './kept-load.mts';
 
 /** Reads a prepared file by its site path. */
 export type ReadPrepared = (path: string) => Promise<unknown>;
@@ -24,14 +25,10 @@ export const readPublicFile: ReadPrepared = async path => {
   return jsonAt(resolve(root(), 'public', path.slice(1)));
 };
 
-let built: Promise<readonly CatalogueIndexEntry[]> | null = null;
 /** The object catalogue the build wrote (`pages/catalogue/index.json.ts`), for the deployed functions and a static
  * preview. It is computed under Vite, which the bundled functions cannot run, so they read the built file. */
-export function readBuiltCatalogue(): Promise<readonly CatalogueIndexEntry[]> {
-  built ??= jsonAt(resolve(root(), 'dist/catalogue/index.json')).then(value => parseCatalogueIndex(value).entries)
-    .catch((error: unknown) => { built = null; throw error; });
-  return built;
-}
+export const readBuiltCatalogue: () => Promise<readonly CatalogueIndexEntry[]> =
+  keptLoad(async () => parseCatalogueIndex(await jsonAt(resolve(root(), 'dist/catalogue/index.json'))).entries);
 
 /** A built site's search data: its feature index pin and the files beside it. */
 export function builtSearchData(pin: FeatureIndexPin | null): SearchData {
