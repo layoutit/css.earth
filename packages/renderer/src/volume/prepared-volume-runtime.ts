@@ -14,8 +14,9 @@ const AXES = ['x', 'y', 'z'] as const;
  * root's opacity leaves or reaches 1. On the iPad, with the camera still and 88 slices displayed, 1 to 0.99 made a frame
  * of 54 to 55 ms, 0.999 to 1 one of 30, and 0.99 to 0.98 one of 17, which is no cost; a drag across M42 had 179 and 490
  * paints in one frame at its changes of axis, and with this ceiling its longest frame mid-drag fell from 77 to 79 ms
- * to 40 to 43 (2026-10-04). At rest in headless WebKit the ceiling changed at most 8 pixels of one M42 view and none of
- * three others; in headless Chromium, 1 to 4 of 255 on 1.4% to 3.4% of a view's pixels. */
+ * to 39 to 41 (2026-10-04). Against the same views at opacity 1, at rest: headless WebKit drew M42 and the Milky Way
+ * the same to the pixel and 174 to 517 pixels of M31 differently, by at most 6 of 255; headless Chromium drew 1.3% to
+ * 3.3% of an M42 view's pixels and 1.2% to 4.0% of an M31 view's differently, nearly all by 1 and at most by 15. */
 export const STACK_OPACITY_CEILING = 0.999;
 /** A stack joins every JOIN_STRIDE-th slice first, so one part of the way in is the whole cloud thinner, not a part of it. */
 const JOIN_STRIDE = 8;
