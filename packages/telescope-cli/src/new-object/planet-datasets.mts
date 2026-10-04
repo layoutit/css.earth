@@ -23,6 +23,8 @@ import { parseCieTable, hostLitGray } from '@cssearth/bake/objects/color';
 import { readCie1931ColorMatching } from '@cssearth/bake/objects/sources';
 import { HOSTED_PLANET_STYLESHEET } from './new-hosted-planet.mts';
 import { installPhaseCurveDataset, type PhaseCurveEntry } from './phase-curve-dataset.mts';
+import { installSimulationDataset, restoreSimulationFile, simulationRecipe, simulationRelease, type SimulationEntry } from './simulation/simulation-dataset.mts';
+import { loadNetcdfLonLatField } from '@cssearth/bake/objects/raster';
 
 export const EMISSION_COLUMNS = 'plntname,centralwavelng,bandwidth,especlipdep,especlipdeperr1,especlipdeperr2,especlipdeplim,espbritemp,espbritemperr1,espbritemperr2,espbritemplim,facility,instrument,plntreflink';
 export const emissionQuery = (planet: string) => `select ${EMISSION_COLUMNS} from emissionspec where plntname='${planet.replace(/'/gu, "''")}' order by centralwavelng`;
@@ -208,7 +210,7 @@ const DATASET_REBUILD_FILES = ['object.json', 'text.json', 'source/preparation/r
 /** Give planets already in the tree their color from what is measured: `thermal` reads the archive's emission table and
  * installs the "Thermal glow" dataset where a dayside temperature is measured; `host-light` lights a neutral gray with the
  * host's color. Returns one line per planet; nothing is baked here (packages/bake/cli/prepare-object.mts does that). */
-export async function rebuildExistingDatasets(root: string, ids: readonly string[], mode: 'thermal' | 'host-light' | 'photometry' | 'phase-curve', archive: Archive, progress = (_line: string) => {}, photometry: ReadonlyMap<string, PhotometrySpec> = new Map(), phaseCurves: ReadonlyMap<string, readonly PhaseCurveEntry[]> = new Map()) {
+export async function rebuildExistingDatasets(root: string, ids: readonly string[], mode: 'thermal' | 'host-light' | 'photometry' | 'phase-curve' | 'simulation', archive: Archive, progress = (_line: string) => {}, photometry: ReadonlyMap<string, PhotometrySpec> = new Map(), phaseCurves: ReadonlyMap<string, readonly PhaseCurveEntry[]> = new Map(), simulations: ReadonlyMap<string, readonly SimulationEntry[]> = new Map()) {
   const { mkdir, writeFile } = await import('node:fs/promises');
   const lines: string[] = [];
   for (const id of ids) {
@@ -227,6 +229,21 @@ export async function rebuildExistingDatasets(root: string, ids: readonly string
       for (const entry of phaseCurves.get(id) ?? []) {
         const { minimum, maximum, hottest } = await installPhaseCurveDataset(files, id, descriptor.displayName, entry);
         lines.push(`${id}: ${entry.dataset} dataset from ${entry.credit}, ${minimum}-${maximum} K, hottest ${hottest}° from noon`); progress(lines.at(-1)!);
+      }
+      for (const [path, value] of files) { await mkdir(dirname(resolve(root, path)), { recursive: true }); await writeFile(resolve(root, path), value); }
+      continue;
+    }
+    if (mode === 'simulation') {
+      // A published simulation is added beside the default dataset and never becomes it, so the marker stays as it is. The
+      // release is checked on Zenodo, its file is brought into the source directory, and the range drawn is the file's own.
+      const catalog = (JSON.parse(String(files.get(`src/objects/${id}/object.json`))) as { properties: { catalog?: { aliases?: unknown } } }).properties.catalog;
+      const names = [descriptor.displayName, ...Array.isArray(catalog?.aliases) ? catalog.aliases.filter((alias): alias is string => typeof alias === 'string') : []];
+      for (const entry of simulations.get(id) ?? []) {
+        const release = await simulationRelease(archive, id, names, entry);
+        if (await restoreSimulationFile(resolve(o, 'source'), id, entry, release) === 'downloaded') progress(`${id}: ${entry.file} downloaded from Zenodo record ${release.doi}`);
+        const field = await loadNetcdfLonLatField(resolve(o, 'source'), simulationRecipe(entry));
+        const { minimum, maximum } = installSimulationDataset(files, id, descriptor.displayName, entry, release, field.report);
+        lines.push(`${id}: ${entry.dataset} dataset from the ${entry.model} simulation of ${entry.credit}, ${minimum}-${maximum} ${entry.units}, ${release.license.name}`); progress(lines.at(-1)!);
       }
       for (const [path, value] of files) { await mkdir(dirname(resolve(root, path)), { recursive: true }); await writeFile(resolve(root, path), value); }
       continue;

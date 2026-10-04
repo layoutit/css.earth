@@ -34,7 +34,7 @@ This package is the layer above the libraries: it imports `@cssearth/telescope`,
 
 The object generator behind `telescope new-object` is `src/new-object/`: `cli.mts` is the entry the telescope runs as a process of its
 own through `workspace-commands/new-object.mts`, `new-object-cli.mts` is the standalone entry for the modes the telescope does not expose
-(`--star-limb`, `--thermal`, `--host-light`, `--phase-curve`, `--charts`, `--retext`, `--retime`, the shape-only scaffold), and
+(`--star-limb`, `--thermal`, `--host-light`, `--phase-curve`, `--simulation`, `--charts`, `--retext`, `--retime`, the shape-only scaffold), and
 `new-hosted-planet.mts` scaffolds one hosted planet. `hosted-orbits/` holds the two Python fitters `hosted.mts` runs beside it.
 The generated solar geometry (`src/platform/solar-geometry.mts`) stays generated: the entries load it with `solar-epoch.mts` and
 pass the epoch down, so no module here imports it.

@@ -584,6 +584,8 @@ export async function draftsFromArchive(hosts: readonly string[], { root = proce
       catch (error) { const line = (error as Error).message.split('\n')[0]!; results[i] = { failure: line.startsWith(`${host}:`) ? line : `${host}: ${line}` }; progress(`  left out: ${(results[i] as { failure: string }).failure}`); }
     }
   }));
+  const planetNames = (spec: Record<string, unknown>) => (spec.planets as { name?: unknown }[]).flatMap(planet => typeof planet.name === 'string' ? [planet.name] : []);
+  const simulated = await (await import('./simulation/simulation-dataset.mts')).simulationSurvey(liveArchive, results.flatMap(result => 'drafted' in result ? planetNames(result.drafted.spec) : [])); // Zenodo is asked once which drafted planets have a published simulation.
   for (const [i, result] of results.entries()) {
     const host = hosts[i]!;
     if ('failure' in result) { failed.push(result.failure); continue; }
@@ -591,7 +593,7 @@ export async function draftsFromArchive(hosts: readonly string[], { root = proce
     const planets = (spec.planets as unknown[]).length;
     if (planets || !('host' in spec)) stars.push(spec);
     stars.push(...companions);
-    report.push(`${host}: ${planets} planet${planets === 1 ? '' : 's'}${companions.length ? `, ${companions.length} companion star${companions.length === 1 ? '' : 's'}` : ''}${'host' in spec ? ' added to the existing star' : ''}${skipped.length ? `; left out: ${skipped.join('; ')}` : ''}${notes.length ? `; ${notes.join('; ')}` : ''}`);
+    report.push(`${host}: ${planets} planet${planets === 1 ? '' : 's'}${companions.length ? `, ${companions.length} companion star${companions.length === 1 ? '' : 's'}` : ''}${'host' in spec ? ' added to the existing star' : ''}${skipped.length ? `; left out: ${skipped.join('; ')}` : ''}${notes.length ? `; ${notes.join('; ')}` : ''}${simulated.note(planetNames(spec))}`);
   }
-  return { stars, report: [...report, ...failed.map(line => `left out: ${line}`)] };
+  return { stars, report: [...report, ...failed.map(line => `left out: ${line}`), ...simulated.failure ? [simulated.failure] : []] };
 }
