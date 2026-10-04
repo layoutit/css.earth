@@ -27,11 +27,6 @@
     "url": "https://doi.org/10.1093/mnras/stx1433",
     "uncertainty": 125
   },
-  "gravity": {
-    "value": 3.47,
-    "source": "SIMBAD's compilation of spectroscopic measurements (mesFe_h): log g 3.47 from 2023ApJS..266...11B; the 1 published value span log g 3.47 to 3.47, across which the limb law changes by at most 0.0% of the centre brightness",
-    "url": "https://ui.adsabs.harvard.edu/abs/2023ApJS..266...11B"
-  },
   "radialVelocity": {
     "value": -0.3,
     "source": "Anderson & Francis (2012), Astronomy Letters 38, 331 (XHIP), Hipparcos astrometry, HIP 112122: RV -0.3 +/- 0.3 km/s (quality A)",
@@ -56,6 +51,9 @@
       "ra": "pmRA",
       "dec": "pmDE"
     }
+  },
+  "limb": {
+    "none": "no mass is measured and no spectroscopic surface gravity is published with this radius: McDonald, Zijlstra & Watson (2017), MNRAS 471, 770 assume the gravity of their fit (table column 15)"
   },
   "planets": [],
   "companions": [],

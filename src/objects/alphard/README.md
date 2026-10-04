@@ -16,6 +16,8 @@ Generated 2026-10-03 by [new-object-cli.mts](../../../packages/telescope-cli/src
 
 - The color's cross-check differs by 5 levels at most in any channel (threshold 12); [object-package-consistency.test.mts](../../../src/objects/object-package-consistency.test.mts) recomputes it after preparation.
 
+![Alphard, Hamal and Denebola before and after the limb law, 3 October 2026](evidence/2026-10-03/limb.jpg)
+
 ## Known problems
 
 - **Assumptions of the frame.** The axis's position angle and the rotation phase are conventions.
