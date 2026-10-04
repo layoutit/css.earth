@@ -25,6 +25,7 @@
  *
  * Writes src/objects/<body>/source/atmosphere/psg-limb.json and the limb and nadir configurations beside it.
  */
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 import { execFile } from 'node:child_process';
 import { promisify } from 'node:util';
 import { mkdir, readFile, writeFile, appendFile } from 'node:fs/promises';
@@ -122,7 +123,7 @@ if (!altitudes.length || altitudes.some((value, index) => !Number.isFinite(value
   throw new TypeError(`--altitudes= must be increasing numbers in km, got ${JSON.stringify(argument('altitudes'))}.`);
 const lmax = integer('lmax'), nmax = integer('nmax', 8), WINDOW_NM = integer('window-nm', 10);
 if (!(WINDOW_NM > 0)) throw new TypeError('--window-nm= must be positive.');
-const root = process.cwd(), cachePath = resolve(root, 'output/psg-limb', `${body}.jsonl`), outputDirectory = resolve(root, 'src/objects', body, 'source/atmosphere');
+const root = checkoutProjectRoot(import.meta.url), cachePath = resolve(root, 'output/psg-limb', `${body}.jsonl`), outputDirectory = resolve(root, 'src/objects', body, 'source/atmosphere');
 await mkdir(dirname(cachePath), { recursive: true });
 const cache = new Map<string, unknown>((await readFile(cachePath, 'utf8').catch(() => '')).split('\n').filter(Boolean).map(line => { const { key, value } = JSON.parse(line); return [key, value]; }));
 const cached = async <T,>(key: string, compute: () => Promise<T>): Promise<T> => {

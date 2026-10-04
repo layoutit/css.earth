@@ -1,15 +1,19 @@
 #!/usr/bin/env node
+import { fitsArchiveInputs } from '@cssearth/fits/node';
+import { setupBakeOracleInputs } from '@cssearth/bake/objects/cameras';
+await setupBakeOracleInputs();
 /** Focused FITS gate; optional restoration is limited to this suite's pinned inputs. */
 import { spawnSync } from 'node:child_process';
 import { existsSync } from 'node:fs';
 import { readFile, mkdir, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
-import { readOracleFixture, readOracleInput, verifyOracleBytes, ORACLE_ROOT, fitsArchiveInputs } from '@cssearth/core/oracle';
+import { readOracleFixture, readOracleInput, verifyOracleBytes, ORACLE_ROOT } from '@cssearth/core/oracle';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
+import { missingFitsInputs } from './fits-inputs.mts';
 
 const args = process.argv.slice(2);
 if (args.some(arg => !['--unit', '--restore'].includes(arg)) || args.includes('--unit') && args.includes('--restore'))
-  throw new Error('Usage: pnpm test:fits [--unit | --restore]');
+  throw new Error('Usage: node .github/scripts/checks/test-fits.mts [--unit | --restore]');
 // node --test skips a listed file that does not exist without failing, so a moved or deleted test would silently drop out.
 const requireListed = (paths: readonly string[]) => {
   const missing = paths.filter(path => path.endsWith('.mts') && !existsSync(resolve(ORACLE_ROOT, path)));
@@ -59,17 +63,10 @@ for (const id of ['didymos', 'dimorphos', 'arrokoth', 'pluto']) {
   }
 }
 // Verify before each decoder's own byte-bound comparisons. Corruption never triggers a refresh.
-const missing: { path: string; bytes?: number }[] = [];
-for (const input of inputs.values()) {
-  try { await readOracleInput(input); }
-  catch (error) {
-    if (!(error instanceof Error) || !error.message.startsWith('Missing FITS oracle input')) throw error;
-    missing.push(input);
-  }
-}
+const missing = await missingFitsInputs(inputs.values(), readOracleInput);
 if (missing.length && !args.includes('--restore')) throw new Error(
   `${missing.length} missing FITS test inputs. ` +
-  'Run pnpm build:preparation, then pnpm test:fits --restore. For the offline checks only, use pnpm test:fits --unit.\n' + missing.map(i => i.path).join('\n'));
+  'Run pnpm build:preparation, then node .github/scripts/checks/test-fits.mts --restore. For the offline checks only, use node .github/scripts/checks/test-fits.mts --unit.\n' + missing.map(i => i.path).join('\n'));
 if (missing.length) {
   const { executeAcquisition, parseAcquisitionPlan } = await import('@cssearth/bake/objects/acquisition');
   const { parseSourceManifest } = await import('@cssearth/bake/objects/sources');

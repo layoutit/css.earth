@@ -17,13 +17,14 @@
  * `src/objects/nearby-universe-galaxies/source/galaxies/cf4-hyperleda.csv.gz`.
  * Output: `src/objects/fornax-cluster-members/source/dots/fcc-members.csv.gz`. It prints what it kept.
  */
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 import { spawnSync } from 'node:child_process';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { gunzipSync, gzipSync } from 'node:zlib';
 import { createRaDecCatalogueMatcher } from '@cssearth/astronomy';
 
-const repository = resolve(import.meta.dirname, '../../../..');
+const repository = checkoutProjectRoot(import.meta.url);
 const fccPath = resolve(process.argv[2] ?? resolve(repository, 'output/clusters/fcc-p2tbl2.dat.gz'));
 const fieldPath = resolve(repository, 'src/objects/nearby-universe-galaxies/source/galaxies/cf4-hyperleda.csv.gz');
 const outputPath = resolve(repository, 'src/objects/fornax-cluster-members/source/dots/fcc-members.csv.gz');

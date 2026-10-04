@@ -14,6 +14,7 @@
  *
  * Usage: node packages/bake/authoring/ring-particles/positions.mts <host id> [dots]
  */
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { gzipSync } from 'node:zlib';
@@ -24,7 +25,7 @@ const DEFAULT_DOTS = 4000, SEED = 20061012;
 
 const host = process.argv[2] ?? '';
 if (!(ROTATING_BODY_IDS as readonly string[]).includes(host)) throw new TypeError(`Usage: positions.mts <host id>; ${JSON.stringify(host)} has no rotation model.`);
-const root = resolve(import.meta.dirname, '../../../..'), hostDirectory = resolve(root, 'src/objects', host);
+const root = checkoutProjectRoot(import.meta.url), hostDirectory = resolve(root, 'src/objects', host);
 const recipePath = resolve(hostDirectory, 'source/preparation/rings.json');
 const DOTS = process.argv[3] === undefined ? DEFAULT_DOTS : Number(process.argv[3]);
 if (!Number.isInteger(DOTS) || DOTS < 1) throw new TypeError(`The dot count must be a whole number above zero, got ${JSON.stringify(process.argv[3])}.`);

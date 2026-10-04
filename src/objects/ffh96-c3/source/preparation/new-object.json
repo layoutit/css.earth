@@ -1,0 +1,65 @@
+{
+  "id": "ffh96-c3",
+  "name": "[FFH96] C3",
+  "system": "[FFH96] C3 system",
+  "description": "A Cepheid in the galaxy M100 that pulsates every 63.5 days.",
+  "parent": "m100",
+  "featured": true,
+  "target": "[FFH96] C3",
+  "paper": {
+    "url": "https://doi.org/10.26093/cds/vizier.34110361",
+    "credit": "Kanbur et al. (2003), A&A 411, 361"
+  },
+  "radius": {
+    "value": 241.5,
+    "source": "Groenewegen (2020), A&A 635, A33, period relations for Galactic fundamental-mode Cepheids applied to this star's period, 63.53 d in Kanbur et al. (2003), A&A 411, 361, VizieR J/A+A/411/361/table1 Galaxy = NGC4321, Cepheid = C3 (log(P) 1.803); not a measurement of this star: eq. 2, log R = 0.721 log P + 1.083; the uncertainty is the relation's scatter, 0.067 dex",
+    "url": "https://arxiv.org/abs/2002.02186",
+    "uncertainty": 40.3
+  },
+  "mass": "unmeasured",
+  "temperature": {
+    "value": 4720,
+    "source": "Groenewegen (2020), A&A 635, A33, period relations for Galactic fundamental-mode Cepheids applied to this star's period, 63.53 d in Kanbur et al. (2003), A&A 411, 361, VizieR J/A+A/411/361/table1 Galaxy = NGC4321, Cepheid = C3 (log(P) 1.803); not a measurement of this star: the luminosity of eq. 1 (M_bol = -2.95 log P - 0.98, with the nominal solar M_bol 4.74) over the radius of eq. 2, through L = 4 pi R^2 sigma T^4 with the nominal solar 5772 K (IAU 2015 Resolutions B2 (Mamajek et al. 2015, arXiv:1510.06262) and B3 (Prsa et al. 2016, arXiv:1605.09788)); the uncertainty is the 317 K by which the two relations miss the paper's own Cepheid temperatures",
+    "url": "https://arxiv.org/abs/2002.02186",
+    "uncertainty": 317
+  },
+  "gravityRange": {
+    "min": -1.33,
+    "max": 2.86,
+    "source": "Luck (2018), AJ 156, 171, table 3 (the spectroscopic gravities of its Cepheid spectra)",
+    "url": "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=J/AJ/156/171/table3"
+  },
+  "radialVelocity": {
+    "value": 1566,
+    "source": "SIMBAD's radial velocity of M100, the Cepheid's galaxy, from 2022ApJS..261...21Y; the star's own motion within the galaxy is not measured",
+    "url": "https://ui.adsabs.harvard.edu/abs/2022ApJS..261...21Y/abstract",
+    "uncertainty": 3
+  },
+  "distance": {
+    "value": 15215772,
+    "source": "Placed in M100 as the app draws it, where the star's sight line crosses the disc's midplane: 15,215,772 pc (src/objects/m100-layers/source/recipe.json: centre 15,210,000 pc, inclination 38.5 deg, line of nodes 156.2 deg). The galaxy's distance, which places the galaxy and not a star within it: Leroy et al. (2021), PHANGS-ALMA, ApJS 257, 43, table of galaxies, row NGC4321: distance 15.21 ± 0.5 Mpc, from the compilation of Anand et al. (2021) (https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/257/43)",
+    "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/257/43"
+  },
+  "position": {
+    "catalogue": "basic",
+    "row": {
+      "main_id": "[FFH96] C3"
+    },
+    "credit": "Kanbur et al. (2003), A&A 411, 361, VizieR J/A+A/411/361/table1 Galaxy = NGC4321, Cepheid = C3, names the star in SIMBAD (SName); SIMBAD holds its position and names no paper for it",
+    "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=%5BFFH96%5D%20C3",
+    "archive": "simbad"
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A Cepheid in the galaxy M100, 15.2 million parsecs away, that swells and shrinks every 63.5 days.",
+    "introduction": "Kanbur et al. (2003) list its pulsation at 63.5 days.",
+    "locator": "VizieR J/A+A/411/361/table1 Galaxy = NGC4321, Cepheid = C3: log(P)"
+  },
+  "notes": [
+    "The star pulsates; it is drawn at its mean radius",
+    "Its radius and temperature are what Groenewegen (2020), A&A 635, A33's relations for Galactic Cepheids give at its period; no measurement of this star's size or temperature exists",
+    "Its radial velocity is its galaxy's; its own motion within M100 is not measured"
+  ],
+  "order": 5766
+}

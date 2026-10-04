@@ -1,4 +1,3 @@
-import type { LimbBlock } from '@cssearth/objects';
 /**
  * Planet limbs from published photometric models. A lighting overlay multiplies a body's map by its model's radiance
  * factor relative to the flood-lit disc centre (incidence, emission and phase all zero). The map shows as published at
@@ -6,6 +5,7 @@ import type { LimbBlock } from '@cssearth/objects';
  * and, where the source publishes one, the phase curve. Nothing here is authored: no floor, ambient term or terminator
  * ramp. A color map names one record per channel; a grey map names the same record three times.
  */
+import type { LimbBlock } from '@cssearth/objects';
 import sharp from 'sharp';
 import { resolve } from 'node:path';
 import { radianceFactor } from './normalization.ts';

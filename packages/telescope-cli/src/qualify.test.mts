@@ -4,7 +4,7 @@ const test = sourceTest();
 import { mkdtemp, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
-import { card, imageFixture } from './fixtures/fits/helpers.mts';
+import { card, imageFixture } from '@cssearth/fits/test-support';
 import { fitsObservationInterval, recordQualification, QUALIFICATION_SCHEMA } from './qualify.mts';
 import { loadQualifiedObservations } from './qualified-observations.mts';
 import { assessRequest } from './request-satisfaction.mts';

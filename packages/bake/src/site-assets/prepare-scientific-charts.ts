@@ -1,4 +1,4 @@
-import { discoverRoot } from '@cssearth/core/node';
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 import { isArray, requireRecord, requireFiniteNumber, shape, text, number, optional, array, dictionary } from '@cssearth/core';
 
 import {decodeProfile} from "../objects/raster/index.ts";
@@ -11,8 +11,8 @@ import { resolve } from "node:path";
 
 import { renderPhotometricPhaseChart } from '../objects/charts/index.ts';
 
-/** The checkout, found through this package's own name so the path holds from the sources and from `dist/`. */
-const projectRoot = discoverRoot({ strategy: 'package-location', fromUrl: import.meta.url, packageSpecifier: '@cssearth/bake/package.json', rootOffset: '../..', missing: { behavior: 'throw' } });
+/** The real checkout, found by the shared workspace-marker resolver from source and `dist/`. */
+const projectRoot = checkoutProjectRoot(import.meta.url);
 const contextPath = resolve(
   projectRoot,
   "site/source/scientific-charts/planetary-context.json",
@@ -141,4 +141,3 @@ function polynomial(coefficients:readonly number[], value:number) {
 function titleCase(value:string) {
   return value[0].toUpperCase() + value.slice(1);
 }
-

@@ -16,8 +16,11 @@ Human entry points:
   telescope explore TARGET [--family F01..F18] [--kind KIND] [--instrument NAME] [--wavelength MIN,MAX] [--from ISO --to ISO] [--icrs-circle RA,DEC,RADIUS] [--out DIRECTORY]
   telescope fetch EXPLORE.json --archive keck|gemini|opus|chandra|spitzer --pick N [--file NAME] --out DIRECTORY [--resume] [--json]
   telescope papers TARGET [--instrument NAME] [--host NAME] [--json] [--out DIRECTORY]
+  telescope simulations TARGET [--json] [--out DIRECTORY]
+  telescope leads TARGET | --class CLASS [--json] [--out DIRECTORY]
+  telescope stars GALAXY [--json] [--out DIRECTORY]
   telescope new-object SPEC.json [--check] [--skip-existing] [--json]
-  telescope new-object --from-archive HOST... | --from-debcat SYSTEM... | --from-apokasc KIC... | --from-cepheids NAME... | --from-k2 EPIC... | --from-tess TIC... | --from-gaia SOURCE_ID... | --from-hipparcos HIP... | --from-iau all|NAME... | --from-chara HD... | --from-npoi HD... | --from-sh0es HOST[/ID]... | --from-m31cepheids all|V1|ID... | --from-m33cepheids all|ID... --out SPEC.json
+  telescope new-object --from-archive HOST... | --from-debcat SYSTEM... | --from-apokasc KIC... | --from-cepheids NAME... | --from-k2 EPIC... | --from-tess TIC... | --from-gaia SOURCE_ID... | --from-hipparcos HIP... | --from-iau all|NAME... | --from-chara HD... | --from-npoi HD... | --from-sh0es HOST[/ID]... | --from-m31cepheids all|V1|ID... | --from-m33cepheids all|ID... | --from-table CLASS:GALAXY=TABLE[#ROW]... --out SPEC.json
   telescope ascl SOFTWARE [--json]
   telescope ascl --product PRODUCT.json|RUN/pick-N/result.json [--json]
   telescope wwt-fits EXPLORE.json --pick N --level N --x X --y Y --out DIRECTORY
@@ -46,12 +49,24 @@ cross-checked against the next; a model limb law from Claret's grids; manifest, 
 Only prose is left marked TODO(new-object), unless the spec carries drafted text. --from-archive writes a spec for planet hosts from the
 NASA Exoplanet Archive's default parameter sets (their transiting planets, with drafted text); --from-debcat drafts both stars of
 an eclipsing binary from DEBCat, --from-apokasc a Kepler-field giant from APOKASC-3, --from-cepheids a Cepheid from Groenewegen
-(2013), --from-k2 a K2-field giant and --from-tess a TESS giant from Khan et al. (2023), --from-gaia any star from Gaia DR3 FLAME, --from-hipparcos a Hipparcos star from the model-atmosphere fit to its light (McDonald et al. 2017), --from-iau the stars the IAU has named that the universe lacks, each by the first of those routes that measures it, --from-chara a nearby star whose disc CHARA measured (Boyajian et al. 2012), --from-npoi a bright star whose disc the NPOI measured (Baines et al. 2018, 2021), --from-sh0es the Cepheids Hubble found in a SN Ia host galaxy (Hoffmann et al. 2016), --from-m31cepheids Hubble's V1 and the Cepheids Hubble measured in Andromeda (Li et al. 2021), --from-m33cepheids those it measured in Triangulum (Breuval et al. 2023), each naming what the spec still needs from the paper; --check runs the bake's first steps on
+(2013), --from-k2 a K2-field giant and --from-tess a TESS giant from Khan et al. (2023), --from-gaia any star from Gaia DR3 FLAME, --from-hipparcos a Hipparcos star from the model-atmosphere fit to its light (McDonald et al. 2017), --from-iau the stars the IAU has named that the universe lacks, each by the first of those routes that measures it, --from-chara a nearby star whose disc CHARA measured (Boyajian et al. 2012), --from-npoi a bright star whose disc the NPOI measured (Baines et al. 2018, 2021), --from-sh0es the Cepheids Hubble found in a SN Ia host galaxy (Hoffmann et al. 2016), --from-m31cepheids Hubble's V1 and the Cepheids Hubble measured in Andromeda (Li et al. 2021), --from-m33cepheids those it measured in Triangulum (Breuval et al. 2023), --from-table a star of another galaxy from any VizieR table that lists it with a period (cepheid:m81=J/ApJ/743/176/table1), placed in its galaxy by the table's position, by SIMBAD's, or by the table's detector pixel on the exposure the request names (#exposure=mast:HST/product/FILE.fits,firstPixel=N), each naming what the spec still needs from the paper; --check runs the bake's first steps on
 what was generated; --skip-existing leaves objects already in the universe alone. The spec format is in packages/telescope-cli/src/new-object/spec.mts.
 Papers lists up to 20 OpenAlex works that name the target (and instrument) in their title or abstract,
 using arXiv's Atom API when OpenAlex is temporarily unavailable. The saved report names the source and fallback reason.
 It ranks open access first, tries one plain GET per open copy, marks browser challenges as blocked, and prints
 HTML figure captions and table titles about maps or observation lists. Nothing is saved without --out.
+Simulations lists the Zenodo dataset records that name the target and speak of a simulation or a model, each with its
+license, size and files. It downloads nothing. A listed record is a lead: new-object --simulation adds one as a dataset from
+an entry written after reading its paper (packages/telescope-cli/src/new-object/simulation/simulation-dataset.mts), fetching
+by byte range only the header and the one grid it draws.
+Leads asks DataCite, which registers the DOIs of every data repository and of arXiv, for the records that name the target
+and speak of a measured phase curve or map, a measured eclipse, or a model: data releases at Zenodo, Dryad, Dataverse,
+universities, the CDS and MAST, and the papers themselves. --class exoplanet asks for every object of that class, ten a
+request, and ranks them with what each page opens on, the pages without a map first. A lead is read before anything is
+shown: new-object --phase-curve draws a paper's fitted table and new-object --simulation a released field.
+Stars counts the stars SIMBAD lists inside a galaxy's outline by class, names the papers they come from, and says which of
+VizieR's tables of those papers give each star a period and a place. It downloads nothing. A table it calls ready is a lead
+for new-object --from-table, and so is one that lists detector pixels, once its paper has said which exposure they are of.
 ASCL searches its live software catalog by title or matches the exact software names in a verified
 product receipt. It reports citable code entries and preferred citations when provided by ASCL.
 Only the receipt establishes what this run recorded as used; an ASCL match is a citation lead, not

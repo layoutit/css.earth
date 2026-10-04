@@ -1,0 +1,43 @@
+{
+  "id": "doi-10-26093-cds-vizier-15290723",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Gibson et al. (2004): VI photometry of Cepheids",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.26093/cds/vizier.15290723"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://doi.org/10.26093/cds/vizier.15290723",
+      "label": "Publisher"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://doi.org/10.26093/cds/vizier.15290723",
+      "checkedOn": "2026-10-04",
+      "locator": "Crossref record: title, authors, container"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Gibson et al. (2004), Centre de Donnees Strasbourg (CDS)",
+      "scope": "citation",
+      "evidence": "https://doi.org/10.26093/cds/vizier.15290723"
+    }
+  ],
+  "publisher": "Centre de Donnees Strasbourg (CDS)",
+  "creators": [
+    "B.K. Gibson",
+    "P.B. Stetson",
+    "W.L. Freedman",
+    "et al."
+  ],
+  "publicationDate": "2004"
+}

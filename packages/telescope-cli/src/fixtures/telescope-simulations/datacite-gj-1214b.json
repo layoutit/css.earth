@@ -1,0 +1,266 @@
+{
+ "data": {
+  "data": [
+   {
+    "id": "10.7910/dvn/8xaepy",
+    "type": "dois",
+    "attributes": {
+     "doi": "10.7910/dvn/8xaepy",
+     "publisher": "Harvard Dataverse",
+     "publicationYear": 2022,
+     "types": {
+      "resourceTypeGeneral": "Dataset"
+     },
+     "titles": [
+      {
+       "title": "Simulation Data from \"The Impact of Phase Equilibrium Cloud Models on GCM Simulations of GJ1214b\""
+      }
+     ],
+     "descriptions": [
+      {
+       "description": "GCM data associated with the paper \"The Impact of Phase Equilibrium Cloud Models on GCM Simulations of GJ 1214b\" published in MNRAS."
+      },
+      {
+       "description": "The files are identified as gj1214b_(metallicity)_clear.nc for clear sky runs and g1214b_(metallicity)_cloudy_fsed(fsed_value).nc for cloudy runs. Two additional runs, discussed in the paper, are included in this archive: gj1214b_100x_cloudy_fsed0.1_gamma_dist.nc is the test of the gamma distribution and gj1214b_1x_clear_plane_parallel_test.nc is the clear sky run without the pseudo-spherical irradiation.\n<br><br>\nThe data are in NetCDF format and contain the following fields, output every 10 days.\n<br><br>\n\"U COMPNT OF WIND AFTER TS\" - Longitudinal wind<br>\n\"V COMPNT OF WIND AFTER TS\" - Latitudinal wind<br>\n\"W COMPNT OF WIND AFTER TS\" - Vertical wind<br>\n<br>\n\"SW HEATING RATES: ALL TIMESTEPS\" - Shortwave heating rate, output every 10 days, despite the name.<br>\n\"LW HEATING RATES\" - Longwave heating rate<br>\n<br>\n\"TEMPERATURE ON THETA LEVELS\" - Temperature in K<br>\n\"PRESSURE AT THETA LEVELS AFTER TS\" - Pressure in Pa<br>\n<br>\nFor cloudy runs, the adopted mixing rate and cloud properties are also included.<br>\n<br>\n\"Stash Code = 1604\" - KCl volume mixing ratio<br>\n\"Stash Code = 1606\" - ZnS volume mixing ratio <br>\n\"Stash Code = 1614\" - reff for KCl clouds<br>\n\"Stash Code = 1616\" - reff for ZnS clouds<br>\n\"Stash Code = 1620\" - Kzz<br>"
+      }
+     ],
+     "rightsList": [
+      {},
+      {
+       "rightsIdentifier": "cc0-1.0"
+      }
+     ]
+    }
+   },
+   {
+    "id": "10.24378/exe.1023",
+    "type": "dois",
+    "attributes": {
+     "doi": "10.24378/exe.1023",
+     "publisher": "University of Exeter",
+     "publicationYear": 2018,
+     "types": {
+      "resourceTypeGeneral": "Dataset"
+     },
+     "titles": [
+      {
+       "title": "The limits of the primitive equations of dynamics for warm, slowly rotating Small Neptunes and Super Earths (dataset)"
+      }
+     ],
+     "descriptions": [
+      {
+       "description": "We present significant differences in the simulated atmospheric flow for warm, tidally–locked small Neptunes and super Earths (based on a nominal GJ 1214b) when solving the simplified, and commonly used, primitive dynamical equations or the full Navier–Stokes equations. The dominant prograde, superrotating zonal jet is markedly different between the simulations which are performed using prac- tically identical numerical setups, within the same model. The differences arise due to the breakdown of the so–called ‘shallow–fluid’ and traditional approximations, which worsens when rotation rates are slowed, and day–night temperature contrasts are increased. The changes in the zonal advection between simulations solving the full and simplified equations, give rise to significant differences in the atmospheric redistribution of heat, altering the position of the hottest part of the atmosphere and temperature contrast between the day and night sides. The implications for the atmospheric chemistry and, therefore, observations need to be studied with a model including a more detailed treatment of the radiative transfer and chemistry. Small Neptunes and super Earths are extremely abundant and important, potentially bridging the structural properties (mass, radius, composition) of terrestrial and gas giant planets. Our results indicate care is required when interpreting the output of models solving the primitive equations of motion for such planets."
+      },
+      {
+       "description": "Netcdf output files of prognostic atmospheric fields for 3D simulations of a Super-Earth/Mini neptune Exoplanet based nominally on GJ1214b"
+      },
+      {
+       "description": "The article associated with this dataset is located in ORE at: http://hdl.handle.net/10871/35082"
+      }
+     ],
+     "rightsList": [
+      {
+       "rightsIdentifier": "cc-by-4.0"
+      }
+     ]
+    }
+   },
+   {
+    "id": "10.17909/qe3z-qj40",
+    "type": "dois",
+    "attributes": {
+     "doi": "10.17909/qe3z-qj40",
+     "publisher": "STScI/MAST",
+     "publicationYear": 2024,
+     "types": {
+      "resourceTypeGeneral": "Dataset"
+     },
+     "titles": [
+      {
+       "title": "JWST MIRI/LRS phase curve of GJ 1214 b"
+      }
+     ],
+     "descriptions": [],
+     "rightsList": []
+    }
+   },
+   {
+    "id": "10.5281/zenodo.7703085",
+    "type": "dois",
+    "attributes": {
+     "doi": "10.5281/zenodo.7703085",
+     "publisher": "Zenodo",
+     "publicationYear": 2023,
+     "types": {
+      "resourceTypeGeneral": "Dataset"
+     },
+     "titles": [
+      {
+       "title": "GJ 1214b MIRI phase curve analysis"
+      }
+     ],
+     "descriptions": [
+      {
+       "description": "Outputs of the fiducial Gj 1214b analysis. Files: result.txt: eclipse depth, transit depth, and nightside Fp/Fs per wavelength bin. This file also reports amplitude and phase offset, but these are calculated ONLY from the first-order component of the phase curve, ignoring the second-order component. See amplitudes_and_phases.txt for the (relative) amplitude and phase offset while taking the second-order component into account. lightcurves.txt: best fit spectroscopic light curves Generate plots.ipynb: a Jupyter notebook that generates the *.png plots in the folder. If you're confused about the format of the data files, consult this notebook. *.png files: generated by the aforementioned Jupyter notebook. If you're confused about what a plot is showing, consult the notebook. white_lightcurve.txt: best fit white light curve white_envelope.txt, white_envelope_3sigma.txt: 1 sigma and 3 sigma envelopes of the white light curve white_light_result.txt: system parameters inferred from white light curve white_chain.npy: the emcee chain for the white light curve. Parameters: delta_t_transit, delta_t_eclipse, Fp, C1, D1, C2, D2, rp/rs, a/Rs, b, error_factor, Fstar, Aramp, tau, cy, slope. white_lnprobs.npy: ln(posterior) for every sample of the white chain chain_6000_6500.npy: the chain for the spectroscopic light curve spanning 6000--6500 Angstroms. Parameters: Fp, C1, D1, C2, D2, error_factor, rp/rs, Fstar, Aramp, tau, cy, slope lnprobs_6000_6500.npy: ln(posterior) for the spectroscopic chain mentioned above amplitudes_and_phases.txt: relative amplitude, (max - min) / max, of the phase curve, along with the phase offset, defined as the position of the phase curve maximum relative to mid-eclipse. Negative means east. calc_amplitude_offset.py: script that calculates the amplitudes and phase offsets in the above file, starting from the spectroscopic chain. Usage: python calc_amplitude_offset.py 6000, for the bin 6000-6500 Angstrom. fiducial_stellar_spectrum.fits: the stellar spectrum we adopted data.pkl: the reduced data that we fit for with emcee positions.txt: x and y positions inferred for the trace"
+      }
+     ],
+     "rightsList": [
+      {
+       "rightsIdentifier": "cc-by-4.0"
+      },
+      {}
+     ]
+    }
+   },
+   {
+    "id": "10.57780/esa-622hk6f",
+    "type": "dois",
+    "attributes": {
+     "doi": "10.57780/esa-622hk6f",
+     "publisher": "European Space Agency",
+     "publicationYear": 2022,
+     "types": {
+      "resourceTypeGeneral": "Dataset"
+     },
+     "titles": [
+      {
+       "title": "16875"
+      }
+     ],
+     "descriptions": [
+      {
+       "description": "With no equivalent in our Solar system comma  sub-Neptunes and super-Earths are the most common categories of planet discovered so far. Formation models predict that they are one and the samedoublePoint both composed of rocky cores comma  with sub-Neptunes retaining extended atmospheres comma  while super-Earths lose them early on. The puffy atmospheres of the smallest sub-Neptunes are outstanding candidates for atmospheric characterisation comma  as they represent an important step towards the study of Earth-analogs. Particularly comma  there is growing interest in exploring the atmospheres of temperate sub-Neptunes as these could be harbouring liquid water. In this context comma  TOI-4336 b is of the highest interest due to the parameters of the system putting it at the top of the list of temperate candidates for atmospheric exploration. In anticipation of in-depth characterization with HST and the upcoming JWST comma  it is essential to perform atmospheric reconnaissance in order to discriminate between a clear H-dominated atmosphere (e.g. K2-18b) and a cloudy one (e.g. GJ 1214 b) which prevents the detection of absorbers. We propose the observation of TOI-4336 b with HST.s WFC3 and the G141 grism in order to obtain a transmission spectrum covering the range between 1.1 and 1.7 microns. With this Mid-Cycle proposal we expect to probe the upper layers of the atmosphere and detect the presence of water vapour with only three transits at the 5 sigma level comma  confirming our hypothesis this sub-Neptune is ideal for a full atmospheric characterisation."
+      }
+     ],
+     "rightsList": []
+    }
+   }
+  ],
+  "meta": {
+   "total": 5,
+   "totalPages": 1
+  }
+ },
+ "paper": {
+  "data": [
+   {
+    "id": "10.48550/arxiv.2305.05697",
+    "type": "dois",
+    "attributes": {
+     "doi": "10.48550/arxiv.2305.05697",
+     "publisher": "arXiv",
+     "publicationYear": 2023,
+     "types": {
+      "resourceTypeGeneral": "Text"
+     },
+     "titles": [
+      {
+       "title": "The Hazy and Metal-Rich Atmosphere of GJ 1214 b Constrained by Near and Mid-Infrared Transmission Spectroscopy"
+      }
+     ],
+     "descriptions": [
+      {
+       "description": "The near-infrared transmission spectrum of the warm sub-Neptune exoplanet GJ 1214 b has been observed to be flat and featureless, implying a high metallicity atmosphere with abundant aerosols. Recent JWST MIRI LRS observations of a phase curve of GJ 1214 b showed that its transmission spectrum is flat out into the mid-infrared. In this paper, we use the combined near- and mid-infrared transmission spectrum of GJ 1214 b to constrain its atmospheric composition and aerosol properties. We generate a grid of photochemical haze models using an aerosol microphysics code for a number of background atmospheres spanning metallicities from 100 to 1000 $\\times$ solar, as well as a steam atmosphere scenario. The flatness of the combined data set largely rules out atmospheric metallicities $\\leq$300 $\\times$ solar due to their large corresponding molecular feature amplitudes, preferring values $\\geq$1000 $\\times$ solar and column haze production rates $\\geq$10$^{-10}$ g cm$^{-2}$ s$^{-1}$. The steam atmosphere scenario with similarly high haze production rates also exhibit sufficiently small molecular features to be consistent with the transmission spectrum. These compositions imply that atmospheric mean molecular weights $\\geq$15 g mol$^{-1}$ are needed to fit the data. Our results suggest that haze production is highly efficient on GJ 1214 b and could involve non-hydrocarbon, non-nitrogen haze precursors. Further characterization of GJ 1214 b's atmosphere would likely require multiple transits and eclipses using JWST across the near and mid-infrared, potentially complemented by groundbased high resolution transmission spectroscopy."
+      },
+      {
+       "description": "21 pages, 10 figures, 4 tables. Accepted for publication by ApJ"
+      }
+     ],
+     "rightsList": [
+      {
+       "rightsIdentifier": "cc-by-4.0"
+      }
+     ]
+    }
+   },
+   {
+    "id": "10.48550/arxiv.2305.06240",
+    "type": "dois",
+    "attributes": {
+     "doi": "10.48550/arxiv.2305.06240",
+     "publisher": "arXiv",
+     "publicationYear": 2023,
+     "types": {
+      "resourceTypeGeneral": "Text"
+     },
+     "titles": [
+      {
+       "title": "A reflective, metal-rich atmosphere for GJ 1214b from its JWST phase curve"
+      }
+     ],
+     "descriptions": [
+      {
+       "description": "There are no planets intermediate in size between Earth and Neptune in our Solar System, yet these objects are found around a substantial fraction of other stars. Population statistics show that close-in planets in this size range bifurcate into two classes based on their radii. It is hypothesized that the group with larger radii (referred to as \"sub-Neptunes\") is distinguished by having hydrogen-dominated atmospheres that are a few percent of the total mass of the planets. GJ 1214b is an archetype sub-Neptune that has been observed extensively using transmission spectroscopy to test this hypothesis. However, the measured spectra are featureless, and thus inconclusive, due to the presence of high-altitude aerosols in the planet's atmosphere. Here we report a spectroscopic thermal phase curve of GJ 1214b obtained with JWST in the mid-infrared. The dayside and nightside spectra (average brightness temperatures of 553 $\\pm$ 9 and 437 $\\pm$ 19 K, respectively) each show &gt;3$σ$ evidence of absorption features, with H$_2$O as the most likely cause in both. The measured global thermal emission implies that GJ 1214b's Bond albedo is 0.51 $\\pm$ 0.06. Comparison between the spectroscopic phase curve data and three-dimensional models of GJ 1214b reveal a planet with a high metallicity atmosphere blanketed by a thick and highly reflective layer of clouds or haze."
+      },
+      {
+       "description": "Published online in Nature on May 10, 2023"
+      }
+     ],
+     "rightsList": [
+      {}
+     ]
+    }
+   },
+   {
+    "id": "10.48550/arxiv.2209.12205",
+    "type": "dois",
+    "attributes": {
+     "doi": "10.48550/arxiv.2209.12205",
+     "publisher": "arXiv",
+     "publicationYear": 2022,
+     "types": {
+      "resourceTypeGeneral": "Text"
+     },
+     "titles": [
+      {
+       "title": "The Impact of Phase Equilibrium Cloud Models on GCM Simulations of GJ~1214b"
+      }
+     ],
+     "descriptions": [
+      {
+       "description": "We investigate the impact of clouds on the atmosphere of GJ~1214b using the radiatively-coupled, phase-equilibrium cloud model {\\sc EddySed} coupled to the {\\sc Unified Model} general circulation model. We find that, consistent with previous investigations, high metallicity ($100\\times$ solar) and clouds with large vertical extents (a sedimentation factor of $f_\\mathrm{sed} = 0.1$) are required to best match the observations, although metallicities even higher than those investigated here may be required to improve agreement further. We additionally find that in our case which best matches the observations ($f_\\mathrm{sed}=0.1$), the velocity structures change relative to the clear sky case with the formation of a superrotating jet being suppressed, although further investigation is required to understand the cause of the suppression. The increase in cloud extent with $f_\\mathrm{sed}$ results in a cooler planet due to a higher albedo, causing the atmosphere to contract. This also results in a reduced day-night contrast seen in the phase curves, although the introduction of cloud still results in a reduction of the phase offset. We additionally investigate the impact the the {\\sc Unified Model}'s pseudo-spherical irradiation scheme on the calculation of heating rates, finding that the introduction of nightside shortwave heating results in slower mid-latitude jets compared to the plane parallel irradiation scheme used in previous works. We also consider the impact of a gamma distribution, as opposed to a log-normal distribution, for the distribution of cloud particle radii and find the impact to be relatively minor."
+      },
+      {
+       "description": "Accepted to MNRAS"
+      }
+     ],
+     "rightsList": [
+      {}
+     ]
+    }
+   },
+   {
+    "id": "10.48550/arxiv.1401.1898",
+    "type": "dois",
+    "attributes": {
+     "doi": "10.48550/arxiv.1401.1898",
+     "publisher": "arXiv",
+     "publicationYear": 2014,
+     "types": {
+      "resourceTypeGeneral": "Text"
+     },
+     "titles": [
+      {
+       "title": "The atmospheric circulation of the super Earth GJ 1214b: Dependence on composition and metallicity"
+      }
+     ],
+     "descriptions": [
+      {
+       "description": "We present three-dimensional atmospheric circulation models of GJ 1214b, a 2.7 Earth-radius, 6.5 Earth-mass super Earth detected by the MEarth survey. Here we explore the planet's circulation as a function of atmospheric metallicity and atmospheric composition, modeling atmospheres with a low mean-molecular weight (i.e., H2-dominated) and a high mean-molecular weight (i.e. water- and CO2-dominated). We find that atmospheres with a low mean-molecular weight have strong day-night temperature variations at pressures above the infrared photosphere that lead to equatorial superrotation. For these atmospheres, the enhancement of atmospheric opacities with increasing metallicity lead to shallower atmospheric heating, larger day-night temperature variations and hence stronger superrotation. In comparison, atmospheres with a high mean-molecular weight have larger day-night and equator-to-pole temperature variations than low mean-molecular weight atmospheres, but differences in opacity structure and energy budget lead to differences in jet structure. The circulation of a water-dominated atmosphere is dominated by equatorial superrotation, while the circulation of a CO2-dominated atmosphere is instead dominated by high-latitude jets. By comparing emergent flux spectra and lightcurves for 50x solar and water-dominated compositions, we show that observations in emission can break the degeneracy in determining the atmospheric composition of GJ 1214b. The variation in opacity with wavelength for the water-dominated atmosphere leads to large phase variations within water bands and small phase variations outside of water bands. The 50x solar atmosphere, however, yields small variations within water bands and large phase variations at other characteristic wavelengths. These observations would be much less sensitive to clouds, condensates, and hazes than transit observations."
+      },
+      {
+       "description": "12 pages, 11 figures, 2 tables, accepted to ApJ"
+      }
+     ],
+     "rightsList": [
+      {}
+     ]
+    }
+   }
+  ],
+  "meta": {
+   "total": 4,
+   "totalPages": 1
+  }
+ }
+}

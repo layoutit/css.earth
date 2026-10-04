@@ -17,6 +17,13 @@ import type { GalaxySource } from './types.ts';
  * object's own `prepared/`, its inventory and descriptor. */
 export async function prepareGalaxyCatalogObject(options: { objectDirectory: string; outputDirectory?: string }) {
   const objectDirectory = resolve(options.objectDirectory), sourceDirectory = resolve(objectDirectory, 'source');
+  const existing = record(JSON.parse(await readFile(resolve(objectDirectory, 'object.json'), 'utf8').catch((error: unknown) => {
+    if (error instanceof Error && 'code' in error && error.code === 'ENOENT') throw new TypeError(`object.json is missing for ${objectDirectory}`);
+    throw error;
+  })), 'object.json');
+  if (typeof existing.id !== 'string' || !/^[a-z][a-z0-9-]*$/u.test(existing.id)) throw new TypeError(`${objectDirectory}/object.json: authored descriptor id is required.`);
+  const objectId = existing.id;
+  if (objectId !== basename(objectDirectory)) throw new TypeError(`${objectDirectory}/object.json: authored descriptor id ${JSON.stringify(objectId)} must match directory ${JSON.stringify(basename(objectDirectory))}.`);
   const recipeBytes = await readFile(resolve(sourceDirectory, 'catalogue.json'));
   const recipe = parseGalaxyRecipe(JSON.parse(recipeBytes.toString('utf8')) as unknown);
   const presentation = record(JSON.parse(await readFile(resolve(sourceDirectory, 'presentation.json'), 'utf8')) as unknown, 'Galaxy presentation');
@@ -65,15 +72,13 @@ export async function prepareGalaxyCatalogObject(options: { objectDirectory: str
     confirmedLocalGroup: data.objects.filter(row => row.membership.group === 'local-group' && row.status === 'confirmed').length };
   if (outputDirectory === resolve(objectDirectory, 'prepared')) {
     // The catalogue's outputs are the context's prepared inventory.
-    const current = await readInventory(basename(objectDirectory), objectDirectory);
+    const current = await readInventory(objectId, objectDirectory);
     const kept = current?.assets.filter(asset => asset.location === 'prepared' && !receipt.outputs.some(output => output.path === asset.filename)) ?? [];
-    await updateInventory({ objectId: basename(objectDirectory), objectDirectory, location: 'prepared',
+    await updateInventory({ objectId, objectDirectory, location: 'prepared',
       assets: [...kept, { filename: 'catalogue.json', bytes: bytes.length, sha256: sha256(bytes) }, { filename: 'display-sample.json', bytes: displayBytes.length, sha256: sha256(displayBytes) }] });
     // Authored descriptor properties (an overview entry, for one) stay; the preparation pin is this bake's.
-    const existing = await readFile(resolve(objectDirectory, 'object.json'), 'utf8').then(text => record(JSON.parse(text), 'object.json'), (error: unknown) => {
-      if (error instanceof Error && 'code' in error && error.code === 'ENOENT') return null; throw error; });
-    const authored = existing?.properties === undefined ? {} : record(existing.properties, 'object.json properties');
-    const descriptor = { schema: OBJECT_SCHEMA, id: basename(objectDirectory), type: 'galaxy-catalog',
+    const authored = existing.properties === undefined ? {} : record(existing.properties, 'object.json properties');
+    const descriptor = { schema: OBJECT_SCHEMA, id: objectId, type: 'galaxy-catalog',
       properties: { ...authored, preparation: { source: 'source/catalogue.json' } },
       prepared: { format: data.schema, url: 'prepared/catalogue.json' } };
     await writeFile(resolve(objectDirectory, 'object.json'), JSON.stringify(descriptor, null, 2) + '\n');

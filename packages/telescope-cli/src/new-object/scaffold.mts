@@ -1,7 +1,7 @@
-import { RASTER_RECIPE_SCHEMA } from '@cssearth/objects';
 /** The package files of a placed star, shared by the shape-only scaffold and the full generator (generate.mts); the command is
  * packages/telescope-cli/src/new-object/new-object-cli.mts. */
-import { OBJECT_CONTENT_SCHEMA, OBJECT_CONTENT_VERSION, AUTHORED_OBJECT_SCHEMA, OBJECT_SCHEMA, SOURCE_MANIFEST_SCHEMA, NEUTRAL_CATALOGUE_COLOR, PREPARED_CSS_OBJECT_FORMAT, OBJECT_TEXT_SCHEMA, DISPLAY_ORIENTATION_SCHEMA, UNIFORM_DISC_STAR_SCHEMA, SOLAR_SYSTEM_PREPARATION_SCHEMA, INVESTIGATION_LEDGER_SCHEMA, ACQUISITION_PLAN_SCHEMA, CSS_PRESENTATION_PROFILE_SCHEMA, CSS_GEOMETRY_PROFILE_SCHEMA, NAVIGATION_MARKER_SCHEMA } from '@cssearth/objects';
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
+import { RASTER_RECIPE_SCHEMA, OBJECT_CONTENT_SCHEMA, OBJECT_CONTENT_VERSION, AUTHORED_OBJECT_SCHEMA, OBJECT_SCHEMA, SOURCE_MANIFEST_SCHEMA, NEUTRAL_CATALOGUE_COLOR, PREPARED_CSS_OBJECT_FORMAT, OBJECT_TEXT_SCHEMA, DISPLAY_ORIENTATION_SCHEMA, UNIFORM_DISC_STAR_SCHEMA, SOLAR_SYSTEM_PREPARATION_SCHEMA, INVESTIGATION_LEDGER_SCHEMA, ACQUISITION_PLAN_SCHEMA, CSS_PRESENTATION_PROFILE_SCHEMA, CSS_GEOMETRY_PROFILE_SCHEMA, NAVIGATION_MARKER_SCHEMA } from '@cssearth/objects';
 
 import { mkdir, readFile, stat, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
@@ -238,7 +238,7 @@ export function scaffoldStarFiles(spec: StarScaffold, bodyRecord: unknown, epoch
   return files;
 }
 
-export async function scaffoldStar(spec: StarScaffold, { SOLAR_GEOMETRY_EPOCH_JD_TT }: Pick<SolarEpoch, 'SOLAR_GEOMETRY_EPOCH_JD_TT'>, root = process.cwd()) {
+export async function scaffoldStar(spec: StarScaffold, { SOLAR_GEOMETRY_EPOCH_JD_TT }: Pick<SolarEpoch, 'SOLAR_GEOMETRY_EPOCH_JD_TT'>, root = checkoutProjectRoot(import.meta.url)) {
   if (await stat(resolve(root, 'src/objects', spec.id)).then(() => true, () => false)) throw new Error(`src/objects/${spec.id} already exists; the scaffold never overwrites a package.`);
   const record = JSON.parse(await readFile(resolve(root, 'packages/astronomy/data/bodies', `${spec.id}.json`), 'utf8')) as unknown;
   const files = scaffoldStarFiles(spec, record, SOLAR_GEOMETRY_EPOCH_JD_TT);

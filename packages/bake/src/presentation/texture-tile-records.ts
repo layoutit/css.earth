@@ -1,6 +1,6 @@
 import { requireTextureTileLeaves, textureTileLeafStyles, type PreparedTextureTile, type PreparedTextureTileLeaves, type PreparedVariant } from '@cssearth/objects';
 import { rebuildPropertyTable } from './property-table.ts';
-import { isRecord as coreIsRecord } from '@cssearth/core';
+import { isRecord } from '@cssearth/core';
 import { scanCssDeclarations } from './css-declaration-scanner.ts';
 
 // Tiled page leaves as prepared records (the last step of the presentation bindings, prepared-presentation-bindings.ts).
@@ -30,15 +30,17 @@ export function textureTileVariables(name: string, tile: PreparedTextureTile | u
 
 const NUMBER = String.raw`-?(?:\d+\.?\d*|\.\d+)(?:e[-+]?\d+)?`;
 const escape = (text: string) => text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-const isRecord = coreIsRecord;
 const TILE_VARIABLE = /var\((--[\w-]+)-(?:x|y|scale)\b/;
 const STYLE_NAMES: Readonly<Record<string, string>> = { backgroundPosition: 'background-position', backgroundSize: 'background-size' };
 
+// Exact case; historical malformed fragments use slice(0, -1), dropping their final character.
+// Preserve that admission policy separately from the leaf-box adapter's colonless retention.
+const TEXTURE_DECLARATION_NAME = (part: string, colon: number) => part.slice(0, colon).trim();
 /** A static style's declarations, split where CSS splits them: not inside quotes or parentheses (URLs). */
-function declarations(style: string) {
+function declarations(style: string, declarationName = TEXTURE_DECLARATION_NAME) {
   return [...scanCssDeclarations(style)].map(part => {
     const colon = part.indexOf(':');
-    return { name: part.slice(0, colon).trim(), value: part.slice(colon + 1).trim(), text: part };
+    return { name: declarationName(part, colon), value: part.slice(colon + 1).trim(), text: part };
   });
 }
 

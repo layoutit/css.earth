@@ -4,7 +4,7 @@
  * published values and plays it (@cssearth/bake/photometry, light-curve.ts). */
 import { checkGaiaCepheidModel, gaiaCepheidQuery, GAIA_TIME_OFFSET_JD, parseGaiaCepheidRow, PULSATION_SECONDS_PER_DAY } from '@cssearth/bake/photometry';
 import type { SolarEpoch } from './solar-epoch.mts';
-import { GAIA_TAP } from './archives.mts';
+import { GAIA_TAP } from './archives/archives.mts';
 import { CHECKED } from './color.mts';
 import { bindInputs, json, type PackageFiles } from './dataset.mts';
 

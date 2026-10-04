@@ -1,3 +1,5 @@
+import { setupBakeOracleInputs } from '../cameras/oracle-inputs.mts';
+await setupBakeOracleInputs();
 import { pathToFileURL } from 'node:url';
 import { projectRoot as findProjectRoot } from '@cssearth/core/node';
 import assert from 'node:assert/strict';

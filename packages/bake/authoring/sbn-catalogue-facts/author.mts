@@ -36,6 +36,7 @@
  * Run from the repository root. `--fetch` downloads missing tables and labels into the cache named in
  * catalogues.json; `--check` writes nothing and fails when a file would change.
  */
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 import { INVESTIGATION_LEDGER_SCHEMA } from '@cssearth/objects';
 import assert from 'node:assert/strict';
 import { mkdir, readFile, readdir, unlink, writeFile } from 'node:fs/promises';
@@ -45,8 +46,7 @@ import { loadTable, numeric, value, type Row, type Table } from './pds4-table.mt
 import { spliceDocument } from './manifest-splice.mts';
 import { halfUnit, interval, scientific, shortReference } from './format.mts';
 
-const ROOT = resolve(import.meta.dirname, '../../../..');
-if (process.cwd() !== ROOT) throw new Error('Run from the repository root.');
+const ROOT = checkoutProjectRoot(import.meta.url);
 const TOOL = 'packages/bake/authoring/sbn-catalogue-facts/author.mts';
 const EVIDENCE = 'reference/sbn-catalogues.json', EVIDENCE_PATH = `source/${EVIDENCE}`, LEDGER_ID = 'sbn-catalogue-facts';
 const SMALL_BODIES = new Set(['asteroid', 'comet', 'trans-neptunian', 'dwarf-planet', 'interstellar']);

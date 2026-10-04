@@ -1,5 +1,5 @@
-import { COMPACT_SYMMETRY_SCHEMA, validatePreparedCssVolume, type CompilerPin } from '@cssearth/objects';
 /** Export accepted research voxels; renderer-specific replay is injected into the internal baker. */
+import { COMPACT_SYMMETRY_SCHEMA, validatePreparedCssVolume, type CompilerPin } from '@cssearth/objects';
 import { readFile, writeFile, mkdir } from "node:fs/promises";
 import { resolve } from "node:path";
 import { gzipSync } from "node:zlib";

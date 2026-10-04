@@ -1,4 +1,4 @@
-import { isArray, shape, array, number, optional } from '@cssearth/core';
+import { normalize3OrZero, isArray, shape, array, number, optional } from '@cssearth/core';
 import { parse } from '@cssearth/core/schema';
 import { ellipsoidMaterialRecipe, type Orientation, type MaterialPose, type MaterialRaster, type RadialMaterialInput, type MaterialAsset, type FixedMaterial, type PreparedDatasetMaterial } from './material-contract.ts';
 import type { Vector3, ReadonlyVector3 } from '../../geometry/index.ts';
@@ -8,7 +8,7 @@ import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 import sharp from 'sharp';
 import { worldPositionToCss } from '@layoutit/polycss';
-import { intersectViewRayWithEllipsoid, normalizeVector, dotVector, rotateSequence } from '../../geometry/index.ts';
+import { intersectViewRayWithEllipsoid,  dotVector, rotateSequence } from '../../geometry/index.ts';
 import { writeMaterialAtlasTile, sampleRgbaBilinear } from './material-atlas.ts';
 
 import { optimizePreparedDisplayLosslessWebp, optimizePreparedQ75Webp, PREPARED_Q75_WEBP_ENCODING } from '../../../delivery/index.ts';
@@ -18,7 +18,7 @@ const scale=(vector: ReadonlyVector3,value: number): Vector3=>[vector[0]*value,v
 const add=(...vectors: ReadonlyVector3[]): Vector3=>[vectors.reduce((sum,v)=>sum+v[0],0),vectors.reduce((sum,v)=>sum+v[1],0),vectors.reduce((sum,v)=>sum+v[2],0)];
 
 const safeName=(name: unknown)=>typeof name==='string'&&/^[a-z0-9][a-z0-9-]*(?:@2x)?\.webp$/u.test(name);
-function transform(vector: ReadonlyVector3,steps: readonly Orientation[],state: MaterialPose){for(const step of steps){if(step.kind==='normalize')vector=normalizeVector(vector);else vector=rotateSequence(vector,[{axis:step.axis,degrees:'state' in step?state[step.state]*step.factor:step.degrees}]);}return vector;}
+function transform(vector: ReadonlyVector3,steps: readonly Orientation[],state: MaterialPose){for(const step of steps){if(step.kind==='normalize')vector=normalize3OrZero(vector);else vector=rotateSequence(vector,[{axis:step.axis,degrees:'state' in step?state[step.state]*step.factor:step.degrees}]);}return vector;}
 
 export function parseEllipsoidMaterialRecipe(input: unknown){
   const config = parse(input, ellipsoidMaterialRecipe, 'ellipsoid material recipe');

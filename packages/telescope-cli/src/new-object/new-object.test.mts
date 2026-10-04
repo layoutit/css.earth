@@ -7,7 +7,7 @@ import { gzipSync } from 'node:zlib';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 import { parseCieTable } from '@cssearth/bake/objects/color';
 import { readCie1931ColorMatching } from '@cssearth/bake/objects/sources';
-import { readIdentifiers, type Archive, type GaiaRow } from './archives.mts';
+import { readIdentifiers, type Archive, type GaiaRow } from './archives/archives.mts';
 import { chooseColor, coverageGaps } from './color.mts';
 import { assembleArchiveOrbit, orbitizeHostedOrbit, parseArchiveRows } from './orbit.mts';
 import { parseObjectSpecs, parseStarSpec } from './spec.mts';
@@ -538,7 +538,7 @@ test('a hosted body\'s package is written after phase one wrote its astronomy re
 });
 
 test('a paper cited by every star of a batch is read from its archive once; a failed read is asked again', async () => {
-  const { fetchPublication } = await import('./archives.mts');
+  const { fetchPublication } = await import('./archives/archives.mts');
   let asked = 0, fail = true;
   const archive = { async text() { asked++; if (fail) { fail = false; throw new Error('arXiv answered 503'); } return '<feed><entry><id>http://arxiv.org/abs/2304.00037v2</id><title>A paper</title><published>2023-03-31T00:00:00Z</published><author><name>L. Breuval</name></author></entry></feed>'; } } as unknown as Archive;
   await assert.rejects(fetchPublication(archive, 'https://arxiv.org/abs/2304.00037'), /503/u);
@@ -548,7 +548,7 @@ test('a paper cited by every star of a batch is read from its archive once; a fa
 });
 
 test('a DOI Crossref does not hold is read from DataCite, as the CDS VizieR catalogues are', async () => {
-  const { fetchPublication } = await import('./archives.mts');
+  const { fetchPublication } = await import('./archives/archives.mts');
   const datacite = JSON.stringify({ data: { attributes: { titles: [{ title: 'Gaia DR2' }], publicationYear: 2018, publisher: 'Centre de Donnees Strasbourg (CDS)', creators: [{ name: 'European Space Agency' }] } } });
   const archive: Archive = { async text(url) { if (url.includes('api.crossref.org')) throw new Error(`${url} answered 404 Not Found.`); if (url.includes('api.datacite.org')) return datacite; throw new Error(`unexpected ${url}`); },
     async bytes() { throw new Error('none'); }, async exists() { return false; } };
@@ -560,7 +560,7 @@ test('a DOI Crossref does not hold is read from DataCite, as the CDS VizieR cata
 });
 
 test('a reference the archive cites only by its ADS bibcode is read as the paper it links to, keeping the bibcode', async () => {
-  const { fetchPublication } = await import('./archives.mts');
+  const { fetchPublication } = await import('./archives/archives.mts');
   const { publicationRecord } = await import('./generate.mts');
   const arxiv = '<feed><entry><title>Seven temperate terrestrial planets</title><published>2017-03-04T00:00:00Z</published><author><name>Michael Gillon</name></author><author><name>Amaury Triaud</name></author><author><name>Brice-Olivier Demory</name></author><arxiv:journal_ref>Nature 542, 456</arxiv:journal_ref></entry></feed>';
   const crossref = JSON.stringify({ message: { title: ['Seven temperate terrestrial planets'], issued: { 'date-parts': [[2017]] }, author: [{ given: 'Michael', family: 'Gillon' }, { given: 'Amaury', family: 'Triaud' }, { given: 'Brice-Olivier', family: 'Demory' }], 'container-title': ['Nature &amp; Astronomy'], volume: '1', 'article-number': '0056' } });
@@ -626,7 +626,7 @@ test('a whole star package from fixtures is what the bake accepts: declared file
 });
 
 test('a star beyond Gaia\'s parallax is placed at its cited distance; a weak or missing parallax without one is refused', async () => {
-  const { generateStar, placement, PARALLAX_FLOOR_SIGMA } = await import('./generate.mts'), { parseGaiaRow } = await import('./archives.mts');
+  const { generateStar, placement, PARALLAX_FLOOR_SIGMA } = await import('./generate.mts'), { parseGaiaRow } = await import('./archives/archives.mts');
   const gaia = '303374445376245632', header = 'source_id,ref_epoch,ra,dec,parallax,parallax_error,pmra,pmdec,radial_velocity,radial_velocity_error,ruwe,phot_g_mean_mag,bp_rp,has_xp_sampled,mass_flame,mass_flame_lower,mass_flame_upper,radius_flame,radius_flame_lower,radius_flame_upper';
   // A two-parameter solution: a position and a magnitude, as Gaia DR3 gives a star in another galaxy.
   const twoParameter = [header, `${gaia},2016.0,23.4424,30.7444,,,,,,,,19.2,-0.1,false,,,,,,`].join('\n');
@@ -666,7 +666,7 @@ test('a star beyond Gaia\'s parallax is placed at its cited distance; a weak or 
 });
 
 test('an imaged planet\'s K, H and J magnitudes become the band color, each cited to its paper; a planet missing a band is named', async () => {
-  const { draftUltracoolPhotometry, readCsv, ULTRACOOL } = await import('./ultracool.mts');
+  const { draftUltracoolPhotometry, readCsv, ULTRACOOL } = await import('./archives/ultracool.mts');
   const { parsePhotometryEntries } = await import('./spec.mts');
   assert.deepEqual(readCsv('a,b\n"x, y",2\n'), [{ a: 'x, y', b: '2' }]);
   const main = 'name,name_simbad,name_simbadable,J_MKO,Jerr_MKO,ref_J_MKO,H_MKO,Herr_MKO,ref_H_MKO,K_MKO,Kerr_MKO,ref_K_MKO\n51 Eri b,* 51 Eri b,* 51 Eri b,19.04,0.40,Raja17,18.99,0.21,Raja17,18.67,0.19,Raja17\nAF Lep b,null,null,19.22,0.1,X,18.61,0.1,X,NaN,NaN,null\n';
@@ -706,7 +706,7 @@ test('a star Gaia gives no radial velocity takes SIMBAD\'s, cited to its paper, 
 
 test('an archive answering a server error or a rate limit is asked again; a 404 is an answer', async () => {
   // Waits are counted, not waited out: the 503's real pause is five seconds.
-  const waits: number[] = [], liveArchive = (await import('./archives.mts')).createLiveArchive(async ms => { waits.push(ms); });
+  const waits: number[] = [], liveArchive = (await import('./archives/archives.mts')).createLiveArchive(async ms => { waits.push(ms); });
   const real = globalThis.fetch, answers = [503, 200, 404];
   let calls = 0;
   globalThis.fetch = (async () => { calls++; const status = answers.shift()!; return new Response(status === 200 ? 'rows' : 'busy', { status }); }) as typeof fetch;
@@ -752,7 +752,7 @@ test('a planet found without a transit is placed only on one paper\'s whole orbi
 });
 
 test('a DEBCat row drafts both stars of an eclipsing binary, and the draft is refused until the paper\'s orbit is copied in', async () => {
-  const { parseDebcat, draftFromDebcat } = await import('./debcat.mts');
+  const { parseDebcat, draftFromDebcat } = await import('./archives/debcat.mts');
   // Rows in the page's own format (https://www.astro.keele.ac.uk/jkt/debcat/, 2026-09-27): a whole row, one with a value but no error,
   // and one with an empty temperature.
   const td = (html: string) => `<TD STYLE="WHITE-SPACE: NOWRAP" ALIGN="CENTER"> ${html} </TD>`;
@@ -781,6 +781,35 @@ test('a DEBCat row drafts both stars of an eclipsing binary, and the draft is re
   assert.equal(parsed.companions[0]!.orbit && 'elements' in parsed.companions[0]!.orbit && parsed.companions[0]!.orbit.epoch, 'superior-conjunction');
 });
 
+test('an ADS reference whose publisher address ends in the DOI is read as that paper, not left as a bare bibcode', async () => {
+  const { fetchPublication } = await import('./archives/archives.mts');
+  // 1999PASP..111..438F: ADS sends its publisher link to iopscience.iop.org/article/10.1086/316343, with no doi.org address (2026-10-04).
+  const crossref = JSON.stringify({ message: { title: ['The Updated Zwicky Catalog (UZC)'], author: [{ given: 'Emilio E.', family: 'Falco' }], issued: { 'date-parts': [[1999]] }, 'container-title': ['Publications of the Astronomical Society of the Pacific'], volume: '111', page: '438' } });
+  const archive: Archive = { async text(url) { if (url === 'https://api.crossref.org/works/10.1086%2F316343') return crossref; throw new Error(`unexpected ${url}`); }, async bytes() { return Buffer.from(''); }, async exists() { return false; },
+    async location(url) { return url.endsWith('/PUB_HTML') ? 'https://iopscience.iop.org/article/10.1086/316343' : undefined; } };
+  const paper = await fetchPublication(archive, 'https://ui.adsabs.harvard.edu/abs/1999PASP..111..438F/abstract');
+  assert.deepEqual([paper!.doi, paper!.bibcode, paper!.title, paper!.creators, paper!.year], ['10.1086/316343', '1999PASP..111..438F', 'The Updated Zwicky Catalog (UZC)', ['Emilio E. Falco'], '1999']);
+});
+
+test('a B star at a gravity ATLAS does not reach takes its limb law from the same paper\'s B-star grid', async () => {
+  const { chooseLimb } = await import('./limb.mts');
+  // Reeve & Howarth (2016) summary1 rows of the solar B-star grid at 2 km/s around 18,000 K and log g 2.2, as VizieR serves them, 2026-10-04.
+  const bstar = ['#RESOURCE=yCat_J_MNRAS_456_1294', '', 'FileName\tquad2.2\tquad2.3', ' \t \t', '--------------\t------------\t------------',
+    'BG17000g200v02\t 3.07558e-01\t 2.63332e-01', 'BG17000g225v02\t 2.44385e-01\t 2.90790e-01', 'BG18000g200v02\t 3.48114e-01\t 2.41694e-01', 'BG18000g225v02\t 2.51191e-01\t 2.89943e-01', 'BG18000g250v02\t 2.10603e-01\t 2.97430e-01', ''].join('\n');
+  const asked: string[] = [];
+  const archive: Archive = { async text(_url, form) { asked.push(String(form?.FileName ?? form?.['-source'])); return form?.FileName === 'BG*v02' ? bstar : '#\n'; }, async bytes() { return Buffer.from(''); }, async exists() { return false; } };
+  const limb = await chooseLimb('b-hypergiant', 18000, 2.2, archive);
+  assert.equal(limb.grid, 'tlusty-b');
+  assert.ok(limb.coefficients!.u1 >= 0.244385 && limb.coefficients!.u1 <= 0.348114 && limb.coefficients!.u2 >= 0.241694 && limb.coefficients!.u2 <= 0.290790, 'inside the four nodes at 17,000 and 18,000 K, log g 2.00 and 2.25');
+  assert.match(limb.sentence, /Reeve & Howarth \(2016\), MNRAS 456, 1294 compute from non-LTE TLUSTY B-star model atmospheres for the Bessell V band at 18,000 K and log g 2\.2/u);
+  assert.match(limb.files![0]!.text, /^2\.00\t18000\t 3\.48114e-01\t 2\.41694e-01$/mu);
+  assert.equal(limb.files![0]!.path, 'photometry/reeve-2016-b-v-quadratic.tsv');
+  const replayed = (limb.acquisitions![0]!.replacements as { pattern: string; flags: string; replacement: string }[]).reduce((text, { pattern, flags, replacement }) => text.replace(new RegExp(pattern, flags), replacement), bstar);
+  assert.equal(replayed, limb.files![0]!.text, 'the restore recipe reproduces the stored table');
+  // It is asked only after every grid an earlier star was read from, so no existing star changes its law.
+  assert.ok(asked.indexOf('BG*v02') > asked.indexOf('OG*') && asked.indexOf('BG*v02') > asked.indexOf('J/A+A/554/A98/table3'));
+});
+
 test('a hot star beyond the ATLAS gravities takes its limb law from the TLUSTY grid, and its restore rewrites the download the same way', async () => {
   const { chooseLimb } = await import('./limb.mts');
   // The four Reeve & Howarth (2016) summary1 rows around HD 226868 (31,138 K, log g 3.348) as VizieR serves them, 2026-09-27.
@@ -801,7 +830,7 @@ test('a hot star beyond the ATLAS gravities takes its limb law from the TLUSTY g
 });
 
 test('APOKASC-3 and Groenewegen (2013) rows draft single stars through the one route table; what a catalogue lacks is left to cite', async () => {
-  const { parseApokascRow, draftFromApokasc } = await import('./apokasc.mts'), { parseCepheidRow, draftFromCepheid } = await import('./cepheids.mts'), { writeDrafts, DRAFT_ROUTES } = await import('./drafts.mts');
+  const { parseApokascRow, draftFromApokasc } = await import('./archives/apokasc.mts'), { parseCepheidRow, draftFromCepheid } = await import('./archives/cepheids.mts'), { writeDrafts, DRAFT_ROUTES } = await import('./drafts.mts');
   // Rows as VizieR serves them, 2026-09-27: J/ApJS/276/69 table4 and J/A+A/550/A70 table10.
   const apokasc = ['KIC\tCatTab\tEvolSt\tMass\te_Mass\tRadius\te_Radius\tTeff\te_Teff\tloggSeis\te_loggSeis\tGaiaDR3', ' \t \t \tMsun\tMsun\tRsun\tRsun\tK\tK\t[cm.s-2]\t[cm.s-2]\t', '--------\t--------',
     '  893214\tGold    \tRGB    \t    1.4404\t    0.0602\t   11.0014\t    0.2055\t 4718.9233\t   44.7811\t    2.5146\t    0.0050\t2050237616959273728',
@@ -827,7 +856,7 @@ test('APOKASC-3 and Groenewegen (2013) rows draft single stars through the one r
   const { physicalValues } = await import('./generate.mts'), values = physicalValues(measured, { sourceId: '1', ra: 0, dec: 0, g: 13, hasXpSampled: false });
   assert.deepEqual([values.gm, values.logg], [0, 1.2]);
   assert.match(values.massText, /No mass is measured, so GM is 0/u);
-  assert.deepEqual(Object.keys(DRAFT_ROUTES), ['archive', 'debcat', 'apokasc', 'cepheids', 'k2', 'tess', 'gaia', 'hipparcos', 'iau', 'chara', 'npoi', 'sh0es', 'm31cepheids', 'm33cepheids']);
+  assert.deepEqual(Object.keys(DRAFT_ROUTES), ['archive', 'debcat', 'apokasc', 'cepheids', 'k2', 'tess', 'gaia', 'hipparcos', 'iau', 'chara', 'npoi', 'sh0es', 'm31cepheids', 'm33cepheids', 'table']);
   await assert.rejects(writeDrafts('gcvs', ['X'], 'output/x.json', { root, progress: () => {}, archive: {} as Archive }), /No draft route gcvs; the routes are --from-archive, --from-debcat, --from-apokasc, --from-cepheids, --from-k2, --from-tess, --from-gaia/u);
 });
 
@@ -840,7 +869,7 @@ test('a fast-moving star is looked up in SIMBAD where it was at J2000, not where
 });
 
 test('a CHARA row drafts a named star with its measured radius and temperature, and no mass when the paper fits none', async () => {
-  const { parseCharaRow, draftFromChara } = await import('./chara.mts');
+  const { parseCharaRow, draftFromChara } = await import('./archives/chara.mts');
   // Rows as VizieR serves them, 2026-10-01: J/ApJ/746/101 targets.
   const rows = ['HD\tSpT\tPlx\te_Plx\tD(LD)\te_D(LD)\tR\te_R\tTeff\te_Teff\tM\te_M', ' \t \tmas\tmas\tmas\tmas\tRsun\tRsun\tK\tK\tMsun\tMsun', '------\t------',
     '102870\tF8.5IV-V  \t 91.50\t 0.22\t 1.431\t 0.006\t 1.681\t 0.008\t6132\t 26\t 1.324\t 0.005',
@@ -857,7 +886,7 @@ test('a CHARA row drafts a named star with its measured radius and temperature, 
 });
 
 test('a K2 giant is drafted at its asteroseismic distance only when both pipelines agree on its radius', async () => {
-  const { parseK2Row, draftFromK2 } = await import('./k2.mts');
+  const { parseK2Row, draftFromK2 } = await import('./archives/k2.mts');
   // Rows as VizieR serves them, 2026-09-28: J/A+A/677/A21 k2_apo, one request per EPIC number.
   const k2 = (row: string) => ['K2-ID\tK2-camp\tGaiaEDR3\tTeff-A\te_Tefffin-A\tMass-M\tb_Mass-M\tB_Mass-M\tRad-M\tb_Rad-M\tB_Rad-M\tRad-E\tb_Rad-E\tB_Rad-E\tDist-M\tb_Dist-M\tB_Dist-M\tAV-M\tFlags-A',
     ' \t \t \tK\tK\tMsun\tMsun\tMsun\tRsun\tRsun\tRsun\tRsun\tRsun\tRsun\tpc\tpc\tpc\tmag\t', '-----------------\t----', row].join('\n');
@@ -873,7 +902,7 @@ test('a K2 giant is drafted at its asteroseismic distance only when both pipelin
 });
 
 test('a K2 star APOGEE did not observe is read from the K2 + GALAH table, and a TESS star from TESS + APOGEE', async () => {
-  const { parseK2Row, draftFromK2, draftsFromK2 } = await import('./k2.mts');
+  const { parseK2Row, draftFromK2, draftsFromK2 } = await import('./archives/k2.mts');
   // Rows as VizieR serves them, 2026-09-28: J/A+A/677/A21 k2_gal and tess_apo.
   const galah = ['K2-ID\tK2-camp\tTeff-G\tTefffin-G\tFlagsp-G\tGaiaEDR3\tMass-M\tb_Mass-M\tB_Mass-M\tRad-M\tb_Rad-M\tB_Rad-M\tRad-E\tb_Rad-E\tB_Rad-E\tDist-M\tb_Dist-M\tB_Dist-M\tAV-M',
     ' \t \tK\tK\t \t \tMsun\tMsun\tMsun\tRsun\tRsun\tRsun\tRsun\tRsun\tRsun\tpc\tpc\tpc\tmag', '-----------------\t----',
@@ -895,7 +924,7 @@ test('a K2 star APOGEE did not observe is read from the K2 + GALAH table, and a 
 });
 
 test('a star anywhere on the sky drafts from Gaia DR3 alone when the archive flags vouch for its FLAME chain', async () => {
-  const { parseGaiaDraftRow, draftFromGaia } = await import('./gaia.mts');
+  const { parseGaiaDraftRow, draftFromGaia } = await import('./archives/gaia.mts');
   // The row as the Gaia Archive serves it, 2026-09-28.
   const header = 'source_id,parallax,parallax_error,ruwe,flags_flame,radius_flame,mass_flame,teff_gspphot,teff_gspphot_lower,teff_gspphot_upper,ag_gspphot';
   const row = '6711869948052992,0.11950849172011525,0.015932519,1.145126,10,15.559747,3.3650587,6087.612,6071.958,6095.802,0.8901';
@@ -910,14 +939,14 @@ test('a star anywhere on the sky drafts from Gaia DR3 alone when the archive fla
 });
 
 test('a Gaia source SIMBAD never catalogued is identified by that source; a target without one is refused', async () => {
-  const { identify } = await import('./archives.mts');
+  const { identify } = await import('./archives/archives.mts');
   const unknown = async () => undefined;
   assert.deepEqual(await identify(unknown, 'Gaia DR3 6881624509796808576', '6881624509796808576', 'gaia-dr3-6881624509796808576'), { main: 'Gaia DR3 6881624509796808576', gaia: '6881624509796808576' });
   await assert.rejects(identify(unknown, 'HV 9999', undefined, 'hv-9999'), /hv-9999: SIMBAD does not know HV 9999\./u);
 });
 
 test('a binary component the archive writes apart is looked up under the name SIMBAD joins', async () => {
-  const { identify } = await import('./archives.mts');
+  const { identify } = await import('./archives/archives.mts');
   // SIMBAD, 2026-09-29: "K2-288 B", the archive's hostname, is not an identifier; K2-288B is LP 413-32 B, with Gaia DR2
   // 44838019756570112 and no DR3 source (Gaia's dr2_neighbourhood maps that DR2 source to K2-288 A, 0.79 arcsec away), so it is refused.
   const simbad = async (name: string) => name === 'K2-288B' ? { mainId: 'LP 413-32 B', identifiers: ['LP 413-32 B', 'Gaia DR2 44838019756570112', 'NAME K2-288B'] } : undefined;
@@ -936,4 +965,3 @@ test('a binary whose primary Gaia sees eclipsing on another period is refused; l
   assert.equal(eclipsingPeriodAgrees(214.3655, 2.998979), true, 'a long orbit Gaia saw twice is not checked');
   assert.ok(GAIA_EB_CHECKED_DAYS > 100 && GAIA_EB_CHECKED_DAYS < 110);
 });
-

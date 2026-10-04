@@ -25,7 +25,7 @@ node labs/performance/ios-capture.mts --name by-hand --seconds 15
 
 It needs Xcode, `ios_webkit_debug_proxy` and AXe (`brew install cameroncooke/axe/axe`). Steps are a JSON list of `{ "tap": [x, y] }`, `{ "type": "text" }`, `{ "drag": { "from": [x, y], "to": [x, y], "seconds": 1.5 } }`, `{ "wait": seconds }`, `{ "screenshot": "name" }`, `{ "viewport": "name" }` and `{ "probe": "name" }` (records the scene router's state, the route and the page's element count), in simulator points, sent as real touch input.
 
-- `--open` loads the page in the visible tab, waits until the app reports its body ready, then `--settle` seconds more. It waits for a changed document clock and the requested route, so an outgoing page cannot satisfy it.
+- `--open` loads the page in the visible tab, waits until the app reports its body ready, then until the page has been quiet for a second (no file finished loading, no frame over 20 ms), for at most `--settle` seconds. It waits for a changed document clock and the requested route, so an outgoing page cannot satisfy it.
 - `--no-cache` requests a cold load; otherwise Safari keeps its cache as a visitor's would.
 - A `screenshot` is the full device or simulator screen (`.screen.png`); a `viewport` is only the Web Inspector page image (`.viewport.png`). A device screenshot fails if the native screen service is unavailable; it never falls back to the page image. Check the screenshots before reading any numbers: a tap on the wrong control records the wrong moment.
 - `--native page` (the default) traces only the web content process holding the page. `--native all` records every process on the Mac, for compositor and GPU questions; its trace is several times larger. `--native off` skips it. A recording that fails to stop within 30 s is killed and the report says so.
@@ -80,20 +80,28 @@ pnpm ipad:screen after-flight --device --expect-url http://192.168.0.8:4212/lute
 
 This writes a full device PNG and a source receipt under `output/performance/ios-stills/`. A single grab can take seconds; for a moving flight, use the native `--screens` filmstrip. `--screens` perturbs frame timing, so leave it off for performance comparisons. Capture one origin at a time: loading another origin moves Safari's page to a new process and drops the inspector session.
 
-[pymobiledevice3](https://github.com/doronz88/pymobiledevice3) adds what Web Inspector cannot see (`pip install pymobiledevice3`, then `--pymobiledevice3 <path>` or `PYMOBILEDEVICE3`; Developer Mode on the device). During a device recording it samples Core Animation's frames per second and the memory of Safari's web content processes into `device-graphics.jsonl` and `device-webcontent.jsonl`. A device `--replay` plays the recorded path as real touch through its CoreDevice HID service (`device-touch.py`), after three calibration taps.
+[pymobiledevice3](https://github.com/doronz88/pymobiledevice3) adds what Web Inspector cannot see (`pip install pymobiledevice3`, then `--pymobiledevice3 <path>` or `PYMOBILEDEVICE3`; Developer Mode on the device). With `--device-monitors` a device recording samples Core Animation's frames per second and the memory of Safari's web content processes into `device-graphics.jsonl` and `device-webcontent.jsonl`; they are off unless asked for, because starting them was 3 s of every capture and the device's system monitor works for them while the page is being timed (2026-10-04). A device `--replay` plays the recorded path as real touch through its CoreDevice HID service (`device-touch.py`), after three calibration taps.
 
 #### Where a device capture's time goes
 
-`--stage-timing` prints each stage of a capture. A one-second capture of Venus from the dev server, measured on
-2026-09-30:
+`--stage-timing` prints each stage of a capture. A one-second capture of Earth from the dev server on the iPad, measured
+on 2026-10-04:
 
 | Stage | With `--open` | Page already open |
 |---|---|---|
-| Venus reloads until the app reports ready | 5.5 s | none |
-| `--settle 3` (it applies only after `--open`) | 3 s | none |
+| The page reloads until the app reports ready | 1.3 s | none |
+| The settle after `--open`: until the page is quiet for a second, at most `--settle` seconds | 1 s | none |
 | The steps (`[{"wait": 1}]`) | 1 s | 1 s |
-| Recorder setup, final probes and report | about 1 s | about 1 s |
-| **Total** | **about 11 s** | **about 2 s** |
+| Attaching, recorder setup, final probes and report | about 0.9 s | about 0.8 s |
+| **Total** | **4.2 s** | **1.8 s** |
+
+The device's Web Inspector proxy keeps running after the capture that started it, so the next one attaches at once: a
+proxy started right after the last was stopped took up to 8.5 s to list the device's pages.
+
+Every capture ends with a `Capture time:` line naming the stages that took over half a second. The native recorder
+(`--native page` or `all`) is the dearest: on 2026-10-04 it added 5.6 s before a one-second capture's trace started and 20 s
+after it, to stop and export, and its processes used three times the page's own CPU while it recorded. Use it for a
+question that needs WebKit's own stacks, and count late frames without it.
 
 To iterate on one view, open the page once and leave out `--open`. Use `--open` only when a fresh load is the subject:
 startup, or two servers compared behind the same URL. After switching servers, Safari can run the previous build's
@@ -107,6 +115,23 @@ A cold dev load of Venus used to take 7.3 s on the iPad. Every page imported all
 objects as one `?url` module each. Safari needed about 4 s to resolve them, and no frame rendered until it had.
 `site/prepared-context-objects.mts` now lists those files from each object's inventory, as the asset-origin build
 always did. The load takes 3.3 s with 263 requests instead of 2,335.
+
+### Counting late frames: the page times itself
+
+A capture that records the device changes what it measures: with the native recorder attached, the capture's own
+processes (the tunnel, the Instruments hub, the system monitor, the Inspector's samplers) used 16 to 17 ms of the iPad's
+CPU a frame, against 5.4 ms for the page's main thread, and some of the late frames in such a capture were theirs
+(2026-10-04). So late frames are counted with nothing attached:
+
+```sh
+pnpm ipad:timed --open /earth/ --origin http://192.168.0.8:4293 --name far-zoom
+```
+
+It installs a wheel program in the page (out of the subject and back, twice, unless `--program` gives another), leaves
+for the run, and comes back for the record: every frame's time, how long the page's frame callbacks ran, and for each
+frame over 25 ms the hand-over, the files that arrived and the timers over 8 ms in it. It prints the summary and saves
+it as `self-timed.json` beside the reading capture. Use a profiled capture to name what runs in a frame; never to count
+late frames, or to judge a change by their count.
 
 ### Repeatable journeys on the connected iPad
 
@@ -147,7 +172,9 @@ pnpm ipad:run --debug --start earth --fly lutetia --screenshot arrived --name lu
 
 It writes `causes.json` (DOM, style and listener calls with stacks and node IDs), `layers.jsonl` (native layer snapshots), `compositor-checkpoints.json` (computed styles and boxes at arrival and at the end) and `analysis.json` with a paint and image-decode lane. Layer IDs and Inspector node IDs must never be joined by array position; the page-side retained node identity provides that link. Native snapshots are asynchronous observations, not proof that pixels reached the screen.
 
-`--debug --native page` adds the Instruments Time Profiler, filtered to the WebContent process; `--debug --native all` keeps every process, for commit stalls. `ios-capture.mts --rebuild <capture>` reprocesses existing native recordings with symbols. On a physical iPad, native profiling holds a `pymobiledevice3 remote start-tunnel --native` connection for the recording. A saved Instruments file whose end reason reports a disconnect is rejected as native coverage. Inspect native export errors and sample coverage before drawing native-stack conclusions; sample weights do not partition elapsed commit time.
+The capture writes the page's script samples as `javascript.cpuprofile` and `javascript.callers.cpuprofile`. The iPad returns a recording's first samples in order but without a time; `placeUntimedSamples` places each by the script time before it, which the profiler's script spans give. A sample's place is therefore good to a frame or two, not to the millisecond. Native stacks name WebKit's functions only: script frames in them are addresses, and these samples are how a frame's script is named.
+
+`--debug --native page` adds the Instruments Time Profiler, filtered to the WebContent process; `--debug --native all` keeps every process, for commit stalls. `ios-capture.mts --rebuild <capture>` reprocesses existing native recordings with symbols and rewrites the script profiles. On a physical iPad, native profiling holds a `pymobiledevice3 remote start-tunnel --native` connection for the recording. A saved Instruments file whose end reason reports a disconnect is rejected as native coverage. Inspect native export errors and sample coverage before drawing native-stack conclusions; sample weights do not partition elapsed commit time.
 
 ## Chrome traces
 
@@ -175,3 +202,9 @@ uses its source-map and package-source helpers so captures can recover authored
 source locations. This is an intentional build-time dependency; capture and trace
 processing do not belong in the running application. A standalone package would
 need an actual second host and a defined public API before extraction is useful.
+
+## Device-bound accepted limits
+
+The iPad runner's eager prepared-registry load is accepted because this command starts a device journey against a prepared checkout, rather than exposing an importable host-neutral library. Change it when a second non-device host needs the runner; device/browser lifecycle behavior can only be qualified on the actual device.
+
+The navigation capture harness's preview port/readiness and shutdown lifecycle remain accepted device/browser-bound limits: local mocks cannot establish Safari or browser-process lifecycle correctness. Change these defaults only with a real capture showing readiness and bounded cleanup on the target device/browser; a launched process alone is insufficient evidence.

@@ -1,8 +1,8 @@
+import type { PointFieldRgb, PreparedPointFieldStar } from '@cssearth/objects';
 import { STAR_IDS, starAstrometry, starStateKm, PARSEC_KM } from '@cssearth/astronomy';
 import { readCatalog } from '@cssearth/catalog';
 import type { Catalog } from '@cssearth/catalog';
-import type { PreparedPointFieldStar } from '@cssearth/objects';
-import type { Rgb, StarsRecipe } from './types.ts';
+import type { StarsRecipe } from './types.ts';
 import { sourceBytes } from '../volume/node/index.ts';
 import { catalogueColor } from '@cssearth/engine';
 import { nearestColor } from './color.ts';
@@ -11,7 +11,7 @@ function column(catalogue: Catalog, name: string): Float32Array {
   if (!(value instanceof Float32Array)) throw new TypeError(`Star ${name} column must be float32.`);
   return value;
 }
-export async function loadStarSource(sourceDirectory: string, recipe: StarsRecipe, colors: readonly Rgb[], epochJdTt: number) {
+export async function loadStarSource(sourceDirectory: string, recipe: StarsRecipe, colors: readonly PointFieldRgb[], epochJdTt: number) {
   const bytes = await sourceBytes(sourceDirectory, recipe.catalogue);
   const catalogue = readCatalog(Uint8Array.from(bytes).buffer);
   if (catalogue.count !== recipe.catalogue.count) throw new TypeError('Star catalogue count does not match its source pin.');

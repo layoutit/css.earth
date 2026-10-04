@@ -1,4 +1,3 @@
-import { isFiniteNumber } from '@cssearth/core';
 /**
  * The registration stage: every camera route is measured after it loads, the same way, and the numbers go into the
  * dataset report instead of a body's prose.
@@ -13,7 +12,7 @@ import { isFiniteNumber } from '@cssearth/core';
  * Hard failure stays where it was, on lit shape over sky in the format that loads the frame. This stage never throws
  * for a bad number; it records the number. A frame it cannot judge is reported with the reason.
  */
-import { requireArray, requireRecord, requireString } from '@cssearth/core';
+import { isFiniteNumber, requireArray, requireRecord, requireString } from '@cssearth/core';
 import { loadNativePhotograph } from '../native-photograph-source.ts';
 import { framesReference, observationCaster, outline, peakValue, prepareFrame, registrationSweep, reliefSweep, type PreparedFrame, type RegistrationImage, type RegistrationResult, type ReliefResult, type SurfaceReference } from '../registration/registration-sweeps.ts';
 import type { FrameDetector, LoadContext, ObservationFrame } from './contract.ts';

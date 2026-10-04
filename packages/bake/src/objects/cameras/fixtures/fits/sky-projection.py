@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """Astropy pixel <-> world for packages/fits/src/sky.ts skyProjection, and region values for packages/fits/src/node/file.ts readFitsFileRegion.
 Run with the pinned oracle environment; never imports the TypeScript helper.
-Each case is a TAN or plain SIN header, rotated or not. For deterministic sky points near the reference, Astropy's all_world2pix (origin 0)
-gives the expected zero-based pixels, and all_pix2world the expected directions of deterministic pixels. Headers marked `from`
-copy the WCS cards of that product verbatim; the rest are written for this oracle. Cases with distortion, a slant SIN or another projection
-are refused by the helper and only recorded. Every case is an IMAGE extension of packages/fits/src/node/fixtures/fits/sky-projection.fits; the
+Each case is a TAN (with or without SIP distortion) or plain SIN header, rotated or not. For deterministic sky points near the reference,
+Astropy's all_world2pix (origin 0) gives the expected zero-based pixels, and all_pix2world the expected directions of deterministic pixels.
+Headers marked `from` copy the WCS cards of that product verbatim; the rest are written for this oracle. Cases with another distortion, SIP
+cards on axes that do not name SIP, a slant SIN or another projection are refused by the helper and only recorded. Every case is an IMAGE extension of packages/fits/src/node/fixtures/fits/sky-projection.fits; the
 `sci` extension also carries a small float32 image whose region values the file reader must return.
 """
 import sys
@@ -25,6 +25,14 @@ ALMA_SIN = ('ALMA pipeline continuum image of PDS 70, project 2018.A.00030.S (me
     {'CTYPE1': 'RA---SIN', 'CTYPE2': 'DEC--SIN', 'CUNIT1': 'deg', 'CUNIT2': 'deg', 'RADESYS': 'ICRS', 'LONPOLE': 180.0, 'LATPOLE': -41.39806682174,
      'CRPIX1': 769.0, 'CRPIX2': 769.0, 'CRVAL1': 212.0420926751, 'CRVAL2': -41.39806682174,
      'CDELT1': -2.416666669157e-06, 'CDELT2': 2.416666669157e-06, 'PC1_1': 1.0, 'PC1_2': 0.0, 'PC2_1': 0.0, 'PC2_2': 1.0, 'PV2_1': 0.0, 'PV2_2': 0.0})
+WFPC2_WF4 = ('HST WFPC2 F555W exposure of NGC 1637, programme 9155 (u6fv0101m_c0m.fits, SCI extension 4, detector WF4)',
+    {'CTYPE1': 'RA---TAN-SIP', 'CTYPE2': 'DEC--TAN-SIP', 'CRPIX1': 425.0, 'CRPIX2': 425.0, 'CRVAL1': 70.36567856558561, 'CRVAL2': -2.86790072198885,
+     'CD1_1': 1.617442251788924E-05, 'CD1_2': -2.245384389166951E-05, 'CD2_1': -2.245237444586934E-05, 'CD2_2': -1.618184770313391E-05,
+     'A_ORDER': 3, 'B_ORDER': 3, 'A_0_2': -4.693299899827253E-07, 'B_0_2': -2.886434988684502E-06, 'A_1_1': -2.780400109259062E-06,
+     'B_1_1': -3.447691418182868E-06, 'A_2_0': -3.477299969745218E-06, 'B_2_0': -3.548399029829361E-07, 'A_0_3': -1.137799993111699E-10,
+     'B_0_3': -3.452507297057036E-08, 'A_1_2': -3.555599903393159E-08, 'B_1_2': 4.237424806885753E-10, 'A_2_1': 4.171900047644783E-10,
+     'B_2_1': -3.58329095184396E-08, 'A_3_0': -3.453200037029092E-08, 'B_3_0': -2.779383137962067E-10})
+# The SIP cases come last, so the deterministic points of the cases before them stay as they were.
 CASES = [
     ('jwst-nircam-rotated', JWST_F187N[0], JWST_F187N[1]),
     ('crota2-thirty', None, {'CTYPE1': 'RA---TAN', 'CTYPE2': 'DEC--TAN', 'CRPIX1': 50.5, 'CRPIX2': 40.5, 'CRVAL1': 201.4, 'CRVAL2': -43.0, 'CDELT1': -0.0002, 'CDELT2': 0.0002, 'CROTA2': 30.0}),
@@ -34,9 +42,13 @@ CASES = [
     ('alma-pipeline-sin', ALMA_SIN[0], ALMA_SIN[1]),
     ('sin-rotated-wide', None, {'CTYPE1': 'RA---SIN', 'CTYPE2': 'DEC--SIN', 'CRPIX1': 50.5, 'CRPIX2': 40.5, 'CRVAL1': 201.4, 'CRVAL2': -43.0, 'CDELT1': -0.002, 'CDELT2': 0.002, 'CROTA2': 30.0}),
     ('tan-near-pole-wide', None, {'CTYPE1': 'RA---TAN', 'CTYPE2': 'DEC--TAN', 'CRPIX1': 500, 'CRPIX2': 500, 'CRVAL1': 37.95, 'CRVAL2': 88.9, 'CDELT1': -0.001, 'CDELT2': 0.001, 'PC1_1': 0.8, 'PC1_2': -0.6, 'PC2_1': 0.6, 'PC2_2': 0.8}),
+    ('sip-second-order', None, {'CTYPE1': 'RA---TAN-SIP', 'CTYPE2': 'DEC--TAN-SIP', 'CRPIX1': 2, 'CRPIX2': 1.5, 'CRVAL1': 83.8, 'CRVAL2': 22.0, 'CDELT1': -0.0002, 'CDELT2': 0.0002, 'A_ORDER': 2, 'B_ORDER': 2, 'A_2_0': 1e-6, 'B_0_2': 1e-6}),
+    ('hst-wfpc2-sip', WFPC2_WF4[0], WFPC2_WF4[1]),
 ]
+# A detector's distortion polynomial holds on the detector: the WFPC2 chip is 800 pixels a side.
+ON_DETECTOR = {'tan-near-pole-wide': 400, 'sip-second-order': 400, 'hst-wfpc2-sip': 400}
 REFUSED = [
-    ('sip-distortion', {'CTYPE1': 'RA---TAN-SIP', 'CTYPE2': 'DEC--TAN-SIP', 'CRPIX1': 2, 'CRPIX2': 1.5, 'CRVAL1': 83.8, 'CRVAL2': 22.0, 'CDELT1': -0.0002, 'CDELT2': 0.0002, 'A_ORDER': 2, 'B_ORDER': 2, 'A_2_0': 1e-6, 'B_0_2': 1e-6}),
+    ('sip-cards-on-plain-tan', {'CTYPE1': 'RA---TAN', 'CTYPE2': 'DEC--TAN', 'CRPIX1': 2, 'CRPIX2': 1.5, 'CRVAL1': 83.8, 'CRVAL2': 22.0, 'CDELT1': -0.0002, 'CDELT2': 0.0002, 'A_ORDER': 2, 'B_ORDER': 2, 'A_2_0': 1e-6, 'B_0_2': 1e-6}),
     ('tpv-distortion', {'CTYPE1': 'RA---TAN', 'CTYPE2': 'DEC--TAN', 'CRPIX1': 2, 'CRPIX2': 1.5, 'CRVAL1': 83.8, 'CRVAL2': 22.0, 'CDELT1': -0.0002, 'CDELT2': 0.0002, 'PV1_1': 1.0, 'PV2_1': 1.0}),
     ('sin-slant', {'CTYPE1': 'RA---SIN', 'CTYPE2': 'DEC--SIN', 'CRPIX1': 2, 'CRPIX2': 1.5, 'CRVAL1': 83.8, 'CRVAL2': 22.0, 'CDELT1': -0.0002, 'CDELT2': 0.0002, 'PV2_1': 0.1, 'PV2_2': 0.0}),
     ('arc-projection', {'CTYPE1': 'RA---ARC', 'CTYPE2': 'DEC--ARC', 'CRPIX1': 2, 'CRPIX2': 1.5, 'CRVAL1': 83.8, 'CRVAL2': 22.0, 'CDELT1': -0.0002, 'CDELT2': 0.0002}),
@@ -72,7 +84,7 @@ for name, source, _ in CASES:
     # Pixels around the reference, out to a few thousand pixels, and the sky directions Astropy gives them; then sky points
     # offset from those directions, and the pixels Astropy gives back.
     pixels = np.column_stack([x0 + rng.uniform(-2500, 2500, 12), y0 + rng.uniform(-2500, 2500, 12)])
-    if name == 'tan-near-pole-wide': pixels = np.column_stack([x0 + rng.uniform(-400, 400, 12), y0 + rng.uniform(-400, 400, 12)])
+    if name in ON_DETECTOR: pixels = np.column_stack([x0 + rng.uniform(-ON_DETECTOR[name], ON_DETECTOR[name], 12), y0 + rng.uniform(-ON_DETECTOR[name], ON_DETECTOR[name], 12)])
     world = wcs.all_pix2world(pixels, 0)
     shifted = world + np.column_stack([rng.uniform(-1e-3, 1e-3, 12), rng.uniform(-1e-3, 1e-3, 12)])
     shifted[:, 0] %= 360.0

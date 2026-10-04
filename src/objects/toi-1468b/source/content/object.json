@@ -49,7 +49,7 @@
   },
   "datasets": {
     "titleKey": "datasets",
-    "defaultDataset": "shape",
+    "defaultDataset": "temperature",
     "controls": [
       {
         "id": "shape",
@@ -65,6 +65,66 @@
         },
         "falseColor": false,
         "notes": "No image or color of TOI-1468 b is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the color of toi-1468's light, as its color dataset measures it."
+      },
+      {
+        "id": "temperature",
+        "label": "Rock model",
+        "qualification": "A model set by one measurement: the 15 µm eclipse depth of Meier Valdés et al. (2025), three JWST MIRI F1500W occultations of the Hot Rocks Survey",
+        "thumbnail": "toi-1468b-dataset-temperature.webp",
+        "surface": "toi-1468b-surface-temperature@2x.webp",
+        "poles": "toi-1468b-poles-temperature@2x.webp",
+        "source": {
+          "id": "toi-1468b-temperature-eclipse-depth",
+          "path": "../manifest.json",
+          "url": "https://arxiv.org/abs/2503.19772"
+        },
+        "falseColor": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Brightness temperature",
+          "labels": [
+            "≤ 50",
+            "675",
+            "1300"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                13,
+                8,
+                135
+              ],
+              [
+                126,
+                3,
+                168
+              ],
+              [
+                204,
+                71,
+                120
+              ],
+              [
+                248,
+                149,
+                64
+              ],
+              [
+                240,
+                249,
+                33
+              ]
+            ],
+            "labels": [
+              "≤ 50",
+              "675",
+              "1300"
+            ]
+          },
+          "meta": "K",
+          "sourceUrl": "https://arxiv.org/abs/2503.19772"
+        },
+        "notes": "A model, not a map. Only TOI-1468 b's dayside brightness is measured: an eclipse depth of 280 to 342 ppm at 15 µm (Meier Valdés et al. (2025)), which the paper finds mostly consistent with no atmosphere and zero Bond albedo. A bare rock with that depth is 1,082 to 1,232 K under the star and dark at night; whether the night side is dark is not measured. With shadows on, the star's light darkens the night half."
       }
     ]
   },

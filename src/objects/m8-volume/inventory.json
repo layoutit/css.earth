@@ -22,8 +22,8 @@
     {
       "location": "prepared",
       "filename": "datasets.json",
-      "bytes": 1227033,
-      "sha256": "f9e71ac66761c8d4b3a527efb09fda956b5a721665b1e93593f0d7edd0de2b18"
+      "bytes": 9978,
+      "sha256": "b9a188e7296efa902866d7d926d89f27f877faa723d770ed2ab0bfad6a820c6f"
     },
     {
       "location": "prepared",
@@ -207,6 +207,12 @@
     },
     {
       "location": "prepared",
+      "filename": "eso-optical/volume.json",
+      "bytes": 352330,
+      "sha256": "dcfa07c63e4ecf0f0ed7ed78892ddef654eeac6ba5c5d58050377dd42dd05b2a"
+    },
+    {
+      "location": "prepared",
       "filename": "eso-vista/atlases/x.webp",
       "bytes": 561950,
       "sha256": "ec183e196d73c2c924ec3fca3d83f8b5f6945a70d074c05a2a72f092ccf42cbe"
@@ -381,9 +387,21 @@
     },
     {
       "location": "prepared",
+      "filename": "eso-vista/volume.json",
+      "bytes": 350872,
+      "sha256": "fafcc67466ca0d8e81c1960b3003b74cf14079ba053558b273303c7f9ee82783"
+    },
+    {
+      "location": "prepared",
       "filename": "presentation.json",
       "bytes": 5312,
       "sha256": "0511cc632b33254062202ae9e016a696f3d02aa94f720379071255f0dd7f66fa"
+    },
+    {
+      "location": "prepared",
+      "filename": "record.json",
+      "bytes": 8325,
+      "sha256": "a191c76109e1c8a01c23e0b7384029e56fef1d1f6c3ed284fbc0b5a0a0966370"
     },
     {
       "location": "prepared",
@@ -558,6 +576,18 @@
       "filename": "spitzer-mid-infrared/impostors/view-ppp.png",
       "bytes": 17671,
       "sha256": "fba98139fe7920ed8df48b9e074ae28bba70fab7b37234e3ea45c079f8e52b6e"
+    },
+    {
+      "location": "prepared",
+      "filename": "spitzer-mid-infrared/volume.json",
+      "bytes": 358891,
+      "sha256": "dd64d7b2389052469026243caa70b143775c11c372f5483f438d0aa23e73bdf5"
+    },
+    {
+      "location": "prepared",
+      "filename": "stars.bin",
+      "bytes": 13599,
+      "sha256": "ef853eca39b4d77bcb978dd9fc20f0c0f92fda4f5800c98dcddff27662e6b983"
     }
   ]
 }

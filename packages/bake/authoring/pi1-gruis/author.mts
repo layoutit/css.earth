@@ -6,16 +6,16 @@
  *   node packages/bake/authoring/pi1-gruis/author.mts [--check]
  *
  * --check recomputes every output and fails if any differs from the file on disk. */
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { writeOrCheckAuthoredOutputs } from '../authored-output.mts';
+import { runAuthor } from '../authored-output.mts';
 import { pathToFileURL } from 'node:url';
-import { convolveGaussian, readReconstruction, writeReconstruction } from '@cssearth/bake/objects/layers/observation';
-import { readChannelRows } from '@cssearth/bake/objects/layers/observation';
+import { convolveGaussian, readReconstruction, writeReconstruction, readChannelRows } from '@cssearth/bake/objects/layers/observation';
 import { requireArray, requireRecord, requireFiniteNumber, requireString } from '@cssearth/core';
 import { authorUniformDiscSphere, contextMarker } from '../betelgeuse/author.mts';
 
-const root = resolve(import.meta.dirname, '../../../../src/objects/pi1-gruis/source');
+const root = resolve(checkoutProjectRoot(import.meta.url), 'src/objects/pi1-gruis/source');
 
 /** The image-ready PIONIER file (Paladini et al. 2018) as published in the OiDB, and the reconstruction made from it. */
 export const VISIBILITIES_PATH = 'observations/PI_GRU_forImage.fits';
@@ -27,24 +27,28 @@ export const SPHERE_PATH = 'shape/uniform-disc.tab';
 export const CONTEXT_PATH = 'presentation/context.png';
 
 export async function authorPi1Gruis({ check = false } = {}) {
-  await authorUniformDiscSphere(root, 'π¹ Gruis', { check });
-  const rows = readChannelRows(await readFile(resolve(root, VISIBILITIES_PATH)));
-  let longest = 0;
-  for (const row of rows.vis2) longest = Math.max(longest, Math.hypot(row.u, row.v));
-  const meanWavelength = rows.wavelengthsMetres.reduce((sum, value) => sum + value, 0) / rows.wavelengthsMetres.length;
-  const beamMas = meanWavelength / (2 * longest) * 206264806.247;
-  if (Math.abs(beamMas - BEAM_FWHM_MAS) > 0.05) throw new Error(`The file's longest baseline gives a ${beamMas.toFixed(2)} mas beam, not ${BEAM_FWHM_MAS}.`);
-  const raw = readReconstruction(await readFile(resolve(root, RAW_IMAGE_PATH)));
-  const pixelMas = raw.axes.scale[0];
-  const beam = writeReconstruction(raw, convolveGaussian(raw, BEAM_FWHM_MAS / pixelMas), [['BEAMFWHM', BEAM_FWHM_MAS, 'mas, Gaussian convolution applied by author.mts'], ['ORIGFILE', RAW_IMAGE_PATH.split('/').at(-1)!, 'SQUEEZE posterior mean this was convolved from']]);
-  const raster = requireRecord(JSON.parse(await readFile(resolve(root, 'preparation/raster.json'), 'utf8')), 'raster');
-  const dataset = requireRecord(requireRecord(requireRecord(requireArray(raster.surfaces)[0], 'surface').science, 'science').dataset, 'dataset');
-  const display = requireRecord(dataset.display, 'display'), frame = requireRecord(requireArray(dataset.frames)[0], 'frame');
-  const palette = requireArray(display.palette).map(value => requireString(value)), percentiles = requireArray(display.percentiles).map(value => requireFiniteNumber(value));
-  const marker = await contextMarker(readReconstruction(beam), palette, [percentiles[0]!, percentiles[1]!], requireFiniteNumber(frame.backgroundMaximum));
-  const outputs: [string, Buffer][] = [[BEAM_IMAGE_PATH, beam], [CONTEXT_PATH, marker]];
-  await writeOrCheckAuthoredOutputs(root, outputs, { check, missingFile: 'propagate-read-error', mkdir: 'none' });
-  return { vis2: rows.vis2.length, t3: rows.t3.length, flagged: rows.flagged, channels: rows.wavelengthsMetres.length, longestBaselineMetres: longest, beamMas };
+  return runAuthor({
+    root: root, check, readError: 'propagate-read-error', mkdir: 'none',
+    compute: async () => {
+      await authorUniformDiscSphere(root, 'π¹ Gruis', { check });
+      const rows = readChannelRows(await readFile(resolve(root, VISIBILITIES_PATH)));
+      let longest = 0;
+      for (const row of rows.vis2) longest = Math.max(longest, Math.hypot(row.u, row.v));
+      const meanWavelength = rows.wavelengthsMetres.reduce((sum, value) => sum + value, 0) / rows.wavelengthsMetres.length;
+      const beamMas = meanWavelength / (2 * longest) * 206264806.247;
+      if (Math.abs(beamMas - BEAM_FWHM_MAS) > 0.05) throw new Error(`The file's longest baseline gives a ${beamMas.toFixed(2)} mas beam, not ${BEAM_FWHM_MAS}.`);
+      const raw = readReconstruction(await readFile(resolve(root, RAW_IMAGE_PATH)));
+      const pixelMas = raw.axes.scale[0];
+      const beam = writeReconstruction(raw, convolveGaussian(raw, BEAM_FWHM_MAS / pixelMas), [['BEAMFWHM', BEAM_FWHM_MAS, 'mas, Gaussian convolution applied by author.mts'], ['ORIGFILE', RAW_IMAGE_PATH.split('/').at(-1)!, 'SQUEEZE posterior mean this was convolved from']]);
+      const raster = requireRecord(JSON.parse(await readFile(resolve(root, 'preparation/raster.json'), 'utf8')), 'raster');
+      const dataset = requireRecord(requireRecord(requireRecord(requireArray(raster.surfaces)[0], 'surface').science, 'science').dataset, 'dataset');
+      const display = requireRecord(dataset.display, 'display'), frame = requireRecord(requireArray(dataset.frames)[0], 'frame');
+      const palette = requireArray(display.palette).map(value => requireString(value)), percentiles = requireArray(display.percentiles).map(value => requireFiniteNumber(value));
+      const marker = await contextMarker(readReconstruction(beam), palette, [percentiles[0]!, percentiles[1]!], requireFiniteNumber(frame.backgroundMaximum));
+      const outputs: [string, Buffer][] = [[BEAM_IMAGE_PATH, beam], [CONTEXT_PATH, marker]];
+      return { outputs: outputs, result: { vis2: rows.vis2.length, t3: rows.t3.length, flagged: rows.flagged, channels: rows.wavelengthsMetres.length, longestBaselineMetres: longest, beamMas } };
+    },
+  });
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {

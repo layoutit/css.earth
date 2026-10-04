@@ -1,5 +1,6 @@
 /** Runtime checks for values that arrive from outside the type system: JSON files, prepared payloads, archive records
- * and command-line input. No dependencies and no host globals, so browser bundles and Node tools share one copy. */
+ * and command-line input. No dependencies and no host globals, so browser bundles and Node tools share one copy.
+ * Caller-owned failure callbacks preserve domain diagnostics. */
 
 /** Reports a failed check. The message names the value and has no closing full stop. */
 export type Fail = (message: string) => never;
@@ -14,22 +15,20 @@ export function isRecord(value: unknown): value is Record<string, unknown> {
   return value !== null && typeof value === 'object' && !Array.isArray(value);
 }
 /** An object literal or `JSON.parse` object: its prototype is `Object.prototype`. */
-export function isPlainRecord(value: unknown): value is Record<string, unknown> {
+function isPlainRecord(value: unknown): value is Record<string, unknown> {
   return value !== null && typeof value === 'object' && Object.getPrototypeOf(value) === Object.prototype;
 }
 export function isFiniteNumber(value: unknown): value is number {
   return typeof value === 'number' && Number.isFinite(value);
 }
 /** Empty strings and whitespace are accepted; no coercion or trimming. */
-export function isTextAllowEmpty(value: unknown): value is string { return typeof value === 'string'; }
+function isTextAllowEmpty(value: unknown): value is string { return typeof value === 'string'; }
 /** Whitespace-only strings are accepted. */
 export function isNonemptyText(value: unknown): value is string { return isTextAllowEmpty(value) && value.length > 0; }
 /** Trimming is used only for acceptance; readers return the original string. */
 export function isNonblankText(value: unknown): value is string { return isTextAllowEmpty(value) && value.trim().length > 0; }
-export function isPositiveNumber(value: unknown): value is number { return isFiniteNumber(value) && value > 0; }
-/** Integer, not safe integer: finite represented integers above MAX_SAFE_INTEGER pass. */
-export function isPositiveInteger(value: unknown): value is number { return isPositiveNumber(value) && Number.isInteger(value); }
-export function isSafeIntegerAtLeast(value: unknown, minimum: number): value is number {
+function isPositiveNumber(value: unknown): value is number { return isFiniteNumber(value) && value > 0; }
+function isSafeIntegerAtLeast(value: unknown, minimum: number): value is number {
   return isFiniteNumber(value) && Number.isSafeInteger(value) && value >= minimum;
 }
 
@@ -45,11 +44,7 @@ export function readNonblankText(value: unknown, label: string, fail: Fail = rep
   return value;
 }
 export function readPositiveNumber(value: unknown, label: string, fail: Fail = report): number { return positiveOr(fail, value, label); }
-export function readPositiveInteger(value: unknown, label: string, fail: Fail = report): number {
-  const result = positiveOr(fail, value, label);
-  if (!Number.isInteger(result)) fail(`${label} must be a positive integer`);
-  return result;
-}
+
 export function readSafeIntegerAtLeast(value: unknown, minimum: number, label: string, fail: Fail = report): number {
   if (!isSafeIntegerAtLeast(value, minimum)) fail(`${label} must be a safe integer at least ${minimum}`);
   return value;
@@ -92,7 +87,6 @@ export function requireArray(value: unknown, label = 'Source value'): unknown[] 
 export function requireString(value: unknown, label = 'Source value'): string { return stringOr(report, value, label); }
 export function requireFiniteNumber(value: unknown, label = 'Source value'): number { return finiteOr(report, value, label); }
 export function requirePositive(value: unknown, label = 'Source value'): number { return positiveOr(report, value, label); }
-export function requireBoolean(value: unknown, label = 'Source value'): boolean { return booleanOr(report, value, label); }
 /** A string with at least one character: `<label> must be nonempty text.` */
 export function requireNonemptyText(value: unknown, label = 'Source value'): string {
   if (!isNonemptyText(value)) report(`${label} must be nonempty text`);
@@ -135,3 +129,30 @@ export function checks(fail: Fail) {
   };
 }
 export type Checks = ReturnType<typeof checks>;
+
+/** Nonempty strings, preserving the original value and the legacy string diagnostic. */
+export function requireNonemptyString(value: unknown, label: string): string {
+  if (!isNonemptyText(value)) report(`${label} must be a string`);
+  return value;
+}
+/** Exactly three finite components; tuple shape and component failures retain distinct diagnostics. */
+export function requireFiniteTriple(value: unknown, label: string): [number, number, number] {
+  if (!Array.isArray(value) || value.length !== 3) report(`${label} must contain three numbers`);
+  return [requireFiniteNumber(value[0], label), requireFiniteNumber(value[1], label), requireFiniteNumber(value[2], label)];
+}
+
+/** Predicate for tuple-consuming validators; Array.every retains their historical sparse-array admission. */
+export function isFiniteTriple(value: unknown): value is [number, number, number] {
+  return Array.isArray(value) && value.length === 3 && value.every(isFiniteNumber);
+}
+/** Finite triple with caller diagnostics. Compact legacy inputs check components before dimensions. */
+export function readFiniteTriple(value: unknown, label: string, fail: Fail = report, componentsFirst = false): [number, number, number] {
+  if (!Array.isArray(value)) fail(`${label} must be an array`);
+  if (componentsFirst) {
+    const numbers = value.map(item => finiteOr(fail, item, label));
+    if (numbers.length !== 3) fail(`${label} must contain three numbers`);
+    return [numbers[0]!, numbers[1]!, numbers[2]!];
+  }
+  if (value.length !== 3) fail(`${label} must contain three numbers`);
+  return [finiteOr(fail, value[0], label), finiteOr(fail, value[1], label), finiteOr(fail, value[2], label)];
+}

@@ -140,6 +140,28 @@
           }
         ]
       }
+    },
+    {
+      "id": "mascara-1b-temperature-phase-curve",
+      "path": "science/bell-2021/phase-curve.json",
+      "origin": "https://arxiv.org/abs/2010.00687",
+      "credit": "Bell et al. (2021); a Spitzer IRAC 4.5 µm phase curve (program 14059)",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "Transcribed from the paper, table cell by table cell, with each cell's location",
+      "redistribution": "Factual parameter transcription only; no paper figures",
+      "consumers": [
+        "temperature-phase-curve-map"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-mascara-1b-temperature-phase-curve",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
@@ -156,7 +178,8 @@
         "generator": "packages/telescope-cli/src/source-authoring/context-markers.mts",
         "inputs": [
           "mascara-1b-observational-measurements",
-          "mascara-1b-preparation-raster"
+          "mascara-1b-preparation-raster",
+          "mascara-1b-temperature-phase-curve"
         ]
       },
       "generator": "packages/telescope-cli/src/source-authoring/context-markers.mts",

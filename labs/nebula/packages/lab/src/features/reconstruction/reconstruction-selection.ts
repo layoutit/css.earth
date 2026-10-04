@@ -1,5 +1,5 @@
-import { COMPACT_FINITE_EMISSION_METHOD } from '@cssearth/objects';
 /** Selection rules for saved reconstructions: the catalogue's owning model decides, never whichever result is on screen. */
+import { COMPACT_FINITE_EMISSION_METHOD } from '@cssearth/objects';
 import { densityPreviewAllowed, reconstructionProcessingCapability, type ReconstructionProcessingCapability } from './reconstruction-capabilities.ts';
 import type { ReconstructionCandidate, ReconstructionCatalogue } from './reconstruction-types.ts';
 

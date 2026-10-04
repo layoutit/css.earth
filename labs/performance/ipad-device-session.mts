@@ -1,10 +1,9 @@
 /** One retained pymobiledevice3 session for visible Safari and native iPad frames. */
 import { MissingSourceInputError } from '@cssearth/core';
-import { spawn, type ChildProcess } from 'node:child_process';
+import { spawn, type ChildProcess, execFile } from 'node:child_process';
 import { mkdir, readdir, realpath, rm } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { promisify } from 'node:util';
-import { execFile } from 'node:child_process';
 import sharp from 'sharp';
 
 const exec = promisify(execFile);

@@ -1,5 +1,5 @@
-import { inside, safeId, parseSourceProducts, sourceReceipt, sourceRecordComplete, assertPinnedLabel, type SourceProduct } from './source-product-contract.mts';
 /** Package-owned observations enter the same query as archive holdings. Pins stay in the existing source manifest. */
+import { inside, safeId, parseSourceProducts, sourceReceipt, sourceRecordComplete, assertPinnedLabel, type SourceProduct } from './source-product-contract.mts';
 import { intakeSources, type SourceIntakeIssue } from './source-intake.mts';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';

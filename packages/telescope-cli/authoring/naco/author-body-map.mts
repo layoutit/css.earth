@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-import { BODY_MAP_SCHEMA } from '@cssearth/objects';
 /** Turn one checked NACO jitter product into a registered body map through the shared resolved-disc boundary.
  *
  *   node packages/telescope-cli/authoring/naco/author-body-map.mts <target> <program> <naco_img_jitter.fits> --raw <raw-dir> [--out <map.fits>] [--check]
@@ -8,26 +7,22 @@ import { BODY_MAP_SCHEMA } from '@cssearth/objects';
  * therefore proves the axes from every pinned raw frame (north up, east left, one common scale and zero position angle),
  * while the shared resolved-disc stage fits the new origin and owns all body geometry and projection.
  */
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
+import { BODY_MAP_SCHEMA, type BodyMapFrame, type MeasurementDefinition, type ProductInput, type ProductSoftware } from '@cssearth/objects';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { basename, dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { readFitsImage } from '@cssearth/fits';
 import { requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { bodyMapFits, topRowFirst } from '@cssearth/bake/objects/layers/observation';
-import { renderBodyMapProduct } from '@cssearth/bake/objects/layers/observation';
-import { type BodyMapFrame, type MeasurementDefinition } from '@cssearth/objects';
+import { bodyMapFits, topRowFirst, renderBodyMapProduct, placeResolvedDisc } from '@cssearth/bake/objects/layers/observation';
 import { bindMapResolution, bodyMapProductRecord, formatProductRecord } from '@cssearth/telescope-cli/body-map-publication';
-import { fileSize, readProductRecord, sameRun } from '@cssearth/telescope/node';
+import { fileSize, readProductRecord, sameRun, esoHeader, type EsoHeader } from '@cssearth/telescope/node';
 import { productRecordPath } from '@cssearth/telescope';
-import { type ProductInput, type ProductSoftware } from '@cssearth/objects';
-import { placeResolvedDisc } from '@cssearth/bake/objects/layers/observation';
-import { horizonsTables } from '@cssearth/bake/objects/layers/terrestrial';
-import { horizonsRows, LEAP_SECONDS_KERNEL, leapSecondsKernel, loadOrientation, observerRowValues, rowJd } from '@cssearth/bake/objects/layers/terrestrial';
-import { esoHeader, type EsoHeader } from '@cssearth/telescope/node';
+import { horizonsTables, horizonsRows, LEAP_SECONDS_KERNEL, leapSecondsKernel, loadOrientation, observerRowValues, rowJd } from '@cssearth/bake/objects/layers/terrestrial';
 import { readProgram } from '@cssearth/telescope-cli/archives/naco/archive';
 import { bankKernelPath } from '@cssearth/bake/objects/cameras';
 
-const REPOSITORY = resolve(import.meta.dirname, '../../../..');
+const REPOSITORY = checkoutProjectRoot(import.meta.url);
 const PCK = 'src/spice/cassini/pck/pck00011.tpc';
 const DEGREE = Math.PI / 180, ARCSEC_PER_RADIAN = 206_264.806_247, AU_KM = 1.495978707e8;
 

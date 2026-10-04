@@ -1,6 +1,6 @@
-import { type PreparedSilhouetteSteps, type PreparedTexturePlacements } from '@cssearth/objects';
+import { LEAF_BOX_PROPERTY, LEAF_BOX_FACTOR, type PreparedTree, type PreparedSilhouetteSteps, type PreparedTexturePlacements } from '@cssearth/objects';
 import { walkSilhouetteLevels } from '@cssearth/engine';
-import { rebuildPropertyTable, appendPropertyTable } from './property-table.ts';
+import { rebuildPropertyTable } from './property-table.ts';
 
 // Leaf boxes that follow the body's size on screen.
 //
@@ -19,9 +19,9 @@ import { rebuildPropertyTable, appendPropertyTable } from './property-table.ts';
 // (`prepared-presentation/prepared-presentation-bindings.ts`), so every generator shares one rule.
 
 /** The step every leaf reads; `<property>-<block>` names a block in the binding's placements and groups. */
-export const LEAF_BOX_PROPERTY = '--silhouette-step';
+export { LEAF_BOX_PROPERTY } from '@cssearth/objects';
 /** Each leaf's own factor, which its lengths and transform read. */
-export const LEAF_BOX_FACTOR = '--leaf-box';
+export { LEAF_BOX_FACTOR } from '@cssearth/objects';
 /** A leaf box holds at least this many of its CSS pixels per CSS pixel it covers on screen. Each texel is resampled twice,
  * into the box and onto the screen; at one box pixel per screen pixel the second resampling speckles fine texture. On
  * the Moon at rest in the iOS simulator (DPR 3), one gave 3,271 changed pixels against full boxes, two gave 239. */
@@ -236,7 +236,8 @@ export function withLeafBoxes<D extends LeafBoxTree>(definition: D, measured: { 
     throw new TypeError(`Leaf boxes need a positive body diameter (${bodyDiameter}) and logical body diameter (${initialDiameter}).`);
   }
   const { factors, initial, binding } = prepareLeafBoxBindings(measured.leaves, { bodyCentre: measured.bodyCentre, bodyDiameter, target, closed, initialDiameter });
-  const { properties, intern } = appendPropertyTable(tree.properties);
+  const properties = [...tree.properties];
+  const intern = (property: PreparedTree['properties'][number]) => properties.push(property) - 1;
   const factorOf = new Map(factors.map(factor => [factor.node, factor.value]));
   const nodes = tree.nodes.map((node, index) => {
     // prepare:object-json writes the bound runtime back, so an earlier measurement's factors and steps are dropped wherever

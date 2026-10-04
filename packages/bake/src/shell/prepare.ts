@@ -1,8 +1,8 @@
 /** Self-contained preparation entry point for pinned transparent surface objects. */
+import { requireNonemptyString as text, requireRecord as record } from '@cssearth/core';
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { dirname, relative, resolve } from 'node:path';
 import { PREPARED_OBJECT_SCHEMA, SURFACE_SHELL_FORMAT, parseDensityVolumeFrame, parseObjectDescriptor } from '@cssearth/objects';
-import { requireRecord as record } from '@cssearth/core';
 
 import { sourceBytes, containedPath } from '../volume/node/index.ts';
 import { parseShellRecipe } from './config.ts';
@@ -52,9 +52,4 @@ export async function prepareSurfaceShellObject(options: { objectDirectory: stri
   }
   console.log(`PREPARED ${descriptor.id}: ${data.faces.length} PolyCSS triangle leaves; ${atlas.width * atlas.height * 4} decoded RGBA bytes; ${outputPath}`);
   return envelope;
-}
-
-function text(value: unknown, at: string): string {
-  if (typeof value !== 'string' || !value) throw new TypeError(`${at} must be a string.`);
-  return value;
 }

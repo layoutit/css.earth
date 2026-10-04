@@ -102,4 +102,3 @@ test('the HR 8799 measurements match their own planets, and the candidate fifth 
     assert.deepEqual(within, PAPER_AGREES_WITHIN[association.closest], `${association.measurement.id} per-axis agreement`);
   }
 });
-

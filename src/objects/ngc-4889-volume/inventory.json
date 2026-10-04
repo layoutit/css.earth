@@ -10,8 +10,8 @@
     {
       "location": "prepared",
       "filename": "datasets.json",
-      "bytes": 166737,
-      "sha256": "b95015d140e3ccbaf15195957fb556a987418ae2474f8d78f6568ec889710dcb"
+      "bytes": 3527,
+      "sha256": "67eeb229903ac47f90bfc1ba0807e20610bf20d6358f3484d64077622afc5c0d"
     },
     {
       "location": "prepared",
@@ -24,6 +24,12 @@
       "filename": "presentation.json",
       "bytes": 1375,
       "sha256": "d9111461f364596a077c1535b2329424cd75a5a34c731277a856131a60cec9ba"
+    },
+    {
+      "location": "prepared",
+      "filename": "record.json",
+      "bytes": 9494,
+      "sha256": "ff9b20cf41ce70b569c92dcf28dcd2c4c42d9fab6f4e6c63f93675d27bf67d2b"
     },
     {
       "location": "prepared",
@@ -198,6 +204,18 @@
       "filename": "sdss-optical/impostors/view-ppp.png",
       "bytes": 45370,
       "sha256": "cf836d2ee617853fed026e857d735916c273428880986a0c4e2d013517238fbc"
+    },
+    {
+      "location": "prepared",
+      "filename": "sdss-optical/volume.json",
+      "bytes": 58368,
+      "sha256": "d94f9e3f593a797021bf9c6465d22a352841f530b836f05a8ffdb052877976b5"
+    },
+    {
+      "location": "prepared",
+      "filename": "stars.bin",
+      "bytes": 387,
+      "sha256": "cfb7b797eb41a948a20fd05b754018ce2b051ccd9f29d9972b171488da55a768"
     }
   ]
 }

@@ -1,7 +1,7 @@
 /** The transit chart's files, recipe and refusals (transit-chart.mts), offline. */
 import assert from 'node:assert/strict';
 import { sourceTest } from '@cssearth/objects/node/source-test';
-import type { Archive } from './archives.mts';
+import type { Archive } from './archives/archives.mts';
 import { installTransitChart, type Fold, type FoldMeasure, type TessArchive } from './transit-chart.mts';
 
 const test = sourceTest();

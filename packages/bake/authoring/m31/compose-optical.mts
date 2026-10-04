@@ -8,12 +8,13 @@
  * Inputs: `source/lggs-panorama.jpg` (the publisher Large JPEG, restored from its origin) and `source/source.jpg`.
  * Output: `source/optical-composite.jpg`, the recipe's `source.path`, and `evidence/2026-09-29/optical-composite.json`, what was measured.
  */
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 import sharp from 'sharp';
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { parseImageLayerRecipe, imageLayerView } from '@cssearth/bake/image-layers';
 
-const sourceDirectory = resolve(import.meta.dirname, '../../../../src/objects/m31-layers/source');
+const sourceDirectory = resolve(checkoutProjectRoot(import.meta.url), 'src/objects/m31-layers/source');
 const recipe = JSON.parse(await readFile(resolve(sourceDirectory, 'recipe.json'), 'utf8'));
 const composition = recipe.composition as {
   frame: { centerRaDeg: number; centerDecDeg: number; fieldOfViewDeg: [number, number]; northClockwiseDeg: number; arcsecPerPixel: number };

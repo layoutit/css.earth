@@ -15,7 +15,7 @@ function place(dolly: PerspectiveDolly, bodyCenterUnits: PositionM) {
 }
 
 it('keeps detail hidden through the prepared billboard band', () => {
-  const lod = { model: 'silhouette-diameter-crossfade', billboardFadeStartDiscPixels: 20,
+  const lod = { model: 'silhouette-diameter-crossfade' as const, billboardFadeStartDiscPixels: 20,
     billboardFullDiscPixels: 14, markerFadeStartDiscPixels: 8, markerFullDiscPixels: 4.5 };
   const samples = [40, 17, 14, 13, 7, 4.5, 4].map(diameter => levelOfDetailFor(lod, diameter));
   assert.deepEqual(samples.map(sample => sample.stage), ['geometry', 'geometry', 'billboard', 'billboard', 'billboard', 'marker', 'marker']);
@@ -256,7 +256,7 @@ it('stops the zoom where one CSS pixel shows the least surface arc the imagery s
 
 
 it('uses the prepared geometry threshold before a context icon fills a body view', () => {
-  const plan = scene.camera.levelOfDetail;
+  const plan = { ...scene.camera.levelOfDetail, model: 'silhouette-diameter-crossfade' as const };
   assert.equal(levelOfDetailFor(plan, 13).stage, 'billboard');
   assert.equal(levelOfDetailFor(plan, 14).proxyOpacity, 1);
   assert.equal(levelOfDetailFor(plan, 17).proxyOpacity, .5);

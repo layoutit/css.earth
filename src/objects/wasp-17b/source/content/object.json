@@ -49,7 +49,7 @@
   },
   "datasets": {
     "titleKey": "datasets",
-    "defaultDataset": "shape",
+    "defaultDataset": "temperature",
     "controls": [
       {
         "id": "shape",
@@ -65,6 +65,66 @@
         },
         "falseColor": false,
         "notes": "No image or color of WASP-17 b is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the color of wasp-17's light, as its color dataset measures it."
+      },
+      {
+        "id": "temperature",
+        "label": "JWST",
+        "qualification": "Published map · Valentine et al. (2024) · JWST MIRI 5 to 12 µm, one eclipse on 14 March 2023",
+        "thumbnail": "wasp-17b-dataset-temperature.webp",
+        "surface": "wasp-17b-surface-temperature@2x.webp",
+        "poles": "wasp-17b-poles-temperature@2x.webp",
+        "source": {
+          "id": "wasp-17b-temperature-map",
+          "path": "../manifest.json",
+          "url": "https://zenodo.org/records/12571830"
+        },
+        "falseColor": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Brightness temperature",
+          "labels": [
+            "500",
+            "1350",
+            "2200"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                13,
+                8,
+                135
+              ],
+              [
+                126,
+                3,
+                168
+              ],
+              [
+                204,
+                71,
+                120
+              ],
+              [
+                248,
+                149,
+                64
+              ],
+              [
+                240,
+                249,
+                33
+              ]
+            ],
+            "labels": [
+              "500",
+              "1350",
+              "2200"
+            ]
+          },
+          "meta": "K",
+          "sourceUrl": "https://zenodo.org/records/12571830"
+        },
+        "notes": "Brightness temperature at 5 to 12 µm of WASP-17 b, the map Valentine et al. (2024) fitted to one eclipse on 14 March 2023 and released. Only large patterns are real. The hot spot sits 19° east of noon, 15° to 30° within the paper's uncertainty. The paper shows the map from 110° west to 110° east; the rest was not facing the telescope and is left blank. With shadows on, the star's light darkens the night half."
       }
     ]
   },

@@ -17,6 +17,7 @@
  * writes both files under .local/betelgeuse-shell/observations/, beside the package's other downloads, and fails unless
  * each has the length the author declares. Pass --check to compare without writing.
  */
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -145,7 +146,7 @@ export function reduceAlmaContinuum(bytes: Buffer): Buffer {
 const direct = process.argv[1] !== undefined && import.meta.url === pathToFileURL(resolve(process.argv[1])).href;
 if (direct) {
   const check = process.argv.includes('--check');
-  const target = resolve(import.meta.dirname, '../../../..', DOWNLOADS_BASE);
+  const target = resolve(checkoutProjectRoot(import.meta.url), DOWNLOADS_BASE);
   const jobs = [
     { download: ALMA_DOWNLOADS.cube, url: ALMA_SIO.cutout, reduce: reduceAlmaSio, declared: ALMA_SIO },
     { download: ALMA_DOWNLOADS.continuum, url: ALMA_SIO.continuum.url, reduce: reduceAlmaContinuum, declared: ALMA_SIO.continuum },

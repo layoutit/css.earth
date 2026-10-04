@@ -8,8 +8,7 @@ import type {MaterialSourceTrack} from '../../../presentation/index.ts';
 import { PREPARED_PRESENTATION_SCHEMA, preparedResourcePool, type PreparedCubicSkyPlan, type PreparedDirectionalSunPlan } from '@cssearth/objects';
 import{BASE_TILE,worldPositionToCss,createPolyCamera,buildPolyCameraSceneTransform,buildPolyMeshTransform}from'@layoutit/polycss';
 import { multiplyPreparedMatrix4, preparedRotationMatrix4, readPreparedMatrix4, serializePreparedMatrix4 } from '@cssearth/core';
-import { prepareCssomDeclarationReads, createPreparedNodeTree } from '../../../presentation/index.ts';
-import{prepareMaterialTracks}from'../../../presentation/index.ts';
+import { prepareCssomDeclarationReads, createPreparedNodeTree, prepareMaterialTracks } from '../../../presentation/index.ts';
 import{rotateSequence}from'../../geometry/index.ts';
 
 const round=(value:number)=>Number(value.toFixed(12));

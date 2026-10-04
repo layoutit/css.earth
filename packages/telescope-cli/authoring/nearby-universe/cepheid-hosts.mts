@@ -15,7 +15,7 @@ import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { gunzipSync, gzipSync } from 'node:zlib';
 import { resolveSkyTarget, WORKSPACE } from '@cssearth/telescope/node';
-import { hostName, RIESS_2016_HOSTS } from '../../src/new-object/sh0es.mts';
+import { hostName, RIESS_2016_HOSTS } from '../../src/new-object/archives/sh0es.mts';
 
 /** A galaxy's catalogue position and SIMBAD's agree to a few arcseconds; the nearest other galaxy in these tables is arcminutes away. */
 const MATCH_ARCSEC = 30;

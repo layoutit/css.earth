@@ -1,0 +1,66 @@
+{
+  "id": "svf2019-ngc-4736-1",
+  "name": "[SVF2019] NGC 4736-1",
+  "system": "[SVF2019] NGC 4736-1 system",
+  "description": "A luminous blue variable in the galaxy M94, about three million times as luminous as the Sun.",
+  "parent": "m94",
+  "featured": true,
+  "target": "[SVF2019] NGC 4736-1",
+  "paper": {
+    "url": "https://arxiv.org/abs/1901.05277",
+    "credit": "Solovyeva et al. (2019), MNRAS 484, L24"
+  },
+  "radius": {
+    "value": 183,
+    "source": "Solovyeva et al. (2019), MNRAS 484, L24, section 3.1: log(L_bol/L_sun) = 6.5 +/- 0.2 (at the paper's distance modulus of M94, 28.31) and T = 18 +/- 3 kK, through L = 4 pi R^2 sigma T^4 with the nominal solar 5772 K (IAU 2015 Resolution B3, Prsa et al. 2016, arXiv:1605.09788); the paper prints no radius, and no measurement of this star's size exists",
+    "url": "https://arxiv.org/abs/1901.05277",
+    "uncertainty": 74
+  },
+  "mass": "unmeasured",
+  "temperature": {
+    "value": 18000,
+    "source": "Solovyeva et al. (2019), MNRAS 484, L24, section 3.1: photosphere temperature T = 18 +/- 3 kK, estimated from the strengths of its He I and Fe II lines",
+    "url": "https://arxiv.org/abs/1901.05277",
+    "uncertainty": 3000
+  },
+  "gravityRange": {
+    "min": 1.7,
+    "max": 2.38,
+    "source": "Clark et al. (2012), A&A 541, A145, table 4 (the model gravities of the four Galactic early-B hypergiants it analyses, at 13.7 to 18.1 kK, stars it finds intermediate between B supergiants and luminous blue variables)",
+    "url": "https://arxiv.org/abs/1202.3991"
+  },
+  "radialVelocity": {
+    "value": 286.86262335812637,
+    "source": "SIMBAD's radial velocity of M94, the star's galaxy, from 1999PASP..111..438F; the star's own motion within the galaxy is not measured",
+    "url": "https://ui.adsabs.harvard.edu/abs/1999PASP..111..438F/abstract",
+    "uncertainty": 0.00008005538
+  },
+  "distance": {
+    "value": 4337391,
+    "source": "Placed in M94 as the app draws it, where the star's sight line crosses the disc's midplane: 4,337,391 pc (src/objects/m94-layers/source/recipe.json: centre 4,337,106 pc, inclination 31.77 deg, line of nodes 105 deg). The galaxy's distance, which places the galaxy and not a star within it: Tully et al. (2023), Cosmicflows-4, ApJ 944, 94; CDS J/ApJ/944/94, table 2 (distances of individual galaxies), PGC 43495: distance modulus 28.186 ± 0.039 mag (https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/944/94)",
+    "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/944/94"
+  },
+  "position": {
+    "catalogue": "basic",
+    "row": {
+      "main_id": "[SVF2019] NGC 4736-1"
+    },
+    "credit": "Solovyeva et al. (2019), MNRAS 484, L24, section 2 (its HST coordinates, 12:50:57.264 +41:07:23.13); SIMBAD holds that position, from 2019MNRAS.484L..24S",
+    "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=%5BSVF2019%5D%20NGC%204736-1",
+    "archive": "simbad"
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A luminous blue variable in the galaxy M94, about three million times as luminous as the Sun.",
+    "introduction": "Solovyeva et al. (2019) found it by its spectrum and saw its light change by 1.1 magnitudes from 2005 to 2018. They estimate its temperature at 18,000 K.",
+    "locator": "section 3.1, NGC 4736_1: T, log(L_bol/L_sun), Delta V"
+  },
+  "notes": [
+    "The star varies; it is drawn at the radius its published luminosity and temperature give",
+    "Its radius is not measured: it follows from the paper's luminosity and temperature",
+    "Its limb is read at the gravities published for early-B hypergiants; no gravity of this star is measured",
+    "Its radial velocity is its galaxy's; its own motion within M94 is not measured"
+  ],
+  "order": 5768
+}

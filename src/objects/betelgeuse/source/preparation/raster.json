@@ -76,15 +76,15 @@
           "transfer": {
             "maximumSeparationFootprints": 2,
             "visibilityToleranceMeters": 1,
-            "maximumEmissionDegrees": 70,
+            "maximumEmissionDegrees": 88,
             "interpretation": "Trial acceptance bounds, not estimates of source accuracy. A footprint is the pixel's range times its angular size, 19.6 million kilometres at the disc centre from 168 parsecs, so a contributor lies within two of those of the closest sphere point; the one-metre visibility tolerance is numerically zero on a body this size, and the sphere is convex, so no point occludes another."
           },
           "photometry": {
             "model": "retained-observation",
             "referenceIncidenceDegrees": 0,
             "referenceEmissionDegrees": 0,
-            "maximumIncidenceDegrees": 70,
-            "maximumEmissionDegrees": 70,
+            "maximumIncidenceDegrees": 88,
+            "maximumEmissionDegrees": 88,
             "maximumGain": 1
           },
           "display": {
@@ -163,15 +163,15 @@
           "transfer": {
             "maximumSeparationFootprints": 2,
             "visibilityToleranceMeters": 1,
-            "maximumEmissionDegrees": 70,
+            "maximumEmissionDegrees": 88,
             "interpretation": "Trial acceptance bounds, not estimates of source accuracy. A footprint is the pixel's range times its angular size, 19.6 million kilometres at the disc centre from 168 parsecs, so a contributor lies within two of those of the closest sphere point; the one-metre visibility tolerance is numerically zero on a body this size, and the sphere is convex, so no point occludes another."
           },
           "photometry": {
             "model": "retained-observation",
             "referenceIncidenceDegrees": 0,
             "referenceEmissionDegrees": 0,
-            "maximumIncidenceDegrees": 70,
-            "maximumEmissionDegrees": 70,
+            "maximumIncidenceDegrees": 88,
+            "maximumEmissionDegrees": 88,
             "maximumGain": 1
           },
           "display": {
@@ -250,15 +250,15 @@
           "transfer": {
             "maximumSeparationFootprints": 2,
             "visibilityToleranceMeters": 1,
-            "maximumEmissionDegrees": 70,
+            "maximumEmissionDegrees": 88,
             "interpretation": "Trial acceptance bounds, not estimates of source accuracy. A footprint is the pixel's range times its angular size, 19.6 million kilometres at the disc centre from 168 parsecs, so a contributor lies within two of those of the closest sphere point; the one-metre visibility tolerance is numerically zero on a body this size, and the sphere is convex, so no point occludes another."
           },
           "photometry": {
             "model": "retained-observation",
             "referenceIncidenceDegrees": 0,
             "referenceEmissionDegrees": 0,
-            "maximumIncidenceDegrees": 70,
-            "maximumEmissionDegrees": 70,
+            "maximumIncidenceDegrees": 88,
+            "maximumEmissionDegrees": 88,
             "maximumGain": 1
           },
           "display": {

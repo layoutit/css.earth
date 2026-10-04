@@ -11,9 +11,8 @@ import { requireFiniteNumber, requireRecord, requireString, array, number, optio
 import { decodeProfile } from '../../../raster/index.ts';
 import { readFitsHdu } from '@cssearth/fits';
 import { parseTextKernel, parseLeapSeconds } from '@cssearth/spice';
-import { restoredBankFile } from '../../../cameras/index.ts';
+import { restoredBankFile, observerCamera, parseSpinState, pckOrientation, spinOrientation, type BodyOrientation, type ObserverCamera, type ObserverSighting } from '../../../cameras/index.ts';
 import { decodeCalibratedCamera } from '../../../geometry/index.ts';
-import { observerCamera, parseSpinState, pckOrientation, spinOrientation, type BodyOrientation, type ObserverCamera, type ObserverSighting } from '../../../cameras/index.ts';
 import { limbCentre } from './registration-sweeps.ts';
 import { readingPole, spinRecordReading } from './spin-record-reading.ts';
 

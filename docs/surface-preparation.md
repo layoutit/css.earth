@@ -37,6 +37,7 @@ prepared background size and position; the runtime needs no special path.
 | Prepare solid-body imagery, scientific layers and meshes | [prepareTerrestrialLayers](../packages/bake/src/objects/layers/terrestrial/terrestrial-layers.ts) |
 | Compare retrieved atmospheric profiles with credible intervals | [Retrieved profile chart recipe](retrieved-profile-charts.md) |
 | Sample a pressure level from a numeric longitude/latitude table | [CSV slice reader](../packages/bake/src/objects/raster/lonlat-slice-table.ts): `lonlat-slice-table`, one-based `columns`, an exact `slice`, and a coordinate rounding tolerance. It validates periodic longitude and complete cells; latitude coverage ends at the released samples. [WASP-103 b](../src/objects/wasp-103b/README.md) is the climate-model example. |
+| Read one field of a released model run from NetCDF | [NetCDF field reader](../packages/bake/src/objects/raster/netcdf/netcdf-lonlat-field.ts): `netcdf-lonlat-field`, a `variable`, its two `coordinates`, a `select` index for every other dimension, the `sourceUnits` the file must state and `longitudeZeroAt`, the grid longitude of the body's zero meridian. It reads classic NetCDF (CDF-1, CDF-2, CDF-5) from the file's own byte ranges and refuses NetCDF-4 by name. A release of gigabytes is kept as two exact byte ranges the manifest declares: `path` is its first bytes (the header and coordinates) and `field` the bytes of the selected grid, which the header must place at the declared range. It validates periodic longitude, reading once a first meridian the grid stores at both ends; latitude coverage ends at the released rows and cells at the fill value stay without a value. `new-object --simulation` writes the recipe from an entry ([simulation-dataset.mts](../packages/telescope-cli/src/new-object/simulation/simulation-dataset.mts)). |
 | Add or restyle scientific charts | [Chart recipes catalog](chart-recipes.md) |
 | Record which inputs each dataset reads | [Lineage bindings](../packages/bake/src/objects/lineage/lineage-recipes.ts) and [the body reader](../packages/bake/src/objects/lineage/body-lineage.ts) |
 
@@ -273,7 +274,7 @@ The focused tests compare decoder results with Astropy and NASA's PDS4 reader;
 neither runs in the application. The shared oracle reader checks declared paths
 and recorded byte counts, not manifest hashes. The Charon spectral-map test
 also compares regenerated maps with its retained reference outputs.
-The [test-only Pallas acquisition record](../packages/bake/src/objects/layers/observation/fixtures/fits/archive-inputs.json)
+The [test-only Pallas acquisition record](../packages/fits/src/node/fixtures/fits/archive-inputs.json)
 names the four native files, sizes and source URLs independently of production
 body acquisition. They are restored under ignored `.local/fits-reference/`;
 no Pallas body recipe or surface output changes here.

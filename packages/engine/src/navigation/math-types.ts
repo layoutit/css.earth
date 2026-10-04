@@ -11,6 +11,4 @@ export interface TrackballMetrics {
   angularDegreesPerTrackballRadius?: number; pitchResponse?: number;
   tumbleOnly?: boolean;
 }
-export interface PitchCalibration {
-  defaultControlPitchDegrees: number; maximumControlPitchDegrees: number; initialScenePitchDegrees: number; maximumScenePitchDegrees: number;
-}
+export type { PitchCalibration } from '@cssearth/core';

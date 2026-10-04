@@ -11,6 +11,7 @@
  * snapshot and writes the source manifest. The astronomy record is written without elements; run
  * `node packages/astronomy/cli/generate-asteroids.mts --object=<ids>` next, then `node packages/bake/cli/prepare-object.mts <id>`.
  */
+import { authorPath } from './paths.mts';
 import { OBJECT_CONTENT_SCHEMA, OBJECT_CONTENT_VERSION, SOURCE_MANIFEST_SCHEMA, NEUTRAL_CATALOGUE_COLOR, PREPARED_CSS_OBJECT_FORMAT, OBJECT_TEXT_SCHEMA, INVESTIGATION_LEDGER_SCHEMA, ACQUISITION_PLAN_SCHEMA } from '@cssearth/objects';
 
 import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
@@ -19,14 +20,12 @@ import sharp from 'sharp';
 import { createSourceManifest } from '@cssearth/objects/node';
 
 import { ENTRY_EVIDENCE } from '@cssearth/bake/sources';
-import { shapeMaterialRaster, renderRadialSnapshot } from '@cssearth/bake/objects/layers/terrestrial';
+import { shapeMaterialRaster, renderRadialSnapshot, loadRadialTerrain } from '@cssearth/bake/objects/layers/terrestrial';
 import { elementsUrl, vectorsUrl } from '../../../../packages/astronomy/cli/lib/horizons.mts';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { loadPdsPlateShape, requireTerrainMesh, simplifyRadialShape } from '@cssearth/bake/objects/geometry';
-import { loadRadialTerrain } from '@cssearth/bake/objects/layers/terrestrial';
 
-const ROOT = resolve(import.meta.dirname, '../../../..');
-if (process.cwd() !== ROOT) throw new Error('Run from the repository root.');
+const ROOT = authorPath();
 const TEMPLATE = 'achilles';
 const EPOCH_JD = 2461286.5, AU_KM = 149597870.7, OBLIQUITY_DEGREES = 23.439291111;
 const DAMIT = 'https://damit.cuni.cz/projects/damit';
@@ -51,7 +50,7 @@ interface Body {
 }
 
 const args = process.argv.slice(2);
-const inputsPath = args.find(arg => arg.startsWith('--inputs='))?.slice(9) ?? 'packages/bake/authoring/damit-asteroids/inputs.json';
+const inputsPath = authorPath(args.find(arg => arg.startsWith('--inputs='))?.slice(9) ?? 'packages/bake/authoring/damit-asteroids/inputs.json');
 const only = args.find(arg => arg.startsWith('--object='))?.slice(9);
 const inputs = requireRecord(JSON.parse(await readFile(inputsPath, 'utf8')));
 /** The date the current body's sources were checked: its own `checked`, else the table's. */
@@ -105,7 +104,7 @@ function parseIdentifier(value: unknown) {
 
 /** Write a catalogue record for a cited work that has none yet; its evidence names the citing file and locator. */
 async function ensureRecord(source: RecordSource & { url: string; label: string }, citingPath: string, locator: string) {
-  const path = resolve('src/sources', `${source.catalogueId}.json`);
+  const path = authorPath('src/sources', `${source.catalogueId}.json`);
   if (await readFile(path).catch(() => null)) return;
   await write(path, json({ id: source.catalogueId, kind: source.kind, identityLevel: 'work', title: source.title,
     identifiers: source.identifier ? [source.identifier] : [], links: [{ role: 'landing', url: source.url, label: source.label }],
@@ -115,7 +114,7 @@ async function ensureRecord(source: RecordSource & { url: string; label: string 
 
 const json = (value: unknown) => JSON.stringify(value, null, 2) + '\n';
 const write = async (path: string, value: string | Buffer) => { await mkdir(dirname(path), { recursive: true }); await writeFile(path, value); };
-const cacheDirectory = resolve('output/damit-asteroids/downloads');
+const cacheDirectory = authorPath('output/damit-asteroids/downloads');
 async function download(url: string, name: string) {
   const cached = resolve(cacheDirectory, name);
   const existing = await readFile(cached).catch(() => null);
@@ -177,7 +176,7 @@ const sourceEntry = (catalogueId: string, url: string, label: string, locator: s
 
 async function authorBody(body: Body) {
   const { id, name, number, model, calibration } = body;
-  const pkg = resolve('src/objects', id), src = resolve(pkg, 'source'), template = resolve('src/objects', TEMPLATE);
+  const pkg = authorPath('src/objects', id), src = resolve(pkg, 'source'), template = authorPath('src/objects', TEMPLATE);
   const modelUrl = `${DAMIT}/asteroid_models/view/${model.id}`, shapeUrl = `${DAMIT}/stored_files/open/${model.shapeFile}/shape.txt`;
   const spinUrl = model.spinFile === undefined ? undefined : `${DAMIT}/stored_files/open/${model.spinFile}/${model.spinFileName ?? 'IAUspin.txt'}`;
   const shapePath = `shape/model-${model.id}.txt`, spinPath = `reference/${model.id}-IAUspin.txt`;
@@ -386,7 +385,7 @@ async function authorBody(body: Body) {
     prepared: { format: PREPARED_CSS_OBJECT_FORMAT, url: 'prepared/object.json' },
   };
   await write(resolve(pkg, 'object.json'), json(object));
-  const astronomyPath = resolve('packages/astronomy/data/bodies', `${id}.json`);
+  const astronomyPath = authorPath('packages/astronomy/data/bodies', `${id}.json`);
   const existingAstronomy = await readFile(astronomyPath, 'utf8').catch(() => null);
   if (!existingAstronomy) await write(astronomyPath, json({ id, classification: 'asteroid', physical: { name, horizonsCode: command, meanRadiusKm: radiusKm, gravitationalParameterKm3PerS2: 0, parent: 'sun' },
     physicalNotes: 'Published shape models with documented physical size calibration.', acquisition: { heliocentric: { target: command, model: 'asteroid' } } }));

@@ -1,5 +1,5 @@
-import { parseLabModelJson } from '../../resources/model-paths.ts';
 /** Copy a pinned rectangular float32 density window without interpolation or normalization. */
+import { parseLabModelJson } from '../../resources/model-paths.ts';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, relative, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';

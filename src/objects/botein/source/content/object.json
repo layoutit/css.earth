@@ -41,7 +41,7 @@
       {
         "id": "color",
         "label": "Color",
-        "qualification": "Color from its measured spectrum. The disc itself is unresolved.",
+        "qualification": "Color from its measured spectrum. The disc itself is unresolved; darkening toward the edge from a model atmosphere.",
         "thumbnail": "botein-dataset-color.webp",
         "surface": "botein-surface-color@2x.webp",
         "poles": "botein-poles-color@2x.webp",
@@ -51,7 +51,7 @@
           "url": "https://archive.stsci.edu/pub/hlsp/stisngsl/v2/hd019787/h_stis_ngsl_hd019787_v2.fits"
         },
         "falseColor": false,
-        "notes": "The color of the star's measured spectrum (HST/STIS Next Generation Spectral Library v2 (Heap & Lindler; MAST high-level science product), HD 19787). No limb darkening is drawn: no mass is measured and no spectroscopic surface gravity is published with this radius: McDonald, Zijlstra & Watson (2017), MNRAS 471, 770 assume the gravity of their fit (table column 15). The spin axis's direction on the sky is a display convention."
+        "notes": "The color of the star's measured spectrum (HST/STIS Next Generation Spectral Library v2 (Heap & Lindler; MAST high-level science product), HD 19787). The spin axis's direction on the sky is a display convention. The darkening toward the edge is the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 4,921 K and log g 2.36 (u1 0.646, u2 0.135): a model, because no fit of this star's limb is used."
       }
     ]
   },

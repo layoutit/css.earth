@@ -1,5 +1,5 @@
-import { validateBounds } from './bounds.ts';
 /** Offline display-volume reconstruction from an exactly partitioned photograph. */
+import { validateBounds } from './bounds.ts';
 import type { FilledComponent, FilledComponentsResult } from './filled-components.ts';
 import type { FilledVolumePart } from './filled-parts.ts';
 

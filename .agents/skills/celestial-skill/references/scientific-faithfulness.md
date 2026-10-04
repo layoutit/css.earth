@@ -91,12 +91,21 @@ measured map need not stay a neutral sphere.
 - Show it as a dataset of its own. Its visible description names the model, the
   paper and the scenario the run assumes: the atmosphere, surface and rotation it
   was given. When nobody has detected that atmosphere, say so.
-- The default view stays the measured one, or the neutral one where nothing is
-  measured. Never blend simulated structure into a measured dataset, and never use
-  it to fill a gap in one.
+- A planet opens on the best dataset it has: a measured map or image first, then a
+  published simulation, then one color over the whole body, and the neutral shape
+  last. So a simulation is the default view where nothing measured is drawn as a
+  map, and it says it is a model there as plainly as anywhere. Never blend simulated
+  structure into a measured dataset, and never use it to fill a gap in one.
 - Use the released numbers: the quantity, units, grid and time averaging the
   release states, with a legend in those units. A temperature map in false color
   is not what an eye would see.
+- A time mean is the one the release wrote. A file of instants gives one instant,
+  and the dataset says which. Pick the quantity that carries the pattern: under
+  ten bars of steam the surface temperature is uniform to a few kelvin, while the
+  outgoing radiation holds the day and night contrast.
+- Do not show a scenario that a measurement of the object contradicts, such as a
+  thick atmosphere on a planet whose measured dayside is as hot as bare rock.
+  Where a measurement leaves the scenario open, say what it found.
 - When several models of the same case are published, show one and name it, and
   state how far the others differ. Do not average models.
 - Draw only what is visible at the size the body is shown. A pattern that spans

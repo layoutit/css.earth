@@ -248,7 +248,7 @@ test('a repository rule has no baseline: any finding breaks the check and is pri
   assert.equal(isBroken(found), true);
   assert.doesNotMatch(formatFindings(clean), /broken/u);
   assert.match(formatFindings(found), /no-x: 1 findings[\s\S]*Repository rules broken:[\s\S]*\n {4}a\/x$/u);
-  assert.deepEqual(REPOSITORY_RULES.map(item => item.id), ['site-build-format-readers', 'bake-without-renderer', 'format-schema-ownership', 'preparation-without-renderer', 'workspace-package-cycles', 'integration-owners', 'retired-folders', 'objects-hold-data', 'nebula-boundaries', 'declared-dependencies', 'pre-install-imports'], 'package cycles, retired folders, data-only object packages, the nebula boundaries, declared workspace dependencies and pre-install imports are the repository rules');
+  assert.deepEqual(REPOSITORY_RULES.map(item => item.id), ['authoring-policies', 'site-build-format-readers', 'bake-without-renderer', 'format-schema-ownership', 'preparation-without-renderer', 'workspace-package-cycles', 'integration-owners', 'retired-folders', 'objects-hold-data', 'nebula-boundaries', 'declared-dependencies', 'pre-install-imports'], 'package cycles, retired folders, data-only object packages, the nebula boundaries, declared workspace dependencies and pre-install imports are the repository rules');
 });
 
 test('a script or Astro module inside an object package is a finding; its data is not', () => {
@@ -357,6 +357,12 @@ test('retired root tests and dependent integration owners fail without a baselin
     write('packages/c/package.json', '{"name":"@x/c","dependencies":{"@x/a":"workspace:*"}}');
     write('integration/example.test.mts', "import '@x/a'; import '@x/b';\n");
     assert.equal(broken(), false, 'independent owners are green');
+    write('packages/objects/package.json', '{"name":"@cssearth/objects"}');
+    write('packages/astronomy/package.json', '{"name":"@cssearth/astronomy"}');
+    write('integration/example.test.mts', "import '@cssearth/objects'; import '@cssearth/astronomy';\n");
+    assert.equal(broken(), true, 'objects is shared: objects plus astronomy is still one independent owner');
+    write('integration/example.test.mts', "import '@x/a'; import '@x/b';\n");
+
     write('tests/new.mts', 'export {};');
     assert.equal(broken(), true, 'an untracked root tests file is red');
     execFileSync('git', ['add', 'tests/new.mts'], { cwd: root });
@@ -485,8 +491,11 @@ test('manifest cycles fail without a baseline across all dependency fields', () 
 
 test('objects format folder allow-list rejects a new algorithm folder, including an empty one', () => {
   const root = mkdtempSync(join(tmpdir(), 'object-format-folders-'));
+  mkdirSync(join(root, '.github/scripts/architecture/ratchets'), { recursive: true });
   const check = () => REPOSITORY_RULES.find(rule => rule.id === 'objects-hold-data')!.check(root, []);
   try {
+    mkdirSync(join(root, '.github/scripts/architecture'), { recursive: true });
+    writeFileSync(join(root, '.github/scripts/architecture/ratchets/source-ratchets.json'), JSON.stringify({ objects: { ceiling: 0, entries: {} }, cwd: { ceiling: 0, entries: {} } }));
     for (const folder of OBJECT_FORMAT_FOLDERS) mkdirSync(join(root, 'packages/objects/src', folder), { recursive: true });
     assert.deepEqual(check(), []);
     const fake = join(root, 'packages/objects/src/fake-algorithm');

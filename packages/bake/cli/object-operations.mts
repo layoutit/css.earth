@@ -5,4 +5,5 @@ import { runOperations } from '@cssearth/bake/objects/acquisition';
 
 const [mode, id, ...args] = process.argv.slice(2);
 if (!mode || !id) throw new TypeError('Usage: object-operations.mts <acquire|verify|manifest|assemble> <id>');
-console.log(JSON.stringify(await runOperations(mode, id, args)));
+// The command runs in the checkout it is started in (a fixture checkout holds its own copy of this script), so the root is the working directory.
+console.log(JSON.stringify(await runOperations(mode, id, args, process.cwd())));

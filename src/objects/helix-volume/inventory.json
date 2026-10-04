@@ -22,8 +22,8 @@
     {
       "location": "prepared",
       "filename": "datasets.json",
-      "bytes": 1490233,
-      "sha256": "f544b633704331cc3ddfb4937ceac18a58a210155ae1abdab8cf37dc7b82ded3"
+      "bytes": 9575,
+      "sha256": "d434403f0ef80780c067daa37eaaf206dc07309387fc0c731162bf0b610b3554"
     },
     {
       "location": "prepared",
@@ -207,6 +207,12 @@
     },
     {
       "location": "prepared",
+      "filename": "eso-vista/volume.json",
+      "bytes": 161389,
+      "sha256": "a5899ebb6b1190a3ea022bd22e5b04231324e6649c99b38bc0b7595fe5171faf"
+    },
+    {
+      "location": "prepared",
       "filename": "eso-wfi/atlases/x.webp",
       "bytes": 393726,
       "sha256": "36ddffe8788d8ec0a94c153c58b7a30989d2e5735e1ecf434d925b122a364962"
@@ -378,6 +384,12 @@
       "filename": "eso-wfi/impostors/view-ppp.png",
       "bytes": 19940,
       "sha256": "44a4142e63cb02bd22022c1c33c3f4ac1d8c3a9d46f3cf8b85c38ddd216405d5"
+    },
+    {
+      "location": "prepared",
+      "filename": "eso-wfi/volume.json",
+      "bytes": 160667,
+      "sha256": "008bd0a40878ce873dce00d21974ba853eae1d0fe28ea5b48c41c1f13d7477a3"
     },
     {
       "location": "prepared",
@@ -555,9 +567,27 @@
     },
     {
       "location": "prepared",
+      "filename": "eso-wide/volume.json",
+      "bytes": 161028,
+      "sha256": "bd40dee4e20838855b74daa5444f903945f0c45b03f9fbfe96b29242d48b248e"
+    },
+    {
+      "location": "prepared",
       "filename": "presentation.json",
       "bytes": 4746,
       "sha256": "657df0f0be6d47085e689498f7a26f7d57eacb3dd0e61c2eb6da19593fffe86d"
+    },
+    {
+      "location": "prepared",
+      "filename": "record.json",
+      "bytes": 8167,
+      "sha256": "c0dad2d36c53e970b4fdb948bf8f1546f2a2b3de57bc567a1a36ca4e6798b628"
+    },
+    {
+      "location": "prepared",
+      "filename": "stars.bin",
+      "bytes": 79489,
+      "sha256": "188eb61e38c99c9b27581872634e166b19bc2dc25b564e7641b712807f39075e"
     }
   ]
 }

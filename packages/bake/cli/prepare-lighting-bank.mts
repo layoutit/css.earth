@@ -4,6 +4,7 @@
  *   node packages/bake/cli/prepare-lighting-bank.mts [--check] [<bank>...]
  *
  * Every bank by default. */
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 import '@cssearth/bake/thread-pool';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -11,7 +12,7 @@ import { LIGHTING_BANKS, LIGHTING_BANK_ROOT, bakeLightingBank, checkLightingBank
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
   const args = process.argv.slice(2), check = args.includes('--check'), ids = args.filter(arg => arg !== '--check');
-  const root = process.cwd();
+  const root = checkoutProjectRoot(import.meta.url);
   for (const id of ids.length ? ids : Object.keys(LIGHTING_BANKS)) {
     if (check) {
       const result = await checkLightingBank(id, root);

@@ -1,0 +1,40 @@
+{
+  "id": "source-wasp-17b-temperature-map",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "WASP-17 b · wasp 17b temperature map",
+  "identifiers": [
+    {
+      "type": "pds4-lidvid",
+      "value": "ThERESA/eclipse_mapping_l2n2_model/tmap.pkl"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://zenodo.org/records/12571830/files/ThERESA.zip?download=1",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/wasp-17b/source/manifest.json",
+      "locator": "/inputs/8"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Valentine et al. (2024); JWST MIRI, one eclipse on 14 March 2023",
+      "scope": "The wasp 17b temperature map input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "CC BY 4.0",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

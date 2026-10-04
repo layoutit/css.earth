@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "svf2019-ngc-4736-1",
+  "card": {
+    "text": "A luminous blue variable in the galaxy M94, about three million times as luminous as the Sun.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-1901-05277",
+        "url": "https://arxiv.org/abs/1901.05277",
+        "label": "Solovyeva et al. (2019)",
+        "checked": "2026-10-04",
+        "locator": "section 3.1, NGC 4736_1: T, log(L_bol/L_sun), Delta V"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Solovyeva et al. (2019) found it by its spectrum and saw its light change by 1.1 magnitudes from 2005 to 2018. They estimate its temperature at 18,000 K.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-1901-05277",
+        "url": "https://arxiv.org/abs/1901.05277",
+        "label": "Solovyeva et al. (2019)",
+        "checked": "2026-10-04",
+        "locator": "section 3.1, NGC 4736_1: T, log(L_bol/L_sun), Delta V"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its temperature",
+      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

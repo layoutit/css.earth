@@ -21,4 +21,3 @@ test('the summary surface.jl writes is read back, and a truncated one is refused
   assert.throws(() => parseSurfaceSummary('tiles=3072\n'), /lacks visible_tiles/u);
   assert.throws(() => parseSurfaceSummary('tiles=many\n'), /Unreadable/u);
 });
-

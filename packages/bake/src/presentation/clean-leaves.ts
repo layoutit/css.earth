@@ -1,5 +1,5 @@
 import { rebuildPropertyTable } from './property-table.ts';
-import { isRecord as coreIsRecord } from '@cssearth/core';
+import { isRecord as record } from '@cssearth/core';
 import { scanCssDeclarations } from './css-declaration-scanner.ts';
 
 // Clean prepared nodes (the last step of the presentation bindings, prepared-presentation-bindings.ts, and of the node
@@ -40,14 +40,16 @@ export function preparedPropertyName({ name, custom }: Pick<Property, 'name' | '
   if (custom || name.startsWith('--')) return name.startsWith('--') ? name : name.toLowerCase();
   return name.replace(/^(webkit|moz|ms)(?=[A-Z])/, '-$1').replace(/[A-Z]/g, letter => `-${letter.toLowerCase()}`);
 }
+// Native names fold to lower case; custom names keep case. Colon-at-zero and colonless fragments are rejected.
+const CLEAN_DECLARATION_NAME = (name: string) => name.startsWith('--') ? name : name.toLowerCase();
 /** A static style's declarations, split where CSS splits them: not inside quotes or parentheses (URLs). */
-function declarations(style: string) {
+function declarations(style: string, declarationName = CLEAN_DECLARATION_NAME) {
   const parts: { name: string; text: string }[] = [];
   for (const text of scanCssDeclarations(style)) {
     const colon = text.indexOf(':');
     if (colon < 1) throw new TypeError(`Prepared CSS declaration is invalid: ${text}`);
     const name = text.slice(0, colon).trim();
-    parts.push({ name: name.startsWith('--') ? name : name.toLowerCase(), text });
+    parts.push({ name: declarationName(name), text });
   }
   return parts;
 }
@@ -114,7 +116,6 @@ export function withoutCleanLeaves<D extends { tree: Tree }>(definition: D): D {
 
 /** withoutCleanLeaves for a value read from disk: checks the shape it reads before expanding, so a reader needs no cast. */
 export function expandCleanLeaves(value: unknown): unknown {
-  const record = coreIsRecord;
   if (!record(value) || !record(value.tree) || !Array.isArray(value.tree.nodes) || !Array.isArray(value.tree.properties)) return value;
   return withoutCleanLeaves(value as unknown as { tree: Tree });
 }

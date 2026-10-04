@@ -4,7 +4,7 @@
  *
  * Its bootstrap closure imports only Node built-ins: `packages/bake/cli/check-stale-builds.mts` loads this file from source, so the check still
  * runs, and `--run` still rebuilds, when this package's own build is missing or stale. */
-import { readWorkspaceGraph, workspaceOrder, hasBuild, buildOutput } from './workspace-graph.ts';
+import { readWorkspaceGraph, workspaceOrder, hasBuild, buildOutput, findWorkspaceRoot } from './workspace-graph.ts';
 import { spawn } from 'node:child_process';
 import { readdir, readFile, stat } from 'node:fs/promises';
 import { relative, resolve } from 'node:path';
@@ -18,7 +18,7 @@ export async function anyChangedAfter(paths: readonly string[], time: number) {
 /** `inputs` names the bundler's metafile: every file the last build read counts as a source, so an import from outside the
  * declared directories (src/platform, a site module) still marks the bundle stale. `base` is the directory tsup ran from,
  * which the metafile's input paths are relative to. */
-export interface BuildRule { readonly name: string; readonly command: string; readonly sources: readonly string[]; readonly output: string; readonly inputs?: string; readonly base?: string }
+export interface BuildRule { readonly name: string; readonly command: string; readonly sources: readonly string[]; readonly output: string; readonly additionalOutputs?: readonly string[]; readonly inputs?: string; readonly base?: string }
 
 /** The builds preparation tools import. Sources are directories scanned for TypeScript, JSON body records or generator scripts.
  * A package's rule follows the rules of the workspace packages it depends on (its package.json `dependencies`), since --run
@@ -26,10 +26,10 @@ export interface BuildRule { readonly name: string; readonly command: string; re
 const BUILD_METADATA: readonly (Partial<BuildRule> & Pick<BuildRule, 'name'> & { bundledWorkspace?: boolean })[] = [
   { name: '@cssearth/astronomy', sources: ['packages/astronomy/src', 'packages/astronomy/data/bodies', 'packages/astronomy/cli'] },
   // Declaration stubs are written after tsc succeeds; a failed declaration build must read stale.
-  { name: '@cssearth/bake', output: 'packages/bake/dist/volume.d.ts', inputs: 'packages/bake/dist/metafile-esm.json', base: 'packages/bake' },
+  { name: '@cssearth/bake', output: 'packages/bake/dist/volume.js', additionalOutputs: ['packages/bake/dist/volume.d.ts'], inputs: 'packages/bake/dist/metafile-esm.json', base: 'packages/bake' },
   { name: '@cssearth/renderer', inputs: 'packages/renderer/dist/metafile-esm.json', base: 'packages/renderer' },
-  { name: '@cssearth/volume-viewer', sources: ['packages/volume-viewer/src', 'packages/bake/src'], output: 'packages/volume-viewer/dist/scene/compiler-viewer.js' },
-  { name: '@cssearth/telescope-cli', output: 'packages/telescope-cli/dist/telescope.mjs', bundledWorkspace: true },
+  { name: '@cssearth/volume-viewer', sources: ['packages/volume-viewer/src'], output: 'packages/volume-viewer/dist/scene/compiler-viewer.js' },
+  { name: '@cssearth/telescope-cli', sources: ['packages/telescope-cli/src', 'packages/telescope-cli/src/sphere'], output: 'packages/telescope-cli/dist/telescope.mjs', additionalOutputs: ['packages/telescope-cli/dist/sphere-lane.js'], bundledWorkspace: true },
 ];
 
 export function buildRules(root: string): readonly BuildRule[] {
@@ -43,7 +43,10 @@ export function buildRules(root: string): readonly BuildRule[] {
   });
 }
 
-export const BUILD_RULES = Object.freeze(buildRules(process.cwd()));
+/** The checkout this module lives in, whatever the working directory (A159). */
+const BOOTSTRAP_ROOT = findWorkspaceRoot();
+
+export const BUILD_RULES = Object.freeze(buildRules(BOOTSTRAP_ROOT));
 
 const SOURCE = /\.(?:ts|mts|json)$/u, SKIP = new Set(['dist', 'node_modules']);
 
@@ -73,11 +76,13 @@ async function metafileInputs(root: string, rule: BuildRule): Promise<string[] |
   return Object.keys(inputs).map(path => relative(root, resolve(base, path))).filter(path => !path.startsWith('..') && !path.includes('node_modules'));
 }
 
-export async function staleBuilds(root = process.cwd(), rules: readonly BuildRule[] = BUILD_RULES) {
+export async function staleBuilds(root = BOOTSTRAP_ROOT, rules: readonly BuildRule[] = BUILD_RULES) {
   const stale: { name: string; command: string; reason: string }[] = [];
   for (const rule of rules) {
-    const output = await stat(resolve(root, rule.output)).catch(() => null);
-    if (!output) { stale.push({ name: rule.name, command: rule.command, reason: `${rule.output} is missing` }); continue; }
+    const outputs = await Promise.all([rule.output, ...rule.additionalOutputs ?? []].map(async path => ({ path, info: await stat(resolve(root, path)).catch(() => null) })));
+    const missing = outputs.find(output => !output.info);
+    if (missing) { stale.push({ name: rule.name, command: rule.command, reason: `${missing.path} is missing` }); continue; }
+    const output = outputs.reduce((oldest, candidate) => candidate.info!.mtimeMs < oldest.info!.mtimeMs ? candidate : oldest);
     let source = 0, newestPath = '';
     for (const path of rule.sources) { const time = await newest(resolve(root, path)); if (time > source) { source = time; newestPath = path; } }
     const inputs = await metafileInputs(root, rule);
@@ -86,7 +91,7 @@ export async function staleBuilds(root = process.cwd(), rules: readonly BuildRul
       const time = (await stat(resolve(root, path)).catch(() => null))?.mtimeMs ?? Infinity;
       if (time > source) { source = time; newestPath = path; }
     }
-    if (source > output.mtimeMs) stale.push({ name: rule.name, command: rule.command, reason: `${newestPath} changed after ${relative(root, resolve(root, rule.output))} was built` });
+    if (source > output.info!.mtimeMs) stale.push({ name: rule.name, command: rule.command, reason: `${newestPath} changed after ${relative(root, resolve(root, output.path))} was built` });
   }
   return stale;
 }
@@ -94,7 +99,7 @@ export async function staleBuilds(root = process.cwd(), rules: readonly BuildRul
 /** Rebuild only what is stale, in rule order, so a dependent build never runs before its dependency. */
 /** Run one build command through the shell with the caller's terminal, so a long build streams its output and no output
  * size can fail it; resolves when it exits 0 and rejects with its exit status otherwise. */
-export function runBuildCommand(command: string, cwd = process.cwd()): Promise<void> {
+export function runBuildCommand(command: string, cwd = BOOTSTRAP_ROOT): Promise<void> {
   return new Promise((done, fail) => {
     const child = spawn(command, { cwd, shell: true, stdio: 'inherit' });
     child.once('error', fail);
@@ -102,7 +107,7 @@ export function runBuildCommand(command: string, cwd = process.cwd()): Promise<v
   });
 }
 
-export async function rebuildStale(root = process.cwd(), rules: readonly BuildRule[] = BUILD_RULES,
+export async function rebuildStale(root = BOOTSTRAP_ROOT, rules: readonly BuildRule[] = BUILD_RULES,
   run: (command: string) => Promise<void> = command => runBuildCommand(command, root)) {
   const stale = await staleBuilds(root, rules);
   for (const build of stale) {

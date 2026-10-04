@@ -1,5 +1,7 @@
+import { setupBakeOracleInputs } from '../../../cameras/oracle-inputs.mts';
+await setupBakeOracleInputs();
 import assert from 'node:assert/strict';
-import { sourceLoad, sourceTest } from '@cssearth/objects/node/source-test';
+import { sourceLoad, sourceTest, sourceValues } from '@cssearth/objects/node/source-test';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { decodeOsirisGeo, decodeOsirisQuality, acceptOsirisQuality } from '@cssearth/bake/objects/layers/terrestrial';
@@ -16,8 +18,8 @@ const loaded = await sourceLoad(async () => {
   return { fixture, geoInput, qualityInput, geo, quality, planes };
 });
 const test = sourceTest(null, loaded);
-const { fixture, geoInput, qualityInput, geo, quality, planes } = loaded.values;
 test('the fixture is bound to the pinned OSIRIS products and their label identity', async () => {
+  const { fixture, geoInput, qualityInput, geo, quality, planes } = sourceValues(loaded);
   await assertPinnedInputs(fixture.inputs);
   const identity = requireRecord(fixture.cases.identity);
   assert.equal(geo.startTime, requireString(identity.START_TIME));
@@ -26,6 +28,7 @@ test('the fixture is bound to the pinned OSIRIS products and their label identit
 });
 
 test('every geometry plane matches the record-pointer reads exactly', () => {
+  const { fixture, geoInput, qualityInput, geo, quality, planes } = sourceValues(loaded);
   let compared = 0;
   for (const [name, raw] of Object.entries(planes('geometry'))) {
     const plane = requireRecord(raw);
@@ -39,6 +42,7 @@ test('every geometry plane matches the record-pointer reads exactly', () => {
 });
 
 test('the quality companion planes and flag histogram match', () => {
+  const { fixture, geoInput, qualityInput, geo, quality, planes } = sourceValues(loaded);
   const qualityPlanes = planes('quality'), histogram = requireRecord(fixture.cases.qualityHistogram);
   for (const { index, value } of sampleList(requireRecord(qualityPlanes.IMAGE).samples)) assert.equal(geo.planes.IMAGE[index], Math.fround(value), `radiance at ${index}`);
   for (const { index, value } of sampleList(requireRecord(qualityPlanes.QUALITY_MAP_IMAGE).samples)) assert.equal(quality.flags[index], value, `flag at ${index}`);

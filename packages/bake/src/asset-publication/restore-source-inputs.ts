@@ -1,3 +1,4 @@
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 import { hasErrorCode } from '@cssearth/core';
 import { lstat, mkdtemp, readFile, readdir, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
@@ -19,7 +20,7 @@ import { RUNTIME_ASSET_ORIGIN, fetchWithRetry, sourceCacheUrl, sourceFileFormatP
  * A repository volume file is written only when its bytes are the format its extension names (`sourceFormatProblem`), so a
  * publisher page answering HTTP 200 is refused rather than saved as the image.
  */
-export async function restoreSourceInputs(argumentsList: readonly string[], { root: projectRoot = process.cwd(), assetOrigin = RUNTIME_ASSET_ORIGIN } = {}) {
+export async function restoreSourceInputs(argumentsList: readonly string[], { root: projectRoot = checkoutProjectRoot(import.meta.url), assetOrigin = RUNTIME_ASSET_ORIGIN } = {}) {
   const repositoryVolumeMode = argumentsList.length === 1 && argumentsList[0] === '--repository-volumes';
 
   async function repositoryVolumeObjectIds(): Promise<string[]> {

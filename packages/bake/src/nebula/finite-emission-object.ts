@@ -1,32 +1,30 @@
-import { OBJECT_SCHEMA, PREPARED_OBJECT_SCHEMA, PREPARED_VOLUME_DATASETS_SCHEMA, parsePreparedLmcStars, cloudDensityWeight, validateCloudDensityFilter, type CloudDensityFilter, validatePreparedVolumeDatasets } from '@cssearth/objects';
-import { isRecord, isNonemptyText } from '@cssearth/core';
 /** Restore a delivered finite-emission dataset bank from its checked-in compact inputs; no lab, no research services. */
+import { readNonemptyText, isRecord } from '@cssearth/core';
+import { OBJECT_SCHEMA, PREPARED_OBJECT_SCHEMA, PREPARED_VOLUME_DATASETS_SCHEMA, PREPARED_VOLUME_DATASET_INDEX_SCHEMA, parsePreparedLmcStars, cloudDensityWeight, validateCloudDensityFilter, type CloudDensityFilter, validatePreparedVolumeDatasets } from '@cssearth/objects';
+import { readVolumeDatasetBank, writeVolumeDatasetBank } from '@cssearth/objects/node';
 import assert from 'node:assert/strict';
 import { mkdir, readFile, rename, rm, readdir } from 'node:fs/promises';
 import { gunzipSync } from 'node:zlib';
 import { resolve } from 'node:path';
-import { restoreCompactFiniteEmission, localPath, pinned, type Pin, writeAtomic } from '../volume/node/index.ts';
-
+import { restoreCompactFiniteEmission, localPath, pinned, type CompilerPin, writeAtomic } from '../volume/node/index.ts';
 import { compileCssVolume, prepareVolumeImpostors } from '../volume-leaves/index.ts';
 import { prepareVolumeAtlases } from '../density/index.ts';
 
 const record = (value: unknown, at: string): Record<string, unknown> => { assert.ok(isRecord(value), `Expected an object: ${at}`); return value; };
-const text = (value: unknown, at: string): string => { assert.ok(isNonemptyText(value), `Expected text: ${at}`); return value; };
 const json = (bytes: Uint8Array, gzipped: boolean): unknown => JSON.parse((gzipped ? gunzipSync(bytes) : Buffer.from(bytes)).toString('utf8'));
 const stringify = (value: unknown) => Buffer.from(JSON.stringify(value, null, 2) + '\n');
-function parsePin(value: unknown, at: string): Pin {
+function parsePin(value: unknown, at: string): CompilerPin {
   const pin = record(value, at);
-  return { path: text(pin.path, `${at} path`) };
+  return { path: readNonemptyText(pin.path, `${at} path`, () => assert.fail(`Expected text: ${at} path`)) };
 }
-const read = async (root: string, pin: Pin) => json(await pinned(root, pin), pin.path.endsWith('.gz'));
+const read = async (root: string, pin: CompilerPin) => json(await pinned(root, pin), pin.path.endsWith('.gz'));
 
 /** True when the descriptor names a prepared bank and every texture it lists is present at its recorded size. */
 async function deliveredBankVerified(directory: string, installed: string): Promise<boolean> {
   try {
     const descriptor = record(JSON.parse(await readFile(resolve(directory, 'object.json'), 'utf8')), 'descriptor');
     record(descriptor.prepared, 'descriptor delivery');
-    const bytes = await readFile(resolve(installed, 'datasets.json'));
-    const data = validatePreparedVolumeDatasets(record(json(bytes, false), 'installed bank').data);
+    const data = await readVolumeDatasetBank(installed);
     for (const dataset of data.datasets) for (const resource of dataset.volume.resources) {
       const texture = await readFile(resolve(installed, resource.path));
       if (texture.length !== resource.bytes) return false;
@@ -47,9 +45,9 @@ function parseDensityFilter(value: unknown, at: string): CloudDensityFilter {
  * Regenerate `prepared/datasets.json`, its axis atlases and the descriptor from delivered inputs alone.
  * Slice textures are an intermediate: the delivery ships three atlases per dataset, as the other nebulae do.
  */
-export async function prepareFiniteEmissionObject(root: string, directory: string, compactInputs: Pin, ifMissing: boolean, allowMissing = false) {
+export async function prepareFiniteEmissionObject(root: string, directory: string, compactInputs: CompilerPin, ifMissing: boolean, allowMissing = false) {
   const inputs = record(await read(root, compactInputs), 'compact inputs');
-  const bankId = text(inputs.bankId, 'bank id'), defaultDataset = text(inputs.defaultDataset, 'default dataset');
+  const bankId = readNonemptyText(inputs.bankId, 'bank id', () => assert.fail(`Expected text: bank id`)), defaultDataset = readNonemptyText(inputs.defaultDataset, 'default dataset', () => assert.fail(`Expected text: default dataset`));
   const framingRadiusUnits = inputs.framingRadiusUnits;
   assert.ok(typeof framingRadiusUnits === 'number' && framingRadiusUnits > 0, 'A delivered bank needs a framing radius.');
   const frame = record(inputs.frame, 'delivered frame');
@@ -80,7 +78,7 @@ export async function prepareFiniteEmissionObject(root: string, directory: strin
       const starOptions = record(spec.stars, `${dataset.imageId} star presentation`);
       const size = starOptions.size, brightness = starOptions.brightness;
       assert.ok(typeof size === 'number' && typeof brightness === 'number', 'Delivered star presentation must be numeric.');
-      const enabledIds = Array.isArray(spec.enabledIds) ? spec.enabledIds.map(value => text(value, 'enabled part')) : [];
+      const enabledIds = Array.isArray(spec.enabledIds) ? spec.enabledIds.map(value => readNonemptyText(value, 'enabled part', () => assert.fail(`Expected text: enabled part`))) : [];
       assert.ok(enabledIds.length > 0, `${dataset.imageId} names no enabled cloud part.`);
 
       // The accepted bank embeds this dataset's own provenance, so the replay attaches the same pinned record.
@@ -122,15 +120,14 @@ export async function prepareFiniteEmissionObject(root: string, directory: strin
       const baked = await prepareVolumeAtlases({ volume: projected, prefix: `${dataset.imageId}/atlases`,
         readResource: path => readFile(localPath(staging, path)),
         writeResource: async (path: string, bytes: Uint8Array) => writeAtomic(localPath(staging, `atlases-out/${path}`), Buffer.from(bytes)) });
-      datasets.push({ id: dataset.imageId, label: text(presentation.label, 'dataset label'), title: text(presentation.label, 'dataset title'),
-        description: text(presentation.description, 'dataset description'), sourceUrl: presentation.sourceUrl,
+      datasets.push({ id: dataset.imageId, label: readNonemptyText(presentation.label, 'dataset label', () => assert.fail(`Expected text: dataset label`)), title: readNonemptyText(presentation.label, 'dataset title', () => assert.fail(`Expected text: dataset title`)),
+        description: readNonemptyText(presentation.description, 'dataset description', () => assert.fail(`Expected text: dataset description`)), sourceUrl: presentation.sourceUrl,
         volume: baked, brightness: datasetBrightness, stars: { frame: starsPayload.frame, points } });
     }
     const first = delivered.find(entry => entry.imageId === defaultDataset);
     assert.ok(first, 'The delivered default dataset is missing.');
     const data = validatePreparedVolumeDatasets({ schema: PREPARED_VOLUME_DATASETS_SCHEMA, id: bankId, defaultDataset, framingRadiusUnits,
       starsEnabled: Boolean(record(first.stars, 'default star presentation').enabled), datasets });
-    const envelope = stringify({ schema: PREPARED_OBJECT_SCHEMA, id: bankId, type: 'volume-dataset-bank', format: PREPARED_VOLUME_DATASETS_SCHEMA, data });
 
     await mkdir(installed, { recursive: true });
     // Replace each installed dataset directory; a rename onto a populated one fails, and a re-prepare is normal.
@@ -138,12 +135,13 @@ export async function prepareFiniteEmissionObject(root: string, directory: strin
       await rm(resolve(installed, entry), { recursive: true, force: true });
       await rename(resolve(staging, 'atlases-out', entry), resolve(installed, entry));
     }
-    await writeAtomic(resolve(installed, 'datasets.json'), envelope);
+    // The bank's files, after its dataset directories are in place: the index, one volume a dataset, the stars and the record.
+    await writeVolumeDatasetBank(installed, data);
     await writeAtomic(resolve(installed, 'delivery.json'), stringify({ schema: 'cssearth-finite-emission-delivery-receipt@2',
       compactInputs, datasets: receipts }));
     await writeAtomic(resolve(directory, 'object.json'), stringify({ schema: OBJECT_SCHEMA, id: bankId, type: 'volume-dataset-bank',
       properties: { frame, preparation: { source: 'source/compact-delivery.json' } },
-      prepared: { format: PREPARED_VOLUME_DATASETS_SCHEMA, url: 'prepared/datasets.json' } }));
+      prepared: { format: PREPARED_VOLUME_DATASET_INDEX_SCHEMA, url: 'prepared/datasets.json' } }));
     console.log(`DELIVERY_READY ${directory}: ${datasets.length} datasets, ${datasets.reduce((sum, dataset) => sum + dataset.volume.resources.length, 0)} atlases`);
     return { id: bankId, status: 'prepared' };
   } finally { await rm(staging, { recursive: true, force: true }); }

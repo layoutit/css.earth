@@ -3,7 +3,7 @@
  *
  *   node packages/telescope-cli/src/archives/jwst/klip/reduce.mts <program id> <band> <work directory> --raw <dir> [--max-rss-gib <n>]
  *
- * The program (klip/programs/<id>.json) pins the raw _uncal exposures by MAST URI and byte count, which observations are the
+ * The program (programs/<id>.json) pins the raw _uncal exposures by MAST URI and byte count, which observations are the
  * target and which the PSF reference star, and every setting of the published reduction with the page it is read from. The chain
  * is the one the authors ran (Balmer et al. 2025 for HR 8799, their public AF Lep b script for its shape): the jwst stage 1
  * and 2 pipelines through spaceKLIP, median and bad-pixel cleaning, NaN replacement, a Nyquist blur, padding, centring on a
@@ -20,8 +20,8 @@ import { freeMemoryPercent, toolchainPython, WORKSPACE } from '@cssearth/telesco
 import { archivePrograms } from '../../programs.mts';
 import { jwstToolchain } from '../toolchain.mts';
 
-/** The pinned programs sit beside this code, found through the checkout. */
-export const JWST_KLIP_PROGRAMS = archivePrograms('jwst/klip');
+/** The pinned programs share the JWST programs root, found through the checkout. */
+export const JWST_KLIP_PROGRAMS = archivePrograms('jwst');
 const PROGRAMS = resolve(WORKSPACE, JWST_KLIP_PROGRAMS.path);
 
 export interface KlipBand { readonly band: string; readonly science: readonly string[]; readonly references: readonly string[] }

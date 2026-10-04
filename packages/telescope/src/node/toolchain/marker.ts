@@ -2,9 +2,8 @@
  * asked to reinstall; the texts are compared whole, so no fingerprint of them is kept. */
 import { readFileSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
-import { requireRecord, requireString } from '@cssearth/core';
+import { requireRecord, requireString, MissingSourceInputError } from '@cssearth/core';
 import { TOOLCHAINS } from '../paths.js';
-import { MissingSourceInputError } from '@cssearth/core';
 
 export interface ToolchainPins { readonly id: string; readonly file: string; readonly descriptor: string; readonly lock: string | null; readonly entry: Record<string, unknown> }
 

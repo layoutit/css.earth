@@ -75,3 +75,21 @@ reads live commands, manifests, documentation, CI paths, generator literals and 
 specifiers. Historical records retain the old path with an adjacent `(now ...)`
 replacement; test fixture text is excluded through syntax, while actual test imports
 and process calls are checked. Extend the ledger when another owner is retired.
+
+`ratchets/authoring-policy.mts` rejects direct (including imported aliases and namespace calls)
+`combineBodyMaps` calls in telescope sources and both authoring roots. The exact HST
+slit-scan author is retained for trial-placement diagnostics; it publishes through
+`combineUnderPolicy`. The syntax check follows local aliases, namespace destructuring, element access and call/apply.
+The same rule compares CLI implementation exports with the committed
+`ratchets/cli-exports-baseline.json` allowance (derived from main, may only shrink): entries may export `main`
+or default implementations, but other exported functions, classes and value re-exports
+belong in `src/`. Existing entries cannot gain exports beyond their recorded allowance. The check needs
+no git refs or history and checks library surfaces rather than command-body complexity.
+
+The format/root source ratchets are in `ratchets/source-ratchets.json`. Each remaining objects numeric
+admission or ordering file and each working-directory command has a specific reason. New
+files fail and stale allowances must be removed. Committed ceilings limit entry counts
+without git history; tests pin each ceiling to its current count. Removing debt lowers
+the ceiling, while any increase requires an explicit reviewed ceiling change. Missing
+budget files fail in every checkout. Unit mutations prove math, sorting, root calls,
+and budget growth fail; tests and comments are excluded through the TypeScript syntax tree.

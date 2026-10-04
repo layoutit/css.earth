@@ -49,7 +49,7 @@
   },
   "datasets": {
     "titleKey": "datasets",
-    "defaultDataset": "shape",
+    "defaultDataset": "temperature",
     "controls": [
       {
         "id": "shape",
@@ -65,6 +65,66 @@
         },
         "falseColor": false,
         "notes": "No image or color of LHS 3844 b is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the color of lhs-3844's light, as its color dataset measures it."
+      },
+      {
+        "id": "temperature",
+        "label": "Spitzer",
+        "qualification": "Published fit · Kreidberg et al. (2019) · a Spitzer IRAC 4.5 µm phase curve (program 14204) · longitude only",
+        "thumbnail": "lhs-3844b-dataset-temperature.webp",
+        "surface": "lhs-3844b-surface-temperature@2x.webp",
+        "poles": "lhs-3844b-poles-temperature@2x.webp",
+        "source": {
+          "id": "lhs-3844b-temperature-phase-curve",
+          "path": "../manifest.json",
+          "url": "https://arxiv.org/abs/1908.06834"
+        },
+        "falseColor": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Brightness temperature",
+          "labels": [
+            "350",
+            "725",
+            "1100"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                13,
+                8,
+                135
+              ],
+              [
+                126,
+                3,
+                168
+              ],
+              [
+                204,
+                71,
+                120
+              ],
+              [
+                248,
+                149,
+                64
+              ],
+              [
+                240,
+                249,
+                33
+              ]
+            ],
+            "labels": [
+              "350",
+              "725",
+              "1100"
+            ]
+          },
+          "meta": "K",
+          "sourceUrl": "https://arxiv.org/abs/1908.06834"
+        },
+        "notes": "Brightness temperature at 4.5 µm of LHS 3844 b from Kreidberg et al. (2019)'s published fit to a Spitzer IRAC 4.5 µm phase curve (program 14204). Their Fourier series becomes a map of longitude through the Cowan & Agol (2008) inversion, so there is no north-south detail and every latitude is drawn alike. The hottest longitude is within 6° of noon, which the paper finds consistent with noon itself. Longitudes where the fit gives no emission are left blank. The false color runs from 350 to 1,100 K. With shadows on, the star's light darkens the night half."
       }
     ]
   },

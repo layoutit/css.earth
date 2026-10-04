@@ -33,6 +33,54 @@
           "source": "the color dataset of gj-1132 (src/objects/gj-1132/source/photometry/stellar-color.json)"
         }
       }
+    },
+    {
+      "id": "temperature",
+      "output": "gj-1132b-surface-{id}{suffix}.webp",
+      "thumbnail": "gj-1132b-dataset-{id}.webp",
+      "source": "science/xue-2024/dayside-5-12um.json",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "temperature",
+        "label": "Rock model",
+        "format": "bare-rock-eclipse",
+        "path": "science/xue-2024/dayside-5-12um.json",
+        "sampling": "bilinear",
+        "units": "K",
+        "planet": "gj-1132b",
+        "host": "gj-1132",
+        "band": {
+          "encoding": "throughput-columns",
+          "path": "science/valentine-2024/miri_throughput.dat",
+          "minimumMicrons": 5,
+          "maximumMicrons": 12
+        },
+        "star": {
+          "encoding": "svo-model-spectrum",
+          "path": "science/bt-settl-cifist/bt-settl-cifist-3200-5.0-0.0.xml"
+        },
+        "consumer": "gj-1132b-bare-rock-model",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "minimum": 50,
+        "maximum": 800,
+        "colors": [
+          "#0d0887",
+          "#7e03a8",
+          "#cc4778",
+          "#f89540",
+          "#f0f921"
+        ],
+        "labels": [
+          "≤ 50",
+          "425",
+          "800"
+        ],
+        "description": "A model, not a map: the temperature of a bare rock with no atmosphere to carry heat, set by the 5–12 µm eclipse depth Xue et al. (2024) measured: about 742 K under the star, nothing at night. Only the dayside brightness is measured.",
+        "title": "Bare-rock model · from Xue et al. (2024)'s eclipse depth",
+        "sourceUrl": "https://arxiv.org/abs/2408.13340"
+      }
     }
   ],
   "lighting": {

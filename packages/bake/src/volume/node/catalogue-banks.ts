@@ -1,11 +1,11 @@
+import { catalogueCells, cataloguePointSpread } from '../catalogue-points.ts';
 // Where a catalogue point bank lives. A recipe's `published: true` says the app fetches the bank: it goes to the object's
-// `prepared/` as a packed binary (`<id>.bin`, @cssearth/objects prepared-data/catalogue-bank-binary.ts) and its inventory, and must fit
+// `prepared/` as a packed binary (`<id>.bin`, @cssearth/objects prepared-data/catalogue/catalogue-bank-binary.ts) and its inventory, and must fit
 // what the app draws. Every other bank is a bake input for a later merge or
 // stack and stays in the repository's ignored `output/`, out of the inventory, R2 and the site's module graph.
 import { mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { basename, dirname, resolve } from 'node:path';
-import { CATALOGUE_POINTS_SCHEMA, MAX_CATALOGUE_POINTS, catalogueCells, cataloguePointSpread } from '@cssearth/objects';
-import { decodeCatalogueBankBinary, encodeCatalogueBankBinary } from '@cssearth/objects';
+import { CATALOGUE_POINTS_SCHEMA, MAX_CATALOGUE_POINTS, decodeCatalogueBankBinary, encodeCatalogueBankBinary } from '@cssearth/objects';
 import { inventoryPreparedAssets, packPreparedBinary, unpackPreparedBinary } from '@cssearth/objects/node';
 
 /** A bake input: `output/catalogue-points/<object>/<id>.json` under the repository root. */

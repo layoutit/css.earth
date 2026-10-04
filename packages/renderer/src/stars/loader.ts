@@ -1,10 +1,7 @@
-import { PREPARED_CSS_POINT_FIELD_MANIFEST_SCHEMA } from '@cssearth/objects';
-import { parseDensityVolumeFrame, parseObjectDescriptor, readPreparedObject } from '@cssearth/objects';
+import { PREPARED_CSS_POINT_FIELD_MANIFEST_SCHEMA, parseDensityVolumeFrame, parseObjectDescriptor, readPreparedObject, decodePreparedCssPointField, parsePreparedCssPointFieldManifest } from '@cssearth/objects';
 import { readPreparedBinary } from '../prepared-data/prepared-binary.js';
-import type { ObjectDescriptor } from '@cssearth/objects';
+import type { ObjectDescriptor, PreparedCssPointField, PreparedPointAppearance } from '@cssearth/objects';
 import type { PreparedCssTransport } from '../loader.js';
-import type { PreparedCssPointField, PreparedPointAppearance } from '@cssearth/objects';
-import { decodePreparedCssPointField, parsePreparedCssPointFieldManifest } from '@cssearth/objects';
 
 /** Loads one prepared point-field manifest and the binary column bank it names. Image
  * resources stay in the prepared asset bank. */
@@ -57,4 +54,3 @@ function parsePointFieldDescriptor(input: unknown): { readonly descriptor: Objec
   if (Object.keys(reference).length !== 1 || typeof reference.source !== 'string' || !reference.source || reference.source.startsWith('/') || reference.source.split('/').includes('..')) throw new TypeError('Point-field preparation reference is invalid.');
   return Object.freeze({ descriptor, frame: parseDensityVolumeFrame(properties.frame) });
 }
-

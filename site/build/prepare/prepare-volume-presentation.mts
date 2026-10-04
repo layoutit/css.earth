@@ -1,6 +1,6 @@
 import { readVolumeAttachment, readVolumePresentationPreviews, hasVolumePresentationSource, PREPARED_VOLUME_PRESENTATION_SCHEMA, validatePreparedImageLayerBank } from '@cssearth/objects';
 import { parseVolumePresentationSource, parseVolumeSourceManifest, readObjectContentDatasets } from '@cssearth/objects';
-import { isTrackedVolumeSourcePreview, type VolumeSourcePreview as Preview, type VolumePresentationSource as Presentation, PREPARED_VOLUME_DATASETS_SCHEMA, PREPARED_IMAGE_LAYER_BANK_SCHEMA, parseObjectDescriptor } from '@cssearth/objects';
+import { isTrackedVolumeSourcePreview, type VolumeSourcePreview as Preview, type VolumePresentationSource as Presentation, PREPARED_VOLUME_DATASET_INDEX_SCHEMA, PREPARED_IMAGE_LAYER_BANK_SCHEMA, parseObjectDescriptor } from '@cssearth/objects';
 import { sha256 } from '@cssearth/core/node';
 import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
@@ -22,7 +22,7 @@ import { RUNTIME_ASSET_ORIGIN, fetchWithRetry, sourceCacheUrl } from '@cssearth/
 import { DECORATIVE_WEBP } from '@cssearth/bake/raster';
 
 export const volumePresentationCompilerClosure = ['site/build/prepare/prepare-volume-presentation.mts', 'site/dataset-content.mts', 'packages/bake/src/sources/context-source-records.ts',
-  'packages/objects/src/prepared-data/volume-source-manifest.ts', 'packages/objects/src/prepared-data/volume-presentation-source.ts',
+  'packages/objects/src/prepared-data/source/volume-source-manifest.ts', 'packages/objects/src/prepared-data/source/volume-presentation-source.ts',
   'packages/telescope-cli/src/sky/sky-band-composite.mts', 'packages/bake/src/objects/raster/wise-atlas-mosaic.ts', 'packages/bake/src/objects/color/color-transfer.ts', 'packages/fits/src/fits.ts', 'packages/fits/src/node/file.ts', 'packages/bake/src/raster/lossy-lane.ts'] as const;
 
 const json = (bytes: Buffer): unknown => JSON.parse(bytes.toString('utf8'));
@@ -113,7 +113,7 @@ async function volumeSources(root: string, input: (path: string) => Promise<Buff
     const manifest = parseVolumeSourceManifest(json(await input(`${base}/source/manifest.json`)), { reader: 'presentation', objectId: record.objectId, policy: 'presentation-source' });
     const descriptor = parseObjectDescriptor(json(await input(`${base}/object.json`)));
     const format = descriptor.prepared?.format;
-    if (descriptor.id !== record.objectId || !((descriptor.type === 'volume-dataset-bank' && format === PREPARED_VOLUME_DATASETS_SCHEMA) ||
+    if (descriptor.id !== record.objectId || !((descriptor.type === 'volume-dataset-bank' && format === PREPARED_VOLUME_DATASET_INDEX_SCHEMA) ||
       (descriptor.type === 'image-layer-bank' && format === PREPARED_IMAGE_LAYER_BANK_SCHEMA && record.datasets.length === 1 && record.defaultDataset === 'optical')))
       throw new TypeError(`Invalid volume descriptor: ${record.objectId}`);
     results.push({ base, record, manifest, descriptor });

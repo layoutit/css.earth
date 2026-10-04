@@ -2,7 +2,7 @@ import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
 import { isDeepStrictEqual } from 'node:util';
 import {
-  checks, failure, hasErrorCode, isFiniteNumber, isPlainRecord, isRecord, requireArray, requireBoolean, requireFiniteNumber,
+  checks, failure, hasErrorCode, isFiniteNumber, isRecord, requireArray, requireFiniteNumber,
   requireNonemptyText, requirePositive, requireRecord, requireString,
 } from './index.js';
 
@@ -13,12 +13,9 @@ const thrown = (run: () => unknown): { name: string; message: string } => {
 };
 
 describe('predicates', () => {
-  it('isRecord accepts any non-array object and isPlainRecord only plain ones', () => {
+  it('isRecord accepts any non-array object', () => {
     for (const value of [{}, { a: 1 }, new Box(), Object.create(null)]) assert.equal(isRecord(value), true);
     for (const value of [null, undefined, [], 0, '', 'x', true]) assert.equal(isRecord(value), false);
-    assert.equal(isPlainRecord({ a: 1 }), true);
-    assert.equal(isPlainRecord(JSON.parse('{"a":1}')), true);
-    for (const value of [new Box(), Object.create(null), [], null, new Date(0)]) assert.equal(isPlainRecord(value), false);
   });
   it('isFiniteNumber rejects NaN, infinities and numeric strings', () => {
     assert.equal(isFiniteNumber(0), true);
@@ -43,7 +40,6 @@ describe('getters (the bake objects/sources source-values dialect)', () => {
     assert.equal(requireString(''), '');
     assert.equal(requireFiniteNumber(-0), -0);
     assert.equal(requirePositive(2), 2);
-    assert.equal(requireBoolean(false), false);
     assert.equal(requireNonemptyText('x'), 'x');
   });
   it('throw TypeError with the historical messages', () => {
@@ -55,7 +51,6 @@ describe('getters (the bake objects/sources source-values dialect)', () => {
     assert.equal(thrown(() => requireFiniteNumber('1')).message, 'Source value must be finite.');
     assert.equal(thrown(() => requirePositive(0, 'Radius')).message, 'Radius must be positive.');
     assert.equal(thrown(() => requirePositive(Infinity, 'Radius')).message, 'Radius must be finite.');
-    assert.equal(thrown(() => requireBoolean('true', 'Flag')).message, 'Flag must be boolean.');
     assert.equal(thrown(() => requireNonemptyText('', 'Name')).message, 'Name must be nonempty text.');
     assert.equal(requireNonemptyText(' ', 'Name'), ' ');
   });
@@ -105,5 +100,16 @@ describe('labelled checks (the renderer dialect)', () => {
   it('an unprefixed failure gives the plain getter wording', () => {
     const plain = checks(failure());
     assert.equal(message(() => plain.finite(null, 'Scale')), 'Scale must be finite.');
+  });
+});
+
+describe('composite finite and nonempty-string readers', () => {
+  it('preserves exact tuple dimensions, finite admission and legacy diagnostics', async () => {
+    const { requireFiniteTriple, requireNonemptyString } = await import('./index.js');
+    assert.deepEqual(requireFiniteTriple([1, 2, 3], 'point'), [1, 2, 3]);
+    assert.equal(requireNonemptyString(' ', 'title'), ' ');
+    for (const bad of [[], [1, 2], [1, 2, 3, 4], null]) assert.throws(() => requireFiniteTriple(bad, 'point'), { message: 'point must contain three numbers.' });
+    for (const bad of [[1, NaN, 3], [1, '2', 3]]) assert.throws(() => requireFiniteTriple(bad, 'point'), { message: 'point must be finite.' });
+    for (const bad of ['', null, 1]) assert.throws(() => requireNonemptyString(bad, 'title'), { message: 'title must be a string.' });
   });
 });

@@ -1,0 +1,30 @@
+{
+ "id": "svf2019-ngc-4736-1",
+ "classification": "star",
+ "order": 5768,
+ "physical": {
+  "name": "[SVF2019] NGC 4736-1",
+  "horizonsCode": null,
+  "meanRadiusKm": 127313100,
+  "gravitationalParameterKm3PerS2": 0,
+  "parent": null,
+  "effectiveTemperatureK": 18000
+ },
+ "physicalNotes": "Radius 183 +/- 74 solar radii from Solovyeva et al. (2019), MNRAS 484, L24, section 3.1: log(L_bol/L_sun) = 6.5 +/- 0.2 (at the paper's distance modulus of M94, 28.31) and T = 18 +/- 3 kK, through L = 4 pi R^2 sigma T^4 with the nominal solar 5772 K (IAU 2015 Resolution B3, Prsa et al. 2016, arXiv:1605.09788); the paper prints no radius, and no measurement of this star's size exists (https://arxiv.org/abs/1901.05277): 127,313,100 km at 695,700 km per solar radius. No mass is measured, so GM is 0, the records' unpublished value. Temperature 18000 +/- 3000 K from Solovyeva et al. (2019), MNRAS 484, L24, section 3.1: photosphere temperature T = 18 +/- 3 kK, estimated from the strengths of its He I and Fe II lines (https://arxiv.org/abs/1901.05277). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 192.7386,
+  "declinationDegrees": 41.12309166666666,
+  "positionEpochJulianYear": 2000,
+  "distanceParsecs": 4337391,
+  "properMotionRaMasPerYear": 0,
+  "properMotionDecMasPerYear": 0,
+  "radialVelocityKmPerS": 286.86262335812637,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Solovyeva et al. (2019), MNRAS 484, L24, section 2 (its HST coordinates, 12:50:57.264 +41:07:23.13); SIMBAD holds that position, from 2019MNRAS.484L..24S (https://simbad.cds.unistra.fr/simbad/sim-id?Ident=%5BSVF2019%5D%20NGC%204736-1), SIMBAD basic row main_id = [SVF2019] NGC 4736-1: ra 192.7386, dec 41.12309166666666, from the archived row src/objects/svf2019-ngc-4736-1/source/photometry/catalogue-row.tsv; SIMBAD names it [SVF2019] NGC 4736-1",
+   "distance": "Placed in M94 as the app draws it, where the star's sight line crosses the disc's midplane: 4,337,391 pc (src/objects/m94-layers/source/recipe.json: centre 4,337,106 pc, inclination 31.77 deg, line of nodes 105 deg). The galaxy's distance, which places the galaxy and not a star within it: Tully et al. (2023), Cosmicflows-4, ApJ 944, 94; CDS J/ApJ/944/94, table 2 (distances of individual galaxies), PGC 43495: distance modulus 28.186 ± 0.039 mag (https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/944/94) (https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/944/94): 4337391 pc; Gaia DR3 cannot see the star",
+   "properMotion": "basic row main_id = [SVF2019] NGC 4736-1 measures no proper motion; zero is assumed (at 4,337,391 pc, 1 mas/yr would be 20,561 km/s across the sky)",
+   "radialVelocity": "SIMBAD's radial velocity of M94, the star's galaxy, from 1999PASP..111..438F; the star's own motion within the galaxy is not measured (https://ui.adsabs.harvard.edu/abs/1999PASP..111..438F/abstract)"
+  }
+ }
+}

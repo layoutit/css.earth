@@ -12,7 +12,7 @@
 import { PLANCK_FLOOR_KELVIN } from '@cssearth/objects';
 import { readFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
-import type { Archive } from './archives.mts';
+import type { Archive } from './archives/archives.mts';
 import { CHECKED, planckChoice } from './color.mts';
 import { bindInputs, json, type PackageFiles } from './dataset.mts';
 import { decodeEntities, NASA_TAP } from './orbit.mts';
@@ -23,6 +23,9 @@ import { parseCieTable, hostLitGray } from '@cssearth/bake/objects/color';
 import { readCie1931ColorMatching } from '@cssearth/bake/objects/sources';
 import { HOSTED_PLANET_STYLESHEET } from './new-hosted-planet.mts';
 import { installPhaseCurveDataset, type PhaseCurveEntry } from './phase-curve-dataset.mts';
+import { WORKSPACE } from '@cssearth/telescope/node';
+import { installSimulationDataset, restoreSimulationField, simulationPaths, simulationRecipe, simulationRelease, type SimulationEntry } from './simulation/simulation-dataset.mts';
+import { loadNetcdfLonLatField } from '@cssearth/bake/objects/raster';
 
 export const EMISSION_COLUMNS = 'plntname,centralwavelng,bandwidth,especlipdep,especlipdeperr1,especlipdeperr2,especlipdeplim,espbritemp,espbritemperr1,espbritemperr2,espbritemplim,facility,instrument,plntreflink';
 export const emissionQuery = (planet: string) => `select ${EMISSION_COLUMNS} from emissionspec where plntname='${planet.replace(/'/gu, "''")}' order by centralwavelng`;
@@ -203,12 +206,12 @@ export function installHostLight(files: PackageFiles, id: string, light: HostLig
 }
 
 /** The package files the dataset installers rewrite, read from the tree so a planet already in the universe can take a dataset. */
-const DATASET_REBUILD_FILES = ['object.json', 'text.json', 'source/preparation/raster.json', 'source/preparation/geometry.json', 'source/preparation/acquisition.json', 'source/content/object.json', 'source/manifest.json'] as const;
+export const DATASET_REBUILD_FILES = ['object.json', 'text.json', 'source/preparation/raster.json', 'source/preparation/geometry.json', 'source/preparation/acquisition.json', 'source/content/object.json', 'source/manifest.json'] as const;
 
 /** Give planets already in the tree their color from what is measured: `thermal` reads the archive's emission table and
  * installs the "Thermal glow" dataset where a dayside temperature is measured; `host-light` lights a neutral gray with the
  * host's color. Returns one line per planet; nothing is baked here (packages/bake/cli/prepare-object.mts does that). */
-export async function rebuildExistingDatasets(root: string, ids: readonly string[], mode: 'thermal' | 'host-light' | 'photometry' | 'phase-curve', archive: Archive, progress = (_line: string) => {}, photometry: ReadonlyMap<string, PhotometrySpec> = new Map(), phaseCurves: ReadonlyMap<string, readonly PhaseCurveEntry[]> = new Map()) {
+export async function rebuildExistingDatasets(root: string, ids: readonly string[], mode: 'thermal' | 'host-light' | 'photometry' | 'phase-curve' | 'simulation', archive: Archive, progress = (_line: string) => {}, photometry: ReadonlyMap<string, PhotometrySpec> = new Map(), phaseCurves: ReadonlyMap<string, readonly PhaseCurveEntry[]> = new Map(), simulations: ReadonlyMap<string, readonly SimulationEntry[]> = new Map(), fetcher: typeof fetch = fetch) {
   const { mkdir, writeFile } = await import('node:fs/promises');
   const lines: string[] = [];
   for (const id of ids) {
@@ -224,11 +227,31 @@ export async function rebuildExistingDatasets(root: string, ids: readonly string
     if (kind === 'neutral-shape' && raster.emission === undefined && !(JSON.parse(String(files.get(`src/objects/${id}/object.json`))) as { properties: { page: { stylesheets: string[] } } }).properties.page.stylesheets.includes(HOSTED_PLANET_STYLESHEET)) { ensureStylesheet(files, id); lines.push(`${id}: stylesheet written, its lighting frame had no size`); progress(lines.at(-1)!); }
     if (mode === 'phase-curve') {
       // A heat map is added beside the default dataset, so the marker, drawn from the default dataset, stays as it is.
+      let promoted = false;
       for (const entry of phaseCurves.get(id) ?? []) {
-        const { minimum, maximum, hottest } = await installPhaseCurveDataset(files, id, descriptor.displayName, entry);
-        lines.push(`${id}: ${entry.dataset} dataset from ${entry.credit}, ${minimum}-${maximum} K, hottest ${hottest}° from noon`); progress(lines.at(-1)!);
+        const installed = await installPhaseCurveDataset(files, id, descriptor.displayName, entry);
+        promoted ||= installed.promoted;
+        lines.push(`${id}: ${entry.dataset} dataset from ${entry.credit}, ${installed.minimum}-${installed.maximum} K, hottest ${installed.hottest}° from noon${installed.promoted ? '; the page now opens on it' : ''}`); progress(lines.at(-1)!);
       }
-      for (const [path, value] of files) { await mkdir(dirname(resolve(root, path)), { recursive: true }); await writeFile(resolve(root, path), value); }
+      await writeWithMarker(root, files, id, promoted);
+      continue;
+    }
+    if (mode === 'simulation') {
+      // A published simulation is its own dataset, and the page opens on it where it had no map. The release is checked on
+      // Zenodo, the two parts read of its file are brought into the source directory, and the range drawn is the file's own.
+      const catalog = (JSON.parse(String(files.get(`src/objects/${id}/object.json`))) as { properties: { catalog?: { aliases?: unknown } } }).properties.catalog;
+      const names = [descriptor.displayName, ...Array.isArray(catalog?.aliases) ? catalog.aliases.filter((alias): alias is string => typeof alias === 'string') : []];
+      let promoted = false;
+      for (const entry of simulations.get(id) ?? []) {
+        const release = await simulationRelease(archive, id, names, entry);
+        const ranges = await restoreSimulationField(resolve(o, 'source'), id, entry, release, fetcher), paths = simulationPaths(entry);
+        if (ranges.fetched) progress(`${id}: ${ranges.fetched.toLocaleString('en-US')} bytes of ${entry.file} fetched from Zenodo record ${release.doi}`);
+        const field = await loadNetcdfLonLatField(resolve(o, 'source'), simulationRecipe(entry), new Map([[paths.head, ranges.head], [paths.field, ranges.field]]));
+        const installed = installSimulationDataset(files, id, descriptor.displayName, entry, release, field.report, ranges);
+        promoted ||= installed.promoted;
+        lines.push(`${id}: ${entry.dataset} dataset from the ${entry.model} simulation of ${entry.credit}, ${installed.minimum}-${installed.maximum} ${entry.displayUnits ?? entry.units}, ${release.license.name}${installed.promoted ? '; the page now opens on it' : ''}`); progress(lines.at(-1)!);
+      }
+      await writeWithMarker(root, files, id, promoted);
       continue;
     }
     if (mode === 'photometry') {
@@ -261,11 +284,23 @@ export async function rebuildExistingDatasets(root: string, ids: readonly string
   return lines;
 }
 
+/** Write a package whose datasets changed. When its default dataset changed too, the marker is drawn again from the new one. */
+export async function writeWithMarker(root: string, files: PackageFiles, id: string, defaultChanged: boolean) {
+  const { mkdir, writeFile } = await import('node:fs/promises');
+  if (defaultChanged) datasetMarkerEntry(files, id);
+  for (const [path, value] of files) { await mkdir(dirname(resolve(root, path)), { recursive: true }); await writeFile(resolve(root, path), value); }
+  // The marker author draws in the checkout it runs in; a package written to a scratch root keeps the marker it has.
+  if (defaultChanged && resolve(root) === resolve(WORKSPACE)) { const { authorContextMarkers } = await import('../source-authoring/context-markers.mts'); await authorContextMarkers([id]); }
+}
+
 /** A planet's context marker as the marker author draws it from its default dataset (packages/telescope-cli/src/source-authoring/context-markers.mts): the
  * manifest entry names that author and the inputs the dataset reads, replacing the scaffold's gray-disc entry. */
 export function datasetMarkerEntry(files: PackageFiles, id: string) {
   const path = `src/objects/${id}/source/manifest.json`, manifest = JSON.parse(String(files.get(path))) as { inputs: { id: string }[]; generatedIntermediates?: Record<string, unknown>[] };
-  const datasetInputs = manifest.inputs.map(input => input.id).filter(input => [`${id}-preparation-raster`, `${id}-observational-measurements`, `${id}-thermal-color`].includes(input) || input.endsWith('-band-color'));
+  // A default that is a map is drawn from the input its control names (a published fit, a released simulation).
+  const content = JSON.parse(String(files.get(`src/objects/${id}/source/content/object.json`))) as { datasets?: { defaultDataset?: string; controls?: { id: string; source?: { id?: string } }[] } };
+  const mapInput = content.datasets?.controls?.find(control => control.id === content.datasets?.defaultDataset)?.source?.id;
+  const datasetInputs = manifest.inputs.map(input => input.id).filter(input => [`${id}-preparation-raster`, `${id}-observational-measurements`, `${id}-thermal-color`, mapInput].includes(input) || input.endsWith('-band-color'));
   const generator = 'packages/telescope-cli/src/source-authoring/context-markers.mts', previous = manifest.generatedIntermediates?.find(entry => entry.path === 'presentation/context.png');
   manifest.generatedIntermediates = [...(manifest.generatedIntermediates ?? []).filter(entry => entry.path !== 'presentation/context.png'), {
     id: 'dataset-color-context-marker', path: 'presentation/context.png', origin: String(previous?.origin ?? ''), credit: `The default dataset's color as a disc; rendered by ${generator}`,

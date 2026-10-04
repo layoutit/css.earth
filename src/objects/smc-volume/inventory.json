@@ -34,8 +34,8 @@
     {
       "location": "prepared",
       "filename": "datasets.json",
-      "bytes": 2823515,
-      "sha256": "d7d236025a341c3ade57d7df347678b7bfb38096c18137849d5e85d285af0d08"
+      "bytes": 15225,
+      "sha256": "90917b398e106c44b2ec9c2cb1c90f9fd96bc1372237215ca7f976d610dd53b8"
     },
     {
       "location": "prepared",
@@ -48,6 +48,12 @@
       "filename": "presentation.json",
       "bytes": 7689,
       "sha256": "565a0c8e1a715ebdf4379cd60627b98519170777459fa801f1b6402c07dabfed"
+    },
+    {
+      "location": "prepared",
+      "filename": "record.json",
+      "bytes": 433186,
+      "sha256": "35f53b8e9c53e2254ad5369b219efee6cd168efd0efa1d084954bc2f9ee0f338"
     },
     {
       "location": "prepared",
@@ -225,6 +231,12 @@
     },
     {
       "location": "prepared",
+      "filename": "smc-allwise-wide/volume.json",
+      "bytes": 143073,
+      "sha256": "0d121b312d4af99dceee89535a15e448e875523584e0fc89f88bf535b129a292"
+    },
+    {
+      "location": "prepared",
       "filename": "smc-dss2/atlases/x.webp",
       "bytes": 342006,
       "sha256": "0cd1d8dd844ede31b568321bc047855c1482b89ba7737b2cb75367a3edc60add"
@@ -396,6 +408,12 @@
       "filename": "smc-dss2/impostors/view-ppp.png",
       "bytes": 12991,
       "sha256": "af20126c96906dfe69d2a0c7139a8cfacd5deddbb063834d06c19e9284870c54"
+    },
+    {
+      "location": "prepared",
+      "filename": "smc-dss2/volume.json",
+      "bytes": 140449,
+      "sha256": "9644bc8843a8e9672410293f43d0418b97d94910b8388ce86ef432c244af5daf"
     },
     {
       "location": "prepared",
@@ -573,6 +591,12 @@
     },
     {
       "location": "prepared",
+      "filename": "smc-horalek-wide/volume.json",
+      "bytes": 143069,
+      "sha256": "ea25744f508ad76ba379fa4fffa0cefae43e2ef5360e8afc558f5ed23621b474"
+    },
+    {
+      "location": "prepared",
       "filename": "smc-smash/atlases/x.webp",
       "bytes": 338448,
       "sha256": "f388e6eff388d4ea3a45f213b909060f99b10becfd531d4189c043fda305cc0f"
@@ -747,6 +771,12 @@
     },
     {
       "location": "prepared",
+      "filename": "smc-smash/volume.json",
+      "bytes": 140773,
+      "sha256": "90de76153844891441fc805a24fa07cd7d0c525a2e11bfaedbb2146d01f77f8e"
+    },
+    {
+      "location": "prepared",
       "filename": "smc-vista/atlases/x.webp",
       "bytes": 340756,
       "sha256": "b9f5c4285c865d91d181b1440906015931d574344a6c96596f9ef4399e01b4e1"
@@ -918,6 +948,18 @@
       "filename": "smc-vista/impostors/view-ppp.png",
       "bytes": 12532,
       "sha256": "64cf0b92cef7e0eab24e92ab5db32c7fdca26e7c70ad48ea7b2e23d01774a4dd"
+    },
+    {
+      "location": "prepared",
+      "filename": "smc-vista/volume.json",
+      "bytes": 140773,
+      "sha256": "e893d939aa568042f1469e38afe43d550808b2e0bdabeff0b8c5d546e443d850"
+    },
+    {
+      "location": "prepared",
+      "filename": "stars.bin",
+      "bytes": 72477,
+      "sha256": "a06cc37fe19af886351f635e63fc1d80ddacd8ce9c9dc5c2a7c6966d79f0abee"
     }
   ]
 }

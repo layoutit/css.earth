@@ -1,6 +1,3 @@
-import { MAP_SPHERE_DATASETS_SCHEMA, readMapSphereDatasetPreviews } from '@cssearth/objects';
-import { IMAGE_MESH_SCHEMA } from '@cssearth/objects';
-import { createSurfacePatches } from '../src/surface-geometry/index.ts';
 /**
  * Prepare an all-sky HEALPix map as a sphere of image patches around the Sun, seen from outside: the cosmic microwave
  * background at the distance its light left from. `source/<id>/sphere.json` names the map (its FITS file, column and
@@ -13,7 +10,7 @@ import { createSurfacePatches } from '../src/surface-geometry/index.ts';
  * Galactic coordinates), `samplesPerTexel`² samples averaged, through the same projective mapping PolyCSS draws the tile
  * with, and with a one-texel border sampled past the patch; each leaf reaches into that border, so neighbouring patches
  * overlap by a texel and no seam opens between them. The atlas goes through the lossy lane. Writes `prepared/<id>.json`
- * (`IMAGE_MESH_SCHEMA`, parsed by `parseImageMesh` in packages/objects/src/prepared-data/image-mesh.ts) and `prepared/<id>/<id>.webp`. A recipe
+ * (`IMAGE_MESH_SCHEMA`, parsed by `parseImageMesh` in packages/objects/src/prepared-data/presentation/image-mesh.ts) and `prepared/<id>/<id>.webp`. A recipe
  * `cutaway` marks the patches of the hemisphere it opens; the runtime hides them and draws the rest's inside behind what
  * the sphere holds, or shows the whole sphere. Its `datasets` are the page's datasets of the sphere, whole or cut open:
  * `prepared/datasets.json` carries their card text, the color table's legend and a picture of each view
@@ -21,6 +18,8 @@ import { createSurfacePatches } from '../src/surface-geometry/index.ts';
  *
  * Usage: node packages/bake/cli/prepare-map-sphere.mts <object-directory> <id>
  */
+import { MAP_SPHERE_DATASETS_SCHEMA, readMapSphereDatasetPreviews, IMAGE_MESH_SCHEMA } from '@cssearth/objects';
+import { createSurfacePatches } from '../src/surface-geometry/index.ts';
 import { spawnSync } from 'node:child_process';
 import { mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { basename, resolve } from 'node:path';

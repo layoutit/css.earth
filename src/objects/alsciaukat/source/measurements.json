@@ -12,5 +12,7 @@
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."
-  }
+  },
+  "surfaceGravityLogg": 0.98,
+  "surfaceGravitySource": "log g 0.98 from 2024MNRAS.531.4823P; the 9 published values span log g 0.82 to 2.05, across which the limb law changes by at most 0.4% of the centre brightness (https://ui.adsabs.harvard.edu/abs/2024MNRAS.531.4823P)"
 }

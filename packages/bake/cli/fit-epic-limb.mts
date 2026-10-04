@@ -14,6 +14,7 @@
  * Prints each frame's fit; --write stores the three model records under src/objects/earth/source/photometry/ and the
  * per-bin evidence under src/objects/earth/evidence/epic-limb-fit.json.
  */
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 import * as h5 from 'h5wasm/node';
 import { writeFile, mkdir } from 'node:fs/promises';
 import { basename, resolve } from 'node:path';
@@ -84,7 +85,7 @@ const summary = BANDS.map(({ band, channel }) => {
 });
 console.log(summary);
 if (process.argv.includes('--write')) {
-  const root = process.cwd(), photometry = resolve(root, 'src/objects/earth/source/photometry'), evidence = resolve(root, 'src/objects/earth/evidence');
+  const root = checkoutProjectRoot(import.meta.url), photometry = resolve(root, 'src/objects/earth/source/photometry'), evidence = resolve(root, 'src/objects/earth/evidence');
   await mkdir(photometry, { recursive: true }); await mkdir(evidence, { recursive: true });
   const phase = [Math.min(...fits.map(fit => fit.phaseDegrees[0])), Math.max(...fits.map(fit => fit.phaseDegrees[1]))].map(value => Math.round(value * 10) / 10);
   const emission = Math.round(Math.acos(MINIMUM_COSINE) * 1800 / Math.PI) / 10;

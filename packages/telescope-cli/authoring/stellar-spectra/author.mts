@@ -6,6 +6,7 @@
  *   node packages/telescope-cli/authoring/stellar-spectra/author.mts [--check] [<id> ...]
  *
  * --check recomputes everything and fails where a file differs. */
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -13,7 +14,7 @@ import { loadStellarPhotometricColor } from '@cssearth/bake/objects/stellar';
 import { MARKER_PATH, starMarker } from '../../src/source-authoring/context-markers.mts';
 import { requireArray, requireRecord, requireString, isRecord } from '@cssearth/core';
 
-const objects = resolve(import.meta.dirname, '../../../../src/objects');
+const objects = resolve(checkoutProjectRoot(import.meta.url), 'src/objects');
 /** Stars whose default dataset is the measured-spectrum color: marker, catalogue and surface colors. */
 export const SPECTRUM_STARS = ['sirius', 'vega', 'hd-209458', 'arcturus', 'altair', 'deneb', 'fomalhaut', 'rigel', 'alpha-centauri-a', 'alpha-centauri-b',
   'aldebaran', 'kepler-186', 'kepler-452', 'wasp-39', 'polaris', 'proxima-centauri', 'k2-18', 'regulus', 'alderamin', 'rasalhague', 'caph', 'beta-pictoris', 'wd-1856-534', 'pds-70'] as const;

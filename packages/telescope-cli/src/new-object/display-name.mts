@@ -13,9 +13,9 @@
  *
  * The designations not chosen stay the star's aliases, so search finds each. Nothing here writes a name SIMBAD does not list:
  * steps 1 to 3 drop SIMBAD's own prefix and spell out the constellation, step 4 returns the identifier as SIMBAD writes it. */
-import type { Archive } from './archives.mts';
+import type { Archive } from './archives/archives.mts';
 import { adql, csv, SIMBAD_TAP } from './companions.mts';
-import type { IauLookup } from './iau-names.mts';
+import type { IauLookup } from './archives/iau-names.mts';
 import { spelledOut } from './prose.mts';
 
 /** Catalogues before surveys; among surveys, those that name stars a reader has met (planet hosts) before the wide photometric ones. */
@@ -25,7 +25,9 @@ const collapse = (text: string) => text.replace(/\s+/gu, ' ').trim();
 const starts = (identifier: string, prefix: string) => identifier.startsWith(`${prefix} `) || identifier.startsWith(`${prefix}-`) || identifier.startsWith(`${prefix}+`);
 
 export type NameStep = 'iau' | 'proper' | 'bayer-flamsteed' | 'variable' | 'catalogue';
-/** Steps that give a star a name of its own rather than a designation; such a star is a map target (spec `featured`). */
+/** Steps that give a star a name of its own rather than a designation. A name does not make a star a map target: the
+ * map names a star that has something to see or that its spec marks notable (`featured`), and 271 stars featured for
+ * their IAU name alone put a ring and a caption each on the galaxy's map (2026-10-04). */
 export const PROPER_STEPS: ReadonlySet<NameStep> = new Set(['iau', 'proper']);
 export function preferredName(identifiers: readonly string[], iau?: IauLookup): { readonly name: string; readonly step: NameStep; readonly identifier: string } | undefined {
   const ids = identifiers.map(collapse), found = (test: (id: string) => boolean) => ids.find(test);

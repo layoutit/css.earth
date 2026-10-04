@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { access, readFile } from 'node:fs/promises';
 import { gunzipSync } from 'node:zlib';
 import { sourceTest } from '@cssearth/objects/node/source-test';
-import { decodeCatalogueBankBinary, parseCataloguePoints, parseCompleteWorldContext, parsePreparedWorldContextSummary, parsePreparedWorldIndex } from '@cssearth/objects';
+import { decodeCatalogueBankBinary, readCataloguePointBank, parseCompleteWorldContext, parsePreparedWorldContextSummary, parsePreparedWorldIndex } from '@cssearth/objects';
 import { unpackPreparedBinary } from '@cssearth/objects/node';
 import { OBJECTS } from '../objects.mts';
 const test = sourceTest();
@@ -10,7 +10,7 @@ const test = sourceTest();
 const prepared = new URL('../../src/objects/observable-universe/prepared/', import.meta.url);
 const json = async (name: string) => JSON.parse(await readFile(new URL(name, prepared), 'utf8')) as unknown;
 /** The plain-dot stars of a whole world: a star drawn as a plain dot that orbits nothing, whether or not it is bound to
- * another (packages/objects/src/prepared-data/world-holders.ts). */
+ * another (packages/objects/src/prepared-data/world/world-holders.ts). */
 const plainStars = (whole: { readonly bodies: readonly { id: string; plainDot?: boolean; classification?: string; orbit?: unknown }[] }) =>
   whole.bodies.filter(body => body.plainDot && body.classification === 'star' && !body.orbit).map(body => body.id);
 
@@ -65,7 +65,7 @@ test('every plain-dot star is a dot once: of the Milky Way\'s own bank when the 
   assert.ok(!summary.dotBanks!.includes('observable-universe'), 'the world has no dot bank of its own: every page would ask for it');
   const points = new Map<string, { positionM: number[]; toleranceM: number }[]>();
   for (const id of summary.dotBanks!) {
-    const name = 'plain-stars.bin', bank = parseCataloguePoints(decodeCatalogueBankBinary(unpackPreparedBinary(await readFile(new URL(`../../${id}/prepared/${name}`, prepared)), name), name), name);
+    const name = 'plain-stars.bin', bank = readCataloguePointBank(decodeCatalogueBankBinary(unpackPreparedBinary(await readFile(new URL(`../../${id}/prepared/${name}`, prepared)), name), name), name);
     assert.equal(bank.id, 'plain-stars');
     assert.ok(OBJECTS.some(object => object.id === id), `${id} is an object`);
     points.set(id, bank.points.map(point => ({ toleranceM: bank.frame.metersPerUnit * 1e-4,

@@ -1,5 +1,5 @@
-import { parseDistanceSubject } from '../prepared-data/spatial-relations.js';
-import type { DistanceSubject } from '../prepared-data/spatial-relations.js';
+import { parseDistanceSubject } from '../prepared-data/catalogue/spatial-relations.js';
+import type { DistanceSubject } from '../prepared-data/catalogue/spatial-relations.js';
 import { isRecord } from '@cssearth/core';
 
 /** Display and sort values are prepared together; catalogue epochs are not measurement epochs. */

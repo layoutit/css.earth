@@ -8,6 +8,11 @@ Each topic is one subpath entry, with its source in `src/<topic>/`. A topic impo
 layer (the raster lane uses the photometric models), never sideways. Command entries live in `cli/` and run as
 `node packages/bake/cli/<command>.mts`; nothing imports them.
 
+`prepare-object` runs each step in a background process group, even when it inherits terminal stdio.
+Steps must not read terminal stdin or prompt interactively: background reads can receive `SIGTTIN`.
+Cancellation and `SIGINT`, `SIGTERM`, `SIGHUP`, or `SIGQUIT` give each step group `SIGTERM` and two seconds
+to clean up before `SIGKILL`; the parent then preserves the received signal. An immediate process exit cannot wait.
+
 | entry | what it holds | host |
 |---|---|---|
 | `@cssearth/bake/volume` | emission interfaces, coordinates, fields, materials and sampling | host-neutral: no Node built-ins, DOM or native codecs; prepared recipes, slice formats, compiler controls, star inputs, observation mappings, simulation depth-prior and cancellation interfaces, and pure validators live in `@cssearth/objects` |
@@ -94,6 +99,22 @@ Every textured presentation resolves its image consumers from the actual scene C
 
 The runtime uses those bindings to keep the mesh connected, publish images directly to their leaves, and introduce each atlas on one face before activating later batches. A missing binding bank falls back to inherited texture publication and connected-node batching. The registry activation check rejects that omission for textured deliveries.
 
+## Declaration adapter policies
+
+The shared scanner splits fragments only. Each adapter supplies its own named
+`declarationName` parameter; the historical #1152 quote/backslash convention
+stays in the scanner and is pinned by its tests.
+
+| Adapter | Named default | Name/admission policy |
+| --- | --- | --- |
+| Clean leaves | `CLEAN_DECLARATION_NAME` | Native names lowercase; custom names preserve case; reject colonless and colon-at-zero fragments. |
+| Leaf boxes | `LEAF_BOX_DECLARATION_NAME` | Case-sensitive exclusion; colonless fragments have no name and remain. |
+| Texture tiles | `TEXTURE_DECLARATION_NAME` | Preserve case; historical colonless name drops its last character (`slice(0, -1)`). |
+
+`src/presentation/css-declaration-scanner.test.mts` pins these separate policies,
+including malformed fragments. This documents the texture adapter's existing
+truncation without changing its admission during a relocation.
+
 ## Prepared ring backings
 
 Ring wedges and full ring planes carry the same projective leaf metadata as body surfaces. Their compiler scales each leaf box and texture address together with the inverse transform, preserving the prepared world geometry. The shared silhouette groups choose backing sizes before connection and keep them during coasting. A ring must not bypass this contract by emitting only a fixed CSS box.
@@ -103,7 +124,7 @@ Ring wedges and full ring planes carry the same projective leaf metadata as body
 A galaxy's dots are catalogue point banks (`cssearth-catalogue-points@1`). `prepare-catalogue-points.mts` places one
 published catalogue; `merge-catalogue-points.mts` thins several into one bank; `stack-catalogue-points.mts` joins merged
 levels. A recipe marks the bank the app fetches with `published: true`: it is written to `prepared/<id>.bin` (the
-bank's fields with its points and cells as typed columns, `@cssearth/objects` prepared-data/catalogue-bank-binary.ts,
+bank's fields with its points and cells as typed columns, `@cssearth/objects` prepared-data/catalogue/catalogue-bank-binary.ts,
 packed by `@cssearth/objects` prepared-binary.ts), inventoried and published to R2, and holds at most `MAX_CATALOGUE_POINTS` (40,000, `@cssearth/objects`), the bound the
 renderer enforces. Every other bank is a bake input written to the ignored `output/catalogue-points/<object>/`: never
 inventoried, never published, and never imported as a module (`packages/bake/src/volume/node/catalogue-banks.ts`). Vite

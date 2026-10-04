@@ -1,0 +1,142 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "gsf2000-ngc-3627-c36",
+  "parent": "m66",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "[GSF2000] NGC 3627 C36",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 147627540
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/gsf2000-ngc-3627-c36-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "[GSF2000] NGC 3627 C36",
+      "classification": "star",
+      "color": "#ffe2c7",
+      "distanceAu": 2126674312521.9,
+      "description": "A Cepheid in the galaxy M66, 10.3 million parsecs away, that swells and shrinks every 53.1 days.",
+      "systemName": "[GSF2000] NGC 3627 C36 system",
+      "order": 5770,
+      "context": {
+        "order": 5767
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -3.0538343718567086e+23,
+        5.354202495015865e+22,
+        7.135161253314718e+22
+      ],
+      "presentationToReference": [
+        -0.9598847268459761,
+        -0.2209036583217567,
+        0.17269303665142544,
+        0.16829390771057534,
+        0.03873042131703338,
+        0.9849756926402344,
+        0.22427320793026156,
+        -0.9745263096523714,
+        -3.6065882538829147e-17
+      ],
+      "orbitUpReference": [
+        0.2209036583217567,
+        -0.03873042131703338,
+        0.9745263096523714
+      ],
+      "metersPerUnit": 476217870.9677419,
+      "bodyRadiusM": 147627540000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

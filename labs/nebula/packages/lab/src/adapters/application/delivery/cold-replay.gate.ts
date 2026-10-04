@@ -1,10 +1,10 @@
-import { isRecord as coreIsRecord } from '@cssearth/core';
-import { nebulaBakeBackend } from '@cssearth/bake/nebula';
 /** Explicit expensive gate (not default unit-test discovery):
  * node labs/nebula/packages/lab/src/adapters/application/delivery/run-cold-replay.mts --timeout-seconds 1800
  * Optional --objects m42,helix,m45,m8,m1 selects a bounded subset; every selected object's datasets run.
  * Each child has a hard deadline, isolated cwd/root, and only declared compact inputs/profile.
  */
+import { isRecord as coreIsRecord } from '@cssearth/core';
+import { nebulaBakeBackend } from '@cssearth/bake/nebula';
 import assert from 'node:assert/strict';
 import { spawn } from 'node:child_process';
 import { mkdtemp, mkdir, readFile, writeFile, rm } from 'node:fs/promises';

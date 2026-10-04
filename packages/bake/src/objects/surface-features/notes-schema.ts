@@ -1,7 +1,5 @@
-import { readNonArrayRecord, readTextAllowEmpty } from '@cssearth/core';
-const requireRecord = (value: unknown, label = 'Source value'): Record<string, unknown> => { return readNonArrayRecord(value, label, () => { throw new TypeError(`${label} must be an object.`); }); };
+import { requireRecord, requireString } from '@cssearth/core';
 const requireArray = (value: unknown, label = 'Source value'): unknown[] => { if (!Array.isArray(value)) throw new TypeError(`${label} must be an array.`); return value; };
-const requireString = (value: unknown, label = 'Source value'): string => { return readTextAllowEmpty(value, label, () => { throw new TypeError(`${label} must be a string.`); }); };
 // The pinned notes document: Wikipedia lead summaries joined to Gazetteer feature ids through Wikidata.
 export const FEATURE_NOTES_SCHEMA = 'cssearth-surface-feature-notes@1';
 export const MAXIMUM_NOTE_CHARACTERS = 320;

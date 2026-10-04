@@ -1,6 +1,6 @@
 /** Node-only workspace discovery shared by bootstrap builds and CI. No built imports. */
-import { globSync, readFileSync } from 'node:fs';
-import { resolve } from 'node:path';
+import { existsSync, globSync, readFileSync, realpathSync } from 'node:fs';
+import { dirname, resolve } from 'node:path';
 export interface Workspace { name: string; directory: string; dependencies: string[]; manifest: Record<string, unknown> }
 function record(value: unknown): Record<string, unknown> {
   if (!value || typeof value !== 'object' || Array.isArray(value)) throw new TypeError('Expected a manifest object');
@@ -47,8 +47,8 @@ export function workspaceExternals(packages: readonly Workspace[], owner: string
 export function hasBuild(pkg: Workspace): boolean { return typeof record(pkg.manifest.scripts ?? {}).build === 'string'; }
 export function buildOutput(pkg: Workspace): string {
   function target(value: unknown): string | undefined {
-    if (typeof value === 'string' && value.startsWith('./dist/')) return value;
-    if (value && typeof value === 'object') for (const child of Object.values(value)) { const found = target(child); if (found) return found; }
+    if (typeof value === 'string' && value.startsWith('./dist/') && /\.[cm]?js$/u.test(value)) return value;
+    if (value && typeof value === 'object') for (const child of [...['import', 'default', 'module', 'node'].map(key => Reflect.get(value, key)), ...Object.entries(value).filter(([key]) => key !== 'types').map(([, child]) => child)]) { const found = target(child); if (found) return found; }
     return undefined;
   }
   const output = target(pkg.manifest.module) ?? target(pkg.manifest.exports) ?? target(pkg.manifest.main);
@@ -80,4 +80,14 @@ export function externalWorkspaceSpecifier(packages: readonly Workspace[], exter
   }
   const target = runtimeTarget(entry) ?? (exports === undefined && typeof pkg.manifest.module === 'string' ? pkg.manifest.module : undefined);
   return target !== undefined && /\.[cm]?js$/.test(target);
+}
+
+/** The checkout root from this module's own location, not the caller's working directory: the first parent holding
+ * `pnpm-workspace.yaml`, as a real path so a symlinked checkout resolves to one root. Bootstrap builds run before any package
+ * is built, so this cannot import `@cssearth/core`'s `projectRoot` (A159). */
+export function findWorkspaceRoot(from: string = import.meta.dirname): string {
+  for (let directory = realpathSync(from); ; directory = dirname(directory)) {
+    if (existsSync(resolve(directory, 'pnpm-workspace.yaml'))) return directory;
+    if (dirname(directory) === directory) throw new TypeError(`No pnpm-workspace.yaml above ${from}`);
+  }
 }

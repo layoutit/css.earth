@@ -4,11 +4,9 @@ import { loadObjectTestDefinition } from '@cssearth/objects/node/contract';
 import assert from "node:assert/strict";
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
-import { createObjectSelectionRuntime } from '@cssearth/renderer/testing';
+import { createObjectSelectionRuntime, createPreparedResidency, mountPreparedPresentation, initialObjectSelection } from '@cssearth/renderer/testing';
 import { cameraMotionSignalFor } from '@cssearth/renderer/navigation';
-import { createPreparedResidency } from '@cssearth/renderer/testing';
 import { retainedPresentationFixture, preparedSelectionFixture } from "../../test/object-runtime-package.mts";
-import { mountPreparedPresentation, initialObjectSelection } from '@cssearth/renderer/testing';
 
 import type { ObjectSelection } from '@cssearth/renderer/runtime/object-contract.ts';
 

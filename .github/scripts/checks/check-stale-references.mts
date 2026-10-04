@@ -1,12 +1,21 @@
 import { execFileSync } from 'node:child_process';
 import { existsSync, readFileSync } from 'node:fs';
-import { resolve } from 'node:path';
+import { resolve, matchesGlob } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import ts from 'typescript';
+import { parse } from 'yaml';
 import { MODULE_RELATIVE_ROOT_OWNERS, RETIRED_PATHS } from './retired-paths.mts';
 
-const POLICY = new Set(['.github/scripts/checks/retired-paths.mts', '.github/scripts/checks/check-stale-references.mts']);
-const URL = /https?:\/\/[^\s"'<>`)]+/gu;
+const POLICY = new Set(['.github/scripts/checks/retired-paths.mts', '.github/scripts/checks/historical-jwst-references.json', '.github/scripts/checks/check-stale-references.mts']);
+// Exact committed prose is history; new strings cannot acquire a retired route through these exceptions.
+const historicalValue: unknown = JSON.parse(readFileSync(new URL('./historical-jwst-references.json', import.meta.url), 'utf8'));
+if (!historicalValue || typeof historicalValue !== 'object' || Array.isArray(historicalValue)) throw new TypeError('Invalid historical JWST references');
+const HISTORICAL_JWST_REFERENCES = new Map<string, readonly string[]>();
+for (const [path, lines] of Object.entries(historicalValue)) {
+  if (!Array.isArray(lines) || !lines.every((line: unknown) => typeof line === 'string')) throw new TypeError(`Invalid historical references: ${path}`);
+  HISTORICAL_JWST_REFERENCES.set(path, lines);
+}
+const URL_PATTERN = /https?:\/\/[^\s"'<>`)]+/gu;
 const ROOT_OWNERS: ReadonlySet<string> = new Set(MODULE_RELATIVE_ROOT_OWNERS);
 /** Only executable import/command syntax is live in tests; quoted negative fixtures are evidence. */
 function testLiveLines(path: string, text: string): ReadonlySet<number> {
@@ -44,8 +53,12 @@ export function staleReferenceLines(path: string, bytes: Uint8Array): string[] {
   const liveLines = testFile ? testLiveLines(path, textSource) : undefined;
   textSource.split('\n').forEach((line, index) => {
     if (/^\s*"historicalAcquisition"\s*:/u.test(line)) return;
+    if (HISTORICAL_JWST_REFERENCES.get(path)?.includes(line.trim())) return;
     if (liveLines && !liveLines.has(index)) return;
-    const text = line.replace(URL, '');
+    const text = line.replace(URL_PATTERN, url => {
+      const live = url.match(/^https?:\/\/github\.com\/[^/]+\/[^/]+\/blob\/main\/(.+)$/u);
+      return live?.[1] ?? '';
+    });
     for (const retired of RETIRED_PATHS) {
       let at = text.indexOf(retired);
       while (at !== -1) {
@@ -67,11 +80,45 @@ export function staleReferenceLines(path: string, bytes: Uint8Array): string[] {
   return found;
 }
 
+/** Workflow command paths are live callers, including paths not in the retired-path ledger. */
+export function workflowCommandPaths(text: string): string[] {
+  const paths: string[] = [];
+  const visit = (value: unknown): void => {
+    if (Array.isArray(value)) { value.forEach(visit); return; }
+    if (!value || typeof value !== 'object') return;
+    for (const [key, child] of Object.entries(value)) {
+      if (key === 'run' && typeof child === 'string') {
+        for (const line of child.replace(/\\\r?\n/gu, ' ').split('\n')) {
+          if (!/\b(?:node|pnpm)\b/u.test(line)) continue;
+          for (const token of line.matchAll(/(?:^|[\s"'])(\.?\/?(?:packages|site|src|labs|integration|\.github)\/[^\s"';&|<>]+|(?:[\w.@-]+\/)*[\w.@-]+\.(?:[cm]?[jt]s|tsx|json))/gu)) {
+            const path = token[1]!.replace(/^\.\//u, '');
+            const before = line.slice(0, token.index! + token[0].indexOf(token[1]!)).trimEnd();
+            if (!/[$]/u.test(path) && !/(?:\bcd|--(?:dir|directory|cwd)|-C)$/u.test(before)) paths.push(path);
+          }
+        }
+      } else visit(child);
+    }
+  };
+  visit(parse(text));
+  return [...new Set(paths)];
+}
+
+export function workflowPathTracked(target: string, tracked: ReadonlySet<string>): boolean {
+  return /[*?{}[\]]/u.test(target) ? [...tracked].some(path => matchesGlob(path, target))
+    : tracked.has(target) || [...tracked].some(path => path.startsWith(`${target.replace(/\/$/u, '')}/`));
+}
+
 export function checkStaleReferences(root: string): string[] {
   const paths = execFileSync('git', ['ls-files', '--cached', '--others', '--exclude-standard', '-z'],
     { cwd: root, encoding: 'utf8', maxBuffer: 32 * 1024 * 1024 }).split('\0').filter(Boolean);
-  return [...new Set(paths)].flatMap(path => existsSync(resolve(root, path))
-    ? staleReferenceLines(path, readFileSync(resolve(root, path))) : []);
+  const tracked = new Set(execFileSync('git', ['ls-files', '-z'], { cwd: root, encoding: 'utf8', maxBuffer: 32 * 1024 * 1024 }).split('\0'));
+  return [...new Set(paths)].flatMap(path => {
+    if (!existsSync(resolve(root, path))) return [];
+    const bytes = readFileSync(resolve(root, path));
+    const workflow = /^\.github\/workflows\/.*\.ya?ml$/u.test(path)
+      ? workflowCommandPaths(bytes.toString()).filter(target => !workflowPathTracked(target, tracked)).map(target => `${path}: workflow command path is not tracked: ${target}`) : [];
+    return [...staleReferenceLines(path, bytes), ...workflow];
+  });
 }
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
   const failures = checkStaleReferences(resolve(import.meta.dirname, '../../..'));

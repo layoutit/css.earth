@@ -3,6 +3,7 @@
 import { gunzipSync, gzipSync } from 'node:zlib';
 import { shufflePreparedBinary, unshufflePreparedBinary } from '../prepared-binary.js';
 import type { PreparedBinaryRegion } from '../prepared-binary.js';
+import { decodePreparedBank, encodePreparedBank, type PreparedBank } from '../prepared-bank.js';
 
 /** The file a prepared binary is published as. */
 export function packPreparedBinary(bytes: Uint8Array, regions: readonly PreparedBinaryRegion[], at = 'prepared binary'): Uint8Array {
@@ -13,4 +14,15 @@ export function packPreparedBinary(bytes: Uint8Array, regions: readonly Prepared
 export function unpackPreparedBinary(file: Uint8Array, at = 'prepared binary'): ArrayBuffer {
   if (file[0] !== 0x1f || file[1] !== 0x8b) throw new TypeError(`${at}: a prepared binary file is gzip-compressed; this one starts ${file[0]}, ${file[1]}.`);
   return unshufflePreparedBinary(new Uint8Array(gunzipSync(file)), at);
+}
+
+/** A prepared bank (prepared-bank.ts) as the file the page fetches: encoded, then packed. */
+export function packPreparedBank(bank: PreparedBank, at = 'prepared bank'): Uint8Array {
+  const { bytes, regions } = encodePreparedBank(bank, at);
+  return packPreparedBinary(bytes, regions, at);
+}
+
+/** The bank of a fetched or stored file. */
+export function unpackPreparedBank(file: Uint8Array, at = 'prepared bank'): PreparedBank {
+  return decodePreparedBank(unpackPreparedBinary(file, at), at);
 }

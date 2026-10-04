@@ -1,10 +1,9 @@
-import { VO_METADATA_SCHEMA } from '@cssearth/objects';
 /** The only cssEarth process boundary into the pinned astronomy packages. Operations are explicit rather than extensible:
  * Astroquery and PyVO own supported remote protocols; the caller owns validation and scientific meaning. */
+import { VO_METADATA_SCHEMA, parseMetadata, parsePin, type Json, type Pin, type MetadataResponse } from '@cssearth/objects';
 import { spawn } from 'node:child_process';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { astroqueryToolchain } from './toolchain/toolchain.js';
-import { parseMetadata, parsePin, type Json, type Pin, type MetadataResponse } from '@cssearth/objects';
 export class ArchiveTransportError extends Error {}
 export type VoFailureCode = 'authentication' | 'no-content' | 'byte-limit' | 'protocol' | 'transport' | 'interrupted' | 'identity' | 'local-io';
 export class VoAccessError extends Error {

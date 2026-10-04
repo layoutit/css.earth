@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-import { sampleStatistics as statistics, type Statistics } from '@cssearth/fits';
 /** Compare two independently commanded NACO jitter sequences of one night, sample by sample: the only oracle this route has.
  *
  *   node packages/telescope-cli/src/archives/naco/compare.mts <program id> <work directory> <tpl_start> <tpl_start>
@@ -30,6 +29,7 @@ import { sampleStatistics as statistics, type Statistics } from '@cssearth/fits'
  * added to the product record each reduction wrote beside its own product, as `internal-consistency` evidence. That is the
  * only kind this route can add: with no archive product and no ESO master calibration to agree with, nothing here is
  * archive agreement. A product whose run wrote no record takes no evidence at all, and the comparison says so. */
+import { sampleStatistics as statistics, type Statistics } from '@cssearth/fits';
 import { readFile, stat, writeFile } from 'node:fs/promises';
 import { basename, dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';

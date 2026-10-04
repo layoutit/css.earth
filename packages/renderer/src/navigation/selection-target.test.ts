@@ -1,11 +1,10 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { isDeepStrictEqual } from 'node:util';
-import { createSelectionFlight, sampleSelectionFlight } from '@cssearth/engine';
+import { createSelectionFlight, sampleSelectionFlight, worldCameraFromCenteredPresentation } from '@cssearth/engine';
 import { readFile } from 'node:fs/promises';
 import { createWorldSelectionTarget } from './selection-target.js';
 import { parsePreparedWorldCameraFrame } from '@cssearth/objects';
-import { worldCameraFromCenteredPresentation } from '@cssearth/engine';
 import { presentWorldCamera } from './world-camera.js';
 
 const viewport = { focalPixels: 1247.08, principalOffsetPixels: [-170, 0] as const, framingRadiusPixels: 259.2 };

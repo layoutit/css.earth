@@ -106,8 +106,8 @@ export async function prepareSpatialContext(options: SpatialContextPreparationOp
       // Only notable asteroids are map targets: JPL mission targets and those with real imagery. The rest are plain dots.
       const imagery = (discoveries[object.id] as { imagery?: unknown } | undefined)?.imagery === true;
       if (object.classification === 'asteroid' && !isJplMissionTarget(object) && !imagery) body.plainDot = true;
-      // The galactic map's stars are decorative except the notable ones: a star is a map target only when it is featured (an IAU
-      // name, or marked notable), has real imagery or hosts a body that does. Every other star, archive hosts included, is a
+      // The galactic map's stars are decorative except those with something to see: a star is a map target only when it has
+      // real imagery, hosts a body that does, or is marked notable by its package (`featured`). A name alone is no reason. Every other star, archive hosts included, is a
       // plain dot; its page stays reachable through search. The rule holds in every galaxy: a clickable marker always shows its
       // ring and name, so a Cepheid in a Virgo Cluster galaxy is a target only when its package features it.
       const discovery = discoveries[object.id] as { featured?: unknown; hostsImagery?: unknown } | undefined;

@@ -1,4 +1,4 @@
-import { containedPath } from '@cssearth/core/node';
+import { projectRoot as checkoutProjectRoot, containedPath } from '@cssearth/core/node';
 import { readNonArrayRecord, readNonblankText, readFiniteNumber, readPositiveNumber } from '@cssearth/core';
 import { existsSync } from 'node:fs';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
@@ -12,7 +12,7 @@ type Pixel = readonly [number, number];
 type Vec = readonly [number, number, number];
 type RecordValue = Record<string, unknown>;
 
-const root = process.cwd();
+const root = checkoutProjectRoot(import.meta.url);
 const record = (value: unknown, at: string): RecordValue => { return readNonArrayRecord(value, at, () => { throw new TypeError(`${at} must be an object.`); }); };
 const text = (value: unknown, at: string): string => { return readNonblankText(value, at, () => { throw new TypeError(`${at} must be text.`); }); };
 const finite = (value: unknown, at: string): number => { return readFiniteNumber(value, at, () => { throw new TypeError(`${at} must be finite.`); }); };

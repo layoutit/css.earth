@@ -5,16 +5,16 @@
     {
       "id": "companion-context-marker",
       "path": "presentation/context.png",
-      "origin": "https://www.eso.org/public/images/eso0907a/",
-      "credit": "ESO; the default dataset's picture as the Helix Nebula bank publishes it, saved by site/build/prepare/companion-context.mts",
-      "license": "ESO public-image terms; retain the complete recorded credit.",
+      "origin": "https://esahubble.org/images/opo0432d/",
+      "credit": "NASA, ESA, C.R. O'Dell (Vanderbilt University), and M. Meixner, P. McCullough, and G. Bacon (Space Telescope Science Institute); the default dataset's picture as the Helix Nebula bank publishes it, saved by site/build/prepare/companion-context.mts",
+      "license": "CC-BY-4.0; retain the complete recorded credit.",
       "consumers": [
         "navigation"
       ],
       "generator": "site/build/prepare/companion-context.mts",
       "sourceBinding": {
         "kind": "local",
-        "reason": "A picture of the bank the default dataset shows; its sources are that bank's (src/objects/helix-volume/source/manifest.json)."
+        "reason": "A picture of the bank the default dataset shows; its sources are that bank's (src/objects/helix-layers/source/manifest.json)."
       }
     }
   ],

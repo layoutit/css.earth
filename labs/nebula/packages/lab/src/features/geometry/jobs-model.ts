@@ -1,5 +1,5 @@
-import { isRecord as coreIsRecord } from '@cssearth/core';
 /** Browser-safe contracts for explicit, non-destructive detector proposals. */
+import { isRecord as coreIsRecord } from '@cssearth/core';
 import { readDetectionSettings, type DetectionSettings } from '@cssearth/nebula-reconstruction/evidence/geometry/settings';
 import { isVariantName } from '../variant-name.ts';
 

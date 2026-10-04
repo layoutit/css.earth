@@ -19,7 +19,7 @@ export { loadPreparedCssObject, loadPreparedDataset } from './loader.js';
 export { adoptPreparedDatasetTables } from './prepared-data/dataset-tables.js';
 
 export type { PreparedCssTransport } from './loader.js';
-export { prestartPreparedObjectDecoding } from './prepared-object-worker-client.js';
+export { prestartPreparedObjectDecoding, readPrepared } from './prepared-data-worker-client.js';
 
 export type { ObjectDatasets } from './runtime/object-scene.js';
 export type { ObjectSharedView, ObjectSceneLifecycle } from './runtime/object-scene.js';

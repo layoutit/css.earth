@@ -5,7 +5,7 @@
  * of the transit below the baseline) at least DETECTION_SIGMA times its standard error. A planet with no 2-minute light curve, no
  * whole transit, or a dip TESS does not resolve gets no chart, and the report says which. */
 import { resolve } from 'node:path';
-import type { Archive } from './archives.mts';
+import type { Archive } from './archives/archives.mts';
 import type { PackageFiles } from './dataset.mts';
 import { NASA_TAP } from './orbit.mts';
 
@@ -118,4 +118,3 @@ export async function installTransitChart(files: PackageFiles, id: string, name:
   const operations = lightCurves.map((file, i) => ({ kind: 'download', groups: ['restore', 'refresh'], path: paths[i], url: `https://mast.stsci.edu/api/v0.1/Download/file?uri=${file.uri}` }));
   return { report: `${id}: transit from TESS sectors ${sectors}${align ? `, aligned ${align} min (1 sigma ${sigmaText} min)` : ''}`, readme: `its transit in ${lightCurves.length} TESS sector${lightCurves.length === 1 ? '' : 's'} (${sectors}), folded onto its orbit`, recipe, control, inputs, operations };
 }
-

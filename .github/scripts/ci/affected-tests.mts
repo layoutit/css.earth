@@ -1,36 +1,22 @@
+import { testLaneFiles } from '../../../packages/core/src/node/script-test-files.ts';
+export { testLaneFiles } from '../../../packages/core/src/node/script-test-files.ts';
 /** Which tests a change can break: the workspace packages it touched and every package that depends on one, and the
  * site when it, or a package it imports, changed. A push to main, or a change to shared configuration, tests everything.
  *
  *   node .github/scripts/ci/affected-tests.mts <base ref>    append test_packages and test_site to $GITHUB_OUTPUT
  *   node .github/scripts/ci/affected-tests.mts               (no base: a push) test everything */
 import { execFileSync } from 'node:child_process';
-import { appendFileSync, globSync, readdirSync, readFileSync } from 'node:fs';
-import { resolve } from 'node:path';
+import { appendFileSync, existsSync, readdirSync, readFileSync } from 'node:fs';
+import { dirname, relative, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 
 export interface Workspace { readonly directory: string; readonly name: string; readonly dependencies: readonly string[]; }
 export interface AffectedTests { readonly packages: 'all' | readonly string[]; readonly site: boolean; readonly files: readonly string[]; }
 
-/** The root scripts are the only lane map. Use their quoted Node test globs for collection and affected routing. */
-export function testLaneFiles(root: string): Readonly<Record<'packages' | 'site', readonly string[]>> {
-  const manifest: unknown = JSON.parse(readFileSync(resolve(root, 'package.json'), 'utf8'));
-  if (!manifest || typeof manifest !== 'object' || !('scripts' in manifest) || !manifest.scripts || typeof manifest.scripts !== 'object')
-    throw new TypeError('package.json has no scripts');
-  const scripts = manifest.scripts;
-  const collect = (lane: 'packages' | 'site'): string[] => {
-    const script = Reflect.get(scripts, `test:${lane}`);
-    if (typeof script !== 'string') throw new TypeError(`package.json has no test:${lane}`);
-    const patterns = [...script.matchAll(/"([^"\n]+)"/gu)].map(match => match[1]!);
-    if (patterns.length === 0) throw new TypeError(`test:${lane} has no test globs`);
-    return [...new Set(patterns.flatMap(pattern => globSync(pattern, { cwd: root })))].sort();
-  };
-  return { packages: collect('packages'), site: collect('site') };
-}
-
 /** Discover cross-owner coverage from the collected tests rather than maintaining a second path list.
  * Looking for package-name strings conservatively includes static and dynamic imports in each collected test. */
 export function testOwners(root: string): ReadonlyMap<string, readonly string[]> {
-  return new Map(testLaneFiles(root).packages.map(file => {
+  return new Map(testLaneFiles(root, JSON.parse(readFileSync(resolve(root, 'package.json'), 'utf8')) as unknown, ['test:packages', 'test:site']).packages.map(file => {
     const text = readFileSync(resolve(root, file), 'utf8');
     return [file, [...new Set([...text.matchAll(/['"`]@cssearth\/([^/'"`]+)(?:[/'"`])/gu)].map(match => match[1]!))]];
   }));
@@ -40,28 +26,54 @@ const SHARED = [/^package\.json$/u, /^pnpm-lock\.yaml$/u, /^pnpm-workspace\.yaml
 /** The offline preparation and archive tools. Many changes touch a package they import, so a
  * tool joins only when it, or another tool it imports, changed; a push to main tests them whatever changed. */
 const TOOLS = new Set(['bake', 'telescope-cli']);
-// This producer contract was explicitly routed for objects changes before discovery.
-const TOOL_FOREIGN_TESTS = new Map([['packages/bake/src/presentation/depth-partition-contract.test.ts', ['objects']]]);
-/** A tool test that pins another package's frozen fixture reads it through a `<package>/test/` path; editing that fixture
- * selects the pinning test, so the producer check runs on the pull request, not only after the merge. */
-export function readsChangedFixture(text: string, paths: readonly string[]): boolean {
+/** Resolve declared paths without reading their targets: the changes job only checks out test sources. */
+function declaredPaths(root: string, test: string, text: string): readonly string[] {
+  const literals = [...text.matchAll(/['"`]([^'"`\n]+)['"`]/gu)].map(match => match[1]!);
+  const directories = literals.filter(value => value.endsWith('/')).flatMap(value => [resolve(root, value), resolve(root, dirname(test), value)]);
+  return [...new Set(literals.filter(value => /\.[a-z0-9]+$/iu.test(value)).flatMap(value =>
+    [resolve(root, value), resolve(root, dirname(test), value), ...directories.map(directory => resolve(directory, value))]
+      .map(candidate => relative(root, candidate)).filter(path => !path.startsWith('../'))))];
+}
+
+/** Keep legacy split fixture declarations as well as exact repository and module-relative paths. */
+export function readsChangedFixture(text: string, paths: readonly string[], test = '', root = resolve(import.meta.dirname, '../../..')): boolean {
+  const declared = new Set(declaredPaths(root, test, text));
   return paths.some(path => {
     const match = /^packages\/([^/]+)\/test\/(?:.+\/)?([^/]+)$/u.exec(path);
-    return match !== null && text.includes(`${match[1]}/test/`) && text.includes(match[2]!);
+    return declared.has(path) || (match !== null && text.includes(`${match[1]}/test/`) && text.includes(match[2]!));
   });
+}
+
+/** Root-entry imports can consume any objects contract. Subpath imports consume only that entry. */
+export function importsChangedObjects(text: string, paths: readonly string[]): boolean {
+  return [...text.matchAll(/['"`]@cssearth\/objects(?:\/([^'"`]+))?['"`]/gu)].some(match =>
+    !match[1] || paths.some(path => path === `packages/objects/src/${match[1]}.ts`
+      || path.startsWith(`packages/objects/src/${match[1]}/`)));
 }
 const SITE = [/^site\//u, /^src\//u, /^integration\//u, /^\.github\//u, /^labs\/performance\//u];
 
-/** Sources outside `packages/` whose schema literals a package test pins (see `packages/bake/src/sources/python-schema-identifiers.test.ts`
- * and `shell-grid-schema.test.ts`): a change confined to one of them still selects the package that owns the pin. */
-const PINNED_SOURCE_OWNERS: Readonly<Record<string, string>> = Object.freeze({
-  '.github/scripts/checks/check-body-references.mts': 'bake',
-  'src/objects/heliosphere/source/ibex/extract.py': 'bake',
-});
+/** Derive source pins from repository-path literals read by tests, including module-relative URLs. */
+export function pinnedSourceOwners(root: string, owners: ReadonlyMap<string, readonly string[]>): ReadonlyMap<string, readonly string[]> {
+  const pins = new Map<string, string[]>();
+  for (const test of owners.keys()) {
+    if (!test.startsWith('packages/')) continue;
+    const owner = test.split('/')[1]!;
+    const text = readFileSync(resolve(root, test), 'utf8');
+    for (const path of declaredPaths(root, test, text).filter(path => /\.(?:py|[cm]?ts)$/u.test(path)))
+      pins.set(path, [...new Set([...(pins.get(path) ?? []), owner])]);
+  }
+  return pins;
+}
+export const TOOL_OBJECT_TEST_LIMIT = 150;
+let repositoryPins: ReadonlyMap<string, readonly string[]> | undefined;
+function defaultPins(): ReadonlyMap<string, readonly string[]> {
+  const root = resolve(import.meta.dirname, '../../..');
+  return repositoryPins ??= pinnedSourceOwners(root, testOwners(root));
+}
 
-export function affectedTests(paths: readonly string[] | null, packages: readonly Workspace[], siteDependencies: readonly string[], owners: ReadonlyMap<string, readonly string[]> = testOwners(resolve(import.meta.dirname, '../../..'))): AffectedTests {
+export function affectedTests(paths: readonly string[] | null, packages: readonly Workspace[], siteDependencies: readonly string[], owners: ReadonlyMap<string, readonly string[]> = testOwners(resolve(import.meta.dirname, '../../..')), pins: ReadonlyMap<string, readonly string[]> = defaultPins()): AffectedTests {
   if (paths === null || paths.some(path => SHARED.some(pattern => pattern.test(path)))) return { packages: 'all', site: true, files: [] };
-  const changed = new Set(paths.flatMap(path => /^packages\/([^/]+)\//u.exec(path)?.[1] ?? PINNED_SOURCE_OWNERS[path] ?? []));
+  const changed = new Set(paths.flatMap(path => /^packages\/([^/]+)\//u.exec(path)?.[1] ?? pins.get(path) ?? []));
   // Everything that imports a changed package can break with it: walk the dependents until nothing new joins.
   const byName = new Map(packages.map(workspace => [workspace.name, workspace.directory]));
   const joins = (workspace: Workspace) => workspace.dependencies.some(name => {
@@ -74,14 +86,18 @@ export function affectedTests(paths: readonly string[] | null, packages: readonl
   }
   const site = paths.some(path => SITE.some(pattern => pattern.test(path))) || siteDependencies.some(name => changed.has(byName.get(name) ?? ''));
   // A foreign test whose own package already runs is in that package's glob.
-  const fixtureReaders = new Map<string, string>(paths.some(path => /^packages\/[^/]+\/test\//u.test(path))
-    ? [...owners.keys()].filter(test => TOOLS.has(/^packages\/([^/]+)\//u.exec(test)?.[1] ?? '')).map(test => [test, readFileSync(resolve(import.meta.dirname, '../../..', test), 'utf8')] as const)
-    : []);
+  const root = resolve(import.meta.dirname, '../../..');
+  const readers = new Map([...owners.keys()]
+    .filter(test => existsSync(resolve(root, test)))
+    .map(test => [test, readFileSync(resolve(root, test), 'utf8')] as const));
+  const toolObjectCount = [...owners].filter(([file, imports]) => TOOLS.has(file.split('/')[1] ?? '') && imports.includes('objects')).length;
   const files = [...owners].filter(([test, imports]) => !changed.has(/^packages\/([^/]+)\//u.exec(test)?.[1] ?? '')
-    && (!TOOLS.has(/^packages\/([^/]+)\//u.exec(test)?.[1] ?? '')
+    && ((readers.has(test) && readsChangedFixture(readers.get(test)!, paths, test, root))
+      || (!TOOLS.has(/^packages\/([^/]+)\//u.exec(test)?.[1] ?? '')
       ? imports.some(owner => changed.has(owner)) || paths.includes(test)
-      : TOOL_FOREIGN_TESTS.get(test)?.some(owner => changed.has(owner)) === true
-        || (fixtureReaders.has(test) && readsChangedFixture(fixtureReaders.get(test)!, paths)))).map(([test]) => test).sort();
+      : (changed.has('objects') && imports.includes('objects')
+          && (toolObjectCount <= TOOL_OBJECT_TEST_LIMIT || importsChangedObjects(readers.get(test) ?? '', paths)))
+        ))).map(([test]) => test).sort();
   return { packages: [...changed].sort(), site, files };
 }
 

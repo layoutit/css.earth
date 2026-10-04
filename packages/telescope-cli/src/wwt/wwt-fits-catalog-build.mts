@@ -1,8 +1,7 @@
 /** Snapshot a WWT WTML FITS collection with WWT's own parser for runtime-free lookup. */
 import { spawnSync } from 'node:child_process';
 import { readFile, writeFile } from 'node:fs/promises';
-import { resolve } from 'node:path';
-import { basename } from 'node:path';
+import { resolve, basename } from 'node:path';
 
 const parser = String.raw`
 import importlib.metadata, json, sys

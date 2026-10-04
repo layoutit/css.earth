@@ -1,3 +1,4 @@
+import { normalize3OrZero } from '@cssearth/core';
 import {parse, object, string, boolean} from '@cssearth/core/schema';
 import {radialMotionRecipe} from './radial-motion-recipe.ts';
 import type {ReadonlyVector3} from '../../geometry/index.ts';
@@ -5,11 +6,10 @@ export const bodyRingShadow = object({model:string,edgeFeather:object({model:str
 import {readFile,mkdir} from 'node:fs/promises';
 import {resolve} from 'node:path';
 import sharp from 'sharp';
-import {parseRadialLayerRecipe} from '../giant/index.ts';
-import {sampleRadialProfile,rasterObservedRadialField, loadObservedProfile} from '../giant/index.ts';
+import { parseRadialLayerRecipe, sampleRadialProfile, rasterObservedRadialField, loadObservedProfile } from '../giant/index.ts';
 import {verifyObservationSources} from '../observed-surfaces/index.ts';
 import {cropTransparentRgba} from './rgba.ts';
-import {normalizeVector,rotateX as rotateVectorX,rotateZ as rotateVectorZ} from '../../geometry/index.ts';
+import {rotateX as rotateVectorX,rotateZ as rotateVectorZ} from '../../geometry/index.ts';
 /** Observed radial-profile sampling and the ellipsoid penumbra the body casts on the rings. */
 export async function prepareRadialMotionAndShadow({sourceDirectory,publicDirectory,config: input,radialRecipe: radialInput}: {sourceDirectory: string; publicDirectory: string; config: unknown; radialRecipe: unknown}) {
  const config = parse(input, radialMotionRecipe, 'radial motion recipe');
@@ -43,7 +43,7 @@ const RING_SHADOW_TEXTURE_SIZE = config.parameters.ringShadowTextureSize;
 const RING_SHADOW_TRANSPARENT_GUTTER = config.parameters.ringShadowTransparentGutter;
 
 const PRESENTATION_TIME_SCALE=BODY_REFERENCE_ROTATION_SECONDS/PRESENTATION_REFERENCE_ROTATION_SECONDS;
-const STATIC_OBJECT_LIGHT_DIRECTION=Object.freeze(rotateVectorZ(rotateVectorX(rotateVectorZ(normalizeVector(STATIC_WORLD_LIGHT_DIRECTION),-STATIC_SYSTEM_NODE_DEGREES*Math.PI/180),-BODY_OBLIQUITY_DEGREES*Math.PI/180),-STATIC_MESH_ROTATION_DEGREES*Math.PI/180));
+const STATIC_OBJECT_LIGHT_DIRECTION=Object.freeze(rotateVectorZ(rotateVectorX(rotateVectorZ(normalize3OrZero(STATIC_WORLD_LIGHT_DIRECTION),-STATIC_SYSTEM_NODE_DEGREES*Math.PI/180),-BODY_OBLIQUITY_DEGREES*Math.PI/180),-STATIC_MESH_ROTATION_DEGREES*Math.PI/180));
 const raw=rasterObservedRadialField(layer,layer.size,layer.readability.minimumPixels[1],profile);
 const shadow=createBodyShadowOverlay(RING_SHADOW_TEXTURE_SIZE);
 const feathered=await featherBodyShadowOverlay({shadowRgba:shadow.rgba,shadowTextureSize:RING_SHADOW_TEXTURE_SIZE,ringRgba:raw,ringTextureSize:layer.size});

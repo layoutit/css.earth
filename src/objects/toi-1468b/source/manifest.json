@@ -169,6 +169,76 @@
           }
         ]
       }
+    },
+    {
+      "id": "toi-1468b-temperature-eclipse-depth",
+      "path": "science/meier-valdes-2025/dayside-15um.json",
+      "origin": "https://arxiv.org/abs/2503.19772",
+      "credit": "Meier Valdés et al. (2025); three JWST MIRI F1500W occultations of the Hot Rocks Survey",
+      "license": "Factual numerical measurement; source attribution retained",
+      "acquisition": "Transcribed from the paper: the eclipse depth and its one-sigma range, with the cell and its location",
+      "redistribution": "A two-number measurement record",
+      "consumers": [
+        "toi-1468b-bare-rock-model"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-toi-1468b-temperature-eclipse-depth",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "toi-1468b-jwst-miri-f1500w-filter",
+      "path": "science/svo/JWST_MIRI.F1500W.xml",
+      "origin": "https://svo2.cab.inta-csic.es/theory/fps/fps.php?ID=JWST/MIRI.F1500W",
+      "productId": "JWST/MIRI.F1500W",
+      "version": "SVO Filter Profile Service",
+      "title": "JWST/MIRI.F1500W filter response",
+      "sourceUrl": "https://svo2.cab.inta-csic.es/theory/fps/index.php?id=JWST/MIRI.F1500W",
+      "credit": "Spanish Virtual Observatory Filter Profile Service (Rodrigo & Solano 2020)",
+      "displayCredit": "SVO Filter Profile Service",
+      "license": "Filter profiles served openly by the SVO for research use with citation",
+      "licenseEvidence": [
+        "https://svo2.cab.inta-csic.es/theory/fps/index.php?mode=use"
+      ],
+      "acquisition": "Restored through source/preparation/acquisition.json from the SVO Filter Profile Service VOTable for JWST/MIRI.F1500W, unchanged.",
+      "redistribution": "Not redistributed in git; restored from the SVO.",
+      "consumers": [
+        "toi-1468b-bare-rock-model"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Pinned SVO filter profile; the service has no catalogue record in this repository yet."
+      }
+    },
+    {
+      "id": "toi-1468b-bt-settl-cifist-3400",
+      "path": "science/bt-settl-cifist/bt-settl-cifist-3400-5.0-0.0.xml",
+      "origin": "https://svo2.cab.inta-csic.es/theory/newov2/ssap.php?model=bt-settl-cifist&fid=193",
+      "productId": "bt-settl-cifist fid 193",
+      "version": "BT-Settl (CIFIST2011) through the SVO Theoretical Spectra service",
+      "title": "BT-Settl CIFIST model spectrum, Teff 3400 K, log g 5.0, [M/H] 0",
+      "sourceUrl": "https://svo2.cab.inta-csic.es/theory/newov2/index.php?models=bt-settl-cifist",
+      "credit": "F. Allard, D. Homeier, B. Freytag (2012), BT-Settl CIFIST2011; Spanish Virtual Observatory Theoretical Spectra service",
+      "displayCredit": "BT-Settl · SVO",
+      "license": "Model spectra served openly by the SVO for research use with citation",
+      "licenseEvidence": [
+        "https://svo2.cab.inta-csic.es/theory/newov2/index.php?models=bt-settl-cifist"
+      ],
+      "acquisition": "Restored through source/preparation/acquisition.json from the SVO SSAP access reference for Teff 3400 K, log g 5.0, [M/H] 0, the grid point nearest toi-1468's cited temperature and gravity.",
+      "redistribution": "Not redistributed in git; restored from the SVO.",
+      "consumers": [
+        "toi-1468b-bare-rock-model"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Pinned SVO model spectrum; the service has no catalogue record in this repository yet."
+      }
     }
   ],
   "generatedIntermediates": [
@@ -185,7 +255,8 @@
         "generator": "packages/telescope-cli/src/source-authoring/context-markers.mts",
         "inputs": [
           "toi-1468b-observational-measurements",
-          "toi-1468b-preparation-raster"
+          "toi-1468b-preparation-raster",
+          "toi-1468b-temperature-eclipse-depth"
         ]
       },
       "generator": "packages/telescope-cli/src/source-authoring/context-markers.mts",

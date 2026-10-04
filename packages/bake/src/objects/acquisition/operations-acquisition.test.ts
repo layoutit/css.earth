@@ -5,10 +5,9 @@ import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 import { execFileSync } from 'node:child_process';
 import { randomUUID } from 'node:crypto';
-import { executeAcquisition, parseAcquisitionPlan } from '@cssearth/bake/objects/acquisition';
+import { executeAcquisition, parseAcquisitionPlan, convertMappedComposition, parseMappedCompositionRecipe } from '@cssearth/bake/objects/acquisition';
 import { acquirePinnedDownloads, verifySources, type SourceManifest } from '@cssearth/bake/objects/sources';
 import { gzipSync } from 'node:zlib';
-import { convertMappedComposition, parseMappedCompositionRecipe } from '@cssearth/bake/objects/acquisition';
 const test = sourceTest();
 
 const rawSource = (_bytes: Uint8Array) => ({path:'source.img',origin:'https://example.test/source.img'});
@@ -185,6 +184,15 @@ for(const [name,received,declared,error] of [
     transport:{fetch:async()=>chunkedResponse([received.subarray(0,2),received.subarray(2)],declared)}}),error);
   assert.deepEqual(await readFile(join(directory,'source.img')),old);
   assert.deepEqual(await readdir(directory),['source.img']);
+}));
+
+// A server that compresses the transfer declares the compressed length, and fetch hands over the decoded file:
+// raw.githubusercontent.com answers a 4.6 MB table with content-length 637707. That length says nothing about the file.
+test('a compressed answer is not held to the length of its transfer',()=>temporary(async directory=>{
+  const data=Buffer.from('pinned data');
+  await executeAcquisition({sourceRoot:directory,manifest:rawManifest(data),plan:rawPlan,mirrorOrigin:null,
+    transport:{fetch:async()=>new Response(data,{headers:{'content-length':'4','content-encoding':'gzip'}})}});
+  assert.deepEqual(await readFile(join(directory,'source.img')),data);
 }));
 
 test('abrupt source stream errors clean up without replacing the previous pin',()=>temporary(async directory=>{

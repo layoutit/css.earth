@@ -4,20 +4,20 @@
 
 Its brightness, measured band by band, gives 61 times the Sun's luminosity at 4,889 K, so 10.921 solar radii. It is also HD 177241, HR 7217, HIP 93683. The introduction is generated from McDonald, Zijlstra & Watson (2017), MNRAS 471, 770's published values; the sections below are the data's own.
 
-**Star.** Placement: Gaia DR3 source 4081642115877635840, distance 44 pc from McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 93683: distance 43.554 pc, the paper's parallax inverted (Gaia DR1's where it revised the star's, else the Hipparcos reduction of van Leeuwen 2007; section 2.3; fractional uncertainty 0.01), at which the luminosity and radius hold; Gaia DR3's parallax, 23.812 ± 0.152 mas (156.9 standard errors), is not used. Radius 10.921 solar radii from McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 93683: radius 10.921 solar radii, implied by the fitted luminosity 61.216 solar luminosities (fractional uncertainty 0.052) and temperature (https://doi.org/10.1093/mnras/stx1433). No mass is measured, so GM is 0, the records' unpublished value. Temperature 4,889 K from McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 93683: effective temperature 4889 +/- 125 K, from the fit of a model atmosphere to the star's spectral energy distribution (goodness of fit Q 0.046). No surface gravity of this star is published.
+**Star.** Placement: Gaia DR3 source 4081642115877635840, distance 44 pc from McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 93683: distance 43.554 pc, the paper's parallax inverted (Gaia DR1's where it revised the star's, else the Hipparcos reduction of van Leeuwen 2007; section 2.3; fractional uncertainty 0.01), at which the luminosity and radius hold; Gaia DR3's parallax, 23.812 ± 0.152 mas (156.9 standard errors), is not used. Radius 10.921 solar radii from McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 93683: radius 10.921 solar radii, implied by the fitted luminosity 61.216 solar luminosities (fractional uncertainty 0.052) and temperature (https://doi.org/10.1093/mnras/stx1433). No mass is measured, so GM is 0, the records' unpublished value. Temperature 4,889 K from McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 93683: effective temperature 4889 +/- 125 K, from the fit of a model atmosphere to the star's spectral energy distribution (goodness of fit Q 0.046). log g 2.7 from 2014ApJ...785...94L ("The lithium abundances of a large sample of red giants.").
 
 **Color.** Burnashev (1985), Abastumani Astrophys. Obs. Bull. 59, 83; VizieR III/126, part2 record 255 (BS 7217), through the CIE 1931 2° observer: #ffe2c0. Routes tried in order: stis-ngsl: HD 177241 is not in the library; pulkovo: HR 7217 is not in the catalogue; kiehling: HR 7217 is not among its 60 stars; kharitonov: HR 7217 is not in the catalogue; gaia-xp: Gaia DR3 published no sampled BP/RP spectrum of it; burnashev: used.
 
-**Limb.** No limb darkening is drawn: no mass is measured and no spectroscopic surface gravity is published with this radius: McDonald, Zijlstra & Watson (2017), MNRAS 471, 770 assume the gravity of their fit (table column 15).
+**Limb.** The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 4,889 K and log g 2.7 (u1 0.660, u2 0.124): a model, because no fit of this star's limb is used. Gravity: log g 2.7 from 2014ApJ...785...94L; the 10 published values span log g 2.5 to 3.03, across which the limb law changes by at most 0.1% of the centre brightness.
 
 ## Evidence
 
 Generated 2026-10-03 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts) from Gaia DR3, SIMBAD and the archives named above; each choice was read with the dataset's own reader.
 
-
 ## Known problems
 
 - **Assumptions of the frame.** The axis's position angle and the rotation phase are conventions.
 - **Quoted text.** The introduction quotes sentences of the Wikipedia article "Omicron Sagittarii" (revision 1369727831) verbatim, CC BY-SA 4.0.
+- **Model limb.** The limb darkening is a model atmosphere at the star's temperature and gravity, not a measurement of this star.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

@@ -6,6 +6,7 @@
  * `--index` renders the open-work index: every unresolved or deferred decision grouped by what is being waited on, so the
  * next piece of work is chosen from the record instead of memory. `--write` refreshes the committed copy.
  */
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { resolve } from 'node:path';
 import {
@@ -17,7 +18,7 @@ import { readCatalog } from '@cssearth/objects/node';
 import { prepareSceneDistance } from '@cssearth/bake/navigation';
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
-  const root = fileURLToPath(new URL('../../../', import.meta.url)), options = investigationOptions(process.argv.slice(2));
+  const root = checkoutProjectRoot(import.meta.url), options = investigationOptions(process.argv.slice(2));
   if (options.facilities) {
     const [facilities, ledgers] = await Promise.all([groundFacilities(root), readFacilityLedgers(root)]);
     const report = investigationReport(facilities, ledgers.map(ledger => ({ schema: ledger.schema, objectId: ledger.facilityId, entries: ledger.entries })), options);

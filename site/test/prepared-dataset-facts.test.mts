@@ -1,5 +1,6 @@
+import { parseCompleteObjectContentSource } from '@cssearth/objects/node/contract';
 import { OBJECT_CONTENT_FIXTURE_LABEL } from './fixtures/object-content-fixture.mts';
-import { parseCompleteObjectContentSource, type ObjectContentSource } from '@cssearth/objects';
+import { type ObjectContentSource } from '@cssearth/objects';
 import assert from 'node:assert/strict';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();

@@ -33,6 +33,42 @@
           "source": "the color dataset of ltt-9779 (src/objects/ltt-9779/source/photometry/stellar-color.json)"
         }
       }
+    },
+    {
+      "id": "temperature",
+      "output": "ltt-9779b-surface-{id}{suffix}.webp",
+      "thumbnail": "ltt-9779b-dataset-{id}.webp",
+      "source": "science/crossfield-2020/phase-curve.json",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "temperature",
+        "label": "Spitzer",
+        "format": "published-phase-curve-map",
+        "path": "science/crossfield-2020/phase-curve.json",
+        "consumer": "temperature-phase-curve-map",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "K",
+        "minimum": 400,
+        "maximum": 1950,
+        "colors": [
+          "#0d0887",
+          "#7e03a8",
+          "#cc4778",
+          "#f89540",
+          "#f0f921"
+        ],
+        "labels": [
+          "400",
+          "1175",
+          "1950"
+        ],
+        "description": "Brightness temperature at 4.5 µm from the paper's phase-curve fit, turned into a map of longitude. It has no north-south information.",
+        "title": "Spitzer · published phase-curve fit",
+        "sourceUrl": "https://arxiv.org/abs/2010.12745"
+      }
     }
   ],
   "lighting": {

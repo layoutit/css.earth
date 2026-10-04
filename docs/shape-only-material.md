@@ -9,7 +9,7 @@ When published whole-disc photometry gives a body's color indices and V
 geometric albedo, its shape view may use that measured color instead, through
 the raster `disc-integrated-color` science kind
 ([disc-integrated-color.ts](../packages/bake/src/objects/color/disc-integrated-color.ts)); its record parser is owned by
-[objects](../packages/objects/src/prepared-data/disc-integrated-color.ts).
+[objects](../packages/objects/src/prepared-data/photometry/disc-integrated-color.ts).
 Color indices relative to the Sun give reflectance at the B, V, R and I effective
 wavelengths; a piecewise-linear spectrum through them is integrated with the CIE
 1931 observer under D65 and scaled so V reflectance equals the albedo. The color
@@ -40,7 +40,7 @@ brightness against each other survive. The surface must declare `falseColor`. Th
 A star with no image may instead show the color of its catalogued photometric
 temperature, through the `stellar-photometric-color` science kind
 ([stellar-photometric-color.ts](../packages/bake/src/objects/stellar/stellar-photometric-color.ts)); its record parser is owned by
-[objects](../packages/objects/src/prepared-data/stellar-photometric-color.ts).
+[objects](../packages/objects/src/prepared-data/photometry/stellar-photometric-color.ts).
 A Planck spectrum at that temperature is integrated with the CIE 1931 observer and
 converted to sRGB with its D65 white, scaled so the brightest channel is full. The
 disc is self-luminous: the color carries no brightness or spectral lines. WASP-43

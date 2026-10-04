@@ -25,6 +25,16 @@ Camera projection, star loading and navigation remain here.
   its prepared data. Object page stylesheets (`src/renderers/css/styles/*-surfaces.css`) belong to the objects, not here.
 - Validate every external value where it enters (prepared runtime validators in `@cssearth/objects`); no `any` and no TypeScript suppression comments.
 
+## Reading prepared data
+
+- A prepared data file is read by its kind's reader (`src/prepared-data/prepared-readers.ts`), listed in
+  `src/prepared-data/readers.ts`: it fetches, unpacks and validates, and hands the page the value with its buffers by
+  transfer. In a browser the readers run in the data worker (`src/prepared-data-worker.ts`, asked through
+  `readPrepared(kind, url)`); Node tools and tests run the same reader in place. The page's thread parses no large text
+  and builds no object for each element of a table. A new format adds a reader there, not a fetch and a parse of its own.
+- A value that crossed from the worker has lost its validator's mark: the reader that receives it re-marks it
+  (`trustPreparedCssVolume`), or every later validation walks it again.
+
 ## Entries
 
 - `tsup.config.ts` names the built entries; `package.json#exports` publishes each of them and the TypeScript source
@@ -71,3 +81,7 @@ Shared resource/address and image-density conventions, tile styles, interior-dis
 
 Presentation-to-world conversion, camera pose/viewport shapes, default-view rotation, silhouette walking and
 surface fly-to calibration belong to `@cssearth/engine`. Renderer extends the engine viewport with layout fields. Runtime viewport/layout and world-to-presentation projection stay here.
+
+## Accepted test boundaries
+
+Node tests beside `src/node/` verify private implementation details; `test/` holds package integration fixtures and helpers. Three explicit `./test/` exports expose only the fixture files imported through package entries. The sole consumer outside renderer is `site/test/runtime-package.test.mts`, which imports `@cssearth/renderer/test/object-runtime-package.mts`; the orbit and camera-orientation fixture exports serve renderer tests.

@@ -14,6 +14,7 @@
  * shared neutral gray, lit by its own star: no color of these planets is measured. Prose the scaffold cannot know
  * (reader text, README, credits, ledger) carries the marker TODO(new-hosted-planet).
  * Then run: node packages/bake/cli/prepare-object.mts <id> */
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 import { HOSTED_PLANET_MEASUREMENTS_SCHEMA, RASTER_RECIPE_SCHEMA, OBJECT_CONTENT_SCHEMA, OBJECT_CONTENT_VERSION, AUTHORED_OBJECT_SCHEMA, OBJECT_SCHEMA, SOURCE_MANIFEST_SCHEMA, NEUTRAL_CATALOGUE_COLOR, PREPARED_CSS_OBJECT_FORMAT, OBJECT_TEXT_SCHEMA, DISPLAY_ORIENTATION_SCHEMA, SYNCHRONOUS_ROTATION_SCHEMA, SOLAR_SYSTEM_PREPARATION_SCHEMA, INVESTIGATION_LEDGER_SCHEMA, ACQUISITION_PLAN_SCHEMA, CSS_PRESENTATION_PROFILE_SCHEMA, CSS_GEOMETRY_PROFILE_SCHEMA, NAVIGATION_MARKER_SCHEMA, systemObjectId } from '@cssearth/objects';
 
 import { mkdir, readFile, stat, writeFile } from 'node:fs/promises';
@@ -209,7 +210,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
   const flag = (name: string) => { const index = args.indexOf(`--${name}`); return index < 0 ? undefined : args[index + 1]; };
   const id = args.find((argument, index) => !argument.startsWith('--') && !args[index - 1]?.startsWith('--'));
   if (!id) throw new TypeError('Usage: new-hosted-planet <id> --name <name> --system <system> --description <line> --paper <url> --paper-credit <credit>');
-  const root = resolve(import.meta.dirname, '../../../..');
+  const root = checkoutProjectRoot(import.meta.url);
   const exists = (path: string) => stat(resolve(root, path)).then(() => true, () => false);
   if (await exists(`src/objects/${id}`)) throw new Error(`src/objects/${id} already exists; the scaffold never overwrites a package.`);
   const order = flag('order'), color = flag('color'), rotation = flag('rotation'), glowK = flag('self-luminous'), glowSource = flag('temperature-source');

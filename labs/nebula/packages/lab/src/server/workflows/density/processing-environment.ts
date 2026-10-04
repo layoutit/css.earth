@@ -1,5 +1,5 @@
-import { isRecord as coreIsRecord } from '@cssearth/core';
 /** Read only the processing prerequisites from the canonical bake recipe. */
+import { isRecord as coreIsRecord } from '@cssearth/core';
 import type { BakeRecipe } from './config.ts';
 
 export type ProcessingEnvironmentRecipe = Pick<BakeRecipe, 'environment'> & { removal: Pick<BakeRecipe['removal'], 'model'> };

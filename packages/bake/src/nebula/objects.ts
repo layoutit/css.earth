@@ -1,23 +1,26 @@
-/** Reproducible offline handoff from the two lab methods to the shared application volume capability. */
-import { OBJECT_SCHEMA, PREPARED_OBJECT_SCHEMA, DENSITY_VOLUME_FORMAT, PREPARED_VOLUME_DATASETS_SCHEMA, parseVolumeRecipe, type CompilerBakeResult, type DensityVolumeFrame, validatePreparedCssVolume, validatePreparedVolumeDatasets, type PreparedVolumeDataset, parsePreparedNebulaCatalog, readNebulaDelivery, type NebulaSkyFrame } from '@cssearth/objects';
+import { readNonemptyText } from '@cssearth/core';
+import { OBJECT_SCHEMA, PREPARED_OBJECT_SCHEMA, DENSITY_VOLUME_FORMAT, PREPARED_VOLUME_DATASETS_SCHEMA, PREPARED_VOLUME_DATASET_INDEX_SCHEMA, parseVolumeRecipe, type CompilerBakeResult, type DensityVolumeFrame, validatePreparedCssVolume, validatePreparedVolumeDatasets, type PreparedVolumeDataset, parsePreparedNebulaCatalog, readNebulaDelivery, type NebulaSkyFrame } from '@cssearth/objects';
+import { readVolumeDatasetBank, writeVolumeDatasetBank } from '@cssearth/objects/node';
 import { nebulaBakeBackend } from './backend.ts';
 import { verifyReplayReferences } from './references.ts';
-
 import { replayCompactCompiler, replayCompactSymmetry, replayCompactSampled, prepareVolumeSlices } from '../volume/node/index.ts';
 import { compileCssVolume, prepareVolumeImpostors } from '../volume-leaves/index.ts';
 import { readFile, writeFile, mkdir, readdir, rename, rm } from 'node:fs/promises';
 import { resolve, dirname, relative, isAbsolute, sep } from 'node:path';
 import { isDeepStrictEqual } from 'node:util';
 import { prepareNebulaCatalogueField } from './catalogue-field.ts';
-
 import { prepareVolumeAtlases } from '../density/index.ts';
-
 import { embedNebulaFrame, embedNebulaVolume, reflectNebulaPoint } from './nebula-frame.ts';
 import { sanitizeVolumeProvenance } from './volume-provenance.ts';
 import { assertCompilerDeliveryElementBudget } from './element-budget.ts';
+
+const invalidText = (): never => { throw new TypeError('Expected nebula delivery text.'); };
+/** Reproducible offline handoff from the two lab methods to the shared application volume capability. */
+
+
+
 const json = (v: unknown) => JSON.stringify(v, null, 2) + '\n';
 const record = (v: unknown): Record<string, unknown> => { if (!v || typeof v !== 'object' || Array.isArray(v)) throw new TypeError('Expected nebula delivery object.'); return v as Record<string, unknown>; };
-const text = (v: unknown) => { if (typeof v !== 'string' || !v) throw new TypeError('Expected nebula delivery text.'); return v; };
 export interface NebulaResearchBackend {
   compiler(root: string, recipe: ReturnType<typeof readNebulaDelivery>, progress: (message: string, fraction?: number) => void): Promise<{
     id: string; scene: CompilerBakeResult; sources: {id: string; label: string; credit: string; page: string}[];
@@ -31,19 +34,19 @@ function local(root: string, path: string): string {
 }
 async function read(root: string, path: string) { return JSON.parse(await readFile(local(root,path),'utf8')) as unknown; }
 async function put(path: string, value: string | Uint8Array) { await mkdir(dirname(path),{ recursive:true }); await writeFile(path,value); }
-interface Pin { path: string }
-function pin(v: unknown): Pin {
-  const p = record(v), path = text(p.path);
+interface CompilerPin { path: string }
+function pin(v: unknown): CompilerPin {
+  const p = record(v), path = readNonemptyText(p.path, '', invalidText);
   return { path };
 }
-async function pinned(root: string, p: Pin) { const bytes = await readFile(local(root,p.path)); return bytes; }
+async function pinned(root: string, p: CompilerPin) { const bytes = await readFile(local(root,p.path)); return bytes; }
 /** Reuse an installed bank only when its receipt records the current recipe and its descriptor and every resource it
  * names are present. The receipt keeps the whole recipe, so a changed recipe is compared, not trusted. */
 async function installed(directory: string, recipe: unknown): Promise<boolean> {
   try {
     if (!isDeepStrictEqual(record(await read(directory,'prepared/delivery.json')).recipe, recipe)) return false;
     const descriptor = record(await read(directory,'object.json')), prepared = pin({ path:record(descriptor.prepared).url });
-    const envelope = record(JSON.parse((await pinned(directory,prepared)).toString())), data = validatePreparedVolumeDatasets(envelope.data);
+    const data = await readVolumeDatasetBank(dirname(local(directory,prepared.path)));
     for (const dataset of data.datasets) for (const resource of dataset.volume.resources) await pinned(directory,{path:`prepared/${resource.path}`});
     return true;
   } catch (error) { if (error instanceof Error && 'code' in error && error.code === 'ENOENT') return false; throw error; }
@@ -184,8 +187,8 @@ export async function prepareNebulaObject(root: string, directory: string, ifMis
       framingRadiusUnits:recipe.framingRadiusUnits,contextVisibility:'independent',starsEnabled:datasets[0]!.stars.points.length>0,
       ...(recipe.attachedTo === undefined ? {} : {attachedTo:recipe.attachedTo}),datasets});
     const renderElements = assertCompilerDeliveryElementBudget(compilerSampling, data);
-    const envelope = json({schema:PREPARED_OBJECT_SCHEMA,id:recipe.id,type:'volume-dataset-bank',format:PREPARED_VOLUME_DATASETS_SCHEMA,data});
-    await put(resolve(staging,'datasets.json'),envelope);
+    // The bank's files: its index, one volume a dataset, its stars and its record (@cssearth/objects volume-dataset-bank-files.ts).
+    await writeVolumeDatasetBank(staging, data);
     await put(resolve(staging,'delivery.json'),json({schema:'cssearth-nebula-delivery-receipt@2',recipe:JSON.parse(recipeBytes.toString()),sourceResult,
       acceptedLabResult:recipe.acceptedLabResult,...(fieldStars ? {fieldStars} : {}), ...(renderElements ? { renderElements } : {}),
       datasets:datasets.map(l=>({id:l.id,stars:l.stars.points.length,leaves:l.volume.resources.length}))}));
@@ -198,7 +201,7 @@ export async function prepareNebulaObject(root: string, directory: string, ifMis
       if (error instanceof SyntaxError || error instanceof Error && 'code' in error && error.code === 'ENOENT') return {} as Record<string, unknown>; throw error; });
     const host = authored.host, cataloguePoints = authored.cataloguePoints;
     await put(resolve(directory,'object.json'),json({schema:OBJECT_SCHEMA,id:recipe.id,type:'volume-dataset-bank',properties:{frame:datasets[0]!.volume.frame,
-      preparation:{source:'source/delivery.json'},...(host === undefined ? {} : {host:text(host)}),...(cataloguePoints === undefined ? {} : {cataloguePoints})},prepared:{format:PREPARED_VOLUME_DATASETS_SCHEMA,url:'prepared/datasets.json'}}));
+      preparation:{source:'source/delivery.json'},...(host === undefined ? {} : {host:readNonemptyText(host, '', invalidText)}),...(cataloguePoints === undefined ? {} : {cataloguePoints})},prepared:{format:PREPARED_VOLUME_DATASET_INDEX_SCHEMA,url:'prepared/datasets.json'}}));
     return { id:recipe.id,status:'prepared',sourceResult,datasets:datasets.map(l=>({id:l.id,stars:l.stars.points.length,leaves:l.volume.resources.length})) };
   } finally { await rm(staging,{recursive:true,force:true}); }
 }

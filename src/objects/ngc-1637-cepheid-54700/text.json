@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "ngc-1637-cepheid-54700",
+  "card": {
+    "text": "A Cepheid in the galaxy NGC 1637, 9.3 million parsecs away, that swells and shrinks every 54.4 days.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1086-376831",
+        "url": "https://doi.org/10.1086/376831",
+        "label": "Leonard et al. (2003), The Astrophysical Journal 594 247-278",
+        "checked": "2026-10-04",
+        "locator": "table 8, ID 54700: P, and note a"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Leonard et al. (2003) list its pulsation at 54.4 days. It is one of the 18 Cepheids their distance to the galaxy rests on.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1086-376831",
+        "url": "https://doi.org/10.1086/376831",
+        "label": "Leonard et al. (2003), The Astrophysical Journal 594 247-278",
+        "checked": "2026-10-04",
+        "locator": "table 8, ID 54700: P, and note a"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its temperature",
+      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

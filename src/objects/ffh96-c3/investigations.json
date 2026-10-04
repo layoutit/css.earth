@@ -1,0 +1,53 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "ffh96-c3",
+  "entries": [
+    {
+      "id": "placement",
+      "subject": "Placement",
+      "status": "included",
+      "finding": "Kanbur et al. (2003), A&A 411, 361, VizieR J/A+A/411/361/table1 Galaxy = NGC4321, Cepheid = C3, names the star in SIMBAD (SName); SIMBAD holds its position and names no paper for it, SIMBAD basic row main_id = [FFH96] C3: J2000 position; Gaia cannot see the star. Distance: Placed in M100 as the app draws it, where the star's sight line crosses the disc's midplane: 15,215,772 pc (src/objects/m100-layers/source/recipe.json: centre 15,210,000 pc, inclination 38.5 deg, line of nodes 156.2 deg). The galaxy's distance, which places the galaxy and not a star within it: Leroy et al. (2021), PHANGS-ALMA, ApJS 257, 43, table of galaxies, row NGC4321: distance 15.21 ± 0.5 Mpc, from the compilation of Anand et al. (2021) (https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/257/43) (https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/257/43): 15215772 pc; Gaia DR3 cannot see the star. Proper motion: basic row main_id = [FFH96] C3 measures no proper motion; zero is assumed (at 15,215,772 pc, 1 mas/yr would be 72,130 km/s across the sky). Radial velocity from SIMBAD's radial velocity of M100, the Cepheid's galaxy, from 2022ApJS..261...21Y; the star's own motion within the galaxy is not measured.",
+      "evidence": [
+        "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=%5BFFH96%5D%20C3",
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/257/43",
+        "https://ui.adsabs.harvard.edu/abs/2022ApJS..261...21Y/abstract"
+      ]
+    },
+    {
+      "id": "radius-mass-and-temperature",
+      "subject": "Radius, mass and temperature",
+      "status": "included",
+      "finding": "Radius 241.5 +/- 40.3 solar radii from Groenewegen (2020), A&A 635, A33, period relations for Galactic fundamental-mode Cepheids applied to this star's period, 63.53 d in Kanbur et al. (2003), A&A 411, 361, VizieR J/A+A/411/361/table1 Galaxy = NGC4321, Cepheid = C3 (log(P) 1.803); not a measurement of this star: eq. 2, log R = 0.721 log P + 1.083; the uncertainty is the relation's scatter, 0.067 dex (https://arxiv.org/abs/2002.02186). No mass is measured, so GM is 0, the records' unpublished value. Temperature 4720 +/- 317 K from Groenewegen (2020), A&A 635, A33, period relations for Galactic fundamental-mode Cepheids applied to this star's period, 63.53 d in Kanbur et al. (2003), A&A 411, 361, VizieR J/A+A/411/361/table1 Galaxy = NGC4321, Cepheid = C3 (log(P) 1.803); not a measurement of this star: the luminosity of eq. 1 (M_bol = -2.95 log P - 0.98, with the nominal solar M_bol 4.74) over the radius of eq. 2, through L = 4 pi R^2 sigma T^4 with the nominal solar 5772 K (IAU 2015 Resolutions B2 (Mamajek et al. 2015, arXiv:1510.06262) and B3 (Prsa et al. 2016, arXiv:1605.09788)); the uncertainty is the 317 K by which the two relations miss the paper's own Cepheid temperatures.",
+      "evidence": [
+        "https://arxiv.org/abs/2002.02186"
+      ]
+    },
+    {
+      "id": "color",
+      "subject": "Color",
+      "status": "included",
+      "finding": "A Planck spectrum at 4,720 K, because no archive holds a spectrum of this star (stis-ngsl: no HD number in SIMBAD; gaia-xp: the star is placed by a catalogue row, so no Gaia DR3 source is read for it; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number), through the CIE 1931 2-degree observer: #ffe1c5. Routes tried in order: stis-ngsl: no HD number in SIMBAD; gaia-xp: the star is placed by a catalogue row, so no Gaia DR3 source is read for it; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; planck: used.",
+      "evidence": [
+        "https://arxiv.org/abs/2002.02186"
+      ]
+    },
+    {
+      "id": "limb-darkening",
+      "subject": "Limb darkening",
+      "status": "included",
+      "finding": "The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 4,720 K and log g 0.65 (u1 0.706, u2 0.076): a model, because no fit of this star's limb is used.",
+      "evidence": [
+        "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=J/A+A/529/A75"
+      ]
+    },
+    {
+      "id": "surface-gravity",
+      "subject": "Surface gravity",
+      "status": "included",
+      "finding": "Unmeasured, bounded: no gravity of this star is published (none in SIMBAD); Luck (2018), AJ 156, 171, table 3 (the spectroscopic gravities of its Cepheid spectra) gives the class's range, log g -1.33 to 2.86. Across log g 0 to 2.85, the part the grid covers, the limb laws differ by at most 1.5% of the centre brightness from the one drawn, at log g 0.65, the gravity closest to all of them; log g 0.65 is a display choice, not a measurement.",
+      "evidence": [
+        "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=J/AJ/156/171/table3"
+      ]
+    }
+  ]
+}

@@ -16,6 +16,9 @@ import type { DeliveryContext } from './delivery-context.mts';
 import { HELP, SHORT_HELP, VERSION } from './help.mts';
 import { importLocalArtifact } from './local-import.mts';
 import { formatPapers, searchPapers } from './papers.mts';
+import { formatSimulations, searchSimulations } from './simulations/simulations.mts';
+import { formatStars, surveyStars } from './stars/stars.mts';
+import { formatLeads, formatSurvey, searchLeads, surveyLeads } from './simulations/leads.mts';
 import { formatAscl, matchProductSoftware, searchAscl } from './ascl.mts';
 import { familyCoverageLedger } from './family-handlers.mts';
 import { executeFamilyOperation, familyOperationNeedsParameters, type FamilyOperationParameters } from './family-operation.mts';
@@ -52,11 +55,11 @@ export interface CliServices {
   readonly listArtifactOutputs:(path:string,structure?:string)=>Promise<InspectedArtifact>;
   readonly exportOutput:typeof exportOutput;
   readonly projectOutput:typeof projectOutput;
-  readonly exportSphere:typeof exportSphere;
+  readonly exportSphere:(recordPath:string,outputDirectory:string)=>ReturnType<typeof exportSphere>;
   readonly exportSpatialObject:typeof exportSpatialObject;
   readonly executeFamilyOperation:typeof executeFamilyOperation;
 }
-const defaultServices:CliServices={importLocalArtifact,familyCoverageLedger,saveExploration,getSession,listArtifactOutputs,exportOutput,projectOutput,exportSphere,exportSpatialObject,executeFamilyOperation};
+const defaultServices:CliServices={importLocalArtifact,familyCoverageLedger,saveExploration,getSession,listArtifactOutputs,exportOutput,projectOutput,exportSphere:async(recordPath,outputDirectory)=>exportSphere(recordPath,outputDirectory,await import(pathToFileURL(resolve(WORKSPACE,'src/platform/solar-geometry.mts')).href)),exportSpatialObject,executeFamilyOperation};
 const inheritedTty=(name:string,fallback:boolean|undefined):boolean=>process.env[name]==='1'?true:process.env[name]==='0'?false:fallback===true;
 function processIo(output:(text:string)=>void):CliIo {
   let terminal:ReturnType<typeof createInterface>|undefined;
@@ -242,6 +245,16 @@ export async function main(args: readonly string[], root = WORKSPACE, output: (t
       }else if(options.command==='papers'){
         const result=await searchPapers(root,{target:options.target,...(options.instrument?{instrument:options.instrument}:{}),...(options.host?{host:options.host}:{}),...(options.directory?{directory:options.directory}:{}),progress:line=>io.error(`${line}\n`)});
         text=options.json?`${JSON.stringify(result)}\n`:formatPapers(result,options.directory);code=result.works.length?0:3;
+      }else if(options.command==='simulations'){
+        const result=await searchSimulations(root,{target:options.target,...(options.directory?{directory:options.directory}:{}),progress:line=>io.error(`${line}\n`)});
+        text=options.json?`${JSON.stringify(result)}\n`:formatSimulations(result,options.directory);code=result.records.length?0:3;
+      }else if(options.command==='stars'){
+        const result=await surveyStars(root,{target:options.target,...(options.directory?{directory:options.directory}:{}),progress:line=>io.error(`${line}\n`)});
+        text=options.json?`${JSON.stringify(result)}\n`:formatStars(result,options.directory);code=result.leads.length?0:3;
+      }else if(options.command==='leads'){
+        const shared={...(options.directory?{directory:options.directory}:{}),progress:(line:string)=>io.error(`${line}\n`)};
+        if(options.archiveClass){const result=await surveyLeads(root,{archiveClass:options.archiveClass,...shared});text=options.json?`${JSON.stringify(result)}\n`:formatSurvey(result,options.directory);code=result.rows.length?0:3;}
+        else{const result=await searchLeads(root,{target:options.target!,...shared});text=options.json?`${JSON.stringify(result)}\n`:formatLeads(result,options.directory);code=result.leads.length?0:3;}
       }else if(options.command==='candidates'){
         const {runCandidates,epochMjd}=await import('./sky/association.mts'),result=await runCandidates(options.system,epochMjd(options.epoch),options.directory,{...(options.figureBackground?{figureBackground:options.figureBackground}:{}),...(options.orbitDraws?{orbitDraws:options.orbitDraws}:{})});
         text=options.json?`${JSON.stringify(result.set)}\n`:`${result.set.candidates.map(candidate=>`${candidate.id}  east ${candidate.eastMas.toFixed(2)} mas  north ${candidate.northMas.toFixed(2)} mas  ${candidate.sigmaEastMas===undefined?'reference':`± ${candidate.sigmaEastMas.toFixed(2)}, ${candidate.sigmaNorthMas!.toFixed(2)} mas (${candidate.predictedFrom!.tool} ${candidate.predictedFrom!.planet})`}`).join('\n')}\nSaved: ${options.directory}\n`;code=0;

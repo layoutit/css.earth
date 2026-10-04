@@ -1,5 +1,5 @@
 import { readPublishedLimbDarkening } from '@cssearth/objects';
-import { isRecord as coreIsRecord } from '@cssearth/core';
+import { isRecord as plainRecord, requireArray, requireFiniteNumber, requireRecord, requireString, shape, text } from '@cssearth/core';
 import { prepareDefaultCameraAngles, prepareSkyNorthScreenAngleDegrees, type SolarGeometry } from '../scene/index.ts';
 // One `science` adapter for the generic raster lane that dispatches by `science.kind` to the existing
 // decoders. Nothing is re-implemented: `./raster.mts` keeps `observationRaster`, the terrestrial lane
@@ -12,17 +12,13 @@ import sharp from 'sharp';
 import { readRgba, paintMissingCoverage } from '../../raster/index.ts';
 import type { ObservationInterpretation, InterpretedSurface } from '../../raster/index.ts';
 import type { RasterRecipe } from '@cssearth/objects';
-import { createSolarSynopticInterpreter, type SynopticRecipe, offLimbPlate, observationRaster, parseObservationDataset, loadNativeObservationPoleSampler, preparePdsFloatMap, parsePdsFloatProfile, loadDiscBandColor, prepareControlledMapMosaic, loadControlledMapPoles, loadControlledMapPhotometry, matchControlledMapLevels } from '../layers/observation/index.ts';
+import { createSolarSynopticInterpreter, type SynopticRecipe, offLimbPlate, observationRaster, parseObservationDataset, loadNativeObservationPoleSampler, preparePdsFloatMap, parsePdsFloatProfile, loadDiscBandColor, prepareControlledMapMosaic, loadControlledMapPoles, loadControlledMapPhotometry, matchControlledMapLevels, readReconstruction } from '../layers/observation/index.ts';
 import { array, literal, number, object, optional, parse, string, tuple, union, nil } from '@cssearth/core/schema';
 import { createSourceManifest } from '@cssearth/objects/node';
-import { requireArray, requireFiniteNumber, requireRecord, requireString, shape, text } from '@cssearth/core';
-import { loadSurfaceObservation, type SurfaceObservation } from '../layers/terrestrial/index.ts';
+import { loadSurfaceObservation, type SurfaceObservation, prepareControlledOrthographicMosaic, parseSolidScience, parseSurfaceSource, parseSolidObservation, parseColorPhotometry, loadNativePhotograph, type NativePhotograph, validateCategoricalGrid } from '../layers/terrestrial/index.ts';
 import { requireTerrainMesh, sampleRadialTriangles, loadPdsRadiusTable } from '../geometry/index.ts';
-import { readReconstruction } from '../layers/observation/index.ts';
 import { skyDisplayRaster } from '@cssearth/fits';
 import { readObservation, loadScienceSurface, paintScienceSurface, prepareObservedColor, validateScienceQualityMasks, validateGeologyProfile, validatePds4ObservationPolicy, preparePdsByteMosaic, loadControlledObservationGeometry, matchObservedColorLevels } from '../raster/index.ts';
-import { prepareControlledOrthographicMosaic, parseSolidScience, parseSurfaceSource, parseSolidObservation, parseColorPhotometry, loadNativePhotograph, type NativePhotograph } from '../layers/terrestrial/index.ts';
-import { validateCategoricalGrid } from '../layers/terrestrial/index.ts';
 import { prepareAkatsukiUviMap } from './akatsuki-uvi-l3b.ts';
 import { loadDiscIntegratedColor, encodeBandColor, hostLitGray } from '../color/index.ts';
 import { readCie1931ColorMatching } from '../sources/index.ts';
@@ -37,8 +33,6 @@ interface Options { readonly objectId: string; readonly displayName: string; rea
   /** Partial restores verify selected source pins and decoder groups; photographs additionally forbid scientific/model changes.
    * Full preparation (and solar synoptic preparation) verifies the entire package. */
   readonly sourceVerification?: 'complete' | 'photographs' | 'selected-surfaces'; }
-
-const plainRecord = coreIsRecord;
 const emissionSchema = object({ offLimbSize: number, limbSize: number, bodyDiameter: number, offLimbOutput: string, limbOutput: string, metadata: plainRecord });
 /** Validate a raw raster recipe down to the facts the interpreter needs; the lane validates the rest when it packs. */
 export function parseInterpreterRecipe(value: unknown): InterpreterRecipe {

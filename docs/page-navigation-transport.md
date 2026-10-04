@@ -23,7 +23,7 @@ A body with several datasets sends the tables of its default dataset only. Each
 other dataset's tables go in their own file, `/objects/<id>/datasets/<dataset>.json`.
 These tables are the dataset's selection variants, the texture-level addresses
 of its pages, and the image entries that only it reads
-([dataset tables](../packages/objects/src/prepared-data/dataset-tables.ts)).
+([dataset tables](../packages/objects/src/prepared-data/content/dataset-tables.ts)).
 Earth's transport fell from 85 KB to 44 KB gzipped. Each of its other datasets is
 about 7 KB gzipped (2026-09-30).
 
@@ -210,7 +210,7 @@ node --test site/test/scene-session.test.mts
 ```
 
 Worker reuse, cancellation and disposal are covered by
-[prepared-object-worker-client.test.ts](../packages/renderer/src/prepared-object-worker-client.test.ts)
+[prepared-data-worker-client.test.ts](../packages/renderer/src/prepared-data-worker-client.test.ts)
 in the renderer suite. Browser checks should hold a destination's actual scene
 request and verify an immediate complete card, one scene swap, retained camera
 and correct interruption behavior.

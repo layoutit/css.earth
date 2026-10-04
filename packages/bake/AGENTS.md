@@ -131,11 +131,11 @@ cycle. Share anything else through `@cssearth/core` or another package. Prepared
   three layers).
 - `src/preparation/` is published as `@cssearth/bake/preparation` (Node only). It holds the stale-build check (`stale-builds.ts`) that `pnpm dev:prepare` and `packages/bake/cli/prepare-object.mts` run through
   `packages/bake/cli/check-stale-builds.mts`: that command imports the module from source, the one bake command that does,
-  because it must run, and `--run` must rebuild, while this package is unbuilt, so its source closure imports only Node built-ins. The workspace graph reader is also exported as `@cssearth/bake/preparation/workspace-graph` directly from source for bootstrap-safe CI discovery.
+  because it must run, and `--run` must rebuild, while this package is unbuilt, so its source closure imports only Node built-ins. The workspace graph reader is also exported as `@cssearth/bake/preparation/workspace-graph` directly from source for bootstrap-safe CI discovery. Test-lane collection uses core’s generic quoted-glob collector; lane names come from the root scripts.
   Its tests are `node --test` suites in `src/preparation/`.
 - `src/run-implemented-objects/` is published as `@cssearth/bake/run-implemented-objects` (Node only): runs a registered
   scene object's acquire, prepare, test, browser or assemble command, and the concurrency-limited, memory-budgeted
-  scheduler `prepare-objects` calls to prepare several objects at once. It imports `sources`. `packages/bake/cli/run-implemented-objects.mts` is its command.
+  scheduler `prepare-objects` calls to prepare several objects at once. It imports `sources` and `preparation`. Object suites come from root test-lane globs; shared suites mark the `CSSEARTH_TEST_OBJECTS` contract. `packages/bake/cli/run-implemented-objects.mts` is its command.
 - `src/prepare-objects/` is published as `@cssearth/bake/prepare-objects` (Node only): the catalogue-wide preparation run,
   each object through `run-implemented-objects`'s scheduler, then navigation and the inventories. It imports
   `run-implemented-objects`. `packages/bake/cli/prepare-objects.mts` is its command.
@@ -164,7 +164,7 @@ cycle. Share anything else through `@cssearth/core` or another package. Prepared
     sphere is written with. The solar geometry is generated into the checkout (`src/platform/solar-geometry.mts`) after the packages build,
     so callers pass `SolarGeometry` or use `loadSolarGeometry` from `@cssearth/bake/objects/scene` to load and validate the generated file. The prepared sky and Sun contracts belong to `@cssearth/objects`; their authored standards and preparers
     belong to `presentation`, which the scene imports as a lower topic.
-  - `objects/raster`: scientific surfaces from PDS, ISIS, FITS, GeoTIFF, VTK, NumPy, HEALPix and Tecplot products,
+  - `objects/raster`: scientific surfaces from PDS, ISIS, FITS, GeoTIFF, VTK, NumPy, HEALPix, Tecplot and classic NetCDF products,
     categorical geology and symbols, exoplanet eclipse and published phase-curve maps, observed color rasters and their
     photometric composition, a planet's whole-disc color record and the band-ratio tie to it, the source records they read, the WISE atlas mosaic grid, FITS binary tables (OIFITS and archive
     tables) and a star's limb darkening fitted to TESS transits. It imports `objects/scene`,
@@ -320,8 +320,8 @@ the finite-emission compiler. Change an output only on purpose, together with ev
   `tsup.config.ts` and `package.json`; don't raise Node's heap for the build.
 
 The presentation schema identifier, narrowed material/selection records and leaf-box data shape live in
-`@cssearth/objects`; leaf-box extraction and presentation compilation stay here. The presentation-envelope
-validator remains here until its sky/Sun format dependencies can move without weakening validation.
+`@cssearth/objects`; leaf-box extraction and presentation compilation stay here. Structural presentation-envelope admission belongs to `@cssearth/objects` with explicit authored/runtime
+policies; authored referential checks remain here.
 
 Prepared CSS volume, impostor, dataset, embedded catalogue point, image-layer and surface-shell formats
 and validators belong to `@cssearth/objects`. Image and geometry generation and file I/O stay here;
@@ -379,3 +379,26 @@ and lighting-bank resolution to those shared parsers. Keep scientific calculatio
 
 The public `@cssearth/bake/run-implemented-objects/source` entry runs discovery guards
 against the current source, independent of a previous package build.
+
+## Accepted authoring boundaries
+
+Authoring stays a per-body leaf. Promote an instrument adapter into a library topic only when a second body uses it; a single-body instrument does not justify a shared API.
+
+The root `authoring/source-authoring-templates.mts` is an accepted leaf-only helper for preserving reviewed source identity in the Galileo/Lucy and distant-worlds drafts. It is not a library entry; move it into an owned topic when a non-authoring consumer needs it and its terrestrial/source dependencies have a declared lower-topic home.
+
+The declared-record readers intentionally have different admission contracts; combining them would erase required caller policy. Consolidate only after a shared policy can preserve each contract and diagnostic.
+
+| Reader | Accepted records and policy |
+|---|---|
+| `sources/read-source-catalogue.ts` | Independent JSON files in `src/sources`, full catalogue admission, nonempty set and filename/id equality. |
+| `sources/source-catalogue-inputs.ts` | Claim-local citations and used manifest bindings; unused documents/intermediates are omitted and unresolved bindings are rejected. |
+| `sources/context-source-records.ts` | Context lineage projection from declared manifest records, with the host's route and input reader. |
+| `asset-publication/restore-source-inputs.ts` | Missing declared acquisition bytes; volume restoration admits its own manifest policy and validates file formats, while other bodies dispatch their acquisition command. |
+
+Synoptic oracle regeneration intentionally needs the original Sun/Jupiter archive FITS listed by the current manifests, and the relocated native oracles likewise need their original archive inputs. Committed fixtures establish historical comparisons, not fresh regeneration after a manifest or tool change; change this limit by restoring those inputs and recording a new native run, never by weakening the comparison.
+
+Nebula text and volume triple admission use core readers with caller-owned failure callbacks to preserve assertion versus TypeError diagnostics and blank-text acceptance.
+
+Layer topics import a lower topic only through its `index.ts` (`entries.test.ts` enforces it), so the giant and layered geometry contracts take `BANDED_ELLIPSOID_SCHEMA` through the `scene` topic index rather than from the schema's leaf file. Importing the leaf directly fails the topic-order test; the accepted cost is that the scene barrel is loaded for one constant. Lifting the constant to `@cssearth/objects` (where schema ids live) is the way out if the cost ever matters.
+
+Historical body evidence retains the test/source addresses at the commit whose result it reports, rather than claiming those results were regenerated by today's relocated commands. Bare historical addresses are accepted only with that revision context; replace them with current addresses and results after the original native archive inputs are restored and the oracle is rerun, including the SBMT fixture/tool mismatch described in its owning README.

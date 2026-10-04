@@ -1,4 +1,5 @@
 /** Application nebula preparation (`pnpm prepare:nebulae`). Scientific regeneration remains an explicit research command. */
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 import { readdir, access, readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { prepareNebulaObject, prepareCompactDensityObject, applicationDeliveryKind } from '@cssearth/bake/nebula';
@@ -10,7 +11,7 @@ const selected = args.find(arg=>arg.startsWith('--object='))?.slice(9);
 // Deploy builds only: a package missing from R2 (setup:assets/setup:prepared skipped a 404) reports unavailable
 // instead of triggering a from-scratch bake here, which needs a source acquisition service this build never runs.
 const allowMissing = args.includes('--allow-missing') || process.env.CSSEARTH_ALLOW_MISSING_ASSETS === '1';
-const root = process.cwd(), objects = resolve(root,'src/objects'), results = [];
+const root = checkoutProjectRoot(import.meta.url), objects = resolve(root,'src/objects'), results = [];
 async function exists(path: string) {
   try { await access(path); return true; }
   catch (error) { if (error instanceof Error && 'code' in error && error.code === 'ENOENT') return false; throw error; }

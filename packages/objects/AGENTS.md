@@ -16,7 +16,9 @@ inventory (`src/node/`, the Node-only `@cssearth/objects/node` entry); the main,
 import `node/`.
 `src/node/contract/` is the Node-only `@cssearth/objects/node/contract` entry: the helpers tests use to check an object
 against its contract (its final prepared definition, and fixture values required before a test inspects them).
-`src/node/source-test.ts` is the Node-only `@cssearth/objects/node/source-test` entry for tests that need restored object sources.
+`src/node/contract/object-content-fixture.ts` owns complete content-fixture admission, exported only by the Node contract entry; production content readers stay browser-safe.
+`src/node/contract/source-test.ts` owns restored-source test support; `@cssearth/objects/node/source-test` is its public test API across packages, labs, site and CI. `@cssearth/objects/node/contract` also exports this support alongside fixtures and loaders. `sourceLoad` discriminates loaded values from a skip; callers read `sourceValues` inside a running test. Restore hints may be injected by the caller.
+KNOWN LIMIT: sharp exposes missing inputs only through its third-party `Input file is missing` message, without a filesystem error code/path. `missingSourceReason` reads that message and checks tracked/sparse state; project-owned absences use `MissingSourceInputError` codes.
 `src/volume/` holds browser-safe prepared compiler/joint/shape scene contracts, density-filter helpers,
 layer-plan/report readers and render-element budgets; exported through the main entry. It also owns the data-only
 volume and sampled recipes, emission-fit settings, physical slice formats and validation, compiler controls and star
@@ -61,7 +63,13 @@ Preparation must remain reproducible from source inputs and provenance outside p
 - `pnpm lint:packages` enforces the limit. Split code by responsibility; keep bulk prepared data outside source code.
 - Maintain README.md and CLAUDE.md as a symlink to this guide. Test behavior and package boundaries.
 
-`src/prepared-data/catalogue-bank-binary.ts` owns the catalogue bank magic, position scale and binary codec.
+`src/prepared-bank.ts` owns the one container of the prepared data files a page fetches (magic `CSBANK01`): a JSON header
+and named typed columns, packed by `prepared-binary.ts`. A new data file is a bank on this codec, never a layout of its own.
+`src/prepared-data/catalogue/catalogue-bank-binary.ts` owns the catalogue point bank's columns and position scale on that container;
+`catalogue-point-columns.ts` owns the form the page holds (columns, no object for a point) and its checks, and
+`catalogue-dots.ts` the galaxy catalogue's dots as the page draws them.
+`src/volume/delivery/volume-dataset-bank-files.ts` owns how a volume dataset bank is stored: an index, one volume a dataset, its
+stars once as columns and a record of provenance; `src/node/volume-dataset-bank.ts` writes and reads those files.
 `src/stars/` owns point-field data/manifest schemas, bank layout, quantization, decoding and validation,
 exported through the browser-safe main entry. Hierarchy construction and encoding star rows remain in bake;
 loading, selection and projection remain with their runtime owners. Contract tests run in the packages lane;
@@ -80,8 +88,8 @@ Prepared CSS sky, parallax, cubic-sky and directional-Sun contracts and validato
 exported by the main entry. Sky/Sun validators default to the historical authored bake acceptance and diagnostics. The single 'runtime' policy
 opts into runtime checks; there are no independent validation flags.
 Sky/Sun authored standards and direction computation stay with bake and renderer.
-Bake retains the authored presentation-envelope checks: runtime validation is stricter in several fields and cannot
-replace them without changing accepted authored input.
+`requirePresentationEnvelope` owns structural envelope admission with explicit authored/runtime policies: authored
+accepts minimal cameras, while runtime requires the full camera and identity. Bake retains authored referential checks.
 
 Prepared CSS volumes, impostors, volume datasets, embedded catalogue points and image-layer banks live in
 `src/volume/`; surface-shell data and validation live in `src/prepared-data/`. Their schema and envelope identifiers,
@@ -159,7 +167,7 @@ caller validation order. Transforms, fitting, projection, display selection and 
 Contract tests use node:test in the packages lane.
 
 Saved CSS camera snapshots (`CameraPose`), their schema identifier and pure matrix admission live in
-`src/prepared-data/camera-pose.ts`, exported through the browser-safe main entry. Share links retain
+`src/prepared-data/camera/camera-pose.ts`, exported through the browser-safe main entry. Share links retain
 bounded proper-rotation validation; live restore retains finite-matrix admission before renderer projects
 it to a rotation. DOMMatrix, camera controls and URL/base64 transport stay in renderer. Contract tests
 use node:test in the packages lane.
@@ -175,20 +183,20 @@ CSS geometry profiles, surface geometry/seam-outset data and the pure profile pa
 Navigation marker recipe identifiers and wire types belong to objects; image/source validation and preparation stay with bake.
 Paged ellipsoid recipes, authored camera fields and pure parsers belong to objects. Full assets and navigation field reads retain separate admission policies; camera derivation and asset preparation stay with bake/site.
 Chart asset recipes and nested spectrum, measured-spectrum, retrieved-profile and system-orbits parsers belong to objects. Envelope/source spectrum admission stays distinct; rendering, source sampling and Node file paths stay with consumers.
-Volume dataset manifest identifiers and pure parsers live in `src/volume/volume-dataset-manifest.ts`; explicit assertion, extra-key and native-entries policies preserve bake admission. Output selection and byte checks stay with bake/lab.
-Compact density delivery identifiers and pure parsers live in `src/volume/compact-density-delivery.ts`; host assertions preserve diagnostics and staged input admission. Replay and source-owner path admission stay with bake/lab.
-Nebula depth-model identifiers and `DepthRecipe`/`DepthSurface` wire types and the pure recipe parser live in `src/volume/nebula-depth-model.ts`; the caller supplies joint-path admission, while evidence policy and sampling stay with reconstruction/lab.
-Gaia nebula-field types and the pure parser live in `src/volume/gaia-nebula-field.ts`; explicit catalogue-selection and astrometry-table subsets preserve their historical admission and diagnostics. Projection, scientific admission, selection and file I/O stay with bake/telescope-cli.
-Nebula delivery identifiers, sky-frame data and pure envelope admission live in `src/volume/nebula-delivery.ts`; transport and compilation stay with bake/telescope-cli/lab.
-Circumstellar reconstruction identifiers, reconstruction records and opacity data live in `src/volume/circumstellar-reconstruction.ts`; opacity computation, reconstruction and historical file admission stay with lab/telescope-cli.
-UVFITS request/response types and pure validation live in `src/prepared-data/pyuvdata-uvfits.ts`; process and toolchain handling stay in telescope.
-Volume source-manifest envelope admission and context records live in `src/prepared-data/volume-source-manifest.ts`; manifest I/O, restoration and lineage stay with callers.
-Volume presentation-source identifiers, preview parsing and pure preview/dataset/presentation records live in `src/prepared-data/volume-presentation-source.ts`; preview creation and dataset text validation stay with callers.
+Volume dataset manifest identifiers and pure parsers live in `src/volume/delivery/volume-dataset-manifest.ts`; explicit assertion, extra-key and native-entries policies preserve bake admission. Output selection and byte checks stay with bake/lab.
+Compact density delivery identifiers and pure parsers live in `src/volume/compact/compact-density-delivery.ts`; host assertions preserve diagnostics and staged input admission. Replay and source-owner path admission stay with bake/lab.
+Nebula depth-model identifiers and `DepthRecipe`/`DepthSurface` wire types and the pure recipe parser live in `src/volume/nebula/nebula-depth-model.ts`; the caller supplies joint-path admission, while evidence policy and sampling stay with reconstruction/lab.
+Gaia nebula-field types and the pure parser live in `src/volume/nebula/gaia-nebula-field.ts`; explicit catalogue-selection and astrometry-table subsets preserve their historical admission and diagnostics. Projection, scientific admission, selection and file I/O stay with bake/telescope-cli.
+Nebula delivery identifiers, sky-frame data and pure envelope admission live in `src/volume/nebula/nebula-delivery.ts`; transport and compilation stay with bake/telescope-cli/lab.
+Circumstellar reconstruction identifiers, reconstruction records and opacity data live in `src/volume/nebula/circumstellar-reconstruction.ts`; opacity computation, reconstruction and historical file admission stay with lab/telescope-cli.
+UVFITS request/response types and pure validation live in `src/prepared-data/source/pyuvdata-uvfits.ts`; process and toolchain handling stay in telescope.
+Volume source-manifest envelope admission and context records live in `src/prepared-data/source/volume-source-manifest.ts`; manifest I/O, restoration and lineage stay with callers.
+Volume presentation-source identifiers, preview parsing and pure preview/dataset/presentation records live in `src/prepared-data/source/volume-presentation-source.ts`; preview creation and dataset text validation stay with callers.
 
-Published mutual-orbit and body-epoch structures and pure decoding live in `src/prepared-data/published-orbit.ts`;
+Published mutual-orbit and body-epoch structures and pure decoding live in `src/prepared-data/orbit/published-orbit.ts`;
 scientific evaluation and source I/O stay in astronomy. Product records and their evidence kinds/parser live in
-`src/prepared-data/telescope-product.ts`; run identity, product paths and evidence queries stay in telescope.
-VO metadata, pin, region and snapshot data/parsers live in `src/prepared-data/vo-discovery.ts`, using core JSON data;
+`src/prepared-data/source/telescope-product.ts`; run identity, product paths and evidence queries stay in telescope.
+VO metadata, pin, region and snapshot data/parsers live in `src/prepared-data/source/vo-discovery.ts`, using core JSON data;
 archive operations, network transport, ADQL generation and row identity queries stay with telescope owners.
 
 Body-map products, resolution evidence, raster recipes and limb-model references have browser-safe
@@ -197,3 +205,5 @@ The parsers require owner-supplied surface-resolution and lighting-bank resolver
 validation position. Bake supplies them through `readBodyMapProduct` and `readRasterRecipe`;
 angular-to-surface conversion, sampled map combination, lighting banks and photometric evaluation stay in bake.
 Contract and duplicate-ownership tests use node:test beside the formats.
+
+The cross-domain schema-identifier conformance test stays in `src/prepared-data/` because that owner maintains the public identifier admission surface, including source and volume identifiers. Move it to a package-wide test owner when such an owner has a distinct suite contract; its current location does not narrow coverage.

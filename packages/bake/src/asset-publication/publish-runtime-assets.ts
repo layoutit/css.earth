@@ -1,13 +1,11 @@
-import { sha256 } from '@cssearth/core/node';
+import { projectRoot as checkoutProjectRoot, sha256 } from '@cssearth/core/node';
 import { mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { execFile, spawn } from "node:child_process";
 import { promisify } from "node:util";
-import { createRequire } from "node:module";
 import { dirname, join, resolve } from "node:path";
-import { inventoryAssets, inventoriedObjectIds } from '../delivery/index.ts';
+import { inventoryAssets, inventoriedObjectIds, expectedContentType, verifyPublished, reportVerification, type PublishAsset } from '../delivery/index.ts';
 import { RUNTIME_ASSET_ORIGIN } from '../objects/sources/index.ts';
-import { expectedContentType, verifyPublished, reportVerification, type PublishAsset } from "../delivery/index.ts";
 
 const BUCKET = "cssearth-assets";
 const CACHE_CONTROL = "public,max-age=31536000,immutable";
@@ -112,7 +110,7 @@ async function findMisses<T extends PublishAsset>(assets: readonly T[], fetcher:
 // packages/bake/src/delivery/publish-verification.ts. `wrangler r2 bulk put` has silently dropped a subset of a batch before, which
 // is exactly what that verification pass catches.
 export async function publishRuntimeAssets(objectIds: readonly string[], { since }: { since?: string } = {}): Promise<void> {
-  const root = resolve(dirname(createRequire(import.meta.url).resolve("@cssearth/bake/package.json")), "../..");
+  const root = checkoutProjectRoot(import.meta.url);
   const ids = inventoriedObjectIds(objectIds, root);
   const assets = await inventoryAssets(root, ids);
   if (since === undefined) return publishAssets(assets);

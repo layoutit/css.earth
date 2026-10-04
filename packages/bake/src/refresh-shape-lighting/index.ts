@@ -1,6 +1,7 @@
 /** `@cssearth/bake/refresh-shape-lighting` (Node only): refresh only the default shape atlas; retain every other prepared
  * asset. `packages/bake/cli/refresh-shape-lighting.mts stage|publish <object-id>... | --all` is its command. The generated
  * solar geometry is written after the packages build, so the host passes it in (`SolarGeometry`). */
+import { shapeLightingPath } from './paths.ts';
 import { sha256 } from '@cssearth/core/node';
 import { readFile, writeFile, mkdir, copyFile, rename } from 'node:fs/promises';
 import { resolve, basename } from 'node:path';
@@ -14,7 +15,7 @@ const records = (value: unknown) => requireArray(value).map(value => requireReco
 const save = (path: string, value: unknown) => writeFile(path, JSON.stringify(value, null, 2) + '\n');
 
 export async function stageShapeLighting(id: string, solarGeometry: SolarGeometry) {
-  const directory = resolve('src/objects', id), stage = resolve('output/shape-default-lighting', id);
+  const directory = shapeLightingPath('src/objects', id), stage = shapeLightingPath('output/shape-default-lighting', id);
   await mkdir(stage, { recursive: true });
   const config = parseSolidPreparationSource(await json(resolve(directory, 'source/preparation/terrestrial.json')));
   const scene = await json(resolve(directory, 'prepared/scene.json'));
@@ -45,7 +46,7 @@ export async function stageShapeLighting(id: string, solarGeometry: SolarGeometr
   // Verify the entire existing asset bank against its inventory before publication; the inventory rows become the
   // baseline showing that Shadows-on and all other datasets stay untouched.
   for (const asset of records(inventory.assets)) {
-    const bytes = await readFile(resolve('public/scenes', id, requireString(asset.filename)));
+    const bytes = await readFile(shapeLightingPath('public/scenes', id, requireString(asset.filename)));
     if (sha256(bytes) !== asset.sha256 || bytes.length !== asset.bytes) throw new Error(`${id}: stale asset ${asset.filename}.`);
   }
   for (const document of [surfaces, material])
@@ -59,7 +60,7 @@ export async function stageShapeLighting(id: string, solarGeometry: SolarGeometr
 }
 
 export async function validateStage(id: string) {
-  const stage = resolve('output/shape-default-lighting', id);
+  const stage = shapeLightingPath('output/shape-default-lighting', id);
   const receipt = await json(resolve(stage, 'receipt.json'));
   for (const asset of records(receipt.changedAssets))
     if (sha256(await readFile(resolve(stage, requireString(asset.filename)))) !== asset.sha256) throw new Error('Staged atlas changed.');
@@ -67,10 +68,10 @@ export async function validateStage(id: string) {
 
 export async function publishShapeLighting(id: string) {
   await validateStage(id);
-  const directory = resolve('src/objects', id), stage = resolve('output/shape-default-lighting', id);
+  const directory = shapeLightingPath('src/objects', id), stage = shapeLightingPath('output/shape-default-lighting', id);
   const receipt = await json(resolve(stage, 'receipt.json'));
   for (const asset of records(receipt.changedAssets)) {
-    const filename = requireString(asset.filename), destination = resolve('public/scenes', id, filename);
+    const filename = requireString(asset.filename), destination = shapeLightingPath('public/scenes', id, filename);
     const temporary = `${destination}.shape-lighting-tmp`;
     await copyFile(resolve(stage, filename), temporary);
     await rename(temporary, destination);
@@ -82,6 +83,6 @@ export async function publishShapeLighting(id: string) {
   }
   const changed = new Set(records(receipt.changedAssets).map(asset => requireString(asset.filename)));
   for (const asset of records(receipt.baselineAssets)) if (!changed.has(requireString(asset.filename)))
-    if (sha256(await readFile(resolve('public/scenes', id, requireString(asset.filename)))) !== asset.sha256)
+    if (sha256(await readFile(shapeLightingPath('public/scenes', id, requireString(asset.filename)))) !== asset.sha256)
       throw new Error(`${id}: unrelated asset changed during publication.`);
 }

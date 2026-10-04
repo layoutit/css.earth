@@ -10,6 +10,7 @@
  * - `controlled-ortho`: an orthophoto from a controlled release, already placed by its authors; only reprojected.
  * Limb-placed frames are moved by the recipe's measured datum shift onto the controlled release's grid.
  */
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 import { mkdir, readFile, writeFile, mkdtemp, rm } from 'node:fs/promises';
 import { execFileSync } from 'node:child_process';
 import { tmpdir } from 'node:os';
@@ -38,7 +39,7 @@ interface Recipe {
   observations: { id: string; frames: { id: string; kind: 'geomed' | 'controlled-ortho'; path?: string; labelPath?: string }[] }[];
 }
 
-const root = resolve(import.meta.dirname, '../../../..');
+const root = checkoutProjectRoot(import.meta.url);
 /** Grid cells that divide the globe evenly; a frame takes the coarsest one no larger than half its own pixel, and never finer than the recipe's cell. */
 const CELL_LADDER = [0.1, 0.12, 0.15, 0.2, 0.25, 0.3, 0.4, 0.5, 0.6];
 const frameCell = (pixelScaleKm: number, radiusKm: number, finest: number) => {

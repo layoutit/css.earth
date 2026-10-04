@@ -1,5 +1,3 @@
-import { ARCHIVED_CAMERA_SCHEMA, type SpiceCamera } from '@cssearth/objects';
-import { cross3 as cross, dot3 as dot } from '@cssearth/core';
 /**
  * A pinhole camera from SPICE kernels for one exposure: the instrument frame's
  * orientation, the observer's position and the Sun direction in the target's
@@ -9,6 +7,8 @@ import { cross3 as cross, dot3 as dot } from '@cssearth/core';
  * the recipe states which instrument-frame axes stored columns and rows follow,
  * because that is a property of the archived array, not of the kernels.
  */
+import { ARCHIVED_CAMERA_SCHEMA, type SpiceCamera } from '@cssearth/objects/archived-camera';
+import { cross3 as cross, dot3 as dot } from '@cssearth/core';
 import { has, number, numbers, string, type KernelPool } from './text-kernel.js';
 import { apply, multiply, transpose, type Matrix3 } from './ck.js';
 import { stelab, type Ephemeris } from './geometry.js';

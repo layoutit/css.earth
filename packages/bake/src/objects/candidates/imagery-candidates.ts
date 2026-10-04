@@ -11,15 +11,15 @@
  * resolution among images is set against the finest imagery the body already ships: a photograph dataset's finest cast frame, or a
  * natural-color or monochrome map dataset's native scale (their prepared reports).
  * The verdict is advisory: finer frames still need a camera, registration and reuse terms before they can ship. */
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
-import { createRequire } from 'node:module';
 import { requireArray, requireRecord } from '@cssearth/core';
 import { almaObservations, archiveLeads, depositsCiting, esoRawObservations, fetchRetrying, mastObservations } from './archive-search.ts';
 
 const OPUS = 'https://opus.pds-rings.seti.org/api';
-/** The checkout, found through this package's own name so the path holds from the sources and from `dist/`. */
-const ROOT = resolve(dirname(createRequire(import.meta.url).resolve('@cssearth/bake/package.json')), '../..');
+/** The real checkout, found by the shared workspace-marker resolver from source and `dist/`. */
+const ROOT = checkoutProjectRoot(import.meta.url);
 /** A frame must be at least twice as fine as the shipped one to count as an upgrade: finer by less is within footprint and mesh error. */
 export const UPGRADE_FACTOR = 2;
 

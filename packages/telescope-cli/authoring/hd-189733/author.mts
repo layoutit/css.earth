@@ -8,12 +8,13 @@
  *   node packages/telescope-cli/authoring/hd-189733/author.mts [--check]
  *
  * --check recomputes the markers and fails if any differs from the file on disk. */
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { MARKER_PATH, planetMarker, starMarker } from '../../src/source-authoring/context-markers.mts';
 
-const objects = resolve(import.meta.dirname, '../../../../src/objects');
+const objects = resolve(checkoutProjectRoot(import.meta.url), 'src/objects');
 
 export async function authorHd189733Markers({ check = false } = {}) {
   const outputs: [string, Buffer][] = [

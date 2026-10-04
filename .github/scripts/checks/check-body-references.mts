@@ -39,8 +39,28 @@ const record = (value: unknown): Json => (value !== null && typeof value === 'ob
 const entries = (manifest: unknown, list: typeof LISTS[number]) => (Array.isArray(record(manifest)[list]) ? record(manifest)[list] as unknown[] : []).map(record);
 const text = (value: unknown) => (typeof value === 'string' ? value : undefined);
 
-/** The script a generator runs: its first word, a repository-relative path. */
-export const generatorScript = (generator: string) => generator.trim().split(/\s+/u)[0]!;
+/** Resolve a live generator command, including node/tsx launchers and dated `(now ...)` relocations. */
+export const generatorScript = (generator: string) => {
+  const live = generator.match(/\(now\s+([^)]*)\)/u)?.[1] ?? generator;
+  const words = live.trim().split(/\s+/u);
+  return ['node', 'tsx'].includes(words[0]!) ? words[1]! : words[0]!;
+};
+
+/** Every manifest is a live source record, including shared references and non-body formats. */
+export function manifestGeneratorFindings(file: string, value: unknown, tracked: ReadonlySet<string>): Finding[] {
+  const findings: Finding[] = [];
+  const visit = (item: unknown): void => {
+    if (!item || typeof item !== 'object') return;
+    if (Array.isArray(item)) { item.forEach(visit); return; }
+    for (const [key, child] of Object.entries(item)) {
+      if (key === 'generator' && typeof child === 'string' && !tracked.has(generatorScript(child)))
+        findings.push({ file, problem: `generator \"${child}\" names untracked script ${generatorScript(child)}.` });
+      else visit(child);
+    }
+  };
+  visit(value);
+  return findings;
+}
 
 /** One body's findings, from its manifest and acquisition plan as parsed JSON, the paths committed in its source folder
  * and, when given, every path the repository tracks. */
@@ -101,6 +121,8 @@ export async function checkBodyReferences(root = process.cwd()): Promise<Finding
   const paths = lines.map(line => line.slice(line.indexOf('\t') + 1)), tracked = new Set(paths);
   const findings = sharedCopyFindings(lines);
   const json = async (path: string): Promise<unknown> => JSON.parse(await readFile(resolve(root, path), 'utf8'));
+  for (const path of paths.filter(path => /(?:^|\/)manifest\.json$/u.test(path)))
+    findings.push(...manifestGeneratorFindings(path, await json(path), tracked));
   const committed = new Map<string, Set<string>>();
   for (const path of paths) {
     const match = path.match(/^src\/objects\/([^/]+)\/source\/(.+)$/u);
@@ -115,7 +137,7 @@ export async function checkBodyReferences(root = process.cwd()): Promise<Finding
     // A volume package restores through its own repository-relative manifest (packages/bake/cli/restore-source-inputs.mts).
     if (record(manifest).schema !== 'cssearth-authoritative-sources@3') continue;
     const acquisition = files.has('preparation/acquisition.json') ? await json(`src/objects/${objectId}/source/preparation/acquisition.json`) : null;
-    findings.push(...bodySourceFindings(objectId, manifest, acquisition, files, tracked));
+    findings.push(...bodySourceFindings(objectId, manifest, acquisition, files));
   }
   return findings;
 }

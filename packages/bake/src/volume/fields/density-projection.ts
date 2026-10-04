@@ -1,6 +1,5 @@
 import {createIntegratedSignalSampler} from './cloud-density.ts';
-import type {ObservationPhoto} from '@cssearth/objects';
-import type { Bounds3 } from '@cssearth/objects';
+import type { ObservationPhoto, Bounds3 } from '@cssearth/objects';
 export interface DensityProjectionSource {bounds:Bounds3;depth:number;exposureGain:number;densityAt(x:number,y:number,z:number):number}
 type Vec2 = [number, number];
 export function prepareDensityProjection(source: DensityProjectionSource, distance: number, width = 256) {

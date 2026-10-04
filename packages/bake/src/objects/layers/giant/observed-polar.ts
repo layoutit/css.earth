@@ -7,32 +7,35 @@ import sharp from 'sharp';
 import {packProjectiveSurfaceRaster} from '../../../scene/index.ts';
 import {planetographicRowsToMeshLatitude} from '../../geometry/index.ts';
 import { readFitsPrimary } from '@cssearth/fits';
-import {verifyObservationSources} from '../observed-surfaces/index.ts';
+import { verifyObservationSources, measureScalarCoverage, finitePercentiles, falseColorMap, resizeObservedRgb, prepareMeasuredPolarAtlas } from '../observed-surfaces/index.ts';
 import { latitudeRasterBands } from './geometry.ts';
 import { compositePolarOverlay, layoutPolarAtlasForCaps, writeDomeRings, type DomeRingWarp, type PoleProjection } from './polar-dome.ts';
 import { validateRelativePath } from './relative-path.ts';
-import {measureScalarCoverage,finitePercentiles,falseColorMap} from '../observed-surfaces/index.ts';
-import {resizeObservedRgb,prepareMeasuredPolarAtlas} from '../observed-surfaces/index.ts';
+
+/** Polar recipes retain their own address and raster limits; these are not the material lane's policies. */
+const POLAR_RECIPE_POLICY = { identifier: /^[a-z][a-z0-9-]*$/, publicPrefix: /^\/[a-z0-9/-]+\/$/, minimumRasterDimension: 16,
+  minimumDatasets: 1, rgbComponents: 3, minimumEllipsoidRatio: 1, minimumPaletteColors: 2 };
 
 export function parseObservedPolarRecipe(input: unknown) {
   const config=parseObservedPolarSource(input);
-  if(config?.schema!=='cssearth-observed-polar-surfaces@2'||!/^[a-z][a-z0-9-]*$/.test(config.namespace)||typeof config.publicPrefix!=='string'||!/^\/[a-z0-9/-]+\/$/.test(config.publicPrefix))throw new TypeError('Invalid observed polar recipe.');
-  if(!Array.isArray(config.datasets)||!config.datasets.length)throw new TypeError('Observed polar datasets must be declared.');
-  const finite=(value: unknown)=>{if(typeof value==='number'&&!Number.isFinite(value))throw new TypeError('Observed polar parameters must be finite.');if(value&&typeof value==='object')Object.values(value).forEach(finite);};finite(config);
-  for(const value of Object.values(config.dimensions))if(!Number.isSafeInteger(value)||value<16)throw new TypeError('Invalid observed polar raster dimensions.');
+  if(config?.schema!=='cssearth-observed-polar-surfaces@2'||!POLAR_RECIPE_POLICY.identifier.test(config.namespace)||typeof config.publicPrefix!=='string'||!POLAR_RECIPE_POLICY.publicPrefix.test(config.publicPrefix))throw new TypeError('Invalid observed polar recipe.');
+  if(!Array.isArray(config.datasets)||config.datasets.length<POLAR_RECIPE_POLICY.minimumDatasets)throw new TypeError('Observed polar datasets must be declared.');
+  /** Numeric extensions in the polar source are checked recursively as well. */
+  const validateFinitePolarParameters=(value: unknown)=>{if(typeof value==='number'&&!Number.isFinite(value))throw new TypeError('Observed polar parameters must be finite.');if(value&&typeof value==='object')Object.values(value).forEach(validateFinitePolarParameters);};validateFinitePolarParameters(config);
+  for(const value of Object.values(config.dimensions))if(!Number.isSafeInteger(value)||value<POLAR_RECIPE_POLICY.minimumRasterDimension)throw new TypeError('Invalid observed polar raster dimensions.');
   latitudeRasterBands(config.packing.latitudeBoundsDegrees,config.dimensions.height);
   const ids=new Set(),outputs=new Set(),sourcePaths=new Set<string>();
   const source=(path: string)=>{validateRelativePath(path);sourcePaths.add(path);};
   for(const dataset of config.datasets) {
-    if(!/^[a-z][a-z0-9-]*$/.test(dataset.id)||ids.has(dataset.id))throw new TypeError('Invalid observed polar dataset operation.');
+    if(!POLAR_RECIPE_POLICY.identifier.test(dataset.id)||ids.has(dataset.id))throw new TypeError('Invalid observed polar dataset operation.');
     ids.add(dataset.id);source(dataset.source);
     for(const filename of Object.values(dataset.files)){validateRelativePath(filename);if(outputs.has(filename))throw new TypeError('Observed polar outputs must be unique.');outputs.add(filename);}
     if(dataset.operation==='rgb-measured-rows'&&(!Number.isInteger(dataset.coverage.columnStride)||dataset.coverage.columnStride<1))throw new TypeError('Invalid observed RGB coverage stride.');
     if(dataset.operation==='rgb-observed-gaps'){
-      if(dataset.coverageSources.length!==3||!(dataset.planetographicAxisRatio>=1))throw new TypeError('RGB maps require three component coverage maps and an ellipsoid ratio.');
+      if(dataset.coverageSources.length!==POLAR_RECIPE_POLICY.rgbComponents||!(dataset.planetographicAxisRatio>=POLAR_RECIPE_POLICY.minimumEllipsoidRatio))throw new TypeError('RGB maps require three component coverage maps and an ellipsoid ratio.');
       dataset.coverageSources.forEach(source);
     }
-    if(dataset.operation==='scalar-observed-gaps'&&(!Array.isArray(dataset.palette)||dataset.palette.length<2||dataset.scalar.range&&!(dataset.scalar.range[1]>dataset.scalar.range[0])))throw new TypeError('Invalid measured scalar parameters.');
+    if(dataset.operation==='scalar-observed-gaps'&&(!Array.isArray(dataset.palette)||dataset.palette.length<POLAR_RECIPE_POLICY.minimumPaletteColors||dataset.scalar.range&&!(dataset.scalar.range[1]>dataset.scalar.range[0])))throw new TypeError('Invalid measured scalar parameters.');
   }
   return {...config,sourcePins:[...sourcePaths].map(path=>({path}))};
 }

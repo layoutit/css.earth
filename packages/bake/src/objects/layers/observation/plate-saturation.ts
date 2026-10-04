@@ -3,11 +3,11 @@
  * A Schmidt plate saturates: the brightest stars lose their peak and keep a flat core with a broad photographic
  * halo that survives star removal. Those pixels are neither galaxy light nor zero, so they are reported as no
  * coverage. Saturation is found from the data, by the flat top a point spread function cannot produce, and the
- * halo is grown until the ring median reaches the plate's own measured background.
+ * halo is grown until the ring medianAveraged reaches the plate's own measured background.
  *
  * Plate-to-plate background steps are NOT corrected here; see the plate background note in
  * `docs/color-preparation.md` for what the pinned inputs do and do not allow. */
-import { median } from '@cssearth/core';
+import { medianAveraged } from '@cssearth/core';
 
 export const DSS_SATURATION_REFERENCE = 'https://archive.stsci.edu/dss/index.html';
 
@@ -21,7 +21,7 @@ export const PLATE_PREPARATION = Object.freeze({
   minimumPlateauRadius: 2,
   /** A flat top that never ends inside this radius is not a star; a flat field is not saturation. */
   maximumPlateauRadius: 32,
-  /** The halo ends where the ring median falls within this many robust deviations of the local background. */
+  /** The halo ends where the ring medianAveraged falls within this many robust deviations of the local background. */
   haloContrast: 5,
   /** Bounds the halo of one star, in pixels. */
   maximumHaloRadius: 120,
@@ -36,7 +36,7 @@ const ringMedian = (plane: Float32Array, width: number, height: number, cx: numb
     const value = plane[y * width + x]!;
     if (Number.isFinite(value)) values.push(value);
   }
-  return values.length ? median(values) : NaN;
+  return values.length ? medianAveraged(values) : NaN;
 };
 
 export interface SaturatedStar { readonly x: number; readonly y: number; readonly peak: number; readonly plateauRadius: number; readonly maskedRadius: number; readonly maskedPixels: number }
@@ -47,7 +47,7 @@ export function maskSaturatedStars(plane: Float32Array, width: number, height: n
   if (!finite.length) throw new Error('A plate band has no observed pixels.');
   const candidate = finite[Math.floor(PLATE_PREPARATION.corePercentile / 100 * (finite.length - 1))]!;
   const background = finite[Math.floor(0.5 * (finite.length - 1))]!;
-  const spread = median(Array.from(finite.subarray(0, finite.length - 1), value => Math.abs(value - background))) || 1;
+  const spread = medianAveraged(Array.from(finite.subarray(0, finite.length - 1), value => Math.abs(value - background))) || 1;
   const stars: SaturatedStar[] = [];
   const guard = PLATE_PREPARATION.minimumPlateauRadius + 2;
   for (let y = guard; y < height - guard; y++) for (let x = guard; x < width - guard; x++) {
@@ -66,7 +66,7 @@ export function maskSaturatedStars(plane: Float32Array, width: number, height: n
       plateau = radius;
     }
     if (plateau < PLATE_PREPARATION.minimumPlateauRadius || plateau >= PLATE_PREPARATION.maximumPlateauRadius) continue;
-    // The halo ends where the ring median reaches the plate background; the local background is measured far out.
+    // The halo ends where the ring medianAveraged reaches the plate background; the local background is measured far out.
     let masked = plateau;
     for (let radius = plateau + 1; radius <= PLATE_PREPARATION.maximumHaloRadius; radius++) {
       const ring = ringMedian(plane, width, height, x, y, radius);
@@ -90,6 +90,6 @@ export function maskSaturatedStars(plane: Float32Array, width: number, height: n
     measured.push({ ...star, maskedPixels: count });
   }
   return { stars: measured, maskedPixels, coreThreshold: candidate, background, backgroundSpread: spread,
-    method: 'Saturated cores are found by the flat top a point spread function cannot produce, then grown to where the ring median reaches the measured plate background. Masked pixels are reported as no coverage, never as zero.',
+    method: 'Saturated cores are found by the flat top a point spread function cannot produce, then grown to where the ring medianAveraged reaches the measured plate background. Masked pixels are reported as no coverage, never as zero.',
     settings: PLATE_PREPARATION, reference: DSS_SATURATION_REFERENCE };
 }

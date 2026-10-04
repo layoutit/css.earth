@@ -1,0 +1,35 @@
+{
+  "id": "source-gsf2000-ngc-3627-c36-exposure-header",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "[GSF2000] NGC 3627 C36 · gsf2000 ngc 3627 c36 exposure header",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:HST/product/u35i0101r_c0m.fits",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/gsf2000-ngc-3627-c36/source/manifest.json",
+      "locator": "/inputs/7"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Gibson et al. (2000), ApJ 529, 723, VizieR J/ApJ/529/723/appen Cluster = NGC 3627, CNN = C36 (Chip 4, Xpos 135.7, Ypos 125.4); the table names no exposure for this galaxy, so the pixel is read on the first exposure of its programme (GO 6549), u35i0101r, whose header places a pixel where those of four later epochs do; u35i0101r_c0m.fits (Mikulski Archive for Space Telescopes, STScI)",
+      "scope": "The gsf2000 ngc 3627 c36 exposure header input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "Public NASA mission data (MAST)",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

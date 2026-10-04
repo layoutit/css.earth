@@ -1,12 +1,11 @@
 import { PREPARED_WORLD_CONTEXT_SUMMARY_SCHEMA, PREPARED_WORLD_SYSTEM_SCHEMA, systemHostId, systemObjectId, worldHolders } from '@cssearth/objects';
-import type { PreparedWorldContextData as PreparedWorldContext } from '@cssearth/objects';
+import type { PreparedWorldContextData, PreparedSystemView } from '@cssearth/objects';
 import { outwardSphere } from './spatial-context.ts';
 import type { Vector3 } from './spatial-context.ts';
-import type { PreparedSystemView } from '@cssearth/objects';
 
 export type Billboard = { readonly url: string; readonly size: number; readonly focalPixels: number; readonly distanceM: number };
 type Facts = Readonly<Record<string, unknown>>;
-type Body = PreparedWorldContext['focus'] | PreparedWorldContext['bodies'][number];
+type Body = PreparedWorldContextData['focus'] | PreparedWorldContextData['bodies'][number];
 
 /** The browser's copy of a prepared world context, split by the object tree (packages/objects/src/registry/object-tree.ts):
  * every body's row is in the file of the object it is inside, and a body with a system of its own is drawn as that system,
@@ -35,7 +34,7 @@ type Body = PreparedWorldContext['focus'] | PreparedWorldContext['bodies'][numbe
  *   billboards share; its address is its own world billboard, `/scenes/<id>/<id>-billboard.webp`, unless it says otherwise.
  * - An orbit leaves out its centre when that is its parent's prepared position (every orbit, as `prepareWorldContext`
  *   places them), and says `lod: true` when its detail levels share its bounds. */
-export function summarizeWorldContext(prepared: PreparedWorldContext, orbitBanks: Readonly<Record<string, number>>,
+export function summarizeWorldContext(prepared: PreparedWorldContextData, orbitBanks: Readonly<Record<string, number>>,
   /** The object each object is inside (its package's `parent`). */
   parentOf: (id: string) => string | undefined,
   /** The dot bank object whose dots the plain-dot asteroids are: their holder. */
@@ -46,7 +45,7 @@ export function summarizeWorldContext(prepared: PreparedWorldContext, orbitBanks
   const positions = new Map<string, Vector3>([...[focus, ...bodies].map(body => [body.id, body.positionM] as const),
     ...Object.entries(orbitCenters).map(([id, centre]) => [id, centre.positionM] as const)]);
   const byId = new Map(bodies.map(body => [body.id, body] as const));
-  const files = new Map<string, PreparedWorldContext['bodies'][number][]>(), rows = new Map<string, PreparedWorldContext['bodies'][number]>();
+  const files = new Map<string, PreparedWorldContextData['bodies'][number][]>(), rows = new Map<string, PreparedWorldContextData['bodies'][number]>();
   for (const body of bodies) {
     if (holders.ownRow(body.id)) { rows.set(body.id, body); continue; }
     const holder = holders.holderOf(body.id)!;

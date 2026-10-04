@@ -1,14 +1,11 @@
-import { isRecord as coreIsRecord } from '@cssearth/core';
 /** Offline registration of spectral crops onto the retained union mesh. Never resamples source pixels. */
+import { isRecord as jointRecord } from '@cssearth/core';
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import sharp from 'sharp';
-import { type CompilerBakeResult, type CompilerDatasetVolume, type CompilerPin, readVolumeLayerPlan, readVolumeSlabInterval, type VolumeSlabInterval } from '@cssearth/objects';
+import { type CompilerBakeResult, type CompilerDatasetVolume, type CompilerPin, readVolumeLayerPlan, readVolumeSlabInterval, type VolumeSlabInterval, validateVolumeLayerSlices, type VolumeSlices, type VolumeSliceQuad } from '@cssearth/objects';
 import { COMPILER_PHYSICAL_REFERENCE, compilerPreparedSlices } from '../../coordinates/compiler-frame.ts';
-import { validateVolumeLayerSlices, type VolumeSlices, type VolumeSliceQuad } from '@cssearth/objects';
 import type { CompilerBakeBackend, CompiledVolumeArtifact } from './bake.ts';
-
-const jointRecord = coreIsRecord;
 
 
 export interface ComponentVolumeArtifact extends CompiledVolumeArtifact {

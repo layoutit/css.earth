@@ -16,10 +16,10 @@ import it. Reading files, and writing the transport image as a `Buffer`, need No
 | | decoded required cards: `requiredFiniteCard`, `requiredTrimmedTextCard` | `Error` naming the source and missing key; numeric strings and blank text refused |
 | | quoted-literal headers for older product adapters: `readFitsPrimary` (one 2D primary or IMAGE extension), `readFitsPlane` (one primary-array plane) | as `readFitsImage`, plus the dimension or primary check |
 | | `readRiceCompressedImage`, `riceDecompress`: lossless RICE_1 tile-compressed integer images | `Unsupported FITS tile compression.` … |
-| | `skyImageAxes`, `skyDisplayRaster`, `skyProjection`: which way an axis-aligned sky image faces, its display raster, and TAN or SIN pixel ↔ ICRS | `TypeError` naming the refused WCS |
+| | `skyImageAxes`, `skyDisplayRaster`, `skyProjection`: which way an axis-aligned sky image faces, its display raster, and TAN (with or without SIP distortion) or SIN pixel ↔ ICRS | `TypeError` naming the refused WCS |
 | | `decodeFits`: a 2D primary float image as top-down (DOM row order) Float32 samples | `TypeError`: `Unsupported FITS transport image.`, `Nonfinite FITS pixel.` |
 | | `sampleStatistics`: two sample runs compared (counts, bit identity, relative differences above the median) | no throw |
-| `@cssearth/fits/node` | `readFitsFileHdus` (headers located on disk without reading data), `readFitsFileRegion` (one image rectangle, optionally through an open handle) | as the byte reader, plus `FITS region outside image.` |
+| `@cssearth/fits/node` | `readFitsFileHdus` (headers located on disk without reading data), `locateFitsHdus` (the same through any byte reader, such as range requests to an archive, stopping where the caller does), `readFitsFileRegion` (one image rectangle, optionally through an open handle) | as the byte reader, plus `FITS region outside image.` |
 | | `encodeFits`: top-down Float32 samples to a primary float32 FITS `Buffer`, the inverse of `decodeFits` | `TypeError`: `FITS metadata cannot override the transport layout.` … |
 
 A released `WAVELNTH` label with a numeric wavelength and plain ion names may omit its closing quote. The reader preserves its text and original card and reports a warning; unterminated structural values remain errors.
@@ -50,3 +50,5 @@ pnpm build:fits
 pnpm --filter @cssearth/fits typecheck
 pnpm --filter @cssearth/fits test
 ```
+
+Tests share authored FITS bytes through `@cssearth/fits/test-support`; independent Astropy files live in this package’s `src/node/fixtures/fits/`.

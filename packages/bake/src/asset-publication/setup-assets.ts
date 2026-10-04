@@ -1,4 +1,4 @@
-import { sha256 } from '@cssearth/core/node';
+import { projectRoot as checkoutProjectRoot, sha256 } from '@cssearth/core/node';
 import type { RuntimeAssetLocation } from '../delivery/index.ts';
 interface InstallProgress {completed: number; total: number; installed: number; reused: number; skipped: number;}
 /** Network failures and 5xx are retried; a 404 is a verdict and is never retried. */
@@ -7,10 +7,8 @@ const delay = (ms: number) => new Promise<void>(resolve => setTimeout(resolve, m
 import { existsSync, statSync } from "node:fs";
 import { readFile, utimes } from "node:fs/promises";
 import { resolve } from "node:path";
-import { publishSourceBytes } from "../delivery/index.ts";
-import { PREPARED_CATALOGUE, readPreparedObjects } from "@cssearth/objects/node";
-import { ASSET_LOCATIONS, type AssetLocation } from '@cssearth/objects/node';
-import { inventoriedObjectIds, inventoryAssets, volumeMetadataAssets } from '../delivery/index.ts';
+import { publishSourceBytes, inventoriedObjectIds, inventoryAssets, volumeMetadataAssets } from "../delivery/index.ts";
+import { PREPARED_CATALOGUE, readPreparedObjects, ASSET_LOCATIONS, type AssetLocation } from "@cssearth/objects/node";
 
 /** `node packages/bake/cli/setup-assets.mts --allow-missing` or `CSSEARTH_ALLOW_MISSING_ASSETS=1`: deploy builds only. */
 export function readAllowMissingFlag(args: readonly string[] = []) {
@@ -123,7 +121,7 @@ export async function installRuntimeAssets(assets: readonly RuntimeAssetLocation
  * restores inventoried files from R2. `--location` narrows to one location; `--metadata` restores only the
  * prepared presentation of the volume objects, which is all a deploy catalogue reads.
  */
-export async function setupAssets(args: readonly string[], root = process.cwd()) {
+export async function setupAssets(args: readonly string[], root = checkoutProjectRoot(import.meta.url)) {
   const allowMissing = readAllowMissingFlag(args), metadata = args.includes("--metadata");
   const locationArg = args.find(arg => arg.startsWith("--location="))?.slice("--location=".length);
   if (locationArg !== undefined && !(ASSET_LOCATIONS as readonly string[]).includes(locationArg)) throw new TypeError(`Unknown asset location: ${locationArg}.`);

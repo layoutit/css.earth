@@ -1,0 +1,30 @@
+{
+ "id": "ngc-1637-cepheid-54700",
+ "classification": "star",
+ "order": 5769,
+ "physical": {
+  "name": "NGC 1637 Cepheid 54700",
+  "horizonsCode": null,
+  "meanRadiusKm": 150271200,
+  "gravitationalParameterKm3PerS2": 0,
+  "parent": null,
+  "effectiveTemperatureK": 4770
+ },
+ "physicalNotes": "Radius 216 +/- 36 solar radii from Groenewegen (2020), A&A 635, A33, period relations for Galactic fundamental-mode Cepheids applied to this star's period, 54.42 d in Leonard et al. (2003), ApJ 594, 247, table 8 (ID 54700: P 54.42 d); not a measurement of this star: eq. 2, log R = 0.721 log P + 1.083; the uncertainty is the relation's scatter, 0.067 dex (https://arxiv.org/abs/2002.02186): 150,271,200 km at 695,700 km per solar radius. No mass is measured, so GM is 0, the records' unpublished value. Temperature 4770 +/- 317 K from Groenewegen (2020), A&A 635, A33, period relations for Galactic fundamental-mode Cepheids applied to this star's period, 54.42 d in Leonard et al. (2003), ApJ 594, 247, table 8 (ID 54700: P 54.42 d); not a measurement of this star: the luminosity of eq. 1 (M_bol = -2.95 log P - 0.98, with the nominal solar M_bol 4.74) over the radius of eq. 2, through L = 4 pi R^2 sigma T^4 with the nominal solar 5772 K (IAU 2015 Resolutions B2 (Mamajek et al. 2015, arXiv:1510.06262) and B3 (Prsa et al. 2016, arXiv:1605.09788)); the uncertainty is the 317 K by which the two relations miss the paper's own Cepheid temperatures (https://arxiv.org/abs/2002.02186). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 70.37018679837365,
+  "declinationDegrees": -2.864324611480704,
+  "positionEpochJulianYear": 2000,
+  "distanceParsecs": 9289203,
+  "properMotionRaMasPerYear": 0,
+  "properMotionDecMasPerYear": 0,
+  "radialVelocityKmPerS": 712.7,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Leonard et al. (2003), ApJ 594, 247, table 6 (ID 54700: chip 4, X 414.8, Y 216.8); its section 4.1 says the hstphot positions it reports are of the combined V-band frame, which no epoch leaves by more than about half a pixel, and that hstphot gives an integer to a star centred on a pixel's lower-left corner; read here on the first exposure of that series, u6fv0101m (table 3) (https://doi.org/10.1086/376831), MAST mast:HST/product/u6fv0101m_c0m.fits pixel extension = SCI,4, x = 414.8, y = 216.8, first pixel centre = 0.5: RA 70.37018679837365, Dec -2.864324611480704, from the archived header src/objects/ngc-1637-cepheid-54700/source/photometry/exposure-header.txt",
+   "distance": "Placed in NGC 1637 as the app draws it, where the star's sight line crosses the disc's midplane: 9,289,203 pc (src/objects/ngc-1637-layers/source/recipe.json: centre 9,289,664 pc, inclination 31.1 deg, line of nodes 20.6 deg). The galaxy's distance, which places the galaxy and not a star within it: Jones2009ApJ...696.1176J: Distance Determination to 12 Type II Supernovae Using the Expanding Photosphere Method (https://ui.adsabs.harvard.edu/abs/2009ApJ...696.1176J); catalogue reference Jones2009ApJ...696.1176J: 9289663.8678 pc (-458864.863614/+482708.341758); sn (https://ui.adsabs.harvard.edu/abs/2009ApJ...696.1176J): 9289203 pc; Gaia DR3 cannot see the star",
+   "properMotion": "mast:HST/product/u6fv0101m_c0m.fits pixel extension = SCI,4, x = 414.8, y = 216.8, first pixel centre = 0.5 measures no proper motion; zero is assumed (at 9,289,203 pc, 1 mas/yr would be 44,035 km/s across the sky)",
+   "radialVelocity": "SIMBAD's radial velocity of NGC 1637, the Cepheid's galaxy, from 2004MNRAS.350.1195M; the star's own motion within the galaxy is not measured (https://ui.adsabs.harvard.edu/abs/2004MNRAS.350.1195M/abstract)"
+  }
+ }
+}

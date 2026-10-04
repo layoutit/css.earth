@@ -1,3 +1,5 @@
+import { requireNonemptyString as text } from '@cssearth/core';
+import type { PreparedImageLayerBank } from '@cssearth/objects';
 export type Vec3 = [number, number, number];
 export type LayerAxis = 'x' | 'y' | 'z';
 
@@ -13,7 +15,7 @@ export interface ImageLayerRecipe {
     /** Companion galaxies removed the same way, by their rows (key column) in a repository catalogue with the Local Volume
      * Database's columns: ra, dec (deg), rhalf (arcmin), position_angle (deg), ellipticity. */
     companions?: { catalogue: string; keys: string[]; source: string; basis: string } };
-  observation: { centerRaDeg: number; centerDecDeg: number; fieldOfViewDeg: [number, number]; northClockwiseDeg: number };
+  observation: PreparedImageLayerBank['observation'];
   target: { centerRaDeg: number; centerDecDeg: number; distancePc: number };
   geometry: { kind: 'inclined-disk' | 'line-of-sight-envelope'; inclinationDeg: number; lineOfNodesPaDeg: number;
     thicknessKpc: number; supportRadiusKpc: number; supportTaperFraction: number; depthWeights: number[]; depthScales: number[];
@@ -35,6 +37,12 @@ export interface ImageLayerRecipe {
      * position angle `polarLeansToPaDeg`. `envelope` is a filled sphere around it, the nebula's outline. `cavities` are regions along the pole that emit `emission` of the body's emissivity, each about
      * `sizeArcsec` across; they lie behind the star between the position angles `farBetweenPaDeg` and in front of it
      * elsewhere. Every value is one a paper prints or states. */
+    /** A nebula's published rings (./rings.ts): a filled disc and the ring around it, circles of `radiusArcsec` in two
+     * planes through the star, each tilted its own way: the axis `tiltDeg` from the sight line, its far end leaning to
+     * position angle `farAxisPaDeg`. With `lineOfSightThicknessArcsec` each has that much depth along the sight line.
+     * Every value is one a paper prints. */
+    rings?: { source: string; basis: string; disc: { radiusArcsec: number; tiltDeg: number; farAxisPaDeg: number }; ring: { radiusArcsec: number; tiltDeg: number; farAxisPaDeg: number };
+      lineOfSightThicknessArcsec?: number };
     body?: { source: string; basis: string; semiPolarArcsec: number; semiEquatorialArcsec: number; polarTiltDeg: number; polarLeansToPaDeg: number;
       envelope?: { source: string; radiusArcsec: number };
       cavities?: { source: string; emission: number; sizeArcsec: number; farBetweenPaDeg: [number, number] } };
@@ -81,9 +89,7 @@ const finite = (v: unknown, at: string): number => {
 const positive = (v: unknown, at: string, integer = false): number => {
   const n = finite(v, at); if (n <= 0 || (integer && !Number.isInteger(n))) throw new TypeError(`${at} must be positive.`); return n;
 };
-const text = (v: unknown, at: string): string => {
-  if (typeof v !== 'string' || !v) throw new TypeError(`${at} must be a string.`); return v;
-};
+
 const path = (v: unknown): string => {
   const p = text(v, 'source path'); if (p.startsWith('/') || p.split('/').includes('..') || /[\\\0]/.test(p)) throw new TypeError('Path must be contained.'); return p;
 };
@@ -116,6 +122,13 @@ const shapeOf = (v: unknown): NonNullable<ImageLayerRecipe['geometry']['shape']>
       polarTiltDeg: tilt, polarLeansToPaDeg: finite(r.polarLeansToPaDeg, 'geometry.shape.ring.polarLeansToPaDeg'), expansionKmS: speeds(r.expansionKmS, 'geometry.shape.ring.expansionKmS') },
     ...(lobe === undefined ? {} : { lobe: { source: text(lobe.source, 'geometry.shape.lobe.source'), radiusArcsec: positive(lobe.radiusArcsec, 'geometry.shape.lobe.radiusArcsec'), expansionKmS: speeds(lobe.expansionKmS, 'geometry.shape.lobe.expansionKmS') } }),
     smoothPixels: smooth };
+};
+const ringsOf = (v: unknown): NonNullable<ImageLayerRecipe['geometry']['rings']> => {
+  const r = object(v, 'geometry.rings'), plane = (value: unknown, name: string) => { const q = object(value, name), tilt = finite(q.tiltDeg, `${name}.tiltDeg`); if (!(tilt >= 0 && tilt < 90)) throw new TypeError(`${name}.tiltDeg must be from 0 to under 90; got ${tilt}.`); return { radiusArcsec: positive(q.radiusArcsec, `${name}.radiusArcsec`), tiltDeg: tilt, farAxisPaDeg: finite(q.farAxisPaDeg, `${name}.farAxisPaDeg`) }; };
+  const disc = plane(r.disc, 'geometry.rings.disc'), ring = plane(r.ring, 'geometry.rings.ring');
+  if (!(ring.radiusArcsec > disc.radiusArcsec)) throw new TypeError(`geometry.rings.ring.radiusArcsec (${ring.radiusArcsec}) must be over the disc's (${disc.radiusArcsec}).`);
+  return { source: text(r.source, 'geometry.rings.source'), basis: text(r.basis, 'geometry.rings.basis'), disc, ring,
+    ...(r.lineOfSightThicknessArcsec === undefined ? {} : { lineOfSightThicknessArcsec: positive(r.lineOfSightThicknessArcsec, 'geometry.rings.lineOfSightThicknessArcsec') }), };
 };
 const bodyOf = (v: unknown): NonNullable<ImageLayerRecipe['geometry']['body']> => {
   const b = object(v, 'geometry.body'), tilt = finite(b.polarTiltDeg, 'geometry.body.polarTiltDeg'), fraction = (value: unknown, name: string) => { const n = finite(value, name); if (!(n > 0 && n < 1)) throw new TypeError(`${name} is a fraction above 0 and under 1; got ${n}.`); return n; };
@@ -206,11 +219,12 @@ export function parseImageLayerRecipe(value: unknown): ImageLayerRecipe {
       supportTaperFraction, depthWeights: weights, depthScales: scales, ...(g.bulge===undefined?{}:{bulge:bulgeOf(g.bulge)}),
       ...(g.shape===undefined?{}:{shape:(()=>{if(g.bulge!==undefined||b.flat!==true)throw new TypeError('geometry.shape is for a flat bank without a bulge.');return shapeOf(g.shape);})()}),
       ...(g.body===undefined?{}:{body:(()=>{if(g.bulge!==undefined||g.shape!==undefined||b.flat!==true)throw new TypeError('geometry.body is for a flat bank without a bulge or walls.');return bodyOf(g.body);})()}),
+      ...(g.rings===undefined?{}:{rings:(()=>{if(g.bulge!==undefined||g.shape!==undefined||g.body!==undefined||b.flat!==true)throw new TypeError('geometry.rings is for a flat bank without a bulge, walls or a body.');return ringsOf(g.rings);})()}),
       ...(g.unit===undefined?{}:{unit:parsecUnit(g.unit,g.bulge!==undefined||b.flat!==true)}) },
     bake: { maxFacePixels: positive(b.maxFacePixels, 'maxFacePixels', true), diffuseFacePixels: positive(b.diffuseFacePixels,'diffuseFacePixels',true),
       ...(b.levels===undefined?{}:{levels:levelsOf(b.levels)}),
       ...(b.colorTie===undefined?{}:{colorTie:colorTieOf(b.colorTie)}),
-      ...(g.bulge===undefined&&g.shape===undefined&&g.body===undefined?{}:{bulgeSlices:positive(b.bulgeSlices,'bulgeSlices',true),bulgeFacePixels:positive(b.bulgeFacePixels,'bulgeFacePixels',true),bulgeCrossSlices:positive(b.bulgeCrossSlices,'bulgeCrossSlices',true)}), crossAxisSlices: positive(b.crossAxisSlices, 'crossAxisSlices', true),
+      ...(g.bulge===undefined&&g.shape===undefined&&g.body===undefined&&(g.rings as {lineOfSightThicknessArcsec?:unknown}|undefined)?.lineOfSightThicknessArcsec===undefined?{}:{bulgeSlices:positive(b.bulgeSlices,'bulgeSlices',true),bulgeFacePixels:positive(b.bulgeFacePixels,'bulgeFacePixels',true),bulgeCrossSlices:positive(b.bulgeCrossSlices,'bulgeCrossSlices',true)}), crossAxisSlices: positive(b.crossAxisSlices, 'crossAxisSlices', true),
       crossAxisAlongPixels:positive(b.crossAxisAlongPixels,'crossAxisAlongPixels',true),crossAxisDepthPixels: positive(b.crossAxisDepthPixels, 'crossAxisDepthPixels', true), backgroundFloor,edgeTaperFraction,diffuseFraction,diffuseSigmaPixels:positive(b.diffuseSigmaPixels,'diffuseSigmaPixels'),
       ...(b.flat===undefined?{}:{flat:flatOf(b.flat)}),
       encoding: { format: 'webp', quality, ...(e.alphaQuality===undefined?{}:{alphaQuality:alphaQualityOf(e.alphaQuality)}) } }, provenance: { path: path(p.path) } };

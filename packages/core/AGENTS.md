@@ -10,6 +10,8 @@ browser runtime and the preparation tools import the same module. `src/node/` is
 The Node-only `src/node/oracle/` harness is exported as `@cssearth/core/oracle` (ESM only). Its Python
 writer and pinned requirements are shipped beside the built fixture reader; domain cases stay with their owners.
 Kernel verification is supplied by the caller, so core never imports preparation packages.
+Owners explicitly register oracle input resolvers; their package metadata names an `oracleManifest` for generator and setup commands. Core validates registrations and contains no domain input layouts or body ids.
+The Node entry collects quoted test globs from caller-supplied scripts; callers own manifest reading and lane names. Its builtins-only source is bootstrap-safe for CI.
 Other file reading stays with the callers.
 Tree-shaking must keep working: no top-level side effects beyond constant definitions.
 

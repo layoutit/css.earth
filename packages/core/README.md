@@ -8,8 +8,8 @@ behind the separate `@cssearth/core/node` entry.
 
 | entry | what it holds | failure |
 |---|---|---|
-| `@cssearth/core` | `isRecord`, `isPlainRecord`, `isFiniteNumber`, `hasErrorCode` | predicates, no throw |
-| | `requireRecord`, `requireArray`, `requireString`, `requireFiniteNumber`, `requirePositive`, `requireBoolean`, `requireNonemptyText` | `<label> must be …` (label defaults to `Source value`) |
+| `@cssearth/core` | `isRecord`, `isFiniteNumber`, `hasErrorCode` | predicates, no throw |
+| | `requireRecord`, `requireArray`, `requireString`, `requireFiniteNumber`, `requirePositive`, `requireNonemptyText` | `<label> must be …` (label defaults to `Source value`) |
 | | `checks(failure(prefix))`: `record`, `array`, `text`, `finite`, `positive`, `integer`, `boolean`, `choice`, `unique`, `numbers` | `<prefix><label> must be ….` |
 | | decoders: `shape`, `optional`, `nullable`, `array`, `dictionary`, `boolean`, `choice`, `text`, `number` | `<context> <key>: <reason>` |
 | | `normalizeOrZero`, `normalize3OrZero`, `normalize3OrZeroNonPositive`, `normalize3Unchecked` | zero/NaN policies named explicitly |
@@ -20,16 +20,15 @@ behind the separate `@cssearth/core/node` entry.
 | | `isArray`, `canonical` (recursively key-sorted copy for stable JSON), `flagValue`, `positionalArguments` | no throw |
 | `@cssearth/core/schema` | structural guards: `object`, `array`, `tuple`, `union`, `literal`, `json`, … and `parse` | `Invalid <label> structure at <path> (<value>).` |
 | `@cssearth/core/oracle` | Shared oracle fixture validation and input reading; [Python harness](src/node/oracle/README.md) | Node only, ESM only |
-| `@cssearth/core/node` | `sha256` (the content address of a published runtime asset, from text as UTF-8 or bytes), `projectRoot` (nearest workspace ancestor), `discoverRoot` (caller-relative marker/package discovery), `discoverGitRoot` (explicit starting directory), `containedPath` (lexical or realpath containment) | Node only |
+| `@cssearth/core/node` | `sha256` (the content address of a published runtime asset, from text as UTF-8 or bytes), `projectRoot` (nearest workspace ancestor after resolving the module directory to its real path), `discoverRoot` (caller-relative marker/package discovery), `discoverGitRoot` (explicit starting directory), `containedPath` (lexical or realpath containment) | Node only |
 
 Getters take at most two parameters, so `requireArray(rows).map(requireString)` works and names a
 failing element by its index. `shape` keeps fields it does not decode; its default context is
 `Terrestrial source`, the wording the source records have always reported.
 
 Explicit readers accept a caller-owned `Fail`: `readNonArrayRecord`, `readFiniteNumber`, `readTextAllowEmpty`,
-`readNonemptyText`, `readNonblankText`, `readPositiveNumber`, `readPositiveInteger` and `readSafeIntegerAtLeast`.
-Nonempty text accepts whitespace; nonblank text checks trimming but returns the original string. Positive integers
-accept represented integers above the safe range; safe integers do not. These readers are not array-map callbacks.
+`readNonemptyText`, `readNonblankText`, `readPositiveNumber` and `readSafeIntegerAtLeast`.
+Nonempty text accepts whitespace; nonblank text checks trimming but returns the original string. Safe integers reject values above the safe range. These readers are not array-map callbacks.
 
 ```text
 packages/core/
@@ -49,3 +48,9 @@ pnpm --filter @cssearth/core test
 ```
 
 Shared world rotation/reflection types and validation live in `src/math/world-rotation.ts`, used by objects parsers and engine navigation.
+
+Normalization policies preserve each caller’s historical zero, NaN and component-count behavior: `normalizeOrZero` keeps array length and signed zeros; `normalize3OrZero` returns exactly three components; `normalize3OrZeroNonPositive` uses positive zero for non-positive/NaN lengths; `normalizeOrThrow` keeps caller diagnostics; `normalize3Unchecked` is for admitted nonzero vectors. Tests pin these differences. The two median policies likewise distinguish an averaged middle pair from a copied upper-middle sample.
+
+`PitchCalibration` is the host-neutral structural pitch contract shared by navigation and authored camera records.
+
+The Node entry also exports `scriptTestFiles`: it collects quoted test globs from caller-supplied package scripts. Callers own manifest reading and lane names; CI may import its builtins-only source before installation.

@@ -1,0 +1,103 @@
+{
+  "schema": "cssearth-volume-source-manifest@2",
+  "pathBase": "repository",
+  "inputs": [
+    {
+      "id": "optical",
+      "path": "src/objects/helix-layers/source/source.jpg",
+      "origin": "https://cdn.esahubble.org/archives/images/large/opo0432d.jpg",
+      "sourceUrl": "https://esahubble.org/images/opo0432d/",
+      "title": "A new view of the Helix Nebula",
+      "credit": "NASA, ESA, C.R. O'Dell (Vanderbilt University), and M. Meixner, P. McCullough, and G. Bacon (Space Telescope Science Institute)",
+      "displayCredit": "ESA/Hubble",
+      "acquisition": "The publisher's JPEG (6145 x 6623 px), downloaded unchanged; not tracked. Its place on the sky is what the publisher's page prints (recipe observation). A display composite of Hubble ACS frames with CTIO Mosaic II frames around them, not a calibrated scientific array.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "esahubble-opo0432d",
+            "role": "material",
+            "evidence": "src/objects/helix-layers/source/provenance.json"
+          }
+        ]
+      },
+      "dependencies": [],
+      "datasetId": "optical",
+      "license": "CC-BY-4.0; retain the complete recorded credit.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "hubble",
+            "evidence": "https://esahubble.org/images/opo0432d/"
+          },
+          {
+            "kind": "facility",
+            "facilityId": "blanco-4m",
+            "evidence": "https://esahubble.org/images/opo0432d/"
+          }
+        ]
+      }
+    },
+    {
+      "id": "gaia-field-stars",
+      "path": "src/objects/helix-layers/source/gaia-dr3-field.csv",
+      "origin": "https://gea.esac.esa.int/tap-server/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=SELECT+source_id%2C+ra%2C+dec%2C+parallax%2C+parallax_error%2C+pmra%2C+pmdec%2C+phot_g_mean_mag+FROM+gaiadr3.gaia_source+WHERE+1%3DCONTAINS(POINT('ICRS'%2C+ra%2C+dec)%2C+CIRCLE('ICRS'%2C+337.424667%2C+-20.837025%2C+0.34))+AND+phot_g_mean_mag+IS+NOT+NULL+AND+0%3DCONTAINS(POINT('ICRS'%2C+ra%2C+dec)%2C+CIRCLE('ICRS'%2C+337.410625%2C+-20.837111%2C+0.0006))+ORDER+BY+source_id",
+      "title": "Gaia DR3 stars in the picture's field, gaia-dr3-field.csv",
+      "credit": "Gaia Collaboration, Vallenari et al. (2023), A&A 674, A1",
+      "acquisition": "Query result downloaded unchanged from the ESA Gaia archive; read by the image-layer bake to remove the field's stars from the photograph.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "gaia-2023-dr3",
+            "role": "material",
+            "evidence": "https://gea.esac.esa.int/tap-server/tap/sync"
+          }
+        ]
+      }
+    }
+  ],
+  "documents": [
+    {
+      "id": "recipe",
+      "path": "src/objects/helix-layers/source/recipe.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned processing, source interpretation or presentation record; the published image is separately bound as a material input."
+      },
+      "kind": "authored-document",
+      "origin": "cssEarth project-authored record",
+      "credit": "cssEarth contributors",
+      "title": "Image-layer preparation recipe",
+      "acquisition": "Checked-in project-authored JSON. This pin identifies local processing or interpretation metadata, not an original publisher document; the published image is separately bound in inputs."
+    },
+    {
+      "id": "provenance",
+      "path": "src/objects/helix-layers/source/provenance.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned processing, source interpretation or presentation record; the published image is separately bound as a material input."
+      },
+      "kind": "authored-document",
+      "origin": "cssEarth project-authored record",
+      "credit": "cssEarth contributors",
+      "title": "Published image interpretation and acquisition record",
+      "acquisition": "Checked-in project-authored JSON. This pin identifies local processing or interpretation metadata, not an original publisher document; the published image is separately bound in inputs."
+    },
+    {
+      "id": "presentation",
+      "path": "src/objects/helix-layers/source/presentation.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned processing, source interpretation or presentation record; the published image is separately bound as a material input."
+      },
+      "kind": "authored-document",
+      "origin": "cssEarth project-authored record",
+      "credit": "cssEarth contributors",
+      "title": "Dataset presentation and prepared-bank bindings",
+      "acquisition": "Checked-in project-authored JSON. This pin identifies local processing or interpretation metadata, not an original publisher document; the published image is separately bound in inputs."
+    }
+  ],
+  "generatedIntermediates": []
+}

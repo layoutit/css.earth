@@ -13,12 +13,13 @@
  * `keepEvery` in source id order (Gaia's source ids follow position, so the share is even across the sky), where
  * `keepEvery` is the ratio of the median per-cell counts of the two samples on their own cells.
  */
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 import { medianUpperMiddle as median } from '@cssearth/core';
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { gunzipSync, gzipSync } from 'node:zlib';
 
-const repository = resolve(import.meta.dirname, '../../../..');
+const repository = checkoutProjectRoot(import.meta.url);
 const sourceDirectory = resolve(repository, 'src/objects/nearby-universe-galaxies/source');
 const inputPath = resolve(process.argv[2] ?? resolve(repository, 'output/quaia/quaia-g20.csv'));
 const outputPath = resolve(sourceDirectory, 'quaia-quasars/quaia-sample.csv.gz');

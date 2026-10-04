@@ -1,5 +1,4 @@
-import { isFiniteNumber as coreIsFiniteNumber } from '@cssearth/core';
-import { isArray, isRecord } from '@cssearth/core';
+import { isFiniteNumber as coreIsFiniteNumber, isArray, isRecord } from '@cssearth/core';
 import type {ProjectiveGeometry} from '../../../scene/index.ts';
 import type {RasterInfo} from '../observation/index.ts';
 export interface PagedRasterConfiguration {publicBase: string; geometry: {BODY_LONGITUDE_SEGMENTS: number};

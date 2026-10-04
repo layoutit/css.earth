@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-import { BODY_MAP_SCHEMA } from '@cssearth/objects';
 /** Write a body's ALMA thermal maps from its record, src/objects/<id>/source/preparation/alma-thermal-maps.json.
  *
  *   node packages/telescope-cli/authoring/interferometry/author-thermal-maps.mts <object id> [--check] [--raw <dir>]...
@@ -23,21 +22,19 @@ import { BODY_MAP_SCHEMA } from '@cssearth/objects';
  * reports by how much.
  *
  * --check writes nothing and fails if any file would change. */
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
+import { BODY_MAP_SCHEMA, type BodyMapFrame, type BodyMapObservation, type CombinationPolicy, type MeasurementDefinition } from '@cssearth/objects';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { readFitsHeader, readFitsImage } from '@cssearth/fits';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { ALMA, horizonsTables } from '@cssearth/bake/objects/layers/terrestrial';
-import { horizonsRows, loadOrientation, observerRowValues, rowJd } from '@cssearth/bake/objects/layers/terrestrial';
-import { placeResolvedDisc } from '@cssearth/bake/objects/layers/observation';
-import { combineUnderPolicy, renderBodyMapProduct } from '@cssearth/bake/objects/layers/observation';
-import { type BodyMapFrame, type BodyMapObservation, type CombinationPolicy, type MeasurementDefinition } from '@cssearth/objects';
-import { bodyMapFits, type BodyMap } from '@cssearth/bake/objects/layers/observation';
+import { ALMA, horizonsTables, horizonsRows, loadOrientation, observerRowValues, rowJd } from '@cssearth/bake/objects/layers/terrestrial';
+import { placeResolvedDisc, combineUnderPolicy, renderBodyMapProduct, bodyMapFits, type BodyMap } from '@cssearth/bake/objects/layers/observation';
 import { bindMapResolution, bodyMapProductRecord, formatProductRecord } from '@cssearth/telescope-cli/body-map-publication';
 import type { ProductInput, ProductSoftware } from '@cssearth/objects';
 
-const REPOSITORY = resolve(import.meta.dirname, '../../../..');
+const REPOSITORY = checkoutProjectRoot(import.meta.url);
 /** The FITS ORIGIN of a cutout. A FITS string value holds at most 68 characters, so this keeps the short label it was written with. */
 export const CUTOUT_ORIGIN = 'cssEarth telescope-cli interferometry/alma-disc-selfcal.mts';
 const DEGREE = Math.PI / 180, MJD_EPOCH_JD = 2_400_000.5;

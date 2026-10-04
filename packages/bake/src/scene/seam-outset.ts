@@ -1,4 +1,4 @@
-import { type PreparedSilhouetteSteps } from '@cssearth/objects';
+import { SURFACE_SEAM_OUTSET_PROPERTY, type PreparedSilhouetteSteps } from '@cssearth/objects';
 import { walkSilhouetteLevels } from '@cssearth/engine';
 
 
@@ -7,7 +7,7 @@ import type { SeamOutsetProfile } from '@cssearth/objects';
 export interface PreparedSeamOutset extends PreparedSilhouetteSteps { property: string; targetPixels: number; }
 export interface PreparedLeafSeamOutset { property: string; scale: readonly [number, number]; }
 
-export const SURFACE_SEAM_OUTSET_PROPERTY = '--surface-seam-outset';
+export { SURFACE_SEAM_OUTSET_PROPERTY } from '@cssearth/objects';
 
 const significant = (value: number) => Number(value.toPrecision(6));
 

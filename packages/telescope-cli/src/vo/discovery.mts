@@ -1,13 +1,9 @@
-import { parseSnapshot } from '@cssearth/objects';
-import { VO_DISCOVERY_SCHEMA } from '@cssearth/objects';
+import { parseSnapshot, VO_DISCOVERY_SCHEMA, canonical, jsonValue, parseMetadata, parsePin, parseRegion, type DiscoverySnapshot, type IcrsCircle, type Json } from '@cssearth/objects';
 import { mkdir, stat, writeFile } from 'node:fs/promises';
 import { basename, resolve } from 'node:path';
-import { astroquery } from '@cssearth/telescope/node';
-import { mastService, type MastServiceRequest, type MastServiceResult } from '@cssearth/telescope/node';
+import { astroquery, mastService, type MastServiceRequest, type MastServiceResult, recordKey, type TransferLimits } from '@cssearth/telescope/node';
 import type { ProductKind } from '../recipe-request.mts';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { recordKey, type TransferLimits } from '@cssearth/telescope/node';
-import { canonical, jsonValue, parseMetadata, parsePin, parseRegion, type DiscoverySnapshot, type IcrsCircle, type Json } from '@cssearth/objects';
 import { mapIvoaProductType, type ProductTypeMapping } from '../product-type.mts';
 import type { FamilyId } from '../product-descriptor.mts';
 import { productTypeFamilyEvidence, type ObservationFamilyEvidence } from '../observation-families.mts';

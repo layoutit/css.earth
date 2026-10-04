@@ -24,11 +24,11 @@
  * Where a node beside the star is missing, the law is read between the nearest nodes that all exist. Outside every grid no law is
  * drawn and the reason is recorded; nothing is extrapolated. A spec may decline a law with its own reason. */
 import { interpolateGrid, readHowarthNode, readLimbGrid, type GridNode, type QuadraticLimbDarkening } from '@cssearth/bake/objects/stellar';
-import { VIZIER_ASU, type Archive } from './archives.mts';
+import { VIZIER_ASU, type Archive } from './archives/archives.mts';
 import { fromPicaso, PICASO } from './picaso-limb.mts';
 
 interface Grid {
-  readonly key: 'atlas' | 'tlusty' | 'neilson' | 'phoenix' | 'white-dwarf'; readonly inputId: string; readonly file: string; readonly source: string; readonly cite: string; readonly models: string; readonly band: string;
+  readonly key: 'atlas' | 'tlusty' | 'tlusty-b' | 'neilson' | 'phoenix' | 'white-dwarf'; readonly inputId: string; readonly file: string; readonly source: string; readonly cite: string; readonly models: string; readonly band: string;
   readonly vizier: string; readonly modelColumns: Readonly<Record<string, string>>;
   readonly columns: { readonly teff: string; readonly logg: string; readonly u1: string; readonly u2: string; readonly mass?: string };
   readonly form: (teff: string, logg: string, mass?: string) => Record<string, string>;
@@ -60,6 +60,14 @@ export const GRIDS: readonly Grid[] = [
   { key: 'neilson', inputId: 'neilson-2013-limb-darkening', file: 'photometry/neilson-2013-v-quadratic.tsv', source: 'J/A+A/554/A98/table3', cite: 'Neilson & Lester (2013), A&A 554, A98', models: 'spherical ATLAS (SATLAS)', band: 'Johnson V', vizier: 'J/A+A/554/A98',
     modelColumns: {}, columns: { teff: 'Teff', logg: 'logg', u1: 'a(V)', u2: 'b(V)', mass: 'M' },
     form: (teff, logg, mass) => ({ '-source': 'J/A+A/554/A98/table3', '-out.max': '5000', Teff: teff, logg, ...(mass ? { M: mass } : {}), '-out': 'Teff,logg,M,a(V),b(V)' }) },
+  // The same paper's B-star grid (TLUSTY BStar06, 15,000 to 30,000 K): at 18,000 K it reaches log g 2.00, where ATLAS stops at 2.5,
+  // so a B supergiant or hypergiant has a law. Its solar composition at 2 km/s is the one set that spans every gravity (163 models).
+  // After the grids every earlier star was read from, so none of them changes.
+  { key: 'tlusty-b', inputId: 'reeve-2016-b-limb-darkening', file: 'photometry/reeve-2016-b-v-quadratic.tsv', source: 'J/MNRAS/456/1294/summary1', cite: 'Reeve & Howarth (2016), MNRAS 456, 1294',
+    models: 'non-LTE TLUSTY B-star', band: 'Bessell V', vizier: 'J/MNRAS/456/1294', modelColumns: {}, columns: { teff: 'Teff', logg: 'logg', u1: 'a', u2: 'b' },
+    form: () => ({ '-source': 'J/MNRAS/456/1294/summary1', '-out.max': '500', FileName: 'BG*v02', Filter: 'Bessell-V', '-out': 'FileName,quad2.2,quad2.3' }),
+    rewrite: [{ pattern: String.raw`^FileName\tquad2\.2\tquad2\.3`, flags: 'm', replacement: 'logg\tTeff\ta\tb\n[cgs]\tK\t\t' },
+      { pattern: String.raw`^B[A-Z](\d{5})g(\d)(\d{2})v\d+\t`, flags: 'gm', replacement: '$2.$3\t$1\t' }] },
   { key: 'phoenix', inputId: 'claret-2017-limb-darkening', file: 'photometry/claret-2017-tess-quadratic.tsv', source: 'J/A+A/600/A30/tableab', cite: 'Claret (2017), A&A 600, A30', models: 'PHOENIX', band: 'TESS', vizier: 'J/A+A/600/A30',
     modelColumns: { Type: 'q', Mod: 'PC' }, columns: { teff: 'Teff', logg: 'logg', u1: 'aLSM', u2: 'bLSM' },
     form: (teff, logg) => ({ '-source': 'J/A+A/600/A30/tableab', '-out.max': '500', Teff: teff, logg, Z: '=0', Type: 'q', Mod: 'PC', '-out': 'logg,Teff,Z,L/HP,aLSM,bLSM,Type,Mod' }) },
@@ -149,7 +157,7 @@ export async function chooseLimb(id: string, teffK: number, logg: number, archiv
     catch (error) { return { sentence: `No limb darkening is drawn: at ${Math.round(teffK).toLocaleString('en-US')} K and log g ${logg} the ${grid.models} grid of ${grid.cite} does not reach it (${(error as Error).message})` }; }
   }
   const reasons: string[] = [];
-  for (const grid of [...GRIDS.slice(0, 3), 'howarth' as const, GRIDS[3]!, 'picaso' as const]) {
+  for (const grid of [...GRIDS.slice(0, 3), 'howarth' as const, GRIDS[3]!, GRIDS[4]!, 'picaso' as const]) {
     try { return grid === 'howarth' ? await fromHowarth(id, teffK, logg, archive) : grid === 'picaso' ? fromPicaso(id, teffK, logg) : await fromGrid(id, grid, teffK, logg, massSolar, archive); }
     catch (error) { reasons.push(`${grid === 'howarth' ? HOWARTH.cite : grid === 'picaso' ? `${PICASO.cite} (${PICASO.models})` : `${grid.cite} (${grid.models})`}: ${(error as Error).message}`); }
   }

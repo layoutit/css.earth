@@ -23,6 +23,7 @@
  *   which `prepare-catalogue-points.mts src/objects/nearby-universe-galaxies desi-bright-galaxies` writes): the recipe's color
  *   stops.
  */
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 import { catalogueBankInputPath } from '@cssearth/bake/volume/node';
 import { medianUpperMiddle as median } from '@cssearth/core';
 import { createReadStream } from 'node:fs';
@@ -31,7 +32,7 @@ import { resolve } from 'node:path';
 import { createInterface } from 'node:readline';
 import { createGunzip, gunzipSync, gzipSync } from 'node:zlib';
 
-const repository = resolve(import.meta.dirname, '../../../..');
+const repository = checkoutProjectRoot(import.meta.url);
 const sourceDirectory = resolve(repository, 'src/objects/nearby-universe-galaxies/source');
 const inputPath = resolve(process.argv[2] ?? resolve(repository, 'output/wisescos/wiseScosPhotoz160708.csv.gz'));
 const outputPath = resolve(sourceDirectory, 'wisescos-galaxies/wisescos-sample.csv.gz');

@@ -10,16 +10,16 @@
  * epochs go in batches and one table is written with every row in order. The acquisition plan gets one refresh step per
  * table holding those exact queries, so the tables can be asked for again and their rows compared.
  */
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 import { readFile, writeFile } from 'node:fs/promises';
-import { createRequire } from 'node:module';
 import { dirname, resolve } from 'node:path';
 import { readFitsHdu } from '@cssearth/fits';
 import { requireArray, requireRecord } from '@cssearth/core';
 import { HORIZONS_API, horizonsCommand, horizonsRefreshOperations } from './horizons-tables.ts';
 import { loadObserverCameraInputs, zimpolExposure } from './observer-cameras.ts';
 
-/** The checkout, found through this package's own name so the path holds from the sources and from `dist/`. */
-const ROOT = resolve(dirname(createRequire(import.meta.url).resolve('@cssearth/bake/package.json')), '../..');
+/** The real checkout, found by the shared workspace-marker resolver from source and `dist/`. */
+const ROOT = checkoutProjectRoot(import.meta.url);
 /** A dataset's two refresh steps in its acquisition plan, replacing any it had for those paths. */
 export async function writeHorizonsOperations(objectId: string, sourceDirectory: string) {
   const { record, frames } = await loadObserverCameraInputs(sourceDirectory);

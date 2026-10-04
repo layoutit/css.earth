@@ -19,11 +19,12 @@
  * - The Galactic centre is the Milky Way's own: its volume frame's origin (`object.json` properties.volume.originM), where
  *   its drawing and the merge's `withinPcOfCentre` put it.
  */
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { gunzipSync, gzipSync } from 'node:zlib';
 
-const repository = resolve(import.meta.dirname, '../../../..');
+const repository = checkoutProjectRoot(import.meta.url);
 const inputPath = resolve(process.argv[2] ?? resolve(repository, 'output/rrlyrae/table5.dat.gz'));
 const outputPath = resolve(repository, 'src/objects/milky-way-volume/source/gaia-rr-lyrae/sample.csv.gz');
 const descriptorPath = resolve(repository, 'src/objects/milky-way-volume/object.json');

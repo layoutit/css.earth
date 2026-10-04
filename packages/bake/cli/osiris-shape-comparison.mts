@@ -7,11 +7,7 @@ import { pathToFileURL } from 'node:url';
 import { requireRecord, requireString } from '@cssearth/core';
 import { createSourceManifest } from '@cssearth/objects/node';
 import { requireTerrainMesh } from '@cssearth/bake/objects/geometry';
-import { parseSolidPreparationSource, decodeOsirisGeo, decodeOsirisQuality, acceptOsirisQuality, project } from '@cssearth/bake/objects/layers/terrestrial';
-import { radialTerrainForDataset } from '@cssearth/bake/objects/layers/terrestrial';
-import { loadRadialTerrain } from '@cssearth/bake/objects/layers/terrestrial';
-import { fitBackplaneCamera } from '@cssearth/bake/objects/layers/terrestrial';
-import { parseGeoDataset } from '@cssearth/bake/objects/layers/terrestrial';
+import { parseSolidPreparationSource, decodeOsirisGeo, decodeOsirisQuality, acceptOsirisQuality, project, radialTerrainForDataset, loadRadialTerrain, fitBackplaneCamera, parseGeoDataset } from '@cssearth/bake/objects/layers/terrestrial';
 
 const summary = (values: number[]) => {
   values.sort((a, b) => a - b);

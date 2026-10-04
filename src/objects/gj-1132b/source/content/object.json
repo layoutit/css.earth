@@ -49,7 +49,7 @@
   },
   "datasets": {
     "titleKey": "datasets",
-    "defaultDataset": "shape",
+    "defaultDataset": "temperature",
     "controls": [
       {
         "id": "shape",
@@ -65,6 +65,66 @@
         },
         "falseColor": false,
         "notes": "No image or color of GJ 1132 b is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the color of gj-1132's light, as its color dataset measures it."
+      },
+      {
+        "id": "temperature",
+        "label": "Rock model",
+        "qualification": "A model set by one measurement: the 5–12 µm eclipse depth of Xue et al. (2024), one JWST MIRI LRS eclipse on 1 July 2023 (GTO 1274)",
+        "thumbnail": "gj-1132b-dataset-temperature.webp",
+        "surface": "gj-1132b-surface-temperature@2x.webp",
+        "poles": "gj-1132b-poles-temperature@2x.webp",
+        "source": {
+          "id": "gj-1132b-temperature-eclipse-depth",
+          "path": "../manifest.json",
+          "url": "https://arxiv.org/abs/2408.13340"
+        },
+        "falseColor": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Brightness temperature",
+          "labels": [
+            "≤ 50",
+            "425",
+            "800"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                13,
+                8,
+                135
+              ],
+              [
+                126,
+                3,
+                168
+              ],
+              [
+                204,
+                71,
+                120
+              ],
+              [
+                248,
+                149,
+                64
+              ],
+              [
+                240,
+                249,
+                33
+              ]
+            ],
+            "labels": [
+              "≤ 50",
+              "425",
+              "800"
+            ]
+          },
+          "meta": "K",
+          "sourceUrl": "https://arxiv.org/abs/2408.13340"
+        },
+        "notes": "A model, not a map. Only GJ 1132 b's dayside brightness is measured: an eclipse depth of 123 to 157 ppm at 5–12 µm (Xue et al. (2024)), which the paper finds only one sigma below the hottest a bare rock can be, and concludes the planet likely has no significant atmosphere. A bare rock with that depth is 711 to 772 K under the star and dark at night; whether the night side is dark is not measured. With shadows on, the star's light darkens the night half."
       }
     ]
   },

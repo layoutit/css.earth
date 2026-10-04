@@ -10,11 +10,12 @@
  *
  * Usage: node packages/bake/authoring/small-body-dots/positions.mts <object id>
  */
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 import { readdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { gunzipSync, gzipSync } from 'node:zlib';
 
-const root = resolve(import.meta.dirname, '../../../..'), objects = resolve(root, 'src/objects');
+const root = checkoutProjectRoot(import.meta.url), objects = resolve(root, 'src/objects');
 const id = process.argv[2];
 if (!id || !/^[a-z][a-z0-9-]*$/u.test(id)) throw new TypeError('Usage: positions.mts <object id>');
 const queryPath = resolve(objects, id, 'source/dots/query.json');

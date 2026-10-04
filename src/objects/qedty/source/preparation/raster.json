@@ -26,7 +26,26 @@
       "falseColor": false,
       "science": {
         "kind": "stellar-photometric-color",
-        "qualification": "Uniform photosphere color from a blackbody at the star's published temperature. No limb darkening is drawn: no mass is measured and no spectroscopic surface gravity is published with this radius: McDonald, Zijlstra & Watson (2017), MNRAS 471, 770 assume the gravity of their fit (table column 15). The disc is unresolved: no map or absolute brightness is implied. Self-luminous, so no lighting."
+        "qualification": "Photosphere color from a blackbody at the star's published temperature. The disc is unresolved: no map or absolute brightness is implied. Self-luminous, so no lighting. The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 4,675 K and log g 2.64 (u1 0.725, u2 0.075): a model, because no fit of this star's limb is used.",
+        "limbDarkening": {
+          "law": "quadratic",
+          "path": "photometry/claret-2011-v-quadratic.tsv",
+          "grid": {
+            "teffK": 4675,
+            "logg": 2.64,
+            "models": {
+              "Filt": "V",
+              "Met": "L",
+              "Mod": "A"
+            }
+          },
+          "columns": {
+            "teff": "Teff",
+            "logg": "logg",
+            "u1": "a",
+            "u2": "b"
+          }
+        }
       }
     }
   ],
@@ -48,7 +67,7 @@
       },
       "limbMaterial": {
         "logicalSize": 496,
-        "composition": "transparent: the sphere's own silhouette is the limb; the light just outside it is on the off-limb plate",
+        "composition": "black alpha darkens the photosphere according to the selected limb-darkening law; transparent outside the silhouette",
         "surfaceReplacement": false,
         "runtimeAlphaProcessing": false
       },

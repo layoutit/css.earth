@@ -17,7 +17,7 @@ orbit to its outer reaches.
   The starlight was removed here from the raw exposures ([below](#the-hubble-color-dataset)).
 - **2.1 and 4.1 micrometres, 49 to 124 au.** MAST's level-3 coronagraph mosaics of JWST/NIRCam F210M and F410M behind
   MASK335R, 21 March 2025, GO programme 4758 (PI Y. Zhou), the run of [Zhou et al. (2026)](https://arxiv.org/abs/2607.13133).
-  They are listed in [`beta-pictoris-4758.json`](../../../packages/telescope-cli/src/archives/jwst/imaging/programs/beta-pictoris-4758.json).
+  They are listed in [`beta-pictoris-4758.json`](../../../packages/telescope-cli/src/archives/jwst/programs/beta-pictoris-4758.json).
 - **Recipe.** [`source/circumstellar.json`](source/circumstellar.json) names the datasets, inputs, conventions,
   stretches and the published geometry each measurement is checked against.
   [`author.mts`](../../../packages/telescope-cli/authoring/circumstellar/author.mts) writes everything else in `source/`

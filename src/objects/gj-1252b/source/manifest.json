@@ -169,6 +169,76 @@
           }
         ]
       }
+    },
+    {
+      "id": "gj-1252b-temperature-eclipse-depth",
+      "path": "science/crossfield-2022/dayside-4.5um.json",
+      "origin": "https://arxiv.org/abs/2208.09479",
+      "credit": "Crossfield et al. (2022); Spitzer IRAC 4.5 µm secondary eclipses",
+      "license": "Factual numerical measurement; source attribution retained",
+      "acquisition": "Transcribed from the paper: the eclipse depth and its one-sigma range, with the cell and its location",
+      "redistribution": "A two-number measurement record",
+      "consumers": [
+        "gj-1252b-bare-rock-model"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-gj-1252b-temperature-eclipse-depth",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "gj-1252b-spitzer-irac-i2-filter",
+      "path": "science/svo/Spitzer_IRAC.I2.xml",
+      "origin": "https://svo2.cab.inta-csic.es/theory/fps/fps.php?ID=Spitzer/IRAC.I2",
+      "productId": "Spitzer/IRAC.I2",
+      "version": "SVO Filter Profile Service",
+      "title": "Spitzer/IRAC.I2 filter response",
+      "sourceUrl": "https://svo2.cab.inta-csic.es/theory/fps/index.php?id=Spitzer/IRAC.I2",
+      "credit": "Spanish Virtual Observatory Filter Profile Service (Rodrigo & Solano 2020)",
+      "displayCredit": "SVO Filter Profile Service",
+      "license": "Filter profiles served openly by the SVO for research use with citation",
+      "licenseEvidence": [
+        "https://svo2.cab.inta-csic.es/theory/fps/index.php?mode=use"
+      ],
+      "acquisition": "Restored through source/preparation/acquisition.json from the SVO Filter Profile Service VOTable for Spitzer/IRAC.I2, unchanged.",
+      "redistribution": "Not redistributed in git; restored from the SVO.",
+      "consumers": [
+        "gj-1252b-bare-rock-model"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Pinned SVO filter profile; the service has no catalogue record in this repository yet."
+      }
+    },
+    {
+      "id": "gj-1252b-bt-settl-cifist-3500",
+      "path": "science/bt-settl-cifist/bt-settl-cifist-3500-5.0-0.0.xml",
+      "origin": "https://svo2.cab.inta-csic.es/theory/newov2/ssap.php?model=bt-settl-cifist&fid=200",
+      "productId": "bt-settl-cifist fid 200",
+      "version": "BT-Settl (CIFIST2011) through the SVO Theoretical Spectra service",
+      "title": "BT-Settl CIFIST model spectrum, Teff 3500 K, log g 5.0, [M/H] 0",
+      "sourceUrl": "https://svo2.cab.inta-csic.es/theory/newov2/index.php?models=bt-settl-cifist",
+      "credit": "F. Allard, D. Homeier, B. Freytag (2012), BT-Settl CIFIST2011; Spanish Virtual Observatory Theoretical Spectra service",
+      "displayCredit": "BT-Settl · SVO",
+      "license": "Model spectra served openly by the SVO for research use with citation",
+      "licenseEvidence": [
+        "https://svo2.cab.inta-csic.es/theory/newov2/index.php?models=bt-settl-cifist"
+      ],
+      "acquisition": "Restored through source/preparation/acquisition.json from the SVO SSAP access reference for Teff 3500 K, log g 5.0, [M/H] 0, the grid point nearest gj-1252's cited temperature and gravity.",
+      "redistribution": "Not redistributed in git; restored from the SVO.",
+      "consumers": [
+        "gj-1252b-bare-rock-model"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Pinned SVO model spectrum; the service has no catalogue record in this repository yet."
+      }
     }
   ],
   "generatedIntermediates": [
@@ -185,7 +255,8 @@
         "generator": "packages/telescope-cli/src/source-authoring/context-markers.mts",
         "inputs": [
           "gj-1252b-observational-measurements",
-          "gj-1252b-preparation-raster"
+          "gj-1252b-preparation-raster",
+          "gj-1252b-temperature-eclipse-depth"
         ]
       },
       "generator": "packages/telescope-cli/src/source-authoring/context-markers.mts",

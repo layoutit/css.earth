@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "ssf98-v129",
+  "card": {
+    "text": "A Cepheid in the galaxy M101, 6.7 million parsecs away, that swells and shrinks every 66.1 days.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-26093-cds-vizier-18300010",
+        "url": "https://doi.org/10.26093/cds/vizier.18300010",
+        "label": "Hoffmann et al. (2017), Centre de Donnees Strasbourg (CDS)",
+        "checked": "2026-10-04",
+        "locator": "VizieR J/ApJ/830/10/table5 Gal = M101, ID = 277598: Per"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Hoffmann et al. (2016) list its pulsation at 66.1 days.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-26093-cds-vizier-18300010",
+        "url": "https://doi.org/10.26093/cds/vizier.18300010",
+        "label": "Hoffmann et al. (2017), Centre de Donnees Strasbourg (CDS)",
+        "checked": "2026-10-04",
+        "locator": "VizieR J/ApJ/830/10/table5 Gal = M101, ID = 277598: Per"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its temperature",
+      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

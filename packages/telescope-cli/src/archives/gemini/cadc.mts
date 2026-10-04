@@ -70,4 +70,3 @@ export async function primaryHeaderBytes(uri: string, records = 64): Promise<Buf
   if (!response.ok) throw new Error(`CADC refused ${uri}: ${response.status}`);
   return Buffer.from(await response.arrayBuffer());
 }
-

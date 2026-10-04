@@ -71,9 +71,12 @@ export async function publishPinnedSource({sourceRoot,entry,bytes}:{sourceRoot:s
 }
 
 /** The byte count a raw download is held to: a ranged input's own slice, else the answer's declared length, else
- *  null when the answer declares none. */
+ *  null when the answer declares none. A compressed answer declares the size of the transfer, not of the file that
+ *  fetch hands over decoded (GitHub serves raw text gzipped), so it declares nothing about the file. */
 export function declaredDownloadBytes(entry:SourceEntry,response:{headers:{get(name:string):string|null}}):number|null {
  if(entry.range)return entry.range.length;
+ const encoding=response.headers.get('content-encoding')?.trim().toLowerCase();
+ if(encoding&&encoding!=='identity')return null;
  const declared=response.headers.get('content-length');
  return declared!==null&&/^\d+$/.test(declared.trim())&&Number(declared)>0&&Number.isSafeInteger(Number(declared))?Number(declared):null;
 }

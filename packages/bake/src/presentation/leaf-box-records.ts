@@ -1,6 +1,6 @@
 import type { LeafBoxComponent, PreparedLeafBox } from '@cssearth/objects';
 import { rebuildPropertyTable } from './property-table.ts';
-import { isRecord as coreIsRecord } from '@cssearth/core';
+import { isRecord } from '@cssearth/core';
 import { scanCssDeclarations } from './css-declaration-scanner.ts';
 
 // Leaf boxes as prepared records (the last step of the presentation bindings, prepared-presentation-bindings.ts).
@@ -29,7 +29,6 @@ const seamTerm = (k: string) => `calc(1 + var(${SURFACE_SEAM_OUTSET_PROPERTY}, 0
 const SEAM = new RegExp(String.raw`^ translate\(50%, 50%\) scale\(calc\(1 \+ var\(${SURFACE_SEAM_OUTSET_PROPERTY}, 0\) \* (${NUMBER})\), calc\(1 \+ var\(${SURFACE_SEAM_OUTSET_PROPERTY}, 0\) \* (${NUMBER})\)\) translate\(-50%, -50%\)$`);
 /** The properties a record carries; the node's static style drops them too, since the record overrides them. */
 const OWNED = ['width', 'height', 'background-size', 'background-position', 'transform', '--polycss-atlas-width', '--polycss-atlas-height'];
-const isRecord = coreIsRecord;
 const leafBoxBinding = (value: unknown): value is Binding => isRecord(value) && value.kind === 'silhouette-step-property' && value.property === LEAF_BOX_PROPERTY;
 const seamBinding = (value: unknown): value is Binding => isRecord(value) && value.kind === 'silhouette-step-property' && value.property === SURFACE_SEAM_OUTSET_PROPERTY;
 
@@ -56,11 +55,14 @@ function length(value: string, where: () => string) {
   if (!scaled) throw new TypeError(`${where()}: unexpected leaf-box length: ${value}`);
   return Number(scaled[1]);
 }
+// Exact, case-sensitive exclusion; no colon means no declaration name and the fragment stays.
+const LEAF_BOX_DECLARATION_NAME = (part: string, colon: number) => colon < 0 ? undefined : part.slice(0, colon).trim();
 /** A static style without the named declarations. Semicolons inside quotes or parentheses (URLs) do not split. */
-function withoutDeclarations(style: string, names: readonly string[]) {
+function withoutDeclarations(style: string, names: readonly string[], declarationName = LEAF_BOX_DECLARATION_NAME) {
   return [...scanCssDeclarations(style)].filter(part => {
     const colon = part.indexOf(':');
-    return colon < 0 || !names.includes(part.slice(0, colon).trim());
+    const name = declarationName(part, colon);
+    return name === undefined || !names.includes(name);
   }).map(part => `${part};`).join('');
 }
 

@@ -13,8 +13,8 @@ This package is the layer above the libraries: it imports `@cssearth/telescope`,
 - the archives' records: every archive's client code, reducers and ledger builder is `src/archives/<archive>/`, beside the
   ledger machinery they share (`src/archives/`). PDS, Keck, Gemini, NACO, Chandra, Spitzer, Juno, HST, JWST and IHW keep
   their programs, receipts, toolchain pins and the bodies a ledger or route is about (`ledger-focus.json`,
-  `moving-targets.json`, `horizons-bodies.json`) beside that code, still read through `WORKSPACE`; JWST keeps one programs
-  folder beside each tool that reads it (`jwst/programs`, `jwst/imaging/programs`, `jwst/klip/programs`). The
+  `moving-targets.json`, `horizons-bodies.json`) beside that code, still read through `WORKSPACE`; JWST keeps one `jwst/programs/` root: time-series directories and imaging, cube and KLIP JSON files.
+  Receipts retain their original bytes and are matched by program id, band and pinned product, never the previous directory. The
   interferometry reduction (`src/archives/interferometry/`: ALMA restores, VLTI calibration, star imaging) keeps its
   toolchain pins (`toolchains.json`), the ROTIR Julia project (`rotir/`), star seasons (`seasons/`) and test fixtures beside
   it. Per-body authoring (the HST slit-scan map, the JWST band maps, the NACO body map, the ALMA thermal maps, the circumstellar
@@ -23,8 +23,8 @@ This package is the layer above the libraries: it imports `@cssearth/telescope`,
   where `src/archives/programs.mts` puts them. No archive module names a body (`archives/archive-scope.test.mts`).
   The Juno archive tests are beside the archive in `src/archives/juno/`;
   `test:packages` runs every test in this package;
-- the entry scripts and rendering lane it runs by path as processes or compiled modules (`src/workspace-commands/`, the sphere
-  lane in `src/sphere/sphere-lane.mts` and `src/sphere/sphere-html.mts`), because they read the checkout's body packages and
+- the entry scripts it runs by path as processes and the built sphere package entry (`src/workspace-commands/`, the sphere
+  lane exported as `@cssearth/telescope-cli/sphere/lane` and `src/sphere/sphere-html.mts`), because they read the checkout's body packages and
   application shell. The native CSS camera, resize input and carried viewport values that lane writes into its HTML are
   this package's `src/sphere/native-scroll/` (exported as `./sphere/native-scroll/*`, which the native scroll preview in
   `labs/experiments/` also imports); they followed the lane out of `tools/experiments/` (now `labs/experiments/`);
@@ -34,10 +34,17 @@ This package is the layer above the libraries: it imports `@cssearth/telescope`,
 
 The object generator behind `telescope new-object` is `src/new-object/`: `cli.mts` is the entry the telescope runs as a process of its
 own through `workspace-commands/new-object.mts`, `new-object-cli.mts` is the standalone entry for the modes the telescope does not expose
-(`--star-limb`, `--thermal`, `--host-light`, `--phase-curve`, `--charts`, `--retext`, `--retime`, the shape-only scaffold), and
+(`--star-limb`, `--thermal`, `--host-light`, `--phase-curve`, `--simulation`, `--rock-eclipse`, `--published-map`, `--charts`, `--retext`, `--retime`, the shape-only scaffold), and
 `new-hosted-planet.mts` scaffolds one hosted planet. `hosted-orbits/` holds the two Python fitters `hosted.mts` runs beside it.
 The generated solar geometry (`src/platform/solar-geometry.mts`) stays generated: the entries load it with `solar-epoch.mts` and
 pass the epoch down, so no module here imports it.
+
+The star survey behind `telescope stars GALAXY` is `src/stars/`. It and the generator's `--from-table` route
+(`src/new-object/archives/tables/table-stars.mts`) read VizieR's table metadata and SIMBAD through the same two modules,
+`vizier-tables.mts` and `simbad-tap.mts` beside it; a star class is a branch of SIMBAD's own type tree, never a
+list of types kept here. A star listed by detector pixel is placed by `src/new-object/archives/images/image-pixel.mts`: it reads
+header records of the archived exposure by byte range, keeps the one extension header as the package's ranged source input,
+and takes the sky position from `@cssearth/fits` `skyProjection`, which owns the projection and its SIP distortion.
 
 The sky band composer is `src/sky/` (exported as `./sky/*`): `sky-band-composite.mts` composes pinned hips2fits, AllWISE
 atlas and JWST level-3 bands on one TAN grid, and `author-sky-bands.mts` acquires and pins those bands. It moved from
@@ -70,3 +77,11 @@ See the [shared source-format ownership contract](../objects/AGENTS.md) for WISE
 
 `src/implementation-dependencies.mts` declares `RENDERER_BUILD_CONFIG_PATH` for its entry-source closure.
 The architecture rule names this metadata reader separately from runtime consumers; its guard rejects an unlisted reader.
+
+Sphere export runs the built `@cssearth/telescope-cli/sphere/lane` entry from `dist`. After editing `src/sphere/`, rebuild with `pnpm --filter @cssearth/telescope-cli build` before exporting again.
+
+The library/command split is accepted: bake imports the light telescope library, while telescope-cli depends on bake for preparation; merging them would create a cycle. Reconsider only when the command no longer needs bake.
+
+Fixture homes follow their test owner: shared command fixtures stay in `src/fixtures/`, while family, VO and archive fixtures stay beside their tests. This split is accepted to keep archive-specific inputs local; promote a fixture only when a second owner consumes it.
+
+Interferometry intentionally keeps seven toolchains in one descriptor and one installer because the reduction workflow coordinates their install/verify policy. Split only when a toolchain gains an independent owner or installer contract.

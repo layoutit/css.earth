@@ -15,12 +15,13 @@
  * `featherPx`): light within the half width of the path is kept whole, fades to black over the feather, and is black
  * beyond it. It is for a lensed arc that crosses a field of nearer galaxies, which do not stand at the arc's distance.
  */
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 import { mkdir, readFile, stat, writeFile } from 'node:fs/promises';
 import { basename, resolve } from 'node:path';
 import sharp from 'sharp';
 import type { Sharp } from 'sharp';
 
-const repository = resolve(import.meta.dirname, '../../../..');
+const repository = checkoutProjectRoot(import.meta.url);
 const ids = process.argv.slice(2);
 if (!ids.length) throw new TypeError('Usage: picture-source.mts <object id>...');
 

@@ -13,6 +13,7 @@
  * The mean is written to the recipe's output beside the object's sources, with the spread between the sample's first half
  * and the whole reported so the average's convergence is on record.
  */
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 import { spawn } from 'node:child_process';
 import { access, mkdir, readFile, rename, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
@@ -23,7 +24,7 @@ import { requireArray, requireFiniteNumber, requireRecord, requireString } from 
 interface ReleaseFile { readonly role: string; readonly path: string }
 interface Release { readonly repository: string; readonly commit: string; readonly files: readonly ReleaseFile[] }
 
-const root = resolve(import.meta.dirname, '../../../..');
+const root = checkoutProjectRoot(import.meta.url);
 const args = process.argv.slice(2), objectId = args.find(arg => !arg.startsWith('--') && !/^\d+$/u.test(arg) && !arg.includes('/'));
 const option = (name: string) => { const index = args.indexOf(`--${name}`); return index < 0 ? undefined : args[index + 1]; };
 if (!objectId || !/^[a-z][a-z0-9-]*$/u.test(objectId)) throw new Error('Usage: node packages/bake/authoring/eht/topset-mean.mts <object-id> [--python <path>] [--workers <n>]');

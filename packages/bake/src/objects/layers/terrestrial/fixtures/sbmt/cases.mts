@@ -1,3 +1,5 @@
+import { setupBakeOracleInputs } from '../../../../cameras/oracle-inputs.mts';
+await setupBakeOracleInputs();
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { requireRecord, requireArray, requireString, requireFiniteNumber } from '@cssearth/core';

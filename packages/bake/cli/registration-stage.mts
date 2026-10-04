@@ -13,11 +13,8 @@ import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { createSourceManifest } from '@cssearth/objects/node';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
-import { loadRadialModels } from '@cssearth/bake/objects/layers/terrestrial';
-import { radialModelForDataset } from '@cssearth/bake/objects/layers/terrestrial';
+import { loadRadialModels, radialModelForDataset, loadSurfaceObservation, registrationBlockFor, withRegistrationBlock } from '@cssearth/bake/objects/layers/terrestrial';
 import { requireTerrainMesh } from '@cssearth/bake/objects/geometry';
-import { loadSurfaceObservation } from '@cssearth/bake/objects/layers/terrestrial';
-import { registrationBlockFor, withRegistrationBlock } from '@cssearth/bake/objects/layers/terrestrial';
 
 const ROOT = resolve(import.meta.dirname, '../../..');
 const [selector, flag] = process.argv.slice(2);

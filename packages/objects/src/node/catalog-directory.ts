@@ -15,7 +15,12 @@ export type ObjectDescriptors = ReadonlyMap<string, unknown>;
 export async function readObjectDescriptors(objectsDirectory: string): Promise<ObjectDescriptors> {
   const names = (await readdir(objectsDirectory, { withFileTypes: true })).filter(entry => entry.isDirectory()).map(entry => entry.name);
   const read = await Promise.all(names.map(async name => {
-    try { return [name, JSON.parse(await readFile(resolve(objectsDirectory, name, 'object.json'), 'utf8'))] as const; }
+    try {
+      const path = resolve(objectsDirectory, name, 'object.json'), descriptor: unknown = JSON.parse(await readFile(path, 'utf8'));
+      if (!isRecord(descriptor) || typeof descriptor.id !== 'string' || !/^[a-z][a-z0-9-]*$/u.test(descriptor.id)) throw new TypeError(`${path}: authored descriptor id is required.`);
+      if (descriptor.id !== name) throw new TypeError(`Catalogue identity differs: ${name}.`);
+      return [descriptor.id, descriptor] as const;
+    }
     catch (error) { if (hasErrorCode(error, 'ENOENT')) return null; throw error; }
   }));
   return new Map(read.filter(entry => entry !== null));

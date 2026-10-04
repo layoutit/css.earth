@@ -1,0 +1,43 @@
+{
+  "id": "doi-10-1086-376831",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Leonard et al. (2003): The Cepheid Distance to NGC 1637: A Direct Test of the Expanding Photosphere Method Distance to SN 1999em",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.1086/376831"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://doi.org/10.1086/376831",
+      "label": "Publisher"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://doi.org/10.1086/376831",
+      "checkedOn": "2026-10-04",
+      "locator": "Crossref record: title, authors, container"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Leonard et al. (2003), The Astrophysical Journal 594 247-278",
+      "scope": "citation",
+      "evidence": "https://doi.org/10.1086/376831"
+    }
+  ],
+  "publisher": "The Astrophysical Journal 594 247-278",
+  "creators": [
+    "Douglas C. Leonard",
+    "Shashi M. Kanbur",
+    "Choong C. Ngeow",
+    "et al."
+  ],
+  "publicationDate": "2003"
+}

@@ -9,8 +9,10 @@ import type { WorldPlannerSource } from './world-context/world-context-planner-c
 export type PreparedImageLayerMount = { payload: PreparedCssImageLayers; resolveResource(path: string): string;
   /** Published catalogues placed in the bank's own frame, drawn as dots over its layers and faded with them. */
   cataloguePointUrls?: readonly string[] };
+/** `payload` is the catalogue's dots as the data worker reads them (@cssearth/objects catalogue-dots.ts); a caller that
+ * holds the catalogues whole passes the galaxy catalogue with its sample and the other two. */
 export type PreparedCatalogBank = { payload: unknown; galaxySample?: unknown; nebulae?: unknown; fadeStartDistanceM: number; fullDistanceM: number;
-  clusters?: { payload: unknown; fadeStartDistanceM: number; fullDistanceM: number } };
+  clusters?: { payload?: unknown; fadeStartDistanceM: number; fullDistanceM: number } };
 
 export interface PreparedUniverseOptions {
   /** Prepared catalogue point banks of the galaxies beyond the Local Group (background-points.ts). */
@@ -65,7 +67,7 @@ export interface PreparedUniverseOptions {
   /** Prepared before any dataset is fetched: each bank's context visibility and, where it has one, its Sun-facing
    * billboard in a shared atlas. A small or distant bank draws its billboard; its datasets load only once large. */
   /** What the universe knows of every dataset bank before fetching it, and where each bank's billboard image is served. */
-  datasetBillboards?: { readonly plan: DatasetBillboards; readonly imageUrl: (id: string) => string };
+  datasetBillboards?: { readonly plan: DatasetBillboards; readonly imageUrl: (id: string, dataset?: string) => string };
   /** Mount the prepared celestial sky cube. Phones leave it out: its faces cost tens of megabytes of layers. */
   sky?: boolean;
   /** A bank's payload, and any published catalogue points drawn with it (M87's globular clusters). */

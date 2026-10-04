@@ -16,8 +16,8 @@
     {
       "location": "prepared",
       "filename": "datasets.json",
-      "bytes": 1546913,
-      "sha256": "645d22d96717b37459645187bf5872ccec97f9965dd9a98db4030d5a52e6c25f"
+      "bytes": 6339,
+      "sha256": "138f37ee846e9622a63522be2a8a020e88e55435be583ca6520c612a9b6ebcc8"
     },
     {
       "location": "prepared",
@@ -201,6 +201,12 @@
     },
     {
       "location": "prepared",
+      "filename": "eso-optical/volume.json",
+      "bytes": 437274,
+      "sha256": "fc4e7feac160954f7133c222abea3b014dcde78865754e3ce2982500ce8fec29"
+    },
+    {
+      "location": "prepared",
       "filename": "eso-vista/atlases/x.webp",
       "bytes": 395258,
       "sha256": "4ac16f906e3c0364953d46f2d900dd587f39aac9f30472956fed8e0f51056554"
@@ -375,9 +381,27 @@
     },
     {
       "location": "prepared",
+      "filename": "eso-vista/volume.json",
+      "bytes": 435480,
+      "sha256": "85eeafc1dd799cd7692928b9f88c207139ead6c7680ed926d055d8f571242572"
+    },
+    {
+      "location": "prepared",
       "filename": "presentation.json",
       "bytes": 3269,
       "sha256": "d2804111e0815171cd7d0db74a85c96c1ae16c052b6c807b8ffa9d684e5027b6"
+    },
+    {
+      "location": "prepared",
+      "filename": "record.json",
+      "bytes": 5563,
+      "sha256": "b498215bdba4345cfcafa20aaab92a0e6519592b775abd1f9d8c13ac4d9c4940"
+    },
+    {
+      "location": "prepared",
+      "filename": "stars.bin",
+      "bytes": 79563,
+      "sha256": "a955edc1bec53203b5ea0a13c0857c0a98e5f7aecfe181df1a7b47b47c859da7"
     }
   ]
 }

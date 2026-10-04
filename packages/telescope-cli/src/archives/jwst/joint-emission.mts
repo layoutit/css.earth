@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-import { findOne } from './find-product.mts';
 /**
  * One planet's emission light curve from a joint Eureka! Stage 5 fit of several reduced visits.
  *
@@ -15,6 +14,7 @@ import { findOne } from './find-product.mts';
  * 4. Writes time, flux, error, a mask for every transit of every planet from its fitted orbit (padded 10 minutes), and an indicator column per visit after the first:
  *    the light-curve form an eclipse-map-fit recipe reads.
  */
+import { findOne } from './find-product.mts';
 import { spawnSync } from 'node:child_process';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';

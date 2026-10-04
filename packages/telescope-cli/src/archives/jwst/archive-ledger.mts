@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-import { sampleAgreement } from './sample-agreement.mts';
 /** The JWST ledger: what the public archive holds in each observing mode, which of it this repository can already turn into
  * something drawn, and which of the objects it ships JWST has observed.
  *
@@ -14,6 +13,7 @@ import { sampleAgreement } from './sample-agreement.mts';
  * data/jwst/ledger.json and docs/jwst-ledger.md; --local rewrites only the repository-derived part of both, from the ledger
  * already on disk, because pinning a program or writing a receipt changes nothing the archive said; --targets writes every
  * target of every mode, which is too long to keep. */
+import { sampleAgreement } from './sample-agreement.mts';
 import { readdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { hasErrorCode, isRecord, requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
@@ -157,6 +157,8 @@ export async function repositoryState(repository = REPOSITORY) {
   }
   for (const file of files.filter(name => name.endsWith('.json') && !name.endsWith('.reproduction.json')).sort()) {
     const program = await readJson(resolve(imaging, file));
+    // KLIP programs share this root but do not declare pipeline imaging bands. Unknown schemas still fail below.
+    if (isRecord(program) && program.schema === 'cssearth-jwst-klip-program@1') continue;
     if (!isRecord(program) || !Array.isArray(program.bands)) throw new TypeError(`${file} is not an imaging program.`);
     const id = requireString(program.id), pinned = new Set<string>(), proved = new Set<string>();
     for (const entry of program.bands) {

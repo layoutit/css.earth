@@ -1,5 +1,5 @@
-import { dotN as dot, median } from '@cssearth/core';
-/** One additive level per region, solved from the median difference of every measured boundary.
+import { dotN as dot, medianAveraged } from '@cssearth/core';
+/** One additive level per region, solved from the medianAveraged difference of every measured boundary.
  * Montage's mBgModel with constant terms (Berriman et al.): minimise sum n_ij (o_i - o_j - d_ij)^2 with
  * sum o = 0. The WISE atlas mosaic and the photographic plate background share this solver. */
 export const MONTAGE_BACKGROUND_REFERENCE = 'https://doi.org/10.1504/IJCSE.2009.026999';
@@ -50,7 +50,7 @@ export function solveConstantOffsets(count: number, pairs: readonly OffsetPair[]
   for (let t = 0; t < count; t++) offsets[t] -= mean;
   const residual = (applied: boolean) => {
     const values = pairs.map(pair => Math.abs(pair.difference - (applied ? offsets[pair.i]! - offsets[pair.j]! : 0)));
-    return values.length ? median(values) : 0;
+    return values.length ? medianAveraged(values) : 0;
   };
   return { offsets, pairs: pairs.length, sweeps, medianPairStepBefore: residual(false), medianPairStepAfter: residual(true) };
 }

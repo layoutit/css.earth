@@ -1,4 +1,4 @@
-import { FACILITY_EMBLEMS_SCHEMA } from '@cssearth/objects';
+import { FACILITY_EMBLEMS_SCHEMA, readFacilityEmblemSource, type FacilityEmblemEntry, type FacilityEmblemLibrary } from '@cssearth/objects';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import sharp from 'sharp';
@@ -13,7 +13,8 @@ const historicalEvidence='site/source/facilities/emblem-library.json';
 
 const records=requireArray(JSON.parse(await fs.readFile(path.join(root,'source-records.json'),'utf8'))).map(value=>{const entry=requireRecord(value);return {...entry,id:requireString(entry.id),localSource:requireString(entry.localSource)};});
 await fs.mkdir(output,{recursive:true});
-const entries=[],layers=[];
+const entries: FacilityEmblemEntry[]=[];
+const layers=[];
 for(const e of records){
  const index: number=entries.length;
  const catalogueId=`artwork-emblem-${e.id}`;
@@ -21,7 +22,7 @@ for(const e of records){
  const sourceEvidence=requireArray(catalogue.evidence);
  if(catalogue.id!==catalogueId||!sourceEvidence.some(value=>requireRecord(value).locator===`/entries/${index}`))
   throw Error(`Emblem order no longer matches the catalogued source: ${e.id}`);
- const sourceBinding={kind:'catalogued',references:[{catalogueId,role:'artwork',evidence:`${historicalEvidence}#/entries/${index}`}]};
+ const sourceBinding: FacilityEmblemEntry['sourceBinding']={kind:'catalogued',references:[{catalogueId,role:'artwork',evidence:`${historicalEvidence}#/entries/${index}`}]};
  const input=await fs.readFile(path.join(root,e.localSource));
  // Juno's vector uses negative space for the white features shown in the raster
  // insignia. Retain that white inside the circular badge, with no outer square.
@@ -61,12 +62,13 @@ for(const e of records){
  const shown=await sharp(published).ensureAlpha().raw().toBuffer();
  for(let y=0;y<SIZE;y++)for(let x=0;x<SIZE;x++)if(x===0||y===0||x===SIZE-1||y===SIZE-1)if(shown[(y*SIZE+x)*4+3]!==0)throw Error('Published emblem has an opaque frame edge: '+e.id+' at '+x+','+y);
  await fs.writeFile(path.join(output,e.id+'.png'),published);
- entries.push({id:e.id,src:'/shell/facility-emblems/'+e.id+'.png',width:SIZE,height:SIZE,bytes:published.length,source:{...e,inputBytes:input.length},preparation:{method:e.id==='juno'?'Rasterize source vector over a white circle to retain the original raster badge appearance; exterior remains transparent.':removed?'Remove only edge-connected white background; preserve original artwork RGB.':'Preserve source transparency.',removedBackgroundPixels:removed,crop:{left,top,width:right-left+1,height:bottom-top+1},outputPadding:2,transparentPixels:transparent},sourceBinding});
+ entries.push({id:e.id,src:'/shell/facility-emblems/'+e.id+'.png',width:SIZE,height:SIZE,bytes:published.length,source:readFacilityEmblemSource({...e,inputBytes:input.length}),preparation:{method:e.id==='juno'?'Rasterize source vector over a white circle to retain the original raster badge appearance; exterior remains transparent.':removed?'Remove only edge-connected white background; preserve original artwork RGB.':'Preserve source transparency.',removedBackgroundPixels:removed,crop:{left,top,width:right-left+1,height:bottom-top+1},outputPadding:2,transparentPixels:transparent},sourceBinding});
  const x=index%6*160,y=Math.floor(index/6)*186;
  layers.push({input:await sharp(png).resize(128,128).png().toBuffer(),left:x+16,top:y+8});
  layers.push({input:Buffer.from(`<svg width="160" height="28"><text x="8" y="18" fill="#ccc" font-family="Arial" font-size="12">${e.id}</text></svg>`),left:x,top:y+147});
  console.log(e.id,removed?'removed '+removed+' exterior pixels':'native alpha',png.length);
 }
 if(entries.length!==24||new Set(entries.map(e=>e.id)).size!==24)throw Error('Expected all 24');
-await fs.writeFile(path.join(root,'../emblem-library.json'),JSON.stringify({schema:FACILITY_EMBLEMS_SCHEMA,normalBuildPolicy:'Reuse committed PNGs; preparation and acquisition are explicit maintenance only.',entries},null,2)+'\n');
+const library: FacilityEmblemLibrary={schema:FACILITY_EMBLEMS_SCHEMA,normalBuildPolicy:'Reuse committed PNGs; preparation and acquisition are explicit maintenance only.',entries};
+await fs.writeFile(path.join(root,'../emblem-library.json'),JSON.stringify(library,null,2)+'\n');
 if(process.argv[2])await sharp({create:{width:960,height:744,channels:3,background:'#0d0d0d'}}).composite(layers).png().toFile(path.resolve(process.argv[2]));

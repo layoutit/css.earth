@@ -3,12 +3,9 @@ import { projectRoot as findProjectRoot } from '@cssearth/core/node';
 import assert from 'node:assert/strict';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 import { TEXELS_PER_CSS_PIXEL, leafRasterScale, packProjectiveSurfaceRaster } from '@cssearth/bake/scene';
-import { prepareBandedEllipsoid, domeRingWarp, latitudeRasterBands, type BandedImagePixels } from '@cssearth/bake/objects/layers/giant';
-import { publishedLeafImages } from '@cssearth/bake/objects/layers/giant';
+import { prepareBandedEllipsoid, domeRingWarp, latitudeRasterBands, type BandedImagePixels, publishedLeafImages, polarImageProjection, writeDomeRings } from '@cssearth/bake/objects/layers/giant';
 import { readFile } from 'node:fs/promises';
 import { assertPolarCaps, poleOfClass } from './fixtures/polar-caps.mts';
-import { polarImageProjection } from '@cssearth/bake/objects/layers/giant';
-import { writeDomeRings } from '@cssearth/bake/objects/layers/giant';
 const test = sourceTest();
 
 const ringUrl = '/scenes/hypothetical/rings@2x.webp';

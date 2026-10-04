@@ -1,11 +1,11 @@
+import type { PointFieldRgb, PreparedCssPointFieldManifest as PreparedCssPointField } from '@cssearth/objects';
 import sharp from 'sharp';
 import { createExposure, exposureLimits, POINT_MIN_RADIUS_PX, starPresentation } from '@cssearth/engine';
-import type { PreparedCssPointFieldManifest as PreparedCssPointField } from '@cssearth/objects';
-import type { Rgb, StarsRecipe } from './types.ts';
+import type { StarsRecipe } from './types.ts';
 
 function smoothstep(min: number, max: number, value: number) { const t = Math.max(0,Math.min(1,(value-min)/(max-min))); return t*t*(3-2*t); }
 /** Offline integration of Galaxio's settled (zero-motion) compact core/halo PSF; ordinary PNG alpha. */
-export async function preparePointAtlas(colors: readonly Rgb[], config: StarsRecipe['atlas']): Promise<Buffer> {
+export async function preparePointAtlas(colors: readonly PointFieldRgb[], config: StarsRecipe['atlas']): Promise<Buffer> {
   const size = config.tileSize, width = size*colors.length, rgba = Buffer.alloc(width*size*4), n = config.samplesPerPixelAxis;
   for (let tile = 0; tile < colors.length; tile++) for (let y = 0; y < size; y++) for (let x = 0; x < size; x++) {
     let alpha = 0;

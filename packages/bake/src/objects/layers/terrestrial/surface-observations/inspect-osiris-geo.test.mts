@@ -2,10 +2,7 @@ import { required } from '@cssearth/objects/node/contract';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import assert from 'node:assert/strict';
-import { decodeOsirisGeo, decodeOsirisQuality, acceptOsirisQuality, lommelSeeligerGain, fitCamera, project, PLANE_NAMES, GEO_SHAPE_MODEL, osirisRadianceFactorScale, phaseGain, observationGain } from '@cssearth/bake/objects/layers/terrestrial';
-import { sampleFootprint } from '@cssearth/bake/objects/layers/terrestrial';
-import { archiveBackplanes } from '@cssearth/bake/objects/layers/terrestrial';
-import { diskPhotometry } from '@cssearth/bake/objects/layers/terrestrial';
+import { decodeOsirisGeo, decodeOsirisQuality, acceptOsirisQuality, lommelSeeligerGain, fitCamera, project, PLANE_NAMES, GEO_SHAPE_MODEL, osirisRadianceFactorScale, phaseGain, observationGain, sampleFootprint, archiveBackplanes, diskPhotometry } from '@cssearth/bake/objects/layers/terrestrial';
 import type { DiskPhotometry } from '@cssearth/bake/objects/layers/terrestrial';
 
 /** A decoded GEO frame as the footprint stage sees it: optional quality flags and disk photometry. */

@@ -1,16 +1,16 @@
-import { parseRuntimeManifest, prepareRuntimeManifest, assembleRuntimeAssets } from '../../delivery/index.ts';
-import { containedPath, parseSourceManifest, verifySources } from '../sources/index.ts';
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
+import { parseRuntimeManifest, prepareRuntimeManifest, assembleRuntimeAssets, publishSourceBytes } from '../../delivery/index.ts';
+import { containedPath, parseSourceManifest, verifySources, RUNTIME_ASSET_ORIGIN, fetchWithRetry, sourceCacheUrl, sourceFormatProblem } from '../sources/index.ts';
 import { executeAcquisition, parseAcquisitionPlan, restoreMissingSources } from './operations-acquisition.ts';
-import { RUNTIME_ASSET_ORIGIN, fetchWithRetry, sourceCacheUrl, sourceFormatProblem } from '../sources/index.ts';
-import { publishSourceBytes } from '../../delivery/index.ts';
 import { readFile, lstat } from 'node:fs/promises';
 import { resolve } from 'node:path';
 
 const object=(value:unknown):Record<string,unknown>=>{if(!value||typeof value!=='object'||Array.isArray(value))throw new TypeError('Expected an object.');return value as Record<string,unknown>;};
 
-export async function runOperations(mode:string,id:string,argumentsList:string[]=[]) {
+/** `root` is the checkout the operation runs in: a caller-supplied root always wins; the checkout holding this module is only the default. */
+export async function runOperations(mode:string,id:string,argumentsList:string[]=[],root:string=checkoutProjectRoot(import.meta.url)) {
  if(!/^[a-z][a-z0-9-]*$/.test(id))throw new TypeError('Operation needs an object id.');
- const root=process.cwd(),objectRoot=resolve(root,'src/objects',id),sourceRoot=resolve(objectRoot,'source'),preparationRoot=resolve(objectRoot,'prepared');
+ const objectRoot=resolve(root,'src/objects',id),sourceRoot=resolve(objectRoot,'source'),preparationRoot=resolve(objectRoot,'prepared');
  const descriptor=object(JSON.parse(await readFile(resolve(objectRoot,'object.json'),'utf8')) as unknown);if(descriptor.id!==id)throw new TypeError('Object descriptor identity differs.');
  if(mode==='acquire'||mode==='verify'){
   const manifest=parseSourceManifest(JSON.parse(await readFile(resolve(sourceRoot,'manifest.json'),'utf8')) as unknown,id);

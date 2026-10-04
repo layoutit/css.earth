@@ -1,6 +1,6 @@
 /** Public asset closure and assembly, independent of source acquisition or CLI dispatch. */
+import { projectRoot as checkoutProjectRoot, sha256 } from '@cssearth/core/node';
 import { containedPath } from '../objects/sources/index.ts';
-import { sha256 } from '@cssearth/core/node';
 import { inventoryPublicAssets, requireInventory } from '@cssearth/objects/node';
 import { requireRecord as object } from '@cssearth/core';
 import { readFile, readdir, unlink, lstat } from 'node:fs/promises';
@@ -41,7 +41,7 @@ async function verifyAssetFiles(root:string,manifest:RuntimeManifest,exact:boole
 /** The object page stylesheets (the renderer package's own stylesheets name no scene image), whose `url(/scenes/<id>/…)` values the deploy resolves to published hashes like the
  * prepared data's (site/asset-origin.mts). A body's stylesheet datasets are part of what it ships. */
 export async function stylesheetTexts():Promise<string[]> {
- const directory=resolve(process.cwd(),'src/renderers/css/styles');
+ const directory=resolve(checkoutProjectRoot(import.meta.url),'src/renderers/css/styles');
  // A tree without renderer stylesheets (an isolated fixture) has no stylesheet references.
  const entries=await readdir(directory).catch((error:unknown)=>{if(error instanceof Error&&'code' in error&&error.code==='ENOENT')return [];throw error;});
  const names=entries.filter(name=>name.endsWith('.css')).sort();

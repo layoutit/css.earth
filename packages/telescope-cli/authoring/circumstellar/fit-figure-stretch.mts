@@ -11,6 +11,7 @@
  * the same paper prints its single-filter scales in. `a`, `top` and the star's offset in the panel (up to six pixels either
  * way) are fitted to the panel's colors between 1 and 4.4 arcseconds, the ring and its halo; the mirrored image is fitted too,
  * as a handedness check. The figure is read, never retained: only these numbers go into the recipe. */
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -99,7 +100,7 @@ export async function fitFigureStretch(figure: string, panel: { x0: number; y0: 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
   const args = process.argv.slice(2), [id, datasetId, figure] = args.filter((arg, i) => !arg.startsWith('--') && args[i - 1] !== '--raw');
   if (!id || !datasetId || !figure) throw new TypeError('Usage: fit-figure-stretch <object id> <dataset id> <figure.png> [--raw <dir>]...');
-  const repository = resolve(import.meta.dirname, '../../../..'), recipe = requireRecord(JSON.parse(await readFile(resolve(repository, 'src/objects', id, 'source/circumstellar.json'), 'utf8')) as unknown);
+  const repository = checkoutProjectRoot(import.meta.url), recipe = requireRecord(JSON.parse(await readFile(resolve(repository, 'src/objects', id, 'source/circumstellar.json'), 'utf8')) as unknown);
   const dataset = requireArray(recipe.datasets).map(value => requireRecord(value)).find(value => value.id === datasetId);
   if (!dataset) throw new Error(`${id} has no dataset ${datasetId}.`);
   const fitRecord = requireRecord(requireRecord(dataset.stretch).fit), box = requireRecord(fitRecord.panel);

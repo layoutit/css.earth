@@ -1,0 +1,46 @@
+{
+  "schema": "cssearth-published-phase-curve@1",
+  "source": "Zhang et al. (2018), AJ 155, 83, 'Phase Curves of WASP-33b and HD 149026b and a New Correlation between Phase Curve Offset and Irradiation Temperature' (doi:10.3847/1538-3881/aaa458; arXiv:1710.07642). Spitzer IRAC 4.5 um phase curve of WASP-33b, 11 April 2012. Values read from the authors' LaTeX source: the table of best-fit parameters (table:all_results), column WASP-33b 4.5 um, and the table of dayside and nightside brightness temperatures (table:toy_model). The model is a first-order sinusoid, L_p = C + c1 cos(2 pi t/P) + c2 sin(2 pi t/P); the table prints its amplitude, sqrt(c1^2 + c2^2), and its phase offset, \"with a negative offset meaning the maximum occurs before the center of the eclipse\", which is a hot spot east of noon. The star pulsates (a delta Scuti variable); the fit models the pulsations with a Gaussian process.",
+  "wavelengthMicrons": 4.5,
+  "radiusRatio": {
+    "value": 0.103,
+    "cell": "0.103 +/- 0.0011",
+    "where": "table:all_results, WASP-33b 4.5 um, R_p/R_s"
+  },
+  "eclipseDepth": {
+    "value": 0.0042499999999999994,
+    "cell": "4250 +/- 160 ppm, \"the planetary flux at the center of eclipse divided by the stellar flux\"",
+    "where": "table:all_results, WASP-33b 4.5 um, Eclipse depth"
+  },
+  "model": {
+    "kind": "amplitude-offset",
+    "equation": "L_p = C + c1 cos(2 pi t/P) + c2 sin(2 pi t/P), printed as its amplitude sqrt(c1^2 + c2^2) and its phase offset from the eclipse centre.",
+    "semiAmplitude": {
+      "value": 0.001792,
+      "cell": "1792 +/- 94 ppm",
+      "where": "table:all_results, WASP-33b 4.5 um, Amplitude"
+    },
+    "offsetDegreesEast": {
+      "value": 19.8,
+      "cell": "-19.8 +/- 3.0 degrees: negative, so the maximum comes before the centre of the eclipse and the hot spot lies 19.8 degrees east",
+      "where": "table:all_results, WASP-33b 4.5 um, Phase offset"
+    }
+  },
+  "reported": {
+    "daysideK": {
+      "value": 3209,
+      "cell": "3209 +89/-87 K",
+      "where": "table:toy_model, WASP-33b 4.5, T_b,day"
+    },
+    "nightsideK": {
+      "value": 1498,
+      "cell": "1498 +114/-118 K",
+      "where": "table:toy_model, WASP-33b 4.5, T_b,night (from F_p - 2 A cos(phi))"
+    },
+    "offsetDegrees": {
+      "value": 19.8,
+      "cell": "-19.8 +/- 3.0 degrees, negative before eclipse",
+      "where": "table:all_results, WASP-33b 4.5 um, Phase offset"
+    }
+  }
+}

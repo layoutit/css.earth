@@ -1,0 +1,65 @@
+{
+  "id": "gpf97-c01",
+  "name": "[GPF97] c01",
+  "system": "[GPF97] c01 system",
+  "description": "A Cepheid in the galaxy M95 that pulsates every 43.0 days.",
+  "parent": "m95",
+  "featured": true,
+  "target": "[GPF97] c01",
+  "paper": {
+    "url": "https://doi.org/10.26093/cds/vizier.34110361",
+    "credit": "Kanbur et al. (2003), A&A 411, 361"
+  },
+  "radius": {
+    "value": 182.1,
+    "source": "Groenewegen (2020), A&A 635, A33, period relations for Galactic fundamental-mode Cepheids applied to this star's period, 42.95 d in Kanbur et al. (2003), A&A 411, 361, VizieR J/A+A/411/361/table1 Galaxy = NGC3351, Cepheid = C1 (log(P) 1.633); not a measurement of this star: eq. 2, log R = 0.721 log P + 1.083; the uncertainty is the relation's scatter, 0.067 dex",
+    "url": "https://arxiv.org/abs/2002.02186",
+    "uncertainty": 30.4
+  },
+  "mass": "unmeasured",
+  "temperature": {
+    "value": 4840,
+    "source": "Groenewegen (2020), A&A 635, A33, period relations for Galactic fundamental-mode Cepheids applied to this star's period, 42.95 d in Kanbur et al. (2003), A&A 411, 361, VizieR J/A+A/411/361/table1 Galaxy = NGC3351, Cepheid = C1 (log(P) 1.633); not a measurement of this star: the luminosity of eq. 1 (M_bol = -2.95 log P - 0.98, with the nominal solar M_bol 4.74) over the radius of eq. 2, through L = 4 pi R^2 sigma T^4 with the nominal solar 5772 K (IAU 2015 Resolutions B2 (Mamajek et al. 2015, arXiv:1510.06262) and B3 (Prsa et al. 2016, arXiv:1605.09788)); the uncertainty is the 317 K by which the two relations miss the paper's own Cepheid temperatures",
+    "url": "https://arxiv.org/abs/2002.02186",
+    "uncertainty": 317
+  },
+  "gravityRange": {
+    "min": -1.33,
+    "max": 2.86,
+    "source": "Luck (2018), AJ 156, 171, table 3 (the spectroscopic gravities of its Cepheid spectra)",
+    "url": "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=J/AJ/156/171/table3"
+  },
+  "radialVelocity": {
+    "value": 779,
+    "source": "SIMBAD's radial velocity of M95, the Cepheid's galaxy, from 2022ApJS..261...21Y; the star's own motion within the galaxy is not measured",
+    "url": "https://ui.adsabs.harvard.edu/abs/2022ApJS..261...21Y/abstract",
+    "uncertainty": 3
+  },
+  "distance": {
+    "value": 9951724,
+    "source": "Placed in M95 as the app draws it, where the star's sight line crosses the disc's midplane: 9,951,724 pc (src/objects/m95-layers/source/recipe.json: centre 9,954,054 pc, inclination 41 deg, line of nodes 192 deg). The galaxy's distance, which places the galaxy and not a star within it: Tully2009AJ....138..323T: The Extragalactic Distance Database (https://ui.adsabs.harvard.edu/abs/2009AJ....138..323T); catalogue reference Tully2009AJ....138..323T: 9954054.17352 pc (-136574.74332/+138474.687247); trgb",
+    "url": "https://ui.adsabs.harvard.edu/abs/2009AJ....138..323T"
+  },
+  "position": {
+    "catalogue": "basic",
+    "row": {
+      "main_id": "[GPF97] c01"
+    },
+    "credit": "Kanbur et al. (2003), A&A 411, 361, VizieR J/A+A/411/361/table1 Galaxy = NGC3351, Cepheid = C1, names the star in SIMBAD (SName); SIMBAD holds its position and names no paper for it",
+    "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=%5BGPF97%5D%20c01",
+    "archive": "simbad"
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A Cepheid in the galaxy M95, 10.0 million parsecs away, that swells and shrinks every 43.0 days.",
+    "introduction": "Kanbur et al. (2003) list its pulsation at 43.0 days.",
+    "locator": "VizieR J/A+A/411/361/table1 Galaxy = NGC3351, Cepheid = C1: log(P)"
+  },
+  "notes": [
+    "The star pulsates; it is drawn at its mean radius",
+    "Its radius and temperature are what Groenewegen (2020), A&A 635, A33's relations for Galactic Cepheids give at its period; no measurement of this star's size or temperature exists",
+    "Its radial velocity is its galaxy's; its own motion within M95 is not measured"
+  ],
+  "order": 5765
+}

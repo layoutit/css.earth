@@ -9,11 +9,12 @@
  * `src/objects/local-group-galaxies/source/lvdb/comb_all.csv`.
  * Output: `source/local-group-galaxies/lvdb-sample.csv.gz`. It prints what it kept.
  */
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { gunzipSync, gzipSync } from 'node:zlib';
 
-const repository = resolve(import.meta.dirname, '../../../..');
+const repository = checkoutProjectRoot(import.meta.url);
 const catalogPath = resolve(repository, 'src/objects/local-group-galaxies/prepared/catalogue.json');
 const tablePath = resolve(repository, 'src/objects/local-group-galaxies/source/lvdb/comb_all.csv');
 const outputPath = resolve(repository, 'src/objects/nearby-universe-galaxies/source/local-group-galaxies/lvdb-sample.csv.gz');

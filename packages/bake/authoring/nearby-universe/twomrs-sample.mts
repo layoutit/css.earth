@@ -17,12 +17,13 @@
  *   stages); a quasar or AGN (-9), an HI cloud (12), a peculiar (15), an unclassified galaxy (19), an unclassified spiral
  *   (20) or an unexamined one (98) has none.
  */
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { gunzipSync, gzipSync } from 'node:zlib';
 import { createRaDecCatalogueMatcher } from '@cssearth/astronomy';
 
-const repository = resolve(import.meta.dirname, '../../../..');
+const repository = checkoutProjectRoot(import.meta.url);
 const inputPath = resolve(process.argv[2] ?? resolve(repository, 'output/2mrs/table3.dat.gz'));
 const fieldPath = resolve(repository, 'src/objects/nearby-universe-galaxies/source/galaxies/cf4-hyperleda.csv.gz');
 const outputPath = resolve(repository, 'src/objects/nearby-universe-galaxies/source/galaxies-2mrs/twomrs-sample.csv.gz');

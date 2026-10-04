@@ -5,9 +5,7 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
-import { createPreparedMaterialPublisher, preparedMaterialFrame } from '@cssearth/renderer/testing';
-import { selectedPreparedVariant } from '@cssearth/renderer/testing';
-import { initialObjectSelection } from '@cssearth/renderer/testing';
+import { createPreparedMaterialPublisher, preparedMaterialFrame, selectedPreparedVariant, initialObjectSelection } from '@cssearth/renderer/testing';
 import { retainedPresentationFixture } from "../../test/object-runtime-package.mts";
 
 import { parse, object, array, tuple, number, boolean, string } from '@cssearth/core/schema';

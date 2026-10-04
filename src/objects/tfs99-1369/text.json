@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "tfs99-1369",
+  "card": {
+    "text": "A Cepheid in the galaxy M96, 10.5 million parsecs away, that swells and shrinks every 30.1 days.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1046-j-1365-8711-1999-02954-x",
+        "url": "https://doi.org/10.1046/j.1365-8711.1999.02954.x",
+        "label": "Tanvir et al. (1999), Monthly Notices of the Royal Astronomical Society 310 175-188",
+        "checked": "2026-10-04",
+        "locator": "table 3, ID 1369: log(P), and the caption"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Tanvir et al. (1999) list the logarithm of its period as 1.478: 30.1 days. It is one of the seven Cepheids their distance to the galaxy rests on.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1046-j-1365-8711-1999-02954-x",
+        "url": "https://doi.org/10.1046/j.1365-8711.1999.02954.x",
+        "label": "Tanvir et al. (1999), Monthly Notices of the Royal Astronomical Society 310 175-188",
+        "checked": "2026-10-04",
+        "locator": "table 3, ID 1369: log(P), and the caption"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its temperature",
+      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

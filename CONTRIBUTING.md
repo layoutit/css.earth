@@ -308,6 +308,11 @@ your own in `.git/hooks` and any `core.hooksPath` you already set in place. The 
 its throwaway checkout gets this `core.hooksPath` too; it never commits there, so the setting is harmless. CI runs the same check over every commit in a pull request as part of the required `Classify changes`
 job, so reword a rejected commit with `git rebase -i` rather than skipping the hook.
 
+## Accepted checkout boundaries
+
+Root keeps third-party dependencies that root-level tools import (site, labs and CI scripts). They leave root only when those tools move into packages; each package must declare its own runtime imports.
+
+
 ## Pull requests
 
 - Title with [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/): `fix(shell): ...`, `feat(universe): ...`, `docs: ...`.

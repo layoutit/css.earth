@@ -12,5 +12,7 @@
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's measured spectrum (HST/STIS Next Generation Spectral Library v2 (Heap & Lindler; MAST high-level science product), HD 52973) (photometry/stellar-color.json); no image of the photosphere exists."
-  }
+  },
+  "surfaceGravityLogg": 1.1,
+  "surfaceGravitySource": "log g 1.1 from 2023A&A...678A.195D, the median of its 125 spectra; the 143 published values span log g 0.8 to 3.41, across which the limb law changes by at most 1.9% of the centre brightness (https://ui.adsabs.harvard.edu/abs/2023A%26A...678A.195D)"
 }

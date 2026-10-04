@@ -1,5 +1,5 @@
 /** Export the existing physical point/volume package. This does not infer depth from a spectral cube. */
-import { OBJECT_SCHEMA, type PreparedCssPointField, type PreparedCssVolume, type PreparedVolumeDatasets } from '@cssearth/objects';
+import { OBJECT_SCHEMA, VOLUME_DATASET_RECORD_FILE, type PreparedCssPointField, type PreparedCssVolume, type PreparedVolumeDatasetIndex } from '@cssearth/objects';
 import { readFile,writeFile,mkdir,mkdtemp,rm,rmdir,rename,realpath } from 'node:fs/promises';
 import { resolve,dirname,relative,isAbsolute } from 'node:path';
 import { randomUUID } from 'node:crypto';
@@ -10,11 +10,16 @@ import { VERSION } from './help.mts';
 import { writeProductRecord, WORKSPACE } from '@cssearth/telescope/node';
 import type { ProductInput } from '@cssearth/objects';
 
+type SpatialLoader = Partial<Pick<typeof import('@cssearth/renderer/stars/loader.ts'), 'loadPreparedCssPointField'>
+  & Pick<typeof import('@cssearth/renderer/volume/loader.ts'), 'loadPreparedCssVolume'>
+  & Pick<typeof import('@cssearth/renderer/volume/prepared-volume-datasets.ts'), 'loadPreparedVolumeDatasets' | 'preparedTransportReader'>>;
+
 export type SpatialKind='points'|'volume'|'volume-dataset-bank';
 type SpatialPayload =
   | {kind:'points';payload:PreparedCssPointField}
   | {kind:'volume';payload:PreparedCssVolume}
-  | {kind:'volume-dataset-bank';payload:PreparedVolumeDatasets};
+  // A bank is stored as its index and the files the index names; its provenance is in its record, which no page reads.
+  | {kind:'volume-dataset-bank';payload:PreparedVolumeDatasetIndex&{readonly provenance:unknown}};
 const workspaceRoot=WORKSPACE;
 
 async function validateSpatialObject(objectPath:string,expected:SpatialKind|undefined){
@@ -48,13 +53,20 @@ async function validateSpatialObject(objectPath:string,expected:SpatialKind|unde
   await mkdir(resolve(workspaceRoot,'work'),{recursive:true});const scratch=await mkdtemp(resolve(workspaceRoot,'work/telescope-spatial-loader-'));
   const moduleFile=resolve(scratch,'loader.mjs');await writeFile(moduleFile,compiled.outputFiles[0].text);
   try{
-    const loader: {loadPreparedCssPointField?:(input: unknown, transport: {read(path: string): Promise<ArrayBuffer>}) => Promise<PreparedCssPointField>;loadPreparedCssVolume?:(input: unknown, transport: {read(path: string): Promise<ArrayBuffer>}) => Promise<PreparedCssVolume>;loadPreparedVolumeDatasets?:(input: unknown, transport: {read(path: string): Promise<ArrayBuffer>}) => Promise<PreparedVolumeDatasets>}=await import(`${pathToFileURL(moduleFile).href}?${randomUUID()}`);
+    const loader: SpatialLoader=await import(`${pathToFileURL(moduleFile).href}?${randomUUID()}`);
     const transport={read:async(path:string)=>Uint8Array.from(await read(path)).buffer};
+    const manifestPath=requireString(prepared.url);
+    // Every dataset's volume and stars are read through the same checked transport, so the handoff holds the whole bank.
+    const bank=async()=>{
+      const loaded=await loader.loadPreparedVolumeDatasets!(descriptor,transport,{resolve:path=>path,read:loader.preparedTransportReader!(transport)});
+      for(const dataset of loaded.index.datasets)await loaded.load(dataset.id);
+      const record=requireRecord(JSON.parse((await read(relative(root,resolve(root,dirname(manifestPath),VOLUME_DATASET_RECORD_FILE)))).toString()),'volume dataset record');
+      return {...loaded.index,provenance:record.provenance};
+    };
     const value:SpatialPayload=kind==='points'?{kind,payload:await loader.loadPreparedCssPointField!(descriptor,transport)}
       :kind==='volume'?{kind,payload:await loader.loadPreparedCssVolume!(descriptor,transport)}
-      :{kind,payload:await loader.loadPreparedVolumeDatasets!(descriptor,transport)};
-    const manifestPath=requireString(prepared.url);
-    const resources=value.kind==='volume-dataset-bank'?value.payload.datasets.flatMap(dataset=>dataset.volume.resources):value.payload.resources;
+      :{kind,payload:await bank()};
+    const resources=value.kind==='volume-dataset-bank'?value.payload.datasets.flatMap(dataset=>dataset.resources):value.payload.resources;
     for(const resource of resources){const path=relative(root,resolve(root,dirname(manifestPath),resource.path)),content=await read(path);if(content.length!==resource.bytes)throw new Error(`Spatial resource ${resource.path} is ${content.length} bytes; ${manifestPath} lists ${resource.bytes}.`);}
     // A point field publishes its baked provenance beside its manifest (prepared/stars-provenance.json); the others carry it.
     const provenance:unknown=value.kind==='points'?requireRecord(JSON.parse((await read(relative(root,resolve(root,dirname(manifestPath),'stars-provenance.json')))).toString())).provenance:value.payload.provenance;

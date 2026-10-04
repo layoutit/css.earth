@@ -1,4 +1,3 @@
-import { projectRoot as findProjectRoot } from '@cssearth/core/node';
 /** From raw JWST exposures to an eclipse map: HD 189733b's two MIRI eclipses (program 2021, observations 002 and 011), reduced from
  * raw by packages/telescope-cli/src/archives/jwst/reduce-tso.mts, fitted here with Lally et al. (2025)'s model and compared with the map they deposited
  * (Zenodo 15103479, output_E.npy). The run's outputs are ignored files, so the test runs where they are present.
@@ -10,6 +9,7 @@ import { projectRoot as findProjectRoot } from '@cssearth/core/node';
  * timescale is chosen from a grid by chi-squared, since the fit is linear. Each eclipse's errors are scaled to its point-to-point
  * scatter, because Eureka! 1.4's error estimate (227 ppm) is below our measured scatter (352 ppm); the deposit's errors need
  * a factor of 0.95 to 0.99. Their map also fits Spitzer, so the comparison is on shape and position, not exact values. */
+import { projectRoot as findProjectRoot } from '@cssearth/core/node';
 import assert from 'node:assert/strict';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();

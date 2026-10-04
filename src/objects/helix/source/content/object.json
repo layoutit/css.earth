@@ -43,8 +43,24 @@
   },
   "datasets": {
     "titleKey": "datasets",
-    "defaultDataset": "eso-wfi",
+    "defaultDataset": "rings",
     "controls": [
+      {
+        "id": "rings",
+        "label": "Hubble + CTIO \u00b7 optical",
+        "thumbnail": "helix-dataset-rings.webp",
+        "volume": {
+          "objectId": "helix-layers",
+          "datasetId": "optical",
+          "surface": "rings"
+        },
+        "source": {
+          "id": "helix-layers-optical",
+          "path": "../../helix-layers/source/manifest.json",
+          "url": "https://esahubble.org/images/opo0432d/"
+        },
+        "falseColor": true
+      },
       {
         "id": "eso-vista",
         "label": "ESO VISTA \u00b7 infrared",

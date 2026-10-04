@@ -100,3 +100,33 @@ test('a map saved without its grid arrays states the pixel-centre grid, and show
   assert.throws(() => decodeNpyDictionaryMap(bytes, { ...recipe, visibleLongitudes: { times: ['t'], planet: 'p' } }), /computed from the recipe/u);
   assert.equal(visible.report.shownColumns, 6);
 });
+
+/** The byte program `pickle.dump(array)` writes at protocol 4 for one C-ordered float64 array: frames, memoized values and
+ * globals named from the stack. */
+function pickledArray(shape: [number, number], values: number[], module = 'numpy.core.multiarray') {
+  const parts: Buffer[] = [], op = (...bytes: number[]) => parts.push(Buffer.from(bytes));
+  const short = (text: string) => { const b = Buffer.from(text, 'utf8'); parts.push(Buffer.from([0x8c, b.length]), b, Buffer.from([0x94])); };
+  op(0x80, 4, 0x95, 0, 0, 0, 0, 0, 0, 0, 0);
+  short(module); short('_reconstruct'); op(0x93, 0x94); short('numpy'); short('ndarray'); op(0x93, 0x94, 0x4b, 0, 0x85, 0x94, 0x43, 1, 0x62, 0x94, 0x87, 0x94, 0x52, 0x94);
+  op(0x28, 0x4b, 1, 0x4b, shape[0], 0x4b, shape[1], 0x86, 0x94, 0x68, 3); short('dtype'); op(0x93, 0x94); short('f8'); op(0x89, 0x88, 0x87, 0x94, 0x52, 0x94);
+  op(0x28, 0x4b, 3); short('<'); op(0x4e, 0x4e, 0x4e, 0x4a, 255, 255, 255, 255, 0x4a, 255, 255, 255, 255, 0x4b, 0, 0x74, 0x94, 0x62, 0x89);
+  const raw = Buffer.alloc(values.length * 8), n = Buffer.alloc(4); values.forEach((v, i) => raw.writeDoubleLE(v, i * 8)); n.writeUInt32LE(raw.length);
+  parts.push(Buffer.from([0x42]), n, raw); op(0x95, 5, 0, 0, 0, 0, 0, 0, 0, 0x94, 0x74, 0x94, 0x62, 0x2e);
+  return Buffer.concat(parts);
+}
+
+test('a bare protocol-4 pickle of one array is a map on the stated grid, shown over the longitudes its paper states', () => {
+  const arrays = grid(8, 4, (lon, lat) => 1000 + lon + 10 * lat), bytes = pickledArray([4, 8], [...arrays.tmap.values]);
+  const recipe = { path: 'x', sampling: 'bilinear', units: 'K', values: [], gridLayout: 'pixel-centres', container: 'pickle' };
+  const whole = decodeNpyDictionaryMap(bytes, recipe);
+  assert.deepEqual([whole.width, whole.height, whole.sample(-157.5, -67.5)], [8, 4, 1000 - 157.5 - 675]);
+  // Cells of 45 degrees: the one centred at -112.5 reaches -90 and is inside a range that starts at -110; the next one west is not.
+  const shown = decodeNpyDictionaryMap(bytes, { ...recipe, shownLongitudes: [-110, 110] });
+  assert.deepEqual([shown.sample(-157.5, 0), shown.sample(-112.5, -67.5), shown.report.shownColumns], [null, 1000 - 112.5 - 675, 6]);
+  assert.throws(() => decodeNpyDictionaryMap(bytes, { ...recipe, shownLongitudes: [110, -110] }), /one \[west, east\] range/u);
+  assert.throws(() => decodeNpyDictionaryMap(bytes, { ...recipe, shownLongitudes: [-110, 110], visibleLongitudes: { times: ['t'], planet: 'p' } }), /without visibleLongitudes/u);
+  assert.throws(() => decodeNpyDictionaryMap(bytes, { ...recipe, container: 'zip' }), /container is 'pickle'/u);
+  assert.throws(() => decodeNpyDictionaryMap(bytes, { ...recipe, container: undefined }), /Not a NumPy/u);
+  // A global the reader does not know is refused, never resolved.
+  assert.throws(() => decodeNpyDictionaryMap(pickledArray([4, 8], [...arrays.tmap.values], 'os'), recipe), /Pickle global not allowed: os\._reconstruct/u);
+});

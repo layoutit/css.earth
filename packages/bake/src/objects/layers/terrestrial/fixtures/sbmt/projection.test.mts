@@ -1,3 +1,5 @@
+import { setupBakeOracleInputs } from '../../../../cameras/oracle-inputs.mts';
+await setupBakeOracleInputs();
 import assert from 'node:assert/strict';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
@@ -6,7 +8,7 @@ import { resolve } from 'node:path';
 import { compare, tolerances } from './compare.mts';
 import { cases, parseCase, vector, assertQueryCoverage, queryGrid } from './cases.mts';
 import { readPointing, camera } from './candidate.mts';
-import { verifyOracleBytes, readOracleFixture, ORACLE_ROOT } from '@cssearth/core/oracle';
+import { verifyOracleBytes, readOracleInput, readOracleFixture, ORACLE_ROOT } from '@cssearth/core/oracle';
 import { pin } from './runtime.mts';
 import { nativeArray, call, construct } from './java.mts';
 
@@ -42,14 +44,14 @@ test('case contract rejects missing, ambiguous, excessive and unsupported input 
 });
 
 test('pointing binding rejects malformed SUM/INFO and unsupported camera corrections',async()=>{
-  const c=definitions.find(c=>c.format==='sum')!, text=await readFile(resolve(ORACLE_ROOT,c.pointing),'utf8');
+  const c=definitions.find(c=>c.format==='sum')!, text=(await readOracleInput({path:c.pointing})).toString('utf8');
   assert.throws(()=>readPointing(text.split('\n').slice(0,5).join('\n'),c),/Invalid SUM/);
   assert.throws(()=>readPointing(text,{...c,width:c.width+1}),/dimensions/);
   const lines=text.split('\n');
   for(const [index,row] of [[3,'1 0 0'],[9,'1 1 0 0 1 0'],[10,'0 1 0 0'],[5,'0 0 0'],[4,'NaN 0 0']] as const){
     const bad=[...lines];bad[index]=row;assert.throws(()=>readPointing(bad.join('\n'),c));
   }
-  const info=definitions.find(c=>c.format==='info')!, infoText=await readFile(resolve(ORACLE_ROOT,info.pointing),'utf8');
+  const info=definitions.find(c=>c.format==='info')!, infoText=(await readOracleInput({path:info.pointing})).toString('utf8');
   assert.throws(()=>readPointing(infoText.replace('MSI_FRUSTUM4','MISSING'),info),/Missing/);
   assert.throws(()=>readPointing(infoText+'\nSPACECRAFT_POSITION=(0,0,1)',info),/duplicate/);
   assert.throws(()=>camera([0,0,1],[[1,0,0],[1,0,0],[1,0,0]],100,100),/Degenerate/);
@@ -57,7 +59,7 @@ test('pointing binding rejects malformed SUM/INFO and unsupported camera correct
 
 test('source tampering, unsafe software pins and invalid native values fail before comparison',async()=>{
   const fixture=await readOracleFixture('packages/bake/src/objects/layers/terrestrial/fixtures/sbmt/projection.json'), p=fixture.inputs.find(p=>p.path.endsWith('.SUM'))!;
-  const bytes=await readFile(resolve(ORACLE_ROOT,p.path)), bad=Buffer.from(bytes);bad[0]^=1;
+  const bytes=await readOracleInput(p), bad=Buffer.from(bytes);bad[0]^=1;
   assert.throws(()=>pin({path:'../escape',bytes:1}),/Unsafe/);
   assert.throws(()=>pin({path:'native/x',bytes:-1}),/Invalid/);
   assert.throws(()=>vector([1,NaN,2]));assert.throws(()=>vector([1,2]));
@@ -66,7 +68,7 @@ test('source tampering, unsafe software pins and invalid native values fail befo
 });
 
 test('orientation, origin and units mutations exceed the acceptance criteria',async()=>{
-  const c=definitions[0], p=readPointing(await readFile(resolve(ORACLE_ROOT,c.pointing),'utf8'),c);
+  const c=definitions[0], p=readPointing((await readOracleInput({path:c.pointing})).toString('utf8'),c);
   const original=camera(p.origin,p.frustum,c.width,c.height), flipped=camera(p.origin,[p.frustum[1],p.frustum[0],p.frustum[3],p.frustum[2]],c.width,c.height);
   const q=p.origin.map((v,i)=>v+p.frustum[0][i]*10);
   assert.ok(Math.abs(original.project(q)[0]-flipped.project(q)[0])>100);

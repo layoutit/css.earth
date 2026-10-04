@@ -1,21 +1,18 @@
+import { authorPath } from './paths.mts';
 import { refreshSourceRecord } from '../source-authoring-templates.mts';
 import { requireRecord, requireArray, requireString, requireFiniteNumber } from '@cssearth/core';
 import { createSourceManifest } from '@cssearth/objects/node';
 import { requireTerrainMesh } from '@cssearth/bake/objects/geometry';
-import { mkdir as ensureReportDirectory } from 'node:fs/promises';
-await ensureReportDirectory('output/distant-worlds', {recursive:true});
+import { mkdir as ensureReportDirectory, readFile, writeFile, readdir } from 'node:fs/promises';
+await ensureReportDirectory(authorPath('output/distant-worlds'), {recursive:true});
 // Use the common source-mesh snapshot owner; no scene technique lives here.
-import { readFile, writeFile, readdir } from 'node:fs/promises';
 import { resolve, relative } from 'node:path';
 import sharp from 'sharp';
-import { loadRadialTerrain } from '@cssearth/bake/objects/layers/terrestrial';
-import { renderRadialSnapshot } from '@cssearth/bake/objects/layers/terrestrial';
+import { loadRadialTerrain, renderRadialSnapshot } from '@cssearth/bake/objects/layers/terrestrial';
 import { paintMissingCoverage } from '@cssearth/bake/raster';
-const root = resolve(import.meta.dirname, '../../../..');
-if (process.cwd() !== root) throw new Error('Run from the repository root.');
 const read = async (path: string) => requireRecord(JSON.parse(await readFile(path, 'utf8')));
 const records = (value: unknown) => requireArray(value).map(entry => requireRecord(entry));
-const bodies = records((await read(process.argv.find(arg => arg.startsWith('--inputs='))?.slice('--inputs='.length) ?? 'packages/bake/authoring/distant-worlds/inputs.json')).bodies).map(b => ({...b,id:requireString(b.id),name:requireString(b.name),source:requireString(b.source),credit:requireString(b.credit)}));
+const bodies = records((await read(authorPath(process.argv.find(arg => arg.startsWith('--inputs='))?.slice('--inputs='.length) ?? 'packages/bake/authoring/distant-worlds/inputs.json'))).bodies).map(b => ({...b,id:requireString(b.id),name:requireString(b.name),source:requireString(b.source),credit:requireString(b.credit)}));
 
 const write = (path: string, value: unknown) => writeFile(path, Buffer.isBuffer(value) ? value : JSON.stringify(value, null, 2) + '\n');
 const files = async (path: string): Promise<string[]> => (await Promise.all((await readdir(path, {withFileTypes:true})).map(e => e.isDirectory() ? files(resolve(path,e.name)) : [resolve(path,e.name)]))).flat();
@@ -27,7 +24,7 @@ if (!refreshOnly) {
   map=await sharp(pixels,{raw:{width,height,channels:3}}).png().toBuffer();
 }
 for (const b of bodies) {
-  const pkg=resolve('src/objects',b.id),src=resolve(pkg,'source');
+  const pkg=authorPath('src/objects',b.id),src=resolve(pkg,'source');
   const manifest=await read(resolve(src,'manifest.json'));
   if (!refreshOnly) {
     if (!map) throw new TypeError('Source map preparation must finish before publication.');
@@ -39,7 +36,7 @@ for (const b of bodies) {
     const recipe={generator:'packages/bake/src/objects/layers/terrestrial/radial-snapshot.ts',inputs:['published-shape','model-surface'],size:512,longitudeDegrees:55,latitudeDegrees:20,ambient:.45,diffuse:.55,datasetId:'model'};
     const context=await renderRadialSnapshot({...recipe,faces:radial.faces,map});
     await write(resolve(src,'presentation/context.png'),context);
-    const navigation=await read('src/objects/annefrank/source/preparation/navigation.json');
+    const navigation=await read(authorPath('src/objects/annefrank/source/preparation/navigation.json'));
     const navigationPath=requireString(requireRecord(navigation.source).path);
     await write(resolve(src,'preparation/navigation.json'),{...navigation,objectId:b.id,source:{path:navigationPath}});
     // A first run has no previous record to merge, so name the generator, licence and consumers here; the

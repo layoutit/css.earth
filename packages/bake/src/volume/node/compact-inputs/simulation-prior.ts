@@ -7,12 +7,11 @@
 import { resolve, dirname } from 'node:path';
 import { fieldToPhysical, angularScale } from '../../coordinates/observer-tangent.ts';
 import { parseVolumeRecipe } from '@cssearth/objects';
-import type { SimulationDepthPrior } from '@cssearth/objects';
+import type { SimulationDepthPrior, CompilerPin } from '@cssearth/objects';
 import { loadVolumeSource, sampleEncoded, sourceBytes } from './density-grid.ts';
 import { channelDensity } from '../slices/density.ts';
 
-interface Pin { path: string }
-const isPin = (value: unknown): value is Pin => !!value && typeof value === 'object' &&
+const isPin = (value: unknown): value is CompilerPin => !!value && typeof value === 'object' &&
   typeof (value as { path?: unknown }).path === 'string';
 
 export async function loadSimulationPrior(root: string, cloudProvenance: unknown, distanceKpc: number, tangentBoundsKpc: { min: number[]; max: number[] },
