@@ -1,9 +1,9 @@
-import { discoverRoot } from '@cssearth/core/node';
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 import { readFile, writeFile, mkdir } from "node:fs/promises";
 import { dirname, join, resolve } from "node:path";
 // The checkout this module's own @cssearth/bake install sits in, independent of the caller's cwd (as
 // ../model.ts resolves it; resolved here rather than imported to avoid a cycle, since model.ts imports this file).
-const CHECKOUT_ROOT = discoverRoot({ strategy: 'package-location', fromUrl: import.meta.url, packageSpecifier: '@cssearth/bake/package.json', rootOffset: '../..', missing: { behavior: 'throw' } });
+const CHECKOUT_ROOT = checkoutProjectRoot(import.meta.url);
 export const workDir = resolve(
   CHECKOUT_ROOT,
   process.env.OPUS_WORK_DIR ?? "output/opus-audit",

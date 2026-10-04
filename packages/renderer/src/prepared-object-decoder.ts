@@ -1,6 +1,9 @@
-import { parseObjectDescriptor, readPreparedObject, parsePreparedObjectRuntime, type ObjectRuntimeDefinition, record, PREPARED_CSS_OBJECT_FORMAT } from '@cssearth/objects';
+import { checks, failure } from '@cssearth/core';
+import { parseObjectDescriptor, readPreparedObject, parsePreparedObjectRuntime, type ObjectRuntimeDefinition, PREPARED_CSS_OBJECT_FORMAT } from '@cssearth/objects';
 
 import { parsePreparedAssetOrigin } from './rendering/prepared-asset-origin.js';
+
+const { record } = checks(failure('Prepared data: '));
 
 export function requirePreparedCssDescriptor(input: unknown) {
   const descriptor = parseObjectDescriptor(input);

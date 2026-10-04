@@ -1,3 +1,4 @@
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 import { readPreparedObjects } from '@cssearth/objects/node';
 import { CUBIC_SKY_CAMERA_PRESENTATION_STANDARD, prepareCubicSky, prepareDirectionalSun } from '../../presentation/index.ts';
 import { prepareSolarSystemSunPresentation, type SolarGeometry } from '../scene/index.ts';
@@ -10,7 +11,7 @@ export type { SolarSource } from '@cssearth/objects';
 
 /** The preparers with their implementation-owned signatures, bound to the solar geometry the host passes in. */
 export async function loadCelestialAdapters(geometry: SolarGeometry) {
-  const objects = readPreparedObjects(process.cwd());
+  const objects = readPreparedObjects(checkoutProjectRoot(import.meta.url));
   return { requireSceneObject: objects.requireSceneObject, prepareCubicSky, prepareDirectionalSun,
     prepareSolarSystemSunPresentation: (source: SolarSource) => prepareSolarSystemSunPresentation(geometry, source),
     cubicSkyCamera: CUBIC_SKY_CAMERA_PRESENTATION_STANDARD };

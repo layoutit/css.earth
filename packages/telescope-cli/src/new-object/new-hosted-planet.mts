@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 /** Scaffold a planet of another star from its astronomy record, instead of cloning another planet by find-and-replace.
  *
  *   node packages/telescope-cli/src/new-object/new-hosted-planet.mts <id> --name <display name> --system <system name>
@@ -209,7 +210,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
   const flag = (name: string) => { const index = args.indexOf(`--${name}`); return index < 0 ? undefined : args[index + 1]; };
   const id = args.find((argument, index) => !argument.startsWith('--') && !args[index - 1]?.startsWith('--'));
   if (!id) throw new TypeError('Usage: new-hosted-planet <id> --name <name> --system <system> --description <line> --paper <url> --paper-credit <credit>');
-  const root = resolve(import.meta.dirname, '../../../..');
+  const root = checkoutProjectRoot(import.meta.url);
   const exists = (path: string) => stat(resolve(root, path)).then(() => true, () => false);
   if (await exists(`src/objects/${id}`)) throw new Error(`src/objects/${id} already exists; the scaffold never overwrites a package.`);
   const order = flag('order'), color = flag('color'), rotation = flag('rotation'), glowK = flag('self-luminous'), glowSource = flag('temperature-source');

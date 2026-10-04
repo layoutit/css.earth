@@ -2,6 +2,8 @@
  * Keep prefixes only for fully drained owners; add a prefix when its last live caller moves. */
 export const RETIRED_PATHS = [
   'tools/',
+  'packages/telescope-cli/src/archives/jwst/imaging/programs/',
+  'packages/telescope-cli/src/archives/jwst/klip/programs/',
   'integration/renderer-bake/', // 3b092f2039: tests moved to their producing/consuming owners.
   'packages/objects/src/baking/', // b5d83cac27: bake owns these algorithms.
   'packages/objects/src/geometry/', // b5d83cac27: now bake's surface-geometry.

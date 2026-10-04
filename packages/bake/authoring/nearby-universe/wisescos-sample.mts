@@ -1,3 +1,4 @@
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 // Entry script: node packages/bake/authoring/nearby-universe/wisescos-sample.mts [wiseScosPhotoz160708.csv.gz]
 /**
  * The Nearby Universe's WISE x SuperCOSMOS sample: the photometric-redshift galaxies (Bilicki et al. 2016, ApJS 225, 5)
@@ -31,7 +32,7 @@ import { resolve } from 'node:path';
 import { createInterface } from 'node:readline';
 import { createGunzip, gunzipSync, gzipSync } from 'node:zlib';
 
-const repository = resolve(import.meta.dirname, '../../../..');
+const repository = checkoutProjectRoot(import.meta.url);
 const sourceDirectory = resolve(repository, 'src/objects/nearby-universe-galaxies/source');
 const inputPath = resolve(process.argv[2] ?? resolve(repository, 'output/wisescos/wiseScosPhotoz160708.csv.gz'));
 const outputPath = resolve(sourceDirectory, 'wisescos-galaxies/wisescos-sample.csv.gz');

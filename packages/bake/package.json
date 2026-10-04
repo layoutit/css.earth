@@ -371,5 +371,6 @@
     "@types/three": "0.180.0",
     "tsup": "^8.0.1",
     "typescript": "5.9.3"
-  }
+  },
+  "oracleManifest": "oracle-manifest.json"
 }

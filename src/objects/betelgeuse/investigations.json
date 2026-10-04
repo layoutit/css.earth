@@ -99,6 +99,28 @@
       "evidence": [
         "https://vizier.cds.unistra.fr/viz-bin/asu-tsv"
       ]
+    },
+    {
+      "id": "limb-coverage",
+      "subject": "How far toward the limb the reconstructions are cast onto the sphere",
+      "status": "included",
+      "finding": "Until 2026-10-03 the images were cast only to 70 degrees from the disc centre, so the drawn disc ended at 0.94 of the radius in a toothed edge and 5.3 to 8.9 percent of each image's light was left off it. They are now cast to 88 degrees and cover 48.5 percent of the sphere. A first cast at 88 degrees left holes in the last pixel of the disc, because the shared footprint asked each of the four pixels around a point for a surface point of its own and the ones beyond the silhouette have none; a reconstruction is a brightness field over its whole frame, so its frames are now sampled at the point itself, held to the limit by the point's own normal (sampleSkyField).",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/betelgeuse/source/preparation/raster.json",
+        "https://github.com/layoutit/css.earth/blob/main/packages/bake/src/objects/layers/terrestrial/surface-observations/footprint.ts",
+        "https://github.com/layoutit/css.earth/blob/main/packages/bake/src/objects/layers/terrestrial/surface-observations/footprint.test.mts"
+      ]
+    },
+    {
+      "id": "first-beam-off-limb",
+      "subject": "The light between the disc edge and one beam outside it (1.00 to 1.19 stellar radii)",
+      "status": "excluded",
+      "finding": "Measured on the beam-convolved images about each one's centroid, with the disc at 42.45 mas: this zone holds 7.5, 9.6 and 9.8 percent of the light in December 2018, February 2020 and December 2020, at about a fifth of the peak brightness; beyond it lie 0.6, 10.3 and 0.9 percent. It is the star's own edge smeared by the beam. Drawing it on the off-limb volume's scale was composed face-on from the images before any bake: that scale tops out at 6 percent of the central brightness, so the zone becomes a flat saturated band, and in December 2018 and 2020 the band and scattered reconstruction noise would be the whole volume. So the off-limb volume keeps starting one beam out, only February 2020 has one, and the gap is stated in the README.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/betelgeuse/README.md",
+        "https://github.com/layoutit/css.earth/blob/main/packages/bake/authoring/betelgeuse-shell/author.mts"
+      ],
+      "revisitWhen": "One display scale that carries both the photosphere's patches and the faint light outside it."
     }
   ]
 }

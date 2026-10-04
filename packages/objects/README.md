@@ -226,3 +226,5 @@ The site build reader rule follows lexical JSON.parse aliases, destructuring and
 and literal template substitutions. It does not resolve arbitrary filename computation,
 cross-module file transports, dynamic JSON method keys or reassigned parser aliases;
 those reads require manual review. This is a bounded static check, not complete data-flow proof.
+
+`@cssearth/objects/archived-camera` provides the archived camera schema, parsers and camera types without importing the full objects entry. Browser-safe codec sources type-check with ES libraries and Node's host-compatible encoding globals; the main entry imports no Node runtime modules.

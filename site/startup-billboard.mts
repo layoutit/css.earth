@@ -56,8 +56,9 @@ export async function prepareStartupBillboard(stage: HTMLElement, factory: Scene
     cover?.publish(view.world, view.viewport);
     // The page's cover may have shown the photograph already (startup-cover.mts); the mark is the first time it showed.
     if (!window.performance.getEntriesByName('cssearth:startup-billboard').length) window.performance.mark('cssearth:startup-billboard');
-    // The billboard is the loading state: once it shows, the ring leaves. Without one, the ring waits for the detail.
-    if (cover) removeLoader();
+    // Once the billboard shows, the ring leaves and the header's line runs until the detail answers input, as on the
+    // page's own cover (startup-cover.mts). Without a billboard, the ring waits for the detail.
+    if (cover) { removeLoader(); document.querySelector('.explorer-navigation-progress')?.setAttribute('aria-hidden', 'false'); }
     onCover();
     pending = createPreparedArrival(signal, cover, () => {
       window.performance.mark('cssearth:startup-detail-ready');

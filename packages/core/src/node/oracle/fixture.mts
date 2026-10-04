@@ -31,33 +31,46 @@ export async function pinnedOracleVersions() {
   return new Map(text.split('\n').map(line => line.trim()).filter(line => line && !line.startsWith('#')).map(line => { const [name, version] = line.split('=='); return [name.toLowerCase().replace(/-/g, '_'), version] as const; }));
 }
 
-/** Every input is a body manifest input, a checked-in package fixture or a test-only archive record.
- * Kernel callers supply their existing bank verifier; core does not own acquisition. */
-export async function assertPinnedInputs(inputs: readonly { path: string; bytes?: number }[], verifyKernelBank?: (set: string, kernels: readonly string[]) => Promise<unknown>) {
-  for (const input of inputs) {
-    if (/^packages\/[a-z0-9-]+\/src\/(?:[a-z0-9-]+\/)*fixtures\/[A-Za-z0-9_/-]+\.(?:fits|json|sum|tab)$/u.test(input.path)) {
+export interface OracleInput { path: string; bytes?: number }
+export type OracleKernelVerifier = (set: string, kernels: readonly string[]) => Promise<unknown>;
+export interface OracleInputResolver {
+  id: string;
+  accepts: (path: string) => boolean;
+  verify: (input: OracleInput, verifyKernelBank?: OracleKernelVerifier) => Promise<void>;
+}
+const resolvers = new Map<string, OracleInputResolver>();
+
+/** Owners explicitly install their setup manifest before reading their oracle inputs. */
+export function registerOracleInputResolvers(manifest: readonly OracleInputResolver[]) {
+  const incoming = new Set<string>();
+  for (const resolver of manifest) {
+    if (resolvers.has(resolver.id) || incoming.has(resolver.id)) throw new Error(`Oracle input resolver already registered: ${resolver.id}`);
+    incoming.add(resolver.id);
+  }
+  for (const resolver of manifest) resolvers.set(resolver.id, resolver);
+}
+const installedOwners = new Set<string>();
+
+/** Idempotence belongs to the singleton registry, including source and built owner modules. */
+export function setupOracleInputResolvers(owner: string, manifest: readonly OracleInputResolver[]) {
+  if (installedOwners.has(owner)) return;
+  registerOracleInputResolvers(manifest);
+  installedOwners.add(owner);
+}
+
+/** Each input has exactly one owner, which validates its source record. */
+export async function assertPinnedInputs(inputs: readonly OracleInput[], verifyKernelBank?: OracleKernelVerifier) {
+  try {
+    for (const input of inputs) {
+      const owners = [...resolvers.values()].filter(resolver => resolver.accepts(input.path));
+      if (owners.length !== 1) throw new Error(`Oracle input requires exactly one registered owner: ${input.path} (${owners.length} found).`);
+      await owners[0]!.verify(input, verifyKernelBank);
       verifyOracleBytes(input, await readFile(oraclePath(input.path)));
-      continue;
     }
-    if (input.path.startsWith('.local/fits-reference/')) {
-      const pin = (await fitsArchiveInputs()).find(pin => pin.path === input.path);
-      if (!pin || (input.bytes !== undefined && pin.bytes !== input.bytes)) throw new Error(`FITS test archive record changed: ${input.path}`);
-      continue;
-    }
-    const kernel = /^src\/spice\/([a-z][a-z0-9-]*)\/(.+)$/u.exec(input.path);
-    if (kernel) {
-      // A shared kernel bank verifies its own pins (packages/bake/cli/kernel-bank.mts).
-      if (!verifyKernelBank) throw new Error('Kernel oracle inputs require the caller bank verifier.');
-      await verifyKernelBank(kernel[1]!, [kernel[2]!]);
-      verifyOracleBytes(input, await readFile(oraclePath(input.path)));
-      continue;
-    }
-    const match = /^src\/objects\/([^/]+)\/source\/(.+)$/u.exec(input.path);
-    if (!match) throw new Error(`Oracle input outside a body's sources: ${input.path}`);
-    const manifest = requireRecord(JSON.parse(await readFile(resolve(ORACLE_ROOT, 'src/objects', match[1], 'source/manifest.json'), 'utf8')));
-    const entry = [...requireArray(manifest.inputs), ...requireArray(manifest.documents)].map(e => requireRecord(e)).find(e => e.path === match[2]);
-    if (!entry) throw new Error(`Oracle input is not a manifest input or document: ${input.path}`);
-    verifyOracleBytes(input, await readFile(oraclePath(input.path)));
+  } catch (error) {
+    if (error instanceof Error && 'code' in error && error.code === 'ENOENT')
+      throw new MissingSourceInputError(`Missing oracle input ${inputs.map(input => input.path).join(', ')}. Restore it from its owner's declared source record.`, { cause: error });
+    throw error;
   }
 }
 
@@ -87,21 +100,4 @@ export function assertPinnedReferences(references: readonly { url: string; bytes
     if (!/^https:\/\/(raw\.githubusercontent\.com\/[^/]+\/[^/]+\/[0-9a-f]{40}\/|github\.com\/[^/]+\/[^/]+\/blob\/[0-9a-f]{40}\/)/u.test(reference.url)) throw new Error(`Oracle reference is not pinned to a commit: ${reference.url}`);
     if (!(reference.bytes > 0)) throw new Error(`Oracle reference lacks its size: ${reference.url}`);
   }
-}
-
-export async function fitsArchiveInputs() {
-  const record = requireRecord(JSON.parse(await readFile(resolve(ORACLE_ROOT, 'packages/fits/src/node/fixtures/fits/archive-inputs.json'), 'utf8')));
-  if (record.schema !== 'cssearth-fits-reference-inputs@1') throw new Error('Invalid FITS reference input record.');
-  const inputs = requireArray(record.inputs).map(raw => {
-    const entry = requireRecord(raw), path = requireString(entry.path), url = requireString(entry.url);
-    const bytes = requireFiniteNumber(entry.bytes);
-    if (!/^\.local\/fits-reference\/[a-z0-9-]+\.fits$/u.test(path) || !/^https:\/\//u.test(url) ||
-        !Number.isSafeInteger(bytes) || bytes < 1 || bytes > 64 * 1024 * 1024)
-      throw new Error('Invalid FITS reference input identity or size.');
-    const headers = Object.fromEntries(Object.entries(requireRecord(entry.headers ?? {})).map(([key, value]) => [key, requireString(value)]));
-    return { path, url, bytes, headers };
-  });
-  if (!inputs.length || inputs.length > 16 || new Set(inputs.map(i => i.path)).size !== inputs.length)
-    throw new Error('Invalid FITS reference input population.');
-  return inputs;
 }

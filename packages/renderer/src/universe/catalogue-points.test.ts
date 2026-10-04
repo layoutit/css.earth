@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { isDeepStrictEqual } from 'node:util';
 import { parseHTML } from 'linkedom';
 import { mountCataloguePoints } from './catalogue-points.js';
-import { parseCataloguePoints as readCataloguePointBank } from '@cssearth/objects';
+import { readCataloguePointBank } from '@cssearth/objects';
 import { catalogueCells, cataloguePointSpread } from '@cssearth/objects';
 import { holdStartup, releaseStartup } from '../rendering/startup-gate.js';
 

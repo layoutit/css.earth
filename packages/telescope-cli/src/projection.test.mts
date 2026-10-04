@@ -9,11 +9,18 @@ import { parseCli } from './cli-arguments.mts';
 import { writeProductRecord, WORKSPACE, fileSize } from '@cssearth/telescope/node';
 import { exportSphere } from './sphere/sphere.mts';
 import { listArtifactOutputs } from './artifact-outputs.mts';
-import { inspectMeasurementSphere } from './sphere/sphere-lane.mts';
+import { inspectMeasurementSphere } from '@cssearth/telescope-cli/sphere/lane';
 import { bodyMapFits } from '@cssearth/bake/objects/layers/observation';
 import { renderBodyMapProduct } from '@cssearth/bake/objects/layers/observation';
 import { type BodyMapProduct } from '@cssearth/objects';
 import sharp from 'sharp';
+import type { SolarGeometry } from '@cssearth/bake/objects/scene';
+const unusedGeometry: SolarGeometry = {
+  SOLAR_GEOMETRY_EPOCH_LABEL: 'fixture', SOLAR_GEOMETRY_EPOCH_JD_TT: 0, ASTRONOMICAL_UNIT_KILOMETERS: 1,
+  requireBodyFixedSunDirection: () => [1, 0, 0], requireBodyFixedEclipticNorth: () => [0, 0, 1],
+  requireBodyFixedToIcrf: () => [1, 0, 0, 0, 1, 0, 0, 0, 1],
+  bodyFixedStarDirection: () => null, requireBodyOrbit: () => ({ heliocentricDistanceAu: 1 }),
+};
 const test = sourceTest();
 const geometry={schema:'cssearth-navigation-input@1',observer:'JWST',kernels:[{file:'rotation.tpc',role:'rotation',source:'https://naif.jpl.nasa.gov/'}],registration:{method:'wcs',explanation:'Header WCS; no independently fitted centre'},width:360,height:180,maximumEmissionDegrees:65};
 const sourceRequest={target:'mercury',wavelengthMicrometres:[1,2],kind:'image',time:{any:true},angularResolutionArcsec:1,result:'telescope-product'};
@@ -62,11 +69,11 @@ test('sphere inspection validates the map contract, navigation and existing sphe
     const {files,outputs}=await mapFixture(root),ready=await listArtifactOutputs(files.record);
     assert.equal(ready.target,'mercury');assert.deepEqual(ready.sourceContext,explorationContext);assert.ok(ready.outputs.some(output=>output.kind==='sphere'&&output.available));
     await assert.rejects(listArtifactOutputs(files.record,'VALUE'),/structure applies only/);
-    const sphere=await exportSphere(files.record,resolve(root,'sphere-ready')),receipt=JSON.parse(await readFile(sphere.receipt,'utf8'));
+    const sphere=await exportSphere(files.record,resolve(root,'sphere-ready'),await import(new URL('../../../src/platform/solar-geometry.mts',import.meta.url).href)),receipt=JSON.parse(await readFile(sphere.receipt,'utf8'));
     assert.deepEqual(receipt.parameters.sourceContext,explorationContext);assert.deepEqual(sphere.sourceContext,explorationContext);
     await writeFile(files.metadata,'{}');await writeProductRecord(files.record,{telescope:'Fixture',stage:'body-map',inputs:[],parameters:{},software:[]},outputs);
     const malformed=await listArtifactOutputs(files.record);assert.ok(malformed.outputs.some(output=>output.kind==='sphere'&&!output.available));
-    await assert.rejects(exportSphere(files.record,resolve(root,'sphere')),/body map schema|Unsupported body map/);
+    await assert.rejects(exportSphere(files.record,resolve(root,'sphere'),unusedGeometry),/body map schema|Unsupported body map/);
     const unsupported=await mapFixture(resolve(root,'unsupported'),'no-such-sphere'),answer=await listArtifactOutputs(unsupported.files.record);
     assert.ok(answer.outputs.some(output=>output.kind==='sphere'&&!output.available));
   }finally{await rm(root,{recursive:true,force:true});}
@@ -85,7 +92,7 @@ test('projection and sphere cannot consume changed outputs or raw sky-image reco
   try{
     const file=resolve(root,'image.fits'),record=resolve(root,'output.product.json');await writeFile(file,'original');
     await writeProductRecord(record,{telescope:'Fixture',stage:'telescope-output',inputs:[],parameters:{},software:[]},[{path:'image.fits',file}]);
-    await assert.rejects(exportSphere(record,resolve(root,'sphere')),/registered body-map/);
+    await assert.rejects(exportSphere(record,resolve(root,'sphere'),unusedGeometry),/registered body-map/);
     await writeFile(file,'changed');await assert.rejects(verifiedProduct(record),/no longer its recorded size/);
     assert.throws(()=>localOutput(root,'../outside'),/escapes/);
   }finally{await rm(root,{recursive:true,force:true});}

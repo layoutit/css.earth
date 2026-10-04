@@ -1,0 +1,6 @@
+{
+  "oracles": {
+    "fits/binary-table": "packages/telescope-cli/src/archives/interferometry/fixtures/oracles/fits/binary-table.py",
+    "physical-units/spectral": "packages/telescope-cli/src/archives/interferometry/fixtures/oracles/physical-units/spectral.py"
+  }
+}

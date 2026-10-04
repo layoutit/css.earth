@@ -1,3 +1,4 @@
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 /** Generate a complete placed-star package from a star spec (spec.mts): the astronomy record from Gaia DR3 and SIMBAD, the color
  * dataset from the best archived spectrum (color.mts) with its limb-darkening law (limb.mts), the catalogue color and navigation
  * marker from that dataset, the manifest, acquisition plan, source records, credits and the README sections the data determine. Prose
@@ -171,7 +172,7 @@ export function eclipsingPeriodAgrees(paperDays: number, gaiaDays: number | unde
 }
 
 /** Compose every file of the package and its shared records. Pure apart from the archive reads; the caller writes. */
-export async function generateStar(spec: StarSpec, { archive = liveArchive, root = process.cwd(), resolver = telescopeResolver(root), order, universe, refresh = false, solarEpoch }: { archive?: Archive; root?: string; resolver?: Resolver; order: number; universe?: Existing; refresh?: boolean; solarEpoch: SolarEpoch }): Promise<Generated> {
+export async function generateStar(spec: StarSpec, { archive = liveArchive, root = checkoutProjectRoot(import.meta.url), resolver = telescopeResolver(root), order, universe, refresh = false, solarEpoch }: { archive?: Archive; root?: string; resolver?: Resolver; order: number; universe?: Existing; refresh?: boolean; solarEpoch: SolarEpoch }): Promise<Generated> {
   // The Gaia row waits only for the identity; everything else (color, limb, the papers) is read at once. A star Gaia cannot see has
   // no identifiers to search the archives by: its catalogue row is its identity and its evidence. A star too bright for Gaia (a
   // Hipparcos row, with its motion) is in the bright-star spectral catalogues under the HD and HR numbers SIMBAD lists for it.
@@ -407,7 +408,7 @@ export async function writePackageFiles(files: Map<string, string | Buffer>, id:
 }
 
 /** Write a generated star's package and its marker. */
-export async function writeGenerated(generated: Pick<Generated, 'id' | 'files'>, root = process.cwd(), refresh = false) {
+export async function writeGenerated(generated: Pick<Generated, 'id' | 'files'>, root = checkoutProjectRoot(import.meta.url), refresh = false) {
   const { written, kept } = await writePackageFiles(generated.files, generated.id, root, refresh);
   const presentation = resolve(root, `src/objects/${generated.id}/source/presentation`);
   // The marker needs the package on disk: a placeholder first, then the color dataset as a disc.
@@ -429,7 +430,7 @@ const reason = (error: unknown) => (error as Error).message.split('\n')[0]!;
  * Stars and every hosted body's astronomy record are written first; the astronomy package is rebuilt; the hosted packages are then
  * written by a fresh process (runHostedPhase), which loads the rebuilt package. A system that fails is reported with its reason and
  * the rest of the batch goes on; nothing of it is written. `refresh` regenerates bodies the tool made, under refresh.mts's rules. */
-export async function runNewObject(specPath: string, { root = process.cwd(), progress = (_line: string) => {}, skipExisting = false, refresh = false, solarEpoch }: { root?: string; progress?: (line: string) => void; skipExisting?: boolean; refresh?: boolean; solarEpoch: SolarEpoch }): Promise<NewObjectResult[]> {
+export async function runNewObject(specPath: string, { root = checkoutProjectRoot(import.meta.url), progress = (_line: string) => {}, skipExisting = false, refresh = false, solarEpoch }: { root?: string; progress?: (line: string) => void; skipExisting?: boolean; refresh?: boolean; solarEpoch: SolarEpoch }): Promise<NewObjectResult[]> {
   const { readdir } = await import('node:fs/promises'), { parseObjectSpecs } = await import('./spec.mts'), { hostedRecord } = await import('./hosted.mts');
   const parsed = parseObjectSpecs(JSON.parse(await readFile(resolve(specPath), 'utf8')));
   const exists = (path: string) => stat(resolve(root, path)).then(() => true, () => false);
@@ -524,7 +525,7 @@ export async function runNewObject(specPath: string, { root = process.cwd(), pro
 /** Hosts whose planets are written at once (runHostedPhase). */
 export const HOSTED_CONCURRENCY = 8;
 /** Phase two, in a process that loads the rebuilt astronomy package: every hosted body's package. */
-export async function runHostedPhase(handoff: string, { SOLAR_GEOMETRY_EPOCH_JD_TT }: Pick<SolarEpoch, 'SOLAR_GEOMETRY_EPOCH_JD_TT'>, root = process.cwd()): Promise<NewObjectResult[]> {
+export async function runHostedPhase(handoff: string, { SOLAR_GEOMETRY_EPOCH_JD_TT }: Pick<SolarEpoch, 'SOLAR_GEOMETRY_EPOCH_JD_TT'>, root = checkoutProjectRoot(import.meta.url)): Promise<NewObjectResult[]> {
   const { hostedPackage } = await import('./hosted.mts');
   const { refresh, records } = JSON.parse(await readFile(resolve(root, handoff), 'utf8')) as { refresh: boolean; records: any[] }, results: NewObjectResult[] = [];
   const write = async (saved: any): Promise<NewObjectResult> => {
@@ -566,7 +567,7 @@ export const formatNewObject = (results: readonly NewObjectResult[]) => `${resul
  * 4 took 27 s, 8 took 19 s and 16 took 18 s, each spec byte-identical; past 8 the archives, not the client, set the pace. */
 export const DRAFT_CONCURRENCY = 8;
 /** The `archive` draft route (drafts.mts): specs for planet hosts from the NASA Exoplanet Archive's default parameter sets. */
-export async function draftsFromArchive(hosts: readonly string[], { root = process.cwd(), progress = (_line: string) => {} } = {}) {
+export async function draftsFromArchive(hosts: readonly string[], { root = checkoutProjectRoot(import.meta.url), progress = (_line: string) => {} } = {}) {
   const { archiveSpec } = await import('./from-archive.mts'), { existingBodies } = await import('./identity.mts');
   const universe = await existingBodies(root), stars: unknown[] = [], report: string[] = [], failed: string[] = [];
   // DRAFT_CONCURRENCY hosts are read at once; the spec and the report keep the order the hosts were given in.

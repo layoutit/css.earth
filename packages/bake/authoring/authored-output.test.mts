@@ -3,7 +3,7 @@ import { mkdtemp, readFile, rm, mkdir } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { test } from 'node:test';
-import { writeOrCheckAuthoredOutputs } from './authored-output.mts';
+import { runAuthor, writeOrCheckAuthoredOutputs } from './authored-output.mts';
 
 const ordinary = { readError: 'propagate-read-error', mkdir: 'none' } as const;
 const shell = { readError: 'mismatch-on-read-error', mkdir: 'root-before-write-or-check',
@@ -47,4 +47,27 @@ test('shell creates the root even on check/empty outputs and masks all read erro
     await writeOrCheckAuthoredOutputs(root, [['ok', Buffer.from('a')]], { ...shell, check: false });
     await writeOrCheckAuthoredOutputs(root, [['ok', Buffer.from('a')]], { ...shell, check: true });
   } finally { await rm(parent, { recursive: true, force: true }); }
+});
+
+
+test('runAuthor computes once, forwards check policy, preserves bytes and returns the body result', async () => {
+  const root = await mkdtemp(resolve(tmpdir(), 'run-author-'));
+  try {
+    let calls = 0;
+    const result = { body: 'test', measurements: [1, 2] };
+    const bytes = Buffer.from([0, 255, 13, 10]);
+    const compute = async () => { calls++; return { outputs: [['file', bytes]] as const, result }; };
+    assert.equal(await runAuthor({ root, compute, ...ordinary, check: false }), result);
+    assert.deepEqual(await readFile(resolve(root, 'file')), bytes);
+    assert.equal(await runAuthor({ root, compute, ...ordinary, check: true }), result);
+    assert.equal(calls, 2);
+    await assert.rejects(runAuthor({ root, ...ordinary, check: true,
+      compute: async () => ({ outputs: [['file', Buffer.from('changed')]], result }) }),
+    { message: 'file differs from its authored recomputation.' });
+    assert.deepEqual(await readFile(resolve(root, 'file')), bytes);
+    await assert.rejects(runAuthor({ root, ...ordinary, check: true,
+      compute: async () => ({ outputs: [['missing', bytes]], result }) }), { code: 'ENOENT' });
+    await assert.rejects(runAuthor({ root, ...shell, check: true,
+      compute: async () => ({ outputs: [['missing', bytes]], result }) }), { message: 'Authored output differs: missing' });
+  } finally { await rm(root, { recursive: true, force: true }); }
 });

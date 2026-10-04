@@ -1,3 +1,4 @@
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 // Entry script: node packages/bake/authoring/nearby-universe/twomrs-sample.mts [table3.dat.gz]
 /**
  * The Nearby Universe's 2MASS Redshift Survey sample: the 2MRS galaxies (Huchra et al. 2012, ApJS 199, 26, table 3) that
@@ -22,7 +23,7 @@ import { resolve } from 'node:path';
 import { gunzipSync, gzipSync } from 'node:zlib';
 import { createRaDecCatalogueMatcher } from '@cssearth/astronomy';
 
-const repository = resolve(import.meta.dirname, '../../../..');
+const repository = checkoutProjectRoot(import.meta.url);
 const inputPath = resolve(process.argv[2] ?? resolve(repository, 'output/2mrs/table3.dat.gz'));
 const fieldPath = resolve(repository, 'src/objects/nearby-universe-galaxies/source/galaxies/cf4-hyperleda.csv.gz');
 const outputPath = resolve(repository, 'src/objects/nearby-universe-galaxies/source/galaxies-2mrs/twomrs-sample.csv.gz');

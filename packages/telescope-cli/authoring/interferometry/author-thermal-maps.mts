@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 import { BODY_MAP_SCHEMA } from '@cssearth/objects';
 /** Write a body's ALMA thermal maps from its record, src/objects/<id>/source/preparation/alma-thermal-maps.json.
  *
@@ -37,7 +38,7 @@ import { bodyMapFits, type BodyMap } from '@cssearth/bake/objects/layers/observa
 import { bindMapResolution, bodyMapProductRecord, formatProductRecord } from '@cssearth/telescope-cli/body-map-publication';
 import type { ProductInput, ProductSoftware } from '@cssearth/objects';
 
-const REPOSITORY = resolve(import.meta.dirname, '../../../..');
+const REPOSITORY = checkoutProjectRoot(import.meta.url);
 /** The FITS ORIGIN of a cutout. A FITS string value holds at most 68 characters, so this keeps the short label it was written with. */
 export const CUTOUT_ORIGIN = 'cssEarth telescope-cli interferometry/alma-disc-selfcal.mts';
 const DEGREE = Math.PI / 180, MJD_EPOCH_JD = 2_400_000.5;

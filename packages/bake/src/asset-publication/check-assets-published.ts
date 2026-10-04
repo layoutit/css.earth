@@ -1,6 +1,6 @@
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 import { execFile } from "node:child_process";
 import { existsSync } from "node:fs";
-import { createRequire } from "node:module";
 import { dirname, resolve } from "node:path";
 import { promisify } from "node:util";
 import { Agent, fetch as undiciFetch } from "undici";
@@ -9,8 +9,8 @@ import { RUNTIME_ASSET_ORIGIN } from '../objects/sources/index.ts';
 import { isRecord } from "@cssearth/core";
 
 const execFileAsync = promisify(execFile);
-/** The checkout, found through this package's own name so the path holds from the sources and from `dist/`. */
-const defaultRoot = resolve(dirname(createRequire(import.meta.url).resolve("@cssearth/bake/package.json")), "../..");
+/** The real checkout, found by the shared workspace-marker resolver from source and `dist/`. */
+const defaultRoot = checkoutProjectRoot(import.meta.url);
 
 async function git(root: string, args: readonly string[]): Promise<string> {
   const { stdout } = await execFileAsync("git", [...args], { cwd: root, maxBuffer: 1024 * 1024 * 64 });

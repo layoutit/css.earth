@@ -1,3 +1,4 @@
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 import { existsSync } from 'node:fs';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve, relative, sep } from 'node:path';
@@ -7,7 +8,7 @@ import { fitImageControls } from './image-controls.ts';
 type Pixel = readonly [number, number];
 type Vec = readonly [number, number, number];
 type Obj = Record<string, unknown>;
-const root = process.cwd();
+const root = checkoutProjectRoot(import.meta.url);
 const obj = (v: unknown, a: string): Obj => {
   if (v === null || typeof v !== 'object' || Array.isArray(v)) throw new TypeError(`${a} must be an object.`);
   return v as Obj;

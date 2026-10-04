@@ -1,3 +1,4 @@
+// CSSEARTH_TEST_OBJECTS: shared surface page invariants also run for each implemented object.
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { RASTER_DECODE_LIMIT_PIXELS, RASTER_LEVEL_LIMIT_PIXELS, RASTER_PAGE_PIXELS, packedRasterSize, rasterPageName, rasterPagePlan } from '@cssearth/bake/raster';

@@ -1,4 +1,4 @@
-import { ARCHIVED_CAMERA_SCHEMA, type SpiceCamera } from '@cssearth/objects';
+import { ARCHIVED_CAMERA_SCHEMA, type SpiceCamera } from '@cssearth/objects/archived-camera';
 import { cross3 as cross, dot3 as dot } from '@cssearth/core';
 /**
  * A pinhole camera from SPICE kernels for one exposure: the instrument frame's

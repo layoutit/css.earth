@@ -51,7 +51,6 @@ The clump dims the star behind it. The line of sight through its centre carries 
 
 ## Known problems
 
-- This package is a proof of concept that a body can sit inside a prepared volume.
 - The 2024 shell and the 4 micrometre envelope are inferred from one projected profile each, and the 2019 clump is a published model. Nothing here measures how far along the line of sight any of this material lies.
 - The 2024 map's masked disc leaves an empty cap toward Earth and another away from it: that is the mask made visible, not a structure.
 - The polarisation color is the paper's `inferno` color map, a legend, not color.

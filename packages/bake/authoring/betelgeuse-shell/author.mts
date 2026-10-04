@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 import { VOLUME_PROVENANCE_SCHEMA } from '@cssearth/bake/volume';
 import { VOLUME_SOURCE_MANIFEST_SCHEMA, VOLUME_PRESENTATION_SOURCE_SCHEMA, VOLUME_RECIPE_SCHEMA, NEBULA_DELIVERY_SCHEMA } from '@cssearth/objects';
 /** Betelgeuse's circumstellar material, as four density grids the shared slab baker turns into one dataset bank.
@@ -21,17 +22,17 @@ import { VOLUME_SOURCE_MANIFEST_SCHEMA, VOLUME_PRESENTATION_SOURCE_SCHEMA, VOLUM
 import { access, readFile, readdir } from 'node:fs/promises';
 import sharp from 'sharp';
 import { resolve } from 'node:path';
-import { writeOrCheckAuthoredOutputs } from '../authored-output.mts';
+import { runAuthor } from '../authored-output.mts';
 import { pathToFileURL } from 'node:url';
 import { fitsImageAccessor, readFitsHdu, readFitsImage, skyImageAxes } from '@cssearth/fits';
 import { encodeDensityKtx2 } from '@cssearth/bake/density';
 
-const root = resolve(import.meta.dirname, '../../../../src/objects/betelgeuse-shell/source');
+const root = resolve(checkoutProjectRoot(import.meta.url), 'src/objects/betelgeuse-shell/source');
 const packageBase = 'src/objects/betelgeuse-shell/source';
 /** Original downloads, and the ALMA boxes cut from them, stay out of git and out of the source closure as every volume's
  * downloads do: the manifest names them by path and origin, and the source cache mirrors the ones no publisher serves byte for byte. */
 export const DOWNLOADS_BASE = '.local/betelgeuse-shell';
-const downloads = resolve(import.meta.dirname, '../../../..', DOWNLOADS_BASE);
+const downloads = resolve(checkoutProjectRoot(import.meta.url), DOWNLOADS_BASE);
 /** The two publisher figures this package cites, kept beside it because preparation reads them for the dataset previews. */
 export const PREVIEWS = Object.freeze({
   'zimpol-v': { path: 'previews/aa61023-26-fig3.jpg', url: 'https://www.aanda.org/articles/aa/full_html/2026/07/aa61023-26/aa61023-26-fig3.jpg',
@@ -45,7 +46,7 @@ export const PREVIEWS = Object.freeze({
     credit: 'ESO/M. Montarg\u00e8s et al.', crop: { left: 320, top: 40, width: 318, height: 520 },
     license: 'CC-BY-4.0. ESO images are released under the Creative Commons Attribution 4.0 International licence; retain the credit.' },
 });
-const starScene = resolve(import.meta.dirname, '../../../../src/objects/betelgeuse/prepared/scene.json');
+const starScene = resolve(checkoutProjectRoot(import.meta.url), 'src/objects/betelgeuse/prepared/scene.json');
 
 /** The two V-band products as ESO serves them: the pipeline intensity and its ancillary degree of linear polarisation. */
 export const PRODUCTS = Object.freeze({
@@ -397,7 +398,7 @@ export async function author(defaultDataset = 'zimpol-v') {
 
   // --- the third measured dataset: the 4 micrometre light outside the photosphere, given the same treatment ---
   // The reconstruction that paints the star's own sphere also carries a fifth of its flux outside the disc. On the
-  // sphere that light is a flat plate behind the body; here it is asked for a shape, exactly as the polarisation was.
+  // sphere stops at the disc; here that light is asked for a shape, exactly as the polarisation was.
   const emissionFits = await declaredFits(EMISSION_2020);
   const { width: ew, height: eh } = emissionFits, E = emissionFits.values;
   const emissionPixelsPerUnit = radiusArcsec * 1000 / EMISSION_2020.pixelMas;
@@ -756,7 +757,7 @@ export async function author(defaultDataset = 'zimpol-v') {
       'zimpol-v': `Fitted envelope, drawn in the published figure's own color map. The degree map is floor-subtracted and carried on the same scale as that figure's colorbar, zero to ${STRETCH.topDegree.toFixed(2)}. Depth is not the sky image pushed backwards: the azimuthally averaged radial profile is fitted with simple three-dimensional envelopes placed around the star, and the one that projects to it is a spherical shell of radius ${shell.radiusUnits.toFixed(2)} stellar radii and gaussian thickness ${shell.widthUnits.toFixed(2)}, which leaves a residual of ${shell.residual.toExponential(2)} against a profile of ${signalRms.toExponential(2)}. A steady outflow r^-${outflow.exponent.toFixed(2)} leaves ${outflow.residual.toExponential(2)} and a constant depth, which is what pushing the image backwards assumes, leaves ${flatResidual.toExponential(2)}. Each sky column is spread along that envelope and normalised so it reproduces its measured degree, which puts a patch at the shell's own radius rather than smeared through the box. The envelope is symmetric in depth, so every patch is drawn both in front of the star and behind it. Color is matplotlib ${COLOR_MAP.name} sampled at the quarters of the bar and carried as four emission channels, one per stop, so the compiler's sum interpolates the bar and the column emits the bar color of its own degree; every channel shares the one depth profile, so a column's chromaticity does not vary along it. The disc within one radius and everything fainter than three thousandths of the stellar peak are removed; the map tapers out between 4.5 and 6 radii. Depth is not measured.`,
       'sio-2023': `Measured on three axes, under one stated flow. ALMA observed SiO v=0 J=5-4 around the star from ${sioDateText}; the archive's pipeline cube was cut out, its residual continuum removed and ${channels} channels of ${channelKmS.toFixed(2)} km/s kept. The star is not at the observation's phase centre: the continuum image from the same observation and calibration puts it ${sioStarMas.toFixed(0)} mas away, ${(sioStarMas / radiusMas).toFixed(1)} stellar radii, at position angle ${sioStarAngle.toFixed(0)} degrees, and every position here is measured from it; the line's own absorption is centred ${absorptionFromStarMas.toFixed(1)} mas from that point. Against the star the line absorbs from ${absorbedFrom.toFixed(1)} to +${absorbedTo.toFixed(1)} km/s about the star's velocity, deepest ${(-deepestAbsorption * 1e3).toFixed(0)} mJy per beam: gas between us and the star, leaving it and, on the red side, falling back. Inside the star's continuum footprint emission cannot be told from that absorption and is not drawn. Outside it, moment masking (the cube smoothed by its beam and three channels, cut at ${ALMA_SIO.maskSigma} times its noise and grown by the smoothing) keeps ${emissionPixels} pixels within ${halfUnits} stellar radii of the star, ${(emissionPixels / beamPixels).toFixed(0)} beams carrying ${(emissionFlux / beamPixels).toFixed(2)} Jy km/s: a lopsided ring, brightest ${ringRadius.toFixed(2)} stellar radii from the star, with its weight toward position angle ${weightAngle.toFixed(0)} degrees. The star's velocity, ${systemicKmS.toFixed(1)} km/s LSRK, is the flux-weighted mean of that ring. The blue edge of the absorption, the fastest gas in front of the star coming toward us, gives the flow's terminal speed the way a P Cygni profile does: ${outflowKmS.toFixed(1)} km/s with half a channel. Every channel of every pixel is placed along the line of sight on a spherical outflow at that speed: a parcel at sky distance s moving at v lies at depth s v / sqrt(u^2 - v^2). ${(100 * placedFlux / emissionFlux).toFixed(1)} percent of the ring's flux lands inside the grid, the deepest ${deepest.toFixed(2)} stellar radii along the line of sight; ${(100 * fasterFlux / emissionFlux).toFixed(2)} percent is faster than the flow and cannot be placed on it. Each sample is drawn as a gaussian a quarter of the beam's minor axis in standard deviation. Beyond the ring, a further ${(100 * farShare).toFixed(0)} percent of the masked flux lies ${farNearest.toFixed(0)} to ${farFurthest.toFixed(0)} stellar radii to the ${compass(farAngle)}, beside a ${(otherPeak / continuumNoise).toFixed(1)}-sigma continuum peak, outside the volume; it is not drawn, and whether it is circumstellar gas or an artefact of the bright star in this image is open. The sky positions and velocities are measured; that the gas flows straight out at one speed is assumed.`,
       'emission-2020': `The 4 micrometre light outside the photosphere, from the same reconstruction that paints the star's own sphere. Its disc and the first beam beyond it are removed: inside the disc the sphere is drawn, and within one beam of it the light is the star's edge smeared by that beam. What is left carries a fifth of the reconstruction's flux and falls too slowly to be that beam. The depth is fitted the same way as the polarisation: the best envelope is a ${emissionFit.shape} (${emissionFit.shape === 'spherical-shell' ? `radius ${emissionFit.shell.radiusUnits.toFixed(2)} stellar radii, gaussian thickness ${emissionFit.shell.widthUnits.toFixed(2)}` : `r^-${emissionFit.outflow.exponent.toFixed(2)}`}) leaving ${Math.min(emissionFit.shell.residual, emissionFit.outflow.residual).toExponential(2)}, against ${emissionFit.flatResidual.toExponential(2)} for the constant depth an extrusion assumes and a profile of ${emissionFit.signalRms.toExponential(2)}. The image is only 100 milliarcseconds across, so this dataset speaks for the inner envelope alone and fades at the edge of its own field. Color is the reconstruction's own heat scale, the same one the sphere carries, because this is the same quantity.`,
-      'veil-2019-12': `The published December 2019 clump: a sphere of radius ${VEIL_2019_12.radiusAu} au centred at (${VEIL_2019_12.centreRaDecEarthAu.join(', ')}) au along right ascension, declination and toward Earth, of constant dust density ${VEIL_2019_12.densityGramsPerCubicCentimetre} g/cm3 in ${VEIL_2019_12.composition} grains centred on ${VEIL_2019_12.grainMicrometres} micrometres. The uniform density is drawn as grey extinction, scaled so the line of sight through the clump's centre carries an optical depth of ln ${VEIL_2019_12.dimmingFactor}, which is the ${VEIL_2019_12.dimmingFactor}-times dimming of the southern hemisphere the paper reports. Ordinary source-over compositing then gives transmission times the star behind plus the light the dust scatters toward us, so the photosphere is dimmed rather than covered. The scattered term follows the inverse-square illumination each parcel receives and its brightest column is drawn at ${VEIL_2019_12.scatteredSurfaceBrightness} of the photosphere's surface brightness, which is a display choice.`,
+      'veil-2019-12': `The published December 2019 clump: a sphere of radius ${VEIL_2019_12.radiusAu} au centred at (${VEIL_2019_12.centreRaDecEarthAu.join(', ')}) au along right ascension, declination and toward Earth, of constant dust density ${VEIL_2019_12.densityGramsPerCubicCentimetre} g/cm3 in ${VEIL_2019_12.composition} grains centred on ${VEIL_2019_12.grainMicrometres} micrometres. The uniform density is drawn as gray extinction, scaled so the line of sight through the clump's centre carries an optical depth of ln ${VEIL_2019_12.dimmingFactor}, which is the ${VEIL_2019_12.dimmingFactor}-times dimming of the southern hemisphere the paper reports. Ordinary source-over compositing then gives transmission times the star behind plus the light the dust scatters toward us, so the photosphere is dimmed rather than covered. The scattered term follows the inverse-square illumination each parcel receives and its brightest column is drawn at ${VEIL_2019_12.scatteredSurfaceBrightness} of the photosphere's surface brightness, which is a display choice.`,
     },
     limitations: [
       'The 2024 map is one epoch, one filter and one sky-plane image: no third axis was observed. Its depth is the envelope that best projects to the measured radial profile, which is an inference from that profile, not a measurement, and it cannot say which patches are in front and which behind.',
@@ -776,7 +777,7 @@ export async function author(defaultDataset = 'zimpol-v') {
       `The SiO cube is the archive's pipeline image at its own beam, ${(sio.number('BMAJ') * 3.6e6).toFixed(0)} by ${(sio.number('BMIN') * 3.6e6).toFixed(0)} mas, with channels ${channelKmS.toFixed(2)} km/s wide; each sample is drawn narrower than a channel's worth of depth, at its measured velocity.`,
       'The SiO colors are a false-color ramp for integrated line brightness, not a color, a temperature or a density.',
       'The clump dims the star by ordinary alpha compositing, which is exact for extinction but cannot be cut by the photosphere: it covers the whole silhouette it crosses rather than being clipped at the limb.',
-      'Its extinction is grey. Silicate dust reddens what it transmits; no color was applied because the photosphere behind it is drawn in an infrared intensity palette, not in color.',
+      'Its extinction is gray. Silicate dust reddens what it transmits; no color was applied because the photosphere behind it is drawn in an infrared intensity palette, not in color.',
       'The scattered light is a stated display level, not a measurement.',
       'The 2024 map always composites behind the star, because its emission surrounds the body instead of standing clear of it in depth.',
     ],
@@ -875,7 +876,7 @@ export async function author(defaultDataset = 'zimpol-v') {
       description: grid.id === 'sio-2023'
         ? `ALMA saw silicon monoxide around this star in August 2023, and this is the one dataset here whose depth comes from measured velocities rather than from a shape fitted to a picture. Measured from the star itself, found in the same observation\u2019s continuum, the molecule absorbs in front of the star and glows in a lopsided ring ${ringRadius.toFixed(1)} stellar radii out, heaviest to the ${compass(weightAngle)}. Every channel of the line cube is placed along the line of sight on a spherical outflow at ${outflowKmS.toFixed(1)} kilometres a second, the speed of the fastest gas it absorbs in front of the star, the usual first reading of an expanding stellar envelope. The same absorption shows gas falling back as well, and that gas is placed as if it were flowing out. Silicon monoxide is what silicate dust condenses from, so this is the material of the other datasets caught before it became dust. The colors are a false-color ramp for line brightness.`
         : grid.id === 'emission-2020'
-        ? `The same reconstruction that paints this star\u2019s sphere carries a fifth of its flux outside the published disc. On the sphere that light is a flat plate behind the body; here it is given a shape. The disc and the first beam beyond it are removed, because inside the disc the sphere is drawn and within one beam of it the light is the star\u2019s own edge smeared by the beam. What is left falls far too slowly to be that beam: the envelope that best projects to it is r^\u2212${emissionFit.outflow.exponent.toFixed(1)}, five times better than the constant depth an extrusion assumes. The image spans 100 milliarcseconds, so this speaks for the inner envelope alone. Its colors are the reconstruction\u2019s own heat scale, because this is the same quantity as the sphere.`
+        ? `The same reconstruction that paints this star\u2019s sphere carries a fifth of its flux outside the published disc. The sphere stops at the disc; here that light is given a shape. The disc and the first beam beyond it are removed, because inside the disc the sphere is drawn and within one beam of it the light is the star\u2019s own edge smeared by the beam. What is left falls far too slowly to be that beam: the envelope that best projects to it is r^\u2212${emissionFit.outflow.exponent.toFixed(1)}, five times better than the constant depth an extrusion assumes. The image spans 100 milliarcseconds, so this speaks for the inner envelope alone. Its colors are the reconstruction\u2019s own heat scale, because this is the same quantity as the sphere.`
         : grid.id === 'zimpol-v'
         ? `The degree of linear polarisation VLT/SPHERE-ZIMPOL measured in the V band on 3 December 2024, in the color map and on the zero-to-${STRETCH.topDegree.toFixed(2)} scale the paper prints it in, placed in the plane of the sky through the star and spread along the line of sight by the scattering-angle efficiency of polarised light. The patches are dust. The colors are the publisher's legend for a ratio, not the color of anything. Depth is a stated convention, not a measurement, and nothing finer than the 16 milliarcsecond beam is in the data.`
         : 'The dust clump Montarg\u00e8s et al. fitted with RADMC-3D to the images of the Great Dimming, drawn from the numbers they published for December 2019: a sphere of uniform density south and slightly west of the star and between it and us. Its extinction is scaled so the line of sight through its centre dims the star ten times, as the paper reports for the southern hemisphere, and the light it scatters back is drawn faintly over that. This is a model fitted to images, not an image.',
@@ -946,6 +947,9 @@ export async function author(defaultDataset = 'zimpol-v') {
     const evidence = pinnedEvidence.get(`${id}/${catalogueId}`) ?? `${packageBase}/manifest.json#/inputs/${inputs.length}`;
     return { dependencies: [], sourceBinding: { kind: 'catalogued', references: [{ catalogueId, role: 'material', evidence }] } };
   };
+  // The telescope behind a dataset's input: its facility in site/source/facilities, evidenced by the input's own origin and credit.
+  const capture = (facilityId: string, origin: string, credit: string, missionId?: string) =>
+    ({ capture: { attributions: [{ kind: 'facility', facilityId, ...(missionId === undefined ? {} : { missionId }), evidence: `${origin} \u2014 ${credit}` }] } });
   for (const entry of walked.sort((a, b) => pathOf(a).localeCompare(pathOf(b), 'en'))) {
     const name = entry.name;
     const bytes = entry.downloaded ? await readFile(resolve(downloads, name)) : produced.get(name) ?? await readFile(resolve(root, name));
@@ -953,27 +957,29 @@ export async function author(defaultDataset = 'zimpol-v') {
     const observation = observations[name], preview = previewByPath.get(name);
     if (observation) {
       const id = name.split('/').at(-1)!.replace(/\.fits$/, '').toLowerCase().replace(/[^a-z0-9-]+/g, '-');
+      const origin = `https://dataportal.eso.org/dataPortal/file/${observation.dpId}`, credit = 'ESO/VLT/SPHERE-ZIMPOL, programme 114.28H9.001; Montarg\u00e8s et al. 2026, A&A 711, L12';
       inputs.push({ id, ...binding(id), path,
-        origin: `https://dataportal.eso.org/dataPortal/file/${observation.dpId}`, sourceUrl: 'https://archive.eso.org/scienceportal/home?data_collection=BETELGEUSE-B',
-        title: `ESO Phase 3 BETELGEUSE-B \u00b7 ${observation.dpId}`, credit: 'ESO/VLT/SPHERE-ZIMPOL, programme 114.28H9.001; Montarg\u00e8s et al. 2026, A&A 711, L12',
+        origin, sourceUrl: 'https://archive.eso.org/scienceportal/home?data_collection=BETELGEUSE-B',
+        title: `ESO Phase 3 BETELGEUSE-B \u00b7 ${observation.dpId}`, credit,
         displayCredit: 'ESO/VLT/SPHERE-ZIMPOL', acquisition: `Downloaded unchanged from the ESO archive by its DataLink identifier ${observation.dpId}. ${observation.role}.`,
         license: 'CC-BY-4.0 under the ESO data access policy; retain the ESO provenance and the paper citation.',
-        ...(id === 'sphere-zimpol-betelgeuse-p1-v-dolp' ? { datasetId: 'zimpol-v' } : {}) });
+        ...(id === 'sphere-zimpol-betelgeuse-p1-v-dolp' ? { datasetId: 'zimpol-v', ...capture('vlt-ut3', origin, credit) } : {}) });
     } else if (preview) {
       inputs.push({ id: `preview-${preview.id}`, ...binding(`preview-${preview.id}`), path, origin: preview.origin, sourceUrl: preview.origin, title: preview.title,
         credit: preview.credit, displayCredit: preview.credit,
         acquisition: `Publisher figure downloaded unchanged from ${preview.url}; preparation resizes it into this object's dataset preview.`,
         license: preview.license });
     } else if (name === ALMA_SIO.path) {
+      const credit = 'ALMA (ESO/NAOJ/NRAO), project 2022.A.00026.S, member ' + ALMA_SIO.member;
       inputs.push({ id: 'alma-sio-v0-5-4-2023-08', ...binding('alma-sio-v0-5-4-2023-08'), path,
         origin: ALMA_SIO.cutout,
         sourceUrl: 'https://almascience.org/aq/?result_view=observation&projectCode=2022.A.00026.S',
         title: `ALMA ${ALMA_SIO.proposal} \u00b7 SiO v=0 J=5-4 cube of Betelgeuse, August 2023`,
-        credit: 'ALMA (ESO/NAOJ/NRAO), project 2022.A.00026.S, member ' + ALMA_SIO.member,
+        credit,
         displayCredit: 'ALMA (ESO/NAOJ/NRAO)',
         acquisition: `Cut out of the archive's own pipeline cube ${ALMA_SIO.product} through its SODA service, on the circle about the observation's phase centre that the origin URL requests. packages/bake/authoring/betelgeuse-shell/reduce-alma-sio.mts keeps the channels within ${ALMA_SIO.windowKmS} km/s of ${ALMA_SIO.windowCentreKmS} km/s LSRK in a box ${ALMA_SIO.boxHalfMas} mas either way of the phase centre, and subtracts from each pixel the median of the ${sio.number('CONTCHAN')} channels more than ${ALMA_SIO.lineFreeBeyondKmS} km/s from the line. The pipeline removes the continuum before imaging, so that median is only its residual. The archive product is 72 GB; this is the part of it that carries the line around this star.`,
         license: 'ALMA data are public under the ALMA data access policy; retain the ALMA credit line.',
-        datasetId: 'sio-2023' });
+        datasetId: 'sio-2023', ...capture('alma', ALMA_SIO.cutout, credit) });
     } else if (name === ALMA_SIO.continuum.path) {
       inputs.push({ id: 'alma-continuum-2023-08', ...binding('alma-continuum-2023-08'), path,
         origin: ALMA_SIO.continuum.url,
@@ -984,15 +990,17 @@ export async function author(defaultDataset = 'zimpol-v') {
         acquisition: `The member's continuum image ${ALMA_SIO.continuum.product}, made with the same calibration as the line cube, downloaded whole from the archive and cut by packages/bake/authoring/betelgeuse-shell/reduce-alma-sio.mts to a box ${ALMA_SIO.boxHalfMas} mas either way of the phase centre, values unchanged. It is the only product of the observation that shows where the star is.`,
         license: 'ALMA data are public under the ALMA data access policy; retain the ALMA credit line.' });
     } else if (name === EMISSION_2020.path) {
+      const origin = 'https://github.com/fabienbaron/squeeze/tree/4d34e877606f16be73e7689fcb517d0b72d9d455';
+      const credit = 'Reconstruction by this repository with SQUEEZE 3.0 (F. Baron, GPL-3.0) from ESO/VLTI/MATISSE calibrated visibilities via the JMMC OiDB; observations from Drevon et al. (2024)';
       inputs.push({ id: 'matisse-2020-02-continuum-4mas', ...binding('matisse-2020-02-continuum-4mas'), path,
-        origin: 'https://github.com/fabienbaron/squeeze/tree/4d34e877606f16be73e7689fcb517d0b72d9d455',
+        origin,
         sourceUrl: 'https://doi.org/10.1051/0004-6361/202347719',
         title: 'VLTI/MATISSE 4 \u00b5m reconstruction, February 2020, convolved to the 4 mas beam',
-        credit: 'Reconstruction by this repository with SQUEEZE 3.0 (F. Baron, GPL-3.0) from ESO/VLTI/MATISSE calibrated visibilities via the JMMC OiDB; observations from Drevon et al. (2024)',
+        credit,
         displayCredit: 'ESO/VLTI/MATISSE; reconstruction by this repository',
         acquisition: 'The same bytes Betelgeuse\u2019s own package ships, copied here so this package accounts for every byte it reads. Only the light outside the published disc is used; the disc itself is the star\u2019s drawn sphere.',
         license: 'Reconstruction released by this repository under its own licence; the MATISSE visibilities are ESO archive data under the ESO data access policy.',
-        datasetId: 'emission-2020' });
+        datasetId: 'emission-2020', ...capture('vlti', origin, credit, 'eso-vlti-matisse-betelgeuse') });
     } else if (name === 'veil-2019-12-parameters.json') {
       inputs.push({ id: 'veil-2019-12-parameters', ...binding('veil-2019-12-parameters'), path,
         origin: 'https://doi.org/10.1038/s41586-021-03546-8', sourceUrl: 'https://arxiv.org/abs/2201.10551',
@@ -1033,9 +1041,10 @@ if (direct) {
     console.log(`SKIP betelgeuse-shell --check: requires sources under ${DOWNLOADS_BASE}: ${missing.join(', ')}. Restore source-cache/betelgeuse-shell/<manifest path> when available; otherwise acquire the declared ESO/MATISSE inputs and run packages/bake/authoring/betelgeuse-shell/reduce-alma-sio.mts for the ALMA products. No outputs compared.`);
   } else {
     const selected = process.argv.find(arg => arg.startsWith('--default='))?.slice(10);
-    const result = await author(selected);
-    await writeOrCheckAuthoredOutputs(root, result.outputs, { check, readError: 'mismatch-on-read-error',
-      mkdir: 'root-before-write-or-check', mismatchMessage: name => `Authored output differs: ${name}` });
+    const result = await runAuthor({ root, check, readError: 'mismatch-on-read-error',
+      mkdir: 'root-before-write-or-check', mismatchMessage: name => `Authored output differs: ${name}`,
+      compute: async () => { const result = await author(selected); return { outputs: result.outputs, result }; },
+    });
     console.log(`${check ? 'CHECKED' : 'AUTHORED'} betelgeuse-shell: ${JSON.stringify(result.measured)}; grid ${GRID.size}^3; ${JSON.stringify(result.grids)}`);
   }
 }

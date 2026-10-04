@@ -1,15 +1,15 @@
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 import { pds3Keyword } from '@cssearth/telescope';
 import { readFitsPlane } from '@cssearth/fits';
 import type { KernelSet } from '@cssearth/spice/node';
 import { encodeClock, clockToEt, etToUtc, utcToEt, spiceCamera, type Aberration, type PixelModelKeys } from '@cssearth/spice';
 import type { SpiceCameraDeclaration } from '../../../raster/index.ts';
 import { decodeCalibratedCamera } from '../../../geometry/index.ts';
-import { createRequire } from 'node:module';
 import { dirname, relative, resolve } from 'node:path';
 
 /** The checkout this package lives in (`packages/bake`), found by the package's own name, so it is the same whether this
  * code runs from src/ (tests) or from dist/; a fixed offset from this file would change once the file is built. */
-const projectRoot = resolve(dirname(createRequire(import.meta.url).resolve('@cssearth/bake/package.json')), '../..');
+const projectRoot = checkoutProjectRoot(import.meta.url);
 /** The kernel bank and the oracle fixtures both load kernels from an absolute, machine-specific path (the worktree
  * root, or a checkout under a different home directory). Recorded evidence must be reproducible across machines and
  * checkouts, so it names each kernel relative to the project root rather than embedding that absolute path. */

@@ -4,6 +4,7 @@ import { parseHTML } from 'linkedom';
 import { createScenePublication } from '../scene/scene-publication.mts';
 import type { SceneSessionState } from '../scene/scene-session.mts';
 import type { BrowserWindow } from '../browser/browser-types.mts';
+import type { ObjectShell } from '../shell/object-shell-types.mts';
 import { unusedSharedView } from './navigation-test-values.mts';
 
 test('readiness stays observable without publishing body lifecycle classes', () => {
@@ -13,7 +14,7 @@ test('readiness stays observable without publishing body lifecycle classes', () 
   const publication = createScenePublication({ stage, documentTarget: document, windowTarget: window as unknown as BrowserWindow,
     getShell: () => null, getWorld: () => null,
     read: () => ({ state, pending: null, objectId: 'earth', subject: { objectId: 'earth', view: 'body' },
-      motionEnabled: false, lightCurvesEnabled: true, reducedMotionActive: false, mountedObjectCount: 0, playing: false, hasPresented: true }),
+      motionEnabled: false, lightCurvesEnabled: true, reducedMotionActive: false, mountedObjectCount: 0, playing: false, hasPresented: true, covered: false }),
   });
   publication.publish();
   assert.equal(document.documentElement.dataset.ready, 'loading');
@@ -34,4 +35,26 @@ test('readiness stays observable without publishing body lifecycle classes', () 
   publication.publish();
   assert.equal(document.documentElement.dataset.ready, undefined);
   assert.equal(document.body.className, 'application');
+});
+
+test('the header line runs while a photograph covers a cold page; the readout is told only of a flight', () => {
+  const { document, window } = parseHTML('<html><body><div class="object-viewport"><main></main></div></body></html>');
+  let covered = true;
+  const calls: string[] = [];
+  const shell = {
+    setNavigationInFlight(active: boolean) { calls.push(`flight:${active}`); },
+    setDestinationLoading(active: boolean) { calls.push(`loading:${active}`); },
+  } as unknown as ObjectShell;
+  const publication = createScenePublication({ stage: document.querySelector('main')!, documentTarget: document,
+    windowTarget: window as unknown as BrowserWindow, getShell: () => shell, getWorld: () => null,
+    read: () => ({ state: { kind: 'loading', activation: 'idle', mount: null }, pending: null, objectId: 'earth',
+      subject: { objectId: 'earth', view: 'body' }, motionEnabled: false, lightCurvesEnabled: true, reducedMotionActive: false,
+      mountedObjectCount: 0, playing: false, hasPresented: true, covered }),
+  });
+  publication.publish();
+  assert.deepEqual(calls, ['flight:false', 'loading:true']);
+  // The detail replaced the photograph.
+  covered = false; calls.length = 0;
+  publication.publish();
+  assert.deepEqual(calls, ['flight:false', 'loading:false']);
 });

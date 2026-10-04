@@ -1,7 +1,11 @@
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 import { DATASET_BILLBOARDS_SCHEMA } from '@cssearth/objects';
 // `pnpm prepare:dataset-billboards` (`packages/bake/cli/prepare-dataset-billboards.mts`): what the universe knows about every volume dataset bank before fetching it.
 // Each bank gets its context visibility (whether it fades with the galaxy) and, when its default dataset has
 // prepared impostors, the one impostor view that faces the Sun, as an image of its own named by the bank's id.
+// Every other dataset with impostors gets the same view as `<bank id>.<dataset id>`: a billboard stands for the dataset
+// that is selected. With one image for the bank, zooming out of Betelgeuse drew its 2024 dust, the bank's default, over
+// the February 2020 halo that was selected (2026-10-03).
 // From the Solar System and the nearby stars a nebula is a few pixels to a few dozen: its billboard draws it there,
 // and its megabytes of datasets are fetched only once it is large on screen. Inputs are the restored prepared
 // dataset payloads, each one the object's inventory lists.
@@ -114,10 +118,11 @@ async function imageLayerBillboard(id: string, descriptor: Record<string, unknow
 }
 
 /** Writes the dataset billboards of the checkout at `projectRoot`. */
-export async function prepareDatasetBillboards(projectRoot = process.cwd()) {
+export async function prepareDatasetBillboards(projectRoot = checkoutProjectRoot(import.meta.url)) {
   const objects = resolve(projectRoot, 'src/objects');
-  const banks: { id: string; contextVisibility: 'galactic' | 'independent'; attached: boolean;
-    view?: { back: Vector; right: Vector; down: Vector }; radiusUnits?: number; framingRadiusUnits?: number; image?: Buffer }[] = [];
+  type Drawn = { view: { back: Vector; right: Vector; down: Vector }; radiusUnits: number; image: Buffer };
+  const banks: { id: string; contextVisibility: 'galactic' | 'independent'; attached: boolean; framingRadiusUnits?: number;
+    view?: Drawn['view']; radiusUnits?: number; image?: Buffer; defaultDataset?: string; datasets?: (Drawn & { id: string })[] }[] = [];
   for (const id of (await readdir(objects, { withFileTypes: true })).filter(entry => entry.isDirectory()).map(entry => entry.name).sort()) {
     let descriptor: Record<string, unknown>;
     try { descriptor = requireRecord(JSON.parse(await readFile(resolve(objects, id, 'object.json'), 'utf8'))); }
@@ -127,60 +132,72 @@ export async function prepareDatasetBillboards(projectRoot = process.cwd()) {
     const data = requireRecord((await preparedPayload(id, descriptor, objects)).data, `${id} datasets`);
     const contextVisibility = data.contextVisibility ?? 'galactic';
     if (contextVisibility !== 'galactic' && contextVisibility !== 'independent') throw new TypeError(`${id}: unsupported context visibility.`);
-    const dataset = requireArray(data.datasets, `${id} datasets`).map(value => requireRecord(value)).find(value => value.id === data.defaultDataset);
+    const datasets = requireArray(data.datasets, `${id} datasets`).map(value => requireRecord(value));
+    const dataset = datasets.find(value => value.id === data.defaultDataset);
     if (!dataset) throw new TypeError(`${id}: default dataset is missing.`);
-    const volume = requireRecord(dataset.volume, `${id} default dataset volume`);
-    if (JSON.stringify(volume.frame) !== JSON.stringify(requireRecord(descriptor.properties).frame)) {
-      throw new TypeError(`${id}: default dataset frame differs from the descriptor frame.`);
-    }
+    const descriptorFrame = JSON.stringify(requireRecord(descriptor.properties).frame);
+    /** The impostor view the renderer would pick for a camera at the Sun, or none for a dataset without impostors. */
+    const sunView = async (dataset: Record<string, unknown>): Promise<Drawn | undefined> => {
+      const label = `${id} ${String(dataset.id)}`, volume = requireRecord(dataset.volume, `${label} volume`);
+      // The billboard is placed in the bank's one frame, whichever dataset it pictures.
+      if (JSON.stringify(volume.frame) !== descriptorFrame) throw new TypeError(`${label}: dataset frame differs from the descriptor frame.`);
+      if (volume.impostors === undefined) return undefined;
+      const impostors = requireRecord(volume.impostors, `${label} impostors`);
+      const frame = requireRecord(volume.frame) as unknown as Parameters<typeof presentPhysicalPoseInVolume>[1];
+      const local = presentPhysicalPoseInVolume({ positionM: [0, 0, 0], orientationXyzw: [0, 0, 0, 1] }, frame).positionUnits;
+      const length = Math.hypot(...local), toViewer = local.map(value => value / length);
+      const views = requireArray(impostors.views, `${label} impostor views`).map(value => requireRecord(value));
+      const view = views.reduce((best, candidate) => {
+        const score = (value: Record<string, unknown>) => vector(value.back, `${label} view back`).reduce((sum, item, axis) => sum + item * toViewer[axis]!, 0);
+        return score(candidate) > score(best) ? candidate : best;
+      });
+      const image = await readFile(resolve(objects, id, 'prepared', requireString(view.texturePath, `${label} view texture`)));
+      const { width, height } = await sharp(image).metadata();
+      if (width !== CELL_PX || height !== CELL_PX) throw new TypeError(`${label}: impostor view is ${width}x${height}, not ${CELL_PX} px.`);
+      const radiusUnits = typeof impostors.radiusUnits === 'number' ? impostors.radiusUnits : NaN;
+      if (!(radiusUnits > 0)) throw new TypeError(`${label}: impostor radius must be positive.`);
+      return { view: { back: vector(view.back, `${label} back`), right: vector(view.right, `${label} right`), down: vector(view.down, `${label} down`) }, radiusUnits, image };
+    };
     // A cloud that accompanies a body stays dark until that body's dataset asks for it.
     const framingRadiusUnits = data.framingRadiusUnits;
     if (typeof framingRadiusUnits !== 'number' || !(framingRadiusUnits > 0)) throw new TypeError(`${id}: datasets need a positive framingRadiusUnits, got ${String(framingRadiusUnits)}.`);
     // The authored framing radius is what the universe hangs the bank's caption under, before any dataset loads.
     const bank = { id, contextVisibility, attached: data.attachedTo !== undefined, framingRadiusUnits } as (typeof banks)[number];
-    if (volume.impostors !== undefined) {
-      const impostors = requireRecord(volume.impostors, `${id} impostors`);
-      const frame = requireRecord(volume.frame) as unknown as Parameters<typeof presentPhysicalPoseInVolume>[1];
-      // The view the renderer would pick for a camera at the Sun: its direction to the viewer in the volume.
-      const local = presentPhysicalPoseInVolume({ positionM: [0, 0, 0], orientationXyzw: [0, 0, 0, 1] }, frame).positionUnits;
-      const length = Math.hypot(...local), toViewer = local.map(value => value / length);
-      const views = requireArray(impostors.views, `${id} impostor views`).map(value => requireRecord(value));
-      const view = views.reduce((best, candidate) => {
-        const score = (value: Record<string, unknown>) => vector(value.back, `${id} view back`).reduce((sum, item, axis) => sum + item * toViewer[axis]!, 0);
-        return score(candidate) > score(best) ? candidate : best;
-      });
-      const image = await readFile(resolve(objects, id, 'prepared', requireString(view.texturePath, `${id} view texture`)));
-      const { width, height } = await sharp(image).metadata();
-      if (width !== CELL_PX || height !== CELL_PX) throw new TypeError(`${id}: impostor view is ${width}x${height}, not ${CELL_PX} px.`);
-      bank.view = { back: vector(view.back, `${id} back`), right: vector(view.right, `${id} right`), down: vector(view.down, `${id} down`) };
-      bank.radiusUnits = typeof impostors.radiusUnits === 'number' ? impostors.radiusUnits : NaN;
-      if (!(bank.radiusUnits > 0)) throw new TypeError(`${id}: impostor radius must be positive.`);
-      bank.image = image;
+    Object.assign(bank, await sunView(dataset));
+    const others: NonNullable<(typeof bank)['datasets']> = [];
+    for (const other of datasets) {
+      if (other === dataset) continue;
+      const drawn = await sunView(other);
+      if (drawn) others.push({ id: requireString(other.id, `${id} dataset id`), ...drawn });
     }
+    if (others.length) { bank.defaultDataset = requireString(dataset.id, `${id} default dataset`); bank.datasets = others; }
     banks.push(bank);
   }
-  const drawn = banks.filter(bank => bank.image);
+  const drawn = banks.flatMap(bank => [...(bank.image ? [{ name: bank.id, image: bank.image }] : []),
+    ...(bank.datasets ?? []).map(dataset => ({ name: `${bank.id}.${dataset.id}`, image: dataset.image }))]);
   // Photographic billboards go through the lossy lane with exact alpha. Effort 4, not 6: every dev start encodes these;
   // on the atlas they replaced, 6 took 4.7 s and 4 took 0.3 s for 6.7 KB more, and pixelmatch (threshold 0.1) found none
   // of its 1,310,720 pixels different between the two (2026-09-30).
   const images = resolve(projectRoot, OUTPUT.images);
   await mkdir(images, { recursive: true });
-  const names = new Set(drawn.map(bank => `${bank.id}.webp`));
+  const names = new Set(drawn.map(billboard => `${billboard.name}.webp`));
   // A bank that lost its billboard, or was removed, leaves no image behind.
   for (const stale of (await readdir(images)).filter(name => !names.has(name))) await rm(resolve(images, stale));
   let imageBytes = 0, next = 0;
   await Promise.all(Array.from({ length: 8 }, async () => {
     while (next < drawn.length) {
-      const bank = drawn[next++]!;
-      const bytes = await encodeLossyWebp(sharp(bank.image!), { alphaQuality: 100, effort: 4 });
+      const billboard = drawn[next++]!;
+      const bytes = await encodeLossyWebp(sharp(billboard.image), { alphaQuality: 100, effort: 4 });
       imageBytes += bytes.length;
-      await writeIfChanged(resolve(images, `${bank.id}.webp`), bytes);
+      await writeIfChanged(resolve(images, `${billboard.name}.webp`), bytes);
     }
   }));
   const metadata = { schema: DATASET_BILLBOARDS_SCHEMA, imagePx: CELL_PX,
     banks: banks.map(bank => ({ id: bank.id, contextVisibility: bank.contextVisibility, attached: bank.attached,
       ...(bank.framingRadiusUnits === undefined ? {} : { framingRadiusUnits: bank.framingRadiusUnits }),
-      ...(bank.view ? { billboard: { radiusUnits: bank.radiusUnits, ...bank.view } } : {}) })) };
+      ...(bank.view ? { billboard: { radiusUnits: bank.radiusUnits, ...bank.view } } : {}),
+      ...(bank.datasets ? { defaultDataset: bank.defaultDataset,
+        datasets: bank.datasets.map(dataset => ({ id: dataset.id, radiusUnits: dataset.radiusUnits, ...dataset.view })) } : {}) })) };
   await writeIfChanged(resolve(projectRoot, OUTPUT.metadata), `${JSON.stringify(metadata)}\n`);
   // The atlas an earlier checkout wrote here is no longer read.
   await rm(resolve(projectRoot, 'site/prepared-dataset-billboards.webp'), { force: true });

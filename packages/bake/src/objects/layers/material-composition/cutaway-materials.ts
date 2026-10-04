@@ -28,12 +28,6 @@ export async function prepareCutawayMaterials({sourceDirectory,publicDirectory,c
 
 
 
-
-
-
-
-
-
 const OUTER_POLE_SOURCES = config.outerPoleSources;
 const THUMBNAIL_URL = config.thumbnailUrl;
 const INTERIOR_OBJECT_LIGHT_DIRECTION = objectLightDirection;
@@ -131,10 +125,12 @@ const prepared = Object.freeze({
 
 
 
+/** Cutaway sources require an exterior default and at least three cited sources; angular/radial ordering stays local. */
+const CUTAWAY_SOURCE_POLICY = { defaultView: 'exterior', minimumSources: 3, maximumWidthDegrees: 180 };
 function validateManifest(value:InteriorSource) {
   if (value?.schema !== config.sourceSchema ||
-      value.defaultView !== "exterior" ||
-      !Array.isArray(value.sources) || value.sources.length < 3) {
+      value.defaultView !== CUTAWAY_SOURCE_POLICY.defaultView ||
+      !Array.isArray(value.sources) || value.sources.length < CUTAWAY_SOURCE_POLICY.minimumSources) {
     throw new TypeError("Cutaway interior source manifest is incompatible.");
   }
   const { cutaway, palette } = value;
@@ -149,7 +145,7 @@ function validateManifest(value:InteriorSource) {
       throw new TypeError(`Cutaway interior ${key} is invalid.`);
     }
   }
-  if (cutaway.widthDegrees <= 0 || cutaway.widthDegrees >= 180 ||
+  if (cutaway.widthDegrees <= 0 || cutaway.widthDegrees >= CUTAWAY_SOURCE_POLICY.maximumWidthDegrees ||
       cutaway.diffuseCoreVisualRadius >= cutaway.metallicShellRadius ||
       cutaway.diffuseCoreTransitionRadius <= cutaway.diffuseCoreVisualRadius) {
     throw new RangeError("Cutaway interior radial or cutaway ranges are invalid.");

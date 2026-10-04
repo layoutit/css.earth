@@ -183,10 +183,13 @@ export function mountObjectShell({
         viewReadout.setPlaybackState(state);
       }
     },
-    setNavigationInFlight(active: boolean) {
+    setDestinationLoading(active: boolean) {
       if (lifetime.disposed) return;
       const hidden = String(!active);
       if (navigationProgress && navigationProgress.ariaHidden !== hidden) navigationProgress.ariaHidden = hidden;
+    },
+    setNavigationInFlight(active: boolean) {
+      if (lifetime.disposed) return;
       viewReadout.setNavigationInFlight(active);
       if (!active) { releaseArrivalControls(); releaseArrivalControls = () => {}; }
     },

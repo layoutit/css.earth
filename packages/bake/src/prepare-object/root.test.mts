@@ -36,3 +36,21 @@ test('the default checkout resolves from the module even when launched outside i
   assert.equal(result.status, 0, result.stderr);
   assert.match(result.stdout, /MODULE_ROOT_OK/);
 });
+
+test('spawn failure reports ENOENT immediately in inherited and captured execution lanes', async () => {
+  const root = await mkdtemp(resolve(tmpdir(), 'prepare-spawn-'));
+  try {
+    await mkdir(resolve(root, 'src/objects/spawn-fixture'), { recursive: true });
+    await writeFile(resolve(root, 'src/objects/spawn-fixture/object.json'), '{}');
+    const url = new URL('./index.ts', import.meta.url).href;
+    for (const step of ['world', 'sources']) {
+      const code = `const { prepareObjects } = await import(${JSON.stringify(url)}); process.env.PATH = ''; const start = performance.now(); const ok = await prepareObjects(['spawn-fixture'], { root: ${JSON.stringify(root)}, from: '${step}', to: '${step}', progress: () => {} }); if (ok || performance.now() - start >= 1000) process.exit(1); console.log('SPAWN_FAILURE_OK');`;
+      const result = spawnSync(process.execPath, ['--input-type=module', '-e', code], { encoding: 'utf8', timeout: 5000 });
+      assert.equal(result.status, 0, result.stderr);
+      assert.match(result.stdout, /SPAWN_FAILURE_OK/u);
+      assert.match(result.stderr, new RegExp(`Step "${step}" failed running:`));
+      assert.match(result.stderr, /spawn (?:pnpm|node) ENOENT/u);
+      assert.doesNotMatch(result.stderr, /Could not terminate/u);
+    }
+  } finally { await rm(root, { recursive: true, force: true }); }
+});

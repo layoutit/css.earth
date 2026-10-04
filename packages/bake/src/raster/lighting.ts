@@ -1,3 +1,4 @@
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 import { existsSync } from 'node:fs';
 import { copyFile } from 'node:fs/promises';
 import { availableParallelism } from 'node:os';
@@ -23,7 +24,7 @@ export async function prepareLighting(config: RasterRecipe, recipe: LightingReci
     // A recipe naming a shared bank takes the bank's rows and billboard as baked under public/lighting/<bank>/ (lighting-banks.ts):
     // the same bytes an encode here would write, checked by prepare-lighting-bank --check, without the encode. The bake stages
     // into a scratch directory, so the bank is found from the repository root every preparation tool runs from.
-    const bankDirectory = recipe.bank === undefined ? undefined : resolve(process.cwd(), LIGHTING_BANK_ROOT, recipe.bank);
+    const bankDirectory = recipe.bank === undefined ? undefined : resolve(checkoutProjectRoot(import.meta.url), LIGHTING_BANK_ROOT, recipe.bank);
     const banks: Record<string, unknown> = {};
     const density = RASTER_DENSITY, frameSize = recipe.frameSize * density, rowCount = Math.ceil(recipe.frameCount / recipe.columns);
     const bbSize = recipe.billboardFrameSize * density, bbRows = Math.ceil(recipe.frameCount / recipe.billboardColumns), bbWidth = bbSize * recipe.billboardColumns, bbHeight = bbSize * bbRows;

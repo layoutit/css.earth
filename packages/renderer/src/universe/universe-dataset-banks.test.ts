@@ -14,7 +14,9 @@ mock.module('../volume/prepared-volume-datasets.js', { namedExports: {
     mount: ({ host, before, frontHost, frontBefore }: { host: HTMLElement; before: Element; frontHost: HTMLElement; frontBefore: Element }) => {
       const root = host.ownerDocument.createElement('div'), frontRoot = host.ownerDocument.createElement('div');
       host.insertBefore(root, before); frontHost.insertBefore(frontRoot, frontBefore);
-      return { root, frontRoot, textureUrls: () => ['/slice.webp'], publish() {}, setStarsVisible() {}, destroy() { root.remove(); frontRoot.remove(); } };
+      let selectedDataset = payload.defaultDataset;
+      return { root, frontRoot, textureUrls: () => ['/slice.webp'], publish() {}, setStarsVisible() {}, destroy() { root.remove(); frontRoot.remove(); },
+        selectDataset(id: string) { selectedDataset = id; }, state: () => ({ selectedDataset }) };
     },
   }),
 } });
@@ -111,4 +113,31 @@ test('a bank declared after mount is drawn and loaded as one declared with it, i
   assert.equal(root.dataset.volumeDatasetResidentBankCount, '1');
   lifetime.destroy();
   assert.equal(root.querySelectorAll('.prepared-dataset-billboards').length, 0, 'the scene takes its billboard with it');
+});
+
+test("a bank's billboard pictures the dataset its host selected, not the bank's default", async () => {
+  const { document } = parseHTML('<div id="back"><span></span></div><div id="front"><span></span></div>');
+  const root = document.getElementById('back')!, frontRoot = document.getElementById('front')!, lifetime = createSceneLifetime();
+  const billboard = { radiusUnits: 1, back: [0, 0, 1], right: [1, 0, 0], down: [0, 1, 0] } as const;
+  const dust = { ...payload.datasets[0]!, id: 'dust' };
+  const banks = createUniverseDatasetBanks({ prepareBillboardImage: () => true, root, end: root.firstElementChild!, frontRoot, frontEnd: frontRoot.firstElementChild!,
+    lifetime, declarations: [{ id: 'shell', frame }], frame, visibility: { hiddenBelowRadiusPixels: 30, fullAboveRadiusPixels: 60 }, warmDomNodeBudget: 10000,
+    facts: [{ id: 'shell', contextVisibility: 'independent', attached: true, billboard, defaultDataset: 'optical', datasets: new Map([['dust', billboard]]) }],
+    billboards: { plan: { imagePx: 256, banks: new Map() }, imageUrl: (id, dataset) => `/billboards/${dataset === undefined ? id : `${id}.${dataset}`}.webp` },
+    load: async () => ({ payload: { ...payload, id: 'shell', attachedTo: 'host', datasets: [...payload.datasets, dust] }, resolveResource: path => path }) });
+  const leaf = root.querySelector<HTMLElement>('[data-dataset-billboard="shell"]')!;
+  // The framing sphere projects to 10 px: under the bank's own threshold, so its billboard stands for it.
+  const publish = () => banks.publish({ referenceFrame: 'fixture', epochJdTt: 1, pose: { positionM: [0, 0, 10], orientationXyzw: [0, 0, 0, 1] } },
+    { focalPixels: 100, principalOffsetPixels: [0, 0], widthPixels: 400, heightPixels: 300 }, 1, 1);
+  banks.setEnabled('shell', true);
+  banks.select('shell', 'dust');
+  publish();
+  assert.equal(leaf.style.backgroundImage, 'url("/billboards/shell.dust.webp")', 'before the bank has loaded');
+  await banks.focusBank('shell')!.load();
+  publish();
+  assert.equal(leaf.style.backgroundImage, 'url("/billboards/shell.dust.webp")');
+  banks.select('shell', 'optical');
+  publish();
+  assert.equal(leaf.style.backgroundImage, 'url("/billboards/shell.webp")');
+  lifetime.destroy();
 });

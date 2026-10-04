@@ -55,11 +55,14 @@ function length(value: string, where: () => string) {
   if (!scaled) throw new TypeError(`${where()}: unexpected leaf-box length: ${value}`);
   return Number(scaled[1]);
 }
+// Exact, case-sensitive exclusion; no colon means no declaration name and the fragment stays.
+const LEAF_BOX_DECLARATION_NAME = (part: string, colon: number) => colon < 0 ? undefined : part.slice(0, colon).trim();
 /** A static style without the named declarations. Semicolons inside quotes or parentheses (URLs) do not split. */
-function withoutDeclarations(style: string, names: readonly string[]) {
+function withoutDeclarations(style: string, names: readonly string[], declarationName = LEAF_BOX_DECLARATION_NAME) {
   return [...scanCssDeclarations(style)].filter(part => {
     const colon = part.indexOf(':');
-    return colon < 0 || !names.includes(part.slice(0, colon).trim());
+    const name = declarationName(part, colon);
+    return name === undefined || !names.includes(name);
   }).map(part => `${part};`).join('');
 }
 
