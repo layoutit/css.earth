@@ -5,8 +5,8 @@ import { resolve } from 'node:path';
 import { test } from 'node:test';
 import { writeOrCheckAuthoredOutputs } from './authored-output.mts';
 
-const ordinary = { missingFile: 'propagate-read-error', mkdir: 'none' } as const;
-const shell = { missingFile: 'mismatch-on-read-error', mkdir: 'root-before-write-or-check',
+const ordinary = { readError: 'propagate-read-error', mkdir: 'none' } as const;
+const shell = { readError: 'mismatch-on-read-error', mkdir: 'root-before-write-or-check',
   mismatchMessage: (path: string) => `Authored output differs: ${path}` } as const;
 
 test('write/check preserves bytes; mismatch leaves existing output untouched', async () => {

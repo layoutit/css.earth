@@ -1,8 +1,9 @@
 import { readFileSync } from 'node:fs';
-import { test } from 'node:test';
+import { sourceTest } from '@cssearth/objects/node/source-test';
+const test = sourceTest();
 import assert from 'node:assert/strict';
 import { isDeepStrictEqual } from 'node:util';
-import { parseCataloguePoints, parseCataloguePointSteps } from './catalogue-point-bank.js';
+import { readCataloguePointBank, parseCataloguePointSteps } from './catalogue-point-bank.js';
 import { catalogueCells, cataloguePointSpread, decodeCatalogueBankBinary } from '@cssearth/objects';
 import { unpackPreparedBinary } from '@cssearth/objects/node';
 
@@ -23,7 +24,7 @@ test('the prepared catalogues the app draws are valid banks of every selected ro
     const path = new URL(`../../../../src/objects/${object}/prepared/${id}.bin`, import.meta.url);
     const prepared = decodeCatalogueBankBinary(unpackPreparedBinary(readFileSync(path), path.pathname), path.pathname) as {
       points: number[][]; counts: { points: number; missingDistance?: number; selected?: number }; source?: string; appearance: { levels?: { points: number }[] } };
-    const parsed = parseCataloguePoints(prepared);
+    const parsed = readCataloguePointBank(prepared);
     assert.equal(parsed.id, id);
     assert.equal(parsed.points.length, prepared.counts.points);
     assert.deepEqual(parsed.spread, cataloguePointSpread(prepared.points), `${object}/${id}: the bake's spread is the one its points trace`);
@@ -36,20 +37,20 @@ test('the prepared catalogues the app draws are valid banks of every selected ro
 
 test('a palette bank colors each point by its index and refuses an index outside the palette', () => {
   const colored = { ...bank, appearance: { ...bank.appearance, palette: ['#8ec9ff', '#ffc070'] }, points: [[1, 0, -10, 0], [-1, 0, -10, 1]] };
-  assert.deepEqual(parseCataloguePoints(colored).points.map(point => point.colorCss), ['#8ec9ff', '#ffc070']);
-  assert.throws(() => parseCataloguePoints({ ...colored, points: [[1, 0, -10, 2]] }), /test-stars: point 0 names palette color 2/);
+  assert.deepEqual(readCataloguePointBank(colored).points.map(point => point.colorCss), ['#8ec9ff', '#ffc070']);
+  assert.throws(() => readCataloguePointBank({ ...colored, points: [[1, 0, -10, 2]] }), /test-stars: point 0 names palette color 2/);
 });
 
 test('catalogue point banks refuse malformed points and appearances, naming the bank', () => {
-  assert.throws(() => parseCataloguePoints({ ...bank, points: [[1, 0]] }), /test-stars: point 0/);
-  assert.throws(() => parseCataloguePoints({ ...bank, appearance: { ...bank.appearance, colorCss: 'gold' } }), /test-stars: catalogue point appearance/);
-  assert.throws(() => parseCataloguePoints({ ...bank, points: [] }), /test-stars: a catalogue point bank holds/);
+  assert.throws(() => readCataloguePointBank({ ...bank, points: [[1, 0]] }), /test-stars: point 0/);
+  assert.throws(() => readCataloguePointBank({ ...bank, appearance: { ...bank.appearance, colorCss: 'gold' } }), /test-stars: catalogue point appearance/);
+  assert.throws(() => readCataloguePointBank({ ...bank, points: [] }), /test-stars: a catalogue point bank holds/);
   const { spread: _spread, ...unspread } = bank;
   const { cells: _cells, ...uncelled } = bank;
-  assert.throws(() => parseCataloguePoints(uncelled), /test-stars \(catalogue points\): catalogue point bank field cells must be/);
-  assert.throws(() => parseCataloguePoints(unspread), /test-stars \(catalogue points\): catalogue point bank field spread must be .* got undefined/);
-  assert.throws(() => parseCataloguePoints({ ...bank, spread: { normal: [1, 1, 0], across: 1, along: 0 } }), /test-stars \(catalogue points\): catalogue point bank field spread/);
-  assert.throws(() => parseCataloguePoints({ ...bank, spread: { ...bank.spread, across: -1 } }), /test-stars \(catalogue points\): catalogue point bank field spread/);
+  assert.throws(() => readCataloguePointBank(uncelled), /test-stars \(catalogue points\): catalogue point bank field cells must be/);
+  assert.throws(() => readCataloguePointBank(unspread), /test-stars \(catalogue points\): catalogue point bank field spread must be .* got undefined/);
+  assert.throws(() => readCataloguePointBank({ ...bank, spread: { normal: [1, 1, 0], across: 1, along: 0 } }), /test-stars \(catalogue points\): catalogue point bank field spread/);
+  assert.throws(() => readCataloguePointBank({ ...bank, spread: { ...bank.spread, across: -1 } }), /test-stars \(catalogue points\): catalogue point bank field spread/);
 });
 
 test('a bank read in steps is the bank read in one call, a few points a step, and refuses the same point', () => {
@@ -60,7 +61,7 @@ test('a bank read in steps is the bank read in one call, a few points a step, an
   for (; !step.done; step = steps.next()) pauses++;
   // Ten points, four a step: a pause after the fourth and the eighth, and one before the cells are read.
   assert.equal(pauses, 3);
-  assert.deepEqual(step.value, parseCataloguePoints(colored, 'steps'));
+  assert.deepEqual(step.value, readCataloguePointBank(colored, 'steps'));
   const broken = parseCataloguePointSteps({ ...colored, points: points.map((point, index) => index === 9 ? [9, 0, -10, 2] : point) }, 'steps', 4);
   assert.equal(broken.next().done, false);
   assert.equal(broken.next().done, false);

@@ -4,8 +4,9 @@ import { execFileSync } from 'node:child_process';
 import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
-import { checkoutState, missingSourceReason, restoredSources } from '@cssearth/objects/node/source-test';
+import { checkoutState, missingSourceReason, restoredSources, sourceLoad, sourceValues } from '@cssearth/objects/node/source-test';
 import { readOracleInput } from '@cssearth/core/oracle';
+import { projectRoot } from '@cssearth/core/node';
 import { MissingSourceInputError } from '@cssearth/core';
 
 test('restored source paths resolve from the objects package to the repository root', () => {
@@ -30,13 +31,13 @@ test('skipping follows the error code, not the wording of the message', () => {
 
 
 test('an untracked source sharp reports missing skips; a tracked one still fails', () => {
-  const root = new URL('../../../', import.meta.url).pathname;
+  const root = projectRoot(import.meta.url) + '/';
   assert.match(missingSourceReason(new Error(`Input file is missing: ${root}src/objects/saturn/source/observations/not-restored.tif`)) ?? '', /saturn: .*not-restored\.tif is not restored/u);
   assert.equal(missingSourceReason(new Error(`Input file is missing: ${root}src/objects/saturn/source/manifest.json`)), null);
 });
 
 test('a tracked file a sparse checkout leaves out is absent from this checkout; one missing from its checkout still fails', () => {
-  const root = new URL('../../../', import.meta.url).pathname, file = `${root}src/objects/betelgeuse/source/observations/not-here.fits`;
+  const root = projectRoot(import.meta.url) + '/', file = `${root}src/objects/betelgeuse/source/observations/not-here.fits`;
   const missing = Object.assign(new Error(`ENOENT: no such file or directory, open '${file}'`), { code: 'ENOENT', path: file });
   assert.match(missingSourceReason(missing, null, () => 'outside-sparse-checkout') ?? '', /outside this sparse checkout; run git sparse-checkout add '\/src\/objects\/betelgeuse\/source\/observations\/not-here\.fits'/u);
   assert.equal(missingSourceReason(missing, null, () => 'checked-out'), null, 'a tracked file its checkout should hold is a failure');
@@ -67,4 +68,18 @@ test('an oracle input that is not restored is a skip, whichever layer reports th
   assert.ok(error instanceof Error);
   assert.notEqual(missingSourceReason(error), null);
   assert.equal(missingSourceReason(new Error('Oracle source size differs from its record: x')), null, 'a wrong size stays a failure');
+});
+
+test('sourceLoad discriminates absence and cannot supply fake values', async () => {
+  const absent = await sourceLoad(() => { throw new MissingSourceInputError('absent'); });
+  assert.notEqual(absent.skip, false);
+  assert.equal(Object.hasOwn(absent, 'values'), false);
+  assert.throws(() => sourceValues(absent), MissingSourceInputError);
+  const present = await sourceLoad(() => ({ value: 7 }));
+  assert.equal(present.skip, false);
+  assert.deepEqual(sourceValues(present), { value: 7 });
+  await assert.rejects(sourceLoad(() => { throw new Error('ordinary'); }), /ordinary/u);
+});
+test('source restore instructions belong to the caller', () => {
+  assert.match(missingSourceReason(new MissingSourceInputError('absent'), 'probe', undefined, id => `restore ${id}`) ?? '', /run restore probe/u);
 });

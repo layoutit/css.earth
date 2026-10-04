@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { sourceLoad, sourceTest } from '@cssearth/objects/node/source-test';
+import { sourceLoad, sourceTest, sourceValues } from '@cssearth/objects/node/source-test';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { decodePds4GeometryCube } from '@cssearth/bake/objects/layers/terrestrial';
@@ -27,8 +27,8 @@ const loaded = await sourceLoad(async () => {
   return { fixture, planes, source, config, mosaic, recipe, name, bytes, xml, cube, samples, flagged };
 });
 const test = sourceTest(null, loaded);
-const { fixture, planes, source, config, mosaic, recipe, name, bytes, xml, cube, samples, flagged } = loaded.values;
 test('the fixture was generated from the pinned cube and label by a named PDS4 reader', async () => {
+  const { fixture, planes, source, config, mosaic, recipe, name, bytes, xml, cube, samples, flagged } = sourceValues(loaded);
   assert.equal(fixture.oracle, 'pds4_tools');
   assert.equal(requireString(fixture.tool.pds4_tools), '1.4');
   await assertPinnedInputs(fixture.inputs);
@@ -36,6 +36,7 @@ test('the fixture was generated from the pinned cube and label by a named PDS4 r
 });
 
 test('image and intercept values match the PDS4 reader exactly and flagged pixels are invalid', () => {
+  const { fixture, planes, source, config, mosaic, recipe, name, bytes, xml, cube, samples, flagged } = sourceValues(loaded);
   let compared = 0;
   for (const { index, value } of samples('ioverf')) {
     if (flagged(value)) { assert.equal(cube.valid(index) && cube.acceptPixel(index), false, `flagged I/F at ${index}`); continue; }
@@ -51,6 +52,7 @@ test('image and intercept values match the PDS4 reader exactly and flagged pixel
 });
 
 test('illumination angles match the PDS4 reader after the declared degree-to-radian conversion', () => {
+  const { fixture, planes, source, config, mosaic, recipe, name, bytes, xml, cube, samples, flagged } = sourceValues(loaded);
   let compared = 0;
   for (const [plane, key] of [['incidence', 'INCIDENCE_ANGLE_IMAGE'], ['emission', 'EMISSION_ANGLE_IMAGE'], ['phase', 'PHASE_ANGLE_IMAGE']] as const) for (const { index, value } of samples(plane)) {
     if (flagged(value)) { assert.equal(cube.valid(index), false, `${plane} flagged at ${index}`); continue; }

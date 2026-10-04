@@ -11,7 +11,7 @@ import {join} from 'node:path';
 import sharp from 'sharp';
 import {continueBoundaryMean,percentileFalseColor,completeUniformCoverage,polarDiscAtlas,parseObservedSurfaceRecipe,prepareObservedSurfaces} from '@cssearth/bake/objects/layers/observed-surfaces';
 import type {PolarProjection} from '@cssearth/bake/objects/layers/observed-surfaces';
-import {card} from '../../geometry/fixtures/fits-helpers.mts';
+import {card} from '@cssearth/fits/test-support';
 
 test('dated component coverage normalizes longitude and preserves isolated dark observations',async()=>{
   const directory=await mkdtemp(join(tmpdir(),'opal-components-'));

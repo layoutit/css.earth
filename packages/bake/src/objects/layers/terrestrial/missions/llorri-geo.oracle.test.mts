@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { sourceLoad, sourceTest } from '@cssearth/objects/node/source-test';
+import { sourceLoad, sourceTest, sourceValues } from '@cssearth/objects/node/source-test';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { decodeLlorri, sipPixel } from '@cssearth/bake/objects/layers/terrestrial';
@@ -19,8 +19,8 @@ const loaded = await sourceLoad(async () => {
   return { fixture, input, source, config, recipe, camera, frame, cards, planes, sip, exposure };
 });
 const test = sourceTest(null, loaded);
-const { fixture, input, source, config, recipe, camera, frame, cards, planes, sip, exposure } = loaded.values;
 test('the fixture is bound to the pinned L\'LORRI product and its header', async () => {
+  const { fixture, input, source, config, recipe, camera, frame, cards, planes, sip, exposure } = sourceValues(loaded);
   await assertPinnedInputs(fixture.inputs);
   assert.equal(frame.startTime, requireString(cards.STARTUTC));
   assert.equal(requireString(cards.CTYPE1), 'RA---TAN-SIP');
@@ -28,6 +28,7 @@ test('the fixture is bound to the pinned L\'LORRI product and its header', async
 });
 
 test('DN per second, sigma and quality decisions match astropy\'s HDU reads', () => {
+  const { fixture, input, source, config, recipe, camera, frame, cards, planes, sip, exposure } = sourceValues(loaded);
   let compared = 0;
   const image = sampleList(requireRecord(planes.hdu0).samples), sigma = sampleList(requireRecord(planes.hdu1).samples), flags = sampleList(requireRecord(planes.hdu2).samples);
   // The decoder stores DN over exposure as float32: agreement to float32 precision.
@@ -37,6 +38,7 @@ test('DN per second, sigma and quality decisions match astropy\'s HDU reads', ()
 });
 
 test('the bound SIP terms are the header\'s and the distortion matches astropy.wcs to a nanopixel', () => {
+  const { fixture, input, source, config, recipe, camera, frame, cards, planes, sip, exposure } = sourceValues(loaded);
   const a = requireRecord(sip.a), b = requireRecord(sip.b);
   for (const [terms, coefficients, letter] of [[camera.sip.a, a, 'A'], [camera.sip.b, b, 'B']] as const) {
     for (const [i, j, value] of terms) assert.equal(coefficients[`${letter}_${i}_${j}`], value, `${letter}_${i}_${j}`);

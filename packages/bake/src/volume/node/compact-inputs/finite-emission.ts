@@ -21,11 +21,11 @@ import { physicalToField, angularScale } from '../../coordinates/observer-tangen
 
 import { recolorCloudSlices } from '../slices/material.ts';
 import { loadSimulationPrior } from './simulation-prior.ts';
-import { localPath, pinned, type Pin } from './io.ts';
+import { localPath, pinned, type CompilerPin } from './io.ts';
 import { containedPath } from './density-grid.ts';
 
 /** Delivered JSON may be gzipped; the path says which. */
-async function json(root: string, pin: Pin): Promise<unknown> {
+async function json(root: string, pin: CompilerPin): Promise<unknown> {
   const bytes = await pinned(root, pin);
   return JSON.parse((pin.path.endsWith('.gz') ? gunzipSync(bytes) : bytes).toString('utf8'));
 }
@@ -43,7 +43,7 @@ export interface CompactFiniteDataset {
  * Regenerate every dataset of one delivered finite-emission model into `destination/<imageId>`.
  * Returns the painted banks; the delivery owner compiles, packs and verifies them.
  */
-export async function restoreCompactFiniteEmission(root: string, inputPin: Pin, destination: string): Promise<CompactFiniteDataset[]> {
+export async function restoreCompactFiniteEmission(root: string, inputPin: CompilerPin, destination: string): Promise<CompactFiniteDataset[]> {
   const input = readCompactFiniteEmission(await json(root, inputPin));
   const { distance, modelTangent, exposureGain, fullChromaAlphaByte, encoding, datasets } = input;
   const appearance = input.appearance;
@@ -54,7 +54,7 @@ export async function restoreCompactFiniteEmission(root: string, inputPin: Pin, 
   const neutralDirectory = localPath(root, input.neutralTextures);
   const A = angularScale(distance);
 
-  const envelopeRecord = readSimulationEnvelopeRecord(await json(root, input.envelope));
+  const envelopeRecord = readSimulationEnvelopeRecord(await json(root, input.envelope), message => assert.fail(message));
   const settings = envelopeRecord.settings, chroma = envelopeChromaSettings(settings);
   const depthPrior = await loadSimulationPrior(root, input.priorRecipe, distance, modelTangent);
   const envelopeGrid = { ...envelopeRecord, gain: Float32Array.from(envelopeRecord.gain) };

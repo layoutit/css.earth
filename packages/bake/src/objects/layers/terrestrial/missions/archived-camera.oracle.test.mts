@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { sourceLoad, sourceTest } from '@cssearth/objects/node/source-test';
+import { sourceLoad, sourceTest, sourceValues } from '@cssearth/objects/node/source-test';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { decodeOsirisReflectance, acceptOsirisQuality } from '@cssearth/bake/objects/layers/terrestrial';
@@ -19,8 +19,8 @@ const loaded = await sourceLoad(async () => {
   return { fixture, input, source, config, recipe, frameRecipe, camera, frame, planes };
 });
 const test = sourceTest(null, loaded);
-const { fixture, input, source, config, recipe, frameRecipe, camera, frame, planes } = loaded.values;
 test('the fixture is bound to the pinned Steins product and its label identity', async () => {
+  const { fixture, input, source, config, recipe, frameRecipe, camera, frame, planes } = sourceValues(loaded);
   await assertPinnedInputs(fixture.inputs);
   const identity = requireRecord(fixture.cases.identity);
   assert.equal(frame.startTime, requireString(identity.START_TIME));
@@ -30,6 +30,7 @@ test('the fixture is bound to the pinned Steins product and its label identity',
 });
 
 test('reflectance values and quality decisions match the record-pointer reads', () => {
+  const { fixture, input, source, config, recipe, frameRecipe, camera, frame, planes } = sourceValues(loaded);
   let compared = 0;
   for (const { index, value } of sampleList(requireRecord(planes.IMAGE).samples)) { assert.equal(frame.planes.IMAGE[index], Math.fround(value), `I/F at ${index}`); compared++; }
   for (const { index, value } of sampleList(requireRecord(planes.QUALITY_MAP_IMAGE).samples)) {

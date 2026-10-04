@@ -1,5 +1,5 @@
 import { rebuildPropertyTable } from './property-table.ts';
-import { isRecord as coreIsRecord } from '@cssearth/core';
+import { isRecord as record } from '@cssearth/core';
 import { scanCssDeclarations } from './css-declaration-scanner.ts';
 
 // Clean prepared nodes (the last step of the presentation bindings, prepared-presentation-bindings.ts, and of the node
@@ -114,7 +114,6 @@ export function withoutCleanLeaves<D extends { tree: Tree }>(definition: D): D {
 
 /** withoutCleanLeaves for a value read from disk: checks the shape it reads before expanding, so a reader needs no cast. */
 export function expandCleanLeaves(value: unknown): unknown {
-  const record = coreIsRecord;
   if (!record(value) || !record(value.tree) || !Array.isArray(value.tree.nodes) || !Array.isArray(value.tree.properties)) return value;
   return withoutCleanLeaves(value as unknown as { tree: Tree });
 }

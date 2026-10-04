@@ -58,7 +58,7 @@ packages/objects/
 │   ├── provenance/ Provenance, exploration and source-usage records (`@cssearth/objects/provenance`)
 │   └── node/      Source manifests, the prepared registry read and the runtime asset closure (`@cssearth/objects/node`, Node only)
 │       ├── contract/ Object test helpers (`@cssearth/objects/node/contract`, Node only)
-│       └── source-test.ts Restored source test helper (`@cssearth/objects/node/source-test`, Node only)
+│       └── source-test.ts Compatibility facade for contract/source-test.ts (`@cssearth/objects/node/source-test`, Node only)
 ├── AGENTS.md      Package boundaries
 └── CLAUDE.md      Symlink to AGENTS.md
 ```

@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import { gzipSync } from 'node:zlib';
-import { card } from '../geometry/fixtures/fits-helpers.mts';
+import { card } from '@cssearth/fits/test-support';
 import { binWiseAtlasTile, matchTileBackgrounds, mosaicTiles, wiseAtlasUrl } from '@cssearth/bake/objects/raster';
 
 const size = 64, scale = 0.01;

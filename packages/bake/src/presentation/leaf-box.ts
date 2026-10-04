@@ -1,6 +1,6 @@
-import { type PreparedSilhouetteSteps, type PreparedTexturePlacements } from '@cssearth/objects';
+import { type PreparedTree, type PreparedSilhouetteSteps, type PreparedTexturePlacements } from '@cssearth/objects';
 import { walkSilhouetteLevels } from '@cssearth/engine';
-import { rebuildPropertyTable, appendPropertyTable } from './property-table.ts';
+import { rebuildPropertyTable } from './property-table.ts';
 
 // Leaf boxes that follow the body's size on screen.
 //
@@ -236,7 +236,8 @@ export function withLeafBoxes<D extends LeafBoxTree>(definition: D, measured: { 
     throw new TypeError(`Leaf boxes need a positive body diameter (${bodyDiameter}) and logical body diameter (${initialDiameter}).`);
   }
   const { factors, initial, binding } = prepareLeafBoxBindings(measured.leaves, { bodyCentre: measured.bodyCentre, bodyDiameter, target, closed, initialDiameter });
-  const { properties, intern } = appendPropertyTable(tree.properties);
+  const properties = [...tree.properties];
+  const intern = (property: PreparedTree['properties'][number]) => properties.push(property) - 1;
   const factorOf = new Map(factors.map(factor => [factor.node, factor.value]));
   const nodes = tree.nodes.map((node, index) => {
     // prepare:object-json writes the bound runtime back, so an earlier measurement's factors and steps are dropped wherever

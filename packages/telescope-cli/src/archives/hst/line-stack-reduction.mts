@@ -1,4 +1,3 @@
-import { readPositiveNumber } from '@cssearth/core';
 /** The arithmetic of stacking STIS long-slit line images of a moving target in the target's own frame.
  *
  * A long-slit exposure of a body that is smaller than the slit is already an image in one direction: along the slit the body
@@ -12,6 +11,7 @@ import { readPositiveNumber } from '@cssearth/core';
  * masked wavelengths, the windows, the grid, the rejection rule — arrives as a pinned stack definition, parsed here and
  * used by [line-stack.mts](line-stack.mts). Sources for the recipe are named in that definition and in
  * [docs/hubble.md](../../../docs/hubble.md). */
+import { readPositiveNumber } from '@cssearth/core';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 
 // ---- brightness -------------------------------------------------------------------------------------------------------

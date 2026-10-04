@@ -27,7 +27,7 @@ export async function authorCeTauri({ check = false } = {}) {
   const image = readReconstruction(await readFile(resolve(root, MARKER_IMAGE_PATH)));
   const marker = await contextMarker(image, palette, [percentiles[0]!, percentiles[1]!], requireFiniteNumber(frame.backgroundMaximum));
   const outputs: [string, Buffer][] = [[CONTEXT_PATH, marker]];
-  await writeOrCheckAuthoredOutputs(root, outputs, { check, missingFile: 'propagate-read-error', mkdir: 'none' });
+  await writeOrCheckAuthoredOutputs(root, outputs, { check, readError: 'propagate-read-error', mkdir: 'none' });
   return { width: image.width, height: image.height };
 }
 

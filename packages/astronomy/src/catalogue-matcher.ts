@@ -4,6 +4,18 @@ export type RaDecDeg = readonly [raDeg: number, decDeg: number];
 /** Multiplying the distance before comparison can change rounding at the boundary. */
 export type CatalogueMatchComparison = 'degrees' | 'arcseconds';
 
+/** Legacy tangent-plane separation about the first position. */
+function separationDegrees(raDeg: number, decDeg: number, fieldRaDeg: number, fieldDecDeg: number, wrapRa = true): number {
+  let difference = raDeg - fieldRaDeg;
+  if (wrapRa && difference > 180) difference -= 360;
+  else if (wrapRa && difference < -180) difference += 360;
+  return Math.hypot(difference * Math.cos(decDeg * Math.PI / 180), decDeg - fieldDecDeg);
+}
+/** Radius-aware callers select RA wrapping explicitly; historical cluster deduplication does not wrap. */
+export function catalogueSeparationArcsec(raDeg: number, decDeg: number, fieldRaDeg: number, fieldDecDeg: number, wrapRa = true): number {
+  return 3600 * separationDegrees(raDeg, decDeg, fieldRaDeg, fieldDecDeg, wrapRa);
+}
+
 function validatePositionDeg(raDeg: number, decDeg: number): void {
   // Non-finite numbers were accepted by every authoring copy and never matched.
   if (typeof raDeg !== 'number' || typeof decDeg !== 'number') {
@@ -68,10 +80,7 @@ export function createRaDecCatalogueMatcher(
       for (let dx = count < 3 ? 0 : -1; dx <= (count < 3 ? count - 1 : 1); dx++) {
         const neighbour = count < 3 ? dx : (x + dx + count) % count;
         for (const [fieldRaDeg, fieldDecDeg] of cells.get(`${y + dy},${neighbour}`) ?? []) {
-          let raDifferenceDeg = raDeg - fieldRaDeg;
-          if (raDifferenceDeg > 180) raDifferenceDeg -= 360;
-          else if (raDifferenceDeg < -180) raDifferenceDeg += 360;
-          const distanceDeg = Math.hypot(raDifferenceDeg * Math.cos(decDeg * Math.PI / 180), decDeg - fieldDecDeg);
+          const distanceDeg = separationDegrees(raDeg, decDeg, fieldRaDeg, fieldDecDeg);
           if (comparison === 'arcseconds' ? 3600 * distanceDeg <= matchArcsec : distanceDeg <= radiusDeg) return true;
         }
       }

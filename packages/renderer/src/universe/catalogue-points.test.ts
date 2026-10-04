@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { isDeepStrictEqual } from 'node:util';
 import { parseHTML } from 'linkedom';
 import { mountCataloguePoints } from './catalogue-points.js';
-import { parseCataloguePoints } from '@cssearth/objects';
+import { parseCataloguePoints as readCataloguePointBank } from '@cssearth/objects';
 import { catalogueCells, cataloguePointSpread } from '@cssearth/objects';
 import { holdStartup, releaseStartup } from '../rendering/startup-gate.js';
 
@@ -32,7 +32,7 @@ test('a stacked bank adds its inner levels\' dots as the view narrows, only once
     assert.ok(next >= previous);
     previous = next;
   }
-  assert.throws(() => parseCataloguePoints({ ...bank, appearance: { ...bank.appearance, levels: [{ points: 1, fullDetailUnits: 1 }, { points: 1, appearUnits: [2, 1] }] } }), /test-stars: level 1 appears over a shrinking window/);
+  assert.throws(() => readCataloguePointBank({ ...bank, appearance: { ...bank.appearance, levels: [{ points: 1, fullDetailUnits: 1 }, { points: 1, appearUnits: [2, 1] }] } }), /test-stars: level 1 appears over a shrinking window/);
 });
 
 test('seen from outside, a bank draws only as many dots as its projected shape holds', async () => {
@@ -48,8 +48,8 @@ test('seen from outside, a bank draws only as many dots as its projected shape h
   assert.ok(tilted < faceOn);
   assert.equal(far, Math.floor(Math.PI * (1000 * spread.across / 4000) ** 2 / 64), 'four times farther holds a sixteenth');
   assert.equal(screenPointCount(spread, [0, 0, 1000], 1000, 256), Math.floor(faceOn * 64 / 256), 'a sparser bank holds a quarter as many');
-  assert.equal(parseCataloguePoints({ ...bank, appearance: { ...bank.appearance, outsidePixelsPerDot: 256 } }).appearance.outsidePixelsPerDot, 256);
-  assert.throws(() => parseCataloguePoints({ ...bank, appearance: { ...bank.appearance, outsidePixelsPerDot: 0 } }), /test-stars: outsidePixelsPerDot is a positive number/);
+  assert.equal(readCataloguePointBank({ ...bank, appearance: { ...bank.appearance, outsidePixelsPerDot: 256 } }).appearance.outsidePixelsPerDot, 256);
+  assert.throws(() => readCataloguePointBank({ ...bank, appearance: { ...bank.appearance, outsidePixelsPerDot: 0 } }), /test-stars: outsidePixelsPerDot is a positive number/);
 });
 
 test('a catalogue loads on its first publication and draws every point as the same small dot', async () => {
@@ -122,7 +122,7 @@ test('a level with a near opacity has its own group and dims to it as the innerm
   assert.deepEqual(parts.map(part => part.style.opacity), ['0.5', '1']);
   field.destroy();
   for (const nearOpacity of [0, 1.5]) {
-    assert.throws(() => parseCataloguePoints({ ...stacked, appearance: { ...stacked.appearance, levels: [{ ...stacked.appearance.levels[0], nearOpacity }, ...stacked.appearance.levels.slice(1)] } }), { message: `test-stars: level 0 nearOpacity must be in (0, 1], got ${nearOpacity}.` });
+    assert.throws(() => readCataloguePointBank({ ...stacked, appearance: { ...stacked.appearance, levels: [{ ...stacked.appearance.levels[0], nearOpacity }, ...stacked.appearance.levels.slice(1)] } }), { message: `test-stars: level 0 nearOpacity must be in (0, 1], got ${nearOpacity}.` });
   }
 });
 
@@ -147,7 +147,7 @@ test('a screen budget draws an even, stable share of the visible dots and refuse
   assert.equal(drawn(), kept, 'the same dots stay as the camera moves');
   field.destroy();
   for (const screenBudget of [0, 1.5, -3]) {
-    assert.throws(() => parseCataloguePoints({ ...budgeted, appearance: { ...budgeted.appearance, screenBudget } }), { message: `test-stars: catalogue point screenBudget must be a positive whole number, got ${screenBudget}.` });
+    assert.throws(() => readCataloguePointBank({ ...budgeted, appearance: { ...budgeted.appearance, screenBudget } }), { message: `test-stars: catalogue point screenBudget must be a positive whole number, got ${screenBudget}.` });
   }
 });
 
@@ -175,8 +175,8 @@ test('a translucent catalogue draws its dots as paths with their alpha', async (
 test('a sized palette draws one color at two radii as two paths, and refuses a radius list that does not match', async () => {
   const sized = { ...bank, appearance: { ...bank.appearance, palette: ['#ffffff', '#ffffff'], paletteRadiusPx: [1.1, 0.5] },
     points: [[1, 0, -10, 0], [-1, 0, -10, 1]] };
-  assert.deepEqual(parseCataloguePoints(sized).points.map(point => point.radiusPx), [1.1, 0.5]);
-  assert.throws(() => parseCataloguePoints({ ...sized, appearance: { ...sized.appearance, paletteRadiusPx: [1] } }), /test-stars: paletteRadiusPx holds one positive radius per palette color/);
+  assert.deepEqual(readCataloguePointBank(sized).points.map(point => point.radiusPx), [1.1, 0.5]);
+  assert.throws(() => readCataloguePointBank({ ...sized, appearance: { ...sized.appearance, paletteRadiusPx: [1] } }), /test-stars: paletteRadiusPx holds one positive radius per palette color/);
   const { document } = parseHTML('<div id="host"></div>'), host = document.getElementById('host')!;
   const points = mountCataloguePoints({ host, url: '/sized.json', loadBank: async () => sized });
   points.publish({ world: { referenceFrame: 'sun-icrf', epochJdTt: 2451545, pose: { positionM: [0, 0, 0], orientationXyzw: [0, 0, 0, 1] } },
@@ -237,8 +237,8 @@ test('an inner level with its own screen budget moves the bank\'s to it as the l
   assert.ok(inside > 650, 'the level\'s once it is whole');
   assert.ok(inside < 850);
   field.destroy();
-  assert.throws(() => parseCataloguePoints({ ...budgeted, appearance: { ...budgeted.appearance, screenBudget: undefined } }), /test-stars: a level's screenBudget moves the bank's, so the bank needs a screenBudget too\./);
-  assert.throws(() => parseCataloguePoints({ ...budgeted, appearance: { ...budgeted.appearance, levels: [{ ...levels[0], screenBudget: 10 }, levels[1]] } }), /test-stars: level 0 screenBudget must be a positive whole number on an inner level, got 10\./);
+  assert.throws(() => readCataloguePointBank({ ...budgeted, appearance: { ...budgeted.appearance, screenBudget: undefined } }), /test-stars: a level's screenBudget moves the bank's, so the bank needs a screenBudget too\./);
+  assert.throws(() => readCataloguePointBank({ ...budgeted, appearance: { ...budgeted.appearance, levels: [{ ...levels[0], screenBudget: 10 }, levels[1]] } }), /test-stars: level 0 screenBudget must be a positive whole number on an inner level, got 10\./);
 });
 
 test('an arriving level spends what the budget leaves, never thinning the levels already on screen', async () => {
@@ -278,7 +278,7 @@ test('a bank with fadeOutUnits fades out as the view narrows at its origin, and 
   assert.ok(Math.abs(Number(points.root.style.strokeOpacity) - 0.5) < 1e-9, `halfway through the window in the logarithm, got ${points.root.style.strokeOpacity}`);
   points.publish(at(2));
   assert.equal(points.root.style.display, 'none', 'narrower than the window, not drawn');
-  assert.throws(() => parseCataloguePoints({ ...bank, appearance: { ...bank.appearance, fadeOutUnits: [3, 9] } }), /test-stars: fadeOutUnits/);
+  assert.throws(() => readCataloguePointBank({ ...bank, appearance: { ...bank.appearance, fadeOutUnits: [3, 9] } }), /test-stars: fadeOutUnits/);
   points.destroy();
 });
 

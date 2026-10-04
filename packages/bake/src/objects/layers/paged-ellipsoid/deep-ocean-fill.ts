@@ -195,4 +195,3 @@ function measureReplacementWeight(recipe: DeepOceanFillRecipe, plain: RasterInfo
   }
   return { weight, selectedSphereShare: selectedWeight / sphereWeight };
 }
-
