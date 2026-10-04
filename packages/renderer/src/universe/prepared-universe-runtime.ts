@@ -239,7 +239,8 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
           initialCatalog: catalog, catalogBank, loadCatalog, loadImageLayer, requestPublication, billboards: datasetBillboards, stellarExtents, prepareBillboardImage });
         let labelBudget = createLabelBudget(0, 0);
         let labelBlockers: readonly LabelScreenRect[] = [];
-        let overview = false;
+        // A selected satellite system frames like an overview and keeps its host as the selection.
+        let overview = false, systemSelection = false;
         let selectionPreview: string | null | undefined;
         const shellLayers: ReturnType<typeof mountPreparedCssSurfaceShell>[] = [];
         const mountedShells = [...shells];
@@ -255,7 +256,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
         // The first `selectObject` always applies: the mounted default differs from a selection in its caption framing.
         let selectionApplied = false, selectedFramingScale = 1;
         const caption = () => previewCaption ?? captionBody;
-        const captionFlags = () => ({ overview: selectionPreview ? false : overview, preview: selectionPreview, edge: previewCaption ? previewEdge : selectedEdge });
+        const captionFlags = () => ({ overview: selectionPreview ? false : overview && !systemSelection, preview: selectionPreview, edge: previewCaption ? previewEdge : selectedEdge });
         // The bank the mounted scene's dataset shows as its companion: its subject, drawn whole while it is shown.
         let companion: string | null = null;
         // The banks that are a scene's whole subject: a galaxy's image layers, and a volume that is not attached to a body.
@@ -284,9 +285,9 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
         const spatial = own(mountPreparedWorldContext({ host: stage, presentationHost, before: root, plan, sprites: spriteTable, requestPublication, annotationOpacities, annotationPriorities, nonNavigableIds, plainDots, opacityClock, orbitRenderer: 'strokes', depthBase }));
         layers.add(spatial);
         lifetime.onDispose(() => { layers.delete(spatial); });
-        // The selected body's own label is the close-up's; overviews label every body.
+        // The selected body's own label is the close-up's and a selected system's host's; overviews label every body.
         const publishSuppressedLabels = () => spatial.setBodyVisibility({
-          labelSuppressed: [...(!overview ? [selected.id] : []), ...(previewCaption ? [previewCaption.id] : [])],
+          labelSuppressed: [...(!overview || systemSelection ? [selected.id] : []), ...(previewCaption ? [previewCaption.id] : [])],
         });
         publishSuppressedLabels();
         const focusPoint = own(mountWorldContextPointSource({ host: root, before: end, plan, field: pointAppearance, resolveResource: resolvePointResource, pickingHost: stage }));
@@ -340,7 +341,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
           /** `systemRetired`: the zoom shows an object the star is inside, past the star's own system. `starsRetired`: it
            * is past the object that holds the stars too, as the host says. */
           setOverview(enabled: boolean, systemRetired = false, preserveSelection = false, starsRetired = false) {
-            overview = enabled;
+            overview = enabled; systemSelection = enabled && preserveSelection;
             spatial.setOverview(enabled, preserveSelection);
             // Past the system scope, a planetary system is drawn as its star; past the scope that holds the stars, they retire too.
             spatial.setSystemRetired(enabled && systemRetired, starsRetired);
