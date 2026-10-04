@@ -133,9 +133,11 @@ export function mountPreparedCssVolume(options: PreparedVolumeMountOptions): Pre
   // slice is a layer with a surface of its own, and a stack shown whole made hundreds in one frame. A drag across M42
   // (stacks of 314, 439 and 88 slices, each with its first copy) had three or four frames of 130 to 200 ms at each
   // change of axis on the iPad, spent making surfaces in the GPU process, Safari and the display server while the
-  // page's own thread waited (2026-10-04). Paced, a change of axis has one frame of 30 to 80 ms, its first: the GPU
-  // process converts the stack's image again for the first slice drawn from it after a pause (22 ms for M42's 7
-  // megapixel atlas with the camera still), however few slices join.
+  // page's own thread waited (2026-10-04). Paced, a change of axis still has a frame of 30 to 80 ms. Safari paints
+  // every slice displayed under a root again when the root's opacity leaves or reaches 1: with the camera still and 88
+  // slices displayed, 1 to 0.99 made a frame of 54 ms and 0.99 to 0.98 one of 17. And the first change to a stack's
+  // slices after half a second's pause (one slice shown, one slice's opacity) made a frame of 36 to 42 ms, the ones
+  // after it none.
   // The share doubles from a frame's first units to its most (8, 16, then 32 slices) whatever the pacer's budget has
   // fallen to: the budget halves after any slow frame, and where every frame is slow a stack would join a slice a
   // frame, thin for seconds (headless Chromium showed 84 of a copy's 88 slices five seconds after a turn).
