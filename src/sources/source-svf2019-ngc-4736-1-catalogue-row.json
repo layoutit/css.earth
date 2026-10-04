@@ -1,0 +1,35 @@
+{
+  "id": "source-svf2019-ngc-4736-1-catalogue-row",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "[SVF2019] NGC 4736-1 · svf2019 ngc 4736 1 catalogue row",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://simbad.cds.unistra.fr/simbad/sim-tap/sync",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/svf2019-ngc-4736-1/source/manifest.json",
+      "locator": "/inputs/7"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Solovyeva et al. (2019), MNRAS 484, L24, section 2 (its HST coordinates, 12:50:57.264 +41:07:23.13); SIMBAD holds that position, from 2019MNRAS.484L..24S; SIMBAD (CDS; Wenger et al. 2000, A&AS 143, 9)",
+      "scope": "The svf2019 ngc 4736 1 catalogue row input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "CDS SIMBAD database: free use with acknowledgement",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

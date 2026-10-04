@@ -1,0 +1,142 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "svf2019-ngc-4736-1",
+  "parent": "m94",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "[SVF2019] NGC 4736-1",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 127313100
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/svf2019-ngc-4736-1-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "[SVF2019] NGC 4736-1",
+      "classification": "star",
+      "color": "#aec4ff",
+      "distanceAu": 894651115846.8,
+      "description": "A luminous blue variable in the galaxy M94, about three million times as luminous as the Sun.",
+      "systemName": "[SVF2019] NGC 4736-1 system",
+      "order": 5768,
+      "context": {
+        "order": 5765
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -9.83383173549962e+22,
+        -2.223112241367718e+22,
+        8.802236383108446e+22
+      ],
+      "presentationToReference": [
+        -0.7347568657470817,
+        -0.6414909293280626,
+        -0.22050336919726118,
+        -0.16610483345720248,
+        -0.14502041280281439,
+        0.975386212826825,
+        0.6576788977454576,
+        -0.7532983920468169,
+        4.0271217849536707e-17
+      ],
+      "orbitUpReference": [
+        0.6414909293280626,
+        0.14502041280281439,
+        0.7532983920468169
+      ],
+      "metersPerUnit": 410687419.3548387,
+      "bodyRadiusM": 127313100000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

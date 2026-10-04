@@ -1,0 +1,51 @@
+{
+  "id": "arxiv-1901-05277",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Solovyeva et al. (2019): New Luminous Blue Variable Candidates in NGC 4736",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1901.05277"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1093/mnrasl/sly241"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/1901.05277",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1093/mnrasl/sly241",
+      "label": "Journal version"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/1901.05277",
+      "checkedOn": "2026-10-04",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Solovyeva et al. (2019)",
+      "scope": "citation",
+      "evidence": "https://arxiv.org/abs/1901.05277"
+    }
+  ],
+  "creators": [
+    "Y. Solovyeva",
+    "A. Vinokurov",
+    "S. Fabrika",
+    "et al."
+  ],
+  "publicationDate": "2019"
+}
