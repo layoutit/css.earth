@@ -8,11 +8,15 @@
  *    the gravity whose law is closest to all the others. The largest difference to any of them is recorded; the gravity is
  *    marked unmeasured and never becomes a fact of the star.
  *
- * Either way the README states the spread of limb laws across the published values or the range, measured on the same grid. */
+ * Either way the README states the spread of limb laws across the published values or the range, measured on the same grid.
+ *
+ * A draft route whose paper measures no mass cites the published value as the spec's `gravity` (citedGravity), so the generator
+ * reads the limb law at it as at any cited gravity. */
 import { interpolateQuadraticLimbDarkening } from '@cssearth/bake/objects/stellar';
 import { VIZIER_ASU, type Archive } from './archives.mts';
 import { SIMBAD_TAP } from './companions.mts';
 import { GRIDS } from './limb.mts';
+import type { Cited } from './spec.mts';
 
 /** Survey pipelines, which fit gravities for large samples with one automated model; a star's own analysis comes first. */
 export const SURVEY_PIPELINES: Readonly<Record<string, string>> = {
@@ -76,6 +80,12 @@ async function lawsAcross(archive: Archive, teffK: number, loggs: readonly numbe
   throw new Error(`${where}: no limb grid covers ${teffK} K ${all ? 'across' : 'anywhere in'} log g ${lo}..${hi} (${reasons.slice(0, 3).join('; ')}).`);
 }
 
+/** A published choice as a spec's cited `gravity` (spec.mts): the value, the rule's sentence under the compilation it was read from, and the paper. */
+export function citedGravity(choice: GravityChoice): Cited {
+  if (choice.kind !== 'published') throw new TypeError(`A spec cites a published gravity; log g ${choice.logg} is a display choice inside a range.`);
+  return { value: choice.logg, source: `SIMBAD's compilation of spectroscopic measurements (mesFe_h): ${choice.sentence}`, url: choice.url };
+}
+
 /** Intensity relative to the centre across the disc, mu from 0 to 1, for a quadratic law. */
 const profile = ({ u1, u2 }: { u1: number; u2: number }) => Array.from({ length: 101 }, (_, i) => { const x = 1 - i / 100; return 1 - u1 * x - u2 * x * x; });
 const difference = (a: readonly number[], b: readonly number[]) => Math.max(...a.map((value, i) => Math.abs(value - b[i]!)));
@@ -90,8 +100,9 @@ export async function chooseGravity({ archive, ra, dec, teffK, range, where }: {
     // reach) it is not measured, and the sentence says nothing of it.
     const laws = await lawsAcross(archive, teffK, gravities, where, true).then(found => found.map(law => profile(law!)), () => null);
     const spread = laws ? Math.max(0, ...laws.map(law => difference(law, laws[gravities.indexOf(published.logg)]!))) : Number.NaN;
+    // A label that already says what the paper is (the comparison of pipelines) stands as written; a survey's name is called its pipeline.
     const pipeline = SURVEY_PIPELINES[published.bibcode];
-    return { logg: published.logg, kind: 'published', source: `${published.bibcode}${published.title ? ` ("${published.title}")` : ''}${pipeline ? `, the ${pipeline} pipeline` : ''}`,
+    return { logg: published.logg, kind: 'published', source: `${published.bibcode}${published.title ? ` ("${published.title}")` : ''}${pipeline ? `, ${/^an? /u.test(pipeline) ? pipeline : `the ${pipeline} pipeline`}` : ''}`,
       url: `https://ui.adsabs.harvard.edu/abs/${encodeURIComponent(published.bibcode)}`, span, spread,
       sentence: `log g ${published.logg} from ${published.bibcode}${published.measurements > 1 ? `, the median of its ${published.measurements} spectra` : ''}${pipeline ? ` (${pipeline}, a survey pipeline: no analysis of this star's own spectra is published)` : ''}; ` +
         `the ${values.length} published value${values.length === 1 ? '' : 's'} span log g ${span[0]} to ${span[1]}${Number.isFinite(spread) ? `, across which the limb law changes by at most ${(spread * 100).toFixed(1)}% of the centre brightness` : ''}` };

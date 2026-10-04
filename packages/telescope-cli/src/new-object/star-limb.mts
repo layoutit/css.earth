@@ -4,11 +4,17 @@
  * 1. a law transcribed from a paper beside the star (`source/photometry/<name>-limb-darkening.json`, cssearth-published-limb-darkening@1,
  *    quadratic or power), a measurement or the model a paper fixed for this star;
  * 2. the model grids of limb.mts, at the star's temperature and gravity (and mass, for spherical models). The gravity is the star's
- *    mass and radius in its astronomy record, else a published spectroscopic value (gravity.mts).
+ *    mass and radius in its astronomy record, else a published spectroscopic value (gravity.mts), searched at the star's J2000
+ *    position: the record's, carried back from its own epoch by its proper motion.
  * 3. the star's own calibrated interferometry, fitted inside the first lobe, when an observation season records it
  *    (interferometric-limb.mts); the record is written beside the star and read as in 1.
  * A star that already has a color dataset gains the law on it; a placeholder that has none gains the color dataset with it
- * (color.mts, dataset.mts). A star no source covers is reported and left unchanged. */
+ * (color.mts, dataset.mts). A star no source covers is reported and left unchanged.
+ *
+ * A generated star with no mass said in its README that no gravity is published, and a draft that found none declined a law in its
+ * stored spec. When the law is read at a published gravity, both take it: the README names the paper, and the stored spec cites the
+ * gravity as a draft of the star now would (gravity.mts citedGravity), so `--refresh` regenerates the star with its law. */
+import { requireFiniteNumber } from '@cssearth/core';
 import { PUBLISHED_LIMB_DARKENING_SCHEMA, INVESTIGATION_LEDGER_SCHEMA } from '@cssearth/objects';
 import { mkdir, readFile, readdir, rm, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
@@ -16,11 +22,13 @@ import { parseCieTable } from '@cssearth/bake/objects/color';
 import { readCie1931ColorMatching } from '@cssearth/bake/objects/sources';
 import { fetchGaiaRow, liveArchive, readIdentifiers, telescopeResolver, type Archive, type GaiaRow, type Identifiers, type Resolver } from './archives.mts';
 import { chooseColor } from './color.mts';
-import { chooseGravity, type GravityChoice } from './gravity.mts';
+import { chooseGravity, citedGravity, type GravityChoice } from './gravity.mts';
+import { simbadPosition } from './generate.mts';
 import { fitInterferometricLimb } from './interferometric-limb.mts';
 import { bindInputs, installColorDataset, json, type PackageFiles } from './dataset.mts';
 import { chooseLimb, GRIDS, HOWARTH, whiteDwarfGrid, type LimbChoice } from './limb.mts';
-import { whiteDwarfSpec, type StarSpec } from './spec.mts';
+import { STORED_SPEC } from './refresh.mts';
+import { parseStarSpec, whiteDwarfSpec, type StarSpec } from './spec.mts';
 
 const GM_SUN = 132712440041.93938;
 const parseWhiteDwarf = (entry: unknown, id: string) => { const value = (entry as { whiteDwarf?: unknown } | null)?.whiteDwarf; return value === undefined ? undefined : whiteDwarfSpec(value, `${id}.whiteDwarf`); };
@@ -33,7 +41,20 @@ const STALE = /(?:^|(?<=\.\s))(?:- )?[^.\n]*(?:\bno limb[- ]darkening\b|\blimb[^
 const NO_GRID = /(?:The disc is )?No limb darkening is drawn: at [\d,]+ K and log g [\d.]+[^(\n]*no model grid used here reaches it \((?:[^()\n]|\((?:[^()\n]|\([^()\n]*\))*\))*\)\.?[^\S\n]*/gu;
 const stale = (text: unknown) => String(text ?? '').replace(NO_GRID, '').replace(STALE, '');
 
-interface StarGravity { readonly logg: number; readonly kind: 'measured' | GravityChoice['kind']; readonly sentence: string; readonly url?: string }
+interface StarGravity { readonly logg: number; readonly kind: 'measured' | GravityChoice['kind']; readonly sentence: string; readonly url?: string; readonly published?: GravityChoice }
+// The last sentence of a generated README's Star paragraph when the star has no mass: none published, or the one an earlier run named.
+const STAR_GRAVITY = /^(\*\*Star\.\*\* .*?) (?:No surface gravity of this star is published\.|log g -?[\d.]+ from \d{4}[^\n]*)$/mu;
+const SIMBAD_CITED = /^SIMBAD's compilation of spectroscopic measurements/u;
+
+/** A star's stored spec citing the published gravity its law is read at, in place of the decline or of the gravity an earlier run
+ * cited. A spec that cites a gravity of its own, or is a hosted body's, is left as it is (null). */
+function specWithGravity(stored: Record<string, unknown> | null, choice: GravityChoice) {
+  const earlier = (stored?.gravity as { source?: unknown } | undefined)?.source;
+  if (!stored || typeof stored.host === 'string' || !(stored.limb !== undefined || (typeof earlier === 'string' && SIMBAD_CITED.test(earlier)))) return null;
+  const spec = Object.fromEntries(Object.entries(stored).filter(([key]) => key !== 'limb' && key !== 'gravity').flatMap(([key, value]) => key === 'temperature' ? [[key, value], ['gravity', citedGravity(choice)]] : [[key, value]]));
+  parseStarSpec(spec);
+  return `${JSON.stringify(spec, null, 2)}\n`;
+}
 
 /** A transcribed law beside the star, when there is one. */
 async function publishedLaw(root: string, id: string): Promise<LimbChoice | null> {
@@ -137,11 +158,15 @@ export async function starLimb(root: string, ids: readonly string[], { archive =
     let gravity: StarGravity | null = gm > 0 ? { logg: Number(Math.log10(gm * 1e15 / (radiusKm * 1e5) ** 2).toFixed(2)), kind: 'measured',
       sentence: `log g from the mass and radius in packages/astronomy/data/bodies/${id}.json: ${Math.log10(gm * 1e15 / (radiusKm * 1e5) ** 2).toFixed(3)}` } : null;
     if (!gravity && !published && host.star) {
-      const choice = await chooseGravity({ archive, ra: host.star.rightAscensionDegrees, dec: host.star.declinationDegrees, teffK, where: id });
-      if (choice) gravity = { logg: choice.logg, kind: choice.kind, sentence: choice.sentence, url: choice.url };
+      // SIMBAD's positions are J2000; a record is at its catalogue's epoch (Gaia's 2016, Hipparcos's 1991.25), arcseconds away for a nearby star.
+      const star = host.star as Record<string, unknown>, number = (key: string) => requireFiniteNumber(star[key], `${id}: star.${key}`);
+      const at = simbadPosition({ ra: number('rightAscensionDegrees'), dec: number('declinationDegrees'), epoch: number('positionEpochJulianYear') },
+        { ra: star.properMotionRaMasPerYear === undefined ? 0 : number('properMotionRaMasPerYear'), dec: star.properMotionDecMasPerYear === undefined ? 0 : number('properMotionDecMasPerYear') });
+      const choice = await chooseGravity({ archive, ...at, teffK, where: id });
+      if (choice) gravity = { logg: choice.logg, kind: choice.kind, sentence: choice.sentence, url: choice.url, ...(choice.kind === 'published' ? { published: choice } : {}) };
     }
     // A white dwarf's stored spec cites its atmosphere class, which names the grid its law is read from (limb.mts).
-    const stored = await readFile(resolve(root, o, 'source/preparation/new-object.json'), 'utf8').then(text => JSON.parse(text) as Record<string, any>, () => null);
+    const stored = await readFile(resolve(root, o, STORED_SPEC), 'utf8').then(text => JSON.parse(text) as Record<string, any>, () => null);
     const whiteDwarf = parseWhiteDwarf((stored?.companions as { id?: string }[] | undefined)?.find(entry => entry.id === id) ?? stored, id);
     let limb: LimbChoice = published ?? (gravity ? await chooseLimb(id, teffK, gravity.logg, archive, undefined, massSolar, whiteDwarf?.atmosphere) : { sentence: 'No limb darkening is drawn: no gravity of this star is measured or published' });
     if (whiteDwarf && !published) limb = { ...limb, sentence: `${limb.sentence}; its atmosphere is ${whiteDwarf.atmosphere}: ${whiteDwarf.source} (${whiteDwarf.url})` };
@@ -167,6 +192,10 @@ export async function starLimb(root: string, ids: readonly string[], { archive =
     // The gravity a grid law was read at; a published law is read at none.
     const readAt = gravity && limb.grid ? ` Gravity: ${gravity.sentence}.` : '';
     files.set(`${o}/NOTICE.md`, `${String(files.get(`${o}/NOTICE.md`) ?? '').replace(/\n\nLimb darkening: [^\n]*/gu, '').trimEnd()}\n\n${limb.credit}\n`);
+    // The published gravity a grid law was read at is the star's: its README and stored spec say so (header).
+    const cited = limb.grid ? gravity?.published : undefined, respec = cited ? specWithGravity(stored, cited) : null;
+    if (respec) files.set(`${o}/${STORED_SPEC}`, respec);
+    if (cited) files.set(`${o}/README.md`, String(files.get(`${o}/README.md`) ?? '').replace(STAR_GRAVITY, (_all, before: string) => `${before} log g ${cited.logg} from ${cited.source}.`));
     files.set(`${o}/README.md`, readmeWithLimb(String(files.get(`${o}/README.md`) ?? ''), `**Limb.** The disc is ${limb.sentence}.${readAt}`,
       measured ? '- **Measured limb, other band.** The law was measured or fixed outside the visible band the color is drawn in; the visible limb is not measured.' : `- **Model limb.** The limb darkening is a model atmosphere at the star's temperature and ${gravity?.kind === 'bounded' ? 'a display gravity' : 'gravity'}, not a measurement of this star.`));
     // The gravity on record is the one a grid law was read at. A published law is read at none, so the star's cited gravity stays.

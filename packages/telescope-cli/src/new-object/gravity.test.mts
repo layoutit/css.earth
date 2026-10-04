@@ -39,6 +39,10 @@ test('a published value is used as a fact, with the spread of laws across every 
   const choice = await chooseGravity({ archive: archive(simbad), ra: 0, dec: 0, teffK: 5500, range, where: 'test' });
   assert.equal(choice?.kind, 'published'); assert.equal(choice?.logg, 1);
   assert.deepEqual(choice?.span, [1, 2]); assert.ok(Math.abs(choice!.spread - 0.05) < 1e-9);
+  // A survey's value names its pipeline; the paper that compares pipelines is named as what it is.
+  const survey = async (bibcode: string) => (await chooseGravity({ archive: archive(`main_id\tlog_g\tbibcode\ttitle\n"V* X"\t1.0\t"${bibcode}"\t"T"\n`), ra: 0, dec: 0, teffK: 5500, where: 'test' }))?.source;
+  assert.equal(await survey('2013AJ....146..134K'), '2013AJ....146..134K ("T"), the RAVE DR4 pipeline');
+  assert.equal(await survey('2022A&A...663A...4S'), '2022A&A...663A...4S ("T"), a comparison of survey pipelines (Soubiran et al. 2022)');
   const twoStars = 'main_id\tlog_g\tbibcode\ttitle\n"A"\t1\t"b"\t"t"\n"B"\t1\t"b"\t"t"\n';
   await assert.rejects(chooseGravity({ archive: archive(twoStars), ra: 0, dec: 0, teffK: 5500, range, where: 'test' }), /test: SIMBAD holds gravities for A and B within 1 arcsecond/u);
 });
