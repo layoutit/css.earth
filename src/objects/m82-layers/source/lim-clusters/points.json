@@ -1,0 +1,60 @@
+{
+  "schema": "cssearth-catalogue-points-source@1",
+  "id": "lim-clusters",
+  "table": {
+    "path": "table2.dat",
+    "origin": "https://cdsarc.cds.unistra.fr/ftp/J/ApJ/766/20/table2.dat",
+    "bytes": 139230,
+    "format": "fixed-width",
+    "columns": {
+      "name": [
+        1,
+        5
+      ],
+      "raH": [
+        7,
+        8
+      ],
+      "raM": [
+        10,
+        11
+      ],
+      "raS": [
+        13,
+        17
+      ],
+      "decSign": [
+        19,
+        19
+      ],
+      "decD": [
+        20,
+        21
+      ],
+      "decM": [
+        23,
+        24
+      ],
+      "decS": [
+        26,
+        29
+      ]
+    }
+  },
+  "filters": [],
+  "frame": {
+    "input": "icrs",
+    "output": "sun-icrf",
+    "epochJdTt": 2461286.5,
+    "placement": "image-layer-disc",
+    "converter": "Each sky position onto the plane the picture stands on, facing the Sun (recipe.json), through the image-layer bake's own intersection."
+  },
+  "source": "lim-2013-m82-star-clusters",
+  "meaning": "Star clusters of M82 that Lim et al. (2013) found in Hubble images: one dot per cluster at its catalogue position.",
+  "appearance": {
+    "colorCss": "#9fd4ff",
+    "radiusPx": 0.75,
+    "opacity": 1,
+    "note": "Presentation only: the Milky Way open-cluster layer's blue-white, size and opacity. Each dot takes its tone and half its color from the photograph under it (packages/bake/cli/prepare-catalogue-points.mts)."
+  }
+}

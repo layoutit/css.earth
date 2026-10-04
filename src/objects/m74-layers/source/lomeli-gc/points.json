@@ -1,0 +1,65 @@
+{
+  "schema": "cssearth-catalogue-points-source@1",
+  "id": "lomeli-gc",
+  "table": {
+    "path": "table6.dat",
+    "origin": "https://cdsarc.cds.unistra.fr/ftp/J/MNRAS/509/180/table6.dat",
+    "bytes": 286085,
+    "format": "fixed-width",
+    "columns": {
+      "name": [
+        9,
+        21
+      ],
+      "raDeg": [
+        23,
+        32
+      ],
+      "decDeg": [
+        34,
+        42
+      ]
+    }
+  },
+  "filters": [
+    {
+      "column": [
+        1,
+        7
+      ],
+      "op": "==",
+      "value": "NGC628",
+      "basis": "The table holds five galaxies; these are the rows of NGC628."
+    },
+    {
+      "column": [
+        143,
+        144
+      ],
+      "op": "==",
+      "value": "02",
+      "basis": "Flag 02: determined as a bona fide globular cluster from its U-band photometry (ReadMe note 7). Flag 0 has no U-band photometry, flag 1 is a reddened young cluster and flag 3 has an unreliable U-B."
+    }
+  ],
+  "frame": {
+    "input": "icrs",
+    "output": "sun-icrf",
+    "epochJdTt": 2461286.5,
+    "placement": "image-layer-disc",
+    "converter": "Each sky position onto the midplane of the inclined disc the image layers are baked on (recipe.json), through the image-layer bake's own intersection.",
+    "discThickness": {
+      "profile": "exponential",
+      "scaleHeightPc": 438,
+      "source": "kregel-2002-disc-flattening",
+      "basis": "The stellar disc's exponential scale height as its scale length over 7.3, the mean flattening Kregel et al. (2002) measured for edge-on discs, with S4G's disc scale length (Salo et al. 2015), 69.34″ = 3.20 kpc: 438 pc. For young objects it is an upper value. Each row's own height is drawn, not measured."
+    }
+  },
+  "source": "lomeli-nunez-2022-spiral-globular-clusters",
+  "meaning": "Globular clusters of M74 from Lomelí-Núñez et al.'s (2022) Hubble candidates, those the paper's U-band photometry marks as bona fide: one dot per cluster at its catalogue position.",
+  "appearance": {
+    "colorCss": "#ffb38a",
+    "radiusPx": 1,
+    "opacity": 1,
+    "note": "Presentation only: the Milky Way globular clusters' warm orange. Each dot takes its tone and half its color from the photograph under it (packages/bake/cli/prepare-catalogue-points.mts)."
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "schema": "cssearth-volume-source-manifest@2",
+  "pathBase": "repository",
+  "inputs": [
+    {
+      "id": "clusters",
+      "path": "src/objects/m31-globular-clusters/source/dots/table1.dat",
+      "origin": "https://cdsarc.cds.unistra.fr/ftp/J/ApJ/824/42/table1.dat",
+      "sourceUrl": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/824/42",
+      "title": "Star clusters in M31. VII. Global kinematics and metallicity subpopulations of the globular clusters, table1.dat",
+      "credit": "N. Caldwell, A. J. Romanowsky; ApJ 824, 42; CDS J/ApJ/824/42",
+      "acquisition": "Published table downloaded unchanged from its CDS origin; read by packages/bake/cli/prepare-catalogue-points.mts through dots/points.json.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "caldwell-2016-m31-globular-clusters",
+            "role": "material",
+            "evidence": "https://cdsarc.cds.unistra.fr/ftp/J/ApJ/824/42/table1.dat"
+          },
+          {
+            "catalogueId": "mackey-2019-m31-outer-halo-clusters",
+            "role": "method",
+            "evidence": "src/objects/m31-globular-clusters/source/dots/points.json#/frame/spheroid"
+          },
+          {
+            "catalogueId": "huxor-2011-m31-halo-globular-clusters",
+            "role": "method",
+            "evidence": "src/objects/m31-globular-clusters/source/dots/points.json#/frame/spheroid"
+          }
+        ]
+      },
+      "dependencies": [],
+      "license": "Original catalogue terms apply; cite the authors and CDS/VizieR."
+    }
+  ],
+  "documents": [
+    {
+      "path": "src/objects/m31-globular-clusters/source/dots/points.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
+      }
+    },
+    {
+      "path": "src/objects/m31-globular-clusters/source/presentation.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
+      }
+    }
+  ],
+  "generatedIntermediates": []
+}

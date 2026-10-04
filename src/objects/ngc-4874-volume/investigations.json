@@ -55,8 +55,11 @@
       "id": "globular-clusters",
       "subject": "Globular cluster dots",
       "status": "deferred",
-      "finding": "Not drawn. Dots on a volume bank are listed in a table in the site's code, which this change does not touch.",
-      "revisitWhen": "The site table can take a new bank."
+      "finding": "No table of the galaxy's own globular clusters with positions was found at CDS (SIMBAD and VizieR, 2026-10-04); Chiboucas et al. (2011), CDS J/ApJ/737/86, list ultra-compact dwarfs of the Coma Cluster core, which are not drawn.",
+      "revisitWhen": "A table of the galaxy's globular clusters with positions is published.",
+      "evidence": [
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/737/86"
+      ]
     }
   ]
 }

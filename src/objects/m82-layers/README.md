@@ -21,6 +21,14 @@ A survey image of M82 (NGC 3034), cleaned of the Milky Way stars in front of it 
 - **Rim:** the picture fades out on a round rim at 8.85 kpc, 0.98 of its half-width, so no straight edge shows.
 - **Sky:** the image's sky, (8, 8, 6) of 255 (each channel's median over the frame's outer ring), is subtracted as the background floor (8 of 255).
 
+## Dots
+
+| Catalogue | Drawn | Note |
+| --- | --- | --- |
+| [Star clusters (Lim et al. 2013)](https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/766/20), [recipe](source/lim-clusters/points.json) | 1,105 | clusters of every age in Hubble images; the paper counts 1,070 in the disc and 35 in the halo, which it takes for old globular clusters |
+
+The catalogue tables are files of the CDS archive (each descriptor's `table.origin`); they are not tracked. Each dot is a catalogued object at its published sky position, placed on the plane the picture stands on; its depth is not measured, and it is not drawn. Each dot takes its tone from the image's brightness under it and moves halfway from its kind's color to the image's color there.
+
 ## Known problems
 
 - The picture is flat: seen from the side it is a line.

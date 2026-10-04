@@ -53,6 +53,24 @@
           }
         ]
       }
+    },
+    {
+      "id": "lim-clusters-table",
+      "path": "src/objects/m82-layers/source/lim-clusters/table2.dat",
+      "origin": "https://cdsarc.cds.unistra.fr/ftp/J/ApJ/766/20/table2.dat",
+      "title": "The star cluster system in the nearby starburst galaxy M82, table2.dat",
+      "credit": "S. Lim, N. Hwang, M. G. Lee; ApJ 766, 20",
+      "acquisition": "Published table downloaded unchanged from its CDS origin; read by packages/bake/cli/prepare-catalogue-points.mts through lim-clusters/points.json.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "lim-2013-m82-star-clusters",
+            "role": "material",
+            "evidence": "https://cdsarc.cds.unistra.fr/ftp/J/ApJ/766/20/table2.dat"
+          }
+        ]
+      }
     }
   ],
   "documents": [

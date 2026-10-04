@@ -71,6 +71,24 @@
           }
         ]
       }
+    },
+    {
+      "id": "whitlock-gc-table",
+      "path": "src/objects/m105-layers/source/whitlock-gc/tablea1.dat",
+      "origin": "https://cdsarc.cds.unistra.fr/ftp/J/MNRAS/345/949/tablea1.dat",
+      "title": "UBRI photometry of globular clusters in the Leo group galaxy NGC 3379, tablea1.dat",
+      "credit": "S. Whitlock, D. A. Forbes, M. A. Beasley; MNRAS 345, 949",
+      "acquisition": "Published table downloaded unchanged from its CDS origin; read by packages/bake/cli/prepare-catalogue-points.mts through whitlock-gc/points.json.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "whitlock-2003-ngc3379-globular-clusters",
+            "role": "material",
+            "evidence": "https://cdsarc.cds.unistra.fr/ftp/J/MNRAS/345/949/tablea1.dat"
+          }
+        ]
+      }
     }
   ],
   "documents": [

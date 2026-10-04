@@ -35,9 +35,10 @@
       "id": "dots",
       "subject": "Catalogued objects as dots",
       "status": "included",
-      "finding": "56 dots from 1 published table: 56 planetary nebulae (Feldmeier et al. (1997), CDS J/ApJ/479/231, 203 rows in the file). Each dot is a catalogued object at its published sky position, placed where its sight line meets the disc. No height above the disc is drawn: no published scale length was found for this disc.",
+      "finding": "59 dots from 2 published tables: 56 planetary nebulae (Feldmeier et al. (1997), CDS J/ApJ/479/231, 203 rows in the file); 3 globular cluster candidates (González-Lópezlira et al. (2022), CDS J/ApJ/941/53, 15 rows in the file). Each dot is a catalogued object at its published sky position, placed where its sight line meets the disc. No height above the disc is drawn: no published scale length was found for this disc.",
       "evidence": [
-        "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/479/231"
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/479/231",
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/941/53"
       ]
     }
   ]

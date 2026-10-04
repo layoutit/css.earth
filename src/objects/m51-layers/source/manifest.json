@@ -107,6 +107,24 @@
           }
         ]
       }
+    },
+    {
+      "id": "lomeli-gc-table",
+      "path": "src/objects/m51-layers/source/lomeli-gc/table6.dat",
+      "origin": "https://cdsarc.cds.unistra.fr/ftp/J/MNRAS/509/180/table6.dat",
+      "title": "Luminosity functions of globular clusters in five nearby spiral galaxies using HST/ACS images, table6.dat",
+      "credit": "L. Lomelí-Núñez, Y. D. Mayya, L. H. Rodríguez-Merino, P. A. Ovando, D. Rosa-González; MNRAS 509, 180",
+      "acquisition": "Published table downloaded unchanged from its CDS origin; read by packages/bake/cli/prepare-catalogue-points.mts through lomeli-gc/points.json.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "lomeli-nunez-2022-spiral-globular-clusters",
+            "role": "material",
+            "evidence": "https://cdsarc.cds.unistra.fr/ftp/J/MNRAS/509/180/table6.dat"
+          }
+        ]
+      }
     }
   ],
   "documents": [
