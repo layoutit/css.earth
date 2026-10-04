@@ -30,6 +30,10 @@ test('records refuse unknown keys, impossible parameters and malformed ranges', 
   bad(r => { r.fit = { phaseDegrees: [54, 1.3] }; }, /increasing/);
   bad(r => { r.schema = 'other'; }, /Expected cssearth-photometric-model@1/);
   assert.throws(() => parsePhotometricModelRecord({ ...hapkeRecord, model: { family: 'separable', disk: { family: 'lunar-lambert', weight: 2 } } }), /weight/);
+  const lines = { family: 'lommel-seeliger-lambert', lunarFraction: 0.871, lunarFractionPerDegree: -0.003, surfacePhase: 1.556, surfacePhasePerDegree: -0.014 };
+  assert.deepEqual(parsePhotometricModelRecord({ ...hapkeRecord, model: { family: 'separable', disk: lines } }).model, { family: 'separable', disk: lines });
+  assert.throws(() => parsePhotometricModelRecord({ ...hapkeRecord, model: { family: 'separable', disk: { ...lines, weight: 0.5 } } }), /unknown keys: weight/);
+  assert.throws(() => parsePhotometricModelRecord({ ...hapkeRecord, model: { family: 'separable', disk: { ...lines, surfacePhasePerDegree: undefined } } }), /surface phase function per degree/);
 });
 
 test('a recipe block names its record, keeps the reference inside the fitted phase, and reports phase extrapolation', () => {
