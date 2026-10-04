@@ -1,0 +1,35 @@
+{
+  "id": "source-ngc-1637-cepheid-54700-exposure-header",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "NGC 1637 Cepheid 54700 · ngc 1637 cepheid 54700 exposure header",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:HST/product/u6fv0101m_c0m.fits",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/ngc-1637-cepheid-54700/source/manifest.json",
+      "locator": "/inputs/7"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Leonard et al. (2003), ApJ 594, 247, table 6 (ID 54700: chip 4, X 414.8, Y 216.8); its section 4.1 says the hstphot positions it reports are of the combined V-band frame, which no epoch leaves by more than about half a pixel, and that hstphot gives an integer to a star centred on a pixel's lower-left corner; read here on the first exposure of that series, u6fv0101m (table 3); u6fv0101m_c0m.fits (Mikulski Archive for Space Telescopes, STScI)",
+      "scope": "The ngc 1637 cepheid 54700 exposure header input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "Public NASA mission data (MAST)",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

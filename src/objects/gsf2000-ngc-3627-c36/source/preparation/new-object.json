@@ -1,0 +1,68 @@
+{
+  "id": "gsf2000-ngc-3627-c36",
+  "name": "[GSF2000] NGC 3627 C36",
+  "system": "[GSF2000] NGC 3627 C36 system",
+  "description": "A Cepheid in the galaxy M66 that pulsates every 53.1 days.",
+  "parent": "m66",
+  "featured": true,
+  "target": "[GSF2000] NGC 3627 C36",
+  "paper": {
+    "url": "https://doi.org/10.26093/cds/vizier.15290723",
+    "credit": "Gibson et al. (2000), ApJ 529, 723"
+  },
+  "radius": {
+    "value": 212.2,
+    "source": "Groenewegen (2020), A&A 635, A33, period relations for Galactic fundamental-mode Cepheids applied to this star's period, 53.08 d in Gibson et al. (2000), ApJ 529, 723, VizieR J/ApJ/529/723/appen Cluster = NGC 3627, CNN = C36 (Per); not a measurement of this star: eq. 2, log R = 0.721 log P + 1.083; the uncertainty is the relation's scatter, 0.067 dex",
+    "url": "https://arxiv.org/abs/2002.02186",
+    "uncertainty": 35.4
+  },
+  "mass": "unmeasured",
+  "temperature": {
+    "value": 4770,
+    "source": "Groenewegen (2020), A&A 635, A33, period relations for Galactic fundamental-mode Cepheids applied to this star's period, 53.08 d in Gibson et al. (2000), ApJ 529, 723, VizieR J/ApJ/529/723/appen Cluster = NGC 3627, CNN = C36 (Per); not a measurement of this star: the luminosity of eq. 1 (M_bol = -2.95 log P - 0.98, with the nominal solar M_bol 4.74) over the radius of eq. 2, through L = 4 pi R^2 sigma T^4 with the nominal solar 5772 K (IAU 2015 Resolutions B2 (Mamajek et al. 2015, arXiv:1510.06262) and B3 (Prsa et al. 2016, arXiv:1605.09788)); the uncertainty is the 317 K by which the two relations miss the paper's own Cepheid temperatures",
+    "url": "https://arxiv.org/abs/2002.02186",
+    "uncertainty": 317
+  },
+  "gravityRange": {
+    "min": -1.33,
+    "max": 2.86,
+    "source": "Luck (2018), AJ 156, 171, table 3 (the spectroscopic gravities of its Cepheid spectra)",
+    "url": "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=J/AJ/156/171/table3"
+  },
+  "radialVelocity": {
+    "value": 724,
+    "source": "SIMBAD's radial velocity of M66, the Cepheid's galaxy, from 2022ApJS..261...21Y; the star's own motion within the galaxy is not measured",
+    "url": "https://ui.adsabs.harvard.edu/abs/2022ApJS..261...21Y/abstract",
+    "uncertainty": 3
+  },
+  "distance": {
+    "value": 10310408,
+    "source": "Placed in M66 as the app draws it, where the star's sight line crosses the disc's midplane: 10,310,408 pc (src/objects/m66-layers/source/recipe.json: centre 10,313,356 pc, inclination 57.3 deg, line of nodes 173.1 deg). The galaxy's distance, which places the galaxy and not a star within it: Tully et al. (2023), Cosmicflows-4, ApJ 944, 94; CDS J/ApJ/944/94, table 2 (distances of individual galaxies), PGC 34695: distance modulus 30.067 ± 0.061 mag (https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/944/94)",
+    "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/944/94"
+  },
+  "position": {
+    "catalogue": "mast:HST/product/u35i0101r_c0m.fits",
+    "row": {
+      "extension": "SCI,4",
+      "x": "135.7",
+      "y": "125.4"
+    },
+    "credit": "Gibson et al. (2000), ApJ 529, 723, VizieR J/ApJ/529/723/appen Cluster = NGC 3627, CNN = C36 (Chip 4, Xpos 135.7, Ypos 125.4); the table names no exposure for this galaxy, so the pixel is read on the first exposure of its programme (GO 6549), u35i0101r, whose header places a pixel where those of four later epochs do",
+    "url": "https://doi.org/10.26093/cds/vizier.15290723",
+    "archive": "mast",
+    "firstPixel": 1
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A Cepheid in the galaxy M66, 10.3 million parsecs away, that swells and shrinks every 53.1 days.",
+    "introduction": "Gibson et al. (2000) list its pulsation at 53.1 days.",
+    "locator": "VizieR J/ApJ/529/723/appen Cluster = NGC 3627, CNN = C36: Per"
+  },
+  "notes": [
+    "The star pulsates; it is drawn at its mean radius",
+    "Its radius and temperature are what Groenewegen (2020), A&A 635, A33's relations for Galactic Cepheids give at its period; no measurement of this star's size or temperature exists",
+    "Its radial velocity is its galaxy's; its own motion within M66 is not measured"
+  ],
+  "order": 5770
+}

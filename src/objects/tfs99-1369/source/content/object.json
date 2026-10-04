@@ -1,0 +1,81 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "tfs99-1369",
+  "displayName": "[TFS99] 1369",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "141 solar radii",
+        "source": {
+          "catalogueId": "arxiv-2002-02186",
+          "url": "https://arxiv.org/abs/2002.02186",
+          "label": "Groenewegen (2020), A&A 635, A33 (2020)",
+          "checked": "2026-10-04",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "10,456,180 parsecs",
+        "source": {
+          "catalogueId": "page-cdsarc-cds-unistra-fr-viz-bin-cat-j-apj-944-94",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/944/94",
+          "label": "Placed in M96 as the app draws it, where the star's sight line crosses the disc's midplane: 10,456,180 pc (src/objects/m96-layers/source/recipe.json: centre 10,452,014 pc, inclination 51.07 deg, line of nodes 4.57 deg). The galaxy's distance, which places the galaxy and not a star within it: Tully et al. (2023), Cosmicflows-4, ApJ 944, 94; CDS J/ApJ/944/94, table 2 (distances of individual galaxies), PGC 32192: distance modulus 30.096 ± 0.044 mag (https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/944/94)",
+          "checked": "2026-10-04",
+          "path": "source/measurements.json",
+          "locator": "distanceParsecs; distanceSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "color",
+    "controls": [
+      {
+        "id": "color",
+        "label": "Color",
+        "qualification": "Color of a blackbody at the star's temperature; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
+        "thumbnail": "tfs99-1369-dataset-color.webp",
+        "surface": "tfs99-1369-surface-color@2x.webp",
+        "poles": "tfs99-1369-poles-color@2x.webp",
+        "source": {
+          "id": "tfs99-1369-stellar-color",
+          "path": "../manifest.json",
+          "url": "https://arxiv.org/abs/2002.02186"
+        },
+        "falseColor": false,
+        "notes": "The color of a blackbody at the star's published temperature. The darkening toward the edge is the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 4,950 K and log g 0.75 (u1 0.638, u2 0.125): a model, because no fit of this star's limb is used. The spin axis's direction on the sky is a display convention."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Tanvir et al. (1999), MNRAS 310, 175",
+      "href": "https://doi.org/10.1046/j.1365-8711.1999.02954.x"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://doi.org/10.1046/j.1365-8711.1999.02954.x",
+      "credit": "Tanvir et al. (1999), MNRAS 310, 175"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/tfs99-1369.json",
+      "credit": "Groenewegen radius; Tanvir et al. (1999), MNRAS 310, 175, table 3 (ID 1369: 10:46:42.12 +11:52:07.0); SIMBAD holds that position, from 1999MNRAS.310..175T position; cited distance; no measured rotation axis (display convention)"
+    }
+  }
+}
