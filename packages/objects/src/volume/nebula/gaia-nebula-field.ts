@@ -1,5 +1,7 @@
 /** Gaia/Bailer-Jones field wire data, with the historical consumer subsets made explicit. */
-import { isRecord } from '@cssearth/core';
+import { readNonblankText, isRecord } from '@cssearth/core';
+
+const invalidText = (): never => { throw new TypeError('Catalogue field requires nonempty text.'); };
 export const GAIA_NEBULA_FIELD_SCHEMA = 'cssearth-gaia-nebula-field@1';
 
 export interface GaiaNebulaFieldStar {
@@ -41,9 +43,7 @@ function positive(v: unknown): number {
   const n = number(v); if (!(n > 0)) throw new TypeError('Catalogue field requires positive values.'); return n;
 }
 function nullable(v: unknown): number | null { return v === null ? null : number(v); }
-function text(v: unknown): string {
-  if (typeof v !== 'string' || !v.trim()) throw new TypeError('Catalogue field requires nonempty text.'); return v;
-}
+
 function sky(raValue: unknown, decValue: unknown): [number, number] {
   const ra = number(raValue), dec = number(decValue);
   if (ra < 0 || ra >= 360 || Math.abs(dec) > 90) throw new TypeError('Catalogue field ICRS coordinates are invalid.');
@@ -70,7 +70,7 @@ export function parseGaiaNebulaField(input: unknown, options: { subset: GaiaNebu
     });
   }
   const value = record(input), selection = record(value.selection);
-  if (value.schema !== GAIA_NEBULA_FIELD_SCHEMA || !/^[a-z][a-z0-9-]*$/.test(text(value.id))) {
+  if (value.schema !== GAIA_NEBULA_FIELD_SCHEMA || !/^[a-z][a-z0-9-]*$/.test(readNonblankText(value.id, '', invalidText))) {
     throw new TypeError('Invalid Gaia catalogue field schema or identity.');
   }
   const center = selection.centerIcrsDegrees;
@@ -83,14 +83,14 @@ export function parseGaiaNebulaField(input: unknown, options: { subset: GaiaNebu
     throw new TypeError('Invalid catalogue field sphere, fade, match radius or budget.');
   }
   if (!Array.isArray(selection.retainIds)) throw new TypeError('Catalogue field needs explicit retained identities.');
-  const retainIds = selection.retainIds.map(text);
+  const retainIds = selection.retainIds.map(value => readNonblankText(value, '', invalidText));
   const retainedAppearance = selection.retainedAppearance ?? 'dataset';
   if (retainedAppearance !== 'dataset' && retainedAppearance !== 'anchor') throw new TypeError('Invalid retained star appearance policy.');
   if (new Set(retainIds).size !== retainIds.length || retainIds.length > maximumStars) throw new TypeError('Invalid retained catalogue identities or budget.');
   if (!Array.isArray(value.stars)) throw new TypeError('Catalogue field requires source rows.');
   const ids = new Set<string>();
   const stars = value.stars.map(inputStar => {
-    const s = record(inputStar), sourceId = text(s.sourceId), [raDeg, decDeg] = sky(s.raDeg, s.decDeg);
+    const s = record(inputStar), sourceId = readNonblankText(s.sourceId, '', invalidText), [raDeg, decDeg] = sky(s.raDeg, s.decDeg);
     if (!/^\d{10,20}$/.test(sourceId) || ids.has(sourceId)) throw new TypeError('Gaia source identities must be unique decimal strings.');
     ids.add(sourceId);
     const distancePc = positive(s.distancePc), distanceLowerPc = positive(s.distanceLowerPc), distanceUpperPc = positive(s.distanceUpperPc);
@@ -99,7 +99,7 @@ export function parseGaiaNebulaField(input: unknown, options: { subset: GaiaNebu
       pmRaMasYr: nullable(s.pmRaMasYr), pmDecMasYr: nullable(s.pmDecMasYr), photGMeanMag: number(s.photGMeanMag),
       bpRp: nullable(s.bpRp), parallaxMas: number(s.parallaxMas), parallaxErrorMas: positive(s.parallaxErrorMas), ruwe: positive(s.ruwe) };
   });
-  return { id: text(value.id), coordinateEpochJulianYear: number(value.coordinateEpochJulianYear), stars,
+  return { id: readNonblankText(value.id, '', invalidText), coordinateEpochJulianYear: number(value.coordinateEpochJulianYear), stars,
     selection: { centerIcrsDegrees, distancePc, outerRadiusPc, featherStartPc, maximumStars, retainedMatchArcsec, retainIds, retainedAppearance,
       limitingMagnitude: number(selection.limitingMagnitude), fadeMagnitude: positive(selection.fadeMagnitude),
       referenceMagnitude: number(selection.referenceMagnitude), referenceDiameterPx: positive(selection.referenceDiameterPx),

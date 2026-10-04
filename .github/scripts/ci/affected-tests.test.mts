@@ -1,8 +1,12 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { globSync, readdirSync, readFileSync } from 'node:fs';
-import { resolve } from 'node:path';
-import { affectedTests, testLaneFiles, testOwners } from './affected-tests.mts';
+import { globSync, readdirSync, readFileSync, mkdtempSync, rmSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { execFileSync } from 'node:child_process';
+import { pathToFileURL } from 'node:url';
+import { parse } from 'yaml';
+import { resolve, matchesGlob } from 'node:path';
+import { affectedTests, pinnedSourceOwners, TOOL_OBJECT_TEST_LIMIT, testLaneFiles, testOwners } from './affected-tests.mts';
 
 const packages = [
   { directory: 'core', name: '@cssearth/core', dependencies: [] },
@@ -87,9 +91,12 @@ test('real-tree discovery keeps offline tools bounded for objects and runs them 
   const objects = affectedTests(['packages/objects/src/index.ts'], workspaces, site, discovered);
   assert.notEqual(objects.packages, 'all');
   assert.ok(!objects.packages.includes('bake') && !objects.packages.includes('telescope-cli'));
-  assert.deepEqual(objects.files.filter(file => /^packages\/(bake|telescope-cli)\//u.test(file)),
-    ['packages/bake/src/presentation/depth-partition-contract.test.ts']);
-  assert.ok(objects.files.length <= 20, `unbounded foreign discovery: ${objects.files.length}`);
+  const toolTests = [...discovered].filter(([file, imports]) => /^packages\/(bake|telescope-cli)\//u.test(file) && imports.includes('objects'));
+  assert.ok(toolTests.length > TOOL_OBJECT_TEST_LIMIT);
+  const bounded = new Map(toolTests.slice(0, TOOL_OBJECT_TEST_LIMIT));
+  const boundedResult = affectedTests(['packages/objects/src/index.ts'], workspaces, site, bounded, new Map());
+  assert.deepEqual(boundedResult.files, [...bounded.keys()].sort(), 'real discovered imports run at the bounded count');
+  assert.deepEqual(objects.files.filter(file => /^packages\/(bake|telescope-cli)\//u.test(file)), []);
   const bake = affectedTests(['packages/bake/src/stars/point-field-bank.ts'], workspaces, site, discovered);
   assert.ok(bake.packages.includes('bake') && bake.packages.includes('telescope-cli'));
   assert.ok(bake.files.includes(mount));
@@ -109,4 +116,78 @@ test('editing a renderer fixture that a bake test pins selects that bake test, s
     assert.ok(files.some(file => file.startsWith('packages/bake/')), `${fixture} selects no bake test`);
   }
   assert.ok(!affectedTests(['packages/renderer/src/index.ts'], packages, site).files.some(file => file.startsWith('packages/bake/')));
+});
+
+
+test('derived object imports select tools below the limit and keep the gate above it', () => {
+  for (const count of [TOOL_OBJECT_TEST_LIMIT, TOOL_OBJECT_TEST_LIMIT + 1]) {
+    const imports = new Map(Array.from({ length: count }, (_, index) => [`packages/bake/src/case-${index}.test.ts`, ['objects']]));
+    const result = affectedTests(['packages/objects/src/parser.ts'], packages, site, imports, new Map());
+    assert.equal(result.files.length, count <= TOOL_OBJECT_TEST_LIMIT ? count : 0);
+  }
+});
+test('source pin ownership is derived from real test literals', () => {
+  const root = resolve(import.meta.dirname, '../../..');
+  const pins = pinnedSourceOwners(root, testOwners(root));
+  assert.ok(pins.get('.github/scripts/checks/check-body-references.mts')?.includes('bake'));
+  assert.ok(pins.get('src/objects/heliosphere/source/ibex/extract.py')?.includes('bake'));
+});
+
+/** gitignore-style sparse patterns have no brace expansion. Check every script variant. */
+function changesSparsePatterns(text: string): string[] {
+  const workflow = parse(text);
+  const step = workflow.jobs.changes.steps.find((step: { with?: Record<string, unknown> }) => step.with?.['sparse-checkout']);
+  assert.ok(step && typeof step.with['sparse-checkout'] === 'string');
+  return step.with['sparse-checkout'].trim().split('\n').map((line: string) => line.trim());
+}
+function expandBraces(pattern: string): string[] {
+  const match = /\{([^{}]+)\}/u.exec(pattern);
+  return match ? match[1]!.split(',').flatMap(part => expandBraces(pattern.slice(0, match.index) + part + pattern.slice(match.index + match[0].length))) : [pattern];
+}
+function sparseCoverage(patterns: readonly string[]): string[] {
+  const manifest = JSON.parse(readFileSync(new URL('../../../package.json', import.meta.url), 'utf8'));
+  const missing: string[] = [];
+  for (const name of ['test:packages', 'test:site']) {
+    const script: string = manifest.scripts[name];
+    for (const match of script.matchAll(/"([^"\n]+)"/gu)) for (const glob of expandBraces(match[1]!)) {
+      // Witness for each expanded glob, including the excluded rendered-page name.
+      const witness = glob.replaceAll('**/', 'nested/').replaceAll('!(rendered-page)', 'contract').replaceAll('*', 'sample');
+      if (!patterns.some(pattern => matchesGlob(witness, pattern.replace(/^\//u, '')))) missing.push(glob);
+    }
+  }
+  return missing;
+}
+test('changes sparse patterns cover every quoted root test glob; deleting a pattern is red', () => {
+  const patterns = changesSparsePatterns(readFileSync(new URL('../../workflows/universe.yml', import.meta.url), 'utf8'));
+  assert.deepEqual(sparseCoverage(patterns), []);
+  assert.ok(sparseCoverage(patterns.filter(pattern => pattern !== '/packages/**/*.test.mts')).includes('packages/**/*.test.mts'));
+  assert.deepEqual(sparseCoverage(patterns), []);
+});
+test('real sparse clone preserves objects-only foreign test selection', { timeout: 20000 }, t => {
+  const root = resolve(import.meta.dirname, '../../..'), temp = mkdtempSync(resolve(tmpdir(), 'affected-sparse-'));
+  const sparse = resolve(temp, 'clone');
+  try {
+    try {
+      execFileSync('git', ['clone', '--quiet', '--no-checkout', '--depth', '1', pathToFileURL(root).href, sparse], { timeout: 15000, stdio: 'pipe' });
+    } catch (error) {
+      t.skip(`file:// shallow clone unavailable within 15 seconds: ${String(error)}`);
+      return;
+    }
+    const patterns = changesSparsePatterns(readFileSync(resolve(root, '.github/workflows/universe.yml'), 'utf8'));
+    execFileSync('git', ['sparse-checkout', 'set', '--no-cone', '--stdin'], { cwd: sparse, input: patterns.join('\n') + '\n', stdio: 'pipe' });
+    execFileSync('git', ['read-tree', '-mu', 'HEAD'], { cwd: sparse, stdio: 'pipe' });
+    const workspaces = readdirSync(resolve(root, 'packages'), { withFileTypes: true }).filter(entry => entry.isDirectory()).map(entry => {
+      const manifest = JSON.parse(readFileSync(resolve(root, 'packages', entry.name, 'package.json'), 'utf8'));
+      return { directory: entry.name, name: String(manifest.name), dependencies: ['dependencies', 'devDependencies', 'peerDependencies']
+        .flatMap(field => Object.keys(manifest[field] ?? {})).filter(name => name.startsWith('@cssearth/')) };
+    });
+    const changed = ['packages/objects/src/index.ts'];
+    const fullOwners = testOwners(root), sparseOwners = testOwners(sparse);
+    assert.deepEqual([...sparseOwners], [...fullOwners], 'sparse discovery retains every package test owner');
+    const full = affectedTests(changed, workspaces, site, fullOwners, pinnedSourceOwners(root, fullOwners));
+    const actual = affectedTests(changed, workspaces, site, sparseOwners, pinnedSourceOwners(sparse, sparseOwners));
+    assert.ok(full.files.length > 0);
+    assert.deepEqual(actual.files, full.files);
+    t.diagnostic(`Sparse probe: ${sparseOwners.size} owners; ${actual.files.length} extra files equal full tree: ${actual.files.join(', ')}`);
+  } finally { rmSync(temp, { recursive: true, force: true }); }
 });

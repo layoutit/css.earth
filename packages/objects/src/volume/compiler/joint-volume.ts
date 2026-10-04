@@ -1,6 +1,8 @@
-export const JOINT_FIT_VOLUME_SCHEMA = 'cssearth-joint-fit-volume@1';
+import { isFiniteTriple as triple } from '@cssearth/core';
 import type { DensityVolumeFrame } from '../../density-volume.js';
 import type { Bounds3, Vector3 } from '../emission/coordinates.js';
+
+export const JOINT_FIT_VOLUME_SCHEMA = 'cssearth-joint-fit-volume@1';
 
 export interface JointVolumePin { path: string }
 export interface JointVolumeResult {
@@ -40,9 +42,6 @@ export function readJointVolumeResult(value: unknown): JointVolumeResult {
 
 function record(value: unknown): Record<string, unknown> {
   return value && typeof value === 'object' && !Array.isArray(value) ? value as Record<string, unknown> : {};
-}
-function triple(value: unknown): value is [number, number, number] {
-  return Array.isArray(value) && value.length === 3 && value.every(Number.isFinite);
 }
 function readBounds(value: unknown): { min: [number, number, number]; max: [number, number, number] } | null {
   const item = record(value), min = item.min, max = item.max;

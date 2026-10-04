@@ -2,7 +2,7 @@ import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
 import { isDeepStrictEqual } from 'node:util';
 import {
-  checks, failure, hasErrorCode, isFiniteNumber, isPlainRecord, isRecord, requireArray, requireBoolean, requireFiniteNumber,
+  checks, failure, hasErrorCode, isFiniteNumber, isRecord, requireArray, requireFiniteNumber,
   requireNonemptyText, requirePositive, requireRecord, requireString,
 } from './index.js';
 
@@ -13,12 +13,9 @@ const thrown = (run: () => unknown): { name: string; message: string } => {
 };
 
 describe('predicates', () => {
-  it('isRecord accepts any non-array object and isPlainRecord only plain ones', () => {
+  it('isRecord accepts any non-array object', () => {
     for (const value of [{}, { a: 1 }, new Box(), Object.create(null)]) assert.equal(isRecord(value), true);
     for (const value of [null, undefined, [], 0, '', 'x', true]) assert.equal(isRecord(value), false);
-    assert.equal(isPlainRecord({ a: 1 }), true);
-    assert.equal(isPlainRecord(JSON.parse('{"a":1}')), true);
-    for (const value of [new Box(), Object.create(null), [], null, new Date(0)]) assert.equal(isPlainRecord(value), false);
   });
   it('isFiniteNumber rejects NaN, infinities and numeric strings', () => {
     assert.equal(isFiniteNumber(0), true);
@@ -43,7 +40,6 @@ describe('getters (the bake objects/sources source-values dialect)', () => {
     assert.equal(requireString(''), '');
     assert.equal(requireFiniteNumber(-0), -0);
     assert.equal(requirePositive(2), 2);
-    assert.equal(requireBoolean(false), false);
     assert.equal(requireNonemptyText('x'), 'x');
   });
   it('throw TypeError with the historical messages', () => {
@@ -55,7 +51,6 @@ describe('getters (the bake objects/sources source-values dialect)', () => {
     assert.equal(thrown(() => requireFiniteNumber('1')).message, 'Source value must be finite.');
     assert.equal(thrown(() => requirePositive(0, 'Radius')).message, 'Radius must be positive.');
     assert.equal(thrown(() => requirePositive(Infinity, 'Radius')).message, 'Radius must be finite.');
-    assert.equal(thrown(() => requireBoolean('true', 'Flag')).message, 'Flag must be boolean.');
     assert.equal(thrown(() => requireNonemptyText('', 'Name')).message, 'Name must be nonempty text.');
     assert.equal(requireNonemptyText(' ', 'Name'), ' ');
   });

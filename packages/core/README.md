@@ -8,8 +8,8 @@ behind the separate `@cssearth/core/node` entry.
 
 | entry | what it holds | failure |
 |---|---|---|
-| `@cssearth/core` | `isRecord`, `isPlainRecord`, `isFiniteNumber`, `hasErrorCode` | predicates, no throw |
-| | `requireRecord`, `requireArray`, `requireString`, `requireFiniteNumber`, `requirePositive`, `requireBoolean`, `requireNonemptyText` | `<label> must be …` (label defaults to `Source value`) |
+| `@cssearth/core` | `isRecord`, `isFiniteNumber`, `hasErrorCode` | predicates, no throw |
+| | `requireRecord`, `requireArray`, `requireString`, `requireFiniteNumber`, `requirePositive`, `requireNonemptyText` | `<label> must be …` (label defaults to `Source value`) |
 | | `checks(failure(prefix))`: `record`, `array`, `text`, `finite`, `positive`, `integer`, `boolean`, `choice`, `unique`, `numbers` | `<prefix><label> must be ….` |
 | | decoders: `shape`, `optional`, `nullable`, `array`, `dictionary`, `boolean`, `choice`, `text`, `number` | `<context> <key>: <reason>` |
 | | `normalizeOrZero`, `normalize3OrZero`, `normalize3OrZeroNonPositive`, `normalize3Unchecked` | zero/NaN policies named explicitly |
@@ -27,9 +27,8 @@ failing element by its index. `shape` keeps fields it does not decode; its defau
 `Terrestrial source`, the wording the source records have always reported.
 
 Explicit readers accept a caller-owned `Fail`: `readNonArrayRecord`, `readFiniteNumber`, `readTextAllowEmpty`,
-`readNonemptyText`, `readNonblankText`, `readPositiveNumber`, `readPositiveInteger` and `readSafeIntegerAtLeast`.
-Nonempty text accepts whitespace; nonblank text checks trimming but returns the original string. Positive integers
-accept represented integers above the safe range; safe integers do not. These readers are not array-map callbacks.
+`readNonemptyText`, `readNonblankText`, `readPositiveNumber` and `readSafeIntegerAtLeast`.
+Nonempty text accepts whitespace; nonblank text checks trimming but returns the original string. Safe integers reject values above the safe range. These readers are not array-map callbacks.
 
 ```text
 packages/core/

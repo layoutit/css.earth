@@ -1,23 +1,25 @@
-/** Reproducible offline handoff from the two lab methods to the shared application volume capability. */
+import { readNonemptyText } from '@cssearth/core';
 import { OBJECT_SCHEMA, PREPARED_OBJECT_SCHEMA, DENSITY_VOLUME_FORMAT, PREPARED_VOLUME_DATASETS_SCHEMA, parseVolumeRecipe, type CompilerBakeResult, type DensityVolumeFrame, validatePreparedCssVolume, validatePreparedVolumeDatasets, type PreparedVolumeDataset, parsePreparedNebulaCatalog, readNebulaDelivery, type NebulaSkyFrame } from '@cssearth/objects';
 import { nebulaBakeBackend } from './backend.ts';
 import { verifyReplayReferences } from './references.ts';
-
 import { replayCompactCompiler, replayCompactSymmetry, replayCompactSampled, prepareVolumeSlices } from '../volume/node/index.ts';
 import { compileCssVolume, prepareVolumeImpostors } from '../volume-leaves/index.ts';
 import { readFile, writeFile, mkdir, readdir, rename, rm } from 'node:fs/promises';
 import { resolve, dirname, relative, isAbsolute, sep } from 'node:path';
 import { isDeepStrictEqual } from 'node:util';
 import { prepareNebulaCatalogueField } from './catalogue-field.ts';
-
 import { prepareVolumeAtlases } from '../density/index.ts';
-
 import { embedNebulaFrame, embedNebulaVolume, reflectNebulaPoint } from './nebula-frame.ts';
 import { sanitizeVolumeProvenance } from './volume-provenance.ts';
 import { assertCompilerDeliveryElementBudget } from './element-budget.ts';
+
+const invalidText = (): never => { throw new TypeError('Expected nebula delivery text.'); };
+/** Reproducible offline handoff from the two lab methods to the shared application volume capability. */
+
+
+
 const json = (v: unknown) => JSON.stringify(v, null, 2) + '\n';
 const record = (v: unknown): Record<string, unknown> => { if (!v || typeof v !== 'object' || Array.isArray(v)) throw new TypeError('Expected nebula delivery object.'); return v as Record<string, unknown>; };
-const text = (v: unknown) => { if (typeof v !== 'string' || !v) throw new TypeError('Expected nebula delivery text.'); return v; };
 export interface NebulaResearchBackend {
   compiler(root: string, recipe: ReturnType<typeof readNebulaDelivery>, progress: (message: string, fraction?: number) => void): Promise<{
     id: string; scene: CompilerBakeResult; sources: {id: string; label: string; credit: string; page: string}[];
@@ -33,7 +35,7 @@ async function read(root: string, path: string) { return JSON.parse(await readFi
 async function put(path: string, value: string | Uint8Array) { await mkdir(dirname(path),{ recursive:true }); await writeFile(path,value); }
 interface CompilerPin { path: string }
 function pin(v: unknown): CompilerPin {
-  const p = record(v), path = text(p.path);
+  const p = record(v), path = readNonemptyText(p.path, '', invalidText);
   return { path };
 }
 async function pinned(root: string, p: CompilerPin) { const bytes = await readFile(local(root,p.path)); return bytes; }
@@ -198,7 +200,7 @@ export async function prepareNebulaObject(root: string, directory: string, ifMis
       if (error instanceof SyntaxError || error instanceof Error && 'code' in error && error.code === 'ENOENT') return {} as Record<string, unknown>; throw error; });
     const host = authored.host, cataloguePoints = authored.cataloguePoints;
     await put(resolve(directory,'object.json'),json({schema:OBJECT_SCHEMA,id:recipe.id,type:'volume-dataset-bank',properties:{frame:datasets[0]!.volume.frame,
-      preparation:{source:'source/delivery.json'},...(host === undefined ? {} : {host:text(host)}),...(cataloguePoints === undefined ? {} : {cataloguePoints})},prepared:{format:PREPARED_VOLUME_DATASETS_SCHEMA,url:'prepared/datasets.json'}}));
+      preparation:{source:'source/delivery.json'},...(host === undefined ? {} : {host:readNonemptyText(host, '', invalidText)}),...(cataloguePoints === undefined ? {} : {cataloguePoints})},prepared:{format:PREPARED_VOLUME_DATASETS_SCHEMA,url:'prepared/datasets.json'}}));
     return { id:recipe.id,status:'prepared',sourceResult,datasets:datasets.map(l=>({id:l.id,stars:l.stars.points.length,leaves:l.volume.resources.length})) };
   } finally { await rm(staging,{recursive:true,force:true}); }
 }

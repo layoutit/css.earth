@@ -1,22 +1,20 @@
 /** Restore a delivered finite-emission dataset bank from its checked-in compact inputs; no lab, no research services. */
+import { readNonemptyText, isRecord } from '@cssearth/core';
 import { OBJECT_SCHEMA, PREPARED_OBJECT_SCHEMA, PREPARED_VOLUME_DATASETS_SCHEMA, parsePreparedLmcStars, cloudDensityWeight, validateCloudDensityFilter, type CloudDensityFilter, validatePreparedVolumeDatasets } from '@cssearth/objects';
-import { isRecord, isNonemptyText } from '@cssearth/core';
 import assert from 'node:assert/strict';
 import { mkdir, readFile, rename, rm, readdir } from 'node:fs/promises';
 import { gunzipSync } from 'node:zlib';
 import { resolve } from 'node:path';
 import { restoreCompactFiniteEmission, localPath, pinned, type CompilerPin, writeAtomic } from '../volume/node/index.ts';
-
 import { compileCssVolume, prepareVolumeImpostors } from '../volume-leaves/index.ts';
 import { prepareVolumeAtlases } from '../density/index.ts';
 
 const record = (value: unknown, at: string): Record<string, unknown> => { assert.ok(isRecord(value), `Expected an object: ${at}`); return value; };
-const text = (value: unknown, at: string): string => { assert.ok(isNonemptyText(value), `Expected text: ${at}`); return value; };
 const json = (bytes: Uint8Array, gzipped: boolean): unknown => JSON.parse((gzipped ? gunzipSync(bytes) : Buffer.from(bytes)).toString('utf8'));
 const stringify = (value: unknown) => Buffer.from(JSON.stringify(value, null, 2) + '\n');
 function parsePin(value: unknown, at: string): CompilerPin {
   const pin = record(value, at);
-  return { path: text(pin.path, `${at} path`) };
+  return { path: readNonemptyText(pin.path, `${at} path`, () => assert.fail(`Expected text: ${at} path`)) };
 }
 const read = async (root: string, pin: CompilerPin) => json(await pinned(root, pin), pin.path.endsWith('.gz'));
 
@@ -49,7 +47,7 @@ function parseDensityFilter(value: unknown, at: string): CloudDensityFilter {
  */
 export async function prepareFiniteEmissionObject(root: string, directory: string, compactInputs: CompilerPin, ifMissing: boolean, allowMissing = false) {
   const inputs = record(await read(root, compactInputs), 'compact inputs');
-  const bankId = text(inputs.bankId, 'bank id'), defaultDataset = text(inputs.defaultDataset, 'default dataset');
+  const bankId = readNonemptyText(inputs.bankId, 'bank id', () => assert.fail(`Expected text: bank id`)), defaultDataset = readNonemptyText(inputs.defaultDataset, 'default dataset', () => assert.fail(`Expected text: default dataset`));
   const framingRadiusUnits = inputs.framingRadiusUnits;
   assert.ok(typeof framingRadiusUnits === 'number' && framingRadiusUnits > 0, 'A delivered bank needs a framing radius.');
   const frame = record(inputs.frame, 'delivered frame');
@@ -80,7 +78,7 @@ export async function prepareFiniteEmissionObject(root: string, directory: strin
       const starOptions = record(spec.stars, `${dataset.imageId} star presentation`);
       const size = starOptions.size, brightness = starOptions.brightness;
       assert.ok(typeof size === 'number' && typeof brightness === 'number', 'Delivered star presentation must be numeric.');
-      const enabledIds = Array.isArray(spec.enabledIds) ? spec.enabledIds.map(value => text(value, 'enabled part')) : [];
+      const enabledIds = Array.isArray(spec.enabledIds) ? spec.enabledIds.map(value => readNonemptyText(value, 'enabled part', () => assert.fail(`Expected text: enabled part`))) : [];
       assert.ok(enabledIds.length > 0, `${dataset.imageId} names no enabled cloud part.`);
 
       // The accepted bank embeds this dataset's own provenance, so the replay attaches the same pinned record.
@@ -122,8 +120,8 @@ export async function prepareFiniteEmissionObject(root: string, directory: strin
       const baked = await prepareVolumeAtlases({ volume: projected, prefix: `${dataset.imageId}/atlases`,
         readResource: path => readFile(localPath(staging, path)),
         writeResource: async (path: string, bytes: Uint8Array) => writeAtomic(localPath(staging, `atlases-out/${path}`), Buffer.from(bytes)) });
-      datasets.push({ id: dataset.imageId, label: text(presentation.label, 'dataset label'), title: text(presentation.label, 'dataset title'),
-        description: text(presentation.description, 'dataset description'), sourceUrl: presentation.sourceUrl,
+      datasets.push({ id: dataset.imageId, label: readNonemptyText(presentation.label, 'dataset label', () => assert.fail(`Expected text: dataset label`)), title: readNonemptyText(presentation.label, 'dataset title', () => assert.fail(`Expected text: dataset title`)),
+        description: readNonemptyText(presentation.description, 'dataset description', () => assert.fail(`Expected text: dataset description`)), sourceUrl: presentation.sourceUrl,
         volume: baked, brightness: datasetBrightness, stars: { frame: starsPayload.frame, points } });
     }
     const first = delivered.find(entry => entry.imageId === defaultDataset);
