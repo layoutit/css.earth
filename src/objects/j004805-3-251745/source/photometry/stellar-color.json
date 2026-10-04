@@ -1,0 +1,16 @@
+{
+  "schema": "cssearth-stellar-photometric-color@1",
+  "objectId": "j004805-3-251745",
+  "spectrum": "planck",
+  "temperature": {
+    "published": {
+      "kelvin": 15000,
+      "lowerKelvin": 12000,
+      "upperKelvin": 18000,
+      "citation": "Comerón et al. (2003), A&A 400, 137, section 3.1: T_eff = 15,000 K, uncertain by about 3,000 K, from its B-V colour through the colour, temperature and bolometric correction relations of Castelli (1999): 15000 +/- 3000 K, https://doi.org/10.1051/0004-6361:20021909"
+    },
+    "note": "No archive holds a spectrum of this star (stis-ngsl: no HD number in SIMBAD; gaia-xp: the star is placed by a catalogue row, so no Gaia DR3 source is read for it; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number), so the color is a Planck spectrum at its published temperature."
+  },
+  "whitePoint": "sRGB D65",
+  "normalization": "brightest linear sRGB channel = 1"
+}

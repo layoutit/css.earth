@@ -1,0 +1,44 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "j004805-3-251745",
+  "entries": [
+    {
+      "id": "placement",
+      "subject": "Placement",
+      "status": "included",
+      "finding": "Comerón et al. (2003), A&A 402, 181, the erratum to Comerón et al. (2003), A&A 400, 137, which corrects the coordinates to 0h 48m 05.3s, -25° 17' 45\" (J2000) and the name to J004805.3-251745, DOI 10.1051/0004-6361:20030311 row Object = J004805.3-251745, RA = 00:48:05.3, Dec = -25:17:45: J2000 position; Gaia cannot see the star. Distance: At NGC 253's own distance, 7,351 pc from its centre on the sky: the star is in the galaxy's halo, its sight line does not cross the disc there, and its depth along that line is not measured (Comerón et al. (2003), A&A 400, 137 also take the galaxy's distance for it). The galaxy's distance: RadburnSmith2011ApJS..195...18R: The GHOSTS Survey. I. Hubble Space Telescope Advanced Camera for Surveys Data (https://ui.adsabs.harvard.edu/abs/2011ApJS..195...18R); catalogue reference RadburnSmith2011ApJS..195...18R: 3467368.50453 pc (-109992.362096/+113595.866501); trgb (https://ui.adsabs.harvard.edu/abs/2011ApJS..195...18R): 3467369 pc; Gaia DR3 cannot see the star. Proper motion: 10.1051/0004-6361:20030311 row Object = J004805.3-251745, RA = 00:48:05.3, Dec = -25:17:45 measures no proper motion; zero is assumed (at 3,467,369 pc, 1 mas/yr would be 16,437 km/s across the sky). Radial velocity from Comerón et al. (2003), A&A 400, 137, section 3: v = 279 +/- 15 km/s from its Balmer and Ca II K lines, against the galaxy's 251 km/s.",
+      "evidence": [
+        "https://doi.org/10.1051/0004-6361:20030311",
+        "https://ui.adsabs.harvard.edu/abs/2011ApJS..195...18R",
+        "https://doi.org/10.1051/0004-6361:20021909"
+      ]
+    },
+    {
+      "id": "radius-mass-and-temperature",
+      "subject": "Radius, mass and temperature",
+      "status": "included",
+      "finding": "Radius 24 +/- 15 solar radii from Comerón et al. (2003), A&A 400, 137, section 3.1: L = 2.6 x 10^4 L_sun (Delta log L = 0.4, at the paper's distance of NGC 253, 2.6 Mpc) and T_eff = 15,000 K (about +/- 3,000 K), through L = 4 pi R^2 sigma T^4 with the nominal solar 5772 K (IAU 2015 Resolution B3, Prsa et al. 2016, arXiv:1605.09788); the paper prints no radius, and no measurement of this star's size exists (https://doi.org/10.1051/0004-6361:20021909). Mass 12 solar masses from Comerón et al. (2003), A&A 400, 137, abstract and section 3.1: a mass of 12 M_sun, the initial mass that the evolutionary models of Meynet & Maeder (2000) give at its temperature and luminosity; not a dynamical measurement (https://doi.org/10.1051/0004-6361:20021909). Temperature 15000 +/- 3000 K from Comerón et al. (2003), A&A 400, 137, section 3.1: T_eff = 15,000 K, uncertain by about 3,000 K, from its B-V colour through the colour, temperature and bolometric correction relations of Castelli (1999).",
+      "evidence": [
+        "https://doi.org/10.1051/0004-6361:20021909"
+      ]
+    },
+    {
+      "id": "color",
+      "subject": "Color",
+      "status": "included",
+      "finding": "A Planck spectrum at 15,000 K, because no archive holds a spectrum of this star (stis-ngsl: no HD number in SIMBAD; gaia-xp: the star is placed by a catalogue row, so no Gaia DR3 source is read for it; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number), through the CIE 1931 2-degree observer: #b5c9ff. Routes tried in order: stis-ngsl: no HD number in SIMBAD; gaia-xp: the star is placed by a catalogue row, so no Gaia DR3 source is read for it; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; planck: used.",
+      "evidence": [
+        "https://doi.org/10.1051/0004-6361:20021909"
+      ]
+    },
+    {
+      "id": "limb-darkening",
+      "subject": "Limb darkening",
+      "status": "included",
+      "finding": "The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 15,000 K and log g 2.76 (u1 0.168, u2 0.306): a model, because no fit of this star's limb is used.",
+      "evidence": [
+        "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=J/A+A/529/A75"
+      ]
+    }
+  ]
+}
