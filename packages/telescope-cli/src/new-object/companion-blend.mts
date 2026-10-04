@@ -14,7 +14,7 @@
  * most f of its range, so under CROSS_CHECK_AGREEMENT levels of 255 it cannot move the color further than two spectra of one star
  * are allowed to differ. `NEARBY_ARCSEC` is only how far the question is asked, not an aperture: beyond it a person is not consulted. */
 import { CROSS_CHECK_AGREEMENT } from '@cssearth/bake/objects/stellar';
-import { VIZIER_ASU, type Archive } from './archives.mts';
+import { VIZIER_ASU, type Archive } from './archives/archives.mts';
 
 export const NEARBY_ARCSEC = 10;
 export const BLEND_LIMIT = CROSS_CHECK_AGREEMENT / 255;

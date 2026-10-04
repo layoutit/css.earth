@@ -1,7 +1,7 @@
 /** A white dwarf's limb law is read from the grid of its cited atmosphere class and from no other (limb.mts). */
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import type { Archive } from './archives.mts';
+import type { Archive } from './archives/archives.mts';
 import { chooseLimb } from './limb.mts';
 import { parseStarSpec } from './spec.mts';
 

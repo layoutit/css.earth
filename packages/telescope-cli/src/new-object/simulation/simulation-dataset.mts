@@ -16,7 +16,7 @@ import { stat } from 'node:fs/promises';
 import { Readable } from 'node:stream';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { containedPath, publishPinnedSourceStream } from '@cssearth/bake/objects/sources';
-import type { Archive } from '../archives.mts';
+import type { Archive } from '../archives/archives.mts';
 import { bindInputs, json, type PackageFiles } from '../dataset.mts';
 import { MAX_RECORDS, ZENODO_RECORDS, namesObject, parseZenodoRecord, parseZenodoSearch, reuseLicense, speaksOfSimulation, zenodoQuery, type ReuseLicense } from '../../simulations/simulations.mts';
 

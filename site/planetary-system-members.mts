@@ -9,7 +9,7 @@ export type PlanetarySystemPlan = Pick<PreparedWorldContext, 'focus' | 'bodies'>
 export interface PlanetarySystemMembers { readonly id: string; readonly memberIds: readonly string[] }
 
 /** Each body's host in the object tree: the host of the system the body, with any system of its own, is inside (`inside`
- * in its world row, packages/objects/src/prepared-data/world-context.ts). A moon's is its planet, a planet's its star, a
+ * in its world row, packages/objects/src/prepared-data/world/world-context.ts). A moon's is its planet, a planet's its star, a
  * bound companion's the star it is bound to. A body inside no system has none. */
 export function planetarySystemParents(plan: PlanetarySystemPlan): ReadonlyMap<string, string> {
   return new Map(plan.bodies.flatMap(body => {

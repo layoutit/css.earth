@@ -1,7 +1,7 @@
 import { array, attribute, boolean, choice, fail, finite, integer, numbers, positive, record, text, unique } from './guards.js';
 import { nodeReference, resource, resourceList } from './resources-tree.js';
-import type { PreparedMaterialTrack, PreparedMaterialSelection } from '../runtime-material-types.js';
-import type { PreparedTree } from '../runtime-presentation-types.js';
+import type { PreparedMaterialTrack, PreparedMaterialSelection } from '../runtime/runtime-material-types.js';
+import type { PreparedTree } from '../presentation/runtime-presentation-types.js';
 
 export function requireMaterials(value: unknown, tree: PreparedTree, resources: ReadonlySet<string>): asserts value is readonly PreparedMaterialTrack[] {
   const tracks = array(value, 'materials'); unique(tracks.map(input => record(input, 'material').id), 'material tracks');

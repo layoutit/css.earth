@@ -1,18 +1,18 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { parseGeometryProfile } from './css-geometry-profile.ts';
-import { parseSolarSceneSource } from './solar-system-preparation.ts';
-import { parseInvestigationLedger, parseFacilityLedger, evidenceLink } from './investigation-ledger.ts';
-import { parseAcquisitionPlan } from './acquisition-plan.ts';
-import { parsePagedRecipe, parsePagedDatasetBindings } from './paged-ellipsoid.ts';
-import { parseChartAssetRecipe } from './chart-assets.ts';
-import { parseSpectrumRecipe } from './chart-spectrum.ts';
-import { parseMeasuredSpectrum } from './chart-measured-spectrum.ts';
-import { parseRetrievedProfile } from './chart-retrieved-profile.ts';
-import { parseSystemOrbits } from './chart-system-orbits.ts';
-import { parseDepthRecipe, NEBULA_DEPTH_MODEL_SCHEMA } from '../volume/nebula-depth-model.ts';
-import { CSS_GEOMETRY_PROFILE_SCHEMA, PAGED_ELLIPSOID_SCHEMA, CHART_ASSETS_SCHEMA } from './presentation-recipe-schemas.ts';
-import { ACQUISITION_PLAN_SCHEMA, INVESTIGATION_LEDGER_SCHEMA } from './source-schema-identifiers.ts';
+import { parseGeometryProfile } from './presentation/css-geometry-profile.ts';
+import { parseSolarSceneSource } from './orbit/solar-system-preparation.ts';
+import { parseInvestigationLedger, parseFacilityLedger, evidenceLink } from './source/investigation-ledger.ts';
+import { parseAcquisitionPlan } from './source/acquisition-plan.ts';
+import { parsePagedRecipe, parsePagedDatasetBindings } from './presentation/paged-ellipsoid.ts';
+import { parseChartAssetRecipe } from './photometry/chart-assets.ts';
+import { parseSpectrumRecipe } from './photometry/chart-spectrum.ts';
+import { parseMeasuredSpectrum } from './photometry/chart-measured-spectrum.ts';
+import { parseRetrievedProfile } from './photometry/chart-retrieved-profile.ts';
+import { parseSystemOrbits } from './photometry/chart-system-orbits.ts';
+import { parseDepthRecipe, NEBULA_DEPTH_MODEL_SCHEMA } from '../volume/nebula/nebula-depth-model.ts';
+import { CSS_GEOMETRY_PROFILE_SCHEMA, PAGED_ELLIPSOID_SCHEMA, CHART_ASSETS_SCHEMA } from './presentation/presentation-recipe-schemas.ts';
+import { ACQUISITION_PLAN_SCHEMA, INVESTIGATION_LEDGER_SCHEMA } from './source/source-schema-identifiers.ts';
 
 const diagnostic = (message: string) => ({ name: 'TypeError', message });
 const geometry = { schema: CSS_GEOMETRY_PROFILE_SCHEMA, namespace: 'fixture', bodyRotationDegrees: 0,

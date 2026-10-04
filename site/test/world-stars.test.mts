@@ -10,7 +10,7 @@ const test = sourceTest();
 const prepared = new URL('../../src/objects/observable-universe/prepared/', import.meta.url);
 const json = async (name: string) => JSON.parse(await readFile(new URL(name, prepared), 'utf8')) as unknown;
 /** The plain-dot stars of a whole world: a star drawn as a plain dot that orbits nothing, whether or not it is bound to
- * another (packages/objects/src/prepared-data/world-holders.ts). */
+ * another (packages/objects/src/prepared-data/world/world-holders.ts). */
 const plainStars = (whole: { readonly bodies: readonly { id: string; plainDot?: boolean; classification?: string; orbit?: unknown }[] }) =>
   whole.bodies.filter(body => body.plainDot && body.classification === 'star' && !body.orbit).map(body => body.id);
 

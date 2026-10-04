@@ -2,69 +2,95 @@
   "schema": "cssearth-directory-growth@1",
   "allowance": 20,
   "directories": {
+    ".github/scripts/architecture": {
+      "implementations": 23,
+      "tests": 16,
+      "reason": "Architecture graph, resolver and rule checks form one repository-boundary checker; moving individual rules would fragment its shared policy owner."
+    },
     "labs/nebula/packages/lab/browser": {
       "implementations": 43,
-      "tests": 2
+      "tests": 2,
+      "reason": "The lab browser is one interactive baking workbench; retain its shared UI owner pending a dedicated browser decomposition."
     },
     "labs/nebula/packages/lab/src/cli/commands": {
-      "implementations": 53,
-      "tests": 7
+      "implementations": 54,
+      "tests": 7,
+      "reason": "The lab command directory is the single command registration surface; moving one command would fragment that coherent CLI owner."
     },
     "labs/performance": {
       "implementations": 30,
-      "tests": 14
+      "tests": 14,
+      "reason": "Performance probes share one experiment owner and runnable entry surface; experiment reorganization is outside this directory-growth packet."
     },
     "packages/astronomy/src": {
-      "implementations": 24,
-      "tests": 20
+      "implementations": 25,
+      "tests": 20,
+      "reason": "The package root is the host-neutral astronomical calculation API; a single extra module does not establish a separate format owner."
     },
     "packages/bake/cli": {
-      "implementations": 101,
-      "tests": 0
+      "implementations": 103,
+      "tests": 0,
+      "reason": "Preparation commands form the documented executable entry surface; moving isolated commands would churn invocation paths without separating their implementation owners."
+    },
+    "packages/bake/src/objects/raster": {
+      "implementations": 21,
+      "tests": 22,
+      "reason": "Measured-map preparation modules and colocated science tests form one raster-object owner; the extra module does not create an independent format area."
     },
     "packages/renderer/src/navigation": {
       "implementations": 39,
-      "tests": 17
+      "tests": 17,
+      "reason": "The retained world camera and input policy form one navigation owner; its decomposition requires a dedicated interaction change."
     },
     "packages/renderer/src/rendering": {
-      "implementations": 30,
-      "tests": 22
+      "implementations": 34,
+      "tests": 22,
+      "reason": "Prepared scene activation and retained DOM writes form one rendering lifecycle owner; the additional modules and colocated tests do not establish an independent rendering area."
     },
     "packages/renderer/src/universe": {
       "implementations": 29,
-      "tests": 15
+      "tests": 15,
+      "reason": "Universe context projection and prepared catalogue display form one renderer owner; retain the existing ceiling pending dedicated decomposition."
     },
     "packages/telescope-cli/src": {
-      "implementations": 59,
-      "tests": 42
+      "implementations": 60,
+      "tests": 42,
+      "reason": "The telescope CLI root holds its public command and shared ingestion entry surface; isolating the additional module would not establish a separate command owner."
     },
     "packages/telescope-cli/src/archives/interferometry": {
       "implementations": 27,
-      "tests": 21
+      "tests": 21,
+      "reason": "Archive calibration and reconstruction modules share the interferometry acquisition owner and its colocated tests."
     },
     "packages/telescope-cli/src/new-object": {
-      "implementations": 37,
-      "tests": 7
+      "implementations": 33,
+      "tests": 13,
+      "reason": "Object drafting orchestration remains one command owner; archive-specific provider readers and their tests now live in archives/."
     },
     "site": {
-      "implementations": 85,
-      "tests": 3
+      "implementations": 102,
+      "tests": 3,
+      "reason": "plan 7: site architecture"
     },
     "site/build/prepare": {
-      "implementations": 29,
-      "tests": 0
+      "implementations": 38,
+      "tests": 0,
+      "reason": "plan 7: site architecture"
     },
     "site/components": {
       "implementations": 38,
-      "tests": 0
+      "tests": 0,
+      "reason": "Existing shared application-shell components remain together pending plan 7: site architecture."
     },
     "site/test": {
       "implementations": 9,
-      "tests": 110
+      "tests": 110,
+      "reason": "Flat site integration tests are advisory only; splitting their common harness ownership belongs to plan 7: site architecture."
     },
     "src/platform": {
       "implementations": 13,
-      "tests": 23
+      "tests": 23,
+      "reason": "Existing platform integration tests remain colocated with their source owner; test growth is advisory and does not block new coverage."
     }
   }
 }

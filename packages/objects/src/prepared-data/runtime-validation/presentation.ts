@@ -1,10 +1,10 @@
 import { array, attribute, boolean, choice, fail, finite, integer, positive, record, text, unique } from './guards.js';
 import { ancestor, nodeReference, requireWrite, resourceList } from './resources-tree.js';
 import { requireSelectedMaterial } from './materials.js';
-import type { PreparedVariant, PreparedViewBinding, PreparedPresentationDefinition, PreparedTree } from '../runtime-presentation-types.js';
-import type { PreparedMaterialTrack } from '../runtime-material-types.js';
-import type { ObjectControls } from '../object-controls.js';
-import type { CameraPlan } from '../runtime-camera-types.js';
+import type { PreparedVariant, PreparedViewBinding, PreparedPresentationDefinition, PreparedTree } from '../presentation/runtime-presentation-types.js';
+import type { PreparedMaterialTrack } from '../runtime/runtime-material-types.js';
+import type { ObjectControls } from '../runtime/object-controls.js';
+import type { CameraPlan } from '../camera/runtime-camera-types.js';
 
 import { requireTexturePlacements } from './prepared-texture-levels.js';
 

@@ -1,7 +1,7 @@
 /** A measured spectrum is refused when a double-star catalogue lists a close companion bright enough to change its color (companion-blend.mts). */
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import type { Archive } from './archives.mts';
+import type { Archive } from './archives/archives.mts';
 import { BLEND_LIMIT, blendRefusal, blendingCompanion, lightShare, parseWdsPairs } from './companion-blend.mts';
 
 // Rows as VizieR serves B/wds/wds around each star, 2026-10-03.

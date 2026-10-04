@@ -76,7 +76,7 @@
  *
  * A file may also hold `"pulsars": [ … ]`: neutron stars with a published hot-region map, written whole from cited values (pulsar.mts). */
 import { isRecord, requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { parsePulsarSpec, type PulsarSpec } from './pulsar.mts';
+import { parsePulsarSpec, type PulsarSpec } from './archives/pulsar.mts';
 import { WHITE_DWARF_ATMOSPHERES, type WhiteDwarfAtmosphere } from './limb.mts';
 import { DISC_BAND_COLOR_SCHEMA, parseDiscBandColorRecord } from '@cssearth/bake/objects/layers/observation';
 import { phaseCurveEntry, type PhaseCurveEntry } from './phase-curve-dataset.mts';
