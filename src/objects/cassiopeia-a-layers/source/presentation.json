@@ -1,0 +1,57 @@
+{
+  "schema": "cssearth-volume-presentation-source@2",
+  "objectId": "cassiopeia-a-layers",
+  "name": "Cassiopeia A",
+  "defaultDataset": "optical",
+  "bank": {
+    "path": "src/objects/cassiopeia-a-layers/prepared/image-layers.json"
+  },
+  "recipes": [
+    {
+      "id": "image-layer-recipe",
+      "path": "src/objects/cassiopeia-a-layers/source/recipe.json"
+    },
+    {
+      "id": "source-evidence",
+      "path": "src/objects/cassiopeia-a-layers/source/provenance.json"
+    }
+  ],
+  "sharedInputs": [],
+  "datasets": [
+    {
+      "id": "optical",
+      "label": "Webb · near infrared",
+      "title": "Cassiopeia A in the near infrared",
+      "description": "ESA/Webb's NIRCam picture of Cassiopeia A, at 1.62, 3.56 and 4.44 µm. The remnant's ejecta expand freely, so a speed along the sight line is a depth (DeLaney et al. 2010). Where Spitzer's [Ar II] spectra measure a speed, the picture's fine detail is at that depth: in front of the picture's plane where the ejecta approach, behind it where they recede. The smooth light lies on the forward shock's sphere: its broad glow on both halves, the rest on the far half, since one picture cannot tell the halves apart.",
+      "summary": "Webb's picture as a shell: smooth light on the forward shock's sphere, ejecta at the depths their measured speeds give.",
+      "detail": "3493 × 4000 px",
+      "facts": [
+        {
+          "id": "bands",
+          "label": "Colors",
+          "value": "1.62, 3.56 and 4.44 µm"
+        },
+        {
+          "id": "source-pixels",
+          "label": "Source pixels",
+          "value": "3493 × 4000"
+        },
+        {
+          "id": "coverage",
+          "label": "Field",
+          "value": "6.09 × 6.97 arcmin"
+        },
+        {
+          "id": "license",
+          "label": "License",
+          "value": "CC-BY-4.0"
+        }
+      ],
+      "input": "optical",
+      "preview": {
+        "path": "src/objects/cassiopeia-a-layers/source/starless.jpg",
+        "url": "https://cdn.esawebb.org/archives/images/publicationjpg/weic2330a.jpg"
+      }
+    }
+  ]
+}

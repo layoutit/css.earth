@@ -89,3 +89,43 @@ test('image textures are demanded once when their retained axis first contribute
   publish([0, Math.SQRT1_2, 0, Math.SQRT1_2]);
   assert.equal(resolveResource.mock.callCount(), 2);
 });
+
+test('a stack mounts a camera for each of its scenes, and a stack without leaves is not mounted and takes no part', () => {
+  const document = new ImageDocument(), host = document.createElement(), before = document.createElement();
+  host.appendChild(before);
+  const style = { width: '1px', height: '1px', transform: 'translate3d(0,0,0)', backgroundSize: '2px 1px', backgroundPosition: '0px 0px' };
+  const payload: PreparedCssImageLayers = {
+    schema: 'cssearth-css-volume@1', id: 'fixture',
+    frame: { referenceFrame: 'fixture', epochJdTt: 123, originM: [0, 0, 0], localToReferenceXyzw: [0, 0, 0, 1],
+      metersPerUnit: 1, boundsUnits: { min: [-1, -1, -1], max: [1, 1, 1] } },
+    anchors: [], bankViews: views.map(view => view.axis === 'z' ? { ...view, sceneSizes: [1, 2] } : view),
+    stacks: views.map(({ axis }) => ({ axis, leaves: axis === 'z' ? ['flat', 'a', 'b'].map(id => ({ id, centerUnits: [0, 0, 0] as [number, number, number],
+      texturePath: id === 'flat' ? 'flat.png' : 'atlas.png', widthPx: 1, heightPx: 1, style })) : [] })),
+    resources: ['flat.png', 'atlas.png'].map(path => ({ path, bytes: 1, width: 2, height: 1 })),
+    provenance: {}, approximation: {},
+  };
+  const resolveResource = mock.fn((path: string) => `/prepared/${path}`);
+  const runtime = mountPreparedCssImageLayers({ host: host as unknown as HTMLElement, before: before as unknown as Element, payload, resolveResource });
+  const named = (name: string) => document.elements.filter(element => element.className === name);
+  const leaf = (id: string) => document.elements.find(element => element.dataset.imageLayerLeaf === id)!;
+  // One projection, for the stack that draws; in it a camera, a scene and a mesh for each run, with the run's leaves.
+  assert.deepEqual(named('css-volume-projection').map(element => element.dataset.imageLayerAxis), ['z']);
+  assert.equal(named('css-volume-projection')[0]!.children.length, 2);
+  assert.deepEqual(named('css-volume-mesh').map(mesh => mesh.children.map(element => element.dataset.imageLayerLeaf)), [['flat'], ['a', 'b']]);
+  const publish = (orientationXyzw: readonly [number, number, number, number]) => runtime.publish({
+    world: { referenceFrame: 'fixture', epochJdTt: 123, pose: { positionM: [0, 0, 10], orientationXyzw } },
+    viewport: { focalPixels: 600, principalOffsetPixels: [0, 0] },
+  });
+  publish([0, 0, 0, 1]);
+  // Every scene takes the camera, and leaves cut from one atlas ask for its address once.
+  const [first, second] = named('css-volume-scene');
+  assert.ok(first!.style.transform && first!.style.transform === second!.style.transform);
+  assert.deepEqual(named('css-volume-camera').map(camera => camera.style.perspective), ['600px', '600px']);
+  assert.deepEqual(resolveResource.mock.calls.map(call => call.arguments), [['flat.png'], ['atlas.png']]);
+  assert.equal(leaf('a').style.backgroundImage, leaf('b').style.backgroundImage);
+  // Seen edge-on the stack is still the only one that draws: it keeps the whole weight.
+  publish([Math.SQRT1_2, 0, 0, Math.SQRT1_2]);
+  assert.equal(named('css-volume-projection')[0]!.style.opacity, '0.999');
+  assert.equal(named('css-volume-projection')[0]!.style.visibility, 'visible');
+  assert.deepEqual(imageLayerAxisWeights([Math.SQRT1_2, 0, 0, Math.SQRT1_2], views.filter(view => view.axis === 'z')), { z: 1 });
+});

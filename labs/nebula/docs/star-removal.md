@@ -18,7 +18,7 @@ The earlier VISTA, Horálek and WISE recipes retain their existing source/alignm
 
 ## A picture for the application: `remove-stars`
 
-`node labs/nebula/run.mts remove-stars <object-directory> [--from=<file>] [--coarse=<factor>]` makes the star-free copy
+`node labs/nebula/run.mts remove-stars <object-directory> [--from=<file>] [--coarse=<factor>] [--star-red-over-blue=<ratio>]` makes the star-free copy
 of an image-layer bank's picture
 ([remove-stars.ts](../packages/lab/src/cli/commands/remove-stars.ts)). It reads the bank's `source/recipe.json`, takes the
 download the recipe names into the ignored cache (`.local/nebula-lab/starless/<id>/`), runs NOX over it and writes the
@@ -42,7 +42,17 @@ more. The rest of the picture keeps its own pixels. The constants are presentati
 quarter of its size. The small pass also takes compact bright nebula: on M17, M27, M43, M57 and M78 it took real gas, so
 those banks run one pass. The glow fill above is for a galaxy; on a nebula it erased the gas around the stars that light it.
 
-Tests: `node labs/nebula/run.mts test haloes` and `node labs/nebula/run.mts test coarse`.
+NOX takes compact bright light, and a supernova remnant's ejecta are compact bright knots: over Cassiopeia A's Webb picture
+it took the knots with the stars. With `--star-red-over-blue=<ratio>`
+[star-color.ts](../packages/reconstruction/src/star-removal/star-color.ts) reads the light NOX took by its color and gives the
+picture its own pixels back where that light is not a star's: a connected patch of pixels that each lost more than 6 levels
+is a star where its lost red is at most the ratio times its lost blue, and in any other patch a pixel is still a star's
+where the light lost within 2 px of it is that color. In Cassiopeia A's picture (1.62, 3.56 and 4.44 µm as blue, green and
+red) a star is blue and the ejecta red: the lost light, by its patches' red over blue, peaks between 0.25 and 0.5, is lowest
+near 0.8 and tails off above 1, so that bank passes 0.8. The constants are presentation choices made on that picture. The
+small pass there replaced 8% of the picture with soft light and left the bright stars' spikes, so the bank runs one pass.
+
+Tests: `node labs/nebula/run.mts test haloes`, `node labs/nebula/run.mts test coarse` and `node labs/nebula/run.mts test star-color`.
 
 ## Interpretation
 

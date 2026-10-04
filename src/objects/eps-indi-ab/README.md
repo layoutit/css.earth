@@ -35,6 +35,6 @@ Run of 2026-10-04, when the color and the limb law were added. The orbit test ab
 - The orbit drawn is one sample of a posterior whose semi-major axis spans 14.4 to 17.5 au and eccentricity 0.16 to 0.34 (16th to 84th percentiles): two years of imaging cover a small arc of a 70-year orbit.
 - It misses the 2025 May JWST position of Matthews et al. (2026), which the fit did not use, by 0.3 degrees.
 - The radius is a model value; the planet is a point in every image.
-- **Model limb.** The limb darkening is computed from the cloud-free model a paper fitted to the planet, in the middle band of its color, not a measurement of this planet; another model grid would give another law.
+- **Model limb.** The limb darkening is computed from the cloud-free model a paper fitted to the planet, in the middle band of its color, not a measurement of this planet; another model grid would give another law. Among the 4 models it is read between, the disc near its edge (the lowest of the eight angles) is 30% to 35% as bright as the centre. PICASO finds 104% of the band flux the release states for those models.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

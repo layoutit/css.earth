@@ -26,7 +26,22 @@
       "falseColor": true,
       "science": {
         "kind": "disc-integrated-band-color",
-        "qualification": "Infrared false color of the whole disc from published flux densities (De Rosa et al. (2016), ApJ 824, 121; zero points from the SVO Filter Profile Service, Table 2, HD 95086 b, apparent magnitude: NaCo L′ 16.27 +/- 0.19, GPI K1 18.99 +/- 0.2, GPI H 20.51 +/- 0.25; SVO Paranal/NACO.Lp 240.8 Jy, Gemini/GPI.K1 721.7 Jy, Gemini/GPI.H 1018.2 Jy): red NaCo L′ 3.77 µm, green GPI K1 2.029 µm, blue GPI H 1.632 µm, on one range shared with the bodies the record names. The planet is unresolved, so no map is implied. It glows with its own heat, so no lighting."
+        "qualification": "Infrared false color of the whole disc from published flux densities (De Rosa et al. (2016), ApJ 824, 121; zero points from the SVO Filter Profile Service, Table 2, HD 95086 b, apparent magnitude: NaCo L′ 16.27 +/- 0.19, GPI K1 18.99 +/- 0.2, GPI H 20.51 +/- 0.25; SVO Paranal/NACO.Lp 240.8 Jy, Gemini/GPI.K1 721.7 Jy, Gemini/GPI.H 1018.2 Jy): red NaCo L′ 3.77 µm, green GPI K1 2.029 µm, blue GPI H 1.632 µm, on one range shared with the bodies the record names. The planet is unresolved, so no map is implied. It glows with its own heat, so no lighting. The disc is dimmed toward the limb by the quadratic law fitted to the GPI K1 intensity PICASO 4.1 (Batalha et al. 2019, ApJ 878, 70) computes from Exo-REM cloudy (Charnay et al. 2018, ApJ 854, 172; 3.16 times solar metallicity, C/O 0.35) model atmospheres at 936 K and log g 3.9, read between the models YGP_900K_logg3.5, YGP_900K_logg4.0, YGP_950K_logg3.5, YGP_950K_logg4.0 (u1 0.570, u2 0.269; the law fits each model's eight angles within 0.25% of the centre): a cloudy model, the one Malin et al. (2024), arXiv:2408.16843 fit to this planet, because no table reaches a planet this cold and nobody has resolved its disc.",
+        "limbDarkening": {
+          "law": "quadratic",
+          "path": "photometry/picaso-exo-rem-k1-quadratic.tsv",
+          "grid": {
+            "teffK": 936,
+            "logg": 3.9,
+            "models": {}
+          },
+          "columns": {
+            "teff": "Teff",
+            "logg": "logg",
+            "u1": "a",
+            "u2": "b"
+          }
+        }
       }
     }
   ],
@@ -48,7 +63,7 @@
       },
       "limbMaterial": {
         "logicalSize": 496,
-        "composition": "transparent: the adopted source-radius opaque-sphere silhouette is the limb; no off-limb or radial-brightness source is selected",
+        "composition": "black alpha darkens the disc according to the selected limb-darkening law; transparent outside the silhouette",
         "sourceRadius": "measurements.json#radiusKm",
         "surfaceReplacement": false,
         "runtimeAlphaProcessing": false

@@ -81,7 +81,7 @@
       {
         "id": "shape",
         "label": "Shape",
-        "qualification": "A sphere of the published radius, glowing with its own heat; the neutral gray is a display convention, not a measured color.",
+        "qualification": "A sphere of the published radius, glowing with its own heat; the neutral gray is a display convention, not a measured color; darkening toward the edge from a model atmosphere.",
         "thumbnail": "pds-70-c-dataset-shape.webp",
         "surface": "pds-70-c-surface-shape@2x.webp",
         "poles": "pds-70-c-poles-shape@2x.webp",
@@ -91,7 +91,7 @@
           "url": "https://arxiv.org/abs/2504.11210"
         },
         "falseColor": false,
-        "notes": "No image or color of this planet's surface exists: it is a point of light in every image. Its size is the radius the best-supported atmosphere model of Wang et al. (2021) needs for its spectrum; their other models give sizes from under one to over three Jupiter radii. No spin is measured; the display axis is its orbit normal. The gray marks an unresolved surface."
+        "notes": "No image or color of this planet's surface exists: it is a point of light in every image. Its size is the radius the best-supported atmosphere model of Wang et al. (2021) needs for its spectrum; their other models give sizes from under one to over three Jupiter radii. No spin is measured; the display axis is its orbit normal. The gray marks an unresolved surface. The darkening toward the edge is the quadratic law fitted to the SPHERE K1 intensity PICASO 4.1 (Batalha et al. 2019, ApJ 878, 70) computes from Exo-REM cloudy (Charnay et al. 2018, ApJ 854, 172; 1 times solar metallicity, C/O 0.50) model atmospheres at 1,112 K and log g 3.87, read between the models YGP_1100K_logg3.5, YGP_1100K_logg4.0, YGP_1150K_logg3.5, YGP_1150K_logg4.0 (u1 0.407, u2 0.370; the law fits each model's eight angles within 0.48% of the centre): a cloudy model, the one Wang et al. (2021), AJ 161, 148 fit to this planet, because no table reaches a planet this cold and nobody has resolved its disc."
       }
     ]
   },

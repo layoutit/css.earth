@@ -43,11 +43,13 @@
     {
       "id": "limb-darkening",
       "subject": "Limb darkening",
-      "status": "unresolved",
-      "finding": "No limb darkening is drawn: the published limb table (Claret, Hauschildt & Witte 2012) starts at 1,500 K, and at 800 K the planet is below it. Its temperature is the fit of Madurowicz et al. (2025): Sonora Elf Owl models with clouds the authors computed with Virga at sedimentation efficiency 10 over 70% of the disc (hole fraction 0.3). Those cloud properties are not released, and neither are the clouds of the Exo-REM model Balmer et al. (2025) fit. Exo-REM's public grid releases temperature and gas profiles and spectra, but no cloud properties, so the limb of a cloudy Exo-REM model cannot be computed from it.",
+      "status": "included",
+      "finding": "The disc is dimmed toward the limb by the quadratic law fitted to the MKO H intensity PICASO 4.1 (Batalha et al. 2019, ApJ 878, 70) computes from Exo-REM cloudy (Charnay et al. 2018, ApJ 854, 172; 3.16 times solar metallicity, C/O 0.65) model atmospheres at 632 K and log g 3.7, read between the models YGP_600K_logg3.5, YGP_600K_logg4.0, YGP_650K_logg3.5, YGP_650K_logg4.0 (u1 1.237, u2 -0.291; the law fits each model's eight angles within 0.33% of the centre): a cloudy model, the one Balmer et al. (2025), arXiv:2503.13608 fit to this planet, because no table reaches a planet this cold and nobody has resolved its disc. The temperature and gravity are that fit's (Section IV.2.2, the best-fit Exo-REM model with informative priors on the mass and radius: Teff 632 +/- 13 K, log g 3.7 +/- 0.3, radius 1.30 +/- 0.03, [Fe/H] 0.65 +/- 0.15, C/O 0.65 +0.05/-0.08; [record](source/photometry/atmosphere-fit.json)), not the 800 K of its measurements record. Another fit (Madurowicz et al. 2025, the temperature on record) uses Sonora Elf Owl models with patchy clouds its authors computed and did not release, so no law can be computed from it.",
       "evidence": [
-        "https://arxiv.org/abs/2510.08327",
-        "https://lesia.obspm.fr/exorem/YGP_grids/"
+        "https://lesia.obspm.fr/exorem/YGP_grids/old_grids_2021/",
+        "https://gitlab.obspm.fr/Exoplanet-Atmospheres-LESIA/exorem",
+        "https://doi.org/10.5281/zenodo.3759675",
+        "https://arxiv.org/abs/2503.13608"
       ]
     }
   ]

@@ -1,0 +1,81 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "cassiopeia-a",
+  "card": {
+    "text": "Cassiopeia A is a supernova remnant about 3,400 parsecs away.",
+    "sources": [
+      {
+        "catalogueId": "publication-thorstensen-2001-cassiopeia-a-expansion-centre",
+        "url": "https://arxiv.org/abs/astro-ph/0104188",
+        "label": "Thorstensen, Fesen & van den Bergh (2001), AJ 122, 297: the expansion center and dynamical age of Cassiopeia A",
+        "checked": "2026-10-04",
+        "locator": "Abstract: a distance of 3.4 kpc"
+      },
+      {
+        "catalogueId": "wikipedia-cassiopeia-a",
+        "url": "https://en.wikipedia.org/wiki/Cassiopeia_A",
+        "label": "Wikipedia, \"Cassiopeia A\"",
+        "checked": "2026-10-04",
+        "locator": "Lead section, revision 1370774186",
+        "quote": "Cassiopeia A is a supernova remnant (SNR) in the constellation Cassiopeia and the brightest extrasolar radio source in the sky at frequencies below 1 GHz."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "ESA/Webb's picture of it is a shell here: its smooth light on the forward shock's sphere, its ejecta as far in front or behind as their measured speeds put them.",
+    "sources": [
+      {
+        "catalogueId": "esawebb-weic2330a",
+        "url": "https://esawebb.org/images/weic2330a/",
+        "label": "ESA/Webb weic2330a: NASA, ESA, CSA, STScI, D. Milisavljevic (Purdue University), T. Temim (Princeton University), I. De Looze (University of Gent)",
+        "checked": "2026-10-04",
+        "locator": "Cas A (NIRCam image); NIRCam 1.62, 3.56 and 4.44 µm"
+      },
+      {
+        "catalogueId": "publication-delaney-2010-cassiopeia-a-3d",
+        "url": "https://arxiv.org/abs/1011.3858",
+        "label": "DeLaney et al. (2010), ApJ 725, 2038: the three-dimensional structure of Cassiopeia A",
+        "checked": "2026-10-04",
+        "locator": "Sect. IV.1: the [Ar II] ejecta on one shell in free expansion, S = 0.022 arcsec per km/s; the forward shock at a radius of 153 arcsec"
+      },
+      {
+        "catalogueId": "wikipedia-cassiopeia-a",
+        "url": "https://en.wikipedia.org/wiki/Cassiopeia_A",
+        "label": "Wikipedia, \"Cassiopeia A\"",
+        "checked": "2026-10-04",
+        "locator": "Lead section, revision 1370774186",
+        "quote": "The supernova occurred approximately 11,000 light-years (3.4 kpc) away within the Milky Way; given the width of the Orion Arm, it lies in the next-nearest arm outwards, the Perseus Arm, about 30 degrees from the Galactic anticenter."
+      }
+    ]
+  },
+  "datasets": {
+    "optical": {
+      "title": "Cassiopeia A in the near infrared",
+      "detail": "3493 × 4000 px",
+      "summary": "Webb's picture as a shell: smooth light on the forward shock's sphere, ejecta at the depths their measured speeds give.",
+      "sources": [
+        {
+          "catalogueId": "esawebb-weic2330a",
+          "url": "https://esawebb.org/images/weic2330a/",
+          "label": "ESA/Webb weic2330a: NASA, ESA, CSA, STScI, D. Milisavljevic (Purdue University), T. Temim (Princeton University), I. De Looze (University of Gent)",
+          "checked": "2026-10-04",
+          "locator": "Cas A (NIRCam image)"
+        },
+        {
+          "catalogueId": "publication-delaney-2010-cassiopeia-a-3d",
+          "url": "https://arxiv.org/abs/1011.3858",
+          "label": "DeLaney et al. (2010), ApJ 725, 2038: the three-dimensional structure of Cassiopeia A",
+          "checked": "2026-10-04",
+          "locator": "Sect. IV.1: the shell fit that turns a Doppler speed into a depth"
+        },
+        {
+          "catalogueId": "chandra-cassiopeia-a-3d-model",
+          "url": "https://chandra.harvard.edu/resources/illustrations/3d_files.html",
+          "label": "Chandra X-ray Center: Cassiopeia A in 3D, ASCII VTK files created from telescope data (NASA/CXC/SAO)",
+          "checked": "2026-10-04",
+          "locator": "newar-ascii.vtk: the [Ar II] surface of the paper's model"
+        }
+      ]
+    }
+  }
+}

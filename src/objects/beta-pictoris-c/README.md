@@ -10,6 +10,8 @@ Beta Pictoris c is a giant planet 2.7 au from [Beta Pictoris](../beta-pictoris/R
 
 **Radius and mass.** 1.2 ± 0.1 Jupiter radii, the radius the Exo-REM atmospheric model needs to give the flux-calibrated GRAVITY K-band spectrum at 1,250 K (Nowak et al. 2020); Drift-Phoenix gives 1.05 ± 0.1. Mass 8.89 ± 0.75 Jupiter masses, dynamical (Lacour et al. 2021).
 
+**Limb.** No limb darkening is drawn: the published limb table (Claret, Hauschildt & Witte 2012) starts at 1,500 K, and at 1,250 K the planet is below it. Its one published fit is an Exo-REM model (Nowak et al. 2020), which prints the temperature and gravity (1250 +/- 50 K, log g 3.85 +0.15/-0.25) but not the metallicity or C/O the model was read at, so the model of Exo-REM's public grid cannot be named.
+
 **Rotation.** Not measured; the display axis is the orbit normal and nothing turns.
 
 **Shape dataset.** A sphere of the model radius in the shared neutral gray, self-luminous. Only one band of the planet is measured, GRAVITY's K (m_K 14.3 ± 0.1, Nowak et al. [2020](https://arxiv.org/abs/2010.04442)); a false color needs three measured bands, so it stays gray.

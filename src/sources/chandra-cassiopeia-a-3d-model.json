@@ -1,0 +1,41 @@
+{
+  "id": "chandra-cassiopeia-a-3d-model",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Cassiopeia A in 3D: ASCII VTK files created from telescope data",
+  "identifiers": [
+    {
+      "type": "Archive resource",
+      "value": "https://chandra.harvard.edu/graphics/resources/illustrations/3d_files/CasA_supernova_remnant-ascii_vtks.zip"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://chandra.harvard.edu/resources/illustrations/3d_files.html",
+      "label": "Published source"
+    },
+    {
+      "role": "original",
+      "url": "https://chandra.harvard.edu/graphics/resources/illustrations/3d_files/CasA_supernova_remnant-ascii_vtks.zip",
+      "label": "Zip of ASCII VTK files, 3.94 MB"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://chandra.harvard.edu/resources/illustrations/3d_files.html",
+      "checkedOn": "2026-10-04",
+      "locator": "Cassiopeia A: \"ASCII VTK files created from telescope data\" (3.94 MB). The zip's README: created by NASA, the Smithsonian Astrophysical Observatory's Chandra X-ray Center, MIT and T. DeLaney et al., from Chandra, Spitzer, the NOAO 4-meter at Kitt Peak and the Michigan-Dartmouth-MIT 2.4-meter. Seven surfaces: newar ([Ar II], 34,725 vertices), newsi, fekcorr, newhetg, newopt, newjets, cco."
+    }
+  ],
+  "publisher": "Chandra X-ray Center",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "NASA/CXC/SAO",
+      "scope": "Published source",
+      "evidence": "https://chandra.harvard.edu/resources/illustrations/3d_files.html"
+    }
+  ]
+}
