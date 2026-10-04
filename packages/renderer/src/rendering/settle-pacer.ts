@@ -32,9 +32,12 @@ interface PacedOwner { wanted: boolean; run(budget: number): number }
 export function createFramePacer(frame: FrameRequest, pacing: { readonly startUnits: number; readonly maximumUnits: number; readonly slowFrameMs: number; readonly quickFrameMs: number } = SETTLE_PACING) {
   const owners = new Set<PacedOwner>();
   let budget: number = pacing.startUnits, scheduled = false, wrote = false, last: number | null = null, turn = 0;
+  // What the frame's own work asked `take` for: this frame so far, and the whole frame before.
+  let asking = 0, asked = 0;
   const schedule = () => { if (!scheduled) { scheduled = true; frame(drain); } };
   function drain(now?: number) {
     scheduled = false;
+    asked = asking; asking = 0;
     // The frame since the last slice carried its cost: pace the next slice by it.
     const spent = wrote && last !== null && now !== undefined ? now - last : null;
     last = now ?? null;
@@ -60,6 +63,16 @@ export function createFramePacer(frame: FrameRequest, pacing: { readonly startUn
     request(owner: PacedOwner) { owner.wanted = true; owners.add(owner); schedule(); },
     /** Drop an owner's waiting slice. */
     cancel(owner: PacedOwner) { owner.wanted = false; owners.delete(owner); },
+    /** The units a frame's own work may spend now, of the `wanted` it has: for a paint that cannot wait for its turn (a
+     * travelling camera's dots are painted from that frame's camera). Those who take in a frame share the budget in
+     * proportion to what they wanted the frame before, and the frame they cause paces the next as a slice's does. */
+    take(wanted: number) {
+      if (!(wanted > 0)) return 0;
+      asking += wanted; wrote = true; schedule();
+      return Math.min(wanted, budget * wanted / Math.max(wanted, asked));
+    },
+    /** The units a frame starts with, before any frame has been measured. */
+    startUnits: pacing.startUnits,
   };
 }
 export type FramePacer = ReturnType<typeof createFramePacer>;
@@ -123,6 +136,10 @@ export function createSettlePacer(slice: SettleSlice, { frame, clock = () => glo
      * (a native response, a test) everything is written now. */
     request(urgent = false) { if (!pacer) { while (!destroyed && slice(Infinity, false) > 0); return; } if (urgent || !moving()) schedule(); else wakeWhenStill(); },
     moving,
+    /** The units of the frame's budget this owner's own work may spend now (FramePacer.take); all of them without a pacer. */
+    take: (wanted: number) => pacer ? pacer.take(wanted) : wanted,
+    /** The units a frame starts with (FramePacer.startUnits). */
+    startUnits: pacer ? pacer.startUnits : SETTLE_PACING.startUnits,
     destroy() { destroyed = true; unsubscribe(); pacer?.cancel(owner); },
   };
 }
