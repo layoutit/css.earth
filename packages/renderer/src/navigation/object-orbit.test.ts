@@ -97,9 +97,11 @@ it('holds a pole-held drag to the body pole without a stage level-of-detail attr
   const f = fixture(undefined, { ...scene.camera, drag: { model: 'pole-held-tumble' } });
   f.roots[2]!.system = { style: { transform: 'rotateX(90deg)' } };
   assert.equal(f.roots[0]!.dataset.lod, undefined);
-  const pole = f.callbacks.drag.trackballMetrics().pole;
-  assert.ok(Array.isArray(pole), 'pole-held drag lost its pole');
-  assert.ok(Math.abs(Math.hypot(...pole) - 1) < 1e-9);
+  const { pole, meridian } = f.callbacks.drag.trackballMetrics();
+  assert.ok(Array.isArray(pole) && Array.isArray(meridian), 'pole-held drag lost its pole or its meridian');
+  assert.ok(Math.abs(Math.hypot(...pole) - 1) < 1e-9 && Math.abs(Math.hypot(...meridian) - 1) < 1e-9);
+  // The meridian is the system node's +X axis: across the pole.
+  assert.ok(Math.abs(pole[0]! * meridian[0]! + pole[1]! * meridian[1]! + pole[2]! * meridian[2]!) < 1e-9);
   f.orbit.destroy();
 });
 

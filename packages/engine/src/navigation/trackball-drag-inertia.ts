@@ -1,4 +1,4 @@
-import type { PointerDelta, TrackballMetrics, Quaternion, Vector3 } from './math-types.js';
+import type { PointerDelta, TrackballMetrics, Quaternion } from './math-types.js';
 import type { SphereDragInput } from './sphere-drag.js';
 export interface DragSample { x: number; y: number; timestamp: number; pitch: number; yaw: number; }
 export interface DragHistory { x: Float64Array; y: Float64Array; timestamp: Float64Array; pitch: Float64Array; yaw: Float64Array; length: number; next: number; }
@@ -6,7 +6,6 @@ export interface TrackballDeltaInput extends PointerDelta { centerX: number; cen
 export interface DragThrowVelocity { pitchDegreesPerMillisecond: number; yawDegreesPerMillisecond: number; initialSpeedDegreesPerMillisecond: number; }
 export type DragThrow = NonNullable<ReturnType<typeof estimateDragThrow>>;
 import { projectSphereDrag } from "./sphere-drag.js";
-import { poleTurnRotation, type PoleTurn } from "./pole-drag.js";
 
 export const TRACKBALL_DRAG_INERTIA = Object.freeze({
   schema: "cssearth-trackball-throw@10",
@@ -169,11 +168,7 @@ export function estimateDragThrow({
   frameMilliseconds = 1000 / 60,
   trackball,
   projectRotation = projectSphereDrag,
-  pole = null,
-  projectTurn = null,
-}: { history: DragHistory; releaseTimestamp: number; frameMilliseconds?: number; trackball: TrackballMetrics; projectRotation?: (input: SphereDragInput) => Quaternion;
-  /** The body's pole at release and the drag's turn about it: the throw then coasts about the pole, as the drag did. */
-  pole?: Vector3 | null; projectTurn?: ((input: SphereDragInput) => PoleTurn) | null }) {
+}: { history: DragHistory; releaseTimestamp: number; frameMilliseconds?: number; trackball: TrackballMetrics; projectRotation?: (input: SphereDragInput) => Quaternion }) {
   validateHistory(history);
   if (!Number.isFinite(releaseTimestamp) ||
       !Number.isFinite(frameMilliseconds) || frameMilliseconds <= 0 ||
@@ -250,8 +245,7 @@ export function estimateDragThrow({
     opticalCenterX: trackball?.opticalCenterX, opticalCenterY: trackball?.opticalCenterY,
     radius: trackball?.surfaceRadius, focalLength: trackball?.focalLength,
   };
-  const turn = pole && projectTurn ? projectTurn(forward) : null;
-  const delta = turn && pole ? poleTurnRotation(turn, pole) : projectRotation(forward);
+  const delta = projectRotation(forward);
   const sine = Math.hypot(delta[0], delta[1], delta[2]);
   const angle = 2 * Math.atan2(sine, Math.abs(delta[3]));
   const scale = sine > 1e-12
@@ -267,7 +261,6 @@ export function estimateDragThrow({
     angularVelocity: Object.freeze([
       delta[0] * scale, delta[1] * scale, delta[2] * scale,
     ]),
-    poleTurnPerMillisecond: turn ? Object.freeze({ spin: turn.spin / frameMilliseconds, tilt: turn.tilt / frameMilliseconds }) : null,
   });
 }
 
