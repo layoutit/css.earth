@@ -1,12 +1,12 @@
 {
   "schema": "cssearth-object@2",
   "id": "xo-4-system",
+  "parent": "milky-way",
   "type": "system",
   "generator": "site/build/prepare/system-packages.mts",
   "properties": {
     "system": {
-      "host": "xo-4",
-      "members": "planets"
+      "host": "xo-4"
     },
     "catalog": {
       "name": "Koit system",

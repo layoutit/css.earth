@@ -1,12 +1,12 @@
 {
   "schema": "cssearth-object@2",
   "id": "tres-3-system",
+  "parent": "milky-way",
   "type": "system",
   "generator": "site/build/prepare/system-packages.mts",
   "properties": {
     "system": {
-      "host": "tres-3",
-      "members": "planets"
+      "host": "tres-3"
     },
     "catalog": {
       "name": "Pipoltr system",

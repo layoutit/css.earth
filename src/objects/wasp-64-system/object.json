@@ -1,12 +1,12 @@
 {
   "schema": "cssearth-object@2",
   "id": "wasp-64-system",
+  "parent": "milky-way",
   "type": "system",
   "generator": "site/build/prepare/system-packages.mts",
   "properties": {
     "system": {
-      "host": "wasp-64",
-      "members": "planets"
+      "host": "wasp-64"
     },
     "catalog": {
       "name": "Atakoraka system",

@@ -79,7 +79,7 @@ export function draftFromMcDonald(row: ReturnType<typeof parseMcDonaldRow>, iden
   if (!id) throw new Error(`${hip}: every id its names give (${[name, hd, hip].join(', ')}) is taken or starts with a digit; give this star a spec by hand.`);
   const at = `${MCDONALD.credit}, table 2, ${hip}`, parsecs = row.parsecs, width = sunWidth(row.radius), luminosity = row.luminosity >= 10 ? Math.round(row.luminosity).toLocaleString('en-US') : String(row.luminosity);
   return {
-    id, name, system: `${name} system`, target: hip,
+    id, name, system: `${name} system`, parent: 'milky-way', target: hip,
     ...(name === hip ? {} : { aliases: [...new Set([preferred?.step === 'iau' ? preferredName(identifiers)?.name : undefined, hd, hip].filter((value): value is string => !!value && value !== name))] }),
     ...(preferred && PROPER_STEPS.has(preferred.step) ? { featured: true } : {}),
     description: `A star ${parsecs.toFixed(0)} parsecs away, ${width}, measured from its light.`,

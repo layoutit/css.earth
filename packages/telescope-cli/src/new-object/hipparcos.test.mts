@@ -15,6 +15,7 @@ test('a table 2 row inside the paper\'s well-fit subset is drafted at its distan
   const spec = draftFromMcDonald(row, ['HIP 13847', 'HD 18622', '* tet Eri'], { gaia: false, velocity: { velocity: 11.9, error: 0.7, quality: 'A' }, taken: () => false,
     name: { name: 'Acamar', step: 'iau', identifier: '* tet Eri' } });
   assert.equal(spec.id, 'acamar');
+  assert.equal(spec.parent, 'milky-way', 'a star Hipparcos places is inside the Milky Way');
   assert.equal(spec.featured, true);
   assert.equal(spec.mass, 'unmeasured');
   assert.equal(spec.distance.value, 49.431);

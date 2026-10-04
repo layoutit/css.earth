@@ -1,12 +1,12 @@
 {
   "schema": "cssearth-object@2",
   "id": "hat-p-9-system",
+  "parent": "milky-way",
   "type": "system",
   "generator": "site/build/prepare/system-packages.mts",
   "properties": {
     "system": {
-      "host": "hat-p-9",
-      "members": "planets"
+      "host": "hat-p-9"
     },
     "catalog": {
       "name": "Tevel system",

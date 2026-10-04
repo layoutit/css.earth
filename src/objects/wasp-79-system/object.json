@@ -1,12 +1,12 @@
 {
   "schema": "cssearth-object@2",
   "id": "wasp-79-system",
+  "parent": "milky-way",
   "type": "system",
   "generator": "site/build/prepare/system-packages.mts",
   "properties": {
     "system": {
-      "host": "wasp-79",
-      "members": "planets"
+      "host": "wasp-79"
     },
     "catalog": {
       "name": "Montuno system",

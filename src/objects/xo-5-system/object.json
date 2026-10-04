@@ -1,12 +1,12 @@
 {
   "schema": "cssearth-object@2",
   "id": "xo-5-system",
+  "parent": "milky-way",
   "type": "system",
   "generator": "site/build/prepare/system-packages.mts",
   "properties": {
     "system": {
-      "host": "xo-5",
-      "members": "planets"
+      "host": "xo-5"
     },
     "catalog": {
       "name": "Absolutno system",

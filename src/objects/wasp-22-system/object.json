@@ -1,12 +1,12 @@
 {
   "schema": "cssearth-object@2",
   "id": "wasp-22-system",
+  "parent": "milky-way",
   "type": "system",
   "generator": "site/build/prepare/system-packages.mts",
   "properties": {
     "system": {
-      "host": "wasp-22",
-      "members": "planets"
+      "host": "wasp-22"
     },
     "catalog": {
       "name": "Tojil system",
