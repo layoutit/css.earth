@@ -1,0 +1,59 @@
+{
+  "schema": "cssearth-published-phase-curve@1",
+  "source": "Kempton et al. (2023), Nature 620, 67, 'A reflective, metal-rich atmosphere for GJ 1214b from its JWST phase curve' (doi:10.1038/s41586-023-06159-5; arXiv:2305.06240). JWST MIRI LRS phase curve of 20-22 July 2022, white light, 5.0-12.0 um. Values read from the authors' LaTeX source: Methods eq. 5 and the table of derived phase curve parameters (Extended Data Table 1), row 5.0-12.0, in ppm; the radius ratio from the authors' release (Zenodo record 7703086, 'Generate plots.ipynb').",
+  "bandMicrons": [
+    5,
+    12
+  ],
+  "radiusRatio": {
+    "value": 0.1161,
+    "cell": "RpRs = 0.1161",
+    "where": "Zenodo record 7703086, 'Generate plots.ipynb'"
+  },
+  "eclipseDepth": {
+    "value": 0.000379,
+    "cell": "379 +12/-13 ppm",
+    "where": "Extended Data Table 1, 5.0-12.0, E"
+  },
+  "model": {
+    "kind": "eclipse-fourier",
+    "equation": "F_p = E + C1 (cos(omega t) - 1) + D1 sin(omega t) + C2 (cos(2 omega t) - 1) + D2 sin(2 omega t), t counted from mid-eclipse (Methods eq. 5); every term a fraction of the star's flux.",
+    "c1": {
+      "value": 0.000127,
+      "cell": "127 +/- 4 ppm",
+      "where": "Extended Data Table 1, 5.0-12.0, C_1"
+    },
+    "d1": {
+      "value": -0.000139,
+      "cell": "-139 +/- 7 ppm",
+      "where": "Extended Data Table 1, 5.0-12.0, D_1"
+    },
+    "c2": {
+      "value": 0.000046,
+      "cell": "46 +/- 4 ppm",
+      "where": "Extended Data Table 1, 5.0-12.0, C_2"
+    },
+    "d2": {
+      "value": -0.000015,
+      "cell": "-15 +/- 4 ppm",
+      "where": "Extended Data Table 1, 5.0-12.0, D_2"
+    }
+  },
+  "reported": {
+    "daysideK": {
+      "value": 553,
+      "cell": "553 +/- 9 K",
+      "where": "abstract and main text: the dayside spectrum's average brightness temperature and best-fit blackbody"
+    },
+    "nightsideK": {
+      "value": 437,
+      "cell": "437 +/- 19 K",
+      "where": "abstract: the nightside spectrum's average brightness temperature"
+    },
+    "offsetDegrees": {
+      "value": -47.68,
+      "cell": "phi_med = -47.68 degrees: the phase of the first-order term, atan2(D_1, C_1), not the offset of the peak",
+      "where": "Zenodo record 7703086, white_light_result.txt"
+    }
+  }
+}

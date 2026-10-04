@@ -111,6 +111,28 @@
           }
         ]
       }
+    },
+    {
+      "id": "qatar-2b-temperature-phase-curve",
+      "path": "science/may-2022/phase-curve.json",
+      "origin": "https://arxiv.org/abs/2203.15059",
+      "credit": "May et al. (2022); a Spitzer IRAC 4.5 µm phase curve of 21-23 May 2017",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "Transcribed from the paper, table cell by table cell, with each cell's location",
+      "redistribution": "Factual parameter transcription only; no paper figures",
+      "consumers": [
+        "temperature-phase-curve-map"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-qatar-2b-temperature-phase-curve",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
@@ -127,7 +149,8 @@
         "generator": "packages/telescope-cli/src/source-authoring/context-markers.mts",
         "inputs": [
           "qatar-2b-observational-measurements",
-          "qatar-2b-preparation-raster"
+          "qatar-2b-preparation-raster",
+          "qatar-2b-temperature-phase-curve"
         ]
       },
       "generator": "packages/telescope-cli/src/source-authoring/context-markers.mts",

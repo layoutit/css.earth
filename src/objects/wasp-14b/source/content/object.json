@@ -49,7 +49,7 @@
   },
   "datasets": {
     "titleKey": "datasets",
-    "defaultDataset": "shape",
+    "defaultDataset": "temperature",
     "controls": [
       {
         "id": "shape",
@@ -65,6 +65,66 @@
         },
         "falseColor": false,
         "notes": "No image or color of WASP-14 b is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the color of wasp-14's light, as its color dataset measures it."
+      },
+      {
+        "id": "temperature",
+        "label": "Spitzer",
+        "qualification": "Published fit · Bell et al. (2021) · a Spitzer IRAC 4.5 µm phase curve (program 80073, first published by Wong et al. (2015)) · longitude only",
+        "thumbnail": "wasp-14b-dataset-temperature.webp",
+        "surface": "wasp-14b-surface-temperature@2x.webp",
+        "poles": "wasp-14b-poles-temperature@2x.webp",
+        "source": {
+          "id": "wasp-14b-temperature-phase-curve",
+          "path": "../manifest.json",
+          "url": "https://arxiv.org/abs/2010.00687"
+        },
+        "falseColor": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Brightness temperature",
+          "labels": [
+            "1150",
+            "1850",
+            "2550"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                13,
+                8,
+                135
+              ],
+              [
+                126,
+                3,
+                168
+              ],
+              [
+                204,
+                71,
+                120
+              ],
+              [
+                248,
+                149,
+                64
+              ],
+              [
+                240,
+                249,
+                33
+              ]
+            ],
+            "labels": [
+              "1150",
+              "1850",
+              "2550"
+            ]
+          },
+          "meta": "K",
+          "sourceUrl": "https://arxiv.org/abs/2010.00687"
+        },
+        "notes": "Brightness temperature at 4.5 µm of WASP-14 b from Bell et al. (2021)'s published fit to a Spitzer IRAC 4.5 µm phase curve (program 80073, first published by Wong et al. (2015)). Their Fourier series becomes a map of longitude through the Cowan & Agol (2008) inversion, so there is no north-south detail and every latitude is drawn alike. The hottest longitude is 12° east of noon. The false color runs from 1,150 to 2,550 K. With shadows on, the star's light darkens the night half."
       }
     ]
   },
