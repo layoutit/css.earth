@@ -46,9 +46,16 @@ export function parseSolidPreparationSource(input:unknown) {
     geometry:shape({radius:number,radiusKm:number,mapUrl:text,polesUrl:text,radialModels:optional(value=>value),
       radialTerrain:optional(parseRadialSource),radialTerrainAlternatives:optional(array(value=>Object.assign({},parseRadialSource(value),shape({datasetId:text,additionalDatasetIds:optional(array(text))})(value)))),
       camera:optional(value=>{const camera=shape({framingScale:optional(number)})(value);refuseAuthoredCameraAngles(camera);return camera;})}),
-    lighting:parseSolidLighting,
+    lighting:optional(parseSolidLighting),
     presentation:shape({defaultDataset:text}),
     celestial:shape({sunSource:text,sunQualification:optional(text),qualification:optional(text)})})(source);
+  // A sphere draws lighting frames and needs their recipe. A shape-model body bakes its lighting into its mesh atlases
+  // (radial/radial-materials.ts) and draws none, so a lighting block there would be read by nothing.
+  const lightingField=`${extra.namespace}: source/preparation/terrestrial.json lighting`;
+  if(extra.geometry.radialTerrain!==undefined&&extra.lighting!==undefined)
+    throw new TypeError(`${lightingField} is read by nothing: geometry.radialTerrain makes this a shape-model body, whose lighting is baked into its mesh atlases. Remove the block.`);
+  if(extra.geometry.radialTerrain===undefined&&extra.lighting===undefined)
+    throw new TypeError(`${lightingField} is missing: a body without geometry.radialTerrain is a sphere, which draws lighting frames.`);
   const raster=requireRecord(source.raster);
   return {...source,...base,...extra,raster:{...base.raster,
     observations:base.raster.observations.map(entry=>({...entry,validity:validity(entry.validity)})),

@@ -48,10 +48,11 @@ export function parseTerrestrialProfile(input:unknown) {
       !Number.isSafeInteger(value.raster.poleSize) || value.raster.poleSize <= 0 ||
       !isArray(value.raster.observations) ||
       !Number.isFinite(value.geometry?.radius) || value.geometry.radius <= 0 || !Number.isFinite(value.geometry.radiusKm) || value.geometry.radiusKm <= 0 ||
-      !Number.isSafeInteger(value.lighting?.frameSize) || value.lighting.frameSize <= 0 ||
-      !Number.isSafeInteger(value.lighting.frameCount) || value.lighting.frameCount < 2 ||
-      !Number.isSafeInteger(value.lighting.columns) || value.lighting.columns <= 0 || value.lighting.frameCount % value.lighting.columns ||
-      value.lighting.logicalSize !== value.geometry.radius * 2 || ![...value.raster.observations, ...(value.raster.scientific ?? []), ...(value.raster.observedColors ?? []), ...(value.raster.shapeViews ?? []), ...(value.raster.surfaceObservations ?? [])].some(dataset => dataset.id === value.presentation?.defaultDataset)) {
+      // Only a sphere has lighting frames (records/profile-source.ts); they are drawn at the sphere's diameter.
+      (value.lighting !== undefined && (!Number.isSafeInteger(value.lighting.frameSize) || value.lighting.frameSize <= 0 ||
+        !Number.isSafeInteger(value.lighting.frameCount) || value.lighting.frameCount < 2 ||
+        !Number.isSafeInteger(value.lighting.columns) || value.lighting.columns <= 0 || value.lighting.frameCount % value.lighting.columns ||
+        value.lighting.logicalSize !== value.geometry.radius * 2)) || ![...value.raster.observations, ...(value.raster.scientific ?? []), ...(value.raster.observedColors ?? []), ...(value.raster.shapeViews ?? []), ...(value.raster.surfaceObservations ?? [])].some(dataset => dataset.id === value.presentation?.defaultDataset)) {
     throw new TypeError('Invalid terrestrial surface preparation profile.');
   }
   validateTerrestrialRings(value.rings, value.geometry.radiusKm);

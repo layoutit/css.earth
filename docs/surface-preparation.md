@@ -681,7 +681,8 @@ same published law, so the limb in the app is the limb the instrument saw.
   [refresh-sphere-lighting.mts](../packages/bake/cli/refresh-sphere-lighting.mts)
   rebakes only that atlas, without the source maps. The lane's shape-model
   bodies, Phobos, Deimos, Mimas and Tethys among them, draw no lighting
-  frames. Their flood-lit bank is the map unshaded, which is what a law that
+  frames, and their recipes state no `lighting` block: the parser refuses one
+  there, since nothing would read it. Their flood-lit bank is the map unshaded, which is what a law that
   is flat at zero phase gives: Akimov's function, or the Hapke fits of Phobos
   and Deimos, flat to 0.2%. Their Shadows bank is baked once in the body frame
   as 0.12 + 0.88 cos i with cast shadows, where a law that depends on the

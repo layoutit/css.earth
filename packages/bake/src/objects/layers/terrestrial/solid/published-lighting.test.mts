@@ -35,7 +35,7 @@ test('a sphere with published models gets its lighting atlas from the law, in th
     // The third frame has the Sun toward +x at 70.5 degrees phase: lit on that side, night on the other.
     assert.equal(alpha(2, 3, middle), 255);
     assert.ok(alpha(2, size - 6, middle) < 200, `sunward side alpha ${alpha(2, size - 6, middle)}`);
-    await assert.rejects(prepareSolidMaterial({ surfaces: [], sourceDirectory: root, publicDirectory: root, outputDirectory: root, config, radial: true }), /fixture: source\/preparation\/terrestrial\.json lighting\.limb .* shape-model body/);
+    await assert.rejects(prepareSolidMaterial({ surfaces: [], sourceDirectory: root, publicDirectory: root, outputDirectory: root, config, radial: true }), /fixture: source\/preparation\/terrestrial\.json lighting is read by nothing: a shape-model body/);
     await assert.rejects(prepareSolidMaterial({ surfaces: [], publicDirectory: root, outputDirectory: root, config }), /needs the source directory/);
   } finally { await rm(root, { recursive: true, force: true }); }
 });

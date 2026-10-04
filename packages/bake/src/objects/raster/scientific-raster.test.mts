@@ -135,7 +135,7 @@ test('capability selection and validity policy are independent of body names', a
   const config = JSON.parse(await readFile(new URL('../../../../../src/objects/vesta/source/preparation/terrestrial.json', import.meta.url), 'utf8'));
   const variant = structuredClone(config); variant.namespace = 'test-body'; variant.publicBase = '/scenes/test-body/';
   assert.equal(parseTerrestrialProfile(variant).namespace, 'test-body');
-  variant.geometry.radius = 231; assert.throws(() => parseTerrestrialProfile(variant), /Invalid terrestrial/);
+  variant.geometry.radius = 0; assert.throws(() => parseTerrestrialProfile(variant), /Invalid terrestrial/);
 });
 
 test('a measured elevation dataset can be the only surface capability', async () => {

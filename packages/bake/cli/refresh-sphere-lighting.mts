@@ -26,5 +26,5 @@ for (const id of ids) {
   if (!inventory) throw new Error(`${id}: ${objectDirectory}/inventory.json is missing; a body is published before its lighting is refreshed.`);
   const kept = inventory.assets.filter(asset => asset.location === 'public' && asset.filename !== filename).map(asset => ({ filename: asset.filename, bytes: asset.bytes, sha256: asset.sha256 }));
   await updateInventory({ objectId: id, objectDirectory, location: 'public', assets: [...kept, { filename, bytes: bytes.length, sha256: sha256(bytes) }] });
-  console.log(`${id}: ${filename} ${bytes.length} bytes, ${'limb' in config.lighting ? 'published models' : 'authored sphere law'}.`);
+  console.log(`${id}: ${filename} ${bytes.length} bytes, ${config.lighting && 'limb' in config.lighting ? 'published models' : 'authored sphere law'}.`);
 }
