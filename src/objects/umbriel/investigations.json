@@ -97,12 +97,13 @@
       "id": "limb-law",
       "subject": "Photometric law for the lighting overlays",
       "status": "unresolved",
-      "finding": "Helfenstein, Veverka and Thomas (1988) fitted Hapke models to Voyager whole-disc photometry of the five large Uranian moons. Only the abstract could be read (single-scattering albedo from 0.3 for Umbriel to 0.7 for Ariel, g near -0.3), and a whole-disc fit states no emission range. Schenk's 2020 mosaic history names ISIS photomet without its parameter file. Umbriel keeps the shared sphere bank.",
+      "finding": "Helfenstein, Veverka and Thomas (1988) fitted Hapke models to Voyager whole-disc photometry of the five large Uranian moons. Only the abstract could be read (single-scattering albedo from 0.3 for Umbriel to 0.7 for Ariel, g near -0.3), and a whole-disc fit states no emission range. The summary of Helfenstein and Veverka in NASA's Reports of Planetary Geology and Geophysics Program 1988 (TM-4130, page 238) is open: Hapke parameters from Voyager clear-filter photometry, fitted to whole-disc and disc-resolved data together, global average single-scattering albedo 0.372, asymmetry -0.235, roughness 26 degrees. It prints no opposition surge width or amplitude, so the model is incomplete, and no angle ranges. Schenk's 2020 mosaic history names ISIS photomet without its parameter file. Umbriel keeps the shared sphere bank.",
       "evidence": [
         "https://doi.org/10.1016/0019-1035(88)90039-5",
-        "https://ntrs.nasa.gov/citations/19880051927"
+        "https://ntrs.nasa.gov/citations/19880051927",
+        "https://ntrs.nasa.gov/citations/19900003138"
       ],
-      "revisitWhen": "A disc-resolved law for Umbriel with its fitted emission range is read in the paper, or the photometric parameter file of Schenk's mosaic is released."
+      "revisitWhen": "The opposition surge parameters that go with the 1988 summary's fit are read in the paper, or the photometric parameter file of Schenk's mosaic is released."
     },
     {
       "id": "map-left-edge-2026-09-28",

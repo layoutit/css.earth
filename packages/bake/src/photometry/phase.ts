@@ -22,11 +22,22 @@ export type PhaseModel =
    * the fit's own extrapolation to zero phase. A polynomial says nothing beyond the phase its data reached, where it can
    * turn negative, so there it is held at its value at `heldBeyondDegrees`.
    */
-  | { readonly family: 'quadratic'; readonly constant: number; readonly perDegree: number; readonly perDegreeSquared: number; readonly heldBeyondDegrees: number };
+  | { readonly family: 'quadratic'; readonly constant: number; readonly perDegree: number; readonly perDegreeSquared: number; readonly heldBeyondDegrees: number }
+  /**
+   * Phase values a paper prints at the phase angles of its images (Buratti and Mosher 1995, Table 1), each point
+   * [phase in degrees, A], joined by straight lines. Outside the printed phases it is held at the nearest printed value.
+   */
+  | { readonly family: 'tabulated'; readonly points: readonly (readonly [number, number])[] };
 
 export function phaseValue(model: PhaseModel, phase: number): number {
   if (model.family === 'exponential') return Math.exp(-model.slopePerRadian * phase);
   if (model.family === 'quadratic') { const degrees = Math.min(phase * 180 / Math.PI, model.heldBeyondDegrees); return model.constant + model.perDegree * degrees + model.perDegreeSquared * degrees * degrees; }
+  if (model.family === 'tabulated') {
+    const degrees = phase * 180 / Math.PI, { points } = model, next = points.findIndex(([at]) => at >= degrees);
+    if (next <= 0) return points[next === 0 ? 0 : points.length - 1][1];
+    const [from, low] = points[next - 1], [to, high] = points[next];
+    return low + (high - low) * (degrees - from) / (to - from);
+  }
   const g = model.asymmetry;
   return (1 + model.amplitude / (1 + Math.tan(phase / 2) / model.width)) * (1 - g * g) / (1 + 2 * g * Math.cos(phase) + g * g) ** 1.5;
 }
@@ -45,6 +56,12 @@ export function assertPhaseModel(model: PhaseModel) {
     const vertex = perDegreeSquared === 0 ? 0 : -perDegree / (2 * perDegreeSquared), at = (degrees: number) => constant + perDegree * degrees + perDegreeSquared * degrees * degrees;
     const least = Math.min(at(0), at(heldBeyondDegrees), vertex > 0 && vertex < heldBeyondDegrees ? at(vertex) : Infinity);
     if (!(least > 0)) throw new TypeError(`Quadratic phase function must be positive from 0 to ${heldBeyondDegrees} degrees, got ${least} at its least.`);
+    return model;
+  }
+  if (model.family === 'tabulated') {
+    const { points } = model;
+    if (!(Array.isArray(points) && points.length >= 2) || !points.every(point => Array.isArray(point) && point.length === 2 && point.every(Number.isFinite))) throw new TypeError('A tabulated phase function needs at least two finite [degrees, value] points.');
+    if (!points.every(([degrees, value], index) => degrees >= 0 && degrees <= 180 && value > 0 && (index === 0 || degrees > points[index - 1][0]))) throw new TypeError('Tabulated phase points must have increasing phases within [0, 180] degrees and positive values.');
     return model;
   }
   if (model.family !== 'hg-shadow-hiding') throw new TypeError(`Unknown phase function: ${String((model as { family: unknown }).family)}`);

@@ -172,7 +172,16 @@
     }
   ],
   "lighting": {
-    "bank": "sphere",
+    "frameSize": 512,
+    "columns": 8,
+    "frameCount": 256,
+    "billboardFrameSize": 24,
+    "billboardColumns": 16,
+    "rowOutput": "lighting-{density}x-row-{row}.webp",
+    "billboardOutput": "lighting-{density}x-billboard.webp",
+    "minimumLightViewZ": -1,
+    "maximumLightViewZ": 1,
+    "radiusScale": 0.505,
     "presentationSize": 460,
     "defaultFrame": 230,
     "bankSchema": "cssiapetus-prepared-lighting-bank@1",
@@ -180,20 +189,20 @@
     "metadata": {
       "schema": "cssiapetus-prepared-lighting@1",
       "storageModel": "prepared-full-resolution-density-row-shards",
-      "model": "prepared-full-phase-lambert-cubic-sky-sun-no-atmosphere",
-      "sourceRenderer": "OpenSpace@56e29b54/modules/globebrowsing/shaders/texturetilemapping.glsl",
-      "ambientIntensity": 0.05,
-      "shadowlessFloodLimbFloor": 0.35,
-      "orenNayarRoughness": 0,
-      "terminatorSmoothstep": [
-        0,
-        0.1
-      ],
+      "model": "published-photometric-models",
       "minimumLightViewZ": -1,
       "maximumLightViewZ": 1,
       "baseLightAzimuthDegrees": 0,
       "cameraContract": "unbounded-accumulated-matrix3d-phase-and-roll",
-      "runtimeRasterization": false
+      "runtimeRasterization": false,
+      "lightingModel": "Lunar-like (Lommel-Seeliger) law of Buratti and Mosher (1995): the body's published photometric models relative to the flood-lit disc centre (packages/bake/src/photometry/limb.ts); no floor, ambient term or terminator ramp"
+    },
+    "limb": {
+      "models": [
+        "photometry/buratti-mosher-1995-lommel-seeliger-clear.json",
+        "photometry/buratti-mosher-1995-lommel-seeliger-clear.json",
+        "photometry/buratti-mosher-1995-lommel-seeliger-clear.json"
+      ]
     }
   }
 }

@@ -1,0 +1,31 @@
+{
+  "schema": "cssearth-photometric-model@1",
+  "id": "helfenstein-1989-hapke-clear",
+  "instrument": "Voyager 2 ISS, with Earth-based photometry near opposition",
+  "filter": "clear filter, 0.48 um",
+  "quantity": "radiance-factor",
+  "model": {
+    "family": "hapke",
+    "singleScatteringAlbedo": 0.41,
+    "hFunction": "hapke-1981",
+    "phaseFunction": {
+      "form": "henyey-greenstein",
+      "asymmetry": -0.29
+    },
+    "shadowHiding": {
+      "amplitude": 1.03,
+      "width": 0.007
+    },
+    "roughnessDegrees": 21
+  },
+  "fit": {
+    "phaseDegrees": [
+      18,
+      148
+    ],
+    "emissionDegrees": [
+      0,
+      84.9
+    ]
+  }
+}

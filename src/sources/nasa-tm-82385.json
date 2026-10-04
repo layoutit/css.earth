@@ -1,0 +1,42 @@
+{
+  "id": "nasa-tm-82385",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Reports of Planetary Geology Program, 1980 (NASA Technical Memorandum 82385)",
+  "identifiers": [
+    {
+      "type": "NASA report number",
+      "value": "NASA-TM-82385"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://ntrs.nasa.gov/citations/19810007392",
+      "label": "Publication"
+    },
+    {
+      "role": "original",
+      "url": "https://ntrs.nasa.gov/api/citations/19810007392/downloads/19810007392.pdf",
+      "label": "Report"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/ganymede/source/manifest.json",
+      "locator": "/documents/25"
+    },
+    {
+      "path": "src/objects/callisto/source/manifest.json",
+      "locator": "/documents/25"
+    }
+  ],
+  "creators": [
+    "Steven W. Squyres",
+    "Joseph Veverka"
+  ],
+  "publisher": "NASA Office of Space Science",
+  "publicationDate": "1980",
+  "relations": [],
+  "statements": []
+}
