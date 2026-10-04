@@ -208,7 +208,7 @@ export async function draftsFromTable(names: readonly string[], archive: Archive
           credit: `${paper.credit}, VizieR ${where}, names the star in SIMBAD (${columns.simbadName}); SIMBAD holds its position${placed.bibcode ? `, from ${placed.bibcode}` : ' and names no paper for it'}` }
         : { catalogue: request.table, row: key, columns: DECIMAL_POSITION, credit: paper.credit, url: paper.url });
       const shown = days.toFixed(days < 10 ? 2 : 1);
-      stars.push({ ...request.featured ? { featured: true as const } : {}, ...relationCepheidDraft({ id: slug(starName), name: starName, target: simbadName ?? starName, galaxy: galaxy.name, inside: galaxy.id, periodDays: days, paper, position,
+      stars.push({ ...request.featured ? { featured: true as const } : {}, ...relationCepheidDraft({ id: slug(starName), name: starName, ...(simbadName ? { target: simbadName } : {}), galaxy: galaxy.name, inside: galaxy.id, periodDays: days, paper, position,
         periodSource: `${paper.credit}, VizieR ${where} (${columns.period.column}${columns.period.log ? ` ${cells[columns.period.column]}` : ''})`,
         description: `A ${starClass.noun} in ${galaxy.reader} that pulsates every ${shown} days.`, distance: placeInGalaxy(galaxy, raDeg, decDeg, where), velocity,
         text: { card: `A ${starClass.noun} in ${galaxy.reader}, ${far} away, that swells and shrinks every ${shown} days.`, introduction: `${cited.authors} list its pulsation at ${shown} days.`,

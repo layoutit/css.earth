@@ -145,7 +145,8 @@ test('a table with a position per star drafts a spec placed by its row, named as
   assert.equal(catalogueRowUrl(spec.position!), VIZIER_ASU);
   // A star SIMBAD does not list takes the name its table writes, in its galaxy.
   const unlisted = answering([['-meta.all', gerkeMeta], ['/ReadMe', gerkeReadMe], ['rvz_radvel', 'rvz_radvel,rvz_err,rvz_bibcode\n-47.0,0.1,"2022ApJS..261....6K"\n'], ['DISTANCE(POINT', 'main_id\totype\tseparation\n'], [GERKE, gerkeRows]]);
-  assert.equal(parseStarSpec((await draftsFromTable([`cepheid:m81=${GERKE}#095614.95+690141.0`], unlisted, root)).stars[0]).name, 'M81 Cepheid 095614.95+690141.0');
+  const named = parseStarSpec((await draftsFromTable([`cepheid:m81=${GERKE}#095614.95+690141.0`], unlisted, root)).stars[0]);
+  assert.deepEqual([named.name, named.target], ['M81 Cepheid 095614.95+690141.0', undefined], 'and it claims no name in SIMBAD');
   await assert.rejects(draftsFromTable([`cepheid:m81=${GERKE}`], answering([['-meta.all', '#INFO\tError=Table or Catalog not found: x\t\n']]), root), /VizieR holds no table J\/ApJ\/743\/176\/table1; `telescope stars m81` lists the tables/u);
 });
 

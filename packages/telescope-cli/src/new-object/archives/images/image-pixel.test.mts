@@ -148,7 +148,7 @@ test('a table of chips and pixels drafts a star through the exposure the request
   assert.throws(() => parseTableRequest(`cepheid:ngc-1637=${TABLE}#exposure=u6fv0101m,firstPixel=1`), /a table of detector pixels is placed with both/u);
   const { archive, asked } = serving(exposure(), answers), { stars, report } = await draftsFromTable([`${request},C01`], archive, root), spec = parseStarSpec(stars[0]);
   assert.deepEqual(report, [`${request},C01: 1 Cepheid of Gibson et al. (2000), ApJ 529, 723 in NGC 1637, placed by pixel on mast:HST/product/u6fv0101m_c0m.fits; radius and temperature from Groenewegen (2020), A&A 635, A33's period relations.`]);
-  assert.deepEqual([spec.id, spec.name, spec.target, spec.parent], ['ngc-1637-cepheid-c01', 'NGC 1637 Cepheid C01', 'NGC 1637 Cepheid C01', 'ngc-1637'], 'the star keeps its table\'s name: SIMBAD is not asked which star lies there');
+  assert.deepEqual([spec.id, spec.name, spec.target, spec.parent], ['ngc-1637-cepheid-c01', 'NGC 1637 Cepheid C01', undefined, 'ngc-1637'], 'the star keeps its table\'s name and claims none in SIMBAD: SIMBAD is not asked which star lies there');
   assert.deepEqual(spec.position, { archive: 'mast', catalogue: 'mast:HST/product/u6fv0101m_c0m.fits', row: { extension: 'SCI,1', x: '584.5', y: '490.2' }, firstPixel: 0.5, url: 'https://doi.org/10.26093/cds/vizier.15290723',
     credit: 'Gibson et al. (2000), ApJ 529, 723, VizieR J/ApJ/529/723/appen CNN = C01 (Chip 1, Xpos 584.5, Ypos 490.2)' });
   assert.deepEqual(asked.at(-1), { offset: 20160, length: 2880 }, 'the star was placed in its galaxy from the header of chip 1');
