@@ -49,7 +49,7 @@ export async function countModules(root = process.cwd(), list: (root: string) =>
   for (const file of await list(root)) {
     const path = file.replaceAll('\\', '/');
     const directory = dirname(path);
-    if (directory === '.' || isExempt(directory)) continue;
+    if (directory === './' || isExempt(directory)) continue;
     const name = path.slice(path.lastIndexOf('/') + 1);
     if (!CODE.test(name) || name.endsWith('.d.ts') || name.endsWith('.d.mts')) continue;
     const count = counts.get(directory) ?? { implementations: 0, tests: 0 };
@@ -59,13 +59,18 @@ export async function countModules(root = process.cwd(), list: (root: string) =>
   return counts;
 }
 
+export interface DirectoryBaseline { implementations: number; tests: number; reason?: string }
 export interface Baseline { readonly schema: 'cssearth-directory-growth@1'; readonly allowance: number;
-  readonly directories: Readonly<Record<string, { implementations: number; tests: number }>> }
+  readonly directories: Readonly<Record<string, DirectoryBaseline>> }
 
-export function buildBaseline(counts: ReadonlyMap<string, { implementations: number; tests: number }>): Baseline {
-  const directories: Record<string, { implementations: number; tests: number }> = {};
+export function buildBaseline(counts: ReadonlyMap<string, { implementations: number; tests: number }>,
+  previous?: Baseline): Baseline {
+  const directories: Record<string, DirectoryBaseline> = {};
   for (const [directory, count] of [...counts].sort(([left], [right]) => left.localeCompare(right))) {
-    if (count.implementations > FREE_ALLOWANCE || count.tests > FREE_ALLOWANCE) directories[directory] = count;
+    if (count.implementations <= FREE_ALLOWANCE && count.tests <= FREE_ALLOWANCE) continue;
+    const reason = previous?.directories[directory]?.reason;
+    if (!reason?.trim()) throw new TypeError(`${directory}: add a written reason before recording an above-allowance baseline.`);
+    directories[directory] = { ...count, reason };
   }
   return { schema: 'cssearth-directory-growth@1', allowance: FREE_ALLOWANCE, directories };
 }
@@ -93,16 +98,42 @@ export function growth(counts: ReadonlyMap<string, { implementations: number; te
 
 export async function readBaseline(root = process.cwd()): Promise<Baseline> {
   const raw: unknown = JSON.parse(await readFile(resolve(root, BASELINE_PATH), 'utf8'));
-  if (!raw || typeof raw !== 'object' || (raw as Baseline).schema !== 'cssearth-directory-growth@1') {
+  return validateBaseline(raw);
+}
+
+const isRecord = (value: unknown): value is Record<string, unknown> =>
+  value !== null && typeof value === 'object' && !Array.isArray(value);
+const isCount = (value: unknown): value is number =>
+  typeof value === 'number' && Number.isSafeInteger(value) && value >= 0;
+
+/** Validate the file at its input boundary; an undocumented ceiling cannot waive the check. */
+export function validateBaseline(raw: unknown): Baseline {
+  if (!isRecord(raw) || raw.schema !== 'cssearth-directory-growth@1'
+    || raw.allowance !== FREE_ALLOWANCE || !isRecord(raw.directories)) {
     throw new TypeError(`${BASELINE_PATH} is not a cssearth-directory-growth@1 baseline.`);
   }
-  return raw as Baseline;
+  const directories: Record<string, DirectoryBaseline> = {};
+  for (const [directory, entry] of Object.entries(raw.directories)) {
+    if (!isRecord(entry) || !isCount(entry.implementations) || !isCount(entry.tests)) {
+      throw new TypeError(`${directory}: baseline counts must be non-negative integers.`);
+    }
+    if (entry.reason !== undefined && (typeof entry.reason !== 'string' || !entry.reason.trim())) {
+      throw new TypeError(`${directory}: baseline reason must be a non-empty string.`);
+    }
+    if ((entry.implementations > FREE_ALLOWANCE || entry.tests > FREE_ALLOWANCE)
+      && typeof entry.reason !== 'string') {
+      throw new TypeError(`${directory}: an above-allowance baseline requires a written reason.`);
+    }
+    directories[directory] = { implementations: entry.implementations, tests: entry.tests,
+      ...(typeof entry.reason === 'string' ? { reason: entry.reason } : {}) };
+  }
+  return { schema: 'cssearth-directory-growth@1', allowance: FREE_ALLOWANCE, directories };
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
   const counts = await countModules();
   if (process.argv.includes('--write')) {
-    const baseline = buildBaseline(counts);
+    const baseline = buildBaseline(counts, await readBaseline());
     await writeFile(BASELINE_PATH, JSON.stringify(baseline, null, 2) + '\n');
     console.log(`Recorded ${Object.keys(baseline.directories).length} directories over ${FREE_ALLOWANCE} modules.`);
   } else {

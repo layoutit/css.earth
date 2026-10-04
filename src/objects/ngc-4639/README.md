@@ -10,7 +10,7 @@ at the same distance.
 
 | Source | Measurement used |
 | --- | --- |
-| [Riess et al. (2016)](https://arxiv.org/abs/1604.01424) ([record](../../sources/arxiv-1604-01424.json)) | Table 5, row N4639 (SN 1990N): Cepheid distance modulus μ = 31.532 ± 0.071 mag, so 10^(μ/5 + 1) pc = 20.25 Mpc. The same distance places its Cepheids ([sh0es.mts](../../../packages/telescope-cli/src/new-object/sh0es.mts)). |
+| [Riess et al. (2016)](https://arxiv.org/abs/1604.01424) ([record](../../sources/arxiv-1604-01424.json)) | Table 5, row N4639 (SN 1990N): Cepheid distance modulus μ = 31.532 ± 0.071 mag, so 10^(μ/5 + 1) pc = 20.25 Mpc. The same distance places its Cepheids ([sh0es.mts](../../../packages/telescope-cli/src/new-object/archives/sh0es.mts)). |
 | [HyperLEDA](http://atlas.obs-hp.fr/hyperleda/) ([record](../../sources/hyperleda-2014.json)) | Meandata row PGC 42741: centre 190.71834°, 13.25724° (al2000 12.7145558 h), inclination 51.02°: the card's tilt. It is not in Leroy et al.'s PHANGS table. |
 | [RC3](https://cdsarc.cds.unistra.fr/viz-bin/cat/VII/155) ([record](../../sources/rc3-1991.json)) | Type SAB(rs)bc (`.SXT4..`): between unbarred and barred; log D25 = 1.44, the framing radius. |
 | [Cosmicflows-4, Tully et al. (2023)](https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/944/94) ([record](../../sources/cosmicflows-4.json)) | Which object it is inside: Table2 row PGC 42741 is its own group, 1PGC 42741, with no other member listed, so no group places it in a cluster and its parent is `nearby-universe`. |

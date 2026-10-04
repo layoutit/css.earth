@@ -24,7 +24,7 @@ test('file path aliases are followed; comments and plain JSON are not schema rec
 });
 test('registry schemas and tracked data discover paths relative to any checkout', () => {
   const root = mkdtempSync(join(tmpdir(), 'build-readers-'));
-  const files = ['packages/objects/src/prepared-data/example.ts', 'src/objects/body/source/recipe.json', 'site/build/read.mts', 'packages/objects/src/prepared-data/format-reader-ledger.ts'];
+  const files = ['packages/objects/src/prepared-data/example.ts', 'src/objects/body/source/recipe.json', 'site/build/read.mts', 'packages/objects/src/prepared-data/source/format-reader-ledger.ts'];
   try {
     for (const file of files) mkdirSync(join(root, file, '..'), { recursive: true });
     writeFileSync(join(root, files[0]!), "export const SCHEMA = 'cssearth-example@1';");
@@ -90,7 +90,7 @@ test('nullable adapters forward the whole document; projecting before admission 
 });
 test('ledger protects untracked map-sphere output without a tracked JSON record', () => {
   const root = mkdtempSync(join(tmpdir(), 'build-map-datasets-'));
-  const files = ['packages/objects/src/prepared-data/map-sphere-datasets.ts', 'packages/objects/src/prepared-data/format-reader-ledger.ts', 'site/build/read.mts'];
+  const files = ['packages/objects/src/prepared-data/surface/map-sphere-datasets.ts', 'packages/objects/src/prepared-data/source/format-reader-ledger.ts', 'site/build/read.mts'];
   try {
     for (const file of files) mkdirSync(join(root, file, '..'), { recursive: true });
     writeFileSync(join(root, files[0]!), "export const MAP_SPHERE_DATASETS_SCHEMA = 'cssearth-map-sphere-datasets@2';");

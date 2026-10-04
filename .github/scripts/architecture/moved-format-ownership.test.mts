@@ -28,8 +28,8 @@ const routing: Readonly<Record<string, readonly string[]>> = {
   'packages/bake/src/asset-publication/restore-source-inputs.ts': ["sourceObject(JSON.parse(manifest.toString('utf8'))).schema === VOLUME_SOURCE_MANIFEST_SCHEMA"],
   'packages/bake/cli/prepare-nebula-field-catalogues.mts': ['previous.schema!==GAIA_NEBULA_FIELD_SCHEMA'],
 };
-const diagnosticOwners = ['prepared-data/telescope-product.ts', 'prepared-data/vo-discovery.ts',
-  'prepared-data/volume-source-manifest.ts', 'prepared-data/source-record-readers.ts', 'prepared-data/volume-presentation-source.ts', 'volume/gaia-nebula-field.ts', 'volume/nebula-delivery.ts'];
+const diagnosticOwners = ['prepared-data/source/telescope-product.ts', 'prepared-data/source/vo-discovery.ts',
+  'prepared-data/source/volume-source-manifest.ts', 'prepared-data/source/source-record-readers.ts', 'prepared-data/source/volume-presentation-source.ts', 'volume/nebula/gaia-nebula-field.ts', 'volume/nebula/nebula-delivery.ts'];
 const normalize = (text: string) => text.replace(/\s+/gu, '');
 const tree = (path: string, text: string) => ts.createSourceFile(path, text, ts.ScriptTarget.Latest, true);
 function literals(source: ts.SourceFile): string[] {

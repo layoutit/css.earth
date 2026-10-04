@@ -22,7 +22,7 @@ import { requireArray, requireFiniteNumber, requireRecord, requireString } from 
 import { NetcdfHeaderIncomplete, parseClassicNetcdfHeader, valueRange, type ByteRange, type NetcdfHeader } from '@cssearth/bake/objects/raster';
 import { containedPath, publishPinnedSourceStream } from '@cssearth/bake/objects/sources';
 import { assertRangeResponse, rangeRequestHeader } from '@cssearth/objects/node';
-import type { Archive } from '../archives.mts';
+import type { Archive } from '../archives/archives.mts';
 import { bindInputs, json, openOnMap, type PackageFiles } from '../dataset.mts';
 import { MAX_RECORDS, ZENODO_RECORDS, namesObject, parseZenodoRecord, parseZenodoSearch, reuseLicense, sizeText, speaksOfSimulation, zenodoQuery, type ReuseLicense } from '../../simulations/simulations.mts';
 

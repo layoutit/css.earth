@@ -7,7 +7,7 @@ import { pathToFileURL } from 'node:url';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
 import { answerParent } from '@cssearth/core/node';
 import { prepareObjects } from '@cssearth/bake/prepare-object';
-import { liveArchive } from './archives.mts';
+import { liveArchive } from './archives/archives.mts';
 import { writeDrafts } from './drafts.mts';
 import { formatNewObject, runNewObject } from './generate.mts';
 import { refreshSpec } from './refresh.mts';

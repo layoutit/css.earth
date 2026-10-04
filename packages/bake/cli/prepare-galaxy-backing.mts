@@ -5,7 +5,7 @@ import { GALAXY_BACKING_SCHEMA, parseDensityVolumeFrame, type VolumeSliceQuad } 
  * under the catalogue dots. The image is scaled so both anchors land on the app's own positions (the frame origin and
  * the Sun), laid in the plane through them normal to the Galactic north pole, and compiled with the same PolyCSS
  * volume compiler as the galaxy's other planes. Writes `prepared/<id>.json` (`GALAXY_BACKING_SCHEMA`, parsed by `parseGalaxyBacking` in
-   * packages/objects/src/prepared-data/galaxy-backing.ts) and `prepared/<id>/<id>.webp` through the lossy lane.
+   * packages/objects/src/prepared-data/catalogue/galaxy-backing.ts) and `prepared/<id>/<id>.webp` through the lossy lane.
  *
  * Close up the image's texels blow up and blur. `nearFade` dims the whole image to `nearOpacity` as the camera closes
  * in from `fadeKpc[0]` to `fadeKpc[1]`; each of `sections` is the same image, transparent beyond a ring about the

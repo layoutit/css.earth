@@ -12,7 +12,7 @@
 import { PLANCK_FLOOR_KELVIN } from '@cssearth/objects';
 import { readFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
-import type { Archive } from './archives.mts';
+import type { Archive } from './archives/archives.mts';
 import { CHECKED, planckChoice } from './color.mts';
 import { bindInputs, json, type PackageFiles } from './dataset.mts';
 import { decodeEntities, NASA_TAP } from './orbit.mts';

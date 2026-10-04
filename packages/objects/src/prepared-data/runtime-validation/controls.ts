@@ -1,4 +1,4 @@
-import { SHELL_SETTING_NAMES, objectCycleStates, type ObjectControls } from '../object-controls.js';
+import { SHELL_SETTING_NAMES, objectCycleStates, type ObjectControls } from '../runtime/object-controls.js';
 import { array, boolean, choice, fail, finite, record, text, unique } from './guards.js';
 export function requireControls(value: unknown): asserts value is ObjectControls {
   const controls = record(value, 'controls');

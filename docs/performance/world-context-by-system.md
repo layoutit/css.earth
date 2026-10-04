@@ -11,7 +11,7 @@ Every object is inside exactly one other object (`parent` in its object.json; th
 a body's row is in the file of the object it is inside.
 
 `pnpm prepare:world-context` writes the browser's copy ([summary.ts](../../packages/bake/src/world-context/summary.ts)),
-by one rule the bake and the build share ([world-holders.ts](../../packages/objects/src/prepared-data/world-holders.ts)):
+by one rule the bake and the build share ([world-holders.ts](../../packages/objects/src/prepared-data/world/world-holders.ts)):
 
 - `src/objects/observable-universe/prepared/world.json`, which every page reads, is the root object's: the camera, frame
   and sky facts and the Sun, at the frame's origin. It lists no other body.

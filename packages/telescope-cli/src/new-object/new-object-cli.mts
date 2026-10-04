@@ -51,7 +51,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(realpathSync(process.ar
     process.stdout.write(JSON.stringify(await runHostedPhase(handoff, await loadSolarEpoch(checkoutProjectRoot(import.meta.url)))));
   } else if (args.includes('--draft-photometry')) {
     // Band photometry for imaged planets from the UltracoolSheet: `--draft-photometry ID... --out entries.json`, then `--photometry entries.json` (new-object/ultracool.mts).
-    const { readFile, writeFile } = await import('node:fs/promises'), { draftUltracoolPhotometry } = await import('./ultracool.mts'), { liveArchive } = await import('./archives.mts');
+    const { readFile, writeFile } = await import('node:fs/promises'), { draftUltracoolPhotometry } = await import('./archives/ultracool.mts'), { liveArchive } = await import('./archives/archives.mts');
     const out = option('out'), ids = args.filter((argument, i) => !argument.startsWith('--') && args[i - 1] !== '--out');
     if (!out || !ids.length) throw new TypeError('Usage: new-object --draft-photometry ID... --out entries.json');
     const planets = await Promise.all(ids.map(async id => ({ id, name: String((JSON.parse(await readFile(`src/objects/${id}/source/content/object.json`, 'utf8')) as { displayName: string }).displayName) })));
@@ -60,45 +60,45 @@ if (process.argv[1] && import.meta.url === pathToFileURL(realpathSync(process.ar
     process.stdout.write(`${entries.map(entry => `${entry.id}: ${entry.photometry.bands.map(band => `${band.band} ${band.value} µJy`).join(', ')}`).join('\n')}\n${notes.join('\n')}\n${entries.length} of ${ids.length} planets drafted to ${out}; apply with --photometry ${out}\n`);
   } else if (args.includes('--charts') && !specPath) {
     // Charts for the archive planets of hosts already in the tree: `--charts HOST_ID...` (new-object/planet-charts.mts).
-    const { chartHosts } = await import('./planet-charts.mts'), { liveArchive } = await import('./archives.mts');
+    const { chartHosts } = await import('./planet-charts.mts'), { liveArchive } = await import('./archives/archives.mts');
     const lines = await chartHosts(checkoutProjectRoot(import.meta.url), args.filter(argument => !argument.startsWith('--')), liveArchive, line => process.stdout.write(`${line}\n`));
     process.stdout.write(`${lines.length} planet(s) charted. Bake them from the prepare step: node packages/bake/cli/prepare-object.mts <id>... --from prepare\n`);
   } else if (args.includes('--retime') && !specPath) {
     // Orbit timing of archive planets after the ephemeris rule changes: `--retime HOST_ID...` (new-object/retime.mts).
-    const { retimeHosts } = await import('./retime.mts'), { liveArchive } = await import('./archives.mts');
+    const { retimeHosts } = await import('./retime.mts'), { liveArchive } = await import('./archives/archives.mts');
     const lines = await retimeHosts(checkoutProjectRoot(import.meta.url), args.filter(argument => !argument.startsWith('--')), liveArchive, line => process.stdout.write(`${line}\n`));
     process.stdout.write(`${lines.length} planet(s) considered. Rebuild the astronomy package, then bake the changed ones.\n`);
   } else if (args.includes('--rename') && !specPath) {
     // Names by the order of preference, for stars the tool made: `--rename STAR_ID...` (new-object/rename.mts), then `--refresh`.
-    const { renameStars } = await import('./rename.mts'), { liveArchive } = await import('./archives.mts');
+    const { renameStars } = await import('./rename.mts'), { liveArchive } = await import('./archives/archives.mts');
     const { lines, refresh } = await renameStars(checkoutProjectRoot(import.meta.url), args.filter(argument => !argument.startsWith('--')), liveArchive);
     process.stdout.write(`${lines.join('\n')}\n${refresh.length ? `Regenerate: node packages/telescope-cli/src/new-object/new-object-cli.mts --refresh ${refresh.join(' ')} --bake\n` : ''}`);
   } else if (args.includes('--retext') && !specPath) {
     // Drafted text and size facts of archive hosts and their planets, after a template change: `--retext HOST_ID...` (new-object/retext.mts).
-    const { retextHosts } = await import('./retext.mts'), { liveArchive } = await import('./archives.mts');
+    const { retextHosts } = await import('./retext.mts'), { liveArchive } = await import('./archives/archives.mts');
     const lines = await retextHosts(checkoutProjectRoot(import.meta.url), args.filter(argument => !argument.startsWith('--')), liveArchive, line => process.stdout.write(`${line}\n`));
     process.stdout.write(`${lines.length} package(s) considered. Bake the changed ones from the text step: node packages/bake/cli/prepare-object.mts <id>... --from catalogue\n`);
   } else if (option('phase-curve') !== undefined && !specPath) {
     // Heat maps from published phase-curve fits for planets already in the tree: `--phase-curve entries.json` (new-object/phase-curve-dataset.mts).
-    const { readFile } = await import('node:fs/promises'), { parsePhaseCurveEntries } = await import('./phase-curve-dataset.mts'), { rebuildExistingDatasets } = await import('./planet-datasets.mts'), { liveArchive } = await import('./archives.mts');
+    const { readFile } = await import('node:fs/promises'), { parsePhaseCurveEntries } = await import('./phase-curve-dataset.mts'), { rebuildExistingDatasets } = await import('./planet-datasets.mts'), { liveArchive } = await import('./archives/archives.mts');
     const entries = parsePhaseCurveEntries(JSON.parse(await readFile(option('phase-curve')!, 'utf8')));
     const lines = await rebuildExistingDatasets(checkoutProjectRoot(import.meta.url), [...entries.keys()], 'phase-curve', liveArchive, line => process.stdout.write(`${line}\n`), new Map(), entries);
     process.stdout.write(`${lines.length} dataset(es) added. Bake the changed planets: node packages/bake/cli/prepare-object.mts <id>...\n`);
   } else if (option('simulation') !== undefined && !specPath) {
     // Published simulations for bodies already in the tree, each from an entry written after reading its paper: `--simulation entries.json` (new-object/simulation/simulation-dataset.mts).
-    const { readFile } = await import('node:fs/promises'), { parseSimulationEntries } = await import('./simulation/simulation-dataset.mts'), { rebuildExistingDatasets } = await import('./planet-datasets.mts'), { liveArchive } = await import('./archives.mts');
+    const { readFile } = await import('node:fs/promises'), { parseSimulationEntries } = await import('./simulation/simulation-dataset.mts'), { rebuildExistingDatasets } = await import('./planet-datasets.mts'), { liveArchive } = await import('./archives/archives.mts');
     const entries = parseSimulationEntries(JSON.parse(await readFile(option('simulation')!, 'utf8')));
     const lines = await rebuildExistingDatasets(process.cwd(), [...entries.keys()], 'simulation', liveArchive, line => process.stdout.write(`${line}\n`), new Map(), new Map(), entries);
     process.stdout.write(`${lines.length} dataset${lines.length === 1 ? '' : 's'} written. Bake: node packages/bake/cli/prepare-object.mts ${[...entries.keys()].join(' ')}\n`);
   } else if (option('photometry') !== undefined && !specPath) {
     // Band photometry for imaged planets already in the tree: `--photometry entries.json`, a list of { id, photometry } (spec.mts PhotometrySpec).
-    const { readFile } = await import('node:fs/promises'), { parsePhotometryEntries } = await import('./spec.mts'), { rebuildExistingDatasets } = await import('./planet-datasets.mts'), { liveArchive } = await import('./archives.mts');
+    const { readFile } = await import('node:fs/promises'), { parsePhotometryEntries } = await import('./spec.mts'), { rebuildExistingDatasets } = await import('./planet-datasets.mts'), { liveArchive } = await import('./archives/archives.mts');
     const entries = parsePhotometryEntries(JSON.parse(await readFile(option('photometry')!, 'utf8')));
     const lines = await rebuildExistingDatasets(checkoutProjectRoot(import.meta.url), [...entries.keys()], 'photometry', liveArchive, line => process.stdout.write(`${line}\n`), entries);
     process.stdout.write(`${lines.length} planet(s) considered. Bake the changed ones: node packages/bake/cli/prepare-object.mts <id>...\n`);
   } else if ((args.includes('--thermal') || args.includes('--host-light')) && !specPath) {
     // Color for planets already in the tree, from what is measured: `--thermal ID...` or `--host-light ID...` (new-object/planet-datasets.mts).
-    const mode = args.includes('--thermal') ? 'thermal' : 'host-light', { rebuildExistingDatasets } = await import('./planet-datasets.mts'), { liveArchive } = await import('./archives.mts');
+    const mode = args.includes('--thermal') ? 'thermal' : 'host-light', { rebuildExistingDatasets } = await import('./planet-datasets.mts'), { liveArchive } = await import('./archives/archives.mts');
     const lines = await rebuildExistingDatasets(checkoutProjectRoot(import.meta.url), args.filter(argument => !argument.startsWith('--')), mode, liveArchive, line => process.stdout.write(`${line}\n`));
     process.stdout.write(`${lines.length} planet(s) considered. Bake the changed ones: node packages/bake/cli/prepare-object.mts <id>...\n`);
   } else if (args.includes('--star-limb') && !specPath) {

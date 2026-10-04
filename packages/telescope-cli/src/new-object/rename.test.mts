@@ -3,7 +3,7 @@ import { mkdtemp, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { dirname, resolve } from 'node:path';
 import test from 'node:test';
-import type { Archive } from './archives.mts';
+import type { Archive } from './archives/archives.mts';
 import { renameStars } from './rename.mts';
 import { STORED_SPEC } from './refresh.mts';
 

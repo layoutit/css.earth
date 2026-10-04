@@ -10,7 +10,7 @@ at the same distance.
 
 | Source | Measurement used |
 | --- | --- |
-| [Riess et al. (2016)](https://arxiv.org/abs/1604.01424) ([record](../../sources/arxiv-1604-01424.json)) | Table 5, row N4424 (SN 2012cg): Cepheid distance modulus μ = 31.080 ± 0.292 mag, so 10^(μ/5 + 1) pc = 16.44 Mpc. The same distance places its Cepheids ([sh0es.mts](../../../packages/telescope-cli/src/new-object/sh0es.mts)). |
+| [Riess et al. (2016)](https://arxiv.org/abs/1604.01424) ([record](../../sources/arxiv-1604-01424.json)) | Table 5, row N4424 (SN 2012cg): Cepheid distance modulus μ = 31.080 ± 0.292 mag, so 10^(μ/5 + 1) pc = 16.44 Mpc. The same distance places its Cepheids ([sh0es.mts](../../../packages/telescope-cli/src/new-object/archives/sh0es.mts)). |
 | [Leroy et al. (2021)](https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/257/43) ([record](../../sources/leroy-2021-phangs-alma.json)) | Row NGC4424: centre 186.79833°, 9.42056°, inclination 58.2 ± 6.0°: the card's tilt. |
 | [RC3](https://cdsarc.cds.unistra.fr/viz-bin/cat/VII/155) ([record](../../sources/rc3-1991.json)) | Type SB(s)a (`.SBS1*.`): barred; log D25 = 1.56, the framing radius. |
 | [Cosmicflows-4, Tully et al. (2023)](https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/944/94) ([record](../../sources/cosmicflows-4.json)) | Which object it is inside: Table2 row PGC 40809 belongs to group 1PGC 41220, the group of M49 (NGC 4472): the Virgo Cluster, so its parent is `virgo-cluster`. |

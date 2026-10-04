@@ -1,6 +1,6 @@
 /** Complete content-fixture admission; production readers stay browser-safe. */
 import { parse, object, array, dictionary, union, optional, literal, number, string, boolean, json } from '@cssearth/core/schema';
-import { OBJECT_CONTENT_SCHEMA, OBJECT_CONTENT_VERSION, type ObjectContentSource } from '../../prepared-data/object-content.js';
+import { OBJECT_CONTENT_SCHEMA, OBJECT_CONTENT_VERSION, type ObjectContentSource } from '../../prepared-data/content/object-content.js';
 
 const source = object({ id: string, path: optional(string), url: optional(string) });
 const fact = object({ id: string, label: string, value: string, source: optional(object({

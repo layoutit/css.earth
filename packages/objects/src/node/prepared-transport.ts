@@ -1,5 +1,5 @@
 import { PREPARED_OBJECT_SCHEMA } from '../descriptor.js';
-import { OBJECT_PAGE_SCHEMA } from '../prepared-data/object-page-schema.js';
+import { OBJECT_PAGE_SCHEMA } from '../prepared-data/content/object-page-schema.js';
 // A scene body's transports, built from its restored `prepared/runtime.json` when read. The descriptor names them
 // `prepared/object.json` and `prepared/page.json`, the paths the site serves (`/objects/<id>/object.json`), but no copy is
 // written to disk: rewriting 1.18 GB of runtimes into near-identical files cost every dev start and deploy about 40 s.

@@ -19,7 +19,7 @@ PSR J0437−4715 is a neutron star 157 parsecs away, 1.4 times the Sun's mass in
 
 ## Evidence
 
-Generated 2026-10-02 by [pulsar.mts](../../../packages/telescope-cli/src/new-object/pulsar.mts) from the spec kept in [new-object.json](source/preparation/new-object.json).
+Generated 2026-10-02 by [pulsar.mts](../../../packages/telescope-cli/src/new-object/archives/pulsar.mts) from the spec kept in [new-object.json](source/preparation/new-object.json).
 
 - [hot-region-map.test.mts](../../../packages/bake/src/objects/raster/hot-region-map.test.mts) reads the record and checks it against what the paper says of its own fit.
 - The page as it opens, seen from Earth at the fit's phase zero. The paper's [Figure 11](https://arxiv.org/abs/2407.06789), left panel, draws the best sample from the same view: the two-temperature spot just west of the Earth-facing meridian in the south, the ring out of sight around the north pole.

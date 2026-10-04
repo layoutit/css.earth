@@ -8,7 +8,7 @@
  * stay as they are, so a template change is not a regeneration. Nothing is baked here (packages/bake/cli/prepare-object.mts does it). */
 import { readdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import type { Archive } from './archives.mts';
+import type { Archive } from './archives/archives.mts';
 import { archiveSpec } from './from-archive.mts';
 import { EARTH_GM, JUPITER_GM, JUPITER_RADIUS_KM, sizeFacts } from './hosted.mts';
 import { json } from './dataset.mts';
