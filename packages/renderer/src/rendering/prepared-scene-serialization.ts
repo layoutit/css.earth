@@ -2,8 +2,8 @@ import { textureTileLeafStyles, type ObjectRuntimeDefinition } from '@cssearth/o
 
 import { initialObjectSelection } from '../runtime/object-contract.js';
 import { resolvePreparedAssetUrl, rewritePreparedStyleUrls } from './prepared-asset-origin.js';
-import { textureTileGroups } from './prepared-texture-levels.js';
-import { leafBoxBindings, leafBoxStyles } from './prepared-leaf-box-direct.js';
+import { preparedTexturePixels, textureTileGroups } from './prepared-texture-levels.js';
+import { leafBoxBindings, leafBoxExact, leafBoxStyles } from './prepared-leaf-box-direct.js';
 import { omittedPreparedNodes } from './prepared-omitted-nodes.js';
 import { preparedDatasetPending } from '../prepared-data/dataset-tables.js';
 
@@ -74,12 +74,17 @@ export function serializePreparedScene(definition: ObjectRuntimeDefinition, data
     }
     if (node.parent === -1) roots.push(index); else elements[node.parent].children.push(index);
   }
-  // Leaf boxes ship their final values at the prepared initial step, from their records (prepared-leaf-box-direct.ts);
-  // the mounted writer continues from the same values.
-  const leafBoxes = leafBoxBindings(definition.viewBindings);
-  for (const leaf of leafBoxes.boxes) for (const [name, value] of leafBoxStyles(leaf, leafBoxes.step, leafBoxes.outset)) write(leaf.node, name, value);
   // The base view uses the same initial prepared texture level as an interactive mount.
   const textureResources = definition.textureLevels?.levels[0]?.resources, tileGroups = textureTileGroups(definition.textureLevels);
+  // Leaf boxes ship their final values at the prepared initial step and for the image each leaf shows here, from their
+  // records (prepared-leaf-box-direct.ts); the mounted writer continues from the same values.
+  const pixels = preparedTexturePixels(definition), shown = new Map<number, number | undefined>();
+  for (const binding of variant.writes) if (binding.kind === 'texture' && binding.resource !== null) {
+    const image = pixels(textureResources?.[binding.resource] ?? binding.resource);
+    for (const leaf of definition.tree.textureBindings?.find(entry => entry.target === binding.target && entry.name === binding.name)?.leaves ?? []) shown.set(leaf, image);
+  }
+  const leafBoxes = leafBoxBindings(definition.viewBindings), sized = leafBoxes.boxes.filter(leaf => leaf.density !== undefined).length;
+  for (const leaf of leafBoxes.boxes) for (const [name, value] of leafBoxStyles(leaf, leafBoxes.step, leafBoxes.outset, false, leafBoxExact(leaf, shown.get(leaf.node), sized))) write(leaf.node, name, value);
   for (const binding of variant.writes) {
     const element = target(binding.target);
     if (binding.kind === 'attribute') {

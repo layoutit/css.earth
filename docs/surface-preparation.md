@@ -74,16 +74,57 @@ flight from Earth to the Moon took 22.4 s and 9.96 MB of the Moon's images befor
 7.2 s and 1.17 MB after (a phone-sized view, 2026-10-02). A dataset drawn at a `resolutionScale` steps through the same list
 shifted by its scale. Below, the Moon on a phone before and after.
 
-What a dataset switch costs is the repaint of the faces. Each face is its own layer, and every one is painted again in
-the frame that draws the new dataset; that frame grows with the area of the faces' boxes
-([leaf boxes](#leaf-boxes-follow-the-body-on-screen)). On an iPad, through the published bucket (2026-10-04, the page
-timing its own frames):
+What a dataset switch costs is the repaint of the faces. Each face is its own layer, and every one, the ones behind
+the body too, is painted again in the frame that draws the new dataset. How long that takes is decided by how WebKit
+draws a face's part of its image, not by the size of the face's box. WebKit draws the whole image under a clip when the
+scale is the same on both axes and not above one; otherwise it copies the crop and draws the copy with interpolation
+(`shouldUseSubimage` in its
+[GraphicsContextCG.cpp](https://github.com/WebKit/WebKit/blob/main/Source/WebCore/platform/graphics/cg/GraphicsContextCG.cpp)).
+It snaps the background tile to device pixels before it compares the axes, so a box a pixel off takes the slow draw,
+and under the clip only a draw at the image's own size is a copy: a smaller one resamples. So a face takes the exact
+box of the image it shows and draws it at its own size ([leaf boxes](#leaf-boxes-follow-the-body-on-screen)). The
+frame of a switch on an iPad before and after that rule, on datasets already visited, images from the published
+bucket (2026-10-04, the page timing its own frames):
 
-| Body, at its default view | Face boxes | Frame of a switch | All faces repainted, nothing loaded |
+| Body, at its default view | Before | After |
+| --- | --- | --- |
+| Io | 221 to 255 ms | 46 to 51 ms |
+| Moon | 213 to 331 ms | 47 to 52 ms |
+| Titan | 166 to 238 ms | 66 to 94 ms |
+| Venus | 145 to 223 ms | 66 to 94 ms |
+| Mercury, whose bake already landed on the exact box | 56 to 62 ms | 45 to 50 ms |
+| Io, zoomed in to its widest level | 189 to 302 ms | 110 to 147 ms |
+
+Device screenshots of the six bodies at rest, after against before: Io 0.3% of the body's pixels differ by more than
+2 of 255, Titan 3.2%, Europa 4.9%, the Moon 6.1%, Venus and Mercury none; sharpness (mean absolute Laplacian) 100 to
+104.5% of before.
+
+The measurements behind the rule. Io's 448 faces, 314 of them in view, showing a level 4160 × 768 texels: each row
+sets the boxes and backgrounds of the faces in view in place, then times three dataset switches and a forced repaint
+of those faces:
+
+| Faces in view | Scale of the draw | Frame of a switch | Faces in view repainted |
 | --- | --- | --- | --- |
-| Mercury | 65 px | 56 to 74 ms | 85 to 101 ms |
-| Io | 104 to 128 px | 182 to 328 ms | 350 to 497 ms |
-| Io, its boxes shrunk in place to 65 px | 65 px | 95 to 144 ms | |
+| 64 px box, as its step asked | 0.9846 across, 0.9844 down | 185 to 244 ms | 523 to 613 ms |
+| 65 px box | 1 | 87 to 117 ms | 65 to 69 ms |
+| 64 px box, background set to 1 | 1 | 93 to 117 ms | 67 to 69 ms |
+| 128 px box, background set to 1 | 1 | 92 to 119 ms | 66 to 67 ms |
+| 64 px box, background set to a half | 0.5 | 92 to 121 ms | 74 to 78 ms |
+| 64 px box, background set to 0.98 | 0.98, not whole device pixels | 177 to 237 ms | 437 to 558 ms |
+| 64 px box, background set to 2 | 2 | 189 to 223 ms | 281 to 292 ms |
+| 128 px box | 1.97 | 221 to 245 ms | 417 to 548 ms |
+
+Mercury shows the same from the other side: 59 to 65 ms as published, 197 to 212 ms with its faces set to 64 or
+66 px, and 57 to 71 ms back at 65 px. Io's 134 hidden faces, repainted alone with the image at each scale: at its own
+size in the exact 65 px box, 40 to 43 ms; a half, 148 ms; a quarter, 163 to 231 ms; a sixteenth, 465 ms; in the 3 px
+boxes their step asks for, a cropped copy each, 60 ms. Zoomed in to the widest level the hidden faces cannot keep
+exact boxes (121 MB of layers) and still take the cropped copy, which is what is left of that frame.
+
+A dataset shown before is decoded again before it is drawn again. WebKit drops the decoded pixels of an image that
+nothing draws, even one the page still holds, and the paint that shows it again decodes it on the main thread: the Moon
+going back to its surface map spent 117 of 219 main-thread samples of its long frames decoding WebP. A demand for
+images that stayed resident undrawn waits for a second `decode()`, off that thread, before it is ready
+([prepared-residency.ts](../packages/renderer/src/rendering/prepared-residency.ts)).
 
 How the surface is cut into images matters less. Io and Mercury baked as square pages of four faces, 112 pages a
 surface, switched in 158 to 298 ms and 129 to 146 ms at their default views: no gain for Io, and twice Mercury's time
@@ -459,6 +500,22 @@ its full box. [leaf-box.ts](../packages/bake/src/presentation/leaf-box.ts) holds
 
 - **The factor** is `min(1, step × density)`. A leaf's density is what its box needs per pixel of the body's silhouette:
   two box pixels per screen pixel (`LEAF_BOX_SCREEN_PIXELS`) at its most magnified edge, from its measured scene frame.
+- **The exact box.** A leaf whose image states its decoded size does not take the factor as it is: only the image
+  drawn at its own size is copied, not resampled ([what a dataset switch costs](#find-the-processing-step)). Its exact
+  factor is the image's width over the texels across the full background at two per CSS pixel (`leafBoxExact` in
+  [prepared-leaf-box-direct.ts](../packages/renderer/src/rendering/prepared-leaf-box-direct.ts)): Io's level 4,160
+  texels wide gives 65 px of its 128 px box, its widest image 130 px. The leaf takes that box with its image, in one
+  write, once its step needs the whole image.
+  - **Kept while the body can afford it.** A leaf the view needs less of, a face behind the body, keeps the exact box
+    too while all the body's leaves in boxes like it stay within the 32 MiB kept beyond need: Io's 448 faces at the
+    level it rests on are 30 MB of layers. Past that (its widest level, 121 MB) such a leaf takes its factor.
+  - **Never above the bake's ceiling.** An image more than a sixteenth wider than the full box holds was capped on
+    purpose (Charon's 13,000 texels would take 201 px of 128); its leaves keep the factor.
+  - A leaf whose image states no size keeps the factor.
+- **Pixels, not shares.** The runtime writes a leaf's box, background size and background position in pixels, a leaf
+  in its exact box with the image's own size. WebKit resolves a percentage against the box snapped to device pixels:
+  Titan's default map sits in boxes 32.25 px wide, and with the background as a share of the box its faces repainted in
+  217 to 246 ms; with the same box and the size in pixels, in 64 to 67 ms (iPad, 2026-10-04).
 - **Steps** grow by √2 from 16 silhouette pixels to the first step at which every leaf holds its full box.
 - **Groups.** The presentation bindings measure every leaf in a browser at each `prepare:object-json`, so every generator
   shares the rule. Surface leaves join blocks of about eight leaves by direction (`LEAF_BOX_GROUP_LEAVES`), each with a
