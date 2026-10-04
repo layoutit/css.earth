@@ -686,10 +686,11 @@ same published law, so the limb in the app is the limb the instrument saw.
   | Ganymede, Callisto | Lommel–Seeliger (lunar-like), which has no parameter | [Squyres and Veverka 1981](https://doi.org/10.1016/0019-1035%2881%2990203-7), Voyager clear-filter images. The paper is closed; the function is read in the authors' summary, page 67 of [NASA TM-82385](https://ntrs.nasa.gov/citations/19810007392). Flat at zero phase. No phase function is printed. The limb limit is the outermost pixel of the finest whole-disc Voyager frame, derived here |
   | Iapetus | Lommel–Seeliger, with the phase values the paper prints per image | [Buratti and Mosher 1995](https://doi.org/10.1006/icar.1995.1093), Voyager images, read in its [JPL preprint](https://dataverse.jpl.nasa.gov/dataset.xhtml?persistentId=hdl:2014/29299). Flat at zero phase. The limb limit is the outermost pixel of the finest image in its Table 1, derived here |
   | Oberon | Hapke (1986): single-scattering albedo 0.41, asymmetry −0.29, roughness 21°, opposition surge 1.03 and 0.007 | Helfenstein, Hillier, Weitz and Veverka, Voyager clear-filter images and Earth-based photometry, read in the authors' summary, pages 230 and 231 of [NASA TM-4210](https://ntrs.nasa.gov/citations/19900018290). The limb limit is the outermost pixel of the frame it names as its finest, derived here |
+  | Umbriel | Hapke (1986): single-scattering albedo 0.34, asymmetry −0.18, roughness 28°, opposition surge width 0.06 and S(0) 1.28 | [Helfenstein and Veverka 1988](https://ui.adsabs.harvard.edu/abs/1988LPI....19..477H), five Voyager clear-filter images at 10.4° to 142.9° phase, an open conference abstract. The surge amplitude follows from S(0) by the authors' definition; the limb limit is the outermost pixel of its finest frame, derived here |
   | Rhea, Dione, Enceladus | Akimov, with a quadratic phase curve at 0.55 µm | [Filacchione et al. 2022](https://doi.org/10.1016/j.icarus.2021.114803), Cassini VIMS; flat at zero phase |
   | Pluto, Charon | Lunar-Lambert, A 0.70 | [Buratti et al. 2017](https://doi.org/10.1016/j.icarus.2016.11.012), LORRI approach images; the limb limit is the outermost pixel of the finest image in its Table 1, derived here |
 
-  Titan, Miranda, Ariel, Umbriel, Titania, Triton,
+  Titan, Miranda, Ariel, Titania, Triton,
   Eris and Makemake keep the shared `sphere` bank. Each
   has a `limb-law` entry in its `investigations.json` that says what was found
   and what is missing: no law exists, the published one could not be read, it

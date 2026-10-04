@@ -4,6 +4,8 @@ Umbriel is shown with Voyager 2's monochrome mosaic, a Voyager false-color datas
 
 ## Sources
 
+Lighting uses the Hapke law [Helfenstein and Veverka (1988)](https://ui.adsabs.harvard.edu/abs/1988LPI....19..477H) fitted to disc-resolved Voyager photometry of Umbriel. See [Lighting law](#lighting-law).
+
 Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).
 
 Monochrome uses Paul Schenk’s [2020 LPI Uranian satellites release](https://repository.hou.usra.edu/handle/20.500.11753/1687), original `uumap-cyl-180180.cub`, a 919 × 460 floating-point mosaic on a 4,000 m grid. The source README is retained alongside it.
@@ -20,6 +22,12 @@ The mosaic feeds the shared raster lane used by Mercury, Venus, Mars, the Moon a
 
 For the color dataset, [`author-color-frames.mts`](../../../packages/bake/authoring/voyager-iss/author-color-frames.mts) fits each frame's limb and registers it against the Schenk mosaic seen through its own camera. A set with a band that does not register is dropped rather than fringed. Each triplet is corrected with the same Lunar-Lambert disk function as the monochrome mosaic, to incidence 30° and emission 0°. The archive's calibration leaves violet darker than green, which renders purple, so the violet and ultraviolet bands take one gain each (1.055, 1.020) to meet Bell and McCord's whole-disc ratios (ultraviolet/green 1.03, violet/green 1.0). Spatial color differences are Voyager's own.
 
+## Lighting law
+
+The globe is lit with Hapke's 1986 model and the parameters [Helfenstein and Veverka (1988)](https://ui.adsabs.harvard.edu/abs/1988LPI....19..477H) fitted to disc-resolved brightness in five Voyager clear-filter images of Umbriel at 10.4° to 142.9° phase: single-scattering albedo 0.34, asymmetry −0.18, roughness 28°, opposition surge width 0.06 and S(0) = 1.28. They are the disc-resolved row of Table I in the [scanned abstract](https://articles.adsabs.harvard.edu/pdf/1988LPI....19..477H). The model takes the surge amplitude B0, which the authors define as S(0)/(w P(0)) in their [1986 NASA summary](https://ntrs.nasa.gov/citations/19870013908): 2.145. The law is recorded in [`source/photometry/helfenstein-1988-hapke-clear.json`](source/photometry/helfenstein-1988-hapke-clear.json).
+
+Each lighting frame is the law relative to the flood-lit disc centre, so the centre of the default view shows the map as published. With the Sun behind the viewer the limb is 0.99 of the centre. At 0.98 of the radius that is an overlay alpha under 0.01, where the authored bank this replaces reached 0.49. See [planet limbs](../../../docs/surface-preparation.md#planet-limbs-from-published-laws).
+
 ## Evidence
 
 - The prepared normal map correlates 0.87 against its georeferenced source from 0° E and −0.10 from 180° E, so the map starts at 0° E ([where the prepared map starts](../../../docs/surface-preparation.md#where-the-prepared-map-starts)).
@@ -29,6 +37,7 @@ For the color dataset, [`author-color-frames.mts`](../../../packages/bake/author
 
 ## Known problems
 
+- **Lighting law:** One global row lights every terrain; the abstract excludes the few bright craters from its fit. The surge amplitude 2.145 is computed here from the printed S(0), and the emission limit 84.6° is derived here. The opposition surge puts the point under the Sun at 0.61 of the flood-lit centre at 10° phase, so frames with Shadows on are dimmer than the flood-lit view.
 - The mosaic is source-normalized imagery, not calibrated albedo. Resolution varies, and acquisition shadows and processing seams can remain.
 - The Voyager color dataset is false color (green, violet, ultraviolet as red, green, blue) at the observations' own phase angles. A color seam at a footprint edge is a real difference in viewing geometry. Bell and McCord's ratios are read from a figure at ±0.02, and their ultraviolet calibration carries a stated ±10 % uncertainty.
 - The separate limb-profile product uses an older control network displaced by degrees and does not provide continuous elevation coverage.
