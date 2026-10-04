@@ -9,9 +9,10 @@ import { resolve } from 'node:path';
 
 const object=(value:unknown):Record<string,unknown>=>{if(!value||typeof value!=='object'||Array.isArray(value))throw new TypeError('Expected an object.');return value as Record<string,unknown>;};
 
-export async function runOperations(mode:string,id:string,argumentsList:string[]=[]) {
+/** `root` is the checkout the operation runs in: a caller-supplied root always wins; the checkout holding this module is only the default. */
+export async function runOperations(mode:string,id:string,argumentsList:string[]=[],root:string=checkoutProjectRoot(import.meta.url)) {
  if(!/^[a-z][a-z0-9-]*$/.test(id))throw new TypeError('Operation needs an object id.');
- const root=checkoutProjectRoot(import.meta.url),objectRoot=resolve(root,'src/objects',id),sourceRoot=resolve(objectRoot,'source'),preparationRoot=resolve(objectRoot,'prepared');
+ const objectRoot=resolve(root,'src/objects',id),sourceRoot=resolve(objectRoot,'source'),preparationRoot=resolve(objectRoot,'prepared');
  const descriptor=object(JSON.parse(await readFile(resolve(objectRoot,'object.json'),'utf8')) as unknown);if(descriptor.id!==id)throw new TypeError('Object descriptor identity differs.');
  if(mode==='acquire'||mode==='verify'){
   const manifest=parseSourceManifest(JSON.parse(await readFile(resolve(sourceRoot,'manifest.json'),'utf8')) as unknown,id);
