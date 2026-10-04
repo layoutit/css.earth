@@ -1,0 +1,40 @@
+{
+  "id": "publication-guerrero-2003-owl-nebula",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Physical Structure of Planetary Nebulae. I. The Owl Nebula",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "astro-ph/0303056"
+    },
+    {
+      "type": "doi",
+      "value": "10.1086/375206"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/astro-ph/0303056",
+      "label": "Published reference"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/astro-ph/0303056",
+      "checkedOn": "2026-10-03",
+      "locator": "Sect. III.1: the inner shell is confined by an ellipse of 182 by 168 arcsec with its major axis north-west to south-east; the eyes are two regions of diminished surface brightness along that axis, each about 35 arcsec in size; the forehead and beak are two regions of enhanced surface brightness about 1 arcmin apart along the minor axis; the outer shell is almost circular. Sect. III.2 and III.3: from echelle spectra, with expansion in proportion to distance from the centre, the inner shell's boundary is an ellipsoid of radius 93 arcsec along the polar direction and 83 arcsec in the equatorial plane, its major axis tilted 10 to 30 degrees from the line of sight; brighter patches at the systemic velocity coincide with the forehead and beak; [N II] shows a thin shell on the outer edge of the H-alpha and [O III] shell; the outer shell is a filled envelope expanding at 40 km/s. Sect. IV: the main nebula is 218 arcsec across; the forehead and beak are denser gas along the equatorial plane."
+    }
+  ],
+  "creators": [
+    "Guerrero, M. A.",
+    "Chu, Y.-H.",
+    "Manchado, A.",
+    "Kwitter, K. B."
+  ],
+  "publisher": "AJ 125, 3213",
+  "publicationDate": "2003",
+  "relations": [],
+  "statements": []
+}

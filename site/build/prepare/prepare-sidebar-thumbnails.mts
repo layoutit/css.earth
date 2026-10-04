@@ -1,4 +1,5 @@
-import { GALAXY_BACKING_SCHEMA } from '@cssearth/objects';
+import { readVolumePresentationPreviews, readGalaxyBackingSource, parsePreparedGalaxyCatalog } from '@cssearth/objects';
+import { parseObjectDescriptor } from '@cssearth/objects';
 import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
@@ -52,8 +53,8 @@ for (const folder of (await readdir(resolve(root, 'src/objects'), { withFileType
   let raw: unknown;
   try { raw = JSON.parse(await readFile(resolve(root, path), 'utf8')); }
   catch (error) { if (hasErrorCode(error, 'ENOENT')) continue; throw error; }
-  const presentation = sourceObject(raw);
-  if (presentation.schema !== 'cssearth-volume-presentation@2') continue;
+  const presentation = readVolumePresentationPreviews(raw, 'candidate');
+  if (presentation === null) continue;
   await read(path);
   const id = sourceId(presentation.objectId), defaultDataset = sourceId(presentation.defaultDataset);
   if (id !== folder.name) throw new Error(`Mismatched sidebar image owner: ${id}`);
@@ -77,15 +78,14 @@ const galaxyCatalogues: string[] = [];
 for (const folder of (await readdir(resolve(root, 'src/objects'), { withFileTypes: true })).filter(entry => entry.isDirectory()).sort((a, b) => a.name.localeCompare(b.name))) {
   const descriptorPath = `src/objects/${folder.name}/object.json`;
   let descriptor: unknown;
-  try { descriptor = JSON.parse(await readFile(resolve(root, descriptorPath), 'utf8')); }
+  try { descriptor = parseObjectDescriptor(JSON.parse(await readFile(resolve(root, descriptorPath), 'utf8'))); }
   catch (error) { if (hasErrorCode(error, 'ENOENT')) continue; throw error; }
   // The galaxy catalogue is found by what it is; its rows are read below.
   if (sourceObject(descriptor).type === 'galaxy-catalog') galaxyCatalogues.push(folder.name);
   if (sourceObject(descriptor).type !== 'density-volume') continue;
   await read(descriptorPath);
   const id = folder.name, backingPath = `src/objects/${id}/prepared/backing.json`;
-  const backing = sourceObject(await json(backingPath));
-  if (backing.schema !== GALAXY_BACKING_SCHEMA) throw new TypeError(`${backingPath}: invalid galaxy backing.`);
+  const backing = readGalaxyBackingSource(await json(backingPath));
   const texturePath = `src/objects/${id}/prepared/${sourcePath(sourceObject(backing.leaf).texturePath)}`;
   const recipePath = `src/objects/${id}/source/backing/recipe.json`, recipe = sourceObject(await json(recipePath));
   if (sourceText(backing.source) !== sourceText(recipe.source)) throw new TypeError(`${backingPath}: source differs from its recipe.`);
@@ -97,7 +97,7 @@ for (const folder of (await readdir(resolve(root, 'src/objects'), { withFileType
 
 // Catalogue IDs and detailed package IDs can differ (for example M 31).
 for (const id of galaxyCatalogues) {
-  const catalogue = sourceObject(await json(`src/objects/${id}/prepared/catalogue.json`));
+  const catalogue = parsePreparedGalaxyCatalog(await json(`src/objects/${id}/prepared/catalogue.json`));
   for (const object of sourceArray(catalogue.objects, sourceObject)) {
     if (typeof object.detailedObjectId === 'string' && defaults[object.detailedObjectId])
       defaults[sourceText(object.id)] = defaults[object.detailedObjectId];

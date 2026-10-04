@@ -1,4 +1,4 @@
-import { parseFacilityEmblemLibrary, parseFacilityEmblemImage } from '@cssearth/objects';
+import { parseObjectDescriptor, readSourceManifestInputs, readObjectContentPanel, parseFacilityEmblemLibrary, parseFacilityEmblemImage } from '@cssearth/objects';
 import { contextLineages } from '@cssearth/bake/sources';
 import { spatialSourceCitations } from '@cssearth/bake/sources';
 import { sourceResolver, parseSourceBinding } from '@cssearth/objects/sources';
@@ -129,8 +129,8 @@ export async function prepareFacilities({ root = resolve(import.meta.dirname, '.
   const parts = await pipelined(SCENE_OBJECTS, 32, async object => {
     const part = { metadata: [] as SourceUse[], inventory: [] as SourceInventoryEntry[], facts: 0, object: null as SourceUsageObject | null };
     const base = `src/objects/${object.id}`;
-    const descriptor = explorationRecord(await json(`${base}/object.json`));
-    const manifest = explorationRecord(await json(`${base}/source/manifest.json`));
+    const descriptor = parseObjectDescriptor(await json(`${base}/object.json`));
+    const manifest = readSourceManifestInputs(await json(`${base}/source/manifest.json`));
     const recipe = explorationRecord(explorationRecord(descriptor.properties).recipe);
     const contentReference = explorationArray(recipe.sources, explorationRecord).find(source => source.id === 'content');
     if (!contentReference) throw new Error(`Missing content recipe for ${object.id}.`);
@@ -140,7 +140,7 @@ export async function prepareFacilities({ root = resolve(import.meta.dirname, '.
     const contentPin = ['inputs', 'documents', 'generatedIntermediates'].flatMap(section => explorationArray(manifest[section] ?? [], explorationRecord))
       .filter(entry => `source/${entry.path}` === contentPath);
     if (contentPin.length !== 1) throw new Error(`Content source for ${object.id} is not declared once in its manifest.`);
-    const content = explorationRecord(JSON.parse(contentBytes.toString('utf8')));
+    const content = readObjectContentPanel(JSON.parse(contentBytes.toString('utf8')));
     const objectDirectory = resolve(root, base);
     const panel = await verifyFactsheetSources(content.panel, { objectDirectory, manifest, sources,
       read: path => input(`${base}/${path}`),
@@ -174,7 +174,7 @@ export async function prepareFacilities({ root = resolve(import.meta.dirname, '.
   const volumes = packageMode === 'published' ? await readPreparedVolumes({ root, input }) : await prepareVolumePresentations({ root, input, mirrorOrigin });
   for (const volume of [...volumes, ...await contextLineages({ route: CONTEXT_ROUTE, root, input })]) {
     const manifestPath = `${sourcePath(volume.base)}/${sourcePath(volume.lineage.manifestPath)}`;
-    const manifest = explorationRecord(await json(manifestPath));
+    const manifest = readSourceManifestInputs(await json(manifestPath));
     for (const source of explorationArray(manifest.inputs, explorationRecord)) if (source.capture !== undefined) validateCapture(parseCapture(source.capture), catalog);
     inventory.push(...sourceInventory(manifest, manifestPath, sources, new Set(volume.lineage.sources.map(source => source.path))));
     objects.push(volume);

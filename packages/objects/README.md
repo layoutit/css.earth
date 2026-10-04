@@ -217,3 +217,12 @@ The parsers require owner-supplied surface-resolution and lighting-bank resolver
 validation position. Bake supplies them through `readBodyMapProduct` and `readRasterRecipe`;
 angular-to-surface conversion, sampled map combination, lighting banks and photometric evaluation stay in bake.
 Contract and duplicate-ownership tests use node:test beside the formats.
+
+`readMapSphereDatasetPreviews` admits the historical map-sphere dataset schema and validates only preview identities and image addresses; bake and site use it.
+
+The site build reader rule follows lexical JSON.parse aliases, destructuring and literal
+`JSON['parse']` access. Paths come from tracked schema records and the reader ledger
+(including untracked map-sphere `prepared/datasets.json`). It follows local path aliases
+and literal template substitutions. It does not resolve arbitrary filename computation,
+cross-module file transports, dynamic JSON method keys or reassigned parser aliases;
+those reads require manual review. This is a bounded static check, not complete data-flow proof.

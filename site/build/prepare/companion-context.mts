@@ -1,3 +1,4 @@
+import { readObjectContentDatasets } from '@cssearth/objects';
 // Entry: node site/build/prepare/companion-context.mts <object id>. An object with no surface has no picture of its own: its
 // list marker is drawn from the bank its default dataset shows, or from a published picture of the bank that draws it
 // (`--picture`). This writes that picture as the object's marker source,
@@ -16,7 +17,7 @@ if (picture) {
   if (!picture.startsWith(`${resolve(root, 'src/objects')}/`)) throw new TypeError(`${option}: the picture is a file of an object package.`);
   await sharp(picture).resize(512, 512, { fit: 'cover' }).png().toFile(resolve(presentation, 'context.png'));
 } else {
-  const content = JSON.parse(await readFile(resolve(objectDirectory, 'source/content/object.json'), 'utf8')) as { datasets: { defaultDataset: string; controls: { id: string; thumbnail?: string; volume?: unknown }[] } };
+  const content = readObjectContentDatasets(JSON.parse(await readFile(resolve(objectDirectory, 'source/content/object.json'), 'utf8')));
   const shown = content.datasets.controls.find(control => control.id === content.datasets.defaultDataset);
   if (!shown?.volume) throw new TypeError(`src/objects/${id}/source/content/object.json: the default dataset shows no companion bank to picture.`);
   // The companion's picture, as the dataset thumbnail draws it, saved as PNG beside the other presentation sources.

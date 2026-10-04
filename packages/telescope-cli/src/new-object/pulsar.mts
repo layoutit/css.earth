@@ -1,3 +1,4 @@
+import { NEUTRON_STAR_MEASUREMENTS_SCHEMA } from '@cssearth/objects';
 /** A pulsar with a published surface map, as a placed star: the `pulsars` entries of a spec file (spec.mts lists the stars').
  *
  * A neutron star is too small to image, so everything here is cited: its timing position, proper motion and distance, its mass, the
@@ -199,7 +200,7 @@ export async function generatePulsar(spec: PulsarSpec, { archive = liveArchive, 
       otherTemperatures: others.map(other => ({ temperatureK: Math.round(other.kelvin), u1: round(other.u1, 4), u2: round(other.u2, 4) })) },
     note: `One law is drawn over the whole disc, at the temperature most of it is at. ${bulk ? 'The table is the fully ionized atmosphere the hot-region fit uses; the paper that measures the cooler surface models it with a partially ionized one, which this table does not hold. ' : ''}The hot regions' own laws are in otherTemperatures.` }));
 
-  files.set(`${s}/measurements.json`, json({ schema: 'cssearth-neutron-star@1', id,
+  files.set(`${s}/measurements.json`, json({ schema: NEUTRON_STAR_MEASUREMENTS_SCHEMA, id,
     radiusKm: spec.radius.value, radiusSource: `${spec.radius.source} (${spec.radius.url}): ${spec.radius.value}${spec.radius.uncertainty ? ` +/- ${spec.radius.uncertainty}` : ''} km, inferred from the pulse shape.`,
     massSolar: spec.mass.value, massSource: `${spec.mass.source} (${spec.mass.url})`,
     distanceParsecs: spec.distance.value, distanceSource: String(body.star.sources.distance),

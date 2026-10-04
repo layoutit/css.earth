@@ -42,7 +42,8 @@ test('context product parser preserves optional interpretation and admitted unkn
 test('volume consumers retain one shared parser call and cannot redeclare moved parsing', () => {
   const source = (path: string) => readFileSync(new URL(`../../../../${path}`, import.meta.url), 'utf8');
   const preview = source('site/build/prepare/prepare-volume-presentation.mts');
-  assert.match(preview, /preview: parseVolumeSourcePreview\(dataset\.preview\)/u);
+  assert.match(preview, /parseVolumePresentationSource\(raw\)/u);
+  assert.match(source('packages/objects/src/prepared-data/volume-presentation-source.ts'), /preview: parseVolumeSourcePreview\(dataset\.preview\)/u);
   assert.doesNotMatch(preview, /function preview\(|\['path', 'url', 'skyBands', 'authoredFrom', 'crop'\]/u);
   const context = source('packages/bake/src/sources/context-source-records.ts');
   assert.match(context, /const products = parseVolumeContextProducts\(presentation\.products\)/u);
@@ -52,4 +53,14 @@ test('volume consumers retain one shared parser call and cannot redeclare moved 
     assert.match(text, /parseVolumeSourceManifest\([^;]+reader:/u);
     assert.doesNotMatch(text, /manifest\.pathBase/u);
   }
+});
+
+test('presentation-source policy validates fields and input records without tightening other readers', () => {
+  const options = { reader: 'presentation', objectId: 'nebula', policy: 'presentation-source' } as const;
+  const valid = { ...manifest, inputs: [], documents: [] };
+  assert.equal(parseVolumeSourceManifest(valid, options), valid);
+  assert.throws(() => parseVolumeSourceManifest({ ...valid, extra: true }, options), { message: 'Unexpected volume source manifest field: extra.' });
+  assert.throws(() => parseVolumeSourceManifest(manifest, options));
+  assert.throws(() => parseVolumeSourceManifest({ ...valid, inputs: [null] }, options));
+  assert.throws(() => parseVolumeSourceManifest({ ...valid, pathBase: 'object' }, options), { message: 'Invalid volume source manifest: nebula.' });
 });

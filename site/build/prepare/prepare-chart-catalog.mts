@@ -1,3 +1,4 @@
+import { readChartAssetRecipe } from '@cssearth/objects';
 import { mkdir, readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -17,7 +18,7 @@ export async function prepareChartCatalog(args: readonly string[] = [], root = r
       throw error;
     });
     if (raw === null) continue;
-    const recipe = parseChartAssetRecipe(JSON.parse(raw));
+    const recipe = parseChartAssetRecipe(readChartAssetRecipe(JSON.parse(raw)));
     if (!recipe.charts.length) continue;
     await refreshObjectCharts(root, id);
     for (const chart of recipe.charts) entries.push({ id, kind: chart.kind, output: chart.output,
