@@ -17,6 +17,7 @@ import { HELP, SHORT_HELP, VERSION } from './help.mts';
 import { importLocalArtifact } from './local-import.mts';
 import { formatPapers, searchPapers } from './papers.mts';
 import { formatSimulations, searchSimulations } from './simulations/simulations.mts';
+import { formatStars, surveyStars } from './stars/stars.mts';
 import { formatLeads, formatSurvey, searchLeads, surveyLeads } from './simulations/leads.mts';
 import { formatAscl, matchProductSoftware, searchAscl } from './ascl.mts';
 import { familyCoverageLedger } from './family-handlers.mts';
@@ -247,6 +248,9 @@ export async function main(args: readonly string[], root = WORKSPACE, output: (t
       }else if(options.command==='simulations'){
         const result=await searchSimulations(root,{target:options.target,...(options.directory?{directory:options.directory}:{}),progress:line=>io.error(`${line}\n`)});
         text=options.json?`${JSON.stringify(result)}\n`:formatSimulations(result,options.directory);code=result.records.length?0:3;
+      }else if(options.command==='stars'){
+        const result=await surveyStars(root,{target:options.target,...(options.directory?{directory:options.directory}:{}),progress:line=>io.error(`${line}\n`)});
+        text=options.json?`${JSON.stringify(result)}\n`:formatStars(result,options.directory);code=result.leads.length?0:3;
       }else if(options.command==='leads'){
         const shared={...(options.directory?{directory:options.directory}:{}),progress:(line:string)=>io.error(`${line}\n`)};
         if(options.archiveClass){const result=await surveyLeads(root,{archiveClass:options.archiveClass,...shared});text=options.json?`${JSON.stringify(result)}\n`:formatSurvey(result,options.directory);code=result.rows.length?0:3;}

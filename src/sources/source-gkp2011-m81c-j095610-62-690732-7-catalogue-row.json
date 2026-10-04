@@ -1,0 +1,35 @@
+{
+  "id": "source-gkp2011-m81c-j095610-62-690732-7-catalogue-row",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "[GKP2011] M81C J095610.62+690732.7 · gkp2011 m81c j095610 62 690732 7 catalogue row",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/gkp2011-m81c-j095610-62-690732-7/source/manifest.json",
+      "locator": "/inputs/7"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Gerke et al. (2011), ApJ 743, 176; VizieR J/ApJ/743/176/table1 (CDS)",
+      "scope": "The gkp2011 m81c j095610 62 690732 7 catalogue row input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "CDS VizieR catalogue: free use with citation",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

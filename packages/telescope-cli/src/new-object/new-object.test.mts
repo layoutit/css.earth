@@ -781,6 +781,35 @@ test('a DEBCat row drafts both stars of an eclipsing binary, and the draft is re
   assert.equal(parsed.companions[0]!.orbit && 'elements' in parsed.companions[0]!.orbit && parsed.companions[0]!.orbit.epoch, 'superior-conjunction');
 });
 
+test('an ADS reference whose publisher address ends in the DOI is read as that paper, not left as a bare bibcode', async () => {
+  const { fetchPublication } = await import('./archives/archives.mts');
+  // 1999PASP..111..438F: ADS sends its publisher link to iopscience.iop.org/article/10.1086/316343, with no doi.org address (2026-10-04).
+  const crossref = JSON.stringify({ message: { title: ['The Updated Zwicky Catalog (UZC)'], author: [{ given: 'Emilio E.', family: 'Falco' }], issued: { 'date-parts': [[1999]] }, 'container-title': ['Publications of the Astronomical Society of the Pacific'], volume: '111', page: '438' } });
+  const archive: Archive = { async text(url) { if (url === 'https://api.crossref.org/works/10.1086%2F316343') return crossref; throw new Error(`unexpected ${url}`); }, async bytes() { return Buffer.from(''); }, async exists() { return false; },
+    async location(url) { return url.endsWith('/PUB_HTML') ? 'https://iopscience.iop.org/article/10.1086/316343' : undefined; } };
+  const paper = await fetchPublication(archive, 'https://ui.adsabs.harvard.edu/abs/1999PASP..111..438F/abstract');
+  assert.deepEqual([paper!.doi, paper!.bibcode, paper!.title, paper!.creators, paper!.year], ['10.1086/316343', '1999PASP..111..438F', 'The Updated Zwicky Catalog (UZC)', ['Emilio E. Falco'], '1999']);
+});
+
+test('a B star at a gravity ATLAS does not reach takes its limb law from the same paper\'s B-star grid', async () => {
+  const { chooseLimb } = await import('./limb.mts');
+  // Reeve & Howarth (2016) summary1 rows of the solar B-star grid at 2 km/s around 18,000 K and log g 2.2, as VizieR serves them, 2026-10-04.
+  const bstar = ['#RESOURCE=yCat_J_MNRAS_456_1294', '', 'FileName\tquad2.2\tquad2.3', ' \t \t', '--------------\t------------\t------------',
+    'BG17000g200v02\t 3.07558e-01\t 2.63332e-01', 'BG17000g225v02\t 2.44385e-01\t 2.90790e-01', 'BG18000g200v02\t 3.48114e-01\t 2.41694e-01', 'BG18000g225v02\t 2.51191e-01\t 2.89943e-01', 'BG18000g250v02\t 2.10603e-01\t 2.97430e-01', ''].join('\n');
+  const asked: string[] = [];
+  const archive: Archive = { async text(_url, form) { asked.push(String(form?.FileName ?? form?.['-source'])); return form?.FileName === 'BG*v02' ? bstar : '#\n'; }, async bytes() { return Buffer.from(''); }, async exists() { return false; } };
+  const limb = await chooseLimb('b-hypergiant', 18000, 2.2, archive);
+  assert.equal(limb.grid, 'tlusty-b');
+  assert.ok(limb.coefficients!.u1 >= 0.244385 && limb.coefficients!.u1 <= 0.348114 && limb.coefficients!.u2 >= 0.241694 && limb.coefficients!.u2 <= 0.290790, 'inside the four nodes at 17,000 and 18,000 K, log g 2.00 and 2.25');
+  assert.match(limb.sentence, /Reeve & Howarth \(2016\), MNRAS 456, 1294 compute from non-LTE TLUSTY B-star model atmospheres for the Bessell V band at 18,000 K and log g 2\.2/u);
+  assert.match(limb.files![0]!.text, /^2\.00\t18000\t 3\.48114e-01\t 2\.41694e-01$/mu);
+  assert.equal(limb.files![0]!.path, 'photometry/reeve-2016-b-v-quadratic.tsv');
+  const replayed = (limb.acquisitions![0]!.replacements as { pattern: string; flags: string; replacement: string }[]).reduce((text, { pattern, flags, replacement }) => text.replace(new RegExp(pattern, flags), replacement), bstar);
+  assert.equal(replayed, limb.files![0]!.text, 'the restore recipe reproduces the stored table');
+  // It is asked only after every grid an earlier star was read from, so no existing star changes its law.
+  assert.ok(asked.indexOf('BG*v02') > asked.indexOf('OG*') && asked.indexOf('BG*v02') > asked.indexOf('J/A+A/554/A98/table3'));
+});
+
 test('a hot star beyond the ATLAS gravities takes its limb law from the TLUSTY grid, and its restore rewrites the download the same way', async () => {
   const { chooseLimb } = await import('./limb.mts');
   // The four Reeve & Howarth (2016) summary1 rows around HD 226868 (31,138 K, log g 3.348) as VizieR serves them, 2026-09-27.
@@ -827,7 +856,7 @@ test('APOKASC-3 and Groenewegen (2013) rows draft single stars through the one r
   const { physicalValues } = await import('./generate.mts'), values = physicalValues(measured, { sourceId: '1', ra: 0, dec: 0, g: 13, hasXpSampled: false });
   assert.deepEqual([values.gm, values.logg], [0, 1.2]);
   assert.match(values.massText, /No mass is measured, so GM is 0/u);
-  assert.deepEqual(Object.keys(DRAFT_ROUTES), ['archive', 'debcat', 'apokasc', 'cepheids', 'k2', 'tess', 'gaia', 'hipparcos', 'iau', 'chara', 'npoi', 'sh0es', 'm31cepheids', 'm33cepheids']);
+  assert.deepEqual(Object.keys(DRAFT_ROUTES), ['archive', 'debcat', 'apokasc', 'cepheids', 'k2', 'tess', 'gaia', 'hipparcos', 'iau', 'chara', 'npoi', 'sh0es', 'm31cepheids', 'm33cepheids', 'table']);
   await assert.rejects(writeDrafts('gcvs', ['X'], 'output/x.json', { root, progress: () => {}, archive: {} as Archive }), /No draft route gcvs; the routes are --from-archive, --from-debcat, --from-apokasc, --from-cepheids, --from-k2, --from-tess, --from-gaia/u);
 });
 

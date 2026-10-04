@@ -122,29 +122,40 @@ export async function fetchGaiaRow(archive: Archive, sourceId: string) {
 /** One row of a VizieR table, for a star Gaia cannot see (spec `position`): the whole row as VizieR serves it, archived beside the
  * body, and the J2000 position it gives. */
 export interface CatalogueRow { readonly catalogue: string; readonly tsv: string; readonly form: Readonly<Record<string, string>>; readonly cells: Readonly<Record<string, string>>; readonly ra: number; readonly dec: number; readonly words: string;
+  /** The columns the position was read from: the table's RAJ2000 and DEJ2000 unless the spec names others. */
+  readonly columns: { readonly ra: string; readonly dec: string };
+  /** Where the row is held, and how a manifest records it (rowArchive). */
+  readonly archive: 'VizieR' | 'SIMBAD';
   /** The Julian year of the position, 2000 unless the spec's `motion` says otherwise, and the row's proper motion (mas/yr) when it names the columns. */
   readonly epoch: number; readonly pmra?: number; readonly pmdec?: number }
-export const catalogueRowForm = (position: CataloguePosition): Record<string, string> => ({ '-source': position.catalogue, '-out.all': '', '-out.max': '2',
-  // VizieR's answer holds a table's default columns; the proper-motion columns are asked for by name.
-  ...(position.motion ? { '-out.add': `${position.motion.ra},${position.motion.dec}` } : {}), ...position.row });
+export const SIMBAD_TAP = 'https://simbad.cds.unistra.fr/simbad/sim-tap/sync';
+export const catalogueRowUrl = (position: CataloguePosition) => position.archive === 'simbad' ? SIMBAD_TAP : VIZIER_ASU;
+/** SIMBAD's own position of an object, with the paper it names for it: ICRS at J2000, as its `basic` table holds it. */
+const simbadRowForm = (mainId: string) => ({ REQUEST: 'doQuery', LANG: 'ADQL', FORMAT: 'tsv', QUERY: `SELECT main_id, ra, dec, coo_bibcode FROM basic WHERE main_id = '${mainId.replaceAll("'", "''")}'` });
+export const catalogueRowForm = (position: CataloguePosition): Record<string, string> => position.archive === 'simbad' ? simbadRowForm(position.row.main_id!) : ({ '-source': position.catalogue, '-out.all': '', '-out.max': '2',
+  // VizieR's answer holds a table's default columns; the proper-motion columns and its computed decimal position are asked for by name.
+  ...(position.motion || position.columns ? { '-out.add': [...position.columns ? [position.columns.ra, position.columns.dec] : [], ...position.motion ? [position.motion.ra, position.motion.dec] : []].join(',') } : {}), ...position.row });
 /** The row `position.row` picks; exactly one, with a decimal J2000 position. */
 export function parseCatalogueRow(tsv: string, position: CataloguePosition, where: string): Omit<CatalogueRow, 'tsv' | 'form'> {
   const words = `${position.catalogue} row ${Object.entries(position.row).map(([column, cell]) => `${column} = ${cell}`).join(', ')}`;
   const lines = tsv.split('\n').filter(line => line.trim() && !line.startsWith('#'));
-  const header = lines[0]?.split('\t').map(cell => cell.trim()) ?? [], rows = lines.slice(3).map(line => line.split('\t').map(cell => cell.trim()));
-  if (rows.length !== 1) throw new Error(`${where}: VizieR ${words} matches ${rows.length} rows, not one; add the columns that tell them apart to position.row.`);
+  // A VizieR answer has a units line and a rule under its header; a SIMBAD answer has neither, and quotes its strings.
+  const simbad = position.archive === 'simbad', held = simbad ? 'SIMBAD' : 'VizieR', text = (cell: string) => simbad && /^".*"$/u.test(cell) ? cell.slice(1, -1) : cell.trim();
+  const header = lines[0]?.split('\t').map(cell => cell.trim()) ?? [], rows = lines.slice(simbad ? 1 : 3).map(line => line.split('\t').map(text));
+  if (rows.length !== 1) throw new Error(`${where}: ${held} ${words} matches ${rows.length} rows, not one; ${simbad ? 'main_id is the name as SIMBAD writes it, spaces included' : 'add the columns that tell them apart to position.row'}.`);
   const cells = Object.fromEntries(header.map((column, i) => [column, rows[0]![i] ?? '']));
-  for (const [column, cell] of Object.entries(position.row)) if (cells[column] !== cell) throw new Error(`${where}: VizieR ${words}: the row found has ${column} = ${cells[column] ?? '(no such column)'}, not ${cell}.`);
-  const degrees = (column: string) => { const value = Number(cells[column]); if (!cells[column] || !Number.isFinite(value)) throw new Error(`${where}: VizieR ${words} has no decimal ${column} (${cells[column] ?? 'no such column'}); the position must be decimal J2000 degrees.`); return value; };
+  for (const [column, cell] of Object.entries(position.row)) if (cells[column] !== cell) throw new Error(`${where}: ${held} ${words}: the row found has ${column} = ${cells[column] ?? '(no such column)'}, not ${cell}.`);
+  const degrees = (column: string) => { const value = Number(cells[column]); if (!cells[column] || !Number.isFinite(value)) throw new Error(`${where}: ${held} ${words} has no decimal ${column} (${cells[column] ?? 'no such column'}); the position must be decimal J2000 degrees.`); return value; };
   const motion = (column: string) => { const value = Number(cells[column]); if (!cells[column] || !Number.isFinite(value)) throw new Error(`${where}: VizieR ${words} has no proper motion in ${column} (${cells[column] ?? 'no such column'}).`); return value; };
-  return { catalogue: position.catalogue, cells, ra: degrees('RAJ2000'), dec: degrees('DEJ2000'), words, epoch: position.motion?.epoch ?? 2000,
+  const columns = simbad ? { ra: 'ra', dec: 'dec' } : position.columns ?? { ra: 'RAJ2000', dec: 'DEJ2000' };
+  return { catalogue: position.catalogue, cells, ra: degrees(columns.ra), dec: degrees(columns.dec), columns, archive: held, words, epoch: position.motion?.epoch ?? 2000,
     ...(position.motion ? { pmra: motion(position.motion.ra), pmdec: motion(position.motion.dec) } : {}) };
 }
 export const CATALOGUE_ROW_REPLACEMENTS = [{ pattern: '^#.*\\n', flags: 'gm', replacement: '' }, { pattern: '^\\s*\\n', flags: 'gm', replacement: '' }] as const;
 const stableVizier = (text: string) => CATALOGUE_ROW_REPLACEMENTS.reduce((out, { pattern, flags, replacement }) => out.replace(new RegExp(pattern, `${flags}u`), replacement), text);
 export async function fetchCatalogueRow(archive: Archive, position: CataloguePosition, where: string): Promise<CatalogueRow> {
   // The response's dated comment lines and blank lines are dropped so the archived bytes are stable (CATALOGUE_ROW_REPLACEMENTS).
-  const form = catalogueRowForm(position), tsv = stableVizier(await archive.text(VIZIER_ASU, form));
+  const form = catalogueRowForm(position), tsv = stableVizier(await archive.text(catalogueRowUrl(position), form));
   return { ...parseCatalogueRow(tsv, position, where), tsv, form };
 }
 
@@ -261,7 +272,8 @@ async function readPublication(archive: Archive, url: string): Promise<Publicati
     const code = decodeURIComponent(bibcode), year = code.slice(0, 4), landing = `https://ui.adsabs.harvard.edu/abs/${code}`;
     const gateway = (type: string) => archive.location?.(`https://ui.adsabs.harvard.edu/link_gateway/${encodeURIComponent(code)}/${type}`).catch(() => undefined);
     const [eprint, published] = await Promise.all([gateway('EPRINT_HTML'), gateway('PUB_HTML')]);
-    const linkedArxiv = /arxiv\.org\/abs\/([0-9]{4}\.[0-9]{4,5})/u.exec(eprint ?? '')?.[1], linkedDoi = /doi\.org\/(10\.\S+)$/u.exec(published ?? '')?.[1];
+    // A publisher's own address can end in the DOI instead of going through doi.org (iopscience.iop.org/article/10.1086/316343).
+    const linkedArxiv = /arxiv\.org\/abs\/([0-9]{4}\.[0-9]{4,5})/u.exec(eprint ?? '')?.[1], linkedDoi = (/doi\.org\/(10\.\S+)$/u.exec(published ?? '') ?? /\/(10\.\d{4,9}\/[^\s?#]+)$/u.exec(published ?? ''))?.[1];
     // The published paper first (Crossref, the better citation, with no request limit), its preprint id kept alongside; the arXiv API
     // (one request every 3 s) only for a paper with no DOI.
     if (linkedDoi) {
@@ -287,4 +299,14 @@ async function readPublication(archive: Archive, url: string): Promise<Publicati
   // The query names the record when there is one: SIMBAD's sim-id page is one path for every star.
   const { hostname, pathname, search } = new URL(url), id = `page-${`${hostname}${pathname.replace(/\.(html?|php)$/u, '')}${decodeURIComponent(search)}`.toLowerCase().replace(/[^a-z0-9]+/gu, '-').replace(/^-|-$/gu, '')}`;
   return { id, title: `${hostname}${pathname}`, creators: [], year: '', url, page: true };
+}
+
+/** How a manifest records the archive a catalogue-placed star's row came from: where it is asked, its credit and terms, the page a
+ * reader opens, and the request in words. SIMBAD's credit and terms are CDS's own (https://cds.unistra.fr/help/acknowledgement/). */
+export function rowArchive(row: Pick<CatalogueRow, 'archive' | 'catalogue' | 'words' | 'cells'>) {
+  return row.archive === 'SIMBAD'
+    ? { origin: SIMBAD_TAP, credit: 'SIMBAD (CDS; Wenger et al. 2000, A&AS 143, 9)', license: 'CDS SIMBAD database: free use with acknowledgement', licenseEvidence: ['https://cds.unistra.fr/help/acknowledgement/'],
+      page: `https://simbad.cds.unistra.fr/simbad/sim-id?Ident=${encodeURIComponent(row.cells.main_id ?? '')}`, acquisition: `SIMBAD TAP query in source/preparation/acquisition.json: ${row.words}, its position and the paper SIMBAD names for it.` }
+    : { origin: VIZIER_ASU, credit: `VizieR ${row.catalogue} (CDS)`, license: 'CDS VizieR catalogue: free use with citation', licenseEvidence: ['https://cds.unistra.fr/vizier-org/licences_vizier.html'],
+      page: `https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=${row.catalogue}`, acquisition: `VizieR ASU TSV query in source/preparation/acquisition.json: ${row.words}, every column, with the response's dated comment lines and blank lines removed so the bytes are stable.` };
 }
