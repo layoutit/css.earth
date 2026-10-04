@@ -1,0 +1,43 @@
+{
+  "id": "doi-10-26093-cds-vizier-17430176",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Gerke et al. (2013): BVI photometry of Cepheids in M81",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.26093/cds/vizier.17430176"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://doi.org/10.26093/cds/vizier.17430176",
+      "label": "Publisher"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://doi.org/10.26093/cds/vizier.17430176",
+      "checkedOn": "2026-10-04",
+      "locator": "Crossref record: title, authors, container"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Gerke et al. (2013), Centre de Donnees Strasbourg (CDS)",
+      "scope": "citation",
+      "evidence": "https://doi.org/10.26093/cds/vizier.17430176"
+    }
+  ],
+  "publisher": "Centre de Donnees Strasbourg (CDS)",
+  "creators": [
+    "J.R. Gerke",
+    "C.S. Kochanek",
+    "J.L. Prieto",
+    "et al."
+  ],
+  "publicationDate": "2013"
+}

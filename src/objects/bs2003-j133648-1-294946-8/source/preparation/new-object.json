@@ -1,0 +1,67 @@
+{
+  "id": "bs2003-j133648-1-294946-8",
+  "name": "[BS2003] J133648.1-294946.8",
+  "system": "[BS2003] J133648.1-294946.8 system",
+  "description": "A Cepheid in the galaxy M83 that pulsates every 54.8 days.",
+  "parent": "m83",
+  "featured": true,
+  "target": "[BS2003] J133648.1-294946.8",
+  "paper": {
+    "url": "https://doi.org/10.26093/cds/vizier.15919111",
+    "credit": "Bonanos & Stanek (2003), ApJ 591, L111"
+  },
+  "radius": {
+    "value": 217.2,
+    "source": "Groenewegen (2020), A&A 635, A33, period relations for Galactic fundamental-mode Cepheids applied to this star's period, 54.831 d in Bonanos & Stanek (2003), ApJ 591, L111, VizieR J/ApJ/591/L111/table1 Per = 54.831 (Per); not a measurement of this star: eq. 2, log R = 0.721 log P + 1.083; the uncertainty is the relation's scatter, 0.067 dex",
+    "url": "https://arxiv.org/abs/2002.02186",
+    "uncertainty": 36.2
+  },
+  "mass": "unmeasured",
+  "temperature": {
+    "value": 4760,
+    "source": "Groenewegen (2020), A&A 635, A33, period relations for Galactic fundamental-mode Cepheids applied to this star's period, 54.831 d in Bonanos & Stanek (2003), ApJ 591, L111, VizieR J/ApJ/591/L111/table1 Per = 54.831 (Per); not a measurement of this star: the luminosity of eq. 1 (M_bol = -2.95 log P - 0.98, with the nominal solar M_bol 4.74) over the radius of eq. 2, through L = 4 pi R^2 sigma T^4 with the nominal solar 5772 K (IAU 2015 Resolutions B2 (Mamajek et al. 2015, arXiv:1510.06262) and B3 (Prsa et al. 2016, arXiv:1605.09788)); the uncertainty is the 317 K by which the two relations miss the paper's own Cepheid temperatures",
+    "url": "https://arxiv.org/abs/2002.02186",
+    "uncertainty": 317
+  },
+  "gravityRange": {
+    "min": -1.33,
+    "max": 2.86,
+    "source": "Luck (2018), AJ 156, 171, table 3 (the spectroscopic gravities of its Cepheid spectra)",
+    "url": "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=J/AJ/156/171/table3"
+  },
+  "radialVelocity": {
+    "value": 519.1,
+    "source": "SIMBAD's radial velocity of M83, the Cepheid's galaxy, from 2004MNRAS.350.1195M; the star's own motion within the galaxy is not measured",
+    "url": "https://ui.adsabs.harvard.edu/abs/2004MNRAS.350.1195M/abstract"
+  },
+  "distance": {
+    "value": 4899985,
+    "source": "Placed in M83 as the app draws it, where the star's sight line crosses the disc's midplane: 4,899,985 pc (src/objects/m83-layers/source/recipe.json: centre 4,897,788 pc, inclination 24 deg, line of nodes 45 deg). The galaxy's distance, which places the galaxy and not a star within it: Tully2009AJ....138..323T: The Extragalactic Distance Database (https://ui.adsabs.harvard.edu/abs/2009AJ....138..323T); catalogue reference Tully2009AJ....138..323T: 4897788.19368 pc (-67200.1732867/+68135.0208189); unspecified",
+    "url": "https://ui.adsabs.harvard.edu/abs/2009AJ....138..323T"
+  },
+  "position": {
+    "catalogue": "J/ApJ/591/L111/table1",
+    "row": {
+      "Per": "54.831"
+    },
+    "credit": "Bonanos & Stanek (2003), ApJ 591, L111",
+    "url": "https://doi.org/10.26093/cds/vizier.15919111",
+    "columns": {
+      "ra": "_RAJ2000",
+      "dec": "_DEJ2000"
+    }
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A Cepheid in the galaxy M83, 4.9 million parsecs away, that swells and shrinks every 54.8 days.",
+    "introduction": "Bonanos & Stanek (2003) list its pulsation at 54.8 days.",
+    "locator": "VizieR J/ApJ/591/L111/table1 Per = 54.831: Per"
+  },
+  "notes": [
+    "The star pulsates; it is drawn at its mean radius",
+    "Its radius and temperature are what Groenewegen (2020), A&A 635, A33's relations for Galactic Cepheids give at its period; no measurement of this star's size or temperature exists",
+    "Its radial velocity is its galaxy's; its own motion within M83 is not measured"
+  ],
+  "order": 5761
+}

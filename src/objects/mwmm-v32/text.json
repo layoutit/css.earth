@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "mwmm-v32",
+  "card": {
+    "text": "A Cepheid in the galaxy NGC 300, 2.1 million parsecs away, that swells and shrinks every 52.8 days.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-26093-cds-vizier-51281167",
+        "url": "https://doi.org/10.26093/cds/vizier.51281167",
+        "label": "Gieren et al. (2005), Centre de Donnees Strasbourg (CDS)",
+        "checked": "2026-10-04",
+        "locator": "VizieR J/AJ/128/1167/table1 [PGF2002] = cep006: Per"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Gieren et al. (2004) list its pulsation at 52.8 days.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-26093-cds-vizier-51281167",
+        "url": "https://doi.org/10.26093/cds/vizier.51281167",
+        "label": "Gieren et al. (2005), Centre de Donnees Strasbourg (CDS)",
+        "checked": "2026-10-04",
+        "locator": "VizieR J/AJ/128/1167/table1 [PGF2002] = cep006: Per"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its temperature",
+      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

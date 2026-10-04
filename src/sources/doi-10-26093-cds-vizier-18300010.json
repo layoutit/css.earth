@@ -1,0 +1,43 @@
+{
+  "id": "doi-10-26093-cds-vizier-18300010",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Hoffmann et al. (2017): >20yrs of HST obs. of Cepheids in SNIa host gal.",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.26093/cds/vizier.18300010"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://doi.org/10.26093/cds/vizier.18300010",
+      "label": "Publisher"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://doi.org/10.26093/cds/vizier.18300010",
+      "checkedOn": "2026-10-04",
+      "locator": "Crossref record: title, authors, container"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Hoffmann et al. (2017), Centre de Donnees Strasbourg (CDS)",
+      "scope": "citation",
+      "evidence": "https://doi.org/10.26093/cds/vizier.18300010"
+    }
+  ],
+  "publisher": "Centre de Donnees Strasbourg (CDS)",
+  "creators": [
+    "S.L. Hoffmann",
+    "L.M. Macri",
+    "A.G. Riess",
+    "et al."
+  ],
+  "publicationDate": "2017"
+}

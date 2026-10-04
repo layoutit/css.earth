@@ -1,0 +1,35 @@
+{
+  "id": "source-bs2003-j133648-1-294946-8-catalogue-row",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "[BS2003] J133648.1-294946.8 · bs2003 j133648 1 294946 8 catalogue row",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/bs2003-j133648-1-294946-8/source/manifest.json",
+      "locator": "/inputs/7"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Bonanos & Stanek (2003), ApJ 591, L111; VizieR J/ApJ/591/L111/table1 (CDS)",
+      "scope": "The bs2003 j133648 1 294946 8 catalogue row input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "CDS VizieR catalogue: free use with citation",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}
