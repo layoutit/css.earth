@@ -1,3 +1,4 @@
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 import { OBJECT_SCHEMA, PREPARED_OBJECT_SCHEMA, OBJECT_RUNTIME_SCHEMA, parseObjectDescriptor, PREPARED_CSS_OBJECT_FORMAT } from '@cssearth/objects';
 
 // Pinning a prepared object to its transport: the descriptor's `prepared` pin and page reference, and the body's inventory.
@@ -5,7 +6,6 @@ import { OBJECT_SCHEMA, PREPARED_OBJECT_SCHEMA, OBJECT_RUNTIME_SCHEMA, parseObje
 // prepared-transport), so no copy is written here. It prepares nothing; the world-navigation and spatial-context finalization that runs
 // before it on a fresh bake stays with `site/build/prepare/prepare-object-json.mts`.
 import { mkdir, readFile } from 'node:fs/promises';
-import { createRequire } from 'node:module';
 import { dirname, resolve } from 'node:path';
 import { requireRecord } from '@cssearth/core';
 
@@ -14,8 +14,8 @@ import { inventoryPreparedAssets, readInventory } from '@cssearth/objects/node';
 import { preparePageMetadata, writePreparedText } from '../delivery/index.ts';
 import { requireObjectRuntimeDefinition } from './object-runtime-contract.ts';
 
-/** The checkout, found through this package's own name so the path holds from the sources and from `dist/`. */
-const root = resolve(dirname(createRequire(import.meta.url).resolve('@cssearth/bake/package.json')), '../..');
+/** The real checkout, found by the shared workspace-marker resolver from source and `dist/`. */
+const root = checkoutProjectRoot(import.meta.url);
 const format = PREPARED_CSS_OBJECT_FORMAT;
 
 export function serializeObjectJson(descriptorValue:unknown, definitionValue:unknown) {

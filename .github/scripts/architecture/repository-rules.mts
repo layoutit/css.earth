@@ -1,3 +1,4 @@
+import { checkAuthoringPolicies } from './authoring-policy.mts';
 import { checkSiteBuildFormatReaders } from './site-build-format-readers.mts';
 /** Rules the architecture check applies to the repository itself rather than to the import graph. They have no
  * baseline: the repository satisfies each of them today, so every finding fails the check, and
@@ -45,7 +46,8 @@ export function objectCodeFiles(files: readonly string[]): string[] {
   return files.filter(file => OBJECT_CODE.test(file) && !isTestPath(file)).map(file => `${file}: object packages hold data only; put code in packages/ or site/`);
 }
 
-/** Only established format owners may be top-level objects source folders. */
+/** Only established format owners may be top-level objects source folders. Format-area subfolders
+ * inherit their owner: prepared-data and volume remain data-only at every depth. */
 export const OBJECT_FORMAT_FOLDERS: readonly string[] = ["node", "prepared-data", "provenance", "registry", "sources", "stars", "volume"];
 export function objectFormatFolders(root: string): string[] {
   const directory = resolve(root, 'packages/objects/src');
@@ -56,6 +58,7 @@ export function objectFormatFolders(root: string): string[] {
 }
 
 export const REPOSITORY_RULES: readonly RepositoryRule[] = [
+  { id: 'authoring-policies', description: 'new CLI entries export only main/default implementations; authoring averages placed maps through measurement policy', check: checkAuthoringPolicies },
   { id: 'site-build-format-readers', description: 'site/build reads shared schema-bearing JSON through objects parsers', check: checkSiteBuildFormatReaders },
   { id: 'bake-without-renderer', description: 'bake declares no renderer dependency and permits no renderer exception', check: checkBakeWithoutRenderer },
   { id: 'format-schema-ownership', description: 'shared raw schema literals and duplicates of objects definitions fail; schema/owner exceptions must remain current and justified', check: checkFormatSchemaOwnership },

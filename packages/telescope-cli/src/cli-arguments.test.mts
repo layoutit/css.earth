@@ -11,6 +11,7 @@ const cases = [
   { args: ['family-run','input','operation','--out','out'], option: '--out', expected: { command:'family-run', descriptor:resolve('input'), operationId:'operation', directory:resolve('out'), ...common } },
   { args: ['family-assess','request','descriptor','--out','out'], option: '--out', expected: { command:'family-assess', request:resolve('request'), descriptor:resolve('descriptor'), directory:resolve('out'), ...common } },
   { args: ['papers','input','--host','star'], option: '--host', expected: { command:'papers', target:'input', host:'star', ...common } },
+  { args: ['simulations','input','--out','out'], option: '--out', expected: { command:'simulations', target:'input', directory:resolve('out'), ...common } },
   { args: ['candidates','input','--epoch','date','--out','out'], option: '--epoch', expected: { command:'candidates', system:'input', epoch:'date', directory:resolve('out'), fitAstrometry:false, fitOrbits:false, ...common } },
   { args: ['associate','input','--system','star','--out','out'], option: '--system', expected: { command:'associate', measurements:resolve('input'), system:'star', directory:resolve('out'), fitAstrometry:false, fitOrbits:false, ...common } },
   { args: ['import','input','--out','out'], option: '--out', expected: { command:'import', specification:resolve('input'), directory:resolve('out'), ...common } },

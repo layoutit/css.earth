@@ -171,4 +171,3 @@ export async function prepareSurfaceMinimaps({ objectDirectory, publicDirectory,
   } else await writeFile(resolve(outputDirectory, 'minimaps.json'), JSON.stringify({ images }) + '\n');
   return images;
 }
-

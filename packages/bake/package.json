@@ -370,6 +370,7 @@
     "@types/node": "^26.4.0",
     "@types/three": "0.180.0",
     "tsup": "^8.0.1",
-    "typescript": "^5.3.3"
-  }
+    "typescript": "5.9.3"
+  },
+  "oracleManifest": "oracle-manifest.json"
 }

@@ -1,3 +1,4 @@
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 /** Bake the shared lighting banks into `public/lighting/<bank>/`, or check the tracked files against a fresh bake. The
  * bake and the check are `bakeLightingBank` and `checkLightingBank` in `@cssearth/bake/raster`.
  *
@@ -11,7 +12,7 @@ import { LIGHTING_BANKS, LIGHTING_BANK_ROOT, bakeLightingBank, checkLightingBank
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
   const args = process.argv.slice(2), check = args.includes('--check'), ids = args.filter(arg => arg !== '--check');
-  const root = process.cwd();
+  const root = checkoutProjectRoot(import.meta.url);
   for (const id of ids.length ? ids : Object.keys(LIGHTING_BANKS)) {
     if (check) {
       const result = await checkLightingBank(id, root);

@@ -5,12 +5,12 @@
  * are cited as quotes of the article at its revision, under CC BY-SA 4.0, beside the short factual line drafted from the archive
  * numbers. A body with no article, or whose article is a disambiguation page or not about a star or planet, gets no quotes and
  * keeps its `TODO(new-object)` for a person. */
-import type { Archive, Publication } from './archives.mts';
+import type { Archive, Publication } from './archives/archives.mts';
 import { CHECKED } from './color.mts';
 import type { DraftQuotes } from './spec.mts';
 
 export const WIKIPEDIA_SUMMARY = 'https://en.wikipedia.org/api/rest_v1/page/summary/';
-/** A citation quote's ceiling in the reader-text format (packages/objects/src/prepared-data/object-text.ts). */
+/** A citation quote's ceiling in the reader-text format (packages/objects/src/prepared-data/content/object-text.ts). */
 export const QUOTE_BUDGET = 300;
 
 export interface WikipediaLead { readonly title: string; readonly url: string; readonly revision: string; readonly extract: string; readonly description?: string }

@@ -29,9 +29,9 @@ test('preparation readers invoke shared parsers and supply owner resolution', ()
     ['packages/bake/src/raster/validation.ts', 'parseRasterRecipe(value, resolveLightingRecipe)'],
     ['packages/bake/src/objects/layers/observation/body-maps/body-map-product.ts', 'parseBodyMapProduct(value, surfaceResolutionKm)'],
   ]) assert.ok(readFileSync(resolve(root, file!), 'utf8').includes(call!), `${file} lost its shared reader`);
-  const raster = readFileSync(resolve(root, 'packages/objects/src/prepared-data/raster-recipe-parser.ts'), 'utf8');
+  const raster = readFileSync(resolve(root, 'packages/objects/src/prepared-data/surface/raster-recipe-parser.ts'), 'utf8');
   assert.ok(raster.includes("parseLimbBlock(lighting.limb, 'lighting.limb')"));
   assert.ok(raster.includes("parseLimbBlock(atmosphere.limb, 'atmosphere.limb')"));
-  const body = readFileSync(resolve(root, 'packages/objects/src/prepared-data/body-map-product.ts'), 'utf8');
+  const body = readFileSync(resolve(root, 'packages/objects/src/prepared-data/surface/body-map-product.ts'), 'utf8');
   assert.ok(body.includes('parseResolutionEvidence(resolution.evidence)'));
 });

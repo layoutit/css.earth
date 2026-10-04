@@ -72,5 +72,5 @@ pnpm --filter @cssearth/spice test
 ```
 
 Archived-camera data and the serialized `SpiceCamera` record belong to the browser-safe
-`@cssearth/objects` main entry (`packages/objects/src/prepared-data/archived-camera.ts`).
+`@cssearth/objects` main entry (`packages/objects/src/prepared-data/camera/archived-camera.ts`).
 Kernel computation stays here; writers import the format schema and type from objects.

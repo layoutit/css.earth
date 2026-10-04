@@ -12,5 +12,7 @@
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's measured spectrum (Burnashev (1985), Abastumani Astrophys. Obs. Bull. 59, 83; VizieR III/126, part2 record 40 (BS 1393), cross-checked against Gaia DR3 XP spectrum, source 4871775051598300160 (9 levels apart at most, the threshold is 12)) (photometry/stellar-color.json); no image of the photosphere exists."
-  }
+  },
+  "surfaceGravityLogg": 1.71,
+  "surfaceGravitySource": "log g 1.71 from 1990ApJS...74.1075M, the median of its 3 spectra; the 3 published values span log g 1.71 to 1.71, across which the limb law changes by at most 0.0% of the centre brightness (https://ui.adsabs.harvard.edu/abs/1990ApJS...74.1075M)"
 }

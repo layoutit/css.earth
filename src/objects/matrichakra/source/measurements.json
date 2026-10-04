@@ -12,5 +12,7 @@
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."
-  }
+  },
+  "surfaceGravityLogg": 3.29,
+  "surfaceGravitySource": "log g 3.29 from 2025A&A...698A..93J; the 15 published values span log g 2.9134 to 3.422, across which the limb law changes by at most 0.2% of the centre brightness (https://ui.adsabs.harvard.edu/abs/2025A%26A...698A..93J)"
 }

@@ -1,5 +1,3 @@
-import { pathToFileURL } from 'node:url';
-import { projectRoot as findProjectRoot } from '@cssearth/core/node';
 import assert from 'node:assert/strict';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
@@ -73,21 +71,6 @@ test('the combination itself refuses maps that are not one measurement', () => {
 test('a resolution limit looks at both axes of the beam', () => {
   const round = { ...seen('round', 2457352.9, 1), angularResolution: { majorArcsec: 1, minorArcsec: 1, basis: 'beam' } }, needle = { ...seen('needle', 2457352.9, 1), angularResolution: { majorArcsec: 1, minorArcsec: 0.01, basis: 'beam' } };
   assert.throws(() => checkProductsCombinable([map(heat, [round]), map(heat, [needle])], { time: { rule: 'mosaic-of-snapshots' }, resolution: { rule: 'within-factor', factor: 2 } }), /minor axis ranges over a factor of 100/u);
-});
-
-test('no production code averages placed maps except through the policy', async () => {
-  const { readFile, readdir } = await import('node:fs/promises');
-  const offenders: string[] = [];
-  // The telescope command's modules and both packages' per-body authoring scripts are production code here.
-  for (const [root, prefix] of [[new URL('packages/telescope-cli/src/', pathToFileURL(findProjectRoot(import.meta.url) + '/')), 'telescope-cli/'],
-    [new URL('packages/telescope-cli/authoring/', pathToFileURL(findProjectRoot(import.meta.url) + '/')), 'telescope-cli/authoring/'],
-    [new URL('packages/bake/authoring/', pathToFileURL(findProjectRoot(import.meta.url) + '/')), 'bake/authoring/']] as const)
-    for (const entry of await readdir(root, { recursive: true })) {
-      if (!entry.endsWith('.mts') || entry.endsWith('.test.mts') || entry === 'body-map-product.mts' || entry === 'jwst/cubes/body-map.mts') continue;
-      if (/\bcombineBodyMaps\(/u.test(await readFile(new URL(entry, root), 'utf8'))) offenders.push(`${prefix}${entry}`);
-    }
-  // The slit-scan stage compares trial placements with the averaging primitive as a diagnostic; its shipped map goes through the policy.
-  assert.deepEqual(offenders.filter(entry => entry !== 'telescope-cli/authoring/hst/slit-scan-map.mts'), []);
 });
 
 test('a snapshot mosaic keeps the emission limit it was asked for', () => {

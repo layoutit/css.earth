@@ -1,6 +1,5 @@
 /** JSON identity intentionally includes field order, just as the node builder's tables do. */
 function propertyInterner<P>(properties: P[]) {
-  // Append keeps every existing entry; the last duplicate is the one subsequent lookups use.
   const ids = new Map(properties.map((property, id) => [JSON.stringify(property), id]));
   const intern = (property: P) => {
     const key = JSON.stringify(property);
@@ -8,11 +7,6 @@ function propertyInterner<P>(properties: P[]) {
     return ids.get(key)!;
   };
   return { properties, intern };
-}
-
-/** Preserve existing indices and unused entries while interning additional properties. */
-export function appendPropertyTable<P>(existing: readonly P[]) {
-  return propertyInterner([...existing]);
 }
 
 /** Rebuild in node/reference order, dropping unused entries and remapping duplicate references. */

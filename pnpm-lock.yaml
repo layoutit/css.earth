@@ -93,15 +93,6 @@ importers:
       eslint:
         specifier: ^10.10.0
         version: 10.10.0(jiti@2.6.1)
-      geotiff:
-        specifier: 3.0.5
-        version: 3.0.5
-      h5wasm:
-        specifier: 0.10.3
-        version: 0.10.3
-      meshoptimizer:
-        specifier: 1.2.0
-        version: 1.2.0
       pixelmatch:
         specifier: 7.2.0
         version: 7.2.0
@@ -117,9 +108,6 @@ importers:
       react-dom:
         specifier: 19.2.8
         version: 19.2.8(react@19.2.8)
-      robust-predicates:
-        specifier: 3.0.3
-        version: 3.0.3
       sharp:
         specifier: 0.35.3
         version: 0.35.3(@types/node@26.4.0)
@@ -219,16 +207,15 @@ importers:
         version: 0.35.3(@types/node@26.4.0)
 
   packages/astronomy:
-    dependencies:
+    devDependencies:
       '@cssearth/objects':
         specifier: workspace:*
         version: link:../objects
-    devDependencies:
       tsup:
         specifier: ^8.0.1
         version: 8.5.1(jiti@2.6.1)(postcss@8.5.26)(tsx@4.23.15)(typescript@5.9.3)(yaml@2.9.0)
       typescript:
-        specifier: ^5.3.3
+        specifier: 5.9.3
         version: 5.9.3
 
   packages/bake:
@@ -319,7 +306,7 @@ importers:
         specifier: ^8.0.1
         version: 8.5.1(jiti@2.6.1)(postcss@8.5.26)(tsx@4.23.15)(typescript@5.9.3)(yaml@2.9.0)
       typescript:
-        specifier: ^5.3.3
+        specifier: 5.9.3
         version: 5.9.3
 
   packages/catalog:
@@ -332,7 +319,7 @@ importers:
         specifier: ^8.0.1
         version: 8.5.1(jiti@2.6.1)(postcss@8.5.26)(tsx@4.23.15)(typescript@5.9.3)(yaml@2.9.0)
       typescript:
-        specifier: ^5.3.3
+        specifier: 5.9.3
         version: 5.9.3
 
   packages/core:
@@ -344,7 +331,7 @@ importers:
         specifier: ^8.0.1
         version: 8.5.1(jiti@2.6.1)(postcss@8.5.26)(tsx@4.23.15)(typescript@5.9.3)(yaml@2.9.0)
       typescript:
-        specifier: ^5.3.3
+        specifier: 5.9.3
         version: 5.9.3
 
   packages/engine:
@@ -360,7 +347,7 @@ importers:
         specifier: ^8.0.1
         version: 8.5.1(jiti@2.6.1)(postcss@8.5.26)(tsx@4.23.15)(typescript@5.9.3)(yaml@2.9.0)
       typescript:
-        specifier: ^5.3.3
+        specifier: 5.9.3
         version: 5.9.3
 
   packages/fits:
@@ -376,7 +363,7 @@ importers:
         specifier: ^8.0.1
         version: 8.5.1(jiti@2.6.1)(postcss@8.5.26)(tsx@4.23.15)(typescript@5.9.3)(yaml@2.9.0)
       typescript:
-        specifier: ^5.3.3
+        specifier: 5.9.3
         version: 5.9.3
 
   packages/objects:
@@ -392,7 +379,7 @@ importers:
         specifier: ^8.0.1
         version: 8.5.1(jiti@2.6.1)(postcss@8.5.26)(tsx@4.23.15)(typescript@5.9.3)(yaml@2.9.0)
       typescript:
-        specifier: ^5.3.3
+        specifier: 5.9.3
         version: 5.9.3
 
   packages/renderer:
@@ -423,7 +410,7 @@ importers:
         specifier: ^8.0.1
         version: 8.5.1(jiti@2.6.1)(postcss@8.5.26)(tsx@4.23.15)(typescript@5.9.3)(yaml@2.9.0)
       typescript:
-        specifier: ^5.3.3
+        specifier: 5.9.3
         version: 5.9.3
 
   packages/spice:
@@ -442,7 +429,7 @@ importers:
         specifier: ^8.0.1
         version: 8.5.1(jiti@2.6.1)(postcss@8.5.26)(tsx@4.23.15)(typescript@5.9.3)(yaml@2.9.0)
       typescript:
-        specifier: ^5.3.3
+        specifier: 5.9.3
         version: 5.9.3
 
   packages/telescope:
@@ -464,7 +451,7 @@ importers:
         specifier: ^8.0.1
         version: 8.5.1(jiti@2.6.1)(postcss@8.5.26)(tsx@4.23.15)(typescript@5.9.3)(yaml@2.9.0)
       typescript:
-        specifier: ^5.3.3
+        specifier: 5.9.3
         version: 5.9.3
 
   packages/telescope-cli:
@@ -496,6 +483,12 @@ importers:
       '@cssearth/telescope':
         specifier: workspace:*
         version: link:../telescope
+      linkedom:
+        specifier: ^0.18.13
+        version: 0.18.13
+      sharp:
+        specifier: 0.35.3
+        version: 0.35.3(@types/node@26.4.0)
     devDependencies:
       '@types/node':
         specifier: ^26.4.0
@@ -506,17 +499,14 @@ importers:
       esbuild:
         specifier: 0.27.7
         version: 0.27.7
-      linkedom:
-        specifier: ^0.18.13
-        version: 0.18.13
       pngjs:
         specifier: 7.0.0
         version: 7.0.0
-      sharp:
-        specifier: 0.35.3
-        version: 0.35.3(@types/node@26.4.0)
+      tsup:
+        specifier: ^8.0.1
+        version: 8.5.1(jiti@2.6.1)(postcss@8.5.26)(tsx@4.23.15)(typescript@5.9.3)(yaml@2.9.0)
       typescript:
-        specifier: ^5.3.3
+        specifier: 5.9.3
         version: 5.9.3
 
   packages/volume-viewer:

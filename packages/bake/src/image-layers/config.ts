@@ -1,3 +1,5 @@
+import { requireNonemptyString as text } from '@cssearth/core';
+import type { PreparedImageLayerBank } from '@cssearth/objects';
 export type Vec3 = [number, number, number];
 export type LayerAxis = 'x' | 'y' | 'z';
 
@@ -13,7 +15,7 @@ export interface ImageLayerRecipe {
     /** Companion galaxies removed the same way, by their rows (key column) in a repository catalogue with the Local Volume
      * Database's columns: ra, dec (deg), rhalf (arcmin), position_angle (deg), ellipticity. */
     companions?: { catalogue: string; keys: string[]; source: string; basis: string } };
-  observation: { centerRaDeg: number; centerDecDeg: number; fieldOfViewDeg: [number, number]; northClockwiseDeg: number };
+  observation: PreparedImageLayerBank['observation'];
   target: { centerRaDeg: number; centerDecDeg: number; distancePc: number };
   geometry: { kind: 'inclined-disk' | 'line-of-sight-envelope'; inclinationDeg: number; lineOfNodesPaDeg: number;
     thicknessKpc: number; supportRadiusKpc: number; supportTaperFraction: number; depthWeights: number[]; depthScales: number[];
@@ -85,9 +87,7 @@ const finite = (v: unknown, at: string): number => {
 const positive = (v: unknown, at: string, integer = false): number => {
   const n = finite(v, at); if (n <= 0 || (integer && !Number.isInteger(n))) throw new TypeError(`${at} must be positive.`); return n;
 };
-const text = (v: unknown, at: string): string => {
-  if (typeof v !== 'string' || !v) throw new TypeError(`${at} must be a string.`); return v;
-};
+
 const path = (v: unknown): string => {
   const p = text(v, 'source path'); if (p.startsWith('/') || p.split('/').includes('..') || /[\\\0]/.test(p)) throw new TypeError('Path must be contained.'); return p;
 };

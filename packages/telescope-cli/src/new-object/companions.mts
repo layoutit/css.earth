@@ -5,7 +5,7 @@
  * the TESS Input Catalog v8.2 (Stassun et al. 2019, VizieR IV/39/tic82). It becomes a placed star at its own Gaia DR3 position, bound
  * to its host (`boundTo`) and so inside the host's system: at these separations the measured positions are the stars' places, so no
  * orbit is involved. A pair too close for Gaia to separate is not in the catalogue and is not added. */
-import type { Archive } from './archives.mts';
+import type { Archive } from './archives/archives.mts';
 import { hostId as idFor } from './identity.mts';
 
 // VizieR's ASU service, as the color routes use it: its TAP mirror (tapvizier) sends an incomplete certificate chain that Node refuses.

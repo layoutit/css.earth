@@ -1,5 +1,5 @@
 import { boolean, choice, fail, finite, positive, record, text } from './guards.js';
-import type { CameraPlan } from '../runtime-camera-types.js';
+import type { CameraPlan } from '../camera/runtime-camera-types.js';
 
 export function requireCamera(value: unknown): asserts value is CameraPlan {
   const camera = record(value, 'camera');

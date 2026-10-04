@@ -2,3 +2,4 @@
 // the browser entry.
 export * from './file.js';
 export * from './transport.js';
+export { fitsArchiveInputs, fitsOracleInputResolvers } from './oracle-inputs.js';

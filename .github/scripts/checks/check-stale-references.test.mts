@@ -10,6 +10,8 @@ import { checkStaleReferences, staleReferenceLines } from './check-stale-referen
 const bytes = (value: string) => new TextEncoder().encode(value);
 test('every live reference class rejects a retired path, including output generator literals and bundle specifiers', () => {
   const cases = [
+    ['module.mts', 'const path = "packages/telescope-cli/src/archives/jwst/imaging/programs/new.json";'],
+    ['module.mts', 'const path = "packages/telescope-cli/src/archives/jwst/klip/programs/new.json";'],
     ['package.json', '{"scripts":{"prepare":"node tools/prepare.mts"}}'],
     ['source/manifest.json', '{"generator":"tools/prepare.mts"}'],
     ['README.md', 'Run `node tools/prepare.mts`.'],
@@ -69,4 +71,21 @@ test('test syntax distinguishes multiline live imports from quoted negative fixt
   'tools/old.mts'
 ]);`,
   ]) assert.equal(staleReferenceLines('guard.test.mts', bytes(text)).length, 1, text);
+});
+
+test('JWST acquisition history remains allowed while generator paths fail', () => {
+  const path = 'src/objects/body/source/manifest.json';
+  assert.equal(staleReferenceLines(path, bytes('  "acquisition": "pinned in packages/telescope-cli/src/archives/jwst/imaging/programs/old.json."')).length, 1);
+  const recorded = 'src/objects/beta-pictoris-disc/source/manifest.json';
+  const line = readFileSync(recorded, 'utf8').split('\n').find(line => line.includes('/jwst/imaging/programs/'))!;
+  assert.deepEqual(staleReferenceLines(recorded, bytes(line)), []);
+  assert.equal(staleReferenceLines(recorded, bytes(line.replace('mast:JWST/product/', 'mast:JWST/new-product/'))).length, 1);
+  assert.equal(staleReferenceLines(path, bytes('  "generator": "packages/telescope-cli/src/archives/jwst/imaging/programs/new.json"')).length, 1);
+});
+
+test('live GitHub JWST links fail but commit-pinned evidence remains historical', () => {
+  const old = 'packages/telescope-cli/src/archives/jwst/imaging/programs/body.json';
+  assert.equal(staleReferenceLines('src/objects/body/investigations.json', bytes(`"https://github.com/org/repo/blob/main/${old}"`)).length, 1);
+  assert.deepEqual(staleReferenceLines('src/objects/body/investigations.json', bytes(`"https://github.com/org/repo/blob/abcdef1/${old}"`)), []);
+  assert.equal(staleReferenceLines('src/objects/body/investigations.json', bytes(`  "finding": "The reduction used ${old}."`)).length, 1);
 });

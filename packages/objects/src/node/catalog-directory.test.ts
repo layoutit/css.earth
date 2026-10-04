@@ -3,7 +3,7 @@ import { mkdir, mkdtemp, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { after, test } from 'node:test';
-import { readContextObjects } from './catalog-directory.js';
+import { readContextObjects } from '@cssearth/objects/node';
 
 // Temporary checkouts the tests make, removed once the file's tests finish.
 const temporary: string[] = [];
@@ -23,4 +23,10 @@ async function objects(packages: Record<string, Record<string, unknown>>) {
 test('a bank and an object seen from inside are context objects; an ordinary object is not', async () => {
   const root = await objects({ galaxy: { catalog: {}, zoom }, bank: { host: 'galaxy' }, star: { catalog: {} } });
   assert.deepEqual((await readContextObjects(root)).map(object => object.id), ['bank', 'galaxy']);
+});
+
+test('every catalogue descriptor requires an authored id, including descriptors without catalogue properties', async () => {
+  const root = await objects({ fixture: {} });
+  await writeFile(join(root, 'fixture', 'object.json'), JSON.stringify({ type: 'x' }));
+  await assert.rejects(readContextObjects(root), /object.json: authored descriptor id is required\./u);
 });

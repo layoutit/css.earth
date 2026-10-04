@@ -13,7 +13,7 @@
 import { CHART_ASSETS_SCHEMA, MEASURED_SPECTRUM_SCHEMA } from '@cssearth/objects';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import type { Archive } from './archives.mts';
+import type { Archive } from './archives/archives.mts';
 import { bindInputs, json, type PackageFiles } from './dataset.mts';
 import { archiveRows, bestEphemeris, decodeEntities, ephemerisSigmaDays, NASA_TAP } from './orbit.mts';
 import { installTransitChart, liveTessArchive, type Fold, type TessArchive } from './transit-chart.mts';

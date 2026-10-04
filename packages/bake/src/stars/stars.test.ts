@@ -28,4 +28,3 @@ test('enclosing radii are recomputed from the rounded centre and retain exact so
   assert(node.radiusUnits >= Math.hypot(...star.positionUnits.map((v, i) => v - node.positionUnits[i]!)));
   assert(node.radiusUnits > 0, 'retaining the pre-rounding zero radius would wrongly cull this source row');
 });
-

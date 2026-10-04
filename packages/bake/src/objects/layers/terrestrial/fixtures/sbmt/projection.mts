@@ -1,3 +1,5 @@
+import { setupBakeOracleInputs } from '../../../../cameras/oracle-inputs.mts';
+await setupBakeOracleInputs();
 /** Execute unmodified SBMT/SAAVTK/VTK and its FITS dependency. No pipeline
  * implementation or candidate output is imported here. */
 import { readFile, writeFile, mkdir } from 'node:fs/promises';

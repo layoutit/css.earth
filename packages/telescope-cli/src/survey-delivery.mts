@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 import { randomBytes } from 'node:crypto';
 /** Repeatable local-observation survey through the public saved-query/delivery API. No claim of fresh archive discovery. */
 import { readFile, writeFile, mkdir, access, readdir, stat } from 'node:fs/promises';
@@ -76,9 +77,9 @@ export async function surveyDeliveries(root:string,targets:readonly string[],out
 if(process.argv[1]&&import.meta.url===pathToFileURL(resolve(process.argv[1])).href){
   const [out,...args]=process.argv.slice(2);if(!out||!args.length)throw new Error('Usage: survey-delivery.mts OUTPUT_DIRECTORY --random COUNT [SEED] | TARGET ...');
   const seed=args[0]==='--random'?(args[2]??randomBytes(16).toString('hex')):randomBytes(16).toString('hex');
-  const pool=args[0]==='--random'?await localTargetPool(process.cwd()):args;
+  const pool=args[0]==='--random'?await localTargetPool(checkoutProjectRoot(import.meta.url)):args;
   const count=args[0]==='--random'?Number(args[1]):pool.length;if(!Number.isSafeInteger(count)||count<1)throw new Error('Count must be a positive integer');
   const targets=args[0]==='--random'?shuffled(pool,seed).slice(0,count):args;
   process.stderr.write(`seed=${seed}; requested=${count}; available=${pool.length}; targets=${targets.join(',')}\n`);
-  console.log(JSON.stringify((await surveyDeliveries(process.cwd(),targets,resolve(out),256_000_000,seed,pool,count)).map(r=>({target:r.target,state:r.state,error:r.error})),null,2));
+  console.log(JSON.stringify((await surveyDeliveries(checkoutProjectRoot(import.meta.url),targets,resolve(out),256_000_000,seed,pool,count)).map(r=>({target:r.target,state:r.state,error:r.error})),null,2));
 }

@@ -53,7 +53,7 @@ test('the bake tests that exercise the renderer run on a renderer-only change, t
 
 test('every package and integration test is collected in a lane from the root script globs', () => {
   const root = resolve(import.meta.dirname, '../../..');
-  const lanes = testLaneFiles(root);
+  const lanes = testLaneFiles(root, JSON.parse(readFileSync(resolve(root, 'package.json'), 'utf8')) as unknown, ['test:packages', 'test:site']);
   const collected = new Set([...lanes.packages, ...lanes.site]);
   const tests = globSync(['packages/**/*.test.{ts,mts}', 'integration/**/*.test.{ts,mts}'], { cwd: root });
   assert.ok(tests.length > 0);

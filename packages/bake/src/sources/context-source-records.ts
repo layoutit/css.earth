@@ -1,3 +1,4 @@
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 import { parseVolumeSourceManifest, parseVolumeContextProducts } from '@cssearth/objects';
 import { readFile, readdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
@@ -16,7 +17,7 @@ export interface ContextLineage { id: string; name: string; route: string; base:
 
 /** Each catalogue context's lineage, read from the products its `source/presentation.json` declares and its manifest.
  * `route` is the application route that shows the context objects; the application passes it in. */
-export async function contextLineages({ route, root = process.cwd(), input = (path: string) => readFile(resolve(root, path)) }: {
+export async function contextLineages({ route, root = checkoutProjectRoot(import.meta.url), input = (path: string) => readFile(resolve(root, path)) }: {
   route: string; root?: string; input?: (path: string) => Promise<Buffer>;
 }): Promise<ContextLineage[]> {
   const results: ContextLineage[] = [];

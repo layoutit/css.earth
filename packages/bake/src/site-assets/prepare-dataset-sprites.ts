@@ -1,3 +1,4 @@
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 import { mkdir, readFile, readdir, rm, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
@@ -8,7 +9,7 @@ import { sourceArray, sourceId, sourceObject, sourceText } from '@cssearth/objec
 const tile = 42;
 
 /** Bake each object's dataset thumbnails into one sprite under public/navigation/dataset-sprites; returns how many were written. */
-export async function prepareDatasetSprites(root = process.cwd()) {
+export async function prepareDatasetSprites(root = checkoutProjectRoot(import.meta.url)) {
   const destination = resolve(root, 'public/navigation/dataset-sprites');
   const sidebar = sourceObject(JSON.parse(await readFile(resolve(root, 'public/navigation/sidebar-thumbnails.json'), 'utf8')));
   const sidebarImages = sourceObject(sidebar.images);
@@ -51,4 +52,3 @@ export async function prepareDatasetSprites(root = process.cwd()) {
   await Promise.all(Array.from({ length: 16 }, async () => { while (next < folders.length) await drawBody(folders[next++]!); }));
   return count;
 }
-

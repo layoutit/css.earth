@@ -131,11 +131,11 @@ cycle. Share anything else through `@cssearth/core` or another package. Prepared
   three layers).
 - `src/preparation/` is published as `@cssearth/bake/preparation` (Node only). It holds the stale-build check (`stale-builds.ts`) that `pnpm dev:prepare` and `packages/bake/cli/prepare-object.mts` run through
   `packages/bake/cli/check-stale-builds.mts`: that command imports the module from source, the one bake command that does,
-  because it must run, and `--run` must rebuild, while this package is unbuilt, so its source closure imports only Node built-ins. The workspace graph reader is also exported as `@cssearth/bake/preparation/workspace-graph` directly from source for bootstrap-safe CI discovery.
+  because it must run, and `--run` must rebuild, while this package is unbuilt, so its source closure imports only Node built-ins. The workspace graph reader is also exported as `@cssearth/bake/preparation/workspace-graph` directly from source for bootstrap-safe CI discovery. Test-lane collection uses core’s generic quoted-glob collector; lane names come from the root scripts.
   Its tests are `node --test` suites in `src/preparation/`.
 - `src/run-implemented-objects/` is published as `@cssearth/bake/run-implemented-objects` (Node only): runs a registered
   scene object's acquire, prepare, test, browser or assemble command, and the concurrency-limited, memory-budgeted
-  scheduler `prepare-objects` calls to prepare several objects at once. It imports `sources`. `packages/bake/cli/run-implemented-objects.mts` is its command.
+  scheduler `prepare-objects` calls to prepare several objects at once. It imports `sources` and `preparation`. Object suites come from root test-lane globs; shared suites mark the `CSSEARTH_TEST_OBJECTS` contract. `packages/bake/cli/run-implemented-objects.mts` is its command.
 - `src/prepare-objects/` is published as `@cssearth/bake/prepare-objects` (Node only): the catalogue-wide preparation run,
   each object through `run-implemented-objects`'s scheduler, then navigation and the inventories. It imports
   `run-implemented-objects`. `packages/bake/cli/prepare-objects.mts` is its command.
@@ -164,7 +164,7 @@ cycle. Share anything else through `@cssearth/core` or another package. Prepared
     sphere is written with. The solar geometry is generated into the checkout (`src/platform/solar-geometry.mts`) after the packages build,
     so callers pass `SolarGeometry` or use `loadSolarGeometry` from `@cssearth/bake/objects/scene` to load and validate the generated file. The prepared sky and Sun contracts belong to `@cssearth/objects`; their authored standards and preparers
     belong to `presentation`, which the scene imports as a lower topic.
-  - `objects/raster`: scientific surfaces from PDS, ISIS, FITS, GeoTIFF, VTK, NumPy, HEALPix and Tecplot products,
+  - `objects/raster`: scientific surfaces from PDS, ISIS, FITS, GeoTIFF, VTK, NumPy, HEALPix, Tecplot and classic NetCDF products,
     categorical geology and symbols, exoplanet eclipse and published phase-curve maps, observed color rasters and their
     photometric composition, a planet's whole-disc color record and the band-ratio tie to it, the source records they read, the WISE atlas mosaic grid, FITS binary tables (OIFITS and archive
     tables) and a star's limb darkening fitted to TESS transits. It imports `objects/scene`,

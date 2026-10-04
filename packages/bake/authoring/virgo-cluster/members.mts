@@ -1,3 +1,4 @@
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 // Entry script: node packages/bake/authoring/virgo-cluster/members.mts [evcc table2.dat]
 /**
  * The Virgo Cluster's member dots: the Extended Virgo Cluster Catalog's certain members (Kim et al. 2014, ApJS 215, 22,
@@ -21,7 +22,7 @@ import { dirname, resolve } from 'node:path';
 import { gunzipSync, gzipSync } from 'node:zlib';
 import { createRaDecCatalogueMatcher } from '@cssearth/astronomy';
 
-const repository = resolve(import.meta.dirname, '../../../..');
+const repository = checkoutProjectRoot(import.meta.url);
 const evccPath = resolve(process.argv[2] ?? resolve(repository, 'output/clusters/evcc-table2.dat'));
 const fieldPath = resolve(repository, 'src/objects/nearby-universe-galaxies/source/galaxies/cf4-hyperleda.csv.gz');
 const outputPath = resolve(repository, 'src/objects/virgo-cluster-members/source/dots/evcc-members.csv.gz');

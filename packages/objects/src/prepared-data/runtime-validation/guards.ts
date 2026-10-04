@@ -1,7 +1,7 @@
 import { checks, failure, type Fail } from '@cssearth/core';
 export type RecordValue = Record<string, unknown>;
-/** Prepared presentation checks report `Prepared presentation: <message>.`; `record` accepts only plain records. */
-export const fail: Fail = failure('Prepared presentation: ');
+/** Prepared presentation checks report `Prepared data: <message>.`; `record` accepts only plain records. */
+export const fail: Fail = failure('Prepared data: ');
 export const { record, array, text, finite, positive, integer, boolean, choice, unique, numbers } = checks(fail);
 export function direction(value: unknown, label: string, tolerance = 1e-9): number[] {
   const result = numbers(value, label, 3);

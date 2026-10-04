@@ -1,3 +1,4 @@
+import { requireNonemptyString as text } from '@cssearth/core';
 /** Renderer-independent, pinned celestial radiance image and fixed offline display transfer. */
 import { requireRecord as record, requireFiniteNumber as finite } from '@cssearth/core';
 export interface SkyReference { path: string; }
@@ -59,9 +60,4 @@ export function parseSkyRecipe(value: unknown): SkyRecipe {
     projection: { frame: p.frame, mapping: p.mapping, centerRaDegrees: 0 },
     bake: { faceSize, exposure: positive(b.exposure, 'sky exposure'), transfer: b.transfer, displayGain,
       ...(shadowFloor ? { shadowFloor } : {}), webpQuality }, provenance: reference(r.provenance), ...(parallax ? { parallax } : {}) };
-}
-
-function text(value: unknown, at: string): string {
-  if (typeof value !== 'string' || !value) throw new TypeError(`${at} must be a string.`);
-  return value;
 }

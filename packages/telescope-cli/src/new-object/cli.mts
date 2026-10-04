@@ -1,3 +1,4 @@
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 /** `telescope new-object`: the object generator and the bake it hands its objects to, run as the workspace's own process.
  * The telescope parses and checks the command line, then runs this with the parsed options as one JSON argument; the result
  * text and exit code, or the failure, go back over the IPC channel, and everything printed here is the telescope's stderr. */
@@ -6,7 +7,7 @@ import { pathToFileURL } from 'node:url';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
 import { answerParent } from '@cssearth/core/node';
 import { prepareObjects } from '@cssearth/bake/prepare-object';
-import { liveArchive } from './archives.mts';
+import { liveArchive } from './archives/archives.mts';
 import { writeDrafts } from './drafts.mts';
 import { formatNewObject, runNewObject } from './generate.mts';
 import { refreshSpec } from './refresh.mts';
@@ -30,22 +31,22 @@ export async function newObjectCommand(options:NewObjectOptions,root:string,stde
     const {mkdir,writeFile}=await import('node:fs/promises'),path=resolve(root,'output/new-object/refresh.json');
     await mkdir(resolve(root,'output/new-object'),{recursive:true});await writeFile(path,`${JSON.stringify(await refreshSpec(root,options.ids),null,2)}\n`);
     const results=await runNewObject(path,{root,progress,refresh:true,solarEpoch:await loadSolarEpoch(root)}),good=results.filter(result=>!result.failed).map(result=>result.id);
-    const baked=(options.check||options.bake)&&good.length?await prepareObjects(good,{progress,...(options.bake?{}:{to:'page'})}):true;
+    const baked=(options.check||options.bake)&&good.length?await prepareObjects(good,{root,progress,...(options.bake?{}:{to:'page'})}):true;
     text=options.json?`${JSON.stringify(results)}\n`:formatNewObject(results);code=baked&&!results.some(result=>result.failed)?0:1;
   }else if(options.ids){
-    const baked=await prepareObjects(options.ids,{progress});
+    const baked=await prepareObjects(options.ids,{root,progress});
     text=options.json?`${JSON.stringify({baked:baked?options.ids:[]})}\n`:baked?`${options.ids.length} object(s) baked.\n`:'';code=baked?0:1;
   }else if(options.from){
     const result=await writeDrafts(options.from,options.names??[],options.out!,{root,archive:liveArchive,progress:line=>stderr(`${line}\n`)});
     text=options.json?`${JSON.stringify(result)}\n`:`${result.report.join('\n')}\n${result.entries} entries written to ${result.path}\n`;code=result.entries?0:3;
   }else{
     const results=await runNewObject(options.spec!,{root,progress:line=>stderr(`${line}\n`),skipExisting:options.skipExisting,solarEpoch:await loadSolarEpoch(root)});
-    const good=results.filter(result=>!result.failed).map(result=>result.id),baked=(options.check||options.bake)&&good.length?await prepareObjects(good,{progress,...(options.bake?{}:{to:'page'})}):true;
+    const good=results.filter(result=>!result.failed).map(result=>result.id),baked=(options.check||options.bake)&&good.length?await prepareObjects(good,{root,progress,...(options.bake?{}:{to:'page'})}):true;
     text=options.json?`${JSON.stringify(results)}\n`:formatNewObject(results)+(results.length&&baked&&options.bake?`${results.length} objects baked.\n`:results.length&&baked&&options.check?`${results.length} objects passed the bake's first steps.\n`:'');code=baked&&!results.some(result=>result.failed)?0:1;
   }
   return {text,code};
 }
 
 if(process.argv[1]&&import.meta.url===pathToFileURL(resolve(process.argv[1])).href){
-  await answerParent(()=>newObjectCommand(parseNewObjectOptions(JSON.parse(process.argv[2]??'null')),resolve(import.meta.dirname,'../../../..'),line=>{process.stderr.write(line);}));
+  await answerParent(()=>newObjectCommand(parseNewObjectOptions(JSON.parse(process.argv[2]??'null')),checkoutProjectRoot(import.meta.url),line=>{process.stderr.write(line);}));
 }

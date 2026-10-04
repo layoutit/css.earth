@@ -27,14 +27,16 @@
     "url": "https://doi.org/10.1093/mnras/stx1433",
     "uncertainty": 125
   },
+  "gravity": {
+    "value": 2.12,
+    "source": "SIMBAD's compilation of spectroscopic measurements (mesFe_h): log g 2.12 from 2024A&A...682A.145S; the 16 published values span log g 1.75 to 3.2, across which the limb law changes by at most 0.4% of the centre brightness",
+    "url": "https://ui.adsabs.harvard.edu/abs/2024A%26A...682A.145S"
+  },
   "distance": {
     "value": 111.982,
     "source": "McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 112440: distance 111.982 pc, the paper's parallax inverted (Gaia DR1's where it revised the star's, else the Hipparcos reduction of van Leeuwen 2007; section 2.3; fractional uncertainty 0.027), at which the luminosity and radius hold",
     "url": "https://doi.org/10.1093/mnras/stx1433",
     "uncertainty": 3.024
-  },
-  "limb": {
-    "none": "no mass is measured and no spectroscopic surface gravity is published with this radius: McDonald, Zijlstra & Watson (2017), MNRAS 471, 770 assume the gravity of their fit (table column 15)"
   },
   "planets": [],
   "companions": [],

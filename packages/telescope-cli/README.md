@@ -34,6 +34,8 @@ In a terminal, `explore` shows the observations, unknown metadata, unsupported r
 
 `telescope ascl NAME` searches the [Astrophysics Source Code Library](https://ascl.net/); with `--product PATH` it checks a delivery's software names against ASCL titles. A title match is only a citation lead.
 
+`telescope simulations OBJECT` lists the Zenodo dataset records that name the object and speak of a simulation or a model, each with its license, size and files. It downloads nothing, and a listed record is a lead. To show one, read its paper and write an entry for `node packages/telescope-cli/src/new-object/new-object-cli.mts --simulation entries.json` ([simulation-dataset.mts](src/new-object/simulation/simulation-dataset.mts) documents the entry). That command checks the record's license, that it names the object and that it lists the file, brings the file into the body's source directory, and writes the dataset with its labels. The [published simulations](../../.agents/skills/celestial-skill/references/scientific-faithfulness.md#published-simulations) rule gives the conditions.
+
 When you know the scientific acceptance criteria, save an explicit request:
 
 ```sh
@@ -117,3 +119,5 @@ Renderer runtime exceptions are file-scoped in [the architecture rule](../../.gi
 `src/spatial-handoff.mts` runs physical resource loaders; `src/sphere/native-scroll/native-camera.mts`,
 `src/sphere/sphere-html.mts` and `src/sphere/sphere-oracle.mts` publish retained scenes.
 The package keeps its renderer dependency for these four consumers. F16 validation uses objects contracts.
+
+Sphere export imports the built `@cssearth/telescope-cli/sphere/lane` entry from `dist`. The CLI loads the checkout's generated solar geometry and passes it to `exportSphere`; the lane compiles only during package build. After editing `src/sphere/`, rebuild with `pnpm --filter @cssearth/telescope-cli build` before exporting again.

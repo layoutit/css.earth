@@ -67,8 +67,11 @@ export async function presentStartupCover(document: Document): Promise<void> {
     opacity: String(Math.min(1, Math.max(0, (2 * radiusPixels - 2) / 12))) });
   image.dataset.startupCover = 'shown';
   window.performance.mark('cssearth:startup-billboard');
-  // The photograph is the loading state (startup-billboard.mts).
+  // The photograph replaces the ring. It looks like the scene but does not answer input yet, so the header's progress line
+  // runs. The shell is not mounted this early; once it is, it keeps the line until the detail presents
+  // (`setDestinationLoading`, scene-publication.mts).
   document.querySelector('.startup-loading')?.remove();
+  document.querySelector('.explorer-navigation-progress')?.setAttribute('aria-hidden', 'false');
 }
 
 if (typeof document !== 'undefined') void presentStartupCover(document).catch(error => console.error('Startup cover failed', error));

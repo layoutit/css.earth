@@ -6936,6 +6936,9 @@
         "kind": "local",
         "reason": "SQUEEZE's raw posterior mean at 0.78 mas pixels from image-star.mts with the season betelgeuse-matisse-2020-12, the input to the beam convolution; not displayed."
       }
+    },
+    {
+      "path": "presentation/minimap.json"
     }
   ]
 }

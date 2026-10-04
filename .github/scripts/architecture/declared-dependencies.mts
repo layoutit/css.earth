@@ -2,7 +2,7 @@
  * `package.json` declares it. pnpm hoists every workspace package to the root `node_modules`, so an undeclared import
  * resolves anyway; nothing else notices until an isolated install or a build order drops it. Any dependency field
  * counts as a declaration for tests and for packages that run from source (telescope-cli has no tsup build). A package
- * tsup builds must ship what its non-test code imports, type-only imports included since `dist/*.d.ts` keeps them:
+ * tsup builds must ship what its library code imports; checkout-only cli/ scripts may use dev dependencies. Type-only imports are included since `dist/*.d.ts` keeps them:
  * tsup keeps `dependencies` (and peer, optional) external but inlines a `devDependencies` package into `dist/`, or
  * leaves `dist/` importing a package its consumers never install. */
 import { existsSync, readFileSync } from 'node:fs';
@@ -57,7 +57,8 @@ export function undeclaredImports(packages: readonly DeclaredPackage[], sources:
   for (const [path, text] of sources) {
     const importer = packages.find(item => path.startsWith(`${item.directory}/`));
     if (!importer || !importer.directory.startsWith('packages/')) continue;
-    const needsShipped = importer.built && !isTestPath(path);
+    // cli/ scripts run from the checkout and are not shipped in the library dist.
+    const needsShipped = importer.built && !isTestPath(path) && !path.startsWith(`${importer.directory}/cli/`);
     for (const specifier of importedSpecifiers(text, path)) {
       const imported = packages.find(item => specifier === item.name || specifier.startsWith(`${item.name}/`));
       if (!imported || imported === importer) continue;

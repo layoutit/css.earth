@@ -6,12 +6,9 @@ export function medianAveraged(values: number[]): number {
   return values.length % 2 ? values[middle]! : (values[middle - 1]! + values[middle]!) / 2;
 }
 
-/** Compatibility name for the in-place averaged policy. */
-export const median = medianAveraged;
-
 /** Copy, sort and choose the upper middle. An empty sample is refused. */
 export function medianUpperMiddle(values: readonly number[]): number {
-  if (!values.length) throw new TypeError('No occupied cells to take a median of.');
+  if (!values.length) throw new TypeError('Cannot take the upper-middle median of an empty sample.');
   const sorted = [...values].sort((a, b) => a - b);
   return sorted[sorted.length >> 1]!;
 }

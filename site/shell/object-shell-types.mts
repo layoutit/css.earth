@@ -42,5 +42,7 @@ export interface ObjectShell {
   setCamera(provider: ShellCamera | null): void;
   setPlaybackState(state: PlaybackState): void;
   setNavigationInFlight(active: boolean): void;
+  /** The header's progress line: a destination is loading, in flight or already in place behind its photograph. */
+  setDestinationLoading(active: boolean): void;
   destroy(): void;
 }
