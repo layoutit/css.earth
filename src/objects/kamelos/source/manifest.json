@@ -176,14 +176,40 @@
           }
         ]
       }
+    },
+    {
+      "id": "kamelos-claret-2011-limb-darkening",
+      "path": "photometry/claret-2011-v-quadratic.tsv",
+      "origin": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv",
+      "credit": "Claret & Bloemen (2011), A&A 529, A75 (VizieR J/A+A/529/A75)",
+      "license": "VizieR catalogue data, public with citation of the paper and CDS",
+      "licenseEvidence": [
+        "https://cds.unistra.fr/vizier-org/licences_vizier.html"
+      ],
+      "acquisition": "VizieR request in source/preparation/acquisition.json: the quadratic Johnson V coefficients of the grid nodes at 4000..4250 K, log g 1.5..2, solar metallicity.",
+      "redistribution": "Catalogue rows retained unchanged with their citation.",
+      "consumers": [
+        "assets",
+        "datasets"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-kamelos-claret-2011-limb-darkening",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
     {
-      "id": "uniform-disc-context-marker",
+      "id": "limb-darkened-disc-context-marker",
       "path": "presentation/context.png",
       "origin": "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=1140693565213532416&FORMAT=csv&DATA_STRUCTURE=RAW&RELEASE=Gaia+DR3",
-      "credit": "The color dataset as a disc; rendered by packages/telescope-cli/src/source-authoring/context-markers.mts",
+      "credit": "The color dataset as a disc, dimmed toward the limb by its law; rendered by packages/telescope-cli/src/source-authoring/context-markers.mts",
       "license": "Project-authored display derivative.",
       "consumers": [
         "navigation"
@@ -193,7 +219,8 @@
         "inputs": [
           "kamelos-stellar-color",
           "kamelos-gaia-xp",
-          "kamelos-preparation-raster"
+          "kamelos-preparation-raster",
+          "kamelos-claret-2011-limb-darkening"
         ]
       },
       "generator": "packages/telescope-cli/src/source-authoring/context-markers.mts",

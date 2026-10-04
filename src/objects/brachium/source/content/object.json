@@ -41,7 +41,7 @@
       {
         "id": "color",
         "label": "Color",
-        "qualification": "Color of a blackbody at the star's temperature. The disc itself is unresolved.",
+        "qualification": "Color of a blackbody at the star's temperature. The disc itself is unresolved; darkening toward the edge from a model atmosphere.",
         "thumbnail": "brachium-dataset-color.webp",
         "surface": "brachium-surface-color@2x.webp",
         "poles": "brachium-poles-color@2x.webp",
@@ -51,7 +51,7 @@
           "url": "https://doi.org/10.1093/mnras/stx1433"
         },
         "falseColor": false,
-        "notes": "The color of a blackbody at the star's published temperature. No limb darkening is drawn: no mass is measured and no spectroscopic surface gravity is published with this radius: McDonald, Zijlstra & Watson (2017), MNRAS 471, 770 assume the gravity of their fit (table column 15). The spin axis's direction on the sky is a display convention."
+        "notes": "The color of a blackbody at the star's published temperature. The spin axis's direction on the sky is a display convention. The darkening toward the edge is the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 3,577 K and log g 2 (u1 1.037, u2 -0.192): a model, because no fit of this star's limb is used."
       }
     ]
   },

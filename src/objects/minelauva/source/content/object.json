@@ -41,7 +41,7 @@
       {
         "id": "color",
         "label": "Color",
-        "qualification": "Color from its measured spectrum. The disc itself is unresolved.",
+        "qualification": "Color from its measured spectrum. The disc itself is unresolved; darkening toward the edge from a model atmosphere.",
         "thumbnail": "minelauva-dataset-color.webp",
         "surface": "minelauva-surface-color@2x.webp",
         "poles": "minelauva-poles-color@2x.webp",
@@ -51,7 +51,7 @@
           "url": "https://cdsarc.cds.unistra.fr/ftp/III/201/table5.dat"
         },
         "falseColor": false,
-        "notes": "The color of the star's measured spectrum (Pulkovo spectrophotometric catalogue, table 5 (320-1080 nm, 2.5 nm steps, 10 nm resolution, absolute flux in W m^-2 m^-1)). No limb darkening is drawn: no mass is measured and no spectroscopic surface gravity is published with this radius: McDonald, Zijlstra & Watson (2017), MNRAS 471, 770 assume the gravity of their fit (table column 15). The spin axis's direction on the sky is a display convention."
+        "notes": "The color of the star's measured spectrum (Pulkovo spectrophotometric catalogue, table 5 (320-1080 nm, 2.5 nm steps, 10 nm resolution, absolute flux in W m^-2 m^-1)). The spin axis's direction on the sky is a display convention. The darkening toward the edge is the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 3,657 K and log g 0.8 (u1 1.033, u2 -0.185): a model, because no fit of this star's limb is used."
       }
     ]
   },

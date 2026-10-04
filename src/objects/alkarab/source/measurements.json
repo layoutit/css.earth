@@ -12,5 +12,7 @@
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's measured spectrum (Kharitonov, Tereshchenko & Knyazeva (1988), Spectrophotometric Catalogue of Stars (Alma-Ata), record 1115) (photometry/stellar-color.json); no image of the photosphere exists."
-  }
+  },
+  "surfaceGravityLogg": 3.32,
+  "surfaceGravitySource": "log g 3.32 from 2023ApJS..266...41P; the 4 published values span log g 2.918 to 4.39, across which the limb law changes by at most 0.6% of the centre brightness (https://ui.adsabs.harvard.edu/abs/2023ApJS..266...41P)"
 }
