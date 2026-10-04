@@ -172,16 +172,25 @@ export function mountBatchedSpatialPoints<T extends BatchedSpatialPoint>(options
   // the exact paint follows once the publications pause.
   // `owed`: the paint on screen is a warped one (or one kept while its counts changed), so the pause owes the exact paint.
   let latest: VolumeCameraPublication | null = null, settle: ReturnType<typeof setTimeout> | null = null, settling = false, owed = false;
+  // When the publication that last asked for a settle arrived: the armed timer waits out the pause from there, so a
+  // travelling camera does not clear and set a timer on every frame.
+  let travelledAt = 0;
   // The pause's exact paint: after a warp, and after a paint that left its margin out. Only the first can change what
   // the view shows, so only it tells the owner. It repaints the layer's other fields too (`member.repaint`).
   const settleAfterPause = () => {
-    if (settle !== null) clearTimeout(settle);
-    settle = setTimeout(() => {
-      settle = null;
-      if (!latest) return;
-      if (owed) { settling = true; try { publish(latest, true); } finally { settling = false; } onSettle?.(); }
-      else if (painted && painted.overscan < OVERSCAN) publish(latest, true);
-    }, SETTLE_MS);
+    travelledAt = performance.now();
+    if (settle !== null) return;
+    const wait = (delay: number) => {
+      settle = setTimeout(() => {
+        const rest = SETTLE_MS - (performance.now() - travelledAt);
+        if (rest > 1) { wait(rest); return; }
+        settle = null;
+        if (!latest) return;
+        if (owed) { settling = true; try { publish(latest, true); } finally { settling = false; } onSettle?.(); }
+        else if (painted && painted.overscan < OVERSCAN) publish(latest, true);
+      }, delay);
+    };
+    wait(SETTLE_MS);
   };
   // A repaint the pacer runs for dots a zoom adds. The dots' paint is a paint exception of the motion contract
   // (docs/performance/motion-freezes-membership.md), so nothing holds it: the pacer only spaces it by the frame budget.

@@ -31,6 +31,8 @@ export function createVolumeTextureReadiness(publish: () => void, createImage?: 
       });
       return [...wanted].every(url => decoded.has(url));
     },
+    /** Whether one of the wanted images has finished its transport and decode. */
+    decoded(url: string): boolean { return !disposed && decoded.has(url); },
     destroy() {
       if (disposed) return;
       disposed = true; pending.clear(); decoded.clear(); store.destroy();

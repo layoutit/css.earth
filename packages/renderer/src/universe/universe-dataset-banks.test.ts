@@ -33,7 +33,7 @@ async function fixture(attached = false) {
   const { document } = parseHTML('<div id="back"><span></span></div><div id="front"><span></span></div>');
   const root = document.getElementById('back')!, frontRoot = document.getElementById('front')!;
   const lifetime = createSceneLifetime();
-  const banks = createUniverseDatasetBanks({ prepareBillboardAtlas: () => true, root, end: root.firstElementChild!, frontRoot, frontEnd: frontRoot.firstElementChild!,
+  const banks = createUniverseDatasetBanks({ prepareBillboardImage: () => true, root, end: root.firstElementChild!, frontRoot, frontEnd: frontRoot.firstElementChild!,
     lifetime, declarations: [{ id: 'fixture', frame }], facts: [{ id: 'fixture', contextVisibility: 'independent', attached }],
     frame, visibility, warmDomNodeBudget: 10000, load: async () => ({ payload, resolveResource: path => path }) });
   await banks.focusBank('fixture')!.load();
@@ -92,15 +92,15 @@ test('close-ups suppress distant banks while attached shells and the selected ne
 test('a bank declared after mount is drawn and loaded as one declared with it, its billboard in the same layer', async () => {
   const { document } = parseHTML('<div id="back"><span></span></div><div id="front"><span></span></div>');
   const root = document.getElementById('back')!, frontRoot = document.getElementById('front')!, lifetime = createSceneLifetime();
-  const billboard = { cell: 0, radiusUnits: 1, back: [0, 0, 1], right: [1, 0, 0], down: [0, 1, 0] } as const;
-  const plan = { atlas: { columns: 2, rows: 1, cellPx: 256 }, banks: new Map() };
+  const billboard = { radiusUnits: 1, back: [0, 0, 1], right: [1, 0, 0], down: [0, 1, 0] } as const;
+  const plan = { imagePx: 256, banks: new Map() };
   const loads: string[] = [];
-  const banks = createUniverseDatasetBanks({ prepareBillboardAtlas: () => true, root, end: root.firstElementChild!, frontRoot, frontEnd: frontRoot.firstElementChild!,
+  const banks = createUniverseDatasetBanks({ prepareBillboardImage: () => true, root, end: root.firstElementChild!, frontRoot, frontEnd: frontRoot.firstElementChild!,
     lifetime, declarations: [{ id: 'early', frame }], facts: [{ id: 'early', contextVisibility: 'independent', attached: false, billboard }],
-    frame, visibility, warmDomNodeBudget: 10000, billboards: { plan, atlasUrl: '/atlas.webp' },
+    frame, visibility, warmDomNodeBudget: 10000, billboards: { plan, imageUrl: (id: string) => `/billboards/${id}.webp` },
     load: async id => { loads.push(id); return { payload: { ...payload, id }, resolveResource: path => path }; } });
   assert.equal(banks.focusBank('late'), null, 'unknown before its host brings it');
-  banks.declare({ id: 'late', frame }, { id: 'late', contextVisibility: 'independent', attached: true, billboard: { ...billboard, cell: 1 } });
+  banks.declare({ id: 'late', frame }, { id: 'late', contextVisibility: 'independent', attached: true, billboard });
   banks.declare({ id: 'late', frame }, { id: 'late', contextVisibility: 'independent', attached: true });
   assert.equal(root.dataset.volumeDatasetDeclaredBankCount, '2', 'declared once');
   const layers = root.querySelectorAll('.prepared-dataset-billboards');

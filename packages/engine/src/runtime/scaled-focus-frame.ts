@@ -26,10 +26,8 @@ export interface ScaledCameraPose {
 export function presentPhysicalPoseInVolume(pose: PhysicalCameraPose, frame: ScaledFocusFrame): ScaledCameraPose {
   validateScaledFocusFrame(frame);
   const local = cameraPoseFromReferenceFrame(pose, frame);
-  return Object.freeze({
-    positionUnits: copyPosition(scale(local.positionM, 1 / frame.metersPerUnit)),
-    orientationXyzw: copyOrientation(local.orientationXyzw),
-  });
+  // Not frozen: this runs for every volume and billboard on every frame (see heliocentric-geometry.ts offAxisFrame).
+  return { positionUnits: scale(local.positionM, 1 / frame.metersPerUnit), orientationXyzw: local.orientationXyzw };
 }
 
 /** Bounds are descriptive prepared coverage, not a navigation clamp. */
@@ -60,8 +58,4 @@ function validateOrientation(orientation: OrientationXyzw, name: string): void {
 }
 function scale(position: PositionM, factor: number): PositionM {
   return [position[0] * factor, position[1] * factor, position[2] * factor];
-}
-function copyPosition(position: PositionM): PositionM { return Object.freeze([position[0], position[1], position[2]]); }
-function copyOrientation(orientation: OrientationXyzw): OrientationXyzw {
-  return Object.freeze([orientation[0], orientation[1], orientation[2], orientation[3]]);
 }

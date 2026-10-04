@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
-import { navigatedAppReady, nativeRecordingClock, CALIBRATION_POINTS, captureMetrics, compareCaptures, solveAffine, touchPlan, comparePixels, formatComparison, options, devicePageProcess, jsonValues, traceEvents, timeProfileSamples, parseSteps, requireStepsFor, screenshotArtifact, sameCapturePage, summariseNumericSamples, schedulingStacks, summariseCpu, summariseInitiators, summariseSamples, summariseTimeProfile, summariseTimeline } from './ios-capture.mts';
+import { navigatedAppReady, nativeRecordingClock, CALIBRATION_POINTS, captureMetrics, compareCaptures, solveAffine, touchPlan, comparePixels, formatComparison, options, devicePageProcess, jsonValues, traceEvents, timeProfileSamples, parseSteps, requireStepsFor, screenshotArtifact, sameCapturePage, summariseNumericSamples, schedulingStacks, summariseCpu, summariseInitiators, summariseSamples, summariseTimeProfile, summariseTimeline, cpuProfileFromSamples } from './ios-capture.mts';
 
 test('memory and residency evidence share the trace clock and preserve category units', () => {
   const trace = traceEvents([], 1000, null, {}, undefined, null, {
@@ -217,4 +217,24 @@ test('opening a route waits for the new document, not the outgoing ready page', 
   assert.equal(navigatedAppReady({ url, timeOrigin: 101, ready: false }, url, 100), false);
   assert.equal(navigatedAppReady({ url, timeOrigin: NaN, ready: true }, url, 100), false);
   assert.equal(navigatedAppReady({ url, timeOrigin: 101, ready: true }, url, 100), true);
+});
+
+test("the device's samples become a V8 profile, and a host function's time can stay on the line that called it", () => {
+  const script = (name: string, line: number, at: number) => ({ name, url: 'http://site.test/a.js', line, column: 3, at });
+  const host = { name: 'freeze', url: '', line: -1, column: -1 };
+  const samples = [
+    { timestamp: 10, frames: [host, script('parse', 20, 24), script('load', 5, 7)] },
+    { timestamp: 10.001, frames: [host, script('parse', 20, 24), script('load', 5, 7)] },
+    { timestamp: 10.002, frames: [script('parse', 20, 22), script('load', 5, 7)] },
+  ];
+  const sampled = cpuProfileFromSamples(samples);
+  const name = (profile: ReturnType<typeof cpuProfileFromSamples>, id: number) => profile.nodes.find(node => node.id === id)!;
+  assert.deepEqual(sampled.samples.map(id => name(sampled, id).callFrame.functionName), ['freeze', 'freeze', 'parse']);
+  assert.deepEqual(sampled.timeDeltas, [0, 1000, 1000]);
+  // WebKit's line 20, column 3 is V8's 19 and 2; the executing line stays as WebKit counts it, as V8's ticks do.
+  const parse = sampled.nodes.find(node => node.callFrame.functionName === 'parse')!;
+  assert.deepEqual([parse.callFrame.lineNumber, parse.callFrame.columnNumber, parse.positionTicks], [19, 2, [{ line: 22, ticks: 1 }]]);
+  const callers = cpuProfileFromSamples(samples, true);
+  assert.deepEqual(callers.samples.map(id => name(callers, id).callFrame.functionName), ['parse', 'parse', 'parse']);
+  assert.deepEqual(callers.nodes.find(node => node.callFrame.functionName === 'parse')!.positionTicks, [{ line: 22, ticks: 1 }, { line: 24, ticks: 2 }]);
 });
