@@ -10,8 +10,8 @@
     {
       "location": "prepared",
       "filename": "datasets.json",
-      "bytes": 101472,
-      "sha256": "33973030440e740b892ae3fe41afa3ce1b1f949a46fae56d87a78428107fe8ce"
+      "bytes": 6903,
+      "sha256": "82ae5b78281872a7a1399a85adba589b52c2a740fb3c54d6d72489d771850b3d"
     },
     {
       "location": "prepared",
@@ -447,9 +447,27 @@
     },
     {
       "location": "prepared",
+      "filename": "electron-density/volume.json",
+      "bytes": 38143,
+      "sha256": "e6cfade8bd49cbd576967d2f292da6f69a9ac08d719eefe66bcae18bedd8f39a"
+    },
+    {
+      "location": "prepared",
       "filename": "presentation.json",
       "bytes": 2539,
       "sha256": "95177dead497a616b6cc834fdcab95378fc90f9dba142eb0cb05fef250aa47ba"
+    },
+    {
+      "location": "prepared",
+      "filename": "record.json",
+      "bytes": 5424,
+      "sha256": "3fbe115953fc2d14df5e46f3861aeafc9376f8811a7129cbd363090c88e29cdc"
+    },
+    {
+      "location": "prepared",
+      "filename": "stars.bin",
+      "bytes": 280,
+      "sha256": "cfdab83616a8bcb54bb01d4a28bba0c8e12b3d67ec5c5cf0903143d7dc3302c6"
     }
   ]
 }

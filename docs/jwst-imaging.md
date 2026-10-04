@@ -77,5 +77,5 @@ Programme 1250 (GTO, PI G. Villanueva), NIRSpec G395H, 23 November 2022, four ex
 - A cube map's detail is the telescope's: Europa's disc was ten pixels across, so nothing under about 300 km is surface detail. Both integral-field units are read; MIRI's cubes are pinned one channel and sub-band at a time.
 - The re-run trusts MAST's level-2 exposures. Stages 1 and 2 are not re-run.
 - Coronagraphy is NIRCam's only, and only subarray observations: a full-frame coronagraph observation's name does not say which occulter it is behind. MIRI's four-quadrant phase-mask alignment does not converge (above).
-- Distortion-corrected mosaics are required. `skyProjection` refuses SIP, TPV and PV cards rather than approximating them.
+- Distortion-corrected mosaics are required. `skyProjection` applies SIP on axes that name it and refuses TPV, PV and lookup-table distortion rather than approximating them; a level-3 mosaic carries none.
 - Detail finer than the depth model's cells has no depth of its own. It sits wherever the model puts matter along its column.

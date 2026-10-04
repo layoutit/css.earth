@@ -10,8 +10,8 @@
     {
       "location": "prepared",
       "filename": "datasets.json",
-      "bytes": 62693,
-      "sha256": "dc038e933dc3faccc1d55e0f1a9250db37fec8c38dcb368e911da7cc31750cc7"
+      "bytes": 3512,
+      "sha256": "7aab4af0a5b701a02d205c2e8b871150989f3552ee652b788eb9687d5943d53b"
     },
     {
       "location": "prepared",
@@ -22,8 +22,8 @@
     {
       "location": "prepared",
       "filename": "dots.bin",
-      "bytes": 30014,
-      "sha256": "7ba2cda47a6a7658960733deb07b436d084e17c1d8ccac4348669c8938931a99"
+      "bytes": 30087,
+      "sha256": "a5537a1d1bca0bc45ee3d82de9595f63ca9477d998e49371de7e939942ab2d8b"
     },
     {
       "location": "prepared",
@@ -201,9 +201,27 @@
     },
     {
       "location": "prepared",
+      "filename": "eso-optical/volume.json",
+      "bytes": 54869,
+      "sha256": "c1b1f9bf580f5a258c9e597772d69e378ff5b1bea1b1e3e9cc8cd0e35f649fc3"
+    },
+    {
+      "location": "prepared",
       "filename": "presentation.json",
       "bytes": 1364,
       "sha256": "67eba0c45ca9241f85a6b483c7bf2087dff65cdb0db251430d32406ad8fa338a"
+    },
+    {
+      "location": "prepared",
+      "filename": "record.json",
+      "bytes": 6583,
+      "sha256": "04379790cd7a61561b055e95cd3fc614315f63367a67f737aa96b14492375dad"
+    },
+    {
+      "location": "prepared",
+      "filename": "stars.bin",
+      "bytes": 388,
+      "sha256": "dac2db4dc01ce2e0be3d08f67dd36e188955746b6d5cbd0fbd1d3e2f1ed8afd1"
     }
   ]
 }

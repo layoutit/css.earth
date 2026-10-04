@@ -1,10 +1,13 @@
-import { parseGalaxyDisplaySample, parsePreparedGalaxyCatalog, parsePreparedClusterCatalog, parsePreparedNebulaCatalog, type PreparedCatalogObject } from '@cssearth/objects';
+import { catalogueDots, parsePreparedGalaxyCatalog, parsePreparedClusterCatalog, parsePreparedNebulaCatalog, type PreparedCatalogueDots } from '@cssearth/objects';
 import { type WorldCameraPose } from '@cssearth/engine';
 import type { WorldCameraViewport } from '../navigation/world-camera.js';
 import { createOpacityFader } from '../stars/opacity-fader.js';
 import { projectCatalogPosition } from './galaxy-catalog-layout.js';
 
-interface Dot { readonly object: PreparedCatalogObject; readonly element: HTMLElement; transform: string }
+interface Dot { readonly positionM: readonly number[]; readonly element: HTMLElement; transform: string }
+
+/** The dots as the data worker hands them over (catalogue-dots-reader.ts), not a catalogue in its JSON form. */
+const isDots = (value: unknown): value is PreparedCatalogueDots => typeof value === 'object' && value !== null && (value as { positionsM?: unknown }).positionsM instanceof Float64Array;
 
 /** The spatial catalogues as the universe draws them: one unobtrusive dot for each sampled Local Group galaxy that has no
  * package of its own. A catalogue is data: its rows are never named, marked, picked or selected here. A galaxy, cluster or
@@ -12,26 +15,30 @@ interface Dot { readonly object: PreparedCatalogObject; readonly element: HTMLEl
 export function mountPreparedGalaxyCatalog({ host, before, payload, clusters, galaxySample, nebulae }: {
   host: HTMLElement; before: Element; payload: unknown; clusters?: unknown; nebulae?: unknown; galaxySample?: unknown;
 }) {
-  const catalog = parsePreparedGalaxyCatalog(payload), document = host.ownerDocument;
-  const clusterCatalog = clusters === undefined ? null : parsePreparedClusterCatalog(clusters);
-  const nebulaCatalog = nebulae === undefined ? null : parsePreparedNebulaCatalog(nebulae);
-  for (const other of [clusterCatalog, nebulaCatalog]) if (other && (other.frame.referenceFrame !== catalog.frame.referenceFrame || other.frame.epochJdTt !== catalog.frame.epochJdTt)) throw new TypeError('Prepared catalogues must share one frame and epoch.');
-  let sampleIds: Set<string> | undefined;
-  if (galaxySample !== undefined) {
-    sampleIds = new Set(parseGalaxyDisplaySample(galaxySample, catalog).ids);
-  }
+  const document = host.ownerDocument;
+  // The page receives the dots alone (@cssearth/objects catalogue-dots.ts). A caller that holds the catalogues whole (a
+  // test, a tool) passes them, and the same dots are read from them here.
+  const read = (): PreparedCatalogueDots => {
+    if (isDots(payload)) return payload;
+    const catalog = parsePreparedGalaxyCatalog(payload);
+    const clusterCatalog = clusters === undefined ? null : parsePreparedClusterCatalog(clusters);
+    const nebulaCatalog = nebulae === undefined ? null : parsePreparedNebulaCatalog(nebulae);
+    for (const other of [clusterCatalog, nebulaCatalog]) if (other && (other.frame.referenceFrame !== catalog.frame.referenceFrame || other.frame.epochJdTt !== catalog.frame.epochJdTt)) throw new TypeError('Prepared catalogues must share a reference frame and epoch.');
+    return catalogueDots(catalog, galaxySample, clusterCatalog?.objects.length ?? 0);
+  };
+  const catalog = read();
   const root = document.createElement('div');
   root.className = 'prepared-galaxy-catalog';
   // Zero-size root at the stage centre, children placed from it (world-context.css).
   host.insertBefore(root, before);
   const fader = createOpacityFader(document.defaultView!, undefined, { hideAtZero: true });
   // Membership is a prepared scientific fact, never a runtime distance cut. A row with a package is drawn by the world context.
-  const dots: Dot[] = catalog.objects.filter(object => object.name && !object.detailedObjectId && object.membership.group === 'local-group' && (!sampleIds || sampleIds.has(object.id))).map(object => {
+  const dots: Dot[] = catalog.ids.map((id, index) => {
     const element = document.createElement('span');
-    element.dataset.galaxyDot = object.id;
+    element.dataset.galaxyDot = id;
     element.style.cssText = 'opacity:0;visibility:hidden';
     root.append(element);
-    return { object, element, transform: '' };
+    return { positionM: [catalog.positionsM[index * 3]!, catalog.positionsM[index * 3 + 1]!, catalog.positionsM[index * 3 + 2]!], element, transform: '' };
   });
   root.dataset.catalogueCount = String(dots.length);
   let destroyed = false, dormant = false;
@@ -46,7 +53,7 @@ export function mountPreparedGalaxyCatalog({ host, before, payload, clusters, ga
       if (alpha === 0) { if (dormant) return; dormant = true; } else dormant = false;
       const width = viewport.widthPixels ?? host.clientWidth, height = viewport.heightPixels ?? host.clientHeight;
       for (const dot of dots) {
-        const point = width > 0 && height > 0 ? projectCatalogPosition(dot.object.positionM, world, viewport) : null;
+        const point = width > 0 && height > 0 ? projectCatalogPosition(dot.positionM, world, viewport) : null;
         const visible = point !== null && Math.abs(point.x) <= width / 2 + 4 && Math.abs(point.y) <= height / 2 + 4;
         if (visible) {
           // Never read back from the style (a read serialises it). Hundredths of a pixel: a finer text is a write the
@@ -60,7 +67,7 @@ export function mountPreparedGalaxyCatalog({ host, before, payload, clusters, ga
     /** While the camera coasts a dot that fades out keeps its box; it is hidden once the coast stops
      * (docs/performance/motion-freezes-membership.md). */
     setCoasting(active: boolean) { fader.holdHiding(active); },
-    inspect() { return { count: dots.length, clusterCount: clusterCatalog?.objects.length ?? 0 }; },
+    inspect() { return { count: dots.length, clusterCount: catalog.clusterCount }; },
     destroy() {
       if (destroyed) return; destroyed = true; fader.destroy();
       root.remove();

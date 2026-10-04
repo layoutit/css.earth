@@ -1,6 +1,6 @@
 import { writeStyle } from '../rendering/retained-write.js';
 import { eyeDistanceM } from '@cssearth/engine';
-import { parseCataloguePointSteps, type CataloguePointLevel, type CataloguePointSpread, type VolumeVector } from '@cssearth/objects';
+import { cataloguePointColumns, readCataloguePointBank, type CataloguePointLevel, type CataloguePointSpread, type PreparedCataloguePointColumns, type VolumeVector } from '@cssearth/objects';
 
 
 import type { VolumeCameraPublication } from '../volume/types.js';
@@ -78,6 +78,10 @@ const toLocalAxes = ([x, y, z, w]: readonly number[], [vx, vy, vz]: readonly num
  * its host's one dot layer (point-layer.ts): every bank of a host paints into the same layer, and the
  * root's stroke opacity dims this bank alone.
  */
+/** A bank as the data worker hands it over (its points in one array), not in its JSON form. */
+const isColumns = (value: unknown): value is PreparedCataloguePointColumns =>
+  typeof value === 'object' && value !== null && (value as { positions?: unknown }).positions instanceof Float64Array;
+
 export function mountCataloguePoints({ host, before, url, loadBank, occluder }: {
   host: HTMLElement; before?: Node; url: string; loadBank(url: string): Promise<unknown>;
   /** A disc in the world's reference frame (its centre, unit normal and radius, in metres) that dims the dots behind it. */
@@ -99,13 +103,16 @@ export function mountCataloguePoints({ host, before, url, loadBank, occluder }: 
   // never asked for one.
   let placeKey: ((positionM: readonly number[]) => string | null) | null = null;
   /** The hidden points of one part, by the part's own indices. */
-  const hiddenIn = (points: readonly { readonly positionUnits: readonly number[] }[]) => {
+  const hiddenIn = (positions: Float64Array) => {
     let byPlace: Map<string, number> | null = null, forList: typeof hiddenAtM = null, indices: ReadonlySet<number> | null = null;
     return () => {
       if (forList === hiddenAtM) return indices;
       forList = hiddenAtM;
       if (!hiddenAtM?.length || !placeKey) return indices = null;
-      byPlace ??= new Map(points.map((point, index) => [point.positionUnits.join(','), index] as const));
+      if (!byPlace) {
+        byPlace = new Map();
+        for (let index = 0; index * 3 < positions.length; index++) byPlace.set(`${positions[index * 3]},${positions[index * 3 + 1]},${positions[index * 3 + 2]}`, index);
+      }
       const found = hiddenAtM.flatMap(positionM => { const key = placeKey!(positionM), index = key === null ? undefined : byPlace!.get(key); return index === undefined ? [] : [index]; });
       return indices = found.length ? new Set(found) : null;
     };
@@ -160,22 +167,18 @@ export function mountCataloguePoints({ host, before, url, loadBank, occluder }: 
       // A body's first view does not draw the background dots: they wait for it to be interactive (startup-gate.ts).
       afterStartup(host.ownerDocument.defaultView, () => { if (!destroyed) void loadBank(url).then(value => {
         if (destroyed) return;
-        // A bank arrives while the camera moves (the nearby galaxies' at about 250 pc of a zoom out), and reading its points,
-        // styling them, resolving its field and painting it are each a pass over all of them: together, in the task its
-        // bytes arrived in, they were one frame of 172 to 218 ms of that zoom on the iPad for 39,916 points. The load runs
-        // in slices of the document's pacer instead, as a body's activation does during a flight (prepared-activation.ts),
-        // and its longest frame there is 33 ms (2026-10-03): `allowance` is the points a frame's budget still covers, and
-        // a pass yields when it is spent.
+        // A bank arrives as columns: the data worker read its file, checked it and handed its arrays over
+        // (catalogue-point-reader.ts), so this thread reads no point and builds no object for one. A bank in its JSON
+        // form (a test's, a tool's) is turned into columns here.
+        // Resolving the field and painting it are still a pass over every point each: with the bank's reading they were
+        // one frame of 172 to 218 ms of a zoom on the iPad for the nearby galaxies' 39,916 points (2026-10-03). They run
+        // in slices of the document's pacer, as a body's activation does during a flight (prepared-activation.ts):
+        // `allowance` is the points a frame's budget still covers, and a pass yields when it is spent.
         let allowance = Infinity;
         const steps = (function* (): Generator<void, void, void> {
-        const reading = parseCataloguePointSteps(value, url, POINTS_PER_PACER_UNIT);
-        let read = reading.next();
-        for (; !read.done; read = reading.next()) if ((allowance -= POINTS_PER_PACER_UNIT) <= 0) yield;
-        const bank = read.value;
+        const bank: PreparedCataloguePointColumns = isColumns(value) ? value : cataloguePointColumns(readCataloguePointBank(value, url));
         const fadeOut = bank.appearance.fadeOutUnits;
         fadeOutM = fadeOut ? [fadeOut[0] * bank.frame.metersPerUnit, fadeOut[1] * bank.frame.metersPerUnit] : null;
-        // One style object per palette entry (a color at one radius): the projection asks for a style per point on every
-        // frame. An entry's alpha byte scales the bank's opacity.
         // A world place as the bank would have stored it, compared axis by axis with every point. The bank's frame is
         // unrotated here or no place is hidden: a rotated bank (a galaxy's own dots) is never asked for one.
         const [qx, qy, qz, qw] = bank.frame.localToReferenceXyzw, unrotated = qx === 0 && qy === 0 && qz === 0 && qw === 1;
@@ -185,30 +188,39 @@ export function mountCataloguePoints({ host, before, url, loadBank, occluder }: 
         const levels = bank.appearance.levels ?? [];
         let start = 0;
         const shares = levels.map(level => { const entry = { start, points: level.points, nearOpacity: level.nearOpacity ?? 1, share: 1 }; start += level.points; return entry; });
-        const runEnds = shares.length < 2 ? [bank.points.length] : shares.map(entry => entry.start + entry.points);
-        // Each point's style, found once: a key per point here, and none in the passes that follow. The same pass
-        // measures how far the bank reaches and lists the styles each part's points have.
-        const styles = new Map<string, BatchedSpatialPointStyle>(), styleOf = new Map<(typeof bank.points)[number], BatchedSpatialPointStyle>();
+        const runEnds = shares.length < 2 ? [bank.count] : shares.map(entry => entry.start + entry.points);
+        // One style object for each paint (a color at one radius): the bank's styles that are the same paint share it, so
+        // they share a path. A color's alpha byte scales the bank's opacity.
+        const paints = new Map<string, BatchedSpatialPointStyle>();
+        const styles = bank.styles.map(({ colorCss, radiusPx }) => {
+          const key = `${colorCss}|${radiusPx}`;
+          let style = paints.get(key);
+          if (!style) paints.set(key, style = { colorCss: colorCss.slice(0, 7), radiusPx, opacity: bank.appearance.opacity * (colorCss.length === 9 ? parseInt(colorCss.slice(7), 16) / 255 : 1) });
+          return style;
+        });
+        // The styles each part's points have, from their style column.
         const used = runEnds.map(() => new Set<BatchedSpatialPointStyle>());
-        let reachUnits = 0, run = 0, seen = 0;
-        for (const point of bank.points) {
-          const key = `${point.colorCss}|${point.radiusPx}`, [x, y, z] = point.positionUnits;
-          let style = styles.get(key);
-          if (!style) styles.set(key, style = { colorCss: point.colorCss.slice(0, 7), radiusPx: point.radiusPx,
-            opacity: bank.appearance.opacity * (point.colorCss.length === 9 ? parseInt(point.colorCss.slice(7), 16) / 255 : 1) });
-          styleOf.set(point, style);
-          while (run < runEnds.length && seen >= runEnds[run]!) run++;
-          used[run]?.add(style); seen++;
-          reachUnits = Math.max(reachUnits, Math.hypot(x!, y!, z!));
-          if (--allowance <= 0) yield;
+        runEnds.forEach((end, run) => {
+          const from = run ? runEnds[run - 1]! : 0, { styleOf } = bank;
+          if (!styleOf) { if (end > from) used[run]!.add(styles[0]!); return; }
+          const has = new Uint8Array(styles.length);
+          for (let index = from; index < end; index++) has[styleOf[index]!] = 1;
+          has.forEach((flag, at) => { if (flag) used[run]!.add(styles[at]!); });
+        });
+        // How far the bank reaches from its origin: one pass over its places.
+        let reachSquared = 0;
+        for (let index = 0; index < bank.positions.length; index += 3) {
+          const x = bank.positions[index]!, y = bank.positions[index + 1]!, z = bank.positions[index + 2]!;
+          reachSquared = Math.max(reachSquared, x * x + y * y + z * z);
         }
+        const reachUnits = Math.sqrt(reachSquared);
         extent = { originM: bank.frame.originM, radiusM: reachUnits * bank.frame.metersPerUnit };
         // Zooming out draws a smaller share of the catalogue, always a prefix of its prepared order (sparse places first,
         // crowds last): points leave and return as the camera moves, and none is swapped for another. From outside the
         // bank's reach the share is also capped by how many dots its projected shape holds.
         const drawn = (distanceUnits: number, cameraUnits: VolumeVector) => Math.min(bank.appearance.levels
           ? stackedPointCount(bank.appearance.levels, distanceUnits, distanceUnits * halfWidthPerDistance, bank.frame.metersPerUnit)
-          : drawnPointCount(bank.points.length, distanceUnits * bank.frame.metersPerUnit,
+          : drawnPointCount(bank.count, distanceUnits * bank.frame.metersPerUnit,
             bank.appearance.fullDetailUnits === undefined ? undefined : bank.appearance.fullDetailUnits * bank.frame.metersPerUnit),
           screenPointCount(bank.spread, cameraUnits, latest?.viewport.focalPixels ?? 0, bank.appearance.outsidePixelsPerDot));
         // Past its screen budget a bank draws an even share of its visible dots, set from the last frame's count. An inner
@@ -232,16 +244,17 @@ export function mountCataloguePoints({ host, before, url, loadBank, occluder }: 
         // A level's exact repaint after a pause measures the view the camera stopped at: the shares are recomputed from it and
         // published once more, so a still view keeps the same dots however the frames before it were paced.
         const settled = () => { if (latest && runtime) { runtime.publish(latest); runtime.publish(latest); } };
-        const part = (index: number, points: typeof bank.points, cellOf: Int32Array, count: (total: number) => number, share: () => number, paintGroup?: number) => ({ points,
+        // A part is a run of the bank's points, read where the bank holds them: views of its columns, not copies.
+        const part = (index: number, from: number, to: number, count: (total: number) => number, share: () => number, paintGroup?: number) => ({
+          columns: { count: to - from, positions: bank.positions.subarray(from * 3, to * 3), styles, styleOf: bank.styleOf ? bank.styleOf.subarray(from, to) : null },
           ...(paintGroup === undefined ? {} : { paintGroup }),
-          cells: { boxes: bank.cells.boxes, of: cellOf },
+          cells: { boxes: bank.cells.boxes, of: bank.cells.of.subarray(from, to) },
           drawnCount: (distanceUnits: number, cameraUnits: VolumeVector) => count(drawn(distanceUnits, cameraUnits)),
           ...(budget === undefined ? {} : { keepFraction: share }),
-          hidden: hiddenIn(points),
+          hidden: hiddenIn(bank.positions.subarray(from * 3, to * 3)),
           // One path per color unions its dots, so two translucent dots of one color that overlap do not add up; a part
           // keeps a path only for the colors its own dots use.
-          paintPalette: [...used[index]!].map(pointPaint),
-          stylePoint: (point: (typeof bank.points)[number]) => styleOf.get(point)! });
+          paintPalette: [...used[index]!].map(pointPaint) });
         const local = occluder && { normal: toLocalAxes(bank.frame.localToReferenceXyzw, occluder.normal), radiusUnits: occluder.radiusM / bank.frame.metersPerUnit,
           centreUnits: toLocalAxes(bank.frame.localToReferenceXyzw, occluder.centreM.map((value, axis) => (value - bank.frame.originM[axis]!) / bank.frame.metersPerUnit)) };
         const mount = (parts: ReturnType<typeof part>[]) => mountBatchedSpatialPoints({ host: slot, frame: bank.frame, parts, deferFill: true,
@@ -258,12 +271,12 @@ export function mountCataloguePoints({ host, before, url, loadBank, occluder }: 
           });
         };
         if (shares.length < 2) {
-          const whole = { share: 1 }, single = mount([part(0, bank.points, bank.cells.of, total => total, () => whole.share)]);
+          const whole = { share: 1 }, single = mount([part(0, 0, bank.count, total => total, () => whole.share)]);
           fill = single.fill;
           runtime = { layers: [single.root], publish(publication) { single.publish(publication); rebudget([single.stats().candidates], distanceOf(publication), [whole]); }, hide: single.hide, destroy: single.destroy };
         } else {
           const innermost = levels[levels.length - 1] as { appearUnits?: readonly [number, number] };
-          const field = mount(shares.map((entry, index) => part(index, bank.points.slice(entry.start, entry.start + entry.points), bank.cells.of.subarray(entry.start, entry.start + entry.points),
+          const field = mount(shares.map((entry, index) => part(index, entry.start, entry.start + entry.points,
             // Levels with the same near opacity dim together, so they share their paths (batched-spatial-points.ts).
             total => Math.max(0, Math.min(entry.points, total - entry.start)), () => entry.share, entry.nearOpacity)));
           fill = field.fill;

@@ -1,13 +1,15 @@
 /** Every archive the star generator reads, behind one small fetch interface so the tests run offline on fixtures. Each call names
  * the URL it read; a failed request says which archive, which URL and which status. */
 import { requireString } from '@cssearth/core';
+import { assertRangeResponse, rangeRequestHeader, type SourceRange } from '@cssearth/objects/node';
 import { decodeEntities } from '../orbit.mts';
 import type { CataloguePosition } from '../spec.mts';
 
 export interface Archive {
   /** GET, or POST a form when `form` is given; the response text. */
   text(url: string, form?: Readonly<Record<string, string>>): Promise<string>;
-  bytes(url: string): Promise<Buffer>;
+  /** The whole answer, or exactly the bytes of `range`: a ranged request answered with anything else is refused. */
+  bytes(url: string, range?: SourceRange): Promise<Buffer>;
   /** Whether a HEAD request answers 200. */
   exists(url: string): Promise<boolean>;
   /** Where a redirecting URL points, without following it; undefined when it does not redirect. */
@@ -64,7 +66,7 @@ async function transfer<T>(url: string, read: (response: Response) => Promise<T>
 class HttpError extends Error {}
 export const createLiveArchive = (wait: Wait = pause): Archive => ({
   text: (url, form) => transfer(url, response => response.text(), form ? { method: 'POST', body: new URLSearchParams(form) } : undefined, wait),
-  bytes: url => transfer(url, async response => Buffer.from(await response.arrayBuffer()), undefined, wait),
+  bytes: (url, range) => transfer(url, async response => { if (range) assertRangeResponse(response, range, url); return Buffer.from(await response.arrayBuffer()); }, range ? { headers: { range: rangeRequestHeader(range) } } : undefined, wait),
   exists: url => transfer(url, async response => response.status === 200, { method: 'HEAD' }, wait).catch(error => { if (error instanceof HttpError) return false; throw error; }),
   location: url => fetch(url, { redirect: 'manual', headers: { 'User-Agent': USER_AGENT }, signal: AbortSignal.timeout(TRANSFER_TIMEOUT_MS) }).then(response => response.status >= 300 && response.status < 400 ? response.headers.get('location') ?? undefined : undefined),
 });
@@ -120,14 +122,17 @@ export async function fetchGaiaRow(archive: Archive, sourceId: string) {
 }
 
 /** One row of a VizieR table, for a star Gaia cannot see (spec `position`): the whole row as VizieR serves it, archived beside the
- * body, and the J2000 position it gives. */
+ * body, and the J2000 position it gives. A star a paper lists by its detector pixel is held the same way: `tsv` is then the header of
+ * the archived exposure's extension, and `image` says where in the file it lies (images/image-pixel.mts). */
 export interface CatalogueRow { readonly catalogue: string; readonly tsv: string; readonly form: Readonly<Record<string, string>>; readonly cells: Readonly<Record<string, string>>; readonly ra: number; readonly dec: number; readonly words: string;
   /** The columns the position was read from: the table's RAJ2000 and DEJ2000 unless the spec names others. */
   readonly columns: { readonly ra: string; readonly dec: string };
   /** Where the row is held, and how a manifest records it (rowArchive). */
-  readonly archive: 'VizieR' | 'SIMBAD';
+  readonly archive: 'VizieR' | 'SIMBAD' | 'MAST'; readonly image?: { readonly url: string; readonly file: string; readonly extension: string; readonly range: SourceRange };
   /** The Julian year of the position, 2000 unless the spec's `motion` says otherwise, and the row's proper motion (mas/yr) when it names the columns. */
   readonly epoch: number; readonly pmra?: number; readonly pmdec?: number }
+/** Where a catalogue-placed star's archived row is kept, beside where a Gaia row would be; an exposure's header is kept beside it. */
+export const CATALOGUE_ROW_PATH = 'photometry/catalogue-row.tsv', EXPOSURE_HEADER_PATH = 'photometry/exposure-header.txt';
 export const SIMBAD_TAP = 'https://simbad.cds.unistra.fr/simbad/sim-tap/sync';
 export const catalogueRowUrl = (position: CataloguePosition) => position.archive === 'simbad' ? SIMBAD_TAP : VIZIER_ASU;
 /** SIMBAD's own position of an object, with the paper it names for it: ICRS at J2000, as its `basic` table holds it. */
@@ -154,6 +159,7 @@ export function parseCatalogueRow(tsv: string, position: CataloguePosition, wher
 export const CATALOGUE_ROW_REPLACEMENTS = [{ pattern: '^#.*\\n', flags: 'gm', replacement: '' }, { pattern: '^\\s*\\n', flags: 'gm', replacement: '' }] as const;
 const stableVizier = (text: string) => CATALOGUE_ROW_REPLACEMENTS.reduce((out, { pattern, flags, replacement }) => out.replace(new RegExp(pattern, `${flags}u`), replacement), text);
 export async function fetchCatalogueRow(archive: Archive, position: CataloguePosition, where: string): Promise<CatalogueRow> {
+  if (position.archive === 'mast') return (await import('./images/image-pixel.mts')).fetchImagePixel(archive, position, where);
   // The response's dated comment lines and blank lines are dropped so the archived bytes are stable (CATALOGUE_ROW_REPLACEMENTS).
   const form = catalogueRowForm(position), tsv = stableVizier(await archive.text(catalogueRowUrl(position), form));
   return { ...parseCatalogueRow(tsv, position, where), tsv, form };
@@ -272,7 +278,8 @@ async function readPublication(archive: Archive, url: string): Promise<Publicati
     const code = decodeURIComponent(bibcode), year = code.slice(0, 4), landing = `https://ui.adsabs.harvard.edu/abs/${code}`;
     const gateway = (type: string) => archive.location?.(`https://ui.adsabs.harvard.edu/link_gateway/${encodeURIComponent(code)}/${type}`).catch(() => undefined);
     const [eprint, published] = await Promise.all([gateway('EPRINT_HTML'), gateway('PUB_HTML')]);
-    const linkedArxiv = /arxiv\.org\/abs\/([0-9]{4}\.[0-9]{4,5})/u.exec(eprint ?? '')?.[1], linkedDoi = /doi\.org\/(10\.\S+)$/u.exec(published ?? '')?.[1];
+    // A publisher's own address can end in the DOI instead of going through doi.org (iopscience.iop.org/article/10.1086/316343).
+    const linkedArxiv = /arxiv\.org\/abs\/([0-9]{4}\.[0-9]{4,5})/u.exec(eprint ?? '')?.[1], linkedDoi = (/doi\.org\/(10\.\S+)$/u.exec(published ?? '') ?? /\/(10\.\d{4,9}\/[^\s?#]+)$/u.exec(published ?? ''))?.[1];
     // The published paper first (Crossref, the better citation, with no request limit), its preprint id kept alongside; the arXiv API
     // (one request every 3 s) only for a paper with no DOI.
     if (linkedDoi) {
@@ -301,11 +308,25 @@ async function readPublication(archive: Archive, url: string): Promise<Publicati
 }
 
 /** How a manifest records the archive a catalogue-placed star's row came from: where it is asked, its credit and terms, the page a
- * reader opens, and the request in words. SIMBAD's credit and terms are CDS's own (https://cds.unistra.fr/help/acknowledgement/). */
-export function rowArchive(row: Pick<CatalogueRow, 'archive' | 'catalogue' | 'words' | 'cells'>) {
+ * reader opens, the request in words, the file it is kept in and the operation that fetches it again. SIMBAD's credit and terms are
+ * CDS's own (https://cds.unistra.fr/help/acknowledgement/); MAST's are STScI's (https://archive.stsci.edu/publishing/data-use). */
+export interface RowArchive { readonly origin: string; readonly credit: string; readonly license: string; readonly licenseEvidence: readonly string[]; readonly page: string; readonly acquisition: string;
+  /** The kept file, the manifest input's name, what the star was placed by, who keeps the archive, and the bytes kept when they are a range of the file. */
+  readonly path: string; readonly input: string; readonly kept: 'row' | 'pixel'; readonly keeper: string; readonly redistribution: string; readonly range?: SourceRange; readonly operation: Readonly<Record<string, unknown>> }
+/** `selected` is the cells that picked the row: a restore must find them in the answer. */
+export function rowArchive(row: Pick<CatalogueRow, 'archive' | 'catalogue' | 'words' | 'cells' | 'columns' | 'form' | 'image'>, selected: readonly string[] = []): RowArchive {
+  if (row.image) {
+    const { url, file, extension, range } = row.image;
+    return { origin: url, credit: `${file} (Mikulski Archive for Space Telescopes, STScI)`, license: 'Public NASA mission data (MAST)', licenseEvidence: ['https://archive.stsci.edu/publishing/data-use'],
+      page: url, path: EXPOSURE_HEADER_PATH, input: 'exposure-header', range, kept: 'pixel', keeper: 'MAST, STScI', redistribution: 'One image header, retained unchanged with its credit.',
+      acquisition: `One byte-range request to MAST in source/preparation/acquisition.json: the header of extension ${extension} of ${file} (bytes ${range.offset} to ${range.offset + range.length - 1}), whose world coordinates place the pixel. The image itself is not fetched.`,
+      operation: { kind: 'download', groups: ['restore', 'refresh'], path: EXPOSURE_HEADER_PATH, url } };
+  }
+  const held = { path: CATALOGUE_ROW_PATH, input: 'catalogue-row', kept: 'row' as const, keeper: 'CDS, Strasbourg', redistribution: 'One catalogue row, retained unchanged with its credit.' };
+  const operation = (url: string) => ({ kind: 'request-download', groups: ['restore', 'refresh'], path: CATALOGUE_ROW_PATH, url, form: row.form, replacements: CATALOGUE_ROW_REPLACEMENTS, requiredText: [row.columns.ra, ...selected] });
   return row.archive === 'SIMBAD'
-    ? { origin: SIMBAD_TAP, credit: 'SIMBAD (CDS; Wenger et al. 2000, A&AS 143, 9)', license: 'CDS SIMBAD database: free use with acknowledgement', licenseEvidence: ['https://cds.unistra.fr/help/acknowledgement/'],
+    ? { ...held, operation: operation(SIMBAD_TAP), origin: SIMBAD_TAP, credit: 'SIMBAD (CDS; Wenger et al. 2000, A&AS 143, 9)', license: 'CDS SIMBAD database: free use with acknowledgement', licenseEvidence: ['https://cds.unistra.fr/help/acknowledgement/'],
       page: `https://simbad.cds.unistra.fr/simbad/sim-id?Ident=${encodeURIComponent(row.cells.main_id ?? '')}`, acquisition: `SIMBAD TAP query in source/preparation/acquisition.json: ${row.words}, its position and the paper SIMBAD names for it.` }
-    : { origin: VIZIER_ASU, credit: `VizieR ${row.catalogue} (CDS)`, license: 'CDS VizieR catalogue: free use with citation', licenseEvidence: ['https://cds.unistra.fr/vizier-org/licences_vizier.html'],
+    : { ...held, operation: operation(VIZIER_ASU), origin: VIZIER_ASU, credit: `VizieR ${row.catalogue} (CDS)`, license: 'CDS VizieR catalogue: free use with citation', licenseEvidence: ['https://cds.unistra.fr/vizier-org/licences_vizier.html'],
       page: `https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=${row.catalogue}`, acquisition: `VizieR ASU TSV query in source/preparation/acquisition.json: ${row.words}, every column, with the response's dated comment lines and blank lines removed so the bytes are stable.` };
 }

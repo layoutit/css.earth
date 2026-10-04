@@ -1,14 +1,8 @@
-import { parsePreparedGalaxyCatalog, parsePreparedClusterCatalog, parsePreparedNebulaCatalog } from '@cssearth/objects';
+import type { PreparedCatalogueDots } from '@cssearth/objects';
+import { readPrepared } from '@cssearth/renderer';
 
-/** The three spatial catalogues the world draws as dots, served at `/catalogues/<id>.json` (`site/pages/catalogues/[id].json.ts`). */
-export async function loadDotCatalogues(origin: string, fetcher: typeof fetch = fetch, signal?: AbortSignal) {
-  const rows = await Promise.all((['galaxies', 'clusters', 'nebulae'] as const).map(async id => {
-    const url = new URL(`/catalogues/${id}.json`, origin);
-    const response = await fetcher(url, { redirect: 'error', signal: signal ?? AbortSignal.timeout(15_000) });
-    if (!response.ok) throw new Error(`Prepared catalogue ${url.pathname} failed: HTTP ${response.status}.`);
-    return { id, data: await response.json() as unknown };
-  }));
-  return { galaxies: parsePreparedGalaxyCatalog(rows.find(row => row.id === 'galaxies')?.data),
-    clusters: parsePreparedClusterCatalog(rows.find(row => row.id === 'clusters')?.data),
-    nebulae: parsePreparedNebulaCatalog(rows.find(row => row.id === 'nebulae')?.data) };
+/** The dots the world draws from the galaxy catalogue, served at `/catalogues/dots.bin` (`site/pages/catalogues/dots.bin.ts`)
+ * and read by the data worker: the page's thread fetches and parses no catalogue. */
+export function loadCatalogueDots(origin: string, read: <Value>(kind: string, url: string) => Promise<Value> = readPrepared): Promise<PreparedCatalogueDots> {
+  return read<PreparedCatalogueDots>('catalogue-dots', new URL('/catalogues/dots.bin', origin).href);
 }

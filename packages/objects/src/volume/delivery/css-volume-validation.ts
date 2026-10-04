@@ -14,10 +14,14 @@ const AXES: readonly VolumeAxis[] = ['x', 'y', 'z'];
  * times in the frame they arrived in, 57 ms of a zoom on the iPad (2026-10-03). */
 const validated = new WeakSet<object>();
 
+/** A volume the data worker validated and sent to the page: the copy that arrives is answered as validated, not read
+ * again on the page's thread. Only the reader that received it from the worker calls this. */
+export function trustPreparedCssVolume(volume: PreparedCssVolume): PreparedCssVolume { validated.add(volume); return volume; }
+
 export function validatePreparedCssVolume(input: unknown): PreparedCssVolume {
   if (typeof input === 'object' && input !== null && validated.has(input)) return input as PreparedCssVolume;
   const value = record(input, 'prepared CSS volume');
-  exactKeys(value, ['schema', 'id', 'frame', 'anchors', 'stacks', 'resources', 'provenance', 'approximation', ...(Object.hasOwn(value, 'sky') ? ['sky'] : []), ...(Object.hasOwn(value, 'impostors') ? ['impostors'] : [])], 'prepared CSS volume');
+  exactKeys(value, ['schema', 'id', 'frame', 'anchors', 'stacks', 'resources', ...['provenance', 'approximation'].filter(key => Object.hasOwn(value, key)), ...(Object.hasOwn(value, 'sky') ? ['sky'] : []), ...(Object.hasOwn(value, 'impostors') ? ['impostors'] : [])], 'prepared CSS volume');
   if (value.schema !== PREPARED_CSS_VOLUME_SCHEMA || typeof value.id !== 'string' || !/^[a-z][a-z0-9-]*$/u.test(value.id)) {
     throw new TypeError('Prepared CSS volume identity is invalid.');
   }
@@ -57,10 +61,11 @@ export function validatePreparedCssVolume(input: unknown): PreparedCssVolume {
   const impostors = Object.hasOwn(value, 'impostors') ? validateVolumeImpostors(value.impostors, resources) : undefined;
   const sky = Object.hasOwn(value, 'sky') ? validatePreparedCssSky(value.sky, resourcesInput as PreparedCssVolume['resources']) : undefined;
   if (sky && (sky.referenceFrame !== frame.referenceFrame || sky.epochJdTt !== frame.epochJdTt)) throw new TypeError('Prepared sky and volume must share their reference frame and epoch.');
-  const volume: PreparedCssVolume = Object.freeze({ schema: value.schema, id: value.id, frame,
+  const volume = Object.freeze({ schema: value.schema, id: value.id, frame,
     ...(value.anchors === undefined ? {} : { anchors: value.anchors as PreparedCssVolume['anchors'] }),
     stacks: stacks as PreparedCssVolume['stacks'], resources: resourcesInput as PreparedCssVolume['resources'],
-    provenance: value.provenance, approximation: value.approximation, ...(sky ? { sky } : {}), ...(impostors ? { impostors } : {}) });
+    ...(Object.hasOwn(value, 'provenance') ? { provenance: value.provenance } : {}), ...(Object.hasOwn(value, 'approximation') ? { approximation: value.approximation } : {}),
+    ...(sky ? { sky } : {}), ...(impostors ? { impostors } : {}) }) as PreparedCssVolume;
   validated.add(volume);
   return volume;
 }

@@ -2,7 +2,8 @@ import { readFile } from 'node:fs/promises';
 import { relative, resolve, sep } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { parseObjectDescriptor, readSourceManifestInputs, readVolumePresentationPreviews } from '@cssearth/objects';
-import { loadPreparedVolumeDatasets } from '@cssearth/renderer/universe';
+import { PREPARED_VOLUME_DATASET_INDEX_SCHEMA, parseDensityVolumeFrame } from '@cssearth/objects';
+import { readVolumeDatasetBank } from '@cssearth/objects/node';
 import { lineageSource } from '@cssearth/objects/provenance';
 import type { ContextAvailability } from '@cssearth/objects/provenance';
 import { sourceArray, sourceObject } from '@cssearth/objects/sources';
@@ -40,7 +41,11 @@ export async function inspectContextAvailability(projectRoot = root, { publicAss
     };
     try {
       const descriptor = parseObjectDescriptor(JSON.parse((await read(directory, 'object.json')).toString()));
-      const bank = await loadPreparedVolumeDatasets(descriptor, { read: async path => new Uint8Array(await read(directory, path)).buffer });
+      if (descriptor.prepared?.format !== PREPARED_VOLUME_DATASET_INDEX_SCHEMA) throw new TypeError(`${id}: object.json names format ${JSON.stringify(descriptor.prepared?.format ?? null)}; a volume dataset bank is stored as ${PREPARED_VOLUME_DATASET_INDEX_SCHEMA}.`);
+      // The bank whole, from its files: its index, each dataset's volume and its stars (@cssearth/objects volume-dataset-bank-files.ts).
+      const prepared = resolve(directory, 'prepared'), bank = await readVolumeDatasetBank(prepared, async name => new Uint8Array(await read(prepared, name)));
+      const frame = JSON.stringify(parseDensityVolumeFrame(descriptor.properties.frame));
+      for (const dataset of bank.datasets) if (JSON.stringify(dataset.volume.frame) !== frame) throw new TypeError(`${id}: dataset ${dataset.id} is not in its descriptor's frame.`);
       const sources = sourceArray(readSourceManifestInputs(JSON.parse((await read(directory, 'source/manifest.json')).toString())).inputs, raw => lineageSource(raw));
       const presentation = parsePreparedVolumePresentation(readVolumePresentationPreviews(JSON.parse((await read(directory, 'prepared/presentation.json')).toString())), bank, sources);
       for (const dataset of bank.datasets) for (const resource of dataset.volume.resources)

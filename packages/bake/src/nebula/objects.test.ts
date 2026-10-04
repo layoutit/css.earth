@@ -7,7 +7,8 @@ import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import ts from 'typescript';
 import { sanitizeVolumeProvenance, applicationDeliveryKind, prepareNebulaObject, type NebulaResearchBackend, assertCompilerDeliveryElementBudget } from '@cssearth/bake/nebula';
-import { createRenderElementBudget, validatePreparedVolumeDatasets, CSS_COMPILER_RENDER_BUDGET, type CompilerBakeResult, type PreparedCssVolume } from '@cssearth/objects';
+import { createRenderElementBudget, CSS_COMPILER_RENDER_BUDGET, type CompilerBakeResult, type PreparedCssVolume } from '@cssearth/objects';
+import { readVolumeDatasetBank } from '@cssearth/objects/node';
 
 
 // Run from the repository root with Node's test runner and the tsx loader.
@@ -123,9 +124,11 @@ test('the real installer rejects post-compiler field stars before replacing the 
   scene.sampling.renderBudget = createRenderElementBudget(CSS_COMPILER_RENDER_BUDGET, 1, 3);
   const result = await prepareNebulaObject(root, directory, false, backend);
   assert.equal(result.status, 'prepared');
-  const parsed: unknown = JSON.parse(await readFile(resolve(directory, 'prepared/datasets.json'), 'utf8'));
-  assert.ok(parsed && typeof parsed === 'object' && 'data' in parsed);
-  const data = validatePreparedVolumeDatasets(parsed.data);
+  // The installed bank is its files: an index, the dataset's volume, its stars and its record (volume-dataset-bank-files.ts).
+  const index: unknown = JSON.parse(await readFile(resolve(directory, 'prepared/datasets.json'), 'utf8'));
+  assert.ok(index && typeof index === 'object' && 'format' in index);
+  assert.equal(index.format, 'cssearth-volume-dataset-index@1');
+  const data = await readVolumeDatasetBank(resolve(directory, 'prepared'));
   assert.equal(data.datasets[0]!.stars.points.length, 1);
   assert.equal(data.datasets[0]!.volume.impostors?.views.length, 26);
   assert.ok(data.datasets[0]!.volume.stacks.every(stack => stack.leaves[0]!.texturePath.includes('/atlases/')));

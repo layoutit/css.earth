@@ -68,3 +68,19 @@ test('a camera in another frame is refused', () => {
   assert.throws(() => runtime.publish({ ...world, epochJdTt: world.epochJdTt + 1 }, viewport, 1), /share a reference frame and epoch/u);
   runtime.destroy();
 });
+
+test('the mount draws the dots it is handed, as the data worker reads them: no catalogue is read on the page', () => {
+  const frame = { referenceFrame: 'sun-icrf', epochJdTt: 2461286.5 };
+  const document = new Document(), host = document.createElement(), before = document.createElement(); host.append(before);
+  const dots = { frame, ids: ['near', 'behind'], positionsM: Float64Array.from([0, 0, 0, 0, 0, 2e24]), clusterCount: 7 };
+  const runtime = mountPreparedGalaxyCatalog({ host: host as unknown as HTMLElement, before: before as unknown as HTMLElement, payload: dots });
+  const root = runtime.root as unknown as Element;
+  assert.deepEqual(root.children.map(child => child.dataset.galaxyDot), ['near', 'behind']);
+  assert.deepEqual(runtime.inspect(), { count: 2, clusterCount: 7 });
+  runtime.publish({ ...frame, pose: { positionM: [0, 0, 1e24], orientationXyzw: [0, 0, 0, 1] } }, { focalPixels: 600, principalOffsetPixels: [0, 0], widthPixels: 800, heightPixels: 600 }, 1);
+  assert.equal(root.children[0]!.style.transform, 'translate(0px,0px) translate(-50%,-50%)', 'the dot in front of the camera is placed');
+  assert.equal(root.children[1]!.style.transform, undefined, 'the dot behind it is not');
+  assert.throws(() => runtime.publish({ referenceFrame: 'other', epochJdTt: frame.epochJdTt, pose: { positionM: [0, 0, 1e24], orientationXyzw: [0, 0, 0, 1] } },
+    { focalPixels: 600, principalOffsetPixels: [0, 0], widthPixels: 800, heightPixels: 600 }, 1), /share a reference frame and epoch/u);
+  runtime.destroy();
+});

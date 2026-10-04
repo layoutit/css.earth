@@ -42,7 +42,7 @@ test('an intent-fetched fragment is requested once, shared by preview and conten
   fragments.prefetch('ceres');
   assert.equal(fragments.ready('ceres'), false, 'A request in flight is not yet a card');
   const [preview, content] = await Promise.all([fragments.get('ceres'), fragments.get('ceres')]);
-  assert.notEqual(preview.document, content.document, 'Consumers never share a parsed document');
+  assert.equal(preview.document, content.document, 'Consumers that hold a page together read one parsed document');
   assert.equal(fragments.inspect().activeDocuments, 2);
   preview.release(); content.release();
   assert.equal(fragments.inspect().activeDocuments, 0);
@@ -54,7 +54,7 @@ test('an intent-fetched fragment is requested once, shared by preview and conten
   const retainedCeres = fragments.peek('ceres'); assert.ok(retainedCeres); retainedCeres.release();
   const reloadedVenus = await fragments.get('venus'); reloadedVenus.release();
   assert.deepEqual(calls, ['/navigation/ceres/', '/navigation/venus/', '/navigation/mars/', '/navigation/venus/']);
-  assert.deepEqual(fragments.inspect(), { encodedEntries: 2, inFlightEntries: 0, activeDocuments: 0, parsedDocuments: 8 });
+  assert.deepEqual(fragments.inspect(), { encodedEntries: 2, inFlightEntries: 0, activeDocuments: 0, parsedDocuments: 7 });
   assert.throws(() => createNavigationFragments({ windowTarget: fixtureWindow().windowTarget, capacity: 0 }), RangeError);
 });
 
@@ -89,6 +89,27 @@ test('a released lease drops document access without retiring another consumer o
   next.release();
 });
 
+test("a page requested ahead is parsed only when a consumer leases it; one that is not the object's own is dropped then", async () => {
+  let parses = 0, body = 'ceres';
+  const calls: string[] = [];
+  class CountingParser extends FragmentParser { override parseFromString(text: string) { parses++; return super.parseFromString(text); } }
+  const windowTarget = { ...fixtureWindow().windowTarget, DOMParser: CountingParser } as unknown as BrowserWindow;
+  const fragments = createNavigationFragments({ windowTarget, async fetchPage(url) { calls.push(url); return new Response(body); } });
+  const arrived = async (id: string) => { while (!fragments.ready(id)) await new Promise(resolve => setImmediate(resolve)); };
+  fragments.prefetch('ceres'); await arrived('ceres');
+  assert.equal(parses, 0, 'a page that arrives is not parsed');
+  const ceres = await fragments.get('ceres'), again = fragments.peek('ceres');
+  assert.equal(parses, 1, 'two leases alive together are one parse');
+  ceres.release(); again?.release();
+  fragments.peek('ceres')?.release();
+  assert.equal(parses, 2, 'and a lease after the last release parses again');
+  body = 'vesta|mars'; fragments.prefetch('vesta'); await arrived('vesta');
+  assert.equal(fragments.peek('vesta'), null, 'a page of another object is not leased');
+  body = 'vesta';
+  const vesta = await fragments.get('vesta'); vesta.release();
+  assert.deepEqual(calls, ['/navigation/ceres/', '/navigation/vesta/', '/navigation/vesta/'], 'and the next demand asks for it again');
+});
+
 test('failed, mismatched and cancelled requests never poison the shared fragment', async () => {
   const calls: string[] = [];
   let status = 503, body = 'venus';
@@ -104,7 +125,7 @@ test('failed, mismatched and cancelled requests never poison the shared fragment
   await assert.rejects(cancelled, error => error === reason);
   const arrived = await fragments.get('venus');
   const cached = fragments.peek('venus'); assert.ok(cached);
-  assert.notEqual(cached.document, arrived.document);
+  assert.equal(cached.document, arrived.document);
   arrived.release(); cached.release();
   assert.equal(fragments.inspect().activeDocuments, 0);
   assert.equal(calls.length, 3, 'Cancelling one consumer keeps the shared request');

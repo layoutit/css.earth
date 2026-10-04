@@ -22,8 +22,8 @@
     {
       "location": "prepared",
       "filename": "datasets.json",
-      "bytes": 1228119,
-      "sha256": "4fb317180a3c674221f4e7aca8aed70ada7818888b6eab3c4b7556d6dc061d86"
+      "bytes": 9768,
+      "sha256": "05b20779f682ce204d661eceafa59b813e8f5ab0f956f9318595819ae22b70b0"
     },
     {
       "location": "prepared",
@@ -207,9 +207,27 @@
     },
     {
       "location": "prepared",
+      "filename": "horalek-widefield/volume.json",
+      "bytes": 127148,
+      "sha256": "8eec3a179ebe0f342767873e43bc525586040c8f8c16fd2a94d18bd44bd504ef"
+    },
+    {
+      "location": "prepared",
       "filename": "presentation.json",
       "bytes": 4847,
       "sha256": "32a8d70bdeace73856cb78af826da717661792af2c89d16f724de3002aaca717"
+    },
+    {
+      "location": "prepared",
+      "filename": "record.json",
+      "bytes": 268917,
+      "sha256": "a8313ef363d77af355d6bebdd04af9bcb310ed407c1ff79d1c6aed5f07af1651"
+    },
+    {
+      "location": "prepared",
+      "filename": "stars.bin",
+      "bytes": 43365,
+      "sha256": "2eb9ff53e3fe30c555f67594fe0198294f9bcf317c7bf1a59d461d9b950db289"
     },
     {
       "location": "prepared",
@@ -387,6 +405,12 @@
     },
     {
       "location": "prepared",
+      "filename": "vista-infrared/volume.json",
+      "bytes": 126254,
+      "sha256": "1c740075d0ef49e893f84757dda970bfa3d6adfb973f1a9a19752ce52fb1b9ea"
+    },
+    {
+      "location": "prepared",
       "filename": "wise-wide-infrared/atlases/x.webp",
       "bytes": 435982,
       "sha256": "9d76c714ec7f25a5114d44238f7252fba30622fc947bba3fd83a5fa20c121c8e"
@@ -558,6 +582,12 @@
       "filename": "wise-wide-infrared/impostors/view-ppp.png",
       "bytes": 19340,
       "sha256": "7e5f13f82fad425ab5cca60d83f75872990d142119455c9f72d37667b752e56f"
+    },
+    {
+      "location": "prepared",
+      "filename": "wise-wide-infrared/volume.json",
+      "bytes": 127446,
+      "sha256": "0282975d2c30bd1eafba1d61abc836a96ed210a61a4ef4d90c2060adaa97d06e"
     }
   ]
 }

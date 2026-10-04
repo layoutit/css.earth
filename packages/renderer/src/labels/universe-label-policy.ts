@@ -46,8 +46,11 @@ export function labelEligible(facts: { named?: boolean; notable?: boolean }): bo
 /** The tier of a featured star; at galaxy scale, bodies below it give way to the galaxy's tracers. */
 export const FEATURED_STAR_TIER = 4;
 
-export function labelImportance(kind: string, major = false, orientationReference = 0, featured = false): number {
+/** `pictured`: the star has real imagery or hosts a body that does. Where two stars' captions compete, the one with
+ * something to see is shown before one that is only marked notable. */
+export function labelImportance(kind: string, major = false, orientationReference = 0, featured = false, pictured = false): number {
   if (orientationReference > 0) return orientationReference;
+  if (pictured && (kind === 'star' || kind === 'black-hole')) return FEATURED_STAR_TIER + .5;
   // A featured star (its catalogue's `featured`) is a landmark of the galaxy: it keeps its marker at galaxy scale.
   if (featured && (kind === 'star' || kind === 'black-hole')) return FEATURED_STAR_TIER;
   // A planet of another star is a planet of its system: the tier is the body's role in the system it belongs to, not whether

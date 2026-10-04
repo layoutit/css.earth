@@ -1,0 +1,81 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "svf2019-ngc-4736-1",
+  "displayName": "[SVF2019] NGC 4736-1",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "183 solar radii",
+        "source": {
+          "catalogueId": "arxiv-1901-05277",
+          "url": "https://arxiv.org/abs/1901.05277",
+          "label": "Solovyeva et al. (2019)",
+          "checked": "2026-10-04",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "4,337,391 parsecs",
+        "source": {
+          "catalogueId": "page-cdsarc-cds-unistra-fr-viz-bin-cat-j-apj-944-94",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/944/94",
+          "label": "Placed in M94 as the app draws it, where the star's sight line crosses the disc's midplane: 4,337,391 pc (src/objects/m94-layers/source/recipe.json: centre 4,337,106 pc, inclination 31.77 deg, line of nodes 105 deg). The galaxy's distance, which places the galaxy and not a star within it: Tully et al. (2023), Cosmicflows-4, ApJ 944, 94; CDS J/ApJ/944/94, table 2 (distances of individual galaxies), PGC 43495: distance modulus 28.186 ± 0.039 mag (https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/944/94)",
+          "checked": "2026-10-04",
+          "path": "source/measurements.json",
+          "locator": "distanceParsecs; distanceSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "color",
+    "controls": [
+      {
+        "id": "color",
+        "label": "Color",
+        "qualification": "Color of a blackbody at the star's temperature; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
+        "thumbnail": "svf2019-ngc-4736-1-dataset-color.webp",
+        "surface": "svf2019-ngc-4736-1-surface-color@2x.webp",
+        "poles": "svf2019-ngc-4736-1-poles-color@2x.webp",
+        "source": {
+          "id": "svf2019-ngc-4736-1-stellar-color",
+          "path": "../manifest.json",
+          "url": "https://arxiv.org/abs/1901.05277"
+        },
+        "falseColor": false,
+        "notes": "The color of a blackbody at the star's published temperature. The darkening toward the edge is the quadratic law Reeve & Howarth (2016), MNRAS 456, 1294 compute from non-LTE TLUSTY B-star model atmospheres for the Bessell V band at 18,000 K and log g 2.15 (u1 0.290, u2 0.271): a model, because no fit of this star's limb is used. The spin axis's direction on the sky is a display convention."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Solovyeva et al. (2019), MNRAS 484, L24",
+      "href": "https://arxiv.org/abs/1901.05277"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://arxiv.org/abs/1901.05277",
+      "credit": "Solovyeva et al. (2019), MNRAS 484, L24"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/svf2019-ngc-4736-1.json",
+      "credit": "Solovyeva et al. radius; Solovyeva et al. (2019), MNRAS 484, L24, section 2 (its HST coordinates, 12:50:57.264 +41:07:23.13); SIMBAD holds that position, from 2019MNRAS.484L..24S position; cited distance; no measured rotation axis (display convention)"
+    }
+  }
+}

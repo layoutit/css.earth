@@ -19,6 +19,12 @@
  * SIMBAD instead, through the SIMBAD name CDS added to each row. The star is named as SIMBAD names it when SIMBAD holds a star at
  * its position, and as its table writes it otherwise.
  *
+ * A table that lists each star by its detector pixel (the HST Cepheid papers: chip, X, Y) places its stars through the exposure those
+ * pixels were measured on, which the paper says and the table does not: `exposure=mast:HST/product/u35i0101r_c0m.fits` names it and
+ * `firstPixel=1` the coordinate the paper's software gives the centre of the first pixel (1 for DAOPHOT and ALLFRAME, 0.5 for HSTphot).
+ * The chip is the image extension of that number. Such a star keeps its table's name: the exposure's pointing is too coarse to tell
+ * which of SIMBAD's stars it is (images/image-pixel.mts).
+ *
  * `telescope stars GALAXY` lists the tables worth trying (stars/stars.mts). */
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
@@ -27,6 +33,7 @@ import { VIZIER_ASU, type Archive } from '../archives.mts';
 import { preferredName, simbadIdentifiers } from '../../display-name.mts';
 import { slug } from '../../identity.mts';
 import type { CataloguePosition } from '../../spec.mts';
+import { fetchImagePixel } from '../images/image-pixel.mts';
 import { GROENEWEGEN_2020, galaxyVelocity, relationCepheidDraft } from '../sh0es.mts';
 import { simbadAt, simbadQuoted, simbadRows } from './simbad-tap.mts';
 import { catalogueOf, DECIMAL_POSITION, parseVizierReadMe, starColumns, vizierDataRows, vizierReadMeUrl, vizierTables, type StarColumns } from './vizier-tables.mts';
@@ -52,7 +59,10 @@ export const TABLE_CLASSES: Readonly<Record<string, TableClass>> = {
   cepheid: { noun: 'Cepheid', longestPeriodDays: GROENEWEGEN_2020.longestPeriodDays, relation: `${GROENEWEGEN_2020.credit}'s period relations`, simbadRoot: 'Ce*' },
 };
 
-export interface TableRequest { readonly starClass: string; readonly galaxy: string; readonly table: string; readonly filters: Cells; readonly named?: string; readonly all: boolean; readonly featured: boolean }
+export interface TableRequest { readonly starClass: string; readonly galaxy: string; readonly table: string; readonly filters: Cells; readonly named?: string; readonly all: boolean; readonly featured: boolean;
+  /** The archived exposure the table's pixels were measured on, and the paper's coordinate of the first pixel's centre. */
+  readonly exposure?: { readonly product: string; readonly firstPixel: number } }
+const RESERVED = ['exposure', 'firstPixel'];
 export function parseTableRequest(name: string): TableRequest {
   const match = /^([a-z][a-z-]*):([a-z][a-z0-9-]*)=([A-Z]+\/[\w+/.-]+?)(?:#(.+))?$/u.exec(name.trim());
   if (!match) throw new TypeError(`${name} is not CLASS:GALAXY=TABLE[#ROW] (cepheid:m81=J/ApJ/743/176/table1); the classes are ${Object.keys(TABLE_CLASSES).join(', ')}.`);
@@ -60,8 +70,12 @@ export function parseTableRequest(name: string): TableRequest {
   const parts = (match[4] ?? '').split(',').map(part => part.trim()).filter(Boolean), bare = parts.filter(part => !part.includes('=') && part !== 'all' && part !== 'featured');
   if (bare.length > 1) throw new TypeError(`${name}: ROW names one star (${bare.join(', ')} are ${bare.length}); the other parts are COLUMN=VALUE, all or featured.`);
   if (parts.includes('all') && parts.includes('featured')) throw new TypeError(`${name}: featured marks one star a reader should find; all would mark every row of the table.`);
+  const given = Object.fromEntries(parts.filter(part => part.includes('=')).map(part => { const at = part.indexOf('='); return [part.slice(0, at).trim(), part.slice(at + 1).trim()]; }));
+  const { exposure: product, firstPixel } = given;
+  if ((product === undefined) !== (firstPixel === undefined) || (product !== undefined && (!/^mast:[A-Za-z0-9_-]+\/product\/[\w.+-]+\.fits$/u.test(product) || !['0', '0.5', '1'].includes(firstPixel!))))
+    throw new TypeError(`${name}: a table of detector pixels is placed with both exposure=mast:HST/product/FILE.fits, the exposure they were measured on, and firstPixel=0.5, 1 or 0, the paper's coordinate of the first pixel's centre.`);
   return { starClass: match[1]!, galaxy: match[2]!, table: match[3]!, all: parts.includes('all'), featured: parts.includes('featured'), ...(bare[0] ? { named: bare[0] } : {}),
-    filters: Object.fromEntries(parts.filter(part => part.includes('=')).map(part => { const at = part.indexOf('='); return [part.slice(0, at).trim(), part.slice(at + 1).trim()]; })) };
+    ...(product ? { exposure: { product, firstPixel: Number(firstPixel) } } : {}), filters: Object.fromEntries(Object.entries(given).filter(([column]) => !RESERVED.includes(column))) };
 }
 
 /** A bibcode's journal reference as a reader meets it: 2012A&A...539A.138F is "A&A 539, A138". */
@@ -169,31 +183,38 @@ export async function draftsFromTable(names: readonly string[], archive: Archive
     // One row alone cannot say, so the whole table is asked.
     const judged = picked.kept.length > 1 ? picked.kept : rows, places = new Set(judged.map(cells => `${cells[DECIMAL_POSITION.ra]} ${cells[DECIMAL_POSITION.dec]}`)).size;
     const ownPositions = places > judged.length / 2 && judged.every(cells => degrees(cells, DECIMAL_POSITION.ra) !== undefined);
-    if (!ownPositions && !columns.simbadName) throw new Error(`${request.table} gives its rows no position of their own (${DECIMAL_POSITION.ra}, ${DECIMAL_POSITION.dec} are empty or one place for every row) and no SIMBAD name; its stars cannot be placed from it.`);
+    const pixel = request.exposure && columns.pixel;
+    if (request.exposure && !pixel) throw new Error(`${request.table} has no detector pixel columns (${table.columns.map(column => column.name).join(', ')}); exposure= places a table that lists X and Y.`);
+    if (!pixel && !ownPositions && !columns.simbadName) throw new Error(`${request.table} gives its rows no position of their own (${DECIMAL_POSITION.ra}, ${DECIMAL_POSITION.dec} are empty or one place for every row) and no SIMBAD name; its stars cannot be placed from it.`);
     const velocity = await galaxyVelocity(archive, galaxy.name), kiloparsecs = galaxy.parsecs / 1000, far = kiloparsecs >= 1000 ? `${(kiloparsecs / 1000).toFixed(1)} million parsecs` : `${Math.round(kiloparsecs)} kiloparsecs`;
     for (const { cells, key } of picked.rows) {
       const days = period(cells), where = `${request.table} ${Object.entries(key).map(([column, cell]) => `${column} = ${cell}`).join(', ')}`;
       if (!(days > 0)) throw new Error(`${where}: ${columns.period.column} is ${JSON.stringify(cells[columns.period.column])}, not a period.`);
       // The SIMBAD name CDS added to a row is the star's, whether or not the row has a position; without one the star is looked for at its place.
-      const listedName = columns.simbadName ? cells[columns.simbadName] : undefined, listed = listedName ? await simbadObject(archive, listedName) : undefined, placed = ownPositions ? undefined : listed;
-      if (!ownPositions && !placed) throw new Error(`${where}: SIMBAD holds no position for ${columns.simbadName} = ${JSON.stringify(listedName)}, and the table gives the row none of its own.`);
-      const raDeg = placed?.raDeg ?? degrees(cells, DECIMAL_POSITION.ra)!, decDeg = placed?.decDeg ?? degrees(cells, DECIMAL_POSITION.dec)!;
-      const simbadName = (listed?.mainId ?? (await simbadAt(archive, raDeg, decDeg, SIMBAD_MATCH_ARCSEC, starClass.simbadRoot))?.name)?.replace(/\s+/gu, ' ');
+      const listedName = columns.simbadName ? cells[columns.simbadName] : undefined, listed = listedName ? await simbadObject(archive, listedName) : undefined, placed = ownPositions || pixel ? undefined : listed;
+      // A pixel is of one chip's frame: a row with no chip, on a camera of several, was measured on a mosaic of them and has no header.
+      if (pixel && pixel.chip && !/^[1-9]\d*$/u.test(cells[pixel.chip] ?? '')) throw new Error(`${where}: ${pixel.chip} is ${JSON.stringify(cells[pixel.chip])}, not a chip number; its ${pixel.x} and ${pixel.y} are not of one detector's frame.`);
+      const byPixel: CataloguePosition | undefined = pixel ? { archive: 'mast', catalogue: request.exposure!.product, row: { extension: `SCI,${pixel.chip ? cells[pixel.chip] : 1}`, x: cells[pixel.x]!, y: cells[pixel.y]! }, firstPixel: request.exposure!.firstPixel, url: paper.url,
+        credit: `${paper.credit}, VizieR ${where} (${[pixel.chip, pixel.x, pixel.y].filter(Boolean).map(column => `${column} ${cells[column!]}`).join(', ')})` } : undefined;
+      const onImage = byPixel && await fetchImagePixel(archive, byPixel, where);
+      if (!pixel && !ownPositions && !placed) throw new Error(`${where}: SIMBAD holds no position for ${columns.simbadName} = ${JSON.stringify(listedName)}, and the table gives the row none of its own.`);
+      const raDeg = onImage?.ra ?? placed?.raDeg ?? degrees(cells, DECIMAL_POSITION.ra)!, decDeg = onImage?.dec ?? placed?.decDeg ?? degrees(cells, DECIMAL_POSITION.dec)!;
+      const simbadName = (listed?.mainId ?? (onImage ? undefined : await simbadAt(archive, raDeg, decDeg, SIMBAD_MATCH_ARCSEC, starClass.simbadRoot))?.name)?.replace(/\s+/gu, ' ');
       const written = picked.named ? `${galaxy.name} ${starClass.noun} ${cells[picked.named]}` : undefined;
       const starName = (simbadName ? preferredName(await simbadIdentifiers(archive, simbadName))?.name ?? simbadName : undefined) ?? written;
       if (!starName) throw new Error(`${where}: SIMBAD lists no ${starClass.noun} within ${SIMBAD_MATCH_ARCSEC}" of RA ${raDeg}, Dec ${decDeg} and the table names none, so the star has no name.`);
-      const position: CataloguePosition = placed
+      const position: CataloguePosition = byPixel ?? (placed
         ? { archive: 'simbad', catalogue: 'basic', row: { main_id: placed.mainId }, url: `https://simbad.cds.unistra.fr/simbad/sim-id?Ident=${encodeURIComponent(simbadName!)}`,
           credit: `${paper.credit}, VizieR ${where}, names the star in SIMBAD (${columns.simbadName}); SIMBAD holds its position${placed.bibcode ? `, from ${placed.bibcode}` : ' and names no paper for it'}` }
-        : { catalogue: request.table, row: key, columns: DECIMAL_POSITION, credit: paper.credit, url: paper.url };
+        : { catalogue: request.table, row: key, columns: DECIMAL_POSITION, credit: paper.credit, url: paper.url });
       const shown = days.toFixed(days < 10 ? 2 : 1);
-      stars.push({ ...request.featured ? { featured: true as const } : {}, ...relationCepheidDraft({ id: slug(starName), name: starName, target: simbadName ?? starName, galaxy: galaxy.name, inside: galaxy.id, periodDays: days, paper, position,
+      stars.push({ ...request.featured ? { featured: true as const } : {}, ...relationCepheidDraft({ id: slug(starName), name: starName, ...(simbadName ? { target: simbadName } : {}), galaxy: galaxy.name, inside: galaxy.id, periodDays: days, paper, position,
         periodSource: `${paper.credit}, VizieR ${where} (${columns.period.column}${columns.period.log ? ` ${cells[columns.period.column]}` : ''})`,
         description: `A ${starClass.noun} in ${galaxy.reader} that pulsates every ${shown} days.`, distance: placeInGalaxy(galaxy, raDeg, decDeg, where), velocity,
         text: { card: `A ${starClass.noun} in ${galaxy.reader}, ${far} away, that swells and shrinks every ${shown} days.`, introduction: `${cited.authors} list its pulsation at ${shown} days.`,
           locator: `VizieR ${where}: ${columns.period.column}` } }) });
     }
-    report.push(`${name}: ${picked.rows.length} ${starClass.noun}${picked.rows.length === 1 ? '' : 's'} of ${paper.credit} in ${galaxy.name}${ownPositions ? '' : ', placed by SIMBAD'}; radius and temperature from ${starClass.relation}.`);
+    report.push(`${name}: ${picked.rows.length} ${starClass.noun}${picked.rows.length === 1 ? '' : 's'} of ${paper.credit} in ${galaxy.name}${pixel ? `, placed by pixel on ${request.exposure!.product}` : ownPositions ? '' : ', placed by SIMBAD'}; radius and temperature from ${starClass.relation}.`);
   }
   return { stars, report };
 }

@@ -7,8 +7,8 @@ import { navigationHref } from './navigation/navigation-history.mts';
 // flight on arrival. While the camera moves nothing is
 // written and no timer runs; the renderer announces start and rest as `objectmotionchange` (camera-motion-signal.ts).
 // A change at rest that no motion announces (a dataset, a playback toggle, a restore) is written once, after a short quiet
-// period. Playback rotation is not written: the URL keeps that motion is on, not the spin angle. Each iPad Safari
-// `replaceState` dispatches a navigate event and can re-run Reader detection over the page (up to 24 ms, 2026-09-30).
+// period. Playback rotation is not written: the URL keeps that motion is on, not the spin angle. "Written" here means
+// handed to the history owner, which holds it until the address bar can hear it at no cost (navigation-history.mts).
 const QUIET_MS = 150;
 
 export function bindViewUrl({ windowTarget, view, getMotion, replace, onError = () => {} }: {

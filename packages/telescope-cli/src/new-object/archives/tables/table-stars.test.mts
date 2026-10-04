@@ -145,7 +145,8 @@ test('a table with a position per star drafts a spec placed by its row, named as
   assert.equal(catalogueRowUrl(spec.position!), VIZIER_ASU);
   // A star SIMBAD does not list takes the name its table writes, in its galaxy.
   const unlisted = answering([['-meta.all', gerkeMeta], ['/ReadMe', gerkeReadMe], ['rvz_radvel', 'rvz_radvel,rvz_err,rvz_bibcode\n-47.0,0.1,"2022ApJS..261....6K"\n'], ['DISTANCE(POINT', 'main_id\totype\tseparation\n'], [GERKE, gerkeRows]]);
-  assert.equal(parseStarSpec((await draftsFromTable([`cepheid:m81=${GERKE}#095614.95+690141.0`], unlisted, root)).stars[0]).name, 'M81 Cepheid 095614.95+690141.0');
+  const named = parseStarSpec((await draftsFromTable([`cepheid:m81=${GERKE}#095614.95+690141.0`], unlisted, root)).stars[0]);
+  assert.deepEqual([named.name, named.target], ['M81 Cepheid 095614.95+690141.0', undefined], 'and it claims no name in SIMBAD');
   await assert.rejects(draftsFromTable([`cepheid:m81=${GERKE}`], answering([['-meta.all', '#INFO\tError=Table or Catalog not found: x\t\n']]), root), /VizieR holds no table J\/ApJ\/743\/176\/table1; `telescope stars m81` lists the tables/u);
 });
 
@@ -166,12 +167,15 @@ test('a table that gives every row its galaxy\'s centre places its stars by the 
   assert.deepEqual(catalogueRowForm(spec.position!), { REQUEST: 'doQuery', LANG: 'ADQL', FORMAT: 'tsv', QUERY: "SELECT main_id, ra, dec, coo_bibcode FROM basic WHERE main_id = '[GPF97] c01'" });
   const row = parseCatalogueRow('main_id\tra\tdec\tcoo_bibcode\n"[GPF97] c01"\t160.97075\t11.687527777777778\t\n', spec.position!, 'test');
   assert.deepEqual([row.ra, row.dec, row.columns, row.archive, row.words, row.epoch], [160.97075, 11.687527777777778, { ra: 'ra', dec: 'dec' }, 'SIMBAD', 'basic row main_id = [GPF97] c01', 2000]);
-  assert.deepEqual(rowArchive(row), { origin: SIMBAD_TAP, credit: 'SIMBAD (CDS; Wenger et al. 2000, A&AS 143, 9)', license: 'CDS SIMBAD database: free use with acknowledgement', licenseEvidence: ['https://cds.unistra.fr/help/acknowledgement/'],
-    page: 'https://simbad.cds.unistra.fr/simbad/sim-id?Ident=%5BGPF97%5D%20c01', acquisition: 'SIMBAD TAP query in source/preparation/acquisition.json: basic row main_id = [GPF97] c01, its position and the paper SIMBAD names for it.' });
+  const { operation, ...held } = rowArchive({ ...row, form: catalogueRowForm(spec.position!) }, Object.values(spec.position!.row));
+  assert.deepEqual(held, { origin: SIMBAD_TAP, credit: 'SIMBAD (CDS; Wenger et al. 2000, A&AS 143, 9)', license: 'CDS SIMBAD database: free use with acknowledgement', licenseEvidence: ['https://cds.unistra.fr/help/acknowledgement/'],
+    page: 'https://simbad.cds.unistra.fr/simbad/sim-id?Ident=%5BGPF97%5D%20c01', acquisition: 'SIMBAD TAP query in source/preparation/acquisition.json: basic row main_id = [GPF97] c01, its position and the paper SIMBAD names for it.',
+    path: 'photometry/catalogue-row.tsv', input: 'catalogue-row', kept: 'row', keeper: 'CDS, Strasbourg', redistribution: 'One catalogue row, retained unchanged with its credit.' });
+  assert.deepEqual([operation.kind, operation.url, operation.requiredText], ['request-download', SIMBAD_TAP, ['ra', '[GPF97] c01']]);
   assert.throws(() => parseCatalogueRow('main_id\tra\tdec\tcoo_bibcode\n', spec.position!, 'test'), /test: SIMBAD basic row main_id = \[GPF97\] c01 matches 0 rows, not one; main_id is the name as SIMBAD writes it, spaces included/u);
   assert.deepEqual(citedRow('Kanbur et al. (2003) (https://x), SIMBAD basic row main_id = [GPF97] c01: ra 160.97075, dec 11.68'), { table: 'basic', key: 'main_id = [GPF97] c01' }, 'a second package for the same SIMBAD object is a duplicate');
   assert.throws(() => parseStarSpec({ ...stars[0] as object, position: { ...spec.position, catalogue: 'J/A+A/411/361/table1' } }), /a SIMBAD position is \{ "archive": "simbad", "catalogue": "basic", "row": \{ "main_id": NAME \} \}, with no columns or motion/u);
-  assert.throws(() => parseStarSpec({ ...stars[0] as object, position: { ...spec.position, archive: 'ned' } }), /position\.archive is "simbad" or absent \(a VizieR table\), not "ned"/u);
+  assert.throws(() => parseStarSpec({ ...stars[0] as object, position: { ...spec.position, archive: 'ned' } }), /position\.archive is "simbad", "mast" or absent \(a VizieR table\), not "ned"/u);
   // SIMBAD does not know the name the table gives: the row cannot be placed.
   const unknown = answering([['-meta.all', kanburMeta], ['/ReadMe', kanburReadMe], ['rvz_radvel', 'rvz_radvel,rvz_err,rvz_bibcode\n779.0,3.0,"2022ApJS..261...21Y"\n'], ["n.id = '[GPF97] c1'", 'main_id\tra\tdec\tcoo_bibcode\n'], [KANBUR, kanburRows]]);
   await assert.rejects(draftsFromTable([`cepheid:m95=${KANBUR}`], unknown, root), /Galaxy = NGC3351, Cepheid = C1: SIMBAD holds no position for SName = "\[GPF97\] c1", and the table gives the row none of its own/u);

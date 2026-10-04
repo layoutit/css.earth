@@ -213,9 +213,15 @@
     },
     {
       "location": "prepared",
+      "filename": "chandra-xray/volume.json",
+      "bytes": 279679,
+      "sha256": "954422c0ba9390f21ebcb32b6c79478008ac1cfd4ce79581e05f243b6b8b6638"
+    },
+    {
+      "location": "prepared",
       "filename": "datasets.json",
-      "bytes": 4521996,
-      "sha256": "c74c6ad3e60386ea587cea5ed8d65d097b451ae4dc0a6d44a3253a2c912b66b0"
+      "bytes": 20841,
+      "sha256": "08d4665e676d87ef8efb44b31e149a417364e8e20426731cc0b3990f2c1e7922"
     },
     {
       "location": "prepared",
@@ -399,9 +405,21 @@
     },
     {
       "location": "prepared",
+      "filename": "hubble-optical/volume.json",
+      "bytes": 280903,
+      "sha256": "ff7302e6fbb5177ad425963a312636fe3e1e9b2a66fa9c5f690d33115610ea66"
+    },
+    {
+      "location": "prepared",
       "filename": "presentation.json",
       "bytes": 10339,
       "sha256": "105b42213dbad736ee91b2ff6f87f1740d75133eb0fc3c99174af2b5427220af"
+    },
+    {
+      "location": "prepared",
+      "filename": "record.json",
+      "bytes": 11774,
+      "sha256": "c965a9ade2e19d7c24fe341190bde0fff011931286e984395e9b8e1d52b031f9"
     },
     {
       "location": "prepared",
@@ -579,6 +597,18 @@
     },
     {
       "location": "prepared",
+      "filename": "spitzer-infrared/volume.json",
+      "bytes": 282095,
+      "sha256": "b541bcc2c7094d1777472eee654625dfa8062985b437a20a2018fd17bb8444da"
+    },
+    {
+      "location": "prepared",
+      "filename": "stars.bin",
+      "bytes": 16513,
+      "sha256": "b0a441594529c6c83a579210782fed086bc4070708977fca0861fea9c84a246d"
+    },
+    {
+      "location": "prepared",
       "filename": "vla-radio/atlases/x.webp",
       "bytes": 1484154,
       "sha256": "4795a77a4a8f807202b4f08ed9cec745e880f7ecaec47c7da7fb5ce7d3310c47"
@@ -750,6 +780,12 @@
       "filename": "vla-radio/impostors/view-ppp.png",
       "bytes": 55102,
       "sha256": "3fa370bc162852561208c9aa20308e3d24997eb88384d49b8a68dbc590415122"
+    },
+    {
+      "location": "prepared",
+      "filename": "vla-radio/volume.json",
+      "bytes": 277923,
+      "sha256": "e9e685da6a84a5e200c00ba06ad9ba5b5c7915cf78aa820db9e16a2650fd7b9c"
     },
     {
       "location": "prepared",
@@ -927,6 +963,12 @@
     },
     {
       "location": "prepared",
+      "filename": "webb-components/volume.json",
+      "bytes": 281499,
+      "sha256": "87b92f477333be3d646b0ef6e3aad4db3e911ed8299f7f0101c1364da4dcce6b"
+    },
+    {
+      "location": "prepared",
       "filename": "webb-infrared/atlases/x.webp",
       "bytes": 1004302,
       "sha256": "ec4c67604564344b0a64a118813e2403c1d4e8063dffb67f69a813f89018d251"
@@ -1098,6 +1140,12 @@
       "filename": "webb-infrared/impostors/view-ppp.png",
       "bytes": 63917,
       "sha256": "9023484b0e64f6aea8f097294c79dee667828ea3e5bfa60ec231c479f3bfbcf1"
+    },
+    {
+      "location": "prepared",
+      "filename": "webb-infrared/volume.json",
+      "bytes": 280305,
+      "sha256": "b43208db82bc3f0c22799238348a1de03f0c212ba12921b88f676a634d1cd15a"
     }
   ]
 }

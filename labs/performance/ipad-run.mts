@@ -158,7 +158,7 @@ export async function runIpadJourney(argv: readonly string[]): Promise<string> {
     deviceSession = await startIpadDeviceSession(startUrl, udid);
     stage('visible Safari ready');
     const { out, report } = await captureIosMoment(['--device', ...(udid ? [udid] : []), '--name', name,
-      '--expect-url', startUrl, '--steps', stepsPath, '--strict-steps', '--stage-timing', '--no-device-monitors', '--screens',
+      '--expect-url', startUrl, '--steps', stepsPath, '--strict-steps', '--stage-timing', '--screens',
       // A local preview's source maps do not describe a deployed build.
       '--dist', built ? 'dist' : '', '--settle', '2', '--native', native,
       ...(debug ? ['--debug'] : []), ...(heapSnapshot ? ['--heap-snapshot'] : []), ...(styleWrites ? ['--style-writes'] : [])], deviceSession);

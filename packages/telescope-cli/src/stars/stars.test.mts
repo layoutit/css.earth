@@ -71,6 +71,21 @@ test('a table with a period and a position per star is a ready lead, for a class
   } finally { await rm(directory, { recursive: true, force: true }); }
 });
 
+test('a table that lists each star by its detector pixel is a lead that still needs its exposure', async () => {
+  // M95's answers, with the reanalysis's table described as VizieR describes Gibson et al. (2000), J/ApJ/529/723/appen: a chip, X and Y, and no sky position.
+  const column = (name: string, format: string, description: string, ucd: string) => `#Column\t${name}\t(${format})\t${description}\t[ucd=${ucd}]`;
+  const pixels = ['#RESOURCE=yCat_15290723_1', '#Name: J/ApJ/529/723/appen', '#Title:', '#INFO\tnrows=232\tNumber of rows of the table', '#Table\t:', '#Name: J/ApJ/529/723/appen', '#Title:', column('Cluster', 'a9', 'Cluster name', 'meta.id.parent'),
+    column('CNN', 'A3', 'Cepheid number in the cluster (1)', 'meta.id;meta.main'), column('Chip', 'I1', '? Chip number', 'meta.id;instr'), column('Xpos', 'F6.1', 'X pixel position', 'pos.cartesian.x;instr.det'),
+    column('Ypos', 'F6.1', 'Y pixel position', 'pos.cartesian.y;instr.det'), column('Per', 'F5.2', 'TRIAL period', 'time.period')].join('\n');
+  const result = await surveyStars(WORKSPACE, { target: 'm95', catalogue, fetcher: answering(await served('m95'), (url, body) => url.includes('-meta.all') && url.includes('2003A') ? pixels : body) });
+  const table = result.classes[0]!.papers[1]!.catalogue!.tables[0]!;
+  assert.deepEqual([table.columns.pixel, table.columns.position, table.ownPositions], [{ x: 'Xpos', y: 'Ypos', chip: 'Chip' }, false, false]);
+  assert.deepEqual(result.leads, [{ class: 'cepheid', bibcode: '2003A&A...411..361K', table: 'J/ApJ/529/723/appen', positions: 'pixel', command: 'telescope new-object --from-table cepheid:m95=J/ApJ/529/723/appen#exposure=mast:HST/product/FILE.fits,firstPixel=N --out SPEC.json' }]);
+  const text = formatStars(result);
+  assert.match(text, /VizieR J\/ApJ\/529\/723\/appen: 232 rows, period \(Per\), no position, a detector pixel per star \(Chip, Xpos, Ypos\)\n/u);
+  assert.match(text, /\nPlaced by pixel, once the paper says which exposure its pixels are of and how its software counts them \(FILE, N\): telescope new-object --from-table cepheid:m95=J\/ApJ\/529\/723\/appen#exposure=mast:HST\/product\/FILE\.fits,firstPixel=N --out SPEC\.json\n/u);
+});
+
 test('a target SIMBAD gives no outline is refused by the field that is empty, and the command line takes one galaxy', async () => {
   const answers = await served('m95');
   await assert.rejects(surveyStars(WORKSPACE, { target: 'm95', catalogue, fetcher: answering(answers, (url, body) => url === answers[0]!.url ? body.replace('\t5.59651', '\t') : body) }),

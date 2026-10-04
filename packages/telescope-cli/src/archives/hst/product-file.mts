@@ -81,7 +81,7 @@ export async function readHstFileHdus(path: string): Promise<HstFileHdu[]> {
       const dataBytes = (count + (extension ? integer(header, 'PCOUNT', 0) : 0)) * (extension ? integer(header, 'GCOUNT', 1) : 1) * Math.abs(bitpix) / 8;
       const next = start + padded(dataOffset + dataBytes);
       if (!Number.isSafeInteger(dataBytes) || dataBytes < 0 || next > size) throw new Error(`${path}: truncated or unbounded FITS data or padding.`);
-      hdus.push({ header, cards: [], dataStart: start + dataOffset, dataBytes, bitpix, dimensions, repeatedCards });
+      hdus.push({ header, cards: [], headerStart: start, dataStart: start + dataOffset, dataBytes, bitpix, dimensions, repeatedCards });
       start = next;
       if (hdus.length > 1024) throw new Error(`${path}: too many FITS HDUs.`);
     }

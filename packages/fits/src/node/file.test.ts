@@ -5,7 +5,7 @@ import { join } from 'node:path';
 import { after as afterAll, before as beforeAll, test } from 'node:test';
 import { readFitsHdus, readFitsImage } from '../index.js';
 import { card, imageFixture } from './fixtures/bytes.js';
-import { readFitsFileHdus, readFitsFileRegion } from './index.js';
+import { locateFitsHdus, readFitsFileHdus, readFitsFileRegion } from './index.js';
 
 let directory = '';
 beforeAll(async () => { directory = await mkdtemp(join(tmpdir(), 'fits-file-')); });
@@ -24,6 +24,7 @@ test('HDUs located on disk agree with the byte reader, and regions apply BSCALE,
   const located = await readFitsFileHdus(path), parsed = readFitsHdus(bytes);
   assert.deepEqual(located.map(hdu => [hdu.header, hdu.cards, hdu.dataStart, hdu.dataBytes, hdu.bitpix, hdu.dimensions]),
     parsed.map(hdu => [hdu.header, hdu.cards, hdu.dataOffset, hdu.dataBytes, hdu.bitpix, hdu.dimensions]));
+  assert.deepEqual(located.map(hdu => hdu.headerStart), [0, 5760]);
   const whole = readFitsImage(bytes, { start: parsed[1]!.dataOffset - 2880 });
   const region = await readFitsFileRegion(path, located[1]!, { x0: 0, y0: 1, width: 2, height: 2 });
   assert.deepEqual([...region.values], [...whole.values.subarray(2, 6)]);
@@ -41,4 +42,20 @@ test('a caller-held handle is used and left open; a truncated file is refused', 
   } finally { await handle.close(); }
   const truncated = join(directory, 'truncated.fits'); await writeFile(truncated, bytes.subarray(0, bytes.length - 1));
   await assert.rejects(readFitsFileHdus(truncated), /Truncated/);
+});
+
+test('one extension of an archived file is located by reading header records only, and nothing after it', async () => {
+  // A primary whose header takes two records, then three extensions; the reader is asked one record at a time, as a byte-range request would be.
+  const long = Buffer.from([card('SIMPLE', 'T'), card('BITPIX', '8'), card('NAXIS', '0'), ...Array.from({ length: 40 }, (_, i) => card(`KEY${i}`, String(i))), 'END'.padEnd(80)].join('').padEnd(2 * 2880));
+  const bytes = Buffer.concat([long, extension([0, 1]), extension([2, 3]), extension([4, 5])]), reads: [number, number][] = [];
+  const read = async (offset: number, length: number) => { reads.push([offset, length]); return bytes.subarray(offset, offset + length); };
+  const found: number[] = [];
+  for await (const hdu of locateFitsHdus(read, undefined, 2880)) {
+    found.push(hdu.headerStart);
+    if (found.length === 3) { assert.deepEqual([hdu.dataStart, hdu.dataBytes, hdu.dimensions], [14400, 4, [2, 1]]); break; }
+  }
+  assert.deepEqual(found, [0, 5760, 11520]);
+  // The primary's first record has no END card, so it is read again four records long; each extension header is one record.
+  assert.deepEqual(reads, [[0, 2880], [0, 11520], [5760, 2880], [11520, 2880]]);
+  await assert.rejects(async () => { for await (const _ of locateFitsHdus(read, undefined, 100)) break; }, /whole 2,880-byte records/u);
 });

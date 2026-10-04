@@ -28,14 +28,20 @@
     {
       "location": "prepared",
       "filename": "members.json",
-      "bytes": 107931,
-      "sha256": "36999dcb310d2a75eff9a407ce0fa020388869fb7935e99c5b6d3b56d09c1555"
+      "bytes": 37765,
+      "sha256": "1f94d27a32cacf4ce7838ece12feb1e41de4b6f7795ca0610ea75e46876b71aa"
     },
     {
       "location": "prepared",
       "filename": "places.json",
       "bytes": 62903,
-      "sha256": "9a73abf541a46ef8fcaef15e3dc6989159a7129087fdba939f87b53d6d4dee9c"
+      "sha256": "b85062066b94c0b20b97950b279dd99199113f8e5c258a1334b104a7a56a09d8"
+    },
+    {
+      "location": "prepared",
+      "filename": "plain-stars.bin",
+      "bytes": 4760,
+      "sha256": "835c18588ac6d5e6a97b27cc795763dd0ca8c5245c2bde713867855f043454fc"
     },
     {
       "location": "prepared",

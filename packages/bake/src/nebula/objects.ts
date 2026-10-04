@@ -1,5 +1,6 @@
 import { readNonemptyText } from '@cssearth/core';
-import { OBJECT_SCHEMA, PREPARED_OBJECT_SCHEMA, DENSITY_VOLUME_FORMAT, PREPARED_VOLUME_DATASETS_SCHEMA, parseVolumeRecipe, type CompilerBakeResult, type DensityVolumeFrame, validatePreparedCssVolume, validatePreparedVolumeDatasets, type PreparedVolumeDataset, parsePreparedNebulaCatalog, readNebulaDelivery, type NebulaSkyFrame } from '@cssearth/objects';
+import { OBJECT_SCHEMA, PREPARED_OBJECT_SCHEMA, DENSITY_VOLUME_FORMAT, PREPARED_VOLUME_DATASETS_SCHEMA, PREPARED_VOLUME_DATASET_INDEX_SCHEMA, parseVolumeRecipe, type CompilerBakeResult, type DensityVolumeFrame, validatePreparedCssVolume, validatePreparedVolumeDatasets, type PreparedVolumeDataset, parsePreparedNebulaCatalog, readNebulaDelivery, type NebulaSkyFrame } from '@cssearth/objects';
+import { readVolumeDatasetBank, writeVolumeDatasetBank } from '@cssearth/objects/node';
 import { nebulaBakeBackend } from './backend.ts';
 import { verifyReplayReferences } from './references.ts';
 import { replayCompactCompiler, replayCompactSymmetry, replayCompactSampled, prepareVolumeSlices } from '../volume/node/index.ts';
@@ -45,7 +46,7 @@ async function installed(directory: string, recipe: unknown): Promise<boolean> {
   try {
     if (!isDeepStrictEqual(record(await read(directory,'prepared/delivery.json')).recipe, recipe)) return false;
     const descriptor = record(await read(directory,'object.json')), prepared = pin({ path:record(descriptor.prepared).url });
-    const envelope = record(JSON.parse((await pinned(directory,prepared)).toString())), data = validatePreparedVolumeDatasets(envelope.data);
+    const data = await readVolumeDatasetBank(dirname(local(directory,prepared.path)));
     for (const dataset of data.datasets) for (const resource of dataset.volume.resources) await pinned(directory,{path:`prepared/${resource.path}`});
     return true;
   } catch (error) { if (error instanceof Error && 'code' in error && error.code === 'ENOENT') return false; throw error; }
@@ -186,8 +187,8 @@ export async function prepareNebulaObject(root: string, directory: string, ifMis
       framingRadiusUnits:recipe.framingRadiusUnits,contextVisibility:'independent',starsEnabled:datasets[0]!.stars.points.length>0,
       ...(recipe.attachedTo === undefined ? {} : {attachedTo:recipe.attachedTo}),datasets});
     const renderElements = assertCompilerDeliveryElementBudget(compilerSampling, data);
-    const envelope = json({schema:PREPARED_OBJECT_SCHEMA,id:recipe.id,type:'volume-dataset-bank',format:PREPARED_VOLUME_DATASETS_SCHEMA,data});
-    await put(resolve(staging,'datasets.json'),envelope);
+    // The bank's files: its index, one volume a dataset, its stars and its record (@cssearth/objects volume-dataset-bank-files.ts).
+    await writeVolumeDatasetBank(staging, data);
     await put(resolve(staging,'delivery.json'),json({schema:'cssearth-nebula-delivery-receipt@2',recipe:JSON.parse(recipeBytes.toString()),sourceResult,
       acceptedLabResult:recipe.acceptedLabResult,...(fieldStars ? {fieldStars} : {}), ...(renderElements ? { renderElements } : {}),
       datasets:datasets.map(l=>({id:l.id,stars:l.stars.points.length,leaves:l.volume.resources.length}))}));
@@ -200,7 +201,7 @@ export async function prepareNebulaObject(root: string, directory: string, ifMis
       if (error instanceof SyntaxError || error instanceof Error && 'code' in error && error.code === 'ENOENT') return {} as Record<string, unknown>; throw error; });
     const host = authored.host, cataloguePoints = authored.cataloguePoints;
     await put(resolve(directory,'object.json'),json({schema:OBJECT_SCHEMA,id:recipe.id,type:'volume-dataset-bank',properties:{frame:datasets[0]!.volume.frame,
-      preparation:{source:'source/delivery.json'},...(host === undefined ? {} : {host:readNonemptyText(host, '', invalidText)}),...(cataloguePoints === undefined ? {} : {cataloguePoints})},prepared:{format:PREPARED_VOLUME_DATASETS_SCHEMA,url:'prepared/datasets.json'}}));
+      preparation:{source:'source/delivery.json'},...(host === undefined ? {} : {host:readNonemptyText(host, '', invalidText)}),...(cataloguePoints === undefined ? {} : {cataloguePoints})},prepared:{format:PREPARED_VOLUME_DATASET_INDEX_SCHEMA,url:'prepared/datasets.json'}}));
     return { id:recipe.id,status:'prepared',sourceResult,datasets:datasets.map(l=>({id:l.id,stars:l.stars.points.length,leaves:l.volume.resources.length})) };
   } finally { await rm(staging,{recursive:true,force:true}); }
 }
