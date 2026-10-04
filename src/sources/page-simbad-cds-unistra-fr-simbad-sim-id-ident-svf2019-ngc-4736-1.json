@@ -1,0 +1,35 @@
+{
+  "id": "page-simbad-cds-unistra-fr-simbad-sim-id-ident-svf2019-ngc-4736-1",
+  "kind": "reference-page",
+  "identityLevel": "work",
+  "title": "Web page simbad.cds.unistra.fr/simbad/sim-id",
+  "identifiers": [
+    {
+      "type": "Archive resource",
+      "value": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=%5BSVF2019%5D%20NGC%204736-1"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=%5BSVF2019%5D%20NGC%204736-1",
+      "label": "simbad.cds.unistra.fr/simbad/sim-id"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=%5BSVF2019%5D%20NGC%204736-1",
+      "checkedOn": "2026-10-04",
+      "locator": "The page as cited by a NASA Exoplanet Archive parameter set or by a spec"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "simbad.cds.unistra.fr/simbad/sim-id",
+      "scope": "citation",
+      "evidence": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=%5BSVF2019%5D%20NGC%204736-1"
+    }
+  ]
+}

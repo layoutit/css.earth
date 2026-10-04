@@ -1,0 +1,35 @@
+{
+  "id": "source-svf2019-ngc-4736-1-reeve-2016-b-limb-darkening",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "[SVF2019] NGC 4736-1 · svf2019 ngc 4736 1 reeve 2016 b limb darkening",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/svf2019-ngc-4736-1/source/manifest.json",
+      "locator": "/inputs/6"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Reeve & Howarth (2016), MNRAS 456, 1294 (VizieR J/MNRAS/456/1294)",
+      "scope": "The svf2019 ngc 4736 1 reeve 2016 b limb darkening input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "VizieR catalogue data, public with citation of the paper and CDS",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}
