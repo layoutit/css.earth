@@ -1,5 +1,6 @@
 /** The star survey (stars.mts), offline. The fixtures are every answer SIMBAD and VizieR served the survey for M95, M83 and M51 on
- * 2026-10-04, whole. M51 holds a supergiant SIMBAD types as a plain star (M51-DS1), which no class of the survey names. M95's Cepheids come from a paper VizieR does not hold and from a reanalysis whose
+ * 2026-10-04, whole. M51 holds a supergiant SIMBAD types as a plain star (M51-DS1), which no class of the survey names. The papers
+ * API's answers (OpenAlex) are cut: no work is kept for M95 and M83, and for M51 three of its 91, without their author lists. M95's Cepheids come from a paper VizieR does not hold and from a reanalysis whose
  * table gives every row its galaxy's centre and the star's SIMBAD name; M83's have a table with a position per star. */
 import assert from 'node:assert/strict';
 import { mkdtemp, readFile, rm } from 'node:fs/promises';
@@ -10,7 +11,7 @@ import { WORKSPACE } from '@cssearth/telescope/node';
 import { parseCli } from '../cli-arguments.mts';
 import { loadTargetCatalogue } from '../query.mts';
 import { parseSimbadTsv } from '../new-object/archives/tables/simbad-tap.mts';
-import { formatStars, parseSimbadTypes, simbadQueries, STARS_SCHEMA, surveyStars, typesUnder } from './stars.mts';
+import { formatStars, parseSimbadTypes, simbadQueries, spellings, STARS_SCHEMA, starWorksQuery, surveyStars, typesUnder } from './stars.mts';
 
 interface Served { readonly url: string; readonly body: string }
 // Read once: the catalogue is every object package's descriptor.
@@ -95,9 +96,25 @@ test('a single star of no class, with no parallax or proper motion in SIMBAD, is
   // The stars asked for are of no class above and no outburst or remnant: a Cepheid, a nova or an X-ray binary is counted where it belongs.
   const query = simbadQueries.others(202.47, 47.195, 0.1, ['*', 'Em*']);
   assert.match(query, /^SELECT TOP 8 b\.main_id, b\.otype, b\.nbref FROM basic AS b WHERE CONTAINS\(POINT\('ICRS', b\.ra, b\.dec\), CIRCLE\('ICRS', 202\.47, 47\.195, 0\.10000\)\) = 1 AND b\.plx_value IS NULL AND b\.pmra IS NULL AND b\.nbref >= 2 AND b\.otype IN \('\*', 'Em\*'\) ORDER BY nbref DESC$/u);
+  // The papers API names the works that speak of the galaxy and a kind of star, whatever SIMBAD holds: here a Cepheid paper SIMBAD's stars do not
+  // cite and the paper of M51-DS1 itself. A title that only says "massive star clusters" is named too: the reader judges.
+  assert.deepEqual(result.works.map(work => [work.year, work.title.slice(0, 44), work.doi]), [
+    [2025, 'Detecting the Black Hole Candidate Populatio', 'https://doi.org/10.3847/1538-4357/ad9d37'],
+    [2023, 'Reeling in the Whirlpool galaxy: Distance to', 'https://doi.org/10.1051/0004-6361/202346971'],
+    [2022, 'An Exceptional Dimming Event for a Massive, ', 'https://doi.org/10.3847/1538-4357/ac626c']]);
+  assert.match(text, /\nWorks that name it with a kind of star \(papers API\), the star in the title first, each newest first:\n {2}2025 {2}Detecting[^\n]+\n {2}2023 {2}Reeling in the Whirlpool galaxy: Distance to M 51 clarified through Cepheids[^\n]+\n {2}2022 {2}An Exceptional Dimming Event for a Massive, Cool Supergiant in M51 {2}https:\/\/doi\.org\/10\.3847\/1538-4357\/ac626c\n/u);
+  assert.deepEqual(spellings(['M61', 'NGC 4303', 'Messier 61', 'Swelling Spiral']), ['M 61', 'M61', 'NGC 4303', 'NGC4303', 'Messier 61', 'Messier61', 'Swelling Spiral'], 'a paper writes a catalogue name with or without its space');
+  const asked = new URL(starWorksQuery(['M61', 'NGC 4303'])).searchParams;
+  assert.match(asked.get('filter') ?? '', /^title_and_abstract\.search:\("M 61" OR "M61" OR "NGC 4303" OR "NGC4303"\) AND \("Cepheid" OR "Cepheids" OR "supergiant" OR [^)]+\),type:article\|review\|preprint\|letter$/u);
+  assert.equal(asked.get('sort'), 'publication_year:desc');
+  // When the papers API does not answer, the survey still stands and says so.
+  const answers = await served('m51'), failing = (async (url: string | URL | Request) => String(url).includes('api.openalex.org') ? new Response('slow down', { status: 429 }) : answering(answers)(url)) as typeof fetch;
+  const unanswered = await surveyStars(WORKSPACE, { target: 'm51', catalogue, fetcher: failing });
+  assert.deepEqual([unanswered.works, unanswered.worksIssue, unanswered.others.length], [[], 'OpenAlex returned HTTP 429 for ' + starWorksQuery(['Whirlpool Galaxy', ...catalogue.find(entry => entry.id === 'm51')!.aliases]) + '.', 3]);
+  assert.match(formatStars(unanswered), /\nThe papers API did not answer \(OpenAlex returned HTTP 429 for [^\n]+\); run `telescope papers` for it later\.\n/u);
   // A galaxy with no such star says nothing of them.
   const none = await surveyStars(WORKSPACE, { target: 'm95', catalogue, fetcher: answering(await served('m95')) });
-  assert.deepEqual(none.others, []); assert.doesNotMatch(formatStars(none), /Other single stars/u);
+  assert.deepEqual([none.others, none.works], [[], []]); assert.doesNotMatch(formatStars(none), /Other single stars|Works that name it/u);
 });
 
 test('a target SIMBAD gives no outline is refused by the field that is empty, and the command line takes one galaxy', async () => {

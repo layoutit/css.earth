@@ -45,6 +45,8 @@ The star survey behind `telescope stars GALAXY` is `src/stars/`. It and the gene
 list of types kept here. A star listed by detector pixel is placed by `src/new-object/archives/images/image-pixel.mts`: it reads
 header records of the archived exposure by byte range, keeps the one extension header as the package's ranged source input,
 and takes the sky position from `@cssearth/fits` `skyProjection`, which owns the projection and its SIP distortion.
+The survey ends by asking the papers API (`src/papers.mts`, OpenAlex) for works that name the galaxy and a kind of star: a
+literature claim about a galaxy's stars is checked there before it is made, never from SIMBAD and VizieR alone.
 
 The sky band composer is `src/sky/` (exported as `./sky/*`): `sky-band-composite.mts` composes pinned hips2fits, AllWISE
 atlas and JWST level-3 bands on one TAN grid, and `author-sky-bands.mts` acquires and pins those bands. It moved from
