@@ -1,0 +1,47 @@
+{
+  "id": "doi-10-1086-316343",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Falco et al. (1999): The Updated Zwicky Catalog (UZC)",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.1086/316343"
+    },
+    {
+      "type": "bibliography-key",
+      "value": "1999PASP..111..438F"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://ui.adsabs.harvard.edu/abs/1999PASP..111..438F",
+      "label": "Publisher"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://ui.adsabs.harvard.edu/abs/1999PASP..111..438F",
+      "checkedOn": "2026-10-04",
+      "locator": "Crossref record: title, authors, container"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Falco et al. (1999), Publications of the Astronomical Society of the Pacific 111 438-452",
+      "scope": "citation",
+      "evidence": "https://ui.adsabs.harvard.edu/abs/1999PASP..111..438F"
+    }
+  ],
+  "publisher": "Publications of the Astronomical Society of the Pacific 111 438-452",
+  "creators": [
+    "Emilio E. Falco",
+    "Michael J. Kurtz",
+    "Margaret J. Geller",
+    "et al."
+  ],
+  "publicationDate": "1999"
+}

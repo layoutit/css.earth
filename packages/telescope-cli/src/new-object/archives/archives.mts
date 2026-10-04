@@ -272,7 +272,8 @@ async function readPublication(archive: Archive, url: string): Promise<Publicati
     const code = decodeURIComponent(bibcode), year = code.slice(0, 4), landing = `https://ui.adsabs.harvard.edu/abs/${code}`;
     const gateway = (type: string) => archive.location?.(`https://ui.adsabs.harvard.edu/link_gateway/${encodeURIComponent(code)}/${type}`).catch(() => undefined);
     const [eprint, published] = await Promise.all([gateway('EPRINT_HTML'), gateway('PUB_HTML')]);
-    const linkedArxiv = /arxiv\.org\/abs\/([0-9]{4}\.[0-9]{4,5})/u.exec(eprint ?? '')?.[1], linkedDoi = /doi\.org\/(10\.\S+)$/u.exec(published ?? '')?.[1];
+    // A publisher's own address can end in the DOI instead of going through doi.org (iopscience.iop.org/article/10.1086/316343).
+    const linkedArxiv = /arxiv\.org\/abs\/([0-9]{4}\.[0-9]{4,5})/u.exec(eprint ?? '')?.[1], linkedDoi = (/doi\.org\/(10\.\S+)$/u.exec(published ?? '') ?? /\/(10\.\d{4,9}\/[^\s?#]+)$/u.exec(published ?? ''))?.[1];
     // The published paper first (Crossref, the better citation, with no request limit), its preprint id kept alongside; the arXiv API
     // (one request every 3 s) only for a paper with no DOI.
     if (linkedDoi) {
