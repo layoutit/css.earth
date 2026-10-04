@@ -26,13 +26,29 @@ const SHARED = [/^package\.json$/u, /^pnpm-lock\.yaml$/u, /^pnpm-workspace\.yaml
 /** The offline preparation and archive tools. Many changes touch a package they import, so a
  * tool joins only when it, or another tool it imports, changed; a push to main tests them whatever changed. */
 const TOOLS = new Set(['bake', 'telescope-cli']);
-/** A tool test that pins another package's frozen fixture reads it through a `<package>/test/` path; editing that fixture
- * selects the pinning test, so the producer check runs on the pull request, not only after the merge. */
-export function readsChangedFixture(text: string, paths: readonly string[]): boolean {
+/** Resolve declared paths without reading their targets: the changes job only checks out test sources. */
+function declaredPaths(root: string, test: string, text: string): readonly string[] {
+  const literals = [...text.matchAll(/['"`]([^'"`\n]+)['"`]/gu)].map(match => match[1]!);
+  const directories = literals.filter(value => value.endsWith('/')).flatMap(value => [resolve(root, value), resolve(root, dirname(test), value)]);
+  return [...new Set(literals.filter(value => /\.[a-z0-9]+$/iu.test(value)).flatMap(value =>
+    [resolve(root, value), resolve(root, dirname(test), value), ...directories.map(directory => resolve(directory, value))]
+      .map(candidate => relative(root, candidate)).filter(path => !path.startsWith('../'))))];
+}
+
+/** Keep legacy split fixture declarations as well as exact repository and module-relative paths. */
+export function readsChangedFixture(text: string, paths: readonly string[], test = '', root = resolve(import.meta.dirname, '../../..')): boolean {
+  const declared = new Set(declaredPaths(root, test, text));
   return paths.some(path => {
     const match = /^packages\/([^/]+)\/test\/(?:.+\/)?([^/]+)$/u.exec(path);
-    return match !== null && text.includes(`${match[1]}/test/`) && text.includes(match[2]!);
+    return declared.has(path) || (match !== null && text.includes(`${match[1]}/test/`) && text.includes(match[2]!));
   });
+}
+
+/** Root-entry imports can consume any objects contract. Subpath imports consume only that entry. */
+export function importsChangedObjects(text: string, paths: readonly string[]): boolean {
+  return [...text.matchAll(/['"`]@cssearth\/objects(?:\/([^'"`]+))?['"`]/gu)].some(match =>
+    !match[1] || paths.some(path => path === `packages/objects/src/${match[1]}.ts`
+      || path.startsWith(`packages/objects/src/${match[1]}/`)));
 }
 const SITE = [/^site\//u, /^src\//u, /^integration\//u, /^\.github\//u, /^labs\/performance\//u];
 
@@ -43,14 +59,8 @@ export function pinnedSourceOwners(root: string, owners: ReadonlyMap<string, rea
     if (!test.startsWith('packages/')) continue;
     const owner = test.split('/')[1]!;
     const text = readFileSync(resolve(root, test), 'utf8');
-    const literals = [...text.matchAll(/['"]([^'"\n]+)['"]/gu)].map(match => match[1]!);
-    const directories = literals.filter(value => value.endsWith('/')).flatMap(value => [resolve(root, value), resolve(root, dirname(test), value)]);
-    for (const value of literals.filter(value => /\.(?:py|[cm]?ts)$/u.test(value))) {
-      for (const candidate of [resolve(root, value), resolve(root, dirname(test), value), ...directories.map(directory => resolve(directory, value))]) {
-        const path = relative(root, candidate);
-        if (!path.startsWith('../') && existsSync(candidate)) pins.set(path, [...new Set([...(pins.get(path) ?? []), owner])]);
-      }
-    }
+    for (const path of declaredPaths(root, test, text).filter(path => /\.(?:py|[cm]?ts)$/u.test(path)))
+      pins.set(path, [...new Set([...(pins.get(path) ?? []), owner])]);
   }
   return pins;
 }
@@ -76,15 +86,18 @@ export function affectedTests(paths: readonly string[] | null, packages: readonl
   }
   const site = paths.some(path => SITE.some(pattern => pattern.test(path))) || siteDependencies.some(name => changed.has(byName.get(name) ?? ''));
   // A foreign test whose own package already runs is in that package's glob.
-  const fixtureReaders = new Map<string, string>(paths.some(path => /^packages\/[^/]+\/test\//u.test(path))
-    ? [...owners.keys()].filter(test => TOOLS.has(/^packages\/([^/]+)\//u.exec(test)?.[1] ?? '')).map(test => [test, readFileSync(resolve(import.meta.dirname, '../../..', test), 'utf8')] as const)
-    : []);
+  const root = resolve(import.meta.dirname, '../../..');
+  const readers = new Map([...owners.keys()]
+    .filter(test => existsSync(resolve(root, test)))
+    .map(test => [test, readFileSync(resolve(root, test), 'utf8')] as const));
   const toolObjectCount = [...owners].filter(([file, imports]) => TOOLS.has(file.split('/')[1] ?? '') && imports.includes('objects')).length;
   const files = [...owners].filter(([test, imports]) => !changed.has(/^packages\/([^/]+)\//u.exec(test)?.[1] ?? '')
-    && (!TOOLS.has(/^packages\/([^/]+)\//u.exec(test)?.[1] ?? '')
+    && ((readers.has(test) && readsChangedFixture(readers.get(test)!, paths, test, root))
+      || (!TOOLS.has(/^packages\/([^/]+)\//u.exec(test)?.[1] ?? '')
       ? imports.some(owner => changed.has(owner)) || paths.includes(test)
-      : (changed.has('objects') && toolObjectCount <= TOOL_OBJECT_TEST_LIMIT && imports.includes('objects'))
-        || (fixtureReaders.has(test) && readsChangedFixture(fixtureReaders.get(test)!, paths)))).map(([test]) => test).sort();
+      : (changed.has('objects') && imports.includes('objects')
+          && (toolObjectCount <= TOOL_OBJECT_TEST_LIMIT || importsChangedObjects(readers.get(test) ?? '', paths)))
+        ))).map(([test]) => test).sort();
   return { packages: [...changed].sort(), site, files };
 }
 
