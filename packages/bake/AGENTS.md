@@ -376,3 +376,6 @@ coverage, atmosphere and interior raster algorithms live in internal `src/baking
 Body-map and raster recipe contracts, resolution evidence and limb-model reference validation belong to
 `@cssearth/objects`. `readBodyMapProduct` and `readRasterRecipe` supply the surface-resolution calculation
 and lighting-bank resolution to those shared parsers. Keep scientific calculations, sampled maps and preparation here.
+
+The public `@cssearth/bake/run-implemented-objects/source` entry runs discovery guards
+against the current source, independent of a previous package build.

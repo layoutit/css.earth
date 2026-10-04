@@ -57,6 +57,13 @@ it('a fixture input resolves at its recorded path', async () => {
   assert.deepEqual((await readOracleInput(input)), await readFile(resolve(root, 'packages/fits/src/node/fixtures/fits/float32.fits')));
 });
 
+it('missing oracle inputs name their recorded path and owner restoration without a dead command', async () => {
+  const path = 'packages/core/src/node/fixtures/absent-oracle-input.fits';
+  await assert.rejects(readOracleInput({ path }), {
+    message: `Missing oracle input ${path}. Restore it from its owner's declared source record.`,
+  });
+});
+
 it('source and built oracle runners list the known oracles', () => {
   for (const path of ['packages/core/src/node/oracle/run.mts', 'packages/core/dist/oracle/run.js']) {
     const result = spawnSync(process.execPath, [resolve(root, path), '__unknown__'], { cwd: tmpdir(), encoding: 'utf8' });

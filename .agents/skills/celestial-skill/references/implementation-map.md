@@ -421,7 +421,7 @@ purposes; run those needed for the task, not every preparation step by default.
 
 | Purpose | Current entry point |
 | --- | --- |
-| Build shared tool bundles when needed | `pnpm build:tools` |
+| Build shared tool bundles when needed | `pnpm build:preparation` |
 | Install already published prepared files | `pnpm setup:assets --object=<id>` |
 | Restore missing declared source files | `node packages/bake/cli/object-operations.mts acquire <id>` |
 | Check declared source-file coverage without acquiring | `node packages/bake/cli/object-operations.mts acquire <id> --verify-only`; this does not verify source digests |

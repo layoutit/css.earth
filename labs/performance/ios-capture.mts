@@ -35,6 +35,7 @@
 // it never differs. It also prints the before/after table (frames, work and compositing per frame, slow frames, layer
 // memory, and on a device its frame rate and Safari's memory), from the means of every baseline capture of that name and of
 // this command's --runs <n> repeats, and writes it to comparison.md in the last run.
+import { MissingSourceInputError } from '@cssearth/core';
 import { holdNativeDeviceTunnel } from './ipad-native-tunnel.mts';
 import { appendFileSync } from 'node:fs';
 import { symbolicateNativeXml } from './native-symbols.mts';
@@ -206,7 +207,7 @@ async function bootedUdid() {
 async function connectedDevice(udid: string | null) {
   // A failed command still says why; a missing one names its package.
   const said = (tool: string) => (error: unknown) => {
-    if (isRecord(error) && error.code === 'ENOENT') throw new Error(`${tool} is not installed: brew install libimobiledevice.`);
+    if (isRecord(error) && error.code === 'ENOENT') throw new MissingSourceInputError(`${tool} is not installed: brew install libimobiledevice.`);
     return { stdout: isRecord(error) ? [error.stdout, error.stderr].filter(text => typeof text === 'string').join(' ') : '' };
   };
   const { stdout } = await run('idevice_id', ['-l']).catch(said('idevice_id'));
@@ -1114,7 +1115,7 @@ const DEVELOPER_SERVICES = 'pymobiledevice3 (--pymobiledevice3 <path> or $PYMOBI
 /** pymobiledevice3's own Python, beside its command. */
 async function bridgePython(binary: string) {
   const path = binary.includes('/') ? binary : (await run('which', [binary]).catch(() => ({ stdout: '' }))).stdout.trim();
-  if (!path) throw new Error(`${binary} is not installed; pip install pymobiledevice3 or pass --pymobiledevice3 <path>.`);
+  if (!path) throw new MissingSourceInputError(`${binary} is not installed; pip install pymobiledevice3 or pass --pymobiledevice3 <path>.`);
   return resolve(await realpath(path).then(real => real, () => path), '..', 'python');
 }
 

@@ -8,7 +8,7 @@ baseline updates. Contract lint runs the check and `node --test .github/scripts/
   in the preparation renderer exception list. `declared-dependencies.mts` rejects
   undeclared workspace imports; its E1 fixture proves a bake import fails without
   declaring renderer. The declaration scanner also checks literal `require.resolve` calls. `preparation-without-renderer.mts` retains telescope's exact
-  publication/transport exceptions and rejects stale entries.
+  publication/transport exceptions and the declared renderer build-config metadata reader, and rejects stale entries.
 - `format-schema-ownership.mts` scans TypeScript, Python and Astro source for
   versioned schema literals, including type literals and embedded template scripts.
   `schemaOwner` groups packages, lab packages, site and top-level tooling directories.
@@ -60,6 +60,13 @@ edges from owner names.
 Preparation additionally recognizes literal sibling renderer URLs, package
 imports targets, tsconfig extends and compiler-option paths. It still does not
 prove computed loaders, configuration inheritance or a dependency routed through
-an exempt consumer's re-export (A202/A251). The telescope implementation bundler
-also loads renderer build configuration through a computed path (A203); removing
-that coupling requires a shared source-entry resolver, not another exception.
+an exempt consumer's re-export (A202/A251). The telescope implementation bundler reads the renderer build configuration through the declared
+`RENDERER_BUILD_CONFIG_PATH`, which the rule checks as a named metadata exception (A203).
+
+Every PR contract-lint lane also runs `checks/check-stale-references.mts` and its tests.
+The short `checks/retired-paths.mts` ledger identifies drained paths from rename history
+and the relocated owners whose checkout roots must stay module-relative. The check
+reads live commands, manifests, documentation, CI paths, generator literals and import
+specifiers. Historical records retain the old path with an adjacent `(now ...)`
+replacement; test fixture text is excluded through syntax, while actual test imports
+and process calls are checked. Extend the ledger when another owner is retired.

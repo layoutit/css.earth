@@ -20,7 +20,7 @@ From the repository root:
 
 ```sh
 pnpm install --frozen-lockfile --ignore-scripts
-pnpm build:tools
+pnpm build:preparation
 node packages/bake/cli/prepare-stars.mts src/objects/stellar-neighbourhood
 pnpm test:packages
 ```

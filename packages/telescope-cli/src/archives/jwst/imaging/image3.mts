@@ -31,6 +31,7 @@ import { mastFile, type MastFile } from '@cssearth/telescope/node';
 import { freeMemoryPercent, toolchainPython } from '@cssearth/telescope/node';
 import { parseImagingProgram, PROGRAMS, type ImagingBand, type ImagingProgram } from './archive.mts';
 import { gridWcs, parseSkyGrid, type SkyGrid } from '@cssearth/bake/objects/raster';
+import { MissingSourceInputError } from '@cssearth/core';
 
 const IMAGE3 = `
 import json, sys, time
@@ -84,7 +85,7 @@ export function pipelineSoftware(lock: string): readonly ProductSoftware[] {
  * built from other pins by the time a stage gets here. */
 export async function eurekaPins(): Promise<{ software: readonly ProductSoftware[] }> {
   await stat(resolve(EUREKA_ROOT, 'installed.json'))
-    .catch(() => { throw new Error('Eureka! is not installed: node packages/telescope-cli/src/archives/jwst/toolchain.mts install'); });
+    .catch(() => { throw new MissingSourceInputError('Eureka! is not installed: node packages/telescope-cli/src/archives/jwst/toolchain.mts install'); });
   return { software: pipelineSoftware(await readFile(resolve(WORKSPACE, 'packages/telescope-cli/src/archives/jwst/requirements.lock'), 'utf8')) };
 }
 

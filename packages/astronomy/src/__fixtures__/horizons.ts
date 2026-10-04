@@ -2,7 +2,7 @@
 // GENERATED FILE — do not edit by hand.
 //
 // Source:    JPL Horizons vector ephemerides; every entry carries the URL that produced it
-// Generator: packages/astronomy/tools/fetch-fixtures.mts
+// Generator: packages/astronomy/cli/fetch-fixtures.mts
 //
 // Regenerate with `node cli/fetch-fixtures.mts` from packages/astronomy. The
 // generator re-downloads the source series, re-derives the truncation, and

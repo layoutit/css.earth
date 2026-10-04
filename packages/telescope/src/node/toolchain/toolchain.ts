@@ -7,6 +7,7 @@ import { dirname, resolve } from 'node:path';
 import { TOOLCHAINS, WORKSPACE } from '../paths.js';
 import { installedMarkerIssue, readToolchainPins, writeInstalledMarker, type ToolchainPins } from './marker.js';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
+import { MissingSourceInputError } from '@cssearth/core';
 
 export const ASTROQUERY_ROOT = resolve(WORKSPACE, 'output/toolchains/astroquery');
 export const ASTROQUERY_CACHE = resolve(process.env.CSS_EARTH_ASTROQUERY_CACHE ?? resolve(homedir(), '.cache/css-earth/astroquery'));
@@ -104,7 +105,7 @@ export function astroqueryToolchainSync(): AstroqueryToolchain {
   const root = findInstalledRoot(ASTROQUERY_ROOT, sharedRoot(entry), pins);
   if (!root) {
     const rootIssue = toolchainRootIssue(ASTROQUERY_ROOT);
-    throw new Error(rootIssue ?? 'The astronomy packages are not installed: node packages/telescope-cli/src/toolchains/astronomy-toolchains.mts astroquery install');
+    throw new MissingSourceInputError(rootIssue ?? 'The astronomy packages are not installed: node packages/telescope-cli/src/toolchains/astronomy-toolchains.mts astroquery install');
   }
   const bin = resolve(root, 'env/bin'), python = resolve(bin, 'python');
   return { python, version: requireString(entry.astroquery), pyvoVersion: requireString(entry.pyvo), scipyVersion: requireString(entry.scipy),

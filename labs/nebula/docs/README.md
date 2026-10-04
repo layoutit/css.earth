@@ -19,7 +19,7 @@
 - [Simulation observer](registration.md) and [image registration](image-registration.md): measured source coordinates versus approximate model placement.
 - [Processing method](../METHOD.md): reusable stages and acceptance criteria.
 - [Code/usage contract](../AGENTS.md): module organization and editing boundaries.
-- [Sources and credits](../sources/README.md): observation provenance.
+- [Sources and credits](../packages/lab/sources/README.md): observation provenance.
 
 ## Research history
 

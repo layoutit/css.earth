@@ -629,8 +629,7 @@ it, `"lighting": { "bank": "sphere", ... }`, keeping only its presentation
 fields and metadata; the parser fills the bank's fields in, and the bake copies
 the bank's files into the body's scene directory instead of encoding them, so
 the body's prepared output, inventory and published files are what encoding
-would give. `prepare-lighting-bank.mts --check`, run by
-[its test](../packages/bake/src/raster/lighting-bank-bake.test.ts), bakes each bank afresh
+would give. [`prepare-lighting-bank.mts --check`](../packages/bake/cli/prepare-lighting-bank.mts) bakes each bank afresh
 and compares it with the tracked files byte for byte, so the copy is never stale.
 A body whose lighting differs (Neptune, Uranus, the HD 110067 planets) keeps its
 inline block and its own encode. The `sphere` bank's law is authored: a 0.35
@@ -846,7 +845,7 @@ This setting does not change runtime texture selection or add a renderer feature
 After updating the changed recipe and content, use the shared preparer:
 
 ```sh
-pnpm build:tools
+pnpm build:preparation
 node site/build/prepare/refresh-photographs.ts moon surface
 node site/build/prepare/refresh-photographs.ts europa normal enhanced
 node site/build/prepare/refresh-photographs.ts io normal enhanced

@@ -2,13 +2,13 @@ import { type PreparedTree, type PreparedWrite } from '@cssearth/objects';
 
 import type { Page } from 'playwright';
 
-import type { PresentationSource, DepthSurface } from './prepared-depth-partitions.ts';
+import type { PresentationSource, PreparedDepthPartitionSurface } from './prepared-depth-partitions.ts';
 type MinimalPresentation = {id: string; tree: PreparedTree; variants: {writes: readonly PreparedWrite[]}[]};
 
 /** Prove that moving a source leaf to a projected carrier preserves its CSS
  * cascade, including every selected dataset and coarse visibility state.
  * Namespace or ancestor-sensitive styles that cannot survive keep native depth. */
-export async function verifyDepthStyles(page: Page, source: PresentationSource, compiled: PresentationSource, surface: DepthSurface | null) {
+export async function verifyDepthStyles(page: Page, source: PresentationSource, compiled: PresentationSource, surface: PreparedDepthPartitionSurface | null) {
   if (!compiled.depthPartitions) return true;
   if (!surface) throw new TypeError('Compiled depth requires its surface.');
   const chain = [];

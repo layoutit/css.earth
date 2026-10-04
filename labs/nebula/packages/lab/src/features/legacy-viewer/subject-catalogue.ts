@@ -1,6 +1,9 @@
 import records from '../../state/subjects.json';
 import { readLabWorkflow } from '../../state/lab-workflows.ts';
 import sourceCatalog from '../../adapters/sources/nebula-catalogue.ts';
+import { catalogueSourceUrl } from '../../resources/source-catalogue-paths.ts';
+import { resolveLabModelPath } from '../../resources/model-paths.ts';
+declare const __NEBULA_SOURCE_CATALOGUE_URL__: string;
 import { relativePath } from './overlay-catalogue';
 import { isResultName } from '../result-name.ts';
 declare const __NEBULA_REPO_ROOT__: string;
@@ -41,7 +44,7 @@ export interface LabSubjectRecord {
     reconstructionReferenceImageId?: string; starAlignmentReference?: { path: string }; referenceFramingRadiusUnits?: number };
 }
 const subjectRecords: readonly LabSubjectRecord[] = records;
-export const localFile = (path: string) => `/@fs${__NEBULA_REPO_ROOT__.replace(/\/$/, '')}/${path}`;
+export const localFile = (path: string) => `/@fs${__NEBULA_REPO_ROOT__.replace(/\/$/, '')}/${resolveLabModelPath(path)}`;
 const recipes = import.meta.glob('../../../../../../../src/objects/*/source/recipe.json', { eager: true, import: 'default' }) as
   Record<string, { source: { publisherUrl: string; credit: string }; geometry: { supportRadiusKpc: number } }>;
 function prepareSubjectRecord(record: LabSubjectRecord) {
@@ -108,7 +111,7 @@ function prepareSubjectRecord(record: LabSubjectRecord) {
     throw new TypeError(`Lab subject ${record.id} needs a reconstruction publisher URL and source credit.`);
   const declared = sourceCatalog.subjects.find(item => item.subjectId === (record.sourceSubjectId ?? record.id))?.sources;
   const sourceImages = declared?.map(source => ({ id: source.id, name: source.name,
-    sourceUrl: localFile(`${sourceCatalog.pathBase}/${source.path}`), sourcePageUrl: source.sourcePageUrl, credit: source.credit }))
+    sourceUrl: catalogueSourceUrl(__NEBULA_SOURCE_CATALOGUE_URL__, sourceCatalog.pathBase, source.path), sourcePageUrl: source.sourcePageUrl, credit: source.credit }))
     ?? (imagePath ? [{ id: `${record.id}-source`, name: `${record.name} · source`, sourceUrl, sourcePageUrl, credit }] : []);
   for (const comparison of record.comparisonImages ?? []) {
     sourceImages.push({ id: comparison.id, name: comparison.name, sourceUrl: localFile(comparison.imagePath),

@@ -77,9 +77,11 @@ const FOLLOWED_WORKSPACE_ENTRIES: Readonly<Record<string, string>> = {
 /** The CSS renderer runtime was relative modules under `src/renderers/css/` before it became `@cssearth/renderer`, and an
  * operation that renders or validates prepared data ran them as its own code. Its built entries map to the sources its
  * tsup configuration names (`@cssearth/renderer/navigation` → `src/navigation/index.ts`); its source subpaths name the file. */
+/** Declared renderer build metadata input, checked by the preparation architecture rule. */
+export const RENDERER_BUILD_CONFIG_PATH = 'packages/renderer/tsup.config.ts';
 let rendererEntries: Promise<Readonly<Record<string, string>>> | undefined;
 /** Read once, when a bundle first reaches the renderer, so a change to the renderer's entry list touches only those. */
-const loadRendererEntries = () => rendererEntries ??= import(pathToFileURL(resolve(WORKSPACE, 'packages/renderer/tsup.config.ts')).href)
+const loadRendererEntries = () => rendererEntries ??= import(pathToFileURL(resolve(WORKSPACE, RENDERER_BUILD_CONFIG_PATH)).href)
   .then((config: { default: { entry: Record<string, string> } }) => Object.fromEntries(Object.entries(config.default.entry)
     .map(([name, source]) => [name, `src/${source.slice(source.lastIndexOf('/src/') + '/src/'.length)}`])));
 async function rendererSource(specifier: string): Promise<string | undefined> {
