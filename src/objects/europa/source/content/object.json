@@ -106,88 +106,6 @@
         "noData": true
       },
       {
-        "id": "elevation",
-        "label": "Elevation",
-        "thumbnail": "europa-dataset-elevation.webp",
-        "surface": "europa-elevation@2x.webp",
-        "poles": "europa-poles-elevation@2x.webp",
-        "falseColor": true,
-        "source": {
-          "id": "usgs-agenor-controlled-dtm",
-          "path": "../manifest.json",
-          "url": "https://stac.astrogeology.usgs.gov/docs/data/jupiter/europa/europa_controlled_usgs_dtms/"
-        },
-        "facts": [
-          {
-            "id": "quantity",
-            "label": "Quantity",
-            "value": "Local stereo height · m"
-          },
-          {
-            "id": "datum",
-            "label": "Datum",
-            "value": "Independent relative stereo solution"
-          },
-          {
-            "id": "extent",
-            "label": "Region",
-            "value": "134.63–149.01°E ·42.12–45.03°S"
-          },
-          {
-            "id": "resolution",
-            "label": "Effective detail",
-            "value": "About 3km; 614 m reprojected grid"
-          },
-          {
-            "id": "precision",
-            "label": "Source precision",
-            "value": "Nominal 52 m; approximately 100 m empirical estimate, not a pointwise error bound"
-          }
-        ],
-        "legend": {
-          "kind": "scale",
-          "title": "Agenor local height (m)",
-          "labels": [
-            "−700",
-            "−200",
-            "300"
-          ],
-          "meta": "m",
-          "sourceUrl": "https://stac.astrogeology.usgs.gov/docs/data/jupiter/europa/europa_controlled_usgs_dtms/",
-          "recipe": {
-            "palette": [
-              [
-                37,
-                76,
-                137
-              ],
-              [
-                108,
-                156,
-                172
-              ],
-              [
-                211,
-                200,
-                143
-              ],
-              [
-                155,
-                79,
-                50
-              ]
-            ],
-            "labels": [
-              "−700",
-              "−200",
-              "300"
-            ]
-          }
-        },
-        "notes": "Agenor Linea only, near 142°E and 44°S. Colors encode the released local stereo heights in meters; their relative datum is not a global reference level. Effective detail is about 3 km. Fixed northwest cartographic relief shows slopes; it is not part of the numeric scale. Gray grid preserves the DTM’s finite/no-data footprint. The archive’s duplicated, cubic-resampled quality products are excluded; colors imply no quality class or pointwise accuracy.",
-        "noData": true
-      },
-      {
         "id": "geology",
         "label": "Geology",
         "thumbnail": "europa-dataset-geology.webp",
@@ -500,12 +418,6 @@
       "role": "surface",
       "description": "Voyager/Galileo global mosaic",
       "href": "https://astrogeology.usgs.gov/search/map/europa_voyager_galileo_ssi_global_mosaic_500m"
-    },
-    {
-      "label": "USGS stereo terrain",
-      "role": "surface",
-      "description": "Controlled Europa DTMs, source precision and control documentation",
-      "href": "https://stac.astrogeology.usgs.gov/docs/data/jupiter/europa/europa_controlled_usgs_dtms/"
     }
   ],
   "provenance": {

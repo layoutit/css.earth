@@ -2,7 +2,7 @@
  * rule the default camera uses (`prepareDefaultCameraAngles`): the design tilt, turned to face the centre of the data. Where
  * the data lies comes from the minimap step, which records each dataset's coverage direction before its lossy encoding. A dataset
  * whose recipe authors a focus keeps it: a focus chooses one region of scattered data and the zoom it needs (Europa's
- * Agenor terrain model), which coverage alone cannot. */
+ * False color sequences), which coverage alone cannot. */
 import { preparedControlPitch, SURFACE_FLY_TO } from '@cssearth/engine';
 import { isRecord } from '@cssearth/core';
 import { readFile } from 'node:fs/promises';
