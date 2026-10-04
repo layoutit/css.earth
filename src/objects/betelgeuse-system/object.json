@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "betelgeuse-system",
+  "parent": "milky-way",
+  "type": "system",
+  "generator": "site/build/prepare/system-packages.mts",
+  "properties": {
+    "system": {
+      "host": "betelgeuse"
+    },
+    "catalog": {
+      "name": "Betelgeuse system",
+      "systemName": "Betelgeuse system",
+      "classification": "star-system",
+      "color": "#ffc876",
+      "distanceAu": 34652487.4,
+      "description": "Red supergiant in Orion, resolved by the VLT interferometer."
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        108273570124095360,
+        5139556753316323000,
+        668312118652173700
+      ],
+      "presentationToReference": [
+        0.020888978655048133,
+        0.7447970999782391,
+        0.6669639648697326,
+        0.9914353648671089,
+        0.07058892846092199,
+        -0.10987775238674023,
+        0.1289169029319736,
+        -0.6635468958881081,
+        0.736943653948987
+      ],
+      "orbitUpReference": [
+        -0.7447970999782391,
+        -0.07058892846092199,
+        0.6635468958881081
+      ],
+      "metersPerUnit": 1714563870.967742,
+      "bodyRadiusM": 531514800000
+    }
+  }
+}

@@ -10,10 +10,12 @@ export interface PlanetarySystemMembers { readonly id: string; readonly memberId
 
 /** Each body's host in the object tree: the host of the system the body, with any system of its own, is inside (`inside`
  * in its world row, packages/objects/src/prepared-data/world-context.ts). A moon's is its planet, a planet's its star, a
- * bound companion's the star it is bound to. A body inside no system has none. */
+ * bound companion's the star it is bound to. A body inside no system has none, with one exception: a body drawn from its
+ * record alone has no package to name its system, so until its star has one the tree puts it where its star is, and its
+ * orbit says whose system it starts (Siwarha, around a Betelgeuse that had no system, 2026-10-03). */
 export function planetarySystemParents(plan: PlanetarySystemPlan): ReadonlyMap<string, string> {
   return new Map(plan.bodies.flatMap(body => {
-    const host = body.inside === undefined ? null : systemHostId(body.inside);
+    const host = (body.inside === undefined ? null : systemHostId(body.inside)) ?? (body.unpackaged && body.orbit ? body.orbit.centerBodyId : null);
     return host === null || host === body.id ? [] : [[body.id, host] as const];
   }));
 }

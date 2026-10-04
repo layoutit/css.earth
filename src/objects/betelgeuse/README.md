@@ -26,7 +26,7 @@ Betelgeuse is the first body here outside the Solar System and the first whose s
 | Inclination | 98 ± 5 degrees | the same paper, Table 4 |
 | Where it was seen | 52.32 ± 0.18 mas at position angle 117.12 ± 0.60 degrees, 6 December 2024 | Montargès et al. (2026, [A&A 711, L12](https://doi.org/10.1051/0004-6361/202661023)), VLT/SPHERE, 6.1 sigma |
 
-The orbit is a circle, as the radial-velocity fit assumes. Its direction on the sky is set by where SPHERE saw the companion, a quarter of a period after the 2023 transit; the astrometric fit of MacLeod et al. gives 60 ± 6 degrees, which does not pass through that position and is not used. The telescope-images picture in the sidebar is the signal-to-noise map ESO published with the detection (`Betelgeuse_B_PACO_2024-12-06_CntHa.fits`, collection [BETELGEUSE-B](https://archive.eso.org/scienceportal/home?data_collection=BETELGEUSE-B)), drawn pixel for pixel by [fits-gallery-image.ts](../../../packages/bake/src/objects/charts/fits-gallery-image.ts).
+The orbit is a circle, as the radial-velocity fit assumes. Its direction on the sky is set by where SPHERE saw the companion, a quarter of a period after the 2023 transit; the astrometric fit of MacLeod et al. gives 60 ± 6 degrees, which does not pass through that position and is not used. ESO publishes the detection's signal-to-noise map in its collection [BETELGEUSE-B](https://archive.eso.org/scienceportal/home?data_collection=BETELGEUSE-B) (`Betelgeuse_B_PACO_2024-12-06_CntHa.fits`); it is not shown here.
 
 The [navigation marker](source/preparation/navigation.json) is a photosphere crop of the February 2020 reconstruction with a circular alpha edge. It omits off-limb emission.
 
@@ -36,7 +36,6 @@ The [navigation marker](source/preparation/navigation.json) is a photosphere cro
 - [`reconstruction-comparison.png`](source/reference/reconstruction-comparison.png) places the published image beside three SQUEEZE reconstructions; their peak-to-median contrast inside the disc is 1.30, 1.44 and 1.52.
 - Each image is cast out to 88 degrees from the disc centre and covers 48.5 percent of the sphere; a whole hemisphere is 50. A point near the limb takes the image's value at its own place on the sky ([`footprint.test.mts`](../../../packages/bake/src/objects/layers/terrestrial/surface-observations/footprint.test.mts)).
 - The recorded orbit puts Siwarha 46.1 mas from the star at position angle 113.6 degrees on the night SPHERE found it at 52.32 mas and 117.12 degrees: 6 mas inside, within what the transit time's uncertainty of about 128 days allows. It crosses the disc at the 2023 transit and passes behind the star half a period later ([`hostedOrbits.binaries.test.ts`](../../../packages/astronomy/src/hostedOrbits.binaries.test.ts)).
-- The detection map peaks at 6.11 at pixel (59, 65), 46 to 50 mas east-southeast of the centre of its footprint depending on the centre's pixel.
 - [`rendered-default-view.png`](source/reference/rendered-default-view.png) shows the default view of September 2026, before the image reached the limb: in Chrome the rendered disc correlated 0.83 with the reconstruction as seen on the sky against −0.28 with its mirror image.
 
 ## Known problems

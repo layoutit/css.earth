@@ -15,12 +15,8 @@ interface Props {
   thumbnailObjectId?: string;
 }
 const { objectId, datasets, page, route = `/${objectId}/`, thumbnailObjectId = objectId } = Astro.props;
-// A dataset that shows a companion cloud over another dataset's plates (the dust around a star, drawn on the star's own
-// image) is pictured by the cloud: the borrowed surface's thumbnail made every such row of one body look alike.
 const previewUrl = (dataset: NonNullable<ShellProps['datasets']>['controls'][number]) =>
-  sidebarThumbnail(thumbnailObjectId, dataset.id)?.url2x
-    ?? (dataset.volume && dataset.volume.surface !== dataset.id ? sidebarThumbnail(dataset.volume.objectId, dataset.volume.datasetId)?.url2x : undefined)
-    ?? dataset.thumbnailUrl;
+  sidebarThumbnail(thumbnailObjectId, dataset.id)?.url2x ?? dataset.thumbnailUrl;
 // A dataset that names a companion cloud keeps the plates of another dataset, so the body on screen is drawn in that
 // one's scale. Its legend is published beside the cloud's own, or the reader is left with a body nothing explains.
 const borrowedLegend = (dataset: NonNullable<ShellProps['datasets']>['controls'][number]) => {

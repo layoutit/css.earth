@@ -51,7 +51,7 @@
       "id": "sphere-zimpol",
       "subject": "VLT/SPHERE/ZIMPOL images (ESO Phase 3 collection BETELGEUSE-B, December 2024)",
       "status": "excluded",
-      "finding": "The public V-band polarimetric product resolves the disc at about 14 pixels of 3.6 mas with a 16 mas beam: three resolution elements. Not a surface. The deep H-alpha products of the same collection are the companion search, with the star subtracted; their detection map is kept as a sidebar picture (see companion-siwarha).",
+      "finding": "The public V-band polarimetric product resolves the disc at about 14 pixels of 3.6 mas with a 16 mas beam: three resolution elements. The deep H-alpha products in the same collection are differential-imaging companion searches with the star subtracted. Not a surface.",
       "evidence": [
         "https://archive.eso.org/scienceportal/home?data_collection=BETELGEUSE-B"
       ],
@@ -126,11 +126,10 @@
       "id": "companion-siwarha",
       "subject": "Siwarha (Alpha Orionis B), the companion: orbit, detection and nature",
       "status": "included",
-      "finding": "Drawn as a point on its orbit, an astronomy record with no package: no paper measures its size or temperature. Period, orbit size, transit time and circular shape are the radial-velocity fit of MacLeod et al. (2025); the inclination is their astrometric fit. The orbit's direction on the sky is the position angle at which VLT/SPHERE detected the companion on 6 December 2024 (Montarges et al. 2026: 52.32 +/- 0.18 mas, 117.12 +/- 0.60 degrees, 6.1 sigma), a quarter of a period after the 2023 transit; MacLeod et al.'s astrometric node of 60 +/- 6 degrees does not pass through it and is not used. The recorded orbit puts the companion 46.1 mas from the star at 113.6 degrees that night. Its mass is disputed (0.60 +/- 0.14 solar masses at least from the radial velocities; 2.6 to 3.1 as a coeval star; under about 1.5 from the far ultraviolet; or reflected light at a bow shock), so the minimum mass is recorded and no sphere is drawn. ESO's Phase 3 collection BETELGEUSE-B publishes the detection's signal-to-noise map, which is shown in the sidebar as a picture because one point of light cannot be laid onto a surface. The IAU adopted the name on 22 September 2025.",
+      "finding": "Drawn as a point on its orbit, an astronomy record with no package: no paper measures its size or temperature. Period, orbit size, transit time and circular shape are the radial-velocity fit of MacLeod et al. (2025); the inclination is their astrometric fit. The orbit's direction on the sky is the position angle at which VLT/SPHERE detected the companion on 6 December 2024 (Montarges et al. 2026: 52.32 +/- 0.18 mas, 117.12 +/- 0.60 degrees, 6.1 sigma), a quarter of a period after the 2023 transit; MacLeod et al.'s astrometric node of 60 +/- 6 degrees does not pass through it and is not used. The recorded orbit puts the companion 46.1 mas from the star at 113.6 degrees that night. Its mass is disputed (0.60 +/- 0.14 solar masses at least from the radial velocities; 2.6 to 3.1 as a coeval star; under about 1.5 from the far ultraviolet; or reflected light at a bow shock), so the minimum mass is recorded and no sphere is drawn. ESO's Phase 3 collection BETELGEUSE-B publishes the detection's signal-to-noise map (Betelgeuse_B_PACO_2024-12-06_CntHa.fits, peak 6.11); it is not shown. The IAU adopted the name on 22 September 2025.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/packages/astronomy/data/bodies/siwarha.json",
         "https://github.com/layoutit/css.earth/blob/main/packages/astronomy/src/hostedOrbits.binaries.test.ts",
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/betelgeuse/source/companion/gallery.json",
         "https://doi.org/10.1051/0004-6361/202661023",
         "https://arxiv.org/abs/2409.11332",
         "https://arxiv.org/abs/2507.15749",

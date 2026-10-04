@@ -16,10 +16,5 @@
     "qualification": "A sphere at the published radius. The photosphere of a red supergiant is not a solid surface and its limb is not sharp; the sphere is the reference surface the interferometric image is cast onto, not a measured shape."
   },
   "surfaceGravityLogg": -0.08,
-  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/betelgeuse.json: -0.079",
-  "companionSeparationMas": 52.32,
-  "companionPositionAngleDegrees": 117.12,
-  "companionSource": "Montargès et al. (2026, A&A 711, L12; https://doi.org/10.1051/0004-6361/202661023): the candidate companion detected at 6.1 sigma on 6 December 2024 in the SPHERE-ZIMPOL CntHa filter, 52.32 +/- 0.18 mas from Betelgeuse at position angle 117.12 +/- 0.60 degrees, at (8.24 +/- 1.04) x 10^-4 of the star’s brightness in that filter. Howell et al. (2025, ApJ 988, L47; https://arxiv.org/abs/2507.15749) saw it three days later at 52 +/- 2 mas and 115 +/- 5 degrees, at 1.5 sigma, and proposed the name; the IAU Working Group on Star Names adopted Siwarha for Alpha Orionis B on 22 September 2025 (https://exopla.net/star-names/modern-iau-star-names/). The paper calls it a candidate: that it is bound to Betelgeuse awaits a second epoch.",
-  "companionOrbitalPeriodDays": 2109.2,
-  "companionOrbitalPeriodSource": "MacLeod et al. (2025, ApJ 978, 50; https://arxiv.org/abs/2409.11332), Table 1: 2109.2 (+9.2/-9.1) d, from radial velocities measured between 1896 and 2024."
+  "surfaceGravitySource": "log g from the mass and radius in packages/astronomy/data/bodies/betelgeuse.json: -0.079"
 }

@@ -1,7 +1,7 @@
 {
   "schema": "cssearth-object@2",
   "id": "betelgeuse",
-  "parent": "milky-way",
+  "parent": "betelgeuse-system",
   "type": "layered-body",
   "properties": {
     "preparation": {
@@ -10,7 +10,6 @@
       "steps": [
         "verify-sources",
         "assets",
-        "charts",
         "panel-content",
         "datasets",
         "starfield",
@@ -82,10 +81,6 @@
         {
           "id": "solar-system",
           "path": "source/presentation/solar-system.json"
-        },
-        {
-          "id": "charts",
-          "path": "source/content/charts.json"
         },
         {
           "id": "rotation",
