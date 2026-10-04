@@ -123,12 +123,13 @@ export async function fetchGaiaRow(archive: Archive, sourceId: string) {
 
 /** One row of a VizieR table, for a star Gaia cannot see (spec `position`): the whole row as VizieR serves it, archived beside the
  * body, and the J2000 position it gives. A star a paper lists by its detector pixel is held the same way: `tsv` is then the header of
- * the archived exposure's extension, and `image` says where in the file it lies (images/image-pixel.mts). */
+ * the archived exposure's extension, and `image` says where in the file it lies (images/image-pixel.mts). Coordinates a paper prints in a
+ * table no archive holds are a row too, with nothing kept: the paper is cited by its DOI, as every other printed value is (`paper`). */
 export interface CatalogueRow { readonly catalogue: string; readonly tsv: string; readonly form: Readonly<Record<string, string>>; readonly cells: Readonly<Record<string, string>>; readonly ra: number; readonly dec: number; readonly words: string;
   /** The columns the position was read from: the table's RAJ2000 and DEJ2000 unless the spec names others. */
   readonly columns: { readonly ra: string; readonly dec: string };
   /** Where the row is held, and how a manifest records it (rowArchive). */
-  readonly archive: 'VizieR' | 'SIMBAD' | 'MAST'; readonly image?: { readonly url: string; readonly file: string; readonly extension: string; readonly range: SourceRange };
+  readonly archive: 'VizieR' | 'SIMBAD' | 'MAST' | 'DOI'; readonly paper?: { readonly url: string }; readonly image?: { readonly url: string; readonly file: string; readonly extension: string; readonly range: SourceRange };
   /** The Julian year of the position, 2000 unless the spec's `motion` says otherwise, and the row's proper motion (mas/yr) when it names the columns. */
   readonly epoch: number; readonly pmra?: number; readonly pmdec?: number }
 /** Where a catalogue-placed star's archived row is kept, beside where a Gaia row would be; an exposure's header is kept beside it. */
@@ -160,6 +161,12 @@ export const CATALOGUE_ROW_REPLACEMENTS = [{ pattern: '^#.*\\n', flags: 'gm', re
 const stableVizier = (text: string) => CATALOGUE_ROW_REPLACEMENTS.reduce((out, { pattern, flags, replacement }) => out.replace(new RegExp(pattern, `${flags}u`), replacement), text);
 export async function fetchCatalogueRow(archive: Archive, position: CataloguePosition, where: string): Promise<CatalogueRow> {
   if (position.archive === 'mast') return (await import('./images/image-pixel.mts')).fetchImagePixel(archive, position, where);
+  if (position.archive === 'paper') {
+    const columns = position.columns!, ra = sexagesimal(position.row[columns.ra]!) * 15, dec = sexagesimal(position.row[columns.dec]!);
+    if (!(ra >= 0 && ra < 360 && Math.abs(dec) <= 90)) throw new RangeError(`${where}: ${columns.ra} ${position.row[columns.ra]}, ${columns.dec} ${position.row[columns.dec]} is not a place on the sky.`);
+    return { catalogue: position.catalogue, tsv: '', form: {}, cells: position.row, ra, dec, columns, archive: 'DOI', paper: { url: position.url }, epoch: 2000,
+      words: `${position.catalogue} row ${Object.entries(position.row).map(([column, cell]) => `${column} = ${cell}`).join(', ')}` };
+  }
   // The response's dated comment lines and blank lines are dropped so the archived bytes are stable (CATALOGUE_ROW_REPLACEMENTS).
   const form = catalogueRowForm(position), tsv = stableVizier(await archive.text(catalogueRowUrl(position), form));
   return { ...parseCatalogueRow(tsv, position, where), tsv, form };
@@ -307,14 +314,21 @@ async function readPublication(archive: Archive, url: string): Promise<Publicati
   return { id, title: `${hostname}${pathname}`, creators: [], year: '', url, page: true };
 }
 
+/** A sexagesimal angle as printed ("12:21:55.068", "-00:01:22.600") in its own unit; the sign is the text's, so -00 stays negative. */
+export function sexagesimal(text: string) {
+  const [whole, minutes, seconds] = text.replace(/^[+-]/u, '').split(':').map(Number);
+  return (text.startsWith('-') ? -1 : 1) * (whole! + minutes! / 60 + seconds! / 3600);
+}
 /** How a manifest records the archive a catalogue-placed star's row came from: where it is asked, its credit and terms, the page a
  * reader opens, the request in words, the file it is kept in and the operation that fetches it again. SIMBAD's credit and terms are
  * CDS's own (https://cds.unistra.fr/help/acknowledgement/); MAST's are STScI's (https://archive.stsci.edu/publishing/data-use). */
 export interface RowArchive { readonly origin: string; readonly credit: string; readonly license: string; readonly licenseEvidence: readonly string[]; readonly page: string; readonly acquisition: string;
   /** The kept file, the manifest input's name, what the star was placed by, who keeps the archive, and the bytes kept when they are a range of the file. */
-  readonly path: string; readonly input: string; readonly kept: 'row' | 'pixel'; readonly keeper: string; readonly redistribution: string; readonly range?: SourceRange; readonly operation: Readonly<Record<string, unknown>> }
+  readonly path?: string; readonly input?: string; readonly kept: 'row' | 'pixel'; readonly keeper: string; readonly redistribution: string; readonly range?: SourceRange; readonly operation?: Readonly<Record<string, unknown>> }
 /** `selected` is the cells that picked the row: a restore must find them in the answer. */
-export function rowArchive(row: Pick<CatalogueRow, 'archive' | 'catalogue' | 'words' | 'cells' | 'columns' | 'form' | 'image'>, selected: readonly string[] = []): RowArchive {
+export function rowArchive(row: Pick<CatalogueRow, 'archive' | 'catalogue' | 'words' | 'cells' | 'columns' | 'form' | 'image' | 'paper'>, selected: readonly string[] = []): RowArchive {
+  // A paper's printed coordinates: nothing is kept or fetched again, the paper is cited.
+  if (row.paper) return { origin: row.paper.url, credit: '', license: '', licenseEvidence: [], page: row.paper.url, acquisition: '', kept: 'row', keeper: 'as the paper prints them', redistribution: '' };
   if (row.image) {
     const { url, file, extension, range } = row.image;
     return { origin: url, credit: `${file} (Mikulski Archive for Space Telescopes, STScI)`, license: 'Public NASA mission data (MAST)', licenseEvidence: ['https://archive.stsci.edu/publishing/data-use'],

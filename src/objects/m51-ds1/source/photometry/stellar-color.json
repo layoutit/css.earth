@@ -1,0 +1,16 @@
+{
+  "schema": "cssearth-stellar-photometric-color@1",
+  "objectId": "m51-ds1",
+  "spectrum": "planck",
+  "temperature": {
+    "published": {
+      "kelvin": 4300,
+      "lowerKelvin": 3800,
+      "upperKelvin": 4800,
+      "citation": "Jencson et al. (2022), ApJ 930, 81, section 4.4.1: the model that best fits the star's light before its 2019 dimming has T_eff = 4300 K; the models that fit well span 3700 to 4700 K: 4300 +/- 500 K, https://doi.org/10.3847/1538-4357/ac626c"
+    },
+    "note": "No archive holds a spectrum of this star (stis-ngsl: no HD number in SIMBAD; gaia-xp: the star is placed by a catalogue row, so no Gaia DR3 source is read for it; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number), so the color is a Planck spectrum at its published temperature."
+  },
+  "whitePoint": "sRGB D65",
+  "normalization": "brightest linear sRGB channel = 1"
+}
