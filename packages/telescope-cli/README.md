@@ -118,4 +118,4 @@ Renderer runtime exceptions are file-scoped in [the architecture rule](../../.gi
 `src/sphere/sphere-html.mts` and `src/sphere/sphere-oracle.mts` publish retained scenes.
 The package keeps its renderer dependency for these four consumers. F16 validation uses objects contracts.
 
-Sphere export imports the built `@cssearth/telescope-cli/sphere/lane` entry. The CLI loads the checkout's generated solar geometry and passes it to `exportSphere`; the lane compiles only during package build.
+Sphere export imports the built `@cssearth/telescope-cli/sphere/lane` entry from `dist`. The CLI loads the checkout's generated solar geometry and passes it to `exportSphere`; the lane compiles only during package build. After editing `src/sphere/`, rebuild with `pnpm --filter @cssearth/telescope-cli build` before exporting again.

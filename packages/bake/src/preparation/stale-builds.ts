@@ -29,7 +29,7 @@ const BUILD_METADATA: readonly (Partial<BuildRule> & Pick<BuildRule, 'name'> & {
   { name: '@cssearth/bake', output: 'packages/bake/dist/volume.d.ts', inputs: 'packages/bake/dist/metafile-esm.json', base: 'packages/bake' },
   { name: '@cssearth/renderer', inputs: 'packages/renderer/dist/metafile-esm.json', base: 'packages/renderer' },
   { name: '@cssearth/volume-viewer', sources: ['packages/volume-viewer/src', 'packages/bake/src'], output: 'packages/volume-viewer/dist/scene/compiler-viewer.js' },
-  { name: '@cssearth/telescope-cli', output: 'packages/telescope-cli/dist/telescope.mjs', bundledWorkspace: true },
+  { name: '@cssearth/telescope-cli', sources: ['packages/telescope-cli/src', 'packages/telescope-cli/src/sphere'], output: 'packages/telescope-cli/dist/telescope.mjs', bundledWorkspace: true },
 ];
 
 export function buildRules(root: string): readonly BuildRule[] {

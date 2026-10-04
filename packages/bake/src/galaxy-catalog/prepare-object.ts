@@ -5,7 +5,7 @@ import { prepareGalaxyCatalog } from './prepare.ts';
 import { parseGalaxyCsv, parseMembershipTable, readArchiveMember, readAuthorMetadata } from './source.ts';
 import { readInventory, updateInventory } from '@cssearth/objects/node';
 import { mkdir, readFile, rename, writeFile } from 'node:fs/promises';
-import { dirname, resolve } from 'node:path';
+import { basename, dirname, resolve } from 'node:path';
 import { spatialPublicationId } from '@cssearth/catalog';
 import { OBJECT_SCHEMA, parsePreparedGalaxyCatalog } from '@cssearth/objects';
 import { requireRecord as record } from '@cssearth/core';
@@ -17,9 +17,13 @@ import type { GalaxySource } from './types.ts';
  * object's own `prepared/`, its inventory and descriptor. */
 export async function prepareGalaxyCatalogObject(options: { objectDirectory: string; outputDirectory?: string }) {
   const objectDirectory = resolve(options.objectDirectory), sourceDirectory = resolve(objectDirectory, 'source');
-  const existing = record(JSON.parse(await readFile(resolve(objectDirectory, 'object.json'), 'utf8')), 'object.json');
+  const existing = record(JSON.parse(await readFile(resolve(objectDirectory, 'object.json'), 'utf8').catch((error: unknown) => {
+    if (error instanceof Error && 'code' in error && error.code === 'ENOENT') throw new TypeError(`${objectDirectory}/object.json: authored descriptor id is required.`);
+    throw error;
+  })), 'object.json');
   if (typeof existing.id !== 'string' || !/^[a-z][a-z0-9-]*$/u.test(existing.id)) throw new TypeError(`${objectDirectory}/object.json: authored descriptor id is required.`);
   const objectId = existing.id;
+  if (objectId !== basename(objectDirectory)) throw new TypeError(`${objectDirectory}/object.json: authored descriptor id ${JSON.stringify(objectId)} must match directory ${JSON.stringify(basename(objectDirectory))}.`);
   const recipeBytes = await readFile(resolve(sourceDirectory, 'catalogue.json'));
   const recipe = parseGalaxyRecipe(JSON.parse(recipeBytes.toString('utf8')) as unknown);
   const presentation = record(JSON.parse(await readFile(resolve(sourceDirectory, 'presentation.json'), 'utf8')) as unknown, 'Galaxy presentation');

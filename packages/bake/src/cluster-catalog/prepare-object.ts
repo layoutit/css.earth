@@ -1,5 +1,5 @@
 import { mkdir, readFile, rename, writeFile } from 'node:fs/promises';
-import { dirname, resolve } from 'node:path';
+import { basename, dirname, resolve } from 'node:path';
 import { gunzipSync } from 'node:zlib';
 import { parsePreparedClusterCatalog } from '@cssearth/objects';
 import { requireRecord as record } from '@cssearth/core';
@@ -29,9 +29,13 @@ export function readClusterGroupDistances(csv: string, path: string): Map<string
  * group distances, written with its inventory into the object's own `prepared/`. */
 export async function prepareClusterCatalogObject(options: { objectDirectory: string }) {
   const objectDirectory = resolve(options.objectDirectory), sourceDirectory = resolve(objectDirectory, 'source');
-  const descriptor = record(JSON.parse(await readFile(resolve(objectDirectory, 'object.json'), 'utf8')), 'object.json');
+  const descriptor = record(JSON.parse(await readFile(resolve(objectDirectory, 'object.json'), 'utf8').catch((error: unknown) => {
+    if (error instanceof Error && 'code' in error && error.code === 'ENOENT') throw new TypeError(`${objectDirectory}/object.json: authored descriptor id is required.`);
+    throw error;
+  })), 'object.json');
   if (typeof descriptor.id !== 'string' || !/^[a-z][a-z0-9-]*$/u.test(descriptor.id)) throw new TypeError(`${objectDirectory}/object.json: authored descriptor id is required.`);
   const objectId = descriptor.id;
+  if (objectId !== basename(objectDirectory)) throw new TypeError(`${objectDirectory}/object.json: authored descriptor id ${JSON.stringify(objectId)} must match directory ${JSON.stringify(basename(objectDirectory))}.`);
   const recipe = record(JSON.parse(await readFile(resolve(sourceDirectory, 'catalogue.json'), 'utf8')), 'Cluster recipe') as unknown as ClusterRecipe;
   const pinned = async (id: string) => {
     const source = recipe.sources.find(candidate => candidate.id === id);

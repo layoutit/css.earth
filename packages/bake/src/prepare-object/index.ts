@@ -87,41 +87,88 @@ export const PREPARATION_STEPS: readonly PreparationStep[] = Object.freeze<Prepa
 
 export type Progress = (line: string) => void;
 
-/** Each command owns a process group: an abort stops descendants as well as the direct child. Parent signals and IPC
- * disconnection preserve the telescope wrapper's cleanup even though these groups are detached from its group. */
+const terminationSignals = ['SIGINT', 'SIGTERM', 'SIGHUP', 'SIGQUIT'] as const;
+const activeCommands = new Set<() => void>();
+let parentSignal: NodeJS.Signals | undefined;
+const forwardParentSignal = (received: NodeJS.Signals) => {
+  parentSignal ??= received;
+  for (const stop of activeCommands) stop();
+};
+const parentSignalHandlers = terminationSignals.map(received => [received, () => forwardParentSignal(received)] as const);
+const stopOnDisconnect = () => { for (const stop of activeCommands) stop(); };
+
+/** Each command owns a background process group, including inherited-stdio commands: terminal stdin reads can receive
+ * SIGTTIN, so preparation steps must not prompt interactively. Abort, parent signals and IPC disconnection give the whole
+ * group SIGTERM for cleanup, then SIGKILL after two seconds. Process exit alone cannot wait and kills immediately. */
 async function runPreparationCommand(command: string, args: readonly string[], root: string, signal: AbortSignal | undefined, capture: boolean): Promise<string | null> {
-  if (signal?.aborted) return 'Preparation aborted.';
+  if (signal?.aborted || parentSignal) return 'Preparation aborted.';
   return new Promise(done => {
     const child = spawn(command, args, { cwd: root, detached: true, stdio: capture ? ['ignore', 'pipe', 'pipe'] : 'inherit' });
-    let stderr = '', error: Error | undefined;
-    let groupTerminated = false;
-    const killGroup = () => {
-      if (child.pid === undefined || groupTerminated) return;
-      try { process.kill(-child.pid, 'SIGKILL'); }
-      catch (failure) { if (!(failure instanceof Error && 'code' in failure && failure.code === 'ESRCH')) throw failure; }
-      // A sent SIGKILL (or an already-gone group) completes ownership: exit/close must not signal that id again.
-      groupTerminated = true;
+    let stderr = '', error: Error | undefined, closed = false, status: number | null = null;
+    let stopping = false, groupFinished = false, interrupted = false, settled = false;
+    let timer: ReturnType<typeof setTimeout> | undefined;
+    let poll: ReturnType<typeof setInterval> | undefined;
+    const recordError = (failure: unknown) => { error ??= failure instanceof Error ? failure : new Error(String(failure)); };
+    const signalGroup = (sent: NodeJS.Signals | 0): boolean => {
+      if (child.pid === undefined || groupFinished) return false;
+      try { process.kill(-child.pid, sent); return true; }
+      catch (failure) {
+        if (!(failure instanceof Error && 'code' in failure && failure.code === 'ESRCH')) recordError(failure);
+        return false;
+      }
     };
-    const forward = (received: NodeJS.Signals) => { killGroup(); cleanup(); process.kill(process.pid, received); };
     const cleanup = () => {
-      signal?.removeEventListener('abort', killGroup);
-      process.off('SIGINT', forward); process.off('SIGTERM', forward); process.off('exit', killGroup); process.off('disconnect', killGroup);
+      if (timer) clearTimeout(timer);
+      if (poll) clearInterval(poll);
+      signal?.removeEventListener('abort', abort);
+      process.off('exit', exit);
+      activeCommands.delete(abort);
+      if (!activeCommands.size) {
+        for (const [received, handler] of parentSignalHandlers) process.off(received, handler);
+        process.off('disconnect', stopOnDisconnect);
+      }
     };
-    signal?.addEventListener('abort', killGroup, { once: true });
-    process.on('SIGINT', forward); process.on('SIGTERM', forward); process.on('exit', killGroup);
-    // answerParent also handles disconnect by terminating its own group; stop the detached steps first.
-    process.prependListener('disconnect', killGroup);
+    const finish = (cannotTerminate = false) => {
+      if (settled || (!closed && !cannotTerminate) || !groupFinished) return;
+      if (cannotTerminate) {
+        child.stdout?.destroy(); child.stderr?.destroy(); child.unref();
+        error = new Error(`Could not terminate preparation process group ${child.pid}: ${error?.message ?? 'signaling failed'}`);
+      }
+      settled = true; cleanup();
+      done(status === 0 && !interrupted && !signal?.aborted && !error ? null : `${[command, ...args].join(' ')}\n${error?.message ?? stderr.split('\n').filter(line => line.trim() && !line.startsWith('    at')).slice(-6).join('\n')}`);
+      if (!activeCommands.size && parentSignal) {
+        const received = parentSignal; parentSignal = undefined;
+        try { process.kill(process.pid, received); } catch (failure) { recordError(failure); }
+      }
+    };
+    const finishGroup = () => { groupFinished = true; if (timer) clearTimeout(timer); if (poll) clearInterval(poll); finish(); };
+    const stop = () => {
+      if (stopping || groupFinished) return;
+      stopping = true;
+      if (!signalGroup('SIGTERM') && !error) { finishGroup(); return; }
+      timer = setTimeout(() => {
+        const killed = signalGroup('SIGKILL');
+        if (!killed && error) { groupFinished = true; finish(true); }
+        else finishGroup();
+      }, 2000);
+      poll = setInterval(() => { if (!signalGroup(0) && !error) finishGroup(); }, 25);
+    };
+    const abort = () => { interrupted = true; stop(); };
+    const exit = () => { signalGroup('SIGKILL'); };
+    if (!activeCommands.size) {
+      for (const [received, handler] of parentSignalHandlers) process.on(received, handler);
+      process.prependListener('disconnect', stopOnDisconnect);
+    }
+    activeCommands.add(abort);
+    signal?.addEventListener('abort', abort, { once: true });
+    process.on('exit', exit);
     child.stdout?.resume();
     child.stderr?.on('data', (chunk: Buffer) => { stderr = (stderr + chunk.toString()).slice(-64 * 1024 * 1024); });
-    child.once('error', failure => { error = failure; });
-    // Kill descendants at exit, before waiting for inherited output pipes to close.
-    child.once('exit', killGroup);
-    child.once('close', status => {
-      // A command may have left descendants behind: they still belong to this step, including after an abort.
-      killGroup(); cleanup();
-      done(status === 0 && !signal?.aborted && !error ? null : `${[command, ...args].join(' ')}\n${error?.message ?? stderr.split('\n').filter(line => line.trim() && !line.startsWith('    at')).slice(-6).join('\n')}`);
-    });
-    if (signal?.aborted) killGroup();
+    child.once('error', recordError);
+    // Descendants may keep output pipes open after their leader exits.
+    child.once('exit', stop);
+    child.once('close', code => { closed = true; status = code; stop(); finish(); });
+    if (signal?.aborted || parentSignal) abort();
   });
 }
 
@@ -162,7 +209,7 @@ export async function prepareObjects(ids: readonly string[], { from, to, reuseIm
     progress(`\n[${step.name}] ${step.purpose}${commands.length ? '' : ' (nothing to do)'} (${elapsed()})`);
     for (const [command, ...args] of commands) {
       const failure = await runPreparationCommand(command!, args, root, signal, false);
-      if (failure) { console.error(`\nStep "${step.name}" failed running: ${[command, ...args].join(' ')}\nFix it, then resume: ${resume(step)}`); return false; }
+      if (failure) { console.error(`\nStep "${step.name}" failed running: ${failure}\nFix it, then resume: ${resume(step)}`); return false; }
     }
   }
   progress(`\n${ids.length === 1 ? ids[0] : `${ids.length} objects`}: prepared in ${elapsed()}. Check in the browser, run the unit tests, review git status before committing, and publish: node packages/bake/cli/publish-runtime-assets.mts ${[...ids, ...(end >= index('pins', 0) ? ['sun'] : [])].map(id => `--object=${id}`).join(' ')}`);

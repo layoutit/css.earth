@@ -173,3 +173,23 @@ test('the bootstrap root is the real checkout whatever the working directory or 
     assert.equal(projectRoot(pathToFileURL(join(link, 'packages/bake/src/preparation/stale-builds.ts')).href), repository);
   } finally { await rm(scratch, { recursive: true, force: true }); }
 });
+
+
+test('the built sphere lane source explicitly invalidates the telescope CLI build', async () => {
+  const rule = BUILD_RULES.find(candidate => candidate.name === '@cssearth/telescope-cli');
+  assert.ok(rule);
+  const source = 'packages/telescope-cli/src/sphere';
+  assert.ok(rule.sources.includes(source));
+  const root = await mkdtemp(join(tmpdir(), 'stale-sphere-'));
+  try {
+    await mkdir(join(root, source), { recursive: true });
+    await mkdir(join(root, rule.output, '..'), { recursive: true });
+    await writeFile(join(root, source, 'sphere-lane.mts'), 'export {}');
+    await writeFile(join(root, rule.output), '');
+    await utimes(join(root, source, 'sphere-lane.mts'), 1000, 1000);
+    await utimes(join(root, rule.output), 2000, 2000);
+    assert.deepEqual(await staleBuilds(root, [rule]), []);
+    await utimes(join(root, source, 'sphere-lane.mts'), 3000, 3000);
+    assert.deepEqual((await staleBuilds(root, [rule])).map(build => build.command), ['pnpm --filter @cssearth/telescope-cli build']);
+  } finally { await rm(root, { recursive: true, force: true }); }
+});

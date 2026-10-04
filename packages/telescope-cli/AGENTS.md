@@ -70,3 +70,5 @@ See the [shared source-format ownership contract](../objects/AGENTS.md) for WISE
 
 `src/implementation-dependencies.mts` declares `RENDERER_BUILD_CONFIG_PATH` for its entry-source closure.
 The architecture rule names this metadata reader separately from runtime consumers; its guard rejects an unlisted reader.
+
+Sphere export runs the built `@cssearth/telescope-cli/sphere/lane` entry from `dist`. After editing `src/sphere/`, rebuild with `pnpm --filter @cssearth/telescope-cli build` before exporting again.

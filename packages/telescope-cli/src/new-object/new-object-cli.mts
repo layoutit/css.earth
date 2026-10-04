@@ -26,6 +26,7 @@ import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
  * (`@cssearth/bake/objects/color`, star-catalogue-color.ts). The package starts with the shape dataset and stays off the map until a surface image is added.
  * Prose the scaffold cannot know (reader text, README, credits, ledger) is written with the marker TODO(new-object), which
  * src/objects/object-package-consistency.test.mts refuses. Then run: node packages/bake/cli/prepare-object.mts <id> */
+import { realpathSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { scaffoldStar, TODO } from './scaffold.mts';
@@ -33,7 +34,12 @@ import { loadSolarEpoch } from './solar-epoch.mts';
 
 export { scaffoldStar, scaffoldStarFiles, solarRadii, starStylesheet, TODO, type StarScaffold } from './scaffold.mts';
 
-if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
+/** The standalone entry writes generated records in its checkout, even from another cwd. */
+export function newObjectPath(...parts: string[]): string {
+  return resolve(checkoutProjectRoot(import.meta.url), ...parts);
+}
+
+if (process.argv[1] && import.meta.url === pathToFileURL(realpathSync(process.argv[1])).href) {
   const args = process.argv.slice(2), option = (name: string) => { const index = args.indexOf(`--${name}`); return index >= 0 ? args[index + 1] : undefined; };
   const specPath = option('spec'), handoff = option('hosted');
   if (args.some(argument => /^--from-[a-z0-9]+$/u.test(argument))) {
@@ -102,7 +108,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
     const { readFile } = await import('node:fs/promises'), drawnHere: string[] = [];
     const DISC_AUTHORS = ['packages/telescope-cli/src/source-authoring/context-markers.mts', 'packages/telescope-cli/authoring/stellar-spectra/author.mts'];
     for (const id of changed) {
-      const manifest = JSON.parse(await readFile(resolve('src/objects', id, 'source/manifest.json'), 'utf8')) as { inputs?: { path?: string; generator?: string }[]; generatedIntermediates?: { path?: string; generator?: string }[] };
+      const manifest = JSON.parse(await readFile(newObjectPath('src/objects', id, 'source/manifest.json'), 'utf8')) as { inputs?: { path?: string; generator?: string }[]; generatedIntermediates?: { path?: string; generator?: string }[] };
       const marker = [...manifest.generatedIntermediates ?? [], ...manifest.inputs ?? []].find(entry => entry.path === 'presentation/context.png');
       if (marker?.generator && DISC_AUTHORS.includes(marker.generator)) drawnHere.push(id);
     }
@@ -117,8 +123,8 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
     // Regenerate bodies the tool made from their stored specs: `--refresh ID... [--check | --bake]` (new-object/refresh.mts).
     const { mkdir, writeFile } = await import('node:fs/promises'), { refreshSpec } = await import('./refresh.mts');
     const { formatNewObject, runNewObject } = await import('./generate.mts'), { prepareObjects } = await import('@cssearth/bake/prepare-object');
-    const ids = args.filter(argument => !argument.startsWith('--')), path = resolve('output/new-object/refresh.json');
-    await mkdir(resolve('output/new-object'), { recursive: true }); await writeFile(path, `${JSON.stringify(await refreshSpec(checkoutProjectRoot(import.meta.url), ids), null, 2)}\n`);
+    const ids = args.filter(argument => !argument.startsWith('--')), path = newObjectPath('output/new-object/refresh.json');
+    await mkdir(newObjectPath('output/new-object'), { recursive: true }); await writeFile(path, `${JSON.stringify(await refreshSpec(checkoutProjectRoot(import.meta.url), ids), null, 2)}\n`);
     const results = await runNewObject(path, { progress: line => process.stderr.write(`${line}\n`), refresh: true, solarEpoch: await loadSolarEpoch(checkoutProjectRoot(import.meta.url)) });
     process.stdout.write(formatNewObject(results));
     const good = results.filter(result => !result.failed).map(result => result.id);

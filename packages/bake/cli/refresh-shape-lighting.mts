@@ -10,7 +10,7 @@ import { readPreparedObjects } from '@cssearth/objects/node';
 import { publishShapeLighting, stageShapeLighting, validateStage } from '@cssearth/bake/refresh-shape-lighting';
 
 const projectRoot = checkoutProjectRoot(import.meta.url);
-const SCENE_OBJECTS = readPreparedObjects(resolve(import.meta.dirname, '../../..')).sceneObjects;
+const SCENE_OBJECTS = readPreparedObjects(projectRoot).sceneObjects;
 const json = async (path: string) => requireRecord(JSON.parse(await readFile(path, 'utf8')));
 
 const args = process.argv.slice(2), mode = args[0];
@@ -21,7 +21,7 @@ for (const id of requested) {
   if (!/^[a-z][a-z0-9-]*$/.test(id)) throw new Error('Invalid object id.');
   if (args.includes('--all')) {
     let recipe;
-    try { recipe = await json(resolve('src/objects', id, 'source/preparation/terrestrial.json')); }
+    try { recipe = await json(resolve(projectRoot, 'src/objects', id, 'source/preparation/terrestrial.json')); }
     catch (error) { if (error instanceof Error && 'code' in error && error.code === 'ENOENT') continue; throw error; }
     if (!requireArray(requireRecord(recipe.raster).shapeViews ?? []).length) continue;
   }

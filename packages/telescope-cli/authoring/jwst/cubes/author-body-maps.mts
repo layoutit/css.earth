@@ -37,7 +37,7 @@ import { bodyMapFits, type BodyMap } from '@cssearth/bake/objects/layers/observa
 import { bindMapResolution, bodyMapProductRecord, formatProductRecord } from '@cssearth/telescope-cli/body-map-publication';
 import type { ProductInput, ProductSoftware } from '@cssearth/objects';
 
-const REPOSITORY = resolve(checkoutProjectRoot(import.meta.url), '..');
+const REPOSITORY = checkoutProjectRoot(import.meta.url);
 export const JWST_HORIZONS_CENTER = '500@-170';
 const DEGREE = Math.PI / 180;
 
