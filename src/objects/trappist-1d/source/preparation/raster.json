@@ -43,6 +43,54 @@
       "science": {
         "kind": "equirectangular-illustration"
       }
+    },
+    {
+      "id": "climate-model",
+      "output": "trappist-1d-surface-{id}{suffix}.webp",
+      "thumbnail": "trappist-1d-dataset-{id}.webp",
+      "source": "science/turbet-2023/diagfi_T1d_1barN2_10barH2O.head.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "climate-model",
+        "label": "Climate model",
+        "format": "netcdf-lonlat-field",
+        "path": "science/turbet-2023/diagfi_T1d_1barN2_10barH2O.head.dat",
+        "field": "science/turbet-2023/diagfi_T1d_1barN2_10barH2O.OLR-Time299.dat",
+        "variable": "OLR",
+        "coordinates": {
+          "longitude": "longitude",
+          "latitude": "latitude"
+        },
+        "select": {
+          "Time": 299
+        },
+        "sourceUnits": "W m-2",
+        "longitudeZeroAt": 0,
+        "coordinateToleranceDegrees": 0.005,
+        "consumer": "climate-model-simulation",
+        "sampling": "bilinear",
+        "displaySampling": "nearest",
+        "outputLongitudeOrigin": 0,
+        "units": "W/m²",
+        "minimum": 200,
+        "maximum": 600,
+        "colors": [
+          "#000004",
+          "#57106e",
+          "#bc3754",
+          "#f98e09",
+          "#fcffa4"
+        ],
+        "labels": [
+          "200",
+          "400",
+          "600"
+        ],
+        "description": "Simulated outgoing thermal radiation from the Generic PCM model, a published simulation and not a measurement.",
+        "title": "Climate model · Generic PCM simulation",
+        "sourceUrl": "https://arxiv.org/abs/2308.15110"
+      }
     }
   ],
   "lighting": {

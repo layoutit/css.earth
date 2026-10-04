@@ -1,0 +1,49 @@
+{
+  "schema": "cssearth-published-phase-curve@1",
+  "source": "May et al. (2022), AJ 163, 256, 'A New Analysis of Eight Spitzer Phase Curves and Hot Jupiter Population Trends: Qatar-1b, Qatar-2b, WASP-52b, WASP-34b, and WASP-140b' (doi:10.3847/1538-3881/ac6261; arXiv:2203.15059). Spitzer IRAC 4.5 um phase curve of WASP-34b, 3-8 November 2020, label wa034bo21. Values read from the authors' LaTeX source: the table of fit results (table:Results), column wa034bo21. The best fit uses the symmetric phase function (table:bestfits), a first-order sinusoid, so the printed amplitude, (max - min)/2, and hotspot offset, positive eastward, are the whole phase variation. The planet's eclipse is grazing; the paper states that all its values are corrected for it. The observation table labels this visit wa034bo11.",
+  "wavelengthMicrons": 4.5,
+  "radiusRatio": {
+    "value": 0.12007,
+    "cell": "0.12007 +/- 0.0002",
+    "where": "table:Results, wa034bo21, Transit Depth [R_p/R_S]"
+  },
+  "eclipseDepth": {
+    "value": 0.000851,
+    "cell": "851 +/- 95 ppm, F_p/F_S at mid-eclipse (\"Day\"); the fitted eclipse depth row prints 850 +/- 95 ppm",
+    "where": "table:Results, wa034bo21, F_p/F_S Day"
+  },
+  "model": {
+    "kind": "amplitude-offset",
+    "equation": "A symmetric (single cosine) phase function, printed as its amplitude (max - min)/2 and its hotspot offset.",
+    "semiAmplitude": {
+      "value": 0.000446,
+      "cell": "446 +/- 78 ppm",
+      "where": "table:Results, wa034bo21, Amplitude"
+    },
+    "offsetDegreesEast": {
+      "value": 34.7,
+      "cell": "34.7 +/- 4.7 degrees",
+      "where": "table:Results, wa034bo21, Hotspot Offset"
+    }
+  },
+  "reported": {
+    "daysideK": {
+      "value": 1185,
+      "cell": "1185 +/- 47 K",
+      "where": "table:Results, wa034bo21, Temperature Day"
+    },
+    "nightsideK": {
+      "value": 726,
+      "cell": "726 +/- 119 K",
+      "where": "table:Results, wa034bo21, Temperature Night"
+    },
+    "offsetDegrees": {
+      "value": 34.7,
+      "cell": "34.7 +/- 4.7 degrees",
+      "where": "table:Results, wa034bo21, Hotspot Offset"
+    }
+  },
+  "notStated": [
+    "The table comment gives \"Day\" and \"Night\" as phases 0.0/1.0 and 0.5 in that order; the Day flux equals the curve at mid-eclipse (phase 0.5) for every column, and is read so here."
+  ]
+}

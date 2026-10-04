@@ -59,3 +59,23 @@ TypeScript AST, relative to the test's repository location. Schema references ou
 objects are limited to imports/re-exports, named publishers, and exact retained
 routing or scientific checks. Distinctive parser diagnostics also reject renamed
 copies. Generic record/text checks are not format-specific diagnostics.
+
+## Known limits in second readers
+
+- **KNOWN LIMIT:** `packages/telescope-cli/authoring/circumstellar/author.mts` reads
+  reconstruction identity, retired fields and grid compatibility before its scientific bake.
+  The complete objects reader additionally requires scientific fields that this historical
+  admission does not validate; replacing it directly would reject previously accepted inputs.
+  A shared, explicitly named authoring subset is needed before that reader can replace it.
+- **KNOWN LIMIT:** `packages/bake/src/delivery/runtime-assets.ts` scans volume-presentation
+  identity while assembling metadata restoration. Its historical scanner accepts incomplete
+  records and skips unrelated schemas; the complete source parser requires restored dataset
+  provenance. A shared identity-only admission is needed to preserve that scanner contract.
+- The lab delivery adapter delegates the authored envelope to bake's objects reader; its
+  remaining generic object checks inspect symmetry output descriptors, not a second delivery parser.
+- Compiler publications use objects' explicitly named ownership readers for depth and
+  photometric MGE inputs. Publication admission accepts identity/evidence-only snapshots;
+  full scientific recipe parsers retain their stricter contracts. The physical-evidence ledger
+  remains a **KNOWN LIMIT**: receipt admission checks subject identity and three arrays,
+  whereas sampled-prior qualification additionally checks source attribution and addressed evidence;
+  applying that policy to every depth receipt would change its historical admission.

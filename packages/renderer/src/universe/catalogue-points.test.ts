@@ -3,11 +3,14 @@ import assert from 'node:assert/strict';
 import { isDeepStrictEqual } from 'node:util';
 import { parseHTML } from 'linkedom';
 import { mountCataloguePoints } from './catalogue-points.js';
-import { readCataloguePointBank, catalogueCells, cataloguePointSpread } from '@cssearth/objects';
+import { readCataloguePointBank } from '@cssearth/objects';
 import { holdStartup, releaseStartup } from '../rendering/startup-gate.js';
 
-/** What the bake adds to a published bank (catalogue-banks.ts): its spread and its cells, per level. */
-const baked = (points: readonly (readonly number[])[], levels?: readonly number[]) => ({ spread: cataloguePointSpread(points), cells: catalogueCells(points, levels) });
+/** Prepared fixture: one declared box per level, with no bake algorithm in the runtime owner. */
+const baked = (points: readonly (readonly number[])[], levels: readonly number[] = [points.length]) => ({
+  spread: { normal: [0, 0, 1], across: 20, along: 20 },
+  cells: { boxes: levels.map(() => [-20, -20, -20, 20, 20, 20]), of: levels.flatMap((count, cell) => Array<number>(count).fill(cell)) },
+});
 
 const frame = { referenceFrame: 'sun-icrf', epochJdTt: 2451545, originM: [0, 0, 0], localToReferenceXyzw: [0, 0, 0, 1],
   metersPerUnit: 1, boundsUnits: { min: [-20, -20, -20], max: [20, 20, 20] } };
@@ -36,11 +39,8 @@ test('a stacked bank adds its inner levels\' dots as the view narrows, only once
 
 test('seen from outside, a bank draws only as many dots as its projected shape holds', async () => {
   const { screenPointCount } = await import('./catalogue-points.js');
-  // A flat disc of radius 10 in the x-y plane.
-  const disc = Array.from({ length: 2000 }, (_, i) => [10 * Math.sqrt((i + .5) / 2000) * Math.cos(i * 2.4), 10 * Math.sqrt((i + .5) / 2000) * Math.sin(i * 2.4), 0]);
-  const spread = cataloguePointSpread(disc);
-  assert.ok(Math.abs(Math.abs(spread.normal[2]) - (1)) < 10 ** -6 / 2, `${Math.abs(spread.normal[2])} is not close to ${1}`);
-  assert.ok(spread.across > 9); assert.ok(Math.abs(spread.along - (0)) < 10 ** -6 / 2, `${spread.along} is not close to ${0}`);
+  // Prepared flat-disc spread; principal-axis preparation is tested by bake.
+  const spread = { normal: [0, 0, 1] as const, across: 9.5, along: 0 };
   assert.equal(screenPointCount(spread, [0, 0, 5], 1000), Infinity, 'within its reach there is no limit');
   const faceOn = screenPointCount(spread, [0, 0, 1000], 1000), tilted = screenPointCount(spread, [0, 800, 600], 1000), far = screenPointCount(spread, [0, 0, 4000], 1000);
   assert.equal(faceOn, Math.floor(Math.PI * (1000 * spread.across / 1000) ** 2 / 64));

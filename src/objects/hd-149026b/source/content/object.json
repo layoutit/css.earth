@@ -49,7 +49,7 @@
   },
   "datasets": {
     "titleKey": "datasets",
-    "defaultDataset": "thermal",
+    "defaultDataset": "temperature",
     "controls": [
       {
         "id": "thermal",
@@ -65,6 +65,66 @@
         },
         "falseColor": false,
         "notes": "The color of HD 149026 b's heat: a black body at the dayside brightness temperature measured in secondary eclipse at 8 µm (Spitzer Space Telescope satellite Infrared Array Camera (IRAC)). Its star lights the day side; the night side is not measured. Reflected starlight is not included."
+      },
+      {
+        "id": "temperature",
+        "label": "Spitzer",
+        "qualification": "Published fit · Zhang et al. (2018) · a Spitzer IRAC 4.5 µm phase curve of 8 April 2011 · longitude only",
+        "thumbnail": "hd-149026b-dataset-temperature.webp",
+        "surface": "hd-149026b-surface-temperature@2x.webp",
+        "poles": "hd-149026b-poles-temperature@2x.webp",
+        "source": {
+          "id": "hd-149026b-temperature-phase-curve",
+          "path": "../manifest.json",
+          "url": "https://arxiv.org/abs/1710.07642"
+        },
+        "falseColor": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Brightness temperature",
+          "labels": [
+            "700",
+            "1250",
+            "1800"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                13,
+                8,
+                135
+              ],
+              [
+                126,
+                3,
+                168
+              ],
+              [
+                204,
+                71,
+                120
+              ],
+              [
+                248,
+                149,
+                64
+              ],
+              [
+                240,
+                249,
+                33
+              ]
+            ],
+            "labels": [
+              "700",
+              "1250",
+              "1800"
+            ]
+          },
+          "meta": "K",
+          "sourceUrl": "https://arxiv.org/abs/1710.07642"
+        },
+        "notes": "Brightness temperature at 4.5 µm of HD 149026 b from Zhang et al. (2018)'s published fit to a Spitzer IRAC 4.5 µm phase curve of 8 April 2011. Their Fourier series becomes a map of longitude through the Cowan & Agol (2008) inversion, so there is no north-south detail and every latitude is drawn alike. The hottest longitude is 24° east of noon. The false color runs from 700 to 1,800 K. With shadows on, the star's light darkens the night half."
       }
     ]
   },

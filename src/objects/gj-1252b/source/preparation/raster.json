@@ -33,6 +33,52 @@
           "source": "the color dataset of gj-1252 (src/objects/gj-1252/source/photometry/stellar-color.json)"
         }
       }
+    },
+    {
+      "id": "temperature",
+      "output": "gj-1252b-surface-{id}{suffix}.webp",
+      "thumbnail": "gj-1252b-dataset-{id}.webp",
+      "source": "science/crossfield-2022/dayside-4.5um.json",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "temperature",
+        "label": "Rock model",
+        "format": "bare-rock-eclipse",
+        "path": "science/crossfield-2022/dayside-4.5um.json",
+        "sampling": "bilinear",
+        "units": "K",
+        "planet": "gj-1252b",
+        "host": "gj-1252",
+        "band": {
+          "encoding": "svo-filter",
+          "path": "science/svo/Spitzer_IRAC.I2.xml"
+        },
+        "star": {
+          "encoding": "svo-model-spectrum",
+          "path": "science/bt-settl-cifist/bt-settl-cifist-3500-5.0-0.0.xml"
+        },
+        "consumer": "gj-1252b-bare-rock-model",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "minimum": 50,
+        "maximum": 1800,
+        "colors": [
+          "#0d0887",
+          "#7e03a8",
+          "#cc4778",
+          "#f89540",
+          "#f0f921"
+        ],
+        "labels": [
+          "≤ 50",
+          "925",
+          "1800"
+        ],
+        "description": "A model, not a map: the temperature of a bare rock with no atmosphere to carry heat, set by the 4.5 µm eclipse depth Crossfield et al. (2022) measured: about 1,590 K under the star, nothing at night. Only the dayside brightness is measured.",
+        "title": "Bare-rock model · from Crossfield et al. (2022)'s eclipse depth",
+        "sourceUrl": "https://arxiv.org/abs/2208.09479"
+      }
     }
   ],
   "lighting": {

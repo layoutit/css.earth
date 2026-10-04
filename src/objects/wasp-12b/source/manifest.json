@@ -357,7 +357,8 @@
         "inputs": [
           "wasp-12b-observational-measurements",
           "wasp-12b-preparation-raster",
-          "wasp-12b-thermal-color"
+          "wasp-12b-thermal-color",
+          "wasp-12b-bell-2019-phase-curve-2010"
         ]
       },
       "generator": "packages/telescope-cli/src/source-authoring/context-markers.mts",

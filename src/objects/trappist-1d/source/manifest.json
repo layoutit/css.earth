@@ -108,6 +108,76 @@
           }
         ]
       }
+    },
+    {
+      "id": "trappist-1d-climate-model-simulation",
+      "path": "science/turbet-2023/diagfi_T1d_1barN2_10barH2O.OLR-Time299.dat",
+      "range": {
+        "offset": 3494157704,
+        "length": 25480
+      },
+      "origin": "https://zenodo.org/records/5627945/files/diagfi_T1d_1barN2_10barH2O.nc?download=1",
+      "productId": "diagfi_T1d_1barN2_10barH2O.nc",
+      "version": "10.5281/zenodo.5627945",
+      "sourceUrl": "https://zenodo.org/records/5627945",
+      "credit": "Turbet et al. (2023); Generic PCM simulation",
+      "displayCredit": "Turbet et al. (2023) · Generic PCM",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/5627945",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "title": "Outgoing thermal radiation (OLR) of TRAPPIST-1d in the Generic PCM simulation: Data associated with the Turbet et al. 2023 manuscript (GCM simulations of TRAPPIST-1b, c and d)",
+      "acquisition": "One range request to Zenodo record 10.5281/zenodo.5627945: the bytes of OLR at Time index 299 in diagfi_T1d_1barN2_10barH2O.nc, where the file's header puts them. The 3.5 GB file is never fetched whole. A model output, not an observation.",
+      "redistribution": "Exact bytes of the release; CC BY 4.0 with attribution.",
+      "consumers": [
+        "climate-model-simulation"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-trappist-1d-climate-model-simulation",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "trappist-1d-climate-model-simulation-grid",
+      "path": "science/turbet-2023/diagfi_T1d_1barN2_10barH2O.head.dat",
+      "range": {
+        "offset": 0,
+        "length": 6024
+      },
+      "origin": "https://zenodo.org/records/5627945/files/diagfi_T1d_1barN2_10barH2O.nc?download=1",
+      "productId": "diagfi_T1d_1barN2_10barH2O.nc",
+      "version": "10.5281/zenodo.5627945",
+      "sourceUrl": "https://zenodo.org/records/5627945",
+      "credit": "Turbet et al. (2023); Generic PCM simulation",
+      "displayCredit": "Turbet et al. (2023) · Generic PCM",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/5627945",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "title": "Header and coordinate variables of diagfi_T1d_1barN2_10barH2O.nc, the Generic PCM simulation of TRAPPIST-1d",
+      "acquisition": "One range request to Zenodo record 10.5281/zenodo.5627945: the first 6,024 bytes of diagfi_T1d_1barN2_10barH2O.nc, its header and its coordinate variables.",
+      "redistribution": "Exact bytes of the release; CC BY 4.0 with attribution.",
+      "consumers": [
+        "climate-model-simulation"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-trappist-1d-climate-model-simulation-grid",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
@@ -124,7 +194,8 @@
         "generator": "packages/telescope-cli/src/source-authoring/context-markers.mts",
         "inputs": [
           "trappist-1d-observational-measurements",
-          "trappist-1d-preparation-raster"
+          "trappist-1d-preparation-raster",
+          "trappist-1d-climate-model-simulation"
         ]
       },
       "generator": "packages/telescope-cli/src/source-authoring/context-markers.mts",

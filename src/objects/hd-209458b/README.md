@@ -40,6 +40,8 @@ The orbit is drawn circular. The ascending node at celestial north is a display 
 
 [`published-phase-curve-map.test.mts`](../../../packages/bake/src/objects/raster/eclipse-map/published-phase-curve-map.test.mts) integrates the map over the visible hemisphere and gets the Fourier curve back to 1e-9. It holds the dataset to the table above.
 
+![HD 209458 b and WASP-12 b as their pages open: before, on the thermal color, and after, on the measured heat map, 4 October 2026](evidence/2026-10-04/default.jpg)
+
 ## Known problems
 
 - **Longitude only.** A phase curve cannot see north and south, so the map is a band that varies only with longitude. Real hot Jupiters are cooler toward the poles.

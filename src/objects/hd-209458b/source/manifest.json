@@ -166,7 +166,8 @@
         "inputs": [
           "hd-209458b-observational-measurements",
           "hd-209458b-preparation-raster",
-          "hd-209458b-thermal-color"
+          "hd-209458b-thermal-color",
+          "hd-209458b-zellem-2014-phase-curve"
         ]
       },
       "generator": "packages/telescope-cli/src/source-authoring/context-markers.mts",

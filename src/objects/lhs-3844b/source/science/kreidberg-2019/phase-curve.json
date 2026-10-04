@@ -1,0 +1,41 @@
+{
+  "schema": "cssearth-published-phase-curve@1",
+  "source": "Kreidberg et al. (2019), Nature 573, 87, 'Absence of a thick atmosphere on the terrestrial exoplanet LHS 3844b' (doi:10.1038/s41586-019-1497-4; arXiv:1908.06834). Spitzer IRAC channel 2 (4.5 um) phase curve, 100 hours between UT 2019 February 4 and 8, program 14204. Values read from the authors' LaTeX source, main text: eclipse depth, peak-to-trough amplitude of the phase variation, longitude of peak brightness and radius ratio of their adopted fit, a first-degree spherical-harmonic temperature map. The paper prints the fit as those three numbers, which are drawn here as one sinusoid; its Methods say a sinusoid differs from the spherical-harmonic model only through the Planck function. The paper does not state which way its longitude runs; east-positive is taken, and the value is one sigma from zero.",
+  "wavelengthMicrons": 4.5,
+  "radiusRatio": {
+    "value": 0.0641,
+    "cell": "0.0641 +/- 0.0003",
+    "where": "main text, R_p/R_s"
+  },
+  "eclipseDepth": {
+    "value": 0.00038,
+    "cell": "380 +/- 40 ppm",
+    "where": "main text, secondary eclipse depth"
+  },
+  "model": {
+    "kind": "amplitude-offset",
+    "equation": "f(phi) = F0 - A cos(phi - Delta phi), phi the orbital phase from transit; the text prints the peak-to-trough amplitude and the longitude of peak brightness.",
+    "semiAmplitude": {
+      "value": 0.000175,
+      "cell": "350 +/- 40 ppm peak-to-trough: half of it is the semi-amplitude, 175 ppm",
+      "where": "main text, peak-to-trough amplitude of the phase variation"
+    },
+    "offsetDegreesEast": {
+      "value": -6,
+      "cell": "-6 +/- 6 degrees, consistent with zero",
+      "where": "main text, longitude of peak brightness"
+    }
+  },
+  "reported": {
+    "daysideK": {
+      "value": 1040,
+      "cell": "1040 +/- 40 K",
+      "where": "main text, dayside brightness temperature"
+    },
+    "offsetDegrees": {
+      "value": -6,
+      "cell": "-6 +/- 6 degrees",
+      "where": "main text, longitude of peak brightness"
+    }
+  }
+}

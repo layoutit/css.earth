@@ -46,6 +46,11 @@
       "title": "Shape only",
       "detail": "Published radius",
       "summary": "A sphere at the published size. No picture of its surface exists."
+    },
+    "temperature": {
+      "title": "Bare rock from its eclipse depth",
+      "detail": "A model from one measurement",
+      "summary": "A model, not a map: a bare rock as bright at 5–12 µm as the measured day side. About 740 K under the star, dark at night."
     }
   }
 }

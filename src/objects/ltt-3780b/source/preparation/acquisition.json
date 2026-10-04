@@ -27,6 +27,24 @@
       ],
       "path": "photometry/tess/tess2026033082000-s0100-0000000036724087-0302-s_lc.fits",
       "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2026033082000-s0100-0000000036724087-0302-s_lc.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "science/svo/JWST_MIRI.F1500W.xml",
+      "url": "https://svo2.cab.inta-csic.es/theory/fps/fps.php?ID=JWST/MIRI.F1500W"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "science/bt-settl-cifist/bt-settl-cifist-3400-5.0-0.0.xml",
+      "url": "https://svo2.cab.inta-csic.es/theory/newov2/ssap.php?model=bt-settl-cifist&fid=193"
     }
   ]
 }

@@ -1,3 +1,4 @@
+import { catalogueCells, cataloguePointSpread } from '../catalogue-points.ts';
 import { existsSync } from 'node:fs';
 import { mkdir, mkdtemp, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
@@ -5,7 +6,7 @@ import { resolve } from 'node:path';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { isDeepStrictEqual } from 'node:util';
-import { MAX_CATALOGUE_POINTS, catalogueCells, cataloguePointSpread } from '@cssearth/objects';
+import { MAX_CATALOGUE_POINTS } from '@cssearth/objects';
 import { readCatalogueBank, recipePublished, writeCatalogueBank } from './catalogue-banks.ts';
 
 const bank = (points: number) => ({ schema: 'cssearth-catalogue-points@1', id: 'x', points: Array.from({ length: points }, (_, i) => [i, 0, 0]) });

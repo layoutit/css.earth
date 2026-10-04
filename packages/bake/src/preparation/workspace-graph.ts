@@ -47,8 +47,8 @@ export function workspaceExternals(packages: readonly Workspace[], owner: string
 export function hasBuild(pkg: Workspace): boolean { return typeof record(pkg.manifest.scripts ?? {}).build === 'string'; }
 export function buildOutput(pkg: Workspace): string {
   function target(value: unknown): string | undefined {
-    if (typeof value === 'string' && value.startsWith('./dist/')) return value;
-    if (value && typeof value === 'object') for (const child of Object.values(value)) { const found = target(child); if (found) return found; }
+    if (typeof value === 'string' && value.startsWith('./dist/') && /\.[cm]?js$/u.test(value)) return value;
+    if (value && typeof value === 'object') for (const child of [...['import', 'default', 'module', 'node'].map(key => Reflect.get(value, key)), ...Object.entries(value).filter(([key]) => key !== 'types').map(([, child]) => child)]) { const found = target(child); if (found) return found; }
     return undefined;
   }
   const output = target(pkg.manifest.module) ?? target(pkg.manifest.exports) ?? target(pkg.manifest.main);

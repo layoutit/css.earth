@@ -1,14 +1,13 @@
+import { readFiniteTriple, readTextAllowEmpty } from '@cssearth/core';
 import { readSampledRecipe } from '../emission/sampled-recipe.js';
 import { readCompilerBakeResult, type CompilerPin } from '../compiler/compiler-bake.js';
+
+const invalidText = (): never => { throw new Error('Invalid compact string'); };
 export const COMPACT_SAMPLED_SCHEMA = 'cssearth-compact-sampled@2';
 export interface CompactSampledColor { rgb: [number, number, number]; covered: boolean }
 const jointRecord = (v: unknown): v is Record<string, unknown> => v !== null && typeof v === 'object' && !Array.isArray(v);
 const object = (v: unknown): Record<string, unknown> => {
   if (!jointRecord(v)) throw new Error("Invalid compact record");
-  return v;
-};
-const text = (v: unknown): string => {
-  if (typeof v !== "string") throw new Error("Invalid compact string");
   return v;
 };
 const finite = (v: unknown): number => {
@@ -20,19 +19,14 @@ const array = (v: unknown): unknown[] => {
   if (!Array.isArray(v)) throw new Error("Invalid compact list");
   return v;
 };
-const triple = (v: unknown): [number, number, number] => {
-  const a = array(v).map(finite);
-  if (a.length !== 3) throw new Error("Invalid vector");
-  return [a[0]!, a[1]!, a[2]!];
-};
 const pin = (v: unknown): CompilerPin => {
   const p = object(v);
-  return { path: text(p.path) };
+  return { path: readTextAllowEmpty(p.path, '', invalidText) };
 };
 function readCompactSampledColors(v: unknown): CompactSampledColor[] {
   return array(v).map((c) => {
     const r = object(c),
-      rgb = triple(r.rgb);
+      rgb = readFiniteTriple(r.rgb, '', compactVectorFailure, true);
     if (typeof r.covered !== "boolean" || rgb.some((n) => n < 0 || n > 1))
       throw new Error("Invalid material color");
     return { rgb, covered: r.covered };
@@ -42,7 +36,7 @@ function readCompactSampledColors(v: unknown): CompactSampledColor[] {
 export function readCompactSampled(value: unknown) {
   const m = object(value);
   if (m.schema !== COMPACT_SAMPLED_SCHEMA) throw new Error("Invalid compact sampled model");
-  const recipe = readSampledRecipe(m.recipe), original = readCompilerBakeResult(m.scene), id = text(m.sourceResult);
+  const recipe = readSampledRecipe(m.recipe), original = readCompilerBakeResult(m.scene), id = readTextAllowEmpty(m.sourceResult, '', invalidText);
   if (id !== original.id) throw new TypeError('Compact source result differs from its retained scene.');
   const datasets = array(m.datasets).map(readCompactSampledDataset);
   const ids = datasets.map(dataset => dataset.id);
@@ -56,9 +50,9 @@ function readCompactSampledDataset(value: unknown) {
   const fit = f === undefined ? undefined : { atoms: array(f.atoms).map(a => {
     const r = object(a), sigmaArcsec = finite(r.sigmaArcsec);
     if (sigmaArcsec <= 0) throw new Error("Invalid atom");
-    return { centerArcsec: triple(r.centerArcsec), sigmaArcsec };
+    return { centerArcsec: readFiniteTriple(r.centerArcsec, '', compactVectorFailure, true), sigmaArcsec };
   }), coefficients: array(f.coefficients).map(finite), ejectaGain: finite(f.ejectaGain) };
-  return { id: text(l.id), label: text(l.label), credit: text(l.credit), page: text(l.page), points: pin(l.points), fit,
+  return { id: readTextAllowEmpty(l.id, '', invalidText), label: readTextAllowEmpty(l.label, '', invalidText), credit: readTextAllowEmpty(l.credit, '', invalidText), page: readTextAllowEmpty(l.page, '', invalidText), points: pin(l.points), fit,
     material: { windColors: readCompactSampledColors(material.windColors), diffuseColors: readCompactSampledColors(material.diffuseColors) } };
 }
 export function decodeCompactPointColors(bytes: Uint8Array, height: number): Float64Array {
@@ -76,4 +70,8 @@ export function encodeCompactPointColors(colors: Float64Array): Uint8Array {
   const bytes = new Uint8Array(colors.length * 8), view = new DataView(bytes.buffer);
   for (let i = 0; i < colors.length; i++) view.setFloat64(i * 8, colors[i]!, true);
   return bytes;
+}
+
+function compactVectorFailure(message: string): never {
+  throw new Error(message.endsWith('must be an array') ? 'Invalid compact list' : message.endsWith('must be finite') ? 'Invalid compact number' : 'Invalid vector');
 }

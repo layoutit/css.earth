@@ -1,5 +1,5 @@
 /** Authored density placement wire contract; transforms stay with preparation. */
-import { requireFiniteNumber as finite, requireRecord as record } from '@cssearth/core';
+import { requireFiniteTriple as triple, requireFiniteNumber as finite, requireRecord as record } from '@cssearth/core';
 import type { Vector3 } from './coordinates.ts';
 
 export const DENSITY_PLACEMENT_SCHEMA = 'cssearth-density-placement@1';
@@ -14,9 +14,4 @@ export function parseDensityPlacement(input: unknown): DensityPlacement {
   if (!(scale > 0)) throw new TypeError('Density placement scale must be positive.');
   return { schema: value.schema, scale, rotationZDegrees: finite(value.rotationZDegrees, 'density placement rotation'),
     pivotUnits: triple(value.pivotUnits, 'density placement pivot'), translationUnits: triple(value.translationUnits, 'density placement translation') };
-}
-
-function triple(value: unknown, at: string): [number, number, number] {
-  if (!Array.isArray(value) || value.length !== 3) throw new TypeError(`${at} must contain three numbers.`);
-  return [finite(value[0], at), finite(value[1], at), finite(value[2], at)];
 }

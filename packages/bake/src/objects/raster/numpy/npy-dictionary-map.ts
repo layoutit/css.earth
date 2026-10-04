@@ -1,11 +1,17 @@
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { readNpyObject, type NpyArray, type NpyValue } from './npy-pickle.ts';
+import { readNpyObject, readPickledValue, type NpyArray, type NpyValue } from './npy-pickle.ts';
 import { readTarMember } from './tar-member.ts';
-import { shape, text, array, optional } from '@cssearth/core';
+import { shape, text, number, array, optional } from '@cssearth/core';
 
 const profile = shape({ path: text, member: optional(text), sampling: text, units: text, values: array(text), latitudes: optional(array(text)), longitudes: optional(array(text)),
-  gridLayout: optional(text), visibleLongitudes: optional(shape({ times: array(text), planet: text })) });
+  gridLayout: optional(text), visibleLongitudes: optional(shape({ times: array(text), planet: text })), container: optional(text), shownLongitudes: optional(array(number)) });
+
+/** The file's value: the object a `.npy` file wraps, or, with `container: 'pickle'`, a bare pickle (`values: []` when the pickle is the array itself). */
+const rootValue = (bytes: Uint8Array, container: string | undefined): NpyValue => {
+  if (container !== undefined && container !== 'pickle') throw new TypeError(`An .npy map's container is 'pickle' or left out (got ${container}).`);
+  return container === 'pickle' ? readPickledValue(bytes) : readNpyObject(bytes);
+};
 
 /** ThERESA's range of observed longitudes (utils.vislon at commit 74a8fec): the sub-observer longitude 180 - 360 (t - t0) / P at every
  * observation time, widened by 90 degrees each way, each limb wrapped into [-180, 180) and the least and greatest taken. The planet
@@ -32,7 +38,7 @@ export const npyArrayAt = (root: NpyValue, keys: readonly string[]): NpyArray =>
     }
     value = (value as Record<string, NpyValue>)[key]!;
   }
-  if ((value as NpyArray)?.kind !== 'ndarray' || (value as NpyArray).dtype !== 'float64') throw new TypeError(`${keys.join('.')} is not a float64 array.`);
+  if ((value as NpyArray)?.kind !== 'ndarray' || (value as NpyArray).dtype !== 'float64') throw new TypeError(`${keys.join('.') || 'The pickled value'} is not a float64 array.`);
   return value as NpyArray;
 };
 
@@ -40,8 +46,15 @@ export const npyArrayAt = (root: NpyValue, keys: readonly string[]): NpyArray =>
  * latitudes, pixel-centre longitudes), as eclipse-mapping codes publish their maps. The grid must be regular, whole-sphere
  * and row-major with latitude along the first axis and longitude along the second; any other layout is refused rather than
  * guessed. */
-export function decodeNpyDictionaryMap(bytes: Uint8Array, value: unknown, visibleLongitudes?: readonly [number, number]) {
+export function decodeNpyDictionaryMap(bytes: Uint8Array, value: unknown, computed?: readonly [number, number]) {
   const recipe = profile(value);
+  // The range shown is computed from the deposit's observation times, or, when the deposit holds none, is the range of
+  // longitudes its paper states it shows (`shownLongitudes: [west, east]`), never both.
+  const stated = recipe.shownLongitudes;
+  if (stated && (recipe.visibleLongitudes || stated.length !== 2 || !(stated[0]! >= -180 && stated[0]! < stated[1]! && stated[1]! <= 180))) {
+    throw new TypeError('shownLongitudes is one [west, east] range in degrees within -180 to 180, without visibleLongitudes.');
+  }
+  const visibleLongitudes = stated ? [stated[0]!, stated[1]!] as const : computed;
   if (!['nearest', 'bilinear'].includes(recipe.sampling)) throw new TypeError('An .npy map samples nearest or bilinear.');
   // A deposit either carries its grid as arrays beside the values, or states its layout: 'pixel-centres' is the grid eclipse-mapping codes
   // such as ThERESA build (south to north and west to east from -180 degrees, values at pixel centres) when only the values are saved.
@@ -49,8 +62,8 @@ export function decodeNpyDictionaryMap(bytes: Uint8Array, value: unknown, visibl
   if (statedGrid ? recipe.gridLayout !== 'pixel-centres' : recipe.latitudes === undefined || recipe.longitudes === undefined || recipe.gridLayout !== undefined) {
     throw new TypeError('An .npy map names both its latitude and longitude arrays, or states gridLayout pixel-centres.');
   }
-  if ((recipe.visibleLongitudes === undefined) !== (visibleLongitudes === undefined)) throw new TypeError('Visible longitudes are computed from the recipe\'s observation times.');
-  const root = readNpyObject(bytes);
+  if ((recipe.visibleLongitudes === undefined) !== (computed === undefined)) throw new TypeError('Visible longitudes are computed from the recipe\'s observation times.');
+  const root = rootValue(bytes, recipe.container);
   const values = npyArrayAt(root, recipe.values);
   const [height, width] = values.shape;
   if (values.shape.length !== 2 || !height || !width || values.fortranOrder) throw new TypeError('The .npy map values must be one C-ordered two-dimensional array.');
@@ -103,7 +116,7 @@ export async function loadNpyDictionaryMap(root: string, value: unknown) {
   const { HOSTED_PLANET_IDS, hostedOrbit } = await import('@cssearth/astronomy');
   if (!(HOSTED_PLANET_IDS as readonly string[]).includes(recipe.visibleLongitudes.planet)) throw new TypeError(`Visible longitudes need a hosted planet: ${recipe.visibleLongitudes.planet}.`);
   const orbit = hostedOrbit(recipe.visibleLongitudes.planet as Parameters<typeof hostedOrbit>[0]);
-  const times = npyArrayAt(readNpyObject(bytes), recipe.visibleLongitudes.times);
+  const times = npyArrayAt(rootValue(bytes, recipe.container), recipe.visibleLongitudes.times);
   if (times.shape.length !== 1) throw new TypeError('Observation times must be one-dimensional.');
   return decodeNpyDictionaryMap(bytes, recipe, theresaVisibleLongitudes(times.data as Float64Array, orbit.transitTimeBmjdTdb, orbit.periodDays, orbit.eccentricity));
 }

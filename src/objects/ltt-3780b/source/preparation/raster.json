@@ -33,6 +33,52 @@
           "source": "the color dataset of ltt-3780 (src/objects/ltt-3780/source/photometry/stellar-color.json)"
         }
       }
+    },
+    {
+      "id": "temperature",
+      "output": "ltt-3780b-surface-{id}{suffix}.webp",
+      "thumbnail": "ltt-3780b-dataset-{id}.webp",
+      "source": "science/allen-2025/dayside-15um.json",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "temperature",
+        "label": "Rock model",
+        "format": "bare-rock-eclipse",
+        "path": "science/allen-2025/dayside-15um.json",
+        "sampling": "bilinear",
+        "units": "K",
+        "planet": "ltt-3780b",
+        "host": "ltt-3780",
+        "band": {
+          "encoding": "svo-filter",
+          "path": "science/svo/JWST_MIRI.F1500W.xml"
+        },
+        "star": {
+          "encoding": "svo-model-spectrum",
+          "path": "science/bt-settl-cifist/bt-settl-cifist-3400-5.0-0.0.xml"
+        },
+        "consumer": "ltt-3780b-bare-rock-model",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "minimum": 50,
+        "maximum": 1400,
+        "colors": [
+          "#0d0887",
+          "#7e03a8",
+          "#cc4778",
+          "#f89540",
+          "#f0f921"
+        ],
+        "labels": [
+          "≤ 50",
+          "725",
+          "1400"
+        ],
+        "description": "A model, not a map: the temperature of a bare rock with no atmosphere to carry heat, set by the 15 µm eclipse depth Allen et al. (2025) measured: about 1,287 K under the star, nothing at night. Only the dayside brightness is measured.",
+        "title": "Bare-rock model · from Allen et al. (2025)'s eclipse depth",
+        "sourceUrl": "https://arxiv.org/abs/2508.14210"
+      }
     }
   ],
   "lighting": {

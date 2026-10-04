@@ -33,6 +33,42 @@
           "source": "the color dataset of gj-1214 (src/objects/gj-1214/source/photometry/stellar-color.json)"
         }
       }
+    },
+    {
+      "id": "temperature",
+      "output": "gj-1214b-surface-{id}{suffix}.webp",
+      "thumbnail": "gj-1214b-dataset-{id}.webp",
+      "source": "science/kempton-2023/phase-curve.json",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "temperature",
+        "label": "JWST",
+        "format": "published-phase-curve-map",
+        "path": "science/kempton-2023/phase-curve.json",
+        "consumer": "temperature-phase-curve-map",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "K",
+        "minimum": 150,
+        "maximum": 650,
+        "colors": [
+          "#0d0887",
+          "#7e03a8",
+          "#cc4778",
+          "#f89540",
+          "#f0f921"
+        ],
+        "labels": [
+          "150",
+          "400",
+          "650"
+        ],
+        "description": "Brightness temperature across 5–12 µm from the paper's phase-curve fit, turned into a map of longitude. It has no north-south information.",
+        "title": "JWST · published phase-curve fit",
+        "sourceUrl": "https://arxiv.org/abs/2305.06240"
+      }
     }
   ],
   "lighting": {

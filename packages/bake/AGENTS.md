@@ -397,7 +397,7 @@ The declared-record readers intentionally have different admission contracts; co
 
 Synoptic oracle regeneration intentionally needs the original Sun/Jupiter archive FITS listed by the current manifests, and the relocated native oracles likewise need their original archive inputs. Committed fixtures establish historical comparisons, not fresh regeneration after a manifest or tool change; change this limit by restoring those inputs and recording a new native run, never by weakening the comparison.
 
-Nebula text admissions retain local wrappers where assertion versus TypeError diagnostics and blank-text acceptance differ; share admission only when those caller contracts can be preserved. Volume triple admission and shell text admission use core readers.
+Nebula text and volume triple admission use core readers with caller-owned failure callbacks to preserve assertion versus TypeError diagnostics and blank-text acceptance.
 
 Layer topics import a lower topic only through its `index.ts` (`entries.test.ts` enforces it), so the giant and layered geometry contracts take `BANDED_ELLIPSOID_SCHEMA` through the `scene` topic index rather than from the schema's leaf file. Importing the leaf directly fails the topic-order test; the accepted cost is that the scene barrel is loaded for one constant. Lifting the constant to `@cssearth/objects` (where schema ids live) is the way out if the cost ever matters.
 

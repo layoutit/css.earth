@@ -1,11 +1,12 @@
+import { isNonemptyText as text } from '@cssearth/core';
 import { readCompilerBakeResult } from '../compiler/compiler-bake.js';
 import { readEnvelopeColors, type EnvelopeColors } from '../emission/photometric-emission.js';
 import { readRetainedEmissionField } from '../emission/retained-emission.js';
+
 export const COMPACT_COMPILER_SCHEMA = 'cssearth-compact-compiler@1';
 const sameIds = (a: string[], b: string[]) => a.length === b.length && a.every((id, i) => id === b[i]);
 
 const record = (v: unknown): v is Record<string, unknown> => v !== null && typeof v === 'object' && !Array.isArray(v);
-const text = (v: unknown): v is string => typeof v === 'string' && v.length > 0;
 export interface CompactCompilerMaterial { sourceId: string; envelopeColors?: EnvelopeColors; components: { id: string; rgb: [number, number, number]; covered: boolean }[] }
 export interface CompactCompilerResource { path: string; bytes: number; width: number; height: number }
 export function readCompactCompiler(value: unknown) {

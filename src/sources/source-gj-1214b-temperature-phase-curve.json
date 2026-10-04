@@ -1,0 +1,35 @@
+{
+  "id": "source-gj-1214b-temperature-phase-curve",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "GJ 1214 b · gj 1214b temperature phase curve",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/2305.06240",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/gj-1214b/source/manifest.json",
+      "locator": "/inputs/9"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Kempton et al. (2023); a JWST MIRI 5–12 µm phase curve of 20–22 July 2022",
+      "scope": "The gj 1214b temperature phase curve input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "Factual numerical measurements; source attribution retained",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

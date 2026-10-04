@@ -1,0 +1,35 @@
+{
+  "id": "source-gj-1252b-temperature-eclipse-depth",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "GJ 1252 b · gj 1252b temperature eclipse depth",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/2208.09479",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/gj-1252b/source/manifest.json",
+      "locator": "/inputs/8"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Crossfield et al. (2022); Spitzer IRAC 4.5 µm secondary eclipses",
+      "scope": "The gj 1252b temperature eclipse depth input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "Factual numerical measurement; source attribution retained",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

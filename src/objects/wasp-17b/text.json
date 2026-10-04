@@ -46,6 +46,11 @@
       "title": "Shape only",
       "detail": "Published radius",
       "summary": "A sphere at the published size. No picture of its surface exists."
+    },
+    "temperature": {
+      "title": "JWST MIRI map",
+      "detail": "Measured temperature",
+      "summary": "Heat at 5 to 12 µm, from one eclipse on 14 March 2023. The hot spot is 19° east of noon; the far side is blank."
     }
   }
 }
