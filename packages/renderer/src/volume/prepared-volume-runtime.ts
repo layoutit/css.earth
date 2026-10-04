@@ -10,6 +10,14 @@ import { createSettlePacer, SETTLE_PACING } from '../rendering/settle-pacer.js';
 export const LARGE_IMAGE_PIXELS = 1 << 20;
 
 const AXES = ['x', 'y', 'z'] as const;
+/** The most a stack's root is ever opaque: never 1. Safari paints every slice displayed under a root again when the
+ * root's opacity leaves or reaches 1. On the iPad, with the camera still and 88 slices displayed, 1 to 0.99 made a frame
+ * of 54 to 55 ms, 0.999 to 1 one of 30, and 0.99 to 0.98 one of 17, which is no cost; a drag across M42 had 179 and 490
+ * paints in one frame at its changes of axis, and with this ceiling its longest frame mid-drag fell from 77 to 79 ms
+ * to 39 to 41 (2026-10-04). Against the same views at opacity 1, at rest: headless WebKit drew M42 and the Milky Way
+ * the same to the pixel and 174 to 517 pixels of M31 differently, by at most 6 of 255; headless Chromium drew 1.3% to
+ * 3.3% of an M42 view's pixels and 1.2% to 4.0% of an M31 view's differently, nearly all by 1 and at most by 15. */
+export const STACK_OPACITY_CEILING = 0.999;
 /** A stack joins every JOIN_STRIDE-th slice first, so one part of the way in is the whole cloud thinner, not a part of it. */
 const JOIN_STRIDE = 8;
 /** What a slice joining the layer tree costs the pacer, in its units: a frame's first 16 are then 8 slices. On the iPad
@@ -133,11 +141,9 @@ export function mountPreparedCssVolume(options: PreparedVolumeMountOptions): Pre
   // slice is a layer with a surface of its own, and a stack shown whole made hundreds in one frame. A drag across M42
   // (stacks of 314, 439 and 88 slices, each with its first copy) had three or four frames of 130 to 200 ms at each
   // change of axis on the iPad, spent making surfaces in the GPU process, Safari and the display server while the
-  // page's own thread waited (2026-10-04). Paced, a change of axis still has a frame of 30 to 80 ms. Safari paints
-  // every slice displayed under a root again when the root's opacity leaves or reaches 1: with the camera still and 88
-  // slices displayed, 1 to 0.99 made a frame of 54 ms and 0.99 to 0.98 one of 17. And the first change to a stack's
-  // slices after half a second's pause (one slice shown, one slice's opacity) made a frame of 36 to 42 ms, the ones
-  // after it none.
+  // page's own thread waited (2026-10-04). Paced, a change of axis still has a frame of 30 to 45 ms: the first change
+  // to a stack's slices after half a second's pause (one slice shown, one slice's opacity) made a frame of 36 to 42 ms
+  // with the camera still, the ones after it none.
   // The share doubles from a frame's first units to its most (8, 16, then 32 slices) whatever the pacer's budget has
   // fallen to: the budget halves after any slow frame, and where every frame is slow a stack would join a slice a
   // frame, thin for seconds (headless Chromium showed 84 of a copy's 88 slices five seconds after a turn).
@@ -221,7 +227,7 @@ export function mountPreparedCssVolume(options: PreparedVolumeMountOptions): Pre
       const root = roots[index]!;
       const { weight, opticalGain } = strengths[index]!;
       total += weight;
-      const visible = weight > 0, opacity = total > 0 ? String(weight / total) : '0';
+      const visible = weight > 0, opacity = total > 0 ? String(Math.min(STACK_OPACITY_CEILING, weight / total)) : '0';
       if (rootVisible[index] !== visible) {
         rootVisible[index] = visible;
         if (visible && !rootDisplayed[index]) {

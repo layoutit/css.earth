@@ -75,6 +75,8 @@ test('image textures are demanded once when their retained axis first contribute
   assert.equal(leaf('x').style.backgroundImage, undefined);
   assert.equal(leaf('y').style.backgroundImage, undefined);
   assert.equal(bank('z').style.visibility, 'visible');
+  // A bank alone in the mix stays just under opaque: its opacity never crosses 1.
+  assert.equal(bank('z').style.opacity, '0.999');
   assert.equal(bank('y').style.display, 'none');
   publish([Math.SQRT1_2, 0, 0, Math.SQRT1_2]);
   assert.deepEqual(resolveResource.mock.calls.map(call => call.arguments), [['z.png'], ['y.png']]);

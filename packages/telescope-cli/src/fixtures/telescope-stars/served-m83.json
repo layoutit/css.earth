@@ -74,5 +74,9 @@
  {
   "url": "https://simbad.cds.unistra.fr/simbad/sim-tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=tsv&QUERY=SELECT+TOP+8+b.main_id%2C+b.otype%2C+b.nbref+FROM+basic+AS+b+WHERE+CONTAINS%28POINT%28%27ICRS%27%2C+b.ra%2C+b.dec%29%2C+CIRCLE%28%27ICRS%27%2C+204.25383%2C+-29.865761111111112%2C+0.11500%29%29+%3D+1+AND+b.plx_value+IS+NULL+AND+b.pmra+IS+NULL+AND+b.nbref+%3E%3D+2+AND+b.otype+IN+%28%27*%27%2C+%27V*%27%2C+%27PM*%27%2C+%27Pe*%27%29+ORDER+BY+nbref+DESC",
   "body": "main_id\totype\tnbref\n"
+ },
+ {
+  "url": "https://api.openalex.org/works?filter=title_and_abstract.search%3A%28%22M+83%22+OR+%22M83%22+OR+%22ESO+444-081%22+OR+%22ESO444-081%22+OR+%22NGC+5236%22+OR+%22NGC5236%22+OR+%22PGC048082%22+OR+%22UGCA366%22%29+AND+%28%22Cepheid%22+OR+%22Cepheids%22+OR+%22supergiant%22+OR+%22supergiants%22+OR+%22hypergiant%22+OR+%22luminous+blue+variable%22+OR+%22Wolf-Rayet%22+OR+%22Mira%22+OR+%22Miras%22+OR+%22RR+Lyrae%22+OR+%22early-type+star%22+OR+%22massive+star%22%29%2Ctype%3Aarticle%7Creview%7Cpreprint%7Cletter&per-page=100&sort=publication_year%3Adesc&select=id%2Cdoi%2Ctitle%2Cdisplay_name%2Cpublication_year%2Ctype%2Cauthorships%2Copen_access%2Cbest_oa_location%2Cprimary_location%2Crelevance_score%2Cabstract_inverted_index",
+  "body": "{\"results\":[]}"
  }
 ]
