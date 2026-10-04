@@ -14,6 +14,8 @@ import type { LimbChoice } from './limb.mts';
 export const PICASO = { cite: 'PICASO 4.1 (Batalha et al. 2019, ApJ 878, 70)', models: 'Sonora Bobcat cloud-free (Marley et al. 2021, ApJ 920, 85)',
   file: 'photometry/picaso-bobcat-v-quadratic.tsv', profiles: 'https://doi.org/10.5281/zenodo.5063476', opacities: 'https://doi.org/10.5281/zenodo.18636725' } as const;
 const logg = (gravityMps2: number) => Number(Math.log10(gravityMps2 * 100).toFixed(4));
+/** Three decimals, a value that rounds to zero written without a sign. */
+const coefficient = (value: number) => (Math.abs(value) < 0.0005 ? 0 : value).toFixed(3);
 
 /** The band a law is computed in (an SVO filter id) with the node file's name, and the body it is for: the flag that recomputes
  * it and the end of its sentence. */
@@ -60,7 +62,7 @@ export function fromPicaso(id: string, teffK: number, starLogg: number, band: Pi
       acquisition: `Computed by node packages/telescope-cli/src/new-object/new-object-cli.mts ${body.flag} ${id} (packages/telescope-cli/src/new-object/picaso-limb.mts, @cssearth/telescope/node picasoLimbNodes) at the nodes ${chosen.map(profile).join(', ')}.`,
       redistribution: 'Model coefficients and the intensities they are fitted to, with the model and tool cited.', consumers: ['assets', 'datasets'],
       sourceBinding: { kind: 'local', reason: `Computed with the pinned PICASO toolchain; ${body.flag} recomputes it.` } }],
-    sentence: `dimmed toward the limb by the quadratic law fitted to the ${band.name} intensity ${PICASO.cite} computes from ${models.name} model atmospheres at ${teffK.toLocaleString('en-US')} K and log g ${starLogg}, read between the models ${chosen.map(profile).join(', ')} (u1 ${coefficients.u1.toFixed(3)}, u2 ${coefficients.u2.toFixed(3)}; the law fits each model's eight angles within ${(worst * 100).toFixed(2)}% of the centre): ${models.kind}, ${body.because}`,
+    sentence: `dimmed toward the limb by the quadratic law fitted to the ${band.name} intensity ${PICASO.cite} computes from ${models.name} model atmospheres at ${teffK.toLocaleString('en-US')} K and log g ${starLogg}, read between the models ${chosen.map(profile).join(', ')} (u1 ${coefficient(coefficients.u1)}, u2 ${coefficient(coefficients.u2)}; the law fits each model's eight angles within ${(worst * 100).toFixed(2)}% of the centre): ${models.kind}, ${body.because}`,
     credit: `Limb darkening: computed with ${PICASO.cite} on ${models.name} profiles (${models.release}) and the PICASO 4.0 correlated-k tables (${PICASO.opacities}).`,
   };
 }
