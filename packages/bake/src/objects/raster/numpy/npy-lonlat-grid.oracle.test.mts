@@ -1,7 +1,7 @@
 import { setupBakeOracleInputs } from '../../cameras/oracle-inputs.mts';
 await setupBakeOracleInputs();
 import assert from 'node:assert/strict';
-import { sourceLoad, sourceTest } from '@cssearth/objects/node/source-test';
+import { sourceLoad, sourceTest, sourceValues } from '@cssearth/objects/node/source-test';
 import { resolve } from 'node:path';
 import { decodeNpyLonLatGrid, readNpy } from '@cssearth/bake/objects/raster';
 import { readOracleFixture, assertPinnedInputs, readOracleInput, sampleList } from '@cssearth/core/oracle';
@@ -21,7 +21,7 @@ test('the fixture is bound to the pinned ALMA grids', async () => {
 test('dtypes, shapes, missing nodes and sampled values match numpy.load', () => {
   let compared = 0;
   for (const [name, expectedValue] of Object.entries(requireRecord(fixture.cases.arrays))) {
-    const expected = requireRecord(expectedValue), array = loaded.values.get(name)!;
+    const expected = requireRecord(expectedValue), array = sourceValues(loaded).get(name)!;
     assert.equal(array.descr, expected.dtype, name);
     assert.deepEqual(array.shape, requireArray(expected.shape).map(n => requireFiniteNumber(n)), name);
     assert.equal([...array.values].filter(Number.isNaN).length, requireFiniteNumber(expected.missing), name);
@@ -31,8 +31,8 @@ test('dtypes, shapes, missing nodes and sampled values match numpy.load', () => 
 });
 
 test('nearest-node lookups match numpy, including longitudes beyond 180 and both half-cells at the antimeridian', () => {
-  const grid = decodeNpyLonLatGrid({ values: loaded.values.get('ThermalInertia_BestFitValue')!,
-    longitudes: loaded.values.get('LongitudeArray')!, latitudes: loaded.values.get('LatitudeArray')! }, null);
+  const grid = decodeNpyLonLatGrid({ values: sourceValues(loaded).get('ThermalInertia_BestFitValue')!,
+    longitudes: sourceValues(loaded).get('LongitudeArray')!, latitudes: sourceValues(loaded).get('LatitudeArray')! }, null);
   const nodes = requireArray(fixture.cases.nodes).map(value => requireRecord(value));
   for (const node of nodes) {
     const value = grid.sample(requireFiniteNumber(node.longitude), requireFiniteNumber(node.latitude));
