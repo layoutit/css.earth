@@ -259,10 +259,11 @@ test('a sweep asks once for each target, and asks arXiv for the rest once OpenAl
     if (calls.length === 1) return Response.json({ results: [indexed('W30', 'The red supergiants of NGC 4303', 'Spectra'), indexed('W31', 'A census of M61', 'It has a red supergiant')] });
     return Response.json({ error: 'Rate limit exceeded', message: 'Insufficient budget.', retryAfter: 26_685 }, { status: 429 });
   };
-  const result = await sweepPapers(workspace, { targets: ['m61', 'NGC 9999', 'NGC 9998'], about: ['red supergiant'], fulltext: true, fetcher, pause: async ms => { pauses.push(Math.round(ms / 1000)); }, apiKey: '' });
+  const result = await sweepPapers(workspace, { targets: ['m61', 'NGC 9999', 'NGC 9998'], about: ['red supergiant'], fulltext: true, fetcher, pause: async ms => { pauses.push(ms); }, apiKey: '' });
   await rm(workspace, { recursive: true, force: true });
   assert.deepEqual(calls, ['api.openalex.org', 'api.openalex.org', 'export.arxiv.org', 'export.arxiv.org'], 'a refusal holds until midnight UTC: OpenAlex is not asked again');
-  assert.deepEqual(pauses, [1, 3], 'requests to one host are a second apart, and three for the arXiv API');
+  // The waits are what is left of each gap after the time the run took, so they are bounded, not exact.
+  assert.deepEqual([pauses.length, pauses[0]! > 0 && pauses[0]! <= 1000, pauses[1]! > 1000 && pauses[1]! <= 3000], [2, true, true], 'requests to one host are a second apart, and three for the arXiv API');
   const issue = 'OpenAlex returned HTTP 429: the daily budget of this network, shared by everyone on it without an API key, is spent and returns in 7 h 25 min; a free key in OPENALEX_API_KEY has ten times the budget.';
   assert.deepEqual(result.targets.map(entry => [entry.target.name, entry.source, entry.sourceIssue, entry.candidates, entry.works.map(work => work.title)]), [
     ['M61', 'openalex', undefined, 2, ['The red supergiants of NGC 4303', 'A census of M61']], ['NGC 9999', 'arxiv', issue, 0, []], ['NGC 9998', 'arxiv', issue, 1, ['Red supergiants of NGC 9998']]]);
