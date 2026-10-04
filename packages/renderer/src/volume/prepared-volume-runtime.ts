@@ -4,12 +4,19 @@ import { presentPhysicalPoseInVolume, cssViewFromOrientation, worldRotationFromQ
 import type { PreparedVolumeMountOptions, PreparedMaterialVolumeRuntime, VolumeCameraPublication, VolumeLocalCamera, PreparedVolumeCameraTransform } from './types.js';
 
 import { revealLayer } from '../rendering/layer-reveal.js';
-import { createSettlePacer } from '../rendering/settle-pacer.js';
+import { createSettlePacer, SETTLE_PACING } from '../rendering/settle-pacer.js';
 
 /** A leaf image this large decodes off the main thread before it shows again (layer-reveal.ts). */
 export const LARGE_IMAGE_PIXELS = 1 << 20;
 
 const AXES = ['x', 'y', 'z'] as const;
+/** A stack joins every JOIN_STRIDE-th slice first, so one part of the way in is the whole cloud thinner, not a part of it. */
+const JOIN_STRIDE = 8;
+/** What a slice joining the layer tree costs the pacer, in its units: a frame's first 16 are then 8 slices. On the iPad
+ * (M42, 2026-10-04, the camera still) a stack of 628 small slices joining 8 a frame had no frame over 21 ms, 32 a frame
+ * one of 33 ms, its first, 64 a frame 45 ms then 23, and all at once one of 182 ms; a stack of 88 slices fourteen times
+ * their area joined 32 a frame the same way. The count is the cost, not the pixels. */
+const JOIN_UNITS = 2;
 
 /** Mounts fixed projective slice geometry. It owns DOM transforms only; all geometry and pixels are prepared. */
 export function mountPreparedCssVolume(options: PreparedVolumeMountOptions): PreparedMaterialVolumeRuntime {
@@ -36,8 +43,9 @@ export function mountPreparedCssVolume(options: PreparedVolumeMountOptions): Pre
   const boundedLeaves: { nodes: HTMLElement[]; bounds: PreparedLeafBounds | undefined; shown: boolean | null; hidden: boolean; axis: number; large: string | null }[] = [];
   const pendingTextures = AXES.map(() => new Map<{ nodes: HTMLElement[]; shown: boolean | null }, string>());
   const materialLeaves: { axis: number; leaf: typeof boundedLeaves[number] }[] = [];
-  // `resident`: the copy's nodes are displayed; `hidden`: how many of them a retirement in progress has already hidden.
-  const opticalCopies: { nodes: HTMLElement[][]; alpha: number[]; resident: boolean[]; hidden: number[] }[] = [];
+  // An axis stack's nodes by optical copy (0 is the slice itself), in the order they join; the `alpha` of copies 1 and 2;
+  // whether each copy is `wanted`; and `shown`, how many of a copy's nodes are displayed: its first ones.
+  const opticalCopies: { nodes: HTMLElement[][]; alpha: number[]; wanted: boolean[]; shown: number[] }[] = [];
   for (const axis of AXES) {
     const stack = payload.stacks.find(candidate => candidate.axis === axis);
     if (!stack) throw new TypeError(`Prepared CSS volume has no ${axis} stack.`);
@@ -58,7 +66,10 @@ export function mountPreparedCssVolume(options: PreparedVolumeMountOptions): Pre
     // them on every camera change.
     root.style.display = 'none';
     root.style.visibility = 'hidden';
-    const copies = { nodes: [[], []] as HTMLElement[][], alpha: [NaN, NaN], resident: [false, false], hidden: [0, 0] };
+    // Where each slice stands in its stack's joining order; the document keeps the prepared order.
+    const joining = stack.leaves.map((_, order) => order).sort((a, b) => a % JOIN_STRIDE - b % JOIN_STRIDE || a - b);
+    const place = new Map(joining.map((order, position) => [stack.leaves[order]!, position]));
+    const copies = { nodes: [[], [], []] as HTMLElement[][], alpha: [NaN, NaN], wanted: [false, false, false], shown: [0, 0, 0] };
     opticalCopies.push(copies);
     for (const leaf of stack.leaves) {
       const textureUrl = options.resolveResource(leaf.texturePath);
@@ -73,7 +84,7 @@ export function mountPreparedCssVolume(options: PreparedVolumeMountOptions): Pre
         const node = createLeaf(create, leaf, copy);
         mesh.append(node);
         bounded.nodes.push(node);
-        if (copy > 0) copies.nodes[copy - 1]!.push(node);
+        copies.nodes[copy]![place.get(leaf)!] = node;
       }
     }
     scene.append(mesh);
@@ -91,32 +102,61 @@ export function mountPreparedCssVolume(options: PreparedVolumeMountOptions): Pre
   // an axis stack whose weight reached zero, an optical copy whose alpha did, a slice that left the view. Until then each
   // stays as it is at opacity 0 or out of view. Hiding them as the camera turned dropped and remade hundreds of layers in
   // a frame: one throw of a drag at the Milky Way flipped `display` on 2,016 slices while it coasted (2026-10-03).
-  // What the camera turns towards still shows at once.
+  // A stack leaves whole, in one frame: a frame that removes any of a stack's layers costs by the layers still there.
+  // On the iPad M42's 628 displayed slices left in one frame of 42 to 50 ms; 16 a frame, eight frames of 34 to 93 ms;
+  // 64 a frame, 91 and 37 ms (2026-10-04, the camera still).
   const rootDisplayed = roots.map(() => false), leavingLeaves = new Set<typeof boundedLeaves[number]>();
   const retire = createSettlePacer((budget, moving) => {
     if (destroyed || moving) return 0;
     let written = 0;
-    roots.forEach((root, index) => {
-      if (rootVisible[index] !== false || !rootDisplayed[index]) return;
-      // A zero-weight axis stack leaves layout and compositing, not just paint.
-      root.style.visibility = 'hidden'; root.style.display = 'none'; rootDisplayed[index] = false; written++;
-    });
     for (const leaf of leavingLeaves) {
       if (written >= budget) return written;
       leavingLeaves.delete(leaf);
       if (leaf.shown === false) { leaf.hidden = true; for (const node of leaf.nodes) { node.style.visibility = 'hidden'; written++; } }
     }
-    for (const copies of opticalCopies) for (let copy = 0; copy < 2; copy++) {
-      if (!copies.resident[copy] || copies.alpha[copy]! > 0) continue;
-      const nodes = copies.nodes[copy]!;
-      while (copies.hidden[copy]! < nodes.length) {
-        if (written >= budget) return written;
-        nodes[copies.hidden[copy]!++]!.style.display = 'none'; written++;
+    for (const [index, copies] of opticalCopies.entries()) {
+      if (written >= budget) return written;
+      if (rootVisible[index] === false && rootDisplayed[index]) {
+        // A zero-weight axis stack leaves layout and compositing, not just paint.
+        roots[index]!.style.visibility = 'hidden'; roots[index]!.style.display = 'none'; rootDisplayed[index] = false; written++;
       }
-      copies.resident[copy] = false; copies.hidden[copy] = 0;
+      for (let copy = 0; copy < 3; copy++) {
+        if (copies.wanted[copy]) continue;
+        const nodes = copies.nodes[copy]!;
+        for (let each = 0; each < copies.shown[copy]!; each++) nodes[each]!.style.display = 'none';
+        written += copies.shown[copy]! * JOIN_UNITS; copies.shown[copy] = 0;
+      }
     }
     return written;
   });
+  // What the camera turns towards joins a share a frame, moving or not, and the first frames of a join the least: each
+  // slice is a layer with a surface of its own, and a stack shown whole made hundreds in one frame. A drag across M42
+  // (stacks of 314, 439 and 88 slices, each with its first copy) had three or four frames of 130 to 200 ms at each
+  // change of axis on the iPad, spent making surfaces in the GPU process, Safari and the display server while the
+  // page's own thread waited (2026-10-04). Paced, a change of axis still has a frame of 30 to 80 ms. Safari paints
+  // every slice displayed under a root again when the root's opacity leaves or reaches 1: with the camera still and 88
+  // slices displayed, 1 to 0.99 made a frame of 54 ms and 0.99 to 0.98 one of 17. And the first change to a stack's
+  // slices after half a second's pause (one slice shown, one slice's opacity) made a frame of 36 to 42 ms, the ones
+  // after it none.
+  // The share doubles from a frame's first units to its most (8, 16, then 32 slices) whatever the pacer's budget has
+  // fallen to: the budget halves after any slow frame, and where every frame is slow a stack would join a slice a
+  // frame, thin for seconds (headless Chromium showed 84 of a copy's 88 slices five seconds after a turn).
+  let joinFrames = 0;
+  const join = createSettlePacer(() => {
+    if (destroyed) return 0;
+    const allowed = Math.min(SETTLE_PACING.maximumUnits, SETTLE_PACING.startUnits * 2 ** joinFrames);
+    let written = 0;
+    for (const copies of opticalCopies) for (let copy = 0; copy < 3; copy++) {
+      if (!copies.wanted[copy]) continue;
+      const nodes = copies.nodes[copy]!;
+      while (copies.shown[copy]! < nodes.length) {
+        if (written >= allowed) { joinFrames++; return written; }
+        nodes[copies.shown[copy]!++]!.style.display = ''; written += JOIN_UNITS;
+      }
+    }
+    joinFrames = 0;
+    return written;
+  }, { holdWhile: 'never' });
   const publish = ({ world, viewport }: VolumeCameraPublication) => {
     if (destroyed) return;
     if (world.referenceFrame !== payload.frame.referenceFrame || world.epochJdTt !== payload.frame.epochJdTt) {
@@ -184,8 +224,7 @@ export function mountPreparedCssVolume(options: PreparedVolumeMountOptions): Pre
       const visible = weight > 0, opacity = total > 0 ? String(weight / total) : '0';
       if (rootVisible[index] !== visible) {
         rootVisible[index] = visible;
-        if (!visible) retire.request();
-        else if (!rootDisplayed[index]) {
+        if (visible && !rootDisplayed[index]) {
           root.style.visibility = 'visible'; root.style.display = 'block'; rootDisplayed[index] = true;
           for (const leaf of boundedLeaves) if (leaf.axis === index && leaf.large && leaf.shown !== false) for (const node of leaf.nodes) revealLayer(node, leaf.large);
         }
@@ -200,13 +239,14 @@ export function mountPreparedCssVolume(options: PreparedVolumeMountOptions): Pre
         const previous = copies.alpha[copy - 1]!;
         if (alpha === previous) continue;
         copies.alpha[copy - 1] = alpha;
-        const value = String(alpha), nodes = copies.nodes[copy - 1]!;
-        for (const node of nodes) node.style.opacity = value;
-        if (alpha > 0) {
-          // Some of its nodes may already be hidden by a retirement the camera interrupted.
-          if (!copies.resident[copy - 1] || copies.hidden[copy - 1]! > 0) for (const node of nodes) node.style.display = '';
-          copies.resident[copy - 1] = true; copies.hidden[copy - 1] = 0;
-        } else if (copies.resident[copy - 1]) retire.request();
+        const value = String(alpha);
+        for (const node of copies.nodes[copy]!) node.style.opacity = value;
+      }
+      for (let copy = 0; copy < 3; copy++) {
+        const wanted = visible && (copy === 0 || copies.alpha[copy - 1]! > 0);
+        if (wanted === copies.wanted[copy]) continue;
+        copies.wanted[copy] = wanted;
+        if (wanted) join.request(); else retire.request();
       }
     }
   };
@@ -243,7 +283,7 @@ export function mountPreparedCssVolume(options: PreparedVolumeMountOptions): Pre
     });
   }, roots: Object.freeze(roots), destroy() {
     if (destroyed) return;
-    destroyed = true; retire.destroy();
+    destroyed = true; retire.destroy(); join.destroy();
     for (const root of roots) root.remove();
   }});
 }
@@ -272,8 +312,10 @@ export function preparedVolumeCameraTransform(publication: VolumeCameraPublicati
 
 function createLeaf(create: (tag: string) => HTMLElement, leaf: PreparedCssVolume['stacks'][number]['leaves'][number], copy: number): HTMLElement {
   const node = create('s');
-  // A zero-alpha optical copy contributes nothing; it stays out of layout and compositing.
-  if (copy > 0) { node.style.opacity = '0'; node.style.display = 'none'; }
+  // A slice is out of layout and compositing until its stack is turned to and it joins (`join`); a zero-alpha optical
+  // copy contributes nothing.
+  node.style.display = 'none';
+  if (copy > 0) node.style.opacity = '0';
   node.style.width = leaf.style.width;
   node.style.height = leaf.style.height;
   node.style.transform = leaf.style.transform;

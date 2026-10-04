@@ -1,5 +1,7 @@
-// `node labs/performance/webkit-devtools-trace.mts <capture dir>…`: write trace.devtools.json beside an ios-capture
-// trace.json, so Chrome DevTools' Performance panel can open a Safari (WebKit) recording.
+// `node labs/performance/webkit-devtools-trace.mts <capture dir>… [--marks <prefix>]`: write trace.devtools.json beside
+// an ios-capture trace.json, so Chrome DevTools' Performance panel can open a Safari (WebKit) recording. `--marks` keeps
+// only the span between the first and last `console.timeStamp` whose message starts with the prefix, so the chart is
+// the run and not the load before it or the still page after.
 //
 // DevTools draws a trace only when it looks like Chrome's: a TracingStartedInBrowser record naming the page's frame, a
 // renderer main thread called CrRendererMain whose work sits inside RunTask slices, and Chrome's event names. WebKit's
@@ -25,10 +27,19 @@ export const DEVTOOLS_NAMES: Readonly<Record<string, string>> = {
 
 const PID = 1, MAIN = 1, COMPOSITOR = 2, FRAME = 'F1', CATEGORY = 'devtools.timeline';
 
-/** The DevTools-shaped copy of an ios-capture trace.json, with the device's screen grabs (epoch ms, base64 JPEG) as its filmstrip. */
-export function devtoolsTrace(trace: unknown, screens: readonly { epochMs: number; jpeg: string }[] = []): { traceEvents: Record<string, unknown>[]; metadata: Record<string, unknown> } {
-  const source = requireRecord(trace, 'trace'), events = requireArray(source.traceEvents, 'traceEvents').filter(isRecord);
+/** A quarter of a second kept on each side of the marked span. */
+const MARK_MARGIN_US = 250_000;
+
+/** The DevTools-shaped copy of an ios-capture trace.json, with the device's screen grabs (epoch ms, base64 JPEG) as its
+ * filmstrip. With `marks`, only the span between the first and last time stamp whose message starts with it. */
+export function devtoolsTrace(trace: unknown, screens: readonly { epochMs: number; jpeg: string }[] = [], marks: string | null = null): { traceEvents: Record<string, unknown>[]; metadata: Record<string, unknown> } {
+  const source = requireRecord(trace, 'trace'), recorded = requireArray(source.traceEvents, 'traceEvents').filter(isRecord);
   const metadata = isRecord(source.metadata) ? source.metadata : {}, url = typeof metadata.url === 'string' ? metadata.url : '';
+  const marked = marks === null ? [] : recorded.filter(event => event.name === 'TimeStamp' && typeof event.ts === 'number' && isRecord(event.args) && isRecord(event.args.data)
+    && String(event.args.data.message ?? '').startsWith(marks)).map(event => Number(event.ts));
+  if (marks !== null && !marked.length) throw new TypeError(`The trace has no time stamp starting with "${marks}".`);
+  const from = marked.reduce((n, ts) => Math.min(n, ts), Infinity) - MARK_MARGIN_US, to = marks === null ? Infinity : marked.reduce((n, ts) => Math.max(n, ts), -Infinity) + MARK_MARGIN_US;
+  const events = marks === null ? recorded : recorded.filter(event => typeof event.ts !== 'number' || (event.ts >= from && event.ts <= to));
   const page = events.filter(event => event.pid === 1 && typeof event.ts === 'number' && (event.ph === 'X' || event.ph === 'i'));
   const start = page.reduce((n, event) => Math.min(n, Number(event.ts)), Infinity);
   // A debug capture can contain hundreds of thousands of records. A sorted interval
@@ -59,10 +70,15 @@ export function devtoolsTrace(trace: unknown, screens: readonly { epochMs: numbe
         args: { data: { ...data, message: `${type}: ${String(data.objectId ?? '')}` }, webkit: type } });
       continue;
     }
-    // A WebKit frame lasts until the next one: it becomes the frame boundary on the compositor, not a main-thread task.
+    // A WebKit frame becomes a frame on the compositor, not a main-thread task: it begins and is drawn where the record
+    // starts and ends. Every frame is drawn in the chart, one that composited nothing too: drawn only where a Composite
+    // ended, the Frames track was empty wherever the page was still or the main thread waited, which is where a long
+    // frame hides (2026-10-04).
     if (type === 'RenderingFrame') {
       frame++;
       out.push({ ph: 'I', s: 't', name: 'BeginFrame', cat: 'disabled-by-default-devtools.timeline.frame', pid: PID, tid: COMPOSITOR, ts, args: { layerTreeId: 1, frameSeqId: frame } });
+      // The last frame before a still page lasts until the page moves again: it ends with the marked span.
+      out.push({ ph: 'I', s: 't', name: 'DrawFrame', cat: 'disabled-by-default-devtools.timeline.frame', pid: PID, tid: COMPOSITOR, ts: Math.min(ts + dur, to), args: { layerTreeId: 1, frameSeqId: frame } });
       continue;
     }
     const name = DEVTOOLS_NAMES[type] ?? type;
@@ -73,23 +89,25 @@ export function devtoolsTrace(trace: unknown, screens: readonly { epochMs: numbe
     if (depthZero) out.push({ ph: 'X', name: 'RunTask', cat: 'disabled-by-default-devtools.timeline', pid: PID, tid: MAIN, ts, dur, args: {} });
     out.push({ ph: 'X', name, cat: CATEGORY, pid: PID, tid: MAIN, ts, dur,
       args: name === 'Layout' ? { beginData: data, endData: {}, webkit: type } : { data, webkit: type } });
-    if (type === 'Composite') out.push({ ph: 'I', s: 't', name: 'DrawFrame', cat: 'disabled-by-default-devtools.timeline.frame', pid: PID, tid: COMPOSITOR, ts: ts + dur, args: { layerTreeId: 1, frameSeqId: frame } });
   }
   if (screens.length) {
     const epoch = requireFiniteNumber(metadata.stopwatchEpochMs, 'trace metadata stopwatchEpochMs');
-    for (const screen of screens) out.push({ ph: 'O', name: 'Screenshot', cat: 'disabled-by-default-devtools.screenshot', id: '0x1', pid: PID, tid: MAIN,
-      ts: Math.round((screen.epochMs - epoch) * 1e3), args: { snapshot: screen.jpeg } });
+    for (const screen of screens) {
+      const ts = Math.round((screen.epochMs - epoch) * 1e3);
+      if (marks === null || (ts >= from && ts <= to)) out.push({ ph: 'O', name: 'Screenshot', cat: 'disabled-by-default-devtools.screenshot', id: '0x1', pid: PID, tid: MAIN, ts, args: { snapshot: screen.jpeg } });
+    }
   }
   return { traceEvents: out, metadata: { source: 'cssearth webkit-devtools-trace', ...metadata } };
 }
 
 if (import.meta.url === pathToFileURL(process.argv[1] ?? '').href) {
-  const dirs = process.argv.slice(2);
-  if (!dirs.length) throw new TypeError('Usage: webkit-devtools-trace.mts <capture dir>…');
+  const args = process.argv.slice(2), flag = args.indexOf('--marks'), marks = flag >= 0 ? args[flag + 1] ?? null : null;
+  const dirs = flag >= 0 ? [...args.slice(0, flag), ...args.slice(flag + 2)] : args;
+  if (!dirs.length || (flag >= 0 && !marks)) throw new TypeError('Usage: webkit-devtools-trace.mts <capture dir>… [--marks <prefix>]');
   for (const dir of dirs) {
     const files = await readdir(resolve(dir, 'screens')).then(names => names.filter(name => /^\d+\.jpg$/u.test(name)).sort(), () => []);
     const screens = await Promise.all(files.map(async name => ({ epochMs: Number(name.slice(0, -4)), jpeg: (await readFile(resolve(dir, 'screens', name))).toString('base64') })));
-    const copy = devtoolsTrace(JSON.parse(await readFile(resolve(dir, 'trace.json'), 'utf8')), screens);
+    const copy = devtoolsTrace(JSON.parse(await readFile(resolve(dir, 'trace.json'), 'utf8')), screens, marks);
     const receipt: unknown = await readFile(resolve(dir, 'report.json'), 'utf8').then(JSON.parse, () => null);
     copy.metadata.capture = { directory: resolve(dir), screenSource: screens.length ? 'device-screen' : 'none', screenFrames: screens.length,
       ...(isRecord(receipt) ? { checkout: receipt.checkout ?? null, checkoutRole: receipt.checkoutRole ?? null,
