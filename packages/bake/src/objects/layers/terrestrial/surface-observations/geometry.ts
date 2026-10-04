@@ -1,5 +1,5 @@
-import { cross3 as cross, dot3 as dot } from '@cssearth/core';
 /** Per-pixel geometry. An archive either ships backplanes with its image, or the camera's rays are cast onto the full source mesh. */
+import { cross3 as cross, dot3 as dot } from '@cssearth/core';
 import type { SourceMesh } from '../../../geometry/index.ts';
 import type { ObservationCamera, PixelGeometry } from './contract.ts';
 

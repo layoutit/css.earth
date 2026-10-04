@@ -48,4 +48,3 @@ test('the reference ellipsoid has the stated semi-axes at its equator and poles'
   assert.ok(Math.abs(radius(0, 0)! - 1562600) < 1 && Math.abs(radius(90, 0)! - 1560300) < 1 && Math.abs(radius(0, 90)! - 1559500) < 1, `${radius(0, 0)} ${radius(90, 0)} ${radius(0, 90)}`);
   assert.throws(() => ellipsoidMesh([1560]), /no triaxial radii/u);
 });
-

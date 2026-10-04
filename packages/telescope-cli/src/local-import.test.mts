@@ -1,12 +1,11 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
-import { WORKSPACE, astroqueryToolchain } from '@cssearth/telescope/node';
+import { WORKSPACE, astroqueryToolchain, readProductRecord } from '@cssearth/telescope/node';
 test.before(async () => { await astroqueryToolchain(); });
 import { copyFile, mkdtemp, mkdir, readFile, rm, symlink, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
-import { readProductRecord } from '@cssearth/telescope/node';
 import { importLocalArtifact, parseLocalImportSpec } from './local-import.mts';
 import { listArtifactOutputs } from './artifact-outputs.mts';
 import { executeFamilyOperation } from './family-operation.mts';

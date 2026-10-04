@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { createSelectionFlight, sampleSelectionFlight } from '@cssearth/engine';
+import { createSelectionFlight, sampleSelectionFlight, worldCameraFromCenteredPresentation, worldCameraFromPresentation } from '@cssearth/engine';
 import type { PositionM } from '@cssearth/engine';
 import { fileURLToPath } from 'node:url';
 import { createSourceManifest } from '@cssearth/objects/node';
@@ -10,7 +10,6 @@ import { cross3, isRecord } from '@cssearth/core';
 import { ASTRONOMICAL_UNIT_KILOMETERS, BODY_FIXED_ECLIPTIC_NORTH_DIRECTIONS, BODY_FIXED_SUN_DIRECTIONS, BODY_FIXED_TO_ICRF_MATRICES,
   BODY_ORBITS, SOLAR_GEOMETRY_EPOCH_JD_TT } from '../../../../src/platform/solar-geometry.mts';
 import { type PreparedWorldCameraFrame } from '@cssearth/objects';
-import { worldCameraFromCenteredPresentation, worldCameraFromPresentation } from '@cssearth/engine';
 import { presentWorldCamera } from './world-camera.js';
 import type { WorldCameraViewport } from './world-camera.js';
 

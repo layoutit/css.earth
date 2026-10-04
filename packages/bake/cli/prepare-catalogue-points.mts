@@ -1,4 +1,3 @@
-import { CATALOGUE_POINTS_SCHEMA } from '@cssearth/objects';
 /**
  * Prepare a published point catalogue beside an object as a bank of fixed 3D points. `source/<id>/points.json` names
  * the table, its columns, the rows the authors' own selection keeps, an optional color column and the citation;
@@ -32,6 +31,7 @@ import { CATALOGUE_POINTS_SCHEMA } from '@cssearth/objects';
  *
  * Usage: node packages/bake/cli/prepare-catalogue-points.mts <object-directory> <id>
  */
+import { CATALOGUE_POINTS_SCHEMA } from '@cssearth/objects';
 import { spawnSync } from 'node:child_process';
 import { readFile, writeFile } from 'node:fs/promises';
 import { basename, resolve } from 'node:path';

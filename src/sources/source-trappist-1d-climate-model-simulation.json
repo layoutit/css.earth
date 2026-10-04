@@ -1,0 +1,35 @@
+{
+  "id": "source-trappist-1d-climate-model-simulation",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "TRAPPIST-1d · trappist 1d climate model simulation",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://zenodo.org/records/5627945/files/diagfi_T1d_1barN2_10barH2O.nc?download=1",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/trappist-1d/source/manifest.json",
+      "locator": "/inputs/6"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Turbet et al. (2023); Generic PCM simulation",
+      "scope": "The trappist 1d climate model simulation input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "CC BY 4.0",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

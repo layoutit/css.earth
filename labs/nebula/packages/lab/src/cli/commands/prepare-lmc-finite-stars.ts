@@ -1,5 +1,3 @@
-import { PREPARED_CATALOGUE_STARS_SCHEMA, type PreparedLmcStars } from '@cssearth/objects';
-import { isRecord as coreIsRecord } from '@cssearth/core';
 /**
  * Offline preparation of the published Bonanos et al. (2009) massive LMC star sample inside the current
  * finite LMC emission model, through the shared finite-model star placement.
@@ -8,6 +6,8 @@ import { isRecord as coreIsRecord } from '@cssearth/core';
  * alignment-density cloud and stays untouched; this command writes the layer of the two-scale
  * envelope models beside it.
  */
+import { PREPARED_CATALOGUE_STARS_SCHEMA, type PreparedLmcStars } from '@cssearth/objects';
+import { isRecord as coreIsRecord } from '@cssearth/core';
 import { readFile } from 'node:fs/promises';
 import { basename, resolve } from 'node:path';
 import { STAR_PHOTOMETRY } from '@cssearth/bake/volume';

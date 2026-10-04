@@ -1,5 +1,5 @@
-import { validateBounds } from './bounds.ts';
 /** Offline, photograph-column-preserving coherent depth assignment. */
+import { validateBounds } from './bounds.ts';
 import type { StructureRegion } from '@cssearth/nebula-reconstruction/evidence/wavelets';
 
 type Vec3 = [number, number, number];

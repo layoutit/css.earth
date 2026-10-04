@@ -4,8 +4,7 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
-import { commitEncounterLandmarkOutputs, evaluateEncounterAnchor, transformImageControlStages } from '@cssearth/bake/objects/surface-features';
-import { fitImageControls } from '@cssearth/bake/objects/surface-features';
+import { commitEncounterLandmarkOutputs, evaluateEncounterAnchor, transformImageControlStages, fitImageControls } from '@cssearth/bake/objects/surface-features';
 
 const unit = (values: readonly number[]) => { const length = Math.hypot(...values); return values.map(value => value / length); };
 const camera = { positionMeters: [0, 0, 0], ray(x: number, y: number) { return unit([x / 100, y / 100, 1]); } };

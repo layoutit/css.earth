@@ -1,6 +1,10 @@
+import { execFileSync } from 'node:child_process';
+import { mkdtempSync, mkdirSync, writeFileSync, rmSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { resolve } from 'node:path';
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { bodySourceFindings, sharedCopyFindings } from './check-body-references.mts';
+import { bodySourceFindings, sharedCopyFindings, manifestGeneratorFindings, checkBodyReferences } from './check-body-references.mts';
 
 const problems = (findings: readonly { problem: string }[]) => findings.map(finding => finding.problem.split(/[;,]/u)[0]);
 
@@ -19,7 +23,7 @@ test('a generator starts with a script the repository tracks, optionally followe
   const manifest = { inputs: [{ path: 'a.png', generator: 'packages/x/make.mts a --b', recipe: { generator: 'tools/gone.mjs' } }],
     generatedIntermediates: [{ path: 'b.json', generator: 'node packages/x/make.mts' }] };
   assert.deepEqual(problems(bodySourceFindings('x', manifest, null, new Set(['a.png']), new Set(['packages/x/make.mts']))),
-    ['inputs a.png names generator "tools/gone.mjs"', 'generatedIntermediates b.json names generator "node packages/x/make.mts"']);
+    ['inputs a.png names generator "tools/gone.mjs"']);
 });
 
 test('an acquisition step must restore a declared file', () => {
@@ -52,4 +56,25 @@ test('a committed SPICE kernel fails anywhere, and a body copy of a shared refer
   assert.deepEqual(sharedCopyFindings(lines).map(finding => finding.file), [
     'src/spice/voyager/lsk/naif0012.tls', 'src/objects/puck/source/geometry/naif0012.tls', 'src/objects/steins/source/reference/ROS_V33.TF',
     'src/objects/vega/source/reference/CIE_xyz_1931_2deg.csv']);
+});
+
+test('reference and nested manifest generators resolve live commands and dated relocations', () => {
+  const file = 'src/references/example/manifest.json', tracked = new Set(['packages/x/make.mts']);
+  assert.deepEqual(manifestGeneratorFindings(file, { generator: 'node packages/x/make.mts --acquire', nested: [{ generator: 'old.mts (now packages/x/make.mts)' }] }, tracked), []);
+  assert.equal(manifestGeneratorFindings(file, { generator: 'node packages/x/missing.mts' }, tracked).length, 1);
+});
+
+test('all tracked manifests are checked, including reference manifests outside body schemas', async () => {
+  const root = mkdtempSync(resolve(tmpdir(), 'manifest-generators-'));
+  try {
+    execFileSync('git', ['init', '-q'], { cwd: root });
+    mkdirSync(resolve(root, 'src/references/example'), { recursive: true });
+    const path = resolve(root, 'src/references/example/manifest.json');
+    writeFileSync(path, '{"generator":"node missing.mts --acquire"}');
+    execFileSync('git', ['add', '.'], { cwd: root });
+    assert.equal((await checkBodyReferences(root)).length, 1, 'missing script mutation is red');
+    writeFileSync(resolve(root, 'missing.mts'), 'export {};');
+    execFileSync('git', ['add', '.'], { cwd: root });
+    assert.deepEqual(await checkBodyReferences(root), [], 'restoring tracked script is green');
+  } finally { rmSync(root, { recursive: true, force: true }); }
 });

@@ -1,7 +1,7 @@
+/** One offline finite-material experiment on an existing reconstruction. All density slice alpha is retained. */
 import { OBJECT_SCHEMA, PREPARED_OBJECT_SCHEMA, CLOUD_PARTS_SCHEMA, DENSITY_VOLUME_FORMAT, parseVolumeRecipe, type VolumeSlices, type VolumeSliceQuad, type Vector3 } from '@cssearth/objects';
 import { collectArtifacts } from '../../server/workflows/density/io.ts';
 import { parseFiniteMaterialSettings, verifyFiniteMaterialArtifacts } from './finite-density-material-artifacts.ts';
-/** One offline finite-material experiment on an existing reconstruction. All density slice alpha is retained. */
 import { readFile, writeFile, mkdir, cp, readdir } from 'node:fs/promises';
 import { resolve, dirname, relative, basename } from 'node:path';
 import { pathToFileURL } from 'node:url';

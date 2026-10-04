@@ -73,4 +73,3 @@ test('thin supported features receive finer equally spaced banks without an unbo
   assert.deepEqual(compilerSliceCounts(bounds, 1000), baseline);
   for (const scale of [0, -1, NaN, Infinity]) assert.throws(() => compilerSliceCounts(bounds, scale), /sampling/);
 });
-

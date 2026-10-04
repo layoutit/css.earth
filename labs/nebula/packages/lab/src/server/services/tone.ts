@@ -1,9 +1,8 @@
+/** Local Node-only texture preparation. Browser receives finished URLs and retains its geometry. */
 import { DENSITY_VOLUME_FORMAT } from '@cssearth/objects';
 import { isRecord as coreIsRecord } from '@cssearth/core';
 import { createConcurrencyLimit } from './concurrency.ts';
-import { resolveLabModelPath } from '../../resources/model-paths.ts';
-import { parseLabModelJson } from '../../resources/model-paths.ts';
-/** Local Node-only texture preparation. Browser receives finished URLs and retains its geometry. */
+import { resolveLabModelPath, parseLabModelJson } from '../../resources/model-paths.ts';
 import { randomUUID } from 'node:crypto';
 import { mkdir, readFile, readdir, realpath, rename, rm, stat, utimes, writeFile } from 'node:fs/promises';
 import { dirname, isAbsolute, relative, resolve, sep } from 'node:path';

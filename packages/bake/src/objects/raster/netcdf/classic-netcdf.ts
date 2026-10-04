@@ -124,9 +124,39 @@ export function parseClassicNetcdfHeader(bytes: Buffer, label: string): NetcdfHe
     attributes: global, variables, layout, recordBytes };
 }
 
+/** Where a run of a variable's values lies in the file: `count` values from the `start`-th, counted in storage order. A
+ * record variable's run lies inside one record, since the records of the other variables come between two of its own. */
+export function valueRange(header: NetcdfHeader, name: string, start: number, count: number, label: string): { offset: number; length: number } {
+  const variable = header.variables.get(name), place = header.layout.get(name);
+  if (!variable || !place) throw new TypeError(`${label} has no variable ${name}; it has ${[...header.variables.keys()].join(', ')}.`);
+  const total = variable.shape.reduce((product, length) => product * length, 1), perRecord = place.record ? total / Math.max(1, header.records) : total;
+  if (!Number.isSafeInteger(start) || !Number.isSafeInteger(count) || start < 0 || count <= 0 || start + count > total)
+    throw new RangeError(`${label}: variable ${name} has ${total} values, and ${count} from value ${start} were asked for.`);
+  const record = place.record ? Math.floor(start / perRecord) : 0, within = start - record * perRecord;
+  if (within + count > perRecord) throw new RangeError(`${label}: values ${start} to ${start + count - 1} of ${name} lie in more than one record, and so in more than one run of bytes.`);
+  return { offset: place.begin + record * header.recordBytes + within * place.elementBytes, length: count * place.elementBytes };
+}
+
+/** The numbers a run of stored bytes holds, as the variable's type reads them: no scale, offset or fill is applied. */
+export function storedValues(header: NetcdfHeader, name: string, bytes: Buffer, label: string): Float64Array {
+  const variable = header.variables.get(name), place = header.layout.get(name);
+  if (!variable || !place) throw new TypeError(`${label} has no variable ${name}.`);
+  if (variable.type === 'char') throw new TypeError(`${label}: variable ${name} is text, not numbers.`);
+  if (bytes.length % place.elementBytes) throw new TypeError(`${label}: ${bytes.length} bytes are not a whole number of ${name}'s ${place.elementBytes}-byte values.`);
+  const code = place.typeCode;
+  return Float64Array.from({ length: bytes.length / place.elementBytes }, (_, index) => {
+    const at = index * place.elementBytes;
+    return code === 5 ? bytes.readFloatBE(at) : code === 6 ? bytes.readDoubleBE(at) : code === 4 ? bytes.readInt32BE(at) : code === 3 ? bytes.readInt16BE(at)
+      : code === 1 ? bytes.readInt8(at) : code === 7 ? bytes.readUInt8(at) : code === 8 ? bytes.readUInt16BE(at) : code === 9 ? bytes.readUInt32BE(at)
+      : code === 10 ? Number(bytes.readBigInt64BE(at)) : Number(bytes.readBigUInt64BE(at));
+  });
+}
+
 export interface ClassicNetcdf extends NetcdfHeader {
   /** Every value of a numeric variable, in storage order (the last dimension varying fastest), as stored: no scale, offset or fill is applied. */
   values(name: string): Promise<Float64Array>;
+  /** `count` of those values from the `start`-th, read from their own bytes alone. */
+  slice(name: string, start: number, count: number): Promise<Float64Array>;
   close(): Promise<void>;
 }
 
@@ -147,25 +177,20 @@ export async function openClassicNetcdf(path: string): Promise<ClassicNetcdf> {
       }
     }
     const parsed = header;
-    return { ...parsed, close: () => file.close(), async values(name: string) {
+    const slice = async (name: string, start: number, count: number) => {
+      const { offset, length } = valueRange(parsed, name, start, count, path), bytes = Buffer.alloc(length);
+      const { bytesRead } = await file.read(bytes, 0, length, offset);
+      if (bytesRead !== length) throw new TypeError(`${path} ends inside variable ${name}: ${bytesRead} of ${length} bytes at ${offset}.`);
+      return storedValues(parsed, name, bytes, path);
+    };
+    return { ...parsed, close: () => file.close(), slice, async values(name: string) {
       const variable = parsed.variables.get(name), place = parsed.layout.get(name);
       if (!variable || !place) throw new TypeError(`${path} has no variable ${name}; it has ${[...parsed.variables.keys()].join(', ')}.`);
       if (variable.type === 'char') throw new TypeError(`${path}: variable ${name} is text, not numbers.`);
       const total = variable.shape.reduce((product, length) => product * length, 1);
       if (total > MAXIMUM_VALUES) throw new RangeError(`${path}: variable ${name} has ${total} values, more than the ${MAXIMUM_VALUES} read at once.`);
       const perRecord = place.record ? total / Math.max(1, parsed.records) : total, out = new Float64Array(total);
-      for (let record = 0, written = 0; written < total; record++) {
-        const bytes = Buffer.alloc(perRecord * place.elementBytes), position = place.begin + (place.record ? record * parsed.recordBytes : 0);
-        const { bytesRead } = await file.read(bytes, 0, bytes.length, position);
-        if (bytesRead !== bytes.length) throw new TypeError(`${path} ends inside variable ${name}: ${bytesRead} of ${bytes.length} bytes at ${position}.`);
-        for (let index = 0; index < perRecord; index++, written++) {
-          const at = index * place.elementBytes;
-          out[written] = place.typeCode === 5 ? bytes.readFloatBE(at) : place.typeCode === 6 ? bytes.readDoubleBE(at)
-            : place.typeCode === 4 ? bytes.readInt32BE(at) : place.typeCode === 3 ? bytes.readInt16BE(at) : place.typeCode === 1 ? bytes.readInt8(at)
-            : place.typeCode === 7 ? bytes.readUInt8(at) : place.typeCode === 8 ? bytes.readUInt16BE(at) : place.typeCode === 9 ? bytes.readUInt32BE(at)
-            : place.typeCode === 10 ? Number(bytes.readBigInt64BE(at)) : Number(bytes.readBigUInt64BE(at));
-        }
-      }
+      for (let written = 0; written < total; written += perRecord) out.set(await slice(name, written, perRecord), written);
       return out;
     } };
   } catch (error) { await file.close(); throw error; }

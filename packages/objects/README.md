@@ -49,7 +49,7 @@ files, which the bake writes, `setup:assets` restores and the build assembles (t
 check an object against its contract (its final prepared definition, read from
 `src/objects/<id>/prepared/runtime.json`, and fixture values required before a test
 inspects them).
-`@cssearth/objects/node/source-test` is the Node-only test helper for restored object source inputs.
+`@cssearth/objects/node/source-test` is the public Node-only test API for restored source inputs across packages, labs, site and CI; `node/contract` provides fixtures and loaders and also exports this support.
 
 ```text
 packages/objects/
@@ -58,7 +58,7 @@ packages/objects/
 │   ├── provenance/ Provenance, exploration and source-usage records (`@cssearth/objects/provenance`)
 │   └── node/      Source manifests, the prepared registry read and the runtime asset closure (`@cssearth/objects/node`, Node only)
 │       ├── contract/ Object test helpers (`@cssearth/objects/node/contract`, Node only)
-│       └── source-test.ts Compatibility facade for contract/source-test.ts (`@cssearth/objects/node/source-test`, Node only)
+│       └── source-test.ts Public restored-source test API (`@cssearth/objects/node/source-test`, Node only)
 ├── AGENTS.md      Package boundaries
 └── CLAUDE.md      Symlink to AGENTS.md
 ```
@@ -195,21 +195,21 @@ contracts in `src/prepared-data/`, exported through `@cssearth/objects`. Source 
 metadata and panel field parsing preserve caller diagnostics. Asset production, editorial checks, Astro adapters,
 source binding resolution and image byte inspection stay in bake/site. Contract tests use node:test in the packages lane.
 
-Astronomy published-orbit/epoch, solar-system preparation, investigation-ledger and acquisition-plan schema identifiers live in `src/prepared-data/`; physical scene source/unit reads, acquisition and investigation parsers are shared. Scientific evaluation, survey expansion, Node containment, DSK validation and acquisition execution stay with their owners; host callbacks preserve admission order.
-Authored CSS presentation profiles and their pure parser belong to objects; compilation stays with bake.
-CSS geometry profiles, surface geometry/seam-outset data and the pure profile parser belong to objects; scene validation and generation stay with bake.
-Navigation marker recipe identifiers and wire types belong to objects; image/source validation and preparation stay with bake.
-Paged ellipsoid recipes, authored camera fields and pure parsers belong to objects. Full assets and navigation field reads retain separate admission policies; camera derivation and asset preparation stay with bake/site.
-Chart asset recipes and nested spectrum, measured-spectrum, retrieved-profile and system-orbits parsers belong to objects. Envelope/source spectrum admission stays distinct; rendering, source sampling and Node file paths stay with consumers.
-Volume dataset manifest identifiers live in `src/volume/delivery/volume-dataset-manifest.ts`; output selection and byte checks stay with bake/lab.
-Compact density delivery identifiers live in `src/volume/compact/compact-density-delivery.ts`; replay and source-owner admission stay with bake/lab.
-Nebula depth-model identifiers and `DepthRecipe`/`DepthSurface` wire types and the pure recipe parser live in `src/volume/nebula/nebula-depth-model.ts`; the caller supplies joint-path admission, while evidence policy and sampling stay with reconstruction/lab.
-Gaia nebula-field types and the pure parser live in `src/volume/nebula/gaia-nebula-field.ts`; explicit catalogue-selection and astrometry-table subsets preserve their historical admission and diagnostics. Projection, scientific admission, selection and file I/O stay with bake/telescope-cli.
-Nebula delivery identifiers, sky-frame data and pure envelope admission live in `src/volume/nebula/nebula-delivery.ts`; transport and compilation stay with bake/telescope-cli/lab.
-Circumstellar reconstruction identifiers, reconstruction records and opacity data live in `src/volume/nebula/circumstellar-reconstruction.ts`; opacity computation, reconstruction and historical file admission stay with lab/telescope-cli.
-UVFITS request/response types and pure validation live in `src/prepared-data/source/pyuvdata-uvfits.ts`; process and toolchain handling stay in telescope.
-Volume source-manifest envelope admission and context records live in `src/prepared-data/source/volume-source-manifest.ts`; manifest I/O, restoration and lineage stay with callers.
-Volume presentation-source identifiers, preview parsing and pure preview/dataset/presentation records live in `src/prepared-data/source/volume-presentation-source.ts`; preview creation and dataset text validation stay with callers.
+- Astronomy published-orbit/epoch, solar-system preparation, investigation-ledger and acquisition-plan schema identifiers live in `src/prepared-data/`; physical scene source/unit reads, acquisition and investigation parsers are shared. Scientific evaluation, survey expansion, Node containment, DSK validation and acquisition execution stay with their owners; host callbacks preserve admission order.
+- Authored CSS presentation profiles and their pure parser belong to objects; compilation stays with bake.
+- CSS geometry profiles, surface geometry/seam-outset data and the pure profile parser belong to objects; scene validation and generation stay with bake.
+- Navigation marker recipe identifiers and wire types belong to objects; image/source validation and preparation stay with bake.
+- Paged ellipsoid recipes, authored camera fields and pure parsers belong to objects. Full assets and navigation field reads retain separate admission policies; camera derivation and asset preparation stay with bake/site.
+- Chart asset recipes and nested spectrum, measured-spectrum, retrieved-profile and system-orbits parsers belong to objects. Envelope/source spectrum admission stays distinct; rendering, source sampling and Node file paths stay with consumers.
+- Volume dataset manifest identifiers live in `src/volume/delivery/volume-dataset-manifest.ts`; output selection and byte checks stay with bake/lab.
+- Compact density delivery identifiers live in `src/volume/compact/compact-density-delivery.ts`; replay and source-owner admission stay with bake/lab.
+- Nebula depth-model identifiers and `DepthRecipe`/`DepthSurface` wire types and the pure recipe parser live in `src/volume/nebula/nebula-depth-model.ts`; the caller supplies joint-path admission, while evidence policy and sampling stay with reconstruction/lab.
+- Gaia nebula-field types and the pure parser live in `src/volume/nebula/gaia-nebula-field.ts`; explicit catalogue-selection and astrometry-table subsets preserve their historical admission and diagnostics. Projection, scientific admission, selection and file I/O stay with bake/telescope-cli.
+- Nebula delivery identifiers, sky-frame data and pure envelope admission live in `src/volume/nebula/nebula-delivery.ts`; transport and compilation stay with bake/telescope-cli/lab.
+- Circumstellar reconstruction identifiers, reconstruction records and opacity data live in `src/volume/nebula/circumstellar-reconstruction.ts`; opacity computation, reconstruction and historical file admission stay with lab/telescope-cli.
+- UVFITS request/response types and pure validation live in `src/prepared-data/source/pyuvdata-uvfits.ts`; process and toolchain handling stay in telescope.
+- Volume source-manifest envelope admission and context records live in `src/prepared-data/source/volume-source-manifest.ts`; manifest I/O, restoration and lineage stay with callers.
+- Volume presentation-source identifiers, preview parsing and pure preview/dataset/presentation records live in `src/prepared-data/source/volume-presentation-source.ts`; preview creation and dataset text validation stay with callers.
 
 Published mutual-orbit and body-epoch structures and pure decoding live in `src/prepared-data/orbit/published-orbit.ts`;
 scientific evaluation and source I/O stay in astronomy. Product records and their evidence kinds/parser live in

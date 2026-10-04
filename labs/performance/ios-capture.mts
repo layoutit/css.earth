@@ -35,7 +35,7 @@
 // it never differs. It also prints the before/after table (frames, work and compositing per frame, slow frames, layer
 // memory, and on a device its frame rate and Safari's memory), from the means of every baseline capture of that name and of
 // this command's --runs <n> repeats, and writes it to comparison.md in the last run.
-import { MissingSourceInputError } from '@cssearth/core';
+import { MissingSourceInputError, isRecord, requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { holdNativeDeviceTunnel } from './ipad-native-tunnel.mts';
 import { appendFileSync } from 'node:fs';
 import { symbolicateNativeXml } from './native-symbols.mts';
@@ -48,7 +48,6 @@ import { gunzipSync, gzip, gzipSync } from 'node:zlib';
 import pixelmatch from 'pixelmatch';
 import sharp from 'sharp';
 import type { SourceMapConsumer } from 'source-map-js';
-import { isRecord, requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { readSourceMap } from './trace-sources.mts';
 import { startLayerSampler } from './ipad-layer-sampler.mts';
 import { INSTALL_TRACE_CAUSES, STOP_TRACE_CAUSES } from './ipad-trace-causes.mts';

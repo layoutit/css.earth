@@ -49,7 +49,7 @@
   },
   "datasets": {
     "titleKey": "datasets",
-    "defaultDataset": "shape",
+    "defaultDataset": "temperature",
     "controls": [
       {
         "id": "shape",
@@ -65,6 +65,66 @@
         },
         "falseColor": false,
         "notes": "No image or color of LHS 1140 c is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the color of lhs-1140's light, as its color dataset measures it."
+      },
+      {
+        "id": "temperature",
+        "label": "Rock model",
+        "qualification": "A model set by one measurement: the 15 µm eclipse depth of Fortune et al. (2025), three JWST MIRI F1500W eclipses of the Hot Rocks Survey",
+        "thumbnail": "lhs-1140c-dataset-temperature.webp",
+        "surface": "lhs-1140c-surface-temperature@2x.webp",
+        "poles": "lhs-1140c-poles-temperature@2x.webp",
+        "source": {
+          "id": "lhs-1140c-temperature-eclipse-depth",
+          "path": "../manifest.json",
+          "url": "https://arxiv.org/abs/2505.22186"
+        },
+        "falseColor": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Brightness temperature",
+          "labels": [
+            "≤ 50",
+            "375",
+            "700"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                13,
+                8,
+                135
+              ],
+              [
+                126,
+                3,
+                168
+              ],
+              [
+                204,
+                71,
+                120
+              ],
+              [
+                248,
+                149,
+                64
+              ],
+              [
+                240,
+                249,
+                33
+              ]
+            ],
+            "labels": [
+              "≤ 50",
+              "375",
+              "700"
+            ]
+          },
+          "meta": "K",
+          "sourceUrl": "https://arxiv.org/abs/2505.22186"
+        },
+        "notes": "A model, not a map. Only LHS 1140 c's dayside brightness is measured: an eclipse depth of 230 to 316 ppm at 15 µm (Fortune et al. (2025)), which the paper finds in excellent agreement with a low-albedo bare rock. A bare rock with that depth is 558 to 647 K under the star and dark at night; whether the night side is dark is not measured. With shadows on, the star's light darkens the night half."
       }
     ]
   },

@@ -6,11 +6,11 @@ const record = { schema: DISPLAY_ORIENTATION_SCHEMA, rightAscensionDegrees: 10, 
   displayMeridianDegrees: 0, phase: 'arbitrary-display-phase', qualification: 'illustrative' };
 test('display orientation preserves numeric and attribution admission', () => {
   assert.equal(DISPLAY_ORIENTATION_SCHEMA, 'cssearth-display-orientation@1');
-  assert.deepEqual(parseAuthoredOrientation(record), { rightAscensionDegrees: 10, declinationDegrees: -90, displayMeridianDegrees: 0, periodHours: 0 });
+  assert.deepEqual(parseAuthoredOrientation(record), { rightAscensionDegrees: 10, declinationDegrees: -90, displayMeridianDegrees: 0, periodHours: undefined });
   for (const patch of [{ schema: 'other' }, { phase: 'measured' }, { qualification: '' }, { qualification: ' ' }, { declinationDegrees: 91 }])
     assert.throws(() => parseAuthoredOrientation({ ...record, ...patch }), { message: 'Invalid authored orientation source.' });
   assert.throws(() => parseAuthoredOrientation({ ...record, rightAscensionDegrees: Infinity }), TypeError);
-  assert.equal(parseAuthoredOrientation({ ...record, periodHours: 0 }).periodHours, 0);
+  assert.equal(parseAuthoredOrientation({ ...record, periodHours: 0 }).periodHours, undefined);
 });
 test('observed-pole field policy preserves positive periods and optional qualification', () => {
   assert.equal(parseAuthoredOrientation({ ...record, qualification: undefined, periodHours: 24 }, { observed: true }).periodHours, 24);

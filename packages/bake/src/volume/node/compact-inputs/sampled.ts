@@ -1,8 +1,7 @@
-import { readCompactSampled, decodeCompactPointColors } from '@cssearth/objects';
-import { readCompactPin as pinned } from './io.ts';
 /** Replay retained measured samples and emitter colors without fitting or native images. */
+import { readCompactSampled, decodeCompactPointColors, readCompilerBakeResult, type CompilerPin } from '@cssearth/objects';
+import { readCompactPin as pinned } from './io.ts';
 import { gunzipSync } from 'node:zlib';
-import { readCompilerBakeResult, type CompilerPin } from '@cssearth/objects';
 import { prepareSampledMaterial } from '../../materials/sampled.ts';
 import { prepareSampledField } from '../../fields/sampled.ts';
 import { gridDiffuse } from '../../fields/diffuse-atoms.ts';

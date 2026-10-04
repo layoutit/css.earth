@@ -18,4 +18,3 @@ export function parseLimbBlock(value: unknown, where: string): LimbBlock {
     throw new TypeError(`${where}.reference must be a source-relative image path, got ${JSON.stringify(record.reference)}.`);
   return { models: [models[0], models[1], models[2]], ...(record.reference === undefined ? {} : { reference: record.reference as string }) };
 }
-

@@ -1,5 +1,5 @@
-import { parseLabModelJson, resolveLabModelPath } from '../../resources/model-paths.ts';
 /** Acquisition of full-resolution lab reference images by URL, checked by their declared dimensions; never a browser dependency. */
+import { parseLabModelJson, resolveLabModelPath } from '../../resources/model-paths.ts';
 import { createWriteStream } from 'node:fs';
 import { mkdir, readFile, rename, stat, writeFile } from 'node:fs/promises';
 import { basename, dirname, resolve } from 'node:path';

@@ -1,12 +1,11 @@
 #!/usr/bin/env node
-import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 /** Scaffold a placed-star object package from its astronomy record, instead of cloning another star by find-and-replace.
  *
  *   node packages/telescope-cli/src/new-object/new-object-cli.mts --spec <stars.json> [--skip-existing] [--check | --bake]
  *   node packages/telescope-cli/src/new-object/new-object-cli.mts --bake <id>...
  *   node packages/telescope-cli/src/new-object/new-object-cli.mts --refresh <id>... [--check | --bake]
  *   node packages/telescope-cli/src/new-object/new-object-cli.mts --thermal <id>... | --host-light <id>... | --photometry entries.json | --phase-curve entries.json
- *   node packages/telescope-cli/src/new-object/new-object-cli.mts --simulation entries.json
+ *   node packages/telescope-cli/src/new-object/new-object-cli.mts --simulation entries.json | --rock-eclipse entries.json | --published-map entries.json
  *   node packages/telescope-cli/src/new-object/new-object-cli.mts --rename <star id>...
  *   node packages/telescope-cli/src/new-object/new-object-cli.mts --retext <host id>... | --charts <host id>... | --retime <host id>...
  *   node packages/telescope-cli/src/new-object/new-object-cli.mts --star-limb <id>... [--bake]
@@ -27,6 +26,7 @@ import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
  * (`@cssearth/bake/objects/color`, star-catalogue-color.ts). The package starts with the shape dataset and stays off the map until a surface image is added.
  * Prose the scaffold cannot know (reader text, README, credits, ledger) is written with the marker TODO(new-object), which
  * src/objects/object-package-consistency.test.mts refuses. Then run: node packages/bake/cli/prepare-object.mts <id> */
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 import { realpathSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -88,7 +88,19 @@ if (process.argv[1] && import.meta.url === pathToFileURL(realpathSync(process.ar
     // Published simulations for bodies already in the tree, each from an entry written after reading its paper: `--simulation entries.json` (new-object/simulation/simulation-dataset.mts).
     const { readFile } = await import('node:fs/promises'), { parseSimulationEntries } = await import('./simulation/simulation-dataset.mts'), { rebuildExistingDatasets } = await import('./planet-datasets.mts'), { liveArchive } = await import('./archives/archives.mts');
     const entries = parseSimulationEntries(JSON.parse(await readFile(option('simulation')!, 'utf8')));
-    const lines = await rebuildExistingDatasets(process.cwd(), [...entries.keys()], 'simulation', liveArchive, line => process.stdout.write(`${line}\n`), new Map(), new Map(), entries);
+    const lines = await rebuildExistingDatasets(newObjectPath(), [...entries.keys()], 'simulation', liveArchive, line => process.stdout.write(`${line}\n`), new Map(), new Map(), entries);
+    process.stdout.write(`${lines.length} dataset${lines.length === 1 ? '' : 's'} written. Bake: node packages/bake/cli/prepare-object.mts ${[...entries.keys()].join(' ')}\n`);
+  } else if (option('rock-eclipse') !== undefined && !specPath) {
+    // Bare-rock models from published eclipse depths for rocky planets already in the tree: `--rock-eclipse entries.json` (new-object/rock/rock-eclipse-dataset.mts).
+    const { readFile } = await import('node:fs/promises'), { addRockEclipseDatasets, parseRockEclipseEntries } = await import('./rock/rock-eclipse-dataset.mts'), { liveArchive } = await import('./archives/archives.mts');
+    const entries = parseRockEclipseEntries(JSON.parse(await readFile(option('rock-eclipse')!, 'utf8')));
+    const lines = await addRockEclipseDatasets(checkoutProjectRoot(import.meta.url), entries, liveArchive, line => process.stdout.write(`${line}\n`));
+    process.stdout.write(`${lines.length} dataset${lines.length === 1 ? '' : 's'} written. Bake: node packages/bake/cli/prepare-object.mts ${[...entries.keys()].join(' ')}\n`);
+  } else if (option('published-map') !== undefined && !specPath) {
+    // Eclipse maps their authors released, for planets already in the tree: `--published-map entries.json` (new-object/map/published-map-dataset.mts).
+    const { readFile } = await import('node:fs/promises'), { addPublishedMapDatasets, parsePublishedMapEntries } = await import('./map/published-map-dataset.mts'), { liveArchive } = await import('./archives/archives.mts');
+    const entries = parsePublishedMapEntries(JSON.parse(await readFile(option('published-map')!, 'utf8')));
+    const lines = await addPublishedMapDatasets(checkoutProjectRoot(import.meta.url), entries, liveArchive, line => process.stdout.write(`${line}\n`));
     process.stdout.write(`${lines.length} dataset${lines.length === 1 ? '' : 's'} written. Bake: node packages/bake/cli/prepare-object.mts ${[...entries.keys()].join(' ')}\n`);
   } else if (option('photometry') !== undefined && !specPath) {
     // Band photometry for imaged planets already in the tree: `--photometry entries.json`, a list of { id, photometry } (spec.mts PhotometrySpec).

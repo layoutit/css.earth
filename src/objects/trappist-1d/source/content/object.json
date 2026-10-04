@@ -62,7 +62,7 @@
   },
   "datasets": {
     "titleKey": "datasets",
-    "defaultDataset": "shape",
+    "defaultDataset": "climate-model",
     "controls": [
       {
         "id": "shape",
@@ -93,6 +93,66 @@
         },
         "falseColor": false,
         "notes": "NASA's artist's concept of TRAPPIST-1d: the map its Eyes on Exoplanets app wraps around the planet. Nobody has resolved this planet's disc, so none of the color, clouds or terrain in it was observed. Its longitudes are arbitrary."
+      },
+      {
+        "id": "climate-model",
+        "label": "Climate model",
+        "qualification": "Simulation · Generic PCM · Turbet et al. (2023) · False color",
+        "thumbnail": "trappist-1d-dataset-climate-model.webp",
+        "surface": "trappist-1d-surface-climate-model@2x.webp",
+        "poles": "trappist-1d-poles-climate-model@2x.webp",
+        "source": {
+          "id": "trappist-1d-climate-model-simulation",
+          "path": "../manifest.json",
+          "url": "https://arxiv.org/abs/2308.15110"
+        },
+        "falseColor": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Outgoing thermal radiation",
+          "labels": [
+            "200",
+            "400",
+            "600"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                4
+              ],
+              [
+                87,
+                16,
+                110
+              ],
+              [
+                188,
+                55,
+                84
+              ],
+              [
+                249,
+                142,
+                9
+              ],
+              [
+                252,
+                255,
+                164
+              ]
+            ],
+            "labels": [
+              "200",
+              "400",
+              "600"
+            ]
+          },
+          "meta": "W/m²",
+          "sourceUrl": "https://arxiv.org/abs/2308.15110"
+        },
+        "notes": "Outgoing thermal radiation of TRAPPIST-1d in the Generic PCM simulation of Turbet et al. (2023): a model, not a measurement. The run assumes one bar of nitrogen with ten bars of water vapor, the steam atmosphere of a planet too hot for its water to condense, on a planet that keeps one face to its star. The map is one instant, the run's last output. Nobody has detected an atmosphere on TRAPPIST-1d. JWST's transit spectrum is flat: it rules out thick clear atmospheres and leaves a thin one, one with high clouds, or none (Piaulet-Ghorayeb et al. 2025). Another model, given an Earth-like atmosphere, finds a temperate surface possible within narrow limits (Way 2025). The false color runs from 200 to 600 W/m²; it is not what an eye would see. With shadows on, the star's light darkens the night half."
       }
     ]
   },

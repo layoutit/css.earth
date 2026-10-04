@@ -1,7 +1,6 @@
-import { normalizeOrZero as normalizeVector } from '@cssearth/core';
+import { normalizeOrZero as normalizeVector, isArray, requireFiniteNumber, requireString } from '@cssearth/core';
 import { applyLinearTint } from '../../color/index.ts';
-import { isArray, requireFiniteNumber, requireString } from '@cssearth/core';
-import {basename} from 'node:path';
+import { basename, resolve } from 'node:path';
 import { writeLossyWebp } from '../../../raster/index.ts';
 import type {WebpOptions} from 'sharp';
 import type {RasterInfo} from '../observation/index.ts';
@@ -19,7 +18,6 @@ type AtmosphereModel = Awaited<ReturnType<AtmospherePreparation['readAtmosphereM
 type Tomography = Awaited<ReturnType<typeof readMantleTomography>>;
 interface SphereAssetInput extends RasterInfo {data: Buffer; density: number; canonical?: boolean; outputRoot?: string; name: string; bandCount: number; polarCapBandSpan?: number; projectiveSurface?: boolean; longitudeOffsetDegrees: number; webp?: WebpOptions; cutaway?: Cutaway; nativePhotographicClouds?: NativePhotographicCloudComposite; nativePhotographicSampling?: boolean; nativePhotographicDisplayGamma?: number; nativeDeepOceanFill?: NativeDeepOceanFill;}
 import { mkdir, readFile, rm } from "node:fs/promises";
-import { resolve } from "node:path";
 import sharp from "sharp";
 import { verifyPreparedMurImage, writeMurLegend } from "./globe/mur-image.ts";
 import { prepareElevationMap, writeElevationLegend } from "./elevation.ts";

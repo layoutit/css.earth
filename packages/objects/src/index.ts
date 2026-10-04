@@ -6,7 +6,7 @@ export type { ImageLayerBankDescriptor } from './image-layer-bank.js';
 export { parseCataloguePointBankDescriptor } from './catalogue-point-bank.js';
 export type { CataloguePointBankDescriptor } from './catalogue-point-bank.js';
 export { parseDensityVolumeFrame, parseDensityVolumeObjectDescriptor } from './density-volume.js';
-export { CATALOGUE_CELL_POINTS, CATALOGUE_POINTS_SCHEMA, MAX_CATALOGUE_POINTS, catalogueCells, cataloguePointSpread, parseCatalogueCells, parseCataloguePointSpread } from './catalogue-points.js';
+export { CATALOGUE_CELL_POINTS, CATALOGUE_POINTS_SCHEMA, MAX_CATALOGUE_POINTS, parseCatalogueCells, parseCataloguePointSpread } from './catalogue-points.js';
 export type { CatalogueCells, CataloguePointSpread } from './catalogue-points.js';
 export type { DensityVolumeFrame, DensityVolumeObjectDescriptor, DensityVolumePreparationReference, VolumeQuaternion, VolumeVector } from './density-volume.js';
 export { parseAuthoredObjectDescriptor, parseAuthoredRecipe } from './authored.js';
@@ -154,7 +154,7 @@ export { readEmissionWindow } from './volume/emission/emission-window.js';
 export type { EmissionWindow } from './volume/emission/emission-window.js';
 export { validateEnvelopeSettings, SIMULATION_ENVELOPE_SCHEMA, readSimulationEnvelopeRecord } from './volume/nebula/simulation-envelope.js';
 export type { SimulationEnvelopeSettings, SimulationEnvelopeRecord } from './volume/nebula/simulation-envelope.js';
-export { PHOTOMETRIC_MGE_SCHEMA, readPhotometricMgeRecipe } from './volume/emission/photometric-mge.js';
+export { PHOTOMETRIC_MGE_SCHEMA, readPhotometricMgeRecipe, readPublishedPhotometricMgeRecipe } from './volume/emission/photometric-mge.js';
 export type { PhotometricGaussian, PhotometricMgeRecipe } from './volume/emission/photometric-mge.js';
 export { PHOTOMETRIC_ENVELOPE_SCHEMA, readPhotometricEnvelope, readEnvelopeColors } from './volume/emission/photometric-emission.js';
 export type { RetainedPhotometricEnvelope, EnvelopeColors } from './volume/emission/photometric-emission.js';
@@ -227,7 +227,7 @@ export { PREPARED_CONTENT_SCHEMA, parsePreparedPanelContent, type PreparedObject
 export { FACILITY_EMBLEMS_SCHEMA, readFacilityEmblemSource, parseFacilityEmblemLibrary, parseFacilityEmblemImage, type FacilityEmblemEntry, type FacilityEmblemLibrary } from './prepared-data/content/facility-emblems.js';
 
 // E2-rest: P1
-export { PUBLISHED_MUTUAL_ORBIT_SCHEMA, PUBLISHED_BODY_EPOCH_EPHEMERIS_SCHEMA, SOLAR_SYSTEM_PREPARATION_SCHEMA, INVESTIGATION_LEDGER_SCHEMA, ACQUISITION_PLAN_SCHEMA } from './prepared-data/source/source-schema-identifiers.js';
+export { PUBLISHED_MUTUAL_ORBIT_SCHEMA, PUBLISHED_BODY_EPOCH_EPHEMERIS_SCHEMA, SOLAR_SYSTEM_PREPARATION_SCHEMA, INVESTIGATION_LEDGER_SCHEMA, ACQUISITION_PLAN_SCHEMA, ECLIPSE_DEPTH_SCHEMA } from './prepared-data/source/source-schema-identifiers.js';
 export type { AcquisitionOperation, AcquisitionPlan } from './prepared-data/source/acquisition-plan.js';
 export { INVESTIGATION_STATUSES, type InvestigationStatus, type InvestigationEntry, type InvestigationLedger, type FacilityInvestigationLedger } from './prepared-data/source/investigation-ledger.js';
 // E2-rest: P2
@@ -246,7 +246,7 @@ export { PYUVDATA_UVFITS_SCHEMA, parsePyuvdataUvfitsRequest, parsePyuvdataUvfits
 export { VOLUME_SOURCE_MANIFEST_SCHEMA, parseVolumeSourceManifest, parseVolumeContextProducts, type VolumeManifestReader, type VolumeContextProduct } from './prepared-data/source/volume-source-manifest.js';
 export { VOLUME_PRESENTATION_SOURCE_SCHEMA, parseVolumeSourcePreview, isTrackedVolumeSourcePreview, type VolumeSourcePreview, type TrackedVolumeSourcePreview, type VolumeDatasetSource, type VolumePresentationSource } from './prepared-data/source/volume-presentation-source.js';
 export { parseGeometryProfile, type GeometryProfile, type SeamOutsetProfile, type SurfaceGeometryProfile } from './prepared-data/presentation/css-geometry-profile.js';
-export { parseDepthRecipe } from './volume/nebula/nebula-depth-model.js';
+export { parseDepthRecipe, readPublishedDepthRecipe } from './volume/nebula/nebula-depth-model.js';
 export { parseAcquisitionPlan, type AcquisitionValidationPolicy } from './prepared-data/source/acquisition-plan.js';
 export { evidenceLink, parseInvestigationLedger, parseFacilityLedger, type InvestigationEntryExpansion } from './prepared-data/source/investigation-ledger.js';
 export { parseMeasuredSpectrum, type MeasuredSpectrumRecipe, type MeasurementSource } from './prepared-data/photometry/chart-measured-spectrum.js';
@@ -291,3 +291,5 @@ export { PACKAGED_POINTS_SOURCE_SCHEMA, readPackagedPointsFrame } from './prepar
 export { HOSTED_PLANET_MEASUREMENTS_SCHEMA, NEUTRON_STAR_MEASUREMENTS_SCHEMA, readPreparedChartContentRecord } from './prepared-data/presentation/build-projections.js';
 
 export { MAP_SPHERE_DATASETS_SCHEMA, readMapSphereDatasetPreviews } from './prepared-data/surface/map-sphere-datasets.js';
+export { LEAF_BOX_PROPERTY, LEAF_BOX_FACTOR, SURFACE_SEAM_OUTSET_PROPERTY } from './prepared-data/presentation/leaf-box-properties.js';
+export { requirePresentationEnvelope } from './prepared-data/runtime-validation/presentation-envelope.js';

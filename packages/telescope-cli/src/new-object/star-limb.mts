@@ -14,8 +14,8 @@
  * A generated star with no mass said in its README that no gravity is published, and a draft that found none declined a law in its
  * stored spec. When the law is read at a published gravity, both take it: the README names the paper, and the stored spec cites the
  * gravity as a draft of the star now would (gravity.mts citedGravity), so `--refresh` regenerates the star with its law. */
-import { requireFiniteNumber } from '@cssearth/core';
-import { PUBLISHED_LIMB_DARKENING_SCHEMA, INVESTIGATION_LEDGER_SCHEMA } from '@cssearth/objects';
+import { requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
+import { PUBLISHED_LIMB_DARKENING_SCHEMA, INVESTIGATION_LEDGER_SCHEMA, readPublishedPowerLaw, readPublishedLimbDarkening } from '@cssearth/objects';
 import { mkdir, readFile, readdir, rm, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { parseCieTable } from '@cssearth/bake/objects/color';
@@ -61,17 +61,19 @@ async function publishedLaw(root: string, id: string): Promise<LimbChoice | null
   const directory = resolve(root, 'src/objects', id, 'source/photometry');
   const names = (await readdir(directory).catch(() => [] as string[])).filter(name => name.endsWith('-limb-darkening.json'));
   for (const name of names) {
-    const record = JSON.parse(await readFile(resolve(directory, name), 'utf8')) as { schema?: string; law?: string; source?: string; band?: string; basis?: string; alpha?: { value: number }; u1?: { value: number }; u2?: { value: number }; fit?: { tool: string; input: string; data: string } };
+    const record = requireRecord(JSON.parse(await readFile(resolve(directory, name), 'utf8')), 'published limb darkening');
     if (record.schema !== PUBLISHED_LIMB_DARKENING_SCHEMA) continue;
+    const coefficients = record.law === 'power' ? readPublishedPowerLaw(record) : readPublishedLimbDarkening(record);
+    const fit = record.fit === undefined ? undefined : requireRecord(record.fit, 'limb fit');
     // A fitted law's origin is the origin of the file it was fitted to, as the star's manifest records it.
-    const fitted = record.fit && ((JSON.parse(await readFile(resolve(root, 'src/objects', id, 'source/manifest.json'), 'utf8')) as { inputs?: { path: string; origin?: string }[] }).inputs ?? []).find(input => input.path === record.fit!.input)?.origin;
-    const path = `photometry/${name}`, url = fitted ?? /https?:\/\/\S+?(?=[),;]|\s|$)/u.exec(record.source ?? '')?.[0] ?? '';
-    const credit = (record.source ?? '').split(/,\s*(?=https?:|Table|Section)/u)[0]!.trim();
+    const fitted = fit && ((JSON.parse(await readFile(resolve(root, 'src/objects', id, 'source/manifest.json'), 'utf8')) as { inputs?: { path: string; origin?: string }[] }).inputs ?? []).find(input => input.path === fit.input)?.origin;
+    const path = `photometry/${name}`, url = fitted ?? /https?:\/\/\S+?(?=[),;]|\s|$)/u.exec(requireString(record.source, 'source'))?.[0] ?? '';
+    const credit = (requireString(record.source, 'source')).split(/,\s*(?=https?:|Table|Section)/u)[0]!.trim();
     // A law fitted in this package to a pinned input says so, and names the tool that refits it; any other record is a paper's.
-    const fit = record.fit;
-    const law = fit ? `the ${record.law === 'power' ? `power law I(mu) = mu^${record.alpha?.value}` : `quadratic law (u1 ${record.u1?.value}, u2 ${record.u2?.value})`} fitted in this package to ${fit.data} (${record.band})`
-      : record.law === 'power' ? `the power law I(mu) = mu^${record.alpha?.value} that ${credit} fit to the star's resolved disc (${record.band})`
-      : `the quadratic law (u1 ${record.u1?.value}, u2 ${record.u2?.value}) ${credit} ${record.basis === 'model-prior' ? 'fixed from model atmospheres for this star' : 'fit to this star'} (${record.band})`;
+    const terms = coefficients.law === 'power' ? `power law I(mu) = mu^${coefficients.alpha}` : `quadratic law (u1 ${coefficients.u1}, u2 ${coefficients.u2})`;
+    const law = fit ? `the ${terms} fitted in this package to ${fit.data} (${record.band})`
+      : coefficients.law === 'power' ? `the ${terms} that ${credit} fit to the star's resolved disc (${record.band})`
+      : `the ${terms} ${credit} ${record.basis === 'model-prior' ? 'fixed from model atmospheres for this star' : 'fit to this star'} (${record.band})`;
     return { limbDarkening: { law: record.law === 'power' ? 'power' : 'quadratic', published: true, path }, sentence: `dimmed toward the limb by ${law}`, credit: `Limb darkening: ${credit}.`,
       inputs: [{ id: `${id}-${name.replace(/\.json$/u, '')}`, path, origin: url, credit, license: 'Factual numerical measurements; source attribution retained',
         acquisition: fit ? `Fitted by ${fit.tool} to ${fit.input}` : 'Transcribed from the paper, each value with its quoted cell', redistribution: fit ? 'A fitted parameter with its method; no paper figures' : 'Factual parameter transcription only; no paper figures', consumers: ['assets', 'datasets'],

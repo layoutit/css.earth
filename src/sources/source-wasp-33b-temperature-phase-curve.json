@@ -1,0 +1,35 @@
+{
+  "id": "source-wasp-33b-temperature-phase-curve",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "WASP-33 b · wasp 33b temperature phase curve",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/1710.07642",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/wasp-33b/source/manifest.json",
+      "locator": "/inputs/10"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Zhang et al. (2018); a Spitzer IRAC 4.5 µm phase curve of 11 April 2012",
+      "scope": "The wasp 33b temperature phase curve input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "Factual numerical measurements; source attribution retained",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

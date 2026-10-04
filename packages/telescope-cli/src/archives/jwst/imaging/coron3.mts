@@ -24,9 +24,8 @@ import { basename, dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { requireRecord } from '@cssearth/core';
 import { productRecordPath } from '@cssearth/telescope';
-import { readProductRecord, sameRun, writeProductRecord } from '@cssearth/telescope/node';
+import { readProductRecord, sameRun, writeProductRecord, freeMemoryPercent, toolchainPython } from '@cssearth/telescope/node';
 import { eurekaToolchain } from '../toolchain.mts';
-import { freeMemoryPercent, toolchainPython } from '@cssearth/telescope/node';
 import { eurekaPins, imagingMembers, imagingProductRun, level3ProductFacts } from './image3.mts';
 
 const CORON3 = `

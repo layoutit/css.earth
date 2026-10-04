@@ -199,3 +199,7 @@ and a hand-tuned element is not.
 - Every source file, test, tool, and generated source is limited to 600 physical lines, including blanks/comments.
 - `pnpm lint:packages` enforces the limit. Split code by responsibility; keep bulk prepared data outside source code.
 - Maintain README.md and CLAUDE.md as a symlink to this guide. Test behavior and package boundaries.
+
+The SDSS16 query behind the Perseus and Coma photometry is unavailable, so exact archive regeneration is an accepted limit; retained photometry is the evidence, not a reproducible query. Replace this limit when the original query or an independently qualified replacement is recovered.
+
+The public hosted-orbit source reader imports objects' source-record admission, so objects is a shipped dependency; CLI-only dependency acceptance no longer applies to that reader.

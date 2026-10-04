@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 /** R Doradus authored inputs: the uniform-disc reference sphere from the retained measurements, the dataset frame cut from the
  * pinned ALMA continuum image, and the navigation marker rendered from it.
  *
@@ -11,6 +10,7 @@ import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
  * oversampled and the cubic interpolation only reads between samples it is given.
  *
  * --check recomputes every output and fails if any differs from the file on disk. */
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { runAuthor } from '../authored-output.mts';

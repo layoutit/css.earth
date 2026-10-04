@@ -1,6 +1,6 @@
-import { requiredFiniteCard as cardNumber, requiredTrimmedTextCard as cardText } from '@cssearth/fits';
 /** The STIS slit-scan frames a map is read from: their headers, background-subtracted read windows and row spectra, the
  * geometry of every exposure from Horizons, and where the body sat in each visit, measured from the scan itself. */
+import { requiredFiniteCard as cardNumber, requiredTrimmedTextCard as cardText } from '@cssearth/fits';
 import { stat } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { readFitsFileHdus, readFitsFileRegion, type FitsFileHdu } from '@cssearth/fits/node';

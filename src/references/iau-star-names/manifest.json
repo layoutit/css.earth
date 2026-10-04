@@ -11,7 +11,7 @@
         "https://www.pas.rochester.edu/~emamajek/WGSN/IAU-CSN.txt"
       ],
       "acquisition": "Nine columns of the page's table (name, designation, Hipparcos number, Bayer designation, SIMBAD spelling, constellation, adoption date, J2000 right ascension and declination in degrees), one row per name, sorted by name.",
-      "generator": "node packages/telescope-cli/src/new-object/iau-names.mts --acquire",
+      "generator": "node packages/telescope-cli/src/new-object/archives/iau-names.mts --acquire",
       "redistribution": "Extracted columns under CC BY 4.0 with attribution to the IAU WGSN",
       "consumers": [
         "datasets"

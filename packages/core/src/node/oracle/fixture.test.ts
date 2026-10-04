@@ -1,3 +1,6 @@
+/** Accepted build-boundary check: build core before this suite so the published oracle reader and shipped pins
+ * are verified from another working directory, and the ./oracle export names its fixture-reader implementation;
+ * remove this requirement only when a separate publication test retains those assertions. */
 import { spawnSync } from 'node:child_process';
 import { mkdtemp, readFile, readdir, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';

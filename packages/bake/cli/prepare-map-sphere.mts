@@ -1,6 +1,3 @@
-import { MAP_SPHERE_DATASETS_SCHEMA, readMapSphereDatasetPreviews } from '@cssearth/objects';
-import { IMAGE_MESH_SCHEMA } from '@cssearth/objects';
-import { createSurfacePatches } from '../src/surface-geometry/index.ts';
 /**
  * Prepare an all-sky HEALPix map as a sphere of image patches around the Sun, seen from outside: the cosmic microwave
  * background at the distance its light left from. `source/<id>/sphere.json` names the map (its FITS file, column and
@@ -21,6 +18,8 @@ import { createSurfacePatches } from '../src/surface-geometry/index.ts';
  *
  * Usage: node packages/bake/cli/prepare-map-sphere.mts <object-directory> <id>
  */
+import { MAP_SPHERE_DATASETS_SCHEMA, readMapSphereDatasetPreviews, IMAGE_MESH_SCHEMA } from '@cssearth/objects';
+import { createSurfacePatches } from '../src/surface-geometry/index.ts';
 import { spawnSync } from 'node:child_process';
 import { mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { basename, resolve } from 'node:path';

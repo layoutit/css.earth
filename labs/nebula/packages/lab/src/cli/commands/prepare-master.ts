@@ -1,16 +1,15 @@
-import { parseLabModelJson } from '../../resources/model-paths.ts';
 /** Lab-only high-resolution optical master, followed by smaller prepared CSS banks. */
+import { parseLabModelJson } from '../../resources/model-paths.ts';
 import { access, mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve, relative } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import type { DensityVolumeFrame } from '@cssearth/objects';
+import type { DensityVolumeFrame, VolumeRecipe } from '@cssearth/objects';
 import { convertParticlesToDensityVolume } from '../../server/workflows/stars/particles.ts';
 import { extractExtendedSource, type ExtractionOptions, type NativeExtractionReceipt } from '@cssearth/nebula-reconstruction/star-removal/extraction';
 import { createPhotoMasterEmissionSampler } from '@cssearth/nebula-reconstruction/methods/density-prior/photo-master';
 import { bakeMasterVolumeSlices, deriveMasterVolumeSlices } from '@cssearth/bake/volume/node';
 import { OBJECT_SCHEMA, PREPARED_OBJECT_SCHEMA, DENSITY_VOLUME_FORMAT, type VolumeSlices } from '@cssearth/objects';
 import { compileCssVolume } from '../../adapters/preparation/css-volume.ts';
-import type { VolumeRecipe } from '@cssearth/objects';
 
 type Vec3 = [number, number, number];
 interface MasterExperiment {

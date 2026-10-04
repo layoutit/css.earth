@@ -6,8 +6,7 @@ import { homedir } from 'node:os';
 import { dirname, resolve } from 'node:path';
 import { TOOLCHAINS, WORKSPACE } from '../paths.js';
 import { installedMarkerIssue, readToolchainPins, writeInstalledMarker, type ToolchainPins } from './marker.js';
-import { requireArray, requireRecord, requireString } from '@cssearth/core';
-import { MissingSourceInputError } from '@cssearth/core';
+import { requireArray, requireRecord, requireString, MissingSourceInputError } from '@cssearth/core';
 
 export const ASTROQUERY_ROOT = resolve(WORKSPACE, 'output/toolchains/astroquery');
 export const ASTROQUERY_CACHE = resolve(process.env.CSS_EARTH_ASTROQUERY_CACHE ?? resolve(homedir(), '.cache/css-earth/astroquery'));

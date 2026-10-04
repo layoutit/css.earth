@@ -1,0 +1,234 @@
+{
+  "ceiling": 69,
+  "entries": {
+    "packages/astronomy/cli/body-epoch-ephemeris.mts": {
+      "reason": "Retained body epoch ephemeris CLI implementation exports; migration to src remains outstanding.",
+      "exports": [
+        "loadBodyEpochEphemeris",
+        "evaluatePublishedOrbit"
+      ]
+    },
+    "packages/astronomy/cli/body-records.mts": {
+      "reason": "Retained body records CLI implementation exports; migration to src remains outstanding.",
+      "exports": [
+        "readBodyRecords",
+        "writeBodyRecord",
+        "prepareBodyRecords"
+      ]
+    },
+    "packages/astronomy/cli/generate-heliocentric.mts": {
+      "reason": "Retained generate heliocentric CLI implementation exports; migration to src remains outstanding.",
+      "exports": [
+        "generateHeliocentric"
+      ]
+    },
+    "packages/astronomy/cli/lib/elp2000.mts": {
+      "reason": "Retained elp2000 CLI implementation exports; migration to src remains outstanding.",
+      "exports": [
+        "loadElpTerms",
+        "elpPositionKm"
+      ]
+    },
+    "packages/astronomy/cli/lib/ephemeris-records.mts": {
+      "reason": "Retained ephemeris records CLI implementation exports; migration to src remains outstanding.",
+      "exports": [
+        "parseBodyEpochRecord"
+      ]
+    },
+    "packages/astronomy/cli/lib/fit-cosine-series.mts": {
+      "reason": "Retained fit cosine series CLI implementation exports; migration to src remains outstanding.",
+      "exports": [
+        "fitCosineSeries"
+      ]
+    },
+    "packages/astronomy/cli/lib/fit-harmonics.mts": {
+      "reason": "Retained fit harmonics CLI implementation exports; migration to src remains outstanding.",
+      "exports": [
+        "fitHarmonics"
+      ]
+    },
+    "packages/astronomy/cli/lib/fit-libration.mts": {
+      "reason": "Retained fit libration CLI implementation exports; migration to src remains outstanding.",
+      "exports": [
+        "fitLibration"
+      ]
+    },
+    "packages/astronomy/cli/lib/fit-position-correction.mts": {
+      "reason": "Retained fit position correction CLI implementation exports; migration to src remains outstanding.",
+      "exports": [
+        "fitPositionCorrection"
+      ]
+    },
+    "packages/astronomy/cli/lib/generator-records.mts": {
+      "reason": "Retained generator records CLI implementation exports; migration to src remains outstanding.",
+      "exports": [
+        "{ objectValue, stringValue, numberValue, arrayValue, numberVector }",
+        "readElementRecord",
+        "readVectorFixture",
+        "recordMap",
+        "readStarRecord",
+        "readHostedOrbitRecord"
+      ]
+    },
+    "packages/astronomy/cli/lib/horizons.mts": {
+      "reason": "Retained horizons CLI implementation exports; migration to src remains outstanding.",
+      "exports": [
+        "vectorsUrl",
+        "elementsUrl",
+        "physicalDataUrl",
+        "horizons",
+        "parseVectors",
+        "parseElements"
+      ]
+    },
+    "packages/astronomy/cli/lib/s-stars.mts": {
+      "reason": "Retained s stars CLI implementation exports; migration to src remains outstanding.",
+      "exports": [
+        "parseVizierTsv",
+        "gillessenOrbits",
+        "multiStarFitStars",
+        "gravityOrbits",
+        "habibiStars",
+        "sStarRecords"
+      ]
+    },
+    "packages/astronomy/cli/lib/satellite-fit.mts": {
+      "reason": "Retained satellite fit CLI implementation exports; migration to src remains outstanding.",
+      "exports": [
+        "mean",
+        "fitLine",
+        "dot",
+        "cross",
+        "normalize",
+        "solveKepler",
+        "planeBasis",
+        "fitRotation"
+      ]
+    },
+    "packages/astronomy/cli/lib/source-validation.mts": {
+      "reason": "Retained source validation CLI implementation exports; migration to src remains outstanding.",
+      "exports": [
+        "{ string, number, vector, optional, array, dictionary, boolean, literal, shape }"
+      ]
+    },
+    "packages/astronomy/cli/lib/sources.mts": {
+      "reason": "Retained sources CLI implementation exports; migration to src remains outstanding.",
+      "exports": [
+        "cached",
+        "shortest",
+        "HEADER"
+      ]
+    },
+    "packages/astronomy/cli/lib/vsop87.mts": {
+      "reason": "Retained vsop87 CLI implementation exports; migration to src remains outstanding.",
+      "exports": [
+        "parseVsop87",
+        "loadVsop87a",
+        "evalVsop87",
+        "evalVsop87Rate"
+      ]
+    },
+    "packages/astronomy/cli/lib/write-record-sections.mts": {
+      "reason": "Retained write record sections CLI implementation exports; migration to src remains outstanding.",
+      "exports": [
+        "literalRecords",
+        "readRecordSections",
+        "writeRecordSections"
+      ]
+    },
+    "packages/astronomy/cli/scene-ephemeris.mts": {
+      "reason": "Retained scene ephemeris CLI implementation exports; migration to src remains outstanding.",
+      "exports": [
+        "loadSceneEpochEphemeris"
+      ]
+    },
+    "packages/bake/cli/astronomy-data-collect-photojournal.mts": {
+      "reason": "Retained astronomy data collect photojournal CLI implementation exports; migration to src remains outstanding.",
+      "exports": [
+        "captionText",
+        "captionPhrases"
+      ]
+    },
+    "packages/bake/cli/astronomy-data-collect-targets.mts": {
+      "reason": "Retained astronomy data collect targets CLI implementation exports; migration to src remains outstanding.",
+      "exports": [
+        "pds4Targets",
+        "pds3Targets"
+      ]
+    },
+    "packages/bake/cli/astronomy-data-collect-usgs-files.mts": {
+      "reason": "Retained astronomy data collect usgs files CLI implementation exports; migration to src remains outstanding.",
+      "exports": [
+        "productFiles",
+        "memberProducts"
+      ]
+    },
+    "packages/bake/cli/mapped-composition-evidence.mts": {
+      "reason": "Retained mapped composition evidence CLI implementation exports; migration to src remains outstanding.",
+      "exports": [
+        "qualifyMappedComposition"
+      ]
+    },
+    "packages/bake/cli/osiris-shape-comparison.mts": {
+      "reason": "Retained osiris shape comparison CLI implementation exports; migration to src remains outstanding.",
+      "exports": [
+        "compareOsirisShapes"
+      ]
+    },
+    "packages/bake/cli/prepare-image-layers.mts": {
+      "reason": "Retained prepare image layers CLI implementation exports; migration to src remains outstanding.",
+      "exports": [
+        "prepareImageLayerObject"
+      ]
+    },
+    "packages/bake/cli/prepare-llorri-overlap.mts": {
+      "reason": "Retained prepare llorri overlap CLI implementation exports; migration to src remains outstanding.",
+      "exports": [
+        "prepareLlorriOverlap"
+      ]
+    },
+    "packages/bake/cli/prepare-magnetic-map.mts": {
+      "reason": "Retained prepare magnetic map CLI implementation exports; migration to src remains outstanding.",
+      "exports": [
+        "prepareMagneticMap"
+      ]
+    },
+    "packages/bake/cli/prepare-mars-crust.mts": {
+      "reason": "Retained prepare mars crust CLI implementation exports; migration to src remains outstanding.",
+      "exports": [
+        "convertCrustGrid"
+      ]
+    },
+    "packages/bake/cli/prepare-solar-geometry.mts": {
+      "reason": "Retained prepare solar geometry CLI implementation exports; migration to src remains outstanding.",
+      "exports": [
+        "prepareSolarGeometry"
+      ]
+    },
+    "packages/bake/cli/prepare-stars.mts": {
+      "reason": "Retained prepare stars CLI implementation exports; migration to src remains outstanding.",
+      "exports": [
+        "prepareStarsObject"
+      ]
+    },
+    "packages/bake/cli/prepare-volume.mts": {
+      "reason": "Retained prepare volume CLI implementation exports; migration to src remains outstanding.",
+      "exports": [
+        "prepareDensityVolumeObject"
+      ]
+    },
+    "packages/bake/cli/publish-source-cache.mts": {
+      "reason": "Retained publish source cache CLI implementation exports; migration to src remains outstanding.",
+      "exports": [
+        "objectSourceCacheCandidates",
+        "publishSourceCache"
+      ]
+    },
+    "packages/bake/cli/refresh-sphere-photographs.mts": {
+      "reason": "Retained refresh sphere photographs CLI implementation exports; migration to src remains outstanding.",
+      "exports": [
+        "refreshSpherePhotographs"
+      ]
+    }
+  }
+}

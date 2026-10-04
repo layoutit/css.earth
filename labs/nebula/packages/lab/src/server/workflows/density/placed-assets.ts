@@ -1,7 +1,6 @@
 /** Compact authored-placement replay. Reuses every canonical texture and grid byte. */
-import { readFile, mkdir, symlink, rename, rm, realpath } from 'node:fs/promises';
+import { readFile, mkdir, symlink, rename, rm, realpath, writeFile } from 'node:fs/promises';
 import { basename, dirname, resolve } from 'node:path';
-import { writeFile } from 'node:fs/promises';
 import { placeDensitySlices } from '@cssearth/bake/volume';
 import { parseDensityPlacement, PREPARED_OBJECT_SCHEMA, DENSITY_VOLUME_FORMAT, type VolumeSlices } from '@cssearth/objects';
 import { sourceBytes, containedPath } from '@cssearth/bake/volume/node';

@@ -1,5 +1,4 @@
-import type { PreparedTextureLevels, PreparedTexturePlacements, PreparedTextureTileLeaves } from '../presentation/runtime-presentation-types.js';
-import type { PreparedVariant } from '../presentation/runtime-presentation-types.js';
+import type { PreparedTextureLevels, PreparedTexturePlacements, PreparedTextureTileLeaves, PreparedVariant } from '../presentation/runtime-presentation-types.js';
 import { isArray } from '@cssearth/core';
 // Shared by offline qualification and the browser's external JSON boundary.
 export function requireTextureLevels(value: unknown, variants: readonly Pick<PreparedVariant, 'writes' | 'required'>[], resources: {has(key:string):boolean}): asserts value is PreparedTextureLevels {

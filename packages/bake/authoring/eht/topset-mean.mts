@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 /**
  * The EHT image of a black hole, made the way its collaboration made it: EHT's own eht-imaging pipeline, run on the
  * released calibrated data for a drawn sample of its published Top Set parameter combinations, and averaged. A release
@@ -14,6 +13,7 @@ import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
  * The mean is written to the recipe's output beside the object's sources, with the spread between the sample's first half
  * and the whole reported so the average's convergence is on record.
  */
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 import { spawn } from 'node:child_process';
 import { access, mkdir, readFile, rename, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';

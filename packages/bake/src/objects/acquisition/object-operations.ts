@@ -1,9 +1,7 @@
 import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
-import { parseRuntimeManifest, prepareRuntimeManifest, assembleRuntimeAssets } from '../../delivery/index.ts';
-import { containedPath, parseSourceManifest, verifySources } from '../sources/index.ts';
+import { parseRuntimeManifest, prepareRuntimeManifest, assembleRuntimeAssets, publishSourceBytes } from '../../delivery/index.ts';
+import { containedPath, parseSourceManifest, verifySources, RUNTIME_ASSET_ORIGIN, fetchWithRetry, sourceCacheUrl, sourceFormatProblem } from '../sources/index.ts';
 import { executeAcquisition, parseAcquisitionPlan, restoreMissingSources } from './operations-acquisition.ts';
-import { RUNTIME_ASSET_ORIGIN, fetchWithRetry, sourceCacheUrl, sourceFormatProblem } from '../sources/index.ts';
-import { publishSourceBytes } from '../../delivery/index.ts';
 import { readFile, lstat } from 'node:fs/promises';
 import { resolve } from 'node:path';
 

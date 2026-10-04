@@ -4,9 +4,8 @@
 // seven datasets' tables: 136 KB of its gzipped startup bytes, where the opening view shows one (2026-09-30).
 import type { ObjectRuntimeDefinition } from '../runtime/object-runtime-types.js';
 import type { ObjectControls } from '../runtime/object-controls.js';
-import type { PreparedVariant } from '../presentation/runtime-presentation-types.js';
+import type { PreparedVariant, PreparedTextureLevels, PreparedTextureTile } from '../presentation/runtime-presentation-types.js';
 import type { PreparedResourceEntry } from '../runtime/runtime-resource-types.js';
-import type { PreparedTextureLevels, PreparedTextureTile } from '../presentation/runtime-presentation-types.js';
 import { array, fail, record, text } from '../runtime-validation/guards.js';
 import { requireAssets } from '../runtime-validation/resources-tree.js';
 import { requireTextureLevels } from '../runtime-validation/prepared-texture-levels.js';

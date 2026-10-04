@@ -1,11 +1,10 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { execFileSync } from 'node:child_process';
-import { mkdtempSync, rmSync, writeFileSync } from 'node:fs';
+import { globSync, mkdirSync, mkdtempSync, rmSync, writeFileSync, readFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
-import { join } from 'node:path';
-import { readFileSync } from 'node:fs';
-import { checkStaleReferences, staleReferenceLines } from './check-stale-references.mts';
+import { join, resolve } from 'node:path';
+import { checkStaleReferences, staleReferenceLines, workflowCommandPaths, workflowPathTracked } from './check-stale-references.mts';
 
 const bytes = (value: string) => new TextEncoder().encode(value);
 test('every live reference class rejects a retired path, including output generator literals and bundle specifiers', () => {
@@ -88,4 +87,91 @@ test('live GitHub JWST links fail but commit-pinned evidence remains historical'
   assert.equal(staleReferenceLines('src/objects/body/investigations.json', bytes(`"https://github.com/org/repo/blob/main/${old}"`)).length, 1);
   assert.deepEqual(staleReferenceLines('src/objects/body/investigations.json', bytes(`"https://github.com/org/repo/blob/abcdef1/${old}"`)), []);
   assert.equal(staleReferenceLines('src/objects/body/investigations.json', bytes(`  "finding": "The reduction used ${old}."`)).length, 1);
+});
+
+test('every relocated CI root owner rejects a caller cwd while its module-relative root passes', () => {
+  for (const path of [
+    '.github/scripts/ci/build-ci.mts',
+    '.github/scripts/ci/ci-cache-key.mts',
+    '.github/scripts/ci/check-ci.mts',
+  ]) {
+    assert.equal(staleReferenceLines(path, bytes('const root = process.cwd();')).length, 1, path);
+    assert.deepEqual(staleReferenceLines(path, bytes('const root = resolve(import.meta.dirname, "../../..");')), [], path);
+  }
+});
+
+
+test('workflow command paths cover inline and block node/pnpm commands, including globs and excluding dynamic inputs', () => {
+  assert.deepEqual(workflowCommandPaths(`jobs:
+  check:
+    steps:
+      - run: node --test packages/a/value.test.ts absent.mts
+      - run: |
+          pnpm test packages/b/value.test.mts
+          node --test "packages/c/*.test.ts" $INPUT
+`), ['packages/a/value.test.ts', 'absent.mts', 'packages/b/value.test.mts', 'packages/c/*.test.ts']);
+});
+test('mutation: a tracked workflow stale test path is red and a tracked replacement is green', () => {
+  const root = mkdtempSync(join(tmpdir(), 'workflow-paths-'));
+  try {
+    execFileSync('git', ['init', '-q', root]);
+    mkdirSync(join(root, '.github/workflows'), { recursive: true });
+    mkdirSync(join(root, 'packages/a'), { recursive: true });
+    const workflow = join(root, '.github/workflows/check.yml');
+    writeFileSync(workflow, 'jobs:\n  check:\n    steps:\n      - run: node --test packages/a/removed.test.ts\n');
+    execFileSync('git', ['add', '.'], { cwd: root });
+    assert.match(checkStaleReferences(root).join('\n'), /not tracked: packages\/a\/removed/u);
+    writeFileSync(join(root, 'packages/a/present.test.ts'), '');
+    writeFileSync(workflow, 'jobs:\n  check:\n    steps:\n      - run: node --test packages/a/present.test.ts\n');
+    execFileSync('git', ['add', '.'], { cwd: root });
+    assert.deepEqual(checkStaleReferences(root), []);
+  } finally { rmSync(root, { recursive: true, force: true }); }
+});
+
+function missingTestProjects(root: string): string[] {
+  const value: unknown = JSON.parse(readFileSync(resolve(root, 'tsconfig.tests.json'), 'utf8'));
+  if (!value || typeof value !== 'object' || !('references' in value) || !Array.isArray(value.references)) throw new TypeError('Invalid test references');
+  const references = new Set(value.references.map((entry: unknown) => {
+    if (!entry || typeof entry !== 'object' || !('path' in entry) || typeof entry.path !== 'string') throw new TypeError('Invalid project reference');
+    return entry.path.replace(/^\.\//u, '');
+  }));
+  return [...new Set(globSync('packages/**/*.test.{ts,mts}', { cwd: root }).map(file => file.split('/')[1]!))]
+    .filter(name => !references.has(`packages/${name}/tsconfig.tests.json`)).sort();
+}
+test('every workspace package with tests participates in test typechecking', () => {
+  assert.deepEqual(missingTestProjects(resolve(import.meta.dirname, '../../..')), []);
+});
+test('mutation: adding an unreferenced package with tests is red, adding its reference is green', () => {
+  const root = mkdtempSync(resolve(tmpdir(), 'test-projects-'));
+  try {
+    mkdirSync(resolve(root, 'packages/new/src'), { recursive: true });
+    writeFileSync(resolve(root, 'packages/new/package.json'), '{"name":"@cssearth/new"}');
+    writeFileSync(resolve(root, 'packages/new/src/value.test.ts'), '');
+    writeFileSync(resolve(root, 'tsconfig.tests.json'), '{"references":[]}');
+    assert.deepEqual(missingTestProjects(root), ['new']);
+    writeFileSync(resolve(root, 'tsconfig.tests.json'), '{"references":[{"path":"./packages/new/tsconfig.tests.json"}]}');
+    assert.deepEqual(missingTestProjects(root), []);
+  } finally { rmSync(root, { recursive: true, force: true }); }
+});
+
+test('continued workflow node commands retain every literal test path', () => {
+  const workflow = String.raw`jobs:
+  check:
+    steps:
+      - run: |
+          node --test \
+            fixtures/continued.test.mts \
+            packages/a/present.test.ts
+`;
+  assert.deepEqual(workflowCommandPaths(workflow), ['fixtures/continued.test.mts', 'packages/a/present.test.ts']);
+});
+
+test('workflow test globs must match tracked files; directory arguments are ignored', () => {
+  const tracked = new Set(['packages/bake/src/sources/current.test.mts']);
+  assert.equal(workflowPathTracked('packages/bake/src/sources/*.test.*', tracked), true);
+  assert.equal(workflowPathTracked('packages/bake', tracked), true, 'tracked directory arguments are valid');
+  assert.equal(workflowPathTracked('packages/bake/missing-command', tracked), false, 'extensionless missing commands stay guarded');
+  assert.equal(workflowPathTracked('packages/bake/src/missing/*.test.*', tracked), false, 'mutation red');
+  assert.equal(workflowPathTracked('packages/bake/src/sources/*.test.*', tracked), true, 'mutation green');
+  assert.deepEqual(workflowCommandPaths('jobs:\n  check:\n    steps:\n      - run: cd packages/bake && pnpm test --dir packages/bake.v2 packages/bake/src/sources/*.test.*\n'), ['packages/bake/src/sources/*.test.*']);
 });

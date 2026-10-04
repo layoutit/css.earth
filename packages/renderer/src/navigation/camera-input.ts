@@ -8,16 +8,10 @@ import type { ActiveMode, InterruptionMode } from './camera-input-diagnostics.js
 import { bindCameraInputListeners } from './camera-input-listeners.js';
 import { errorMessage } from './types.js';
 import type { TrackballMetrics, CameraDelta, ControlsUpdate, Quaternion } from './types.js';
-import type { Vector3 } from "@cssearth/engine";
-import type { SphereDragInput } from "@cssearth/engine";
-import type { DragThrow } from "@cssearth/engine";
+import type { Vector3, SphereDragInput, DragThrow } from "@cssearth/engine";
 export type MatrixDragControls = ReturnType<typeof createUnboundedMatrixDragControls>;
-import { createSceneLifetime } from "@cssearth/engine";
-import { projectSphereDrag, composeDragRotation, rotationFromAngularVelocity, poleTumbleTurn, poleGrabTurn, poleTurnRotation, rotateVector } from "@cssearth/engine";
-import { advanceDragThrow, createDragHistory, estimateDragThrow, TRACKBALL_DRAG_INERTIA, projectTrackballDelta, recordDragSample, resetDragHistory } from "@cssearth/engine";
+import { createSceneLifetime, projectSphereDrag, composeDragRotation, rotationFromAngularVelocity, poleTumbleTurn, poleGrabTurn, poleTurnRotation, rotateVector, advanceDragThrow, createDragHistory, estimateDragThrow, TRACKBALL_DRAG_INERTIA, projectTrackballDelta, recordDragSample, resetDragHistory, SURFACE_FLY_TO, conjugateRotation, isTrackballMetrics } from "@cssearth/engine";
 import { planSurfaceFlyTo, sampleSurfaceFlyTo } from './surface-fly-to.js';
-import { SURFACE_FLY_TO } from '@cssearth/engine';
-import { conjugateRotation, isTrackballMetrics } from "@cssearth/engine";
 import { clearCursor, setBaseCursor } from './cursor-state.js';
 import { cameraMotionSignalFor } from './camera-motion-signal.js';
 import type { CameraMotionSource } from './camera-motion-signal.js';

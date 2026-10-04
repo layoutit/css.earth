@@ -1,8 +1,7 @@
 /** Generic, self-contained density-volume object preparation entry point. */
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { dirname, relative, resolve } from 'node:path';
-import { PREPARED_OBJECT_SCHEMA, DENSITY_VOLUME_FORMAT, parseDensityVolumeObjectDescriptor } from '@cssearth/objects';
-import { parseVolumeRecipe } from '@cssearth/objects';
+import { PREPARED_OBJECT_SCHEMA, DENSITY_VOLUME_FORMAT, parseDensityVolumeObjectDescriptor, parseVolumeRecipe } from '@cssearth/objects';
 import { sourceBytes, containedPath, prepareVolumeSlices } from '../volume/node/index.ts';
 import { compileCssVolume } from '../volume-leaves/index.ts';
 import { acquireVolumeSource } from './acquisition.ts';

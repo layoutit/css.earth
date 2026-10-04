@@ -17,7 +17,8 @@ import `node/`.
 `src/node/contract/` is the Node-only `@cssearth/objects/node/contract` entry: the helpers tests use to check an object
 against its contract (its final prepared definition, and fixture values required before a test inspects them).
 `src/node/contract/object-content-fixture.ts` owns complete content-fixture admission, exported only by the Node contract entry; production content readers stay browser-safe.
-`src/node/contract/source-test.ts` owns restored-source test support; `@cssearth/objects/node/contract` exports it. The old `node/source-test` subpath is a compatibility facade for frozen site consumers. `sourceLoad` discriminates loaded values from a skip; callers read `sourceValues` inside a running test. Restore hints may be injected by the caller.
+`src/node/contract/source-test.ts` owns restored-source test support; `@cssearth/objects/node/source-test` is its public test API across packages, labs, site and CI. `@cssearth/objects/node/contract` also exports this support alongside fixtures and loaders. `sourceLoad` discriminates loaded values from a skip; callers read `sourceValues` inside a running test. Restore hints may be injected by the caller.
+KNOWN LIMIT: sharp exposes missing inputs only through its third-party `Input file is missing` message, without a filesystem error code/path. `missingSourceReason` reads that message and checks tracked/sparse state; project-owned absences use `MissingSourceInputError` codes.
 `src/volume/` holds browser-safe prepared compiler/joint/shape scene contracts, density-filter helpers,
 layer-plan/report readers and render-element budgets; exported through the main entry. It also owns the data-only
 volume and sampled recipes, emission-fit settings, physical slice formats and validation, compiler controls and star
@@ -87,8 +88,8 @@ Prepared CSS sky, parallax, cubic-sky and directional-Sun contracts and validato
 exported by the main entry. Sky/Sun validators default to the historical authored bake acceptance and diagnostics. The single 'runtime' policy
 opts into runtime checks; there are no independent validation flags.
 Sky/Sun authored standards and direction computation stay with bake and renderer.
-Bake retains the authored presentation-envelope checks: runtime validation is stricter in several fields and cannot
-replace them without changing accepted authored input.
+`requirePresentationEnvelope` owns structural envelope admission with explicit authored/runtime policies: authored
+accepts minimal cameras, while runtime requires the full camera and identity. Bake retains authored referential checks.
 
 Prepared CSS volumes, impostors, volume datasets, embedded catalogue points and image-layer banks live in
 `src/volume/`; surface-shell data and validation live in `src/prepared-data/`. Their schema and envelope identifiers,
@@ -204,3 +205,5 @@ The parsers require owner-supplied surface-resolution and lighting-bank resolver
 validation position. Bake supplies them through `readBodyMapProduct` and `readRasterRecipe`;
 angular-to-surface conversion, sampled map combination, lighting banks and photometric evaluation stay in bake.
 Contract and duplicate-ownership tests use node:test beside the formats.
+
+The cross-domain schema-identifier conformance test stays in `src/prepared-data/` because that owner maintains the public identifier admission surface, including source and volume identifiers. Move it to a package-wide test owner when such an owner has a distinct suite contract; its current location does not narrow coverage.

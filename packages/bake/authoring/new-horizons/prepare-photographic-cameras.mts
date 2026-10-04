@@ -1,4 +1,3 @@
-import { cross3 as cross, array, boolean, number, optional, shape, text, dotN as dot } from '@cssearth/core';
 /**
  * Bounded New Horizons LORRI pointing registration for a fixed PCK body frame
  * and fixed released STL.  This is deliberately not a pose or shape solver.
@@ -6,6 +5,7 @@ import { cross3 as cross, array, boolean, number, optional, shape, text, dotN as
  * Usage: node --experimental-strip-types packages/bake/authoring/new-horizons/prepare-photographic-cameras.mts \
  *   src/objects/nix/source/preparation/photography.json
  */
+import { cross3 as cross, array, boolean, number, optional, shape, text, dotN as dot } from '@cssearth/core';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, resolve, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';

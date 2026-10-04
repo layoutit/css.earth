@@ -120,3 +120,17 @@ test('a star with no mass takes the gravity published at its J2000 position: its
   await starLimb(star.root, ['a-star'], { archive: simbad });
   assert.deepEqual(await Promise.all(paths.map(star.read)), first, 'a rerun changes nothing');
 });
+
+
+test('a published law must satisfy the objects coefficient admission before editing a star', async t => {
+  const star = await starWithEarlierLaw();
+  t.after(() => rm(star.root, { recursive: true, force: true }));
+  await mkdir(join(star.root, star.source, 'photometry'), { recursive: true });
+  await writeFile(join(star.root, star.source, 'photometry/a-paper-limb-darkening.json'), JSON.stringify({
+    schema: 'cssearth-published-limb-darkening@1', law: 'power', source: 'A Paper https://example.org/paper', band: 'V',
+    alpha: { value: 0.5, uncertainty: 0.1 },
+  }));
+  const before = await star.read(`${star.source}/preparation/raster.json`);
+  await assert.rejects(starLimb(star.root, ['a-star'], { archive }), /alpha.cell/u);
+  assert.equal(await star.read(`${star.source}/preparation/raster.json`), before);
+});

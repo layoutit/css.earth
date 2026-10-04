@@ -45,8 +45,6 @@ src/objects/europa/source/photometry/*.lbl
 src/objects/*/source/**/*.ttf
 src/objects/*/source/**/*.webp
 src/objects/*/source/**/*.zip
-# Released model output (NetCDF), megabytes to gigabytes a file; restored from its Zenodo record (source/manifest.json).
-src/objects/*/source/**/*.nc
 # Binary SPICE kernels are restored through each body's acquisition plan; text kernels stay beside the body.
 src/objects/*/source/**/*.bsp
 src/objects/*/source/**/*.bc
@@ -397,6 +395,7 @@ src/objects/hd-110067/source/photometry/espresso.fits
 src/objects/hd-181327/source/photometry/tess/
 src/objects/hd-189733/source/photometry/tess/
 src/objects/hd-189733b/source/science/lally-2025/output_E.npy
+src/objects/wasp-17b/source/science/valentine-2024/tmap.pkl
 src/objects/hd-189733b/source/illustration/HD_189733_b.jpg
 src/objects/hd-29615/source/science/willamo-2022/*.dat
 src/objects/hd-35296/source/science/willamo-2022/*.dat
@@ -420,6 +419,20 @@ src/objects/r-doradus/source/observations/*
 src/objects/rhea/source/vims/data/**/*.img
 src/objects/titan/source/geology/*.shp
 src/objects/titan/source/geology/*.lyr
+src/objects/toi-1468b/source/science/svo/JWST_MIRI.F1500W.xml
+src/objects/toi-1468b/source/science/bt-settl-cifist/bt-settl-cifist-3400-5.0-0.0.xml
+src/objects/ltt-3780b/source/science/svo/JWST_MIRI.F1500W.xml
+src/objects/ltt-3780b/source/science/bt-settl-cifist/bt-settl-cifist-3400-5.0-0.0.xml
+src/objects/lhs-1140c/source/science/svo/JWST_MIRI.F1500W.xml
+src/objects/lhs-1140c/source/science/bt-settl-cifist/bt-settl-cifist-3100-5.0-0.0.xml
+src/objects/gj-3929b/source/science/svo/JWST_MIRI.F1500W.xml
+src/objects/gj-3929b/source/science/bt-settl-cifist/bt-settl-cifist-3400-5.0-0.0.xml
+src/objects/gj-1252b/source/science/svo/Spitzer_IRAC.I2.xml
+src/objects/gj-1252b/source/science/bt-settl-cifist/bt-settl-cifist-3500-5.0-0.0.xml
+src/objects/gj-367b/source/science/valentine-2024/miri_throughput.dat
+src/objects/gj-367b/source/science/bt-settl-cifist/bt-settl-cifist-3500-5.0-0.0.xml
+src/objects/gj-1132b/source/science/valentine-2024/miri_throughput.dat
+src/objects/gj-1132b/source/science/bt-settl-cifist/bt-settl-cifist-3200-5.0-0.0.xml
 src/objects/trappist-1b/source/science/svo/JWST_MIRI.F1500W.xml
 src/objects/trappist-1b/source/science/bt-settl-cifist/bt-settl-cifist-2600-5.0-0.0.xml
 src/objects/trappist-1b/source/illustration/TRAPPIST-1_b.jpg

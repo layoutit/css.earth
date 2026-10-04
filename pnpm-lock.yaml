@@ -207,10 +207,11 @@ importers:
         version: 0.35.3(@types/node@26.4.0)
 
   packages/astronomy:
-    devDependencies:
+    dependencies:
       '@cssearth/objects':
         specifier: workspace:*
         version: link:../objects
+    devDependencies:
       tsup:
         specifier: ^8.0.1
         version: 8.5.1(jiti@2.6.1)(postcss@8.5.26)(tsx@4.23.15)(typescript@5.9.3)(yaml@2.9.0)

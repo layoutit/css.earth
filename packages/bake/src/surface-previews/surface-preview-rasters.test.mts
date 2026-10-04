@@ -6,8 +6,7 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import sharp from 'sharp';
 import { unpackSurfacePreview, assertSurfacePreviewCoverage, recipeSurfacePreviews } from '@cssearth/bake/surface-previews';
-import { preparePagedSurfaceMap } from '@cssearth/bake/objects/layers/paged-ellipsoid';
-import { createPagedSurfaceRaster } from '@cssearth/bake/objects/layers/paged-ellipsoid';
+import { preparePagedSurfaceMap, createPagedSurfaceRaster } from '@cssearth/bake/objects/layers/paged-ellipsoid';
 import { prepareProjectiveTextureLayer } from '@cssearth/bake/scene';
 
 // Two reversed bands with conspicuous padding: the preview must recover

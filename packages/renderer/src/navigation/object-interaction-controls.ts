@@ -1,7 +1,6 @@
-import { createSceneLifetime } from "@cssearth/engine";
+import { createSceneLifetime, interactionTrackball, directAngularDegreesPerTrackballRadius, directPitchResponseForZoom } from "@cssearth/engine";
 import { createUnboundedMatrixDragControls as createMatrixDragControls } from './camera-input.js';
 import { createPreparedWheelZoomControls as createWheelZoomControls } from './prepared-wheel-zoom.js';
-import { interactionTrackball, directAngularDegreesPerTrackballRadius, directPitchResponseForZoom } from "@cssearth/engine";
 import { errorMessage } from './types.js';
 import type { RuntimePolicy } from './runtime-policy.js';
 import type { NavigationCamera, TrackballMetrics, CameraDelta, ControlsUpdate } from './types.js';

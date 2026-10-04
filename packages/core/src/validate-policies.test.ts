@@ -1,10 +1,9 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import {
-  isRecord, isPlainRecord, isFiniteNumber, isTextAllowEmpty, isNonemptyText, isNonblankText,
-  isPositiveNumber, isPositiveInteger, isSafeIntegerAtLeast,
+  isRecord, isFiniteNumber, isNonemptyText,
   readNonArrayRecord, readFiniteNumber, readTextAllowEmpty, readNonemptyText, readNonblankText,
-  readPositiveNumber, readPositiveInteger, readSafeIntegerAtLeast,
+  readPositiveNumber, readSafeIntegerAtLeast,
 } from './validate.js';
 
 class Box { value = 1; }
@@ -15,16 +14,13 @@ const numeric = (value: unknown): value is number => typeof value === 'number' &
 const policies: { name: string; predicate: (value: unknown) => boolean; reader?: (value: unknown) => unknown; accepts: (value: unknown) => boolean }[] = [
   { name: 'non-array record (includes class and null prototype)', predicate: isRecord,
     reader: value => readNonArrayRecord(value, 'value'), accepts: value => value !== null && typeof value === 'object' && !Array.isArray(value) },
-  { name: 'plain record (Object.prototype only)', predicate: isPlainRecord,
-    accepts: value => value !== null && typeof value === 'object' && Object.getPrototypeOf(value) === Object.prototype },
   { name: 'finite number', predicate: isFiniteNumber, reader: value => readFiniteNumber(value, 'value'), accepts: numeric },
-  { name: 'text allowing empty', predicate: isTextAllowEmpty, reader: value => readTextAllowEmpty(value, 'value'), accepts: value => typeof value === 'string' },
+  { name: 'text allowing empty', predicate: value => typeof value === 'string', reader: value => readTextAllowEmpty(value, 'value'), accepts: value => typeof value === 'string' },
   { name: 'nonempty text allowing whitespace', predicate: isNonemptyText, reader: value => readNonemptyText(value, 'value'), accepts: value => typeof value === 'string' && value.length > 0 },
-  { name: 'nonblank text preserving whitespace', predicate: isNonblankText, reader: value => readNonblankText(value, 'value'), accepts: value => typeof value === 'string' && value.trim().length > 0 },
-  { name: 'positive finite number', predicate: isPositiveNumber, reader: value => readPositiveNumber(value, 'value'), accepts: value => numeric(value) && value > 0 },
-  { name: 'positive integer allowing unsafe integers', predicate: isPositiveInteger, reader: value => readPositiveInteger(value, 'value'), accepts: value => numeric(value) && value > 0 && Number.isInteger(value) },
+  { name: 'nonblank text preserving whitespace', predicate: value => typeof value === 'string' && value.trim().length > 0, reader: value => readNonblankText(value, 'value'), accepts: value => typeof value === 'string' && value.trim().length > 0 },
+  { name: 'positive finite number', predicate: value => numeric(value) && value > 0, reader: value => readPositiveNumber(value, 'value'), accepts: value => numeric(value) && value > 0 },
   ...[-1, 0, 1].map(minimum => ({ name: `safe integer at least ${minimum}`,
-    predicate: (value: unknown) => isSafeIntegerAtLeast(value, minimum), reader: (value: unknown) => readSafeIntegerAtLeast(value, minimum, 'value'),
+    predicate: (value: unknown) => numeric(value) && Number.isSafeInteger(value) && value >= minimum, reader: (value: unknown) => readSafeIntegerAtLeast(value, minimum, 'value'),
     accepts: (value: unknown) => numeric(value) && Number.isSafeInteger(value) && value >= minimum })),
 ];
 for (const policy of policies) test(policy.name, () => {
@@ -49,7 +45,6 @@ test('explicit readers pin their default diagnostics', () => {
     { run: () => readNonemptyText('', 'value'), message: 'value must be a string with content.' },
     { run: () => readNonblankText(' ', 'value'), message: 'value must be nonblank text.' },
     { run: () => readPositiveNumber(0, 'value'), message: 'value must be positive.' },
-    { run: () => readPositiveInteger(0.5, 'value'), message: 'value must be a positive integer.' },
     { run: () => readSafeIntegerAtLeast(0, 1, 'value'), message: 'value must be a safe integer at least 1.' },
   ];
   for (const { run, message } of cases) assert.throws(run, { name: 'TypeError', message });

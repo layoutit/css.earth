@@ -1,5 +1,5 @@
-import { isRecord as coreIsRecord } from '@cssearth/core';
 /** Source-pixel shape controls. Detection seeds the model; authored depth is never a measurement. */
+import { isRecord as coreIsRecord } from '@cssearth/core';
 import type { GeometryCandidate, GeometryMap } from '../evidence/geometry/contracts.ts';
 import { ellipsePoint, radialError } from '@cssearth/nebula-reconstruction/evidence/geometry/ellipse';
 import type { ShapeCloudComponent, ShapeCloudSettings } from '@cssearth/objects';

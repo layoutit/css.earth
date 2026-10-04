@@ -1,10 +1,10 @@
-import { isRecord as coreIsRecord } from '@cssearth/core';
 /** Inbound protection for the production application and its preparation closure, run by the architecture check's
  * `nebula-boundaries` rule through `nebula-packages.mts`.
  * Unknown computed imports are rejected in the compact preparation adapter and when
  * their expression references nebula paths. General plugin loaders are not subjected
  * to blanket data-flow claims; literal/const/alias imports are resolved below.
  */
+import { isRecord as coreIsRecord } from '@cssearth/core';
 import { existsSync, readFileSync, readdirSync, realpathSync, statSync } from 'node:fs';
 import { dirname, relative, resolve, extname } from 'node:path';
 import { fileURLToPath } from 'node:url';

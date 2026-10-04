@@ -1,5 +1,4 @@
-import { validateChannelGain, type ChannelGain } from '@cssearth/objects';
-import { validateDatasetToneCurve, type DatasetToneCurve } from '@cssearth/objects';
+import { validateChannelGain, type ChannelGain, validateDatasetToneCurve, type DatasetToneCurve } from '@cssearth/objects';
 type Vector3 = [number, number, number];
 
 type Sample = (x: number, y: number, z: number, out: Vector3) => void;

@@ -49,7 +49,7 @@
   },
   "datasets": {
     "titleKey": "datasets",
-    "defaultDataset": "shape",
+    "defaultDataset": "temperature",
     "controls": [
       {
         "id": "shape",
@@ -65,6 +65,66 @@
         },
         "falseColor": false,
         "notes": "No image or color of GJ 1214 b is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the color of gj-1214's light, as its color dataset measures it."
+      },
+      {
+        "id": "temperature",
+        "label": "JWST",
+        "qualification": "Published fit · Kempton et al. (2023) · a JWST MIRI 5–12 µm phase curve of 20–22 July 2022 · longitude only",
+        "thumbnail": "gj-1214b-dataset-temperature.webp",
+        "surface": "gj-1214b-surface-temperature@2x.webp",
+        "poles": "gj-1214b-poles-temperature@2x.webp",
+        "source": {
+          "id": "gj-1214b-temperature-phase-curve",
+          "path": "../manifest.json",
+          "url": "https://arxiv.org/abs/2305.06240"
+        },
+        "falseColor": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Brightness temperature",
+          "labels": [
+            "150",
+            "400",
+            "650"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                13,
+                8,
+                135
+              ],
+              [
+                126,
+                3,
+                168
+              ],
+              [
+                204,
+                71,
+                120
+              ],
+              [
+                248,
+                149,
+                64
+              ],
+              [
+                240,
+                249,
+                33
+              ]
+            ],
+            "labels": [
+              "150",
+              "400",
+              "650"
+            ]
+          },
+          "meta": "K",
+          "sourceUrl": "https://arxiv.org/abs/2305.06240"
+        },
+        "notes": "Brightness temperature across 5–12 µm of GJ 1214 b from Kempton et al. (2023)'s published fit to a JWST MIRI 5–12 µm phase curve of 20–22 July 2022. Their Fourier series becomes a map of longitude through the Cowan & Agol (2008) inversion, so there is no north-south detail and every latitude is drawn alike. The hottest longitude is 20° east of noon. Longitudes where the fit gives no emission are left blank. The false color runs from 150 to 650 K. With shadows on, the star's light darkens the night half."
       }
     ]
   },

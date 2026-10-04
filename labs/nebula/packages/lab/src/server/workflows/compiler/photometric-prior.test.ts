@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { readFile } from 'node:fs/promises';
-import { verifyPhotometricEvidence } from './photometric-prior.ts';
+import { verifyPhotometricEvidence, fitPhotometricEmission } from './photometric-prior.ts';
 import { readPhotometricMgeRecipe, readRetainedEmissionField, type EmissionFieldModel } from '@cssearth/objects';
 
 test('photometric evidence validation rejects cross-subject or repinned source snapshots', async () => {
@@ -12,7 +12,6 @@ test('photometric evidence validation rejects cross-subject or repinned source s
   assert.throws(() => verifyPhotometricEvidence(recipe, { schema: 'cssearth-nebula-physical-evidence@1', subjectId: 'other', sources: [] }, recipe.id), /evidence ledger/);
 });
 
-import { fitPhotometricEmission } from './photometric-prior.ts';
 import { createPhotometricMgePrior } from '@cssearth/nebula-reconstruction/methods/inference/photometric-mge';
 import { createPhotometricEmission } from '@cssearth/bake/volume';
 

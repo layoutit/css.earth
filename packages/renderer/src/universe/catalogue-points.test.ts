@@ -4,11 +4,13 @@ import { isDeepStrictEqual } from 'node:util';
 import { parseHTML } from 'linkedom';
 import { mountCataloguePoints } from './catalogue-points.js';
 import { readCataloguePointBank } from '@cssearth/objects';
-import { catalogueCells, cataloguePointSpread } from '@cssearth/objects';
 import { holdStartup, releaseStartup } from '../rendering/startup-gate.js';
 
-/** What the bake adds to a published bank (catalogue-banks.ts): its spread and its cells, per level. */
-const baked = (points: readonly (readonly number[])[], levels?: readonly number[]) => ({ spread: cataloguePointSpread(points), cells: catalogueCells(points, levels) });
+/** Prepared fixture: one declared box per level, with no bake algorithm in the runtime owner. */
+const baked = (points: readonly (readonly number[])[], levels: readonly number[] = [points.length]) => ({
+  spread: { normal: [0, 0, 1], across: 20, along: 20 },
+  cells: { boxes: levels.map(() => [-20, -20, -20, 20, 20, 20]), of: levels.flatMap((count, cell) => Array<number>(count).fill(cell)) },
+});
 
 const frame = { referenceFrame: 'sun-icrf', epochJdTt: 2451545, originM: [0, 0, 0], localToReferenceXyzw: [0, 0, 0, 1],
   metersPerUnit: 1, boundsUnits: { min: [-20, -20, -20], max: [20, 20, 20] } };
@@ -37,11 +39,8 @@ test('a stacked bank adds its inner levels\' dots as the view narrows, only once
 
 test('seen from outside, a bank draws only as many dots as its projected shape holds', async () => {
   const { screenPointCount } = await import('./catalogue-points.js');
-  // A flat disc of radius 10 in the x-y plane.
-  const disc = Array.from({ length: 2000 }, (_, i) => [10 * Math.sqrt((i + .5) / 2000) * Math.cos(i * 2.4), 10 * Math.sqrt((i + .5) / 2000) * Math.sin(i * 2.4), 0]);
-  const spread = cataloguePointSpread(disc);
-  assert.ok(Math.abs(Math.abs(spread.normal[2]) - (1)) < 10 ** -6 / 2, `${Math.abs(spread.normal[2])} is not close to ${1}`);
-  assert.ok(spread.across > 9); assert.ok(Math.abs(spread.along - (0)) < 10 ** -6 / 2, `${spread.along} is not close to ${0}`);
+  // Prepared flat-disc spread; principal-axis preparation is tested by bake.
+  const spread = { normal: [0, 0, 1] as const, across: 9.5, along: 0 };
   assert.equal(screenPointCount(spread, [0, 0, 5], 1000), Infinity, 'within its reach there is no limit');
   const faceOn = screenPointCount(spread, [0, 0, 1000], 1000), tilted = screenPointCount(spread, [0, 800, 600], 1000), far = screenPointCount(spread, [0, 0, 4000], 1000);
   assert.equal(faceOn, Math.floor(Math.PI * (1000 * spread.across / 1000) ** 2 / 64));
@@ -66,9 +65,9 @@ test('a catalogue loads on its first publication and draws every point as the sa
   const paths = [...points.root.querySelectorAll('path')];
   assert.equal(paths.length, 1);
   assert.equal(paths[0]!.getAttribute('stroke'), '#ffe2a8ff');
-  assert.equal(paths[0]!.getAttribute('stroke-width'), '12', 'as wide as the dot, 1.5 px in eighths of a pixel');
+  assert.equal(paths[0]!.getAttribute('stroke-width'), '1.5', 'as wide as the dot, in pixels');
   assert.equal(paths[0]!.getAttribute('d')!.match(/M/g)?.length, 2);
-  assert.match(paths[0]!.getAttribute('d') ?? '', /^(M-?[\d.]+ -?[\d.]+h\.1){2}$/);
+  assert.match(paths[0]!.getAttribute('d') ?? '', /^(M-?[\d.]+ -?[\d.]+h\.01){2}$/);
   const retainedPath = paths[0];
   points.publish({ world: {...world, pose: {...world.pose, positionM: [1,0,0]}}, viewport });
   assert.equal(points.root.querySelector('path'), retainedPath);
@@ -183,7 +182,7 @@ test('a sized palette draws one color at two radii as two paths, and refuses a r
     viewport: { focalPixels: 100, principalOffsetPixels: [0, 0], widthPixels: 1000, heightPixels: 800 } });
   await new Promise(resolve => setTimeout(resolve, 0));
   const drawn = [...points.root.querySelectorAll('path')].filter(path => path.getAttribute('d'));
-  assert.deepEqual(drawn.map(path => [path.getAttribute('stroke'), path.getAttribute('stroke-width')]).sort(), [['#ffffffb3', '17.6'], ['#ffffffb3', '8']]);
+  assert.deepEqual(drawn.map(path => [path.getAttribute('stroke'), path.getAttribute('stroke-width')]).sort(), [['#ffffffb3', '1'], ['#ffffffb3', '2.2']]);
   points.destroy();
 });
 

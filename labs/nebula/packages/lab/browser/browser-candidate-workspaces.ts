@@ -1,5 +1,5 @@
-import { chooseLabObject } from './browser-object-picker.ts';
 /** Empty observation-only subjects must remain navigable without starting processing. */
+import { chooseLabObject } from './browser-object-picker.ts';
 import assert from 'node:assert/strict';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { chromium } from 'playwright';

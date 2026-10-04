@@ -1,0 +1,46 @@
+{
+  "schema": "cssearth-published-phase-curve@1",
+  "source": "Bell et al. (2021), MNRAS 504, 3316, 'A comprehensive reanalysis of Spitzer's 4.5 um phase curves, and the phase variations of the ultra-hot Jupiters MASCARA-1b and KELT-16b' (doi:10.1093/mnras/stab1027; arXiv:2010.00687). Spitzer IRAC 4.5 um phase curve of WASP-14b, program 80073, first published by Wong et al. (2015) and reanalysed here. Values read from the authors' LaTeX source: the table of preferred SPCA model parameters (tab:preferred), row WASP-14b, detector model PLDAper1_3x3. The preferred fit is first order (the caption of its figure names the mode PLDAper1_3x3_v1), so the printed semi-amplitude and offset are the whole phase variation (section 4.1: semi-amplitude sqrt(C1^2 + D1^2), offset east -arctan2(D1, C1)).",
+  "wavelengthMicrons": 4.5,
+  "radiusRatio": {
+    "value": 0.09561,
+    "cell": "0.09561 +0.00049/-0.00052",
+    "where": "tab:preferred, WASP-14b, R_p/R_*"
+  },
+  "eclipseDepth": {
+    "value": 0.002327,
+    "cell": "2327 +/- 69 ppm",
+    "where": "tab:preferred, WASP-14b, F_p/F_*"
+  },
+  "model": {
+    "kind": "amplitude-offset",
+    "equation": "F_p = F_day [1 + C1 (cos psi - 1) + D1 sin psi], psi counted from mid-eclipse (section 4.1), printed as its semi-amplitude and the offset east of its maximum.",
+    "semiAmplitude": {
+      "value": 0.000843,
+      "cell": "843 +39/-41 ppm",
+      "where": "tab:preferred, WASP-14b, Semi-Amplitude"
+    },
+    "offsetDegreesEast": {
+      "value": 12.4,
+      "cell": "12.4 +2.2/-2.5 degrees east",
+      "where": "tab:preferred, WASP-14b, Max Flux Offset"
+    }
+  },
+  "reported": {
+    "daysideK": {
+      "value": 2401,
+      "cell": "2401 +50/-49 K",
+      "where": "tab:preferred, WASP-14b, T_day"
+    },
+    "nightsideK": {
+      "value": 1391,
+      "cell": "1391 +56/-61 K",
+      "where": "tab:preferred, WASP-14b, T_night"
+    },
+    "offsetDegrees": {
+      "value": 12.4,
+      "cell": "12.4 +2.2/-2.5 degrees east",
+      "where": "tab:preferred, WASP-14b, Max Flux Offset"
+    }
+  }
+}

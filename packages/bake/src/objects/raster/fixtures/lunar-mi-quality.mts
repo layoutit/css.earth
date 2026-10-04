@@ -4,14 +4,16 @@
 import {fromFile} from 'geotiff';
 import {readFile,writeFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
+import {projectRoot} from '@cssearth/core/node';
 import {loadScienceSurface} from '@cssearth/bake/objects/raster';
+const checkout=projectRoot(import.meta.url);
 function record(v:unknown):Record<string,unknown>{if(!v||typeof v!=='object'||Array.isArray(v))throw new TypeError('Expected record');return v as Record<string,unknown>;}
-const root=resolve('src/objects/moon/source/science/usgs');
+const root=resolve(checkout,'src/objects/moon/source/science/usgs');
 const names=['fit-quality','iron-oxide','optical-maturity','submicroscopic-iron','plagioclase-grain-size','olivine','orthopyroxene','clinopyroxene','plagioclase'];
 const minerals=['olivine','orthopyroxene','clinopyroxene','plagioclase'];
 const grids=new Map<string,Float32Array>();
 for(const name of names){const path=resolve(root,`${name}.tif`);const file=await fromFile(path);try{const im=await file.getImage();if(im.getWidth()!==2048||im.getHeight()!==1024||im.getGDALNoData()!==-99999)throw new Error('Grid dimensions or missing value changed');const data=await im.readRasters({interleave:true});if(!(data instanceof Float32Array))throw new Error('Expected float32');grids.set(name,data);}finally{await file.close();}}
-const recipe=record(JSON.parse(await readFile('src/objects/moon/source/preparation/raster.json','utf8'))),surfaces=recipe.surfaces;
+const recipe=record(JSON.parse(await readFile(resolve(checkout,'src/objects/moon/source/preparation/raster.json'),'utf8'))),surfaces=recipe.surfaces;
 if(!Array.isArray(surfaces))throw new Error('Expected surfaces');
 const fit=grids.get('fit-quality')!,checks=[];
 for(const name of names.filter(n=>n!=='fit-quality')){

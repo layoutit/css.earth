@@ -1,10 +1,10 @@
-import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 /** Bake the shared lighting banks into `public/lighting/<bank>/`, or check the tracked files against a fresh bake. The
  * bake and the check are `bakeLightingBank` and `checkLightingBank` in `@cssearth/bake/raster`.
  *
  *   node packages/bake/cli/prepare-lighting-bank.mts [--check] [<bank>...]
  *
  * Every bank by default. */
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 import '@cssearth/bake/thread-pool';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';

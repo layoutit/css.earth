@@ -1,7 +1,7 @@
+/** Retained measured particles and per-emitter materials; never stores rendered slices. */
 import { encodeCompactPointColors, COMPACT_SAMPLED_SCHEMA, validatePreparedCssVolume, readCompilerBakeResult, CSS_COMPILER_RENDER_BUDGET, type CompilerPin } from '@cssearth/objects';
 import { readCompactPin as pinned, replayCompactSampled as replay } from '@cssearth/bake/volume/node';
 import { compileCssVolume } from '@cssearth/bake/volume-leaves';
-/** Retained measured particles and per-emitter materials; never stores rendered slices. */
 import { readFile, writeFile, mkdir } from "node:fs/promises";
 import { resolve } from "node:path";
 import { gzipSync, gunzipSync } from "node:zlib";

@@ -1,0 +1,49 @@
+{
+  "schema": "cssearth-published-phase-curve@1",
+  "source": "May et al. (2022), AJ 163, 256, 'A New Analysis of Eight Spitzer Phase Curves and Hot Jupiter Population Trends: Qatar-1b, Qatar-2b, WASP-52b, WASP-34b, and WASP-140b' (doi:10.3847/1538-3881/ac6261; arXiv:2203.15059). Spitzer IRAC 3.6 um phase curve of WASP-52b, 17-19 October 2016 and 21-23 October 2017, fitted together, label wa052bo11 and wa052bo12. Values read from the authors' LaTeX source: the table of fit results (table:Results), column wa052bo11 and wa052bo12. The best fit uses the symmetric phase function (table:bestfits), a first-order sinusoid, so the printed amplitude, (max - min)/2, and hotspot offset, positive eastward, are the whole phase variation. The two 3.6 um visits share one column. The paper cautions that its 4.5 um phase curve of this planet \"is potentially unreliable\", so the 3.6 um fit is the one drawn.",
+  "wavelengthMicrons": 3.6,
+  "radiusRatio": {
+    "value": 0.16464,
+    "cell": "0.16464 +/- 0.00011",
+    "where": "table:Results, wa052bo11 and wa052bo12, Transit Depth [R_p/R_S]"
+  },
+  "eclipseDepth": {
+    "value": 0.002206,
+    "cell": "2206 +/- 77 ppm, F_p/F_S at mid-eclipse (\"Day\"); the fitted eclipse depth row prints 2201 +/- 77 ppm",
+    "where": "table:Results, wa052bo11 and wa052bo12, F_p/F_S Day"
+  },
+  "model": {
+    "kind": "amplitude-offset",
+    "equation": "A symmetric (single cosine) phase function, printed as its amplitude (max - min)/2 and its hotspot offset.",
+    "semiAmplitude": {
+      "value": 0.00065,
+      "cell": "650 +/- 79 ppm",
+      "where": "table:Results, wa052bo11 and wa052bo12, Amplitude"
+    },
+    "offsetDegreesEast": {
+      "value": -2.1,
+      "cell": "-2.1 +/- 4.9 degrees",
+      "where": "table:Results, wa052bo11 and wa052bo12, Hotspot Offset"
+    }
+  },
+  "reported": {
+    "daysideK": {
+      "value": 1454,
+      "cell": "1454 +/- 21 K",
+      "where": "table:Results, wa052bo11 and wa052bo12, Temperature Day"
+    },
+    "nightsideK": {
+      "value": 1116,
+      "cell": "1116 +/- 46 K",
+      "where": "table:Results, wa052bo11 and wa052bo12, Temperature Night"
+    },
+    "offsetDegrees": {
+      "value": -2.1,
+      "cell": "-2.1 +/- 4.9 degrees",
+      "where": "table:Results, wa052bo11 and wa052bo12, Hotspot Offset"
+    }
+  },
+  "notStated": [
+    "The table comment gives \"Day\" and \"Night\" as phases 0.0/1.0 and 0.5 in that order; the Day flux equals the curve at mid-eclipse (phase 0.5) for every column, and is read so here."
+  ]
+}

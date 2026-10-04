@@ -120,7 +120,7 @@
       "origin": "https://doi.org/10.5281/zenodo.7113931",
       "credit": "NSX hydrogen atmosphere table nsx_H_v200804.out (Ho & Lai 2001, MNRAS 327, 1081; Ho & Heinke 2009, Nature 462, 71), distributed with X-PSI",
       "license": "Project-computed model values; the table is distributed under CC BY 4.0 with X-PSI's tutorial files",
-      "acquisition": "Computed by packages/telescope-cli/src/new-object/pulsar.mts from nsx_H_v200804.out (https://doi.org/10.5281/zenodo.7113931): nsxLimbProfile and fitQuadraticLimb in @cssearth/bake/objects/stellar.",
+      "acquisition": "Computed by packages/telescope-cli/src/new-object/pulsar.mts (now packages/telescope-cli/src/new-object/archives/pulsar.mts) from nsx_H_v200804.out (https://doi.org/10.5281/zenodo.7113931): nsxLimbProfile and fitQuadraticLimb in @cssearth/bake/objects/stellar.",
       "redistribution": "Model coefficients and the profile they are fitted to, with the model cited.",
       "consumers": [
         "temperature-hot-region-map"
@@ -136,7 +136,7 @@
       "origin": "https://doi.org/10.5281/zenodo.13766753",
       "credit": "Choudhury et al. (2024), reproduction package (Zenodo)",
       "license": "Creative Commons Attribution 4.0 International",
-      "acquisition": "Every 109th of the 218,553 equal-weight posterior samples of the deposit (nlive20000_expf3.3_noCONST_noMM_tol0.1post_equal_weights.dat), the columns the hot regions read, to seven significant figures; written by packages/telescope-cli/src/new-object/pulsar.mts.",
+      "acquisition": "Every 109th of the 218,553 equal-weight posterior samples of the deposit (nlive20000_expf3.3_noCONST_noMM_tol0.1post_equal_weights.dat), the columns the hot regions read, to seven significant figures; written by packages/telescope-cli/src/new-object/pulsar.mts (now packages/telescope-cli/src/new-object/archives/pulsar.mts).",
       "redistribution": "A thinned copy of deposited posterior samples, with the deposit cited.",
       "consumers": [
         "temperature-hot-region-map"

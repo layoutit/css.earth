@@ -1,5 +1,5 @@
-import { projectRoot as findProjectRoot } from '@cssearth/core/node';
 /** Controlled cameras: the lit source shape must land on the photographed body, and a published photometric model resolves against its record. */
+import { projectRoot as findProjectRoot } from '@cssearth/core/node';
 import assert from 'node:assert/strict';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
@@ -8,8 +8,7 @@ import { resolve } from 'node:path';
 import { createSourceManifest } from '@cssearth/objects/node';
 import { requireArray, requireRecord } from '@cssearth/core';
 import type { PixelGeometry } from '@cssearth/bake/objects/layers/terrestrial';
-import { MAXIMUM_LIT_SHAPE_ON_SKY, litShapeOnSky, parseControlledCameraDataset } from '@cssearth/bake/objects/layers/terrestrial';
-import { publishedPhotometry } from '@cssearth/bake/objects/layers/terrestrial';
+import { MAXIMUM_LIT_SHAPE_ON_SKY, litShapeOnSky, parseControlledCameraDataset, publishedPhotometry } from '@cssearth/bake/objects/layers/terrestrial';
 
 const root = findProjectRoot(import.meta.url);
 

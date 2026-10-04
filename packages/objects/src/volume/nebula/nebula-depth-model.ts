@@ -50,3 +50,11 @@ export function parseDepthRecipe(v: unknown, allowedPath: (path: string) => bool
   return { schema: v.schema, id: v.id, centerIcrsDegrees: center, evidence: { path: v.evidence.path }, background, features,
     detailThicknessRatio: v.detailThicknessRatio, minimumThicknessArcsec: v.minimumThicknessArcsec, interpretation: v.interpretation };
 }
+
+/** Publication ownership admission preserves receipts that retain only identity and an evidence pin.
+ * Scientific recipe admission remains the full reader's responsibility. */
+export function readPublishedDepthRecipe(value: unknown, expectedId: string): { evidence: unknown } {
+  if (!isRecord(value) || value.schema !== NEBULA_DEPTH_MODEL_SCHEMA || value.id !== expectedId)
+    throw new Error('Prepared depth recipe belongs to another nebula or has an invalid schema.');
+  return { evidence: value.evidence };
+}

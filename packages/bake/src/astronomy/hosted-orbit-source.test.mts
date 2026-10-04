@@ -5,7 +5,7 @@ import { resolve } from 'node:path';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 
-import { readHostedOrbitRecord } from '../../../astronomy/cli/lib/generator-records.mts';
+import { readHostedOrbitRecord } from '@cssearth/astronomy';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 
 const root = findProjectRoot(import.meta.url);

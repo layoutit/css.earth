@@ -81,3 +81,7 @@ Shared resource/address and image-density conventions, tile styles, interior-dis
 
 Presentation-to-world conversion, camera pose/viewport shapes, default-view rotation, silhouette walking and
 surface fly-to calibration belong to `@cssearth/engine`. Renderer extends the engine viewport with layout fields. Runtime viewport/layout and world-to-presentation projection stay here.
+
+## Accepted test boundaries
+
+Node tests beside `src/node/` verify private implementation details; `test/` holds package integration fixtures and helpers. Three explicit `./test/` exports expose only the fixture files imported through package entries. The sole consumer outside renderer is `site/test/runtime-package.test.mts`, which imports `@cssearth/renderer/test/object-runtime-package.mts`; the orbit and camera-orientation fixture exports serve renderer tests.

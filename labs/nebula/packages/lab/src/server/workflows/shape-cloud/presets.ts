@@ -1,5 +1,5 @@
-import { isRecord as coreIsRecord } from '@cssearth/core';
 /** Checked-in authored fits are separate from detection evidence and browser drafts. */
+import { isRecord as coreIsRecord } from '@cssearth/core';
 import type { StructureImage } from '../../../features/observations/models/structures-model.ts';
 import type { GeometryMap } from '../../../features/observations/models/geometry-model.ts';
 import { initializeShapeCloud, readShapeCloudSettings } from '../../../features/shape-cloud/model.ts';

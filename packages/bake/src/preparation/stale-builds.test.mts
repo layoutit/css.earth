@@ -3,11 +3,10 @@ import { projectRoot } from '@cssearth/core/node';
 import assert from 'node:assert/strict';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
-import { mkdtemp, mkdir, readFile, rm, utimes, writeFile } from 'node:fs/promises';
+import { mkdtemp, mkdir, readFile, rm, utimes, writeFile, realpath, symlink } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { realpath, symlink } from 'node:fs/promises';
-import { findWorkspaceRoot } from '@cssearth/bake/preparation/workspace-graph';
+import { findWorkspaceRoot, buildOutput } from '@cssearth/bake/preparation/workspace-graph';
 import { BUILD_RULES, rebuildStale, staleBuilds } from '@cssearth/bake/preparation';
 
 test('a build is stale when a compiled source is newer than its output or the output is missing', async () => {
@@ -83,8 +82,8 @@ test('with the engine and the bake both stale, --run rebuilds the engine first',
     for (const name of ['engine', 'bake']) await utimes(join(root, `packages/${name}/src/index.ts`), 3000, 3000);
     const ran: string[] = [];
     await rebuildStale(root, BUILD_RULES, async command => { ran.push(command); });
-    // The graph orders the source-reading viewer before bake, and the dependent telescope CLI after bake.
-    assert.deepEqual(ran, ['pnpm --filter @cssearth/engine build', 'pnpm --filter @cssearth/volume-viewer build', 'pnpm --filter @cssearth/bake build', 'pnpm --filter @cssearth/telescope-cli build']);
+    // Viewer stays fresh: it does not read bake sources. The dependent telescope CLI follows bake.
+    assert.deepEqual(ran, ['pnpm --filter @cssearth/engine build', 'pnpm --filter @cssearth/bake build', 'pnpm --filter @cssearth/telescope-cli build']);
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 
@@ -199,4 +198,16 @@ test('the built sphere lane source explicitly invalidates the telescope CLI buil
     await utimes(join(root, source, 'sphere-lane.mts'), 3000, 3000);
     assert.deepEqual((await staleBuilds(root, [rule])).map(build => build.command), ['pnpm --filter @cssearth/telescope-cli build']);
   } finally { await rm(root, { recursive: true, force: true }); }
+});
+
+test('every build watches runtime JavaScript and volume-viewer watches its own sources', () => {
+  assert.ok(BUILD_RULES.every(rule => /\.[cm]?js$/u.test(rule.output)));
+  assert.ok(!BUILD_RULES.find(rule => rule.name === '@cssearth/volume-viewer')!.sources.includes('packages/bake/src'));
+});
+
+test('export conditions prefer runtime import over declaration and other targets', () => {
+  const pkg = { name: '@test/p', directory: 'packages/p', dependencies: [], manifest: {
+    exports: { '.': { types: './dist/index.d.ts', require: './dist/fallback.cjs', import: './dist/index.js' } } } };
+  assert.equal(buildOutput(pkg), 'packages/p/dist/index.js');
+  assert.throws(() => buildOutput({ ...pkg, manifest: { exports: { '.': { types: './dist/index.d.ts' } } } }), /no dist output/u);
 });

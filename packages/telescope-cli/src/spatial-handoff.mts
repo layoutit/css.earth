@@ -10,6 +10,10 @@ import { VERSION } from './help.mts';
 import { writeProductRecord, WORKSPACE } from '@cssearth/telescope/node';
 import type { ProductInput } from '@cssearth/objects';
 
+type SpatialLoader = Partial<Pick<typeof import('@cssearth/renderer/stars/loader.ts'), 'loadPreparedCssPointField'>
+  & Pick<typeof import('@cssearth/renderer/volume/loader.ts'), 'loadPreparedCssVolume'>
+  & Pick<typeof import('@cssearth/renderer/volume/prepared-volume-datasets.ts'), 'loadPreparedVolumeDatasets' | 'preparedTransportReader'>>;
+
 export type SpatialKind='points'|'volume'|'volume-dataset-bank';
 type SpatialPayload =
   | {kind:'points';payload:PreparedCssPointField}
@@ -49,8 +53,7 @@ async function validateSpatialObject(objectPath:string,expected:SpatialKind|unde
   await mkdir(resolve(workspaceRoot,'work'),{recursive:true});const scratch=await mkdtemp(resolve(workspaceRoot,'work/telescope-spatial-loader-'));
   const moduleFile=resolve(scratch,'loader.mjs');await writeFile(moduleFile,compiled.outputFiles[0].text);
   try{
-    const loader: {loadPreparedCssPointField?:(input: unknown, transport: {read(path: string): Promise<ArrayBuffer>}) => Promise<PreparedCssPointField>;loadPreparedCssVolume?:(input: unknown, transport: {read(path: string): Promise<ArrayBuffer>}) => Promise<PreparedCssVolume>;loadPreparedVolumeDatasets?:(input: unknown, transport: {read(path: string): Promise<ArrayBuffer>}, options: {resolve(path: string): string; read: unknown}) => Promise<{index: PreparedVolumeDatasetIndex; load(id: string): Promise<void>}>;
-      preparedTransportReader?:(transport: {read(path: string): Promise<ArrayBuffer>}) => unknown}=await import(`${pathToFileURL(moduleFile).href}?${randomUUID()}`);
+    const loader: SpatialLoader=await import(`${pathToFileURL(moduleFile).href}?${randomUUID()}`);
     const transport={read:async(path:string)=>Uint8Array.from(await read(path)).buffer};
     const manifestPath=requireString(prepared.url);
     // Every dataset's volume and stars are read through the same checked transport, so the handoff holds the whole bank.

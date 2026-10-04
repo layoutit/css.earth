@@ -2,7 +2,7 @@
 
 Time scales, float64 vectors and the reference-frame tree behind [cssEarth](https://github.com/layoutit/cssEarth).
 
-Zero dependencies, zero browser globals. Everything here runs in Node, a worker, or the browser.
+Shared source contracts come from `@cssearth/objects`; there are no browser globals. Everything here runs in Node, a worker, or the browser.
 
 `createRaDecCatalogueMatcher(positionsDeg, matchArcsec, comparison)` indexes
 RA/declination pairs and returns a position predicate. Catalogue coordinates stay

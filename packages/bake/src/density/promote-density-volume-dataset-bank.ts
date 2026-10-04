@@ -1,7 +1,3 @@
-import { DENSITY_VOLUME_DATASET_BANK_SOURCE_SCHEMA } from '@cssearth/objects';
-import { PREPARED_VOLUME_DATASET_INDEX_SCHEMA } from '@cssearth/objects';
-import { writeVolumeDatasetBank } from '@cssearth/objects/node';
-import { OBJECT_SCHEMA, PREPARED_OBJECT_SCHEMA, PREPARED_VOLUME_DATASETS_SCHEMA, DENSITY_VOLUME_FORMAT, parsePreparedDensityVolumeText, parseDensityVolumeObjectDescriptor, validatePreparedVolumeDatasets, type PreparedCssVolume } from '@cssearth/objects';
 /**
  * Package an already-prepared physical density volume as one selectable dataset.
  *
@@ -12,6 +8,8 @@ import { OBJECT_SCHEMA, PREPARED_OBJECT_SCHEMA, PREPARED_VOLUME_DATASETS_SCHEMA,
  * measurement frame remains recorded in provenance. It never constructs a
  * depth coordinate.
  */
+import { DENSITY_VOLUME_DATASET_BANK_SOURCE_SCHEMA, OBJECT_SCHEMA, PREPARED_OBJECT_SCHEMA, PREPARED_VOLUME_DATASETS_SCHEMA, PREPARED_VOLUME_DATASET_INDEX_SCHEMA, DENSITY_VOLUME_FORMAT, parsePreparedDensityVolumeText, parseDensityVolumeObjectDescriptor, validatePreparedVolumeDatasets, type PreparedCssVolume } from '@cssearth/objects';
+import { writeVolumeDatasetBank } from '@cssearth/objects/node';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, isAbsolute, relative, resolve, sep } from 'node:path';
 

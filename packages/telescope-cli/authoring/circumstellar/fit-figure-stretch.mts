@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 /** Fit the one display number a published color image does not print: the brightness stretch that maps a reflectance-color
  * dataset onto the publisher's own figure panel.
  *
@@ -12,6 +11,7 @@ import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
  * the same paper prints its single-filter scales in. `a`, `top` and the star's offset in the panel (up to six pixels either
  * way) are fitted to the panel's colors between 1 and 4.4 arcseconds, the ring and its halo; the mirrored image is fitted too,
  * as a handedness check. The figure is read, never retained: only these numbers go into the recipe. */
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
