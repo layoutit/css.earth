@@ -9,7 +9,8 @@ import { unshufflePreparedBinary } from '@cssearth/objects';
 export async function readPreparedBinary(compressed: ArrayBuffer | Uint8Array, at = 'prepared binary'): Promise<ArrayBuffer> {
   const bytes = compressed instanceof Uint8Array ? compressed : new Uint8Array(compressed);
   if (bytes[0] !== 0x1f || bytes[1] !== 0x8b) throw new TypeError(`${at}: a prepared binary file is gzip-compressed; this one starts ${bytes[0]}, ${bytes[1]}.`);
-  const packed: BufferSource = compressed instanceof Uint8Array ? compressed.slice() : compressed;
+  // A byte view, never a bare ArrayBuffer: Node 22's stream never settles on one (the tests run there).
+  const packed = compressed instanceof Uint8Array ? compressed.slice() : new Uint8Array(compressed);
   const stream = new ReadableStream<BufferSource>({ start(controller) { controller.enqueue(packed); controller.close(); } }).pipeThrough(new DecompressionStream('gzip'));
   return unshufflePreparedBinary(new Uint8Array(await new Response(stream).arrayBuffer()), at);
 }
