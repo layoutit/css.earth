@@ -309,6 +309,10 @@ Exo-REM's neighbouring models differ in how deep their cloud tops lie, so a law 
 from node to node; each README states that range and the flux ratios. A planet with no usable fit stays a flat disc, and its
 ledger says why, with the fits read in its papers.
 
+A self-luminous planet with no measured color is a gray disc, and it takes a law the same way: its fit record names the band
+it is seen in (`band`), and the law darkens the gray (PDS 70 c, in SPHERE K1). The gray stays a display convention; only the
+darkening is the model's.
+
 **Gravity darkening.** A star that spins fast is flattened and hotter at its poles. Where a paper publishes a Roche-von Zeipel
 fit (ω, β, the polar temperature, the radii and the pole's orientation), [gravity-darkening.ts](../packages/bake/src/objects/stellar/gravity-darkening.ts)
 rebuilds the surface from those numbers and writes a temperature for each latitude row. Its tests require the paper's

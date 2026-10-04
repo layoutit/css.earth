@@ -20,7 +20,7 @@ import { requireTerrainMesh, sampleRadialTriangles, loadPdsRadiusTable } from '.
 import { skyDisplayRaster } from '@cssearth/fits';
 import { readObservation, loadScienceSurface, paintScienceSurface, prepareObservedColor, validateScienceQualityMasks, validateGeologyProfile, validatePds4ObservationPolicy, preparePdsByteMosaic, loadControlledObservationGeometry, matchObservedColorLevels } from '../raster/index.ts';
 import { prepareAkatsukiUviMap } from './akatsuki-uvi-l3b.ts';
-import { loadDiscIntegratedColor, encodeBandColor, hostLitGray } from '../color/index.ts';
+import { loadDiscIntegratedColor, encodeBandColor, hostLitGray, srgbToLinear } from '../color/index.ts';
 import { readCie1931ColorMatching } from '../sources/index.ts';
 import { prepareGlbSurface } from '../layers/shape-model/index.ts';
 import { addSpotFigureToLimbPlate, addSpotOccultationToLimbPlate, limbDarkeningPlate, limbIntensity, loadGridLimbDarkening, loadStellarPhotometricColor, parseSpotFigureModel, parseSpotOccultation, spotDiscCentre } from '../stellar/index.ts';
@@ -417,9 +417,13 @@ export async function createSurfaceInterpreter({ objectId, displayName, sourceDi
         const gray = surface.science.hostLight === undefined ? [128, 128, 128] as const : hostLitGray(requireString(requireRecord(surface.science.hostLight, 'science.hostLight').srgb, 'science.hostLight.srgb'));
         const data = Buffer.alloc(width * height * 4);
         for (let offset = 0; offset < data.length; offset += 4) { data[offset] = gray[0]; data[offset + 1] = gray[1]; data[offset + 2] = gray[2]; data[offset + 3] = 255; }
-        // An emissive body (a star with no observation) still owes the presentation its off-limb and limb plates: both transparent.
-        if (recipe.emission) return { data, channels: 4, nearest: true, plates: transparentPlates(recipe.emission.offLimbSize * density, recipe.emission.limbSize * density) };
-        return { data, channels: 4, nearest: true };
+        // An emissive body (a star with no observation) still owes the presentation its off-limb and limb plates: both transparent,
+        // unless a limb law (a model atmosphere's, in the band the body is seen in) darkens the gray toward its edge.
+        if (!recipe.emission) return { data, channels: 4, nearest: true };
+        const plates = transparentPlates(recipe.emission.offLimbSize * density, recipe.emission.limbSize * density);
+        if (surface.science.limbDarkening !== undefined) plates.limb = limbDarkeningPlate(recipe.emission.limbSize * density, await loadGridLimbDarkening(async path => { await (await manifest).validatePath(path); return readFile(resolve(sourceDirectory, path)); }, surface.science.limbDarkening, `${objectId}/${surface.id}`),
+          { linear: [srgbToLinear(gray[0] / 255), srgbToLinear(gray[1] / 255), srgbToLinear(gray[2] / 255)], srgb: gray });
+        return { data, channels: 4, nearest: true, plates };
       }
       case 'black-shadow': {
         // A black hole's measured shadow, drawn as a black disc that always faces the viewer: the limb plate, which the runtime fits to

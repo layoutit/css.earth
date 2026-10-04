@@ -21,6 +21,16 @@
         "https://arxiv.org/abs/2109.10671",
         "https://doi.org/10.1051/0004-6361/202141889"
       ]
+    },
+    {
+      "id": "limb-darkening",
+      "subject": "Limb darkening",
+      "status": "unresolved",
+      "finding": "No limb darkening is drawn: the published limb table (Claret, Hauschildt & Witte 2012) starts at 1,500 K, and at 1,250 K the planet is below it. Its one published fit is an Exo-REM model (Nowak et al. 2020), which prints the temperature and gravity (1250 +/- 50 K, log g 3.85 +0.15/-0.25) but not the metallicity or C/O the model was read at, so the model of Exo-REM's public grid cannot be named.",
+      "evidence": [
+        "https://arxiv.org/abs/2010.04442",
+        "https://lesia.obspm.fr/exorem/YGP_grids/old_grids_2021/"
+      ]
     }
   ]
 }
