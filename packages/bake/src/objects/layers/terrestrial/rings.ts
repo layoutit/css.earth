@@ -4,9 +4,8 @@ const parseRingProfile = shape({textureSize:number,bands:array(shape({id:text,se
 export type TerrestrialRings = ReturnType<typeof parseRingProfile>;
 import { writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { prepareRingLeaves } from '../shape-model/index.ts';
+import { prepareRingLeaves, publishedImageSize } from '../shape-model/index.ts';
 import { prepareCoplanarColorRaster, coplanarTileLayout } from '../material-composition/index.ts';
-import { publishedImageSize } from '../shape-model/index.ts';
 
 /** A ring is drawn from its measured dimensions and its published normal opacity, in the neutral gray of a body with no
  * measured color. A recipe sets no color. */

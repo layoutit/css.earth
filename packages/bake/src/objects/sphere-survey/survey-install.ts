@@ -12,14 +12,10 @@
  */
 import { access, copyFile, mkdir, readFile, readdir, rename, rm, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
-import { authorSourceRecords } from '../../sources/index.ts';
+import { authorSourceRecords, INVESTIGATION_SURVEY_DIRECTORY } from '../../sources/index.ts';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
-import { REGISTRATION_BLOCK_BEGIN, REGISTRATION_BLOCK_END } from '../layers/terrestrial/index.ts';
-import { COMPARISON_BLOCK_BEGIN, COMPARISON_BLOCK_END, PHASE_SWEEP_STEP_DEGREES, comparisonBlock, parseComparisonEvidence, phaseAgreement, withComparisonBlock, type ComparisonEvidence, type PhaseAgreement } from '../layers/terrestrial/index.ts';
-import { OBSERVER_CAMERAS_FILE } from '../layers/terrestrial/index.ts';
+import { REGISTRATION_BLOCK_BEGIN, REGISTRATION_BLOCK_END, COMPARISON_BLOCK_BEGIN, COMPARISON_BLOCK_END, PHASE_SWEEP_STEP_DEGREES, comparisonBlock, parseComparisonEvidence, phaseAgreement, withComparisonBlock, type ComparisonEvidence, type PhaseAgreement, OBSERVER_CAMERAS_FILE, writeHorizonsOperations } from '../layers/terrestrial/index.ts';
 import { LAM, LAM_HEADERS, framesUrl, shapeUrl } from './lam.ts';
-import { INVESTIGATION_SURVEY_DIRECTORY } from '../../sources/index.ts';
-import { writeHorizonsOperations } from '../layers/terrestrial/index.ts';
 import { DATASET_ID, SURVEY_DATASET_SETTINGS, buildSetup, leaveOutArguments, localCopy } from './survey-setup.ts';
 
 export const COMPARISON_ENTRY = `${DATASET_ID}-published-comparison`;

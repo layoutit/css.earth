@@ -1,6 +1,6 @@
+/** Band depth has three input windows. Keep their enclosing reduction range out of the measurement's band identity. */
 import { parseRegion, type ResolutionAssumption } from '@cssearth/objects';
 import { parseLimits } from '@cssearth/telescope/node';
-/** Band depth has three input windows. Keep their enclosing reduction range out of the measurement's band identity. */
 import { requireArray, requireFiniteNumber, requireString } from '@cssearth/core';
 export function inputWavelengths(request: CapabilityRequest): readonly [number,number] {
   if (!request.continuumMicrometres) return request.wavelengthMicrometres;

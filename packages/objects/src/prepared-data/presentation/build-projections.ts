@@ -1,3 +1,4 @@
+/** Narrow data-only admissions used by build consumers; no geometry or editorial policy. */
 import { COMPACT_DENSITY_DELIVERY_SCHEMA } from '../../volume/compact/compact-density-delivery.js';
 import { UNIFORM_DISC_STAR_SCHEMA } from '../photometry/uniform-disc-star.js';
 import { PREPARED_FEATURES_SCHEMA } from '../surface/prepared-features.js';
@@ -5,7 +6,6 @@ import { parsePreparedPanelContent, PREPARED_CONTENT_SCHEMA } from '../content/p
 import { GALAXY_BACKING_SCHEMA } from '../catalogue/galaxy-backing.js';
 import { NEBULA_DELIVERY_SCHEMA } from '../../volume/nebula/nebula-delivery.js';
 import { VOLUME_DATASET_MANIFEST_SCHEMA } from '../../volume/delivery/volume-dataset-manifest.js';
-/** Narrow data-only admissions used by build consumers; no geometry or editorial policy. */
 import { requireRecord, requireArray, requireString, requireFiniteNumber, isRecord } from '@cssearth/core';
 import { CHART_ASSETS_SCHEMA } from './presentation-recipe-schemas.js';
 import { SOURCE_MANIFEST_SCHEMA } from '../../sources/source-manifest-schema.js';

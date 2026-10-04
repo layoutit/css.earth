@@ -1,18 +1,14 @@
 import { type CameraPose, type PerspectiveCameraPlan, type PreparedWorldCameraFrame } from '@cssearth/objects';
-import { cameraProjectionScale, worldCameraFromCenteredPresentation, worldCameraFromPresentation, type WorldCameraPose } from '@cssearth/engine';
+import { cameraProjectionScale, worldCameraFromCenteredPresentation, worldCameraFromPresentation, type WorldCameraPose, preparedScenePitch, distanceForSilhouetteRadius, rotationFromMatrix3d, silhouetteRadiusAtDistance, scaleWorldPosition, validateWorldPosition } from '@cssearth/engine';
 
-import { preparedScenePitch } from '@cssearth/engine';
 import type { PositionM } from '@cssearth/engine';
-import type { CameraAngles, CameraDelta, CameraUpdate } from './types.js';
+import type { CameraAngles, CameraDelta, CameraUpdate, Vector3 } from './types.js';
 
 import { createCameraOrientation } from './camera-orientation.js';
-import { distanceForSilhouetteRadius, rotationFromMatrix3d, silhouetteRadiusAtDistance } from '@cssearth/engine';
 import { worldCameraViewport, presentWorldCamera } from './world-camera.js';
 import type { WorldCameraViewport } from './world-camera.js';
 
-import { scaleWorldPosition, validateWorldPosition } from '@cssearth/engine';
 import type { PerspectiveWorldContext } from './perspective-dolly.js';
-import type { Vector3 } from './types.js';
 import { clamp } from '@cssearth/core';
 
 /** The live camera stays in its prepared local frame for float64 precision.

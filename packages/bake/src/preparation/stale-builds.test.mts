@@ -3,10 +3,9 @@ import { projectRoot } from '@cssearth/core/node';
 import assert from 'node:assert/strict';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
-import { mkdtemp, mkdir, readFile, rm, utimes, writeFile } from 'node:fs/promises';
+import { mkdtemp, mkdir, readFile, rm, utimes, writeFile, realpath, symlink } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { realpath, symlink } from 'node:fs/promises';
 import { findWorkspaceRoot } from '@cssearth/bake/preparation/workspace-graph';
 import { BUILD_RULES, rebuildStale, staleBuilds } from '@cssearth/bake/preparation';
 

@@ -1,9 +1,8 @@
-import { requireNonemptyString as text } from '@cssearth/core';
 /** Self-contained preparation entry point for pinned transparent surface objects. */
+import { requireNonemptyString as text, requireRecord as record } from '@cssearth/core';
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { dirname, relative, resolve } from 'node:path';
 import { PREPARED_OBJECT_SCHEMA, SURFACE_SHELL_FORMAT, parseDensityVolumeFrame, parseObjectDescriptor } from '@cssearth/objects';
-import { requireRecord as record } from '@cssearth/core';
 
 import { sourceBytes, containedPath } from '../volume/node/index.ts';
 import { parseShellRecipe } from './config.ts';

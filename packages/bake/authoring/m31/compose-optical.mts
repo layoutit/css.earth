@@ -1,5 +1,3 @@
-import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
-// Entry script: node packages/bake/authoring/m31/compose-optical.mts
 /**
  * M31's optical image-layer input: the Local Group Galaxies Survey panorama (NOIRLab noao-m31lgs_ubvIha, ~1" seeing) wherever
  * it has data, and the ESA/Hubble DSS2 view (heic1112f, the tracked `source.jpg` crop) in the mosaic's notches and the outer
@@ -9,6 +7,8 @@ import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
  * Inputs: `source/lggs-panorama.jpg` (the publisher Large JPEG, restored from its origin) and `source/source.jpg`.
  * Output: `source/optical-composite.jpg`, the recipe's `source.path`, and `evidence/2026-09-29/optical-composite.json`, what was measured.
  */
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
+// Entry script: node packages/bake/authoring/m31/compose-optical.mts
 import sharp from 'sharp';
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';

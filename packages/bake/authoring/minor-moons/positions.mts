@@ -1,4 +1,3 @@
-import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 /**
  * A planet's moons that have no page, each at its JPL Horizons position at the world's epoch.
  *
@@ -10,6 +9,7 @@ import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
  *
  * Usage: node packages/bake/authoring/minor-moons/positions.mts <host id>
  */
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 import { existsSync } from 'node:fs';
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';

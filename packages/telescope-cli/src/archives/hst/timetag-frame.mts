@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-import { requiredFiniteCard as cardNumber, requiredTrimmedTextCard as cardText } from '@cssearth/fits';
 /** Rebuild one STIS TIME-TAG exposure in a moving target's own rest frame.
  *
  *   node packages/telescope-cli/src/archives/hst/timetag-frame.mts <definition id> <files directory> <output directory> [--fetch] [--receipt]
@@ -23,11 +22,11 @@ import { requiredFiniteCard as cardNumber, requiredTrimmedTextCard as cardText }
  * The image carries a real sky WCS about the target's position at the middle of the exposure, so `@cssearth/fits`
  * reads its orientation like any other sky image. That is a statement about the grid's axes, not about the sky standing
  * still: the target moved, and the WCS says where it was at one instant. */
+import { requiredFiniteCard as cardNumber, requiredTrimmedTextCard as cardText, skyImageAxes } from '@cssearth/fits';
 import { mkdir, open, readFile, writeFile } from 'node:fs/promises';
 import { basename, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { readFitsFileHdus, type FitsFileHdu } from '@cssearth/fits/node';
-import { skyImageAxes } from '@cssearth/fits';
 import { positionalArguments } from '@cssearth/core';
 import { headerBlock, padBlock } from '@cssearth/bake/objects/raster';
 import { assertInputs, fileSize, writeProductRecord } from '@cssearth/telescope/node';

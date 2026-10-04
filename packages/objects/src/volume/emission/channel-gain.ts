@@ -6,4 +6,3 @@ export function validateChannelGain(value: unknown): ChannelGain {
     throw new TypeError('A dataset channel gain must be three finite multipliers in (0,4].');
   return [value[0] as number, value[1] as number, value[2] as number];
 }
-

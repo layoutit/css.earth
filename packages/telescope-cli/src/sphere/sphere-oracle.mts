@@ -1,6 +1,6 @@
+/** Independent analytic ray/ellipsoid reference; no PolyCSS geometry is used to draw it. */
 import { parsePreparedObjectRuntime, parsePreparedWorldContext, worldCameraOf, parsePreparedWorldCameraFrame } from '@cssearth/objects';
 
-/** Independent analytic ray/ellipsoid reference; no PolyCSS geometry is used to draw it. */
 import { execFileSync } from 'node:child_process';
 import assert from 'node:assert/strict';
 import { requireRecord, requireArray } from '@cssearth/core';

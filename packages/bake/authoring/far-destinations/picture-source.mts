@@ -1,5 +1,3 @@
-import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
-// Entry script: node packages/bake/authoring/far-destinations/picture-source.mts <object id>...
 /**
  * The picture each far destination's image-layer bank bakes: a publisher's image, or the part of it that shows the
  * object. Each bank's acquisition record (`src/objects/<id>-layers/source/provenance.json`, `acquisition`) names the
@@ -16,6 +14,8 @@ import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
  * `featherPx`): light within the half width of the path is kept whole, fades to black over the feather, and is black
  * beyond it. It is for a lensed arc that crosses a field of nearer galaxies, which do not stand at the arc's distance.
  */
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
+// Entry script: node packages/bake/authoring/far-destinations/picture-source.mts <object id>...
 import { mkdir, readFile, stat, writeFile } from 'node:fs/promises';
 import { basename, resolve } from 'node:path';
 import sharp from 'sharp';

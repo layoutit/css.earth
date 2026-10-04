@@ -1,6 +1,6 @@
-import { requiredFiniteCard as cardNumber, requiredTrimmedTextCard as cardText } from '@cssearth/fits';
 /** The STIS line frames a stack is made from: their headers and read regions, where the body sits along and across the slit,
  * the sky level and the reflected sunlight each frame carries. */
+import { requiredFiniteCard as cardNumber, requiredTrimmedTextCard as cardText } from '@cssearth/fits';
 import { readFitsFileHdus, readFitsFileRegion, type FitsFileHdu } from '@cssearth/fits/node';
 import { clippedMean, median, robustScatter, type LineStackDefinition } from './line-stack-reduction.mts';
 import type { FrameEphemeris } from './line-stack-ephemeris.mts';

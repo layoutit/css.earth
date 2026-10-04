@@ -1,11 +1,26 @@
 import type { Linter } from "eslint";
 import typescriptParser from '@typescript-eslint/parser';
+import { headerCommentFirst } from './.github/scripts/checks/module-style/index.mts';
 
 export const packageLineLimit = 600;
 // The contract forbids runtime canvas and WebGL (AGENTS.md); WWT's engine is WebGL. Build-time preparation may rasterize.
 const noCanvas = 'The CSS runtime uses no canvas or WebGL (AGENTS.md).';
 
 export default [
+  {
+    files: ['**/*.{js,mjs,cjs,ts,tsx,mts}'],
+    // `site/` and the root `src/` stay out of the module-style gate until plan 7 (site architecture): a mass reformat there
+    // would collide with the site maintainers' open work.
+    ignores: ['site/**', 'src/**'],
+    languageOptions: { parser: typescriptParser },
+    plugins: { module: { rules: { 'header-comment-first': headerCommentFirst } } },
+    rules: {
+      'no-duplicate-imports': ['error', { allowSeparateTypeImports: true }],
+      'module/header-comment-first': 'error',
+      'eol-last': ['error', 'always'],
+      'no-multiple-empty-lines': ['error', { max: 10000, maxEOF: 0 }],
+    },
+  },
   { ignores: ['**/node_modules/**', '**/dist/**', '**/.cache/**', '**/coverage/**',
     // Generated output and the open-ended registries. `src/platform/solar-geometry.mts` alone is
     // 26,968 generated lines; `src/objects` is 586 authored body packages, not modules.

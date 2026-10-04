@@ -1,4 +1,3 @@
-import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 /** The one record every virtual telescope writes beside what it produces.
  *
  * The instruments stay different: an event list, a spectral cube, a calibrated image and a strip camera want different
@@ -15,6 +14,7 @@ import { requireArray, requireFiniteNumber, requireRecord, requireString } from 
  * A record is written by the run that made the outputs, from what that run actually used; nothing later rewrites it. A stage
  * may reuse an existing output only when the record beside it says the same inputs, parameters and software made it
  * (`sameRun`). Records hold no clock time, so the same run writes the same bytes. */
+import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 
 export const PRODUCT_RECORD_SCHEMA = 'cssearth-telescope-product@1';
 
@@ -72,4 +72,3 @@ export function parseProductRecord(value: unknown): ProductRecord {
   return { schema: PRODUCT_RECORD_SCHEMA, telescope: requireString(record.telescope, 'telescope'), stage: requireString(record.stage, 'stage'), inputs, parameters: requireRecord(record.parameters, 'parameters'), software,
     outputs, evidence };
 }
-

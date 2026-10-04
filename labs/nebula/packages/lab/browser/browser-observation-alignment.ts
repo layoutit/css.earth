@@ -1,5 +1,5 @@
-import { chooseLabObject } from './browser-object-picker.ts';
 /** Real prepared observations: registration display, layer identity, persistence and shared shell. */
+import { chooseLabObject } from './browser-object-picker.ts';
 import assert from 'node:assert/strict';
 import { readFile, mkdir, writeFile } from 'node:fs/promises';
 import { chromium } from 'playwright';

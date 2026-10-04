@@ -4,9 +4,7 @@ import assert from 'node:assert/strict';
 import { mkdtemp, readFile, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { horizonsRows, observerRowValues } from '@cssearth/bake/objects/layers/terrestrial';
-import { writeHorizonsTables } from '@cssearth/bake/objects/layers/terrestrial';
-import { BATCH, LIGHT_SECONDS_PER_AU, horizonsCommand, horizonsTables, joinResponses, observerQuery } from '@cssearth/bake/objects/layers/terrestrial';
+import { horizonsRows, observerRowValues, writeHorizonsTables, BATCH, LIGHT_SECONDS_PER_AU, horizonsCommand, horizonsTables, joinResponses, observerQuery } from '@cssearth/bake/objects/layers/terrestrial';
 
 const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 const calendar = (jd: number) => {

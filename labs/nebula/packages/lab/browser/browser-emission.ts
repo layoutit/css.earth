@@ -1,6 +1,6 @@
+/** Focused, read-only check of the planetary-nebula experiment in the real lab. */
 import { cameraOrientation, gestureCamera } from './browser-camera.ts';
 import { chooseLabObject } from './browser-object-picker.ts';
-/** Focused, read-only check of the planetary-nebula experiment in the real lab. */
 import assert from 'node:assert/strict';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { chromium } from 'playwright';

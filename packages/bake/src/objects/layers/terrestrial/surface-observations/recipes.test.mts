@@ -1,6 +1,6 @@
+/** Every authored photograph dataset validates against its format's recipe schema, and a dataset refuses what its format does not declare. */
 import { pathToFileURL } from 'node:url';
 import { projectRoot as findProjectRoot } from '@cssearth/core/node';
-/** Every authored photograph dataset validates against its format's recipe schema, and a dataset refuses what its format does not declare. */
 import assert from 'node:assert/strict';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();

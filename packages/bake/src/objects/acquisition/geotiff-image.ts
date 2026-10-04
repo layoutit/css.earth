@@ -8,9 +8,8 @@ import {tmpdir} from 'node:os';
 import {join} from 'node:path';
 import {Readable, Transform} from 'node:stream';
 import {pipeline} from 'node:stream/promises';
-import {containedPath} from '../sources/index.ts';
+import { containedPath, withIdleTimeout } from '../sources/index.ts';
 import {missingCoverageColor} from '../../raster/index.ts';
-import {withIdleTimeout} from '../sources/index.ts';
 import {assertGeoTiffGrid, parseGeoTiffGridRecipe, type GeoTiffGridRecipe} from './geotiff-grid.ts';
 
 export interface GeoTiffImageRecipe {

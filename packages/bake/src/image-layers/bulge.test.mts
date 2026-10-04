@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { imageLayerBulgeModel } from '@cssearth/bake/image-layers';
+import { imageLayerBulgeModel, imageLayerShapeModel, lowerEnvelope, imageLayerBodyModel } from '@cssearth/bake/image-layers';
 
 // M31 with Dorman et al.'s (2013, Table 3) bulge-plus-disc fit, on a disc inclined 74.0°.
 const model = imageLayerBulgeModel({ target: { centerRaDeg: 10.684, centerDecDeg: 41.269, distancePc: 776_000 },
@@ -123,7 +123,6 @@ test('an edge-on disc is bright along its position angle and thin across it', ()
 });
 
 // A nebula's published walls (geometry.shape): the Ring Nebula's main shell and lobe, pole along the sight line.
-import { imageLayerShapeModel, lowerEnvelope } from '@cssearth/bake/image-layers';
 const walled = (polarTiltDeg: number) => imageLayerShapeModel({ source: 'test', basis: 'test', expansionKmSPerArcsec: 0.65,
   ring: { semiMajorArcsec: 44, semiMinorArcsec: 30, majorPaDeg: 60, polarTiltDeg, polarLeansToPaDeg: 240, expansionKmS: [19, 9, 9] },
   lobe: { source: 'test', radiusArcsec: 19.7, expansionKmS: [36, 28, 20] }, smoothPixels: 16 });
@@ -173,7 +172,6 @@ test('the lower envelope stays under fine dark detail and ignores fine bright de
 });
 
 // A nebula's published filled body (geometry.body): the Owl Nebula's spheroid, envelope and cavities.
-import { imageLayerBodyModel } from '@cssearth/bake/image-layers';
 const owl = imageLayerBodyModel({ source: 'test', basis: 'test', semiPolarArcsec: 93, semiEquatorialArcsec: 83, polarTiltDeg: 25, polarLeansToPaDeg: 300,
   envelope: { source: 'test', radiusArcsec: 109 }, cavities: { source: 'test', emission: 0.3, sizeArcsec: 35, farBetweenPaDeg: [135, 210] } });
 

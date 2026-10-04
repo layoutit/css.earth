@@ -1,8 +1,7 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
-import { visibilityComponents } from '@cssearth/bake/prepared-presentation';
-import { partitionSurface } from '@cssearth/bake/prepared-presentation';
+import { visibilityComponents, partitionSurface } from '@cssearth/bake/prepared-presentation';
 import { verifyRayOrder } from './fixtures/prepared-visibility-oracle.mts';
 
 type Triangle = Parameters<typeof visibilityComponents>[0][number];

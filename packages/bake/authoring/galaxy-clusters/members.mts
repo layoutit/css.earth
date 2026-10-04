@@ -1,6 +1,3 @@
-import { catalogueSeparationArcsec } from '@cssearth/astronomy';
-import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
-// Entry script: node packages/bake/authoring/galaxy-clusters/members.mts <hydra|centaurus|perseus|coma>
 /**
  * A galaxy cluster's member dots: the members a published catalogue lists that Cosmicflows-4 does not already hold, since
  * the Nearby Universe field draws those. A galaxy within 10 arcsec of a Cosmicflows-4 position is the same galaxy. Each
@@ -29,10 +26,12 @@ import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
  *
  * Output: `src/objects/<cluster>-cluster-members/source/dots/members.csv.gz`. It prints what it kept.
  */
+import { catalogueSeparationArcsec, createRaDecCatalogueMatcher } from '@cssearth/astronomy';
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
+// Entry script: node packages/bake/authoring/galaxy-clusters/members.mts <hydra|centaurus|perseus|coma>
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { gunzipSync, gzipSync } from 'node:zlib';
-import { createRaDecCatalogueMatcher } from '@cssearth/astronomy';
 
 export const QUERIES = {
   'coma-kang-2025': 'SELECT Seq, ObjID, RAJ2000, DEJ2000, rmag, z FROM "J/ApJS/278/51/table2" WHERE Mm=1',

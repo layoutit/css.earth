@@ -4,4 +4,3 @@ export function limbIntensity(mu: number, law: { readonly law: 'power'; readonly
   const { u1, u2 } = law as { u1: number; u2: number };
   return 1 - u1 * (1 - mu) - u2 * (1 - mu) ** 2;
 }
-

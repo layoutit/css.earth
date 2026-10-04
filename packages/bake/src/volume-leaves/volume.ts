@@ -1,5 +1,5 @@
-import { PREPARED_CSS_VOLUME_SCHEMA, type DensityVolumeFrame, type Axis, type Vector3, type VolumeRecipe, type VolumeSlices, type PreparedLeafBounds, type PreparedCssVolume, type PreparedVolumeLeafStyle } from '@cssearth/objects';
 /** Actual PolyCSS preparation of static image geometry; no runtime image or mesh generation. */
+import { PREPARED_CSS_VOLUME_SCHEMA, type DensityVolumeFrame, type Axis, type Vector3, type VolumeRecipe, type VolumeSlices, type PreparedLeafBounds, type PreparedCssVolume, type PreparedVolumeLeafStyle } from '@cssearth/objects';
 import { balanceVolumeSlices } from './volume-order.ts';
 import { compileLeafBounds } from './leaf-bounds.ts';
 import { computeTextureAtlasPlanPublic, resolvePolyTextureLeafGeometry, type Polygon } from '@layoutit/polycss';

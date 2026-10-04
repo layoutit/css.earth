@@ -18,11 +18,9 @@
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { requireRecord, requireString } from '@cssearth/core';
-import { horizonsTables } from '../layers/terrestrial/index.ts';
-import { qualifiedFace, shadingNormal } from '../layers/terrestrial/index.ts';
+import { horizonsTables, qualifiedFace, shadingNormal, horizonsRows, observerRowValues } from '../layers/terrestrial/index.ts';
 import type { SourceMesh } from '../geometry/index.ts';
 import { observerCamera, type BodyOrientation } from '../cameras/index.ts';
-import { horizonsRows, observerRowValues } from '../layers/terrestrial/index.ts';
 import { lamText, parseFrameListing, type LamFrame } from './lam.ts';
 
 const DEGREE = Math.PI / 180;

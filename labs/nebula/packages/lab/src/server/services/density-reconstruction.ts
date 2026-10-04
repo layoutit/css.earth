@@ -1,9 +1,8 @@
+/** Local, explicit reconstruction jobs consume saved NOX pixels; they never run star removal. */
 import { isRecord as coreIsRecord } from '@cssearth/core';
 import { reconstructionProcessingCapability } from '../../features/reconstruction/reconstruction-capabilities.ts';
 import { runProcessingWorker } from '../workers/run.ts';
-import { resolveLabModelPath } from '../../resources/model-paths.ts';
-import { parseLabModelJson } from '../../resources/model-paths.ts';
-/** Local, explicit reconstruction jobs consume saved NOX pixels; they never run star removal. */
+import { resolveLabModelPath, parseLabModelJson } from '../../resources/model-paths.ts';
 import { mkdir, readFile, readdir, realpath, rename, rm, stat, writeFile } from 'node:fs/promises';
 import { dirname, isAbsolute, relative, resolve, sep } from 'node:path';
 import type { Plugin } from 'vite';

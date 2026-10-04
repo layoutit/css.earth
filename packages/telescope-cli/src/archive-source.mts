@@ -4,12 +4,11 @@ import { get } from 'node:https';
 import { basename, dirname, resolve } from 'node:path';
 import { Readable } from 'node:stream';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
-import { writeProductRecord } from '@cssearth/telescope/node';
+import { writeProductRecord, parseLimits } from '@cssearth/telescope/node';
 import { VERSION } from './help.mts';
 import type { ProductInput } from '@cssearth/objects';
 import { EXPLORATION_SCHEMA } from './exploration.mts';
 import { FITS_SOURCE_SCHEMA } from './fits-source.mts';
-import { parseLimits } from '@cssearth/telescope/node';
 
 export interface SourceFile { readonly url: string; readonly name: string; readonly path?: string; readonly bytes?: number; readonly archiveEncoding?: 'gzip' }
 export interface SourceSelection {

@@ -1,5 +1,5 @@
-import { type CloudCatalogue } from '@cssearth/objects';
 /** Retained prepared contribution selection and whole-composite display attenuation. */
+import { type CloudCatalogue } from '@cssearth/objects';
 import type { CloudBrightness } from './cloud-types.ts';
 
 export const nativeCloudBrightness = (): CloudBrightness => ({ overall: 1, x: 1, y: 1, z: 1 });

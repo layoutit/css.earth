@@ -1,6 +1,6 @@
+/** Frozen-image benchmark. No named-region masks, depth assignment or runtime baking. */
 import {supportRuns} from '@cssearth/nebula-reconstruction/evidence/support-runs';
 import { parseLabModelJson } from '../../resources/model-paths.ts';
-/** Frozen-image benchmark. No named-region masks, depth assignment or runtime baking. */
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { gzipSync } from 'node:zlib';

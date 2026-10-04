@@ -1,5 +1,5 @@
-import { OBJECT_SCHEMA, PREPARED_IMAGE_LAYER_BANK_SCHEMA } from '@cssearth/objects';
 /** Generic offline preparation entry point for retained extruded image layers. */
+import { OBJECT_SCHEMA, PREPARED_IMAGE_LAYER_BANK_SCHEMA } from '@cssearth/objects';
 import { mkdir, readFile, unlink, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';

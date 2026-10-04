@@ -5,9 +5,8 @@ import assert from 'node:assert/strict';
 import { existsSync, mkdtempSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
-import { COMPARISON_BLOCK_BEGIN, COMPARISON_BLOCK_END, comparisonBlock, parseComparisonEvidence } from '@cssearth/bake/objects/layers/terrestrial';
+import { COMPARISON_BLOCK_BEGIN, COMPARISON_BLOCK_END, comparisonBlock, parseComparisonEvidence, horizonsCommand } from '@cssearth/bake/objects/layers/terrestrial';
 import { DATASET_ID, SURVEY_DATASET_SETTINGS, adamSimplification, latitudeSpan, leaveOutArguments, nightsText, noticeWithDataset, readmeWithDataset, surveyFigures, unusedWords, withRefreshedDataset } from '@cssearth/bake/objects/sphere-survey';
-import { horizonsCommand } from '@cssearth/bake/objects/layers/terrestrial';
 
 const ROOT = findProjectRoot(import.meta.url), OBJECTS = resolve(ROOT, 'src/objects');
 const json = (path: string) => JSON.parse(readFileSync(path, 'utf8'));

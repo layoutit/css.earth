@@ -6,8 +6,7 @@ export const bodyRingShadow = object({model:string,edgeFeather:object({model:str
 import {readFile,mkdir} from 'node:fs/promises';
 import {resolve} from 'node:path';
 import sharp from 'sharp';
-import {parseRadialLayerRecipe} from '../giant/index.ts';
-import {sampleRadialProfile,rasterObservedRadialField, loadObservedProfile} from '../giant/index.ts';
+import { parseRadialLayerRecipe, sampleRadialProfile, rasterObservedRadialField, loadObservedProfile } from '../giant/index.ts';
 import {verifyObservationSources} from '../observed-surfaces/index.ts';
 import {cropTransparentRgba} from './rgba.ts';
 import {rotateX as rotateVectorX,rotateZ as rotateVectorZ} from '../../geometry/index.ts';

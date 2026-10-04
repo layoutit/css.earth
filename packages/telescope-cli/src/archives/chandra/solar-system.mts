@@ -28,13 +28,11 @@
 import { mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { basename, relative, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { addProductEvidence, readProductRecord, writeProductRecord, WORKSPACE } from '@cssearth/telescope/node';
+import { addProductEvidence, readProductRecord, writeProductRecord, WORKSPACE, astroqueryRows, toolchainPython } from '@cssearth/telescope/node';
 import { productRecordPath } from '@cssearth/telescope';
 import { type ProductEvidence, type ProductInput, type ProductRun } from '@cssearth/objects';
-import { astroqueryRows } from '@cssearth/telescope/node';
 import type { FitsHeader } from '@cssearth/fits';
 import { requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { toolchainPython } from '@cssearth/telescope/node';
 import { PROGRAMS, type ChandraFile, type ChandraObservation } from './archive.mts';
 import { reprocessedWith } from './compare.mts';
 import { column, eventTable, gunzipFile, type EventTable } from './events.mts';

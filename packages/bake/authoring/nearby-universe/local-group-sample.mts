@@ -1,5 +1,3 @@
-import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
-// Entry script: node packages/bake/authoring/nearby-universe/local-group-sample.mts
 /**
  * The Nearby Universe's Local Group dots: every galaxy of the prepared Local Group catalogue (LVDB v1.1.1, its eligible
  * rows) nearer than the Cosmicflows-4 field's inner edge, so the dots continue inside it. Galaxies drawn as their own
@@ -10,6 +8,8 @@ import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
  * `src/objects/local-group-galaxies/source/lvdb/comb_all.csv`.
  * Output: `source/local-group-galaxies/lvdb-sample.csv.gz`. It prints what it kept.
  */
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
+// Entry script: node packages/bake/authoring/nearby-universe/local-group-sample.mts
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { gunzipSync, gzipSync } from 'node:zlib';

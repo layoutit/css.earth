@@ -1,4 +1,3 @@
-import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 /**
  * Author a body's Voyager color frames as the per-frame products the observed-color dataset reads: an equirectangular float32
  * GeoTIFF of calibrated I/F and a geometry label (exposure epoch and body rotation) for each frame.
@@ -11,6 +10,7 @@ import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
  * - `controlled-ortho`: an orthophoto from a controlled release, already placed by its authors; only reprojected.
  * Limb-placed frames are moved by the recipe's measured datum shift onto the controlled release's grid.
  */
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 import { mkdir, readFile, writeFile, mkdtemp, rm } from 'node:fs/promises';
 import { execFileSync } from 'node:child_process';
 import { tmpdir } from 'node:os';

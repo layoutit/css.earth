@@ -11,4 +11,3 @@ export function parseSystemOrbits(value: unknown): SystemOrbitsRecipe {
   return { kind: 'system-orbits', id, title: requireString(r.title, 'title'), description: requireString(r.description, 'description'), output: requireString(r.output, 'output'),
     metadata: requireRecord(r.metadata, 'chart metadata'), system: requireString(r.system, `${id}.system`), highlight: requireString(r.highlight, `${id}.highlight`) };
 }
-

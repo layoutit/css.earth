@@ -1,5 +1,5 @@
-import { bakePaintedField, sourceBytes } from '@cssearth/bake/volume/node';
 /** Explicit offline preview: one neutral shape field, then RGB-only painting of its exact slabs. */
+import { bakePaintedField, sourceBytes } from '@cssearth/bake/volume/node';
 import { isAbsolute } from 'node:path';
 import sharp from 'sharp';
 import { type DensityVolumeFrame, validatePreparedCssVolume } from '@cssearth/objects';
