@@ -7,6 +7,7 @@ import { ContextChange, createWorldContextFrameReceiver } from './world-context/
 import { createWorldContextBodyInteraction, createWorldContextInteractions } from './world-context/world-context-interactions.js';
 import { createWorldContextMarkerFactory, createWorldContextMarkerPaint, type WorldContextMarkerPaint } from './world-context/world-context-marker-paint.js';
 import type { WorldContextFrame } from './world-context/world-context-frame.js';
+import { createCaptionMeasurer } from './world-context/world-context-caption-measure.js';
 import type { PlannedWorldContext } from './world-context/world-context-planner.js';
 import { bindWorldBodyColumns, createWorldBodyColumns, type PackedWorldContextView } from './world-context/world-context-view-transport.js';
 import { createSystemFade, indicatorDotDiameter, BODY_INDICATOR_DIAMETER, CONTEXT_LINE_WIDTH } from './world-context/context-scale.js';
@@ -267,6 +268,9 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
   // Beyond the system only the locators keep publishing: the anchor and every placed orbitless body.
   let anchorOnly = bodies.filter((entry, index) => index === 0 || !entry.orbit);
   let systemRetired = false, systemRetiredByScope = false, galaxyRetiredByScope = false;
+  // Whether the retired system's members may still be on the page: set by whatever attaches or paints one, cleared by
+  // the pass that takes them off, so a retired system costs no walk of every body on every frame.
+  let retirePending = true;
   const depthOrder = createDepthOrder(bodies, depthBase, annotationPriorities);
   // Hidden bodies leave the paint order, except the selected one.
   const refreshDepthBodies = () => depthOrder.setMembers(bodies.filter(entry => !entry.bodyHidden || entry === selectedEntry));
@@ -341,6 +345,11 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
   // The bodies themselves changed: a plan already captured indexes the old list and cannot be drawn.
   const invalidatePlans = () => { presentationRevision++; policyDirty = true; };
   const invalidateLabelSizes = () => { invalidatePolicy(); for (const entry of bodies) entry.labelSize = { ...entry.labelSize, width: 0 }; };
+  // A caption's size is read after the layout that follows its request, not in the middle of a frame
+  // (world-context-caption-measure.ts); the plan that needs it is asked for once it is known.
+  const captionMeasurer = createCaptionMeasurer<(typeof bodies)[number]>(windowTarget, { hold: () => destroyed || coasting,
+    measured(entry, size) { if (entry.labelSize.width === 0) entry.labelSize = size; },
+    done() { invalidatePolicy(); if (!navigationInFlight) refresh(); } });
   const fonts = host.ownerDocument.fonts;
   fonts?.addEventListener('loadingdone', invalidateLabelSizes);
   let annotationFrame: number | null = null;
@@ -563,6 +572,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
         const entry = bodies[index];
         if (entry.labelSize.width !== 0) continue;
         if (!entry.mover.parentNode) { attachMarkers.add(entry); awaitingMeasurement.add(entry); continue; }
+        if (captionMeasurer) { captionMeasurer.request(entry); continue; }
         const text = windowTarget.getComputedStyle(entry.caption, '::after');
         const width = Math.ceil(parseFloat(text.width)), height = Math.ceil(parseFloat(text.height));
         if (width > 0 && height > 0) { entry.labelSize = { width, height }; measured = true; }
@@ -576,6 +586,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
       const delta = contextFrames.accept(preparedFrame);
       const { frame } = delta, { opacity } = frame;
       if (rotationPhase === 'released') rotationPhase = 'idle';
+      if (opacity === 0 && !systemRetired) retirePending = true;
       systemRetired = opacity === 0;
       presentationRevision++;
       const { ranksChanged, changed: depthChanged } = depthOrder.update(world.pose.orientationXyzw, rotating, selectedEntry);
@@ -687,7 +698,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
         const contributesPaint = billboardShown || orbitShown;
         if (paintedBodies.has(entry) !== contributesPaint) {
           if (contributesPaint) paintedBodies.add(entry); else paintedBodies.delete(entry);
-          paintMembershipChanged = true;
+          paintMembershipChanged = true; retirePending = true;
         }
         // The paint owner names the node that carries the orbit's presentation.
         const orbitPaint = entry.piecePool.presentation;
@@ -708,7 +719,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
           fader.set(orbitPaint, orbitShown && !plannedOrbit ? 0 : orbitVisibility);
           const patch = delta.orbits.get(index);
           if (patch && (!coast || (orbitShown && plannedOrbit))) {
-            entry.piecePool.publish(segments);
+            entry.piecePool.publish(segments); retirePending = true;
             entry.previousCount = segments.length;
           }
         }
@@ -734,19 +745,25 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
       });
       // Publish first, then attach populated owners. A later view reads only requested caption sizes.
       for (const entry of attachMarkers) root.appendChild(entry.mover);
+      // A marker attached for its caption is measured after this frame's layout.
+      if (captionMeasurer) for (const entry of awaitingMeasurement) captionMeasurer.request(entry);
       for (const entry of attachOrbits) root.appendChild(entry.orbitRoot);
+      if (attachMarkers.size || attachOrbits.size) retirePending = true;
       // A retired system's members leave the page once their retiring frame has hidden them, and so does any other body
       // that paints nothing then (a galaxy's stars past its scope): the anchor stands for them, and a return inside
       // attaches each again as it shows. Inside a system, hidden markers stay attached; they toggle often there.
       // A member paints nothing once retired, even an orbit a coast kept fading when its retiring frame was planned: the
       // following frames publish only the anchor and the placed stars, so it is never published again until a return.
-      if (systemRetired && !coasting) {
+      if (systemRetired && !coasting && retirePending) {
+        retirePending = false;
         for (const entry of bodies) {
           if (entry === bodies[0] || (entry.orbit === null && paintedBodies.has(entry))) continue;
           // A marker attached this frame for its caption's measurement stays, hidden, for the next frame, which reads it.
           // Removed here it was attached again by that frame, never measured, and each attach asked for another frame:
           // one unmeasured star kept an idle page publishing for ever (2026-10-01).
-          if (entry.mover.parentNode && !awaitingMeasurement.has(entry)) entry.mover.remove();
+          // A marker whose caption still waits for its report (world-context-caption-measure.ts) stays too, and the pass
+          // runs again for it.
+          if (entry.mover.parentNode) { if (awaitingMeasurement.has(entry) || captionMeasurer?.pending(entry)) retirePending = true; else entry.mover.remove(); }
           if (entry.orbitRoot.parentNode) entry.orbitRoot.remove();
           entry.piecePool.detach();
           paintedBodies.delete(entry);
@@ -767,7 +784,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
       windowTarget.removeEventListener('pointerdown', beginCameraInput, { capture: true });
       windowTarget.removeEventListener('wheel', beginCameraInput, { capture: true });
       for (const event of ['focusin', 'focusout']) presentationHost.removeEventListener(event, refreshAnnotations);
-      root.removeEventListener('transitionend', finishIndicatorShrink); fader.destroy(); fonts?.removeEventListener('loadingdone', invalidateLabelSizes); for (const entry of bodies) entry.interaction.destroy(); root.remove(); } },
+      root.removeEventListener('transitionend', finishIndicatorShrink); fader.destroy(); captionMeasurer?.destroy(); fonts?.removeEventListener('loadingdone', invalidateLabelSizes); for (const entry of bodies) entry.interaction.destroy(); root.remove(); } },
   });
   const indicatorTransitions = new Map<Element, (typeof bodies)[number]>(bodies.map(entry => [entry.marker, entry]));
   const finishIndicatorShrink = (event: Event) => {

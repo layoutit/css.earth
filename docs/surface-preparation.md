@@ -569,7 +569,7 @@ measured the same way on 2026-09-25 against the lossless files they replaced:
 | Image | Pixels | Lossless | q80 | Flagged |
 |---|---|---|---|---|
 | Body-marker pages (three) | 8192×32, 8192×32, 6080×32 | 482 KB | 284 KB | 13, 6, 6 |
-| Dataset-billboard atlas | 1024×1024 | 247 KB | 98.5 KB | 4 |
+| Dataset-billboard atlas (one image for each billboard since 2026-10-03) | 1024×1024 | 247 KB | 98.5 KB | 4 |
 | Star point atlas | 1024×32 | 14.0 KB | 0.7 KB | 0 |
 
 The per-body marker tiles the pages are packed from stay lossless.
