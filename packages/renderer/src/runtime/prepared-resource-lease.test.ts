@@ -232,6 +232,35 @@ test('first-paint decode rechecks selected handles once without refetching or pu
   residency.destroy(); assert.equal((await residency.decodeForPaint()), false);
 });
 
+test('a demand for an image that stayed resident undrawn decodes it again before it is ready', async () => {
+  const calls: string[] = [], warm = mock.fn((_error: unknown) => {});
+  let fail = false;
+  const assets: PreparedAssets = {
+    entries: [{ key: 'a', url: '/a.webp', pool: 'pages' }, { key: 'b', url: '/b.webp', pool: 'pages' }],
+    pools: [{ id: 'pages', capacity: 2, concurrency: 2, retention: 'selection', reuse: false, eviction: 'capacity' }], startup: [],
+  };
+  const residency = createPreparedResidency({ assets, onWarmError: warm, createImage: () => ({ src: '', decoding: 'async' as const, naturalWidth: 1, naturalHeight: 1,
+    async decode() { calls.push(this.src); if (fail) throw new Error('discarded'); } }) });
+  const first = residency.request({ required: ['a'] }); await first.ready; residency.commit(first);
+  const second = residency.request({ required: ['b'] }); await second.ready; residency.commit(second);
+  // Dataset a is no longer drawn but stays resident: WebKit may have dropped its pixels.
+  assert.equal(residency.resources.has('a'), true);
+  calls.length = 0;
+  const back = residency.request({ required: ['a'] }); await back.ready;
+  assert.deepEqual(calls, ['/a.webp']);
+  residency.commit(back);
+  // The image drawn now is not decoded again by a demand that keeps it.
+  calls.length = 0;
+  const same = residency.request({ required: ['a'] }); await same.ready; residency.commit(same);
+  assert.deepEqual(calls, []);
+  // A second decode that fails is reported and leaves the image to its paint: the demand is still ready.
+  fail = true;
+  const again = residency.request({ required: ['b'] });
+  assert.equal(await again.ready, again);
+  assert.equal(warm.mock.callCount(), 1);
+  residency.destroy();
+});
+
 test('first-paint decode propagates failure and remains cancelled after its owner retires', async () => {
   let rejectNext: ((reason: Error) => void) | null = null;
   let delayed = false;

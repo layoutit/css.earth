@@ -4,7 +4,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 
 import { parseHTML } from 'linkedom';
-import { createTextureTileWriter, selectPreparedTextureLevel } from './prepared-texture-levels.js';
+import { createTextureTileWriter, preparedTexturePixels, selectPreparedTextureLevel } from './prepared-texture-levels.js';
 
 import { mountPreparedPresentation, preparedTextureLevelKeys, resolvePreparedPresentation } from './prepared-presentation.js';
 
@@ -198,6 +198,13 @@ test('a level switch commits each tiled leaf with its image, and no tile variabl
   assert.doesNotMatch((nodes[1]!.getAttribute('style') ?? ''), /--page-0-/);
 });
 
+// Io's shape: dataset a is drawn at twice dataset b's scale, and each has a level half as wide. Decoded sizes go as the
+// square of the width.
+const sized = { textureLevels, variants, assets: { entries: [
+  { key: 'a', url: '/a.webp', pool: 'pages', decodedBytes: 8320 * 1536 * 4 }, { key: 'a-small', url: '/a-small.webp', pool: 'pages', decodedBytes: 4160 * 768 * 4 },
+  { key: 'b', url: '/b.webp', pool: 'pages', decodedBytes: 4160 * 768 * 4 }, { key: 'b-small', url: '/b-small.webp', pool: 'pages', decodedBytes: 2080 * 384 * 4 },
+], pools: [], startup: [] } } as unknown as PreparedPresentationDefinition;
+
 test('a level switch lands a page a slice of its leaves a frame, not the page whole', () => {
   const frames: ((time: number) => void)[] = [];
   let now = 0;
@@ -210,7 +217,11 @@ test('a level switch lands a page a slice of its leaves a frame, not the page wh
     const stage = document.querySelector('main')!;
     const nodes = Array.from({ length: 102 }, () => document.createElement('s'));
     nodes[0]!.append(nodes[1]!); nodes[1]!.append(...nodes.slice(2));
-    const leaves = nodes.slice(2), paged = { textureLevels, materials: [], animations: [], viewBindings: [],
+    // Io's faces: every leaf's step asks for its full 128 px box, so the image it shows decides its size.
+    const matrix = 'matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)', boxes = nodes.slice(2).map((_, index) => ({ node: index + 2, density: 1, box: [128, 128], backgroundSize: [4096, 756.184], matrix }));
+    const leaves = nodes.slice(2), paged = { textureLevels, assets: sized.assets, materials: [], animations: [],
+      viewBindings: [{ kind: 'silhouette-step-property', target: 0, property: '--silhouette-step', hysteresis: .1, levels: [{ minimumDiameter: 0, value: '16' }, { minimumDiameter: 100, value: '362' }],
+        groups: { '--silhouette-step-0': boxes.map(box => box.node) }, initial: '362', boxes }],
       variants: [{ when: { datasetId: 'a' }, required: ['a'], materials: [], writes: [{ kind: 'texture' as const, resource: 'a', target: 1, name: 'backgroundImage', quoted: true }] }],
       tree: { nodes: [], camera: 0, scene: 0, stageClasses: [], textureBindings: [{ target: 1, name: 'backgroundImage', leaves: leaves.map((_, index) => index + 2) }] } } as unknown as PreparedPresentationDefinition;
     const presentation = mountPreparedPresentation(stage as unknown as HTMLElement, { own() {}, registerAnimation() {}, seekAnimation() {} }, paged,
@@ -222,10 +233,14 @@ test('a level switch lands a page a slice of its leaves a frame, not the page wh
     // The dataset's first commit lands whole.
     const sharp = () => leaves.filter(leaf => leaf.style.backgroundImage === 'url("/a.webp")').length;
     assert.equal(leaves.every(leaf => leaf.style.backgroundImage === 'url("/a-small.webp")'), true);
+    // The small level is 4,160 texels wide across a 4,096 px background: 65 px of box hold it at two texels a pixel.
+    assert.equal(leaves.every(leaf => leaf.style.getPropertyValue('width') === '65px'), true);
     presentation.commitSelection({ selection: { datasetId: 'a' }, resources, plan: resolvePreparedPresentation(paged, { selection: { datasetId: 'a' }, view: view(900), previousPlan: small }) });
     assert.equal(sharp(), 0);
     const shares: number[] = [];
-    while (frames.length && sharp() < 100) { const before = sharp(); frame(); shares.push(sharp() - before); }
+    while (frames.length && sharp() < 100) { const before = sharp(); frame(); shares.push(sharp() - before);
+      // A leaf takes its box with its image: none shows the full level in the small one's box, or the small one in the full one's.
+      assert.equal(leaves.every(leaf => (leaf.style.backgroundImage === 'url("/a.webp")') === (leaf.style.getPropertyValue('width') === '130px')), true); }
     assert.equal(sharp(), 100);
     assert.ok(shares.length >= 4 && Math.max(...shares) <= 32, `shares ${shares.join(' ')}`);
     assert.equal(shares[0], 8);
@@ -241,4 +256,56 @@ test('tile leaf records name one texture write each, with finite placements and 
   assert.throws(() => requireTextureLevels(broken({ leaves: [[2, 0, 0], [2, 1, 1]] }), tiledVariants, resources), /leaf \[2,1,1\]/);
   assert.throws(() => requireTextureLevels(broken({ leaves: [[2, 0]] }), tiledVariants, resources), /leaf/);
   assert.throws(() => requireTextureLevels(broken({ extra: 1 }), tiledVariants, resources), /unknown fields extra/);
+});
+
+test('a texture states its pixels from its decoded size; a sheet and an unsized image state none', () => {
+  const pixels = preparedTexturePixels(sized);
+  assert.deepEqual(['a', 'a-small', 'b', 'b-small', 'other'].map(pixels), [8320 * 1536, 4160 * 768, 4160 * 768, 2080 * 384, undefined]);
+  assert.equal(preparedTexturePixels(definition)('a'), undefined);
+  // A dataset whose tables arrive later is adopted into the same definition: its sizes count from then on.
+  const growing = { ...sized, assets: { ...sized.assets!, entries: sized.assets!.entries.slice(2) } } as unknown as PreparedPresentationDefinition;
+  const later = preparedTexturePixels(growing);
+  assert.deepEqual(['a', 'b'].map(later), [undefined, 4160 * 768]);
+  Object.assign(growing.assets!, { entries: sized.assets!.entries });
+  assert.deepEqual(['a', 'b'].map(later), [8320 * 1536, 4160 * 768]);
+  // A sheet's size is its own, not its page's.
+  const sheeted = { ...sized, textureLevels: { hysteresis: 0.2, levels: [
+    { minimumDiameter: 0, resources: { a: 'sheet', b: 'b-small' }, tiles: { a: { x: 0, y: 0, scale: 4 } } }, { minimumDiameter: 230, resources: { a: 'a', b: 'b' } }] },
+    assets: { entries: [...sized.assets!.entries, { key: 'sheet', url: '/sheet.webp', pool: 'pages', decodedBytes: 16384 * 16384 * 4 }], pools: [], startup: [] } } as unknown as PreparedPresentationDefinition;
+  assert.deepEqual(['sheet', 'a'].map(preparedTexturePixels(sheeted)), [undefined, 8320 * 1536]);
+});
+
+test('a dataset lands with its box: each leaf takes its image and its exact box in one write', () => {
+  const frames: ((time: number) => void)[] = [];
+  let now = 0;
+  stubGlobal('requestAnimationFrame', (callback: (time: number) => void) => frames.push(callback));
+  stubGlobal('cancelAnimationFrame', () => {});
+  stubGlobal('performance', { now: () => now });
+  try {
+    const { document } = parseHTML('<html><body><main></main></body></html>');
+    const stage = document.querySelector('main')!;
+    const nodes = Array.from({ length: 6 }, () => document.createElement('s'));
+    nodes[0]!.append(nodes[1]!); nodes[1]!.append(...nodes.slice(2));
+    const matrix = 'matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)', leaves = [2, 3, 4, 5];
+    // Io's faces: every leaf's step asks for its full 128 px box, so the image alone decides its size.
+    const boxed = { ...sized, materials: [], animations: [],
+      variants: ['a', 'b'].map(datasetId => ({ when: { datasetId }, required: [datasetId], materials: [], writes: [{ kind: 'texture' as const, resource: datasetId, target: 1, name: 'backgroundImage', quoted: true }] })),
+      viewBindings: [{ kind: 'silhouette-step-property', target: 0, property: '--silhouette-step', hysteresis: .1, levels: [{ minimumDiameter: 0, value: '16' }, { minimumDiameter: 100, value: '362' }],
+        groups: { '--silhouette-step-0': leaves }, initial: '362', boxes: leaves.map(node => ({ node, density: 1, box: [128, 128], backgroundSize: [4096, 756.184], matrix })) }],
+      tree: { nodes: [], camera: 0, scene: 0, stageClasses: [], textureBindings: [{ target: 1, name: 'backgroundImage', leaves }] } } as unknown as PreparedPresentationDefinition;
+    const presentation = mountPreparedPresentation(stage as unknown as HTMLElement, { own() {}, registerAnimation() {}, seekAnimation() {} }, boxed,
+      { claim: () => ({ nodes: nodes as unknown as HTMLElement[], roots: [nodes[0]] as unknown as HTMLElement[] }), destroy() {} });
+    const resources = { url: (key: string) => `/${key}.webp` } as unknown as PreparedResources;
+    const view = (silhouetteDiameter: number) => ({ sceneMatrix: '', sunViewDirection: null, levelOfDetail: { stage: 'geometry', silhouetteDiameter, billboardOpacity: 0, markerOpacity: 0 } });
+    const widths = () => leaves.map(node => nodes[node]!.style.getPropertyValue('width'));
+    assert.deepEqual(widths(), Array(4).fill('128px'));
+    // Dataset a at its small level, 4,160 texels wide: 65 px of box.
+    const small = resolvePreparedPresentation(boxed, { selection: { datasetId: 'a' }, view: view(100) });
+    presentation.commitSelection({ selection: { datasetId: 'a' }, resources, plan: small });
+    assert.deepEqual(widths(), Array(4).fill('65px'));
+    assert.equal(nodes[2]!.style.getPropertyValue('transform'), `${matrix} scale(1.969231)`);
+    // Dataset b, drawn at half a's scale, lands whole with its own box: 2,080 texels at its small level, 32.5 px.
+    presentation.commitSelection({ selection: { datasetId: 'b' }, resources, plan: resolvePreparedPresentation(boxed, { selection: { datasetId: 'b' }, view: view(100) }) });
+    assert.deepEqual(widths(), Array(4).fill('32.5px'));
+  } finally { unstubAllGlobals(); }
 });
