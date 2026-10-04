@@ -9,6 +9,7 @@ import { createTextureTileWriter, selectPreparedTextureLevel } from './prepared-
 import { mountPreparedPresentation, preparedTextureLevelKeys, resolvePreparedPresentation } from './prepared-presentation.js';
 
 import type { PreparedResources } from './prepared-residency.js';
+import { stubGlobal, unstubAllGlobals } from '@cssearth/objects/node/contract';
 
 const textureLevels = { hysteresis: 0.2, levels: [
   { minimumDiameter: 0, resources: { a: 'a-small', b: 'b-small' } },
@@ -171,6 +172,10 @@ test('a tiled page leaf takes its final placement directly and writes only what 
     '2 backgroundPosition -0.25px -0.25px', '2 backgroundSize 168px auto', '3 backgroundPosition -84.0625px -0.25px', '3 backgroundSize 168px auto']);
   for (const node of nodes) assert.doesNotMatch((node.getAttribute('style') ?? ''), /var\(|calc\(|--/);
   assert.equal(writer.publish(1, '--other', undefined), 0);
+  // A slice of a page's leaves takes its placement alone.
+  writes.length = 0;
+  assert.equal(writer.publish(1, '--page-0', tiledLevels.levels[0]!.tiles!.page, new Set([nodes[3]!])), 2);
+  assert.deepEqual(writes.map(([node]) => node), [3, 3]);
 });
 
 test('a level switch commits each tiled leaf with its image, and no tile variable on the target', () => {
@@ -191,6 +196,40 @@ test('a level switch commits each tiled leaf with its image, and no tile variabl
   presentation.commitSelection({ selection: { datasetId: 'a' }, resources, plan: large });
   assert.deepEqual(([nodes[3]!.style.backgroundImage, nodes[3]!.style.backgroundPosition, nodes[3]!.style.backgroundSize]), ['url("/page.webp")', '-84.0625px -0.25px', '168px auto']);
   assert.doesNotMatch((nodes[1]!.getAttribute('style') ?? ''), /--page-0-/);
+});
+
+test('a level switch lands a page a slice of its leaves a frame, not the page whole', () => {
+  const frames: ((time: number) => void)[] = [];
+  let now = 0;
+  const frame = () => { now += 16; frames.shift()!(now); };
+  stubGlobal('requestAnimationFrame', (callback: (time: number) => void) => frames.push(callback));
+  stubGlobal('cancelAnimationFrame', () => {});
+  stubGlobal('performance', { now: () => now });
+  try {
+    const { document } = parseHTML('<html><body><main></main></body></html>');
+    const stage = document.querySelector('main')!;
+    const nodes = Array.from({ length: 102 }, () => document.createElement('s'));
+    nodes[0]!.append(nodes[1]!); nodes[1]!.append(...nodes.slice(2));
+    const leaves = nodes.slice(2), paged = { textureLevels, materials: [], animations: [], viewBindings: [],
+      variants: [{ when: { datasetId: 'a' }, required: ['a'], materials: [], writes: [{ kind: 'texture' as const, resource: 'a', target: 1, name: 'backgroundImage', quoted: true }] }],
+      tree: { nodes: [], camera: 0, scene: 0, stageClasses: [], textureBindings: [{ target: 1, name: 'backgroundImage', leaves: leaves.map((_, index) => index + 2) }] } } as unknown as PreparedPresentationDefinition;
+    const presentation = mountPreparedPresentation(stage as unknown as HTMLElement, { own() {}, registerAnimation() {}, seekAnimation() {} }, paged,
+      { claim: () => ({ nodes: nodes as unknown as HTMLElement[], roots: [nodes[0]] as unknown as HTMLElement[] }), destroy() {} });
+    const resources = { url: (key: string) => `/${key}.webp` } as unknown as PreparedResources;
+    const view = (silhouetteDiameter: number) => ({ sceneMatrix: '', sunViewDirection: null, levelOfDetail: { stage: 'geometry', silhouetteDiameter, billboardOpacity: 0, markerOpacity: 0 } });
+    const small = resolvePreparedPresentation(paged, { selection: { datasetId: 'a' }, view: view(100) });
+    presentation.commitSelection({ selection: { datasetId: 'a' }, resources, plan: small });
+    // The dataset's first commit lands whole.
+    const sharp = () => leaves.filter(leaf => leaf.style.backgroundImage === 'url("/a.webp")').length;
+    assert.equal(leaves.every(leaf => leaf.style.backgroundImage === 'url("/a-small.webp")'), true);
+    presentation.commitSelection({ selection: { datasetId: 'a' }, resources, plan: resolvePreparedPresentation(paged, { selection: { datasetId: 'a' }, view: view(900), previousPlan: small }) });
+    assert.equal(sharp(), 0);
+    const shares: number[] = [];
+    while (frames.length && sharp() < 100) { const before = sharp(); frame(); shares.push(sharp() - before); }
+    assert.equal(sharp(), 100);
+    assert.ok(shares.length >= 4 && Math.max(...shares) <= 32, `shares ${shares.join(' ')}`);
+    assert.equal(shares[0], 8);
+  } finally { unstubAllGlobals(); }
 });
 
 test('tile leaf records name one texture write each, with finite placements and each leaf once', () => {

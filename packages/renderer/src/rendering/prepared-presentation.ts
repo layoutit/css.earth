@@ -63,6 +63,8 @@ export function selectedPreparedVariant(definition: PreparedPresentationDefiniti
 }
 // A presentation resolves every frame the camera moves; these depend only on the definition and the level, so they are
 // built once and shared (nothing writes to a resolved map).
+/** What a leaf taking another texture level costs the pacer, in its units: it is painted again. */
+const LEVEL_LEAF_UNITS = 2;
 const NO_FALLBACKS: Readonly<Record<string, string>> = Object.freeze({});
 const pageFallbacks = new WeakMap<object, Readonly<Record<string, string>>>();
 const fallbacksFor = (fallbacks: Parameters<typeof activeResourceFallbacks>[0]) => {
@@ -296,10 +298,12 @@ export function mountPreparedPresentation(stage: HTMLElement, context: PreparedP
     else publishStyle(binding.target, binding.name, binding.value);
   }
   // A texture level swap repaints every leaf whose page changes: Earth's 160 leaves took one 256 ms commit on the iPad
-  // (2026-09-30), after the zoom had settled. A level-only commit lands its changed pages a slice a frame, held while the
-  // camera moves (settle-pacer.ts); a dataset change still lands whole.
+  // (2026-09-30), after the zoom had settled. A level-only commit lands its changed leaves a slice a frame, each leaf
+  // with its image and its tile placement, held while the camera moves (settle-pacer.ts); a dataset change still lands
+  // whole. A page is split across frames too: the Moon's pages of 96 to 128 leaves, each landing whole, made four frames
+  // of 41 to 79 ms after a flight landed there on the iPad (2026-10-04).
   let committedVariant: unknown = null, levelPacer: ReturnType<typeof createSettlePacer> | null = null;
-  const pendingLevels = new Map<string, { leaves: number; writes: CommittedWrite[] }>();
+  const pendingLevels = new Map<string, { leaves: readonly HTMLElement[]; done: number; image: string; tile: Extract<CommittedWrite, { kind: "tile" }> | null }>();
   return Object.freeze({ cameraElement, sceneElement, connect, activate, revealGroups,
     ...(definition.surfaceHit ? { surfaceHitTest: bindPreparedSurfaceHit(definition.surfaceHit, nodes[definition.surfaceHit.target], sceneElement, cameraElement, () => stage.dataset.dataset) } : {}),
     ...(definition.motionFrame ? { motionFrame: Object.freeze(definition.motionFrame.map(index => nodes[index])) } : {}),
@@ -349,17 +353,23 @@ export function mountPreparedPresentation(stage: HTMLElement, context: PreparedP
         const next = contentWrites[index + 1];
         const tile = next?.kind === "tile" && next.target === binding.target && next.name === binding.name ? next : null;
         if (tile) index++;
-        pendingLevels.set(`${binding.target}:${binding.name}`, { leaves: leaves.length, writes: tile ? [binding, tile] : [binding] });
+        pendingLevels.set(`${binding.target}:${binding.name}`, { leaves, done: 0, image: binding.value, tile });
       }
       if (pendingLevels.size) {
         if (!levelPacer) context.own(() => levelPacer?.destroy());
         levelPacer ??= createSettlePacer(budget => {
           let written = 0;
           for (const [key, unit] of pendingLevels) {
-            if (written > 0 && written + unit.leaves > budget) break;
+            if (written >= budget) break;
+            const share = unit.leaves.slice(unit.done, unit.done + Math.max(1, Math.floor((budget - written) / LEVEL_LEAF_UNITS)));
+            unit.done += share.length;
+            if (unit.tile) styleWrites += textureTiles.publish(unit.tile.target, unit.tile.name, unit.tile.tile, new Set(share));
+            for (const leaf of share) textureActivation.write(leaf, unit.image);
+            styleWrites += share.length; written += share.length * LEVEL_LEAF_UNITS;
+            if (unit.done < unit.leaves.length) continue;
             pendingLevels.delete(key);
-            for (const write of unit.writes) publish(write);
-            written += unit.leaves;
+            // A tile leaf the page's binding does not list takes its placement with the page's last slice.
+            if (unit.tile) styleWrites += textureTiles.publish(unit.tile.target, unit.tile.name, unit.tile.tile);
           }
           return written;
         }, { motion: cameraMotion });
