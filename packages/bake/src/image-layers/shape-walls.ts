@@ -1,6 +1,7 @@
 import type { imageLayerShapeModel } from './shape.ts';
 
-type Model = ReturnType<typeof imageLayerShapeModel>;
+/** What gives a picture its walls: a shell's printed shape (./shape.ts) or a published density grid (./density-grid.ts). */
+type Model = Pick<ReturnType<typeof imageLayerShapeModel>, 'walls' | 'between' | 'detail'> & { shape: { smoothPixels: number; speeds?: { depth?: 'wall' | 'speed' } } };
 /** One surface the picture's light lies on: for each face pixel its depth along the sight line, the optical depth of
  * its light there and that light's color. `texels` is how many face pixels across a texel of a surface that holds only
  * smooth light may be; without it a texel is a face pixel. `around` is the surface's depth at pixels just past its

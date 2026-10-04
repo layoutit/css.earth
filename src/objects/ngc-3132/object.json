@@ -1,0 +1,98 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "ngc-3132",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Southern Ring Nebula",
+      "steps": [
+        "verify-sources",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 7140037092343.739
+      },
+      "sources": [
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Southern Ring Nebula",
+      "systemName": "Milky Way",
+      "classification": "nebula",
+      "color": "#9a9a9a",
+      "distanceAu": 155523664,
+      "description": "The Southern Ring Nebula is a planetary nebula about 754 parsecs away.",
+      "aliases": [
+        "NGC 3132",
+        "Eight-Burst Nebula",
+        "Caldwell 74"
+      ],
+      "order": 5392,
+      "context": {}
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -15600212660547010000,
+        8379715406293922000,
+        -15090424374047937000
+      ],
+      "presentationToReference": [
+        -0.9942131546945435,
+        0,
+        0.10742533701284676,
+        0.09856081972102344,
+        0.3977771559319137,
+        0.9121727353054563,
+        0.042731345031997534,
+        -0.9174820620691818,
+        0.39547528106449126
+      ],
+      "orbitUpReference": [
+        0,
+        -0.3977771559319137,
+        0.9174820620691818
+      ],
+      "metersPerUnit": 23032377717237.867,
+      "bodyRadiusM": 7140037092343739
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}
