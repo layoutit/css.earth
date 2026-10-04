@@ -81,7 +81,7 @@
       {
         "id": "color",
         "label": "NIRCam",
-        "qualification": "Infrared false color of the whole disc from published JWST photometry; not a natural color and not a map.",
+        "qualification": "Infrared false color of the whole disc from published JWST photometry; not a natural color and not a map; darkening toward the edge from a model atmosphere.",
         "thumbnail": "hr-8799-e-dataset-color.webp",
         "surface": "hr-8799-e-surface-color@2x.webp",
         "poles": "hr-8799-e-poles-color@2x.webp",
@@ -91,7 +91,7 @@
           "url": "https://arxiv.org/abs/2503.13608"
         },
         "falseColor": true,
-        "notes": "Red, green and blue are the planet's brightness at 4.6, 4.3 and 4.1 micrometres measured by JWST (Balmer et al. 2025), on one scale shared with its three siblings. The planet is a point in every image, so this is one color for the whole disc, not a map. It glows with its own heat."
+        "notes": "Red, green and blue are the planet's brightness at 4.6, 4.3 and 4.1 micrometres measured by JWST (Balmer et al. 2025), on one scale shared with its three siblings. The planet is a point in every image, so this is one color for the whole disc, not a map. It glows with its own heat. The darkening toward the edge is the quadratic law fitted to the JWST/NIRCam F430M intensity PICASO 4.1 (Batalha et al. 2019, ApJ 878, 70) computes from Sonora Diamondback cloudy (Morley et al. 2024, ApJ 975, 59; [M/H] +0.5, f_sed 2) model atmospheres at 1,200 K and log g 3.5, read between the models t1100g31f2_m+0.5_co1.0, t1100g100f2_m+0.5_co1.0, t1200g31f2_m+0.5_co1.0, t1200g100f2_m+0.5_co1.0 (u1 0.238, u2 0.256; the law fits each model's eight angles within 0.31% of the centre): a cloudy model, the one Nasedkin et al. (2024), A&A 687, A298 fit to this planet, because no table reaches a planet this cold and nobody has resolved its disc."
       }
     ]
   },

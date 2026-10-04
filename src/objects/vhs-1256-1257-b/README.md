@@ -14,6 +14,8 @@ VHS 1256-1257 b is a young companion of about 12 Jupiter masses, 8 arcseconds (a
 
 **Infrared color dataset.** The default dataset paints the sphere one false color from its measured flux in three infrared bands: red MKO K 2.184 µm (965.9 ± 110 µJy), green MKO H 1.614 µm (505.9 ± 7.5 µJy), blue MKO J 1.2417 µm (215.9 ± 4 µJy) (Best et al. (2021); McMahon et al. (2013), as compiled in Best, Liu, Magnier & Dupuy (2024), The UltracoolSheet v2.1 (Zenodo); zero points from the SVO Filter Profile Service; [record](source/photometry/band-color.json)). Display range: this planet alone, from zero to its brightest band (MKO K), so the color shows its band ratios; brightness is not compared across planets at different distances. Not a natural color; nobody has resolved its disc.
 
+**Limb.** The disc is dimmed toward the limb by the quadratic law fitted to the MKO H intensity PICASO 4.1 (Batalha et al. 2019, ApJ 878, 70) computes from Sonora Diamondback cloudy (Morley et al. 2024, ApJ 975, 59; [M/H] +0.5, f_sed 1) model atmospheres at 1,116 K and log g 3.5, read between the models t1100g31f1_m+0.5_co1.0, t1100g100f1_m+0.5_co1.0, t1200g31f1_m+0.5_co1.0, t1200g100f1_m+0.5_co1.0 (u1 0.406, u2 -0.000; the law fits each model's eight angles within 0.02% of the centre): a cloudy model, the one Petrus et al. (2024), ApJL 966, L11 fit to this planet, because no table reaches a planet this cold and nobody has resolved its disc ([nodes](source/photometry/picaso-diamondback-h-quadratic.tsv)). The temperature and gravity are that fit's (Table 4, Sonora, full spectrum: Teff 1116 +/- 1, log(g) < 3.50, [M/H] > 0.50, f_sed 1.01 +/- 0.01; the two limits are the grid's edges, and f_sed is read at the grid's 1; [record](source/photometry/atmosphere-fit.json)), not the 1,100 K of its measurements record.
+
 **Rotation.** No spin axis on the sky is measured; the display axis is the orbit normal ([rotation.json](source/preparation/rotation.json)).
 
 ## Evidence
@@ -27,5 +29,6 @@ Run of 2026-09-23 (this version):
 - The planet moves across the sky at about 10 mas a year, close to the fastest a bound orbit this far out allows, so the orbits that fit crowd toward high eccentricity and the recorded one is eccentric (e 0.64). The orbit is about the pair's centre of mass but is drawn around A, which lies up to about 50 mas from that centre on the sky; on an 8-arcsecond separation neither offset is visible.
 - The radius and mass are model values; the planet is a point in every image.
 - No spin axis is measured.
+- **Model limb.** The limb darkening is computed from the cloudy model a paper fitted to the planet, in the middle band of its color, not a measurement of this planet; another model grid would give another law.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

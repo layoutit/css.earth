@@ -16,6 +16,8 @@ The [navigation marker](source/preparation/navigation.json) adds a prepared curv
 
 **Infrared color dataset.** The default dataset paints the sphere one false color from its measured flux in three infrared bands: red MKO K 2.184 µm (21.72 ± 3.8 µJy), green MKO H 1.614 µm (26.23 ± 5.1 µJy), blue MKO J 1.2417 µm (37.38 ± 14 µJy) (Rajan et al. (2017), as compiled in Best, Liu, Magnier & Dupuy (2024), The UltracoolSheet v2.1 (Zenodo); zero points from the SVO Filter Profile Service; [record](source/photometry/band-color.json)). Display range: this planet alone, from zero to its brightest band (MKO J), so the color shows its band ratios; brightness is not compared across planets at different distances. Not a natural color; nobody has resolved its disc.
 
+**Limb.** No limb darkening is drawn: at 800 K it is outside the 1,500 to 4,800 K of the models Claret, Hauschildt & Witte (2012), A&A 546, A14 tabulate; and no paper's fit of a cloudy model grid is recorded for it (source/photometry/atmosphere-fit.json).
+
 **Rotation.** None measured; Denis et al. measure a projected spin velocity, but no period or axis. The display axis is the orbit normal ([rotation.json](source/preparation/rotation.json)).
 
 ## Evidence
