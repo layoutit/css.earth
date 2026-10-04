@@ -75,8 +75,9 @@ test('a VizieR answer\'s rows are read under its rule, and a catalogue\'s paper 
 });
 
 test('a request names a class, a galaxy, a table and the rows; each row drafted is given the fewest cells that pick it again', () => {
-  assert.deepEqual(parseTableRequest('cepheid:m81=J/ApJ/743/176/table1'), { starClass: 'cepheid', galaxy: 'm81', table: GERKE, all: false, filters: {} });
-  assert.deepEqual(parseTableRequest('cepheid:m95=J/A+A/411/361/table1#Galaxy=NGC3351,C2'), { starClass: 'cepheid', galaxy: 'm95', table: KANBUR, all: false, named: 'C2', filters: { Galaxy: 'NGC3351' } });
+  assert.deepEqual(parseTableRequest('cepheid:m81=J/ApJ/743/176/table1'), { starClass: 'cepheid', galaxy: 'm81', table: GERKE, all: false, featured: false, filters: {} });
+  assert.deepEqual(parseTableRequest('cepheid:m95=J/A+A/411/361/table1#Galaxy=NGC3351,C2,featured'), { starClass: 'cepheid', galaxy: 'm95', table: KANBUR, all: false, featured: true, named: 'C2', filters: { Galaxy: 'NGC3351' } });
+  assert.throws(() => parseTableRequest('cepheid:m81=J/ApJ/743/176/table1#all,featured'), /featured marks one star a reader should find; all would mark every row of the table/u);
   assert.equal(parseTableRequest('cepheid:ngc-300=J/AJ/128/1167/table1#all').all, true);
   assert.throws(() => parseTableRequest('m81=J/ApJ/743/176/table1'), /is not CLASS:GALAXY=TABLE\[#ROW\] \(cepheid:m81=J\/ApJ\/743\/176\/table1\); the classes are cepheid/u);
   assert.throws(() => parseTableRequest('mira:m81=J/ApJ/743/176/table1'), /no class mira; the classes are cepheid/u);
@@ -129,7 +130,7 @@ test('a table with a position per star drafts a spec placed by its row, named as
     ['DISTANCE(POINT', 'main_id\totype\tseparation\n"[GKP2011] M81C J095610.62+690732.7"\t"Ce*"\t0.00001\n'], ['SELECT a.id FROM ident', 'id\n"[GKP2011] M81C J095610.62+690732.7"\n'], [GERKE, gerkeRows]]);
   const { stars, report } = await draftsFromTable([`cepheid:m81=${GERKE}`], archive, root), spec = parseStarSpec(stars[0]);
   assert.deepEqual(report, ['cepheid:m81=J/ApJ/743/176/table1: 1 Cepheid of Gerke et al. (2011), ApJ 743, 176 in M81; radius and temperature from Groenewegen (2020), A&A 635, A33\'s period relations.']);
-  assert.deepEqual([spec.id, spec.name, spec.parent, spec.target], ['gkp2011-m81c-j095610-62-690732-7', '[GKP2011] M81C J095610.62+690732.7', 'm81', '[GKP2011] M81C J095610.62+690732.7']);
+  assert.deepEqual([spec.id, spec.name, spec.parent, spec.target, spec.featured], ['gkp2011-m81c-j095610-62-690732-7', '[GKP2011] M81C J095610.62+690732.7', 'm81', '[GKP2011] M81C J095610.62+690732.7', undefined], 'a drafted star is a plain dot unless the request features it');
   // The source cited is the catalogue that was read, by the DOI CDS registered for it; the credit is the paper's.
   assert.deepEqual(spec.position, { catalogue: GERKE, row: { M81C: '095610.62+690732.7' }, columns: { ra: '_RAJ2000', dec: '_DEJ2000' }, credit: 'Gerke et al. (2011), ApJ 743, 176', url: 'https://doi.org/10.26093/cds/vizier.17430176' });
   assert.deepEqual([spec.paper, spec.mass, spec.radialVelocity?.value], [{ url: 'https://doi.org/10.26093/cds/vizier.17430176', credit: 'Gerke et al. (2011), ApJ 743, 176' }, 'unmeasured', -47]);
@@ -151,7 +152,8 @@ test('a table with a position per star drafts a spec placed by its row, named as
 test('a table that gives every row its galaxy\'s centre places its stars by the SIMBAD name of each row', async () => {
   const archive = answering([['-meta.all', kanburMeta], ['/ReadMe', kanburReadMe], ['rvz_radvel', 'rvz_radvel,rvz_err,rvz_bibcode\n779.0,3.0,"2022ApJS..261...21Y"\n'],
     ["n.id = '[GPF97] c1'", 'main_id\tra\tdec\tcoo_bibcode\n"[GPF97] c01"\t160.97075\t11.687527777777778\t\n'], ['SELECT a.id FROM ident', 'id\n"[GPF97] c01"\n'], [KANBUR, kanburRows]]);
-  const { stars, report } = await draftsFromTable([`cepheid:m95=${KANBUR}`], archive, root), spec = parseStarSpec(stars[0]);
+  const { stars, report } = await draftsFromTable([`cepheid:m95=${KANBUR}#featured`], archive, root), spec = parseStarSpec(stars[0]);
+  assert.equal(spec.featured, true, 'the one star of its galaxy is a map target when the request says so');
   assert.match(report[0]!, /1 Cepheid of Kanbur et al\. \(2003\), A&A 411, 361 in M95, placed by SIMBAD;/u);
   assert.deepEqual([spec.id, spec.name, spec.parent, spec.paper.url], ['gpf97-c01', '[GPF97] c01', 'm95', 'https://doi.org/10.26093/cds/vizier.34110361']);
   assert.deepEqual(spec.position, { archive: 'simbad', catalogue: 'basic', row: { main_id: '[GPF97] c01' }, url: 'https://simbad.cds.unistra.fr/simbad/sim-id?Ident=%5BGPF97%5D%20c01',

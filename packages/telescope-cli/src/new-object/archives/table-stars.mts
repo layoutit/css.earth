@@ -12,7 +12,8 @@
  * names so; `all` drafts every row kept. With neither, one star is drafted: the longest period the class's relation covers. A table
  * of several galaxies is narrowed to this one by the column that holds its name (NGC3351), when a cell matches a name the galaxy's
  * package lists. Each star's `position.row` is the fewest cells that pick its row again: its name in the table, else its period and
- * the cells after it.
+ * the cells after it. `featured` makes the one star drafted a map target (a ring, a name, a click) and a row of its galaxy's list;
+ * without it the star is a plain dot, as every star of a batch is (spec.mts `featured`).
  *
  * A table whose rows have no position of their own (a reanalysis that gives every star its galaxy's centre) places its stars by
  * SIMBAD instead, through the SIMBAD name CDS added to each row. The star is named as SIMBAD names it when SIMBAD holds a star at
@@ -51,14 +52,15 @@ export const TABLE_CLASSES: Readonly<Record<string, TableClass>> = {
   cepheid: { noun: 'Cepheid', longestPeriodDays: GROENEWEGEN_2020.longestPeriodDays, relation: `${GROENEWEGEN_2020.credit}'s period relations`, simbadRoot: 'Ce*' },
 };
 
-export interface TableRequest { readonly starClass: string; readonly galaxy: string; readonly table: string; readonly filters: Cells; readonly named?: string; readonly all: boolean }
+export interface TableRequest { readonly starClass: string; readonly galaxy: string; readonly table: string; readonly filters: Cells; readonly named?: string; readonly all: boolean; readonly featured: boolean }
 export function parseTableRequest(name: string): TableRequest {
   const match = /^([a-z][a-z-]*):([a-z][a-z0-9-]*)=([A-Z]+\/[\w+/.-]+?)(?:#(.+))?$/u.exec(name.trim());
   if (!match) throw new TypeError(`${name} is not CLASS:GALAXY=TABLE[#ROW] (cepheid:m81=J/ApJ/743/176/table1); the classes are ${Object.keys(TABLE_CLASSES).join(', ')}.`);
   if (!TABLE_CLASSES[match[1]!]) throw new TypeError(`${name}: no class ${match[1]}; the classes are ${Object.keys(TABLE_CLASSES).join(', ')}.`);
-  const parts = (match[4] ?? '').split(',').map(part => part.trim()).filter(Boolean), bare = parts.filter(part => !part.includes('=') && part !== 'all');
-  if (bare.length > 1) throw new TypeError(`${name}: ROW names one star (${bare.join(', ')} are ${bare.length}); the other parts are COLUMN=VALUE or all.`);
-  return { starClass: match[1]!, galaxy: match[2]!, table: match[3]!, all: parts.includes('all'), ...(bare[0] ? { named: bare[0] } : {}),
+  const parts = (match[4] ?? '').split(',').map(part => part.trim()).filter(Boolean), bare = parts.filter(part => !part.includes('=') && part !== 'all' && part !== 'featured');
+  if (bare.length > 1) throw new TypeError(`${name}: ROW names one star (${bare.join(', ')} are ${bare.length}); the other parts are COLUMN=VALUE, all or featured.`);
+  if (parts.includes('all') && parts.includes('featured')) throw new TypeError(`${name}: featured marks one star a reader should find; all would mark every row of the table.`);
+  return { starClass: match[1]!, galaxy: match[2]!, table: match[3]!, all: parts.includes('all'), featured: parts.includes('featured'), ...(bare[0] ? { named: bare[0] } : {}),
     filters: Object.fromEntries(parts.filter(part => part.includes('=')).map(part => { const at = part.indexOf('='); return [part.slice(0, at).trim(), part.slice(at + 1).trim()]; })) };
 }
 
@@ -185,11 +187,11 @@ export async function draftsFromTable(names: readonly string[], archive: Archive
           credit: `${paper.credit}, VizieR ${where}, names the star in SIMBAD (${columns.simbadName}); SIMBAD holds its position${placed.bibcode ? `, from ${placed.bibcode}` : ' and names no paper for it'}` }
         : { catalogue: request.table, row: key, columns: DECIMAL_POSITION, credit: paper.credit, url: paper.url };
       const shown = days.toFixed(days < 10 ? 2 : 1);
-      stars.push(relationCepheidDraft({ id: slug(starName), name: starName, target: simbadName ?? starName, galaxy: galaxy.name, inside: galaxy.id, periodDays: days, paper, position,
+      stars.push({ ...request.featured ? { featured: true as const } : {}, ...relationCepheidDraft({ id: slug(starName), name: starName, target: simbadName ?? starName, galaxy: galaxy.name, inside: galaxy.id, periodDays: days, paper, position,
         periodSource: `${paper.credit}, VizieR ${where} (${columns.period.column}${columns.period.log ? ` ${cells[columns.period.column]}` : ''})`,
         description: `A ${starClass.noun} in ${galaxy.reader} that pulsates every ${shown} days.`, distance: placeInGalaxy(galaxy, raDeg, decDeg, where), velocity,
         text: { card: `A ${starClass.noun} in ${galaxy.reader}, ${far} away, that swells and shrinks every ${shown} days.`, introduction: `${cited.authors} list its pulsation at ${shown} days.`,
-          locator: `VizieR ${where}: ${columns.period.column}` } }));
+          locator: `VizieR ${where}: ${columns.period.column}` } }) });
     }
     report.push(`${name}: ${picked.rows.length} ${starClass.noun}${picked.rows.length === 1 ? '' : 's'} of ${paper.credit} in ${galaxy.name}${ownPositions ? '' : ', placed by SIMBAD'}; radius and temperature from ${starClass.relation}.`);
   }
