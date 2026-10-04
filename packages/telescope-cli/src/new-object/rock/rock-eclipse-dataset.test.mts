@@ -8,7 +8,7 @@ import { resolve } from 'node:path';
 import test from 'node:test';
 import { WORKSPACE } from '@cssearth/telescope/node';
 import type { Archive } from '../archives/archives.mts';
-import { hostAtmosphere, installRockEclipseDataset, parseRockEclipseEntries, restoreRockInputs, rockInputs, rockRecipe } from './rock-eclipse-dataset.mts';
+import { hostAtmosphere, installRockEclipseDataset, parseRockEclipseEntries, restoreRockInputs, rockInputs, rockRecipe, throughputRelease } from './rock-eclipse-dataset.mts';
 
 const id = 'trappist-1f', o = `src/objects/${id}`;
 const written = { id, dataset: 'temperature', label: 'Rock model', path: 'science/allen-2025/dayside-15um.json', url: 'https://arxiv.org/abs/2508.14210', credit: 'Allen et al. (2025)',
@@ -95,4 +95,34 @@ test('the dataset says it is a model set by one measurement, draws the rock the 
   assert.equal(installRockEclipseDataset(files, id, 'TRAPPIST-1f', 'trappist-1', entry, { substellarK: 1287.4, substellarRangeK: [1180.2, 1391.6] }).promoted, false);
   assert.equal(after('source/preparation/raster.json').surfaces.length, count);
   assert.equal(after('source/manifest.json').inputs.filter((input: { id: string }) => input.id.startsWith('trappist-1f-') && /eclipse-depth|filter|bt-settl/u.test(input.id)).length, 3);
+});
+
+test('a depth summed over a spectrograph takes a released throughput table as its band, checked at its release', async () => {
+  const table = { record: '10.5281/zenodo.12571830', file: 'ThERESA.zip', member: 'ThERESA/miri_throughput.dat', path: 'science/valentine-2024/miri_throughput.dat', minimumMicrons: 5, maximumMicrons: 12, instrument: 'JWST MIRI LRS', credit: 'Valentine et al. (2024)' };
+  const entry = entryOf({ filter: undefined, throughput: table, band: '5 to 12 µm', path: 'science/xue-2024/dayside-5-12um.json' });
+  assert.deepEqual(rockInputs(entry).filter, { path: 'science/valentine-2024/miri_throughput.dat', url: 'https://zenodo.org/records/12571830/files/ThERESA.zip?download=1', member: 'ThERESA/miri_throughput.dat' });
+  assert.deepEqual(rockRecipe(id, 'trappist-1', entry).band, { encoding: 'throughput-columns', path: 'science/valentine-2024/miri_throughput.dat', minimumMicrons: 5, maximumMicrons: 12 });
+  assert.throws(() => entryOf({ throughput: table }), /names the band once: an SVO filter id \(field filter\) or a released throughput table \(field throughput\)/u);
+  assert.throws(() => entryOf({ filter: undefined }), /names the band once/u);
+  assert.throws(() => entryOf({ filter: undefined, throughput: { ...table, member: undefined } }), /throughput\.member names the table inside a \.zip file, and only there/u);
+  assert.throws(() => entryOf({ filter: undefined, throughput: { ...table, maximumMicrons: 4 } }), /sums from minimumMicrons to a larger maximumMicrons/u);
+  assert.equal(entryOf({ verdict: 'likely best explained by an airless planet' }).verdict, 'likely best explained by an airless planet');
+  // The release must allow reuse and list the file.
+  const record = (license: string) => JSON.stringify({ id: 12571830, doi: '10.5281/zenodo.12571830', metadata: { title: 'Non-Uniform Dayside Emission for WASP-17b', creators: [{ name: 'Valentine, Daniel' }], license: { id: license } }, files: [{ key: 'ThERESA.zip', size: 4118999 }] });
+  const zenodo = (answer: string): Archive => ({ text: async () => answer, bytes: async () => { throw new Error('Unexpected bytes request'); }, exists: async () => false });
+  const release = await throughputRelease(zenodo(record('cc-by-4.0')), 'trappist-1f, dataset temperature', table);
+  assert.deepEqual([release.license.name, release.fileUrl], ['CC BY 4.0', 'https://zenodo.org/records/12571830/files/ThERESA.zip?download=1']);
+  await assert.rejects(throughputRelease(zenodo(record('cc-by-nd-4.0')), 'trappist-1f, dataset temperature', table), /a throughput table is used only under a license known to allow reuse \(field throughput\.record\)/u);
+  await assert.rejects(throughputRelease(zenodo(record('cc-by-4.0')), 'trappist-1f, dataset temperature', { ...table, file: 'other.zip' }), /lists no file other\.zip \(field throughput\.file\)/u);
+  // Installed, the table is the package's own pinned copy, restored as a member of the release's ZIP.
+  const files = new Map<string, string | Buffer>(await Promise.all(PACKAGE.map(async path => [`${o}/${path}`, await readFile(resolve(WORKSPACE, o, path), 'utf8')] as const)));
+  const after = (path: string) => JSON.parse(String(files.get(`${o}/${path}`))) as Record<string, any>;
+  assert.throws(() => installRockEclipseDataset(files, id, 'TRAPPIST-1f', 'trappist-1', entry, { substellarK: 800, substellarRangeK: [780, 820] }), /a throughput table is installed with its checked release/u);
+  installRockEclipseDataset(files, id, 'TRAPPIST-1f', 'trappist-1', entry, { substellarK: 800, substellarRangeK: [780, 820] }, release);
+  const band = after('source/manifest.json').inputs.at(-2);
+  assert.deepEqual([band.id, band.path, band.productId, band.version, band.license, band.sourceBinding.kind],
+    ['trappist-1f-jwst-miri-lrs-throughput', 'science/valentine-2024/miri_throughput.dat', 'ThERESA/miri_throughput.dat', '10.5281/zenodo.12571830', 'CC BY 4.0', 'local']);
+  assert.deepEqual(after('source/preparation/acquisition.json').operations.at(-2),
+    { kind: 'zip-member', groups: ['restore', 'refresh'], path: 'science/valentine-2024/miri_throughput.dat', url: 'https://zenodo.org/records/12571830/files/ThERESA.zip?download=1', member: 'ThERESA/miri_throughput.dat' });
+  assert.equal(after('source/preparation/raster.json').surfaces.at(-1).science.band.encoding, 'throughput-columns');
 });

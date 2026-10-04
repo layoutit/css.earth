@@ -33,6 +33,49 @@
           "source": "the color dataset of wasp-17 (src/objects/wasp-17/source/photometry/stellar-color.json)"
         }
       }
+    },
+    {
+      "id": "temperature",
+      "output": "wasp-17b-surface-{id}{suffix}.webp",
+      "thumbnail": "wasp-17b-dataset-{id}.webp",
+      "source": "science/valentine-2024/tmap.pkl",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "temperature",
+        "label": "Temperature",
+        "format": "npy-dictionary-map",
+        "path": "science/valentine-2024/tmap.pkl",
+        "sampling": "bilinear",
+        "units": "K",
+        "values": [],
+        "gridLayout": "pixel-centres",
+        "container": "pickle",
+        "shownLongitudes": [
+          -110,
+          110
+        ],
+        "consumer": "wasp-17b-temperature-published-map",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "minimum": 500,
+        "maximum": 2200,
+        "colors": [
+          "#0d0887",
+          "#7e03a8",
+          "#cc4778",
+          "#f89540",
+          "#f0f921"
+        ],
+        "labels": [
+          "500",
+          "1350",
+          "2200"
+        ],
+        "description": "Brightness temperature at 5 to 12 µm, fitted to one eclipse on 14 March 2023. Only large patterns are real; longitudes the paper does not show are left blank.",
+        "title": "JWST MIRI · eclipse map",
+        "sourceUrl": "https://zenodo.org/records/12571830"
+      }
     }
   ],
   "lighting": {
