@@ -159,7 +159,7 @@ export async function opensOn(root: string, id: string): Promise<string | undefi
 }
 
 /** Kinds that draw no map: the neutral shape, or one color over the whole body. These are the pages a lead can improve. */
-const UNIFORM = new Set(['neutral-shape', 'dayside-thermal-color', 'disc-integrated-band-color']);
+const UNIFORM = new Set(['neutral-shape', 'equilibrium-thermal-color', 'dayside-thermal-color', 'disc-integrated-band-color']);
 
 export interface SurveyRow { readonly id: string; readonly name: string; readonly opensOn: string | undefined; readonly leads: readonly Lead[] }
 export interface LeadSurvey { readonly schema: typeof LEADS_SCHEMA; readonly archiveClass: string; readonly objects: number; readonly requests: number; readonly failures: readonly string[]; readonly rows: readonly SurveyRow[] }

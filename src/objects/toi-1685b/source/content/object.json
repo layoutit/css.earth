@@ -49,22 +49,22 @@
   },
   "datasets": {
     "titleKey": "datasets",
-    "defaultDataset": "shape",
+    "defaultDataset": "thermal",
     "controls": [
       {
-        "id": "shape",
-        "label": "Shape",
-        "qualification": "A sphere of the published radius, lit by TOI-1685; the neutral gray is a display convention, not a measured color.",
-        "thumbnail": "toi-1685b-dataset-shape.webp",
-        "surface": "toi-1685b-surface-shape@2x.webp",
-        "poles": "toi-1685b-poles-shape@2x.webp",
+        "id": "thermal",
+        "label": "Thermal glow",
+        "qualification": "Black-body color at its measured dayside temperature, 1,360 K. The disc itself is unresolved.",
+        "thumbnail": "toi-1685b-dataset-thermal.webp",
+        "surface": "toi-1685b-surface-thermal@2x.webp",
+        "poles": "toi-1685b-poles-thermal@2x.webp",
         "source": {
-          "id": "toi-1685b-observational-measurements",
+          "id": "toi-1685b-thermal-color",
           "path": "../manifest.json",
-          "url": "https://ui.adsabs.harvard.edu/abs/2025A&A...696A..28E/abstract"
+          "url": "https://arxiv.org/abs/2412.03411"
         },
         "falseColor": false,
-        "notes": "No image or color of TOI-1685 b is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the color of toi-1685's light, as its color dataset measures it."
+        "notes": "The color of TOI-1685 b's heat: a black body at the dayside brightness temperature measured in secondary eclipse at 4.5 µm (JWST NIRSpec). Its star lights the day side; the night side is not measured. Reflected starlight is not included."
       }
     ]
   },

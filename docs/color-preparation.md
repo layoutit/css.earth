@@ -202,6 +202,28 @@ color instead of a white lamp: the gray's brightness with the host color dataset
 [color-transfer.ts](../packages/bake/src/objects/color/color-transfer.ts)). `telescope new-object --from-archive` does both; `node packages/telescope-cli/src/new-object/new-object-cli.mts --thermal <id>...`
 and `--host-light <id>...` (that entry only) give them to planets already in the tree.
 
+The archive's emission table stopped growing, so a planet it lacks is looked up in the Spitzer eclipse catalogue of Deming et
+al. (2023, AJ 165, 104; CDS `J/AJ/165/104`, table 2): one uniform reanalysis of every Spitzer eclipse of 122 hot Jupiters, with
+a dayside brightness temperature at 3.6 and 4.5 µm. The same rule picks the band. A band Spitzer never observed is printed
+as 0 and a temperature whose lower error reaches it is not a detection; neither is used. A planet on an orbit with an
+eccentricity of 0.3 or more is left out: one eclipse catches it near its closest approach, not its day side round the orbit.
+
+### The expected glow of a hot giant
+
+A hot giant nobody has measured still gets a color, said to be an estimate wherever it is shown: the "Expected glow"
+dataset, a black body at the equilibrium temperature a paper prints for it (`--expected-glow <id>...`). The temperature is
+the archive's default parameter set's when that set prints one, the most recently published paper's otherwise; the TESS
+candidate list is not a paper and is not used.
+
+It is an estimate with a measured error. The catalogue above holds both numbers for 120 hot Jupiters on near-circular
+orbits: the measured 4.5 µm day side (table 2) and the equilibrium temperature (table 3). Measured over estimated has a
+median of 1.08, 68% of the planets between 0.95 and 1.20, and 83% within 20%. Taken with the archive's own
+equilibrium temperatures, the ones the estimate uses, on the 107 of those planets the archive has one for: a median of 1.08,
+85% within 20% and 95% within 30%. So the estimate is shown only where that test
+reaches: a planet of at least 0.77 Jupiter radii, the smallest in the sample, hotter than the 1,000 K a black body needs to
+glow, on an orbit rounder than 0.3. It is never shown for a small planet, whose day side nobody has tested this way, and a
+measured day side replaces it: `--thermal` rebuilds an expected glow as a thermal glow.
+
 ![Dataset thumbnails: HD 219134 c gray, HD 219134 b the same gray under its host's light, HD 209458 b and WASP-39 b glowing at their measured dayside temperatures](images/planet-color-routes.png)
 
 ![Before and after on the page: TRAPPIST-1 e, Kepler-186 f and HD 219134 b under their stars' light, HD 209458 b at its measured dayside heat; the flat gray discs on main had no stylesheet sizing their lighting frame](images/planet-color-before-after.png)

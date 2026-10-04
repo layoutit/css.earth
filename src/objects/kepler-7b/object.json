@@ -30,12 +30,7 @@
           "projection": "equirectangular",
           "datasets": [
             {
-              "id": "shape",
-              "source": "content",
-              "material": "lighting"
-            },
-            {
-              "id": "illustration",
+              "id": "thermal",
               "source": "content",
               "material": "lighting"
             }

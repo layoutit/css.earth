@@ -1,0 +1,20 @@
+{
+  "schema": "cssearth-stellar-photometric-color@1",
+  "objectId": "toi-561b",
+  "spectrum": "planck",
+  "temperature": {
+    "published": {
+      "kelvin": 2048,
+      "lowerKelvin": 1842,
+      "upperKelvin": 2254,
+      "citation": "Boucher et al. 2026, dayside temperature of the combined NIRSpec G395H phase-curve fit, 2048 +193 -206 K: 2048 +/- 206 K, https://arxiv.org/abs/2608.21519"
+    },
+    "note": "Its day side's brightness temperature is measured in secondary eclipse at 4 µm (JWST NIRSpec) and nobody has imaged it, so the color is a Planck spectrum at its published temperature.",
+    "chosen": "the fit to both detectors together, 2.9 to 5.1 µm; the larger of its two errors is kept",
+    "wavelengthMicrometres": 4,
+    "facility": "JWST NIRSpec"
+  },
+  "whitePoint": "sRGB D65",
+  "normalization": "brightest linear sRGB channel = 1",
+  "gamut": "desaturate"
+}

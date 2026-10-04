@@ -7,14 +7,14 @@
     "latitudeSegments": 16,
     "longitudeSegments": 32,
     "surface": {
-      "url": "/scenes/toi-6564b/toi-6564b-surface-shape@2x.webp",
+      "url": "/scenes/toi-6564b/toi-6564b-surface-thermal@2x.webp",
       "width": 1024,
       "height": 768
     },
     "surfaceLatitudeHeight": 512,
     "packedBandGutter": 8,
     "poles": {
-      "url": "/scenes/toi-6564b/toi-6564b-poles-shape@2x.webp",
+      "url": "/scenes/toi-6564b/toi-6564b-poles-thermal@2x.webp",
       "width": 512,
       "height": 256
     },
@@ -22,7 +22,7 @@
     "polarRadiusScale": 1.035,
     "polarOffset": 0.1,
     "uv": "cell",
-    "color": "#a29894"
+    "color": "#ff6800"
   },
   "projection": {
     "tileSize": 50,

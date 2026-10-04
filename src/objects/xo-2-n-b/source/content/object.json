@@ -49,22 +49,22 @@
   },
   "datasets": {
     "titleKey": "datasets",
-    "defaultDataset": "shape",
+    "defaultDataset": "thermal",
     "controls": [
       {
-        "id": "shape",
-        "label": "Shape",
-        "qualification": "A sphere of the published radius, lit by XO-2 N; the neutral gray is a display convention, not a measured color.",
-        "thumbnail": "xo-2-n-b-dataset-shape.webp",
-        "surface": "xo-2-n-b-surface-shape@2x.webp",
-        "poles": "xo-2-n-b-poles-shape@2x.webp",
+        "id": "thermal",
+        "label": "Expected glow",
+        "qualification": "An estimate, not a measurement: black-body color at its published equilibrium temperature, 1,328 K.",
+        "thumbnail": "xo-2-n-b-dataset-thermal.webp",
+        "surface": "xo-2-n-b-surface-thermal@2x.webp",
+        "poles": "xo-2-n-b-poles-thermal@2x.webp",
         "source": {
-          "id": "xo-2-n-b-observational-measurements",
+          "id": "xo-2-n-b-thermal-color",
           "path": "../manifest.json",
-          "url": "https://ui.adsabs.harvard.edu/abs/2024A&A...684A.116R/abstract"
+          "url": "https://ui.adsabs.harvard.edu/abs/2012MNRAS.426.1291S/abstract"
         },
         "falseColor": false,
-        "notes": "No image or color of XO-2 N b is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the color of xo-2-n's light, as its color dataset measures it."
+        "notes": "Nobody has measured XO-2 N b's heat. This is the color of a black body at 1,328 K, the equilibrium temperature its paper computes from its star's light (Southworth 2012, equilibrium temperature (NASA Exoplanet Archive planetary systems table)). On 120 hot Jupiters whose day side Spitzer measured, the measured temperature is within 20% of this kind of estimate for 83% (Deming et al. 2023). Its star lights the day side. Reflected starlight is not included."
       }
     ]
   },
