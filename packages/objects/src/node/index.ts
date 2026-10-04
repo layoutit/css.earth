@@ -16,3 +16,4 @@ export { ASSET_LOCATIONS, INVENTORY_FILE, INVENTORY_SCHEMA, assembleRuntimeAsset
 export type { AssetLocation, Inventory, InventoryAsset } from './runtime-asset-closure.js';
 export { preparedObjectText, preparedObjectTransport, preparedPageData, readJsonHead } from './prepared-transport.js';
 export { packPreparedBinary, unpackPreparedBinary, packPreparedBank, unpackPreparedBank } from './prepared-binary-file.js';
+export { volumeDatasetBankFiles, writeVolumeDatasetBank, readVolumeDatasetBank } from './volume-dataset-bank.js';

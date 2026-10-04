@@ -1,5 +1,7 @@
 /** Offline handoff of existing cloud geometry, prepared pixels and saved display choices. */
 import { OBJECT_SCHEMA, PREPARED_OBJECT_SCHEMA, PREPARED_VOLUME_DATASETS_SCHEMA, parsePreparedLmcStars, cloudDensityWeight, validateCloudDensityFilter, validatePreparedCssVolume, parseCloudCatalogue, type CloudDensityFilter, type PreparedCssVolume, VOLUME_DATASET_MANIFEST_SCHEMA } from '@cssearth/objects';
+import { PREPARED_VOLUME_DATASET_INDEX_SCHEMA, type PreparedVolumeDatasets } from '@cssearth/objects';
+import { volumeDatasetBankFiles } from '@cssearth/objects/node';
 import assert from 'node:assert/strict';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, resolve, relative, sep } from 'node:path';
@@ -124,13 +126,12 @@ export async function promoteVolumeDatasets(root: string, input: VolumeDatasetPr
   }
   const data = { schema: PREPARED_VOLUME_DATASETS_SCHEMA, id: recipe.id, defaultDataset: recipe.defaultDataset,
     framingRadiusUnits: recipe.framingRadiusUnits, starsEnabled: recipe.datasets.find(dataset => dataset.imageId === recipe.defaultDataset)!.stars.enabled, datasets };
-  const envelope = { schema: PREPARED_OBJECT_SCHEMA, id: recipe.id, type: 'volume-dataset-bank', format: PREPARED_VOLUME_DATASETS_SCHEMA, data };
-  const recipeBytes = bytes(recipe), preparedBytes = bytes(envelope);
+  const recipeBytes = bytes(recipe), preparedFiles = volumeDatasetBankFiles(data as PreparedVolumeDatasets);
   await output('source/lenses.json', recipeBytes);
-  await output('prepared/datasets.json', preparedBytes);
+  for (const [name, file] of preparedFiles) await output(`prepared/${name}`, Buffer.from(file));
   await output('object.json', bytes({ schema: OBJECT_SCHEMA, id: recipe.id, type: 'volume-dataset-bank',
     properties: { frame: commonFrame, preparation: { source: 'source/lenses.json' } },
-    prepared: { format: PREPARED_VOLUME_DATASETS_SCHEMA, url: 'prepared/datasets.json' } }));
+    prepared: { format: PREPARED_VOLUME_DATASET_INDEX_SCHEMA, url: 'prepared/datasets.json' } }));
   await put(resolve(destination, 'source/lens-manifest.json'), bytes({ schema: VOLUME_DATASET_MANIFEST_SCHEMA, outputs }));
   return { id: recipe.id, datasets: datasets.map(dataset => ({ id: dataset.id, stars: dataset.stars.points.length,
     slices: dataset.volume.stacks.reduce((sum, stack) => sum + stack.leaves.length, 0) })),

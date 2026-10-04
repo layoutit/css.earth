@@ -1,4 +1,9 @@
 import { samePreparedCatalogueGeometry, validatePreparedVolumeDatasets, PREPARED_VOLUME_DATASETS_SCHEMA, parseObjectDescriptor, parseDensityVolumeFrame, readPreparedObject, samePreparedVolumeTopology, type PreparedVolumeDataset, type PreparedVolumeDatasetBrightness, type PreparedVolumeDatasets, type PreparedAssets, type PreparedCssVolume, type VolumeAxis } from '@cssearth/objects';
+import { PREPARED_VOLUME_DATASET_INDEX_SCHEMA, splitPreparedVolumeDatasets, trustPreparedCataloguePoints, trustPreparedCssVolume, validatePreparedVolumeDatasetIndex,
+  type DensityVolumeFrame, type PreparedCataloguePoints, type PreparedVolumeDatasetEntry, type PreparedVolumeDatasetIndex } from '@cssearth/objects';
+import { readPrepared } from '../prepared-data-worker-client.js';
+import { readPreparedHere } from '../prepared-data/prepared-readers.js';
+import { PREPARED_CSS_VOLUME_READER, PREPARED_VOLUME_STARS_READER } from './prepared-volume-readers.js';
 import { writeData, writeStyle } from '../rendering/retained-write.js';
 import { preparedVolumeTexturePaths } from './prepared-volume-runtime.js';
 import { projectVolumeImpostors } from './volume-impostor-projection.js';
@@ -20,20 +25,77 @@ export interface PreparedVolumeDatasetState {
   readonly datasets: readonly Pick<PreparedVolumeDataset, 'id' | 'label' | 'title' | 'description' | 'sourceUrl'>[];
 }
 
-/** Decode the authored generic bank; preparation is never a runtime fallback. */
-export async function loadPreparedVolumeDatasets(input: unknown, transport: PreparedCssTransport): Promise<PreparedVolumeDatasets> {
+/**
+ * What the page holds of a dataset bank: its index, and the files of the datasets it has shown. A bank's files are one
+ * a dataset (@cssearth/objects volume-dataset-bank-files.ts); the page reads the index when the bank arrives and a
+ * dataset's volume and stars when that dataset is first selected.
+ */
+export interface PreparedVolumeDatasetSource {
+  readonly index: PreparedVolumeDatasetIndex;
+  /** The frame every dataset of the bank shares. */
+  readonly frame: DensityVolumeFrame;
+  /** A dataset's files, once read. */
+  volume(id: string): PreparedCssVolume | undefined;
+  stars(id: string): PreparedCataloguePoints | undefined;
+  /** Read a dataset's files. Every caller waiting for one dataset shares one read; a failed read is tried again. */
+  load(id: string): Promise<void>;
+}
+
+/** A whole bank in memory as a source with every dataset read: what a preparation or a test holds. */
+export function preparedVolumeDatasetSource(input: PreparedVolumeDatasets): PreparedVolumeDatasetSource {
+  const bank = validatePreparedVolumeDatasets(input), byId = new Map(bank.datasets.map(dataset => [dataset.id, dataset] as const));
+  return Object.freeze({ index: validatePreparedVolumeDatasetIndex(splitPreparedVolumeDatasets(bank).index), frame: bank.datasets[0]!.volume.frame,
+    volume: (id: string) => byId.get(id)?.volume, stars: (id: string) => byId.get(id)?.stars, load: () => Promise.resolve() });
+}
+
+/** A reader of a bank's files over a transport that returns their bytes, on this thread: Node tools and tests. */
+export function preparedTransportReader(transport: PreparedCssTransport) {
+  return <Value>(kind: string, path: string): Promise<Value> =>
+    readPreparedHere(kind, path, (async (url: string | URL | Request) => new Response(await transport.read(String(url)))) as typeof fetch).then(reading => reading.value as Value);
+}
+
+/** Read a bank's index and the files of one dataset (its default unless `dataset` names another); preparation is never
+ * a runtime fallback. `resolve` gives the address of a file named as the descriptor names its index (`prepared/…`), and
+ * `read` reads one by its kind, in the data worker unless the caller reads elsewhere. */
+export async function loadPreparedVolumeDatasets(input: unknown, transport: PreparedCssTransport, { resolve, read = readPrepared, dataset }: {
+  resolve(path: string): string; read?<Value>(kind: string, url: string): Promise<Value>; dataset?: string;
+}): Promise<PreparedVolumeDatasetSource> {
   const descriptor = parseObjectDescriptor(input);
-  if (descriptor.type !== 'volume-dataset-bank' || descriptor.prepared?.format !== PREPARED_VOLUME_DATASETS_SCHEMA) {
-    throw new TypeError('A volume dataset bank requires its prepared artifact.');
+  if (descriptor.type !== 'volume-dataset-bank' || descriptor.prepared?.format !== PREPARED_VOLUME_DATASET_INDEX_SCHEMA) {
+    throw new TypeError(`Volume dataset bank ${descriptor.id} requires its ${PREPARED_VOLUME_DATASET_INDEX_SCHEMA} index, got ${JSON.stringify(descriptor.prepared?.format ?? null)}.`);
   }
-  const frame = parseDensityVolumeFrame(descriptor.properties.frame);
-  const bytes = await transport.read(descriptor.prepared.url);
+  const frame = parseDensityVolumeFrame(descriptor.properties.frame), reference = descriptor.prepared.url, directory = reference.replace(/[^/]*$/u, '');
+  const bytes = await transport.read(reference);
   const value: unknown = JSON.parse(new TextDecoder('utf-8', { fatal: true }).decode(bytes));
-  const payload = readPreparedObject(value, descriptor, validatePreparedVolumeDatasets).data;
-  if (payload.id !== descriptor.id || payload.datasets.some(dataset => JSON.stringify(dataset.volume.frame) !== JSON.stringify(frame))) {
-    throw new TypeError('Prepared volume dataset identity/frame does not match its authored descriptor.');
-  }
-  return payload;
+  const index = readPreparedObject(value, descriptor, validatePreparedVolumeDatasetIndex).data;
+  if (index.id !== descriptor.id) throw new TypeError(`Volume dataset bank ${descriptor.id}: its index is of ${index.id}.`);
+  const entries = new Map(index.datasets.map(entry => [entry.id, entry] as const));
+  const volumes = new Map<string, PreparedCssVolume>(), stars = new Map<string, PreparedCataloguePoints>(), starFiles = new Map<string, Promise<PreparedCataloguePoints>>();
+  const loads = new Map<string, Promise<void>>();
+  const readStars = (file: string) => {
+    let reading = starFiles.get(file);
+    if (!reading) {
+      starFiles.set(file, reading = read<PreparedCataloguePoints>(PREPARED_VOLUME_STARS_READER, resolve(directory + file)).then(trustPreparedCataloguePoints));
+      reading.catch(() => { if (starFiles.get(file) === reading) starFiles.delete(file); });
+    }
+    return reading;
+  };
+  const load = (id: string): Promise<void> => {
+    const entry = entries.get(id);
+    if (!entry) return Promise.reject(new TypeError(`Volume dataset bank ${index.id} has no dataset ${id}.`));
+    let loading = loads.get(id);
+    if (!loading) {
+      const reading = loading = Promise.all([read<PreparedCssVolume>(PREPARED_CSS_VOLUME_READER, resolve(directory + entry.volume)), readStars(entry.stars)]).then(([volume, points]) => {
+        if (JSON.stringify(volume.frame) !== JSON.stringify(frame)) throw new TypeError(`Volume dataset bank ${index.id}: dataset ${id} is not in its descriptor's frame.`);
+        volumes.set(id, trustPreparedCssVolume(volume)); stars.set(id, points);
+      });
+      loads.set(id, reading);
+      reading.catch(() => { if (loads.get(id) === reading) loads.delete(id); });
+    }
+    return loading;
+  };
+  await load(dataset !== undefined && entries.has(dataset) ? dataset : index.defaultDataset);
+  return Object.freeze({ index, frame, volume: (id: string) => volumes.get(id), stars: (id: string) => stars.get(id), load });
 }
 
 /** Same completed-image attenuation as Nebula Lab cloudCompositeOpacity; never attenuate individual slabs. */
@@ -48,17 +110,27 @@ export function volumeDatasetCompositeOpacity(banks: readonly { axis: VolumeAxis
   return brightness.overall * gain;
 }
 
-/** Fixed declared bank; visible LODs attach their own textures on demand. */
+/** A dataset as the mount holds it: its index entry, with its files read through the source. */
+type MountedDataset = Omit<PreparedVolumeDatasetEntry, 'volume' | 'stars'> & { readonly volume: PreparedCssVolume; readonly stars: PreparedCataloguePoints };
+
+/** Fixed declared bank; visible LODs attach their own textures on demand. `payload` is the bank's source (its index and
+ * the datasets read so far), or a whole bank in memory. */
 export function createPreparedVolumeDatasets({ payload, resolveResource }: {
-  payload: PreparedVolumeDatasets; resolveResource(path: string): string;
+  payload: PreparedVolumeDatasetSource | PreparedVolumeDatasets; resolveResource(path: string): string;
 }) {
-  const data = validatePreparedVolumeDatasets(payload), pool = `volume-datasets:${data.id}`;
-  const topologyFamilies: PreparedVolumeDataset[][] = [];
-  for (const dataset of data.datasets) {
-    const family = topologyFamilies.find(candidate => samePreparedVolumeTopology(candidate[0]!.volume, dataset.volume));
-    if (family) family.push(dataset); else topologyFamilies.push([dataset]);
-  }
-  const paths = [...new Set(data.datasets.flatMap(dataset => dataset.volume.resources.map(resource => resource.path)))];
+  const source = 'index' in payload ? payload : preparedVolumeDatasetSource(payload);
+  const data = source.index, pool = `volume-datasets:${data.id}`;
+  // A dataset's files are read before it is shown; reading one that is not is a fault of the caller, named here.
+  const held = <Value>(id: string, value: Value | undefined, what: string): Value => {
+    if (value === undefined) throw new TypeError(`Volume dataset bank ${data.id}: dataset ${id} is shown before its ${what} is read.`);
+    return value;
+  };
+  const datasets: readonly MountedDataset[] = data.datasets.map(({ volume: _volume, stars: _stars, ...entry }) => Object.freeze({ ...entry,
+    get volume() { return held(entry.id, source.volume(entry.id), 'volume'); }, get stars() { return held(entry.id, source.stars(entry.id), 'stars'); } }));
+  // The datasets of one family share their geometry (the index's `topology`): one surface shows whichever is selected.
+  const topologyFamilies: MountedDataset[][] = [];
+  for (const dataset of datasets) (topologyFamilies[dataset.topology] ??= []).push(dataset);
+  const paths = [...new Set(data.datasets.flatMap(dataset => dataset.resources.map(resource => resource.path)))];
   const urls = new Map(paths.map(path => {
     const url = resolveResource(path);
     if (typeof url !== 'string' || !url) throw new TypeError('Prepared volume dataset resource URL is missing.');
@@ -73,7 +145,7 @@ export function createPreparedVolumeDatasets({ payload, resolveResource }: {
     if (!url) throw new TypeError(`Undeclared prepared volume dataset resource: ${path}.`);
     return url;
   };
-  return Object.freeze({ assets, payload: data,
+  return Object.freeze({ assets, payload: data, source,
     mount({ host, before, frontHost, frontBefore, nativeFocalCss }: { host: HTMLElement; before: Element;
       /** Where a dataset whose data lies wholly between the observer and the body composites; without it every dataset stays behind. */
       frontHost?: HTMLElement; frontBefore?: Element; nativeFocalCss?: string }) {
@@ -95,13 +167,16 @@ export function createPreparedVolumeDatasets({ payload, resolveResource }: {
       }
       const frontEnd = frontRoot ? create('span') : null;
       if (frontRoot && frontEnd) { frontEnd.hidden = true; frontRoot.append(frontEnd); }
-      let selected = data.datasets.some(dataset => dataset.id === selectedNative) ? selectedNative! : data.defaultDataset, destroyed = false, latest: VolumeCameraPublication | null = null;
+      // The dataset the server rendered, when its files are read; otherwise the bank's default, which the loader reads.
+      let selected = selectedNative !== undefined && source.volume(selectedNative) ? selectedNative : data.defaultDataset, destroyed = false, latest: VolumeCameraPublication | null = null;
+      // The dataset asked for last: a selection whose files are still being read is shown when they arrive, unless another was asked for since.
+      let wanted = selected;
       let starsVisible = data.starsEnabled ?? true;
       const listeners = new Set<(state: PreparedVolumeDatasetState) => void>();
       const datasetContent = Object.freeze(data.datasets.map(({ id, label, title, description, sourceUrl }) =>
         Object.freeze({ id, label, title, description, sourceUrl })));
-      const datasetById = new Map(data.datasets.map(dataset => [dataset.id, dataset] as const));
-      const families: { datasets: readonly PreparedVolumeDataset[]; active: { dataset: PreparedVolumeDataset }; surface: HTMLElement;
+      const datasetById = new Map(datasets.map(dataset => [dataset.id, dataset] as const));
+      const families: { datasets: readonly MountedDataset[]; active: { dataset: MountedDataset }; surface: HTMLElement;
         runtime: ReturnType<typeof mountPreparedVolumeLod> }[] = [];
       let stars: ReturnType<typeof mountPreparedCataloguePoints> | null = null;
       const mountStars = () => {
@@ -125,7 +200,7 @@ export function createPreparedVolumeDatasets({ payload, resolveResource }: {
         root.dataset.volumeResidentTopologyCount = String(families.length);
         root.dataset.volumeResidentDomNodes = String(1 + countDescendants(root) + (frontRoot ? 1 + countDescendants(frontRoot) : 0));
       };
-      const ensureFamily = (dataset: PreparedVolumeDataset) => {
+      const ensureFamily = (dataset: MountedDataset) => {
         const datasets = topologyFamilies.find(candidate => candidate.includes(dataset))!;
         const existingFamily = families.find(candidate => candidate.datasets === datasets);
         if (existingFamily) return existingFamily;
@@ -238,11 +313,19 @@ export function createPreparedVolumeDatasets({ payload, resolveResource }: {
             if (latest) publish(latest);
             notify();
           },
+          /** Show dataset `id`. One whose files are not read yet is read first and shown on arrival; the bank keeps the
+           * dataset it shows until then. */
           selectDataset(id: string) {
             if (destroyed) return;
             const next = datasetById.get(id);
             if (!next) throw new TypeError(`Unknown prepared volume dataset: ${id}.`);
+            wanted = id;
             if (id === selected) return;
+            if (!source.volume(id) || !source.stars(id)) {
+              source.load(id).then(() => { if (!destroyed && wanted === id) this.selectDataset(id); },
+                (error: unknown) => { if (wanted === id) wanted = selected; console.error(`Volume dataset bank ${data.id}: dataset ${id} could not be read.`, error); });
+              return;
+            }
             stars?.setPresentation(next.stars);
             const family = ensureFamily(next);
             family.active.dataset = next;

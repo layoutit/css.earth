@@ -151,7 +151,8 @@ export function loadApplicationUniverse(): Promise<ApplicationUniverse> {
       imageUrl: (id: string) => `/navigation/dataset-billboards/${encodeURIComponent(id)}.webp` };
     const loadVolumeDataset = createInFlightLoader(async (id: string) => {
       if (!volumeDatasetIds.has(id)) throw new TypeError(`Unknown prepared volume dataset bank: ${id}.`);
-      const set = await bankSet(id), payload = await loadPreparedVolumeDatasets(set.descriptor, set.transport);
+      // The bank's index and its default dataset; another dataset's files are read when it is first selected.
+      const set = await bankSet(id), payload = await loadPreparedVolumeDatasets(set.descriptor, set.transport, { resolve: path => set.resolve(path) });
       return { payload, resolveResource: (path: string) => set.resolve(`prepared/${path}`),
         // Published catalogues drawn through the bank, with its opacity (its descriptor's `cataloguePoints`).
         cataloguePointUrls: bankCataloguePoints(parseObjectDescriptor(set.descriptor)).map(bank => set.resolve(`prepared/${bank}.bin`)) };

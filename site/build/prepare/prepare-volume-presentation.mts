@@ -1,6 +1,6 @@
 import { readVolumeAttachment, readVolumePresentationPreviews, hasVolumePresentationSource, PREPARED_VOLUME_PRESENTATION_SCHEMA, validatePreparedImageLayerBank } from '@cssearth/objects';
 import { parseVolumePresentationSource, parseVolumeSourceManifest, readObjectContentDatasets } from '@cssearth/objects';
-import { isTrackedVolumeSourcePreview, type VolumeSourcePreview as Preview, type VolumePresentationSource as Presentation, PREPARED_VOLUME_DATASETS_SCHEMA, PREPARED_IMAGE_LAYER_BANK_SCHEMA, parseObjectDescriptor } from '@cssearth/objects';
+import { isTrackedVolumeSourcePreview, type VolumeSourcePreview as Preview, type VolumePresentationSource as Presentation, PREPARED_VOLUME_DATASET_INDEX_SCHEMA, PREPARED_IMAGE_LAYER_BANK_SCHEMA, parseObjectDescriptor } from '@cssearth/objects';
 import { sha256 } from '@cssearth/core/node';
 import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
@@ -113,7 +113,7 @@ async function volumeSources(root: string, input: (path: string) => Promise<Buff
     const manifest = parseVolumeSourceManifest(json(await input(`${base}/source/manifest.json`)), { reader: 'presentation', objectId: record.objectId, policy: 'presentation-source' });
     const descriptor = parseObjectDescriptor(json(await input(`${base}/object.json`)));
     const format = descriptor.prepared?.format;
-    if (descriptor.id !== record.objectId || !((descriptor.type === 'volume-dataset-bank' && format === PREPARED_VOLUME_DATASETS_SCHEMA) ||
+    if (descriptor.id !== record.objectId || !((descriptor.type === 'volume-dataset-bank' && format === PREPARED_VOLUME_DATASET_INDEX_SCHEMA) ||
       (descriptor.type === 'image-layer-bank' && format === PREPARED_IMAGE_LAYER_BANK_SCHEMA && record.datasets.length === 1 && record.defaultDataset === 'optical')))
       throw new TypeError(`Invalid volume descriptor: ${record.objectId}`);
     results.push({ base, record, manifest, descriptor });

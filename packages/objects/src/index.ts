@@ -104,14 +104,17 @@ export { DIRECTIONAL_SUN_PRESENTATION_STANDARD_SCHEMA } from './prepared-data/ru
 export { validatePreparedCubicSky, validateDirectionalSunPlan } from './prepared-data/sky-contract.js';
 
 export type { VolumeAxis, PreparedVolumeLeafStyle, PreparedVolumeLeaf, PreparedVolumeStack, PreparedVolumeImpostors, PreparedCssVolume } from './volume/css-volume-types.js';
-export { validatePreparedCssVolume } from './volume/css-volume-validation.js';
+export { validatePreparedCssVolume, trustPreparedCssVolume } from './volume/css-volume-validation.js';
 export { validateVolumeImpostors } from './volume/volume-impostor-validation.js';
-export { validatePreparedCataloguePoints } from './volume/prepared-catalogue-points.js';
+export { validatePreparedCataloguePoints, trustPreparedCataloguePoints } from './volume/prepared-catalogue-points.js';
 export type { PreparedCataloguePoint, PreparedCataloguePoints } from './volume/prepared-catalogue-points.js';
 export { DEFAULT_POINT_VISIBILITY } from './volume/point-visibility.js';
 export type { PreparedPointVisibility } from './volume/point-visibility.js';
 export { validatePreparedVolumeDatasets, samePreparedCatalogueGeometry, samePreparedPhysicalFrame } from './volume/prepared-volume-datasets.js';
 export type { PreparedVolumeDatasetBrightness, PreparedVolumeDataset, PreparedVolumeDatasets, PreparedVolumeDatasetBank } from './volume/prepared-volume-datasets.js';
+export { PREPARED_VOLUME_DATASET_INDEX_SCHEMA, PREPARED_VOLUME_DATASET_RECORD_SCHEMA, PREPARED_VOLUME_STARS_SCHEMA, VOLUME_DATASET_INDEX_FILE, VOLUME_DATASET_RECORD_FILE,
+  encodeVolumeStars, decodeVolumeStars, splitPreparedVolumeDatasets, joinPreparedVolumeDatasets, validatePreparedVolumeDatasetIndex } from './volume/volume-dataset-bank-files.js';
+export type { PreparedVolumeDatasetEntry, PreparedVolumeDatasetIndex, PreparedVolumeDatasetFiles } from './volume/volume-dataset-bank-files.js';
 export type { PreparedImageLayerBank, PreparedImageLayerLeaf, PreparedImageLayerView, PreparedCssImageLayers } from './volume/image-layer-bank-types.js';
 export { validatePreparedImageLayerBank } from './volume/image-layer-bank-validation.js';
 export type { PreparedCssSurfaceShell } from './prepared-data/css-surface-shell-types.js';

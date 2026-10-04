@@ -28,8 +28,8 @@
     {
       "location": "prepared",
       "filename": "datasets.json",
-      "bytes": 363593,
-      "sha256": "736ffa5fa5070075d993436be4c58a8cb0c77d58d910bb3713dad897e8d2288a"
+      "bytes": 12741,
+      "sha256": "200f5b3765dde131aca1be110644f3dcc4e5ba3a269b37d7a589b65a196828cf"
     },
     {
       "location": "prepared",
@@ -213,9 +213,21 @@
     },
     {
       "location": "prepared",
+      "filename": "emission-2020/volume.json",
+      "bytes": 24031,
+      "sha256": "8dacda6aae0ab2c74ff322f0748c4baee1e6926fcffc9af6cdbf10c2b31a0566"
+    },
+    {
+      "location": "prepared",
       "filename": "presentation.json",
       "bytes": 9390,
       "sha256": "0513004ed6d1fd327ab22d659c8a64b067ad5ee5c5150d7f383df6c19131b99e"
+    },
+    {
+      "location": "prepared",
+      "filename": "record.json",
+      "bytes": 64245,
+      "sha256": "89539ccca58289c5d6eb893f9501933b611e83abf3eb733bf263ad4fccb1f3ee"
     },
     {
       "location": "prepared",
@@ -393,6 +405,18 @@
     },
     {
       "location": "prepared",
+      "filename": "sio-2023/volume.json",
+      "bytes": 34075,
+      "sha256": "90f18cc9cebc6d6447fa535be84a97c46de3a3b3465d914ea51b7f375bca731b"
+    },
+    {
+      "location": "prepared",
+      "filename": "stars.bin",
+      "bytes": 379,
+      "sha256": "267e672dc4dfdaded9c1f0c265f50c86ae91aabc2257f9647f7801c75edf6cb8"
+    },
+    {
+      "location": "prepared",
       "filename": "veil-2019-12/atlases/x.webp",
       "bytes": 4894,
       "sha256": "6021188db652f8dd53f7a74cb964a511ebf4ef476487fc1c60f75a48ee007863"
@@ -567,6 +591,12 @@
     },
     {
       "location": "prepared",
+      "filename": "veil-2019-12/volume.json",
+      "bytes": 15815,
+      "sha256": "7acfb73c4531206b490308a67a27bbc16f06732cf06c3fa1daa5075f78f83b1b"
+    },
+    {
+      "location": "prepared",
       "filename": "zimpol-v/atlases/x.webp",
       "bytes": 106640,
       "sha256": "05df46c7398c0eba034fbf7bed61ef21066b040751104785b7654a59f0cb454b"
@@ -738,6 +768,12 @@
       "filename": "zimpol-v/impostors/view-ppp.png",
       "bytes": 38704,
       "sha256": "0b3b4713471f01fbfc7b5fe3115bd78b9025bcad0fb0597b9da75825545a1bce"
+    },
+    {
+      "location": "prepared",
+      "filename": "zimpol-v/volume.json",
+      "bytes": 37693,
+      "sha256": "713a5556a08970aea5f90ce1fd1f8cf853b77ab49548086883a0db827f3d75e5"
     }
   ]
 }

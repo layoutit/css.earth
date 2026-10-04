@@ -5,7 +5,7 @@ import type { SceneLifetime } from '@cssearth/engine';
 import { type DensityVolumeFrame, type PreparedPointVisibility, type DatasetBankBillboard, type DatasetBillboards } from '@cssearth/objects';
 import { type WorldCameraPose } from '@cssearth/engine';
 import type { WorldCameraViewport } from '../navigation/world-camera.js';
-import { createPreparedVolumeDatasets } from '../volume/prepared-volume-datasets.js';
+import { createPreparedVolumeDatasets, type PreparedVolumeDatasetSource } from '../volume/prepared-volume-datasets.js';
 import { projectedVolumeOpacity, projectVolumeSphere, volumeFramingRadiusUnits } from '../volume/projected-volume-visibility.js';
 
 import { mountDatasetBillboards } from './dataset-billboards.js';
@@ -19,6 +19,8 @@ interface DatasetBank {
   readonly facts: DatasetBankBillboard;
   readonly billboardIndex: number;
   mounted: DatasetMount | null;
+  /** The cause of the bank's last failed load, already reported. */
+  failure?: string;
   /** Catalogue points drawn inside the mounted bank, with its opacity. */
   points: ReturnType<typeof mountCataloguePoints>[];
   textures: ReturnType<typeof createVolumeTextureReadiness> | null;
@@ -131,12 +133,15 @@ export function createUniverseDatasetBanks({ root, end, frontRoot, frontEnd, lif
     const generation = bank.generation;
     const loading = load(bank.id).then(options => {
       if (lifetime.disposed || generation !== bank.generation || bank.mounted) return;
-      const loadedFrame = options.payload.datasets[0]!.volume.frame;
+      // A bank arrives as its source (its index and the datasets read so far) or, from a caller that holds one whole, as the bank.
+      const source = options.payload, whole = 'index' in source ? null : source;
+      const loadedFrame = whole ? whole.datasets[0]!.volume.frame : (source as PreparedVolumeDatasetSource).frame;
+      const datasetIds = (whole ?? (source as PreparedVolumeDatasetSource).index).datasets.map(dataset => dataset.id);
       if (loadedFrame.referenceFrame !== frame.referenceFrame || loadedFrame.epochJdTt !== frame.epochJdTt) {
         throw new TypeError('Prepared volume datasets must share the universe reference frame and epoch.');
       }
       const pendingDataset = bank.pendingSelection;
-      if (pendingDataset !== undefined && !options.payload.datasets.some(dataset => dataset.id === pendingDataset)) {
+      if (pendingDataset !== undefined && !datasetIds.includes(pendingDataset)) {
         throw new TypeError(`Unknown prepared volume dataset: ${pendingDataset}.`);
       }
       const prepared = createPreparedVolumeDatasets(options);
@@ -160,6 +165,11 @@ export function createUniverseDatasetBanks({ root, end, frontRoot, frontEnd, lif
       updateWeight(bank);
       trimWarmResidency();
       requestPublication?.();
+    }).catch((error: unknown) => {
+      // A bank that cannot be read is asked for again on a later view; its failure is said once for each cause, by name.
+      const cause = error instanceof Error ? error.message : String(error);
+      if (bank.failure !== cause) { bank.failure = cause; console.error(`Volume dataset bank ${bank.id} could not be loaded.`, error); }
+      throw error;
     }).finally(() => { if (bank.loading === loading) bank.loading = null; });
     bank.loading = loading;
     return loading;

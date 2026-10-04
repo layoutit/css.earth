@@ -1,4 +1,6 @@
 import { DENSITY_VOLUME_DATASET_BANK_SOURCE_SCHEMA } from '@cssearth/objects';
+import { PREPARED_VOLUME_DATASET_INDEX_SCHEMA } from '@cssearth/objects';
+import { writeVolumeDatasetBank } from '@cssearth/objects/node';
 import { OBJECT_SCHEMA, PREPARED_OBJECT_SCHEMA, PREPARED_VOLUME_DATASETS_SCHEMA, DENSITY_VOLUME_FORMAT, parsePreparedDensityVolumeText, parseDensityVolumeObjectDescriptor, validatePreparedVolumeDatasets, type PreparedCssVolume } from '@cssearth/objects';
 /**
  * Package an already-prepared physical density volume as one selectable dataset.
@@ -180,7 +182,6 @@ export async function promoteDensityVolumeDatasetBank(request: DensityVolumeData
     framingRadiusUnits: request.framingRadiusUnits, contextVisibility: 'independent', starsEnabled: false,
     ...(request.attachedTo === undefined ? {} : { attachedTo: request.attachedTo }),
     provenance, datasets });
-  const envelope = json({ schema: PREPARED_OBJECT_SCHEMA, id: request.id, type: 'volume-dataset-bank', format: PREPARED_VOLUME_DATASETS_SCHEMA, data });
   const delivery = json({ schema: DENSITY_VOLUME_DATASET_BANK_SOURCE_SCHEMA,
     ...(request.attachedTo === undefined ? {} : { attachedTo: request.attachedTo }),
     ...(sourceReceipts.length === 1 ? { source: sourceReceipts[0] } : { sources: sourceReceipts }),
@@ -197,10 +198,10 @@ export async function promoteDensityVolumeDatasetBank(request: DensityVolumeData
     const output = local(destinationDirectory, `prepared/${requestSource.datasetId}/${resource.path}`);
     await mkdir(dirname(output), { recursive: true }); await writeFile(output, bytes);
   }
-  await writeFile(preparedOutput, envelope);
+  await writeVolumeDatasetBank(dirname(preparedOutput), data);
   const destinationDescriptor = json({ schema: OBJECT_SCHEMA, id: request.id, type: 'volume-dataset-bank', properties: {
     frame: presentationFrame, preparation: { source: 'source/delivery.json' },
-  }, prepared: { format: PREPARED_VOLUME_DATASETS_SCHEMA, url: 'prepared/datasets.json' } });
+  }, prepared: { format: PREPARED_VOLUME_DATASET_INDEX_SCHEMA, url: 'prepared/datasets.json' } });
   const destinationDescriptorPath = local(destinationDirectory, 'object.json');
   await writeFile(destinationDescriptorPath, destinationDescriptor);
   return Object.freeze({ descriptorPath: destinationDescriptorPath, preparedPath: preparedOutput, deliveryPath,

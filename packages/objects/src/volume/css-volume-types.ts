@@ -52,6 +52,7 @@ export interface PreparedCssVolume {
   readonly anchors?: readonly { readonly id: string; readonly positionUnits: VolumeVector }[];
   readonly stacks: readonly PreparedVolumeStack[];
   readonly resources: readonly { readonly path: string; readonly bytes: number; readonly width: number; readonly height: number }[];
+  /** How the volume was made. A bake writes both; in the file a page fetches both are absent (volume-dataset-bank-files.ts). */
   readonly provenance: unknown;
   readonly approximation: unknown;
   readonly sky?: PreparedCssSky;
