@@ -31,7 +31,7 @@ import { CONTEXT_ROUTE, DATASET_ROUTES } from '@cssearth/objects/provenance';
 const SCENE_OBJECTS = readPreparedObjects(resolve(import.meta.dirname, '../../..')).sceneObjects;
 
 export const explorationCompilerClosure = [
-  'site/build/prepare/prepare-facilities.mts', 'packages/bake/src/sources/spatial-source-citations.ts', 'packages/catalog/src/spatial.ts', 'packages/objects/src/prepared-data/galaxy-catalog.ts', 'packages/objects/src/prepared-data/spatial-relations.ts', 'packages/objects/src/prepared-data/cluster-catalog.ts', 'packages/objects/src/provenance/exploration-catalog.ts', 'packages/objects/src/provenance/exploration-contributions.ts',
+  'site/build/prepare/prepare-facilities.mts', 'packages/bake/src/sources/spatial-source-citations.ts', 'packages/catalog/src/spatial.ts', 'packages/objects/src/prepared-data/catalogue/galaxy-catalog.ts', 'packages/objects/src/prepared-data/catalogue/spatial-relations.ts', 'packages/objects/src/prepared-data/catalogue/cluster-catalog.ts', 'packages/objects/src/provenance/exploration-catalog.ts', 'packages/objects/src/provenance/exploration-contributions.ts',
   'packages/objects/src/provenance/prepared-exploration.ts', 'packages/objects/src/provenance/object-lineage.ts', 'packages/objects/src/provenance/product-input-evidence.ts', 'packages/objects/src/node/prepared-registry.ts', 'packages/objects/src/registry/object-schema.ts',
   'packages/objects/src/registry/object-catalog.ts', 'site/prepared-catalogue.mjs', 'site/build/prepare/prepare-catalog.mts', 'packages/objects/src/node/catalog-directory.ts',
   'packages/objects/src/registry/navigable-object.ts', 'packages/objects/src/registry/navigation-distance.ts', 'packages/bake/src/navigation/navigation-destinations.ts',

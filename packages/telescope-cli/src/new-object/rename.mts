@@ -10,9 +10,9 @@
 import { readdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { requireArray, requireRecord } from '@cssearth/core';
-import type { Archive } from './archives.mts';
+import type { Archive } from './archives/archives.mts';
 import { preferredName, PROPER_STEPS, simbadIdentifiers } from './display-name.mts';
-import { readIauNames } from './iau-names.mts';
+import { readIauNames } from './archives/iau-names.mts';
 import { STORED_SPEC } from './refresh.mts';
 
 type Stored = Record<string, unknown>;

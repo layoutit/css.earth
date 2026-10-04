@@ -10,7 +10,7 @@ import { resolve } from 'node:path';
 import { scaffoldHostedPlanetFiles, TODO as HOSTED_TODO } from './new-hosted-planet.mts';
 import { readCie1931ColorMatching } from '@cssearth/bake/objects/sources';
 import { parseCieTable } from '@cssearth/bake/objects/color';
-import { citedName, isCollaboration, type Archive, type Publication } from './archives.mts';
+import { citedName, isCollaboration, type Archive, type Publication } from './archives/archives.mts';
 import { CHECKED, planckChoice } from './color.mts';
 import { bindInputs, installColorDataset, json, type PackageFiles } from './dataset.mts';
 import { quoteSource } from './prose.mts';

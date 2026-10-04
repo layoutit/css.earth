@@ -5,7 +5,7 @@ import { mkdir, mkdtemp, readFile, readdir, rm, writeFile } from 'node:fs/promis
 import { tmpdir } from 'node:os';
 import { dirname, join } from 'node:path';
 import test from 'node:test';
-import type { Archive } from './archives.mts';
+import type { Archive } from './archives/archives.mts';
 import { starLimb } from './star-limb.mts';
 
 // Claret & Bloemen (2011), J/A+A/529/A75 table-af, the Johnson V nodes around 6,432 K and log g 4.37 as VizieR serves them, 2026-10-03.

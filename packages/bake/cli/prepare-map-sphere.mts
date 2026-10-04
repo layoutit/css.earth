@@ -13,7 +13,7 @@ import { createSurfacePatches } from '../src/surface-geometry/index.ts';
  * Galactic coordinates), `samplesPerTexel`² samples averaged, through the same projective mapping PolyCSS draws the tile
  * with, and with a one-texel border sampled past the patch; each leaf reaches into that border, so neighbouring patches
  * overlap by a texel and no seam opens between them. The atlas goes through the lossy lane. Writes `prepared/<id>.json`
- * (`IMAGE_MESH_SCHEMA`, parsed by `parseImageMesh` in packages/objects/src/prepared-data/image-mesh.ts) and `prepared/<id>/<id>.webp`. A recipe
+ * (`IMAGE_MESH_SCHEMA`, parsed by `parseImageMesh` in packages/objects/src/prepared-data/presentation/image-mesh.ts) and `prepared/<id>/<id>.webp`. A recipe
  * `cutaway` marks the patches of the hemisphere it opens; the runtime hides them and draws the rest's inside behind what
  * the sphere holds, or shows the whole sphere. Its `datasets` are the page's datasets of the sphere, whole or cut open:
  * `prepared/datasets.json` carries their card text, the color table's legend and a picture of each view

@@ -10,14 +10,14 @@ const root = fileURLToPath(new URL('../../../', import.meta.url));
 // Generic object/text/number helper wording is shared by unrelated formats and is not an ownership marker.
 const contracts = [
   {
-    "owner": "packages/objects/src/prepared-data/solar-system-preparation.ts",
+    "owner": "packages/objects/src/prepared-data/orbit/solar-system-preparation.ts",
     "diagnostics": [
       "solar-system source must be an object.",
       "Solar-system source is invalid."
     ]
   },
   {
-    "owner": "packages/objects/src/prepared-data/investigation-ledger.ts",
+    "owner": "packages/objects/src/prepared-data/source/investigation-ledger.ts",
     "diagnostics": [
       "expects objectId",
       "expects facilityId",
@@ -28,7 +28,7 @@ const contracts = [
     ]
   },
   {
-    "owner": "packages/objects/src/prepared-data/acquisition-plan.ts",
+    "owner": "packages/objects/src/prepared-data/source/acquisition-plan.ts",
     "diagnostics": [
       "Expected acquisition object.",
       "Invalid acquisition plan.",
@@ -57,7 +57,7 @@ const contracts = [
     ]
   },
   {
-    "owner": "packages/objects/src/prepared-data/css-geometry-profile.ts",
+    "owner": "packages/objects/src/prepared-data/presentation/css-geometry-profile.ts",
     "diagnostics": [
       "needs an asset and positive raster dimensions.",
       "Unsupported geometry profile.",
@@ -80,7 +80,7 @@ const contracts = [
     ]
   },
   {
-    "owner": "packages/objects/src/prepared-data/paged-ellipsoid.ts",
+    "owner": "packages/objects/src/prepared-data/presentation/paged-ellipsoid.ts",
     "diagnostics": [
       ", which preparation derives.",
       ": paged ellipsoid zoom limit needs atlas.sourceWidth, atlas.density and textureLevels.texelsPerCssPixel; found",
@@ -88,7 +88,7 @@ const contracts = [
     ]
   },
   {
-    "owner": "packages/objects/src/prepared-data/chart-assets.ts",
+    "owner": "packages/objects/src/prepared-data/photometry/chart-assets.ts",
     "diagnostics": [
       "Unsafe chart source path.",
       "${label} must contain finite samples.",
@@ -109,7 +109,7 @@ const contracts = [
     ]
   },
   {
-    "owner": "packages/objects/src/prepared-data/chart-measured-spectrum.ts",
+    "owner": "packages/objects/src/prepared-data/photometry/chart-measured-spectrum.ts",
     "diagnostics": [
       "Spectrum path must stay inside the source directory.",
       "Invalid measured-spectrum axis.",
@@ -120,7 +120,7 @@ const contracts = [
     ]
   },
   {
-    "owner": "packages/objects/src/prepared-data/chart-retrieved-profile.ts",
+    "owner": "packages/objects/src/prepared-data/photometry/chart-retrieved-profile.ts",
     "diagnostics": [
       "Profile path must stay inside the source directory.",
       "Invalid profile row count or column.",
@@ -135,13 +135,13 @@ const contracts = [
     ]
   },
   {
-    "owner": "packages/objects/src/prepared-data/chart-system-orbits.ts",
+    "owner": "packages/objects/src/prepared-data/photometry/chart-system-orbits.ts",
     "diagnostics": [
       ": a system-orbits chart has kind system-orbits and a lowercase id."
     ]
   },
   {
-    "owner": "packages/objects/src/prepared-data/chart-spectrum.ts",
+    "owner": "packages/objects/src/prepared-data/photometry/chart-spectrum.ts",
     "diagnostics": [
       "source must be text.",
       "Invalid spectrum sampling profile.",
@@ -152,7 +152,7 @@ const contracts = [
     ]
   },
   {
-    "owner": "packages/objects/src/volume/nebula-depth-model.ts",
+    "owner": "packages/objects/src/volume/nebula/nebula-depth-model.ts",
     "diagnostics": [
       "Invalid depth-model pair.",
       "Invalid evidence-addressed depth surface.",

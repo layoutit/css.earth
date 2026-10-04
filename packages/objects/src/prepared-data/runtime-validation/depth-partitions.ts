@@ -1,6 +1,6 @@
 import { array, fail, integer, numbers, record } from './guards.js';
 import { ancestor, nodeReference } from './resources-tree.js';
-import type { PreparedTree } from '../runtime-presentation-types.js';
+import type { PreparedTree } from '../presentation/runtime-presentation-types.js';
 
 export function requireDepthPartitions(value: unknown, tree: PreparedTree): number[] {
   if (value === undefined) return [];

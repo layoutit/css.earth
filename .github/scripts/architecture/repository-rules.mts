@@ -46,7 +46,8 @@ export function objectCodeFiles(files: readonly string[]): string[] {
   return files.filter(file => OBJECT_CODE.test(file) && !isTestPath(file)).map(file => `${file}: object packages hold data only; put code in packages/ or site/`);
 }
 
-/** Only established format owners may be top-level objects source folders. */
+/** Only established format owners may be top-level objects source folders. Format-area subfolders
+ * inherit their owner: prepared-data and volume remain data-only at every depth. */
 export const OBJECT_FORMAT_FOLDERS: readonly string[] = ["node", "prepared-data", "provenance", "registry", "sources", "stars", "volume"];
 export function objectFormatFolders(root: string): string[] {
   const directory = resolve(root, 'packages/objects/src');

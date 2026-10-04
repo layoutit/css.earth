@@ -4,17 +4,17 @@ import test from 'node:test';
 const source = (path: string) => readFileSync(new URL(path, import.meta.url), 'utf8');
 
 test('objects readers retain shared policy and arithmetic calls', () => {
-  const disc = source('./disc-integrated-color.ts');
+  const disc = source('./photometry/disc-integrated-color.ts');
   assert.match(disc, /parseDiscColor\(value, \{ acceptance: 'photometry' \}\)/u);
   assert.match(disc, /parseDiscColorRecord = \(value: unknown\): DiscColorRecord => parseDiscColor\(value\)/u);
-  const camera = source('./camera-pose.ts');
+  const camera = source('./camera/camera-pose.ts');
   assert.match(camera, /return parseCameraPoseMatrix\(scene, \{ rotation: 'finite' \}\)/u);
   assert.equal(camera.match(/\.map\(Number\)/gu)?.length, 1);
-  assert.match(source('./published-limb-darkening.ts'), /limbIntensity\(0, law\)/u);
-  const window = source('../volume/emission-window.ts');
+  assert.match(source('./photometry/published-limb-darkening.ts'), /limbIntensity\(0, law\)/u);
+  const window = source('../volume/emission/emission-window.ts');
   assert.match(window, /convexWindowEdges\(/u);
   assert.doesNotMatch(window, /function edges|Math\.hypot/u);
-  const compact = source('../volume/compact-finite-emission.ts');
+  const compact = source('../volume/compact/compact-finite-emission.ts');
   for (const call of ['parseCloudAppearance(input.appearance)', 'validateChannelGain(dataset.channelGain)', 'validateDatasetToneCurve(dataset.toneCurve)', 'readCompactToneProjection(input.toneProjection)']) assert.ok(compact.includes(call), call);
 });
 
@@ -31,7 +31,7 @@ function assertSharedReaders(path: string, expected: Readonly<Record<string, str
       assert.ok(ts.isImportDeclaration(declaration) && ts.isStringLiteral(declaration.moduleSpecifier));
       const owner = declaration.moduleSpecifier.text;
       const original = (node.propertyName ?? node.name).text;
-      if (path === './object-content.ts' && owner === '@cssearth/core/schema') {
+      if (path === './content/object-content.ts' && owner === '@cssearth/core/schema') {
         // Object-content also imports distinct schema combinators under their canonical names.
         assert.equal(original, node.name.text);
         assert.ok(['object', 'array', 'number'].includes(original));
@@ -64,6 +64,6 @@ function assertSharedReaders(path: string, expected: Readonly<Record<string, str
 }
 
 test('panel callers import their primitives without local redefinitions', () => {
-  assertSharedReaders('./prepared-content.ts', Object.fromEntries(primitives.map(name => [name, name])));
-  assertSharedReaders('./object-content.ts', { preparedObject: 'object', preparedText: 'text', preparedArray: 'array' });
+  assertSharedReaders('./content/prepared-content.ts', Object.fromEntries(primitives.map(name => [name, name])));
+  assertSharedReaders('./content/object-content.ts', { preparedObject: 'object', preparedText: 'text', preparedArray: 'array' });
 });

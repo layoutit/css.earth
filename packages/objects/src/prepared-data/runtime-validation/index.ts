@@ -1,15 +1,15 @@
-import { OBJECT_RUNTIME_SCHEMA } from '../object-controls.js';
-import type { ObjectRuntimeDefinition } from '../object-runtime-types.js';
+import { OBJECT_RUNTIME_SCHEMA } from '../runtime/object-controls.js';
+import type { ObjectRuntimeDefinition } from '../runtime/object-runtime-types.js';
 import { choice, fail, parsedJsonNumbersFinite, record, requireJsonData, text } from './guards.js';
 import { requireAssets, requireTree } from './resources-tree.js';
 import { requireCamera } from './camera.js';
 import { requireControls } from './controls.js';
-import { validatePreparedCubicSky, validateDirectionalSunPlan } from '../sky-contract.js';
+import { validatePreparedCubicSky, validateDirectionalSunPlan } from '../sky/sky-contract.js';
 import { requireMaterials } from './materials.js';
 import { requireAnimations, requireOptionalPresentation, requireVariants, requireViewBindings } from './presentation.js';
 import { requireTextureLevels } from './prepared-texture-levels.js';
 import { requireDepthPartitions } from './depth-partitions.js';
-import { requireDeferredDatasets } from '../dataset-tables.js';
+import { requireDeferredDatasets } from '../content/dataset-tables.js';
 
 /** Validate external prepared JSON before any DOM, image, or animation is created.
  * `parsedJson` marks a direct JSON.parse result: only its numbers need the

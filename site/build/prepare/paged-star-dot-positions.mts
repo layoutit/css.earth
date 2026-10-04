@@ -27,7 +27,7 @@ const worldPath = resolve(objects, 'sun/prepared/world-context.json');
 const world = parsePreparedWorldContextPlan(JSON.parse(await readFile(worldPath, 'utf8')));
 const bodies = new Map(world.bodies.map(body => [body.id, body]));
 /** The object a body is inside past any system: its own, or the one of the star it is bound to (each row's `inside`,
- * packages/objects/src/prepared-data/world-holders.ts `insideOf`). */
+ * packages/objects/src/prepared-data/world/world-holders.ts `insideOf`). */
 const holderOf = (id: string): string | undefined => {
   let at = bodies.get(id)?.inside;
   for (let host = at === undefined ? null : systemHostId(at); host !== null; host = at === undefined ? null : systemHostId(at)) at = bodies.get(host)?.inside;
@@ -44,7 +44,7 @@ for (const [bankId, descriptor] of await readObjectDescriptors(objects)) {
   if (recipe.frame?.referenceFrame !== world.frame.referenceFrame || recipe.frame.epochJdTt !== world.frame.epochJdTt) {
     throw new TypeError(`${recipePath} frames its table in ${String(recipe.frame?.referenceFrame)} at JD ${String(recipe.frame?.epochJdTt)}; the world context is in ${world.frame.referenceFrame} at JD ${world.frame.epochJdTt}.`);
   }
-  // The same stars the world leaves to its dot banks (packages/objects/src/prepared-data/world-holders.ts `plainStar`).
+  // The same stars the world leaves to its dot banks (packages/objects/src/prepared-data/world/world-holders.ts `plainStar`).
   const rows: string[] = [];
   for (const body of [...world.bodies].sort((a, b) => a.id < b.id ? -1 : 1)) {
     if (body.classification !== 'star' || body.plainDot !== true || body.orbit || holderOf(body.id) !== host) continue;
