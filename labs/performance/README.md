@@ -134,9 +134,10 @@ capture. Use a profiled capture to name what runs in a frame; never to count lat
 count.
 
 `--program` picks the input: `far-zoom` (the default: out of the subject and back, twice, 34 s), or one of the short
-ones for a hot interaction, `drag` (two throws and a held turn, 6.5 s), `zoom` (out and in, twice, 7 s) and `fly`
-(two flights, 7 s). A JSON list of steps gives another: `["wheel", frames, deltaY]`, `["wait", frames]`,
-`["drag", frames, dx, dy, "fling"|"hold"]`, `["fly", "<object id>"]`, `["click", "<selector>", index]`.
+ones for a hot interaction, `drag` (two throws and a held turn, 6.5 s), `zoom` (out and in, twice, 7 s), `fly`
+(two flights, 7 s) and `datasets` (a body's first three datasets through the card's list, 6.5 s). A JSON list of steps
+gives another: `["wheel", frames, deltaY]`, `["wait", frames]`, `["drag", frames, dx, dy, "fling"|"hold"]`,
+`["fly", "<object id>"]`, `["click", "<selector>", index]`, `["pick", "<select's selector>", option index]`.
 
 `--trace` runs the program once with the Inspector's timeline attached instead, and writes `trace.devtools.json` for
 Chrome DevTools' Performance panel: cut to the run, with a time stamp at each step, every frame in the Frames track and
