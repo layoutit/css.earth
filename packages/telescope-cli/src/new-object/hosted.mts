@@ -103,19 +103,18 @@ export async function hostedRecord(spec: HostedSpec, host: { readonly spec: Star
     if (!picked) throw new Error(`${spec.id}: give ${label} with its source; no archive row supplies it.`);
     return { value: picked.value, ...(picked.limit ? { limit: true as const } : {}), ...(picked.unmeasured ? { unmeasured: true as const } : {}), source: picked.unmeasured ? picked.row.label : `${picked.row.label}${picked.row.bibcode ? ` (${picked.row.bibcode})` : ''}, via the NASA Exoplanet Archive`, url: picked.row.url ?? 'https://exoplanetarchive.ipac.caltech.edu/' };
   };
-  const blackHole = spec.blackHole === true, unresolved = spec.unresolved === true;
-  const radius = blackHole || unresolved ? spec.radius : spec.radius ?? fromRow(assembled?.radius, 'radius'), mass = spec.mass ?? fromRow(assembled?.mass, 'mass');
+  const blackHole = spec.blackHole === true;
+  const radius = blackHole ? spec.radius : spec.radius ?? fromRow(assembled?.radius, 'radius'), mass = spec.mass ?? fromRow(assembled?.mass, 'mass');
   const star = spec.kind === 'companion', unit = star ? { r: SOLAR_RADIUS_KM, gm: GM_SUN, rn: 'solar radii', mn: 'solar masses', rper: 'km per solar radius', gmn: 'the JPL solar GM' }
     : { r: JUPITER_RADIUS_KM, gm: JUPITER_GM, rn: 'Jupiter radii', mn: 'Jupiter masses', rper: 'km per Jupiter radius', gmn: "JPL's Jupiter GM" };
   const radiusKm = radius ? radius.value * unit.r : 0, t = spec.temperature;
   const body = { id: spec.id, classification: blackHole ? 'black-hole' : star ? 'star' : 'exoplanet', order,
-    physical: { name: spec.name, horizonsCode: null, meanRadiusKm: fixed(radiusKm, 1), gravitationalParameterKm3PerS2: ('limit' in mass && mass.limit) || ('unmeasured' in mass && mass.unmeasured) ? 0 : fixed(mass.value * unit.gm, 2), parent: host.spec.id, ...(star && !blackHole && !unresolved ? { effectiveTemperatureK: t!.value } : {}) },
+    physical: { name: spec.name, horizonsCode: null, meanRadiusKm: fixed(radiusKm, 1), gravitationalParameterKm3PerS2: ('limit' in mass && mass.limit) || ('unmeasured' in mass && mass.unmeasured) ? 0 : fixed(mass.value * unit.gm, 2), parent: host.spec.id, ...(star && !blackHole ? { effectiveTemperatureK: t!.value } : {}) },
     physicalNotes: (radius ? `Radius ${radius.value}${radius.uncertainty ? ` +/- ${radius.uncertainty}` : ''} ${unit.rn} from ${radius.source} (${radius.url}): ${fixed(radiusKm, 1).toLocaleString('en-US')} km at ${unit.r.toLocaleString('en-US')} ${unit.rper}. `
-      : unresolved ? 'No source measures a size or a temperature for this star, so the radius is the records\' unmeasured 0 and it is drawn as a point. '
       : 'No source measures a size for this black hole (no shadow or horizon is resolved), so the radius is the records\' unmeasured 0 and it is drawn as a point. ')
       + ('unmeasured' in mass && mass.unmeasured ? `No mass is measured: ${mass.source} (${mass.url}), so GM is 0, the records' unpublished value.`
         : 'limit' in mass && mass.limit ? `No mass is measured: ${mass.source} (${mass.url}) gives only an upper limit of ${mass.value} ${unit.mn}, so GM is 0, the records' unpublished value.`
-        : `GM from the mass ${mass.value}${mass.uncertainty ? ` +/- ${mass.uncertainty}` : ''} ${unit.mn} (${mass.source}, ${mass.url}) times ${unit.gmn}.`) + `${t ? ` Temperature ${t.value}${t.uncertainty ? ` +/- ${t.uncertainty}` : ''} K from ${t.source} (${t.url}).` : ''}${blackHole || unresolved ? '' : ' A sphere: no oblateness is measured.'}`,
+        : `GM from the mass ${mass.value}${mass.uncertainty ? ` +/- ${mass.uncertainty}` : ''} ${unit.mn} (${mass.source}, ${mass.url}) times ${unit.gmn}.`) + `${t ? ` Temperature ${t.value}${t.uncertainty ? ` +/- ${t.uncertainty}` : ''} K from ${t.source} (${t.url}).` : ''}${blackHole ? '' : ' A sphere: no oblateness is measured.'}`,
     hostedOrbit: orbit };
   return { spec, hostId: host.spec.id, system: host.spec.system, body, order, orbit, orbitCitation: citation, radius, mass, documents, todo };
 }
@@ -123,7 +122,7 @@ export async function hostedRecord(spec: HostedSpec, host: { readonly spec: Star
 /** The package of a hosted body whose astronomy record is built into the astronomy package. */
 export async function hostedPackage(record: HostedRecord, hostBody: unknown, publications: Map<string, Publication>, archive: Archive, root: string, epochJdTt: number) {
   const { spec } = record, id = spec.id, o = `src/objects/${id}`, s = `${o}/source`, star = spec.kind === 'companion', t = spec.temperature;
-  if (spec.blackHole || spec.unresolved) throw new Error(`${id}: ${spec.blackHole ? 'a black hole' : 'an unresolved'} companion is an astronomy record only; it has no package.`);
+  if (spec.blackHole) throw new Error(`${id}: a black hole companion is an astronomy record only; it has no package.`);
   const radius = record.radius;
   if (!radius) throw new Error(`${id}: a packaged body needs its cited radius.`);
   const scaffold = scaffoldHostedPlanetFiles({ id, name: spec.name, system: record.system, description: spec.description, paper: spec.paper.url, paperCredit: spec.paper.credit, order: record.order,

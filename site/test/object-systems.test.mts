@@ -44,9 +44,7 @@ test('planetary systems follow prepared orbit chains to their stars', () => {
     ['gj-820-a', 'gj-820-a'], ['gj-820-b', 'gj-820-a'], ['alpha-centauri-b', 'alpha-centauri-a'], ['proxima-centauri', 'alpha-centauri-a']] as const) {
     assert.equal(systemOfObject(SCENE_OBJECTS, id)?.id, system, id);
   }
-  assert.equal(systemOfObject(SCENE_OBJECTS, 'r-doradus'), null, 'A star without orbiting bodies belongs to no system');
-  // A companion drawn from its record alone, with no package, still makes its star a system.
-  assert.deepEqual(systemById(SCENE_OBJECTS, 'betelgeuse')?.memberIds, ['siwarha']);
+  assert.equal(systemOfObject(SCENE_OBJECTS, 'betelgeuse'), null, 'A star without orbiting bodies belongs to no system');
   // A system inside another holds its own bodies, and the outer one holds them too.
   assert.deepEqual(systemById(SCENE_OBJECTS, 'eps-indi-ba')?.memberIds, ['eps-indi-bb']);
   assert.deepEqual([...systemById(SCENE_OBJECTS, 'eps-indi-a')!.memberIds].sort(), ['eps-indi-ab', 'eps-indi-ba', 'eps-indi-bb']);
@@ -110,11 +108,6 @@ test('a plan reads its systems from what its bodies are inside', () => {
   // The Earth put inside the Moon's system closes their chain into a loop.
   const cyclic = { ...APPLICATION_WORLD_CONTEXT, bodies: APPLICATION_WORLD_CONTEXT.bodies.map(body => body.id === 'earth' ? { ...body, inside: 'moon-system' } : body) };
   assert.throws(() => planetarySystemMembers(cyclic), /the chain of hosts is cyclic/);
-  // A body with no package starts the system of the star it orbits: before that system exists, the tree puts it where its star is.
-  const cygnus = APPLICATION_WORLD_CONTEXT.bodies.find(body => body.id === 'cygnus-x-1')!, star = APPLICATION_WORLD_CONTEXT.bodies.find(body => body.id === 'hd-226868')!;
-  assert.ok(cygnus.unpackaged && cygnus.orbit?.centerBodyId === 'hd-226868');
-  const unstarted = { ...APPLICATION_WORLD_CONTEXT, bodies: APPLICATION_WORLD_CONTEXT.bodies.map(body => body.id === 'cygnus-x-1' ? { ...body, inside: star.inside === 'hd-226868-system' ? 'milky-way' : star.inside } : body) };
-  assert.deepEqual(planetarySystemMembers(unstarted).find(system => system.id === 'hd-226868')?.memberIds, ['cygnus-x-1']);
   // Every row of the whole world says what it is inside, except a star alone or in its own system's file.
   const unplaced = APPLICATION_WORLD_CONTEXT.bodies.filter(body => body.inside === undefined);
   assert.ok(unplaced.length > 0 && unplaced.every(body => body.classification === 'star'), 'only a plain-dot star can lack it');

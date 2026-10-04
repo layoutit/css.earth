@@ -166,30 +166,3 @@ describe('Sirius B and Procyon B: white dwarfs on visual orbits', () => {
     }
   })
 })
-
-describe('Siwarha: Betelgeuse\'s companion', () => {
-  // Independent oracle: the direct detection the orbit's size and timing were not fitted to. Montarges et al. (2026, A&A 711,
-  // L12, https://doi.org/10.1051/0004-6361/202661023) found the companion 52.32 +/- 0.18 mas from Betelgeuse at position angle
-  // 117.12 +/- 0.60 degrees on 6 December 2024 (MJD 60650.19); the record takes its period, size and transit time from the
-  // radial velocities of MacLeod et al. (2025) and only its orientation on the sky from that detection.
-  const star = starAstrometry('betelgeuse'), sight = directionFromRaDec(star.rightAscensionDegrees, star.declinationDegrees)
-  const { east, north } = skyBasis(star.rightAscensionDegrees, star.declinationDegrees)
-  const masPerKm = 206264806.247 / (star.distanceParsecs * PARSEC_KM), radiusKm = BODIES.betelgeuse.meanRadiusKm
-  const sky = (bmjd: number) => {
-    const { positionKm, velocityKmPerDay } = hostedOrbitStateRelativeBmjdTdb(hostedOrbit('siwarha'), star, radiusKm, bmjd)
-    const e = dot(positionKm, east) * masPerKm, n = dot(positionKm, north) * masPerKm
-    return { separationMas: Math.hypot(e, n), positionAngle: (Math.atan2(e, n) * 180 / Math.PI + 360) % 360, awayKm: dot(positionKm, sight), recedingKmPerDay: dot(velocityKmPerDay, sight) }
-  }
-  it('is beside the star where SPHERE found it, moving away from the observer', () => {
-    const seen = sky(60650.19)
-    // The transit time is uncertain by about 128 days, a sixteenth of the orbit, which moves the companion by up to 8 mas here.
-    assert.ok(Math.abs(seen.separationMas - 52.32) < 8, `${seen.separationMas} mas`)
-    assert.ok(Math.abs(seen.positionAngle - 117.12) < 5, `${seen.positionAngle} degrees`)
-    assert.ok(seen.recedingKmPerDay > 0, 'receding quadrature')
-  })
-  it('crosses the disc at the 2023 transit and passes behind the star half a period later', () => {
-    const transit = sky(59983.5), eclipse = sky(59983.5 + 2109.2 / 2), discMas = radiusKm * masPerKm
-    assert.ok(transit.awayKm < 0 && transit.separationMas < discMas, `${transit.separationMas} of ${discMas} mas`)
-    assert.ok(eclipse.awayKm > 0 && eclipse.separationMas < discMas, `${eclipse.separationMas} of ${discMas} mas`)
-  })
-})

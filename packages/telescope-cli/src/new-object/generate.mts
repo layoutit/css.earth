@@ -482,8 +482,8 @@ export async function runNewObject(specPath: string, { root = process.cwd(), pro
       const record = await hostedRecord(entry, host, orders.get(entry.id)!, liveArchive, root);
       progress(`  ${entry.id}: orbit from ${'whereistheplanet' in entry.orbit ? `whereistheplanet ${entry.orbit.whereistheplanet}` : 'archive' in entry.orbit ? record.orbitCitation.label : 'record' in entry.orbit ? `its kept record (${record.orbitCitation.label})` : 'the cited elements'} (P ${record.orbit.periodDays} d, a/R* ${record.orbit.semiMajorAxisStellarRadii})${record.todo.length ? `; noted: ${record.todo.join('; ')}` : ''}`);
       if (!record.kept) await writeFile(resolve(root, `packages/astronomy/data/bodies/${entry.id}.json`), `${JSON.stringify(record.body, null, 1)}\n`);
-      // A black hole companion, or a star with no measured size, is its record alone: drawn in its star's system, with no package (spec.mts).
-      if (entry.blackHole || entry.unresolved) { recordsOnly.push(entry.id); results.push({ id: entry.id, kind: entry.kind, files: 1, todo: [], orbit: `cited elements (${record.orbitCitation.label}); astronomy record only` }); }
+      // A black hole companion is its record alone: drawn in its star's system, with no package (spec.mts).
+      if (entry.blackHole) { recordsOnly.push(entry.id); results.push({ id: entry.id, kind: entry.kind, files: 1, todo: [], orbit: `cited elements (${record.orbitCitation.label}); astronomy record only` }); }
       else hosted.push({ ...record, documents: Object.fromEntries(record.documents) });
     } catch (error) { failed(entry.id, entry.kind, error); }
   };

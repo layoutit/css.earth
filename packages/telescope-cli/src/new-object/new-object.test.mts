@@ -98,30 +98,6 @@ test('a black hole companion is a record only: a mass, no temperature, and no ra
   assert.equal(record.radius, undefined);
 });
 
-test('a companion star with no measured size is a record only: a star with a mass and an orbit, drawn as a point', async () => {
-  const cited = { value: 0.6, uncertainty: 0.14, source: 'MacLeod et al. (2025)', url: 'https://arxiv.org/abs/2409.11332' };
-  const orbit = { elements: { periodDays: 2109.2, semiMajorAxisStellarRadii: 2.3796, inclinationDegrees: 98, eccentricity: 0, transitTimeBmjdTdb: 59983.5, ascendingNodePositionAngleDegrees: 117.12 }, epoch: 'inferior-conjunction', source: 's', url: cited.url };
-  const faint = { id: 'test-faint', name: 'Test Faint', description: 'A companion.', paper: star.paper, unresolved: true, mass: cited, orbit };
-  const spec = parseStarSpec({ ...star, companions: [faint] }).companions[0]!;
-  assert.equal(spec.unresolved, true);
-  assert.throws(() => parseStarSpec({ ...star, companions: [{ ...faint, temperature: { ...cited, value: 1e4 } }] }), /no measured radius or temperature/u);
-  assert.throws(() => parseStarSpec({ ...star, companions: [{ ...faint, radius: cited }] }), /no measured radius or temperature/u);
-  assert.throws(() => parseStarSpec({ ...star, companions: [{ ...faint, mass: undefined }] }), /needs its cited mass/u);
-  assert.throws(() => parseStarSpec({ ...star, companions: [{ ...faint, blackHole: true }] }), /only a companion star may be unresolved/u);
-  assert.throws(() => parseStarSpec({ ...star, planets: [faint] }), /only a companion star may be unresolved/u);
-  const { hostedRecord, hostedPackage } = await import('./hosted.mts');
-  const host = { spec: { id: 'test-star', system: 'Test system' } as never, body: { physical: { meanRadiusKm: 531514800 }, star: { distanceParsecs: 168 } } };
-  const record = await hostedRecord(spec, host, 1, {} as Archive, root);
-  const body = record.body as { classification: string; physical: Record<string, unknown>; physicalNotes: string; hostedOrbit: Record<string, unknown> };
-  assert.equal(body.classification, 'star');
-  assert.equal(body.physical.meanRadiusKm, 0, 'no source measures its size');
-  assert.equal(body.physical.effectiveTemperatureK, undefined);
-  assert.match(body.physicalNotes, /No source measures a size or a temperature for this star/u);
-  assert.doesNotMatch(body.physicalNotes, /A sphere/u);
-  assert.equal(body.hostedOrbit.ascendingNodePositionAngleDegrees, 117.12);
-  await assert.rejects(hostedPackage(record, host.body, new Map(), {} as Archive, root, 2461286.5), /an unresolved companion is an astronomy record only/u);
-});
-
 test('a body another owner records is packaged from that record, and the spec\'s cited values must reproduce it', async () => {
   const s2 = JSON.parse(await readFile(resolve(root, 'packages/astronomy/data/bodies/s2.json'), 'utf8'));
   const cite = (value: number) => ({ value, source: 'Habibi et al. (2017), Table 3', url: 'https://arxiv.org/abs/1708.06353' });
