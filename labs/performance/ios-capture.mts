@@ -467,6 +467,61 @@ export function summariseSamples(stacks: readonly (readonly Frame[])[], name: (f
   return { samples: stacks.length, self: top(self, limit), inclusive: top(inclusive, limit) };
 }
 
+/**
+ * The iPad hands back a recording's first samples in order but with no time (`timestamp` 0), and times only the late
+ * ones. Its sampler takes a sample only while script runs, so an untimed sample is placed by the script time before it:
+ * the script spans the profiler reported between `from` and the first timed sample (`to` when none is timed) are shared
+ * equally among the untimed samples. Checked on two zooms, 2026-10-04: the samples of a page's parse landed within
+ * 0.05 s of that page's arrival in the network log, at 1.35 ms of script a sample.
+ */
+export function placeUntimedSamples<Sample extends { readonly timestamp: number }>(samples: readonly Sample[], spans: readonly (readonly [number, number])[], from: number, to: number): Sample[] {
+  const timed = samples.findIndex(sample => sample.timestamp > 0), count = timed < 0 ? samples.length : timed, end = timed < 0 ? to : samples[timed]!.timestamp;
+  // The spans as one union: a microtask reported inside another span counts once.
+  const ranges: [number, number][] = [];
+  for (const [start, stop] of spans.map(([start, stop]) => [Math.max(start, from), Math.min(stop, end)] as const).filter(([start, stop]) => stop > start).sort((a, b) => a[0] - b[0])) {
+    const last = ranges.at(-1);
+    if (last && start <= last[1]) last[1] = Math.max(last[1], stop); else ranges.push([start, stop]);
+  }
+  const total = ranges.reduce((sum, [start, stop]) => sum + stop - start, 0);
+  if (!count || !total) return [...samples];
+  const placed: Sample[] = [];
+  let range = 0, before = 0;
+  for (let index = 0; index < count; index++) {
+    const target = (index + .5) * total / count;
+    while (range < ranges.length - 1 && before + ranges[range]![1] - ranges[range]![0] < target) { before += ranges[range]![1] - ranges[range]![0]; range++; }
+    placed.push({ ...samples[index]!, timestamp: Math.min(ranges[range]![1], ranges[range]![0] + target - before) });
+  }
+  return [...placed, ...samples.slice(count)];
+}
+
+/** Each target's script samples in a recording's events (`page`, or the worker's id), the page's placed in time. */
+export function scriptSamples(moment: readonly Message[]) {
+  const sampled = new Map<string, { timestamp: number; frames: Frame[] }[]>();
+  const page = (method: string) => moment.filter(event => event.method === method && event.source === 'page' && isRecord(event.params)).map(event => event.params as Message);
+  for (const event of moment) {
+    if (event.method !== 'ScriptProfiler.trackingComplete' || !isRecord(event.params) || !isRecord(event.params.samples)) continue;
+    sampled.set(requireString(event.source, 'source'), requireArray(event.params.samples.stackTraces, 'stack traces').map(trace => requireRecord(trace, 'trace')).map(trace => ({
+      timestamp: typeof trace.timestamp === 'number' ? trace.timestamp : 0,
+      frames: requireArray(trace.stackFrames, 'frames').map(frame => requireRecord(frame, 'frame')).map(frame => ({ name: typeof frame.name === 'string' ? frame.name : '', url: typeof frame.url === 'string' ? frame.url : '',
+        line: typeof frame.line === 'number' ? frame.line : 0, column: typeof frame.column === 'number' ? frame.column : 0,
+        ...(isRecord(frame.expressionLocation) && typeof frame.expressionLocation.line === 'number' ? { at: frame.expressionLocation.line } : {}) })) })));
+  }
+  const samples = sampled.get('page'), from = page('ScriptProfiler.trackingStart')[0]?.timestamp, to = page('ScriptProfiler.trackingComplete')[0]?.timestamp;
+  if (samples && typeof from === 'number' && typeof to === 'number') {
+    sampled.set('page', placeUntimedSamples(samples, page('ScriptProfiler.trackingUpdate').flatMap(update => isRecord(update.event) &&
+      typeof update.event.startTime === 'number' && typeof update.event.endTime === 'number' ? [[update.event.startTime, update.event.endTime] as const] : []), from, to));
+  }
+  return sampled;
+}
+
+/** Writes the page's samples as V8 profiles for `jankmonster hot <capture>/javascript.cpuprofile --lines --root <dist> --root site`;
+ * the second leaves each host function's time on the script line that called it. */
+async function writeScriptProfiles(out: string, samples: readonly { readonly timestamp: number; readonly frames: readonly Frame[] }[]) {
+  if (!samples.length) return;
+  await writeFile(resolve(out, 'javascript.cpuprofile'), JSON.stringify(cpuProfileFromSamples(samples)));
+  await writeFile(resolve(out, 'javascript.callers.cpuprofile'), JSON.stringify(cpuProfileFromSamples(samples, true)));
+}
+
 /** The device's sampled stacks (leaf first) as a V8 `.cpuprofile`, which `jankmonster hot` ranks by function and, with
  * `--lines`, by source line. A host function (`freeze`, `setAttribute`) has no line of its own: with `callers` its
  * samples are left on the script line that called it, so the lines table shows who pays for it. */
@@ -1861,25 +1916,9 @@ export async function captureIosMoment(args: readonly string[], deviceScreensSes
   session.close(); proxy?.kill();
 
   // Page side.
-  const stacks = new Map<string, Frame[][]>();
-  let pageSamples: { timestamp: number; frames: Frame[] }[] = [];
-  for (const event of moment) {
-    if (event.method !== 'ScriptProfiler.trackingComplete' || !isRecord(event.params) || !isRecord(event.params.samples)) continue;
-    const sampled = requireArray(event.params.samples.stackTraces, 'stack traces').map(trace => requireRecord(trace, 'trace')).map(trace => ({
-      timestamp: typeof trace.timestamp === 'number' ? trace.timestamp : 0,
-      frames: requireArray(trace.stackFrames, 'frames').map(frame => requireRecord(frame, 'frame')).map(frame => ({ name: typeof frame.name === 'string' ? frame.name : '', url: typeof frame.url === 'string' ? frame.url : '',
-        line: typeof frame.line === 'number' ? frame.line : 0, column: typeof frame.column === 'number' ? frame.column : 0,
-        ...(isRecord(frame.expressionLocation) && typeof frame.expressionLocation.line === 'number' ? { at: frame.expressionLocation.line } : {}) })) }));
-    const source = requireString(event.source, 'source');
-    if (source === 'page') pageSamples = sampled;
-    stacks.set(source === 'page' ? 'page' : `worker ${workers.get(source) ?? source}`, sampled.map(sample => sample.frames));
-  }
-  // The page's samples as V8 profiles for `jankmonster hot <capture>/javascript.cpuprofile --lines --root <dist> --root site`;
-  // the second leaves each host function's time on the script line that called it.
-  if (pageSamples.length) {
-    await writeFile(resolve(out, 'javascript.cpuprofile'), JSON.stringify(cpuProfileFromSamples(pageSamples)));
-    await writeFile(resolve(out, 'javascript.callers.cpuprofile'), JSON.stringify(cpuProfileFromSamples(pageSamples, true)));
-  }
+  const sampled = scriptSamples(moment);
+  const stacks = new Map([...sampled].map(([source, samples]) => [source === 'page' ? 'page' : `worker ${workers.get(source) ?? source}`, samples.map(sample => sample.frames)]));
+  await writeScriptProfiles(out, sampled.get('page') ?? []);
   const timelineRecords = moment.filter(event => event.method === 'Timeline.eventRecorded' && isRecord(event.params)).map(event => (event.params as Message).record);
   const scheduling = schedulingStacks(timelineRecords);
   const namer = await sourceNamer(option.dist);
@@ -2077,7 +2116,7 @@ if (import.meta.url === pathToFileURL(process.argv[1] ?? '').href) await main().
   process.exit(1);
 });
 
-/** --rebuild <capture dir>: remake trace.json from raw.json.gz and native.trace, the way the capture made it. */
+/** --rebuild <capture dir>: remake trace.json and the script profiles from raw.json.gz and native.trace, the way the capture made them. */
 export async function rebuildTrace(dir: string) {
   const raw = requireRecord(JSON.parse(gunzipSync(await readFile(resolve(dir, 'raw.json.gz'))).toString('utf8')), 'raw capture');
   const moment = requireArray(raw.moment, 'raw moment').filter(isRecord);
@@ -2091,6 +2130,7 @@ export async function rebuildTrace(dir: string) {
   const deviceSamples = isRecord(raw.deviceSamples) ? raw.deviceSamples as { graphics: unknown[]; webContent: unknown[] } : null;
   await writeFile(resolve(dir, 'trace.json'), JSON.stringify(traceEvents(timelineRecords, stopwatchEpochMs, deviceSamples, isRecord(raw.metadata) ? raw.metadata : {},
     { updates: cpuUpdates, workers }, nativeSamples, isRecord(raw.evidence) ? raw.evidence : {})) + '\n');
+  await writeScriptProfiles(dir, scriptSamples(moment).get('page') ?? []);
   console.log(`${dir}/trace.json rebuilt${nativeSamples ? `, ${nativeSamples.samples.length} native samples` : hasNative ? `, native export failed: ${exported && 'error' in exported.summary ? exported.summary.error.trim() : '?'}` : ''}`);
 }
 

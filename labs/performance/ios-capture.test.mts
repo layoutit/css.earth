@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
-import { navigatedAppReady, nativeRecordingClock, CALIBRATION_POINTS, captureMetrics, compareCaptures, solveAffine, touchPlan, comparePixels, formatComparison, options, devicePageProcess, jsonValues, traceEvents, timeProfileSamples, parseSteps, requireStepsFor, screenshotArtifact, sameCapturePage, summariseNumericSamples, schedulingStacks, summariseCpu, summariseInitiators, summariseSamples, summariseTimeProfile, summariseTimeline, cpuProfileFromSamples } from './ios-capture.mts';
+import { placeUntimedSamples, scriptSamples, navigatedAppReady, nativeRecordingClock, CALIBRATION_POINTS, captureMetrics, compareCaptures, solveAffine, touchPlan, comparePixels, formatComparison, options, devicePageProcess, jsonValues, traceEvents, timeProfileSamples, parseSteps, requireStepsFor, screenshotArtifact, sameCapturePage, summariseNumericSamples, schedulingStacks, summariseCpu, summariseInitiators, summariseSamples, summariseTimeProfile, summariseTimeline, cpuProfileFromSamples } from './ios-capture.mts';
 
 test('memory and residency evidence share the trace clock and preserve category units', () => {
   const trace = traceEvents([], 1000, null, {}, undefined, null, {
@@ -237,4 +237,27 @@ test("the device's samples become a V8 profile, and a host function's time can s
   const callers = cpuProfileFromSamples(samples, true);
   assert.deepEqual(callers.samples.map(id => name(callers, id).callFrame.functionName), ['parse', 'parse', 'parse']);
   assert.deepEqual(callers.nodes.find(node => node.callFrame.functionName === 'parse')!.positionTicks, [{ line: 22, ticks: 1 }, { line: 24, ticks: 2 }]);
+});
+
+test('samples the device hands back without a time are placed by the script time before them', () => {
+  const untimed = (name: string) => ({ timestamp: 0, name });
+  // 4 ms of script before the first timed sample: two spans of 1 ms, then one of 2 ms that holds a microtask of its own.
+  const spans = [[10, 10.001], [11, 11.001], [12, 12.002], [12.0005, 12.001], [20, 20.5]] as const;
+  const placed = placeUntimedSamples([untimed('a'), untimed('b'), untimed('c'), untimed('d'), { timestamp: 13, name: 'e' }], spans, 9, 30);
+  assert.deepEqual(placed.map(sample => [sample.name, Math.round(sample.timestamp * 1e4) / 1e4]), [['a', 10.0005], ['b', 11.0005], ['c', 12.0005], ['d', 12.0015], ['e', 13]]);
+  // With no timed sample the recording's end closes the spans; with no script span nothing is placed.
+  assert.deepEqual(placeUntimedSamples([untimed('a'), untimed('b')], [[10, 10.002], [40, 41]], 9, 30).map(sample => sample.timestamp), [10.0005, 10.0015]);
+  assert.deepEqual(placeUntimedSamples([untimed('a')], [], 9, 30), [untimed('a')]);
+
+  const frame = { name: 'tick', url: 'http://site.test/a.js', line: 3, column: 1 };
+  const page = (method: string, params: Record<string, unknown>) => ({ method, source: 'page', params });
+  const sampled = scriptSamples([
+    page('ScriptProfiler.trackingStart', { timestamp: 9 }),
+    page('ScriptProfiler.trackingUpdate', { event: { startTime: 10, endTime: 10.002, type: 'Other' } }),
+    { method: 'ScriptProfiler.trackingUpdate', source: 'worker:1', params: { event: { startTime: 5, endTime: 6, type: 'Other' } } },
+    page('ScriptProfiler.trackingComplete', { timestamp: 30, samples: { stackTraces: [{ timestamp: 0, stackFrames: [frame] }, { timestamp: 0, stackFrames: [frame] }] } }),
+    { method: 'ScriptProfiler.trackingComplete', source: 'worker:1', params: { timestamp: 30, samples: { stackTraces: [{ timestamp: 0, stackFrames: [frame] }] } } },
+  ]);
+  assert.deepEqual(sampled.get('page')!.map(sample => sample.timestamp), [10.0005, 10.0015]);
+  assert.deepEqual(sampled.get('worker:1')!.map(sample => sample.timestamp), [0]);
 });
