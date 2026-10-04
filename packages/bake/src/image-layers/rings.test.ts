@@ -30,6 +30,15 @@ function light(leaf: Texture, x: number, y: number): [number, number, number, nu
   return [leaf.data[at]! * alpha, leaf.data[at + 1]! * alpha, leaf.data[at + 2]! * alpha, alpha];
 }
 
+/** A leaf's light where a browser stretches its picture over the nebula, blending its cells: what it holds is color times opacity, rounded down. */
+function stretched(leaf: Texture, x: number, y: number): number[] {
+  const dx = x - leaf.origin[0]!, dy = y - leaf.origin[1]!, det = leaf.right[0]! * leaf.down[1]! - leaf.right[1]! * leaf.down[0]!;
+  const fx = (dx * leaf.down[1]! - dy * leaf.down[0]!) / det * leaf.width - .5, fy = (leaf.right[0]! * dy - leaf.right[1]! * dx) / det * leaf.height - .5, i0 = Math.floor(fx), j0 = Math.floor(fy), out = [0, 0, 0, 0];
+  for (const [i, j, w] of [[i0, j0, (1 - fx + i0) * (1 - fy + j0)], [i0 + 1, j0, (fx - i0) * (1 - fy + j0)], [i0, j0 + 1, (1 - fx + i0) * (fy - j0)], [i0 + 1, j0 + 1, (fx - i0) * (fy - j0)]] as const) {
+    const o = 4 * (Math.max(0, Math.min(leaf.height - 1, j)) * leaf.width + Math.max(0, Math.min(leaf.width - 1, i))), a = leaf.data[o + 3]!; out[3]! += w * a / 255; for (let c = 0; c < 3; c++) out[c]! += w * Math.floor(leaf.data[o + c]! * a / 255); }
+  return out;
+}
+
 test('a ring\'s plane comes toward the Sun where the far end of its axis points, and the two planes share the light between the published radii', () => {
   const { planes: [disc, ring] } = imageLayerRingsModel({ source: 'fixture', basis: 'fixture', disc: { radiusArcsec: 250, tiltDeg: 23, farAxisPaDeg: 288 }, ring: { radiusArcsec: 371, tiltDeg: 53, farAxisPaDeg: 168 } });
   // Depth is positive away from the Sun. The axis is the plane's normal, so the plane tips the other way.
@@ -182,30 +191,32 @@ test('rings with a thickness keep their detail on the sheets and spread their gl
       assert.ok(Math.abs(offsets[0]!) > 1 && Math.abs(offsets[0]!) < THICKNESS, `${leaf.id} at ${offsets[0]} arcsec from its plane`);
       return { ...(await texture(join(root, 'thick'), leaf)), plane, offset: offsets[0]! }; }));
     for (const plane of planes) { const offsets = drawn.filter(entry => entry.plane === plane).map(entry => entry.offset).sort((a, b) => a - b); assert.ok(Math.abs(offsets[0]! + offsets[offsets.length - 1]!) < 1e-3 && offsets.filter(offset => offset < 0).length === LAYERS / 2, `${plane.id}: as many in front as behind`); }
-    // A browser stretches the glow's picture over the nebula, blending its cells; what it holds is color times opacity, rounded down.
-    const blended = (glowing: Texture, x: number, y: number, depth: number) => { const sx = x * (1000 + depth * arcsec) / 1000, sy = y * (1000 + depth * arcsec) / 1000, dx = sx - glowing.origin[0]!, dy = sy - glowing.origin[1]!, det = glowing.right[0]! * glowing.down[1]! - glowing.right[1]! * glowing.down[0]!;
-      const fx = (dx * glowing.down[1]! - dy * glowing.down[0]!) / det * glowing.width - .5, fy = (glowing.right[0]! * dy - glowing.right[1]! * dx) / det * glowing.height - .5, i0 = Math.floor(fx), j0 = Math.floor(fy), out = [0, 0, 0, 0];
-      for (const [i, j, w] of [[i0, j0, (1 - fx + i0) * (1 - fy + j0)], [i0 + 1, j0, (fx - i0) * (1 - fy + j0)], [i0, j0 + 1, (1 - fx + i0) * (fy - j0)], [i0 + 1, j0 + 1, (fx - i0) * (fy - j0)]] as const) {
-        const o = 4 * (Math.max(0, Math.min(glowing.height - 1, j)) * glowing.width + Math.max(0, Math.min(glowing.width - 1, i))), a = glowing.data[o + 3]!; out[3]! += w * a / 255; for (let c = 0; c < 3; c++) out[c]! += w * Math.floor(glowing.data[o + c]! * a / 255); }
-      return out; };
     // The Sun's view at the picture's pixel centres: every layer on the sight line, nearest first.
     const [disc, ring] = await Promise.all(sheets.map(leaf => texture(join(root, 'thick'), leaf)));
     const whole = await texture(join(root, 'flat'), (reference.banks.find(entry => entry.axis === 'z')!.leaves as Leaf[]).find(leaf => leaf.id === 'z-detail')!);
     let lit = 0, glowing = 0, worst = 0, off = 0;
     for (let py = 1; py < SIZE; py += 2) for (let px = 1; px < SIZE; px += 2) {
       const east = (SIZE / 2 - 0.5 - px) * pixel, north = (SIZE / 2 - 0.5 - py) * pixel, x = east * arcsec, y = north * arcsec, expected = light(whole, x, y);
-      const onSight = [...drawn.map(entry => ({ depth: entry.plane.depth(east, north) + entry.offset, value: blended(entry, x, y, 0), glow: true })), { depth: planes[0].depth(east, north), value: light(disc!, x, y), glow: false }, { depth: planes[1].depth(east, north), value: light(ring!, x, y), glow: false }].sort((a, b) => a.depth - b.depth);
+      const onSight = [...drawn.map(entry => ({ depth: entry.plane.depth(east, north) + entry.offset, value: stretched(entry, x, y), glow: true })), { depth: planes[0].depth(east, north), value: light(disc!, x, y), glow: false }, { depth: planes[1].depth(east, north), value: light(ring!, x, y), glow: false }].sort((a, b) => a.depth - b.depth);
       const seen = [0, 0, 0]; let clear = 1, fromGlow = 0;
       for (const layer of onSight) { for (let c = 0; c < 3; c++) seen[c]! += clear * layer.value[c]!; clear *= 1 - layer.value[3]!; if (layer.glow && layer.value[3]! > 0) fromGlow++; }
       // The sheets are lossy pictures of what the glow leaves: a texel may be several levels off, the picture as a whole is not.
-      for (let c = 0; c < 3; c++) { const difference = Math.abs(seen[c]! - expected[c]!); worst = Math.max(worst, difference); off += difference / 3; assert.ok(difference < 12, `${east}, ${north}: channel ${c} shows ${seen[c]} for ${expected[c]}`); }
+      // Where the detail changes sheets, two pixels wide in a picture this small, the lossy edges of both sheets meet.
+      const changing = Math.abs(planes[0].share(east, north) - .5) < .25;
+      for (let c = 0; c < 3; c++) { const difference = Math.abs(seen[c]! - expected[c]!); worst = Math.max(worst, difference); off += difference / 3; assert.ok(difference < (changing ? 30 : 12), `${east}, ${north}: channel ${c} shows ${seen[c]} for ${expected[c]}`); }
       if (expected[3]) lit++; if (fromGlow > 1) glowing++;
     }
     assert.ok(lit > 200 && glowing > 100 && off / lit < 2, `${lit} lit, ${glowing} with glow at more than one depth; worst ${worst}, ${off / lit} off on average`);
+    // Detail is in one place: away from an even split a sight line's sheet light is on one sheet, the larger share's.
+    let single = 0;
+    for (let py = 1; py < SIZE; py += 2) for (let px = 1; px < SIZE; px += 2) { const east = (SIZE / 2 - 0.5 - px) * pixel, north = (SIZE / 2 - 0.5 - py) * pixel, share = planes[0].share(east, north);
+      if (!(share > 0 && share < 1) || Math.abs(share - .5) < .16 || !light(whole, east * arcsec, north * arcsec)[3]) continue;
+      const other = light(share > .5 ? ring! : disc!, east * arcsec, north * arcsec); assert.equal(other[3], 0, `${east}, ${north}: share ${share}`); single++; }
+    assert.ok(single > 20, `${single} sight lines between the radii with their detail on one sheet`);
     // The knots are on the sheets, not in the glow: the glow under the bright knot is no brighter than across the star
     // from it, where the picture is the same but for the knot.
     const knot = [(SIZE / 2 - 0.5 - 38) * pixel * arcsec, (SIZE / 2 - 0.5 - 30) * pixel * arcsec] as const, beside = [-knot[0], -knot[1]] as const;
-    const through = (place: readonly [number, number]) => drawn.reduce((sum, entry) => sum + blended(entry, place[0], place[1], 0)[2]!, 0);
+    const through = (place: readonly [number, number]) => drawn.reduce((sum, entry) => sum + stretched(entry, place[0], place[1])[2]!, 0);
     assert.ok(through(knot) <= through(beside) * 1.1 && light(disc!, knot[0], knot[1])[2] > light(disc!, beside[0], beside[1])[2] + 10, `the knot is on the disc's sheet: glow ${through(knot)} and ${through(beside)}, sheet ${light(disc!, knot[0], knot[1])[2]} and ${light(disc!, beside[0], beside[1])[2]}`);
     // The glow is a bell about the plane: the drawings nearest it hold the most.
     const strength = (leaf: Texture) => { let sum = 0; for (let o = 3; o < leaf.data.length; o += 4) sum += leaf.data[o]!; return sum; }, ofRing = drawn.filter(entry => entry.plane === planes[1]).sort((a, b) => Math.abs(a.offset) - Math.abs(b.offset));

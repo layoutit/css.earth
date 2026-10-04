@@ -15,6 +15,13 @@ const LEAST_CELLS = 2;
  * shown within about 27° of the sight line, the angle whose tangent is one over this. Farther round a ring can stand
  * edge-on, where layers parallel to it show nothing and the curtains do. */
 export const RINGS_FACE_ON_STEP = 2;
+/** A knot or a filament is in one place, so a sheet's detail is not shared as the glow is: it lies on the structure
+ * with the larger share of its sight line's light. Within this much of an even split the two sheets share it, so no
+ * edge shows from the Sun where the detail changes planes. Shared in proportion, every knot between the two radii
+ * showed twice once the camera turned, once on each plane. */
+const DETAIL_SHARED_WITHIN = 0.15;
+/** The disc sheet's part of a sight line's detail, from the disc's share of its light. */
+const detailOnDisc = (share: number) => { const t = Math.max(0, Math.min(1, (share - .5) / (2 * DETAIL_SHARED_WITHIN) + .5)); return t * t * (3 - 2 * t); };
 
 /** The rings' glow on a grid of cells over the picture's light: each channel's optical depth for each cell and
  * structure (disc, then ring). */
@@ -95,8 +102,9 @@ export function imageLayerRingsCurtains(cells: RingsCells, structure: number, ax
 
 /** The two sheets, disc then ring, as RGBA over the whole face: what the photograph has left once the glow shows, so
  * that from the Sun glow and sheets together are the photograph. `drawn` are each structure's glow images as a browser
- * holds them (the encoded images read back). Each sheet's opacity is a smooth cover over its light
- * (`imageLayerRingsCover`), and what it hides of the glow behind it is added to its own light. */
+ * holds them (the encoded images read back). The glow is shared between the structures in proportion; what is left
+ * goes to the sheet of the structure with the larger share (`DETAIL_SHARED_WITHIN`). Each sheet's opacity is a smooth
+ * cover over its light (`imageLayerRingsCover`), and what it hides of the glow behind it is added to its own light. */
 export function imageLayerRingsSheets(rgba: Buffer, width: number, height: number, east: Across, north: Across, model: Model, cells: RingsCells, glow: readonly [RingsGlow, RingsGlow], drawn: readonly Buffer[][]): [Buffer, Buffer] {
   const { left, top, cell, cols, rows } = cells, count = width * height, texels = cols * rows;
   // Each glow image as a browser draws it: color times opacity in whole numbers, rounded down.
@@ -109,7 +117,7 @@ export function imageLayerRingsSheets(rgba: Buffer, width: number, height: numbe
   /** One pixel's sheets: their light (color times opacity, 0 to 1) by structure and channel into `light`. */
   const solve = (px: number, py: number): number => {
     const p = py * width + px, a = Math.min(rgba[4 * p + 3]! / 255, .998); light.fill(0); if (!a) return 0;
-    const e = at(east, px, py), n = at(north, px, py), onDisc = model.planes[0].share(e, n); shares[0] = onDisc > 0 ? 1 - (1 - a) ** onDisc : 0; shares[1] = onDisc < 1 ? 1 - (1 - a) ** (1 - onDisc) : 0;
+    const e = at(east, px, py), n = at(north, px, py), onDisc = detailOnDisc(model.planes[0].share(e, n)); shares[0] = onDisc; shares[1] = 1 - onDisc;
     // Each glow image here, as a browser blends the four cells around the pixel: its light and opacity.
     const fx = (px + .5 - left) / cell - .5, fy = (py + .5 - top) / cell - .5, i0 = Math.floor(fx), j0 = Math.floor(fy), tx = fx - i0, ty = fy - j0, ia = Math.max(0, Math.min(cols - 1, i0)), ib = Math.max(0, Math.min(cols - 1, i0 + 1)), ja = Math.max(0, Math.min(rows - 1, j0)), jb = Math.max(0, Math.min(rows - 1, j0 + 1));
     corner[0] = 4 * (ja * cols + ia); corner[1] = 4 * (ja * cols + ib); corner[2] = 4 * (jb * cols + ia); corner[3] = 4 * (jb * cols + ib);
@@ -125,8 +133,8 @@ export function imageLayerRingsSheets(rgba: Buffer, width: number, height: numbe
       const o = 4 * layer.image, into = blended[structure]!; if (!(into[o + 3]! > 0)) continue;
       for (let c = 0; c < 3; c++) seen[c]! += clear * into[o + c]!;
       clear *= 1 - into[o + 3]!; }
-    let brightest = 0; const whole = shares[0]! + shares[1]!;
-    for (let c = 0; c < 3; c++) { const owed = Math.max(0, rgba[4 * p + c]! / 255 * a - seen[c]!); for (let s = 0; s < 2; s++) { if (!(shares[s]! > 0)) continue; const value = owed * shares[s]! / whole / Math.max(clearTo[s]!, 1e-3); light[3 * s + c] = value; brightest = Math.max(brightest, value); } }
+    let brightest = 0;
+    for (let c = 0; c < 3; c++) { const owed = Math.max(0, rgba[4 * p + c]! / 255 * a - seen[c]!); for (let s = 0; s < 2; s++) { if (!(shares[s]! > 0)) continue; const value = owed * shares[s]! / Math.max(clearTo[s]!, 1e-3); light[3 * s + c] = value; brightest = Math.max(brightest, value); } }
     return brightest; };
   // First with clear sheets, for how opaque each has to be; then with those opacities, for what each shows.
   for (let py = 0; py < height; py++) for (let px = 0; px < width; px++) if (solve(px, py) > 0) { const p = py * width + px; for (let s = 0; s < 2; s++) opacity[s]![p] = 255 * Math.min(1, Math.max(light[3 * s]!, light[3 * s + 1]!, light[3 * s + 2]!)); }
