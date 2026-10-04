@@ -53,18 +53,18 @@
     "controls": [
       {
         "id": "thermal",
-        "label": "Expected glow",
-        "qualification": "An estimate, not a measurement: black-body color at its published equilibrium temperature, 1,715 K.",
+        "label": "Thermal glow",
+        "qualification": "Black-body color at its measured dayside temperature, 1,815 K. The disc itself is unresolved.",
         "thumbnail": "wasp-77-a-b-dataset-thermal.webp",
         "surface": "wasp-77-a-b-surface-thermal@2x.webp",
         "poles": "wasp-77-a-b-poles-thermal@2x.webp",
         "source": {
           "id": "wasp-77-a-b-thermal-color",
           "path": "../manifest.json",
-          "url": "https://ui.adsabs.harvard.edu/abs/2020A&A...636A..98C/abstract"
+          "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....165..104D/abstract"
         },
         "falseColor": false,
-        "notes": "Nobody has measured WASP-77 A b's heat. This is the color of a black body at 1,715 K, the equilibrium temperature its paper computes from its star's light (Cortés-Zuleta et al. 2020, equilibrium temperature (NASA Exoplanet Archive planetary systems table)). On 120 hot Jupiters whose day side Spitzer measured, the measured temperature is within 20% of this kind of estimate for 83% (Deming et al. 2023). Its star lights the day side. Reflected starlight is not included."
+        "notes": "The color of WASP-77 A b's heat: a black body at the dayside brightness temperature measured in secondary eclipse at 3.6 µm (Spitzer IRAC). Its star lights the day side; the night side is not measured. Reflected starlight is not included."
       }
     ]
   },

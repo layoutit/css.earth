@@ -64,8 +64,9 @@ export function pickThermalRow(rows: readonly EmissionRow[]): EmissionRow | unde
  * (Deming et al. 2023, AJ 165, 104), as the CDS serves its table 2. The archive's emission table predates it and lacks most of
  * these planets, so it is asked second. */
 export const SPITZER_ECLIPSES = { table: 'https://cdsarc.cds.unistra.fr/ftp/J/AJ/165/104/table2.dat', paper: 'https://ui.adsabs.harvard.edu/abs/2023AJ....165..104D/abstract', label: 'Deming et al. 2023', catalogue: 'J/AJ/165/104' };
-/** A planet name as the catalogue's key: "WASP-29 b" and the catalogue's "WASP-029" are both wasp29. The catalogue lists planets b only. */
-const eclipseKey = (name: string) => name.trim().replace(/\s+b$/u, '').toLowerCase().replace(/[\s-]+/gu, '').replace(/(^|\D)0+(?=\d)/gu, '$1');
+/** A planet name as the catalogue's key: "WASP-29 b" and the catalogue's "WASP-029" are both wasp29. The catalogue lists planets b only,
+ * and names the planet of a binary's primary by the system: its "WASP-077" is WASP-77 A b, its "XO-2" is XO-2 N b. */
+const eclipseKey = (name: string) => name.trim().replace(/\s+(?:[AN]\s+)?b$/u, '').toLowerCase().replace(/[\s-]+/gu, '').replace(/(^|\D)0+(?=\d)/gu, '$1');
 
 /** The catalogue's rows for one planet, one per band it measured. The table is fixed width (its ReadMe): the name in bytes 1 to 10,
  * then per band the temperature and its upper and lower one-sigma errors, 3.6 µm from byte 48 and 4.5 µm from byte 62. A band
@@ -376,7 +377,8 @@ export async function rebuildExistingDatasets(root: string, ids: readonly string
         chosen = equilibrium;
       }
       if (!chosen) { say(`${id}: ${why}`); continue; }
-      const { hex } = await installThermalDataset(files, id, descriptor.displayName, chosen, csv);
+      // The archive's emission rows are kept beside a measured color only: an estimate has none to keep.
+      const { hex } = await installThermalDataset(files, id, descriptor.displayName, chosen, 'wavelengthMicrometres' in chosen ? csv : undefined);
       const readme = resolve(o, 'README.md'), text = await readFile(readme, 'utf8'), color = text.split('\n').find(line => line.startsWith('**Color.**'));
       if (color !== undefined) await writeFile(readme, text.replace(color, () => thermalColorLine(chosen, hex)));
       say('wavelengthMicrometres' in chosen ? `${id}: thermal glow ${hex} at ${chosen.temperatureK} K (${chosen.wavelengthMicrometres} µm, ${chosen.facility})` : `${id}: expected glow ${hex} at ${chosen.temperatureK} K, an estimate (${chosen.source})`);

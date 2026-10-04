@@ -27,6 +27,9 @@ test('the Spitzer eclipse catalogue is read by its fixed columns, a planet found
   // A band Spitzer never observed is printed as 0; a temperature whose lower error reaches it is not a detection.
   assert.deepEqual(parseSpitzerEclipses(TABLE, 'WASP-13 b').map(row => [row.wavelengthMicrometres, row.temperatureK]), [[4.5, 1512]]);
   assert.deepEqual(parseSpitzerEclipses(TABLE, 'WASP-29 b').map(row => [row.wavelengthMicrometres, row.temperatureK]), [[4.5, 913]]);
+  // The planet of a binary's primary is listed under the system's name; a planet of the secondary is not it.
+  assert.deepEqual(parseSpitzerEclipses(TABLE, 'HAT-P-1 A b').map(row => row.temperatureK), [1733, 1073]);
+  assert.deepEqual(parseSpitzerEclipses(TABLE, 'HAT-P-1 B b'), []);
   // The catalogue lists planets b only, and a planet it lacks has no rows.
   assert.deepEqual(parseSpitzerEclipses(TABLE, 'HAT-P-1 c'), []);
   assert.deepEqual(parseSpitzerEclipses(TABLE, 'HAT-P-11 b'), []);

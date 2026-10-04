@@ -18,15 +18,6 @@
       ],
       "path": "photometry/tess/tess2024274222008-s0084-0000000288246496-0281-s_lc.fits",
       "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2024274222008-s0084-0000000288246496-0281-s_lc.fits"
-    },
-    {
-      "kind": "download",
-      "groups": [
-        "restore",
-        "refresh"
-      ],
-      "path": "photometry/emission-spectroscopy.csv",
-      "url": "https://exoplanetarchive.ipac.caltech.edu/TAP/sync?query=select+plntname%2Ccentralwavelng%2Cbandwidth%2Cespeclipdep%2Cespeclipdeperr1%2Cespeclipdeperr2%2Cespeclipdeplim%2Cespbritemp%2Cespbritemperr1%2Cespbritemperr2%2Cespbritemplim%2Cfacility%2Cinstrument%2Cplntreflink+from+emissionspec+where+plntname%3D%27WASP-60+b%27+order+by+centralwavelng&format=csv"
     }
   ]
 }

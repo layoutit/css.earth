@@ -186,28 +186,6 @@
         "kind": "local",
         "reason": "Project-authored color recipe naming the cited equilibrium temperature; repinned when edited."
       }
-    },
-    {
-      "id": "hat-p-36b-emission-spectroscopy",
-      "path": "photometry/emission-spectroscopy.csv",
-      "origin": "https://exoplanetarchive.ipac.caltech.edu/TAP/sync?query=select+plntname%2Ccentralwavelng%2Cbandwidth%2Cespeclipdep%2Cespeclipdeperr1%2Cespeclipdeperr2%2Cespeclipdeplim%2Cespbritemp%2Cespbritemperr1%2Cespbritemperr2%2Cespbritemplim%2Cfacility%2Cinstrument%2Cplntreflink+from+emissionspec+where+plntname%3D%27HAT-P-36+b%27+order+by+centralwavelng&format=csv",
-      "credit": "NASA Exoplanet Archive, emission spectroscopy table (secondary-eclipse depths and brightness temperatures as published)",
-      "license": "NASA Exoplanet Archive data use: acknowledge the archive and the papers it cites",
-      "acquisition": "TAP query in source/preparation/acquisition.json: every emission row of this planet, ordered by wavelength.",
-      "redistribution": "Table rows as served, with the archive acknowledged.",
-      "consumers": [
-        "datasets"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "source-hat-p-36b-emission-spectroscopy",
-            "role": "material",
-            "evidence": "Origin and product identifier recorded on this manifest entry."
-          }
-        ]
-      }
     }
   ],
   "generatedIntermediates": [

@@ -11,8 +11,7 @@
     },
     "note": "Nobody has measured its heat or imaged it; this is the equilibrium temperature its paper computes from its star's light, an estimate, so the color is a Planck spectrum at its published temperature.",
     "chosen": "3 papers in the archive print one; the most recently published",
-    "estimate": true,
-    "rows": "photometry/emission-spectroscopy.csv"
+    "estimate": true
   },
   "whitePoint": "sRGB D65",
   "normalization": "brightest linear sRGB channel = 1",

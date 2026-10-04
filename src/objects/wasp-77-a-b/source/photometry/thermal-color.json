@@ -4,15 +4,15 @@
   "spectrum": "planck",
   "temperature": {
     "published": {
-      "kelvin": 1715,
-      "lowerKelvin": 1689,
-      "upperKelvin": 1741,
-      "citation": "Cortés-Zuleta et al. 2020, equilibrium temperature (NASA Exoplanet Archive planetary systems table): 1715 +/- 26 K, https://ui.adsabs.harvard.edu/abs/2020A&A...636A..98C/abstract"
+      "kelvin": 1815,
+      "lowerKelvin": 1782,
+      "upperKelvin": 1848,
+      "citation": "Deming et al. 2023, dayside brightness temperature at 3.6 µm (uniform reanalysis of Spitzer's eclipses, CDS J/AJ/165/104 table 2): 1815 +/- 33 K, https://ui.adsabs.harvard.edu/abs/2023AJ....165..104D/abstract"
     },
-    "note": "Nobody has measured its heat or imaged it; this is the equilibrium temperature its paper computes from its star's light, an estimate, so the color is a Planck spectrum at its published temperature.",
-    "chosen": "3 papers in the archive print one; the most recently published",
-    "estimate": true,
-    "rows": "photometry/emission-spectroscopy.csv"
+    "note": "Its day side's brightness temperature is measured in secondary eclipse at 3.6 µm (Spitzer IRAC) and nobody has imaged it, so the color is a Planck spectrum at its published temperature.",
+    "chosen": "2 measured of 2 rows; the smallest relative uncertainty, then the longest wavelength",
+    "wavelengthMicrometres": 3.6,
+    "facility": "Spitzer IRAC"
   },
   "whitePoint": "sRGB D65",
   "normalization": "brightest linear sRGB channel = 1",
