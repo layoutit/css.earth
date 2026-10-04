@@ -32,8 +32,8 @@
   },
   "geometry": {
     "kind": "inclined-disk",
-    "inclinationDeg": 0.001,
-    "lineOfNodesPaDeg": 138.831,
+    "inclinationDeg": 41,
+    "lineOfNodesPaDeg": 220,
     "thicknessKpc": 1.54e-7,
     "depthWeights": [
       0.25,
@@ -50,7 +50,7 @@
     "unit": "pc",
     "surface": {
       "source": "nasa-3d-homunculus-nebula",
-      "basis": "Steffen et al. (2014) made a closed surface of the Homunculus from VLT/X-shooter H2 spectra that map the whole nebula: one continuous surface for each lobe, with its polar holes, trenches and protrusions. NASA publishes that model as a file for printing (17101 triangles), its z axis the nebula's pole. Smith (2006) gives the pole: an inclination of 41 degrees, the tilt of the polar axis out of the line of sight, along position angle 310 degrees; the south-east lobe approaches. The file gives neither its unit on the sky, its turn about the pole, the star's place in it, nor which end recedes: measured here on this picture (packages/bake/authoring/homunculus-nebula/model-fit.mts), the +z end recedes, the file is turned 328 degrees about the pole, a unit is 2.72 arcsec and the star is at (0.96, 0, -0.08); the model's outline then shares 86.8% with the picture's lit pixels. The patches follow the surface within 0.1 arcsec, a presentation value.",
+      "basis": "Steffen et al. (2014) made a closed surface of the Homunculus from VLT/X-shooter H2 spectra that map the whole nebula: one continuous surface for each lobe, with its polar holes, trenches and protrusions. NASA publishes that model as a file for printing (17101 triangles), its z axis the nebula's pole. Smith (2006) gives the pole: an inclination of 41 degrees, the tilt of the polar axis out of the line of sight, along position angle 310 degrees; the south-east lobe approaches. The file gives neither its unit on the sky, its turn about the pole, the star's place in it, nor which end recedes: measured here on this picture (packages/bake/authoring/homunculus-nebula/model-fit.mts), the +z end recedes, the file is turned 328 degrees about the pole, a unit is 2.72 arcsec and the star is at (0.96, 0, -0.08); the model's outline then shares 86.8% with the picture's lit pixels. The same script measures where the star's own light ends in this picture, 2.9 arcsec from it: all of the light within half of that, and less and less out to it, stays at the star. The patches follow the surface within 0.1 arcsec, a presentation value.",
       "path": "homunculus.stl",
       "arcsecPerUnit": 2.72,
       "originUnits": [
@@ -64,6 +64,7 @@
         "rollDeg": 328,
         "receding": "+z"
       },
+      "starRadiusArcsec": 1.45,
       "fitArcsec": 0.1
     }
   },

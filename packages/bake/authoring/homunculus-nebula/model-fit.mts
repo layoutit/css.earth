@@ -21,6 +21,8 @@ import { parseImageLayerRecipe, stlTriangles } from '@cssearth/bake/image-layers
 const SMALLER = 3, LIT_ABOVE = 0.35;
 /** The pole (Smith 2006): its angle from the sight line and the position angle of its receding end, degrees. */
 const POLE_TILT_DEG = 41, POLE_PA_DEG = 310;
+/** The width of the rings the star's light is measured in, in arcseconds. */
+const RING_ARCSEC = 0.1;
 /** The waist of the file, where the search for the star starts: the narrowest of its cross-sections along z. */
 const WAIST_UNITS = [0.76, 0.1, 0.12] as const;
 
@@ -35,6 +37,12 @@ let starX = 0, starY = 0, saturated = 0;
 for (let y = 0; y < full.info.height; y++) for (let x = 0; x < full.info.width; x++) { const at = 3 * (y * full.info.width + x); if (full.data[at]! > 250 && full.data[at + 1]! > 250 && full.data[at + 2]! > 250) { starX += x; starY += y; saturated++; } }
 if (!saturated) throw new Error(`${recipe.source.path} has no saturated pixel to take for the star.`);
 const star: [number, number] = [starX / saturated / SMALLER, starY / saturated / SMALLER], arcsecPerPixel = recipe.observation.fieldOfViewDeg[0] * 3600 / full.info.width;
+// How far the star's light reaches: the picture's brightness in rings about the star, each `RING_ARCSEC` wide, falls
+// until it is the nebula's own. The first ring no brighter than the ten past it is where the star's light ends.
+const rings: number[][] = [];
+for (let y = 0; y < full.info.height; y++) for (let x = 0; x < full.info.width; x++) { const at = 3 * (y * full.info.width + x), ring = Math.floor(Math.hypot(x - starX / saturated, y - starY / saturated) * arcsecPerPixel / RING_ARCSEC); if (ring < 80) (rings[ring] ??= []).push(Math.max(full.data[at]!, full.data[at + 1]!, full.data[at + 2]!)); }
+const middleOf = (values: number[]) => [...values].sort((a, b) => a - b)[Math.floor(values.length / 2)]!, levels = rings.map(middleOf), ends = levels.findIndex((level, ring) => ring + 10 < levels.length && level <= middleOf(levels.slice(ring + 1, ring + 11)));
+if (ends < 0) throw new Error(`${recipe.source.path}: the star's light does not end within ${(rings.length * RING_ARCSEC).toFixed(0)} arcsec of the star.`);
 // The picture's lit pixels.
 const light = new Float32Array(width * height); for (let p = 0; p < width * height; p++) light[p] = 0.2126 * data[3 * p]! + 0.7152 * data[3 * p + 1]! + 0.0722 * data[3 * p + 2]!;
 const sorted = Float32Array.from(light).sort(), sky = sorted[Math.floor(0.3 * sorted.length)]!, bright = sorted[Math.floor(0.9 * sorted.length)]!, lit = new Uint8Array(width * height);
@@ -66,7 +74,7 @@ for (let pass = 0; pass < 2; pass++) {
   for (let dx = -0.4; dx <= 0.401; dx += 0.1) for (let dy = -0.4; dy <= 0.401; dy += 0.1) for (let dz = -0.4; dz <= 0.401; dz += 0.2) { const origin: [number, number, number] = [WAIST_UNITS[0] + dx, WAIST_UNITS[1] + dy, WAIST_UNITS[2] + dz], share = shared(best.receding, best.rollDeg, best.pixelsPerUnit, origin); if (share > best.share) best = { ...best, share, origin }; }
 }
 const unitArcsec = best.pixelsPerUnit * SMALLER * arcsecPerPixel;
-console.log(`The star: pixel ${(star[0] * SMALLER).toFixed(0)}, ${(star[1] * SMALLER).toFixed(0)} of ${full.info.width} x ${full.info.height}; ${saturated} saturated pixels, ${(Math.sqrt(saturated / Math.PI) * arcsecPerPixel).toFixed(2)} arcsec in radius.`);
+console.log(`The star: pixel ${(star[0] * SMALLER).toFixed(0)}, ${(star[1] * SMALLER).toFixed(0)} of ${full.info.width} x ${full.info.height}; ${saturated} saturated pixels, ${(Math.sqrt(saturated / Math.PI) * arcsecPerPixel).toFixed(2)} arcsec in radius. Its light ends ${(ends * RING_ARCSEC).toFixed(1)} arcsec from it: the picture there is as bright (${levels[ends]} of 255) as over the arcsecond past it.`);
 console.log(`The model on the picture: the ${best.receding > 0 ? '+z' : '-z'} end recedes, turned ${((best.rollDeg % 360) + 360) % 360} degrees about the pole, ${unitArcsec.toFixed(2)} arcsec a unit, the star at (${best.origin.map(value => value.toFixed(2)).join(', ')}) of the file; its outline shares ${(100 * best.share).toFixed(1)}% with the picture's lit pixels.`);
 // Steffen et al. (2014): the lobes' speed is 600 to 680 km/s at 3.4e15 m from the star; Smith (2006): 2350 pc.
 let reach = 0; for (let index = 0; index < triangles.length; index += 3) reach = Math.max(reach, Math.abs(triangles[index + 2]! - best.origin[2]));
