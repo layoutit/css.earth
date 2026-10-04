@@ -1,3 +1,4 @@
+import { readFileSync } from 'node:fs';
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { resolve } from 'node:path';
@@ -10,7 +11,7 @@ test('per-object discovery keeps shared suites and every body-owned suite collec
   const files = await discoverObjectTests('earth', { projectRoot: root });
   assert.ok(files.includes(resolve(root, 'site/test/runtime-package.test.mts')));
   assert.ok(files.includes(resolve(root, 'packages/bake/src/raster/raster-pages.test.mts')));
-  const lanes = testLaneFiles(root);
+  const lanes = testLaneFiles(root, JSON.parse(readFileSync(resolve(root, 'package.json'), 'utf8')) as unknown, ['test:packages', 'test:site']);
   for (const file of [...lanes.packages, ...lanes.site].filter(file => file.startsWith('src/objects/earth/')))
     assert.ok(files.includes(resolve(root, file)), file);
   assert.equal(files.length, new Set(files).size);

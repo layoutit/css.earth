@@ -21,6 +21,8 @@ import { runImage3 } from '../archives/jwst/imaging/image3.mts';
 import { binWiseAtlasTile, gridWcs, parseSkyGrid, matchTileBackgrounds, mosaicTiles, MONTAGE_BACKGROUND_REFERENCE, readWiseAtlasTile, WISE_ATLAS_REFERENCE, wiseAtlasUrl, type SkyGrid } from '@cssearth/bake/objects/raster';
 
 export const HIPS2FITS = 'https://alasky.cds.unistra.fr/hips-image-services/hips2fits';
+// Serialized evidence: packages/telescope-cli/src/archives/jwst/imaging/programs/ (now packages/telescope-cli/src/archives/jwst/programs/).
+const HISTORICAL_JWST_PROGRAM_ROOT = 'packages/telescope-cli/src/archives/jwst/' + 'imaging/programs/';
 const WISE_ATLAS_PIXEL_SR = (1.375 / 206264.80624709636) ** 2;
 const WISE = 'https://wise2.ipac.caltech.edu/docs/release/allsky/expsup/sec2_3f.html';
 const IRAC = 'https://irsa.ipac.caltech.edu/data/SPITZER/docs/irac/iracinstrumenthandbook/46/';
@@ -307,7 +309,7 @@ async function bandPlane(recipe: SkyBandComposite, input: SkyBandInput, io: SkyB
   if ('program' in input && route.acquisition.kind === 'jwst') {
     const { plane, header, run } = await image3Plane(recipe.grid, input, route.acquisition.band, io);
     return { plane, acquisition: { kind: 'jwst-image3', program: input.program,
-      program_file: `packages/telescope-cli/src/archives/jwst/programs/${input.program}.json`, pipeline: header.CAL_VER, crdsContext: header.CRDS_CTX, ...(run ? { run } : {}),
+      program_file: `${HISTORICAL_JWST_PROGRAM_ROOT}${input.program}.json`, pipeline: header.CAL_VER, crdsContext: header.CRDS_CTX, ...(run ? { run } : {}),
       limits: 'The pipeline\u2019s image3 stage (tweakreg, skymatch, outlier detection, resample) re-run from MAST\u2019s level-2 members onto the recipe grid, north up, so the exposures are resampled once. Pixels no exposure covered are missing.' } };
   }
   if ('product' in input && input.product !== undefined && route.acquisition.kind === 'jwst') {

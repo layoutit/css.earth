@@ -44,7 +44,7 @@ export async function discoverObjectTests(
   id: string,
   { projectRoot = checkoutProjectRoot(import.meta.url) }: {projectRoot?: string} = {},
 ) {
-  const lanes = testLaneFiles(projectRoot);
+  const lanes = testLaneFiles(projectRoot, JSON.parse(readFileSync(resolve(projectRoot, 'package.json'), 'utf8')) as unknown, ['test:packages', 'test:site']);
   // Lane globs determine membership. Shared object suites declare the selection contract in their source;
   // unfiltered shared invariants use the same marker, so adding a suite requires no runner name list.
   const tests = [...lanes.packages, ...lanes.site].filter(file => file.startsWith(`src/objects/${id}/`)

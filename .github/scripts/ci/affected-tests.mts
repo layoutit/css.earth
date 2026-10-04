@@ -1,4 +1,5 @@
-import { scriptTestFiles } from '../../../packages/core/src/node/script-test-files.ts';
+import { testLaneFiles } from '../../../packages/core/src/node/script-test-files.ts';
+export { testLaneFiles } from '../../../packages/core/src/node/script-test-files.ts';
 /** Which tests a change can break: the workspace packages it touched and every package that depends on one, and the
  * site when it, or a package it imports, changed. A push to main, or a change to shared configuration, tests everything.
  *
@@ -12,17 +13,10 @@ import { pathToFileURL } from 'node:url';
 export interface Workspace { readonly directory: string; readonly name: string; readonly dependencies: readonly string[]; }
 export interface AffectedTests { readonly packages: 'all' | readonly string[]; readonly site: boolean; readonly files: readonly string[]; }
 
-/** Root scripts own lane membership; core collects their quoted test globs without reading repository files. */
-export function testLaneFiles(root: string): Readonly<Record<'packages' | 'site', readonly string[]>> {
-  const manifest: unknown = JSON.parse(readFileSync(resolve(root, 'package.json'), 'utf8'));
-  const files = scriptTestFiles(root, manifest, ['test:packages', 'test:site']);
-  return { packages: files.get('test:packages')!, site: files.get('test:site')! };
-}
-
 /** Discover cross-owner coverage from the collected tests rather than maintaining a second path list.
  * Looking for package-name strings conservatively includes static and dynamic imports in each collected test. */
 export function testOwners(root: string): ReadonlyMap<string, readonly string[]> {
-  return new Map(testLaneFiles(root).packages.map(file => {
+  return new Map(testLaneFiles(root, JSON.parse(readFileSync(resolve(root, 'package.json'), 'utf8')) as unknown, ['test:packages', 'test:site']).packages.map(file => {
     const text = readFileSync(resolve(root, file), 'utf8');
     return [file, [...new Set([...text.matchAll(/['"`]@cssearth\/([^/'"`]+)(?:[/'"`])/gu)].map(match => match[1]!))]];
   }));

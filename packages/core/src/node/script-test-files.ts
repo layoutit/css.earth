@@ -13,3 +13,9 @@ export function scriptTestFiles(root: string, manifest: unknown, names: readonly
     return [name, [...new Set(patterns.flatMap(pattern => globSync(pattern, { cwd: root })))].sort()];
   }));
 }
+
+/** Project callers supply the manifest and lane names; both CI and preparation share this routing. */
+export function testLaneFiles(root: string, manifest: unknown, names: readonly [string, string]): Readonly<Record<'packages' | 'site', readonly string[]>> {
+  const files = scriptTestFiles(root, manifest, names);
+  return { packages: files.get(names[0])!, site: files.get(names[1])! };
+}
