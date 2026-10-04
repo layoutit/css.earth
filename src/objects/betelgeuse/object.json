@@ -1,7 +1,7 @@
 {
   "schema": "cssearth-object@2",
   "id": "betelgeuse",
-  "parent": "betelgeuse-system",
+  "parent": "milky-way",
   "type": "layered-body",
   "properties": {
     "preparation": {
@@ -115,7 +115,7 @@
       "color": "#ffc876",
       "distanceAu": 34652487.4,
       "description": "Red supergiant in Orion, resolved by the VLT interferometer.",
-      "systemName": "Betelgeuse system",
+      "systemName": "Orion",
       "aliases": [
         "Alpha Orionis",
         "HD 39801"

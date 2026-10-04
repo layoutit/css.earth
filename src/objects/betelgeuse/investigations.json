@@ -121,24 +121,6 @@
         "https://github.com/layoutit/css.earth/blob/main/packages/bake/authoring/betelgeuse-shell/author.mts"
       ],
       "revisitWhen": "One display scale that carries both the photosphere's patches and the faint light outside it."
-    },
-    {
-      "id": "companion-siwarha",
-      "subject": "Siwarha (Alpha Orionis B), the companion: orbit, detection and nature",
-      "status": "included",
-      "finding": "Drawn as a point on its orbit, an astronomy record with no package: no paper measures its size or temperature. Period, orbit size, transit time and circular shape are the radial-velocity fit of MacLeod et al. (2025); the inclination is their astrometric fit. The orbit's direction on the sky is the position angle at which VLT/SPHERE detected the companion on 6 December 2024 (Montarges et al. 2026: 52.32 +/- 0.18 mas, 117.12 +/- 0.60 degrees, 6.1 sigma), a quarter of a period after the 2023 transit; MacLeod et al.'s astrometric node of 60 +/- 6 degrees does not pass through it and is not used. The recorded orbit puts the companion 46.1 mas from the star at 113.6 degrees that night. Its mass is disputed (0.60 +/- 0.14 solar masses at least from the radial velocities; 2.6 to 3.1 as a coeval star; under about 1.5 from the far ultraviolet; or reflected light at a bow shock), so the minimum mass is recorded and no sphere is drawn. ESO's Phase 3 collection BETELGEUSE-B publishes the detection's signal-to-noise map (Betelgeuse_B_PACO_2024-12-06_CntHa.fits, peak 6.11); it is not shown. The IAU adopted the name on 22 September 2025.",
-      "evidence": [
-        "https://github.com/layoutit/css.earth/blob/main/packages/astronomy/data/bodies/siwarha.json",
-        "https://github.com/layoutit/css.earth/blob/main/packages/astronomy/src/hostedOrbits.binaries.test.ts",
-        "https://doi.org/10.1051/0004-6361/202661023",
-        "https://arxiv.org/abs/2409.11332",
-        "https://arxiv.org/abs/2507.15749",
-        "https://arxiv.org/abs/2505.18375",
-        "https://arxiv.org/abs/2608.11672",
-        "https://archive.eso.org/scienceportal/home?data_collection=BETELGEUSE-B",
-        "https://exopla.net/star-names/modern-iau-star-names/"
-      ],
-      "revisitWhen": "A second epoch that confirms it is bound, or a measured color or size: it then becomes a body with its own package."
     }
   ]
 }
