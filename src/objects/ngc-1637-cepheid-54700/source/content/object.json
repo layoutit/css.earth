@@ -1,0 +1,81 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "ngc-1637-cepheid-54700",
+  "displayName": "NGC 1637 Cepheid 54700",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "216 solar radii",
+        "source": {
+          "catalogueId": "arxiv-2002-02186",
+          "url": "https://arxiv.org/abs/2002.02186",
+          "label": "Groenewegen (2020), A&A 635, A33 (2020)",
+          "checked": "2026-10-04",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "9,289,203 parsecs",
+        "source": {
+          "catalogueId": "doi-10-1088-0004-637x-696-2-1176",
+          "url": "https://ui.adsabs.harvard.edu/abs/2009ApJ...696.1176J",
+          "label": "Placed in NGC 1637 as the app draws it, where the star's sight line crosses the disc's midplane: 9,289,203 pc (src/objects/ngc-1637-layers/source/recipe.json: centre 9,289,664 pc, inclination 31.1 deg, line of nodes 20.6 deg). The galaxy's distance, which places the galaxy and not a star within it: Jones2009ApJ...696.1176J: Distance Determination to 12 Type II Supernovae Using the Expanding Photosphere Method (https://ui.adsabs.harvard.edu/abs/2009ApJ...696.1176J); catalogue reference Jones2009ApJ...696.1176J: 9289663.8678 pc (-458864.863614/+482708.341758); sn",
+          "checked": "2026-10-04",
+          "path": "source/measurements.json",
+          "locator": "distanceParsecs; distanceSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "color",
+    "controls": [
+      {
+        "id": "color",
+        "label": "Color",
+        "qualification": "Color of a blackbody at the star's temperature; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
+        "thumbnail": "ngc-1637-cepheid-54700-dataset-color.webp",
+        "surface": "ngc-1637-cepheid-54700-surface-color@2x.webp",
+        "poles": "ngc-1637-cepheid-54700-poles-color@2x.webp",
+        "source": {
+          "id": "ngc-1637-cepheid-54700-stellar-color",
+          "path": "../manifest.json",
+          "url": "https://arxiv.org/abs/2002.02186"
+        },
+        "falseColor": false,
+        "notes": "The color of a blackbody at the star's published temperature. The darkening toward the edge is the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 4,770 K and log g 0.65 (u1 0.692, u2 0.086): a model, because no fit of this star's limb is used. The spin axis's direction on the sky is a display convention."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Leonard et al. (2003), ApJ 594, 247",
+      "href": "https://doi.org/10.1086/376831"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://doi.org/10.1086/376831",
+      "credit": "Leonard et al. (2003), ApJ 594, 247"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/ngc-1637-cepheid-54700.json",
+      "credit": "Groenewegen radius; Leonard et al. (2003), ApJ 594, 247, table 6 (ID 54700: chip 4, X 414.8, Y 216.8); its section 4.1 says the hstphot positions it reports are of the combined V-band frame, which no epoch leaves by more than about half a pixel, and that hstphot gives an integer to a star centred on a pixel's lower-left corner; read here on the first exposure of that series, u6fv0101m (table 3) position; cited distance; no measured rotation axis (display convention)"
+    }
+  }
+}

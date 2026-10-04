@@ -1,0 +1,65 @@
+{
+  "id": "tfs99-1369",
+  "name": "[TFS99] 1369",
+  "system": "[TFS99] 1369 system",
+  "description": "A Cepheid in the galaxy M96 that pulsates every 30.1 days.",
+  "parent": "m96",
+  "featured": true,
+  "target": "[TFS99] 1369",
+  "paper": {
+    "url": "https://doi.org/10.1046/j.1365-8711.1999.02954.x",
+    "credit": "Tanvir et al. (1999), MNRAS 310, 175"
+  },
+  "radius": {
+    "value": 140.8,
+    "source": "Groenewegen (2020), A&A 635, A33, period relations for Galactic fundamental-mode Cepheids applied to this star's period, 30.06 d in Tanvir et al. (1999), MNRAS 310, 175, table 3 (ID 1369: log(P) 1.478); not a measurement of this star: eq. 2, log R = 0.721 log P + 1.083; the uncertainty is the relation's scatter, 0.067 dex",
+    "url": "https://arxiv.org/abs/2002.02186",
+    "uncertainty": 23.5
+  },
+  "mass": "unmeasured",
+  "temperature": {
+    "value": 4950,
+    "source": "Groenewegen (2020), A&A 635, A33, period relations for Galactic fundamental-mode Cepheids applied to this star's period, 30.06 d in Tanvir et al. (1999), MNRAS 310, 175, table 3 (ID 1369: log(P) 1.478); not a measurement of this star: the luminosity of eq. 1 (M_bol = -2.95 log P - 0.98, with the nominal solar M_bol 4.74) over the radius of eq. 2, through L = 4 pi R^2 sigma T^4 with the nominal solar 5772 K (IAU 2015 Resolutions B2 (Mamajek et al. 2015, arXiv:1510.06262) and B3 (Prsa et al. 2016, arXiv:1605.09788)); the uncertainty is the 317 K by which the two relations miss the paper's own Cepheid temperatures",
+    "url": "https://arxiv.org/abs/2002.02186",
+    "uncertainty": 317
+  },
+  "gravityRange": {
+    "min": -1.33,
+    "max": 2.86,
+    "source": "Luck (2018), AJ 156, 171, table 3 (the spectroscopic gravities of its Cepheid spectra)",
+    "url": "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=J/AJ/156/171/table3"
+  },
+  "radialVelocity": {
+    "value": 882,
+    "source": "SIMBAD's radial velocity of M96, the Cepheid's galaxy, from 2022ApJS..261...21Y; the star's own motion within the galaxy is not measured",
+    "url": "https://ui.adsabs.harvard.edu/abs/2022ApJS..261...21Y/abstract",
+    "uncertainty": 3
+  },
+  "distance": {
+    "value": 10456180,
+    "source": "Placed in M96 as the app draws it, where the star's sight line crosses the disc's midplane: 10,456,180 pc (src/objects/m96-layers/source/recipe.json: centre 10,452,014 pc, inclination 51.07 deg, line of nodes 4.57 deg). The galaxy's distance, which places the galaxy and not a star within it: Tully et al. (2023), Cosmicflows-4, ApJ 944, 94; CDS J/ApJ/944/94, table 2 (distances of individual galaxies), PGC 32192: distance modulus 30.096 ± 0.044 mag (https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/944/94)",
+    "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/944/94"
+  },
+  "position": {
+    "catalogue": "basic",
+    "row": {
+      "main_id": "[TFS99]  1369"
+    },
+    "credit": "Tanvir et al. (1999), MNRAS 310, 175, table 3 (ID 1369: 10:46:42.12 +11:52:07.0); SIMBAD holds that position, from 1999MNRAS.310..175T",
+    "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=%5BTFS99%5D%201369",
+    "archive": "simbad"
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "A Cepheid in the galaxy M96, 10.5 million parsecs away, that swells and shrinks every 30.1 days.",
+    "introduction": "Tanvir et al. (1999) list the logarithm of its period as 1.478: 30.1 days. It is one of the seven Cepheids their distance to the galaxy rests on.",
+    "locator": "table 3, ID 1369: log(P), and the caption"
+  },
+  "notes": [
+    "The star pulsates; it is drawn at its mean radius",
+    "Its radius and temperature are what Groenewegen (2020), A&A 635, A33's relations for Galactic Cepheids give at its period; no measurement of this star's size or temperature exists",
+    "Its radial velocity is its galaxy's; its own motion within M96 is not measured"
+  ],
+  "order": 5771
+}

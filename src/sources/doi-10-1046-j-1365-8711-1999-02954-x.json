@@ -1,0 +1,42 @@
+{
+  "id": "doi-10-1046-j-1365-8711-1999-02954-x",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Tanvir et al. (1999): The Cepheid distance to M96 and the Hubble constant",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.1046/j.1365-8711.1999.02954.x"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://doi.org/10.1046/j.1365-8711.1999.02954.x",
+      "label": "Publisher"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://doi.org/10.1046/j.1365-8711.1999.02954.x",
+      "checkedOn": "2026-10-04",
+      "locator": "Crossref record: title, authors, container"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Tanvir et al. (1999), Monthly Notices of the Royal Astronomical Society 310 175-188",
+      "scope": "citation",
+      "evidence": "https://doi.org/10.1046/j.1365-8711.1999.02954.x"
+    }
+  ],
+  "publisher": "Monthly Notices of the Royal Astronomical Society 310 175-188",
+  "creators": [
+    "N. R. Tanvir",
+    "H. C. Ferguson",
+    "T. Shanks"
+  ],
+  "publicationDate": "1999"
+}
