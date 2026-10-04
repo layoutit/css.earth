@@ -6,8 +6,8 @@
  * `background-position` and `transform` directly: no custom property, `calc()` or parse, and each leaf keeps what it
  * last wrote so an unchanged value is never written again.
  *
- * A leaf whose image states its size takes the box that image fills at exactly TEXELS_PER_CSS_PIXEL (`leafBoxExact`)
- * and draws the image at its own size. WebKit draws part of an image in one of two ways (GraphicsContextCG.cpp,
+ * A leaf whose image states its size takes the box that image fills at one texel per device pixel (`leafBoxExact`) and
+ * draws the image at its own size. WebKit draws part of an image in one of two ways (GraphicsContextCG.cpp,
  * `shouldUseSubimage`): the whole image under a clip when the scale is the same on both axes and not above one, a
  * cropped copy with interpolation otherwise; and under the clip only a draw at the image's own size is a copy, a smaller
  * one resamples. A dataset switch repaints every face in one frame: on an iPad Io's 448 faces took 185 to 245 ms in the
@@ -36,28 +36,37 @@ const LAYOUT_UNITS = 64;
  * texels would take 201 px), and has no exact fit. */
 const EXACT_OVER_FULL = 1 + 1 / 16;
 
-/** How a leaf draws an image at exactly TEXELS_PER_CSS_PIXEL on both axes: the factor of its full box, the image's own
+/** How a leaf draws an image at one texel per device pixel on both axes: the factor of its full box, the image's own
  * size in CSS pixels, and whether a leaf the view needs less of keeps this box. */
 export interface LeafBoxExact { readonly factor: number; readonly tile: readonly [number, number]; readonly kept: boolean }
 
-/** The exact fit of an image of `pixels` in a leaf. The image's width comes from its pixels and the shape of the leaf's
- * background; the factor is that width over the texels across the full background, with the box it gives put on the
- * layout grid (a prepared background rounded a hair wide, Titan's 4,127.76 px, would leave the box under a whole texel).
- * None for an image without a stated size, a leaf without a box and background in pixels, or an image wider than the
- * box allows.
+/** The texels per CSS pixel that are one per device pixel on a screen: its pixel ratio where that is a whole number no
+ * less than the bake's two (an iPad's 2, a phone's 3). The copy is by backing pixel: on the iPad with the page scaled
+ * to four backing pixels per CSS pixel, Io's faces in the boxes exact for two switched in 215 to 223 ms and in the
+ * boxes exact for four in 35 to 44 ms (2026-10-04). Any other screen keeps the bake's density. */
+const exactDensity = (devicePixelRatio: number) =>
+  Number.isInteger(devicePixelRatio) && devicePixelRatio >= TEXELS_PER_CSS_PIXEL ? devicePixelRatio : TEXELS_PER_CSS_PIXEL;
+
+/** The exact fit of an image of `pixels` in a leaf on a screen of `devicePixelRatio`. The image's width comes from its
+ * pixels and the shape of the leaf's background; the factor is that width over the device pixels across the full
+ * background, with the box it gives put on the layout grid (a prepared background rounded a hair wide, Titan's
+ * 4,127.76 px, would leave the box under a whole texel). None for an image without a stated size, a leaf without a box
+ * and background in pixels, or an image wider than the box allows.
  *
  * A leaf the view needs less of (a face behind the body) keeps the exact box while every one of the body's `leaves`
  * could: together their layers stay within the bytes kept beyond the view's need (EXTRA_BYTES). Io's 448 faces at the
  * level it rests on are 30 MB of layers in exact boxes and its switch 45 to 54 ms; with the hidden ones in the 3 px their
- * step asks for it is 103 to 136 ms, and halved to a quarter or a sixteenth of the image 163 to 465 ms more. */
+ * step asks for it is 103 to 136 ms, and halved to a quarter or a sixteenth of the image 163 to 465 ms more. Only where
+ * the box is exact on this screen: elsewhere such a leaf would be resampled at full size. */
 export function leafBoxExact(leaf: PreparedLeafBox, pixels: number | undefined, leaves = 1, devicePixelRatio: number = TEXELS_PER_CSS_PIXEL): LeafBoxExact | undefined {
   const [width, height] = leaf.backgroundSize ?? [], box = leaf.box;
   if (pixels === undefined || typeof width !== 'number' || typeof height !== 'number' || box === undefined || !(width > 0) || !(height > 0) || !(box[0] > 0)) return undefined;
   const imageWidth = Math.round(Math.sqrt(pixels * width / height)), imageHeight = Math.round(pixels / imageWidth);
-  const factor = Math.round(box[0] * imageWidth / (TEXELS_PER_CSS_PIXEL * width) * LAYOUT_UNITS) / LAYOUT_UNITS / box[0];
+  const density = exactDensity(devicePixelRatio);
+  const factor = Math.round(box[0] * imageWidth / (density * width) * LAYOUT_UNITS) / LAYOUT_UNITS / box[0];
   if (factor > EXACT_OVER_FULL) return undefined;
   const layerBytes = box[0] * box[1] * factor ** 2 * devicePixelRatio ** 2 * 4;
-  return { factor, tile: [imageWidth / TEXELS_PER_CSS_PIXEL, imageHeight / TEXELS_PER_CSS_PIXEL], kept: layerBytes * leaves <= EXTRA_BYTES };
+  return { factor, tile: [imageWidth / density, imageHeight / density], kept: density === devicePixelRatio && layerBytes * leaves <= EXTRA_BYTES };
 }
 
 /** A leaf's factor: what its step needs of the full box, up to the whole. Showing an image with an exact fit, that box

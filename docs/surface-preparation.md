@@ -502,10 +502,15 @@ its full box. [leaf-box.ts](../packages/bake/src/presentation/leaf-box.ts) holds
   two box pixels per screen pixel (`LEAF_BOX_SCREEN_PIXELS`) at its most magnified edge, from its measured scene frame.
 - **The exact box.** A leaf whose image states its decoded size does not take the factor as it is: only the image
   drawn at its own size is copied, not resampled ([what a dataset switch costs](#find-the-processing-step)). Its exact
-  factor is the image's width over the texels across the full background at two per CSS pixel (`leafBoxExact` in
-  [prepared-leaf-box-direct.ts](../packages/renderer/src/rendering/prepared-leaf-box-direct.ts)): Io's level 4,160
-  texels wide gives 65 px of its 128 px box, its widest image 130 px. The leaf takes that box with its image, in one
-  write, once its step needs the whole image.
+  factor is the image's width over the device pixels across the full background (`leafBoxExact` in
+  [prepared-leaf-box-direct.ts](../packages/renderer/src/rendering/prepared-leaf-box-direct.ts)): on an iPad, two
+  device pixels a CSS pixel, Io's level 4,160 texels wide gives 65 px of its 128 px box and its widest image 130 px.
+  The leaf takes that box with its image, in one write, once its step needs the whole image.
+  - **One texel per device pixel.** The box follows the screen's pixel ratio where that is a whole number of two or
+    more (a phone's three gives 43.33 px for the same level); any other screen keeps the bake's two texels a CSS
+    pixel. The copy is by backing pixel: with the iPad's page scaled to four backing pixels a CSS pixel, Io's faces in
+    the boxes exact for two switched in 215 to 223 ms and in the boxes exact for four in 35 to 44 ms. No phone was
+    measured.
   - **Kept while the body can afford it.** A leaf the view needs less of, a face behind the body, keeps the exact box
     too while all the body's leaves in boxes like it stay within the 32 MiB kept beyond need: Io's 448 faces at the
     level it rests on are 30 MB of layers. Past that (its widest level, 121 MB) such a leaf takes its factor.

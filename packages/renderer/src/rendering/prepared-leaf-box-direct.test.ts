@@ -103,6 +103,16 @@ test('a leaf showing a sized image takes its exact box and draws the image at it
   assert.equal(dear?.kept, false);
   assert.partialDeepStrictEqual(Object.fromEntries(leafBoxStyles(boxes[0]!, 100, 0, false, dear)), { width: '20.8192px', backgroundSize: '656.117088px 484.519386px' });
   assert.partialDeepStrictEqual(Object.fromEntries(leafBoxStyles(boxes[0]!, 362, 0, false, dear)), { width: '66px', backgroundSize: '2080px 1536px' });
+  // The exact box is one texel per device pixel: on a phone of three, Io's level 4,160 texels wide takes 43.33 px of
+  // its 128 px box (on the layout grid) where an iPad of two takes 65 px, the image a third of its size in CSS pixels.
+  const io: PreparedLeafBox = { node: 4, density: 1, box: [128, 128], backgroundSize: [4096, 756.184], backgroundPosition: [-660.676, -408.616], matrix };
+  assert.deepEqual(leafBoxExact(io, 4160 * 768, 448, 2), { factor: 65 / 128, tile: [2080, 384], kept: true });
+  assert.deepEqual(leafBoxExact(io, 4160 * 768, 448, 3), { factor: 43.328125 / 128, tile: [4160 / 3, 256], kept: true });
+  assert.partialDeepStrictEqual(Object.fromEntries(leafBoxStyles(io, 362, 0, false, leafBoxExact(io, 4160 * 768, 448, 3))), { width: '43.328125px', backgroundSize: '1386.666667px 256px' });
+  // A screen whose ratio is no whole number of two or more keeps the bake's two texels a CSS pixel, and there a leaf
+  // the view needs less of does not keep the box: it is not exact on that screen.
+  assert.deepEqual(leafBoxExact(io, 4160 * 768, 448, 2.625), { factor: 65 / 128, tile: [2080, 384], kept: false });
+  assert.deepEqual(leafBoxExact(io, 4160 * 768, 448, 1), { factor: 65 / 128, tile: [2080, 384], kept: false });
   // Titan's faces show 64.5 texels of their quarter-size map: a box half a device pixel wide, the image still at its own size.
   const titan: PreparedLeafBox = { node: 3, density: 1, box: [128, 128], backgroundSize: [4127.76, 762.048], backgroundPosition: [-32.2481, -495.3], matrix };
   assert.partialDeepStrictEqual(Object.fromEntries(leafBoxStyles(titan, 362, 0, false, leafBoxExact(titan, 2080 * 384))), { width: '32.25px', height: '32.25px', backgroundSize: '1040px 192px' });
