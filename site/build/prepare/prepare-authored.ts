@@ -414,7 +414,7 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
         .prepareGiantLayers({ sourceDirectory, publicDirectory, config: ringsSource.value, write: true })
     : null;
   const celestial = reuseImages
-    ? { sky: validatePreparedCubicSky(await publishedJson('sky')), sun: validateDirectionalSunPlan(await publishedJson('sun')) } as unknown as Awaited<ReturnType<typeof prepareCelestialAssets>>
+    ? { sky: validatePreparedCubicSky(await publishedJson('sky')), sun: readPublishedSun(await publishedJson('sun')) } as unknown as Awaited<ReturnType<typeof prepareCelestialAssets>>
     : await prepareCelestialAssets({ sourceDirectory, publicDirectory, outputDirectory, directionalSun: litBySun(descriptor, required(sources, 'presentation').value),
       solarGeometry: await solarGeometry() });
   const geometryConfig = parseGeometryProfile(required(sources, 'geometry').value);
@@ -521,7 +521,8 @@ export async function redrawOnlyDecision(objectDirectory: string, publishedRecip
     if (bytes.equals(await readFile(now.path))) continue;
     const keys = REDRAWN_KEYS[id];
     if (!keys) return { redraw: false, reason: `recipe source ${id} changed` };
-    if (without(readComparableSource(JSON.parse(bytes.toString('utf8')), now.value), keys) !== without(now.value, keys)) return { redraw: false, reason: `${path} changed outside ${keys.join(', ')}` };
+    const comparable = readComparableSource(JSON.parse(bytes.toString('utf8')), now.value);
+    if (comparable === null || without(comparable, keys) !== without(now.value, keys)) return { redraw: false, reason: `${path} changed outside ${keys.join(', ')}` };
     acceptChanged.push(id);
   }
   // A redraw carries the published feature anchors, which were placed with the left edge the published feature record states.
@@ -559,4 +560,9 @@ if (direct) {
     if (legend.changes.length) throw new Error(`${id}: legend labels differ from the prepared stretch: ${legend.summary}; run prepare-authored ${id} --write.`);
   }
   console.log(JSON.stringify({ id: result.descriptor.id, runtime: result.definition !== undefined }));
+}
+
+/** Stars and unlit bodies publish a null directional Sun. */
+export function readPublishedSun(value: unknown) {
+  return value === null ? null : validateDirectionalSunPlan(value);
 }

@@ -1,5 +1,5 @@
 import { sourceObject } from '@cssearth/objects/sources';
-import { parseObjectDescriptor, readSystemText, SYSTEM_TEXT_SCHEMA } from '@cssearth/objects';
+import { readObjectDescriptorRecord, readSystemText, SYSTEM_TEXT_SCHEMA } from '@cssearth/objects';
 /**
  * A system is an object: a host with the bodies that orbit it has a package, an address and a page of its own
  * (`src/objects/<host>-system/object.json`; the Sun's is `solar-system`). This writes each one from what the repository
@@ -29,8 +29,8 @@ const bodies = SCENE_OBJECTS.filter(object => !object.system);
 const hostOf = (id: string) => { const host = bodies.find(object => object.id === id); if (!host) throw new TypeError(`System host ${id} has no object package.`); return host; };
 type Descriptor = { parent?: string; properties: { catalog: Record<string, unknown>; worldFrame: unknown } };
 const descriptorOf = async (id: string): Promise<Descriptor> => {
-  const descriptor = parseObjectDescriptor(JSON.parse(await readFile(resolve(objectsRoot, id, 'object.json'), 'utf8')));
-  return { ...descriptor, properties: { ...descriptor.properties, catalog: sourceObject(descriptor.properties.catalog), worldFrame: descriptor.properties.worldFrame } };
+  const descriptor = readObjectDescriptorRecord(JSON.parse(await readFile(resolve(objectsRoot, id, 'object.json'), 'utf8')));
+  return { ...descriptor, parent: typeof descriptor.parent === 'string' ? descriptor.parent : undefined, properties: { ...sourceObject(descriptor.properties), catalog: sourceObject(sourceObject(descriptor.properties).catalog), worldFrame: sourceObject(descriptor.properties).worldFrame } };
 };
 const existing = async (id: string) => descriptorOf(id).catch((error: NodeJS.ErrnoException) => { if (error.code === 'ENOENT') return undefined; throw error; });
 // Each moon system's cited introduction, checked: its length, and its sources against the source catalogue (system-text.mts).

@@ -139,7 +139,7 @@ export function readStellarExtent(value: unknown, objectId: string, path: string
   if (record.schema !== STELLAR_EXTENT_SOURCE_SCHEMA || record.objectId !== objectId) throw new TypeError(`${path}: expected a ${STELLAR_EXTENT_SOURCE_SCHEMA} record for ${objectId}.`);
   const radiusPc = record.radiusPc, source = record.source;
   if (typeof radiusPc !== 'number' || !(radiusPc > 0) || !Number.isFinite(radiusPc)) throw new TypeError(`${path}: radiusPc must be a positive number, got ${String(radiusPc)}.`);
-  if (typeof source !== 'string' || !/^[a-z0-9][a-z0-9-]*$/u.test(source)) throw new TypeError(`${path}: source must name a source catalogue record, got ${String(source)}.`);
+  if (typeof source !== 'string' || !/^[a-z0-9][a-z0-9-]*$/u.test(source)) throw new TypeError(`${path}: source must name a src/sources record, got ${String(source)}.`);
   return { radiusPc, source };
 }
 
@@ -151,7 +151,7 @@ export function readPreparedPanelContentRecord(value: unknown) {
 /** Source comparison reads dictionary contents only after binding the historical schema to its current source. */
 export function readComparableSource(value: unknown, reference: unknown) {
   const record = requireRecord(value), current = requireRecord(reference);
-  if (record.schema !== current.schema) throw new TypeError('Published source schema differs from its current recipe.');
+  if (record.schema !== current.schema) return null;
   return record;
 }
 

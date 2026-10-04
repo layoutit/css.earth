@@ -270,7 +270,7 @@ export { readChartAssetRecipe, readSourceManifestInputs, readFeatureSearchCatalo
 export { SYSTEM_TEXT_SCHEMA, readSystemText } from './prepared-data/build-projections.js';
 export { readObjectContentDatasets, readObjectContentPanel } from './prepared-data/object-content.js';
 export { readCataloguePresentationDistances } from './prepared-data/build-projections.js';
-export { FORMAT_READER_POLICIES, type FormatReaderPolicy } from './prepared-data/format-reader-ledger.js';
+export { type FormatReaderPolicy } from './prepared-data/format-reader-ledger.js';
 export { PREPARED_VOLUME_PRESENTATION_SCHEMA, DENSITY_VOLUME_DATASET_BANK_SOURCE_SCHEMA, readVolumePresentationPreviews, readVolumeAttachment, readGalaxyBackingSource } from './prepared-data/build-projections.js';
 export { hasVolumePresentationSource } from './prepared-data/volume-presentation-source.js';
 export { WORLD_CONTEXT_SOURCE_SCHEMA, readWorldContextSourceSelection, STELLAR_EXTENT_SOURCE_SCHEMA, readStellarExtent } from './prepared-data/build-projections.js';
@@ -280,3 +280,5 @@ export { readStellarDotMeasurements, readFeatureMapLongitude } from './prepared-
 export { PACKAGED_POINTS_SOURCE_SCHEMA, readPackagedPointsFrame } from './prepared-data/build-projections.js';
 
 export { HOSTED_PLANET_MEASUREMENTS_SCHEMA, NEUTRON_STAR_MEASUREMENTS_SCHEMA, readPreparedChartContentRecord } from './prepared-data/build-projections.js';
+
+export { MAP_SPHERE_DATASETS_SCHEMA, readMapSphereDatasetPreviews } from './prepared-data/map-sphere-datasets.js';

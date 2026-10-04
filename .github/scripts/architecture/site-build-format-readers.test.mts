@@ -59,3 +59,46 @@ test('local transports and parse callbacks require admission at the consumer', (
   assert.equal(buildFormatReaderFindings('site/build/read.mts', `${prefix} parseObjectDescriptor(await json('object.json')); const unchecked = await json('object.json');`, paths).length, 1);
   assert.equal(buildFormatReaderFindings('site/build/read.mts', "const value = await readFile('object.json', 'utf8').then(JSON.parse); console.log(value.id);", paths).length, 1);
 });
+
+test('parser aliases, destructuring and element access mutations are red then green', () => {
+  for (const [setup, parser] of [
+    ['const P = JSON.parse;', 'P'],
+    ['const P = JSON.parse; const Q = P;', 'Q'],
+    ['const { parse } = JSON;', 'parse'],
+    ['const { parse: P } = JSON;', 'P'],
+    ['', "JSON['parse']"],
+    ['const J = JSON;', "J['parse']"],
+  ]) {
+    const expression = `${parser}(await readFile('object.json', 'utf8'))`;
+    assert.equal(buildFormatReaderFindings('site/build/read.mts', `${setup} const value = ${expression};`, paths).length, 1, parser);
+    assert.deepEqual(buildFormatReaderFindings('site/build/read.mts', `import { readObjectDescriptorRecord } from '@cssearth/objects'; ${setup} const value = readObjectDescriptorRecord(${expression});`, paths), [], parser);
+  }
+});
+test('computed template path containing a known filename is red then green; arbitrary computation is outside the rule', () => {
+  const expression = "JSON.parse(await readFile(`${root}/${id}/object.json`, 'utf8'))";
+  assert.equal(buildFormatReaderFindings('site/build/read.mts', `const value = ${expression};`, paths).length, 1);
+  assert.deepEqual(buildFormatReaderFindings('site/build/read.mts', `import { readObjectDescriptorRecord } from '@cssearth/objects'; const value = readObjectDescriptorRecord(${expression});`, paths), []);
+  assert.deepEqual(buildFormatReaderFindings('site/build/read.mts', 'const value = JSON.parse(await readFile(computeFilename(), "utf8"));', paths), []);
+});
+
+test('nullable adapters forward the whole document; projecting before admission is red', () => {
+  const prefix = "import { validateDirectionalSunPlan } from '@cssearth/objects';";
+  const expression = "JSON.parse(await readFile('prepared/sun.json', 'utf8'))";
+  const known = new Set(['prepared/sun.json']);
+  assert.deepEqual(buildFormatReaderFindings('site/build/read.mts', `${prefix} function sun(value: unknown) { return value === null ? null : validateDirectionalSunPlan(value); } const result = sun(${expression});`, known), []);
+  assert.equal(buildFormatReaderFindings('site/build/read.mts', `${prefix} function sun(value: unknown) { return value === null ? null : validateDirectionalSunPlan(value.sun); } const result = sun(${expression});`, known).length, 1);
+});
+test('ledger protects untracked map-sphere output without a tracked JSON record', () => {
+  const root = mkdtempSync(join(tmpdir(), 'build-map-datasets-'));
+  const files = ['packages/objects/src/prepared-data/map-sphere-datasets.ts', 'packages/objects/src/prepared-data/format-reader-ledger.ts', 'site/build/read.mts'];
+  try {
+    for (const file of files) mkdirSync(join(root, file, '..'), { recursive: true });
+    writeFileSync(join(root, files[0]!), "export const MAP_SPHERE_DATASETS_SCHEMA = 'cssearth-map-sphere-datasets@2';");
+    writeFileSync(join(root, files[1]!), "export const POLICIES = [{ schema: MAP_SPHERE_DATASETS_SCHEMA, readers: ['readMapSphereDatasetPreviews'], paths: ['prepared/datasets.json'] }];");
+    const expression = "JSON.parse(await readFile('prepared/datasets.json', 'utf8'))";
+    writeFileSync(join(root, files[2]!), `const value = ${expression};`);
+    assert.equal(checkSiteBuildFormatReaders(root, files).length, 1);
+    writeFileSync(join(root, files[2]!), `import { readMapSphereDatasetPreviews } from '@cssearth/objects'; const value = readMapSphereDatasetPreviews(${expression});`);
+    assert.deepEqual(checkSiteBuildFormatReaders(root, files), []);
+  } finally { rmSync(root, { recursive: true, force: true }); }
+});

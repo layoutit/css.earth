@@ -64,7 +64,6 @@ export async function prepareFeatureIndex({ root = process.cwd() }: { root?: str
       const url = text(pin.url, `${object.id} catalogue url`), file = url.split('/').at(-1)!;
       const bytes = await readFile(resolve(root, 'public/scenes', object.id, file));
       const part = readFeatureSearchCatalog(JSON.parse(bytes.toString('utf8')), object.id, pin.count);
-      if (!isRecord(part) || !Array.isArray(part.features) || part.features.length !== pin.count) throw new TypeError(`${object.id}: feature catalogue count differs from its descriptor.`);
       catalog ??= part;
       values.push(...part.features);
     }

@@ -74,7 +74,7 @@ test('additional shared build projections reject incompatible schemas', () => {
     readWorldContextSourceSelection, readPreparedPanelContentRecord, readStellarDotMeasurements, readFeatureMapLongitude])
     assert.throws(() => read({ schema: 'wrong' }));
   assert.throws(() => readStellarExtent({ schema: 'wrong' }, 'body', 'source'));
-  assert.throws(() => readComparableSource({ schema: 'old' }, { schema: 'current' }));
+  assert.equal(readComparableSource({ schema: 'old' }, { schema: 'current' }), null);
 });
 test('additional shared build projections validate fields before exposing them', () => {
   const presentation = { schema: PREPARED_VOLUME_PRESENTATION_SCHEMA, objectId: 'body', defaultDataset: 'image', controls: [{ id: 'image', thumbnailUrl: '/thumb', texture: { url: '/image', width: 2, height: 1 } }] };
@@ -94,7 +94,7 @@ test('additional shared build projections validate fields before exposing them',
   assert.equal(readStellarExtent(extent, 'body', 'source').radiusPc, 1);
   assert.throws(() => readStellarExtent({ ...extent, schema: 'wrong' }, 'body', 'source'));
   assert.throws(() => readStellarExtent({ ...extent, radiusPc: 0 }, 'body', 'source'));
-  assert.equal(readComparableSource({ schema: 'current', extra: 1 }, { schema: 'current' }).extra, 1);
+  assert.equal(readComparableSource({ schema: 'current', extra: 1 }, { schema: 'current' })?.extra, 1);
   assert.equal(readStellarDotMeasurements({ radiusKm: 1 }).radiusKm, 1);
   assert.throws(() => readStellarDotMeasurements({ radiusKm: NaN }));
   assert.equal(readFeatureMapLongitude({ schema: PREPARED_FEATURES_SCHEMA, mapLeftEdgeLongitudeDeg: 30 }), 30);
@@ -131,4 +131,36 @@ test('descriptor rewrites admit the schema and preserve source generator metadat
 });
 test('compact delivery attachment uses the same host projection', () => {
   assert.equal(readVolumeAttachment({ schema: COMPACT_DENSITY_DELIVERY_SCHEMA, attachedTo: 'lmc' }).attachedTo, 'lmc');
+});
+
+test('build subset schema identifiers retain their historical spellings', () => {
+  assert.equal(CHART_ASSETS_SCHEMA, 'cssearth-chart-assets@1');
+  assert.equal(COMPACT_DENSITY_DELIVERY_SCHEMA, 'cssearth-compact-density-delivery@1');
+  assert.equal(GALAXY_BACKING_SCHEMA, 'cssearth-galaxy-backing@1');
+  assert.equal(HOSTED_PLANET_MEASUREMENTS_SCHEMA, 'cssearth-hosted-planet@1');
+  assert.equal(NEBULA_DELIVERY_SCHEMA, 'cssearth-nebula-delivery@2');
+  assert.equal(NEUTRON_STAR_MEASUREMENTS_SCHEMA, 'cssearth-neutron-star@1');
+  assert.equal(OBJECT_CONTENT_SCHEMA, 'cssearth-object-content@2');
+  assert.equal(OBJECT_RUNTIME_SCHEMA, 'cssearth-object-runtime@5');
+  assert.equal(OBJECT_SCHEMA, 'cssearth-object@2');
+  assert.equal(PACKAGED_POINTS_SOURCE_SCHEMA, 'cssearth-packaged-points-source@1');
+  assert.equal(PREPARED_FEATURES_SCHEMA, 'cssearth-prepared-features@1');
+  assert.equal(PREPARED_SURFACE_FEATURES_SCHEMA, 'cssearth-prepared-surface-features@1');
+  assert.equal(PREPARED_VOLUME_PRESENTATION_SCHEMA, 'cssearth-volume-presentation@2');
+  assert.equal(RASTER_RECIPE_SCHEMA, 'cssearth-raster-recipe@2');
+  assert.equal(SOURCE_MANIFEST_SCHEMA, 'cssearth-authoritative-sources@3');
+  assert.equal(STELLAR_EXTENT_SOURCE_SCHEMA, 'cssearth-stellar-extent@1');
+  assert.equal(SYSTEM_TEXT_SCHEMA, 'cssearth-system-text@1');
+  assert.equal(VOLUME_PRESENTATION_SOURCE_SCHEMA, 'cssearth-volume-presentation-source@2');
+  assert.equal(VOLUME_SOURCE_MANIFEST_SCHEMA, 'cssearth-volume-source-manifest@2');
+  assert.equal(WORLD_CONTEXT_SOURCE_SCHEMA, 'cssearth-world-context-source@1');
+});
+
+import { DENSITY_VOLUME_DATASET_BANK_SOURCE_SCHEMA } from './build-projections.js';
+import { VOLUME_DATASET_MANIFEST_SCHEMA } from '../volume/volume-dataset-manifest.js';
+test('attachment projections admit the historical dataset-bank envelopes', () => {
+  assert.equal(DENSITY_VOLUME_DATASET_BANK_SOURCE_SCHEMA, 'cssearth-density-volume-dataset-bank-source@1');
+  assert.equal(VOLUME_DATASET_MANIFEST_SCHEMA, 'cssearth-volume-dataset-manifest@1');
+  for (const schema of ['cssearth-density-volume-dataset-bank-source@1', 'cssearth-volume-dataset-manifest@1'])
+    assert.equal(readVolumeAttachment({ schema, attachedTo: 'body' }).attachedTo, 'body');
 });

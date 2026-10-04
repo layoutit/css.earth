@@ -1,4 +1,4 @@
-import { parsePreparedGalaxyCatalog, readVolumePresentationPreviews } from '@cssearth/objects';
+import { readMapSphereDatasetPreviews, parsePreparedGalaxyCatalog, readVolumePresentationPreviews } from '@cssearth/objects';
 import { parseObjectDescriptor } from '@cssearth/objects';
 import { PREPARED_GALAXY_CATALOG_SCHEMA } from '@cssearth/objects';
 import { IMAGE_MESH_SCHEMA, CATALOGUE_POINTS_BINARY_SCHEMA, DENSITY_VOLUME_FORMAT, OBJECT_RUNTIME_SCHEMA, parsePreparedObjectRuntime, requireControls } from '@cssearth/objects';
@@ -92,7 +92,7 @@ export async function companionThumbnails({ objectDirectory, publicDirectory, co
     }
     // A sphere of sky (the microwave background) publishes a picture of each of its datasets.
     if (bank.prepared?.format === IMAGE_MESH_SCHEMA) {
-      const datasets = JSON.parse(await readFile(resolve(bankDirectory, 'prepared/datasets.json'), 'utf8')) as { controls: { id: string; thumbnailUrl: string }[] };
+      const datasets = readMapSphereDatasetPreviews(JSON.parse(await readFile(resolve(bankDirectory, 'prepared/datasets.json'), 'utf8')));
       const picture = datasets.controls.find(candidate => candidate.id === control.volume!.datasetId)?.thumbnailUrl;
       if (!picture) throw new TypeError(`${bankDirectory}/prepared/datasets.json: dataset ${control.volume.datasetId} names no picture.`);
       await mkdir(dirname(output), { recursive: true });

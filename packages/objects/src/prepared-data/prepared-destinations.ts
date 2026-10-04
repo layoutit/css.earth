@@ -35,8 +35,9 @@ export function readDestinationSettlements(catalog: unknown, pin: { readonly obj
     if (!isRecord(place)) throw new TypeError(`${pin.objectId}: place record is invalid.`);
     const id = place.id;
     if (!(typeof id === 'number' && Number.isSafeInteger(id)) && !(typeof id === 'string' && /^[0-9]+$/u.test(id))) throw new TypeError(`${pin.objectId}: place id is invalid.`);
-    if (typeof place.name !== 'string' || !place.name || typeof place.latitude !== 'number' || !Number.isFinite(place.latitude) ||
-        typeof place.longitude !== 'number' || !Number.isFinite(place.longitude)) throw new TypeError(`${pin.objectId}: place settlement is invalid.`);
+    if (typeof place.name !== 'string' || !place.name) throw new TypeError('place name must be text.');
+    if (typeof place.latitude !== 'number' || !Number.isFinite(place.latitude)) throw new TypeError('place latitude must be finite.');
+    if (typeof place.longitude !== 'number' || !Number.isFinite(place.longitude)) throw new TypeError('place longitude must be finite.');
     return { id: String(id), name: place.name, latitudeDeg: place.latitude, longitudeDeg: place.longitude };
   });
 }

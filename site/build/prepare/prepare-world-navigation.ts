@@ -1,10 +1,11 @@
 import { parsePreparedObjectRuntime, validatePreparedCubicSky, validateDirectionalSunPlan } from '@cssearth/objects';
-import { parseObjectDescriptor } from '@cssearth/objects';
+import { readObjectDescriptorRecord } from '@cssearth/objects';
 import { parseSolarSceneSource, parsePagedRecipe, OBJECT_RUNTIME_SCHEMA, WORLD_NAVIGATION_PREPARATION_SCHEMA, SOLAR_SYSTEM_PREPARATION_SCHEMA, PAGED_ELLIPSOID_SCHEMA, type WorldNavigationPreparationReceipt } from '@cssearth/objects';
 
 import { HOSTED_PLANET_IDS, STAR_IDS } from '@cssearth/astronomy';
 import { buildPolyCameraSceneTransform } from '@layoutit/polycss';
 import { preparedControlPitch } from '@cssearth/engine';
+import { requireRecord } from '@cssearth/core';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve, relative } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -276,8 +277,8 @@ if (invoked) {
   const scene = JSON.parse(await readFile(resolve(outputDirectory, 'scene.json'), 'utf8'));
   const result = await prepareWorldNavigationDefinition({ objectDirectory, definition });
   await writeWorldNavigationArtifacts(outputDirectory, result, scene);
-  const descriptorPath = resolve(objectDirectory, 'object.json'), descriptor = parseObjectDescriptor(JSON.parse(await readFile(descriptorPath, 'utf8')));
-  await writeFile(descriptorPath, `${JSON.stringify({ ...descriptor, properties: { ...descriptor.properties, worldFrame: result.frame } }, null, 2)}\n`);
+  const descriptorPath = resolve(objectDirectory, 'object.json'), descriptor = readObjectDescriptorRecord(JSON.parse(await readFile(descriptorPath, 'utf8')));
+  await writeFile(descriptorPath, `${JSON.stringify({ ...descriptor, properties: { ...requireRecord(descriptor.properties), worldFrame: result.frame } }, null, 2)}\n`);
   const { writeObjectJson } = await import(pathToFileURL(resolve(objectDirectory, '../../../site/build/prepare/prepare-object-json.mts')).href);
   console.log(JSON.stringify(await writeObjectJson(descriptor.id, result.definition)));
 }

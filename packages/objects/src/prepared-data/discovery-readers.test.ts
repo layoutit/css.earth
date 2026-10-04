@@ -45,3 +45,9 @@ test('full and truncated transports admit the same valid camera and reject a wro
   assert.throws(() => readRuntimeCamera({ ...value, schema: 'wrong' }));
   assert.throws(() => readRuntimeCameraPrefix(prefix.replace(OBJECT_RUNTIME_SCHEMA, 'wrong')));
 });
+
+test('discovery schema identifiers retain historical spellings', () => {
+  assert.equal(SHAPE_MODEL_SCHEMA, 'cssearth-shape-model@2');
+  assert.equal(OBJECT_RUNTIME_SCHEMA, 'cssearth-object-runtime@5');
+  assert.equal(PREPARED_DESTINATIONS_SCHEMA, 'cssearth-prepared-destinations@1');
+});

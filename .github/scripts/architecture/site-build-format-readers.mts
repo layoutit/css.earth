@@ -152,7 +152,11 @@ export function buildFormatReaderFindings(path: string, text: string, sharedPath
         if (ts.isIdentifier(child) && checker.getSymbolAtLocation(child) === parameter) references.push(child);
         ts.forEachChild(child, collect);
       }; collect(node.body);
-      const first = references[0];
+      const first = references.find(reference => {
+        const parent = reference.parent;
+        return !(ts.isBinaryExpression(parent) && [ts.SyntaxKind.EqualsEqualsEqualsToken, ts.SyntaxKind.ExclamationEqualsEqualsToken].includes(parent.operatorToken.kind)
+          && (parent.left.kind === ts.SyntaxKind.NullKeyword || parent.right.kind === ts.SyntaxKind.NullKeyword));
+      });
       if (first?.parent && ts.isCallExpression(first.parent) && ts.isIdentifier(first.parent.expression) && parsers.has(first.parent.expression.text))
         {
         const symbol = checker.getSymbolAtLocation(node.name), imported = checker.getSymbolAtLocation(first.parent.expression), reader = imported && parserSymbols.get(imported);
@@ -161,10 +165,34 @@ export function buildFormatReaderFindings(path: string, text: string, sharedPath
     }
     ts.forEachChild(node, adapters);
   }; adapters(tree);
+  // Resolve lexical aliases by symbol, so unrelated or shadowed names do not count.
+  const jsonReference = (node: ts.Expression, seen = new Set<ts.Symbol>()): boolean => {
+    if (ts.isParenthesizedExpression(node) || ts.isAsExpression(node)) return jsonReference(node.expression, seen);
+    if (!ts.isIdentifier(node)) return false;
+    const symbol = checker.getSymbolAtLocation(node), declaration = symbol?.valueDeclaration;
+    if (node.text === 'JSON' && !declaration) return true;
+    if (!symbol || seen.has(symbol) || !declaration || !ts.isVariableDeclaration(declaration) || !declaration.initializer) return false;
+    return jsonReference(declaration.initializer, new Set([...seen, symbol]));
+  };
+  const jsonParse = (node: ts.Expression, seen = new Set<ts.Symbol>()): boolean => {
+    if (ts.isParenthesizedExpression(node) || ts.isAsExpression(node)) return jsonParse(node.expression, seen);
+    if (ts.isPropertyAccessExpression(node)) return node.name.text === 'parse' && jsonReference(node.expression);
+    if (ts.isElementAccessExpression(node)) return ts.isStringLiteralLike(node.argumentExpression) && node.argumentExpression.text === 'parse' && jsonReference(node.expression);
+    if (!ts.isIdentifier(node)) return false;
+    const symbol = checker.getSymbolAtLocation(node), declaration = symbol?.valueDeclaration;
+    if (!symbol || seen.has(symbol) || !declaration) return false;
+    const next = new Set([...seen, symbol]);
+    if (ts.isVariableDeclaration(declaration) && declaration.initializer) return jsonParse(declaration.initializer, next);
+    if (ts.isBindingElement(declaration) && ts.isObjectBindingPattern(declaration.parent) && ts.isVariableDeclaration(declaration.parent.parent)) {
+      const key = declaration.propertyName ?? declaration.name, initializer = declaration.parent.parent.initializer;
+      return !declaration.dotDotDotToken && (ts.isIdentifier(key) || ts.isStringLiteralLike(key)) && key.text === 'parse' && !!initializer && jsonReference(initializer);
+    }
+    return false;
+  };
   const findings: string[] = [];
-  const parseNodes: ts.Node[] = [...calls.filter(call => call.expression.getText(tree) === 'JSON.parse')];
+  const parseNodes: ts.Node[] = [...calls.filter(call => jsonParse(call.expression))];
   const callbacks = (node: ts.Node): void => {
-    if (ts.isPropertyAccessExpression(node) && node.getText(tree) === 'JSON.parse' && ts.isCallExpression(node.parent) && node.parent.arguments.includes(node)) parseNodes.push(node);
+    if (ts.isExpression(node) && jsonParse(node) && ts.isCallExpression(node.parent) && node.parent.arguments.includes(node)) parseNodes.push(node);
     ts.forEachChild(node, callbacks);
   }; callbacks(tree);
   for (const parse of parseNodes) {

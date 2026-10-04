@@ -1,3 +1,4 @@
+import { MAP_SPHERE_DATASETS_SCHEMA } from './map-sphere-datasets.js';
 import { COMPACT_DENSITY_DELIVERY_SCHEMA } from '../volume/compact-density-delivery.js';
 import { HOSTED_PLANET_MEASUREMENTS_SCHEMA, NEUTRON_STAR_MEASUREMENTS_SCHEMA } from './build-projections.js';
 import { PACKAGED_POINTS_SOURCE_SCHEMA } from './build-projections.js';
@@ -33,6 +34,7 @@ import { PREPARED_CUBIC_SKY_SCHEMA, PREPARED_DIRECTIONAL_SUN_SCHEMA } from './ru
 export interface FormatReaderPolicy { readonly schema: string; readonly readers: readonly string[]; readonly paths: readonly string[] }
 /** The architecture check reads this data through the AST before any workspace build. No filesystem discovery lives here. */
 export const FORMAT_READER_POLICIES: readonly FormatReaderPolicy[] = [
+  { schema: MAP_SPHERE_DATASETS_SCHEMA, readers: ['readMapSphereDatasetPreviews'], paths: ['prepared/datasets.json'] },
   { schema: FACILITY_CATALOG_SCHEMA, readers: ['parseExplorationCatalog'], paths: [] },
   { schema: PREPARED_CUBIC_SKY_SCHEMA, readers: ['validatePreparedCubicSky'], paths: ['prepared/sky.json', 'sky.json'] },
   { schema: PREPARED_DIRECTIONAL_SUN_SCHEMA, readers: ['validateDirectionalSunPlan'], paths: ['prepared/sun.json', 'sun.json'] },
