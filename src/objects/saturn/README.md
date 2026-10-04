@@ -34,7 +34,16 @@ The map never observed three row ranges: north of 82.8 degrees, 3.8 to 1.0
 degrees north (behind the rings) and south of 87.4 degrees. The geometry
 recipe names those rows, and preparation fills them by linear interpolation in
 latitude before resampling to a 2,880 x 1,440 grid. The fill supplies no
-measured cloud detail. The polar caps are projected from the nearest
+measured cloud detail.
+
+The equatorial range is wider than the mask: 4.8 degrees north to 0.4 degrees
+south. The rows beside the mask are not clean surface. Its edge is ragged along
+longitude, and south of it the row median falls from 233 to 5 of 255 over seven
+rows, so a fill between the mask's own neighbors stayed black. The range ends
+north at the first row with no texel more than 25 % off its row's median in any
+channel, and south at the first row within 1 % of the level beyond it. The
+polar ranges stay at the mask, so the ragged dark rows beside each pole show as
+the map has them. The polar caps are projected from the nearest
 observed rows.
 
 Color. The OPAL readme calls the color TIF "arbitrarily scaled", so its
@@ -44,7 +53,7 @@ full-disc albedo of Saturn, times a 5,772 K Planck spectrum, through the CIE
 [`source/photometry/karkoschka-1998-whole-disc-color.json`](source/photometry/karkoschka-1998-whole-disc-color.json).
 The tie allows for the limb law, so the flood-lit disc integrates to
 Karkoschka's color. The map then gets back its untied luminance with one
-factor on all three channels, 1.264, and a soft shoulder keeps bright texels
+factor on all three channels, 1.269, and a soft shoulder keeps bright texels
 from clipping. Spatial color differences stay the map's own. An independent
 spectrum agrees: Payne et al. (2026) gives green/red 0.863 and blue/red 0.589,
 where Karkoschka's spectrum gives 0.863 and 0.593.
@@ -173,10 +182,10 @@ component FITS rows in stored order than after a north/south flip.
 ## Known problems
 
 - Ultraviolet and methane views contain filled rows, and their rings are the visible-light opacity profile.
-- The visible map keeps a dark line 3.8 to 1.0 degrees north, where the rings hid the planet. The fill interpolates between the rows beside the gap, and in the source those rows are dark themselves (rows 430 and 445 average 12 and 8 of 255), so the filled strip stays dark.
+- The visible map has no measured cloud detail from 4.8 degrees north to 0.4 degrees south, where the rings hid the planet. Those rows are a latitude gradient between the rows beside them.
 - Interior layers are illustrations.
 - Narrow ring features are widened and brightened for readability; they do not establish optical depth or fully resolved ringlets.
 - Rotation is accelerated. The camera, shadows and background orientation are presentation choices, and source observations come from different dates.
-- The visible map's color balance is tied to one whole-disc spectrum from 1995; the 2025 map's own cloud colors are kept, but a seasonal change in Saturn's overall color since 1995 would not show. The tie sets channel ratios only; the map's overall brightness is still the archive TIF's arbitrary scale, kept at its untied mean, and its brightest 4 % of texels are compressed by a soft shoulder.
+- The visible map's color balance is tied to one whole-disc spectrum from 1995; the 2025 map's own cloud colors are kept, but a seasonal change in Saturn's overall color since 1995 would not show. The tie sets channel ratios only; the map's overall brightness is still the archive TIF's arbitrary scale, kept at its untied mean, and its brightest 7 % of texels are compressed by a soft shoulder.
 - The map's blue channel is F395N (violet) data, displayed as sRGB blue with the F467M limb law. The navigation portrait and context image still crop the untied TIF.
 - The material overlay has one color and alpha per texel, so the per-channel limb law is exact for the prepared surface's mean color and approximate for colors far from it ([planet limbs](../../../docs/surface-preparation.md#planet-limbs-from-published-laws)). OPAL's coefficients are for near-zero phase; directional frames use them at every phase.
