@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-atmosphere-grid-fit@1",
+  "grid": "exo-rem",
+  "teffK": 936,
+  "logg": 3.9,
+  "metallicity": 0.55,
+  "co": 0.34,
+  "source": {
+    "citation": "Malin et al. (2024), arXiv:2408.16843",
+    "url": "https://arxiv.org/abs/2408.16843",
+    "locator": "Table 8, Exo-REM with the prior on the gravity: Teff 936 +66/-63 K, log g 3.90 +0.1/-0.1, [Fe/H] 0.55 +0.22/-0.19, C/O 0.34 +0.30/-0.12, radius 1.14 +/- 0.08"
+  }
+}

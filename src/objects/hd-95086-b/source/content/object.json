@@ -54,7 +54,7 @@
       {
         "id": "infrared",
         "label": "Infrared color",
-        "qualification": "False color from its measured flux in three infrared bands (De Rosa et al. (2016), ApJ 824, 121; zero points from the SVO Filter Profile Service). The disc itself is unresolved.",
+        "qualification": "False color from its measured flux in three infrared bands (De Rosa et al. (2016), ApJ 824, 121; zero points from the SVO Filter Profile Service). The disc itself is unresolved; darkening toward the edge from a model atmosphere.",
         "thumbnail": "hd-95086-b-dataset-infrared.webp",
         "surface": "hd-95086-b-surface-infrared@2x.webp",
         "poles": "hd-95086-b-poles-infrared@2x.webp",
@@ -64,7 +64,7 @@
           "url": "https://arxiv.org/abs/1604.01411"
         },
         "falseColor": true,
-        "notes": "HD 95086 b's brightness in three infrared bands as one color: red NaCo L′ 3.77 µm, green GPI K1 2.029 µm, blue GPI H 1.632 µm (De Rosa et al. (2016), ApJ 824, 121; zero points from the SVO Filter Profile Service), on a range shared with this planet alone, from zero to its brightest band (naco l′), so the color shows its band ratios; brightness is not compared across planets at different distances. Not a natural color; nobody has resolved its disc."
+        "notes": "HD 95086 b's brightness in three infrared bands as one color: red NaCo L′ 3.77 µm, green GPI K1 2.029 µm, blue GPI H 1.632 µm (De Rosa et al. (2016), ApJ 824, 121; zero points from the SVO Filter Profile Service), on a range shared with this planet alone, from zero to its brightest band (naco l′), so the color shows its band ratios; brightness is not compared across planets at different distances. Not a natural color; nobody has resolved its disc. The darkening toward the edge is the quadratic law fitted to the GPI K1 intensity PICASO 4.1 (Batalha et al. 2019, ApJ 878, 70) computes from Exo-REM cloudy (Charnay et al. 2018, ApJ 854, 172; 3.16 times solar metallicity, C/O 0.35) model atmospheres at 936 K and log g 3.9, read between the models YGP_900K_logg3.5, YGP_900K_logg4.0, YGP_950K_logg3.5, YGP_950K_logg4.0 (u1 0.570, u2 0.269; the law fits each model's eight angles within 0.25% of the centre): a cloudy model, the one Malin et al. (2024), arXiv:2408.16843 fit to this planet, because no table reaches a planet this cold and nobody has resolved its disc."
       }
     ]
   },

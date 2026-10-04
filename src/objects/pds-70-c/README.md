@@ -16,6 +16,8 @@ PDS 70 c is a gas giant still forming inside the gap of [PDS 70](../pds-70/READM
 
 **Shape dataset.** A sphere of the model radius in the shared neutral gray: the planet is a point in every image. A false color needs three firmly detected bands; Stolker et al. ([2020](https://arxiv.org/abs/2009.04483)) call their Brα detection of it tentative, and the papers checked print no three firm ones, so it stays gray.
 
+**Limb.** The disc is dimmed toward the limb by the quadratic law fitted to the SPHERE K1 intensity PICASO 4.1 (Batalha et al. 2019, ApJ 878, 70) computes from Exo-REM cloudy (Charnay et al. 2018, ApJ 854, 172; 1 times solar metallicity, C/O 0.50) model atmospheres at 1,112 K and log g 3.87, read between the models YGP_1100K_logg3.5, YGP_1100K_logg4.0, YGP_1150K_logg3.5, YGP_1150K_logg4.0 (u1 0.407, u2 0.370; the law fits each model's eight angles within 0.48% of the centre): a cloudy model, the one Wang et al. (2021), AJ 161, 148 fit to this planet, because no table reaches a planet this cold and nobody has resolved its disc ([nodes](source/photometry/picaso-exo-rem-k1-quadratic.tsv)). The temperature and gravity are that fit's (Table 4, PDS 70 c, Exo-REM with interstellar extinction: Teff 1112 +133/-98 K, radius 2.42 +0.66/-0.54, log g 3.87 +0.48/-0.30, [M/H] 0.01 +0.44/-0.42, C/O 0.50 +0.20/-0.19, A_V 18.6 +1.3/-3.2, Bayes factor 2.2e6; the plain Exo-REM fit (1024 K) has the lowest Bayes factor of the table; [record](source/photometry/atmosphere-fit.json)), not the 1,054 K of its measurements record. The planet has no measured color; the law is read in SPHERE K1, the K band it is seen in and the band of PDS 70 b's law. The fit dims the model by an extinction that is the same over the whole disc, so the law is the model atmosphere's. It is not the fit with the highest evidence in that table (plain DRIFT-PHOENIX, 1054 K, Bayes factor 6.2e7): it is the best fit of the models that are public with their clouds.
+
 **Rotation.** None measured. The display axis is the orbit normal ([rotation.json](source/preparation/rotation.json)).
 
 ## Evidence
@@ -24,10 +26,19 @@ Run of 2026-09-23 (this version):
 
 - [`hostedOrbits.test.ts`](../../../packages/astronomy/src/hostedOrbits.test.ts) checks the GRAVITY positions, the near side and the direction of motion (above); the astronomy package's 857 tests pass.
 
+Run of 2026-10-04, when the limb law was added. The test above still applies: the orbit did not change.
+
+- The app's arrival picture of the planet, a flat gray disc before and darkened toward the limb after, by the law computed from its fitted Exo-REM model:
+
+![PDS 70 c, a flat gray disc before and darkened toward the limb after](evidence/2026-10-04/limb.jpg)
+
+- [`imaged-limb.test.mts`](../../../packages/telescope-cli/src/new-object/imaged/imaged-limb.test.mts) checks that the law's node file records, for each model, how much of the band flux of the release's own spectrum PICASO finds (97% to 103% here), and that a planet with no color keeps its shape paragraph and credit when the law is added.
+
 ## Known problems
 
 - The radius and temperature are model values, and the models disagree (above).
 - The orbit is the median of a posterior, not one fitted orbit; the dynamical mass is wide.
 - No spin is measured; the axis shown is the orbit normal.
+- **Model limb.** The limb darkening is computed from the cloudy model a paper fitted to the planet, in the band it is seen in, not a measurement of this planet; another model grid would give another law. Among the 4 models it is read between, the disc near its edge (the lowest of the eight angles) is 39% to 55% as bright as the centre. PICASO finds 97% to 103% of the band flux the release states for those models.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

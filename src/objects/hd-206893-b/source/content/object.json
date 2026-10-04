@@ -54,7 +54,7 @@
       {
         "id": "infrared",
         "label": "Infrared color",
-        "qualification": "False color from its measured flux in three infrared bands (Ward et al. (2021), as compiled in Best, Liu, Magnier & Dupuy (2024), The UltracoolSheet v2.1 (Zenodo); zero points from the SVO Filter Profile Service). The disc itself is unresolved.",
+        "qualification": "False color from its measured flux in three infrared bands (Ward et al. (2021), as compiled in Best, Liu, Magnier & Dupuy (2024), The UltracoolSheet v2.1 (Zenodo); zero points from the SVO Filter Profile Service). The disc itself is unresolved; darkening toward the edge from a model atmosphere.",
         "thumbnail": "hd-206893-b-dataset-infrared.webp",
         "surface": "hd-206893-b-surface-infrared@2x.webp",
         "poles": "hd-206893-b-poles-infrared@2x.webp",
@@ -64,7 +64,7 @@
           "url": "https://ui.adsabs.harvard.edu/abs/2021AJ....161....5W"
         },
         "falseColor": true,
-        "notes": "HD 206893 B's brightness in three infrared bands as one color: red MKO K 2.184 µm, green MKO H 1.614 µm, blue MKO J 1.2417 µm (Ward et al. (2021), as compiled in Best, Liu, Magnier & Dupuy (2024), The UltracoolSheet v2.1 (Zenodo); zero points from the SVO Filter Profile Service), on a range shared with this planet alone, from zero to its brightest band (mko k), so the color shows its band ratios; brightness is not compared across planets at different distances. Not a natural color; nobody has resolved its disc."
+        "notes": "HD 206893 B's brightness in three infrared bands as one color: red MKO K 2.184 µm, green MKO H 1.614 µm, blue MKO J 1.2417 µm (Ward et al. (2021), as compiled in Best, Liu, Magnier & Dupuy (2024), The UltracoolSheet v2.1 (Zenodo); zero points from the SVO Filter Profile Service), on a range shared with this planet alone, from zero to its brightest band (mko k), so the color shows its band ratios; brightness is not compared across planets at different distances. Not a natural color; nobody has resolved its disc. The darkening toward the edge is the quadratic law fitted to the MKO H intensity PICASO 4.1 (Batalha et al. 2019, ApJ 878, 70) computes from Exo-REM cloudy (Charnay et al. 2018, ApJ 854, 172; 1 times solar metallicity, C/O 0.75) model atmospheres at 1,347 K and log g 3.55, read between the models YGP_1300K_logg3.5, YGP_1300K_logg4.0, YGP_1350K_logg3.5, YGP_1350K_logg4.0 (u1 0.656, u2 0.043; the law fits each model's eight angles within 0.10% of the centre): a cloudy model, the one Kammerer et al. (2021), arXiv:2106.08249 fit to this planet, because no table reaches a planet this cold and nobody has resolved its disc."
       }
     ]
   },

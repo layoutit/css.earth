@@ -1,0 +1,28 @@
+{
+  "id": "cassiopeia-a",
+  "classification": "nebula",
+  "order": 5390,
+  "physical": {
+    "name": "Cassiopeia A",
+    "horizonsCode": null,
+    "meanRadiusKm": 0,
+    "gravitationalParameterKm3PerS2": 0,
+    "parent": null
+  },
+  "physicalNotes": "No radius or mass of Cassiopeia A is recorded: it is an extended remnant, and its package frames it at 2.52 pc (object.json worldFrame.bodyRadiusM), the forward shock's radius, 153 arcsec (DeLaney et al. 2010, Sect. IV.1).",
+  "star": {
+    "rightAscensionDegrees": 350.8657083,
+    "declinationDegrees": 58.8137222,
+    "positionEpochJulianYear": 2000,
+    "distanceParsecs": 3400,
+    "properMotionRaMasPerYear": 0,
+    "properMotionDecMasPerYear": 0,
+    "radialVelocityKmPerS": 0,
+    "sources": {
+      "position": "Thorstensen, Fesen & van den Bergh (2001), AJ 122, 297: the expansion center and dynamical age of Cassiopeia A: its expansion center, 23h 23m 27.77s, +58° 48' 49.4\" (ICRS) (https://arxiv.org/abs/astro-ph/0104188)",
+      "distance": "Thorstensen, Fesen & van den Bergh (2001), AJ 122, 297: the expansion center and dynamical age of Cassiopeia A: a distance of 3.4 kpc (https://arxiv.org/abs/astro-ph/0104188)",
+      "properMotion": "Zero: the remnant is held at its expansion centre; no motion across the sky is applied.",
+      "radialVelocity": "Zero: no radial velocity is recorded for the remnant here."
+    }
+  }
+}

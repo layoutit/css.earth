@@ -2,13 +2,17 @@ import type { imageLayerShapeModel } from './shape.ts';
 
 type Model = ReturnType<typeof imageLayerShapeModel>;
 /** One surface the picture's light lies on: for each face pixel its depth along the sight line, the optical depth of
- * its light there and that light's color. */
-export interface ShapeLayer { depth: Float32Array; tau: Float32Array; hue: Uint8Array }
+ * its light there and that light's color. `texels` is how many face pixels across a texel of a surface that holds only
+ * smooth light may be; without it a texel is a face pixel. */
+export interface ShapeLayer { depth: Float32Array; tau: Float32Array; hue: Uint8Array; texels?: number }
 /** The picture's light on a nebula's walls, nearest surface first: the near wall, the surface between the walls where
- * the model has one, the far wall. `sharp` has bit `k` set where layer `k` holds fine detail at a pixel. A pixel
+ * the model has one, the far wall. Where a measured speed is its own depth the order is the reverse of the painting's
+ * instead: the near measured surface, the far one, the near wall, the far wall. `sharp` has bit `k` set where layer `k` holds fine detail at a pixel. A pixel
  * outside the walls has a depth of NaN in every layer. */
 export interface ShapeWalls { layers: ShapeLayer[]; sharp: Uint8Array; pixels: number }
 
+/** How many face pixels of the smooth light's blur radius a texel of a surface that holds only smooth light is, at least. */
+export const SMOOTH_PIXELS_A_TEXEL = 12;
 const layerOf = (count: number): ShapeLayer => ({ depth: new Float32Array(count).fill(NaN), tau: new Float32Array(count), hue: new Uint8Array(3 * count) });
 const tauOf = (alpha: number) => -Math.log(1 - alpha);
 
@@ -24,10 +28,15 @@ const tauOf = (alpha: number) => -Math.log(1 - alpha);
  * ones in front.
  *
  * `sky` gives a face pixel's offset from the star, east and north in arcseconds; `unitsPerArcsec` turns the model's
- * depths into the bank's units.
+ * depths into the bank's units. `broad` is each channel's smooth light blurred much farther, for a model whose measured
+ * speeds are their own depths.
  */
-export function imageLayerShapeWalls(base: Buffer, width: number, height: number, lights: readonly Float32Array[], floors: readonly Float32Array[], model: Model, sky: (px: number, py: number) => readonly [number, number], unitsPerArcsec: number): ShapeWalls {
+export function imageLayerShapeWalls(base: Buffer, width: number, height: number, lights: readonly Float32Array[], floors: readonly Float32Array[], model: Model, sky: (px: number, py: number) => readonly [number, number], unitsPerArcsec: number, broad?: readonly Float32Array[]): ShapeWalls {
   const count = width * height, near = layerOf(count), far = layerOf(count), mid = model.between ? layerOf(count) : null, sharp = new Uint8Array(count);
+  // Where a measured speed is its own depth: the two surfaces the measured light lies on, in front of the plane and behind it.
+  const lifted = model.shape.speeds?.depth === 'speed' ? [layerOf(count), layerOf(count)] as const : null;
+  // The walls then hold smooth light alone, blurred over `smoothPixels`: a twelfth of that is texel enough, in a power of two.
+  if (lifted) near.texels = far.texels = 2 ** Math.floor(Math.log2(Math.max(1, model.shape.smoothPixels / SMOOTH_PIXELS_A_TEXEL)));
   let pixels = 0;
   const hue = (layer: ShapeLayer, p: number, light: readonly number[], alpha: number) => { for (let c = 0; c < 3; c++) layer.hue[3 * p + c] = alpha > 0 ? Math.min(255, Math.round(255 * light[c]! / alpha)) : 0; };
   for (let py = 0; py < height; py++) for (let px = 0; px < width; px++) {
@@ -40,7 +49,27 @@ export function imageLayerShapeWalls(base: Buffer, width: number, height: number
     const behind = floors.map(floor => smooth > 0 ? floor[p]! / smooth * farAlpha : 0); let nearAlpha = 1 - Math.exp(-(whole - farTau)), front = [0, 0, 0];
     for (let pass = 0; pass < 2; pass++) { front = lights.map((light, c) => Math.max(0, light[p]! - (1 - nearAlpha) * behind[c]!)); nearAlpha = Math.min(.998, Math.max(nearAlpha, ...front)); }
     near.depth[p] = ends.near * unitsPerArcsec; far.depth[p] = ends.far * unitsPerArcsec; sharp[p] = 1;
-    if (!mid || !where || !(where.far > 0 || where.mid > 0)) { near.tau[p] = tauOf(nearAlpha); far.tau[p] = farTau; hue(near, p, front, nearAlpha); hue(far, p, behind, farAlpha); if (mid && where) mid.depth[p] = where.at * unitsPerArcsec; }
+    if (lifted && where?.lifted) {
+      // The fine detail a speed places lies on the two measured surfaces, in the shares of what approaches and what
+      // recedes there; what none places stays on the picture's plane. The smooth light is the shell's. One picture cannot
+      // tell the shell's halves apart, and two copies of it come apart as soon as the camera is nearer than the Sun: so
+      // the halves share only its broad part (`broad`), half each, and the far half holds the rest. The surfaces are
+      // painted in one order from every side: the plane, the far wall, the near wall, the far measured surface, the near
+      // one. Each carries the light it hides of those painted before it, in proportion to its own opacity: seen from
+      // the Sun they are the photograph, and none is made brighter to shine through another.
+      const glow = floors.map((floor, c) => Math.min(floor[p]!, lights[c]![p]!)), glowTau = Math.min(whole, -Math.log(1 - Math.min(Math.max(...glow), .998))), fineTau = whole - glowTau;
+      const fine = lights.map((light, c) => light[p]! - glow[c]!), veil = glow.map((value, c) => Math.min(value, broad ? broad[c]![p]! : 0) / 2), own = [fine.map(value => where.mid * value), glow.map((value, c) => value - veil[c]!), veil, fine.map(value => where.far * value), fine.map(value => where.near * value)];
+      const veilTau = Math.min(glowTau / 2, -Math.log(1 - Math.min(Math.max(...veil), .998))), taus = [where.mid * fineTau, glowTau - veilTau, veilTau, where.far * fineTau, where.near * fineTau], below = [0, 0, 0];
+      const painted = own.map((light, index) => { let alpha = Math.min(.998, 1 - Math.exp(-taus[index]!)), shown = light;
+        for (let pass = 0; pass < 2; pass++) { shown = light.map((value, c) => value + alpha * below[c]!); alpha = Math.min(.998, Math.max(alpha, ...shown)); }
+        for (let c = 0; c < 3; c++) below[c]! += light[c]!;
+        return { alpha, shown }; });
+      for (const [layer, index] of [[far, 1], [near, 2], [lifted[1], 3], [lifted[0], 4]] as const) { layer.tau[p] = tauOf(painted[index]!.alpha); hue(layer, p, painted[index]!.shown, painted[index]!.alpha); }
+      if (where.near > 0) lifted[0].depth[p] = where.lifted.near * unitsPerArcsec; if (where.far > 0) lifted[1].depth[p] = where.lifted.far * unitsPerArcsec;
+      sharp[p] = (where.near > 0 ? 2 : 0) | (where.far > 0 ? 4 : 0);
+      for (let c = 0; c < 3; c++) base[4 * p + c] = painted[0]!.alpha > 0 ? Math.min(255, Math.round(255 * painted[0]!.shown[c]! / painted[0]!.alpha)) : 0;
+      base[4 * p + 3] = Math.round(255 * painted[0]!.alpha); pixels++; continue;
+    } else if (!mid || !where || !(where.far > 0 || where.mid > 0)) { near.tau[p] = tauOf(nearAlpha); far.tau[p] = farTau; hue(near, p, front, nearAlpha); hue(far, p, behind, farAlpha); if (mid && where) mid.depth[p] = where.at * unitsPerArcsec; }
     else {
       // Detail off the near wall: that share of the near wall is its half of the smooth light alone. The surface
       // between the walls holds its share of the detail, seen through the near wall; the far wall is what the
@@ -57,5 +86,5 @@ export function imageLayerShapeWalls(base: Buffer, width: number, height: number
     base[4 * p + 3] = 0; pixels++;
   }
   // A surface between the walls is the middle layer; without one the far wall's detail bit is the second.
-  return { layers: mid ? [near, mid, far] : [near, far], sharp, pixels };
+  return { layers: lifted ? [lifted[0], lifted[1], near, far] : mid ? [near, mid, far] : [near, far], sharp, pixels };
 }

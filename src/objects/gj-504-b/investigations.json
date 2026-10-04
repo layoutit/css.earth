@@ -26,11 +26,13 @@
     {
       "id": "limb-darkening",
       "subject": "Limb darkening",
-      "status": "unresolved",
-      "finding": "No limb darkening is drawn: the published limb table (Claret, Hauschildt & Witte 2012) starts at 1,500 K, and at 564 K the planet is below it. Its published grid fit is Exo-REM, a cloudy model (512 +/- 10 K, Mâlin et al. 2025). Exo-REM's public grid releases temperature and gas profiles and spectra, but no cloud properties, so the limb of a cloudy Exo-REM model cannot be computed from it.",
+      "status": "included",
+      "finding": "The disc is dimmed toward the limb by the quadratic law fitted to the MKO H intensity PICASO 4.1 (Batalha et al. 2019, ApJ 878, 70) computes from Exo-REM cloudy (Charnay et al. 2018, ApJ 854, 172; 3.16 times solar metallicity, C/O 0.70) model atmospheres at 512 K and log g 3.45, read between the models YGP_500K_logg3.0, YGP_500K_logg4.0, YGP_550K_logg3.0, YGP_550K_logg4.0 (u1 1.319, u2 -0.320; the law fits each model's eight angles within 0.36% of the centre): a cloudy model, the one Mâlin et al. (2025), arXiv:2501.00104 fit to this planet, because no table reaches a planet this cold and nobody has resolved its disc. The temperature and gravity are that fit's (Table 4 (best-fit atmospheric parameters, Exo-REM), near- and mid-infrared data: Teff 512 +10/-10 K, log g 3.45 +0.35/-0.25, metallicity 0.54 +0.09/-0.11, C/O 0.70 +0.06/-0.07, radius 1.08 +0.04/-0.03; [record](source/photometry/atmosphere-fit.json)), not the 564 K of its measurements record.",
       "evidence": [
-        "https://arxiv.org/abs/2501.00104",
-        "https://lesia.obspm.fr/exorem/YGP_grids/"
+        "https://lesia.obspm.fr/exorem/YGP_grids/old_grids_2021/",
+        "https://gitlab.obspm.fr/Exoplanet-Atmospheres-LESIA/exorem",
+        "https://doi.org/10.5281/zenodo.3759675",
+        "https://arxiv.org/abs/2501.00104"
       ]
     }
   ]

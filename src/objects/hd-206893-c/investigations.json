@@ -11,6 +11,16 @@
       "evidence": [
         "https://arxiv.org/abs/2208.04867"
       ]
+    },
+    {
+      "id": "limb-darkening",
+      "subject": "Limb darkening",
+      "status": "unresolved",
+      "finding": "No limb darkening is drawn: the published limb table (Claret, Hauschildt & Witte 2012) starts at 1,500 K. The planet's fit is a DRIFT-PHOENIX model at 1,182 +21/-54 K (Hinkley et al. 2023, Table 3), below the table, and the clouds of that grid's models are not public. The paper also fitted Exo-REM models, whose grid is public with its clouds, but prints no parameters of that fit.",
+      "evidence": [
+        "https://arxiv.org/abs/2208.04867",
+        "https://lesia.obspm.fr/exorem/YGP_grids/old_grids_2021/"
+      ]
     }
   ]
 }

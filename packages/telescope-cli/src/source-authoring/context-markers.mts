@@ -114,7 +114,7 @@ async function flatDatasetColor(id: string, science: Record<string, unknown>, su
 async function markerFor(id: string) {
   const { science, source } = await defaultSurface(id);
   const flat = await flatDatasetColor(id, science, source);
-  if (flat && science.kind === 'disc-integrated-band-color' && science.limbDarkening !== undefined) {
+  if (flat && (science.kind === 'disc-integrated-band-color' || science.kind === 'neutral-shape') && science.limbDarkening !== undefined) {
     const law = await loadGridLimbDarkening(path => readFile(resolve(objects, id, 'source', path)), science.limbDarkening, id);
     return disc((x, y) => flat.map(value => Math.round(255 * linearToSrgb(srgbToLinear(value / 255) * Math.max(0, limbIntensity(Math.sqrt(Math.max(0, 1 - x * x - y * y)), law))))) as unknown as [number, number, number]);
   }

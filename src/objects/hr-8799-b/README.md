@@ -16,7 +16,7 @@ HR 8799 b is one of the three planets Marois et al. ([2008](https://arxiv.org/ab
 
 **NIRCam color dataset.** The planet's flux densities in JWST/NIRCam F460M, F430M and F410M, 64.5, 72.6 and 164.6 µJy (Balmer et al. 2025, Table 2), drive red, green and blue. Balmer et al. detect all four planets in these three filters (section III.3), and the longest wavelength is red. The four planets share one range, from zero to the largest of their twelve values, planet d in F410M (410.5 µJy), so their band ratios and their brightness against each other survive ([color preparation](../../../docs/color-preparation.md)). The result, #6e75aa, is infrared false color, not what an eye would see, and one color for the whole disc ([photometry record](source/photometry/jwst-nircam-band-color.json)).
 
-**Limb.** The disc is dimmed toward the limb by the quadratic law fitted to the JWST/NIRCam F430M intensity PICASO 4.1 (Batalha et al. 2019, ApJ 878, 70) computes from Sonora Diamondback cloudy (Morley et al. 2024, ApJ 975, 59; [M/H] +0.5, f_sed 2) model atmospheres at 1,100 K and log g 3.5, read between the models t1000g31f2_m+0.5_co1.0, t1000g100f2_m+0.5_co1.0, t1100g31f2_m+0.5_co1.0, t1100g100f2_m+0.5_co1.0 (u1 0.243, u2 0.251; the law fits each model's eight angles within 0.38% of the centre): a cloudy model, the one Nasedkin et al. (2024), A&A 687, A298 fit to this planet, because no table reaches a planet this cold and nobody has resolved its disc ([nodes](source/photometry/picaso-diamondback-f430m-quadratic.tsv)). The temperature and gravity are that fit's (Table 9 (grid-fit chi-squared results), HR 8799 b, Diamondback: chi-squared 879, Teff 1100, log g 3.5, [M/H] 0.5, f_sed 2.0, C/O 0.458, radius 1.07; the single best-fit model of that grid; [record](source/photometry/atmosphere-fit.json)), not the 942 K of its measurements record.
+**Limb.** The disc is dimmed toward the limb by the quadratic law fitted to the JWST/NIRCam F430M intensity PICASO 4.1 (Batalha et al. 2019, ApJ 878, 70) computes from Sonora Diamondback cloudy (Morley et al. 2024, ApJ 975, 59; [M/H] +0.5, f_sed 2) model atmospheres at 1,100 K and log g 3.5, read between the models t1000g31f2_m+0.5_co1.0, t1000g100f2_m+0.5_co1.0, t1100g31f2_m+0.5_co1.0, t1100g100f2_m+0.5_co1.0 (u1 0.268, u2 0.274; the law fits each model's eight angles within 0.36% of the centre): a cloudy model, the one Nasedkin et al. (2024), A&A 687, A298 fit to this planet, because no table reaches a planet this cold and nobody has resolved its disc ([nodes](source/photometry/picaso-diamondback-f430m-quadratic.tsv)). The temperature and gravity are that fit's (Table 9 (grid-fit chi-squared results), HR 8799 b, Diamondback: chi-squared 879, Teff 1100, log g 3.5, [M/H] 0.5, f_sed 2.0, C/O 0.458, radius 1.07; the single best-fit model of that grid; [record](source/photometry/atmosphere-fit.json)), not the 942 K of its measurements record.
 
 **Rotation.** None measured in the papers this package cites; the display axis is the orbit normal ([rotation.json](source/preparation/rotation.json)).
 
@@ -30,7 +30,7 @@ Run of 2026-09-23:
 
 Run of 2026-10-04, when the limb law was added. The tests above still apply: the orbit and color records did not change.
 
-- The app's arrival pictures of the five imaged planets below the published table, before and after the law computed from each one's fitted cloudy model:
+- The app's arrival pictures of the five imaged planets below the published table, before and after the law computed from each one's fitted cloudy model (solved with four-term spherical harmonics since the same day; the first, two-stream laws were too flat, see [VHS 1256 b](../vhs-1256-1257-b/README.md#evidence)):
 
 ![HR 8799 b, c, d and e and VHS 1256 b, each a flat disc before and darkened toward the limb after](evidence/2026-10-04/limbs.jpg)
 
@@ -43,7 +43,7 @@ Run of 2026-10-04, when the limb law was added. The tests above still apply: the
 - The period is derived, not printed by the paper.
 - Orbit elements are posterior medians of a coplanar fit, which reproduce the data but are not a single self-consistent sample.
 - No spin is measured; the axis shown is the orbit normal.
-- **Model limb.** The limb darkening is computed from the cloudy model a paper fitted to the planet, in the middle band of its color, not a measurement of this planet; another model grid would give another law.
 - The limb law's model grid is not the best-fitting one: Nasedkin et al. (2024, Table 8) find that Exo-REM and ATMO fit these spectra better than Diamondback, which is used because its structures and cloud properties are public.
+- **Model limb.** The limb darkening is computed from the cloudy model a paper fitted to the planet, in the middle band of its color, not a measurement of this planet; another model grid would give another law. Among the 4 models it is read between, the disc near its edge (the lowest of the eight angles) is 55% to 60% as bright as the centre.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

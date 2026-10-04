@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-atmosphere-grid-fit@1",
+  "grid": "exo-rem",
+  "teffK": 845,
+  "logg": 3.89,
+  "metallicity": 0.69,
+  "co": 0.57,
+  "source": {
+    "citation": "Balmer et al. (2025), arXiv:2411.05917",
+    "url": "https://arxiv.org/abs/2411.05917",
+    "locator": "Table 4, all data, Exo-REM with a uniform prior on the radius: Teff 845 +/- 3 K, log g 3.89 +/- 0.05, radius 1.13 +/- 0.01, [Fe/H] 0.69 +/- 0.02, C/O 0.57 +/- 0.01, the lowest chi-squared of the two Exo-REM rows (2.45); with the gravity fixed at the dynamical mass the same grid gives 783 +/- 5 K at log g 3.7"
+  }
+}

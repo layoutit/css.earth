@@ -15,9 +15,15 @@ export function validatePreparedImageLayerBank(input: unknown): PreparedCssImage
         typeof bank.samplingStepUnits !== 'number' || !Number.isFinite(bank.samplingStepUnits) || bank.samplingStepUnits <= 0) {
       throw new TypeError('Image-layer views require prepared plane normals and sampling intervals.');
     }
-    bankViews.push({ axis: bank.axis as PreparedImageLayerView['axis'],
-      normalUnits: normal as [number, number, number], samplingStepUnits: bank.samplingStepUnits });
     if (!Array.isArray(bank.leaves)) throw new TypeError('Image-layer bank needs prepared leaves.');
+    const scenes = bank.scenes;
+    if (scenes !== undefined && (!Array.isArray(scenes) || !scenes.length || !scenes.every(size => Number.isInteger(size) && size > 0) ||
+        scenes.reduce((sum: number, size: number) => sum + size, 0) !== bank.leaves.length)) {
+      throw new TypeError(`Image-layer stack ${String(bank.axis)}: its scenes are positive whole numbers of leaves that add up to its ${bank.leaves.length} leaves, not ${JSON.stringify(scenes)}.`);
+    }
+    bankViews.push({ axis: bank.axis as PreparedImageLayerView['axis'],
+      normalUnits: normal as [number, number, number], samplingStepUnits: bank.samplingStepUnits,
+      ...(scenes === undefined ? {} : { sceneSizes: scenes as number[] }) });
     return { axis: bank.axis, leaves: bank.leaves.map(input => {
       const leaf = record(input);
       return { id: leaf.id, centerUnits: leaf.centerUnits, texturePath: leaf.texturePath,

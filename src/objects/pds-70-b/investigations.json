@@ -34,11 +34,13 @@
     {
       "id": "limb-darkening",
       "subject": "Limb darkening",
-      "status": "unresolved",
-      "finding": "No limb darkening is drawn: the published limb table (Claret, Hauschildt & Witte 2012) starts at 1,500 K. That table is computed from PHOENIX models, and the planet's fit with a PHOENIX model, DRIFT-PHOENIX, is 1,384 +47/-48 K, or 1,442 +52/-71 K with interstellar extinction (Wang et al. 2021, Table 4), below the table; the law is not extrapolated. Its Exo-REM fit there is 1,051 K. Exo-REM's public grid releases temperature and gas profiles and spectra, but no cloud properties, so the limb of a cloudy Exo-REM model cannot be computed from it.",
+      "status": "included",
+      "finding": "The disc is dimmed toward the limb by the quadratic law fitted to the SPHERE K1 intensity PICASO 4.1 (Batalha et al. 2019, ApJ 878, 70) computes from Exo-REM cloudy (Charnay et al. 2018, ApJ 854, 172; 1 times solar metallicity, C/O 0.60) model atmospheres at 1,234 K and log g 3.89, read between the models YGP_1200K_logg3.5, YGP_1200K_logg4.0, YGP_1250K_logg3.5, YGP_1250K_logg4.0 (u1 0.300, u2 0.245; the law fits each model's eight angles within 0.49% of the centre): a cloudy model, the one Wang et al. (2021), AJ 161, 148 fit to this planet, because no table reaches a planet this cold and nobody has resolved its disc. The temperature and gravity are that fit's (Table 4, Exo-REM with interstellar extinction: Teff 1234 +95/-78 K, radius 2.88 +0.44/-0.35, log g 3.89 +0.42/-0.35, [M/H] 0.01 +0.44/-0.37, C/O 0.61 +0.12/-0.21, A_V 8.3 +1.5/-2.2, Bayes factor 46; the plain Exo-REM fit (1051 K) has the lowest Bayes factor of the table; [record](source/photometry/atmosphere-fit.json)), not the 1,392 K of its measurements record. The fit dims the model by an extinction that is the same over the whole disc, so the law is the model atmosphere's. It is not the fit with the highest evidence in that table (DRIFT-PHOENIX, Bayes factor 96): it is the adequate fit whose models are public with their clouds.",
       "evidence": [
-        "https://arxiv.org/abs/2101.04187",
-        "https://lesia.obspm.fr/exorem/YGP_grids/"
+        "https://lesia.obspm.fr/exorem/YGP_grids/old_grids_2021/",
+        "https://gitlab.obspm.fr/Exoplanet-Atmospheres-LESIA/exorem",
+        "https://doi.org/10.5281/zenodo.3759675",
+        "https://arxiv.org/abs/2101.04187"
       ]
     }
   ]

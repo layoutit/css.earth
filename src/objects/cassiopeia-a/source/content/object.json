@@ -1,0 +1,131 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "cassiopeia-a",
+  "displayName": "Cassiopeia A",
+  "panel": {
+    "facts": [
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "3,400 pc",
+        "source": {
+          "catalogueId": "publication-thorstensen-2001-cassiopeia-a-expansion-centre",
+          "url": "https://arxiv.org/abs/astro-ph/0104188",
+          "label": "Thorstensen, Fesen & van den Bergh (2001), AJ 122, 297: the expansion center and dynamical age of Cassiopeia A: a distance of 3.4 kpc",
+          "checked": "2026-10-04"
+        }
+      },
+      {
+        "id": "position",
+        "label": "Sky position (ICRS)",
+        "value": "RA 350.866°, Dec 58.814°",
+        "source": {
+          "catalogueId": "publication-thorstensen-2001-cassiopeia-a-expansion-centre",
+          "url": "https://arxiv.org/abs/astro-ph/0104188",
+          "label": "Thorstensen, Fesen & van den Bergh (2001), AJ 122, 297: the expansion center and dynamical age of Cassiopeia A: its expansion center, 23h 23m 27.77s, +58° 48' 49.4\"",
+          "checked": "2026-10-04"
+        }
+      },
+      {
+        "id": "explosion",
+        "label": "Its knots left one point in",
+        "value": "A.D. 1671.3 ± 0.9, if they never slowed",
+        "source": {
+          "catalogueId": "publication-thorstensen-2001-cassiopeia-a-expansion-centre",
+          "url": "https://arxiv.org/abs/astro-ph/0104188",
+          "label": "Thorstensen, Fesen & van den Bergh (2001), AJ 122, 297: the expansion center and dynamical age of Cassiopeia A: knot convergent date A.D. 1671.3 ± 0.9, assuming no deceleration",
+          "checked": "2026-10-04"
+        }
+      },
+      {
+        "id": "ejecta-speeds",
+        "label": "Ejecta speeds along the sight line",
+        "value": "About -4,000 to 6,000 km/s",
+        "source": {
+          "catalogueId": "publication-delaney-2010-cassiopeia-a-3d",
+          "url": "https://arxiv.org/abs/1011.3858",
+          "label": "DeLaney et al. (2010), ApJ 725, 2038: the three-dimensional structure of Cassiopeia A; Sect. III: [Ar II] velocities",
+          "checked": "2026-10-04"
+        }
+      },
+      {
+        "id": "picture",
+        "label": "Picture width",
+        "value": "6.09 arcmin, 6.02 pc at its distance",
+        "source": {
+          "catalogueId": "esawebb-weic2330a",
+          "url": "https://esawebb.org/images/weic2330a/",
+          "label": "ESA/Webb weic2330a: NASA, ESA, CSA, STScI, D. Milisavljevic (Purdue University), T. Temim (Princeton University), I. De Looze (University of Gent)",
+          "checked": "2026-10-04"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "optical",
+    "controls": [
+      {
+        "id": "optical",
+        "label": "Webb · near infrared",
+        "thumbnail": "cassiopeia-a-dataset-optical.webp",
+        "volume": {
+          "objectId": "cassiopeia-a-layers",
+          "datasetId": "optical",
+          "surface": "optical"
+        },
+        "source": {
+          "id": "cassiopeia-a-layers-optical",
+          "path": "../../cassiopeia-a-layers/source/manifest.json",
+          "url": "https://esawebb.org/images/weic2330a/"
+        },
+        "falseColor": true
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Thorstensen, Fesen & van den Bergh (2001), AJ 122, 297: the expansion center and dynamical age of Cassiopeia A: a distance of 3.4 kpc",
+      "href": "https://arxiv.org/abs/astro-ph/0104188"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Thorstensen, Fesen & van den Bergh (2001), AJ 122, 297: the expansion center and dynamical age of Cassiopeia A: its expansion center, 23h 23m 27.77s, +58° 48' 49.4\"",
+      "href": "https://arxiv.org/abs/astro-ph/0104188"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Thorstensen, Fesen & van den Bergh (2001), AJ 122, 297: the expansion center and dynamical age of Cassiopeia A: knot convergent date A.D. 1671.3 ± 0.9, assuming no deceleration",
+      "href": "https://arxiv.org/abs/astro-ph/0104188"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "DeLaney et al. (2010), ApJ 725, 2038: the three-dimensional structure of Cassiopeia A; Sect. III: [Ar II] velocities",
+      "href": "https://arxiv.org/abs/1011.3858"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "ESA/Webb weic2330a: NASA, ESA, CSA, STScI, D. Milisavljevic (Purdue University), T. Temim (Princeton University), I. De Looze (University of Gent)",
+      "href": "https://esawebb.org/images/weic2330a/"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://arxiv.org/abs/astro-ph/0104188",
+      "credit": "Thorstensen, Fesen & van den Bergh (2001), AJ 122, 297: the expansion center and dynamical age of Cassiopeia A"
+    }
+  }
+}

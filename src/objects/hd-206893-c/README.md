@@ -14,6 +14,8 @@ HD 206893 c is a giant planet circling about 3.5 au from its star, inside the or
 
 **Shape dataset.** A sphere of the model radius in the shared neutral gray ([ledger](investigations.json)). Its light is measured in one band, as a K-band contrast with GRAVITY (about 8.2 × 10⁻⁵ of the star, Hinkley et al. [2023](https://arxiv.org/abs/2208.04867)); a false color needs three measured bands, so it stays gray.
 
+**Limb.** No limb darkening is drawn: the published limb table (Claret, Hauschildt & Witte 2012) starts at 1,500 K. The planet's fit is a DRIFT-PHOENIX model at 1,182 +21/-54 K (Hinkley et al. 2023, Table 3), below the table, and the clouds of that grid's models are not public. The paper also fitted Exo-REM models, whose grid is public with its clouds, but prints no parameters of that fit.
+
 **Rotation.** No rotation period or spin axis of HD 206893 c on the sky is measured; the papers cited in the README were checked. The display axis is the orbit normal ([rotation.json](source/preparation/rotation.json)).
 
 ## Evidence

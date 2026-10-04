@@ -26,7 +26,22 @@
       "falseColor": true,
       "science": {
         "kind": "disc-integrated-band-color",
-        "qualification": "Infrared false color of the whole disc from published flux densities (Sutlieff, Bonse et al. (2026), arXiv:2606.23801; zero points from the SVO Filter Profile Service, Table 1, apparent magnitude of the detections: JWST/NIRCam F444W 14.7 +/- 0.2 (2023-03-18), JWST/NIRCam F410M 15.2 +/- 0.2 (2025-03-22), VLT/ERIS L′ 15.57 +/- 0.16 (2025-12-03); SVO JWST/NIRCam.F444W 184.1 Jy, JWST/NIRCam.F410M 208.8 Jy, Paranal/ERIS.Lp 239.2 Jy): red F444W 4.35 µm, green F410M 4.072 µm, blue ERIS L′ 3.78 µm, on one range shared with the bodies the record names. The planet is unresolved, so no map is implied. It glows with its own heat, so no lighting."
+        "qualification": "Infrared false color of the whole disc from published flux densities (Sutlieff, Bonse et al. (2026), arXiv:2606.23801; zero points from the SVO Filter Profile Service, Table 1, apparent magnitude of the detections: JWST/NIRCam F444W 14.7 +/- 0.2 (2023-03-18), JWST/NIRCam F410M 15.2 +/- 0.2 (2025-03-22), VLT/ERIS L′ 15.57 +/- 0.16 (2025-12-03); SVO JWST/NIRCam.F444W 184.1 Jy, JWST/NIRCam.F410M 208.8 Jy, Paranal/ERIS.Lp 239.2 Jy): red F444W 4.35 µm, green F410M 4.072 µm, blue ERIS L′ 3.78 µm, on one range shared with the bodies the record names. The planet is unresolved, so no map is implied. It glows with its own heat, so no lighting. The disc is dimmed toward the limb by the quadratic law fitted to the JWST/NIRCam F410M intensity PICASO 4.1 (Batalha et al. 2019, ApJ 878, 70) computes from Exo-REM cloudy (Charnay et al. 2018, ApJ 854, 172; 3.16 times solar metallicity, C/O 0.65) model atmospheres at 600 K and log g 4, read between the models YGP_550K_logg3.5, YGP_550K_logg4.0, YGP_600K_logg3.5, YGP_600K_logg4.0 (u1 0.781, u2 0.156; the law fits each model's eight angles within 0.13% of the centre): a cloudy model, the one Sutlieff, Bonse et al. (2026), arXiv:2606.23801 fit to this planet, because no table reaches a planet this cold and nobody has resolved its disc.",
+        "limbDarkening": {
+          "law": "quadratic",
+          "path": "photometry/picaso-exo-rem-f410m-quadratic.tsv",
+          "grid": {
+            "teffK": 600,
+            "logg": 4,
+            "models": {}
+          },
+          "columns": {
+            "teff": "Teff",
+            "logg": "logg",
+            "u1": "a",
+            "u2": "b"
+          }
+        }
       }
     }
   ],
@@ -48,7 +63,7 @@
       },
       "limbMaterial": {
         "logicalSize": 496,
-        "composition": "transparent: the adopted source-radius opaque-sphere silhouette is the limb; no off-limb or radial-brightness source is selected",
+        "composition": "black alpha darkens the disc according to the selected limb-darkening law; transparent outside the silhouette",
         "sourceRadius": "measurements.json#radiusKm",
         "surfaceReplacement": false,
         "runtimeAlphaProcessing": false

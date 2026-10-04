@@ -1,0 +1,14 @@
+{
+  "schema": "cssearth-atmosphere-grid-fit@1",
+  "grid": "exo-rem",
+  "teffK": 1347,
+  "logg": 3.55,
+  "metallicity": 0.06,
+  "co": 0.75,
+  "note": "The paper dims this model by the extinction of enstatite dust, applied to the whole disc alike; the law is the model atmosphere's, without that dust",
+  "source": {
+    "citation": "Kammerer et al. (2021), arXiv:2106.08249",
+    "url": "https://arxiv.org/abs/2106.08249",
+    "locator": "Table 6, Exo-REM with extinction by enstatite dust (the dusty model): Teff 1347 +6/-7 K, log g 3.55 +0.06/-0.04 (toward the grid's lower boundary), [Fe/H] 0.06 +0.09/-0.07, C/O 0.75 +0.00/-0.01 (toward the upper boundary), radius 2.03 +/- 0.08, A_V 2.87 +0.36/-0.30, reduced chi-squared 0.757; the plain Exo-REM fit (1049 K, radius 2.32) is the one the paper calls an outlier"
+  }
+}

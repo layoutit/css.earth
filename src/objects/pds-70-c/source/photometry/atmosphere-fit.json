@@ -1,0 +1,15 @@
+{
+  "schema": "cssearth-atmosphere-grid-fit@1",
+  "grid": "exo-rem",
+  "teffK": 1112,
+  "logg": 3.87,
+  "metallicity": 0.01,
+  "co": 0.5,
+  "band": "SPHERE K1",
+  "note": "The planet has no measured color; the law is read in SPHERE K1, the K band it is seen in and the band of PDS 70 b's law. The fit dims the model by an extinction that is the same over the whole disc, so the law is the model atmosphere's. It is not the fit with the highest evidence in that table (plain DRIFT-PHOENIX, 1054 K, Bayes factor 6.2e7): it is the best fit of the models that are public with their clouds",
+  "source": {
+    "citation": "Wang et al. (2021), AJ 161, 148",
+    "url": "https://arxiv.org/abs/2101.04187",
+    "locator": "Table 4, PDS 70 c, Exo-REM with interstellar extinction: Teff 1112 +133/-98 K, radius 2.42 +0.66/-0.54, log g 3.87 +0.48/-0.30, [M/H] 0.01 +0.44/-0.42, C/O 0.50 +0.20/-0.19, A_V 18.6 +1.3/-3.2, Bayes factor 2.2e6; the plain Exo-REM fit (1024 K) has the lowest Bayes factor of the table"
+  }
+}

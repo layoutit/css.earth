@@ -112,5 +112,12 @@ version-pinned PyPI releases into its own ignored environment ([picaso-toolchain
 data of the release, the Sonora Bobcat structures of Marley et al. (2021, ApJ 920, 85; [doi:10.5281/zenodo.5063476](https://doi.org/10.5281/zenodo.5063476),
 CC BY 4.0), the cloudy Sonora Diamondback structures and cloud optical properties of Morley et al. (2024, ApJ 975, 59;
 [doi:10.5281/zenodo.12735103](https://doi.org/10.5281/zenodo.12735103), CC BY 4.0) and the PICASO 4.0 correlated-k tables of Batalha and Mang ([doi:10.5281/zenodo.18636725](https://doi.org/10.5281/zenodo.18636725),
-CC BY 4.0). cssEarth does not copy or modify PICASO source code. PICASO is distributed under the GNU General Public License
+CC BY 4.0). Models that state their own abundances are fetched when a law is first computed from them, and read with PICASO's
+resampled opacity database (Batalha, Freedman and Lupu, [doi:10.5281/zenodo.3759675](https://doi.org/10.5281/zenodo.3759675),
+CC BY 4.0): the cloud-free Sonora Elf Owl models of Mukherjee et al. (2024, ApJ 963, 73;
+[doi:10.5281/zenodo.10381250](https://doi.org/10.5281/zenodo.10381250), CC BY 4.0), and the cloudy models of
+[Exo-REM's public grid](https://lesia.obspm.fr/exorem/YGP_grids/old_grids_2021/) for young giant planets (Baudino et al. 2015,
+A&A 582, A83; Charnay et al. 2018, ApJ 854, 172; Blain et al. 2021, A&A 646, A15, the papers its README asks to be cited), with
+the optical constants of iron and forsterite clouds from the [Exo-REM distribution](https://gitlab.obspm.fr/Exoplanet-Atmospheres-LESIA/exorem)
+(MIT license). cssEarth does not copy or modify PICASO source code. PICASO is distributed under the GNU General Public License
 version 3, reproduced in [PICASO-LICENSE.txt](PICASO-LICENSE.txt).
