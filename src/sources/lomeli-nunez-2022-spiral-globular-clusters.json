@@ -1,0 +1,58 @@
+{
+  "id": "lomeli-nunez-2022-spiral-globular-clusters",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Luminosity functions of globular clusters in five nearby spiral galaxies using HST/ACS images",
+  "identifiers": [
+    {
+      "type": "ads",
+      "value": "2022MNRAS.509..180L"
+    },
+    {
+      "type": "CDS/VizieR",
+      "value": "J/MNRAS/509/180"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://ui.adsabs.harvard.edu/abs/2022MNRAS.509..180L",
+      "label": "2022MNRAS.509..180L"
+    },
+    {
+      "role": "archive",
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/MNRAS/509/180",
+      "label": "CDS J/MNRAS/509/180"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/MNRAS/509/180/ReadMe",
+      "checkedOn": "2026-10-04",
+      "locator": "table6.dat: 1,973 rows; 99 drawn as Whirlpool Galaxy's globular clusters (The table holds five galaxies; these are the rows of M51. Flag 02: determined as a bona fide globular cluster from its U-band photometry (ReadMe note 7). Flag 0 has no U-band photometry, flag 1 is a reddened young cluster and flag 3 has an unreliable U-B.)."
+    },
+    {
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/MNRAS/509/180/ReadMe",
+      "checkedOn": "2026-10-04",
+      "locator": "table6.dat: 1,973 rows; 49 drawn as M74's globular clusters (The table holds five galaxies; these are the rows of NGC628. Flag 02: determined as a bona fide globular cluster from its U-band photometry (ReadMe note 7). Flag 0 has no U-band photometry, flag 1 is a reddened young cluster and flag 3 has an unreliable U-B.)."
+    }
+  ],
+  "creators": [
+    "L. Lomelí-Núñez",
+    "Y. D. Mayya",
+    "L. H. Rodríguez-Merino",
+    "P. A. Ovando",
+    "D. Rosa-González"
+  ],
+  "publisher": "MNRAS 509, 180",
+  "publicationDate": "2022",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite Lomelí-Núñez et al. (2022), MNRAS 509, 180.",
+      "scope": "Whirlpool Galaxy's globular clusters",
+      "evidence": "https://cdsarc.cds.unistra.fr/ftp/J/MNRAS/509/180/ReadMe"
+    }
+  ]
+}

@@ -1,0 +1,72 @@
+{
+  "schema": "cssearth-catalogue-points-source@1",
+  "id": "misgeld-gc",
+  "table": {
+    "path": "tablea1.dat",
+    "origin": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/531/A4/tablea1.dat",
+    "bytes": 6726,
+    "format": "fixed-width",
+    "columns": {
+      "name": [
+        1,
+        7
+      ],
+      "raH": [
+        10,
+        11
+      ],
+      "raM": [
+        13,
+        14
+      ],
+      "raS": [
+        16,
+        19
+      ],
+      "decSign": [
+        21,
+        21
+      ],
+      "decD": [
+        22,
+        23
+      ],
+      "decM": [
+        25,
+        26
+      ],
+      "decS": [
+        28,
+        31
+      ]
+    }
+  },
+  "filters": [],
+  "frame": {
+    "input": "icrs",
+    "output": "sun-icrf",
+    "epochJdTt": 2461286.5,
+    "placement": "spheroid",
+    "converter": "Each sky position at a depth drawn from the spheroid's density along its sight line (frame.spheroid).",
+    "spheroid": {
+      "centerRaDeg": 159.178421,
+      "centerDecDeg": -27.528339,
+      "distancePc": 54300000,
+      "halfLightRadiusKpc": 52.3,
+      "sersicIndex": 4.8,
+      "axisRatio": 0.93,
+      "axisPositionAngleDeg": 122,
+      "cutoffHalfLightRadii": 1.409,
+      "source": "arnaboldi-2012-hydra-core",
+      "basis": "The spheroid the volume's light is spread through (labs/nebula/models/ngc-3311/experiment.json shapePrior): Arnaboldi et al.'s (2012) Table 2 Sérsic fit to NGC 3311 (n = 4.8, half-light radius 198.8 arcsec, 52.3 kpc at 54.3 Mpc, axis ratio 0.93), axis along NGC 3311's minor axis in the plane of the sky, ending at 1.409 half-light radii, where the fit's field ends. Each object's depth is drawn from it, not measured."
+    }
+  },
+  "source": "misgeld-2011-hydra-compact-objects",
+  "meaning": "Globular clusters and ultra-compact dwarf galaxies of the Hydra I Cluster's core that Misgeld et al.'s (2011) spectra place in the cluster by their velocities: one dot per object at its catalogue position.",
+  "appearance": {
+    "colorCss": "#ffb38a",
+    "radiusPx": 1,
+    "opacity": 1,
+    "note": "Presentation only: the Milky Way globular clusters' warm orange."
+  }
+}

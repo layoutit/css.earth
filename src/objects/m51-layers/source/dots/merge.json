@@ -2,7 +2,7 @@
   "schema": "cssearth-catalogue-points-merge@1",
   "id": "dots",
   "published": true,
-  "meaning": "Whirlpool Galaxy's catalogued objects as dots on its photograph's disc: star clusters, cepheids, planetary nebulae.",
+  "meaning": "Whirlpool Galaxy's catalogued objects as dots on its photograph's disc: star clusters, cepheids, planetary nebulae, globular clusters.",
   "centreOnGalaxy": true,
   "banks": [
     {
@@ -17,6 +17,11 @@
     },
     {
       "bank": "feldmeier-pne",
+      "withinPcOfCentre": 19960,
+      "basis": "Presentation choice: a dot is drawn only where the photograph is, inside the image layers' 19.96 kpc support radius (recipe.json)."
+    },
+    {
+      "bank": "lomeli-gc",
       "withinPcOfCentre": 19960,
       "basis": "Presentation choice: a dot is drawn only where the photograph is, inside the image layers' 19.96 kpc support radius (recipe.json)."
     }

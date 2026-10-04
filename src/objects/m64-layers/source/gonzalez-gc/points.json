@@ -1,0 +1,50 @@
+{
+  "schema": "cssearth-catalogue-points-source@1",
+  "id": "gonzalez-gc",
+  "table": {
+    "path": "table8.dat",
+    "origin": "https://cdsarc.cds.unistra.fr/ftp/J/ApJ/941/53/table8.dat",
+    "bytes": 2580,
+    "format": "fixed-width",
+    "columns": {
+      "name": [
+        1,
+        14
+      ],
+      "raDeg": [
+        16,
+        23
+      ],
+      "decDeg": [
+        25,
+        31
+      ]
+    }
+  },
+  "filters": [],
+  "frame": {
+    "input": "icrs",
+    "output": "sun-icrf",
+    "epochJdTt": 2461286.5,
+    "placement": "image-layer-disc",
+    "converter": "Each sky position onto the midplane of the inclined disc the image layers are baked on (recipe.json), through the image-layer bake's own intersection.",
+    "discThickness": {
+      "profile": "exponential",
+      "scaleHeightPc": 163,
+      "source": "kregel-2002-disc-flattening",
+      "basis": "The stellar disc's exponential scale height as its scale length over 7.3, the mean flattening Kregel et al. (2002) measured for edge-on discs, with S4G's disc scale length (Salo et al. 2015), 56.23″ = 1.19 kpc: 163 pc. Each row's own height is drawn, not measured."
+    },
+    "bulge": {
+      "source": "salo-2015-s4g-decompositions",
+      "basis": "Old objects fill the bulge as well as the disc: each is a bulge member with the bulge's share of S4G's fitted light at its sky position (faded out between 2.45 and 4.9 kpc as the image layers' is), and then sits at a depth drawn from the bulge's density along its sight line. Membership is drawn, not measured."
+    }
+  },
+  "source": "gonzalez-lopezlira-2022-spiral-globular-clusters",
+  "meaning": "Globular cluster candidates of M64 from González-Lópezlira et al. (2022), picked by their colors and shapes in CFHT images: one dot per candidate at its catalogue position.",
+  "appearance": {
+    "colorCss": "#ffb38a",
+    "radiusPx": 1,
+    "opacity": 1,
+    "note": "Presentation only: the Milky Way globular clusters' warm orange. Each dot takes its tone and half its color from the photograph under it (packages/bake/cli/prepare-catalogue-points.mts)."
+  }
+}

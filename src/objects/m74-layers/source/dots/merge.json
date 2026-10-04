@@ -2,7 +2,7 @@
   "schema": "cssearth-catalogue-points-merge@1",
   "id": "dots",
   "published": true,
-  "meaning": "M74's catalogued objects as dots on its photograph's disc: hii region candidates, planetary nebulae, supernova remnants.",
+  "meaning": "M74's catalogued objects as dots on its photograph's disc: hii region candidates, planetary nebulae, supernova remnants, globular clusters.",
   "centreOnGalaxy": true,
   "banks": [
     {
@@ -17,6 +17,11 @@
     },
     {
       "bank": "scheuermann-snr",
+      "withinPcOfCentre": 16420,
+      "basis": "Presentation choice: a dot is drawn only where the photograph is, inside the image layers' 16.42 kpc support radius (recipe.json)."
+    },
+    {
+      "bank": "lomeli-gc",
       "withinPcOfCentre": 16420,
       "basis": "Presentation choice: a dot is drawn only where the photograph is, inside the image layers' 16.42 kpc support radius (recipe.json)."
     }

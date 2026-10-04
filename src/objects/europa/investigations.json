@@ -48,10 +48,10 @@
     {
       "id": "agenor-dtm",
       "subject": "USGS controlled Agenor DTM",
-      "status": "included",
-      "finding": "Released controlled Agenor DTM supplies Elevation; it is regional terrain and does not establish global relief.",
+      "status": "excluded",
+      "finding": "Removed on 2026-10-04 after shipping as the Elevation view. The model is a regional stereo product of Agenor Linea, 134.63 to 149.01 degrees east and 42.12 to 45.03 degrees south: that box is 0.07% of the sphere, so the globe showed the gray no-data grid with one small strip, and choosing the view flew the camera to the strip. The release's other model, Yelland Ridges, is regional too.",
+      "revisitWhen": "A released terrain model covers enough of Europa to read at globe scale.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/europa/source/manifest.json",
         "https://stac.astrogeology.usgs.gov/docs/data/jupiter/europa/europa_controlled_usgs_dtms/"
       ]
     },

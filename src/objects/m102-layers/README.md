@@ -21,6 +21,14 @@ A survey image of M102 (NGC 5866), cleaned of the Milky Way stars in front of it
 - **Rim:** the picture fades out on a round rim at 21.49 kpc, 0.98 of its half-width, so no straight edge shows.
 - **Sky:** the image's sky, (8, 6, 5) of 255 (each channel's median over the frame's outer ring), is subtracted as the background floor (8 of 255).
 
+## Dots
+
+| Catalogue | Drawn | Note |
+| --- | --- | --- |
+| [Globular cluster candidates (Cantiello et al. 2007)](https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/668/209), [recipe](source/cantiello-gc/points.json) | 109 | candidates picked by color, size and shape in Hubble images, not confirmed clusters |
+
+The catalogue tables are files of the CDS archive (each descriptor's `table.origin`); they are not tracked. Each dot is a catalogued object at its published sky position, placed on the plane the picture stands on; its depth is not measured, and it is not drawn. Each dot takes its tone from the image's brightness under it and moves halfway from its kind's color to the image's color there.
+
 ## Known problems
 
 - The picture is flat: seen from the side it is a line.

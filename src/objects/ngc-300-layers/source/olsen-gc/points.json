@@ -1,0 +1,85 @@
+{
+  "schema": "cssearth-catalogue-points-source@1",
+  "id": "olsen-gc",
+  "table": {
+    "path": "table3.dat",
+    "origin": "https://cdsarc.cds.unistra.fr/ftp/J/AJ/127/2674/table3.dat",
+    "bytes": 82592,
+    "format": "fixed-width",
+    "columns": {
+      "name": [
+        1,
+        12
+      ],
+      "raH": [
+        14,
+        15
+      ],
+      "raM": [
+        17,
+        18
+      ],
+      "raS": [
+        20,
+        25
+      ],
+      "decSign": [
+        27,
+        27
+      ],
+      "decD": [
+        28,
+        29
+      ],
+      "decM": [
+        31,
+        32
+      ],
+      "decS": [
+        34,
+        38
+      ]
+    }
+  },
+  "filters": [
+    {
+      "column": [
+        1,
+        7
+      ],
+      "op": "==",
+      "value": "NGC 300",
+      "basis": "The table holds six Sculptor group galaxies; these are the candidates around NGC 300."
+    },
+    {
+      "column": [
+        102,
+        114
+      ],
+      "op": "==",
+      "value": "cluster",
+      "basis": "Note 'cluster': a candidate whose spectrum confirmed it as a star cluster. The others are stars, galaxies, or have a weak spectrum or none."
+    }
+  ],
+  "frame": {
+    "input": "icrs",
+    "output": "sun-icrf",
+    "epochJdTt": 2461286.5,
+    "placement": "image-layer-disc",
+    "converter": "Each sky position onto the midplane of the inclined disc the image layers are baked on (recipe.json), through the image-layer bake's own intersection.",
+    "discThickness": {
+      "profile": "exponential",
+      "scaleHeightPc": 211,
+      "source": "kregel-2002-disc-flattening",
+      "basis": "The stellar disc's exponential scale height as its scale length over 7.3, the mean flattening Kregel et al. (2002) measured for edge-on discs, with S4G's disc scale length (Salo et al. 2015): 211 pc. The same thickness as the image layers' slabs; for young objects it is an upper value. Each row's own height is drawn, not measured."
+    }
+  },
+  "source": "olsen-2004-sculptor-globular-clusters",
+  "meaning": "Globular clusters of NGC 300 that Olsen et al.'s (2004) spectra confirmed among their candidates: one dot per cluster at its catalogue position.",
+  "appearance": {
+    "colorCss": "#ffb38a",
+    "radiusPx": 1,
+    "opacity": 1,
+    "note": "Presentation only: the Milky Way globular clusters' warm orange. Each dot takes its tone and half its color from the photograph under it (packages/bake/cli/prepare-catalogue-points.mts)."
+  }
+}

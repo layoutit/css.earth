@@ -39,6 +39,15 @@
       "evidence": [
         "https://github.com/charvey2718/nox"
       ]
+    },
+    {
+      "id": "dots",
+      "subject": "Catalogued objects as dots",
+      "status": "included",
+      "finding": "9 dots from 1 published table: 9 globular cluster candidates (González-Lópezlira et al. (2022), CDS J/ApJ/941/53, 25 rows in the file). Each dot is a catalogued object at its published sky position, placed where its sight line meets the disc. Its height above the disc is drawn from a 145 pc layer, the scale length over 7.3 ([Kregel et al. 2002](https://arxiv.org/abs/astro-ph/0204154), [record](../../sources/kregel-2002-disc-flattening.json)); that height is not measured. Globular clusters near the centre can sit in the bulge, with the bulge's share of the fitted light there; that membership is drawn, not measured.",
+      "evidence": [
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/941/53"
+      ]
     }
   ]
 }

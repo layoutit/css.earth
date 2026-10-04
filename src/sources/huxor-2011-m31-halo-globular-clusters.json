@@ -1,0 +1,49 @@
+{
+  "id": "huxor-2011-m31-halo-globular-clusters",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Exploring the properties of the M31 halo globular cluster system",
+  "identifiers": [
+    {
+      "type": "ads",
+      "value": "2011MNRAS.414..770H"
+    },
+    {
+      "type": "arXiv",
+      "value": "1102.0403"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://ui.adsabs.harvard.edu/abs/2011MNRAS.414..770H",
+      "label": "2011MNRAS.414..770H"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/1102.0403",
+      "checkedOn": "2026-10-04",
+      "locator": "Sect. 3.3 and Fig. 7: a broken power law fitted to the radial surface density of the clusters, with indices -0.80 +/- 0.10 inside about 5 kpc, -2.88 +/- 0.13 from about 5 to 30 kpc and -0.87 +/- 0.52 outside about 30 kpc. The last is replaced here by Mackey et al. (2019)."
+    }
+  ],
+  "creators": [
+    "A. P. Huxor",
+    "A. M. N. Ferguson",
+    "N. R. Tanvir",
+    "M. J. Irwin",
+    "A. D. Mackey",
+    "R. A. Ibata"
+  ],
+  "publisher": "MNRAS 414, 770",
+  "publicationDate": "2011",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite Huxor et al. (2011), MNRAS 414, 770.",
+      "scope": "The radial profile M31's inner globular clusters are spread in depth with",
+      "evidence": "https://arxiv.org/abs/1102.0403"
+    }
+  ]
+}

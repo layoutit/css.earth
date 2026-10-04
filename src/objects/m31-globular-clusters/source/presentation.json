@@ -1,0 +1,28 @@
+{
+  "provenance": {
+    "name": "M31's globular clusters",
+    "products": [
+      {
+        "id": "dots",
+        "label": "Caldwell & Romanowsky (2016) globular clusters, CDS J/ApJ/824/42",
+        "process": "Place each of the table's clusters at its sky position, at a depth along the sight line drawn from the cluster system's published projected profile taken as round, around M31's world origin.",
+        "recipe": "source/dots/points.json",
+        "selector": "",
+        "inputs": [
+          "clusters"
+        ],
+        "outputs": [
+          "prepared/dots.bin"
+        ],
+        "interpretation": {
+          "kind": "catalogue-positions",
+          "sourceKind": "published-catalogue"
+        },
+        "limitations": [
+          "A cluster's depth is drawn from the system's radial profile, not measured.",
+          "The profile is taken as round; the metal-rich inner clusters lie like M31's disc (Caldwell & Romanowsky 2016)."
+        ]
+      }
+    ]
+  }
+}

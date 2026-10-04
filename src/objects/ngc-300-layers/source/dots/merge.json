@@ -2,7 +2,7 @@
   "schema": "cssearth-catalogue-points-merge@1",
   "id": "dots",
   "published": true,
-  "meaning": "NGC 300's catalogued objects as dots on its photograph's disc: planetary nebulae, HII regions, Cepheids, OB associations and supernova remnants.",
+  "meaning": "NGC 300's catalogued objects as dots on its photograph's disc: planetary nebulae, HII regions, Cepheids, OB associations, supernova remnants, globular clusters.",
   "centreOnGalaxy": true,
   "banks": [
     {
@@ -27,6 +27,11 @@
     },
     {
       "bank": "vucetic-snr",
+      "withinPcOfCentre": 9400,
+      "basis": "Presentation choice: a dot is drawn only where the photograph is, inside the image layers' 9.4 kpc support radius (recipe.json)."
+    },
+    {
+      "bank": "olsen-gc",
       "withinPcOfCentre": 9400,
       "basis": "Presentation choice: a dot is drawn only where the photograph is, inside the image layers' 9.4 kpc support radius (recipe.json)."
     }

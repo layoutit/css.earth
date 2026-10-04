@@ -1,0 +1,54 @@
+{
+  "id": "caldwell-2016-m31-globular-clusters",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Star clusters in M31. VII. Global kinematics and metallicity subpopulations of the globular clusters",
+  "identifiers": [
+    {
+      "type": "ads",
+      "value": "2016ApJ...824...42C"
+    },
+    {
+      "type": "CDS/VizieR",
+      "value": "J/ApJ/824/42"
+    },
+    {
+      "type": "arXiv",
+      "value": "1603.06947"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://ui.adsabs.harvard.edu/abs/2016ApJ...824...42C",
+      "label": "2016ApJ...824...42C"
+    },
+    {
+      "role": "archive",
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/824/42",
+      "label": "CDS J/ApJ/824/42"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/ApJ/824/42/ReadMe",
+      "checkedOn": "2026-10-04",
+      "locator": "table1.dat: 441 rows, each a globular cluster with its J2000 position, projected distance from M31's centre (0.1 to 141 kpc), and where measured its velocity, metallicity and age (4.8 to 14 Gyr); all 441 drawn as M31's globular clusters."
+    }
+  ],
+  "creators": [
+    "N. Caldwell",
+    "A. J. Romanowsky"
+  ],
+  "publisher": "ApJ 824, 42",
+  "publicationDate": "2016",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite Caldwell & Romanowsky (2016), ApJ 824, 42.",
+      "scope": "M31's globular clusters",
+      "evidence": "https://cdsarc.cds.unistra.fr/ftp/J/ApJ/824/42/ReadMe"
+    }
+  ]
+}

@@ -26,6 +26,7 @@ A survey image of M105 (NGC 3379), cleaned of the Milky Way stars in front of it
 | Catalogue | Drawn | Note |
 | --- | --- | --- |
 | [Planetary nebulae (Hartke et al. 2022)](https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/663/A12), [recipe](source/hartke-pne/points.json) | 172 | with velocities; those the paper gives to M105 with a probability above one half; 53 more lie outside the photograph |
+| [Globular cluster candidates (Whitlock et al. 2003)](https://cdsarc.cds.unistra.fr/viz-bin/cat/J/MNRAS/345/949), [recipe](source/whitlock-gc/points.json) | 83 | candidates picked by magnitude and color in wide-field images, not confirmed clusters; 50 more lie outside the photograph |
 
 The catalogue tables are files of the CDS archive (each descriptor's `table.origin`); they are not tracked. Each dot is a catalogued object at its published sky position, placed on the plane the picture stands on; its depth is not measured, and it is not drawn. Each dot takes its tone from the image's brightness under it and moves halfway from its kind's color to the image's color there.
 

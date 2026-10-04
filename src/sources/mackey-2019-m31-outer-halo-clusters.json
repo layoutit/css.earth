@@ -1,0 +1,49 @@
+{
+  "id": "mackey-2019-m31-outer-halo-clusters",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "The outer halo globular cluster system of M31 - III. Relationship to the stellar halo",
+  "identifiers": [
+    {
+      "type": "ads",
+      "value": "2019MNRAS.484.1756M"
+    },
+    {
+      "type": "arXiv",
+      "value": "1810.10719"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://ui.adsabs.harvard.edu/abs/2019MNRAS.484.1756M",
+      "label": "2019MNRAS.484.1756M"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/1810.10719",
+      "checkedOn": "2026-10-04",
+      "locator": "Sect. 3.1 and Fig. 4: the radial surface density of M31's globular clusters breaks at a projected radius of about 27 kpc; a least-squares fit to all points outside 25 kpc gives a power law of index -2.37 +/- 0.17, out to about 150 kpc (-2.15 +/- 0.10 without the bump at 30 to 50 kpc). Footnote 5: the halo outside 25 kpc appears close to spherical."
+    }
+  ],
+  "creators": [
+    "D. Mackey",
+    "A. M. N. Ferguson",
+    "A. P. Huxor",
+    "J. Veljanoski",
+    "G. F. Lewis",
+    "A. W. McConnachie"
+  ],
+  "publisher": "MNRAS 484, 1756",
+  "publicationDate": "2019",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite Mackey et al. (2019), MNRAS 484, 1756.",
+      "scope": "The radial profile M31's outer globular clusters are spread in depth with",
+      "evidence": "https://arxiv.org/abs/1810.10719"
+    }
+  ]
+}

@@ -50,6 +50,12 @@ The [accepted bake recipe](../../labs/nebula/models/lmc/bake.json) pins image pl
 
 The Milky Way overview enables the galaxy's prepared depth layers; other destinations keep its distant views. M31, M33 and the SMC use image-derived parametric layers, not the LMC's star-removal and density-coloring pipeline.
 
+## Cluster dots
+
+Galaxies draw their catalogued star clusters as dots, each at its published position on the sky. On a flat picture a dot lies on the picture's disc or plane and takes its tone from the photograph. Through a volume it sits at a depth drawn from the volume's spheroid. [M31's globular clusters](../../src/objects/m31-globular-clusters/README.md) are a bank of their own, spread in depth by the cluster system's published radial profile out to 150 kpc. No cluster's depth is measured. Each bank's README names its table and counts the clusters that lie beyond its photograph.
+
+![Thirteen galaxies with their cluster dots as their pages open, and M31 pulled back](../images/galaxies/cluster-dots.webp)
+
 ## Reproduction and evidence
 
 For the accepted LMC bank and an app capture, from the repository root with supported Node/pnpm and Python 3.9–3.12:
