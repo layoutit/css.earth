@@ -21,16 +21,18 @@ export async function parseCompleteWorldContext(summary: unknown, read: (id: str
   const index = parsePreparedWorldIndex(indexInput), files = index.files;
   let whole = parsePreparedWorldContextSummary(summary);
   const values = await Promise.all(files.map(read)), held = new Set<string>();
-  const add = (id: string, value: unknown) => {
+  const parse = (id: string, value: unknown) => {
     const system = parsePreparedWorldSystem(value, whole, id);
     for (const body of system.bodies) {
       if (held.has(body.id)) throw new TypeError(`Prepared world file ${id} holds ${body.id}, which another file holds too.`);
       held.add(body.id);
     }
-    whole = extendWorldContext(whole, [system], index.order);
+    return system;
   };
-  files.forEach((id, at) => add(id, values[at]));
-  for (const [id, row] of Object.entries(index.rows)) add(id, row);
+  files.forEach((id, at) => { whole = extendWorldContext(whole, [parse(id, values[at])], index.order); });
+  // A row is a star with nothing round it, so no row needs another placed first: they join the plan together. Joining
+  // them one at a time checked the whole plan once for each of 2,052 rows, 4.4 s of the 6.1 s this took.
+  whole = extendWorldContext(whole, Object.entries(index.rows).map(([id, row]) => parse(id, row)), index.order);
   if (whole.bodies.length !== index.order.length) throw new TypeError(`The summary and its ${files.length} files hold ${whole.bodies.length} bodies, not the index's ${index.order.length}.`);
   return whole;
 }
