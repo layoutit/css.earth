@@ -1,10 +1,9 @@
-import type { Point3 } from './types.ts';
-
+import type { PointFieldVector } from '@cssearth/objects';
 /** Published hierarchy precision, in parsecs and magnitudes. Source rows stay exact.
  * Native pow/log/hypot can differ by an ulp across CPUs; their full binary64
  * tails are not meaningful precision for aggregates of float32 astrometry.
  */
-export function hierarchyPosition(position: Point3): Point3 {
+export function hierarchyPosition(position: PointFieldVector): PointFieldVector {
   const coordinate = (value: number) => Number(value.toFixed(10));
   return [coordinate(position[0]), coordinate(position[1]), coordinate(position[2])];
 }

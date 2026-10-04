@@ -75,3 +75,12 @@ reads live commands, manifests, documentation, CI paths, generator literals and 
 specifiers. Historical records retain the old path with an adjacent `(now ...)`
 replacement; test fixture text is excluded through syntax, while actual test imports
 and process calls are checked. Extend the ledger when another owner is retired.
+
+`authoring-policy.mts` rejects direct (including imported aliases and namespace calls)
+`combineBodyMaps` calls in telescope sources and both authoring roots. The exact HST
+slit-scan author is retained for trial-placement diagnostics; it publishes through
+`combineUnderPolicy`. This syntax check does not trace arbitrary function-value aliases.
+The same rule compares CLI paths with `origin/main`: new entries may export `main`
+or default implementations, but other exported functions, classes and value re-exports
+belong in `src/`. Existing entries remain unchanged until touched; the simple rule
+checks exported library surfaces rather than estimating command-body complexity.

@@ -1,10 +1,11 @@
+import { parseCompleteObjectContentSource } from '@cssearth/objects/node/contract';
 import assert from 'node:assert/strict';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import { projectRoot } from '@cssearth/core/node';
 import { resolve } from 'node:path';
 import { readFile } from 'node:fs/promises';
-import { authoredDatasetMetadata, OBJECT_CONTENT_SCHEMA, OBJECT_CONTENT_VERSION, parseCompleteObjectContentSource, validateObjectContentEnvelope } from '@cssearth/objects';
+import { authoredDatasetMetadata, OBJECT_CONTENT_SCHEMA, OBJECT_CONTENT_VERSION, validateObjectContentEnvelope } from '@cssearth/objects';
 
 test('dataset source links come from the authored dataset records', async () => {
   const source: unknown = JSON.parse(await readFile(resolve(projectRoot(import.meta.url), 'src/objects/earth/source/content/object.json'), 'utf8'));

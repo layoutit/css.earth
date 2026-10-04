@@ -9,7 +9,7 @@ import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
  * --check recomputes both outputs and fails if either differs from the file on disk. */
 import { readFile, readdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { writeOrCheckAuthoredOutputs } from '../authored-output.mts';
+import { runAuthor } from '../authored-output.mts';
 import { pathToFileURL } from 'node:url';
 import { mergeContinuum, mergedOifits, type ContinuumRecipe } from '@cssearth/bake/objects/layers/observation';
 import { convolveGaussian, readReconstruction, writeReconstruction } from '@cssearth/bake/objects/layers/observation';
@@ -88,34 +88,42 @@ export async function contextMarker(image: ReturnType<typeof readReconstruction>
  * the much larger pinned interferometry archives every sibling star body also authors. Written or checked first, so the
  * small sphere table restores without the archive files a full run also needs. Shared by every uniform-disc star body. */
 export async function authorUniformDiscSphere(sourceRoot: string, label: string, { check = false } = {}) {
-  const measurements = parseUniformDiscStarMeasurements(JSON.parse(await readFile(resolve(sourceRoot, 'measurements.json'), 'utf8')), label, SPHERE_PATH);
-  const bytes = Buffer.from(uniformDiscTable(measurements.radiusKm, measurements.shape.stepDegrees), 'latin1');
-  await writeOrCheckAuthoredOutputs(sourceRoot, [[SPHERE_PATH, bytes]], { check, readError: 'propagate-read-error', mkdir: 'none' });
-  return measurements;
+  return runAuthor({
+    root: sourceRoot, check, readError: 'propagate-read-error', mkdir: 'none',
+    compute: async () => {
+      const measurements = parseUniformDiscStarMeasurements(JSON.parse(await readFile(resolve(sourceRoot, 'measurements.json'), 'utf8')), label, SPHERE_PATH);
+      const bytes = Buffer.from(uniformDiscTable(measurements.radiusKm, measurements.shape.stepDegrees), 'latin1');
+      return { outputs: [[SPHERE_PATH, bytes]], result: measurements };
+    },
+  });
 }
 
 export async function authorBetelgeuse({ check = false } = {}) {
-  await authorUniformDiscSphere(root, 'Betelgeuse', { check });
-  const oifitsDirectory = resolve(root, 'observations/oifits'), names = await readdir(oifitsDirectory);
-  const raster = requireRecord(JSON.parse(await readFile(resolve(root, 'preparation/raster.json'), 'utf8')), 'raster');
-  const dataset = requireRecord(requireRecord(requireRecord(requireArray(raster.surfaces)[0], 'surface').science, 'science').dataset, 'dataset');
-  const display = requireRecord(dataset.display, 'display'), frame = requireRecord(requireArray(dataset.frames)[0], 'frame');
-  const palette = requireArray(display.palette).map(value => requireString(value)), percentiles = requireArray(display.percentiles).map(value => requireFiniteNumber(value));
-  const outputs: [string, Buffer][] = [], counts: Record<string, { vis2: number; t3: number; files: number }> = {};
-  for (const epoch of MATISSE_EPOCHS) {
-    const files = names.filter(name => name.endsWith('.fits') && epoch.nights.some(night => name.startsWith(night))).sort().map(name => resolve(oifitsDirectory, name));
-    if (files.length !== epoch.files) throw new Error(`Expected the ${epoch.files} pinned ${epoch.id} MATISSE files, found ${files.length}.`);
-    const recipe = { ...CONTINUUM_RECIPE, outputMjd: epoch.outputMjd, outputDateObs: epoch.outputDateObs };
-    const merged = await mergeContinuum(files, recipe), paths = epochPaths(epoch.id);
-    const raw = readReconstruction(await readFile(resolve(root, paths.raw)));
-    const pixelMas = raw.axes.scale[0];
-    const beam = writeReconstruction(raw, convolveGaussian(raw, epoch.beamMas / pixelMas), [['BEAMFWHM', epoch.beamMas, 'mas, Gaussian convolution applied by author.mts'], ['ORIGFILE', paths.raw.split('/').at(-1)!, 'SQUEEZE posterior mean this was convolved from']]);
-    outputs.push([paths.merged, mergedOifits(merged, recipe)], [paths.beam(epoch.beamMas), beam]);
-    if (epoch.id === '2020-02') outputs.push([CONTEXT_PATH, await contextMarker(readReconstruction(beam), palette, [percentiles[0]!, percentiles[1]!], requireFiniteNumber(frame.backgroundMaximum))]);
-    counts[epoch.id] = { vis2: merged.vis2.length, t3: merged.t3.length, files: merged.files.length };
-  }
-  await writeOrCheckAuthoredOutputs(root, outputs, { check, readError: 'propagate-read-error', mkdir: 'none' });
-  return counts;
+  return runAuthor({
+    root: root, check, readError: 'propagate-read-error', mkdir: 'none',
+    compute: async () => {
+      await authorUniformDiscSphere(root, 'Betelgeuse', { check });
+      const oifitsDirectory = resolve(root, 'observations/oifits'), names = await readdir(oifitsDirectory);
+      const raster = requireRecord(JSON.parse(await readFile(resolve(root, 'preparation/raster.json'), 'utf8')), 'raster');
+      const dataset = requireRecord(requireRecord(requireRecord(requireArray(raster.surfaces)[0], 'surface').science, 'science').dataset, 'dataset');
+      const display = requireRecord(dataset.display, 'display'), frame = requireRecord(requireArray(dataset.frames)[0], 'frame');
+      const palette = requireArray(display.palette).map(value => requireString(value)), percentiles = requireArray(display.percentiles).map(value => requireFiniteNumber(value));
+      const outputs: [string, Buffer][] = [], counts: Record<string, { vis2: number; t3: number; files: number }> = {};
+      for (const epoch of MATISSE_EPOCHS) {
+        const files = names.filter(name => name.endsWith('.fits') && epoch.nights.some(night => name.startsWith(night))).sort().map(name => resolve(oifitsDirectory, name));
+        if (files.length !== epoch.files) throw new Error(`Expected the ${epoch.files} pinned ${epoch.id} MATISSE files, found ${files.length}.`);
+        const recipe = { ...CONTINUUM_RECIPE, outputMjd: epoch.outputMjd, outputDateObs: epoch.outputDateObs };
+        const merged = await mergeContinuum(files, recipe), paths = epochPaths(epoch.id);
+        const raw = readReconstruction(await readFile(resolve(root, paths.raw)));
+        const pixelMas = raw.axes.scale[0];
+        const beam = writeReconstruction(raw, convolveGaussian(raw, epoch.beamMas / pixelMas), [['BEAMFWHM', epoch.beamMas, 'mas, Gaussian convolution applied by author.mts'], ['ORIGFILE', paths.raw.split('/').at(-1)!, 'SQUEEZE posterior mean this was convolved from']]);
+        outputs.push([paths.merged, mergedOifits(merged, recipe)], [paths.beam(epoch.beamMas), beam]);
+        if (epoch.id === '2020-02') outputs.push([CONTEXT_PATH, await contextMarker(readReconstruction(beam), palette, [percentiles[0]!, percentiles[1]!], requireFiniteNumber(frame.backgroundMaximum))]);
+        counts[epoch.id] = { vis2: merged.vis2.length, t3: merged.t3.length, files: merged.files.length };
+      }
+      return { outputs: outputs, result: counts };
+    },
+  });
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {

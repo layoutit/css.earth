@@ -1,30 +1,22 @@
+import { scriptTestFiles } from '../../../packages/core/src/node/script-test-files.ts';
 /** Which tests a change can break: the workspace packages it touched and every package that depends on one, and the
  * site when it, or a package it imports, changed. A push to main, or a change to shared configuration, tests everything.
  *
  *   node .github/scripts/ci/affected-tests.mts <base ref>    append test_packages and test_site to $GITHUB_OUTPUT
  *   node .github/scripts/ci/affected-tests.mts               (no base: a push) test everything */
 import { execFileSync } from 'node:child_process';
-import { appendFileSync, globSync, readdirSync, readFileSync } from 'node:fs';
+import { appendFileSync, readdirSync, readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 
 export interface Workspace { readonly directory: string; readonly name: string; readonly dependencies: readonly string[]; }
 export interface AffectedTests { readonly packages: 'all' | readonly string[]; readonly site: boolean; readonly files: readonly string[]; }
 
-/** The root scripts are the only lane map. Use their quoted Node test globs for collection and affected routing. */
+/** Root scripts own lane membership; core collects their quoted test globs without reading repository files. */
 export function testLaneFiles(root: string): Readonly<Record<'packages' | 'site', readonly string[]>> {
   const manifest: unknown = JSON.parse(readFileSync(resolve(root, 'package.json'), 'utf8'));
-  if (!manifest || typeof manifest !== 'object' || !('scripts' in manifest) || !manifest.scripts || typeof manifest.scripts !== 'object')
-    throw new TypeError('package.json has no scripts');
-  const scripts = manifest.scripts;
-  const collect = (lane: 'packages' | 'site'): string[] => {
-    const script = Reflect.get(scripts, `test:${lane}`);
-    if (typeof script !== 'string') throw new TypeError(`package.json has no test:${lane}`);
-    const patterns = [...script.matchAll(/"([^"\n]+)"/gu)].map(match => match[1]!);
-    if (patterns.length === 0) throw new TypeError(`test:${lane} has no test globs`);
-    return [...new Set(patterns.flatMap(pattern => globSync(pattern, { cwd: root })))].sort();
-  };
-  return { packages: collect('packages'), site: collect('site') };
+  const files = scriptTestFiles(root, manifest, ['test:packages', 'test:site']);
+  return { packages: files.get('test:packages')!, site: files.get('test:site')! };
 }
 
 /** Discover cross-owner coverage from the collected tests rather than maintaining a second path list.

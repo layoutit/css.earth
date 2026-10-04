@@ -1,13 +1,14 @@
+import type { PointFieldVector, PointFieldRgb } from '@cssearth/objects';
 import type { PreparedPointFieldStar, PreparedPointFieldNode } from '@cssearth/objects';
-import type { Point3, Rgb } from './types.ts';
+
 import { nearestColor } from './color.ts';
 import { hierarchyPosition, hierarchyMagnitude, hierarchyRadius } from './precision.ts';
 
 /** Every input row occurs exactly once in the reordered array. Internal bounds contain its actual members. */
-export function prepareStarHierarchy(input: readonly PreparedPointFieldStar[], colors: readonly Rgb[], leafSize: number, maximumDepth: number) {
+export function prepareStarHierarchy(input: readonly PreparedPointFieldStar[], colors: readonly PointFieldRgb[], leafSize: number, maximumDepth: number) {
   if (!input.length || !Number.isSafeInteger(leafSize) || leafSize < 1) throw new TypeError('Star hierarchy requires rows and a positive leaf size.');
   const stars: PreparedPointFieldStar[] = [], nodes: PreparedPointFieldNode[] = [];
-  function append(rows: readonly PreparedPointFieldStar[], min: Point3, max: Point3, depth: number): number {
+  function append(rows: readonly PreparedPointFieldStar[], min: PointFieldVector, max: PointFieldVector, depth: number): number {
     const index = nodes.length, first = stars.length;
     let flux = 0, px = 0, py = 0, pz = 0, red = 0, green = 0, blue = 0;
     for (const row of rows) {
@@ -23,7 +24,7 @@ export function prepareStarHierarchy(input: readonly PreparedPointFieldStar[], c
     nodes.push({ positionUnits, radiusUnits: hierarchyRadius(radiusUnits), absoluteMagnitude: hierarchyMagnitude(-2.5*Math.log10(flux)), colorIndex: nearestColor([red/flux,green/flux,blue/flux], colors), first, count: rows.length, children });
     if (rows.length <= leafSize) stars.push(...rows);
     else {
-      const mid: Point3 = [(min[0]+max[0])/2,(min[1]+max[1])/2,(min[2]+max[2])/2];
+      const mid: PointFieldVector = [(min[0]+max[0])/2,(min[1]+max[1])/2,(min[2]+max[2])/2];
       const bins: PreparedPointFieldStar[][] = Array.from({ length: 8 }, () => []);
       for (const row of rows) { const p = row.positionUnits; bins[(p[0]>=mid[0]?1:0)|(p[1]>=mid[1]?2:0)|(p[2]>=mid[2]?4:0)]!.push(row); }
       if (depth >= maximumDepth) {
@@ -31,8 +32,8 @@ export function prepareStarHierarchy(input: readonly PreparedPointFieldStar[], c
         for (let offset = 0; offset < rows.length; offset += leafSize) children.push(append(rows.slice(offset, offset+leafSize), min, max, depth+1));
       } else bins.forEach((bin, octant) => {
         if (!bin.length) return;
-        const lo: Point3 = [octant&1?mid[0]:min[0],octant&2?mid[1]:min[1],octant&4?mid[2]:min[2]];
-        const hi: Point3 = [octant&1?max[0]:mid[0],octant&2?max[1]:mid[1],octant&4?max[2]:mid[2]];
+        const lo: PointFieldVector = [octant&1?mid[0]:min[0],octant&2?mid[1]:min[1],octant&4?mid[2]:min[2]];
+        const hi: PointFieldVector = [octant&1?max[0]:mid[0],octant&2?max[1]:mid[1],octant&4?max[2]:mid[2]];
         children.push(append(bin, lo, hi, depth+1));
       });
     }
@@ -43,5 +44,5 @@ export function prepareStarHierarchy(input: readonly PreparedPointFieldStar[], c
   const extent = 2 ** Math.ceil(Math.log2(maximum));
   if (!Number.isFinite(extent) || extent <= 0) throw new TypeError('Invalid catalogue extent.');
   append(input, [-extent,-extent,-extent], [extent,extent,extent], 0);
-  return { stars, nodes, boundsUnits: { min: [-extent,-extent,-extent] as Point3, max: [extent,extent,extent] as Point3 } };
+  return { stars, nodes, boundsUnits: { min: [-extent,-extent,-extent] as PointFieldVector, max: [extent,extent,extent] as PointFieldVector } };
 }

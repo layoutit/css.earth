@@ -9,7 +9,7 @@ import { VOLUME_SOURCE_MANIFEST_SCHEMA, VOLUME_PRESENTATION_SOURCE_SCHEMA, VOLUM
  *   node packages/telescope-cli/authoring/circumstellar/author.mts <object id> [--check] [--raw <dir>]...
  *
  * The recipe is src/objects/<id>/source/circumstellar.json. A dataset names coronagraph bands of a pinned JWST imaging program
- * (packages/telescope-cli/src/archives/jwst/imaging/programs), the star's flux in each and the red, green and blue channels they average into: the
+ * (packages/telescope-cli/src/archives/jwst/programs), the star's flux in each and the red, green and blue channels they average into: the
  * reflectance color a publisher shows. Each band's MAST level-3 mosaic is downloaded into .local/<id>/observations, read about
  * the star through its own WCS (disc-envelope.mts readSkyPlane), background-subtracted and divided by the star's flux
  * (fit-figure-stretch.mts reflectanceChannels). The ring's geometry is measured on the mean of the channels, checked against
@@ -378,7 +378,7 @@ async function buildDataset(recipe: CircumstellarRecipe, dataset: CircumstellarD
     for (const { band, entry, mosaic, primary } of channels.entries) bands.push({ band, mosaic, primary, sky: channels.planes.get(band)!,
       origin: { file: entry.level3.name, url: mastDownloadUrl(entry.level3.uri), bytes: entry.level3.bytes, title: `MAST JWST programme ${program.programme} · ${entry.observation} level-3 coronagraph mosaic`,
         credit: recipe.credit, displayCredit: 'NASA/ESA/CSA JWST, MAST', license: recipe.license.note,
-        acquisition: `Downloaded unchanged from MAST by its URI ${entry.level3.uri} (@cssearth/telescope/node mastFile), the pipeline's own calwebb_coron3 product of the association pinned in packages/telescope-cli/src/archives/jwst/imaging/programs/${dataset.program}.json.`,
+        acquisition: `Downloaded unchanged from MAST by its URI ${entry.level3.uri} (@cssearth/telescope/node mastFile), the pipeline's own calwebb_coron3 product of the association pinned in packages/telescope-cli/src/archives/jwst/programs/${dataset.program}.json.`,
         role: `MAST level-3 coronagraph mosaic ${entry.level3.name} (calwebb_coron3), the ${filterOf(band)} band of the ${dataset.id} leaves`, landing: recipe.sourceUrl,
         observed: String(primary['DATE-OBS']), instrument: `JWST/NIRCam behind the ${JWST_BANDS[band]!.coronagraph} coronagraph` } });
   }
