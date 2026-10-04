@@ -20,7 +20,7 @@
  * name of its own is a map target. */
 import { VIZIER_ASU, type Archive } from './archives.mts';
 import { adql, csv, SIMBAD_TAP } from './companions.mts';
-import { preferredName, PROPER_STEPS, simbadIdentifiers } from './display-name.mts';
+import { preferredName, simbadIdentifiers } from './display-name.mts';
 import { readIauNames } from './iau-names.mts';
 import { slug } from './identity.mts';
 import { sunWidth, wikipediaQuotes } from './prose.mts';
@@ -81,7 +81,6 @@ export function draftFromMcDonald(row: ReturnType<typeof parseMcDonaldRow>, iden
   return {
     id, name, system: `${name} system`, parent: 'milky-way', target: hip,
     ...(name === hip ? {} : { aliases: [...new Set([preferred?.step === 'iau' ? preferredName(identifiers)?.name : undefined, hd, hip].filter((value): value is string => !!value && value !== name))] }),
-    ...(preferred && PROPER_STEPS.has(preferred.step) ? { featured: true } : {}),
     description: `A star ${parsecs.toFixed(0)} parsecs away, ${width}, measured from its light.`,
     paper: { url: MCDONALD.paper, credit: MCDONALD.credit },
     distance: { value: parsecs, uncertainty: Number((parsecs * row.parallaxFraction).toFixed(3)), source: `${at}: distance ${parsecs} pc, the paper's parallax inverted (Gaia DR1's where it revised the star's, else the Hipparcos reduction of van Leeuwen 2007; section 2.3; fractional uncertainty ${row.parallaxFraction}), at which the luminosity and radius hold`, url: MCDONALD.paper },

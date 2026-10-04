@@ -30,6 +30,11 @@ test('different layers consume one density and collision budget', () => {
 test('Earth is the second orientation reference after the Sun, ahead of other planets', () => {
   // Orientation references come from prepared discovery, never from object ids in shared code.
   assert.ok(labelImportance('star', true, 5) > labelImportance('planet', true, 4));
+  // A star with something to see is captioned before one that is only marked notable, and after the Sun.
+  assert.ok(labelImportance('star', false, 0, true, true) > labelImportance('star', false, 0, true));
+  assert.ok(labelImportance('star', false, 0, false, true) > labelImportance('star', false, 0, true));
+  assert.ok(labelImportance('star', false, 5) > labelImportance('star', false, 0, true, true));
+  assert.equal(labelImportance('planet', false, 0, false, true), labelImportance('planet'), 'only a star is ranked by what it shows');
   assert.ok(labelImportance('planet', true, 4) > labelImportance('planet', true));
   assert.equal(labelImportance('planet', true, 0), labelImportance('planet', true));
 });

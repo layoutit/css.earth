@@ -16,7 +16,7 @@ test('a table 2 row inside the paper\'s well-fit subset is drafted at its distan
     name: { name: 'Acamar', step: 'iau', identifier: '* tet Eri' } });
   assert.equal(spec.id, 'acamar');
   assert.equal(spec.parent, 'milky-way', 'a star Hipparcos places is inside the Milky Way');
-  assert.equal(spec.featured, true);
+  assert.equal('featured' in spec, false, 'a name alone does not make a star a map target');
   assert.equal(spec.mass, 'unmeasured');
   assert.equal(spec.distance.value, 49.431);
   assert.match(spec.radius.source, /table 2, HIP 13847: radius 6\.238 solar radii/u);

@@ -59,7 +59,7 @@ test('an IAU draft takes the name, keeps the planet names, and lists the designa
     row, 'acamar', ['HIP 13847', 'HD 18622', '* tet Eri', '* tet01 Eri', 'NAME Acamar']);
   assert.equal(spec.id, 'acamar');
   assert.equal(spec.name, 'Acamar');
-  assert.equal(spec.featured, true);
+  assert.equal('featured' in spec, false, 'a name alone does not make a star a map target');
   assert.equal(spec.planets[0].name, 'HIP 13847 b');
   assert.equal(spec.planets[0].description, 'Planet of Acamar.');
   assert.deepEqual(spec.aliases, ['HD 18622', 'HIP 13847', 'Theta Eridani']);
