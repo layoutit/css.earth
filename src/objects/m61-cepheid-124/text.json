@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "m61-cepheid-124",
+  "card": {
+    "text": "A Cepheid in the galaxy M61, 17.0 million parsecs away, that swells and shrinks every 68.2 days.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-4357-ae47d8",
+        "url": "https://doi.org/10.3847/1538-4357/ae47d8",
+        "label": "Markham et al. (2026), The Astrophysical Journal 1000 78",
+        "checked": "2026-10-04",
+        "locator": "Appendix A, ID 124: P; abstract (the 130 candidates)"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Markham et al. (2026) list it among the 130 Cepheid candidates Hubble found in the galaxy, pulsating every 68.2 days.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-4357-ae47d8",
+        "url": "https://doi.org/10.3847/1538-4357/ae47d8",
+        "label": "Markham et al. (2026), The Astrophysical Journal 1000 78",
+        "checked": "2026-10-04",
+        "locator": "Appendix A, ID 124: P; abstract (the 130 candidates)"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its temperature",
+      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

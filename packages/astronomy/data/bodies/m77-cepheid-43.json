@@ -1,0 +1,30 @@
+{
+ "id": "m77-cepheid-43",
+ "classification": "star",
+ "order": 5774,
+ "physical": {
+  "name": "M77 Cepheid 43",
+  "horizonsCode": null,
+  "meanRadiusKm": 174342420,
+  "gravitationalParameterKm3PerS2": 0,
+  "parent": null,
+  "effectiveTemperatureK": 4700
+ },
+ "physicalNotes": "Radius 250.6 +/- 41.8 solar radii from Groenewegen (2020), A&A 635, A33, period relations for Galactic fundamental-mode Cepheids applied to this star's period, 66.85 d in Markham et al. (2026), ApJ 1000, 78, Appendix B (the table of the final Cepheid candidates in NGC 1068), ID 43: P 66.85 +/- 2.34 d; not a measurement of this star: eq. 2, log R = 0.721 log P + 1.083; the uncertainty is the relation's scatter, 0.067 dex (https://arxiv.org/abs/2002.02186): 174,342,420 km at 695,700 km per solar radius. No mass is measured, so GM is 0, the records' unpublished value. Temperature 4700 +/- 317 K from Groenewegen (2020), A&A 635, A33, period relations for Galactic fundamental-mode Cepheids applied to this star's period, 66.85 d in Markham et al. (2026), ApJ 1000, 78, Appendix B (the table of the final Cepheid candidates in NGC 1068), ID 43: P 66.85 +/- 2.34 d; not a measurement of this star: the luminosity of eq. 1 (M_bol = -2.95 log P - 0.98, with the nominal solar M_bol 4.74) over the radius of eq. 2, through L = 4 pi R^2 sigma T^4 with the nominal solar 5772 K (IAU 2015 Resolutions B2 (Mamajek et al. 2015, arXiv:1510.06262) and B3 (Prsa et al. 2016, arXiv:1605.09788)); the uncertainty is the 317 K by which the two relations miss the paper's own Cepheid temperatures (https://arxiv.org/abs/2002.02186). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 40.6623125,
+  "declinationDegrees": -0.012293333333333333,
+  "positionEpochJulianYear": 2000,
+  "distanceParsecs": 13970531,
+  "properMotionRaMasPerYear": 0,
+  "properMotionDecMasPerYear": 0,
+  "radialVelocityKmPerS": 1042.573806425224,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Markham et al. (2026), ApJ 1000, 78, Appendix B (the table of the final Cepheid candidates in NGC 1068), ID 43 (https://doi.org/10.3847/1538-4357/ae47d8), DOI 10.3847/1538-4357/ae47d8 row ID = 43, RA = 02:42:38.955, Dec = -00:00:44.256: RA 40.6623125, Dec -0.012293333333333333, as the paper prints them",
+   "distance": "Placed in M77 as the app draws it, where the star's sight line crosses the disc's midplane: 13,970,531 pc (src/objects/m77-layers/source/recipe.json: centre 13,970,000 pc, inclination 34.7 deg, line of nodes 72.7 deg). The galaxy's distance, which places the galaxy and not a star within it: Leroy et al. (2021), PHANGS-ALMA, ApJS 257, 43, table of galaxies, row NGC1068: distance 13.97 ± 2.11 Mpc, from the compilation of Anand et al. (2021) (https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/257/43) (https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJS/257/43): 13970531 pc; Gaia DR3 cannot see the star",
+   "properMotion": "10.3847/1538-4357/ae47d8 row ID = 43, RA = 02:42:38.955, Dec = -00:00:44.256 measures no proper motion; zero is assumed (at 13,970,531 pc, 1 mas/yr would be 66,227 km/s across the sky)",
+   "radialVelocity": "SIMBAD's radial velocity of M77, the Cepheid's galaxy, from 2022ApJS..261....2K; the star's own motion within the galaxy is not measured (https://ui.adsabs.harvard.edu/abs/2022ApJS..261....2K/abstract)"
+  }
+ }
+}
