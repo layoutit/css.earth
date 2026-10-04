@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
-import { placeUntimedSamples, scriptSamples, navigatedAppReady, nativeRecordingClock, CALIBRATION_POINTS, captureMetrics, compareCaptures, solveAffine, touchPlan, comparePixels, formatComparison, options, devicePageProcess, jsonValues, traceEvents, timeProfileSamples, parseSteps, requireStepsFor, screenshotArtifact, sameCapturePage, summariseNumericSamples, schedulingStacks, summariseCpu, summariseInitiators, summariseSamples, summariseTimeProfile, summariseTimeline, cpuProfileFromSamples } from './ios-capture.mts';
+import { captureOverhead, pageQuiet, placeUntimedSamples, scriptSamples, navigatedAppReady, nativeRecordingClock, CALIBRATION_POINTS, captureMetrics, compareCaptures, solveAffine, touchPlan, comparePixels, formatComparison, options, devicePageProcess, jsonValues, traceEvents, timeProfileSamples, parseSteps, requireStepsFor, screenshotArtifact, sameCapturePage, summariseNumericSamples, schedulingStacks, summariseCpu, summariseInitiators, summariseSamples, summariseTimeProfile, summariseTimeline, cpuProfileFromSamples } from './ios-capture.mts';
 
 test('memory and residency evidence share the trace clock and preserve category units', () => {
   const trace = traceEvents([], 1000, null, {}, undefined, null, {
@@ -260,4 +260,13 @@ test('samples the device hands back without a time are placed by the script time
   ]);
   assert.deepEqual(sampled.get('page')!.map(sample => sample.timestamp), [10.0005, 10.0015]);
   assert.deepEqual(sampled.get('worker:1')!.map(sample => sample.timestamp), [0]);
+});
+
+test("a capture says where its time went, and a reload settles when the page is quiet", () => {
+  assert.equal(captureOverhead([['device ready', 100], ['page navigated and ready', 2200], ['settled', 3900], ['trace and screen sampler ready', 9500], ['actions complete', 10500], ['raw and trace saved', 30000], ['report written', 30100]]),
+    '30.1 s in all: raw and trace saved 19.5 s, trace and screen sampler ready 5.6 s, page navigated and ready 2.1 s, settled 1.7 s, actions complete 1.0 s');
+  assert.equal(captureOverhead([['device ready', 100], ['report written', 400]]), '0.4 s in all');
+  // The settle is a page expression with its limit in it: a quiet second ends it, the limit caps it.
+  assert.match(pageQuiet(8000), /now - busy >= 1000 \|\| now - started >= 8000/);
+  assert.match(pageQuiet(-5), />= 0\)/);
 });

@@ -293,13 +293,18 @@ async function connectProxy(port: number, target: Target, expectedUrl?: string |
       throw new Error(`Port ${port} already serves Web Inspector pages that are not device ${target.udid}'s (a simulator proxy?): stop it with pkill ios_webkit_debug_proxy, or pass --port <n>.`);
     return { page: await visiblePage(listed, expectedUrl), proxy: null };
   }
+  // A device's proxy outlives the capture that started it, and the next capture finds it listening: a proxy started
+  // right after the last one was stopped took up to 8.5 s to list the device's pages, where a running one answers at
+  // once (2026-10-04). One that no longer answers (the device was unplugged) is stopped first, so the port is free.
+  if (target.kind === 'device') await run('pkill', ['-f', `ios_webkit_debug_proxy -c ${target.udid}:${port}`]).catch(() => undefined);
   const proxy = spawn('ios_webkit_debug_proxy', target.kind === 'device' ? ['-c', `${target.udid}:${port}`]
-    : ['-s', `unix:${await inspectorSocket(target.udid)}`, '-c', `null:${port - 1},:${port}-${port + 100}`], { stdio: 'ignore' });
+    : ['-s', `unix:${await inspectorSocket(target.udid)}`, '-c', `null:${port - 1},:${port}-${port + 100}`], { stdio: 'ignore', detached: target.kind === 'device' });
+  if (target.kind === 'device') proxy.unref();
   // Checked at once, then every 250 ms within the same 10 s budget.
   for (let attempt = 0; attempt < 40; attempt++) {
     if (attempt) await wait(250);
     const pages = await inspectorPages(port).catch(() => []);
-    if (pages.length) return { page: await visiblePage(pages, expectedUrl), proxy };
+    if (pages.length) return { page: await visiblePage(pages, expectedUrl), proxy: target.kind === 'device' ? null : proxy };
   }
   proxy.kill();
   throw new Error(target.kind === 'device'
@@ -1276,7 +1281,7 @@ export function options(args: readonly string[]) {
     throw new TypeError('--cold-load records startup without injected debug hooks or replay.');
   return { coldLoad, name, stepsFile, replay, seconds: seconds === null ? null : requireFiniteNumber(Number(seconds), '--seconds'),
     dist: value('--dist') ?? 'dist', udid: value('--udid'), port: Number(value('--port') ?? 9222), profile: value('--template') ?? 'Time Profiler',
-    open: value('--open'), origin: value('--origin'), expectUrl: value('--expect-url'), settle: Number(value('--settle') ?? 12), noCache: args.includes('--no-cache'), eval: value('--eval'), tail: Number(value('--tail') ?? 6), jsSamples: !args.includes('--no-js-samples'), styleWrites: args.includes('--style-writes') || args.includes('--debug'), debug: args.includes('--debug'), screens: args.includes('--screens'), deviceMonitors: !args.includes('--no-device-monitors'), compare: value('--compare'), device,
+    open: value('--open'), origin: value('--origin'), expectUrl: value('--expect-url'), settle: Number(value('--settle') ?? 12), noCache: args.includes('--no-cache'), eval: value('--eval'), tail: Number(value('--tail') ?? 6), jsSamples: !args.includes('--no-js-samples'), styleWrites: args.includes('--style-writes') || args.includes('--debug'), debug: args.includes('--debug'), screens: args.includes('--screens'), deviceMonitors: args.includes('--device-monitors'), compare: value('--compare'), device,
     // A device's web content process is not reachable by pid from the Mac; record it with --native all, or not at all.
     native: nativeMode(value('--native') ?? (device ? 'off' : 'page')), pymobiledevice3: value('--pymobiledevice3') ?? process.env.PYMOBILEDEVICE3 ?? 'pymobiledevice3' };
 }
@@ -1557,10 +1562,25 @@ interface DeviceScreens {
   screenshot(file: string): Promise<void>;
 }
 
+/** A page expression that resolves once the page has been quiet for a second (no file finished loading, no frame over
+ * 20 ms), or after `limitMs`, with the milliseconds it waited. */
+export const pageQuiet = (limitMs: number) => `new Promise(resolve => { const started = performance.now(); let busy = started, frame = started, files = performance.getEntriesByType('resource').length;
+  const tick = now => { const count = performance.getEntriesByType('resource').length; if (count !== files || now - frame > 20) { files = count; busy = now; } frame = now;
+    if (now - busy >= 1000 || now - started >= ${Math.max(0, Math.round(limitMs))}) resolve(Math.round(now - started)); else requestAnimationFrame(tick); };
+  requestAnimationFrame(tick); })`;
+
+/** Where a capture's time went, by the stages it timed: the parts over half a second, largest first. */
+export function captureOverhead(stages: readonly (readonly [string, number])[]): string {
+  const parts = stages.map(([label, at], index) => [label, at - (index ? stages[index - 1]![1] : 0)] as const).filter(([, took]) => took >= 500).sort((a, b) => b[1] - a[1]);
+  const total = stages.at(-1)?.[1] ?? 0;
+  return `${(total / 1000).toFixed(1)} s in all${parts.length ? `: ${parts.map(([label, took]) => `${label} ${(took / 1000).toFixed(1)} s`).join(', ')}` : ''}`;
+}
+
 export async function captureIosMoment(args: readonly string[], deviceScreensSession?: DeviceScreens) {
   const option = options(args);
   const setupStarted = Date.now();
-  const stage = (label: string) => { if (args.includes('--stage-timing')) console.error(`iPad ${label}: ${((Date.now() - setupStarted) / 1000).toFixed(1)} s`); };
+  const stages: [string, number][] = [];
+  const stage = (label: string) => { stages.push([label, Date.now() - setupStarted]); if (args.includes('--stage-timing')) console.error(`iPad ${label}: ${((Date.now() - setupStarted) / 1000).toFixed(1)} s`); };
   const steps = option.stepsFile ? parseSteps(JSON.parse(await readFile(resolve(option.stepsFile), 'utf8'))) : [];
   if (option.device && steps.some(step => 'screenshot' in step) && !option.open && !option.expectUrl)
     throw new TypeError('A device screen step needs --open <url> or --expect-url <url> to identify the Safari page before capture.');
@@ -1606,6 +1626,21 @@ export async function captureIosMoment(args: readonly string[], deviceScreensSes
   };
   await enableDomains();
   stage('Web Inspector ready');
+  // WebKit's Runtime.evaluate cannot wait for a promise; Runtime.awaitPromise can. Every expression is wrapped in one, so a
+  // script that returns a promise (a replay, a scripted camera move) finishes before the capture goes on.
+  const evaluate = async (expression: string) => {
+    const reply = await session.send('Runtime.evaluate', { expression: `Promise.resolve((${expression}))`, returnByValue: false });
+    if ('timeout' in reply || 'error' in reply || isRecord(reply.result) && reply.result.wasThrown === true)
+      throw new Error(`Web Inspector could not evaluate the step: ${JSON.stringify(reply).slice(0, 500)}`);
+    const promise = isRecord(reply.result) && isRecord(reply.result.result) ? reply.result.result.objectId : null;
+    if (typeof promise !== 'string') throw new Error(`Web Inspector returned no step result: ${JSON.stringify(reply).slice(0, 500)}`);
+    try {
+      const settled = await session.send('Runtime.awaitPromise', { promiseObjectId: promise, returnByValue: true });
+      if ('timeout' in settled || 'error' in settled || isRecord(settled.result) && settled.result.wasThrown === true)
+        throw new Error(`Web Inspector step failed: ${JSON.stringify(settled).slice(0, 500)}`);
+      return isRecord(settled.result) && isRecord(settled.result.result) ? settled.result.result.value : null;
+    } finally { await session.send('Runtime.releaseObject', { objectId: promise }); }
+  };
   // --open loads the page in this same tab, so each capture starts from a fresh load in the tab on screen.
   // --settle then counts from the moment the app reports its body loaded, not from the navigation.
   const open = option.open?.startsWith('/') ? `${option.origin ?? await networkOrigin()}${option.open}` : option.open;
@@ -1624,7 +1659,9 @@ export async function captureIosMoment(args: readonly string[], deviceScreensSes
     stage('page navigated and ready');
     // A new process starts with every domain off (and its own stopwatch): enable them again before recording.
     if (session.swaps() !== swapsBefore) await enableDomains();
-    await wait(option.settle * 1000);
+    // The page is settled once it has been quiet for a second, or after --settle seconds: a fixed wait was 8 to 12 s of
+    // every reloaded capture, most of it on a page that had finished (2026-10-04).
+    await evaluate(pageQuiet(option.settle * 1000));
     stage('settled');
   }
   const location = await session.send('Runtime.evaluate', { expression: 'location.href', returnByValue: true });
@@ -1635,21 +1672,6 @@ export async function captureIosMoment(args: readonly string[], deviceScreensSes
     throw new Error(`Safari is on ${url}; expected ${expected}. No recording or screen grab started.`);
   }
   await mkdir(out, { recursive: true });
-  // WebKit's Runtime.evaluate cannot wait for a promise; Runtime.awaitPromise can. Every expression is wrapped in one, so a
-  // script that returns a promise (a replay, a scripted camera move) finishes before the capture goes on.
-  const evaluate = async (expression: string) => {
-    const reply = await session.send('Runtime.evaluate', { expression: `Promise.resolve((${expression}))`, returnByValue: false });
-    if ('timeout' in reply || 'error' in reply || isRecord(reply.result) && reply.result.wasThrown === true)
-      throw new Error(`Web Inspector could not evaluate the step: ${JSON.stringify(reply).slice(0, 500)}`);
-    const promise = isRecord(reply.result) && isRecord(reply.result.result) ? reply.result.result.objectId : null;
-    if (typeof promise !== 'string') throw new Error(`Web Inspector returned no step result: ${JSON.stringify(reply).slice(0, 500)}`);
-    try {
-      const settled = await session.send('Runtime.awaitPromise', { promiseObjectId: promise, returnByValue: true });
-      if ('timeout' in settled || 'error' in settled || isRecord(settled.result) && settled.result.wasThrown === true)
-        throw new Error(`Web Inspector step failed: ${JSON.stringify(settled).slice(0, 500)}`);
-      return isRecord(settled.result) && isRecord(settled.result.result) ? settled.result.result.value : null;
-    } finally { await session.send('Runtime.releaseObject', { objectId: promise }); }
-  };
   const awaitRoute = async (pathname: string): Promise<unknown> => {
     const deadline = Date.now() + 90_000;
     let last: unknown = null, enabledAtSwap = session.swaps();
@@ -1986,6 +2008,8 @@ export async function captureIosMoment(args: readonly string[], deviceScreensSes
   await writeFile(resolve(out, 'report.json'), JSON.stringify(report, null, 2) + '\n');
   await writeFile(resolve(out, 'README.md'), readme(report));
   stage('report written');
+  // Where the capture's own time went, on every run: a reload, a settle or the native recorder is never a silent cost.
+  console.error(`Capture time: ${captureOverhead(stages)}.`);
   if (target.kind === 'simulator') await run('xcrun', ['simctl', 'status_bar', udid, 'clear']).catch(() => undefined);
   return { out, report };
   } catch (error) {
