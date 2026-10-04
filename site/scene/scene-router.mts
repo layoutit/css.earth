@@ -157,7 +157,8 @@ export function createSceneRouter({
   const publication = createScenePublication({ stage, documentTarget, windowTarget,
     read: () => ({ state: scenes.state, pending: requests.current, objectId, subject: subject(), motionEnabled: preferences.state.motionEnabled, lightCurvesEnabled: preferences.state.lightCurvesEnabled, reducedMotionActive,
       mountedObjectCount: scenes.current?.mount ? 1 : 0, playing: scenes.current?.playing ?? false,
-      hasPresented: hasPresented || initialScene?.available === true || initialBillboard?.isConnected === true }),
+      hasPresented: hasPresented || initialScene?.available === true || initialBillboard?.isConnected === true,
+      covered: initialBillboard?.isConnected === true }),
     getShell: () => shellOwner?.shell ?? null, getWorld: () => world.current,
   });
 
@@ -788,6 +789,8 @@ export function createSceneRouter({
     if (!scenes.isCurrent(session)) return;
     delete documentTarget.documentElement.dataset.bodyPending;
     documentTarget.querySelector('.startup-loading')?.remove();
+    // The cover's line (startup-cover.mts) has no owner when the failure comes before the shell mounts.
+    documentTarget.querySelector('.explorer-navigation-progress')?.setAttribute('aria-hidden', 'true');
     if (session.request) requests.finish(session.request, 'failed');
     try { retire(session, error instanceof Error ? error : new Error(String(error))); }
     catch (failure) { report(failure); }
