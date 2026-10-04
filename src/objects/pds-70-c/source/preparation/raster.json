@@ -26,7 +26,22 @@
       "falseColor": false,
       "science": {
         "kind": "neutral-shape",
-        "qualification": "Shared neutral gray display convention for a self-luminous planet with no image or measured visible color in this package; a sphere of the published radius that glows with its own heat (1,054 K), so no lighting."
+        "qualification": "Shared neutral gray display convention for a self-luminous planet with no image or measured visible color in this package; a sphere of the published radius that glows with its own heat (1,054 K), so no lighting. The disc is dimmed toward the limb by the quadratic law fitted to the SPHERE K1 intensity PICASO 4.1 (Batalha et al. 2019, ApJ 878, 70) computes from Exo-REM cloudy (Charnay et al. 2018, ApJ 854, 172; 1 times solar metallicity, C/O 0.50) model atmospheres at 1,112 K and log g 3.87, read between the models YGP_1100K_logg3.5, YGP_1100K_logg4.0, YGP_1150K_logg3.5, YGP_1150K_logg4.0 (u1 0.407, u2 0.370; the law fits each model's eight angles within 0.48% of the centre): a cloudy model, the one Wang et al. (2021), AJ 161, 148 fit to this planet, because no table reaches a planet this cold and nobody has resolved its disc.",
+        "limbDarkening": {
+          "law": "quadratic",
+          "path": "photometry/picaso-exo-rem-k1-quadratic.tsv",
+          "grid": {
+            "teffK": 1112,
+            "logg": 3.87,
+            "models": {}
+          },
+          "columns": {
+            "teff": "Teff",
+            "logg": "logg",
+            "u1": "a",
+            "u2": "b"
+          }
+        }
       }
     }
   ],
@@ -48,7 +63,7 @@
       },
       "limbMaterial": {
         "logicalSize": 496,
-        "composition": "transparent: the adopted source-radius opaque-sphere silhouette is the limb; no off-limb or radial-brightness source is selected",
+        "composition": "black alpha darkens the disc according to the selected limb-darkening law; transparent outside the silhouette",
         "sourceRadius": "measurements.json#radiusKm",
         "surfaceReplacement": false,
         "runtimeAlphaProcessing": false
