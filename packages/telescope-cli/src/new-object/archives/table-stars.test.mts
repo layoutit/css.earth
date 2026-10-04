@@ -8,7 +8,7 @@ import { sourceTest } from '@cssearth/objects/node/source-test';
 import { catalogueRowForm, catalogueRowUrl, parseCatalogueRow, rowArchive, SIMBAD_TAP, VIZIER_ASU, type Archive } from './archives.mts';
 import { citedRow } from '../identity.mts';
 import { parseStarSpec } from '../spec.mts';
-import { bibcodeReference, draftsFromTable, paperCredit, parseTableRequest, pickRows, placeInGalaxy, readGalaxy } from './table-stars.mts';
+import { bibcodeReference, draftsFromTable, paperCredit, parseTableRequest, pickRows, placeInGalaxy, readGalaxy, TABLE_CLASSES } from './table-stars.mts';
 import { catalogueOf, parseVizierMeta, parseVizierReadMe, starColumns, vizierDataRows, vizierReadMeUrl } from './vizier-tables.mts';
 
 const test = sourceTest(), root = resolve(import.meta.dirname, '../../../../..');
@@ -97,11 +97,17 @@ test('a request names a class, a galaxy, a table and the rows; each row drafted 
   assert.deepEqual([m95.named, m95.kept.length, m95.rows.map(row => row.key)], ['Cepheid', 2, [{ Galaxy: 'NGC3351', Cepheid: 'C1' }]]);
   assert.deepEqual(pickRows(kanbur, kanburColumns, parseTableRequest(`cepheid:m100=${KANBUR}`), ['M100', 'NGC 4321'], log, 68.464).rows.map(row => row.key), [{ Galaxy: 'NGC4321', Cepheid: 'C3' }], 'C2 pulsates in 76 d, beyond the relation');
   // A star's name may be a number when the table's metadata says which column it is; no other numeric column is taken for one.
-  const numbered = [{ Gal: 'M101', ID: '115287', Per: '14.2' }, { Gal: 'M101', ID: '98012', Per: '66.095' }, { Gal: 'N4258', ID: '98012', Per: '9.1' }];
-  assert.deepEqual(pickRows(numbered, { identifier: 'ID', period: { column: 'Per', log: false }, position: true }, parseTableRequest('cepheid:m101=J/ApJ/830/10/table5'), ['M101'], period, 68.464).rows.map(row => row.key), [{ Gal: 'M101', ID: '98012' }]);
+  const numbered = [{ Gal: 'M101', ID: '115287', Per: '14.2' }, { Gal: 'M101', ID: '98012', Per: '66.095' }, { Gal: 'N4258', ID: '98012', Per: '9.1' }], ids = { identifier: 'ID', period: { column: 'Per', log: false }, position: true } as const;
+  assert.deepEqual(pickRows(numbered, ids, parseTableRequest('cepheid:m101=J/ApJ/830/10/table5'), ['M101'], period, 68.464).rows.map(row => row.key), [{ Gal: 'M101', ID: '98012' }]);
+  // Two stars of one galaxy may share an ID (one of Hoffmann et al.'s 538 in M101 does): the row's period then tells them apart.
+  const shared = [...Array.from({ length: 18 }, (_, index) => ({ Gal: 'M101', ID: String(100 + index), Per: String(5 + index) })), { Gal: 'M101', ID: '183892', Per: '24.895' }, { Gal: 'M101', ID: '183892', Per: '81.521' }];
+  assert.deepEqual(pickRows(shared, ids, parseTableRequest('cepheid:m101=J/ApJ/830/10/table5#Gal=M101,105'), ['M101'], period, 68.464).rows.map(row => row.key), [{ Gal: 'M101', ID: '105' }]);
+  assert.deepEqual(pickRows(shared, ids, parseTableRequest('cepheid:m101=J/ApJ/830/10/table5#all'), ['M101'], period, 68.464).rows.at(-1)!.key, { ID: '183892', Per: '81.521' });
+  assert.throws(() => pickRows(shared, ids, parseTableRequest('cepheid:m101=J/ApJ/830/10/table5#183892'), ['M101'], period, 68.464), /ID = 183892 matches 2 rows, not one/u);
   // A table that names no star: the row is picked by its period, and by the cells after it when periods repeat.
   const unnamed = [{ Per: '6.777', Xpix: '755.48', Comm: '' }, { Per: '6.777', Xpix: '1179.80', Comm: '' }, { Per: '7.943', Xpix: '365.66', Comm: 'blend' }];
   assert.deepEqual(pickRows(unnamed, { period: { column: 'Per', log: false }, position: true }, request('#all'), ['M83'], period, 68.464).rows.map(row => row.key), [{ Per: '6.777', Xpix: '755.48' }, { Per: '6.777', Xpix: '1179.80' }, { Per: '7.943' }]);
+  assert.equal(pickRows(unnamed, { period: { column: 'Per', log: false }, position: true }, request('#Per=7.943'), ['M83'], period, 68.464).named, undefined, 'a remark after the period is not the star\'s name, even when it is the only row kept');
 });
 
 test('a star is placed where its sight line crosses its galaxy\'s drawn disc, and refused outside the radius the package frames', async () => {
@@ -126,6 +132,7 @@ test('a table with a position per star drafts a spec placed by its row, named as
   assert.deepEqual([spec.id, spec.name, spec.parent, spec.target], ['gkp2011-m81c-j095610-62-690732-7', '[GKP2011] M81C J095610.62+690732.7', 'm81', '[GKP2011] M81C J095610.62+690732.7']);
   assert.deepEqual(spec.position, { catalogue: GERKE, row: { M81C: '095610.62+690732.7' }, columns: { ra: '_RAJ2000', dec: '_DEJ2000' }, credit: 'Gerke et al. (2011), ApJ 743, 176', url: 'https://ui.adsabs.harvard.edu/abs/2011ApJ...743..176G' });
   assert.deepEqual([spec.paper, spec.mass, spec.radialVelocity?.value], [{ url: 'https://ui.adsabs.harvard.edu/abs/2011ApJ...743..176G', credit: 'Gerke et al. (2011), ApJ 743, 176' }, 'unmeasured', -47]);
+  assert.ok(archive.asked.some(request => /o\.path LIKE '%Ce\*%' AND CONTAINS\(POINT\('ICRS', b\.ra, b\.dec\), CIRCLE\('ICRS', 149\.04425, 69\.12575, 0\.0005556\)\) = 1/u.test(request)), 'SIMBAD is asked for a Cepheid within 2" of the row');
   assert.ok(Math.abs(spec.distance!.value - 3622342) < 2, 'on the midplane of the disc M81 is drawn as, 8 kpc behind its centre');
   assert.match(spec.radius === 'gaia-flame' ? '' : spec.radius.source, /this star's period, 64\.823 d in Gerke et al\. \(2011\), ApJ 743, 176, VizieR J\/ApJ\/743\/176\/table1 M81C = 095610\.62\+690732\.7 \(Per\); not a measurement of this star/u);
   assert.deepEqual(spec.text, { card: 'A Cepheid in the galaxy M81, 3.6 million parsecs away, that swells and shrinks every 64.8 days.', introduction: 'Gerke et al. (2011) list its pulsation at 64.8 days.', locator: 'VizieR J/ApJ/743/176/table1 M81C = 095610.62+690732.7: Per' });
@@ -150,6 +157,7 @@ test('a table that gives every row its galaxy\'s centre places its stars by the 
     credit: 'Kanbur et al. (2003), A&A 411, 361, VizieR J/A+A/411/361/table1 Galaxy = NGC3351, Cepheid = C1, names the star in SIMBAD (SName); SIMBAD holds its position and names no paper for it' });
   assert.match(spec.radius === 'gaia-flame' ? '' : spec.radius.source, /this star's period, 42\.95 d in Kanbur et al\. \(2003\), A&A 411, 361, VizieR J\/A\+A\/411\/361\/table1 Galaxy = NGC3351, Cepheid = C1 \(log\(P\) 1\.633\)/u);
   assert.ok(!archive.asked.some(request => request.includes('DISTANCE(POINT')), 'the star is named by its row, not looked for at the galaxy\'s centre');
+  assert.equal(TABLE_CLASSES.cepheid!.simbadRoot, 'Ce*');
   // The generator asks SIMBAD for that object's own row, and a manifest records SIMBAD as its archive.
   assert.equal(catalogueRowUrl(spec.position!), SIMBAD_TAP);
   assert.deepEqual(catalogueRowForm(spec.position!), { REQUEST: 'doQuery', LANG: 'ADQL', FORMAT: 'tsv', QUERY: "SELECT main_id, ra, dec, coo_bibcode FROM basic WHERE main_id = '[GPF97] c01'" });

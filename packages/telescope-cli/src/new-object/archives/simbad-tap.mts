@@ -17,9 +17,10 @@ export const simbadRows = async (archive: Archive, query: string) => parseSimbad
 
 export const simbadQuoted = (value: string) => `'${value.replaceAll("'", "''")}'`;
 /** The star SIMBAD lists nearest a position, within `arcsec` of it: its main designation, type and distance from the position. Only
- * the star branch of SIMBAD's type tree is asked: a galaxy's own entry, a cluster or a nebula at that place is not the star. */
-export async function simbadAt(archive: Archive, raDeg: number, decDeg: number, arcsec: number) {
+ * the branch of SIMBAD's type tree under `root` is asked ("Ce*", the Cepheids): a galaxy's own entry, a cluster, a nebula or a
+ * neighbouring star of another kind at that place is not the star. */
+export async function simbadAt(archive: Archive, raDeg: number, decDeg: number, arcsec: number, root: string) {
   const point = `POINT('ICRS', ${raDeg}, ${decDeg})`;
-  const [row] = await simbadRows(archive, `SELECT TOP 1 b.main_id, b.otype, DISTANCE(POINT('ICRS', b.ra, b.dec), ${point}) AS separation FROM basic AS b JOIN otypedef AS o ON o.otype = b.otype WHERE o.path LIKE '*%' AND CONTAINS(POINT('ICRS', b.ra, b.dec), CIRCLE('ICRS', ${raDeg}, ${decDeg}, ${(arcsec / 3600).toFixed(7)})) = 1 ORDER BY separation`);
+  const [row] = await simbadRows(archive, `SELECT TOP 1 b.main_id, b.otype, DISTANCE(POINT('ICRS', b.ra, b.dec), ${point}) AS separation FROM basic AS b JOIN otypedef AS o ON o.otype = b.otype WHERE o.path LIKE ${simbadQuoted(`%${root}%`)} AND CONTAINS(POINT('ICRS', b.ra, b.dec), CIRCLE('ICRS', ${raDeg}, ${decDeg}, ${(arcsec / 3600).toFixed(7)})) = 1 ORDER BY separation`);
   return row?.main_id ? { name: row.main_id.replace(/\s+/gu, ' '), otype: row.otype ?? '', arcsec: Number(row.separation) * 3600 } : undefined;
 }

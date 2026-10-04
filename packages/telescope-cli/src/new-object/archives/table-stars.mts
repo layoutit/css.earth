@@ -29,8 +29,9 @@ import { GROENEWEGEN_2020, galaxyVelocity, relationCepheidDraft } from './sh0es.
 import { simbadAt, simbadQuoted, simbadRows } from './simbad-tap.mts';
 import { catalogueOf, DECIMAL_POSITION, parseVizierReadMe, starColumns, vizierDataRows, vizierReadMeUrl, vizierTables, type StarColumns } from './vizier-tables.mts';
 
-/** A star SIMBAD lists within this of a row's position is that row's star: the tables give positions to a tenth of an arcsecond. */
-export const SIMBAD_MATCH_ARCSEC = 1;
+/** A star of the class that SIMBAD lists within this of a row's position is that row's star. A ground-based table gives right
+ * ascension to a tenth of a second of time, 1.5"; M83's [TTS2003] C2 is 1.4" from its row in Bonanos & Stanek (2003). */
+export const SIMBAD_MATCH_ARCSEC = 2;
 const PARSEC_M = 3.0856775814913673e16, KEY_CELLS = 3;
 type Cells = Readonly<Record<string, string>>;
 
@@ -41,10 +42,12 @@ interface TableClass {
   /** The longest period the class's relation was fitted to; the default star is chosen under it. */
   readonly longestPeriodDays: number;
   readonly relation: string;
+  /** The root of the class's branch in SIMBAD's type tree: a star matched by position must be on it. */
+  readonly simbadRoot: string;
 }
 export const TABLE_CLASSES: Readonly<Record<string, TableClass>> = {
   // Radius and temperature from Groenewegen's (2020) period relations for Galactic fundamental-mode Cepheids (sh0es.mts).
-  cepheid: { noun: 'Cepheid', longestPeriodDays: GROENEWEGEN_2020.longestPeriodDays, relation: `${GROENEWEGEN_2020.credit}'s period relations` },
+  cepheid: { noun: 'Cepheid', longestPeriodDays: GROENEWEGEN_2020.longestPeriodDays, relation: `${GROENEWEGEN_2020.credit}'s period relations`, simbadRoot: 'Ce*' },
 };
 
 export interface TableRequest { readonly starClass: string; readonly galaxy: string; readonly table: string; readonly filters: Cells; readonly named?: string; readonly all: boolean }
@@ -104,20 +107,22 @@ export function placeInGalaxy(galaxy: Pick<Galaxy, 'id' | 'name' | 'distance' | 
 
 const plain = (name: string) => name.toLowerCase().replace(/[^a-z0-9]/gu, '');
 const own = (column: string) => column !== 'recno' && !column.startsWith('_') && !/^(?:RA|DE)(?:J2000|B1950|deg)?$/u.test(column);
-const unique = (rows: readonly Cells[], column: string) => rows.every(cells => cells[column]) && new Set(rows.map(cells => cells[column])).size === rows.length;
+/** Whether a column names rows: every row has a cell, and at least `share` of them differ (two stars of one table may share an ID). */
+const names = (rows: readonly Cells[], column: string, share = 1) => rows.every(cells => cells[column]) && new Set(rows.map(cells => cells[column])).size >= share * rows.length;
 
 /** The rows the request keeps, each with the fewest cells that pick it out of the whole table again (the spec's `position.row`). */
 export function pickRows(rows: readonly Cells[], columns: StarColumns, request: TableRequest, galaxyNames: readonly string[], period: (cells: Cells) => number, longestPeriodDays: number) {
   const header = Object.keys(rows[0] ?? {}).filter(own), absent = Object.keys(request.filters).filter(column => !header.includes(column));
   if (absent.length) throw new Error(`${request.table} has no column ${absent.join(', ')}; its columns are ${header.join(', ')}.`);
   // A table of several galaxies names each row's galaxy: the column whose cells match a name of this one narrows it.
-  const names = new Set(galaxyNames.map(plain)), galaxyColumn = Object.keys(request.filters).length ? undefined : header.find(column => new Set(rows.map(cells => cells[column])).size > 1 && rows.some(cells => names.has(plain(cells[column] ?? ''))));
-  const filters: Cells = galaxyColumn ? { [galaxyColumn]: rows.find(cells => names.has(plain(cells[galaxyColumn] ?? '')))![galaxyColumn]! } : request.filters;
+  const known = new Set(galaxyNames.map(plain)), galaxyColumn = Object.keys(request.filters).length ? undefined : header.find(column => new Set(rows.map(cells => cells[column])).size > 1 && rows.some(cells => known.has(plain(cells[column] ?? ''))));
+  const filters: Cells = galaxyColumn ? { [galaxyColumn]: rows.find(cells => known.has(plain(cells[galaxyColumn] ?? '')))![galaxyColumn]! } : request.filters;
   const kept = rows.filter(cells => Object.entries(filters).every(([column, cell]) => cells[column] === cell));
   if (!kept.length) throw new Error(`${request.table}: no row has ${Object.entries(filters).map(([column, cell]) => `${column} = ${cell}`).join(', ')}; cells are compared as VizieR writes them.`);
-  // The column the table's metadata calls the star's name may be a number (an ID); any other column names a row only by text.
-  const free = (column: string | undefined): column is string => !!column && !(column in filters) && column !== columns.simbadName && unique(kept, column);
-  const named = free(columns.identifier) ? columns.identifier : header.find(column => free(column) && kept.every(cells => !Number.isFinite(Number(cells[column]))));
+  // The column the table's metadata calls the star's name may be a number (an ID) and may repeat once in a while; any other column
+  // names a row only when it comes before the period, as a name does and a remark does not, by text that never repeats.
+  const free = (column: string | undefined): column is string => !!column && !(column in filters) && column !== columns.simbadName, leading = header.slice(0, Math.max(0, header.indexOf(columns.period?.column ?? '')));
+  const named = free(columns.identifier) && names(kept, columns.identifier, 0.9) ? columns.identifier : leading.find(column => free(column) && names(kept, column) && kept.every(cells => !Number.isFinite(Number(cells[column]))));
   const keyOf = (cells: Cells): Cells => {
     const tried: Record<string, string> = { ...filters }, match = () => rows.filter(row => Object.entries(tried).every(([column, cell]) => row[column] === cell)).length;
     for (const column of [named, columns.period?.column, ...header].filter((candidate): candidate is string => !!candidate && cells[candidate] !== '')) {
@@ -165,13 +170,14 @@ export async function draftsFromTable(names: readonly string[], archive: Archive
     for (const { cells, key } of picked.rows) {
       const days = period(cells), where = `${request.table} ${Object.entries(key).map(([column, cell]) => `${column} = ${cell}`).join(', ')}`;
       if (!(days > 0)) throw new Error(`${where}: ${columns.period.column} is ${JSON.stringify(cells[columns.period.column])}, not a period.`);
-      const listedName = ownPositions ? undefined : cells[columns.simbadName!], held = listedName ? await simbadObject(archive, listedName) : undefined;
+      // The SIMBAD name CDS added to a row is the star's, whether or not the row has a position; without one the star is looked for at its place.
+      const listedName = columns.simbadName ? cells[columns.simbadName] : undefined, listed = listedName ? await simbadObject(archive, listedName) : undefined, held = ownPositions ? undefined : listed;
       if (!ownPositions && !held) throw new Error(`${where}: SIMBAD holds no position for ${columns.simbadName} = ${JSON.stringify(listedName)}, and the table gives the row none of its own.`);
       const raDeg = held?.raDeg ?? degrees(cells, DECIMAL_POSITION.ra)!, decDeg = held?.decDeg ?? degrees(cells, DECIMAL_POSITION.dec)!;
-      const simbadName = (held?.mainId ?? (await simbadAt(archive, raDeg, decDeg, SIMBAD_MATCH_ARCSEC))?.name)?.replace(/\s+/gu, ' ');
+      const simbadName = (listed?.mainId ?? (await simbadAt(archive, raDeg, decDeg, SIMBAD_MATCH_ARCSEC, starClass.simbadRoot))?.name)?.replace(/\s+/gu, ' ');
       const written = picked.named ? `${galaxy.name} ${starClass.noun} ${cells[picked.named]}` : undefined;
       const starName = (simbadName ? preferredName(await simbadIdentifiers(archive, simbadName))?.name ?? simbadName : undefined) ?? written;
-      if (!starName) throw new Error(`${where}: SIMBAD lists no star within ${SIMBAD_MATCH_ARCSEC}" of RA ${raDeg}, Dec ${decDeg} and the table names none, so the star has no name.`);
+      if (!starName) throw new Error(`${where}: SIMBAD lists no ${starClass.noun} within ${SIMBAD_MATCH_ARCSEC}" of RA ${raDeg}, Dec ${decDeg} and the table names none, so the star has no name.`);
       const position: CataloguePosition = held
         ? { archive: 'simbad', catalogue: 'basic', row: { main_id: held.mainId }, url: `https://simbad.cds.unistra.fr/simbad/sim-id?Ident=${encodeURIComponent(simbadName!)}`,
           credit: `${paper.credit}, VizieR ${where}, names the star in SIMBAD (${columns.simbadName}); SIMBAD holds its position${held.bibcode ? `, from ${held.bibcode}` : ' and names no paper for it'}` }
