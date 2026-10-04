@@ -1,11 +1,12 @@
 /** An imaged planet's limb law (imaged-limb.mts), offline: lines of the published table as the CDS serves them, and a small
  * package in memory with the documents a planet had while it was still a gray sphere. */
 import assert from 'node:assert/strict';
-import { readFile } from 'node:fs/promises';
+import { readdir, readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import test from 'node:test';
 import { diamondbackGrid, diamondbackNodes, picasoInstalled, picasoLimbNodes, picasoPassband, picasoToolchainSync, WORKSPACE } from '@cssearth/telescope/node';
 import type { PackageFiles } from '../dataset.mts';
+import { exoRem } from '../picaso-limb.mts';
 import { ATMOSPHERE_FIT, CLARET_2012, claret2012Grid, claretBand, documentImagedColor, fittedImagedLimb, imagedLimb, installImagedLimb, parseAtmosphereFit, type ImagedLimb } from './imaged-limb.mts';
 
 // The four H-band nodes around 1,727 K and log g 3.59, with a flux-conservation row and a K-band row the reader must pass over.
@@ -76,7 +77,14 @@ test('the law goes on the color dataset with its texts, nodes and manifest entry
   // named here gets no computed law, and the toolchain is not asked.
   const fit = parseAtmosphereFit({ schema: ATMOSPHERE_FIT.schema, grid: 'sonora-diamondback', teffK: 1100, logg: 3.5, metallicity: 0.5, fsed: 2, source: { citation: 'Someone et al. (2024)', url: 'https://example.org/fit', locator: 'Table 9' } }, 'x-b fit');
   assert.deepEqual([fit.teffK, fit.logg, fit.metallicity, fit.fsed], [1100, 3.5, 0.5, 2]);
-  assert.throws(() => parseAtmosphereFit({ schema: ATMOSPHERE_FIT.schema, grid: 'exo-rem', teffK: 1100, logg: 3.5, metallicity: 0.5, fsed: 2, source: fit.source }, 'x-b fit'), /x-b fit: grid is exo-rem; a law is computed from sonora-diamondback or sonora-elf-owl models only/u);
+  assert.throws(() => parseAtmosphereFit({ schema: ATMOSPHERE_FIT.schema, grid: 'atmo', teffK: 1100, logg: 3.5, metallicity: 0.5, fsed: 2, source: fit.source }, 'x-b fit'), /x-b fit: grid is atmo; a law is computed from sonora-diamondback or sonora-elf-owl or exo-rem models only/u);
+  // An Exo-REM fit states its C/O; its law is read from the grid's models of the nearest composition, and a fit outside the grid is refused.
+  const cloudy = parseAtmosphereFit({ schema: ATMOSPHERE_FIT.schema, grid: 'exo-rem', teffK: 845, logg: 3.89, metallicity: 0.69, co: 0.57, source: fit.source }, 'x-b fit');
+  assert.deepEqual([cloudy.co, cloudy.logKzz, cloudy.fsed], [0.57, undefined, undefined]);
+  assert.equal(exoRem(cloudy.metallicity, cloudy.co!).name, 'Exo-REM cloudy (Charnay et al. 2018, ApJ 854, 172; 3.16 times solar metallicity, C/O 0.55)');
+  assert.equal(exoRem(0.01, 0.61).name, 'Exo-REM cloudy (Charnay et al. 2018, ApJ 854, 172; 1 times solar metallicity, C/O 0.60)');
+  assert.throws(() => exoRem(2.5, 0.55), /\[M\/H\] 2\.5 is outside the -0\.5 to 2 of Exo-REM's public grid/u);
+  assert.throws(() => exoRem(0, 0.9), /C\/O 0\.9 is outside the 0\.1 to 0\.8 of Exo-REM's public grid/u);
   assert.deepEqual(fittedImagedLimb('x-b', fit, 'L′'), { why: 'no law is computed in L′, the middle band of its color' });
   // A planet lit by its star, or with no infrared color, has no flat disc to darken.
   const lit = scaffold(), plain = read(lit, 'source/preparation/raster.json');
@@ -140,4 +148,18 @@ test("Epsilon Indi Ab's nodes record that the Elf Owl release's own flux was rep
   const ratios = [...nodes.matchAll(/band flux ([\d.]+) of the release's own spectrum/gu)].map(match => Number(match[1]));
   assert.equal(ratios.length, 4);
   assert.ok(ratios.every(ratio => Math.abs(ratio - 1) < 0.05), ratios.join(', '));
+});
+
+// A law computed from an Exo-REM grid model carries the same check, and it is what told the two solvers apart: across a thick
+// cloud PICASO's two-stream flux fell to 60% of the release's, and four-term spherical harmonics stay within the bounds here.
+test('every Exo-REM law records, for each model it is read between, the share of the release\'s band flux PICASO finds', async () => {
+  const objects = resolve(WORKSPACE, 'src/objects'), files: string[] = [];
+  for (const id of await readdir(objects)) for (const file of await readdir(resolve(objects, id, 'source/photometry')).catch(() => [])) if (/^picaso-exo-rem-.*-quadratic\.tsv$/u.test(file)) files.push(resolve(objects, id, 'source/photometry', file));
+  assert.ok(files.length > 0);
+  for (const file of files) {
+    const nodes = await readFile(file, 'utf8'), ratios = [...nodes.matchAll(/band flux ([\d.]+) of the release's own spectrum/gu)].map(match => Number(match[1]));
+    assert.match(nodes, /^# solved with four-term spherical harmonics/mu, file);
+    assert.equal(ratios.length, nodes.split('\n').filter(line => /^\d/u.test(line)).length, file);
+    assert.ok(ratios.every(ratio => ratio > 0.8 && ratio < 1.3), `${file}: ${ratios.join(', ')}`);
+  }
 });

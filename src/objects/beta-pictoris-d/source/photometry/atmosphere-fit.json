@@ -1,0 +1,14 @@
+{
+  "schema": "cssearth-atmosphere-grid-fit@1",
+  "grid": "exo-rem",
+  "teffK": 600,
+  "logg": 4,
+  "metallicity": 0.5,
+  "co": 0.65,
+  "note": "The paper shows this model as the match to the photometry; it reports no fitted temperature, so the law is read at its evolutionary-model temperature",
+  "source": {
+    "citation": "Sutlieff, Bonse et al. (2026), arXiv:2606.23801",
+    "url": "https://arxiv.org/abs/2606.23801",
+    "locator": "Section III.5 and Figure 5: the Exo-REM models of log g 4.0, [Fe/H] 0.5 and C/O 0.65 (the composition of the best-fit model of 51 Eridani b) fit all of the planet's photometry; the temperature is the paper's 600 +45/-60 K (Table 2), from evolutionary models"
+  }
+}

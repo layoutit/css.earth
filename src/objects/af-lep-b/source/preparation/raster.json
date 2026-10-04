@@ -26,7 +26,22 @@
       "falseColor": true,
       "science": {
         "kind": "disc-integrated-band-color",
-        "qualification": "Infrared false color of the whole disc from published flux densities (De Rosa et al. (2023); Mesa et al. (2023), as compiled in Best, Liu, Magnier & Dupuy (2024), The UltracoolSheet v2.1 (Zenodo); zero points from the SVO Filter Profile Service, UltracoolSheet Main.csv, AF Lep b: 2MASS Ks 16.75 +/- 0.07 (DeRo23), MKO H 18.61 +/- 0.36 (Mesa23), MKO J 19.22 +/- 0.33 (Mesa23); SVO 2MASS/2MASS.Ks 666.8 Jy, MKO/NSFCam.H 1034.8 Jy, MKO/NSFCam.J 1544.0 Jy): red 2MASS Ks 2.159 µm, green MKO H 1.614 µm, blue MKO J 1.2417 µm, on one range shared with the bodies the record names. The planet is unresolved, so no map is implied. It glows with its own heat, so no lighting."
+        "qualification": "Infrared false color of the whole disc from published flux densities (De Rosa et al. (2023); Mesa et al. (2023), as compiled in Best, Liu, Magnier & Dupuy (2024), The UltracoolSheet v2.1 (Zenodo); zero points from the SVO Filter Profile Service, UltracoolSheet Main.csv, AF Lep b: 2MASS Ks 16.75 +/- 0.07 (DeRo23), MKO H 18.61 +/- 0.36 (Mesa23), MKO J 19.22 +/- 0.33 (Mesa23); SVO 2MASS/2MASS.Ks 666.8 Jy, MKO/NSFCam.H 1034.8 Jy, MKO/NSFCam.J 1544.0 Jy): red 2MASS Ks 2.159 µm, green MKO H 1.614 µm, blue MKO J 1.2417 µm, on one range shared with the bodies the record names. The planet is unresolved, so no map is implied. It glows with its own heat, so no lighting. The disc is dimmed toward the limb by the quadratic law fitted to the MKO H intensity PICASO 4.1 (Batalha et al. 2019, ApJ 878, 70) computes from Exo-REM cloudy (Charnay et al. 2018, ApJ 854, 172; 3.16 times solar metallicity, C/O 0.55) model atmospheres at 845 K and log g 3.89, read between the models YGP_800K_logg3.5, YGP_800K_logg4.0, YGP_850K_logg3.5, YGP_850K_logg4.0 (u1 0.703, u2 0.015; the law fits each model's eight angles within 0.18% of the centre): a cloudy model, the one Balmer et al. (2025), arXiv:2411.05917 fit to this planet, because no table reaches a planet this cold and nobody has resolved its disc.",
+        "limbDarkening": {
+          "law": "quadratic",
+          "path": "photometry/picaso-exo-rem-h-quadratic.tsv",
+          "grid": {
+            "teffK": 845,
+            "logg": 3.89,
+            "models": {}
+          },
+          "columns": {
+            "teff": "Teff",
+            "logg": "logg",
+            "u1": "a",
+            "u2": "b"
+          }
+        }
       }
     }
   ],
@@ -48,7 +63,7 @@
       },
       "limbMaterial": {
         "logicalSize": 496,
-        "composition": "transparent: the adopted source-radius opaque-sphere silhouette is the limb; no off-limb or radial-brightness source is selected",
+        "composition": "black alpha darkens the disc according to the selected limb-darkening law; transparent outside the silhouette",
         "sourceRadius": "measurements.json#radiusKm",
         "surfaceReplacement": false,
         "runtimeAlphaProcessing": false

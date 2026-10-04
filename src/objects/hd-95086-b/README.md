@@ -14,7 +14,7 @@ HD 95086 b is a young giant planet with a very red color. JWST's mid-infrared im
 
 **Infrared color dataset.** The default dataset paints the sphere one false color from its measured flux in three infrared bands: red NaCo L′ 3.77 µm (74.75 ± 13 µJy), green GPI K1 2.029 µm (18.3 ± 3.4 µJy), blue GPI H 1.632 µm (6.366 ± 1.5 µJy) (De Rosa et al. (2016), ApJ 824, 121; zero points from the SVO Filter Profile Service; [record](source/photometry/band-color.json)). Display range: this planet alone, from zero to its brightest band (NaCo L′), so the color shows its band ratios; brightness is not compared across planets at different distances. Not a natural color; nobody has resolved its disc.
 
-**Limb.** No limb darkening is drawn: the published limb table (Claret, Hauschildt & Witte 2012) starts at 1,500 K, and at 936 K the planet is below it. Its fit is Exo-REM, a cloudy model (Mâlin et al. 2024, Table 8). Exo-REM's public grid releases temperature and gas profiles and spectra, but no cloud properties, so the limb of a cloudy Exo-REM model cannot be computed from it.
+**Limb.** The disc is dimmed toward the limb by the quadratic law fitted to the GPI K1 intensity PICASO 4.1 (Batalha et al. 2019, ApJ 878, 70) computes from Exo-REM cloudy (Charnay et al. 2018, ApJ 854, 172; 3.16 times solar metallicity, C/O 0.35) model atmospheres at 936 K and log g 3.9, read between the models YGP_900K_logg3.5, YGP_900K_logg4.0, YGP_950K_logg3.5, YGP_950K_logg4.0 (u1 0.570, u2 0.269; the law fits each model's eight angles within 0.25% of the centre): a cloudy model, the one Malin et al. (2024), arXiv:2408.16843 fit to this planet, because no table reaches a planet this cold and nobody has resolved its disc ([nodes](source/photometry/picaso-exo-rem-k1-quadratic.tsv)). The temperature and gravity are that fit's (Table 8, Exo-REM with the prior on the gravity: Teff 936 +66/-63 K, log g 3.90 +0.1/-0.1, [Fe/H] 0.55 +0.22/-0.19, C/O 0.34 +0.30/-0.12, radius 1.14 +/- 0.08; [record](source/photometry/atmosphere-fit.json)), not the 936 K of its measurements record.
 
 **Rotation.** No rotation period or spin axis of HD 95086 b on the sky is measured; the papers cited in the README were checked. The display axis is the orbit normal ([rotation.json](source/preparation/rotation.json)).
 
@@ -28,5 +28,6 @@ Run of 2026-09-23 (this version):
 
 - The orbit comes from a 2019 fit; it passes the two newer positions within two of their errors.
 - The radius and mass are model values; the planet is a point in every image.
+- **Model limb.** The limb darkening is computed from the cloudy model a paper fitted to the planet, in the middle band of its color, not a measurement of this planet; another model grid would give another law. Among the 4 models it is read between, the disc near its edge (the lowest of the eight angles) is 33% to 44% as bright as the centre. PICASO finds 92% to 97% of the band flux the release states for those models.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

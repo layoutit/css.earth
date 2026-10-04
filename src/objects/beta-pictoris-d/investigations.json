@@ -32,11 +32,13 @@
     {
       "id": "limb-darkening",
       "subject": "Limb darkening",
-      "status": "unresolved",
-      "finding": "No limb darkening is drawn: the published limb table (Claret, Hauschildt & Witte 2012) starts at 1,500 K, and at 600 K the planet is below it. The model its discovery paper shows as the closest match is an Exo-REM one (Sutlieff, Bonse et al. 2026, section III.5). Exo-REM's public grid releases temperature and gas profiles and spectra, but no cloud properties, so the limb of a cloudy Exo-REM model cannot be computed from it.",
+      "status": "included",
+      "finding": "The disc is dimmed toward the limb by the quadratic law fitted to the JWST/NIRCam F410M intensity PICASO 4.1 (Batalha et al. 2019, ApJ 878, 70) computes from Exo-REM cloudy (Charnay et al. 2018, ApJ 854, 172; 3.16 times solar metallicity, C/O 0.65) model atmospheres at 600 K and log g 4, read between the models YGP_550K_logg3.5, YGP_550K_logg4.0, YGP_600K_logg3.5, YGP_600K_logg4.0 (u1 0.781, u2 0.156; the law fits each model's eight angles within 0.13% of the centre): a cloudy model, the one Sutlieff, Bonse et al. (2026), arXiv:2606.23801 fit to this planet, because no table reaches a planet this cold and nobody has resolved its disc. The temperature and gravity are that fit's (Section III.5 and Figure 5: the Exo-REM models of log g 4.0, [Fe/H] 0.5 and C/O 0.65 (the composition of the best-fit model of 51 Eridani b) fit all of the planet's photometry; the temperature is the paper's 600 +45/-60 K (Table 2), from evolutionary models; [record](source/photometry/atmosphere-fit.json)), not the 600 K of its measurements record. The paper shows this model as the match to the photometry; it reports no fitted temperature, so the law is read at its evolutionary-model temperature.",
       "evidence": [
-        "https://arxiv.org/abs/2606.23801",
-        "https://lesia.obspm.fr/exorem/YGP_grids/"
+        "https://lesia.obspm.fr/exorem/YGP_grids/old_grids_2021/",
+        "https://gitlab.obspm.fr/Exoplanet-Atmospheres-LESIA/exorem",
+        "https://doi.org/10.5281/zenodo.3759675",
+        "https://arxiv.org/abs/2606.23801"
       ]
     }
   ]

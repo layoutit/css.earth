@@ -99,6 +99,39 @@
         "kind": "local",
         "reason": "Project-authored color recipe transcribing the cited photometry; repinned when edited."
       }
+    },
+    {
+      "id": "pds-70-b-picaso-exo-rem-limb-darkening",
+      "path": "photometry/picaso-exo-rem-k1-quadratic.tsv",
+      "origin": "https://lesia.obspm.fr/exorem/YGP_grids/old_grids_2021/",
+      "credit": "PICASO 4.1 (Batalha et al. 2019, ApJ 878, 70) on Exo-REM cloudy (Charnay et al. 2018, ApJ 854, 172; 1 times solar metallicity, C/O 0.60) profiles",
+      "license": "Project-computed model values; the Exo-REM grid is public and its README asks that its papers be cited, Exo-REM with its cloud optical constants is under the MIT license, PICASO is GPL-3.0",
+      "acquisition": "Computed by node packages/telescope-cli/src/new-object/new-object-cli.mts --imaged-limb pds-70-b (packages/telescope-cli/src/new-object/picaso-limb.mts, @cssearth/telescope/node picasoLimbNodes) at the nodes YGP_1200K_logg3.5_met1.00_CO0.60, YGP_1200K_logg4.0_met1.00_CO0.60, YGP_1250K_logg3.5_met1.00_CO0.60, YGP_1250K_logg4.0_met1.00_CO0.60.",
+      "redistribution": "Model coefficients and the intensities they are fitted to, with the model and tool cited.",
+      "consumers": [
+        "assets",
+        "datasets"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Computed with the pinned PICASO toolchain; --imaged-limb recomputes it."
+      }
+    },
+    {
+      "id": "pds-70-b-atmosphere-fit",
+      "path": "photometry/atmosphere-fit.json",
+      "origin": "https://arxiv.org/abs/2101.04187",
+      "credit": "Wang et al. (2021), AJ 161, 148, Table 4, Exo-REM with interstellar extinction: Teff 1234 +95/-78 K, radius 2.88 +0.44/-0.35, log g 3.89 +0.42/-0.35, [M/H] 0.01 +0.44/-0.37, C/O 0.61 +0.12/-0.21, A_V 8.3 +1.5/-2.2, Bayes factor 46; the plain Exo-REM fit (1051 K) has the lowest Bayes factor of the table",
+      "license": "Factual numerical values; source attribution retained",
+      "acquisition": "Transcribed from the paper: the model of the public grid it fits to the planet, each value as printed",
+      "redistribution": "Factual parameter transcription only; no paper figures",
+      "consumers": [
+        "datasets"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Published fit transcribed with its source; repinned when edited."
+      }
     }
   ],
   "generatedIntermediates": [
@@ -106,7 +139,7 @@
       "id": "dataset-color-context-marker",
       "path": "presentation/context.png",
       "origin": "https://arxiv.org/abs/2504.11210",
-      "credit": "The default dataset's color as a disc; rendered by packages/telescope-cli/src/source-authoring/context-markers.mts",
+      "credit": "The default dataset's color as a disc, dimmed toward the limb by its law; rendered by packages/telescope-cli/src/source-authoring/context-markers.mts",
       "license": "Project-authored display derivative.",
       "consumers": [
         "navigation"
@@ -116,7 +149,8 @@
         "inputs": [
           "pds-70-b-observational-measurements",
           "pds-70-b-preparation-raster",
-          "pds-70-b-band-color"
+          "pds-70-b-band-color",
+          "pds-70-b-picaso-exo-rem-limb-darkening"
         ]
       },
       "generator": "packages/telescope-cli/src/source-authoring/context-markers.mts",

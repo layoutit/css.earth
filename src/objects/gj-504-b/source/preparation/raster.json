@@ -26,7 +26,22 @@
       "falseColor": true,
       "science": {
         "kind": "disc-integrated-band-color",
-        "qualification": "Infrared false color of the whole disc from published flux densities (Janson et al. (2013c), as compiled in Best, Liu, Magnier & Dupuy (2024), The UltracoolSheet v2.1 (Zenodo); zero points from the SVO Filter Profile Service, UltracoolSheet Main.csv, GJ 504 B: MKO K 19.38 +/- 0.11 (Jans13d), H 19.99 +/- 0.10 (Jans13d), J 19.76 +/- 0.10 (Jans13d); SVO MKO/NSFCam.K 638.2 Jy, MKO/NSFCam.H 1034.8 Jy, MKO/NSFCam.J 1544.0 Jy): red MKO K 2.184 µm, green MKO H 1.614 µm, blue MKO J 1.2417 µm, on one range shared with the bodies the record names. The planet is unresolved, so no map is implied. It glows with its own heat, so no lighting."
+        "qualification": "Infrared false color of the whole disc from published flux densities (Janson et al. (2013c), as compiled in Best, Liu, Magnier & Dupuy (2024), The UltracoolSheet v2.1 (Zenodo); zero points from the SVO Filter Profile Service, UltracoolSheet Main.csv, GJ 504 B: MKO K 19.38 +/- 0.11 (Jans13d), H 19.99 +/- 0.10 (Jans13d), J 19.76 +/- 0.10 (Jans13d); SVO MKO/NSFCam.K 638.2 Jy, MKO/NSFCam.H 1034.8 Jy, MKO/NSFCam.J 1544.0 Jy): red MKO K 2.184 µm, green MKO H 1.614 µm, blue MKO J 1.2417 µm, on one range shared with the bodies the record names. The planet is unresolved, so no map is implied. It glows with its own heat, so no lighting. The disc is dimmed toward the limb by the quadratic law fitted to the MKO H intensity PICASO 4.1 (Batalha et al. 2019, ApJ 878, 70) computes from Exo-REM cloudy (Charnay et al. 2018, ApJ 854, 172; 3.16 times solar metallicity, C/O 0.70) model atmospheres at 512 K and log g 3.45, read between the models YGP_500K_logg3.0, YGP_500K_logg4.0, YGP_550K_logg3.0, YGP_550K_logg4.0 (u1 1.319, u2 -0.320; the law fits each model's eight angles within 0.36% of the centre): a cloudy model, the one Mâlin et al. (2025), arXiv:2501.00104 fit to this planet, because no table reaches a planet this cold and nobody has resolved its disc.",
+        "limbDarkening": {
+          "law": "quadratic",
+          "path": "photometry/picaso-exo-rem-h-quadratic.tsv",
+          "grid": {
+            "teffK": 512,
+            "logg": 3.45,
+            "models": {}
+          },
+          "columns": {
+            "teff": "Teff",
+            "logg": "logg",
+            "u1": "a",
+            "u2": "b"
+          }
+        }
       }
     },
     {
@@ -58,7 +73,7 @@
       },
       "limbMaterial": {
         "logicalSize": 496,
-        "composition": "transparent: the adopted source-radius opaque-sphere silhouette is the limb; no off-limb or radial-brightness source is selected",
+        "composition": "black alpha darkens the disc according to the selected limb-darkening law; transparent outside the silhouette",
         "sourceRadius": "measurements.json#radiusKm",
         "surfaceReplacement": false,
         "runtimeAlphaProcessing": false
