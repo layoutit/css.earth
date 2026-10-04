@@ -18,9 +18,17 @@ Epsilon Indi Ab is a cold giant planet about 16 au from its star. JWST first ima
 
 ## Evidence
 
-Run of 2026-09-23 (this version):
+Run of 2026-09-23:
 
 - [`hostedOrbits.test.ts`](../../../packages/astronomy/src/hostedOrbits.test.ts) places the planet, at its star's Gaia distance, against the measured positions (see the test for each miss).
+
+Run of 2026-10-04, when the color and the limb law were added. The orbit test above still applies: the orbit record did not change.
+
+- The app's arrival picture of the planet in its color, before and after the limb law:
+
+![Epsilon Indi Ab as a flat disc before and darkened toward the limb after](evidence/2026-10-04/limb.jpg)
+
+- [`imaged-limb.test.mts`](../../../packages/telescope-cli/src/new-object/imaged/imaged-limb.test.mts) checks that each node of [the law's file](source/photometry/picaso-elf-owl-f1065c-quadratic.tsv) records a band flux within 5% of the spectrum the Elf Owl release itself carries (1.04 at all four).
 
 ## Known problems
 
