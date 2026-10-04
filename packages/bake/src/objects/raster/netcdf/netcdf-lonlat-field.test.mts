@@ -1,9 +1,11 @@
 /** The released longitude/latitude field reader against the reference library's fixture (fixtures/README.md): the grid is
  * four latitudes by eight longitudes, and every expected value is the one the fixture's definition states. */
 import assert from 'node:assert/strict';
-import { resolve } from 'node:path';
+import { mkdtemp, open, rm, writeFile } from 'node:fs/promises';
+import { tmpdir } from 'node:os';
+import { join, resolve } from 'node:path';
 import test from 'node:test';
-import { loadNetcdfLonLatField, loadScienceSurface } from '@cssearth/bake/objects/raster';
+import { decodeNetcdfLonLatField, loadNetcdfLonLatField, loadScienceSurface, openClassicNetcdf, valueRange, type NetcdfVariable } from '@cssearth/bake/objects/raster';
 
 const root = resolve(import.meta.dirname, 'fixtures');
 const field = (overrides: Record<string, unknown> = {}) => ({ format: 'netcdf-lonlat-field', path: 'field-cdf2.nc', variable: 'TS',
@@ -65,6 +67,59 @@ test('whatever the recipe leaves unsaid or says wrongly is refused with the file
   await assert.rejects(loadNetcdfLonLatField(root, field({ path: '../field-cdf2.nc' })), /must be inside the source directory/u);
   const { longitudeZeroAt: _unsaid, ...silent } = field();
   await assert.rejects(loadNetcdfLonLatField(root, silent), /field-cdf2\.nc, longitudeZeroAt/u);
+});
+
+test('a release kept as its first bytes and the bytes of the selected grid reads as the whole file does', async () => {
+  // The two ranges a 3.5 GB release is kept as, cut here from the fixture: everything up to the end of its coordinates, and TS at time 1.
+  const whole = await openClassicNetcdf(resolve(root, 'field-cdf2.nc'));
+  const coordinates = ['lat', 'lon'].map(name => valueRange(whole, name, 0, whole.variables.get(name)!.shape[0]!, 'fixture'));
+  const head = { offset: 0, length: Math.max(...coordinates.map(range => range.offset + range.length)) }, grid = valueRange(whole, 'TS', 32, 32, 'fixture');
+  await whole.close();
+  const directory = await mkdtemp(join(tmpdir(), 'cssearth-netcdf-')), file = await open(resolve(root, 'field-cdf2.nc'), 'r');
+  try {
+    for (const [name, range] of [['field.head.dat', head], ['field.TS-time1.dat', grid]] as const) {
+      const bytes = Buffer.alloc(range.length);
+      await file.read(bytes, 0, range.length, range.offset);
+      await writeFile(join(directory, name), bytes);
+    }
+    const kept = (overrides: Record<string, unknown> = {}) => field({ path: 'field.head.dat', field: 'field.TS-time1.dat', ...overrides });
+    const manifest = (range: { offset: number; length: number }) => writeFile(join(directory, 'manifest.json'), JSON.stringify({ inputs: [
+      { path: 'field.head.dat', range: head }, { path: 'field.TS-time1.dat', range }, { path: 'another.json' }] }));
+    await manifest(grid);
+    const map = await loadNetcdfLonLatField(directory, kept()), reference = await loadNetcdfLonLatField(root, field());
+    for (let i = 0; i < 4; i++) for (let j = 0; j < 8; j++) assert.equal(map.sample(j * 45, -67.5 + i * 45), surface(1, i, j), `node ${i},${j}`);
+    assert.deepEqual(map.report, reference.report);
+    // The recipe's selection and the manifest's range must be the same bytes: another time lies elsewhere in the release.
+    await assert.rejects(loadNetcdfLonLatField(directory, kept({ select: { time: 0 } })),
+      new RegExp(`field\\.TS-time1\\.dat: the manifest declares 128 bytes from ${grid.offset}, and the header in field\\.head\\.dat puts the selected TS at 128 bytes from `, 'u'));
+    await assert.rejects(loadNetcdfLonLatField(directory, kept(), new Map([['field.head.dat', head]])), /the manifest declares no byte range/u);
+    await assert.rejects(loadNetcdfLonLatField(directory, kept(), new Map([['field.head.dat', { offset: 4, length: head.length }], ['field.TS-time1.dat', grid]])), /a range from offset 0/u);
+    await writeFile(join(directory, 'field.TS-time1.dat'), Buffer.alloc(grid.length - 4));
+    await assert.rejects(loadNetcdfLonLatField(directory, kept()), /field\.TS-time1\.dat has 124 bytes, and the selected TS has 128/u);
+    await assert.rejects(loadNetcdfLonLatField(directory, kept({ field: '../x.dat' })), /must be inside the source directory/u);
+  } finally { await file.close(); await rm(directory, { recursive: true }); }
+});
+
+test('a grid that ends on its first longitude again is read without the repeat', async () => {
+  // The LMD models' grid: -180 to 180 with both ends stored, here four steps of 90 degrees and three latitudes, north first.
+  const variable = (name: string, dimensions: string[], shape: number[], units: string): NetcdfVariable => ({ name, dimensions, shape, type: 'double', attributes: { units } });
+  const longitudes = [-180, -90, 0, 90, 180], latitudes = [90, 0, -90], value = (row: number, column: number) => 100 * row + (column % 4);
+  const source = (repeat: number) => ({
+    variables: new Map([['tsurf', variable('tsurf', ['Time', 'latitude', 'longitude'], [2, 3, 5], 'K')], ['longitude', variable('longitude', ['longitude'], [5], 'degrees_east')],
+      ['latitude', variable('latitude', ['latitude'], [3], 'degrees_north')]]),
+    values: async (name: string) => Float64Array.from(name === 'longitude' ? longitudes : latitudes),
+    slice: async (_name: string, start: number, count: number) => {
+      assert.deepEqual([start, count], [15, 15], 'only the grid at the second time is read');
+      return Float64Array.from({ length: 15 }, (_, index) => index === 4 ? repeat : value(Math.floor(index / 5), index % 5));
+    },
+  });
+  const recipe = { variable: 'tsurf', coordinates: { longitude: 'longitude', latitude: 'latitude' }, select: { Time: 1 }, sourceUnits: 'K', longitudeZeroAt: 0, coordinateToleranceDegrees: 0.005 };
+  const map = await decodeNetcdfLonLatField(source(0), recipe, 'lmd.nc');
+  assert.deepEqual([map.report.width, map.report.height, map.report.longitudeRange, map.report.latitudeRange], [4, 3, [-180, 90], [-90, 90]]);
+  assert.equal(map.sample(0, 0), 102);
+  assert.equal(map.sample(135, 90), 1.5, 'between the last kept longitude and the first, around the seam');
+  assert.equal(map.sample(180, -90), 200);
+  await assert.rejects(decodeNetcdfLonLatField(source(7), recipe, 'lmd.nc'), /lmd\.nc: tsurf ends on its first longitude again, and row 0 holds 0 there and 7 360 degrees on/u);
 });
 
 test('the scientific raster interpreter reads the format', async () => {

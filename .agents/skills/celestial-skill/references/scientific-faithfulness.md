@@ -99,6 +99,13 @@ measured map need not stay a neutral sphere.
 - Use the released numbers: the quantity, units, grid and time averaging the
   release states, with a legend in those units. A temperature map in false color
   is not what an eye would see.
+- A time mean is the one the release wrote. A file of instants gives one instant,
+  and the dataset says which. Pick the quantity that carries the pattern: under
+  ten bars of steam the surface temperature is uniform to a few kelvin, while the
+  outgoing radiation holds the day and night contrast.
+- Do not show a scenario that a measurement of the object contradicts, such as a
+  thick atmosphere on a planet whose measured dayside is as hot as bare rock.
+  Where a measurement leaves the scenario open, say what it found.
 - When several models of the same case are published, show one and name it, and
   state how far the others differ. Do not average models.
 - Draw only what is visible at the size the body is shown. A pattern that spans

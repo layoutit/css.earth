@@ -4,40 +4,53 @@
  * dataset, named as a model with its paper and the scenario it assumes. The body opens on it only where it had no map.
  *
  *   new-object --simulation entries.json      a list of { id, dataset, label, quantity, record, file, path, variable, coordinates,
- *                                             select, units, longitudeZeroAt, model, credit, url, scenario, detected, undetected?,
- *                                             others?, range? }
+ *                                             select, units, displayUnits?, longitudeZeroAt, model, credit, url, scenario, time,
+ *                                             detected, undetected?, observed?, others?, range? }
  *
  * The entry holds what only a person can settle by reading the paper: which file and variable, which time and level, where
  * the model put the star overhead, what the run assumes and whether that has been detected. The tool checks the rest against
  * the release and derives the words: the record's license, that it names this object and lists the file; the variable, its
  * units and its grid; the range drawn and the legend. Nothing is guessed, and whatever fails is refused with the object,
- * the file and the field. */
+ * the file and the field.
+ *
+ * A model writes files of gigabytes, and one map is a few kilobytes of one. The release is never fetched whole: two range
+ * requests bring its first bytes (the header and the coordinate variables) and the bytes of the selected grid, and the
+ * package keeps those two parts as exact bytes of the release, each declared with its range in the source manifest. */
 import { stat } from 'node:fs/promises';
 import { Readable } from 'node:stream';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
+import { NetcdfHeaderIncomplete, parseClassicNetcdfHeader, valueRange, type ByteRange, type NetcdfHeader } from '@cssearth/bake/objects/raster';
 import { containedPath, publishPinnedSourceStream } from '@cssearth/bake/objects/sources';
+import { assertRangeResponse, rangeRequestHeader } from '@cssearth/objects/node';
 import type { Archive } from '../archives.mts';
 import { bindInputs, json, openOnMap, type PackageFiles } from '../dataset.mts';
-import { MAX_RECORDS, ZENODO_RECORDS, namesObject, parseZenodoRecord, parseZenodoSearch, reuseLicense, speaksOfSimulation, zenodoQuery, type ReuseLicense } from '../../simulations/simulations.mts';
+import { MAX_RECORDS, ZENODO_RECORDS, namesObject, parseZenodoRecord, parseZenodoSearch, reuseLicense, sizeText, speaksOfSimulation, zenodoQuery, type ReuseLicense } from '../../simulations/simulations.mts';
 
 export interface SimulationEntry {
   /** Dataset id, and the dataset key of its reader text. */
   readonly dataset: string; readonly label: string;
   /** What the field is, as the legend titles it: "Surface temperature". */
   readonly quantity: string;
-  /** The release: its Zenodo DOI, the file of it that is read, and where that file lives inside the package's source directory. */
+  /** The release: its Zenodo DOI, the file of it that is read, and where that file would live inside the package's source
+   * directory. The two parts kept of it are named after that place (simulationPaths). */
   readonly record: string; readonly file: string; readonly path: string;
   /** What is read from the file: the variable, its coordinate variables, the index along every other dimension and its units. */
   readonly variable: string; readonly coordinates: { readonly longitude: string; readonly latitude: string };
   readonly select: Readonly<Record<string, number>>; readonly units: string;
+  /** The units as a reader sees them, when the file's own spelling is not it: "W/m²" for the file's "W m-2". */
+  readonly displayUnits?: string;
   /** The grid longitude, in degrees east, of the body's zero meridian: where the model put the star overhead on a synchronous planet. */
   readonly longitudeZeroAt: number;
   /** Who made it: the model's name ("ExoCAM"), the paper ("Wolf et al. (2022)") and its URL. */
   readonly model: string; readonly credit: string; readonly url: string;
   /** What the run assumes, as the rest of a sentence: "one bar of nitrogen with 400 ppm of carbon dioxide over a global ocean". */
   readonly scenario: string;
+  /** What the map is in time, as the rest of the sentence "The map is ...": "the mean state the release holds", "one instant, the run's last output". */
+  readonly time: string;
   /** Whether what the scenario assumes has been detected on the object, and when it has not, what nobody has detected ("an atmosphere"). */
   readonly detected: boolean; readonly undetected?: string;
+  /** What a measurement of the object says about the scenario, as a sentence that names its paper, with the paper's address. */
+  readonly observed?: { readonly text: string; readonly url: string };
   /** How far other published models of the same case differ, as a sentence, with the paper that says so. */
   readonly others?: { readonly text: string; readonly url: string };
   /** The legend's limits, when the paper's own color scale is used; the released range rounded outward otherwise. */
@@ -54,7 +67,7 @@ export function simulationEntry(value: unknown, label: string): SimulationEntry 
     if (!words) throw new TypeError(`${label}.${key} is empty.`);
     return words;
   };
-  const known = new Set(['id', 'dataset', 'label', 'quantity', 'record', 'file', 'path', 'variable', 'coordinates', 'select', 'units', 'longitudeZeroAt', 'model', 'credit', 'url', 'scenario', 'detected', 'undetected', 'others', 'range']);
+  const known = new Set(['id', 'dataset', 'label', 'quantity', 'record', 'file', 'path', 'variable', 'coordinates', 'select', 'units', 'displayUnits', 'longitudeZeroAt', 'model', 'credit', 'url', 'scenario', 'time', 'detected', 'undetected', 'observed', 'others', 'range']);
   const unknown = Object.keys(input).filter(key => !known.has(key));
   if (unknown.length) throw new TypeError(`${label}: unknown fields ${unknown.join(', ')}.`);
   const dataset = text('dataset'), record = text('record'), file = text('file'), path = text('path'), url = text('url');
@@ -65,25 +78,31 @@ export function simulationEntry(value: unknown, label: string): SimulationEntry 
   if (!/^https:\/\//u.test(url)) throw new TypeError(`${label}.url ${url}: the paper's https address.`);
   const coordinates = requireRecord(input.coordinates, `${label}.coordinates`), select = input.select === undefined ? {} : requireRecord(input.select, `${label}.select`);
   for (const [dimension, index] of Object.entries(select)) if (typeof index !== 'number' || !Number.isSafeInteger(index) || index < 0) throw new TypeError(`${label}.select.${dimension} must be a whole index counted from 0.`);
-  const scenario = text('scenario');
+  const variable = text('variable');
+  // The kept part is named after the variable and the selection, so both are plain names.
+  for (const [field, name] of [['variable', variable], ...Object.keys(select).map(dimension => ['select', dimension])] as const)
+    if (!/^[A-Za-z0-9_]+$/u.test(name)) throw new TypeError(`${label}.${field} ${name}: a NetCDF name of letters, digits and underscores.`);
+  const scenario = text('scenario'), time = text('time');
   if (/[.!?]$/u.test(scenario)) throw new TypeError(`${label}.scenario is the rest of the sentence "The run assumes ..."; leave out its final period.`);
+  if (/[.!?]$/u.test(time)) throw new TypeError(`${label}.time is the rest of the sentence "The map is ..."; leave out its final period.`);
   if (typeof input.detected !== 'boolean') throw new TypeError(`${label}.detected must say, true or false, whether what the scenario assumes has been detected on the object.`);
   if (input.detected !== (input.undetected === undefined)) throw new TypeError(input.detected ? `${label}.undetected: nothing is undetected when detected is true.` : `${label}.undetected must name what nobody has detected ("an atmosphere").`);
-  const others = input.others === undefined ? undefined : (() => {
-    const record = requireRecord(input.others, `${label}.others`), sentence = requireString(record.text, `${label}.others.text`).trim(), source = requireString(record.url, `${label}.others.url`);
-    if (!/[.]$/u.test(sentence)) throw new TypeError(`${label}.others.text is a whole sentence, ending in a period.`);
-    if (!/^https:\/\//u.test(source)) throw new TypeError(`${label}.others.url ${source}: the https address of the paper that compares the models.`);
+  const cited = (key: 'others' | 'observed', paper: string) => input[key] === undefined ? undefined : (() => {
+    const record = requireRecord(input[key], `${label}.${key}`), sentence = requireString(record.text, `${label}.${key}.text`).trim(), source = requireString(record.url, `${label}.${key}.url`);
+    if (!/[.]$/u.test(sentence)) throw new TypeError(`${label}.${key}.text is a whole sentence, ending in a period.`);
+    if (!/^https:\/\//u.test(source)) throw new TypeError(`${label}.${key}.url ${source}: the https address of the paper that ${paper}.`);
     return { text: sentence, url: source };
   })();
+  const others = cited('others', 'compares the models'), observed = cited('observed', 'reports the measurement');
   const range = input.range === undefined ? undefined : (() => {
     const limits = requireArray(input.range, `${label}.range`).map((limit, index) => requireFiniteNumber(limit, `${label}.range[${index}]`));
     if (limits.length !== 2 || !(limits[0]! < limits[1]!)) throw new TypeError(`${label}.range is [minimum, maximum], the first below the second.`);
     return [limits[0]!, limits[1]!] as const;
   })();
-  return { dataset, label: text('label'), quantity: text('quantity'), record, file, path, variable: text('variable'),
+  return { dataset, label: text('label'), quantity: text('quantity'), record, file, path, variable,
     coordinates: { longitude: requireString(coordinates.longitude, `${label}.coordinates.longitude`), latitude: requireString(coordinates.latitude, `${label}.coordinates.latitude`) },
-    select: select as Record<string, number>, units: text('units'), longitudeZeroAt: requireFiniteNumber(input.longitudeZeroAt, `${label}.longitudeZeroAt`), model: text('model'), credit: text('credit'), url, scenario,
-    detected: input.detected, ...(input.undetected === undefined ? {} : { undetected: text('undetected') }), ...(others ? { others } : {}), ...(range ? { range } : {}) };
+    select: select as Record<string, number>, units: text('units'), ...(input.displayUnits === undefined ? {} : { displayUnits: text('displayUnits') }), longitudeZeroAt: requireFiniteNumber(input.longitudeZeroAt, `${label}.longitudeZeroAt`), model: text('model'), credit: text('credit'), url, scenario, time,
+    detected: input.detected, ...(input.undetected === undefined ? {} : { undetected: text('undetected') }), ...(observed ? { observed } : {}), ...(others ? { others } : {}), ...(range ? { range } : {}) };
 }
 
 /** `--simulation entries.json`: the entries for bodies already in the tree, by body id. */
@@ -110,22 +129,83 @@ export async function simulationRelease(archive: Archive, id: string, names: rea
   return { doi: entry.record, recordUrl: record.url, title: record.title, license, fileUrl: file.url, bytes: file.bytes };
 }
 
-/** The released file in the package's source directory. One already there at the size Zenodo lists is kept; otherwise it is
- * streamed from the record and held to that size, so a file of gigabytes is never held in memory. */
-export async function restoreSimulationFile(sourceRoot: string, id: string, entry: SimulationEntry, release: SimulationRelease, fetcher: typeof fetch = fetch): Promise<'present' | 'downloaded'> {
-  const path = containedPath(sourceRoot, entry.path);
-  const size = await stat(path).then(info => info.size, (error: NodeJS.ErrnoException) => { if (error.code === 'ENOENT') return undefined; throw error; });
-  if (size === release.bytes) return 'present';
-  if (size !== undefined) throw new Error(`${id}, dataset ${entry.dataset}: ${path} has ${size} bytes and Zenodo lists ${release.bytes} for ${entry.file}; remove it to download the release again.`);
-  const response = await fetcher(release.fileUrl, { redirect: 'follow', headers: { 'user-agent': 'cssEarth-telescope/1.0 (https://css.earth)' } });
-  if (!response.ok || !response.body) throw new Error(`${id}, dataset ${entry.dataset}: Zenodo returned HTTP ${response.status} for ${release.fileUrl}.`);
-  await publishPinnedSourceStream({ sourceRoot, entry: { path: entry.path, origin: release.fileUrl }, stream: Readable.fromWeb(response.body as never), declaredBytes: release.bytes });
-  return 'downloaded';
+/** Where the two kept parts of the release live, beside where the entry puts the file: its first bytes, and the selected grid
+ * named after the variable and the selection. */
+export function simulationPaths(entry: SimulationEntry): { readonly head: string; readonly field: string } {
+  const stem = entry.path.replace(/\.nc$/u, '');
+  return { head: `${stem}.head.dat`, field: `${stem}.${entry.variable}${Object.entries(entry.select).map(([dimension, index]) => `-${dimension}${index}`).join('')}.dat` };
 }
 
-/** What the field reader is asked for: the entry's statements about the file, and the tolerance WASP-103 b's table uses. */
+export interface SimulationRanges { readonly head: ByteRange; readonly field: ByteRange }
+/** The most kept of a release's first bytes: a history file's header names hundreds of variables, and its coordinates follow. */
+const HEAD_LIMIT = 8 * 1024 * 1024;
+
+/** The two byte ranges of the release an entry is drawn from, by the release's own header: from its first byte to the end of
+ * the later coordinate variable, and the selected grid. Refused: coordinates stored in records, and a variable whose
+ * longitude and latitude are not its last two dimensions, since its grid is then not one run of bytes. */
+export function simulationRanges(header: NetcdfHeader, entry: SimulationEntry, where: string): SimulationRanges {
+  const variable = header.variables.get(entry.variable);
+  if (!variable) throw new TypeError(`${where} has no variable ${entry.variable} (field variable); it has ${[...header.variables.keys()].slice(0, 12).join(', ')}${header.variables.size > 12 ? ` and ${header.variables.size - 12} more` : ''}.`);
+  const coordinate = (role: 'longitude' | 'latitude') => {
+    const name = entry.coordinates[role], found = header.variables.get(name);
+    if (!found || found.dimensions.length !== 1) throw new TypeError(`${where} has no one-dimensional ${role} variable ${name} (field coordinates.${role}).`);
+    if (header.layout.get(name)!.record) throw new TypeError(`${where}: the ${role} variable ${name} is stored in records, not among the file's first bytes (field coordinates.${role}).`);
+    const range = valueRange(header, name, 0, found.shape[0]!, where);
+    return { dimension: found.dimensions[0]!, end: range.offset + range.length };
+  };
+  const longitude = coordinate('longitude'), latitude = coordinate('latitude'), last = variable.dimensions.length - 1;
+  const places = [variable.dimensions.indexOf(longitude.dimension), variable.dimensions.indexOf(latitude.dimension)];
+  if (last < 1 || Math.min(...places) !== last - 1 || Math.max(...places) !== last)
+    throw new TypeError(`${where}: ${entry.variable} varies along ${variable.dimensions.join(', ')}; its grid is kept as one run of bytes, which needs its longitude and latitude last (field variable).`);
+  const grid = variable.shape[last - 1]! * variable.shape[last]!;
+  const start = variable.dimensions.slice(0, last - 1).reduce((sum, dimension, place) => {
+    const index = entry.select[dimension], length = variable.shape[place]!;
+    if (index === undefined) throw new TypeError(`${where}: select gives no index along ${dimension}; ${entry.variable} varies along ${variable.dimensions.join(', ')} (field select).`);
+    if (index >= length) throw new RangeError(`${where}: select.${dimension} is ${index}; ${dimension} has ${length} entries, counted from 0 (field select).`);
+    return sum * length + index;
+  }, 0) * grid;
+  const head = { offset: 0, length: Math.max(longitude.end, latitude.end) };
+  if (head.length > HEAD_LIMIT) throw new RangeError(`${where}: its header and coordinates take ${head.length} bytes, more than the ${HEAD_LIMIT} kept (field file).`);
+  return { head, field: valueRange(header, entry.variable, start, grid, where) };
+}
+
+/** The two kept parts in the package's source directory, each brought by one range request and held to its length. The
+ * header is asked for first, in growing pieces until it parses, since it says where the parts lie. A part already there at
+ * its length is not asked for again. Returns the ranges and the bytes fetched for the parts. */
+export async function restoreSimulationField(sourceRoot: string, id: string, entry: SimulationEntry, release: SimulationRelease, fetcher: typeof fetch = fetch): Promise<SimulationRanges & { readonly fetched: number }> {
+  const where = `${id}, dataset ${entry.dataset}: ${entry.file}`;
+  const ranged = async (range: ByteRange) => {
+    const response = await fetcher(release.fileUrl, { redirect: 'follow', headers: { 'user-agent': 'cssEarth-telescope/1.0 (https://css.earth)', range: rangeRequestHeader(range) } });
+    if (!response.ok || !response.body) throw new Error(`${where}: Zenodo returned HTTP ${response.status} for bytes ${range.offset} to ${range.offset + range.length - 1} of ${release.fileUrl}.`);
+    assertRangeResponse(response, range, release.fileUrl);
+    return response;
+  };
+  let header: NetcdfHeader | undefined;
+  for (let length = Math.min(release.bytes, 1 << 18); header === undefined; length = Math.min(release.bytes, length * 4)) {
+    try { header = parseClassicNetcdfHeader(Buffer.from(await (await ranged({ offset: 0, length })).arrayBuffer()), where); }
+    catch (error) {
+      if (!(error instanceof NetcdfHeaderIncomplete)) throw error;
+      if (length === release.bytes || length >= HEAD_LIMIT) throw new TypeError(`${where}: its NetCDF header does not end within its first ${length} bytes (field file).`);
+    }
+  }
+  const ranges = simulationRanges(header, entry, where), paths = simulationPaths(entry);
+  let fetched = 0;
+  for (const [path, range] of [[paths.head, ranges.head], [paths.field, ranges.field]] as const) {
+    const target = containedPath(sourceRoot, path);
+    const size = await stat(target).then(info => info.size, (error: NodeJS.ErrnoException) => { if (error.code === 'ENOENT') return undefined; throw error; });
+    if (size === range.length) continue;
+    if (size !== undefined) throw new Error(`${where}: ${target} has ${size} bytes and the release puts ${range.length} there; remove it to fetch the range again.`);
+    const response = await ranged(range);
+    await publishPinnedSourceStream({ sourceRoot, entry: { path, origin: release.fileUrl, range }, stream: Readable.fromWeb(response.body as never), declaredBytes: range.length });
+    fetched += range.length;
+  }
+  return { ...ranges, fetched };
+}
+
+/** What the field reader is asked for: the entry's statements about the file, its two kept parts, and the tolerance WASP-103 b's table uses. */
 export function simulationRecipe(entry: SimulationEntry) {
-  return { format: 'netcdf-lonlat-field', path: entry.path, variable: entry.variable, coordinates: entry.coordinates, select: entry.select,
+  const paths = simulationPaths(entry);
+  return { format: 'netcdf-lonlat-field', path: paths.head, field: paths.field, variable: entry.variable, coordinates: entry.coordinates, select: entry.select,
     sourceUnits: entry.units, longitudeZeroAt: entry.longitudeZeroAt, coordinateToleranceDegrees: 0.005 };
 }
 
@@ -140,10 +220,11 @@ export interface FieldReport { readonly minimum: number; readonly maximum: numbe
 
 /** Add the dataset to the package in `files`. It becomes the default where the default was one color or the neutral shape; a
  * default that is a measured map stays. Returns the range drawn and whether the default changed. */
-export function installSimulationDataset(files: PackageFiles, id: string, name: string, entry: SimulationEntry, release: SimulationRelease, field: FieldReport) {
+export function installSimulationDataset(files: PackageFiles, id: string, name: string, entry: SimulationEntry, release: SimulationRelease, field: FieldReport, ranges: SimulationRanges) {
   const o = `src/objects/${id}`, s = `${o}/source`, read = (path: string) => requireRecord(JSON.parse(String(files.get(path))), path);
   const others = (list: unknown, where: string, key: string, value: string) => requireArray(list, where).filter(item => requireRecord(item, where)[key] !== value);
   const [minimum, maximum] = entry.range ?? roundedRange(field.minimum, field.maximum), number = (value: number) => String(Number(value.toPrecision(12)));
+  const units = entry.displayUnits ?? entry.units, paths = simulationPaths(entry);
   if (field.minimum < minimum || field.maximum > maximum)
     throw new RangeError(`${id}, dataset ${entry.dataset}: ${entry.variable} in ${entry.file} runs from ${field.minimum} to ${field.maximum} ${entry.units}, outside the range ${minimum} to ${maximum} the entry gives (field range).`);
   const labels = [minimum, (minimum + maximum) / 2, maximum].map(number);
@@ -154,10 +235,10 @@ export function installSimulationDataset(files: PackageFiles, id: string, name: 
 
   const raster = read(`${s}/preparation/raster.json`), lit = raster.emission === undefined;
   const science = { kind: 'terrestrial-scientific', id: entry.dataset, label: entry.label, ...simulationRecipe(entry), consumer, sampling: 'bilinear', displaySampling: 'nearest',
-    outputLongitudeOrigin: 0, units: entry.units, minimum, maximum, colors: INFERNO, labels,
+    outputLongitudeOrigin: 0, units, minimum, maximum, colors: INFERNO, labels,
     description: `Simulated ${quantity} from the ${entry.model} model, a published simulation and not a measurement.${caps}${gaps}`, title: `${entry.label} · ${entry.model} simulation`, sourceUrl: entry.url };
   raster.surfaces = [...others(raster.surfaces, `${id} raster surfaces`, 'id', entry.dataset),
-    { id: entry.dataset, output: `${id}-surface-{id}{suffix}.webp`, thumbnail: `${id}-dataset-{id}.webp`, source: entry.path, falseColor: true, science }];
+    { id: entry.dataset, output: `${id}-surface-{id}{suffix}.webp`, thumbnail: `${id}-dataset-{id}.webp`, source: paths.head, falseColor: true, science }];
   files.set(`${s}/preparation/raster.json`, json(raster));
   const descriptor = read(`${o}/object.json`), recipe = requireRecord(requireRecord(descriptor.properties, `${id} properties`).recipe, `${id} recipe`);
   const surface = requireRecord(requireArray(recipe.surfaces, `${id} recipe surfaces`)[0], `${id} recipe surface`);
@@ -168,8 +249,8 @@ export function installSimulationDataset(files: PackageFiles, id: string, name: 
   const control = { id: entry.dataset, label: entry.label, qualification: `Simulation · ${entry.model} · ${entry.credit} · False color`,
     thumbnail: `${id}-dataset-${entry.dataset}.webp`, surface: `${id}-surface-${entry.dataset}@2x.webp`, poles: `${id}-poles-${entry.dataset}@2x.webp`,
     source: { id: input, path: '../manifest.json', url: entry.url }, falseColor: true, ...(short || field.missing ? { noData: true } : {}),
-    legend: { kind: 'scale', title: entry.quantity, labels, recipe: { palette, labels }, meta: entry.units, sourceUrl: entry.url },
-    notes: `${entry.quantity} of ${name} in the ${entry.model} simulation of ${entry.credit}: a model, not a measurement. The run assumes ${entry.scenario}.${entry.detected ? '' : ` Nobody has detected ${entry.undetected} on ${name}.`}${entry.others ? ` ${entry.others.text}` : ''}${caps}${gaps} The false color runs from ${minimum.toLocaleString('en-US')} to ${maximum.toLocaleString('en-US')} ${entry.units}; it is not what an eye would see.${lit ? " With shadows on, the star's light darkens the night half." : ''}` };
+    legend: { kind: 'scale', title: entry.quantity, labels, recipe: { palette, labels }, meta: units, sourceUrl: entry.url },
+    notes: `${entry.quantity} of ${name} in the ${entry.model} simulation of ${entry.credit}: a model, not a measurement. The run assumes ${entry.scenario}. The map is ${entry.time}.${entry.detected ? '' : ` Nobody has detected ${entry.undetected} on ${name}.`}${entry.observed ? ` ${entry.observed.text}` : ''}${entry.others ? ` ${entry.others.text}` : ''}${caps}${gaps} The false color runs from ${minimum.toLocaleString('en-US')} to ${maximum.toLocaleString('en-US')} ${units}; it is not what an eye would see.${lit ? " With shadows on, the star's light darkens the night half." : ''}` };
   const shown = requireRecord(content.datasets, `${id} content datasets`);
   shown.controls = [...others(shown.controls, `${id} dataset controls`, 'id', entry.dataset), control];
   files.set(`${s}/content/object.json`, json(content));
@@ -178,14 +259,20 @@ export function installSimulationDataset(files: PackageFiles, id: string, name: 
     summary: `${entry.quantity} in a published model, in false color. It shows one scenario, not a measurement.${short ? ' Gray caps lack released samples.' : ''}` } };
   files.set(`${o}/text.json`, json(text));
 
-  const manifest = read(`${s}/manifest.json`);
-  manifest.inputs = [...others(manifest.inputs, `${id} manifest inputs`, 'id', input), { id: input, path: entry.path, origin: release.fileUrl,
-    productId: entry.file, version: release.doi, title: `${entry.quantity} (${entry.variable}) of ${name} in the ${entry.model} simulation: ${release.title}`, sourceUrl: release.recordUrl,
-    credit: `${entry.credit}; ${entry.model} simulation`, displayCredit: `${entry.credit} · ${entry.model}`, license: release.license.name, licenseEvidence: [release.recordUrl, release.license.url],
-    acquisition: `Download ${entry.file} unchanged from Zenodo record ${release.doi}; a model output, not an observation.`, redistribution: `${release.license.name} with attribution.`, consumers: [consumer] }];
+  // The two kept parts are exact bytes of the release, each one declared with its range and restored by one range request.
+  const manifest = read(`${s}/manifest.json`), selection = Object.entries(entry.select).map(([dimension, index]) => ` at ${dimension} index ${index}`).join(''), grid = `${input}-grid`;
+  const shared = { origin: release.fileUrl, productId: entry.file, version: release.doi, sourceUrl: release.recordUrl, credit: `${entry.credit}; ${entry.model} simulation`, displayCredit: `${entry.credit} · ${entry.model}`,
+    license: release.license.name, licenseEvidence: [release.recordUrl, release.license.url] };
+  const kept = { redistribution: `Exact bytes of the release; ${release.license.name} with attribution.`, consumers: [consumer] };
+  manifest.inputs = [...requireArray(manifest.inputs, `${id} manifest inputs`).filter(item => ![input, grid].includes(String(requireRecord(item, `${id} manifest input`).id))),
+    { id: input, path: paths.field, range: ranges.field, ...shared, title: `${entry.quantity} (${entry.variable}) of ${name} in the ${entry.model} simulation: ${release.title}`,
+      acquisition: `One range request to Zenodo record ${release.doi}: the bytes of ${entry.variable}${selection} in ${entry.file}, where the file's header puts them. The ${sizeText(release.bytes)} file is never fetched whole. A model output, not an observation.`, ...kept },
+    { id: grid, path: paths.head, range: ranges.head, ...shared, title: `Header and coordinate variables of ${entry.file}, the ${entry.model} simulation of ${name}`,
+      acquisition: `One range request to Zenodo record ${release.doi}: the first ${ranges.head.length.toLocaleString('en-US')} bytes of ${entry.file}, its header and its coordinate variables.`, ...kept }];
   files.set(`${s}/manifest.json`, json(manifest));
   const plan = read(`${s}/preparation/acquisition.json`);
-  plan.operations = [...others(plan.operations, `${id} acquisition operations`, 'path', entry.path), { kind: 'download', groups: ['restore', 'refresh'], path: entry.path, url: release.fileUrl }];
+  plan.operations = [...requireArray(plan.operations, `${id} acquisition operations`).filter(item => ![paths.field, paths.head].includes(String(requireRecord(item, `${id} acquisition operation`).path))),
+    ...[paths.field, paths.head].map(target => ({ kind: 'download', groups: ['restore', 'refresh'], path: target, url: release.fileUrl }))];
   files.set(`${s}/preparation/acquisition.json`, json(plan));
   bindInputs(files, id);
   // A body opens on the best dataset it has: the simulation takes the default from one color or the neutral shape, never from

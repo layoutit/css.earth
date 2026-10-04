@@ -55,7 +55,8 @@ It ranks open access first, tries one plain GET per open copy, marks browser cha
 HTML figure captions and table titles about maps or observation lists. Nothing is saved without --out.
 Simulations lists the Zenodo dataset records that name the target and speak of a simulation or a model, each with its
 license, size and files. It downloads nothing. A listed record is a lead: new-object --simulation adds one as a dataset from
-an entry written after reading its paper (packages/telescope-cli/src/new-object/simulation/simulation-dataset.mts).
+an entry written after reading its paper (packages/telescope-cli/src/new-object/simulation/simulation-dataset.mts), fetching
+by byte range only the header and the one grid it draws.
 ASCL searches its live software catalog by title or matches the exact software names in a verified
 product receipt. It reports citable code entries and preferred citations when provided by ASCL.
 Only the receipt establishes what this run recorded as used; an ASCL match is a citation lead, not
