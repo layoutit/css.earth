@@ -53,7 +53,7 @@ packages/renderer/
 │   ├── solar-system/   heliocentric geometry, orbits, and Sun direction computation (prepared formats: `@cssearth/objects`)
 │   ├── sky/, stars/, volume/, shell/, image-layers/, labels/
 │   └── styles/         runtime stylesheets
-├── test/node/          Node suites and fixtures
+├── src/node/           Node suites and fixtures
 ├── tsup.config.ts      built entries
 ├── AGENTS.md           package rules
 └── CLAUDE.md           symlink to AGENTS.md

@@ -182,3 +182,32 @@ setTimeout(() => { throw new Error('late failure'); }, 10);
     assert.match(error?.message ?? '', /answered, then exited with 1/u);
   } finally { await fixture.cleanup(); }
 });
+
+for (const signal of ['SIGTERM', 'SIGKILL'] as const) {
+  test(`${signal} on the telescope cleans up detached prepareObjects step groups`, { timeout: 20_000 }, async () => {
+    const fixture = await workspace(`import { answerParent } from '@cssearth/core/node';
+import { prepareObjects } from '@cssearth/bake/prepare-object';
+await answerParent(async () => ({ text: '', code: await prepareObjects(['fixture'], { root: process.argv[2], from: 'builds', to: 'builds', progress: () => {} }) ? 0 : 1 }));
+`);
+    const root = resolve(fixture.directory, 'checkout'), script = resolve(root, 'packages/bake/cli/check-stale-builds.mts');
+    await mkdir(resolve(root, 'src/objects/fixture'), { recursive: true });
+    await writeFile(resolve(root, 'src/objects/fixture/object.json'), '{}');
+    await mkdir(resolve(root, 'packages/bake/cli'), { recursive: true });
+    await writeFile(script, `import { spawn } from 'node:child_process'; import { writeFileSync } from 'node:fs';
+writeFileSync('command.pid', String(process.pid));
+spawn(process.execPath, ['-e', 'require("node:fs").writeFileSync("child.pid", String(process.pid)); setInterval(() => {}, 1000);'], { stdio: 'ignore' });
+setInterval(() => {}, 1000);`);
+    let command = 0, child = 0;
+    const dispatcher = spawn(process.execPath, [resolve(fixture.directory, 'dispatch.mts'), root], { cwd: ROOT, stdio: 'ignore' });
+    const closed = new Promise(accept => dispatcher.once('close', accept));
+    try {
+      command = await readPid(resolve(root, 'command.pid')); child = await readPid(resolve(root, 'child.pid'));
+      dispatcher.kill(signal); await closed;
+      assert.deepEqual([await gone(command), await gone(child)], [true, true], 'both detached descendants stopped');
+    } finally {
+      dispatcher.kill('SIGKILL');
+      for (const pid of [command, child]) if (pid && alive(pid)) process.kill(pid, 'SIGKILL');
+      await fixture.cleanup();
+    }
+  });
+}

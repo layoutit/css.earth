@@ -39,6 +39,11 @@
     "./node/source-test": {
       "types": "./dist/node/source-test.d.ts",
       "import": "./dist/node/source-test.js"
+    },
+    "./archived-camera": {
+      "types": "./dist/archived-camera.d.ts",
+      "import": "./dist/archived-camera.js",
+      "require": "./dist/archived-camera.cjs"
     }
   },
   "scripts": {
@@ -50,7 +55,7 @@
   },
   "devDependencies": {
     "tsup": "^8.0.1",
-    "typescript": "^5.3.3",
+    "typescript": "5.9.3",
     "@types/node": "^26.4.0"
   }
 }

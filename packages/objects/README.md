@@ -58,7 +58,7 @@ packages/objects/
 │   ├── provenance/ Provenance, exploration and source-usage records (`@cssearth/objects/provenance`)
 │   └── node/      Source manifests, the prepared registry read and the runtime asset closure (`@cssearth/objects/node`, Node only)
 │       ├── contract/ Object test helpers (`@cssearth/objects/node/contract`, Node only)
-│       └── source-test.ts Restored source test helper (`@cssearth/objects/node/source-test`, Node only)
+│       └── source-test.ts Compatibility facade for contract/source-test.ts (`@cssearth/objects/node/source-test`, Node only)
 ├── AGENTS.md      Package boundaries
 └── CLAUDE.md      Symlink to AGENTS.md
 ```
@@ -232,3 +232,5 @@ The site build reader rule follows lexical JSON.parse aliases, destructuring and
 and literal template substitutions. It does not resolve arbitrary filename computation,
 cross-module file transports, dynamic JSON method keys or reassigned parser aliases;
 those reads require manual review. This is a bounded static check, not complete data-flow proof.
+
+`@cssearth/objects/archived-camera` provides the archived camera schema, parsers and camera types without importing the full objects entry. Browser-safe codec sources type-check with ES libraries and Node's host-compatible encoding globals; the main entry imports no Node runtime modules.

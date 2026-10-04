@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 /** HD 189733 system navigation markers, rendered from each body's own data with the WASP-43 system's renderers:
  *
  * - HD 189733 A: the color of its Gaia XP spectrum, dimmed toward the limb by the law fitted to TESS transits of HD 189733b.
@@ -13,7 +14,7 @@ import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { MARKER_PATH, planetMarker, starMarker } from '../../src/source-authoring/context-markers.mts';
 
-const objects = resolve(import.meta.dirname, '../../../../src/objects');
+const objects = resolve(checkoutProjectRoot(import.meta.url), 'src/objects');
 
 export async function authorHd189733Markers({ check = false } = {}) {
   const outputs: [string, Buffer][] = [

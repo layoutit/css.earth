@@ -1,3 +1,4 @@
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 import {requireRecord,hasErrorCode,shape,text,number,array,optional} from '@cssearth/core';
 const parseSourceRef=shape({id:text,path:text});
 const parseDescriptor=shape({id:text,properties:shape({recipe:shape({sources:array(parseSourceRef)})})});
@@ -51,7 +52,7 @@ export async function prepareFactsheet(objectDirectory:string, { check = false }
 }
 
 /** Re-publish the facts of the named registered objects of the checkout at `root`, or of every one when `ids` is empty. */
-export async function prepareFactsheets({ ids = [] as readonly string[], check = false, root = process.cwd() } = {}) {
+export async function prepareFactsheets({ ids = [] as readonly string[], check = false, root = checkoutProjectRoot(import.meta.url) } = {}) {
   const SCENE_OBJECTS = readPreparedObjects(root).sceneObjects;
   assert.ok(ids.every(id => SCENE_OBJECTS.some(object => object.id === id)), 'Unregistered factsheet target');
   // Each body reads and writes only its own package, so 16 are prepared at once; results stay in registry order.

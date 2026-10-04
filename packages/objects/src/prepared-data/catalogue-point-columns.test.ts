@@ -1,7 +1,7 @@
 import { readFileSync } from 'node:fs';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { catalogueCells, cataloguePointSpread, catalogueBankColumns, decodeCatalogueBankBinary, decodePreparedBank, encodeCatalogueBankBinary, parseCataloguePoints } from '@cssearth/objects';
+import { catalogueCells, cataloguePointSpread, catalogueBankColumns, decodeCatalogueBankBinary, decodePreparedBank, encodeCatalogueBankBinary, readCataloguePointBank } from '@cssearth/objects';
 import { unpackPreparedBinary } from '@cssearth/objects/node';
 import { cataloguePointColumnBuffers, cataloguePointColumns, readCataloguePointColumns } from './catalogue-point-columns.js';
 
@@ -16,7 +16,7 @@ const bank = { schema: 'cssearth-catalogue-points@1', id: 'test-dots', frame,
 const file = () => { const { bytes } = encodeCatalogueBankBinary(bank, 'test.bin'); return decodePreparedBank(bytes.buffer.slice(bytes.byteOffset, bytes.byteOffset + bytes.byteLength) as ArrayBuffer, 'test.bin'); };
 
 test('a bank read as columns is the bank its JSON form parses to: every place, style and cell, with no object for a point', () => {
-  const columns = readCataloguePointColumns(file(), 'test.bin'), parsed = parseCataloguePoints(bank);
+  const columns = readCataloguePointColumns(file(), 'test.bin'), parsed = readCataloguePointBank(bank);
   assert.equal(columns.count, parsed.points.length);
   assert.deepEqual([...columns.positions], parsed.points.flatMap(point => [...point.positionUnits]));
   assert.deepEqual(parsed.points.map((_, index) => columns.styles[columns.styleOf![index]!]), parsed.points.map(({ colorCss, radiusPx }) => ({ colorCss, radiusPx })));
@@ -51,7 +51,7 @@ test('a published bank reads as columns to what its JSON form parses to', t => {
   let bytes: Buffer;
   try { bytes = readFileSync(path); } catch { t.skip('src/objects/nearby-universe-galaxies/prepared/dots.bin is not restored here'); return; }
   const columns = readCataloguePointColumns(decodePreparedBank(unpackPreparedBinary(bytes, path.pathname), path.pathname), path.pathname);
-  const parsed = parseCataloguePoints(decodeCatalogueBankBinary(unpackPreparedBinary(bytes, path.pathname), path.pathname));
+  const parsed = readCataloguePointBank(decodeCatalogueBankBinary(unpackPreparedBinary(bytes, path.pathname), path.pathname));
   assert.ok(columns.count > 30_000);
   assert.equal(columns.count, parsed.points.length);
   for (let index = 0; index < columns.count; index++) {

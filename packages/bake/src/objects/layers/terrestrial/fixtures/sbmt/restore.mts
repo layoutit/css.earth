@@ -1,3 +1,5 @@
+import { setupBakeOracleInputs } from '../../../../cameras/oracle-inputs.mts';
+await setupBakeOracleInputs();
 /** Restore only the oracle's selected body inputs through existing acquisition
  * plans. Never acquire a whole body's maps or overwrite changed source bytes. */
 import { readFile } from 'node:fs/promises';

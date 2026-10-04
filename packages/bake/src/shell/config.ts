@@ -1,3 +1,5 @@
+import { requireFiniteTriple as triple } from '@cssearth/core';
+import { requireNonemptyString as text } from '@cssearth/core';
 /** Data-only deformation and material recipe for a prepared transparent surface. */
 import { parseDensityVolumeFrame, type DensityVolumeFrame, type Vector3 } from '@cssearth/objects';
 import { requireFiniteNumber as finite, requireRecord as record } from '@cssearth/core';
@@ -72,13 +74,4 @@ function pinnedSource(p: Record<string, unknown>): { path: string } {
     throw new TypeError('Source must be relative.');
   }
   return { path };
-}
-
-function text(value: unknown, at: string): string {
-  if (typeof value !== 'string' || !value) throw new TypeError(`${at} must be a string.`);
-  return value;
-}
-function triple(value: unknown, at: string): [number, number, number] {
-  if (!Array.isArray(value) || value.length !== 3) throw new TypeError(`${at} must contain three numbers.`);
-  return [finite(value[0], at), finite(value[1], at), finite(value[2], at)];
 }

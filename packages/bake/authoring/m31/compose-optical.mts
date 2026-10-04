@@ -1,3 +1,4 @@
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 // Entry script: node packages/bake/authoring/m31/compose-optical.mts
 /**
  * M31's optical image-layer input: the Local Group Galaxies Survey panorama (NOIRLab noao-m31lgs_ubvIha, ~1" seeing) wherever
@@ -13,7 +14,7 @@ import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { parseImageLayerRecipe, imageLayerView } from '@cssearth/bake/image-layers';
 
-const sourceDirectory = resolve(import.meta.dirname, '../../../../src/objects/m31-layers/source');
+const sourceDirectory = resolve(checkoutProjectRoot(import.meta.url), 'src/objects/m31-layers/source');
 const recipe = JSON.parse(await readFile(resolve(sourceDirectory, 'recipe.json'), 'utf8'));
 const composition = recipe.composition as {
   frame: { centerRaDeg: number; centerDecDeg: number; fieldOfViewDeg: [number, number]; northClockwiseDeg: number; arcsecPerPixel: number };

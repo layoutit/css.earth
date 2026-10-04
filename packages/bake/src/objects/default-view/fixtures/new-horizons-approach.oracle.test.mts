@@ -1,7 +1,9 @@
+import { setupBakeOracleInputs } from '../../cameras/oracle-inputs.mts';
+await setupBakeOracleInputs();
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { sourceLoad, sourceTest } from '@cssearth/objects/node/source-test';
+import { sourceLoad, sourceTest, sourceValues } from '@cssearth/objects/node/source-test';
 import { assertPinnedInputs, ORACLE_ROOT, readOracleFixture } from '@cssearth/core/oracle';
 import { requireArray, requireFiniteNumber, requireRecord } from '@cssearth/core';
 import { parseApproachRecipe, spacecraftApproach } from '@cssearth/spice';
@@ -24,8 +26,8 @@ const loaded = await sourceLoad(async () => {
 const test = sourceTest(null, loaded);
 
 test('the approach direction and closest approach match SpiceyPy for Pluto and Charon', () => {
-  for (const [body, result] of loaded.values.results) {
-    const expected = requireRecord(loaded.values.fixture.cases[body], body);
+  for (const [body, result] of sourceValues(loaded).results) {
+    const expected = requireRecord(sourceValues(loaded).fixture.cases[body], body);
     const direction = requireArray(expected.direction).map(value => requireFiniteNumber(value));
     assert.ok(Math.abs(result.closestApproachEt - requireFiniteNumber(expected.closestApproachEt)) < 0.01, `${body} closest approach`);
     assert.ok(Math.abs(result.rangeKm - requireFiniteNumber(expected.rangeKm)) < 1e-3, `${body} range`);

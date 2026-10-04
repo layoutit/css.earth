@@ -29,4 +29,3 @@ export const cameraFrameFields = {id:text,path:text,labelPath:optional(text),enc
   reconstruction:optional(shape({startTime:text,filter:text,visibilitiesPath:text}))};
 export const parseCameraFrame = shape(cameraFrameFields);
 export const parseCameraShape = shape({format:text,path:text,grid:requireRecord});
-

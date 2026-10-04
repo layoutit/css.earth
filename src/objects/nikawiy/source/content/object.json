@@ -41,7 +41,7 @@
       {
         "id": "color",
         "label": "Color",
-        "qualification": "Color from Gaia's spectrum of the star. The disc itself is unresolved.",
+        "qualification": "Color from Gaia's spectrum of the star. The disc itself is unresolved; darkening toward the edge from a model atmosphere.",
         "thumbnail": "nikawiy-dataset-color.webp",
         "surface": "nikawiy-surface-color@2x.webp",
         "poles": "nikawiy-poles-color@2x.webp",
@@ -51,7 +51,7 @@
           "url": "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=1392396172224832896&FORMAT=csv&DATA_STRUCTURE=RAW&RELEASE=Gaia+DR3"
         },
         "falseColor": false,
-        "notes": "The color of the star's Gaia DR3 BP/RP spectrum. No limb darkening is drawn: no mass is measured and no spectroscopic surface gravity is published with this radius: McDonald, Zijlstra & Watson (2017), MNRAS 471, 770 assume the gravity of their fit (table column 15). The spin axis's direction on the sky is a display convention."
+        "notes": "The color of the star's Gaia DR3 BP/RP spectrum. The spin axis's direction on the sky is a display convention. The darkening toward the edge is the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 4,861 K and log g 3.38 (u1 0.680, u2 0.106): a model, because no fit of this star's limb is used."
       }
     ]
   },

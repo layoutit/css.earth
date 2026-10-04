@@ -1,3 +1,4 @@
+import { normalize3OrZero } from '@cssearth/core';
 import { LAYERED_OBLATE_SCHEMA } from '../../scene/index.ts';
 import { linearToSrgb, srgbToLinear } from '../../color/index.ts';
 import { isArray, requireString, requireRecord } from '@cssearth/core';
@@ -42,7 +43,7 @@ import { buildPolyCameraSceneTransform, buildPolyMeshTransform, buildSeamBleedPo
 import { createProjectiveSurfaceRasterPresentation, fitTextureGeometry, fitProjectiveTextureGeometryToStableLayout, leafRasterScale, packProjectiveSurfaceRaster, prepareProjectiveTextureLayer, POLAR_CAP_STYLE, requireOutwardCap } from '../../../scene/index.ts';
 import { optimizePreparedQ75Webp, PREPARED_Q75_WEBP_ENCODING } from '../../../delivery/index.ts';
 import { verifyObservationSources } from '../observed-surfaces/index.ts';
-import { ellipsoidPoint, planetographicRowsToMeshLatitude, intersectViewRayWithEllipsoid, prepareProjectedEllipsoidSilhouetteCoverage, prepareObjectViewDirection as prepareViewDirection, prepareObjectSpaceDirection, normalizeVector, dotVector, subtractVector, rotateX, rotateY, rotateZ } from '../../geometry/index.ts';
+import { ellipsoidPoint, planetographicRowsToMeshLatitude, intersectViewRayWithEllipsoid, prepareProjectedEllipsoidSilhouetteCoverage, prepareObjectViewDirection as prepareViewDirection, prepareObjectSpaceDirection,  dotVector, subtractVector, rotateX, rotateY, rotateZ } from '../../geometry/index.ts';
 import { CHANNEL_NAMES, floodDiscMean, loadLimbLaw, limbFactors, limbOverlay, meanObservedColor, outsideSilhouette, scatteringAngles, type Channels } from '../../../photometry/index.ts';
 import { displayBandRatios, keepLuminance, latitudeWeightedLuminance, loadWholeDiscColor } from '../../raster/index.ts';
 import { tieBandRatios } from '../../raster/index.ts';
@@ -1007,9 +1008,9 @@ function prepareFixedMaterialPlane({
     );
     return rotateZ(result, -MESH_ROTATION_Z * Math.PI / 180);
   };
-  const right = normalizeVector(screenToObject([0, 1, 0]));
-  const down = normalizeVector(screenToObject([1, 0, 0]));
-  const view = normalizeVector(screenToObject([0, 0, 1]));
+  const right = normalize3OrZero(screenToObject([0, 1, 0]));
+  const down = normalize3OrZero(screenToObject([1, 0, 0]));
+  const view = normalize3OrZero(screenToObject([0, 0, 1]));
   if (view.some((component, index) =>
     Math.abs(component - objectView[index]) > 1e-12)) {
     throw new Error("Ellipsoid fixed-material view projection drifted.");
@@ -2769,7 +2770,7 @@ function preparePolarSample(pole:"north"|"south", unitX:number, unitY:number, ra
   let longitude = Math.atan2(unitY, unitX);
   if (longitude < 0) longitude += Math.PI * 2;
   const position = spherePoint(latitude, longitude);
-  const normal = normalizeVector([
+  const normal = normalize3OrZero([
     position[0] / (EQUATORIAL_RADIUS ** 2),
     position[1] / (EQUATORIAL_RADIUS ** 2),
     position[2] / (POLAR_RADIUS ** 2),
@@ -2957,7 +2958,7 @@ function sampleForegroundRing(
 
 function prepareObjectViewDirection(scenePitchDegrees:number, systemObliquityDegrees:number) { return prepareViewDirection(scenePitchDegrees, { systemObliquityDegrees, presentationNodeDegrees: OBJECT_PRESENTATION_NODE_DEGREES, meshRotationDegrees: MESH_ROTATION_Z }); }
 
-function prepareObjectLightDirection(systemObliquityDegrees:number) { return prepareObjectSpaceDirection(normalizeVector(PREPARED_RING_SOURCE.shadowModel.worldLightDirection), { systemObliquityDegrees, presentationNodeDegrees: OBJECT_PRESENTATION_NODE_DEGREES, meshRotationDegrees: MESH_ROTATION_Z }); }
+function prepareObjectLightDirection(systemObliquityDegrees:number) { return prepareObjectSpaceDirection(normalize3OrZero(PREPARED_RING_SOURCE.shadowModel.worldLightDirection), { systemObliquityDegrees, presentationNodeDegrees: OBJECT_PRESENTATION_NODE_DEGREES, meshRotationDegrees: MESH_ROTATION_Z }); }
 
 function prepareInitialObjectViewDirection() {
   return prepareObjectViewDirection(

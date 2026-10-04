@@ -207,7 +207,9 @@ async function loadControlledFrame(frame: CameraFrameRecipe, photometry: Observa
   // Registration: lit shape within the photometric incidence limit must land on the photographed body, not on the sky.
   const silhouette = litShapeOnSky(geometry, background, quality, maximumIncidenceDegrees, image.width * image.height);
   if (silhouette.share > MAXIMUM_LIT_SHAPE_ON_SKY) throw new Error(`Controlled camera ${frame.id} places ${(silhouette.share * 100).toFixed(1)}% of its lit source shape on sky; its stated camera does not register to the photograph.`);
-  const built = cameraFrame({ id: frame.id, image: { ...observation, report: { ...observation.report, silhouette } }, camera, geometry, photometry, limits, mesh: radial.grid });
+  // A reconstruction from interferometric visibilities is a brightness field over the whole frame, not a detector's pixels of a surface.
+  const built = cameraFrame({ id: frame.id, image: { ...observation, report: { ...observation.report, silhouette } }, camera, geometry, photometry, limits, mesh: radial.grid,
+    skyField: frame.encoding === 'fits-oi-reconstruction' });
   return { frame: built, label };
 }
 

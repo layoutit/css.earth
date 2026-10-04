@@ -1,6 +1,6 @@
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 import { execFile } from 'node:child_process';
 import { readdir, readFile } from 'node:fs/promises';
-import { createRequire } from 'node:module';
 import { dirname, extname, resolve } from 'node:path';
 import { promisify } from 'node:util';
 import { inventoryAssets, inventoriedObjectIds } from '../delivery/index.ts';
@@ -9,8 +9,8 @@ import { OBJECT_TREE_ROOT, parseCompleteWorldContext, parsePreparedSystemView, p
 import { readPreparedObjects } from '@cssearth/objects/node';
 
 const execFileAsync = promisify(execFile);
-/** The checkout, found through this package's own name so the path holds from the sources and from `dist/`. */
-const ROOT = resolve(dirname(createRequire(import.meta.url).resolve('@cssearth/bake/package.json')), '../..');
+/** The real checkout, found by the shared workspace-marker resolver from source and `dist/`. */
+const ROOT = checkoutProjectRoot(import.meta.url);
 const textExtensions = new Set(['.css', '.html', '.js', '.json', '.map', '.svg', '.txt', '.xml']);
 const escapedOrigin = RUNTIME_ASSET_ORIGIN.replace(/[.*+?^${}()|[\]\\]/gu, '\\$&');
 const runtimeAssetPattern = new RegExp(`${escapedOrigin}/runtime-assets/[a-f0-9]{64}/[a-zA-Z0-9._@/-]+`, 'gu');

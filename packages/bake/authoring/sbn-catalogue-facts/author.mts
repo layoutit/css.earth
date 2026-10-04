@@ -1,3 +1,4 @@
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 /**
  * Fill small-body factsheets from six PDS Small Bodies Node catalogues (catalogues.json): the Asteroid Lightcurve
  * Database V4.0, Small Bodies Occultations V4.0, TNO and Centaur Diameters, Albedos and Densities V1.0, NEOWISE
@@ -45,8 +46,7 @@ import { loadTable, numeric, value, type Row, type Table } from './pds4-table.mt
 import { spliceDocument } from './manifest-splice.mts';
 import { halfUnit, interval, scientific, shortReference } from './format.mts';
 
-const ROOT = resolve(import.meta.dirname, '../../../..');
-if (process.cwd() !== ROOT) throw new Error('Run from the repository root.');
+const ROOT = checkoutProjectRoot(import.meta.url);
 const TOOL = 'packages/bake/authoring/sbn-catalogue-facts/author.mts';
 const EVIDENCE = 'reference/sbn-catalogues.json', EVIDENCE_PATH = `source/${EVIDENCE}`, LEDGER_ID = 'sbn-catalogue-facts';
 const SMALL_BODIES = new Set(['asteroid', 'comet', 'trans-neptunian', 'dwarf-planet', 'interstellar']);

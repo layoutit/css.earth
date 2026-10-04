@@ -1,5 +1,5 @@
 // `@cssearth/bake/objects/raster` (Node only): the science and observation rasters preparation reads. Scientific surfaces
-// from PDS, ISIS, FITS, GeoTIFF, VTK, NumPy, HEALPix and Tecplot products, categorical geology and symbol overlays, published
+// from PDS, ISIS, FITS, GeoTIFF, VTK, NumPy, HEALPix, Tecplot and classic NetCDF products, categorical geology and symbol overlays, published
 // exoplanet phase-curve and eclipse maps, observed color rasters and their photometric composition, the records that describe
 // them, and the WISE atlas mosaic grid.
 // `npy-lonlat-grid` and `npy-pickle` each define an `NpyArray` type; the pickle reader's is exported and the lonlat grid's
@@ -17,7 +17,10 @@ export * from './dem/image-dem-science.ts';
 export * from './dem/image-dem.ts';
 export * from './pds/isis3-raster.ts';
 export * from './latitude-belt-map.ts';
+export * from './lonlat/lonlat-grid.ts';
 export * from './lonlat-slice-table.ts';
+export * from './netcdf/classic-netcdf.ts';
+export * from './netcdf/netcdf-lonlat-field.ts';
 export * from './numpy/npy-dictionary-map.ts';
 export { readNpy, type SpinFrameTransfer, spinFrameTransfer, loadSpinFrameTransfer, decodeNpyLonLatGrid, loadNpyLonLatGrid, npyLonLatGridDependencies } from './numpy/npy-lonlat-grid.ts';
 export * from './numpy/npy-pickle.ts';

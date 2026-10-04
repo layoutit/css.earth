@@ -1,5 +1,4 @@
-export { normalize3OrZero as normalizeVector } from '@cssearth/core';
-import { normalize3OrZero as normalizeVector } from '@cssearth/core';
+import { normalize3OrZero } from '@cssearth/core';
 export type Vector3 = [number, number, number];
 export type ReadonlyVector3 = readonly [number, number, number];
 export interface EllipsoidShape {equatorialRadius: number; polarRadius: number}
@@ -68,7 +67,7 @@ export function intersectViewRayWithEllipsoid(origin: ReadonlyVector3, direction
       [(-b - root) / (2 * a), (-b + root) / (2 * a)];
     const hits = distances.map(distance => {
       const position: Vector3 = [origin[0] + direction[0] * distance, origin[1] + direction[1] * distance, origin[2] + direction[2] * distance];
-      const normal = normalizeVector([
+      const normal = normalize3OrZero([
         position[0] * inverseEquatorialSquared,
         position[1] * inverseEquatorialSquared,
         position[2] * inversePolarSquared,
@@ -103,7 +102,7 @@ export function intersectViewRayWithEllipsoid(origin: ReadonlyVector3, direction
       origin[1] + direction[1] * distance,
       origin[2] + direction[2] * distance,
     ];
-    const normal = normalizeVector([
+    const normal = normalize3OrZero([
       position[0] / equatorialSquared,
       position[1] / equatorialSquared,
       position[2] / polarSquared,
@@ -134,7 +133,7 @@ export function prepareObjectSpaceDirection(direction: ReadonlyVector3, {
   direction = rotateZ(direction, -presentationNodeDegrees * Math.PI / 180);
   direction = rotateX(direction, -systemObliquityDegrees * Math.PI / 180);
   direction = rotateZ(direction, -meshRotationDegrees * Math.PI / 180);
-  return normalizeVector(direction);
+  return normalize3OrZero(direction);
 }
 
 export function prepareObjectViewDirection(scenePitchDegrees: number, frame: ObjectDirectionFrame) {

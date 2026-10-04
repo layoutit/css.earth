@@ -1,5 +1,7 @@
+import { setupBakeOracleInputs } from '../../../cameras/oracle-inputs.mts';
+await setupBakeOracleInputs();
 import assert from 'node:assert/strict';
-import { sourceLoad, sourceTest } from '@cssearth/objects/node/source-test';
+import { sourceLoad, sourceTest, sourceValues } from '@cssearth/objects/node/source-test';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { decodeAmicaGeo } from '@cssearth/bake/objects/layers/terrestrial';
@@ -15,8 +17,8 @@ const loaded = await sourceLoad(async () => {
   return { fixture, cube, label, original, flat, frame, planes, exposure };
 });
 const test = sourceTest(null, loaded);
-const { fixture, cube, label, original, flat, frame, planes, exposure } = loaded.values;
 test('the fixture is bound to the pinned AMICA products and their label identity', async () => {
+  const { fixture, cube, label, original, flat, frame, planes, exposure } = sourceValues(loaded);
   await assertPinnedInputs(fixture.inputs);
   const identity = requireRecord(fixture.cases.identity);
   assert.equal(frame.startTime, requireString(identity.START_TIME));
@@ -25,6 +27,7 @@ test('the fixture is bound to the pinned AMICA products and their label identity
 });
 
 test('geometry planes match the big-endian cube exactly, angles after the degree-to-radian conversion, nulls as invalid', () => {
+  const { fixture, cube, label, original, flat, frame, planes, exposure } = sourceValues(loaded);
   let compared = 0;
   for (const [name, raw] of Object.entries(planes)) {
     if (name === 'IMAGE') continue;
@@ -40,6 +43,7 @@ test('geometry planes match the big-endian cube exactly, angles after the degree
 });
 
 test('the image is the detector DN over the flat over the exposure, with the DDR\'s vertical reversal', () => {
+  const { fixture, cube, label, original, flat, frame, planes, exposure } = sourceValues(loaded);
   let compared = 0;
   for (const raw of requireArray(fixture.cases.imagePairs)) {
     const pair = requireRecord(raw), index = requireFiniteNumber(pair.index), ddr = requireFiniteNumber(pair.ddr), dn = requireFiniteNumber(pair.dn);

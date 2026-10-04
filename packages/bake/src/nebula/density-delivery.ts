@@ -4,9 +4,9 @@ import { prepareVolumeAtlases } from '../density/index.ts';
 import { validatePreparedVolumeDatasets, validatePreparedCssVolume, parseVolumeDatasetManifest } from '@cssearth/objects';
 import { readVolumeDatasetBank } from '@cssearth/objects/node';
 
-import { localPath, pinned, type Pin, writeAtomic } from '../volume/node/index.ts';
+import { localPath, pinned, type CompilerPin, writeAtomic } from '../volume/node/index.ts';
 
-export interface BakeDelivery { directory: string; manifest: Pin; atlasInputs?: Pin; compactInputs?: Pin }
+export interface BakeDelivery { directory: string; manifest: CompilerPin; atlasInputs?: CompilerPin; compactInputs?: CompilerPin }
 async function deliveryFiles(root: string, delivery: BakeDelivery) {
   localPath(root, delivery.directory);
   const manifest = JSON.parse((await pinned(root, delivery.manifest)).toString());

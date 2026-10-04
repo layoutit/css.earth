@@ -27,6 +27,7 @@ interface DatasetBank {
   loading: Promise<void> | null;
   generation: number;
   explicitEnabled: boolean | undefined;
+  /** The dataset asked for, or the one the bank mounted with: selected at each mount, and what the bank's billboard pictures. */
   pendingSelection: string | undefined;
   pendingStarsVisible: boolean | undefined;
   framing: { frame: DensityVolumeFrame; radiusUnits: number; visibility: PreparedPointVisibility };
@@ -45,15 +46,16 @@ export function createUniverseDatasetBanks({ root, end, frontRoot, frontEnd, lif
   facts: readonly DatasetBankBillboard[];
   frame: { referenceFrame: string; epochJdTt: number };
   visibility: PreparedPointVisibility;
-  billboards?: { plan: DatasetBillboards; imageUrl: (id: string) => string };
+  billboards?: { plan: DatasetBillboards; imageUrl: (id: string, dataset?: string) => string };
   load: PreparedUniverseOptions['loadVolumeDataset'];
   warmDomNodeBudget: number;
   requestPublication?: () => boolean;
   prepareBillboardImage: (url: string) => boolean;
 }) {
   let billboardCount = 0, useClock = 0, coasting = false;
+  const pictured = (bankFacts: DatasetBankBillboard) => bankFacts.billboard !== undefined || (bankFacts.datasets?.size ?? 0) > 0;
   const record = (declared: { id: string; frame: DensityVolumeFrame }, bankFacts: DatasetBankBillboard): DatasetBank => ({
-    id: declared.id, facts: bankFacts, billboardIndex: bankFacts.billboard ? billboardCount++ : -1,
+    id: declared.id, facts: bankFacts, billboardIndex: pictured(bankFacts) ? billboardCount++ : -1,
     mounted: null, points: [], textures: null, loading: null, generation: 0, explicitEnabled: undefined,
     // A bank's own star points stay hidden unless a caller shows them.
     pendingSelection: undefined, pendingStarsVisible: false,
@@ -74,14 +76,15 @@ export function createUniverseDatasetBanks({ root, end, frontRoot, frontEnd, lif
     bank.textures?.destroy(); bank.textures = null;
   });
   for (const bank of banks) release(bank);
-  const billboardEntry = (bank: DatasetBank) => ({ id: bank.id, frame: bank.framing.frame, billboard: bank.facts.billboard! });
+  const billboardEntry = (bank: DatasetBank) => ({ id: bank.id, frame: bank.framing.frame, billboard: bank.facts.billboard,
+    defaultDataset: bank.facts.defaultDataset, datasets: bank.facts.datasets });
   const mountBillboards = (entries: ReturnType<typeof billboardEntry>[]) => {
     const mounted = mountDatasetBillboards({ host: root, before: end, imageUrl: preparedBillboards!.imageUrl,
       imagePx: preparedBillboards!.plan.imagePx, entries, prepareImage: prepareBillboardImage });
     lifetime.onDispose(() => mounted.destroy());
     return mounted;
   };
-  const billboardEntries = banks.filter(bank => bank.facts.billboard).map(billboardEntry);
+  const billboardEntries = banks.filter(bank => bank.billboardIndex >= 0).map(billboardEntry);
   let billboards = billboardEntries.length ? mountBillboards(billboardEntries) : null;
 
   function publishResidency() {
@@ -149,6 +152,8 @@ export function createUniverseDatasetBanks({ root, end, frontRoot, frontEnd, lif
       try {
         mounted.root.style.display = 'none';
         if (pendingDataset !== undefined) mounted.selectDataset(pendingDataset);
+        // A bank that adopts server-drawn nodes mounts with their dataset; its billboard pictures that one.
+        else bank.pendingSelection = mounted.state().selectedDataset;
         if (bank.pendingStarsVisible !== undefined) mounted.setStarsVisible(bank.pendingStarsVisible);
       } catch (error) { mounted.destroy(); throw error; }
       if (lifetime.disposed || generation !== bank.generation) { mounted.destroy(); return; }
@@ -222,7 +227,7 @@ export function createUniverseDatasetBanks({ root, end, frontRoot, frontEnd, lif
       const bank = record(declared, bankFacts);
       banks.push(bank); byId.set(bank.id, bank); release(bank);
       // Its billboard joins the mounted layer; the first one makes it, after what the universe mounted since.
-      if (bank.facts.billboard) {
+      if (bank.billboardIndex >= 0) {
         if (billboards) billboards.add(billboardEntry(bank)); else billboards = mountBillboards([billboardEntry(bank)]);
         billboards.setCoasting(coasting);
       }
@@ -273,10 +278,12 @@ export function createUniverseDatasetBanks({ root, end, frontRoot, frontEnd, lif
         const ready = bank.mounted && bank.textures?.ready(shown > 0 && (requestedOpacity > 0 || incoming)
           ? bank.mounted.textureUrls({ world, viewport }, incoming) : []);
         const opacity = ready ? requestedOpacity : 0;
-        const billboard = bank.facts.billboard;
-        if (billboards && billboard) {
-          const billboardOpacity = shown * projectedVolumeOpacity(world, viewport, frame, billboard.radiusUnits) * (ready ? 1 - opacity / Math.max(shown, Number.MIN_VALUE) : 1);
-          billboards.publish(bank.billboardIndex, billboardOpacity, world, viewport);
+        if (billboards && bank.billboardIndex >= 0) {
+          // The billboard pictures the selected dataset; a dataset with no view of its own draws none.
+          const billboardRadiusUnits = billboards.radiusUnits(bank.billboardIndex, bank.pendingSelection);
+          const billboardOpacity = billboardRadiusUnits === undefined ? 0
+            : shown * projectedVolumeOpacity(world, viewport, frame, billboardRadiusUnits) * (ready ? 1 - opacity / Math.max(shown, Number.MIN_VALUE) : 1);
+          billboards.publish(bank.billboardIndex, billboardOpacity, world, viewport, bank.pendingSelection);
         }
         if (!bank.mounted) {
           const visible = requestedOpacity > 0 && projectVolumeSphere(world, viewport, frame, radiusUnits).visible;

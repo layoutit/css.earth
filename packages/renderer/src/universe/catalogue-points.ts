@@ -1,6 +1,6 @@
 import { writeStyle } from '../rendering/retained-write.js';
 import { eyeDistanceM } from '@cssearth/engine';
-import { cataloguePointColumns, parseCataloguePoints, type CataloguePointLevel, type CataloguePointSpread, type PreparedCataloguePointColumns, type VolumeVector } from '@cssearth/objects';
+import { cataloguePointColumns, readCataloguePointBank, type CataloguePointLevel, type CataloguePointSpread, type PreparedCataloguePointColumns, type VolumeVector } from '@cssearth/objects';
 
 
 import type { VolumeCameraPublication } from '../volume/types.js';
@@ -176,7 +176,7 @@ export function mountCataloguePoints({ host, before, url, loadBank, occluder }: 
         // `allowance` is the points a frame's budget still covers, and a pass yields when it is spent.
         let allowance = Infinity;
         const steps = (function* (): Generator<void, void, void> {
-        const bank: PreparedCataloguePointColumns = isColumns(value) ? value : cataloguePointColumns(parseCataloguePoints(value, url));
+        const bank: PreparedCataloguePointColumns = isColumns(value) ? value : cataloguePointColumns(readCataloguePointBank(value, url));
         const fadeOut = bank.appearance.fadeOutUnits;
         fadeOutM = fadeOut ? [fadeOut[0] * bank.frame.metersPerUnit, fadeOut[1] * bank.frame.metersPerUnit] : null;
         // A world place as the bank would have stored it, compared axis by axis with every point. The bank's frame is

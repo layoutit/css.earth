@@ -12,5 +12,7 @@
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's measured spectrum (Pulkovo spectrophotometric catalogue, table 5 (320-1080 nm, 2.5 nm steps, 10 nm resolution, absolute flux in W m^-2 m^-1)) (photometry/stellar-color.json); no image of the photosphere exists."
-  }
+  },
+  "surfaceGravityLogg": 2.4,
+  "surfaceGravitySource": "log g 2.4 from 2025A&A...698A..93J; the 33 published values span log g 1.38 to 2.85, across which the limb law changes by at most 0.3% of the centre brightness (https://ui.adsabs.harvard.edu/abs/2025A%26A...698A..93J)"
 }

@@ -1,3 +1,5 @@
+import { setupBakeOracleInputs } from '../../../../cameras/oracle-inputs.mts';
+await setupBakeOracleInputs();
 import { existsSync } from 'node:fs';
 import { readFile, mkdir, stat } from 'node:fs/promises';
 import { resolve } from 'node:path';

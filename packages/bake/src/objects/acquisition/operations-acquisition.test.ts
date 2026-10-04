@@ -187,6 +187,15 @@ for(const [name,received,declared,error] of [
   assert.deepEqual(await readdir(directory),['source.img']);
 }));
 
+// A server that compresses the transfer declares the compressed length, and fetch hands over the decoded file:
+// raw.githubusercontent.com answers a 4.6 MB table with content-length 637707. That length says nothing about the file.
+test('a compressed answer is not held to the length of its transfer',()=>temporary(async directory=>{
+  const data=Buffer.from('pinned data');
+  await executeAcquisition({sourceRoot:directory,manifest:rawManifest(data),plan:rawPlan,mirrorOrigin:null,
+    transport:{fetch:async()=>new Response(data,{headers:{'content-length':'4','content-encoding':'gzip'}})}});
+  assert.deepEqual(await readFile(join(directory,'source.img')),data);
+}));
+
 test('abrupt source stream errors clean up without replacing the previous pin',()=>temporary(async directory=>{
   const data=Buffer.from('pinned data'),old=Buffer.from('previous pin');await writeFile(join(directory,'source.img'),old);
   let pulls=0;

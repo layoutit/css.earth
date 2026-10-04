@@ -1,3 +1,4 @@
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 /**
  * Cut this package's two ALMA inputs out of the archive's own products for member uid://A001/X360d/Xae. Nothing here is
  * science: both are boxes about the observation's phase centre, and the author finds the star in the continuum.
@@ -145,7 +146,7 @@ export function reduceAlmaContinuum(bytes: Buffer): Buffer {
 const direct = process.argv[1] !== undefined && import.meta.url === pathToFileURL(resolve(process.argv[1])).href;
 if (direct) {
   const check = process.argv.includes('--check');
-  const target = resolve(import.meta.dirname, '../../../..', DOWNLOADS_BASE);
+  const target = resolve(checkoutProjectRoot(import.meta.url), DOWNLOADS_BASE);
   const jobs = [
     { download: ALMA_DOWNLOADS.cube, url: ALMA_SIO.cutout, reduce: reduceAlmaSio, declared: ALMA_SIO },
     { download: ALMA_DOWNLOADS.continuum, url: ALMA_SIO.continuum.url, reduce: reduceAlmaContinuum, declared: ALMA_SIO.continuum },

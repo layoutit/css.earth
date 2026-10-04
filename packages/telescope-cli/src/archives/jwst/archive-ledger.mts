@@ -157,6 +157,8 @@ export async function repositoryState(repository = REPOSITORY) {
   }
   for (const file of files.filter(name => name.endsWith('.json') && !name.endsWith('.reproduction.json')).sort()) {
     const program = await readJson(resolve(imaging, file));
+    // KLIP programs share this root but do not declare pipeline imaging bands. Unknown schemas still fail below.
+    if (isRecord(program) && program.schema === 'cssearth-jwst-klip-program@1') continue;
     if (!isRecord(program) || !Array.isArray(program.bands)) throw new TypeError(`${file} is not an imaging program.`);
     const id = requireString(program.id), pinned = new Set<string>(), proved = new Set<string>();
     for (const entry of program.bands) {

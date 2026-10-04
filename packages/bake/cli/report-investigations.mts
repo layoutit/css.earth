@@ -1,3 +1,4 @@
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 /** Report investigation decisions and missing ledgers from the same descriptors that generate OBJECTS, or with --facilities from
  * the facilities catalogue's ground telescopes and their ledgers under src/facilities.
  * Usage: node packages/bake/cli/report-investigations.mts [--facilities] [--classification=asteroid] [--status=deferred,unresolved] [--search=registration] [--summary] [--json]
@@ -17,7 +18,7 @@ import { readCatalog } from '@cssearth/objects/node';
 import { prepareSceneDistance } from '@cssearth/bake/navigation';
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
-  const root = fileURLToPath(new URL('../../../', import.meta.url)), options = investigationOptions(process.argv.slice(2));
+  const root = checkoutProjectRoot(import.meta.url), options = investigationOptions(process.argv.slice(2));
   if (options.facilities) {
     const [facilities, ledgers] = await Promise.all([groundFacilities(root), readFacilityLedgers(root)]);
     const report = investigationReport(facilities, ledgers.map(ledger => ({ schema: ledger.schema, objectId: ledger.facilityId, entries: ledger.entries })), options);

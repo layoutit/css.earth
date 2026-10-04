@@ -7,7 +7,7 @@ import assert from 'node:assert/strict';
 import { mkdir, readFile, rename, rm, readdir } from 'node:fs/promises';
 import { gunzipSync } from 'node:zlib';
 import { resolve } from 'node:path';
-import { restoreCompactFiniteEmission, localPath, pinned, type Pin, writeAtomic } from '../volume/node/index.ts';
+import { restoreCompactFiniteEmission, localPath, pinned, type CompilerPin, writeAtomic } from '../volume/node/index.ts';
 
 import { compileCssVolume, prepareVolumeImpostors } from '../volume-leaves/index.ts';
 import { prepareVolumeAtlases } from '../density/index.ts';
@@ -16,11 +16,11 @@ const record = (value: unknown, at: string): Record<string, unknown> => { assert
 const text = (value: unknown, at: string): string => { assert.ok(isNonemptyText(value), `Expected text: ${at}`); return value; };
 const json = (bytes: Uint8Array, gzipped: boolean): unknown => JSON.parse((gzipped ? gunzipSync(bytes) : Buffer.from(bytes)).toString('utf8'));
 const stringify = (value: unknown) => Buffer.from(JSON.stringify(value, null, 2) + '\n');
-function parsePin(value: unknown, at: string): Pin {
+function parsePin(value: unknown, at: string): CompilerPin {
   const pin = record(value, at);
   return { path: text(pin.path, `${at} path`) };
 }
-const read = async (root: string, pin: Pin) => json(await pinned(root, pin), pin.path.endsWith('.gz'));
+const read = async (root: string, pin: CompilerPin) => json(await pinned(root, pin), pin.path.endsWith('.gz'));
 
 /** True when the descriptor names a prepared bank and every texture it lists is present at its recorded size. */
 async function deliveredBankVerified(directory: string, installed: string): Promise<boolean> {
@@ -48,7 +48,7 @@ function parseDensityFilter(value: unknown, at: string): CloudDensityFilter {
  * Regenerate `prepared/datasets.json`, its axis atlases and the descriptor from delivered inputs alone.
  * Slice textures are an intermediate: the delivery ships three atlases per dataset, as the other nebulae do.
  */
-export async function prepareFiniteEmissionObject(root: string, directory: string, compactInputs: Pin, ifMissing: boolean, allowMissing = false) {
+export async function prepareFiniteEmissionObject(root: string, directory: string, compactInputs: CompilerPin, ifMissing: boolean, allowMissing = false) {
   const inputs = record(await read(root, compactInputs), 'compact inputs');
   const bankId = text(inputs.bankId, 'bank id'), defaultDataset = text(inputs.defaultDataset, 'default dataset');
   const framingRadiusUnits = inputs.framingRadiusUnits;

@@ -4,13 +4,12 @@
     "strict": true,
     "noUncheckedIndexedAccess": false,
     "lib": [
-      "ES2022",
-      "DOM" // TextEncoder/TextDecoder for the browser-safe prepared-bank codecs.
+      "ES2022"
     ],
     "rootDir": "src",
     "outDir": "dist",
     "allowJs": false,
-    "types": [],
+    "types": ["node"],
     "incremental": true,
     "tsBuildInfoFile": "../../output/tsbuildinfo/packages-objects.tsbuildinfo"
   },

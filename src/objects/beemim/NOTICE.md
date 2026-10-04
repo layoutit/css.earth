@@ -5,3 +5,5 @@ Radius, mass and temperature: Radius 41.658 solar radii from McDonald, Zijlstra 
 Color: Burnashev (1985), Abastumani Astrophys. Obs. Bull. 59, 83; VizieR III/126, part2 record 40 (BS 1393), through the CIE 1931 2° color-matching functions (CIE 2019, CC BY-SA 4.0, doi:10.25039/CIE.DS.xvudnb9b). Cross-check: Gaia DR3 XP spectrum, source 4871775051598300160.
 
 Placement: Gaia DR3 source 4871775051598300160: position, proper motion; distance: McDonald, Zijlstra & Watson (2017), MNRAS 471, 770, table 2, HIP 20535: distance 90.826 pc, the paper's parallax inverted (Gaia DR1's where it revised the star's, else the Hipparcos reduction of van Leeuwen 2007; section 2.3; fractional uncertainty 0.034), at which the luminosity and radius hold. This work has made use of data from the European Space Agency (ESA) mission Gaia, processed by the Gaia Data Processing and Analysis Consortium (DPAC). Identifiers: SIMBAD, CDS, Strasbourg.
+
+Limb darkening: Claret & Bloemen (2011), A&A 529, A75, via VizieR J/A+A/529/A75.

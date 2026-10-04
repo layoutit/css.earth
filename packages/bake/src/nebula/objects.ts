@@ -33,12 +33,12 @@ function local(root: string, path: string): string {
 }
 async function read(root: string, path: string) { return JSON.parse(await readFile(local(root,path),'utf8')) as unknown; }
 async function put(path: string, value: string | Uint8Array) { await mkdir(dirname(path),{ recursive:true }); await writeFile(path,value); }
-interface Pin { path: string }
-function pin(v: unknown): Pin {
+interface CompilerPin { path: string }
+function pin(v: unknown): CompilerPin {
   const p = record(v), path = text(p.path);
   return { path };
 }
-async function pinned(root: string, p: Pin) { const bytes = await readFile(local(root,p.path)); return bytes; }
+async function pinned(root: string, p: CompilerPin) { const bytes = await readFile(local(root,p.path)); return bytes; }
 /** Reuse an installed bank only when its receipt records the current recipe and its descriptor and every resource it
  * names are present. The receipt keeps the whole recipe, so a changed recipe is compared, not trusted. */
 async function installed(directory: string, recipe: unknown): Promise<boolean> {

@@ -1,5 +1,5 @@
 import { WORLD_CONTEXT_SOURCE_SCHEMA, PREPARED_WORLD_CONTEXT_SCHEMA, PREPARED_WORLD_SYSTEM_VIEW_SCHEMA } from '@cssearth/objects';
-import type { PreparedWorldCameraFrame, PreparedContextCameraPresentation as WorldContextCameraPresentation, PreparedContextPointSource as WorldContextPointSource, PreparedVolumeOpacityProfile as VolumeOpacityProfile, PreparedOrbitCenter as WorldContextOrbitCenter, PreparedWorldContextData as PreparedWorldContext, PreparedOrbitDataLod as PreparedOrbitLod } from '@cssearth/objects';
+import type { PreparedWorldCameraFrame, PreparedContextCameraPresentation as WorldContextCameraPresentation, PreparedContextPointSource as WorldContextPointSource, PreparedVolumeOpacityProfile as VolumeOpacityProfile, PreparedOrbitCenter as WorldContextOrbitCenter, PreparedWorldContextData, PreparedOrbitDataLod as PreparedOrbitLod } from '@cssearth/objects';
 import { cross3 as cross, dot3 as dot } from '@cssearth/core';
 import { prepareBoundView, prepareGroupView, prepareSystemView } from './system-view.ts';
 import type { SystemViewPolicy } from './system-view.ts';
@@ -118,7 +118,7 @@ function parseVolumeOpacityProfile(value: unknown): VolumeOpacityProfile {
 export function prepareWorldContext(source: WorldContextSource, facts: Readonly<Record<string, WorldContextBodyFact>>,
   states: Readonly<Record<string, OrbitalState>>,
   orbitCenters: Readonly<Record<string, WorldContextOrbitCenter>> = {},
-  systemViewPolicy?: SystemViewPolicy): PreparedWorldContext {
+  systemViewPolicy?: SystemViewPolicy): PreparedWorldContextData {
   for (const [id, center] of Object.entries(orbitCenters)) {
     identifier(id, 'Orbit center id'); identifier(center.centerBodyId, `${id} orbit center parent`);
     if (!Array.isArray(center.positionM) || center.positionM.length !== 3 || center.positionM.some(value => !Number.isFinite(value))) {
@@ -247,7 +247,7 @@ export function outwardSphere(sphere: { readonly centerM: Vector3; readonly radi
 
 /** Each system's camera candidates, one document per host: system framing reads the one it frames, so a page never
  * downloads the candidates of systems it does not open (all 74 were 635 KB brotli on every page). */
-export function worldSystemViews(prepared: PreparedWorldContext) {
+export function worldSystemViews(prepared: PreparedWorldContextData) {
   return freeze([prepared.focus, ...prepared.bodies].flatMap(body => body.systemView
     ? [freeze({ schema: PREPARED_WORLD_SYSTEM_VIEW_SCHEMA as typeof PREPARED_WORLD_SYSTEM_VIEW_SCHEMA, id: body.id, candidates: body.systemView.candidates })] : []));
 }

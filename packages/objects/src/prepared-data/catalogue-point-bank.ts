@@ -40,7 +40,7 @@ export interface PreparedCataloguePointBank {
 }
 
 /** A prepared catalogue-point bank: fixed 3D positions of a published catalogue and how to draw them. */
-export function parseCataloguePoints(value: unknown, at = 'catalogue points'): PreparedCataloguePointBank {
+export function readCataloguePointBank(value: unknown, at = 'catalogue points'): PreparedCataloguePointBank {
   const steps = parseCataloguePointSteps(value, at, Infinity);
   for (;;) { const step = steps.next(); if (step.done) return step.value; }
 }

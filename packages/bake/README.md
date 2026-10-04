@@ -8,6 +8,11 @@ Each topic is one subpath entry, with its source in `src/<topic>/`. A topic impo
 layer (the raster lane uses the photometric models), never sideways. Command entries live in `cli/` and run as
 `node packages/bake/cli/<command>.mts`; nothing imports them.
 
+`prepare-object` runs each step in a background process group, even when it inherits terminal stdio.
+Steps must not read terminal stdin or prompt interactively: background reads can receive `SIGTTIN`.
+Cancellation and `SIGINT`, `SIGTERM`, `SIGHUP`, or `SIGQUIT` give each step group `SIGTERM` and two seconds
+to clean up before `SIGKILL`; the parent then preserves the received signal. An immediate process exit cannot wait.
+
 | entry | what it holds | host |
 |---|---|---|
 | `@cssearth/bake/volume` | emission interfaces, coordinates, fields, materials and sampling | host-neutral: no Node built-ins, DOM or native codecs; prepared recipes, slice formats, compiler controls, star inputs, observation mappings, simulation depth-prior and cancellation interfaces, and pure validators live in `@cssearth/objects` |
@@ -93,6 +98,22 @@ The prepared-presentation pass resolves whole-surface visibility priorities befo
 Every textured presentation resolves its image consumers from the actual scene CSS during preparation. Its tree carries `textureBindings`, including an explicit empty array when a texture cannot be published directly to leaves. Before reusing an installed runtime as compiler input, restore and verify it against its inventory with `node packages/bake/cli/setup-assets.mts --object=<id>`; a local cache may hold an older dataset. After changing presentation compilation, regenerate the affected runtime assets and publish their inventories.
 
 The runtime uses those bindings to keep the mesh connected, publish images directly to their leaves, and introduce each atlas on one face before activating later batches. A missing binding bank falls back to inherited texture publication and connected-node batching. The registry activation check rejects that omission for textured deliveries.
+
+## Declaration adapter policies
+
+The shared scanner splits fragments only. Each adapter supplies its own named
+`declarationName` parameter; the historical #1152 quote/backslash convention
+stays in the scanner and is pinned by its tests.
+
+| Adapter | Named default | Name/admission policy |
+| --- | --- | --- |
+| Clean leaves | `CLEAN_DECLARATION_NAME` | Native names lowercase; custom names preserve case; reject colonless and colon-at-zero fragments. |
+| Leaf boxes | `LEAF_BOX_DECLARATION_NAME` | Case-sensitive exclusion; colonless fragments have no name and remain. |
+| Texture tiles | `TEXTURE_DECLARATION_NAME` | Preserve case; historical colonless name drops its last character (`slice(0, -1)`). |
+
+`src/presentation/css-declaration-scanner.test.mts` pins these separate policies,
+including malformed fragments. This documents the texture adapter's existing
+truncation without changing its admission during a relocation.
 
 ## Prepared ring backings
 

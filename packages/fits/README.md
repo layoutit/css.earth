@@ -50,3 +50,5 @@ pnpm build:fits
 pnpm --filter @cssearth/fits typecheck
 pnpm --filter @cssearth/fits test
 ```
+
+Tests share authored FITS bytes through `@cssearth/fits/test-support`; independent Astropy files live in this package’s `src/node/fixtures/fits/`.

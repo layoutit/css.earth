@@ -11,8 +11,8 @@ import type { SimulationDepthPrior } from '@cssearth/objects';
 import { loadVolumeSource, sampleEncoded, sourceBytes } from './density-grid.ts';
 import { channelDensity } from '../slices/density.ts';
 
-interface Pin { path: string }
-const isPin = (value: unknown): value is Pin => !!value && typeof value === 'object' &&
+import type { CompilerPin } from '@cssearth/objects';
+const isPin = (value: unknown): value is CompilerPin => !!value && typeof value === 'object' &&
   typeof (value as { path?: unknown }).path === 'string';
 
 export async function loadSimulationPrior(root: string, cloudProvenance: unknown, distanceKpc: number, tangentBoundsKpc: { min: number[]; max: number[] },

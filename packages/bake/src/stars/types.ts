@@ -1,5 +1,3 @@
-export type Point3 = readonly [number, number, number];
-export type Rgb = readonly [number, number, number];
 export interface RuntimeLabelPolicy {
   readonly activeSlots: number; readonly transitionSlots: number; readonly capHeightPx: number;
   readonly gapPx: number; readonly maxAlpha: number; readonly fadeMs: number;

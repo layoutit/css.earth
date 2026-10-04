@@ -16,6 +16,7 @@ Human entry points:
   telescope explore TARGET [--family F01..F18] [--kind KIND] [--instrument NAME] [--wavelength MIN,MAX] [--from ISO --to ISO] [--icrs-circle RA,DEC,RADIUS] [--out DIRECTORY]
   telescope fetch EXPLORE.json --archive keck|gemini|opus|chandra|spitzer --pick N [--file NAME] --out DIRECTORY [--resume] [--json]
   telescope papers TARGET [--instrument NAME] [--host NAME] [--json] [--out DIRECTORY]
+  telescope simulations TARGET [--json] [--out DIRECTORY]
   telescope new-object SPEC.json [--check] [--skip-existing] [--json]
   telescope new-object --from-archive HOST... | --from-debcat SYSTEM... | --from-apokasc KIC... | --from-cepheids NAME... | --from-k2 EPIC... | --from-tess TIC... | --from-gaia SOURCE_ID... | --from-hipparcos HIP... | --from-iau all|NAME... | --from-chara HD... | --from-npoi HD... | --from-sh0es HOST[/ID]... | --from-m31cepheids all|V1|ID... | --from-m33cepheids all|ID... --out SPEC.json
   telescope ascl SOFTWARE [--json]
@@ -52,6 +53,9 @@ Papers lists up to 20 OpenAlex works that name the target (and instrument) in th
 using arXiv's Atom API when OpenAlex is temporarily unavailable. The saved report names the source and fallback reason.
 It ranks open access first, tries one plain GET per open copy, marks browser challenges as blocked, and prints
 HTML figure captions and table titles about maps or observation lists. Nothing is saved without --out.
+Simulations lists the Zenodo dataset records that name the target and speak of a simulation or a model, each with its
+license, size and files. It downloads nothing. A listed record is a lead: new-object --simulation adds one as a dataset from
+an entry written after reading its paper (packages/telescope-cli/src/new-object/simulation/simulation-dataset.mts).
 ASCL searches its live software catalog by title or matches the exact software names in a verified
 product receipt. It reports citable code entries and preferred citations when provided by ASCL.
 Only the receipt establishes what this run recorded as used; an ASCL match is a citation lead, not

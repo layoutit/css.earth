@@ -1,3 +1,5 @@
+import { catalogueSeparationArcsec } from '@cssearth/astronomy';
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 // Entry script: node packages/bake/authoring/galaxy-clusters/members.mts <hydra|centaurus|perseus|coma>
 /**
  * A galaxy cluster's member dots: the members a published catalogue lists that Cosmicflows-4 does not already hold, since
@@ -45,7 +47,7 @@ interface Member { name: string; ra: number; dec: number; stage: string; b: stri
 
 const cluster = process.argv[2] as Cluster;
 if (!(cluster in CLUSTERS)) throw new TypeError(`Usage: members.mts <${Object.keys(CLUSTERS).join('|')}>, got ${String(cluster)}.`);
-const repository = resolve(import.meta.dirname, '../../../..');
+const repository = checkoutProjectRoot(import.meta.url);
 const input = (name: string) => resolve(repository, 'output/clusters', `${name}.csv`);
 const fieldPath = resolve(repository, 'src/objects/nearby-universe-galaxies/source/galaxies/cf4-hyperleda.csv.gz');
 const outputPath = resolve(repository, `src/objects/${cluster}-cluster-members/source/dots/members.csv.gz`);
@@ -73,7 +75,6 @@ const stage = (type: string): string => {
     [/^S(B)?d/u, '7'], [/^S(B)?m/u, '9'], [/^(Im|BCD)/u, '10']];
   return classes.find(([pattern]) => pattern.test(type))?.[1] ?? '';
 };
-const arcsecBetween = (ra1: number, dec1: number, ra2: number, dec2: number) => 3600 * Math.hypot((ra1 - ra2) * Math.cos(dec1 * Math.PI / 180), dec1 - dec2);
 
 async function sloanMembers(file: keyof typeof QUERIES, idColumn: string, prefix: string): Promise<Member[]> {
   const photometry = new Map((await table(`${cluster}-sdss16`)).map(row => [row.objID!, row]));
@@ -96,7 +97,7 @@ const readers: Record<Cluster, () => Promise<Member[]>> = {
       return { name: (row.Name ?? '').replaceAll('_', ' '), ra: number(row, 'RAJ2000', input('hydra-hcdc')), dec: number(row, 'DEJ2000', input('hydra-hcdc')), stage: '', b: jesterB(r + color, r) };
     });
     // A dwarf the redshift table also lists is drawn once, with the dwarf catalogue's magnitude.
-    const repeated = giants.filter(giant => dwarfs.some(dwarf => arcsecBetween(giant.ra, giant.dec, dwarf.ra, dwarf.dec) <= MATCH_ARCSEC));
+    const repeated = giants.filter(giant => dwarfs.some(dwarf => catalogueSeparationArcsec(giant.ra, giant.dec, dwarf.ra, dwarf.dec, false) <= MATCH_ARCSEC));
     return [...giants.filter(giant => !repeated.includes(giant)), ...dwarfs];
   },
 };

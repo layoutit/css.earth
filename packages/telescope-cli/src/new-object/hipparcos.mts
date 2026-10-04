@@ -16,14 +16,17 @@
  * The star sits at the paper's distance, so its radius and distance agree. A star SIMBAD links to a Gaia DR3 source takes Gaia's
  * position and motion; one Gaia does not list sits on its Hipparcos row (XHIP, Anderson & Francis 2012, whose radial velocity it
  * takes). The paper's surface gravity is assumed, not measured (its column 15), so the mass is "unmeasured": GM is the records'
- * unpublished 0 and no limb law is chosen. The star is shown by its preferred name (display-name.mts, the IAU name first); one with a
- * name of its own is a map target. */
+ * unpublished 0. The draft cites the star's published spectroscopic gravity instead (gravity.mts, searched at SIMBAD's J2000 position
+ * of the Hipparcos number), at which the generator reads the limb law; only with none published is no law chosen. The star is shown
+ * by its preferred name (display-name.mts, the IAU name first); one with a name of its own is a map target. */
 import { VIZIER_ASU, type Archive } from './archives.mts';
 import { adql, csv, SIMBAD_TAP } from './companions.mts';
 import { preferredName, simbadIdentifiers } from './display-name.mts';
+import { chooseGravity, citedGravity, type GravityChoice } from './gravity.mts';
 import { readIauNames } from './iau-names.mts';
 import { slug } from './identity.mts';
 import { sunWidth, wikipediaQuotes } from './prose.mts';
+import type { Cited } from './spec.mts';
 
 export const MCDONALD = { source: 'J/MNRAS/471/770/table2', paper: 'https://doi.org/10.1093/mnras/stx1433', credit: 'McDonald, Zijlstra & Watson (2017), MNRAS 471, 770' };
 export const XHIP = { catalogue: 'V/137D/XHIP', url: 'https://doi.org/10.1134/S1063773712050015', credit: 'Anderson & Francis (2012), Astronomy Letters 38, 331 (XHIP), Hipparcos astrometry' };
@@ -71,12 +74,25 @@ export function parseXhipVelocity(tsv: string, hip: string) {
   return { velocity, ...(cell('e_RV') && Number.isFinite(error) ? { error } : {}), quality: cell('q_RV') };
 }
 
+/** SIMBAD's main type and J2000 position for a Hipparcos number. */
+export function parseSimbadStar(answer: string, hip: string) {
+  const found = csv(answer)[0], ra = Number(found?.ra), dec = Number(found?.dec);
+  if (!found?.ra || !found.dec || !Number.isFinite(ra) || !Number.isFinite(dec)) throw new Error(`HIP ${hip}: SIMBAD gives no J2000 position for it (ra ${JSON.stringify(found?.ra)}, dec ${JSON.stringify(found?.dec)}), so its published gravities cannot be searched.`);
+  return { mainType: String(found.otype ?? ''), ra, dec };
+}
 
-export function draftFromMcDonald(row: ReturnType<typeof parseMcDonaldRow>, identifiers: readonly string[], options: { readonly name?: ReturnType<typeof preferredName>; readonly gaia: boolean; readonly velocity?: ReturnType<typeof parseXhipVelocity>; readonly taken: (id: string) => boolean }) {
+/** `gravity` is the star's published spectroscopic gravity (gravity.mts chooseGravity, with no range), or null when none is published. */
+export function draftFromMcDonald(row: ReturnType<typeof parseMcDonaldRow>, identifiers: readonly string[], options: { readonly name?: ReturnType<typeof preferredName>; readonly gaia: boolean; readonly velocity?: ReturnType<typeof parseXhipVelocity>; readonly gravity?: GravityChoice | null;
+  /** Why the star's published gravity is not used, when it contradicts the radius (gravity.mts). */
+  readonly unusableGravity?: string; readonly taken: (id: string) => boolean }) {
   const hip = `HIP ${row.hip}`, preferred = options.name, name = preferred?.name ?? hip, hd = identifiers.map(id => id.replace(/\s+/gu, ' ')).find(id => /^HD \d+$/u.test(id));
   // The id is the name's slug, else (a name taken by another body, or one that starts with a digit) the HD, then the HIP number's.
   const id = [name, hd, hip].filter((value): value is string => !!value).map(slug).find(candidate => /^[a-z]/u.test(candidate) && !options.taken(candidate));
   if (!id) throw new Error(`${hip}: every id its names give (${[name, hd, hip].join(', ')}) is taken or starts with a digit; give this star a spec by hand.`);
+  // A published gravity is cited, and the generator reads the limb law at it as at any cited gravity; with none, no law is chosen.
+  const limb: { readonly gravity?: Cited; readonly limb?: { readonly none: string } } = options.gravity ? { gravity: citedGravity(options.gravity) }
+    : { limb: { none: options.unusableGravity ? `no mass is measured, and ${options.unusableGravity}`
+      : `no mass is measured and no spectroscopic surface gravity is published with this radius: ${MCDONALD.credit} assume the gravity of their fit (table column 15)` } };
   const at = `${MCDONALD.credit}, table 2, ${hip}`, parsecs = row.parsecs, width = sunWidth(row.radius), luminosity = row.luminosity >= 10 ? Math.round(row.luminosity).toLocaleString('en-US') : String(row.luminosity);
   return {
     id, name, system: `${name} system`, parent: 'milky-way', target: hip,
@@ -91,7 +107,7 @@ export function draftFromMcDonald(row: ReturnType<typeof parseMcDonaldRow>, iden
       position: { catalogue: XHIP.catalogue, row: { HIP: row.hip }, credit: XHIP.credit, url: XHIP.url, motion: { epoch: 1991.25, ra: 'pmRA', dec: 'pmDE' } },
       radialVelocity: { value: options.velocity!.velocity, ...(options.velocity!.error === undefined ? {} : { uncertainty: options.velocity!.error }), source: `${XHIP.credit}, ${hip}: RV ${options.velocity!.velocity}${options.velocity!.error === undefined ? '' : ` +/- ${options.velocity!.error}`} km/s${options.velocity!.quality ? ` (quality ${options.velocity!.quality})` : ''}`, url: XHIP.url },
     }),
-    limb: { none: `no mass is measured and no spectroscopic surface gravity is published with this radius: ${MCDONALD.credit} assume the gravity of their fit (table column 15)` },
+    ...limb,
     // The reader text is the table row in words, cited to it; nothing the row does not hold.
     text: { card: `A star ${parsecs.toFixed(0)} parsecs away, ${width}, measured from its light.`,
       introduction: `Its brightness, measured band by band, gives ${luminosity} times the Sun's luminosity at ${row.teff.toLocaleString('en-US')} K, so ${row.radius} solar radii.`,
@@ -119,14 +135,17 @@ export async function draftsFromHipparcos(names: readonly string[], archive: Arc
   for (const hip of names.map(value => value.replace(/^HIP\s*/iu, '').trim())) {
     if (!/^\d{1,6}$/u.test(hip)) throw new Error(`${MCDONALD.credit} is read by HIP number, not ${hip}.`);
     const row = parseMcDonaldRow(await archive.text(VIZIER_ASU, { '-source': MCDONALD.source, HIP: `=${hip}`, '-out': COLUMNS.join(','), '-out.max': '5' }), hip);
-    requireOneStar(hip, String(csv(await archive.text(SIMBAD_TAP, adql(`SELECT b.otype FROM ident AS n JOIN basic AS b ON b.oid = n.oidref WHERE n.id = 'HIP ${hip}'`)))[0]?.otype ?? ''));
+    const simbad = parseSimbadStar(await archive.text(SIMBAD_TAP, adql(`SELECT b.otype, b.ra, b.dec FROM ident AS n JOIN basic AS b ON b.oid = n.oidref WHERE n.id = 'HIP ${hip}'`)), hip);
+    requireOneStar(hip, simbad.mainType);
     const identifiers = await simbadIdentifiers(archive, `HIP ${hip}`), gaia = identifiers.some(id => /^Gaia DR3 \d+$/u.test(id.replace(/\s+/gu, ' ')));
     const velocity = gaia ? undefined : parseXhipVelocity(await archive.text(VIZIER_ASU, { '-source': XHIP.catalogue, HIP: `=${hip}`, '-out': 'HIP,RV,e_RV,q_RV', '-out.max': '5' }), hip);
-    const name = preferredName(identifiers, lookup), star = draftFromMcDonald(row, identifiers, { name, gaia, ...(velocity ? { velocity } : {}), taken });
+    let unusable: string | undefined;
+    const gravity = await chooseGravity({ archive, ra: simbad.ra, dec: simbad.dec, teffK: row.teff, where: `HIP ${hip}`, radiusSolar: row.radius, contradicted: sentence => { unusable = sentence; } });
+    const name = preferredName(identifiers, lookup), star = draftFromMcDonald(row, identifiers, { name, gaia, ...(velocity ? { velocity } : {}), gravity, ...(unusable ? { unusableGravity: unusable } : {}), taken });
     const quotes = await starQuotes(archive, identifiers, star.name, name?.step === 'iau' ? [name.identifier] : []);
     stars.push(quotes ? { ...star, text: { ...star.text, quotes } } : star);
     drafted.add(star.id);
-    report.push(`HIP ${hip}: drafted as ${star.name} (${star.id}) from ${MCDONALD.credit}; placed ${gaia ? 'by Gaia DR3' : 'on its XHIP row'} at the paper's distance${quotes ? `; quotes ${quotes.title}` : '; no Wikipedia quotes'}.`);
+    report.push(`HIP ${hip}: drafted as ${star.name} (${star.id}) from ${MCDONALD.credit}; placed ${gaia ? 'by Gaia DR3' : 'on its XHIP row'} at the paper's distance; ${gravity ? gravity.sentence : `${unusable ?? 'no spectroscopic gravity is published'}, so no limb law`}${quotes ? `; quotes ${quotes.title}` : '; no Wikipedia quotes'}.`);
   }
   return { stars, report };
 }

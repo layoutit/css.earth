@@ -5,3 +5,4 @@ export * from './project-root.js';
 export * from './root-discovery.js';
 export * from './path-containment.js';
 export * from './parent-process.js';
+export * from './script-test-files.js';

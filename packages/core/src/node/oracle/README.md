@@ -122,3 +122,5 @@ at the pinned commit, so it needs network access.
   dataset and a pinned conda environment file.
 - ISIS `photomet` on cubes, for normalization grids beyond the unit-test
   geometries. It needs an ISIS install through conda.
+
+Input owners explicitly install their resolver setup before comparing fixtures. The core reader requires exactly one owner per input and reports absent restored inputs through `MissingSourceInputError`. Generator and setup commands come from the `oracleManifest` declared in each owning package’s metadata.

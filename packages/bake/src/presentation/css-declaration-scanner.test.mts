@@ -51,7 +51,7 @@ test('each adapter keeps its own name policy over the shared fragments', () => {
     variants: [{ writes: [{ kind: 'texture' as const, target: 0, name: '--page-0', resource: 'page:normal:0', quoted: true }] }],
     textureLevels: { hysteresis: 0.2, levels: [{ minimumDiameter: 0, resources: { 'page:normal:0': 'sheet' }, tiles: { 'page:normal:0': { x: 168, y: 0, scale: 7 } } }, { minimumDiameter: 230, resources: { 'page:normal:0': 'page' } }] },
     tree: { nodes: [{ parent: -1, style: '', properties: [0, 1, 2, 3] },
-      { parent: 0, style: 'Background-Size:9px;broken;background-position:calc(-1px * var(--page-0-x, 0) - 1px) calc(-1px * var(--page-0-y, 0) - 2px);background-size:calc(168px * var(--page-0-scale, 1)) auto', properties: [] }],
+      { parent: 0, style: 'Background-Size:9px;broken;background-sizeX;:empty;background-position:calc(-1px * var(--page-0-x, 0) - 1px) calc(-1px * var(--page-0-y, 0) - 2px);background-size:calc(168px * var(--page-0-scale, 1)) auto', properties: [] }],
     properties, textureBindings: [{ target: 0, name: '--page-0', leaves: [1] }] } });
-  assert.equal(tiled.tree.nodes[1]!.style, 'Background-Size:9px;broken;');
+  assert.equal(tiled.tree.nodes[1]!.style, 'Background-Size:9px;broken;:empty;');
 });

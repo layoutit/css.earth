@@ -31,6 +31,16 @@
         "https://cdsarc.cds.unistra.fr/ftp/III/202/catalog.dat",
         "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=1284537517514584704&FORMAT=csv&DATA_STRUCTURE=RAW&RELEASE=Gaia+DR3"
       ]
+    },
+    {
+      "id": "limb-darkening",
+      "subject": "Limb darkening",
+      "status": "included",
+      "finding": "The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 4,350 K and log g 1.8 (u1 0.819, u2 0.002): a model, because no fit of this star's limb is used. Gravity: log g 1.8 from 2024A&A...682A.145S; the 10 published values span log g 1.2 to 2.3, across which the limb law changes by at most 0.2% of the centre brightness.",
+      "evidence": [
+        "https://vizier.cds.unistra.fr/viz-bin/asu-tsv",
+        "https://ui.adsabs.harvard.edu/abs/2024A%26A...682A.145S"
+      ]
     }
   ]
 }

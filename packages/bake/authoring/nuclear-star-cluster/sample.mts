@@ -1,3 +1,4 @@
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 // Entry script: node packages/bake/authoring/nuclear-star-cluster/sample.mts [central.tsv]
 /**
  * The Milky Way's nuclear star cluster sample: the stars of the GALACTICNUCLEUS survey (Nogueras-Lara et al. 2019, A&A
@@ -28,7 +29,7 @@ import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { gzipSync } from 'node:zlib';
 
-const repository = resolve(import.meta.dirname, '../../../..');
+const repository = checkoutProjectRoot(import.meta.url);
 const inputPath = resolve(process.argv[2] ?? resolve(repository, 'output/sgr/gns6.tsv'));
 const outputPath = resolve(repository, 'src/objects/nuclear-star-cluster/source/dots/sample.csv.gz');
 const CENTRE_RA_DEG = 266.4168166, CENTRE_DEC_DEG = -29.0078250, DISTANCE_PC = 8277, HALF_LIGHT_PC = 5.1, AXIS_RATIO = 0.71;
