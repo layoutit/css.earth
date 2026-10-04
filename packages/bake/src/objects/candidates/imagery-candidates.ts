@@ -1,4 +1,3 @@
-import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 /** Before wiring or re-registering a photograph dataset, find whether a public archive holds finer frames than the body ships
  * (`packages/bake/cli/imagery-candidates.mts` prints what these find).
  *
@@ -12,6 +11,7 @@ import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
  * resolution among images is set against the finest imagery the body already ships: a photograph dataset's finest cast frame, or a
  * natural-color or monochrome map dataset's native scale (their prepared reports).
  * The verdict is advisory: finer frames still need a camera, registration and reuse terms before they can ship. */
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { requireArray, requireRecord } from '@cssearth/core';

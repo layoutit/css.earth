@@ -1,4 +1,3 @@
-import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 /**
  * Earth's limb law measured from DSCOVR EPIC Level 1B frames: one Minnaert coefficient per color channel (680, 551
  * and 443 nm), fitted to the whole sunlit disc as EPIC sees it from L1, clouds and atmosphere included. Each frame's
@@ -15,6 +14,7 @@ import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
  * Prints each frame's fit; --write stores the three model records under src/objects/earth/source/photometry/ and the
  * per-bin evidence under src/objects/earth/evidence/epic-limb-fit.json.
  */
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 import * as h5 from 'h5wasm/node';
 import { writeFile, mkdir } from 'node:fs/promises';
 import { basename, resolve } from 'node:path';

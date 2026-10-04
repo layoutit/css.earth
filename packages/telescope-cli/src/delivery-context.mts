@@ -1,12 +1,10 @@
 /** One validated source context follows a telescope product through every derived artifact. */
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { parseAcceptedAssumptions } from '@cssearth/objects';
-import { inputWavelengths } from './recipe-request.mts';
-import { PRODUCT_KINDS, REQUESTED_RESULTS, type CapabilityRequest } from './recipe-request.mts';
+import { parseAcceptedAssumptions, jsonValue, parseRegion, type Json } from '@cssearth/objects';
+import { inputWavelengths, PRODUCT_KINDS, REQUESTED_RESULTS, type CapabilityRequest } from './recipe-request.mts';
 import type { ConstraintVerdict } from './query-contract.mts';
 import type { RequestSatisfaction } from './request-satisfaction.mts';
 import { parseLimits } from '@cssearth/telescope/node';
-import { jsonValue, parseRegion, type Json } from '@cssearth/objects';
 
 export interface ExplorationReference {
   readonly schema: 'cssearth-telescope-exploration@1';

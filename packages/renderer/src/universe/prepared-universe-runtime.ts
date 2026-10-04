@@ -1,7 +1,6 @@
 import { parsePreparedWorldContextPlan, validatePreparedCssVolume, DEFAULT_POINT_VISIBILITY, type PreparedWorldContext, type PreparedWorldCameraFrame, type PreparedAssets, type PreparedCssSurfaceShell, type DensityVolumeFrame } from '@cssearth/objects';
-import { type WorldCameraPose } from '@cssearth/engine';
+import { type WorldCameraPose, createSceneLifetime, eyeDistanceM } from '@cssearth/engine';
 
-import { createSceneLifetime, eyeDistanceM } from '@cssearth/engine';
 import type { LabelScreenRect } from '../labels/screen-label-layout.js';
 import { mountBackgroundPoints } from './background-points.js';
 import { UNHIGHLIGHTED_OPACITY } from './context-presentation-policy.js';

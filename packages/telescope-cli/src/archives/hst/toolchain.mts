@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-import { readToolchainDescriptor } from '../toolchain-descriptor.mts';
 /** Install and locate the pinned HST calibration environment of toolchain.json under output/toolchains/hst (ignored by git).
  *
  *   node packages/telescope-cli/src/archives/hst/toolchain.mts install
@@ -12,6 +11,7 @@ import { readToolchainDescriptor } from '../toolchain-descriptor.mts';
  *
  * Reference files are not part of the environment: CRDS fetches the ones a pinned context selects into the cache under this
  * root the first time a calibration runs (calibrate.mts). */
+import { readToolchainDescriptor } from '../toolchain-descriptor.mts';
 import { spawnSync } from 'node:child_process';
 import { assertInstalledMarker, runToolchainProcess, WORKSPACE, writeInstalledMarker } from '@cssearth/telescope/node';
 import { access, mkdir, rm } from 'node:fs/promises';

@@ -2,8 +2,7 @@ import { fixtureRecord } from '@cssearth/objects/node/contract';
 import assert from 'node:assert/strict';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 import { readFile } from 'node:fs/promises';
-import { parseTerrestrialProfile } from '@cssearth/bake/objects/layers/terrestrial';
-import { alternativeForDataset, radialModelForDataset } from '@cssearth/bake/objects/layers/terrestrial';
+import { parseTerrestrialProfile, alternativeForDataset, radialModelForDataset } from '@cssearth/bake/objects/layers/terrestrial';
 const test = sourceTest();
 const read = async (id: string) => JSON.parse(await readFile(new URL(`../../../../../../src/objects/${id}/source/preparation/terrestrial.json`,import.meta.url), 'utf8'));
 test('authored scientific body profiles dispatch without body-named executable recipes',async()=>{

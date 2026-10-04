@@ -1,4 +1,3 @@
-import { cross3 as cross } from '@cssearth/core';
 /**
  * Epoch refinement of a push-frame image against the retained mesh.
  *
@@ -10,6 +9,7 @@ import { cross3 as cross } from '@cssearth/core';
  * keep their source values. Edge points are split into a fit and a holdout partition, and the holdout residual and both
  * offsets must stay within the recipe's budget. The limb measurement itself is limb-refinement.mts's.
  */
+import { cross3 as cross } from '@cssearth/core';
 import type { SourceMesh } from '../../../geometry/index.ts';
 import { limbResidual, limbThreshold, observedLimb, type LimbCamera, type LimbEdgePoint, type LimbImage, type LimbPixelMapping, type Residual } from './limb-refinement.ts';
 

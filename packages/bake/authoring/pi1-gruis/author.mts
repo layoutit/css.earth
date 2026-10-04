@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 /** π¹ Gruis authored inputs: the uniform-disc reference sphere from the retained measurements, the beam-convolved
  * reconstruction from the pinned SQUEEZE image, and the navigation marker rendered from it. The visibilities need no merge:
  * the pinned VLTI/PIONIER file is the image-ready file its authors published in the JMMC OiDB, and SQUEEZE read it as is.
@@ -7,12 +6,12 @@ import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
  *   node packages/bake/authoring/pi1-gruis/author.mts [--check]
  *
  * --check recomputes every output and fails if any differs from the file on disk. */
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { runAuthor } from '../authored-output.mts';
 import { pathToFileURL } from 'node:url';
-import { convolveGaussian, readReconstruction, writeReconstruction } from '@cssearth/bake/objects/layers/observation';
-import { readChannelRows } from '@cssearth/bake/objects/layers/observation';
+import { convolveGaussian, readReconstruction, writeReconstruction, readChannelRows } from '@cssearth/bake/objects/layers/observation';
 import { requireArray, requireRecord, requireFiniteNumber, requireString } from '@cssearth/core';
 import { authorUniformDiscSphere, contextMarker } from '../betelgeuse/author.mts';
 

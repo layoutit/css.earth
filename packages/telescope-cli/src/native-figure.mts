@@ -2,8 +2,7 @@
 import { mkdir,readFile,writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { execFileSync } from 'node:child_process';
-import { pdsPackages } from '@cssearth/telescope/node';
-import { astroqueryToolchain } from '@cssearth/telescope/node';
+import { pdsPackages, astroqueryToolchain } from '@cssearth/telescope/node';
 import { decodeIsis3Core } from '@cssearth/bake/objects/raster';
 import { isisMetadata,pdsMetadata } from './native-metadata.mts';
 import { requireRecord,requireArray,requireString } from '@cssearth/core';

@@ -1,10 +1,9 @@
-import { parseLabModelJson } from '../../resources/model-paths.ts';
 /** Research-only CLI; the restricted third-party software must be obtained separately by its user. */
+import { parseLabModelJson } from '../../resources/model-paths.ts';
 import { spawn } from 'node:child_process';
 import { createWriteStream } from 'node:fs';
-import { readFile } from 'node:fs/promises';
+import { readFile, access, constants } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
-import { access, constants } from 'node:fs/promises';
 import { prepareGetSfBenchmark, type GetSfInput } from '../../server/workflows/density/getsf.ts';
 import { collectGetSfBenchmark } from '../../server/workflows/density/getsf-collect.ts';
 

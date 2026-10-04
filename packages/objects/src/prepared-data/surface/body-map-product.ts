@@ -1,4 +1,3 @@
-import { canonical, requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 /** What a map of a measurement on a body means, carried beside the map.
  *
  * Three telescopes already put a measurement on a body through the same projection (jwst/cubes/body-map.mts): a JWST band
@@ -19,6 +18,7 @@ import { canonical, requireArray, requireFiniteNumber, requireRecord, requireStr
  * body, frame and grid, and only under a stated policy for the two things that legitimately differ between observations:
  * time and resolution. A heat snapshot is never averaged with a band depth, and two snapshots of a changing quantity are
  * never averaged as if they were one without the caller saying so. */
+import { canonical, requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { parseResolutionEvidence, type ResolutionEvidence } from './resolution-evidence.js';
 
 export const BODY_MAP_SCHEMA = 'cssearth-body-map@1';

@@ -1,5 +1,5 @@
-import { CSS_COMPILER_RENDER_BUDGET, validatePreparedCssVolume } from '@cssearth/objects';
 /** Concrete cssEarth representation and point-profile backend; numerical replay stays package-owned. */
+import { CSS_COMPILER_RENDER_BUDGET, validatePreparedCssVolume } from '@cssearth/objects';
 import { compileCssVolume } from '../volume-leaves/index.ts';
 import type { CompilerBakeBackend } from '../volume/node/index.ts';
 

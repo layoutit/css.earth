@@ -2,9 +2,8 @@
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { resolve, relative } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { OBJECT_SCHEMA, PREPARED_OBJECT_SCHEMA, VOLUME_RECIPE_SCHEMA, DENSITY_VOLUME_FORMAT, parseDensityVolumeObjectDescriptor, type Vector3 } from '@cssearth/objects';
+import { OBJECT_SCHEMA, PREPARED_OBJECT_SCHEMA, VOLUME_RECIPE_SCHEMA, DENSITY_VOLUME_FORMAT, parseDensityVolumeObjectDescriptor, type Vector3, type VolumeRecipe } from '@cssearth/objects';
 import { cataloguePosition, METERS_PER_KPC } from '@cssearth/bake/volume';
-import { type VolumeRecipe } from '@cssearth/objects';
 import { planFullDensityGrid } from '@cssearth/nebula-reconstruction/stars/full-density';
 import { sourceBytes, prepareVolumeSlices } from '@cssearth/bake/volume/node';
 import { convertParticlesToDensityVolume } from '../../server/workflows/stars/particles.ts';

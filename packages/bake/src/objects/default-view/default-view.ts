@@ -5,8 +5,7 @@
  * through `captureWorldCamera`. From the pose: the sub-camera point on the body, and where the body's pole and the
  * celestial directions land on screen. A preparation check uses it to refuse a default view that misses the dataset's
  * sub-observer point; a test pins the numbers the browser was measured to show. */
-import { preparedScenePitch } from '@cssearth/engine';
-import { worldCameraFromPresentation } from '@cssearth/engine';
+import { preparedScenePitch, worldCameraFromPresentation } from '@cssearth/engine';
 import type { SolarGeometry } from '../scene/index.ts';
 
 const DEGREE = Math.PI / 180;

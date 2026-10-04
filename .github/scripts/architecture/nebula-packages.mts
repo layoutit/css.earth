@@ -1,6 +1,6 @@
-import { isRecord as coreIsRecord } from '@cssearth/core';
 /** Enforce the internal nebula dependency graph against actual source imports. The architecture check runs it as its
  * `nebula-boundaries` rule (`rules.mts`), with the inbound closure in `nebula-inbound.mts`. */
+import { isRecord as coreIsRecord } from '@cssearth/core';
 import { readFileSync, readdirSync, existsSync } from 'node:fs';
 import { dirname, resolve, relative, extname } from 'node:path';
 import ts from 'typescript';

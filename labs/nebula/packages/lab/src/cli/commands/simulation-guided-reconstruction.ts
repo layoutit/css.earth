@@ -1,6 +1,6 @@
+/** Offline conditional emission experiment; originals and baseline remain immutable. */
 import { OBJECT_SCHEMA, PREPARED_OBJECT_SCHEMA, CLOUD_PARTS_SCHEMA, SIMULATION_ENVELOPE_SCHEMA, validateEnvelopeSettings, DENSITY_VOLUME_FORMAT, type Vector3, type SkyBounds, type EmissionBounds } from '@cssearth/objects';
 import { collectArtifacts } from '../../server/workflows/density/io.ts';
-/** Offline conditional emission experiment; originals and baseline remain immutable. */
 import {readFile,writeFile,mkdir,cp,rename} from 'node:fs/promises';
 import {resolve,relative,basename} from 'node:path';
 import sharp from 'sharp';

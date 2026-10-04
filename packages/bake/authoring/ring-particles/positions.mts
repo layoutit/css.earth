@@ -1,4 +1,3 @@
-import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 /**
  * Dots across a planet's rings, their density taken from the planet's measured ring profile.
  *
@@ -15,6 +14,7 @@ import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
  *
  * Usage: node packages/bake/authoring/ring-particles/positions.mts <host id> [dots]
  */
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { gzipSync } from 'node:zlib';

@@ -1,5 +1,5 @@
-import { requireFiniteTriple as triple } from '@cssearth/core';
 /** Offline RGBA volume acquisition, checked against its recorded length, and deterministic encoded-field reduction. */
+import { requireFiniteTriple as triple, requireRecord as record, requireFiniteNumber as finite } from '@cssearth/core';
 import { mkdir, readFile, writeFile, rename, rm } from 'node:fs/promises';
 import { createWriteStream } from 'node:fs';
 import { Readable, Transform } from 'node:stream';
@@ -7,9 +7,7 @@ import { pipeline } from 'node:stream/promises';
 import { dirname, resolve } from 'node:path';
 import { zstdCompressSync, constants } from 'node:zlib';
 import { containedPath, sourceBytes, urlCachePath, type DecodedGrid } from '../volume/node/index.ts';
-import { type VolumeRecipe } from '@cssearth/objects';
-import { type Vector3 } from '@cssearth/objects';
-import { requireRecord as record, requireFiniteNumber as finite } from '@cssearth/core';
+import { type VolumeRecipe, type Vector3 } from '@cssearth/objects';
 
 export interface VolumeAcquisition {
   schema: 'cssearth-raw-volume-acquisition@1';

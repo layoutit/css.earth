@@ -1,5 +1,8 @@
 /** Runtime checks for values that arrive from outside the type system: JSON files, prepared payloads, archive records
- * and command-line input. No dependencies and no host globals, so browser bundles and Node tools share one copy. */
+ * and command-line input. No dependencies and no host globals, so browser bundles and Node tools share one copy.
+ * Accepted public validation policies: text emptiness, positivity and safe integers are independent API choices,
+ * even when a checkout has no production caller; caller-local aliases retain domain vocabulary and diagnostics.
+ * Remove a policy only through a public API change, or replace an alias when its owning reader is migrated. */
 
 /** Reports a failed check. The message names the value and has no closing full stop. */
 export type Fail = (message: string) => never;

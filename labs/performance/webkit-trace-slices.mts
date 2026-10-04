@@ -1,5 +1,5 @@
-import { paintClues, paintTraceEvents } from './webkit-paint-clues.mts';
 /** Semantic navigation windows and exclusive cost pivots for every exported iPad trace. */
+import { paintClues, paintTraceEvents } from './webkit-paint-clues.mts';
 import { mkdir, readFile, rename, writeFile } from 'node:fs/promises';
 import { basename, resolve } from 'node:path';
 import { isRecord, requireArray, requireRecord } from '@cssearth/core';

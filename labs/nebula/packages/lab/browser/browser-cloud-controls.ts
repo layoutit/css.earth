@@ -1,6 +1,6 @@
+/** Focused real-browser checks of retained prepared cloud parts and display attenuation. */
 import { gestureCamera } from './browser-camera.ts';
 import { chooseLabObject } from './browser-object-picker.ts';
-/** Focused real-browser checks of retained prepared cloud parts and display attenuation. */
 import assert from 'node:assert/strict';
 import { mkdir, writeFile } from 'node:fs/promises';
 import { chromium } from 'playwright';

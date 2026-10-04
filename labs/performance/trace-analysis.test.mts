@@ -147,5 +147,3 @@ test('source attribution reads the supplied bundle and refuses symlink escapes',
     assert.match(unavailable, /leaves supplied build/);
   } finally { await rm(root, { recursive: true, force: true }); }
 });
-
-

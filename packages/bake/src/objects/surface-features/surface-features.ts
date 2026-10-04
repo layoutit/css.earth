@@ -1,4 +1,4 @@
-import { readNonArrayRecord, readNonblankText, readFiniteNumber } from '@cssearth/core';
+import { readNonArrayRecord, readNonblankText, readFiniteNumber, dot3 as dot } from '@cssearth/core';
 import { featureDiscoveryZoomShare, normalizeSearchText } from './catalog.ts';
 import { PREPARED_FEATURES_SCHEMA, type PreparedFeaturesDescriptor, PREPARED_SURFACE_FEATURES_SCHEMA, surfaceFeatureBankIndex, type SurfaceFeatureKind, type SurfaceFeatureOutline, type SurfaceFeatureAxes, type SurfaceFeaturePolicy, type PreparedSurfaceFeature, type PreparedSurfaceFeatureCatalog, type SurfaceFeatureCatalogDescriptor, type SurfaceFeatureSelectionPlan, type PreparedSurfaceFeaturePlan } from '@cssearth/objects';
 import type { Vector3 } from './catalog.ts';
@@ -12,7 +12,6 @@ import { loadNaturalEarthRows, parseNaturalEarthConfig, type NaturalEarthConfig 
 import { loadSiteRows, parseSurfaceSites, type SiteRow } from './sites.ts';
 import { prepareLandmarks } from './landmarks.ts';
 import { parseShpPolylines } from './shp.ts';
-import { dot3 as dot } from '@cssearth/core';
 /** Spacecraft sites are discovered past the whole-body view (which sits near 0.43 of the zoom range), once the camera closes in. */
 const SITE_ZOOM_SHARE = 0.6;
 

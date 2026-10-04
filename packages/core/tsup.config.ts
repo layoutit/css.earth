@@ -1,3 +1,6 @@
+/** Accepted output limit: tsup emits unexported CommonJS oracle tools containing ESM metadata, but all oracle
+ * consumers and commands use the ESM outputs only. Remove the unused CJS files when selective output generation
+ * can preserve the concrete configuration required by runtime-source discovery and CI build-input readers. */
 import { defineConfig } from 'tsup'
 import { copyFile, mkdir } from 'node:fs/promises'
 

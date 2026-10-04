@@ -17,10 +17,10 @@ export interface DisplayOrientation {
 export function parseAuthoredOrientation(value: unknown, { observed = false }: { observed?: boolean } = {}) {
   const source = requireRecord(value, 'Rotation source');
   const rightAscension = requireFiniteNumber(source.rightAscensionDegrees), declination = requireFiniteNumber(source.declinationDegrees), meridian = requireFiniteNumber(source.displayMeridianDegrees);
-  const periodHours = observed ? requireFiniteNumber(source.periodHours) : 0;
+  const periodHours = observed ? requireFiniteNumber(source.periodHours) : undefined;
   if ((!observed && source.schema !== DISPLAY_ORIENTATION_SCHEMA) || source.phase !== 'arbitrary-display-phase' ||
       ![rightAscension, declination, meridian].every(Number.isFinite) ||
-      (observed && (!Number.isFinite(periodHours) || periodHours <= 0)) ||
+      (periodHours !== undefined && (!Number.isFinite(periodHours) || periodHours <= 0)) ||
       (!observed && (typeof source.qualification !== 'string' || !source.qualification.trim())) ||
       Math.abs(declination) > 90) throw new TypeError('Invalid authored orientation source.');
   return { rightAscensionDegrees: rightAscension, declinationDegrees: declination, displayMeridianDegrees: meridian, periodHours };

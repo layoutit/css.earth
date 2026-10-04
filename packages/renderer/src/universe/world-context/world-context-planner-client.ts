@@ -1,6 +1,5 @@
-import { PREPARED_WORLD_CONTEXT_SUMMARY_SCHEMA } from '@cssearth/objects';
+import { PREPARED_WORLD_CONTEXT_SUMMARY_SCHEMA, parsePreparedWorldContextPlan, worldContextGeometry } from '@cssearth/objects';
 import type { PreparedWorldContext, PreparedWorldContextGeometry } from '@cssearth/objects';
-import { parsePreparedWorldContextPlan, worldContextGeometry } from '@cssearth/objects';
 import type { WorldContextView } from './world-context-planner.js';
 import type { WorldContextFrame } from './world-context-frame.js';
 import { packWorldBodies, WORLD_BODY_FIELDS, type PackedWorldContextView } from './world-context-view-transport.js';

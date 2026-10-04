@@ -1,3 +1,6 @@
+/** Accepted application preparation adapter: generated site catalogue and marker paths provide the host discovery
+ * records because this command prepares this checkout’s search UI. A second host must pass those records explicitly
+ * before this adapter is reused outside the site build. */
 import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 // `pnpm prepare:search-thumbnails`: small previews for search result rows, at
 // `public/navigation/search/<id>@2x.webp`: 40 CSS px at the one prepared density. Every scene object whose navigation

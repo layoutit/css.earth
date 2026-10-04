@@ -16,7 +16,7 @@ import { VERSION } from '../../help.mts';
 import { access, mkdir, readFile, writeFile } from 'node:fs/promises';
 import { basename, dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { addProductEvidence, writeProductRecord, WORKSPACE } from '@cssearth/telescope/node';
+import { addProductEvidence, writeProductRecord, WORKSPACE, astroqueryRows } from '@cssearth/telescope/node';
 import { productRecordPath } from '@cssearth/telescope';
 import { type ProductInput, type ProductRun, type ProductSoftware } from '@cssearth/objects';
 import { loadKernelSet, type KernelSet } from '@cssearth/spice/node';
@@ -25,7 +25,6 @@ import { numbers, utcToEt } from '@cssearth/spice';
 import { parsePdsRadiusTable } from '@cssearth/bake/objects/geometry';
 import { decodeJunocam, refinableStrips, type JunocamGeometry, refineStripEpochs, type StripRefinementPolicy } from '@cssearth/bake/objects/layers/terrestrial';
 import { PROGRAMS, readProgram, type JunocamProgram } from './archive.mts';
-import { astroqueryRows } from '@cssearth/telescope/node';
 import { flagValue, positionalArguments } from '@cssearth/core';
 
 export const RECEIPT_SCHEMA = 'cssearth-junocam-registration@1';

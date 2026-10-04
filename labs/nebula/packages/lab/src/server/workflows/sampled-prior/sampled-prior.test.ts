@@ -3,9 +3,8 @@ import { test } from 'node:test';
 import { decodeFits } from '@cssearth/fits';
 import { encodeFits } from '@cssearth/fits/node';
 import { analyticEmission, mapSample, prepareSampledField } from '@cssearth/bake/volume';
-import { type EmissionVector3 } from '@cssearth/objects';
+import { type EmissionVector3, verifySampledEvidence, type SampledRecipe, type SampleTerm } from '@cssearth/objects';
 import { readSampledRecipe } from '../../../features/sampled-prior/model.ts';
-import { verifySampledEvidence, type SampledRecipe, type SampleTerm } from '@cssearth/objects';
 
 const fixture = {
   schema: 'cssearth-sampled-nebula@2', id: 'qualified-example', centerIcrsDegrees: [80, 22],

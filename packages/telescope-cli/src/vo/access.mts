@@ -2,13 +2,11 @@
 import { basename, dirname, resolve } from 'node:path';
 import { mkdir, readFile, stat, writeFile, copyFile, rename, rm } from 'node:fs/promises';
 import { randomUUID } from 'node:crypto';
-import { fileSize, readProductRecord, sameRun, writeProductRecord } from '@cssearth/telescope/node';
+import { fileSize, readProductRecord, sameRun, writeProductRecord, astroquery, parseLimits, plainName, productKey, type TransferLimits } from '@cssearth/telescope/node';
 import type { ProductRun } from '@cssearth/objects';
-import { astroquery } from '@cssearth/telescope/node';
 import { requireRecord } from '@cssearth/core';
 import { extractVoPackage } from './package.mts';
 import { inspectVoFits, type VoContentProfile } from './content.mts';
-import { parseLimits, plainName, productKey, type TransferLimits } from '@cssearth/telescope/node';
 import { canonical, jsonValue, type DiscoverySnapshot, type Json, type MetadataResponse, type Pin, type Resource } from '@cssearth/objects';
 import type { DiscoveredObservation, DiscoveryRequest } from './discovery.mts';
 import { voUrl, type VoNetworkPolicy } from './network-policy.mts';

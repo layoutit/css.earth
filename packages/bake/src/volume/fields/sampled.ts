@@ -1,7 +1,5 @@
-import type { Cancellation } from '@cssearth/objects';
 /** Offline normalized splatting of qualified points; analytic components never reposition those samples. */
-import type { EmissionBounds, EmissionVector3 } from '@cssearth/objects';
-import type { SampledRecipe, SampleTerm, ComponentWeights } from '@cssearth/objects';
+import type { Cancellation, EmissionBounds, EmissionVector3, SampledRecipe, SampleTerm, ComponentWeights } from '@cssearth/objects';
 
 export interface SpatialField { bounds: EmissionBounds; sampleEmission(x: number, y: number, z: number, out: EmissionVector3): void }
 export function mapSample(m: readonly number[], x: number, y: number, z: number): EmissionVector3 {

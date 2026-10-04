@@ -1,4 +1,3 @@
-import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 // Entry script: node packages/bake/authoring/nuclear-star-cluster/sample.mts [central.tsv]
 /**
  * The Milky Way's nuclear star cluster sample: the stars of the GALACTICNUCLEUS survey (Nogueras-Lara et al. 2019, A&A
@@ -25,6 +24,7 @@ import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
  * - The sample ends at two half-light radii (5.1 pc at 8277 pc: Gallego-Cano et al. 2020; GRAVITY Collaboration 2022),
  *   where the cluster's share is down to about a tenth.
  */
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { gzipSync } from 'node:zlib';

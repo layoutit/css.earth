@@ -1,6 +1,6 @@
 import { type PreparedPresentationDefinition, type PreparedTree, type PreparedDepthOrder, type SurfacePoint, type SurfaceTriangle } from '@cssearth/objects';
 
-import { pathToFileURL } from 'node:url';
+import { pathToFileURL, fileURLToPath } from 'node:url';
 import { projectRoot } from '@cssearth/core/node';
 import assert from 'node:assert/strict';
 import { sourceTest } from '@cssearth/objects/node/source-test';
@@ -8,7 +8,6 @@ const test = sourceTest();
 import { partitionSurface, prepareDepthPartitions, restoreDepthSource } from '@cssearth/bake/prepared-presentation';
 import { prepareActivationGroups } from '@cssearth/bake/presentation';
 import { readFile } from 'node:fs/promises';
-import { fileURLToPath } from 'node:url';
 import { join } from 'node:path';
 import { requireObjectRuntimeDefinition } from '@cssearth/bake/contract';
 

@@ -17,10 +17,7 @@ interface ShapeContext {descriptor:AuthoredObjectDescriptor;sources:ReadonlyMap<
 import { createSourceManifest } from '@cssearth/objects/node';
 import { prepareSolidBodySurface } from '../../../scene/index.ts';
 import { SHAPE_MODEL_SCHEMA, prepareSolarSystemScene, prepareSolarSystemSunPresentation, type SolarGeometry } from '../../scene/index.ts';
-import { prepareCubicSky, prepareDirectionalSun } from '../../../presentation/index.ts';
-import { CUBIC_SKY_CAMERA_PRESENTATION_STANDARD } from '../../../presentation/index.ts';
-import { requirePreparedPresentation } from '../../../presentation/index.ts';
-import { createPreparedNodeTree, prepareCssomDeclarationReads } from '../../../presentation/index.ts';
+import { prepareCubicSky, prepareDirectionalSun, CUBIC_SKY_CAMERA_PRESENTATION_STANDARD, requirePreparedPresentation, createPreparedNodeTree, prepareCssomDeclarationReads } from '../../../presentation/index.ts';
 import { prepareCoplanarColorRaster, coplanarTileLayout } from '../material-composition/index.ts';
 
 const writeJson = (dir:string, name:string, data:unknown) => writeFile(resolve(dir, name + '.json'), JSON.stringify(data) + '\n');

@@ -1,9 +1,7 @@
-import { OBJECT_SCHEMA, PREPARED_OBJECT_SCHEMA, PREPARED_CSS_POINT_FIELD_MANIFEST_SCHEMA } from '@cssearth/objects';
+import { OBJECT_SCHEMA, PREPARED_OBJECT_SCHEMA, PREPARED_CSS_POINT_FIELD_MANIFEST_SCHEMA, parseDensityVolumeFrame, pointFieldBankRegions } from '@cssearth/objects';
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { dirname, relative, resolve } from 'node:path';
-import { parseDensityVolumeFrame } from '@cssearth/objects';
 import { packPreparedBinary } from '@cssearth/objects/node';
-import { pointFieldBankRegions } from '@cssearth/objects';
 import { M_PER_PC } from '@cssearth/astronomy';
 import { parseStarsRecipe } from './config.ts';
 import { requireRecord as record, requireNonemptyText as text } from '@cssearth/core';

@@ -1,4 +1,3 @@
-import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 /**
  * Oracle for the limb placement: place a raw GEOMED frame exactly as author-color-frames does (recorded pointing, limb fit,
  * no datum shift) and compare it with the controlled release's orthophoto of the same frame, which its authors placed by
@@ -17,6 +16,7 @@ import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
  *   mosaic's pixel, and the search reaches ±60 cells.
  * With --write, the report goes to the recipe's `output.oracle` path beside the placement report.
  */
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 import { mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { execFileSync } from 'node:child_process';
 import { tmpdir } from 'node:os';

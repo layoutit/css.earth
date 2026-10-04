@@ -1,6 +1,5 @@
 import { resolve } from 'node:path';
-import { readAuthoredSources } from '../../../sources/index.ts';
-import { readJsonSource } from '../../../sources/index.ts';
+import { readAuthoredSources, readJsonSource } from '../../../sources/index.ts';
 import { requireFiniteNumber } from '@cssearth/core';
 import { validateSourceManifest } from '@cssearth/objects/node';
 import { prepareDirectionalSun } from '../../../../presentation/index.ts';

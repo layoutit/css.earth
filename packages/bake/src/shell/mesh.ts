@@ -1,7 +1,6 @@
-import { requireFiniteTriple as triple } from '@cssearth/core';
 /** Offline mesh construction; runtime receives only retained transforms and source-derived normals. */
+import { requireFiniteTriple as triple, requireRecord as record, requireFiniteNumber as finite } from '@cssearth/core';
 import type { ShellRecipe } from './config.ts';
-import { requireRecord as record, requireFiniteNumber as finite } from '@cssearth/core';
 import { type Vector3 } from '@cssearth/objects';
 import { sourceBytes } from '../volume/node/index.ts';
 

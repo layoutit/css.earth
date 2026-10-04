@@ -1,4 +1,3 @@
-import type { EdgeOnReconstruction } from '@cssearth/objects';
 /** Research command: reconstruct the emission of an edge-on circumstellar disc in three dimensions from its images, with the
  * axially symmetric method of Wenger, Lorenz & Magnor (2013) (methods/symmetry/solver). The symmetry axis is the disc's normal,
  * so the voxels grouped together are those at one height above the midplane and one radius from the star.
@@ -12,6 +11,7 @@ import type { EdgeOnReconstruction } from '@cssearth/objects';
  * baker reads and the receipt `reconstruction-<dataset>.json`: the channel digest it was solved from, the method settings, the
  * projection error per channel and a depth check against extrusion. The author then uses that grid only while the digest
  * still matches the channels it displays. */
+import type { EdgeOnReconstruction } from '@cssearth/objects';
 import { CIRCUMSTELLAR_RECONSTRUCTION_SCHEMA } from '@cssearth/objects';
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';

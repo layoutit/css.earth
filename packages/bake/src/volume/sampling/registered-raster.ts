@@ -1,5 +1,4 @@
-import type { ObservationMapping } from '@cssearth/objects';
-import type { ObservationPhoto } from '@cssearth/objects';
+import type { ObservationMapping, ObservationPhoto } from '@cssearth/objects';
 export function registeredImageSampler(photo:ObservationPhoto,mapping:ObservationMapping) {
   return registeredRasterSampler(photo.width,photo.height,photo.rgb,3,mapping);
 }

@@ -1,6 +1,6 @@
+/** Local native-pixel analysis. This endpoint never replaces a source or prepares a cloud. */
 import { isRecord as coreIsRecord } from '@cssearth/core';
 import { resolveLabModelPath } from '../../resources/model-paths.ts';
-/** Local native-pixel analysis. This endpoint never replaces a source or prepares a cloud. */
 import { spawn } from 'node:child_process';
 import { mkdir, readFile, readdir, realpath, rename, rm, stat, writeFile } from 'node:fs/promises';
 import { dirname, isAbsolute, relative, resolve, sep } from 'node:path';

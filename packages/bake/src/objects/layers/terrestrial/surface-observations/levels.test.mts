@@ -1,14 +1,10 @@
 import { pathToFileURL } from 'node:url';
 import { projectRoot as findProjectRoot } from '@cssearth/core/node';
-import { fixtureRecord } from '@cssearth/objects/node/contract';
-import { required } from '@cssearth/objects/node/contract';
+import { fixtureRecord, required } from '@cssearth/objects/node/contract';
 import assert from 'node:assert/strict';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
-import { edgeWeights, finestOnSurface, fitObservationLevels, pixelOnSurface, selectObservation, sampleTrianglePoints } from '@cssearth/bake/objects/layers/terrestrial';
-import { validateSurfaceObservation, loadSurfaceObservation } from '@cssearth/bake/objects/layers/terrestrial';
-import { namedLevelRefusal } from '@cssearth/bake/objects/layers/terrestrial';
-import { observingSeasons } from '@cssearth/bake/objects/layers/terrestrial';
+import { edgeWeights, finestOnSurface, fitObservationLevels, pixelOnSurface, selectObservation, sampleTrianglePoints, validateSurfaceObservation, loadSurfaceObservation, namedLevelRefusal, observingSeasons } from '@cssearth/bake/objects/layers/terrestrial';
 import { createSourceManifest } from '@cssearth/objects/node';
 import { resolve } from 'node:path';
 import { readFile } from 'node:fs/promises';

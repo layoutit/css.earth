@@ -1,4 +1,3 @@
-import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 /** Report investigation decisions and missing ledgers from the same descriptors that generate OBJECTS, or with --facilities from
  * the facilities catalogue's ground telescopes and their ledgers under src/facilities.
  * Usage: node packages/bake/cli/report-investigations.mts [--facilities] [--classification=asteroid] [--status=deferred,unresolved] [--search=registration] [--summary] [--json]
@@ -7,6 +6,7 @@ import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
  * `--index` renders the open-work index: every unresolved or deferred decision grouped by what is being waited on, so the
  * next piece of work is chosen from the record instead of memory. `--write` refreshes the committed copy.
  */
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { resolve } from 'node:path';
 import {

@@ -1,8 +1,7 @@
 import {readFile,mkdir,writeFile} from 'node:fs/promises';
 import sharp from 'sharp';
 import {parsePdsRadiusTable} from '@cssearth/bake/objects/geometry';
-import {matrixCamera} from '@cssearth/bake/objects/layers/terrestrial';
-import {decodeNearMsi} from '@cssearth/bake/objects/layers/terrestrial';
+import { matrixCamera, decodeNearMsi } from '@cssearth/bake/objects/layers/terrestrial';
 import {requireRecord,requireArray,requireString,requireFiniteNumber} from '@cssearth/core';
 const root='src/objects/mathilde',source=`${root}/source`,out=`${root}/evidence/near-msi`;
 const body=requireRecord(JSON.parse(await readFile(`${root}/prepared/surfaces.json`,'utf8')));

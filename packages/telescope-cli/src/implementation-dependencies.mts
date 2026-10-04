@@ -121,4 +121,3 @@ export function followedWorkspaceSources(root: string): Plugin {
     });
   } };
 }
-

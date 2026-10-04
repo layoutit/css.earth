@@ -1,4 +1,3 @@
-import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 // Entry script: node packages/bake/authoring/milky-way/gaia-rr-lyrae-sample.mts [table5.dat.gz]
 /**
  * The Milky Way's Gaia RR Lyrae sample: the Gaia DR3 RR Lyrae stars Li et al. (2023, ApJ 944, 88, table 5) place beyond
@@ -20,6 +19,7 @@ import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
  * - The Galactic centre is the Milky Way's own: its volume frame's origin (`object.json` properties.volume.originM), where
  *   its drawing and the merge's `withinPcOfCentre` put it.
  */
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { gunzipSync, gzipSync } from 'node:zlib';
