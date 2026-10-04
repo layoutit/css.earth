@@ -93,12 +93,13 @@ export function vizierDataRows(tsv: string, source: string): Record<string, stri
 export const DECIMAL_POSITION = { ra: '_RAJ2000', dec: '_DEJ2000' } as const;
 
 /** The paper a VizieR catalogue holds the tables of, from the head of the catalogue's ReadMe: its title, its authors' surnames and
- * its bibcode ("=2011ApJ...743..176G"). VizieR's table metadata names the paper only for a catalogue of several tables. */
+ * its bibcode ("=2011ApJ...743..176G", sometimes followed by a remark). VizieR's table metadata names the paper only for a catalogue of
+ * several tables. */
 export interface VizierPaper { readonly bibcode: string; readonly title: string; readonly authors: readonly string[] }
 export const vizierReadMeUrl = (catalogue: string) => `https://cdsarc.cds.unistra.fr/ftp/${catalogue}/ReadMe`;
 export function parseVizierReadMe(text: string, catalogue: string): VizierPaper {
   const lines = text.split(/\r?\n/u), rule = (line: string) => /^={20,}\s*$/u.test(line), first = lines.findIndex(rule), second = lines.findIndex((line, index) => index > first && rule(line));
-  const head = first >= 0 && second > first ? lines.slice(first + 1, second) : [], bibcode = head.map(line => /^\s*=(\d{4}\S{15})\s*$/u.exec(line)?.[1]).find(Boolean);
+  const head = first >= 0 && second > first ? lines.slice(first + 1, second) : [], bibcode = head.map(line => /^\s*=(\d{4}\S{15})(?:\s|$)/u.exec(line)?.[1]).find(Boolean);
   const reference = head.findIndex(line => /^\s*</u.test(line)), firstAuthor = head.findIndex(line => /^ {4}\S/u.test(line));
   if (!bibcode || reference < 0 || firstAuthor < 0 || firstAuthor > reference) throw new Error(`${vizierReadMeUrl(catalogue)}: its head names no paper (title, authors, "<journal reference>", "=bibcode").`);
   // An author is a surname and initials ("Contreras Ramos R.", "Gerke J.R."); the surname is what a citation writes.

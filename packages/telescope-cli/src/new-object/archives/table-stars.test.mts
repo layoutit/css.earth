@@ -63,6 +63,8 @@ test('a VizieR answer\'s rows are read under its rule, and a catalogue\'s paper 
   assert.throws(() => vizierDataRows('#INFO\tError=Table or Catalog not found: t\t\n', 't'), /VizieR t: Table or Catalog not found/u);
   assert.deepEqual(parseVizierReadMe(gerkeReadMe, 'J/ApJ/743/176'), { bibcode: '2011ApJ...743..176G', title: 'A study of Cepheids in M81 with the Large Binocular Telescope (efficiently calibrated with Hubble Space Telescope).', authors: ['Gerke', 'Kochanek', 'Prieto', 'Stanek', 'Macri'] });
   assert.deepEqual(parseVizierReadMe(gerkeReadMe.replace('    Gerke J.R., Kochanek C.S., Prieto J.L., Stanek K.Z., Macri L.M.', '    Fiorentino G., Contreras Ramos R.,\n    van den Bergh S.'), 'x').authors, ['Fiorentino', 'Contreras Ramos', 'van den Bergh']);
+  // The bibcode line may carry a remark, and the authors may run over several lines.
+  assert.deepEqual(parseVizierReadMe(gerkeReadMe.replace('   =2011ApJ...743..176G', '   =2016ApJ...830...10H    (SIMBAD/NED BibCode)'), 'J/ApJ/830/10').bibcode, '2016ApJ...830...10H');
   assert.throws(() => parseVizierReadMe('no head', 'J/X/1/2'), /https:\/\/cdsarc\.cds\.unistra\.fr\/ftp\/J\/X\/1\/2\/ReadMe: its head names no paper/u);
   assert.deepEqual([catalogueOf(KANBUR), vizierReadMeUrl('J/A+A/411/361')], ['J/A+A/411/361', 'https://cdsarc.cds.unistra.fr/ftp/J/A+A/411/361/ReadMe']);
   assert.deepEqual(bibcodeReference('2012A&A...539A.138F'), { year: '2012', reference: 'A&A 539, A138' });
@@ -94,6 +96,9 @@ test('a request names a class, a galaxy, a table and the rows; each row drafted 
   const m95 = pickRows(kanbur, kanburColumns, parseTableRequest(`cepheid:m95=${KANBUR}`), ['M95', 'NGC 3351'], log, 68.464);
   assert.deepEqual([m95.named, m95.kept.length, m95.rows.map(row => row.key)], ['Cepheid', 2, [{ Galaxy: 'NGC3351', Cepheid: 'C1' }]]);
   assert.deepEqual(pickRows(kanbur, kanburColumns, parseTableRequest(`cepheid:m100=${KANBUR}`), ['M100', 'NGC 4321'], log, 68.464).rows.map(row => row.key), [{ Galaxy: 'NGC4321', Cepheid: 'C3' }], 'C2 pulsates in 76 d, beyond the relation');
+  // A star's name may be a number when the table's metadata says which column it is; no other numeric column is taken for one.
+  const numbered = [{ Gal: 'M101', ID: '115287', Per: '14.2' }, { Gal: 'M101', ID: '98012', Per: '66.095' }, { Gal: 'N4258', ID: '98012', Per: '9.1' }];
+  assert.deepEqual(pickRows(numbered, { identifier: 'ID', period: { column: 'Per', log: false }, position: true }, parseTableRequest('cepheid:m101=J/ApJ/830/10/table5'), ['M101'], period, 68.464).rows.map(row => row.key), [{ Gal: 'M101', ID: '98012' }]);
   // A table that names no star: the row is picked by its period, and by the cells after it when periods repeat.
   const unnamed = [{ Per: '6.777', Xpix: '755.48', Comm: '' }, { Per: '6.777', Xpix: '1179.80', Comm: '' }, { Per: '7.943', Xpix: '365.66', Comm: 'blend' }];
   assert.deepEqual(pickRows(unnamed, { period: { column: 'Per', log: false }, position: true }, request('#all'), ['M83'], period, 68.464).rows.map(row => row.key), [{ Per: '6.777', Xpix: '755.48' }, { Per: '6.777', Xpix: '1179.80' }, { Per: '7.943' }]);

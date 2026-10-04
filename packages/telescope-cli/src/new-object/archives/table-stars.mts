@@ -115,7 +115,9 @@ export function pickRows(rows: readonly Cells[], columns: StarColumns, request: 
   const filters: Cells = galaxyColumn ? { [galaxyColumn]: rows.find(cells => names.has(plain(cells[galaxyColumn] ?? '')))![galaxyColumn]! } : request.filters;
   const kept = rows.filter(cells => Object.entries(filters).every(([column, cell]) => cells[column] === cell));
   if (!kept.length) throw new Error(`${request.table}: no row has ${Object.entries(filters).map(([column, cell]) => `${column} = ${cell}`).join(', ')}; cells are compared as VizieR writes them.`);
-  const named = [columns.identifier, ...header].find((column): column is string => !!column && !(column in filters) && column !== columns.simbadName && unique(kept, column) && kept.every(cells => !Number.isFinite(Number(cells[column]))));
+  // The column the table's metadata calls the star's name may be a number (an ID); any other column names a row only by text.
+  const free = (column: string | undefined): column is string => !!column && !(column in filters) && column !== columns.simbadName && unique(kept, column);
+  const named = free(columns.identifier) ? columns.identifier : header.find(column => free(column) && kept.every(cells => !Number.isFinite(Number(cells[column]))));
   const keyOf = (cells: Cells): Cells => {
     const tried: Record<string, string> = { ...filters }, match = () => rows.filter(row => Object.entries(tried).every(([column, cell]) => row[column] === cell)).length;
     for (const column of [named, columns.period?.column, ...header].filter((candidate): candidate is string => !!candidate && cells[candidate] !== '')) {
