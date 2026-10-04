@@ -1,0 +1,46 @@
+{
+  "schema": "cssearth-published-phase-curve@1",
+  "source": "Crossfield et al. (2020), ApJL 903, L7, 'Phase Curves of Hot Neptune LTT 9779b Suggest a High-metallicity Atmosphere' (doi:10.3847/2041-8213/abbc71; arXiv:2010.12745). Spitzer IRAC 4.5 um phase curve, program GO-14290. Values read from the authors' LaTeX source: the table of fit and derived parameters and the table that compares the data with models, row 'Spitzer 4.5 um, data'. The model is one sinusoid (their phase-curve equation); the comparison table's notes define its amplitude as peak-to-valley and its offset as the eastward shift of the maximum from the substellar point. The day-side flux is the eclipse depth of Dragomir et al. (2020), which the fit holds fixed.",
+  "wavelengthMicrons": 4.5,
+  "radiusRatio": {
+    "value": 0.0452,
+    "cell": "0.0452 +/- 0.0017",
+    "where": "table of fit parameters, R_p/R_*, 4.5 um, this work"
+  },
+  "eclipseDepth": {
+    "value": 0.000375,
+    "cell": "375 +/- 62 ppm, F_P/F_* at phase 0.5, from Dragomir et al. (2020)",
+    "where": "comparison table, Spitzer 4.5 um, data, F_P/F_* at phi = 0.5"
+  },
+  "model": {
+    "kind": "amplitude-offset",
+    "equation": "f(phi) = 1 - A cos(phi - Delta phi), phi the orbital phase from transit; the tables print the peak-to-valley amplitude and the eastward shift of the maximum.",
+    "semiAmplitude": {
+      "value": 0.000179,
+      "cell": "358 +/- 106 ppm peak-to-valley (table note a): half of it is the semi-amplitude, 179 ppm",
+      "where": "comparison table, Spitzer 4.5 um, data, Amplitude"
+    },
+    "offsetDegreesEast": {
+      "value": -10,
+      "cell": "-10 +/- 21 degrees east of the substellar point: slightly west (table note)",
+      "where": "comparison table, Spitzer 4.5 um, data, Offset"
+    }
+  },
+  "reported": {
+    "daysideK": {
+      "value": 1800,
+      "cell": "1800 +/- 120 K, from Dragomir et al. (2020)",
+      "where": "table of derived parameters, T_day, 4.5 um"
+    },
+    "nightsideK": {
+      "value": 700,
+      "cell": "700 +/- 430 K (below 1350 K at 2 sigma)",
+      "where": "table of derived parameters, T_night, 4.5 um"
+    },
+    "offsetDegrees": {
+      "value": -10,
+      "cell": "-10 +/- 21 degrees east",
+      "where": "comparison table, Spitzer 4.5 um, data, Offset"
+    }
+  }
+}

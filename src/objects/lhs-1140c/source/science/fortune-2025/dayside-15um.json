@@ -1,0 +1,9 @@
+{
+  "schema": "cssearth-eclipse-depth@1",
+  "planet": "lhs-1140c",
+  "eclipseDepthPpm": {
+    "low": 230,
+    "high": 316
+  },
+  "source": "Fortune et al. (2025): three JWST MIRI F1500W eclipses of the Hot Rocks Survey. Eclipse depth 273 +/- 43 ppm, the aperture-extraction joint fit with a Gaussian process (the note of the table that compares surface and atmosphere models); the range is its one-sigma interval. The paper finds the day side in excellent agreement with a low-albedo bare rock. https://arxiv.org/abs/2505.22186"
+}

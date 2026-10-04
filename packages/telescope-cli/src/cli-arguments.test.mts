@@ -12,6 +12,8 @@ const cases = [
   { args: ['family-assess','request','descriptor','--out','out'], option: '--out', expected: { command:'family-assess', request:resolve('request'), descriptor:resolve('descriptor'), directory:resolve('out'), ...common } },
   { args: ['papers','input','--host','star'], option: '--host', expected: { command:'papers', target:'input', host:'star', ...common } },
   { args: ['simulations','input','--out','out'], option: '--out', expected: { command:'simulations', target:'input', directory:resolve('out'), ...common } },
+  { args: ['leads','input','--out','out'], option: '--out', expected: { command:'leads', target:'input', directory:resolve('out'), ...common } },
+  { args: ['leads','--class','exoplanet'], option: '--class', expected: { command:'leads', archiveClass:'exoplanet', ...common } },
   { args: ['candidates','input','--epoch','date','--out','out'], option: '--epoch', expected: { command:'candidates', system:'input', epoch:'date', directory:resolve('out'), fitAstrometry:false, fitOrbits:false, ...common } },
   { args: ['associate','input','--system','star','--out','out'], option: '--system', expected: { command:'associate', measurements:resolve('input'), system:'star', directory:resolve('out'), fitAstrometry:false, fitOrbits:false, ...common } },
   { args: ['import','input','--out','out'], option: '--out', expected: { command:'import', specification:resolve('input'), directory:resolve('out'), ...common } },
@@ -36,6 +38,11 @@ for (const { args, option, expected } of cases) {
     assert.deepEqual(parseCli([...args,'--help']), { command:'help' });
   });
 }
+
+test('leads takes one object or one class, never both and never neither', () => {
+  const usage = { name:'TypeError', message:'Use telescope leads OBJECT [--json] [--out DIRECTORY] or telescope leads --class CLASS [--json] [--out DIRECTORY].' };
+  for (const args of [['leads'], ['leads','input','--class','exoplanet'], ['leads','one','two']]) assert.throws(() => parseCli(args), usage);
+});
 
 test('selectors deliberately preserve lexical versus Number coercion policies', () => {
   for (const raw of ['1','01','+1','1.0','1e0','0x1',' 1 ']) {

@@ -169,6 +169,28 @@
           }
         ]
       }
+    },
+    {
+      "id": "lhs-3844b-temperature-phase-curve",
+      "path": "science/kreidberg-2019/phase-curve.json",
+      "origin": "https://arxiv.org/abs/1908.06834",
+      "credit": "Kreidberg et al. (2019); a Spitzer IRAC 4.5 µm phase curve (program 14204)",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "Transcribed from the paper, table cell by table cell, with each cell's location",
+      "redistribution": "Factual parameter transcription only; no paper figures",
+      "consumers": [
+        "temperature-phase-curve-map"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-lhs-3844b-temperature-phase-curve",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
@@ -185,7 +207,8 @@
         "generator": "packages/telescope-cli/src/source-authoring/context-markers.mts",
         "inputs": [
           "lhs-3844b-observational-measurements",
-          "lhs-3844b-preparation-raster"
+          "lhs-3844b-preparation-raster",
+          "lhs-3844b-temperature-phase-curve"
         ]
       },
       "generator": "packages/telescope-cli/src/source-authoring/context-markers.mts",

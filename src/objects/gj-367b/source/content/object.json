@@ -49,7 +49,7 @@
   },
   "datasets": {
     "titleKey": "datasets",
-    "defaultDataset": "shape",
+    "defaultDataset": "temperature",
     "controls": [
       {
         "id": "shape",
@@ -65,6 +65,66 @@
         },
         "falseColor": false,
         "notes": "No image or color of GJ 367 b is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the color of gj-367's light, as its color dataset measures it."
+      },
+      {
+        "id": "temperature",
+        "label": "Rock model",
+        "qualification": "A model set by one measurement: the 5–12 µm eclipse depth of Zhang et al. (2024), a JWST MIRI LRS phase curve of 12.7 hours with two eclipses (GO 2508)",
+        "thumbnail": "gj-367b-dataset-temperature.webp",
+        "surface": "gj-367b-surface-temperature@2x.webp",
+        "poles": "gj-367b-poles-temperature@2x.webp",
+        "source": {
+          "id": "gj-367b-temperature-eclipse-depth",
+          "path": "../manifest.json",
+          "url": "https://arxiv.org/abs/2401.01400"
+        },
+        "falseColor": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Brightness temperature",
+          "labels": [
+            "≤ 50",
+            "1075",
+            "2100"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                13,
+                8,
+                135
+              ],
+              [
+                126,
+                3,
+                168
+              ],
+              [
+                204,
+                71,
+                120
+              ],
+              [
+                248,
+                149,
+                64
+              ],
+              [
+                240,
+                249,
+                33
+              ]
+            ],
+            "labels": [
+              "≤ 50",
+              "1075",
+              "2100"
+            ]
+          },
+          "meta": "K",
+          "sourceUrl": "https://arxiv.org/abs/2401.01400"
+        },
+        "notes": "A model, not a map. Only GJ 367 b's dayside brightness is measured: an eclipse depth of 75 to 83 ppm at 5–12 µm (Zhang et al. (2024)), which the paper finds fully consistent with a zero-albedo planet with no heat recirculation: a dark, hot, airless sub-Earth. A bare rock with that depth is 1,930 to 2,052 K under the star and dark at night; whether the night side is dark is not measured. With shadows on, the star's light darkens the night half."
       }
     ]
   },

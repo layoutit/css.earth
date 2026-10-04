@@ -2,6 +2,7 @@
  * catalogue and surface color, the dataset control, the dataset text, the manifest entries, the acquisition steps and the marker
  * recipe. Shared by placed stars (generate.mts) and companion stars on hosted orbits (hosted.mts), which are the same dataset. */
 import { loadStellarPhotometricColor, type StellarColor } from '@cssearth/bake/objects/stellar';
+import { requireArray, requireRecord } from '@cssearth/core';
 import type { ColorChoice } from './color.mts';
 import type { LimbChoice } from './limb.mts';
 
@@ -9,6 +10,24 @@ export const json = (value: unknown) => `${JSON.stringify(value, null, 2)}\n`;
 const hex = (color: StellarColor) => `#${color.srgb.map(value => value.toString(16).padStart(2, '0')).join('')}`;
 
 export type PackageFiles = Map<string, string | Buffer>;
+
+/** Dataset kinds that draw one color, or the neutral shape, over the whole body: the last a body falls back to. */
+export const UNIFORM_DATASET_KINDS: ReadonlySet<string> = new Set(['neutral-shape', 'dayside-thermal-color', 'disc-integrated-band-color']);
+
+/** A body opens on the best dataset it has: a map of it, measured or simulated, before one color over the whole body
+ * (.agents/skills/celestial-skill/references/scientific-faithfulness.md). `dataset` becomes the package's default when its
+ * default draws one color or the neutral shape; a default that is already a map stays. Returns whether the default changed. */
+export function openOnMap(files: PackageFiles, id: string, dataset: string): boolean {
+  const s = `src/objects/${id}/source`, path = `${s}/content/object.json`;
+  const content = requireRecord(JSON.parse(String(files.get(path))), path), shown = requireRecord(content.datasets, `${path} datasets`);
+  const raster = requireRecord(JSON.parse(String(files.get(`${s}/preparation/raster.json`))), `${id} raster recipe`);
+  const current = requireArray(raster.surfaces, `${id} raster surfaces`).map(surface => requireRecord(surface, `${id} raster surface`)).find(surface => surface.id === shown.defaultDataset);
+  const kind = current === undefined ? undefined : requireRecord(current.science, `${id} default dataset`).kind;
+  if (typeof kind !== 'string' || !UNIFORM_DATASET_KINDS.has(kind)) return false;
+  shown.defaultDataset = dataset;
+  files.set(path, json(content));
+  return true;
+}
 
 /** Rewrite a scaffolded emissive package (its one `shape` dataset) into the color dataset. Returns the prepared color and the words
  * the rest of the package uses for it. */

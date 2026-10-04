@@ -1,0 +1,35 @@
+{
+  "id": "source-qatar-2b-temperature-phase-curve",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Qatar-2 b · qatar 2b temperature phase curve",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/2203.15059",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/qatar-2b/source/manifest.json",
+      "locator": "/inputs/6"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "May et al. (2022); a Spitzer IRAC 4.5 µm phase curve of 21-23 May 2017",
+      "scope": "The qatar 2b temperature phase curve input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "Factual numerical measurements; source attribution retained",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

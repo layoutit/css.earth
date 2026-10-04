@@ -1,0 +1,35 @@
+{
+  "id": "source-ltt-3780b-temperature-eclipse-depth",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "LTT 3780 b · ltt 3780b temperature eclipse depth",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/2508.14210",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/ltt-3780b/source/manifest.json",
+      "locator": "/inputs/8"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Allen et al. (2025); two JWST MIRI F1500W eclipses of the Hot Rocks Survey",
+      "scope": "The ltt 3780b temperature eclipse depth input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "Factual numerical measurement; source attribution retained",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

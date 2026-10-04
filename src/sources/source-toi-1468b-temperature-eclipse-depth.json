@@ -1,0 +1,35 @@
+{
+  "id": "source-toi-1468b-temperature-eclipse-depth",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "TOI-1468 b · toi 1468b temperature eclipse depth",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/2503.19772",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/toi-1468b/source/manifest.json",
+      "locator": "/inputs/8"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Meier Valdés et al. (2025); three JWST MIRI F1500W occultations of the Hot Rocks Survey",
+      "scope": "The toi 1468b temperature eclipse depth input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "Factual numerical measurement; source attribution retained",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

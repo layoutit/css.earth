@@ -17,6 +17,7 @@ Human entry points:
   telescope fetch EXPLORE.json --archive keck|gemini|opus|chandra|spitzer --pick N [--file NAME] --out DIRECTORY [--resume] [--json]
   telescope papers TARGET [--instrument NAME] [--host NAME] [--json] [--out DIRECTORY]
   telescope simulations TARGET [--json] [--out DIRECTORY]
+  telescope leads TARGET | --class CLASS [--json] [--out DIRECTORY]
   telescope new-object SPEC.json [--check] [--skip-existing] [--json]
   telescope new-object --from-archive HOST... | --from-debcat SYSTEM... | --from-apokasc KIC... | --from-cepheids NAME... | --from-k2 EPIC... | --from-tess TIC... | --from-gaia SOURCE_ID... | --from-hipparcos HIP... | --from-iau all|NAME... | --from-chara HD... | --from-npoi HD... | --from-sh0es HOST[/ID]... | --from-m31cepheids all|V1|ID... | --from-m33cepheids all|ID... --out SPEC.json
   telescope ascl SOFTWARE [--json]
@@ -55,7 +56,13 @@ It ranks open access first, tries one plain GET per open copy, marks browser cha
 HTML figure captions and table titles about maps or observation lists. Nothing is saved without --out.
 Simulations lists the Zenodo dataset records that name the target and speak of a simulation or a model, each with its
 license, size and files. It downloads nothing. A listed record is a lead: new-object --simulation adds one as a dataset from
-an entry written after reading its paper (packages/telescope-cli/src/new-object/simulation/simulation-dataset.mts).
+an entry written after reading its paper (packages/telescope-cli/src/new-object/simulation/simulation-dataset.mts), fetching
+by byte range only the header and the one grid it draws.
+Leads asks DataCite, which registers the DOIs of every data repository and of arXiv, for the records that name the target
+and speak of a measured phase curve or map, a measured eclipse, or a model: data releases at Zenodo, Dryad, Dataverse,
+universities, the CDS and MAST, and the papers themselves. --class exoplanet asks for every object of that class, ten a
+request, and ranks them with what each page opens on, the pages without a map first. A lead is read before anything is
+shown: new-object --phase-curve draws a paper's fitted table and new-object --simulation a released field.
 ASCL searches its live software catalog by title or matches the exact software names in a verified
 product receipt. It reports citable code entries and preferred citations when provided by ASCL.
 Only the receipt establishes what this run recorded as used; an ASCL match is a citation lead, not

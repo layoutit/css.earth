@@ -208,6 +208,28 @@
           }
         ]
       }
+    },
+    {
+      "id": "hd-149026b-temperature-phase-curve",
+      "path": "science/zhang-2018/phase-curve.json",
+      "origin": "https://arxiv.org/abs/1710.07642",
+      "credit": "Zhang et al. (2018); a Spitzer IRAC 4.5 µm phase curve of 8 April 2011",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "Transcribed from the paper, table cell by table cell, with each cell's location",
+      "redistribution": "Factual parameter transcription only; no paper figures",
+      "consumers": [
+        "temperature-phase-curve-map"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-hd-149026b-temperature-phase-curve",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
@@ -225,7 +247,8 @@
         "inputs": [
           "hd-149026b-observational-measurements",
           "hd-149026b-preparation-raster",
-          "hd-149026b-thermal-color"
+          "hd-149026b-thermal-color",
+          "hd-149026b-temperature-phase-curve"
         ]
       },
       "generator": "packages/telescope-cli/src/source-authoring/context-markers.mts",

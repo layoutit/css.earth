@@ -9,6 +9,24 @@
       ],
       "path": "illustration/TRAPPIST-1_d.jpg",
       "url": "https://eyes.nasa.gov/apps/exo/assets/image/exoplanet/TRAPPIST-1_d.jpg"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "science/turbet-2023/diagfi_T1d_1barN2_10barH2O.OLR-Time299.dat",
+      "url": "https://zenodo.org/records/5627945/files/diagfi_T1d_1barN2_10barH2O.nc?download=1"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "science/turbet-2023/diagfi_T1d_1barN2_10barH2O.head.dat",
+      "url": "https://zenodo.org/records/5627945/files/diagfi_T1d_1barN2_10barH2O.nc?download=1"
     }
   ]
 }

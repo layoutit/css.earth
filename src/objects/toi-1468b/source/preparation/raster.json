@@ -33,6 +33,52 @@
           "source": "the color dataset of toi-1468 (src/objects/toi-1468/source/photometry/stellar-color.json)"
         }
       }
+    },
+    {
+      "id": "temperature",
+      "output": "toi-1468b-surface-{id}{suffix}.webp",
+      "thumbnail": "toi-1468b-dataset-{id}.webp",
+      "source": "science/meier-valdes-2025/dayside-15um.json",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "temperature",
+        "label": "Rock model",
+        "format": "bare-rock-eclipse",
+        "path": "science/meier-valdes-2025/dayside-15um.json",
+        "sampling": "bilinear",
+        "units": "K",
+        "planet": "toi-1468b",
+        "host": "toi-1468",
+        "band": {
+          "encoding": "svo-filter",
+          "path": "science/svo/JWST_MIRI.F1500W.xml"
+        },
+        "star": {
+          "encoding": "svo-model-spectrum",
+          "path": "science/bt-settl-cifist/bt-settl-cifist-3400-5.0-0.0.xml"
+        },
+        "consumer": "toi-1468b-bare-rock-model",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "minimum": 50,
+        "maximum": 1300,
+        "colors": [
+          "#0d0887",
+          "#7e03a8",
+          "#cc4778",
+          "#f89540",
+          "#f0f921"
+        ],
+        "labels": [
+          "≤ 50",
+          "675",
+          "1300"
+        ],
+        "description": "A model, not a map: the temperature of a bare rock with no atmosphere to carry heat, set by the 15 µm eclipse depth Meier Valdés et al. (2025) measured: about 1,157 K under the star, nothing at night. Only the dayside brightness is measured.",
+        "title": "Bare-rock model · from Meier Valdés et al. (2025)'s eclipse depth",
+        "sourceUrl": "https://arxiv.org/abs/2503.19772"
+      }
     }
   ],
   "lighting": {

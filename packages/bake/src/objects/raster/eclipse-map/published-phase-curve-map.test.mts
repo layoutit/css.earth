@@ -256,6 +256,40 @@ test('GJ 1214b: Kempton et al. (2023)\'s terms, in the star\'s flux from eclipse
   } finally { await rm(directory, { recursive: true, force: true }); }
 });
 
+test('a printed semi-amplitude and offset east are a first-order sinusoid: Bell et al. (2021)\'s WASP-14b row gives its night side and its peak', async () => {
+  // Bell et al. (2021, MNRAS 504, 3316), the table of preferred SPCA models, WASP-14b (PLDAper1_3x3_v1, a first-order fit):
+  // Rp/R* 0.09561, Fp/F* 2327 ppm, semi-amplitude 843 ppm, max flux offset 12.4 degrees east, T_day 2401 K, T_night 1391 +56/-61 K.
+  const E = 2327e-6, A = 843e-6, east = 12.4;
+  const raw = { schema: 'cssearth-published-phase-curve@1', source: 'Bell et al. (2021), preferred SPCA models, WASP-14b', wavelengthMicrons: 4.5,
+    radiusRatio: tableCell(0.09561, 'Rp/R*'), eclipseDepth: tableCell(E, 'Fp/F*'),
+    model: { kind: 'amplitude-offset', semiAmplitude: tableCell(A, 'Semi-Amplitude'), offsetDegreesEast: tableCell(east, 'Max Flux Offset') },
+    reported: { daysideK: tableCell(2401, 'T_day'), nightsideK: tableCell(1391, 'T_night'), offsetDegrees: tableCell(east, 'Max Flux Offset') } };
+  const record = parsePublishedPhaseCurve(raw);
+  if (record.model.kind !== 'amplitude-offset') throw new TypeError('The row prints an amplitude and an offset.');
+  // Their section 4.1: the semi-amplitude is F_day sqrt(C1^2 + D1^2) and the offset east -atan2(D1, C1), so these C1 and D1 are the
+  // same curve in the eclipse-normalised form the reader already takes.
+  const phi = east * Math.PI / 180, normalised = sinusoidMap({ kind: 'eclipse-normalized-fourier', c1: A / E * Math.cos(phi), d1: -A / E * Math.sin(phi), c2: 0, d2: 0 }, E);
+  const { flux } = sinusoidMap(record.model, record.eclipseDepth);
+  for (const degrees of [-180, -90, -12.4, 0, 30, 90, 170]) { const xi = degrees * Math.PI / 180; assert.ok(Math.abs(flux(xi) - normalised.flux(xi)) < 1e-18, `${degrees} degrees`); }
+  assert.ok(Math.abs(flux(0) - E) < 1e-18, 'the planet shows its eclipse depth at mid-eclipse');
+  assert.ok(Math.abs((flux(-phi) - flux(Math.PI - phi)) / 2 - A) < 1e-18, 'half of maximum minus minimum is the printed semi-amplitude');
+  const directory = await mkdtemp(join(tmpdir(), 'wasp-14b-'));
+  try {
+    await writeFile(join(directory, 'phase-curve.json'), JSON.stringify(raw));
+    const loaded = await loadPublishedPhaseCurveMap(directory, { path: 'phase-curve.json' });
+    const { derived } = loaded.report as unknown as { derived: Record<string, number> };
+    assert.ok(Math.abs(derived.daysideK! - 2401) < 1e-3, `day side ${derived.daysideK}`);
+    // The night side is not an input: the printed 1391 +56/-61 K is recovered from the curve at mid-transit.
+    assert.ok(Math.abs(derived.nightsideK! - 1391) <= 56, `night side ${derived.nightsideK}`);
+    assert.ok(Math.abs(derived.peakDegreesBeforeEclipse! - east) < 0.01, `peak ${derived.peakDegreesBeforeEclipse}`);
+    // East of noon is hotter than west of it.
+    assert.ok(loaded.sample(east, 0)! > loaded.sample(-east, 0)!);
+  } finally { await rm(directory, { recursive: true, force: true }); }
+  const refused = (model: Record<string, unknown>, message: RegExp) => assert.throws(() => parsePublishedPhaseCurve({ ...raw, model: { ...raw.model, ...model } }), message);
+  refused({ offsetDegreesEast: tableCell(120, 'offset') }, /offsetDegreesEast lies between -90 and 90 degrees/u);
+  refused({ semiAmplitude: tableCell(0, 'amplitude') }, /semiAmplitude is a positive fraction of the star's flux/u);
+});
+
 test('a published phase curve gives one wavelength or one band', () => {
   const base = { schema: 'cssearth-published-phase-curve@1', source: 's', radiusRatio: tableCell(0.1, 'k'), eclipseDepth: tableCell(1e-3, 'E'),
     model: { kind: 'eclipse-fourier', c1: tableCell(1e-4, 'C1'), d1: tableCell(0, 'D1') }, reported: { daysideK: tableCell(1000, 'T'), offsetDegrees: tableCell(0, 'o') } };

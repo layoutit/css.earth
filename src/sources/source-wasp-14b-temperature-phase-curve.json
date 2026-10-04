@@ -1,0 +1,35 @@
+{
+  "id": "source-wasp-14b-temperature-phase-curve",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "WASP-14 b · wasp 14b temperature phase curve",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/2010.00687",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/wasp-14b/source/manifest.json",
+      "locator": "/inputs/6"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Bell et al. (2021); a Spitzer IRAC 4.5 µm phase curve (program 80073, first published by Wong et al. (2015))",
+      "scope": "The wasp 14b temperature phase curve input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "Factual numerical measurements; source attribution retained",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

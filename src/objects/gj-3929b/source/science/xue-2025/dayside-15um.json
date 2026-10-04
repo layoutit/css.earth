@@ -1,0 +1,9 @@
+{
+  "schema": "cssearth-eclipse-depth@1",
+  "planet": "gj-3929b",
+  "eclipseDepthPpm": {
+    "low": 133,
+    "high": 186
+  },
+  "source": "Xue et al. (2025): two JWST MIRI F1500W eclipses of the Rocky Worlds program. Eclipse depth 160 +26/-27 ppm, the joint fit of the two visits (the table of priors and posteriors of the fit to the JWST secondary eclipse data, joint fit, F_p/F_s); the range is its one-sigma interval. The paper finds the day side likely that of a bare rock, at the temperature of a black one. https://arxiv.org/abs/2508.12516"
+}

@@ -1,0 +1,35 @@
+{
+  "id": "source-trappist-1e-climate-model-simulation",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "TRAPPIST-1e · trappist 1e climate model simulation",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://zenodo.org/records/5532765/files/ExoCAM_thai_hab1_L51_n68equiv.cam.h0.avg.nc?download=1",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/trappist-1e/source/manifest.json",
+      "locator": "/inputs/6"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Wolf et al. (2022); ExoCAM simulation",
+      "scope": "The trappist 1e climate model simulation input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "CC BY 4.0",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}
