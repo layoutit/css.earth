@@ -13,6 +13,16 @@
         "https://arxiv.org/abs/2302.05420",
         "https://ui.adsabs.harvard.edu/abs/2023A&A...672A..94D"
       ]
+    },
+    {
+      "id": "limb-darkening",
+      "subject": "Limb darkening",
+      "status": "unresolved",
+      "finding": "No limb darkening is drawn: the published limb table (Claret, Hauschildt & Witte 2012) starts at 1,500 K, and at 770 K the planet is below it. Its published model fits use Exo-REM, a cloudy model (Palma-Bifani et al. 2024, A&A 683, A214). Exo-REM's public grid releases temperature and gas profiles and spectra, but no cloud properties, so the limb of a cloudy Exo-REM model cannot be computed from it.",
+      "evidence": [
+        "https://arxiv.org/abs/2401.05491",
+        "https://lesia.obspm.fr/exorem/YGP_grids/"
+      ]
     }
   ]
 }

@@ -163,7 +163,10 @@ export function documentImagedColor(files: PackageFiles, id: string, record: Rec
   const measured = fluxes.map((band, index) => `${bands[index]} (${requireFiniteNumber(band.value, `${id} band value`)} ± ${requireFiniteNumber(band.error, `${id} band error`)} ${unit})`);
   const generated = '**Infrared color dataset.** The default dataset paints the sphere one false color from its measured flux';
   const color = `${generated} in three infrared bands: red ${measured[0]}, green ${measured[1]}, blue ${measured[2]} (${citation}; [record](source/${recordPath})). Display range: ${requireString(record.displayRangeSource, `${id} displayRangeSource`).replace(/^T/u, 't')} Not a natural color; nobody has resolved its disc.`;
-  const limbLine = limb ? `**Limb.** The disc is ${limb.law.sentence} ([nodes](source/${limb.law.file})). ${limb.gravity}.` : none && `**Limb.** No limb darkening is drawn: ${none}.`;
+  // With no law, the reason is the ledger's when it records one (a finding written by hand, with the papers checked), else the route's.
+  const ledger = requireRecord(JSON.parse(String(files.get(`${o}/investigations.json`))), `${id} ledger`), entries = requireArray(ledger.entries, `${id} ledger entries`).map(entry => requireRecord(entry, `${id} ledger entry`));
+  const recorded = limb ? undefined : entries.find(entry => entry.id === 'limb-darkening' && entry.status !== 'included');
+  const limbLine = limb ? `**Limb.** The disc is ${limb.law.sentence} ([nodes](source/${limb.law.file})). ${limb.gravity}.` : recorded ? `**Limb.** ${requireString(recorded.finding, `${id} limb finding`)}` : none && `**Limb.** No limb darkening is drawn: ${none}.`;
   // A planet colored after it was scaffolded still has the gray sphere's paragraph, which the color's replaces. A color paragraph
   // written by hand is kept.
   const lines = String(files.get(`${o}/README.md`)).split('\n'), keepsOwn = lines.some(line => /^\*\*[^*]*color dataset\.\*\*/iu.test(line) && !line.startsWith(generated));
@@ -182,9 +185,8 @@ export function documentImagedColor(files: PackageFiles, id: string, record: Rec
   const credits = [...(notice.some(line => line.startsWith('Color:')) ? [] : [`${COLOR_CREDIT} ${citation} (${bands.join(', ')}).`]), ...(limb ? [limb.law.credit] : [])];
   files.set(`${o}/NOTICE.md`, `${[...notice, ...credits.flatMap(line => ['', line])].join('\n').replace(/\n{3,}/gu, '\n\n').trimEnd()}\n`);
 
-  const ledger = requireRecord(JSON.parse(String(files.get(`${o}/investigations.json`))), `${id} ledger`), entries = requireArray(ledger.entries, `${id} ledger entries`).map(entry => requireRecord(entry, `${id} ledger entry`));
   const shown = `Shown in infrared false color from its measured flux in ${bands.join(', ')} (${citation}).`, url = requireString(source.url, `${id} band color url`);
-  ledger.entries = [...entries.filter(entry => entry.id !== 'limb-darkening').map(entry => entry.id !== 'band-color' ? entry
+  ledger.entries = [...entries.filter(entry => entry.id !== 'limb-darkening' || entry === recorded).map(entry => entry.id !== 'band-color' ? entry
     : { ...entry, status: 'included', finding: `${shown} ${String(entry.finding).replace(shown, '').replace(/,? so (?:the planet|it) is the shared neutral gray\./u, '.').trim()}`.trim(), evidence: [...new Set([...requireArray(entry.evidence ?? [], `${id} ledger evidence`), url])] }),
     ...(entries.some(entry => entry.id === 'band-color' || entry.id === 'color') ? [] : [{ id: 'band-color', subject: 'A false color from three measured bands', status: 'included', finding: shown, evidence: [url] }]),
     ...(limb ? [{ id: 'limb-darkening', subject: 'Limb darkening', status: 'included', finding: `The disc is ${limb.law.sentence}. ${limb.gravity}.`, evidence: [...limb.law.evidence] }] : [])];

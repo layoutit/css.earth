@@ -22,6 +22,16 @@
         "https://eyes.nasa.gov/apps/exo/assets/image/exoplanet/GJ_504_b.jpg",
         "https://science.nasa.gov/tutorials/eyes-on-exoplanets-tutorial/"
       ]
+    },
+    {
+      "id": "limb-darkening",
+      "subject": "Limb darkening",
+      "status": "unresolved",
+      "finding": "No limb darkening is drawn: the published limb table (Claret, Hauschildt & Witte 2012) starts at 1,500 K, and at 564 K the planet is below it. Its published grid fit is Exo-REM, a cloudy model (512 +/- 10 K, Mâlin et al. 2025). Exo-REM's public grid releases temperature and gas profiles and spectra, but no cloud properties, so the limb of a cloudy Exo-REM model cannot be computed from it.",
+      "evidence": [
+        "https://arxiv.org/abs/2501.00104",
+        "https://lesia.obspm.fr/exorem/YGP_grids/"
+      ]
     }
   ]
 }

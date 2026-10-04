@@ -16,7 +16,7 @@ PDS 70 b is a gas giant still forming inside the gap of [PDS 70](../pds-70/READM
 
 **Infrared color dataset.** The default dataset paints the sphere one false color from its measured flux in three infrared bands: red NACO L′ 3.77 µm (329.3 ± 73 µJy), green SPHERE K1 2.102 µm (148.5 ± 5.5 µJy), blue SPHERE H3 1.666 µm (63.72 ± 11 µJy) (Stolker et al. (2020), A&A 644, A13; zero points from the SVO Filter Profile Service; [record](source/photometry/band-color.json)). Display range: this planet alone, from zero to its brightest band (NACO L′), so the color shows its band ratios; brightness is not compared across planets at different distances. Not a natural color; nobody has resolved its disc.
 
-**Limb.** No limb darkening is drawn: at 1,392 K it is outside the 1,500 to 4,800 K of the models Claret, Hauschildt & Witte (2012), A&A 546, A14 tabulate; and no paper's fit of a cloudy model grid is recorded for it (source/photometry/atmosphere-fit.json).
+**Limb.** No limb darkening is drawn: the published limb table (Claret, Hauschildt & Witte 2012) starts at 1,500 K. That table is computed from PHOENIX models, and the planet's fit with a PHOENIX model, DRIFT-PHOENIX, is 1,384 +47/-48 K, or 1,442 +52/-71 K with interstellar extinction (Wang et al. 2021, Table 4), below the table; the law is not extrapolated. Its Exo-REM fit there is 1,051 K. Exo-REM's public grid releases temperature and gas profiles and spectra, but no cloud properties, so the limb of a cloudy Exo-REM model cannot be computed from it.
 
 **Rotation.** None measured. The display axis is the orbit normal ([rotation.json](source/preparation/rotation.json)).
 

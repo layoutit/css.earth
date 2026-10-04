@@ -104,6 +104,14 @@ test('the documents of a planet that was a gray sphere are brought in line with 
   assert.ok(kept.includes('**NIRCam color dataset.** Written by hand.') && !kept.includes('**Infrared color dataset.**') && !kept.includes('Model limb'));
   assert.ok(kept.includes('**Limb.** No limb darkening is drawn: at 800 K it is outside the table.\n\n**Rotation.**'));
   assert.ok(!String(cool.get(`${o}/NOTICE.md`)).includes('Limb darkening'));
+  // A reason recorded in the ledger, with the papers checked, is the one the README gives, and a rerun keeps it.
+  const reasoned = read(cool, 'investigations.json');
+  reasoned.entries.push({ id: 'limb-darkening', subject: 'Limb darkening', status: 'unresolved', finding: 'No limb darkening is drawn: its published fits are of a cloudy model whose clouds are not released.', evidence: ['https://example.org/fit'] });
+  cool.set(`${o}/investigations.json`, json(reasoned));
+  documentImagedColor(cool, 'x-b', RECORD, 'photometry/band-color.json', undefined, 'at 800 K it is outside the table');
+  documentImagedColor(cool, 'x-b', RECORD, 'photometry/band-color.json', undefined, 'at 800 K it is outside the table');
+  assert.ok(String(cool.get(`${o}/README.md`)).includes('**Limb.** No limb darkening is drawn: its published fits are of a cloudy model whose clouds are not released.\n'));
+  assert.equal(read(cool, 'investigations.json').entries.filter((entry: { id: string }) => entry.id === 'limb-darkening').length, 1);
 });
 
 // The check that PICASO reads the cloudy release as its authors' own code did: the release publishes synthetic photometry of every
