@@ -4,7 +4,8 @@ import { tmpdir } from 'node:os';
 import { dirname, join, resolve } from 'node:path';
 import { test } from 'node:test';
 import sharp from 'sharp';
-import { type PreparedCssVolume, type VolumeAxis, validatePreparedVolumeDatasets } from '@cssearth/objects';
+import { type PreparedCssVolume, type VolumeAxis } from '@cssearth/objects';
+import { readVolumeDatasetBank } from '@cssearth/objects/node';
 
 import { prepareNebulaObject } from './nebula-objects.ts';
 import { readNebulaDelivery } from '@cssearth/objects';
@@ -71,8 +72,7 @@ test('delivery restores missing impostors with their exact bytes',async()=>{
   try {
     const {directory,pixels} = await fixture(root);
     assert.equal((await prepareNebulaObject(root,directory,true,true)).status,'prepared');
-    const envelope = JSON.parse(await readFile(join(directory,'prepared/datasets.json'),'utf8'));
-    const data = validatePreparedVolumeDatasets(envelope.data), dataset = data.datasets[0]!;
+    const data = await readVolumeDatasetBank(join(directory,'prepared')), dataset = data.datasets[0]!;
     assert.equal(dataset.stars?.points.length,7,'The isolated delivery must include its pinned catalogue field.');
     assert.ok(dataset.volume.impostors,'Delivery must retain the generated impostor descriptor.');
     const proxies = dataset.volume.resources.filter(resource=>resource.path.includes('/impostors/'));
