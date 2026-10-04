@@ -34,14 +34,18 @@ export interface ImageLayerRecipe {
      * the star, km/s away from the Sun). Inside `inner` a feature measured approaching is on the wall in front of the
      * star and one receding on the wall behind it (`restKmS` either way is all one wall). Outside it the detail lies
      * on one surface: the equatorial plane where it is at rest, the wall its speed points to where it reaches
-     * `wallKmS`. A place follows the measurements within about `reachArcsec`. Every value is one a paper prints. `starRadiusArcsec` is
+     * `wallKmS`. With `depth` "speed" a measured speed is its own depth under the law, on no wall: the fine detail
+     * lies on two surfaces, in front of the star's plane where the speeds approach and behind it where they recede.
+     * The fine detail nothing measures stays on the picture's plane, and `ring` is then the shell the smooth light lies
+     * on: its broad part half on each wall, the rest on the far wall. A place follows the measurements within about `reachArcsec`.
+     * Every value is one a paper prints. `starRadiusArcsec` is
      * how far the central star's own light reaches in the picture: that light stays at the star, on no wall.
      * `smoothPixels` is presentation: the radius, in face pixels, of the smooth light the far wall carries. */
     shape?: { source: string; basis: string; expansionKmSPerArcsec: number;
       ring: { semiMajorArcsec: number; semiMinorArcsec: number; majorPaDeg: number; polarTiltDeg: number; polarLeansToPaDeg: number; expansionKmS: [number, number, number] };
       lobe?: { source: string; radiusArcsec: number; expansionKmS: [number, number, number] };
       inner?: { source: string; semiMajorArcsec: number; semiMinorArcsec: number; majorPaDeg: number; expansionKmSPerArcsec: number; expansionKmS: [number, number, number] };
-      speeds?: { source: string; basis: string; path: string; columns: { east: number; north: number; kmS: number }; restKmS: number; wallKmS: number; reachArcsec: number }; starRadiusArcsec?: number; smoothPixels: number };
+      speeds?: { source: string; basis: string; path: string; columns: { east: number; north: number; kmS: number }; reachArcsec: number } & ({ depth?: 'wall'; restKmS: number; wallKmS: number } | { depth: 'speed' }); starRadiusArcsec?: number; smoothPixels: number };
     /** A nebula's published filled body (./body.ts): a spheroid of gas that emits evenly, `semiPolarArcsec` along its pole
      * and `semiEquatorialArcsec` across it, the pole tipped `polarTiltDeg` from the sight line with its near end leaning to
      * position angle `polarLeansToPaDeg`. `envelope` is a filled sphere around it, the nebula's outline. `cavities` are regions along the pole that emit `emission` of the body's emissivity, each about
@@ -129,6 +133,11 @@ const shapeOf = (v: unknown): NonNullable<ImageLayerRecipe['geometry']['shape']>
   const lobe = s.lobe === undefined ? undefined : object(s.lobe, 'geometry.shape.lobe'), inner = s.inner === undefined ? undefined : object(s.inner, 'geometry.shape.inner'), measured = s.speeds === undefined ? undefined : object(s.speeds, 'geometry.shape.speeds');
   if (lobe && inner) throw new TypeError('geometry.shape takes a lobe through the shell\'s opening or a closed inner shell, not both.');
   const column = (value: unknown, name: string) => { const index = finite(value, name); if (!(Number.isInteger(index) && index >= 0)) throw new TypeError(`${name} is a column counted from 0; got ${index}.`); return index; };
+  // Where a measured feature lies: on a wall, between the two speeds that say which, or at its own speed's depth.
+  const placed = (measured: Record<string, unknown>): { depth?: 'wall'; restKmS: number; wallKmS: number } | { depth: 'speed' } => {
+    if (measured.depth !== undefined && measured.depth !== 'wall' && measured.depth !== 'speed') throw new TypeError(`geometry.shape.speeds.depth says where a measured feature lies: "wall" (on the shell's wall its speed points to) or "speed" (as deep as its own speed puts it under the shell's law), not ${JSON.stringify(measured.depth)}.`);
+    if (measured.depth === 'speed') { for (const key of ['restKmS', 'wallKmS']) if (measured[key] !== undefined) throw new TypeError(`geometry.shape.speeds.${key} says which wall a feature is on; with depth "speed" no feature is on a wall, so leave it out.`); return { depth: 'speed' }; }
+    return { ...(measured.depth === undefined ? {} : { depth: measured.depth }), restKmS: positive(measured.restKmS, 'geometry.shape.speeds.restKmS'), wallKmS: positive(measured.wallKmS, 'geometry.shape.speeds.wallKmS') }; };
   return { source: text(s.source, 'geometry.shape.source'), basis: text(s.basis, 'geometry.shape.basis'), expansionKmSPerArcsec: positive(s.expansionKmSPerArcsec, 'geometry.shape.expansionKmSPerArcsec'),
     ring: { semiMajorArcsec: positive(r.semiMajorArcsec, 'geometry.shape.ring.semiMajorArcsec'), semiMinorArcsec: positive(r.semiMinorArcsec, 'geometry.shape.ring.semiMinorArcsec'), majorPaDeg: finite(r.majorPaDeg, 'geometry.shape.ring.majorPaDeg'),
       polarTiltDeg: tilt, polarLeansToPaDeg: finite(r.polarLeansToPaDeg, 'geometry.shape.ring.polarLeansToPaDeg'), expansionKmS: speeds(r.expansionKmS, 'geometry.shape.ring.expansionKmS') },
@@ -136,7 +145,7 @@ const shapeOf = (v: unknown): NonNullable<ImageLayerRecipe['geometry']['shape']>
     ...(inner === undefined ? {} : { inner: { source: text(inner.source, 'geometry.shape.inner.source'), semiMajorArcsec: positive(inner.semiMajorArcsec, 'geometry.shape.inner.semiMajorArcsec'), semiMinorArcsec: positive(inner.semiMinorArcsec, 'geometry.shape.inner.semiMinorArcsec'), majorPaDeg: finite(inner.majorPaDeg, 'geometry.shape.inner.majorPaDeg'),
       expansionKmSPerArcsec: positive(inner.expansionKmSPerArcsec, 'geometry.shape.inner.expansionKmSPerArcsec'), expansionKmS: speeds(inner.expansionKmS, 'geometry.shape.inner.expansionKmS') } }),
     ...(measured === undefined ? {} : { speeds: (() => { const columns = object(measured.columns, 'geometry.shape.speeds.columns'); return { source: text(measured.source, 'geometry.shape.speeds.source'), basis: text(measured.basis, 'geometry.shape.speeds.basis'), path: path(measured.path),
-      columns: { east: column(columns.east, 'geometry.shape.speeds.columns.east'), north: column(columns.north, 'geometry.shape.speeds.columns.north'), kmS: column(columns.kmS, 'geometry.shape.speeds.columns.kmS') }, restKmS: positive(measured.restKmS, 'geometry.shape.speeds.restKmS'), wallKmS: positive(measured.wallKmS, 'geometry.shape.speeds.wallKmS'), reachArcsec: positive(measured.reachArcsec, 'geometry.shape.speeds.reachArcsec') }; })() }),
+      columns: { east: column(columns.east, 'geometry.shape.speeds.columns.east'), north: column(columns.north, 'geometry.shape.speeds.columns.north'), kmS: column(columns.kmS, 'geometry.shape.speeds.columns.kmS') }, reachArcsec: positive(measured.reachArcsec, 'geometry.shape.speeds.reachArcsec'), ...placed(measured) }; })() }),
     ...(s.starRadiusArcsec === undefined ? {} : { starRadiusArcsec: positive(s.starRadiusArcsec, 'geometry.shape.starRadiusArcsec') }),
     smoothPixels: smooth };
 };

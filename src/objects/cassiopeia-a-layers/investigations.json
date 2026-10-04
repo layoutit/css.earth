@@ -1,0 +1,87 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "cassiopeia-a-layers",
+  "entries": [
+    {
+      "id": "weic2330a",
+      "subject": "ESA/Webb weic2330a",
+      "status": "included",
+      "finding": "Cas A (NIRCam image): NIRCam at 1.62, 3.56 and 4.44 µm; 11694 × 13392 px over 6.09 × 6.97 arcmin, released 11 December 2023. The publication JPEG, 3493 × 4000 px, is the one drawn. The file's embedded sky tags: 0.0312 arcsec per pixel of the 11694 × 13392 px original (0.1045 of the 3493 × 4000 px file drawn), north 27.16° right of vertical, the frame's centre at 350.8497673°, 58.815054°.",
+      "evidence": [
+        "https://esawebb.org/images/weic2330a/",
+        "https://esawebb.org/copyright/"
+      ]
+    },
+    {
+      "id": "measured-depths",
+      "subject": "The ejecta's depths",
+      "status": "included",
+      "finding": "DeLaney et al. (2010) fit a Gaussian to the [Ar II] 6.99 µm line at every place of a Spitzer IRS map (effective resolution 3.7 arcsec; line centres from spectra that resolve 2,500 to 3,000 km/s). The ejecta lie on one shell in free expansion, so a speed is a depth: S = 0.022 ± 0.002 arcsec per km/s, the shell's centre receding at 859 ± 100 km/s. The Chandra X-ray Center publishes the paper's model as files; the [Ar II] surface gives 10632 cells, 6078 approaching and 4554 receding. Where a place has cells within about 9 arcsec the picture's fine detail is drawn at their depth.",
+      "evidence": [
+        "https://arxiv.org/abs/1011.3858",
+        "https://chandra.harvard.edu/resources/illustrations/3d_files.html"
+      ]
+    },
+    {
+      "id": "smooth-light",
+      "subject": "The light without a measured depth",
+      "status": "included",
+      "finding": "No spectrum places the remnant's smooth light: the smoke between the shocks and the glow around the ejecta. Left on the picture's plane it turned as a flat disc. Cassiopeia A is a shell: its forward shock is a thin ring of X-ray filaments about 300 arcsec across (Gotthelf et al. 2001, as DeLaney et al. 2010 report it), 153 arcsec in radius. The smooth light is drawn on that sphere. Half on each half, as the Ring Nebula's is on its shell, the two copies came apart from the page's camera, which is nearer than the Sun, and the picture smeared; on the far half alone the picture is drawn once but the sphere's rim tore. So the halves share only the light's broad part (blurred over 37 arcsec), half each, and the far half holds the rest: a presentation choice. The sphere's centre along the sight line is not measured (DeLaney et al. make no assertion of it); it is drawn about the picture's plane.",
+      "evidence": [
+        "https://arxiv.org/abs/1011.3858"
+      ]
+    },
+    {
+      "id": "model-frame",
+      "subject": "The model files' frame and unit",
+      "status": "included",
+      "finding": "Nothing published states the files' axes or unit. Measured here (packages/bake/authoring/cassiopeia-a/ejecta-speeds.mts --frame): of the four ways to lay x and z on the sky, east along +x and north along +z puts the most of Webb's picture under the [Ar II] surface, at 3.60 arcsec a unit; with the origin free the best is 3.62 arcsec a unit and an origin 2 arcsec south of the expansion centre of Thorstensen, Fesen & van den Bergh (2001). Two checks against the paper's printed numbers: the sphere nearest the [Ar II] surface is 30.47 units in radius and the paper's shell 108.6 arcsec, 3.56 arcsec a unit; the neutron-star marker stands 5.47 units in front of the origin and the paper puts it at zero velocity, 18.9 arcsec in front of the shell's centre, 3.45 arcsec a unit. The table uses 3.6; the three agree within 5%, less than the paper's own 9% on S.",
+      "evidence": [
+        "https://chandra.harvard.edu/resources/illustrations/3d_files.html",
+        "https://arxiv.org/abs/1011.3858",
+        "https://arxiv.org/abs/astro-ph/0104188"
+      ]
+    },
+    {
+      "id": "stars",
+      "subject": "The stars in the picture",
+      "status": "included",
+      "finding": "The picture's stars are not the remnant's: left in, they stood on its plane, and where a depth is measured they were lifted with the ejecta. NOX removes stars, and took the remnant's compact knots with them. In this picture a star is blue and the ejecta red: the light NOX took, by its patches' red over blue, peaks between 0.25 and 0.5, is lowest near 0.8 and tails off above 1. So the picture keeps its own pixels where the light taken is redder than 0.8 of its blue (labs/nebula/packages/reconstruction/src/star-removal/star-color.ts), a presentation choice. A second pass over a quarter-size copy, for the saturated stars, replaced 8% of the picture with soft light and left their spikes, so it is not used: the brightest stars stay.",
+      "evidence": [
+        "https://esawebb.org/images/weic2330a/",
+        "https://github.com/charvey2718/nox"
+      ]
+    },
+    {
+      "id": "other-components",
+      "subject": "The model's other components",
+      "status": "deferred",
+      "finding": "The files also hold the [Si II] interior (10.2 arcsec resolution, about three in four sight lines with more than one component), the X-ray Fe-K and Si XIII ejecta (decelerated, with their own scale), the outer optical knots and the jets. Only the [Ar II] surface is used: it is the Bright Ring the picture shows, at the finest resolution, on the one law.",
+      "evidence": [
+        "https://arxiv.org/abs/1011.3858",
+        "https://chandra.harvard.edu/resources/illustrations/3d_files.html"
+      ],
+      "revisitWhen": "A lens of the X-ray ejecta or of the unshocked interior is wanted."
+    },
+    {
+      "id": "optical-knots",
+      "subject": "A speed for each optical knot",
+      "status": "deferred",
+      "finding": "Milisavljevic & Fesen (2013) measure Doppler speeds of the optical main-shell and outer knots at finer resolution than the infrared map. CDS has no table for the paper (J/ApJ/772/134).",
+      "evidence": [
+        "https://arxiv.org/abs/1306.2310"
+      ],
+      "revisitWhen": "The knot table is public."
+    },
+    {
+      "id": "full-resolution",
+      "subject": "The picture at its full size",
+      "status": "deferred",
+      "finding": "ESA/Webb's original is 11694 × 13392 px. The bank draws the remnant 2,012 px across from the 3493 × 4000 px publication JPEG; four times the texels would be four times the bytes a phone downloads.",
+      "evidence": [
+        "https://esawebb.org/images/weic2330a/"
+      ],
+      "revisitWhen": "Image-layer banks get texture levels chosen by the size on screen."
+    }
+  ]
+}

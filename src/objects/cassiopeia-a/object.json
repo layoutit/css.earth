@@ -1,0 +1,98 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "cassiopeia-a",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Cassiopeia A",
+      "steps": [
+        "verify-sources",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 77820812338140
+      },
+      "sources": [
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Cassiopeia A",
+      "systemName": "Milky Way",
+      "classification": "nebula",
+      "color": "#9a9a9a",
+      "distanceAu": 701300341,
+      "description": "Cassiopeia A is a supernova remnant about 3,400 parsecs away.",
+      "aliases": [
+        "Cas A",
+        "3C 461",
+        "SNR G111.7-02.1"
+      ],
+      "order": 5390,
+      "context": {}
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        53637380144868565000,
+        -8624245245090757000,
+        89751876523140610000
+      ],
+      "presentationToReference": [
+        0.8879122269381498,
+        0,
+        0.46001290987725063,
+        0.42205359313262464,
+        0.3977771559319137,
+        -0.814643540907653,
+        0.18298262698293646,
+        -0.9174820620691818,
+        -0.35319120034862916
+      ],
+      "orbitUpReference": [
+        0,
+        -0.3977771559319137,
+        0.9174820620691818
+      ],
+      "metersPerUnit": 251034878510129.03,
+      "bodyRadiusM": 77820812338140000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

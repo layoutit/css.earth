@@ -48,6 +48,7 @@
     "./star-removal/native": "./src/star-removal/native.ts",
     "./star-removal/haloes": "./src/star-removal/haloes.ts",
     "./star-removal/coarse": "./src/star-removal/coarse.ts",
+    "./star-removal/star-color": "./src/star-removal/star-color.ts",
     "./methods/sampled/material-fit": "./src/methods/sampled/material-fit.ts",
     "./star-removal/extraction": "./src/star-removal/extraction.ts",
     "./star-removal/native-extraction": "./src/star-removal/native-extraction.ts",

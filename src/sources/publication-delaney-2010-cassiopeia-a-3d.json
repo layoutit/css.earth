@@ -1,0 +1,48 @@
+{
+  "id": "publication-delaney-2010-cassiopeia-a-3d",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "The Three-Dimensional Structure of Cassiopeia A",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1011.3858"
+    },
+    {
+      "type": "doi",
+      "value": "10.1088/0004-637X/725/2/2038"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/1011.3858",
+      "label": "Published reference"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/1011.3858",
+      "checkedOn": "2026-10-04",
+      "locator": "Sect. II.3: every place of the binned Spitzer IRS cubes with a line detected above 3 sigma is fitted with Gaussians; effective resolution 3.7 arcsec for [Ar II] and 10.2 arcsec for [Si II]; velocity resolution 2500 to 3000 km/s. Sect. III: [Ar II] velocities range from about -4000 to 6000 km/s, offset toward positive velocities. Sect. IV.1: the [Ar II] regions fit one spherical shell, 1000 to 2000 km/s thick; v_c = 859 ± 100 km/s, v_m = -4077 ± 200 km/s, S = 0.022 ± 0.002 arcsec per km/s; the infrared ejecta are effectively in free expansion; the forward shock is at a radius of 153 arcsec, and no assertion is made of its offset from the Bright Ring along the velocity axis. Sect. I: the forward shock is a thin ring of X-ray filaments approximately 300 arcsec in diameter (Gotthelf et al. 2001). Sect. IV.1 (3D): the data are smoothed with a 3D Gaussian, the symbol size about 6 arcsec for [Ar II]. Sect. IV.2: the neutron star is placed at 23h 23m 27.94s, +58° 48' 42.5\" and zero velocity; the reverse shock's centre is shifted into the sky by 859 km/s, 0.31 pc at a distance of 3.4 kpc."
+    }
+  ],
+  "creators": [
+    "DeLaney, T.",
+    "Rudnick, L.",
+    "Stage, M. D.",
+    "Smith, J. D.",
+    "Isensee, K.",
+    "Rho, J.",
+    "Allen, G. E.",
+    "Gomez, H.",
+    "Kozasa, T.",
+    "Reach, W. T.",
+    "Davis, J. E.",
+    "Houck, J. C."
+  ],
+  "publisher": "ApJ 725, 2038",
+  "publicationDate": "2010",
+  "relations": [],
+  "statements": []
+}
