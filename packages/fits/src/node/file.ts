@@ -1,37 +1,55 @@
-/** FITS files on disk: HDU headers located without reading data, and image regions read row by row.
+/** FITS files on disk or in an archive: HDU headers located without reading data, and image regions read row by row.
  * Structure is validated as the byte reader in `../fits.ts` validates it. */
 import { open, type FileHandle } from 'node:fs/promises';
 import { integer, MAX_HEADER_RECORDS, optionalNumber, padded, readFitsHeader, RECORD, type FitsHeader } from '../fits.js';
 
-/** One HDU of a FITS file on disk, located without reading its data. */
+/** One HDU of a FITS file, located without reading its data: its header records start at `headerStart` and end where its data start. */
 export interface FitsFileHdu {
   readonly header: FitsHeader; readonly cards: readonly string[];
-  readonly dataStart: number; readonly dataBytes: number; readonly bitpix: number; readonly dimensions: readonly number[];
+  readonly headerStart: number; readonly dataStart: number; readonly dataBytes: number; readonly bitpix: number; readonly dimensions: readonly number[];
 }
 
-/** Every HDU header of a file, reading only header blocks: a level-3 archive mosaic of hundreds of megabytes is located, not
- * loaded. Structure is validated as readFitsHdu does, and the file must hold every declared data block. */
+/** How a FITS file is read: `length` bytes at `offset`. A file on disk, or byte-range requests to the archive that holds it. */
+export type FitsReader = (offset: number, length: number) => Promise<Uint8Array>;
+
+/** The HDUs of a FITS file in order, reading only header records: a level-3 archive mosaic of hundreds of megabytes is located, not
+ * loaded, and a caller that wants one extension of a file in an archive stops there, so nothing after it is asked for. Structure is
+ * validated as readFitsHdu does. A header is read `firstRead` bytes at a time, four times as many while its END card is not among
+ * them; `size` is the file's length when it is known, and the file must then hold every declared data block. */
+export async function* locateFitsHdus(read: FitsReader, size = Infinity, firstRead = MAX_HEADER_RECORDS * RECORD): AsyncGenerator<FitsFileHdu> {
+  if (!Number.isSafeInteger(firstRead) || firstRead < RECORD || firstRead % RECORD) throw new RangeError('A FITS header is read in whole 2,880-byte records.');
+  for (let start = 0, found = 0; start < size; found++) {
+    if (found >= 1024) throw new Error('Too many FITS HDUs.');
+    const most = Math.min(MAX_HEADER_RECORDS * RECORD, size - start);
+    let block = await read(start, Math.min(firstRead, most)), parsed: ReturnType<typeof readFitsHeader> | undefined;
+    while (!parsed) {
+      try { parsed = readFitsHeader(block); }
+      catch (error) {
+        if (block.length >= most || !/no END card/u.test((error as Error).message)) throw error;
+        block = await read(start, Math.min(most, block.length * 4));
+      }
+    }
+    const { header, cards, dataOffset } = parsed;
+    if (found ? header.XTENSION === undefined : header.SIMPLE !== true || header.XTENSION !== undefined)
+      throw new Error('Invalid FITS primary/extension sequence.');
+    if (header.GROUPS === true || header.ZIMAGE === true) throw new Error('Unsupported grouped or compressed FITS data.');
+    const bitpix = integer(header, 'BITPIX', -64, 64), naxis = integer(header, 'NAXIS', 0, 999), dimensions: number[] = [];
+    let count = naxis ? 1 : 0;
+    for (let i = 1; i <= naxis; i++) { const n = integer(header, `NAXIS${i}`, 0); dimensions.push(n); count *= n; }
+    const pcount = header.XTENSION !== undefined ? integer(header, 'PCOUNT', 0) : 0, gcount = header.XTENSION !== undefined ? integer(header, 'GCOUNT', 1) : 1;
+    const dataBytes = (count + pcount) * gcount * Math.abs(bitpix) / 8, next = start + padded(dataOffset + dataBytes);
+    if (!Number.isSafeInteger(dataBytes) || !Number.isSafeInteger(next) || next > size) throw new Error('Truncated or unbounded FITS data or padding.');
+    yield { header, cards, headerStart: start, dataStart: start + dataOffset, dataBytes, bitpix, dimensions };
+    start = next;
+  }
+}
+
+/** Every HDU header of a file on disk. */
 export async function readFitsFileHdus(path: string): Promise<FitsFileHdu[]> {
   const file = await open(path, 'r');
   try {
     const size = (await file.stat()).size, hdus: FitsFileHdu[] = [];
-    for (let start = 0; start < size;) {
-      const block = Buffer.alloc(Math.min(MAX_HEADER_RECORDS * RECORD, size - start));
-      await file.read(block, 0, block.length, start);
-      const { header, cards, dataOffset } = readFitsHeader(block);
-      if (hdus.length ? header.XTENSION === undefined : header.SIMPLE !== true || header.XTENSION !== undefined)
-        throw new Error('Invalid FITS primary/extension sequence.');
-      if (header.GROUPS === true || header.ZIMAGE === true) throw new Error('Unsupported grouped or compressed FITS data.');
-      const bitpix = integer(header, 'BITPIX', -64, 64), naxis = integer(header, 'NAXIS', 0, 999), dimensions: number[] = [];
-      let count = naxis ? 1 : 0;
-      for (let i = 1; i <= naxis; i++) { const n = integer(header, `NAXIS${i}`, 0); dimensions.push(n); count *= n; }
-      const pcount = header.XTENSION !== undefined ? integer(header, 'PCOUNT', 0) : 0, gcount = header.XTENSION !== undefined ? integer(header, 'GCOUNT', 1) : 1;
-      const dataBytes = (count + pcount) * gcount * Math.abs(bitpix) / 8, next = start + padded(dataOffset + dataBytes);
-      if (!Number.isSafeInteger(dataBytes) || next > size) throw new Error('Truncated or unbounded FITS data or padding.');
-      hdus.push({ header, cards, dataStart: start + dataOffset, dataBytes, bitpix, dimensions });
-      start = next;
-      if (hdus.length > 1024) throw new Error('Too many FITS HDUs.');
-    }
+    for await (const hdu of locateFitsHdus(async (offset, length) => { const block = Buffer.alloc(length); await file.read(block, 0, length, offset); return block; }, size)) hdus.push(hdu);
     if (!hdus.length) throw new Error('Empty FITS file.');
     return hdus;
   } finally { await file.close(); }

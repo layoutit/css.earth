@@ -4,7 +4,8 @@
  * into classes by SIMBAD's own type tree (its `otypedef` table), and each class names the papers its stars come from.
  * VizieR is then asked, by bibcode, whether it holds each paper's tables, and each table is read for what a placed star
  * needs: a position of its own and a period or a temperature. Nothing is downloaded and no star is made here. A table the
- * survey calls ready is a lead for `new-object --from-table`; a star SIMBAD lists inside the outline may still be a
+ * survey calls ready is a lead for `new-object --from-table`, and so is one that lists each star by its detector pixel, once its
+ * paper has said which exposure the pixels are of; a star SIMBAD lists inside the outline may still be a
  * foreground star of the Milky Way, which only its paper says. */
 import { mkdir, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
@@ -42,7 +43,7 @@ export interface StarTable { readonly name: string; readonly rows: number | null
 export interface StarPaper { readonly bibcode: string; readonly title: string; readonly stars: number; readonly url: string;
   /** VizieR's tables of the paper that carry a period or a temperature; null when VizieR holds no table of the paper. */
   readonly catalogue: { readonly name: string; readonly tables: readonly StarTable[] } | null }
-export interface StarLead { readonly class: string; readonly bibcode: string; readonly table: string; readonly positions: 'table' | 'simbad'; readonly command: string }
+export interface StarLead { readonly class: string; readonly bibcode: string; readonly table: string; readonly positions: 'table' | 'simbad' | 'pixel'; readonly command: string }
 export interface StarSurvey {
   readonly schema: typeof STARS_SCHEMA; readonly target: { readonly id: string; readonly name: string };
   readonly simbad: { readonly name: string; readonly raDeg: number; readonly decDeg: number; readonly majorAxisArcmin: number; readonly radiusDeg: number };
@@ -118,9 +119,11 @@ export async function surveyStars(root: string, options: StarSurveyOptions): Pro
       }
     }
     classes.push({ id: starClass.id, label: starClass.label, count: count(starClass.roots), papers: found });
-    // A table is a lead when it has a period and a place for each star: its own, or SIMBAD's through the name CDS added to each row.
-    if ('route' in starClass) for (const paper of found) for (const table of paper.catalogue?.tables ?? []) if (table.columns.period && (table.ownPositions || table.columns.simbadName) && !leads.some(lead => lead.table === table.name))
-      leads.push({ class: starClass.id, bibcode: paper.bibcode, table: table.name, positions: table.ownPositions ? 'table' : 'simbad', command: `telescope new-object --from-table ${starClass.route}:${target.id}=${table.name} --out SPEC.json` });
+    // A table is a lead when it has a period and a place for each star: its own, SIMBAD's through the name CDS added to each row, or a detector pixel.
+    if ('route' in starClass) for (const paper of found) for (const table of paper.catalogue?.tables ?? []) if (table.columns.period && (table.ownPositions || table.columns.simbadName || table.columns.pixel) && !leads.some(lead => lead.table === table.name)) {
+      const positions = table.ownPositions ? 'table' : table.columns.simbadName ? 'simbad' : 'pixel';
+      leads.push({ class: starClass.id, bibcode: paper.bibcode, table: table.name, positions, command: `telescope new-object --from-table ${starClass.route}:${target.id}=${table.name}${positions === 'pixel' ? '#exposure=mast:HST/product/FILE.fits,firstPixel=N' : ''} --out SPEC.json` });
+    }
   }
   const result: StarSurvey = { schema: STARS_SCHEMA, target, simbad: { name: (galaxy.main_id ?? '').replace(/\s+/gu, ' '), raDeg, decDeg, majorAxisArcmin, radiusDeg },
     objects: [...counts.values()].reduce((sum, n) => sum + n, 0), stars: count(['*']) - TRANSIENTS.reduce((sum, kind) => sum + count(kind.roots), 0),
@@ -130,7 +133,8 @@ export async function surveyStars(root: string, options: StarSurveyOptions): Pro
 }
 
 const tableWords = (table: StarTable) => [`${table.rows ?? 'unknown'} rows`, table.columns.period ? `period (${table.columns.period.column})` : '', table.columns.temperature ? `temperature (${table.columns.temperature})` : '',
-  table.ownPositions ? 'a position per star' : table.columns.position ? 'one position for every row, not each star\'s' : 'no position', !table.ownPositions && table.columns.simbadName ? `a SIMBAD name per row (${table.columns.simbadName})` : ''].filter(Boolean).join(', ');
+  table.ownPositions ? 'a position per star' : table.columns.position ? 'one position for every row, not each star\'s' : 'no position', !table.ownPositions && table.columns.simbadName ? `a SIMBAD name per row (${table.columns.simbadName})` : '',
+  table.columns.pixel ? `a detector pixel per star (${[table.columns.pixel.chip, table.columns.pixel.x, table.columns.pixel.y].filter(Boolean).join(', ')})` : ''].filter(Boolean).join(', ');
 
 export function formatStars(result: StarSurvey, directory?: string): string {
   const many = (n: number) => n.toLocaleString('en-US');
@@ -149,7 +153,8 @@ export function formatStars(result: StarSurvey, directory?: string): string {
   lines.push('');
   if (!result.leads.length) lines.push('No table gives a star of a class the generator drafts both a period and a place.');
   for (const lead of result.leads) lines.push(lead.positions === 'table' ? `Ready: ${lead.command}`
-    : `Ready, placed by SIMBAD (the table gives each row a SIMBAD name and no position): ${lead.command}`);
+    : lead.positions === 'simbad' ? `Ready, placed by SIMBAD (the table gives each row a SIMBAD name and no position): ${lead.command}`
+    : `Placed by pixel, once the paper says which exposure its pixels are of and how its software counts them (FILE, N): ${lead.command}`);
   lines.push('', 'A lead is not a star: read the paper, and check a star is in the galaxy and not in front of it.');
   if (directory) lines.push('', `Saved: ${resolve(directory, 'stars.json')}`);
   return `${lines.join('\n')}\n`;

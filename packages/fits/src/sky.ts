@@ -92,11 +92,13 @@ export function skyDisplayRaster<T extends Float32Array | Float64Array>(values: 
 }
 
 /** A gnomonic (TAN) or orthographic (SIN) sky image's pixel <-> ICRS mapping, rotated or not: what an archive mosaic needs to be resampled onto another
- * grid. Distortion terms (SIP, TPV, PV cards other than a plain SIN's zero PV2_1 and PV2_2) are refused, as is a LONPOLE other than 180 or a frame other than ICRS or FK5.
+ * grid, and what places a star a paper lists by its detector pixel. A TAN image may carry SIP distortion (RA---TAN-SIP, as the detector frames of Hubble
+ * and Spitzer do), which is applied. Other distortion terms (TPV, lookup tables, PV cards other than a plain SIN's zero PV2_1 and PV2_2, SIP cards on
+ * axes that do not name SIP) are refused, as is a LONPOLE other than 180 or a frame other than ICRS or FK5.
  * Pixels are zero-based (the centre of the first stored pixel is 0, 0). packages/bake/src/objects/cameras/fixtures/fits/sky-projection.py checks both
  * directions against Astropy's all_world2pix and all_pix2world. */
 export interface SkyProjection {
-  /** Zero-based pixel of an ICRS direction, or undefined on the far side of the tangent plane. */
+  /** Zero-based pixel of an ICRS direction, or undefined on the far side of the tangent plane or where a SIP distortion has no inverse. */
   readonly pixelOf: (raDeg: number, decDeg: number) => [number, number] | undefined;
   /** ICRS direction of a zero-based pixel. */
   readonly skyOf: (x: number, y: number) => [number, number];
@@ -106,15 +108,16 @@ export interface SkyProjection {
 export function skyProjection(header: FitsHeader): SkyProjection {
   // TAN (gnomonic) or SIN (orthographic, as radio interferometers write their images): both zenithal about the reference point,
   // the standard coordinates divided by the direction's height above the tangent plane for TAN and not for SIN.
-  const kind = text(header, 'CTYPE1') === 'RA---TAN' && text(header, 'CTYPE2') === 'DEC--TAN' ? 'TAN' : text(header, 'CTYPE1') === 'RA---SIN' && text(header, 'CTYPE2') === 'DEC--SIN' ? 'SIN' : undefined;
-  if (!kind) throw new TypeError('A sky projection needs RA---TAN and DEC--TAN axes, or RA---SIN and DEC--SIN.');
+  const sip = text(header, 'CTYPE1') === 'RA---TAN-SIP' && text(header, 'CTYPE2') === 'DEC--TAN-SIP' ? sipDistortion(header) : undefined;
+  const kind = sip || text(header, 'CTYPE1') === 'RA---TAN' && text(header, 'CTYPE2') === 'DEC--TAN' ? 'TAN' : text(header, 'CTYPE1') === 'RA---SIN' && text(header, 'CTYPE2') === 'DEC--SIN' ? 'SIN' : undefined;
+  if (!kind) throw new TypeError('A sky projection needs RA---TAN and DEC--TAN axes (with or without SIP), or RA---SIN and DEC--SIN.');
   // A SIN header may carry PV2_1 and PV2_2 = 0, the plain orthographic projection; anything else is the slant form, not applied here.
   const pv = Object.keys(header).filter(key => /^PV\d+_\d+$/u.test(key));
   if (kind === 'SIN' && pv.some(key => !/^PV2_[12]$/u.test(key) || numberOf(header, key) !== 0)) throw new TypeError('A slant SIN projection (PV2_1 or PV2_2 not zero) is a distortion this projection does not apply.');
   if (numberOf(header, 'LONPOLE', 180) !== 180) throw new TypeError('A sky image with a LONPOLE other than 180 is not supported.');
   const frame = text(header, 'RADESYS');
   if (frame !== undefined && frame !== 'ICRS' && frame !== 'FK5') throw new TypeError(`Sky frame ${frame} is not ICRS.`);
-  if (Object.keys(header).some(key => /^(?:A|B|AP|BP)_(?:ORDER|\d+_\d+)$/u.test(key) || (kind === 'TAN' && /^PV\d+_\d+$/u.test(key)) || /^(?:D2IM|DP|CPDIS|CQDIS)/u.test(key)))
+  if (Object.keys(header).some(key => (!sip && SIP_CARD.test(key)) || (kind === 'TAN' && /^PV\d+_\d+$/u.test(key)) || /^(?:D2IM|DP|CPDIS|CQDIS)/u.test(key)))
     throw new TypeError('A sky image with distortion terms needs its distortion model, which this projection does not apply.');
   const units = [text(header, 'CUNIT1'), text(header, 'CUNIT2')];
   if (units.some(unit => unit !== undefined && unit !== 'deg')) throw new TypeError('A TAN sky image states its axes in degrees.');
@@ -131,10 +134,11 @@ export function skyProjection(header: FitsHeader): SkyProjection {
       if (!(z > 0)) return undefined;
       // Standard coordinates on the tangent plane, degrees: intermediate world x grows toward increasing RA (east).
       const height = kind === 'TAN' ? z : 1, x = dot(v, east) / height / DEG, y = dot(v, north) / height / DEG;
-      return [(d * x - b * y) / det + crpix[0]! - 1, (-c * x + a * y) / det + crpix[1]! - 1];
+      const linear = [(d * x - b * y) / det, (-c * x + a * y) / det] as const, offset = sip ? sip.inverse(linear[0], linear[1]) : linear;
+      return offset && [offset[0] + crpix[0]! - 1, offset[1] + crpix[1]! - 1];
     },
     skyOf(px, py) {
-      const u = px + 1 - crpix[0]!, w = py + 1 - crpix[1]!, x = (a * u + b * w) * DEG, y = (c * u + d * w) * DEG;
+      const p = px + 1 - crpix[0]!, q = py + 1 - crpix[1]!, [u, w] = sip ? sip.forward(p, q) : [p, q], x = (a * u + b * w) * DEG, y = (c * u + d * w) * DEG;
       // TAN: the point on the tangent plane, normalised. SIN: the point on the sphere straight behind the plane point.
       const lift = kind === 'TAN' ? 1 : Math.sqrt(Math.max(0, 1 - x * x - y * y));
       const v = [0, 1, 2].map(i => lift * centre[i]! + x * east[i]! + y * north[i]!), n = Math.hypot(v[0]!, v[1]!, v[2]!);
@@ -143,3 +147,39 @@ export function skyProjection(header: FitsHeader): SkyProjection {
   };
 }
 const DEG = Math.PI / 180;
+
+/** SIP distortion (Shupe et al. 2005, https://fits.gsfc.nasa.gov/registry/sip/SIP_distortion_v1_0.pdf): polynomials A and B in the pixel offset from
+ * the reference pixel, added to that offset before the linear matrix. The inverse solves those same polynomials by Newton's method, as Astropy's
+ * all_world2pix does, and does not read the header's approximate AP and BP. */
+const SIP_CARD = /^(?:A|B|AP|BP)_(?:ORDER|DMAX|\d+_\d+)$/u;
+function sipDistortion(header: FitsHeader) {
+  const terms = (name: 'A' | 'B') => {
+    const order = numberOf(header, `${name}_ORDER`), card = new RegExp(`^${name}_(\\d+)_(\\d+)$`, 'u');
+    if (!Number.isInteger(order) || order < 0 || order > 9) throw new TypeError(`Sky image ${name}_ORDER is not a SIP order.`);
+    return Object.keys(header).flatMap(key => {
+      const match = card.exec(key);
+      if (!match) return [];
+      const p = Number(match[1]), q = Number(match[2]);
+      if (p + q > order) throw new TypeError(`Sky image ${key} is beyond ${name}_ORDER ${order}.`);
+      return [[p, q, numberOf(header, key)] as const];
+    });
+  };
+  const a = terms('A'), b = terms('B');
+  // A polynomial and its two partial derivatives at (u, w).
+  const at = (polynomial: typeof a, u: number, w: number) => polynomial.reduce<[number, number, number]>(([value, du, dw], [p, q, c]) =>
+    [value + c * u ** p * w ** q, du + (p ? c * p * u ** (p - 1) * w ** q : 0), dw + (q ? c * q * u ** p * w ** (q - 1) : 0)], [0, 0, 0]);
+  return {
+    forward: (u: number, w: number) => [u + at(a, u, w)[0], w + at(b, u, w)[0]] as const,
+    inverse(U: number, W: number) {
+      let u = U, w = W;
+      for (let step = 0; step < 50; step++) {
+        const [f, fu, fw] = at(a, u, w), [g, gu, gw] = at(b, u, w), det = (1 + fu) * (1 + gw) - fw * gu;
+        if (!(Math.abs(det) > 1e-6)) return undefined;
+        const ru = u + f - U, rw = w + g - W, du = (ru * (1 + gw) - rw * fw) / det, dw = (rw * (1 + fu) - ru * gu) / det;
+        u -= du; w -= dw;
+        if (Math.hypot(du, dw) < 1e-10) return [u, w] as const;
+      }
+      return undefined;
+    },
+  };
+}
