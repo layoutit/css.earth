@@ -260,17 +260,24 @@ hidden waiting for its controller; it now rests at its peek, and its handle open
 A dataset, settings or feature response without a saved view used to keep the prepared tree's mount pose: depth was
 left unscaled, which drew each polar cap as a hole, and the body had one fixed size that overflowed a phone. It now takes
 the pose of a fresh mount, framed at the share of the viewport width the live camera fits a body to
-(`site/default-width-share.mts`), and the photograph of a page without script is sized by the same share. The pairs
-below are the Moon's Tycho link at 1280×800 and Europa with shadows at 390×844, before and after.
+(`site/default-width-share.mts`), and the photograph of a page without script is sized by the same share. The live
+camera also keeps a body within a share of the viewport's height; a page without script now takes the smaller of the
+two, as a scale on the drawn stage and a cap on the photograph. Before that a window wide for its height drew the body
+too large: Saturn was 475 px across at 1320×559 against 338 px with script, and is 338 px in Chromium 148, WebKit 26.4
+and Firefox 150 now. The pairs below are the Moon's Tycho link at 1280×800 and Europa with shadows at 390×844, before
+and after.
 
 ![The Moon and Europa drawn by a native response, before and after the default view](images/native-default-view.png)
 
-A drawn body also takes a drag and the wheel without script (`dragWithoutScript` in `site/layouts/ObjectLayout.astro`).
-Dragging turns the body's prepared rotation: a hidden resize corner holds the drag and a view timeline reads it. A body
-without a prepared rotation, such as a star, only zooms. The wheel scales the whole stage from a tenth of its size to five
-times it, so a star's limb or a material composite zooms with the body. Dragging needs a resize corner (Chromium,
-WebKit) and the wheel needs `scroll-initial-target` (recent Chromium); other browsers keep the still view. The frames are
-Jupiter at 1280×800 in headless Chromium: the opening view, after a drag, zoomed out and zoomed in.
+A drawn body also takes a drag and the wheel without script (`site/native-input.mts`, which those pages link as
+`/native-input.css`; a page with script never requests it). Dragging turns the body's prepared rotation: the browser's
+resize handle holds the drag, a row of hover strips keeps that handle under the pointer, and anchor positioning carries
+the stored width to the body. A body without a prepared rotation, such as a star, only zooms. The wheel scales the whole
+stage from a tenth of its size to five times it, so a star's limb or a material composite zooms with the body. Dragging
+needs anchor positioning and a pointer that hovers; the wheel needs scroll timelines, which Firefox does not ship, so
+Firefox drags and does not zoom. Both were measured without script in Chromium 148, WebKit 26.4 and Firefox 150; a
+browser without anchor positioning keeps the still view. The frames are Jupiter at 1280×800 in headless Chromium: the
+opening view, after a drag, zoomed out and zoomed in.
 
 ![Jupiter without script: the opening view, turned by a drag, zoomed out and zoomed in](images/native-drag-zoom.png)
 
