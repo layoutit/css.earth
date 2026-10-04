@@ -1,0 +1,43 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "homunculus-nebula-layers",
+  "type": "image-layer-bank",
+  "properties": {
+    "preparation": {
+      "source": "source/recipe.json"
+    },
+    "host": "homunculus-nebula",
+    "frame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -34662603585005190000,
+        11756401314058086000,
+        -62597823284558320000
+      ],
+      "localToReferenceXyzw": [
+        -0.5623141049283225,
+        0.7844947792054218,
+        0.21252195592185388,
+        -0.1523325541348456
+      ],
+      "metersPerUnit": 30856775814913670,
+      "boundsUnits": {
+        "min": [
+          -0.17886202588179806,
+          -0.1786785176955206,
+          -0.2547017912133924
+        ],
+        "max": [
+          0.17900173728953894,
+          0.17946361394342786,
+          0.2655364772658686
+        ]
+      }
+    }
+  },
+  "prepared": {
+    "format": "cssearth-image-layer-bank@1",
+    "url": "prepared/image-layers.json"
+  }
+}

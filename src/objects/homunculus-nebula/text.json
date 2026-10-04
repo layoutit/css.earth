@@ -1,0 +1,95 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "homunculus-nebula",
+  "card": {
+    "text": "The Homunculus Nebula is the two-lobed cloud of dust around the star Eta Carinae, about 2,350 parsecs away.",
+    "sources": [
+      {
+        "catalogueId": "publication-smith-2006-homunculus-shape",
+        "url": "https://arxiv.org/abs/astro-ph/0602464",
+        "label": "Smith (2006), ApJ 644, 1151: the structure of the Homunculus, shape and latitude dependence from H2 and [Fe II] velocity maps",
+        "checked": "2026-10-04",
+        "locator": "Abstract: a distance of 2350 ± 50 pc"
+      },
+      {
+        "catalogueId": "wikipedia-homunculus-nebula",
+        "url": "https://en.wikipedia.org/wiki/Homunculus_Nebula",
+        "label": "Wikipedia, \"Homunculus Nebula\"",
+        "checked": "2026-10-04",
+        "locator": "Lead section, revision 1337614757",
+        "quote": "The Homunculus Nebula is a bipolar emission and reflection nebula surrounding the massive star system Eta Carinae, about 7,500 light-years from Earth."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "ESA/Hubble's picture of it lies here on the surface its spectra give: two hollow lobes, one tipped toward the Sun and one away.",
+    "sources": [
+      {
+        "catalogueId": "esahubble-potw1208a",
+        "url": "https://esahubble.org/images/potw1208a/",
+        "label": "ESA/Hubble potw1208a: ESA/Hubble & NASA",
+        "checked": "2026-10-04",
+        "locator": "Preview of a forthcoming supernova; ACS 220, 250, 330, 550 and 660 nm"
+      },
+      {
+        "catalogueId": "publication-steffen-2014-homunculus-3d",
+        "url": "https://arxiv.org/abs/1407.4096",
+        "label": "Steffen et al. (2014), MNRAS 442, 3316: the three-dimensional structure of the Eta Carinae Homunculus",
+        "checked": "2026-10-04",
+        "locator": "Abstract: the first full 3D model of the Homunculus, with a printable version"
+      },
+      {
+        "catalogueId": "publication-smith-2006-homunculus-shape",
+        "url": "https://arxiv.org/abs/astro-ph/0602464",
+        "label": "Smith (2006), ApJ 644, 1151: the structure of the Homunculus, shape and latitude dependence from H2 and [Fe II] velocity maps",
+        "checked": "2026-10-04",
+        "locator": "Sect. 4: i = 41.0 ± 0.5 degrees, the tilt of the polar axis out of the line of sight"
+      },
+      {
+        "catalogueId": "wikipedia-homunculus-nebula",
+        "url": "https://en.wikipedia.org/wiki/Homunculus_Nebula",
+        "label": "Wikipedia, \"Homunculus Nebula\"",
+        "checked": "2026-10-04",
+        "locator": "Lead section, revision 1337614757",
+        "quote": "The nebula is embedded within the much larger Carina Nebula, a large star-forming H II region."
+      }
+    ]
+  },
+  "datasets": {
+    "optical": {
+      "title": "The Homunculus, ultraviolet to visible",
+      "detail": "1089 × 1033 px",
+      "summary": "Hubble's picture on the nebula's published 3D surface: two closed lobes, their pole 41° from the sight line.",
+      "sources": [
+        {
+          "catalogueId": "esahubble-potw1208a",
+          "url": "https://esahubble.org/images/potw1208a/",
+          "label": "ESA/Hubble potw1208a: ESA/Hubble & NASA",
+          "checked": "2026-10-04",
+          "locator": "Preview of a forthcoming supernova"
+        },
+        {
+          "catalogueId": "publication-steffen-2014-homunculus-3d",
+          "url": "https://arxiv.org/abs/1407.4096",
+          "label": "Steffen et al. (2014), MNRAS 442, 3316: the three-dimensional structure of the Eta Carinae Homunculus",
+          "checked": "2026-10-04",
+          "locator": "Sect. 3: a single continuous surface of each lobe"
+        },
+        {
+          "catalogueId": "nasa-3d-homunculus-nebula",
+          "url": "https://github.com/nasa/NASA-3D-Resources/tree/master/3D%20Printing/Eta%20Carinae%20Homunculus%20Nebula",
+          "label": "NASA 3D Resources: Eta Carinae Homunculus Nebula, the model of Steffen et al. (2014) for printing",
+          "checked": "2026-10-04",
+          "locator": "Eta Carinae Homunculus Nebula.stl"
+        },
+        {
+          "catalogueId": "publication-smith-2006-homunculus-shape",
+          "url": "https://arxiv.org/abs/astro-ph/0602464",
+          "label": "Smith (2006), ApJ 644, 1151: the structure of the Homunculus, shape and latitude dependence from H2 and [Fe II] velocity maps",
+          "checked": "2026-10-04",
+          "locator": "Sect. 4: the pole's inclination and the distance"
+        }
+      ]
+    }
+  }
+}

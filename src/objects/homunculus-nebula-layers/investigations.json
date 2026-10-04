@@ -1,0 +1,67 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "homunculus-nebula-layers",
+  "entries": [
+    {
+      "id": "potw1208a",
+      "subject": "ESA/Hubble potw1208a",
+      "status": "included",
+      "finding": "Preview of a forthcoming supernova: ACS at 220, 250, 330, 550 and 660 nm; 1089 × 1033 px over 27.0 × 25.6 arcsec, released 20 February 2012. The file's embedded sky tags for scale and direction, 0.0248 arcsec per pixel and north 34.98° left of vertical, and the star for place: the middle of the picture's saturated pixels, pixel 627, 525, is set at Eta Carinae's catalogued place, so the frame's centre is 161.2656327°, -59.684052°.",
+      "evidence": [
+        "https://esahubble.org/images/potw1208a/",
+        "https://esahubble.org/copyright/"
+      ]
+    },
+    {
+      "id": "surface",
+      "subject": "The nebula's surface",
+      "status": "included",
+      "finding": "Steffen et al. (2014) mapped the whole Homunculus with VLT/X-shooter in H2 2.12 µm and made the first full 3D model of it: a single continuous surface for each lobe, with the polar holes, trenches and near-equatorial protrusions the spectra show. The optical picture is light the star scatters off the dust of that thin, clumpy shell. NASA publishes the model as a file for printing; the bake reads where each sight line crosses it.",
+      "evidence": [
+        "https://arxiv.org/abs/1407.4096",
+        "https://github.com/nasa/NASA-3D-Resources/tree/master/3D%20Printing/Eta%20Carinae%20Homunculus%20Nebula"
+      ]
+    },
+    {
+      "id": "model-fit",
+      "subject": "How the model lies on the picture",
+      "status": "included",
+      "finding": "Smith (2006) prints the pole: an inclination of 41.0 ± 0.5 degrees, the tilt of the polar axis out of the line of sight, along position angle 310 degrees. The file prints nothing of its unit, its turn about the pole, the star's place or which end recedes. Measured here (packages/bake/authoring/homunculus-nebula/model-fit.mts): the +z end recedes, the turn is 328 degrees, a unit is 2.72 arcsec and the star is at (0.96, 0, -0.08) of the file; the model's outline then shares 86.8% with the picture's lit pixels. A check against a printed number: the file's farthest point along its pole is 3.89 units from the star, 10.6 arcsec, 3.72e15 m at 2,350 pc, beside the 3.4e15 m at which Steffen et al. state the lobes' speeds.",
+      "evidence": [
+        "https://arxiv.org/abs/astro-ph/0602464",
+        "https://arxiv.org/abs/1407.4096",
+        "https://github.com/nasa/NASA-3D-Resources/tree/master/3D%20Printing/Eta%20Carinae%20Homunculus%20Nebula"
+      ]
+    },
+    {
+      "id": "unseen-sides",
+      "subject": "The sides the picture does not show",
+      "status": "included",
+      "finding": "One picture shows the side of each lobe that faces the Sun. The far sides, and the part of the north-west lobe behind the south-east one, have not been photographed. Each repeats the picture along its own sight line, so the lobes are closed and lit from every side: a presentation choice, not what those sides look like.",
+      "evidence": [
+        "https://esahubble.org/images/potw1208a/"
+      ]
+    },
+    {
+      "id": "skirt",
+      "subject": "The equatorial skirt and the outer ejecta",
+      "status": "deferred",
+      "finding": "Steffen et al. (2014) and Smith (2006) find no H2 from the thin equatorial skirt, so the model has no surface for it. The skirt and the faint ejecta around the lobes stay on the picture's plane.",
+      "evidence": [
+        "https://arxiv.org/abs/1407.4096",
+        "https://arxiv.org/abs/astro-ph/0602464"
+      ],
+      "revisitWhen": "A published shape for the skirt, or for the outer ejecta, exists as data."
+    },
+    {
+      "id": "heic1912a",
+      "subject": "Hubble's 2019 ultraviolet picture",
+      "status": "deferred",
+      "finding": "ESA/Hubble heic1912a (WFC3, Mg II 280 nm, 336 nm and [N II] 658 nm; 1779 × 1805 px over 40 arcsec) shows the lobes about 800 px long inside the glowing outer ejecta. The nebula is larger in it than in the 2012 picture: it expands. The ejecta have no published surface and would lie flat.",
+      "evidence": [
+        "https://esahubble.org/images/heic1912a/"
+      ],
+      "revisitWhen": "A second dataset is wanted; the model must be fitted to that picture's own epoch."
+    }
+  ]
+}

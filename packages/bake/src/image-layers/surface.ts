@@ -15,9 +15,10 @@ export const BODY_LEAST_PIXELS = 256;
  * of pixels a pixel inside the outline and not at all a pixel outside: left alone, the two sides end that far apart;
  * and a side that ends at a hard edge over a dark picture shows as a line. */
 export const RIM_JOINS_PIXELS = 4;
-/** What the flat picture keeps under the surface is the faint light around its outline: this share of the pixels
- * within `AROUND_PIXELS` of the outline are fainter. */
-export const AROUND_PIXELS = 32, AROUND_FAINTER_SHARE = 0.2;
+/** What the flat picture keeps under the surface is the light around the surface's outline, carried inward: the
+ * picture outside the outline as means over squares this many pixels across, each square under the surface the mean
+ * of its neighbours, settled over `CARRIED_PASSES` passes. */
+export const CARRIED_SQUARE_PIXELS = 8, CARRIED_PASSES = 400;
 /** How far past a body's outline, in pixels, each of its sides is carried on as the other side goes, mirrored in the
  * outline: a patch that crosses the outline then stands near the surface on both sides of it, and the two sides'
  * patches meet at the rim. Without it a patch's corners past the outline stand at the rim's own depth, and the patch
@@ -88,7 +89,7 @@ const layerOf = (count: number): ShapeLayer => ({ depth: new Float32Array(count)
  * The picture shows the side nearest the Sun, so that side holds the picture. The sides behind it were never
  * photographed: each repeats the picture, sight line by sight line, so the surface is closed and lit from every side.
  * The flat picture keeps three things under the surface: the faint light that surrounds the outline
- * (`AROUND_FAINTER_SHARE`), so no dark hole stands behind the surface when it is seen from the side; the central star's
+ * carried inward (`CARRIED_SQUARE_PIXELS`), so no hole stands behind the surface when it is seen from the side; the central star's
  * own light (`starRadiusArcsec`: all of it out to that radius, less and less out to twice that), which is at the star
  * and on no surface; and, over the last pixels inside the outline of the body that shows the picture, that picture's
  * light again, under the body's own. The stack paints the flat picture, then the sides from the farthest to the nearest; the nearest holds what the
@@ -110,13 +111,19 @@ export function imageLayerSurfaceWalls(base: Buffer, width: number, height: numb
         for (let k = 0; k < pairs; k++) { if (!has(q, k) || body[pairs * q + k]! >= 0 || lobes[most * q + 2 * k] !== lobe || Math.abs((enter(q, k) + leave(q, k)) / 2 - middle) > step) continue; body[pairs * q + k] = id; claimed[q] = id; stack.push(pairs * q + k); break; } } }
     sizes.push(size); }
   const drawn = (p: number, pair: number) => has(p, pair) && sizes[body[pairs * p + pair]!]! >= BODY_LEAST_PIXELS;
-  // The picture's light, and the faint light around the surface's outline.
-  const light = (p: number, c: number) => base[4 * p + c]! / 255 * Math.min(base[4 * p + 3]! / 255, .998), outside = new Float32Array(count).fill(Infinity), ring: number[][] = [[], [], []];
-  for (let p = 0; p < count; p++) if (has(p, 0)) outside[p] = 0;
-  for (let y = 0; y < height; y++) for (let x = 0; x < width; x++) { const p = y * width + x; if (x) outside[p] = Math.min(outside[p]!, outside[p - 1]! + 1); if (y) outside[p] = Math.min(outside[p]!, outside[p - width]! + 1); }
-  for (let y = height - 1; y >= 0; y--) for (let x = width - 1; x >= 0; x--) { const p = y * width + x; if (x < width - 1) outside[p] = Math.min(outside[p]!, outside[p + 1]! + 1); if (y < height - 1) outside[p] = Math.min(outside[p]!, outside[p + width]! + 1); }
-  for (let p = 0; p < count; p++) if (outside[p]! > 0 && outside[p]! <= AROUND_PIXELS && base[4 * p + 3]) for (let c = 0; c < 3; c++) ring[c]!.push(light(p, c));
-  const around = ring.map(values => values.length ? values.sort((a, b) => a - b)[Math.floor(AROUND_FAINTER_SHARE * values.length)]! : 0);
+  // The picture's light, and the light around the surface's outline carried in under it.
+  const light = (p: number, c: number) => base[4 * p + c]! / 255 * Math.min(base[4 * p + 3]! / 255, .998), square = CARRIED_SQUARE_PIXELS, columns = Math.ceil(width / square), rows = Math.ceil(height / square);
+  const carried = [0, 1, 2].map(c => { const held = new Float32Array(columns * rows), known = new Uint8Array(columns * rows);
+    for (let row = 0; row < rows; row++) for (let column = 0; column < columns; column++) { let sum = 0, seen = 0;
+      for (let y = row * square; y < Math.min(height, (row + 1) * square); y++) for (let x = column * square; x < Math.min(width, (column + 1) * square); x++) if (!has(y * width + x, 0)) { sum += light(y * width + x, c); seen++; }
+      if (seen) { held[row * columns + column] = sum / seen; known[row * columns + column] = 1; } }
+    for (let pass = 0; pass < CARRIED_PASSES; pass++) for (let row = 0; row < rows; row++) for (let column = 0; column < columns; column++) { const at = row * columns + column; if (known[at]) continue; let sum = 0, around = 0;
+      for (const [dx, dy] of sides) { const nx = column + dx, ny = row + dy; if (nx < 0 || ny < 0 || nx >= columns || ny >= rows) continue; sum += held[ny * columns + nx]!; around++; }
+      held[at] = sum / around; }
+    return held; });
+  // What a pixel of the flat picture may keep: the carried light there, read between the squares' middles.
+  const kept = (p: number, c: number) => { const x = p % width, y = (p - x) / width, u = Math.max(0, Math.min(columns - 1, (x + .5) / square - .5)), v = Math.max(0, Math.min(rows - 1, (y + .5) / square - .5)), i = Math.min(columns - 2, Math.floor(u)), j = Math.min(rows - 2, Math.floor(v)), a = u - i, b = v - j, field = carried[c]!;
+    return (1 - b) * ((1 - a) * field[j * columns + i]! + a * field[j * columns + i + 1]!) + b * ((1 - a) * field[(j + 1) * columns + i]! + a * field[(j + 1) * columns + i + 1]!); };
   // Each body's sides: their depths led together, and their share of the light taken up, over the last pixels inside its outline.
   const made = new Map<number, { enter: ShapeLayer; leave: ShapeLayer; depth: number; size: number }>(), inside = new Float32Array(count), taken = new Float32Array(pairs * count), sharp = new Uint8Array(count); let pixels = 0;
   for (let id = 0; id < sizes.length; id++) { if (sizes[id]! < BODY_LEAST_PIXELS) continue;
@@ -143,13 +150,14 @@ export function imageLayerSurfaceWalls(base: Buffer, width: number, height: numb
     // The surface's share of the light there: none at the star. The flat picture keeps the rest, and over the last pixels
     // inside the outline of the body that shows the picture it keeps that light too: a side that ends at a hard edge
     // over a dark picture shows as a line, and the nearest side holds only what the photograph has left over it.
-    const from = starRadiusArcsec > 0 ? fromStar(p % width, Math.floor(p / width)) / starRadiusArcsec : Infinity, t = Math.max(0, Math.min(1, 2 - from)), share = 1 - t * t * (3 - 2 * t), kept = 1 - share * taken[pairs * p + lit[0]!]!; if (!(share > 0)) continue;
-    const whole = tauOf(Math.min(base[4 * p + 3]! / 255, .998)), all = [light(p, 0), light(p, 1), light(p, 2)], faint = all.map((value, c) => Math.min(value, around[c]!)), faintTau = Math.min(whole, tauOf(Math.min(Math.max(...faint), .998)));
-    const own = all.map((value, c) => share * (value - faint[c]!)), keep = all.map((value, c) => faint[c]! + kept * (value - faint[c]!)), keepAlpha = Math.min(.998, Math.max(1 - Math.exp(-(faintTau + kept * (whole - faintTau))), ...keep)), alpha = Math.min(.998, Math.max(1 - Math.exp(-share * (whole - faintTau)), ...own));
+    const from = starRadiusArcsec > 0 ? fromStar(p % width, Math.floor(p / width)) / starRadiusArcsec : Infinity, t = Math.max(0, Math.min(1, 2 - from)), share = 1 - t * t * (3 - 2 * t), under = 1 - share * taken[pairs * p + lit[0]!]!; if (!(share > 0)) continue;
+    const whole = tauOf(Math.min(base[4 * p + 3]! / 255, .998)), all = [light(p, 0), light(p, 1), light(p, 2)], faint = all.map((value, c) => Math.min(value, kept(p, c))), faintTau = Math.min(whole, tauOf(Math.min(Math.max(...faint), .998)));
+    const own = all.map((value, c) => share * (value - faint[c]!)), keep = all.map((value, c) => faint[c]! + under * (value - faint[c]!)), keepAlpha = Math.min(.998, Math.max(1 - Math.exp(-(faintTau + under * (whole - faintTau))), ...keep)), alpha = Math.min(.998, Math.max(1 - Math.exp(-share * (whole - faintTau)), ...own));
     const below = [...keep];
     for (let at = lit.length - 1; at >= 0; at--) for (const entering of [false, true]) { const side = made.get(body[pairs * p + lit[at]!]!)!, layer = entering ? side.enter : side.leave;
-      // The nearest side is opaque enough to hold, in every channel, what the photograph has left once the rest shows through it.
-      if (at === 0 && entering) { const nearAlpha = Math.min(.998, Math.max(alpha, ...all.map((value, c) => below[c]! < 1 ? (value - below[c]!) / (1 - below[c]!) : 0))), shown = all.map((value, c) => Math.max(0, value - (1 - nearAlpha) * below[c]!)); layer.tau[p] = tauOf(nearAlpha); hue(layer, p, shown, nearAlpha); }
+      // The nearest side is opaque enough to hold, in every channel, what the photograph has left once the rest shows
+      // through it, and to hide what the rest shows beyond the photograph.
+      if (at === 0 && entering) { const nearAlpha = Math.min(.998, Math.max(alpha, ...all.map((value, c) => below[c]! < 1 ? (value - below[c]!) / (1 - below[c]!) : 0), ...all.map((value, c) => below[c]! > value ? 1 - value / below[c]! : 0))), shown = all.map((value, c) => Math.max(0, value - (1 - nearAlpha) * below[c]!)); layer.tau[p] = tauOf(nearAlpha); hue(layer, p, shown, nearAlpha); }
       else { layer.tau[p] = tauOf(alpha); hue(layer, p, own, alpha); for (let c = 0; c < 3; c++) below[c] = own[c]! + (1 - alpha) * below[c]!; } }
     for (let c = 0; c < 3; c++) base[4 * p + c] = keepAlpha > 0 ? Math.min(255, Math.round(255 * keep[c]! / keepAlpha)) : 0;
     base[4 * p + 3] = Math.round(255 * keepAlpha); sharp[p] = 1; pixels++; }
