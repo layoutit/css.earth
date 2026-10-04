@@ -1,5 +1,5 @@
-/** The star survey (stars.mts), offline. The fixtures are every answer SIMBAD and VizieR served the survey for M95 and M83 on
- * 2026-10-04, whole and in the order asked. M95's Cepheids come from a paper VizieR does not hold and from a reanalysis whose
+/** The star survey (stars.mts), offline. The fixtures are every answer SIMBAD and VizieR served the survey for M95, M83 and M51 on
+ * 2026-10-04, whole. M51 holds a supergiant SIMBAD types as a plain star (M51-DS1), which no class of the survey names. M95's Cepheids come from a paper VizieR does not hold and from a reanalysis whose
  * table gives every row its galaxy's centre and the star's SIMBAD name; M83's have a table with a position per star. */
 import assert from 'node:assert/strict';
 import { mkdtemp, readFile, rm } from 'node:fs/promises';
@@ -84,6 +84,20 @@ test('a table that lists each star by its detector pixel is a lead that still ne
   const text = formatStars(result);
   assert.match(text, /VizieR J\/ApJ\/529\/723\/appen: 232 rows, period \(Per\), no position, a detector pixel per star \(Chip, Xpos, Ypos\)\n/u);
   assert.match(text, /\nPlaced by pixel, once the paper says which exposure its pixels are of and how its software counts them \(FILE, N\): telescope new-object --from-table cepheid:m95=J\/ApJ\/529\/723\/appen#exposure=mast:HST\/product\/FILE\.fits,firstPixel=N --out SPEC\.json\n/u);
+});
+
+test('a single star of no class, with no parallax or proper motion in SIMBAD, is named as a lead for a spec written by hand', async () => {
+  const result = await surveyStars(WORKSPACE, { target: 'm51', catalogue, fetcher: answering(await served('m51')) });
+  assert.deepEqual(result.others, [{ name: 'EQ J132952.7+471036', otype: '*', papers: 7 }, { name: 'NAME M51-DS1', otype: '*', papers: 4 }, { name: 'EQ J1329+4710', otype: '*', papers: 2 }]);
+  assert.deepEqual(result.leads, [], 'its long-period variable has a table, and no class the generator drafts');
+  const text = formatStars(result);
+  assert.match(text, /\nOther single stars SIMBAD holds here with no parallax or proper motion, most cited first: EQ J132952\.7\+471036 \(\*, 7 papers\); NAME M51-DS1 \(\*, 4 papers\); EQ J1329\+4710 \(\*, 2 papers\)\.\nOne whose paper prints a temperature and a luminosity can be drafted by hand \(spec\.mts\)\.\n/u);
+  // The stars asked for are of no class above and no outburst or remnant: a Cepheid, a nova or an X-ray binary is counted where it belongs.
+  const query = simbadQueries.others(202.47, 47.195, 0.1, ['*', 'Em*']);
+  assert.match(query, /^SELECT TOP 8 b\.main_id, b\.otype, b\.nbref FROM basic AS b WHERE CONTAINS\(POINT\('ICRS', b\.ra, b\.dec\), CIRCLE\('ICRS', 202\.47, 47\.195, 0\.10000\)\) = 1 AND b\.plx_value IS NULL AND b\.pmra IS NULL AND b\.nbref >= 2 AND b\.otype IN \('\*', 'Em\*'\) ORDER BY nbref DESC$/u);
+  // A galaxy with no such star says nothing of them.
+  const none = await surveyStars(WORKSPACE, { target: 'm95', catalogue, fetcher: answering(await served('m95')) });
+  assert.deepEqual(none.others, []); assert.doesNotMatch(formatStars(none), /Other single stars/u);
 });
 
 test('a target SIMBAD gives no outline is refused by the field that is empty, and the command line takes one galaxy', async () => {

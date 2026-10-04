@@ -5,7 +5,8 @@
  * VizieR is then asked, by bibcode, whether it holds each paper's tables, and each table is read for what a placed star
  * needs: a position of its own and a period or a temperature. Nothing is downloaded and no star is made here. A table the
  * survey calls ready is a lead for `new-object --from-table`, and so is one that lists each star by its detector pixel, once its
- * paper has said which exposure the pixels are of; a star SIMBAD lists inside the outline may still be a
+ * paper has said which exposure the pixels are of. The single stars of no class that SIMBAD holds there with no parallax and no
+ * proper motion are named too, the most cited first: a star a paper studied alone is often typed a plain star; a star SIMBAD lists inside the outline may still be a
  * foreground star of the Milky Way, which only its paper says. */
 import { mkdir, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
@@ -21,6 +22,8 @@ const REQUEST_TIMEOUT_MS = 60_000;
 const USER_AGENT = 'cssEarth-telescope/1.0 (https://css.earth)';
 /** Papers named per class, and rows read from a table to see whether its positions are each star's own. */
 const PAPERS_PER_CLASS = 4, ROWS_SAMPLED = 3;
+/** Stars outside every class named for the reader, when at least this many papers cite them. */
+const OTHERS_NAMED = 8, OTHERS_PAPERS = 2;
 
 /** The star classes the survey reports, each by the root of its branch in SIMBAD's type tree. `route` names the
  * `new-object --from-table` class that drafts such a star from a table row; a class without one is counted only. */
@@ -52,6 +55,9 @@ export interface StarSurvey {
   readonly classes: readonly { readonly id: string; readonly label: string; readonly count: number; readonly papers: readonly StarPaper[] }[];
   readonly transients: readonly { readonly one: string; readonly label: string; readonly count: number }[];
   readonly leads: readonly StarLead[];
+  /** Single stars of no class above that SIMBAD holds inside the outline with no parallax and no proper motion, so not plainly in front of
+   * the galaxy, the most cited first: M51-DS1 is typed a plain star. Each is a lead for a spec written by hand from its paper. */
+  readonly others: readonly { readonly name: string; readonly otype: string; readonly papers: number }[];
 }
 
 /** SIMBAD's type tree: each type with its path from the root ("* > Ev* > Ce* > cC*"). */
@@ -67,6 +73,7 @@ export const simbadQueries = {
   galaxy: (name: string) => `SELECT b.main_id, b.ra, b.dec, b.galdim_majaxis FROM basic AS b JOIN ident AS n ON b.oid = n.oidref WHERE n.id = ${quoted(name)}`,
   types: () => 'SELECT otype, path, is_candidate FROM otypedef',
   counts: (raDeg: number, decDeg: number, radiusDeg: number) => `SELECT otype, COUNT(*) AS n FROM basic WHERE ${circle(raDeg, decDeg, radiusDeg)} GROUP BY otype`,
+  others: (raDeg: number, decDeg: number, radiusDeg: number, otypes: readonly string[]) => `SELECT TOP ${OTHERS_NAMED} b.main_id, b.otype, b.nbref FROM basic AS b WHERE ${circle(raDeg, decDeg, radiusDeg).replace('ra, dec', 'b.ra, b.dec')} AND b.plx_value IS NULL AND b.pmra IS NULL AND b.nbref >= ${OTHERS_PAPERS} AND b.otype IN (${otypes.map(quoted).join(', ')}) ORDER BY nbref DESC`,
   papers: (raDeg: number, decDeg: number, radiusDeg: number, otypes: readonly string[]) => `SELECT TOP ${PAPERS_PER_CLASS} r.bibcode, r.title, COUNT(*) AS n FROM basic AS b JOIN has_ref AS h ON h.oidref = b.oid JOIN ref AS r ON r.oidbib = h.oidbibref WHERE ${circle(raDeg, decDeg, radiusDeg).replace('ra, dec', 'b.ra, b.dec')} AND b.otype IN (${otypes.map(quoted).join(', ')}) GROUP BY r.bibcode, r.title ORDER BY n DESC`,
 };
 
@@ -125,9 +132,13 @@ export async function surveyStars(root: string, options: StarSurveyOptions): Pro
       leads.push({ class: starClass.id, bibcode: paper.bibcode, table: table.name, positions, command: `telescope new-object --from-table ${starClass.route}:${target.id}=${table.name}${positions === 'pixel' ? '#exposure=mast:HST/product/FILE.fits,firstPixel=N' : ''} --out SPEC.json` });
     }
   }
+  // Every confirmed star type that is neither a class above nor an outburst or remnant, as far as SIMBAD counts any here.
+  const named = new Set([...STAR_CLASSES, ...TRANSIENTS].flatMap(kind => typesUnder(types, kind.roots))), plain = typesUnder(types, ['*']).filter(otype => !named.has(otype) && counts.has(otype));
+  if (plain.length) progress('Reading the other single stars SIMBAD holds there…');
+  const others = plain.length ? (await simbad(simbadQueries.others(raDeg, decDeg, radiusDeg, plain))).map(row => ({ name: (row.main_id ?? '').replace(/\s+/gu, ' '), otype: row.otype ?? '', papers: Number(row.nbref) })) : [];
   const result: StarSurvey = { schema: STARS_SCHEMA, target, simbad: { name: (galaxy.main_id ?? '').replace(/\s+/gu, ' '), raDeg, decDeg, majorAxisArcmin, radiusDeg },
     objects: [...counts.values()].reduce((sum, n) => sum + n, 0), stars: count(['*']) - TRANSIENTS.reduce((sum, kind) => sum + count(kind.roots), 0),
-    classes, transients: TRANSIENTS.map(kind => ({ one: kind.one, label: kind.label, count: count(kind.roots) })), leads };
+    classes, transients: TRANSIENTS.map(kind => ({ one: kind.one, label: kind.label, count: count(kind.roots) })), leads, others };
   if (options.directory) { await mkdir(options.directory, { recursive: true }); await writeFile(resolve(options.directory, 'stars.json'), `${JSON.stringify(result, null, 2)}\n`); }
   return result;
 }
@@ -155,6 +166,8 @@ export function formatStars(result: StarSurvey, directory?: string): string {
   for (const lead of result.leads) lines.push(lead.positions === 'table' ? `Ready: ${lead.command}`
     : lead.positions === 'simbad' ? `Ready, placed by SIMBAD (the table gives each row a SIMBAD name and no position): ${lead.command}`
     : `Placed by pixel, once the paper says which exposure its pixels are of and how its software counts them (FILE, N): ${lead.command}`);
+  if (result.others.length) lines.push('', `Other single stars SIMBAD holds here with no parallax or proper motion, most cited first: ${result.others.map(star => `${star.name} (${star.otype}, ${star.papers} papers)`).join('; ')}.`,
+    'One whose paper prints a temperature and a luminosity can be drafted by hand (spec.mts).');
   lines.push('', 'A lead is not a star: read the paper, and check a star is in the galaxy and not in front of it.');
   if (directory) lines.push('', `Saved: ${resolve(directory, 'stars.json')}`);
   return `${lines.join('\n')}\n`;
