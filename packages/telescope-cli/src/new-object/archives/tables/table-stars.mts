@@ -23,11 +23,11 @@
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { imageLayerDisc, imageLayerDiscDistanceKpc } from '@cssearth/bake/image-layers';
-import { VIZIER_ASU, type Archive } from './archives.mts';
-import { preferredName, simbadIdentifiers } from '../display-name.mts';
-import { slug } from '../identity.mts';
-import type { CataloguePosition } from '../spec.mts';
-import { GROENEWEGEN_2020, galaxyVelocity, relationCepheidDraft } from './sh0es.mts';
+import { VIZIER_ASU, type Archive } from '../archives.mts';
+import { preferredName, simbadIdentifiers } from '../../display-name.mts';
+import { slug } from '../../identity.mts';
+import type { CataloguePosition } from '../../spec.mts';
+import { GROENEWEGEN_2020, galaxyVelocity, relationCepheidDraft } from '../sh0es.mts';
 import { simbadAt, simbadQuoted, simbadRows } from './simbad-tap.mts';
 import { catalogueOf, DECIMAL_POSITION, parseVizierReadMe, starColumns, vizierDataRows, vizierReadMeUrl, vizierTables, type StarColumns } from './vizier-tables.mts';
 

@@ -36,8 +36,8 @@ export const DRAFT_ROUTES: Readonly<Record<string, { readonly names: string; rea
   m31cepheids: { names: 'all | V1 | ID', draft: async (names, { archive, root }) => (await import('./archives/m31-cepheids.mts')).draftsFromM31Cepheids(names, archive, root) },
   // A Cepheid of the Triangulum Galaxy that Hubble measured for its distance (Breuval et al. 2023) (m33-cepheids.mts).
   m33cepheids: { names: 'all | ID', draft: async (names, { archive, root }) => (await import('./archives/m33-cepheids.mts')).draftsFromM33Cepheids(names, archive, root) },
-  // A star of another galaxy from any VizieR table that lists it with a position and a period (table-stars.mts); `telescope stars GALAXY` finds the tables.
-  table: { names: 'CLASS:GALAXY=TABLE[#ROW]', draft: async (names, { archive, root }) => (await import('./archives/table-stars.mts')).draftsFromTable(names, archive, root) },
+  // A star of another galaxy from any VizieR table that lists it with a position and a period (tables/table-stars.mts); `telescope stars GALAXY` finds the tables.
+  table: { names: 'CLASS:GALAXY=TABLE[#ROW]', draft: async (names, { archive, root }) => (await import('./archives/tables/table-stars.mts')).draftsFromTable(names, archive, root) },
 };
 
 /** Draft `names` through `route` and write the spec file at `out`. */

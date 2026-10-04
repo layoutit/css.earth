@@ -5,13 +5,13 @@
 import assert from 'node:assert/strict';
 import { resolve } from 'node:path';
 import { sourceTest } from '@cssearth/objects/node/source-test';
-import { catalogueRowForm, catalogueRowUrl, parseCatalogueRow, rowArchive, SIMBAD_TAP, VIZIER_ASU, type Archive } from './archives.mts';
-import { citedRow } from '../identity.mts';
-import { parseStarSpec } from '../spec.mts';
+import { catalogueRowForm, catalogueRowUrl, parseCatalogueRow, rowArchive, SIMBAD_TAP, VIZIER_ASU, type Archive } from '../archives.mts';
+import { citedRow } from '../../identity.mts';
+import { parseStarSpec } from '../../spec.mts';
 import { bibcodeReference, draftsFromTable, paperCredit, parseTableRequest, pickRows, placeInGalaxy, readGalaxy, TABLE_CLASSES } from './table-stars.mts';
 import { catalogueOf, parseVizierMeta, parseVizierReadMe, starColumns, vizierDataRows, vizierReadMeUrl } from './vizier-tables.mts';
 
-const test = sourceTest(), root = resolve(import.meta.dirname, '../../../../..');
+const test = sourceTest(), root = resolve(import.meta.dirname, '../../../../../..');
 const column = (name: string, format: string, description: string, ucd = '') => `#Column\t${name}\t(${format})\t${description}\t[ucd=${ucd}]`;
 const meta = (table: string, rows: number, columns: readonly string[], resource = 'yCat_17430176_1') => [`#RESOURCE=${resource}`, `#Name: ${table}`, '#Title:', `#INFO\tnrows=${rows}\tNumber of rows of the table`, '#Table\t:', `#Name: ${table}`, '#Title:', ...columns].join('\n');
 const RECNO = column('recno', 'I8', 'Record number assigned by the VizieR team. Should Not be used for identification.', 'meta.record');

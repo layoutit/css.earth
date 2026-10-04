@@ -1,7 +1,7 @@
 /** SIMBAD's TAP service answered as tab-separated text. Paper titles and star names hold commas, so the comma-separated answer the
  * identifier lookups read (companions.mts `csv`) cannot carry them. */
-import { SIMBAD_TAP } from '../companions.mts';
-import type { Archive } from './archives.mts';
+import { SIMBAD_TAP } from '../../companions.mts';
+import type { Archive } from '../archives.mts';
 
 export const simbadTsvForm = (query: string) => ({ REQUEST: 'doQuery', LANG: 'ADQL', FORMAT: 'tsv', QUERY: query });
 

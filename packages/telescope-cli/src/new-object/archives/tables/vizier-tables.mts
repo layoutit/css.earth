@@ -3,7 +3,7 @@
  * name (J/ApJ/743/176), a table name or a paper's bibcode as `-source`, so a paper is looked up without guessing its
  * catalogue name. A column is recognised by its UCD when the table has one and by its name otherwise: older tables carry
  * no UCDs. */
-import { VIZIER_ASU, type Archive } from './archives.mts';
+import { VIZIER_ASU, type Archive } from '../archives.mts';
 
 export interface VizierColumn { readonly name: string; readonly format: string; readonly description: string; readonly ucd: string }
 export interface VizierTable { readonly name: string; readonly rows: number | null; readonly columns: readonly VizierColumn[] }

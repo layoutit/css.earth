@@ -9,7 +9,7 @@ import test from 'node:test';
 import { WORKSPACE } from '@cssearth/telescope/node';
 import { parseCli } from '../cli-arguments.mts';
 import { loadTargetCatalogue } from '../query.mts';
-import { parseSimbadTsv } from '../new-object/archives/simbad-tap.mts';
+import { parseSimbadTsv } from '../new-object/archives/tables/simbad-tap.mts';
 import { formatStars, parseSimbadTypes, simbadQueries, STARS_SCHEMA, surveyStars, typesUnder } from './stars.mts';
 
 interface Served { readonly url: string; readonly body: string }

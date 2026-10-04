@@ -9,9 +9,9 @@
 import { mkdir, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { SIMBAD_TAP } from '../new-object/companions.mts';
-import { parseSimbadTsv, simbadQuoted as quoted, simbadTsvForm } from '../new-object/archives/simbad-tap.mts';
+import { parseSimbadTsv, simbadQuoted as quoted, simbadTsvForm } from '../new-object/archives/tables/simbad-tap.mts';
 import { VIZIER_ASU } from '../new-object/archives/archives.mts';
-import { DECIMAL_POSITION, parseVizierMeta, starColumns, vizierDataRows, type StarColumns } from '../new-object/archives/vizier-tables.mts';
+import { DECIMAL_POSITION, parseVizierMeta, starColumns, vizierDataRows, type StarColumns } from '../new-object/archives/tables/vizier-tables.mts';
 import { displayName } from '../papers.mts';
 import { loadTargetCatalogue } from '../query.mts';
 
