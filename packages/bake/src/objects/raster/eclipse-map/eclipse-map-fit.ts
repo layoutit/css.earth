@@ -6,7 +6,7 @@ import { bareRockDaysideFlux, bareRockFromEclipseDepth, bareRockTemperature, fit
 import { measureTransitShift } from './transit-timing.ts';
 import { readTarMember } from '../numpy/tar-member.ts';
 import { array, boolean, number, optional, shape, text } from '@cssearth/core';
-import { ECLIPSE_DEPTH_SCHEMA } from '@cssearth/objects';
+import { DAYSIDE_TEMPERATURE_SCHEMA, ECLIPSE_DEPTH_SCHEMA } from '@cssearth/objects';
 
 const inside = (path: string) => { if (!path || path.startsWith('/') || path.includes('\\') || path.split('/').includes('..')) throw new TypeError('An eclipse-map input must be inside the source directory.'); return path; };
 const systematic = (value: unknown): Systematic => {
@@ -229,5 +229,29 @@ export async function loadBareRockEclipse(root: string, value: unknown) {
       return bareRockTemperature(substellarK, longitude, latitude);
     },
     report: { format: 'bare-rock-eclipse', units: 'K', eclipseDepthPpm: [low, high], substellarK, substellarRangeK: [lowerK, upperK], ...(record.radiusRatio === undefined ? {} : { radiusRatio }) },
+  };
+}
+
+const daysideRecord = shape({ schema: text, planet: text, temperatureK: shape({ value: number, lower: number, upper: number }), wavelengthMicrons: number, source: text });
+const measuredDaysideProfile = shape({ path: text, sampling: text, units: text, planet: text });
+
+/** A measured dayside brightness temperature and nothing else. A secondary eclipse measures the day side as a whole: one
+ * number. It is drawn over the hemisphere under the star (longitude 0, latitude 0) and the night hemisphere is left as missing
+ * data, because the measurement says nothing of it. No pattern is implied on the day side. */
+export async function loadMeasuredDayside(root: string, value: unknown) {
+  const recipe = measuredDaysideProfile(value);
+  if (recipe.units !== 'K') throw new TypeError('A measured day side is a brightness temperature in K.');
+  const record = daysideRecord(JSON.parse((await readFile(resolve(root, inside(recipe.path)))).toString('utf8')));
+  if (record.schema !== DAYSIDE_TEMPERATURE_SCHEMA || record.planet !== recipe.planet) throw new TypeError(`${recipe.path} is not a dayside temperature of ${recipe.planet}.`);
+  const { value: daysideK, lower, upper } = record.temperatureK;
+  if (!(lower > 0 && lower <= daysideK && upper >= daysideK)) throw new TypeError('A dayside temperature needs 0 < lower <= value <= upper.');
+  const radians = Math.PI / 180;
+  return {
+    daysideK,
+    sample(longitude: number, latitude: number) {
+      if (!Number.isFinite(longitude) || !Number.isFinite(latitude) || latitude < -90 || latitude > 90) return null;
+      return Math.cos(latitude * radians) * Math.cos(longitude * radians) > 0 ? daysideK : null;
+    },
+    report: { format: 'measured-dayside', units: 'K', daysideK, daysideRangeK: [lower, upper], wavelengthMicrons: record.wavelengthMicrons },
   };
 }

@@ -82,28 +82,47 @@
       "consumers": [
         "scene"
       ]
+    },
+    {
+      "id": "gq-lup-b-band-color",
+      "path": "photometry/band-color.json",
+      "origin": "https://ui.adsabs.harvard.edu/abs/2007ApJ...654L.151M",
+      "credit": "Marois et al. (2007); Stolker et al. (2021); McElwain et al. (2007), as compiled in Best, Liu, Magnier & Dupuy (2024), The UltracoolSheet v2.1 (Zenodo); zero points from the SVO Filter Profile Service, UltracoolSheet Main.csv, GQ Lup b: MKO K 13.37 +/- 0.12 (Maro07), MKO H 14.02 +/- 0.13 (Stol21), 2MASS J 14.9 +/- 0.11 (McEl07); SVO MKO/NSFCam.K 638.2 Jy, MKO/NSFCam.H 1034.8 Jy, 2MASS/2MASS.J 1594.0 Jy",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "Authored method record: the published flux densities transcribed with their bands and the shared display range",
+      "redistribution": "Method record only",
+      "consumers": [
+        "assets",
+        "datasets"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored color recipe transcribing the cited photometry; repinned when edited."
+      }
     }
   ],
   "generatedIntermediates": [
     {
-      "id": "neutral-disc-context-marker",
+      "id": "dataset-color-context-marker",
       "path": "presentation/context.png",
       "origin": "https://arxiv.org/abs/2110.04307",
-      "credit": "Sphere of the published radius; marker written by packages/telescope-cli/src/new-object/new-hosted-planet.mts",
+      "credit": "The default dataset's color as a disc; rendered by packages/telescope-cli/src/source-authoring/context-markers.mts",
       "license": "Project-authored display derivative.",
       "consumers": [
         "navigation"
       ],
       "recipe": {
-        "generator": "packages/telescope-cli/src/new-object/new-hosted-planet.mts",
+        "generator": "packages/telescope-cli/src/source-authoring/context-markers.mts",
         "inputs": [
-          "gq-lup-b-observational-measurements"
+          "gq-lup-b-observational-measurements",
+          "gq-lup-b-preparation-raster",
+          "gq-lup-b-band-color"
         ]
       },
-      "generator": "packages/telescope-cli/src/new-object/new-hosted-planet.mts",
+      "generator": "packages/telescope-cli/src/source-authoring/context-markers.mts",
       "sourceBinding": {
         "kind": "local",
-        "reason": "A flat neutral gray disc, the marker of an unresolved surface."
+        "reason": "The default dataset drawn as a disc; `context-markers.mts --check` recomputes it."
       }
     }
   ],

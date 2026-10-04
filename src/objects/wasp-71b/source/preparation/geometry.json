@@ -7,14 +7,14 @@
     "latitudeSegments": 16,
     "longitudeSegments": 32,
     "surface": {
-      "url": "/scenes/wasp-71b/wasp-71b-surface-shape@2x.webp",
+      "url": "/scenes/wasp-71b/wasp-71b-surface-thermal@2x.webp",
       "width": 1024,
       "height": 768
     },
     "surfaceLatitudeHeight": 512,
     "packedBandGutter": 8,
     "poles": {
-      "url": "/scenes/wasp-71b/wasp-71b-poles-shape@2x.webp",
+      "url": "/scenes/wasp-71b/wasp-71b-poles-thermal@2x.webp",
       "width": 512,
       "height": 256
     },
@@ -22,7 +22,7 @@
     "polarRadiusScale": 1.035,
     "polarOffset": 0.1,
     "uv": "cell",
-    "color": "#9f989a"
+    "color": "#ff8c19"
   },
   "projection": {
     "tileSize": 50,

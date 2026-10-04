@@ -49,22 +49,22 @@
   },
   "datasets": {
     "titleKey": "datasets",
-    "defaultDataset": "shape",
+    "defaultDataset": "thermal",
     "controls": [
       {
-        "id": "shape",
-        "label": "Shape",
-        "qualification": "A sphere of the published radius, lit by WASP-77; the neutral gray is a display convention, not a measured color.",
-        "thumbnail": "wasp-77-a-b-dataset-shape.webp",
-        "surface": "wasp-77-a-b-surface-shape@2x.webp",
-        "poles": "wasp-77-a-b-poles-shape@2x.webp",
+        "id": "thermal",
+        "label": "Thermal glow",
+        "qualification": "Black-body color at its measured dayside temperature, 1,815 K. The disc itself is unresolved.",
+        "thumbnail": "wasp-77-a-b-dataset-thermal.webp",
+        "surface": "wasp-77-a-b-surface-thermal@2x.webp",
+        "poles": "wasp-77-a-b-poles-thermal@2x.webp",
         "source": {
-          "id": "wasp-77-a-b-observational-measurements",
+          "id": "wasp-77-a-b-thermal-color",
           "path": "../manifest.json",
-          "url": "https://ui.adsabs.harvard.edu/abs/2024PASP..136f4401N/abstract"
+          "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....165..104D/abstract"
         },
         "falseColor": false,
-        "notes": "No image or color of WASP-77 A b is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the color of wasp-77-a's light, as its color dataset measures it."
+        "notes": "The color of WASP-77 A b's heat: a black body at the dayside brightness temperature measured in secondary eclipse at 3.6 µm (Spitzer IRAC). Its star lights the day side; the night side is not measured. Reflected starlight is not included."
       }
     ]
   },

@@ -10,11 +10,17 @@ It is the only planet known around Petra. Its orbit and size follow Triaud et al
 
 **Color.** No image or measured color exists. The neutral gray is lit by wasp-80's measured color (#ffbe8d, the color dataset of wasp-80 (src/objects/wasp-80/source/photometry/stellar-color.json)) at the gray's own brightness.
 
+**Measured day side.** The page opens on the one thing measured of its surface: a dayside brightness temperature of 888 K at 4.5 µm (Triaud et al. 2015, dayside brightness temperature at 4.5 µm (NASA Exoplanet Archive emission table); [record](source/photometry/dayside-temperature.json)). Chosen by rule: 2 measured of 2 rows; the smallest relative uncertainty, then the longest wavelength. The `measured-dayside` format paints the hemisphere under the star in false color at that temperature, on the 300 to 3,000 K scale every measured day side shares, and leaves the night hemisphere blank. It is too cool for a visible glow, so no black-body color is shown.
+
 **Charts.** The orbits of Petra's planets from above, from their hosted-orbit records, and its transit in 1 TESS sector (54), folded onto its orbit. Upper limits and rows without an error are left out.
 
 ## Evidence
 
 Generated 2026-10-03 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/wasp-80b.json).
+
+- Run of 2026-10-04: [`new-object --thermal`](../../../packages/telescope-cli/src/new-object/planet-datasets.mts) wrote the measured day side as a dataset of its own, as it did for ten other planets too cool to glow or on an eccentric orbit. Six planets of that run as their pages open, before and after:
+
+![Six planets before and after: HIP 65426 b and YSES 1 b in their measured infrared colors, WASP-80 b and HAT-P-2 b with their measured day side in false color, HAT-P-26 b at its measured glow, GJ 806 b at a bare-rock estimate](evidence/2026-10-04/day-sides.jpg)
 
 
 ## Known problems

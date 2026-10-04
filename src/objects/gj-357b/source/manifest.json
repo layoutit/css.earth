@@ -169,6 +169,28 @@
           }
         ]
       }
+    },
+    {
+      "id": "gj-357b-dayside-temperature",
+      "path": "photometry/dayside-temperature.json",
+      "origin": "https://arxiv.org/abs/2609.30552",
+      "credit": "Zgraggen et al. 2026, dayside brightness temperature at 15 µm, 923 +39 -38 K, from an occultation depth of 200.5 +/- 12.7 ppm in F1500W",
+      "license": "Factual numerical measurement; source attribution retained",
+      "acquisition": "Transcribed measurement record: the dayside brightness temperature and its one-sigma range, with the row chosen",
+      "redistribution": "A one-number measurement record",
+      "consumers": [
+        "gj-357b-measured-dayside"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-gj-357b-dayside-temperature",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
@@ -185,7 +207,8 @@
         "generator": "packages/telescope-cli/src/source-authoring/context-markers.mts",
         "inputs": [
           "gj-357b-observational-measurements",
-          "gj-357b-preparation-raster"
+          "gj-357b-preparation-raster",
+          "gj-357b-dayside-temperature"
         ]
       },
       "generator": "packages/telescope-cli/src/source-authoring/context-markers.mts",

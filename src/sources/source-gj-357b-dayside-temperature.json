@@ -1,0 +1,35 @@
+{
+  "id": "source-gj-357b-dayside-temperature",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "GJ 357 b · gj 357b dayside temperature",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/2609.30552",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/gj-357b/source/manifest.json",
+      "locator": "/inputs/8"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Zgraggen et al. 2026, dayside brightness temperature at 15 µm, 923 +39 -38 K, from an occultation depth of 200.5 +/- 12.7 ppm in F1500W",
+      "scope": "The gj 357b dayside temperature input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "Factual numerical measurement; source attribution retained",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

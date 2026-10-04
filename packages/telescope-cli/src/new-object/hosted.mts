@@ -15,7 +15,7 @@ import { CHECKED, planckChoice } from './color.mts';
 import { bindInputs, installColorDataset, json, type PackageFiles } from './dataset.mts';
 import { quoteSource } from './prose.mts';
 import { writeLedger } from './ledger.mts';
-import { hostLightOf, installBandColorDataset, installHostLight, installThermalDataset, datasetMarkerEntry, thermalFromArchive } from './planet-datasets.mts';
+import { hostLightOf, installBandColorDataset, installHostLight, installThermalDataset, datasetMarkerEntry, thermalColorLine, thermalFromArchive } from './planet-datasets.mts';
 import { installPhaseCurveDataset } from './phase-curve-dataset.mts';
 import { installPlanetCharts } from './planet-charts.mts';
 import { chooseLimb } from './limb.mts';
@@ -153,7 +153,7 @@ export async function hostedPackage(record: HostedRecord, hostBody: unknown, pub
     const { csv } = await thermalFromArchive(archive, 'archive' in spec.orbit ? spec.orbit.planetName ?? spec.name : spec.name);
     const installed = await installThermalDataset(files, id, spec.name, spec.thermal, csv);
     colorHex = installed.hex; colorCredit = installed.credit;
-    colorLine = `**Color.** A black body at the ${spec.thermal.temperatureK.toLocaleString('en-US')} K dayside brightness temperature measured in secondary eclipse at ${spec.thermal.wavelengthMicrometres} µm (${spec.thermal.source}): ${colorHex}. Chosen from the archive's emission rows by rule: ${spec.thermal.chosen}. Reflected starlight is not included.`;
+    colorLine = thermalColorLine(spec.thermal, colorHex);
   } else if (!star && !t) {
     const light = await hostLightOf(root, record.hostId);
     if (light) { installHostLight(files, id, light); colorLine = `**Color.** No image or measured color exists. The neutral gray is lit by ${record.hostId}'s measured color (${light.srgb}, ${light.source}) at the gray's own brightness.`; }

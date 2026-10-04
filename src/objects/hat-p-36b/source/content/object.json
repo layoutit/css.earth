@@ -49,22 +49,22 @@
   },
   "datasets": {
     "titleKey": "datasets",
-    "defaultDataset": "shape",
+    "defaultDataset": "thermal",
     "controls": [
       {
-        "id": "shape",
-        "label": "Shape",
-        "qualification": "A sphere of the published radius, lit by Tuiren; the neutral gray is a display convention, not a measured color.",
-        "thumbnail": "hat-p-36b-dataset-shape.webp",
-        "surface": "hat-p-36b-surface-shape@2x.webp",
-        "poles": "hat-p-36b-poles-shape@2x.webp",
+        "id": "thermal",
+        "label": "Expected glow",
+        "qualification": "An estimate, not a measurement: black-body color at its published equilibrium temperature, 1,780.97 K.",
+        "thumbnail": "hat-p-36b-dataset-thermal.webp",
+        "surface": "hat-p-36b-surface-thermal@2x.webp",
+        "poles": "hat-p-36b-poles-thermal@2x.webp",
         "source": {
-          "id": "hat-p-36b-observational-measurements",
+          "id": "hat-p-36b-thermal-color",
           "path": "../manifest.json",
           "url": "https://ui.adsabs.harvard.edu/abs/2019AJ....158...39C/abstract"
         },
         "falseColor": false,
-        "notes": "No image or color of HAT-P-36 b is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the color of hat-p-36's light, as its color dataset measures it."
+        "notes": "Nobody has measured HAT-P-36 b's heat. This is the color of a black body at 1,780.97 K, the equilibrium temperature its paper computes from its star's light (Chakrabarty & Sengupta 2019, equilibrium temperature (NASA Exoplanet Archive planetary systems table)). On 120 hot Jupiters whose day side Spitzer measured, the measured temperature is within 20% of this kind of estimate for 83% (Deming et al. 2023). Its star lights the day side. Reflected starlight is not included."
       }
     ]
   },

@@ -49,22 +49,22 @@
   },
   "datasets": {
     "titleKey": "datasets",
-    "defaultDataset": "shape",
+    "defaultDataset": "thermal",
     "controls": [
       {
-        "id": "shape",
-        "label": "Shape",
-        "qualification": "A sphere of the published radius, lit by GJ 806; the neutral gray is a display convention, not a measured color.",
-        "thumbnail": "gj-806b-dataset-shape.webp",
-        "surface": "gj-806b-surface-shape@2x.webp",
-        "poles": "gj-806b-poles-shape@2x.webp",
+        "id": "thermal",
+        "label": "Expected glow",
+        "qualification": "An estimate, not a measurement: black-body color at 1,204 K, the bare-rock maximum for its orbit.",
+        "thumbnail": "gj-806b-dataset-thermal.webp",
+        "surface": "gj-806b-surface-thermal@2x.webp",
+        "poles": "gj-806b-poles-thermal@2x.webp",
         "source": {
-          "id": "gj-806b-observational-measurements",
+          "id": "gj-806b-thermal-color",
           "path": "../manifest.json",
-          "url": "https://ui.adsabs.harvard.edu/abs/2023A&A...678A..80P/abstract"
+          "url": "https://arxiv.org/abs/2412.06573"
         },
         "falseColor": false,
-        "notes": "No image or color of GJ 806 b is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the color of gj-806's light, as its color dataset measures it."
+        "notes": "Nobody has measured GJ 806 b's heat. This is the color of a black body at 1,204 K, the hottest day side a dark, airless rock can have on its orbit (computed from gj-806's temperature, 3600 K, and the orbit's a/R* 7.3, as T* (R*/a)^(1/2) (2/3)^(1/4)). Nine rocky planets of red dwarfs with a measured day side fall within 13% of this kind of estimate (Coy et al. 2025); GJ 357 b, measured since, is 35% above it. Its star lights the day side. Reflected starlight is not included."
       }
     ]
   },

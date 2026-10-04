@@ -4,12 +4,12 @@
  *   node packages/telescope-cli/src/new-object/new-object-cli.mts --spec <stars.json> [--skip-existing] [--check | --bake]
  *   node packages/telescope-cli/src/new-object/new-object-cli.mts --bake <id>...
  *   node packages/telescope-cli/src/new-object/new-object-cli.mts --refresh <id>... [--check | --bake]
- *   node packages/telescope-cli/src/new-object/new-object-cli.mts --thermal <id>... | --host-light <id>... | --photometry entries.json | --phase-curve entries.json
+ *   node packages/telescope-cli/src/new-object/new-object-cli.mts --thermal <id>... | --thermal-entries entries.json | --expected-glow <id>... | --host-light <id>... | --photometry entries.json | --phase-curve entries.json
  *   node packages/telescope-cli/src/new-object/new-object-cli.mts --simulation entries.json | --rock-eclipse entries.json | --published-map entries.json
  *   node packages/telescope-cli/src/new-object/new-object-cli.mts --rename <star id>...
  *   node packages/telescope-cli/src/new-object/new-object-cli.mts --retext <host id>... | --charts <host id>... | --retime <host id>...
  *   node packages/telescope-cli/src/new-object/new-object-cli.mts --star-limb <id>... [--bake]
- *   node packages/telescope-cli/src/new-object/new-object-cli.mts --draft-photometry <id>... --out entries.json
+ *   node packages/telescope-cli/src/new-object/new-object-cli.mts --draft-photometry <id>[="name in the sheet"]... --out entries.json
  *
  * generates complete packages from a star spec (new-object/spec.mts): Gaia DR3 placement, the color dataset from the best archived
  * spectrum with its cross-check, the model limb law, the catalogue color, marker, manifest, acquisition plan, source records and
@@ -54,7 +54,9 @@ if (process.argv[1] && import.meta.url === pathToFileURL(realpathSync(process.ar
     const { readFile, writeFile } = await import('node:fs/promises'), { draftUltracoolPhotometry } = await import('./archives/ultracool.mts'), { liveArchive } = await import('./archives/archives.mts');
     const out = option('out'), ids = args.filter((argument, i) => !argument.startsWith('--') && args[i - 1] !== '--out');
     if (!out || !ids.length) throw new TypeError('Usage: new-object --draft-photometry ID... --out entries.json');
-    const planets = await Promise.all(ids.map(async id => ({ id, name: String((JSON.parse(await readFile(`src/objects/${id}/source/content/object.json`, 'utf8')) as { displayName: string }).displayName) })));
+    // `ID="name in the sheet"` names a planet the sheet lists another way (VHS 1256-1257 b is its "VHS J125601.92-125723.9 b").
+    const planets = await Promise.all(ids.map(async token => { const [id, alias] = token.split('=') as [string, string | undefined];
+      return { id, name: String((JSON.parse(await readFile(`src/objects/${id}/source/content/object.json`, 'utf8')) as { displayName: string }).displayName), aliases: alias ? [alias] : [] }; }));
     const { entries, notes } = await draftUltracoolPhotometry(liveArchive, planets);
     await writeFile(out, `${JSON.stringify(entries, null, 2)}\n`);
     process.stdout.write(`${entries.map(entry => `${entry.id}: ${entry.photometry.bands.map(band => `${band.band} ${band.value} µJy`).join(', ')}`).join('\n')}\n${notes.join('\n')}\n${entries.length} of ${ids.length} planets drafted to ${out}; apply with --photometry ${out}\n`);
@@ -96,6 +98,12 @@ if (process.argv[1] && import.meta.url === pathToFileURL(realpathSync(process.ar
     const entries = parseRockEclipseEntries(JSON.parse(await readFile(option('rock-eclipse')!, 'utf8')));
     const lines = await addRockEclipseDatasets(checkoutProjectRoot(import.meta.url), entries, liveArchive, line => process.stdout.write(`${line}\n`));
     process.stdout.write(`${lines.length} dataset${lines.length === 1 ? '' : 's'} written. Bake: node packages/bake/cli/prepare-object.mts ${[...entries.keys()].join(' ')}\n`);
+  } else if (option('thermal-entries') !== undefined && !specPath) {
+    // Measured day sides read from their papers, for planets the archives' tables lack: `--thermal-entries entries.json` (spec.mts parseThermalEntries).
+    const { readFile } = await import('node:fs/promises'), { parseThermalEntries } = await import('./spec.mts'), { rebuildExistingDatasets } = await import('./planet-datasets.mts'), { liveArchive } = await import('./archives/archives.mts');
+    const entries = parseThermalEntries(JSON.parse(await readFile(option('thermal-entries')!, 'utf8')));
+    const lines = await rebuildExistingDatasets(checkoutProjectRoot(import.meta.url), [...entries.keys()], 'thermal', liveArchive, line => process.stdout.write(`${line}\n`), new Map(), new Map(), new Map(), fetch, entries);
+    process.stdout.write(`${lines.length} planet(s) considered. Bake the changed ones: node packages/bake/cli/prepare-object.mts ${[...entries.keys()].join(' ')}\n`);
   } else if (option('published-map') !== undefined && !specPath) {
     // Eclipse maps their authors released, for planets already in the tree: `--published-map entries.json` (new-object/map/published-map-dataset.mts).
     const { readFile } = await import('node:fs/promises'), { addPublishedMapDatasets, parsePublishedMapEntries } = await import('./map/published-map-dataset.mts'), { liveArchive } = await import('./archives/archives.mts');
@@ -108,9 +116,9 @@ if (process.argv[1] && import.meta.url === pathToFileURL(realpathSync(process.ar
     const entries = parsePhotometryEntries(JSON.parse(await readFile(option('photometry')!, 'utf8')));
     const lines = await rebuildExistingDatasets(checkoutProjectRoot(import.meta.url), [...entries.keys()], 'photometry', liveArchive, line => process.stdout.write(`${line}\n`), entries);
     process.stdout.write(`${lines.length} planet(s) considered. Bake the changed ones: node packages/bake/cli/prepare-object.mts <id>...\n`);
-  } else if ((args.includes('--thermal') || args.includes('--host-light')) && !specPath) {
+  } else if ((args.includes('--thermal') || args.includes('--expected-glow') || args.includes('--host-light')) && !specPath) {
     // Color for planets already in the tree, from what is measured: `--thermal ID...` or `--host-light ID...` (new-object/planet-datasets.mts).
-    const mode = args.includes('--thermal') ? 'thermal' : 'host-light', { rebuildExistingDatasets } = await import('./planet-datasets.mts'), { liveArchive } = await import('./archives/archives.mts');
+    const mode = args.includes('--thermal') ? 'thermal' : args.includes('--expected-glow') ? 'expected-glow' : 'host-light', { rebuildExistingDatasets } = await import('./planet-datasets.mts'), { liveArchive } = await import('./archives/archives.mts');
     const lines = await rebuildExistingDatasets(checkoutProjectRoot(import.meta.url), args.filter(argument => !argument.startsWith('--')), mode, liveArchive, line => process.stdout.write(`${line}\n`));
     process.stdout.write(`${lines.length} planet(s) considered. Bake the changed ones: node packages/bake/cli/prepare-object.mts <id>...\n`);
   } else if (args.includes('--star-limb') && !specPath) {

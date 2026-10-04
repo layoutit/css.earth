@@ -1,0 +1,19 @@
+{
+  "schema": "cssearth-stellar-photometric-color@1",
+  "objectId": "toi-4552b",
+  "spectrum": "planck",
+  "temperature": {
+    "published": {
+      "kelvin": 1434,
+      "lowerKelvin": 1434,
+      "upperKelvin": 1434,
+      "citation": "computed from toi-4552's temperature, 3258 K, and the orbit's a/R* 4.2163, as T* (R*/a)^(1/2) (2/3)^(1/4): 1434 K; the source gives no uncertainty, so the range is the value itself, https://arxiv.org/abs/2412.06573"
+    },
+    "note": "Nobody has measured its heat or imaged it; this is the hottest day side a dark, airless rock can have on its orbit, an estimate, so the color is a Planck spectrum at its published temperature.",
+    "chosen": "the bare-rock maximum, no light reflected and no heat carried to the night side; the star's temperature is Srivastava et al. 2026, the stellar temperature of the default parameter set of TOI-4552 b in the NASA Exoplanet Archive, a/R* is Srivastava et al. 2026",
+    "estimate": true
+  },
+  "whitePoint": "sRGB D65",
+  "normalization": "brightest linear sRGB channel = 1",
+  "gamut": "desaturate"
+}

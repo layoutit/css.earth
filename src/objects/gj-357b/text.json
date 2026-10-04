@@ -30,6 +30,11 @@
       "title": "Shape only",
       "detail": "Published radius",
       "summary": "A sphere at the published size. No picture of its surface exists."
+    },
+    "dayside": {
+      "title": "Measured day side",
+      "detail": "Measured in eclipse",
+      "summary": "The day side is 923 K, measured at 15 µm. The night side is not measured."
     }
   }
 }

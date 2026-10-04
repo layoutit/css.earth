@@ -82,28 +82,47 @@
       "consumers": [
         "scene"
       ]
+    },
+    {
+      "id": "yses-1-b-band-color",
+      "path": "photometry/band-color.json",
+      "origin": "https://ui.adsabs.harvard.edu/abs/2020MNRAS.492..431B",
+      "credit": "Bohn et al. (2020a), as compiled in Best, Liu, Magnier & Dupuy (2024), The UltracoolSheet v2.1 (Zenodo); zero points from the SVO Filter Profile Service, UltracoolSheet Main.csv, YSES 1 b: 2MASS Ks 14.7 +/- 0.14 (Bohn20a), 2MASS H 15.87 +/- 0.38 (Bohn20a), 2MASS J 15.73 +/- 0.38 (Bohn20a); SVO 2MASS/2MASS.Ks 666.8 Jy, 2MASS/2MASS.H 1024.0 Jy, 2MASS/2MASS.J 1594.0 Jy",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "Authored method record: the published flux densities transcribed with their bands and the shared display range",
+      "redistribution": "Method record only",
+      "consumers": [
+        "assets",
+        "datasets"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored color recipe transcribing the cited photometry; repinned when edited."
+      }
     }
   ],
   "generatedIntermediates": [
     {
-      "id": "neutral-disc-context-marker",
+      "id": "dataset-color-context-marker",
       "path": "presentation/context.png",
       "origin": "https://arxiv.org/abs/2509.14321",
-      "credit": "Sphere of the published radius; marker written by packages/telescope-cli/src/new-object/new-hosted-planet.mts",
+      "credit": "The default dataset's color as a disc; rendered by packages/telescope-cli/src/source-authoring/context-markers.mts",
       "license": "Project-authored display derivative.",
       "consumers": [
         "navigation"
       ],
       "recipe": {
-        "generator": "packages/telescope-cli/src/new-object/new-hosted-planet.mts",
+        "generator": "packages/telescope-cli/src/source-authoring/context-markers.mts",
         "inputs": [
-          "yses-1-b-observational-measurements"
+          "yses-1-b-observational-measurements",
+          "yses-1-b-preparation-raster",
+          "yses-1-b-band-color"
         ]
       },
-      "generator": "packages/telescope-cli/src/new-object/new-hosted-planet.mts",
+      "generator": "packages/telescope-cli/src/source-authoring/context-markers.mts",
       "sourceBinding": {
         "kind": "local",
-        "reason": "A flat neutral gray disc, the marker of an unresolved surface."
+        "reason": "The default dataset drawn as a disc; `context-markers.mts --check` recomputes it."
       }
     }
   ],
