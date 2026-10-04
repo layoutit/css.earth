@@ -165,8 +165,9 @@ export function cameraPoseToReferenceFrame(pose: PhysicalCameraPose, frame: Focu
 /** Where the eye is, as an origin and an offset from it: the pose's exact focus offset while it still adds up to `positionM`
  * (a copy whose position was changed keeps a stale one), else `positionM` itself with no offset. */
 export function eyeAnchor(pose: PhysicalCameraPose): { readonly originM: PositionM; readonly offsetM: PositionM } {
-  const exact = pose.focusOffset;
-  return exact !== undefined && [0, 1, 2].every(axis => pose.positionM[axis] === exact.originM[axis]! + exact.offsetM[axis]!) ? exact : { originM: pose.positionM, offsetM: ZERO };
+  const exact = pose.focusOffset, eye = pose.positionM;
+  return exact !== undefined && eye[0] === exact.originM[0] + exact.offsetM[0] && eye[1] === exact.originM[1] + exact.offsetM[1]
+    && eye[2] === exact.originM[2] + exact.offsetM[2] ? exact : { originM: eye, offsetM: ZERO };
 }
 const ZERO: PositionM = Object.freeze([0, 0, 0]);
 

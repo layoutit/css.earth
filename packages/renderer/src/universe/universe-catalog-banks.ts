@@ -182,7 +182,14 @@ export function createUniverseCatalogBanks({ root, end, stage, lifetime, declara
     setCoasting(active: boolean) { billboards?.setCoasting(active); catalog?.setCoasting(active); },
     /** The image bank whose framing sphere holds `positionM`: the galaxy a selected star is in. */
     imageBankContaining(positionM: readonly number[]): string | undefined {
-      return images.find(bank => Math.hypot(...positionM.map((value, axis) => value - bank.frame.originM[axis]!)) <= bank.radiusUnits * bank.frame.metersPerUnit)?.id;
+      // Asked on every frame of every bank: plain arithmetic, where a mapped array for each bank was 2.1 % of an iPad's
+      // script time in a zoom out of Earth (2026-10-04).
+      for (const bank of images) {
+        const origin = bank.frame.originM, x = positionM[0]! - origin[0], y = positionM[1]! - origin[1], z = positionM[2]! - origin[2];
+        const reachM = bank.radiusUnits * bank.frame.metersPerUnit;
+        if (x * x + y * y + z * z <= reachM * reachM) return bank.id;
+      }
+      return undefined;
     },
     /** `inside` is the galaxy the selected body is in, and how much of its dots show: a star of M33 stands among M33's
      * catalogue dots, without the photograph that is the galaxy seen from outside. */
