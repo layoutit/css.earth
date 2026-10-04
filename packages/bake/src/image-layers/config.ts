@@ -27,11 +27,21 @@ export interface ImageLayerRecipe {
      * distance from the star) a speed is a depth, so each ellipse is an ellipsoidal wall. `ring` is the main shell: its
      * outline on the sky and, for the display's red, green and blue channels, the speed of the lines that make that
      * channel. Its pole is tipped `polarTiltDeg` from the sight line, the near end leaning to position angle
-     * `polarLeansToPaDeg`. `lobe` is the body through the shell's opening, on the same axis. Every value is one a paper
-     * prints. `smoothPixels` is presentation: the radius, in face pixels, of the smooth light the far wall carries. */
+     * `polarLeansToPaDeg`. `lobe` is the body through the shell's opening, on the same axis. `inner` is a closed shell
+     * inside the main one, on the same axis, where a paper gives each shell its own expansion law: its outline in its
+     * equatorial plane, its speed along the pole and its own law. `speeds` are measured speeds along the sight line at
+     * places on the sky (`path`: a table of whitespace-separated columns, counted from 0: arcseconds east and north of
+     * the star, km/s away from the Sun). Inside `inner` a feature measured approaching is on the wall in front of the
+     * star and one receding on the wall behind it (`restKmS` either way is all one wall). Outside it the detail lies
+     * on one surface: the equatorial plane where it is at rest, the wall its speed points to where it reaches
+     * `wallKmS`. A place follows the measurements within about `reachArcsec`. Every value is one a paper prints. `starRadiusArcsec` is
+     * how far the central star's own light reaches in the picture: that light stays at the star, on no wall.
+     * `smoothPixels` is presentation: the radius, in face pixels, of the smooth light the far wall carries. */
     shape?: { source: string; basis: string; expansionKmSPerArcsec: number;
       ring: { semiMajorArcsec: number; semiMinorArcsec: number; majorPaDeg: number; polarTiltDeg: number; polarLeansToPaDeg: number; expansionKmS: [number, number, number] };
-      lobe?: { source: string; radiusArcsec: number; expansionKmS: [number, number, number] }; smoothPixels: number };
+      lobe?: { source: string; radiusArcsec: number; expansionKmS: [number, number, number] };
+      inner?: { source: string; semiMajorArcsec: number; semiMinorArcsec: number; majorPaDeg: number; expansionKmSPerArcsec: number; expansionKmS: [number, number, number] };
+      speeds?: { source: string; basis: string; path: string; columns: { east: number; north: number; kmS: number }; restKmS: number; wallKmS: number; reachArcsec: number }; starRadiusArcsec?: number; smoothPixels: number };
     /** A nebula's published filled body (./body.ts): a spheroid of gas that emits evenly, `semiPolarArcsec` along its pole
      * and `semiEquatorialArcsec` across it, the pole tipped `polarTiltDeg` from the sight line with its near end leaning to
      * position angle `polarLeansToPaDeg`. `envelope` is a filled sphere around it, the nebula's outline. `cavities` are regions along the pole that emit `emission` of the body's emissivity, each about
@@ -116,11 +126,18 @@ const shapeOf = (v: unknown): NonNullable<ImageLayerRecipe['geometry']['shape']>
   const speeds = (value: unknown, name: string): [number, number, number] => { if (!Array.isArray(value) || value.length !== 3) throw new TypeError(`${name} holds three speeds, for the red, green and blue channels.`); return [positive(value[0], `${name}[0]`), positive(value[1], `${name}[1]`), positive(value[2], `${name}[2]`)]; };
   if (!(tilt >= 0 && tilt <= 90)) throw new TypeError(`geometry.shape.ring.polarTiltDeg must be from 0 to 90; got ${tilt}.`);
   if (!(Number.isInteger(smooth) && smooth >= 1 && smooth <= 64)) throw new TypeError(`geometry.shape.smoothPixels must be a whole number from 1 to 64; got ${smooth}.`);
-  const lobe = s.lobe === undefined ? undefined : object(s.lobe, 'geometry.shape.lobe');
+  const lobe = s.lobe === undefined ? undefined : object(s.lobe, 'geometry.shape.lobe'), inner = s.inner === undefined ? undefined : object(s.inner, 'geometry.shape.inner'), measured = s.speeds === undefined ? undefined : object(s.speeds, 'geometry.shape.speeds');
+  if (lobe && inner) throw new TypeError('geometry.shape takes a lobe through the shell\'s opening or a closed inner shell, not both.');
+  const column = (value: unknown, name: string) => { const index = finite(value, name); if (!(Number.isInteger(index) && index >= 0)) throw new TypeError(`${name} is a column counted from 0; got ${index}.`); return index; };
   return { source: text(s.source, 'geometry.shape.source'), basis: text(s.basis, 'geometry.shape.basis'), expansionKmSPerArcsec: positive(s.expansionKmSPerArcsec, 'geometry.shape.expansionKmSPerArcsec'),
     ring: { semiMajorArcsec: positive(r.semiMajorArcsec, 'geometry.shape.ring.semiMajorArcsec'), semiMinorArcsec: positive(r.semiMinorArcsec, 'geometry.shape.ring.semiMinorArcsec'), majorPaDeg: finite(r.majorPaDeg, 'geometry.shape.ring.majorPaDeg'),
       polarTiltDeg: tilt, polarLeansToPaDeg: finite(r.polarLeansToPaDeg, 'geometry.shape.ring.polarLeansToPaDeg'), expansionKmS: speeds(r.expansionKmS, 'geometry.shape.ring.expansionKmS') },
     ...(lobe === undefined ? {} : { lobe: { source: text(lobe.source, 'geometry.shape.lobe.source'), radiusArcsec: positive(lobe.radiusArcsec, 'geometry.shape.lobe.radiusArcsec'), expansionKmS: speeds(lobe.expansionKmS, 'geometry.shape.lobe.expansionKmS') } }),
+    ...(inner === undefined ? {} : { inner: { source: text(inner.source, 'geometry.shape.inner.source'), semiMajorArcsec: positive(inner.semiMajorArcsec, 'geometry.shape.inner.semiMajorArcsec'), semiMinorArcsec: positive(inner.semiMinorArcsec, 'geometry.shape.inner.semiMinorArcsec'), majorPaDeg: finite(inner.majorPaDeg, 'geometry.shape.inner.majorPaDeg'),
+      expansionKmSPerArcsec: positive(inner.expansionKmSPerArcsec, 'geometry.shape.inner.expansionKmSPerArcsec'), expansionKmS: speeds(inner.expansionKmS, 'geometry.shape.inner.expansionKmS') } }),
+    ...(measured === undefined ? {} : { speeds: (() => { const columns = object(measured.columns, 'geometry.shape.speeds.columns'); return { source: text(measured.source, 'geometry.shape.speeds.source'), basis: text(measured.basis, 'geometry.shape.speeds.basis'), path: path(measured.path),
+      columns: { east: column(columns.east, 'geometry.shape.speeds.columns.east'), north: column(columns.north, 'geometry.shape.speeds.columns.north'), kmS: column(columns.kmS, 'geometry.shape.speeds.columns.kmS') }, restKmS: positive(measured.restKmS, 'geometry.shape.speeds.restKmS'), wallKmS: positive(measured.wallKmS, 'geometry.shape.speeds.wallKmS'), reachArcsec: positive(measured.reachArcsec, 'geometry.shape.speeds.reachArcsec') }; })() }),
+    ...(s.starRadiusArcsec === undefined ? {} : { starRadiusArcsec: positive(s.starRadiusArcsec, 'geometry.shape.starRadiusArcsec') }),
     smoothPixels: smooth };
 };
 const ringsOf = (v: unknown): NonNullable<ImageLayerRecipe['geometry']['rings']> => {

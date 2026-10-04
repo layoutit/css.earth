@@ -1,0 +1,52 @@
+{
+  "id": "esahubble-heic9910a",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "NGC 2392",
+  "identifiers": [
+    {
+      "type": "ESA/Hubble image",
+      "value": "heic9910a"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://esahubble.org/images/heic9910a/",
+      "label": "Published source"
+    },
+    {
+      "role": "original",
+      "url": "https://cdn.esahubble.org/archives/images/large/heic9910a.jpg",
+      "label": "JPEG, 1500 x 1500 px"
+    },
+    {
+      "role": "rights",
+      "url": "https://esahubble.org/copyright/",
+      "label": "Reuse terms"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://esahubble.org/images/heic9910a/",
+      "checkedOn": "2026-10-04",
+      "locator": "1500 x 1500 px over 1.25 × 1.25 arcmin; WFPC2 He II 469, [O III] 502, H-alpha 656 and [N II] 658 nm; released 24 January 2000. The file's embedded sky tags for scale and direction, 0.0499 arcsec per pixel and north 168.4° left of vertical, and the central star for place: the tags alone put the star 0.45 arcsec from where the picture shows it, so the frame's centre is set at 112.2952649°, 20.9119113°, where the star in the picture is at its Gaia place."
+    }
+  ],
+  "publisher": "ESA/Hubble",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "NASA, ESA, Andrew Fruchter (STScI), and the ERO team (STScI + ST-ECF)",
+      "scope": "Published source",
+      "evidence": "https://esahubble.org/images/heic9910a/"
+    },
+    {
+      "kind": "rights",
+      "text": "Creative Commons Attribution 4.0 International; the full credit must be shown.",
+      "scope": "Published source",
+      "evidence": "https://esahubble.org/copyright/"
+    }
+  ]
+}

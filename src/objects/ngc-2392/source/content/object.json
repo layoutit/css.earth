@@ -1,0 +1,114 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "ngc-2392",
+  "displayName": "NGC 2392",
+  "panel": {
+    "facts": [
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "1,795 pc (1,666 to 1,942)",
+        "source": {
+          "catalogueId": "chornay-walton-2021-pn-central-stars",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/656/A110",
+          "label": "Chornay & Walton (2021), A&A 656, A110; CDS J/A+A/656/A110, Table A.1, PN G197.8+17.3: distance 1,795 pc (1,666 to 1,942) from the Gaia EDR3 parallax of its central star",
+          "checked": "2026-10-04"
+        }
+      },
+      {
+        "id": "position",
+        "label": "Sky position (J2000)",
+        "value": "RA 112.295°, Dec 20.912°",
+        "source": {
+          "catalogueId": "chornay-walton-2021-pn-central-stars",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/656/A110",
+          "label": "Chornay & Walton (2021), PN G197.8+17.3: its central star, Gaia EDR3 865037169677723904",
+          "checked": "2026-10-04"
+        }
+      },
+      {
+        "id": "inner-shell",
+        "label": "Inner shell expansion",
+        "value": "120 km/s toward and away from the Sun",
+        "source": {
+          "catalogueId": "publication-garcia-diaz-2012-eskimo-model",
+          "url": "https://arxiv.org/abs/1211.6717",
+          "label": "García-Díaz et al. (2012), ApJ 761, 172: A detailed morpho-kinematic model of the Eskimo, NGC 2392",
+          "checked": "2026-10-04"
+        }
+      },
+      {
+        "id": "picture",
+        "label": "Picture width",
+        "value": "1.25 arcmin, 0.65 pc at its distance",
+        "source": {
+          "catalogueId": "esahubble-heic9910a",
+          "url": "https://esahubble.org/images/heic9910a/",
+          "label": "ESA/Hubble heic9910a: NASA, ESA, Andrew Fruchter (STScI), and the ERO team (STScI + ST-ECF)",
+          "checked": "2026-10-04"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "optical",
+    "controls": [
+      {
+        "id": "optical",
+        "label": "Hubble · optical",
+        "thumbnail": "ngc-2392-dataset-optical.webp",
+        "volume": {
+          "objectId": "ngc-2392-layers",
+          "datasetId": "optical",
+          "surface": "optical"
+        },
+        "source": {
+          "id": "ngc-2392-layers-optical",
+          "path": "../../ngc-2392-layers/source/manifest.json",
+          "url": "https://esahubble.org/images/heic9910a/"
+        },
+        "falseColor": true
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Chornay & Walton (2021), A&A 656, A110; CDS J/A+A/656/A110, Table A.1, PN G197.8+17.3: distance 1,795 pc (1,666 to 1,942) from the Gaia EDR3 parallax of its central star",
+      "href": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/656/A110"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Chornay & Walton (2021), PN G197.8+17.3: its central star, Gaia EDR3 865037169677723904",
+      "href": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/656/A110"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "García-Díaz et al. (2012), ApJ 761, 172: A detailed morpho-kinematic model of the Eskimo, NGC 2392",
+      "href": "https://arxiv.org/abs/1211.6717"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "ESA/Hubble heic9910a: NASA, ESA, Andrew Fruchter (STScI), and the ERO team (STScI + ST-ECF)",
+      "href": "https://esahubble.org/images/heic9910a/"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/656/A110",
+      "credit": "Chornay & Walton (2021), A&A 656, A110; CDS J/A+A/656/A110, Table A.1, PN G197.8+17.3: distance 1,795 pc (1,666 to 1,942) from the Gaia EDR3 parallax of its central star"
+    }
+  }
+}

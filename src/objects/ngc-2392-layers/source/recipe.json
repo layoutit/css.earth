@@ -1,0 +1,119 @@
+{
+  "schema": "cssearth-image-layer-recipe@1",
+  "id": "ngc-2392-layers",
+  "source": {
+    "path": "source.jpg",
+    "dimensions": [
+      1500,
+      1500
+    ],
+    "originalDimensions": [
+      1500,
+      1500
+    ],
+    "publisherUrl": "https://esahubble.org/images/heic9910a/",
+    "downloadUrl": "https://cdn.esahubble.org/archives/images/large/heic9910a.jpg",
+    "credit": "NASA, ESA, Andrew Fruchter (STScI), and the ERO team (STScI + ST-ECF)",
+    "license": "CC-BY-4.0"
+  },
+  "observation": {
+    "centerRaDeg": 112.2952649,
+    "centerDecDeg": 20.9119113,
+    "fieldOfViewDeg": [
+      0.0207892,
+      0.0207892
+    ],
+    "northClockwiseDeg": -168.4
+  },
+  "target": {
+    "centerRaDeg": 112.29485540704,
+    "centerDecDeg": 20.91180208706,
+    "distancePc": 1795.0308872481207
+  },
+  "geometry": {
+    "kind": "inclined-disk",
+    "inclinationDeg": 0.001,
+    "lineOfNodesPaDeg": 164.065,
+    "thicknessKpc": 3.26e-7,
+    "depthWeights": [
+      0.25,
+      0.5,
+      0.25
+    ],
+    "supportRadiusKpc": 0.00031914,
+    "supportTaperFraction": 0.7,
+    "depthScales": [
+      1,
+      1,
+      1
+    ],
+    "unit": "pc",
+    "shape": {
+      "source": "publication-garcia-diaz-2012-eskimo-model",
+      "basis": "García-Díaz et al. (2012, Sect. III and VI): the outer shell is close to a sphere of angular radius 23 arcsec expanding at 16 km/s; the inner shell is a prolate spheroid expanding at 120 km/s along its major axis, tilted 9 degrees from the line of sight and pointing towards position angle 205 degrees; the velocity law is homologous, v = k r, with a different k for each component. The shell's law here is 16 km/s at 23 arcsec. All three display channels take the [N II] speeds: the paper's spectra are [N II] 658 nm.",
+      "expansionKmSPerArcsec": 0.6957,
+      "ring": {
+        "semiMajorArcsec": 23,
+        "semiMinorArcsec": 23,
+        "majorPaDeg": 25,
+        "polarTiltDeg": 9,
+        "polarLeansToPaDeg": 205,
+        "expansionKmS": [
+          16,
+          16,
+          16
+        ]
+      },
+      "inner": {
+        "source": "publication-garcia-diaz-2015-eskimo-proper-motions",
+        "semiMajorArcsec": 11,
+        "semiMinorArcsec": 9.2,
+        "majorPaDeg": 25,
+        "expansionKmSPerArcsec": 7.246,
+        "expansionKmS": [
+          120,
+          120,
+          120
+        ]
+      },
+      "speeds": {
+        "source": "publication-garcia-diaz-2015-eskimo-proper-motions",
+        "basis": "García-Díaz et al. (2015), Table 3 (CDS J/ApJ/798/129): 536 structures of the nebula with their place from the central star (X to the east, Y to the north, arcsec) and their radial velocity from high-resolution spectra (km/s). Inside the inner shell a structure moving 16 km/s, the outer shell's own speed, or faster is on one wall. Outside it a structure at the caps' 55 km/s (García-Díaz et al. 2012, Sect. III.3 and VI) is on the outer shell's wall, where that paper's model puts the caps, and one at rest on the equatorial plane, its disc of cometary knots.",
+        "path": "proper-motions.dat",
+        "columns": {
+          "east": 0,
+          "north": 1,
+          "kmS": 7
+        },
+        "restKmS": 16,
+        "wallKmS": 55,
+        "reachArcsec": 1
+      },
+      "starRadiusArcsec": 0.9,
+      "smoothPixels": 16
+    }
+  },
+  "bake": {
+    "maxFacePixels": 1500,
+    "crossAxisSlices": 32,
+    "crossAxisDepthPixels": 97,
+    "backgroundFloor": 0.03,
+    "encoding": {
+      "format": "webp",
+      "quality": 70,
+      "alphaQuality": 80
+    },
+    "diffuseFacePixels": 80,
+    "crossAxisAlongPixels": 384,
+    "edgeTaperFraction": 0.04,
+    "diffuseFraction": 0.65,
+    "diffuseSigmaPixels": 2,
+    "flat": true,
+    "bulgeSlices": 56,
+    "bulgeFacePixels": 256,
+    "bulgeCrossSlices": 56
+  },
+  "provenance": {
+    "path": "provenance.json"
+  }
+}

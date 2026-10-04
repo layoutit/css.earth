@@ -1,0 +1,55 @@
+{
+  "id": "publication-garcia-diaz-2015-eskimo-proper-motions",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Internal Proper Motions in the Eskimo Nebula",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1411.0042"
+    },
+    {
+      "type": "doi",
+      "value": "10.1088/0004-637X/798/2/129"
+    },
+    {
+      "type": "CDS catalogue",
+      "value": "J/ApJ/798/129"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/1411.0042",
+      "label": "Published reference"
+    },
+    {
+      "role": "original",
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/ApJ/798/129/table3.dat",
+      "label": "Table 3 at CDS"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/1411.0042",
+      "checkedOn": "2026-10-04",
+      "locator": "Sect. I: in Paper I the inner shell is tilted by 9 degrees to the line of sight with a position angle of 25 degrees and has a width to length ratio of about 1.8. Sect. V: the ratio between the inner shell's major and minor axes is 1.8; distance 1300 pc from the inner shell's proper motions and radial velocities."
+    },
+    {
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/ApJ/798/129/ReadMe",
+      "checkedOn": "2026-10-04",
+      "locator": "table3.dat, 536 records: X and Y of each structure from the central star in arcsec, its proper motion in pixels and km/s (two WFPC2 [N II] images 7.695 yr apart), and its radial velocity in km/s from high-resolution spectra."
+    }
+  ],
+  "creators": [
+    "García-Díaz, Ma. T.",
+    "Gutiérrez, L.",
+    "Steffen, W.",
+    "López, J. A.",
+    "Beckman, J."
+  ],
+  "publisher": "ApJ 798, 129",
+  "publicationDate": "2015",
+  "relations": [],
+  "statements": []
+}

@@ -1,0 +1,100 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "ngc-2392-layers",
+  "entries": [
+    {
+      "id": "heic9910a",
+      "subject": "ESA/Hubble heic9910a",
+      "status": "included",
+      "finding": "NGC 2392: WFPC2, He II 469, [O III] 502, H-alpha 656 and [N II] 658 nm; 1500 × 1500 px over 1.25 × 1.25 arcmin, released 24 January 2000. The file's embedded sky tags for scale and direction, 0.0499 arcsec per pixel and north 168.4° left of vertical, and the central star for place: the tags alone put the star 0.45 arcsec from where the picture shows it, so the frame's centre is set at 112.2952649°, 20.9119113°, where the star in the picture is at its Gaia place.",
+      "evidence": [
+        "https://esahubble.org/images/heic9910a/",
+        "https://esahubble.org/copyright/"
+      ]
+    },
+    {
+      "id": "walls",
+      "subject": "The shells and their depth",
+      "status": "included",
+      "finding": "García-Díaz et al. (2012) model the nebula from 21 long-slit [N II] spectra: an outer shell close to a sphere, 23 arcsec in radius, expanding at 16 km/s, and inside it a prolate inner shell expanding at 120 km/s along its axis, tilted 9 degrees from the line of sight toward position angle 205 degrees, each with its own homologous law. García-Díaz et al. (2015) give the inner shell's axis ratio, 1.8. The picture's light lies on those two shells' walls.",
+      "evidence": [
+        "https://arxiv.org/abs/1211.6717",
+        "https://arxiv.org/abs/1411.0042"
+      ]
+    },
+    {
+      "id": "inner-outline",
+      "subject": "The inner shell's outline on the sky",
+      "status": "included",
+      "finding": "No paper read prints the inner shell's outline with its direction; Singh et al. (2025) give its size as 18 by 15 arcsec. Measured on the picture here (packages/bake/authoring/ngc-2392/inner-shell-rim.mts), its rim stands up to 11 arcsec from the star toward the north-north-east and 7.5 to 8.3 arcsec to the east, south and west: it is not centred on the star. The smallest ellipse centred on the star that holds the rim has semi-axes of 10.80 and 9.15 arcsec, the long one toward position angle 28 degrees, beside the papers' 25; the wall's outline is that ellipse rounded up, 11 and 9.2 arcsec, along the papers' direction. The shell's length along its pole is 1.8 times the short semi-axis, 16.6 arcsec.",
+      "evidence": [
+        "https://esahubble.org/images/heic9910a/",
+        "https://arxiv.org/abs/2508.11202",
+        "https://arxiv.org/abs/1411.0042"
+      ]
+    },
+    {
+      "id": "measured-sides",
+      "subject": "Which wall a feature is on",
+      "status": "included",
+      "finding": "García-Díaz et al. (2015), Table 3, lists 536 structures with their place and radial velocity. Beyond 12 arcsec from the star 187 are within 8 km/s of rest, 57 approach at 38 to 49 km/s, all but a few in the south, and 31 recede at 27 to 58 km/s, in the north and west: the paper's disc of cometary knots and its caps in front of and behind the inner shell. Inside the inner shell 123 approach and 130 recede. The approaching inner structures lie toward position angle 201 degrees from the receding ones, which is the paper's tilt (205 degrees) found again in its table. Inside the inner shell a structure approaching is drawn on the wall in front of the star and one receding on the wall behind. Outside it the detail is one surface: the equatorial plane where the structures are at rest, bent to the outer shell's wall where they move at the caps' speed.",
+      "evidence": [
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/798/129",
+        "https://arxiv.org/abs/1411.0042"
+      ]
+    },
+    {
+      "id": "expansion-distance",
+      "subject": "The distance from the nebula's own expansion",
+      "status": "excluded",
+      "finding": "García-Díaz et al. (2015) find 1300 pc from the inner shell's proper motions and radial velocities, with the model's shape. The page stands at the Gaia EDR3 distance of the central star, 1,795 pc (Chornay & Walton 2021), as the other planetary nebulae here do. The walls are set in arcseconds, so their shape does not depend on the distance.",
+      "evidence": [
+        "https://arxiv.org/abs/1411.0042",
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/656/A110"
+      ],
+      "revisitWhen": "A later Gaia release or a new expansion distance moves the two apart or together."
+    },
+    {
+      "id": "jet",
+      "subject": "The bipolar jet",
+      "status": "deferred",
+      "finding": "García-Díaz et al. (2012) find a jet leaving the star at 165 km/s and reaching 180 km/s, about 30 degrees from the line of sight; Guerrero et al. (2021) map it with GTC MEGARA integral-field spectra. It does not show in the picture, so nothing of it is drawn.",
+      "evidence": [
+        "https://arxiv.org/abs/1211.6717",
+        "https://arxiv.org/abs/2102.01093"
+      ],
+      "revisitWhen": "A map of the jet is published as data, or the MEGARA cubes are reduced here."
+    },
+    {
+      "id": "megara-cubes",
+      "subject": "A measured speed at every place",
+      "status": "deferred",
+      "finding": "Guerrero et al. (2021) observed the nebula with GTC MEGARA in twenty pointings: a spectrum at every 0.62 arcsec. Reduced, the cubes would give each place its own speeds in place of 536 structures.",
+      "evidence": [
+        "https://arxiv.org/abs/2102.01093"
+      ],
+      "revisitWhen": "The reduced cubes are public, or a toolkit for the GTC archive exists here."
+    },
+    {
+      "id": "x-ray-bubble",
+      "subject": "The hot gas inside the inner shell",
+      "status": "deferred",
+      "finding": "XMM-Newton and Chandra show diffuse X-ray emission filling the inner shell (Guerrero et al. 2005; Ruiz et al. 2013). It would be a lens of its own, a glow inside the walls.",
+      "evidence": [
+        "https://arxiv.org/abs/astro-ph/0412540",
+        "https://arxiv.org/abs/1302.3886"
+      ],
+      "revisitWhen": "An X-ray lens is wanted beside the optical one."
+    },
+    {
+      "id": "second-epoch",
+      "subject": "Hubble's 2007 frames",
+      "status": "deferred",
+      "finding": "The archive holds a second WFPC2 [N II] epoch (programme 11122, 2007), which the proper motions were measured against. The published 2000 picture is the one drawn.",
+      "evidence": [
+        "https://cdsarc.cds.unistra.fr/ftp/J/ApJ/798/129/ReadMe"
+      ],
+      "revisitWhen": "A picture from the archive's own frames is wanted."
+    }
+  ]
+}

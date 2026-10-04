@@ -1,0 +1,81 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "ngc-2392",
+  "card": {
+    "text": "NGC 2392 is a planetary nebula about 1,795 parsecs away.",
+    "sources": [
+      {
+        "catalogueId": "chornay-walton-2021-pn-central-stars",
+        "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/656/A110",
+        "label": "Chornay & Walton (2021), A&A 656, A110; CDS J/A+A/656/A110, Table A.1, PN G197.8+17.3: distance 1,795 pc (1,666 to 1,942) from the Gaia EDR3 parallax of its central star",
+        "checked": "2026-10-04",
+        "locator": "distance: 1,795 pc (1,666 to 1,942)"
+      },
+      {
+        "catalogueId": "wikipedia-eskimo-nebula",
+        "url": "https://en.wikipedia.org/wiki/Eskimo_Nebula",
+        "label": "Wikipedia, \"Eskimo Nebula\"",
+        "checked": "2026-10-04",
+        "locator": "Lead section, revision 1371767561",
+        "quote": "The Eskimo Nebula is a bipolar, double-shell planetary nebula (PN) in the northern constellation of Gemini."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "ESA/Hubble's photograph of it lies here on the walls its spectra give: a bubble pointed almost at the Sun inside a round shell 0.40 pc across.",
+    "sources": [
+      {
+        "catalogueId": "esahubble-heic9910a",
+        "url": "https://esahubble.org/images/heic9910a/",
+        "label": "ESA/Hubble heic9910a: NASA, ESA, Andrew Fruchter (STScI), and the ERO team (STScI + ST-ECF)",
+        "checked": "2026-10-04",
+        "locator": "NGC 2392; He II 469, [O III] 502, H-alpha 656 and [N II] 658 nm"
+      },
+      {
+        "catalogueId": "publication-garcia-diaz-2012-eskimo-model",
+        "url": "https://arxiv.org/abs/1211.6717",
+        "label": "García-Díaz et al. (2012), ApJ 761, 172: A detailed morpho-kinematic model of the Eskimo, NGC 2392",
+        "checked": "2026-10-04",
+        "locator": "Sect. VI: outer shell of angular radius 23 arcsec; inner shell a prolate spheroid tilted 9 degrees from the line of sight"
+      },
+      {
+        "catalogueId": "wikipedia-eskimo-nebula",
+        "url": "https://en.wikipedia.org/wiki/Eskimo_Nebula",
+        "label": "Wikipedia, \"Eskimo Nebula\"",
+        "checked": "2026-10-04",
+        "locator": "Lead section, revision 1371767561",
+        "quote": "Alternatively, it is known as NGC 2392, Clown Face Nebula, Lion Nebula, or Caldwell 39."
+      }
+    ]
+  },
+  "datasets": {
+    "optical": {
+      "title": "NGC 2392 in visible light",
+      "detail": "1500 × 1500 px",
+      "summary": "The photograph on the nebula's walls: a bubble inside a round shell, each feature on the side its measured speed gives.",
+      "sources": [
+        {
+          "catalogueId": "esahubble-heic9910a",
+          "url": "https://esahubble.org/images/heic9910a/",
+          "label": "ESA/Hubble heic9910a: NASA, ESA, Andrew Fruchter (STScI), and the ERO team (STScI + ST-ECF)",
+          "checked": "2026-10-04",
+          "locator": "NGC 2392"
+        },
+        {
+          "catalogueId": "publication-garcia-diaz-2012-eskimo-model",
+          "url": "https://arxiv.org/abs/1211.6717",
+          "label": "García-Díaz et al. (2012), ApJ 761, 172: A detailed morpho-kinematic model of the Eskimo, NGC 2392",
+          "checked": "2026-10-04",
+          "locator": "Sect. VI: the outer shell, the inner shell, the caps and the equatorial disc of cometary knots, with their speeds"
+        },
+        {
+          "catalogueId": "publication-garcia-diaz-2015-eskimo-proper-motions",
+          "url": "https://arxiv.org/abs/1411.0042",
+          "label": "García-Díaz et al. (2015), ApJ 798, 129: Internal proper motions in the Eskimo Nebula; CDS J/ApJ/798/129",
+          "checked": "2026-10-04",
+          "locator": "Table 3: each structure's place and radial velocity"
+        }
+      ]
+    }
+  }
+}
