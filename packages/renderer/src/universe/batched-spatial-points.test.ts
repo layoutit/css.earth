@@ -1,5 +1,4 @@
 import { readFileSync } from 'node:fs';
-import { parseCatalogueCells } from '@cssearth/objects';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { isDeepStrictEqual } from 'node:util';
@@ -123,8 +122,15 @@ test('prepared cells skip out-of-view boxes without changing a single drawn dot 
     const clump = [[40, 0, -60], [-90, 30, 20], [5, -5, 5]][index % 3]!;
     return [clump[0]! + (random() - .5) * 30, clump[1]! + (random() - .5) * 30, clump[2]! + (random() - .5) * 30, index % 2];
   });
-  // Preserved bake output for the deterministic rows above; parser admission verifies every box.
-  const cells = parseCatalogueCells(JSON.parse(readFileSync(new URL('./batched-spatial-points.cells.json', import.meta.url), 'utf8')), rows, [rows.length], 'culling fixture');
+  // Preserved bake assignment of each row to its cell (integers, stable across platforms). The boxes are the exact bounds of
+  // each cell's rows, built here: a transcendental function (Math.sin/cos) rounds differently on arm64 and x64, so boxes frozen
+  // from another platform's rows would not hold their points (bake's catalogue-points test pins the assignment).
+  const frozen = JSON.parse(readFileSync(new URL('./batched-spatial-points.cells.json', import.meta.url), 'utf8')) as { of: number[] };
+  const cellCount = Math.max(...frozen.of) + 1;
+  const bounds = new Float64Array(cellCount * 6).map((_, index) => index % 6 < 3 ? Infinity : -Infinity);
+  frozen.of.forEach((cell, row) => { for (let axis = 0; axis < 3; axis++) { const value = rows[row]![axis]!;
+    bounds[cell * 6 + axis] = Math.min(bounds[cell * 6 + axis]!, value); bounds[cell * 6 + 3 + axis] = Math.max(bounds[cell * 6 + 3 + axis]!, value); } });
+  const cells = { boxes: bounds, of: Int32Array.from(frozen.of) };
   const points = rows.map(row => ({ positionUnits: [row[0], row[1], row[2]] as unknown as readonly [number, number, number], color: row[3] }));
   const styles = [{ colorCss: '#ffffff', opacity: .5, radiusPx: 1 }, { colorCss: '#ff8800', opacity: 1, radiusPx: 2.5 }];
   let keep = 1, drawn = rows.length;

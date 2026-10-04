@@ -59,3 +59,21 @@ test('principal-axis spread prepares the flat-disc reach read by the renderer', 
   assert.ok(Math.abs(Math.abs(spread.normal[2]) - (1)) < 10 ** -6 / 2, `${Math.abs(spread.normal[2])} is not close to ${1}`);
   assert.ok(spread.across > 9); assert.ok(Math.abs(spread.along - (0)) < 10 ** -6 / 2, `${spread.along} is not close to ${0}`);
 });
+
+test('the renderer culling fixture keeps the bake assignment: same cells, same bounds up to rounding', () => {
+  // The renderer test (batched-spatial-points.test.ts) rebuilds exact boxes from this frozen assignment, because Math.sin/cos
+  // differ in the last bit between arm64 and x64; here the bake algorithm must still produce that assignment.
+  let seed = 11;
+  const random = () => ((seed = (seed * 1664525 + 1013904223) >>> 0) / 2 ** 32);
+  const rows = Array.from({ length: 3000 }, (_, index) => {
+    if (index % 3 === 0) { const u = random() * 2 - 1, a = random() * 2 * Math.PI, r = 150 + random() * 5, s = Math.sqrt(1 - u * u);
+      return [r * s * Math.cos(a), r * s * Math.sin(a), r * u, index % 2]; }
+    const clump = [[40, 0, -60], [-90, 30, 20], [5, -5, 5]][index % 3]!;
+    return [clump[0]! + (random() - .5) * 30, clump[1]! + (random() - .5) * 30, clump[2]! + (random() - .5) * 30, index % 2];
+  });
+  const frozen = JSON.parse(readFileSync(new URL('../../../renderer/src/universe/batched-spatial-points.cells.json', import.meta.url), 'utf8')) as { boxes: number[][]; of: number[] };
+  const cells = catalogueCells(rows, undefined, 32);
+  assert.deepEqual(cells.of, frozen.of);
+  assert.equal(cells.boxes.length, frozen.boxes.length);
+  cells.boxes.forEach((box, cell) => box.forEach((value, index) => assert.ok(Math.abs(value - frozen.boxes[cell]![index]!) < 1e-9, `box ${cell} bound ${index}`)));
+});
