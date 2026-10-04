@@ -16,6 +16,8 @@ export type { ObjectPreparation } from './preparation.js';
 export * from './registry/index.js';
 export { PREPARED_BINARY_MAGIC, shufflePreparedBinary, unshufflePreparedBinary } from './prepared-binary.js';
 export type { PreparedBinaryRegion } from './prepared-binary.js';
+export { PREPARED_BANK_MAGIC, encodePreparedBank, decodePreparedBank, preparedBankColumn } from './prepared-bank.js';
+export type { PreparedBank, PreparedBankColumn, PreparedBankColumnType } from './prepared-bank.js';
 export * from './volume/cloud-density-filter.js';
 export * from './volume/compiler-bake.js';
 export * from './volume/coordinates.js';

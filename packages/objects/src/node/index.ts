@@ -15,4 +15,4 @@ export { ASSET_LOCATIONS, INVENTORY_FILE, INVENTORY_SCHEMA, assembleRuntimeAsset
   requireInventory, updateInventory, validateInventory, verifyInventory } from './runtime-asset-closure.js';
 export type { AssetLocation, Inventory, InventoryAsset } from './runtime-asset-closure.js';
 export { preparedObjectText, preparedObjectTransport, preparedPageData, readJsonHead } from './prepared-transport.js';
-export { packPreparedBinary, unpackPreparedBinary } from './prepared-binary-file.js';
+export { packPreparedBinary, unpackPreparedBinary, packPreparedBank, unpackPreparedBank } from './prepared-binary-file.js';

@@ -27,7 +27,7 @@ the elements that own stacking; an inherited depth variable on the shared stage 
 | `@cssearth/renderer/universe` | the universe context (`createPreparedUniverse`), the world-frame queue and the loaders of volumes, point appearances, surface shells, image layers and volume datasets |
 | `@cssearth/renderer/platform/*` | single modules the application and tools import on their own (`object-orbit`, `camera-input`, `camera-layout`, `prepared-wheel-zoom`, `prepared-residency`, `object-contract`, `prepared-image-store`, `object-selection-runtime`, `prepared-presentation`, `perspective-dolly`, `surface-fly-to`) |
 | `@cssearth/renderer/testing` | the same implementations, exposed for tests |
-| `@cssearth/renderer/scene-native-waits`, `…/prepared-object-worker`, `…/world-context-planner-worker` | native wait helpers and the two worker entries |
+| `@cssearth/renderer/scene-native-waits`, `…/prepared-data-worker`, `…/world-context-planner-worker` | native wait helpers and the two worker entries |
 | `@cssearth/renderer/<folder>/<file>.ts` | a TypeScript source module, for the types and small functions the entries above do not publish |
 | `@cssearth/renderer/styles/*.css` | the runtime stylesheets: `volume.css`, `world-context.css`, `triangle-faces.css` |
 
