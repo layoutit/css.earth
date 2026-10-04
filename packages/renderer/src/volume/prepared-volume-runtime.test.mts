@@ -260,6 +260,19 @@ test('a stack the camera turns to joins a share a frame, every eighth slice firs
   } finally { mock.timers.reset(); }
 });
 
+test('a stack alone in the mix stays just under opaque, so its root never crosses opacity 1', () => {
+  const { runtime, roots } = mount(payload(3));
+  runtime.publish(publication([0, 0, 1]));
+  assert.deepEqual(roots.map(root => root.style.opacity), ['0', '0', '0.999']);
+  runtime.publish(publication([1, 0, 0]));
+  assert.equal(roots[0]!.style.opacity, '0.999');
+  for (const direction of [[1, 1, 1], [1, .9, 0], [0, 1, .95], [0, -1, 0]] as const) {
+    runtime.publish(publication(direction));
+    for (const root of roots) assert.ok(Number(root.style.opacity) <= .999, `opacity ${root.style.opacity}`);
+  }
+  runtime.destroy();
+});
+
 test('material replacement survives first visibility of every deferred axis', () => {
   const { runtime, meshes } = mount(payload(3));
   runtime.publish(publication([0, 0, 1]));
