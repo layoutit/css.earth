@@ -2,7 +2,7 @@ import { INVESTIGATION_LEDGER_SCHEMA, type InvestigationLedger } from '@cssearth
 import assert from 'node:assert/strict';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
-import { investigationOptions, investigationReport, formatInvestigationReport } from '@cssearth/bake/sources';
+import { investigationOptions, investigationReport, formatInvestigationReport, watchedSource } from '@cssearth/bake/sources';
 
 const ledger = (objectId: string): InvestigationLedger => ({ schema: INVESTIGATION_LEDGER_SCHEMA, objectId, entries: [
   { id: 'mesh', subject: 'Selected mesh', status: 'included', finding: 'Source geometry is in use; optical terrain remains unknown.', evidence: ['https://example.org/mesh'] },
@@ -37,4 +37,9 @@ test('finding searches and status filters preserve scope-wide counts, and invali
 test('the facilities report cannot be filtered by object classification', () => {
   assert.equal(investigationOptions(['--facilities']).facilities, true);
   assert.throws(() => investigationOptions(['--facilities', '--classification=asteroid']), /no object classification/);
+});
+
+test('a repository path in evidence is not a watched external source', () => {
+  assert.equal(watchedSource(['evidence/max-zoom/texels.json', 'https://astrogeology.usgs.gov/search/map/ceres_dawn_fc_global_mosaic_140m']), 'astrogeology.usgs.gov');
+  assert.equal(watchedSource(['evidence/max-zoom/texels.json', 'https://github.com/layoutit/css.earth/blob/main/README.md']), null);
 });

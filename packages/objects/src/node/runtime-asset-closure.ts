@@ -174,6 +174,10 @@ export async function inventoryPublicAssets({ objectId, objectDirectory, prepare
   if (arrival !== null) {
     if (!isRecord(arrival) || typeof arrival.url !== 'string') throw new TypeError('Invalid prepared arrival asset.');
     if (!references.includes(arrival.url)) references.push(arrival.url);
+    // The world billboard is that photograph at billboard size (packages/bake/src/site-assets/world-billboard.ts), written
+    // with it and named by no runtime either: a rebake that carries the published set keeps it.
+    const billboard = `${objectId}-billboard.webp`, billboardUrl = `/scenes/${objectId}/${billboard}`;
+    if (!references.includes(billboardUrl) && (await lstat(resolve(publicRoot, billboard)).catch(() => undefined))?.isFile()) references.push(billboardUrl);
   }
   const filenames = normalizeRuntimeAssetUrls({ objectId, urls: references });
   // Offline baking may emit intermediate densities. They are not shipped; production assembly still enforces closure.
