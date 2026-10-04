@@ -1,3 +1,4 @@
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 /** Author the pins of a sky band composite recipe: hips2fits responses, AllWISE atlas tile lists and JWST MAST products.
  * Usage: node packages/telescope-cli/src/sky/author-sky-bands.mts <recipe.json> [--cache=.local/nebula-lab/sky-bands]
  * A band without pins is acquired and pinned; existing pins are verified, never silently replaced.
@@ -6,6 +7,7 @@
  * published footprint edges or its centre projects inside the grid. */
 import { WISE_ATLAS_TILES_SCHEMA, type WiseBand } from '@cssearth/objects';
 import { mkdir, readFile, rename, stat, writeFile } from 'node:fs/promises';
+import { realpathSync } from 'node:fs';
 import { basename, dirname, relative, resolve } from 'node:path';
 import { gunzipSync } from 'node:zlib';
 import { hasErrorCode, requireArray, requireRecord, requireString } from '@cssearth/core';
@@ -81,11 +83,19 @@ export async function overlappingAtlasTiles(grid: SkyGrid, band: WiseBand) {
   return [...ids].sort();
 }
 
+/** Canonical recipe paths keep WISE tile records relative to the real checkout through symlink aliases. */
+export function skyAuthorPaths(recipe: string, cacheOption?: string) {
+  const root = checkoutProjectRoot(import.meta.url), recipePath = realpathSync(resolve(root, recipe));
+  const recipeDirectory = relative(root, dirname(recipePath));
+  if (recipeDirectory === '..' || recipeDirectory.startsWith('../')) throw new TypeError('Sky band recipe must be inside the checkout.');
+  return { root, recipePath, cache: resolve(root, cacheOption ?? '.local/nebula-lab/sky-bands') };
+}
+
 if (import.meta.main) {
-  const [recipePath, ...options] = process.argv.slice(2);
+  const [recipeArgument, ...options] = process.argv.slice(2);
   const cacheOption = options.find(option => option.startsWith('--cache='));
-  if (!recipePath || options.some(option => option !== cacheOption)) throw new TypeError('Usage: author-sky-bands <recipe.json> [--cache=<directory>]');
-  const cache = resolve(cacheOption?.slice(8) ?? '.local/nebula-lab/sky-bands'), root = process.cwd();
+  if (!recipeArgument || options.some(option => option !== cacheOption)) throw new TypeError('Usage: author-sky-bands <recipe.json> [--cache=<directory>]');
+  const { cache, root, recipePath } = skyAuthorPaths(recipeArgument, cacheOption?.slice(8));
   const draft = requireRecord(JSON.parse(await readFile(recipePath, 'utf8')), 'Draft sky band composite');
   const grid = requireRecord(draft.grid) as unknown as SkyGrid;
   const bands = [];

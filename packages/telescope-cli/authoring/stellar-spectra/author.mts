@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 /** Placed stars whose color dataset is a measured spectrum (the `measured` spectrum of stellar-photometric-color.mts): the navigation
  * marker is that color as a uniform disc, and the catalogue and surface colors are its hex. All three are deterministic
  * functions of the pinned spectrum, its record and the CIE observer.
@@ -13,7 +14,7 @@ import { loadStellarPhotometricColor } from '@cssearth/bake/objects/stellar';
 import { MARKER_PATH, starMarker } from '../../src/source-authoring/context-markers.mts';
 import { requireArray, requireRecord, requireString, isRecord } from '@cssearth/core';
 
-const objects = resolve(import.meta.dirname, '../../../../src/objects');
+const objects = resolve(checkoutProjectRoot(import.meta.url), 'src/objects');
 /** Stars whose default dataset is the measured-spectrum color: marker, catalogue and surface colors. */
 export const SPECTRUM_STARS = ['sirius', 'vega', 'hd-209458', 'arcturus', 'altair', 'deneb', 'fomalhaut', 'rigel', 'alpha-centauri-a', 'alpha-centauri-b',
   'aldebaran', 'kepler-186', 'kepler-452', 'wasp-39', 'polaris', 'proxima-centauri', 'k2-18', 'regulus', 'alderamin', 'rasalhague', 'caph', 'beta-pictoris', 'wd-1856-534', 'pds-70'] as const;

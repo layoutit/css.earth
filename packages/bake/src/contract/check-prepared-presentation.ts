@@ -1,8 +1,8 @@
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 import { AUTHORED_OBJECT_SCHEMA, OBJECT_RUNTIME_SCHEMA, PREPARED_CSS_OBJECT_FORMAT, requireObjectControls, type ObjectEntry } from '@cssearth/objects';
 
 import { isArray, hasErrorCode, isRecord, requireRecord, requireArray } from '@cssearth/core';
 import { readFile } from "node:fs/promises";
-import { createRequire } from "node:module";
 import { dirname, relative, resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 import { parseAst } from "vite";
@@ -21,7 +21,7 @@ import { readPreparedObjects } from "@cssearth/objects/node";
  * when the entry is imported. */
 let sceneObjects: readonly ObjectEntry[] | undefined;
 export const preparedPresentationSceneObjects = () => sceneObjects ??=
-  readPreparedObjects(resolve(dirname(createRequire(import.meta.url).resolve("@cssearth/bake/package.json")), "../..")).sceneObjects;
+  readPreparedObjects(checkoutProjectRoot(import.meta.url)).sceneObjects;
 
 export interface PreparedJsonExport { name: string; value: unknown; }
 export function readPreparedJsonModule(source: string, expectedExport?: string): PreparedJsonExport {
@@ -161,7 +161,7 @@ export interface PreparedPresentationAuditOptions {
 // Leaf box records are per-leaf data (1.35 M across the catalogue); the report counts them.
 const reportedBindings = (bindings: readonly object[]) => bindings.map(binding =>
   "boxes" in binding && Array.isArray(binding.boxes) ? { ...binding, boxes: binding.boxes.length } : binding);
-export async function auditPreparedPresentations({ root = process.cwd(), objects = preparedPresentationSceneObjects(), strict = true,
+export async function auditPreparedPresentations({ root = checkoutProjectRoot(import.meta.url), objects = preparedPresentationSceneObjects(), strict = true,
   readText = path => readFile(path, "utf8"), readControls = async path => (await import(pathToFileURL(path).href)).objectControls } : PreparedPresentationAuditOptions = {}) {
   const entries = [];
   for (const object of objects) {

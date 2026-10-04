@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 /** R Doradus authored inputs: the uniform-disc reference sphere from the retained measurements, the dataset frame cut from the
  * pinned ALMA continuum image, and the navigation marker rendered from it.
  *
@@ -20,7 +21,7 @@ import { readReconstruction } from '@cssearth/bake/objects/layers/observation';
 import { requireFiniteNumber, requireString } from '@cssearth/core';
 import { authorUniformDiscSphere, contextMarker } from '../betelgeuse/author.mts';
 
-const root = resolve(import.meta.dirname, '../../../../src/objects/r-doradus/source');
+const root = resolve(checkoutProjectRoot(import.meta.url), 'src/objects/r-doradus/source');
 
 /** The ALMA pipeline's band 7 continuum image of R Doradus, and the dataset frame cut from it. */
 export const ARCHIVE_PATH = 'observations/member.uid___A001_X35f5_Xaea.R_Dor_sci.spw25_27_29_31.cont.I.pbcor.fits';

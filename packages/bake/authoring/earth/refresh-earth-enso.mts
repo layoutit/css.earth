@@ -1,3 +1,4 @@
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 // Entry script: node packages/bake/authoring/earth/refresh-earth-enso.mts. Moves Earth's ENSO sequence to the newest NASA MUR
 // anomaly analysis GIBS has published and the same weekday one and two weeks before it: it acquires each date it does not
 // hold yet, drops the
@@ -33,7 +34,7 @@ function spliceEnso<T>(list: T[], isMember: (entry: T) => boolean, members: read
   list.splice(0, list.length, ...kept);
 }
 
-export async function refreshEarthEnso(root = process.cwd(), { window: shape = ENSO_WINDOW, now = new Date() } = {}) {
+export async function refreshEarthEnso(root = checkoutProjectRoot(import.meta.url), { window: shape = ENSO_WINDOW, now = new Date() } = {}) {
   const object = resolve(root, 'src/objects/earth'), source = join(object, 'source'), science = join(source, 'science');
   const response = await fetch(murCapabilitiesUrl, { signal: AbortSignal.timeout(120000) });
   if (!response.ok) throw new Error(`GIBS capabilities HTTP ${response.status}`);
@@ -146,4 +147,4 @@ export async function refreshEarthEnso(root = process.cwd(), { window: shape = E
   return { window: [window[0], window.at(-1)], acquired: acquired.sort(), mirrored: mirrored.sort(), dropped, advisory };
 }
 
-if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) console.log(json(await refreshEarthEnso(process.cwd())));
+if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) console.log(json(await refreshEarthEnso(checkoutProjectRoot(import.meta.url))));

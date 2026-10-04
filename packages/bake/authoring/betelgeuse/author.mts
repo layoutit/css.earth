@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 /** Betelgeuse authored inputs: the uniform-disc reference sphere from the retained measurements, the monochromatic continuum
  * OIFITS merged from the pinned VLT/MATISSE files, the beam-convolved reconstruction and the navigation marker rendered from it.
  * All are deterministic functions of checked-in or pinned inputs.
@@ -18,7 +19,7 @@ import sharp from 'sharp';
 import { parseUniformDiscStarMeasurements } from '@cssearth/objects';
 import { interpolatePalette } from '@cssearth/bake/objects/color';
 
-const root = resolve(import.meta.dirname, '../../../../src/objects/betelgeuse/source');
+const root = resolve(checkoutProjectRoot(import.meta.url), 'src/objects/betelgeuse/source');
 
 /** The reconstruction recipe the pilot settled: the paper's pseudo-continuum windows, its two February 2020 nights, and the
  * error floors set above the scatter of the beam-commuting-device repeats: the repeats give 0.085 of the squared visibility

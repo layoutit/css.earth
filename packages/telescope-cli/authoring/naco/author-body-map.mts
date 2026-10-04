@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 import { BODY_MAP_SCHEMA } from '@cssearth/objects';
 /** Turn one checked NACO jitter product into a registered body map through the shared resolved-disc boundary.
  *
@@ -27,7 +28,7 @@ import { esoHeader, type EsoHeader } from '@cssearth/telescope/node';
 import { readProgram } from '@cssearth/telescope-cli/archives/naco/archive';
 import { bankKernelPath } from '@cssearth/bake/objects/cameras';
 
-const REPOSITORY = resolve(import.meta.dirname, '../../../..');
+const REPOSITORY = checkoutProjectRoot(import.meta.url);
 const PCK = 'src/spice/cassini/pck/pck00011.tpc';
 const DEGREE = Math.PI / 180, ARCSEC_PER_RADIAN = 206_264.806_247, AU_KM = 1.495978707e8;
 

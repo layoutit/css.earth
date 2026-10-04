@@ -1,3 +1,5 @@
+import { setupBakeOracleInputs } from '../../../../cameras/oracle-inputs.mts';
+await setupBakeOracleInputs();
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
@@ -36,7 +38,7 @@ test('Astropy RICE_1 conformance: a truncated tile is refused', async () => {
 
 test('Astropy WCS conformance: HMI helioprojective pixels under CROTA2', async () => {
   const entry = requireRecord(fixture.cases['hmi-wcs']);
-  const response = JSON.parse(await readFile(resolve(ORACLE_ROOT, 'src/objects/sun/source/hmi/continuum/keywords.json'), 'utf8'));
+  const response = JSON.parse((await readOracleInput({ path: 'src/objects/sun/source/hmi/continuum/keywords.json' })).toString('utf8'));
   const geometry = hmiRecordGeometry(response, requireString(entry.record));
   for (const raw of requireArray(entry.pixels)) {
     const point = requireRecord(raw), [x, y] = hmiPixel(geometry, requireFiniteNumber(point.west), requireFiniteNumber(point.north));

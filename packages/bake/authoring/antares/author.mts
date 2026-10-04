@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 /** Antares authored input: the navigation marker, the scaffold's flat disc in the shared neutral gray, because no image of
  * the photosphere is cast in this package (see the object's investigations.json).
  *
@@ -8,7 +9,7 @@ import { writeOrCheckAuthoredOutputs } from '../authored-output.mts';
 import { pathToFileURL } from 'node:url';
 import { neutralDiscMarker } from '@cssearth/bake/navigation';
 
-const root = resolve(import.meta.dirname, '../../../../src/objects/antares/source');
+const root = resolve(checkoutProjectRoot(import.meta.url), 'src/objects/antares/source');
 export const CONTEXT_PATH = 'presentation/context.png';
 export const CONTEXT_SIZE = 512;
 

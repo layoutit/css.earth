@@ -1,3 +1,4 @@
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 // Entry script: node packages/bake/authoring/fornax-cluster/members.mts [fcc p2tbl2.dat.gz]
 /**
  * The Fornax Cluster's member dots: the Fornax Cluster Catalog's definite members (Ferguson 1989, AJ 98, 367, through
@@ -23,7 +24,7 @@ import { dirname, resolve } from 'node:path';
 import { gunzipSync, gzipSync } from 'node:zlib';
 import { createRaDecCatalogueMatcher } from '@cssearth/astronomy';
 
-const repository = resolve(import.meta.dirname, '../../../..');
+const repository = checkoutProjectRoot(import.meta.url);
 const fccPath = resolve(process.argv[2] ?? resolve(repository, 'output/clusters/fcc-p2tbl2.dat.gz'));
 const fieldPath = resolve(repository, 'src/objects/nearby-universe-galaxies/source/galaxies/cf4-hyperleda.csv.gz');
 const outputPath = resolve(repository, 'src/objects/fornax-cluster-members/source/dots/fcc-members.csv.gz');

@@ -1,4 +1,4 @@
-import { discoverRoot } from '@cssearth/core/node';
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 // `pnpm prepare:search-thumbnails`: small previews for search result rows, at
 // `public/navigation/search/<id>@2x.webp`: 40 CSS px at the one prepared density. Every scene object whose navigation
 // marker has a context sprite (`public/navigation/<id>-context.webp`, up to about 1400 px) previews from that sprite. An
@@ -16,8 +16,8 @@ import { isRecord } from '@cssearth/core';
 import { parseObjectDiscovery } from '@cssearth/objects';
 import { objectThumbnail } from './object-thumbnail.ts';
 
-/** The checkout, found through this package's own name so the path holds from the sources and from `dist/`. */
-const ROOT = discoverRoot({ strategy: 'package-location', fromUrl: import.meta.url, packageSpecifier: '@cssearth/bake/package.json', rootOffset: '../..', missing: { behavior: 'throw' } });
+/** The real checkout, found by the shared workspace-marker resolver from source and `dist/`. */
+const ROOT = checkoutProjectRoot(import.meta.url);
 const root = ROOT;
 /** Preview edge in device pixels: 40 CSS px at 2x. */
 export const SEARCH_THUMBNAIL_PIXELS = 80;

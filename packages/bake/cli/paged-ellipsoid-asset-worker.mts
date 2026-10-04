@@ -1,3 +1,4 @@
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 import { parentPort, workerData } from 'node:worker_threads';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -9,7 +10,7 @@ import type { PagedAssetJob } from '@cssearth/bake/objects/layers/paged-ellipsoi
 // One share of a paged ellipsoid's asset preparation, run in a worker thread by preparePagedEllipsoidAssetsInParallel
 // (`@cssearth/bake/objects/layers/paged-ellipsoid`); the host passes this module as the paged object's `assetWorker`. It
 // loads the generated solar geometry from the checkout it runs in, as the host does.
-const solarGeometry: SolarGeometry = await import(pathToFileURL(resolve(process.cwd(), 'src/platform/solar-geometry.mts')).href);
+const solarGeometry: SolarGeometry = await import(pathToFileURL(resolve(checkoutProjectRoot(import.meta.url), 'src/platform/solar-geometry.mts')).href);
 const data = requireRecord(workerData, 'paged asset worker data'), input = requireRecord(data.job, 'paged asset job');
 const mode = requireString(input.mode, 'paged asset job mode');
 if (mode !== 'maps' && mode !== 'extras' && mode !== 'materials') throw new TypeError(`Unknown paged asset job mode: ${mode}.`);

@@ -1,3 +1,5 @@
+import { setupBakeOracleInputs } from '../cameras/oracle-inputs.mts';
+await setupBakeOracleInputs();
 import assert from 'node:assert/strict';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();

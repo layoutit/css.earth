@@ -4,6 +4,7 @@
  * written after the packages build, so the host passes it in (`SolarGeometry`). */
 import { retainedShapeAtlas, alternativeForDataset, createRasterEmitter, parseRadialSnapshot, SHAPE_MATERIAL, shapeMaterialRaster, renderRadialSnapshot, parseSolidPreparationSource, loadRadialTerrain, prepareRadialMaterials } from '../objects/layers/terrestrial/index.ts';
 import type { RadialMaterialSurface } from '../objects/layers/terrestrial/index.ts';
+import { shapeMaterialPath } from './paths.ts';
 import { sha256 } from '@cssearth/core/node';
 import { readAuthoredSources } from '../objects/sources/index.ts';
 import { readFile, writeFile, mkdir, rename, copyFile, readdir, access } from 'node:fs/promises';
@@ -39,7 +40,7 @@ function describeNeutralMaterial(text: string): string {
 }
 
 export async function refreshShapeMaterialDescriptions(id: string) {
-  const objectDirectory = resolve('src/objects', id), sourceDirectory = resolve(objectDirectory, 'source');
+  const objectDirectory = shapeMaterialPath('src/objects', id), sourceDirectory = resolve(objectDirectory, 'source');
   const recipe = await json(resolve(sourceDirectory, 'preparation/terrestrial.json'));
   const datasetIds = records(requireRecord(recipe.raster).shapeViews ?? []).map(view => requireString(view.id));
   if (!datasetIds.length) return;
@@ -67,8 +68,8 @@ export async function refreshShapeMaterialDescriptions(id: string) {
 
 export async function refreshShapeMaterials(id: string, solarGeometry: SolarGeometry, sourceRoot?: string) {
   if (!/^[a-z][a-z0-9-]*$/.test(id)) throw new TypeError('Invalid object id.');
-  const started = performance.now(), objectDirectory = resolve('src/objects', id), outputDirectory = resolve(objectDirectory, 'prepared');
-  const publicDirectory = resolve('public/scenes', id), stage = resolve('output/shape-material-refresh', id);
+  const started = performance.now(), objectDirectory = shapeMaterialPath('src/objects', id), outputDirectory = resolve(objectDirectory, 'prepared');
+  const publicDirectory = shapeMaterialPath('public/scenes', id), stage = shapeMaterialPath('output/shape-material-refresh', id);
   const recipePath = resolve(objectDirectory, 'source/preparation/terrestrial.json'), recipeBytes = await readFile(recipePath);
   const config = parseSolidPreparationSource(JSON.parse(recipeBytes.toString('utf8'))), views = config.raster.shapeViews ?? [];
   if (!views.length) throw new Error(`${id} has no shape-only dataset.`);
@@ -153,8 +154,8 @@ export async function refreshShapeMaterials(id: string, solarGeometry: SolarGeom
   }
   if (contextRecord) {
     const markerStage = resolve(stage, 'navigation'); await mkdir(markerStage, { recursive: true });
-    const descriptors = [validateMarkerDescriptor(await loadObjectMarkerDescriptor(id, resolve('.')))];
-    await prepareBodyMarkers({ projectRoot: resolve('.'), outputRoot: markerStage, descriptors });
+    const descriptors = [validateMarkerDescriptor(await loadObjectMarkerDescriptor(id, shapeMaterialPath()))];
+    await prepareBodyMarkers({ projectRoot: shapeMaterialPath(), outputRoot: markerStage, descriptors });
 
     // Radial snapshots already own their crop and size. Use the same marker
     // renderer and context encoding without evaluating the whole orbital catalogue.
@@ -167,13 +168,13 @@ export async function refreshShapeMaterials(id: string, solarGeometry: SolarGeom
       await sharp(png).webp({ quality: 85, alphaQuality: 100, effort: 6 }).toFile(resolve(markerStage, `${id}-context.webp`));
     }
 
-    for (const filename of await readdir(markerStage)) await replaceAsset(resolve(markerStage, filename), resolve('public/navigation', filename));
+    for (const filename of await readdir(markerStage)) await replaceAsset(resolve(markerStage, filename), shapeMaterialPath('public/navigation', filename));
     // The committed search preview follows its context image.
-    await prepareSearchThumbnails();
+    await prepareSearchThumbnails(shapeMaterialPath());
   }
   await pretty(manifestPath, manifest);
   await prepareSurfaceMinimaps({ objectDirectory, publicDirectory, outputDirectory, photographs: datasetIds, solarGeometry });
-  await refreshObservationControls(id, datasetIds, new Map(datasetIds.map(datasetId => [datasetId, SHAPE_MATERIAL.color])));
+  await refreshObservationControls(id, datasetIds, new Map(datasetIds.map(datasetId => [datasetId, SHAPE_MATERIAL.color])), shapeMaterialPath());
   await refreshShapeMaterialDescriptions(id);
   const report = { id, datasetIds, seconds: (performance.now() - started) / 1000,
     material: SHAPE_MATERIAL,

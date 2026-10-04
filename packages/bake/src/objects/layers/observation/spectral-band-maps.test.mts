@@ -1,6 +1,7 @@
+import { setupBakeOracleInputs } from '../../cameras/oracle-inputs.mts';
+await setupBakeOracleInputs();
 import assert from 'node:assert/strict';
-import { sourceTest } from '@cssearth/objects/node/source-test';
-const test = sourceTest();
+import { sourceLoad, sourceTest, sourceValues } from '@cssearth/objects/node/source-test';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { estimateBand, fitsCube, paintCell, parseSpectralBandRecipe, prepareSpectralBandMaps } from '@cssearth/bake/objects/layers/observation';
@@ -9,7 +10,8 @@ import { requireRecord, requireArray, requireFiniteNumber, requireString } from 
 
 const source = resolve(ORACLE_ROOT, 'src/objects/charon/source');
 const recipePath = 'science/leisa/bands.json';
-const recipe = parseSpectralBandRecipe(JSON.parse(await readFile(resolve(source, recipePath), 'utf8')));
+const loaded = await sourceLoad(async () => parseSpectralBandRecipe(JSON.parse((await readOracleInput({ path: `src/objects/charon/source/${recipePath}` })).toString('utf8'))));
+const test = sourceTest(null, loaded);
 
 test('the absorption estimators distinguish depth from continuum ratio and reject missing or nonphysical denominators', () => {
   assert.equal(estimateBand([[10, 1.5, 1], [4, 2, 1], [10, 2.5, 1]], 'linear-band-depth'), .6);
@@ -17,8 +19,8 @@ test('the absorption estimators distinguish depth from continuum ratio and rejec
   assert.equal(estimateBand([[4, 4.2, 2], [0, 2.2, 1], [9, 6.8, 3]], 'continuum-ratio'), null);
   assert.equal(estimateBand([[0, 0, 0], [1, 2.2, 1], [9, 6.8, 3]], 'continuum-ratio'), null);
   assert.equal(estimateBand([[NaN, 4.2, 2], [1, 2.2, 1], [9, 6.8, 3]], 'continuum-ratio'), null);
-  assert.throws(() => parseSpectralBandRecipe({ ...recipe, lastBand: 256 }), /Invalid/);
-  const changed = structuredClone(recipe); changed.scans[0].cube = '../escape.fit';
+  assert.throws(() => parseSpectralBandRecipe({ ...sourceValues(loaded), lastBand: 256 }), /Invalid/);
+  const changed = structuredClone(sourceValues(loaded)); changed.scans[0].cube = '../escape.fit';
   assert.throws(() => parseSpectralBandRecipe(changed), /inside/);
 });
 
@@ -43,7 +45,7 @@ test('native planes and Organa cell spectra agree with the independent astropy f
   await assertPinnedInputs(fixture.inputs);
   for (const input of fixture.inputs) await readOracleInput(input);
   const products = requireArray(fixture.cases.products).map(value => requireRecord(value));
-  assert.equal(products.length, recipe.scans.length);
+  assert.equal(products.length, sourceValues(loaded).scans.length);
   const result = await prepareSpectralBandMaps(source, recipePath);
   const manifest = requireRecord(JSON.parse(await readFile(resolve(source, 'manifest.json'), 'utf8')));
   const entries = [...requireArray(manifest.inputs), ...requireArray(manifest.documents)].map(value => requireRecord(value));
@@ -52,7 +54,7 @@ test('native planes and Organa cell spectra agree with the independent astropy f
   }
   assert.deepEqual(result.report, JSON.parse(await readFile(resolve(source, 'science/leisa/preparation.json'), 'utf8')));
   for (const product of products) {
-    const scan = recipe.scans.find(s => s.id === product.id); assert.ok(scan);
+    const scan = sourceValues(loaded).scans.find(s => s.id === product.id); assert.ok(scan);
     const report = result.report.scans.find(s => s.id === product.id); assert.ok(report);
     for (const raw of requireArray(product.raw).map(value => requireRecord(value))) {
       const name = requireString(raw.name); assert.ok(name === 'cube' || name === 'wavelengths' || name === 'geometry');

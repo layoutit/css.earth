@@ -23,8 +23,8 @@ This package is the layer above the libraries: it imports `@cssearth/telescope`,
   where `src/archives/programs.mts` puts them. No archive module names a body (`archives/archive-scope.test.mts`).
   The Juno archive tests are beside the archive in `src/archives/juno/`;
   `test:packages` runs every test in this package;
-- the entry scripts and rendering lane it runs by path as processes or compiled modules (`src/workspace-commands/`, the sphere
-  lane in `src/sphere/sphere-lane.mts` and `src/sphere/sphere-html.mts`), because they read the checkout's body packages and
+- the entry scripts it runs by path as processes and the built sphere package entry (`src/workspace-commands/`, the sphere
+  lane exported as `@cssearth/telescope-cli/sphere/lane` and `src/sphere/sphere-html.mts`), because they read the checkout's body packages and
   application shell. The native CSS camera, resize input and carried viewport values that lane writes into its HTML are
   this package's `src/sphere/native-scroll/` (exported as `./sphere/native-scroll/*`, which the native scroll preview in
   `labs/experiments/` also imports); they followed the lane out of `tools/experiments/` (now `labs/experiments/`);
@@ -70,3 +70,5 @@ See the [shared source-format ownership contract](../objects/AGENTS.md) for WISE
 
 `src/implementation-dependencies.mts` declares `RENDERER_BUILD_CONFIG_PATH` for its entry-source closure.
 The architecture rule names this metadata reader separately from runtime consumers; its guard rejects an unlisted reader.
+
+Sphere export runs the built `@cssearth/telescope-cli/sphere/lane` entry from `dist`. After editing `src/sphere/`, rebuild with `pnpm --filter @cssearth/telescope-cli build` before exporting again.

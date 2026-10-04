@@ -1,3 +1,4 @@
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 // Entry script: node packages/bake/authoring/nearby-universe/quaia-sample.mts [quaia csv]
 /**
  * The Nearby Universe's Quaia sample: the Gaia-unWISE quasars (Storey-Fisher et al. 2024, G < 20.0) that lie outside
@@ -18,7 +19,7 @@ import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { gunzipSync, gzipSync } from 'node:zlib';
 
-const repository = resolve(import.meta.dirname, '../../../..');
+const repository = checkoutProjectRoot(import.meta.url);
 const sourceDirectory = resolve(repository, 'src/objects/nearby-universe-galaxies/source');
 const inputPath = resolve(process.argv[2] ?? resolve(repository, 'output/quaia/quaia-g20.csv'));
 const outputPath = resolve(sourceDirectory, 'quaia-quasars/quaia-sample.csv.gz');

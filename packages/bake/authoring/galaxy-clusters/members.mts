@@ -1,4 +1,5 @@
 import { catalogueSeparationArcsec } from '@cssearth/astronomy';
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 // Entry script: node packages/bake/authoring/galaxy-clusters/members.mts <hydra|centaurus|perseus|coma>
 /**
  * A galaxy cluster's member dots: the members a published catalogue lists that Cosmicflows-4 does not already hold, since
@@ -46,7 +47,7 @@ interface Member { name: string; ra: number; dec: number; stage: string; b: stri
 
 const cluster = process.argv[2] as Cluster;
 if (!(cluster in CLUSTERS)) throw new TypeError(`Usage: members.mts <${Object.keys(CLUSTERS).join('|')}>, got ${String(cluster)}.`);
-const repository = resolve(import.meta.dirname, '../../../..');
+const repository = checkoutProjectRoot(import.meta.url);
 const input = (name: string) => resolve(repository, 'output/clusters', `${name}.csv`);
 const fieldPath = resolve(repository, 'src/objects/nearby-universe-galaxies/source/galaxies/cf4-hyperleda.csv.gz');
 const outputPath = resolve(repository, `src/objects/${cluster}-cluster-members/source/dots/members.csv.gz`);

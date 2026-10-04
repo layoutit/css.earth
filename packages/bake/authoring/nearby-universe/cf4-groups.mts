@@ -1,3 +1,4 @@
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 // Entry script: node packages/bake/authoring/nearby-universe/cf4-groups.mts [table2.dat.gz] [table3.dat.gz]
 /**
  * Adds each Cosmicflows-4 galaxy's group to the tracked galaxy table: the PGC number of the group's dominant galaxy
@@ -14,7 +15,7 @@ import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { gunzipSync, gzipSync } from 'node:zlib';
 
-const repository = resolve(import.meta.dirname, '../../../..');
+const repository = checkoutProjectRoot(import.meta.url);
 const tablePath = resolve(process.argv[4] ?? resolve(repository, 'src/objects/nearby-universe-galaxies/source/galaxies/cf4-hyperleda.csv.gz'));
 const table2Path = resolve(process.argv[2] ?? resolve(repository, 'output/cf4/table2.dat.gz'));
 const table3Path = resolve(process.argv[3] ?? resolve(repository, 'output/cf4/table3.dat.gz'));

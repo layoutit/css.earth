@@ -1,3 +1,5 @@
+import { setupBakeOracleInputs } from '../../cameras/oracle-inputs.mts';
+await setupBakeOracleInputs();
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';

@@ -1,3 +1,5 @@
+import { setupBakeOracleInputs } from '@cssearth/bake/objects/cameras';
+await setupBakeOracleInputs();
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { execFileSync } from 'node:child_process';

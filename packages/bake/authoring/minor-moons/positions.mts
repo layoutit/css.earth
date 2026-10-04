@@ -1,3 +1,4 @@
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 /**
  * A planet's moons that have no page, each at its JPL Horizons position at the world's epoch.
  *
@@ -19,7 +20,7 @@ const HOST_CENTRES: Readonly<Record<string, string>> = { mars: '499', jupiter: '
 
 const host = process.argv[2] ?? '', centre = HOST_CENTRES[host];
 if (!centre) throw new TypeError(`Usage: positions.mts <host id>; the host must be one of ${Object.keys(HOST_CENTRES).join(', ')}, got ${JSON.stringify(host)}.`);
-const root = resolve(import.meta.dirname, '../../../..'), objects = resolve(root, 'src/objects');
+const root = checkoutProjectRoot(import.meta.url), objects = resolve(root, 'src/objects');
 const cataloguePath = resolve(root, 'site/source/moon-catalogues.json');
 const catalogue = JSON.parse(await readFile(cataloguePath, 'utf8')) as { systems: { id: string; moons: { id: string; name: string; elements?: { code?: string | null } | null }[] }[] };
 const system = catalogue.systems.find(entry => entry.id === host);

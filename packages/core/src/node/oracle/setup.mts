@@ -8,16 +8,19 @@
 import { spawnSync } from 'node:child_process';
 import { existsSync } from 'node:fs';
 import { resolve } from 'node:path';
+import { readOracleSetupManifest } from './manifest.mts';
 import { projectRoot } from '../project-root.ts';
 
 const root = projectRoot(import.meta.url);
 
-if (process.argv[2] === 'sbmt') {
-  const result = spawnSync(process.execPath, [resolve(root, 'packages/bake/src/objects/layers/terrestrial/fixtures/sbmt/setup.mts')], { cwd: root, stdio: 'inherit', timeout: 900_000 });
-  if (result.error || result.status !== 0) throw new Error(`SBMT setup failed: ${result.error?.message ?? result.status}`);
+const requested = process.argv[2];
+if (requested) {
+  const command = readOracleSetupManifest(root).setup[requested];
+  if (process.argv.length !== 3 || !command) throw new Error('Unknown oracle setup; owners register setup commands in their manifests.');
+  const result = spawnSync(process.execPath, [resolve(root, command)], { cwd: root, stdio: 'inherit', timeout: 900_000 });
+  if (result.error || result.status !== 0) throw new Error(`Oracle setup failed: ${result.error?.message ?? result.status}`);
   process.exit(0);
 }
-if (process.argv.length > 2) throw new Error('Usage: node packages/core/src/node/oracle/setup.mts [sbmt]');
 
 const venv = resolve(root, '.local/oracles/venv');
 const requirements = resolve(import.meta.dirname, 'requirements.txt');

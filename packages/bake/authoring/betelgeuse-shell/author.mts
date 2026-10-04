@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 import { VOLUME_PROVENANCE_SCHEMA } from '@cssearth/bake/volume';
 import { VOLUME_SOURCE_MANIFEST_SCHEMA, VOLUME_PRESENTATION_SOURCE_SCHEMA, VOLUME_RECIPE_SCHEMA, NEBULA_DELIVERY_SCHEMA } from '@cssearth/objects';
 /** Betelgeuse's circumstellar material, as four density grids the shared slab baker turns into one dataset bank.
@@ -26,12 +27,12 @@ import { pathToFileURL } from 'node:url';
 import { fitsImageAccessor, readFitsHdu, readFitsImage, skyImageAxes } from '@cssearth/fits';
 import { encodeDensityKtx2 } from '@cssearth/bake/density';
 
-const root = resolve(import.meta.dirname, '../../../../src/objects/betelgeuse-shell/source');
+const root = resolve(checkoutProjectRoot(import.meta.url), 'src/objects/betelgeuse-shell/source');
 const packageBase = 'src/objects/betelgeuse-shell/source';
 /** Original downloads, and the ALMA boxes cut from them, stay out of git and out of the source closure as every volume's
  * downloads do: the manifest names them by path and origin, and the source cache mirrors the ones no publisher serves byte for byte. */
 export const DOWNLOADS_BASE = '.local/betelgeuse-shell';
-const downloads = resolve(import.meta.dirname, '../../../..', DOWNLOADS_BASE);
+const downloads = resolve(checkoutProjectRoot(import.meta.url), DOWNLOADS_BASE);
 /** The two publisher figures this package cites, kept beside it because preparation reads them for the dataset previews. */
 export const PREVIEWS = Object.freeze({
   'zimpol-v': { path: 'previews/aa61023-26-fig3.jpg', url: 'https://www.aanda.org/articles/aa/full_html/2026/07/aa61023-26/aa61023-26-fig3.jpg',
@@ -45,7 +46,7 @@ export const PREVIEWS = Object.freeze({
     credit: 'ESO/M. Montarg\u00e8s et al.', crop: { left: 320, top: 40, width: 318, height: 520 },
     license: 'CC-BY-4.0. ESO images are released under the Creative Commons Attribution 4.0 International licence; retain the credit.' },
 });
-const starScene = resolve(import.meta.dirname, '../../../../src/objects/betelgeuse/prepared/scene.json');
+const starScene = resolve(checkoutProjectRoot(import.meta.url), 'src/objects/betelgeuse/prepared/scene.json');
 
 /** The two V-band products as ESO serves them: the pipeline intensity and its ancillary degree of linear polarisation. */
 export const PRODUCTS = Object.freeze({

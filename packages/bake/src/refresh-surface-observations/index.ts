@@ -1,7 +1,7 @@
 /** `@cssearth/bake/refresh-surface-observations` (Node only): refresh existing observation datasets using the full
  * preparer's raster and atlas owners. `packages/bake/cli/refresh-surface-observations.mts <object-id> <datasetId>...` is its
  * command. The generated solar geometry is written after the packages build, so the host passes it in (`SolarGeometry`). */
-import { sha256 } from '@cssearth/core/node';
+import { projectRoot, sha256 } from '@cssearth/core/node';
 import { readFile, writeFile, mkdir, copyFile, readdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
@@ -97,9 +97,9 @@ export async function refreshSurfaceObservations(id: string, datasetIds: readonl
 }
 
 /** Refresh the refreshed datasets' no-data flags and billboard colors without rebaking any images. Reader text publishes separately with prepare:text. */
-export async function refreshObservationControls(id: string, datasetIds: readonly string[], surfaceColors: ReadonlyMap<string, string> = new Map()) {
+export async function refreshObservationControls(id: string, datasetIds: readonly string[], surfaceColors: ReadonlyMap<string, string> = new Map(), root = projectRoot(import.meta.url)) {
   if (!/^[a-z][a-z0-9-]*$/.test(id)) throw new Error('Invalid object id.');
-  const objectDirectory = resolve('src/objects', id), outputDirectory = resolve(objectDirectory, 'prepared'), publicDirectory = resolve('public/scenes', id);
+  const objectDirectory = resolve(root, 'src/objects', id), outputDirectory = resolve(objectDirectory, 'prepared'), publicDirectory = resolve(root, 'public/scenes', id);
   const descriptor = await json(resolve(objectDirectory, 'object.json'));
   const references = records(requireRecord(requireRecord(descriptor.properties).recipe).sources);
   // Keep the existing prepared controls, feature catalogue and all other shell content; a refreshed control takes only its
@@ -136,5 +136,5 @@ export async function refreshObservationControls(id: string, datasetIds: readonl
     });
     await save(path, document);
   }
-  await repinObjectJson(id);
+  await repinObjectJson(id, root);
 }

@@ -1,4 +1,4 @@
-import { discoverRoot } from '@cssearth/core/node';
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 // `@cssearth/bake/run-implemented-objects` (Node only): runs a registered scene object's acquire, prepare, test, browser
 // or assemble command, and the concurrency-limited scheduler that prepares several objects with a memory budget. It
 // imports `sources`. `packages/bake/cli/run-implemented-objects.mts` is its command.
@@ -11,8 +11,8 @@ import { resolve } from "node:path";
 import { readPreparedObjects } from "@cssearth/objects/node";
 import { authoredObject } from '../sources/index.ts';
 
-/** The checkout, found through this package's own name so the path holds from the sources and from `dist/`. */
-const ROOT = discoverRoot({ strategy: 'package-location', fromUrl: import.meta.url, packageSpecifier: '@cssearth/bake/package.json', rootOffset: '../..', missing: { behavior: 'throw' } });
+/** The real checkout, found by the shared workspace-marker resolver from source and `dist/`. */
+const ROOT = checkoutProjectRoot(import.meta.url);
 /** The scene objects, read through the prepared registry of this checkout rather than the application's bound registry. */
 const SCENE_OBJECTS = () => readPreparedObjects(ROOT).sceneObjects;
 
@@ -40,7 +40,7 @@ async function requireAuthored(id: string, projectRoot: string) {
 
 export async function discoverObjectTests(
   id: string,
-  { projectRoot = process.cwd(), readDirectory = readdir }: {projectRoot?: string; readDirectory?: (directory: string) => Promise<string[]>} = {},
+  { projectRoot = checkoutProjectRoot(import.meta.url), readDirectory = readdir }: {projectRoot?: string; readDirectory?: (directory: string) => Promise<string[]>} = {},
 ) {
   const directory = resolve(projectRoot, 'src/objects', id);
   const isTest = (filename: string) => /\.test\.m(?:j|t)s$/u.test(filename);
@@ -62,18 +62,18 @@ export async function discoverObjectTests(
   return tests;
 }
 
-export function sharedUnitTestDirectory(projectRoot = process.cwd()) {
+export function sharedUnitTestDirectory(projectRoot = checkoutProjectRoot(import.meta.url)) {
   return resolve(projectRoot, 'site/test');
 }
 
-export async function resolveObjectAssembly(id: string, { projectRoot = process.cwd(), accessFile = access }: ResolveOptions = {}) {
+export async function resolveObjectAssembly(id: string, { projectRoot = checkoutProjectRoot(import.meta.url), accessFile = access }: ResolveOptions = {}) {
   return resolveObjectCommand(id, 'assemble', { projectRoot, accessFile });
 }
 
 export async function resolveObjectCommand(
   id: string,
   mode: string,
-  { projectRoot = process.cwd(), accessFile = access }: ResolveOptions = {},
+  { projectRoot = checkoutProjectRoot(import.meta.url), accessFile = access }: ResolveOptions = {},
 ) {
   const scripts: Readonly<Partial<Record<string, string>>> = Object.freeze({
     acquire: 'packages/bake/cli/object-operations.mts',
@@ -113,7 +113,7 @@ const gibibyte = 1024 ** 3;
 export const PREPARATION_PEAK_BYTES = { light: 1.5 * gibibyte, heavy: 6 * gibibyte } as const;
 export const PREPARATION_MEMORY_FLOOR = 2.5 * gibibyte;
 
-export async function preparationPeakBytes(id: string, projectRoot = process.cwd()) {
+export async function preparationPeakBytes(id: string, projectRoot = checkoutProjectRoot(import.meta.url)) {
   if (!await authoredObject(id, projectRoot)) return PREPARATION_PEAK_BYTES.heavy;
   let recipe: {raster?: {surfaceObservations?: unknown[]}; geometry?: {radialTerrain?: unknown}};
   try { recipe = JSON.parse(await readFile(resolve(projectRoot, 'src/objects', id, 'source/preparation/terrestrial.json'), 'utf8')); }
@@ -151,7 +151,7 @@ export async function runObjectCommand({ command, argumentsList, cwd, env, onSpa
 }
 
 export async function runPreparationObjects({
-  projectRoot = process.cwd(),
+  projectRoot = checkoutProjectRoot(import.meta.url),
   objectIds = SCENE_OBJECTS().map(({ id }) => id),
   concurrency = defaultPreparationConcurrency(),
   argumentsList = [],

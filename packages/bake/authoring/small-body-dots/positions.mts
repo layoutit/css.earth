@@ -1,3 +1,4 @@
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 /**
  * The small bodies of a bank's populations that have no page, each at its position at the world's epoch.
  *
@@ -14,7 +15,7 @@ import { readdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { gunzipSync, gzipSync } from 'node:zlib';
 
-const root = resolve(import.meta.dirname, '../../../..'), objects = resolve(root, 'src/objects');
+const root = checkoutProjectRoot(import.meta.url), objects = resolve(root, 'src/objects');
 const id = process.argv[2];
 if (!id || !/^[a-z][a-z0-9-]*$/u.test(id)) throw new TypeError('Usage: positions.mts <object id>');
 const queryPath = resolve(objects, id, 'source/dots/query.json');

@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 import { BODY_MAP_SCHEMA } from '@cssearth/objects';
 /** Write a body's JWST band maps from its record, src/objects/<id>/source/preparation/jwst-band-maps.json.
  *
@@ -36,7 +37,7 @@ import { bodyMapFits, type BodyMap } from '@cssearth/bake/objects/layers/observa
 import { bindMapResolution, bodyMapProductRecord, formatProductRecord } from '@cssearth/telescope-cli/body-map-publication';
 import type { ProductInput, ProductSoftware } from '@cssearth/objects';
 
-const REPOSITORY = resolve(import.meta.dirname, '../../../../..');
+const REPOSITORY = checkoutProjectRoot(import.meta.url);
 export const JWST_HORIZONS_CENTER = '500@-170';
 const DEGREE = Math.PI / 180;
 
