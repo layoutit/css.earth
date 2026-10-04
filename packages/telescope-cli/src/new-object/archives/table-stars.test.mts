@@ -13,7 +13,7 @@ import { catalogueOf, parseVizierMeta, parseVizierReadMe, starColumns, vizierDat
 
 const test = sourceTest(), root = resolve(import.meta.dirname, '../../../../..');
 const column = (name: string, format: string, description: string, ucd = '') => `#Column\t${name}\t(${format})\t${description}\t[ucd=${ucd}]`;
-const meta = (table: string, rows: number, columns: readonly string[]) => [`#RESOURCE=yCat_1`, `#Name: ${table}`, '#Title:', `#INFO\tnrows=${rows}\tNumber of rows of the table`, '#Table\t:', `#Name: ${table}`, '#Title:', ...columns].join('\n');
+const meta = (table: string, rows: number, columns: readonly string[], resource = 'yCat_17430176_1') => [`#RESOURCE=${resource}`, `#Name: ${table}`, '#Title:', `#INFO\tnrows=${rows}\tNumber of rows of the table`, '#Table\t:', `#Name: ${table}`, '#Title:', ...columns].join('\n');
 const RECNO = column('recno', 'I8', 'Record number assigned by the VizieR team. Should Not be used for identification.', 'meta.record');
 const GERKE = 'J/ApJ/743/176/table1', gerkeMeta = meta(GERKE, 126, [RECNO, column('M81C', 'A18', 'Cepheid identification (HHMMSS.ss+DDMMSS.s; J2000) (1)', 'meta.id;meta.main'),
   column('f_M81C', 'a5', 'Removed Cepheid from final sample (3)', 'meta.code'), column('Per', 'F6.3', '[10/99] Period', 'time.period'), column('Vmag', 'F5.2', 'Calibrated phase-averaged mean V-band magnitude', 'phot.mag;em.opt.R'),
@@ -25,7 +25,7 @@ const gerkeReadMe = ['J/ApJ/743/176          BVI photometry of Cepheids in M81  
   '    Gerke J.R., Kochanek C.S., Prieto J.L., Stanek K.Z., Macri L.M.', '   <Astrophys. J., 743, 176 (2011)>', '   =2011ApJ...743..176G', '='.repeat(80), 'ADC_Keywords: Galaxies, nearby ; Photometry, HST ; Stars, variable'].join('\n');
 const KANBUR = 'J/A+A/411/361/table1', kanburMeta = meta(KANBUR, 725, [RECNO, column('Galaxy', 'a8', 'Galaxy name'), column('Cepheid', 'a5', 'Name of the Cepheid in the galaxy'), column('log(P)', 'F6.3', 'Period'), column('Vmag', 'F6.3', 'V band mean magnitude'),
   column('SName', 'a18', 'Simbad designation of the Cepheid'), column('Simbad', 'a6', 'Simbad column added by the CDS'), column('_RA', 'F8.4', 'Position of the parent Galaxy (from NED) (right ascension part)', 'pos.eq.ra;meta.main'),
-  column('_DE', 'F8.4', 'Position of the parent Galaxy (from NED) (declination part)', 'pos.eq.dec;meta.main')]);
+  column('_DE', 'F8.4', 'Position of the parent Galaxy (from NED) (declination part)', 'pos.eq.dec;meta.main')], 'yCat_34110361_1');
 const kanburRows = ['_RAJ2000\t_DEJ2000\tGalaxy\tCepheid\tlog(P)\tVmag\tSName\tSimbad\t_RA\t_DE', 'deg\tdeg\t \t \t[d]\tmag\t \t \tdeg\tdeg', '----------\t----------\t--------\t-----\t------\t------\t------------------\t------\t--------\t--------',
   '160.990542\t+11.703611\tNGC3351 \tC1   \t 1.633\t24.447\t[GPF97] c1        \tSimbad\t160.9905\t+11.7036', '160.990542\t+11.703611\tNGC3351 \tC2   \t 1.613\t24.424\t[GPF97] c2        \tSimbad\t160.9905\t+11.7036',
   '185.728750\t+15.822389\tNGC4321 \tC2   \t 1.883\t25.163\t[FFH96] C2        \tSimbad\t185.7287\t+15.8224', '185.728750\t+15.822389\tNGC4321 \tC3   \t 1.803\t25.053\t[FFH96] C3        \tSimbad\t185.7287\t+15.8224'].join('\n');
@@ -41,14 +41,14 @@ const answering = (rules: readonly (readonly [string, string])[]): Archive & { r
 
 test('VizieR\'s table metadata is read for the columns a placed star needs, by UCD and, without one, by name', () => {
   const gerke = parseVizierMeta(gerkeMeta, GERKE)!;
-  assert.deepEqual([gerke.name, gerke.tables.length, gerke.tables[0]!.rows, gerke.tables[0]!.columns.length], [GERKE, 1, 126, 8]);
+  assert.deepEqual([gerke.name, gerke.tables.length, gerke.tables[0]!.rows, gerke.tables[0]!.columns.length, gerke.doi], [GERKE, 1, 126, 8, '10.26093/cds/vizier.17430176'], 'asked for one table, VizieR gives the catalogue\'s number only as the resource id');
   assert.deepEqual(starColumns(gerke.tables[0]!), { identifier: 'M81C', period: { column: 'Per', log: false }, position: true }, 'the cross-identification F94 is not the star\'s own name');
   // A catalogue of two tables, asked by bibcode: its title and paper come with it. The older table has no UCDs.
-  const gieren = parseVizierMeta(['#RESOURCE=yCat_51281167', '#Name: J/AJ/128/1167', '#Title: ARAUCARIA project : NGC 300 Cepheid Variables. II (Gieren+, 2004)', '#INFO\tcites=bibcode:2004AJ....128.1167G\t    Article or Data origin sources',
+  const gieren = parseVizierMeta(['#RESOURCE=yCat_51281167', '#Name: J/AJ/128/1167', '#Title: ARAUCARIA project : NGC 300 Cepheid Variables. II (Gieren+, 2004)', '#INFO\tcites=bibcode:2004AJ....128.1167G\t    Article or Data origin sources', '#INFO\tcitation=doi:10.26093/cds/vizier.51281167\t    Dataset identifier that can be used for citation',
     '#Table\tyCat_51281167_1:', '#Name: J/AJ/128/1167/table1', '#Title:', '#INFO\tnrows=64\tNumber of rows of the table', RECNO, column('[PGF2002]', 'a6', 'Cepheid number'), column('Per', 'F7.3', 'Period'), column('logPer', 'F7.4', 'Log of the period'), column('Rem', 'a30', 'Remarks'),
     column('_RA', 'F8.4', 'Position from Paper I (J/AJ/123/789) (right ascension part)', 'pos.eq.ra;meta.main'), '#Table\tyCat_51281167_2:', '#Name: J/AJ/128/1167/table2', '#Title:', '#INFO\tnrows=3042\tNumber of rows of the table', RECNO,
     column('[PGF2002]', 'a6', 'Cepheid number'), column('HJD', 'F14.6', 'Heliocentric Julian Date')].join('\n'), '2004AJ....128.1167G')!;
-  assert.deepEqual([gieren.name, gieren.bibcode, gieren.title, gieren.tables.map(table => [table.name, table.rows])], ['J/AJ/128/1167', '2004AJ....128.1167G', 'ARAUCARIA project : NGC 300 Cepheid Variables. II (Gieren+, 2004)', [['J/AJ/128/1167/table1', 64], ['J/AJ/128/1167/table2', 3042]]]);
+  assert.deepEqual([gieren.name, gieren.doi, gieren.bibcode, gieren.title, gieren.tables.map(table => [table.name, table.rows])], ['J/AJ/128/1167', '10.26093/cds/vizier.51281167', '2004AJ....128.1167G', 'ARAUCARIA project : NGC 300 Cepheid Variables. II (Gieren+, 2004)', [['J/AJ/128/1167/table1', 64], ['J/AJ/128/1167/table2', 3042]]]);
   assert.deepEqual(starColumns(gieren.tables[0]!), { identifier: '[PGF2002]', period: { column: 'Per', log: false }, position: true }, 'the plain period is read before its logarithm; the leading text column names the star, a later one is a remark');
   assert.equal(starColumns(gieren.tables[1]!).period, undefined);
   assert.deepEqual(starColumns(parseVizierMeta(kanburMeta, KANBUR)!.tables[0]!), { identifier: 'Galaxy', period: { column: 'log(P)', log: true }, simbadName: 'SName', position: true }, 'the CDS link column "Simbad" is not the name column');
@@ -130,8 +130,9 @@ test('a table with a position per star drafts a spec placed by its row, named as
   const { stars, report } = await draftsFromTable([`cepheid:m81=${GERKE}`], archive, root), spec = parseStarSpec(stars[0]);
   assert.deepEqual(report, ['cepheid:m81=J/ApJ/743/176/table1: 1 Cepheid of Gerke et al. (2011), ApJ 743, 176 in M81; radius and temperature from Groenewegen (2020), A&A 635, A33\'s period relations.']);
   assert.deepEqual([spec.id, spec.name, spec.parent, spec.target], ['gkp2011-m81c-j095610-62-690732-7', '[GKP2011] M81C J095610.62+690732.7', 'm81', '[GKP2011] M81C J095610.62+690732.7']);
-  assert.deepEqual(spec.position, { catalogue: GERKE, row: { M81C: '095610.62+690732.7' }, columns: { ra: '_RAJ2000', dec: '_DEJ2000' }, credit: 'Gerke et al. (2011), ApJ 743, 176', url: 'https://ui.adsabs.harvard.edu/abs/2011ApJ...743..176G' });
-  assert.deepEqual([spec.paper, spec.mass, spec.radialVelocity?.value], [{ url: 'https://ui.adsabs.harvard.edu/abs/2011ApJ...743..176G', credit: 'Gerke et al. (2011), ApJ 743, 176' }, 'unmeasured', -47]);
+  // The source cited is the catalogue that was read, by the DOI CDS registered for it; the credit is the paper's.
+  assert.deepEqual(spec.position, { catalogue: GERKE, row: { M81C: '095610.62+690732.7' }, columns: { ra: '_RAJ2000', dec: '_DEJ2000' }, credit: 'Gerke et al. (2011), ApJ 743, 176', url: 'https://doi.org/10.26093/cds/vizier.17430176' });
+  assert.deepEqual([spec.paper, spec.mass, spec.radialVelocity?.value], [{ url: 'https://doi.org/10.26093/cds/vizier.17430176', credit: 'Gerke et al. (2011), ApJ 743, 176' }, 'unmeasured', -47]);
   assert.ok(archive.asked.some(request => /o\.path LIKE '%Ce\*%' AND CONTAINS\(POINT\('ICRS', b\.ra, b\.dec\), CIRCLE\('ICRS', 149\.04425, 69\.12575, 0\.0005556\)\) = 1/u.test(request)), 'SIMBAD is asked for a Cepheid within 2" of the row');
   assert.ok(Math.abs(spec.distance!.value - 3622342) < 2, 'on the midplane of the disc M81 is drawn as, 8 kpc behind its centre');
   assert.match(spec.radius === 'gaia-flame' ? '' : spec.radius.source, /this star's period, 64\.823 d in Gerke et al\. \(2011\), ApJ 743, 176, VizieR J\/ApJ\/743\/176\/table1 M81C = 095610\.62\+690732\.7 \(Per\); not a measurement of this star/u);
@@ -152,7 +153,7 @@ test('a table that gives every row its galaxy\'s centre places its stars by the 
     ["n.id = '[GPF97] c1'", 'main_id\tra\tdec\tcoo_bibcode\n"[GPF97] c01"\t160.97075\t11.687527777777778\t\n'], ['SELECT a.id FROM ident', 'id\n"[GPF97] c01"\n'], [KANBUR, kanburRows]]);
   const { stars, report } = await draftsFromTable([`cepheid:m95=${KANBUR}`], archive, root), spec = parseStarSpec(stars[0]);
   assert.match(report[0]!, /1 Cepheid of Kanbur et al\. \(2003\), A&A 411, 361 in M95, placed by SIMBAD;/u);
-  assert.deepEqual([spec.id, spec.name, spec.parent], ['gpf97-c01', '[GPF97] c01', 'm95']);
+  assert.deepEqual([spec.id, spec.name, spec.parent, spec.paper.url], ['gpf97-c01', '[GPF97] c01', 'm95', 'https://doi.org/10.26093/cds/vizier.34110361']);
   assert.deepEqual(spec.position, { archive: 'simbad', catalogue: 'basic', row: { main_id: '[GPF97] c01' }, url: 'https://simbad.cds.unistra.fr/simbad/sim-id?Ident=%5BGPF97%5D%20c01',
     credit: 'Kanbur et al. (2003), A&A 411, 361, VizieR J/A+A/411/361/table1 Galaxy = NGC3351, Cepheid = C1, names the star in SIMBAD (SName); SIMBAD holds its position and names no paper for it' });
   assert.match(spec.radius === 'gaia-flame' ? '' : spec.radius.source, /this star's period, 42\.95 d in Kanbur et al\. \(2003\), A&A 411, 361, VizieR J\/A\+A\/411\/361\/table1 Galaxy = NGC3351, Cepheid = C1 \(log\(P\) 1\.633\)/u);

@@ -11,14 +11,18 @@ export interface VizierCatalogue {
   /** The catalogue (J/AJ/128/1167) or, when one table was asked for, that table. */
   readonly name: string;
   /** The catalogue's title as VizieR writes it, "ARAUCARIA project : NGC 300 Cepheid Variables. II (Gieren+, 2004)"; empty for a table. */
-  readonly title: string; readonly bibcode: string | null; readonly tables: readonly VizierTable[];
+  readonly title: string; readonly bibcode: string | null;
+  /** The DOI CDS registered for the catalogue (10.26093/cds/vizier.17430176): VizieR states it for a catalogue of several tables, and
+   * its number is the answer's own resource id (yCat_17430176_1) otherwise. */
+  readonly doi: string | null; readonly tables: readonly VizierTable[];
 }
 
 /** The tables of a `-meta.all` answer, or undefined when VizieR holds no such catalogue. Any other error VizieR reports is thrown. */
 export function parseVizierMeta(tsv: string, source: string): VizierCatalogue | undefined {
   const error = /^#INFO\tError=(.*)$/mu.exec(tsv)?.[1]?.trim();
   if (error) { if (/not found/iu.test(error)) return undefined; throw new Error(`VizieR ${source}: ${error}`); }
-  let name = '', title = '', bibcode: string | null = null, resourceRows: number | null = null, inTable = false, named = false;
+  let name = '', title = '', bibcode: string | null = null, doi: string | null = null, resourceRows: number | null = null, inTable = false, named = false;
+  const resource = /^#RESOURCE=yCat_(\d+)(?:_\d+)?\s*$/mu.exec(tsv)?.[1];
   const tables: { name: string; rows: number | null; columns: VizierColumn[] }[] = [];
   for (const line of tsv.split('\n')) {
     if (line.startsWith('#Table')) { inTable = true; named = false; continue; }
@@ -30,6 +34,7 @@ export function parseVizierMeta(tsv: string, source: string): VizierCatalogue | 
     else if (line.startsWith('#INFO\t')) {
       const [key, value = ''] = (line.split('\t')[1] ?? '').split('=');
       if (key === 'cites' && value.startsWith('bibcode:')) bibcode = value.slice(8);
+      if (key === 'citation' && value.startsWith('doi:')) doi = value.slice(4);
       if (key === 'nrows' && /^\d+$/u.test(value)) { if (inTable && current && named) current.rows = Number(value); else resourceRows = Number(value); }
     } else if (line.startsWith('#Column\t') && inTable && current && named) {
       const [, column = '', format = '', description = '', ucd = ''] = line.split('\t');
@@ -39,7 +44,7 @@ export function parseVizierMeta(tsv: string, source: string): VizierCatalogue | 
   if (!name || !tables.length) throw new Error(`VizieR ${source}: the answer names no table.`);
   // Asked for one table, VizieR gives its row count before the table block.
   for (const table of tables) if (table.rows === null && table.name === name) table.rows = resourceRows;
-  return { name, title, bibcode, tables };
+  return { name, title, bibcode, doi: doi ?? (resource ? `10.26093/cds/vizier.${resource}` : null), tables };
 }
 
 /** VizieR's tables for a catalogue, a table or a bibcode; undefined when it holds none. */

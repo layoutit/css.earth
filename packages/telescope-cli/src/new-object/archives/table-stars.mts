@@ -5,7 +5,8 @@
  * turns them into a radius and a temperature, as sh0es.mts does for the Cepheids of one paper. GALAXY is the id of the galaxy's
  * object: the star is placed inside it as the app draws it, where its sight line crosses the midplane of the galaxy's own
  * image-layer disc, and moves with SIMBAD's radial velocity of the galaxy. TABLE is the VizieR table (J/ApJ/743/176/table1); its
- * columns are found by vizier-tables.mts and its paper is cited from the head of the catalogue's ReadMe.
+ * columns are found by vizier-tables.mts. Its paper is credited from the head of the catalogue's ReadMe, and the source cited is the
+ * catalogue itself, by the DOI CDS registered for it: the table is what was read.
  *
  * ROW picks the stars, as comma-separated parts. `COLUMN=VALUE` keeps the rows with that cell; a bare value keeps the row the table
  * names so; `all` drafts every row kept. With neither, one star is drafted: the longest period the class's relation covers. A table
@@ -152,10 +153,11 @@ export async function draftsFromTable(names: readonly string[], archive: Archive
   const stars: Record<string, unknown>[] = [], report: string[] = [];
   for (const name of names) {
     const request = parseTableRequest(name), starClass = TABLE_CLASSES[request.starClass]!, galaxy = await readGalaxy(root, request.galaxy);
-    const table = (await vizierTables(archive, request.table))?.tables.find(candidate => candidate.name === request.table);
-    if (!table) throw new Error(`VizieR holds no table ${request.table}; \`telescope stars ${request.galaxy}\` lists the tables of the papers on its stars.`);
+    const held = await vizierTables(archive, request.table), table = held?.tables.find(candidate => candidate.name === request.table);
+    if (!held || !table) throw new Error(`VizieR holds no table ${request.table}; \`telescope stars ${request.galaxy}\` lists the tables of the papers on its stars.`);
+    if (!held.doi) throw new Error(`VizieR ${request.table}: its answer states no catalogue DOI and no resource number to form one, so the table cannot be cited.`);
     const published = parseVizierReadMe(await archive.text(vizierReadMeUrl(catalogueOf(request.table))), catalogueOf(request.table)), cited = paperCredit(published.authors, published.bibcode);
-    const paper = { url: `https://ui.adsabs.harvard.edu/abs/${encodeURIComponent(published.bibcode)}`, credit: cited.credit }, columns = starColumns(table);
+    const paper = { url: `https://doi.org/${held.doi}`, credit: cited.credit }, columns = starColumns(table);
     if (!columns.period) throw new Error(`${request.table} has no period column (${table.columns.map(column => column.name).join(', ')}); a ${starClass.noun} is drafted from its period.`);
     const rows = vizierDataRows(await archive.text(VIZIER_ASU, { '-source': request.table, '-out.all': '', '-out.add': `${DECIMAL_POSITION.ra},${DECIMAL_POSITION.dec}`, '-out.max': '99999' }), request.table);
     const degrees = (cells: Cells, column: string) => { const value = Number(cells[column]); return cells[column] && Number.isFinite(value) ? value : undefined; };
@@ -171,16 +173,16 @@ export async function draftsFromTable(names: readonly string[], archive: Archive
       const days = period(cells), where = `${request.table} ${Object.entries(key).map(([column, cell]) => `${column} = ${cell}`).join(', ')}`;
       if (!(days > 0)) throw new Error(`${where}: ${columns.period.column} is ${JSON.stringify(cells[columns.period.column])}, not a period.`);
       // The SIMBAD name CDS added to a row is the star's, whether or not the row has a position; without one the star is looked for at its place.
-      const listedName = columns.simbadName ? cells[columns.simbadName] : undefined, listed = listedName ? await simbadObject(archive, listedName) : undefined, held = ownPositions ? undefined : listed;
-      if (!ownPositions && !held) throw new Error(`${where}: SIMBAD holds no position for ${columns.simbadName} = ${JSON.stringify(listedName)}, and the table gives the row none of its own.`);
-      const raDeg = held?.raDeg ?? degrees(cells, DECIMAL_POSITION.ra)!, decDeg = held?.decDeg ?? degrees(cells, DECIMAL_POSITION.dec)!;
+      const listedName = columns.simbadName ? cells[columns.simbadName] : undefined, listed = listedName ? await simbadObject(archive, listedName) : undefined, placed = ownPositions ? undefined : listed;
+      if (!ownPositions && !placed) throw new Error(`${where}: SIMBAD holds no position for ${columns.simbadName} = ${JSON.stringify(listedName)}, and the table gives the row none of its own.`);
+      const raDeg = placed?.raDeg ?? degrees(cells, DECIMAL_POSITION.ra)!, decDeg = placed?.decDeg ?? degrees(cells, DECIMAL_POSITION.dec)!;
       const simbadName = (listed?.mainId ?? (await simbadAt(archive, raDeg, decDeg, SIMBAD_MATCH_ARCSEC, starClass.simbadRoot))?.name)?.replace(/\s+/gu, ' ');
       const written = picked.named ? `${galaxy.name} ${starClass.noun} ${cells[picked.named]}` : undefined;
       const starName = (simbadName ? preferredName(await simbadIdentifiers(archive, simbadName))?.name ?? simbadName : undefined) ?? written;
       if (!starName) throw new Error(`${where}: SIMBAD lists no ${starClass.noun} within ${SIMBAD_MATCH_ARCSEC}" of RA ${raDeg}, Dec ${decDeg} and the table names none, so the star has no name.`);
-      const position: CataloguePosition = held
-        ? { archive: 'simbad', catalogue: 'basic', row: { main_id: held.mainId }, url: `https://simbad.cds.unistra.fr/simbad/sim-id?Ident=${encodeURIComponent(simbadName!)}`,
-          credit: `${paper.credit}, VizieR ${where}, names the star in SIMBAD (${columns.simbadName}); SIMBAD holds its position${held.bibcode ? `, from ${held.bibcode}` : ' and names no paper for it'}` }
+      const position: CataloguePosition = placed
+        ? { archive: 'simbad', catalogue: 'basic', row: { main_id: placed.mainId }, url: `https://simbad.cds.unistra.fr/simbad/sim-id?Ident=${encodeURIComponent(simbadName!)}`,
+          credit: `${paper.credit}, VizieR ${where}, names the star in SIMBAD (${columns.simbadName}); SIMBAD holds its position${placed.bibcode ? `, from ${placed.bibcode}` : ' and names no paper for it'}` }
         : { catalogue: request.table, row: key, columns: DECIMAL_POSITION, credit: paper.credit, url: paper.url };
       const shown = days.toFixed(days < 10 ? 2 : 1);
       stars.push(relationCepheidDraft({ id: slug(starName), name: starName, target: simbadName ?? starName, galaxy: galaxy.name, inside: galaxy.id, periodDays: days, paper, position,
