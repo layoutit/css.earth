@@ -6,6 +6,7 @@ export * from './prepare.ts';
 export { imageLayerDisc, imageLayerDiscDistanceKpc, imageLayerView } from './disc.ts';
 export { imageLayerBulgeModel } from './bulge.ts';
 export { imageLayerShapeModel, lowerEnvelope } from './shape.ts';
+export { imageLayerShapeWalls } from './shape-walls.ts';
 export { imageLayerBodyModel } from './body.ts';
 export { imageLayerRingsCover, imageLayerRingsModel, imageLayerRingsSheet, RINGS_OPACITY_REACH_PIXELS } from './rings.ts';
 export { imageLayerRingsCells, imageLayerRingsCurtains, imageLayerRingsGlow, imageLayerRingsSheets } from './rings-volume.ts';
