@@ -88,3 +88,14 @@ test('live GitHub JWST links fail but commit-pinned evidence remains historical'
   assert.deepEqual(staleReferenceLines('src/objects/body/investigations.json', bytes(`"https://github.com/org/repo/blob/abcdef1/${old}"`)), []);
   assert.equal(staleReferenceLines('src/objects/body/investigations.json', bytes(`  "finding": "The reduction used ${old}."`)).length, 1);
 });
+
+test('every relocated CI root owner rejects a caller cwd while its module-relative root passes', () => {
+  for (const path of [
+    '.github/scripts/ci/build-ci.mts',
+    '.github/scripts/ci/ci-cache-key.mts',
+    '.github/scripts/ci/check-ci.mts',
+  ]) {
+    assert.equal(staleReferenceLines(path, bytes('const root = process.cwd();')).length, 1, path);
+    assert.deepEqual(staleReferenceLines(path, bytes('const root = resolve(import.meta.dirname, "../../..");')), [], path);
+  }
+});

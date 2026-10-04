@@ -44,3 +44,24 @@ test('astronomy public source reader ships objects and remains ordered ahead of 
   const names = workspaceOrder(readWorkspaceGraph(root), ['@cssearth/astronomy']).map(entry => entry.name);
   assert.ok(names.indexOf('@cssearth/objects') < names.indexOf('@cssearth/astronomy'));
 });
+
+test('a not-ok result cannot hide behind complete passing counts', () => {
+  assert.throws(() => requireAstroqueryTests(stub() + 'not ok 99 - unreported failure\n'), /did not pass/u);
+});
+
+test('every TAP summary must be present exactly once', () => {
+  for (const name of ['tests', 'pass', 'fail', 'cancelled', 'skipped', 'todo']) {
+    const value = name === 'tests' || name === 'pass' ? 13 : 0;
+    assert.throws(() => requireAstroqueryTests(stub() + `# ${name} ${value}\n`), /ambiguous TAP/u, name);
+    assert.throws(() => requireAstroqueryTests(stub().replace(`# ${name} ${value}\n`, '')), /Missing or ambiguous TAP/u, name);
+  }
+});
+
+test('filtered astroquery classification survives projection into the runnable job list', async () => {
+  const { affectedJobNames } = await import('./ci-affected.mts');
+  const config = await loadCiAreasConfig();
+  const selected = classifyAffectedPaths(['packages/telescope/src/node/toolchain/python.ts'], config);
+  assert.ok(affectedJobNames(selected).includes('astroquery'), 'the selected filtered lane must remain runnable');
+  const ordinary = classifyAffectedPaths(['README.md'], config);
+  assert.ok(!affectedJobNames(ordinary).includes('astroquery'), 'ordinary documentation does not run the filtered lane');
+});
