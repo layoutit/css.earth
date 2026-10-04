@@ -2359,6 +2359,48 @@ test('one retained flight caption survives the sprite fade through arrival', () 
   layer.destroy();
 });
 
+test('a galaxy wears a diamond, and the flight circle takes its destination\'s shape', async () => {
+  const base = plan(1, [], true);
+  const prepared = { ...base, bodies: base.bodies.map(body => body.id === 'mercury' ? { ...body, classification: 'galaxy' } : body) };
+  const document = new FakeDocument(), host = document.createElement('section'), before = document.createElement('i');
+  host.clientWidth = 800; host.clientHeight = 600; host.append(before);
+  const layer = mountTestContext({ host: host as unknown as HTMLElement, before: before as unknown as Element, plan: prepared,
+    sprites: { sun: sprite, mercury: sprite, venus: sprite, earth: sprite } });
+  const root = layer.root as unknown as FakeElement;
+  // The shape is on the marker whose ring reads it, and only a galaxy carries one.
+  assert.deepEqual(['sun', 'mercury', 'venus', 'earth'].map(id => find(root, 'contextGroup', id).dataset.contextShape), [undefined, 'diamond', undefined, undefined]);
+  // The ring is the marker's ::before, which the fake cascade leaves out: its rules are read from the stylesheet itself.
+  const css = await readFile(new URL('../../packages/renderer/src/styles/world-context.css', import.meta.url), 'utf8');
+  const rule = (selector: string) => css.replace(/\/\*[\s\S]*?\*\//gu, '').split('}').filter(block => block.split('{')[0]!.split(',').some(part => part.trim() === selector))
+    .map(block => block.split('{')[1]).join('');
+  const ring = rule('.prepared-world-context [data-context-shape="diamond"]::before');
+  assert.match(ring, /border-radius: 0;/u);
+  assert.match(ring, /transform: scale\(1\) rotate\(45deg\) translate\(-50%, -50%\);/u);
+  assert.match(rule('.prepared-world-context [data-context-shape="diamond"][data-context-indicator-hovered="true"]::before'),
+    /transform: scale\(1\.25\) rotate\(45deg\) translate\(-50%, -50%\);/u);
+  // A flight previews its destination, and the one retained circle wears the shape that destination's marker carries.
+  const viewport = { focalPixels: 400, principalOffsetPixels: [0, 0] } as const;
+  const pose = (positionM: readonly [number, number, number]) => ({ referenceFrame: 'sun-icrf', epochJdTt: 1, pose: { positionM, orientationXyzw: [0, 0, 0, 1] } } as const);
+  layer.publish(pose([0, 0, 1000]), viewport);
+  const circleFor = (id: string, positionM: readonly [number, number, number]) => {
+    layer.previewSelection(id); layer.setNavigationInFlight(true);
+    // Two frames of the approach: the first admits the annotation, the second draws it.
+    for (const z of [400, positionM[2]]) layer.publish(pose([positionM[0], positionM[1], z]), viewport);
+    const circle = find(root, 'contextFlightCircle', id);
+    assert.equal(circle.style.visibility, '');
+    return circle;
+  };
+  const circle = circleFor('mercury', [100, 0, Math.hypot(1, 800 / 13)]);
+  assert.equal(circle.dataset.contextShape, 'diamond');
+  assert.deepEqual([declared(circle, 'borderRadius'), declared(circle, 'width')], ['0', '12px']);
+  assert.match(circle.style.transform, / translate\(-50%, -50%\) rotate\(45deg\)$/u);
+  assert.equal(circleFor('earth', [0, 60, Math.hypot(1, 800 / 13)]), circle);
+  assert.equal(circle.dataset.contextShape, undefined);
+  assert.deepEqual([declared(circle, 'borderRadius'), declared(circle, 'width')], ['50%', '16px']);
+  assert.match(circle.style.transform, / translate\(-50%, -50%\)$/u);
+  layer.destroy();
+});
+
 for (const destination of [null, 'venus']) test(`flights to ${destination} retain system annotations and orbit cutouts without enabling picking`, () => {
   const root = mount(1), layer = mounted.get(root)!;
   const nodes = all(root);
