@@ -50,6 +50,16 @@ export function createObjectSelectionRuntime({
   // passed. Lighting rows are not levels: a view that only changes them commits live.
   const texturesChange = (plan: PreparedPresentationPlan) => plan.textureLevel !== committedPlan?.textureLevel ||
     JSON.stringify(plan.textureResources ?? null) !== JSON.stringify(committedPlan?.textureResources ?? null);
+  // A dataset change is drawn whole, in one frame that repaints every face: 220 to 345 ms on Saturn and 174 to 321 ms
+  // on the Moon on the iPad (2026-10-04). The reader's choice is announced when it is made (`onChange`), and the change
+  // waits until that has been on screen for a frame, so the shell's loading line is already running through the long
+  // frame; a hidden page, which gets no frames, waits a tenth of a second instead.
+  const announced = () => new Promise<void>(done => {
+    const frame = globalThis.requestAnimationFrame;
+    if (typeof frame !== 'function') { done(); return; }
+    frame(() => frame(() => done()));
+    globalThis.setTimeout(done, 100);
+  });
   const untilStill = () => new Promise<void>(done => {
     if (!motion?.active) { done(); return; }
     const unsubscribe = motion.subscribe(state => { if (!state.active) { unsubscribe(); done(); } });
@@ -157,8 +167,10 @@ export function createObjectSelectionRuntime({
           }
           const plan = resolve(selection);
           ticket = request.ticket && request.plan && sameDemand(plan, planFor(request)) ? request.ticket : preparePass(request, plan);
-          if (!prepared && kind === 'selection' && prepareSelection) {
-            preparation = Promise.resolve(prepareSelection(selection, operationSignal));
+          if (!prepared && kind === 'selection') {
+            const changes = committed !== null && selection.datasetId !== committed.datasetId ? [announced()] : [];
+            if (prepareSelection) changes.push(Promise.resolve(prepareSelection(selection, operationSignal)));
+            if (changes.length) preparation = Promise.all(changes).then(() => {});
             prepared = true;
           }
           // Transfer native demand before awaiting companions, preserving shared decodes across rapid input.

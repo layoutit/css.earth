@@ -89,11 +89,12 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
     let prefetchedLevel: string | null = null;
     let revision = 0, selection: ReturnType<typeof createObjectSelectionRuntime> | null = null, controls: ReturnType<typeof createObjectControlBinding> | null = null;
     const viewListeners = new Set<() => void>();
-    const datasetListeners = new Set<(id: string) => void>();
+    const datasetListeners = new Set<(id: string) => void>(), datasetLoadingListeners = new Set<(loading: boolean) => void>();
+    let datasetLoading = false;
     const worldPublication = createWorldNavigationPublicationHub(fatal);
     let latestWorldPublication: OrbitPublication | null = null;
     const notifyView = () => { if (phase === 'ready') for (const listener of viewListeners) listener(); };
-    lifetime.onDispose(() => { viewListeners.clear(); datasetListeners.clear(); worldPublication.destroy(); });
+    lifetime.onDispose(() => { viewListeners.clear(); datasetListeners.clear(); datasetLoadingListeners.clear(); worldPublication.destroy(); });
     const playback = environment.createPlayback();
     lifetime.onDispose(() => playback.destroy());
     if (preparedTree) lifetime.onDispose(() => preparedTree.destroy());
@@ -219,6 +220,10 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
         if (!lifetime.disposed) datasetListeners.add(listener);
         return () => { datasetListeners.delete(listener); };
       },
+      subscribeLoading(listener: (loading: boolean) => void) {
+        if (!lifetime.disposed) datasetLoadingListeners.add(listener);
+        return () => { datasetLoadingListeners.delete(listener); };
+      },
     }) : undefined;
     const features: import('../labels/surface-feature-types.js').SurfaceFeatureNavigationRuntime | undefined = definition.features ? Object.freeze<import('../labels/surface-feature-types.js').SurfaceFeatureNavigationRuntime>({
       catalog: () => surfaceFeatures?.catalog() ?? null,
@@ -294,6 +299,9 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
     }
     function publishSelection(state: Readonly<ObjectSelectionState>) {
       controls?.publish(state);
+      // A chosen dataset is loading from the choice until it is drawn: the same test as its row's ring (object-control-binding.ts).
+      const loading = state.pending && state.committed !== null && state.desired.datasetId !== state.committed.datasetId;
+      if (loading !== datasetLoading) { datasetLoading = loading; for (const listener of datasetLoadingListeners) listener(loading); }
       if (state.committed && !state.pending) notifyView();
       if (!state.committed || state.pending || !orbit || state.committed.datasetId === navigatedDataset) return;
       navigatedDataset = state.committed.datasetId;

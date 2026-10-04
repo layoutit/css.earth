@@ -99,7 +99,7 @@ export function createSceneRouter({
   const preferences = createWorldPreferences({ getWorld: () => world.current,
     onMotionChange() { syncPlayback(); scenes.current?.viewUrl?.schedule(); },
   });
-  let hasPresented = false;
+  let hasPresented = false, datasetLoading = false;
   const initialScene = retainInitialScene(stage);
   const initialBillboard = documentTarget.querySelector<HTMLImageElement>('img[data-startup-billboard]');
   let destroyed = false;
@@ -158,7 +158,7 @@ export function createSceneRouter({
     read: () => ({ state: scenes.state, pending: requests.current, objectId, subject: subject(), motionEnabled: preferences.state.motionEnabled, lightCurvesEnabled: preferences.state.lightCurvesEnabled, reducedMotionActive,
       mountedObjectCount: scenes.current?.mount ? 1 : 0, playing: scenes.current?.playing ?? false,
       hasPresented: hasPresented || initialScene?.available === true || initialBillboard?.isConnected === true,
-      covered: initialBillboard?.isConnected === true }),
+      covered: initialBillboard?.isConnected === true, datasetLoading }),
     getShell: () => shellOwner?.shell ?? null, getWorld: () => world.current,
   });
 
@@ -341,6 +341,11 @@ export function createSceneRouter({
           if (!scenes.isCurrent(session) || requests.current || scenes.state.kind !== 'ready') return;
           view.syncDataset(session);
         }));
+        // The header's loading bar runs while a chosen dataset is prepared, and stops with the scene that asked.
+        const unsubscribe = mount.datasets.subscribeLoading(loading => {
+          if (scenes.isCurrent(session) && datasetLoading !== loading) { datasetLoading = loading; publication.publish(); }
+        });
+        session.own(() => { unsubscribe(); if (datasetLoading) { datasetLoading = false; publication.publish(); } });
       }
       hasPresented = true;
       documentTarget.querySelector('.startup-loading')?.remove();

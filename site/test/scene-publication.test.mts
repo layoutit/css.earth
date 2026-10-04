@@ -14,7 +14,7 @@ test('readiness stays observable without publishing body lifecycle classes', () 
   const publication = createScenePublication({ stage, documentTarget: document, windowTarget: window as unknown as BrowserWindow,
     getShell: () => null, getWorld: () => null,
     read: () => ({ state, pending: null, objectId: 'earth', subject: { objectId: 'earth', view: 'body' },
-      motionEnabled: false, lightCurvesEnabled: true, reducedMotionActive: false, mountedObjectCount: 0, playing: false, hasPresented: true, covered: false }),
+      motionEnabled: false, lightCurvesEnabled: true, reducedMotionActive: false, mountedObjectCount: 0, playing: false, hasPresented: true, covered: false, datasetLoading: false }),
   });
   publication.publish();
   assert.equal(document.documentElement.dataset.ready, 'loading');
@@ -37,9 +37,9 @@ test('readiness stays observable without publishing body lifecycle classes', () 
   assert.equal(document.body.className, 'application');
 });
 
-test('the header line runs while a photograph covers a cold page; the readout is told only of a flight', () => {
+test('the header line runs while a photograph covers a cold page or a chosen dataset is prepared; the readout is told only of a flight', () => {
   const { document, window } = parseHTML('<html><body><div class="object-viewport"><main></main></div></body></html>');
-  let covered = true;
+  let covered = true, datasetLoading = false;
   const calls: string[] = [];
   const shell = {
     setNavigationInFlight(active: boolean) { calls.push(`flight:${active}`); },
@@ -49,12 +49,19 @@ test('the header line runs while a photograph covers a cold page; the readout is
     windowTarget: window as unknown as BrowserWindow, getShell: () => shell, getWorld: () => null,
     read: () => ({ state: { kind: 'loading', activation: 'idle', mount: null }, pending: null, objectId: 'earth',
       subject: { objectId: 'earth', view: 'body' }, motionEnabled: false, lightCurvesEnabled: true, reducedMotionActive: false,
-      mountedObjectCount: 0, playing: false, hasPresented: true, covered }),
+      mountedObjectCount: 0, playing: false, hasPresented: true, covered, datasetLoading }),
   });
   publication.publish();
   assert.deepEqual(calls, ['flight:false', 'loading:true']);
   // The detail replaced the photograph.
   covered = false; calls.length = 0;
+  publication.publish();
+  assert.deepEqual(calls, ['flight:false', 'loading:false']);
+  // A chosen dataset is being prepared: the line runs until it is drawn, and no flight is announced.
+  datasetLoading = true; calls.length = 0;
+  publication.publish();
+  assert.deepEqual(calls, ['flight:false', 'loading:true']);
+  datasetLoading = false; calls.length = 0;
   publication.publish();
   assert.deepEqual(calls, ['flight:false', 'loading:false']);
 });

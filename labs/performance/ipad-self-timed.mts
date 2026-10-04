@@ -8,7 +8,7 @@
  * time, the time its frame callbacks ran, the hand-overs, the files that arrived and the slow timers. Count late
  * frames with it; name what runs in them with `ios-capture.mts`.
  *
- *   pnpm ipad:timed --open /earth/ --origin http://192.168.0.8:4293 [--program drag|zoom|fly|far-zoom|'<json>'] [--name x] [--trace]
+ *   pnpm ipad:timed --open /earth/ --origin http://192.168.0.8:4293 [--program drag|zoom|fly|datasets|far-zoom|'<json>'] [--name x] [--trace]
  *
  * `--trace` runs the program with the Inspector's timeline attached instead, and writes `trace.devtools.json`, which
  * Chrome DevTools' Performance panel opens: cut to the run, a time stamp at each step, every frame in the Frames track
@@ -26,20 +26,24 @@ import { captureIosMoment } from './ios-capture.mts';
 /** A step of the page's own driver. `wheel`: that many frames of a wheel event of `deltaY` each. `wait`: that many frames
  * of nothing. `drag`: a finger down, moved `dx`, `dy` a frame for that many frames, and lifted at once (`fling`) or
  * after a pause (`hold`, no inertia). `fly`: the app's own navigation to an object. `click`: the n-th element the
- * selector finds, if there is one. */
+ * selector finds, if there is one. `pick`: the n-th option of the first `select` the selector finds, as a reader's
+ * choice (its `input` and `change` events). */
 export type SelfTimedStep = readonly ['wheel', number, number] | readonly ['wait', number] | readonly ['drag', number, number, number, 'fling' | 'hold']
-  | readonly ['fly', string] | readonly ['click', string, number];
+  | readonly ['fly', string] | readonly ['click', string, number] | readonly ['pick', string, number];
 /** Out of the page's subject and back, twice: the zoom the late-frame counts of this lab are quoted for. */
 export const FAR_ZOOM: readonly SelfTimedStep[] = [['wheel', 330, 20], ['wait', 150], ['wheel', 330, -20], ['wait', 150], ['wheel', 330, 20], ['wait', 150], ['wheel', 330, -20], ['wait', 240]];
 /** The three things a reader does most, a few seconds each. Open `drag` and `zoom` on a body's page, `fly` on Earth's. */
 const DRAG: readonly SelfTimedStep[] = [['drag', 60, 6, 0, 'fling'], ['wait', 90], ['drag', 60, -4, 3, 'fling'], ['wait', 90], ['drag', 45, 0, -5, 'hold'], ['wait', 45]];
 const ZOOM: readonly SelfTimedStep[] = [['wheel', 90, 20], ['wait', 45], ['wheel', 90, -20], ['wait', 45], ['wheel', 45, -20], ['wait', 30], ['wheel', 45, 20], ['wait', 45]];
 const FLY: readonly SelfTimedStep[] = [['fly', 'moon'], ['wait', 210], ['fly', 'mars'], ['wait', 210]];
-export const PROGRAMS: Readonly<Record<string, readonly SelfTimedStep[]>> = { 'far-zoom': FAR_ZOOM, drag: DRAG, zoom: ZOOM, fly: FLY };
-/** How many frames a step takes: a flight or a click is one event. */
-const stepFrames = (step: SelfTimedStep) => step[0] === 'fly' || step[0] === 'click' ? 0 : step[1];
+/** A body's datasets, one after another and back to the first, through the card's dataset list. */
+const DATASET_LIST = 'select.object-dataset-native-select';
+const DATASETS: readonly SelfTimedStep[] = [['wait', 30], ['pick', DATASET_LIST, 1], ['wait', 120], ['pick', DATASET_LIST, 2], ['wait', 120], ['pick', DATASET_LIST, 0], ['wait', 120]];
+export const PROGRAMS: Readonly<Record<string, readonly SelfTimedStep[]>> = { 'far-zoom': FAR_ZOOM, drag: DRAG, zoom: ZOOM, fly: FLY, datasets: DATASETS };
+/** How many frames a step takes: a flight, a click or a pick is one event. */
+const stepFrames = (step: SelfTimedStep) => step[0] === 'fly' || step[0] === 'click' || step[0] === 'pick' ? 0 : step[1];
 export const stepLabel = (step: SelfTimedStep) => step[0] === 'wheel' ? `wheel ${step[2] > 0 ? 'out' : 'in'}, ${step[1]} frames` : step[0] === 'wait' ? `wait, ${step[1]} frames`
-  : step[0] === 'drag' ? `drag ${step[2]}, ${step[3]} a frame for ${step[1]} frames, ${step[4]}` : step[0] === 'fly' ? `fly to ${step[1]}` : `click ${step[1]} #${step[2]}`;
+  : step[0] === 'drag' ? `drag ${step[2]}, ${step[3]} a frame for ${step[1]} frames, ${step[4]}` : step[0] === 'fly' ? `fly to ${step[1]}` : `${step[0]} ${step[1]} #${step[2]}`;
 /** The run starts this long after the script is installed, so the Inspector session that installed it has gone. */
 const START_DELAY_MS = 3000;
 
@@ -69,6 +73,9 @@ export const selfTimedStart = (program: readonly SelfTimedStep[], delayMs = STAR
     while (step < program.length && left === 0) { const now = program[step]; state.marks.push([performance.now(), step]); console.timeStamp('${RUN_MARK} ' + labels[step]);
       if (now[0] === 'fly') { if (!fly(now[1])) state.skipped.push(step); step++; continue; }
       if (now[0] === 'click') { const found = document.querySelectorAll(now[1])[now[2]]; if (found) found.click(); else state.skipped.push(step); step++; continue; }
+      if (now[0] === 'pick') { const list = document.querySelector(now[1]);
+        if (list && list.options && list.options[now[2]]) { list.selectedIndex = now[2]; list.dispatchEvent(new Event('input', { bubbles: true })); list.dispatchEvent(new Event('change', { bubbles: true })); }
+        else state.skipped.push(step); step++; continue; }
       left = now[1];
       if (now[0] === 'drag') { x = cx - now[2] * now[1] / 2; y = cy - now[3] * now[1] / 2; finger = document.elementFromPoint(x, y) || document.body; pointer('pointerdown', x, y); } }
     if (step >= program.length) { state.done = true; console.timeStamp('${RUN_MARK} end'); return; }
@@ -132,7 +139,8 @@ function parseProgram(value: unknown): SelfTimedStep[] {
     if (kind === 'drag' && (d === 'fling' || d === 'hold')) return ['drag', requireFiniteNumber(a, 'drag frames'), requireFiniteNumber(b, 'drag dx'), requireFiniteNumber(c, 'drag dy'), d] as const;
     if (kind === 'fly' && typeof a === 'string') return ['fly', a] as const;
     if (kind === 'click' && typeof a === 'string') return ['click', a, requireFiniteNumber(b ?? 0, 'click index')] as const;
-    throw new TypeError(`A program step is ["wheel", frames, deltaY], ["wait", frames], ["drag", frames, dx, dy, "fling"|"hold"], ["fly", id] or ["click", selector, n], got ${JSON.stringify(step)}.`);
+    if (kind === 'pick' && typeof a === 'string') return ['pick', a, requireFiniteNumber(b ?? 0, 'pick index')] as const;
+    throw new TypeError(`A program step is ["wheel", frames, deltaY], ["wait", frames], ["drag", frames, dx, dy, "fling"|"hold"], ["fly", id], ["click", selector, n] or ["pick", selector, n], got ${JSON.stringify(step)}.`);
   });
 }
 

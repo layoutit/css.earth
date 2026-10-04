@@ -21,14 +21,15 @@ export function createTextureTileWriter(levels: PreparedTextureLevels | undefine
   const cssName = (name: string) => name.replace(/[A-Z]/g, letter => `-${letter.toLowerCase()}`);
   return {
     has: (target: number, name: string) => groups.has(`${target}:${name}`),
-    /** Writes the write's tile on its leaves; returns the number of style writes. */
-    publish(target: number, name: string, tile: PreparedTextureTile | undefined) {
+    /** Writes the write's tile on its leaves, or on those of them in `only`; returns the number of style writes. */
+    publish(target: number, name: string, tile: PreparedTextureTile | undefined, only?: ReadonlySet<HTMLElement>) {
       const group = groups.get(`${target}:${name}`);
       if (!group) return 0;
       let writes = 0;
       for (const [node, x, y] of group.leaves) {
         const element = nodes[node];
         if (!element) throw new TypeError(`Prepared texture tile leaf ${node} of ${name} on node ${target} is not in the tree.`);
+        if (only && !only.has(element)) continue;
         let own = written.get(element);
         if (!own) written.set(element, own = new Map());
         for (const [property, value] of textureTileLeafStyles(group, x, y, tile)) {

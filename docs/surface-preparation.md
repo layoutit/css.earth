@@ -74,6 +74,22 @@ flight from Earth to the Moon took 22.4 s and 9.96 MB of the Moon's images befor
 7.2 s and 1.17 MB after (a phone-sized view, 2026-10-02). A dataset drawn at a `resolutionScale` steps through the same list
 shifted by its scale. Below, the Moon on a phone before and after.
 
+How many faces share an image decides what a dataset switch costs: every face is painted again in the one frame that
+draws the new dataset, and a face cut from a large image costs more than one cut from a small one. Saturn's 448 faces,
+switched between two datasets on an iPad with each layout cut from the same atlases (2026-10-04, the page timing its
+own frames):
+
+| The faces' images | Frame of the switch |
+| --- | --- |
+| One atlas, 4160 × 3072 (as published) | 304 to 318 ms |
+| 14 pages of one atlas row each, 4160 × 128 | 172 to 190 ms |
+| 28 pages of 16 faces, 512 × 512 | 132 to 153 ms |
+| 112 pages of 4 faces, 256 × 256 | 138 to 155 ms |
+| An image a face, 448 of 128 × 128 | 202 to 205 ms |
+
+Earth's pages hold four faces (`pageCells`) and its switch is about 100 ms; the Moon's four pages hold 96 to 128
+faces each, and its switch is 174 to 321 ms. Pages of about 16 faces are the fastest layout measured.
+
 ![The Moon on a phone: the whole atlas, left, and the level its silhouette picks, right](images/raster-levels-moon-phone.jpg)
 
 ## Decode the source before choosing its display
