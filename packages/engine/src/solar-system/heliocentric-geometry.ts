@@ -36,15 +36,17 @@ export function silhouetteRadiusAtDistance(
 
 // The direction from the eye to the root's centre, `theta` off the view axis,
 // and the unit screen direction from the principal point toward it.
+// Returned as it is, not frozen: these run for every body on every frame, and Safari pays for each frozen array
+// (228,000 freezes in one zoom out of Earth, 4.2 % of its script time on an iPad, 2026-10-04).
 export function offAxisFrame(focal:number, [ox, oy]:Vector2): OffAxisFrame {
   const offset = Math.hypot(ox, oy);
   const hypotenuse = Math.hypot(offset, focal);
-  return Object.freeze({
+  return {
     radial: offset > 1e-9 ? [-ox / offset, -oy / offset] : [0, 0],
     sinTheta: offset / hypotenuse,
     cosTheta: focal / hypotenuse,
     tanTheta: offset / focal,
-  });
+  };
 }
 
 // The silhouette of a sphere `distance` from the eye, `theta` off the view
@@ -63,27 +65,27 @@ export function silhouetteEllipse(bodyRadius:number, focal:number, distance:numb
   const tangentialSemiAxis = focal * sinAlpha / Math.sqrt(denominator);
   const centreShift = focal * sin2Theta / (2 * denominator) -
     focal * axis.tanTheta;
-  return Object.freeze({
+  return {
     radialSemiAxis,
     tangentialSemiAxis,
     // Unit screen direction of the radial axis (from the principal point).
-    radial: Object.freeze([...axis.radial]),
+    radial: [axis.radial[0], axis.radial[1]],
     // Ellipse centre relative to the root's centre.
-    centre: Object.freeze([
+    centre: [
       centreShift * axis.radial[0],
       centreShift * axis.radial[1],
-    ]),
-  });
+    ],
+  };
 }
 
 // Row-major 3x3 rotation from a CSS matrix3d (column-major m11.. m33): the
 // linear part that maps a scene-frame direction into camera-root CSS space.
 export function rotationFromMatrix3d(matrix: Matrix3dLike): Matrix3 {
-  return Object.freeze([
+  return [
     matrix.m11, matrix.m21, matrix.m31,
     matrix.m12, matrix.m22, matrix.m32,
     matrix.m13, matrix.m23, matrix.m33,
-  ]);
+  ];
 }
 
 // True when the ray from the eye to `eye` (eye-space point) enters the sphere
@@ -209,7 +211,7 @@ export function magnitude(vector:Vector3) {
 export function normalize(vector:Vector3): Vector3 {
   const length = magnitude(vector);
   if (!(length > 0)) throw new RangeError("Direction has no magnitude.");
-  return Object.freeze([vector[0] / length, vector[1] / length, vector[2] / length]);
+  return [vector[0] / length, vector[1] / length, vector[2] / length];
 }
 
 export function round(value:number) {

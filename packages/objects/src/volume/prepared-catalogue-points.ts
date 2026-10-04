@@ -34,10 +34,11 @@ export function validatePreparedCataloguePoints(input: unknown): PreparedCatalog
       throw new TypeError('Prepared catalogue point identity, position or presentation is invalid.');
     }
     ids.add(point.id);
-    return Object.freeze({ id: point.id, positionUnits: Object.freeze([...point.positionUnits]) as VolumeVector,
-      sizePx: point.sizePx, ...(point.diameterUnits === undefined ? {} : { diameterUnits: point.diameterUnits }), colorCss: point.colorCss, opacity: point.opacity });
+    // Plain values, read-only by type: a catalogue's points are not frozen one by one (catalogue-point-bank.ts).
+    return { id: point.id, positionUnits: [...point.positionUnits] as unknown as VolumeVector,
+      sizePx: point.sizePx, ...(point.diameterUnits === undefined ? {} : { diameterUnits: point.diameterUnits }), colorCss: point.colorCss, opacity: point.opacity };
   });
-  const catalogue = Object.freeze({ frame, points: Object.freeze(points) });
+  const catalogue = Object.freeze({ frame, points });
   validated.add(catalogue);
   return catalogue;
 }
