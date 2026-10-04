@@ -15,7 +15,7 @@ timings before claiming it is met. Report cold and warm-cache runs separately.
 | [Repository audit](../.github/workflows/audit.yml) | Main pushes, scheduled runs and manual dispatch: documentation, repository completeness, source-catalogue reconciliation and bake reproduction. Advisory; does not run on PRs or gate deployment. |
 | [Object-scope gate](../.github/workflows/object-scope.yml) | Every PR: more than 12 changed object directories needs the `pipeline-change` label. Labels re-evaluate this gate. |
 | [Nightly asset sweep](../.github/workflows/nightly.yml) | Scheduled/manual runs check published keys, test types and a production build/browser probe. They do not publish the site or run on PRs. |
-| [Deploy](../.github/workflows/deploy.yml) | Manual dispatch only. The default R2 deployment checks build asset references and requires verified published keys before shipping. Merging validates the gate; it does not deploy. |
+| [Deploy](../.github/workflows/deploy.yml) | Manual dispatch only. The default R2 deployment checks build asset references and requires verified published keys before shipping, then publishes to Cloudflare; the `host` input can publish to Netlify instead. Merging validates the gate; it does not deploy. |
 
 The astroquery filter covers the owning workspaces of its discovered test files and their transitive runtime dependencies, toolchain pins and lane configuration. Its pip and toolchain caches are keyed on the pinned requirements and toolchain record. A skipped test or an incomplete derived file run fails the lane.
 
@@ -24,6 +24,53 @@ selected lane must pass. Lint failures do not cancel unrelated checks or conceal
 their results. A newer PR update cancels its stale run; main validation runs are
 not cancelled by later merges. Production deployments use their own concurrency
 group and can supersede an older deployment.
+
+## Serving the site from Cloudflare
+
+Production is on Netlify, which meters bandwidth. The same build can be served by Cloudflare, which does not meter
+bandwidth or static file requests. The built pages become a Worker's static assets. [The Worker](../cloudflare/worker.ts)
+answers the find and report endpoints and page addresses that carry a query, with the handlers the Netlify functions
+call. The [Deploy workflow](../.github/workflows/deploy.yml) publishes it with the repository secrets
+`CLOUDFLARE_API_TOKEN` (from the "Edit Cloudflare Workers" token template) and `CLOUDFLARE_ACCOUNT_ID`. From a checkout
+with a wrangler login, these commands do the same:
+
+```bash
+ASSET_ORIGIN=https://earth-assets.lowpoly.cc pnpm build:deploy
+pnpm deploy:cloudflare-preview   # https://cssearth-preview.cssearth.workers.dev
+pnpm deploy:cloudflare           # css.earth
+```
+
+Each deploy command [bundles the Worker](../site/build/bundle-cloudflare-worker.mts), stages the search catalogues and
+the `_headers` file into `dist`, answers one search and one page from the bundle, and uploads with wrangler. The preview
+asks search engines not to index it. [The wrangler configuration](../wrangler.jsonc) names both targets; the site's own
+address is the `production` environment, which attaches `css.earth` and `www.css.earth` to the Worker.
+
+Tested on 2026-10-04 from Buenos Aires, against the Netlify site the same day:
+
+| Request | Cloudflare preview | Netlify |
+| --- | --- | --- |
+| Static page, cached | 0.09 to 0.12 s | 0.18 to 0.36 s |
+| Find, instance's first | 0.7 to 1.8 s | 3.1 s |
+| Find, later | 0.11 to 0.15 s | 0.41 to 0.52 s (0.17 s from its CDN) |
+| Page with a query, instance's first | 3.5 s | 6.0 s |
+| Page with a query, later | 0.18 to 0.30 s | 1.1 to 1.7 s |
+
+The Netlify site did not yet have this change's faster world load (6.1 s to 1.6 s under Node), which is part of its
+6.0 s and of the preview's 3.5 s.
+
+The whole site is 50,711 files, 9,874 of them HTML. Workers Free allows 20,000 static files in a Worker and stops the
+page handler for its CPU time (error 1102), so the site needs Workers Paid, which allows 100,000 files.
+
+How the Worker differs from the Netlify functions:
+
+- An instance keeps the search catalogues and the world it loaded for later requests, and Cloudflare can stop a request in
+  the middle of such a load. The Worker holds a load open when its reader disconnects. A search that has waited 10 s on
+  another request's load reads the data itself ([kept load](../site/server/kept-load.mts)).
+- A page address with a query gets the static page when its handler fails or has no answer in 10 s, and the Worker logs
+  `page-handler-fallback` with the reason. The page's scripts read a view, dataset or feature from the address; a
+  submitted search (`q`) and everything a reader without scripts would get are not rendered.
+- Netlify keeps each find answer at its CDN until the next deploy. The Worker answers every find request itself; the
+  browser still keeps an answer for five minutes.
 
 ## Keep the PR path lean without dropping proof
 
