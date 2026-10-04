@@ -1,0 +1,35 @@
+{
+  "id": "source-betelgeuse-sphere-paco-cntha-2024-12-06",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Betelgeuse · sphere paco cntha 2024 12 06",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://dataportal.eso.org/dataPortal/file/ADP.2026-08-19T13:19:07.650",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/betelgeuse/source/manifest.json",
+      "locator": "/inputs/200"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "ESO/VLT/SPHERE-ZIMPOL, programme 114.28H9.001; Montargès et al. (2026), A&A 711, L12",
+      "scope": "The sphere paco cntha 2024 12 06 input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "CC-BY-4.0 under the ESO data access policy; retain the ESO provenance and the paper citation.",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}
