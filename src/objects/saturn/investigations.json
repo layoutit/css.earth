@@ -16,7 +16,7 @@
       "id": "opal-unobserved-rows",
       "subject": "Unobserved rows in the OPAL visible map",
       "status": "unresolved",
-      "finding": "The map never observed rows 0-35 north of 82.8 degrees, rows 431-444 behind the rings and rows 887-899 south of 87.4 degrees; the geometry recipe names those rows and preparation fills them by linear interpolation in latitude between the nearest observed rows, detecting nothing from pixel values, and the rotation-B map of the same year has the same gaps so it cannot fill them.",
+      "finding": "The map never observed rows 0-35 north of 82.8 degrees, rows 431-444 behind the rings and rows 887-899 south of 87.4 degrees. The rows beside the equatorial mask are ragged or dimmed toward it (rows 430 and 445 average 12 and 8 of 255), so a fill between them stayed black. The geometry recipe names rows 0-35, 426-451 and 887-899; row 425 holds no texel more than 25 % off its row median in any channel and row 452 is within 1 % of the level beyond it. Preparation fills the named rows by linear interpolation in latitude between the rows beside them, detecting nothing from pixel values, and the rotation-B map of the same year has the same gaps so it cannot fill them.",
       "revisitWhen": "An OPAL or other global release observes those latitude rows.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/saturn/README.md#L96",
