@@ -21,6 +21,8 @@ export interface ObjectDatasets {
   current(): string | null;
   select(id: string, options?: { signal?: AbortSignal }): Promise<boolean>;
   subscribe(listener: (id: string) => void): () => void;
+  /** Hears when a chosen dataset starts or stops being prepared: true from the choice until it is drawn. */
+  subscribeLoading(listener: (loading: boolean) => void): () => void;
 }
 export interface ObjectSceneLifecycle {
   readonly ready: Promise<void>;
