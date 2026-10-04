@@ -7,4 +7,5 @@ export { imageLayerDisc, imageLayerDiscDistanceKpc, imageLayerView } from './dis
 export { imageLayerBulgeModel } from './bulge.ts';
 export { imageLayerShapeModel, lowerEnvelope } from './shape.ts';
 export { imageLayerBodyModel } from './body.ts';
+export { imageLayerRingsModel, imageLayerRingsSheet, RINGS_OPACITY_REACH_PIXELS } from './rings.ts';
 export { removeForegroundStars, removeCompanionGalaxies } from './foreground.ts';

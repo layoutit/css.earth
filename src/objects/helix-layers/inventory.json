@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-inventory@1",
+  "assets": [
+    {
+      "location": "public",
+      "filename": "datasets/optical.webp",
+      "bytes": 7532,
+      "sha256": "4aaba4f6ba3c5e806fcd30e46f487be8d87dccca568200d0eaf1f248132e38bd"
+    },
+    {
+      "location": "prepared",
+      "filename": "image-layers.json",
+      "bytes": 15339,
+      "sha256": "d1a42c3385c117ca6c2556f2b4c7e5bbe7a51712be6621ec6fc5d3aabeff68f1"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/plane-disc.webp",
+      "bytes": 331710,
+      "sha256": "34f1147422eef0cf69e551e68f41330c57ad1e8362af6a747bcac34786ed9dd7"
+    },
+    {
+      "location": "prepared",
+      "filename": "layers/plane-ring.webp",
+      "bytes": 2802380,
+      "sha256": "a2904db0d3ef4bb300597bd7becf03d081151a99c9469ef9672d4f9cea67aab3"
+    },
+    {
+      "location": "prepared",
+      "filename": "presentation.json",
+      "bytes": 1571,
+      "sha256": "e80c5b87d118b7dd95ceaa875dc8beac5575888ede36228982416964f6e72d60"
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "helix-layers",
+  "type": "image-layer-bank",
+  "properties": {
+    "preparation": {
+      "source": "source/recipe.json"
+    },
+    "host": "helix",
+    "frame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        5751247895598724000,
+        -2392762217874603000,
+        -2370845647546379000
+      ],
+      "localToReferenceXyzw": [
+        0.6849222952413901,
+        0.4568781467599061,
+        0.3149607937619726,
+        0.4721689389268716
+      ],
+      "metersPerUnit": 30856775814913670,
+      "boundsUnits": {
+        "min": [
+          -0.8159420188753994,
+          -0.8135050355759569,
+          -1.2680741487909586
+        ],
+        "max": [
+          0.8155377024181661,
+          0.8232045582412039,
+          1.2849425712260256
+        ]
+      }
+    }
+  },
+  "prepared": {
+    "format": "cssearth-image-layer-bank@1",
+    "url": "prepared/image-layers.json"
+  }
+}

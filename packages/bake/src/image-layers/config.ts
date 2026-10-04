@@ -35,6 +35,10 @@ export interface ImageLayerRecipe {
      * position angle `polarLeansToPaDeg`. `envelope` is a filled sphere around it, the nebula's outline. `cavities` are regions along the pole that emit `emission` of the body's emissivity, each about
      * `sizeArcsec` across; they lie behind the star between the position angles `farBetweenPaDeg` and in front of it
      * elsewhere. Every value is one a paper prints or states. */
+    /** A nebula's published rings (./rings.ts): a filled disc and the ring around it, circles of `radiusArcsec` in two
+     * planes through the star, each tilted its own way: the axis `tiltDeg` from the sight line, its far end leaning to
+     * position angle `farAxisPaDeg`. Every value is one a paper prints. */
+    rings?: { source: string; basis: string; disc: { radiusArcsec: number; tiltDeg: number; farAxisPaDeg: number }; ring: { radiusArcsec: number; tiltDeg: number; farAxisPaDeg: number } };
     body?: { source: string; basis: string; semiPolarArcsec: number; semiEquatorialArcsec: number; polarTiltDeg: number; polarLeansToPaDeg: number;
       envelope?: { source: string; radiusArcsec: number };
       cavities?: { source: string; emission: number; sizeArcsec: number; farBetweenPaDeg: [number, number] } };
@@ -116,6 +120,12 @@ const shapeOf = (v: unknown): NonNullable<ImageLayerRecipe['geometry']['shape']>
       polarTiltDeg: tilt, polarLeansToPaDeg: finite(r.polarLeansToPaDeg, 'geometry.shape.ring.polarLeansToPaDeg'), expansionKmS: speeds(r.expansionKmS, 'geometry.shape.ring.expansionKmS') },
     ...(lobe === undefined ? {} : { lobe: { source: text(lobe.source, 'geometry.shape.lobe.source'), radiusArcsec: positive(lobe.radiusArcsec, 'geometry.shape.lobe.radiusArcsec'), expansionKmS: speeds(lobe.expansionKmS, 'geometry.shape.lobe.expansionKmS') } }),
     smoothPixels: smooth };
+};
+const ringsOf = (v: unknown): NonNullable<ImageLayerRecipe['geometry']['rings']> => {
+  const r = object(v, 'geometry.rings'), plane = (value: unknown, name: string) => { const q = object(value, name), tilt = finite(q.tiltDeg, `${name}.tiltDeg`); if (!(tilt >= 0 && tilt < 90)) throw new TypeError(`${name}.tiltDeg must be from 0 to under 90; got ${tilt}.`); return { radiusArcsec: positive(q.radiusArcsec, `${name}.radiusArcsec`), tiltDeg: tilt, farAxisPaDeg: finite(q.farAxisPaDeg, `${name}.farAxisPaDeg`) }; };
+  const disc = plane(r.disc, 'geometry.rings.disc'), ring = plane(r.ring, 'geometry.rings.ring');
+  if (!(ring.radiusArcsec > disc.radiusArcsec)) throw new TypeError(`geometry.rings.ring.radiusArcsec (${ring.radiusArcsec}) must be over the disc's (${disc.radiusArcsec}).`);
+  return { source: text(r.source, 'geometry.rings.source'), basis: text(r.basis, 'geometry.rings.basis'), disc, ring };
 };
 const bodyOf = (v: unknown): NonNullable<ImageLayerRecipe['geometry']['body']> => {
   const b = object(v, 'geometry.body'), tilt = finite(b.polarTiltDeg, 'geometry.body.polarTiltDeg'), fraction = (value: unknown, name: string) => { const n = finite(value, name); if (!(n > 0 && n < 1)) throw new TypeError(`${name} is a fraction above 0 and under 1; got ${n}.`); return n; };
@@ -206,6 +216,7 @@ export function parseImageLayerRecipe(value: unknown): ImageLayerRecipe {
       supportTaperFraction, depthWeights: weights, depthScales: scales, ...(g.bulge===undefined?{}:{bulge:bulgeOf(g.bulge)}),
       ...(g.shape===undefined?{}:{shape:(()=>{if(g.bulge!==undefined||b.flat!==true)throw new TypeError('geometry.shape is for a flat bank without a bulge.');return shapeOf(g.shape);})()}),
       ...(g.body===undefined?{}:{body:(()=>{if(g.bulge!==undefined||g.shape!==undefined||b.flat!==true)throw new TypeError('geometry.body is for a flat bank without a bulge or walls.');return bodyOf(g.body);})()}),
+      ...(g.rings===undefined?{}:{rings:(()=>{if(g.bulge!==undefined||g.shape!==undefined||g.body!==undefined||b.flat!==true)throw new TypeError('geometry.rings is for a flat bank without a bulge, walls or a body.');return ringsOf(g.rings);})()}),
       ...(g.unit===undefined?{}:{unit:parsecUnit(g.unit,g.bulge!==undefined||b.flat!==true)}) },
     bake: { maxFacePixels: positive(b.maxFacePixels, 'maxFacePixels', true), diffuseFacePixels: positive(b.diffuseFacePixels,'diffuseFacePixels',true),
       ...(b.levels===undefined?{}:{levels:levelsOf(b.levels)}),

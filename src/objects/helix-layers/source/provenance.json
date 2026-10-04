@@ -1,0 +1,55 @@
+{
+  "schema": "cssearth-image-layer-provenance@1",
+  "title": "A new view of the Helix Nebula",
+  "publisher": "ESA/Hubble",
+  "sourceId": "opo0432d",
+  "sourcePage": "https://esahubble.org/images/opo0432d/",
+  "download": "https://cdn.esahubble.org/archives/images/large/opo0432d.jpg",
+  "credit": "NASA, ESA, C.R. O'Dell (Vanderbilt University), and M. Meixner, P. McCullough, and G. Bacon (Space Telescope Science Institute)",
+  "license": "CC-BY-4.0",
+  "original": {
+    "dimensions": [
+      6145,
+      6623
+    ],
+    "bands": [
+      "Hubble",
+      "ACS",
+      "F502N",
+      "F658N",
+      "CTIO 4 m",
+      "Mosaic II"
+    ],
+    "fieldOfViewDeg": [
+      0.4543333,
+      0.4896667
+    ]
+  },
+  "checkedSource": {
+    "kind": "Published JPEG",
+    "dimensions": [
+      6145,
+      6623
+    ]
+  },
+  "geometryEvidence": {
+    "inclinationDeg": 0.001,
+    "lineOfNodesPaDeg": 0,
+    "reference": "The picture lies on two tilted planes through the central star (recipe geometry.rings; https://arxiv.org/abs/astro-ph/0407556); the recipe's own inclination is not used."
+  },
+  "registration": {
+    "method": "What the publisher's page prints, used as it is: the frame's centre at 22 29 41.92, -20 50 13.29, a field of 27.26 by 29.38 arcmin, north 0.3° left of vertical. Checked here against the archive's own Hubble F658N mosaic of the nebula: the centre agrees to 0.1 arcsec; the picture's north-south scale is 0.9% smaller than the printed field gives and its axes are 0.1° and 0.9° left of vertical, so a point at the frame's edge is up to 7 arcsec from where the tags put it.",
+    "pixelArcsec": 0.26617,
+    "northClockwiseDeg": -0.3
+  },
+  "displayModel": "The picture's light lies on two tilted planes through the central star: an inner disc of radius 250 arcsec tilted 23 degrees and the plane of the outer ring, radius 371 arcsec, tilted 53 degrees about another axis. Inside the disc's radius a sight line's light is on the disc, beyond the ring's radius on the ring's plane; between the two radii the planes share it in proportion. Which plane holds a patch of light there is not measured, and neither structure has a thickness here.",
+  "coverage": "The published frame inside a circle of 770 arcsec about the central star, fading out over its last 7%. The stars Gaia lists in the field are removed before the bake, all but the central star; fainter stars and background galaxies remain, on the nebula's planes whatever their own distances.",
+  "acquisition": {
+    "url": "https://cdn.esahubble.org/archives/images/large/opo0432d.jpg",
+    "dimensions": [
+      6145,
+      6623
+    ],
+    "operation": "Download the publisher's JPEG; no crop or resample."
+  }
+}

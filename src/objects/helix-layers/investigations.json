@@ -1,0 +1,63 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "helix-layers",
+  "entries": [
+    {
+      "id": "esahubble-opo0432d",
+      "subject": "ESA/Hubble opo0432d",
+      "status": "included",
+      "finding": "Hubble ACS in [O III] and H-alpha with CTIO Mosaic II frames for the parts Hubble did not image; 6145 x 6623 px over 27.3 x 29.4 arcmin. The page prints its place on the sky.",
+      "evidence": [
+        "https://esahubble.org/images/opo0432d/"
+      ]
+    },
+    {
+      "id": "rings",
+      "subject": "The shape of the Helix Nebula",
+      "status": "included",
+      "finding": "O'Dell, McCullough & Meixner (2004): the main ring is two rings. The inner ring is an ellipse of 499 by 459 arcsec, a circle of radius 250 arcsec tilted 23 degrees out of the plane of the sky, the edge of an inner disc; the outer ring is an ellipse of 742 by 446 arcsec, a circle of radius 371 arcsec tilted 53 degrees (Sect. III.1). The more distant side of each symmetry axis: the inner disc's at position angle 288 degrees by its ring's orientation and radial-velocity pattern (303 by its plumes), the outer ring's at about 168 degrees (Sect. IV). The outer features share the outer ring's orientation. The disc's value here is the kinematic one, 288 degrees. Meaburn et al. (2005) read the outer structure as bipolar lobes tilted 37 degrees instead of a second ring; that reading is not drawn.",
+      "evidence": [
+        "https://arxiv.org/abs/astro-ph/0407556",
+        "https://arxiv.org/abs/astro-ph/0504295"
+      ]
+    },
+    {
+      "id": "lvm-velocities",
+      "subject": "SDSS-V Local Volume Mapper velocities of the Helix",
+      "status": "included",
+      "finding": "The public fibre velocities show the inner ring approaching near position angle 285 degrees, the direction O'Dell et al. give for the disc's tilt, at about half their amplitude; they do not show the outer ring.",
+      "evidence": [
+        "https://arxiv.org/abs/2602.10072"
+      ]
+    },
+    {
+      "id": "hubble-9700-native",
+      "subject": "Hubble programme 9700 at native scale",
+      "status": "excluded",
+      "finding": "The archive's own F502N and F658N mosaics (0.04 arcsec per pixel) cover about a third of the frame, a fifth of that in single exposures full of cosmic rays, with visits not matched in background. Merged into the published mosaic they gave a small, patchy gain.",
+      "evidence": [
+        "https://archive.stsci.edu/proposal_search.php?mission=hst&id=9700"
+      ],
+      "revisitWhen": "The page can come close enough to the nebula to show pixels that fine."
+    },
+    {
+      "id": "jwst-6557",
+      "subject": "JWST programme 6557",
+      "status": "deferred",
+      "finding": "NIRCam level-3 mosaics of one 5.8 x 4.2 arcmin field of the ring, 0.03 arcsec per pixel, in six filters. From the nearest the page's camera comes, one screen pixel is about half an arcsecond: the knots JWST resolves are smaller than that, and a picture of one field over the whole nebula reads as a patch.",
+      "evidence": [
+        "https://www.stsci.edu/jwst/science-execution/program-information?id=6557"
+      ],
+      "revisitWhen": "The field has a page of its own, or the camera can come close to a part of a nebula."
+    },
+    {
+      "id": "star-removal",
+      "subject": "Removing the stars",
+      "status": "included",
+      "finding": "NOX, which the other nebula photographs use, removed the cometary knots with the stars on a 1,500 px test crop of the inner ring. The bake removes the stars Gaia DR3 lists in the field instead, all but the central star.",
+      "evidence": [
+        "https://doi.org/10.1051/0004-6361/202243940"
+      ]
+    }
+  ]
+}

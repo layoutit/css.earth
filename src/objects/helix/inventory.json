@@ -20,6 +20,12 @@
       "sha256": "bc29c6010cf300338808114365d0ae4b7142e3fd909e1b073e525f9362d65a54"
     },
     {
+      "location": "public",
+      "filename": "helix-dataset-rings.webp",
+      "bytes": 7532,
+      "sha256": "4aaba4f6ba3c5e806fcd30e46f487be8d87dccca568200d0eaf1f248132e38bd"
+    },
+    {
       "location": "prepared",
       "filename": "content.json",
       "bytes": 1588,
@@ -28,38 +34,38 @@
     {
       "location": "prepared",
       "filename": "controls.json",
-      "bytes": 846,
-      "sha256": "8b4e95509a82eb2d1457d303c497461d35b35cc68f52568b9b817ed22dfdddc5"
+      "bytes": 1027,
+      "sha256": "0d5350848aaa4f5b9575792d1d1eeaf76fcb5ac7498ab4652f35adc5368436e8"
     },
     {
       "location": "prepared",
       "filename": "datasets.json",
-      "bytes": 1253,
-      "sha256": "be511df2fac23e56c756e553721cd5b01d33180e4c83fc8454617406c23e32ce"
+      "bytes": 1587,
+      "sha256": "2d206e130cc41121fc61bdf0df33a2e2ef45caecbaf6fa614216eebc4f111f25"
     },
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 5135,
-      "sha256": "ba6ed9cb65254a29ad5d7bc2dde1e3e691bd889a9c8b1c0066f6491dab9d5986"
+      "bytes": 5388,
+      "sha256": "9fcfc57f38e3024bdeb522fb914fcee96ad572200fc16f71b0a91dabda6510e7"
     },
     {
       "location": "prepared",
       "filename": "scene.json",
       "bytes": 3868,
-      "sha256": "47756e1ae597a549511d9083ddec27d07ad4656344ca1a79989f7c14f20d6b1e"
+      "sha256": "eca27fd6b16ff830165ed72064c5698c973b0224bfbc0ae40fa08bc5acd243ff"
     },
     {
       "location": "prepared",
       "filename": "text.json",
-      "bytes": 1922,
-      "sha256": "25f73ece5f559c503aeb7fe5d5462fa488782f624ac945620a6006fb6f860faa"
+      "bytes": 2925,
+      "sha256": "c235a0cb1a9136bcf72221866cc07529f651e2319f35046f28ca09da8a9f054a"
     },
     {
       "location": "prepared",
       "filename": "world-navigation.json",
       "bytes": 632,
-      "sha256": "6358bf54196757e1fc8068ae966609cdade37f6f1e2813eb59bedb900d464f58"
+      "sha256": "39571f3d8990d2e3e5576c0a7b77f35e6f7ac02d8f30b1ad9884bcfb66ce69d4"
     }
   ]
 }

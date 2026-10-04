@@ -1,0 +1,52 @@
+{
+  "id": "esahubble-opo0432d",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "A new view of the Helix Nebula",
+  "identifiers": [
+    {
+      "type": "ESA/Hubble image",
+      "value": "opo0432d"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://esahubble.org/images/opo0432d/",
+      "label": "Published source"
+    },
+    {
+      "role": "original",
+      "url": "https://cdn.esahubble.org/archives/images/large/opo0432d.jpg",
+      "label": "JPEG, 6145 x 6623 px"
+    },
+    {
+      "role": "rights",
+      "url": "https://esahubble.org/copyright/",
+      "label": "Reuse terms"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://esahubble.org/images/opo0432d/",
+      "checkedOn": "2026-10-04",
+      "locator": "6145 x 6623 px over 27.26 x 29.38 arcmin; Hubble ACS in [O III] 502 nm and H-alpha 658 nm, with the Mosaic II camera of the CTIO 4 m telescope for the rest. The page prints the picture's place on the sky: the frame's centre at 22 29 41.92, -20 50 13.29, north 0.3° left of vertical."
+    }
+  ],
+  "publisher": "ESA/Hubble",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "NASA, ESA, C.R. O'Dell (Vanderbilt University), and M. Meixner, P. McCullough, and G. Bacon (Space Telescope Science Institute)",
+      "scope": "Published source",
+      "evidence": "https://esahubble.org/images/opo0432d/"
+    },
+    {
+      "kind": "rights",
+      "text": "Creative Commons Attribution 4.0 International; the full credit must be shown.",
+      "scope": "Published source",
+      "evidence": "https://esahubble.org/copyright/"
+    }
+  ]
+}
