@@ -515,12 +515,12 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
         const anonymousMinor = entry.minor && !entry.labelShown && !projected.targeted;
         // Explicitly hidden or unnameable bodies also hide their on-screen paths.
         // Ordinary collision decluttering must not blink an orbit during camera motion.
-        // The selected object's path and planets in a selected placed star's
-        // system remain available when their captions are intentionally absent.
+        // The selected object's path, the host's path in a selected satellite system and planets in a selected
+        // placed star's system remain available when their captions are intentionally absent.
         const placedStarFamily = entry.orbit.centerBodyId === subject.focusId && subject.focusId !== plan.focus.id && systemFade.isSystemStar(subject.focusId);
         if (anonymousMinor || projected.inFrame && !entry.labelShown && (entry.labelHidden || !projected.nameable) &&
             !systemFade.hasAuthoredRange(entry.index) && !placedStarFamily &&
-            !(subject.kind === 'body' && entry.body.id === subject.focusId)) projected.orbitVisibility = 0;
+            !(subject.kind !== 'none' && entry.body.id === subject.focusId)) projected.orbitVisibility = 0;
         entry.indicatorCutout = entry.indicatorShown;
         projected.segments = projected.orbitVisibility <= 0 ? [] : entry.indicatorCutout
           ? orbitOutsideMarker(projected.segments, x, y, entry.indicatorRadius) : projected.segments;

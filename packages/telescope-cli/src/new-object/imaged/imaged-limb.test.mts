@@ -86,6 +86,19 @@ test('the law goes on the color dataset with its texts, nodes and manifest entry
   assert.throws(() => exoRem(2.5, 0.55), /\[M\/H\] 2\.5 is outside the -0\.5 to 2 of Exo-REM's public grid/u);
   assert.throws(() => exoRem(0, 0.9), /C\/O 0\.9 is outside the 0\.1 to 0\.8 of Exo-REM's public grid/u);
   assert.deepEqual(fittedImagedLimb('x-b', fit, 'L′'), { why: 'no law is computed in L′, the middle band of its color' });
+  // A self-luminous planet with no color is a gray disc: the law darkens the gray, in the band its fit record names, and its
+  // shape paragraph and credit stay.
+  const grayPlanet = scaffold(), shape = read(grayPlanet, 'source/preparation/raster.json'), shapeContent = read(grayPlanet, 'source/content/object.json');
+  shape.surfaces[0].science.kind = 'neutral-shape'; delete shape.surfaces[0].science.limbDarkening;
+  grayPlanet.set(`${o}/source/preparation/raster.json`, json(shape)); grayPlanet.set(`${o}/source/content/object.json`, json(shapeContent));
+  installImagedLimb(grayPlanet, 'x-b', limb);
+  assert.equal(read(grayPlanet, 'source/preparation/raster.json').surfaces[0].science.limbDarkening.path, CLARET_2012.file);
+  const before = String(grayPlanet.get(`${o}/README.md`)).split('\n').find(line => line.startsWith('**Shape dataset.**'));
+  documentImagedColor(grayPlanet, 'x-b', undefined, '', { law: limb, gravity: 'Its temperature is that of its record' });
+  const grayReadme = String(grayPlanet.get(`${o}/README.md`)).split('\n');
+  assert.deepEqual([grayReadme.includes(before!), grayReadme.some(line => line.startsWith('**Infrared color dataset.**')), grayReadme.filter(line => line.startsWith('**Limb.**')).length], [true, false, 1]);
+  assert.match(String(grayPlanet.get(`${o}/NOTICE.md`)), /in the shared neutral gray; no image or color of the planet's surface exists\.\n\n[^]*Limb darkening: Claret/u);
+  assert.equal(parseAtmosphereFit({ schema: ATMOSPHERE_FIT.schema, grid: 'exo-rem', teffK: 1112, logg: 3.87, metallicity: 0.01, co: 0.5, band: 'SPHERE K1', source: fit.source }, 'x-b fit').band, 'SPHERE K1');
   // A planet lit by its star, or with no infrared color, has no flat disc to darken.
   const lit = scaffold(), plain = read(lit, 'source/preparation/raster.json');
   delete plain.emission; lit.set(`${o}/source/preparation/raster.json`, json(plain));

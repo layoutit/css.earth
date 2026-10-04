@@ -82,6 +82,39 @@
       "consumers": [
         "scene"
       ]
+    },
+    {
+      "id": "pds-70-c-picaso-exo-rem-limb-darkening",
+      "path": "photometry/picaso-exo-rem-k1-quadratic.tsv",
+      "origin": "https://lesia.obspm.fr/exorem/YGP_grids/old_grids_2021/",
+      "credit": "PICASO 4.1 (Batalha et al. 2019, ApJ 878, 70) on Exo-REM cloudy (Charnay et al. 2018, ApJ 854, 172; 1 times solar metallicity, C/O 0.50) profiles",
+      "license": "Project-computed model values; the Exo-REM grid is public and its README asks that its papers be cited, Exo-REM with its cloud optical constants is under the MIT license, PICASO is GPL-3.0",
+      "acquisition": "Computed by node packages/telescope-cli/src/new-object/new-object-cli.mts --imaged-limb pds-70-c (packages/telescope-cli/src/new-object/picaso-limb.mts, @cssearth/telescope/node picasoLimbNodes) at the nodes YGP_1100K_logg3.5_met1.00_CO0.50, YGP_1100K_logg4.0_met1.00_CO0.50, YGP_1150K_logg3.5_met1.00_CO0.50, YGP_1150K_logg4.0_met1.00_CO0.50.",
+      "redistribution": "Model coefficients and the intensities they are fitted to, with the model and tool cited.",
+      "consumers": [
+        "assets",
+        "datasets"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Computed with the pinned PICASO toolchain; --imaged-limb recomputes it."
+      }
+    },
+    {
+      "id": "pds-70-c-atmosphere-fit",
+      "path": "photometry/atmosphere-fit.json",
+      "origin": "https://arxiv.org/abs/2101.04187",
+      "credit": "Wang et al. (2021), AJ 161, 148, Table 4, PDS 70 c, Exo-REM with interstellar extinction: Teff 1112 +133/-98 K, radius 2.42 +0.66/-0.54, log g 3.87 +0.48/-0.30, [M/H] 0.01 +0.44/-0.42, C/O 0.50 +0.20/-0.19, A_V 18.6 +1.3/-3.2, Bayes factor 2.2e6; the plain Exo-REM fit (1024 K) has the lowest Bayes factor of the table",
+      "license": "Factual numerical values; source attribution retained",
+      "acquisition": "Transcribed from the paper: the model of the public grid it fits to the planet, each value as printed",
+      "redistribution": "Factual parameter transcription only; no paper figures",
+      "consumers": [
+        "datasets"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Published fit transcribed with its source; repinned when edited."
+      }
     }
   ],
   "generatedIntermediates": [
@@ -97,7 +130,8 @@
       "recipe": {
         "generator": "packages/telescope-cli/src/new-object/new-hosted-planet.mts",
         "inputs": [
-          "pds-70-c-observational-measurements"
+          "pds-70-c-observational-measurements",
+          "pds-70-c-picaso-exo-rem-limb-darkening"
         ]
       },
       "generator": "packages/telescope-cli/src/new-object/new-hosted-planet.mts",
