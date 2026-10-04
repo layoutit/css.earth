@@ -6,7 +6,7 @@
       "id": "shape",
       "subject": "Shape",
       "status": "included",
-      "finding": "A sphere of the model radius (Morzinski et al. 2015); no image of the planet exists. The gray is a display convention.",
+      "finding": "A sphere of the model radius (Morzinski et al. 2015); no image resolves the planet.",
       "evidence": [
         "https://arxiv.org/abs/1511.02894",
         "https://doi.org/10.1088/0004-637X/815/2/108"
@@ -38,6 +38,24 @@
       "finding": "Ortiz Ceballos, Berger and Cendes (2026), arXiv:2609.16720, MeerKAT (SARAO).",
       "evidence": [
         "https://arxiv.org/abs/2609.16720"
+      ]
+    },
+    {
+      "id": "band-color",
+      "subject": "A false color from three measured bands",
+      "status": "included",
+      "finding": "Shown in infrared false color from its measured flux in MKO K 2.184 µm, MKO H 1.614 µm, MKO J 1.2417 µm (Males et al. (2014), as compiled in Best, Liu, Magnier & Dupuy (2024), The UltracoolSheet v2.1 (Zenodo); zero points from the SVO Filter Profile Service).",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2014ApJ...786...32M"
+      ]
+    },
+    {
+      "id": "limb-darkening",
+      "subject": "Limb darkening",
+      "status": "included",
+      "finding": "The disc is dimmed toward the limb by the quadratic law Claret, Hauschildt & Witte (2012), A&A 546, A14 compute from PHOENIX model atmospheres for the H band at 1,742 K and log g 4.15 (u1 0.803, u2 -0.050): a model, not a measurement of this planet. Its temperature is the 1,742 K of its measurements record; log g 4.15 follows from the mass and radius of its astronomy record (packages/astronomy/data/bodies/beta-pictoris-b.json).",
+      "evidence": [
+        "https://cdsarc.cds.unistra.fr/ftp/J/A+A/546/A14/tableab.dat"
       ]
     }
   ]

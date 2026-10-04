@@ -266,6 +266,30 @@ the two differ by more than 12 levels in any channel unless the record states th
 
 The plate is a round overlay fitted to the sphere's outline at its drawn size, geometry scale included.
 
+**A planet with a map is lit.** A hosted planet whose dataset is a map (a heat map, a model, an illustration) is drawn lit by
+its star, a sphere under the shared lighting bank, with shadows off until the reader turns them on. Nine planets built by hand
+were once drawn self-luminous, flat discs with no limb; `new-object --star-lit <id>...`
+([star-lit.mts](../packages/telescope-cli/src/new-object/map/star-lit.mts)) moved them, so every map is drawn one way. The
+shading is a display convention, not data: a map's colors are read against its legend where the disc is fully lit. Only a body
+seen by its own light, a star or an imaged planet with a disc color, stays self-luminous.
+
+**An imaged planet's limb.** A planet seen by its own heat is one infrared color on an unresolved disc. It takes its law
+the way a cool star does, from a model grid at its own temperature and gravity: Claret, Hauschildt & Witte
+([2012](https://ui.adsabs.harvard.edu/abs/2012A&A...546A..14C/abstract)), PHOENIX models from 1,500 to 4,800 K, in the H
+band, the middle band of a J, H, K color (`new-object --imaged-limb <id>...`,
+[imaged-limb.mts](../packages/telescope-cli/src/new-object/imaged/imaged-limb.mts)). The nodes it is read between are kept
+beside the planet, and every text calls it a model.
+
+No published table reaches a planet cooler than 1,500 K, and a cloud-free model is not an answer: these planets are cloudy, and
+in the H band near 1,000 K a cloud-free Sonora Bobcat atmosphere darkens the limb to black. Where a paper has fitted the public
+cloudy grid, Sonora Diamondback (Morley et al. [2024](https://doi.org/10.3847/1538-4357/ad71d5)), to the planet, the law is
+computed from that fitted model: PICASO takes its structure and the release's cloud optical properties and gives the
+intensity at eight viewing angles in the middle band of the planet's color
+([picaso-limb.mts](../packages/telescope-cli/src/new-object/picaso-limb.mts)). The fit is transcribed with its table in
+`source/photometry/atmosphere-fit.json`. Fed those files, PICASO reproduces the grid's own published J−H and H−K colors
+within 0.11 mag at 1,100 K, log g 3.5 and [M/H] +0.5 (1.29 and 1.04 against 1.20 and 0.97 for f_sed 2), and misses by 0.8 and
+0.3 mag with the clouds left out. A planet with no such fit stays a flat disc, and its README says why.
+
 **Gravity darkening.** A star that spins fast is flattened and hotter at its poles. Where a paper publishes a Roche-von Zeipel
 fit (ω, β, the polar temperature, the radii and the pole's orientation), [gravity-darkening.ts](../packages/bake/src/objects/stellar/gravity-darkening.ts)
 rebuilds the surface from those numbers and writes a temperature for each latitude row. Its tests require the paper's

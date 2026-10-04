@@ -51,8 +51,9 @@ harmonics to degree 2) fits the same 6,905 samples no better (BIC 6903 against 6
 side, which the data do not measure.
 
 **Illustration.** The map is resized unchanged onto the sphere with its left edge at 0° longitude
-([`equirectangular-illustration`](../../../packages/bake/src/objects/interpretation/interpret.ts)). The planet is drawn
-self-luminous, so the map is evenly bright, without the star's shading.
+([`equirectangular-illustration`](../../../packages/bake/src/objects/interpretation/interpret.ts)).
+
+**Lighting.** The planet is drawn lit by its star, as every planet with a map is: a sphere under the shared lighting bank. The shading is a display convention, not data; the map's colors are read against the legend where the disc is fully lit.
 
 ## Evidence
 

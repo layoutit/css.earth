@@ -144,7 +144,7 @@
           "path": "science/jwst-1366-miri/stellar-counts.csv",
           "wavelength": "wavelength_um",
           "counts": "counts",
-          "minimumMicrons": 5.0,
+          "minimumMicrons": 5,
           "maximumMicrons": 10.5
         },
         "star": {
@@ -171,32 +171,31 @@
       }
     }
   ],
-  "emission": {
-    "offLimbSize": 600,
-    "limbSize": 512,
-    "bodyDiameter": 496,
-    "offLimbOutput": "wasp-43b-context-{id}{suffix}.webp",
-    "limbOutput": "wasp-43b-limb-{id}{suffix}.webp",
+  "lighting": {
+    "bank": "sphere",
+    "presentationSize": 460,
+    "defaultFrame": 230,
+    "bankSchema": "csswasp-43b-prepared-lighting-bank@1",
+    "billboardSchema": "csswasp-43b-prepared-lighting-billboard@1",
     "metadata": {
-      "schema": "csswasp-43b-prepared-emission@1",
-      "presentation": "prepared-emissive-surface-with-stationary-off-limb-context-and-limb-plate",
-      "offLimbContext": {
-        "logicalSize": 600,
-        "source": "none: a transparent plate",
-        "composition": "transparent",
-        "rotation": "none",
-        "runtimeAlphaProcessing": false
-      },
-      "limbMaterial": {
-        "logicalSize": 496,
-        "composition": "transparent: the adopted source-radius opaque-sphere silhouette is the limb; no off-limb or radial-brightness source is selected",
-        "sourceRadius": "measurements.json#radiusKm",
-        "surfaceReplacement": false,
-        "runtimeAlphaProcessing": false
-      },
-      "lighting": false,
-      "shadows": false,
-      "runtimeLighting": false
+      "schema": "csswasp-43b-prepared-lighting@1",
+      "storageModel": "prepared-full-resolution-density-row-shards",
+      "model": "prepared-full-phase-lambert-cubic-sky-sun-no-atmosphere",
+      "sourceRadius": "measurements.json#radiusKm",
+      "limbMeaning": "The adopted source-radius opaque-sphere silhouette and prepared phase lighting define the limb; no atmospheric rim is inferred.",
+      "sourceRenderer": "OpenSpace@56e29b54/modules/globebrowsing/shaders/texturetilemapping.glsl",
+      "ambientIntensity": 0.05,
+      "shadowlessFloodLimbFloor": 0.35,
+      "orenNayarRoughness": 0,
+      "terminatorSmoothstep": [
+        0,
+        0.1
+      ],
+      "minimumLightViewZ": -1,
+      "maximumLightViewZ": 1,
+      "baseLightAzimuthDegrees": 0,
+      "cameraContract": "unbounded-accumulated-matrix3d-phase-and-roll",
+      "runtimeRasterization": false
     }
   }
 }

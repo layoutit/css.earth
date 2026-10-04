@@ -17,18 +17,28 @@ WASP-76b is an ultra-hot giant planet that orbits the F star [WASP-76](../wasp-7
 
 **Temperature.** WASP-76 has a fainter companion 0.44″ away inside Spitzer's pixel. The paper corrects for its light with a dilution factor of 0.0901 at 4.5 µm. The planet's intensity relative to the star's is π·value·(1 + 0.0901)/rp² with SPIDERMAN's map value and rp = 0.106. It becomes a brightness temperature at 4.5 µm against the star's 4.5 µm brightness temperature. The paper used an interpolated Kurucz model and prints no number. The value its own eclipse depth, radius ratio and day side imply is 5,695 K. Weighting by Spitzer's 4.5 µm filter curve instead of one wavelength moves the night side by 5 K.
 
-**Orbit and rotation.** Ehrenreich et al. (2020, Extended Data Table 1) give the period, 1.80988198 days, a/R* 4.08, the 89.623° inclination and the transit time. That is 58080.626165 in BJD − 2,400,000, which lands 122 orbits after May et al.'s Spitzer transit to within 76 s. The radius ratio is 0.10852, which is 1.854 Jupiter radii; the mass is 0.894 Jupiter masses. The rotation record, `cssearth-synchronous-rotation@1`, assumes the planet is tidally locked. The planet is drawn emissive.
+**Orbit and rotation.** Ehrenreich et al. (2020, Extended Data Table 1) give the period, 1.80988198 days, a/R* 4.08, the 89.623° inclination and the transit time. That is 58080.626165 in BJD − 2,400,000, which lands 122 orbits after May et al.'s Spitzer transit to within 76 s. The radius ratio is 0.10852, which is 1.854 Jupiter radii; the mass is 0.894 Jupiter masses. The rotation record, `cssearth-synchronous-rotation@1`, assumes the planet is tidally locked.
 
 **Catalogue color.** #f4c731, the dataset palette at the paper's 2,699 K day side, the rule WASP-43b's color follows.
 
+**Lighting.** The planet is drawn lit by its star, as every planet with a map is: a sphere under the shared lighting bank. The shading is a display convention, not data; the map's colors are read against the legend where the disc is fully lit.
+
 ## Evidence
 
-Run of 2026-09-23 (this version):
+Run of 2026-09-23:
 
 - [`published-phase-curve-map.test.mts`](../../../packages/bake/src/objects/raster/eclipse-map/published-phase-curve-map.test.mts) evaluates the recipe through SPIDERMAN 1.0.3. The day side agrees with the paper within its uncertainty, in flux and in temperature. The night side lies within two standard deviations below the paper's. The curve has no peak offset, the map is the same east and west of noon, and the negative patch at midnight is left without a temperature.
 - The lo0 reading. May et al.'s Table 4 labels lo0 in degrees; SPIDERMAN takes radians. Read as 0.67 radians, the map's corrected day side is 3,423 ppm and its half amplitude 1,266 ppm, far from the paper. Read as 0.67°, they are 3,704 and 1,546 ppm. The degree reading is used.
 - [`object-systems.test.mts`](../../../site/test/object-systems.test.mts) checks the system.
 - `hot-jupiter-default-views.png`: the default views of KELT-9, KELT-9b, WASP-76 and WASP-76b on this branch's dev server, headless Chrome at 1440 × 900 after the page reported ready. Both planets open on their substellar point; KELT-9b's hot spot shows east of centre.
+
+Run of 2026-10-04, when the planet moved to the lit lane. The map did not change, so the tests above still apply.
+
+- The app's arrival pictures of the nine planets with a map that were built self-luminous, before and after they were lit by their stars:
+
+![HD 189733 b, WASP-43 b, WASP-18 b, WASP-76 b, WASP-121 b, WASP-103 b, KELT-9 b, TRAPPIST-1 b and TRAPPIST-1 c, each a flat disc before and a shaded sphere after](evidence/2026-10-04/lit.jpg)
+
+- [`star-lit.test.mts`](../../../packages/telescope-cli/src/new-object/map/star-lit.test.mts) checks what the move changes in a package and what it leaves self-luminous.
 
 ## Known problems
 

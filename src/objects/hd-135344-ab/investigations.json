@@ -5,11 +5,20 @@
     {
       "id": "band-color",
       "subject": "A false color from three measured bands, as the HR 8799 planets have",
-      "status": "unresolved",
-      "finding": "No paper checked gives flux densities of this companion in three JWST bands like the NIRCam F410M, F430M and F460M that color HR 8799's planets. A color from other bands would not compare with those, so it is the shared neutral gray.",
+      "status": "included",
+      "finding": "Shown in infrared false color from its measured flux in SPHERE K2 2.253 µm, SPHERE K1 2.102 µm, SPHERE H3 1.666 µm (Stolker et al. (2025), arXiv:2507.06206; zero points from the SVO Filter Profile Service). No paper checked gives flux densities of this companion in three JWST bands like the NIRCam F410M, F430M and F460M that color HR 8799's planets. Its color is from the three bands it is firmly detected in, on its own range, so it is not compared with theirs.",
       "revisitWhen": "Flux densities in three bands comparable with HR 8799's are published.",
       "evidence": [
         "https://arxiv.org/abs/2507.06206"
+      ]
+    },
+    {
+      "id": "limb-darkening",
+      "subject": "Limb darkening",
+      "status": "included",
+      "finding": "The disc is dimmed toward the limb by the quadratic law Claret, Hauschildt & Witte (2012), A&A 546, A14 compute from PHOENIX model atmospheres for the K band at 1,510 K and log g 3.99 (u1 0.608, u2 0.042): a model, not a measurement of this planet. Its temperature is the 1,510 K of its measurements record; log g 3.99 follows from the mass and radius of its astronomy record (packages/astronomy/data/bodies/hd-135344-ab.json).",
+      "evidence": [
+        "https://cdsarc.cds.unistra.fr/ftp/J/A+A/546/A14/tableab.dat"
       ]
     }
   ]

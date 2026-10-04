@@ -1,0 +1,13 @@
+# PICASO 4.1 (Batalha et al. 2019, ApJ 878, 70): the JWST/NIRCam F430M (SVO JWST/NIRCam.F430M) intensity of Sonora Diamondback cloudy (Morley et al. 2024, ApJ 975, 59; [M/H] +0.5, f_sed 2) structures (https://doi.org/10.5281/zenodo.12735103) and the release's cloud optical properties,
+# with the PICASO 4.0 correlated-k table sonora_2121grid_feh0.5_co0.46.hdf5 (https://doi.org/10.5281/zenodo.18636725), energy-weighted over PICASO's bins,
+# at the emission cosines of its eight Gauss points; a and b are the least-squares quadratic law with the centre intensity free.
+# t1100g31f2_m+0.5_co1.0: mu 0.9990 0.9895 0.9580 0.8906 0.7782 0.6186 0.4175 0.1877; I/I0 1.0019 0.9990 0.9893 0.9679 0.9300 0.8701 0.7797 0.6347; rms 0.00305
+# t1100g100f2_m+0.5_co1.0: mu 0.9990 0.9895 0.9580 0.8906 0.7782 0.6186 0.4175 0.1877; I/I0 1.0018 0.9990 0.9896 0.9689 0.9322 0.8746 0.7881 0.6495; rms 0.00295
+# t1200g31f2_m+0.5_co1.0: mu 0.9990 0.9895 0.9580 0.8906 0.7782 0.6186 0.4175 0.1877; I/I0 1.0020 0.9991 0.9895 0.9683 0.9307 0.8712 0.7810 0.6354; rms 0.00312
+# t1200g100f2_m+0.5_co1.0: mu 0.9990 0.9895 0.9580 0.8906 0.7782 0.6186 0.4175 0.1877; I/I0 1.0015 0.9990 0.9906 0.9720 0.9392 0.8879 0.8113 0.6902; rms 0.00246
+Teff	logg	a	b	Profile
+K	[cgs]			
+1100	3.5	0.242620	0.250923	t1100g31f2_m+0.5_co1.0
+1100	4	0.236539	0.236152	t1100g100f2_m+0.5_co1.0
+1200	3.5	0.237811	0.255774	t1200g31f2_m+0.5_co1.0
+1200	4	0.215239	0.201373	t1200g100f2_m+0.5_co1.0

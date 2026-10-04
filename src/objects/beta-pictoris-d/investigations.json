@@ -6,7 +6,7 @@
       "id": "shape",
       "subject": "Shape",
       "status": "included",
-      "finding": "A sphere of the model radius (Sutlieff et al. 2026); no image of the planet exists. The gray is a display convention.",
+      "finding": "A sphere of the model radius (Sutlieff et al. 2026); no image resolves the planet.",
       "evidence": [
         "https://arxiv.org/abs/2606.23801"
       ]
@@ -16,6 +16,15 @@
       "subject": "Orbit and mass",
       "status": "included",
       "finding": "Sutlieff, Bonse et al. (2026), arXiv:2606.23801: the published semi-major axis, inclination and node, with a circular display orbit phased to their six measured positions.",
+      "evidence": [
+        "https://arxiv.org/abs/2606.23801"
+      ]
+    },
+    {
+      "id": "band-color",
+      "subject": "A false color from three measured bands",
+      "status": "included",
+      "finding": "Shown in infrared false color from its measured flux in F444W 4.35 µm, F410M 4.072 µm, ERIS L′ 3.78 µm (Sutlieff, Bonse et al. (2026), arXiv:2606.23801; zero points from the SVO Filter Profile Service).",
       "evidence": [
         "https://arxiv.org/abs/2606.23801"
       ]

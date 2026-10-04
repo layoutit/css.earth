@@ -29,7 +29,7 @@
           "projection": "equirectangular",
           "datasets": [
             {
-              "id": "shape",
+              "id": "infrared",
               "source": "content",
               "material": "emission"
             }

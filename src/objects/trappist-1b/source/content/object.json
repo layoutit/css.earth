@@ -122,7 +122,7 @@
           "meta": "K",
           "sourceUrl": "https://mast.stsci.edu/search/ui/#/jwst/results?proposal_id=3077"
         },
-        "notes": "A bare rock with no atmosphere to carry heat, fitted to the light curve: 575 ± 10 K where the star is overhead, the limit for a perfectly dark surface, cooling toward the terminator and cold at night. It fits the ten visits as well as a free smooth map, whose hot spot also sits under the star. The data measure the day-to-night pattern; the shape across the disc comes from the rock model."
+        "notes": "A bare rock with no atmosphere to carry heat, fitted to the light curve: 575 ± 10 K where the star is overhead, the limit for a perfectly dark surface, cooling toward the terminator and cold at night. It fits the ten visits as well as a free smooth map, whose hot spot also sits under the star. The data measure the day-to-night pattern; the shape across the disc comes from the rock model. The shading is its star's light, a display convention: read the colors against the legend where the disc is lit."
       },
       {
         "id": "illustration",
@@ -137,13 +137,20 @@
           "url": "https://eyes.nasa.gov/apps/exo/"
         },
         "falseColor": false,
-        "notes": "NASA's artist's concept of TRAPPIST-1b: the map its Eyes on Exoplanets app wraps around the planet. Nobody has resolved this planet's disc, so none of the color, clouds or terrain in it was observed. Its longitudes are arbitrary."
+        "notes": "NASA's artist's concept of TRAPPIST-1b: the map its Eyes on Exoplanets app wraps around the planet. Nobody has resolved this planet's disc, so none of the color, clouds or terrain in it was observed. Its longitudes are arbitrary. The shading is its star's light, a display convention: read the colors against the legend where the disc is lit."
       }
     ]
   },
   "settings": {
     "titleKey": "settings",
-    "controls": []
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
   },
   "charts": [],
   "resources": [

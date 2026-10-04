@@ -82,28 +82,47 @@
       "consumers": [
         "scene"
       ]
+    },
+    {
+      "id": "pds-70-b-band-color",
+      "path": "photometry/band-color.json",
+      "origin": "https://arxiv.org/abs/2009.04483",
+      "credit": "Stolker et al. (2020), A&A 644, A13; zero points from the SVO Filter Profile Service, Table 1, PDS 70 b, apparent magnitude: NACO L′ 14.66 +/- 0.24, SPHERE K1 16.66 +/- 0.04, SPHERE H3 17.97 +/- 0.18; SVO Paranal/NACO.Lp 240.8 Jy, Paranal/SPHERE.IRDIS_D_K12_1 684.9 Jy, Paranal/SPHERE.IRDIS_D_H23_3 982.4 Jy",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "Authored method record: the published flux densities transcribed with their bands and the shared display range",
+      "redistribution": "Method record only",
+      "consumers": [
+        "assets",
+        "datasets"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored color recipe transcribing the cited photometry; repinned when edited."
+      }
     }
   ],
   "generatedIntermediates": [
     {
-      "id": "neutral-disc-context-marker",
+      "id": "dataset-color-context-marker",
       "path": "presentation/context.png",
       "origin": "https://arxiv.org/abs/2504.11210",
-      "credit": "Sphere of the published radius; marker written by packages/telescope-cli/src/new-object/new-hosted-planet.mts",
+      "credit": "The default dataset's color as a disc; rendered by packages/telescope-cli/src/source-authoring/context-markers.mts",
       "license": "Project-authored display derivative.",
       "consumers": [
         "navigation"
       ],
       "recipe": {
-        "generator": "packages/telescope-cli/src/new-object/new-hosted-planet.mts",
+        "generator": "packages/telescope-cli/src/source-authoring/context-markers.mts",
         "inputs": [
-          "pds-70-b-observational-measurements"
+          "pds-70-b-observational-measurements",
+          "pds-70-b-preparation-raster",
+          "pds-70-b-band-color"
         ]
       },
-      "generator": "packages/telescope-cli/src/new-object/new-hosted-planet.mts",
+      "generator": "packages/telescope-cli/src/source-authoring/context-markers.mts",
       "sourceBinding": {
         "kind": "local",
-        "reason": "A flat neutral gray disc, the marker of an unresolved surface."
+        "reason": "The default dataset drawn as a disc; `context-markers.mts --check` recomputes it."
       }
     }
   ],

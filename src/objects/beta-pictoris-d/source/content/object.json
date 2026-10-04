@@ -76,22 +76,22 @@
   },
   "datasets": {
     "titleKey": "datasets",
-    "defaultDataset": "shape",
+    "defaultDataset": "infrared",
     "controls": [
       {
-        "id": "shape",
-        "label": "Shape",
-        "qualification": "A sphere of the model radius, glowing with its own heat; the neutral gray is a display convention, not a measured color.",
-        "thumbnail": "beta-pictoris-d-dataset-shape.webp",
-        "surface": "beta-pictoris-d-surface-shape@2x.webp",
-        "poles": "beta-pictoris-d-poles-shape@2x.webp",
+        "id": "infrared",
+        "label": "Infrared color",
+        "qualification": "False color from its measured flux in three infrared bands (Sutlieff, Bonse et al. (2026), arXiv:2606.23801; zero points from the SVO Filter Profile Service). The disc itself is unresolved.",
+        "thumbnail": "beta-pictoris-d-dataset-infrared.webp",
+        "surface": "beta-pictoris-d-surface-infrared@2x.webp",
+        "poles": "beta-pictoris-d-poles-infrared@2x.webp",
         "source": {
-          "id": "beta-pictoris-d-observational-measurements",
+          "id": "beta-pictoris-d-band-color",
           "path": "../manifest.json",
-          "url": "https://arxiv.org/abs/2109.10671"
+          "url": "https://arxiv.org/abs/2606.23801"
         },
-        "falseColor": false,
-        "notes": "No image of this planet's surface exists: it is a faint point 1.1 arcseconds from its star in the 2025 images. Its size, 1.26 Jupiter radii, and its mass are evolutionary-model estimates from its photometry (see the ledger). Its orbit here is circular at the published semi-major axis, phased to the six measured positions, a display approximation of a still poorly constrained orbit. No spin is measured; the display axis is its orbit normal."
+        "falseColor": true,
+        "notes": "Beta Pictoris d's brightness in three infrared bands as one color: red F444W 4.35 µm, green F410M 4.072 µm, blue ERIS L′ 3.78 µm (Sutlieff, Bonse et al. (2026), arXiv:2606.23801; zero points from the SVO Filter Profile Service), on a range shared with this planet alone, from zero to its brightest band (f444w), so the color shows its band ratios; brightness is not compared across planets at different distances. Not a natural color; nobody has resolved its disc."
       }
     ]
   },

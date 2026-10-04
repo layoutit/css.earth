@@ -12,7 +12,9 @@ ROXs 42B b is a young giant planet of about 10 to 13 Jupiter masses, 1.2 arcseco
 
 **Its own light.** The planet is drawn self-luminous, as the other imaged planets are: its glow is its own heat.
 
-**Shape dataset.** A sphere of the model radius in the shared neutral gray. No paper gives its flux in three bands comparable with HR 8799's planets, whose false color comes from JWST (the [ledger](investigations.json) says what would change that).
+**Infrared color dataset.** The default dataset paints the sphere one false color from its measured flux in three infrared bands: red MKO K 2.184 µm (632.3 ± 29 µJy), green MKO H 1.614 µm (460.1 ± 25 µJy), blue MKO J 1.2417 µm (247 ± 16 µJy) (Kraus et al. (2014a), as compiled in Best, Liu, Magnier & Dupuy (2024), The UltracoolSheet v2.1 (Zenodo); zero points from the SVO Filter Profile Service; [record](source/photometry/band-color.json)). Display range: this planet alone, from zero to its brightest band (MKO K), so the color shows its band ratios; brightness is not compared across planets at different distances. Not a natural color; nobody has resolved its disc.
+
+**Limb.** The disc is dimmed toward the limb by the quadratic law Claret, Hauschildt & Witte (2012), A&A 546, A14 compute from PHOENIX model atmospheres for the H band at 1,935 K and log g 3.6 (u1 0.666, u2 0.109): a model, not a measurement of this planet ([nodes](source/photometry/claret-2012-h-quadratic.tsv)). Its temperature is the 1,935 K of its measurements record; log g 3.6 follows from the mass and radius of its astronomy record (packages/astronomy/data/bodies/roxs-42b-b.json).
 
 **Rotation.** No spin axis on the sky is measured; the display axis is the orbit normal ([rotation.json](source/preparation/rotation.json)).
 
@@ -26,6 +28,7 @@ Run of 2026-09-23 (this version):
 
 - Three positions over twenty years leave more free parameters than measurements, as Inglis et al. note: the recorded orbit is one of many that fit, not a measurement of the planet's path. The orbit is about the pair's centre of mass but is drawn around A, up to about 25 mas away on the sky.
 - The radius and mass are model values; the planet is a point in every image.
-- No color is measured in bands comparable with HR 8799's, and no spin axis is measured.
+- No spin axis is measured.
+- **Model limb.** The limb darkening is a model atmosphere at the planet's temperature and gravity, in the middle band of its color, not a measurement of this planet.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

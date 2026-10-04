@@ -115,7 +115,7 @@
           "meta": "K",
           "sourceUrl": "https://arxiv.org/abs/1805.00029"
         },
-        "notes": "Published SPARC/MITgcm simulation. Lower pressure is higher in the atmosphere. Each step selects a released pressure level.",
+        "notes": "Published SPARC/MITgcm simulation. Lower pressure is higher in the atmosphere. Each step selects a released pressure level. The shading is its star's light, a display convention: read the colors against the legend where the disc is lit.",
         "legendNote": "One temperature scale at every level. Gray caps have no released samples."
       },
       {
@@ -182,7 +182,7 @@
           "meta": "K",
           "sourceUrl": "https://arxiv.org/abs/1805.00029"
         },
-        "notes": "Published SPARC/MITgcm simulation. Lower pressure is higher in the atmosphere. Each step selects a released pressure level.",
+        "notes": "Published SPARC/MITgcm simulation. Lower pressure is higher in the atmosphere. Each step selects a released pressure level. The shading is its star's light, a display convention: read the colors against the legend where the disc is lit.",
         "legendNote": "One temperature scale at every level. Gray caps have no released samples."
       },
       {
@@ -249,7 +249,7 @@
           "meta": "K",
           "sourceUrl": "https://arxiv.org/abs/1805.00029"
         },
-        "notes": "Published SPARC/MITgcm simulation. Lower pressure is higher in the atmosphere. Each step selects a released pressure level.",
+        "notes": "Published SPARC/MITgcm simulation. Lower pressure is higher in the atmosphere. Each step selects a released pressure level. The shading is its star's light, a display convention: read the colors against the legend where the disc is lit.",
         "legendNote": "One temperature scale at every level. Gray caps have no released samples."
       },
       {
@@ -316,7 +316,7 @@
           "meta": "K",
           "sourceUrl": "https://arxiv.org/abs/1805.00029"
         },
-        "notes": "Published SPARC/MITgcm simulation. Lower pressure is higher in the atmosphere. Each step selects a released pressure level.",
+        "notes": "Published SPARC/MITgcm simulation. Lower pressure is higher in the atmosphere. Each step selects a released pressure level. The shading is its star's light, a display convention: read the colors against the legend where the disc is lit.",
         "legendNote": "One temperature scale at every level. Gray caps have no released samples."
       },
       {
@@ -383,7 +383,7 @@
           "meta": "K",
           "sourceUrl": "https://arxiv.org/abs/1805.00029"
         },
-        "notes": "Published SPARC/MITgcm simulation. Lower pressure is higher in the atmosphere. Each step selects a released pressure level.",
+        "notes": "Published SPARC/MITgcm simulation. Lower pressure is higher in the atmosphere. Each step selects a released pressure level. The shading is its star's light, a display convention: read the colors against the legend where the disc is lit.",
         "legendNote": "One temperature scale at every level. Gray caps have no released samples."
       },
       {
@@ -450,7 +450,7 @@
           "meta": "K",
           "sourceUrl": "https://arxiv.org/abs/1805.00029"
         },
-        "notes": "Published SPARC/MITgcm simulation. Lower pressure is higher in the atmosphere. Each step selects a released pressure level.",
+        "notes": "Published SPARC/MITgcm simulation. Lower pressure is higher in the atmosphere. Each step selects a released pressure level. The shading is its star's light, a display convention: read the colors against the legend where the disc is lit.",
         "legendNote": "One temperature scale at every level. Gray caps have no released samples."
       },
       {
@@ -517,14 +517,21 @@
           "meta": "K",
           "sourceUrl": "https://arxiv.org/abs/1805.00029"
         },
-        "notes": "Published SPARC/MITgcm simulation. Lower pressure is higher in the atmosphere. Each step selects a released pressure level.",
+        "notes": "Published SPARC/MITgcm simulation. Lower pressure is higher in the atmosphere. Each step selects a released pressure level. The shading is its star's light, a display convention: read the colors against the legend where the disc is lit.",
         "legendNote": "One temperature scale at every level. Gray caps have no released samples."
       }
     ]
   },
   "settings": {
     "titleKey": "settings",
-    "controls": []
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
   },
   "charts": [],
   "resources": [

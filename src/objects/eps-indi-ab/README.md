@@ -10,7 +10,9 @@ Epsilon Indi Ab is a cold giant planet about 16 au from its star. JWST first ima
 
 **Its own light.** It is drawn self-luminous, as the other imaged companions are: its glow is its own heat.
 
-**Shape dataset.** A sphere of the model radius in the shared neutral gray ([ledger](investigations.json)).
+**Infrared color dataset.** The default dataset paints the sphere one false color from its measured flux in three infrared bands: red F1550C 15.51 µm (525 ± 16 µJy), green F1065C 10.55 µm (188 ± 6 µJy), blue F430M 4.278 µm (84 ± 4 µJy) (Sanghi et al. (2026), arXiv:2603.08787, with the MIRI fluxes of Matthews et al. (2024), Nature 633, 789; [record](source/photometry/band-color.json)). Display range: this planet alone, from zero to its brightest band (F1550C), so the color shows its band ratios; brightness is not compared across planets at different distances. Not a natural color; nobody has resolved its disc.
+
+**Limb.** No limb darkening is drawn: its color's middle band, F1065C, is not in the J, H or K of the published table; and no paper's fit of a cloudy model grid is recorded for it (source/photometry/atmosphere-fit.json).
 
 **Rotation.** No rotation period or spin axis of Epsilon Indi Ab is measured; the papers cited in the README were checked. The display axis is the orbit normal ([rotation.json](source/preparation/rotation.json)).
 

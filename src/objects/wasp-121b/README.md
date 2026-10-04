@@ -12,9 +12,11 @@ WASP-121b (IAU name Tylos) is an ultra-hot gas giant 1.7 times Jupiter's size th
 
 **What it shows.** The hottest point is 3,096 K (NRS1) and 3,136 K (NRS2), 3° and 2° east of the point under the star. The east terminator is about 100 to 120 K warmer than the west. A dipole cannot bend: on the far night side it falls through zero, and there it gives no temperature. Those cells are gray: 14 % of the planet in NRS1, 7 % in NRS2. The paper's own phase-binned brightness temperatures show a night side near 1,100 K (Mikal-Evans et al. 2023: 926 and 1,122 K), so the gray is a limit of the simple map, not of the planet.
 
-**Orbit and rotation.** The orbit is the one the maps were fitted with (Supplementary Table 1): period 1.27492503 days, inclination 87.96°, transit at 2459867.64265 BJD_TDB, circular. a/R* 3.796 follows from the fit's stellar mass and radius and planet mass. The rotation record assumes the planet is tidally locked. The planet is drawn emissive, a sphere of radius ratio 0.122657 (NRS1).
+**Orbit and rotation.** The orbit is the one the maps were fitted with (Supplementary Table 1): period 1.27492503 days, inclination 87.96°, transit at 2459867.64265 BJD_TDB, circular. a/R* 3.796 follows from the fit's stellar mass and radius and planet mass. The rotation record assumes the planet is tidally locked. The planet is a sphere of radius ratio 0.122657 (NRS1).
 
 **Catalogue color.** #fbc95a, the temperature palette at the 2,762 K NRS1 day side of Mikal-Evans et al. (2023).
+
+**Lighting.** The planet is drawn lit by its star, as every planet with a map is: a sphere under the shared lighting bank. The shading is a display convention, not data; the map's colors are read against the legend where the disc is fully lit.
 
 ## Evidence
 

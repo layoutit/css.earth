@@ -26,7 +26,22 @@
       "falseColor": true,
       "science": {
         "kind": "disc-integrated-band-color",
-        "qualification": "Infrared false color of the whole disc from published flux densities (Best et al. (2021); McMahon et al. (2013), as compiled in Best, Liu, Magnier & Dupuy (2024), The UltracoolSheet v2.1 (Zenodo); zero points from the SVO Filter Profile Service, UltracoolSheet Main.csv, VHS J125601.92-125723.9 b: MKO K 14.55 +/- 0.12 (Best21), MKO H 15.777 +/- 0.016 (McMa13), MKO J 17.136 +/- 0.02 (McMa13); SVO MKO/NSFCam.K 638.2 Jy, MKO/NSFCam.H 1034.8 Jy, MKO/NSFCam.J 1544.0 Jy): red MKO K 2.184 µm, green MKO H 1.614 µm, blue MKO J 1.2417 µm, on one range shared with the bodies the record names. The planet is unresolved, so no map is implied. It glows with its own heat, so no lighting."
+        "qualification": "Infrared false color of the whole disc from published flux densities (Best et al. (2021); McMahon et al. (2013), as compiled in Best, Liu, Magnier & Dupuy (2024), The UltracoolSheet v2.1 (Zenodo); zero points from the SVO Filter Profile Service, UltracoolSheet Main.csv, VHS J125601.92-125723.9 b: MKO K 14.55 +/- 0.12 (Best21), MKO H 15.777 +/- 0.016 (McMa13), MKO J 17.136 +/- 0.02 (McMa13); SVO MKO/NSFCam.K 638.2 Jy, MKO/NSFCam.H 1034.8 Jy, MKO/NSFCam.J 1544.0 Jy): red MKO K 2.184 µm, green MKO H 1.614 µm, blue MKO J 1.2417 µm, on one range shared with the bodies the record names. The planet is unresolved, so no map is implied. It glows with its own heat, so no lighting. The disc is dimmed toward the limb by the quadratic law fitted to the MKO H intensity PICASO 4.1 (Batalha et al. 2019, ApJ 878, 70) computes from Sonora Diamondback cloudy (Morley et al. 2024, ApJ 975, 59; [M/H] +0.5, f_sed 1) model atmospheres at 1,116 K and log g 3.5, read between the models t1100g31f1_m+0.5_co1.0, t1100g100f1_m+0.5_co1.0, t1200g31f1_m+0.5_co1.0, t1200g100f1_m+0.5_co1.0 (u1 0.406, u2 0.000; the law fits each model's eight angles within 0.02% of the centre): a cloudy model, the one Petrus et al. (2024), ApJL 966, L11 fit to this planet, because no table reaches a planet this cold and nobody has resolved its disc.",
+        "limbDarkening": {
+          "law": "quadratic",
+          "path": "photometry/picaso-diamondback-h-quadratic.tsv",
+          "grid": {
+            "teffK": 1116,
+            "logg": 3.5,
+            "models": {}
+          },
+          "columns": {
+            "teff": "Teff",
+            "logg": "logg",
+            "u1": "a",
+            "u2": "b"
+          }
+        }
       }
     }
   ],
@@ -48,7 +63,7 @@
       },
       "limbMaterial": {
         "logicalSize": 496,
-        "composition": "transparent: the adopted source-radius opaque-sphere silhouette is the limb; no off-limb or radial-brightness source is selected",
+        "composition": "black alpha darkens the disc according to the selected limb-darkening law; transparent outside the silhouette",
         "sourceRadius": "measurements.json#radiusKm",
         "surfaceReplacement": false,
         "runtimeAlphaProcessing": false

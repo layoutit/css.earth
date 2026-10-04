@@ -22,9 +22,13 @@ export async function installStarry() {
   await mkdir(STARRY_ROOT, { recursive: true });
   runToolchainProcess('micromamba', ['create', '-y', '-q', '-p', prefix, '-c', requireString(mamba.channel, 'micromamba channel'),
     ...requireArray(mamba.packages, 'micromamba packages').map(value => requireString(value, 'micromamba package'))], { env: { MAMBA_ROOT_PREFIX: resolve(STARRY_ROOT, 'mamba') }, maxBuffer: 256 * 1024 * 1024 });
-  // The lock is version-pinned and complete; Theano-PyMC builds against the environment's NumPy.
-  runToolchainProcess(resolve(prefix, 'bin/python'), ['-m', 'pip', 'install', '--no-deps', '--no-build-isolation', '-q', '-r',
-    resolve(TOOLCHAINS, requireString(entry.requirements, 'requirements'))], { env: { PYTHONNOUSERSITE: '1' }, maxBuffer: 256 * 1024 * 1024 });
+  // The lock is version-pinned and complete; Theano-PyMC builds against the environment's NumPy. The packages built from their
+  // source releases go in a second pass: their build needs (setuptools-scm) are in the lock too, and pip prepares every package
+  // of one pass before it installs any.
+  const sourceBuilds = new Set(requireArray(entry.sourceBuilds, 'sourceBuilds').map(value => requireString(value, 'source build')));
+  const locked = readFileSync(resolve(TOOLCHAINS, requireString(entry.requirements, 'requirements')), 'utf8').split('\n').filter(line => line.trim() && !line.startsWith('#'));
+  for (const pass of [locked.filter(line => !sourceBuilds.has(line.split('==')[0]!)), locked.filter(line => sourceBuilds.has(line.split('==')[0]!))])
+    runToolchainProcess(resolve(prefix, 'bin/python'), ['-m', 'pip', 'install', '--no-deps', '--no-build-isolation', '-q', ...pass], { env: { PYTHONNOUSERSITE: '1' }, maxBuffer: 256 * 1024 * 1024 });
   await rm(resolve(STARRY_ROOT, 'mamba/pkgs'), { recursive: true, force: true });
   writeInstalledMarker(STARRY_ROOT, pins);
   verifyStarry();

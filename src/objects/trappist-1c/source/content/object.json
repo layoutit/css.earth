@@ -122,7 +122,7 @@
           "meta": "K",
           "sourceUrl": "https://mast.stsci.edu/search/ui/#/jwst/results?proposal_id=2304"
         },
-        "notes": "A model, not a map. Only c's dayside brightness is measured: an eclipse depth of 318 to 389 ppm at 15 µm. A bare rock with that depth is 392 to 421 K under the star and dark at night; whether c's night is dark is not measured, and a thin atmosphere would also fit."
+        "notes": "A model, not a map. Only c's dayside brightness is measured: an eclipse depth of 318 to 389 ppm at 15 µm. A bare rock with that depth is 392 to 421 K under the star and dark at night; whether c's night is dark is not measured, and a thin atmosphere would also fit. The shading is its star's light, a display convention: read the colors against the legend where the disc is lit."
       },
       {
         "id": "illustration",
@@ -137,13 +137,20 @@
           "url": "https://eyes.nasa.gov/apps/exo/"
         },
         "falseColor": false,
-        "notes": "NASA's artist's concept of TRAPPIST-1c: the map its Eyes on Exoplanets app wraps around the planet. Nobody has resolved this planet's disc, so none of the color, clouds or terrain in it was observed. Its longitudes are arbitrary."
+        "notes": "NASA's artist's concept of TRAPPIST-1c: the map its Eyes on Exoplanets app wraps around the planet. Nobody has resolved this planet's disc, so none of the color, clouds or terrain in it was observed. Its longitudes are arbitrary. The shading is its star's light, a display convention: read the colors against the legend where the disc is lit."
       }
     ]
   },
   "settings": {
     "titleKey": "settings",
-    "controls": []
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
   },
   "charts": [],
   "resources": [

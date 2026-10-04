@@ -13,6 +13,7 @@
         "panel-content",
         "datasets",
         "starfield",
+        "sky-sun",
         "scene",
         "controls",
         "presentation",
@@ -30,12 +31,12 @@
             {
               "id": "temperature",
               "source": "content",
-              "material": "emission"
+              "material": "lighting"
             },
             {
               "id": "miri",
               "source": "content",
-              "material": "emission"
+              "material": "lighting"
             }
           ]
         }
@@ -46,9 +47,9 @@
       },
       "materials": [
         {
-          "id": "emission",
+          "id": "lighting",
           "source": "raster",
-          "model": "emissive"
+          "model": "lit"
         }
       ],
       "sources": [
@@ -84,16 +85,12 @@
           "id": "acquisition",
           "path": "source/preparation/acquisition.json"
         }
-      ],
-      "emission": {
-        "source": "raster",
-        "material": "emission"
-      }
+      ]
     },
     "page": {
       "stylesheets": [
         "src/renderers/css/styles/body-surfaces.css",
-        "src/renderers/css/styles/wasp-43b-surfaces.css"
+        "src/renderers/css/styles/templates/composite-planet.css"
       ],
       "metadata": {
         "url": "prepared/page.json"

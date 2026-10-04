@@ -14,15 +14,25 @@ YSES 1 b orbits its young Sun-like star about 160 au out. GRAVITY positions and 
 
 **Its own light.** The planet is drawn self-luminous, as the other imaged planets are: its glow is its own heat.
 
-**Shape dataset.** A sphere of the model radius in the shared neutral gray ([ledger](investigations.json)).
+**Infrared color dataset.** The default dataset paints the sphere one false color from its measured flux in three infrared bands: red 2MASS Ks 2.159 µm (879 ± 110 µJy), green 2MASS H 1.662 µm (459.5 ± 160 µJy), blue 2MASS J 1.235 µm (813.7 ± 280 µJy) (Bohn et al. (2020a), as compiled in Best, Liu, Magnier & Dupuy (2024), The UltracoolSheet v2.1 (Zenodo); zero points from the SVO Filter Profile Service; [record](source/photometry/band-color.json)). Display range: this planet alone, from zero to its brightest band (2MASS Ks), so the color shows its band ratios; brightness is not compared across planets at different distances. Not a natural color; nobody has resolved its disc.
+
+**Limb.** The disc is dimmed toward the limb by the quadratic law Claret, Hauschildt & Witte (2012), A&A 546, A14 compute from PHOENIX model atmospheres for the H band at 1,727 K and log g 3.59 (u1 0.791, u2 -0.029): a model, not a measurement of this planet ([nodes](source/photometry/claret-2012-h-quadratic.tsv)). Its temperature is the 1,727 K of its measurements record; log g 3.59 follows from the mass and radius of its astronomy record (packages/astronomy/data/bodies/yses-1-b.json).
 
 **Rotation.** No rotation period or spin axis of YSES 1 b on the sky is measured; the papers cited in the README were checked. The display axis is the orbit normal ([rotation.json](source/preparation/rotation.json)).
 
 ## Evidence
 
-Run of 2026-09-23 (this version):
+Run of 2026-09-23:
 
 - [`hostedOrbits.test.ts`](../../../packages/astronomy/src/hostedOrbits.test.ts) places the planet, at its star's Gaia distance, against the measured positions (see the test for each miss).
+
+Run of 2026-10-04, when the limb law was added. The orbit test above still applies: the orbit record did not change.
+
+- The app's arrival pictures of the seven imaged planets hot enough for the published table, before and after their limb law:
+
+![Seven imaged planets, each a flat disc before and darkened toward the limb after: YSES 1 b, HIP 65426 b, Beta Pictoris b, AB Pictoris b, ROXs 42B b, DH Tauri b and GQ Lupi b](evidence/2026-10-04/limbs.jpg)
+
+- [`imaged-limb.test.mts`](../../../packages/telescope-cli/src/new-object/imaged/imaged-limb.test.mts) reads the published table's rows and checks the law between its nodes; [`stellar-photometric-color.test.mts`](../../../packages/bake/src/objects/stellar/stellar-photometric-color.test.mts) reads this planet's nodes and checks the plate darkens toward the limb.
 
 ## Known problems
 
@@ -31,5 +41,6 @@ Run of 2026-09-23 (this version):
 - The radius and mass are model values; the planet is a point in every image.
 - The dusty disc JWST found around the planet is not drawn.
 - The second planet, YSES 1 c, is not built (see the star's ledger).
+- **Model limb.** The limb darkening is a model atmosphere at the planet's temperature and gravity, in the middle band of its color, not a measurement of this planet.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

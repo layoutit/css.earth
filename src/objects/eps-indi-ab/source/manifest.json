@@ -104,28 +104,47 @@
           }
         ]
       }
+    },
+    {
+      "id": "eps-indi-ab-band-color",
+      "path": "photometry/band-color.json",
+      "origin": "https://arxiv.org/abs/2603.08787",
+      "credit": "Sanghi et al. (2026), arXiv:2603.08787, with the MIRI fluxes of Matthews et al. (2024), Nature 633, 789, Table 2, flux density in Jy: JWST/MIRI F1550C (5.25 +/- 0.16)e-4, JWST/MIRI F1065C (1.88 +/- 0.06)e-4, JWST/NIRCam F430M (8.4 +/- 0.4)e-5",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "Authored method record: the published flux densities transcribed with their bands and the shared display range",
+      "redistribution": "Method record only",
+      "consumers": [
+        "assets",
+        "datasets"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored color recipe transcribing the cited photometry; repinned when edited."
+      }
     }
   ],
   "generatedIntermediates": [
     {
-      "id": "neutral-disc-context-marker",
+      "id": "dataset-color-context-marker",
       "path": "presentation/context.png",
       "origin": "https://arxiv.org/abs/2603.08787",
-      "credit": "Sphere of the published radius; marker written by packages/telescope-cli/src/new-object/new-hosted-planet.mts",
+      "credit": "The default dataset's color as a disc; rendered by packages/telescope-cli/src/source-authoring/context-markers.mts",
       "license": "Project-authored display derivative.",
       "consumers": [
         "navigation"
       ],
       "recipe": {
-        "generator": "packages/telescope-cli/src/new-object/new-hosted-planet.mts",
+        "generator": "packages/telescope-cli/src/source-authoring/context-markers.mts",
         "inputs": [
-          "eps-indi-ab-observational-measurements"
+          "eps-indi-ab-observational-measurements",
+          "eps-indi-ab-preparation-raster",
+          "eps-indi-ab-band-color"
         ]
       },
-      "generator": "packages/telescope-cli/src/new-object/new-hosted-planet.mts",
+      "generator": "packages/telescope-cli/src/source-authoring/context-markers.mts",
       "sourceBinding": {
         "kind": "local",
-        "reason": "A flat neutral gray disc, the marker of an unresolved surface."
+        "reason": "The default dataset drawn as a disc; `context-markers.mts --check` recomputes it."
       }
     }
   ],

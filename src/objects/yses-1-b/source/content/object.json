@@ -54,7 +54,7 @@
       {
         "id": "infrared",
         "label": "Infrared color",
-        "qualification": "False color from its measured flux in three infrared bands (Bohn et al. (2020a), as compiled in Best, Liu, Magnier & Dupuy (2024), The UltracoolSheet v2.1 (Zenodo); zero points from the SVO Filter Profile Service). The disc itself is unresolved.",
+        "qualification": "False color from its measured flux in three infrared bands (Bohn et al. (2020a), as compiled in Best, Liu, Magnier & Dupuy (2024), The UltracoolSheet v2.1 (Zenodo); zero points from the SVO Filter Profile Service). The disc itself is unresolved; darkening toward the edge from a model atmosphere.",
         "thumbnail": "yses-1-b-dataset-infrared.webp",
         "surface": "yses-1-b-surface-infrared@2x.webp",
         "poles": "yses-1-b-poles-infrared@2x.webp",
@@ -64,7 +64,7 @@
           "url": "https://ui.adsabs.harvard.edu/abs/2020MNRAS.492..431B"
         },
         "falseColor": true,
-        "notes": "YSES 1 b's brightness in three infrared bands as one color: red 2MASS Ks 2.159 µm, green 2MASS H 1.662 µm, blue 2MASS J 1.235 µm (Bohn et al. (2020a), as compiled in Best, Liu, Magnier & Dupuy (2024), The UltracoolSheet v2.1 (Zenodo); zero points from the SVO Filter Profile Service), on a range shared with this planet alone, from zero to its brightest band (2mass ks), so the color shows its band ratios; brightness is not compared across planets at different distances. Not a natural color; nobody has resolved its disc."
+        "notes": "YSES 1 b's brightness in three infrared bands as one color: red 2MASS Ks 2.159 µm, green 2MASS H 1.662 µm, blue 2MASS J 1.235 µm (Bohn et al. (2020a), as compiled in Best, Liu, Magnier & Dupuy (2024), The UltracoolSheet v2.1 (Zenodo); zero points from the SVO Filter Profile Service), on a range shared with this planet alone, from zero to its brightest band (2mass ks), so the color shows its band ratios; brightness is not compared across planets at different distances. Not a natural color; nobody has resolved its disc. The darkening toward the edge is the quadratic law Claret, Hauschildt & Witte (2012), A&A 546, A14 compute from PHOENIX model atmospheres for the H band at 1,727 K and log g 3.59 (u1 0.791, u2 -0.029): a model, not a measurement of this planet."
       }
     ]
   },

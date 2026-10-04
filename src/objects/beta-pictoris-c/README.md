@@ -12,7 +12,7 @@ Beta Pictoris c is a giant planet 2.7 au from [Beta Pictoris](../beta-pictoris/R
 
 **Rotation.** Not measured; the display axis is the orbit normal and nothing turns.
 
-**Shape dataset.** A sphere of the model radius in the shared neutral gray, self-luminous.
+**Shape dataset.** A sphere of the model radius in the shared neutral gray, self-luminous. Only one band of the planet is measured, GRAVITY's K (m_K 14.3 ± 0.1, Nowak et al. [2020](https://arxiv.org/abs/2010.04442)); a false color needs three measured bands, so it stays gray.
 
 ## Evidence
 

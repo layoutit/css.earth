@@ -5,7 +5,8 @@
  * - a star: the photosphere color of its color dataset, dimmed toward the limb by the dataset's limb-darkening law (a uniform disc
  *   when it has none);
  * - a planet whose default dataset is one color (the neutral gray under its host's light, the black-body color of its measured day side,
- *   or the false color of its band photometry): a uniform disc of that color, as the dataset draws the sphere;
+ *   or the false color of its band photometry): a uniform disc of that color, as the dataset draws the sphere; a band color with
+ *   a limb law (an imaged planet's) is dimmed toward the limb by it, as a star is;
  * - a body whose default dataset is a map (a hosted planet, or a brown dwarf with a surface map): that map in an orthographic view
  *   centred on longitude 0 (a hosted planet's substellar point, as seen from its star), north up and east to the right, in the
  *   dataset's palette and range, with any borders the dataset draws.
@@ -22,7 +23,7 @@ import { pathToFileURL } from 'node:url';
 import sharp from 'sharp';
 import { hostLitGray, linearToSrgb, srgbToLinear } from '@cssearth/bake/objects/color';
 import { loadDiscBandColor } from '@cssearth/bake/objects/layers/observation';
-import { limbIntensity, loadStellarPhotometricColor } from '@cssearth/bake/objects/stellar';
+import { limbIntensity, loadGridLimbDarkening, loadStellarPhotometricColor } from '@cssearth/bake/objects/stellar';
 import { colorForValue, loadScienceSurface } from '@cssearth/bake/objects/raster';
 import { MISSING_COVERAGE_STYLES } from '@cssearth/bake/raster';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
@@ -113,6 +114,10 @@ async function flatDatasetColor(id: string, science: Record<string, unknown>, su
 async function markerFor(id: string) {
   const { science, source } = await defaultSurface(id);
   const flat = await flatDatasetColor(id, science, source);
+  if (flat && science.kind === 'disc-integrated-band-color' && science.limbDarkening !== undefined) {
+    const law = await loadGridLimbDarkening(path => readFile(resolve(objects, id, 'source', path)), science.limbDarkening, id);
+    return disc((x, y) => flat.map(value => Math.round(255 * linearToSrgb(srgbToLinear(value / 255) * Math.max(0, limbIntensity(Math.sqrt(Math.max(0, 1 - x * x - y * y)), law))))) as unknown as [number, number, number]);
+  }
   if (flat) return disc(() => flat);
   // A color dataset without a limb-darkening law (none measured) is drawn as the uniform disc it is on the sphere.
   return science.kind === 'stellar-photometric-color' ? starMarker(id, { requireLimbDarkening: science.limbDarkening !== undefined }) : planetMarker(id);

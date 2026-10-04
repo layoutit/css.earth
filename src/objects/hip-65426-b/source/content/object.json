@@ -54,7 +54,7 @@
       {
         "id": "infrared",
         "label": "Infrared color",
-        "qualification": "False color from its measured flux in three infrared bands (Chauvin et al. (2017); Cheetham et al. (2019), as compiled in Best, Liu, Magnier & Dupuy (2024), The UltracoolSheet v2.1 (Zenodo); zero points from the SVO Filter Profile Service). The disc itself is unresolved.",
+        "qualification": "False color from its measured flux in three infrared bands (Chauvin et al. (2017); Cheetham et al. (2019), as compiled in Best, Liu, Magnier & Dupuy (2024), The UltracoolSheet v2.1 (Zenodo); zero points from the SVO Filter Profile Service). The disc itself is unresolved; darkening toward the edge from a model atmosphere.",
         "thumbnail": "hip-65426-b-dataset-infrared.webp",
         "surface": "hip-65426-b-surface-infrared@2x.webp",
         "poles": "hip-65426-b-poles-infrared@2x.webp",
@@ -64,7 +64,7 @@
           "url": "https://ui.adsabs.harvard.edu/abs/2017A&A...605L...9C"
         },
         "falseColor": true,
-        "notes": "HIP 65426 b's brightness in three infrared bands as one color: red 2MASS Ks 2.159 µm, green 2MASS H 1.662 µm, blue 2MASS J 1.235 µm (Chauvin et al. (2017); Cheetham et al. (2019), as compiled in Best, Liu, Magnier & Dupuy (2024), The UltracoolSheet v2.1 (Zenodo); zero points from the SVO Filter Profile Service), on a range shared with this planet alone, from zero to its brightest band (2mass ks), so the color shows its band ratios; brightness is not compared across planets at different distances. Not a natural color; nobody has resolved its disc."
+        "notes": "HIP 65426 b's brightness in three infrared bands as one color: red 2MASS Ks 2.159 µm, green 2MASS H 1.662 µm, blue 2MASS J 1.235 µm (Chauvin et al. (2017); Cheetham et al. (2019), as compiled in Best, Liu, Magnier & Dupuy (2024), The UltracoolSheet v2.1 (Zenodo); zero points from the SVO Filter Profile Service), on a range shared with this planet alone, from zero to its brightest band (2mass ks), so the color shows its band ratios; brightness is not compared across planets at different distances. Not a natural color; nobody has resolved its disc. The darkening toward the edge is the quadratic law Claret, Hauschildt & Witte (2012), A&A 546, A14 compute from PHOENIX model atmospheres for the H band at 1,624 K and log g 4.19 (u1 0.848, u2 -0.116): a model, not a measurement of this planet."
       }
     ]
   },

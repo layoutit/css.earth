@@ -30,8 +30,7 @@ that interprets only the instructions numpy uses to store float arrays, never
 running code a file names.
 [npy-dictionary-map.ts](../../../packages/bake/src/objects/raster/numpy/npy-dictionary-map.ts)
 checks the grid and samples it bilinearly. Both datasets paint 700 to 2,000 K
-with the plasma palette, which is false color. The body is drawn emissive: the
-map is the planet's own heat glow.
+with the plasma palette, which is false color.
 
 The MIRI dataset is fitted during preparation by the `eclipse-map-fit` format
 ([eclipse-map-fit.ts](../../../packages/bake/src/objects/raster/eclipse-map/eclipse-map-fit.ts)),
@@ -48,6 +47,8 @@ assumed tidally locked, as the paper does. The default camera looks at the
 substellar point with the pole up. From a distance the planet is drawn as its
 NIRSpec dayside seen from the star, rendered by
 [author.mts](../../../packages/telescope-cli/authoring/wasp-43/author.mts).
+
+**Lighting.** The planet is drawn lit by its star, as every planet with a map is: a sphere under the shared lighting bank. The shading is a display convention, not data; the map's colors are read against the legend where the disc is fully lit.
 
 ## Evidence
 

@@ -120,7 +120,7 @@
       {
         "id": "infrared",
         "label": "Infrared color",
-        "qualification": "False color from its measured flux in three infrared bands (Males et al. (2014), as compiled in Best, Liu, Magnier & Dupuy (2024), The UltracoolSheet v2.1 (Zenodo); zero points from the SVO Filter Profile Service). The disc itself is unresolved.",
+        "qualification": "False color from its measured flux in three infrared bands (Males et al. (2014), as compiled in Best, Liu, Magnier & Dupuy (2024), The UltracoolSheet v2.1 (Zenodo); zero points from the SVO Filter Profile Service). The disc itself is unresolved; darkening toward the edge from a model atmosphere.",
         "thumbnail": "beta-pictoris-b-dataset-infrared.webp",
         "surface": "beta-pictoris-b-surface-infrared@2x.webp",
         "poles": "beta-pictoris-b-poles-infrared@2x.webp",
@@ -130,7 +130,7 @@
           "url": "https://ui.adsabs.harvard.edu/abs/2014ApJ...786...32M"
         },
         "falseColor": true,
-        "notes": "Beta Pictoris b's brightness in three infrared bands as one color: red MKO K 2.184 µm, green MKO H 1.614 µm, blue MKO J 1.2417 µm (Males et al. (2014), as compiled in Best, Liu, Magnier & Dupuy (2024), The UltracoolSheet v2.1 (Zenodo); zero points from the SVO Filter Profile Service), on a range shared with this planet alone, from zero to its brightest band (mko k), so the color shows its band ratios; brightness is not compared across planets at different distances. Not a natural color; nobody has resolved its disc."
+        "notes": "Beta Pictoris b's brightness in three infrared bands as one color: red MKO K 2.184 µm, green MKO H 1.614 µm, blue MKO J 1.2417 µm (Males et al. (2014), as compiled in Best, Liu, Magnier & Dupuy (2024), The UltracoolSheet v2.1 (Zenodo); zero points from the SVO Filter Profile Service), on a range shared with this planet alone, from zero to its brightest band (mko k), so the color shows its band ratios; brightness is not compared across planets at different distances. Not a natural color; nobody has resolved its disc. The darkening toward the edge is the quadratic law Claret, Hauschildt & Witte (2012), A&A 546, A14 compute from PHOENIX model atmospheres for the H band at 1,742 K and log g 4.15 (u1 0.803, u2 -0.050): a model, not a measurement of this planet."
       }
     ]
   },

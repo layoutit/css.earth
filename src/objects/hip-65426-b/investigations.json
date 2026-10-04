@@ -5,11 +5,21 @@
     {
       "id": "band-color",
       "subject": "A false color from three measured bands, as the HR 8799 planets have",
-      "status": "unresolved",
-      "finding": "Carter et al. (2023) measured this planet in seven JWST filters: NIRCam F250M, F300M, F356W, F410M and F444W, and MIRI F1140C and F1550C. Only F410M is among the F410M, F430M and F460M that color HR 8799's planets, so no comparable three-band color exists and the planet is the shared neutral gray.",
+      "status": "included",
+      "finding": "Shown in infrared false color from its measured flux in 2MASS Ks 2.159 µm, 2MASS H 1.662 µm, 2MASS J 1.235 µm (Chauvin et al. (2017); Cheetham et al. (2019), as compiled in Best, Liu, Magnier & Dupuy (2024), The UltracoolSheet v2.1 (Zenodo); zero points from the SVO Filter Profile Service). Carter et al. (2023) measured this planet in seven JWST filters: NIRCam F250M, F300M, F356W, F410M and F444W, and MIRI F1140C and F1550C. Only F410M is among the F410M, F430M and F460M that color HR 8799's planets, so its color is from ground-based J, H and K photometry on its own range, not compared with theirs.",
       "revisitWhen": "Flux densities in three bands comparable with HR 8799's are published.",
       "evidence": [
-        "https://arxiv.org/abs/2208.14990"
+        "https://arxiv.org/abs/2208.14990",
+        "https://ui.adsabs.harvard.edu/abs/2017A&A...605L...9C"
+      ]
+    },
+    {
+      "id": "limb-darkening",
+      "subject": "Limb darkening",
+      "status": "included",
+      "finding": "The disc is dimmed toward the limb by the quadratic law Claret, Hauschildt & Witte (2012), A&A 546, A14 compute from PHOENIX model atmospheres for the H band at 1,624 K and log g 4.19 (u1 0.848, u2 -0.116): a model, not a measurement of this planet. Its temperature is the 1,624 K of its measurements record; log g 4.19 follows from the mass and radius of its astronomy record (packages/astronomy/data/bodies/hip-65426-b.json).",
+      "evidence": [
+        "https://cdsarc.cds.unistra.fr/ftp/J/A+A/546/A14/tableab.dat"
       ]
     }
   ]

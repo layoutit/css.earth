@@ -12,7 +12,9 @@ HD 206893 B is a dusty brown dwarf 11 au from its star. Small wobbles in its mot
 
 **Its own light.** It is drawn self-luminous, as the other imaged companions are: its glow is its own heat.
 
-**Shape dataset.** A sphere of the model radius in the shared neutral gray ([ledger](investigations.json)).
+**Infrared color dataset.** The default dataset paints the sphere one false color from its measured flux in three infrared bands: red MKO K 2.184 µm (626.5 ± 40 µJy), green MKO H 1.614 µm (193.6 ± 5.3 µJy), blue MKO J 1.2417 µm (68.65 ± 1.9 µJy) (Ward et al. (2021), as compiled in Best, Liu, Magnier & Dupuy (2024), The UltracoolSheet v2.1 (Zenodo); zero points from the SVO Filter Profile Service; [record](source/photometry/band-color.json)). Display range: this planet alone, from zero to its brightest band (MKO K), so the color shows its band ratios; brightness is not compared across planets at different distances. Not a natural color; nobody has resolved its disc.
+
+**Limb.** No limb darkening is drawn: at 1,162 K it is outside the 1,500 to 4,800 K of the models Claret, Hauschildt & Witte (2012), A&A 546, A14 tabulate; and no paper's fit of a cloudy model grid is recorded for it (source/photometry/atmosphere-fit.json).
 
 **Rotation.** No rotation period or spin axis of HD 206893 B on the sky is measured; the papers cited in the README were checked. The display axis is the orbit normal ([rotation.json](source/preparation/rotation.json)).
 

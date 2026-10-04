@@ -48,7 +48,7 @@
   "bodyRotationDegrees": 0,
   "output": {
     "schema": "csstrappist-1b-prepared-runtime-scene@1",
-    "materialSchema": "csstrappist-1b-prepared-emission@1",
+    "materialSchema": "csstrappist-1b-prepared-lighting@1",
     "layout": "body-container",
     "body": {
       "axialTiltDegrees": 0,

@@ -14,15 +14,25 @@ PDS 70 b is a gas giant still forming inside the gap of [PDS 70](../pds-70/READM
 
 **Its own light.** The planet is drawn self-luminous, as the other imaged planets are: its glow is its own heat.
 
-**Shape dataset.** A sphere of the model radius in the shared neutral gray: the planet is a point in every image, and no color of it in comparable bands is measured.
+**Infrared color dataset.** The default dataset paints the sphere one false color from its measured flux in three infrared bands: red NACO L′ 3.77 µm (329.3 ± 73 µJy), green SPHERE K1 2.102 µm (148.5 ± 5.5 µJy), blue SPHERE H3 1.666 µm (63.72 ± 11 µJy) (Stolker et al. (2020), A&A 644, A13; zero points from the SVO Filter Profile Service; [record](source/photometry/band-color.json)). Display range: this planet alone, from zero to its brightest band (NACO L′), so the color shows its band ratios; brightness is not compared across planets at different distances. Not a natural color; nobody has resolved its disc.
+
+**Limb.** No limb darkening is drawn: at 1,392 K it is outside the 1,500 to 4,800 K of the models Claret, Hauschildt & Witte (2012), A&A 546, A14 tabulate; and no paper's fit of a cloudy model grid is recorded for it (source/photometry/atmosphere-fit.json).
 
 **Rotation.** None measured. The display axis is the orbit normal ([rotation.json](source/preparation/rotation.json)).
 
 ## Evidence
 
-Run of 2026-09-23 (this version):
+Run of 2026-09-23:
 
 - [`hostedOrbits.test.ts`](../../../packages/astronomy/src/hostedOrbits.test.ts) checks the GRAVITY positions, the near side and the direction of motion (above); the astronomy package's 857 tests pass.
+
+Run of 2026-10-04, when the color was added. The orbit test above still applies: the orbit record did not change.
+
+- The app's arrival pictures of five imaged planets that were gray spheres, before and after their infrared color from printed photometry:
+
+![PDS 70 b, HD 95086 b, Epsilon Indi Ab, HD 135344 Ab and Beta Pictoris d, each gray before and in its infrared false color after](evidence/2026-10-04/colors.jpg)
+
+- Each magnitude or flux is a printed table value, read in the paper and recorded with its table in [the color record](source/photometry/band-color.json); PDS 70 b's L′ flux from its magnitude and the SVO zero point, 329 µJy, agrees within 5% with the 7.21e-17 W m⁻² µm⁻¹ the paper prints.
 
 ## Known problems
 

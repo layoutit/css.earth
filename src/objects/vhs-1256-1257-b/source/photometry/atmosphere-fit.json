@@ -1,0 +1,13 @@
+{
+  "schema": "cssearth-atmosphere-grid-fit@1",
+  "grid": "sonora-diamondback",
+  "teffK": 1116,
+  "logg": 3.5,
+  "metallicity": 0.5,
+  "fsed": 1,
+  "source": {
+    "citation": "Petrus et al. (2024), ApJL 966, L11",
+    "url": "https://arxiv.org/abs/2312.03852",
+    "locator": "Table 4, Sonora, full spectrum: Teff 1116 +/- 1, log(g) < 3.50, [M/H] > 0.50, f_sed 1.01 +/- 0.01; the two limits are the grid's edges, and f_sed is read at the grid's 1"
+  }
+}

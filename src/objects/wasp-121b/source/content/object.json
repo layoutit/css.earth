@@ -114,7 +114,7 @@
           "meta": "K",
           "sourceUrl": "https://arxiv.org/abs/2506.01771"
         },
-        "notes": "Brightness temperature over the 2.7–3.7 µm band, from the simple map the paper fits to the whole orbit: hottest just east of the point under the star.",
+        "notes": "Brightness temperature over the 2.7–3.7 µm band, from the simple map the paper fits to the whole orbit: hottest just east of the point under the star. The shading is its star's light, a display convention: read the colors against the legend where the disc is lit.",
         "legendNote": "Gray: where the fitted map dips below zero, so it gives no temperature."
       },
       {
@@ -180,14 +180,21 @@
           "meta": "K",
           "sourceUrl": "https://arxiv.org/abs/2506.01771"
         },
-        "notes": "Brightness temperature over the 3.8–5.2 µm band, from the simple map the paper fits to the whole orbit: hottest just east of the point under the star.",
+        "notes": "Brightness temperature over the 3.8–5.2 µm band, from the simple map the paper fits to the whole orbit: hottest just east of the point under the star. The shading is its star's light, a display convention: read the colors against the legend where the disc is lit.",
         "legendNote": "Gray: where the fitted map dips below zero, so it gives no temperature."
       }
     ]
   },
   "settings": {
     "titleKey": "settings",
-    "controls": []
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
   },
   "charts": [],
   "resources": [

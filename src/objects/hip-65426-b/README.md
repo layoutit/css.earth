@@ -12,7 +12,9 @@ HIP 65426 b is a young giant planet about 90 au from its star. JWST imaged it fr
 
 **Its own light.** The planet is drawn self-luminous, as the other imaged planets are: its glow is its own heat.
 
-**Shape dataset.** A sphere of the model radius in the shared neutral gray ([ledger](investigations.json)).
+**Infrared color dataset.** The default dataset paints the sphere one false color from its measured flux in three infrared bands: red 2MASS Ks 2.159 µm (115.9 ± 6.4 µJy), green 2MASS H 1.662 µm (78.4 ± 2.9 µJy), blue 2MASS J 1.235 µm (25.26 ± 9.8 µJy) (Chauvin et al. (2017); Cheetham et al. (2019), as compiled in Best, Liu, Magnier & Dupuy (2024), The UltracoolSheet v2.1 (Zenodo); zero points from the SVO Filter Profile Service; [record](source/photometry/band-color.json)). Display range: this planet alone, from zero to its brightest band (2MASS Ks), so the color shows its band ratios; brightness is not compared across planets at different distances. Not a natural color; nobody has resolved its disc.
+
+**Limb.** The disc is dimmed toward the limb by the quadratic law Claret, Hauschildt & Witte (2012), A&A 546, A14 compute from PHOENIX model atmospheres for the H band at 1,624 K and log g 4.19 (u1 0.848, u2 -0.116): a model, not a measurement of this planet ([nodes](source/photometry/claret-2012-h-quadratic.tsv)). Its temperature is the 1,624 K of its measurements record; log g 4.19 follows from the mass and radius of its astronomy record (packages/astronomy/data/bodies/hip-65426-b.json).
 
 **Rotation.** No rotation period or spin axis of HIP 65426 b is measured; the papers cited in the README were checked. The display axis is the orbit normal ([rotation.json](source/preparation/rotation.json)).
 
@@ -26,5 +28,6 @@ Run of 2026-09-23 (this version):
 
 - The radius and mass are model values; the planet is a point in every image.
 - The posterior holds 1,000 samples, so the orbit kept is the best of those, not a refined maximum.
+- **Model limb.** The limb darkening is a model atmosphere at the planet's temperature and gravity, in the middle band of its color, not a measurement of this planet.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

@@ -9,6 +9,8 @@
  *   node packages/telescope-cli/src/new-object/new-object-cli.mts --rename <star id>...
  *   node packages/telescope-cli/src/new-object/new-object-cli.mts --retext <host id>... | --charts <host id>... | --retime <host id>...
  *   node packages/telescope-cli/src/new-object/new-object-cli.mts --star-limb <id>... [--bake]
+ *   node packages/telescope-cli/src/new-object/new-object-cli.mts --imaged-limb <id>...
+ *   node packages/telescope-cli/src/new-object/new-object-cli.mts --star-lit <id>...
  *   node packages/telescope-cli/src/new-object/new-object-cli.mts --draft-photometry <id>[="name in the sheet"]... --out entries.json
  *
  * generates complete packages from a star spec (new-object/spec.mts): Gaia DR3 placement, the color dataset from the best archived
@@ -120,6 +122,16 @@ if (process.argv[1] && import.meta.url === pathToFileURL(realpathSync(process.ar
     // Color for planets already in the tree, from what is measured: `--thermal ID...` or `--host-light ID...` (new-object/planet-datasets.mts).
     const mode = args.includes('--thermal') ? 'thermal' : args.includes('--expected-glow') ? 'expected-glow' : 'host-light', { rebuildExistingDatasets } = await import('./planet-datasets.mts'), { liveArchive } = await import('./archives/archives.mts');
     const lines = await rebuildExistingDatasets(checkoutProjectRoot(import.meta.url), args.filter(argument => !argument.startsWith('--')), mode, liveArchive, line => process.stdout.write(`${line}\n`));
+    process.stdout.write(`${lines.length} planet(s) considered. Bake the changed ones: node packages/bake/cli/prepare-object.mts <id>...\n`);
+  } else if (args.includes('--star-lit') && !specPath) {
+    // A planet with a map that was built self-luminous, redrawn lit by its star as every other one is: `--star-lit ID...` (new-object/map/star-lit.mts).
+    const { addStarLight } = await import('./map/star-lit.mts'), ids = args.filter(argument => !argument.startsWith('--'));
+    const lines = await addStarLight(checkoutProjectRoot(import.meta.url), ids, line => process.stdout.write(`${line}\n`));
+    process.stdout.write(`${lines.length} planet(s) considered. Bake the changed ones: node packages/bake/cli/prepare-object.mts <id>...\n`);
+  } else if (args.includes('--imaged-limb') && !specPath) {
+    // Limb darkening for imaged planets with an infrared color, from a model grid in a band of that color: `--imaged-limb ID...` (new-object/imaged/imaged-limb.mts).
+    const { addImagedLimbs } = await import('./imaged/imaged-limb.mts'), { liveArchive } = await import('./archives/archives.mts'), ids = args.filter(argument => !argument.startsWith('--'));
+    const lines = await addImagedLimbs(checkoutProjectRoot(import.meta.url), ids, liveArchive, line => process.stdout.write(`${line}\n`));
     process.stdout.write(`${lines.length} planet(s) considered. Bake the changed ones: node packages/bake/cli/prepare-object.mts <id>...\n`);
   } else if (args.includes('--star-limb') && !specPath) {
     // Limb darkening for stars already in the tree, hand-made packages included: `--star-limb ID... [--bake]` (new-object/star-limb.mts).

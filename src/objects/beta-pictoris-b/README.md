@@ -12,11 +12,15 @@ Beta Pictoris b is a super-Jupiter about 10 au from [Beta Pictoris](../beta-pict
 
 **Radius and mass.** 1.45 ± 0.02 Jupiter radii from hot-start evolutionary tracks at the measured bolometric luminosity (Morzinski et al. 2015): a model radius, the planet is unresolved. Mass 11.90 +2.93/−3.04 Jupiter masses, dynamical (Lacour et al. 2021).
 
+**Its own light.** The planet is drawn self-luminous (1,742 K, GRAVITY Collaboration 2020): its glow is its own heat.
+
+**Infrared color dataset.** The default dataset paints the sphere one false color from its measured flux in three infrared bands: red MKO K 2.184 µm (6807 ± 440 µJy), green MKO H 1.614 µm (4953 ± 500 µJy), blue MKO J 1.2417 µm (3738 ± 720 µJy) (Males et al. (2014), as compiled in Best, Liu, Magnier & Dupuy (2024), The UltracoolSheet v2.1 (Zenodo); zero points from the SVO Filter Profile Service; [record](source/photometry/band-color.json)). Display range: this planet alone, from zero to its brightest band (MKO K), so the color shows its band ratios; brightness is not compared across planets at different distances. Not a natural color; nobody has resolved its disc.
+
+**Limb.** The disc is dimmed toward the limb by the quadratic law Claret, Hauschildt & Witte (2012), A&A 546, A14 compute from PHOENIX model atmospheres for the H band at 1,742 K and log g 4.15 (u1 0.803, u2 -0.050): a model, not a measurement of this planet ([nodes](source/photometry/claret-2012-h-quadratic.tsv)). Its temperature is the 1,742 K of its measurements record; log g 4.15 follows from the mass and radius of its astronomy record (packages/astronomy/data/bodies/beta-pictoris-b.json).
+
 **Rotation.** A 9.00 ± 0.13 hour period from JWST/NIRCam photometry of the planet over 16.2 hours in F210M and F410M (Zhou et al. 2026, [arXiv:2607.13133](https://arxiv.org/abs/2607.13133), programme 4758): the sphere turns at 960° per day about its orbit normal. Zhou et al. find the spin axis near equator-on with no sign of misalignment from the orbit; the axis's direction on the sky and the spin sense are not measured, and the prime meridian is arbitrary.
 
 **Radio.** Ortiz Ceballos, Berger and Cendes (2026, [arXiv:2609.16720](https://arxiv.org/abs/2609.16720)): rapid, recurring bursts 40–70% circularly polarised, and persistent emission, at 0.856 to 3.5 GHz over four MeerKAT epochs (15 February and 31 May 2025, 20 February and 2 May 2026); brightest burst 307 µJy, quiescent S-band 48 µJy. The source coincides with planet b against nine Gaia quasars and a VLBI calibrator and is 4.4σ from the star. As electron cyclotron maser emission, the highest frequency implies a field of at least 1.25 kG. The radio source is unresolved: these are facts in the panel, not a picture on the sphere.
-
-**Shape dataset.** A sphere of the model radius in the shared neutral gray, self-luminous (1,742 K, GRAVITY Collaboration 2020): no image or visible color of the planet exists.
 
 ## Evidence
 
@@ -33,5 +37,6 @@ Run of 2026-09-22 (this version):
 - The period is derived, not printed by the paper; its uncertainty follows the masses.
 - The spin axis is taken on the orbit normal; its direction on the sky is not measured.
 - Orbit elements are posterior medians, which reproduce the data but are not a single self-consistent sample.
+- **Model limb.** The limb darkening is a model atmosphere at the planet's temperature and gravity, in the middle band of its color, not a measurement of this planet.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
