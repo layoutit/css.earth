@@ -6,6 +6,8 @@ import { radialModelForDataset } from '../alternative-datasets.ts';
 import { renderRadialSnapshot } from '../radial-snapshot.ts';
 import { SHAPE_MATERIAL, shapeMaterialRaster } from '../shape-material.ts';
 import { lambertAttenuationAtlas, type LambertAttenuationParameters, requireTerrainMesh } from '../../../geometry/index.ts';
+import { limbSphereFrame, loadLimbLaw, meanObservedColor } from '../../../../photometry/index.ts';
+import type { LimbBlock } from '@cssearth/objects';
 import type { WebpOptions } from 'sharp';
 import { writeLossyWebp, paintMissingCoverage, applyUnderlay } from '../../../../raster/index.ts';
 import type { createSourceManifest } from '@cssearth/objects/node';
@@ -13,13 +15,38 @@ import type { RadialState, SolidSurface } from './solid-contract.ts';
 import { encodeBandColor, interpolatePalette } from '../../../color/index.ts';
 import { shape, text, number, requireRecord, requireString } from '@cssearth/core';
 import { mkdir, writeFile } from 'node:fs/promises';
-import { resolve } from 'node:path';
+import { basename, resolve } from 'node:path';
 import sharp from 'sharp';
 import { packProjectiveSurfaceRaster, reprojectSolidBodySurfaceRaster, prepareSolidBodyPoleRaster } from '../../../../scene/index.ts';
 import { loadSurfaceObservation } from '../surface-observations/observations.ts';
+/** Lighting frames of a sphere: the lane's authored law, or the body's published photometric models. */
+type SolidLighting = {frameSize: number; columns: number; frameCount: number; logicalSize: number} &
+  (Omit<LambertAttenuationParameters, 'frameSize' | 'columns' | 'frameCount'> | {limb: LimbBlock});
 interface SolidMaterialConfig {
   namespace: string; publicBase: string; raster: SolidRasterGrid;
-  lighting: LambertAttenuationParameters & {logicalSize: number};
+  lighting: SolidLighting; presentation?: {defaultDataset: string};
+}
+
+/**
+ * The lighting atlas of a sphere lit by its published models: one view-aligned frame per Sun direction, in the authored
+ * atlas's layout and Sun order, each the law relative to the flood-lit disc centre (packages/bake/src/photometry/limb.ts).
+ * The overlay's reference color is the mean observed color of the block's image, or of the default dataset's prepared surface.
+ */
+async function publishedLightingAtlas({ lighting, surfaces, config, sourceDirectory, publicDirectory }: {lighting: SolidLighting & {limb: LimbBlock}; surfaces: SolidSurface[];
+  config: SolidMaterialConfig; sourceDirectory: string | undefined; publicDirectory: string}) {
+  if (sourceDirectory === undefined) throw new TypeError(`${config.namespace}: lighting.limb needs the source directory that holds its model records.`);
+  const law = await loadLimbLaw(sourceDirectory, lighting.limb.models);
+  const surface = surfaces.find(candidate => candidate.id === config.presentation?.defaultDataset) ?? surfaces[0];
+  if (lighting.limb.reference === undefined && !surface) throw new TypeError(`${config.namespace}: lighting.limb names no reference image and no surface is prepared to take one from.`);
+  const reference = await meanObservedColor(lighting.limb.reference === undefined ? resolve(publicDirectory, basename(surface!.surface.url)) : resolve(sourceDirectory, lighting.limb.reference));
+  const { frameSize, columns, frameCount } = lighting, rows = frameCount / columns, width = frameSize * columns, height = frameSize * rows;
+  const pixels = Buffer.alloc(width * height * 4);
+  for (let frame = 0; frame < frameCount; frame++) {
+    const z = -1 + 2 * frame / (frameCount - 1), image = limbSphereFrame(frameSize, 0.5, [Math.sqrt(Math.max(0, 1 - z * z)), 0, z], law, reference, 1);
+    const left = frame % columns * frameSize, top = Math.floor(frame / columns) * frameSize;
+    for (let y = 0; y < frameSize; y++) pixels.set(image.subarray(y * frameSize * 4, (y + 1) * frameSize * 4), ((top + y) * width + left) * 4);
+  }
+  return { pixels, width, height, rows };
 }
 
 // Terminal display encoding only, in the lossy lane (no quality: see createRasterEmitter). Source maps stay lossless for
@@ -244,18 +271,30 @@ export async function prepareSolidSurfacePoles({ surfaces, publicDirectory, conf
   }
 }
 
-export async function prepareSolidMaterial({ surfaces, publicDirectory, outputDirectory, config, radial = false }: {surfaces: SolidSurface[]; publicDirectory: string; outputDirectory: string; config: SolidMaterialConfig; radial?: boolean}) {
+export async function prepareSolidMaterial({ surfaces, sourceDirectory, publicDirectory, outputDirectory, config, radial = false }: {surfaces: SolidSurface[]; sourceDirectory?: string; publicDirectory: string; outputDirectory: string; config: SolidMaterialConfig; radial?: boolean}) {
   await prepareSolidSurfacePoles({ surfaces, publicDirectory, config, radial });
+  const { lighting } = config;
   // A radial body's triangle atlases carry their own baked lighting, and its presentation draws no lighting frames.
-  if (radial) return { surfaces, lighting: null };
-  const { pixels, width, height, rows } = lambertAttenuationAtlas(config.lighting);
+  if (radial) {
+    if ('limb' in lighting) throw new TypeError(`${config.namespace}: source/preparation/terrestrial.json lighting.limb names published models, but a shape-model body bakes its lighting into its mesh atlases and draws no lighting frames.`);
+    return { surfaces, lighting: null };
+  }
+  const material = { surfaces, lighting: await prepareSolidLighting({ surfaces, sourceDirectory, publicDirectory, config }) };
+  await writeFile(resolve(outputDirectory, 'material.json'), `${JSON.stringify(material)}\n`);
+  return material;
+}
+
+/** Bake a sphere's lighting atlas, `<namespace>-lighting.webp`, and describe its frames. Nothing else of the body is read
+ * but the reference image of a published law, so a change of the lighting recipe alone can rebake it
+ * (packages/bake/cli/refresh-sphere-lighting.mts). */
+export async function prepareSolidLighting({ surfaces, sourceDirectory, publicDirectory, config }: {surfaces: SolidSurface[]; sourceDirectory?: string; publicDirectory: string; config: SolidMaterialConfig}) {
+  const { lighting } = config;
+  const { pixels, width, height, rows } = 'limb' in lighting ? await publishedLightingAtlas({ lighting, surfaces, config, sourceDirectory, publicDirectory }) : lambertAttenuationAtlas(lighting);
   const filename = `${config.namespace}-lighting.webp`, url = `${config.publicBase}${filename}`;
   await sharp(pixels, { raw: { width, height, channels: 4 } }).webp({ lossless: true, quality: 100, effort: 6 }).toFile(resolve(publicDirectory, filename));
-  const { columns, frameCount, logicalSize } = config.lighting;
+  const { columns, frameCount, logicalSize } = lighting;
   const frames = Array.from({ length: frameCount }, (_, frame) => ({ resource: 'lighting', frame, row: 0,
     backgroundPosition: `${-(frame % columns) * logicalSize}px ${-Math.floor(frame / columns) * logicalSize}px`,
     backgroundSize: `${columns * logicalSize}px ${rows * logicalSize}px` }));
-  const material = { surfaces, lighting: { url, columns, rowCount: rows, frameCount, frames } };
-  await writeFile(resolve(outputDirectory, 'material.json'), `${JSON.stringify(material)}\n`);
-  return material;
+  return { url, columns, rowCount: rows, frameCount, frames };
 }

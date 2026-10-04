@@ -1647,6 +1647,36 @@
       "path": "science/mura-2024/table3-m-band.json",
       "origin": "https://www.frontiersin.org/journals/astronomy-and-space-sciences/articles/10.3389/fspas.2024.1369472/full",
       "purpose": "Mura et al. (2024) Table 3 M-band hot-spot outputs with Table 2 positions (CC BY 4.0), transcribed from the article. Not drawn: kept to compare the Volcanic heat map against them."
+    },
+    {
+      "path": "photometry/usgs-io-mosaic-lunar-lambert.json",
+      "purpose": "Lunar-Lambert limb-darkening correction USGS applied to its Io mosaics, used to light the globe.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-io-usgs-normal-global-1km",
+            "role": "method",
+            "evidence": "The mosaic's USGS process description says the images were calibrated and map projected in ISIS 2 and that a Lunar-Lambert limb-darkening correction was next performed, after having first determined that a coefficient of 0.7 was adequate for all three colors. ISIS's LunarLambert function, (1 - L) mu0 + 2 L mu0/(mu0 + mu), is the record's form, so the weight is 0.7. No phase function is printed, so the record has none. The page states no emission range.",
+            "locator": "Process Description"
+          },
+          {
+            "catalogueId": "usgs-sim-3168",
+            "role": "reference",
+            "evidence": "The pamphlet of the geologic map says the baseline color mosaic used frames at a consistent phase angle of 3.5 to 4.5 degrees from orbits G2, C9, C21 and I31, the record's fitted phase range, and that bright or dark pixels too near the limb were removed by hand.",
+            "locator": "Pamphlet, Data"
+          },
+          {
+            "catalogueId": "pds-opus-go-ssi-c0359986578",
+            "role": "reference",
+            "evidence": "The fitted emission limit, 87.0 degrees, is derived here, not printed: it is the emission angle at the outermost pixel centre of the finest full-disc Galileo SSI frame of Io at 3.5 to 4.5 degrees phase, the orbit G2 green frame C0359986578, on a 1821.49 km sphere, arcsin((R - 0.5 pixel)/R). The PDS Ring-Moon Systems Node lists its centre resolution as 4.94323 km per pixel; the orbit C21 frames at that phase are finer but each holds only part of the disc.",
+            "locator": "Io Surface Geometry Constraints, centerresolution"
+          }
+        ]
+      },
+      "origin": "https://astrogeology.usgs.gov/search/map/io_voyager_galileo_ssi_global_mosaic_1km",
+      "credit": "Limb-darkening coefficient: USGS Astrogeology Science Center (Becker and Geissler, 2005). Transcription and emission limit: cssEarth.",
+      "acquisition": "Coefficient transcribed from the product's process description into a project document; the emission limit is computed from the image scale the PDS Ring-Moon Systems Node lists; no data file was downloaded."
     }
   ]
 }

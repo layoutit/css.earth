@@ -1,0 +1,44 @@
+{
+  "id": "doi-10-1016-j-icarus-2021-114803",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Saturn's icy satellites investigated by Cassini - VIMS. V. Spectrophotometry",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.1016/j.icarus.2021.114803"
+    },
+    {
+      "type": "arXiv",
+      "value": "2111.15541"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1016/j.icarus.2021.114803",
+      "label": "Publication"
+    },
+    {
+      "role": "mirror",
+      "url": "https://arxiv.org/abs/2111.15541",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/rhea/source/manifest.json",
+      "locator": "/documents/20"
+    },
+    {
+      "path": "src/objects/dione/source/manifest.json",
+      "locator": "/documents/24"
+    },
+    {
+      "path": "src/objects/enceladus/source/manifest.json",
+      "locator": "/documents/34"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

@@ -34,6 +34,10 @@ test('records refuse unknown keys, impossible parameters and malformed ranges', 
   assert.deepEqual(parsePhotometricModelRecord({ ...hapkeRecord, model: { family: 'separable', disk: lines } }).model, { family: 'separable', disk: lines });
   assert.throws(() => parsePhotometricModelRecord({ ...hapkeRecord, model: { family: 'separable', disk: { ...lines, weight: 0.5 } } }), /unknown keys: weight/);
   assert.throws(() => parsePhotometricModelRecord({ ...hapkeRecord, model: { family: 'separable', disk: { ...lines, surfacePhasePerDegree: undefined } } }), /surface phase function per degree/);
+  const curve = { family: 'quadratic', constant: 0.610461, perDegree: -0.00352956, perDegreeSquared: -1.0071e-06, heldBeyondDegrees: 120 };
+  assert.deepEqual(parsePhotometricModelRecord({ ...hapkeRecord, model: { family: 'separable', disk: { family: 'akimov' }, phase: curve } }).model, { family: 'separable', disk: { family: 'akimov' }, phase: curve });
+  assert.throws(() => parsePhotometricModelRecord({ ...hapkeRecord, model: { family: 'separable', disk: { family: 'akimov', weight: 1 } } }), /unknown keys: weight/);
+  assert.throws(() => parsePhotometricModelRecord({ ...hapkeRecord, model: { family: 'separable', disk: { family: 'akimov' }, phase: { ...curve, heldBeyondDegrees: undefined } } }), /phase held beyond/);
 });
 
 test('a recipe block names its record, keeps the reference inside the fitted phase, and reports phase extrapolation', () => {

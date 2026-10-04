@@ -18,6 +18,8 @@
 
 Elevation and relative albedo come from [Weirich, Gaskell, Palmer and Domingue (2025), Rhea SPC Shape Models and Assessment Products V1.0](https://sbn.psi.edu/pds/resource/weirichrheashape.html), NASA PDS. Source selections, trials and open questions are in the [investigation ledger](investigations.json).
 
+- **Lighting:** the Akimov law [Filacchione et al. (2022)](https://doi.org/10.1016/j.icarus.2021.114803) fitted to Cassini VIMS spectra of Rhea. See [Lighting law](#lighting-law).
+
 ## Processing
 
 **Monochrome.** The pinned `Rhea_Cassini_Voyager_mosaic_global_417m.tif` is 11520 × 5760 on a 764.1 km sphere and includes the March 2012 Cassini flyby; six Voyager images cover the north pole. The catalog download link wrongly points to the older 833 m Voyager map. The GeoTIFF's left edge is 180° E, and preparation rolls it by the actual origin without mirroring. Exactly zero is no-data and gets the gray grid.
@@ -36,6 +38,12 @@ Both photographs are sampled from their original grids with a 2 × 2 footprint i
 
 Rings are not rendered: the debris disk inferred by [Jones et al. 2008](https://doi.org/10.1126/science.1151524) was not found by the Cassini imaging search of [Tiscareno et al. 2010](https://doi.org/10.1029/2010GL043663). The very tenuous exosphere gets no halo.
 
+## Lighting law
+
+The globe is lit with the law [Filacchione et al. (2022)](https://doi.org/10.1016/j.icarus.2021.114803) fitted to Cassini VIMS spectra of Rhea: I/F = D(i, e, g) F(g), with Akimov's disk function D and a quadratic phase curve F = a0 + a1 g + a2 g². The coefficients are the 0.55 µm row of its Table 6, the wavelength at which the paper reports its albedos. The law is recorded in [`source/photometry/filacchione-2022-akimov-549nm.json`](source/photometry/filacchione-2022-akimov-549nm.json).
+
+Each lighting frame is the law relative to the flood-lit disc centre. Akimov's function is 1 over the whole disc at zero phase, so with the Sun behind the viewer the map shows as published, with no limb darkening. The authored constants this replaces darkened the limb to 0.35. See [planet limbs](../../../docs/surface-preparation.md#planet-limbs-from-published-laws).
+
 ## Evidence
 
 - Shape: at equal mean size, the vertices of the former 2,000-triangle Q128 mesh lie 0.17% of the radius from the ellipsoid (RMS), 0.81% at most; a sphere gave 0.22% and 0.91%. All 3,984 label anchor and outline points lie on the drawn surface within 0.01%.
@@ -44,6 +52,7 @@ Rings are not rendered: the debris disk inferred by [Jones et al. 2008](https://
 
 ## Known problems
 
+- **Lighting law:** The fit used spectra with incidence and emission up to 70° and phase from 10° to 120°. The flood-lit view is the fit's own extrapolation to 0°, which leaves out the opposition surge, and beyond 120° the phase curve is held. Voyager photometry ([Buratti 1984](https://ntrs.nasa.gov/citations/19840066644)) likewise found almost no limb darkening on Rhea at low phase.
 - The globe has no relief. Image seams, shadows, coarse inserts and numeric-map gaps remain. No inpainting or shadow removal is applied.
 - The elevation producer's one-to-two-grid-spacing estimate comes from simulation experience, not per-cell uncertainty. It is a derived terrain model, not imagery.
 - Relative albedo is a secondary SPC product, less validated than topography. The [producer's assessment](https://sbnarchive.psi.edu/pds4/cassini/satellite-rhea.cassini.shape-models-maps/document/rheashapeassessment.pdf) documents terrain and shadow effects in its values.

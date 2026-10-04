@@ -1,0 +1,34 @@
+{
+  "schema": "cssearth-photometric-model@1",
+  "id": "filacchione-2022-akimov-549nm",
+  "instrument": "Cassini VIMS",
+  "filter": "549 nm",
+  "quantity": "radiance-factor",
+  "model": {
+    "family": "separable",
+    "disk": {
+      "family": "akimov"
+    },
+    "phase": {
+      "family": "quadratic",
+      "constant": 0.596226,
+      "perDegree": -0.00310465,
+      "perDegreeSquared": -4.49371e-06,
+      "heldBeyondDegrees": 120
+    }
+  },
+  "fit": {
+    "phaseDegrees": [
+      10,
+      120
+    ],
+    "incidenceDegrees": [
+      0,
+      70
+    ],
+    "emissionDegrees": [
+      0,
+      70
+    ]
+  }
+}

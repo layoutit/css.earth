@@ -27,9 +27,15 @@ export type DiskModel =
    * in degrees. f is the surface phase function, so D carries the phase curve and is not 1 at normal geometry. Where
    * the printed line for f falls below zero the lunar term is zero and the Lambert term stands alone.
    */
-  | { readonly family: 'lommel-seeliger-lambert'; readonly lunarFraction: number; readonly lunarFractionPerDegree: number; readonly surfacePhase: number; readonly surfacePhasePerDegree: number };
+  | { readonly family: 'lommel-seeliger-lambert'; readonly lunarFraction: number; readonly lunarFractionPerDegree: number; readonly surfacePhase: number; readonly surfacePhasePerDegree: number }
+  /**
+   * Akimov's parameter-free disk function (Shkuratov et al. 1999, 2011): D = cos(g/2) cos[(pi/(pi - g))(gamma - g/2)]
+   * (cos beta)^(g/(pi - g)) / cos gamma, with the photometric longitude gamma = arctan[(mu0 - mu cos g)/(mu sin g)] and
+   * latitude beta = arccos(mu / cos gamma). It is 1 over the whole disc at zero phase: no limb darkening under flood light.
+   */
+  | { readonly family: 'akimov' };
 
-export const DISK_FAMILIES = ['lambert', 'lommel-seeliger', 'lunar-lambert', 'minnaert', 'lommel-seeliger-lambert'] as const;
+export const DISK_FAMILIES = ['lambert', 'lommel-seeliger', 'lunar-lambert', 'minnaert', 'lommel-seeliger-lambert', 'akimov'] as const;
 
 /** Normal incidence and emission at zero phase: the reference at which every disk function above equals 1, except Lommel-Seeliger plus Lambert, which there gives A0 f0 / 2 + 1 - A0. */
 export const NORMAL_GEOMETRY: DiskGeometry = Object.freeze({ mu0: 1, mu: 1, phase: 0 });
@@ -44,6 +50,13 @@ export function diskValue(model: DiskModel, { mu0, mu, phase }: DiskGeometry): n
     case 'lommel-seeliger': return 2 * mu0 / (mu0 + mu);
     case 'lunar-lambert': return (1 - model.weight) * mu0 + 2 * model.weight * mu0 / (mu0 + mu);
     case 'minnaert': { const k = minnaertExponent(model, phase); return mu0 ** k * mu ** (k - 1); }
+    case 'akimov': {
+      // At zero phase the longitude is undetermined and the function is 1 for every one.
+      if (!(Math.sin(phase) > 1e-12)) return 1;
+      const gamma = Math.atan((mu0 - mu * Math.cos(phase)) / (mu * Math.sin(phase))), cosBeta = Math.min(1, mu / Math.cos(gamma)), stretch = Math.PI / (Math.PI - phase);
+      // A geometry held at a fitted limit may leave the lit range of longitudes, where the cosine turns negative: no light.
+      return Math.max(0, Math.cos(phase / 2) * Math.cos(stretch * (gamma - phase / 2)) * cosBeta ** (phase / (Math.PI - phase)) / Math.cos(gamma));
+    }
     case 'lommel-seeliger-lambert': {
       const degrees = phase * 180 / Math.PI, lunar = model.lunarFraction + model.lunarFractionPerDegree * degrees;
       return lunar * Math.max(0, model.surfacePhase + model.surfacePhasePerDegree * degrees) * mu0 / (mu0 + mu) + (1 - lunar) * mu0;

@@ -1,0 +1,27 @@
+{
+  "id": "pds-opus-go-ssi-c0359986578",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "PDS Ring-Moon Systems Node observation record · Galileo SSI frame C0359986578 of Io",
+  "identifiers": [
+    {
+      "type": "OPUS ID",
+      "value": "go-ssi-c0359986578"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://opus.pds-rings.seti.org/opus/api/metadata/go-ssi-c0359986578.json",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/io/source/manifest.json",
+      "locator": "/documents/29"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

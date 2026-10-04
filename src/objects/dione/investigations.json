@@ -94,6 +94,27 @@
         "https://naif.jpl.nasa.gov/pub/naif/generic_kernels/pck/pck00011.tpc",
         "https://doi.org/10.1007/s10569-017-9805-5"
       ]
+    },
+    {
+      "id": "limb-law",
+      "subject": "Photometric law for the lighting overlays",
+      "status": "included",
+      "finding": "Akimov disk function with the quadratic phase curve of Filacchione et al. (2022), fitted to Cassini VIMS spectra of Dione with incidence and emission up to 70 degrees and phase from 10 to 120 degrees: I/F = D(i, e, g)(a0 + a1 g + a2 g^2), with the 0.55 micrometre row of its Table 5, a0 = 0.649476, a1 = -0.00356622, a2 = -6.79378e-06, relative to the flood-lit disc centre. The disk function is 1 at zero phase, so the flood-lit disc is flat. Buratti (1984) found from Voyager images that Dione shows almost no limb darkening at low phase. Zero phase is the fit's own extrapolation and leaves out the opposition surge; beyond 120 degrees the phase curve is held.",
+      "evidence": [
+        "https://doi.org/10.1016/j.icarus.2021.114803",
+        "https://arxiv.org/abs/2111.15541",
+        "https://ntrs.nasa.gov/citations/19840066644"
+      ]
+    },
+    {
+      "id": "authored-limb-lighting",
+      "subject": "Terrestrial lane lighting constants (0.35 flood floor, 0.05 ambient term and a terminator ramp)",
+      "status": "excluded",
+      "finding": "Replaced by the published Akimov law of Filacchione et al. (2022).",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/main/packages/bake/src/objects/geometry/lambert-atlas.ts"
+      ],
+      "revisitWhen": "Nothing: an authored limb is not reopened once a published law exists."
     }
   ]
 }

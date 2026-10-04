@@ -129,6 +129,17 @@
         "https://sbmt.jhuapl.edu/shared-files/files/phobos_g_148m_spc_obj_0000n00000_v004.csv.zip",
         "https://doi.org/10.1186/s40623-023-01814-7"
       ]
+    },
+    {
+      "id": "limb-law",
+      "subject": "Photometric law for the lighting",
+      "status": "unresolved",
+      "finding": "Fornasier et al. (2024) fitted the Hapke (2012) model to disc-resolved Mars Express HRSC images of Phobos in four filters (Table 3; green: single-scattering albedo 0.0725, asymmetry -0.267, roughness 24.07 degrees, porosity 0.87), with the shadow-hiding amplitude 2.283 and width 0.05728 fixed from SRC images. Its fitted incidence and emission ranges were not transcribed. Phobos is a shape-model body. Its flood-lit bank is the map unshaded, and under this law a flood-lit disc is flat to 0.2 percent of its centre (computed with the photometry library), so the default view already follows the law. With Shadows on, lighting is baked once in the body frame as 0.12 + 0.88 cos(incidence) with cast shadows, and a law that depends on the viewing direction cannot be baked into one such bank.",
+      "evidence": [
+        "https://arxiv.org/abs/2403.12156",
+        "https://doi.org/10.1051/0004-6361/202449220"
+      ],
+      "revisitWhen": "Shadow banks keyed by phase angle are prepared for shape-model bodies."
     }
   ]
 }

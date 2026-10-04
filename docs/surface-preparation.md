@@ -665,14 +665,28 @@ same published law, so the limb in the app is the limb the instrument saw.
   | Earth | Minnaert per channel | fitted here to six [DSCOVR EPIC](https://epic.gsfc.nasa.gov/about) Level 1B frames ([fit-epic-limb.mts](../packages/bake/cli/fit-epic-limb.mts)) |
   | Moon | Hapke at 643 nm | [Sato et al. 2014](https://doi.org/10.1002/2013JE004580), the correction of the LROC WAC mosaic; w, b and h_S are medians of its PDS parameter map |
   | Ceres (dwarf planet) | Hapke at 749 nm | [Li et al. 2019](https://doi.org/10.1016/j.icarus.2018.12.038), Dawn Framing Camera |
+  | Io | Lunar-Lambert, weight 0.7 | the [USGS mosaics'](https://astrogeology.usgs.gov/search/map/io_voyager_galileo_ssi_global_mosaic_1km) own limb-darkening correction, at the phase [SIM 3168](https://pubs.usgs.gov/sim/3168/) gives; the limb limit is the outermost pixel of the finest full-disc Galileo frame at that phase, derived here |
   | Europa | Lommel–Seeliger plus Lambert, coefficients linear in phase | [Dhingra et al. 2021](https://doi.org/10.3847/PSJ/ac06d6), Voyager 2, Galileo and New Horizons clear-filter images, ridged-plains row; the limb limit is the outermost pixel of the finest full-disc image in its Table 1, derived here |
+  | Rhea, Dione, Enceladus | Akimov, with a quadratic phase curve at 0.55 µm | [Filacchione et al. 2022](https://doi.org/10.1016/j.icarus.2021.114803), Cassini VIMS; flat at zero phase |
   | Pluto, Charon | Lunar-Lambert, A 0.70 | [Buratti et al. 2017](https://doi.org/10.1016/j.icarus.2016.11.012), LORRI approach images; the limb limit is the outermost pixel of the finest image in its Table 1, derived here |
 
-  Io, Ganymede, Callisto, Titan, Iapetus, the five large Uranian moons, Triton,
+  Ganymede, Callisto, Titan, Iapetus, the five large Uranian moons, Triton,
   Eris and Makemake keep the shared `sphere` bank. Each
   has a `limb-law` entry in its `investigations.json` that says what was found
   and what is missing: no law exists, the published one could not be read, it
   states no emission range, or it covers regions rather than the whole body.
+
+  The terrestrial lane lights its sphere bodies the same way: Rhea, Dione and
+  Enceladus name a `limb` block in the `lighting` of their recipe, and
+  [refresh-sphere-lighting.mts](../packages/bake/cli/refresh-sphere-lighting.mts)
+  rebakes only that atlas, without the source maps. The lane's shape-model
+  bodies, Phobos, Deimos, Mimas and Tethys among them, draw no lighting
+  frames. Their flood-lit bank is the map unshaded, which is what a law that
+  is flat at zero phase gives: Akimov's function, or the Hapke fits of Phobos
+  and Deimos, flat to 0.2%. Their Shadows bank is baked once in the body frame
+  as 0.12 + 0.88 cos i with cast shadows, where a law that depends on the
+  viewing direction cannot go. Their `limb-law` entries name the published
+  laws.
 
   ![Each planet's default view in the app, before (authored lighting) and after (published laws), 25 September 2026](images/planet-limbs/before-after.png)
 
@@ -693,6 +707,16 @@ same published law, so the limb in the app is the limb the instrument saw.
   overlay alpha of 0.06 at 0.98 of the radius.
 
   ![Europa before and after](images/planet-limbs/europa-before-after.webp)
+
+  Io, the same day, with the limb-darkening correction USGS applied to its
+  mosaics. It gives an overlay alpha of 0.12 at 0.98 of the radius.
+
+  ![Io before and after](images/planet-limbs/io-before-after.webp)
+
+  Rhea, the same day, with the Akimov law fitted to Cassini VIMS spectra. It
+  is flat when flood-lit, so that frame draws no overlay at all.
+
+  ![Rhea before and after](images/planet-limbs/rhea-before-after.webp)
 - **One overlay per pixel.** A CSS overlay has one color and one alpha, and
   blend modes are not used. The overlay is exact for the map's mean color,
   measured at bake, and for every pixel in the channel that sets its alpha. A

@@ -77,13 +77,14 @@
       "id": "limb-law",
       "subject": "Photometric law for the lighting overlays",
       "status": "unresolved",
-      "finding": "Hillier et al. (1994) give disc-resolved Hapke fits per terrain unit (from the abstract: w 0.98 or higher, g -0.35 to -0.45 for most units, roughness near 14 degrees), and Hillier et al. (1991) fit the whole disc with a Hapke surface under a thin haze. Neither table could be opened, and neither is one global disk law. Triton keeps the shared sphere bank.",
+      "finding": "Schenk et al. (2021) fitted the lunar-Lambert function to global and regional Voyager images at several phase angles and print its weight as L(a) = 0.88 - 0.014(a) + 0.00005(a), in the article page and in the PDF alike. The last term lacks an exponent. Read as printed the weight is negative beyond 63 degrees phase, inside the 39 to 135 degrees its images span; read with a squared term it is negative beyond 95 degrees. Both readings give 0.88 at zero phase. The paper states no emission range. Hillier et al. (1994) give disc-resolved Hapke fits per terrain unit (from the abstract: w 0.98 or higher, g -0.35 to -0.45 for most units, roughness near 14 degrees), and Hillier et al. (1991) fit the whole disc with a Hapke surface under a thin haze. Neither table could be opened, and neither is one global disk law. Triton keeps the shared sphere bank.",
       "evidence": [
+        "https://doi.org/10.3390/rs13173476",
         "https://doi.org/10.1006/icar.1994.1095",
         "https://ntrs.nasa.gov/citations/19950043343",
         "https://doi.org/10.1029/91JA01736"
       ],
-      "revisitWhen": "A global disc-resolved Triton law with its fitted emission range is read in the paper, or the preparation gains the haze layer the 1991 model needs."
+      "revisitWhen": "A corrected weight line for Schenk et al. (2021) is published, a global disc-resolved Triton law with its fitted emission range is read in the paper, or the preparation gains the haze layer the 1991 model needs."
     },
     {
       "id": "map-left-edge-2026-09-28",

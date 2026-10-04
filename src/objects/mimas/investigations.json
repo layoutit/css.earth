@@ -62,6 +62,18 @@
         "https://doi.org/10.26033/y8wv-r303",
         "https://github.com/layoutit/css.earth/blob/main/src/objects/mimas/source/validation/relative-albedo-anchors.json"
       ]
+    },
+    {
+      "id": "limb-law",
+      "subject": "Photometric law for the lighting",
+      "status": "unresolved",
+      "finding": "Filacchione et al. (2022) fitted Akimov's disk function with a quadratic phase curve to Cassini VIMS spectra of Mimas (Table 2), with incidence and emission up to 70 degrees and phase from 10 to 120 degrees. Mimas is a shape-model body. Its flood-lit bank is the map unshaded, and Akimov's function is 1 over the whole disc at zero phase, so the default view already follows the law. Buratti (1984) found from Voyager images significant limb darkening on Mimas at low phase, which that function does not show; the paper's values could not be read. With Shadows on, lighting is baked once in the body frame as 0.12 + 0.88 cos(incidence) with cast shadows, and a law that depends on the viewing direction cannot be baked into one such bank.",
+      "evidence": [
+        "https://doi.org/10.1016/j.icarus.2021.114803",
+        "https://arxiv.org/abs/2111.15541",
+        "https://ntrs.nasa.gov/citations/19840066644"
+      ],
+      "revisitWhen": "Shadow banks keyed by phase angle are prepared for shape-model bodies."
     }
   ]
 }

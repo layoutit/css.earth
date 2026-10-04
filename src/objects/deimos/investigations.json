@@ -63,6 +63,16 @@
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/deimos/source/manifest.json"
       ]
+    },
+    {
+      "id": "limb-law",
+      "subject": "Photometric law for the lighting",
+      "status": "unresolved",
+      "finding": "Fornasier et al. (2025) fitted Hapke (2012) models to disc-resolved Mars Express SRC images of Deimos at 650 nm, keeping pixels with incidence and emission below 70 degrees, over 10 to 140 degrees phase. Their one-term fit (Table 5) gives single-scattering albedo 0.068, asymmetry -0.275, shadow-hiding amplitude 2.14 and width 0.065, roughness 19.4 degrees and porosity 85.7 percent. Deimos is a shape-model body. Its flood-lit bank is the map unshaded, and under this law a flood-lit disc is flat to 0.2 percent of its centre (computed with the photometry library), so the default view already follows the law. With Shadows on, lighting is baked once in the body frame as 0.12 + 0.88 cos(incidence) with cast shadows, and a law that depends on the viewing direction cannot be baked into one such bank.",
+      "evidence": [
+        "https://arxiv.org/abs/2509.12804"
+      ],
+      "revisitWhen": "Shadow banks keyed by phase angle are prepared for shape-model bodies."
     }
   ]
 }

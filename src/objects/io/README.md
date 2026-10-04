@@ -10,6 +10,7 @@ Io is Jupiter's innermost Galilean moon, shown as a mean-radius sphere with phot
 - **Elevation:** the stereo terrain model of [White et al. (2014)](https://doi.org/10.1002/2013JE004591), served by NASA's [Io Trek](https://trek.nasa.gov/io/) as "Voyager ISS and Galileo SSI DEM 1000 mpp, Global" (product `IoDEM`, [catalogue record](https://trek.nasa.gov/io/TrekServices/ws/index/eq/searchItems?start=0&rows=5&key=IoDEM)). Heights come from Voyager and Galileo stereo pairs fitted to Galileo limb profiles.
 - **VLT/MUSE:** original July 2019 measured maps from King et al. The [source interpretation](source/muse/INTERPRETATION.md) defines units, coordinate evidence, first-valid-night coverage, registration limits and residual night differences.
 - **Volcanic heat:** the registered JIRAM images, geometry and detector masks released with [Perry et al. (2025)](https://doi.org/10.3847/PSJ/adbae3), from [ASU](https://rgcps.asu.edu/juno/). [The recipe](source/science/jiram/perry-recipe.json) selects the release; [the measured receipt](source/science/jiram/perry-receipt.json) records screening and registration.
+- **Lighting:** the lunar-Lambert limb-darkening correction of the USGS mosaics, coefficient 0.7. See [Lighting law](#lighting-law).
 - **Named features:** the IAU/USGS Gazetteer of Planetary Nomenclature centre-point shapefile for Io (public domain per its FGDC metadata), kept under `source/features/`. 44 labelled names carry a caption note, the lead summary of their English Wikipedia article (CC BY-SA 4.0), kept with the article link and revision in `source/features/notes.json`; the caption credits Wikipedia beside the IAU naming year.
 - NASA's [Io facts](https://science.nasa.gov/jupiter/jupiter-moons/io/facts/) support the introduction. The vendored astronomy package supplies Io's 1821.49 km mean radius, IAU/WGCCRE rotation and JPL orbit.
 
@@ -24,6 +25,12 @@ Source selections, recorded trials and open questions are in the [investigation 
 **Named features.** Preparation converts each positive-east centre with the decoded map's left edge at 0° E and anchors it on the mesh. Craters and faculae trace a rim circle, other types their published extent box. [Pele's](https://planetarynames.wr.usgs.gov/Feature/4638) red deposit at 18.71° S, 104.72° E is an independent orientation landmark, and Pele selects it.
 
 **Globe.** The world frame, pole and prime meridian at the shared epoch come from `src/platform/solar-geometry.mts`. The thin sulfur-dioxide atmosphere does not justify a visible halo, so none is rendered. No simulated lava or plume is supplied.
+
+## Lighting law
+
+The globe is lit with the limb-darkening correction USGS applied to these mosaics: the ISIS lunar-Lambert function, (1 − L) μ0 + 2 L μ0/(μ0 + μ), with L = 0.7. Its [process description](https://astrogeology.usgs.gov/search/map/io_voyager_galileo_ssi_global_mosaic_1km) says that coefficient was adequate for all three colors, and the [geologic map pamphlet](https://pubs.usgs.gov/sim/3168/sim3168_pamphlet.pdf) gives the phase of those color frames as 3.5° to 4.5°. The lighting puts back what the map makers divided out. The law is recorded in [`source/photometry/usgs-io-mosaic-lunar-lambert.json`](source/photometry/usgs-io-mosaic-lunar-lambert.json).
+
+Each lighting frame is the law relative to the flood-lit disc centre, so the centre of the default view shows the map as published. With the Sun behind the viewer the limb darkens to 0.72 of the centre. See [planet limbs](../../../docs/surface-preparation.md#planet-limbs-from-published-laws).
 
 ## Evidence
 
@@ -56,6 +63,7 @@ Reproduce with `node packages/bake/authoring/juno/jiram-registered-mosaic.mts sr
 
 ## Known problems
 
+- **Lighting law:** One coefficient serves the whole disc, found by the map makers at about 4° phase; Io's scattering varies between regions and with phase. Its emission limit, 87.0°, is derived here, and the pamphlet says pixels too near the limb were removed by hand. No phase function is printed, so frames with Shadows on carry no phase term.
 - The atlas seams can remain visible at extreme close zoom.
 - **False color:** USGS superimposed color from Galileo violet, green and near-infrared (756 nm) images; this is false color, not a visual true-color measurement. Io changed between the Voyager and Galileo observations; the mosaic is not a single-date snapshot, and boundaries remain visible. The color mosaic is soft around Pele.
 - USGS states that color lacks coverage within approximately 5° of both poles and that merged polar color was interpolated, so color is withheld at |latitude| ≥ 85°. Valid monochrome replaces missing color; the gray grid appears only where neither source has imagery.

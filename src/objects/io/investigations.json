@@ -109,14 +109,25 @@
     {
       "id": "limb-law",
       "subject": "Photometric law for the lighting overlays",
-      "status": "unresolved",
-      "finding": "The USGS false-color mosaic page says a lunar-Lambert coefficient of 0.7 was adequate for all three colors, but gives no angle range and no fit. The disc-resolved studies (Simonelli and Veverka 1986 from Voyager; Simonelli, Dodd and Veverka 2001, Hapke fits to Galileo SSI) could not be opened, and Io's photometry varies strongly between regions. Io keeps the shared sphere bank.",
+      "status": "included",
+      "finding": "Lunar-Lambert law of the USGS global mosaics: their process description says a limb-darkening correction with coefficient 0.7 was adequate for all three colors (ISIS LunarLambert, the library's form), and the pamphlet of the geologic map (USGS SIM 3168) gives the phase of those color frames as 3.5 to 4.5 degrees. The lighting puts that correction back, relative to the flood-lit disc centre. Neither document states an emission range; the limit 87.0 degrees is derived here from the outermost pixel of the finest full-disc frame at that phase (Galileo SSI C0359986578, orbit G2, 4.943 km per pixel) and is second class. The pamphlet says pixels too near the limb were removed by hand. No phase function is printed, so frames with Shadows on carry no phase term. The disc-resolved studies (Simonelli and Veverka 1986 from Voyager; Simonelli, Dodd and Veverka 2001, Hapke fits to Galileo SSI) could not be opened, and Io's photometry varies strongly between regions.",
       "evidence": [
         "https://astrogeology.usgs.gov/search/map/io_voyager_galileo_ssi_global_mosaic_1km",
+        "https://pubs.usgs.gov/sim/3168/sim3168_pamphlet.pdf",
+        "https://opus.pds-rings.seti.org/opus/api/metadata/go-ssi-c0359986578.json",
         "https://ntrs.nasa.gov/citations/19860063116",
         "https://doi.org/10.1029/2000JE001350"
+      ]
+    },
+    {
+      "id": "authored-limb-lighting",
+      "subject": "Shared sphere bank lighting (Lambert with a 0.35 flood floor and 0.05 ambient term, adapted from OpenSpace)",
+      "status": "excluded",
+      "finding": "Replaced by the lunar-Lambert limb-darkening correction of the USGS mosaics; Io now bakes its own bank.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/main/packages/bake/src/raster/lighting-banks.ts"
       ],
-      "revisitWhen": "A disc-resolved Io law with its filter and fitted incidence, emission and phase ranges is read in the paper."
+      "revisitWhen": "Nothing: an authored limb is not reopened once a published law exists."
     },
     {
       "id": "jiram-close-passes-51-53",
