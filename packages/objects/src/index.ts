@@ -282,3 +282,5 @@ export { PACKAGED_POINTS_SOURCE_SCHEMA, readPackagedPointsFrame } from './prepar
 export { HOSTED_PLANET_MEASUREMENTS_SCHEMA, NEUTRON_STAR_MEASUREMENTS_SCHEMA, readPreparedChartContentRecord } from './prepared-data/presentation/build-projections.js';
 
 export { MAP_SPHERE_DATASETS_SCHEMA, readMapSphereDatasetPreviews } from './prepared-data/surface/map-sphere-datasets.js';
+export { LEAF_BOX_PROPERTY, LEAF_BOX_FACTOR, SURFACE_SEAM_OUTSET_PROPERTY } from './prepared-data/presentation/leaf-box-properties.js';
+export { requirePresentationEnvelope } from './prepared-data/runtime-validation/presentation-envelope.js';

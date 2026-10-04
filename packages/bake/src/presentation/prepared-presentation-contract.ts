@@ -1,13 +1,6 @@
-import {
-  type PreparedPoseKeyframe, type PreparedContractTrack, type PreparedContractVariant, type PreparedMaterialAddress,
-  type PreparedMaterialFrameMapping, type EllipsoidProjectionPlan, requireTextureBindings, requireTextureLevels,
-  requireTexturePlacements, type ObjectRuntimeDefinition, type PreparedWrite, type PreparedAssets,
-  type PreparedPresentationDefinition, type PreparedDepthOrder, requirePreparedData, type PreparedCubicSkyPlan,
-  type PreparedDirectionalSunPlan, validatePreparedCubicSky, validateDirectionalSunPlan, PREPARED_PRESENTATION_SCHEMA,
-} from '@cssearth/objects';
+import { type PreparedPoseKeyframe, type PreparedContractTrack, type PreparedContractVariant, type PreparedMaterialAddress, type PreparedMaterialFrameMapping, type EllipsoidProjectionPlan, requireTextureBindings, requireTextureLevels, requireTexturePlacements, type ObjectRuntimeDefinition, type PreparedWrite, type PreparedAssets, type PreparedPresentationDefinition, type PreparedDepthOrder, requirePreparedData, type PreparedCubicSkyPlan, type PreparedDirectionalSunPlan, requirePresentationEnvelope, requireObjectControls } from '@cssearth/objects';
 
 import { isArray } from '@cssearth/core';
-import { requireObjectControls } from '@cssearth/objects';
 
 export type PreparedPresentationContract = Omit<ObjectRuntimeDefinition, "schema" | "id" | "controls" | "sky" | "sun" | "materials" | "variants" | "animations" | "destinations"> & {
   schema: string; sky: PreparedCubicSkyPlan; sun: PreparedDirectionalSunPlan | null;
@@ -35,13 +28,7 @@ export function requirePreparedPresentation(input: unknown, options: { controls:
   const controls = requireObjectControls(options.controls);
   const assets = options.assets ?? plan?.assets;
   requirePreparedData(plan);
-  record(plan, "plan", ["schema", "camera", "sky", "sun", "assets", "tree", "variants", "materials", "viewBindings", "animations", "motion", "depthPartitions", "resourceOrder", "destinations", "motionFrame", "surfaceHit", "textureLevels", "features"]);
-  if (plan.resourceOrder !== undefined) choice(plan.resourceOrder, new Set(["content-first", "materials-first"]), "resource order");
-  if (plan.schema !== PREPARED_PRESENTATION_SCHEMA) fail("schema is incompatible");
-  requireObjectControls(controls);
-  validatePreparedCubicSky(plan.sky, 'authored');
-  if (plan.sun !== null) validateDirectionalSunPlan(plan.sun);
-  if (!(plan.camera?.sceneScale > 0) || !(plan.camera.minimumZoom > 0) || !(plan.camera.maximumZoom >= plan.camera.minimumZoom)) fail("camera plan is incomplete");
+  requirePresentationEnvelope(plan, 'authored', controls);
   if (!isArray(assets?.entries)) fail("resource catalog is missing");
   const resources = new Set(assets.entries.map(entry => entry.key));
   if (plan.textureLevels !== undefined) requireTextureLevels(plan.textureLevels, plan.variants, resources);

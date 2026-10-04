@@ -121,6 +121,8 @@ or assembled a mosaic before mirroring it, explain that step. Disclose an unknow
 original download identity.
 Keeping every temporary response is unnecessary.
 
+Dated evidence and live instructions are admitted manually (A32): a date or command string alone cannot tell whether a record documents a past measurement or promises current behavior. Keep that judgment with the record's owner until an explicit record-kind schema and a migration of existing evidence can preserve those meanings.
+
 ### References and retained files
 
 Use citations for papers, catalogue pages, search results and explanatory webpages.

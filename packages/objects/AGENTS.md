@@ -81,8 +81,8 @@ Prepared CSS sky, parallax, cubic-sky and directional-Sun contracts and validato
 exported by the main entry. Sky/Sun validators default to the historical authored bake acceptance and diagnostics. The single 'runtime' policy
 opts into runtime checks; there are no independent validation flags.
 Sky/Sun authored standards and direction computation stay with bake and renderer.
-Bake retains the authored presentation-envelope checks: runtime validation is stricter in several fields and cannot
-replace them without changing accepted authored input.
+`requirePresentationEnvelope` owns structural envelope admission with explicit authored/runtime policies: authored
+accepts minimal cameras, while runtime requires the full camera and identity. Bake retains authored referential checks.
 
 Prepared CSS volumes, impostors, volume datasets, embedded catalogue points and image-layer banks live in
 `src/volume/`; surface-shell data and validation live in `src/prepared-data/`. Their schema and envelope identifiers,
@@ -198,3 +198,5 @@ The parsers require owner-supplied surface-resolution and lighting-bank resolver
 validation position. Bake supplies them through `readBodyMapProduct` and `readRasterRecipe`;
 angular-to-surface conversion, sampled map combination, lighting banks and photometric evaluation stay in bake.
 Contract and duplicate-ownership tests use node:test beside the formats.
+
+The cross-domain schema-identifier conformance test stays in `src/prepared-data/` because that owner maintains the public identifier admission surface, including source and volume identifiers (A208). Move it to a package-wide test owner when such an owner has a distinct suite contract; its current location does not narrow coverage.
