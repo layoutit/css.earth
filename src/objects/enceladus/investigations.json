@@ -173,13 +173,23 @@
     {
       "id": "limb-law",
       "subject": "Photometric law for the lighting overlays",
-      "status": "unresolved",
-      "finding": "Robidel et al. (2020) correct Cassini VIMS infrared mosaics of Enceladus with the Akimov disc function and a linear phase function, for incidence and emergence up to 80 degrees. Those are not the visible wavelengths of this map, and the photometry library has no Akimov disc function. Filacchione et al. (2022), in this ledger, describe a wavelength-dependent correction from 0.35 micrometres whose values were not transcribed. Enceladus is prepared by the terrestrial lane, whose lighting constants are authored (0.35 flood floor, 0.05 ambient) and which has no path for a published law, so it keeps them.",
+      "status": "included",
+      "finding": "Akimov disk function with the quadratic phase curve of Filacchione et al. (2022), fitted to Cassini VIMS spectra of Enceladus with incidence and emission up to 70 degrees and phase from 10 to 120 degrees: I/F = D(i, e, g)(a0 + a1 g + a2 g^2), with the 0.55 micrometre row of its Table 3, a0 = 0.887595, a1 = -0.00197692, a2 = -3.33943e-05, relative to the flood-lit disc centre. The disk function is 1 at zero phase, so the flood-lit disc is flat. Buratti (1984) found from Voyager images significant limb darkening on Enceladus at low phase, which this law does not show; that paper's values could not be read. Zero phase is the fit's own extrapolation and leaves out the opposition surge; beyond 120 degrees the phase curve is held.",
       "evidence": [
-        "https://arxiv.org/abs/2006.00146",
-        "https://doi.org/10.1016/j.icarus.2021.114803"
+        "https://doi.org/10.1016/j.icarus.2021.114803",
+        "https://arxiv.org/abs/2111.15541",
+        "https://ntrs.nasa.gov/citations/19840066644"
+      ]
+    },
+    {
+      "id": "authored-limb-lighting",
+      "subject": "Terrestrial lane lighting constants (0.35 flood floor, 0.05 ambient term and a terminator ramp)",
+      "status": "excluded",
+      "finding": "Replaced by the published Akimov law of Filacchione et al. (2022).",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/main/packages/bake/src/objects/geometry/lambert-atlas.ts"
       ],
-      "revisitWhen": "The terrestrial lane can light a body from a photometric model record, and a disc-resolved law at visible wavelengths is read in the paper."
+      "revisitWhen": "Nothing: an authored limb is not reopened once a published law exists."
     }
   ]
 }

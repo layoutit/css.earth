@@ -14,6 +14,8 @@ Enceladus (NAIF 602) is a moon of Saturn. It shows a controlled Cassini camera m
 
 The [investigation ledger](investigations.json) records source choices, trials and open questions, including why Photojournal figures PIA06432 and PIA10360 did not qualify as map views.
 
+- **Lighting:** the Akimov law [Filacchione et al. (2022)](https://doi.org/10.1016/j.icarus.2021.114803) fitted to Cassini VIMS spectra of Enceladus. See [Lighting law](#lighting-law).
+
 ## Processing
 
 **Monochrome and elevation.** The mosaic (16098 × 8049, 100 m grid, more than 500 Cassini ISS clear-filter images) is stretched linearly from DN 0–16500 to 0–255. The terrain model (8049 × 4025, 200 m grid) uses a blue–neutral–warm palette over −1 to +1 km with northwest hillshade and no exaggeration. Both are resampled to 8192 × 4096, and missing observations get the shared gray grid. Photographic maps use `textureScale: 0.25`.
@@ -26,6 +28,12 @@ The [investigation ledger](investigations.json) records source choices, trials a
 
 **Shape.** The globe is that ellipsoid, drawn as 16 latitude bands of 32 leaves and two polar caps (452 leaves). The long axis points toward Saturn at 0° longitude and takes the display radius; the other axes keep their ratios. Terrain relief is not modelled on the globe; the Elevation dataset shows it. Until 2026-09-30 the globe was a 2,000-triangle reduction of the corrected v2 DSK (Park et al., doi:10.1029/2023JE008054); the [investigation ledger](investigations.json) records why it was replaced.
 
+## Lighting law
+
+The globe is lit with the law [Filacchione et al. (2022)](https://doi.org/10.1016/j.icarus.2021.114803) fitted to Cassini VIMS spectra of Enceladus: I/F = D(i, e, g) F(g), with Akimov's disk function D and a quadratic phase curve F = a0 + a1 g + a2 g². The coefficients are the 0.55 µm row of its Table 3, the wavelength at which the paper reports its albedos. The law is recorded in [`source/photometry/filacchione-2022-akimov-549nm.json`](source/photometry/filacchione-2022-akimov-549nm.json).
+
+Each lighting frame is the law relative to the flood-lit disc centre. Akimov's function is 1 over the whole disc at zero phase, so with the Sun behind the viewer the map shows as published, with no limb darkening. The authored constants this replaces darkened the limb to 0.35. See [planet limbs](../../../docs/surface-preparation.md#planet-limbs-from-published-laws).
+
 ## Evidence
 
 - Infrared placement: nine geographic samples, including all four corners, match direct RGB reads from the original TIFF. This checks texture addressing, not spacecraft pointing.
@@ -37,6 +45,7 @@ The [investigation ledger](investigations.json) records source choices, trials a
 
 ## Known problems
 
+- **Lighting law:** The fit used spectra with incidence and emission up to 70° and phase from 10° to 120°. The flood-lit view is the fit's own extrapolation to 0°, which leaves out the opposition surge, and beyond 120° the phase curve is held. Voyager photometry ([Buratti 1984](https://ntrs.nasa.gov/citations/19840066644)) found significant limb darkening on Enceladus at low phase, which this law does not show; that paper's values could not be read.
 - Monochrome is photographed brightness, not calibrated albedo. Source shadows and mosaic brightness differences remain.
 - Elevation values are kilometres above the reference ellipsoid with semi-axes 256.2 × 251.4 × 248.6 km, not heights above the 256.2 km cartographic sphere. They must not be added to the drawn IAU ellipsoid, whose axes differ slightly.
 - Infrared color is a seam-free display composite with no validity mask or numeric channels. Its red tint is not a heat, ice-abundance or crystallinity scale, and camera texture is finer than the infrared data.

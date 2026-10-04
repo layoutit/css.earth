@@ -88,13 +88,23 @@
     {
       "id": "limb-law",
       "subject": "Photometric law for the lighting overlays",
-      "status": "unresolved",
-      "finding": "Filacchione et al. (2020) corrected disc-resolved Cassini VIMS data of Rhea with the Shkuratov method at 59 wavelengths from 0.35 to 5.05 micrometres, and say the same scheme was applied to Dione and Tethys. Its parameters and angle limits were not transcribed, and whether the photometry library can hold its disc function was not checked. Rhea is prepared by the terrestrial lane, whose lighting constants are authored (0.35 flood floor, 0.05 ambient) and which has no path for a published law, so it keeps them.",
+      "status": "included",
+      "finding": "Akimov disk function with the quadratic phase curve of Filacchione et al. (2022), fitted to Cassini VIMS spectra of Rhea with incidence and emission up to 70 degrees and phase from 10 to 120 degrees: I/F = D(i, e, g)(a0 + a1 g + a2 g^2), with the 0.55 micrometre row of its Table 6, a0 = 0.596226, a1 = -0.00310465, a2 = -4.49371e-06, relative to the flood-lit disc centre. The disk function is 1 at zero phase, so the flood-lit disc is flat. Buratti (1984) found from Voyager images that Rhea shows almost no limb darkening at low phase. Zero phase is the fit's own extrapolation and leaves out the opposition surge; beyond 120 degrees the phase curve is held.",
       "evidence": [
-        "https://doi.org/10.1093/mnrasl/slaa162",
-        "http://hdl.handle.net/20.500.12386/35841"
+        "https://doi.org/10.1016/j.icarus.2021.114803",
+        "https://arxiv.org/abs/2111.15541",
+        "https://ntrs.nasa.gov/citations/19840066644"
+      ]
+    },
+    {
+      "id": "authored-limb-lighting",
+      "subject": "Terrestrial lane lighting constants (0.35 flood floor, 0.05 ambient term and a terminator ramp)",
+      "status": "excluded",
+      "finding": "Replaced by the published Akimov law of Filacchione et al. (2022).",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/main/packages/bake/src/objects/geometry/lambert-atlas.ts"
       ],
-      "revisitWhen": "The terrestrial lane can light a body from a photometric model record, and the Shkuratov correction's disc function and parameters are read in the paper."
+      "revisitWhen": "Nothing: an authored limb is not reopened once a published law exists."
     }
   ]
 }

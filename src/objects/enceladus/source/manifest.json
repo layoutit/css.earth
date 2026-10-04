@@ -890,6 +890,24 @@
     {
       "path": "geology/Cassini_ISS_GeologicMapUnits_Global.layer.json",
       "purpose": "Published GIS layer description: fields, extent, spatial reference and unit colors (renderer)."
+    },
+    {
+      "path": "photometry/filacchione-2022-akimov-549nm.json",
+      "purpose": "Akimov disk function and quadratic phase curve of Enceladus fitted to Cassini VIMS spectra at 0.55 micrometres, used to light the globe.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "doi-10-1016-j-icarus-2021-114803",
+            "role": "method",
+            "evidence": "Filacchione et al. (2022) eq. 3 writes I/F = D(i, e, g) F(lambda, g). Eq. 4 gives D as Akimov's disk function, with the photometric longitude and latitude of eqs. 5 and 6, and eq. 7 fits F with a second-degree polynomial a0 + a1 g + a2 g^2, g in degrees. Table 3 (Enceladus photometric parameters) gives at 549 nm a0 = 0.887595, a1 = -0.00197692 and a2 = -3.33943e-05; 0.55 micrometres is the wavelength at which the paper reports its albedos. The fitted ranges are the paper's data selection: incidence and emission up to 70 degrees and phase from 10 to 120 degrees. The record holds the polynomial at 120 degrees beyond that phase.",
+            "locator": "Eqs. 3 to 7; Table 3, 549 nm row; Table 1 caption"
+          }
+        ]
+      },
+      "origin": "https://doi.org/10.1016/j.icarus.2021.114803",
+      "credit": "G. Filacchione and co-authors (2022), Icarus 375, 114803; transcription: cssEarth.",
+      "acquisition": "Coefficients transcribed from the cited paper's open copy (arXiv 2111.15541) into a project document; no data file was downloaded."
     }
   ]
 }

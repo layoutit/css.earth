@@ -24,6 +24,8 @@ Gaps within photographic and scientific datasets retain the missing-data grid.
 
 Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).
 
+- **Lighting:** the Akimov law [Filacchione et al. (2022)](https://doi.org/10.1016/j.icarus.2021.114803) fitted to Cassini VIMS spectra of Dione. See [Lighting law](#lighting-law).
+
 ## Processing
 
 The monochrome mosaic is 23040 × 11520 on a 563 km cartographic sphere. Preparation rolls its 180° E left edge by half a width without mirroring it. The enhanced-color map is 14134 × 7067 at about 250 m per pixel, starts at 0° E and is not rolled; all its pixels are kept. The photographic atlas samples each original grid directly with a 2 × 2 texel footprint and WebP quality 95 ([shared preparation guide](../../../docs/surface-preparation.md#preserve-photographic-detail-through-preparation)).
@@ -34,6 +36,12 @@ Named features are cast onto the ellipsoid. Rim circles and extent boxes are not
 
 The iPad display atlases for the photographic, elevation and albedo views use quarter dimensions. This reduces display detail, not the resolution of the source observations or numeric grids.
 
+## Lighting law
+
+The globe is lit with the law [Filacchione et al. (2022)](https://doi.org/10.1016/j.icarus.2021.114803) fitted to Cassini VIMS spectra of Dione: I/F = D(i, e, g) F(g), with Akimov's disk function D and a quadratic phase curve F = a0 + a1 g + a2 g². The coefficients are the 0.55 µm row of its Table 5, the wavelength at which the paper reports its albedos. The law is recorded in [`source/photometry/filacchione-2022-akimov-549nm.json`](source/photometry/filacchione-2022-akimov-549nm.json).
+
+Each lighting frame is the law relative to the flood-lit disc centre. Akimov's function is 1 over the whole disc at zero phase, so with the Sun behind the viewer the map shows as published, with no limb darkening. The authored constants this replaces darkened the limb to 0.35. See [planet limbs](../../../docs/surface-preparation.md#planet-limbs-from-published-laws).
+
 ## Evidence
 
 - Shape: at equal mean size, the vertices of the former 2,000-triangle Q128 mesh lie 0.17% of the radius from the ellipsoid (RMS), 0.78% at most; a sphere gave 0.25% and 1.08%. All 5,215 label anchor and outline points lie on the drawn surface within 0.01%.
@@ -42,6 +50,7 @@ The iPad display atlases for the photographic, elevation and albedo views use qu
 
 ## Known problems
 
+- **Lighting law:** The fit used spectra with incidence and emission up to 70° and phase from 10° to 120°. The flood-lit view is the fit's own extrapolation to 0°, which leaves out the opposition surge, and beyond 120° the phase curve is held. Voyager photometry ([Buratti 1984](https://ntrs.nasa.gov/citations/19840066644)) likewise found almost no limb darkening on Dione at low phase.
 - Geographic registration, silhouette and feature review remain pending. No readiness is claimed.
 - Different control networks, photographed shadows, seams and coarse inserts remain. No inpainting, synthetic color, polar repetition or patch correction is applied.
 - Enhanced-color hemisphere differences reflect surface alteration and E-ring dust as well as residual shading.
