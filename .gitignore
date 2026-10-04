@@ -30,6 +30,8 @@ src/objects/*/source/**/*.csv
 src/objects/m31-layers/source/lggs-stars/table4.dat.gz
 # Cassiopeia A's depth table (10,632 rows); built by packages/bake/authoring/cassiopeia-a/ejecta-speeds.mts, restored from the source mirror.
 src/objects/cassiopeia-a-layers/source/ejecta-speeds.dat
+# The Homunculus's published surface (855 kB); restored from its NASA 3D Resources origin (src/objects/homunculus-nebula-layers/source/manifest.json).
+src/objects/homunculus-nebula-layers/source/homunculus.stl
 # Earth's dated NASA MUR tile archives (45 MB a day); restored from the source mirror (src/objects/earth/source/manifest.json).
 src/objects/earth/source/science/mur/*/tiles.tar.gz
 src/objects/*/source/**/*.fits

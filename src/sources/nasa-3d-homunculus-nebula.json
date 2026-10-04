@@ -1,0 +1,46 @@
+{
+  "id": "nasa-3d-homunculus-nebula",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Eta Carinae Homunculus Nebula (NASA 3D Resources, 3D Printing)",
+  "identifiers": [
+    {
+      "type": "Archive resource",
+      "value": "https://raw.githubusercontent.com/nasa/NASA-3D-Resources/master/3D%20Printing/Eta%20Carinae%20Homunculus%20Nebula/Eta%20Carinae%20Homunculus%20Nebula.stl"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://github.com/nasa/NASA-3D-Resources/tree/master/3D%20Printing/Eta%20Carinae%20Homunculus%20Nebula",
+      "label": "Published source"
+    },
+    {
+      "role": "original",
+      "url": "https://raw.githubusercontent.com/nasa/NASA-3D-Resources/master/3D%20Printing/Eta%20Carinae%20Homunculus%20Nebula/Eta%20Carinae%20Homunculus%20Nebula.stl",
+      "label": "Binary STL, 855 kB"
+    },
+    {
+      "role": "rights",
+      "url": "https://github.com/nasa/NASA-3D-Resources",
+      "label": "Reuse terms"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://github.com/nasa/NASA-3D-Resources/tree/master/3D%20Printing/Eta%20Carinae%20Homunculus%20Nebula",
+      "checkedOn": "2026-10-04",
+      "locator": "Eta Carinae Homunculus Nebula.stl: a binary STL of 17101 triangles, the two lobes along the file's z axis with their protrusions, trenches and polar holes. The collection's README: \"These assets are free and without copyright.\""
+    }
+  ],
+  "publisher": "NASA",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "NASA 3D Resources; model of Steffen et al. (2014)",
+      "scope": "Published source",
+      "evidence": "https://github.com/nasa/NASA-3D-Resources/tree/master/3D%20Printing/Eta%20Carinae%20Homunculus%20Nebula"
+    }
+  ]
+}
