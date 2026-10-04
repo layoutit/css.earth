@@ -7,7 +7,7 @@ import sharp from 'sharp';
 import { parseSolidLighting, prepareSolidMaterial } from '@cssearth/bake/objects/layers/terrestrial';
 const test = sourceTest();
 
-const model = 'photometry/fixture-akimov.json', limb = { models: [model, model, model], reference: 'reference.png' };
+const model = 'photometry/fixture-akimov.json', models: [string, string, string] = [model, model, model], limb = { models, reference: 'reference.png' };
 // Rhea at 599 nm, Filacchione et al. (2022) Table 6: the Akimov disk function with a quadratic phase curve.
 const record = { schema: 'cssearth-photometric-model@1', id: 'fixture-akimov', instrument: 'fixture', filter: 'fixture', quantity: 'radiance-factor',
   model: { family: 'separable', disk: { family: 'akimov' }, phase: { family: 'quadratic', constant: 0.610461, perDegree: -0.00352956, perDegreeSquared: -1.0071e-06, heldBeyondDegrees: 120 } },
