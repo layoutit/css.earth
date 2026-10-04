@@ -1,6 +1,5 @@
 /** Offline handoff of existing cloud geometry, prepared pixels and saved display choices. */
-import { OBJECT_SCHEMA, PREPARED_OBJECT_SCHEMA, PREPARED_VOLUME_DATASETS_SCHEMA, parsePreparedLmcStars, cloudDensityWeight, validateCloudDensityFilter, validatePreparedCssVolume, parseCloudCatalogue, type CloudDensityFilter, type PreparedCssVolume, VOLUME_DATASET_MANIFEST_SCHEMA } from '@cssearth/objects';
-import { PREPARED_VOLUME_DATASET_INDEX_SCHEMA, type PreparedVolumeDatasets } from '@cssearth/objects';
+import { OBJECT_SCHEMA, PREPARED_OBJECT_SCHEMA, PREPARED_VOLUME_DATASETS_SCHEMA, parsePreparedLmcStars, cloudDensityWeight, validateCloudDensityFilter, validatePreparedCssVolume, parseCloudCatalogue, type CloudDensityFilter, type PreparedCssVolume, VOLUME_DATASET_MANIFEST_SCHEMA, PREPARED_VOLUME_DATASET_INDEX_SCHEMA, type PreparedVolumeDatasets } from '@cssearth/objects';
 import { volumeDatasetBankFiles } from '@cssearth/objects/node';
 import assert from 'node:assert/strict';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';

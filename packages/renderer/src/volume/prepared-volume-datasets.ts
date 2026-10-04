@@ -1,6 +1,5 @@
-import { samePreparedCatalogueGeometry, validatePreparedVolumeDatasets, PREPARED_VOLUME_DATASETS_SCHEMA, parseObjectDescriptor, parseDensityVolumeFrame, readPreparedObject, samePreparedVolumeTopology, type PreparedVolumeDataset, type PreparedVolumeDatasetBrightness, type PreparedVolumeDatasets, type PreparedAssets, type PreparedCssVolume, type VolumeAxis } from '@cssearth/objects';
-import { PREPARED_VOLUME_DATASET_INDEX_SCHEMA, splitPreparedVolumeDatasets, trustPreparedCataloguePoints, trustPreparedCssVolume, validatePreparedVolumeDatasetIndex,
-  type DensityVolumeFrame, type PreparedCataloguePoints, type PreparedVolumeDatasetEntry, type PreparedVolumeDatasetIndex } from '@cssearth/objects';
+import { samePreparedCatalogueGeometry, validatePreparedVolumeDatasets, PREPARED_VOLUME_DATASETS_SCHEMA, parseObjectDescriptor, parseDensityVolumeFrame, readPreparedObject, samePreparedVolumeTopology, type PreparedVolumeDataset, type PreparedVolumeDatasetBrightness, type PreparedVolumeDatasets, type PreparedAssets, type PreparedCssVolume, type VolumeAxis,
+  PREPARED_VOLUME_DATASET_INDEX_SCHEMA, splitPreparedVolumeDatasets, trustPreparedCataloguePoints, trustPreparedCssVolume, validatePreparedVolumeDatasetIndex, type DensityVolumeFrame, type PreparedCataloguePoints, type PreparedVolumeDatasetEntry, type PreparedVolumeDatasetIndex } from '@cssearth/objects';
 import { readPrepared } from '../prepared-data-worker-client.js';
 import { readPreparedHere } from '../prepared-data/readers.js';
 import { cssVolumeReader, volumeStarsReader } from './prepared-volume-readers.js';
