@@ -91,9 +91,11 @@ measured map need not stay a neutral sphere.
 - Show it as a dataset of its own. Its visible description names the model, the
   paper and the scenario the run assumes: the atmosphere, surface and rotation it
   was given. When nobody has detected that atmosphere, say so.
-- The default view stays the measured one, or the neutral one where nothing is
-  measured. Never blend simulated structure into a measured dataset, and never use
-  it to fill a gap in one.
+- A planet opens on the best dataset it has: a measured map or image first, then a
+  published simulation, then one color over the whole body, and the neutral shape
+  last. So a simulation is the default view where nothing measured is drawn as a
+  map, and it says it is a model there as plainly as anywhere. Never blend simulated
+  structure into a measured dataset, and never use it to fill a gap in one.
 - Use the released numbers: the quantity, units, grid and time averaging the
   release states, with a legend in those units. A temperature map in false color
   is not what an eye would see.

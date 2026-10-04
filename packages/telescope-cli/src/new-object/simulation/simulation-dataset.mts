@@ -1,7 +1,7 @@
 /** A published simulation as a dataset beside a body's default dataset: one field of a model run a paper released on Zenodo,
  * read by the `netcdf-lonlat-field` format (packages/bake/src/objects/raster/netcdf/netcdf-lonlat-field.ts) and labelled as
  * the rule on published simulations requires (.agents/skills/celestial-skill/references/scientific-faithfulness.md): its own
- * dataset, named as a model with its paper and the scenario it assumes, never the default.
+ * dataset, named as a model with its paper and the scenario it assumes. The body opens on it only where it had no map.
  *
  *   new-object --simulation entries.json      a list of { id, dataset, label, quantity, record, file, path, variable, coordinates,
  *                                             select, units, longitudeZeroAt, model, credit, url, scenario, detected, undetected?,
@@ -17,7 +17,7 @@ import { Readable } from 'node:stream';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { containedPath, publishPinnedSourceStream } from '@cssearth/bake/objects/sources';
 import type { Archive } from '../archives.mts';
-import { bindInputs, json, type PackageFiles } from '../dataset.mts';
+import { bindInputs, json, openOnMap, type PackageFiles } from '../dataset.mts';
 import { MAX_RECORDS, ZENODO_RECORDS, namesObject, parseZenodoRecord, parseZenodoSearch, reuseLicense, speaksOfSimulation, zenodoQuery, type ReuseLicense } from '../../simulations/simulations.mts';
 
 export interface SimulationEntry {
@@ -138,7 +138,8 @@ export function roundedRange(minimum: number, maximum: number): readonly [number
 
 export interface FieldReport { readonly minimum: number; readonly maximum: number; readonly latitudeRange: readonly (number | undefined)[]; readonly missing: number }
 
-/** Add the dataset to the package in `files`, keeping its default dataset. Returns the range drawn. */
+/** Add the dataset to the package in `files`. It becomes the default where the default was one color or the neutral shape; a
+ * default that is a measured map stays. Returns the range drawn and whether the default changed. */
 export function installSimulationDataset(files: PackageFiles, id: string, name: string, entry: SimulationEntry, release: SimulationRelease, field: FieldReport) {
   const o = `src/objects/${id}`, s = `${o}/source`, read = (path: string) => requireRecord(JSON.parse(String(files.get(path))), path);
   const others = (list: unknown, where: string, key: string, value: string) => requireArray(list, where).filter(item => requireRecord(item, where)[key] !== value);
@@ -187,7 +188,9 @@ export function installSimulationDataset(files: PackageFiles, id: string, name: 
   plan.operations = [...others(plan.operations, `${id} acquisition operations`, 'path', entry.path), { kind: 'download', groups: ['restore', 'refresh'], path: entry.path, url: release.fileUrl }];
   files.set(`${s}/preparation/acquisition.json`, json(plan));
   bindInputs(files, id);
-  return { minimum, maximum };
+  // A body opens on the best dataset it has: the simulation takes the default from one color or the neutral shape, never from
+  // a measured map (dataset.mts openOnMap).
+  return { minimum, maximum, promoted: openOnMap(files, id, entry.dataset) };
 }
 
 /** Zenodo's guest search answers 30 requests a minute: one is made every PACE_MS, for NAMES_AT_ONCE names, up to PAGES pages. */

@@ -67,12 +67,13 @@ test('the release is checked on Zenodo: a license that allows reuse, a record th
   await refused(exocam => { exocam.files = exocam.files.slice(1); }, /lists no file field-cdf2\.nc \(field file\); it lists ExoCAM_thai_hab1_L51_n68equiv\.cam\.h0\.avg\.nc, /u);
 });
 
-test('the dataset is added beside the default one, labelled as a model with its scenario, and its range is the file\'s', async () => {
+test('the dataset is labelled as a model with its scenario, its range is the file\'s, and it takes the default from a neutral shape only', async () => {
   const files = new Map<string, string | Buffer>(await Promise.all(PACKAGE.map(async path => [`${o}/${path}`, await readFile(resolve(WORKSPACE, o, path), 'utf8')] as const)));
   const before = (path: string) => JSON.parse(String(files.get(`${o}/${path}`))) as Record<string, any>, defaultDataset = before('source/content/object.json').datasets.defaultDataset;
   const entry = entryOf(), release = await simulationRelease(archive(await record()), id, ['TRAPPIST-1e'], entry);
   const field = await loadNetcdfLonLatField(dirname(fixture), { ...simulationRecipe(entry), path: 'field-cdf2.nc' });
-  assert.deepEqual(installSimulationDataset(files, id, 'TRAPPIST-1e', entry, release, field.report), { minimum: 300, maximum: 340 });
+  assert.equal(defaultDataset, 'shape', 'TRAPPIST-1e opens on its neutral shape');
+  assert.deepEqual(installSimulationDataset(files, id, 'TRAPPIST-1e', entry, release, field.report), { minimum: 300, maximum: 340, promoted: true });
   const after = (path: string) => JSON.parse(String(files.get(`${o}/${path}`))) as Record<string, any>;
   const surface = after('source/preparation/raster.json').surfaces.at(-1);
   assert.deepEqual([surface.id, surface.source, surface.falseColor, surface.science.format, surface.science.variable, surface.science.select, surface.science.longitudeZeroAt],
@@ -80,7 +81,7 @@ test('the dataset is added beside the default one, labelled as a model with its 
   assert.deepEqual([surface.science.minimum, surface.science.maximum, surface.science.labels, surface.science.units, surface.science.displaySampling], [300, 340, ['300', '320', '340'], 'K', 'nearest']);
   assert.equal(after('object.json').properties.recipe.surfaces[0].datasets.at(-1).id, 'climate-model');
   const content = after('source/content/object.json'), control = content.datasets.controls.at(-1);
-  assert.equal(content.datasets.defaultDataset, defaultDataset, 'the default dataset stays the default');
+  assert.equal(content.datasets.defaultDataset, 'climate-model', 'a simulation is a better dataset than a gray sphere: the page opens on it');
   assert.equal(control.qualification, 'Simulation · ExoCAM · Wolf et al. (2022) · False color');
   assert.deepEqual([control.legend.title, control.legend.meta, control.legend.labels, control.noData], ['Surface temperature', 'K', ['300', '320', '340'], true]);
   assert.equal(control.notes, 'Surface temperature of TRAPPIST-1e in the ExoCAM simulation of Wolf et al. (2022): a model, not a measurement. The run assumes the atmosphere and ocean of the THAI "Hab 1" case, on a planet that keeps one face to its star. ' +
@@ -100,7 +101,14 @@ test('the dataset is added beside the default one, labelled as a model with its 
   assert.equal(after('source/manifest.json').inputs.filter((existing: { id: string }) => existing.id === input.id).length, 1);
   assert.throws(() => installSimulationDataset(files, id, 'TRAPPIST-1e', entryOf({ range: [310, 400] }), release, field.report),
     /trappist-1e, dataset climate-model: TS in field-cdf2\.nc runs from 300 to 337 K, outside the range 310 to 400 the entry gives \(field range\)/u);
-  assert.deepEqual(installSimulationDataset(files, id, 'TRAPPIST-1e', entryOf({ range: [180, 340] }), release, field.report), { minimum: 180, maximum: 340 });
+  assert.deepEqual(installSimulationDataset(files, id, 'TRAPPIST-1e', entryOf({ range: [180, 340] }), release, field.report), { minimum: 180, maximum: 340, promoted: false });
+  // A planet that opens on a measured map keeps it: the simulation is added beside it.
+  const measured = 'hd-189733b', m = `src/objects/${measured}`;
+  const mapped = new Map<string, string | Buffer>(await Promise.all(PACKAGE.map(async path => [`${m}/${path}`, await readFile(resolve(WORKSPACE, m, path), 'utf8')] as const)));
+  const opensOn = () => (JSON.parse(String(mapped.get(`${m}/source/content/object.json`))) as { datasets: { defaultDataset: string } }).datasets.defaultDataset;
+  const measuredDefault = opensOn();
+  assert.equal(installSimulationDataset(mapped, measured, 'HD 189733 b', entry, release, field.report).promoted, false);
+  assert.equal(opensOn(), measuredDefault, 'a measured map outranks a simulation');
 });
 
 test('the released file is streamed into the source directory once and held to the size Zenodo lists', async () => {
@@ -126,7 +134,11 @@ test('new-object --simulation writes the package of a body already in the tree, 
     await mkdir(resolve(root, o, 'source/science/wolf-2022'), { recursive: true });
     await cp(fixture, resolve(root, o, 'source/science/wolf-2022/field-cdf2.nc'));
     const lines = await rebuildExistingDatasets(root, [id], 'simulation', archive(await record()), () => {}, new Map(), new Map(), parseSimulationEntries([written]));
-    assert.deepEqual(lines, ['trappist-1e: climate-model dataset from the ExoCAM simulation of Wolf et al. (2022), 300-340 K, CC BY 4.0']);
+    assert.deepEqual(lines, ['trappist-1e: climate-model dataset from the ExoCAM simulation of Wolf et al. (2022), 300-340 K, CC BY 4.0; the page now opens on it']);
+    const page = JSON.parse(await readFile(resolve(root, o, 'source/content/object.json'), 'utf8')) as { datasets: { defaultDataset: string } };
+    assert.equal(page.datasets.defaultDataset, 'climate-model');
+    const marker = (JSON.parse(await readFile(resolve(root, o, 'source/manifest.json'), 'utf8')) as { generatedIntermediates: { path: string; recipe?: { inputs?: string[] } }[] }).generatedIntermediates.find(entry => entry.path === 'presentation/context.png');
+    assert.ok(marker?.recipe?.inputs?.includes('trappist-1e-climate-model-simulation'), 'the marker is drawn from the default dataset, now the simulation');
     const raster = JSON.parse(await readFile(resolve(root, o, 'source/preparation/raster.json'), 'utf8')) as { surfaces: { id: string }[] };
     assert.equal(raster.surfaces.at(-1)!.id, 'climate-model');
     // The entry is checked against the file before anything is written: wrong units, a missing variable, an unstated time.

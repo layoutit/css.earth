@@ -8,7 +8,7 @@
  * or `phaseCurves` on a planet in a spec (spec.mts), the same entries without `id`. */
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
 import { parsePublishedPhaseCurve, publishedPhaseCurveMap } from '@cssearth/bake/objects/raster';
-import { bindInputs, json, type PackageFiles } from './dataset.mts';
+import { bindInputs, json, openOnMap, type PackageFiles } from './dataset.mts';
 
 export interface PhaseCurveEntry {
   /** Dataset id, and the dataset key of its reader text. */
@@ -46,7 +46,8 @@ export function parsePhaseCurveEntries(value: unknown): Map<string, PhaseCurveEn
   return out;
 }
 
-/** Add the dataset to the package in `files`, keeping its default dataset. Returns the drawn range and the hottest longitude east of noon. */
+/** Add the dataset to the package in `files`. It becomes the default where the default was one color; a default that is a map
+ * stays. Returns the drawn range, the hottest longitude east of noon and whether the default changed. */
 export async function installPhaseCurveDataset(files: PackageFiles, id: string, name: string, entry: PhaseCurveEntry) {
   const o = `src/objects/${id}`, s = `${o}/source`, read = (path: string) => JSON.parse(String(files.get(path))) as Record<string, any>;
   const record = parsePublishedPhaseCurve(entry.record), map = await publishedPhaseCurveMap(record);
@@ -94,5 +95,6 @@ export async function installPhaseCurveDataset(files: PackageFiles, id: string, 
     acquisition: 'Transcribed from the paper, table cell by table cell, with each cell\'s location', redistribution: 'Factual parameter transcription only; no paper figures', consumers: [consumer] }];
   files.set(`${s}/manifest.json`, json(manifest));
   bindInputs(files, id);
-  return { minimum, maximum, hottest };
+  // A measured map is a better dataset than one color over the planet: the page opens on it (dataset.mts openOnMap).
+  return { minimum, maximum, hottest, promoted: openOnMap(files, id, entry.dataset) };
 }
