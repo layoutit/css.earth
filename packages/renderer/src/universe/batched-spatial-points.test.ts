@@ -1,4 +1,5 @@
 import { readFileSync } from 'node:fs';
+import { parseCatalogueCells } from '@cssearth/objects';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { isDeepStrictEqual } from 'node:util';
@@ -117,20 +118,18 @@ test('prepared cells skip out-of-view boxes without changing a single drawn dot 
   const random = () => ((seed = (seed * 1664525 + 1013904223) >>> 0) / 2 ** 32);
   // Clumps and a thin shell, so cells are uneven and many lie beside, behind and around the camera.
   const rows = Array.from({ length: 3000 }, (_, index) => {
-    if (index % 3 === 0) { const u = random() * 2 - 1, a = random() * 2 * Math.PI, r = 150 + random() * 5, s = Math.sqrt(1 - u * u);
-      return [r * s * Math.cos(a), r * s * Math.sin(a), r * u, index % 2]; }
+    if (index % 3 === 0) { // a thin shell by direction/length: +, *, / and sqrt are exactly rounded, so rows are bit-identical on every platform
+      let x = 0, y = 0, z = 0, norm = 0;
+      do { x = random() * 2 - 1; y = random() * 2 - 1; z = random() * 2 - 1; norm = Math.sqrt(x * x + y * y + z * z); } while (norm < .1 || norm > 1);
+      const r = (150 + random() * 5) / norm;
+      return [r * x, r * y, r * z, index % 2]; }
     const clump = [[40, 0, -60], [-90, 30, 20], [5, -5, 5]][index % 3]!;
     return [clump[0]! + (random() - .5) * 30, clump[1]! + (random() - .5) * 30, clump[2]! + (random() - .5) * 30, index % 2];
   });
-  // Preserved bake assignment of each row to its cell (integers, stable across platforms). The boxes are the exact bounds of
-  // each cell's rows, built here: a transcendental function (Math.sin/cos) rounds differently on arm64 and x64, so boxes frozen
-  // from another platform's rows would not hold their points (bake's catalogue-points test pins the assignment).
-  const frozen = JSON.parse(readFileSync(new URL('./batched-spatial-points.cells.json', import.meta.url), 'utf8')) as { of: number[] };
-  const cellCount = Math.max(...frozen.of) + 1;
-  const bounds = new Float64Array(cellCount * 6).map((_, index) => index % 6 < 3 ? Infinity : -Infinity);
-  frozen.of.forEach((cell, row) => { for (let axis = 0; axis < 3; axis++) { const value = rows[row]![axis]!;
-    bounds[cell * 6 + axis] = Math.min(bounds[cell * 6 + axis]!, value); bounds[cell * 6 + 3 + axis] = Math.max(bounds[cell * 6 + 3 + axis]!, value); } });
-  const cells = { boxes: bounds, of: Int32Array.from(frozen.of) };
+  // Preserved bake output for the rows above, which use only exactly rounded arithmetic (no Math.sin/cos), so rows, cells and
+  // boxes are bit-identical on every platform; parser admission verifies every box holds its points, and bake's
+  // catalogue-points test pins this JSON to the real algorithm.
+  const cells = parseCatalogueCells(JSON.parse(readFileSync(new URL('./batched-spatial-points.cells.json', import.meta.url), 'utf8')), rows, [rows.length], 'culling fixture');
   const points = rows.map(row => ({ positionUnits: [row[0], row[1], row[2]] as unknown as readonly [number, number, number], color: row[3] }));
   const styles = [{ colorCss: '#ffffff', opacity: .5, radiusPx: 1 }, { colorCss: '#ff8800', opacity: 1, radiusPx: 2.5 }];
   let keep = 1, drawn = rows.length;
