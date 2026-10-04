@@ -35,9 +35,10 @@
       "id": "dots",
       "subject": "Catalogued objects as dots",
       "status": "included",
-      "finding": "172 dots from 1 published table: 172 planetary nebulae (Hartke et al. (2022), CDS J/A+A/663/A12, 319 rows in the file). Each dot is a catalogued object at its published sky position, placed on the plane the picture stands on; its depth is not measured, and it is not drawn.",
+      "finding": "255 dots from 2 published tables: 172 planetary nebulae (Hartke et al. (2022), CDS J/A+A/663/A12, 319 rows in the file); 83 globular cluster candidates (Whitlock et al. (2003), CDS J/MNRAS/345/949, 133 rows in the file). Each dot is a catalogued object at its published sky position, placed on the plane the picture stands on; its depth is not measured, and it is not drawn.",
       "evidence": [
-        "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/663/A12"
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/663/A12",
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/MNRAS/345/949"
       ]
     }
   ]

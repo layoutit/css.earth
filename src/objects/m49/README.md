@@ -13,7 +13,7 @@ The card's facts cite their catalogues in [source/content/object.json](source/co
 | [Virgo Cluster Catalog](https://cdsarc.cds.unistra.fr/viz-bin/cat/J/AJ/90/1681) (Binggeli et al. 1985) | VCC 1226 = NGC 4472, membership M (member). |
 | [SIMBAD](https://simbad.cds.unistra.fr/simbad/sim-id?Ident=M+49) | Radial velocity 948.8 km/s, from the SDSS DR7 redshift ([Abazajian et al. 2009](https://ui.adsabs.harvard.edu/abs/2009ApJS..182..543A/abstract)). |
 
-M49 is not in the Local Volume Database, so its catalogue row is written from these papers (`citedRows` in [the galaxy catalogue recipe](../local-group/source/catalogue.json)). The row details to this package, so the galaxy has one marker and one page.
+M49 is not in the Local Volume Database, so its catalogue row is written from these papers (`citedRows` in [the galaxy catalogue recipe](../local-group-galaxies/source/catalogue.json)). The row details to this package, so the galaxy has one marker and one page.
 
 ## Processing
 

@@ -30,6 +30,15 @@
       "evidence": [
         "https://github.com/charvey2718/nox"
       ]
+    },
+    {
+      "id": "dots",
+      "subject": "Catalogued objects as dots",
+      "status": "included",
+      "finding": "1,105 dots from 1 published table: 1,105 star clusters (Lim et al. (2013), CDS J/ApJ/766/20, 1,105 rows in the file). Each dot is a catalogued object at its published sky position, placed on the plane the picture stands on; its depth is not measured, and it is not drawn.",
+      "evidence": [
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/766/20"
+      ]
     }
   ]
 }

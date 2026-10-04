@@ -34,6 +34,42 @@
           }
         ]
       }
+    },
+    {
+      "id": "misgeld-gc-table",
+      "path": "src/objects/ngc-3311-volume/source/misgeld-gc/tablea1.dat",
+      "origin": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/531/A4/tablea1.dat",
+      "title": "A large population of ultra-compact dwarf galaxies in the Hydra I cluster, tablea1.dat",
+      "credit": "I. Misgeld, S. Mieske, M. Hilker, T. Richtler, I. Y. Georgiev, Y. Schuberth; A&A 531, A4",
+      "acquisition": "Published table downloaded unchanged from its CDS origin; read by packages/bake/cli/prepare-catalogue-points.mts through misgeld-gc/points.json.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "misgeld-2011-hydra-compact-objects",
+            "role": "material",
+            "evidence": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/531/A4/tablea1.dat"
+          }
+        ]
+      }
+    },
+    {
+      "id": "mirabile-gc-table",
+      "path": "src/objects/ngc-3311-volume/source/mirabile-gc/ngc3311.dat",
+      "origin": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/705/A117/ngc3311.dat",
+      "title": "Looking into the faintEst WIth MUSE (LEWIS): Exploring the nature of ultra-diffuse galaxies in the Hydra-I cluster. IV. A study of the globular cluster population in four ultra-diffuse galaxies, ngc3311.dat",
+      "credit": "M. Mirabile, M. Cantiello, M. Rejkuba, S. Mieske, E. Iodice, C. Buttitta; A&A 705, A117",
+      "acquisition": "Published table downloaded unchanged from its CDS origin; read by packages/bake/cli/prepare-catalogue-points.mts through mirabile-gc/points.json.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "mirabile-2026-hydra-globular-clusters",
+            "role": "material",
+            "evidence": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/705/A117/ngc3311.dat"
+          }
+        ]
+      }
     }
   ],
   "documents": [
@@ -72,6 +108,30 @@
     {
       "id": "document-5",
       "path": "src/objects/ngc-3311-volume/source/stellar-extent.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
+      }
+    },
+    {
+      "id": "document-6",
+      "path": "src/objects/ngc-3311-volume/source/misgeld-gc/points.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
+      }
+    },
+    {
+      "id": "document-7",
+      "path": "src/objects/ngc-3311-volume/source/mirabile-gc/points.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
+      }
+    },
+    {
+      "id": "document-8",
+      "path": "src/objects/ngc-3311-volume/source/dots/merge.json",
       "sourceBinding": {
         "kind": "local",
         "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."

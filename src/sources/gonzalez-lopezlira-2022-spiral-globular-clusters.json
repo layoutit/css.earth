@@ -1,0 +1,67 @@
+{
+  "id": "gonzalez-lopezlira-2022-spiral-globular-clusters",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "The relation between globular cluster systems and supermassive black holes in spiral galaxies. III. The link to the M_BH-M* correlation",
+  "identifiers": [
+    {
+      "type": "ads",
+      "value": "2022ApJ...941...53G"
+    },
+    {
+      "type": "CDS/VizieR",
+      "value": "J/ApJ/941/53"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://ui.adsabs.harvard.edu/abs/2022ApJ...941...53G",
+      "label": "2022ApJ...941...53G"
+    },
+    {
+      "role": "archive",
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/941/53",
+      "label": "CDS J/ApJ/941/53"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/ApJ/941/53/ReadMe",
+      "checkedOn": "2026-10-04",
+      "locator": "table5.dat: 15 rows; 3 drawn as M96's globular cluster candidates."
+    },
+    {
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/ApJ/941/53/ReadMe",
+      "checkedOn": "2026-10-04",
+      "locator": "table8.dat: 30 rows; 8 drawn as Black Eye Galaxy's globular cluster candidates."
+    },
+    {
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/ApJ/941/53/ReadMe",
+      "checkedOn": "2026-10-04",
+      "locator": "table7.dat: 25 rows; 9 drawn as M94's globular cluster candidates."
+    }
+  ],
+  "creators": [
+    "R. A. González-Lópezlira",
+    "L. Lomelí-Núñez",
+    "Y. Órdenes-Briceño",
+    "L. Loinard",
+    "S. Gwyn",
+    "K. Álamo-Martínez",
+    "G. Bruzual",
+    "A. Lançon",
+    "T. H. Puzia"
+  ],
+  "publisher": "ApJ 941, 53",
+  "publicationDate": "2022",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite González-Lópezlira et al. (2022), ApJ 941, 53.",
+      "scope": "M96's globular cluster candidates",
+      "evidence": "https://cdsarc.cds.unistra.fr/ftp/J/ApJ/941/53/ReadMe"
+    }
+  ]
+}

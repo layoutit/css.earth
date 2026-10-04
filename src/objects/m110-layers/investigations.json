@@ -35,9 +35,10 @@
       "id": "dots",
       "subject": "Catalogued objects as dots",
       "status": "included",
-      "finding": "45 dots from 1 published table: 45 planetary nebulae (Merrett et al. (2006), CDS J/MNRAS/369/120, 3,300 rows in the file). Each dot is a catalogued object at its published sky position, placed on the plane the picture stands on; its depth is not measured, and it is not drawn.",
+      "finding": "51 dots from 2 published tables: 45 planetary nebulae (Merrett et al. (2006), CDS J/MNRAS/369/120, 3,300 rows in the file); 6 globular clusters (Sharina et al. (2006), CDS J/MNRAS/372/1259, 16 rows in the file). Each dot is a catalogued object at its published sky position, placed on the plane the picture stands on; its depth is not measured, and it is not drawn.",
       "evidence": [
-        "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/MNRAS/369/120"
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/MNRAS/369/120",
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/MNRAS/372/1259"
       ]
     }
   ]

@@ -287,7 +287,7 @@ cycle. Share anything else through `@cssearth/core` or another package. Prepared
   DOM, React, Vite, `sharp`, PolyCSS, renderer imports or file paths, and it never imports `node/`.
 - `src/volume/node/` is published as `@cssearth/bake/volume/node`: the compact-input replay, the XYZ slices, the
   compiler bake and the published catalogue point banks, with the galaxy groups' placement and the shell selection that
-  keeps them first (`catalogue-groups.ts`). `catalogue-spheroid.ts` draws a sky catalogue's depths through a published spheroid, around the Sun in kpc or around an
+  keeps them first (`catalogue-groups.ts`). `catalogue-spheroid.ts` draws a sky catalogue's depths through a published spheroid (a Sérsic fit, or a round system's projected power laws), around the Sun in kpc or around an
   object in pc. `body-points.ts` builds a bank centred on a body from positions relative to it
   (a planet's moons without a page); `packages/bake/cli/prepare-body-points.mts <object-directory> <id>` is its command. It may import `node:*`, `sharp`, the main volume entry and the
   objects' catalogue bank codec (`@cssearth/objects`), which packs a bank as the page decodes it. The main entry never imports it; the Node-only

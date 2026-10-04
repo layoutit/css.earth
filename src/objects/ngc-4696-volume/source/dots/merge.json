@@ -1,0 +1,23 @@
+{
+  "schema": "cssearth-catalogue-points-merge@1",
+  "id": "dots",
+  "published": true,
+  "meaning": "NGC 4696's compact objects as dots through its spheroid: Mieske et al.'s (2007) compact objects with measured velocities and Federle et al.'s (2024) globular cluster candidates.",
+  "centreOnGalaxy": true,
+  "banks": [
+    {
+      "bank": "mieske-gc",
+      "withinPcOfCentre": 64200,
+      "basis": "Presentation choice: a dot is drawn only inside the spheroid's 64.2 kpc edge, where the volume ends."
+    },
+    {
+      "bank": "federle-gc",
+      "withinPcOfCentre": 64200,
+      "basis": "Presentation choice: a dot is drawn only inside the spheroid's 64.2 kpc edge, where the volume ends."
+    }
+  ],
+  "colorTowardWhite": 0.5,
+  "colorTowardWhiteBasis": "Presentation choice: the Milky Way dots' value (milky-way/source/local-3kpc/merge.json), so both galaxies' dots read as the same tints of starlight.",
+  "colorGamma": 1.6,
+  "colorGammaBasis": "Presentation choice: the Milky Way dots' value (milky-way/source/local-3kpc/merge.json), picked there from three renders over its backing."
+}

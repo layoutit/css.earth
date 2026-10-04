@@ -124,6 +124,24 @@
           }
         ]
       }
+    },
+    {
+      "id": "olsen-gc-table",
+      "path": "src/objects/ngc-300-layers/source/olsen-gc/table3.dat",
+      "origin": "https://cdsarc.cds.unistra.fr/ftp/J/AJ/127/2674/table3.dat",
+      "title": "The globular cluster systems of the Sculptor group, table3.dat",
+      "credit": "K. A. G. Olsen, B. W. Miller, N. B. Suntzeff, R. A. Schommer, J. Bright; AJ 127, 2674",
+      "acquisition": "Published table downloaded unchanged from its CDS origin; read by packages/bake/cli/prepare-catalogue-points.mts through olsen-gc/points.json.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "olsen-2004-sculptor-globular-clusters",
+            "role": "material",
+            "evidence": "https://cdsarc.cds.unistra.fr/ftp/J/AJ/127/2674/table3.dat"
+          }
+        ]
+      }
     }
   ],
   "documents": [

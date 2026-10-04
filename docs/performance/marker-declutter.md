@@ -57,13 +57,13 @@ frame, though almost all lay under others.
 | Zoomed on to the Local Group's level: marker groups mounted (drawn), orbit groups, elements | 435 (0), 70, 3,942 | 1 (0), 0, 1,866 |
 | Milky Way page opened directly: marker groups mounted (drawn), elements | 40 (40), 2,260 | 15 (15), 2,160 |
 
-![The Sun's marker pile at 220 AU, main left and this change right, 3x](marker-declutter/pile-220-au.jpg)
+![The Sun's marker pile at 220 AU, main left and this change right, 3x](../images/marker-declutter/pile-220-au.jpg)
 
 The five reference views (Earth, Sun, Milky Way, Nearby Universe, Observable Universe) at threshold 0: Sun, Nearby
 Universe and Observable Universe are identical. Earth changes 17 pixels, two faint dots under brighter ones. Milky Way
 changes at its centre, where the neighbouring stars' dots no longer draw over the Sun's:
 
-![The Sun from the Milky Way's default view, main left and this change right, 8x](marker-declutter/sun-from-the-milky-way.jpg)
+![The Sun from the Milky Way's default view, main left and this change right, 8x](../images/marker-declutter/sun-from-the-milky-way.jpg)
 
 The Solar System card renders the same pixels with and without `content-visibility`, at its top and 3,000 px down.
 

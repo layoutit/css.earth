@@ -24,6 +24,14 @@ A survey image of the Black Eye Galaxy (NGC 4826), cleaned of the Milky Way star
 - **Near side:** the source gives the tilt, not which edge is nearer. The disc is drawn with the edge at position angle 24° nearer: an assumption, not a measurement.
 - **Sky:** the image's sky, (7, 7, 5) of 255 (each channel's median over the frame's outer ring), is subtracted as the background floor (7 of 255).
 
+## Dots
+
+| Catalogue | Drawn | Note |
+| --- | --- | --- |
+| [Globular cluster candidates (González-Lópezlira et al. 2022)](https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/941/53), [recipe](source/gonzalez-gc/points.json) | 8 | candidates picked by color and shape in CFHT images, not confirmed clusters; the file is the paper's table for NGC 4826; 22 more lie outside the photograph |
+
+The catalogue tables are files of the CDS archive (each descriptor's `table.origin`); they are not tracked. Each dot is a catalogued object at its published sky position, placed where its sight line meets the disc. Its height above the disc is drawn from a 163 pc layer, the scale length over 7.3 ([Kregel et al. 2002](https://arxiv.org/abs/astro-ph/0204154), [record](../../sources/kregel-2002-disc-flattening.json)); that height is not measured. Globular clusters near the centre can sit in the bulge, with the bulge's share of the fitted light there; that membership is drawn, not measured. Each dot takes its tone from the image's brightness under it and moves halfway from its kind's color to the image's color there. Globular clusters belong to a galaxy's halo and bulge as much as to its disc, so their places on the disc are approximate.
+
 ## Known problems
 
 - The bulge's depth is modelled, not measured: the paper fits light on the sky, and the spheroid is the one that shows its axis ratio at the disc's tilt.

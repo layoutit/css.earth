@@ -1,0 +1,60 @@
+{
+  "schema": "cssearth-catalogue-points-source@1",
+  "id": "cantiello-gc",
+  "table": {
+    "path": "table1.dat",
+    "origin": "https://cdsarc.cds.unistra.fr/ftp/J/ApJ/668/209/table1.dat",
+    "bytes": 10464,
+    "format": "fixed-width",
+    "columns": {
+      "name": [
+        1,
+        24
+      ],
+      "raH": [
+        1,
+        2
+      ],
+      "raM": [
+        4,
+        5
+      ],
+      "raS": [
+        7,
+        11
+      ],
+      "decSign": [
+        13,
+        13
+      ],
+      "decD": [
+        14,
+        15
+      ],
+      "decM": [
+        17,
+        18
+      ],
+      "decS": [
+        20,
+        24
+      ]
+    }
+  },
+  "filters": [],
+  "frame": {
+    "input": "icrs",
+    "output": "sun-icrf",
+    "epochJdTt": 2461286.5,
+    "placement": "image-layer-disc",
+    "converter": "Each sky position onto the plane the picture stands on, facing the Sun (recipe.json), through the image-layer bake's own intersection."
+  },
+  "source": "cantiello-2007-ngc5866-globular-clusters",
+  "meaning": "Globular cluster candidates of M102 from Cantiello et al.'s (2007) Hubble images: one dot per candidate at its catalogue position.",
+  "appearance": {
+    "colorCss": "#ffb38a",
+    "radiusPx": 1,
+    "opacity": 1,
+    "note": "Presentation only: the Milky Way globular clusters' warm orange. Each dot takes its tone and half its color from the photograph under it (packages/bake/cli/prepare-catalogue-points.mts)."
+  }
+}

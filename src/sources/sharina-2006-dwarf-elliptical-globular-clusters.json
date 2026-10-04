@@ -1,0 +1,51 @@
+{
+  "id": "sharina-2006-dwarf-elliptical-globular-clusters",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Ages, metallicities and [α/Fe] ratios of globular clusters in NGC 147, 185 and 205",
+  "identifiers": [
+    {
+      "type": "ads",
+      "value": "2006MNRAS.372.1259S"
+    },
+    {
+      "type": "CDS/VizieR",
+      "value": "J/MNRAS/372/1259"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://ui.adsabs.harvard.edu/abs/2006MNRAS.372.1259S",
+      "label": "2006MNRAS.372.1259S"
+    },
+    {
+      "role": "archive",
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/MNRAS/372/1259",
+      "label": "CDS J/MNRAS/372/1259"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/MNRAS/372/1259/ReadMe",
+      "checkedOn": "2026-10-04",
+      "locator": "objects.dat: 16 rows; 6 drawn as M110's globular clusters (The table holds NGC 147, NGC 185 and NGC 205 (M110); these are the rows of NGC 205.)."
+    }
+  ],
+  "creators": [
+    "M. E. Sharina",
+    "V. L. Afanasiev",
+    "T. H. Puzia"
+  ],
+  "publisher": "MNRAS 372, 1259",
+  "publicationDate": "2006",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite Sharina et al. (2006), MNRAS 372, 1259.",
+      "scope": "M110's globular clusters",
+      "evidence": "https://cdsarc.cds.unistra.fr/ftp/J/MNRAS/372/1259/ReadMe"
+    }
+  ]
+}
