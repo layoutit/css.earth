@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "j004805-3-251745",
+  "card": {
+    "text": "A hot blue supergiant in the halo of the galaxy NGC 253, 26,000 times as luminous as the Sun.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-20021909",
+        "url": "https://doi.org/10.1051/0004-6361:20021909",
+        "label": "Comerón et al. (2003), Astronomy & Astrophysics 400 137-143",
+        "checked": "2026-10-04",
+        "locator": "sections 3 and 3.1: radial velocity, T_eff, L; abstract (runaway or formed in the halo); erratum for the position"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Comerón et al. (2003) found it far from the galaxy's disc, moving with the galaxy: either a runaway thrown out of the disc or a star born in the halo.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-1051-0004-6361-20021909",
+        "url": "https://doi.org/10.1051/0004-6361:20021909",
+        "label": "Comerón et al. (2003), Astronomy & Astrophysics 400 137-143",
+        "checked": "2026-10-04",
+        "locator": "sections 3 and 3.1: radial velocity, T_eff, L; abstract (runaway or formed in the halo); erratum for the position"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its temperature",
+      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

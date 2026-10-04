@@ -11,13 +11,14 @@ import { resolve } from 'node:path';
 const OTHER = new RegExp('colo' + 'ur', 'iu');
 /** A URL, the Giotto camera, ESA's page section and the cited CIE title keep their own spelling. */
 const KEPT = new RegExp(`https?://[^\\s"'<>)\\]]+|Colo${'u'}rs & filters|Colo${'u'}r-matching functions of CIE 1931|Multicolo${'u'}r Camera`, 'gu');
-/** Files this check does not own: the lockfile, WorldWide Telescope's imageset list, a publisher's page, two pinned
- * scripts, and the root README, which its author edits by hand. */
+/** Files this check does not own: the lockfile, WorldWide Telescope's imageset list, a publisher's page, a recorded answer of the
+ * papers API with a paper's abstract in it, two pinned scripts, and the root README, which its author edits by hand. */
 const THIRD_PARTY = new Set([
   'README.md',
   'pnpm-lock.yaml',
   'data/wwt/core-imagesets.jsonl',
   'packages/telescope-cli/src/fixtures/telescope-papers/article.html',
+  'packages/telescope-cli/src/fixtures/telescope-stars/served-m51.json',
   'labs/nebula/models/lmc/candidates/source/wise-registration/validate-image-registration.pinned.py',
   'labs/nebula/packages/reconstruction/src/registration/validate-image-registration.py',
 ]);
