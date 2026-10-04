@@ -37,6 +37,10 @@ test('repreparing detail textures preserves the navigation arrival image', async
   const staged = await inventoryPublicAssets({ objectId: 'fixture', objectDirectory: preparedDirectory,
     preparedDirectory, publicRoot, urls: ['/scenes/fixture/surface.webp'] });
   assert.deepEqual(staged?.assets.map(asset => asset.filename), ['arrival.webp', 'surface.webp']);
+  // A redraw-only run carries the whole published set, the world billboard made from the arrival photograph included.
+  await writeFile(resolve(publicRoot, 'fixture-billboard.webp'), 'billboard');
+  const carried = await inventoryPublicAssets({ objectId: 'fixture', objectDirectory, publicRoot, urls: ['/scenes/fixture/surface.webp'] });
+  assert.deepEqual(carried?.assets.map(asset => asset.filename), ['arrival.webp', 'fixture-billboard.webp', 'surface.webp']);
 });
 
 test("one inventory per object: each location is written by its own stage and keeps the other's entries", async (context) => {

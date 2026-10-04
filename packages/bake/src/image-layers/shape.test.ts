@@ -156,3 +156,68 @@ test('a nebula\'s filled body holds the light inside its outline, carves its cav
     assert.match(bank.approximation.limitations.join(' '), /published outline, pole and cavity emission/);
   } finally { await rm(root, { recursive: true, force: true }); }
 });
+
+test('an inner shell closes inside the main shell, and measured speeds say where the fine detail lies', async () => {
+  const root = await mkdtemp(join(tmpdir(), 'image-layer-shape-inner-')), source = join(root, 'source');
+  try {
+    await mkdir(source);
+    // A smooth glow 14.6 arcsec in radius (36 arcsec across 64 pixels) with four knots and a star at its middle.
+    const pixel = 36 / SIZE, knots = { approaching: [28, 31], receding: [36, 33], resting: [31, 16], capped: [46, 32] } as const, rgb = Buffer.alloc(SIZE * SIZE * 3);
+    for (let y = 0; y < SIZE; y++) for (let x = 0; x < SIZE; x++) {
+      let lit = Math.hypot(x - 31.5, y - 31.5) < 26 ? 90 : 0;
+      for (const [kx, ky] of Object.values(knots)) lit += 150 * Math.exp(-((x - kx) ** 2 + (y - ky) ** 2) / 3);
+      if ((x === 31 || x === 32) && (y === 31 || y === 32)) lit += 160;
+      const at = 3 * (y * SIZE + x); rgb[at] = Math.min(255, lit); rgb[at + 1] = Math.min(255, 0.7 * lit); rgb[at + 2] = Math.min(255, 0.4 * lit);
+    }
+    await writeFile(join(source, 'source.png'), await sharp(rgb, { raw: { width: SIZE, height: SIZE, channels: 3 } }).png().toBuffer());
+    await writeFile(join(source, 'provenance.json'), '{}\n');
+    // North is up and east to the left: a knot's place from the star, in arcseconds, and its speed along the sight line.
+    const sky = ([kx, ky]: readonly [number, number]) => [(31.5 - kx) * pixel, (31.5 - ky) * pixel] as const, speeds = { approaching: -20, receding: 20, resting: 0, capped: 10 };
+    await writeFile(join(source, 'speeds.txt'), Object.entries(knots).map(([name, at]) => `${sky(at).map(value => value.toFixed(2)).join(' ')} skipped ${speeds[name as keyof typeof speeds]}`).join('\n') + '\n');
+    // The main shell is a sphere of 12 arcsec (8 km/s at 12 arcsec); the inner shell is 5 by 4 arcsec on the sky and,
+    // at 30 km/s under its own law of 5 km/s per arcsec, 6 arcsec along its pole, which points at the Sun.
+    const flat = { schema: 'cssearth-image-layer-recipe@1', id: 'fixture', source: { path: 'source.png', dimensions: [SIZE, SIZE], originalDimensions: [SIZE, SIZE], publisherUrl: 'https://example.test', downloadUrl: 'https://example.test/a', credit: 'Fixture', license: 'CC-BY-4.0' },
+      observation: { centerRaDeg: 10, centerDecDeg: 20, fieldOfViewDeg: [0.01, 0.01], northClockwiseDeg: 0 }, target: { centerRaDeg: 10, centerDecDeg: 20, distancePc: 1000 },
+      geometry: { kind: 'inclined-disk', inclinationDeg: 0.001, lineOfNodesPaDeg: 0, thicknessKpc: 1e-7, supportRadiusKpc: 0.0001, supportTaperFraction: 0.9, depthWeights: [0.25, 0.5, 0.25], depthScales: [1, 1, 1], unit: 'pc' },
+      bake: { maxFacePixels: SIZE, diffuseFacePixels: 16, crossAxisSlices: 3, crossAxisAlongPixels: 16, crossAxisDepthPixels: 9, backgroundFloor: 0, edgeTaperFraction: 0.01, diffuseFraction: 0.6, diffuseSigmaPixels: 1, flat: true, encoding: { format: 'webp', quality: 100 } },
+      provenance: { path: 'provenance.json' } };
+    const shape = { source: 'fixture', basis: 'fixture', expansionKmSPerArcsec: 8 / 12, ring: { semiMajorArcsec: 12, semiMinorArcsec: 12, majorPaDeg: 0, polarTiltDeg: 0, polarLeansToPaDeg: 0, expansionKmS: [8, 8, 8] },
+      inner: { source: 'fixture', semiMajorArcsec: 5, semiMinorArcsec: 4, majorPaDeg: 0, expansionKmSPerArcsec: 5, expansionKmS: [30, 30, 30] },
+      speeds: { source: 'fixture', basis: 'fixture', path: 'speeds.txt', columns: { east: 0, north: 1, kmS: 3 }, restKmS: 4, wallKmS: 10, reachArcsec: 0.8 }, starRadiusArcsec: 0.6, smoothPixels: 2 };
+    const shaped = { ...flat, geometry: { ...flat.geometry, shape }, bake: { ...flat.bake, bulgeSlices: 25, bulgeFacePixels: 32, bulgeCrossSlices: 8 } };
+    const reference = await prepareImageLayers({ sourceDirectory: source, outputDirectory: join(root, 'flat'), recipe: parseImageLayerRecipe(flat) });
+    const bank = await prepareImageLayers({ sourceDirectory: source, outputDirectory: join(root, 'shaped'), recipe: parseImageLayerRecipe(shaped) });
+    const leaves = bank.banks.find(entry => entry.axis === 'z')!.leaves as Leaf[], textures = await Promise.all(leaves.map(leaf => texture(join(root, 'shaped'), leaf)));
+    const order = textures.map((leaf, index) => ({ leaf, id: leaves[index]!.id })).sort((a, b) => b.leaf.depth - a.leaf.depth), arcsec = 1000 * Math.PI / 648000;
+    // Where a place's brightest light lies along the sight line, in arcseconds from the star: the terrace that shows the most of it.
+    const depthOf = ([east, north]: readonly [number, number]) => { let best = { depth: NaN, light: -1 };
+      for (const { leaf, id } of order) { const sample = id === 'z-detail' ? null : texel(leaf, east * arcsec, north * arcsec); if (sample && sample[0] * sample[3] > best.light) best = { depth: leaf.depth / arcsec, light: sample[0] * sample[3] }; }
+      return best.depth; };
+    // Inside the inner shell a knot is on the wall its speed gives: 6 arcsec along the pole, less toward the outline.
+    const approaching = depthOf(sky(knots.approaching)), receding = depthOf(sky(knots.receding));
+    assert.ok(approaching < -3 && approaching > -6.5, `the approaching knot is ${approaching} arcsec from the star's plane`);
+    assert.ok(receding > 3 && receding < 6.5, `the receding knot is ${receding} arcsec from the star's plane`);
+    // Outside it a knot at rest is on the equatorial plane, and one at the walls' speed on the main shell's far wall, 8.8 arcsec back there.
+    const resting = depthOf(sky(knots.resting)), capped = depthOf(sky(knots.capped));
+    assert.ok(Math.abs(resting) < 1.5, `the knot at rest is ${resting} arcsec from the plane`);
+    assert.ok(capped > 6 && capped < 10, `the knot at the walls' speed is ${capped} arcsec behind the plane`);
+    // The star's own light stays at the star, though the inner shell's walls stand 6 arcsec in front of it and behind.
+    assert.ok(Math.abs(depthOf([0.28, 0.28])) < 1.5, `the star's light is ${depthOf([0.28, 0.28])} arcsec from the star`);
+    const depths = order.filter(entry => entry.id !== 'z-detail').map(entry => entry.leaf.depth / arcsec);
+    assert.ok(Math.max(...depths) > 10 && Math.min(...depths) < -10, `the main shell's walls reach ${Math.min(...depths)} to ${Math.max(...depths)} arcsec`);
+    // The Sun's view: the leaves over one another, farthest first, against the flat bake of the same picture.
+    const flatLeaf = reference.banks.find(entry => entry.axis === 'z')!.leaves[0] as Leaf, flatTexture = await texture(join(root, 'flat'), flatLeaf);
+    let total = 0, count = 0, worst = 0;
+    for (let row = 0; row < flatTexture.height; row++) for (let column = 0; column < flatTexture.width; column++) {
+      const a = (column + 0.5) / flatTexture.width, b = (row + 0.5) / flatTexture.height, x = flatTexture.origin[0]! + a * flatTexture.right[0]! + b * flatTexture.down[0]!, y = flatTexture.origin[1]! + a * flatTexture.right[1]! + b * flatTexture.down[1]!, seen = [0, 0, 0];
+      for (const { leaf } of order) { const sample = texel(leaf, x, y); if (!sample) continue; const alpha = sample[3] / 255; for (let channel = 0; channel < 3; channel++) seen[channel] = sample[channel]! * alpha + seen[channel]! * (1 - alpha); }
+      const wanted = texel(flatTexture, x, y)!;
+      for (let channel = 0; channel < 3; channel++) { const difference = Math.abs(seen[channel]! - wanted[channel]! * wanted[3] / 255); total += difference; worst = Math.max(worst, difference); count++; }
+    }
+    assert.ok(total / count < 4, `the mean difference from the flat picture is ${(total / count).toFixed(2)} of 255 (worst ${worst.toFixed(0)})`);
+    assert.throws(() => parseImageLayerRecipe({ ...shaped, geometry: { ...shaped.geometry, shape: { ...shape, lobe: { source: 'fixture', radiusArcsec: 3, expansionKmS: [9, 9, 9] } } } }), /not both/u);
+    assert.throws(() => parseImageLayerRecipe({ ...shaped, geometry: { ...shaped.geometry, shape: { ...shape, speeds: { ...shape.speeds, columns: { east: 0, north: 1 } } } } }), /columns\.kmS/u);
+    await writeFile(join(source, 'speeds.txt'), '1.0 2.0 skipped fast\n');
+    await assert.rejects(prepareImageLayers({ sourceDirectory: source, outputDirectory: join(root, 'broken'), recipe: parseImageLayerRecipe(shaped) }), /speeds\.txt has a row without its east, north and speed columns/u);
+  } finally { await rm(root, { recursive: true, force: true }); }
+});

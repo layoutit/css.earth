@@ -1,0 +1,40 @@
+{
+  "id": "publication-garcia-diaz-2012-ngc-2392-model",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "A Detailed Morpho-Kinematic Model of [...] NGC 2392. A Unifying View with the Cat's Eye and Saturn Planetary Nebulae",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1211.6717"
+    },
+    {
+      "type": "doi",
+      "value": "10.1088/0004-637X/761/2/172"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/1211.6717",
+      "label": "Published reference"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/1211.6717",
+      "checkedOn": "2026-10-04",
+      "locator": "Sect. III.1: the inner shell's velocity ellipse reaches about 120 km/s either side of the systemic velocity (70.5 km/s) at the central slit; its main axis points slightly south and south-west of the observer. Sect. III.2: the outer shell is a narrow velocity ellipse of about 16 km/s, close to an expanding sphere; the cometary knots are at the systemic velocity, so they lie in a disc close to the plane of the sky. Sect. III.3: the caps, about 55 km/s, in front of and behind the inner shell; the northern ones recede. Sect. VI: outer shell angular radius 23 arcsec at 16 km/s; inner shell a deformed prolate spheroid, 120 km/s along its major axis, tilted 9 degrees from the line of sight, pointing towards position angle 205 degrees; homologous law v = k r / r0 with a different k for each component; cometary knots on an equatorial disc at a radius of about 17 arcsec; caps placed at the edge of the outer shell, two behind (north and west) and one in front (south); jet 165 to 180 km/s."
+    }
+  ],
+  "creators": [
+    "García-Díaz, Ma. T.",
+    "López, J. A.",
+    "Steffen, W.",
+    "Richer, M. G."
+  ],
+  "publisher": "ApJ 761, 172",
+  "publicationDate": "2012",
+  "relations": [],
+  "statements": []
+}

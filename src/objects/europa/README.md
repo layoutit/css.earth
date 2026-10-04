@@ -12,6 +12,7 @@ The navigation marker uses the source map as a stylized identifier. The [marker 
 - The Elevation view uses the [USGS controlled Agenor DTM](https://stac.astrogeology.usgs.gov/docs/data/jupiter/europa/europa_controlled_usgs_dtms/). The CC0 release and source authors retain attribution.
 - The geology view keeps the ten map units and no-data regions of [Leonard, Patthoff and Senske (2024), SIM 3513](https://pubs.usgs.gov/publication/sim3513), scale 1:15 million.
 - The infrared view uses [the registered Galileo NIMS archive](https://doi.org/10.17189/4sz4-5024), observations 17ENGLOBAL01A and 17ENGLOBAL02A, Minnaert-corrected CIOF products.
+- Lighting uses the Lommel–Seeliger plus Lambert law of [Dhingra, Buratti and Seignovert (2021)](https://doi.org/10.3847/PSJ/ac06d6), fitted to 21 Voyager 2, Galileo and New Horizons clear-filter images. See [Lighting law](#lighting-law).
 - The VLT/SPHERE composition release of [King, Fletcher and Ligier (2022)](https://doi.org/10.3847/PSJ/ac596d) is [Zenodo 6034904](https://doi.org/10.5281/zenodo.6034904). Its Ice signature, Fine ice and Coarse ice views are withheld (see Known problems).
 - Named features come from the IAU/USGS Gazetteer of Planetary Nomenclature centre-point shapefile (retrieved 2026-09-11, public domain per its FGDC metadata). Twelve names carry a caption note from the lead of their English Wikipedia article (CC BY-SA 4.0, retrieved 2026-09-12), credited in the caption beside the IAU naming year.
 - [NASA's Europa facts](https://science.nasa.gov/jupiter/jupiter-moons/europa/europa-facts/) support the introduction, oxygen atmosphere, and approximate 671,000 km distance from Jupiter.
@@ -53,6 +54,12 @@ These weights are visual choices, not fitted scattering parameters; the [USGS Eu
 
 **Globe.** The rendered sphere uses a 1,560.8 km radius; it is not a resolved shape model. Rotation is synchronous, 3.5255 days. Named features are placed with the map's left edge at 0° E.
 
+## Lighting law
+
+The globe is lit with the law of [Dhingra, Buratti and Seignovert (2021)](https://doi.org/10.3847/PSJ/ac06d6): I/F = A f(α) μ0/(μ0 + μ) + (1 − A) μ0. It adds a lunar-like term and a Lambert term, the form [Buratti and Veverka (1983)](https://doi.org/10.1016/0019-1035%2883%2990053-2) introduced for Europa. The coefficients are the ridged-plains lines of the paper's Table 2, A = 0.871 − 0.003 α and f = 1.556 − 0.014 α, with α the phase angle in degrees. The paper says ridged plains cover more than half of Europa and that the parameters differ little between terrains. The law is recorded in [`source/photometry/dhingra-2021-lommel-seeliger-lambert-clear.json`](source/photometry/dhingra-2021-lommel-seeliger-lambert-clear.json).
+
+Each lighting frame is the law relative to the flood-lit disc centre, so the centre of the default view shows the map as published. With the Sun behind the viewer the limb darkens to 0.86 of the centre. At 0.98 of the radius that is an overlay alpha of 0.06, where the authored bank this replaces reached 0.49. See [planet limbs](../../../docs/surface-preparation.md#planet-limbs-from-published-laws).
+
 ## Evidence
 
 The controlled photographs cover **14.335% of the sphere** with 324 contributing images; the 85° limit withholds 0.889% that the uncorrected mosaic showed. Their fitted gains span 0.227–2.527, with 31 limited by highlights. Without the Lambert step the gains spanned 0.306–11.534, with 110 limited.
@@ -79,6 +86,7 @@ The withheld composition grids match the original release exactly after float32 
 - **False color:** 756 nm, 559 nm and 404 nm are shown as red, green and blue. This is not natural color. About 14.3% of the sphere has usable three-band coverage.
 - **Elevation:** Heights are relative, not tied to a global reference level. Effective resolved detail is about 3 km; source documentation gives nominal 52 m vertical precision.
 - **Illumination:** The disk correction is approximate: no phase-angle normalization, fitted scattering model, or removal of cast shadows.
+- **Lighting law:** One law lights every terrain; the paper's chaos and crater rows differ from the ridged-plains row used. Its emission limit, 84.5°, is derived here, not stated by the paper. The fits cover 10° to 128° phase, so the flood-lit default view (0°) and frames beyond 128° use the printed lines outside that range. The line for f crosses zero at 111°; from there the lit side follows the Lambert term alone. The paper's own fit of its 10° image (A = 0.69, f = 1.17, its Figure 6) gives a darker flood-lit limb, 0.61 of the centre, than the lines of Table 2.
 - **Infrared:** This is a spectral color display, not an abundance map. Its 2010 registration grid is not the 2021 control grid.
 - **Feature outlines:** Craters and faculae trace a rim circle and other types their extent box; these are not published nomenclature boundaries.
 - **Composition reuse:** The Zenodo record is `other-open`, but gives no explicit terms for reusing the numerical release. The three composition views are withheld until such terms exist. SPHERE diffraction limits resolved features to about 150 km.
