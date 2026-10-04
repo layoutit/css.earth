@@ -1,5 +1,5 @@
 /** What VizieR says of a paper's tables, read from an ASU `-meta.all` answer: each table's rows and columns, and which
- * columns hold what a placed star needs (a name, a position of its own, a period, a temperature). VizieR takes a catalogue
+ * columns hold what a placed star needs (a name, a position of its own or a detector pixel, a period, a temperature). VizieR takes a catalogue
  * name (J/ApJ/743/176), a table name or a paper's bibcode as `-source`, so a paper is looked up without guessing its
  * catalogue name. A column is recognised by its UCD when the table has one and by its name otherwise: older tables carry
  * no UCDs. */
@@ -67,6 +67,9 @@ export interface StarColumns {
   readonly simbadName?: string;
   /** Whether the table carries a sky position; whether it is each star's own is seen only in its rows (starPositions). */
   readonly position: boolean;
+  /** Where the star sits on the detector, for a table that lists pixels instead of a sky position (the HST Cepheid papers): X, Y and, on a
+   * camera of several chips, the chip. The exposure they were measured on is the paper's to say (image-pixel.mts). */
+  readonly pixel?: { readonly x: string; readonly y: string; readonly chip?: string };
 }
 /** The columns of a table a placed star is read from. */
 export function starColumns(table: VizierTable): StarColumns {
@@ -80,7 +83,9 @@ export function starColumns(table: VizierTable): StarColumns {
     // A table without UCDs: a text column that leads it is the star's name ("Cepheid number"); a later one is a remark.
     ?? (named[0] && !named[0].ucd && isText(named[0]) ? named[0] : undefined))?.name;
   const simbadName = columns.find(column => /^S(?:imbad)?Name$/u.test(column.name) || /simbad (?:designation|name|identifier)/iu.test(column.description))?.name;
-  return { ...(identifier && identifier !== simbadName ? { identifier } : {}), ...(period ? { period } : {}), ...(temperature ? { temperature } : {}), ...(simbadName ? { simbadName } : {}), position: table.columns.some(isPosition) };
+  const pixelColumn = (axis: string) => (columns.find(column => column.ucd.startsWith(`pos.cartesian.${axis}`) && column.ucd.includes('instr')) ?? columns.find(column => !column.ucd && new RegExp(`^${axis}(?:pos|pix)?$`, 'iu').test(column.name)))?.name;
+  const x = pixelColumn('x'), y = pixelColumn('y'), chip = columns.find(column => (column.ucd.startsWith('meta.id') && column.ucd.includes('instr')) || /^(?:chip|ccd)$/iu.test(column.name))?.name;
+  return { ...(x && y ? { pixel: { x, y, ...(chip ? { chip } : {}) } } : {}), ...(identifier && identifier !== simbadName ? { identifier } : {}), ...(period ? { period } : {}), ...(temperature ? { temperature } : {}), ...(simbadName ? { simbadName } : {}), position: table.columns.some(isPosition) };
 }
 
 /** The data rows of a VizieR tab-separated answer, by column name. The header is the first line after the comments and the rows

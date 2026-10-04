@@ -47,6 +47,10 @@
  * other decimal J2000 columns ({ "ra": "_RAJ2000", "dec": "_DEJ2000" }, VizieR's own, for a sexagesimal table). Such a star takes
  * no `gaia`, and cites its distance, radial velocity, radius and mass; `target` is then only its SIMBAD name, for the README. A star
  * too bright for Gaia is placed the same way on its Hipparcos row, whose `motion` names the position's epoch and the proper-motion columns.
+ * A star its paper lists by detector pixel is placed through the archived exposure's own world coordinates: { "archive": "mast",
+ * "catalogue": "mast:HST/product/u6fv0101m_c0m.fits", "row": { "extension": "SCI,1", "x": "584.5", "y": "490.2" }, "firstPixel": 0.5,
+ * "credit", "url" }, where `row` is the extension (name and version) and the pixel as the paper prints it, and `firstPixel` is the
+ * coordinate the paper's software gives the centre of the first pixel (archives/images/image-pixel.mts).
  * `distance` (parsecs) places the star at a cited distance instead of Gaia DR3's parallax: for a star Gaia gives no parallax (a
  * two-parameter solution, as in other galaxies) or one under the placement floor (generate.mts PARALLAX_FLOOR_SIGMA), or when the
  * paper's own distance is the one its radius and mass assume. The README names the Gaia parallax it replaces.
@@ -133,7 +137,10 @@ export interface CataloguePosition { readonly catalogue: string; readonly row: R
   readonly columns?: { readonly ra: string; readonly dec: string };
   /** `simbad` places the star at SIMBAD's position of the object whose `main_id` is `row.main_id` (catalogue `basic`): for a star whose
    * own table gives each row no position, and whose rows CDS has matched to SIMBAD by name. */
-  readonly archive?: 'simbad';
+  readonly archive?: 'simbad' | 'mast';
+  /** With `mast`: `catalogue` is the MAST product, `row` its { extension, x, y }, and this the coordinate of the first pixel's centre in the
+   * paper's convention: 0.5 (HSTphot, DOLPHOT), 1 (DAOPHOT, IRAF, FITS) or 0. */
+  readonly firstPixel?: number;
   readonly motion?: { readonly epoch: number; readonly ra: string; readonly dec: string } }
 /** Sentences of the body's Wikipedia article lead, verbatim (prose.mts), cited as quotes beside the drafted text. */
 export interface DraftQuotes { readonly url: string; readonly title: string; readonly revision: string; readonly card?: string; readonly introduction?: string }
@@ -273,7 +280,9 @@ function cited(value: unknown, label: string, range: readonly [number, number]):
 }
 function cataloguePosition(value: unknown, label: string): CataloguePosition {
   const input = requireRecord(value, label), catalogue = requireString(input.catalogue, `${label}.catalogue`), row = requireRecord(input.row, `${label}.row`);
-  if (input.archive !== undefined && input.archive !== 'simbad') throw new TypeError(`${label}.archive is "simbad" or absent (a VizieR table), not ${JSON.stringify(input.archive)}.`);
+  if (input.archive !== undefined && input.archive !== 'simbad' && input.archive !== 'mast') throw new TypeError(`${label}.archive is "simbad", "mast" or absent (a VizieR table), not ${JSON.stringify(input.archive)}.`);
+  if (input.archive === 'mast') return imagePosition(input, label);
+  if (input.firstPixel !== undefined) throw new TypeError(`${label}.firstPixel belongs to a pixel on an archived image ("archive": "mast").`);
   const simbad = input.archive === 'simbad', entries = Object.entries(row).map(([column, cell]) => [column, requireString(cell, `${label}.row.${column}`)] as const);
   if (simbad ? catalogue !== 'basic' || entries.length !== 1 || entries[0]![0] !== 'main_id' || input.columns !== undefined || input.motion !== undefined : !/^[A-Z]+\/[\w+/.-]+$/u.test(catalogue))
     throw new TypeError(simbad ? `${label}: a SIMBAD position is { "archive": "simbad", "catalogue": "basic", "row": { "main_id": NAME } }, with no columns or motion.` : `${label}.catalogue is a VizieR table (J/ApJ/830/10/table5), not ${catalogue}.`);
@@ -286,6 +295,19 @@ function cataloguePosition(value: unknown, label: string): CataloguePosition {
   return { catalogue, row: Object.fromEntries(entries), credit: requireString(input.credit, `${label}.credit`), url, ...(simbad ? { archive: 'simbad' as const } : {}),
     ...(columns ? { columns: { ra: requireString(columns.ra, `${label}.columns.ra`), dec: requireString(columns.dec, `${label}.columns.dec`) } } : {}),
     ...(motion ? { motion: { epoch: epoch!, ra: requireString(motion.ra, `${label}.motion.ra`), dec: requireString(motion.dec, `${label}.motion.dec`) } } : {}) };
+}
+/** A pixel of one extension of a MAST product, as its paper prints it. */
+function imagePosition(input: Record<string, unknown>, label: string): CataloguePosition {
+  const catalogue = requireString(input.catalogue, `${label}.catalogue`), row = requireRecord(input.row, `${label}.row`), url = requireString(input.url, `${label}.url`);
+  const example = '{ "archive": "mast", "catalogue": "mast:HST/product/u6fv0101m_c0m.fits", "row": { "extension": "SCI,1", "x": "584.5", "y": "490.2" }, "firstPixel": 0.5 }';
+  if (!/^mast:[A-Za-z0-9_-]+\/product\/[\w.+-]+\.fits$/u.test(catalogue)) throw new TypeError(`${label}.catalogue is a MAST product (mast:HST/product/u6fv0101m_c0m.fits), not ${catalogue}.`);
+  const cells = Object.fromEntries(['extension', 'x', 'y'].map(key => [key, requireString(row[key], `${label}.row.${key}`)])) as { extension: string; x: string; y: string };
+  if (Object.keys(row).length !== 3 || !/^[A-Z][A-Z0-9_-]*,[1-9]\d*$/u.test(cells.extension) || ![cells.x, cells.y].every(cell => /^\d+(?:\.\d+)?$/u.test(cell)) || input.columns !== undefined || input.motion !== undefined)
+    throw new TypeError(`${label}: a pixel position is ${example}: the extension's name and version, and x and y as the paper prints them, with no columns or motion.`);
+  if (input.firstPixel !== 0 && input.firstPixel !== 0.5 && input.firstPixel !== 1)
+    throw new TypeError(`${label}.firstPixel is the coordinate the paper's software gives the centre of the first pixel: 0.5 (HSTphot, DOLPHOT), 1 (DAOPHOT, IRAF, FITS) or 0, not ${JSON.stringify(input.firstPixel)}.`);
+  if (!URL_PATTERN.test(url)) throw new TypeError(`${label}.url must be an https URL, not ${url}.`);
+  return { catalogue, row: cells, credit: requireString(input.credit, `${label}.credit`), url, archive: 'mast', firstPixel: input.firstPixel };
 }
 const citedOrFlame = (value: unknown, label: string, range: readonly [number, number]) => value === 'gaia-flame' ? 'gaia-flame' as const : cited(value, label, range);
 
