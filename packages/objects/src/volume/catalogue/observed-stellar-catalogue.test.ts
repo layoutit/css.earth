@@ -43,3 +43,12 @@ test('caller frame admission follows one envelope read and precedes star admissi
   assert.throws(() => parseObservedStellarCatalogue(once, () => { throw new Error('frame admission'); }), /frame admission/);
   assert.equal(reads, 3);
 });
+
+test('shared stellar text admission preserves the nonblank and 128-character limits', () => {
+  for (const sourceId of [' x ', 'x'.repeat(128)])
+    assert.equal(parseObservedStellarCatalogue({ ...catalogue([]), stars: [{ ...star('valid', 6), sourceId }] }).stars[0]!.sourceId, sourceId);
+  for (const sourceId of ['', ' ', 'x'.repeat(129), null, 1])
+    assert.throws(() => parseObservedStellarCatalogue({ ...catalogue([]), stars: [{ ...star('valid', 6), sourceId }] }), {
+      name: 'TypeError', message: 'Invalid observed stellar catalogue record.',
+    });
+});

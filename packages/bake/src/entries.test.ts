@@ -1,3 +1,5 @@
+import { catalogueCells, cataloguePointSpread } from '@cssearth/bake/volume';
+import { parseCatalogueCells, parseCataloguePointSpread } from '@cssearth/objects';
 import { readdir, readFile } from 'node:fs/promises';
 import { join, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -144,4 +146,12 @@ it('topics import no renderer entry or source subpath', async () => {
   for (const path of await sources(source)) for (const specifier of specifiers(await readFile(path, 'utf8')))
     if (/^@cssearth\/renderer(?:\/|$)/u.test(specifier)) found.push(`${relative(source, path)} -> ${specifier}`);
   assert.deepEqual(found, []);
+});
+
+it('the public volume entry prepares catalogue cells and spread admitted by objects', () => {
+  const points = [[-1, 0, -1], [1, 0, -1], [-1, 0, 1], [1, 0, 1]];
+  const cells = catalogueCells(points, [4], 2), spread = cataloguePointSpread(points);
+  assert.deepEqual([...parseCatalogueCells(cells, points, [4], 'entry').of], cells.of);
+  assert.deepEqual(parseCataloguePointSpread(spread, 'entry'), spread);
+  assert.ok(spread.across > 0 && spread.along < 1e-6);
 });

@@ -1,26 +1,26 @@
 /** Offline Gaia/Bailer-Jones neighbourhoods in the shared physical volume frame. */
+import { readNonblankText, isRecord } from '@cssearth/core';
 import { readFile, realpath } from 'node:fs/promises';
 import { isAbsolute, relative, resolve, sep } from 'node:path';
 import { parseDensityVolumeFrame, type DensityVolumeFrame, validatePreparedCataloguePoints, type PreparedCataloguePoint, parseGaiaNebulaField, type GaiaNebulaFieldStar } from '@cssearth/objects';
 import { rotateWorldPosition, transposeWorldRotation, worldRotationFromQuaternion } from '@cssearth/engine';
-
 import { ARCSECOND_RADIANS, METERS_PER_PARSEC } from './nebula-frame.ts';
-import { isRecord } from '@cssearth/core';
+
+const invalidText = (): never => { throw new TypeError('Catalogue field requires nonempty text.'); };
+
 
 type Vector = readonly [number, number, number];
 function record(v: unknown): Record<string, unknown> {
   if (!isRecord(v)) throw new TypeError('Catalogue field requires an object.');
   return v;
 }
-function text(v: unknown): string {
-  if (typeof v !== 'string' || !v.trim()) throw new TypeError('Catalogue field requires nonempty text.'); return v;
-}
+
 
 function outside(root: string, path: string): boolean {
   const rel = relative(root, path); return rel === '..' || rel.startsWith(`..${sep}`) || isAbsolute(rel);
 }
 async function readPinned(root: string, inputPin: unknown) {
-  const p = record(inputPin), path = text(p.path);
+  const p = record(inputPin), path = readNonblankText(p.path, '', invalidText);
   if (isAbsolute(path) || /[\\\u0000]/.test(path) || path.split('/').some(part => !part || part === '.' || part === '..'))
     throw new TypeError('Invalid catalogue field repository-relative path.');
   const owner = await realpath(root), target = await realpath(resolve(owner, path));

@@ -172,3 +172,20 @@ Before merging a CI change:
 
 Update this guide and the workflow budget comments in the same PR whenever the
 selection, cache, publication or deployment contract changes.
+
+### Derived toolchain and foreign-test coverage
+
+The astroquery lane discovers tests importing `astroqueryToolchain`, prints its
+file list, runs each file and requires a passing TAP summary with zero skips.
+Triggers come from telescope's transitive runtime workspace dependencies (core,
+objects and fits), telescope-cli, the discovered tests and lane configuration.
+The mixed bake HEALPix suite is excluded by name: it also reads the untracked
+Luhman 16 B posterior mean and variance NPY maps. It remains in bake's
+source-qualified test lane, where absent maps deliberately skip through
+`MissingSourceInputError`. The toolchain-only lane does not restore those maps.
+
+Discovery currently finds 394 bake/telescope-cli tests importing objects. The
+foreign-test limit is 150 files, so objects-only changes retain the tool gate;
+when the derived count falls to 150 or fewer, those imports select each test.
+Fixture readers and source-code pins are discovered from test literals, with
+module-relative and checkout-relative paths, rather than maintained owner maps.

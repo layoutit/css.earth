@@ -49,7 +49,7 @@ files, which the bake writes, `setup:assets` restores and the build assembles (t
 check an object against its contract (its final prepared definition, read from
 `src/objects/<id>/prepared/runtime.json`, and fixture values required before a test
 inspects them).
-`@cssearth/objects/node/source-test` is the Node-only test helper for restored object source inputs.
+`@cssearth/objects/node/source-test` is the public Node-only test API for restored source inputs across packages, labs, site and CI; `node/contract` provides fixtures and loaders and also exports this support.
 
 ```text
 packages/objects/
@@ -58,7 +58,7 @@ packages/objects/
 │   ├── provenance/ Provenance, exploration and source-usage records (`@cssearth/objects/provenance`)
 │   └── node/      Source manifests, the prepared registry read and the runtime asset closure (`@cssearth/objects/node`, Node only)
 │       ├── contract/ Object test helpers (`@cssearth/objects/node/contract`, Node only)
-│       └── source-test.ts Compatibility facade for contract/source-test.ts (`@cssearth/objects/node/source-test`, Node only)
+│       └── source-test.ts Public restored-source test API (`@cssearth/objects/node/source-test`, Node only)
 ├── AGENTS.md      Package boundaries
 └── CLAUDE.md      Symlink to AGENTS.md
 ```

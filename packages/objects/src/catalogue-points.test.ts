@@ -1,32 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { isDeepStrictEqual } from 'node:util';
-import { catalogueCells, parseCatalogueCells } from './catalogue-points.js';
-
-const grid = (count: number) => Array.from({ length: count }, (_, index) => [index % 10, Math.floor(index / 10) % 10, Math.floor(index / 100), index % 3]);
-
-test('cells hold at most their share of points, each point in a box that holds it', () => {
-  const points = grid(1000), cells = catalogueCells(points, undefined, 64);
-  const sizes = new Map<number, number>();
-  cells.of.forEach((cell, index) => {
-    sizes.set(cell, (sizes.get(cell) ?? 0) + 1);
-    const box = cells.boxes[cell]!;
-    for (let axis = 0; axis < 3; axis++) assert.equal((points[index]![axis]! >= box[axis]! && points[index]![axis]! <= box[axis + 3]!), true);
-  });
-  assert.ok(Math.max(...sizes.values()) <= 64);
-  assert.equal(sizes.size, cells.boxes.length);
-  assert.deepEqual(catalogueCells(points, undefined, 64), cells, 'the same rows give the same cells');
-});
-
-test('a cell never spans two levels, and the parsed cells match the written ones', () => {
-  const points = grid(300), cells = catalogueCells(points, [100, 200], 64);
-  const levelOf = (index: number) => index < 100 ? 0 : 1, cellLevel = new Map<number, number>();
-  cells.of.forEach((cell, index) => { assert.equal((cellLevel.get(cell) ?? levelOf(index)), levelOf(index)); cellLevel.set(cell, levelOf(index)); });
-  const parsed = parseCatalogueCells(cells, points, [100, 200], 'bank');
-  assert.deepEqual(([...parsed.of]), cells.of);
-  assert.deepEqual(([...parsed.boxes]), cells.boxes.flat());
-  assert.throws(() => catalogueCells(points, [100, 100]), /Levels of 100 \+ 100 points do not add up to the bank's 300/u);
-});
+import { parseCatalogueCells } from './catalogue-points.js';
 
 test('parsing refuses cells that lose a point, misplace it, leave a box empty or span levels', () => {
   const points = [[0, 0, 0], [1, 1, 1], [5, 5, 5]];

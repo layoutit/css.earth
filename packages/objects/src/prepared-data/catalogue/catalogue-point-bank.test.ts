@@ -2,13 +2,13 @@ import { readFileSync } from 'node:fs';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import assert from 'node:assert/strict';
-import { isDeepStrictEqual } from 'node:util';
 import { readCataloguePointBank, parseCataloguePointSteps } from './catalogue-point-bank.js';
-import { catalogueCells, cataloguePointSpread, decodeCatalogueBankBinary } from '@cssearth/objects';
+import { decodeCatalogueBankBinary } from '@cssearth/objects';
 import { unpackPreparedBinary } from '@cssearth/objects/node';
 
-/** What the bake adds to a published bank (catalogue-banks.ts): its spread and its cells, per level. */
-const baked = (points: readonly (readonly number[])[], levels?: readonly number[]) => ({ spread: cataloguePointSpread(points), cells: catalogueCells(points, levels) });
+/** Literal prepared fixture: reader tests never derive the writer's geometry. */
+const baked = (points: readonly (readonly number[])[]) => ({ spread: { normal: [0, 1, 0], across: 20, along: 0 },
+  cells: { boxes: [[-20, -20, -20, 20, 20, 20]], of: points.map(() => 0) } });
 
 const frame = { referenceFrame: 'sun-icrf', epochJdTt: 2451545, originM: [0, 0, 0], localToReferenceXyzw: [0, 0, 0, 1],
   metersPerUnit: 1, boundsUnits: { min: [-20, -20, -20], max: [20, 20, 20] } };
@@ -23,12 +23,12 @@ test('the prepared catalogues the app draws are valid banks of every selected ro
     ['nearby-universe-galaxies', 'quasar-dots'], ['m31-layers', 'stars'], ['m31-layers', 'dots'], ['m33-layers', 'stars'], ['m33-layers', 'dots'], ['m81-layers', 'dots'], ['ngc-253-layers', 'dots']]) {
     const path = new URL(`../../../../../src/objects/${object}/prepared/${id}.bin`, import.meta.url);
     const prepared = decodeCatalogueBankBinary(unpackPreparedBinary(readFileSync(path), path.pathname), path.pathname) as {
-      points: number[][]; counts: { points: number; missingDistance?: number; selected?: number }; source?: string; appearance: { levels?: { points: number }[] } };
+      points: number[][]; spread: { normal: number[]; across: number; along: number }; cells: { boxes: number[][]; of: number[] }; counts: { points: number; missingDistance?: number; selected?: number }; source?: string; appearance: { levels?: { points: number }[] } };
     const parsed = readCataloguePointBank(prepared);
     assert.equal(parsed.id, id);
     assert.equal(parsed.points.length, prepared.counts.points);
-    assert.deepEqual(parsed.spread, cataloguePointSpread(prepared.points), `${object}/${id}: the bake's spread is the one its points trace`);
-    const cells = catalogueCells(prepared.points, prepared.appearance.levels?.map(level => level.points));
+    assert.deepEqual(parsed.spread, prepared.spread);
+    const cells = prepared.cells;
     assert.deepEqual(([...parsed.cells.of]), cells.of, `${object}/${id}: the bake's cells are the ones its points and levels give`);
     // A merged or stacked bank (packages/bake/cli/merge-catalogue-points.mts, stack.mts) counts only its points; a prepared one also its rows.
     if (prepared.source !== 'merge' && prepared.source !== 'stack') assert.equal((prepared.counts.points + prepared.counts.missingDistance!), prepared.counts.selected);

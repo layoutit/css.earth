@@ -1,12 +1,12 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { catalogueCells, decodeCatalogueBankBinary, encodeCatalogueBankBinary } from '@cssearth/objects';
+import { decodeCatalogueBankBinary, encodeCatalogueBankBinary } from '@cssearth/objects';
 import { packPreparedBinary, unpackPreparedBinary } from '@cssearth/objects/node';
 
 test('a catalogue bank decodes to exactly the JSON it was, and refuses positions that would not', () => {
   const points = [[1.2345, -6932.1, 0, 2], [0.0001, 198.4, -25.47, 0], [-1e-4, 3, 4, 300]];
   const bank = { schema: 'cssearth-catalogue-points@1', id: 'b', appearance: { palette: ['#fff'] }, spread: { normal: [0, 0, 1], across: 1, along: 0 },
-    points, cells: catalogueCells(points) };
+    points, cells: { boxes: [[-0.0001, -6932.1, -25.47, 1.2345, 198.4, 4]], of: [0, 0, 0] } };
   const { bytes, regions } = encodeCatalogueBankBinary(bank, 'b');
   const decoded = decodeCatalogueBankBinary(unpackPreparedBinary(packPreparedBinary(bytes, regions)), 'b');
   assert.deepEqual(decoded, bank);

@@ -56,7 +56,7 @@ export function checkoutState(path: string, repository = root): CheckoutState {
 export function missingSourceReason(error: unknown, objectId: string | null = null, stateOf: (path: string) => CheckoutState = checkoutState, restoreHint: RestoreHint = defaultRestoreHint): string | null {
   if (!(error instanceof Error)) return null;
   const objects = resolve(root, 'src/objects') + sep, inside = root + sep;
-  // sharp names an absent input in its message instead of an ENOENT code and path.
+  // Known third-party limit: sharp names an absent input in its message instead of an ENOENT code and path.
   const sharpMissing = /^Input file is missing: (.+)$/u.exec(error.message)?.[1];
   const code = sharpMissing ? 'ENOENT' : 'code' in error ? error.code : undefined;
   const path = sharpMissing ? resolve(sharpMissing) : 'path' in error && typeof error.path === 'string' ? resolve(error.path) : null;

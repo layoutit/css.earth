@@ -1,3 +1,5 @@
+import { readFileSync } from 'node:fs';
+import { parseCatalogueCells } from '@cssearth/objects';
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { isDeepStrictEqual } from 'node:util';
@@ -110,7 +112,6 @@ test('dots a zoom adds arrive during the zoom, through the pacer; dots it takes 
 });
 
 test('prepared cells skip out-of-view boxes without changing a single drawn dot or the paint decisions', async () => {
-  const { catalogueCells } = await import('@cssearth/objects');
   const frame = { referenceFrame: 'sun-icrf', epochJdTt: 2451545, originM: [0, 0, 0] as const, localToReferenceXyzw: [0, 0, 0, 1] as const,
     metersPerUnit: 1, boundsUnits: { min: [-200, -200, -200] as const, max: [200, 200, 200] as const } };
   let seed = 11;
@@ -122,13 +123,14 @@ test('prepared cells skip out-of-view boxes without changing a single drawn dot 
     const clump = [[40, 0, -60], [-90, 30, 20], [5, -5, 5]][index % 3]!;
     return [clump[0]! + (random() - .5) * 30, clump[1]! + (random() - .5) * 30, clump[2]! + (random() - .5) * 30, index % 2];
   });
-  const cells = catalogueCells(rows, undefined, 32);
+  // Preserved bake output for the deterministic rows above; parser admission verifies every box.
+  const cells = parseCatalogueCells(JSON.parse(readFileSync(new URL('./batched-spatial-points.cells.json', import.meta.url), 'utf8')), rows, [rows.length], 'culling fixture');
   const points = rows.map(row => ({ positionUnits: [row[0], row[1], row[2]] as unknown as readonly [number, number, number], color: row[3] }));
   const styles = [{ colorCss: '#ffffff', opacity: .5, radiusPx: 1 }, { colorCss: '#ff8800', opacity: 1, radiusPx: 2.5 }];
   let keep = 1, drawn = rows.length;
   const mount = (withCells: boolean) => { const { document } = parseHTML('<div id="host"></div>');
     return mountBatchedSpatialPoints({ host: document.getElementById('host')!, frame, points, className: 'test-points',
-      ...(withCells ? { cells: { boxes: Float64Array.from(cells.boxes.flat()), of: Int32Array.from(cells.of) } } : {}),
+      ...(withCells ? { cells: { boxes: cells.boxes, of: cells.of } } : {}),
       stylePoint: point => styles[point.color]!, paintPalette: styles.map(pointPaint), drawnCount: () => drawn, keepFraction: () => keep }); };
   const dots = (field: ReturnType<typeof mount>) => [...field.root.querySelectorAll('path')]
     .map(path => [...(path.getAttribute('d') ?? '').matchAll(/M-?\d+ -?\d+h\.1/g)].map(match => match[0]).sort().join(''));
@@ -162,7 +164,7 @@ test('prepared cells skip out-of-view boxes without changing a single drawn dot 
   }
   assert.equal(checked, 300);
   assert.equal(skippedSome, true, 'some views leave most points out');
-  assert.ok((skippedCells / 300) > cells.boxes.length / 4, 'the cells skip most of what a view leaves out');
+  assert.ok((skippedCells / 300) > (cells.boxes.length / 6) / 4, 'the cells skip most of what a view leaves out');
   plain.destroy(); celled.destroy();
 });
 

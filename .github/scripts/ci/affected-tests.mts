@@ -6,8 +6,8 @@ export { testLaneFiles } from '../../../packages/core/src/node/script-test-files
  *   node .github/scripts/ci/affected-tests.mts <base ref>    append test_packages and test_site to $GITHUB_OUTPUT
  *   node .github/scripts/ci/affected-tests.mts               (no base: a push) test everything */
 import { execFileSync } from 'node:child_process';
-import { appendFileSync, readdirSync, readFileSync } from 'node:fs';
-import { resolve } from 'node:path';
+import { appendFileSync, existsSync, readdirSync, readFileSync } from 'node:fs';
+import { dirname, relative, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 
 export interface Workspace { readonly directory: string; readonly name: string; readonly dependencies: readonly string[]; }
@@ -26,8 +26,6 @@ const SHARED = [/^package\.json$/u, /^pnpm-lock\.yaml$/u, /^pnpm-workspace\.yaml
 /** The offline preparation and archive tools. Many changes touch a package they import, so a
  * tool joins only when it, or another tool it imports, changed; a push to main tests them whatever changed. */
 const TOOLS = new Set(['bake', 'telescope-cli']);
-// This producer contract was explicitly routed for objects changes before discovery.
-const TOOL_FOREIGN_TESTS = new Map([['packages/bake/src/presentation/depth-partition-contract.test.ts', ['objects']]]);
 /** A tool test that pins another package's frozen fixture reads it through a `<package>/test/` path; editing that fixture
  * selects the pinning test, so the producer check runs on the pull request, not only after the merge. */
 export function readsChangedFixture(text: string, paths: readonly string[]): boolean {
@@ -38,16 +36,34 @@ export function readsChangedFixture(text: string, paths: readonly string[]): boo
 }
 const SITE = [/^site\//u, /^src\//u, /^integration\//u, /^\.github\//u, /^labs\/performance\//u];
 
-/** Sources outside `packages/` whose schema literals a package test pins (see `packages/bake/src/sources/python-schema-identifiers.test.ts`
- * and `shell-grid-schema.test.ts`): a change confined to one of them still selects the package that owns the pin. */
-const PINNED_SOURCE_OWNERS: Readonly<Record<string, string>> = Object.freeze({
-  '.github/scripts/checks/check-body-references.mts': 'bake',
-  'src/objects/heliosphere/source/ibex/extract.py': 'bake',
-});
+/** Derive source pins from repository-path literals read by tests, including module-relative URLs. */
+export function pinnedSourceOwners(root: string, owners: ReadonlyMap<string, readonly string[]>): ReadonlyMap<string, readonly string[]> {
+  const pins = new Map<string, string[]>();
+  for (const test of owners.keys()) {
+    if (!test.startsWith('packages/')) continue;
+    const owner = test.split('/')[1]!;
+    const text = readFileSync(resolve(root, test), 'utf8');
+    const literals = [...text.matchAll(/['"]([^'"\n]+)['"]/gu)].map(match => match[1]!);
+    const directories = literals.filter(value => value.endsWith('/')).flatMap(value => [resolve(root, value), resolve(root, dirname(test), value)]);
+    for (const value of literals.filter(value => /\.(?:py|[cm]?ts)$/u.test(value))) {
+      for (const candidate of [resolve(root, value), resolve(root, dirname(test), value), ...directories.map(directory => resolve(directory, value))]) {
+        const path = relative(root, candidate);
+        if (!path.startsWith('../') && existsSync(candidate)) pins.set(path, [...new Set([...(pins.get(path) ?? []), owner])]);
+      }
+    }
+  }
+  return pins;
+}
+export const TOOL_OBJECT_TEST_LIMIT = 150;
+let repositoryPins: ReadonlyMap<string, readonly string[]> | undefined;
+function defaultPins(): ReadonlyMap<string, readonly string[]> {
+  const root = resolve(import.meta.dirname, '../../..');
+  return repositoryPins ??= pinnedSourceOwners(root, testOwners(root));
+}
 
-export function affectedTests(paths: readonly string[] | null, packages: readonly Workspace[], siteDependencies: readonly string[], owners: ReadonlyMap<string, readonly string[]> = testOwners(resolve(import.meta.dirname, '../../..'))): AffectedTests {
+export function affectedTests(paths: readonly string[] | null, packages: readonly Workspace[], siteDependencies: readonly string[], owners: ReadonlyMap<string, readonly string[]> = testOwners(resolve(import.meta.dirname, '../../..')), pins: ReadonlyMap<string, readonly string[]> = defaultPins()): AffectedTests {
   if (paths === null || paths.some(path => SHARED.some(pattern => pattern.test(path)))) return { packages: 'all', site: true, files: [] };
-  const changed = new Set(paths.flatMap(path => /^packages\/([^/]+)\//u.exec(path)?.[1] ?? PINNED_SOURCE_OWNERS[path] ?? []));
+  const changed = new Set(paths.flatMap(path => /^packages\/([^/]+)\//u.exec(path)?.[1] ?? pins.get(path) ?? []));
   // Everything that imports a changed package can break with it: walk the dependents until nothing new joins.
   const byName = new Map(packages.map(workspace => [workspace.name, workspace.directory]));
   const joins = (workspace: Workspace) => workspace.dependencies.some(name => {
@@ -63,10 +79,11 @@ export function affectedTests(paths: readonly string[] | null, packages: readonl
   const fixtureReaders = new Map<string, string>(paths.some(path => /^packages\/[^/]+\/test\//u.test(path))
     ? [...owners.keys()].filter(test => TOOLS.has(/^packages\/([^/]+)\//u.exec(test)?.[1] ?? '')).map(test => [test, readFileSync(resolve(import.meta.dirname, '../../..', test), 'utf8')] as const)
     : []);
+  const toolObjectCount = [...owners].filter(([file, imports]) => TOOLS.has(file.split('/')[1] ?? '') && imports.includes('objects')).length;
   const files = [...owners].filter(([test, imports]) => !changed.has(/^packages\/([^/]+)\//u.exec(test)?.[1] ?? '')
     && (!TOOLS.has(/^packages\/([^/]+)\//u.exec(test)?.[1] ?? '')
       ? imports.some(owner => changed.has(owner)) || paths.includes(test)
-      : TOOL_FOREIGN_TESTS.get(test)?.some(owner => changed.has(owner)) === true
+      : (changed.has('objects') && toolObjectCount <= TOOL_OBJECT_TEST_LIMIT && imports.includes('objects'))
         || (fixtureReaders.has(test) && readsChangedFixture(fixtureReaders.get(test)!, paths)))).map(([test]) => test).sort();
   return { packages: [...changed].sort(), site, files };
 }

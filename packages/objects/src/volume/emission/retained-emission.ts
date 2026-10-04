@@ -1,10 +1,11 @@
-const jointRecord = (v: unknown): v is Record<string, unknown> => v !== null && typeof v === 'object' && !Array.isArray(v);
+import { isFiniteTriple as triple } from '@cssearth/core';
 import { readCompilerControls } from '../compiler/compiler-controls.js';
 import { EMISSION_FIELD_SCHEMA } from './emission-field-types.js';
 import type { EmissionComponent, EmissionFieldModel } from './emission-field-types.js';
 import { readPhotometricEnvelope } from './photometric-emission.js';
 import { readEmissionWindow } from './emission-window.js';
-const triple = (v: unknown): v is [number, number, number] => Array.isArray(v) && v.length === 3 && v.every(Number.isFinite);
+
+const jointRecord = (v: unknown): v is Record<string, unknown> => v !== null && typeof v === 'object' && !Array.isArray(v);
 function component(v: unknown): v is EmissionComponent {
   return jointRecord(v) && typeof v.id === 'string' && typeof v.basisId === 'string' && triple(v.center) && triple(v.sigma) && v.sigma.every(n => n > 0) &&
     typeof v.angleRadians === 'number' && Number.isFinite(v.angleRadians) && typeof v.projectedWeight === 'number' && Number.isFinite(v.projectedWeight) && v.projectedWeight >= 0 &&

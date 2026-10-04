@@ -357,6 +357,12 @@ test('retired root tests and dependent integration owners fail without a baselin
     write('packages/c/package.json', '{"name":"@x/c","dependencies":{"@x/a":"workspace:*"}}');
     write('integration/example.test.mts', "import '@x/a'; import '@x/b';\n");
     assert.equal(broken(), false, 'independent owners are green');
+    write('packages/objects/package.json', '{"name":"@cssearth/objects"}');
+    write('packages/astronomy/package.json', '{"name":"@cssearth/astronomy"}');
+    write('integration/example.test.mts', "import '@cssearth/objects'; import '@cssearth/astronomy';\n");
+    assert.equal(broken(), true, 'objects is shared: objects plus astronomy is still one independent owner');
+    write('integration/example.test.mts', "import '@x/a'; import '@x/b';\n");
+
     write('tests/new.mts', 'export {};');
     assert.equal(broken(), true, 'an untracked root tests file is red');
     execFileSync('git', ['add', 'tests/new.mts'], { cwd: root });

@@ -85,3 +85,10 @@ The same rule compares CLI implementation exports with the committed
 or default implementations, but other exported functions, classes and value re-exports
 belong in `src/`. Existing entries cannot gain exports beyond their recorded allowance. The check needs
 no git refs or history and checks library surfaces rather than command-body complexity.
+
+The format/root source ratchets are in `source-ratchets.json`. Each remaining objects numeric
+admission or ordering file and each working-directory command has a specific reason. New
+files fail, stale allowances must be removed, and budgets can only shrink compared with
+`origin/main` when that prior budget is available. Initial adoption and shallow checkouts
+still enforce the current committed budget. Unit mutations prove math, sorting, root calls,
+and budget growth fail; tests and comments are excluded through the TypeScript syntax tree.

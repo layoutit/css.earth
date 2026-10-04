@@ -619,7 +619,7 @@ jobs:
       - name: Install workspace dependencies
         run: pnpm install --frozen-lockfile --ignore-scripts
       - name: Build the telescope dependency closure
-        run: node .github/scripts/architecture/workspace-builds.mts --run @cssearth/telescope
+        run: node .github/scripts/architecture/workspace-builds.mts --run @cssearth/telescope-cli @cssearth/bake
       - name: Install micromamba for the toolchain installer
         # The installer runs `micromamba create` and the runner image has no micromamba. A pinned release binary, so the
         # install cannot change under the lane.
@@ -635,9 +635,8 @@ jobs:
           node packages/telescope-cli/src/toolchains/astronomy-toolchains.mts astroquery verify
       - name: Require all archive safety and CDF tests to run
         run: |
-          node --test --test-reporter=tap packages/telescope-cli/src/families/f07-dynamic-spectrum.test.mts packages/telescope-cli/src/vo/package.test.mts > astroquery.tap
-          cat astroquery.tap
-          node .github/scripts/ci/astroquery-tests.mts astroquery.tap
+          node .github/scripts/ci/astroquery-tests.mts --list
+          node .github/scripts/ci/astroquery-tests.mts --run
 
   ci-guard:
     name: Report the first CI failure

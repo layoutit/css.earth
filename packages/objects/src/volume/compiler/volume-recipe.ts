@@ -1,6 +1,7 @@
-export const VOLUME_RECIPE_SCHEMA = 'cssearth-volume-recipe@1';
+import { requireFiniteTriple as triple, readNonemptyText, requireFiniteNumber as finite, requireRecord as record } from '@cssearth/core';
 import type { Axis, Bounds3, Vector3 } from '../emission/coordinates.js';
-import { requireFiniteNumber as finite, requireRecord as record } from '@cssearth/core';
+
+export const VOLUME_RECIPE_SCHEMA = 'cssearth-volume-recipe@1';
 /** Data-only emission/absorption recipe for a bounded scalar-field volume. */
 /** Row-major transform of ordinary display RGB values during offline preparation. */
 export type DisplayColorMatrix = [number, number, number, number, number, number, number, number, number];
@@ -34,18 +35,10 @@ function positive(value: unknown, at: string, integer = false): number {
   if (n <= 0 || (integer && !Number.isInteger(n))) throw new TypeError(`${at} must be positive${integer ? ' integer' : ''}.`);
   return n;
 }
-function text(value: unknown, at: string): string {
-  if (typeof value !== 'string' || !value) throw new TypeError(`${at} must be a string.`);
-  return value;
-}
 function sourcePath(value: unknown): string {
-  const path = text(value, 'source path');
+  const path = readNonemptyText(value, 'source path', () => { throw new TypeError(`source path must be a string.`); });
   if (path.startsWith('/') || path.split('/').includes('..') || /[\\\u0000]/.test(path)) throw new TypeError('Source must be contained and relative.');
   return path;
-}
-function triple(value: unknown, at: string): Vector3 {
-  if (!Array.isArray(value) || value.length !== 3) throw new TypeError(`${at} must contain three numbers.`);
-  return [finite(value[0], at), finite(value[1], at), finite(value[2], at)];
 }
 function interval(value: unknown, at: string): [number, number] {
   if (!Array.isArray(value) || value.length !== 2) throw new TypeError(`${at} must be an interval.`);
@@ -93,7 +86,7 @@ export function parseVolumeRecipe(value: unknown): VolumeRecipe {
   const sky = r.sky === undefined ? undefined : record(r.sky, 'sky recipe');
   if (!Array.isArray(r.anchors)) throw new TypeError('anchors must be an array.');
   const anchors = r.anchors.map((entry: unknown) => {
-    const anchor = record(entry, 'anchor'); return { id: text(anchor.id, 'anchor id'), referencePositionM: triple(anchor.referencePositionM, 'anchor position') };
+    const anchor = record(entry, 'anchor'); return { id: readNonemptyText(anchor.id, 'anchor id', () => { throw new TypeError(`anchor id must be a string.`); }), referencePositionM: triple(anchor.referencePositionM, 'anchor position') };
   });
   if (new Set(anchors.map(a => a.id)).size !== anchors.length) throw new TypeError('Anchor IDs must be unique.');
   if (r.drawSlices !== undefined && (r.drawSlices !== false || r.hybrid !== undefined)) throw new TypeError('drawSlices may only be false, and then without a hybrid core.');

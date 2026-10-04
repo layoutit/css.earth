@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { globSync, readdirSync, readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
-import { affectedTests, testLaneFiles, testOwners } from './affected-tests.mts';
+import { affectedTests, pinnedSourceOwners, TOOL_OBJECT_TEST_LIMIT, testLaneFiles, testOwners } from './affected-tests.mts';
 
 const packages = [
   { directory: 'core', name: '@cssearth/core', dependencies: [] },
@@ -87,9 +87,12 @@ test('real-tree discovery keeps offline tools bounded for objects and runs them 
   const objects = affectedTests(['packages/objects/src/index.ts'], workspaces, site, discovered);
   assert.notEqual(objects.packages, 'all');
   assert.ok(!objects.packages.includes('bake') && !objects.packages.includes('telescope-cli'));
-  assert.deepEqual(objects.files.filter(file => /^packages\/(bake|telescope-cli)\//u.test(file)),
-    ['packages/bake/src/presentation/depth-partition-contract.test.ts']);
-  assert.ok(objects.files.length <= 20, `unbounded foreign discovery: ${objects.files.length}`);
+  const toolTests = [...discovered].filter(([file, imports]) => /^packages\/(bake|telescope-cli)\//u.test(file) && imports.includes('objects'));
+  assert.ok(toolTests.length > TOOL_OBJECT_TEST_LIMIT);
+  const bounded = new Map(toolTests.slice(0, TOOL_OBJECT_TEST_LIMIT));
+  const boundedResult = affectedTests(['packages/objects/src/index.ts'], workspaces, site, bounded, new Map());
+  assert.deepEqual(boundedResult.files, [...bounded.keys()].sort(), 'real discovered imports run at the bounded count');
+  assert.deepEqual(objects.files.filter(file => /^packages\/(bake|telescope-cli)\//u.test(file)), []);
   const bake = affectedTests(['packages/bake/src/stars/point-field-bank.ts'], workspaces, site, discovered);
   assert.ok(bake.packages.includes('bake') && bake.packages.includes('telescope-cli'));
   assert.ok(bake.files.includes(mount));
@@ -109,4 +112,19 @@ test('editing a renderer fixture that a bake test pins selects that bake test, s
     assert.ok(files.some(file => file.startsWith('packages/bake/')), `${fixture} selects no bake test`);
   }
   assert.ok(!affectedTests(['packages/renderer/src/index.ts'], packages, site).files.some(file => file.startsWith('packages/bake/')));
+});
+
+
+test('derived object imports select tools below the limit and keep the gate above it', () => {
+  for (const count of [TOOL_OBJECT_TEST_LIMIT, TOOL_OBJECT_TEST_LIMIT + 1]) {
+    const imports = new Map(Array.from({ length: count }, (_, index) => [`packages/bake/src/case-${index}.test.ts`, ['objects']]));
+    const result = affectedTests(['packages/objects/src/parser.ts'], packages, site, imports, new Map());
+    assert.equal(result.files.length, count <= TOOL_OBJECT_TEST_LIMIT ? count : 0);
+  }
+});
+test('source pin ownership is derived from real test literals', () => {
+  const root = resolve(import.meta.dirname, '../../..');
+  const pins = pinnedSourceOwners(root, testOwners(root));
+  assert.ok(pins.get('.github/scripts/checks/check-body-references.mts')?.includes('bake'));
+  assert.ok(pins.get('src/objects/heliosphere/source/ibex/extract.py')?.includes('bake'));
 });
