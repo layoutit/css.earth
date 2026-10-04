@@ -15,7 +15,7 @@ timings before claiming it is met. Report cold and warm-cache runs separately.
 | [Repository audit](../.github/workflows/audit.yml) | Main pushes, scheduled runs and manual dispatch: documentation, repository completeness, source-catalogue reconciliation and bake reproduction. Advisory; does not run on PRs or gate deployment. |
 | [Object-scope gate](../.github/workflows/object-scope.yml) | Every PR: more than 12 changed object directories needs the `pipeline-change` label. Labels re-evaluate this gate. |
 | [Nightly asset sweep](../.github/workflows/nightly.yml) | Scheduled/manual runs check published keys, test types and a production build/browser probe. They do not publish the site or run on PRs. |
-| [Deploy](../.github/workflows/deploy.yml) | Manual dispatch only. The default R2 deployment checks build asset references and requires verified published keys before shipping. Merging validates the gate; it does not deploy. |
+| [Deploy](../.github/workflows/deploy.yml) | Manual dispatch only. The default R2 deployment checks build asset references and requires verified published keys before shipping, then publishes to Cloudflare; the `host` input can publish to Netlify instead. Merging validates the gate; it does not deploy. |
 
 The astroquery filter covers the owning workspaces of its discovered test files and their transitive runtime dependencies, toolchain pins and lane configuration. Its pip and toolchain caches are keyed on the pinned requirements and toolchain record. A skipped test or an incomplete derived file run fails the lane.
 
@@ -30,7 +30,9 @@ group and can supersede an older deployment.
 Production is on Netlify, which meters bandwidth. The same build can be served by Cloudflare, which does not meter
 bandwidth or static file requests. The built pages become a Worker's static assets. [The Worker](../cloudflare/worker.ts)
 answers the find and report endpoints and page addresses that carry a query, with the handlers the Netlify functions
-call. No workflow deploys it; these commands do:
+call. The [Deploy workflow](../.github/workflows/deploy.yml) publishes it with the repository secrets
+`CLOUDFLARE_API_TOKEN` (from the "Edit Cloudflare Workers" token template) and `CLOUDFLARE_ACCOUNT_ID`. From a checkout
+with a wrangler login, these commands do the same:
 
 ```bash
 ASSET_ORIGIN=https://earth-assets.lowpoly.cc pnpm build:deploy
