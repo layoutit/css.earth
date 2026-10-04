@@ -1,0 +1,35 @@
+{
+  "id": "source-lhs-1140c-temperature-eclipse-depth",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "LHS 1140 c · lhs 1140c temperature eclipse depth",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/2505.22186",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/lhs-1140c/source/manifest.json",
+      "locator": "/inputs/7"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Fortune et al. (2025); three JWST MIRI F1500W eclipses of the Hot Rocks Survey",
+      "scope": "The lhs 1140c temperature eclipse depth input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "Factual numerical measurement; source attribution retained",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

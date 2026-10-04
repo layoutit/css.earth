@@ -33,6 +33,52 @@
           "source": "the color dataset of gj-3929 (src/objects/gj-3929/source/photometry/stellar-color.json)"
         }
       }
+    },
+    {
+      "id": "temperature",
+      "output": "gj-3929b-surface-{id}{suffix}.webp",
+      "thumbnail": "gj-3929b-dataset-{id}.webp",
+      "source": "science/xue-2025/dayside-15um.json",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "temperature",
+        "label": "Rock model",
+        "format": "bare-rock-eclipse",
+        "path": "science/xue-2025/dayside-15um.json",
+        "sampling": "bilinear",
+        "units": "K",
+        "planet": "gj-3929b",
+        "host": "gj-3929",
+        "band": {
+          "encoding": "svo-filter",
+          "path": "science/svo/JWST_MIRI.F1500W.xml"
+        },
+        "star": {
+          "encoding": "svo-model-spectrum",
+          "path": "science/bt-settl-cifist/bt-settl-cifist-3400-5.0-0.0.xml"
+        },
+        "consumer": "gj-3929b-bare-rock-model",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "minimum": 50,
+        "maximum": 1000,
+        "colors": [
+          "#0d0887",
+          "#7e03a8",
+          "#cc4778",
+          "#f89540",
+          "#f0f921"
+        ],
+        "labels": [
+          "≤ 50",
+          "525",
+          "1000"
+        ],
+        "description": "A model, not a map: the temperature of a bare rock with no atmosphere to carry heat, set by the 15 µm eclipse depth Xue et al. (2025) measured: about 871 K under the star, nothing at night. Only the dayside brightness is measured.",
+        "title": "Bare-rock model · from Xue et al. (2025)'s eclipse depth",
+        "sourceUrl": "https://arxiv.org/abs/2508.12516"
+      }
     }
   ],
   "lighting": {

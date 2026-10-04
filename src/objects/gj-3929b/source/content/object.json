@@ -49,7 +49,7 @@
   },
   "datasets": {
     "titleKey": "datasets",
-    "defaultDataset": "shape",
+    "defaultDataset": "temperature",
     "controls": [
       {
         "id": "shape",
@@ -65,6 +65,66 @@
         },
         "falseColor": false,
         "notes": "No image or color of GJ 3929 b is published: the sphere has its measured size, and the gray marks an unresolved surface. The lighting is its own star's, at the measured orbit. The gray takes the color of gj-3929's light, as its color dataset measures it."
+      },
+      {
+        "id": "temperature",
+        "label": "Rock model",
+        "qualification": "A model set by one measurement: the 15 µm eclipse depth of Xue et al. (2025), two JWST MIRI F1500W eclipses of the Rocky Worlds program",
+        "thumbnail": "gj-3929b-dataset-temperature.webp",
+        "surface": "gj-3929b-surface-temperature@2x.webp",
+        "poles": "gj-3929b-poles-temperature@2x.webp",
+        "source": {
+          "id": "gj-3929b-temperature-eclipse-depth",
+          "path": "../manifest.json",
+          "url": "https://arxiv.org/abs/2508.12516"
+        },
+        "falseColor": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Brightness temperature",
+          "labels": [
+            "≤ 50",
+            "525",
+            "1000"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                13,
+                8,
+                135
+              ],
+              [
+                126,
+                3,
+                168
+              ],
+              [
+                204,
+                71,
+                120
+              ],
+              [
+                248,
+                149,
+                64
+              ],
+              [
+                240,
+                249,
+                33
+              ]
+            ],
+            "labels": [
+              "≤ 50",
+              "525",
+              "1000"
+            ]
+          },
+          "meta": "K",
+          "sourceUrl": "https://arxiv.org/abs/2508.12516"
+        },
+        "notes": "A model, not a map. Only GJ 3929 b's dayside brightness is measured: an eclipse depth of 133 to 186 ppm at 15 µm (Xue et al. (2025)), which the paper finds likely that of a bare rock, at the temperature of a black one. A bare rock with that depth is 787 to 953 K under the star and dark at night; whether the night side is dark is not measured. With shadows on, the star's light darkens the night half."
       }
     ]
   },
