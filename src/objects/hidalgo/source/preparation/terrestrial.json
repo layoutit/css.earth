@@ -69,17 +69,6 @@
       }
     ]
   },
-  "lighting": {
-    "frameSize": 512,
-    "columns": 8,
-    "frameCount": 128,
-    "logicalSize": 460,
-    "terminatorWidth": 0.1,
-    "directionalAmbient": 0.05,
-    "fullPhaseAmbient": 0.35,
-    "fullPhaseDiffuse": 0.65,
-    "maximumOpacity": 0.95
-  },
   "geometry": {
     "radius": 230,
     "radiusKm": 30.7,

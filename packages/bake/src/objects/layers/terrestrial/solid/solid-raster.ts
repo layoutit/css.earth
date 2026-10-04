@@ -24,7 +24,8 @@ type SolidLighting = {frameSize: number; columns: number; frameCount: number; lo
   (Omit<LambertAttenuationParameters, 'frameSize' | 'columns' | 'frameCount'> | {limb: LimbBlock});
 interface SolidMaterialConfig {
   namespace: string; publicBase: string; raster: SolidRasterGrid;
-  lighting: SolidLighting; presentation?: {defaultDataset: string};
+  /** A sphere's lighting frames; a shape-model body has none. */
+  lighting?: SolidLighting; presentation?: {defaultDataset: string};
 }
 
 /**
@@ -273,10 +274,9 @@ export async function prepareSolidSurfacePoles({ surfaces, publicDirectory, conf
 
 export async function prepareSolidMaterial({ surfaces, sourceDirectory, publicDirectory, outputDirectory, config, radial = false }: {surfaces: SolidSurface[]; sourceDirectory?: string; publicDirectory: string; outputDirectory: string; config: SolidMaterialConfig; radial?: boolean}) {
   await prepareSolidSurfacePoles({ surfaces, publicDirectory, config, radial });
-  const { lighting } = config;
   // A radial body's triangle atlases carry their own baked lighting, and its presentation draws no lighting frames.
   if (radial) {
-    if ('limb' in lighting) throw new TypeError(`${config.namespace}: source/preparation/terrestrial.json lighting.limb names published models, but a shape-model body bakes its lighting into its mesh atlases and draws no lighting frames.`);
+    if (config.lighting !== undefined) throw new TypeError(`${config.namespace}: source/preparation/terrestrial.json lighting is read by nothing: a shape-model body bakes its lighting into its mesh atlases and draws no lighting frames.`);
     return { surfaces, lighting: null };
   }
   const material = { surfaces, lighting: await prepareSolidLighting({ surfaces, sourceDirectory, publicDirectory, config }) };
@@ -289,6 +289,7 @@ export async function prepareSolidMaterial({ surfaces, sourceDirectory, publicDi
  * (packages/bake/cli/refresh-sphere-lighting.mts). */
 export async function prepareSolidLighting({ surfaces, sourceDirectory, publicDirectory, config }: {surfaces: SolidSurface[]; sourceDirectory?: string; publicDirectory: string; config: SolidMaterialConfig}) {
   const { lighting } = config;
+  if (lighting === undefined) throw new TypeError(`${config.namespace}: source/preparation/terrestrial.json lighting is missing: a sphere draws lighting frames.`);
   const { pixels, width, height, rows } = 'limb' in lighting ? await publishedLightingAtlas({ lighting, surfaces, config, sourceDirectory, publicDirectory }) : lambertAttenuationAtlas(lighting);
   const filename = `${config.namespace}-lighting.webp`, url = `${config.publicBase}${filename}`;
   await sharp(pixels, { raw: { width, height, channels: 4 } }).webp({ lossless: true, quality: 100, effort: 6 }).toFile(resolve(publicDirectory, filename));
