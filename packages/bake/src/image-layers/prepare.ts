@@ -12,6 +12,7 @@ import { imageLayerDisc, imageLayerView, norm, rad } from './disc.ts';
 import { removeCompanionGalaxies, removeForegroundStars, type CompanionEllipse, type ForegroundRemoval } from './foreground.ts';
 import { imageLayerBulgeModel } from './bulge.ts';
 import { imageLayerShapeModel, lowerEnvelope, smoothed } from './shape.ts';
+import { imageLayerShapeWalls, type ShapeWalls } from './shape-walls.ts';
 import { imageLayerBodyModel } from './body.ts';
 import { imageLayerRingsModel, imageLayerRingsSheet } from './rings.ts';
 import { imageLayerRingsCells, imageLayerRingsCurtains, imageLayerRingsGlow, imageLayerRingsSheets, RINGS_FACE_ON_STEP, type Across } from './rings-volume.ts';
@@ -182,34 +183,23 @@ export async function prepareImageLayers(options: { sourceDirectory: string; out
       // thickness through the bulge.
       const discTau=recipe.geometry.bulge!.lightFrom==='fit'?tau-Math.min(tau,lightScale*l.bulge*bulgeModel.fade(east,north)):(1-w)*(1-share)*tau+w*Math.min(tau,lightScale*l.disc);
       bulgeTau[py*info.width+px]=tau-discTau;base[i]=Math.round(255*(1-Math.exp(-discTau)));}}
-  // A nebula's published walls take the picture's light inside their outline: each pixel's light leaves the flat picture
-  // for the wall in front of the star and the wall behind it, at the depths the spectra give (./shape.ts). One picture
-  // cannot tell the two walls apart, so the far wall takes half the optical depth of the smooth light (the lower
-  // envelope over `smoothPixels`), in its color, and the near wall the rest, with every fine detail: the dark knots show
-  // against the light behind them, so they are in front. Where the light is smooth the two walls are alike. Seen from
-  // the Sun, the near wall over the far wall is the photograph.
-  const shapeModel=recipe.geometry.shape?imageLayerShapeModel(recipe.geometry.shape):null;
-  let shapeWalls:{near:Float32Array;far:Float32Array;nearTau:Float32Array;farTau:Float32Array;nearHue:Uint8Array;farHue:Uint8Array;pixels:number}|null=null;
+  // A nebula's published walls take the picture's light inside their outline (./shape-walls.ts): each pixel's light
+  // leaves the flat picture for the walls, at the depths the spectra give (./shape.ts). Where the recipe has measured
+  // speeds they say which wall a feature is on.
+  const shapeSpeeds=recipe.geometry.shape?.speeds,measuredSpeeds=shapeSpeeds?(await readFile(resolve(options.sourceDirectory,shapeSpeeds.path),'utf8')).split(/\r?\n/).filter(line=>line.trim()).map(line=>{const cells=line.trim().split(/\s+/).map(Number),row=[cells[shapeSpeeds.columns.east],cells[shapeSpeeds.columns.north],cells[shapeSpeeds.columns.kmS]] as [number,number,number];
+    if(!row.every(Number.isFinite))throw new TypeError(`${recipe.id}: ${shapeSpeeds.path} has a row without its east, north and speed columns (geometry.shape.speeds.columns): ${JSON.stringify(line)}.`);return row;}):[];
+  const shapeModel=recipe.geometry.shape?imageLayerShapeModel(recipe.geometry.shape,measuredSpeeds):null;
+  let shapeWalls:ShapeWalls|null=null;
   if(shapeModel){const count=info.width*info.height,arcsec=distanceKpc*Math.PI/648000;
-    const found={near:new Float32Array(count).fill(NaN),far:new Float32Array(count).fill(NaN),nearTau:new Float32Array(count),farTau:new Float32Array(count),nearHue:new Uint8Array(3*count),farHue:new Uint8Array(3*count),pixels:0};
     // Each channel's light (color times opacity, 0 to 1) and its smooth floor under fine dark detail.
     const lights=[0,1,2].map(c=>{const light=new Float32Array(count);for(let p=0;p<count;p++)light[p]=base[4*p+c]!/255*Math.min(base[4*p+3]!/255,.998);return light;});
     const floors=lights.map(light=>lowerEnvelope(light,info.width,info.height,recipe.geometry.shape!.smoothPixels));
-    for(let py=0;py<info.height;py++)for(let px=0;px<info.width;px++){const p=py*info.width+px;if(!base[4*p+3])continue;
-      const ray=rayLocal(2*(px+.5)/info.width-1,1-2*(py+.5)/info.height),ends=shapeModel.walls(ray[0]/ray[2]*distanceKpc/arcsec,ray[1]/ray[2]*distanceKpc/arcsec,[floors[0]![p]!,floors[1]![p]!,floors[2]![p]!]);if(!ends)continue;
-      const smooth=Math.max(floors[0]![p]!,floors[1]![p]!,floors[2]![p]!),whole=-Math.log(1-Math.min(base[4*p+3]!/255,.998)),farTau=Math.min(whole,-Math.log(1-Math.min(smooth,.998)))/2,farAlpha=1-Math.exp(-farTau);
-      // The far wall's light, and the near wall's: what the photograph has left once the far wall shows through it. Where
-      // that would pass full brightness the near wall keeps a little more opacity instead.
-      const behind=floors.map(floor=>smooth>0?floor[p]!/smooth*farAlpha:0);let nearAlpha=1-Math.exp(-(whole-farTau)),front=[0,0,0];
-      for(let pass=0;pass<2;pass++){front=lights.map((light,c)=>Math.max(0,light[p]!-(1-nearAlpha)*behind[c]!));nearAlpha=Math.min(.998,Math.max(nearAlpha,...front));}
-      found.near[p]=ends.near*arcsec;found.far[p]=ends.far*arcsec;found.nearTau[p]=-Math.log(1-nearAlpha);found.farTau[p]=farTau;
-      for(let c=0;c<3;c++){found.nearHue[3*p+c]=nearAlpha>0?Math.min(255,Math.round(255*front[c]!/nearAlpha)):0;found.farHue[3*p+c]=farAlpha>0?Math.min(255,Math.round(255*behind[c]!/farAlpha)):0;}
-      base[4*p+3]=0;found.pixels++;}
+    const found=imageLayerShapeWalls(base,info.width,info.height,lights,floors,shapeModel,(px,py)=>{const ray=rayLocal(2*(px+.5)/info.width-1,1-2*(py+.5)/info.height);return [ray[0]/ray[2]*distanceKpc/arcsec,ray[1]/ray[2]*distanceKpc/arcsec];},arcsec);
     if(!found.pixels)throw new TypeError(`${recipe.id}: the walls (${recipe.geometry.shape!.source}) hold no light of the picture.`);
     // Under the walls the flat picture is clear; it keeps one color there, the mean of what it still shows, so the lossy
     // encoding spends nothing on it and has no dark edge to bleed into the picture around the outline.
     const kept=[0,0,0];let weight=0;for(let p=0;p<count;p++){const a=base[4*p+3]!;if(!a)continue;weight+=a;for(let c=0;c<3;c++)kept[c]!+=a*base[4*p+c]!;}
-    if(weight>0)for(let p=0;p<count;p++)if(!Number.isNaN(found.near[p]!))for(let c=0;c<3;c++)base[4*p+c]=Math.round(kept[c]!/weight);
+    if(weight>0)for(let p=0;p<count;p++)if(!Number.isNaN(found.layers[0]!.depth[p]!))for(let c=0;c<3;c++)base[4*p+c]=Math.round(kept[c]!/weight);
     shapeWalls=found;}
   // A nebula's published filled body takes the picture's light inside its outline (./body.ts). The gas is taken to be
   // the same all around the star at one distance from it, so how much each display channel emits at each distance comes
@@ -401,7 +391,7 @@ export async function prepareImageLayers(options: { sourceDirectory: string; out
     // wall is steep a pixel's light is shared among terraces over as much depth as the wall crosses in
     // `TERRACE_SHARE_PIXELS`. From the side (the x and y banks): curtains through image columns and rows, each holding
     // the walls where they cross it, one terrace thick.
-    const {near,far,nearTau,farTau,nearHue,farHue}=shapeWalls,W=info.width;
+    const {layers,sharp}=shapeWalls,W=info.width,near=layers[0]!.depth,far=layers[layers.length-1]!.depth;
     let bl=W,bt=info.height,br=-1,bb=-1,reach=0;for(let py=0;py<info.height;py++)for(let px=0;px<W;px++){const p=py*W+px;if(Number.isNaN(near[p]!))continue;bl=Math.min(bl,px);br=Math.max(br,px);bt=Math.min(bt,py);bb=Math.max(bb,py);reach=Math.max(reach,-near[p]!,far[p]!);}
     const bw=br-bl+1,bh=bb-bt+1,slices=recipe.bake.bulgeSlices!,step=2*reach/(slices-1),toward=Math.sign(intersect(0,0,1)[2]-intersect(0,0,0)[2])||1;
     const bu0=2*bl/W-1,bu1=2*(br+1)/W-1,bv0=1-2*bt/info.height,bv1=1-2*(bb+1)/info.height,name=(axis:LayerAxis,index:number)=>`shape-${axis}-${String(index).padStart(2,'0')}`;
@@ -409,13 +399,13 @@ export async function prepareImageLayers(options: { sourceDirectory: string; out
     const push=async(id:string,axis:LayerAxis,rgba:Buffer,width:number,height:number,v:Quad['verticesUnits'],offset:number)=>{const path=`layers/${id}.webp`,bytes=await encode(rgba,width,height,path,true);
       leaves.push({id,axis,offsetKpc:offset,centerUnits:scale(add(...v),.25),doubleSided:true,texturePath:path,widthPx:width,heightPx:height,verticesUnits:v,uvs:[[0,0],[1,0],[1,1],[0,1]],style:styleOf(v,path,width,height,leaves.length),bytes:bytes.length});};
     // How far in depth each pixel's light is shared, on each wall, and the sum of its shares over the terraces.
-    const spread=[near,far].map(wall=>{const half=new Float32Array(bw*bh),total=new Float32Array(bw*bh),at=(x:number,y:number,otherwise:number)=>{const value=x<0||y<0||x>=bw||y>=bh?NaN:wall[(bt+y)*W+bl+x]!;return Number.isNaN(value)?otherwise:value;};
+    const spread=layers.map(layer=>layer.depth).map(wall=>{const half=new Float32Array(bw*bh),total=new Float32Array(bw*bh),at=(x:number,y:number,otherwise:number)=>{const value=x<0||y<0||x>=bw||y>=bh?NaN:wall[(bt+y)*W+bl+x]!;return Number.isNaN(value)?otherwise:value;};
       for(let y=0;y<bh;y++)for(let x=0;x<bw;x++){const here=at(x,y,NaN),t=y*bw+x;if(Number.isNaN(here))continue;
         half[t]=Math.max(step,Math.hypot(at(x+1,y,here)-at(x-1,y,here),at(x,y+1,here)-at(x,y-1,here))/2*TERRACE_SHARE_PIXELS);
         for(let k=0;k<slices;k++)total[t]+=Math.max(0,1-Math.abs(here-(-reach+k*step))/half[t]!);}
       return {half,total};});
     const least=Math.ceil(4/LEAF_PIXELS_PER_UNIT/(Math.hypot(...difference3(intersect(bu0,bv0,0),intersect(bu1,bv0,0)))/bw));
-    // A terrace behind the star holds only the far wall's smooth light: half the picture's resolution carries it.
+    // A terrace that holds only the far wall's smooth light is carried at half the picture's resolution.
     const halve=(rgba:Buffer,width:number,height:number)=>{const out=Buffer.alloc(width*height);for(let y=0;y<height/2;y++)for(let x=0;x<width/2;x++){const lit=[0,0,0],plain=[0,0,0];let opacity=0;
         for(const [i,j] of [[0,0],[1,0],[0,1],[1,1]] as const){const o=4*((2*y+j)*width+2*x+i),a=rgba[o+3]!;opacity+=a;for(let c=0;c<3;c++){lit[c]!+=rgba[o+c]!*a;plain[c]!+=rgba[o+c]!;}}
         const o=4*(y*width/2+x);for(let c=0;c<3;c++)out[o+c]=Math.round(opacity?lit[c]!/opacity:plain[c]!/4);out[o+3]=Math.round(opacity/4);}
@@ -425,9 +415,12 @@ export async function prepareImageLayers(options: { sourceDirectory: string; out
         // Color is kept under transparent texels too, so the lossy encoding has no dark edge to bleed in.
         if(Number.isNaN(near[p]!)){for(let c=0;c<3;c++)rgba[o+c]=base[4*p+c]!;continue;}
         const t=y*bw+x,share=(side:number,at:number)=>Math.max(0,1-Math.abs(at-depth)/spread[side]!.half[t]!)/spread[side]!.total[t]!;
-        const front=1-Math.exp(-nearTau[p]!*share(0,near[p]!)),back=1-Math.exp(-farTau[p]!*share(1,far[p]!)),alpha=front+(1-front)*back,stored=Math.round(255*alpha);
-        for(let c=0;c<3;c++)rgba[o+c]=alpha>0?Math.min(255,Math.round((nearHue[3*p+c]!*front+(1-front)*farHue[3*p+c]!*back)/alpha)):nearHue[3*p+c]!;
-        rgba[o+3]=stored;if(stored){x0=Math.min(x0,x);x1=Math.max(x1,x);y0=Math.min(y0,y);y1=Math.max(y1,y);if(front>0)detailed=true;}}
+        // The surfaces' light at this depth, nearest first, each seen through the ones in front of it.
+        let alpha=0,fine=false;const lit=[0,0,0];
+        for(const [k,layer] of layers.entries()){const part=1-Math.exp(-layer.tau[p]!*share(k,layer.depth[p]!)),clear=1-alpha;for(let c=0;c<3;c++)lit[c]=lit[c]!+clear*layer.hue[3*p+c]!*part;alpha=alpha+clear*part;if(part>0&&sharp[p]!&(1<<k))fine=true;}
+        const stored=Math.round(255*alpha);
+        for(let c=0;c<3;c++)rgba[o+c]=alpha>0?Math.min(255,Math.round(lit[c]!/alpha)):layers[0]!.hue[3*p+c]!;
+        rgba[o+3]=stored;if(stored){x0=Math.min(x0,x);x1=Math.max(x1,x);y0=Math.min(y0,y);y1=Math.max(y1,y);if(fine)detailed=true;}}
       if(x1<x0)continue;
       // A terrace is a few CSS pixels across at least, with clear texels around its light: the leaf compiler cannot draw less.
       while(x1-x0+1<least&&(x0>0||x1<bw-1)){if(x0>0)x0--;if(x1<bw-1&&x1-x0+1<least)x1++;}
@@ -438,9 +431,9 @@ export async function prepareImageLayers(options: { sourceDirectory: string; out
     // The curtains' grid: the walls' optical depth, color and depth range in each cell, box-averaged from the picture.
     const fscale=Math.min(1,recipe.bake.bulgeFacePixels!/Math.max(bw,bh)),sw=Math.max(2,Math.round(bw*fscale)),sh=Math.max(2,Math.round(bh*fscale));
     const grid=Array.from({length:sw*sh},(_,t)=>{const i=t%sw,j=Math.floor(t/sw),x0=bl+Math.floor(i*bw/sw),x1=Math.max(x0+1,bl+Math.floor((i+1)*bw/sw)),y0=bt+Math.floor(j*bh/sh),y1=Math.max(y0+1,bt+Math.floor((j+1)*bh/sh));
-      const sides=[{tau:0,color:[0,0,0],lo:Infinity,hi:-Infinity},{tau:0,color:[0,0,0],lo:Infinity,hi:-Infinity}];
+      const sides=layers.map(()=>({tau:0,color:[0,0,0],lo:Infinity,hi:-Infinity}));
       for(let y=y0;y<y1;y++)for(let x=x0;x<x1;x++){const p=y*W+x;if(Number.isNaN(near[p]!))continue;
-        for(const [side,tau,at,hue] of [[sides[0]!,nearTau[p]!,near[p]!,nearHue],[sides[1]!,farTau[p]!,far[p]!,farHue]] as const){if(!(tau>0))continue;side.tau+=tau;side.lo=Math.min(side.lo,at);side.hi=Math.max(side.hi,at);for(let c=0;c<3;c++)side.color[c]!+=tau*hue[3*p+c]!;}}
+        for(const [k,layer] of layers.entries()){const side=sides[k]!,tau=layer.tau[p]!,at=layer.depth[p]!,hue=layer.hue;if(!(tau>0))continue;side.tau+=tau;side.lo=Math.min(side.lo,at);side.hi=Math.max(side.hi,at);for(let c=0;c<3;c++)side.color[c]!+=tau*hue[3*p+c]!;}}
       const n=(x1-x0)*(y1-y0);return sides.map(side=>({tau:side.tau/n,color:side.color.map(c=>side.tau?c/side.tau:0),lo:side.lo-step/2,hi:side.hi+step/2}));});
     const crossSlices=recipe.bake.bulgeCrossSlices!,depthPx=Math.max(8,Math.round(sh*2*reach/Math.max(1e-9,Math.hypot(...difference3(intersect(bu0,bv0,0),intersect(bu0,bv1,0))))));
     for(const axis of ['x','y'] as const){const along=axis==='x'?sh:sw;
@@ -449,7 +442,7 @@ export async function prepareImageLayers(options: { sourceDirectory: string; out
         // A curtain stands for the slab of the nebula around it: at each place along it, the walls of the slab's cells
         // across it, over the depths they span there, so neighbouring curtains' walls meet.
         const across=axis==='x'?sw:sh,first=Math.floor(s*across/crossSlices),last=Math.max(first+1,Math.floor((s+1)*across/crossSlices));
-        for(let a=0;a<along;a++){const cell=[0,1].map(side=>{let tau=0,lo=Infinity,hi=-Infinity;const color=[0,0,0];
+        for(let a=0;a<along;a++){const cell=layers.map((_,side)=>{let tau=0,lo=Infinity,hi=-Infinity;const color=[0,0,0];
             for(let t=first;t<last;t++){const part=grid[axis==='x'?a*sw+t:t*sw+a]![side]!;if(!(part.tau>0))continue;tau+=part.tau;lo=Math.min(lo,part.lo);hi=Math.max(hi,part.hi);for(let c=0;c<3;c++)color[c]!+=part.tau*part.color[c]!;}
             return {tau:tau/(last-first),color:color.map(c=>tau?c/tau:0),lo,hi};});
           for(let d=0;d<depthPx;d++){const depth=toward*(reach-(d+.5)/depthPx*2*reach),o=4*(d*along+a);let tau=0;const light=[0,0,0];

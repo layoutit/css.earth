@@ -1,0 +1,57 @@
+{
+  "schema": "cssearth-volume-presentation-source@2",
+  "objectId": "ngc-2392-layers",
+  "name": "NGC 2392",
+  "defaultDataset": "optical",
+  "bank": {
+    "path": "src/objects/ngc-2392-layers/prepared/image-layers.json"
+  },
+  "recipes": [
+    {
+      "id": "image-layer-recipe",
+      "path": "src/objects/ngc-2392-layers/source/recipe.json"
+    },
+    {
+      "id": "source-evidence",
+      "path": "src/objects/ngc-2392-layers/source/provenance.json"
+    }
+  ],
+  "sharedInputs": [],
+  "datasets": [
+    {
+      "id": "optical",
+      "label": "Hubble · optical",
+      "title": "NGC 2392 in visible light",
+      "description": "ESA/Hubble's photograph of NGC 2392, in He II 469, [O III] 502, H-alpha 656 and [N II] 658 nm. It lies on the walls the nebula's spectra give: a fast inner bubble pointed almost at the Sun inside a round outer shell (García-Díaz et al. 2012). A feature measured approaching is on the wall in front of the star, one receding on the wall behind it (García-Díaz et al. 2015).",
+      "summary": "The photograph on the nebula's walls: a bubble inside a round shell, each feature on the side its measured speed gives.",
+      "detail": "1500 × 1500 px",
+      "facts": [
+        {
+          "id": "bands",
+          "label": "Colors",
+          "value": "He II 469, [O III] 502, H-alpha 656 and [N II] 658 nm"
+        },
+        {
+          "id": "source-pixels",
+          "label": "Source pixels",
+          "value": "1500 × 1500"
+        },
+        {
+          "id": "coverage",
+          "label": "Field",
+          "value": "1.25 × 1.25 arcmin"
+        },
+        {
+          "id": "license",
+          "label": "License",
+          "value": "CC-BY-4.0"
+        }
+      ],
+      "input": "optical",
+      "preview": {
+        "path": "src/objects/ngc-2392-layers/source/source.jpg",
+        "url": "https://cdn.esahubble.org/archives/images/large/heic9910a.jpg"
+      }
+    }
+  ]
+}
