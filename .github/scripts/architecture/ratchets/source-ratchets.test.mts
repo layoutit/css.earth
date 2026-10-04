@@ -16,7 +16,7 @@ test('new math, partitioning and cwd calls are ratcheted; comments and tests are
   assert.throws(() => parseRatchet({ 'new.ts': '' }), /requires a reason/u);
 });
 test('real-tree budget is current and new source mutations fail then clear', () => {
-  const files = execFileSync('git', ['ls-files', '--cached', '--others', '--exclude-standard', '--', 'packages', '.github/scripts/architecture/source-ratchets.json']).toString().trim().split('\n');
+  const files = execFileSync('git', ['ls-files', '--cached', '--others', '--exclude-standard', '--', 'packages', '.github/scripts/architecture/ratchets/source-ratchets.json']).toString().trim().split('\n');
   assert.deepEqual(checkSourceRatchets(process.cwd(), files), []);
   const root = mkdtempSync(resolve(tmpdir(), 'source-ratchets-'));
   const write = (path: string, text: string) => { mkdirSync(dirname(resolve(root, path)), { recursive: true }); writeFileSync(resolve(root, path), text); };
@@ -54,6 +54,7 @@ test('expanded numeric syntax is red, removing it is green', () => {
 });
 test('adding a justified allowance without raising its ceiling is red without git history', () => {
   const root = mkdtempSync(resolve(tmpdir(), 'ceiling-no-refs-'));
+  mkdirSync(resolve(root, '.github/scripts/architecture/ratchets'), { recursive: true });
   try {
     mkdirSync(resolve(root, '.github/scripts/architecture'), { recursive: true });
     mkdirSync(resolve(root, 'packages/objects/src'), { recursive: true });

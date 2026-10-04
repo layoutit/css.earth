@@ -2,10 +2,10 @@
 import ts from 'typescript';
 import { existsSync, readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
-import { isTestPath } from './zones.mts';
+import { isTestPath } from '../zones.mts';
 
 export type Ratchet = Readonly<Record<string, string>>;
-export const RATCHET_PATH = '.github/scripts/architecture/source-ratchets.json';
+export const RATCHET_PATH = '.github/scripts/architecture/ratchets/source-ratchets.json';
 export function parseRatchet(value: unknown): Ratchet {
   if (!value || typeof value !== 'object' || Array.isArray(value)) throw new TypeError('Expected ratchet object');
   const result: Record<string, string> = {};

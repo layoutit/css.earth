@@ -3,7 +3,7 @@ import ts from 'typescript';
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { ceilingFindings } from './source-ratchets.mts';
-import { isTestPath } from './zones.mts';
+import { isTestPath } from '../zones.mts';
 
 const AVERAGING_ROOTS = ['packages/telescope-cli/src/', 'packages/telescope-cli/authoring/', 'packages/bake/authoring/'];
 // This author compares trial placements diagnostically; its shipped map uses combineUnderPolicy.
@@ -94,7 +94,7 @@ export function cliLibraryFindings(path: string, text: string, baseline: Readonl
 
 export function checkAuthoringPolicies(root: string, files: readonly string[]): string[] {
   // No refs or git history are needed in a depth-one CI checkout. The committed ceiling makes budget increases explicit.
-  const value: unknown = JSON.parse(readFileSync(resolve(root, '.github/scripts/architecture/cli-exports-baseline.json'), 'utf8'));
+  const value: unknown = JSON.parse(readFileSync(resolve(root, '.github/scripts/architecture/ratchets/cli-exports-baseline.json'), 'utf8'));
   if (!value || typeof value !== 'object' || Array.isArray(value)) throw new TypeError('Invalid CLI export baseline');
   const entries: unknown = Reflect.get(value, 'entries');
   if (!entries || typeof entries !== 'object' || Array.isArray(entries)) throw new TypeError('Invalid CLI baseline entries');

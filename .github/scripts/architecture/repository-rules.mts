@@ -1,8 +1,8 @@
 /** Rules the architecture check applies to the repository itself rather than to the import graph. They have no
  * baseline: the repository satisfies each of them today, so every finding fails the check, and
  * `--update-baseline` never records one. */
-import { checkSourceRatchets } from './source-ratchets.mts';
-import { checkAuthoringPolicies } from './authoring-policy.mts';
+import { checkSourceRatchets } from './ratchets/source-ratchets.mts';
+import { checkAuthoringPolicies } from './ratchets/authoring-policy.mts';
 import { checkSiteBuildFormatReaders } from './site-build-format-readers.mts';
 import ts from 'typescript';
 import { checkBakeWithoutRenderer } from './bake-without-renderer.mts';
