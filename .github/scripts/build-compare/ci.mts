@@ -5,6 +5,7 @@ import { resolve, join } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { promisify } from 'node:util';
 import { serverVerdict } from './server-policy.mts';
+import { performanceStage, performanceSummary, performanceVerdict } from './performance-stage.mts';
 import { sourceDiff } from './source-diff.mts';
 import { parseMoves, record, strings } from './records.mts';
 
@@ -206,7 +207,31 @@ async function main(): Promise<number> {
   }
   const comparisonExit = await stage('compare', process.execPath, [join(toolRoot, 'compare.mts'), '--base', join(out, 'base'),
     '--head', join(out, 'head'), '--mode', declaration.mode, '--moves', moves, '--sources', sourcesPath, '--json', join(out, 'report.json')], head);
-  let answerExit = 0, answerSummary = '';
+  let answerExit = 0, answerSummary = '', performanceExit = 0;
+  try {
+    // L7 follows the same trust selection as L2: merge-base tools, except for the pull request that introduces them.
+    let performanceRoot = join(headTools ? head : base, '.github/scripts/performance');
+    if (!headTools && !await stat(performanceRoot).catch(() => undefined)) {
+      console.warn('::warning::Bootstrap: merge base has no performance guard tools; using HEAD performance tools');
+      performanceRoot = join(head, '.github/scripts/performance');
+    }
+    for (const checkout of [base, head]) {
+      const destination = join(checkout, '.github/scripts/performance');
+      if (destination === performanceRoot) continue;
+      await rm(destination, { recursive: true, force: true });
+      await cp(performanceRoot, destination, { recursive: true });
+    }
+    const approved = Array.isArray(labels) && labels.some(label => record(label).name === 'performance-increase-approved');
+    const guard = await performanceStage(join(head, '.github/scripts/performance'), base, head, out, declaration.mode, approved);
+    timings.push(...guard.timings);
+    performanceExit = guard.exitCode;
+    answerSummary += performanceSummary(guard);
+  } catch (error) {
+    console.warn(`::${declaration.mode === 'report' ? 'notice' : 'error'}::Performance guard stage failed: ${String(error).replaceAll('\n', '%0A').replaceAll('\r', '%0D')}`);
+    performanceExit = performanceVerdict(declaration.mode, undefined, 1, false);
+    answerSummary += `\n## Performance guard\n\nStage failed: ${String(error)}. Exit: ${performanceExit}.\n`;
+    await writeFile(join(out, 'performance.json'), JSON.stringify({ exitCode: performanceExit, failure: String(error) }));
+  }
   try {
     // L2 follows the same trust selection; only its introducing PR may bootstrap an absent base copy.
     let answerRoot = join(headTools ? head : base, '.github/scripts/server-answers');
@@ -234,7 +259,7 @@ async function main(): Promise<number> {
   }
   await writeFile(join(out, 'timings.json'), `${JSON.stringify(timings, null, 2)}\n`);
   if (process.env.GITHUB_STEP_SUMMARY) await appendFile(process.env.GITHUB_STEP_SUMMARY, jobSummary(JSON.parse(await readFile(join(out, 'report.json'), 'utf8')), timings, declaration.mode, source) + answerSummary);
-  return comparisonExit || answerExit;
+  return comparisonExit || answerExit || performanceExit;
 }
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
   try { process.exitCode = await main(); }
