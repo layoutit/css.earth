@@ -1,0 +1,52 @@
+{
+  "id": "esawebb-weic2616a",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Lion Nebula (NIRCam + MIRI image)",
+  "identifiers": [
+    {
+      "type": "ESA/Webb image",
+      "value": "weic2616a"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://esawebb.org/images/weic2616a/",
+      "label": "Published source"
+    },
+    {
+      "role": "original",
+      "url": "https://cdn.esawebb.org/archives/images/large/weic2616a.jpg",
+      "label": "JPEG, 3505 x 3505 px"
+    },
+    {
+      "role": "rights",
+      "url": "https://esawebb.org/copyright/",
+      "label": "Reuse terms"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://esawebb.org/images/weic2616a/",
+      "checkedOn": "2026-10-05",
+      "locator": "3505 x 3505 px over 1.77 × 1.77 arcmin; NIRCam and MIRI at 1.15, 1.87, 2.12, 3.35 and 10 µm; released 10 August 2026. The file's embedded sky tags for scale and direction, 0.0304 arcsec per pixel and north 170.0° left of vertical, and the star for place: the star in the picture, the largest patch of saturated pixels within 1 arcsec of where the tags put it, 51 px, pixel 1733.9, 1715.5, is set at the recipe's target, so the frame's centre is 112.2950734°, 20.9120789°. The tags alone put the star 0.22 arcsec from where the picture shows it."
+    }
+  ],
+  "publisher": "ESA/Webb",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "NASA, ESA, CSA, STScI. Image Processing: A. Pagan (STScI)",
+      "scope": "Published source",
+      "evidence": "https://esawebb.org/images/weic2616a/"
+    },
+    {
+      "kind": "rights",
+      "text": "Creative Commons Attribution 4.0 International; the full credit must be shown.",
+      "scope": "Published source",
+      "evidence": "https://esawebb.org/copyright/"
+    }
+  ]
+}
