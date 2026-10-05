@@ -1,0 +1,45 @@
+{
+  "schema": "cssearth-volume-source-manifest@2",
+  "pathBase": "repository",
+  "inputs": [
+    {
+      "id": "positions",
+      "path": "src/objects/wd-1851-329-dust-cloud/source/dots/positions.csv.gz",
+      "origin": "https://arxiv.org/abs/2504.01188",
+      "sourceUrl": "https://arxiv.org/abs/2504.01188",
+      "title": "800 dots through the dust shell around the Ring Nebula's central star, sampled from the published shell model",
+      "credit": "Sahai et al. (2025), arXiv:2504.01188",
+      "acquisition": "Written 2026-10-05 by packages/bake/authoring/dust-shell/positions.mts wd-1851-329-dust-cloud 10.5 1310 0.8 800 from the best-fit shell of the paper's Table 4: inner radius 10.5 au, outer radius 1,310 au, density rising outward as r^0.8. Distances follow that density; directions are uniform over the sphere; both come from a seeded generator and are not measurements.",
+      "generator": "packages/bake/authoring/dust-shell/positions.mts",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "publication-sahai-2025-ring-nebula-dust-cloud",
+            "role": "material",
+            "evidence": "src/objects/wd-1851-329-dust-cloud/source/dots/points.json#/table"
+          }
+        ]
+      },
+      "dependencies": [],
+      "license": "Factual model parameters from the paper; source attribution retained."
+    }
+  ],
+  "documents": [
+    {
+      "path": "src/objects/wd-1851-329-dust-cloud/source/dots/points.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
+      }
+    },
+    {
+      "path": "src/objects/wd-1851-329-dust-cloud/source/presentation.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
+      }
+    }
+  ],
+  "generatedIntermediates": []
+}

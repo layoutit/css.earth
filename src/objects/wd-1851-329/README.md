@@ -10,6 +10,8 @@ WD 1851+329 (HD 175353) is the central star of the [Ring Nebula](../m57/README.m
 
 **Limb.** The disc is dimmed toward the limb by the quadratic law (u1 0.0593, u2 0.0996) of the nearest model Claret et al. (2020), A&A 634, A93 tabulate: a pure-hydrogen white dwarf at 100,000 K and log g 7.0, the grid's hottest (Johnson V).
 
+**Dust cloud.** [The dust cloud's dots](../wd-1851-329-dust-cloud/README.md) draw the cloud Webb found around the star, about 2,600 au across (Sahai et al. 2025, https://arxiv.org/abs/2504.01188); the position of a single dot is drawn from a seed.
+
 ## Evidence
 
 Generated 2026-10-05 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts) from Gaia DR3, SIMBAD and the archives named above; each choice was read with the dataset's own reader.
@@ -24,7 +26,7 @@ Headless Chromium at 1440 × 900, device pixel ratio 2, on 2026-10-05, no page e
 - **A derived radius.** No paper prints this star's radius. It is the sphere that radiates the published luminosity at the published temperature (Stefan-Boltzmann law), so it carries the errors of both.
 - **Not shown.** The star's mass is not measured. Evolutionary tracks give 0.56 solar masses from its spectrum (Napiwotzki (1999), arXiv:astro-ph/9908181, Table 2, https://arxiv.org/abs/astro-ph/9908181) and 0.58 from its luminosity (Sahai et al. 2025, https://arxiv.org/abs/2504.01188).
 - **Not shown.** Other analyses differ: a fit of its spectrum gives 101,200 K (Napiwotzki (1999), arXiv:astro-ph/9908181, Table 2), and a fit of its light from the ultraviolet to the infrared takes 135,000 K and finds 310 solar luminosities (Sahai et al. 2025, https://arxiv.org/abs/2504.01188).
-- **Not shown.** Webb found a cloud of dust about 2,600 au across around the star, and a brightness that varies, which a companion under 0.1 solar masses could cause (Sahai et al. 2025, https://arxiv.org/abs/2504.01188). Neither is drawn.
+- **Not shown.** Webb found that the star's brightness varies, which a companion under 0.1 solar masses could cause (Sahai et al. 2025, https://arxiv.org/abs/2504.01188). Neither is drawn.
 - **Model limb.** The limb darkening is the nearest tabulated model atmosphere's, not a measurement of this star.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
