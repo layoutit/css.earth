@@ -1,0 +1,81 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "wd-2226-210",
+  "displayName": "WD 2226-210",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "0.023 solar radii",
+        "source": {
+          "catalogueId": "arxiv-2109-12114",
+          "url": "https://arxiv.org/abs/2109.12114",
+          "label": "González-Santamaría et al. (2021), A&A 656, A51 (2021)",
+          "checked": "2026-10-05",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "216 parsecs",
+        "source": {
+          "catalogueId": "arxiv-0909-4281",
+          "url": "https://arxiv.org/abs/0909.4281",
+          "label": "Benedict et al. (2009), HST parallaxes of planetary nebula nuclei: 216 pc (-12/+14) from the trigonometric parallax of this star, the distance its nebula's page stands at",
+          "checked": "2026-10-05",
+          "path": "source/measurements.json",
+          "locator": "distanceParsecs; distanceSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "color",
+    "controls": [
+      {
+        "id": "color",
+        "label": "Color",
+        "qualification": "Color from Gaia's spectrum of the star. The disc itself is unresolved; darkening toward the edge from a published law.",
+        "thumbnail": "wd-2226-210-dataset-color.webp",
+        "surface": "wd-2226-210-surface-color@2x.webp",
+        "poles": "wd-2226-210-poles-color@2x.webp",
+        "source": {
+          "id": "wd-2226-210-stellar-color",
+          "path": "../manifest.json",
+          "url": "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=6628874205642084224&FORMAT=csv&DATA_STRUCTURE=RAW&RELEASE=Gaia+DR3"
+        },
+        "falseColor": false,
+        "notes": "The color of the star's Gaia DR3 BP/RP spectrum. The spin axis's direction on the sky is a display convention. The darkening toward the edge is the quadratic law (u1 0.0593, u2 0.0996) of the nearest model Claret et al. (2020), A&A 634, A93 tabulate: a pure-hydrogen white dwarf at 100,000 K and log g 7.0, the grid's hottest (Johnson V)."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "González-Santamaría et al. (2021), A&A 656, A51",
+      "href": "https://arxiv.org/abs/2109.12114"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://arxiv.org/abs/2109.12114",
+      "credit": "González-Santamaría et al. (2021), A&A 656, A51"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/wd-2226-210.json",
+      "credit": "González-Santamaría et al. radius; Gaia DR3 position; cited distance; no measured rotation axis (display convention)"
+    }
+  }
+}

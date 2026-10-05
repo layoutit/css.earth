@@ -1,0 +1,81 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "ngc-3132-central-star",
+  "displayName": "NGC 3132 central star",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "0.039 solar radii",
+        "source": {
+          "catalogueId": "arxiv-2301-02775",
+          "url": "https://arxiv.org/abs/2301.02775",
+          "label": "Marco et al. (2023), Nature Astronomy, 2022, Vol. 6, p. 1421",
+          "checked": "2026-10-05",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "754 parsecs",
+        "source": {
+          "catalogueId": "publication-monteiro-2025-ngc-3132-model",
+          "url": "https://arxiv.org/abs/2503.20640",
+          "label": "Monteiro et al. (2025), MNRAS 539, 1756: 754 pc (+18, -15), the Gaia DR3 geometric distance of the bright star beside it, the distance its nebula's page stands at; this star's own Gaia DR3 parallax, 0.51 +/- 0.19 mas, is too weak to place it",
+          "checked": "2026-10-05",
+          "path": "source/measurements.json",
+          "locator": "distanceParsecs; distanceSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "color",
+    "controls": [
+      {
+        "id": "color",
+        "label": "Color",
+        "qualification": "Color of a blackbody at the star's temperature. The disc itself is unresolved.",
+        "thumbnail": "ngc-3132-central-star-dataset-color.webp",
+        "surface": "ngc-3132-central-star-surface-color@2x.webp",
+        "poles": "ngc-3132-central-star-poles-color@2x.webp",
+        "source": {
+          "id": "ngc-3132-central-star-stellar-color",
+          "path": "../manifest.json",
+          "url": "https://arxiv.org/abs/2301.02775"
+        },
+        "falseColor": false,
+        "notes": "The color of a blackbody at the star's published temperature. No limb darkening is drawn: no surface gravity is known: the mass is unmeasured, no spectroscopic log g is published and the spec gives no range for its class. The spin axis's direction on the sky is a display convention."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "De Marco et al. (2022), arXiv:2301.02775",
+      "href": "https://arxiv.org/abs/2301.02775"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://arxiv.org/abs/2301.02775",
+      "credit": "De Marco et al. (2022), arXiv:2301.02775"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/ngc-3132-central-star.json",
+      "credit": "De Marco et al. radius; Gaia DR3 position; cited distance; no measured rotation axis (display convention)"
+    }
+  }
+}

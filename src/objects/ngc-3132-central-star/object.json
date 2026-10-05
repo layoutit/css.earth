@@ -1,0 +1,142 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "ngc-3132-central-star",
+  "parent": "ngc-3132",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "NGC 3132 central star",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 27062.7
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/ngc-3132-central-star-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "NGC 3132 central star",
+      "classification": "star",
+      "color": "#98b3ff",
+      "distanceAu": 155523663.9,
+      "description": "The Southern Ring Nebula's central star is a hot white dwarf, about 754 parsecs away.",
+      "systemName": "Southern Ring Nebula",
+      "order": 5781,
+      "context": {
+        "order": 5778
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -15600061064866680000,
+        8379820268984371000,
+        -15090522859253942000
+      ],
+      "presentationToReference": [
+        -0.6705086786922205,
+        0.5713896423056157,
+        0.47321452689480403,
+        0.36017437322019086,
+        -0.30693062626558176,
+        0.8809472240353905,
+        -0.6486081503295,
+        -0.7611225048085744,
+        2.576144232360025e-7
+      ],
+      "orbitUpReference": [
+        -0.5713896423056157,
+        0.30693062626558176,
+        0.7611225048085744
+      ],
+      "metersPerUnit": 87299.03225806452,
+      "bodyRadiusM": 27062700
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

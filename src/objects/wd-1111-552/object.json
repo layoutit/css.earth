@@ -1,0 +1,142 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "wd-1111-552",
+  "parent": "m97",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "WD 1111+552",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 26019.2
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/wd-1111-552-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "WD 1111+552",
+      "classification": "star",
+      "color": "#98b4ff",
+      "distanceAu": 167283749.4,
+      "description": "WD 1111+552 is the central star of the Owl Nebula, about 811 parsecs away.",
+      "systemName": "Owl Nebula",
+      "order": 5779,
+      "context": {
+        "order": 5776
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -14068925709889950000,
+        2811554623772732000,
+        20504286511675314000
+      ],
+      "presentationToReference": [
+        -0.5621883082146512,
+        -0.8034558971518516,
+        0.19596664879173148,
+        0.1123485310808597,
+        0.16056380352568553,
+        0.9806105611104432,
+        0.8193424886277543,
+        -0.5733043575006895,
+        3.2313499697724563e-9
+      ],
+      "orbitUpReference": [
+        0.8034558971518516,
+        -0.16056380352568553,
+        0.5733043575006895
+      ],
+      "metersPerUnit": 83932.90322580645,
+      "bodyRadiusM": 26019200
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

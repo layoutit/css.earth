@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "wd-2226-210",
+  "card": {
+    "text": "WD 2226-210 is the central star of the Helix Nebula, about 216 parsecs away.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-2109-12114",
+        "url": "https://arxiv.org/abs/2109.12114",
+        "label": "González-Santamaría et al. (2021), A&A 656, A51 (2021)",
+        "checked": "2026-10-05",
+        "locator": "Table 8: NGC 7293, log(L/Lsun) = 1.79, log(Teff) = 5.03"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "The Helix's central star shines at 107,000 K with 62 times the Sun's light. Its sphere is about two and a half times Earth's size.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-2109-12114",
+        "url": "https://arxiv.org/abs/2109.12114",
+        "label": "González-Santamaría et al. (2021), A&A 656, A51 (2021)",
+        "checked": "2026-10-05",
+        "locator": "Table 8: NGC 7293, log(L/Lsun) = 1.79, log(Teff) = 5.03"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its Gaia spectrum",
+      "summary": "The color of the star's light."
+    }
+  }
+}

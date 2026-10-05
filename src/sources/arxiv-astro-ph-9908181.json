@@ -1,0 +1,40 @@
+{
+  "id": "arxiv-astro-ph-9908181",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Napiwotzki (1999): Spectroscopic investigation of old planetaries IV. Model atmosphere analysis",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "astro-ph/9908181"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/astro-ph/9908181",
+      "label": "arXiv preprint"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/astro-ph/9908181",
+      "checkedOn": "2026-10-05",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Napiwotzki (1999), A&A 350, 101",
+      "scope": "citation",
+      "evidence": "https://arxiv.org/abs/astro-ph/9908181"
+    }
+  ],
+  "publisher": "A&A 350, 101",
+  "creators": [
+    "Ralf Napiwotzki"
+  ],
+  "publicationDate": "1999"
+}

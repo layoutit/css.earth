@@ -1,0 +1,59 @@
+{
+  "id": "wd-1851-329",
+  "name": "WD 1851+329",
+  "system": "Ring Nebula",
+  "description": "WD 1851+329 is the central star of the Ring Nebula, about 790 parsecs away.",
+  "aliases": [
+    "HD 175353",
+    "BD+32 3246"
+  ],
+  "parent": "m57",
+  "featured": true,
+  "target": "WD 1851+329",
+  "gaia": "2090486618786534784",
+  "paper": {
+    "url": "https://arxiv.org/abs/2109.12114",
+    "credit": "González-Santamaría et al. (2021), A&A 656, A51"
+  },
+  "radius": {
+    "value": 0.0374,
+    "source": "González-Santamaría et al. (2021), A&A 656, A51, Table 8: log(L/Lsun) = 2.3 from the star's V magnitude at its Gaia EDR3 distance, and log(Teff) = 5.05; the paper prints no radius, and 0.0374 solar radii is the sphere that radiates that luminosity at that temperature (Stefan-Boltzmann law)",
+    "url": "https://arxiv.org/abs/2109.12114"
+  },
+  "mass": "unmeasured",
+  "temperature": {
+    "value": 112200,
+    "source": "González-Santamaría et al. (2021), A&A 656, A51, Table 8: log(Teff) = 5.05, a temperature from the literature the paper compiles; spectral type hgO(H)",
+    "url": "https://arxiv.org/abs/2109.12114"
+  },
+  "gravity": {
+    "value": 6.88,
+    "source": "Napiwotzki (1999), arXiv:astro-ph/9908181, Table 2: log g from a fit of the star's spectrum",
+    "url": "https://arxiv.org/abs/astro-ph/9908181",
+    "uncertainty": 0.26
+  },
+  "distance": {
+    "value": 790.014153719229,
+    "source": "Chornay & Walton (2021), A&A 656, A110; CDS J/A+A/656/A110, Table A.1, PN G063.1+13.9: distance 790 pc (764 to 818) from the Gaia EDR3 parallax of this star, the distance its nebula's page stands at",
+    "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/656/A110"
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "WD 1851+329 is the central star of the Ring Nebula, about 790 parsecs away.",
+    "introduction": "The Ring's central star shines at 112,000 K with 200 times the Sun's light. Its sphere is about four times Earth's size.",
+    "locator": "Table 8: NGC 6720, log(L/Lsun) = 2.3, log(Teff) = 5.05"
+  },
+  "notes": [
+    "The star's mass is not measured. Evolutionary tracks give 0.56 solar masses from its spectrum (Napiwotzki (1999), arXiv:astro-ph/9908181, Table 2, https://arxiv.org/abs/astro-ph/9908181) and 0.58 from its luminosity (Sahai et al. 2025, https://arxiv.org/abs/2504.01188).",
+    "Other analyses differ: a fit of its spectrum gives 101,200 K (Napiwotzki (1999), arXiv:astro-ph/9908181, Table 2), and a fit of its light from the ultraviolet to the infrared takes 135,000 K and finds 310 solar luminosities (Sahai et al. 2025, https://arxiv.org/abs/2504.01188).",
+    "Webb found a cloud of dust about 2,600 au across around the star, and a brightness that varies, which a companion under 0.1 solar masses could cause (Sahai et al. 2025, https://arxiv.org/abs/2504.01188). Neither is drawn."
+  ],
+  "radialVelocity": {
+    "value": -19.1,
+    "uncertainty": 2,
+    "source": "SIMBAD's radial velocity for Gaia DR3 2090486618786534784 (quality E), from 1953GCRV..C......0W; Gaia DR3 measures none",
+    "url": "https://ui.adsabs.harvard.edu/abs/1953GCRV..C......0W/abstract"
+  },
+  "order": 5778
+}

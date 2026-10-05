@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "wd-1851-329",
+  "card": {
+    "text": "WD 1851+329 is the central star of the Ring Nebula, about 790 parsecs away.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-2109-12114",
+        "url": "https://arxiv.org/abs/2109.12114",
+        "label": "González-Santamaría et al. (2021), A&A 656, A51 (2021)",
+        "checked": "2026-10-05",
+        "locator": "Table 8: NGC 6720, log(L/Lsun) = 2.3, log(Teff) = 5.05"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "The Ring's central star shines at 112,000 K with 200 times the Sun's light. Its sphere is about four times Earth's size.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-2109-12114",
+        "url": "https://arxiv.org/abs/2109.12114",
+        "label": "González-Santamaría et al. (2021), A&A 656, A51 (2021)",
+        "checked": "2026-10-05",
+        "locator": "Table 8: NGC 6720, log(L/Lsun) = 2.3, log(Teff) = 5.05"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its temperature",
+      "summary": "The color of the star's light."
+    }
+  }
+}

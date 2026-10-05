@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "ngc-3132-central-star",
+  "card": {
+    "text": "The Southern Ring Nebula's central star is a hot white dwarf, about 754 parsecs away.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-2301-02775",
+        "url": "https://arxiv.org/abs/2301.02775",
+        "label": "Marco et al. (2023), Nature Astronomy, 2022, Vol. 6, p. 1421",
+        "checked": "2026-10-05",
+        "locator": "Results: a central star of effective temperature 110 kK and luminosity 200 Lsun matches the observations; the A2 V companion is 1.7 arcsec away"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "A model of the nebula's light needs a star of 110,000 K with 200 times the Sun's light. The bright star beside it is its companion.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-2301-02775",
+        "url": "https://arxiv.org/abs/2301.02775",
+        "label": "Marco et al. (2023), Nature Astronomy, 2022, Vol. 6, p. 1421",
+        "checked": "2026-10-05",
+        "locator": "Results: a central star of effective temperature 110 kK and luminosity 200 Lsun matches the observations; the A2 V companion is 1.7 arcsec away"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its temperature",
+      "summary": "The color of the star's light."
+    }
+  }
+}

@@ -1,0 +1,7 @@
+# NGC 3132 central star credits
+
+Radius, mass and temperature: Radius 0.0389 solar radii from De Marco et al. (2022), arXiv:2301.02775, Results: the star their model of the nebula needs has 110 kK and 200 Lsun; the paper prints no radius, and 0.0389 solar radii is the sphere that radiates that luminosity at that temperature (Stefan-Boltzmann law) (https://arxiv.org/abs/2301.02775); No mass is measured, so GM is 0, the records' unpublished value; temperature from De Marco et al. (2022), arXiv:2301.02775, Results: a model of the nebula's light with a central star of effective temperature 110 kK and luminosity 200 Lsun matches the observations.
+
+Color: a Planck spectrum at the temperature of De Marco et al. (2022), arXiv:2301.02775, Results: a model of the nebula's light with a central star of effective temperature 110 kK and luminosity 200 Lsun matches the observations, through the CIE 1931 2° color-matching functions (CIE 2019, CC BY-SA 4.0, doi:10.25039/CIE.DS.xvudnb9b).
+
+Placement: Gaia DR3 source 5420219732233481472: position, proper motion; distance: Monteiro et al. (2025), MNRAS 539, 1756: 754 pc (+18, -15), the Gaia DR3 geometric distance of the bright star beside it, the distance its nebula's page stands at; this star's own Gaia DR3 parallax, 0.51 +/- 0.19 mas, is too weak to place it. This work has made use of data from the European Space Agency (ESA) mission Gaia, processed by the Gaia Data Processing and Analysis Consortium (DPAC). Identifiers: SIMBAD, CDS, Strasbourg.

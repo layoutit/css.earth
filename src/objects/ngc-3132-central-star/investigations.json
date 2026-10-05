@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "ngc-3132-central-star",
+  "entries": [
+    {
+      "id": "placement",
+      "subject": "Placement",
+      "status": "included",
+      "finding": "Gaia DR3 source 5420219732233481472: position at J2016.0. Distance: Monteiro et al. (2025), MNRAS 539, 1756: 754 pc (+18, -15), the Gaia DR3 geometric distance of the bright star beside it, the distance its nebula's page stands at; this star's own Gaia DR3 parallax, 0.51 +/- 0.19 mas, is too weak to place it (https://arxiv.org/abs/2503.20640): 754 pc; Gaia DR3 parallax 0.5116 +/- 0.1936 mas (same row, RUWE 2.07), 2.6 standard errors, is not used. Proper motion: Gaia DR3 (same row): -7.677, 0.197 mas/yr. Radial velocity from No catalogued radial velocity: Gaia DR3 measures none for source 5420219732233481472 and SIMBAD lists none. Zero is assumed; a 30 km/s error moves the star by one part in 200,000 of its distance per century.",
+      "evidence": [
+        "https://gea.esac.esa.int/archive/",
+        "https://arxiv.org/abs/2503.20640",
+        "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia%20DR3%205420219732233481472"
+      ]
+    },
+    {
+      "id": "radius-mass-and-temperature",
+      "subject": "Radius, mass and temperature",
+      "status": "included",
+      "finding": "Radius 0.0389 solar radii from De Marco et al. (2022), arXiv:2301.02775, Results: the star their model of the nebula needs has 110 kK and 200 Lsun; the paper prints no radius, and 0.0389 solar radii is the sphere that radiates that luminosity at that temperature (Stefan-Boltzmann law) (https://arxiv.org/abs/2301.02775). No mass is measured, so GM is 0, the records' unpublished value. Temperature 110000 K from De Marco et al. (2022), arXiv:2301.02775, Results: a model of the nebula's light with a central star of effective temperature 110 kK and luminosity 200 Lsun matches the observations.",
+      "evidence": [
+        "https://arxiv.org/abs/2301.02775"
+      ]
+    },
+    {
+      "id": "color",
+      "subject": "Color",
+      "status": "included",
+      "finding": "A Planck spectrum at 110,000 K, because no archive holds a spectrum of this star (stis-ngsl: no HD number in SIMBAD; gaia-xp: Gaia DR3 published no sampled BP/RP spectrum of it; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number), through the CIE 1931 2-degree observer: #98b3ff. Routes tried in order: stis-ngsl: no HD number in SIMBAD; gaia-xp: Gaia DR3 published no sampled BP/RP spectrum of it; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; planck: used.",
+      "evidence": [
+        "https://arxiv.org/abs/2301.02775"
+      ]
+    }
+  ]
+}

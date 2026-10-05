@@ -1,0 +1,53 @@
+{
+  "id": "wd-1111-552",
+  "name": "WD 1111+552",
+  "system": "Owl Nebula",
+  "description": "WD 1111+552 is the central star of the Owl Nebula, about 811 parsecs away.",
+  "parent": "m97",
+  "featured": true,
+  "target": "WD 1111+552",
+  "gaia": "843950873117830528",
+  "paper": {
+    "url": "https://arxiv.org/abs/2109.12114",
+    "credit": "González-Santamaría et al. (2021), A&A 656, A51"
+  },
+  "radius": {
+    "value": 0.0374,
+    "source": "González-Santamaría et al. (2021), A&A 656, A51, Table 8: log(L/Lsun) = 1.98 from the star's V magnitude at its Gaia EDR3 distance, and log(Teff) = 4.97; the paper prints no radius, and 0.0374 solar radii is the sphere that radiates that luminosity at that temperature (Stefan-Boltzmann law)",
+    "url": "https://arxiv.org/abs/2109.12114"
+  },
+  "mass": "unmeasured",
+  "temperature": {
+    "value": 93300,
+    "source": "González-Santamaría et al. (2021), A&A 656, A51, Table 8: log(Teff) = 4.97, a temperature from the literature the paper compiles; spectral type DAO",
+    "url": "https://arxiv.org/abs/2109.12114"
+  },
+  "gravity": {
+    "value": 6.94,
+    "source": "Napiwotzki (1999), arXiv:astro-ph/9908181, Table 2: log g from a fit of the star's spectrum",
+    "url": "https://arxiv.org/abs/astro-ph/9908181",
+    "uncertainty": 0.31
+  },
+  "distance": {
+    "value": 811.014503375056,
+    "source": "Chornay & Walton (2021), A&A 656, A110; CDS J/A+A/656/A110, Table A.1, PN G148.4+57.0: distance 811 pc (782 to 842) from the Gaia EDR3 parallax of this star, the distance its nebula's page stands at",
+    "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/656/A110"
+  },
+  "planets": [],
+  "companions": [],
+  "text": {
+    "card": "WD 1111+552 is the central star of the Owl Nebula, about 811 parsecs away.",
+    "introduction": "The Owl's central star shines at 93,000 K with 95 times the Sun's light. Its sphere is about four times Earth's size.",
+    "locator": "Table 8: NGC 3587, log(L/Lsun) = 1.98, log(Teff) = 4.97"
+  },
+  "notes": [
+    "The star's mass is not measured. Evolutionary tracks give 0.55 solar masses from its spectrum (Napiwotzki (1999), arXiv:astro-ph/9908181, Table 2, https://arxiv.org/abs/astro-ph/9908181).",
+    "A fit of its spectrum gives 93,900 K (Napiwotzki (1999), arXiv:astro-ph/9908181, Table 2, https://arxiv.org/abs/astro-ph/9908181)."
+  ],
+  "radialVelocity": {
+    "value": 0,
+    "source": "No catalogued radial velocity: Gaia DR3 measures none for source 843950873117830528 and SIMBAD lists none. Zero is assumed; a 30 km/s error moves the star by one part in 300,000 of its distance per century",
+    "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia%20DR3%20843950873117830528"
+  },
+  "order": 5779
+}
