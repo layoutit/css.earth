@@ -1,0 +1,46 @@
+{
+  "id": "pds-cassini-iss-global-maps-v1",
+  "kind": "data-product",
+  "identityLevel": "release",
+  "title": "Cassini ISS Global Maps of Jupiter and Saturn",
+  "version": "1.0",
+  "identifiers": [
+    {
+      "type": "doi",
+      "value": "10.17189/rkkb-6y30"
+    },
+    {
+      "type": "PDS4 LIDVID",
+      "value": "urn:nasa:pds:co_iss_global-maps::1.0"
+    }
+  ],
+  "creators": [
+    "L. Li",
+    "R. A. West",
+    "X. Jiang",
+    "B. Knowles"
+  ],
+  "publisher": "NASA Planetary Data System, Atmospheres Node",
+  "publicationDate": "2023",
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.17189/rkkb-6y30",
+      "label": "PDS bundle"
+    },
+    {
+      "role": "original",
+      "url": "https://doi.org/10.1038/s41597-025-04392-3",
+      "label": "Wang, Li, Jiang and West (2025), the maps' data descriptor"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://pds.nasa.gov/ds-view/pds/viewBundle.jsp?identifier=urn%3Anasa%3Apds%3Aco_iss_global-maps&version=1.0",
+      "checkedOn": "2026-10-05",
+      "locator": "IDENTIFIER, NAME, AUTHORS, PUBLICATION YEAR and DIGITAL OBJECT IDENTIFIER"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

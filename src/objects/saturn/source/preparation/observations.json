@@ -256,6 +256,14 @@
       "origin": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2025a_f631n_v1_globalmap.fits",
       "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
       "license": "CC BY 4.0"
+    },
+    {
+      "id": "cassini-iss-2011-color-map-enhanced",
+      "path": "cassini-iss/Cassini_ISS_RGB_Saturn_global_color_map_contrast_enhance.fits",
+      "expectedBytes": 77829120,
+      "origin": "https://pds-atmospheres.nmsu.edu/PDS/data/PDS4/co_iss_global-maps/data_derived/Cassini_ISS_RGB_Saturn_global_color_map_contrast_enhance.fits",
+      "credit": "L. Li, R. A. West, X. Jiang and B. Knowles; Cassini ISS, NASA/JPL-Caltech/Space Science Institute; NASA Planetary Data System, Atmospheres Node",
+      "license": "NASA PDS archive data, urn:nasa:pds:co_iss_global-maps::1.0; not copyrighted, cite the data set"
     }
   ],
   "datasets": [
@@ -1186,6 +1194,132 @@
         "longitudePeriod": 1800
       },
       "planetographicAxisRatio": 1.1086012802589948
+    },
+    {
+      "id": "cassini-2011",
+      "source": "cassini-iss/Cassini_ISS_RGB_Saturn_global_color_map_contrast_enhance.fits",
+      "decode": {
+        "kind": "fits-planes",
+        "bitpix": -32,
+        "width": 3601,
+        "height": 1801,
+        "firstRow": "north",
+        "crop": {
+          "left": 1,
+          "top": 0,
+          "width": 3600,
+          "height": 1801
+        }
+      },
+      "products": [
+        {
+          "kind": "surface",
+          "filename": "saturn-surface-cassini-2011.webp",
+          "transforms": [
+            {
+              "kind": "resize",
+              "width": 2048,
+              "height": 1024
+            }
+          ],
+          "packing": {
+            "bandCount": 16,
+            "gutter": 16
+          },
+          "encoding": {
+            "quality": 80,
+            "smartSubsample": true,
+            "effort": 6
+          }
+        },
+        {
+          "kind": "surface",
+          "filename": "saturn-surface-cassini-2011@2x.webp",
+          "transforms": [
+            {
+              "kind": "resize",
+              "width": 4096,
+              "height": 2048
+            }
+          ],
+          "packing": {
+            "bandCount": 16,
+            "gutter": 32
+          },
+          "encoding": {
+            "quality": 80,
+            "smartSubsample": true,
+            "effort": 6
+          }
+        },
+        {
+          "kind": "poles",
+          "filename": "saturn-poles-cassini-2011.webp",
+          "projection": {
+            "tileSize": 512,
+            "poles": [
+              "north",
+              "south",
+              "north",
+              "south",
+              "north",
+              "south",
+              "north",
+              "south"
+            ],
+            "latitudeSegments": 16,
+            "angularMode": "orthographic",
+            "sampling": "bilinear-wrapped"
+          },
+          "encoding": {
+            "quality": 80,
+            "smartSubsample": true,
+            "effort": 6,
+            "alphaQuality": 100
+          }
+        },
+        {
+          "kind": "thumbnail",
+          "filename": "saturn-dataset-cassini-2011.webp",
+          "transforms": [
+            {
+              "kind": "resize",
+              "width": 132,
+              "height": 72
+            }
+          ],
+          "encoding": {
+            "quality": 80,
+            "smartSubsample": true,
+            "effort": 6
+          }
+        }
+      ],
+      "coverage": {
+        "kind": "declared-rows",
+        "unobservedRows": [
+          [
+            0,
+            110
+          ],
+          [
+            898,
+            906
+          ],
+          [
+            954,
+            1071
+          ],
+          [
+            1721,
+            1800
+          ]
+        ],
+        "reverseLongitude": true,
+        "longitudeOffsetDegrees": -0.1,
+        "longitudePeriod": 3600
+      },
+      "planetocentricSampleRows": 1.1086012802589948
     }
   ]
 }
