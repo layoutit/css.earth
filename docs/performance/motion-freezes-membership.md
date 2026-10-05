@@ -37,6 +37,11 @@ held differently while coasting:
   images are decoded off the page's thread, then shows whole: decoded inside the paint, NGC 2392's 57 layers made a
   frame of 235 ms on a turn and 270 ms on a dataset switch, against 34 and 31 ms decoded first (iPad, 2026-10-05).
   Joining such a stack a share a frame was measured and rejected: each joining frame painted the layers already shown.
+  A dataset picked on a slice volume that is on screen waits the same way (`universe/universe-dataset-banks.ts`): the
+  volume keeps the dataset it shows until every atlas of the next is decoded, then takes them in one frame, and not
+  while the camera coasts. Written at once, each atlas painted as it landed: on M42 frames of 99, 77 and 75 ms at the
+  pick and 143 ms when the last atlas arrived three seconds later; decoded first, 43 and 39 ms on the Small Magellanic
+  Cloud's atlases off the network (iPad, 2026-10-05).
 
 ## Why
 
