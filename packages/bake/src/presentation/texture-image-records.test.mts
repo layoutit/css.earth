@@ -62,7 +62,10 @@ test('the records expand back to the variable form and return to the same record
   const expanded = withoutTextureImageRecords(records);
   const own = (node: number) => expanded.tree.nodes[node]!.properties.map(id => expanded.tree.properties[id]!);
   assert.deepEqual(own(2), [{ name: '--surface', value: 'url("/first.webp")', custom: true }]);
-  assert.deepEqual(own(3), [{ name: 'width', value: '32px', custom: false }, { name: 'backgroundImage', value: 'var(--surface)', custom: false }]);
+  // Each listed element reads its slot at the head of its static style, and holds no image of its own.
+  assert.deepEqual(own(3), [{ name: 'width', value: '32px', custom: false }]);
+  assert.equal(expanded.tree.nodes[3]!.style, 'background-image:var(--surface);background-position:0px 0px;');
+  assert.equal(expanded.tree.nodes[4]!.style, 'background-image:var(--surface);background-position:32px 0px;');
   assert.deepEqual(expanded.variants[0]!.writes.slice(0, 4), [texture(1, '--surface', 'surface:a'), texture(2, '--surface', 'surface:a'), texture(2, '--poles', 'poles:a'),
     texture(5, 'backgroundImage', 'limb:a')]);
   assert.equal((expanded.textureLevels.tileLeaves[0] as { name: string }).name, '--surface');
@@ -70,6 +73,19 @@ test('the records expand back to the variable form and return to the same record
   // The bindings find the same slots again; the plate's write already names its own background.
   const again = withTextureImageRecords({ ...expanded, tree: { ...expanded.tree, textureBindings: [{ target: 2, name: '--surface', leaves: [3, 4] }] } }, [{ target: 5, name: 'backgroundImage', node: 5 }]);
   assert.deepEqual(again, records);
+});
+
+test('a tree whose slots hold no first image keeps its property table, entry for entry', () => {
+  // A depth partition's restore reads the camera's last table entry by position (prepared-depth-partitions.ts).
+  const partitioned = variable();
+  partitioned.tree.properties = [{ name: 'width', value: '32px', custom: false }, { name: 'transformStyle', value: 'flat', custom: false }];
+  partitioned.tree.nodes = partitioned.tree.nodes.map((node, index) => ({ ...node, properties: index === 0 ? [1] : index === 3 ? [0] : [],
+    style: index === 4 ? 'background-image:var(--surface);background-position:32px 0px;' : node.style }));
+  const records = withTextureImageRecords(partitioned, containers), expanded = withoutTextureImageRecords(records);
+  assert.equal(records.tree.properties, partitioned.tree.properties);
+  assert.equal(expanded.tree.properties, partitioned.tree.properties);
+  assert.deepEqual(expanded.tree.nodes[0]!.properties, [1]);
+  assert.deepEqual(withTextureImageRecords({ ...expanded, tree: { ...expanded.tree, textureBindings: [{ target: 2, name: '--surface', leaves: [3, 4] }] } }, [{ target: 5, name: 'backgroundImage', node: 5 }]), records);
 });
 
 test('an element that reads a selected image outside every slot is refused by node', () => {

@@ -105,7 +105,7 @@ export function serializePreparedScene(definition: ObjectRuntimeDefinition, data
         const tile = definition.textureLevels?.levels[0]?.tiles?.[binding.resource];
         for (const [node, x, y] of group.leaves) for (const [name, value] of textureTileLeafStyles(group, x, y, tile)) write(node, name, value);
       }
-    }
+    } else write(binding.target, binding.name, binding.value);
   }
   for (const selected of variant.materials) {
     const track = definition.materials.find(track => track.id === selected.track);

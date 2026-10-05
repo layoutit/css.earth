@@ -30,6 +30,8 @@ const IMAGE = 'backgroundImage';
 const variable = (name: string) => name.startsWith('--');
 const imageProperty = (property: Property) => !property.custom && (property.name === IMAGE || property.name === 'background-image');
 const key = (entry: { target: number; name: string }) => `${entry.target}:${entry.name}`;
+/** An element's read of its slot, as the expansion writes it at the head of the static style. */
+const tag = (name: string) => `background-image:var(${name});`;
 const declarations = (style: string) => [...scanCssDeclarations(style)].map(text => {
   const colon = text.indexOf(':');
   return { name: text.slice(0, colon).trim().toLowerCase(), value: text.slice(colon + 1).trim(), text };
@@ -71,13 +73,18 @@ export function withTextureImageRecords<D extends Definition>(definition: D, con
     if (slot) {
       const reads = `var(${slot.name})`;
       ids = ids.filter(id => !(imageProperty(tree.properties[id]!) && tree.properties[id]!.value === reads));
-      const parts = declarations(style), kept = parts.filter(part => !(part.name === 'background-image' && part.value === reads));
-      if (kept.length !== parts.length) style = kept.map(part => `${part.text};`).join('');
+      // The expansion writes the read first, so the rest of the style returns byte for byte; a builder's sits anywhere.
+      if (style.startsWith(tag(slot.name))) style = style.slice(tag(slot.name).length);
+      else {
+        const parts = declarations(style), kept = parts.filter(part => !(part.name === 'background-image' && part.value === reads));
+        if (kept.length !== parts.length) style = kept.map(part => `${part.text};`).join('');
+      }
       const image = first(index, slot.name);
       if (image !== undefined) { properties.push({ name: IMAGE, value: image, custom: false }); ids.push(properties.length - 1); }
     }
     return style === node.style && ids.length === node.properties.length && ids.every((id, at) => id === node.properties[at]) ? node : { ...node, style, properties: ids };
   });
+  const touched = properties.length !== tree.properties.length || nodes.some((node, index) => node.properties.length !== tree.nodes[index]!.properties.length);
   const left = nodes.findIndex(node => [node.style, ...node.properties.map(id => properties[id]!.value)].some(text => [...names].some(name => text.includes(`var(${name})`) || text.includes(`var(${name},`))));
   if (left >= 0) throw new TypeError(`${definition.id}: prepared node ${left} reads a selected image's variable, but no texture slot lists it: ${nodes[left]!.style}`);
   const bound = new Set(slots.map(key)), drawn = new Map<string, number[]>();
@@ -87,7 +94,8 @@ export function withTextureImageRecords<D extends Definition>(definition: D, con
   for (const write of written) if (!bound.has(key(write)) && !drawn.has(key(write))) empty.set(key(write), { target: write.target, name: write.name, leaves: [] });
   const plain = (name: string) => variable(name) ? name.slice(2) : name;
   return { ...definition, ...levelNames(definition, plain),
-    tree: { ...rebuildPropertyTable(tree, nodes, properties), textureBindings: [...slots, ...empty.values()].map(slot => ({ ...slot, name: plain(slot.name) })) },
+    // A table nothing was added to or dropped from stays as it is: the depth restore reads the camera's last entry by position.
+    tree: { ...(touched ? rebuildPropertyTable(tree, nodes, properties) : { ...tree, nodes }), textureBindings: [...slots, ...empty.values()].map(slot => ({ ...slot, name: plain(slot.name) })) },
     variants: definition.variants.map(variant => ({ ...variant, writes: variant.writes.flatMap(write => {
       if (write.kind !== 'texture' || !variable(write.name)) return [write];
       const nodes = bound.has(key(write)) ? undefined : drawn.get(key(write));
@@ -95,33 +103,34 @@ export function withTextureImageRecords<D extends Definition>(definition: D, con
     }) })) };
 }
 
-/** The records expanded back to the variable form the bindings measure (the inverse of withTextureImageRecords). */
+/** The records expanded back to the variable form the bindings measure (the inverse of withTextureImageRecords). Each
+ * listed element reads its slot at the head of its static style; the property table changes only where a slot's first
+ * image returns to its carrier, so a depth partition's camera property stays the last entry its restore reads. */
 export function withoutTextureImageRecords<D extends Definition>(definition: D): D {
   const { tree } = definition, slots = (tree.textureBindings ?? []).filter(slot => !variable(slot.name));
   if (!slots.length) return definition;
   const named = new Set(slots.map(key)), properties = [...tree.properties];
-  const add = (property: Property) => { properties.push(property); return properties.length - 1; };
-  const reads = new Map<number, number>(), carried = new Map<number, number[]>();
+  const reads = new Map<number, string>(), carried = new Map<number, number[]>();
   for (const slot of slots) {
     const name = `--${slot.name}`, images = new Set<string | undefined>();
     for (const leaf of slot.leaves) {
       const id = tree.nodes[leaf]!.properties.findLast(at => imageProperty(tree.properties[at]!));
       images.add(id === undefined ? undefined : tree.properties[id]!.value);
-      reads.set(leaf, add({ name: IMAGE, value: `var(${name})`, custom: false }));
+      reads.set(leaf, name);
     }
     if (images.size > 1) throw new TypeError(`${definition.id}: texture slot ${slot.name} on node ${slot.target} has elements with different first images: ${[...images].join(', ')}`);
     const [image] = images;
-    if (image !== undefined) carried.set(slot.target, [...carried.get(slot.target) ?? [], add({ name, value: image, custom: true })]);
+    if (image !== undefined) { properties.push({ name, value: image, custom: true }); carried.set(slot.target, [...carried.get(slot.target) ?? [], properties.length - 1]); }
   }
   const nodes = tree.nodes.map((node, index) => {
     const read = reads.get(index), carry = carried.get(index);
     if (read === undefined && !carry) return node;
     const kept = read === undefined ? node.properties : node.properties.filter(id => !imageProperty(tree.properties[id]!));
-    return { ...node, properties: [...kept, ...carry ?? [], ...read === undefined ? [] : [read]] };
+    return { ...node, ...(read === undefined ? {} : { style: tag(read) + node.style }), properties: carry ? [...kept, ...carry] : kept };
   });
   const custom = (entry: { target: number; name: string }) => named.has(key(entry)) ? `--${entry.name}` : entry.name;
   const groups = new Map(slots.map(slot => [slot.name, `--${slot.name}`]));
   return { ...definition, ...levelNames(definition, name => groups.get(name) ?? name),
-    tree: { ...rebuildPropertyTable(tree, nodes, properties), textureBindings: (tree.textureBindings ?? []).map(slot => ({ ...slot, name: custom(slot) })) },
+    tree: { ...(carried.size ? rebuildPropertyTable(tree, nodes, properties) : { ...tree, nodes }), textureBindings: (tree.textureBindings ?? []).map(slot => ({ ...slot, name: custom(slot) })) },
     variants: definition.variants.map(variant => ({ ...variant, writes: variant.writes.map(write => write.kind === 'texture' ? { ...write, name: custom(write) } : write) })) };
 }
