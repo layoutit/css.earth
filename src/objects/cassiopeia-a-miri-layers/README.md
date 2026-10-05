@@ -22,7 +22,7 @@ ESA/Webb's mid-infrared picture of the supernova remnant Cassiopeia A, as a shel
 - **Stars:** not removed. The picture shows few, and they lie on the shell with the smooth light.
 - **Drawing:** the surfaces are meshes of flat patches, as in the near-infrared bank. The face is 1,500 px of the picture's 4,008.
 - **Size:** 7.41 × 7.41 arcmin, 7.33 pc wide at 3,400 pc; the forward shock's sphere is 5.04 pc across.
-- **Rim:** the picture fades out between 185.6″ and 206.2″ from the expansion centre, the largest circle the frame holds, so more of the surroundings show than in the near-infrared dataset, whose picture ends at the shock.
+- **Rim:** the published picture is a square mosaic that does not fill its frame: half the frame is empty. Its own light reaches 142.8″ from the expansion centre at its nearest edge, and the picture fades out between 128.5″ and 142.8″, the largest circle that light fills, so no straight edge shows. The generator measures it: the dark border joined to the frame's edge is the empty part.
 
 ## Evidence
 
@@ -40,8 +40,7 @@ No bake code changes with this dataset.
 
 - The Green Monster is on the wrong side. X-ray spectra put it in front of the remnant (Vink et al. 2024; De Looze et al. 2024), but no paper gives its outline as numbers, so it is not treated apart: its broad light is shared by the sphere's two halves and the rest of it lies on the half behind the picture's plane.
 - The depths are measured in one line, [Ar II]. Dust, which is most of this picture's light, and the other lines are drawn at those depths or on the shock's sphere.
-- Light outside the forward shock's sphere, out to 206″, lies on the picture's plane.
-- The published picture is a square turned on its corner. Inside the rim's circle its empty corners are dark.
+- The rim's circle, 142.8″, is inside the forward shock's 153″: the remnant's outermost 10″ and everything beyond, which the mosaic holds on its other sides, are not drawn.
 - Everything the [near-infrared dataset's known problems](../cassiopeia-a-layers/README.md#known-problems) say of the depths and the meshes holds here.
 - The picture is 0.11″ a pixel and is drawn at 1,500 px, 0.30″ a pixel.
 - Colors are the publisher's display composite, not a measurement.
