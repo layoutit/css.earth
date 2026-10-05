@@ -4,6 +4,7 @@ name: Shared universe
 # all merge-required checks finish, including queue/setup time (not per job).
 # Keep affected correctness checks blocking; keep exhaustive sweeps and release
 # qualification outside the routine PR path. Measure added work against this budget.
+# Universe file shards overlap tests but repeat isolated-runner setup; measure both in hosted runs.
 # Job timeouts below are safety limits, not the agreed feedback budget.
 # Maintenance rules and failure recovery: docs/ci-cd.md.
 
@@ -39,6 +40,7 @@ jobs:
       test_packages: ${{ steps.affected.outputs.test_packages }}
       test_files: ${{ steps.affected.outputs.test_files }}
       test_site: ${{ steps.affected.outputs.test_site }}
+      test_matrix: ${{ steps.shards.outputs.test_matrix }}
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
@@ -85,6 +87,12 @@ jobs:
         # changed (.github/scripts/ci/affected-tests.mts). A push to main, or shared configuration, tests everything.
         id: affected
         run: node .github/scripts/ci/affected-tests.mts ${GITHUB_BASE_REF:+"origin/$GITHUB_BASE_REF"}
+      - name: Choose deterministic universe test shards
+        id: shards
+        env:
+          CI_TEST_PACKAGES: ${{ steps.affected.outputs.test_packages }}
+          CI_TEST_FILES: ${{ steps.affected.outputs.test_files }}
+        run: node .github/scripts/ci/test-shards.mts --matrix
       - name: Check that every commit is one Conventional Commits line with no attribution
         # Required with the rest of this job. A local commit-msg hook gives the same answer earlier, but a hook can be
         # skipped; this reads the pull request's own commits (merge base to head), so the merge itself is never counted.
@@ -154,11 +162,12 @@ jobs:
       - name: Hash tracked build and compiler inputs
         id: ci-cache-key
         run: node .github/scripts/ci/ci-cache-key.mts
-      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+      - uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         id: package-cache
         with:
           path: packages/*/dist
-          key: compiled-packages-v2-${{ steps.ci-cache-key.outputs.package_digest }}
+          key: compiled-packages-v3-${{ steps.ci-cache-key.outputs.package_digest }}
+          restore-keys: compiled-packages-v3-
       - name: Cache pinned NAIF kernel banks
         # A miss restores from each manifest's NAIF origin; no external mirror is written.
         uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
@@ -167,10 +176,13 @@ jobs:
             src/spice/*/*/
           key: naif-kernels-${{ runner.os }}-${{ hashFiles('src/spice/*/manifest.json') }}
       - name: Generate the registry and renderer
-        env:
-          CI_PACKAGE_CACHE_HIT: ${{ steps.package-cache.outputs.cache-hit }}
-          CI_PACKAGE_DIGEST: ${{ steps.ci-cache-key.outputs.package_digest }}
         run: node .github/scripts/ci/build-ci.mts lint
+      # One writer per digest set: every other lane restores and verifies package receipts.
+      - uses: actions/cache/save@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        if: ${{ steps.package-cache.outputs.cache-hit != 'true' }}
+        with:
+          path: packages/*/dist
+          key: compiled-packages-v3-${{ steps.ci-cache-key.outputs.package_digest }}
       - name: Mutation-check stale reference guard
         run: node --test .github/scripts/checks/check-stale-references.test.mts
       - name: Check live references to retired paths
@@ -193,7 +205,7 @@ jobs:
     needs: changes
     if: ${{ github.event_name != 'pull_request' || needs.changes.outputs.run_typecheck == 'true' }}
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: 12
     permissions:
       contents: read
     steps:
@@ -219,11 +231,12 @@ jobs:
       - name: Hash tracked build and compiler inputs
         id: ci-cache-key
         run: node .github/scripts/ci/ci-cache-key.mts
-      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+      - uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         id: package-cache
         with:
           path: packages/*/dist
-          key: compiled-packages-v2-${{ steps.ci-cache-key.outputs.package_digest }}
+          key: compiled-packages-v3-${{ steps.ci-cache-key.outputs.package_digest }}
+          restore-keys: compiled-packages-v3-
       - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         with:
           # Every tsc invocation in typecheck:pr writes its own .tsbuildinfo (never astro check, which never reads
@@ -243,9 +256,6 @@ jobs:
             src/spice/*/*/
           key: naif-kernels-${{ runner.os }}-${{ hashFiles('src/spice/*/manifest.json') }}
       - name: Build shared packages and affected entry points
-        env:
-          CI_PACKAGE_CACHE_HIT: ${{ steps.package-cache.outputs.cache-hit }}
-          CI_PACKAGE_DIGEST: ${{ steps.ci-cache-key.outputs.package_digest }}
         run: node .github/scripts/ci/build-ci.mts full
       - name: Restore only compiler inputs and generate real shell data
         run: pnpm prepare:typecheck
@@ -263,7 +273,7 @@ jobs:
     # Source signatures can break unchanged tests, so use the same owner selection as application types.
     if: ${{ github.event_name != 'pull_request' || needs.changes.outputs.run_typecheck == 'true' }}
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: 12
     permissions:
       contents: read
     steps:
@@ -287,11 +297,12 @@ jobs:
       - name: Hash tracked build and compiler inputs
         id: ci-cache-key
         run: node .github/scripts/ci/ci-cache-key.mts
-      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+      - uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         id: package-cache
         with:
           path: packages/*/dist
-          key: compiled-packages-v2-${{ steps.ci-cache-key.outputs.package_digest }}
+          key: compiled-packages-v3-${{ steps.ci-cache-key.outputs.package_digest }}
+          restore-keys: compiled-packages-v3-
       - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         with:
           # Keep this lane separate: caches are immutable, so sharing the application's key lets the
@@ -309,9 +320,6 @@ jobs:
             src/spice/*/*/
           key: naif-kernels-${{ runner.os }}-${{ hashFiles('src/spice/*/manifest.json') }}
       - name: Build shared packages and affected entry points
-        env:
-          CI_PACKAGE_CACHE_HIT: ${{ steps.package-cache.outputs.cache-hit }}
-          CI_PACKAGE_DIGEST: ${{ steps.ci-cache-key.outputs.package_digest }}
         run: node .github/scripts/ci/build-ci.mts full
       - name: Restore only compiler inputs and generate real shell data
         run: pnpm prepare:typecheck
@@ -323,13 +331,15 @@ jobs:
         run: pnpm typecheck:tests --extendedDiagnostics
 
   universe-checks:
-    name: Universe / ${{ matrix.lane }}
+    name: Universe / ${{ matrix.lane }} / ${{ matrix.shard }} of ${{ matrix.total }}
     strategy:
       fail-fast: false
       matrix:
-        lane: [packages, site]
+        include: ${{ fromJSON(needs.changes.outputs.test_matrix).include }}
     env:
       CI_UNIVERSE_LANE: ${{ matrix.lane }}
+      CI_TEST_SHARD: ${{ matrix.shard }}
+      CI_TEST_SHARDS: ${{ matrix.total }}
       CI_TEST_PACKAGES: ${{ needs.changes.outputs.test_packages }}
       CI_TEST_FILES: ${{ needs.changes.outputs.test_files }}
       # A lane with nothing to test still reports, so the required check passes, but does no work.
@@ -342,16 +352,20 @@ jobs:
       contents: read
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        if: env.CI_LANE_SKIP != 'true'
         with:
           filter: blob:none
           sparse-checkout-cone-mode: false
           sparse-checkout: *code-and-text
       - uses: pnpm/action-setup@f40ffcd9367d9f12939873eb1018b921a783ffaa # v4
+        if: env.CI_LANE_SKIP != 'true'
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        if: env.CI_LANE_SKIP != 'true'
         with:
           node-version: '22'
           cache: pnpm
       - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        if: env.CI_LANE_SKIP != 'true'
         with:
           path: node_modules
           key: node-modules-${{ hashFiles('pnpm-lock.yaml') }}
@@ -362,27 +376,25 @@ jobs:
           pnpm install --frozen-lockfile --ignore-scripts
       - name: Hash tracked build and compiler inputs
         id: ci-cache-key
+        if: env.CI_LANE_SKIP != 'true'
         run: node .github/scripts/ci/ci-cache-key.mts
-      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+      - uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        if: env.CI_LANE_SKIP != 'true'
         id: package-cache
         with:
           path: packages/*/dist
-          key: compiled-packages-v2-${{ steps.ci-cache-key.outputs.package_digest }}
+          key: compiled-packages-v3-${{ steps.ci-cache-key.outputs.package_digest }}
+          restore-keys: compiled-packages-v3-
       - name: Cache pinned NAIF kernel banks
         # A miss restores from each manifest's NAIF origin; no external mirror is written.
         uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        if: env.CI_LANE_SKIP != 'true'
         with:
           path: |
             src/spice/*/*/
           key: naif-kernels-${{ runner.os }}-${{ hashFiles('src/spice/*/manifest.json') }}
-      - name: Build shared packages and affected entry points
-        env:
-          CI_PACKAGE_CACHE_HIT: ${{ steps.package-cache.outputs.cache-hit }}
-          CI_PACKAGE_DIGEST: ${{ steps.ci-cache-key.outputs.package_digest }}
-        run: |
-          if [ "$CI_LANE_SKIP" = true ]; then exit 0; fi
-          node .github/scripts/ci/build-ci.mts full
       - uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        if: env.CI_LANE_SKIP != 'true'
         id: prepared-cache
         with:
           # Every prepared file of every object, not texture banks. Caching two file names of them left each job to
@@ -391,13 +403,13 @@ jobs:
           path: src/objects/*/prepared
           key: prepared-files-v2-${{ hashFiles('src/objects/*/inventory.json') }}
           restore-keys: prepared-files-v2-
+      - name: Build shared packages and affected entry points
+        run: |
+          if [ "$CI_LANE_SKIP" = true ]; then exit 0; fi
+          node .github/scripts/ci/build-ci.mts packages
       - name: Restore prepared assets and object JSON
         # Every object's JSON remains SHA-verified. Only tests that consume real prepared images restore them;
         # application texture banks are not inputs to these runtime and renderer assertions.
-        env:
-          # The packages compiled by the build step above; the second build only regenerates the site's prepared data.
-          CI_PACKAGE_CACHE_HIT: 'true'
-          CI_PACKAGE_DIGEST: ${{ steps.ci-cache-key.outputs.package_digest }}
         run: |
           if [ "$CI_LANE_SKIP" = true ]; then exit 0; fi
           if [ "${GITHUB_EVENT_NAME:-}" = "push" ]; then
@@ -405,14 +417,13 @@ jobs:
           else
             node .github/scripts/ci/prepare-ci-inputs.mts universe
           fi
-          # The catalogue, navigation and world context read the restored banks, and restoring the Sun's published
-          # assets replaces the context the first build wrote: generate them again from this checkout (packages are cached).
-          node .github/scripts/ci/build-ci.mts full
+          # Generate once after restoring the Sun's published world context and the other selected banks.
+          node .github/scripts/ci/build-ci.mts generators
           node site/build/prepare/prepare-feature-index.mts
       - uses: actions/cache/save@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         # Main saves the restored files once per inventory state; pull requests read main's copy and never save their
         # own (a few of those would fill the repository's 10 GB of cache).
-        if: ${{ github.event_name == 'push' && env.CI_LANE_SKIP != 'true' && steps.prepared-cache.outputs.cache-hit != 'true' }}
+        if: ${{ github.event_name == 'push' && matrix.lane == 'site' && matrix.shard == 1 && env.CI_LANE_SKIP != 'true' && steps.prepared-cache.outputs.cache-hit != 'true' }}
         with:
           path: src/objects/*/prepared
           key: prepared-files-v2-${{ hashFiles('src/objects/*/inventory.json') }}
@@ -429,21 +440,18 @@ jobs:
             # The volume packages' previews and compact inputs, as the nebula job keeps them, the tracked density sources
             # the volume tests decode (52 MB) and the tracked geology shapefiles: before the affected packages run too, since
             # the bake's volume tests read them whenever the bake is among them.
-            git grep -l 'cssearth-volume-source-manifest@2' -- 'src/objects/*/source/manifest.json' |
-              while IFS= read -r manifest; do printf '/%s/**\n' "${manifest%/source/manifest.json}"; done | git sparse-checkout add --stdin
-            git sparse-checkout add '/src/objects/**/*.shp' '/src/objects/**/*.ktx2'
-            node packages/bake/cli/restore-source-inputs.mts --repository-volumes
-            if [ "$CI_TEST_PACKAGES" != all ]; then
-              tests=(); for name in $CI_TEST_PACKAGES; do tests+=("packages/$name/**/*.test.{ts,mts}"); done
-              # Tests in offline tools or integration that exercise a changed package (discovered from the root globs and imports by affected-tests.mts).
-              for file in $CI_TEST_FILES; do tests+=("$file"); done
-              pnpm test:run "${tests[@]}"
-              exit 0
-            fi
+            case " $CI_TEST_PACKAGES " in
+              *" bake "*|*" objects "*|*" volume-viewer "*|*" all "*)
+                git grep -l 'cssearth-volume-source-manifest@2' -- 'src/objects/*/source/manifest.json' |
+                  while IFS= read -r manifest; do printf '/%s/**\n' "${manifest%/source/manifest.json}"; done | git sparse-checkout add --stdin
+                git sparse-checkout add '/src/objects/**/*.shp' '/src/objects/**/*.ktx2'
+                node packages/bake/cli/restore-source-inputs.mts --repository-volumes
+                ;;
+            esac
           else
             pnpm typecheck:oracles
           fi
-          pnpm "test:$CI_UNIVERSE_LANE"
+          node .github/scripts/ci/test-shards.mts --run
   universe:
     name: Prepared universe and shared renderer
     needs: [changes, universe-checks]
@@ -467,7 +475,7 @@ jobs:
     needs: changes
     if: ${{ github.event_name != 'pull_request' || needs.changes.outputs.run_universe_preparation == 'true' }}
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: 10
     permissions:
       contents: read
     steps:
@@ -491,11 +499,12 @@ jobs:
       - name: Hash tracked build and compiler inputs
         id: ci-cache-key
         run: node .github/scripts/ci/ci-cache-key.mts
-      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+      - uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         id: package-cache
         with:
           path: packages/*/dist
-          key: compiled-packages-v2-${{ steps.ci-cache-key.outputs.package_digest }}
+          key: compiled-packages-v3-${{ steps.ci-cache-key.outputs.package_digest }}
+          restore-keys: compiled-packages-v3-
       - name: Cache pinned NAIF kernel banks
         # A miss restores from each manifest's NAIF origin; no external mirror is written.
         uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
@@ -504,9 +513,6 @@ jobs:
             src/spice/*/*/
           key: naif-kernels-${{ runner.os }}-${{ hashFiles('src/spice/*/manifest.json') }}
       - name: Build shared packages and affected entry points
-        env:
-          CI_PACKAGE_CACHE_HIT: ${{ steps.package-cache.outputs.cache-hit }}
-          CI_PACKAGE_DIGEST: ${{ steps.ci-cache-key.outputs.package_digest }}
         run: node .github/scripts/ci/build-ci.mts full
       - uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         with:
@@ -543,7 +549,7 @@ jobs:
     needs: changes
     if: ${{ github.event_name != 'pull_request' || needs.changes.outputs.run_nebula == 'true' }}
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 10
     permissions:
       contents: read
     steps:
@@ -583,8 +589,14 @@ jobs:
           restore-keys: |
             tsbuildinfo-nebula-${{ steps.ci-cache-key.outputs.tsconfig_digest }}-${{ github.head_ref || github.ref_name }}-
             tsbuildinfo-nebula-${{ steps.ci-cache-key.outputs.tsconfig_digest }}-main-
+      - uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        id: package-cache
+        with:
+          path: packages/*/dist
+          key: compiled-packages-v3-${{ steps.ci-cache-key.outputs.package_digest }}
+          restore-keys: compiled-packages-v3-
       - name: Build shared TypeScript dependencies
-        run: pnpm -r --filter "./packages/**" build
+        run: node .github/scripts/ci/build-ci.mts packages
       - name: Restore repository volume inputs used by provenance closure
         run: node packages/bake/cli/restore-source-inputs.mts --repository-volumes
       - name: Install the browser used by isolated control tests
@@ -603,7 +615,7 @@ jobs:
     needs: changes
     if: ${{ needs.changes.outputs.run_astroquery == 'true' }}
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: 12
     env:
       CSS_EARTH_ASTROQUERY_CACHE: /home/runner/.cache/css-earth/astroquery
     steps:

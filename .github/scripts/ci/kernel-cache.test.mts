@@ -9,7 +9,7 @@ const root = new URL('../../../', import.meta.url);
 test('every solar preparation CI job caches kernel files under a pin-content key', async () => {
   const workflow = requireRecord(parse(await readFile(new URL('.github/workflows/universe.yml', root), 'utf8')));
   const jobs = Object.values(requireRecord(workflow.jobs)).map(job => requireRecord(job));
-  const fetching = jobs.filter(job => requireArray(job.steps).some(step => /build-ci\.mts (?:lint|full)/u.test(String(requireRecord(step).run))));
+  const fetching = jobs.filter(job => requireArray(job.steps).some(step => /build-ci\.mts (?:lint|full|generators)/u.test(String(requireRecord(step).run))));
   assert.ok(fetching.length >= 5);
   const banks = (await readdir(new URL('src/spice/', root), { withFileTypes: true })).filter(entry => entry.isDirectory());
   const pins = await Promise.all(banks.map(async bank => ({ path: `src/spice/${bank.name}/manifest.json`, contents: await readFile(new URL(`src/spice/${bank.name}/manifest.json`, root), 'utf8') })));
@@ -23,7 +23,7 @@ test('every solar preparation CI job caches kernel files under a pin-content key
     const options = requireRecord(cache.with), key = requireString(options.key);
     assert.equal(requireString(options.path).trim(), 'src/spice/*/*/');
     assert.match(key, /hashFiles\('src\/spice\/\*\/manifest\.json'\)/u);
-    assert.ok(cacheIndex < steps.findIndex(step => /build-ci\.mts (?:lint|full)/u.test(String(step.run))));
+    assert.ok(cacheIndex < steps.findIndex(step => /build-ci\.mts (?:lint|full|generators)/u.test(String(step.run))));
     const expressions = [...key.matchAll(/hashFiles\(([^)]*)\)/gu)];
     assert.ok(expressions.length > 0);
     const globs = expressions.flatMap(expression => [...expression[1]!.matchAll(/'([^']+)'/gu)].map(match => match[1]!));
