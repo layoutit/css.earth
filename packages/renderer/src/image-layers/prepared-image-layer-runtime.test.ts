@@ -30,15 +30,19 @@ test('selection follows baked plane normals and sample density instead of bank n
 // Retained DOM stand-in: exercise resource demand without browser image fetching.
 class ImageElement {
   readonly children: ImageElement[] = [];
+  parent: ImageElement | null = null;
   readonly style: Record<string, string> = {};
   readonly dataset: Record<string, string> = {};
   className = '';
   removed = false;
   readonly ownerDocument: ImageDocument;
   constructor(ownerDocument: ImageDocument) { this.ownerDocument = ownerDocument; }
-  appendChild(child: ImageElement) { this.children.push(child); }
-  insertBefore(child: ImageElement, before: ImageElement) { this.children.splice(this.children.indexOf(before), 0, child); }
-  remove() { this.removed = true; }
+  // A child that is appended moves: it leaves the parent it had.
+  private adopt(child: ImageElement) { child.detach(); child.parent = this; }
+  private detach() { if (this.parent) this.parent.children.splice(this.parent.children.indexOf(this), 1); this.parent = null; }
+  appendChild(child: ImageElement) { this.adopt(child); this.children.push(child); }
+  insertBefore(child: ImageElement, before: ImageElement) { this.adopt(child); this.children.splice(this.children.indexOf(before), 0, child); }
+  remove() { this.detach(); this.removed = true; }
 }
 class ImageDocument {
   readonly elements: ImageElement[] = [];
@@ -159,9 +163,30 @@ test('a stack mounts a camera for each of its scenes, and a stack without leaves
   assert.deepEqual(named('css-volume-camera').map(camera => camera.style.perspective), ['600px', '600px']);
   assert.deepEqual(resolveResource.mock.calls.map(call => call.arguments), [['flat.png'], ['atlas.png']]);
   assert.equal(leaf('a').style.backgroundImage, leaf('b').style.backgroundImage);
+  // Around a body the patches leave their runs' scenes for one flat element that carries the perspective, in the stack's
+  // order, each with the camera's transform before its own; as the page's subject again they are back in their runs.
+  const world = { referenceFrame: 'fixture', epochJdTt: 123, pose: { positionM: [0, 0, 10] as const, orientationXyzw: [0, 0, 0, 1] as const } };
+  const projection = named('css-volume-projection')[0]!, cameras = named('css-volume-camera'), ids = (parent: ImageElement) => parent.children.map(element => element.dataset.imageLayerLeaf);
+  const viewport = { focalPixels: 600, principalOffsetPixels: [3, 4] as const };
+  runtime.publish({ world, viewport });
+  const camera = first!.style.transform;
+  runtime.publish({ world, viewport }, [0, 0, -90]);
+  assert.equal(projection.children.length, 1);
+  const flat = projection.children[0]!;
+  assert.deepEqual([flat.className, flat.style.transformStyle, flat.style.perspective, flat.style.perspectiveOrigin], ['css-volume-mesh', 'flat', '600px', '3px 4px']);
+  assert.deepEqual(ids(flat), ['flat', 'a', 'b']);
+  assert.ok(flat.children.every(element => element.style.transform === `${camera} ${style.transform}`), 'each patch carries the camera before its own transform');
+  runtime.publish({ world: { ...world, pose: { ...world.pose, positionM: [0, 0, 12] } }, viewport }, [0, 0, -90]);
+  assert.ok(flat.children.every(element => element.style.transform !== `${camera} ${style.transform}` && element.style.transform.endsWith(` ${style.transform}`)), 'and follows it');
+  runtime.publish({ world, viewport });
+  assert.deepEqual(projection.children, cameras);
+  assert.deepEqual(named('css-volume-mesh').filter(mesh => mesh !== flat).map(ids), [['flat'], ['a', 'b']]);
+  assert.ok([leaf('flat'), leaf('a'), leaf('b')].every(element => element.style.transform === style.transform));
+  assert.ok(first!.style.transform === camera && second!.style.transform === camera && cameras.every(each => each.style.perspective === '600px'));
   // Seen edge-on the stack is still the only one that draws: it keeps the whole weight.
   publish([Math.SQRT1_2, 0, 0, Math.SQRT1_2]);
-  assert.equal(named('css-volume-projection')[0]!.style.opacity, '0.999');
+  // A stack of patches is drawn at 1, not under the ceiling a stack of sheets is held to.
+  assert.equal(named('css-volume-projection')[0]!.style.opacity, '1');
   assert.equal(named('css-volume-projection')[0]!.style.visibility, 'visible');
   assert.deepEqual(imageLayerAxisWeights([Math.SQRT1_2, 0, 0, Math.SQRT1_2], views.filter(view => view.axis === 'z')), { z: 1 });
 });
