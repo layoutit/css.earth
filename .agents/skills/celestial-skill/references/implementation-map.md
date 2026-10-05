@@ -104,7 +104,11 @@ instead of editing a shared list or atlas position.
   shape model, or a picture registered to one. A map of the same body draws on
   the body's mesh. Picking a dataset on another mesh swaps every face in one
   frame: 0.5 to 1.1 s on an iPad for comet 67P's 1,000 to 2,000 faces when its
-  model, photographs and VIRTIS maps each had their own (2026-10-05).
+  model, photographs and VIRTIS maps each had their own (2026-10-05). A map
+  published on another model of the same body names that model as an alternative
+  with `"display": "body-mesh"`: each texel is read at the closest point of that
+  model's surface and drawn on the body's mesh, as Bennu's six facet tables are
+  from four versions of its shape.
 - **One atlas size for a body's datasets:** on a mesh of triangles every face
   draws its atlas at the layout's size. A dataset with `textureScale` below 1 is
   drawn enlarged, which Safari does with a cropped copy for each face: comet

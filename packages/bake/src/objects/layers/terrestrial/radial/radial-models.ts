@@ -5,7 +5,7 @@ type TerrainContext = Parameters<typeof loadRadialTerrain>[0];
 const datasetGroups = ['observations', 'scientific', 'observedColors', 'shapeViews', 'surfaceObservations'] as const;
 interface ModelConfig {
   namespace: string;
-  geometry: {radius: number; radiusKm: number; radialTerrain?: unknown; radialTerrainAlternatives?: (Record<string, unknown> & {datasetId: string; additionalDatasetIds?: string[]})[]};
+  geometry: {radius: number; radiusKm: number; radialTerrain?: unknown; radialTerrainAlternatives?: (Record<string, unknown> & {datasetId: string; additionalDatasetIds?: string[]; display?: unknown})[]};
   presentation: {defaultDataset: string};
   raster: Partial<Record<typeof datasetGroups[number], {id: string}[]>>;
 }
@@ -14,6 +14,8 @@ export interface LoadedRadialModel {
   datasetIds: string[];
   radial: RadialState;
   config: ModelConfig;
+  /** The models some of these datasets are read from while they draw on this mesh (`display: "body-mesh"`), by dataset. */
+  sampling?: Map<string, {grid: RadialState['grid']; config: ModelConfig}>;
 }
 interface CombinedRadial {faces: RadialState['faces']; leaves: RadialState['leaves']; datasetRanges?: {datasetId: string; start: number; count: number}[];}
 
@@ -31,12 +33,18 @@ export async function loadRadialModels<T extends ModelConfig>(context: Omit<Terr
       alternatives.length && !config.geometry.radialTerrain) throw new TypeError('Invalid alternative surface models.');
   const base = await loadRadialTerrain(context);
   if (!base) return [];
-  const models = [{ id: ids[0], datasetIds: datasets.filter(id => !ids.slice(1).includes(id)), radial: base, config }];
-  for (const { datasetId, additionalDatasetIds: _additional, ...profile } of alternatives) {
+  const sampling = new Map<string, {grid: RadialState['grid']; config: T}>();
+  const models: {id: string; datasetIds: string[]; radial: typeof base; config: T; sampling?: typeof sampling}[] = [{ id: ids[0], datasetIds: datasets.filter(id => !ids.slice(1).includes(id)), radial: base, config, sampling }];
+  for (const { datasetId, additionalDatasetIds: _additional, display, ...profile } of alternatives) {
+    if (display !== undefined && display !== 'body-mesh') throw new TypeError('An alternative surface model draws on its own mesh, or on the body\'s with display "body-mesh".');
     const selected = { ...config, geometry: { ...config.geometry, radialTerrain: profile } };
     const radial = await loadRadialTerrain({ ...context, config: selected });
     if (!radial) throw new TypeError('Alternative model lacks its terrain source.');
-    models.push({ id: datasetId, datasetIds: alternativeDatasetIds({ datasetId, additionalDatasetIds: _additional }), config: selected, radial });
+    const own = alternativeDatasetIds({ datasetId, additionalDatasetIds: _additional });
+    // The same body in another published model: its datasets are read from it and drawn on the body's mesh, so a
+    // selection never swaps meshes. A second mesh is for a dataset that is itself another shape.
+    if (display === 'body-mesh') { models[0]!.datasetIds.push(...own); for (const id of own) sampling.set(id, { grid: radial.grid, config: selected }); continue; }
+    models.push({ id: datasetId, datasetIds: own, config: selected, radial });
   }
   return models;
 }
