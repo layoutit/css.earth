@@ -37,6 +37,6 @@ test('configuration facts and function-specific file closure come from deployed 
     await symlink(resolve(root, 'netlify.toml'), resolve(root, 'data/link.json'));
     // An in-root symlink is copied as bytes. An escaping one must fail even when the glob includes it.
     await symlink(resolve(root, '..'), resolve(root, 'data/escape.json'));
-    await assert.rejects(packagedFunction(root, 'find', config), /escapes project root/u);
+    await assert.rejects(packagedFunction(root, 'find', config), /escapes project root: data\/escape\.json$/u, 'the linked directory is refused itself, not walked');
   } finally { if (pack) await rm(pack.root, { recursive: true, force: true }); await rm(root, { recursive: true, force: true }); }
 });

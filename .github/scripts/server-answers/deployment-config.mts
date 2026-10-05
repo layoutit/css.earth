@@ -103,7 +103,13 @@ export async function packagedFunction(root: string, name: string, config: Deplo
   async function walk(directory: string): Promise<void> {
     for (const entry of await readdir(directory, { withFileTypes: true })) {
       const absolute = resolve(directory, entry.name), path = relative(sourceRoot, absolute).split(sep).join('/');
-      if (entry.isDirectory() || (entry.isSymbolicLink() && visit(path) && (await stat(absolute)).isDirectory())) { if (visit(path)) await walk(absolute); }
+      if (entry.isSymbolicLink() && visit(path) && (await stat(absolute)).isDirectory()) {
+        // A linked directory is followed only while it stays inside the project: one that leads out is refused at once, never walked.
+        const target = await realpath(absolute), shared = resolve(sourceRoot, 'public/scenes');
+        const sharedRoot = await realpath(shared).catch(() => shared);
+        if (!target.startsWith(sourceRoot + sep) && !(path.startsWith('public/scenes/') && target.startsWith(sharedRoot + sep))) throw new Error(`Included file escapes project root: ${path}`);
+        await walk(absolute);
+      } else if (entry.isDirectory()) { if (visit(path)) await walk(absolute); }
       else if (matchesPatterns(path, patterns)) {
         const actual = await realpath(absolute);
         const shared = resolve(sourceRoot, 'public/scenes');
