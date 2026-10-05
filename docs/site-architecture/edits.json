@@ -1,0 +1,432 @@
+{
+  "edits": [
+    {
+      "op": "add-file",
+      "path": "site/model/navigation-href.mts",
+      "imports": [],
+      "change": "Extract held address reader",
+      "note": "Move navigationHref AND its owners WeakMap. Export a registration function for history; preserve deferred URL semantics.",
+      "id": "add-file-navigation-href"
+    },
+    {
+      "op": "add-import",
+      "from": "site/navigation/navigation-history.mts",
+      "to": "site/model/navigation-href.mts",
+      "kind": "value",
+      "change": "Extract held address reader",
+      "note": "History registers and unregisters its held address reader in the same WeakMap; re-export the getter for existing navigation callers.",
+      "id": "add-import-navigation-history-navigation-href"
+    },
+    {
+      "op": "retarget",
+      "from": "site/world/application-world-resources.mts",
+      "to": "site/navigation/navigation-history.mts",
+      "newTo": "site/model/navigation-href.mts",
+      "kind": "value",
+      "change": "Extract held address reader",
+      "note": "Only lower world caller uses navigationHref; other callers retain history behavior.",
+      "id": "retarget-application-world-resources-navigation-href",
+      "line": 18
+    },
+    {
+      "op": "add-file",
+      "path": "site/directory/object-entry-types.mts",
+      "note": "Extract registry aliases from objects; directory must not import the registry that calls it.",
+      "change": "Extract registry types",
+      "imports": [
+        {
+          "to": "site/browser/browser-types.mts",
+          "kind": "type"
+        },
+        {
+          "to": "packages/objects/src/index.ts",
+          "kind": "type"
+        }
+      ],
+      "id": "add-file-object-entry-types"
+    },
+    {
+      "op": "retarget",
+      "from": "site/directory/object-directory.mts",
+      "to": "site/directory/objects.mts",
+      "note": "Use the extracted registry aliases without evaluating the full registry.",
+      "kind": "type",
+      "newTo": "site/directory/object-entry-types.mts",
+      "change": "Extract registry types",
+      "id": "retarget-object-directory-object-entry-types",
+      "line": 3
+    },
+    {
+      "op": "add-import",
+      "to": "site/directory/object-entry-types.mts",
+      "kind": "type",
+      "note": "Registry imports and re-exports its extracted aliases so clients can migrate without duplication.",
+      "from": "site/directory/objects.mts",
+      "change": "Extract registry types",
+      "id": "add-import-objects-object-entry-types"
+    },
+    {
+      "op": "add-file",
+      "path": "site/navigation/navigation-types.mts",
+      "imports": [
+        {
+          "to": "site/browser/browser-types.mts",
+          "kind": "type"
+        },
+        {
+          "to": "packages/renderer/src/runtime/world-navigation-types.ts",
+          "kind": "type"
+        },
+        {
+          "to": "packages/renderer/src/runtime/object-scene.ts",
+          "kind": "type"
+        },
+        {
+          "to": "site/world/scene-subject.mts",
+          "kind": "type"
+        },
+        {
+          "to": "site/world/navigation-scope.mts",
+          "kind": "type"
+        }
+      ],
+      "change": "Extract navigation contracts",
+      "note": "Own WorldHandoff, NavigationHistory and NavigationIntent beside navigation. Import MountOptions, ObjectSceneLifecycle, ObjectWorldNavigation, SceneSubject and PageView; preserve erased aliases SceneView and SelectionTarget.",
+      "id": "add-file-navigation-types"
+    },
+    {
+      "op": "retarget",
+      "from": "site/navigation/prepared-arrival.mts",
+      "to": "site/navigation/prepared-world-navigation.mts",
+      "note": "Arrival reads WorldHandoff from the lower contract; navigation still owns flights.",
+      "kind": "type",
+      "newTo": "site/navigation/navigation-types.mts",
+      "change": "Extract navigation contracts",
+      "id": "retarget-prepared-arrival-navigation-types",
+      "line": 4
+    },
+    {
+      "op": "retarget",
+      "from": "site/navigation/navigation-history.mts",
+      "to": "site/navigation/navigation-request.mts",
+      "newTo": "site/navigation/navigation-types.mts",
+      "kind": "type",
+      "note": "Extract NavigationHistory and NavigationIntent into navigation-types; the history transport must not import request orchestration.",
+      "change": "Extract navigation contracts",
+      "id": "retarget-navigation-history-navigation-types",
+      "line": 4
+    },
+    {
+      "op": "add-import",
+      "to": "site/navigation/navigation-types.mts",
+      "kind": "type",
+      "note": "Flights import and re-export the extracted WorldHandoff contract.",
+      "from": "site/navigation/prepared-world-navigation.mts",
+      "change": "Extract navigation contracts",
+      "id": "add-import-prepared-world-navigation-navigation-types"
+    },
+    {
+      "op": "add-import",
+      "to": "site/navigation/navigation-types.mts",
+      "kind": "type",
+      "note": "Request imports its extracted intent and history types and the plain selection shape; selection behavior is passed in.",
+      "from": "site/navigation/navigation-request.mts",
+      "change": "Extract navigation contracts",
+      "id": "add-import-navigation-request-navigation-types"
+    },
+    {
+      "op": "add-file",
+      "path": "site/content/moon-catalogue.mts",
+      "note": "Split catalogue parsing, cached source catalogue and catalogueMoons into a runtime-safe reader; preparation keeps search-based ordering.",
+      "change": "Split the moon catalogue reader",
+      "imports": [
+        {
+          "to": "site/source/moon-catalogues.json",
+          "kind": "asset"
+        },
+        {
+          "to": "packages/objects/src/sources/index.ts",
+          "kind": "value"
+        }
+      ],
+      "id": "add-file-moon-catalogue"
+    },
+    {
+      "op": "retarget",
+      "from": "site/content/object-children.mts",
+      "to": "site/build/prepare/prepare-body-moons.mts",
+      "note": "Read catalogueMoons from the split reader; production must never import build preparation.",
+      "newTo": "site/content/moon-catalogue.mts",
+      "change": "Split the moon catalogue reader",
+      "id": "retarget-object-children-moon-catalogue",
+      "line": 3
+    },
+    {
+      "op": "remove-import",
+      "from": "site/build/prepare/prepare-body-moons.mts",
+      "to": "site/source/moon-catalogues.json",
+      "note": "Move the source catalogue import with its parser into the reader; preparation calls that reader.",
+      "kind": "asset",
+      "change": "Split the moon catalogue reader",
+      "id": "remove-import-prepare-body-moons-moon-catalogues",
+      "line": 4
+    },
+    {
+      "op": "add-import",
+      "from": "site/build/prepare/prepare-body-moons.mts",
+      "to": "site/content/moon-catalogue.mts",
+      "kind": "value",
+      "note": "Use the single catalogue reader for preparation too; preserve the named-moon eligibility policy in preparation.",
+      "change": "Split the moon catalogue reader",
+      "id": "add-import-prepare-body-moons-moon-catalogue"
+    },
+    {
+      "op": "remove-import",
+      "from": "site/navigation/navigation-request.mts",
+      "to": "site/selection/scene-selection.mts",
+      "note": "Pass selectionTargetFromUrl explicitly through resolveNavigation and readNavigationSelection. Router uses the existing registry export, injects it into createSceneActivation, which forwards all three calls. Import erased SceneView/SelectionTarget aliases from navigation-types; never retain the selection import.",
+      "change": "Pass selection into navigation requests",
+      "id": "remove-import-navigation-request-scene-selection",
+      "line": 11
+    },
+    {
+      "op": "add-import",
+      "to": "site/world/scene-subject.mts",
+      "kind": "value",
+      "note": "Keep existing subject identity helpers in the lower world owner; pass selectionTargetFromUrl as a parameter.",
+      "from": "site/navigation/navigation-request.mts",
+      "change": "Pass selection into navigation requests",
+      "id": "add-import-navigation-request-scene-subject"
+    },
+    {
+      "op": "add-file",
+      "path": "site/scene/scene-frame-presenter.mts",
+      "note": "Extract the structural presenter interface; a session must not import the world coordinator that consumes it.",
+      "change": "Extract the frame presenter contract",
+      "imports": [
+        {
+          "to": "site/world/application-world-context.mts",
+          "kind": "type"
+        },
+        {
+          "to": "site/world/world-viewport.mts",
+          "kind": "type"
+        }
+      ],
+      "id": "add-file-scene-frame-presenter"
+    },
+    {
+      "op": "retarget",
+      "from": "site/scene/scene-session.mts",
+      "to": "site/scene/scene-world.mts",
+      "note": "Session reads SceneFramePresenter from the lower contract, breaking the two-way type dependency.",
+      "kind": "type",
+      "newTo": "site/scene/scene-frame-presenter.mts",
+      "change": "Extract the frame presenter contract",
+      "id": "retarget-scene-session-scene-frame-presenter",
+      "line": 2
+    },
+    {
+      "op": "add-import",
+      "to": "site/scene/scene-frame-presenter.mts",
+      "kind": "type",
+      "note": "World coordinator imports and re-exports the structural presenter contract.",
+      "from": "site/scene/scene-world.mts",
+      "change": "Extract the frame presenter contract",
+      "id": "add-import-scene-world-scene-frame-presenter"
+    },
+    {
+      "id": "add-file-scene-imports",
+      "op": "add-file",
+      "change": "Relocate queued loader owners",
+      "path": "site/scene/scene-imports.mts",
+      "imports": [
+        {
+          "to": "site/browser/import-queue.mts",
+          "kind": "value"
+        },
+        {
+          "to": "site/scene/scene-registry.mts",
+          "kind": "lazy"
+        },
+        {
+          "to": "site/scene/packaged-object-runtime.mts",
+          "kind": "lazy"
+        }
+      ],
+      "note": "Decided by the owner: loader modules hold only import() calls through the existing queue. Own registry and packaged-runtime functions in scene; move the single last chain to lower browser/import-queue. Prove one queue chain, registration before the first scene call, the same entry-chunk modules and bytes, identical L1/L2/L3, L7 no worse and the real-iPad startup journey."
+    },
+    {
+      "id": "add-file-world-imports",
+      "op": "add-file",
+      "change": "Relocate queued loader owners",
+      "path": "site/world/world-imports.mts",
+      "imports": [
+        {
+          "to": "site/browser/import-queue.mts",
+          "kind": "value"
+        },
+        {
+          "to": "site/world/application-world-context.mts",
+          "kind": "lazy"
+        }
+      ],
+      "note": "Own the queued application-world import in world; no initializer inside the thunk."
+    },
+    {
+      "id": "remove-queue-runtime",
+      "op": "remove-import",
+      "change": "Relocate queued loader owners",
+      "to": "site/scene/packaged-object-runtime.mts",
+      "kind": "lazy",
+      "line": 26,
+      "note": "Move the runtime function out of the import-free browser queue implementation.",
+      "from": "site/browser/import-queue.mts"
+    },
+    {
+      "id": "remove-shared-registry",
+      "op": "remove-import",
+      "change": "Relocate queued loader owners",
+      "to": "site/scene/scene-registry.mts",
+      "kind": "lazy",
+      "line": 5,
+      "note": "Leave only importSceneRouter in startup/shared-imports.",
+      "from": "site/startup/shared-imports.mts"
+    },
+    {
+      "id": "remove-shared-world",
+      "op": "remove-import",
+      "change": "Relocate queued loader owners",
+      "to": "site/world/application-world-context.mts",
+      "kind": "lazy",
+      "line": 6,
+      "note": "Move the world function to its owner.",
+      "from": "site/startup/shared-imports.mts"
+    },
+    {
+      "id": "retarget-adapter-scene-imports",
+      "op": "retarget",
+      "change": "Relocate queued loader owners",
+      "to": "site/browser/import-queue.mts",
+      "newTo": "site/scene/scene-imports.mts",
+      "line": 1,
+      "note": "Adapter directly uses the same queued runtime function; preserve the frozen default adapter.",
+      "from": "site/scene/object-adapter.mts"
+    },
+    {
+      "id": "retarget-router-world-imports",
+      "op": "retarget",
+      "change": "Relocate queued loader owners",
+      "to": "site/startup/shared-imports.mts",
+      "newTo": "site/world/world-imports.mts",
+      "line": 2,
+      "note": "Split router loader imports; preserve module-evaluation autostart.",
+      "from": "site/scene/scene-router.mts"
+    },
+    {
+      "id": "add-router-scene-imports",
+      "op": "add-import",
+      "change": "Relocate queued loader owners",
+      "to": "site/scene/scene-imports.mts",
+      "kind": "value",
+      "note": "Import registry/runtime functions and register only the directory runtime loader using the existing object-directory import before first scene call.",
+      "from": "site/scene/scene-router.mts"
+    },
+    {
+      "id": "remove-directory-queue",
+      "op": "remove-import",
+      "change": "Relocate queued loader owners",
+      "to": "site/browser/import-queue.mts",
+      "line": 1,
+      "note": "Directory accepts a typed runtime-loader registration; read the slot at scene invocation, not metadata construction. Missing registration fails explicitly.",
+      "from": "site/directory/object-directory.mts"
+    },
+    {
+      "id": "retarget-boot-scene-imports",
+      "op": "retarget",
+      "change": "Relocate queued loader owners",
+      "to": "site/startup/shared-imports.mts",
+      "newTo": "site/scene/scene-imports.mts",
+      "line": 1,
+      "note": "Body prestart and registry prestart reuse scene-owned promises.",
+      "from": "site/startup/startup-boot.mts"
+    },
+    {
+      "id": "add-boot-world-imports",
+      "op": "add-import",
+      "change": "Relocate queued loader owners",
+      "to": "site/world/world-imports.mts",
+      "kind": "value",
+      "note": "View prestart reuses the world-owned promise.",
+      "from": "site/startup/startup-boot.mts"
+    }
+  ],
+  "changes": [
+    {
+      "id": "extract-held-address-reader",
+      "edits": [
+        "add-file-navigation-href",
+        "add-import-navigation-history-navigation-href",
+        "retarget-application-world-resources-navigation-href"
+      ]
+    },
+    {
+      "id": "extract-registry-types",
+      "edits": [
+        "add-file-object-entry-types",
+        "retarget-object-directory-object-entry-types",
+        "add-import-objects-object-entry-types"
+      ]
+    },
+    {
+      "id": "extract-navigation-contracts",
+      "edits": [
+        "add-file-navigation-types",
+        "retarget-prepared-arrival-navigation-types",
+        "retarget-navigation-history-navigation-types",
+        "add-import-prepared-world-navigation-navigation-types",
+        "add-import-navigation-request-navigation-types"
+      ]
+    },
+    {
+      "id": "split-the-moon-catalogue-reader",
+      "edits": [
+        "add-file-moon-catalogue",
+        "retarget-object-children-moon-catalogue",
+        "remove-import-prepare-body-moons-moon-catalogues",
+        "add-import-prepare-body-moons-moon-catalogue"
+      ]
+    },
+    {
+      "id": "pass-selection-into-navigation-requests",
+      "edits": [
+        "remove-import-navigation-request-scene-selection",
+        "add-import-navigation-request-scene-subject"
+      ]
+    },
+    {
+      "id": "extract-the-frame-presenter-contract",
+      "edits": [
+        "add-file-scene-frame-presenter",
+        "retarget-scene-session-scene-frame-presenter",
+        "add-import-scene-world-scene-frame-presenter"
+      ]
+    },
+    {
+      "id": "relocate-queued-loader-owners",
+      "edits": [
+        "add-file-scene-imports",
+        "add-file-world-imports",
+        "remove-queue-runtime",
+        "remove-shared-registry",
+        "remove-shared-world",
+        "retarget-adapter-scene-imports",
+        "retarget-router-world-imports",
+        "add-router-scene-imports",
+        "remove-directory-queue",
+        "retarget-boot-scene-imports",
+        "add-boot-world-imports"
+      ]
+    }
+  ]
+}
