@@ -6,7 +6,7 @@ Pinwheel Galaxy (M101) as an object of the world: its place, its card and its li
 
 The card's facts cite their catalogues in [source/content/object.json](source/content/object.json); the [astronomy record](../../../packages/astronomy/data/bodies/m101.json) cites the position, distance and velocity that place it.
 
-M101's distance is its Cepheid distance, modulus 29.135 ± 0.045 (6.71 Mpc), from [Riess et al. (2016)](https://arxiv.org/abs/1604.01424), Table 5. It replaces the Local Volume Database's modulus of 29.21 (`distanceOverrides` in [the galaxy catalogue recipe](../local-group/source/catalogue.json)), so the galaxy sits where its dot in the [Nearby Universe](../nearby-universe/README.md) does.
+M101's distance is its Cepheid distance, modulus 29.135 ± 0.045 (6.71 Mpc), from [Riess et al. (2016)](https://arxiv.org/abs/1604.01424), Table 5. It replaces the Local Volume Database's modulus of 29.21 (`distanceOverrides` in [the galaxy catalogue recipe](../local-group-galaxies/source/catalogue.json)), so the galaxy sits where its dot in the [Nearby Universe](../nearby-universe/README.md) does.
 
 ## Processing
 

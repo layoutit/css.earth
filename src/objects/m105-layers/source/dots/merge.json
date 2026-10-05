@@ -2,11 +2,16 @@
   "schema": "cssearth-catalogue-points-merge@1",
   "id": "dots",
   "published": true,
-  "meaning": "M105's catalogued objects as dots on its photograph's plane: planetary nebulae.",
+  "meaning": "M105's catalogued objects as dots on its photograph's plane: planetary nebulae, globular cluster candidates.",
   "centreOnGalaxy": true,
   "banks": [
     {
       "bank": "hartke-pne",
+      "withinPcOfCentre": 12290,
+      "basis": "Presentation choice: a dot is drawn only where the photograph is, inside the image layers' 12.29 kpc support radius (recipe.json)."
+    },
+    {
+      "bank": "whitlock-gc",
       "withinPcOfCentre": 12290,
       "basis": "Presentation choice: a dot is drawn only where the photograph is, inside the image layers' 12.29 kpc support radius (recipe.json)."
     }

@@ -1,0 +1,56 @@
+{
+  "schema": "cssearth-image-layer-provenance@1",
+  "title": "Preview of a forthcoming supernova",
+  "publisher": "ESA/Hubble",
+  "sourceId": "potw1208a",
+  "sourcePage": "https://esahubble.org/images/potw1208a/",
+  "download": "https://cdn.esahubble.org/archives/images/large/potw1208a.jpg",
+  "credit": "ESA/Hubble & NASA",
+  "license": "CC-BY-4.0",
+  "original": {
+    "dimensions": [
+      1089,
+      1033
+    ],
+    "bands": [
+      "Hubble",
+      "ACS",
+      "220 nm",
+      "250 nm",
+      "330 nm",
+      "550 nm",
+      "660 nm"
+    ],
+    "fieldOfViewDeg": [
+      0.007508733,
+      0.007122609
+    ]
+  },
+  "checkedSource": {
+    "kind": "Published JPEG",
+    "dimensions": [
+      1089,
+      1033
+    ]
+  },
+  "geometryEvidence": {
+    "inclinationDeg": 41,
+    "lineOfNodesPaDeg": 220,
+    "reference": "The plane through the star across the nebula's pole. Smith (2006) gives the pole 41 degrees from the sight line toward position angle 310 degrees, its north-west end receding: the plane is inclined 41 degrees, its line of nodes along position angle 220 degrees, its north-west half the nearer. Steffen et al. (2014) call the skirt seen in optical pictures a thin equatorial disc. The surface's own depths are along the sight line from the star, not from this plane."
+  },
+  "registration": {
+    "method": "The file's embedded sky tags for scale and direction, 0.0248 arcsec per pixel and north 34.98° left of vertical, and the star for place: the middle of the picture's saturated pixels, pixel 627, 525, is set at Eta Carinae's catalogued place, so the frame's centre is 161.2656327°, -59.684052°.",
+    "pixelArcsec": 0.02482,
+    "northClockwiseDeg": -34.98
+  },
+  "displayModel": "Inside the outline of the surface Steffen et al. (2014) made, the picture's light lies on that surface, a closed mesh placed with its pole 41 degrees from the sight line toward position angle 310 degrees (Smith 2006). A sight line enters and leaves each lobe: the side nearest the Sun holds the picture, and each side behind it, which the picture does not show, repeats the picture sight line by sight line. Outside the outline the picture lies on the plane through the star across that pole, where the thin equatorial skirt is. The central star's own light, which ends 2.9 arcsec from it in this picture, stays at the star on that plane: all of it within 1.45 arcsec, less and less out to 2.9. The surface is drawn as meshes of flat patches.",
+  "coverage": "The published frame inside a circle about the star: the picture fades out between 10.3 and 11.4 arcsec, the largest circle the frame holds, so no straight edge shows.",
+  "acquisition": {
+    "url": "https://cdn.esahubble.org/archives/images/large/potw1208a.jpg",
+    "dimensions": [
+      1089,
+      1033
+    ],
+    "operation": "Download the publisher's JPEG; no crop or resample."
+  }
+}

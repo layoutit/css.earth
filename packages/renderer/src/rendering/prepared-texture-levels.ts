@@ -1,4 +1,4 @@
-import { textureTileLeafStyles, type PreparedTexturePlacements, type PreparedTextureLevels, type PreparedTextureTile, type PreparedTextureTileLeaves } from '@cssearth/objects';
+import { textureTileLeafStyles, type PreparedPresentationDefinition, type PreparedTexturePlacements, type PreparedTextureLevels, type PreparedTextureTile, type PreparedTextureTileLeaves } from '@cssearth/objects';
 import { walkSilhouetteLevels } from '@cssearth/engine';
 
 import { invertPreparedAffineMatrix4, transformPreparedPoint } from '@cssearth/core';
@@ -39,6 +39,26 @@ export function createTextureTileWriter(levels: PreparedTextureLevels | undefine
       }
       return writes;
     },
+  };
+}
+
+/**
+ * The pixels of each image a texture write shows, from its prepared decoded size at four bytes a pixel. A leaf's box
+ * takes the size its image fills (prepared-leaf-box-direct.ts). An image without a stated size has none, and neither has
+ * a sheet: its size is the sheet's, not its page's.
+ */
+export function preparedTexturePixels(definition: Pick<PreparedPresentationDefinition, 'textureLevels' | 'assets'>) {
+  // A dataset's tables are adopted into the mounted definition after the first load (prepared-data/dataset-tables.ts):
+  // the sizes are read again whenever the entries or the levels are replaced.
+  let read: { entries: unknown; levels: unknown; pixels: Map<string, number> } | null = null;
+  return (shown: string): number | undefined => {
+    const { textureLevels } = definition, entries = definition.assets?.entries;
+    if (!read || read.entries !== entries || read.levels !== textureLevels) {
+      const sheets = new Set((textureLevels?.levels ?? []).flatMap(level => Object.keys(level.tiles ?? {}).map(key => level.resources[key]!)));
+      read = { entries, levels: textureLevels,
+        pixels: new Map((entries ?? []).flatMap(entry => entry.decodedBytes && !sheets.has(entry.key) ? [[entry.key, entry.decodedBytes / 4] as const] : [])) };
+    }
+    return read.pixels.get(shown);
   };
 }
 

@@ -1,0 +1,80 @@
+{
+  "schema": "cssearth-catalogue-points-source@1",
+  "id": "federle-gc",
+  "table": {
+    "path": "tablea1.dat",
+    "origin": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/689/A342/tablea1.dat",
+    "bytes": 313076,
+    "format": "fixed-width",
+    "columns": {
+      "name": [
+        1,
+        24
+      ],
+      "raH": [
+        1,
+        2
+      ],
+      "raM": [
+        4,
+        5
+      ],
+      "raS": [
+        7,
+        11
+      ],
+      "decSign": [
+        13,
+        13
+      ],
+      "decD": [
+        14,
+        15
+      ],
+      "decM": [
+        17,
+        18
+      ],
+      "decS": [
+        20,
+        24
+      ]
+    },
+    "exclude": {
+      "path": "../mieske-gc/table.csv",
+      "raDegColumn": "RAJ2000",
+      "decDegColumn": "DEJ2000",
+      "withinArcsec": 1.3,
+      "source": "mieske-2007-centaurus-compact-objects",
+      "basis": "An object in both catalogues is drawn once, as Mieske et al.'s velocity-confirmed object: 12 of their 27 lie within 0.95 arcsec of one of these candidates and the next nearest pair is 1.79 arcsec apart, so 1.3 arcsec separates the same object from a neighbour."
+    }
+  },
+  "filters": [],
+  "frame": {
+    "input": "icrs",
+    "output": "sun-icrf",
+    "epochJdTt": 2461286.5,
+    "placement": "spheroid",
+    "converter": "Each sky position at a depth drawn from the spheroid's density along its sight line (frame.spheroid).",
+    "spheroid": {
+      "centerRaDeg": 192.205322,
+      "centerDecDeg": -41.311089,
+      "distancePc": 40300000,
+      "halfLightRadiusKpc": 17.8,
+      "sersicIndex": 2.99,
+      "axisRatio": 0.781,
+      "axisPositionAngleDeg": 2.1,
+      "cutoffHalfLightRadii": 3.601,
+      "source": "gao-2020-cgs-ellipticals",
+      "basis": "The spheroid the volume's light is spread through (labs/nebula/models/ngc-4696/experiment.json shapePrior): Gao et al.'s (2020) Table 2 single-Sérsic fit to NGC 4696 (n = 2.99, half-light radius 16.65 kpc at their survey's scale, 91.3 arcsec, 17.8 kpc at 40.3 Mpc, axis ratio 0.781), axis along NGC 4696's minor axis in the plane of the sky (Ho et al. 2011), ending at 3.601 half-light radii, half of Ho et al.'s 26.5 B mag diameter. Each object's depth is drawn from it, not measured."
+    }
+  },
+  "source": "federle-2024-ngc4696-globular-clusters",
+  "meaning": "Globular cluster candidates around NGC 4696 from Federle et al.'s (2024) Magellan imaging: one dot per candidate at its catalogue position.",
+  "appearance": {
+    "colorCss": "#ffb38a",
+    "radiusPx": 1,
+    "opacity": 1,
+    "note": "Presentation only: the Milky Way globular clusters' warm orange."
+  }
+}

@@ -2,7 +2,8 @@
 
 The giant galaxy NGC 3311 at the centre of the Hydra I Cluster, drawn as a volume of starlight on its own page,
 [NGC 3311](../ngc-3311/README.md). A survey image, cleaned of the Milky Way stars and neighbouring galaxies, supplies
-the light along every sight line; the depth of that light follows a published fit to NGC 3311's light.
+the light along every sight line; the depth of that light follows a published fit to NGC 3311's light. Its globular
+clusters and ultra-compact dwarfs are drawn as dots through the same volume.
 **Depth is modelled, not measured. Its close neighbour NGC 3309 is masked out and not drawn.**
 
 ## Sources
@@ -13,6 +14,8 @@ the light along every sight line; the depth of that light follows a published fi
 | [Arnaboldi et al. (2012)](https://arxiv.org/abs/1205.5289) | [Record](../../sources/arnaboldi-2012-hydra-core.json). Table 2, column "allmask": the two-dimensional Sérsic fit to NGC 3311 in a VLT/FORS1 V-band image with the north-east excess masked, n = 4.8 ± 0.02, effective radius 198.8 ± 2.2″, axis ratio 0.93, major axis at position angle 32°. Fitted with NGC 3309's own Sérsic model (Table 1) over a 6.8 × 6.4′ field. |
 | [HyperLEDA PGC](https://cdsarc.cds.unistra.fr/viz-bin/cat/VII/237) (Paturel et al. 2003) | [Record](../../sources/paturel-2003-hyperleda-pgc.json). Positions and D25 sizes of the 16 neighbouring galaxies masked in the image. |
 | [Cosmicflows-4](https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/944/94) (Tully et al. 2023) | Table 3, group 1PGC 31478: 54.3 Mpc. Position from the 2MASS Extended Source Catalog. See the [host](../ngc-3311/README.md). |
+| [Misgeld et al. (2011)](https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/531/A4) | [Record](../../sources/misgeld-2011-hydra-compact-objects.json). [Globular clusters and ultra-compact dwarfs](source/misgeld-gc/points.json) that their VIMOS spectra place in the Hydra I Cluster by velocity: 118 in Table A1, of which the 85 inside the volume are drawn. |
+| [Mirabile et al. (2026)](https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/705/A117) | [Record](../../sources/mirabile-2026-hydra-globular-clusters.json). [Globular cluster candidates](source/mirabile-gc/points.json): the 423 sources of their NGC 3311 master catalogue (Table B1), compact sources in three MUSE fields on the galaxy whose brightness and size match its spectroscopically confirmed clusters (their Sect. 4.1.2). Their photometry includes VISTA H-band imaging. |
 
 ## Method
 
@@ -36,6 +39,9 @@ The Nebula Lab recipe is [labs/nebula/models/ngc-3311/experiment.json](../../../
    Arnaboldi et al.'s fit: n = 4.8, half-light radius 198.8″ (52.3 kpc at 54.3 Mpc), axis ratio 0.93. The spheroid's
    axis is the minor axis (position angle 122°), placed in the plane of the sky; no intrinsic axis is measured. It ends
    at 1.409 half-light radii, 280.2″ (73.8 kpc).
+6. **Dots:** each object sits along its sight line at a depth drawn from the same density
+   (`frame.placement: spheroid` in [prepare-catalogue-points](../../../packages/bake/cli/prepare-catalogue-points.mts)).
+   No object is in both catalogues: the nearest pair is 1.7″ apart.
 
 Values chosen here, not measured:
 
@@ -44,6 +50,7 @@ Values chosen here, not measured:
 - The black level, 25 of 255: the median of the cutout's bottom-right corner and bottom edge. The other corners hold
   NGC 3312, the galaxies around NGC 3308 and a bright star's ghost.
 - The display exposure 1.5 and the 150-cell grid are M87's; the median window is M87's rule.
+- The dots' color is the Milky Way globular clusters'.
 
 ## Evidence
 
@@ -60,6 +67,8 @@ arrival, then the camera turned to the side and to above the galaxy.
 
 ## Known problems
 
+- The candidates fill only three MUSE fields on the centre, within 139″ of it, so the dots are far denser there than
+  the velocity members around them. A candidate is not a confirmed cluster.
 - NGC 3309 is not drawn, and an arc of its outer light remains west of its mask, plain to see at arrival. Inside the mask NGC 3311 is the
   median of its other sides, which is fainter than the light there: the galaxy is brighter to the north-east
   (Arnaboldi et al.'s off-centred envelope) than to the south-west.

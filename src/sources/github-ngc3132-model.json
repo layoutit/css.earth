@@ -1,0 +1,41 @@
+{
+  "id": "github-ngc3132-model",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "NGC3132_model: files of the photoionization model of NGC 3132 (Monteiro et al. 2025)",
+  "identifiers": [
+    {
+      "type": "Archive resource",
+      "value": "https://raw.githubusercontent.com/hektor-monteiro/NGC3132_model/HEAD/structure_visualization/ngc3132_density_structure_101.dat"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://github.com/hektor-monteiro/NGC3132_model",
+      "label": "Published source"
+    },
+    {
+      "role": "original",
+      "url": "https://raw.githubusercontent.com/hektor-monteiro/NGC3132_model/HEAD/structure_visualization/ngc3132_density_structure_101.dat",
+      "label": "Text grid, 39.7 MB"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://github.com/hektor-monteiro/NGC3132_model",
+      "checkedOn": "2026-10-04",
+      "locator": "structure_visualization/ngc3132_density_structure_101.dat: 1030301 rows of \"x y z density\", places in centimetres from -5.074e17 to 5.074e17 (1.015e+16 cm a cell), densities up to 1,752 per cubic centimetre. The repository states no licence."
+    }
+  ],
+  "publisher": "H. Monteiro (GitHub)",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Monteiro et al. (2025), MNRAS 539, 1756",
+      "scope": "Published source",
+      "evidence": "https://github.com/hektor-monteiro/NGC3132_model"
+    }
+  ]
+}

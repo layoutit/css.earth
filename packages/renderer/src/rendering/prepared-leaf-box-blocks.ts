@@ -33,7 +33,7 @@ const START_LEAVES_PER_FRAME = SETTLE_PACING.startUnits;
  * each group's prepared box. One cap, not a share of the view's need: a share lets a long exploration grow past the full
  * boxes. In the iPhone simulator a zoom to 40× into the Moon and back kept 4 MB beyond the need (187 MB at rest, 191 MB
  * back out; main 291 MB), so the cap holds about eight such dives. */
-const EXTRA_BYTES = 32 * 2 ** 20;
+export const EXTRA_BYTES = 32 * 2 ** 20;
 
 export interface LeafBoxBlocksView {
   projection?: PhysicalProjection | null; silhouetteDiameter: number | null | undefined; motionAtRest?: boolean;

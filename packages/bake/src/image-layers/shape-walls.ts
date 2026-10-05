@@ -1,10 +1,12 @@
 import type { imageLayerShapeModel } from './shape.ts';
 
-type Model = ReturnType<typeof imageLayerShapeModel>;
+/** What gives a picture its walls: a shell's printed shape (./shape.ts) or a published density grid (./density-grid.ts). */
+type Model = Pick<ReturnType<typeof imageLayerShapeModel>, 'walls' | 'between' | 'detail'> & { shape: { smoothPixels: number; speeds?: { depth?: 'wall' | 'speed' } } };
 /** One surface the picture's light lies on: for each face pixel its depth along the sight line, the optical depth of
  * its light there and that light's color. `texels` is how many face pixels across a texel of a surface that holds only
- * smooth light may be; without it a texel is a face pixel. */
-export interface ShapeLayer { depth: Float32Array; tau: Float32Array; hue: Uint8Array; texels?: number }
+ * smooth light may be; without it a texel is a face pixel. `around` is the surface's depth at pixels just past its
+ * own, where the layer knows how it goes on (NaN elsewhere): a closed body's side curls round at the body's outline. */
+export interface ShapeLayer { depth: Float32Array; tau: Float32Array; hue: Uint8Array; texels?: number; around?: Float32Array }
 /** The picture's light on a nebula's walls, nearest surface first: the near wall, the surface between the walls where
  * the model has one, the far wall. Where a measured speed is its own depth the order is the reverse of the painting's
  * instead: the near measured surface, the far one, the near wall, the far wall. `sharp` has bit `k` set where layer `k` holds fine detail at a pixel. A pixel

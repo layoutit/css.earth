@@ -175,6 +175,14 @@ export function createPreparedResidency({
     if (errors.length) throw new AggregateError(errors, "Prepared residency release failed.");
   }
   const ready = (key: string) => warmed.has(key) || cache.get(key)?.ready === true;
+  /** Retaining an Image does not pin WebKit's decoded pixels: it drops those of an image nothing draws, and the paint
+   * that shows the image again decodes it on the main thread. Decodes the resident images of `keys` again, off that
+   * thread; an image still decoded resolves at once. */
+  const decodeAgain = (keys: Iterable<string>) => {
+    const handles = new Set([...keys].map(key => images.read(publishedUrl(key))).filter(image => image !== null));
+    paintDecodeChecks += handles.size;
+    return Promise.all([...handles].map(image => image.decode()));
+  };
   const awaitKeys = (keys: Iterable<string>) => Promise.all([...keys].map(key => warmed.has(key)
     ? Promise.resolve(true) : cache.get(key)?.promise ?? Promise.reject(new Error(`Unacquired resource: ${key}.`))));
   function retirePending() {
@@ -215,13 +223,9 @@ export function createPreparedResidency({
     },
     async decodeForPaint() {
       if (destroyed) return false;
-      // Retaining an Image does not pin WebKit's decoded pixels. A preflight
-      // lease can outlive that cache while the camera approaches. Recheck only
-      // the selected resident handles immediately before connecting their DOM.
-      const handles = new Set([...committed].map(key => images.read(publishedUrl(key)))
-        .filter(image => image !== null));
-      paintDecodeChecks += handles.size;
-      await Promise.all([...handles].map(image => image.decode()));
+      // A preflight lease can outlive WebKit's decoded pixels while the camera approaches. Recheck only the selected
+      // resident handles immediately before connecting their DOM.
+      await decodeAgain(committed);
       return !destroyed;
     },
     /** Reads the hash groups of resources a later demand may need, so that demand starts its images at once. Loads no
@@ -241,6 +245,11 @@ export function createPreparedResidency({
       if (destroyed) throw new Error("Prepared residency is destroyed.");
       const required = requireKeys(plan.required), prewarm = [...requireKeys(plan.prewarm ?? [])];
       requireCapacity(protectedKeys(required));
+      // Resident before this demand and drawn by nothing: a dataset or level shown earlier, or warmed ahead. Its pixels
+      // may be gone, and the demand is ready only once they are back. The Moon returning to its surface dataset decoded
+      // four pages in the paint of the switch: 117 of 219 main-thread samples of its 207 to 230 ms iPad frames
+      // (2026-10-04).
+      const idle = [...required].filter(key => ready(key) && !committed.has(key));
       retirePending();
       let resolveState!: TicketState["resolve"];
       const promise = new Promise<PreparedResidencyTicket | null>(resolve => { resolveState = resolve; });
@@ -256,7 +265,13 @@ export function createPreparedResidency({
       // a slow connection warm-up never shares the bandwidth readiness waits for. The previous warm set stays meanwhile.
       try { reconcile({ stabilize }); }
       catch (error) { retirePending(); rejectTicket(error); throw error; }
-      awaitKeys(required).then(values => {
+      awaitKeys(required).then(async values => {
+        if (!state.retired && pending === state && !destroyed && !values.some(value => value === null)) {
+          // A failed second decode leaves the image to the paint, as before; it is reported, not fatal.
+          await decodeAgain(idle.filter(ready)).catch(onWarmError);
+        }
+        return values;
+      }).then(values => {
         if (state.retired || pending !== state || destroyed) return;
         if (values.some(value => value === null)) throw new Error("Current prepared demand was retired.");
         state.ready = true;

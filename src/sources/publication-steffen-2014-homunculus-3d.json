@@ -1,0 +1,45 @@
+{
+  "id": "publication-steffen-2014-homunculus-3d",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "The three-dimensional structure of the Eta Carinae Homunculus",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1407.4096"
+    },
+    {
+      "type": "doi",
+      "value": "10.1093/mnras/stu1088"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/1407.4096",
+      "label": "Published reference"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/1407.4096",
+      "checkedOn": "2026-10-04",
+      "locator": "Abstract: a 3D model from VLT/X-shooter H2 2.12125 micron spectra, with circumpolar trenches and off-planar equatorial protrusions; a hole near the centre of each polar lobe; no detectable H2 from the thin optical skirt; \"we also include a 3D printable version of our Homunculus model\". Sect. 2: the whole nebula (14 x 20 arcsec) mapped on 9 and 10 March 2012. Sect. 3: optical images are continuum light scattered by dust, a relatively thin, clumpy surface; a single continuous surface of each lobe is reconstructed. Sect. 4.1: radial speed 680 km/s (r / 3.4e15 m)^1.2 in the blue (south-east, approaching) lobe and 600 km/s (r / 3.4e15 m) in the red (north-west, receding) lobe."
+    }
+  ],
+  "creators": [
+    "Steffen, W.",
+    "Teodoro, M.",
+    "Madura, T. I.",
+    "Groh, J. H.",
+    "Gull, T. R.",
+    "Mehner, A.",
+    "Corcoran, M. F.",
+    "Damineli, A.",
+    "Hamaguchi, K."
+  ],
+  "publisher": "MNRAS 442, 3316",
+  "publicationDate": "2014",
+  "relations": [],
+  "statements": []
+}

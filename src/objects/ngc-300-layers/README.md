@@ -2,7 +2,7 @@
 
 A ground-based photograph of NGC 300, cleaned of the Milky Way stars in front of it and color-tied to its measured
 integrated color, is spread through a modelled disc. Published catalogues of its planetary nebulae, HII regions,
-Cepheids, OB associations and supernova remnants are drawn as dots on the same disc. Image brightness does not measure
+Cepheids, OB associations, supernova remnants and globular clusters are drawn as dots on the same disc. Image brightness does not measure
 per-pixel distance.
 
 ## Sources
@@ -21,6 +21,7 @@ per-pixel distance.
 | [Pietrzyński et al. (2002)](https://cdsarc.cds.unistra.fr/viz-bin/cat/J/AJ/123/789) | [Cepheids](source/pietrzynski-cepheids/points.json): 117 with periods. |
 | [Pietrzyński et al. (2001)](https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/371/497) | [OB associations](source/pietrzynski-ob/points.json): 117 candidates. |
 | [Vučetić et al. (2015)](https://cdsarc.cds.unistra.fr/viz-bin/cat/J/MNRAS/446/943) | [Supernova remnants](source/vucetic-snr/points.json): 22 optically identified remnants. |
+| [Olsen et al. (2004)](https://cdsarc.cds.unistra.fr/viz-bin/cat/J/AJ/127/2674) | [Globular clusters](source/olsen-gc/points.json): the 7 of their 122 candidates around NGC 300 whose spectra confirmed them as clusters. |
 | [Bland-Hawthorn et al. (2005)](https://arxiv.org/abs/astro-ph/0503488) | [Stellar extent](source/stellar-extent.json): star counts trace the disc to 24′, about 14.4 kpc at their 2.0 Mpc, with no truncation; inside it NGC 300's caption hides. |
 
 The catalogue tables are TAP queries of CDS (the query is each descriptor's `table.origin`); they are not tracked.
@@ -45,10 +46,12 @@ The catalogue tables are TAP queries of CDS (the query is each descriptor's `tab
 | Cepheids (Pietrzyński et al. 2002) | 115 | 2 beyond the photograph |
 | OB associations (Pietrzyński et al. 2001) | 117 | none |
 | Supernova remnants (Vučetić et al. 2015) | 22 | none |
+| Globular clusters (Olsen et al. 2004) | 4 | 3 beyond the photograph |
 
 Dots keep their place in the disc and rise along its axis to heights drawn from the 211 pc layer. Colors are the Milky
 Way's and M31's for each kind; each dot takes its tone from the photograph's brightness under it (never below 15%) and
-moves halfway from its kind's color to the photograph's color there.
+moves halfway from its kind's color to the photograph's color there. Globular clusters belong to the
+halo, so on the disc their places are approximate.
 
 ## Evidence
 

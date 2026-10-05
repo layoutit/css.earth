@@ -26,6 +26,7 @@ A survey image of M110 (NGC 205), cleaned of the Milky Way stars in front of it 
 | Catalogue | Drawn | Note |
 | --- | --- | --- |
 | [Planetary nebulae (Merrett et al. 2006)](https://cdsarc.cds.unistra.fr/viz-bin/cat/J/MNRAS/369/120), [recipe](source/merrett-pne/points.json) | 45 | the rows the M31 survey gives to this galaxy |
+| [Globular clusters (Sharina et al. 2006)](https://cdsarc.cds.unistra.fr/viz-bin/cat/J/MNRAS/372/1259), [recipe](source/sharina-gc/points.json) | 6 | the galaxy's clusters with measured spectra (Hubble I, II, V, VI, VII and VIII) |
 
 The catalogue tables are files of the CDS archive (each descriptor's `table.origin`); they are not tracked. Each dot is a catalogued object at its published sky position, placed on the plane the picture stands on; its depth is not measured, and it is not drawn. Each dot takes its tone from the image's brightness under it and moves halfway from its kind's color to the image's color there.
 

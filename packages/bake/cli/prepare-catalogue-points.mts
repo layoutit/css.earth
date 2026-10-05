@@ -13,7 +13,7 @@
  * along their sight lines through the disc's published thickness. Right ascension and declination may
  * also be sexagesimal columns (`raH`, `raM`, `raS`, `decSign`, `decD`, `decM`, `decS`).
  *
- * `frame.placement: 'spheroid'` draws each ICRS row's depth from a published spheroid's density along its sight line.
+ * `frame.placement: 'spheroid'` draws each ICRS row's depth from a published spheroid's density along its sight line: a Sérsic fit, or a round system's projected power laws (`frame.spheroid.projectedPowerLaw`).
  * With `frame.around` (an object id and a basis) the bank is written around that object's world origin in parsecs
  * (`frame.unit: 'pc'`, to 1e-4 pc) instead of around the Sun in kpc: a cluster a few parsecs across, 8 kpc away, whose
  * stars would otherwise fall on a 0.1 pc grid. The spheroid's centre must be that origin.

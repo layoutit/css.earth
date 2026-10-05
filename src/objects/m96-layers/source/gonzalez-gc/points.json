@@ -1,0 +1,40 @@
+{
+  "schema": "cssearth-catalogue-points-source@1",
+  "id": "gonzalez-gc",
+  "table": {
+    "path": "table5.dat",
+    "origin": "https://cdsarc.cds.unistra.fr/ftp/J/ApJ/941/53/table5.dat",
+    "bytes": 1290,
+    "format": "fixed-width",
+    "columns": {
+      "name": [
+        1,
+        14
+      ],
+      "raDeg": [
+        16,
+        23
+      ],
+      "decDeg": [
+        25,
+        31
+      ]
+    }
+  },
+  "filters": [],
+  "frame": {
+    "input": "icrs",
+    "output": "sun-icrf",
+    "epochJdTt": 2461286.5,
+    "placement": "image-layer-disc",
+    "converter": "Each sky position onto the midplane of the inclined disc the image layers are baked on (recipe.json), through the image-layer bake's own intersection."
+  },
+  "source": "gonzalez-lopezlira-2022-spiral-globular-clusters",
+  "meaning": "Globular cluster candidates of M96 from González-Lópezlira et al. (2022), picked by their colors and shapes in CFHT images: one dot per candidate at its catalogue position.",
+  "appearance": {
+    "colorCss": "#ffb38a",
+    "radiusPx": 1,
+    "opacity": 1,
+    "note": "Presentation only: the Milky Way globular clusters' warm orange. Each dot takes its tone and half its color from the photograph under it (packages/bake/cli/prepare-catalogue-points.mts)."
+  }
+}

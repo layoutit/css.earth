@@ -1,0 +1,74 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "m57-nircam-layers",
+  "entries": [
+    {
+      "id": "weic2320b",
+      "subject": "ESA/Webb weic2320b",
+      "status": "included",
+      "finding": "Webb captures detailed beauty of Ring Nebula (NIRCam image): NIRCam at 1.62, 2.12, 3.0 and 3.35 µm; 4097 × 4156 px over 2.14 × 2.17 arcmin, released 21 August 2023. The file's embedded sky tags for scale and direction, 0.0314 arcsec per pixel and north 140.2° right of vertical, and the star for place: the central star in the picture, pixel 2123, 1991.4, is set at the place the Ring Nebula's page stands at, so the frame's centre is 283.3950727°, 33.0293034°. The tags alone put the star 0.13 arcsec from where the picture shows it.",
+      "evidence": [
+        "https://esawebb.org/images/weic2320b/",
+        "https://esawebb.org/copyright/"
+      ]
+    },
+    {
+      "id": "filters",
+      "subject": "What the picture's colors show",
+      "status": "included",
+      "finding": "Wesson et al. (2024) took the pictures. Their Sect. 5.5: molecular hydrogen dominates the 2.12, 3.0 and 3.35 µm filters; the 1.62 µm filter holds continuum and hydrogen recombination lines, bright in the ring and faint in the halo. Sect. 4.1: the central cavity, about 25 arcsec in radius, is filled with high-ionisation gas, and the shell around it is clumpy in the filters molecular hydrogen dominates. The release shows 1.62 µm in blue, 2.12 in cyan, 3.0 in green and 3.35 in red.",
+      "evidence": [
+        "https://arxiv.org/abs/2308.09027",
+        "https://esawebb.org/images/weic2320b/"
+      ]
+    },
+    {
+      "id": "molecular-shell",
+      "subject": "Where the molecular gas is",
+      "status": "included",
+      "finding": "Kastner et al. (2025) mapped CO(2-1) with the SMA at 3 arcsec and 2 km/s. The gas is a thin layer around the ionised gas, with the same form on the sky as Webb's molecular-hydrogen pictures (abstract; Sect. III.2). A thin ellipsoidal shell matches the cube (Sect. IV): axial ratios 1.0 : 0.71 : 0.82, viewed within about 2 degrees of its third axis, turned to position angle about 70 degrees, 30 km/s along its longest axis, 1.1e+18 by 7.6e+17 cm on the sky at 782 pc, open at both poles. Its dimensions are uncertain at about 10%, by the paper's own statement. The bank's walls for the red and green channels are that shell: 47 by 32.5 arcsec on the sky and 38.5 arcsec along the sight line.",
+      "evidence": [
+        "https://arxiv.org/abs/2501.12223"
+      ]
+    },
+    {
+      "id": "ionised-light",
+      "subject": "The ionised gas in this picture",
+      "status": "included",
+      "finding": "Two choices made here, each a speed a paper prints. The blue channel, where the ionised ring's hydrogen light is, takes the Main Ring's [N II] speed of 19 km/s inside the shell's outline. Inside the shell's polar opening, 19.7 arcsec from the star, every channel takes the Lobes' [O III] speed of 28 km/s: O'Dell et al. (2013) give the Lobes 36 km/s in [N II], 28 in [O III] and 20 in He II, and hydrogen shines in all three zones.",
+      "evidence": [
+        "https://arxiv.org/abs/1301.6636",
+        "https://arxiv.org/abs/2308.09027"
+      ]
+    },
+    {
+      "id": "star-removal",
+      "subject": "Removing the picture's stars",
+      "status": "excluded",
+      "finding": "The Ring Nebula's Hubble picture has its stars removed by the Nebula Lab's NOX. Tried on this picture on 2026-10-04, NOX took more than half the contrast of 3,024 of the 23,327 small bright peaks inside the shell's outline (13%): the ring's knots of molecular hydrogen, which are what this picture shows. The light it took there is no redder than a star's (red over blue 1.04 in the ring, 1.33 on the sky around the nebula), so the color test that keeps Cassiopeia A's knots cannot tell them from stars. The picture keeps its stars.",
+      "evidence": [
+        "https://esawebb.org/images/weic2320b/"
+      ]
+    },
+    {
+      "id": "fast-knots",
+      "subject": "The fast knots seen through the opening",
+      "status": "deferred",
+      "finding": "Kastner et al. (2025, Sect. III.2.2) find that some filaments seen inside the ring in Webb's pictures are molecular knots moving at 45 to 50 km/s along the sight line. They print no table of them; here they lie on the lobe's near wall with the rest of the detail.",
+      "evidence": [
+        "https://arxiv.org/abs/2501.12223"
+      ],
+      "revisitWhen": "The knots' places and speeds are published as a table."
+    },
+    {
+      "id": "weic2320c",
+      "subject": "Webb's mid-infrared picture",
+      "status": "deferred",
+      "finding": "ESA/Webb weic2320c (MIRI, 1257 × 1015 px) shows the same nebula in the mid infrared. It would be a third dataset.",
+      "evidence": [
+        "https://esawebb.org/images/weic2320c/"
+      ],
+      "revisitWhen": "A third dataset is wanted."
+    }
+  ]
+}

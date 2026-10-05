@@ -1,0 +1,88 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "ngc-3132",
+  "card": {
+    "text": "The Southern Ring Nebula is a planetary nebula about 754 parsecs away.",
+    "sources": [
+      {
+        "catalogueId": "publication-monteiro-2025-ngc-3132-model",
+        "url": "https://arxiv.org/abs/2503.20640",
+        "label": "Monteiro et al. (2025), MNRAS 539, 1756: the planetary nebula NGC 3132 revisited, a high definition 3D photoionization model",
+        "checked": "2026-10-04",
+        "locator": "Sect. 1: a Gaia DR3 geometric distance of 754 pc (+18, −15)"
+      },
+      {
+        "catalogueId": "wikipedia-ngc-3132",
+        "url": "https://en.wikipedia.org/wiki/NGC_3132",
+        "label": "Wikipedia, \"NGC 3132\"",
+        "checked": "2026-10-04",
+        "locator": "Lead section, revision 1372045901",
+        "quote": "NGC 3132 is a bright and extensively studied planetary nebula in the constellation Vela."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "ESA/Webb's picture of it lies here at the depths its gas was measured at: a thick ring, its axis tipped about 30° from the sight line.",
+    "sources": [
+      {
+        "catalogueId": "esawebb-weic2207b",
+        "url": "https://esawebb.org/images/weic2207b/",
+        "label": "ESA/Webb weic2207b: NASA, ESA, CSA, STScI, and the Webb ERO Production Team",
+        "checked": "2026-10-04",
+        "locator": "Southern Ring Nebula (NIRCam Image); NIRCam 0.90, 1.87, 2.12, 3.56, 4.05 and 4.70 µm"
+      },
+      {
+        "catalogueId": "publication-monteiro-2025-ngc-3132-model",
+        "url": "https://arxiv.org/abs/2503.20640",
+        "label": "Monteiro et al. (2025), MNRAS 539, 1756: the planetary nebula NGC 3132 revisited, a high definition 3D photoionization model",
+        "checked": "2026-10-04",
+        "locator": "Sect. 3.1: the density structure from velocity cubes; the main ring's axis about 30 degrees from the line of sight"
+      },
+      {
+        "catalogueId": "wikipedia-ngc-3132",
+        "url": "https://en.wikipedia.org/wiki/NGC_3132",
+        "label": "Wikipedia, \"NGC 3132\"",
+        "checked": "2026-10-04",
+        "locator": "Lead section, revision 1372045901",
+        "quote": "Alternatively, it is known as the Eight-Burst Nebula, the Southern Ring Nebula, or Caldwell 74."
+      }
+    ]
+  },
+  "datasets": {
+    "optical": {
+      "title": "The Southern Ring in the near infrared",
+      "detail": "4833 × 4501 px",
+      "summary": "Webb's picture at the depths its gas was measured at: the nearer and farther halves of each sight line's emission.",
+      "sources": [
+        {
+          "catalogueId": "esawebb-weic2207b",
+          "url": "https://esawebb.org/images/weic2207b/",
+          "label": "ESA/Webb weic2207b: NASA, ESA, CSA, STScI, and the Webb ERO Production Team",
+          "checked": "2026-10-04",
+          "locator": "Southern Ring Nebula (NIRCam Image)"
+        },
+        {
+          "catalogueId": "publication-monteiro-2025-ngc-3132-model",
+          "url": "https://arxiv.org/abs/2503.20640",
+          "label": "Monteiro et al. (2025), MNRAS 539, 1756: the planetary nebula NGC 3132 revisited, a high definition 3D photoionization model",
+          "checked": "2026-10-04",
+          "locator": "Sect. 3.1: the gas density structure"
+        },
+        {
+          "catalogueId": "github-ngc3132-model",
+          "url": "https://github.com/hektor-monteiro/NGC3132_model",
+          "label": "Monteiro, NGC3132_model: the files of the photoionization model of Monteiro et al. (2025), with its density grid",
+          "checked": "2026-10-04",
+          "locator": "structure_visualization/ngc3132_density_structure_101.dat"
+        },
+        {
+          "catalogueId": "publication-kastner-2024-ngc-3132-exoskeleton",
+          "url": "https://arxiv.org/abs/2402.11850",
+          "label": "Kastner et al. (2024), ApJ 965, 21: the molecular exoskeleton of the ring-like planetary nebula NGC 3132",
+          "checked": "2026-10-04",
+          "locator": "Sect. 3: the main ring's position angle, and which edge approaches"
+        }
+      ]
+    }
+  }
+}

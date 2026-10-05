@@ -11,6 +11,8 @@ import { serializePreparedScene } from './prepared-scene-serialization.js';
 import { omittedPreparedNodes } from './prepared-omitted-nodes.js';
 import { selectedPreparedVariant } from './prepared-presentation.js';
 import { initialObjectSelection } from '../runtime/object-contract.js';
+import { leafBoxBindings, leafBoxExact, leafBoxStyles } from './prepared-leaf-box-direct.js';
+import { preparedTexturePixels } from './prepared-texture-levels.js';
 
 const root = new URL('../../../../', import.meta.url);
 // Saturn's prepared runtime is restored, not tracked; an unrestored checkout skips the file as the site test did through sourceTest().
@@ -77,4 +79,22 @@ test('a view resolves only the textures it writes, and reports them', () => {
   assert.deepEqual(resolved, scene.textures.map(texture => texture.key));
   assert.equal((scene.textures.length > 0 && scene.textures.length < definition.assets.entries.length), true);
   for (const { address } of scene.textures) assert.equal(scene.html.includes(`https://earth-assets.example${address}`.replaceAll('"', '&quot;')), true);
+});
+
+test('a paged body ships each face in the exact box of the level its markup shows', async () => {
+  // The Moon's markup shows its first texture level, 1,040 texels wide across a background of 4,096 px at the full
+  // 128 px box: a face ships in the 16.25 px that hold it at two texels a pixel, not in the box of its step alone.
+  const moon = await fixture('moon');
+  const paged = await loadPreparedCssObject(moon.descriptor, { async read() { return moon.bytes; } });
+  const scene = serializePreparedScene(paged), boxes = leafBoxBindings(paged.viewBindings);
+  const variant = selectedPreparedVariant(paged, initialObjectSelection(paged.controls));
+  const write = variant.writes.find(binding => binding.kind === 'texture' && binding.resource !== null && paged.tree.textureBindings?.some(entry => entry.name === binding.name && entry.leaves.length > 2));
+  assert.ok(write?.kind === 'texture' && write.resource !== null);
+  const leaf = paged.tree.textureBindings!.find(entry => entry.name === write.name)!.leaves.find(node => boxes.boxes.some(box => box.node === node && box.box))!;
+  const record = boxes.boxes.find(box => box.node === leaf)!;
+  const exact = leafBoxExact(record, preparedTexturePixels(paged)(paged.textureLevels!.levels[0]!.resources[write.resource]!));
+  assert.deepEqual(exact, { factor: 16.25 / 128, tile: [520, 96], kept: true });
+  const full = Object.fromEntries(leafBoxStyles(record, boxes.step, boxes.outset)), shipped = Object.fromEntries(leafBoxStyles(record, boxes.step, boxes.outset, false, exact));
+  const tag = new RegExp(`<[^>]*data-prepared-node="${leaf}"[^>]*>`).exec(scene.html)?.[0] ?? '';
+  assert.ok(parseFloat(shipped.width!) <= 16.25 && tag.includes(`width:${shipped.width}`), `leaf ${leaf} ships ${/width:[^;"]+/.exec(tag)?.[0]}, its image gives ${shipped.width} and its step alone ${full.width}`);
 });

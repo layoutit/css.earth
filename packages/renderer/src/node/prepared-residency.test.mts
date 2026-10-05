@@ -77,7 +77,7 @@ function rowPlan(definition: ObjectRuntimeDefinition, trackId='lighting') {
 }
 
 test('capacity caches reuse completed datasets but cancel abandoned decodes immediately', async () => {
-  const { manager, jobs, commit, complete } = harness(catalog(['/a.webp', '/b.webp', '/c.webp'],
+  const { manager, jobs, images, commit, complete } = harness(catalog(['/a.webp', '/b.webp', '/c.webp'],
     { capacity: 3, concurrency: 1, eviction: 'capacity' }));
   await commit(['0']);
   const abandoned = manager.request({ required: ['1'] });
@@ -87,21 +87,24 @@ test('capacity caches reuse completed datasets but cancel abandoned decodes imme
   assert.equal(jobs.length, 3, 'Latest selection starts without waiting for abandoned native work');
   assert.notEqual(jobs[1].image.src, '/b.webp');
   await complete(); await next.ready; manager.commit(next);
-  const count = jobs.length;
+  const count = jobs.length, loaded = images.length;
   await commit(['0']);
-  assert.equal(jobs.length, count, 'Completed dataset is reused without decoding');
+  assert.equal(images.length, loaded, 'Completed dataset is reused without loading it again');
+  // WebKit drops the decoded pixels of an image nothing draws: the resident image is decoded once more, off the paint.
+  assert.deepEqual(jobs.slice(count).map(job => job.url), ['/a.webp']);
   manager.destroy();
 });
 test('decoded byte budget evicts completed pages before admitting an atomic replacement', async () => {
   const assets = catalog(['/coarse.webp', '/fine.webp', '/other.webp'], { capacity: 8, eviction: 'capacity' });
   assets.pools[0].maximumDecodedBytes = 8;
   assets.entries.forEach(entry => { entry.decodedBytes = 4; });
-  const { manager, commit, jobs } = harness(assets);
+  const { manager, commit, jobs, images } = harness(assets);
   await commit(['0']); await commit(['1']);
   assert.equal(manager.stats().pools[0].decodedBytes, 8);
-  const count = jobs.length;
+  const count = jobs.length, loaded = images.length;
   await commit(['0']);
-  assert.equal(jobs.length, count, 'A visited level stays cached');
+  assert.equal(images.length, loaded, 'A visited level stays cached');
+  assert.deepEqual(jobs.slice(count).map(job => job.url), ['/coarse.webp'], 'and is decoded once more before it is drawn again');
   await commit(['2']);
   assert.equal(manager.resources.has('1'), false, 'Evict unused fine page, even with free count slots');
   assert.equal(manager.resources.has('0'), true, 'Previous visible page survives replacement');

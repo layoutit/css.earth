@@ -1,0 +1,54 @@
+{
+  "id": "mirabile-2026-hydra-globular-clusters",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Looking into the faintEst WIth MUSE (LEWIS): Exploring the nature of ultra-diffuse galaxies in the Hydra-I cluster. IV. A study of the globular cluster population in four ultra-diffuse galaxies",
+  "identifiers": [
+    {
+      "type": "ads",
+      "value": "2026A&A...705A.117M"
+    },
+    {
+      "type": "CDS/VizieR",
+      "value": "J/A+A/705/A117"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://ui.adsabs.harvard.edu/abs/2026A%26A...705A.117M",
+      "label": "2026A&A...705A.117M"
+    },
+    {
+      "role": "archive",
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/705/A117",
+      "label": "CDS J/A+A/705/A117"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/705/A117/ReadMe",
+      "checkedOn": "2026-10-04",
+      "locator": "ngc3311.dat: 423 rows; 423 drawn as NGC 3311's globular cluster candidates, inside the volume's 73.8 kpc edge."
+    }
+  ],
+  "creators": [
+    "M. Mirabile",
+    "M. Cantiello",
+    "M. Rejkuba",
+    "S. Mieske",
+    "E. Iodice",
+    "C. Buttitta"
+  ],
+  "publisher": "A&A 705, A117",
+  "publicationDate": "2026",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite Mirabile et al. (2026), A&A 705, A117.",
+      "scope": "NGC 3311's globular cluster candidates",
+      "evidence": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/705/A117/ReadMe"
+    }
+  ]
+}

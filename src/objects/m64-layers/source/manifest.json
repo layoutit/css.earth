@@ -53,6 +53,24 @@
           }
         ]
       }
+    },
+    {
+      "id": "gonzalez-gc-table",
+      "path": "src/objects/m64-layers/source/gonzalez-gc/table8.dat",
+      "origin": "https://cdsarc.cds.unistra.fr/ftp/J/ApJ/941/53/table8.dat",
+      "title": "The relation between globular cluster systems and supermassive black holes in spiral galaxies. III. The link to the M_BH-M* correlation, table8.dat",
+      "credit": "R. A. González-Lópezlira, L. Lomelí-Núñez, Y. Órdenes-Briceño, L. Loinard, S. Gwyn, K. Álamo-Martínez, G. Bruzual, A. Lançon, T. H. Puzia; ApJ 941, 53",
+      "acquisition": "Published table downloaded unchanged from its CDS origin; read by packages/bake/cli/prepare-catalogue-points.mts through gonzalez-gc/points.json.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "gonzalez-lopezlira-2022-spiral-globular-clusters",
+            "role": "material",
+            "evidence": "https://cdsarc.cds.unistra.fr/ftp/J/ApJ/941/53/table8.dat"
+          }
+        ]
+      }
     }
   ],
   "documents": [

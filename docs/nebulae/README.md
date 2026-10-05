@@ -90,7 +90,7 @@ The seven dataset-bank objects pack each dataset's X/Y/Z slices into three WebP 
 
 Each slab is cropped to its emission, so decoded atlas size follows how much of its bounds a cloud fills. Compiler slabs are 512 pixels wide unless a scene's saved sampling names a smaller `imageWidth` (128 to 512). The Crab saves 256: its diffuse emission fills every slab, and its sampled grid has 256 cells along the longest axis, so a wider slab only interpolates between cells. At 512 its three atlases per dataset were 30 to 34 megapixels each, about 390 MB decoded, and failed to decode in a memory-limited browser; at 256 they are 7.6 to 8.6.
 
-![The Crab zoomed in, 512-pixel slabs on the left and 256 on the right](crab-slab-width.jpg)
+![The Crab zoomed in, 512-pixel slabs on the left and 256 on the right](../images/nebulae/crab-slab-width.jpg)
 
 ## Compact inputs and research replay
 

@@ -15,7 +15,7 @@ import type { PreparedResources, PreparedResourceDemand } from './prepared-resid
 
 import type { PreparedAnimationOptions } from "./prepared-playback.js";
 import { readPreparedStyle, writePreparedStyle, samePreparedStyle } from "./style-access.js";
-import { createTextureTileWriter, selectPreparedTextureLevel, unseenTextureWrites } from './prepared-texture-levels.js';
+import { createTextureTileWriter, preparedTexturePixels, selectPreparedTextureLevel, unseenTextureWrites } from './prepared-texture-levels.js';
 
 import { createLeafBoxBlocks } from './prepared-leaf-box-blocks.js';
 import { createLeafBoxWriter, SEAM_OUTSET } from './prepared-leaf-box-direct.js';
@@ -232,6 +232,8 @@ export function mountPreparedPresentation(stage: HTMLElement, context: PreparedP
   if (progressiveActivation && !definition.tree.activationGroups) throw new TypeError('Flight activation requires prepared groups.');
   const textureBindings = new Map((definition.tree.textureBindings ?? []).map(binding =>
     [`${binding.target}:${binding.name}`, binding.leaves.map(index => nodes[index])] as const));
+  const leafIndex = new Map((definition.tree.textureBindings ?? []).flatMap(binding => binding.leaves.map(index => [nodes[index]!, index] as const)));
+  const texturePixels = preparedTexturePixels(definition);
   const surfaceScenes = [sceneElement, ...(definition.depthPartitions?.groups ?? []).map(group => nodes[group.scene])];
   const textureLeaves = new Set([...textureBindings.values()].flat());
   const textureActivation = prepareTextureActivation(preparedTree && progressiveActivation && definition.tree.textureBindings?.length
@@ -281,21 +283,26 @@ export function mountPreparedPresentation(stage: HTMLElement, context: PreparedP
   let selectedTextures = new Map<string, { target: number; name: string }>();
   const styleKey = (binding: { target: number; name: string }) => `${binding.target}:${binding.name.startsWith("--") ? binding.name : binding.name.replace(/[A-Z]/g, letter => `-${letter.toLowerCase()}`)}`;
   const target = (index: number) => index === -1 ? stage : nodes[index];
-  function publishStyle(index: number, name: string, value: string) {
+  // A leaf's box follows the image it takes: both land in one write, so the leaf repaints once (prepared-leaf-box-direct.ts).
+  const writeLeafTexture = (leaf: HTMLElement, image: string, shown: string | undefined) => {
+    textureActivation.write(leaf, image);
+    if (shown !== undefined) styleWrites += framePublisher.showLeafImage(leafIndex.get(leaf)!, texturePixels(shown));
+  };
+  function publishStyle(index: number, name: string, value: string, shown?: string) {
     if (name === 'display' && textureActivation.deferDisplay(target(index), value)) return;
     const leaves = textureBindings.get(`${index}:${name}`);
     if (leaves) {
-      for (const leaf of leaves) textureActivation.write(leaf, value);
+      for (const leaf of leaves) writeLeafTexture(leaf, value, shown);
       styleWrites += leaves.length;
     } else if (!samePreparedStyle(styleValue(target(index), name), name, value)) { writeStyle(target(index), name, value); styleWrites++; }
   }
-  type CommittedWrite = Exclude<PreparedWrite, { kind: "texture" }> | { kind: "tile"; target: number; name: string; tile: PreparedTextureTile | undefined };
+  type CommittedWrite = Exclude<PreparedWrite, { kind: "texture" }> & { shown?: string } | { kind: "tile"; target: number; name: string; tile: PreparedTextureTile | undefined };
   function publish(binding: CommittedWrite) {
     const element = target(binding.target);
     if (binding.kind === "attribute") { if (readAttribute(element, binding.name) !== binding.value) writeAttribute(element, binding.name, binding.value); }
     else if (binding.kind === "class") { if (element.classList.contains(binding.name) !== binding.value) element.classList.toggle(binding.name, binding.value); }
     else if (binding.kind === "tile") styleWrites += textureTiles.publish(binding.target, binding.name, binding.tile);
-    else publishStyle(binding.target, binding.name, binding.value);
+    else publishStyle(binding.target, binding.name, binding.value, binding.shown);
   }
   // A texture level swap repaints every leaf whose page changes: Earth's 160 leaves took one 256 ms commit on the iPad
   // (2026-09-30), after the zoom had settled. A level-only commit lands its changed leaves a slice a frame, each leaf
@@ -303,7 +310,7 @@ export function mountPreparedPresentation(stage: HTMLElement, context: PreparedP
   // whole. A page is split across frames too: the Moon's pages of 96 to 128 leaves, each landing whole, made four frames
   // of 41 to 79 ms after a flight landed there on the iPad (2026-10-04).
   let committedVariant: unknown = null, levelPacer: ReturnType<typeof createSettlePacer> | null = null;
-  const pendingLevels = new Map<string, { leaves: readonly HTMLElement[]; done: number; image: string; tile: Extract<CommittedWrite, { kind: "tile" }> | null }>();
+  const pendingLevels = new Map<string, { leaves: readonly HTMLElement[]; done: number; image: string; shown: string | undefined; tile: Extract<CommittedWrite, { kind: "tile" }> | null }>();
   return Object.freeze({ cameraElement, sceneElement, connect, activate, revealGroups,
     ...(definition.surfaceHit ? { surfaceHitTest: bindPreparedSurfaceHit(definition.surfaceHit, nodes[definition.surfaceHit.target], sceneElement, cameraElement, () => stage.dataset.dataset) } : {}),
     ...(definition.motionFrame ? { motionFrame: Object.freeze(definition.motionFrame.map(index => nodes[index])) } : {}),
@@ -317,11 +324,13 @@ export function mountPreparedPresentation(stage: HTMLElement, context: PreparedP
       // Resolve the complete texture group before publishing any part of it.
       const writes = variant.writes.flatMap((binding): CommittedWrite[] => {
         if (binding.kind !== "texture") return [binding];
-        const url = binding.resource === null ? null : resources.url(plan?.textureResources?.[binding.resource] ?? binding.resource);
+        const shown = binding.resource === null ? null : plan?.textureResources?.[binding.resource] ?? binding.resource;
+        const url = shown === null ? null : resources.url(shown);
         // A deferred (undrawn) mesh publishes no texture at all; the resolving
         // camera re-plans and commits the complete group before it is shown.
         if (binding.resource !== null && !url && !plan?.deferredTextures) throw new Error(`Prepared selection texture is not ready: ${binding.resource}`);
-        const image = { kind: "style" as const, target: binding.target, name: binding.name, value: url === null ? "none" : binding.quoted ? `url(${JSON.stringify(url)})` : `url(${url})` };
+        const image = { kind: "style" as const, target: binding.target, name: binding.name, value: url === null ? "none" : binding.quoted ? `url(${JSON.stringify(url)})` : `url(${url})`,
+          ...(shown === null ? {} : { shown }) };
         // A page some level draws from a shared sheet places its leaves on its tile (or on the page itself) with every image.
         if (binding.resource === null || !textureTiles.has(binding.target, binding.name)) return [image];
         return [image, { kind: "tile" as const, target: binding.target, name: binding.name, tile: plan?.textureTiles?.[binding.resource] }];
@@ -353,7 +362,7 @@ export function mountPreparedPresentation(stage: HTMLElement, context: PreparedP
         const next = contentWrites[index + 1];
         const tile = next?.kind === "tile" && next.target === binding.target && next.name === binding.name ? next : null;
         if (tile) index++;
-        pendingLevels.set(`${binding.target}:${binding.name}`, { leaves, done: 0, image: binding.value, tile });
+        pendingLevels.set(`${binding.target}:${binding.name}`, { leaves, done: 0, image: binding.value, shown: binding.shown, tile });
       }
       if (pendingLevels.size) {
         if (!levelPacer) context.own(() => levelPacer?.destroy());
@@ -364,7 +373,7 @@ export function mountPreparedPresentation(stage: HTMLElement, context: PreparedP
             const share = unit.leaves.slice(unit.done, unit.done + Math.max(1, Math.floor((budget - written) / LEVEL_LEAF_UNITS)));
             unit.done += share.length;
             if (unit.tile) styleWrites += textureTiles.publish(unit.tile.target, unit.tile.name, unit.tile.tile, new Set(share));
-            for (const leaf of share) textureActivation.write(leaf, unit.image);
+            for (const leaf of share) writeLeafTexture(leaf, unit.image, unit.shown);
             styleWrites += share.length; written += share.length * LEVEL_LEAF_UNITS;
             if (unit.done < unit.leaves.length) continue;
             pendingLevels.delete(key);
@@ -542,6 +551,8 @@ export function createPreparedFramePublisher(definition: PreparedPresentationDef
       }
       framePublications++;
     },
+    /** The leaf on node `index` shows an image of `pixels`: its box follows; returns the style writes. */
+    showLeafImage(index: number, pixels: number | undefined) { return leafBoxes.image(index, pixels); },
     observe() { return { framePublications, styleWrites, transformWrites,
       materials: Object.fromEntries([...materials].map(([id, material]) => [id, material.observe()])) }; },
   };

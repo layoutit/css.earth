@@ -1,0 +1,102 @@
+{
+  "schema": "cssearth-image-layer-recipe@1",
+  "id": "m57-nircam-layers",
+  "source": {
+    "path": "source.jpg",
+    "dimensions": [
+      4097,
+      4156
+    ],
+    "originalDimensions": [
+      4097,
+      4156
+    ],
+    "publisherUrl": "https://esawebb.org/images/weic2320b/",
+    "downloadUrl": "https://cdn.esawebb.org/archives/images/large/weic2320b.jpg",
+    "credit": "ESA/Webb, NASA, CSA, M. Barlow, N. Cox, R. Wesson",
+    "license": "CC-BY-4.0"
+  },
+  "observation": {
+    "centerRaDeg": 283.3950727,
+    "centerDecDeg": 33.0293034,
+    "fieldOfViewDeg": [
+      0.035726,
+      0.03624048
+    ],
+    "northClockwiseDeg": 140.2
+  },
+  "target": {
+    "centerRaDeg": 283.39624524513,
+    "centerDecDeg": 33.02914523473,
+    "distancePc": 790.014153719229
+  },
+  "geometry": {
+    "kind": "inclined-disk",
+    "inclinationDeg": 0.001,
+    "lineOfNodesPaDeg": 9.142,
+    "thicknessKpc": 2.46e-7,
+    "depthWeights": [
+      0.25,
+      0.5,
+      0.25
+    ],
+    "supportRadiusKpc": 0.00023708,
+    "supportTaperFraction": 0.9,
+    "depthScales": [
+      1,
+      1,
+      1
+    ],
+    "unit": "pc",
+    "shape": {
+      "source": "publication-kastner-2025-ring-nebula-molecular-envelope",
+      "basis": "Wesson et al. (2024, Sect. 5.5): molecular hydrogen dominates three of this picture's four filters (2.12, 3.0 and 3.35 µm); the fourth, 1.62 µm, is continuum and hydrogen recombination lines of the ionised gas. Kastner et al. (2025, Sect. IV) match their SMA CO(2-1) cube with a thin expanding ellipsoidal shell of molecular gas around the ionised gas, whose form the near-infrared H2 pictures share: axial ratios 1.0 : 0.71 : 0.82, 1.1e+18 cm by 7.6e+17 cm on the sky at 782 pc (semi-axes 47 and 32.5 arcsec), turned to position angle about 70 degrees and viewed within about 2 degrees of its third axis, expanding at 30 km/s along its longest axis: 0.6383 km/s per arcsec, and 24.6 km/s along the sight line. The red and green channels, molecular hydrogen, take that speed. The blue channel, with the ionised gas's light, takes the Main Ring's [N II] speed, 19 km/s (O'Dell et al. 2013, Sect. III.3): a choice made here. The shell is open at both poles; the opening is modelled there by an elongated ellipsoid of radius 2.3e+17 cm, 19.7 arcsec. Through it the picture shows the ionised gas of the central cavity (Wesson et al., Sect. 4.1), which takes the Lobes' [O III] speed, 28 km/s, in every channel (O'Dell et al. 2013): a choice made here, the middle of the three speeds that paper gives the Lobes. The shell's tilt of about 2 degrees has no printed direction and is not applied. The smooth light is read over 16 face pixels, a presentation value.",
+      "expansionKmSPerArcsec": 0.6383,
+      "ring": {
+        "semiMajorArcsec": 47,
+        "semiMinorArcsec": 32.5,
+        "majorPaDeg": 70,
+        "polarTiltDeg": 0,
+        "polarLeansToPaDeg": 0,
+        "expansionKmS": [
+          24.6,
+          24.6,
+          19
+        ]
+      },
+      "lobe": {
+        "source": "publication-odell-2013-ring-nebula-structure",
+        "radiusArcsec": 19.7,
+        "expansionKmS": [
+          28,
+          28,
+          28
+        ]
+      },
+      "smoothPixels": 16
+    }
+  },
+  "bake": {
+    "maxFacePixels": 1500,
+    "crossAxisSlices": 32,
+    "crossAxisDepthPixels": 97,
+    "backgroundFloor": 0.03,
+    "encoding": {
+      "format": "webp",
+      "quality": 70,
+      "alphaQuality": 80
+    },
+    "diffuseFacePixels": 80,
+    "crossAxisAlongPixels": 384,
+    "edgeTaperFraction": 0.04,
+    "diffuseFraction": 0.65,
+    "diffuseSigmaPixels": 2,
+    "flat": true,
+    "bulgeSlices": 56,
+    "bulgeFacePixels": 256,
+    "bulgeCrossSlices": 56
+  },
+  "provenance": {
+    "path": "provenance.json"
+  }
+}

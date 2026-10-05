@@ -1,0 +1,28 @@
+{
+  "id": "homunculus-nebula",
+  "classification": "nebula",
+  "order": 5391,
+  "physical": {
+    "name": "Homunculus Nebula",
+    "horizonsCode": null,
+    "meanRadiusKm": 0,
+    "gravitationalParameterKm3PerS2": 0,
+    "parent": null
+  },
+  "physicalNotes": "No radius or mass of the Homunculus Nebula is recorded: it is an extended nebula, and its package frames it at 0.130 pc (object.json worldFrame.bodyRadiusM), the circle its picture is drawn in, a presentation value.",
+  "star": {
+    "rightAscensionDegrees": 161.2647742,
+    "declinationDegrees": -59.6844309,
+    "positionEpochJulianYear": 2000,
+    "distanceParsecs": 2350,
+    "properMotionRaMasPerYear": 0,
+    "properMotionDecMasPerYear": 0,
+    "radialVelocityKmPerS": 0,
+    "sources": {
+      "position": "SIMBAD, eta Car: ICRS 10 45 03.5455, -59 41 03.951, from UCAC4 (Zacharias et al. 2012) (https://simbad.cds.unistra.fr/simbad/sim-id?Ident=eta+Car)",
+      "distance": "Smith (2006), ApJ 644, 1151: the structure of the Homunculus, shape and latitude dependence from H2 and [Fe II] velocity maps: 2350 ± 50 pc (https://arxiv.org/abs/astro-ph/0602464)",
+      "properMotion": "Zero: the nebula is held at the star's catalogued place; no motion across the sky is applied.",
+      "radialVelocity": "Zero: no radial velocity is recorded for the nebula here."
+    }
+  }
+}

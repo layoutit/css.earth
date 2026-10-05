@@ -17,7 +17,7 @@ are drawn as dots through the same volume. **Depth is modelled, not measured.**
 | [Peng et al. (2009)](https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/703/42) | [Globular clusters](source/peng-gc/points.json): 2,250 in the Hubble ACS field on the centre. |
 
 M87 is not in the Local Volume Database, so its catalogue row is written from its papers (`citedRows` in
-[the Local Group recipe](../local-group/source/catalogue.json)); the Virgo Cluster Catalog classes it a member.
+[the Local Group recipe](../local-group-galaxies/source/catalogue.json)); the Virgo Cluster Catalog classes it a member.
 
 ## Method
 

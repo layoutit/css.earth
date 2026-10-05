@@ -2,11 +2,16 @@
   "schema": "cssearth-catalogue-points-merge@1",
   "id": "dots",
   "published": true,
-  "meaning": "M96's catalogued objects as dots on its photograph's disc: planetary nebulae.",
+  "meaning": "M96's catalogued objects as dots on its photograph's disc: planetary nebulae, globular cluster candidates.",
   "centreOnGalaxy": true,
   "banks": [
     {
       "bank": "feldmeier-pne",
+      "withinPcOfCentre": 15070,
+      "basis": "Presentation choice: a dot is drawn only where the photograph is, inside the image layers' 15.07 kpc support radius (recipe.json)."
+    },
+    {
+      "bank": "gonzalez-gc",
       "withinPcOfCentre": 15070,
       "basis": "Presentation choice: a dot is drawn only where the photograph is, inside the image layers' 15.07 kpc support radius (recipe.json)."
     }
