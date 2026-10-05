@@ -25,6 +25,12 @@ their results. A newer PR update cancels its stale run; main validation runs are
 not cancelled by later merges. Production deployments use their own concurrency
 group and can supersede an older deployment.
 
+Source coverage combines Node tests, Chromium navigation/worker evidence and server
+hits through one converter. The [coverage contract](coverage.md) defines the raw
+format, targets, measured costs and exact job steps for integration. No separate
+coverage workflow is introduced; the shared lane will run both the measured-floor
+check and the base-ref check.
+
 ## Serving the site from Cloudflare
 
 Production is on Netlify, which meters bandwidth. The same build can be served by Cloudflare, which does not meter

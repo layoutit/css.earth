@@ -1,0 +1,647 @@
+{
+  "version": 1,
+  "scope": {
+    "id": "root",
+    "files": [
+      "site/application-world-context.mts",
+      "site/application-world-frames.mts",
+      "site/application-world-resources.mts",
+      "site/application-world-types.mts",
+      "site/application-world-visibility.mts",
+      "site/arrival-billboard.mts",
+      "site/asset-origin.mts",
+      "site/built-pages.mts",
+      "site/catalogue-moon-labels.mts",
+      "site/chart-pixel-alignment.mts",
+      "site/context-availability.mts",
+      "site/context-datasets.mts",
+      "site/dataset-content.mts",
+      "site/dataset-context.mts",
+      "site/dataset-picker.mts",
+      "site/dataset-response.mts",
+      "site/dataset-url.mts",
+      "site/default-width-share.mts",
+      "site/destination-browser.mts",
+      "site/diagnostic-recorder.mts",
+      "site/diagnostics-policy.mts",
+      "site/dot-catalogue-data.mts",
+      "site/dot-catalogues.mts",
+      "site/error-report.mts",
+      "site/exploration-catalog.mts",
+      "site/feature-browser.mts",
+      "site/first-view-transport.mts",
+      "site/hosted-banks.mts",
+      "site/import-queue.mts",
+      "site/in-flight-loader.mts",
+      "site/information-card.mts",
+      "site/initial-scene.mts",
+      "site/initial-shell-context.mts",
+      "site/inside-view.mts",
+      "site/layout-sections.mts",
+      "site/learn-more.mts",
+      "site/moon-orbit-policy.mts",
+      "site/narrow-layout.mts",
+      "site/native-input.mts",
+      "site/native-view-forms.mts",
+      "site/next-frame.mts",
+      "site/object-adapter.mts",
+      "site/object-browser.mts",
+      "site/object-children.mts",
+      "site/object-classification-label.mts",
+      "site/object-directory.mts",
+      "site/object-entries.mts",
+      "site/object-entry.mts",
+      "site/object-page-contract.mts",
+      "site/object-page-data.mts",
+      "site/object-shell-types.ts",
+      "site/object-systems.mts",
+      "site/object-text.mts",
+      "site/objects.mts",
+      "site/orbit-root.mts",
+      "site/overview-selection.mts",
+      "site/packaged-object-runtime.mts",
+      "site/planetary-system-members.mts",
+      "site/prepare-body-moons.mts",
+      "site/prepared-arrival.mts",
+      "site/prepared-descriptor.mts",
+      "site/prepared-object-path.mts",
+      "site/prepared-panel-content.mts",
+      "site/prepared-scene-ownership.mts",
+      "site/prepared-world-navigation.mts",
+      "site/prepared-world-presentation.mts",
+      "site/root-object.mts",
+      "site/runtime-policy.mts",
+      "site/satellite-selection.mts",
+      "site/satellite-systems.mts",
+      "site/scientific-chart-order.mts",
+      "site/selection-presentation.mts",
+      "site/seo-trail.mts",
+      "site/seo.mts",
+      "site/shared-imports.mts",
+      "site/showcase.mts",
+      "site/sidebar-thumbnails.mts",
+      "site/social-images.mts",
+      "site/source-documentation.mts",
+      "site/source-icons.mts",
+      "site/source-link.mts",
+      "site/startup-billboard.mts",
+      "site/startup-boot.mts",
+      "site/startup-cover.mts",
+      "site/startup-requests.mts",
+      "site/startup-world.mts",
+      "site/stellar-extents.mts",
+      "site/system-card.mts",
+      "site/system-framing-radii.mts",
+      "site/system-framing.mts",
+      "site/tab-panels.mts",
+      "site/view-readout.mts",
+      "site/view-url-runtime.mts",
+      "site/volume-presentation.mts",
+      "site/web-analytics.mts",
+      "site/world-approach.mts",
+      "site/world-camera.mts",
+      "site/world-context-plan.mts",
+      "site/world-objects.mts",
+      "site/world-places.mts",
+      "site/world-preferences.mts",
+      "site/world-system-views.mts",
+      "site/world-viewport.mts",
+      "site/zoom-carry.mts",
+      "site/zoom-scope.mts"
+    ]
+  },
+  "aggregate": {
+    "lines": 81.3,
+    "branches": 62.1,
+    "functions": 74.1
+  },
+  "files": {
+    "site/application-world-context.mts": {
+      "lines": 60.4,
+      "branches": 20.4,
+      "functions": 25.8
+    },
+    "site/application-world-frames.mts": {
+      "lines": 77.7,
+      "branches": 67.8,
+      "functions": 66.6
+    },
+    "site/application-world-resources.mts": {
+      "lines": 73.1,
+      "branches": 57.6,
+      "functions": 67.6
+    },
+    "site/application-world-types.mts": {
+      "lines": 100,
+      "branches": 100,
+      "functions": 100
+    },
+    "site/application-world-visibility.mts": {
+      "lines": 97.6,
+      "branches": 90.9,
+      "functions": 97.3
+    },
+    "site/arrival-billboard.mts": {
+      "lines": 98.1,
+      "branches": 60.6,
+      "functions": 90.9
+    },
+    "site/asset-origin.mts": {
+      "lines": 79,
+      "branches": 58.1,
+      "functions": 75
+    },
+    "site/built-pages.mts": {
+      "lines": 100,
+      "branches": 93.7,
+      "functions": 100
+    },
+    "site/catalogue-moon-labels.mts": {
+      "lines": 78.2,
+      "branches": 39.6,
+      "functions": 78.5
+    },
+    "site/chart-pixel-alignment.mts": {
+      "lines": 100,
+      "branches": 87.5,
+      "functions": 100
+    },
+    "site/context-availability.mts": {
+      "lines": 50,
+      "branches": 100,
+      "functions": 100
+    },
+    "site/context-datasets.mts": {
+      "lines": 100,
+      "branches": 100,
+      "functions": 100
+    },
+    "site/dataset-content.mts": {
+      "lines": 100,
+      "branches": 88.8,
+      "functions": 100
+    },
+    "site/dataset-context.mts": {
+      "lines": 5,
+      "branches": 0,
+      "functions": 0
+    },
+    "site/dataset-picker.mts": {
+      "lines": 100,
+      "branches": 77.7,
+      "functions": 87.5
+    },
+    "site/dataset-response.mts": {
+      "lines": 88.5,
+      "branches": 62.5,
+      "functions": 94.4
+    },
+    "site/dataset-url.mts": {
+      "lines": 100,
+      "branches": 100,
+      "functions": 100
+    },
+    "site/default-width-share.mts": {
+      "lines": 100,
+      "branches": 64.2,
+      "functions": 100
+    },
+    "site/destination-browser.mts": {
+      "lines": 100,
+      "branches": 90,
+      "functions": 100
+    },
+    "site/diagnostic-recorder.mts": {
+      "lines": 65.6,
+      "branches": 25,
+      "functions": 45.7
+    },
+    "site/diagnostics-policy.mts": {
+      "lines": 100,
+      "branches": 33.3,
+      "functions": 100
+    },
+    "site/dot-catalogue-data.mts": {
+      "lines": 0,
+      "branches": 0,
+      "functions": 0
+    },
+    "site/dot-catalogues.mts": {
+      "lines": 0,
+      "branches": 100,
+      "functions": 0
+    },
+    "site/error-report.mts": {
+      "lines": 100,
+      "branches": 100,
+      "functions": 100
+    },
+    "site/exploration-catalog.mts": {
+      "lines": 0,
+      "branches": 100,
+      "functions": 100
+    },
+    "site/feature-browser.mts": {
+      "lines": 100,
+      "branches": 69.2,
+      "functions": 100
+    },
+    "site/first-view-transport.mts": {
+      "lines": 81.8,
+      "branches": 68.7,
+      "functions": 83.3
+    },
+    "site/hosted-banks.mts": {
+      "lines": 94.4,
+      "branches": 85.7,
+      "functions": 100
+    },
+    "site/import-queue.mts": {
+      "lines": 100,
+      "branches": 100,
+      "functions": 80
+    },
+    "site/in-flight-loader.mts": {
+      "lines": 100,
+      "branches": 100,
+      "functions": 100
+    },
+    "site/information-card.mts": {
+      "lines": 78.7,
+      "branches": 38.7,
+      "functions": 65.3
+    },
+    "site/initial-scene.mts": {
+      "lines": 14.2,
+      "branches": 14.2,
+      "functions": 16.6
+    },
+    "site/initial-shell-context.mts": {
+      "lines": 100,
+      "branches": 75,
+      "functions": 100
+    },
+    "site/inside-view.mts": {
+      "lines": 73.3,
+      "branches": 68.2,
+      "functions": 69.2
+    },
+    "site/layout-sections.mts": {
+      "lines": 80,
+      "branches": 100,
+      "functions": 50
+    },
+    "site/learn-more.mts": {
+      "lines": 0,
+      "branches": 0,
+      "functions": 0
+    },
+    "site/moon-orbit-policy.mts": {
+      "lines": 85.7,
+      "branches": 100,
+      "functions": 66.6
+    },
+    "site/narrow-layout.mts": {
+      "lines": 100,
+      "branches": 100,
+      "functions": 100
+    },
+    "site/native-input.mts": {
+      "lines": 100,
+      "branches": 100,
+      "functions": 100
+    },
+    "site/native-view-forms.mts": {
+      "lines": 21.7,
+      "branches": 0,
+      "functions": 20
+    },
+    "site/next-frame.mts": {
+      "lines": 83.3,
+      "branches": 66.6,
+      "functions": 100
+    },
+    "site/object-adapter.mts": {
+      "lines": 66.6,
+      "branches": 9,
+      "functions": 75
+    },
+    "site/object-browser.mts": {
+      "lines": 33,
+      "branches": 7.9,
+      "functions": 8.3
+    },
+    "site/object-children.mts": {
+      "lines": 100,
+      "branches": 89.4,
+      "functions": 100
+    },
+    "site/object-classification-label.mts": {
+      "lines": 0,
+      "branches": 0,
+      "functions": 0
+    },
+    "site/object-directory.mts": {
+      "lines": 87.7,
+      "branches": 76.1,
+      "functions": 94.7
+    },
+    "site/object-entries.mts": {
+      "lines": 75,
+      "branches": 16.6,
+      "functions": 57.1
+    },
+    "site/object-entry.mts": {
+      "lines": 100,
+      "branches": 60,
+      "functions": 100
+    },
+    "site/object-page-contract.mts": {
+      "lines": 100,
+      "branches": 90,
+      "functions": 100
+    },
+    "site/object-page-data.mts": {
+      "lines": 77.4,
+      "branches": 42.4,
+      "functions": 58.3
+    },
+    "site/object-shell-types.ts": {
+      "lines": 100,
+      "branches": 100,
+      "functions": 100
+    },
+    "site/object-systems.mts": {
+      "lines": 100,
+      "branches": 77.2,
+      "functions": 100
+    },
+    "site/object-text.mts": {
+      "lines": 89.8,
+      "branches": 61.8,
+      "functions": 92.5
+    },
+    "site/objects.mts": {
+      "lines": 100,
+      "branches": 75,
+      "functions": 100
+    },
+    "site/orbit-root.mts": {
+      "lines": 100,
+      "branches": 100,
+      "functions": 100
+    },
+    "site/overview-selection.mts": {
+      "lines": 100,
+      "branches": 82.4,
+      "functions": 100
+    },
+    "site/packaged-object-runtime.mts": {
+      "lines": 53.5,
+      "branches": 41.6,
+      "functions": 100
+    },
+    "site/planetary-system-members.mts": {
+      "lines": 100,
+      "branches": 100,
+      "functions": 100
+    },
+    "site/prepare-body-moons.mts": {
+      "lines": 92.5,
+      "branches": 75,
+      "functions": 83.3
+    },
+    "site/prepared-arrival.mts": {
+      "lines": 100,
+      "branches": 81.4,
+      "functions": 100
+    },
+    "site/prepared-descriptor.mts": {
+      "lines": 100,
+      "branches": 75,
+      "functions": 100
+    },
+    "site/prepared-object-path.mts": {
+      "lines": 100,
+      "branches": 66.6,
+      "functions": 100
+    },
+    "site/prepared-panel-content.mts": {
+      "lines": 66.6,
+      "branches": 58.5,
+      "functions": 60
+    },
+    "site/prepared-scene-ownership.mts": {
+      "lines": 100,
+      "branches": 77.7,
+      "functions": 100
+    },
+    "site/prepared-world-navigation.mts": {
+      "lines": 90.3,
+      "branches": 72.1,
+      "functions": 88
+    },
+    "site/prepared-world-presentation.mts": {
+      "lines": 89.6,
+      "branches": 67.7,
+      "functions": 100
+    },
+    "site/root-object.mts": {
+      "lines": 100,
+      "branches": 100,
+      "functions": 100
+    },
+    "site/runtime-policy.mts": {
+      "lines": 95.1,
+      "branches": 81.8,
+      "functions": 91.6
+    },
+    "site/satellite-selection.mts": {
+      "lines": 100,
+      "branches": 90.9,
+      "functions": 100
+    },
+    "site/satellite-systems.mts": {
+      "lines": 100,
+      "branches": 93.7,
+      "functions": 100
+    },
+    "site/scientific-chart-order.mts": {
+      "lines": 100,
+      "branches": 75,
+      "functions": 100
+    },
+    "site/selection-presentation.mts": {
+      "lines": 100,
+      "branches": 100,
+      "functions": 87.5
+    },
+    "site/seo-trail.mts": {
+      "lines": 100,
+      "branches": 100,
+      "functions": 100
+    },
+    "site/seo.mts": {
+      "lines": 100,
+      "branches": 57.1,
+      "functions": 100
+    },
+    "site/shared-imports.mts": {
+      "lines": 60,
+      "branches": 100,
+      "functions": 0
+    },
+    "site/showcase.mts": {
+      "lines": 94.8,
+      "branches": 80,
+      "functions": 100
+    },
+    "site/sidebar-thumbnails.mts": {
+      "lines": 0,
+      "branches": 0,
+      "functions": 0
+    },
+    "site/social-images.mts": {
+      "lines": 93.7,
+      "branches": 83.3,
+      "functions": 100
+    },
+    "site/source-documentation.mts": {
+      "lines": 96.2,
+      "branches": 69.7,
+      "functions": 70
+    },
+    "site/source-icons.mts": {
+      "lines": 80,
+      "branches": 70,
+      "functions": 100
+    },
+    "site/source-link.mts": {
+      "lines": 100,
+      "branches": 100,
+      "functions": 100
+    },
+    "site/startup-billboard.mts": {
+      "lines": 56.5,
+      "branches": 17.1,
+      "functions": 50
+    },
+    "site/startup-boot.mts": {
+      "lines": 91.6,
+      "branches": 50,
+      "functions": 71.4
+    },
+    "site/startup-cover.mts": {
+      "lines": 50,
+      "branches": 48.6,
+      "functions": 40
+    },
+    "site/startup-requests.mts": {
+      "lines": 72.9,
+      "branches": 70.8,
+      "functions": 72.7
+    },
+    "site/startup-world.mts": {
+      "lines": 87,
+      "branches": 57.1,
+      "functions": 90
+    },
+    "site/stellar-extents.mts": {
+      "lines": 100,
+      "branches": 100,
+      "functions": 100
+    },
+    "site/system-card.mts": {
+      "lines": 100,
+      "branches": 87.5,
+      "functions": 100
+    },
+    "site/system-framing-radii.mts": {
+      "lines": 100,
+      "branches": 89.2,
+      "functions": 100
+    },
+    "site/system-framing.mts": {
+      "lines": 97.9,
+      "branches": 82.1,
+      "functions": 97.7
+    },
+    "site/tab-panels.mts": {
+      "lines": 88,
+      "branches": 50,
+      "functions": 57.1
+    },
+    "site/view-readout.mts": {
+      "lines": 85.3,
+      "branches": 53.5,
+      "functions": 58
+    },
+    "site/view-url-runtime.mts": {
+      "lines": 96.5,
+      "branches": 68.9,
+      "functions": 91.6
+    },
+    "site/volume-presentation.mts": {
+      "lines": 100,
+      "branches": 100,
+      "functions": 100
+    },
+    "site/web-analytics.mts": {
+      "lines": 100,
+      "branches": 100,
+      "functions": 100
+    },
+    "site/world-approach.mts": {
+      "lines": 86.4,
+      "branches": 76.1,
+      "functions": 55.5
+    },
+    "site/world-camera.mts": {
+      "lines": 100,
+      "branches": 40,
+      "functions": 100
+    },
+    "site/world-context-plan.mts": {
+      "lines": 86.5,
+      "branches": 61.7,
+      "functions": 80.7
+    },
+    "site/world-objects.mts": {
+      "lines": 100,
+      "branches": 100,
+      "functions": 100
+    },
+    "site/world-places.mts": {
+      "lines": 70.9,
+      "branches": 30,
+      "functions": 40
+    },
+    "site/world-preferences.mts": {
+      "lines": 95,
+      "branches": 40,
+      "functions": 75
+    },
+    "site/world-system-views.mts": {
+      "lines": 100,
+      "branches": 0,
+      "functions": 100
+    },
+    "site/world-viewport.mts": {
+      "lines": 57.1,
+      "branches": 80,
+      "functions": 33.3
+    },
+    "site/zoom-carry.mts": {
+      "lines": 44.4,
+      "branches": 20,
+      "functions": 50
+    },
+    "site/zoom-scope.mts": {
+      "lines": 100,
+      "branches": 94.1,
+      "functions": 100
+    }
+  },
+  "moves": {},
+  "retired": {}
+}
