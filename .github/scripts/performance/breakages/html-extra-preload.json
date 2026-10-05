@@ -1,0 +1,11 @@
+{
+  "name": "html-extra-preload",
+  "expected": "FAIL",
+  "edits": [
+    {
+      "file": "index.html",
+      "before": "</head>",
+      "after": "<link rel=\"preload\" href=\"/world/anywhere.json\" as=\"fetch\" crossorigin=\"anonymous\"></head>"
+    }
+  ]
+}

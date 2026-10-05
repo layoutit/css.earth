@@ -1,0 +1,11 @@
+{
+  "name": "html-extra-request",
+  "expected": "FAIL",
+  "edits": [
+    {
+      "file": "index.html",
+      "before": "</head>",
+      "after": "<script>fetch(\"/objects/earth/entry.json?l7a-extra=1\")</script></head>"
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "name": "extra-preload",
+  "expected": "FAIL",
+  "edits": [
+    {
+      "file": "site/layouts/ObjectLayout.astro",
+      "before": "  <head>",
+      "after": "  <head>\n    <link rel=\"preload\" href=\"/native-input.css\" as=\"style\" />"
+    }
+  ]
+}

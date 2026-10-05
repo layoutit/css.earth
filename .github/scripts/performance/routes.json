@@ -1,0 +1,72 @@
+[
+  {
+    "objectId": "earth",
+    "route": "/earth/",
+    "capability": "textureLevels, materials"
+  },
+  {
+    "objectId": "earth-system",
+    "route": "/earth-system/",
+    "capability": "system.host, textureLevels"
+  },
+  {
+    "objectId": "lmc",
+    "route": "/lmc/",
+    "capability": "volume-dataset-bank, world.dotBanks:owned"
+  },
+  {
+    "objectId": "neptune-system",
+    "route": "/neptune-system/",
+    "capability": "rings, fixed frames"
+  },
+  {
+    "objectId": "beta-pictoris-system",
+    "route": "/beta-pictoris-system/",
+    "capability": "system volume bank"
+  },
+  {
+    "objectId": "asteroid-2001-sn263-system",
+    "route": "/asteroid-2001-sn263-system/",
+    "capability": "surfaceHit"
+  },
+  {
+    "objectId": "mars-system",
+    "route": "/mars-system/",
+    "capability": "atmosphere, textureLevels"
+  },
+  {
+    "objectId": "observable-universe",
+    "route": "/observable-universe/",
+    "capability": "map-sphere"
+  },
+  {
+    "objectId": "abell-1689",
+    "route": "/abell-1689/",
+    "capability": "image-layer-bank"
+  },
+  {
+    "objectId": "centaurus-cluster",
+    "route": "/centaurus-cluster/",
+    "capability": "catalogue-point-bank"
+  },
+  {
+    "objectId": "dione",
+    "route": "/dione/",
+    "capability": "fixed row, materials"
+  },
+  {
+    "objectId": "great-attractor",
+    "route": "/great-attractor/",
+    "capability": "galaxy-point-field"
+  },
+  {
+    "objectId": "local-group",
+    "route": "/local-group/",
+    "capability": "galaxy-catalog"
+  },
+  {
+    "objectId": "milky-way",
+    "route": "/milky-way/",
+    "capability": "density-volume"
+  }
+]
