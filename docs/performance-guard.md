@@ -24,6 +24,8 @@ These are deterministic counts and file lengths, not elapsed time. Compression u
 
 The dependency-round measure is a declared graph-depth model, **not observed network round trips**. The first body runtime overlaps the head's document requests; the router waits for the startup world, then the registry and application-world queue. Conditional execution, worker creation, cache reuse, transport adoption and later requests need part B. Unsupported head request expressions or startup schedules fail analysis rather than silently returning zero. Runtime-computed imports are explicitly reported, not claimed to have known target sizes.
 
+Compressed sizes are net of content-hash text. The build names each emitted file `name.<hash>.ext`, and every importer, including the HTML, repeats those names, so a changed dependency changes its importers' text and moves their compressed size by a few bytes without changing any code. Gzip and Brotli sizes (and the recorded `href` and `src` declarations) are therefore taken with each exact reference to an emitted hashed file carrying a fixed placeholder of the same length. Only exact references that resolve to emitted files are replaced; every other byte is counted, and raw sizes are always measured on the real files.
+
 ## Comparison rules
 
 Every numeric leaf is compared independently, including individual emitted transports and chunk sizes. An absent numeric key means zero: deleting a resource improves its measure; adding a resource increases it. Equality passes. Decreases are listed as `IMPROVEMENT`; increases are listed as `FAILURE`, with the route, measure and both numbers. Numeric findings have kind `increase`; only failures contribute to the failure counts by kind.
