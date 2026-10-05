@@ -2,7 +2,7 @@ import type { PreparedTree } from '../presentation/runtime-presentation-types.js
 
 /** The structure of the texture slots. A slot lists the childless elements under its target that draw it, and may list
  * none (a carrier the depth partitions emptied). Whether a name may be a custom property is the caller's rule: the bindings'
- * working form names one, a shipped runtime never does (image-records.ts). */
+ * working form names one, a shipped runtime never does (shipped-runtime.ts). */
 export function requireTextureBindings(value: unknown, nodes: PreparedTree['nodes']) {
   if (value === undefined) return;
   function fail(): never { throw new TypeError('Invalid prepared leaf texture binding.'); }
