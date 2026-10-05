@@ -131,8 +131,8 @@ full, and the last bake step states the pool's byte budget from the image sizes:
 the one before it, never above what Io states for its pages
 ([prepared-pool-budgets.ts](../packages/bake/src/prepared-presentation/prepared-pool-budgets.ts)). On an iPad, going
 back to a dataset of Bennu took 280 ms and 180 ms after its 13-megapixel atlas had been released, and 82 ms and 75 ms
-with it kept; a first visit is unchanged. Two bodies whose two selections exceed that ceiling (Deimos and Phobos)
-release what a selection leaves, as before.
+with it kept; a first visit is unchanged. A body whose two selections exceed that ceiling releases what a selection
+leaves, as before; since Deimos and Phobos took smaller atlases, no small body does.
 
 How the surface is cut into images matters less. Io and Mercury baked as square pages of four faces, 112 pages a
 surface, switched in 158 to 298 ms and 129 to 146 ms at their default views: no gain for Io, and twice Mercury's time
