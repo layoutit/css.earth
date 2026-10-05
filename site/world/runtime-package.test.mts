@@ -13,7 +13,7 @@ import { requireArray, requireRecord, requireString } from '@cssearth/core';
 import { isDeepStrictEqual } from 'node:util';
 import { adoptPreparedDatasetTables } from '@cssearth/renderer';
 
-import { selectedObjectIds } from '../world/fixtures/anchor-table.mts';
+import { selectedObjectIds } from './fixtures/anchor-table.mts';
 import { projectRoot } from '../directory/fixtures/objects.mts';
 
 /** Whether two node lists hold the same nodes in the same order. A plain boolean: a failed deep comparison of thousands

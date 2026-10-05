@@ -6,7 +6,7 @@ import { webcrypto } from 'node:crypto';
 import { createDiagnosticRecorder } from '../diagnostic-recorder.mts';
 import type { BrowserWindow } from '../browser/browser-types.mts';
 import { isRecord } from '@cssearth/core';
-import { required } from './navigation-test-values.mts';
+import { required } from '../navigation/navigation-test-values.test-support.mts';
 import { createNavigationTiming } from '../navigation/navigation-timing.mts';
 
 function host() {

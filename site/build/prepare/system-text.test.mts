@@ -1,16 +1,16 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 import { readSourceCatalog } from '@cssearth/bake/sources';
-import input from '../../src/navigation/system-text.json' with { type: 'json' };
-import { allSatelliteSystems } from '../satellite-systems.mts';
-import { requireObject } from '../objects.mts';
-import { systemObjectId } from '../model/system-address.mts';
-import { prepareSystemIntroductions } from '../build/prepare/system-text.mts';
-import { showsDefaultContextOrbit } from '../build/prepare/prepare-world-presentation.mts';
+import input from '../../../src/navigation/system-text.json' with { type: 'json' };
+import { allSatelliteSystems } from '../../satellite-systems.mts';
+import { requireObject } from '../../objects.mts';
+import { systemObjectId } from '../../model/system-address.mts';
+import { prepareSystemIntroductions } from './system-text.mts';
+import { showsDefaultContextOrbit } from './prepare-world-presentation.mts';
 const test = sourceTest();
 
 test('every satellite system has a cited introduction, which is its system object\'s description', async () => {
-  const catalogue = await readSourceCatalog(new URL('../../', import.meta.url).pathname);
+  const catalogue = await readSourceCatalog(new URL('../../../', import.meta.url).pathname);
   const hosts = allSatelliteSystems().map(system => system.hostId);
   const prepared = prepareSystemIntroductions(input, hosts, new Set(catalogue.records.map(record => record.id)));
   assert.deepEqual(prepared, Object.fromEntries(hosts.map(id => [id, requireObject(systemObjectId(id)).description])));

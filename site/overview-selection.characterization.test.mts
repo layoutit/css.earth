@@ -3,7 +3,7 @@ import { test } from 'node:test';
 import { selectionAtCamera, watchCameraSelection } from './overview-selection.mts';
 import { systemById } from './object-systems.mts';
 import { worldCameraFromCenteredPresentation } from '@cssearth/engine';
-import { objectFixture, navigationFixture, required } from './test/navigation-test-values.mts';
+import { objectFixture, navigationFixture, required } from './navigation/navigation-test-values.test-support.mts';
 import type { PreparedWorldCameraFrame } from '@cssearth/objects';
 import type { ObjectWorldNavigationListener } from '@cssearth/renderer/runtime/world-navigation-types.ts';
 const au = 149597870700;

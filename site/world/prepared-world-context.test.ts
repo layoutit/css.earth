@@ -1,5 +1,5 @@
 import type { OrientationXyzw, PhysicalCameraPose } from '@cssearth/engine';
-import { readSystemViewFile } from './system-view-file.mts';
+import { readSystemViewFile } from './system-view-file.test-support.mts';
 import { decodeWorldOrbitBank, decodeWorldOrbits, orbitVertices, parseCompleteWorldContext, parsePreparedWorldContext, parsePreparedWorldContextSummary, worldContextGeometry, isPlacedClassification } from '@cssearth/objects';
 import { type WorldCameraPose } from '@cssearth/engine';
 import { required } from '@cssearth/objects/node/contract';

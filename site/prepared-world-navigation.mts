@@ -3,7 +3,7 @@ import { satelliteSystemByHost } from './satellite-systems.mts';
 import { eyeDistanceM, sameEyePlace } from '@cssearth/engine';
 import { createZoomCarry } from './world/zoom-carry.mts';
 import { createPreparedSceneOwnership } from './navigation/prepared-scene-ownership.mts';
-import { createPreparedArrival } from './prepared-arrival.mts';
+import { createPreparedArrival } from './navigation/prepared-arrival.mts';
 import { canUseArrivalBillboard, frameArrivalBillboard, prepareArrivalBillboard } from './navigation/arrival-billboard.mts';
 import type { ObjectEntry } from './objects.mts';
 import type { SceneFactory, ShellCamera, MountOptions } from './browser/browser-types.mts';

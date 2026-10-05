@@ -33,7 +33,7 @@ test('production history transport depends on navigation contracts, never reques
   const declarations = source('./navigation-history.mts').statements.filter(ts.isImportDeclaration);
   assert.ok(declarations.every(item => !ts.isStringLiteral(item.moduleSpecifier) || !item.moduleSpecifier.text.includes('navigation-request')));
   typeImport('./navigation-history.mts', './navigation-types.mts', ['NavigationHistory', 'NavigationIntent']);
-  typeImport('../prepared-arrival.mts', './navigation/navigation-types.mts', ['WorldHandoff']);
+  typeImport('./prepared-arrival.mts', './navigation-types.mts', ['WorldHandoff']);
   typeImport('./navigation-request.mts', './navigation-types.mts', ['NavigationHistory', 'NavigationIntent', 'SelectionTarget']);
 });
 

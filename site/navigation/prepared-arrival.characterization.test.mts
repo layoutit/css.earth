@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { parseHTML } from 'linkedom';
 import { createPreparedArrival } from './prepared-arrival.mts';
-import type { SceneFactory } from './browser/browser-types.mts';
+import type { SceneFactory } from '../browser/browser-types.mts';
 import type { ObjectPreparationView } from '@cssearth/renderer/runtime/prepared-object-navigation.ts';
 import type { ObjectSceneLifecycle } from '@cssearth/renderer/runtime/object-scene.ts';
 

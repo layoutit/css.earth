@@ -1,5 +1,5 @@
 import { sourceTest } from '@cssearth/objects/node/source-test';
-import { readSystemViewFile } from './system-view-file.mts';
+import { readSystemViewFile } from '../world/system-view-file.test-support.mts';
 const test = sourceTest();
 import assert from 'node:assert/strict';
 import { getEventListeners } from 'node:events';
@@ -10,7 +10,7 @@ import { createWorldSelectionTarget, formatSharedView, savedWorldCamera } from '
 import { presentWorldCamera } from '@cssearth/renderer/navigation/world-camera.ts';
 import { createPreparedWorldNavigation } from '../prepared-world-navigation.mts';
 
-import { required, position, navigationFixture, unusedSharedView } from './navigation-test-values.mts';
+import { required, position, navigationFixture, unusedSharedView } from '../navigation/navigation-test-values.test-support.mts';
 import { type PreparedWorldCameraFrame, type PreparedArrivalView } from '@cssearth/objects';
 import { type WorldCameraPose } from '@cssearth/engine';
 import type { WorldCameraPresentation } from '@cssearth/renderer/navigation/world-camera.ts';

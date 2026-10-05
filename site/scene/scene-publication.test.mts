@@ -5,7 +5,7 @@ import { createScenePublication } from './scene-publication.mts';
 import type { SceneSessionState } from './scene-session.mts';
 import type { BrowserWindow } from '../browser/browser-types.mts';
 import type { ObjectShell } from '../shell/object-shell-types.mts';
-import { unusedSharedView } from '../test/navigation-test-values.mts';
+import { unusedSharedView } from '../navigation/navigation-test-values.test-support.mts';
 
 test('readiness stays observable without publishing body lifecycle classes', () => {
   const { document, window } = parseHTML('<html><body class="application"><div class="object-viewport"><main></main></div></body></html>');

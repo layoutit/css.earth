@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import { parseHTML } from 'linkedom';
 import { createFeatureBrowser, type FindResult } from './feature-browser.mts';
-import { required } from './test/navigation-test-values.mts';
+import { required } from './navigation/navigation-test-values.test-support.mts';
 
 function fixture() {
   const { document, window } = parseHTML(`<details class="object-feature-results" open><span class="object-panel-heading-count"></span><p class="object-destination-hint"></p>${Array.from({ length: 2 }, () => '<div><a class="object-destination-result"><b class="object-destination-result-name"></b><span class="object-destination-result-context"></span></a></div>').join('')}</details>`);

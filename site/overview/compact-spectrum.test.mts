@@ -4,11 +4,11 @@ const test = sourceTest();
 import { readFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import { SCENE_OBJECTS } from '../objects.mts';
-import { required } from './navigation-test-values.mts';
-import { SourceEvidence } from '../overview/source-evidence-values.test-support.mts';
+import { required } from '../navigation/navigation-test-values.test-support.mts';
+import { SourceEvidence } from './source-evidence-values.test-support.mts';
 import { hasErrorCode } from '@cssearth/core';
-import { parseSpectrumRecipe, readSpectrumData } from '../overview/spectrum-data.mts';
-import { renderCompactSpectrum } from '../overview/compact-spectrum.mts';
+import { parseSpectrumRecipe, readSpectrumData } from './spectrum-data.mts';
+import { renderCompactSpectrum } from './compact-spectrum.mts';
 
 test('compact charts retain every supplied spectrum sample across the registry', async () => {
   let charts = 0;

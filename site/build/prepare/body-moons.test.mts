@@ -1,8 +1,8 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
-import catalogues from '../source/moon-catalogues.json' with { type: 'json' };
-import { parseMoonCatalogue, prepareBodyMoons } from '../prepare-body-moons.mts';
+import catalogues from '../../source/moon-catalogues.json' with { type: 'json' };
+import { parseMoonCatalogue, prepareBodyMoons } from '../../prepare-body-moons.mts';
 const catalogue = catalogues.systems.find(system => system.id === 'saturn')!;
 
 test('Saturn lists every source moon and only links registered scene objects', () => {

@@ -2230,7 +2230,7 @@
     {
       "id": "handler:site:prepared-arrival:createPreparedArrival:abort:1",
       "kind": "handler",
-      "source": "site/prepared-arrival.mts:27",
+      "source": "site/navigation/prepared-arrival.mts:27",
       "eventTypes": [
         "abort"
       ],

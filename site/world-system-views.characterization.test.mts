@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { readApplicationSystemView } from './world-system-views.mts';
-import { readSystemViewFile } from './test/system-view-file.mts';
+import { readSystemViewFile } from './world/system-view-file.test-support.mts';
 
 test('the default reader requests the host URL and preserves status and JSON failures', async t => {
   const requested: string[] = [];

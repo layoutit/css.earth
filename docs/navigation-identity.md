@@ -35,7 +35,7 @@ the body as that object's centre and its radius. A star of the Large Magellanic 
 zooms out into the Cloud, M87* into M87, M87 into the Virgo Cluster. That scene is
 then left the way any body's is ([overview-selection.mts](../site/overview-selection.mts),
 [inside-view.mts](../site/inside-view.mts)). The way back in needs no click where the object's walls
-surround a body: its entry names that body (`inner`, [surrounded-body.mts](../site/surrounded-body.mts)), and
+surround a body: its entry names that body (`inner`, [surrounded-body.mts](../site/world/surrounded-body.mts)), and
 a zoom in that reaches the nearest view the object's scene allows goes on into the body's scene, which draws
 the walls around it. While that body is selected the object has no marker: the view is among its walls, and its
 breadcrumb names it ([application-world-context.mts](../site/application-world-context.mts)). The Homunculus Nebula zooms in to Eta Carinae, NGC 2392 to HD 59088. A system can be inside another: a star
@@ -196,7 +196,7 @@ identities. See [object provenance](object-provenance.md) for their lineage.
 
 ## Checks
 
-`site/test/navigation-ontology.test.mts` compares every prepared spatial subject
+`site/world/navigation-ontology.test.mts` compares every prepared spatial subject
 with the registry and search, checks every body distance against its prepared
 frame, and resolves the actual galaxy references. The bibliography tests reject
 conflicting keys and invalid locators. Contribution tests distinguish view

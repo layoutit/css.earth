@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { readSystemViewFile } from './system-view-file.mts';
+import { readSystemViewFile } from '../world/system-view-file.test-support.mts';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import { OBJECTS, SCENE_OBJECTS } from '../objects.mts';
@@ -16,7 +16,7 @@ import { presentWorldCamera } from '@cssearth/renderer/navigation/world-camera.t
 import { SYSTEM_FRAMING_ANGLES } from '../browser/runtime-policy.mts';
 import { createSelectionFlight, sampleSelectionFlight } from '@cssearth/engine';
 
-import { required, position, quaternion, navigationFixture, unusedSharedView } from './navigation-test-values.mts';
+import { required, position, quaternion, navigationFixture, unusedSharedView } from '../navigation/navigation-test-values.test-support.mts';
 import { parsePreparedWorldContext } from '@cssearth/objects';
 import { type WorldCameraPose } from '@cssearth/engine';
 import type { ObjectWorldNavigation } from '@cssearth/renderer/runtime/world-navigation-types.ts';

@@ -241,7 +241,7 @@ Gray placeholders receive the same display cue without invented surface detail.
 Measured stellar limb darkening and thermal-map palettes keep their source
 treatment. The Earth and Moon browser view
 checks the Moon sprite in the existing world renderer.
-`site/test/navigation-preparation.test.mts` checks every registered body marker
+`site/world/navigation-preparation.test.mts` checks every registered body marker
 and resolved context image for transparent corners and nonempty content.
 The shared recipe tests separately check bright-center, darker-limb shading.
 The catalogue audit

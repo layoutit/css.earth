@@ -1,5 +1,5 @@
 import { parsePreparedObjectRuntime } from '@cssearth/objects';
-import { readSystemViewFile } from './system-view-file.mts';
+import { readSystemViewFile } from '../world/system-view-file.test-support.mts';
 
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
@@ -13,7 +13,7 @@ import { allSatelliteSystems } from '../satellite-systems.mts';
 import { satelliteSelectionAtCamera } from '../satellite-selection.mts';
 import { createPreparedWorldNavigation } from '../prepared-world-navigation.mts';
 import { loadSystemView } from '../system-framing.mts';
-import { navigationFixture, required, unusedSharedView } from './navigation-test-values.mts';
+import { navigationFixture, required, unusedSharedView } from './navigation-test-values.test-support.mts';
 
 const test = sourceTest();
 const source = required(SCENE_OBJECTS.find(object => object.id === 'earth'));

@@ -112,7 +112,7 @@ Read the current `package.json` and runner arguments before using commands:
 | Prepare one authored package | `pnpm prepare:objects -- --object=<id>` |
 | Update the source/mission catalogues | `node site/build/prepare/prepare-facilities.mts --catalog-only` |
 | Bind new inputs to catalogue records | `node site/build/prepare/author-source-records.mts <id>` |
-| Check shared body runtime behavior | `node --test site/test/runtime-package.test.mts`; run affected scientific tests beside their owning modules too |
+| Check shared body runtime behavior | `node --test site/world/runtime-package.test.mts`; run affected scientific tests beside their owning modules too |
 | Run the full package, renderer, native, preparation and lab sequence | `pnpm test`; choose its individual suites for focused work |
 | Check source identities and bindings | `node --test "src/sources/*.test.mts" "packages/bake/src/objects/sources/*.test.mts"`, or select the affected files |
 | Create the oracle environment and regenerate oracle fixtures | `node packages/core/src/node/oracle/setup.mts`, `node packages/core/src/node/oracle/run.mts`; see `packages/core/src/node/oracle/README.md` |

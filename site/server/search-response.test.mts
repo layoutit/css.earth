@@ -2,12 +2,12 @@ import assert from 'node:assert/strict';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import { parseHTML } from 'linkedom';
-import { handleSearchRequest, renderSearchResponse } from '../server/search-response.mts';
+import { handleSearchRequest, renderSearchResponse } from './search-response.mts';
 import { createSelectionPresentation } from '../selection-presentation.mts';
-import searchRoute from '../server/search-route.mts';
+import searchRoute from './search-route.mts';
 import { createFeatureBrowser } from '../feature-browser.mts';
-import { findObjects, handleFindRequest } from '../server/find.mts';
-import { readPublicFile, type SearchData } from '../server/search-data.mts';
+import { findObjects, handleFindRequest } from './find.mts';
+import { readPublicFile, type SearchData } from './search-data.mts';
 import { parseFindResponse } from '../search/find-protocol.mts';
 import type { CatalogueIndexEntry } from '../search/catalogue-index.mts';
 

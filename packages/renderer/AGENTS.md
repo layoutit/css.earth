@@ -87,4 +87,4 @@ surface fly-to calibration belong to `@cssearth/engine`. Renderer extends the en
 
 ## Accepted test boundaries
 
-Node tests beside `src/node/` verify private implementation details; `test/` holds package integration fixtures and helpers. Three explicit `./test/` exports expose only the fixture files imported through package entries. The sole consumer outside renderer is `site/test/runtime-package.test.mts`, which imports `@cssearth/renderer/test/object-runtime-package.mts`; the orbit and camera-orientation fixture exports serve renderer tests.
+Node tests beside `src/node/` verify private implementation details; `test/` holds package integration fixtures and helpers. Three explicit `./test/` exports expose only the fixture files imported through package entries. The sole consumer outside renderer is `site/world/runtime-package.test.mts`, which imports `@cssearth/renderer/test/object-runtime-package.mts`; the orbit and camera-orientation fixture exports serve renderer tests.

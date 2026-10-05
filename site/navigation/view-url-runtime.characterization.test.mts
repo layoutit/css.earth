@@ -3,7 +3,7 @@ import test from 'node:test';
 import { parseSharedView } from '@cssearth/renderer/navigation';
 import type { ObjectSharedView } from '@cssearth/renderer/runtime/object-scene.ts';
 import { bindViewUrl } from './view-url-runtime.mts';
-import { required } from '../test/navigation-test-values.mts';
+import { required } from './navigation-test-values.test-support.mts';
 
 const token = 'UcM-I2wcRENV2b3fvnbItDlXwOej1wo9cZ5BQsczQAAAAEAFN-vvz-Gyv9XjqHSKGu0AAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAA';
 function fixture(initial = 'http://example.test/venus/?other=keep#info') {
