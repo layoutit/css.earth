@@ -5,7 +5,7 @@ import { createWriteStream } from 'node:fs';
 import { basename, dirname, resolve } from 'node:path';
 import { Readable } from 'node:stream';
 import { pipeline } from 'node:stream/promises';
-import { execFile } from 'node:child_process';
+import { execFile, spawn } from 'node:child_process';
 import { promisify } from 'node:util';
 import { gzipSync } from 'node:zlib';
 import { containedPath, declaredDownloadBytes, publishPinnedSource, publishPinnedSourceStream, sourceCacheUrl, withIdleTimeout } from '../sources/index.ts';
@@ -88,8 +88,16 @@ export async function executeAcquisition({sourceRoot,manifest,plan,group='refres
     const temporary=`${archivePath}.partial-${process.pid}`;
     try{await pipeline(Readable.fromWeb(response.body as never),createWriteStream(temporary));await rename(temporary,archivePath);}finally{await rm(temporary,{force:true});}
    }
-   const {stdout}=await promisify(execFile)('unzip',['-p',archivePath,step.member],{encoding:'buffer',maxBuffer:512*1024*1024});
-   await publish(step.path,stdout);
+   const entry=[...manifest.inputs,...manifest.generatedIntermediates,...manifest.documents].find(entry=>entry.path===step.path);if(!entry)throw new Error(`Undeclared acquisition target: ${step.path}.`);
+   // unzip writes the member straight into the pinned file, so one of hundreds of megabytes is never held in memory. A
+   // member unzip could not read whole fails the stream before the file takes its place.
+   const child=spawn('unzip',['-p',archivePath,step.member],{stdio:['ignore','pipe','pipe']});
+   let complaint='';child.stderr.on('data',(chunk:Buffer)=>{complaint+=chunk.toString();});
+   const exit=new Promise<number|null>((done,fail)=>{child.on('close',done);child.on('error',fail);});
+   await publishPinnedSourceStream({sourceRoot,entry,stream:Readable.from((async function*(){
+    for await(const chunk of child.stdout)yield chunk as Buffer;
+    if(await exit!==0)throw new Error(`unzip could not read ${step.member} from ${step.url}: ${complaint.trim().split('\n')[0]??'no message'}.`);
+   })())});
   }
   else if(step.kind==='tar-gz-member'){
    const cache=resolve('.local/source-archives');await mkdir(cache,{recursive:true});

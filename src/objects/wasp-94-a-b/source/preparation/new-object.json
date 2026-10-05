@@ -1,0 +1,33 @@
+{
+  "host": "wasp-94-a",
+  "planets": [
+    {
+      "id": "wasp-94-a-b",
+      "name": "WASP-94 A b",
+      "description": "Transiting planet of WASP-94 A with a 3.95-day year, found in 2014.",
+      "paper": {
+        "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+        "credit": "Stassun et al. 2017"
+      },
+      "orbit": {
+        "archive": "nasa-ps",
+        "reference": "STASSUN_ET_AL__2017"
+      },
+      "text": {
+        "card": "WASP-94 A b was found in 2014 by SuperWASP as it crossed its star.",
+        "introduction": "It is the only planet known around WASP-94 A. Its orbit and size follow Stassun et al. 2017's fit, the archive's default.",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname STASSUN_ET_AL__2017): disc_year 2014, disc_facility SuperWASP, sy_pnum 2, 1 of them with hostname WASP-94 A; pl_orbper 3.9502001, pl_radj 1.58, pl_bmassj 0.5"
+      },
+      "thermal": {
+        "temperatureK": 1535,
+        "uncertaintyK": 38,
+        "wavelengthMicrometres": 3.6,
+        "facility": "Spitzer IRAC",
+        "source": "Deming et al. 2023, dayside brightness temperature at 3.6 µm (uniform reanalysis of Spitzer's eclipses, CDS J/AJ/165/104 table 2)",
+        "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....165..104D/abstract",
+        "chosen": "2 measured of 2 rows; the smallest relative uncertainty, then the longest wavelength"
+      },
+      "order": 5779
+    }
+  ]
+}

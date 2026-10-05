@@ -1,0 +1,185 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "wasp-94-a-b",
+  "displayName": "WASP-94 A b",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "1.6 Jupiter radii",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-aa5df3",
+          "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S",
+          "label": "Stassun et al. 2017",
+          "checked": "2026-10-05",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "3.95 days",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-aa5df3",
+          "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S",
+          "label": "Stassun et al. 2017",
+          "checked": "2026-10-05",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "0.50 Jupiter masses",
+        "source": {
+          "catalogueId": "doi-10-3847-1538-3881-aa5df3",
+          "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S",
+          "label": "Stassun et al. 2017",
+          "checked": "2026-10-05",
+          "path": "source/measurements.json",
+          "locator": "massSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "climate-model",
+    "controls": [
+      {
+        "id": "thermal",
+        "label": "Thermal glow",
+        "qualification": "Black-body color at its measured dayside temperature, 1,535 K. The disc itself is unresolved.",
+        "thumbnail": "wasp-94-a-b-dataset-thermal.webp",
+        "surface": "wasp-94-a-b-surface-thermal@2x.webp",
+        "poles": "wasp-94-a-b-poles-thermal@2x.webp",
+        "source": {
+          "id": "wasp-94-a-b-thermal-color",
+          "path": "../manifest.json",
+          "url": "https://ui.adsabs.harvard.edu/abs/2023AJ....165..104D/abstract"
+        },
+        "falseColor": false,
+        "notes": "The color of WASP-94 A b's heat: a black body at the dayside brightness temperature measured in secondary eclipse at 3.6 µm (Spitzer IRAC). Its star lights the day side; the night side is not measured. Reflected starlight is not included."
+      },
+      {
+        "id": "climate-model",
+        "label": "Climate model",
+        "qualification": "Simulation · Met Office UM · Mukherjee et al. (2025) · False color",
+        "thumbnail": "wasp-94-a-b-dataset-climate-model.webp",
+        "surface": "wasp-94-a-b-surface-climate-model@2x.webp",
+        "poles": "wasp-94-a-b-poles-climate-model@2x.webp",
+        "source": {
+          "id": "wasp-94-a-b-climate-model-simulation",
+          "path": "../manifest.json",
+          "url": "https://arxiv.org/abs/2505.10910"
+        },
+        "falseColor": true,
+        "noData": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Temperature at 1 millibar",
+          "labels": [
+            "900",
+            "1300",
+            "1700"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                0,
+                0,
+                4
+              ],
+              [
+                87,
+                16,
+                110
+              ],
+              [
+                188,
+                55,
+                84
+              ],
+              [
+                249,
+                142,
+                9
+              ],
+              [
+                252,
+                255,
+                164
+              ]
+            ],
+            "labels": [
+              "900",
+              "1300",
+              "1700"
+            ]
+          },
+          "meta": "K",
+          "sourceUrl": "https://arxiv.org/abs/2505.10910"
+        },
+        "notes": "Temperature at 1 millibar of WASP-94 A b in the Met Office UM simulation of Mukherjee et al. (2025): a model, not a measurement. The run assumes a hydrogen and helium atmosphere with the Sun's share of heavier elements and no clouds, on a planet that turns once for each orbit. The map is one instant, the last state the release holds, read where the pressure is 1 millibar. With JWST, Mukherjee et al. (2025) measured the evening edge 449 ± 83 K hotter than the morning edge; in this model it is about 300 K hotter at this pressure. Gray caps: no released grid samples beyond 89° north or south. The false color runs from 900 to 1,700 K; it is not what an eye would see. With shadows on, the star's light darkens the night half."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [
+    {
+      "id": "wasp-94-a-b-orbits",
+      "titleKey": "systemOrbits",
+      "src": "/scenes/wasp-94-a-b/wasp-94-a-b-system-orbits.svg",
+      "alt": "The orbits of WASP-94 A's planets in this map from above, to scale, with WASP-94 A b highlighted and the direction to Earth down. Each orbit is the one the app draws, from the published period, a/R*, eccentricity and argument of periastron; the star is a marker, not to scale.",
+      "source": {
+        "id": "wasp-94-a-b-observational-measurements",
+        "path": "../manifest.json",
+        "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S"
+      }
+    },
+    {
+      "id": "wasp-94-a-b-transit",
+      "titleKey": "transitLightCurve",
+      "src": "/scenes/wasp-94-a-b/wasp-94-a-b-transit.svg",
+      "alt": "WASP-94 A b crossing its star, as TESS recorded it: 3 sectors (68, 95, 105) of the SPOC pipeline's 2-minute light curves of TIC 92352620, each transit divided by a straight line fitted to the light either side and folded onto the orbit the app draws, then averaged in 18-minute bins. Error bars are each bin's standard error.",
+      "source": {
+        "id": "wasp-94-a-b-tess-sector-68",
+        "path": "../manifest.json",
+        "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2023209231226-s0068-0000000092352620-0262-s_lc.fits"
+      }
+    }
+  ],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Stassun et al. 2017",
+      "href": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+      "credit": "Stassun et al. 2017"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/wasp-94-a-b.json",
+      "credit": "Radius from Stassun et al. 2017 (2017AJ....153..136S), via the NASA Exoplanet Archive; mass from Stassun et al. 2017, the mass the NASA Exoplanet Archive's composite table adopts (2017AJ....153..136S), via the NASA Exoplanet Archive; orbit from Stassun et al. 2017 (2017AJ....153..136S), via the NASA Exoplanet Archive"
+    }
+  }
+}

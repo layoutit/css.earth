@@ -27,7 +27,7 @@ import { gaiaCepheidClass } from '@cssearth/bake/photometry';
 import { CEPHEID_GRAVITIES } from './archives/cepheids.mts';
 import { writeLedger } from './ledger.mts';
 import { adql, csv, SIMBAD_TAP } from './companions.mts';
-import { packageParent, withParent } from './package-parent.mts';
+import { ensureHostSystems, packageParent, withParent } from './package-parent.mts';
 
 const SOLAR_RADIUS_KM = 695700, GM_SUN = 132712440041.93938;
 const GAIA_LICENSE = { license: 'Gaia data are public under the ESA Gaia data policy; the Gaia/DPAC credit is retained', licenseEvidence: ['https://www.cosmos.esa.int/web/gaia-users/credits'] };
@@ -515,6 +515,7 @@ export async function runNewObject(specPath: string, { root = checkoutProjectRoo
     const out = execFileSync(process.execPath, [resolve(import.meta.dirname, 'new-object-cli.mts'), '--hosted', HANDOFF], { cwd: root, stdio: ['ignore', 'pipe', 'inherit'] }).toString('utf8');
     for (const result of JSON.parse(out) as NewObjectResult[]) { results.push(result); if (result.failed) progress(`  ${result.id}: FAILED, not written: ${result.failed}`); }
   }
+  await ensureHostSystems(root, [...(hosted as { spec: { id: string; kind: string }; hostId: string }[]).map(record => ({ id: record.spec.id, host: record.hostId, planet: record.spec.kind === 'planet' })), ...specs.flatMap(spec => spec.boundTo ? [{ id: spec.id, host: spec.boundTo.host, planet: false }] : [])].filter(body => results.some(result => result.id === body.id && !result.failed)), progress);
   const failures = results.filter(result => result.failed);
   if (failures.length) progress(`${failures.length} of ${results.length} bodies failed and were not written: ${failures.map(result => result.id).join(', ')}`);
   return results;

@@ -1,0 +1,144 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "cd-34-14724-b",
+  "parent": "wasp-94-a-system",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "CD-34 14724B",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 995546.7
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/cd-34-14724-b-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "CD-34 14724B",
+      "aliases": [
+        "WASP-94 B"
+      ],
+      "classification": "star",
+      "color": "#fff5f8",
+      "distanceAu": 43692981.5,
+      "description": "CD-34 14724B is a star of 6,050 K, bound to WASP-94 A 3,171 AU away.",
+      "systemName": "WASP-94 system",
+      "order": 5780,
+      "context": {
+        "order": 5777
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        3743855420009231000,
+        -3905640046247194600,
+        -3667934930387447300
+      ],
+      "presentationToReference": [
+        0.5727731573923773,
+        -0.3883170603718777,
+        -0.7219008039854995,
+        -0.5975246183339779,
+        0.4050988783992409,
+        -0.6919965528848475,
+        -0.5611552732137526,
+        -0.8277105528769224,
+        -7.603455654671145e-7
+      ],
+      "orbitUpReference": [
+        0.3883170603718777,
+        -0.4050988783992409,
+        0.8277105528769224
+      ],
+      "metersPerUnit": 3211440.9677419355,
+      "bodyRadiusM": 995546700
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

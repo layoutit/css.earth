@@ -32,6 +32,8 @@ describe('the object tree', () => {
     checkBoundStars(stars, [['companion', 'host']]);
     assert.throws(() => checkBoundStars(stars, [['stray', 'host']]), /src\/objects\/stray\/object\.json: stray is bound to host, so it is inside what host is inside \("host-system"\); its parent is "milky-way"/);
     assert.throws(() => checkBoundStars(stars, [['companion', 'nowhere']]), /companion is bound to nowhere, which is no object of the registry/);
+    // A pair just generated: the companion names the host's system before the systems step has written it and moved the host in.
+    checkBoundStars([...tree, { id: 'new-host', parent: 'milky-way' }, { id: 'new-companion', parent: 'new-host-system' }], [['new-companion', 'new-host']]);
   });
 
   it('reads an object\'s ancestors from the root down and each object\'s children', () => {

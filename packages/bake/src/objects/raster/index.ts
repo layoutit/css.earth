@@ -20,6 +20,8 @@ export * from './latitude-belt-map.ts';
 export * from './lonlat/lonlat-grid.ts';
 export * from './lonlat-slice-table.ts';
 export * from './netcdf/classic-netcdf.ts';
+export * from './netcdf/hdf5-netcdf.ts';
+export * from './netcdf/netcdf-isobar.ts';
 export * from './netcdf/netcdf-lonlat-field.ts';
 export * from './numpy/npy-dictionary-map.ts';
 export { readNpy, type SpinFrameTransfer, spinFrameTransfer, loadSpinFrameTransfer, decodeNpyLonLatGrid, loadNpyLonLatGrid, npyLonLatGridDependencies } from './numpy/npy-lonlat-grid.ts';

@@ -387,7 +387,13 @@ test('the archive draft of a host keeps only its confirmed transiting planets, s
   const text = planets[0]!.text as { card: string; introduction: string; locator: string };
   assert.equal(text.card, 'HD 1 b was found in 2019 by K2 as it crossed its star.');
   assert.match(text.introduction, /^It is one of 3 planets known around HD 1\. Its orbit and size follow One et al\. 2019's fit, the archive's default\.$/u);
-  assert.match(text.locator, /disc_year 2019, disc_facility K2, sy_pnum 3/u);
+  assert.match(text.locator, /disc_year 2019, disc_facility K2, sy_pnum 3;/u);
+  // The archive's sy_pnum counts the whole system. Where it counts another star's planet too (WASP-94 B b beside WASP-94 A b),
+  // the text counts the planets listed under this host, and the locator says both numbers.
+  const paired = await archiveSpec({ ...archive, async text(url: string) { return (await archive.text(url)).replaceAll(',K2,3', ',K2,4'); } }, 'HD 1', { ids: new Set(), names: new Map(), stars: [] });
+  const pairedText = (paired.spec.planets as { text: { introduction: string; locator: string } }[])[0]!.text;
+  assert.match(pairedText.introduction, /^It is one of 3 planets known around HD 1\./u);
+  assert.match(pairedText.locator, /sy_pnum 4, 3 of them with hostname HD 1;/u);
   assert.equal((spec.text as { card: string }).card, '2 planets cross HD 1 as seen from Earth: b, c.');
   assert.equal((spec.text as { introduction: string }).introduction, 'Its radius and temperature follow One et al. 2019.');
   const filled = await archiveSpec({ ...archive, async text(url) { const query = decodeURIComponent(new URL(url).searchParams.get('query') ?? ''); return query.includes('st_teff') ? gapped : archive.text(url); } }, 'HD 1', { ids: new Set(), names: new Map(), stars: [] });

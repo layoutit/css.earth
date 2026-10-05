@@ -1,0 +1,40 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "wasp-94-a-b",
+  "card": {
+    "text": "WASP-94 A b was found in 2014 by SuperWASP as it crossed its star.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-aa5df3",
+        "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+        "label": "Stassun et al. 2017",
+        "checked": "2026-10-05",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname STASSUN_ET_AL__2017): disc_year 2014, disc_facility SuperWASP, sy_pnum 2, 1 of them with hostname WASP-94 A; pl_orbper 3.9502001, pl_radj 1.58, pl_bmassj 0.5"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "It is the only planet known around WASP-94 A. Its orbit and size follow Stassun et al. 2017's fit, the archive's default.",
+    "sources": [
+      {
+        "catalogueId": "doi-10-3847-1538-3881-aa5df3",
+        "url": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+        "label": "Stassun et al. 2017",
+        "checked": "2026-10-05",
+        "locator": "NASA Exoplanet Archive ps table, default parameter set (pl_refname STASSUN_ET_AL__2017): disc_year 2014, disc_facility SuperWASP, sy_pnum 2, 1 of them with hostname WASP-94 A; pl_orbper 3.9502001, pl_radj 1.58, pl_bmassj 0.5"
+      }
+    ]
+  },
+  "datasets": {
+    "thermal": {
+      "title": "Dayside heat",
+      "detail": "From its dayside temperature",
+      "summary": "The color of a black body at the 1,535 K day side measured in eclipse."
+    },
+    "climate-model": {
+      "title": "Met Office UM simulation",
+      "detail": "Published simulation",
+      "summary": "Temperature at 1 millibar in a published model, in false color. One scenario, not a measurement; gray caps lack samples."
+    }
+  }
+}

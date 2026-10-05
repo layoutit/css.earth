@@ -1,0 +1,40 @@
+{
+  "id": "source-wasp-94-a-b-climate-model-simulation",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "WASP-94 A b · wasp 94 a b climate model simulation",
+  "identifiers": [
+    {
+      "type": "pds4-lidvid",
+      "value": "GCM_products/WASP-94Ab_GCM.nc"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://zenodo.org/records/15085825/files/GCM_products.zip?download=1",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/wasp-94-a-b/source/manifest.json",
+      "locator": "/inputs/10"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Mukherjee et al. (2025); Met Office UM simulation",
+      "scope": "The wasp 94 a b climate model simulation input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "CC BY 4.0",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}
