@@ -28,7 +28,7 @@ test('disabled captions respect foreground labels, planet occlusion and overview
 });
 
 test('major moon orbits remain enabled and minor moon orbits are suppressed across planets', async () => {
-  const world = requireRecord(JSON.parse(await readFile(new URL('../../src/objects/sun/prepared/world-context.json', import.meta.url), 'utf8')), 'world context');
+  const world = requireRecord(JSON.parse(await readFile(new URL('../../src/objects/observable-universe/prepared/world-context.json', import.meta.url), 'utf8')), 'world context');
   const bodies = requireArray(world.bodies, 'world bodies').map(value => {
     const body = requireRecord(value, 'world body');
     const orbit = body.orbit === undefined ? undefined : { centerBodyId: requireString(requireRecord(body.orbit, 'orbit').centerBodyId, 'orbit centre') };

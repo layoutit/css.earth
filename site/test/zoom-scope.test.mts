@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
-import preparedContext from '../../src/objects/sun/prepared/world-context.json' with { type: 'json' };
+import preparedContext from '../../src/objects/observable-universe/prepared/world-context.json' with { type: 'json' };
 import { bodyViewAtCamera, zoomFrameDistanceM, zoomScopeAtCamera, viewDistance, type ZoomStep } from '../zoom-scope.mts';
 import { GALAXY_SCALE } from '@cssearth/renderer/labels/universe-label-policy.ts';
 import { presentWorldCamera } from '@cssearth/renderer/navigation/world-camera.ts';

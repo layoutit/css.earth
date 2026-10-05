@@ -13,18 +13,22 @@ import { prepareSceneDistance } from '@cssearth/bake/navigation';
 import { parseSpatialContextCommand, prepareSpatialContext, worldFilesRoot } from '../build/prepare/prepare-spatial-context.ts';
 
 const root = process.cwd();
-const sourcePath = resolve(root, 'src/objects/sun/source/navigation/universe.json');
+const sourcePath = resolve(root, 'src/objects/observable-universe/source/navigation/universe.json');
 const solarGeometryPath = resolve(root, 'src/platform/solar-geometry.mts');
 const contextEntries = (await readCatalog(resolve(import.meta.dirname, '../../src/objects'), prepareSceneDistance)).filter(body => body.context && body.id !== 'sun')
   .sort((a, b) => (a.context!.order ?? Number.MAX_SAFE_INTEGER) - (b.context!.order ?? Number.MAX_SAFE_INTEGER) || a.id.localeCompare(b.id, 'en'));
 
-test('the command takes its paths and refuses unknown options', () => {
-  const generated = parseSpatialContextCommand(['source.json', 'prepared.json'], '/repo');
-  assert.equal(generated.sourcePath, '/repo/source.json');
-  assert.equal(generated.outputPath, '/repo/prepared.json');
+test("the command names no path: the world's source and full context are the root object's, in the objects folder it is given", () => {
+  const generated = parseSpatialContextCommand([], '/repo');
+  assert.equal(generated.sourcePath, '/repo/src/objects/observable-universe/source/navigation/universe.json');
+  assert.equal(generated.outputPath, '/repo/src/objects/observable-universe/prepared/world-context.json');
   assert.equal(generated.solarGeometryPath, '/repo/src/platform/solar-geometry.mts');
+  assert.equal(generated.objectsDirectory, '/repo/src/objects');
+  const fixture = parseSpatialContextCommand(['--objects=fixture/objects'], '/repo');
+  assert.equal(fixture.outputPath, '/repo/fixture/objects/observable-universe/prepared/world-context.json');
+  assert.equal(worldFilesRoot(fixture), '/repo/fixture/objects');
 
-  assert.throws(() => parseSpatialContextCommand(['source.json', 'prepared.json', '--unknown'], '/repo'), /Usage:/);
+  for (const args of [['source.json', 'prepared.json'], ['--unknown'], ['--objects='], ['--objects=a', '--objects=b']]) assert.throws(() => parseSpatialContextCommand(args, '/repo'), /Usage:/);
 });
 
 
@@ -129,7 +133,7 @@ test('all authored bodies retain parent-relative ephemeris orbits in one physica
     const source = JSON.parse(await readFile(sourcePath, 'utf8'));
     // A context written outside an objects folder keeps the world's per-object files beside it, never in a folder above.
     assert.equal(worldFilesRoot({ outputPath }), directory);
-    assert.equal(worldFilesRoot({ outputPath: resolve(root, 'src/objects/sun/prepared/world-context.json') }), resolve(root, 'src/objects'));
+    assert.equal(worldFilesRoot({ outputPath: resolve(root, 'src/objects/observable-universe/prepared/world-context.json') }), resolve(root, 'src/objects'));
     assert.ok(JSON.parse(await readFile(resolve(directory, 'solar-system/prepared/members.json'), 'utf8')).bodies.id.includes('mercury'));
     // Catalogue entries first, then the bodies drawn from their astronomy records around a packaged host.
     assert.deepEqual(result.bodies.filter((body: { unpackaged?: true }) => !body.unpackaged).map((body: { id: string }) => body.id), contextEntries.map(body => body.id));

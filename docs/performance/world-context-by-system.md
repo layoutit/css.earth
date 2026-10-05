@@ -44,8 +44,9 @@ by one rule the bake and the build share ([world-holders.ts](../../packages/obje
   every object with a file from the root of the tree down, and the rows object entries carry. It names no holder. Node
   tools, tests, the build and the deploy check read it; no page does.
 
-The bake computes every body in one full context, `src/objects/sun/prepared/world-context.json`, in the Sun's package: the
-frame is the Sun's and the Sun's scene is framed from it. Node tools read it; no page does. It is the only world file there.
+The bake computes every body in one full context, `src/objects/observable-universe/prepared/world-context.json`, in the root
+object's package beside the summary and the index, from that package's `source/navigation/universe.json`. Node tools and
+tests read it; no page does.
 
 A file is read by every page when a body in it is drawn from anywhere: one that orbits nothing or the Sun and is no
 plain dot (the Solar System's planets, the Milky Way's featured stars, the galaxies and clusters, a featured star of

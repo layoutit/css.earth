@@ -1,5 +1,5 @@
 /** A measurement dataset for an existing standard sphere. No geometry or camera is authored here. */
-import { objectPageCss, parsePreparedObjectRuntime, parsePreparedWorldContext } from '@cssearth/objects';
+import { OBJECT_TREE_ROOT, objectPageCss, parsePreparedObjectRuntime, parsePreparedWorldContext } from '@cssearth/objects';
 
 import { readFile, mkdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
@@ -49,7 +49,7 @@ export async function inspectMeasurementSphere(root:string,target:string){
   const own = requireArray(requireRecord(properties.page).stylesheets).map(path => requireString(path)).filter(path => !shared.includes(path));
   const styles = await Promise.all([...shared, ...own].map(async file => Buffer.from(objectPageCss((await pinned(resolve(root, file))).toString(), id))));
   if (!worldFrame) throw new Error('Standard sphere has no prepared physical frame');
-  const context = parsePreparedWorldContext(await json(resolve(root, 'src/objects/sun/prepared/world-context.json')));
+  const context = parsePreparedWorldContext(await json(resolve(root, 'src/objects', OBJECT_TREE_ROOT, 'prepared/world-context.json')));
   return {id,object,inputs,pinned,recipe,original,datasetId,surface,variant,required,styles,worldFrame,context};
 }
 
