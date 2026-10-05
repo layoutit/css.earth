@@ -65,6 +65,8 @@ export function selectedPreparedVariant(definition: PreparedPresentationDefiniti
 // built once and shared (nothing writes to a resolved map).
 /** What a leaf taking another texture level costs the pacer, in its units: it is painted again. */
 const LEVEL_LEAF_UNITS = 2;
+/** What a mesh leaf being attached costs the pacer, in its units: its layer is inserted. */
+const MESH_LEAF_UNITS = 1;
 const NO_FALLBACKS: Readonly<Record<string, string>> = Object.freeze({});
 const pageFallbacks = new WeakMap<object, Readonly<Record<string, string>>>();
 const fallbacksFor = (fallbacks: Parameters<typeof activeResourceFallbacks>[0]) => {
@@ -306,6 +308,28 @@ export function mountPreparedPresentation(stage: HTMLElement, context: PreparedP
   // whole. A page is split across frames too: the Moon's pages of 96 to 128 leaves, each landing whole, made four frames
   // of 41 to 79 ms after a flight landed there on the iPad (2026-10-04).
   let committedVariant: unknown = null, levelPacer: ReturnType<typeof createSettlePacer> | null = null;
+  // A mesh is attached a slice of leaves a frame. Attached whole, comet 67P's 1,992-face mesh kept Safari's own process
+  // 730 ms inserting the leaves' layers in one commit on an iPad, and its other two meshes 460 and 710 ms (2026-10-05);
+  // the page cannot shorten that insert, only spread it. The slices land while the camera moves too: a dataset that
+  // changes mesh often starts a flight to its view, and the body must not stay empty for it.
+  let meshQueue: { mesh: string; parent: HTMLElement; leaves: HTMLElement[]; done: number } | null = null, meshPacer: ReturnType<typeof createSettlePacer> | null = null;
+  const attachMesh = (name: string) => {
+    const group = detachable.get(meshKey(name));
+    const detached = group?.leaves.filter(leaf => !leaf.parentNode) ?? [];
+    if (!group || !detached.length) { if (meshQueue?.mesh === name) meshQueue = null; return; }
+    meshQueue = { mesh: name, parent: group.parent, leaves: detached, done: 0 };
+    if (!meshPacer) context.own(() => meshPacer?.destroy());
+    meshPacer ??= createSettlePacer(budget => {
+      const queue = meshQueue;
+      if (!queue) return 0;
+      const share = queue.leaves.slice(queue.done, queue.done + Math.max(1, Math.floor(budget / MESH_LEAF_UNITS)));
+      queue.parent.append(...share);
+      queue.done += share.length;
+      if (queue.done >= queue.leaves.length) meshQueue = null;
+      return share.length * MESH_LEAF_UNITS;
+    }, { holdWhile: 'never' });
+    meshPacer.request(true);
+  };
   const pendingLevels = new Map<string, { leaves: readonly HTMLElement[]; done: number; image: string; shown: string | undefined; tile: Extract<CommittedWrite, { kind: "tile" }> | null }>();
   return Object.freeze({ cameraElement, sceneElement, connect, activate, revealGroups,
     ...(definition.surfaceHit ? { surfaceHitTest: bindPreparedSurfaceHit(definition.surfaceHit, nodes[definition.surfaceHit.target], sceneElement, cameraElement, () => stage.dataset.dataset) } : {}),
@@ -341,6 +365,7 @@ export function mountPreparedPresentation(stage: HTMLElement, context: PreparedP
       // If publication is interrupted, the body fails closed instead of
       // rendering one mesh with another mesh's texel addresses.
       for (const mesh of meshes) if (mesh.name !== variant.mesh) mountDetachable(meshKey(mesh.name), false);
+      if (meshQueue && meshQueue.mesh !== variant.mesh) meshQueue = null;
       const hiddenNow = hiddenSubtreeRoots(variant);
       for (const root of hiddenRoots) if (hiddenNow.has(root)) mountDetachable(subtreeKey(root), false);
       for (const [key, binding] of selectedTextures) if (!nextStyles.has(key)) {
@@ -376,7 +401,7 @@ export function mountPreparedPresentation(stage: HTMLElement, context: PreparedP
         levelPacer.request();
       }
       for (const root of hiddenRoots) if (!hiddenNow.has(root)) mountDetachable(subtreeKey(root), true);
-      if (variant.mesh !== undefined) mountDetachable(meshKey(variant.mesh), true);
+      if (variant.mesh !== undefined) attachMesh(variant.mesh);
       selectedTextures = new Map(variant.writes.filter(binding => binding.kind === "texture").map(binding => [styleKey(binding), binding]));
       for (const entry of motion) {
         const duration = entry.plan.timings.find(timing => Object.entries(timing.when).every(([name, value]) => selection[name] === value))?.duration ?? entry.plan.duration;

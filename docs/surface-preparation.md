@@ -134,6 +134,12 @@ back to a dataset of Bennu took 280 ms and 180 ms after its 13-megapixel atlas h
 with it kept; a first visit is unchanged. Six bodies whose two selections exceed that ceiling (Mimas, Phoebe, Tethys,
 Enceladus, Deimos and Phobos) release what a selection leaves, as before.
 
+A dataset that draws on another mesh attaches that mesh a slice of faces a frame, in the tree's order, through the
+settle pacer ([prepared-presentation.ts](../packages/renderer/src/rendering/prepared-presentation.ts)). Attached whole,
+comet 67P's three meshes of 1,000 to 1,992 faces took 487 to 1,153 ms in one frame on an iPad: Safari's own process
+inserting the faces' layers in a single commit, which the page can only spread. Paced, the longest frames of the same
+switches are 76 to 214 ms and the body assembles over frames of 40 to 69 ms.
+
 How the surface is cut into images matters less. Io and Mercury baked as square pages of four faces, 112 pages a
 surface, switched in 158 to 298 ms and 129 to 146 ms at their default views: no gain for Io, and twice Mercury's time
 on its one page. Zoomed in, where only the pages in view are decoded, Io took 75 to 108 ms against 108 to 178 ms.
