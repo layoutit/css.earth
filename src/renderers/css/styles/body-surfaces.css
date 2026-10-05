@@ -230,6 +230,8 @@
   animation-play-state: paused;
 }
 
+/* The radar datasets turn at the solid body's rate. Akatsuki's ultraviolet view is of the cloud tops, so it keeps the
+   cloud deck's 36s rotation above. */
 .object-stage[data-object-id="venus"][data-dataset="radar"] .venus-body,
 .object-stage[data-object-id="venus"][data-dataset="elevation"] .venus-body {
   animation-duration: 96s;
@@ -247,27 +249,6 @@
   backface-visibility: hidden;
   background-repeat: no-repeat;
   pointer-events: none;
-}
-
-.object-stage[data-object-id="venus"][data-dataset="elevation"] .polycss-scene s.venus-polar {
-  background-image:
-    url("/scenes/venus/venus-poles-elevation@2x.webp") !important;
-}
-
-/* Akatsuki's ultraviolet view is of the cloud tops, so it keeps the cloud deck's
-   36s rotation above rather than the 96s solid-body rate the radar datasets use. */
-.object-stage[data-object-id="venus"][data-dataset="ultraviolet"]
-  .polycss-scene
-  s:not(.venus-polar) {
-  background-image:
-    url("/scenes/venus/venus-ultraviolet@2x.webp") !important;
-}
-
-.object-stage[data-object-id="venus"][data-dataset="ultraviolet"]
-  .polycss-scene
-  s.venus-polar {
-  background-image:
-    url("/scenes/venus/venus-poles-ultraviolet@2x.webp") !important;
 }
 
 .object-stage[data-object-id="venus"] .venus-fixed-material {
