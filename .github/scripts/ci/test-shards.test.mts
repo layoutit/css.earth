@@ -21,7 +21,7 @@ function contract(text: string) {
   const workflow = requireRecord(parse(text)), jobs = requireRecord(workflow.jobs);
   const changes = requireRecord(jobs.changes), outputs = requireRecord(changes.outputs);
   assert.equal(outputs.test_matrix, '${{ steps.shards.outputs.test_matrix }}');
-  const step = requireArray(changes.steps).map(requireRecord).find(step => step.id === 'shards');
+  const step = requireArray(changes.steps).map(value => requireRecord(value)).find(step => step.id === 'shards');
   assert.ok(step);
   assert.equal(step.run, 'node .github/scripts/ci/test-shards.mts --matrix');
   assert.deepEqual(step.env, { CI_TEST_PACKAGES: '${{ steps.affected.outputs.test_packages }}', CI_TEST_FILES: '${{ steps.affected.outputs.test_files }}' });

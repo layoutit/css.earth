@@ -64,7 +64,7 @@ test('skipped lanes retain successful jobs without checkout, caches or executabl
   for (const [index, step] of steps.entries()) {
     const mutation = steps.map((value, at) => at === index ? { ...value, if: undefined,
       run: value.run === undefined ? undefined : requireString(value.run).replace(/^if \[ "\$CI_LANE_SKIP" = true \]; then .*exit 0; fi\n/mu, '') } : value);
-    assert.throws(() => assertSkipGuards(mutation), undefined, String(step.name ?? step.uses));
+    assert.throws(() => assertSkipGuards(mutation), Error, String(step.name ?? step.uses));
   }
 });
 
@@ -106,7 +106,7 @@ test('split build preserves every full command and generator dependency, with pa
   assert.deepEqual(packages, full.filter(task => task.id === 'packages'));
   assert.deepEqual(generators, full.filter(task => task.id !== 'packages').map(task => ({ ...task, after: task.after.filter(id => id !== 'packages') })));
   const completed = new Set<string>();
-  await buildCi({ root, mode: 'generators', digest: 'a'.repeat(40), run: async task => {
+  await buildCi({ root, mode: 'generators', run: async task => {
     assert.ok(task.after.every(id => completed.has(id)), task.id);
     completed.add(task.id);
   } });

@@ -97,7 +97,7 @@ test('lockfile closure excludes unrelated importers and includes transitive exte
 });
 test('equal receipts skip builds; mismatches and incomplete restores rebuild exactly the dependent closure', async t => {
   const root = fixture(t), { packages } = await compiledCiCacheKeys({ root, runtime });
-  const calls: CiBuildTask[] = [];
+  const calls: CiBuildTask[] = [], first = () => calls[0]!;
   const run = async (task: CiBuildTask) => {
     calls.push(task);
     for (const output of task.outputs ?? []) {
@@ -108,21 +108,21 @@ test('equal receipts skip builds; mismatches and incomplete restores rebuild exa
   };
   await buildCi({ root, mode: 'packages', packages, run });
   assert.deepEqual(calls[0]!.args, ['-r', '--filter', 'a', '--filter', 'b', '--filter', 'c', '--filter', 'd', 'build']);
-  calls.length = 0;
+  calls.splice(0);
   assert.equal((await buildCi({ root, mode: 'packages', packages, run }))[0]!.cached, true);
   assert.deepEqual(calls, []);
   const receiptFile = resolve(root, 'packages/a/dist/.ci-build-files.json');
   const original = readFileSync(receiptFile, 'utf8'), receipt = JSON.parse(original);
   receipt.digest = 'wrong'; writeFileSync(receiptFile, JSON.stringify(receipt));
   await buildCi({ root, mode: 'packages', packages, run });
-  assert.deepEqual(calls[0]!.args, ['-r', '--filter', 'a', '--filter', 'b', '--filter', 'c', 'build']);
-  calls.length = 0;
+  assert.deepEqual(first().args, ['-r', '--filter', 'a', '--filter', 'b', '--filter', 'c', 'build']);
+  calls.splice(0);
   put(root, 'packages/a/dist/extra.js', 'stale');
   assert.equal(compiledOutputsValid(root, { path: 'packages/a/dist', required: ['index.js'] }, packages[0]!.digest), false);
   rmSync(resolve(root, 'packages/a/dist/extra.js'));
   rmSync(resolve(root, 'packages/a/dist/index.d.ts'));
   await buildCi({ root, mode: 'packages', packages, run });
-  assert.deepEqual(calls[0]!.args, ['-r', '--filter', 'a', '--filter', 'b', '--filter', 'c', 'build']);
+  assert.deepEqual(first().args, ['-r', '--filter', 'a', '--filter', 'b', '--filter', 'c', 'build']);
   assert.deepEqual(packageRebuildClosure(packages, ['a']), ['a', 'b', 'c']);
 });
 
@@ -161,6 +161,7 @@ test('all package consumers restore v3; exactly one lane saves; nebula uses rece
 });
 
 test('source mutations remove closure, root input and package isolation and each turns a regression red', { skip: Boolean(process.env.CI_CACHE_TEST_MODULES) }, t => {
+  mkdirSync(resolve(import.meta.dirname, '../../../output'), { recursive: true });
   const directory = mkdtempSync(resolve(import.meta.dirname, '../../../output/ci-cache-mutants-'));
   t.after(() => rmSync(directory, { recursive: true, force: true }));
   const cacheSource = readFileSync(resolve(import.meta.dirname, 'ci-cache-key.mts'), 'utf8');
@@ -174,7 +175,7 @@ test('source mutations remove closure, root input and package isolation and each
     assert.ok(source.includes(from!), label);
     writeFileSync(resolve(directory, 'ci-cache-key.mts'), owner === 'cache' ? source.replace(from!, to!) : cacheSource);
     writeFileSync(resolve(directory, 'build-ci.mts'), owner === 'build' ? source.replace(from!, to!) : buildSource);
-    const childEnvironment = { ...process.env, CI_CACHE_TEST_MODULES: directory };
+    const childEnvironment: NodeJS.ProcessEnv = { ...process.env, CI_CACHE_TEST_MODULES: directory };
     delete childEnvironment.NODE_TEST_CONTEXT;
     const result = spawnSync(process.execPath, ['--test', `--test-name-pattern=${pattern}`, resolve(import.meta.dirname, 'compiled-packages.test.mts')],
       { encoding: 'utf8', env: childEnvironment });

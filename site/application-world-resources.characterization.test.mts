@@ -87,7 +87,7 @@ function isolatedTest(name: string, run: () => Promise<void>, phone = false) {
     if (process.env.RESOURCE_CASE === name) { await run(); return; }
     const env: NodeJS.ProcessEnv = { ...process.env, RESOURCE_CASE: name, RESOURCE_PHONE: String(phone) };
     delete env.NODE_TEST_CONTEXT; // Start an independent runner, not an IPC child of this one.
-    const child = spawnSync(process.execPath, [...process.execArgv, '--import', pathToFileURL(join(hookDirectory, 'register.mjs')).href, '--test', '--test-name-pattern', name, fileURLToPath(import.meta.url)],
+    const child = spawnSync(process.execPath, [...process.execArgv.filter(argument => !argument.startsWith('--test-shard')), '--import', pathToFileURL(join(hookDirectory, 'register.mjs')).href, '--test', '--test-name-pattern', name, fileURLToPath(import.meta.url)],
       { encoding: 'utf8', timeout: 30000, env });
     assert.equal(child.status, 0, child.stdout + child.stderr);
     assert.match(child.stdout, /# pass 1(?:\n|\r)/u, 'the isolated case must actually run');
