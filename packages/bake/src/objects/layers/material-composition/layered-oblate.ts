@@ -43,7 +43,7 @@ import { createProjectiveSurfaceRasterPresentation, fitTextureGeometry, fitProje
 import { optimizePreparedQ75Webp, PREPARED_Q75_WEBP_ENCODING } from '../../../delivery/index.ts';
 import { verifyObservationSources } from '../observed-surfaces/index.ts';
 import { ellipsoidPoint, planetographicRowsToMeshLatitude, intersectViewRayWithEllipsoid, prepareProjectedEllipsoidSilhouetteCoverage, prepareObjectViewDirection as prepareViewDirection, prepareObjectSpaceDirection,  dotVector, subtractVector, rotateX, rotateY, rotateZ } from '../../geometry/index.ts';
-import { CHANNEL_NAMES, floodDiscMean, loadLimbLaw, limbFactors, limbOverlay, meanObservedColor, outsideSilhouette, scatteringAngles, type Channels } from '../../../photometry/index.ts';
+import { CHANNEL_NAMES, floodDiscMean, loadLimbLaw, limbFactors, limbOverlay, meanObservedColor, scatteringAngles, type Channels } from '../../../photometry/index.ts';
 import { displayBandRatios, keepLuminance, latitudeWeightedLuminance, loadWholeDiscColor, tieBandRatios } from '../../raster/index.ts';
 import type { BandRatioPolicy } from '../../raster/index.ts';
 
@@ -1073,7 +1073,22 @@ function prepareFixedMaterialPlane({
           down[axis] * sampledScreenY * materialSampleScale);
       let hit = intersectViewRayWithEllipsoidSurface(materialOrigin, view);
       // A sample that misses the ellipsoid at content scale lies past the silhouette, where the overlay may only darken.
-      const outsideGlobe = !hit;
+      // A texel the silhouette crosses keeps its color by the share of it that lies inside, so the dark outline stays one
+      // unbroken line when the frame is drawn larger than it was prepared.
+      const silhouetteRadius = Math.hypot(sampledScreenX / radiusX, sampledScreenY / radiusY) * materialSampleScale;
+      let colorKept = hit ? 1 : 0;
+      if (Math.abs(silhouetteRadius - 1) < 6 * materialSampleScale / outputSize) {
+        const samples = PLANET_ORBIT_MATERIAL_SILHOUETTE_SUPERSAMPLING;
+        let inside = 0;
+        for (let sampleRow = 0; sampleRow < samples; sampleRow += 1) {
+          for (let sampleColumn = 0; sampleColumn < samples; sampleColumn += 1) {
+            const x = ((column + (sampleColumn + 0.5) / samples) / outputSize * 2 - 1) * radiusX * materialSampleScale;
+            const y = ((row + (sampleRow + 0.5) / samples) / outputSize * 2 - 1) * radiusY * materialSampleScale;
+            if (intersectViewRayWithEllipsoidSurface(mapVector3((axis) => right[axis] * x + down[axis] * y), view)) inside += 1;
+          }
+        }
+        colorKept = inside / (samples * samples);
+      }
       if (!hit) {
         let lowerScale = 1;
         let upperScale = materialSampleScale;
@@ -1143,7 +1158,7 @@ function prepareFixedMaterialPlane({
       }
       if (!cutawayMaterialRemoved) {
         const overlay = globeLimbOverlay(hit.normal, objectLight, view, 1 / outputSize, directTransmission);
-        writeLimbOverlay(output, outputOffset, outsideGlobe ? outsideSilhouette(overlay) : overlay);
+        writeLimbOverlay(output, outputOffset, [overlay[0] * colorKept, overlay[1] * colorKept, overlay[2] * colorKept, overlay[3]]);
       }
       const surfaceDistance = dotVector(
         subtractVector(coverageHit.position, coverageOrigin),
