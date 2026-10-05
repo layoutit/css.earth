@@ -1,7 +1,7 @@
 import type { SceneFactory, MountOptions } from './browser/browser-types.mts';
 import type { ObjectSceneLifecycle } from '@cssearth/renderer/runtime/object-scene.ts';
 import type { ObjectPreparationView } from '@cssearth/renderer/runtime/prepared-object-navigation.ts';
-import type { WorldHandoff } from './prepared-world-navigation.mts';
+import type { WorldHandoff } from './navigation/navigation-types.mts';
 import type { prepareArrivalBillboard } from './arrival-billboard.mts';
 import { createPreparedSceneOwnership } from './prepared-scene-ownership.mts';
 
