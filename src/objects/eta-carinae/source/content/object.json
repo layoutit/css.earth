@@ -8,11 +8,11 @@
       {
         "id": "radius",
         "label": "Radius",
-        "value": "1032 solar radii",
+        "value": "1301 solar radii",
         "source": {
-          "catalogueId": "arxiv-1006-4816",
-          "url": "https://arxiv.org/abs/1006.4816",
-          "label": "Groh et al. (2010)",
+          "catalogueId": "arxiv-astro-ph-0609715",
+          "url": "https://arxiv.org/abs/astro-ph/0609715",
+          "label": "Weigelt (2006)",
           "checked": "2026-10-05",
           "path": "source/measurements.json",
           "locator": "radiusKm; radiusSource"
@@ -41,7 +41,7 @@
       {
         "id": "color",
         "label": "Color",
-        "qualification": "Color of a blackbody at the star's temperature. The disc itself is unresolved.",
+        "qualification": "Color of a blackbody at the star's temperature. The disc itself is unresolved; darkening toward the edge from a published law.",
         "thumbnail": "eta-carinae-dataset-color.webp",
         "surface": "eta-carinae-surface-color@2x.webp",
         "poles": "eta-carinae-poles-color@2x.webp",
@@ -51,7 +51,7 @@
           "url": "https://arxiv.org/abs/1204.1963"
         },
         "falseColor": false,
-        "notes": "The color of a blackbody at the star's published temperature. No limb darkening is drawn: The light comes from an opaque wind many times larger than the star under it, not from a surface a limb-darkening law describes.. The spin axis's direction on the sky is a display convention."
+        "notes": "The color of a blackbody at the star's published temperature. The wind's measured brightness profile is drawn from its record beside the star (source/photometry, new-object --star-limb).. The spin axis's direction on the sky is a display convention. The darkening toward the edge is the power law I(mu) = mu^6.05 whose brightness is half the centre's at the diameter Weigelt et al. (2007), arXiv:astro-ph/0609715 measured for it, 2.33 mas, on a disc that ends at their tenth-brightness diameter, 5.15 mas (VLTI/AMBER K-band continuum at 2.174 um; not a visible band)."
       }
     ]
   },
@@ -75,7 +75,7 @@
     },
     "physical": {
       "path": "../../../../../packages/astronomy/data/bodies/eta-carinae.json",
-      "credit": "Groh et al. radius; Gaia DR3 position; cited distance; no measured rotation axis (display convention)"
+      "credit": "Weigelt et al. radius; Gaia DR3 position; cited distance; no measured rotation axis (display convention)"
     }
   }
 }

@@ -5,12 +5,12 @@
  "physical": {
   "name": "Eta Carinae",
   "horizonsCode": null,
-  "meanRadiusKm": 717962400,
+  "meanRadiusKm": 905105700,
   "gravitationalParameterKm3PerS2": 0,
   "parent": null,
   "effectiveTemperatureK": 9400
  },
- "physicalNotes": "Radius 1032 solar radii from Groh et al. (2010), arXiv:1006.4816, Sect. 4: most of the star's K-band light comes from a region with a 50% encircled-energy radius of 4.8 AU, measured with VLTI/AMBER by Weigelt et al. (2007); 4.8 AU is 1,032 solar radii (https://arxiv.org/abs/1006.4816): 717,962,400 km at 695,700 km per solar radius. No mass is measured, so GM is 0, the records' unpublished value. Temperature 9400 K from Groh et al. (2012), arXiv:1204.1963, Table 2: the primary's effective temperature where its wind turns opaque (Rosseland optical depth 2/3) (https://arxiv.org/abs/1204.1963). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "physicalNotes": "Radius 1301 solar radii from Weigelt et al. (2007), arXiv:astro-ph/0609715, Table 2: the wind's K-band continuum light (2.174 µm, VLTI/AMBER) falls to a tenth of its central brightness at a diameter of 5.15 mas (±4%); half of that at 2,350 pc is 6.05 AU, 1,301 solar radii (https://arxiv.org/abs/astro-ph/0609715): 905,105,700 km at 695,700 km per solar radius. No mass is measured, so GM is 0, the records' unpublished value. Temperature 9400 K from Groh et al. (2012), arXiv:1204.1963, Table 2: the primary's effective temperature where its wind turns opaque (Rosseland optical depth 2/3) (https://arxiv.org/abs/1204.1963). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
  "star": {
   "rightAscensionDegrees": 161.2647407537247,
   "declinationDegrees": -59.68445877770452,

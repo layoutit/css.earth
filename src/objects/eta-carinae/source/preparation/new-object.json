@@ -9,6 +9,7 @@
   ],
   "parent": "homunculus-nebula",
   "featured": true,
+  "order": 5777,
   "target": "eta Car",
   "gaia": "5350358584482202880",
   "paper": {
@@ -16,9 +17,9 @@
     "credit": "Groh et al. (2012), arXiv:1204.1963"
   },
   "radius": {
-    "value": 1032,
-    "source": "Groh et al. (2010), arXiv:1006.4816, Sect. 4: most of the star's K-band light comes from a region with a 50% encircled-energy radius of 4.8 AU, measured with VLTI/AMBER by Weigelt et al. (2007); 4.8 AU is 1,032 solar radii",
-    "url": "https://arxiv.org/abs/1006.4816"
+    "value": 1301,
+    "source": "Weigelt et al. (2007), arXiv:astro-ph/0609715, Table 2: the wind's K-band continuum light (2.174 µm, VLTI/AMBER) falls to a tenth of its central brightness at a diameter of 5.15 mas (±4%); half of that at 2,350 pc is 6.05 AU, 1,301 solar radii",
+    "url": "https://arxiv.org/abs/astro-ph/0609715"
   },
   "mass": "unmeasured",
   "temperature": {
@@ -26,27 +27,27 @@
     "source": "Groh et al. (2012), arXiv:1204.1963, Table 2: the primary's effective temperature where its wind turns opaque (Rosseland optical depth 2/3)",
     "url": "https://arxiv.org/abs/1204.1963"
   },
+  "radialVelocity": {
+    "value": -25,
+    "source": "SIMBAD's radial velocity for Gaia DR3 5350358584482202880 (quality E), from 1953GCRV..C......0W; Gaia DR3 measures none",
+    "url": "https://ui.adsabs.harvard.edu/abs/1953GCRV..C......0W/abstract",
+    "uncertainty": 2
+  },
   "distance": {
     "value": 2350,
     "source": "Smith (2006), ApJ 644, 1151: 2350 ± 50 pc from the Homunculus's shape and expansion, the distance its nebula's page stands at",
     "url": "https://arxiv.org/abs/astro-ph/0602464"
   },
   "limb": {
-    "none": "The light comes from an opaque wind many times larger than the star under it, not from a surface a limb-darkening law describes."
+    "none": "No model atmosphere describes the light of an opaque wind. The wind's measured brightness profile is drawn from its record beside the star (source/photometry, new-object --star-limb)."
   },
   "planets": [],
   "companions": [],
   "notes": [
     "What is drawn is the star's wind, not its surface. The star under the wind is modelled at 60 solar radii and 35,200 K, and models from 60 to 480 solar radii fit its spectrum equally (Groh et al. 2012, Table 2 and Sect. 3, https://arxiv.org/abs/1204.1963).",
     "The near-infrared light is not round: VLTI measurements find it elongated, which fast rotation or the companion's cavity in the wind both explain (Groh et al. 2010, https://arxiv.org/abs/1006.4816). It is drawn as a sphere.",
+    "Half of the wind's near-infrared light comes from outside a diameter of 4.23 mas, in a faint halo that reaches past the sphere drawn (Weigelt et al. 2007, Table 2, https://arxiv.org/abs/astro-ph/0609715). The halo is not drawn.",
     "It is a binary with a period of 5.54 years. The companion is not seen directly, and the orbit's tilt and direction come from models of the colliding winds (Madura et al. 2012, as adopted by Groh et al. 2012, Table 2: inclination 138 degrees, longitude of periastron 260 degrees). The companion is not drawn.",
     "The star's mass is not measured."
-  ],
-  "radialVelocity": {
-    "value": -25,
-    "uncertainty": 2,
-    "source": "SIMBAD's radial velocity for Gaia DR3 5350358584482202880 (quality E), from 1953GCRV..C......0W; Gaia DR3 measures none",
-    "url": "https://ui.adsabs.harvard.edu/abs/1953GCRV..C......0W/abstract"
-  },
-  "order": 5777
+  ]
 }

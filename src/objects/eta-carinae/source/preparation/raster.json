@@ -26,7 +26,12 @@
       "falseColor": false,
       "science": {
         "kind": "stellar-photometric-color",
-        "qualification": "Uniform photosphere color from a blackbody at the star's published temperature. No limb darkening is drawn: The light comes from an opaque wind many times larger than the star under it, not from a surface a limb-darkening law describes.. The disc is unresolved: no map or absolute brightness is implied. Self-luminous, so no lighting."
+        "qualification": "Photosphere color from a blackbody at the star's published temperature. The wind's measured brightness profile is drawn from its record beside the star (source/photometry, new-object --star-limb).. The disc is unresolved: no map or absolute brightness is implied. Self-luminous, so no lighting. The disc is dimmed toward the limb by the power law I(mu) = mu^6.05 whose brightness is half the centre's at the diameter Weigelt et al. (2007), arXiv:astro-ph/0609715 measured for it, 2.33 mas, on a disc that ends at their tenth-brightness diameter, 5.15 mas (VLTI/AMBER K-band continuum at 2.174 um; not a visible band).",
+        "limbDarkening": {
+          "law": "power",
+          "published": true,
+          "path": "photometry/weigelt-2007-limb-darkening.json"
+        }
       }
     }
   ],
@@ -48,7 +53,7 @@
       },
       "limbMaterial": {
         "logicalSize": 496,
-        "composition": "transparent: the sphere's own silhouette is the limb; the light just outside it is on the off-limb plate",
+        "composition": "black alpha darkens the photosphere according to the selected limb-darkening law; transparent outside the silhouette",
         "surfaceReplacement": false,
         "runtimeAlphaProcessing": false
       },

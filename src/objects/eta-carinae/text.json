@@ -14,14 +14,14 @@
     ]
   },
   "introduction": {
-    "text": "Half of its near-infrared light comes from within 4.8 au, about a thousand Suns across; its wind turns opaque at 9,400 K. An unseen companion circles it every 5.54 years.",
+    "text": "No surface is seen, only a wind that turns opaque at 9,400 K; its near-infrared glow fades to a tenth 6 au from the centre. An unseen companion circles it every 5.54 years.",
     "sources": [
       {
-        "catalogueId": "arxiv-1006-4816",
-        "url": "https://arxiv.org/abs/1006.4816",
-        "label": "Groh et al. (2010), arXiv:1006.4816",
+        "catalogueId": "arxiv-astro-ph-0609715",
+        "url": "https://arxiv.org/abs/astro-ph/0609715",
+        "label": "Weigelt et al. (2007), arXiv:astro-ph/0609715",
         "checked": "2026-10-05",
-        "locator": "Sect. 4: most of the K-band light comes from a region with a 50% encircled-energy radius of 4.8 AU (Weigelt et al. 2007)"
+        "locator": "Table 2, continuum at 2.174 µm: FWHM diameter 2.33 mas, diameter at 10% of the peak intensity 5.15 mas, 50% encircled-energy diameter 4.23 mas"
       },
       {
         "catalogueId": "arxiv-1204-1963",

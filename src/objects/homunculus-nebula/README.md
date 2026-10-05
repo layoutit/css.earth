@@ -14,4 +14,4 @@ The card's facts cite their papers in [source/content/object.json](source/conten
 ## Known problems
 
 - The framing radius is a presentation value, not a measured extent: the lobes reach about 11 arcsec from the star along their pole.
-- Eta Carinae itself has no page yet; the nebula stands at the star's place.
+- The nebula stands at the star's place. [Eta Carinae](../eta-carinae/README.md) has its own page: a zoom in on the nebula goes on into it, and its page draws the nebula's surface around the star.

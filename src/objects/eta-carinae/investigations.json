@@ -31,6 +31,15 @@
       "evidence": [
         "https://arxiv.org/abs/1204.1963"
       ]
+    },
+    {
+      "id": "limb-darkening",
+      "subject": "Limb darkening",
+      "status": "included",
+      "finding": "The disc is dimmed toward the limb by the power law I(mu) = mu^6.05 whose brightness is half the centre's at the diameter Weigelt et al. (2007), arXiv:astro-ph/0609715 measured for it, 2.33 mas, on a disc that ends at their tenth-brightness diameter, 5.15 mas (VLTI/AMBER K-band continuum at 2.174 um; not a visible band).",
+      "evidence": [
+        "https://arxiv.org/abs/astro-ph/0609715"
+      ]
     }
   ]
 }
