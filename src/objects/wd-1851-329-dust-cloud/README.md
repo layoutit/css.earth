@@ -13,7 +13,7 @@
 ## Processing
 
 1. [`positions.mts wd-1851-329-dust-cloud 10.5 1310 0.8 800`](../../../packages/bake/authoring/dust-shell/positions.mts) draws each dot's distance from the star so that the share of dots inside a radius grows as r^3.8 between the two radii: the paper's density, r^0.8, times the r² of each thin shell's volume. Half of the 800 dots lie beyond 1,073 au and the nearest is 159 au from the star.
-2. Each dot's direction is uniform over the sphere, because the paper's model is one-dimensional.
+2. Each dot's direction is uniform over the sphere, because the paper's model is one-dimensional. The paper itself says the cloud is likely disk-like.
 3. Distances and directions come from a seeded generator (mulberry32, seed 20250401). Nothing else is authored.
 4. It writes [`positions.csv.gz`](source/dots/positions.csv.gz), kilometres from the star along the ICRF axes, and `packages/bake/cli/prepare-body-points.mts` writes the point bank at the world's epoch, JD 2461286.5 TT.
 
@@ -27,7 +27,7 @@ A headless capture of this version: the Ring Nebula's page after four wheel step
 
 - **The dots overstate the cloud enormously.** Its optical depth at 0.55 µm is 1.3 × 10⁻⁸ and its dust weighs 1.86 × 10⁻⁶ Earth masses (Table 4). Webb sees it as extra light beyond about 5 µm and as extended emission in its 7.7, 10 and 11.3 µm images; an eye would see nothing. The 800 dots are a display choice.
 - **No dot is a measured grain.** Only the shell's inner radius, outer radius and density law are the paper's.
-- **The dots are round; the cloud may be a disk.** The paper's model is one-dimensional, its title calls the cloud a dusty disk, and it does not exclude one.
+- **The dots are round; the cloud is probably a disk.** The paper says the cloud is likely disk-like and models it in one dimension only because it has no direct information about its shape. The round ball of dots is that simplification, not a measured shape.
 - **From inside the cloud almost nothing shows.** The density rises outward, so no dot lies within 159 au of the star, and a camera nearer than that sees only the sparse dots of the far side.
 - The dots are `#9a9a9a`, the neutral gray; no grain color is measured. Against black they look like background stars in a still image.
 - The dots do not move.

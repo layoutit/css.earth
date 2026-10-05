@@ -21,7 +21,7 @@
         "limitations": [
           "No grain has a measured position. Only the shell's inner and outer radius and its density law are the paper's; each dot's place is drawn from a seeded generator.",
           "The cloud is invisible in visible light: its optical depth at 0.55 µm is 1.3e-8. The 800 dots are a display choice that makes visible a cloud Webb sees as extra light beyond about 5 µm and as extended emission in its 7.7, 10 and 11.3 µm images.",
-          "The paper's model is one-dimensional, so the dots are spread evenly over the sphere. The paper does not exclude a disk."
+          "The paper's model is one-dimensional, so the dots are spread evenly over the sphere. The paper says the cloud is likely disk-like and has no direct information about its shape, so the round ball is a simplification, not a measured shape."
         ]
       }
     ]
