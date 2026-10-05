@@ -56,6 +56,20 @@ export async function loadHolder(id: string, read: (id: string) => Promise<unkno
   return holder === undefined ? null : loadObject(holder, read);
 }
 
+/** The body the walls of `id` surround, as its entry names it (`inner`), once the page has read it (`loadInner`). */
+const inner = new Map<string, string>();
+export const knownInner = (id: string): NavigableObject | undefined => { const body = inner.get(id); return body === undefined ? undefined : knownObject(body); };
+/** Loads the body the walls of `id` surround, when its entry names one: a zoom in on `id` hands the view to it
+ * (overview-selection.mts). Null for an object that names none. */
+export async function loadInner(id: string, read: (id: string) => Promise<unknown | null> = fetchEntry): Promise<NavigableObject | null> {
+  const entry = await read(id), named: unknown = entry && typeof entry === 'object' && 'inner' in entry ? entry.inner : undefined;
+  if (named === undefined) return null;
+  if (typeof named !== 'string') throw new TypeError(`/objects/${id}/entry.json: inner must be an object id; got ${JSON.stringify(named)}.`);
+  const body = await loadObject(named, read);
+  if (body) inner.set(id, named);
+  return body;
+}
+
 /** A prepared catalogue entry as the directory serves it (`@cssearth/objects` catalogueObject), bound to the shell's scene loader. */
 export function objectFromEntry(value: unknown): NavigableObject {
   return catalogueObject(value, descriptor => async (signal?: AbortSignal) => {

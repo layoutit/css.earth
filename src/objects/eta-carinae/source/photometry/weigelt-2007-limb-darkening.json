@@ -1,0 +1,14 @@
+{
+  "schema": "cssearth-published-limb-darkening@1",
+  "objectId": "eta-carinae",
+  "law": "power",
+  "source": "Weigelt et al. (2007), arXiv:astro-ph/0609715, Table 2, the diameters of the wind's light at 2.174 um from the VLTI/AMBER visibilities (https://arxiv.org/abs/astro-ph/0609715)",
+  "band": "VLTI/AMBER K-band continuum at 2.174 um; not a visible band",
+  "alpha": {
+    "value": 6.05,
+    "uncertainty": 0.8,
+    "cell": "continuum 2.1740 | d_FWHM 2.33 | d_10% 5.15 | d_50%EED 4.23 [mas]; errors are ±4% for the diameters in the continuum"
+  },
+  "derived": "whose brightness is half the centre's at the diameter Weigelt et al. (2007), arXiv:astro-ph/0609715 measured for it, 2.33 mas, on a disc that ends at their tenth-brightness diameter, 5.15 mas",
+  "note": "The paper prints no exponent. I(mu)/I(1) = mu^alpha with mu = sqrt(1 - (r/R)^2): the disc's edge R is half the printed tenth-brightness diameter, and alpha = ln(0.5) / ln(sqrt(1 - (2.33/5.15)^2)) = 6.05 puts half brightness at the printed FWHM diameter. The uncertainty carries the ±4% of each diameter (alpha 5.3 to 6.9). The law is dark at the edge where the paper's profile is a tenth of the centre, and reaches a tenth at 0.73 of the radius. The wind's faint halo beyond, which holds half of the light outside 4.23 mas, is not drawn."
+}

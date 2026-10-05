@@ -1,0 +1,51 @@
+{
+  "id": "arxiv-1204-1963",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Groh et al. (2012): On the influence of the companion star in Eta Carinae: 2D radiative transfer modeling of the ultraviolet and optical spectra",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1204.1963"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1111/j.1365-2966.2012.20984.x"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/1204.1963",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1111/j.1365-2966.2012.20984.x",
+      "label": "Journal version"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/1204.1963",
+      "checkedOn": "2026-10-05",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Groh et al. (2012)",
+      "scope": "citation",
+      "evidence": "https://arxiv.org/abs/1204.1963"
+    }
+  ],
+  "creators": [
+    "Jose H. Groh",
+    "D. John Hillier",
+    "Thomas I. Madura",
+    "et al."
+  ],
+  "publicationDate": "2012"
+}

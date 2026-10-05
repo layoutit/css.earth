@@ -425,7 +425,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
               // picture lies on walls (a nebula's central star) stands inside those walls (`selectionHolders`).
               const insideGalaxy = catalogBanks.imageBankContaining(selected.positionM);
               catalogBanks.publishImages(world, viewport, volumeOpacity, detailedFocus?.objectId, insideGalaxy === undefined || insideGalaxy === detailedFocus?.objectId ? undefined
-                : { objectId: insideGalaxy, opacity: logarithmicFade(eyeDistanceM(world.pose, selected.positionM), plan.stars.fadeStartDistanceM, plan.stars.fullDistanceM) }, selectionHolders);
+                : { objectId: insideGalaxy, opacity: logarithmicFade(eyeDistanceM(world.pose, selected.positionM), plan.stars.fadeStartDistanceM, plan.stars.fullDistanceM) }, selectionHolders, selected.positionM as readonly [number, number, number]);
               // A bank of plain-dot stars dims like every marker outside a highlighted category and like every body outside
               // the focus star's system (the frame's `otherSystems`).
               catalogBanks.publishPoints(world, viewport, companion ?? undefined, selectedSystem,
