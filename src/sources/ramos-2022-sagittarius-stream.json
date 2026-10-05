@@ -1,0 +1,57 @@
+{
+  "id": "ramos-2022-sagittarius-stream",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "The Sagittarius stream in Gaia Early Data Release 3 and the origin of the bifurcations",
+  "identifiers": [
+    {
+      "type": "ads",
+      "value": "2022A&A...666A..64R"
+    },
+    {
+      "type": "CDS/VizieR",
+      "value": "J/A+A/666/A64"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://ui.adsabs.harvard.edu/abs/2022A%26A...666A..64R",
+      "label": "2022A&A...666A..64R"
+    },
+    {
+      "role": "archive",
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/666/A64",
+      "label": "CDS J/A+A/666/A64"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/666/A64/ReadMe",
+      "checkedOn": "2026-10-04",
+      "locator": "tablec1.dat: 773,612 stars with a probability of belonging to the stream (ProbSGR); 8,060 rows carry a photometric distance (DistWGBPRP, given for RR Lyrae only), 2,553 of them above zero with ProbSGR above 0.9. One in four of those is drawn."
+    }
+  ],
+  "creators": [
+    "P. Ramos",
+    "T. Antoja",
+    "Z. Yuan",
+    "A. Arentsen",
+    "P.-A. Oria",
+    "B. Famaey",
+    "R. Ibata",
+    "C. Mateu",
+    "J. A. Carballo-Bello"
+  ],
+  "publisher": "A&A 666, A64",
+  "publicationDate": "2022",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Cite Ramos et al. (2022), A&A 666, A64.",
+      "scope": "The Sagittarius stream",
+      "evidence": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/666/A64/ReadMe"
+    }
+  ]
+}

@@ -13,7 +13,7 @@
  * along their sight lines through the disc's published thickness. Right ascension and declination may
  * also be sexagesimal columns (`raH`, `raM`, `raS`, `decSign`, `decD`, `decM`, `decS`).
  *
- * `frame.placement: 'spheroid'` draws each ICRS row's depth from a published spheroid's density along its sight line: a Sérsic fit, or a round system's projected power laws (`frame.spheroid.projectedPowerLaw`).
+ * `frame.placement: 'spheroid'` draws each ICRS row's depth from a published spheroid's density along its sight line: a Sérsic fit, or a round system's projected power laws (`frame.spheroid.projectedPowerLaw`). `frame.seed` names another bank's id to draw with, so two banks of one table place each row at the same depth.
  * With `frame.around` (an object id and a basis) the bank is written around that object's world origin in parsecs
  * (`frame.unit: 'pc'`, to 1e-4 pc) instead of around the Sun in kpc: a cluster a few parsecs across, 8 kpc away, whose
  * stars would otherwise fall on a 0.1 pc grid. The spheroid's centre must be that origin.
@@ -40,7 +40,7 @@ import { parseCieTable, linearToSrgb } from '@cssearth/bake/objects/color';
 import { spectrumLinearSrgb } from '@cssearth/bake/objects/stellar';
 import { readCie1931ColorMatching } from '@cssearth/bake/objects/sources';
 import { GAIA_BP_RP_DISPLAY_DOMAIN, gaiaBpRpDisplayColor } from '@cssearth/bake/nebula';
-import { type CatalogueSizeBy, checkCatalogueSizeBy, checkCatalogueToneBy, parseCatalogueSpheroid, placeGroupMembers, placeMeasuredRows, placeSpheroidRows, recipePublished, toneCataloguePalette, writeCatalogueBank } from '@cssearth/bake/volume/node';
+import { type CatalogueSizeBy, checkCatalogueSizeBy, checkCatalogueToneBy, parseCatalogueSpheroid, placeGroupMembers, placeMeasuredRows, placeSpheroidRows, recipePublished, spheroidSeed, toneCataloguePalette, writeCatalogueBank } from '@cssearth/bake/volume/node';
 
 const [objectDirectoryArgument, id] = process.argv.slice(2);
 if (!objectDirectoryArgument || !id || !/^[a-z][a-z0-9-]*$/u.test(id)) throw new TypeError('Usage: prepare-catalogue-points.mts <object-directory> <id>');
@@ -424,7 +424,7 @@ if (spheroidPlacement) {
     }
     aroundOriginM = origin as number[];
   }
-  const placed = placeSpheroidRows({ sky: converted.sky!, spheroid: parseCatalogueSpheroid((recipe.frame as { spheroid?: unknown }).spheroid, at('frame.spheroid')), id,
+  const placed = placeSpheroidRows({ sky: converted.sky!, spheroid: parseCatalogueSpheroid((recipe.frame as { spheroid?: unknown }).spheroid, at('frame.spheroid')), id: spheroidSeed(recipe.frame, id, at('frame.seed')),
     ...(aroundOriginM ? { aroundOriginM } : {}), at: at('frame.spheroid') });
   converted.points = placed.points; converted.maxDistanceKpc = Math.max(converted.maxDistanceKpc, placed.maxDistanceKpc);
 }
