@@ -1,7 +1,10 @@
 {
   "mode": "semantic",
-  "moves": {},
+  "moves": {
+    "src/objects/sun/source/navigation/universe.json": "src/objects/observable-universe/source/navigation/universe.json"
+  },
+  "objects": ["observable-universe", "sun"],
   "outputs": [],
   "layout": "none",
-  "change": "S3-3 extract the navigation contracts so history no longer imports request orchestration"
+  "change": "Move the world's source and full context from the Sun's package to the root object"
 }
