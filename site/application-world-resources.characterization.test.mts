@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
-import { test, mock, beforeEach } from 'node:test';
+import { test, mock, beforeEach, after } from 'node:test';
+import { existsSync, rmSync, writeFileSync } from 'node:fs';
 import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import { OBJECT_SCHEMA } from '@cssearth/objects';
@@ -39,6 +40,13 @@ let bankResponse: Response | null = null;
 let catalogLoads = 0, plannerCount = 0;
 let loadFailure: Error | null = new Error('initial volume decode');
 mock.module(new URL('./prepared-context-objects.mts', import.meta.url).href, { namedExports: { CONTEXT_OBJECT_DESCRIPTORS: declarations, CONTEXT_OBJECT_ASSET_URLS: assets, CONTEXT_GALAXY_SAMPLE: {} } });
+// The generated billboard table is not tracked and CI does not restore it. The runner process writes a valid empty table
+// when the file is absent and removes it afterwards; each isolated case process (RESOURCE_CASE) only reads it.
+const billboardTable = new URL('./prepared-dataset-billboards.json', import.meta.url);
+if (!process.env.RESOURCE_CASE && !existsSync(billboardTable)) {
+  writeFileSync(billboardTable, JSON.stringify({ schema: 'cssearth-dataset-billboards@2', imagePx: 256, banks: [] }));
+  after(() => rmSync(billboardTable, { force: true }));
+}
 mock.module(new URL('./context-availability.mts', import.meta.url).href, { namedExports: { CONTEXT_AVAILABILITY: availability } });
 mock.module(new URL('./world-context-plan.mts', import.meta.url).href, { namedExports: { ...world,
   WORLD_DOT_BANKS: ['inside'], onWorldSystems: (callback: typeof onSystems) => { onSystems = callback; return () => {}; } } });
