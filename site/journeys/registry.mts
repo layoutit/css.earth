@@ -5,12 +5,16 @@ import { journey as dione } from './dione.journey.mts';
 import { journey as lightCurves } from './light-curves.journey.mts';
 import { journeys as representatives } from './representatives.journey.mts';
 import { journeys as core } from './core.journey.mts';
+import { journeys as navigation } from './navigation.journey.mts';
+import { journeys as input } from './input.journey.mts';
+import { journeys as shell } from './shell.journey.mts';
+import { journeys as capabilities } from './capabilities.journey.mts';
 import { profiles } from './harness/profiles.mts';
 import { declarations, validateDeclaration, type Declaration, type Status } from './manifest-qualification.mts';
 import type { Journey } from './harness/api.mts';
 export type { Status } from './manifest-qualification.mts';
 export interface RegisteredJourney extends Journey { status: Record<string, Status>; qualification?: Record<string, Declaration> }
-export const journeys: RegisteredJourney[] = [milkyWay, earthSystem, dione, lightCurves, ...core, ...representatives].map(journey => ({
+export const journeys: RegisteredJourney[] = [milkyWay, earthSystem, dione, lightCurves, ...core, ...representatives, ...navigation, ...input, ...shell, ...capabilities].map(journey => ({
   ...journey, qualification: declarations[journey.id] ?? {},
   status: Object.fromEntries(Object.keys(profiles).map(profile => [profile, validateDeclaration(declarations[journey.id]?.[profile] ?? { status: 'experimental' }, profile).status])),
 }));
