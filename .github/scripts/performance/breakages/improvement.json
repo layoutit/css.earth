@@ -1,0 +1,11 @@
+{
+  "name": "improvement",
+  "expected": "PASS with IMPROVEMENT",
+  "edits": [
+    {
+      "file": "index.html",
+      "before": "<link rel=\"preload\" href=\"/world/anywhere.json\" as=\"fetch\" crossorigin=\"anonymous\"></head>",
+      "after": "</head>"
+    }
+  ]
+}

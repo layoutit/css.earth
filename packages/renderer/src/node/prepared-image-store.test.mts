@@ -128,3 +128,29 @@ test("transport failure never clears an owner's reused slot", async () => {
   releasePreparedImage(image);
   assert.equal(image.src, "");
 });
+
+test("a slot that is not reused keeps its native handle until the paint after its retirement", async () => {
+  const waiting: (() => void)[] = [], images: PreparedImage[] = [];
+  const store = createPreparedImageStore({ afterPaint: release => { waiting.push(release); }, createImage() {
+    const image: PreparedImage = { src: "", decoding: "async", naturalWidth: 1, naturalHeight: 1, decode: () => Promise.resolve(),
+      removeAttribute(name: string) { if (name === "src") image.src = ""; } };
+    images.push(image); return image;
+  } });
+  const lease = store.createLease();
+  await lease.load("/old.webp");
+  await lease.load("/kept.webp");
+  // Released in the frame that shows its replacement, the handle still names its image: removing it there made WebKit
+  // decode the replacement again inside that frame's paint.
+  lease.release("/old.webp");
+  assert.equal(store.has("/old.webp"), false);
+  assert.equal(images[0]!.src, "/old.webp");
+  assert.equal(waiting.length, 1);
+  waiting.shift()!();
+  assert.equal(images[0]!.src, "");
+  // A store destroyed first releases what was still waiting, once.
+  lease.release("/kept.webp");
+  store.destroy();
+  assert.equal(images[1]!.src, "");
+  waiting.shift()!();
+  assert.equal(images[1]!.src, "");
+});

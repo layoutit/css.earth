@@ -8,8 +8,8 @@ The models and the limb laws are the `@cssearth/bake/photometry` entry (this fol
 
 | Module | Owns |
 | --- | --- |
-| `disk.ts` | Lambert, Lommel-Seeliger, ISIS Lunar-Lambert and Minnaert disk functions, with the same arithmetic the routes used before this library, so outputs stay byte-identical. Also Lommel-Seeliger plus Lambert with coefficients linear in phase, the form Buratti and Veverka (1983) introduced for Europa, and Akimov's parameter-free function, which is flat at zero phase. |
-| `phase.ts` | The Henyey-Greenstein phase term with shadow hiding that 67P used before its full model, the Kaasalainen-Shkuratov exponential, and a quadratic fitted to a phase curve, held beyond its fitted phase. |
+| `disk.ts` | Lambert, Lommel-Seeliger, ISIS Lunar-Lambert and Minnaert disk functions, with the same arithmetic the routes used before this library, so outputs stay byte-identical. Also Lommel-Seeliger plus Lambert with coefficients linear in phase, the form Buratti and Veverka (1983) introduced for Europa, and Akimov's parameter-free function, which is flat at zero phase. Also Minnaert with its exponent given at stated phases and joined by straight lines, for fits made over different phase ranges. |
+| `phase.ts` | The Henyey-Greenstein phase term with shadow hiding that 67P used before its full model, the Kaasalainen-Shkuratov exponential, a quadratic fitted to a phase curve, held beyond its fitted phase, and a table of the values a paper prints per image, joined by straight lines. |
 | `hapke.ts` | The Hapke model: the 1981 and 2002 H-function approximations, one- and two-term Henyey-Greenstein and Legendre particle phase functions, shadow hiding, coherent backscatter and porosity. |
 | `roughness.ts` | Hapke (1984) macroscopic roughness, step for step as ISIS computes it. |
 | `normalization.ts` | A model, a reference geometry and the limits beyond which a pixel is withheld. |

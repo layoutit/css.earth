@@ -1,0 +1,25 @@
+import assert from 'node:assert/strict';
+import { test } from 'node:test';
+import { parseHTML } from 'linkedom';
+import { retainInitialScene } from './initial-scene.mts';
+test('restoration reuses original roots and restores attributes and prepared children until commit', () => {
+  const { document } = parseHTML('<div data-prepared-object="earth" class="before"><section data-prepared-node="0" style="opacity:1"><i data-prepared-volume-node="1"></i></section><aside class="prepared-surface-features"><b>Feature</b></aside></div>');
+  const stage = document.querySelector<HTMLElement>('div')!, roots = [...stage.children];
+  const retained = retainInitialScene(stage)!;
+  assert.equal(retained.available, true);
+  stage.setAttribute('new', 'x'); roots[0].setAttribute('style', 'opacity:0'); roots[0].replaceChildren(); stage.replaceChildren(document.createElement('p'));
+  retained.restore();
+  assert.equal(stage.className, 'before');
+  assert.equal(stage.hasAttribute('new'), false);
+  assert.equal(roots[0].getAttribute('style'), 'opacity:1');
+  assert.equal(stage.children[0], roots[0]);
+  assert.ok(stage.querySelector('[data-prepared-volume-node]'));
+  assert.ok(stage.querySelector('b'));
+  assert.equal(stage.querySelector('b')?.textContent, '', 'snapshot keeps element children, losing text nodes');
+  retained.restore();
+  assert.equal(stage.children[0], roots[0]);
+  retained.commit();
+  assert.equal(retained.available, false); stage.replaceChildren(document.createElement('p')); retained.restore();
+  assert.equal(stage.children.length, 1);
+  assert.equal(retainInitialScene(document.createElement('div')), null);
+});

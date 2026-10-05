@@ -1,4 +1,4 @@
-// Entry script: node packages/bake/authoring/ngc-3132/grid-fit.mts
+// Entry script: node packages/bake/authoring/ngc-3132/grid-fit.mts [bank id, ngc-3132-layers if none]
 /**
  * How the published density grid of NGC 3132 (Monteiro et al. 2025, github.com/hektor-monteiro/NGC3132_model) lies on
  * the bank's picture. The paper made the grid from velocity cubes: one of its axes is the sight line, the other two the
@@ -17,7 +17,9 @@
  *  - How far the star's own light reaches in the picture: past its saturated middle, its brightness in rings about the
  *    star falls until a ring is no brighter than the ten past it.
  *
- * Input: `source/source.jpg` with its embedded sky tags and the grid file beside it. Output: printed.
+ * Input: the bank's `source/recipe.json` for the star's place, `source/source.jpg` with its embedded sky tags and the grid
+ * file beside it. Each picture of the nebula is its own bank; the grid's place on the sky must come out the same from each.
+ * Output: printed.
  */
 import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 import sharp from 'sharp';
@@ -35,8 +37,12 @@ const SEARCH_PIXELS = 400;
 const MINOR_AXIS_PA_DEG = 60, SIDE_FROM_ARCSEC = 8, SIDE_TO_ARCSEC = 28;
 /** The width of the rings the star's light is measured in, arcseconds, and the level from which a ring is saturated. */
 const RING_ARCSEC = 0.1, SATURATED = 250;
+/** The star's patch of saturated pixels is looked for within this many arcseconds of where the picture's tags put it:
+ * the mid-infrared picture shows a second star 1.8 arcsec away. */
+const STAR_WITHIN_ARCSEC = 1;
 
-const sourceDirectory = resolve(checkoutProjectRoot(import.meta.url), 'src/objects/ngc-3132-layers/source'), rad = Math.PI / 180;
+const bank = process.argv[2] ?? 'ngc-3132-layers', sourceDirectory = resolve(checkoutProjectRoot(import.meta.url), 'src/objects', bank, 'source'), rad = Math.PI / 180;
+if (!/^ngc-3132(-[a-z]+)?-layers$/u.test(bank)) throw new TypeError(`${JSON.stringify(bank)} is not a bank of NGC 3132.`);
 const grid = densityGrid(await readFile(resolve(sourceDirectory, GRID_FILE), 'utf8'), CELLS, GRID_FILE), N = CELLS, middle = (N - 1) / 2, cellArcsec = CELL_CM / AU_CM / DISTANCE_PC;
 const at = (i: number, j: number, k: number) => grid[(i * N + j) * N + k]!;
 
@@ -53,15 +59,19 @@ const file = await readFile(resolve(sourceDirectory, 'source.jpg')), tags = file
 const tag = (name: string) => { const found = new RegExp(`<avm:${name}>([\\s\\S]*?)</avm:${name}>`, 'u').exec(tags) ?? new RegExp(`avm:${name}="([^"]*)"`, 'u').exec(tags); if (!found) throw new Error(`source.jpg has no avm:${name}.`); return found[1]!.replace(/<[^>]+>/gu, ' ').trim().split(/\s+/u).map(Number); };
 const pixelArcsec = Math.abs(tag('Spatial.Scale')[0]!) * 3600, rotation = tag('Spatial.Rotation')[0]! * rad;
 const full = await sharp(file).removeAlpha().raw().toBuffer({ resolveWithObject: true }), fullWidth = full.info.width, fullHeight = full.info.height;
-// The star: the largest patch of saturated pixels within 400 pixels of the middle.
-const saturated = (p: number) => full.data[3 * p]! >= 250 && full.data[3 * p + 1]! >= 250 && full.data[3 * p + 2]! >= 250, seen = new Uint8Array(fullWidth * fullHeight); let star = { pixels: 0, x: 0, y: 0 };
-for (let y = Math.round(fullHeight / 2 - 400); y < fullHeight / 2 + 400; y++) for (let x = Math.round(fullWidth / 2 - 400); x < fullWidth / 2 + 400; x++) { const start = y * fullWidth + x; if (seen[start] || !saturated(start)) continue; let pixels = 0, sumX = 0, sumY = 0; const stack = [start]; seen[start] = 1;
+// Where the tags alone put the star: the recipe's target, from the tags' reference place and pixel (counted from the bottom left, the first pixel's middle at 1, as FITS counts).
+const target = (JSON.parse(await readFile(resolve(sourceDirectory, 'recipe.json'), 'utf8')) as { target: { centerRaDeg: number; centerDecDeg: number } }).target, reference = tag('Spatial.ReferenceValue'), referencePixel = tag('Spatial.ReferencePixel'), degrees = Math.abs(tag('Spatial.Scale')[0]!);
+const eastPixels = (target.centerRaDeg - reference[0]!) * Math.cos(target.centerDecDeg * rad) / degrees, northPixels = (target.centerDecDeg - reference[1]!) / degrees;
+const tagged = [referencePixel[0]! - 1 - eastPixels * Math.cos(rotation) - northPixels * Math.sin(rotation), fullHeight - (referencePixel[1]! - eastPixels * Math.sin(rotation) + northPixels * Math.cos(rotation))] as const, within = Math.round(STAR_WITHIN_ARCSEC / pixelArcsec);
+// The star: the largest patch of saturated pixels that starts within that reach of the place.
+const saturated = (p: number) => full.data[3 * p]! >= 250 && full.data[3 * p + 1]! >= 250 && full.data[3 * p + 2]! >= 250, seen = new Uint8Array(fullWidth * fullHeight); let star = { pixels: 0, x: 0, y: 0, from: 0 };
+for (let y = Math.max(0, Math.round(tagged[1] - within)); y <= Math.min(fullHeight - 1, tagged[1] + within); y++) for (let x = Math.max(0, Math.round(tagged[0] - within)); x <= Math.min(fullWidth - 1, tagged[0] + within); x++) { const start = y * fullWidth + x; if (seen[start] || !saturated(start) || Math.hypot(x - tagged[0], y - tagged[1]) > within) continue; let pixels = 0, sumX = 0, sumY = 0; const stack = [start]; seen[start] = 1;
   for (let p = stack.pop(); p !== undefined; p = stack.pop()) { const px = p % fullWidth, py = (p - px) / fullWidth; pixels++; sumX += px; sumY += py; for (const [dx, dy] of [[1, 0], [-1, 0], [0, 1], [0, -1]] as const) { const q = (py + dy) * fullWidth + px + dx; if (px + dx < 0 || py + dy < 0 || px + dx >= fullWidth || py + dy >= fullHeight || seen[q] || !saturated(q)) continue; seen[q] = 1; stack.push(q); } }
-  if (pixels > star.pixels) star = { pixels, x: sumX / pixels, y: sumY / pixels }; }
-if (!star.pixels) throw new Error('source.jpg has no saturated star near its middle.');
+  if (pixels > star.pixels) star = { pixels, x: sumX / pixels, y: sumY / pixels, from: Math.hypot(sumX / pixels - tagged[0], sumY / pixels - tagged[1]) }; }
+if (!star.pixels) throw new Error(`${bank}: source.jpg has no saturated pixel within ${STAR_WITHIN_ARCSEC} arcsec of where its tags put the nebula's star (pixel ${tagged[0].toFixed(1)}, ${tagged[1].toFixed(1)}).`);
 // North and east in the picture, in pixels right and down: the tags turn north counter-clockwise from up.
 const north = [-Math.sin(rotation), -Math.cos(rotation)] as const, east = [-Math.cos(rotation), Math.sin(rotation)] as const;
-console.log(`The picture: ${fullWidth} x ${fullHeight} px, ${pixelArcsec.toFixed(5)} arcsec a pixel, north ${Math.abs(rotation / rad).toFixed(2)} degrees ${rotation < 0 ? 'right' : 'left'} of vertical. The star: ${star.pixels} saturated pixels about ${star.x.toFixed(1)}, ${star.y.toFixed(1)}.`);
+console.log(`The picture: ${fullWidth} x ${fullHeight} px, ${pixelArcsec.toFixed(5)} arcsec a pixel, north ${Math.abs(rotation / rad).toFixed(2)} degrees ${rotation < 0 ? 'right' : 'left'} of vertical. The star: ${star.pixels} saturated pixels about ${star.x.toFixed(1)}, ${star.y.toFixed(1)}, ${(star.from * pixelArcsec).toFixed(2)} arcsec from where the tags alone put it.`);
 
 // The picture, smaller, and the grid's emission summed along the sight line.
 const width = SEARCH_PIXELS, shrink = fullWidth / width, height = Math.round(fullHeight / shrink), small = await sharp(file).resize(width, height).greyscale().blur(1).raw().toBuffer(), arcsecPerPixel = pixelArcsec * shrink, starX = star.x / shrink, starY = star.y / shrink;

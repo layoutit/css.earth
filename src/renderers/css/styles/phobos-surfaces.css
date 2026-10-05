@@ -10,9 +10,8 @@
   margin: 0; padding: 0; border: 0; transform-origin: 0 0; transform-style: flat; backface-visibility: visible;
   border-top-left-radius: 50% 100%; border-top-right-radius: 50% 100%;
   corner-top-left-shape: bevel; corner-top-right-shape: bevel;
-  background-image: var(--phobos-surface-image); background-repeat: no-repeat;
+  background-repeat: no-repeat;
 }
-:where(.object-stage[data-object-id="phobos"]) .phobos-body > .phobos-polar { background-image: var(--phobos-poles-image); }
 :where(.object-stage[data-object-id="phobos"]) .phobos-material-root { z-index: 3; --phobos-billboard-opacity: 0; }
 :where(.object-stage[data-object-id="phobos"]) .phobos-material, :where(.object-stage[data-object-id="phobos"]) .phobos-billboard {
   position: absolute; display: block; left: 50%; top: 50%; width: 460px; height: 460px;

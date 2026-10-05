@@ -47,6 +47,9 @@ export async function prepareEmissive(input: PresentationInputs, adapters: Prese
   corona.style.scale = '1';
   const limb = b.element('div', `${ns}-limb-layer object-render-root`, '', { 'aria-hidden': 'true' });
   limb.style.scale = '1';
+  // Each plate reads its own texture write here, where the bindings find it; what ships is the write on the plate itself
+  // (texture-image-records.ts), so the page's stylesheet names no image.
+  corona.style.backgroundImage = `var(--${ns}-corona-image)`; limb.style.backgroundImage = `var(--${ns}-limb-image)`;
   b.append(null, corona, limb);
   // A pulsating star dims under a black veil on the limb plate, the body's own silhouette at the plate's logical size:
   // it covers the sphere and the rim without letting the sky behind show through, and animates opacity only.

@@ -96,7 +96,7 @@
       "id": "jpl-physical-and-orbit-data",
       "subject": "Vendored JPL body data through the astronomy package",
       "status": "included",
-      "finding": "Physical and orbital data come from the vendored JPL body data, Kepler state vectors and IAU rotation, with mean radius 469.7 km and a fixed geometry epoch of 2026-09-03T00:00:00 TT; the mesh is a sphere at that mean radius and claims no resolved shape.",
+      "finding": "Physical and orbital data come from the vendored JPL body data, Kepler state vectors and IAU rotation, with mean radius 469.7 km and a fixed geometry epoch of 2026-09-03T00:00:00 TT; the mesh is the Dawn spheroid (see oblate-figure) and claims no resolved relief.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/ceres/README.md#L85",
         "https://github.com/layoutit/css.earth/blob/main/src/objects/ceres/README.md#L92",
@@ -345,6 +345,17 @@
         "https://doi.org/10.3847/1538-3881/ab8305"
       ],
       "revisitWhen": "A published resolved thermal-inertia or emissivity map of Ceres from these ALMA data, or a new ALMA epoch whose surface-fixed residuals repeat between independent epochs."
+    },
+    {
+      "id": "oblate-figure",
+      "subject": "Figure of the globe",
+      "status": "included",
+      "finding": "The globe is the Dawn project's oblate spheroid, 482 km at the equator and 446 km at the poles, in place of a 469.7 km mean-radius sphere: 7.5% shorter from pole to pole than across, about 17 pixels of the 460 pixel globe. The radii are those of the mission's NAIF kernel dawn_ceres_v05.tpc (average equatorial radius 482 km, polar radius 446 km, equivalent sphere 470 km), which it attributes to Park et al., Physical Properties of Ceres from the Dawn Mission. The shared sphere geometry now takes a body's map rows as planetocentric latitude when its profile says so: each row is drawn where the line from the centre at that latitude meets the spheroid, and feature anchors are cast onto the same surface, so labels sit on the ground at the poles. The Gazetteer's datum sphere is compared with the spheroid's volume-equivalent radius. No relief is drawn. The coordinate readout still measures on a sphere of the equatorial radius. The scale follows the equatorial radius, so the body is drawn 2.6% larger in the world. The mosaics and the elevation dataset keep their 470 km sphere datum.",
+      "evidence": [
+        "https://naif.jpl.nasa.gov/pub/naif/DAWN/kernels/pck/dawn_ceres_v05.tpc",
+        "https://github.com/layoutit/css.earth/blob/main/packages/bake/src/surface-geometry/surface.ts"
+      ],
+      "revisitWhen": "A resolved shape model is prepared for Ceres."
     }
   ]
 }

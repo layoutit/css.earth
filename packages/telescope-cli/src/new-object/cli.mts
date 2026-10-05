@@ -22,6 +22,8 @@ export function parseNewObjectOptions(value:unknown):NewObjectOptions{
   return {...string('spec'),...strings('ids'),...string('from'),...strings('names'),...string('out'),check:flag('check'),bake:flag('bake'),refresh:flag('refresh'),skipExisting:flag('skipExisting'),json:flag('json')};
 }
 
+const holdsPictures=async(spec:string)=>{const {readFile}=await import('node:fs/promises'),value:unknown=JSON.parse(await readFile(spec,'utf8'));return typeof value==='object'&&value!==null&&'pictures' in value;};
+
 /** The result text and exit code for one parsed `new-object` command. */
 export async function newObjectCommand(options:NewObjectOptions,root:string,stderr:(text:string)=>void):Promise<{readonly text:string;readonly code:number}>{
   let text:string,code:number;
@@ -38,6 +40,11 @@ export async function newObjectCommand(options:NewObjectOptions,root:string,stde
   }else if(options.from){
     const result=await writeDrafts(options.from,options.names??[],options.out!,{root,archive:liveArchive,progress:line=>stderr(`${line}\n`)});
     text=options.json?`${JSON.stringify(result)}\n`:`${result.report.join('\n')}\n${result.entries} entries written to ${result.path}\n`;code=result.entries?0:3;
+  }else if(await holdsPictures(options.spec!)){
+    // A spec of published pictures: each one a dataset on a page that shows a shaped layer bank (pictures/pictures.mts).
+    const {runPictures,bakePictures,formatPictures}=await import('./pictures/pictures.mts'),results=await runPictures(options.spec!,{root,archive:liveArchive,progress}),good=results.filter(result=>!result.failed);
+    const baked=options.bake&&good.length?await bakePictures(good,{root,progress}):true;
+    text=options.json?`${JSON.stringify(results)}\n`:formatPictures(results,options.spec!,baked&&options.bake&&good.length>0);code=baked&&good.length===results.length?0:1;
   }else{
     const results=await runNewObject(options.spec!,{root,progress:line=>stderr(`${line}\n`),skipExisting:options.skipExisting,solarEpoch:await loadSolarEpoch(root)});
     const good=results.filter(result=>!result.failed).map(result=>result.id),baked=(options.check||options.bake)&&good.length?await prepareObjects(good,{root,progress,...(options.bake?{}:{to:'page'})}):true;

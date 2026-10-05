@@ -22,7 +22,7 @@
     ]
   },
   "introduction": {
-    "text": "ESA/Webb's picture of it lies here at the depths its gas was measured at: a thick ring, its axis tipped about 30° from the sight line.",
+    "text": "ESA/Webb's pictures of it lie here at the depths its gas was measured at: a thick ring, its axis tipped about 30° from the sight line.",
     "sources": [
       {
         "catalogueId": "esawebb-weic2207b",
@@ -45,6 +45,13 @@
         "checked": "2026-10-04",
         "locator": "Lead section, revision 1372045901",
         "quote": "Alternatively, it is known as the Eight-Burst Nebula, the Southern Ring Nebula, or Caldwell 74."
+      },
+      {
+        "catalogueId": "esawebb-weic2207c",
+        "url": "https://esawebb.org/images/weic2207c/",
+        "label": "ESA/Webb weic2207c: NASA, ESA, CSA, STScI, and the Webb ERO Production Team",
+        "checked": "2026-10-04",
+        "locator": "Southern Ring Nebula (MIRI Image); MIRI 7.7, 11.3, 12 and 18 µm"
       }
     ]
   },
@@ -81,6 +88,34 @@
           "label": "Kastner et al. (2024), ApJ 965, 21: the molecular exoskeleton of the ring-like planetary nebula NGC 3132",
           "checked": "2026-10-04",
           "locator": "Sect. 3: the main ring's position angle, and which edge approaches"
+        }
+      ]
+    },
+    "mid-infrared": {
+      "title": "The Southern Ring in the mid infrared",
+      "detail": "1306 × 1133 px",
+      "summary": "Webb's mid-infrared picture at the depths the nebula's gas was measured at, as the near-infrared one is.",
+      "sources": [
+        {
+          "catalogueId": "esawebb-weic2207c",
+          "url": "https://esawebb.org/images/weic2207c/",
+          "label": "ESA/Webb weic2207c: NASA, ESA, CSA, STScI, and the Webb ERO Production Team",
+          "checked": "2026-10-04",
+          "locator": "Southern Ring Nebula (MIRI Image)"
+        },
+        {
+          "catalogueId": "publication-monteiro-2025-ngc-3132-model",
+          "url": "https://arxiv.org/abs/2503.20640",
+          "label": "Monteiro et al. (2025), MNRAS 539, 1756: the planetary nebula NGC 3132 revisited, a high definition 3D photoionization model",
+          "checked": "2026-10-04",
+          "locator": "Sect. 3.1: the gas density structure"
+        },
+        {
+          "catalogueId": "github-ngc3132-model",
+          "url": "https://github.com/hektor-monteiro/NGC3132_model",
+          "label": "Monteiro, NGC3132_model: the files of the photoionization model of Monteiro et al. (2025), with its density grid",
+          "checked": "2026-10-04",
+          "locator": "structure_visualization/ngc3132_density_structure_101.dat"
         }
       ]
     }

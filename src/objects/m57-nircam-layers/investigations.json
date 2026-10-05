@@ -6,7 +6,7 @@
       "id": "weic2320b",
       "subject": "ESA/Webb weic2320b",
       "status": "included",
-      "finding": "Webb captures detailed beauty of Ring Nebula (NIRCam image): NIRCam at 1.62, 2.12, 3.0 and 3.35 µm; 4097 × 4156 px over 2.14 × 2.17 arcmin, released 21 August 2023. The file's embedded sky tags for scale and direction, 0.0314 arcsec per pixel and north 140.2° right of vertical, and the star for place: the central star in the picture, pixel 2123, 1991.4, is set at the place the Ring Nebula's page stands at, so the frame's centre is 283.3950727°, 33.0293034°. The tags alone put the star 0.13 arcsec from where the picture shows it.",
+      "finding": "Webb captures detailed beauty of Ring Nebula (NIRCam image): NIRCam at 1.62, 2.12, 3.0 and 3.35 µm; 4097 × 4156 px over 2.14 × 2.17 arcmin, released 21 August 2023. The file's embedded sky tags for scale and direction, 0.0314 arcsec per pixel and north 140.2° right of vertical, and the star for place: the star in the picture, the middle of the central star's light, pixel 2123, 1991.4, is set at the recipe's target, so the frame's centre is 283.3950727°, 33.0293034°. The tags alone put the star 0.10 arcsec from where the picture shows it.",
       "evidence": [
         "https://esawebb.org/images/weic2320b/",
         "https://esawebb.org/copyright/"
@@ -57,18 +57,16 @@
       "finding": "Kastner et al. (2025, Sect. III.2.2) find that some filaments seen inside the ring in Webb's pictures are molecular knots moving at 45 to 50 km/s along the sight line. They print no table of them; here they lie on the lobe's near wall with the rest of the detail.",
       "evidence": [
         "https://arxiv.org/abs/2501.12223"
-      ],
-      "revisitWhen": "The knots' places and speeds are published as a table."
+      ]
     },
     {
       "id": "weic2320c",
       "subject": "Webb's mid-infrared picture",
-      "status": "deferred",
-      "finding": "ESA/Webb weic2320c (MIRI, 1257 × 1015 px) shows the same nebula in the mid infrared. It would be a third dataset.",
+      "status": "included",
+      "finding": "ESA/Webb weic2320c (MIRI, 1257 × 1015 px) shows the same nebula in the mid infrared. It is the page's third dataset, the bank m57-miri-layers, on the ionised shell the Hubble dataset uses.",
       "evidence": [
         "https://esawebb.org/images/weic2320c/"
-      ],
-      "revisitWhen": "A third dataset is wanted."
+      ]
     }
   ]
 }

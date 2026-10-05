@@ -1,0 +1,29 @@
+{
+  "id": "nasa-tm-4041",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Reports of Planetary Geology and Geophysics Program, 1987 (NASA Technical Memorandum 4041)",
+  "identifiers": [
+    {
+      "type": "NASA report number",
+      "value": "NASA-TM-4041"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://ntrs.nasa.gov/citations/19880017749",
+      "label": "Publication"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/titania/source/manifest.json",
+      "locator": "/documents/15"
+    }
+  ],
+  "publisher": "NASA Office of Space Science and Applications",
+  "publicationDate": "1988",
+  "relations": [],
+  "statements": []
+}

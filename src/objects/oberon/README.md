@@ -10,6 +10,8 @@ The Voyager color dataset uses Voyager 2 ISS narrow-angle GEOMED frames from the
 
 Named features come from the IAU/USGS Gazetteer of Planetary Nomenclature centre-point shapefile for Oberon (public domain per its FGDC metadata), kept under `source/features/`. 2 labelled names carry a caption note, the lead summary of their English Wikipedia article (CC BY-SA 4.0), kept with the article link and revision in `source/features/notes.json`; the caption credits Wikipedia beside the IAU naming year. [NASA's overview](https://science.nasa.gov/uranus/moons/oberon/) and the Voyager image caption supply editorial facts. Physical and orbital values use the vendored astronomy package: a 761.4 km mean radius, about 583,500 km orbital semimajor axis, synchronous rotation and an approximately 13.46-day orbit.
 
+Lighting uses the Hapke law Helfenstein, Hillier, Weitz and Veverka fitted to Voyager and Earth-based photometry of Oberon ([NASA TM-4210](https://ntrs.nasa.gov/citations/19900018290), pages 230 and 231). See [Lighting law](#lighting-law).
+
 Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).
 
 ## Processing
@@ -22,6 +24,12 @@ Each set is corrected with the same Lunar-Lambert disk function as the monochrom
 
 **Globe.** Oberon uses the shared raster lane with the shared 16 × 32 sphere mesh and Lambert lighting bank, and no atmosphere. Polar sprites are 1024 × 512 pixels and sample the original photographs directly ([shared preparation guide](../../../docs/surface-preparation.md#preserve-photographic-detail-through-preparation)). The sphere does not encode measured relief. The world frame, pole and prime meridian at the shared epoch come from `src/platform/solar-geometry.mts`. Named features are anchored with the map's left edge at 0° E; craters and faculae trace a rim circle, other types their published extent box. The navigation marker is a crop of observed terrain, not an observed full disc.
 
+## Lighting law
+
+The globe is lit with Hapke's 1986 model and the parameters Helfenstein, Hillier, Weitz and Veverka fitted to Voyager images and Earth-based photometry of Oberon: global average, clear filter (0.48 µm), single-scattering albedo 0.41, asymmetry −0.29, roughness 21°, opposition surge width 0.007 and amplitude 1.03. They are Table I of the authors' summary in NASA's [Reports of Planetary Geology and Geophysics Program 1989](https://ntrs.nasa.gov/citations/19900018290), pages 230 and 231; the [Icarus paper](https://doi.org/10.1016/0019-1035%2891%2990065-2) was not read. The law is recorded in [`source/photometry/helfenstein-1989-hapke-clear.json`](source/photometry/helfenstein-1989-hapke-clear.json).
+
+Each lighting frame is the law relative to the flood-lit disc centre, so the centre of the default view shows the map as published. With the Sun behind the viewer the limb is 0.97 of the centre. At 0.98 of the radius that is an overlay alpha of 0.01, where the authored bank this replaces reached 0.49. See [planet limbs](../../../docs/surface-preparation.md#planet-limbs-from-published-laws).
+
 ## Evidence
 
 The map edge is measured against the georeferenced source at every preparation: the prepared normal map correlates 0.95 from 0° E and 0.16 from 180° E ([where the prepared map starts](../../../docs/surface-preparation.md#where-the-prepared-map-starts)). Geographic checks use [USGS Gazetteer](https://planetarynames.wr.usgs.gov/SearchResults?Target=97_Oberon) centers for Hamlet (44.4° E, 46.1° S), Macbeth (112.5° E, 58.4° S), Othello (42.9° E, 66° S) and Coriolanus (345.2° E, 11.4° S). These check numerical registration, not subpixel agreement with the Gazetteer's older feature outlines.
@@ -30,6 +38,7 @@ The color oracle re-places every frame and correlates its high-passed detail aga
 
 ## Known problems
 
+- **Lighting law:** One clear-filter global row lights every terrain and color channel; the table's green, violet and terrain rows differ. The report prints no phase or emission range: the range 18° to 148° and the emission limit 84.9° are derived here. The Icarus version of the study was not read. The fit has a narrow opposition surge: the point under the Sun is 0.74 of the flood-lit centre at 1° phase and 0.55 at 10°, so every frame with Shadows on is dim against the flood-lit view.
 - Source photometric correction does not remove local cast shadows or guarantee seamless exposures. The Monochrome view is a display of the published corrected observations, not a newly calibrated albedo measurement.
 - The Voyager color dataset is false color (green, violet, ultraviolet as red, green, blue) at the observations' own phase angles; no phase normalisation is applied, so a color seam at a footprint edge is a real difference in viewing geometry. Its whole-disc band ratios are read from a figure at ±0.02, and the ultraviolet calibration carries a stated ±10 % uncertainty; the archive's own ratios are in the prepared report.
 - Named feature outlines are not published nomenclature boundaries.

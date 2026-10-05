@@ -1,11 +1,11 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { existsSync, globSync, readdirSync, readFileSync, mkdtempSync, rmSync } from 'node:fs';
+import { existsSync, globSync, readdirSync, readFileSync, mkdtempSync, mkdirSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { execFileSync } from 'node:child_process';
 import { pathToFileURL } from 'node:url';
 import { parse } from 'yaml';
-import { resolve, matchesGlob } from 'node:path';
+import { resolve, dirname, matchesGlob } from 'node:path';
 import { affectedTests, pinnedSourceOwners, importsChangedObjects, TOOL_OBJECT_TEST_LIMIT, testLaneFiles, testOwners } from './affected-tests.mts';
 
 const packages = [
@@ -174,39 +174,65 @@ test('changes sparse patterns cover every quoted root test glob; deleting a patt
   assert.ok(sparseCoverage(patterns.filter(pattern => pattern !== '/packages/**/*.test.mts')).includes('packages/**/*.test.mts'));
   assert.deepEqual(sparseCoverage(patterns), []);
 });
-test('real sparse clone preserves objects-only foreign test selection', { timeout: 20000 }, t => {
+// A small repository of the test's own: the host checkout may be a shallow or partial clone that cannot be cloned again,
+// and the claim is about the workflow's sparse patterns and the routing, not about the host's history.
+function sparseScenario(patterns: readonly string[]) {
   const root = resolve(import.meta.dirname, '../../..'), temp = mkdtempSync(resolve(tmpdir(), 'affected-sparse-'));
-  const sparse = resolve(temp, 'clone');
+  const manifest = JSON.parse(readFileSync(resolve(root, 'package.json'), 'utf8'));
+  const files: Record<string, string> = {
+    'package.json': JSON.stringify({ name: 'scenario', scripts: { 'test:packages': manifest.scripts['test:packages'], 'test:site': manifest.scripts['test:site'] } }),
+    '.github/workflows/universe.yml': readFileSync(resolve(root, '.github/workflows/universe.yml'), 'utf8'),
+    'packages/objects/src/index.ts': 'export const changed = 1;\n',
+    'packages/bake/src/pin.test.mts': "import { run } from '@cssearth/objects';\nconst extractor = 'src/objects/heliosphere/source/ibex/extract.py';\nrun(extractor);\n",
+    'packages/telescope-cli/src/archive.test.mts': "import { run } from '@cssearth/objects';\nrun();\n",
+    'integration/foreign/foreign.test.mts': "import { run } from '@cssearth/objects';\nrun();\n",
+    'src/objects/heliosphere/source/ibex/extract.py': 'print(1)\n',
+    'src/objects/heliosphere/object.json': '{}\n',
+  };
+  const git = (...args: string[]) => execFileSync('git', args, { cwd: temp, stdio: 'pipe' });
+  for (const [path, text] of Object.entries(files)) { mkdirSync(dirname(resolve(temp, path)), { recursive: true }); writeFileSync(resolve(temp, path), text); }
+  git('init', '--quiet'); git('add', '-A');
+  git('-c', 'user.name=scenario', '-c', 'user.email=scenario@example.invalid', 'commit', '--quiet', '-m', 'scenario');
+  const fullOwners = testOwners(temp);
+  return { temp, git, fullOwners, patterns };
+}
+function applySparse(scenario: ReturnType<typeof sparseScenario>) {
+  execFileSync('git', ['sparse-checkout', 'set', '--no-cone', '--stdin'], { cwd: scenario.temp, input: scenario.patterns.join('\n') + '\n', stdio: 'pipe' });
+  execFileSync('git', ['read-tree', '-mu', 'HEAD'], { cwd: scenario.temp, stdio: 'pipe' });
+  return testOwners(scenario.temp);
+}
+const scenarioWorkspaces = [
+  { directory: 'objects', name: '@cssearth/objects', dependencies: [] },
+  { directory: 'bake', name: '@cssearth/bake', dependencies: ['@cssearth/objects'] },
+  { directory: 'telescope-cli', name: '@cssearth/telescope-cli', dependencies: ['@cssearth/bake'] },
+];
+test('sparse checkout of the real workflow patterns preserves objects-only foreign test selection', () => {
+  const patterns = changesSparsePatterns(readFileSync(resolve(import.meta.dirname, '../../workflows/universe.yml'), 'utf8'));
+  const scenario = sparseScenario(patterns);
   try {
-    try {
-      execFileSync('git', ['clone', '--quiet', '--no-checkout', '--depth', '1', pathToFileURL(root).href, sparse], { timeout: 15000, stdio: 'pipe' });
-    } catch (error) {
-      t.skip(`file:// shallow clone unavailable within 15 seconds: ${String(error)}`);
-      return;
-    }
-    const patterns = changesSparsePatterns(readFileSync(resolve(root, '.github/workflows/universe.yml'), 'utf8'));
-    execFileSync('git', ['sparse-checkout', 'set', '--no-cone', '--stdin'], { cwd: sparse, input: patterns.join('\n') + '\n', stdio: 'pipe' });
-    execFileSync('git', ['read-tree', '-mu', 'HEAD'], { cwd: sparse, stdio: 'pipe' });
-    const workspaces = readdirSync(resolve(root, 'packages'), { withFileTypes: true }).filter(entry => entry.isDirectory()).map(entry => {
-      const manifest = JSON.parse(readFileSync(resolve(root, 'packages', entry.name, 'package.json'), 'utf8'));
-      return { directory: entry.name, name: String(manifest.name), dependencies: ['dependencies', 'devDependencies', 'peerDependencies']
-        .flatMap(field => Object.keys(manifest[field] ?? {})).filter(name => name.startsWith('@cssearth/')) };
-    });
-    const changed = ['packages/objects/src/index.ts'];
-    const fullOwners = testOwners(root), sparseOwners = testOwners(sparse);
-    assert.deepEqual([...sparseOwners], [...fullOwners], 'sparse discovery retains every package test owner');
-    const full = affectedTests(changed, workspaces, site, fullOwners, pinnedSourceOwners(root, fullOwners));
-    const actual = affectedTests(changed, workspaces, site, sparseOwners, pinnedSourceOwners(sparse, sparseOwners));
-    assert.ok(full.files.length > 0);
-    assert.deepEqual(actual.files, full.files);
+    const sparseOwners = applySparse(scenario);
     const extractor = 'src/objects/heliosphere/source/ibex/extract.py';
-    assert.equal(existsSync(resolve(sparse, extractor)), false, 'real workflow patterns omit the pinned extractor');
-    const fullExtractor = affectedTests([extractor], workspaces, site, fullOwners, pinnedSourceOwners(root, fullOwners));
-    const sparseExtractor = affectedTests([extractor], workspaces, site, sparseOwners, pinnedSourceOwners(sparse, sparseOwners));
+    assert.equal(existsSync(resolve(scenario.temp, extractor)), false, 'real workflow patterns omit the pinned extractor');
+    assert.ok(scenario.fullOwners.size >= 3);
+    assert.deepEqual([...sparseOwners], [...scenario.fullOwners], 'sparse discovery retains every test owner');
+    const run = (paths: string[], owners: ReadonlyMap<string, readonly string[]>) =>
+      affectedTests(paths, scenarioWorkspaces, site, owners, pinnedSourceOwners(scenario.temp, owners));
+    const full = run(['packages/objects/src/index.ts'], scenario.fullOwners), sparse = run(['packages/objects/src/index.ts'], sparseOwners);
+    assert.ok(full.files.includes('integration/foreign/foreign.test.mts'));
+    assert.deepEqual(sparse, full);
+    const fullExtractor = run([extractor], scenario.fullOwners), sparseExtractor = run([extractor], sparseOwners);
     assert.ok(fullExtractor.packages.includes('bake'));
-    assert.deepEqual(sparseExtractor, fullExtractor, 'extractor-only routing survives the real sparse checkout');
-    t.diagnostic(`Sparse probe: ${sparseOwners.size} owners; ${actual.files.length} extra files equal full tree: ${actual.files.join(', ')}`);
-  } finally { rmSync(temp, { recursive: true, force: true }); }
+    assert.deepEqual(sparseExtractor, fullExtractor, 'extractor-only routing survives the sparse checkout');
+  } finally { rmSync(scenario.temp, { recursive: true, force: true }); }
+});
+test('the sparse scenario is red when a test glob leaves the patterns or routing stops reading the pins', () => {
+  const patterns = changesSparsePatterns(readFileSync(resolve(import.meta.dirname, '../../workflows/universe.yml'), 'utf8'));
+  const scenario = sparseScenario(patterns.filter(pattern => !pattern.includes('integration')));
+  try {
+    assert.notDeepEqual([...applySparse(scenario)], [...scenario.fullOwners], 'dropping the integration pattern loses a foreign owner');
+    const pins = pinnedSourceOwners(scenario.temp, scenario.fullOwners);
+    assert.deepEqual([...pins.get('src/objects/heliosphere/source/ibex/extract.py') ?? []], ['bake'], 'a pin is read from the test text, not the file');
+  } finally { rmSync(scenario.temp, { recursive: true, force: true }); }
 });
 
 test('above-limit import discovery distinguishes objects root and subpath entries', () => {

@@ -76,15 +76,26 @@
     {
       "id": "limb-law",
       "subject": "Photometric law for the lighting overlays",
-      "status": "unresolved",
-      "finding": "Schenk et al. (2021) fitted the lunar-Lambert function to global and regional Voyager images at several phase angles and print its weight as L(a) = 0.88 - 0.014(a) + 0.00005(a), in the article page and in the PDF alike. The last term lacks an exponent. Read as printed the weight is negative beyond 63 degrees phase, inside the 39 to 135 degrees its images span; read with a squared term it is negative beyond 95 degrees. Both readings give 0.88 at zero phase. The paper states no emission range. Hillier et al. (1994) give disc-resolved Hapke fits per terrain unit (from the abstract: w 0.98 or higher, g -0.35 to -0.45 for most units, roughness near 14 degrees), and Hillier et al. (1991) fit the whole disc with a Hapke surface under a thin haze. Neither table could be opened, and neither is one global disk law. Triton keeps the shared sphere bank.",
+      "status": "included",
+      "finding": "Hapke surface of Hillier, Helfenstein, Verbiscer and Veverka, read in their summary in NASA's Reports of Planetary Geology and Geophysics Program 1989 (TM-4210, page 227). They fitted a Hapke ground under a thin haze to Voyager whole-disc photometry at about 11 to 159 degrees phase. Table 1, green filter: single-scattering albedo 0.995, roughness 14.7 degrees, asymmetry -0.281; haze optical depth 0.0325. The lighting uses the ground alone: this preparation draws no haze, which at that depth matters above about 140 degrees phase. The table prints no opposition surge. Two published descriptions disagreed at low phase, so they were set against the data. On five calibrated Voyager 2 frames at 15 to 38 degrees phase (FDS 11298.55, 11321.34, 11371.48, 11377.09 and 11386.39), the lunar-Lambert weight that best fits the lit disc inside 75 degrees incidence and emission is 0.10 to 0.19; this Hapke surface gives 0.18 to 0.28 for the same geometry, and the line of Schenk et al. (2021) gives 0.35 to 0.68 by either reading of its misprinted last term. Flood-lit, the limb darkens to 0.51 of the centre at 0.98 of the radius, close to what the authored bank drew. It is second class: a whole-disc fit, checked against resolved frames here but not fitted to them; zero phase lies outside its data; and the emission limit 86.6 degrees is derived here from the finest whole-disc green frame (C1138703, 4.745 km per pixel). Hillier et al. (1994) give disc-resolved Hapke fits per terrain unit; that table could not be opened.",
       "evidence": [
+        "https://ntrs.nasa.gov/citations/19900018290",
         "https://doi.org/10.3390/rs13173476",
+        "https://opus.pds-rings.seti.org/opus/api/metadata/vg-iss-2-n-c1138703.json",
         "https://doi.org/10.1006/icar.1994.1095",
-        "https://ntrs.nasa.gov/citations/19950043343",
         "https://doi.org/10.1029/91JA01736"
       ],
-      "revisitWhen": "A corrected weight line for Schenk et al. (2021) is published, a global disc-resolved Triton law with its fitted emission range is read in the paper, or the preparation gains the haze layer the 1991 model needs."
+      "revisitWhen": "The terrain fits of Hillier et al. (1994) are read, the preparation gains a haze layer, or a corrected weight line for Schenk et al. (2021) is published."
+    },
+    {
+      "id": "authored-limb-lighting",
+      "subject": "Shared sphere bank lighting (Lambert with a 0.35 flood floor and 0.05 ambient term, adapted from OpenSpace)",
+      "status": "excluded",
+      "finding": "Replaced by the Hapke surface of Hillier, Helfenstein, Verbiscer and Veverka (1989); Triton now bakes its own bank.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/main/packages/bake/src/raster/lighting-banks.ts"
+      ],
+      "revisitWhen": "Nothing: an authored limb is not reopened once a published law exists."
     },
     {
       "id": "map-left-edge-2026-09-28",

@@ -34,6 +34,15 @@ export function parseCatalogueSpheroid(value: unknown, at: string): CatalogueSph
     sersicIndex: num('sersicIndex'), axisRatio: num('axisRatio'), axisPositionAngleDeg: num('axisPositionAngleDeg'), cutoffHalfLightRadii: num('cutoffHalfLightRadii') };
 }
 
+/** The id a spheroid placement seeds its draws with: the bank's own, or `frame.seed`, the id of another bank of the same
+ * table, so both banks place each row at the same depth (a galaxy's clusters drawn by its own page and by a wider field). */
+export function spheroidSeed(frame: unknown, id: string, at: string): string {
+  const seed = (frame as { seed?: unknown } | null | undefined)?.seed;
+  if (seed === undefined) return id;
+  if (typeof seed !== 'string' || !/^[a-z][a-z0-9-]*$/u.test(seed)) throw new TypeError(`${at} names a bank id to seed the depth draws with; got ${JSON.stringify(seed)}.`);
+  return seed;
+}
+
 /**
  * A spheroid placement: the deprojected Sérsic density (Prugniel & Simien 1997) of a published fit, on an oblate spheroid
  * whose axis lies in the plane of the sky at a position angle, ending at `cutoffHalfLightRadii`. Each ICRS row

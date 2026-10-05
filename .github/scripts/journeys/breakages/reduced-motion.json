@@ -1,0 +1,23 @@
+{
+  "schema": "journey-breakage@1",
+  "id": "reduced-motion",
+  "description": "Remove reduced-motion suppression of default-enabled stellar light curves.",
+  "expectedFamilies": [
+    "rendering"
+  ],
+  "journeys": [
+    "cv-mon-light-curves"
+  ],
+  "profiles": [
+    "chromium-reduced"
+  ],
+  "substitutions": [
+    {
+      "file": "site/runtime-policy.mts",
+      "before": "const lightCurves = sceneState === \"ready\" && lightCurvesRequested && !documentHidden && !reducedMotion;",
+      "after": "const lightCurves = sceneState === \"ready\" && lightCurvesRequested && !documentHidden;",
+      "occurrences": 1
+    }
+  ],
+  "limitation": "The shared world bank does not receive scene-session light-curve permission. This proof mounts CV Mon, whose prepared motion track is an opacity light curve. Native playState is observed exactly; uncontrolled timeline time is excluded by name."
+}

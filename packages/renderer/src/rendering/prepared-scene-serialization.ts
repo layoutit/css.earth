@@ -2,8 +2,8 @@ import { textureTileLeafStyles, type ObjectRuntimeDefinition } from '@cssearth/o
 
 import { initialObjectSelection } from '../runtime/object-contract.js';
 import { resolvePreparedAssetUrl, rewritePreparedStyleUrls } from './prepared-asset-origin.js';
-import { preparedTexturePixels, textureTileGroups } from './prepared-texture-levels.js';
-import { leafBoxBindings, leafBoxExact, leafBoxStyles } from './prepared-leaf-box-direct.js';
+import { preparedTextureSizes, textureTileGroups } from './prepared-texture-levels.js';
+import { createExactKeeper, leafBoxBindings, leafBoxStyles } from './prepared-leaf-box-direct.js';
 import { omittedPreparedNodes } from './prepared-omitted-nodes.js';
 import { preparedDatasetPending } from '../prepared-data/dataset-tables.js';
 
@@ -78,30 +78,34 @@ export function serializePreparedScene(definition: ObjectRuntimeDefinition, data
   const textureResources = definition.textureLevels?.levels[0]?.resources, tileGroups = textureTileGroups(definition.textureLevels);
   // Leaf boxes ship their final values at the prepared initial step and for the image each leaf shows here, from their
   // records (prepared-leaf-box-direct.ts); the mounted writer continues from the same values.
-  const pixels = preparedTexturePixels(definition), shown = new Map<number, number | undefined>();
+  const sizes = preparedTextureSizes(definition), shown = new Map<number, readonly [number, number] | undefined>();
+  const slots = new Map((definition.tree.textureBindings ?? []).map(slot => [`${slot.target}:${slot.name}`, slot.leaves] as const));
   for (const binding of variant.writes) if (binding.kind === 'texture' && binding.resource !== null) {
-    const image = pixels(textureResources?.[binding.resource] ?? binding.resource);
-    for (const leaf of definition.tree.textureBindings?.find(entry => entry.target === binding.target && entry.name === binding.name)?.leaves ?? []) shown.set(leaf, image);
+    const image = sizes(textureResources?.[binding.resource] ?? binding.resource);
+    for (const leaf of slots.get(`${binding.target}:${binding.name}`) ?? []) shown.set(leaf, image);
   }
-  const leafBoxes = leafBoxBindings(definition.viewBindings), sized = leafBoxes.boxes.filter(leaf => leaf.density !== undefined).length;
-  for (const leaf of leafBoxes.boxes) for (const [name, value] of leafBoxStyles(leaf, leafBoxes.step, leafBoxes.outset, false, leafBoxExact(leaf, shown.get(leaf.node), sized))) write(leaf.node, name, value);
+  const leafBoxes = leafBoxBindings(definition.viewBindings), keep = createExactKeeper();
+  for (const leaf of leafBoxes.boxes) for (const [name, value] of leafBoxStyles(leaf, leafBoxes.step, leafBoxes.outset, false, keep(leaf, leafBoxes.step, shown.get(leaf.node)))) write(leaf.node, name, value);
   for (const binding of variant.writes) {
     const element = target(binding.target);
     if (binding.kind === 'attribute') {
       if (binding.value === null) delete element.attributes[binding.name]; else element.attributes[binding.name] = binding.value;
     } else if (binding.kind === 'class') {
       if (binding.value) element.classes.add(binding.name); else element.classes.delete(binding.name);
-    } else {
-      write(binding.target, binding.name, binding.kind === 'texture'
-        ? texture(binding.resource === null ? null : textureResources?.[binding.resource] ?? binding.resource) : binding.value);
+    } else if (binding.kind === 'texture') {
+      // Each element a slot lists takes the image as its own background, as the mounted page writes it
+      // (prepared-presentation.ts); an image its target draws itself is that target's.
+      const image = texture(binding.resource === null ? null : textureResources?.[binding.resource] ?? binding.resource);
+      const leaves = slots.get(`${binding.target}:${binding.name}`);
+      if (leaves) for (const leaf of leaves) write(leaf, 'backgroundImage', image); else write(binding.target, binding.name, image);
       // A page the first level draws from a sheet places its leaves on its tile, as literal values (prepared-presentation.ts
       // commits the same through its tile writer).
-      const group = binding.kind === 'texture' ? tileGroups.get(`${binding.target}:${binding.name}`) : undefined;
-      if (group && binding.kind === 'texture' && binding.resource !== null) {
+      const group = tileGroups.get(`${binding.target}:${binding.name}`);
+      if (group && binding.resource !== null) {
         const tile = definition.textureLevels?.levels[0]?.tiles?.[binding.resource];
         for (const [node, x, y] of group.leaves) for (const [name, value] of textureTileLeafStyles(group, x, y, tile)) write(node, name, value);
       }
-    }
+    } else write(binding.target, binding.name, binding.value);
   }
   for (const selected of variant.materials) {
     const track = definition.materials.find(track => track.id === selected.track);

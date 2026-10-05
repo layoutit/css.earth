@@ -1,0 +1,44 @@
+{
+  "id": "nasa-tm-4210",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Reports of Planetary Geology and Geophysics Program, 1989 (NASA Technical Memorandum 4210)",
+  "identifiers": [
+    {
+      "type": "NASA report number",
+      "value": "NASA-TM-4210"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://ntrs.nasa.gov/citations/19900018290",
+      "label": "Publication"
+    },
+    {
+      "role": "original",
+      "url": "https://ntrs.nasa.gov/api/citations/19900018290/downloads/19900018290.pdf",
+      "label": "Report"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/oberon/source/manifest.json",
+      "locator": "/documents/6"
+    },
+    {
+      "path": "src/objects/triton/source/manifest.json",
+      "locator": "/documents/7"
+    }
+  ],
+  "creators": [
+    "Paul Helfenstein",
+    "John Hillier",
+    "Catherine Weitz",
+    "Joseph Veverka"
+  ],
+  "publisher": "NASA Office of Space Science and Applications",
+  "publicationDate": "1990",
+  "relations": [],
+  "statements": []
+}

@@ -77,10 +77,13 @@ export async function check(root: string, update: boolean): Promise<boolean> {
   const files = repositoryFiles(root);
   const findings = repositoryFindings(root, files);
   const broken = isBroken(findings);
-  const measurement = measure(await buildImportGraph(root, { details: false }).catch((error: unknown) => {
+  const graph = await buildImportGraph(root, { details: false }).catch((error: unknown) => {
     if (broken) console.error(formatFindings(findings));
     throw error;
-  }));
+  });
+  const measurement = measure(graph);
+  const { checkSiteArchitecture } = await import('./site-architecture.mts');
+  await checkSiteArchitecture(root, { graph });
   // Only an update may start from a missing baseline; a check without one is a broken checkout.
   const baseline = await readBaseline(root).catch((error: unknown) => {
     if (update && hasErrorCode(error, 'ENOENT')) return undefined;

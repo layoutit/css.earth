@@ -28,7 +28,7 @@ export interface ImportEdge {
   readonly symbols: readonly string[];
   readonly typeOnly: boolean;
 }
-export interface ImportGraph { readonly files: ReadonlyMap<string, FileFacts>; readonly edges: readonly ImportEdge[] }
+export interface ImportGraph { readonly files: ReadonlyMap<string, FileFacts>; readonly edges: readonly ImportEdge[]; readonly resolution?: { readonly tsconfigPath: string; readonly baseUrl: string | undefined; readonly modules: readonly CruisedModule[] } }
 
 /** One module of dependency-cruiser's JSON result, validated. */
 interface CruisedDependency { readonly module: string; readonly resolved: string; readonly coreModule: boolean; readonly couldNotResolve: boolean }
@@ -235,5 +235,5 @@ export async function buildImportGraph(checkout: string, options: BuildOptions):
       + unresolved.slice(0, 5).map(item => `  ${item.from}: ${item.specifier} (${item.reason})`).join('\n')
       + '\nFix the package exports or its tsup entries, or teach .github/scripts/architecture/workspaces.mts the new form.');
   }
-  return { files, edges: edges.filter(edge => files.has(edge.to)) };
+  return { files, edges: edges.filter(edge => files.has(edge.to)), resolution: { tsconfigPath, baseUrl, modules } };
 }

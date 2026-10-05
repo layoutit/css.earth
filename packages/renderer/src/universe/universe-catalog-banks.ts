@@ -26,6 +26,10 @@ interface ImageBank {
   billboardIndex: number;
   billboardRadiusUnits: number;
   independent: boolean;
+  /** Its light lies on walls around its middle, and the object it draws for: it stands in for that object around a body
+   * inside it (ImageLayerBankDescriptor `surrounds` and `host`). */
+  surrounds: boolean;
+  host: string | undefined;
 }
 
 /** Catalogue and image layers remain descriptor-only until visibility or navigation admits them. */
@@ -36,7 +40,7 @@ export function createUniverseCatalogBanks({ root, end, stage, lifetime, declara
   /** Where a galaxy's billboard and its image slices mount: under the world's dot layer, so its catalogue's dots and its
    * stars' show over its picture. Without one they mount where every other layer does. */
   imagesBefore?: Element;
-  declarations: readonly { id: string; frame: DensityVolumeFrame }[];
+  declarations: readonly { id: string; frame: DensityVolumeFrame; surrounds?: true; host?: string }[];
   initialImages: ReadonlyMap<string, PreparedImageLayerMount>;
   volumeDeclarations: readonly { id: string; frame: DensityVolumeFrame }[];
   initialCatalog?: PreparedCatalogBank;
@@ -57,9 +61,9 @@ export function createUniverseCatalogBanks({ root, end, stage, lifetime, declara
   let billboardCount = 0;
   const images: ImageBank[] = declarations.map(bank => {
     const facts = prepared?.plan.banks.get(bank.id);
-    return { ...bank, radiusUnits: volumeFramingRadiusUnits(bank.frame), mounted: null, points: [], dotsShown: false, loading: null, publishedOpacity: NaN,
+    return { id: bank.id, frame: bank.frame, radiusUnits: volumeFramingRadiusUnits(bank.frame), mounted: null, points: [], dotsShown: false, loading: null, publishedOpacity: NaN,
       billboardIndex: facts?.billboard ? billboardCount++ : -1, billboardRadiusUnits: facts?.billboard?.radiusUnits ?? 0,
-      independent: facts?.contextVisibility === 'independent' };
+      independent: facts?.contextVisibility === 'independent', surrounds: bank.surrounds === true, host: bank.host };
   });
   const byId = new Map(images.map(bank => [bank.id, bank]));
   // A package that is only catalogue dots mounts them the first time its catalogue row is selected; they draw while it is.
@@ -191,14 +195,18 @@ export function createUniverseCatalogBanks({ root, end, stage, lifetime, declara
       return undefined;
     },
     /** `inside` is the galaxy the selected body is in, and how much of its dots show: a star of M33 stands among M33's
-     * catalogue dots, without the photograph that is the galaxy seen from outside. */
+     * catalogue dots, without the photograph that is the galaxy seen from outside. `within` is the objects the selected body
+     * is inside, by the object tree: a bank whose light lies on walls (`surrounds`) draws around a body inside its host, as
+     * a nebula's walls around its central star; the first such bank declared for that host stands for it. */
     publishImages(world: WorldCameraPose, viewport: WorldCameraViewport, volumeOpacity: number, detailedObjectId?: string,
-      inside?: { readonly objectId: string; readonly opacity: number }) {
+      inside?: { readonly objectId: string; readonly opacity: number }, within: readonly string[] = []) {
       if (lifetime.disposed) return;
+      let around: string | undefined;
+      if (within.length) for (const bank of images) if (bank.surrounds && bank.host !== undefined && within.includes(bank.host)) { around = bank.id; break; }
       for (const bank of images) {
         // A galaxy's slices paint only for the observer who selected it, at any distance from it: the context's distance
-        // fade is measured from the selected body, which is the galaxy itself.
-        const opacity = bank.id === detailedObjectId ? projectedVolumeOpacity(world, viewport, bank.frame, bank.radiusUnits) : 0;
+        // fade is measured from the selected body, which is the galaxy itself. Walls paint around a body inside them too.
+        const opacity = bank.id === detailedObjectId || bank.id === around ? projectedVolumeOpacity(world, viewport, bank.frame, bank.radiusUnits) : 0;
         // Its billboard shows it from everywhere else, and gives way as the loaded slices fade in.
         if (billboards && bank.billboardIndex >= 0) {
           const context = bank.independent ? 1 : volumeOpacity;
@@ -221,7 +229,7 @@ export function createUniverseCatalogBanks({ root, end, stage, lifetime, declara
           bank.mounted.root.style.display = opacity > 0 ? '' : 'none';
           bank.publishedOpacity = opacity;
         }
-        if (opacity > 0) bank.mounted.publish({ world, viewport });
+        if (opacity > 0) bank.mounted.publish({ world, viewport }, bank.id === around && bank.id !== detailedObjectId);
       }
     },
   };

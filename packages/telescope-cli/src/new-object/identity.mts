@@ -76,11 +76,12 @@ export async function existingBodies(root: string): Promise<Existing> {
   return { ids, names, stars, gaia, systems };
 }
 
-/** The placed star within DUPLICATE_ARCSEC of a position, both moved by their proper motions to the new star's epoch. */
-export function duplicateStar(existing: Existing, star: { readonly ra: number; readonly dec: number; readonly epoch: number; readonly row?: Placed['row'] }, except?: string): string | undefined {
+/** The placed star within DUPLICATE_ARCSEC of a position, both moved by their proper motions to the new star's epoch. The object
+ * the star is `inside` is never that star: a planetary nebula stands at its central star's place. */
+export function duplicateStar(existing: Existing, star: { readonly ra: number; readonly dec: number; readonly epoch: number; readonly row?: Placed['row'] }, except?: string, inside?: string): string | undefined {
   const rad = Math.PI / 180;
   for (const other of existing.stars) {
-    if (other.id === except) continue;
+    if (other.id === except || other.id === inside) continue;
     if (star.row && other.row?.table === star.row.table) { if (other.row.key === star.row.key) return other.id; continue; }
     const years = star.epoch - other.epoch, dec = other.dec + other.pmdec * years / 3.6e6, ra = other.ra + other.pmra * years / 3.6e6 / Math.cos(other.dec * rad);
     const cos = Math.sin(star.dec * rad) * Math.sin(dec * rad) + Math.cos(star.dec * rad) * Math.cos(dec * rad) * Math.cos((star.ra - ra) * rad);

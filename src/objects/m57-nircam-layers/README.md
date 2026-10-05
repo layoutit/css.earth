@@ -13,7 +13,7 @@ ESA/Webb's near-infrared picture of the Ring Nebula, laid on the shell of molecu
 
 ## The picture
 
-- **Registration:** the file's embedded sky tags give scale and direction, 0.0314″ per pixel and north 140.2° right of vertical. The star gives the place: the central star in the picture is set at the place the Ring Nebula's page stands at. The tags alone put it 0.13″ away.
+- **Registration:** the file's embedded sky tags give scale and direction, 0.0314″ per pixel and north 140.2° right of vertical. The star gives the place: the central star in the picture is set at the place the Ring Nebula's page stands at. The tags alone put it 0.10″ away.
 - **The shell:** an ellipsoid about the star, 47.0″ by 32.5″ on the sky with its long axis at position angle 70°, and 38.5″ along the sight line: 0.82 of the long axis, 24.6 km/s under the shell's law of 30 km/s at 47.0″. The red and green channels, molecular hydrogen, lie on its two walls, in front of the star and behind it.
 - **The ionised ring:** the blue channel holds the 1.62 µm filter's ionised gas. Inside the shell's outline it takes the Main Ring's [N II] speed, 19 km/s, which is 29.8″ along the sight line. A choice made here: hydrogen shines through the whole ionised ring, and [N II], the faster of the ring's two printed speeds, is its outer part.
 - **Through the opening:** the shell is open at both poles. Within 19.7″ of the star, the radius of the ellipsoid Kastner et al. cut the opening with, the picture shows the ionised gas of the central cavity. There every channel takes the Lobes' [O III] speed, 28 km/s, 43.9″ along the sight line. A choice made here: the middle of the three speeds O'Dell et al. give the Lobes.

@@ -1,0 +1,91 @@
+{
+  "schema": "cssearth-image-layer-recipe@1",
+  "id": "ngc-3132-miri-layers",
+  "source": {
+    "path": "source.jpg",
+    "dimensions": [
+      1306,
+      1133
+    ],
+    "originalDimensions": [
+      1306,
+      1133
+    ],
+    "publisherUrl": "https://esawebb.org/images/weic2207c/",
+    "downloadUrl": "https://cdn.esawebb.org/archives/images/large/weic2207c.jpg",
+    "credit": "NASA, ESA, CSA, STScI, and the Webb ERO Production Team",
+    "license": "CC-BY-4.0"
+  },
+  "observation": {
+    "centerRaDeg": 151.7566982,
+    "centerDecDeg": -40.4364794,
+    "fieldOfViewDeg": [
+      0.03986347,
+      0.03458293
+    ],
+    "northClockwiseDeg": 124.652
+  },
+  "target": {
+    "centerRaDeg": 151.75735684271,
+    "centerDecDeg": -40.43642515362,
+    "distancePc": 754
+  },
+  "geometry": {
+    "kind": "inclined-disk",
+    "inclinationDeg": 0.001,
+    "lineOfNodesPaDeg": 353.825,
+    "thicknessKpc": 2.62e-7,
+    "depthWeights": [
+      0.25,
+      0.5,
+      0.25
+    ],
+    "supportRadiusKpc": 0.00022225,
+    "supportTaperFraction": 0.9,
+    "depthScales": [
+      1,
+      1,
+      1
+    ],
+    "unit": "pc",
+    "densityGrid": {
+      "source": "github-ngc3132-model",
+      "basis": "Monteiro et al. (2025) turned SOAR SAM-FP velocity cubes of H-alpha and [N II] 6584 into the nebula's gas density, taking the gas to expand with a speed in proportion to its distance from the star, so that a speed along the sight line is a depth (Sect. 3.1); they publish the density on a grid of 101 cells a side, 1.015e+16 cm a cell, 0.8998 arcsec at the 754 pc they adopt. The file gives neither which of its axes is the sight line, nor how the other two are turned on the sky, nor which end is toward the Sun: measured on the near-infrared picture of the nebula (packages/bake/authoring/ngc-3132/grid-fit.mts), its first axis is the sight line, its high end toward the Sun; its second axis points to position angle 325.5° and its third to 55.5°; its middle is 1 arcsec west and 0.5 arcsec south of the star. The grid's emission then correlates 0.673 with the picture, against 0.094 half a turn on and 0.328 at best with the other handedness. Kastner et al. (2024) measure the main ring's major axis at position angle about 330° and find its eastern edge approaching, which fixes the end toward the Sun. The same script, run on this picture, puts the grid's second axis at 324.5°, a degree from that (correlation 0.58, against 0.136 half a turn on and 0.316 with the other handedness); the walls keep the near-infrared picture's 325.5°, the sharper of the two. The star's own light ends 2.1 arcsec from it in this picture, by the same script: all of it within half that, and less and less out to it, stays at the star. The smooth light is read over 16 face pixels, a presentation value.",
+      "path": "ngc3132_density_structure_101.dat",
+      "cells": 101,
+      "cellArcsec": 0.8998,
+      "toward": "high",
+      "secondAxisPaDeg": 325.5,
+      "thirdAxisPaDeg": 55.5,
+      "centreArcsec": [
+        -1,
+        -0.5
+      ],
+      "smoothPixels": 16,
+      "starRadiusArcsec": 1.05
+    }
+  },
+  "bake": {
+    "maxFacePixels": 1306,
+    "crossAxisSlices": 32,
+    "crossAxisDepthPixels": 97,
+    "backgroundFloor": 0.03,
+    "encoding": {
+      "format": "webp",
+      "quality": 70,
+      "alphaQuality": 80
+    },
+    "diffuseFacePixels": 80,
+    "crossAxisAlongPixels": 384,
+    "edgeTaperFraction": 0.04,
+    "diffuseFraction": 0.65,
+    "diffuseSigmaPixels": 2,
+    "flat": true,
+    "bulgeSlices": 56,
+    "bulgeFacePixels": 256,
+    "bulgeCrossSlices": 56
+  },
+  "provenance": {
+    "path": "provenance.json"
+  }
+}

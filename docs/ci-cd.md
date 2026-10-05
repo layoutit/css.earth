@@ -7,6 +7,11 @@ whole required path, not each job. Job timeouts are emergency limits, not target
 The budget is a review policy, not an automated timing gate; record actual GitHub
 timings before claiming it is met. Report cold and warm-cache runs separately.
 
+The [counted performance guard](performance-guard.md) compares emitted build counts against the merge base. Part A is local tooling; CI wiring is a separate task.
+
+The planned browser lane and its current implementation limits are documented in
+[browser journeys](site-journeys.md). It is not wired into CI yet.
+
 ## What runs where
 
 | Workflow | Trigger and responsibility |
@@ -15,6 +20,7 @@ timings before claiming it is met. Report cold and warm-cache runs separately.
 | [Repository audit](../.github/workflows/audit.yml) | Main pushes, scheduled runs and manual dispatch: documentation, repository completeness, source-catalogue reconciliation and bake reproduction. Advisory; does not run on PRs or gate deployment. |
 | [Object-scope gate](../.github/workflows/object-scope.yml) | Every PR: more than 12 changed object directories needs the `pipeline-change` label. Labels re-evaluate this gate. |
 | [Nightly asset sweep](../.github/workflows/nightly.yml) | Scheduled/manual runs check published keys, test types and a production build/browser probe. They do not publish the site or run on PRs. |
+| [Site safety net](../.github/workflows/site-safety-net.yml) | Always-running declaration gate for refactor branches/labels and application renames; require this gate in branch protection. Fresh declarations, renames, `compare-build` and dispatch select the longer production-shaped comparison. Semantic outputs require declared globs within the computed closure. [Modes, settings and cost](build-comparison.md). |
 | [Deploy](../.github/workflows/deploy.yml) | Manual dispatch only. The default R2 deployment checks build asset references and requires verified published keys before shipping, then publishes to Cloudflare; the `host` input can publish to Netlify instead. Merging validates the gate; it does not deploy. |
 
 The astroquery filter covers the owning workspaces of its discovered test files and their transitive runtime dependencies, toolchain pins and lane configuration. Its pip and toolchain caches are keyed on the pinned requirements and toolchain record. A skipped test or an incomplete derived file run fails the lane.
@@ -24,6 +30,12 @@ selected lane must pass. Lint failures do not cancel unrelated checks or conceal
 their results. A newer PR update cancels its stale run; main validation runs are
 not cancelled by later merges. Production deployments use their own concurrency
 group and can supersede an older deployment.
+
+Source coverage combines Node tests, Chromium navigation/worker evidence and server
+hits through one converter. The [coverage contract](coverage.md) defines the raw
+format, targets, measured costs and exact job steps for integration. No separate
+coverage workflow is introduced; the shared lane will run both the measured-floor
+check and the base-ref check.
 
 ## Serving the site from Cloudflare
 
@@ -136,6 +148,13 @@ that run's normal spread. [PR #549](https://github.com/layoutit/css.earth/pull/5
 later introduced the current pattern and documented its checked consumers and
 original nebula exception. Neither an older timing nor the smaller checkout alone proves
 that today's required feedback meets the budget; measure the current workflow.
+
+## Server answer comparison
+
+The local [server answers safety net](server-answers.md) records and compares real preview middleware and built
+deployment handlers, checks baseline sanity and verifies the observed Netlify package closure. Its guide supplies
+the base/head job sequence, normalisations, mutation replay and measured offline coverage. The site safety-net
+workflow should call this runner after both builds.
 
 ## Adding tests
 

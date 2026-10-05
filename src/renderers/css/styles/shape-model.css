@@ -6,4 +6,4 @@
 .shape-model-ring > s { backface-visibility: visible; }
 .shape-model-lighting { position: absolute; display: block; margin: 0; padding: 0; transform-origin: 0 0; background-repeat: no-repeat; backface-visibility: hidden; pointer-events: none; }
 .shape-model-material-root { position: absolute; inset: 0; z-index: 3; transform-origin: 50% 50%; pointer-events: none; }
-.shape-model-material { position: absolute; display: block; left: 50%; top: 50%; pointer-events: none; background-image: var(--shape-lighting); background-repeat: no-repeat; background-size: 100% 100%; }
+.shape-model-material { position: absolute; display: block; left: 50%; top: 50%; pointer-events: none; background-repeat: no-repeat; background-size: 100% 100%; }

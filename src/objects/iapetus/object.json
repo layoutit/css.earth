@@ -59,8 +59,9 @@
         }
       ],
       "shape": {
-        "kind": "sphere",
-        "radiusKm": 734.3
+        "kind": "ellipsoid",
+        "radiusKm": 745.7,
+        "polarRadiusKm": 712.1
       },
       "surfaces": [
         {
@@ -132,8 +133,8 @@
         -0.39777715593191376,
         0.9174820620691818
       ],
-      "metersPerUnit": 3192.608695652174,
-      "bodyRadiusM": 734300
+      "metersPerUnit": 3242.1739130434785,
+      "bodyRadiusM": 745700
     },
     "page": {
       "stylesheets": [

@@ -53,7 +53,6 @@
 
 /* The silhouette-fit binding already includes physical framing. Keep the prepared plate's native dimensions. */
 .object-stage[data-object-id="direct-v11179-m31c"] .direct-v11179-m31c-corona-layer {
-  background-image: var(--direct-v11179-m31c-corona-image);
   background-position: center;
   background-repeat: no-repeat;
   background-size:
@@ -63,7 +62,6 @@
 
 /* Limb plate: 496 px = raster.json emission.bodyDiameter = camera.logicalBodyDiameter. */
 .object-stage[data-object-id="direct-v11179-m31c"] .direct-v11179-m31c-limb-layer {
-  background-image: var(--direct-v11179-m31c-limb-image);
   background-position: center;
   background-repeat: no-repeat;
   background-size:

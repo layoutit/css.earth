@@ -1,0 +1,23 @@
+{
+  "schema": "cssearth-photometric-model@1",
+  "id": "squyres-veverka-1981-lommel-seeliger-clear",
+  "instrument": "Voyager 1 and 2 ISS",
+  "filter": "clear filter, effective wavelength 0.5 um",
+  "quantity": "radiance-factor",
+  "model": {
+    "family": "separable",
+    "disk": {
+      "family": "lommel-seeliger"
+    }
+  },
+  "fit": {
+    "phaseDegrees": [
+      10,
+      124
+    ],
+    "emissionDegrees": [
+      0,
+      86.2
+    ]
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "name": "extra-first-view-request",
+  "expected": "FAIL",
+  "edits": [
+    {
+      "file": "site/startup-requests.mts",
+      "before": "const urls = [summaryUrl,",
+      "after": "const urls = ['/objects/earth/entry.json?l7a-extra=1', summaryUrl,"
+    }
+  ]
+}

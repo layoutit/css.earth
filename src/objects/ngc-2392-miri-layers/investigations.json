@@ -1,0 +1,45 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "ngc-2392-miri-layers",
+  "entries": [
+    {
+      "id": "weic2616b",
+      "subject": "ESA/Webb weic2616b",
+      "status": "included",
+      "finding": "Lion Nebula (MIRI image): MIRI at 7.7, 10 and 15 µm; 984 × 717 px over 1.77 × 1.29 arcmin, released 10 August 2026. The file's embedded sky tags for scale and direction, 0.1081 arcsec per pixel and north 167.5° left of vertical, and the star for place: the star in the picture, the largest patch of saturated pixels within 1 arcsec of where the tags put it, 3 px, pixel 491, 342, is set at the recipe's target, so the frame's centre is 112.294982°, 20.9122679°. The tags alone put the star 0.24 arcsec from where the picture shows it.",
+      "evidence": [
+        "https://esawebb.org/images/weic2616b/",
+        "https://esawebb.org/copyright/"
+      ]
+    },
+    {
+      "id": "colors",
+      "subject": "What the picture's colors show",
+      "status": "included",
+      "finding": "ESA/Webb's release of 10 August 2026 and its table: PAH at 7.7 µm in blue, silicate at 10 µm in green and 15 µm in red (MIRI). In its words cyan shows the mane, \"the interior of a dust shell\" lit by the star, and the purple clumps with tails toward its edge are dust that has survived so far.",
+      "evidence": [
+        "https://esawebb.org/images/weic2616b/"
+      ]
+    },
+    {
+      "id": "speeds",
+      "subject": "Which speed each color takes",
+      "status": "included",
+      "finding": "No speed is measured in the infrared light this picture shows, and no paper on Webb's observations of NGC 2392 was found (telescope papers \"NGC 2392\" --instrument JWST, OpenAlex, 2026-10-05: no work). Every color takes the [N II] speeds of the two shells (García-Díaz et al. 2012) and of the 536 measured structures (García-Díaz et al. 2015), as the Hubble dataset's colors do: the clumps of the mane are where the model has its cometary knots, at rest on the equatorial disc. The dust is drawn at the ionised gas's depths.",
+      "evidence": [
+        "https://arxiv.org/abs/1211.6717",
+        "https://arxiv.org/abs/1411.0042",
+        "https://esawebb.org/images/weic2616b/"
+      ]
+    },
+    {
+      "id": "inner-rim",
+      "subject": "The inner shell's outline in this picture",
+      "status": "excluded",
+      "finding": "The Hubble bank's script (packages/bake/authoring/ngc-2392/inner-shell-rim.mts ngc-2392-miri-layers) does not find the bubble's rim in this picture: at 0.108 arcsec a pixel, and with the dust shell brighter than the bubble, it stops on the dust at several position angles (12.0 arcsec toward the west, the end of its search) and gives 12.02 by 10.45 arcsec toward position angle 89 degrees. Not used: the wall keeps the outline measured on the two sharper pictures, 11.0 by 9.2 arcsec.",
+      "evidence": [
+        "https://arxiv.org/abs/1211.6717"
+      ]
+    }
+  ]
+}

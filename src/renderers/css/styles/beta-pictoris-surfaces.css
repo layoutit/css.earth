@@ -54,7 +54,6 @@
 /* Off-limb context: 600 px = raster.json emission.offLimbSize, drawn at the disc's 496 px. This star's sphere carries no
    solar-system.json enlargement, so the plate takes the sphere's own size: the Sun's 1.25 hung a quarter past the limb. */
 .object-stage[data-object-id="beta-pictoris"] .beta-pictoris-corona-layer {
-  background-image: var(--beta-pictoris-corona-image);
   background-position: center;
   background-repeat: no-repeat;
   background-size:
@@ -65,7 +64,6 @@
 /* Limb plate: 496 px = raster.json emission.bodyDiameter = camera.logicalBodyDiameter, the size the sphere is drawn at, so the
    plate's edge is the sphere's outline. */
 .object-stage[data-object-id="beta-pictoris"] .beta-pictoris-limb-layer {
-  background-image: var(--beta-pictoris-limb-image);
   background-position: center;
   background-repeat: no-repeat;
   background-size:

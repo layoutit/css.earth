@@ -1,0 +1,46 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "m57-miri-layers",
+  "entries": [
+    {
+      "id": "weic2320c",
+      "subject": "ESA/Webb weic2320c",
+      "status": "included",
+      "finding": "Webb captures detailed beauty of Ring Nebula (MIRI image): MIRI at 5.6, 7.7, 10, 11, 12, 15, 18, 21 and 25 µm; 1257 × 1015 px over 2.33 × 1.88 arcmin, released 21 August 2023. The file's embedded sky tags for scale and direction, 0.1111 arcsec per pixel and north 132.9° right of vertical, and the star for place: the star in the picture, the peak within 3 arcsec of where the tags put it that stands highest above its surroundings, by 94 of 255, pixel 627.5, 513.5, is set at the recipe's target, so the frame's centre is 283.396433°, 33.0290199°. The tags alone put the star 0.04 arcsec from where the picture shows it.",
+      "evidence": [
+        "https://esawebb.org/images/weic2320c/",
+        "https://esawebb.org/copyright/"
+      ]
+    },
+    {
+      "id": "filters",
+      "subject": "What the picture's colors show",
+      "status": "included",
+      "finding": "Wesson et al. (2024), Sect. 4.1: the central cavity, about 25 arcsec in radius, emits mainly in the 10 and 25 µm filters, which contain the high-excitation [S IV] (ionisation potential 35 eV) and [O IV] (55 eV) lines; the inner halo shows in the 5.6 and 7.7 µm filters, which are dominated by molecular hydrogen lines. Their discussion of the shell: the 18 µm filter is dominated by [S III] and the 10 µm one by [S IV]. The release shows 5.6 µm in purple, 7.7 in blue, 10 and 11 in cyan, 12 and 15 in green, 18 in yellow, 21 in orange and 25 in red: ionised gas in the red and green channels, molecular hydrogen in the blue.",
+      "evidence": [
+        "https://arxiv.org/abs/2308.09027",
+        "https://esawebb.org/images/weic2320c/"
+      ]
+    },
+    {
+      "id": "speeds",
+      "subject": "Which speed each color takes",
+      "status": "included",
+      "finding": "The shell is the Hubble dataset's, from O'Dell et al. (2013); no speed is measured in these filters' own lines. Chosen here, each a printed speed. In the Main Ring: red and green 19 km/s, the ring's [N II] and [S II] speed, 29.2 arcsec along the sight line, since [S III] is the shell's lower-ionisation light; blue 24.6 km/s, the molecular shell's speed along the sight line (Kastner et al. 2025), 37.8 arcsec. Through the opening: red 20 km/s, the Lobes' He II speed, 30.8 arcsec, since [O IV] and He II need the same 55 eV; green and blue 28 km/s, the Lobes' [O III] speed, 43.1 arcsec, since [S IV] and [O III] need the same 35 eV. The 12 and 15 µm filters' own lines are not named in the paper's text; they go with the rest of the ionised gas.",
+      "evidence": [
+        "https://arxiv.org/abs/1301.6636",
+        "https://arxiv.org/abs/2308.09027",
+        "https://arxiv.org/abs/2501.12223"
+      ]
+    },
+    {
+      "id": "star-removal",
+      "subject": "Removing the picture's stars",
+      "status": "excluded",
+      "finding": "Not tried on this picture: on the near-infrared one the star remover took the ring's knots with the stars (src/objects/m57-nircam-layers/investigations.json), and this picture shows few stars. It keeps them.",
+      "evidence": [
+        "https://esawebb.org/images/weic2320c/"
+      ]
+    }
+  ]
+}

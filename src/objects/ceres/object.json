@@ -29,8 +29,8 @@
         -0.3977771559319138,
         0.9174820620691819
       ],
-      "metersPerUnit": 2042.1739130434783,
-      "bodyRadiusM": 469700
+      "metersPerUnit": 2095.6521739130435,
+      "bodyRadiusM": 482000
     },
     "preparation": {
       "schema": "cssearth-object-preparation@1",
@@ -131,8 +131,9 @@
         }
       ],
       "shape": {
-        "kind": "sphere",
-        "radiusKm": 469.7
+        "kind": "ellipsoid",
+        "radiusKm": 482,
+        "polarRadiusKm": 446
       },
       "schema": "cssearth-authored-object@2",
       "materials": [

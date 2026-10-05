@@ -83,6 +83,8 @@ test('new-object bakes a spec after generating it, or objects already in the tre
   const draft=parseCli(['new-object','--from-debcat','47 Tuc V69','CM Dra','--out','spec.json']);assert.equal(draft.command,'new-object');if(draft.command!=='new-object')return;
   assert.deepEqual([draft.from,draft.names],['debcat',['47 Tuc V69','CM Dra']]);
   assert.throws(()=>parseCli(['new-object','--from-apokasc','--out','spec.json']),/--from-apokasc NAME\.\.\. --out SPEC\.json/u);
+  const picture=parseCli(['new-object','--from-esa','m57=https://esawebb.org/images/weic2320c/','--out','spec.json']);assert.equal(picture.command,'new-object');if(picture.command!=='new-object')return;
+  assert.deepEqual([picture.from,picture.names],['esa',['m57=https://esawebb.org/images/weic2320c/']]);
 });
 test('local import has one bounded data-only entry point',()=>{
   const parsed=parseCli(['import','spec.json','--out','run','--json']);assert.equal(parsed.command,'import');if(parsed.command!=='import')return;

@@ -1,0 +1,112 @@
+{
+  "provenance": {
+    "name": "The Local Group's structures",
+    "products": [
+      {
+        "id": "m31-globular-clusters",
+        "label": "Caldwell & Romanowsky (2016) globular clusters of M31, CDS J/ApJ/824/42",
+        "process": "Place each cluster at its sky position, at the depth M31's own cluster bank draws for it from the system's published projected profile.",
+        "recipe": "source/m31-globular-clusters/points.json",
+        "selector": "",
+        "inputs": [
+          "m31-clusters"
+        ],
+        "outputs": [
+          "prepared/dots.bin"
+        ],
+        "interpretation": {
+          "kind": "catalogue-positions",
+          "sourceKind": "published-catalogue"
+        },
+        "limitations": [
+          "A cluster's depth is drawn from the system's radial profile, not measured."
+        ]
+      },
+      {
+        "id": "milky-way-globular-clusters",
+        "label": "Baumgardt & Vasiliev (2021) globular clusters of the Milky Way",
+        "process": "Place each cluster at its sky position and its measured distance.",
+        "recipe": "source/milky-way-globular-clusters/points.json",
+        "selector": "",
+        "inputs": [
+          "milky-way-clusters"
+        ],
+        "outputs": [
+          "prepared/dots.bin"
+        ],
+        "interpretation": {
+          "kind": "catalogue-positions",
+          "sourceKind": "published-catalogue"
+        },
+        "limitations": [
+          "The distances carry the errors the table gives, a few per cent for most clusters."
+        ]
+      },
+      {
+        "id": "sagittarius-stream",
+        "label": "Ramos et al. (2022) RR Lyrae of the Sagittarius stream, CDS J/A+A/666/A64",
+        "process": "Place each RR Lyrae star the authors give to the stream with a probability above 0.9 at its sky position and its own photometric distance.",
+        "recipe": "source/sagittarius-stream/points.json",
+        "selector": "",
+        "inputs": [
+          "sagittarius-stream-table"
+        ],
+        "outputs": [
+          "prepared/dots.bin"
+        ],
+        "interpretation": {
+          "kind": "catalogue-positions",
+          "sourceKind": "published-catalogue"
+        },
+        "limitations": [
+          "Each distance is good to about 9%, which stretches every clump along the line to the Sun.",
+          "The probability threshold is a presentation choice."
+        ]
+      },
+      {
+        "id": "field",
+        "label": "The three banks as one field",
+        "process": "Join the three banks; of the stream stars keep one in four, in catalogue order.",
+        "recipe": "source/field/merge.json",
+        "selector": "",
+        "inputs": [
+          "m31-clusters",
+          "milky-way-clusters",
+          "sagittarius-stream-table"
+        ],
+        "outputs": [
+          "prepared/dots.bin"
+        ],
+        "interpretation": {
+          "kind": "catalogue-positions",
+          "sourceKind": "published-catalogue"
+        },
+        "limitations": [
+          "Keeping one stream star in four is a presentation choice."
+        ]
+      },
+      {
+        "id": "dots",
+        "label": "The Local Group's structures as dots",
+        "process": "Write the field as the one bank the world draws once the camera is outside the Milky Way.",
+        "recipe": "source/dots/stack.json",
+        "selector": "",
+        "inputs": [
+          "m31-clusters",
+          "milky-way-clusters",
+          "sagittarius-stream-table"
+        ],
+        "outputs": [
+          "prepared/dots.bin"
+        ],
+        "interpretation": {
+          "kind": "catalogue-positions",
+          "sourceKind": "published-catalogue"
+        },
+        "limitations": [
+          "The field is not drawn from inside the Milky Way, where the galaxy draws its own clusters and stars."
+        ]
+      }
+    ]
+  }
+}

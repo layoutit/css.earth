@@ -1,0 +1,57 @@
+{
+  "schema": "cssearth-volume-presentation-source@2",
+  "objectId": "ngc-2392-miri-layers",
+  "name": "NGC 2392",
+  "defaultDataset": "optical",
+  "bank": {
+    "path": "src/objects/ngc-2392-miri-layers/prepared/image-layers.json"
+  },
+  "recipes": [
+    {
+      "id": "image-layer-recipe",
+      "path": "src/objects/ngc-2392-miri-layers/source/recipe.json"
+    },
+    {
+      "id": "source-evidence",
+      "path": "src/objects/ngc-2392-miri-layers/source/provenance.json"
+    }
+  ],
+  "sharedInputs": [],
+  "datasets": [
+    {
+      "id": "optical",
+      "label": "Webb · mid infrared",
+      "title": "NGC 2392 in the mid infrared",
+      "description": "ESA/Webb's mid-infrared picture of NGC 2392, MIRI at 7.7, 10 and 15 µm: the dust of the shell around the bubble, lit by the star, and the clumps of dust at its edge. It lies on the walls the nebula's spectra give, as Hubble's photograph does: a fast inner bubble inside a round outer shell (García-Díaz et al. 2012), each measured feature on the side its speed gives (García-Díaz et al. 2015). No speed is measured in this light.",
+      "summary": "Webb's mid-infrared picture on the same walls: the dust of the shell around the bubble, and the clumps at its edge.",
+      "detail": "984 × 717 px",
+      "facts": [
+        {
+          "id": "bands",
+          "label": "Colors",
+          "value": "7.7, 10 and 15 µm"
+        },
+        {
+          "id": "source-pixels",
+          "label": "Source pixels",
+          "value": "984 × 717"
+        },
+        {
+          "id": "coverage",
+          "label": "Field",
+          "value": "1.77 × 1.29 arcmin"
+        },
+        {
+          "id": "license",
+          "label": "License",
+          "value": "CC-BY-4.0"
+        }
+      ],
+      "input": "optical",
+      "preview": {
+        "path": "src/objects/ngc-2392-miri-layers/source/source.jpg",
+        "url": "https://cdn.esawebb.org/archives/images/large/weic2616b.jpg"
+      }
+    }
+  ]
+}

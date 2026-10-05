@@ -1,0 +1,57 @@
+{
+  "schema": "cssearth-volume-presentation-source@2",
+  "objectId": "ngc-2392-webb-layers",
+  "name": "NGC 2392",
+  "defaultDataset": "optical",
+  "bank": {
+    "path": "src/objects/ngc-2392-webb-layers/prepared/image-layers.json"
+  },
+  "recipes": [
+    {
+      "id": "image-layer-recipe",
+      "path": "src/objects/ngc-2392-webb-layers/source/recipe.json"
+    },
+    {
+      "id": "source-evidence",
+      "path": "src/objects/ngc-2392-webb-layers/source/provenance.json"
+    }
+  ],
+  "sharedInputs": [],
+  "datasets": [
+    {
+      "id": "optical",
+      "label": "Webb · infrared",
+      "title": "NGC 2392 in the infrared",
+      "description": "ESA/Webb's picture of NGC 2392, NIRCam at 1.15, 1.87, 2.12 and 3.35 µm with MIRI at 10 µm: ionised hydrogen in the bubble, dust and clumps of molecular hydrogen in the shell around it. It lies on the walls the nebula's spectra give, as Hubble's photograph does: a fast inner bubble inside a round outer shell (García-Díaz et al. 2012), each measured feature on the side its speed gives (García-Díaz et al. 2015). No speed is measured in this light.",
+      "summary": "Webb's infrared picture on the same walls: the bubble's ionised gas, and the dust and molecular hydrogen around it.",
+      "detail": "3505 × 3505 px",
+      "facts": [
+        {
+          "id": "bands",
+          "label": "Colors",
+          "value": "1.15, 1.87, 2.12, 3.35 and 10 µm"
+        },
+        {
+          "id": "source-pixels",
+          "label": "Source pixels",
+          "value": "3505 × 3505"
+        },
+        {
+          "id": "coverage",
+          "label": "Field",
+          "value": "1.77 × 1.77 arcmin"
+        },
+        {
+          "id": "license",
+          "label": "License",
+          "value": "CC-BY-4.0"
+        }
+      ],
+      "input": "optical",
+      "preview": {
+        "path": "src/objects/ngc-2392-webb-layers/source/source.jpg",
+        "url": "https://cdn.esawebb.org/archives/images/large/weic2616a.jpg"
+      }
+    }
+  ]
+}

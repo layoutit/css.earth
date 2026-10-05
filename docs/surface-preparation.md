@@ -430,6 +430,22 @@ through the archived camera at right. Compare the marked landmarks; the display
 stretches differ. Both use related observations, so this is a registration check.
 [Gaspra's README](../src/objects/gaspra/README.md) records the source, residuals and limits.
 
+### A flattened body
+
+A body that is shorter from pole to pole than across states its two radii: `shape` in `object.json` becomes
+`{ "kind": "ellipsoid", "radiusKm": <equatorial>, "polarRadiusKm": <polar> }`, and `surface.polarRadius` in
+`source/preparation/geometry.json` is `radius × polar / equatorial`. The lighting frames and the silhouette follow.
+
+Where the flattening is more than a pixel or two, the profile also states `"latitude": "planetocentric"`. A map's rows
+count planetocentric latitude, the angle of the line from the centre. With that setting
+[`meshLatitude`](../packages/bake/src/surface-geometry/surface.ts) draws each row where that line meets the spheroid,
+and the feature step casts label anchors onto the same surface, so labels sit on the ground at the poles. Without it a
+row is placed at the spheroid's parametric latitude, which is exact on a sphere and within a pixel on Mars. Ceres
+(482 by 446 km, 7.5%) and Iapetus (745.7 by 712.1 km, 4.5%) use it; without it their features would sit up to 2.2° and
+1.3° of latitude from their rows. The Gazetteer's datum sphere is then compared with the spheroid's volume-equivalent
+radius. The coordinate readout still measures on a sphere of the equatorial radius, and the lighting overlay
+is still a round body's.
+
 ## Reduce geometry and bake the atlas
 
 [radial-mesh.ts](../packages/bake/src/objects/geometry/radial-mesh.ts)
@@ -506,6 +522,19 @@ its full box. [leaf-box.ts](../packages/bake/src/presentation/leaf-box.ts) holds
   [prepared-leaf-box-direct.ts](../packages/renderer/src/rendering/prepared-leaf-box-direct.ts)): on an iPad, two
   device pixels a CSS pixel, Io's level 4,160 texels wide gives 65 px of its 128 px box and its widest image 130 px.
   The leaf takes that box with its image, in one write, once its step needs the whole image.
+  - **Stated by the bake.** An image's width and height are on its prepared entry, written from the published file by
+    the last step of every bake (`withImageSizes`,
+    [prepared-image-sizes.ts](../packages/bake/src/prepared-presentation/prepared-image-sizes.ts)), and the leaves
+    that draw it are the ones its texture write is bound to. The renderer reads both. It never measures an image, works
+    a size out of a byte count, or guesses which image a leaf draws: a leaf whose image states no size keeps its step's
+    box.
+  - **No variable carries an image.** A texture write names a slot, and the slot lists the elements that draw it
+    (`tree.textureBindings`). The page writes `background-image` on each of those elements, and the served markup
+    does the same; an image a container draws itself is a write of that container's own background. The bake still
+    finds the elements in a headless browser through a custom property, then ships records that name none
+    ([texture-image-records.ts](../packages/bake/src/presentation/texture-image-records.ts)), and the runtime
+    shipped-form check ([shipped-runtime.ts](../packages/objects/src/prepared-data/runtime-validation/shipped-runtime.ts))
+    refuses to pin or mount a runtime whose tree sets a custom property or whose element reads its image from one.
   - **One texel per device pixel.** The box follows the screen's pixel ratio where that is a whole number of two or
     more (a phone's three gives 43.33 px for the same level); any other screen keeps the bake's two texels a CSS
     pixel. The copy is by backing pixel: with the iPad's page scaled to four backing pixels a CSS pixel, Io's faces in
@@ -669,7 +698,10 @@ These still set their own encoding:
 - Earth's full pages keep the qualities its recipe declares; its smaller
   texture levels follow their page, lossy ones through the lane.
 - Lighting rows and their billboards carry shading in alpha and stay lossless.
-- Saturn's layered and spectral materials keep their encodings.
+- Saturn's layered and spectral materials keep their encodings. Its ultraviolet and methane surface maps and their
+  pole atlases joined the lane on 2026-10-05: the maps, 5.92 and 3.77 MB lossless, became 0.23 and 0.14 MB with 0 and 3
+  of 12.8 million pixels flagged; the atlases, 0.39 and 0.35 MB, became 0.04 MB each with none flagged and alpha exact.
+  Decoding a lossless map took 130 to 141 ms inside the frame of a dataset switch on the iPad.
 - Image-layer galaxies (M31, M33), the LMC and SMC volume banks and the Milky
   Way sky keep their recipe qualities.
 - Volume atlases (density in alpha, seen as stacked slices) and the
@@ -746,11 +778,17 @@ same published law, so the limb in the app is the limb the instrument saw.
   | Moon | Hapke at 643 nm | [Sato et al. 2014](https://doi.org/10.1002/2013JE004580), the correction of the LROC WAC mosaic; w, b and h_S are medians of its PDS parameter map |
   | Ceres (dwarf planet) | Hapke at 749 nm | [Li et al. 2019](https://doi.org/10.1016/j.icarus.2018.12.038), Dawn Framing Camera |
   | Io | Lunar-Lambert, weight 0.7 | the [USGS mosaics'](https://astrogeology.usgs.gov/search/map/io_voyager_galileo_ssi_global_mosaic_1km) own limb-darkening correction, at the phase [SIM 3168](https://pubs.usgs.gov/sim/3168/) gives; the limb limit is the outermost pixel of the finest full-disc Galileo frame at that phase, derived here |
-  | Europa | Lommel–Seeliger plus Lambert, coefficients linear in phase | [Dhingra et al. 2021](https://doi.org/10.3847/PSJ/ac06d6), Voyager 2, Galileo and New Horizons clear-filter images, ridged-plains row; the limb limit is the outermost pixel of the finest full-disc image in its Table 1, derived here |
+  | Europa | Minnaert, with the limb exponent of two fits joined by phase | [McEwen and Soderblom 1983](https://ntrs.nasa.gov/citations/19840015363), 44 pairs of Voyager images, to 30° phase; [Dhingra et al. 2021](https://doi.org/10.3847/PSJ/ac06d6), ridged-plains line of Table 2, from 57°; held between, a join that is ours. The 2021 paper's own 10° image agrees with the 1983 fit, not with its line. The limb limit is the outermost pixel of the finest full-disc image in the 2021 paper's Table 1, derived here |
+  | Ganymede, Callisto | Lommel–Seeliger (lunar-like), which has no parameter | [Squyres and Veverka 1981](https://doi.org/10.1016/0019-1035%2881%2990203-7), Voyager clear-filter images. The paper is closed; the function is read in the authors' summary, page 67 of [NASA TM-82385](https://ntrs.nasa.gov/citations/19810007392). Flat at zero phase. No phase function is printed. The limb limit is the outermost pixel of the finest whole-disc Voyager frame, derived here |
+  | Iapetus | Lommel–Seeliger, with the phase values the paper prints per image | [Buratti and Mosher 1995](https://doi.org/10.1006/icar.1995.1093), Voyager images, read in its [JPL preprint](https://dataverse.jpl.nasa.gov/dataset.xhtml?persistentId=hdl:2014/29299). Flat at zero phase. The limb limit is the outermost pixel of the finest image in its Table 1, derived here |
+  | Oberon | Hapke (1986): single-scattering albedo 0.41, asymmetry −0.29, roughness 21°, opposition surge 1.03 and 0.007 | Helfenstein, Hillier, Weitz and Veverka, Voyager clear-filter images and Earth-based photometry, read in the authors' summary, pages 230 and 231 of [NASA TM-4210](https://ntrs.nasa.gov/citations/19900018290). The limb limit is the outermost pixel of the frame it names as its finest, derived here |
+  | Umbriel | Hapke (1986): single-scattering albedo 0.34, asymmetry −0.18, roughness 28°, opposition surge width 0.06 and S(0) 1.28 | [Helfenstein and Veverka 1988](https://ui.adsabs.harvard.edu/abs/1988LPI....19..477H), five Voyager clear-filter images at 10.4° to 142.9° phase, an open conference abstract. The surge amplitude follows from S(0) by the authors' definition; the limb limit is the outermost pixel of its finest frame, derived here |
+  | Titania | Hapke (1986): single-scattering albedo 0.48, asymmetry −0.28, roughness 23°, opposition surge width 0.018 and S(0) 0.77 | Veverka et al. 1987, a fit to whole-disc Voyager photometry, read in the table on page 181 of [NASA TM-4041](https://ntrs.nasa.gov/citations/19880017749). The same group reports that whole-disc and disc-resolved fits agree for Titania. The phase range and limb limit are derived here |
+  | Triton | Hapke surface: single-scattering albedo 0.995, asymmetry −0.281, roughness 14.7°; no opposition surge, and its thin haze is not drawn | Hillier, Helfenstein, Verbiscer and Veverka, a fit to whole-disc Voyager photometry at 11° to 159° phase, green filter, page 227 of [NASA TM-4210](https://ntrs.nasa.gov/citations/19900018290). Chosen over the misprinted line of Schenk et al. 2021 by fitting five calibrated Voyager frames at 15° to 38° phase. The limb limit is derived here |
   | Rhea, Dione, Enceladus | Akimov, with a quadratic phase curve at 0.55 µm | [Filacchione et al. 2022](https://doi.org/10.1016/j.icarus.2021.114803), Cassini VIMS; flat at zero phase |
   | Pluto, Charon | Lunar-Lambert, A 0.70 | [Buratti et al. 2017](https://doi.org/10.1016/j.icarus.2016.11.012), LORRI approach images; the limb limit is the outermost pixel of the finest image in its Table 1, derived here |
 
-  Ganymede, Callisto, Titan, Iapetus, the five large Uranian moons, Triton,
+  Titan, Miranda, Ariel,
   Eris and Makemake keep the shared `sphere` bank. Each
   has a `limb-law` entry in its `investigations.json` that says what was found
   and what is missing: no law exists, the published one could not be read, it
@@ -783,9 +821,10 @@ same published law, so the limb in the app is the limb the instrument saw.
   ![Pluto before and after](images/planet-limbs/pluto-before-after.webp)
   ![Charon before and after](images/planet-limbs/charon-before-after.webp)
 
-  Europa on css.earth with the shared bank (left) and with its published law
-  (right), 4 October 2026: Shadows off above, on below. Its law gives an
-  overlay alpha of 0.06 at 0.98 of the radius.
+  Europa with the 2021 lines alone (left) and with the low-phase fit joined to
+  them (right), 5 October 2026: Shadows off above, on below. The joined law
+  gives an overlay alpha of 0.18 at 0.98 of the radius, where the lines alone
+  gave 0.06 and the authored bank 0.49.
 
   ![Europa before and after](images/planet-limbs/europa-before-after.webp)
 
@@ -798,6 +837,22 @@ same published law, so the limb in the app is the limb the instrument saw.
   is flat when flood-lit, so that frame draws no overlay at all.
 
   ![Rhea before and after](images/planet-limbs/rhea-before-after.webp)
+
+  Ganymede and Iapetus, the same day, with the lunar-like law found in Voyager
+  images. Like Rhea's, it is flat when flood-lit. Iapetus's paper prints a
+  phase value per image, so its lit side dims with phase; Ganymede's phase
+  function is only drawn in a figure, so its lit side carries none.
+
+  ![Ganymede before and after](images/planet-limbs/ganymede-before-after.webp)
+  ![Iapetus before and after](images/planet-limbs/iapetus-before-after.webp)
+
+  Titania and Triton, the same day, with Hapke fits to whole-disc Voyager
+  photometry. Titania's fit has a narrow opposition surge, so its frames with
+  Shadows on are dim against the flood-lit view. Triton's bright, multiply
+  scattering surface darkens toward the limb even when flood-lit.
+
+  ![Titania before and after](images/planet-limbs/titania-before-after.webp)
+  ![Triton before and after](images/planet-limbs/triton-before-after.webp)
 - **One overlay per pixel.** A CSS overlay has one color and one alpha, and
   blend modes are not used. The overlay is exact for the map's mean color,
   measured at bake, and for every pixel in the channel that sets its alpha. A

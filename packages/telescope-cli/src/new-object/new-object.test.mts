@@ -456,6 +456,7 @@ test('ids follow one rule, and a body the universe holds is found whatever its i
   const trappist = JSON.parse(await readFile(resolve(root, 'packages/astronomy/data/bodies/trappist-1.json'), 'utf8')).star;
   assert.equal(duplicateStar(universe, { ra: trappist.rightAscensionDegrees + 1 / 3600, dec: trappist.declinationDegrees, epoch: 2016 }), 'trappist-1', 'one arcsecond away is the same star');
   assert.equal(duplicateStar(universe, { ra: trappist.rightAscensionDegrees, dec: trappist.declinationDegrees, epoch: 2016 }, 'trappist-1'), undefined, 'a refresh does not find itself');
+  assert.equal(duplicateStar(universe, { ra: trappist.rightAscensionDegrees, dec: trappist.declinationDegrees, epoch: 2016 }, undefined, 'trappist-1'), undefined, 'the object a star is inside is not that star');
   assert.equal(duplicateStar(universe, { ra: trappist.rightAscensionDegrees + 0.1, dec: trappist.declinationDegrees, epoch: 2016 }), undefined);
 });
 
@@ -865,7 +866,7 @@ test('APOKASC-3 and Groenewegen (2013) rows draft single stars through the one r
   const { physicalValues } = await import('./generate.mts'), values = physicalValues(measured, { sourceId: '1', ra: 0, dec: 0, g: 13, hasXpSampled: false });
   assert.deepEqual([values.gm, values.logg], [0, 1.2]);
   assert.match(values.massText, /No mass is measured, so GM is 0/u);
-  assert.deepEqual(Object.keys(DRAFT_ROUTES), ['archive', 'debcat', 'apokasc', 'cepheids', 'k2', 'tess', 'gaia', 'hipparcos', 'iau', 'chara', 'npoi', 'sh0es', 'm31cepheids', 'm33cepheids', 'table']);
+  assert.deepEqual(Object.keys(DRAFT_ROUTES), ['archive', 'debcat', 'apokasc', 'cepheids', 'k2', 'tess', 'gaia', 'hipparcos', 'iau', 'chara', 'npoi', 'sh0es', 'm31cepheids', 'm33cepheids', 'table', 'esa']);
   await assert.rejects(writeDrafts('gcvs', ['X'], 'output/x.json', { root, progress: () => {}, archive: {} as Archive }), /No draft route gcvs; the routes are --from-archive, --from-debcat, --from-apokasc, --from-cepheids, --from-k2, --from-tess, --from-gaia/u);
 });
 

@@ -6,6 +6,7 @@ import type { AtlasAddress, PresentationInputs, PresentationDraft, SourceMateria
 import type { PreparedNode, PresentationAdapters } from './adapters.ts';
 import { seamOutsetBinding, seamOutsetInitialValue } from '../scene/index.ts';
 import { RASTER_LEVEL_HYSTERESIS, rasterPageName, type RasterPagePlan } from '../raster/index.ts';
+import { readsTexture } from './prepared-node-tree.ts';
 
 const BILLBOARD_LIGHTING_KEY = 'lighting-billboard', SHADOWLESS_BILLBOARD_KEY = 'shadowless-billboard';
 export async function prepareComposite(input: PresentationInputs, adapters: PresentationAdapters): Promise<PresentationDraft> {
@@ -40,7 +41,8 @@ export async function prepareComposite(input: PresentationInputs, adapters: Pres
   const seamOutset=plan.body.seamRepair?.outset;
   if(seamOutset)system.style.setProperty(seamOutset.property,seamOutsetInitialValue(seamOutset,plan.camera.logicalBodyDiameter));
   b.append(null,camera);b.append(camera,scene);b.append(scene,system);b.append(system,body);
-  for(const leaf of plan.body.leaves)b.append(body,b.leaf(leaf));
+  // A page face names its page already; a cap draws the pole write on the body.
+  for(const leaf of plan.body.leaves)b.append(body,(leaf.className??"").split(/\s+/u).includes(`${ns}-polar`)?readsTexture(b.leaf(leaf),`--${ns}-poles-image`):b.leaf(leaf));
   // A ring hangs beside the body under the system node, so the body's orientation carries it.
   const planeNodes = new Map<string, PreparedNode>();
   for(const entry of planes){

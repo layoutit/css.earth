@@ -1,0 +1,57 @@
+{
+  "schema": "cssearth-volume-presentation-source@2",
+  "objectId": "m57-miri-layers",
+  "name": "Ring Nebula",
+  "defaultDataset": "optical",
+  "bank": {
+    "path": "src/objects/m57-miri-layers/prepared/image-layers.json"
+  },
+  "recipes": [
+    {
+      "id": "image-layer-recipe",
+      "path": "src/objects/m57-miri-layers/source/recipe.json"
+    },
+    {
+      "id": "source-evidence",
+      "path": "src/objects/m57-miri-layers/source/provenance.json"
+    }
+  ],
+  "sharedInputs": [],
+  "datasets": [
+    {
+      "id": "optical",
+      "label": "Webb · mid infrared",
+      "title": "Ring Nebula in the mid infrared",
+      "description": "ESA/Webb's mid-infrared picture of the Ring Nebula, MIRI at 5.6, 7.7, 10, 11, 12, 15, 18, 21 and 25 µm. Ionised gas makes its reds and greens: the hot cavity inside the ring, bright in [O IV] and [S IV], and the ring itself in [S III]. Molecular hydrogen makes its blues, the ring's outer edge and the halo's arcs. It lies on the walls of the ionised shell (O'Dell et al. 2013), as Hubble's picture does, with the speed of the gas each color shows.",
+      "summary": "Webb's mid-infrared picture on the nebula's ionised shell, each color at the speed of the gas it shows.",
+      "detail": "1257 × 1015 px",
+      "facts": [
+        {
+          "id": "bands",
+          "label": "Colors",
+          "value": "5.6, 7.7, 10, 11, 12, 15, 18, 21 and 25 µm"
+        },
+        {
+          "id": "source-pixels",
+          "label": "Source pixels",
+          "value": "1257 × 1015"
+        },
+        {
+          "id": "coverage",
+          "label": "Field",
+          "value": "2.33 × 1.88 arcmin"
+        },
+        {
+          "id": "license",
+          "label": "License",
+          "value": "CC-BY-4.0"
+        }
+      ],
+      "input": "optical",
+      "preview": {
+        "path": "src/objects/m57-miri-layers/source/source.jpg",
+        "url": "https://cdn.esawebb.org/archives/images/large/weic2320c.jpg"
+      }
+    }
+  ]
+}

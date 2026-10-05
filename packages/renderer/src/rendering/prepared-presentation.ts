@@ -15,7 +15,7 @@ import type { PreparedResources, PreparedResourceDemand } from './prepared-resid
 
 import type { PreparedAnimationOptions } from "./prepared-playback.js";
 import { readPreparedStyle, writePreparedStyle, samePreparedStyle } from "./style-access.js";
-import { createTextureTileWriter, preparedTexturePixels, selectPreparedTextureLevel, unseenTextureWrites } from './prepared-texture-levels.js';
+import { createTextureTileWriter, preparedTextureSizes, selectPreparedTextureLevel, unseenTextureWrites } from './prepared-texture-levels.js';
 
 import { createLeafBoxBlocks } from './prepared-leaf-box-blocks.js';
 import { createLeafBoxWriter, SEAM_OUTSET } from './prepared-leaf-box-direct.js';
@@ -233,13 +233,14 @@ export function mountPreparedPresentation(stage: HTMLElement, context: PreparedP
   const textureBindings = new Map((definition.tree.textureBindings ?? []).map(binding =>
     [`${binding.target}:${binding.name}`, binding.leaves.map(index => nodes[index])] as const));
   const leafIndex = new Map((definition.tree.textureBindings ?? []).flatMap(binding => binding.leaves.map(index => [nodes[index]!, index] as const)));
-  const texturePixels = preparedTexturePixels(definition);
+  const textureSize = preparedTextureSizes(definition);
   const surfaceScenes = [sceneElement, ...(definition.depthPartitions?.groups ?? []).map(group => nodes[group.scene])];
-  const textureLeaves = new Set([...textureBindings.values()].flat());
-  const textureActivation = prepareTextureActivation(preparedTree && progressiveActivation && definition.tree.textureBindings?.length
+  // A slot may list no element (a carrier the depth partitions emptied): only listed elements make a body textured.
+  const textureLeaves = new Set([...textureBindings.values()].flat()), textured = textureLeaves.size > 0;
+  const textureActivation = prepareTextureActivation(preparedTree && progressiveActivation && textured
     ? (definition.tree.activationGroups ?? []).map(group => group.map(index => nodes[index])
       .filter(node => textureLeaves.has(node) && surfaceScenes.some(scene => scene.contains(node)))) : [], context.own);
-  const activate = definition.tree.textureBindings?.length ? textureActivation.activate : prepareConnectedActivation(preparedTree && progressiveActivation
+  const activate = textured ? textureActivation.activate : prepareConnectedActivation(preparedTree && progressiveActivation
     ? (definition.tree.activationGroups ?? []).map(group => group.map(index => nodes[index])) : [], context.own,
     // Empty structural anchors can be leaves after preparation partitions the
     // surface. Hit testing and feature binding need their ancestry immediately.
@@ -286,7 +287,7 @@ export function mountPreparedPresentation(stage: HTMLElement, context: PreparedP
   // A leaf's box follows the image it takes: both land in one write, so the leaf repaints once (prepared-leaf-box-direct.ts).
   const writeLeafTexture = (leaf: HTMLElement, image: string, shown: string | undefined) => {
     textureActivation.write(leaf, image);
-    if (shown !== undefined) styleWrites += framePublisher.showLeafImage(leafIndex.get(leaf)!, texturePixels(shown));
+    if (shown !== undefined) styleWrites += framePublisher.showLeafImage(leafIndex.get(leaf)!, textureSize(shown));
   };
   function publishStyle(index: number, name: string, value: string, shown?: string) {
     if (name === 'display' && textureActivation.deferDisplay(target(index), value)) return;
@@ -551,8 +552,8 @@ export function createPreparedFramePublisher(definition: PreparedPresentationDef
       }
       framePublications++;
     },
-    /** The leaf on node `index` shows an image of `pixels`: its box follows; returns the style writes. */
-    showLeafImage(index: number, pixels: number | undefined) { return leafBoxes.image(index, pixels); },
+    /** The leaf on node `index` shows an image of this stated size: its box follows; returns the style writes. */
+    showLeafImage(index: number, size: readonly [number, number] | undefined) { return leafBoxes.image(index, size); },
     observe() { return { framePublications, styleWrites, transformWrites,
       materials: Object.fromEntries([...materials].map(([id, material]) => [id, material.observe()])) }; },
   };

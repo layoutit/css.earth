@@ -55,12 +55,11 @@
     {
       "id": "weic2207c",
       "subject": "Webb's mid-infrared picture",
-      "status": "deferred",
-      "finding": "ESA/Webb weic2207c (MIRI, 1306 × 1133 px) shows the same nebula in the mid infrared. It would lie on the same walls as a second dataset.",
+      "status": "included",
+      "finding": "ESA/Webb weic2207c (MIRI, 1306 × 1133 px) shows the same nebula in the mid infrared. It is the page's second dataset, the bank ngc-3132-miri-layers, on these same walls. The placement fit run on it gives the grid's second axis at 324.5 degrees, a degree from the 325.5 measured on this picture.",
       "evidence": [
         "https://esawebb.org/images/weic2207c/"
-      ],
-      "revisitWhen": "A second dataset is wanted."
+      ]
     }
   ]
 }

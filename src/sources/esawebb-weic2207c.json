@@ -1,0 +1,52 @@
+{
+  "id": "esawebb-weic2207c",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Southern Ring Nebula (MIRI Image)",
+  "identifiers": [
+    {
+      "type": "ESA/Webb image",
+      "value": "weic2207c"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://esawebb.org/images/weic2207c/",
+      "label": "Published source"
+    },
+    {
+      "role": "original",
+      "url": "https://cdn.esawebb.org/archives/images/large/weic2207c.jpg",
+      "label": "JPEG, 1306 x 1133 px"
+    },
+    {
+      "role": "rights",
+      "url": "https://esawebb.org/copyright/",
+      "label": "Reuse terms"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://esawebb.org/images/weic2207c/",
+      "checkedOn": "2026-10-04",
+      "locator": "1306 x 1133 px over 2.39 × 2.07 arcmin; MIRI 7.7, 11.3, 12 and 18 µm (the page prints the second as 1.13 µm); released 12 July 2022. The file's embedded sky tags for scale and direction, 0.1099 arcsec per pixel and north 124.65° right of vertical, and the star for place: the middle of the bright central star's saturated pixels, pixel 663.3, 553.5, is set at SIMBAD's place for NGC 3132, so the frame's centre is 151.7566982°, -40.4364794°. The tags alone put the star 0.26 arcsec away."
+    }
+  ],
+  "publisher": "ESA/Webb",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "NASA, ESA, CSA, STScI, and the Webb ERO Production Team",
+      "scope": "Published source",
+      "evidence": "https://esawebb.org/images/weic2207c/"
+    },
+    {
+      "kind": "rights",
+      "text": "Creative Commons Attribution 4.0 International; the full credit must be shown.",
+      "scope": "Published source",
+      "evidence": "https://esawebb.org/copyright/"
+    }
+  ]
+}

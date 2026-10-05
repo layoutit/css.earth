@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "ngc-3132-miri-layers",
+  "entries": [
+    {
+      "id": "weic2207c",
+      "subject": "ESA/Webb weic2207c",
+      "status": "included",
+      "finding": "Southern Ring Nebula (MIRI Image): MIRI at 7.7, 11.3, 12 and 18 µm; 1306 × 1133 px over 2.39 × 2.07 arcmin, released 12 July 2022. The file's embedded sky tags for scale and direction, 0.1099 arcsec per pixel and north 124.7° right of vertical, and the star for place: the star in the picture, the largest patch of saturated pixels within 1 arcsec of where the tags put it, 29 px, pixel 663.3, 553.5, is set at the recipe's target, so the frame's centre is 151.7566982°, -40.4364794°. The tags alone put the star 0.26 arcsec from where the picture shows it.",
+      "evidence": [
+        "https://esawebb.org/images/weic2207c/",
+        "https://esawebb.org/copyright/"
+      ]
+    },
+    {
+      "id": "walls",
+      "subject": "The walls under this picture",
+      "status": "included",
+      "finding": "The same walls as the near-infrared dataset (src/objects/ngc-3132-layers): the density grid of Monteiro et al. (2025), placed on the sky as measured there. The grid is the ionised gas, from H-alpha and [N II] velocity cubes; this picture also holds dust and molecular light, which takes the same depths here. Run on this picture (packages/bake/authoring/ngc-3132/grid-fit.mts with this bank's id), the same fit finds the grid's second axis at 324.5 degrees, against 325.5 from the near-infrared picture, with a correlation of 0.58 (0.136 half a turn on, 0.316 with the other handedness): a second picture, taken with another instrument, gives the same turn within a degree. The walls keep the near-infrared picture's value.",
+      "evidence": [
+        "https://arxiv.org/abs/2503.20640",
+        "https://github.com/hektor-monteiro/NGC3132_model"
+      ]
+    },
+    {
+      "id": "two-stars",
+      "subject": "The two stars at the centre",
+      "status": "included",
+      "finding": "This picture shows two stars at the nebula's centre, 1.8 arcsec apart (measured here): the bright one the near-infrared picture shows, and a second one. The frame is placed by the bright one, the saturated patch nearest the place the picture's tags give SIMBAD's position; its own light, out to 2.1 arcsec, stays at the star. The second star lies in that light.",
+      "evidence": [
+        "https://esawebb.org/images/weic2207c/"
+      ]
+    }
+  ]
+}

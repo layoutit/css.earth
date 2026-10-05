@@ -93,15 +93,33 @@
     {
       "id": "limb-law",
       "subject": "Photometric law for the lighting overlays",
-      "status": "unresolved",
-      "finding": "USGS map I-2762 says the mosaic was normalized with a lunar-Lambert function with empirically derived values, which it does not print. Squyres and Veverka (1981) and the regional Hapke fits of Belgacem et al. (2021) could not be opened. Dhingra, Buratti and Seignovert (2021) report that Squyres and Veverka found a lunar-like law adequate for Ganymede (A = 1 in the Lommel-Seeliger plus Lambert form), which leaves its fitted emission range unread. Ganymede keeps the shared sphere bank.",
+      "status": "included",
+      "finding": "Lunar-like (Lommel-Seeliger) law of Squyres and Veverka (1981), which has no parameter. The Icarus paper is closed, but the authors' own summary in NASA's Reports of Planetary Geology Program 1980 (TM-82385, page 67) is open. It says Voyager clear-filter images at 10 to 124 degrees phase show that Ganymede's Cratered and Grooved Terrain and Callisto's Cratered Terrain are described closely by I = A F(alpha) mu0/(mu + mu0), and that bright craters follow it approximately. Buratti et al. (2017) and Dhingra, Buratti and Seignovert (2021) report the same result for Ganymede (lunar-like, A = 1). Flood-lit, this law is flat to the limb. F(alpha) is drawn in the report's Figure 1 and not printed, so frames with Shadows on carry no phase term. No emission range is printed; the limit 86.2 degrees is derived here from the outermost pixel of the finest clear-filter Voyager frame that holds the whole disc (Voyager 2 C2063551, 11.286 km per pixel) and is second class. Not used: USGS and the conference abstract on these mosaics (Becker et al. 2001) say they were normalized with a lunar-Lambert function with empirically derived values, which neither prints; Buratti (1991) fitted Hapke models to whole-hemisphere phase curves, which give no disc-resolved law. The near-infrared studies of Ligier et al. (2019) and King and Fletcher (2022) correct their spectra with an Oren-Nayar model, not at this map's wavelengths. The regional Hapke fits of Belgacem et al. (2021) could not be opened. McEwen and Soderblom (1983), an open summary in NASA TM-86246 (page 261), solved the limb darkening from pairs of Voyager images of the same ground: one pair on Ganymede and 16 on Callisto, both consistent with lunar-like scattering. That is an independent disc-resolved result for the same law.",
       "evidence": [
-        "https://pubs.usgs.gov/imap/i2762/",
+        "https://ntrs.nasa.gov/citations/19810007392",
         "https://doi.org/10.1016/0019-1035(81)90203-7",
+        "https://ntrs.nasa.gov/citations/19810058926",
+        "https://arxiv.org/abs/1604.06129",
+        "https://doi.org/10.3847/PSJ/ac06d6",
+        "https://opus.pds-rings.seti.org/opus/api/metadata/vg-iss-2-j-c2063551.json",
+        "https://pubs.usgs.gov/imap/i2762/",
+        "https://www.lpi.usra.edu/meetings/lpsc2001/pdf/2009.pdf",
+        "https://ntrs.nasa.gov/citations/19910063813",
+        "https://arxiv.org/abs/1910.07445",
         "https://doi.org/10.1016/j.icarus.2021.114631",
-        "https://doi.org/10.3847/PSJ/ac06d6"
+        "https://ntrs.nasa.gov/citations/19840015363"
       ],
-      "revisitWhen": "A global disc-resolved Ganymede law with its fitted emission range is read in the paper, or USGS publishes its lunar-Lambert values."
+      "revisitWhen": "The paper's phase functions and emission range, or a newer global disc-resolved Ganymede law at visible wavelengths, are read."
+    },
+    {
+      "id": "authored-limb-lighting",
+      "subject": "Shared sphere bank lighting (Lambert with a 0.35 flood floor and 0.05 ambient term, adapted from OpenSpace)",
+      "status": "excluded",
+      "finding": "Replaced by the lunar-like law of Squyres and Veverka (1981); Ganymede now bakes its own bank.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/main/packages/bake/src/raster/lighting-banks.ts"
+      ],
+      "revisitWhen": "Nothing: an authored limb is not reopened once a published law exists."
     },
     {
       "id": "sim3237-unit-symbology",

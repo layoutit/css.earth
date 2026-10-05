@@ -9,6 +9,7 @@ Titania uses Voyager 2 mosaics and terrain reconstruction, a Voyager color datas
 | Monochrome and elevation | [Schenk's 2020 mosaics and DEMs](https://repository.hou.usra.edu/handle/20.500.11753/1687), described by [Schenk and Moore (2020)](https://doi.org/10.1098/rsta.2020.0102) and the [author README](https://repository.hou.usra.edu/bitstreams/00528589-53e3-496b-ac5d-b6d86fe527c9/download) |
 | Voyager color | Voyager 2 ISS narrow-angle GEOMED frames from the PDS Ring-Moon Systems Node (volumes VGISS_7201–7207): every complete green/violet/ultraviolet set of Titania, 30 frames in 10 sets, listed in [the frame recipe](source/preparation/voyager-color-frames.json) |
 | Geologic categories | [Thomson and Baynham (2026)](https://zenodo.org/records/20819132), digitized Voyager-era interpretations, CC BY 4.0 |
+| Lighting | The Hapke fit of Veverka et al. (1987) to Voyager photometry of Titania, read in [NASA TM-4041](https://ntrs.nasa.gov/citations/19880017749), page 181. See [Lighting law](#lighting-law). |
 | Physical placement and spin | JPL satellite elements and IAU/NAIF rotation |
 | Named features | [IAU/USGS Gazetteer of Planetary Nomenclature](https://planetarynames.wr.usgs.gov/Page/TITANIA/target) Titania centre-point export, snapshot 2026-09-11, public domain. Labels appear at the closest zoom only, and a selected feature stays labelled. |
 
@@ -32,6 +33,12 @@ The archive's filter calibration leaves violet darker than green and ultraviolet
 
 The sphere uses the 788.9 km mean radius, with synchronous spin. The prepared map starts at 0° E; preparation refuses a declared edge the source contradicts ([where the prepared map starts](../../../docs/surface-preparation.md#where-the-prepared-map-starts)).
 
+## Lighting law
+
+The globe is lit with Hapke's 1986 model and the parameters Veverka et al. (1987) fitted to Voyager photometry of Titania: single-scattering albedo 0.48, asymmetry −0.28, roughness 23°, opposition surge width 0.018 and S(0) = 0.77. They are Titania's row in Table 1 of Verbiscer and Veverka's summary, page 181 of NASA's [Reports of Planetary Geology and Geophysics Program 1987](https://ntrs.nasa.gov/citations/19880017749); the [paper](https://doi.org/10.1029/JA092iA13p14895) was not read. The model takes the surge amplitude B0, which the authors define as S(0)/(w P(0)) in their [1986 summary](https://ntrs.nasa.gov/citations/19870013908): 0.65. It is a fit to whole-disc photometry; the same group [reports](https://ntrs.nasa.gov/citations/19900003138) that whole-disc and disc-resolved fits agree excellently for Titania. The law is recorded in [`source/photometry/veverka-1987-hapke-clear.json`](source/photometry/veverka-1987-hapke-clear.json).
+
+Each lighting frame is the law relative to the flood-lit disc centre, so the centre of the default view shows the map as published. With the Sun behind the viewer the limb is 0.97 of the centre. At 0.98 of the radius that is an overlay alpha of 0.02, where the authored bank this replaces reached 0.49. See [planet limbs](../../../docs/surface-preparation.md#planet-limbs-from-published-laws).
+
 ## Evidence
 
 Read through its georeferenced source, the prepared normal map correlates 0.87 from 0° E and 0.16 from 180° E. The [source inspection](source/observations/source-inspection.json) gives independent NumPy coordinate and value samples.
@@ -42,6 +49,7 @@ The checked geology landmark differences are 0.33–0.83° (approximately 4.5–
 
 ## Known problems
 
+- **Lighting law:** The fit is to whole-disc photometry, not to resolved images, and one row lights every terrain. Checked against five calibrated Voyager frames from 0.8° to 70° phase, it matches the resolved limb to 0.06 in lunar-Lambert weight (see the [ledger](investigations.json)). The surge amplitude 0.65 is computed here from the printed S(0); the phase range and the emission limit 86.2° are derived here. The opposition surge puts the point under the Sun at 0.70 of the flood-lit centre at 10° phase, so frames with Shadows on are dimmer than the flood-lit view.
 - The Voyager color dataset is false color (green, violet, ultraviolet as red, green, blue) at the observations' own phase angles. A color seam at a footprint edge is a real difference in viewing geometry. Its band ratios are read from a figure at ±0.02, and the ultraviolet calibration carries a stated ±10 % uncertainty. The brightest 0.1 % of texels may clip.
 - Approximate source coverage is 44.8% for monochrome and 27.7% for elevation before interpolation; the unobserved north stays missing.
 - Monochrome processing depends on an unavailable photometric parameter file (`eu_pho10.pvl`). DN values are not calibrated albedo.

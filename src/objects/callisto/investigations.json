@@ -45,13 +45,29 @@
     {
       "id": "limb-law",
       "subject": "Photometric law for the lighting overlays",
-      "status": "unresolved",
-      "finding": "USGS describes lunar-Lambert normalization of the mosaic without printing its values. Squyres and Veverka (1981) could not be opened, and the Callisto photometry of Belgacem and colleagues covers regions only. Callisto keeps the shared sphere bank.",
+      "status": "included",
+      "finding": "Lunar-like (Lommel-Seeliger) law of Squyres and Veverka (1981), which has no parameter. The Icarus paper is closed, but the authors' own summary in NASA's Reports of Planetary Geology Program 1980 (TM-82385, page 67) is open. It says Voyager clear-filter images at 10 to 124 degrees phase show that Ganymede's Cratered and Grooved Terrain and Callisto's Cratered Terrain are described closely by I = A F(alpha) mu0/(mu + mu0), and that bright craters follow it approximately. Flood-lit, this law is flat to the limb. F(alpha) is drawn in the report's Figure 1 and not printed, so frames with Shadows on carry no phase term. No emission range is printed; the limit 86.3 degrees is derived here from the outermost pixel of the finest clear-filter Voyager frame that holds the whole disc (Voyager 2 C2058321, 10.116 km per pixel) and is second class. Not used: USGS and the conference abstract on these mosaics (Becker et al. 2001) say they were normalized with a lunar-Lambert function with empirically derived values, which neither prints; Buratti (1991) fitted Hapke models to whole-hemisphere phase curves, which give no disc-resolved law. The Callisto photometry of Belgacem and colleagues covers regions only. McEwen and Soderblom (1983), an open summary in NASA TM-86246 (page 261), solved the limb darkening from pairs of Voyager images of the same ground: 16 pairs on Callisto and one on Ganymede, both consistent with lunar-like scattering. That is an independent disc-resolved result for the same law.",
       "evidence": [
+        "https://ntrs.nasa.gov/citations/19810007392",
+        "https://doi.org/10.1016/0019-1035(81)90203-7",
+        "https://ntrs.nasa.gov/citations/19810058926",
+        "https://opus.pds-rings.seti.org/opus/api/metadata/vg-iss-2-j-c2058321.json",
         "https://astrogeology.usgs.gov/search/map/callisto_voyager_galileo_image_mosaic_map",
-        "https://doi.org/10.1016/0019-1035(81)90203-7"
+        "https://www.lpi.usra.edu/meetings/lpsc2001/pdf/2009.pdf",
+        "https://ntrs.nasa.gov/citations/19910063813",
+        "https://ntrs.nasa.gov/citations/19840015363"
       ],
-      "revisitWhen": "A global disc-resolved Callisto law with its fitted emission range is read in the paper, or USGS publishes its lunar-Lambert values."
+      "revisitWhen": "The paper's phase functions and emission range, or a newer global disc-resolved Callisto law, are read."
+    },
+    {
+      "id": "authored-limb-lighting",
+      "subject": "Shared sphere bank lighting (Lambert with a 0.35 flood floor and 0.05 ambient term, adapted from OpenSpace)",
+      "status": "excluded",
+      "finding": "Replaced by the lunar-like law of Squyres and Veverka (1981); Callisto now bakes its own bank.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/main/packages/bake/src/raster/lighting-banks.ts"
+      ],
+      "revisitWhen": "Nothing: an authored limb is not reopened once a published law exists."
     },
     {
       "id": "photojournal-pia00844-nims-global",

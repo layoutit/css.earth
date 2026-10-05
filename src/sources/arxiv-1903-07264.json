@@ -1,0 +1,51 @@
+{
+  "id": "arxiv-1903-07264",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Miszalski et al. (2019): The post-common-envelope X-ray binary nucleus of the planetary nebula NGC 2392",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1903.07264"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1017/pasa.2019.11"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/1903.07264",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1017/pasa.2019.11",
+      "label": "Journal version"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/1903.07264",
+      "checkedOn": "2026-10-05",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Miszalski et al. (2019)",
+      "scope": "citation",
+      "evidence": "https://arxiv.org/abs/1903.07264"
+    }
+  ],
+  "creators": [
+    "Brent Miszalski",
+    "Rajeev Manick",
+    "Hans Van Winckel",
+    "et al."
+  ],
+  "publicationDate": "2019"
+}

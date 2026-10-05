@@ -50,8 +50,9 @@ export interface PreparedUniverseOptions {
   /** A prepared `GALAXY_BACKING_SCHEMA` face-on image drawn under the galaxy's catalogue dots, by URL. */
   galaxyBacking?: string;
   imageLayers?: readonly PreparedImageLayerMount[];
-  /** Descriptor-only image banks. Their JSON and DOM are admitted only on projected visibility or explicit focus. */
-  imageLayerBanks?: readonly { id: string; frame: DensityVolumeFrame }[];
+  /** Descriptor-only image banks. Their JSON and DOM are admitted only on projected visibility or explicit focus.
+   * `surrounds`: the bank's light lies on walls around its middle, so it also draws around a body that stands inside it. */
+  imageLayerBanks?: readonly { id: string; frame: DensityVolumeFrame; surrounds?: true }[];
   loadImageLayer?(id: string): Promise<PreparedImageLayerMount>;
   /** Packages that are only a prepared catalogue point bank (`catalogue-point-bank` descriptors), by URL: fetched and drawn
    * while the catalogue row that details to them (`detailedObjectId`) is selected, or, for a bank that belongs to a body's

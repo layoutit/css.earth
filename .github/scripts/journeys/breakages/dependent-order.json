@@ -1,0 +1,25 @@
+{
+  "schema": "journey-breakage@1",
+  "id": "dependent-order",
+  "description": "Pure reorder of the explicit startup issue batch, preserving the request URL set and response sources.",
+  "expectedFamilies": [
+    "network",
+    "dom"
+  ],
+  "journeys": [
+    "milky-way"
+  ],
+  "profiles": [
+    "chromium-desktop",
+    "webkit-desktop"
+  ],
+  "substitutions": [
+    {
+      "file": "site/startup-requests.mts",
+      "before": "defaultView ? [transportUrl, ...urls] : urls",
+      "after": "defaultView ? [...urls, transportUrl] : urls",
+      "occurrences": 1
+    }
+  ],
+  "limitation": "A declared issue-order regression, not a completion dependency among parallel head requests. The separate world-completion-before-router-import declaration observes the real bootstrap dependency."
+}

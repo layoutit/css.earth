@@ -112,14 +112,16 @@
       "id": "limb-law",
       "subject": "Photometric law for the lighting overlays",
       "status": "included",
-      "finding": "Lommel-Seeliger plus Lambert law of Dhingra, Buratti and Seignovert (2021), fitted to 21 resolved Voyager 2, Galileo and New Horizons clear-filter images: I/F = A f mu0/(mu0 + mu) + (1 - A) mu0, with the ridged-plains lines of its Table 2, A = 0.871 - 0.003 alpha and f = 1.556 - 0.014 alpha (alpha in degrees), fitted at 10 to 128 degrees phase, relative to the flood-lit disc centre. A lighting overlay has one law for the whole body: the ridged-plains row is used because the paper says that unit covers more than half of Europa and that the parameters differ little between terrains. No map pixel changes. The paper states no emission range; the limit 84.5 degrees is derived here from the outermost pixel of the finest full-disc image in its Table 1 (Voyager 2 wide-angle C2065221, 14.465 km per pixel) and is second class. The same table's Minnaert lines are not used: Minnaert grows without bound toward the limb while its exponent is below 1. Buratti and Veverka (1983) introduced this form for Europa; its values could not be read. Belgacem et al. (2020) give Hapke fits for 20 regions only.",
+      "finding": "Minnaert law joined from two fits, each used inside its own phase range. McEwen and Soderblom (1983, NASA TM-86246, page 261) solved the limb darkening from 44 pairs of Voyager images: scattering uniform across materials and wavelength, K = 0.64 - 0.005a + 0.00066a^2 - 0.000012a^3 from 3 to 30 degrees phase. Dhingra, Buratti and Seignovert (2021) fitted 21 Voyager 2, Galileo and New Horizons clear-filter images at 10 to 128 degrees; Table 2, ridged plains: k = 0.532 + 0.004a and B0 = 0.728 - 0.002a. The lighting uses the 1983 exponent to 30 degrees, holds 0.76 until the 2021 line reaches it at 57 degrees, then follows that line; B0 gives the brightness with phase. The 2021 line is not used at low phase because that paper's own fit of its 10 degree image gives k = 0.65 for the whole disc and 0.64 for ridged plains (its Figures 4 and 6), the 1983 value there (0.644), where the line gives 0.57. The join is cssEarth's reading, not either paper's. Flood-lit, the limb is 0.66 of the centre at 0.98 of the radius. The Lommel-Seeliger plus Lambert lines of the same Table 2, used from 2026-10-04 to 2026-10-05, gave 0.86 there, above both low-phase results. A lighting overlay has one law for the whole body; the ridged-plains row is used because the paper says that unit covers more than half of Europa. No map pixel changes. Neither source states an emission range; the limit 84.5 degrees is derived from the outermost pixel of Voyager 2 wide-angle frame C2065221. Buratti and Veverka (1983) introduced the Lommel-Seeliger plus Lambert form for Europa; its values could not be read. Belgacem et al. (2020) give Hapke fits for 20 regions only.",
       "evidence": [
+        "https://ntrs.nasa.gov/citations/19840015363",
         "https://doi.org/10.3847/PSJ/ac06d6",
-        "https://hal.science/hal-04259112",
+        "https://doi.org/10.48577/jpl.6IR6VA",
         "https://opus.pds-rings.seti.org/opus/api/metadata/vg-iss-2-j-c2065221.json",
         "https://ntrs.nasa.gov/citations/19830059564",
         "https://doi.org/10.1016/j.icarus.2019.113525"
-      ]
+      ],
+      "revisitWhen": "A single published law covers Europa from the lowest phases to the highest, or the per-image fits behind the 2021 paper's Figures 7 to 9 are released."
     },
     {
       "id": "authored-limb-lighting",

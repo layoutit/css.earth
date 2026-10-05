@@ -82,6 +82,22 @@
           "url": "https://esawebb.org/images/weic2207b/"
         },
         "falseColor": true
+      },
+      {
+        "id": "mid-infrared",
+        "label": "Webb · mid infrared",
+        "thumbnail": "ngc-3132-dataset-mid-infrared.webp",
+        "volume": {
+          "objectId": "ngc-3132-miri-layers",
+          "datasetId": "optical",
+          "surface": "mid-infrared"
+        },
+        "source": {
+          "id": "ngc-3132-miri-layers-optical",
+          "path": "../../ngc-3132-miri-layers/source/manifest.json",
+          "url": "https://esawebb.org/images/weic2207c/"
+        },
+        "falseColor": true
       }
     ]
   },

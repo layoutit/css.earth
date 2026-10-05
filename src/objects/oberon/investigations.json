@@ -100,13 +100,26 @@
     {
       "id": "limb-law",
       "subject": "Photometric law for the lighting overlays",
-      "status": "unresolved",
-      "finding": "Helfenstein, Veverka and Thomas (1988) fitted Hapke models to Voyager whole-disc photometry of the five large Uranian moons. Only the abstract could be read (single-scattering albedo from 0.3 for Umbriel to 0.7 for Ariel, g near -0.3), and a whole-disc fit states no emission range. Schenk's 2020 mosaic history names ISIS photomet without its parameter file. Oberon keeps the shared sphere bank.",
+      "status": "included",
+      "finding": "Hapke law of Helfenstein, Hillier, Weitz and Veverka, read in their summary in NASA's Reports of Planetary Geology and Geophysics Program 1989 (TM-4210, pages 230 and 231); the Icarus paper (1991) was not read. They fitted Hapke's 1986 model to Voyager imaging and Earth-based photometry. Table I, global average, clear filter (0.48 micrometres): single-scattering albedo 0.41, asymmetry -0.29, roughness 21 degrees, with the opposition surge fixed at h = 0.007 and B0 = 1.03. Flood-lit, the limb is 0.97 of the centre; the narrow opposition surge puts the point under the Sun at 0.74 of that centre at 1 degree phase and 0.55 at 10 degrees, so frames with Shadows on are dim against the flood-lit view. The table also prints green and violet rows and three terrains; one clear-filter global row lights every channel and terrain here. It is second class: the report prints no phase or emission range. The phase range 18 to 148 degrees is the span of the resolved Voyager 2 frames the PDS node lists, and the emission limit 84.9 degrees comes from the outermost pixel of the frame the report names as its finest (FDS 26836.25, 6.130 km per pixel); both are derived here. Helfenstein, Veverka and Thomas (1988) fitted Hapke models to whole-disc photometry of the five moons; that paper could not be read. Thomas and Veverka's 1986 summary gives a Minnaert k near 0.7 for Oberon at 33 degrees phase, one phase only. The same check that Titania passes, run on 2026-10-05 on two calibrated clear frames at 19 and 39 degrees phase (FDS 26809.04 and 26836.23), gives lunar-Lambert weights of 0.60 and 0.39 where this law gives 0.74 and 0.62; a Minnaert k of 0.7 at 33 degrees corresponds to 0.54. Two frames of a disc with uneven albedo do not outweigh two published fits, so the law stands, with this noted.",
       "evidence": [
+        "https://ntrs.nasa.gov/citations/19900018290",
+        "https://doi.org/10.1016/0019-1035(91)90065-2",
+        "https://opus.pds-rings.seti.org/opus/api/metadata/vg-iss-2-u-c2683625.json",
         "https://doi.org/10.1016/0019-1035(88)90039-5",
-        "https://ntrs.nasa.gov/citations/19880051927"
+        "https://ntrs.nasa.gov/citations/19870013908"
       ],
-      "revisitWhen": "A disc-resolved law for Oberon with its fitted emission range is read in the paper, or the photometric parameter file of Schenk's mosaic is released."
+      "revisitWhen": "The fitted phase and emission ranges are read in the Icarus paper, or a per-filter law is wanted for the color dataset."
+    },
+    {
+      "id": "authored-limb-lighting",
+      "subject": "Shared sphere bank lighting (Lambert with a 0.35 flood floor and 0.05 ambient term, adapted from OpenSpace)",
+      "status": "excluded",
+      "finding": "Replaced by the Hapke law of Helfenstein, Hillier, Weitz and Veverka (1989); Oberon now bakes its own bank.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/main/packages/bake/src/raster/lighting-banks.ts"
+      ],
+      "revisitWhen": "Nothing: an authored limb is not reopened once a published law exists."
     },
     {
       "id": "map-left-edge-2026-09-28",

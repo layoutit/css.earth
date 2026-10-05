@@ -12,6 +12,23 @@ const profile = {
 const cell = (overlap: number, texelsPerUnit: number, overscan = 0) =>
   createSurfacePatches(profile, overlap, texelsPerUnit, overscan).find(patch => patch.longitudeIndex === 3 && patch.latitudeIndex === 5)!;
 
+describe('map latitude on a flattened body', () => {
+  // Ceres: 482 km at the equator, 446 km at the poles.
+  const ceres = { ...profile, polarRadius: 230 * 446 / 482 } as SurfaceGeometryProfile;
+  const corner = (surface: SurfaceGeometryProfile) => createSurfacePatches(surface).find(patch => patch.longitudeIndex === 0 && patch.latitudeIndex === 12)!.vertices[0];
+  it('places a planetocentric row on the line from the centre at that latitude', () => {
+    const [x, y, z] = corner({ ...ceres, latitude: 'planetocentric' }), latitude = -Math.PI / 2 + 12 / 16 * Math.PI;
+    assert.ok(Math.abs(Math.atan2(z, Math.hypot(x, y)) - latitude) < 1e-12);
+    // The point lies on the spheroid.
+    assert.ok(Math.abs((x * x + y * y) / 230 ** 2 + z * z / ceres.polarRadius ** 2 - 1) < 1e-12);
+  });
+  it('keeps the parametric placement for a profile that states none, and changes nothing on a sphere', () => {
+    const [x, y, z] = corner(ceres), latitude = -Math.PI / 2 + 12 / 16 * Math.PI;
+    assert.ok(Math.abs(z - ceres.polarRadius * Math.sin(latitude)) < 1e-12 && Math.abs(Math.hypot(x, y) - 230 * Math.cos(latitude)) < 1e-12);
+    assert.ok(isDeepStrictEqual(createSurfacePatches({ ...profile, latitude: 'planetocentric' }), createSurfacePatches(profile)));
+  });
+});
+
 describe('surface patch overlap', () => {
   it('grows the texture cell with the patch, in whole texels, so neighbours sample the same map', () => {
     const exact = cell(0, 4), grown = cell(0.005, 4);

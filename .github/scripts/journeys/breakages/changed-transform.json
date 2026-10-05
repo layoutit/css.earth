@@ -1,0 +1,26 @@
+{
+  "schema": "journey-breakage@1",
+  "id": "changed-transform",
+  "description": "Publish a wrong retained scene-root transform, displacing the whole scene by one CSS pixel.",
+  "expectedFamilies": [
+    "dom",
+    "rendering"
+  ],
+  "journeys": [
+    "dione",
+    "earth-system"
+  ],
+  "profiles": [
+    "chromium-desktop",
+    "webkit-desktop"
+  ],
+  "substitutions": [
+    {
+      "file": "site/scene/scene-publication.mts",
+      "before": "    const root = documentTarget.documentElement;",
+      "after": "    const root = documentTarget.documentElement;\n    stage.style.transform = \"translateX(1px)\";",
+      "occurrences": 1
+    }
+  ],
+  "limitation": "The published scene root moves by one CSS pixel. The DOM lifecycle/style, computed geometry and screenshot detectors observe the change. Captures require a restored, rebuilt copy; bundle changes alone do not prove the transform detector."
+}

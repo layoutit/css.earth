@@ -8,6 +8,7 @@ export * from './leaf-box.ts';
 export * from './leaf-box-records.ts';
 export * from './clean-leaves.ts';
 export * from './texture-tile-records.ts';
+export * from './texture-image-records.ts';
 export * from './prepared-node-tree.ts';
 export * from './prepared-cssom.ts';
 export * from './prepared-activation-groups.ts';

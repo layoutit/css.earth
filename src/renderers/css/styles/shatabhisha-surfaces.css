@@ -53,7 +53,6 @@
 
 /* The silhouette-fit binding already includes physical framing. Keep the prepared plate's native dimensions. */
 .object-stage[data-object-id="shatabhisha"] .shatabhisha-corona-layer {
-  background-image: var(--shatabhisha-corona-image);
   background-position: center;
   background-repeat: no-repeat;
   background-size:
@@ -63,7 +62,6 @@
 
 /* Limb plate: 496 px = raster.json emission.bodyDiameter = camera.logicalBodyDiameter. */
 .object-stage[data-object-id="shatabhisha"] .shatabhisha-limb-layer {
-  background-image: var(--shatabhisha-limb-image);
   background-position: center;
   background-repeat: no-repeat;
   background-size:
