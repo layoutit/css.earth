@@ -75,24 +75,6 @@
       "id": "add-import-prepare-body-moons-moon-catalogue"
     },
     {
-      "op": "remove-import",
-      "from": "site/navigation/navigation-request.mts",
-      "to": "site/selection/scene-selection.mts",
-      "note": "Pass selectionTargetFromUrl explicitly through resolveNavigation and readNavigationSelection. Router uses the existing registry export, injects it into createSceneActivation, which forwards all three calls. Import erased SceneView/SelectionTarget aliases from navigation-types; never retain the selection import.",
-      "change": "Pass selection into navigation requests",
-      "id": "remove-import-navigation-request-scene-selection",
-      "line": 11
-    },
-    {
-      "op": "add-import",
-      "to": "site/world/scene-subject.mts",
-      "kind": "value",
-      "note": "Keep existing subject identity helpers in the lower world owner; pass selectionTargetFromUrl as a parameter.",
-      "from": "site/navigation/navigation-request.mts",
-      "change": "Pass selection into navigation requests",
-      "id": "add-import-navigation-request-scene-subject"
-    },
-    {
       "id": "add-file-scene-imports",
       "op": "add-file",
       "change": "Relocate queued loader owners",
@@ -234,13 +216,6 @@
         "retarget-object-children-moon-catalogue",
         "remove-import-prepare-body-moons-moon-catalogues",
         "add-import-prepare-body-moons-moon-catalogue"
-      ]
-    },
-    {
-      "id": "pass-selection-into-navigation-requests",
-      "edits": [
-        "remove-import-navigation-request-scene-selection",
-        "add-import-navigation-request-scene-subject"
       ]
     },
     {
