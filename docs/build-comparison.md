@@ -148,9 +148,14 @@ PR adds or changes it against the merge-base; a stale declaration means report m
   "mode": "semantic",
   "moves": {},
   "outputs": [{"glob": "earth/index.html", "reason": "Expected Earth content update"}],
-  "layout": "none"
+  "layout": "none",
+  "change": "Name the refactor this declaration belongs to (optional, 1 to 200 characters)"
 }
 ```
+
+`change` names the refactor. It takes part in the freshness comparison, so two pull
+requests that otherwise declare the same thing (for example JavaScript-only changes with
+no outputs) never carry identical declarations.
 
 The always-running **Refactor declaration gate** requires a fresh declaration
 for application renames or the `refactor` label.
