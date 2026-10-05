@@ -1,0 +1,190 @@
+{
+  "schema": "cssearth-volume-source-manifest@2",
+  "pathBase": "repository",
+  "inputs": [
+    {
+      "id": "m31-clusters",
+      "path": "src/objects/m31-globular-clusters/source/dots/table1.dat",
+      "origin": "https://cdsarc.cds.unistra.fr/ftp/J/ApJ/824/42/table1.dat",
+      "sourceUrl": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/ApJ/824/42",
+      "title": "Star clusters in M31. VII. Global kinematics and metallicity subpopulations of the globular clusters, table1.dat",
+      "credit": "N. Caldwell, A. J. Romanowsky; ApJ 824, 42; CDS J/ApJ/824/42",
+      "acquisition": "The published table M31's own cluster bank reads, downloaded unchanged from its CDS origin; read here through m31-globular-clusters/points.json.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "caldwell-2016-m31-globular-clusters",
+            "role": "material",
+            "evidence": "https://cdsarc.cds.unistra.fr/ftp/J/ApJ/824/42/table1.dat"
+          },
+          {
+            "catalogueId": "mackey-2019-m31-outer-halo-clusters",
+            "role": "method",
+            "evidence": "src/objects/local-group-structures/source/m31-globular-clusters/points.json#/frame/spheroid"
+          },
+          {
+            "catalogueId": "huxor-2011-m31-halo-globular-clusters",
+            "role": "method",
+            "evidence": "src/objects/local-group-structures/source/m31-globular-clusters/points.json#/frame/spheroid"
+          }
+        ]
+      },
+      "dependencies": [],
+      "license": "Original catalogue terms apply; cite the authors and CDS/VizieR."
+    },
+    {
+      "id": "milky-way-clusters",
+      "path": "src/objects/milky-way-volume/source/globular-clusters/orbits_table.txt",
+      "origin": "https://people.smp.uq.edu.au/HolgerBaumgardt/globular/orbits_table.txt",
+      "sourceUrl": "https://doi.org/10.1093/mnras/stab1474",
+      "title": "Accurate distances to Galactic globular clusters through a combination of Gaia EDR3, HST and literature data, orbits_table.txt",
+      "credit": "H. Baumgardt, E. Vasiliev; MNRAS 505, 5957",
+      "acquisition": "The table the Milky Way's own cluster bank reads, tracked beside it; read here through milky-way-globular-clusters/points.json.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "baumgardt-vasiliev-2021-gc-distances",
+            "role": "material",
+            "evidence": "https://people.smp.uq.edu.au/HolgerBaumgardt/globular/orbits_table.txt"
+          }
+        ]
+      },
+      "dependencies": [],
+      "license": "Original catalogue terms apply; cite Baumgardt & Vasiliev (2021)."
+    },
+    {
+      "id": "lmc-clusters-table",
+      "path": "src/objects/local-group-structures/source/lmc-clusters/table.csv",
+      "origin": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&MAXREC=100000&QUERY=SELECT+recno%2C+RAJ2000%2C+DEJ2000%2C+49590.6727505+AS+distpc+FROM+%22J%2FMNRAS%2F389%2F678%2Ftable3%22+WHERE+Type+%3D+'C'+AND+RAJ2000+BETWEEN+60+AND+100+ORDER+BY+recno",
+      "sourceUrl": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/MNRAS/389/678",
+      "title": "A general catalogue of extended objects in the Magellanic System, table3: the Large Magellanic Cloud's ordinary clusters",
+      "credit": "E. Bica, C. Bonatto, C. M. Dutra, J. F. C. Santos Jr; MNRAS 389, 678; CDS J/MNRAS/389/678",
+      "acquisition": "Rows selected by the CDS TAP query in the origin, downloaded unchanged; read by packages/bake/cli/prepare-catalogue-points.mts through lmc-clusters/points.json.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "bica-2008-magellanic-extended-objects",
+            "role": "material",
+            "evidence": "https://cdsarc.cds.unistra.fr/ftp/J/MNRAS/389/678/ReadMe"
+          },
+          {
+            "catalogueId": "publication-pietrzynski2019natur-567-200p",
+            "role": "reference",
+            "evidence": "src/objects/local-group-structures/source/lmc-clusters/points.json#/table/note"
+          }
+        ]
+      },
+      "dependencies": [],
+      "license": "Original catalogue terms apply; cite the authors and CDS/VizieR."
+    },
+    {
+      "id": "smc-clusters-table",
+      "path": "src/objects/local-group-structures/source/smc-clusters/table.csv",
+      "origin": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&MAXREC=100000&QUERY=SELECT+recno%2C+RAJ2000%2C+DEJ2000%2C+62440+AS+distpc+FROM+%22J%2FMNRAS%2F389%2F678%2Ftable3%22+WHERE+Type+%3D+'C'+AND+(RAJ2000+%3E+355+OR+RAJ2000+%3C+20)+ORDER+BY+recno",
+      "sourceUrl": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/MNRAS/389/678",
+      "title": "A general catalogue of extended objects in the Magellanic System, table3: the Small Magellanic Cloud's ordinary clusters",
+      "credit": "E. Bica, C. Bonatto, C. M. Dutra, J. F. C. Santos Jr; MNRAS 389, 678; CDS J/MNRAS/389/678",
+      "acquisition": "Rows selected by the CDS TAP query in the origin, downloaded unchanged; read by packages/bake/cli/prepare-catalogue-points.mts through smc-clusters/points.json.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "bica-2008-magellanic-extended-objects",
+            "role": "material",
+            "evidence": "https://cdsarc.cds.unistra.fr/ftp/J/MNRAS/389/678/ReadMe"
+          },
+          {
+            "catalogueId": "publication-graczyk2020apj-904-13g",
+            "role": "reference",
+            "evidence": "src/objects/local-group-structures/source/smc-clusters/points.json#/table/note"
+          }
+        ]
+      },
+      "dependencies": [],
+      "license": "Original catalogue terms apply; cite the authors and CDS/VizieR."
+    },
+    {
+      "id": "sagittarius-stream-table",
+      "path": "src/objects/local-group-structures/source/sagittarius-stream/table.csv",
+      "origin": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&MAXREC=100000&QUERY=SELECT+GaiaEDR3%2C+RA_ICRS%2C+DE_ICRS%2C+DistWGBPRP+FROM+%22J%2FA%2BA%2F666%2FA64%2Ftablec1%22+WHERE+DistWGBPRP+%3E+0+AND+ProbSGR+%3E+0.9+ORDER+BY+GaiaEDR3",
+      "sourceUrl": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/666/A64",
+      "title": "The Sagittarius stream in Gaia Early Data Release 3 and the origin of the bifurcations, tablec1: RR Lyrae with a distance",
+      "credit": "P. Ramos et al.; A&A 666, A64; CDS J/A+A/666/A64",
+      "acquisition": "Rows selected by the CDS TAP query in the origin, downloaded unchanged; read by packages/bake/cli/prepare-catalogue-points.mts through sagittarius-stream/points.json.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "ramos-2022-sagittarius-stream",
+            "role": "material",
+            "evidence": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/666/A64/ReadMe"
+          }
+        ]
+      },
+      "dependencies": [],
+      "license": "Original catalogue terms apply; cite the authors and CDS/VizieR."
+    }
+  ],
+  "documents": [
+    {
+      "path": "src/objects/local-group-structures/source/m31-globular-clusters/points.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
+      }
+    },
+    {
+      "path": "src/objects/local-group-structures/source/milky-way-globular-clusters/points.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
+      }
+    },
+    {
+      "path": "src/objects/local-group-structures/source/lmc-clusters/points.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
+      }
+    },
+    {
+      "path": "src/objects/local-group-structures/source/smc-clusters/points.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
+      }
+    },
+    {
+      "path": "src/objects/local-group-structures/source/sagittarius-stream/points.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
+      }
+    },
+    {
+      "path": "src/objects/local-group-structures/source/field/merge.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
+      }
+    },
+    {
+      "path": "src/objects/local-group-structures/source/dots/stack.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
+      }
+    },
+    {
+      "path": "src/objects/local-group-structures/source/presentation.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored processing configuration."
+      }
+    }
+  ],
+  "generatedIntermediates": []
+}
