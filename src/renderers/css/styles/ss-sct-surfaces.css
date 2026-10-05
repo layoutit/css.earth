@@ -1,19 +1,5 @@
 /* SS Sct: the Sun's emissive presentation (body-surfaces.css, SUN block) scoped to this object, loaded after the shared
    body-surfaces.css base rules. No spin: the rotation axis and period are unmeasured. Both plates are transparent: no observation is cast. */
-.object-stage[data-object-id="ss-sct"] > :is(.polycss-camera, .ss-sct-corona-layer, .ss-sct-limb-layer) {
-  --ss-sct-scene-side-padding: 16px;
-  --ss-sct-reference-width: 1920px;
-  --ss-sct-reference-height: 1080px;
-  --ss-sct-shell-scale: min(
-    1,
-    calc(
-      (100cqw - var(--ss-sct-scene-side-padding) - var(--ss-sct-scene-side-padding)) /
-        var(--ss-sct-reference-width)
-    ),
-    calc(100cqh / var(--ss-sct-reference-height))
-  );
-}
-
 /* The shared stage rule (body-surfaces.css) sizes the camera and the Sun's plates; this object's plates need the same box. */
 .object-stage[data-object-id="ss-sct"] > :is(.ss-sct-corona-layer, .ss-sct-limb-layer) {
   position: absolute;
@@ -80,8 +66,8 @@
 }
 
 .object-stage[data-object-id="ss-sct"] .polycss-scene s {
-  width: var(--polycss-atlas-width, var(--polycss-atlas-size, 64px));
-  height: var(--polycss-atlas-height, var(--polycss-atlas-size, 64px));
+  width: 64px;
+  height: 64px;
   transform-style: preserve-3d;
   font: inherit;
   font-weight: normal;

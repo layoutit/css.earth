@@ -1,19 +1,5 @@
 /* DIRECT V164 M31D: the Sun's emissive presentation (body-surfaces.css, SUN block) scoped to this object, loaded after the shared
    body-surfaces.css base rules. No spin: the rotation axis and period are unmeasured. Both plates are transparent: no observation is cast. */
-.object-stage[data-object-id="direct-v164-m31d"] > :is(.polycss-camera, .direct-v164-m31d-corona-layer, .direct-v164-m31d-limb-layer) {
-  --direct-v164-m31d-scene-side-padding: 16px;
-  --direct-v164-m31d-reference-width: 1920px;
-  --direct-v164-m31d-reference-height: 1080px;
-  --direct-v164-m31d-shell-scale: min(
-    1,
-    calc(
-      (100cqw - var(--direct-v164-m31d-scene-side-padding) - var(--direct-v164-m31d-scene-side-padding)) /
-        var(--direct-v164-m31d-reference-width)
-    ),
-    calc(100cqh / var(--direct-v164-m31d-reference-height))
-  );
-}
-
 /* The shared stage rule (body-surfaces.css) sizes the camera and the Sun's plates; this object's plates need the same box. */
 .object-stage[data-object-id="direct-v164-m31d"] > :is(.direct-v164-m31d-corona-layer, .direct-v164-m31d-limb-layer) {
   position: absolute;
@@ -80,8 +66,8 @@
 }
 
 .object-stage[data-object-id="direct-v164-m31d"] .polycss-scene s {
-  width: var(--polycss-atlas-width, var(--polycss-atlas-size, 64px));
-  height: var(--polycss-atlas-height, var(--polycss-atlas-size, 64px));
+  width: 64px;
+  height: 64px;
   transform-style: preserve-3d;
   font: inherit;
   font-weight: normal;

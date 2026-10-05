@@ -17,6 +17,7 @@ directory-specific `AGENTS.md` files add guidance for their owners.
 - With shadows off (flood lighting), every lighting and material lane shows one prepared frame, published as its own file. Lighting rows load only when shadows are on.
 - A body whose map has a published photometric law is lit with that law through `packages/bake/src/photometry/limb.ts`, relative to the flood-lit disc centre. Authored floors, ambient terms, terminator ramps and limb colors are only for bodies without one.
 - Do not use runtime `clip-path`, CSS masks, filters, CSS gradients, blend modes, canvas, or WebGL.
+- Do not use CSS custom properties where a body is drawn. Prepared runtimes, body and stage stylesheets and the renderer name none: each value goes on the element that draws it, as a literal. The bake may measure through one in its own headless browser if its last step ships a record instead ([how](docs/surface-preparation.md#leaf-boxes-follow-the-body-on-screen)). `node .github/scripts/checks/check-no-variables.mts` and the shipped-form check enforce it.
 - SVG is allowed sparingly where it makes sense. Keep detailed body rendering in PolyCSS. Different SVG edge antialiasing is acceptable; preserve geometry, colors, line thickness, content, and interactions when optimizing.
 - Bytes are the mobile reader's cost. Lossy images from the raster, terrestrial and cutaway lanes and Earth's texture
   levels go through the lossy lane (`packages/bake/src/raster/lossy-lane.ts`): WebP at one quality constant whose comment

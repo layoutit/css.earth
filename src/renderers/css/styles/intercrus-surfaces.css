@@ -1,19 +1,5 @@
 /* Intercrus: the Sun's emissive presentation (body-surfaces.css, SUN block) scoped to this object, loaded after the shared
    body-surfaces.css base rules. No spin: the rotation axis and period are unmeasured. Both plates are transparent: no observation is cast. */
-.object-stage[data-object-id="intercrus"] > :is(.polycss-camera, .intercrus-corona-layer, .intercrus-limb-layer) {
-  --intercrus-scene-side-padding: 16px;
-  --intercrus-reference-width: 1920px;
-  --intercrus-reference-height: 1080px;
-  --intercrus-shell-scale: min(
-    1,
-    calc(
-      (100cqw - var(--intercrus-scene-side-padding) - var(--intercrus-scene-side-padding)) /
-        var(--intercrus-reference-width)
-    ),
-    calc(100cqh / var(--intercrus-reference-height))
-  );
-}
-
 /* The shared stage rule (body-surfaces.css) sizes the camera and the Sun's plates; this object's plates need the same box. */
 .object-stage[data-object-id="intercrus"] > :is(.intercrus-corona-layer, .intercrus-limb-layer) {
   position: absolute;
@@ -80,8 +66,8 @@
 }
 
 .object-stage[data-object-id="intercrus"] .polycss-scene s {
-  width: var(--polycss-atlas-width, var(--polycss-atlas-size, 64px));
-  height: var(--polycss-atlas-height, var(--polycss-atlas-size, 64px));
+  width: 64px;
+  height: 64px;
   transform-style: preserve-3d;
   font: inherit;
   font-weight: normal;

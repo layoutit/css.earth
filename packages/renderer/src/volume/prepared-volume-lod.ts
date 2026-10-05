@@ -47,24 +47,23 @@ export function mountPreparedVolumeLod(options: PreparedVolumeMountOptions, comp
   const document = options.host.ownerDocument;
   const create = options.createElement ?? ((tag: string) => document.createElement(tag));
   // The fade resolves the viewport in CSS, so the projected diameter alone does not say whether a presentation
-  // contributes. Resolving the focal length through a registered length property reads the value the fade uses,
-  // without a layout measurement, and only a viewport change can alter it.
-  const FOCAL_PROPERTY = '--native-volume-focal';
-  let focalKey = '', focalCssPixels = Number.NaN, focalProperty: boolean | null = null;
+  // contributes. The host's outline offset resolves the focal length the fade uses to pixels: a length nothing draws
+  // (the host has no outline), computed without a layout measurement, and only a viewport change can alter it.
+  const FOCAL_PROPERTY = 'outline-offset';
+  let focalKey = '', focalCssPixels = Number.NaN;
   const resolveFocalPixels = (viewport: VolumeCameraPublication['viewport']): number => {
     const view = document.defaultView;
     if (options.nativeFocalCss === undefined || !view) return Number.NaN;
-    if (focalProperty === null) {
-      focalProperty = typeof view.CSS?.registerProperty === 'function';
-      // Another mount in the same document registers the same property; that throw means it is already available.
-      if (focalProperty) try { view.CSS.registerProperty({ name: FOCAL_PROPERTY, syntax: '<length>', inherits: false, initialValue: '0px' }); } catch { /* already registered */ }
-    }
-    if (!focalProperty) return Number.NaN;
     const key = viewport.widthPixels + 'x' + viewport.heightPixels;
     if (key !== focalKey) {
       focalKey = key;
       options.host.style.setProperty(FOCAL_PROPERTY, options.nativeFocalCss);
-      focalCssPixels = Number.parseFloat(view.getComputedStyle(options.host).getPropertyValue(FOCAL_PROPERTY));
+      const computed = typeof view.getComputedStyle === 'function' ? view.getComputedStyle(options.host).getPropertyValue(FOCAL_PROPERTY).trim() : '';
+      // Only a browser computes the expression to pixels. A document without layout (the server's) hands it back as
+      // written: the offset is taken off again and the focal length stays unresolved.
+      const resolved = /^-?\d*\.?\d+(?:e[-+]?\d+)?px$/u.test(computed);
+      if (!resolved) options.host.style.removeProperty(FOCAL_PROPERTY);
+      focalCssPixels = resolved ? Number.parseFloat(computed) : Number.NaN;
     }
     return focalCssPixels;
   };
@@ -121,14 +120,15 @@ export function mountPreparedVolumeLod(options: PreparedVolumeMountOptions, comp
       .filter(leaf => leaf.widthPx * leaf.heightPx >= LARGE_IMAGE_PIXELS).map(leaf => options.resolveResource(leaf.texturePath)));
     writeStyle(full, 'display', detailVisible ? 'block' : 'none'); fullShown = detailVisible;
     writeStyle(distant, 'display', impostorsVisible ? 'block' : 'none');
-    if (responsive) writeStyle(options.host, '--native-volume-mix', nativeProjectedFade(diameterPixels,
-      publication.viewport.focalPixels, options.nativeFocalCss!, bank.fullBelowDiameterPixels, bank.volumeAboveDiameterPixels));
+    // The responsive fade is a CSS expression of the viewport; each presentation's opacity states it in full.
+    const fade = responsive ? nativeProjectedFade(diameterPixels,
+      publication.viewport.focalPixels, options.nativeFocalCss!, bank.fullBelowDiameterPixels, bank.volumeAboveDiameterPixels) : '';
     if (detailVisible) {
       const volume = detail();
       volume.publish(publication);
-      writeStyle(full, 'opacity', responsive ? `calc(var(--native-volume-mix) * ${completedOpacity(volume)})` : String(volumeMix * completedOpacity(volume)));
+      writeStyle(full, 'opacity', responsive ? `calc(${fade} * ${completedOpacity(volume)})` : String(volumeMix * completedOpacity(volume)));
     }
-    writeStyle(distant, 'opacity', !detailAllowed ? '' : responsive ? 'calc(1 - var(--native-volume-mix))' : String(1 - volumeMix));
+    writeStyle(distant, 'opacity', !detailAllowed ? '' : responsive ? `calc(1 - ${fade})` : String(1 - volumeMix));
     const next = projection.views.map(view => view.id);
     for (const id of active) if (!next.includes(id)) writeStyle(views.get(id)!, 'display', 'none');
     // Only the few contributing projections receive screen transforms. Textures and cloud geometry stay fixed.

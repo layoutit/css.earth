@@ -1,19 +1,5 @@
 /* π¹ Gruis: the Sun's emissive presentation (body-surfaces.css, SUN block) scoped to this object, loaded after the shared
    body-surfaces.css base rules. No spin: the rotation axis and period are unmeasured. The off-limb plate is the reconstruction's light outside the disc; the limb plate is transparent. */
-.object-stage[data-object-id="pi1-gruis"] > :is(.polycss-camera, .pi1-gruis-corona-layer, .pi1-gruis-limb-layer) {
-  --pi1-gruis-scene-side-padding: 16px;
-  --pi1-gruis-reference-width: 1920px;
-  --pi1-gruis-reference-height: 1080px;
-  --pi1-gruis-shell-scale: min(
-    1,
-    calc(
-      (100cqw - var(--pi1-gruis-scene-side-padding) - var(--pi1-gruis-scene-side-padding)) /
-        var(--pi1-gruis-reference-width)
-    ),
-    calc(100cqh / var(--pi1-gruis-reference-height))
-  );
-}
-
 /* The shared stage rule (body-surfaces.css) sizes the camera and the Sun's plates; this object's plates need the same box. */
 .object-stage[data-object-id="pi1-gruis"] > :is(.pi1-gruis-corona-layer, .pi1-gruis-limb-layer) {
   position: absolute;
@@ -80,8 +66,8 @@
 }
 
 .object-stage[data-object-id="pi1-gruis"] .polycss-scene s {
-  width: var(--polycss-atlas-width, var(--polycss-atlas-size, 64px));
-  height: var(--polycss-atlas-height, var(--polycss-atlas-size, 64px));
+  width: 64px;
+  height: 64px;
   transform-style: preserve-3d;
   font: inherit;
   font-weight: normal;

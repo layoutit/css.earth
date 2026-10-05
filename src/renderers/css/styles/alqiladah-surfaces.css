@@ -1,19 +1,5 @@
 /* Alqiladah: the Sun's emissive presentation (body-surfaces.css, SUN block) scoped to this object, loaded after the shared
    body-surfaces.css base rules. No spin: the rotation axis and period are unmeasured. Both plates are transparent: no observation is cast. */
-.object-stage[data-object-id="alqiladah"] > :is(.polycss-camera, .alqiladah-corona-layer, .alqiladah-limb-layer) {
-  --alqiladah-scene-side-padding: 16px;
-  --alqiladah-reference-width: 1920px;
-  --alqiladah-reference-height: 1080px;
-  --alqiladah-shell-scale: min(
-    1,
-    calc(
-      (100cqw - var(--alqiladah-scene-side-padding) - var(--alqiladah-scene-side-padding)) /
-        var(--alqiladah-reference-width)
-    ),
-    calc(100cqh / var(--alqiladah-reference-height))
-  );
-}
-
 /* The shared stage rule (body-surfaces.css) sizes the camera and the Sun's plates; this object's plates need the same box. */
 .object-stage[data-object-id="alqiladah"] > :is(.alqiladah-corona-layer, .alqiladah-limb-layer) {
   position: absolute;
@@ -80,8 +66,8 @@
 }
 
 .object-stage[data-object-id="alqiladah"] .polycss-scene s {
-  width: var(--polycss-atlas-width, var(--polycss-atlas-size, 64px));
-  height: var(--polycss-atlas-height, var(--polycss-atlas-size, 64px));
+  width: 64px;
+  height: 64px;
   transform-style: preserve-3d;
   font: inherit;
   font-weight: normal;

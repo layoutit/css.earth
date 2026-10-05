@@ -1,19 +1,5 @@
 /* Almach: the Sun's emissive presentation (body-surfaces.css, SUN block) scoped to this object, loaded after the shared
    body-surfaces.css base rules. No spin: the rotation axis and period are unmeasured. Both plates are transparent: no observation is cast. */
-.object-stage[data-object-id="almach"] > :is(.polycss-camera, .almach-corona-layer, .almach-limb-layer) {
-  --almach-scene-side-padding: 16px;
-  --almach-reference-width: 1920px;
-  --almach-reference-height: 1080px;
-  --almach-shell-scale: min(
-    1,
-    calc(
-      (100cqw - var(--almach-scene-side-padding) - var(--almach-scene-side-padding)) /
-        var(--almach-reference-width)
-    ),
-    calc(100cqh / var(--almach-reference-height))
-  );
-}
-
 /* The shared stage rule (body-surfaces.css) sizes the camera and the Sun's plates; this object's plates need the same box. */
 .object-stage[data-object-id="almach"] > :is(.almach-corona-layer, .almach-limb-layer) {
   position: absolute;
@@ -80,8 +66,8 @@
 }
 
 .object-stage[data-object-id="almach"] .polycss-scene s {
-  width: var(--polycss-atlas-width, var(--polycss-atlas-size, 64px));
-  height: var(--polycss-atlas-height, var(--polycss-atlas-size, 64px));
+  width: 64px;
+  height: 64px;
   transform-style: preserve-3d;
   font: inherit;
   font-weight: normal;

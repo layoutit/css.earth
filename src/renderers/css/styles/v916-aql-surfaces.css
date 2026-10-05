@@ -1,19 +1,5 @@
 /* V916 Aql: the Sun's emissive presentation (body-surfaces.css, SUN block) scoped to this object, loaded after the shared
    body-surfaces.css base rules. No spin: the rotation axis and period are unmeasured. Both plates are transparent: no observation is cast. */
-.object-stage[data-object-id="v916-aql"] > :is(.polycss-camera, .v916-aql-corona-layer, .v916-aql-limb-layer) {
-  --v916-aql-scene-side-padding: 16px;
-  --v916-aql-reference-width: 1920px;
-  --v916-aql-reference-height: 1080px;
-  --v916-aql-shell-scale: min(
-    1,
-    calc(
-      (100cqw - var(--v916-aql-scene-side-padding) - var(--v916-aql-scene-side-padding)) /
-        var(--v916-aql-reference-width)
-    ),
-    calc(100cqh / var(--v916-aql-reference-height))
-  );
-}
-
 /* The shared stage rule (body-surfaces.css) sizes the camera and the Sun's plates; this object's plates need the same box. */
 .object-stage[data-object-id="v916-aql"] > :is(.v916-aql-corona-layer, .v916-aql-limb-layer) {
   position: absolute;
@@ -80,8 +66,8 @@
 }
 
 .object-stage[data-object-id="v916-aql"] .polycss-scene s {
-  width: var(--polycss-atlas-width, var(--polycss-atlas-size, 64px));
-  height: var(--polycss-atlas-height, var(--polycss-atlas-size, 64px));
+  width: 64px;
+  height: 64px;
   transform-style: preserve-3d;
   font: inherit;
   font-weight: normal;

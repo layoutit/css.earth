@@ -1,4 +1,4 @@
-import { type PreparedPoseKeyframe, type PreparedContractTrack, type PreparedContractVariant, type PreparedMaterialAddress, type PreparedMaterialFrameMapping, type EllipsoidProjectionPlan, requireTextureBindings, requireTextureLevels, requireTexturePlacements, type ObjectRuntimeDefinition, type PreparedWrite, type PreparedAssets, type PreparedPresentationDefinition, type PreparedDepthOrder, requirePreparedData, type PreparedCubicSkyPlan, type PreparedDirectionalSunPlan, requirePresentationEnvelope, requireObjectControls } from '@cssearth/objects';
+import { type PreparedPoseKeyframe, type PreparedContractTrack, type PreparedContractVariant, type PreparedMaterialAddress, type PreparedMaterialFrameMapping, type EllipsoidProjectionPlan, requireTextureBindings, requireMeshes, requireTextureLevels, requireTexturePlacements, type ObjectRuntimeDefinition, type PreparedWrite, type PreparedAssets, type PreparedPresentationDefinition, type PreparedDepthOrder, requirePreparedData, type PreparedCubicSkyPlan, type PreparedDirectionalSunPlan, requirePresentationEnvelope, requireObjectControls } from '@cssearth/objects';
 
 import { isArray } from '@cssearth/core';
 
@@ -35,7 +35,7 @@ export function requirePreparedPresentation(input: unknown, options: { controls:
   const resource = (key: string | null, nullable = false) => { if (!(nullable && key === null) && !resources.has(key!)) fail(`undeclared resource ${key}`); };
   const resourceList = (list: readonly string[], label: string) => { array(list, label).forEach(key => resource(key)); unique(list, label); };
   const tree = plan.tree;
-  record(tree, "tree", ["nodes", "properties", "camera", "scene", "stageClasses", "activationGroups", "textureBindings"]);
+  record(tree, "tree", ["nodes", "properties", "camera", "scene", "stageClasses", "activationGroups", "textureBindings", "meshes"]);
   for (const property of array(tree.properties,"prepared style properties")) {
     record(property,"prepared style property",["name","value","custom"]);string(property.name,"prepared property name");
     if(typeof property.value!=="string"||typeof property.custom!=="boolean")fail("prepared property assignment is invalid");
@@ -64,6 +64,7 @@ export function requirePreparedPresentation(input: unknown, options: { controls:
     if (/\b(?:clip-path|mask(?:-\w+)?|filter|mix-blend-mode|background-blend-mode)\s*:|(?:linear|radial|conic)-gradient\s*\(/i.test(entry.style)) fail("unsupported scene style");
   }
   requireTextureBindings(tree.textureBindings, tree.nodes);
+  requireMeshes(tree.meshes, tree.nodes, array(plan.variants, "selection variants").map(variant => variant.mesh));
   node(tree.camera); node(tree.scene);
   if (tree.nodes[tree.camera].parent !== -1 || !ancestor(tree.scene, tree.camera)) fail("one camera root must own the scene");
   if (tree.nodes.filter(entry => /(?:^|\s)polycss-camera(?:\s|$)/.test(entry.className ?? "")).length !== 1 ||
@@ -181,7 +182,7 @@ export function requirePreparedPresentation(input: unknown, options: { controls:
       for(const key of ["onlyWhenEnabled","publishWithAddress"] as const)if(track.rotation[key]!==undefined&&typeof track.rotation[key]!=="boolean")fail(`rotation ${key} must be boolean`);
       if(track.rotation.systemTransform!==undefined)string(track.rotation.systemTransform,"rotation system transform");
       if (track.rotation.polePolicy !== undefined && track.rotation.polePolicy !== "azimuth") fail("unsupported pole azimuth policy");
-      if (track.rotation.kind === "angle") string(track.rotation.property, "angle property");
+      if (track.rotation.kind === "angle") { if (track.rotation.property !== undefined) fail(`an angle rotation names no property (${String(track.rotation.property)}): the page writes its target's transform`); }
       else { finite(track.rotation.width, "rotation width"); finite(track.rotation.height, "rotation height"); if (track.rotation.width <= 0 || track.rotation.height <= 0) fail("rotation size must be positive"); }
       if (track.rotation.kind === "ellipsoid") { string(track.rotation.systemTransform,"ellipsoid system transform"); projection(track.rotation.projection); }
       if(track.rotation.physical!==undefined){
@@ -317,7 +318,7 @@ export function requirePreparedPresentation(input: unknown, options: { controls:
   }
   const variants = array(plan.variants, "selection variants");
   for (const variant of variants) {
-    record(variant, "variant", ["when", "required", "writes", "materials", "navigation", "hiddenSubtrees"]);
+    record(variant, "variant", ["when", "required", "writes", "materials", "navigation", "hiddenSubtrees", "mesh"]);
     if (variant.hiddenSubtrees !== undefined) {
       const containers = new Set(plan.tree.nodes.map(node => node.parent)), hidden = new Set();
       const holds = (root: number, id: number) => { for (let at = id; at >= 0; at = plan.tree.nodes[at].parent) if (at === root) return true; return false; };
@@ -402,7 +403,8 @@ export function requirePreparedPresentation(input: unknown, options: { controls:
     } else if (binding.kind === "silhouette-step-property") {
       // A prepared value per published silhouette step; thresholds are CSS pixels.
       string(binding.property, "silhouette step property");
-      if (!binding.property.startsWith("--")) fail("silhouette step property must be a custom property");
+      // The working form names the step as the custom property its browser measurement reads; what ships names it plainly
+      // (step-name-records.ts).
       if (binding.placements !== undefined) requireTexturePlacements(binding.placements, name => name.startsWith(`${binding.property}-`));
       // Leaf box groups: each names the property or one of its blocks, and its leaves; no leaf is in two groups.
       if (binding.groups !== undefined) {
@@ -444,8 +446,8 @@ export function requirePreparedPresentation(input: unknown, options: { controls:
         previous = level.minimumDiameter;
       }
     } else if (binding.kind === "view-property") {
-      string(binding.property, "view property");
-      if (!binding.property.startsWith("--")) fail("view property must be a custom property");
+      const viewProperty: unknown = binding.property;
+      if (viewProperty !== "opacity") fail(`view property ${String(viewProperty)} on node ${binding.target} must be the opacity of the element that draws it`);
       choice(binding.source, new Set(["billboard-opacity", "marker-opacity"]), "view property source");
       if (binding.precision !== null) { integer(binding.precision, "view property precision"); if (binding.precision > 12) fail("invalid view property precision"); }
     } else if (binding.kind === "view-attribute") {

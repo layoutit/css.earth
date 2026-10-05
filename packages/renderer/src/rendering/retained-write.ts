@@ -23,12 +23,12 @@ function changed(target: object, key: string, value: string): boolean {
   return true;
 }
 
-/** Writes one inline style property, named as on `element.style` (`transform`) or as a custom property (`--name`).
- * Returns whether the value was written. */
+/** Writes one inline style property, named as on `element.style` (`transform`). Returns whether the value was written.
+ * The renderer writes no custom property: a value goes on the element that draws it. */
 export function writeStyle(element: StyleTarget, property: string, value: string): boolean {
+  if (property.startsWith('--')) throw new TypeError(`The renderer writes no custom property: ${property}.`);
   if (!changed(element.style, property, value)) return false;
-  if (property.startsWith('--')) (element.style as { setProperty(name: string, value: string): void }).setProperty(property, value);
-  else (element.style as Record<string, string>)[property] = value;
+  (element.style as Record<string, string>)[property] = value;
   return true;
 }
 

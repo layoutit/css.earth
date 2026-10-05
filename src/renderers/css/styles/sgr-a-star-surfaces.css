@@ -1,19 +1,5 @@
 /* Sagittarius A*: the Sun's emissive presentation (body-surfaces.css, SUN block) scoped to this object, loaded after the shared
    body-surfaces.css base rules. No spin: the rotation axis and period are unmeasured. Both plates are transparent: no observation is cast. */
-.object-stage[data-object-id="sgr-a-star"] > :is(.polycss-camera, .sgr-a-star-corona-layer, .sgr-a-star-limb-layer) {
-  --sgr-a-star-scene-side-padding: 16px;
-  --sgr-a-star-reference-width: 1920px;
-  --sgr-a-star-reference-height: 1080px;
-  --sgr-a-star-shell-scale: min(
-    1,
-    calc(
-      (100cqw - var(--sgr-a-star-scene-side-padding) - var(--sgr-a-star-scene-side-padding)) /
-        var(--sgr-a-star-reference-width)
-    ),
-    calc(100cqh / var(--sgr-a-star-reference-height))
-  );
-}
-
 /* The shared stage rule (body-surfaces.css) sizes the camera and the Sun's plates; this object's plates need the same box. */
 .object-stage[data-object-id="sgr-a-star"] > :is(.sgr-a-star-corona-layer, .sgr-a-star-limb-layer) {
   position: absolute;
@@ -96,8 +82,8 @@
 }
 
 .object-stage[data-object-id="sgr-a-star"] .polycss-scene s {
-  width: var(--polycss-atlas-width, var(--polycss-atlas-size, 64px));
-  height: var(--polycss-atlas-height, var(--polycss-atlas-size, 64px));
+  width: 64px;
+  height: 64px;
   transform-style: preserve-3d;
   font: inherit;
   font-weight: normal;

@@ -1,19 +1,5 @@
 /* Azha: the Sun's emissive presentation (body-surfaces.css, SUN block) scoped to this object, loaded after the shared
    body-surfaces.css base rules. No spin: the rotation axis and period are unmeasured. Both plates are transparent: no observation is cast. */
-.object-stage[data-object-id="azha"] > :is(.polycss-camera, .azha-corona-layer, .azha-limb-layer) {
-  --azha-scene-side-padding: 16px;
-  --azha-reference-width: 1920px;
-  --azha-reference-height: 1080px;
-  --azha-shell-scale: min(
-    1,
-    calc(
-      (100cqw - var(--azha-scene-side-padding) - var(--azha-scene-side-padding)) /
-        var(--azha-reference-width)
-    ),
-    calc(100cqh / var(--azha-reference-height))
-  );
-}
-
 /* The shared stage rule (body-surfaces.css) sizes the camera and the Sun's plates; this object's plates need the same box. */
 .object-stage[data-object-id="azha"] > :is(.azha-corona-layer, .azha-limb-layer) {
   position: absolute;
@@ -80,8 +66,8 @@
 }
 
 .object-stage[data-object-id="azha"] .polycss-scene s {
-  width: var(--polycss-atlas-width, var(--polycss-atlas-size, 64px));
-  height: var(--polycss-atlas-height, var(--polycss-atlas-size, 64px));
+  width: 64px;
+  height: 64px;
   transform-style: preserve-3d;
   font: inherit;
   font-weight: normal;

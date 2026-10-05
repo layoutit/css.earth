@@ -85,7 +85,7 @@ test('repreparation starts from canonical topology and reproduces the final dept
   // A new local frame owner invalidates the old partition instead of retaining
   // a cached layout that can no longer follow that source's material state.
   const changed: PresentationSource = { ...first, viewBindings: [...first.viewBindings, { kind: 'view-property', target: first.surfaceHit.target,
-    property: '--local-material', source: 'billboard-opacity', precision: 6 }] };
+    property: 'opacity', source: 'billboard-opacity', precision: 6 }] };
   assert.equal((await preparePresentationBindings(changed, root, { pageStyles: objectPageStyles })).depthPartitions, undefined);
 });
 

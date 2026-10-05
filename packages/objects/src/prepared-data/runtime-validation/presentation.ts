@@ -7,6 +7,10 @@ import type { ObjectControls } from '../runtime/object-controls.js';
 import type { CameraPlan } from '../camera/runtime-camera-types.js';
 
 import { requireTexturePlacements } from './prepared-texture-levels.js';
+import { requireMeshes } from './meshes.js';
+import { LEAF_BOX_PROPERTY, LEAF_BOX_STEP, SURFACE_SEAM_OUTSET_PROPERTY, SURFACE_SEAM_OUTSET_STEP } from '../presentation/leaf-box-properties.js';
+
+const STEP_NAMES: readonly string[] = [LEAF_BOX_STEP, SURFACE_SEAM_OUTSET_STEP, LEAF_BOX_PROPERTY, SURFACE_SEAM_OUTSET_PROPERTY];
 
 /** `deferred`: datasets whose variants stand in until their tables arrive (dataset-tables.ts). A toggle whose effect
  * only they carry is judged once they are adopted. */
@@ -16,7 +20,8 @@ export function requireVariants(value: unknown, tree: PreparedTree, resources: R
   const keys: Record<string, unknown>[] = [];
   const activationTargets = new Set(tree.activationGroups?.flat() ?? []);
   for (const input of variants) {
-    const variant = record(input, 'variant', ['when', 'required', 'writes', 'materials', 'navigation', 'hiddenSubtrees']);
+    const variant = record(input, 'variant', ['when', 'required', 'writes', 'materials', 'navigation', 'hiddenSubtrees', 'mesh']);
+    requireMeshes(tree.meshes, tree.nodes, [variant.mesh]);
     if (variant.hiddenSubtrees !== undefined) {
       const containers = new Set(tree.nodes.map(node => node.parent)), hidden = new Set<number>();
       const holds = (root: number, id: number) => { for (let at: number = id; at >= 0; at = tree.nodes[at].parent) if (at === root) return true; return false; };
@@ -98,8 +103,10 @@ export function requireViewBindings(value: unknown, tree: PreparedTree, camera: 
     } else if (kind === 'silhouette-fit') {
       if (finite(binding.minimumRadius, 'silhouette floor') < 0 || !(positive(binding.unitScale, 'silhouette scale') > 0) || camera.projection?.model !== 'css-perspective-shared-with-sky') fail('silhouette fit requires perspective camera and scale');
     } else if (kind === 'silhouette-step-property') {
+      // The two prepared steps. The bake's working form names each as a custom property; what ships names it plainly
+      // (shipped-runtime.ts refuses the working names).
       const property = text(binding.property, 'silhouette step property');
-      if (!property.startsWith('--')) fail('silhouette step property must be custom');
+      if (!STEP_NAMES.includes(property)) fail(`silhouette step property ${property} on node ${target} is not a prepared step (${STEP_NAMES.join(', ')})`);
       // Blocks of leaves the camera cannot see keep the first step; each block publishes <property>-<block>.
       if (binding.placements !== undefined) requireTexturePlacements(binding.placements, name => name.startsWith(`${property}-`));
       // Leaf box groups: each names the property or one of its blocks, and its leaves; no leaf is in two groups.
@@ -160,7 +167,7 @@ export function requireViewBindings(value: unknown, tree: PreparedTree, camera: 
       }
     } else if (kind === 'view-attribute' || kind === 'view-property') {
       if (kind === 'view-property') {
-        if (!text(binding.property, 'view property').startsWith('--')) fail('view property must be custom');
+        if (text(binding.property, 'view property') !== 'opacity') fail(`view property ${String(binding.property)} on node ${target} must be the opacity of the element that draws it`);
         choice(binding.source, ['billboard-opacity', 'marker-opacity'], 'view property source');
       } else {
         attribute(binding.property); choice(binding.source, ['scene-pitch', 'control-yaw', 'zoom', 'scene-matrix', 'level-of-detail-stage'], 'view attribute source');

@@ -19,7 +19,7 @@ import { createTextureTileWriter, preparedTextureSizes, selectPreparedTextureLev
 
 import { createLeafBoxBlocks } from './prepared-leaf-box-blocks.js';
 import { createLeafBoxWriter, SEAM_OUTSET } from './prepared-leaf-box-direct.js';
-import { hiddenSubtreeRoots, meshProfile, omittedPreparedNodes } from './prepared-omitted-nodes.js';
+import { hiddenSubtreeRoots, omittedPreparedNodes } from './prepared-omitted-nodes.js';
 import { createSettlePacer } from './settle-pacer.js';
 import type { CameraMotionSignal } from '../navigation/camera-motion-signal.js';
 import { activeResourceFallbacks } from './prepared-resource-fallbacks.js';
@@ -185,14 +185,9 @@ export function mountPreparedPresentation(stage: HTMLElement, context: PreparedP
   // mesh its dataset draws on, and a hidden subtree (Earth's and Saturn's cutaways) only while a dataset shows it. Their
   // nodes stay built but unattached, and a selection swaps them.
   const detachable = new Map<string, { parent: HTMLElement; leaves: HTMLElement[] }>();
-  definition.tree.nodes.forEach((record, index) => {
-    const profile = meshProfile(record.style) ?? meshProfile(nodes[index].getAttribute("style"));
-    if (!profile) return;
-    const mesh = detachable.get(profile);
-    if (mesh) mesh.leaves.push(nodes[index]); else detachable.set(profile, { parent: nodes[record.parent], leaves: [nodes[index]] });
-  });
-  const meshTargets = new Map(definition.variants.flatMap(variant => variant.writes.flatMap(write =>
-    write.kind === "style" && detachable.has(write.name) ? [[write.name, write.target] as const] : [])));
+  const meshes = definition.tree.meshes ?? [], meshKey = (name: string) => `mesh:${name}`;
+  for (const mesh of meshes) detachable.set(meshKey(mesh.name), { parent: nodes[definition.tree.nodes[mesh.leaves[0]![0]].parent],
+    leaves: mesh.leaves.flatMap(([first, count]) => nodes.slice(first, first + count)) });
   const hiddenRoots = new Set(definition.variants.flatMap(variant => [...hiddenSubtreeRoots(variant)]));
   const subtreeKey = (root: number) => `subtree:${root}`;
   for (const root of hiddenRoots) detachable.set(subtreeKey(root), { parent: nodes[root],
@@ -204,8 +199,8 @@ export function mountPreparedPresentation(stage: HTMLElement, context: PreparedP
     const detached = group.leaves.filter(leaf => !leaf.parentNode);
     if (detached.length) group.parent.append(...detached);
   };
-  for (const [profile, index] of meshTargets) if (nodes[index]?.style.getPropertyValue(profile) !== "block") mountDetachable(profile, false);
-  // A subtree the server rendered is the one its selection shows; one built here waits for a selection that shows it.
+  // A mesh or subtree the server rendered is the one its selection shows; one built here waits for a selection that shows it.
+  for (const mesh of meshes) if (!detachable.get(meshKey(mesh.name))!.leaves.some(leaf => leaf.dataset.preparedNode !== undefined)) mountDetachable(meshKey(mesh.name), false);
   for (const root of hiddenRoots) if (!detachable.get(subtreeKey(root))!.leaves.some(leaf => leaf.dataset.preparedNode !== undefined)) mountDetachable(subtreeKey(root), false);
   const owned = () => roots.some(root => root.parentNode === stage);
   const stageBindings = new Map<string, PreparedWrite>();
@@ -340,27 +335,22 @@ export function mountPreparedPresentation(stage: HTMLElement, context: PreparedP
       // absent from its successor in the same publication, without embedding
       // every inactive dataset's clearing writes in every prepared variant.
       const nextStyles = new Set(writes.filter(binding => binding.kind === "style").map(styleKey));
-      const profileDisplay = (binding: typeof writes[number], value: string) => binding.kind === "style" &&
-        binding.name.startsWith("--") && binding.name.endsWith("-display") && binding.value === value;
-      const hiddenProfiles = writes.filter(binding => profileDisplay(binding, "none"));
-      const shownProfiles = writes.filter(binding => profileDisplay(binding, "block"));
-      const contentWrites = writes.filter(binding => !profileDisplay(binding, "none") && !profileDisplay(binding, "block"));
-      // Alternative radial meshes address different atlas layouts. Hide the
-      // outgoing profile before changing their shared image, then reveal the
-      // incoming profile only after the complete dataset has been published.
+      // Alternative radial meshes address different atlas layouts. Unmount the
+      // outgoing mesh before changing their shared image, then mount the
+      // incoming mesh only after the complete dataset has been published.
       // If publication is interrupted, the body fails closed instead of
       // rendering one mesh with another mesh's texel addresses.
-      for (const binding of hiddenProfiles) { publish(binding); if (binding.kind === "style") mountDetachable(binding.name, false); }
+      for (const mesh of meshes) if (mesh.name !== variant.mesh) mountDetachable(meshKey(mesh.name), false);
       const hiddenNow = hiddenSubtreeRoots(variant);
       for (const root of hiddenRoots) if (hiddenNow.has(root)) mountDetachable(subtreeKey(root), false);
       for (const [key, binding] of selectedTextures) if (!nextStyles.has(key)) {
         publishStyle(binding.target, binding.name, "none");
       }
-      for (let index = 0; index < contentWrites.length; index++) {
-        const binding = contentWrites[index]!, leaves = binding.kind === "style" ? textureBindings.get(`${binding.target}:${binding.name}`) : undefined;
+      for (let index = 0; index < writes.length; index++) {
+        const binding = writes[index]!, leaves = binding.kind === "style" ? textureBindings.get(`${binding.target}:${binding.name}`) : undefined;
         if (!levelOnly || binding.kind !== "style" || !leaves?.some(leaf => leaf.style.backgroundImage !== binding.value)) { publish(binding); continue; }
         // A page's image and its tile placement land together.
-        const next = contentWrites[index + 1];
+        const next = writes[index + 1];
         const tile = next?.kind === "tile" && next.target === binding.target && next.name === binding.name ? next : null;
         if (tile) index++;
         pendingLevels.set(`${binding.target}:${binding.name}`, { leaves, done: 0, image: binding.value, shown: binding.shown, tile });
@@ -386,7 +376,7 @@ export function mountPreparedPresentation(stage: HTMLElement, context: PreparedP
         levelPacer.request();
       }
       for (const root of hiddenRoots) if (!hiddenNow.has(root)) mountDetachable(subtreeKey(root), true);
-      for (const binding of shownProfiles) { if (binding.kind === "style") mountDetachable(binding.name, true); publish(binding); }
+      if (variant.mesh !== undefined) mountDetachable(meshKey(variant.mesh), true);
       selectedTextures = new Map(variant.writes.filter(binding => binding.kind === "texture").map(binding => [styleKey(binding), binding]));
       for (const entry of motion) {
         const duration = entry.plan.timings.find(timing => Object.entries(timing.when).every(([name, value]) => selection[name] === value))?.duration ?? entry.plan.duration;
@@ -524,8 +514,9 @@ export function createPreparedFramePublisher(definition: PreparedPresentationDef
           const value = levelOfDetail.stage;
           if (readAttribute(element, binding.property) !== value) writeAttribute(element, binding.property, value);
         } else if (binding.kind === "view-property") {
+          // An opacity on the element that draws it, guarded by the last value written (retained-write.ts).
           const value = formatNumber(round(binding.source === "billboard-opacity" ? levelOfDetail.billboardOpacity : levelOfDetail.markerOpacity, binding.precision));
-          if (styleValue(element, binding.property) !== value) { writeStyle(element, binding.property, value); styleWrites++; }
+          if (writeRetainedStyle(element, binding.property, value)) styleWrites++;
         } else if (followCamera(binding, element, view)) {
           continue;
         } else if (binding.kind === "silhouette-step-property" && binding.groups) {

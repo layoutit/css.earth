@@ -1,12 +1,9 @@
 /* Prepared scene presentation, scoped to its mounted object. */
 .object-stage:where([data-object-id="neptune"]) > .polycss-camera {
-  --neptune-scene-side-padding: 16px;
-  --neptune-reference-width: 1920px;
-  --neptune-reference-height: 1080px;
-  --neptune-shell-scale: min(1, calc((100cqw - var(--neptune-scene-side-padding) * 2) / var(--neptune-reference-width)), calc(100cqh / var(--neptune-reference-height)));
   position: absolute;
   inset: 0;
-  scale: calc(var(--neptune-shell-scale) / var(--object-viewport-zoom-divisor));
+  /* The reference frame fitted to the stage with 16px at each side, never enlarged, over 1 / .88 for breathing room. */
+  scale: calc(min(1, calc((100cqw - 16px * 2) / 1920px), calc(100cqh / 1080px)) / 1.136364);
   transform-origin: 50% 50%;
   transform-style: preserve-3d;
   pointer-events: none;
@@ -23,7 +20,7 @@
 :where(.object-stage[data-object-id="neptune"]) .polycss-scene { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-style: preserve-3d; pointer-events: none; }
 :where(.object-stage[data-object-id="neptune"]) .polycss-mesh { position: absolute; transform-style: preserve-3d; transform-origin: 0 0 0; }
 :where(.object-stage[data-object-id="neptune"]) .polycss-scene :is(b, i, s) { position: absolute; display: block; transform-origin: 0 0; margin: 0; padding: 0; line-height: 0; text-decoration: none; backface-visibility: hidden; background-repeat: no-repeat; pointer-events: none; }
-:where(.object-stage[data-object-id="neptune"]) .polycss-scene s { width: var(--polycss-atlas-width, 64px); height: var(--polycss-atlas-height, 64px); background-origin: border-box; background-clip: border-box; }
+:where(.object-stage[data-object-id="neptune"]) .polycss-scene s { width: 64px; height: 64px; background-origin: border-box; background-clip: border-box; }
 
 :where(.object-stage[data-object-id="neptune"]) .neptune-ring-plane > s { backface-visibility: visible; }
 .object-stage:where([data-object-id="neptune"]).neptune-hide-rings .neptune-ring-plane { visibility: hidden; }
@@ -58,8 +55,6 @@
   background-repeat: no-repeat;
   pointer-events: none;
   transform-origin: 50% 50%;
-  transform: translate(-50%, -50%) rotate(var(--neptune-light-roll, 0deg)) scale(1.71875);
-}
-.object-stage[data-object-id="neptune"].neptune-hide-shadows .neptune-fixed-material {
-  transform: translate(-50%, -50%) scale(1.71875);
+  translate: -50% -50%;
+  scale: 1.71875;
 }

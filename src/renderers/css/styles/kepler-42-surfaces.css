@@ -1,19 +1,5 @@
 /* Kepler-42: the Sun's emissive presentation (body-surfaces.css, SUN block) scoped to this object, loaded after the shared
    body-surfaces.css base rules. No spin: the rotation axis and period are unmeasured. Both plates are transparent: no observation is cast. */
-.object-stage[data-object-id="kepler-42"] > :is(.polycss-camera, .kepler-42-corona-layer, .kepler-42-limb-layer) {
-  --kepler-42-scene-side-padding: 16px;
-  --kepler-42-reference-width: 1920px;
-  --kepler-42-reference-height: 1080px;
-  --kepler-42-shell-scale: min(
-    1,
-    calc(
-      (100cqw - var(--kepler-42-scene-side-padding) - var(--kepler-42-scene-side-padding)) /
-        var(--kepler-42-reference-width)
-    ),
-    calc(100cqh / var(--kepler-42-reference-height))
-  );
-}
-
 /* The shared stage rule (body-surfaces.css) sizes the camera and the Sun's plates; this object's plates need the same box. */
 .object-stage[data-object-id="kepler-42"] > :is(.kepler-42-corona-layer, .kepler-42-limb-layer) {
   position: absolute;
@@ -80,8 +66,8 @@
 }
 
 .object-stage[data-object-id="kepler-42"] .polycss-scene s {
-  width: var(--polycss-atlas-width, var(--polycss-atlas-size, 64px));
-  height: var(--polycss-atlas-height, var(--polycss-atlas-size, 64px));
+  width: 64px;
+  height: 64px;
   transform-style: preserve-3d;
   font: inherit;
   font-weight: normal;

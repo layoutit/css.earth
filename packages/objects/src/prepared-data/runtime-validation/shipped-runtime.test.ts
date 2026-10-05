@@ -31,3 +31,22 @@ test('the working form is refused with the object and the place it names a custo
   assert.throws(() => requireShippedRuntime(runtime({ writes: [texture(1, '--fixture-poles-image')] })),
     /fixture: prepared runtime texture write --fixture-poles-image on node 1 names no texture slot/u);
 });
+
+test('no write, binding, key or style of a shipped runtime names or reads a custom property', () => {
+  const shipped = { ...runtime(), viewBindings: [{ kind: 'silhouette-step-property', target: 1, property: 'silhouette-step', groups: { 'silhouette-step-0': [2] } },
+    { kind: 'view-property', target: 2, property: 'opacity', source: 'billboard-opacity', precision: 6 }], materials: [{ id: 'lighting', target: 2, rotation: { kind: 'angle' } }] };
+  assert.doesNotThrow(() => requireShippedRuntime(shipped as never));
+  const style = { kind: 'style' as const, target: 1, name: '--fixture-billboard-color', value: '#484848' };
+  assert.throws(() => requireShippedRuntime({ ...runtime(), variants: [{ when: {}, required: [], materials: [], writes: [style] }] }),
+    /fixture: prepared runtime style write --fixture-billboard-color on node 1 names a custom property/u);
+  assert.throws(() => requireShippedRuntime(runtime({ nodes: [node(-1), node(0), node(1, 'height:4px;display:var(--fixture-shape-display,none)')] })),
+    /fixture: prepared runtime node 2 sets or reads a custom property: height:4px;display:var\(--fixture-shape-display,none\)/u);
+  assert.throws(() => requireShippedRuntime(runtime({ properties: [{ name: 'width', value: 'calc(4px * var(--leaf-box, 1))', custom: false }] })),
+    /fixture: prepared runtime property width reads a custom property: calc\(4px \* var\(--leaf-box, 1\)\)/u);
+  assert.throws(() => requireShippedRuntime({ ...shipped, viewBindings: [{ ...shipped.viewBindings[0]!, property: '--silhouette-step' }] } as never),
+    /fixture: prepared runtime viewBindings\[0\]\.property names or reads a custom property: --silhouette-step/u);
+  assert.throws(() => requireShippedRuntime({ ...shipped, viewBindings: [{ ...shipped.viewBindings[0]!, groups: { '--silhouette-step-0': [2] } }] } as never),
+    /fixture: prepared runtime viewBindings\[0\]\.groups has the key --silhouette-step-0, a custom property's name/u);
+  assert.throws(() => requireShippedRuntime({ ...shipped, materials: [{ id: 'lighting', target: 2, rotation: { kind: 'angle', property: '--fixture-light-roll' } }] } as never),
+    /fixture: prepared runtime materials\[0\]\.rotation\.property names or reads a custom property: --fixture-light-roll/u);
+});

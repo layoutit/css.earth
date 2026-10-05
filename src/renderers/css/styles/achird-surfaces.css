@@ -1,19 +1,5 @@
 /* Achird: the Sun's emissive presentation (body-surfaces.css, SUN block) scoped to this object, loaded after the shared
    body-surfaces.css base rules. No spin: the rotation axis and period are unmeasured. Both plates are transparent: no observation is cast. */
-.object-stage[data-object-id="achird"] > :is(.polycss-camera, .achird-corona-layer, .achird-limb-layer) {
-  --achird-scene-side-padding: 16px;
-  --achird-reference-width: 1920px;
-  --achird-reference-height: 1080px;
-  --achird-shell-scale: min(
-    1,
-    calc(
-      (100cqw - var(--achird-scene-side-padding) - var(--achird-scene-side-padding)) /
-        var(--achird-reference-width)
-    ),
-    calc(100cqh / var(--achird-reference-height))
-  );
-}
-
 /* The shared stage rule (body-surfaces.css) sizes the camera and the Sun's plates; this object's plates need the same box. */
 .object-stage[data-object-id="achird"] > :is(.achird-corona-layer, .achird-limb-layer) {
   position: absolute;
@@ -80,8 +66,8 @@
 }
 
 .object-stage[data-object-id="achird"] .polycss-scene s {
-  width: var(--polycss-atlas-width, var(--polycss-atlas-size, 64px));
-  height: var(--polycss-atlas-height, var(--polycss-atlas-size, 64px));
+  width: 64px;
+  height: 64px;
   transform-style: preserve-3d;
   font: inherit;
   font-weight: normal;

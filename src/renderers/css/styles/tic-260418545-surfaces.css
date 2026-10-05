@@ -1,19 +1,5 @@
 /* TIC 260418545: the Sun's emissive presentation (body-surfaces.css, SUN block) scoped to this object, loaded after the shared
    body-surfaces.css base rules. No spin: the rotation axis and period are unmeasured. Both plates are transparent: no observation is cast. */
-.object-stage[data-object-id="tic-260418545"] > :is(.polycss-camera, .tic-260418545-corona-layer, .tic-260418545-limb-layer) {
-  --tic-260418545-scene-side-padding: 16px;
-  --tic-260418545-reference-width: 1920px;
-  --tic-260418545-reference-height: 1080px;
-  --tic-260418545-shell-scale: min(
-    1,
-    calc(
-      (100cqw - var(--tic-260418545-scene-side-padding) - var(--tic-260418545-scene-side-padding)) /
-        var(--tic-260418545-reference-width)
-    ),
-    calc(100cqh / var(--tic-260418545-reference-height))
-  );
-}
-
 /* The shared stage rule (body-surfaces.css) sizes the camera and the Sun's plates; this object's plates need the same box. */
 .object-stage[data-object-id="tic-260418545"] > :is(.tic-260418545-corona-layer, .tic-260418545-limb-layer) {
   position: absolute;
@@ -80,8 +66,8 @@
 }
 
 .object-stage[data-object-id="tic-260418545"] .polycss-scene s {
-  width: var(--polycss-atlas-width, var(--polycss-atlas-size, 64px));
-  height: var(--polycss-atlas-height, var(--polycss-atlas-size, 64px));
+  width: 64px;
+  height: 64px;
   transform-style: preserve-3d;
   font: inherit;
   font-weight: normal;

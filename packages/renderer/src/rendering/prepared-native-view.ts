@@ -30,7 +30,6 @@ export function publishPreparedNativeView(definition: ObjectRuntimeDefinition, s
   camera.style.perspective = focalCss;
   camera.style.scale = '1';
   camera.style.perspectiveOrigin = '50% 50%';
-  stage.style.setProperty('--prepared-view-focal', focalCss);
   const [x, y, z] = presentation.bodyCenterUnits;
   const scale = definition.camera.sceneScale;
   scene.style.transform = `translate3d(${x}px,${y}px,calc(${focalCss} + ${z}px)) scale3d(${scale},${scale},${scale}) ${presentation.sceneMatrix}`;
@@ -52,7 +51,7 @@ export function publishPreparedNativeView(definition: ObjectRuntimeDefinition, s
   for (const binding of definition.viewBindings) if (binding.kind === 'silhouette-fit' && presentation.silhouette) {
     const ellipse = presentation.silhouette, target = nodes[binding.target];
     const angle = Math.atan2(ellipse.radial[1], ellipse.radial[0]) * 180 / Math.PI;
-    const length = (value: number) => `calc(var(--prepared-view-focal) * ${value / viewport.focalPixels})`;
+    const length = (value: number) => `calc(${focalCss} * ${value / viewport.focalPixels})`;
     const radius = (value: number) => `calc(max(${binding.minimumRadius}px, ${length(value)}) / 1px * ${binding.unitScale})`;
     target.style.transform = `translate(${length(ellipse.centre[0])},${length(ellipse.centre[1])}) rotate(${angle}deg) scale(${radius(ellipse.radialSemiAxis)},${radius(ellipse.tangentialSemiAxis)}) rotate(${-angle}deg)`;
   }

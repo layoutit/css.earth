@@ -1,19 +1,5 @@
 /* Safina: the Sun's emissive presentation (body-surfaces.css, SUN block) scoped to this object, loaded after the shared
    body-surfaces.css base rules. No spin: the rotation axis and period are unmeasured. Both plates are transparent: no observation is cast. */
-.object-stage[data-object-id="safina"] > :is(.polycss-camera, .safina-corona-layer, .safina-limb-layer) {
-  --safina-scene-side-padding: 16px;
-  --safina-reference-width: 1920px;
-  --safina-reference-height: 1080px;
-  --safina-shell-scale: min(
-    1,
-    calc(
-      (100cqw - var(--safina-scene-side-padding) - var(--safina-scene-side-padding)) /
-        var(--safina-reference-width)
-    ),
-    calc(100cqh / var(--safina-reference-height))
-  );
-}
-
 /* The shared stage rule (body-surfaces.css) sizes the camera and the Sun's plates; this object's plates need the same box. */
 .object-stage[data-object-id="safina"] > :is(.safina-corona-layer, .safina-limb-layer) {
   position: absolute;
@@ -80,8 +66,8 @@
 }
 
 .object-stage[data-object-id="safina"] .polycss-scene s {
-  width: var(--polycss-atlas-width, var(--polycss-atlas-size, 64px));
-  height: var(--polycss-atlas-height, var(--polycss-atlas-size, 64px));
+  width: 64px;
+  height: 64px;
   transform-style: preserve-3d;
   font: inherit;
   font-weight: normal;

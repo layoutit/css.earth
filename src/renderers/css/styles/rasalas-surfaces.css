@@ -1,19 +1,5 @@
 /* Rasalas: the Sun's emissive presentation (body-surfaces.css, SUN block) scoped to this object, loaded after the shared
    body-surfaces.css base rules. No spin: the rotation axis and period are unmeasured. Both plates are transparent: no observation is cast. */
-.object-stage[data-object-id="rasalas"] > :is(.polycss-camera, .rasalas-corona-layer, .rasalas-limb-layer) {
-  --rasalas-scene-side-padding: 16px;
-  --rasalas-reference-width: 1920px;
-  --rasalas-reference-height: 1080px;
-  --rasalas-shell-scale: min(
-    1,
-    calc(
-      (100cqw - var(--rasalas-scene-side-padding) - var(--rasalas-scene-side-padding)) /
-        var(--rasalas-reference-width)
-    ),
-    calc(100cqh / var(--rasalas-reference-height))
-  );
-}
-
 /* The shared stage rule (body-surfaces.css) sizes the camera and the Sun's plates; this object's plates need the same box. */
 .object-stage[data-object-id="rasalas"] > :is(.rasalas-corona-layer, .rasalas-limb-layer) {
   position: absolute;
@@ -80,8 +66,8 @@
 }
 
 .object-stage[data-object-id="rasalas"] .polycss-scene s {
-  width: var(--polycss-atlas-width, var(--polycss-atlas-size, 64px));
-  height: var(--polycss-atlas-height, var(--polycss-atlas-size, 64px));
+  width: 64px;
+  height: 64px;
   transform-style: preserve-3d;
   font: inherit;
   font-weight: normal;

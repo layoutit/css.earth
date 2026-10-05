@@ -30,20 +30,6 @@ export function starStylesheet(id: string, name: string, offLimbSize: number, pl
   const s = `.object-stage[data-object-id="${id}"]`;
   return `/* ${name}: the Sun's emissive presentation (body-surfaces.css, SUN block) scoped to this object, loaded after the shared
    body-surfaces.css base rules. ${spinNote} ${plateNote} */
-${s} > :is(.polycss-camera, .${id}-corona-layer, .${id}-limb-layer) {
-  --${id}-scene-side-padding: 16px;
-  --${id}-reference-width: 1920px;
-  --${id}-reference-height: 1080px;
-  --${id}-shell-scale: min(
-    1,
-    calc(
-      (100cqw - var(--${id}-scene-side-padding) - var(--${id}-scene-side-padding)) /
-        var(--${id}-reference-width)
-    ),
-    calc(100cqh / var(--${id}-reference-height))
-  );
-}
-
 /* The shared stage rule (body-surfaces.css) sizes the camera and the Sun's plates; this object's plates need the same box. */
 ${s} > :is(.${id}-corona-layer, .${id}-limb-layer) {
   position: absolute;
@@ -110,8 +96,8 @@ ${s} .polycss-scene {
 }
 
 ${s} .polycss-scene s {
-  width: var(--polycss-atlas-width, var(--polycss-atlas-size, 64px));
-  height: var(--polycss-atlas-height, var(--polycss-atlas-size, 64px));
+  width: 64px;
+  height: 64px;
   transform-style: preserve-3d;
   font: inherit;
   font-weight: normal;
