@@ -23,8 +23,6 @@ async function scripts() {
     format: 'esm', platform: 'browser', target: 'es2022', logLevel: 'warning',
     plugins: [{ name: 'checkout-sources', setup(resolver) {
       resolver.onResolve({ filter: /^@cssearth\/(engine|core|objects)$/ }, ({ path }) => ({ path: source(path.slice('@cssearth/'.length)) }));
-      // site/runtime-policy.mts takes one function from the renderer's entry; the rest of the renderer is not bundled.
-      resolver.onResolve({ filter: /^@cssearth\/renderer$/ }, () => ({ path: resolve(root, 'packages/renderer/src/navigation/shared-input-surface.ts') }));
     } }] });
   return new Map(result.outputFiles.map(file => [`/${file.path.split('/').at(-1)}`, file.text]));
 }

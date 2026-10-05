@@ -1,7 +1,7 @@
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
 import { polePanTurn, poleViewportTurn, poleTurnRotation, rotateVector } from './pole-drag.js';
-import type { GrabSphere } from './pole-drag.js';
+import type { GrabSphere, PoleTurn } from './pole-drag.js';
 import type { Vector3 } from './math-types.js';
 // CesiumJS 1.145.0's own globe under twelve drags, frame by frame: written by `node labs/experiments/drag-oracle/run.mts record`.
 import recorded from './pole-drag.cesium.json' with { type: 'json' };
@@ -24,7 +24,7 @@ describe('pole-held turns against CesiumJS', () => {
         if (frame.movement) {
           const [previousX, previousY, currentX, currentY] = frame.movement, pointer = { previousX: previousX!, previousY: previousY!, currentX: currentX!, currentY: currentY! };
           // Cesium pans while both ends of the movement are on the globe, and from the first miss turns by viewport share.
-          const pan = offGlobe ? null : polePanTurn(pointer, body, pole);
+          const pan: PoleTurn | null = offGlobe ? null : polePanTurn(pointer, body, pole);
           assert.equal(pan === null, frame.rotating, 'the drag left the globe in a different frame than Cesium\'s');
           offGlobe = frame.rotating;
           const rotation = poleTurnRotation(pan ?? poleViewportTurn(pointer, body, gesture.viewport, pole), pole, across);
