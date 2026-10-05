@@ -4,6 +4,7 @@ import { cp, mkdir, readFile, writeFile, appendFile, rm, stat } from 'node:fs/pr
 import { resolve, join } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { promisify } from 'node:util';
+import { serverVerdict } from './server-policy.mts';
 import { sourceDiff } from './source-diff.mts';
 import { parseMoves, record, strings } from './records.mts';
 
@@ -205,8 +206,35 @@ async function main(): Promise<number> {
   }
   const comparisonExit = await stage('compare', process.execPath, [join(toolRoot, 'compare.mts'), '--base', join(out, 'base'),
     '--head', join(out, 'head'), '--mode', declaration.mode, '--moves', moves, '--sources', sourcesPath, '--json', join(out, 'report.json')], head);
-  if (process.env.GITHUB_STEP_SUMMARY) await appendFile(process.env.GITHUB_STEP_SUMMARY, jobSummary(JSON.parse(await readFile(join(out, 'report.json'), 'utf8')), timings, declaration.mode, source));
-  return comparisonExit;
+  let answerExit = 0, answerSummary = '';
+  try {
+    // L2 follows the same trust selection; only its introducing PR may bootstrap an absent base copy.
+    let answerRoot = join(headTools ? head : base, '.github/scripts/server-answers');
+    if (!headTools && !await stat(answerRoot).catch(() => undefined)) {
+      console.warn('::warning::Bootstrap: merge base has no server-answer tools; using HEAD server-answer tools');
+      answerRoot = join(head, '.github/scripts/server-answers');
+    }
+    for (const checkout of [base, head]) {
+      const destination = join(checkout, '.github/scripts/server-answers');
+      if (destination === answerRoot) continue;
+      await rm(destination, { recursive: true, force: true });
+      await cp(answerRoot, destination, { recursive: true });
+    }
+    const { serverStage, serverSummary } = await import('./server-stage.mts');
+    const answers = await serverStage(base, head, out, declaration.mode, 'https://earth-assets.lowpoly.cc');
+    timings.push(...answers.timings);
+    answerExit = answers.exitCode;
+    answerSummary = serverSummary(answers);
+  } catch (error) {
+    // Even setup/reporting failure of L2 remains informational without a declaration.
+    console.warn(`::notice::Server answers stage failed: ${String(error).replaceAll('\n', '%0A').replaceAll('\r', '%0D')}`);
+    answerExit = serverVerdict(declaration.mode, 0, 1);
+    answerSummary = `\n## Server answers\n\nStage failed: ${String(error)}. Exit: ${answerExit}.\n`;
+    await writeFile(join(out, 'server-answers.json'), JSON.stringify({ exitCode: answerExit, failure: String(error) }));
+  }
+  await writeFile(join(out, 'timings.json'), `${JSON.stringify(timings, null, 2)}\n`);
+  if (process.env.GITHUB_STEP_SUMMARY) await appendFile(process.env.GITHUB_STEP_SUMMARY, jobSummary(JSON.parse(await readFile(join(out, 'report.json'), 'utf8')), timings, declaration.mode, source) + answerSummary);
+  return comparisonExit || answerExit;
 }
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
   try { process.exitCode = await main(); }

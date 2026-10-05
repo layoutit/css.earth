@@ -127,3 +127,17 @@ test('tracked preparation mutations fail even in report mode; summary includes d
   assert.ok(source.includes('requireUnchangedTracked(beforePreparation, await trackedDiff())'));
   assert.ok(source.includes('appendFile(process.env.GITHUB_STEP_SUMMARY'));
 });
+
+test('L2 runs after comparison, shares the selected tools and publishes bounded evidence without making uploads mandatory', async () => {
+  const source = await readFile(new URL('./ci.mts', import.meta.url), 'utf8');
+  assert.ok(source.indexOf("stage('compare'") < source.indexOf('await serverStage('));
+  assert.ok(source.includes("join(headTools ? head : base, '.github/scripts/server-answers')"));
+  assert.ok(source.includes('await cp(answerRoot, destination'));
+  assert.ok(source.includes('return comparisonExit || answerExit'));
+  const workflow = parse(await readFile(new URL('../../workflows/site-safety-net.yml', import.meta.url), 'utf8'));
+  const upload = workflow.jobs['build-compare'].steps.find((step: { uses?: string }) => step.uses?.startsWith('actions/upload-artifact@'));
+  assert.equal(upload.with['if-no-files-found'], 'warn');
+  for (const path of ['server-answers.json', 'server-answers/*.log', 'server-answers/artifacts/']) assert.ok(upload.with.path.includes(path));
+  assert.ok(!upload.with.path.includes('server-answers/base/'));
+  assert.ok(!upload.with.path.includes('server-answers/head/'));
+});

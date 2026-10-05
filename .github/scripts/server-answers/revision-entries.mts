@@ -45,3 +45,15 @@ export function offlineDeploySteps(scripts: Record<string, string>): string[] {
     ...expandScript(scripts, 'build:packages'), ...expandScript(scripts, 'setup:asset-data'),
   ].includes(step)).map(step => step.includes('prepare-facilities') && !step.includes('--restored-only') ? step + ' --restored-only' : step);
 }
+
+/** Reuse the comparison build: only the final deployment bundler and the Worker bundler remain. */
+export function postBuildSteps(scripts: Record<string, string>): string[] {
+  const deploy = expandScript(scripts, 'build:deploy');
+  const boundaries = deploy.flatMap((step, index) => step === 'astro build' ? [index] : []);
+  if (boundaries.length !== 1) throw new Error('Expected one standalone Astro build');
+  const remaining = deploy.slice(boundaries[0]! + 1).filter(step => !/\bshare-images\b/u.test(step) && !/\brun-implemented-objects\.mts assemble$/u.test(step));
+  const worker = expandScript(scripts, 'deploy:cloudflare-preview').find(step => step.startsWith('node '));
+  const safe = (step: string) => /^node [\w./-]+\.[cm]?ts(?: --[\w-]+)*$/u.test(step) && !step.split(/[ /]/u).includes('..');
+  if (remaining.length !== 1 || !remaining.every(safe) || !worker || !safe(worker)) throw new Error('Unsupported post-build bundle recipe; another build is forbidden');
+  return [...remaining, worker.replace(/\s+--noindex\b/u, '')];
+}
