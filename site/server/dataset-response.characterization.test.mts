@@ -4,7 +4,7 @@ import { parseHTML } from 'linkedom';
 import { mkdtemp, mkdir, writeFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { characterizationRuntime } from './test/fixtures/characterization-runtime.mts';
+import { characterizationRuntime } from '../scene/fixtures/characterization-runtime.mts';
 import { readPreparedObjectBytes } from './object-page-data.mts';
 import { renderDatasetResponse, UnreadableSavedView } from './dataset-response.mts';
 

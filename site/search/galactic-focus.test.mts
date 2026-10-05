@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { catalogueObject } from '@cssearth/objects';
 import { prepareSceneDistance } from '@cssearth/bake/navigation';
-import { searchObjects } from '../search/object-search.mts';
+import { searchObjects } from './object-search.mts';
 
 test('a globular cluster package is an entry of the registry from its own descriptor, classified and searched like any other', () => {
   const PC_M = 3.085677581491367e16;

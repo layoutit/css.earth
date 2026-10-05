@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
-import { refuseStaleKeptBindings } from '../build/prepare/prepare-object-json.mts';
+import { refuseStaleKeptBindings } from './prepare-object-json.mts';
 
 test('--keep-bindings refuses when the solved system transform moved', () => {
   // A body outside any solved lane (world-context focus, or a lane with nothing to solve) carries no system transform.

@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { parseHTML } from 'linkedom';
-import { createNavigationStyles } from '../navigation/navigation-styles.mts';
+import { createNavigationStyles } from './navigation-styles.mts';
 
 const shared = '<style data-object-style="site/object-shell.css">.object-stage { position: relative }</style>';
 const body = (id: string) => `<style data-object-style="src/objects/${id}/style.css">[data-object-id="${id}"] { color: red }</style>`;

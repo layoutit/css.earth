@@ -1,5 +1,5 @@
 import type { PreparedWorldContext } from '@cssearth/objects';
-import { SYSTEM_FRAMING_MIN_MOON_RADIUS_SHARE } from './runtime-policy.mts';
+import { SYSTEM_FRAMING_MIN_MOON_RADIUS_SHARE } from '../browser/runtime-policy.mts';
 
 /** Camera framing consumes the prepared orbit bounds, never orbit vertices. */
 export function systemFramingRadii(plan: Pick<PreparedWorldContext, 'focus' | 'bodies'>) {

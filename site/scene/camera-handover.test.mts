@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { bodyInView, createCameraHandover } from '../scene/camera-handover.mts';
-import type { SceneSubject } from '../scene/scene-subject.mts';
+import { bodyInView, createCameraHandover } from './camera-handover.mts';
+import type { SceneSubject } from './scene-subject.mts';
 
 function fixture({ canSwap = (): boolean => true } = {}) {
   const timers = new Map<number, () => void>(), documentTarget = new EventTarget();

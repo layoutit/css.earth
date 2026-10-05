@@ -4,7 +4,7 @@ import { test } from 'node:test';
 import { parseLonLatSliceTable } from '@cssearth/bake/objects/raster';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 import { requireRecord } from '@cssearth/core';
-import { deriveObjectDiscovery } from '../build/prepare/prepare-object-discovery.mts';
+import { deriveObjectDiscovery } from './prepare-object-discovery.mts';
 import { parseObjectDiscovery, discoveryDescription } from '@cssearth/objects';
 
 const specification = { columns: { longitude: 2, latitude: 3, value: 5 }, slice: { column: 4, value: 0.1 }, coordinateToleranceDegrees: 0 };
@@ -12,7 +12,7 @@ const rows = [-135, -45, 45, 135].flatMap(lon => [-60, 0, 60].flatMap(lat => [0.
 const text = rows.join('\n');
 
 test('the climate simulation is never advertised as observed imagery', async () => {
-  const read = async (path: string) => requireRecord(JSON.parse(await readFile(new URL(`../../src/objects/wasp-103b/${path}`, import.meta.url), 'utf8')));
+  const read = async (path: string) => requireRecord(JSON.parse(await readFile(new URL(`../../../src/objects/wasp-103b/${path}`, import.meta.url), 'utf8')));
   const descriptor = await read('object.json'), content = await read('source/content/object.json');
   const discovery = deriveObjectDiscovery(requireRecord(descriptor.properties).catalog, content, [await read('source/preparation/raster.json')]);
   assert.equal(discovery.imagery, false);
@@ -43,7 +43,7 @@ test('an absent level, duplicate, missing cell, nonnumeric value or nonperiodic 
 });
 
 sourceTest('wasp-103b')('the released GCM slice matches the independent temperature anchors in Kreidberg 2018 section 6', async () => {
-  const text = await readFile(new URL('../../src/objects/wasp-103b/source/science/kreidberg-2018/pressure-temperature.dat', import.meta.url), 'utf8');
+  const text = await readFile(new URL('../../../src/objects/wasp-103b/source/science/kreidberg-2018/pressure-temperature.dat', import.meta.url), 'utf8');
   const map = parseLonLatSliceTable(text, { ...specification, slice: { column: 4, value: 0.11542 }, coordinateToleranceDegrees: 0.005 });
   assert.equal(map.report.width, 64);
   assert.equal(map.report.height, 30);

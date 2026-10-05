@@ -1,11 +1,11 @@
 import { parseCompleteObjectContentSource } from '@cssearth/objects/node/contract';
-import { OBJECT_CONTENT_FIXTURE_LABEL } from './fixtures/object-content-fixture.mts';
+import { OBJECT_CONTENT_FIXTURE_LABEL } from '../fixtures/object-content-fixture.mts';
 import { type ObjectContentSource } from '@cssearth/objects';
 import assert from 'node:assert/strict';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
-import { loadObjectContent } from './load-object-content.mts';
-import { prepareObjectContent } from '../build/content/prepare.ts';
+import { loadObjectContent } from './load-object-content.test-support.mts';
+import { prepareObjectContent } from './prepare.ts';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
 
 const preparedObject = (value: unknown): { readonly data: { readonly datasets: { readonly controls: readonly Record<string, unknown>[] } } } => {

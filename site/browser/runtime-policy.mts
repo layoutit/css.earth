@@ -1,6 +1,6 @@
 import { isSharedInputSurface } from '@cssearth/renderer';
 import type { RuntimePolicy } from "@cssearth/renderer/navigation/runtime-policy.ts";
-import type { AutomaticPlaybackInput, AutomaticPlaybackPolicy } from "./browser/shell-contract-types.mts";
+import type { AutomaticPlaybackInput, AutomaticPlaybackPolicy } from "./shell-contract-types.mts";
 
 /** Typed suggestions wait for enough text to avoid broad one-character catalogue requests. */
 export const SEARCH_SUGGESTION_MIN_CHARACTERS = 2;

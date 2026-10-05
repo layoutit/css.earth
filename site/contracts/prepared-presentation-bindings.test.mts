@@ -8,7 +8,7 @@ import { fileURLToPath } from 'node:url';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { preparePresentationBindings } from '@cssearth/bake/prepared-presentation';
-import { objectPageStyles } from '../object-page-contract.mts';
+import { objectPageStyles } from './object-page-contract.mts';
 import { requireObjectRuntimeDefinition } from '@cssearth/bake/contract';
 import type { PresentationSource } from '@cssearth/bake/prepared-presentation';
 

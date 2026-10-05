@@ -5,12 +5,12 @@ import { SEARCH_QUERY_LIMIT } from '../search/object-search.mts';
 import { findObjects, findResults } from './find.mts';
 import type { SearchData } from './search-data.mts';
 import { renderCatalogueRows } from '../search/catalogue-window.mts';
-import { renderDatasetResponse, UnreadableSavedView } from '../dataset-response.mts';
+import { renderDatasetResponse, UnreadableSavedView } from './dataset-response.mts';
 import { createSelectionPresentation } from '../selection-presentation.mts';
 import { selectionTargetFromUrl } from '../scene/scene-selection.mts';
 import { presentFeatureResults, createSearchPresentation } from '../search/search-results-presentation.mts';
-import { pageIdAtPath } from '../root-object.mts';
-import { systemHostId } from '../navigation/system-address.mts';
+import { pageIdAtPath } from '../model/root-object.mts';
+import { systemHostId } from '../model/system-address.mts';
 
 /** Modify only the shared shell. Everything outside these boundaries, including
  * the authenticated scene, head, styles and application scripts, passes through byte for byte. */

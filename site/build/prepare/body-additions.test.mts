@@ -5,11 +5,11 @@ import { tmpdir } from 'node:os';
 import { dirname, resolve } from 'node:path';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
-import { contextObjectAssetUrls, contextObjectJsonModule, contextObjectModule, prepareCatalog, splitContextObjectAssets } from '../build/prepare/prepare-catalog.mts';
+import { contextObjectAssetUrls, contextObjectJsonModule, contextObjectModule, prepareCatalog, splitContextObjectAssets } from './prepare-catalog.mts';
 import { readCatalog } from '@cssearth/objects/node';
 import { prepareSceneDistance } from '@cssearth/bake/navigation';
-import { prepareBodyRecords } from '../../packages/astronomy/cli/body-records.mts';
-import { literalRecords } from '../../packages/astronomy/cli/lib/write-record-sections.mts';
+import { prepareBodyRecords } from '../../../packages/astronomy/cli/body-records.mts';
+import { literalRecords } from '../../../packages/astronomy/cli/lib/write-record-sections.mts';
 import type { PathLike } from 'node:fs';
 
 const write = async (path: string, value: unknown) => {
@@ -82,7 +82,7 @@ async function addBody(root: string, id: string, classification: string, parent 
     id, classification, physical: { name: id, horizonsCode: null, meanRadiusKm: 1,
       gravitationalParameterKm3PerS2: 0, parent: id === 'sun' ? null : parent },
   });
-  await write(resolve(root, `src/objects/${id}/prepared/runtime.json`), { schema: 'cssearth-object-runtime@5', id, camera: JSON.parse(await readFile(new URL('../../src/objects/mercury/prepared/runtime.json', import.meta.url), 'utf8')).camera });
+  await write(resolve(root, `src/objects/${id}/prepared/runtime.json`), { schema: 'cssearth-object-runtime@5', id, camera: JSON.parse(await readFile(new URL('../../../src/objects/mercury/prepared/runtime.json', import.meta.url), 'utf8')).camera });
   await write(resolve(root, `src/objects/${id}/prepared/controls.json`), { datasets: { controls: [] } });
 }
 

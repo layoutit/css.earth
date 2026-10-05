@@ -1,11 +1,11 @@
 import assert from 'node:assert/strict';
 import test, { mock } from 'node:test';
 import * as objectNode from '@cssearth/objects/node';
-import { characterizationRuntime } from './test/fixtures/characterization-runtime.mts';
+import { characterizationRuntime } from '../scene/fixtures/characterization-runtime.mts';
 import { mkdtemp, mkdir, rm, writeFile, readFile, stat, utimes } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { projectRoot } from './test/fixtures/objects.mts';
+import { projectRoot } from '../directory/fixtures/objects.mts';
 let incomplete = false;
 let pageOverride: unknown;
 mock.module('@cssearth/objects/node', { namedExports: { ...objectNode, async preparedPageData(directory: string, id: string) { return pageOverride ?? (incomplete ? { schema: 'cssearth-object-page@1', id, assets: {} } : objectNode.preparedPageData(directory, id)); } } });

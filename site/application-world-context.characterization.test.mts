@@ -37,7 +37,7 @@ mock.module('@cssearth/renderer', { namedExports: { ...renderer,
   labelOcclusionFor: () => ({ read: () => ['sidebar'], subscribe: () => () => effects.push(['occlusion-unsubscribe']) }) } });
 mock.module('@cssearth/renderer/rendering/startup-gate.ts', { namedExports: { afterStartup: (_target: unknown, callback: () => void) => { startup = callback; } } });
 mock.module(new URL('./world-approach.mts', import.meta.url).href, { namedExports: { createWorldApproach: () => ({ start: () => effects.push(['approach-start']), observe(position: unknown) { effects.push(['observe', position]); } }) } });
-mock.module(new URL('./moon-orbit-policy.mts', import.meta.url).href, { namedExports: { suppressMinorMoonOrbitPaint: () => () => effects.push(['orbit-paint-destroy']) } });
+mock.module(new URL('./world/moon-orbit-policy.mts', import.meta.url).href, { namedExports: { suppressMinorMoonOrbitPaint: () => () => effects.push(['orbit-paint-destroy']) } });
 mock.module(new URL('./catalogue-moon-labels.mts', import.meta.url).href, { namedExports: { mountCatalogueMoonLabels: (_host: unknown, bodies: () => unknown, _focus: unknown, _clock: unknown, refresh: () => boolean) => { assert.ok(Array.isArray(bodies())); effects.push(['initial-label-refresh', refresh()]); return ({ selectObject: (id: string) => effects.push(['moon-select', id]), destroy: () => effects.push(['labels-destroy']) }); } } });
 mock.module(new URL('./application-world-frames.mts', import.meta.url).href, { namedExports: { createApplicationWorldFrames: (options: typeof frameOptions) => { frameOptions = options; return ({ refresh: () => { effects.push(['refresh']); return true; },
   stats: {}, present() {}, createFramePresenter() {}, setNavigationInFlight() {},
@@ -45,8 +45,8 @@ mock.module(new URL('./application-world-frames.mts', import.meta.url).href, { n
 mock.module(new URL('./application-world-visibility.mts', import.meta.url).href, { namedExports: { worldVisibilityPolicy: { minorMoonIds: [] },
   createApplicationWorldVisibility: () => ({ selectObject: (id: string) => effects.push(['visibility-select', id]), setIllustrationModelsEnabled() {}, setHighlightedClassification() {} }) } });
 mock.module(new URL('./object-directory.mts', import.meta.url).href, { namedExports: { knownAncestors: (...args: unknown[]) => { effects.push(['known-ancestors', ...args]); return [{ id: 'known' }]; }, ancestorIds: (...args: unknown[]) => { effects.push(['ancestor-ids', ...args]); return ancestorResult; } } });
-mock.module(new URL('./context-availability.mts', import.meta.url).href, { namedExports: { CONTEXT_AVAILABILITY: {} } });
-mock.module(new URL('./diagnostics-policy.mts', import.meta.url).href, { namedExports: { DIAGNOSTICS_ENABLED: true } });
+mock.module(new URL('./world/context-availability.mts', import.meta.url).href, { namedExports: { CONTEXT_AVAILABILITY: {} } });
+mock.module(new URL('./browser/diagnostics-policy.mts', import.meta.url).href, { namedExports: { DIAGNOSTICS_ENABLED: true } });
 const { createApplicationWorldContext } = await import('./application-world-context.mts');
 const viewport = { read() {}, subscribe() {}, destroy() {} } as unknown as ReturnType<typeof createCameraViewport>;
 const frame = {} as PreparedWorldCameraFrame;

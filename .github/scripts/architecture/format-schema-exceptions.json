@@ -89,6 +89,6 @@
     "owners": [
       "site"
     ],
-    "reason": "P5 moves build preview admission into objects. The existing site/volume-presentation.mts runtime adapter retains its schema spelling because this packet forbids runtime changes; site/test/volume-presentation.test.mts pins its admission. Remove this exception when that runtime adapter imports the objects identifier in Plan 7."
+    "reason": "P5 moves build preview admission into objects. The existing site/content/volume-presentation.mts runtime adapter retains its schema spelling because this packet forbids runtime changes; site/content/volume-presentation.test.mts pins its admission. Remove this exception when that runtime adapter imports the objects identifier in Plan 7."
   }
 ]

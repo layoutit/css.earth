@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { afterSceneFrame } from '../scene/scene-frame.mts';
+import { afterSceneFrame } from './scene-frame.mts';
 
 function clock() {
   const frames = new Map<number, FrameRequestCallback>(), tasks = new Map<number, () => void>();

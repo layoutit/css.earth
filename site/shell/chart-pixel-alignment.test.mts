@@ -2,8 +2,8 @@ import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import assert from 'node:assert/strict';
 import type { BrowserWindow } from '../browser/browser-types.mts';
-import { required } from './navigation-test-values.mts';
-import { createChartPixelAlignmentController } from '../chart-pixel-alignment.mts';
+import { required } from '../test/navigation-test-values.mts';
+import { createChartPixelAlignmentController } from './chart-pixel-alignment.mts';
 
 test('hidden charts schedule no work; visible charts batch reads, retain corrections, and retire cleanly', () => {
   const calls: string[] = [], frames = new Map<number, FrameRequestCallback>();

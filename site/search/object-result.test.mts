@@ -1,8 +1,8 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 import { parseHTML } from 'linkedom';
-import type { CatalogueRow } from '../search/catalogue-index.mts';
-import { renderCatalogueRows } from '../search/catalogue-window.mts';
+import type { CatalogueRow } from './catalogue-index.mts';
+import { renderCatalogueRows } from './catalogue-window.mts';
 import { objectResultMarkup } from '../server/object-result-markup.mts';
 const test = sourceTest();
 

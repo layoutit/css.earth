@@ -4,7 +4,7 @@ This is the shared agent contract. `CLAUDE.md` is a symlink to this file;
 directory-specific `AGENTS.md` files add guidance for their owners.
 
 - Mount exactly one object scene at a time. Navigation entries navigate; they never coexist as rendered objects.
-- Shared input policy belongs in `site/runtime-policy.mts`; browser conformance proves common interaction behavior. Keep object-specific rendering facts inside each object package. Do not fabricate fallback scenes for planned objects.
+- Shared input policy belongs in `site/browser/runtime-policy.mts`; browser conformance proves common interaction behavior. Keep object-specific rendering facts inside each object package. Do not fabricate fallback scenes for planned objects.
 - Keep one open-ended `OBJECTS` registry and one generic object adapter. The Sun, planets, and future moons, dwarf planets, asteroids, or other bodies use the same object contract. The fixed eight planet ids are a reporting filter, not a second registry or adapter.
 - Use one shared world camera and navigation contract for every prepared object. Menu membership never limits rendering; new object types extend prepared capabilities rather than introduce separate page-based scene owners.
 - Read the camera's place through the engine's `fromEyeM`, `eyeDistanceM` or `eyeAnchor`; never subtract `world.pose.positionM` by hand. The pose carries its exact offset from the body it is near, which a position in metres from the Sun cannot hold for a small, distant body. `packages/renderer/src/navigation/eye-relative-readers.test.ts` refuses a hand subtraction.

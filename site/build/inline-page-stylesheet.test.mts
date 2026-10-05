@@ -3,7 +3,7 @@ import test from 'node:test';
 import { mkdtemp, mkdir, readFile, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { inlinePageStylesheets } from '../build/inline-page-stylesheet.mts';
+import { inlinePageStylesheets } from './inline-page-stylesheet.mts';
 
 test('pages carry their stylesheet inline and flight fragments keep the link', async () => {
   const dist = await mkdtemp(join(tmpdir(), 'inline-stylesheet-'));

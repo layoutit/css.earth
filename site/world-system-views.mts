@@ -1,6 +1,6 @@
 import { parsePreparedSystemView } from '@cssearth/objects';
 import { APPLICATION_WORLD_CONTEXT } from './world-context-plan.mts';
-import { startupFetch } from './startup-requests.mts';
+import { startupFetch } from './directory/startup-requests.mts';
 
 // One system's camera candidates, fetched when navigation frames that system (`site/system-framing.mts`), from the
 // per-host copy the build serves (`pages/world/system-views/[id].json.ts`). Node tests pass their own reader of the

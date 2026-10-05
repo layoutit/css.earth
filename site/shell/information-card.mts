@@ -1,8 +1,8 @@
 import type { SceneLifetime } from '@cssearth/engine';
-import { sectionElement, type BrowserWindow } from './browser/browser-types.mts';
+import { sectionElement, type BrowserWindow } from '../browser/browser-types.mts';
 import { createChartPixelAlignmentController } from './chart-pixel-alignment.mts';
 import { mountDatasetPickerLayout } from './dataset-picker.mts';
-import { NARROW_LAYOUT } from './narrow-layout.mts';
+import { NARROW_LAYOUT } from '../browser/narrow-layout.mts';
 import { syncTabPanels } from './tab-panels.mts';
 
 type Panel = readonly [string, HTMLDetailsElement];

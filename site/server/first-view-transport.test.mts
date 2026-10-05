@@ -2,9 +2,9 @@ import assert from 'node:assert/strict';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import { loadPreparedCssObject } from '@cssearth/renderer';
-import { firstViewTransport } from '../first-view-transport.mts';
-import { readPreparedObjectBytes } from '../object-page-data.mts';
-import { loadPreparedSceneMarkup } from '../server/load-prepared-scene.mts';
+import { firstViewTransport } from './first-view-transport.mts';
+import { readPreparedObjectBytes } from './object-page-data.mts';
+import { loadPreparedSceneMarkup } from './load-prepared-scene.mts';
 
 test('the first-view transport drops exactly the styles its page markup carries and keeps whole what the runtime builds', async () => {
   const { descriptor, bytes } = await readPreparedObjectBytes('earth');

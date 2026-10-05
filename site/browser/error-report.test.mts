@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { errorReportBootstrap } from '../error-report.mts';
+import { errorReportBootstrap } from '../startup/error-report.mts';
 
 function run(hostname: string) {
   const listeners = new Map<string, (event: unknown) => void>(), beacons: { url: string; body: Record<string, unknown> }[] = [];

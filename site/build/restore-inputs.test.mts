@@ -6,7 +6,7 @@ import { copyFile, mkdir, mkdtemp, readFile, realpath, rm, symlink, writeFile } 
 import { tmpdir } from 'node:os';
 import { relative, resolve } from 'node:path';
 import test, { type TestContext } from 'node:test';
-import { validateObjectPackageFiles } from '../build/object-package-contract.mts';
+import { validateObjectPackageFiles } from './object-package-contract.mts';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
 import { parseAcquisitionPlan } from '@cssearth/bake/objects/acquisition';
 import { sourceFormatProblem } from '@cssearth/bake/objects/sources';
@@ -21,7 +21,7 @@ const json = (path: string, value: unknown): Promise<void> => writeFile(path, JS
 async function fixture(t: TestContext, id = 'titan'): Promise<string> {
   const root = await mkdtemp(resolve(tmpdir(), 'cssearth-restore-'));
   t.after(() => rm(root, { recursive: true, force: true }));
-  for (const dir of ['packages/bake/cli', 'site', `src/objects/${id}/source/preparation`, `src/objects/${id}/prepared`, `public/scenes/${id}`]) {
+  for (const dir of ['packages/bake/cli', 'site/directory', `src/objects/${id}/source/preparation`, `src/objects/${id}/prepared`, `public/scenes/${id}`]) {
     await mkdir(resolve(root, dir), { recursive: true });
   }
   await writeRestore(root);

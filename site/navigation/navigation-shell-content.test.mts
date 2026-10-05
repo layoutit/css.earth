@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { parseHTML } from 'linkedom';
-import { updateSettingsPanel, updateShellElement } from '../navigation/navigation-shell-content.mts';
+import { updateSettingsPanel, updateShellElement } from './navigation-shell-content.mts';
 
 const toggle = (name: string) => `<label><input type="checkbox" name="${name}" form="object-settings-form"><span>${name}</span></label>`;
 const speed = '<label><span>Speed</span><input type="range" name="speed" form="object-settings-form"></label>';

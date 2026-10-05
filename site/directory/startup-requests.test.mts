@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { startStartupRequests, startupFetch, startupRequestsBootstrap, releaseStartupRequests } from '../startup-requests.mts';
+import { startStartupRequests, startupFetch, startupRequestsBootstrap, releaseStartupRequests } from './startup-requests.mts';
 
 function withPage(href: string, run: (fetched: string[]) => Promise<void>) {
   const fetched: string[] = [];

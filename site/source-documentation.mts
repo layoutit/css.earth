@@ -4,7 +4,7 @@ import { resolve } from 'node:path';
 import credits from './prepared-source-credits.json' with { type: 'json' };
 import { parseSourceCredits } from '@cssearth/objects/provenance';
 import { projectRoot } from '@cssearth/core/node';
-import { parseSourceIcons } from './source-icons.mts';
+import { parseSourceIcons } from './content/source-icons.mts';
 
 // Astro prepares these ordinary links. The browser never reads Markdown or
 // reconstructs a document from scientific citations.

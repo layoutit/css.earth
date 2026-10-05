@@ -1,5 +1,5 @@
 import { sectionElements, showSection } from '@cssearth/renderer';
-import { NARROW_LAYOUT } from './narrow-layout.mts';
+import { NARROW_LAYOUT } from '../browser/narrow-layout.mts';
 
 /** A closed tab's panel is not mounted: the server ships it in a template (Detached.astro) and the checked tab's panel is
  * mounted in its place (detached-sections.ts). The body card's own panels stack on narrow screens (NARROW_LAYOUT), so

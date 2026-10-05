@@ -22,7 +22,7 @@ The paper's nominal assumptions include solar composition, cloud-free gas and Ti
 
 ## Evidence
 
-The [reader tests](../../../site/test/lonlat-slice-table.test.mts) check all 1,920 native nodes of the reference slice, the paper's independent temperature anchors, coordinate interpolation, the longitude seam, missing polar coverage and rejection of malformed grids.
+The [reader tests](../../../site/build/prepare/lonlat-slice-table.test.mts) check all 1,920 native nodes of the reference slice, the paper's independent temperature anchors, coordinate interpolation, the longitude seam, missing polar coverage and rejection of malformed grids.
 
 The browser record identifies the tested revision, camera and limits. The inspected desktop globe and phone controls show the reference level. All seven levels were selected in both directions while the same 457 prepared globe nodes remained mounted. The phone view at 390 × 844 CSS pixels had no horizontal overflow. This establishes rendering and interaction behavior, not observational agreement or a performance benchmark.
 

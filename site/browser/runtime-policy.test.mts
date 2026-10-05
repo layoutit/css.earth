@@ -16,7 +16,7 @@ import {
   wheelZoomInputKind,
   mobileSheetKeyboardInset,
   MOBILE_SHEET_POLICY,
-} from "../runtime-policy.mts";
+} from "./runtime-policy.mts";
 import { PREPARED_WHEEL_ZOOM, pinchTargetDistance } from "@cssearth/renderer/navigation/prepared-wheel-zoom.ts";
 
 test("only a keyboard-sized covering takes room from the sheet", () => {

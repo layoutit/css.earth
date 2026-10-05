@@ -33,7 +33,7 @@ test('a bank drawn only for the bodies that hold it names its carriers; a bank d
 });
 
 test('the world hears of every entry read, those read before it listened first, before any reader goes on', async t => {
-  const { onObjectEntry, readObjectEntry } = await import('../object-entries.mts');
+  const { onObjectEntry, readObjectEntry } = await import('../directory/object-entries.mts');
   const fetched = t.mock.method(globalThis, 'fetch', async (url: string) => new Response(JSON.stringify({ id: url.split('/')[2] })));
   const heard: string[] = [];
   await readObjectEntry('early-object');

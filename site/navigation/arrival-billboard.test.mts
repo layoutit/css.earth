@@ -4,7 +4,7 @@ import { parseHTML } from 'linkedom';
 import { type PreparedArrivalView } from '@cssearth/objects';
 import { worldCameraFromCenteredPresentation } from '@cssearth/engine';
 import { presentWorldCamera } from '@cssearth/renderer/navigation/world-camera.ts';
-import { prepareArrivalBillboard, canUseArrivalBillboard, frameArrivalBillboard } from '../arrival-billboard.mts';
+import { prepareArrivalBillboard, canUseArrivalBillboard, frameArrivalBillboard } from './arrival-billboard.mts';
 
 test('arrival fits every viewport at the exact prepared perspective', () => {
   const frame = { referenceFrame: 'world', epochJdTt: 1, originM: [0, 0, 0] as const,

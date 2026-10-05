@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { createNavigationReadiness } from '../navigation/navigation-readiness.mts';
+import { createNavigationReadiness } from './navigation-readiness.mts';
 
 function deferred<T>() {
   let resolve!: (value: T) => void, reject!: (error: Error) => void;

@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { listDistance } from '../search/list-distance.mts';
+import { listDistance } from './list-distance.mts';
 
 test('a list row reads parsecs past a thousand in kpc or Mpc, and keeps nearer distances as they are', () => {
   assert.deepEqual(listDistance({ value: 776247.108, unit: 'pc' }), { value: '776.2', unit: 'kpc' });

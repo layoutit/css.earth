@@ -3,7 +3,7 @@ import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import { runInNewContext } from "node:vm";
 
-import { WEB_ANALYTICS_TOKEN, webAnalyticsBootstrap } from "../web-analytics.mts";
+import { WEB_ANALYTICS_TOKEN, webAnalyticsBootstrap } from "../startup/web-analytics.mts";
 
 test("analytics ignores local visits and loads the Cloudflare beacon on css.earth after the page", () => {
   for (const hostname of ["localhost", "127.0.0.1", "::1"]) {

@@ -3,7 +3,7 @@ import { test } from 'node:test';
 import { parseHTML } from 'linkedom';
 import { createSceneLifetime } from '@cssearth/engine';
 import { createTabsController, mountInformationCard, restoreInformationPanels } from './information-card.mts';
-import type { BrowserWindow } from './browser/browser-types.mts';
+import type { BrowserWindow } from '../browser/browser-types.mts';
 
 function fixture(saved: string | null) {
   const { document, window } = parseHTML('<html><body><aside><div class="object-information-panel"><details id="tree" class="atlas-tree-disclosure"></details><details id="facts"></details><details id="dataset" class="object-dataset-content"></details><div data-information-panel><details id="nested"></details></div></div></aside></body></html>');

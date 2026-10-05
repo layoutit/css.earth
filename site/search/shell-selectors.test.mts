@@ -44,7 +44,7 @@ test("the body's card always opens on breadcrumbs, and its tabs come before its 
 
 test('the drawer carries the search results state its ground reads', async () => {
   const { parseHTML } = await import('linkedom');
-  const { createSearchPresentation } = await import('../search/search-results-presentation.mts');
+  const { createSearchPresentation } = await import('./search-results-presentation.mts');
   const { document } = parseHTML(`<html><body><div class="object-drawer-content"><nav class="object-browser">
     <div id="object-category-results"><p data-search-empty></p></div></nav><div class="object-selected-content"></div></div></body></html>`);
   const presentation = createSearchPresentation(document), drawer = document.querySelector('.object-drawer-content')!;

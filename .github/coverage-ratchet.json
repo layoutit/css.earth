@@ -8,69 +8,69 @@
       "site/application-world-resources.mts",
       "site/application-world-types.mts",
       "site/application-world-visibility.mts",
-      "site/arrival-billboard.mts",
-      "site/asset-origin.mts",
-      "site/built-pages.mts",
+      "site/navigation/arrival-billboard.mts",
+      "site/server-assets/asset-origin.mts",
+      "site/server/built-pages.mts",
       "site/catalogue-moon-labels.mts",
-      "site/chart-pixel-alignment.mts",
-      "site/context-availability.mts",
-      "site/context-datasets.mts",
-      "site/dataset-content.mts",
-      "site/dataset-context.mts",
-      "site/dataset-picker.mts",
-      "site/dataset-response.mts",
-      "site/dataset-url.mts",
-      "site/default-width-share.mts",
+      "site/shell/chart-pixel-alignment.mts",
+      "site/world/context-availability.mts",
+      "site/world/context-datasets.mts",
+      "site/content/dataset-content.mts",
+      "site/content/dataset-context.mts",
+      "site/shell/dataset-picker.mts",
+      "site/server/dataset-response.mts",
+      "site/model/dataset-url.mts",
+      "site/world/default-width-share.mts",
       "site/destination-browser.mts",
       "site/diagnostic-recorder.mts",
-      "site/diagnostics-policy.mts",
+      "site/browser/diagnostics-policy.mts",
       "site/dot-catalogue-data.mts",
-      "site/dot-catalogues.mts",
-      "site/error-report.mts",
+      "site/world/dot-catalogues.mts",
+      "site/startup/error-report.mts",
       "site/exploration-catalog.mts",
       "site/feature-browser.mts",
-      "site/first-view-transport.mts",
+      "site/server/first-view-transport.mts",
       "site/hosted-banks.mts",
       "site/import-queue.mts",
-      "site/in-flight-loader.mts",
-      "site/information-card.mts",
-      "site/initial-scene.mts",
-      "site/initial-shell-context.mts",
+      "site/browser/in-flight-loader.mts",
+      "site/shell/information-card.mts",
+      "site/scene/initial-scene.mts",
+      "site/startup/initial-shell-context.mts",
       "site/inside-view.mts",
-      "site/layout-sections.mts",
-      "site/learn-more.mts",
-      "site/moon-orbit-policy.mts",
-      "site/narrow-layout.mts",
-      "site/native-input.mts",
-      "site/native-view-forms.mts",
-      "site/next-frame.mts",
+      "site/shell/layout-sections.mts",
+      "site/content/learn-more.mts",
+      "site/world/moon-orbit-policy.mts",
+      "site/browser/narrow-layout.mts",
+      "site/browser/native-input.mts",
+      "site/shell/native-view-forms.mts",
+      "site/browser/next-frame.mts",
       "site/object-adapter.mts",
       "site/object-browser.mts",
       "site/object-children.mts",
-      "site/object-classification-label.mts",
+      "site/model/object-classification-label.mts",
       "site/object-directory.mts",
-      "site/object-entries.mts",
+      "site/directory/object-entries.mts",
       "site/object-entry.mts",
-      "site/object-page-contract.mts",
-      "site/object-page-data.mts",
-      "site/object-shell-types.ts",
+      "site/contracts/object-page-contract.mts",
+      "site/server/object-page-data.mts",
+      "site/contracts/object-shell-types.ts",
       "site/object-systems.mts",
-      "site/object-text.mts",
+      "site/content/object-text.mts",
       "site/objects.mts",
-      "site/orbit-root.mts",
+      "site/model/orbit-root.mts",
       "site/overview-selection.mts",
       "site/packaged-object-runtime.mts",
-      "site/planetary-system-members.mts",
+      "site/model/planetary-system-members.mts",
       "site/prepare-body-moons.mts",
       "site/prepared-arrival.mts",
-      "site/prepared-descriptor.mts",
-      "site/prepared-object-path.mts",
-      "site/prepared-panel-content.mts",
-      "site/prepared-scene-ownership.mts",
+      "site/navigation/prepared-descriptor.mts",
+      "site/prepared/prepared-object-path.mts",
+      "site/content/prepared-panel-content.mts",
+      "site/navigation/prepared-scene-ownership.mts",
       "site/prepared-world-navigation.mts",
       "site/prepared-world-presentation.mts",
-      "site/root-object.mts",
-      "site/runtime-policy.mts",
+      "site/model/root-object.mts",
+      "site/browser/runtime-policy.mts",
       "site/satellite-selection.mts",
       "site/satellite-systems.mts",
       "site/selection-presentation.mts",
@@ -78,34 +78,34 @@
       "site/seo.mts",
       "site/shared-imports.mts",
       "site/showcase.mts",
-      "site/sidebar-thumbnails.mts",
+      "site/content/sidebar-thumbnails.mts",
       "site/social-images.mts",
       "site/source-documentation.mts",
-      "site/source-icons.mts",
-      "site/source-link.mts",
+      "site/content/source-icons.mts",
+      "site/browser/source-link.mts",
       "site/startup-billboard.mts",
       "site/startup-boot.mts",
-      "site/startup-cover.mts",
-      "site/startup-requests.mts",
+      "site/startup/startup-cover.mts",
+      "site/directory/startup-requests.mts",
       "site/startup-world.mts",
       "site/stellar-extents.mts",
       "site/system-card.mts",
-      "site/system-framing-radii.mts",
+      "site/world/system-framing-radii.mts",
       "site/system-framing.mts",
-      "site/tab-panels.mts",
+      "site/shell/tab-panels.mts",
       "site/view-readout.mts",
-      "site/view-url-runtime.mts",
-      "site/volume-presentation.mts",
-      "site/web-analytics.mts",
+      "site/navigation/view-url-runtime.mts",
+      "site/content/volume-presentation.mts",
+      "site/startup/web-analytics.mts",
       "site/world-approach.mts",
-      "site/world-camera.mts",
+      "site/world/world-camera.mts",
       "site/world-context-plan.mts",
       "site/world-objects.mts",
       "site/world-places.mts",
-      "site/world-preferences.mts",
+      "site/world/world-preferences.mts",
       "site/world-system-views.mts",
-      "site/world-viewport.mts",
-      "site/zoom-carry.mts",
+      "site/world/world-viewport.mts",
+      "site/world/zoom-carry.mts",
       "site/zoom-scope.mts"
     ]
   },
@@ -140,17 +140,17 @@
       "branches": 90.9,
       "functions": 97.3
     },
-    "site/arrival-billboard.mts": {
+    "site/navigation/arrival-billboard.mts": {
       "lines": 98.1,
       "branches": 60.6,
       "functions": 90.9
     },
-    "site/asset-origin.mts": {
+    "site/server-assets/asset-origin.mts": {
       "lines": 100,
       "branches": 95.3,
       "functions": 100
     },
-    "site/built-pages.mts": {
+    "site/server/built-pages.mts": {
       "lines": 100,
       "branches": 93.7,
       "functions": 100
@@ -160,47 +160,47 @@
       "branches": 90.4,
       "functions": 96.4
     },
-    "site/chart-pixel-alignment.mts": {
+    "site/shell/chart-pixel-alignment.mts": {
       "lines": 100,
       "branches": 87.5,
       "functions": 100
     },
-    "site/context-availability.mts": {
+    "site/world/context-availability.mts": {
       "lines": 100,
       "branches": 100,
       "functions": 100
     },
-    "site/context-datasets.mts": {
+    "site/world/context-datasets.mts": {
       "lines": 100,
       "branches": 100,
       "functions": 100
     },
-    "site/dataset-content.mts": {
+    "site/content/dataset-content.mts": {
       "lines": 100,
       "branches": 88.8,
       "functions": 100
     },
-    "site/dataset-context.mts": {
+    "site/content/dataset-context.mts": {
       "lines": 100,
       "branches": 100,
       "functions": 100
     },
-    "site/dataset-picker.mts": {
+    "site/shell/dataset-picker.mts": {
       "lines": 100,
       "branches": 100,
       "functions": 100
     },
-    "site/dataset-response.mts": {
+    "site/server/dataset-response.mts": {
       "lines": 95.9,
       "branches": 84,
       "functions": 94.4
     },
-    "site/dataset-url.mts": {
+    "site/model/dataset-url.mts": {
       "lines": 100,
       "branches": 100,
       "functions": 100
     },
-    "site/default-width-share.mts": {
+    "site/world/default-width-share.mts": {
       "lines": 100,
       "branches": 100,
       "functions": 100
@@ -215,7 +215,7 @@
       "branches": 93,
       "functions": 97.1
     },
-    "site/diagnostics-policy.mts": {
+    "site/browser/diagnostics-policy.mts": {
       "lines": 100,
       "branches": 33.3,
       "functions": 100
@@ -225,12 +225,12 @@
       "branches": 0,
       "functions": 0
     },
-    "site/dot-catalogues.mts": {
+    "site/world/dot-catalogues.mts": {
       "lines": 100,
       "branches": 100,
       "functions": 100
     },
-    "site/error-report.mts": {
+    "site/startup/error-report.mts": {
       "lines": 100,
       "branches": 100,
       "functions": 100
@@ -245,7 +245,7 @@
       "branches": 100,
       "functions": 100
     },
-    "site/first-view-transport.mts": {
+    "site/server/first-view-transport.mts": {
       "lines": 100,
       "branches": 100,
       "functions": 100
@@ -260,22 +260,22 @@
       "branches": 100,
       "functions": 100
     },
-    "site/in-flight-loader.mts": {
+    "site/browser/in-flight-loader.mts": {
       "lines": 100,
       "branches": 100,
       "functions": 100
     },
-    "site/information-card.mts": {
+    "site/shell/information-card.mts": {
       "lines": 100,
       "branches": 96.7,
       "functions": 100
     },
-    "site/initial-scene.mts": {
+    "site/scene/initial-scene.mts": {
       "lines": 100,
       "branches": 100,
       "functions": 100
     },
-    "site/initial-shell-context.mts": {
+    "site/startup/initial-shell-context.mts": {
       "lines": 100,
       "branches": 75,
       "functions": 100
@@ -285,37 +285,37 @@
       "branches": 92.6,
       "functions": 84.6
     },
-    "site/layout-sections.mts": {
+    "site/shell/layout-sections.mts": {
       "lines": 100,
       "branches": 100,
       "functions": 100
     },
-    "site/learn-more.mts": {
+    "site/content/learn-more.mts": {
       "lines": 100,
       "branches": 100,
       "functions": 100
     },
-    "site/moon-orbit-policy.mts": {
+    "site/world/moon-orbit-policy.mts": {
       "lines": 100,
       "branches": 100,
       "functions": 100
     },
-    "site/narrow-layout.mts": {
+    "site/browser/narrow-layout.mts": {
       "lines": 100,
       "branches": 100,
       "functions": 100
     },
-    "site/native-input.mts": {
+    "site/browser/native-input.mts": {
       "lines": 100,
       "branches": 100,
       "functions": 100
     },
-    "site/native-view-forms.mts": {
+    "site/shell/native-view-forms.mts": {
       "lines": 100,
       "branches": 100,
       "functions": 100
     },
-    "site/next-frame.mts": {
+    "site/browser/next-frame.mts": {
       "lines": 100,
       "branches": 100,
       "functions": 100
@@ -335,7 +335,7 @@
       "branches": 92.1,
       "functions": 100
     },
-    "site/object-classification-label.mts": {
+    "site/model/object-classification-label.mts": {
       "lines": 100,
       "branches": 100,
       "functions": 100
@@ -345,7 +345,7 @@
       "branches": 95.2,
       "functions": 100
     },
-    "site/object-entries.mts": {
+    "site/directory/object-entries.mts": {
       "lines": 100,
       "branches": 100,
       "functions": 100
@@ -355,17 +355,17 @@
       "branches": 60,
       "functions": 100
     },
-    "site/object-page-contract.mts": {
+    "site/contracts/object-page-contract.mts": {
       "lines": 100,
       "branches": 90,
       "functions": 100
     },
-    "site/object-page-data.mts": {
+    "site/server/object-page-data.mts": {
       "lines": 100,
       "branches": 100,
       "functions": 100
     },
-    "site/object-shell-types.ts": {
+    "site/contracts/object-shell-types.ts": {
       "lines": 100,
       "branches": 100,
       "functions": 100
@@ -375,7 +375,7 @@
       "branches": 100,
       "functions": 100
     },
-    "site/object-text.mts": {
+    "site/content/object-text.mts": {
       "lines": 100,
       "branches": 100,
       "functions": 100
@@ -385,7 +385,7 @@
       "branches": 75,
       "functions": 100
     },
-    "site/orbit-root.mts": {
+    "site/model/orbit-root.mts": {
       "lines": 100,
       "branches": 100,
       "functions": 100
@@ -400,7 +400,7 @@
       "branches": 91.6,
       "functions": 100
     },
-    "site/planetary-system-members.mts": {
+    "site/model/planetary-system-members.mts": {
       "lines": 100,
       "branches": 100,
       "functions": 100
@@ -415,22 +415,22 @@
       "branches": 100,
       "functions": 100
     },
-    "site/prepared-descriptor.mts": {
+    "site/navigation/prepared-descriptor.mts": {
       "lines": 100,
       "branches": 75,
       "functions": 100
     },
-    "site/prepared-object-path.mts": {
+    "site/prepared/prepared-object-path.mts": {
       "lines": 100,
       "branches": 100,
       "functions": 100
     },
-    "site/prepared-panel-content.mts": {
+    "site/content/prepared-panel-content.mts": {
       "lines": 100,
       "branches": 100,
       "functions": 100
     },
-    "site/prepared-scene-ownership.mts": {
+    "site/navigation/prepared-scene-ownership.mts": {
       "lines": 100,
       "branches": 77.7,
       "functions": 100
@@ -445,12 +445,12 @@
       "branches": 100,
       "functions": 100
     },
-    "site/root-object.mts": {
+    "site/model/root-object.mts": {
       "lines": 100,
       "branches": 100,
       "functions": 100
     },
-    "site/runtime-policy.mts": {
+    "site/browser/runtime-policy.mts": {
       "lines": 95.1,
       "branches": 81.8,
       "functions": 91.6
@@ -490,7 +490,7 @@
       "branches": 100,
       "functions": 100
     },
-    "site/sidebar-thumbnails.mts": {
+    "site/content/sidebar-thumbnails.mts": {
       "lines": 100,
       "branches": 100,
       "functions": 100
@@ -505,12 +505,12 @@
       "branches": 69.7,
       "functions": 70
     },
-    "site/source-icons.mts": {
+    "site/content/source-icons.mts": {
       "lines": 100,
       "branches": 100,
       "functions": 100
     },
-    "site/source-link.mts": {
+    "site/browser/source-link.mts": {
       "lines": 100,
       "branches": 100,
       "functions": 100
@@ -525,12 +525,12 @@
       "branches": 100,
       "functions": 100
     },
-    "site/startup-cover.mts": {
+    "site/startup/startup-cover.mts": {
       "lines": 100,
       "branches": 94.5,
       "functions": 80
     },
-    "site/startup-requests.mts": {
+    "site/directory/startup-requests.mts": {
       "lines": 100,
       "branches": 100,
       "functions": 100
@@ -550,7 +550,7 @@
       "branches": 87.5,
       "functions": 100
     },
-    "site/system-framing-radii.mts": {
+    "site/world/system-framing-radii.mts": {
       "lines": 100,
       "branches": 89.2,
       "functions": 100
@@ -560,7 +560,7 @@
       "branches": 90.4,
       "functions": 100
     },
-    "site/tab-panels.mts": {
+    "site/shell/tab-panels.mts": {
       "lines": 100,
       "branches": 87.5,
       "functions": 100
@@ -570,17 +570,17 @@
       "branches": 97.1,
       "functions": 100
     },
-    "site/view-url-runtime.mts": {
+    "site/navigation/view-url-runtime.mts": {
       "lines": 100,
       "branches": 100,
       "functions": 91.6
     },
-    "site/volume-presentation.mts": {
+    "site/content/volume-presentation.mts": {
       "lines": 100,
       "branches": 100,
       "functions": 100
     },
-    "site/web-analytics.mts": {
+    "site/startup/web-analytics.mts": {
       "lines": 100,
       "branches": 100,
       "functions": 100
@@ -590,7 +590,7 @@
       "branches": 100,
       "functions": 100
     },
-    "site/world-camera.mts": {
+    "site/world/world-camera.mts": {
       "lines": 100,
       "branches": 60,
       "functions": 100
@@ -610,7 +610,7 @@
       "branches": 90,
       "functions": 100
     },
-    "site/world-preferences.mts": {
+    "site/world/world-preferences.mts": {
       "lines": 100,
       "branches": 100,
       "functions": 100
@@ -620,12 +620,12 @@
       "branches": 100,
       "functions": 100
     },
-    "site/world-viewport.mts": {
+    "site/world/world-viewport.mts": {
       "lines": 100,
       "branches": 100,
       "functions": 100
     },
-    "site/zoom-carry.mts": {
+    "site/world/zoom-carry.mts": {
       "lines": 100,
       "branches": 100,
       "functions": 100

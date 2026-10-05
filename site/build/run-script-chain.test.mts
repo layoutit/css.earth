@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import { readFile } from 'node:fs/promises';
-import { expandScriptChain } from '../build/run-script-chain.mts';
+import { expandScriptChain } from './run-script-chain.mts';
 
 test('aliases expand in place, depth first, and only plain node steps remain', () => {
   const scripts = { a: 'node one.mts && pnpm b && node four.mts', b: 'pnpm -s c && node three.mts', c: 'node two.mts --flag x' };

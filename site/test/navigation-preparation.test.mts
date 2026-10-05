@@ -7,7 +7,7 @@ const test = sourceTest();
 import sharp from "sharp";
 
 import { SCENE_OBJECTS } from "../objects.mts";
-import { authoredObjectFixture } from "./authored-object-fixture.mts";
+import { authoredObjectFixture } from "../build/fixtures/authored-object-fixture.mts";
 import {
   loadMarkerDescriptors,
   moveNavigationFile,

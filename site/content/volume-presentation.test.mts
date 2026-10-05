@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
-import { parsePreparedVolumePresentation } from '../volume-presentation.mts';
+import { parsePreparedVolumePresentation } from './volume-presentation.mts';
 
 const ids = ['optical', 'infrared'];
 const bank = { id: 'nebula', defaultDataset: 'optical', datasets: ids.map(id => ({ id })) };

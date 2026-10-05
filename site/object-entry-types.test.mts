@@ -24,7 +24,7 @@ test('the directory imports erased aliases directly without depending on the reg
   const file = new URL('./object-directory.mts', import.meta.url), directory = source(file);
   const registry = new URL('./objects.mts', import.meta.url).pathname;
   assert.ok(!reachedModules(file, directory).some(module => module === registry || module === registry.replace(/\.mts$/u, '')), 'the directory must not name the registry in any import, re-export or import type');
-  const typesPath = new URL('./object-entry-types.mts', import.meta.url).pathname;
+  const typesPath = new URL('./directory/object-entry-types.mts', import.meta.url).pathname;
   const imports = directory.statements.filter(ts.isImportDeclaration);
   const entry = imports.find(node => ts.isStringLiteral(node.moduleSpecifier) && new URL(node.moduleSpecifier.text, file).pathname === typesPath);
   assert.ok(entry?.importClause?.isTypeOnly);
@@ -35,7 +35,7 @@ test('the directory imports erased aliases directly without depending on the reg
 
 test('the registry preserves every extracted alias as an erased re-export', () => {
   const registry = source(new URL('./objects.mts', import.meta.url));
-  const typesPath = new URL('./object-entry-types.mts', import.meta.url).pathname;
+  const typesPath = new URL('./directory/object-entry-types.mts', import.meta.url).pathname;
   const exports = registry.statements.filter(ts.isExportDeclaration).filter(node =>
     node.moduleSpecifier && ts.isStringLiteral(node.moduleSpecifier) && new URL(node.moduleSpecifier.text, new URL('./objects.mts', import.meta.url)).pathname === typesPath);
   assert.equal(exports.length, 1);
@@ -47,7 +47,7 @@ test('the registry preserves every extracted alias as an erased re-export', () =
 });
 
 test('the alias owner contains only type imports and the three exported aliases', () => {
-  const file = new URL('./object-entry-types.mts', import.meta.url), types = source(file);
+  const file = new URL('./directory/object-entry-types.mts', import.meta.url), types = source(file);
   const imports = types.statements.filter(ts.isImportDeclaration);
   assert.equal(imports.length, 2);
   assert.ok(imports.every(node => node.importClause?.isTypeOnly));

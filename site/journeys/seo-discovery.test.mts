@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
-import { assertHomepageReachability } from "./seo-discovery.mts";
+import { assertHomepageReachability } from "./seo-discovery.test-support.mts";
 
 const home = "http://127.0.0.1:4267/";
 const page = (route: string, links: string[]) => ({ url: new URL(route, home).href, links });

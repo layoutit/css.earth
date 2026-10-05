@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
-import { datasetHref, readDatasetUrl, withDataset } from '../dataset-url.mts';
+import { datasetHref, readDatasetUrl, withDataset } from './dataset-url.mts';
 import { parseDatasetDestination } from '@cssearth/objects/provenance';
 
 const url = (value: string) => new URL(value, 'https://example.test');

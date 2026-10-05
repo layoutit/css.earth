@@ -1,5 +1,5 @@
 import { FIND_PATH, parseDestinationPlace } from '../search/find-protocol.mts';
-import { withSceneDataset } from '../dataset-url.mts';
+import { withSceneDataset } from '../model/dataset-url.mts';
 import type { NavigationRequest } from '../navigation/navigation-lifecycle.mts';
 import type { SceneSession } from './scene-session.mts';
 

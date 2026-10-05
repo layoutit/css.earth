@@ -1,12 +1,12 @@
 import { formatSharedView, parseSharedView } from '@cssearth/renderer/navigation';
 import type { BrowserWindow } from '../browser/browser-types.mts';
-import { withSceneDataset } from '../dataset-url.mts';
+import { withSceneDataset } from '../model/dataset-url.mts';
 import type { createNavigationHistory } from '../navigation/navigation-history.mts';
 import { replaceNavigationUrl, navigationHref } from '../navigation/navigation-history.mts';
 import type { NavigationLifecycle, NavigationRequest } from '../navigation/navigation-lifecycle.mts';
 import type { SceneSession, SceneSessions } from './scene-session.mts';
 import type { WorldContextMount } from './scene-world.mts';
-import { bindViewUrl } from '../view-url-runtime.mts';
+import { bindViewUrl } from '../navigation/view-url-runtime.mts';
 
 interface SceneViewOptions {
   windowTarget: BrowserWindow;

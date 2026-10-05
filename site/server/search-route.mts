@@ -1,4 +1,4 @@
-import { pageIdAtPath } from '../root-object.mts';
+import { pageIdAtPath } from '../model/root-object.mts';
 
 /** Rewrite native form requests in place. No rendering or index work runs at the edge. */
 export default function searchRoute(request: Request): URL | undefined {

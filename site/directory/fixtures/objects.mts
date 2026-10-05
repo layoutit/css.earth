@@ -1,7 +1,7 @@
 import { type PreparedCubicSkyPlan, type PreparedDirectionalSunPlan, parsePreparedObjectRuntime, validatePreparedCubicSky, validateDirectionalSunPlan } from '@cssearth/objects';
 
-import {parseSaturnScene,parseSaturnViews,parseSaturnDatasets,parseSaturnLayouts} from './saturn-prepared.mts';
-import {parseTitle,parsePanel,parseContent} from './prepared-schemas.mts';
+import {parseSaturnScene,parseSaturnViews,parseSaturnDatasets,parseSaturnLayouts} from '../../world/fixtures/saturn-prepared.mts';
+import {parseTitle,parsePanel,parseContent} from '../../world/fixtures/prepared-schemas.mts';
 
 import {requireObjectRuntimeDefinition} from '@cssearth/bake/contract';
 import { readFile } from 'node:fs/promises';

@@ -6,7 +6,7 @@ import { resolve } from 'node:path';
 import { preparedObjectText, preparedObjectTransport, preparedPageData } from '@cssearth/objects/node';
 
 import { isRecord } from '@cssearth/core';
-import { resolveSceneAddressesDeep } from './asset-origin.mts';
+import { resolveSceneAddressesDeep } from '../server-assets/asset-origin.mts';
 
 interface PreparedTransports { readonly descriptor: ObjectDescriptor; readonly object: Buffer<ArrayBuffer>; readonly datasets: ReadonlyMap<string, Buffer<ArrayBuffer>> }
 // The dataset routes read one body's transports in turn: its split is kept for the next request, not rebuilt per file.

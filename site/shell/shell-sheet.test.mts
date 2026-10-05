@@ -3,7 +3,7 @@ import test from 'node:test';
 import { parseHTML } from 'linkedom';
 import { createSceneLifetime } from '@cssearth/engine';
 import type { BrowserWindow } from '../browser/browser-types.mts';
-import { createSheetController } from '../shell/shell-sheet.mts';
+import { createSheetController } from './shell-sheet.mts';
 
 // Synthetic snap heights for a 690 px sheet: the peek rests 538 px below the open sheet,
 // and the half stop rests 253 px below it. The gesture behavior does not depend on the CSS peek size.
@@ -301,8 +301,8 @@ test('a sheet that starts at its peek publishes it without touching the snap dur
 
 test('no rule of the shell stylesheets anchors :has() on the body: a page restyles whole when an element is added under such an anchor', async () => {
   const { readFile } = await import('node:fs/promises');
-  for (const sheet of ['shell/shell-layout.css', 'shell/maps-shell.css', 'shell/settings-panel.css', 'object-shell.css']) {
-    const text = (await readFile(new URL(`../${sheet}`, import.meta.url), 'utf8')).replace(/\/\*[\s\S]*?\*\//gu, '');
+  for (const sheet of ['shell-layout.css', 'maps-shell.css', 'settings-panel.css', '../object-shell.css']) {
+    const text = (await readFile(new URL(`./${sheet}`, import.meta.url), 'utf8')).replace(/\/\*[\s\S]*?\*\//gu, '');
     const anchored = [...text.matchAll(/(?:^|[{},])\s*((?:html|body)[^{},]*:has\([^{]*)/gmu)].map(match => match[1]!.trim());
     assert.deepEqual(anchored, [], `${sheet}: ${anchored.join(' | ')}`);
   }

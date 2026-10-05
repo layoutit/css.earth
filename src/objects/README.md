@@ -118,7 +118,7 @@ Read the current `package.json` and runner arguments before using commands:
 | Create the oracle environment and regenerate oracle fixtures | `node packages/core/src/node/oracle/setup.mts`, `node packages/core/src/node/oracle/run.mts`; see `packages/core/src/node/oracle/README.md` |
 | Run a preparation test | `node --test packages/bake/authoring/<body>/<name>.test.mts` when the selected test uses Node |
 | Production build and assembly | `pnpm build` |
-| Rendered-page assertions over the built HTML | `node --test site/test/rendered-page.test.mts` |
+| Rendered-page assertions over the built HTML | `node --test site/journeys/rendered-page.test.mts` |
 
 Run a `packages/*/cli/` command by its entry in `packages/<pkg>/cli/`; the library of the same name under
 `packages/<pkg>/src/` is what other code imports. A site-owned preparer (one that

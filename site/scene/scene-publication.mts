@@ -6,9 +6,9 @@ import type { NavigationRequest } from '../navigation/navigation-lifecycle.mts';
 import type { ObjectShell } from '../shell/object-shell-types.mts';
 import type { WorldContextMount } from './scene-world.mts';
 import type { BrowserWindow } from '../browser/browser-types.mts';
-import { automaticPlaybackPolicy } from '../runtime-policy.mts';
+import { automaticPlaybackPolicy } from '../browser/runtime-policy.mts';
 import { readObjectDiagnostics } from '@cssearth/renderer';
-import { DIAGNOSTICS_ENABLED } from '../diagnostics-policy.mts';
+import { DIAGNOSTICS_ENABLED } from '../browser/diagnostics-policy.mts';
 
 interface ScenePublicationInput {
   state: SceneSessionState;

@@ -80,7 +80,7 @@ With both servers running:
 ```sh
 pnpm typecheck:renderer
 pnpm --filter @cssearth/engine exec tsc -p ../../labs/experiments/native-scroll/tsconfig.json
-`pnpm test:site` (the browser suites were retired; scene retention is checked in `site/test/scene-session.test.mts`)
+`pnpm test:site` (the browser suites were retired; scene retention is checked in `site/scene/scene-session.test.mts`)
 ```
 
 The browser checks disable JavaScript, verify the initial centred body, wheel and

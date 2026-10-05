@@ -2,7 +2,7 @@ import { OBJECT_TEXT_SCHEMA, parseObjectText } from '@cssearth/objects';
 import assert from 'node:assert/strict';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
-import { compositionWarnings, readerTextErrors, readerTextWarnings } from '../object-text.mts';
+import { compositionWarnings, readerTextErrors, readerTextWarnings } from './object-text.mts';
 
 const source = { catalogueId: 'nasa-saturn-facts', url: 'https://science.nasa.gov/saturn/facts/', label: 'NASA Science · Saturn facts', checked: '2026-09-13' };
 const blocks = {

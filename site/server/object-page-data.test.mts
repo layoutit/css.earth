@@ -4,8 +4,8 @@ const test = sourceTest();
 import {mkdtemp,mkdir,readFile,writeFile,rm,access} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import {resolve} from 'node:path';
-import {loadObjectPageData,readPreparedObjectBytes} from '../object-page-data.mts';
-import {objectPageStyles} from '../object-page-contract.mts';
+import {loadObjectPageData,readPreparedObjectBytes} from './object-page-data.mts';
+import {objectPageStyles} from '../contracts/object-page-contract.mts';
 
 test('page data and the object transport are read from the restored runtime, with no copy on disk',async t=>{
  const root=await mkdtemp(resolve(tmpdir(),'cssearth-page-data-'));

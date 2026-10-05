@@ -5,7 +5,7 @@ import { systemById, type SystemObjects } from '../object-systems.mts';
 import { SYSTEM_RANGES } from '../system-framing.mts';
 import { zoomChain, zoomStepOf } from '../inside-view.mts';
 import { selectionKey, subjectOf, type SceneSubject } from './scene-subject.mts';
-import { systemHostId, systemObjectId } from '../navigation/system-address.mts';
+import { systemHostId, systemObjectId } from '../model/system-address.mts';
 export { moonSystem, selectionKey, starSystem, subjectHost, subjectOf, subjectView, type SceneSubject } from './scene-subject.mts';
 
 /** The camera has crossed into a scope of the zoom (an object seen from inside, or back to the centre's own system): the

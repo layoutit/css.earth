@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import { parseSharedView } from '@cssearth/renderer/navigation';
 import type { ObjectSharedView } from '@cssearth/renderer/runtime/object-scene.ts';
-import { bindViewUrl } from '../view-url-runtime.mts';
+import { bindViewUrl } from './view-url-runtime.mts';
 
 // Two Venus views recorded on the iPad (rest, then a deep zoom), 2026-09-30.
 const REST = 'UcM-I2wcRENV2b3fvnbItDlXwOej1wo9cZ5BQsczQAAAAEAFN-vvz-Gyv9XjqHSKGu0AAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAA';

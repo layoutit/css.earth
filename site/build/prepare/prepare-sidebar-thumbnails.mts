@@ -3,7 +3,7 @@ import { parseObjectDescriptor } from '@cssearth/objects';
 import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
-import { parseDatasetControl } from '../../prepared-panel-content.mts';
+import { parseDatasetControl } from '../../content/prepared-panel-content.mts';
 import { sourceArray, sourceId, sourceObject, sourcePath, sourceText } from '@cssearth/objects/sources';
 import { hasErrorCode } from '@cssearth/core';
 import { objectThumbnail } from '@cssearth/bake/site-assets';

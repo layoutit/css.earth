@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { keptLoad } from '../server/kept-load.mts';
+import { keptLoad } from './kept-load.mts';
 
 test('a value is loaded once and kept, with later callers waiting on the first load', async () => {
   let loads = 0, finish = (_value: string) => {};

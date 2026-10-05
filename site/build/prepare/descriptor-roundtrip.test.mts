@@ -6,7 +6,7 @@ import { runInNewContext } from 'node:vm';
 import { requireRecord } from '@cssearth/core';
 import { readObjectDescriptorRecord, parsePreparedObjectRuntime } from '@cssearth/objects';
 import { sourceTest } from '@cssearth/objects/node/source-test';
-import { prepareWorldNavigationDefinition } from '../build/prepare/prepare-world-navigation.ts';
+import { prepareWorldNavigationDefinition } from './prepare-world-navigation.ts';
 const test = sourceTest();
 const root = process.cwd();
 const ids = ['mercury', 'earth', 'moon', 'mars', 'jupiter', 'io', 'sun', 'ceres'];

@@ -13,7 +13,7 @@ import { createPreparedWorldNavigation } from '../prepared-world-navigation.mts'
 import { createWorldSelectionTarget, parseSharedView, savedWorldCamera } from '@cssearth/renderer/navigation';
 import { worldQuaternionFromRotation, worldRotationFromQuaternion } from '@cssearth/engine';
 import { presentWorldCamera } from '@cssearth/renderer/navigation/world-camera.ts';
-import { SYSTEM_FRAMING_ANGLES } from '../runtime-policy.mts';
+import { SYSTEM_FRAMING_ANGLES } from '../browser/runtime-policy.mts';
 import { createSelectionFlight, sampleSelectionFlight } from '@cssearth/engine';
 
 import { required, position, quaternion, navigationFixture, unusedSharedView } from './navigation-test-values.mts';

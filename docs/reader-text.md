@@ -133,6 +133,6 @@ Warnings are for the reviewer and never block:
   `site/prepared-facilities.json`, so run
   `node site/build/prepare/prepare-facilities.mts --catalog-only` first.
 
-`site/test/prepare-text.test.mts` runs the check on every registered body.
+`site/build/prepare/prepare-text.test.mts` runs the check on every registered body.
 No repository test measures line wrapping. Inspect affected desktop and phone layouts in a browser
 when text or typography changes.

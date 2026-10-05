@@ -44,12 +44,12 @@
     {
       "id": "handler:site:error-report:errorReportBootstrap:embedded:error:1",
       "reason": "Production-host guard returns before either listener is bound on authorized localhost; production traffic and hostname spoofing are outside this run.",
-      "evidence": "site/error-report.mts:8-9 allow only css.earth/www.css.earth and return before addEventListener at lines 18-20; all runner previews use loopback hostnames."
+      "evidence": "site/startup/error-report.mts:8-9 allow only css.earth/www.css.earth and return before addEventListener at lines 18-20; all runner previews use loopback hostnames."
     },
     {
       "id": "handler:site:error-report:errorReportBootstrap:embedded:unhandledrejection:1",
       "reason": "Production-host guard returns before either listener is bound on authorized localhost; production traffic and hostname spoofing are outside this run.",
-      "evidence": "site/error-report.mts:8-9 allow only css.earth/www.css.earth and return before addEventListener at lines 18-20; all runner previews use loopback hostnames."
+      "evidence": "site/startup/error-report.mts:8-9 allow only css.earth/www.css.earth and return before addEventListener at lines 18-20; all runner previews use loopback hostnames."
     },
     {
       "id": "handler:site:application-world-context:createApplicationWorldContext:abort:1",

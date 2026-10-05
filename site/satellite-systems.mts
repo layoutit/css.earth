@@ -1,4 +1,4 @@
-import { systemHostId } from './navigation/system-address.mts';
+import { systemHostId } from './model/system-address.mts';
 import { APPLICATION_WORLD_CONTEXT as context, onWorldSystems } from './world-context-plan.mts';
 
 /** A host and its prepared, navigable satellite children. Framing may select a smaller primary subset. */

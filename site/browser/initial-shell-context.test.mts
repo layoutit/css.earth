@@ -2,7 +2,7 @@ import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import assert from 'node:assert/strict';
 import { parseHTML } from 'linkedom';
-import { deferInitialShellContext, initialShellContextBootstrap } from '../initial-shell-context.mts';
+import { deferInitialShellContext, initialShellContextBootstrap } from '../startup/initial-shell-context.mts';
 
 test('query-specific views withhold static object facts until the requested context is ready', () => {
   for (const query of ['dataset=spectral-slope', 'v=saved', 'feature=12']) {

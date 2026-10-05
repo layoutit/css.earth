@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import { parseHTML } from 'linkedom';
-import { renderSourceLink, sourceDocuments } from '../source-link.mts';
+import { renderSourceLink, sourceDocuments } from './source-link.mts';
 
 test('one source link follows selection, independent of search, dataset and accordion state', () => {
   const { document } = parseHTML(`<html><body>

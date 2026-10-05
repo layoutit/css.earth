@@ -1,8 +1,8 @@
 import { checkObjectTree, defineObjects } from '@cssearth/objects';
 import { CATALOGUE_ENTRIES } from './prepared-catalogue.mjs';
 import { objectFromEntry } from './object-directory.mts';
-import type { NavigableObject } from './object-entry-types.mts';
-export type { ObjectEntry, CatalogEntry, NavigableObject } from './object-entry-types.mts';
+import type { NavigableObject } from './directory/object-entry-types.mts';
+export type { ObjectEntry, CatalogEntry, NavigableObject } from './directory/object-entry-types.mts';
 
 /** The single application registry: every entry of the prepared catalogue (`pnpm prepare:catalog`), decoded as a page's
  * object directory decodes the one entry it loads. */

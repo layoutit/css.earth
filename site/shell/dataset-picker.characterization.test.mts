@@ -4,8 +4,8 @@ import { parseHTML } from 'linkedom';
 import { createSceneLifetime } from '@cssearth/engine';
 import { sectionElements } from '@cssearth/renderer';
 import { bindDatasetPicker, mountDatasetPickerLayout } from './dataset-picker.mts';
-import type { BrowserWindow } from './browser/browser-types.mts';
-import { required } from './test/navigation-test-values.mts';
+import type { BrowserWindow } from '../browser/browser-types.mts';
+import { required } from '../test/navigation-test-values.mts';
 
 const markup = `<html><body><div data-dataset-picker>
 <div class="object-dataset-picker-display"><select data-dataset-native-select><option value="normal" selected>Color</option><option value="clouds">Clouds</option><option value="missing">Missing</option></select></div>

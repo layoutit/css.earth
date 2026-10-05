@@ -6,8 +6,8 @@ import { readFileSync } from 'node:fs';
 
 import { parseHTML } from 'linkedom';
 import { createSceneLifetime } from '@cssearth/engine';
-import { createSettingsController } from '../shell/shell-settings.mts';
-import { createWorldPreferences } from '../world-preferences.mts';
+import { createSettingsController } from './shell-settings.mts';
+import { createWorldPreferences } from '../world/world-preferences.mts';
 import { updateSettingsPanel } from '../navigation/navigation-shell-content.mts';
 import { setLinkSelected, type BrowserWindow } from '../browser/browser-types.mts';
 import { sectionElements } from '@cssearth/renderer';

@@ -10,12 +10,12 @@ import { SCENE_SATELLITE_IDS, SMALL_BODY_IDS, asteroidPositionKm, COMET_IDS, com
 import type { SmallBodyId, CometId, BodyId, DwarfPlanetId, Vsop87BodyKey, StarId, HostedPlanetId } from '@cssearth/astronomy';
 import { readCatalog } from '@cssearth/objects/node';
 import { prepareSceneDistance } from '@cssearth/bake/navigation';
-import { parseSpatialContextCommand, prepareSpatialContext, worldFilesRoot } from '../build/prepare/prepare-spatial-context.ts';
+import { parseSpatialContextCommand, prepareSpatialContext, worldFilesRoot } from './prepare-spatial-context.ts';
 
 const root = process.cwd();
 const sourcePath = resolve(root, 'src/objects/observable-universe/source/navigation/universe.json');
 const solarGeometryPath = resolve(root, 'src/platform/solar-geometry.mts');
-const contextEntries = (await readCatalog(resolve(import.meta.dirname, '../../src/objects'), prepareSceneDistance)).filter(body => body.context && body.id !== 'sun')
+const contextEntries = (await readCatalog(resolve(import.meta.dirname, '../../../src/objects'), prepareSceneDistance)).filter(body => body.context && body.id !== 'sun')
   .sort((a, b) => (a.context!.order ?? Number.MAX_SAFE_INTEGER) - (b.context!.order ?? Number.MAX_SAFE_INTEGER) || a.id.localeCompare(b.id, 'en'));
 
 test("the command names no path: the world's source and full context are the root object's, in the objects folder it is given", () => {

@@ -1,10 +1,10 @@
 ---
-import type { Props as ShellProps } from '../object-shell-types';
+import type { Props as ShellProps } from '../contracts/object-shell-types';
 import DatasetLegend from './DatasetLegend.astro';
 import DatasetThumbnail from './DatasetThumbnail.astro';
 import DatasetDescription from './DatasetDescription.astro';
 import SequencePlayer from './SequencePlayer.astro';
-import { sidebarThumbnail } from '../sidebar-thumbnails.mts';
+import { sidebarThumbnail } from '../content/sidebar-thumbnails.mts';
 interface Props {
   objectId: string;
   datasets: Pick<NonNullable<ShellProps['datasets']>, 'controls' | 'defaultDataset'>;

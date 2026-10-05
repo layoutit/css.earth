@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { parseHTML } from 'linkedom';
-import { collectInformationTabStyle, informationTabStyle, informationTabStyles } from '../server/information-tab-styles.mts';
+import { collectInformationTabStyle, informationTabStyle, informationTabStyles } from './information-tab-styles.mts';
 import { createNavigationStyles } from '../navigation/navigation-styles.mts';
 
 const card = (id: string) => `<section class="object-information-panel"><div class="object-native-tabs">

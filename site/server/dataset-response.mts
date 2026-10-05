@@ -8,11 +8,11 @@ import { preparedSceneMatrix } from '@cssearth/engine';
 import { serializePreparedMatrix4 } from '@cssearth/core';
 import { distanceForSilhouetteRadius } from '@cssearth/engine';
 
-import { requiredElement, requiredSection } from './browser/browser-types.mts';
-import { PLACE_FEATURE_PREFIX } from './search/feature-search.mts';
-import { readSceneDatasetUrl } from './dataset-url.mts';
-import { preparedObjectUrl } from './prepared-object-path.mts';
-import { defaultWidthShare } from './default-width-share.mts';
+import { requiredElement, requiredSection } from '../browser/browser-types.mts';
+import { PLACE_FEATURE_PREFIX } from '../search/feature-search.mts';
+import { readSceneDatasetUrl } from '../model/dataset-url.mts';
+import { preparedObjectUrl } from '../prepared/prepared-object-path.mts';
+import { defaultWidthShare } from '../world/default-width-share.mts';
 
 function region(html: string, name: string) {
   const marker = `<!--${name}:start-->`, start = html.indexOf(marker) + marker.length;

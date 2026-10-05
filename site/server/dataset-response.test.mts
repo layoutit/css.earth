@@ -4,13 +4,13 @@ const test = sourceTest();
 import { readFile } from 'node:fs/promises';
 import { parseHTML } from 'linkedom';
 import { initialObjectSelection, loadPreparedCssObject, loadPreparedDataset, omittedPreparedNodes, selectedPreparedVariant } from '@cssearth/renderer';
-import { readPreparedDatasetBytes, readPreparedObjectBytes } from '../object-page-data.mts';
-import { preparedObjectPath } from '../prepared-object-path.mts';
-import { UnreadableSavedView, renderDatasetResponse } from '../dataset-response.mts';
-import { loadPreparedSceneMarkup } from '../server/load-prepared-scene.mts';
-import { handleSearchRequest } from '../server/search-response.mts';
-import searchRoute from '../server/search-route.mts';
-import { NATIVE_INPUT_STRIPS, NATIVE_TURNING_MESH, nativeInputMarkup, nativeInputStylesheet } from '../native-input.mts';
+import { readPreparedDatasetBytes, readPreparedObjectBytes } from './object-page-data.mts';
+import { preparedObjectPath } from '../prepared/prepared-object-path.mts';
+import { UnreadableSavedView, renderDatasetResponse } from './dataset-response.mts';
+import { loadPreparedSceneMarkup } from './load-prepared-scene.mts';
+import { handleSearchRequest } from './search-response.mts';
+import searchRoute from './search-route.mts';
+import { NATIVE_INPUT_STRIPS, NATIVE_TURNING_MESH, nativeInputMarkup, nativeInputStylesheet } from '../browser/native-input.mts';
 
 const origin = 'https://example.test';
 // A refused dataset request never reaches search.

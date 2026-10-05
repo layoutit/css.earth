@@ -1,4 +1,4 @@
-import { systemHostId } from './navigation/system-address.mts';
+import { systemHostId } from './system-address.mts';
 import { orbitRoot } from './orbit-root.mts';
 import type { PreparedWorldContext } from '@cssearth/objects';
 

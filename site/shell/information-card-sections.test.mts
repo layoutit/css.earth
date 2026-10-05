@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { parseHTML } from 'linkedom';
 import { createSceneLifetime } from '@cssearth/engine';
 import { sourceTest } from '@cssearth/objects/node/source-test';
-import { createTabsController } from '../information-card.mts';
+import { createTabsController } from './information-card.mts';
 
 const test = sourceTest();
 

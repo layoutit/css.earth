@@ -1,4 +1,4 @@
-import { systemHostId, systemObjectId } from '../navigation/system-address.mts';
+import { systemHostId, systemObjectId } from '../model/system-address.mts';
 import type { PageView } from '../navigation/navigation-scope.mts';
 import { knownObject } from '../object-directory.mts';
 import { WORLD_OBJECTS } from '../world-objects.mts';

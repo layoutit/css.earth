@@ -7,8 +7,8 @@ import { join, resolve } from "node:path";
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import { installRuntimeAssets, readAllowMissingFlag } from "@cssearth/bake/asset-publication";
-import { inspectContextAvailability } from "../build/prepare/prepare-context-availability.mts";
-import { writeContextPackage } from "./fixtures/context-package.mts";
+import { inspectContextAvailability } from "./prepare-context-availability.mts";
+import { writeContextPackage } from "../fixtures/context-package.mts";
 
 /** Retries are asserted by count, not by waiting out the real backoff. */
 const noWait = async () => {};

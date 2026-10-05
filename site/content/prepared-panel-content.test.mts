@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import { readFile } from 'node:fs/promises';
-import { parsePanelControls } from '../prepared-panel-content.mts';
+import { parsePanelControls } from './prepared-panel-content.mts';
 import { parsePreparedPanelContent } from '@cssearth/objects';
 
 type PanelContentInput = { schema: string; title: { label: unknown }; facts: { value: unknown }[] };

@@ -2,8 +2,8 @@ import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { parseHTML } from 'linkedom';
 import { mountLayoutSections } from './layout-sections.mts';
-import { NARROW_LAYOUT } from './narrow-layout.mts';
-import type { BrowserWindow } from './browser/browser-types.mts';
+import { NARROW_LAYOUT } from '../browser/narrow-layout.mts';
+import type { BrowserWindow } from '../browser/browser-types.mts';
 test('layout swaps footer and sheet sources on startup and media change', () => {
   const { document, window } = parseHTML('<html><body><footer class="object-footer">Footer</footer><a class="object-sheet-sources">Sources</a></body></html>');
   let matches = false;

@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
-import { createInFlightLoader } from '../in-flight-loader.mts';
+import { createInFlightLoader } from './in-flight-loader.mts';
 
 test('in-flight loader shares concurrent work but releases successful values', async () => {
   let calls = 0, resolve!: (value: object) => void;

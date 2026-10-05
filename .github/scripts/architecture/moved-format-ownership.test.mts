@@ -14,7 +14,7 @@ const publishers = new Set([
   'packages/telescope/src/node/product-record.ts', 'packages/telescope-cli/src/body-map-publication.mts',
   'packages/telescope-cli/src/vo/discovery.mts', 'packages/telescope-cli/authoring/circumstellar/author.mts',
   'packages/bake/authoring/betelgeuse-shell/author.mts', 'packages/bake/authoring/galileo-lucy/orbits.mts',
-  'packages/bake/cli/prepare-nebula-field-catalogues.mts', 'site/test/fixtures/context-package.mts',
+  'packages/bake/cli/prepare-nebula-field-catalogues.mts', 'site/build/fixtures/context-package.mts',
 ]);
 // Routing and scientific checks retained by the move. Only these exact AST expressions
 // are admitted, never the containing file or a named function's arbitrary body.

@@ -1,6 +1,6 @@
 import { requireControls, preparedPanelReaders, type PreparedTitle, type Fact } from '@cssearth/objects';
 const { object, text, number, optionalText, optionalBoolean, array } = preparedPanelReaders;
-import type { Props, Dataset, DatasetControl, DatasetReaderText } from './object-shell-types.js';
+import type { Props, Dataset, DatasetControl, DatasetReaderText } from '../contracts/object-shell-types.js';
 
 const stepOpens = (value: unknown) => {
   if (value !== 'first' && value !== 'last') throw new TypeError(`Prepared dataset step opens must be "first" or "last", not ${JSON.stringify(value)}.`);

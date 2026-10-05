@@ -3,10 +3,10 @@ import { mkdtemp, readFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { sourceTest } from '@cssearth/objects/node/source-test';
-import { prepareChartAssets } from '../build/charts/charts.ts';
+import { prepareChartAssets } from './charts.ts';
 
 const test = sourceTest();
-const source = new URL('../../src/objects/hd-189733/source/', import.meta.url).pathname;
+const source = new URL('../../../src/objects/hd-189733/source/', import.meta.url).pathname;
 const files = ['tess2021204101404-s0041-0000000256364928-0212-s_lc.fits', 'tess2022190063128-s0054-0000000256364928-0227-s_lc.fits', 'tess2024196212429-s0081-0000000256364928-0276-s_lc.fits'].map(name => `photometry/tess/${name}`);
 
 test('HD 189733 b folds from its pinned TESS sectors to a dip as deep as its radius ratio says, flat outside it', async () => {

@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
-import { loadObjectContent } from "./load-object-content.mts";
-import { prepareObjectContent } from "../build/content/prepare.ts";
+import { loadObjectContent } from "./load-object-content.test-support.mts";
+import { prepareObjectContent } from "./prepare.ts";
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 

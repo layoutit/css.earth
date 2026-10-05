@@ -13,9 +13,9 @@ interface SystemView { readonly candidates: readonly FramingCandidate[]; }
 const tuple = (map: (axis: number) => number): PositionM => [map(0), map(1), map(2)];
 import datasetVolumes from './prepared-dataset-volumes.json' with { type: 'json' };
 import fitBoxes from './prepared-fit-boxes.json' with { type: 'json' };
-import { SYSTEM_FRAMING_ANGLES, SYSTEM_FRAMING_PADDING_PIXELS } from './runtime-policy.mts';
-import { systemFramingRadii } from './system-framing-radii.mts';
-export { systemFramingRadii } from './system-framing-radii.mts';
+import { SYSTEM_FRAMING_ANGLES, SYSTEM_FRAMING_PADDING_PIXELS } from './browser/runtime-policy.mts';
+import { systemFramingRadii } from './world/system-framing-radii.mts';
+export { systemFramingRadii } from './world/system-framing-radii.mts';
 import { cssCameraAxesFromOrientation, cssViewFromOrientation, rotateWorldPosition, worldQuaternionFromRotation, worldRotationFromQuaternion } from '@cssearth/engine';
 import { APPLICATION_WORLD_CONTEXT as context, loadWorldSystemOf, onWorldSystems, worldSystemHeld } from './world-context-plan.mts';
 import { readApplicationSystemView } from './world-system-views.mts';

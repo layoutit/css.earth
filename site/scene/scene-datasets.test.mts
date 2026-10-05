@@ -1,8 +1,8 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
-import { createSceneSessions } from '../scene/scene-session.mts';
-import { createDatasetEffects } from '../scene/scene-datasets.mts';
+import { createSceneSessions } from './scene-session.mts';
+import { createDatasetEffects } from './scene-datasets.mts';
 
 type World = NonNullable<ReturnType<Parameters<typeof createDatasetEffects>[1]>>;
 

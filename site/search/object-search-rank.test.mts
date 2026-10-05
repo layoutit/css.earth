@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { designationNames, searchObjects } from '../search/object-search.mts';
+import { designationNames, searchObjects } from './object-search.mts';
 
 const label = (name: string) => ({ name, names: [name], illustration: false, classification: 'body', classificationName: 'moon', systemName: '' });
 

@@ -4,7 +4,7 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
-import { assetHashSplit, assetShaMap, inlineSceneImage, resolveWorldBillboards } from '../asset-origin.mts';
+import { assetHashSplit, assetShaMap, inlineSceneImage, resolveWorldBillboards } from '../server-assets/asset-origin.mts';
 
 test('an object without inventory.json has an empty asset map', async () => {
   const root = await mkdtemp(join(tmpdir(), 'asset-origin-'));

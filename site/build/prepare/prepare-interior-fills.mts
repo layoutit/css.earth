@@ -8,7 +8,7 @@ import { pathToFileURL } from 'node:url';
 import { chromium } from 'playwright';
 
 import { preparePresentationBindings } from '@cssearth/bake/prepared-presentation';
-import { objectPageStyles } from '../../object-page-contract.mts';
+import { objectPageStyles } from '../../contracts/object-page-contract.mts';
 import { repinObjectJson } from '@cssearth/bake/contract';
 import { readPreparedObjects } from '@cssearth/objects/node';
 

@@ -1,4 +1,4 @@
-import { systemHostId } from './navigation/system-address.mts';
+import { systemHostId } from './system-address.mts';
 
 /** The body the site's front page (`/`) shows. Its own route stays `/<id>/`; the front page, search on it and history
  * entries that name `/` all resolve to it here. */

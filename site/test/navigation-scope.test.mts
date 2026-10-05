@@ -1,8 +1,8 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { namesSystem, withView, WORLD_HOST_ID } from '../navigation/navigation-scope.mts';
-import { systemHostId, systemObjectId, systemRoute } from '../navigation/system-address.mts';
-import { objectIdAtPath, pageIdAtPath } from '../root-object.mts';
+import { systemHostId, systemObjectId, systemRoute } from '../model/system-address.mts';
+import { objectIdAtPath, pageIdAtPath } from '../model/root-object.mts';
 
 const url = (value: string) => new URL(value, 'https://css.earth');
 const address = (value: URL) => value.pathname + value.search;
@@ -39,7 +39,7 @@ test('selecting a view moves the address between the object and its system and k
 });
 
 test('a build of named pages builds the scene routes a system page mounts', async () => {
-  const { builtScenePaths } = await import('../built-pages.mts');
+  const { builtScenePaths } = await import('../server/built-pages.mts');
   const { PAGES } = await import('../objects.mts');
   const paths = ['jupiter', 'earth', 'mars'].map(id => ({ params: { id } }));
   assert.deepEqual(builtScenePaths(paths, PAGES, 'earth', { CSSEARTH_BUILD_PAGES: '/jupiter-system/' }).map(path => path.params.id), ['jupiter']);

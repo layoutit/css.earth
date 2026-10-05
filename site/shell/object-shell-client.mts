@@ -1,8 +1,8 @@
 import { cardView, presentCardView } from '../selection-presentation.mts';
-import { renderSourceLink } from '../source-link.mts';
+import { renderSourceLink } from '../browser/source-link.mts';
 import { zoomStepOf } from '../inside-view.mts';
 import { isExtendedClassification } from '@cssearth/objects';
-import { bindTabPanels } from '../tab-panels.mts';
+import { bindTabPanels } from './tab-panels.mts';
 import { sectionElements, sectionPlaceholder, showSection } from '@cssearth/renderer';
 import { createObjectBrowserController } from '../object-browser.mts';
 import { applySeoHead, objectSeo } from '../seo.mts';
@@ -14,17 +14,17 @@ import type { DestinationPresentation } from '../destination-browser.mts';
 import type { ShellCamera, PlaybackState } from '../browser/browser-types.mts';
 import { errorMessage, requiredElement, sectionElement } from '../browser/browser-types.mts';
 import type { NavigationContent } from '../navigation/navigation-content.mts';
-import { DIAGNOSTICS_ENABLED } from '../diagnostics-policy.mts';
+import { DIAGNOSTICS_ENABLED } from '../browser/diagnostics-policy.mts';
 import { createSceneLifetime } from "@cssearth/engine";
 import { createViewReadout } from "../view-readout.mts";
 import { createSurfaceMapReader } from "../minimap/surface-map-context.mts";
 import { mountDiagnosticRecorder } from '../diagnostic-recorder.mts';
 import { bindNavigationIntent, navigationFragments } from '../navigation/navigation-fragments.mts';
 import { createSheetController } from './shell-sheet.mts';
-import { bindDatasetPicker } from '../dataset-picker.mts';
-import { mountLayoutSections } from '../layout-sections.mts';
+import { bindDatasetPicker } from './dataset-picker.mts';
+import { mountLayoutSections } from './layout-sections.mts';
 import { createSettingsController } from './shell-settings.mts';
-import { mountInformationCard, createTabsController } from '../information-card.mts';
+import { mountInformationCard, createTabsController } from './information-card.mts';
 import type { ObjectShell, ShellOptions, ShellNavigationTarget, ShellNavigationTransition } from './object-shell-types.mts';
 
 export function mountObjectShell({

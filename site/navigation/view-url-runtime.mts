@@ -1,6 +1,6 @@
 import type { ObjectSharedView } from '@cssearth/renderer/runtime/object-scene.ts';
 import { formatSharedView } from "@cssearth/renderer/navigation";
-import { navigationHref } from './navigation/navigation-history.mts';
+import { navigationHref } from './navigation-history.mts';
 
 // One URL owner in the shared shell. The URL is written once per interaction, when the camera has come to rest and stayed
 // there for a quiet period: a drag after its release and any throw, a run of wheel notches or a pinch after its glide, a

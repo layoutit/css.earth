@@ -4,7 +4,7 @@ const test = sourceTest();
 import { SCENE_OBJECTS } from '../objects.mts';
 import { WORLD_OBJECTS } from '../world-objects.mts';
 import { SOLAR_SYSTEM_ID, allPlanetarySystems, planetarySystems, systemById, systemOfObject } from '../object-systems.mts';
-import { planetarySystemMembers } from '../planetary-system-members.mts';
+import { planetarySystemMembers } from '../model/planetary-system-members.mts';
 import { PREPARED_WORLD_PRESENTATION } from '../prepared-world-presentation.mts';
 import { SYSTEM_CENTERS, SYSTEM_FRAMING_RADII, systemFramingRadii } from '../system-framing.mts';
 import { APPLICATION_WORLD_CONTEXT } from '../world-context-plan.mts';
@@ -132,7 +132,7 @@ test("every system's overview lasts two doublings of distance before its orbits 
   const { zoomScopeAtCamera } = await import('../zoom-scope.mts');
   const { ancestorsOf } = await import('../objects.mts');
   const { SYSTEM_RANGES } = await import('../system-framing.mts');
-  const { systemObjectId } = await import('../navigation/system-address.mts');
+  const { systemObjectId } = await import('../model/system-address.mts');
   const { APPLICATION_WORLD_CONTEXT: plan } = await import('../world-context-plan.mts');
   for (const system of allPlanetarySystems(SCENE_OBJECTS)) {
     const at = (factor: number) => ({ referenceFrame: 'sun-icrf', epochJdTt: 1, pose: { positionM: [system.originM[0] + system.exitDistanceM * factor, system.originM[1], system.originM[2]] as const,

@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { surfaceMapViewport } from '../minimap/surface-map-context.mts';
+import { surfaceMapViewport } from './surface-map-context.mts';
 
 test('surface consumers use the published clipped viewport without measuring the scene', () => {
   const scene = { closest() { throw new Error('Unexpected layout read'); } };

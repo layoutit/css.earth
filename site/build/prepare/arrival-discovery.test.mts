@@ -5,14 +5,14 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { parseObjectDiscovery, OBJECT_RUNTIME_SCHEMA, OBJECT_SCHEMA, OBJECT_CONTENT_SCHEMA, OBJECT_CONTENT_VERSION, RASTER_RECIPE_SCHEMA } from '@cssearth/objects';
 import { preparedDefaultViewRotation } from '@cssearth/engine';
-import { prepareObjectDiscovery } from '../build/prepare/prepare-object-discovery.mts';
+import { prepareObjectDiscovery } from './prepare-object-discovery.mts';
 
 test('a shape-only body gets a prepared arrival without becoming photographic', async () => {
   const directory = await mkdtemp(join(tmpdir(), 'arrival-discovery-'));
   try {
     const prepared = join(directory, 'prepared');
     await mkdir(prepared);
-    const runtime = JSON.parse(await readFile(new URL('../../src/objects/mercury/prepared/runtime.json', import.meta.url), 'utf8'));
+    const runtime = JSON.parse(await readFile(new URL('../../../src/objects/mercury/prepared/runtime.json', import.meta.url), 'utf8'));
     await writeFile(join(prepared, 'runtime.json'), JSON.stringify({ schema: OBJECT_RUNTIME_SCHEMA, camera: runtime.camera }));
     await writeFile(join(prepared, 'controls.json'), JSON.stringify({ datasets: { defaultDataset: 'shape', controls: [{ id: 'shape' }] } }));
     const billboard = { url: '/scenes/body/body-arrival.webp', dataset: 'shape', size: 1024,
@@ -39,7 +39,7 @@ test('a shape-only body gets a prepared arrival without becoming photographic', 
 test('an object without a surface is reached on its default view when its dataset is pictured, not when it is dots', async () => {
   const root = await mkdtemp(join(tmpdir(), 'arrival-discovery-')), directory = join(root, 'galaxy');
   try {
-    const runtime = JSON.parse(await readFile(new URL('../../src/objects/m31/prepared/runtime.json', import.meta.url), 'utf8'));
+    const runtime = JSON.parse(await readFile(new URL('../../../src/objects/m31/prepared/runtime.json', import.meta.url), 'utf8'));
     for (const path of ['galaxy/prepared', 'galaxy/source/content', 'layers', 'dots']) await mkdir(join(root, path), { recursive: true });
     await writeFile(join(directory, 'prepared/runtime.json'), JSON.stringify({ schema: OBJECT_RUNTIME_SCHEMA, camera: runtime.camera }));
     await writeFile(join(root, 'layers/object.json'), JSON.stringify({ schema: OBJECT_SCHEMA, id: 'layers', type: 'image-layer-bank', properties: {} }));

@@ -3,8 +3,8 @@ import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import { parseHTML } from 'linkedom';
 import type { BrowserWindow } from '../browser/browser-types.mts';
-import type { CatalogueRow } from '../search/catalogue-index.mts';
-import { createCatalogueWindow } from '../search/catalogue-window.mts';
+import type { CatalogueRow } from './catalogue-index.mts';
+import { createCatalogueWindow } from './catalogue-window.mts';
 
 const entry = (index: number): CatalogueRow => ({
   id: `earth-${index}`, name: `Earth ${index}`,

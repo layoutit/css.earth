@@ -14,7 +14,7 @@ const SEARCH_PATH = '/.netlify/functions/search', REPORT_PATH = '/.netlify/funct
 /** How long a reader waits for a page rendered for its query before the static page is sent instead. */
 const PAGE_PATIENCE_MS = 10_000;
 
-/** A page's report of its own failure (site/error-report.mts), written to the Worker's log and answered with no content.
+/** A page's report of its own failure (site/startup/error-report.mts), written to the Worker's log and answered with no content.
  * Nothing is stored. The body is capped: this endpoint is public. */
 async function report(request: Request): Promise<Response> {
   if (request.method !== 'POST') return new Response(null, { status: 405 });

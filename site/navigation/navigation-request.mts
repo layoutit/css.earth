@@ -3,7 +3,7 @@ import type { WorldCameraPose } from '@cssearth/engine';
 import type { ShellCamera } from '../browser/browser-types.mts';
 import type { ObjectEntry } from '../objects.mts';
 import type { createPreparedWorldNavigation } from '../prepared-world-navigation.mts';
-import { withDataset } from '../dataset-url.mts';
+import { withDataset } from '../model/dataset-url.mts';
 import { namesSystem, withView } from './navigation-scope.mts';
 import { systemById, type SystemObjects } from '../object-systems.mts';
 import { satelliteSystemByHost } from '../satellite-systems.mts';
