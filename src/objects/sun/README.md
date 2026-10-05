@@ -33,7 +33,7 @@ The emissive presentation has no lighting: no Shadows toggle, no directional Sun
 - On the full 13 May frame, every one of the 16.8 million decoded samples equals astropy's raw integer.
 - The [FITS map tests](../../../packages/bake/src/objects/interpretation/fits-map.test.mts) check north and south pixel centres, zero and negative values, BLANK handling and transparent off-limb plates.
 - In the [four-dataset render](source/reference/rendered-lenses.png), active regions sit in the same places in every dataset.
-- The derived frame against the authored one it replaced, in the app on 2026-10-05: [the earlier page, the new one and the pixels that differ](evidence/frame-20261005/derived-frame-against-main.webp), at the opening view and pulled back to 10.47 AU. Pixelmatch at threshold 0.1 counts 1,481 and 30,092 of 1,024,000 pixels; two captures of the earlier page differ by 0 and 106. The orbits, stars and labels turn with the frame, and the disc shows the face the IAU spin gives.
+- The derived frame against the authored one it replaced, in the app on 2026-10-05: [the earlier page, the new one and the pixels that differ](evidence/frame-20261005/derived-frame-against-main.webp), at the opening view and pulled back to 10.47 AU. Pixelmatch at threshold 0.1 counts 1,509 and 30,150 of 1,024,000 pixels (572,999 and 574,545 at threshold 0, the counts on the sheet); two captures of the earlier page differ by 0 and 335 (0 and 1,135). The orbits, stars and labels turn with the frame, and the disc shows the face the IAU spin gives.
 
 ## Known problems
 
