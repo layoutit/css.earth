@@ -1,8 +1,7 @@
 import { presentPhysicalPoseInVolume, worldRotationCss, worldRotationFromQuaternion } from '@cssearth/engine';
-import { preparedVolumeCameraTransform, LARGE_IMAGE_PIXELS, STACK_OPACITY_CEILING } from '../volume/prepared-volume-runtime.js';
+import { preparedVolumeCameraTransform, STACK_OPACITY_CEILING } from '../volume/prepared-volume-runtime.js';
 import type { VolumeCameraPublication } from '../volume/types.js';
 import type { PreparedCssImageLayers, PreparedImageLayerView } from '@cssearth/objects';
-import { revealLayer } from '../rendering/layer-reveal.js';
 
 /** A leaf as a rectangle in bank units: its centre, its unit edge directions, its half extents and its normal, from the
  * prepared corners. A sheet is left out of the drawing while the camera stands within one of its stack's sampling steps
@@ -40,6 +39,16 @@ export function mountPreparedCssImageLayers({ host, before, payload, resolveReso
   // A stack without leaves draws nothing: it is not mounted and takes no part in the choice of view.
   const drawn = payload.stacks.filter(stack => stack.leaves.length > 0);
   const views = payload.bankViews.filter(view => drawn.some(stack => stack.axis === view.axis));
+  // A stack coming into the drawing waits for its images: shown with them undecoded, every leaf decoded its WebP on the
+  // page's thread inside one paint. On an iPad a turn onto another stack of NGC 2392's 57 leaves made a frame of 235 ms
+  // (63 paints, 204 ms of them in VP8 decode under WebKit's drawNativeImage), the Southern Ring's 171 ms, and a dataset
+  // coming back 203 to 270 ms (2026-10-05). The stack's images are decoded through handles it keeps while it draws, and it
+  // turns visible when they are done; a document without Image.decode (a test's) shows it at once.
+  // The stack then shows whole. Its leaves joining a share a frame instead was measured and rejected: every joining frame
+  // painted the layers already on screen again (M31's turns 125 to 160 ms against 41 to 43 whole, NGC 2392's 122 against
+  // 36), though it suited the Helix, whose stacks of 87 and 91 leaves with an image each cost 68 to 104 ms shown whole.
+  const Decoder = (document.defaultView as { Image?: new () => { src: string; decode(): Promise<void> } } | null)?.Image;
+  const decodes = typeof Decoder?.prototype?.decode === 'function';
   const banks = drawn.map(stack => {
     const projection = document.createElement('div');
     projection.className = 'css-volume-projection';
@@ -48,7 +57,7 @@ export function mountPreparedCssImageLayers({ host, before, payload, resolveReso
     // Same camera-driven scene as a volume: its will-change keeps slice raster scales through rotation. A stack is one
     // scene, or the runs of leaves its view names (sceneSizes): each run under a camera of its own in the stack's
     // projection, painted in the stack's order, so the browser sorts and cuts only one run's leaves against each other.
-    const textures: { element: HTMLElement; own: string; path: string; large: boolean; sheet: Sheet | null; shown: string;
+    const textures: { element: HTMLElement; own: string; path: string; sheet: Sheet | null; shown: string;
       /** Where the leaf stands along its stack's normal, its place in that order, and the paint order last written. */
       along: number; rank: number; over: string }[] = [];
     const runs: { camera: HTMLElement; scene: HTMLElement; mesh: HTMLElement; leaves: HTMLElement[] }[] = [];
@@ -61,7 +70,7 @@ export function mountPreparedCssImageLayers({ host, before, payload, resolveReso
         const element = document.createElement('s');
         element.dataset.imageLayerLeaf = leaf.id;
         Object.assign(element.style, leaf.style);
-        textures.push({ element, own: leaf.style.transform, path: leaf.texturePath, large: leaf.widthPx * leaf.heightPx >= LARGE_IMAGE_PIXELS,
+        textures.push({ element, own: leaf.style.transform, path: leaf.texturePath,
           sheet: leaf.verticesUnits ? sheetOf(leaf.centerUnits, leaf.verticesUnits) : null, shown: '',
           along: view ? leaf.centerUnits[0] * view.normalUnits[0] + leaf.centerUnits[1] * view.normalUnits[1] + leaf.centerUnits[2] * view.normalUnits[2] : 0, rank: 0, over: '' });
         mesh.appendChild(element); leaves.push(element);
@@ -72,7 +81,8 @@ export function mountPreparedCssImageLayers({ host, before, payload, resolveReso
     }
     [...textures].sort((a, b) => a.along - b.along).forEach((texture, rank) => { texture.rank = rank; });
     root.appendChild(projection);
-    return { axis: stack.axis, projection, runs, textures, normal: view?.normalUnits ?? null, loaded: false, perspective: '', perspectiveOrigin: '', transform: '', reach: view?.samplingStepUnits ?? 0,
+    return { axis: stack.axis, projection, runs, textures, normal: view?.normalUnits ?? null, images: null as string[] | null, drawn: false, ready: !decodes, turn: 0, handles: [] as unknown[],
+      perspective: '', perspectiveOrigin: '', transform: '', reach: view?.samplingStepUnits ?? 0,
       patches: view?.sceneSizes !== undefined, apart: null as HTMLElement | null, spare: null as HTMLElement | null };
   });
   /** A stack leaves its scenes for one flat element (`apart`), or goes back. In a shared scene the browser sorts the
@@ -115,15 +125,13 @@ export function mountPreparedCssImageLayers({ host, before, payload, resolveReso
   };
   host.insertBefore(root, before);
   let destroyed = false;
-  const url = (path: string) => resolveResource(path).replace(/["\\\n\r]/g, char => `\\${char}`);
-  // A large leaf coming back decodes off the main thread first: M31's 7,085 px detail layer decoded inside one 168 ms
-  // paint each time its bank or the whole bank came back on the iPad (2026-09-30).
-  const revealLarge = (bank: (typeof banks)[number]) => {
-    if (bank.loaded) for (const texture of bank.textures) if (texture.large) revealLayer(texture.element, resolveResource(texture.path));
-  };
+  const quotable = (address: string) => address.replace(/["\\\n\r]/g, char => `\\${char}`);
   return Object.freeze({ root,
-    /** The bank root is shown again: its large leaves wait for their decode (layer-reveal.ts). */
-    revealLarge() { for (const bank of banks) if (bank.projection.style.display !== 'none') revealLarge(bank); },
+    /** The opacity the bank's root stops at, as its stacks do (`publish`): 1 for a bank of patches, under 1
+     * (STACK_OPACITY_CEILING) for any other. */
+    ceiling: banks.every(bank => bank.patches) ? 1 : STACK_OPACITY_CEILING,
+    /** The bank root is shown again: each stack it draws waits for its images' decode, as one the camera turns to does. */
+    resume() { for (const bank of banks) { bank.drawn = false; bank.turn++; } },
     /** `around`: the bank is drawn around a body that stands inside it, at that place (reference metres). The sheets the
      * camera stands on are left out, and so are the sheets through the body: they hold the picture's own image of it, a
      * saturated glare many times its size, and the body is drawn in their place (Eta Carinae inside the Homunculus was a
@@ -157,19 +165,31 @@ export function mountPreparedCssImageLayers({ host, before, payload, resolveReso
           if (bank.perspectiveOrigin !== perspectiveOrigin) { bank.perspectiveOrigin = perspectiveOrigin; for (const { camera } of bank.runs) camera.style.perspectiveOrigin = perspectiveOrigin; }
           if (bank.transform !== cssTransform) { bank.transform = cssTransform; for (const { scene } of bank.runs) scene.style.transform = cssTransform; }
         }
-        const weight = weights[bank.axis];
-        const returning = weight > 0 && bank.projection.style.display === 'none';
-        if (weight > 0 && !bank.loaded) {
+        const weight = weights[bank.axis], wanted = weight > 0;
+        if (wanted && !bank.images) {
           // Leaves cut from one atlas share its address.
-          const images = new Map<string, string>();
+          const images = new Map<string, string>(), addresses = new Map<string, string>();
           for (const { element, path } of bank.textures) {
             let image = images.get(path);
-            if (image === undefined) images.set(path, image = `url("${url(path)}")`);
+            if (image === undefined) { const address = resolveResource(path); addresses.set(path, address); images.set(path, image = `url("${quotable(address)}")`); }
             element.style.backgroundImage = image;
           }
-          bank.loaded = true;
+          bank.images = [...addresses.values()];
         }
-        if (returning) revealLarge(bank);
+        if (wanted && !bank.drawn) {
+          bank.drawn = true;
+          if (Decoder && decodes) {
+            const turn = ++bank.turn;
+            bank.ready = false;
+            bank.handles = bank.images!.map(address => { const handle = new Decoder(); handle.src = address; return handle; });
+            // A failed decode still shows the stack: it then decodes as it paints, as before.
+            void Promise.all((bank.handles as { decode(): Promise<void> }[]).map(handle => handle.decode().catch(() => {}))).then(() => {
+              if (destroyed || bank.turn !== turn) return;
+              bank.ready = true;
+              if (bank.drawn) bank.projection.style.visibility = 'visible';
+            });
+          }
+        } else if (!wanted && bank.drawn) { bank.drawn = false; bank.turn++; bank.handles = []; bank.ready = !decodes; }
         // Around a body, the sheets within one sampling step of the camera or of the body are left out (Sheet): an opacity
         // write on change only, and every sheet back when the bank is its page's subject again.
         if (weight > 0 && bank.reach > 0) for (const texture of bank.textures) {
@@ -182,9 +202,9 @@ export function mountPreparedCssImageLayers({ host, before, payload, resolveReso
         // composites the stack as one group, and at the Homunculus's nearest view a wedge of that group, a third of the
         // picture, was black for one step of a drag, at the same camera places on every pass (headless Chrome, 2026-10-05).
         set(bank.projection, 'opacity', String(Math.min(bank.patches ? 1 : STACK_OPACITY_CEILING, weight)));
-        set(bank.projection, 'visibility', weight > 0 ? 'visible' : 'hidden');
+        set(bank.projection, 'visibility', wanted && bank.ready ? 'visible' : 'hidden');
         // A zero-weight axis contributes nothing; its 3D leaves leave compositing.
-        set(bank.projection, 'display', weight > 0 ? '' : 'none');
+        set(bank.projection, 'display', wanted ? '' : 'none');
       }
     },
     destroy() { if (destroyed) return; destroyed = true; root.remove(); },

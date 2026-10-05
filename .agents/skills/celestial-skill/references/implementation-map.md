@@ -100,6 +100,24 @@ instead of editing a shared list or atlas position.
   ranges in one retained scene. Borrelly (`comet-19p`) and Tuttle (`comet-8p`)
   use this path. Verify only the selected model is visible and pickable, camera
   behavior remains shared, and the combined prepared asset bank meets the budget.
+  A dataset takes a mesh of its own only when it is itself another shape: a second
+  shape model, or a picture registered to one. A map of the same body draws on
+  the body's mesh. Picking a dataset on another mesh swaps every face in one
+  frame: 0.5 to 1.1 s on an iPad for comet 67P's 1,000 to 2,000 faces when its
+  model, photographs and VIRTIS maps each had their own (2026-10-05). A map
+  published on another model of the same body names that model as an alternative
+  with `"display": "body-mesh"`: each texel is read at the closest point of that
+  model's surface and drawn on the body's mesh, as Bennu's six facet tables are
+  from four versions of its shape.
+- **One atlas size for a body's datasets:** on a mesh of triangles every face
+  draws its atlas at the layout's size. A dataset with `textureScale` below 1 is
+  drawn enlarged, which Safari does with a cropped copy for each face: comet
+  67P's 1,992 faces took 731 to 842 ms to switch to a half-size atlas and 202 to
+  236 ms to a full-size one on an iPad (2026-10-05). Set `texelsPerFace` to what
+  the datasets need and leave `textureScale` out. A banded sphere follows the
+  same rule with one `textureScale` for its maps: Enceladus's elevation atlas
+  at full size, 8,320 pixels wide among 2,080 pixel ones, took 568 to 613 ms to
+  pick and 51 to 68 ms at their size.
 - **Observation mosaics:** Triton's `source/preparation/terrestrial.json` uses
   the shared terrestrial path (`packages/bake/src/objects/layers/terrestrial/`) for native image geometry,
   photometric correction, compositing and gaps. Reuse the capability with the

@@ -24,8 +24,7 @@
         },
         "nativePhotographicSampling": {
           "samplesPerAxis": 2
-        },
-        "textureScale": 0.25
+        }
       },
       {
         "id": "enhanced",
@@ -36,12 +35,10 @@
         },
         "nativePhotographicSampling": {
           "samplesPerAxis": 2
-        },
-        "textureScale": 0.25
+        }
       },
       {
         "id": "infrared",
-        "textureScale": 0.125,
         "validity": {
           "kind": "geotiff-rgb-bands",
           "samples": [
@@ -182,8 +179,7 @@
               "poleLatitude": -90
             }
           }
-        ],
-        "textureScale": 0.25
+        ]
       },
       {
         "id": "relative-albedo",
@@ -282,8 +278,7 @@
             }
           }
         ],
-        "displaySampling": "nearest",
-        "textureScale": 0.25
+        "displaySampling": "nearest"
       },
       {
         "id": "ice-absorption",
@@ -310,7 +305,6 @@
         "sourceUrl": "https://vims.univ-nantes.fr/cube/1807469104_1",
         "sampling": "nearest",
         "displaySampling": "nearest",
-        "textureScale": 0.125,
         "grid": {
           "width": 1024,
           "height": 512,
@@ -459,7 +453,7 @@
         "expectedFaces": 196608
       },
       "faceBudget": 2000,
-      "texelsPerFace": 16384,
+      "texelsPerFace": 1024,
       "primitive": "u",
       "simplification": {
         "method": "source-meshoptimizer",

@@ -6,7 +6,7 @@
 
 | View | Source | What it means |
 | --- | --- | --- |
-| Shape | ESA/RMOC MTP019 NAVCAM model | Reduced to 1,000 triangles. Default gray is an authored material, not measured color. |
+| Shape | SHAP7 (Preusker et al.), from the [released SHAP7 regional map, v1](https://doi.org/10.17632/2845znt54k.1) | Reduced to 1,992 triangles. Default gray is an authored material, not measured color. |
 | OSIRIS | Eleven calibrated orange-filter photographs: August 2014, October–November 2015 and April 2016 | Grayscale composite with solar-distance, disk and approximate phase correction; not measured albedo. |
 | Albedo, spectral slope, absorption and ice | [Rosetta VIRTIS maps](https://pds-smallbodies.astro.umd.edu/holdings/ro-c-virtis-5-67p-maps-v1.0/) | Reflectivity, its change with wavelength, infrared absorption and modeled ice. Registration near the neck is uncertain. |
 | Surface places | [Thomas et al. (2018)](https://doi.org/10.1016/j.pss.2018.05.019) and the [released SHAP7 regional map, v1](https://doi.org/10.17632/2845znt54k.1) (CC BY 4.0) | 26 named regional labels, plus the existing Agilkia and Abydos Philae sites. |
@@ -18,11 +18,11 @@ The [investigation ledger](investigations.json) records source choices, failed t
 
 ## Processing
 
-Each dataset uses its own source shape: RMOC for the neutral model, SHAP7 for OSIRIS, regions and geology, and SPC SHAP5 for the four VIRTIS maps. meshoptimizer 1.2.0 simplifies each closed mesh separately to 1,000, 1,992 and 1,498 triangles, keeping both lobes, the neck and overhangs. The scene shows exactly one mesh bank at a time.
+Every dataset draws on one mesh: SHAP7, the model the OSIRIS photographs, the regions and the geology map are registered to, simplified by meshoptimizer 1.2.0 to 1,992 triangles that keep both lobes, the neck and overhangs (estimated displacement 46.5 m). Until 5 October 2026 the neutral model drew on the RMOC MTP019 shape at 1,000 triangles and the four VIRTIS maps on SPC SHAP5 at 1,498, and picking a dataset on another shape swapped the whole mesh. The RMOC model is still cited for the mission fact. Every dataset has the same atlas size: a smaller atlas is drawn enlarged on this mesh, and on an iPad that made a dataset switch 731 to 842 ms against 202 to 236 ms with every atlas at full size.
 
 The OSIRIS photographs are level 5 GEO products with level 4 quality companions. Every quality flag other than VALID and LOSSY is rejected before interpolation. Each texel samples the closest point on the full 125K SHAP7 mesh, with emission ≤80° and an independent visibility check. At every accepted point the photograph with the finest projected surface resolution is chosen; brightness never chooses an image. Radiance becomes `I/F` through the [OSIRIS calibration pipeline, §3.13](https://pdssbn.astro.umd.edu/holdings/ro-c-osinac-5-prl-67p-m06-geo-v1.0/document/calib/osiris_cal_pipeline_v06.pdf). [Fornasier et al. (2015)](https://doi.org/10.1051/0004-6361/201525901) supplies the Lommel–Seeliger disk law and the phase terms of [equations 6 and 8 and Table 4](https://arxiv.org/abs/1505.06888). Small residual gains, 0.881–1.044, level the overlaps. [OSIRIS provenance](source/reference/osiris-georeference.json) records the manuals, quality-bit interpretation and correction limits.
 
-VIRTIS maps and region cells transfer to their own source meshes; missing, rejected and ambiguous cells stay gridded. The geology archive's 843 paths and 2,265 feature centres are map symbols in 17 studied regions, mostly north.
+Region cells transfer from the SHAP7 source. Each VIRTIS texel reads its half-degree map cell along the direction from the body centre to the closest SHAP7 source point; SHAP5 decides which directions cross the surface more than once. Missing, rejected and ambiguous cells stay gridded: 32.1 to 33.5% of a VIRTIS atlas, against 27.8 to 29.6% when the maps drew on their own SHAP5 mesh. The geology archive's 843 paths and 2,265 feature centres are map symbols in 17 studied regions, mostly north.
 
 The released pole RA 69.4°, Dec +64.1° and rotation period 12.4041 hours are kept. The displayed rotation phase is arbitrary.
 
@@ -30,13 +30,11 @@ The released pole RA 69.4°, Dec +64.1° and rotation period 12.4041 hours are k
 
 Across eleven frames, the median distance from the original GEO coordinates to the released SHAP7 source is 0.31–0.34 m, against 3.17–8.80 m for the old RMOC source. These are model disagreements, not uncertainty estimates. The eleven photographs cover 90.81% of the SHAP7 display surface. The three newest images supply the selected photograph over 17.67% of it, with nadir pixel scales 0.62, 0.73 and 1.01 m.
 
-| Prepared mesh | Visible triangles | Atlas pixels | One decoded RGBA atlas |
+| Datasets | Visible triangles | Atlas pixels | One decoded RGBA atlas |
 | --- | ---: | --- | ---: |
-| RMOC neutral model | 1,000 | 1,957 × 2,092 | 16.38 MB |
-| SHAP7 OSIRIS, regions and geology | 1,992 | 3,921 × 4,158 | 65.21 MB |
-| SPC SHAP5 VIRTIS maps | 1,498 | 2,399 × 2,557 | 24.54 MB |
+| All eight | 1,992 | 3,921 × 4,158 | 65.21 MB |
 
-The full install is 52,416,035 bytes, including optional lighting assets; this is not a measured page download.
+The full install is 71,516,639 bytes, including optional lighting assets; this is not a measured page download.
 
 ### Registration
 

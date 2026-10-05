@@ -30,6 +30,14 @@ held differently while coasting:
   182 ms), and leaving by the slices still there (all at once 42 to 50 ms, 16 a frame eight frames of 34 to 93 ms,
   2026-10-04). A stack's opacity in the mix stops at 0.999: Safari painted every slice under a stack again each time its
   opacity left or reached 1 (54 ms for 88 slices with the camera still, nothing for 0.99 to 0.98).
+  A galaxy's or nebula's picture layers follow the same two rules (`image-layers/prepared-image-layer-runtime.ts`,
+  `universe/universe-catalog-banks.ts`): a bank of sheets stops its own opacity at 0.999 too. A bank of patches draws
+  at 1, since a group under 1 lost a wedge of the picture at the Homunculus's nearest view, and pays the repaint each
+  time it crosses 1 (180 to 208 ms for Cassiopeia A's 1,397 patches). A stack the camera turns to, or a bank shown
+  again, stays hidden until its
+  images are decoded off the page's thread, then shows whole: decoded inside the paint, NGC 2392's 57 layers made a
+  frame of 235 ms on a turn and 270 ms on a dataset switch, against 34 and 31 ms decoded first (iPad, 2026-10-05).
+  Joining such a stack a share a frame was measured and rejected: each joining frame painted the layers already shown.
 
 ## Why
 
