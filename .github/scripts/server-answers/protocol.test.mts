@@ -1,9 +1,3 @@
-  const catalogue = new URL('../../../dist/catalogue/index.json', import.meta.url);
-  const created: URL[] = [];
-  for (const directory of [new URL('../../../dist/', import.meta.url), new URL('../../../dist/catalogue/', import.meta.url)]) {
-    if (!existsSync(directory)) { mkdirSync(directory); created.push(directory); }
-  }
-  if (!existsSync(catalogue)) { writeFileSync(catalogue, '{"schema":"cssearth-catalogue-index@1","entries":[]}'); created.push(catalogue); }
 /** Check protocol expectations against their actual route, find handler and Worker fallback owners. */
 import assert from 'node:assert/strict';
 import test from 'node:test';
