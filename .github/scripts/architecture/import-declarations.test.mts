@@ -49,8 +49,9 @@ test('production resolution retains duplicates, assets, tests, generated stand-i
     'site/a.test.mts': "import './b.mts';", 'site/Empty.astro': '<p />',
   };
   try {
-    // Reuse an existing HEAD without creating a commit, and populate only this fixture's index.
-    execFileSync('git', ['clone', '--quiet', '--shared', '--no-checkout', process.cwd(), root]);
+    // A repository of its own with one empty commit: a shared clone of the checkout fails on CI's partial clones.
+    execFileSync('git', ['init', '--quiet'], { cwd: root });
+    execFileSync('git', ['-c', 'user.name=fixture', '-c', 'user.email=fixture@example.invalid', '-c', 'commit.gpgsign=false', 'commit', '--quiet', '--allow-empty', '-m', 'fixture'], { cwd: root });
     for (const [file, source] of Object.entries(files)) { mkdirSync(dirname(join(root, file)), { recursive: true }); writeFileSync(join(root, file), source); }
     execFileSync('git', ['add', '.'], { cwd: root });
     const result = await readImportDeclarations(root, { prefix: 'site/', checkAgainstScanner: true });
