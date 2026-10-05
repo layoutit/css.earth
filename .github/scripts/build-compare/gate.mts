@@ -7,7 +7,7 @@ import { hasApplicationRenames } from './source-paths.mts';
 export interface GateInput { declarationStatus: string; applicationRenames: boolean; labels: string[]; branch: string; dispatch?: boolean; }
 export function gateDecision(input: GateInput): { required: boolean; fresh: boolean; run: boolean; passes: boolean } {
   const fresh = /^[AM]\s/u.test(input.declarationStatus);
-  const required = input.applicationRenames || input.labels.includes('refactor') || input.branch.startsWith('untangle');
+  const required = input.applicationRenames || input.labels.includes('refactor');
   return { required, fresh, run: Boolean(input.dispatch) || fresh || required || input.labels.includes('compare-build'), passes: !required || fresh };
 }
 export function cancelBuild(action: string): boolean { return action === 'synchronize'; }

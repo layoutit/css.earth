@@ -74,6 +74,8 @@ test('tool trust defaults to merge-base and changes only through explicit opt-in
   assert.equal(toolSource(refactorDeclaration(undefined), []), 'merge-base');
   assert.equal(toolSource(refactorDeclaration(undefined), ['compare-build']), 'merge-base');
   assert.equal(toolSource(refactorDeclaration(undefined), ['tool-change']), 'head');
+  assert.equal(toolSource(refactorDeclaration(undefined), [], false), 'bootstrap', 'a merge base without tools: only the introducing pull request');
+  assert.equal(toolSource(refactorDeclaration({ mode: 'pure-move', moves: {}, tools: 'head' }), [], false), 'head');
   assert.equal(toolSource(refactorDeclaration({ mode: 'pure-move', moves: {}, tools: 'head' }), []), 'head');
 });
 

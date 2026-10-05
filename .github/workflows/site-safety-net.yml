@@ -154,7 +154,7 @@ jobs:
             const event=process.env.GITHUB_EVENT_PATH ? JSON.parse(readFileSync(process.env.GITHUB_EVENT_PATH,"utf8")) : {};
             const {execFileSync}=await import("node:child_process");
             const base=execFileSync("git",["merge-base","HEAD",process.env.GITHUB_BASE_REF ? `origin/${process.env.GITHUB_BASE_REF}` : "HEAD^"],{encoding:"utf8"}).trim();
-            const fresh=/^[AM]\s/m.test(execFileSync("git",["diff","--name-status",`${base}..HEAD","--",".github/site-refactor.json"],{encoding:"utf8"}));
+            const fresh=/^[AM]\s/m.test(execFileSync("git",["diff","--name-status",`${base}..HEAD`,"--",".github/site-refactor.json"],{encoding:"utf8"}));
             const declared=fresh && existsSync(".github/site-refactor.json") && JSON.parse(readFileSync(".github/site-refactor.json","utf8")).tools==="head";
             process.exit(declared || event.pull_request?.labels?.some(label=>label.name==="tool-change") ? 0 : 1);
           '; then

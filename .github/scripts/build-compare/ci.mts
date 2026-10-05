@@ -55,8 +55,11 @@ export function requireFreshDeclaration(status: string, current: unknown, prior:
   const normalized = (raw: unknown): string => { const declaration = refactorDeclaration(raw); return JSON.stringify([declaration.mode, Object.entries(declaration.moves).sort(([a], [b]) => a.localeCompare(b)), declaration.tools ?? 'merge-base', [...(declaration.objects ?? [])].sort(), declaration.outputs ?? [], declaration.layout ?? 'none']); };
   if (prior !== undefined && normalized(prior) === normalized(current)) throw new Error('Base already contains identical declaration');
 }
-export function toolSource(declaration: RefactorDeclaration, labels: string[]): 'head' | 'merge-base' {
-  return declaration.tools === 'head' || labels.includes('tool-change') ? 'head' : 'merge-base';
+/** Which copy of the comparison tools runs. The merge base's, unless the declaration or a label opts into the head's, or the merge base has no
+ * tools at all (only the pull request that introduces them: `bootstrap`, run loudly). */
+export function toolSource(declaration: RefactorDeclaration, labels: string[], baseHasTools = true): 'head' | 'merge-base' | 'bootstrap' {
+  if (declaration.tools === 'head' || labels.includes('tool-change')) return 'head';
+  return baseHasTools ? 'merge-base' : 'bootstrap';
 }
 export function preparationCommand(raw: unknown): string {
   if (raw === null || typeof raw !== 'object' || !('scripts' in raw)) throw new Error('Missing package scripts.');
@@ -122,9 +125,12 @@ async function main(): Promise<number> {
   const event = process.env.GITHUB_EVENT_PATH ? record(JSON.parse(await readFile(process.env.GITHUB_EVENT_PATH, 'utf8'))) : {};
   const labels = event.pull_request === undefined ? [] : record(event.pull_request).labels;
   const toolLabel = Array.isArray(labels) && labels.some(label => record(label).name === 'tool-change');
-  const headTools = toolSource(declaration, toolLabel ? ['tool-change'] : []) === 'head';
+  const baseHasTools = await readFile(join(base, '.github/scripts/build-compare/build.mts')).then(() => true, () => false);
+  const source = toolSource(declaration, toolLabel ? ['tool-change'] : [], baseHasTools);
+  const headTools = source !== 'merge-base';
   const toolRoot = headTools ? join(head, '.github/scripts/build-compare') : join(base, '.github/scripts/build-compare');
-  if (headTools) console.warn('::warning::TOOL TRUST OVERRIDE: running PR HEAD comparison tools');
+  if (source === 'head') console.warn('::warning::TOOL TRUST OVERRIDE: running PR HEAD comparison tools');
+  if (source === 'bootstrap') console.warn('::warning::Bootstrap: the merge base has no comparison tools; this pull request introduces them, so its own tools run');
   try { await readFile(join(toolRoot, 'build.mts')); } catch { throw new Error('Merge-base comparison tools are absent; bootstrap requires tool-change or tools: head'); }
   for (const checkout of [base, head]) {
     const destination = join(checkout, '.github/scripts/build-compare');

@@ -142,7 +142,7 @@ PR adds or changes it against the merge-base; a stale declaration means report m
 ```
 
 The always-running **Refactor declaration gate** requires a fresh declaration
-for application renames, the `refactor` label or a branch starting with `untangle`.
+for application renames or the `refactor` label.
 It uses merge-base tooling, needs no dependencies or builds, and remains a real
 check when the longer build job is skipped. Selection tooling also comes from
 the merge-base. Bootstrap requires the owner to first install this workflow and
