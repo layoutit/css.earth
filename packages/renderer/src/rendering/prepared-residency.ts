@@ -244,12 +244,17 @@ export function createPreparedResidency({
     request(plan: PreparedResourceDemand, { stabilize = false }: { stabilize?: boolean } = {}) {
       if (destroyed) throw new Error("Prepared residency is destroyed.");
       const required = requireKeys(plan.required), prewarm = [...requireKeys(plan.prewarm ?? [])];
-      requireCapacity(protectedKeys(required));
       // Resident before this demand and drawn by nothing: a dataset or level shown earlier, or warmed ahead. Its pixels
       // may be gone, and the demand is ready only once they are back. The Moon returning to its surface dataset decoded
       // four pages in the paint of the switch: 117 of 219 main-thread samples of its 207 to 230 ms iPad frames
       // (2026-10-04).
       const idle = [...required].filter(key => ready(key) && !committed.has(key));
+      // A warm pool handed its image to retained CSS and kept no handle (prepared-image-store.ts), so nothing here can
+      // decode it again: it is acquired again, from the browser's cache, and is ready once its pixels are back. Jupiter
+      // returning to a dataset whose 4160 px map it had warmed or shown took one 137 to 180 ms frame on the iPad;
+      // acquired again, 67 to 76 ms, and 17 to 29 ms on a first visit (2026-10-05).
+      const resident = idle.filter(key => !warmed.delete(key));
+      requireCapacity(protectedKeys(required));
       retirePending();
       let resolveState!: TicketState["resolve"];
       const promise = new Promise<PreparedResidencyTicket | null>(resolve => { resolveState = resolve; });
@@ -268,7 +273,7 @@ export function createPreparedResidency({
       awaitKeys(required).then(async values => {
         if (!state.retired && pending === state && !destroyed && !values.some(value => value === null)) {
           // A failed second decode leaves the image to the paint, as before; it is reported, not fatal.
-          await decodeAgain(idle.filter(ready)).catch(onWarmError);
+          await decodeAgain(resident.filter(ready)).catch(onWarmError);
         }
         return values;
       }).then(values => {
