@@ -217,13 +217,13 @@ export function createRetainedCubicSkyOrbit({
   // turn about that pole when the plan's drag model is "pole-held-tumble" (Earth's recipe) and the mesh is drawn; other
   // bodies and the same body as a billboard or dot keep the screen axes.
   const poleHeld = cameraPlan.drag?.model === 'pole-held-tumble';
-  const bodyPole = (): { pole?: Vector3 } => {
+  const bodyPole = (): { pole?: Vector3; meridian?: Vector3 } => {
     if (!poleHeld || lodStage() !== 'geometry') return {};
     const system = sceneElement.querySelector<HTMLElement>(':scope > .polycss-mesh');
     if (!system) return {};
     const m = multiplyPreparedMatrix4(readPreparedMatrix4(camera.scene()), readPreparedTransform(system.style.transform || 'none'));
-    const length = Math.hypot(m[8]!, m[9]!, m[10]!);
-    return length > 0 ? { pole: [m[8]! / length, m[9]! / length, m[10]! / length] } : {};
+    const length = Math.hypot(m[8]!, m[9]!, m[10]!), across = Math.hypot(m[0]!, m[1]!, m[2]!);
+    return length > 0 && across > 0 ? { pole: [m[8]! / length, m[9]! / length, m[10]! / length], meridian: [m[0]! / across, m[1]! / across, m[2]! / across] } : {};
   };
   const controls = createObjectInteractionControls({
     inputSurface,

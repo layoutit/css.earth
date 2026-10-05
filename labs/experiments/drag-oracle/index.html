@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Drag oracle: CesiumJS against cssEarth</title>
+<!--virtual-clock-->
+<script>window.CESIUM_BASE_URL = 'https://cdn.jsdelivr.net/npm/cesium@1.145.0/Build/Cesium/';</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cesium@1.145.0/Build/Cesium/Widgets/widgets.css">
+<script src="https://cdn.jsdelivr.net/npm/cesium@1.145.0/Build/Cesium/Cesium.js"></script>
+<style>
+  :root { --cesium: #3dd6ff; --ours: #ffa02e; --ink: #e8e8ea; --dim: #9a9aa3; --bar: #17171b; --line: #2c2c33; }
+  html, body { margin: 0; height: 100%; background: #0b0b0d; color: var(--ink); font: 13px/1.35 system-ui, sans-serif; }
+  body { display: flex; flex-direction: column; }
+  header, #strokes { display: flex; flex-wrap: wrap; gap: 5px 14px; align-items: center; padding: 7px 12px; background: var(--bar); border-bottom: 1px solid var(--line); }
+  #strokes { gap: 4px; }
+  header label, #strokes span { display: inline-flex; gap: 5px; align-items: center; color: var(--dim); white-space: nowrap; }
+  select, button { font: inherit; color: var(--ink); background: #24242b; border: 1px solid var(--line); border-radius: 5px; padding: 3px 8px; }
+  button:hover { background: #30303a; }
+  main { flex: 1; min-height: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 2px; background: var(--line); }
+  .panel { position: relative; min-width: 0; min-height: 0; background: #000; overflow: hidden; }
+  .panel .globe, .panel canvas.over, .panel .input { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .panel .globe, .panel canvas.over { pointer-events: none; }
+  .panel .input { cursor: grab; touch-action: none; }
+  .panel .input.pressed { cursor: grabbing; }
+  .panel h2 { position: absolute; left: 10px; top: 8px; margin: 0; font-size: 13px; font-weight: 600; pointer-events: none; text-shadow: 0 1px 3px #000; }
+  .panel h2 small { display: block; font-weight: 400; color: var(--dim); }
+  .panel .miss { position: absolute; left: 10px; bottom: 8px; pointer-events: none; text-shadow: 0 1px 3px #000; font-variant-numeric: tabular-nums; }
+  #left h2 { color: var(--cesium); } #right h2 { color: var(--ours); }
+  .read { margin-left: auto; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .read b { font-size: 15px; }
+  .cesium-widget-credits { display: none !important; }
+  footer { padding: 5px 12px; background: var(--bar); border-top: 1px solid var(--line); color: var(--dim); font-size: 12px; }
+</style></head>
+<body>
+<header>
+  <label><input type="checkbox" id="overlay" checked> draw the other side's grid on top</label>
+  <label><input type="checkbox" id="inertia" checked> inertia</label>
+  <label><input type="checkbox" id="together" checked> start each drag together</label>
+  <label>distance <input type="range" id="distance" min="1.2" max="16" step="0.01" value="7.992"> <span id="distanceText"></span></label>
+  <label>start from <select id="view"><option value="opening">Earth's opening view</option><option value="polar">above the pole (17° off)</option></select></label>
+  <button id="reset">Reset view</button>
+  <span class="read">apart <b id="apart">0.0°</b> · peak <span id="peak">0.0°</span> · longitude <span id="dlon">0.0°</span> · pole <span id="dpole">0.0°</span></span>
+</header>
+<div id="strokes"><span>Replay a stroke on both:</span></div>
+<main>
+  <section class="panel" id="left"><div class="globe"></div><canvas class="over"></canvas><div class="input"></div>
+    <h2>CesiumJS 1.145<small>its own camera controller, north up</small></h2><div class="miss"></div></section>
+  <section class="panel" id="right"><div class="globe"></div><canvas class="over"></canvas><div class="input"></div>
+    <h2>cssEarth<small>this checkout's drag controller, drawn by Cesium, pole leaning as in the app</small></h2><div class="miss"></div></section>
+</main>
+<footer>Drag either globe: both get the same pointer samples. Ring = where the ground you grabbed is now. Blue grid = Cesium, orange grid = cssEarth. Wheel changes the distance.</footer>
+<script src="/page.js" type="module"></script>
+</body></html>
