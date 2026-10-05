@@ -3,6 +3,18 @@
   "assets": [
     {
       "location": "public",
+      "filename": "ngc-2392-dataset-infrared.webp",
+      "bytes": 5788,
+      "sha256": "61aa1d2078c5920bef4710a998b46165047ba440c4158365dd9f50513020df6d"
+    },
+    {
+      "location": "public",
+      "filename": "ngc-2392-dataset-mid-infrared.webp",
+      "bytes": 4742,
+      "sha256": "04ac420f76521e2258b1cc7b97a563a444f99fc68ff74ae123758cd04f6699be"
+    },
+    {
+      "location": "public",
       "filename": "ngc-2392-dataset-optical.webp",
       "bytes": 5942,
       "sha256": "ec75bd50630d4ce7c4a0db9b58910245bed4325899be04a90a0193d9bf6408c2"
@@ -16,20 +28,26 @@
     {
       "location": "prepared",
       "filename": "controls.json",
-      "bytes": 466,
-      "sha256": "e6e7a1da0a3cf61ecdec9210bf0bff7a662bd3b7ef4986867827b3f87e1d39f1"
+      "bytes": 878,
+      "sha256": "f0280566ba0f548ab5ac7d0c7e00610e6d6fbb7d83d4f09da615bcb71f08055f"
     },
     {
       "location": "prepared",
       "filename": "datasets.json",
-      "bytes": 559,
-      "sha256": "260c9931982fb1a8ec063d8cf8e277903c619e1e0943638748fd40a348c1be73"
+      "bytes": 1307,
+      "sha256": "d3b35676dfe15277c89640ef1933ed71ead9dd3a5e9472e2b7b4b66d2b7fb662"
+    },
+    {
+      "location": "prepared",
+      "filename": "members.json",
+      "bytes": 593,
+      "sha256": "075f74a8b61a0ac6d22cc8e0a4f3e7f83c02fb362f638354deb4989587aed391"
     },
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 4662,
-      "sha256": "298a2e75a82fd2dcd89307895066ad7dc7e6b713ec9957fd8b776d3f62459bc5"
+      "bytes": 5228,
+      "sha256": "d81bc072607f76252da44f01a0002aab089bcfad136fa465e04b5488f5082198"
     },
     {
       "location": "prepared",
@@ -40,8 +58,8 @@
     {
       "location": "prepared",
       "filename": "text.json",
-      "bytes": 2749,
-      "sha256": "950a729f42f252a903a0b56f68009775be5c0755f3a2b8647ef9fed4149d2d0f"
+      "bytes": 5244,
+      "sha256": "0cf01607f9eb6f379f6204aae8017d409c3ae172534ca2a7a16867ab9eed2c36"
     },
     {
       "location": "prepared",

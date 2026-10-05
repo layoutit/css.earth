@@ -50,6 +50,15 @@ The default is the thirteen S0 capability representatives plus `/earth/` and `/`
 
 `measure` writes `measures.json`, with sorted object keys and stable route ordering. Counts, ordered sequences and exact declarations are all compared independently. `compare` returns JSON with `pass`, `findings`, `addedRoutes` and `removedRoutes`. Findings carry `increase`, `order`, `declaration` or `removed-route` kinds; Markdown summaries report failure counts per kind and can go directly into a job summary. Exit 0 means equal or improved, exit 1 means a regression or coverage change. Invalid inputs also exit unsuccessfully and are not successful comparisons.
 
+## In the comparison lane
+
+The [build comparison lane](build-comparison.md) runs the guard on the two builds it already made, after the build comparison and before the server answers (`.github/scripts/build-compare/performance-stage.mts`): it measures `<out>/base` and `<out>/head` (their `dist/` and `metadata/`), compares them, writes `performance.json` and the Markdown comparison to the job summary, and uploads both with the lane artifacts. The tools come from the merge base, like the other lane tools, except for the pull request that introduces them.
+
+- A declared refactor (`.github/site-refactor.json`, every plan-7 pull request) is fully strict: any increase fails the lane, and a stage that cannot run fails closed, since a guard that silently skips guards nothing.
+- An ordinary feature pull request only reports: the increases appear in the job summary and the lane does not fail, because a new feature legitimately adds bytes.
+- The label `performance-increase-approved` applies to a declared refactor only and only the owner may set it: the lane still reports every increase and then passes. Nothing else disables the rule.
+- A decrease is an improvement and needs nothing: the next pull request compares against the merged result.
+
 ## Existing contracts and the build boundary
 
 All [performance notes](performance/README.md) were reviewed for this boundary:

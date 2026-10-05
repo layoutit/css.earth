@@ -1,0 +1,42 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hd-59088",
+  "card": {
+    "text": "HD 59088 is the central star of the planetary nebula NGC 2392, about 1,795 parsecs away.",
+    "sources": [
+      {
+        "catalogueId": "chornay-walton-2021-pn-central-stars",
+        "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/656/A110",
+        "label": "Chornay & Walton (2021), A&A 656, A110; CDS J/A+A/656/A110",
+        "checked": "2026-10-05",
+        "locator": "Table A.1, PN G197.8+17.3: the nebula's central star in Gaia EDR3, distance 1,795 pc (1,666 to 1,942)"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Spectra give it about 40,000 K and 1.5 solar radii. It circles an unseen companion, probably a hot white dwarf, every 1.9 days.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-1204-1200",
+        "url": "https://arxiv.org/abs/1204.1200",
+        "label": "Kaschinski, Pauldrach & Hoffmann (2012), A&A 542, A45",
+        "checked": "2026-10-05",
+        "locator": "Table 2, NGC 2392, the model of Pauldrach et al. (2004): Teff 40 000 K, R 1.5 solar radii, log g 3.7"
+      },
+      {
+        "catalogueId": "arxiv-1903-07264",
+        "url": "https://arxiv.org/abs/1903.07264",
+        "label": "Miszalski et al. (2019), arXiv:1903.07264",
+        "checked": "2026-10-05",
+        "locator": "Abstract and Table 2: a single-lined spectroscopic binary with an orbital period of 1.902208 d; the companion is probably a hot white dwarf"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its Gaia spectrum",
+      "summary": "The color of the star's light, dimmed toward the edge by a model atmosphere."
+    }
+  }
+}

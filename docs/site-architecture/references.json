@@ -136,6 +136,26 @@
       "scope": "live"
     },
     {
+      "file": ".github/scripts/performance/breakages/apply.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": ".github/scripts/performance/breakages/chunk-split.json",
+      "classification": "generator/producer literal",
+      "scope": "live"
+    },
+    {
+      "file": ".github/scripts/performance/breakages/extra-first-view-request.json",
+      "classification": "generator/producer literal",
+      "scope": "live"
+    },
+    {
+      "file": ".github/scripts/performance/breakages/lazy-to-static.json",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
       "file": ".github/scripts/tsconfig.tests.json",
       "classification": "tsconfig/eslint/package.json",
       "scope": "live"
@@ -183,6 +203,11 @@
     {
       "file": "docs/architecture/exploration-catalog.md",
       "classification": "docs link",
+      "scope": "live"
+    },
+    {
+      "file": "docs/coverage.md",
+      "classification": "docs code-span",
       "scope": "live"
     },
     {
@@ -2143,11 +2168,6 @@
     {
       "file": "site/test/scene-session.test.mts",
       "classification": "source import",
-      "scope": "live"
-    },
-    {
-      "file": "site/test/scientific-chart-order.test.mts",
-      "classification": "generator/producer literal",
       "scope": "live"
     },
     {

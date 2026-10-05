@@ -73,7 +73,6 @@
       "site/runtime-policy.mts",
       "site/satellite-selection.mts",
       "site/satellite-systems.mts",
-      "site/scientific-chart-order.mts",
       "site/selection-presentation.mts",
       "site/seo-trail.mts",
       "site/seo.mts",
@@ -112,7 +111,7 @@
   },
   "aggregate": {
     "lines": 99.1,
-    "branches": 91.8,
+    "branches": 91.9,
     "functions": 97
   },
   "files": {
@@ -466,11 +465,6 @@
       "branches": 93.7,
       "functions": 100
     },
-    "site/scientific-chart-order.mts": {
-      "lines": 100,
-      "branches": 75,
-      "functions": 100
-    },
     "site/selection-presentation.mts": {
       "lines": 100,
       "branches": 100,
@@ -643,5 +637,7 @@
     }
   },
   "moves": {},
-  "retired": {}
+  "retired": {
+    "site/scientific-chart-order.mts": "deleted"
+  }
 }

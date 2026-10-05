@@ -253,7 +253,7 @@ and ratcheted without a separate target.
 After the L5 characterization tests (revision `f6b4c85cab`, Node 22.23.2, three identical node collections unioned with the browser and
 preview-server collections of the baseline; the new tests change only Node hits), the union is
 **3777/3811 lines (99.11%)**, **2306/2510 branches (91.87%)** and **1042/1074 functions (97.02%)**. The floors are
-99.1/91.8/97.0 and every per-file floor was raised to the minimum of the three runs. Both targets are met in aggregate.
+99.1/91.9/97.0 (after the L6 deletion of `site/scientific-chart-order.mts`, which nothing imported) and every per-file floor was raised to the minimum of the three runs. Both targets are met in aggregate.
 One eligible file is below 85% lines, `site/dot-catalogue-data.mts` (0 of 11): it is a Vite-only `import.meta.glob` module that
 plain Node cannot evaluate, so its behavior is pinned by a test that runs it in a child process under a hook and no hit is
 recorded. Three files are never loaded. The largest remaining branch gaps are `prepared-world-navigation` 48, `dataset-response` 14,

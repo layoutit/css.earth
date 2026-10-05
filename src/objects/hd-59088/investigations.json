@@ -1,0 +1,44 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "hd-59088",
+  "entries": [
+    {
+      "id": "placement",
+      "subject": "Placement",
+      "status": "included",
+      "finding": "Gaia DR3 source 865037169677723904: position at J2016.0. Distance: Chornay & Walton (2021), A&A 656, A110; CDS J/A+A/656/A110, Table A.1, PN G197.8+17.3: distance 1,795 pc (1,666 to 1,942) from the Gaia EDR3 parallax of this star, the distance its nebula's page stands at (https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/656/A110): 1795.0308872481207 pc; Gaia DR3 parallax 0.5451 +/- 0.0467 mas (same row, RUWE 1.20), 11.7 standard errors, is not used. Proper motion: Gaia DR3 (same row): -1.613, 0.789 mas/yr. Radial velocity from SIMBAD's radial velocity for Gaia DR3 865037169677723904 (quality E), from 1953GCRV..C......0W; Gaia DR3 measures none.",
+      "evidence": [
+        "https://gea.esac.esa.int/archive/",
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/656/A110",
+        "https://ui.adsabs.harvard.edu/abs/1953GCRV..C......0W/abstract"
+      ]
+    },
+    {
+      "id": "radius-mass-and-temperature",
+      "subject": "Radius, mass and temperature",
+      "status": "included",
+      "finding": "Radius 1.5 solar radii from Kaschinski, Pauldrach & Hoffmann (2012), A&A 542, A45, Table 2: NGC 2392, the hydrodynamically consistent model of Pauldrach et al. (2004) (https://arxiv.org/abs/1204.1200). No mass is measured, so GM is 0, the records' unpublished value. Temperature 40000 K from Kaschinski, Pauldrach & Hoffmann (2012), A&A 542, A45, Table 2: NGC 2392, the hydrodynamically consistent model of Pauldrach et al. (2004).",
+      "evidence": [
+        "https://arxiv.org/abs/1204.1200"
+      ]
+    },
+    {
+      "id": "color",
+      "subject": "Color",
+      "status": "included",
+      "finding": "Gaia DR3 XP spectrum, source 865037169677723904, through the CIE 1931 2-degree observer: #a6bdff. Routes tried in order: stis-ngsl: HD 59088 is not in the library; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.",
+      "evidence": [
+        "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=865037169677723904&FORMAT=csv&DATA_STRUCTURE=RAW&RELEASE=Gaia+DR3"
+      ]
+    },
+    {
+      "id": "limb-darkening",
+      "subject": "Limb darkening",
+      "status": "included",
+      "finding": "The disc is dimmed toward the limb by the quadratic law Reeve & Howarth (2016), MNRAS 456, 1294 compute from non-LTE TLUSTY model atmospheres for the Bessell V band at 40,000 K and log g 3.7 (u1 0.089, u2 0.327): a model, because no fit of this star's limb is used.",
+      "evidence": [
+        "https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=J/MNRAS/456/1294"
+      ]
+    }
+  ]
+}

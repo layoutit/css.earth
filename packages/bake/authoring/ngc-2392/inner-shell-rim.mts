@@ -1,4 +1,4 @@
-// Entry script: node packages/bake/authoring/ngc-2392/inner-shell-rim.mts
+// Entry script: node packages/bake/authoring/ngc-2392/inner-shell-rim.mts [bank]
 /**
  * The outline of NGC 2392's inner shell on the sky, measured on the bank's picture. No paper read prints the outline
  * with its direction, and the wall the bake lays the shell's light on must hold all of it.
@@ -7,7 +7,8 @@
  * peak, has fallen half way to the darkest level of the gap beyond it. The outline is the smallest ellipse centred on
  * the star that holds every rim point; the recipe's `geometry.shape.inner` rounds its semi-axes up to 0.1 arcsec.
  *
- * Input: `source/source.jpg` and the recipe's registration (`source/recipe.json`). Output: printed.
+ * Input: `source/source.jpg` and the recipe's registration (`source/recipe.json`) of the bank named, the Hubble
+ * photograph's when none is: the nebula's other pictures are measured the same way. Output: printed.
  */
 import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 import sharp from 'sharp';
@@ -20,7 +21,9 @@ const PEAK_FROM = 5, PEAK_TO = 12, GAP_TO = 15, STEP = 0.05, EVERY_DEG = 5;
 /** The star is looked for this far from where the registration puts it, in arcseconds. */
 const STAR_SEARCH = 0.5;
 
-const sourceDirectory = resolve(checkoutProjectRoot(import.meta.url), 'src/objects/ngc-2392-layers/source');
+const bank = process.argv[2] ?? 'ngc-2392-layers';
+if (!/^ngc-2392(?:-[a-z0-9]+)*-layers$/u.test(bank)) throw new TypeError(`${bank} is not a layer bank of NGC 2392.`);
+const sourceDirectory = resolve(checkoutProjectRoot(import.meta.url), 'src/objects', bank, 'source');
 const recipe = parseImageLayerRecipe(JSON.parse(await readFile(resolve(sourceDirectory, 'recipe.json'), 'utf8')) as unknown);
 const { data, info } = await sharp(resolve(sourceDirectory, recipe.source.path)).removeAlpha().raw().toBuffer({ resolveWithObject: true });
 const width = info.width, height = info.height, rad = Math.PI / 180;

@@ -357,3 +357,5 @@ changes without explaining missing files.
 | `bundle-netlify-functions.mts` | Raw order determines entry list; deployment command excluded from comparison. |
 | `bundle-cloudflare-worker.mts` | Object ids are sorted; scene/name iteration uses raw order for independent copies; excluded deployment command. |
 | `object-page-data.mts` | Reads explicit object paths; no directory/glob discovery. Reaches `ObjectPage.astro` directly. |
+
+The same lane also runs the [performance guard](performance-guard.md#in-the-comparison-lane) on these two builds, between the build comparison and the server answers.

@@ -171,12 +171,21 @@ jobs:
             rm -rf .github/scripts/build-compare
             cp -R "$comparison_tools" .github/scripts/build-compare
           fi
+          # A runner that starves for memory or disk is lost without a trace (run 37292426823 ended that way): print its
+          # resources every minute so the log of a lost run shows the last state.
+          ( while sleep 60; do echo "[resources] $(date +%T) $(free -m | awk 'NR==2{print "mem_used_mb="$3" mem_avail_mb="$7}') $(df -m / | awk 'NR==2{print "disk_avail_mb="$4}') load=$(cut -d' ' -f1 /proc/loadavg) $(ps -eo rss,comm --sort=-rss | awk 'NR==2{print "top="$2":"int($1/1024)"mb"}')"; done ) &
+          sampler=$!
+          trap 'kill "$sampler" 2>/dev/null || true' EXIT
           node .github/scripts/build-compare/ci.mts --head . --base "$GITHUB_WORKSPACE" --out "$GITHUB_WORKSPACE/output/build-comparison"
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         if: ${{ !cancelled() }}
         with:
           name: site-build-comparison
           path: |
+            output/build-comparison/performance.json
+            output/build-comparison/performance/*.md
+            output/build-comparison/performance/*.log
+            output/build-comparison/performance/comparison.json
             output/build-comparison/server-answers.json
             output/build-comparison/server-answers/*.log
             output/build-comparison/server-answers/artifacts/

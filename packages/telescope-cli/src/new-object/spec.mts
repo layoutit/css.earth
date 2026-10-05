@@ -34,7 +34,8 @@
  * records' unmeasured 0), and an astronomy record only, drawn in its star's system, with no package of its own.
  *
  * `parent` is the object the star is inside, by the object tree (packages/objects/src/registry/object-tree.ts): its galaxy's id,
- * `milky-way` for a star Gaia or Hipparcos places. A new star without one is refused; a package that exists keeps the parent it has,
+ * `milky-way` for a star Gaia or Hipparcos places, or the nebula it is the central star of (the one object allowed to stand at
+ * the star's own place: identity.mts duplicateStar). A new star without one is refused; a package that exists keeps the parent it has,
  * because the systems step moves a star with planets into its own system. `boundTo` is { "host": id, "source": sentence } for a star
  * measured to be bound to another with no measured orbit (a wide companion, companions.mts): the astronomy record carries the bond
  * and the star is inside its host's system, whatever `parent` says.

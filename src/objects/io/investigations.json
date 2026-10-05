@@ -110,13 +110,14 @@
       "id": "limb-law",
       "subject": "Photometric law for the lighting overlays",
       "status": "included",
-      "finding": "Lunar-Lambert law of the USGS global mosaics: their process description says a limb-darkening correction with coefficient 0.7 was adequate for all three colors (ISIS LunarLambert, the library's form), and the pamphlet of the geologic map (USGS SIM 3168) gives the phase of those color frames as 3.5 to 4.5 degrees. The lighting puts that correction back, relative to the flood-lit disc centre. Neither document states an emission range; the limit 87.0 degrees is derived here from the outermost pixel of the finest full-disc frame at that phase (Galileo SSI C0359986578, orbit G2, 4.943 km per pixel) and is second class. The pamphlet says pixels too near the limb were removed by hand. No phase function is printed, so frames with Shadows on carry no phase term. The disc-resolved studies (Simonelli and Veverka 1986 from Voyager; Simonelli, Dodd and Veverka 2001, Hapke fits to Galileo SSI) could not be opened, and Io's photometry varies strongly between regions.",
+      "finding": "Lunar-Lambert law of the USGS global mosaics: their process description says a limb-darkening correction with coefficient 0.7 was adequate for all three colors (ISIS LunarLambert, the library's form), and the pamphlet of the geologic map (USGS SIM 3168) gives the phase of those color frames as 3.5 to 4.5 degrees. The lighting puts that correction back, relative to the flood-lit disc centre. Neither document states an emission range; the limit 87.0 degrees is derived here from the outermost pixel of the finest full-disc frame at that phase (Galileo SSI C0359986578, orbit G2, 4.943 km per pixel) and is second class. The pamphlet says pixels too near the limb were removed by hand. No phase function is printed, so frames with Shadows on carry no phase term. The disc-resolved studies (Simonelli and Veverka 1986 from Voyager; Simonelli, Dodd and Veverka 2001, Hapke fits to Galileo SSI) could not be opened, and Io's photometry varies strongly between regions. McEwen and Soderblom (1983), an open summary in NASA TM-86246 (page 261), solved the limb darkening from pairs of Voyager images of the same ground, 19 pairs on Io at 3 to 15 degrees phase, and print a Minnaert exponent per wavelength: 0.55 + 0.005a at 0.59 micrometres, 0.53 + 0.005a at 0.54, 0.52 + 0.005a at 0.48, 0.49 + 0.006a at 0.41 and 0.44 + 0.009a at 0.35, with a the phase in degrees. It is a per-color alternative, not adopted: the lighting puts back the one correction the mosaic itself received.",
       "evidence": [
         "https://astrogeology.usgs.gov/search/map/io_voyager_galileo_ssi_global_mosaic_1km",
         "https://pubs.usgs.gov/sim/3168/sim3168_pamphlet.pdf",
         "https://opus.pds-rings.seti.org/opus/api/metadata/go-ssi-c0359986578.json",
         "https://ntrs.nasa.gov/citations/19860063116",
-        "https://doi.org/10.1029/2000JE001350"
+        "https://doi.org/10.1029/2000JE001350",
+        "https://ntrs.nasa.gov/citations/19840015363"
       ]
     },
     {
