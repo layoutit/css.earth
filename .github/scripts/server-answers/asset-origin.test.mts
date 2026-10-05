@@ -54,7 +54,7 @@ test('real child host resolves both origins from inventory and preserves static 
       const full = await ask({ 'accept-encoding': 'gzip' });
       assert.equal(full.status, 200);
       assert.equal(Buffer.from(String(full.bytes), 'base64').toString(), '{"offline":true}');
-      const headers = new Headers(Array.isArray(full.headers) ? full.headers.map(raw => { if (!Array.isArray(raw) || typeof raw[0] !== 'string' || typeof raw[1] !== 'string') throw new Error('Invalid headers'); return [raw[0], raw[1]]; }) : []);
+      const headers = new Headers(Array.isArray(full.headers) ? full.headers.map(raw => { if (!Array.isArray(raw) || typeof raw[0] !== 'string' || typeof raw[1] !== 'string') throw new Error('Invalid headers'); return [raw[0], raw[1]] as [string, string]; }) : []);
       assert.equal(headers.get('content-encoding'), 'gzip');
       assert.ok(headers.get('etag'));
       assert.equal((await ask({ 'if-none-match': headers.get('etag')! })).status, 304);
