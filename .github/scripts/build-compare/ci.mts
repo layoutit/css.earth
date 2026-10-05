@@ -7,6 +7,9 @@ import { promisify } from 'node:util';
 import { serverVerdict } from './server-policy.mts';
 import { performanceStage, performanceSummary, performanceVerdict } from './performance-stage.mts';
 import { sourceDiff } from './source-diff.mts';
+import { useCache, unpackCache } from './base-cache.mts';
+import { toolchainMatches } from './build.mts';
+import { waitForFile } from './wait-file.mts';
 import { parseMoves, record, strings } from './records.mts';
 
 const execute = promisify(execFile);
@@ -58,10 +61,10 @@ export function requireFreshDeclaration(status: string, current: unknown, prior:
   const normalized = (raw: unknown): string => { const declaration = refactorDeclaration(raw); return JSON.stringify([declaration.mode, Object.entries(declaration.moves).sort(([a], [b]) => a.localeCompare(b)), declaration.tools ?? 'merge-base', [...(declaration.objects ?? [])].sort(), declaration.outputs ?? [], declaration.layout ?? 'none', declaration.change ?? '']); };
   if (prior !== undefined && normalized(prior) === normalized(current)) throw new Error('Base already contains identical declaration');
 }
-/** Which copy of the comparison tools runs. The merge base's, unless the declaration or a label opts into the head's, or the merge base has no
+/** Which copy of the comparison tools runs. The merge base's, unless tool-change opts into the head's, or the merge base has no
  * tools at all (only the pull request that introduces them: `bootstrap`, run loudly). */
-export function toolSource(declaration: RefactorDeclaration, labels: string[], baseHasTools = true): 'head' | 'merge-base' | 'bootstrap' {
-  if (declaration.tools === 'head' || labels.includes('tool-change')) return 'head';
+export function toolSource(_declaration: RefactorDeclaration, labels: string[], baseHasTools = true): 'head' | 'merge-base' | 'bootstrap' {
+  if (labels.includes('tool-change')) return 'head';
   return baseHasTools ? 'merge-base' : 'bootstrap';
 }
 export function preparationCommand(raw: unknown): string {
@@ -96,6 +99,10 @@ export function jobSummary(raw: unknown, timings: { stage: string; seconds: numb
   const closure = record(report.closure ?? {});
   return `## Built-site comparison\n\nMode: ${mode}; tools: ${tools}.\n\nEnvironment totals: ${JSON.stringify(diagnostics.environmentTotals ?? {})}.\n\nEmitted HTML/JS/CSS byte equality: ${JSON.stringify(diagnostics.emittedBytesEqual ?? {})}.\n\nClosure size: ${Object.entries(closure).map(([key, value]) => `${key}=${Array.isArray(value) ? value.length : record(value).count}`).join(', ')}.\n\n| Dimension | Differences |\n| --- | ---: |\n${rows.join('\n')}\n\n| Environment | Differences |\n| --- | ---: |\n${environmentRows.join('\n')}\n\n| Stage | Seconds | Exit |\n| --- | ---: | ---: |\n${timings.map(time => `| ${time.stage} | ${time.seconds.toFixed(1)} | ${time.exitCode} |`).join('\n')}\n`;
 }
+export function comparisonMarkdown(raw: unknown): string {
+  const report = record(raw);
+  return `# Built-site comparison\n\nMode: ${String(report.mode)}; exit: ${String(report.exitCode)}.\n\n` + '```json\n' + JSON.stringify(report, null, 2) + '\n```\n';
+}
 async function command(program: string, args: string[], cwd: string): Promise<number> {
   return new Promise((accept, reject) => {
     const child = spawn(program, args, { cwd, stdio: 'inherit', env: { ...process.env, TZ: 'UTC', LC_ALL: 'C',
@@ -108,7 +115,7 @@ async function main(): Promise<number> {
   const args = process.argv.slice(2), options = new Map<string, string>();
   for (let index = 0; index < args.length; index += 2) {
     const key = args[index], value = args[index + 1];
-    if (!key || !['--head', '--base', '--out'].includes(key) || !value || value.startsWith('--') || options.has(key))
+    if (!key || !['--head', '--base', '--out', '--base-cache', '--cache-ready', '--no-base-cache'].includes(key) || !value || value.startsWith('--') || options.has(key))
       throw new Error('Usage: ci.mts --head <checkout> --base <isolated checkout> --out <directory>');
     options.set(key, value);
   }
@@ -125,7 +132,7 @@ async function main(): Promise<number> {
     console.log(`[build-compare] ${name}: ${timings.at(-1)?.seconds.toFixed(1)}s, exit ${exitCode}`);
     return exitCode;
   };
-  const baseRef = process.env.GITHUB_BASE_REF ? `origin/${process.env.GITHUB_BASE_REF}` : 'HEAD^';
+  const baseRef = process.env.GITHUB_BASE_REF ? `origin/${process.env.GITHUB_BASE_REF}` : 'origin/main';
   const { stdout } = await execute('git', ['merge-base', 'HEAD', baseRef], { cwd: head });
   const revision = stdout.trim();
   if (!/^[a-f0-9]{40}$/u.test(revision)) throw new Error('Git did not return a merge-base commit.');
@@ -149,7 +156,7 @@ async function main(): Promise<number> {
   const toolRoot = headTools ? join(head, '.github/scripts/build-compare') : join(base, '.github/scripts/build-compare');
   if (source === 'head') console.warn('::warning::TOOL TRUST OVERRIDE: running PR HEAD comparison tools');
   if (source === 'bootstrap') console.warn('::warning::Bootstrap: the merge base has no comparison tools; this pull request introduces them, so its own tools run');
-  try { await readFile(join(toolRoot, 'build.mts')); } catch { throw new Error('Merge-base comparison tools are absent; bootstrap requires tool-change or tools: head'); }
+  try { await readFile(join(toolRoot, 'build.mts')); } catch { throw new Error('Merge-base comparison tools are absent; bootstrap requires the introducing PR to provide them'); }
   for (const checkout of [base, head]) {
     const destination = join(checkout, '.github/scripts/build-compare');
     if (destination === toolRoot) continue;
@@ -168,21 +175,26 @@ async function main(): Promise<number> {
   for (const path of inventoryPaths) if (sharePrepared && !(await readFile(join(base, path))).equals(await readFile(join(head, path)))) sharePrepared = false;
   const moves = join(out, 'moves.json');
   await writeFile(moves, `${JSON.stringify(declaration.moves, null, 2)}\n`);
-  await writeFile(join(out, 'inputs.json'), `${JSON.stringify({ base: revision, mode: declaration.mode, tools: source, sharePrepared }, null, 2)}\n`);
-  for (const [label, checkout] of [['base', base], ['head', head]] as const) {
-    let result = await stage(`${label} install`, 'pnpm', ['install', '--frozen-lockfile', '--ignore-scripts'], checkout);
+  await writeFile(join(out, 'inputs.json'), `${JSON.stringify({ base: revision, head: (await execute('git', ['rev-parse', 'HEAD'], { cwd: head })).stdout.trim(), mode: declaration.mode, tools: source, sharePrepared }, null, 2)}\n`);
+  const archive = options.get('--base-cache');
+  const forced = options.get('--no-base-cache') === 'true' || process.env.NO_BASE_CACHE === 'true' || (Array.isArray(labels) && labels.some(label => record(label).name === 'no-base-cache'));
+  const cacheRoot = join(out, 'restored-base');
+  // Attach a rejection handler immediately while head install/preparation/build progresses.
+  const restored = (async () => {
+    if (forced || !archive) return;
+    if (options.get('--cache-ready')) await waitForFile(options.get('--cache-ready')!, 1_200_000);
+    await unpackCache(resolve(archive), cacheRoot);
+  })().then(() => undefined, (error: unknown) => String(error));
+  const buildSide = async (label: 'base' | 'head', checkout: string): Promise<number> => {
+    let result = label === 'head' && process.env.HEAD_INSTALLED === 'true' ? 0 : await stage(`${label} install`, 'pnpm', ['install', '--frozen-lockfile', '--ignore-scripts'], checkout);
     if (result) return result;
-    if (label === 'head' && sharePrepared) {
-      // Preparation may refresh base inventories; recheck before sharing its bytes.
-      for (const path of inventoryPaths) if (!(await readFile(join(base, path))).equals(await readFile(join(head, path)))) sharePrepared = false;
-    }
     if (label === 'head' && sharePrepared) {
       for (const path of inventoryPaths) {
         const folder = path.replace(/inventory\.json$/u, 'prepared');
         if (!(await stat(join(base, folder)).catch(() => undefined))?.isDirectory()) {
           const inventory = record(JSON.parse(await readFile(join(base, path), 'utf8')));
           if (Array.isArray(inventory.assets) && !inventory.assets.some(asset => record(asset).location === 'prepared')) continue;
-          throw new Error(`Missing restored prepared folder: ${folder}`);
+          continue; // Head restores its own missing bank; a cache hit never prepares base.
         }
         await rm(join(head, folder), { recursive: true, force: true });
         const linked = await stage(`copy ${folder}`, 'cp', ['-a', join(base, folder), join(head, folder)], head);
@@ -196,68 +208,100 @@ async function main(): Promise<number> {
     requireUnchangedTracked(beforePreparation, await trackedDiff());
     if (result) return result;
     const values = [join(toolRoot, 'build.mts'), '--checkout', checkout, '--out', join(out, label)];
-    if (label === 'head') values.push('--toolchain', join(out, 'base/toolchain.json'));
+    // Head builds while the base archive restores; compare the complete toolchain records afterward.
     result = await stage(`${label} build`, process.execPath, values, checkout);
-    if (result) {
-      if (label === 'head') {
-        const failure = await readFile(join(out, 'head/toolchain-mismatch.json'), 'utf8').catch(() => undefined);
-        if (failure !== undefined && skipToolchain(declaration.mode, label, failure)) { console.warn('::notice::Toolchain mismatch; report-mode comparison skipped'); await writeFile(join(out, 'report.json'), failure); return 0; }
-      }
-      return result;
-    }
+    if (result) return result;
+    return 0;
+  };
+  const headExit = await buildSide('head', head);
+  if (headExit) { await restored; return headExit; }
+  const restoreFailure = await restored;
+  const fresh = async () => {
+    const notice = forced ? 'forced fresh: no-base-cache' : 'miss/fallback: building a fresh base';
+    console.log(`[base-cache] ${notice}`);
+    if (process.env.GITHUB_STEP_SUMMARY) await appendFile(process.env.GITHUB_STEP_SUMMARY, `Base cache: ${notice}\n\n`);
+    const code = await buildSide('base', base);
+    if (code) throw new Error(`Fresh base failed: exit ${code}`);
+  };
+  let cachedBase = false, cacheNotice: string;
+  if (forced || !archive || restoreFailure) {
+    await rm(cacheRoot, { recursive: true, force: true });
+    await fresh(); cacheNotice = forced ? 'forced fresh: no-base-cache' : `miss/fallback: ${restoreFailure ?? 'no archive supplied'}`;
+  } else {
+    const identity = { commit: revision, toolchain: JSON.parse(await readFile(join(out, 'head/toolchain.json'), 'utf8')) as unknown, lockfile: await readFile(join(base, 'pnpm-lock.yaml')) };
+    const result = await useCache(cacheRoot, out, identity, fresh);
+    cachedBase = result.hit; cacheNotice = result.reason;
   }
-  const comparisonExit = await stage('compare', process.execPath, [join(toolRoot, 'compare.mts'), '--base', join(out, 'base'),
+  await rm(cacheRoot, { recursive: true, force: true });
+  console.log(`[base-cache] ${cacheNotice}`);
+  if (process.env.GITHUB_STEP_SUMMARY) await appendFile(process.env.GITHUB_STEP_SUMMARY, `Base cache: ${cacheNotice}\n\n`);
+  await writeFile(join(out, 'cache.json'), JSON.stringify({ cachedBase, notice: cacheNotice }));
+  const baseToolchain = JSON.parse(await readFile(join(out, 'base/toolchain.json'), 'utf8')) as unknown;
+  const headToolchain = JSON.parse(await readFile(join(out, 'head/toolchain.json'), 'utf8')) as unknown;
+  if (!toolchainMatches(baseToolchain, headToolchain, await readFile(join(out, 'base/pnpm-lock.yaml')), await readFile(join(out, 'head/pnpm-lock.yaml')))) {
+    const failure = JSON.stringify({ skipped: true, notice: 'Toolchain differs from base record', base: baseToolchain, head: headToolchain });
+    await writeFile(join(out, 'head/toolchain-mismatch.json'), failure);
+    if (skipToolchain(declaration.mode, 'head', failure)) { await writeFile(join(out, 'report.json'), failure); return 0; }
+    throw new Error('Toolchain differs from base record');
+  }
+  const comparisonExit = await stage('compare', process.execPath, [join(head, '.github/scripts/build-compare/compare.mts'), '--base', join(out, 'base'),
     '--head', join(out, 'head'), '--mode', declaration.mode, '--moves', moves, '--sources', sourcesPath, '--json', join(out, 'report.json')], head);
   let answerExit = 0, answerSummary = '', performanceExit = 0;
-  try {
-    // L7 follows the same trust selection as L2: merge-base tools, except for the pull request that introduces them.
-    let performanceRoot = join(headTools ? head : base, '.github/scripts/performance');
-    if (!headTools && !await stat(performanceRoot).catch(() => undefined)) {
-      console.warn('::warning::Bootstrap: merge base has no performance guard tools; using HEAD performance tools');
-      performanceRoot = join(head, '.github/scripts/performance');
+  const performanceTask = (async () => {
+    try {
+      // L7 follows the same trust selection as L2: merge-base tools, except for the pull request that introduces them.
+      let performanceRoot = join(headTools ? head : base, '.github/scripts/performance');
+      if (!headTools && !await stat(performanceRoot).catch(() => undefined)) {
+        console.warn('::warning::Bootstrap: merge base has no performance guard tools; using HEAD performance tools');
+        performanceRoot = join(head, '.github/scripts/performance');
+      }
+      for (const checkout of [base, head]) {
+        const destination = join(checkout, '.github/scripts/performance');
+        if (destination === performanceRoot) continue;
+        await rm(destination, { recursive: true, force: true });
+        await cp(performanceRoot, destination, { recursive: true });
+      }
+      const approved = Array.isArray(labels) && labels.some(label => record(label).name === 'performance-increase-approved');
+      const guard = await performanceStage(join(head, '.github/scripts/performance'), base, head, out, declaration.mode, approved, undefined, cachedBase);
+      timings.push(...guard.timings);
+      performanceExit = guard.exitCode;
+      answerSummary += performanceSummary(guard);
+    } catch (error) {
+      console.warn(`::${declaration.mode === 'report' ? 'notice' : 'error'}::Performance guard stage failed: ${String(error).replaceAll('\n', '%0A').replaceAll('\r', '%0D')}`);
+      performanceExit = performanceVerdict(declaration.mode, undefined, 1, false);
+      answerSummary += `\n## Performance guard\n\nStage failed: ${String(error)}. Exit: ${performanceExit}.\n`;
+      await writeFile(join(out, 'performance.json'), JSON.stringify({ exitCode: performanceExit, failure: String(error) }));
     }
-    for (const checkout of [base, head]) {
-      const destination = join(checkout, '.github/scripts/performance');
-      if (destination === performanceRoot) continue;
-      await rm(destination, { recursive: true, force: true });
-      await cp(performanceRoot, destination, { recursive: true });
+  })();
+  const answerTask = (async () => {
+    try {
+      // L2 follows the same trust selection; only its introducing PR may bootstrap an absent base copy.
+      let answerRoot = join(headTools ? head : base, '.github/scripts/server-answers');
+      if (!headTools && !await stat(answerRoot).catch(() => undefined)) {
+        console.warn('::warning::Bootstrap: merge base has no server-answer tools; using HEAD server-answer tools');
+        answerRoot = join(head, '.github/scripts/server-answers');
+      }
+      for (const checkout of [base, head]) {
+        const destination = join(checkout, '.github/scripts/server-answers');
+        if (destination === answerRoot) continue;
+        await rm(destination, { recursive: true, force: true });
+        await cp(answerRoot, destination, { recursive: true });
+      }
+      const { serverStage, serverSummary } = await import('./server-stage.mts');
+      const answers = await serverStage(base, head, out, declaration.mode, 'https://earth-assets.lowpoly.cc', undefined, { cachedBase });
+      timings.push(...answers.timings);
+      answerExit = answers.exitCode;
+      answerSummary += serverSummary(answers);
+    } catch (error) {
+      // Even setup/reporting failure of L2 remains informational without a declaration.
+      console.warn(`::notice::Server answers stage failed: ${String(error).replaceAll('\n', '%0A').replaceAll('\r', '%0D')}`);
+      answerExit = serverVerdict(declaration.mode, 0, 1);
+      answerSummary += `\n## Server answers\n\nStage failed: ${String(error)}. Exit: ${answerExit}.\n`;
+      await writeFile(join(out, 'server-answers.json'), JSON.stringify({ exitCode: answerExit, failure: String(error) }));
     }
-    const approved = Array.isArray(labels) && labels.some(label => record(label).name === 'performance-increase-approved');
-    const guard = await performanceStage(join(head, '.github/scripts/performance'), base, head, out, declaration.mode, approved);
-    timings.push(...guard.timings);
-    performanceExit = guard.exitCode;
-    answerSummary += performanceSummary(guard);
-  } catch (error) {
-    console.warn(`::${declaration.mode === 'report' ? 'notice' : 'error'}::Performance guard stage failed: ${String(error).replaceAll('\n', '%0A').replaceAll('\r', '%0D')}`);
-    performanceExit = performanceVerdict(declaration.mode, undefined, 1, false);
-    answerSummary += `\n## Performance guard\n\nStage failed: ${String(error)}. Exit: ${performanceExit}.\n`;
-    await writeFile(join(out, 'performance.json'), JSON.stringify({ exitCode: performanceExit, failure: String(error) }));
-  }
-  try {
-    // L2 follows the same trust selection; only its introducing PR may bootstrap an absent base copy.
-    let answerRoot = join(headTools ? head : base, '.github/scripts/server-answers');
-    if (!headTools && !await stat(answerRoot).catch(() => undefined)) {
-      console.warn('::warning::Bootstrap: merge base has no server-answer tools; using HEAD server-answer tools');
-      answerRoot = join(head, '.github/scripts/server-answers');
-    }
-    for (const checkout of [base, head]) {
-      const destination = join(checkout, '.github/scripts/server-answers');
-      if (destination === answerRoot) continue;
-      await rm(destination, { recursive: true, force: true });
-      await cp(answerRoot, destination, { recursive: true });
-    }
-    const { serverStage, serverSummary } = await import('./server-stage.mts');
-    const answers = await serverStage(base, head, out, declaration.mode, 'https://earth-assets.lowpoly.cc');
-    timings.push(...answers.timings);
-    answerExit = answers.exitCode;
-    answerSummary = serverSummary(answers);
-  } catch (error) {
-    // Even setup/reporting failure of L2 remains informational without a declaration.
-    console.warn(`::notice::Server answers stage failed: ${String(error).replaceAll('\n', '%0A').replaceAll('\r', '%0D')}`);
-    answerExit = serverVerdict(declaration.mode, 0, 1);
-    answerSummary = `\n## Server answers\n\nStage failed: ${String(error)}. Exit: ${answerExit}.\n`;
-    await writeFile(join(out, 'server-answers.json'), JSON.stringify({ exitCode: answerExit, failure: String(error) }));
-  }
+  })();
+  await Promise.all([performanceTask, answerTask]);
+  await writeFile(join(out, 'comparison.md'), comparisonMarkdown(JSON.parse(await readFile(join(out, 'report.json'), 'utf8'))));
   await writeFile(join(out, 'timings.json'), `${JSON.stringify(timings, null, 2)}\n`);
   if (process.env.GITHUB_STEP_SUMMARY) await appendFile(process.env.GITHUB_STEP_SUMMARY, jobSummary(JSON.parse(await readFile(join(out, 'report.json'), 'utf8')), timings, declaration.mode, source) + answerSummary);
   return comparisonExit || answerExit || performanceExit;

@@ -10,3 +10,14 @@ export function hasApplicationRenames(checkout: string, base: string, head: stri
   }
   return false;
 }
+
+/** Both names of a rename count, including moves out of application ownership. */
+export function applicationPaths(status: string): string[] {
+  const fields = status.split('\0'), paths: string[] = [];
+  for (let i = 0; i < fields.length && fields[i];) {
+    const code = fields[i++]!, old = fields[i++]!;
+    paths.push(old);
+    if (code.startsWith('R') || code.startsWith('C')) paths.push(fields[i++]!);
+  }
+  return paths.filter(applicationSource);
+}
