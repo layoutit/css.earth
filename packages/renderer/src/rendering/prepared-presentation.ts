@@ -21,6 +21,7 @@ import { createLeafBoxBlocks } from './prepared-leaf-box-blocks.js';
 import { createLeafBoxWriter, SEAM_OUTSET } from './prepared-leaf-box-direct.js';
 import { hiddenSubtreeRoots, omittedPreparedNodes } from './prepared-omitted-nodes.js';
 import { createSettlePacer } from './settle-pacer.js';
+import { keepLayers } from './kept-layers.js';
 import type { CameraMotionSignal } from '../navigation/camera-motion-signal.js';
 import { activeResourceFallbacks } from './prepared-resource-fallbacks.js';
 import { preparedDatasetPending } from '../prepared-data/dataset-tables.js';
@@ -258,10 +259,13 @@ export function mountPreparedPresentation(stage: HTMLElement, context: PreparedP
     return { animation, plan, duration: plan.duration };
   });
   // Presentation owns only its prepared roots; application context siblings survive a detail handoff.
+  let kept = false;
   const connect = () => {
     for (const root of roots) if (root.parentNode !== stage) stage.appendChild(root);
     if (roots.some(root => root.parentNode !== stage)) throw new Error("Prepared roots must belong to the mounted stage.");
     for (const name of definition.tree.stageClasses) if (!stage.classList.contains(name)) stage.classList.add(name);
+    // Faces that leave the screen keep their surfaces (kept-layers.ts).
+    if (!kept) { kept = true; context.own(keepLayers(cameraElement, stage.ownerDocument.defaultView)); }
   };
   if (!deferConnection) connect();
   const animations = definition.animations.map(plan => {
