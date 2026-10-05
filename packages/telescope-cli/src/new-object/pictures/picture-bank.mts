@@ -39,6 +39,8 @@ export interface PictureInputs {
   readonly page: EsaPage; readonly tags: SkyTags; readonly dimensions: readonly [number, number];
   /** Where the tags alone put the recipe's target, and how the entry's star was found when the draft found it. */
   readonly tagged: readonly [number, number];
+  /** How far the picture's own light reaches from each pixel (registration.mts lightReachPixels); the frame alone when absent. */
+  readonly lightReach?: (at: readonly [number, number]) => number;
   readonly like: { readonly recipe: Json; readonly manifest: Json; readonly presentation: Json; readonly provenance: Json };
   readonly host: { readonly content: Json; readonly text: Json };
   readonly checked: string;
@@ -91,7 +93,7 @@ const copy = <T,>(value: T): T => structuredClone(value);
 export function pictureFiles(entry: PictureEntry, inputs: PictureInputs): { readonly files: PackageFiles; readonly readme: string; readonly carried: readonly { readonly from: string; readonly to: string }[]; readonly registration: Registration; readonly todo: readonly string[] } {
   const { page, tags, dimensions: [width, height], like, host, checked } = inputs, { bank, dataset } = entry, files: PackageFiles = new Map(), at = `src/objects/${bank}`, likeAt = `src/objects/${entry.like}/`;
   const likeRecipe = copy(like.recipe), target = requireRecord(likeRecipe.target, `${entry.like} recipe target`) as unknown as Place, likeSource = requireRecord(likeRecipe.source, `${entry.like} recipe source`);
-  const star = entry.star ?? inputs.tagged, registration = registerPicture(tags, [width, height], star, target), { observation, plane, pixelArcsec, circleArcsec } = registration;
+  const star = entry.star ?? inputs.tagged, registration = registerPicture(tags, [width, height], star, target, inputs.lightReach?.(star)), { observation, plane, pixelArcsec, circleArcsec } = registration;
   const publisher = `ESA/${page.telescope}`, record = pictureRecordId(page), colors = entry.colors ?? pageColors(page.colors), instruments = [...new Set(page.colors.map(color => color.instrument).filter(Boolean))];
   const pixels = `${width} × ${height}`, field = `${(observation.fieldOfViewDeg[0] * 60).toFixed(2)} × ${(observation.fieldOfViewDeg[1] * 60).toFixed(2)} arcmin`, shown = `${instruments.join(' and ')} at ${colorsPhrase(colors)}`;
   const direction = `${pixelArcsec.toFixed(4)} arcsec per pixel and north ${Math.abs(tags.rotationDeg).toFixed(1)}° ${tags.rotationDeg >= 0 ? 'left' : 'right'} of vertical`, centre = `${observation.centerRaDeg}°, ${observation.centerDecDeg}°`;
@@ -100,6 +102,7 @@ export function pictureFiles(entry: PictureEntry, inputs: PictureInputs): { read
     ? `The file's embedded sky tags for scale and direction, ${direction}, and the star for place: the star in the picture, ${entry.starFound ? `${entry.starFound}, ` : ''}pixel ${star.join(', ')}, is set at the recipe's target, so the frame's centre is ${centre}. The tags alone put the star ${fromTags} arcsec from where the picture shows it.`
     : `The file's embedded sky tags, used as they are: ${direction}, the frame's centre at ${centre}. Not measured against a star here.`;
   const mark = entry.star ? 'the star' : 'the recipe\'s target', rim = `between ${(RIM_FROM * circleArcsec).toFixed(1)} and ${circleArcsec} arcsec from ${mark}`;
+  const held = registration.rimAt === 'light' ? 'the largest circle the picture\'s own light fills (its frame has an empty border)' : 'the largest circle the frame holds';
 
   // The bank: the like bank's recipe with this picture, its registration and what the entry lays over the geometry.
   const recipe = { ...likeRecipe, id: bank, source: { path: 'source.jpg', dimensions: [width, height], originalDimensions: page.original, publisherUrl: page.page, downloadUrl: page.download, credit: page.credit, license: LICENSE }, observation,
@@ -127,7 +130,7 @@ export function pictureFiles(entry: PictureEntry, inputs: PictureInputs): { read
     original: { dimensions: page.original, bands: [page.telescope, ...instruments, ...colors], fieldOfViewDeg: observation.fieldOfViewDeg }, checkedSource: { kind: 'Published JPEG', dimensions: [width, height] },
     geometryEvidence: { inclinationDeg: plane.inclinationDeg, lineOfNodesPaDeg: plane.lineOfNodesPaDeg, reference: `A picture of the sky: the plane is the picture's own tangent plane, perpendicular to the sight line through the picture's centre, so it faces the Sun. That centre is ${registration.starFromCentreArcsec.toFixed(1)} arcsec from ${mark}, which is the whole of the recipe's inclination. Not the orientation of the object itself.` },
     registration: { method: registered, pixelArcsec: Number(pixelArcsec.toPrecision(4)), northClockwiseDeg: observation.northClockwiseDeg }, displayModel,
-    coverage: `The published frame inside a circle about ${mark}: the picture fades out ${rim}, the largest circle the frame holds, so no straight edge shows.`,
+    coverage: `The published frame inside a circle about ${mark}: the picture fades out ${rim}, ${held}, so no straight edge shows.`,
     acquisition: { url: page.download, dimensions: [width, height], operation: 'Download the publisher\'s JPEG; no crop or resample.' } }));
   files.set(`${at}/investigations.json`, json({ schema: INVESTIGATION_LEDGER_SCHEMA, objectId: bank, entries: [
     { id: page.id, subject: `${publisher} ${page.id}`, status: 'included', finding: `${page.title}: ${shown}; ${pixels} px over ${field}, released ${page.released}. ${registered}`, evidence: [page.page, page.rights] }, ...entry.ledger] }));
@@ -152,7 +155,7 @@ export function pictureFiles(entry: PictureEntry, inputs: PictureInputs): { read
   const readme = `# ${name}, ${dataset.label}\n\n${TODO}: one paragraph. What the picture is, what it lies on (the [${entry.like}](../${entry.like}/README.md) bank's walls), and what is chosen here and not measured.\n\n## Sources\n\n| Selected source | Input and meaning |\n| --- | --- |\n` +
     `| [${publisher} ${page.id}](${page.page}) | [Record](../../sources/${record}.json). ${page.title}: ${shown}; ${pixels} px over ${field} (\`source/source.jpg\`, the publisher's JPEG, restored from its origin). Credit: ${page.credit}. A display composite, not calibrated photometry. |\n` +
     entry.sources.map(source => `| [${source.label}](${source.url}) | [Record](../../sources/${source.catalogueId}.json). ${source.locator} |\n`).join('') +
-    `\n## The picture\n\n- **Registration:** ${registered}\n- **Depth:** ${TODO}: what the picture's light lies on, and which printed value each color takes.\n- **Size:** ${field}, ${parsecs}.\n- **Rim:** the picture fades out ${rim}, the largest circle the frame holds.\n` +
+    `\n## The picture\n\n- **Registration:** ${registered}\n- **Depth:** ${TODO}: what the picture's light lies on, and which printed value each color takes.\n- **Size:** ${field}, ${parsecs}.\n- **Rim:** the picture fades out ${rim}, ${held}.\n` +
     `\n## Evidence\n\n${TODO}: the page with this dataset selected, captured headless, and what the capture shows.\n\n## Known problems\n\n- ${TODO}: what is chosen and not measured.\n- Colors are the publisher's display composite, not a measurement.\n`;
   return { files, readme, carried: others.map(input => ({ from: requireString(input.path, `${entry.like} manifest path`), to: moved(input.path) })), registration,
     todo: [`write ${at}/README.md`, `name the ${bank} bank in src/objects/${entry.host}/README.md`] };
