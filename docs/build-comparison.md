@@ -148,7 +148,7 @@ of a rename count. `tool-change` and workflow dispatch force the lane.
 Declarations, `refactor`, `compare-build` and an `untangle` branch alone do not
 select builds. Docs/tools/test-only changes rely on the changed tools' own
 universe tests; the selection job says so in its summary. The declaration gate
-still requires a fresh declaration for application renames or `refactor`.
+still requires a fresh declaration for renames or moves under `site/` or the `refactor` label.
 A declaration is honored only when this PR adds or changes it against the
 merge base; a stale declaration means report mode.
 
@@ -167,7 +167,7 @@ requests that otherwise declare the same thing (for example JavaScript-only chan
 no outputs) never carry identical declarations.
 
 The always-running **Refactor declaration gate** requires a fresh declaration
-for application renames or the `refactor` label.
+for renames or moves under `site/` or the `refactor` label.
 It uses merge-base tooling, needs no dependencies or builds, and remains a real
 check when the longer build job is skipped. Selection tools also come from the merge base, except for `tool-change`
 or their introducing PR; both exceptions print a warning.
