@@ -2,6 +2,8 @@ import type { BrowserWindow } from '../browser/browser-types.mts';
 import { isRecord } from '@cssearth/core';
 import { objectIdAtPath } from '../model/root-object.mts';
 import type { NavigationHistory, NavigationIntent } from './navigation-types.mts';
+import { navigationHref, owners } from '../model/navigation-href.mts';
+export { navigationHref } from '../model/navigation-href.mts';
 type Navigate = (id: string, intent: NavigationIntent) => unknown;
 interface NavigationAnchor { href: string; target?: string; hasAttribute(name: string): boolean; getAttribute(name: string): string | null; }
 function closestAnchor(target: EventTarget | null): NavigationAnchor | null {
@@ -12,14 +14,6 @@ function closestAnchor(target: EventTarget | null): NavigationAnchor | null {
 }
 const navigationId = (event: Event): unknown => 'detail' in event && isRecord(event.detail) ? event.detail.objectId : undefined;
 const navigationFeature = (event: Event): string | undefined => 'detail' in event && isRecord(event.detail) && typeof event.detail.feature === 'string' && /^(?:city-)?[0-9]+$/u.test(event.detail.feature) ? event.detail.feature : undefined;
-
-/** The history owner of each window, so scene code reads the URL a deferred write will publish (`navigationHref`). */
-const owners = new WeakMap<Window, { href(): string }>();
-
-/** The page's URL as the app knows it: a history write deferred while the camera moves is already this URL. */
-export function navigationHref(windowTarget: Window) {
-  return owners.get(windowTarget)?.href() ?? windowTarget.location.href;
-}
 
 // On the iPad every URL change through the History API is followed by slow frames that are not our code: with no inspector
 // attached, `replaceState` returned in 0 to 12 ms, yet the frame of the write took 29 to 42 ms and another of 26 to 34 ms
