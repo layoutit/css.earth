@@ -5,7 +5,7 @@ import assert from 'node:assert/strict';
 
 import { parseHTML } from 'linkedom';
 
-import { createLeafBoxWriter, leafBoxExact, leafBoxStyles } from './prepared-leaf-box-direct.js';
+import { createExactKeeper, createLeafBoxWriter, leafBoxExact, leafBoxStyles } from './prepared-leaf-box-direct.js';
 
 // Two of Venus's leaf-box records (packages/bake/src/presentation/leaf-box-records.ts), under the system node 0.
 const matrix = 'matrix3d(7.503457,-0.739026,0,0,0.004556,0.046257,100.99439,-0.007833,0.028587,0.290248,-0.956524,0,-7.905404,2381.267936,-12169.276988,1)';
@@ -115,6 +115,21 @@ test('a leaf showing a sized image takes its exact box and draws the image at it
   assert.partialDeepStrictEqual(Object.fromEntries(leafBoxStyles(io, 362, 0, false, leafBoxExact(io, [4160, 768], ioArea, 3))), { width: '43.328125px', backgroundSize: '1386.666667px 256px' });
   // At its widest level the same faces would hold 121 MB of layers: a leaf the view needs less of does not keep the box.
   assert.equal(leafBoxExact(io, [8320, 1536], ioArea, 2)?.kept, false);
+  // The bytes kept beyond need are counted leaf by leaf, over the leaves kept so. Saturn's ring plane is a 2,048 px
+  // box beside 448 faces of 64 px: it draws its own image at the size its step needs and counts for nothing, so the 62
+  // faces behind the body keep the exact box of a 4,160 px dataset where the 386 the view fills hold it by need.
+  const face = (node: number): PreparedLeafBox => ({ node, density: 0.003089, box: [64, 64], backgroundSize: [2080, 1536], backgroundPosition: [0, 0], matrix });
+  const ring: PreparedLeafBox = { node: 500, density: 0.002, box: [2048, 2048], backgroundSize: [2048, 2048], backgroundPosition: [0, 0], matrix };
+  const keep = createExactKeeper(2);
+  assert.equal(keep(ring, 512, [4096, 4096])?.factor, 1);
+  for (let node = 0; node < 386; node++) assert.equal(leafBoxStyles(face(node), 512, 0, false, keep(face(node), 512, [4160, 3072])).find(([name]) => name === 'width')?.[1], '64px');
+  for (let node = 386; node < 448; node++) assert.equal(leafBoxStyles(face(node), 16, 0, false, keep(face(node), 16, [4160, 3072])).find(([name]) => name === 'width')?.[1], '64px', `face ${node} keeps its exact box`);
+  // Past the bytes kept beyond need, the next leaf takes what its step asks for: 2,100 such faces are 34 MB at this image.
+  const many = createExactKeeper(2);
+  const widths = Array.from({ length: 2100 }, (_, node) => leafBoxStyles(face(node), 16, 0, false, many(face(node), 16, [4160, 3072])).find(([name]) => name === 'width')?.[1]);
+  assert.equal(widths[0], '64px');
+  assert.equal(widths.at(-1), '3.163136px');
+  assert.equal(widths.filter(width => width === '64px').length, Math.floor(32 * 2 ** 20 / (64 * 64 * 16)));
   // A screen whose ratio is no whole number of two or more keeps the bake's two texels a CSS pixel, and there a leaf
   // the view needs less of does not keep the box: it is not exact on that screen.
   assert.deepEqual(leafBoxExact(io, [4160, 768], ioArea, 2.625), { factor: 65 / 128, tile: [2080, 384], kept: false });

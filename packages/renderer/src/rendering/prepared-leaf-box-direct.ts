@@ -58,9 +58,9 @@ const SHAPE_TOLERANCE = 0.002;
  * states no size, a leaf without a box and background in pixels, a background that stretches its image, or an image
  * wider than the box allows.
  *
- * A leaf the view needs less of (a face behind the body) keeps the exact box while every leaf of the body could: at
- * this share of their full boxes, `area` CSS px² in all, their layers stay within the bytes kept beyond the view's
- * need (EXTRA_BYTES). Io's 448 faces at the
+ * A leaf the view needs less of (a face behind the body) keeps the exact box while the leaves kept so can: at this
+ * share of their full boxes, `area` CSS px² in all (`createExactKeeper` counts them), their layers stay within the
+ * bytes kept beyond the view's need (EXTRA_BYTES). Io's 448 faces at the
  * level it rests on are 30 MB of layers in exact boxes and its switch 45 to 54 ms; with the hidden ones in the 3 px their
  * step asks for it is 103 to 136 ms, and halved to a quarter or a sixteenth of the image 163 to 465 ms more. Only where
  * the box is exact on this screen: elsewhere such a leaf would be resampled at full size. */
@@ -106,9 +106,23 @@ export function leafBoxStyles(leaf: PreparedLeafBox, step: number, outset: numbe
   return styles;
 }
 
-/** The full boxes of a body's sized leaves, in CSS px²: what their layers are measured against (`leafBoxExact`). */
-export const leafBoxArea = (boxes: readonly PreparedLeafBox[]) =>
-  boxes.reduce((sum, leaf) => sum + (leaf.density !== undefined && leaf.box ? leaf.box[0] * leaf.box[1] : 0), 0);
+/** Decides leaf by leaf which keep an exact box their step does not need, within the bytes kept beyond need: each leaf
+ * is measured against its own box and the boxes already kept so (`leafBoxExact`'s `area`). A leaf whose step needs its
+ * whole image holds that box either way and counts for nothing: Saturn's ring plane, 2,048 px square, used to count
+ * against its faces, so the 62 behind the body shrank to the 3 px their step asks for. With them exact, a switch
+ * between its 4,160 px datasets is 93 to 102 ms on the iPad where it was 112 to 124 (2026-10-05). */
+export function createExactKeeper(devicePixelRatio: number = TEXELS_PER_CSS_PIXEL) {
+  const kept = new Map<number, number>();
+  let keptArea = 0;
+  return (leaf: PreparedLeafBox, step: number, size: readonly [number, number] | undefined): LeafBoxExact | undefined => {
+    const own = leaf.box ? leaf.box[0] * leaf.box[1] : 0, others = keptArea - (kept.get(leaf.node) ?? 0);
+    const exact = leafBoxExact(leaf, size, others + own, devicePixelRatio);
+    const keeps = exact !== undefined && exact.kept && leaf.density !== undefined && Math.min(1, step * leaf.density) < Math.min(1, exact.factor);
+    keptArea = others + (keeps ? own : 0);
+    if (keeps) kept.set(leaf.node, own); else kept.delete(leaf.node);
+    return exact;
+  };
+}
 
 /** The leaf-box and seam-outset bindings of a presentation, with their prepared initial values. */
 export function leafBoxBindings(bindings: readonly PreparedViewBinding[]) {
@@ -124,11 +138,11 @@ export function createLeafBoxWriter(bindings: readonly PreparedViewBinding[], no
   const { steps, seam, boxes, step, outset } = leafBoxBindings(bindings);
   const state = new Map(boxes.map(leaf => [leaf.node, { leaf, step, image: undefined as readonly [number, number] | undefined, written: new Map<string, string>() }]));
   let currentOutset = outset, writes = 0;
-  const area = leafBoxArea(boxes);
+  const keep = createExactKeeper(devicePixelRatio);
   const cssName = (name: string) => name.replace(/[A-Z]/g, letter => `-${letter.toLowerCase()}`);
   const publish = (current: { leaf: PreparedLeafBox; step: number; image: readonly [number, number] | undefined; written: Map<string, string> }, seamOnly = false, adopting = false) => {
     const element = nodes[current.leaf.node]!;
-    for (const [property, value] of leafBoxStyles(current.leaf, current.step, currentOutset, seamOnly, leafBoxExact(current.leaf, current.image, area, devicePixelRatio))) {
+    for (const [property, value] of leafBoxStyles(current.leaf, current.step, currentOutset, seamOnly, keep(current.leaf, current.step, current.image))) {
       if (current.written.get(property) === value) continue;
       // A server-rendered leaf already carries its values, for the image the markup shows
       // (prepared-scene-serialization.ts): they stand until the first image lands.

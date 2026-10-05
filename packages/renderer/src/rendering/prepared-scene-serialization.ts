@@ -3,7 +3,7 @@ import { textureTileLeafStyles, type ObjectRuntimeDefinition } from '@cssearth/o
 import { initialObjectSelection } from '../runtime/object-contract.js';
 import { resolvePreparedAssetUrl, rewritePreparedStyleUrls } from './prepared-asset-origin.js';
 import { preparedTextureSizes, textureTileGroups } from './prepared-texture-levels.js';
-import { leafBoxArea, leafBoxBindings, leafBoxExact, leafBoxStyles } from './prepared-leaf-box-direct.js';
+import { createExactKeeper, leafBoxBindings, leafBoxStyles } from './prepared-leaf-box-direct.js';
 import { omittedPreparedNodes } from './prepared-omitted-nodes.js';
 import { preparedDatasetPending } from '../prepared-data/dataset-tables.js';
 
@@ -84,8 +84,8 @@ export function serializePreparedScene(definition: ObjectRuntimeDefinition, data
     const image = sizes(textureResources?.[binding.resource] ?? binding.resource);
     for (const leaf of slots.get(`${binding.target}:${binding.name}`) ?? []) shown.set(leaf, image);
   }
-  const leafBoxes = leafBoxBindings(definition.viewBindings), area = leafBoxArea(leafBoxes.boxes);
-  for (const leaf of leafBoxes.boxes) for (const [name, value] of leafBoxStyles(leaf, leafBoxes.step, leafBoxes.outset, false, leafBoxExact(leaf, shown.get(leaf.node), area))) write(leaf.node, name, value);
+  const leafBoxes = leafBoxBindings(definition.viewBindings), keep = createExactKeeper();
+  for (const leaf of leafBoxes.boxes) for (const [name, value] of leafBoxStyles(leaf, leafBoxes.step, leafBoxes.outset, false, keep(leaf, leafBoxes.step, shown.get(leaf.node)))) write(leaf.node, name, value);
   for (const binding of variant.writes) {
     const element = target(binding.target);
     if (binding.kind === 'attribute') {

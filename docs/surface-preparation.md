@@ -682,7 +682,10 @@ These still set their own encoding:
 - Earth's full pages keep the qualities its recipe declares; its smaller
   texture levels follow their page, lossy ones through the lane.
 - Lighting rows and their billboards carry shading in alpha and stay lossless.
-- Saturn's layered and spectral materials keep their encodings.
+- Saturn's layered and spectral materials keep their encodings. Its ultraviolet and methane surface maps and their
+  pole atlases joined the lane on 2026-10-05: the maps, 5.92 and 3.77 MB lossless, became 0.23 and 0.14 MB with 0 and 3
+  of 12.8 million pixels flagged; the atlases, 0.39 and 0.35 MB, became 0.04 MB each with none flagged and alpha exact.
+  Decoding a lossless map took 130 to 141 ms inside the frame of a dataset switch on the iPad.
 - Image-layer galaxies (M31, M33), the LMC and SMC volume banks and the Milky
   Way sky keep their recipe qualities.
 - Volume atlases (density in alpha, seen as stacked slices) and the

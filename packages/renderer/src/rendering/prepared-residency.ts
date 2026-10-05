@@ -251,8 +251,10 @@ export function createPreparedResidency({
       const idle = [...required].filter(key => ready(key) && !committed.has(key));
       // A warm pool handed its image to retained CSS and kept no handle (prepared-image-store.ts), so nothing here can
       // decode it again: it is acquired again, from the browser's cache, and is ready once its pixels are back. Jupiter
-      // returning to a dataset whose 4160 px map it had warmed or shown took one 137 to 180 ms frame on the iPad;
-      // acquired again, 67 to 76 ms, and 17 to 29 ms on a first visit (2026-10-05).
+      // returning to a dataset whose 4160 px map it had warmed or shown took one 137 to 185 ms frame on the iPad;
+      // acquired again, 67 to 76 ms, with no decode left in its paint. Acquiring a resident image again instead of
+      // decoding it again gained nothing (Saturn 96 to 105 ms either way, Io and the Moon 46 to 50), so those keep
+      // their handle (2026-10-05).
       const resident = idle.filter(key => !warmed.delete(key));
       requireCapacity(protectedKeys(required));
       retirePending();
