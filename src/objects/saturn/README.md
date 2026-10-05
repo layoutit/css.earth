@@ -258,8 +258,10 @@ On 2026-10-05 the default view was captured in headless Chrome with a GPU, at
 and measured on the same rays through 32 degrees of the upper-left limb. Dark
 dips deeper than 12 levels, 3 pixels inside the edge, went from 29 to 3;
 Jupiter has none. Five pixels inside the edge, green/red went from 1.02 to
-0.89 and blue/red from 0.55 to 0.66. Left before, right after, at screen
-pixels:
+0.89 and blue/red from 0.55 to 0.66. With shadows on, the lit lower-left limb
+went from 32 dips to 19 along 28 degrees. Safari was not measured: headless
+WebKit drew only the body's fill disc. Left before, right after, under flood
+light, at screen pixels:
 
 ![The upper-left limb before and after](evidence/2026-10-05/limb-before-after.webp)
 
@@ -278,5 +280,5 @@ The Cassini dataset in the app:
 - The map's blue channel is F395N (violet) data, displayed as sRGB blue. Each display channel's limb law is a weighted mean of OPAL's per-filter coefficients, interpolated between filters. The navigation portrait and context image still crop the untied TIF.
 - The visible map is Hubble's, 1,800 pixels around the planet. At the default view on a 2x screen one source pixel covers 1.8 screen pixels, against 0.9 on Jupiter, so Saturn is softer. A 4,096-pixel body image showed 4 % more fine detail than the shipped 2,048 in a composed default view (2026-10-05) and was not shipped.
 - The Cassini 2011 dataset is the archive's contrast-enhanced color with no calibration, lit with the Hubble map's limb law under the present scene's rings.
-- The limb overlay's frames are 256 pixels wide and drawn 4 times larger. The dashes along the limb were measured and fixed under flood light; with shadows on, the outermost ring was not measured.
+- The limb overlay's frames are 256 pixels wide and drawn 4 times larger. With shadows on, the lit limb still shows dashes, fewer and fainter: 19 dark dips along 28 degrees of it, where css.earth v0.6524 had 32, and half the fine-scale brightness variation (8.0 against 18.6 levels). There the law brightens the limb and the overlay turns black past the silhouette.
 - The material overlay has one color and alpha per texel, so the per-channel limb law is exact for the prepared surface's mean color and approximate for colors far from it ([planet limbs](../../../docs/surface-preparation.md#planet-limbs-from-published-laws)). OPAL's coefficients are for near-zero phase; directional frames use them at every phase.
