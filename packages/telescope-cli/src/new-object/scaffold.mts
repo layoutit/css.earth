@@ -83,7 +83,6 @@ ${s} .polycss-scene s {
 
 /* The silhouette-fit binding already includes physical framing. Keep the prepared plate's native dimensions. */
 ${s} .${id}-corona-layer {
-  background-image: var(--${id}-corona-image);
   background-position: center;
   background-repeat: no-repeat;
   background-size:
@@ -93,7 +92,6 @@ ${s} .${id}-corona-layer {
 
 /* Limb plate: ${BODY_DIAMETER_PX} px = raster.json emission.bodyDiameter = camera.logicalBodyDiameter. */
 ${s} .${id}-limb-layer {
-  background-image: var(--${id}-limb-image);
   background-position: center;
   background-repeat: no-repeat;
   background-size:

@@ -512,6 +512,12 @@ its full box. [leaf-box.ts](../packages/bake/src/presentation/leaf-box.ts) holds
     that draw it are the ones its texture write is bound to. The renderer reads both. It never measures an image, works
     a size out of a byte count, or guesses which image a leaf draws: a leaf whose image states no size keeps its step's
     box.
+  - **No variable carries an image.** A texture write names a slot, and the slot lists the elements that draw it
+    (`tree.textureBindings`). The page writes `background-image` on each of those elements, and the served markup
+    does the same; an image a container draws itself is a write of that container's own background. The bake still
+    finds the elements in a headless browser through a custom property, then ships records that name none
+    ([texture-image-records.ts](../packages/bake/src/presentation/texture-image-records.ts)), and the runtime
+    validator refuses a prepared runtime whose element reads its image from one.
   - **One texel per device pixel.** The box follows the screen's pixel ratio where that is a whole number of two or
     more (a phone's three gives 43.33 px for the same level); any other screen keeps the bake's two texels a CSS
     pixel. The copy is by backing pixel: with the iPad's page scaled to four backing pixels a CSS pixel, Io's faces in

@@ -10,7 +10,7 @@
   margin: 0; padding: 0; border: 0; transform-origin: 0 0; transform-style: flat; backface-visibility: hidden;
   border-top-left-radius: 50% 100%; border-top-right-radius: 50% 100%;
   corner-top-left-shape: bevel; corner-top-right-shape: bevel;
-  background-image: var(--mimas-surface-image); background-repeat: no-repeat;
+  background-repeat: no-repeat;
 }
 :where(.object-stage[data-object-id="mimas"]) .mimas-material-root { z-index: 3; --mimas-billboard-opacity: 0; }
 :where(.object-stage[data-object-id="mimas"]) .mimas-material, :where(.object-stage[data-object-id="mimas"]) .mimas-billboard {

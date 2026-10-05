@@ -86,6 +86,7 @@ export { requireVariants, requireViewBindings } from './prepared-data/runtime-va
 export { requireAssets } from './prepared-data/runtime-validation/resources-tree.js';
 
 export { requireTextureBindings } from './prepared-data/runtime-validation/texture-bindings.js';
+export { requireImageRecords } from './prepared-data/runtime-validation/image-records.js';
 export { PREPARED_DATASET_SCHEMA, deferredDatasetIds, preparedDatasetReference, splitPreparedDatasetTables, requireDeferredDatasets, requirePreparedDatasetTables, mergePreparedDatasetTables } from './prepared-data/content/dataset-tables.js';
 export type { PreparedDatasetLevel, PreparedDatasetTables } from './prepared-data/content/dataset-tables.js';
 export { requireCamera } from './prepared-data/runtime-validation/camera.js';

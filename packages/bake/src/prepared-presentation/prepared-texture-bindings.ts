@@ -1,10 +1,12 @@
 import { type PreparedPresentationDefinition, type PreparedTree } from '@cssearth/objects';
 
 import type { Page } from 'playwright';
+import type { TextureContainer } from '../presentation/index.ts';
 
-/** Resolve image consumers against the actual scene CSS, after depth partitioning.
- * Sentinels are CSS values only: the preparation page blocks every request. */
-export async function prepareTextureBindings(page: Page, definition: PreparedPresentationDefinition & { id: string }): Promise<NonNullable<PreparedTree['textureBindings']>> {
+/** Resolve image consumers against the actual scene CSS, after depth partitioning: the childless elements that draw each
+ * texture write (its slot), and the containers that draw one themselves. Both ship as records that name no custom
+ * property (presentation/texture-image-records.ts). Sentinels are CSS values only: the preparation page blocks every request. */
+export async function prepareTextureBindings(page: Page, definition: PreparedPresentationDefinition & { id: string }): Promise<{ slots: NonNullable<PreparedTree['textureBindings']>; containers: TextureContainer[] }> {
   return page.evaluate(definition => {
     document.querySelectorAll('main').forEach(node => node.remove());
     const stage = document.createElement('main'); stage.className = 'object-stage';
@@ -25,7 +27,7 @@ export async function prepareTextureBindings(page: Page, definition: PreparedPre
       if (!bindings.has(key)) bindings.set(key, { target: write.target, name: write.name, leaves: new Set(), image: `url("https://prepared.invalid/texture-${bindings.size}")` });
     }
     const byImage = new Map([...bindings.values()].map(binding => [binding.image, binding]));
-    const usedByParent = new Set<string>();
+    const containers = new Map<string, { target: number; name: string; node: number }>();
     for (const variant of definition.variants) {
       for (const write of variant.writes) {
         const node = write.target < 0 ? stage : nodes[write.target];
@@ -40,16 +42,17 @@ export async function prepareTextureBindings(page: Page, definition: PreparedPre
       nodes.forEach((node, id) => {
         const image = getComputedStyle(node).backgroundImage, binding = byImage.get(image);
         if (!binding) return;
-        if (node.children.length) usedByParent.add(image); else binding.leaves.add(id);
+        if (node.children.length) containers.set(`${binding.target}:${binding.name}:${id}`, { target: binding.target, name: binding.name, node: id }); else binding.leaves.add(id);
       });
     }
     const owners = new Set<number>();
-    return [...bindings.values()].filter(binding => binding.leaves.size && !usedByParent.has(binding.image)).map(({ target, name, leaves }) => {
+    const slots = [...bindings.values()].filter(binding => binding.leaves.size).map(({ target, name, leaves }) => {
       for (const leaf of leaves) {
         if (owners.has(leaf)) throw new TypeError('Selection-dependent texture consumer requires an explicit binding.');
         owners.add(leaf);
       }
       return { target, name, leaves: [...leaves].sort((a, b) => a - b) };
     });
+    return { slots, containers: [...containers.values()] };
   }, definition);
 }

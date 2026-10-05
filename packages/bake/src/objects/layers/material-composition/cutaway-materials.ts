@@ -13,6 +13,8 @@ import {dotVector as dot3} from '../../geometry/index.ts';
 
 /** Interior cutaways are smooth illustrations, written in the lossy lane (lossy-lane.ts). */
 const INTERIOR_WEBP = { alphaQuality: 100, effort: 6 } as const;
+/** Cutaway sources require an exterior default and at least three cited sources; angular/radial ordering stays local. */
+const CUTAWAY_SOURCE_POLICY = { defaultView: 'exterior', minimumSources: 3, maximumWidthDegrees: 180 };
 import {validateMaterialRecipe} from './recipe.ts';
 import {validateRelativePath} from '../giant/index.ts';
 /** Declared radial composition, two-face cutaway shading, and polar wedge rasters. */
@@ -125,8 +127,6 @@ const prepared = Object.freeze({
 
 
 
-/** Cutaway sources require an exterior default and at least three cited sources; angular/radial ordering stays local. */
-const CUTAWAY_SOURCE_POLICY = { defaultView: 'exterior', minimumSources: 3, maximumWidthDegrees: 180 };
 function validateManifest(value:InteriorSource) {
   if (value?.schema !== config.sourceSchema ||
       value.defaultView !== CUTAWAY_SOURCE_POLICY.defaultView ||

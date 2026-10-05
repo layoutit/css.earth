@@ -297,6 +297,12 @@
     },
     {
       "location": "prepared",
+      "filename": "minimaps/shape.webp",
+      "bytes": 446,
+      "sha256": "ee2dc714de259f18533ad5cfa3a2d4abe307c0e3cb47b54232d6d8f31bfb959b"
+    },
+    {
+      "location": "prepared",
       "filename": "minimaps/thermal.webp",
       "bytes": 456,
       "sha256": "3e2ed85e56f350aea7e0a5c9940876c4c16ac1b00bf67610223d2b6d9e89ab48"
@@ -304,8 +310,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 359764,
-      "sha256": "f542e529ef5565a9bbf8f2379fe96aa28b0e2fd3a6329a1b2f44e581e595ae3e"
+      "bytes": 339144,
+      "sha256": "077a8f59e5b8a3ad0f1fa0b407b2d186a66a1424969c7c90d2e8c34862c65f30"
     },
     {
       "location": "prepared",

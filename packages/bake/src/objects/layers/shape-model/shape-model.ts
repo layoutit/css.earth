@@ -121,7 +121,7 @@ export async function prepareShapeModel({ descriptor, sources, objectDirectory, 
   const materialRoot = sphereLighting ? b.element('div', 'shape-model-material-root object-render-root') : null;
   const material = sphereLighting ? b.element('s', 'shape-model-material',
     `width:${scene.camera.logicalBodyDiameter}px;height:${scene.camera.logicalBodyDiameter}px;margin:${-scene.camera.logicalBodyDiameter / 2}px 0 0 ${-scene.camera.logicalBodyDiameter / 2}px`) : null;
-  if (material && materialRoot) { b.append(null, materialRoot); b.append(materialRoot, material); }
+  if (material && materialRoot) { material.style.backgroundImage = 'var(--shape-lighting)'; b.append(null, materialRoot); b.append(materialRoot, material); }
   const shapeLighting = !sphereLighting ? prepareShapeLighting({ builder: b, root, axes, config, scene,
     image: await publishedImageSize(published, lightingUrl, id), objectId: id }) : null;
   const materialReference = shapeLighting ? {

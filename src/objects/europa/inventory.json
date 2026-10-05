@@ -1209,6 +1209,12 @@
     },
     {
       "location": "prepared",
+      "filename": "minimaps/elevation.webp",
+      "bytes": 1420,
+      "sha256": "658e9d0a9cf9781c647b4003e1bc7b30eefe6ed7498c5f1ad431b400910acdfe"
+    },
+    {
+      "location": "prepared",
       "filename": "minimaps/enhanced.webp",
       "bytes": 12896,
       "sha256": "ead52c4a3bbb1cb4d0b0c79c9ad06faa8e5163b32baf96cd30e589b3bc80dec7"
@@ -1252,8 +1258,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 384391,
-      "sha256": "22e5965470e60eea32f4f9ab872ddd5637a82c016f5acda36b4afcc7d7ae9adf"
+      "bytes": 367884,
+      "sha256": "0fcfb21803f1cbdbeeb2420792dd18f245bb4ea61b688244509c064afe665075"
     },
     {
       "location": "prepared",

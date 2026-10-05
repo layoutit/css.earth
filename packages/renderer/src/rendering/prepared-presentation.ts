@@ -235,11 +235,12 @@ export function mountPreparedPresentation(stage: HTMLElement, context: PreparedP
   const leafIndex = new Map((definition.tree.textureBindings ?? []).flatMap(binding => binding.leaves.map(index => [nodes[index]!, index] as const)));
   const textureSize = preparedTextureSizes(definition);
   const surfaceScenes = [sceneElement, ...(definition.depthPartitions?.groups ?? []).map(group => nodes[group.scene])];
-  const textureLeaves = new Set([...textureBindings.values()].flat());
-  const textureActivation = prepareTextureActivation(preparedTree && progressiveActivation && definition.tree.textureBindings?.length
+  // A slot may list no element (a carrier the depth partitions emptied): only listed elements make a body textured.
+  const textureLeaves = new Set([...textureBindings.values()].flat()), textured = textureLeaves.size > 0;
+  const textureActivation = prepareTextureActivation(preparedTree && progressiveActivation && textured
     ? (definition.tree.activationGroups ?? []).map(group => group.map(index => nodes[index])
       .filter(node => textureLeaves.has(node) && surfaceScenes.some(scene => scene.contains(node)))) : [], context.own);
-  const activate = definition.tree.textureBindings?.length ? textureActivation.activate : prepareConnectedActivation(preparedTree && progressiveActivation
+  const activate = textured ? textureActivation.activate : prepareConnectedActivation(preparedTree && progressiveActivation
     ? (definition.tree.activationGroups ?? []).map(group => group.map(index => nodes[index])) : [], context.own,
     // Empty structural anchors can be leaves after preparation partitions the
     // surface. Hit testing and feature binding need their ancestry immediately.

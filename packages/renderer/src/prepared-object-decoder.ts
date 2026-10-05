@@ -1,5 +1,5 @@
 import { checks, failure } from '@cssearth/core';
-import { parseObjectDescriptor, readPreparedObject, parsePreparedObjectRuntime, type ObjectRuntimeDefinition, PREPARED_CSS_OBJECT_FORMAT } from '@cssearth/objects';
+import { parseObjectDescriptor, readPreparedObject, parsePreparedObjectRuntime, requireImageRecords, type ObjectRuntimeDefinition, PREPARED_CSS_OBJECT_FORMAT } from '@cssearth/objects';
 
 import { parsePreparedAssetOrigin } from './rendering/prepared-asset-origin.js';
 
@@ -25,7 +25,10 @@ export async function decodePreparedCssObject(descriptorInput: unknown, bytes: A
   const value = parseJson(bytes, `Prepared object ${descriptor.id}`);
   const prepared = readPreparedObject(value, descriptor, input => {
     if (record(input, 'runtime plan').id !== descriptor.id) throw new TypeError(`Prepared CSS definition does not match object ${descriptor.id}.`);
-    return parsePreparedObjectRuntime(input, { parsedJson: true });
+    const runtime = parsePreparedObjectRuntime(input, { parsedJson: true });
+    // The page mounts the shipped form only: every image a record, none a custom property.
+    requireImageRecords(runtime);
+    return runtime;
   });
   // Origin resolution is carried by the descriptor, never the transport itself:
   // a rebake is never required to move an object's assets onto `assetOrigin`.
