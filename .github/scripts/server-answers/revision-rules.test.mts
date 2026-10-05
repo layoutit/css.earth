@@ -99,6 +99,7 @@ test('offline revision build detaches scenes for Astro, rebuilds packages and pr
     await buildRevision(root, async (step, _index, env) => {
       seen.push(step); assert.equal(env.ASSET_ORIGIN, 'https://assets.invalid'); assert.equal(env.CSSEARTH_SKIP_DECLARATIONS, '1');
       assert.match(env.NODE_OPTIONS!, /offline\.mts/u);
+      assert.equal(env.PATH!.split(':')[0], resolve(root, 'node_modules/.bin'), 'a bare workspace binary such as `astro` is found as it is under pnpm run');
       if (step === 'astro build') await assert.rejects(lstat(resolve(root, 'public/scenes')), /ENOENT/u);
       else assert.equal((await lstat(resolve(root, 'public/scenes'))).isSymbolicLink(), true);
     });
