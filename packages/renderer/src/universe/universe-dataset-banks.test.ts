@@ -5,24 +5,27 @@ import { parseHTML } from 'linkedom';
 import { createSceneLifetime } from '@cssearth/engine';
 import type { PreparedVolumeDatasets } from '@cssearth/objects';
 
-const decode = { ready: true };
+const decode = { ready: true, pending: new Set<string>() };
 mock.module('../volume/volume-texture-readiness.js', { namedExports: {
-  createVolumeTextureReadiness: () => ({ ready: () => decode.ready, destroy() {} }),
+  createVolumeTextureReadiness: () => ({ ready: (urls: readonly string[]) => decode.ready && urls.every(url => !decode.pending.has(url)),
+    decoded: (url: string) => decode.ready && !decode.pending.has(url), destroy() {} }),
 } });
 mock.module('../volume/prepared-volume-datasets.js', { namedExports: {
   createPreparedVolumeDatasets: ({ payload }: { payload: PreparedVolumeDatasets }) => ({ payload,
     mount: ({ host, before, frontHost, frontBefore }: { host: HTMLElement; before: Element; frontHost: HTMLElement; frontBefore: Element }) => {
       const root = host.ownerDocument.createElement('div'), frontRoot = host.ownerDocument.createElement('div');
       host.insertBefore(root, before); frontHost.insertBefore(frontRoot, frontBefore);
-      let selectedDataset = payload.defaultDataset;
-      return { root, frontRoot, textureUrls: () => ['/slice.webp'], publish() {}, setStarsVisible() {}, destroy() { root.remove(); frontRoot.remove(); },
-        selectDataset(id: string) { selectedDataset = id; }, state: () => ({ selectedDataset }) };
+      let selectedDataset = payload.defaultDataset, staged: string | null = null;
+      return { root, frontRoot, textureUrls: (_publication: unknown, _approaching?: boolean, id = selectedDataset) => [`/${id}.webp`],
+        publish() {}, setStarsVisible() {}, destroy() { root.remove(); frontRoot.remove(); }, read: async () => {}, stagedDataset: () => staged,
+        selectDataset(id: string, stage = false) { staged = stage && id !== selectedDataset ? id : null; if (!staged) selectedDataset = id; },
+        state: () => ({ selectedDataset }) };
     },
   }),
 } });
 // The modules under test import the mocked ones, so they load after the mocks.
 const { createUniverseDatasetBanks } = await import('./universe-dataset-banks.js');
-afterEach(() => { decode.ready = true; });
+afterEach(() => { decode.ready = true; decode.pending.clear(); });
 const frame = { referenceFrame: 'fixture', epochJdTt: 1, originM: [0, 0, 0] as const,
   localToReferenceXyzw: [0, 0, 0, 1] as const, metersPerUnit: 1,
   boundsUnits: { min: [-1, -1, -1] as const, max: [1, 1, 1] as const } };
@@ -55,6 +58,25 @@ for (const stillCoasting of [true, false]) test(`a resident bank recovers after 
   for (const root of f.targets) { assert.equal(root.style.opacity, '0'); assert.equal(root.style.display, 'block'); }
   f.banks.setCoasting(stillCoasting); decode.ready = true; f.publish();
   for (const root of f.targets) { assert.equal(root.style.opacity, '1'); assert.equal(root.style.display, 'block'); }
+  f.lifetime.destroy();
+});
+
+test('a dataset picked on a bank on screen replaces the one shown once its images are decoded and the coast has stopped', async () => {
+  const f = await fixture(), shown = () => f.banks.focusBank('fixture')!.state()!.selectedDataset;
+  f.publish();
+  decode.pending.add('/dust.webp');
+  f.banks.select('fixture', 'dust'); f.publish();
+  assert.equal(shown(), 'optical', 'the bank keeps its dataset while the next one decodes');
+  for (const root of f.targets) { assert.equal(root.style.opacity, '1'); assert.equal(root.style.display, 'block'); }
+  decode.pending.clear(); f.banks.setCoasting(true); f.publish();
+  assert.equal(shown(), 'optical', 'a change of images waits for the coast to stop');
+  f.banks.setCoasting(false); f.publish();
+  assert.equal(shown(), 'dust');
+  for (const root of f.targets) { assert.equal(root.style.opacity, '1'); assert.equal(root.style.display, 'block'); }
+  // With nothing of the shown dataset on screen there is nothing to keep.
+  decode.ready = false; f.publish();
+  f.banks.select('fixture', 'optical'); f.publish();
+  assert.equal(shown(), 'optical');
   f.lifetime.destroy();
 });
 

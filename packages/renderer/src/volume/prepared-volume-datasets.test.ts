@@ -196,6 +196,22 @@ test('same-topology datasets reuse one retained cloud and replace all selected m
   assert.deepEqual(f.host.children, [f.before]);
 });
 
+test('a staged dataset is named, and its images listed, while the bank keeps the one it shows', () => {
+  const f = dom(), runtime = createPreparedVolumeDatasets({ payload: payload(), resolveResource: path => `/prepared/${path}` }).mount(f.options);
+  runtime.publish(publication());
+  assert.equal(runtime.stagedDataset(), null);
+  runtime.selectDataset('second', true);
+  assert.equal(runtime.state().id, 'first'); assert.equal(runtime.stagedDataset(), 'second');
+  assert.equal(runtime.textureUrls(publication()).every(url => url.startsWith('/prepared/first/')), true);
+  assert.equal(runtime.textureUrls(publication(), false, 'second').every(url => url.startsWith('/prepared/second/')), true);
+  assert.throws(() => runtime.textureUrls(publication(), false, 'missing'), /Unknown/);
+  runtime.selectDataset('second');
+  assert.equal(runtime.state().id, 'second'); assert.equal(runtime.stagedDataset(), null);
+  runtime.selectDataset('first', true); runtime.selectDataset('second', true);
+  assert.equal(runtime.stagedDataset(), null, 'the shown dataset asked for again is not staged');
+  runtime.destroy();
+});
+
 test('a distinct topology is allocated only on first selection and then retained hidden', () => {
   const base = payload(), second = base.datasets[1]!;
   const data = { ...base, datasets: [base.datasets[0]!, { ...second, volume: volume(second.id, -1, 1) }, base.datasets[2]!] };
