@@ -4,7 +4,7 @@ import { basename, dirname, isAbsolute, relative, resolve, sep } from 'node:path
 import { pathToFileURL } from 'node:url';
 
 const CACHE_FORMAT = 'cssearth-ci-inputs@2';
-const BUILD_ENVIRONMENT = ['ASSET_ORIGIN', 'CSSEARTH_PERFORMANCE_SOURCEMAPS', 'NODE_ENV'] as const;
+const BUILD_ENVIRONMENT = ['ASSET_ORIGIN', 'CSSEARTH_PERFORMANCE_SOURCEMAPS', 'NODE_ENV', 'CSSEARTH_SKIP_DECLARATIONS'] as const;
 
 export interface CacheRuntime {
   node: string;
@@ -82,9 +82,9 @@ function gitKey(root: string, listing: string): string {
  * outputs never enter the key. Cache consumers must use an exact key and install the frozen lockfile before using its outputs. */
 export function ciCacheKeys({ root = resolve(import.meta.dirname, '../../..'), runtime = {
   node: process.versions.node, platform: process.platform, arch: process.arch, environment: process.env,
-} }: { root?: string; runtime?: CacheRuntime } = {}) {
+}, inputs }: { root?: string; runtime?: CacheRuntime; inputs?: (path: string) => boolean } = {}) {
   root = realpathSync(root);
-  const entries = trackedCacheEntries(root), paths = new Set(entries.map(entry => entry.path));
+  const entries = trackedCacheEntries(root).filter(entry => !inputs || inputs(entry.path)), paths = new Set(entries.map(entry => entry.path));
   const identity = JSON.stringify([CACHE_FORMAT, toolchain(root, runtime)]);
   let bytes = 0, missing = 0, configFiles = 0;
   const states: (readonly unknown[])[] = [], files: { index: number; path: string; executable: boolean }[] = [];
@@ -132,137 +132,151 @@ export function ciCacheKeys({ root = resolve(import.meta.dirname, '../../..'), r
   return { buildDigest: gitKey(root, build), tsconfigDigest: gitKey(root, typecheck), files: entries.length, bytes, missing, configFiles };
 }
 
-// The package key covers every tracked file under packages/. The two non-tsup builds read only
-// package-local files (astronomy's body-records reads packages/astronomy/data; telescope-cli bundles its command),
-// so a change to their scripts or data changes the key without a separate input list to keep current.
-const BUILD_CONFIG_FIELDS = new Set(['entry', 'outDir', 'tsconfig', 'format', 'external', 'dts', 'sourcemap', 'clean', 'target', 'splitting']);
+export interface CompiledPackageInput {
+  name: string;
+  directory: string;
+  dependencies: string[];
+  digest: string;
+}
 
-/** Requires the frozen install, but never scans installed directories. Compiler APIs resolve actual imports;
- * package dist imports stand for the package source digest, so cold and restored checkouts use the same key. */
+const canonical = (value: unknown): string => JSON.stringify(value, (_key, child: unknown) =>
+  isRecord(child) ? Object.fromEntries(Object.entries(child).sort(([a], [b]) => a < b ? -1 : a > b ? 1 : 0)) : child);
+
+/** Select the frozen external dependency closure, including root build tools and peer-qualified snapshots.
+ * Unrelated workspace importers are excluded; workspace sources are covered by package digests instead. */
+function lockInputs(lock: unknown, directory: string): unknown {
+  if (!isRecord(lock) || !isRecord(lock.importers) || !isRecord(lock.packages) || !isRecord(lock.snapshots))
+    throw new TypeError('Compiled caches require a pnpm v9 lockfile.');
+  const snapshots = lock.snapshots, lockedPackages = lock.packages, lockedImporters = lock.importers;
+  const selected = new Map<string, unknown>(), metadata = new Map<string, unknown>();
+  const visit = (name: string, version: unknown): void => {
+    if (typeof version !== 'string') throw new TypeError(`Invalid locked dependency: ${name}`);
+    if (version.startsWith('link:')) return;
+    const key = `${name}@${version}`;
+    if (selected.has(key)) return;
+    const snapshot: unknown = snapshots[key];
+    if (!isRecord(snapshot)) throw new TypeError(`Missing locked snapshot: ${key}`);
+    selected.set(key, snapshot);
+    const base = key.split('(')[0]!;
+    if (!isRecord(lockedPackages[base])) throw new TypeError(`Missing locked package: ${base}`);
+    metadata.set(base, lockedPackages[base]);
+    for (const field of ['dependencies', 'optionalDependencies']) {
+      const dependencies = snapshot[field];
+      if (dependencies !== undefined && !isRecord(dependencies)) throw new TypeError(`Invalid snapshot: ${key}`);
+      for (const [child, resolved] of Object.entries(dependencies ?? {})) visit(child, resolved);
+    }
+  };
+  const importers = ['.', directory].map(path => {
+    const importer: unknown = lockedImporters[path];
+    if (!isRecord(importer)) throw new TypeError(`Missing locked importer: ${path}`);
+    for (const field of ['dependencies', 'devDependencies', 'optionalDependencies']) {
+      const dependencies = importer[field];
+      if (dependencies !== undefined && !isRecord(dependencies)) throw new TypeError(`Invalid importer: ${path}`);
+      for (const [name, dependency] of Object.entries(dependencies ?? {})) {
+        if (!isRecord(dependency)) throw new TypeError(`Invalid locked dependency: ${name}`);
+        visit(name, dependency.version);
+      }
+    }
+    return [path, importer];
+  });
+  return { policy: Object.fromEntries(Object.entries(lock).filter(([key]) => !['importers', 'packages', 'snapshots'].includes(key))),
+    importers, packages: Object.fromEntries(metadata), snapshots: Object.fromEntries(selected) };
+}
+
+/** Hash authored bytes, never execute a build config. A package's complete tracked tree is the conservative
+ * boundary for plugins, generated entry lists and dynamic imports. Literal authored imports extend that boundary.
+ * Workspace dependency digests propagate topologically; no failure falls back to application/docs inputs. */
 export async function compiledCiCacheKeys({ root = resolve(import.meta.dirname, '../../..'), runtime = {
   node: process.versions.node, platform: process.platform, arch: process.arch, environment: process.env,
 } }: { root?: string; runtime?: CacheRuntime } = {}) {
   root = realpathSync(root);
-  const full = ciCacheKeys({ root, runtime }), tracked = new Set(trackedCacheEntries(root).map(entry => entry.path));
-  const compiler = (await import('typescript')).default, { build } = await import('esbuild');
-  const identity = JSON.stringify(['compiled-inputs@1', toolchain(root, runtime)]);
-  const shared = [...tracked].filter(path => isTypecheckCacheInput(path) || ['.github/scripts/ci/build-ci.mts', '.github/scripts/ci/ci-cache-key.mts'].includes(path));
-  const packageInputs = new Set([...shared, ...[...tracked].filter(path => path.startsWith('packages/'))]);
-  const packageManifests = [...tracked].filter(path => /^packages\/[^/]+\/package\.json$/u.test(path));
-  if (!packageManifests.length) throw new TypeError('No tracked package manifests for the compiled cache.');
-  const packages = packageManifests.map(path => {
-    const value: unknown = JSON.parse(readFileSync(resolve(root, path), 'utf8'));
-    if (!isRecord(value) || typeof value.name !== 'string' || !isRecord(value.scripts) || typeof value.scripts.build !== 'string') throw new TypeError(`Invalid build package: ${path}`);
-    return { directory: dirname(path), name: value.name, script: value.scripts.build };
-  });
-  const packageNames = packages.map(pkg => pkg.name), fallbackReasons: string[] = [];
-  const normalizedOptions = (value: unknown): unknown => {
-    if (typeof value === 'string' && isAbsolute(value)) {
-      const local = relative(root, value).split(sep).join('/');
-      return local !== '..' && !local.startsWith('../') ? `./${local}` : value;
-    }
-    if (Array.isArray(value)) return value.map(normalizedOptions);
-    if (isRecord(value)) return Object.fromEntries(Object.entries(value).sort(([a], [b]) => a < b ? -1 : a > b ? 1 : 0).map(([key, child]) => [key, normalizedOptions(child)]));
-    if (typeof value === 'function' || typeof value === 'symbol') throw new TypeError('Build configuration contains executable option values.');
-    return value;
-  };
-  const generatedAstronomy = (path: string) => path.startsWith('packages/astronomy/src/data/generated/');
-  const compiledPackage = (path: string) => packages.some(pkg => path.startsWith(`${pkg.directory}/dist/`));
-  const input = (absolute: string, selected: Set<string>) => {
-    const lexical = relative(root, absolute).split(sep).join('/');
-    if (compiledPackage(lexical) || generatedAstronomy(lexical)) return;
-    const real = existsSync(absolute) ? realpathSync(absolute) : absolute;
-    const local = relative(root, real).split(sep).join('/');
-    if (compiledPackage(local) || generatedAstronomy(local)) return;
-    if (tracked.has(local)) { selected.add(local); return; }
-    // Frozen dependencies include compiler standard libraries. Resolve workspace symlinks before this check.
-    if (real.split(sep).includes('node_modules')) return;
-    throw new TypeError(`Untracked or missing authored compiler input: ${local}`);
-  };
-  const closure = async (directory: string, configPath: string | null, selected: Set<string>, options: string[]) => {
-    let entries: string[], config: Record<string, unknown>;
-    const cwd = resolve(root, directory);
-    if (configPath) {
-      input(configPath, selected);
-      const syntax = compiler.createSourceFile(configPath, readFileSync(configPath, 'utf8'), compiler.ScriptTarget.Latest, true);
-      const imports = compiler.preProcessFile(syntax.text, true, true).importedFiles.map(entry => entry.fileName);
-      // Current configs are plain tsup options plus node:path/node:url. Custom loaders/plugins or imported
-      // configuration modules need their own read contract; do not guess their hidden filesystem inputs.
-      if (imports.some(name => !['tsup', 'node:path', 'node:url'].includes(name))) throw new TypeError(`Unsupported build configuration imports: ${configPath}`);
-      const loaded: unknown = await import(`${pathToFileURL(configPath).href}?ci-input=${gitBlobIds(root, [relative(root, configPath)])[0]}`);
-      if (!isRecord(loaded) || !isRecord(loaded.default)) throw new TypeError(`Expected plain tsup options: ${configPath}`);
-      config = loaded.default;
-      if (Object.keys(config).some(key => !BUILD_CONFIG_FIELDS.has(key))) throw new TypeError(`Unsupported build configuration options: ${configPath}`);
-      const raw = Array.isArray(config.entry) ? config.entry : isRecord(config.entry) ? Object.values(config.entry) : [];
-      if (!raw.length || !raw.every((entry): entry is string => typeof entry === 'string')) throw new TypeError(`Invalid compiler entry points: ${configPath}`);
-      entries = raw.map(entry => resolve(cwd, entry));
-    } else {
-      // The audited telescope builder has one entry and no custom loaders or generation.
-      config = {};
-      entries = [resolve(cwd, 'src/bin.mts')];
-    }
-    options.push(JSON.stringify([directory, normalizedOptions(config)]));
-    const tsconfig = typeof config.tsconfig === 'string' ? resolve(cwd, config.tsconfig) : resolve(cwd, 'tsconfig.json');
-    const read = (path: string) => { input(path, selected); return compiler.sys.readFile(path); };
-    const parsedSource = compiler.readConfigFile(tsconfig, read);
-    if (parsedSource.error) throw new TypeError(compiler.flattenDiagnosticMessageText(parsedSource.error.messageText, '\n'));
-    const parsed = compiler.parseJsonConfigFileContent(parsedSource.config, { ...compiler.sys, readFile: read }, dirname(tsconfig));
-    if (parsed.errors.length) throw new TypeError(compiler.formatDiagnostics(parsed.errors, { getCanonicalFileName: value => value, getCurrentDirectory: () => root, getNewLine: () => '\n' }));
-    const ambient = parsed.fileNames.filter(path => /\.d\.[cm]?ts$/u.test(path));
-    const program = compiler.createProgram([...entries, ...ambient], { ...parsed.options, noEmit: true, incremental: false });
-    const workspaceImport = (specifier: string) => packageNames.some(name => specifier === name || specifier.startsWith(`${name}/`));
-    for (const source of program.getSourceFiles()) {
-      input(source.fileName, selected);
-      const actual = realpathSync(source.fileName), local = relative(root, actual).split(sep).join('/');
-      if (actual.split(sep).includes('node_modules') || compiledPackage(local) || generatedAstronomy(local)) continue;
-      for (const reference of compiler.preProcessFile(source.text, true, true).importedFiles) {
-        const specifier = reference.fileName;
-        if (!specifier.startsWith('.')) continue;
-        const destination = relative(root, resolve(dirname(source.fileName), specifier)).split(sep).join('/');
-        if (generatedAstronomy(destination) || compiledPackage(destination)) continue;
-        if (!compiler.resolveModuleName(specifier, source.fileName, parsed.options, compiler.sys).resolvedModule)
-          throw new TypeError(`Unresolved authored compiler input: ${source.fileName} → ${specifier}`);
+  const full = ciCacheKeys({ root, runtime, inputs: isTypecheckCacheInput }), entries = trackedCacheEntries(root);
+  const tracked = new Set(entries.map(entry => entry.path));
+  const compiler = (await import('typescript')).default;
+  const { parse } = await import('yaml');
+  const lock: unknown = parse(readFileSync(resolve(root, 'pnpm-lock.yaml'), 'utf8'));
+  const identity = canonical(['compiled-inputs@3', toolchain(root, runtime)]);
+  const shared = entries.filter(({ path }) => !path.includes('/') && path !== 'pnpm-lock.yaml' && isTypecheckCacheInput(path) ||
+    ['.github/scripts/ci/build-ci.mts', '.github/scripts/ci/ci-cache-key.mts'].includes(path)).map(entry => entry.path);
+  const packages = entries.filter(({ path }) => /^packages\/[^/]+\/package\.json$/u.test(path)).map(({ path }) => {
+    const manifest: unknown = JSON.parse(readFileSync(resolve(root, path), 'utf8'));
+    if (!isRecord(manifest) || typeof manifest.name !== 'string' || !isRecord(manifest.scripts) || typeof manifest.scripts.build !== 'string')
+      throw new TypeError(`Invalid build package: ${path}`);
+    const dependencies = new Set<string>();
+    for (const field of ['dependencies', 'devDependencies', 'optionalDependencies', 'peerDependencies']) {
+      const values = manifest[field];
+      if (values !== undefined && !isRecord(values)) throw new TypeError(`Invalid dependencies: ${path}`);
+      for (const [name, version] of Object.entries(values ?? {})) {
+        if (typeof version !== 'string') throw new TypeError(`Invalid dependency: ${path}/${name}`);
+        if (version.startsWith('workspace:')) dependencies.add(name);
       }
     }
-    const external = config.external ?? [];
-    if (!Array.isArray(external) || !external.every((value): value is string => typeof value === 'string')) throw new TypeError('Invalid compiler externals.');
-    const result = await build({ absWorkingDir: root, entryPoints: entries, bundle: true, write: false, metafile: true,
-      platform: 'node', format: 'esm', target: 'es2022', tsconfig, outdir: resolve(root, 'output/cache-input-analysis'),
-      external: [...external, ...packageNames], logLevel: 'silent', plugins: [{ name: 'compiled-input-owners', setup(builder) {
-        builder.onResolve({ filter: /./ }, args => {
-          if (workspaceImport(args.path)) return { path: args.path, external: true };
-          const local = relative(root, resolve(args.resolveDir, args.path)).split(sep).join('/');
-          if (generatedAstronomy(local) || compiledPackage(local)) return { path: args.path, external: true };
-          return undefined;
-        });
-      } }] });
-    for (const path of Object.keys(result.metafile!.inputs)) input(resolve(root, path), selected);
-  };
-  const narrowKey = (selected: ReadonlySet<string>, options: readonly string[], upstream = '') => {
-    const sorted = [...selected].sort(), files: string[] = [];
-    const states = sorted.map((path): readonly unknown[] => {
-      const absolute = resolve(root, path), info = lstatSync(absolute);
-      // Package documentation symlinks point to tracked owners already covered by broad package/config inputs.
-      if (info.isSymbolicLink()) return ['symlink', readlinkSync(absolute)];
-      files.push(path);
-      return ['file', info.mode & 0o111];
-    });
-    const ids = new Map(gitBlobIds(root, files).map((id, index) => [files[index]!, id]));
-    const lines = sorted.map((path, index) => JSON.stringify([path, ...states[index]!, ids.get(path) ?? null]) + '\n');
-    return gitKey(root, `${identity}\n${upstream}\n${JSON.stringify(options)}\n${lines.join('')}`);
-  };
-  const packageOptions: string[] = [];
-  let packageDigest = full.buildDigest;
-  try {
-    for (const pkg of packages) {
-      const supported = pkg.script === 'tsup' || pkg.directory === 'packages/astronomy' && pkg.script === 'node cli/body-records.mts && tsup' || pkg.directory === 'packages/telescope-cli' && pkg.script === 'node build.mts';
-      if (!supported) throw new TypeError(`Unaudited package build: ${pkg.directory}`);
-      const config = pkg.directory === 'packages/telescope-cli' ? null : resolve(root, pkg.directory, 'tsup.config.ts');
-      await closure(pkg.directory, config, packageInputs, packageOptions);
+    return { directory: dirname(path), name: manifest.name, dependencies, selected: new Set(shared) };
+  });
+  if (!packages.length || new Set(packages.map(pkg => pkg.name)).size !== packages.length) throw new TypeError('Invalid compiled workspace packages.');
+  const owners = new Map(packages.map(pkg => [pkg.name, pkg]));
+  const fallbackReasons: string[] = [];
+  for (const pkg of packages) {
+    for (const { path } of entries) if (path.startsWith(`${pkg.directory}/`)) pkg.selected.add(path);
+    const queue = [...pkg.selected], visited = new Set<string>();
+    while (queue.length) {
+      const path = queue.pop()!;
+      if (visited.has(path)) continue;
+      visited.add(path);
+      if (!/\.[cm]?[jt]sx?$/u.test(path) || /\.test\./u.test(path) || !existsSync(resolve(root, path))) continue;
+      const text = readFileSync(resolve(root, path), 'utf8');
+      for (const { fileName: specifier } of compiler.preProcessFile(text, true, true).importedFiles) {
+        const owner = packages.find(candidate => specifier === candidate.name || specifier.startsWith(`${candidate.name}/`));
+        if (owner && owner.name !== pkg.name) { pkg.dependencies.add(owner.name); continue; }
+        if (!specifier.startsWith('.')) continue;
+        const base = resolve(dirname(resolve(root, path)), specifier);
+        const stem = base.replace(/\.[cm]?js$/u, '');
+        const candidate = [base, ...['.ts', '.mts', '.cts', '.tsx', '/index.ts', '/index.mts'].map(suffix => stem + suffix)]
+          .find(file => tracked.has(relativeInside(root, file))) ?? base;
+        const local = relativeInside(root, candidate);
+        const relativeOwner = packages.find(other => local.startsWith(`${other.directory}/`));
+        if (relativeOwner && relativeOwner.name !== pkg.name) { pkg.dependencies.add(relativeOwner.name); continue; }
+        if (!tracked.has(local)) {
+          // Generated sources/dist and unresolved literals stay within the complete owning-package boundary.
+          fallbackReasons.push(`${pkg.name}: package-local boundary for ${path} → ${specifier}`);
+          continue;
+        }
+        if (!pkg.selected.has(local)) { pkg.selected.add(local); queue.push(local); }
+      }
     }
-    packageDigest = narrowKey(packageInputs, packageOptions);
-  } catch (error) { fallbackReasons.push(`packages: ${error instanceof Error ? error.message : String(error)}`); }
-  return { ...full, packageDigest, packageInputFiles: packageInputs.size, fallbackReasons };
+  }
+  const allInputs = new Set(packages.flatMap(pkg => [...pkg.selected]));
+  const files = [...allInputs].filter(path => existsSync(resolve(root, path)) && lstatSync(resolve(root, path)).isFile());
+  const ids = new Map(gitBlobIds(root, files).map((id, index) => [files[index]!, id]));
+  const inputState = (path: string): unknown => {
+    const file = resolve(root, path);
+    if (!existsSync(file)) return [path, 'deleted'];
+    const info = lstatSync(file);
+    if (info.isSymbolicLink()) {
+      const target = relativeInside(root, realpathSync(file));
+      if (!tracked.has(target)) throw new TypeError(`Untracked package symlink target: ${path}`);
+      return [path, 'symlink', readlinkSync(file), gitBlobIds(root, [target])[0]];
+    }
+    return [path, info.mode & 0o111, ids.get(path)];
+  };
+  const finished = new Map<string, CompiledPackageInput>(), visiting = new Set<string>();
+  const digestPackage = (name: string): CompiledPackageInput => {
+    const ready = finished.get(name);
+    if (ready) return ready;
+    const pkg = owners.get(name);
+    if (!pkg) throw new TypeError(`Workspace build dependency outside packages: ${name}`);
+    if (visiting.has(name)) throw new TypeError(`Cyclic compiled workspace dependency: ${name}`);
+    visiting.add(name);
+    const dependencies = [...pkg.dependencies].sort();
+    const upstream = dependencies.map(dependency => [dependency, digestPackage(dependency).digest]);
+    const digest = gitKey(root, canonical([identity, [...pkg.selected].sort().map(inputState), lockInputs(lock, pkg.directory), upstream]));
+    const result = { name, directory: pkg.directory, dependencies, digest };
+    finished.set(name, result); visiting.delete(name);
+    return result;
+  };
+  const packageInputs = packages.map(pkg => digestPackage(pkg.name));
+  const packageDigest = gitKey(root, canonical(packageInputs.map(pkg => [pkg.name, pkg.digest])));
+  return { ...full, packageDigest, packages: packageInputs, packageInputFiles: allInputs.size, fallbackReasons: [...new Set(fallbackReasons)] };
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {

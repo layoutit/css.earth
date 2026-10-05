@@ -149,6 +149,104 @@ later introduced the current pattern and documented its checked consumers and
 original nebula exception. Neither an older timing nor the smaller checkout alone proves
 that today's required feedback meets the budget; measure the current workflow.
 
+### Per-package compiled cache
+
+Shared lanes and nebula restore `compiled-packages-v3-<digest set>`, with
+`compiled-packages-v3-` accepting an older entry. The build runner verifies each
+package's input digest and complete output listing in its dist receipt. It rebuilds
+only invalid packages and their transitive dependents, using manifest dependency
+ordering. An exact restore still runs every selected check. Contract lint is the
+single saver; other jobs never race to save that digest set.
+
+Each digest covers the package's tracked files, root compiler/build policy and
+root build tools, its frozen external dependency closure, literal authored imports
+and workspace dependency digests. Configs are parsed rather than executed, so
+function-style tsup configs, hooks, `shims` and `removeNodeProtocol` need no option
+allowlist. Dynamic or unresolved imports retain the complete package and root
+configuration boundary, never the whole application tree. Declaration mode is
+part of the identity. Generated astronomy sources are recreated on warm restores.
+
+The expected effect is reuse across unrelated site/documentation edits and partial
+rebuilds after package edits. This is not a measured speedup: record hosted cold
+and warm runs, `compiledCacheHits`, rebuilt package names and build-ci seconds per
+job, plus total required-check latency. Receipt and input regressions include
+source mutations removing dependency closure, root configuration and package
+isolation. Required check names and test selection remain unchanged.
+
+## Single generation in the universe matrix
+
+The universe matrix restores its prepared-file cache, compiles packages with
+`build-ci.mts packages`, restores and verifies selected inputs with
+`prepare-ci-inputs.mts universe` (main retains `setup:asset-data`), then runs
+`build-ci.mts generators` and the feature index once. The `full` and `lint`
+plans used by other jobs are unchanged. Package compilation still validates
+exact cache receipts and regenerates astronomy TypeScript data on a hit.
+
+The split plan runs exactly the same generator commands and arguments as
+`full`, retaining every dependency between generators. Its only removed
+prerequisite is the package compilation already completed by the previous
+step. The [workflow regression](../.github/scripts/ci/ci-speed.test.mts) pins that
+closure, execution order, single invocation and the unchanged full-build jobs.
+Script inspection gives the output-equivalence argument:
+
+- The catalog reads restored runtime cameras, controls and arrival billboards
+  through `prepare-object-discovery.mts`; these affect the prepared catalog's
+  discovery facts. Its context asset modules read inventories, and its other
+  tables read descriptors and source records. These outputs are regenerated
+  from the same restored inputs as the former second pass.
+- Solar geometry reads the catalog, astronomy records, saved epoch ephemerides
+  and authored rotation sources. Navigation's catalog-only pass writes marker
+  presentation metadata from the catalog and source recipes; it does not bake
+  images. Neither requires an earlier generator pass.
+- Spatial preparation rewrites the Sun's `prepared/world-context.json`, member
+  and place files, orbit and plain-star banks, and system views from source
+  navigation, geometry, descriptors and packaged-star sources. It also removes
+  obsolete world files. Restoring published assets used to overwrite the first
+  pass's context; the retained pass now runs only after that restore.
+- Moon labels read the rewritten Sun context and saved Horizons responses.
+  World presentation reads the regenerated catalog and world files plus source
+  tables. The feature index still follows them and reads restored feature,
+  place and runtime records. Shell titles and icons copy source-owned artwork
+  and produce their modules independently of restored assets.
+
+No generator consumes its previous output as scientific input. The old second
+pass replaced the first pass's outputs; the new sequence retains that second
+pass's commands and inputs, including its cleanup. This is script-level
+reasoning, not a measured byte comparison of a hosted build.
+
+Only the packages matrix lane expands sparse volume/geology inputs and restores
+repository volumes, and only when `CI_TEST_PACKAGES` contains the exact token
+`bake`, `objects`, `volume-viewer` or `all`. The test commands, selected file
+arguments and source-qualified test policy stay unchanged. Nebula's own volume
+restore stays unconditional. Mutation tests execute the actual Bash block with
+recording commands, proving required selections restore inputs and unrelated
+selections avoid both restore and sparse expansion.
+
+Only the universe matrix has `CI_LANE_SKIP`; the other heavy jobs are already
+excluded by their job conditions. Its checkout, package-manager/Node setup,
+all cache actions and cache-key script now skip with the lane. Shell steps still
+return success for an empty lane, keeping both matrix entries and the required
+`Prepared universe and shared renderer` aggregate. Regression mutations remove
+each guard; aggregate tests require every non-success result to fail.
+
+Safety limits changed as follows; they are not feedback targets:
+
+| Job | Previous minutes | New minutes | Supplied observed seconds |
+| --- | --- | --- | --- |
+| Typecheck | 25 | 12 | 291 |
+| Typecheck test files | 25 | 12 | 249 |
+| Preparation / publication | 25 | 10 | 210 |
+| Astroquery | 25 | 12 | Not supplied |
+| Internal nebula | 15 | 10 | 255 |
+
+Every supplied duration is below half its new ceiling. Expected effects are
+less duplicated generator work, fewer unnecessary volume transfers and no
+checkout/cache cost for empty matrix lanes. No speedup is estimated here.
+The orchestrator must measure cold and warm hosted runs, generator counts,
+selected test/verdict parity, checkout/cache and restore durations, and total
+required-check latency; confirm astroquery's longest observed run fits its new
+limit before merging.
+
 ## Server answer comparison
 
 The local [server answers safety net](server-answers.md) records and compares real preview middleware and built
@@ -167,6 +265,34 @@ paths; do not move them into a bespoke wrapper to make CI faster.
 `packages/core/src/node/register-vite-suffix.mts` for Vite imports and enables module mocks; `test:packages`
 runs `packages/` and `integration/`; `test:site` runs `site/`, `src/` and `.github/`. The lab CLI owns lab-test discovery; `pnpm test:lab` also runs its
 assets stage first. Distinguish source-dependent skips from executed checks.
+
+The universe matrix runs site in three shards and all packages in three. For a
+package subset, the sorted, deduplicated files selected by `CI_TEST_PACKAGES` plus
+`CI_TEST_FILES` use one shard at 40 files or fewer, otherwise two. Empty lanes
+retain their explicit no-work success; selected shards must contain files. The
+classification checkout computes this matrix from the existing script globs.
+Each shard calls `pnpm test:run --test-shard=i/n` with the same complete sorted
+file set. Node assigns sorted file indexes modulo the shard count; execution
+durations never affect membership. Discovery and native-runner regressions prove
+exact coverage, stable membership and failure propagation. The local CI reader
+expands the same matrix, including selected subsets. The required **Prepared
+universe and shared renderer** aggregate still requires the entire matrix result
+to be success; failure, cancellation or unexpected skipping fails it, with
+`fail-fast: false` so sibling results remain visible.
+
+Every isolated shard retains the existing install, verified package cache,
+prepared restore and prerequisite generation; source-volume setup remains only
+in packages and oracle compilation only in site. No extra build or restore is
+added within a shard. Only site shard 1 saves the shared prepared cache on main.
+The expected benefit is overlapping test execution; setup is repeated on each
+runner. The supplied baseline is 541 s for site and 87 s for packages, but no
+hosted step timings are available locally: **there is no measured per-shard setup
+time assumption yet**. Workflow commands alone cannot separate setup from tests.
+The orchestrator must measure checkout/install, both package/preparation steps,
+restores, browser install, oracle/source setup, test duration, queue delay and
+aggregate latency on representative cold and warm hosted runs. If measured setup
+dominates and three site shards do not reduce wall time, report that result and
+its step timings; do not claim a speedup from shard counts or local timings.
 
 When changing selection, prove both that a newly matching file is discovered and
 that a deliberately failing assertion makes the command fail. When changing a
