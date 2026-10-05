@@ -4,11 +4,11 @@ import type { ShellCamera } from '../browser/browser-types.mts';
 import type { ObjectEntry } from '../objects.mts';
 import type { createPreparedWorldNavigation } from '../prepared-world-navigation.mts';
 import { withDataset } from '../dataset-url.mts';
-import { withView } from './navigation-scope.mts';
+import { namesSystem, withView } from './navigation-scope.mts';
 import { systemById, type SystemObjects } from '../object-systems.mts';
 import { satelliteSystemByHost } from '../satellite-systems.mts';
 import { zoomStepOf } from '../inside-view.mts';
-import { moonSystem, selectionKey, selectionTargetFromUrl, starSystem, subjectOf, subjectView, type SceneSubject } from '../scene/scene-selection.mts';
+import { moonSystem, selectionKey, starSystem, subjectOf, subjectView, type SceneSubject } from '../scene/scene-subject.mts';
 
 import type { NavigationHistory, NavigationIntent, SceneView, SelectionTarget } from './navigation-types.mts';
 export type { NavigationHistory, NavigationIntent } from './navigation-types.mts';
@@ -30,7 +30,7 @@ export interface ResolvedNavigation {
 
 /** Interpret destination intent here; dataset and camera owners still validate their payloads when applying them. */
 export function readNavigationSelection(url: URL, objectId: string) {
-  return { subject: selectionTargetFromUrl(url, objectId), savedView: url.searchParams.has('v'),
+  return { subject: subjectOf(objectId, namesSystem(url) ? 'system' : 'body'), savedView: url.searchParams.has('v'),
     dataset: url.searchParams.has('dataset'), feature: url.searchParams.get('feature') };
 }
 
