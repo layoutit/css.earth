@@ -3,9 +3,15 @@
   "assets": [
     {
       "location": "public",
+      "filename": "m57-dataset-near-infrared.webp",
+      "bytes": 19184,
+      "sha256": "5a4ed909c7c8b3ad18c0f2fa88274199616e5e72580583e83339e931f2a9844f"
+    },
+    {
+      "location": "public",
       "filename": "m57-dataset-optical.webp",
-      "bytes": 7028,
-      "sha256": "98705f354400f3513c9e323f997644f3c08aa46c01caa035d5162a31de3ae501"
+      "bytes": 6298,
+      "sha256": "b7abcdb4bcd6cceb55938b1a71befac81d2ab259780ce822342004be2bb54ea6"
     },
     {
       "location": "prepared",
@@ -16,20 +22,20 @@
     {
       "location": "prepared",
       "filename": "controls.json",
-      "bytes": 451,
-      "sha256": "03f0cd42322659ce6997eb871f68bfaab26c999e9e7b4e79f0e64c0661b269e6"
+      "bytes": 656,
+      "sha256": "e95759053b5229c227f9658d67eeaaeb8d0330f1141ecf338982f9ebc13627d4"
     },
     {
       "location": "prepared",
       "filename": "datasets.json",
-      "bytes": 529,
-      "sha256": "9f81c2d2c496c3858a4e3bdf41fa9105a09fd72f92313933acffe3cc1ee7cd23"
+      "bytes": 896,
+      "sha256": "5baca9598482ac5db9e51208249bd5181c9cd3d36caea600db0613ec88c48416"
     },
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 4631,
-      "sha256": "31bb0f80131df0dd76d9696f3ca657f1be6081068818091602182b45c0828cd2"
+      "bytes": 4916,
+      "sha256": "bd0065426dca98a0edd59207df18e33b5aa0f5ee3eeafce7c30ff95475e3b926"
     },
     {
       "location": "prepared",
@@ -40,8 +46,8 @@
     {
       "location": "prepared",
       "filename": "text.json",
-      "bytes": 3782,
-      "sha256": "c4fc89a2683080df851a61fed297c9065619e6a7c9983a3db04ba2f125f46df1"
+      "bytes": 5554,
+      "sha256": "00e3c3f3088a1e78d20d8bc7ddc3dc0912ec9fbf21b5b12b2fdb4c441438873c"
     },
     {
       "location": "prepared",

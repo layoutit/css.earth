@@ -1,0 +1,43 @@
+{
+  "id": "publication-wesson-2024-ring-nebula-jwst",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "JWST observations of the Ring Nebula (NGC 6720): I. Imaging of the rings, globules, and arcs",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2308.09027"
+    },
+    {
+      "type": "doi",
+      "value": "10.1093/mnras/stad3670"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/2308.09027",
+      "label": "Published reference"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/2308.09027",
+      "checkedOn": "2026-10-04",
+      "locator": "The observations: NIRCam filters F162M, F212N, F300M and F335M. Sect. 4.1: the central cavity, about 25 arcsec in radius, is filled with high-ionisation gas; the shell's emission is clumpy, especially in filters dominated by H2. Sect. 5.5: the F162M image holds continuum, presumably free-free emission, and hydrogen recombination lines, fainter than the molecular hydrogen emission \"which dominates the other three NIRCam images\"."
+    }
+  ],
+  "creators": [
+    "Wesson, R.",
+    "Matsuura, M.",
+    "Zijlstra, A. A.",
+    "Volk, K.",
+    "Kavanagh, P. J.",
+    "García-Segura, G.",
+    "et al."
+  ],
+  "publisher": "MNRAS 528, 3392",
+  "publicationDate": "2024",
+  "relations": [],
+  "statements": []
+}
