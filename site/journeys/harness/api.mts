@@ -128,8 +128,8 @@ export function journeyApi(page: Page, origin: string, record: Awaited<ReturnTyp
     return response;
   }
   let acceptedFlights = 0;
-  async function navigationWitness(interrupted = false) {
-    if (!acceptedFlights || await page.evaluate(() => Reflect.get(window, '__journeyDocumentStayed')) !== true
+  async function navigationWitness(interrupted = false, departure?: string) {
+    if ((!acceptedFlights && (!departure || new URL(page.url()).pathname === departure)) || await page.evaluate(() => Reflect.get(window, '__journeyDocumentStayed')) !== true
       || await page.locator('html').getAttribute('data-ready') !== 'true') throw new Error('Missing completed resident navigation witness');
     record.capability('capability:inAppNavigation');
     if (interrupted) {

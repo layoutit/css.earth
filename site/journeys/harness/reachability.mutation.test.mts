@@ -37,10 +37,11 @@ for (const engine of ['chromium', 'webkit'] as const) test(`${engine}: native ac
         { id: 'control:fixture', kind: 'control', source: file + ':1', tag: 'button', selector: '.action' },
       ], root);
       await page.goto(`http://127.0.0.1:${address.port}/`);
-      if (!removed) await page.locator('button').click();
+      const action = removed ? async () => {} : async () => { await page.locator('button').click(); };
+      await action();
       const evidence = await read();
       const required = ['handler:site:journeys:fixture:module:click:1', 'control:fixture'];
-      const journey: RegisteredJourney = { id: 'fixture', status: { desktop: 'qualified' }, exercises: required, async run() {} };
+      const journey: RegisteredJourney = { id: 'fixture', status: { desktop: 'qualified' }, exercises: required, run: action };
       const gate = coverageGate([journey], required, [], undefined, [{ journey: 'fixture', profile: 'desktop', signature: signature(journey), observed: evidence.observed, captures: 40, evidence: 'output/test-fixture' }]);
       assert.equal(gate.passed, !removed, 'Action deletion must turn coverage red');
       if (removed) { assert.deepEqual(evidence.observed, []); assert.throws(() => requireObserved(required, evidence.observed), /unobserved/u); }

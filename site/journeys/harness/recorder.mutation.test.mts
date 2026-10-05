@@ -164,7 +164,7 @@ test('delete recorder detector mutations', { skip: !enabled || process.env.MUTAT
   let resultsNative = 0;
   const exemplars: Record<Family, string> = { network: 'network-repeat', dom: 'dom-transient', rendering: 'rendering-screenshot', content: 'content-url-history', errors: 'errors-console-error' };
   try {
-    for (const file of ['server-child.mts', 'server.mts', 'profiles.mts', 'recorder.mts', 'history.mts', 'api.mts', 'trace.mts', 'differ.mts', 'png.mts', 'canonical.mts', 'volatile.mts', 'probe.mts', 'recorder.mutation.test.mts']) {
+    for (const file of ['server-child.mts', 'server.mts', 'profiles.mts', 'recorder.mts', 'reachability.mts', 'listener-resolver.mts', 'binding-sites.mts', 'history.mts', 'api.mts', 'trace.mts', 'differ.mts', 'png.mts', 'canonical.mts', 'volatile.mts', 'probe.mts', 'recorder.mutation.test.mts']) {
       let text = await readFile(resolve(import.meta.dirname, file), 'utf8');
       if (file === 'server-child.mts') text = text.replace('../../server/preview.mts', '../../../../site/server/preview.mts');
       if (file === 'server.mts') text = text.replace("'../../..'", "'../../../..'");
@@ -185,7 +185,7 @@ test('delete recorder detector mutations', { skip: !enabled || process.env.MUTAT
       }), error => error instanceof Error && 'code' in error && error.code === 1 && 'stdout' in error && typeof error.stdout === 'string' && error.stdout.includes(`Detector missing: ${family}`) && error.stdout.includes(`not ok 1 - chromium ${value}`) && error.stdout.includes(`not ok 2 - webkit ${value}`));
     }
     const apiSource = await readFile(resolve(import.meta.dirname, 'api.mts'), 'utf8');
-    const timestamp = "        Object.defineProperty(event, 'timeStamp', { value: performance.now(), configurable: true });";
+    const timestamp = "        if (eventType === 'wheel') Object.defineProperty(event, 'timeStamp', { value: performance.now(), configurable: true });";
     assert.ok(apiSource.includes(timestamp));
     await writeFile(resolve(root, 'api.mts'), apiSource.replace(timestamp, ''));
     await assert.rejects(exec(process.execPath, ['--test', resolve(root, 'recorder.mutation.test.mts')], {

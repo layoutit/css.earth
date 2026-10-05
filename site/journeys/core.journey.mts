@@ -1,5 +1,6 @@
 /** Core representative journeys through shell links, browser history and native input. */
 import type { Journey } from './harness/api.mts';
+import { json } from './harness/trace.mts';
 
 type Api = Parameters<Journey['run']>[0];
 const representatives = [
@@ -13,15 +14,19 @@ const searchExercises = [
   'handler:site:navigation:navigation-history:bindNavigationLinks:objectnavigationquery:1',
 ];
 
-/** Drive the public router event used by the iPad harness; retain a resident reload witness. */
-async function chooseDestination(api: Api, id: string, route: string) {
+/** Drive a native Dione link or the public router event, and retain a resident reload witness. */
+async function chooseDestination(api: Api, id: string, route: string, native = false) {
   await api.page.evaluate(() => { Reflect.set(window, '__journeyDocumentStayed', true); });
   await api.barrier('navigation-ready', route);
   api.setStep(`choose-${id}`);
-  await api.fly(id === 'earth-system' ? 'earth' : id);
+  if (native) await api.page.locator('a.object-link[data-object-id="dione"]').click();
+  else await api.fly(id === 'earth-system' ? 'earth' : id);
   await api.barrier(`arrive-${id}`, `/${id}/`);
+  if (native && (await api.page.locator('.object-information-panel').getAttribute('data-card-subject') !== 'body'
+    || !await api.page.locator('.object-information-panel .object-selected-panel[data-source-subject="object:dione"]').isVisible()))
+    throw new Error('Native Dione link did not present its body card');
   await assertResident(api);
-  await api.navigationWitness();
+  await api.navigationWitness(false, route);
 }
 async function assertResident(api: Api) {
   if (await api.page.evaluate(() => Reflect.get(window, '__journeyDocumentStayed')) !== true)
@@ -30,10 +35,11 @@ async function assertResident(api: Api) {
 
 export const journeys: Journey[] = representatives.flatMap<Journey>(({ id, source }) => [
   {
-    id: `${id}-navigation`, exercises: searchExercises,
+    id: `${id}-navigation`, recipe: json({ id, source, chooseDestination: String(chooseDestination), assertResident: String(assertResident) }), exercises: id === 'dione' ? ['capability:inAppNavigation',
+      'handler:site:navigation:navigation-history:bindNavigationLinks:click:1'] : searchExercises,
     async run(api) {
       await api.load(`/${source}/`, 'departure');
-      await chooseDestination(api, id, `/${source}/`);
+      await chooseDestination(api, id, `/${source}/`, id === 'dione');
     },
   },
   {
@@ -52,7 +58,10 @@ export const journeys: Journey[] = representatives.flatMap<Journey>(({ id, sourc
     },
   },
   {
-    id: `${id}-deep-link`, exercises: ['capability:directLoad', 'capability:historyDeepLinks'],
+    id: `${id}-deep-link`, recipe: json({ id }), exercises: ['capability:directLoad', 'capability:historyDeepLinks',
+      ...(id === 'earth-system' ? ['control:site:components:ObjectShell:button:markup:4',
+        'handler:site:shell:shell-settings:createSettingsController:click:1',
+        'handler:site:shell:shell-settings:createSettingsController:beforetoggle:1'] : [])],
     async run(api) {
       // The native settings link is supported by both the preview and enhanced shell.
       const query = id === 'milky-way' ? '?settings=1' : '?settings=1&shadows=on';
@@ -66,6 +75,13 @@ export const journeys: Journey[] = representatives.flatMap<Journey>(({ id, sourc
       const value: unknown = JSON.parse(settings);
       if (!value || typeof value !== 'object' || id !== 'milky-way' && !('shadows' in value && value.shadows === true))
         throw new Error('Deep link did not restore the requested settings');
+      if (id === 'earth-system') {
+        api.setStep('restored-settings');
+        await api.page.locator('.object-settings-action').click();
+        await api.barrier('restored-settings', `/${id}/`);
+        if (!await api.page.locator('.object-settings-panel input[name="shadows"]').isChecked())
+          throw new Error('Runtime settings did not preserve requested shadows');
+      }
       await api.deepLinkWitness();
     },
   },
