@@ -1,5 +1,6 @@
 /** Child host: real preview/edge/bundled handlers, isolated function packages, and deterministic CDN stand-ins. */
 import fs from 'node:fs';
+import { assetOrigin, fetchRoute } from './asset-origin.mts';
 import promises from 'node:fs/promises';
 import { syncBuiltinESMExports, registerHooks } from 'node:module';
 import { extname, relative, resolve, sep } from 'node:path';
@@ -14,6 +15,7 @@ const logError = console.error;
 console.error = (...values: unknown[]) => { if (values.some(value => String(value).includes('page-handler-fallback'))) fallback = true; logError(...values); };
 const root = await promises.realpath(process.cwd());
 const target = process.argv[2], dist = process.argv[3];
+const publishedOrigin = assetOrigin(process.argv[4]);
 if (!dist || !['preview', 'netlify', 'cloudflare'].includes(target ?? '')) throw new Error('Invalid child arguments');
 const config = await readDeploymentConfig(root, dist);
 const reads = new Map<string, Set<string>>(), packages = new Map<string, { root: string; bundle: string }>();
@@ -85,7 +87,7 @@ async function staticAnswer(request: Request): Promise<Response> {
     if (redirect) return redirect;
     file = resolve(file, 'index.html');
   }
-  if (!await promises.stat(file).catch(() => null) && url.origin === 'https://assets.invalid') file = await publishedFile(url.pathname) ?? file;
+  if (!await promises.stat(file).catch(() => null) && url.origin === publishedOrigin) file = await publishedFile(url.pathname) ?? file;
   try {
     const bytes = await promises.readFile(file), stat = await promises.stat(file);
     const types: Record<string, string> = { '.html': 'text/html; charset=utf-8', '.json': 'application/json', '.xml': 'application/xml', '.txt': 'text/plain', '.js': 'text/javascript', '.css': 'text/css', '.webp': 'image/webp', '.svg': 'image/svg+xml' };
@@ -110,8 +112,7 @@ async function staticAnswer(request: Request): Promise<Response> {
 }
 globalThis.fetch = async (input, init) => {
   const request = new Request(input, init), url = new URL(request.url);
-  if (!['https://answers.invalid', 'https://www.answers.invalid', 'https://assets.invalid', origin].includes(url.origin)) throw new Error(`Network forbidden: ${url.origin}`);
-  if (url.origin === 'https://assets.invalid') return scope.exit(() => staticAnswer(request));
+  if (fetchRoute(url.href, publishedOrigin, origin) === 'asset') return scope.exit(() => staticAnswer(request));
   if (preview) return originalFetch(new Request(origin + url.pathname + url.search, request));
   return scope.exit(() => staticAnswer(request));
 };
