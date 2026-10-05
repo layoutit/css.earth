@@ -10,16 +10,8 @@ import { satelliteSystemByHost } from '../satellite-systems.mts';
 import { zoomStepOf } from '../inside-view.mts';
 import { moonSystem, selectionKey, selectionTargetFromUrl, starSystem, subjectOf, subjectView, type SelectionTarget, type SceneSubject, type SceneView } from '../scene/scene-selection.mts';
 
-export type NavigationHistory = { history: 'push' | 'replace' } | { history: 'pop'; entry: string };
-export type NavigationIntent =
-  /** Go to an object. `view` asks for the system it hosts instead of the body itself; `camera: 'frame'` flies
-   * to that view's framing, and `preserve` keeps the camera where it is (the zoom hands the view over to the object's scene).
-   * `departed`: the view a header pill's flight left: the hand-over it lands on is a new entry, and Back returns to it.
-   * `history: 'replace'` lands on the entry it left (a Slideshow hop after the tour's first). */
-  | { kind: 'object'; view?: SceneView; camera?: 'frame' | 'preserve'; departed?: string; history?: 'replace' }
-  | { kind: 'feature'; id: string | null }
-  | { kind: 'link'; url: string }
-  | { kind: 'history'; url: string; history: NavigationHistory };
+import type { NavigationHistory, NavigationIntent } from './navigation-types.mts';
+export type { NavigationHistory, NavigationIntent } from './navigation-types.mts';
 export type NavigationCamera =
   | { kind: 'surface' }
   | { kind: 'restore'; animate: boolean }
