@@ -62,7 +62,9 @@ async function build(label: string, revision: string, origin = false): Promise<s
   }
   if (origin && !(await readFile(resolve(destination, 'dist/earth/index.html'), 'utf8')).includes('https://assets.invalid')) throw new Error('Asset-origin build did not rewrite Earth HTML.');
   let failedTarget = false;
-  for (const target of ['preview', 'netlify', 'cloudflare']) {
+  // The preview serves features through the real Vite middleware, which would try to fetch the invalid published origin: only the
+  // function targets, whose stand-in static layer resolves published URLs through the inventory, qualify the asset-origin build.
+  for (const target of origin ? ['netlify', 'cloudflare'] : ['preview', 'netlify', 'cloudflare']) {
     const recording = resolve(out, label, target);
     const args = [process.execPath, resolve(import.meta.dirname, 'record.mts'), '--target', target, '--dist', 'dist', '--out', recording];
     if (await stage(`${label}-record-${target}`, args, destination, env) !== 0) { failedTarget = true; continue; }

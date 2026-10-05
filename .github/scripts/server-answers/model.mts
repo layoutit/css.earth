@@ -10,6 +10,7 @@ export const normalisations = [
   'Only explorer-brand-version link text and its GitHub aria-label counter become vPINNED; commit counts change build version.',
   'HTML and catalogue /_astro/<name>.<hash>.<ext> addresses become /_astro/<name>.HASH.<ext>; browser bundle bytes belong to L3.',
   'HTML retains rewritten marker regions and static page/remainder lengths plus md5; unchanged regions reference the static file.',
+  'Repository source-link commit ids become 40 zeros in all recorded text; build provenance is not server behavior, paths remain exact.',
   'JSON object keys sorted recursively; array order preserved.',
   'All headers retained except date, server, connection, keep-alive, last-modified and host-derived provider/request identifiers.',
   'ETag retains presence and weak/strong kind; values contain file timestamps and can change between recordings of the same build.',
@@ -29,8 +30,18 @@ export function sorted(value: unknown): unknown {
   return Object.fromEntries(Object.entries(value).sort(([a], [b]) => a.localeCompare(b, 'en')).map(([key, item]) => [key, sorted(item)]));
 }
 export const serialise = (value: unknown) => JSON.stringify(sorted(value), null, 2) + '\n';
+export function canonicalSourceLinks(value: string): string {
+  return value.replace(/https:\/\/github\.com\/layoutit\/cssEarth\/blob\/[0-9a-f]{40}\//gu,
+    'https://github.com/layoutit/cssEarth/blob/' + '0'.repeat(40) + '/');
+}
+function canonicalJson(value: unknown): unknown {
+  if (typeof value === 'string') return canonicalSourceLinks(value);
+  if (Array.isArray(value)) return value.map(canonicalJson);
+  if (!isObject(value)) return value;
+  return Object.fromEntries(Object.entries(value).map(([key, item]) => [key, canonicalJson(item)]));
+}
 export function canonicalHtml(value: string): string {
-  return value.replace(/<a\b[^>]*\bclass="explorer-brand-version"[^>]*>v\d+\.\d+<\/a>/gu,
+  return canonicalSourceLinks(value).replace(/<a\b[^>]*\bclass="explorer-brand-version"[^>]*>v\d+\.\d+<\/a>/gu,
     link => link.replace(/aria-label="GitHub v\d+\.\d+"/u, 'aria-label="GitHub vPINNED"').replace(/>v\d+\.\d+<\/a>$/u, '>vPINNED</a>'))
     .replace(/\/_astro\/([^/\s"'<>?]+)\.[A-Za-z0-9_-]+\.(js|css|mjs)(?=[\s"'<>?]|$)/gu, '/_astro/$1.HASH.$2');
 }
@@ -72,7 +83,7 @@ export async function recordAnswer(id: string, response: Response, origin: strin
   const headers: Record<string, string> = {};
   for (const [name, value] of response.headers) {
     if (volatileHeaders.has(name)) continue;
-    headers[name] = value.replaceAll(origin, 'https://answers.invalid');
+    headers[name] = canonicalSourceLinks(value.replaceAll(origin, 'https://answers.invalid'));
     if (name === 'etag') headers[name] = /^W\//u.test(value) ? 'present:weak' : 'present:strong';
     if (id.startsWith('static-') && name === 'content-range') headers[name] = value.replace(/\/\d+$/u, '/BUNDLE_LENGTH');
     if (name === 'content-length') headers[name] = value === '0' ? 'zero' : 'nonzero';
@@ -80,9 +91,9 @@ export async function recordAnswer(id: string, response: Response, origin: strin
   const bytes = Buffer.from(await response.arrayBuffer());
   const type = response.headers.get('content-type') ?? '';
   let body: unknown;
-  if (bytes.length && type.includes('json')) body = { kind: 'json', value: sorted(JSON.parse(bytes.toString('utf8'))) };
+  if (bytes.length && type.includes('json')) body = { kind: 'json', value: sorted(canonicalJson(JSON.parse(bytes.toString('utf8')))) };
   else if (!bytes.length || /text\/|xml|javascript|svg/u.test(type)) {
-    const value = bytes.toString('utf8');
+    const value = canonicalSourceLinks(bytes.toString('utf8'));
     body = type.includes('text/html') && page && bytes.length ? compactHtml(value, page.html, page.file, page.request) : { kind: 'text', value: type.includes('text/html') ? canonicalHtml(value) : value };
   }
   else body = { kind: 'binary', ...byteSummary(bytes), prefix: bytes.subarray(0, 64).toString('hex') };
