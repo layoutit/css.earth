@@ -21,6 +21,3 @@ export function queuedImport<Module>(load: () => Promise<Module>): () => Promise
     return pending;
   };
 }
-
-/** The body runtime, shared by the startup prestart and the object directory. */
-export const importPackagedObjectRuntime = queuedImport(() => import('./packaged-object-runtime.mts'));

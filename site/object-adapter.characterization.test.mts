@@ -7,7 +7,7 @@ import type { SceneFactory } from './browser/browser-types.mts';
 const mount: SceneFactory = () => { throw new Error('This test only loads the mount function.'); };
 let loaded: unknown;
 let received: unknown[] = [];
-mock.module(new URL('./import-queue.mts', import.meta.url).href, { namedExports: { async importPackagedObjectRuntime() { return { async loadPackagedObject(...args: unknown[]) { received = args; return loaded; } }; } } });
+mock.module(new URL('./scene-imports.mts', import.meta.url).href, { namedExports: { async importPackagedObjectRuntime() { return { async loadPackagedObject(...args: unknown[]) { received = args; return loaded; } }; } } });
 let entry: ObjectEntry | null = null;
 mock.module(new URL('./object-directory.mts', import.meta.url).href, { namedExports: { async loadObject() { return entry; } } });
 const { objectAdapter } = await import('./object-adapter.mts');

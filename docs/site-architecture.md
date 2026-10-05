@@ -19,16 +19,16 @@ A folder imports itself or strictly lower layers. Sibling folders, including L0 
 | 0 | `vendor/` | Preserved third-party notices | 0 |
 | 0 | `server-assets/` | Server and build prepared-asset origin | 0 |
 | 0 | `contracts/` | Shared page and shell interfaces | 0 |
-| 1 | `directory/` | Startup reads and object catalogue directory | 8; `startup-world.mts`, `object-directory.mts`, `objects.mts`, `world-context-plan.mts` |
+| 1 | `directory/` | Startup reads and object catalogue directory | 9; `startup-world.mts`, `object-directory.mts`, `objects.mts`, `world-context-plan.mts` |
 | 1 | `minimap/` | Surface-map measurements and view formatting | 0 |
-| 2 | `world/` | Shared framing, visibility and camera context | 40; `world-objects.mts`, `world-system-views.mts`, `stellar-extents.mts`, `hosted-banks.mts` |
+| 2 | `world/` | Shared framing, visibility and camera context | 41; `world-objects.mts`, `world-system-views.mts`, `stellar-extents.mts`, `hosted-banks.mts` |
 | 3 | `content/` | Card content, citations and metadata | 11; `exploration-catalog.mts`, `source-documentation.mts`, `seo.mts`, `seo-trail.mts` |
 | 3 | `navigation/` | History, requests, flights and arrivals | 4; `prepared-world-navigation.mts` |
 | 4 | `search/` | Catalogue search and result presentation | 0 |
 | 4 | `selection/` | Committed selection and camera handovers | 8; `scene/scene-selection.mts`, `satellite-selection.mts`, `overview-selection.mts`, `showcase.mts` |
 | 5 | `shell/` | Retained shell controls and panels | 14; `object-browser.mts`, `feature-browser.mts`, `destination-browser.mts`, `selection-presentation.mts` |
 | 6 | `server/` | SSR readers, responses and host middleware | 7; `object-entry.mts`, `world-places.mts`, `dot-catalogue-data.mts`, `social-images.mts` |
-| 6 | `scene/` | Scene sessions, replacement and publication | 7; `object-adapter.mts`, `packaged-object-runtime.mts`, `startup-billboard.mts` |
+| 6 | `scene/` | Scene sessions, replacement and publication | 10; `object-adapter.mts`, `packaged-object-runtime.mts`, `startup-billboard.mts`, `scene-imports.mts` |
 | 7 | `startup/` | Page boot helpers and router entry | 5; `shared-imports.mts`, `startup-boot.mts` |
 | 7 | `build/` | Site preparation and packaging | 3; `prepare-body-moons.mts` |
 | 8 | `layouts/` | Shared page frame and its styles | 2; `components/ObjectSwatchStyles.astro`, `object-shell.css` |
@@ -59,7 +59,6 @@ The changes array partitions stable edit ids into atomic groups. All seven group
 <!-- generated:changes -->
 | Tier | Change / PR | Edit ids | Required code change |
 | ---: | --- | --- | --- |
-| 0 | Relocate queued loader owners | add-file-scene-imports, add-file-world-imports, remove-queue-runtime, remove-shared-registry, remove-shared-world, retarget-adapter-scene-imports, retarget-router-world-imports, add-router-scene-imports, remove-directory-queue, retarget-boot-scene-imports, add-boot-world-imports | Decided by the owner: loader modules hold only import() calls through the existing queue. Own registry and packaged-runtime functions in scene; move the single last chain to lower browser/import-queue. Prove one queue chain, registration before the first scene call, the same entry-chunk modules and bytes, identical L1/L2/L3, L7 no worse and the real-iPad startup journey. Own the queued application-world import in world; no initializer inside the thunk. Move the runtime function out of the import-free browser queue implementation. Leave only importSceneRouter in startup/shared-imports. Move the world function to its owner. Adapter directly uses the same queued runtime function; preserve the frozen default adapter. Split router loader imports; preserve module-evaluation autostart. Import registry/runtime functions and register only the directory runtime loader using the existing object-directory import before first scene call. Directory accepts a typed runtime-loader registration; read the slot at scene invocation, not metadata construction. Missing registration fails explicitly. Body prestart and registry prestart reuse scene-owned promises. View prestart reuses the world-owned promise. |
 <!-- /generated:changes -->
 
 ## Decided loader design: option 3
