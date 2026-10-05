@@ -506,6 +506,12 @@ its full box. [leaf-box.ts](../packages/bake/src/presentation/leaf-box.ts) holds
   [prepared-leaf-box-direct.ts](../packages/renderer/src/rendering/prepared-leaf-box-direct.ts)): on an iPad, two
   device pixels a CSS pixel, Io's level 4,160 texels wide gives 65 px of its 128 px box and its widest image 130 px.
   The leaf takes that box with its image, in one write, once its step needs the whole image.
+  - **Stated by the bake.** An image's width and height are on its prepared entry, written from the published file by
+    the last step of every bake (`withImageSizes`,
+    [prepared-image-sizes.ts](../packages/bake/src/prepared-presentation/prepared-image-sizes.ts)), and the leaves
+    that draw it are the ones its texture write is bound to. The renderer reads both. It never measures an image, works
+    a size out of a byte count, or guesses which image a leaf draws: a leaf whose image states no size keeps its step's
+    box.
   - **One texel per device pixel.** The box follows the screen's pixel ratio where that is a whole number of two or
     more (a phone's three gives 43.33 px for the same level); any other screen keeps the bake's two texels a CSS
     pixel. The copy is by backing pixel: with the iPad's page scaled to four backing pixels a CSS pixel, Io's faces in

@@ -47,26 +47,33 @@ export interface LeafBoxExact { readonly factor: number; readonly tile: readonly
 const exactDensity = (devicePixelRatio: number) =>
   Number.isInteger(devicePixelRatio) && devicePixelRatio >= TEXELS_PER_CSS_PIXEL ? devicePixelRatio : TEXELS_PER_CSS_PIXEL;
 
-/** The exact fit of an image of `pixels` in a leaf on a screen of `devicePixelRatio`. The image's width comes from its
- * pixels and the shape of the leaf's background; the factor is that width over the device pixels across the full
- * background, with the box it gives put on the layout grid (a prepared background rounded a hair wide, Titan's
- * 4,127.76 px, would leave the box under a whole texel). None for an image without a stated size, a leaf without a box
- * and background in pixels, or an image wider than the box allows.
+/** A background of another shape than its image stretches it, and no box then draws the image at its own size on both
+ * axes. Prepared backgrounds are rounded lengths: the shapes agree to this share. */
+const SHAPE_TOLERANCE = 0.002;
+
+/** The exact fit, in a leaf on a screen of `devicePixelRatio`, of the image whose prepared entry states `size` (its
+ * width and height in pixels; the bake states them, prepared-image-sizes.ts). The factor is the image's width over the
+ * device pixels across the leaf's full background, with the box it gives put on the layout grid (a prepared background
+ * rounded a hair wide, Titan's 4,127.76 px, would leave the box under a whole texel). None for an image whose entry
+ * states no size, a leaf without a box and background in pixels, a background that stretches its image, or an image
+ * wider than the box allows.
  *
- * A leaf the view needs less of (a face behind the body) keeps the exact box while every one of the body's `leaves`
- * could: together their layers stay within the bytes kept beyond the view's need (EXTRA_BYTES). Io's 448 faces at the
+ * A leaf the view needs less of (a face behind the body) keeps the exact box while every leaf of the body could: at
+ * this share of their full boxes, `area` CSS px² in all, their layers stay within the bytes kept beyond the view's
+ * need (EXTRA_BYTES). Io's 448 faces at the
  * level it rests on are 30 MB of layers in exact boxes and its switch 45 to 54 ms; with the hidden ones in the 3 px their
  * step asks for it is 103 to 136 ms, and halved to a quarter or a sixteenth of the image 163 to 465 ms more. Only where
  * the box is exact on this screen: elsewhere such a leaf would be resampled at full size. */
-export function leafBoxExact(leaf: PreparedLeafBox, pixels: number | undefined, leaves = 1, devicePixelRatio: number = TEXELS_PER_CSS_PIXEL): LeafBoxExact | undefined {
+export function leafBoxExact(leaf: PreparedLeafBox, size: readonly [number, number] | undefined, area = 0, devicePixelRatio: number = TEXELS_PER_CSS_PIXEL): LeafBoxExact | undefined {
   const [width, height] = leaf.backgroundSize ?? [], box = leaf.box;
-  if (pixels === undefined || typeof width !== 'number' || typeof height !== 'number' || box === undefined || !(width > 0) || !(height > 0) || !(box[0] > 0)) return undefined;
-  const imageWidth = Math.round(Math.sqrt(pixels * width / height)), imageHeight = Math.round(pixels / imageWidth);
+  if (size === undefined || typeof width !== 'number' || typeof height !== 'number' || box === undefined || !(width > 0) || !(height > 0) || !(box[0] > 0)) return undefined;
+  const [imageWidth, imageHeight] = size;
+  if (Math.abs(imageWidth / imageHeight - width / height) > SHAPE_TOLERANCE * width / height) return undefined;
   const density = exactDensity(devicePixelRatio);
   const factor = Math.round(box[0] * imageWidth / (density * width) * LAYOUT_UNITS) / LAYOUT_UNITS / box[0];
   if (factor > EXACT_OVER_FULL) return undefined;
-  const layerBytes = box[0] * box[1] * factor ** 2 * devicePixelRatio ** 2 * 4;
-  return { factor, tile: [imageWidth / density, imageHeight / density], kept: density === devicePixelRatio && layerBytes * leaves <= EXTRA_BYTES };
+  const layerBytes = Math.max(area, box[0] * box[1]) * factor ** 2 * devicePixelRatio ** 2 * 4;
+  return { factor, tile: [imageWidth / density, imageHeight / density], kept: density === devicePixelRatio && layerBytes <= EXTRA_BYTES };
 }
 
 /** A leaf's factor: what its step needs of the full box, up to the whole. Showing an image with an exact fit, that box
@@ -99,6 +106,10 @@ export function leafBoxStyles(leaf: PreparedLeafBox, step: number, outset: numbe
   return styles;
 }
 
+/** The full boxes of a body's sized leaves, in CSS px²: what their layers are measured against (`leafBoxExact`). */
+export const leafBoxArea = (boxes: readonly PreparedLeafBox[]) =>
+  boxes.reduce((sum, leaf) => sum + (leaf.density !== undefined && leaf.box ? leaf.box[0] * leaf.box[1] : 0), 0);
+
 /** The leaf-box and seam-outset bindings of a presentation, with their prepared initial values. */
 export function leafBoxBindings(bindings: readonly PreparedViewBinding[]) {
   const steps = bindings.find((binding): binding is StepBinding => binding.kind === 'silhouette-step-property' && binding.property === LEAF_BOX_STEP);
@@ -111,13 +122,13 @@ export function leafBoxBindings(bindings: readonly PreparedViewBinding[]) {
 export function createLeafBoxWriter(bindings: readonly PreparedViewBinding[], nodes: readonly HTMLElement[],
   write: (element: HTMLElement, name: string, value: string) => void, devicePixelRatio: number = globalThis.devicePixelRatio ?? TEXELS_PER_CSS_PIXEL) {
   const { steps, seam, boxes, step, outset } = leafBoxBindings(bindings);
-  const state = new Map(boxes.map(leaf => [leaf.node, { leaf, step, pixels: undefined as number | undefined, written: new Map<string, string>() }]));
+  const state = new Map(boxes.map(leaf => [leaf.node, { leaf, step, image: undefined as readonly [number, number] | undefined, written: new Map<string, string>() }]));
   let currentOutset = outset, writes = 0;
-  const sized = boxes.filter(leaf => leaf.density !== undefined).length;
+  const area = leafBoxArea(boxes);
   const cssName = (name: string) => name.replace(/[A-Z]/g, letter => `-${letter.toLowerCase()}`);
-  const publish = (current: { leaf: PreparedLeafBox; step: number; pixels: number | undefined; written: Map<string, string> }, seamOnly = false, adopting = false) => {
+  const publish = (current: { leaf: PreparedLeafBox; step: number; image: readonly [number, number] | undefined; written: Map<string, string> }, seamOnly = false, adopting = false) => {
     const element = nodes[current.leaf.node]!;
-    for (const [property, value] of leafBoxStyles(current.leaf, current.step, currentOutset, seamOnly, leafBoxExact(current.leaf, current.pixels, sized, devicePixelRatio))) {
+    for (const [property, value] of leafBoxStyles(current.leaf, current.step, currentOutset, seamOnly, leafBoxExact(current.leaf, current.image, area, devicePixelRatio))) {
       if (current.written.get(property) === value) continue;
       // A server-rendered leaf already carries its values, for the image the markup shows
       // (prepared-scene-serialization.ts): they stand until the first image lands.
@@ -159,13 +170,13 @@ export function createLeafBoxWriter(bindings: readonly PreparedViewBinding[], no
       }
       return leaves;
     },
-    /** The leaf on node `index` now shows an image of `pixels` (none stated: the box its step asks for). Written with the
-     * image, so the leaf repaints once; returns the number of style writes. */
-    image(index: number, pixels: number | undefined) {
+    /** The leaf on node `index` now shows the image whose entry states `size` (none stated: the box its step asks for).
+     * Written with the image, so the leaf repaints once; returns the number of style writes. */
+    image(index: number, size: readonly [number, number] | undefined) {
       const current = state.get(index);
-      if (!current || current.leaf.density === undefined || current.pixels === pixels) return 0;
+      if (!current || current.leaf.density === undefined || current.image?.[0] === size?.[0] && current.image?.[1] === size?.[1]) return 0;
       const before = writes;
-      current.pixels = pixels; publish(current);
+      current.image = size; publish(current);
       return writes - before;
     },
     set(index: number, name: string, value: string) {

@@ -12,7 +12,7 @@ import { omittedPreparedNodes } from './prepared-omitted-nodes.js';
 import { selectedPreparedVariant } from './prepared-presentation.js';
 import { initialObjectSelection } from '../runtime/object-contract.js';
 import { leafBoxBindings, leafBoxExact, leafBoxStyles } from './prepared-leaf-box-direct.js';
-import { preparedTexturePixels } from './prepared-texture-levels.js';
+import { preparedTextureSizes } from './prepared-texture-levels.js';
 
 const root = new URL('../../../../', import.meta.url);
 // Saturn's prepared runtime is restored, not tracked; an unrestored checkout skips the file as the site test did through sourceTest().
@@ -92,7 +92,7 @@ test('a paged body ships each face in the exact box of the level its markup show
   assert.ok(write?.kind === 'texture' && write.resource !== null);
   const leaf = paged.tree.textureBindings!.find(entry => entry.name === write.name)!.leaves.find(node => boxes.boxes.some(box => box.node === node && box.box))!;
   const record = boxes.boxes.find(box => box.node === leaf)!;
-  const exact = leafBoxExact(record, preparedTexturePixels(paged)(paged.textureLevels!.levels[0]!.resources[write.resource]!));
+  const exact = leafBoxExact(record, preparedTextureSizes(paged)(paged.textureLevels!.levels[0]!.resources[write.resource]!));
   assert.deepEqual(exact, { factor: 16.25 / 128, tile: [520, 96], kept: true });
   const full = Object.fromEntries(leafBoxStyles(record, boxes.step, boxes.outset)), shipped = Object.fromEntries(leafBoxStyles(record, boxes.step, boxes.outset, false, exact));
   const tag = new RegExp(`<[^>]*data-prepared-node="${leaf}"[^>]*>`).exec(scene.html)?.[0] ?? '';

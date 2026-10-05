@@ -26,6 +26,10 @@ export function requireAssets(value: unknown): asserts value is PreparedAssets {
       const bytes = integer(entry.decodedBytes, 'decoded image bytes', 1);
       if (pool.maximumDecodedBytes !== undefined && bytes > pool.maximumDecodedBytes) fail('image exceeds decoded byte budget');
     }
+    if (entry.width !== undefined || entry.height !== undefined) {
+      const pixels = integer(entry.width, 'image width', 1) * integer(entry.height, 'image height', 1);
+      if (entry.decodedBytes !== undefined && entry.decodedBytes !== pixels * 4) fail(`resource ${String(entry.key)} states ${String(entry.width)} x ${String(entry.height)} pixels and ${String(entry.decodedBytes)} decoded bytes`);
+    }
   }
   unique(resourceIds, 'resource identities');
   const declared = new Set(resourceIds);

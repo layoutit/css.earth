@@ -2,8 +2,8 @@ import { textureTileLeafStyles, type ObjectRuntimeDefinition } from '@cssearth/o
 
 import { initialObjectSelection } from '../runtime/object-contract.js';
 import { resolvePreparedAssetUrl, rewritePreparedStyleUrls } from './prepared-asset-origin.js';
-import { preparedTexturePixels, textureTileGroups } from './prepared-texture-levels.js';
-import { leafBoxBindings, leafBoxExact, leafBoxStyles } from './prepared-leaf-box-direct.js';
+import { preparedTextureSizes, textureTileGroups } from './prepared-texture-levels.js';
+import { leafBoxArea, leafBoxBindings, leafBoxExact, leafBoxStyles } from './prepared-leaf-box-direct.js';
 import { omittedPreparedNodes } from './prepared-omitted-nodes.js';
 import { preparedDatasetPending } from '../prepared-data/dataset-tables.js';
 
@@ -78,13 +78,13 @@ export function serializePreparedScene(definition: ObjectRuntimeDefinition, data
   const textureResources = definition.textureLevels?.levels[0]?.resources, tileGroups = textureTileGroups(definition.textureLevels);
   // Leaf boxes ship their final values at the prepared initial step and for the image each leaf shows here, from their
   // records (prepared-leaf-box-direct.ts); the mounted writer continues from the same values.
-  const pixels = preparedTexturePixels(definition), shown = new Map<number, number | undefined>();
+  const sizes = preparedTextureSizes(definition), shown = new Map<number, readonly [number, number] | undefined>();
   for (const binding of variant.writes) if (binding.kind === 'texture' && binding.resource !== null) {
-    const image = pixels(textureResources?.[binding.resource] ?? binding.resource);
+    const image = sizes(textureResources?.[binding.resource] ?? binding.resource);
     for (const leaf of definition.tree.textureBindings?.find(entry => entry.target === binding.target && entry.name === binding.name)?.leaves ?? []) shown.set(leaf, image);
   }
-  const leafBoxes = leafBoxBindings(definition.viewBindings), sized = leafBoxes.boxes.filter(leaf => leaf.density !== undefined).length;
-  for (const leaf of leafBoxes.boxes) for (const [name, value] of leafBoxStyles(leaf, leafBoxes.step, leafBoxes.outset, false, leafBoxExact(leaf, shown.get(leaf.node), sized))) write(leaf.node, name, value);
+  const leafBoxes = leafBoxBindings(definition.viewBindings), area = leafBoxArea(leafBoxes.boxes);
+  for (const leaf of leafBoxes.boxes) for (const [name, value] of leafBoxStyles(leaf, leafBoxes.step, leafBoxes.outset, false, leafBoxExact(leaf, shown.get(leaf.node), area))) write(leaf.node, name, value);
   for (const binding of variant.writes) {
     const element = target(binding.target);
     if (binding.kind === 'attribute') {
