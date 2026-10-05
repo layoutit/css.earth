@@ -55,58 +55,6 @@
       "license": "Original catalogue terms apply; cite Baumgardt & Vasiliev (2021)."
     },
     {
-      "id": "lmc-clusters-table",
-      "path": "src/objects/local-group-structures/source/lmc-clusters/table.csv",
-      "origin": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&MAXREC=100000&QUERY=SELECT+recno%2C+RAJ2000%2C+DEJ2000%2C+49590.6727505+AS+distpc+FROM+%22J%2FMNRAS%2F389%2F678%2Ftable3%22+WHERE+Type+%3D+'C'+AND+RAJ2000+BETWEEN+60+AND+100+ORDER+BY+recno",
-      "sourceUrl": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/MNRAS/389/678",
-      "title": "A general catalogue of extended objects in the Magellanic System, table3: the Large Magellanic Cloud's ordinary clusters",
-      "credit": "E. Bica, C. Bonatto, C. M. Dutra, J. F. C. Santos Jr; MNRAS 389, 678; CDS J/MNRAS/389/678",
-      "acquisition": "Rows selected by the CDS TAP query in the origin, downloaded unchanged; read by packages/bake/cli/prepare-catalogue-points.mts through lmc-clusters/points.json.",
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "bica-2008-magellanic-extended-objects",
-            "role": "material",
-            "evidence": "https://cdsarc.cds.unistra.fr/ftp/J/MNRAS/389/678/ReadMe"
-          },
-          {
-            "catalogueId": "publication-pietrzynski2019natur-567-200p",
-            "role": "reference",
-            "evidence": "src/objects/local-group-structures/source/lmc-clusters/points.json#/table/note"
-          }
-        ]
-      },
-      "dependencies": [],
-      "license": "Original catalogue terms apply; cite the authors and CDS/VizieR."
-    },
-    {
-      "id": "smc-clusters-table",
-      "path": "src/objects/local-group-structures/source/smc-clusters/table.csv",
-      "origin": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&MAXREC=100000&QUERY=SELECT+recno%2C+RAJ2000%2C+DEJ2000%2C+62440+AS+distpc+FROM+%22J%2FMNRAS%2F389%2F678%2Ftable3%22+WHERE+Type+%3D+'C'+AND+(RAJ2000+%3E+355+OR+RAJ2000+%3C+20)+ORDER+BY+recno",
-      "sourceUrl": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/MNRAS/389/678",
-      "title": "A general catalogue of extended objects in the Magellanic System, table3: the Small Magellanic Cloud's ordinary clusters",
-      "credit": "E. Bica, C. Bonatto, C. M. Dutra, J. F. C. Santos Jr; MNRAS 389, 678; CDS J/MNRAS/389/678",
-      "acquisition": "Rows selected by the CDS TAP query in the origin, downloaded unchanged; read by packages/bake/cli/prepare-catalogue-points.mts through smc-clusters/points.json.",
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "bica-2008-magellanic-extended-objects",
-            "role": "material",
-            "evidence": "https://cdsarc.cds.unistra.fr/ftp/J/MNRAS/389/678/ReadMe"
-          },
-          {
-            "catalogueId": "publication-graczyk2020apj-904-13g",
-            "role": "reference",
-            "evidence": "src/objects/local-group-structures/source/smc-clusters/points.json#/table/note"
-          }
-        ]
-      },
-      "dependencies": [],
-      "license": "Original catalogue terms apply; cite the authors and CDS/VizieR."
-    },
-    {
       "id": "sagittarius-stream-table",
       "path": "src/objects/local-group-structures/source/sagittarius-stream/table.csv",
       "origin": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&MAXREC=100000&QUERY=SELECT+GaiaEDR3%2C+RA_ICRS%2C+DE_ICRS%2C+DistWGBPRP+FROM+%22J%2FA%2BA%2F666%2FA64%2Ftablec1%22+WHERE+DistWGBPRP+%3E+0+AND+ProbSGR+%3E+0.9+ORDER+BY+GaiaEDR3",
@@ -138,20 +86,6 @@
     },
     {
       "path": "src/objects/local-group-structures/source/milky-way-globular-clusters/points.json",
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Project-authored processing configuration."
-      }
-    },
-    {
-      "path": "src/objects/local-group-structures/source/lmc-clusters/points.json",
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Project-authored processing configuration."
-      }
-    },
-    {
-      "path": "src/objects/local-group-structures/source/smc-clusters/points.json",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored processing configuration."

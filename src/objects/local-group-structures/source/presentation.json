@@ -43,48 +43,6 @@
         ]
       },
       {
-        "id": "lmc-clusters",
-        "label": "Bica et al. (2008) star clusters of the Large Magellanic Cloud, CDS J/MNRAS/389/678",
-        "process": "Place each ordinary cluster at its sky position, at the Cloud's distance (Pietrzyński et al.'s (2019) 49.59 kpc).",
-        "recipe": "source/lmc-clusters/points.json",
-        "selector": "",
-        "inputs": [
-          "lmc-clusters-table"
-        ],
-        "outputs": [
-          "prepared/dots.bin"
-        ],
-        "interpretation": {
-          "kind": "catalogue-positions",
-          "sourceKind": "published-catalogue"
-        },
-        "limitations": [
-          "No cluster's own distance is used: the Cloud's depth along the sight line is not drawn.",
-          "The catalogue's 55 ordinary clusters of the Bridge between the Clouds are not drawn."
-        ]
-      },
-      {
-        "id": "smc-clusters",
-        "label": "Bica et al. (2008) star clusters of the Small Magellanic Cloud, CDS J/MNRAS/389/678",
-        "process": "Place each ordinary cluster at its sky position, at the Cloud's distance (Graczyk et al.'s (2020) 62.44 kpc).",
-        "recipe": "source/smc-clusters/points.json",
-        "selector": "",
-        "inputs": [
-          "smc-clusters-table"
-        ],
-        "outputs": [
-          "prepared/dots.bin"
-        ],
-        "interpretation": {
-          "kind": "catalogue-positions",
-          "sourceKind": "published-catalogue"
-        },
-        "limitations": [
-          "No cluster's own distance is used: the Cloud's depth along the sight line is not drawn.",
-          "The catalogue's 55 ordinary clusters of the Bridge between the Clouds are not drawn."
-        ]
-      },
-      {
         "id": "sagittarius-stream",
         "label": "Ramos et al. (2022) RR Lyrae of the Sagittarius stream, CDS J/A+A/666/A64",
         "process": "Place each RR Lyrae star the authors give to the stream with a probability above 0.9 at its sky position and its own photometric distance.",
@@ -107,15 +65,13 @@
       },
       {
         "id": "field",
-        "label": "The five banks as one field",
-        "process": "Join the five banks; of the stream stars keep one in four, in catalogue order, so the field stays under 4,000 dots.",
+        "label": "The three banks as one field",
+        "process": "Join the three banks; of the stream stars keep one in four, in catalogue order.",
         "recipe": "source/field/merge.json",
         "selector": "",
         "inputs": [
           "m31-clusters",
           "milky-way-clusters",
-          "lmc-clusters-table",
-          "smc-clusters-table",
           "sagittarius-stream-table"
         ],
         "outputs": [
@@ -126,7 +82,7 @@
           "sourceKind": "published-catalogue"
         },
         "limitations": [
-          "The 4,000 dot ceiling is a presentation choice."
+          "Keeping one stream star in four is a presentation choice."
         ]
       },
       {
@@ -138,8 +94,6 @@
         "inputs": [
           "m31-clusters",
           "milky-way-clusters",
-          "lmc-clusters-table",
-          "smc-clusters-table",
           "sagittarius-stream-table"
         ],
         "outputs": [
