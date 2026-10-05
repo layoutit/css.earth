@@ -86,8 +86,11 @@ export async function spitzerShippedObjects(repository = REPOSITORY): Promise<Sh
   const ids = (await shippedObjectIds(repository)).sort();
   const bodies = new Map<string, Record<string, unknown>>();
   for (const id of ids) { const body = await readJson(resolve(repository, 'packages/astronomy/data/bodies', `${id}.json`)); if (isRecord(body)) bodies.set(id, body); }
+  // A body with a NAIF identity moves on the sky: it, and what orbits it, are asked by that identity, never by a place. The
+  // Sun is one, though its record places it as a star, at distance zero with a direction that stands for none.
   const starPosition = (id: string): { raDeg: number; decDeg: number } | undefined => {
-    const star = bodies.get(id)?.star;
+    const body = bodies.get(id), star = body?.star;
+    if (isRecord(body?.physical) && 'naifId' in naifIdFromHorizonsCode(body.physical.horizonsCode)) return undefined;
     return isRecord(star) && typeof star.rightAscensionDegrees === 'number' && typeof star.declinationDegrees === 'number'
       ? { raDeg: star.rightAscensionDegrees, decDeg: star.declinationDegrees } : undefined;
   };
