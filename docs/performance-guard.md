@@ -50,6 +50,14 @@ The default is the thirteen S0 capability representatives plus `/earth/` and `/`
 
 `measure` writes `measures.json`, with sorted object keys and stable route ordering. Counts, ordered sequences and exact declarations are all compared independently. `compare` returns JSON with `pass`, `findings`, `addedRoutes` and `removedRoutes`. Findings carry `increase`, `order`, `declaration` or `removed-route` kinds; Markdown summaries report failure counts per kind and can go directly into a job summary. Exit 0 means equal or improved, exit 1 means a regression or coverage change. Invalid inputs also exit unsuccessfully and are not successful comparisons.
 
+## In the comparison lane
+
+The [build comparison lane](build-comparison.md) runs the guard on the two builds it already made, after the build comparison and before the server answers (`.github/scripts/build-compare/performance-stage.mts`): it measures `<out>/base` and `<out>/head` (their `dist/` and `metadata/`), compares them, writes `performance.json` and the Markdown comparison to the job summary, and uploads both with the lane artifacts. The tools come from the merge base, like the other lane tools, except for the pull request that introduces them.
+
+- Any increase fails the lane, in an ordinary pull request as well as in a declared refactor. A stage that cannot run fails the lane too, since a guard that silently skips guards nothing.
+- The owner may approve a deliberate increase with the label `performance-increase-approved`: the lane still reports every increase and then passes. Nothing else disables it.
+- A decrease is an improvement and needs nothing: the next pull request compares against the merged result.
+
 ## Existing contracts and the build boundary
 
 All [performance notes](performance/README.md) were reviewed for this boundary:
