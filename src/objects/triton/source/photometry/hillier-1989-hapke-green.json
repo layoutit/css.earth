@@ -1,0 +1,27 @@
+{
+  "schema": "cssearth-photometric-model@1",
+  "id": "hillier-1989-hapke-green",
+  "instrument": "Voyager 2 ISS",
+  "filter": "green filter, 0.56 um",
+  "quantity": "radiance-factor",
+  "model": {
+    "family": "hapke",
+    "singleScatteringAlbedo": 0.995,
+    "hFunction": "hapke-1981",
+    "phaseFunction": {
+      "form": "henyey-greenstein",
+      "asymmetry": -0.281
+    },
+    "roughnessDegrees": 14.7
+  },
+  "fit": {
+    "phaseDegrees": [
+      11,
+      159
+    ],
+    "emissionDegrees": [
+      0,
+      86.6
+    ]
+  }
+}
