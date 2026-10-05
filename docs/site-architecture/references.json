@@ -571,13 +571,38 @@
       "scope": "live"
     },
     {
+      "file": "site/application-world-context.characterization.test.mts",
+      "classification": "generator/producer literal",
+      "scope": "live"
+    },
+    {
+      "file": "site/application-world-context.characterization.test.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
       "file": "site/application-world-context.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/application-world-frames.characterization.test.mts",
       "classification": "source import",
       "scope": "live"
     },
     {
       "file": "site/application-world-frames.mts",
       "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/application-world-resources.characterization.test.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/application-world-resources.characterization.test.mts",
+      "classification": "generator/producer literal",
       "scope": "live"
     },
     {
@@ -592,6 +617,11 @@
     },
     {
       "file": "site/application-world-types.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/application-world-visibility.characterization.test.mts",
       "classification": "source import",
       "scope": "live"
     },
@@ -766,6 +796,16 @@
       "scope": "live"
     },
     {
+      "file": "site/catalogue-moon-labels.characterization.test.mts",
+      "classification": "generator/producer literal",
+      "scope": "live"
+    },
+    {
+      "file": "site/catalogue-moon-labels.characterization.test.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
       "file": "site/catalogue-moon-labels.mts",
       "classification": "source import",
       "scope": "live"
@@ -871,6 +911,16 @@
       "scope": "live"
     },
     {
+      "file": "site/context-availability.characterization.test.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/dataset-context.characterization.test.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
       "file": "site/dataset-picker.characterization.test.mts",
       "classification": "source import",
       "scope": "live"
@@ -891,6 +941,11 @@
       "scope": "live"
     },
     {
+      "file": "site/default-width-share.characterization.test.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
       "file": "site/destination-browser.characterization.test.mts",
       "classification": "source import",
       "scope": "live"
@@ -898,6 +953,11 @@
     {
       "file": "site/diagnostic-recorder.characterization.test.mts",
       "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/dot-catalogue-data.characterization.test.mts",
+      "classification": "generator/producer literal",
       "scope": "live"
     },
     {
@@ -911,7 +971,17 @@
       "scope": "live"
     },
     {
+      "file": "site/dot-catalogues.characterization.test.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
       "file": "site/env.d.ts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/exploration-catalog.characterization.test.mts",
       "classification": "source import",
       "scope": "live"
     },
@@ -926,8 +996,28 @@
       "scope": "live"
     },
     {
+      "file": "site/first-view-transport.characterization.test.mts",
+      "classification": "generator/producer literal",
+      "scope": "live"
+    },
+    {
+      "file": "site/first-view-transport.characterization.test.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
       "file": "site/first-view-transport.mts",
       "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/hosted-banks.characterization.test.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/hosted-banks.characterization.test.mts",
+      "classification": "generator/producer literal",
       "scope": "live"
     },
     {
@@ -946,12 +1036,32 @@
       "scope": "live"
     },
     {
+      "file": "site/information-card.characterization.test.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
       "file": "site/information-card.mts",
       "classification": "source import",
       "scope": "live"
     },
     {
+      "file": "site/initial-scene.characterization.test.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/inside-view.characterization.test.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
       "file": "site/inside-view.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/layout-sections.characterization.test.mts",
       "classification": "source import",
       "scope": "live"
     },
@@ -968,6 +1078,21 @@
     {
       "file": "site/layouts/ObjectLayout.astro",
       "classification": "generator/producer literal",
+      "scope": "live"
+    },
+    {
+      "file": "site/learn-more.characterization.test.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/moon-orbit-policy.characterization.test.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/native-view-forms.characterization.test.mts",
+      "classification": "source import",
       "scope": "live"
     },
     {
@@ -992,6 +1117,11 @@
     },
     {
       "file": "site/navigation/navigation-scope.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/next-frame.characterization.test.mts",
       "classification": "source import",
       "scope": "live"
     },
@@ -1031,12 +1161,22 @@
       "scope": "live"
     },
     {
+      "file": "site/object-classification-label.characterization.test.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
       "file": "site/object-directory.characterization.test.mts",
       "classification": "source import",
       "scope": "live"
     },
     {
       "file": "site/object-directory.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/object-entries.characterization.test.mts",
       "classification": "source import",
       "scope": "live"
     },
@@ -1066,6 +1206,11 @@
       "scope": "live"
     },
     {
+      "file": "site/object-systems.characterization.test.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
       "file": "site/object-systems.mts",
       "classification": "source import",
       "scope": "live"
@@ -1076,12 +1221,22 @@
       "scope": "live"
     },
     {
+      "file": "site/object-text.characterization.test.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
       "file": "site/object-text.mts",
       "classification": "source import",
       "scope": "live"
     },
     {
       "file": "site/objects.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/overview-selection.characterization.test.mts",
       "classification": "source import",
       "scope": "live"
     },
@@ -1251,7 +1406,17 @@
       "scope": "live"
     },
     {
+      "file": "site/prepared-arrival.characterization.test.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
       "file": "site/prepared-arrival.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/prepared-panel-content.characterization.test.mts",
       "classification": "source import",
       "scope": "live"
     },
@@ -1261,12 +1426,27 @@
       "scope": "live"
     },
     {
+      "file": "site/prepared-world-navigation.characterization.test.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
       "file": "site/prepared-world-navigation.mts",
       "classification": "source import",
       "scope": "live"
     },
     {
       "file": "site/prepared-world-navigation.mts",
+      "classification": "generator/producer literal",
+      "scope": "live"
+    },
+    {
+      "file": "site/prepared-world-presentation.characterization.test.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/prepared-world-presentation.characterization.test.mts",
       "classification": "generator/producer literal",
       "scope": "live"
     },
@@ -1401,6 +1581,11 @@
       "scope": "live"
     },
     {
+      "file": "site/seo.characterization.test.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
       "file": "site/seo.mts",
       "classification": "source import",
       "scope": "live"
@@ -1431,6 +1616,11 @@
       "scope": "live"
     },
     {
+      "file": "site/shared-imports.characterization.test.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
       "file": "site/shared-imports.mts",
       "classification": "source import",
       "scope": "live"
@@ -1456,7 +1646,22 @@
       "scope": "live"
     },
     {
+      "file": "site/showcase.characterization.test.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/sidebar-thumbnails.characterization.test.mts",
+      "classification": "generator/producer literal",
+      "scope": "live"
+    },
+    {
       "file": "site/site.css",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/social-images.characterization.test.mts",
       "classification": "source import",
       "scope": "live"
     },
@@ -1467,6 +1672,11 @@
     },
     {
       "file": "site/source-documentation.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/source-icons.characterization.test.mts",
       "classification": "source import",
       "scope": "live"
     },
@@ -1497,6 +1707,11 @@
     },
     {
       "file": "site/startup-boot.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/startup-cover.characterization.test.mts",
       "classification": "source import",
       "scope": "live"
     },
@@ -1541,6 +1756,11 @@
       "scope": "live"
     },
     {
+      "file": "site/system-framing.characterization.test.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
       "file": "site/system-framing.mts",
       "classification": "source import",
       "scope": "live"
@@ -1548,6 +1768,11 @@
     {
       "file": "site/system-framing.mts",
       "classification": "generator/producer literal",
+      "scope": "live"
+    },
+    {
+      "file": "site/tab-panels.characterization.test.mts",
+      "classification": "source import",
       "scope": "live"
     },
     {
@@ -2036,6 +2261,11 @@
       "scope": "live"
     },
     {
+      "file": "site/view-readout.characterization.test.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
       "file": "site/view-readout.mts",
       "classification": "source import",
       "scope": "live"
@@ -2056,8 +2286,28 @@
       "scope": "live"
     },
     {
+      "file": "site/world-approach.characterization.test.mts",
+      "classification": "generator/producer literal",
+      "scope": "live"
+    },
+    {
+      "file": "site/world-approach.characterization.test.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
       "file": "site/world-approach.mts",
       "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/world-context-plan.characterization.test.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/world-context-plan.characterization.test.mts",
+      "classification": "generator/producer literal",
       "scope": "live"
     },
     {
@@ -2076,17 +2326,57 @@
       "scope": "live"
     },
     {
+      "file": "site/world-places.characterization.test.mts",
+      "classification": "generator/producer literal",
+      "scope": "live"
+    },
+    {
+      "file": "site/world-places.characterization.test.mts",
+      "classification": "computed import",
+      "scope": "live"
+    },
+    {
       "file": "site/world-places.mts",
       "classification": "source import",
       "scope": "live"
     },
     {
+      "file": "site/world-preferences.characterization.test.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/world-system-views.characterization.test.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
       "file": "site/world-system-views.mts",
       "classification": "source import",
       "scope": "live"
     },
     {
       "file": "site/world-system-views.mts",
+      "classification": "generator/producer literal",
+      "scope": "live"
+    },
+    {
+      "file": "site/world-viewport.characterization.test.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/zoom-carry.characterization.test.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/zoom-scope.characterization.test.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/zoom-scope.characterization.test.mts",
       "classification": "generator/producer literal",
       "scope": "live"
     },
@@ -2222,6 +2512,10 @@
     }
   ],
   "relativeReads": [
+    {
+      "file": "site/application-world-resources.characterization.test.mts",
+      "destination": "site/world/application-world-resources.characterization.test.mts"
+    },
     {
       "file": "site/test/arrival-discovery.test.mts",
       "destination": "site/build/prepare/arrival-discovery.test.mts"
