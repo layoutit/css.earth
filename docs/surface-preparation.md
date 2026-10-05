@@ -430,6 +430,22 @@ through the archived camera at right. Compare the marked landmarks; the display
 stretches differ. Both use related observations, so this is a registration check.
 [Gaspra's README](../src/objects/gaspra/README.md) records the source, residuals and limits.
 
+### A flattened body
+
+A body that is shorter from pole to pole than across states its two radii: `shape` in `object.json` becomes
+`{ "kind": "ellipsoid", "radiusKm": <equatorial>, "polarRadiusKm": <polar> }`, and `surface.polarRadius` in
+`source/preparation/geometry.json` is `radius × polar / equatorial`. The lighting frames and the silhouette follow.
+
+Where the flattening is more than a pixel or two, the profile also states `"latitude": "planetocentric"`. A map's rows
+count planetocentric latitude, the angle of the line from the centre. With that setting
+[`meshLatitude`](../packages/bake/src/surface-geometry/surface.ts) draws each row where that line meets the spheroid,
+and the feature step casts label anchors onto the same surface, so labels sit on the ground at the poles. Without it a
+row is placed at the spheroid's parametric latitude, which is exact on a sphere and within a pixel on Mars. Ceres
+(482 by 446 km, 7.5%) and Iapetus (745.7 by 712.1 km, 4.5%) use it; without it their features would sit up to 2.2° and
+1.3° of latitude from their rows. The Gazetteer's datum sphere is then compared with the spheroid's volume-equivalent
+radius. The coordinate readout still measures on a sphere of the equatorial radius, and the lighting overlay
+is still a round body's.
+
 ## Reduce geometry and bake the atlas
 
 [radial-mesh.ts](../packages/bake/src/objects/geometry/radial-mesh.ts)
