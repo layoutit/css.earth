@@ -1,0 +1,38 @@
+{
+  "id": "doi-10-1006-icar-1995-1093",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Buratti and Mosher (1995): The Dark Side of Iapetus: Additional Evidence for an Exogenous Origin",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.1006/icar.1995.1093"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1006/icar.1995.1093",
+      "label": "Publication"
+    },
+    {
+      "role": "mirror",
+      "url": "https://dataverse.jpl.nasa.gov/dataset.xhtml?persistentId=hdl:2014/29299",
+      "label": "Preprint, JPL Open Repository"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/iapetus/source/manifest.json",
+      "locator": "/documents/13"
+    }
+  ],
+  "creators": [
+    "Bonnie J. Buratti",
+    "Joel A. Mosher"
+  ],
+  "publisher": "Icarus 115, 219-227",
+  "publicationDate": "1995",
+  "relations": [],
+  "statements": []
+}

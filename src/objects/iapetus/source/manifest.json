@@ -791,6 +791,30 @@
     {
       "path": "figures/pia07005-map.json",
       "purpose": "Measured crop, annotation rectangles, background level and grid for the PIA07005 figure; reproduces figures/pia07005-map.png."
+    },
+    {
+      "path": "photometry/buratti-mosher-1995-lommel-seeliger-clear.json",
+      "purpose": "Lunar-like (Lommel-Seeliger) law and phase function Buratti and Mosher fitted to Voyager images of Iapetus, used to light the globe.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "doi-10-1006-icar-1995-1093",
+            "role": "method",
+            "evidence": "Read in the JPL Open Repository preprint; the Icarus version was not read. Page 6 says each Voyager image was fitted to I/F = f(alpha) A mu0/(mu + mu0) + (1 - A) mu0 and that A = 1 adequately describes all observations, which leaves the Lommel-Seeliger term, the record's disk function. It says its f values are normalized to zero phase, the record's first point; the scan prints that angle unclearly. Table 1 lists the images with their phase angle, pixel size and f. The record's other points are its clear-filter rows (0.47 micrometres), 14 to 90 degrees, the record's fitted phase range; the ultraviolet and green rows print the same values. The paper states no emission range. The fitted emission limit, 83.6 degrees, is derived here, not printed: it is the emission angle at the outermost pixel centre of the finest image in Table 1, 9.1 km per pixel, on a 734.3 km sphere, arcsin((R - 0.5 pixel)/R).",
+            "locator": "JPL Open Repository preprint 95-0215, page 6 and Table 1"
+          },
+          {
+            "catalogueId": "doi-10-1016-0019-1035-84-90111-8",
+            "role": "reference",
+            "evidence": "The earlier study of the same images. Its abstract says the surface at 8 to 90 degrees phase is adequately described by a lunarlike photometric function. The paper is closed and was not read.",
+            "locator": "Abstract, NASA Technical Reports Server record 19840066646"
+          }
+        ]
+      },
+      "origin": "https://doi.org/10.1006/icar.1995.1093",
+      "credit": "Bonnie J. Buratti and Joel A. Mosher (1995), Icarus 115, 219. Transcription and emission limit: cssEarth.",
+      "acquisition": "Law and phase values transcribed from the paper's JPL Open Repository preprint into a project document; the emission limit is computed from the pixel size its Table 1 prints; no data file was downloaded."
     }
   ],
   "generatedIntermediates": []
