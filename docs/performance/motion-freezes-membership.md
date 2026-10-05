@@ -15,6 +15,14 @@ While a hand or the app drives the camera (a drag, an active zoom or pinch, a fl
 can see where you are heading. Crossings between levels of detail are staged ahead: the next level is made resident at
 opacity 0, paced, so the crossing itself is a crossfade.
 
+A body's faces keep their surfaces while they are off screen (`rendering/kept-layers.ts`). Safari gives up the surface
+of a layer that leaves the screen and makes it again when it returns, which the page cannot pace: after a zoom in, a
+zoom out on Earth made its off-screen faces again in frames of 124 to 253 ms on the iPad. A transform animation on the
+body's camera element, paused two frames after it starts, makes Safari keep them; the same zoom out then had no frame
+over 47 ms. The price is paid at rest: the sharper pages a zoom in asks for are painted on the faces off screen too
+(about ten frames of 33 to 49 ms where there were two), and those faces hold 58 MB more in the page's process
+(2026-10-05).
+
 Annotations (markers, names, orbits, the footer) and content (sky faces, a nebula's slice stack changing axis) are
 held differently while coasting:
 
