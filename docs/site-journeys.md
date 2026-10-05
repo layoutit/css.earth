@@ -12,7 +12,7 @@ A journey drives a production build and records what the reader sees. Record bas
 | Content | Shell text, title, URL, history length/state values, focus and root data attributes | None |
 | Errors | Page errors, rejections, console errors/warnings, worker errors, blocked foreign requests and journey assertions | None |
 
-Fake time cannot control transport, worker computation, image decoding or native animation timelines. Their timing evidence is saved in `*.raw.json` for inspection and excluded by name from `*.trace.json` and comparison. Completion order among independent requests is not an application guarantee. Part 2 adds real-time base/head runs to pin latency regressions and native scheduling, plus a gate on actual manifest-control reachability. This part makes no latency guarantee.
+Fake time cannot control transport, worker computation, image decoding or native animation timelines. Their timing evidence is saved in `*.raw.json` for inspection and excluded by name from `*.trace.json` and comparison. Completion order among independent requests is not an application guarantee. Part 2 adds real-time base/head runs to pin latency regressions and native scheduling, plus instrumentation for actual manifest-control reachability. This part makes no latency guarantee.
 
 Requests issued concurrently compare as counted multisets. Application-ordered issuance remains exact: Milky Way declares transport-before-entry, and the runner declares completed `/world/anywhere.json` before router import. It does not invent a transport-completion dependency between concurrent startup fetches. Transient DOM attach/detach remains visible even if the endpoint is unchanged.
 
@@ -73,7 +73,30 @@ Milky Way/Earth transitions, history, wheel and native warm cache are experiment
 
 Journeys and their harness live under `site/journeys/`: [architecture rules](../.github/scripts/architecture/rules.mts) prohibit imports across site/labs/CI trees, including types. Copy/build/proof commands live under `.github/scripts/journeys/` and use subprocess boundaries. No architecture baseline increase is needed. Browser journeys have a separate command; synthetic tests use the existing unit globs.
 
-The [manifest ID contract](../site/journeys/manifest-ids.json) preserves all 319 S0 ids and validates each `exercises` entry. `node site/journeys/run.mts --coverage --profile <profile>` reports declared qualified coverage. It does not prove handlers actually fired; part 2 adds that reachability gate.
+The [manifest ID contract](../site/journeys/manifest-ids.json) preserves all 319 S0 ids and validates each `exercises` entry. `node site/journeys/run.mts --coverage --require` exits **1** when any id lacks a qualified journey/profile pair or reviewed exemption, listing every missing id; complete coverage exits **0**. Counts print as `controls driven 2/101 | handlers 10/189 | capabilities 8/29 | exempt 1`. Without `--require`, coverage reports the reached and unreached lists. An explicit `--profile` restricts the report to that profile; otherwise qualified pairs across all profiles contribute.
+
+The committed [unreachable list](../site/journeys/unreachable.json) contains only the S0-reviewed physical-iPad import-queue exclusion, with its one-line reason. Unknown ids, duplicate exemptions and ids exercised by any qualified pair are refused. New exemptions require review; lack of a journey is not a reason for exemption. Deleting an exercise or removing qualification turns the coverage requirement red in mutation tests.
+
+Coverage credits source-audited `exercises` declarations, not instrumented handler firing. The gate intentionally stays red until tranche 2 supplies the missing input and control families. Registering an experimental journey does not add coverage. The S0 representative set covers 159 capability/startup combinations in principle; direct-load qualification alone does not prove the in-app startup paths.
+
+| Additional representative | Dataset action | Chromium desktop | WebKit desktop |
+| --- | --- | --- | --- |
+| lmc | VISTA infrared | 10+30 exact | 10+30 exact |
+| neptune-system | 2017 visible, then 2018 step | experimental | experimental |
+| beta-pictoris-system | Debris-disc color; require legend | experimental | experimental |
+| asteroid-2001-sn263-system | Reselect sole shape dataset | experimental | experimental |
+| mars-system | Chlorine, then iron step | experimental | experimental |
+| observable-universe | Cutaway; require legend | experimental | experimental |
+| abell-1689 | Reselect sole optical dataset | experimental | experimental |
+| centaurus-cluster | Reselect sole members dataset | experimental | experimental |
+| great-attractor | Reselect sole galaxies dataset | experimental | experimental |
+| local-group | Reselect sole galaxies dataset | experimental | experimental |
+
+Together with Milky Way, Earth-system and Dione above, these are all thirteen S0 representatives. The new journeys are intended to open and close settings, then use a native dataset button; only LMC has completed qualification. Single-dataset objects have no alternative to switch to; legends are static panels with no toggle listener.
+
+Neptune and Mars declare sequence steps. Neptune's attempt fails before selection: the system route shows the system card, while host dataset controls belong to its body view and are not visible. The journey needs native host selection before using datasets. The remaining nine new representatives stay experimental and unqualified.
+
+The [qualification command](../.github/scripts/journeys/qualify.mts) runs four ten-capture batches per pair, compares every batch to the first, requires positive comparison output and stops at the first unstable pair. It never changes registry qualification automatically.
 
 ## Run base versus head locally
 
@@ -92,6 +115,7 @@ mkdir -p "$TMPDIR" output/journeys
 export JOURNEY_OUTPUT="$(mktemp -d "$PWD/output/journeys/compare-XXXXXX")"
 node --test site/journeys/harness/*.test.mts site/journeys/registry.test.mts .github/scripts/journeys/breakages/*.test.mts
 pnpm journeys:mutations
+node site/journeys/run.mts --coverage --require
 for JOURNEY_PROFILE in chromium-desktop webkit-desktop; do
   node site/journeys/run.mts --checkout "$BASE_CHECKOUT" --dist "$BASE_CHECKOUT/dist" --out "$JOURNEY_OUTPUT/base/$JOURNEY_PROFILE" --profile "$JOURNEY_PROFILE" --gate --repeat 2
   node site/journeys/run.mts --checkout "$HEAD_CHECKOUT" --dist "$HEAD_CHECKOUT/dist" --out "$JOURNEY_OUTPUT/head/$JOURNEY_PROFILE" --profile "$JOURNEY_PROFILE" --gate --repeat 2
@@ -113,7 +137,7 @@ To add a journey, export a typed `journey` with a unique id, validated `exercise
 | Content | Text, title, URL/history values, root data | Both |
 | Errors | Page error, rejection, console error/warning, worker error | Both |
 
-The full browser lane passes 65 tests in 200 seconds, including all 49 focused recorder cases with stable controls, family-detector deletions in both engines, native-playback/timestamp deletions, worker scheduling and foreign-request safety. Synthetic units pass 82 tests; six browser-only tests are skipped there. Individual-field deletion coverage beyond the named checks remains incomplete.
+The full browser lane passes 65 tests in 200 seconds, including all 49 focused recorder cases with stable controls, family-detector deletions in both engines, native-playback/timestamp deletions, worker scheduling and foreign-request safety. Synthetic units pass 86 tests; six browser-only tests are skipped there. Individual-field deletion coverage beyond the named checks remains incomplete.
 
 Tests require an equal unperturbed control and the declared targeted family set. Deleting each family detector must make the focused browser test fail in both engines. Units also defend step identity, per-subject lifecycle order, chunk collisions/counts/status/names, exact alpha/color pixels and declared issuance. Timing exclusions are tested independently and preserve raw traces.
 
@@ -153,6 +177,7 @@ pnpm exec playwright install --with-deps chromium webkit
 (cd "$HEAD_CHECKOUT" && NODE_OPTIONS=--max-old-space-size=6144 pnpm exec astro build --outDir dist-journeys)
 export JOURNEY_OUTPUT="$(mktemp -d "$PWD/output/journeys/ci-XXXXXX")"
 pnpm journeys:mutations
+node site/journeys/run.mts --coverage --require
 for JOURNEY_PROFILE in chromium-desktop webkit-desktop; do
   node site/journeys/run.mts --checkout "$BASE_CHECKOUT" --dist "$BASE_CHECKOUT/dist-journeys" --out "$JOURNEY_OUTPUT/base/$JOURNEY_PROFILE" --profile "$JOURNEY_PROFILE" --gate --repeat 2
   node site/journeys/run.mts --checkout "$HEAD_CHECKOUT" --dist "$HEAD_CHECKOUT/dist-journeys" --out "$JOURNEY_OUTPUT/head/$JOURNEY_PROFILE" --profile "$JOURNEY_PROFILE" --gate --repeat 2
@@ -172,4 +197,4 @@ done
 
 These are local measurements, not CI guarantees. Browser installation, input restoration and hosted runners remain unmeasured.
 
-Part 2 adds thirteen representatives, actual manifest-control reachability gating, real-time latency and perturbation runs, touch/tablet profiles, coast journeys and the physical iPad path. Native HTTP cache fidelity and complete cache/dependency evidence remain limitations.
+Part 2 completes representative qualification and startup-combination coverage, instrumented manifest-control reachability, real-time latency and perturbation runs, touch/tablet profiles, coast journeys and the physical iPad path. Native HTTP cache fidelity and complete cache/dependency evidence remain limitations.

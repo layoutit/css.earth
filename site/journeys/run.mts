@@ -12,14 +12,23 @@ import { parseTrace, json } from './harness/trace.mts';
 import { installLockstep } from './harness/lockstep.mts';
 import { traceHistogram, ambiguousChunks } from './harness/canonical.mts';
 import { compareDirectories } from './harness/differ.mts';
-import { coverage, manifestIds, validateExercises } from './manifest.mts';
+import { coverageGate, manifestIds, unreachableIds, validateExercises } from './manifest.mts';
 import { journeys, selectJourneys } from './registry.mts';
 export async function main(args: string[]): Promise<number> {
   const { values } = parseArgs({ args, options: { dist: { type: 'string' }, checkout: { type: 'string' }, out: { type: 'string' }, profile: { type: 'string', default: 'chromium-desktop' },
-    journey: { type: 'string' }, coverage: { type: 'boolean', default: false }, gate: { type: 'boolean', default: false }, repeat: { type: 'string', default: '2' } } });
+    journey: { type: 'string' }, coverage: { type: 'boolean', default: false }, require: { type: 'boolean', default: false }, gate: { type: 'boolean', default: false }, repeat: { type: 'string', default: '2' } } });
   const ids = await manifestIds();
   validateExercises(journeys, ids);
-  if (values.coverage) { console.log(JSON.stringify(coverage(journeys, ids, values.profile), null, 2)); return 0; }
+  if (values.require && !values.coverage) throw new Error('--require needs --coverage');
+  if (values.coverage) {
+    if (!profiles[values.profile]) throw new Error(`Unknown profile ${values.profile}`);
+    const selectedProfile = args.some(arg => arg === '--profile' || arg.startsWith('--profile=')) ? values.profile : undefined;
+    const result = coverageGate(journeys, ids, await unreachableIds(), selectedProfile);
+    console.log(result.counts);
+    if (values.require) for (const id of result.missing) console.log(`UNREACHED ${id}`);
+    else console.log(JSON.stringify(result.report, null, 2));
+    return values.require && !result.passed ? 1 : 0;
+  }
   if (!values.dist || !values.out) throw new Error('Expected --dist and --out');
   const profile = profiles[values.profile];
   if (!profile) throw new Error(`Unknown profile ${values.profile}`);

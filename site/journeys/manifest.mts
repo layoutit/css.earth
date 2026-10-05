@@ -21,10 +21,46 @@ export function validateExercises(journeys: readonly { id: string; exercises: st
   const known = new Set(ids);
   for (const journey of journeys) for (const id of journey.exercises) if (!known.has(id)) throw new Error(`${journey.id}: unknown manifest exercise ${id}`);
 }
-export function coverage(journeys: readonly RegisteredJourney[], ids: readonly string[], profile: string) {
-  const reached = new Set(journeys.filter(journey => journey.status[profile] === 'qualified').flatMap(journey => journey.exercises));
+export function coverage(journeys: readonly RegisteredJourney[], ids: readonly string[], profile?: string) {
+  const reached = new Set(journeys.filter(journey => profile ? journey.status[profile] === 'qualified' : Object.values(journey.status).includes('qualified')).flatMap(journey => journey.exercises));
   return Object.fromEntries(['capability', 'handler', 'control'].map(kind => [kind, {
     reached: ids.filter(id => id.startsWith(kind + ':') && reached.has(id)),
     unreached: ids.filter(id => id.startsWith(kind + ':') && !reached.has(id)),
   }]));
+}
+
+export interface Exemption { id: string; reason: string }
+/** S0-reviewed exclusions only; new exclusions require review before changing the committed list. */
+export function parseUnreachable(input: unknown): Exemption[] {
+  if (!Array.isArray(input)) throw new TypeError('Invalid unreachable list');
+  const entries = input.map((entry: unknown) => {
+    if (!entry || typeof entry !== 'object' || !('id' in entry) || typeof entry.id !== 'string'
+      || !('reason' in entry) || typeof entry.reason !== 'string' || !entry.reason.trim()
+      || /[\r\n]/u.test(entry.reason) || Object.keys(entry).some(key => !['id', 'reason'].includes(key)))
+      throw new TypeError('Invalid unreachable entry: expected id and one-line reason');
+    return { id: entry.id, reason: entry.reason };
+  });
+  if (new Set(entries.map(entry => entry.id)).size !== entries.length) throw new TypeError('Duplicate unreachable id');
+  return entries;
+}
+export async function unreachableIds(): Promise<Exemption[]> {
+  const input: unknown = JSON.parse(await readFile(resolve(import.meta.dirname, 'unreachable.json'), 'utf8'));
+  return parseUnreachable(input);
+}
+export function coverageGate(journeys: readonly RegisteredJourney[], ids: readonly string[], exemptions: readonly Exemption[], profile?: string) {
+  validateExercises(journeys, ids);
+  const report = coverage(journeys, ids, profile);
+  // An exemption cannot conceal a qualified exercise in any profile, even in a profile-specific report.
+  const driven = new Set(Object.values(coverage(journeys, ids)).flatMap(kind => kind.reached));
+  for (const entry of exemptions) {
+    if (!ids.includes(entry.id)) throw new Error(`Unknown unreachable manifest id ${entry.id}`);
+    if (driven.has(entry.id)) throw new Error(`Qualified journey reaches exempt id ${entry.id}`);
+  }
+  const exempt = new Set(exemptions.map(entry => entry.id));
+  const missing = Object.values(report).flatMap(kind => kind.unreached).filter(id => !exempt.has(id));
+  const counts = ['control', 'handler', 'capability'].map(kind => {
+    const row = report[kind]!;
+    return `${kind === 'control' ? 'controls driven' : kind === 'handler' ? 'handlers' : 'capabilities'} ${row.reached.length}/${row.reached.length + row.unreached.length}`;
+  }).join(' | ') + ` | exempt ${exempt.size}`;
+  return { report, missing, counts, passed: missing.length === 0 };
 }
