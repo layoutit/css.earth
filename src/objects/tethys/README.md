@@ -89,7 +89,10 @@ Limb columns: the position-angle residual between the projected limb and the pho
 - The SPC map spacing is about 1.5 km, and its one-to-two-grid-spacing error estimate is not a per-cell uncertainty.
   Tethys used uncalibrated ISS images. The polar grids fall slightly short of 55° near cardinal longitudes, leaving
   narrow gray gaps.
-- Photographic, elevation and albedo display atlases use quarter dimensions on the iPad footprint. This reduces
-  display detail, not the source data.
+- Every display atlas is 1,400 × 1,462 pixels, 32 × 32 texels a face. This reduces
+  display detail, not the source data. Until 5 October 2026 the layout was four times those dimensions: the ISS
+  photograph and the shape filled it, and the other atlases were stored at a quarter or an eighth of it and drawn
+  enlarged, 733 to 1,008 ms a dataset switch on an iPad against 139 to 142 ms now. Picking the ISS photograph or the shape froze an
+  iPad's page at 15 seconds a frame; they now take 194 and 170 ms.
 
 [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

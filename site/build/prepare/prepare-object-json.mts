@@ -25,7 +25,7 @@ import { access, readFile } from 'node:fs/promises';
 import { basename, resolve, sep } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { authoredObject } from '@cssearth/bake/sources';
-import { preparePresentationBindings, withImageSizes } from '@cssearth/bake/prepared-presentation';
+import { preparePresentationBindings, withImageSizes, withKeptPoolBudgets } from '@cssearth/bake/prepared-presentation';
 import { objectPageStyles } from '../../contracts/object-page-contract.mts';
 import { readPreparedObjects } from '@cssearth/objects/node';
 
@@ -78,8 +78,9 @@ export async function finalizeObjectJson(id: string, definitionValue: unknown, t
       definition = await preparePresentationBindings(requireObjectRuntimeDefinition(preparedNavigation.definition), projectRoot, { ...options, pageStyles: objectPageStyles });
     }
   }
-  // Every image states its size, from the file the bake published (a staged scene directory holds them flat).
-  definition = requireObjectRuntimeDefinition(await withImageSizes(definition, url => options?.publicDirectory ? resolve(options.publicDirectory, basename(url)) : resolve(projectRoot, 'public', url.replace(/^\//u, ''))));
+  // Every image states its size, from the file the bake published (a staged scene directory holds them flat), and a pool
+  // that keeps its images states its byte budget from those sizes.
+  definition = requireObjectRuntimeDefinition(withKeptPoolBudgets(await withImageSizes(definition, url => options?.publicDirectory ? resolve(options.publicDirectory, basename(url)) : resolve(projectRoot, 'public', url.replace(/^\//u, '')))));
   const scene:unknown = JSON.parse(await readFile(resolve(preparedDirectory, 'scene.json'), 'utf8'));
   await writeWorldNavigationArtifacts(preparedDirectory, { ...preparedNavigation, definition }, requireRecord(scene));
   descriptor = parseObjectDescriptor({ ...descriptor, properties: { ...descriptor.properties, worldFrame: preparedNavigation.frame } });

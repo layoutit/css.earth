@@ -49,23 +49,24 @@ test('georeferenced photographs bind quality, physical distances and bounded dis
 });
 
 test('an alternative model owns its observation mesh and sampler state', async () => {
-  const profile = await read('comet-67p');
-  const alternative = fixtureRecord(alternativeForDataset(profile.geometry.radialTerrainAlternatives, 'osiris'));
+  // Kleopatra's ZIMPOL photograph is registered to the ADAM model, a second shape beside the one its other datasets draw.
+  const profile = await read('kleopatra');
+  const alternative = fixtureRecord(alternativeForDataset(profile.geometry.radialTerrainAlternatives, 'zimpol'));
   assert.notEqual(alternative.path, profile.geometry.radialTerrain.path, 'the observation uses a distinct source mesh');
-  assert.doesNotThrow(() => parseTerrestrialProfile(profile), 'OSIRIS samples its declared alternative mesh');
-  // The OSIRIS dataset validates against its own model, which must preserve the source mesh like the default.
+  assert.doesNotThrow(() => parseTerrestrialProfile(profile), 'the photograph samples its declared alternative mesh');
+  // The photograph validates against its own model, which must preserve the source mesh like the default.
   delete fixtureRecord(alternative, 'simplification').method;
   assert.throws(() => parseTerrestrialProfile(profile), /source-bound/, 'the alternative mesh must preserve its source');
 
   const observation = { samplePoint() { return null; } };
   const base: {observationSurfaces?: Map<string, typeof observation>} = {};
   const alternativeRadial: {observationSurfaces?: Map<string, typeof observation>} = {};
-  const selected = radialModelForDataset([{ datasetIds: ['model'], radial: base }, { datasetIds: ['osiris'], radial: alternativeRadial }], 'osiris');
+  const selected = radialModelForDataset([{ datasetIds: ['shape'], radial: base }, { datasetIds: ['zimpol'], radial: alternativeRadial }], 'zimpol');
   selected.radial.observationSurfaces ??= new Map();
-  selected.radial.observationSurfaces.set('osiris', observation);
+  selected.radial.observationSurfaces.set('zimpol', observation);
   assert.equal(selected.radial, alternativeRadial);
   assert.equal('observationSurfaces' in base, false);
-  assert.equal(alternativeRadial.observationSurfaces?.get('osiris'), observation);
+  assert.equal(alternativeRadial.observationSurfaces?.get('zimpol'), observation);
 });
 
 test('PDS4 geometry cubes declare their planes and identity and bind a lossless, labelled frame within its transfer limits', async () => {

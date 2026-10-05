@@ -45,6 +45,14 @@ their existing importance. Available scene-body labels are admitted before the
 additional disabled moon captions; those captions cannot displace a clickable
 label. The full sidebar list remains available regardless of scene crowding.
 
+Beyond the Local Group scale, with the camera more than 300 kpc from a body,
+a galaxy stands for what is inside it. A star, a black hole or a galaxy it
+holds in the object tree is not a caption candidate while its marker falls
+within the galaxy's circle, so the galaxy is named: M31 rather than M31-V1 or
+M110, the Milky Way rather than the Large Magellanic Cloud. A hovered,
+highlighted or selected body keeps its caption. A selected galaxy is named by
+its own caption and stands for nothing.
+
 Clickable deep-space labels try below, above, right and left when crowded.
 Prepared cloud bounds keep those alternatives outside a nebula's image.
 Disabled moon captions have no circle or navigation target.

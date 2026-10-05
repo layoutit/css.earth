@@ -221,7 +221,10 @@ export async function prepareSolidPresentation({ config, scene: plan, material: 
   const presentation = { schema: PREPARED_PRESENTATION_SCHEMA, camera: plan.camera, sky: plan.sky, sun: plan.sun,
     assets: { entries, pools: [preparedResourcePool('mounted', entries),
       ...(entries.some(entry => entry.pool === 'datasets')
-        ? [preparedResourcePool('datasets', entries, { retention: 'selection', capacity: 4, concurrency: 2 })] : [])],
+        // A dataset's images stay until the pool is full, so coming back to one repaints from an image already in place; the
+        // last bake step states the pool's byte budget, or takes the mark off where two selections are too large
+        // (packages/bake/src/prepared-presentation/prepared-pool-budgets.ts).
+        ? [preparedResourcePool('datasets', entries, { retention: 'selection', capacity: 4, concurrency: 2, eviction: 'capacity' })] : [])],
     startup: entries.filter(entry => entry.pool === 'mounted').map(entry => entry.key) },
     tree, variants, materials: track ? [track] : [], animations: [],
     ...(plan.surfaceTriangles ? { surfaceHit: { target: index(body), triangles: plan.surfaceTriangles,

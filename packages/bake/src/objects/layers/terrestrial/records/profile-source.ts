@@ -44,7 +44,7 @@ export function parseSolidPreparationSource(input:unknown) {
   const extra=shape({schema:choice('cssearth-terrestrial-preparation@2'),kind:choice('solid-observation-body'),
     namespace:text,displayName:text,publicBase:text,rings:optional(value=>value),
     geometry:shape({radius:number,radiusKm:number,mapUrl:text,polesUrl:text,radialModels:optional(value=>value),
-      radialTerrain:optional(parseRadialSource),radialTerrainAlternatives:optional(array(value=>Object.assign({},parseRadialSource(value),shape({datasetId:text,additionalDatasetIds:optional(array(text))})(value)))),
+      radialTerrain:optional(parseRadialSource),radialTerrainAlternatives:optional(array(value=>Object.assign({},parseRadialSource(value),shape({datasetId:text,additionalDatasetIds:optional(array(text)),display:optional(text)})(value)))),
       camera:optional(value=>{const camera=shape({framingScale:optional(number)})(value);refuseAuthoredCameraAngles(camera);return camera;})}),
     lighting:optional(parseSolidLighting),
     presentation:shape({defaultDataset:text}),

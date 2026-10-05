@@ -126,6 +126,14 @@ going back to its surface map spent 117 of 219 main-thread samples of its long f
 images that stayed resident undrawn waits for a second `decode()`, off that thread, before it is ready
 ([prepared-residency.ts](../packages/renderer/src/rendering/prepared-residency.ts)).
 
+A small body keeps the images of the dataset it has just left. Its dataset pool is marked to keep images until it is
+full, and the last bake step states the pool's byte budget from the image sizes: two selections, the one on screen and
+the one before it, never above what Io states for its pages
+([prepared-pool-budgets.ts](../packages/bake/src/prepared-presentation/prepared-pool-budgets.ts)). On an iPad, going
+back to a dataset of Bennu took 280 ms and 180 ms after its 13-megapixel atlas had been released, and 82 ms and 75 ms
+with it kept; a first visit is unchanged. A body whose two selections exceed that ceiling releases what a selection
+leaves, as before; since Deimos and Phobos took smaller atlases, no small body does.
+
 How the surface is cut into images matters less. Io and Mercury baked as square pages of four faces, 112 pages a
 surface, switched in 158 to 298 ms and 129 to 146 ms at their default views: no gain for Io, and twice Mercury's time
 on its one page. Zoomed in, where only the pages in view are decoded, Io took 75 to 108 ms against 108 to 178 ms.
@@ -564,7 +572,11 @@ its full box. [leaf-box.ts](../packages/bake/src/presentation/leaf-box.ts) holds
   217 to 246 ms; with the same box and the size in pixels, in 64 to 67 ms (iPad, 2026-10-04).
 - **Steps** grow by √2 from 16 silhouette pixels to the first step at which every leaf holds its full box.
 - **Groups.** The presentation bindings measure every leaf in a browser at each `prepare:object-json`, so every generator
-  shares the rule. Surface leaves join blocks of about eight leaves by direction (`LEAF_BOX_GROUP_LEAVES`), each with a
+  shares the rule. A leaf a run does not measure is stored with its full box, and the next run puts it back in the
+  variable form first (`withoutLeafBoxRecords`), so it is measured as soon as it renders. Until 2026-10-05 such a leaf
+  kept its full box for good: Enceladus, Dione and Rhea had never been measured, and Enceladus's faces sat in 128 px
+  boxes with images a quarter of that size drawn enlarged, 189 to 289 ms a dataset switch on the iPad against 51 to
+  72 ms once measured. Surface leaves join blocks of about eight leaves by direction (`LEAF_BOX_GROUP_LEAVES`), each with a
   placement like a texture page's; other leaves (rings, shells, cutaways) form groups of eight. The bindings also record
   each group's full box area, for the memory estimate below.
 - **Runtime** ([prepared-leaf-box-blocks.ts](../packages/renderer/src/rendering/prepared-leaf-box-blocks.ts)): a block's step

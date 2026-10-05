@@ -112,7 +112,9 @@ export function lineageProducts({ id, recipes, inputs, paths: declared, controls
     // Mesh geometry changes the final sampled surface as well as its silhouette.
     if (geometry.radialTerrain) {
       for (const product of products) {
-        const modelPaths = paths(alternativeForDataset(records(geometry.radialTerrainAlternatives ?? []), product.id) ?? geometry.radialTerrain);
+        // A dataset read from another model and drawn on the body's mesh (display "body-mesh") has both shapes as its geometry.
+        const alternative = alternativeForDataset(records(geometry.radialTerrainAlternatives ?? []), product.id);
+        const modelPaths = [...paths(alternative ?? geometry.radialTerrain), ...(alternative?.display === 'body-mesh' ? paths(geometry.radialTerrain) : [])];
         product.inputPaths = [...new Set([...product.inputPaths, ...modelPaths])];
         product.inputRoles = { ...product.inputRoles, ...Object.fromEntries(modelPaths.map(path => [path, { role: 'geometry' as const, evidence: 'Source selected by the terrestrial radial-terrain geometry recipe.' }])) };
       }

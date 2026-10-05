@@ -225,8 +225,12 @@ export function createUniverseCatalogBanks({ root, end, stage, lifetime, declara
           bank.dotsShown = dotOpacity > 0;
         }
         if (opacity !== bank.publishedOpacity) {
-          bank.mounted.root.style.opacity = String(opacity);
-          if (opacity > 0 && bank.mounted.root.style.display === 'none') bank.mounted.revealLarge();
+          // The root stops where its stacks do (the bank's `ceiling`). Under 1 for a bank of sheets: Safari paints every leaf
+          // under the root again when its opacity leaves or reaches 1. At 1 for a bank of patches, which a group under 1
+          // draws with a wedge missing at its nearest view (prepared-image-layer-runtime.ts); such a bank pays that repaint,
+          // 180 to 208 ms each way for Cassiopeia A's 1,397 patches with the camera still on an iPad (2026-10-05).
+          bank.mounted.root.style.opacity = String(Math.min(bank.mounted.ceiling, opacity));
+          if (opacity > 0 && bank.mounted.root.style.display === 'none') bank.mounted.resume();
           bank.mounted.root.style.display = opacity > 0 ? '' : 'none';
           bank.publishedOpacity = opacity;
         }

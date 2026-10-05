@@ -55,7 +55,7 @@ async function publishedLightingAtlas({ lighting, surfaces, config, sourceDirect
 const DISPLAY_ENCODING: WebpOptions = { alphaQuality: 100, effort: 4 };
 
 /** Surface composition is source-dependent; the projection/packing is shared. */
-interface RasterRadialModel { datasetIds: string[]; radial: RadialState; config: {geometry: unknown}; }
+interface RasterRadialModel { datasetIds: string[]; radial: RadialState; config: {geometry: unknown}; sampling?: Map<string, {grid: RadialState['grid']; config: {geometry: unknown}}>; }
 const OBSERVATION_PREVIEW_DIVISOR = 4;
 
 export async function prepareSolidRasters({ sourceDirectory, publicDirectory, outputDirectory, config:input, source, radial, radialModels }: {sourceDirectory:string;publicDirectory:string;outputDirectory:string;config:unknown;source:Awaited<ReturnType<typeof createSourceManifest>>;radial?:RadialState|null;radialModels?:readonly RasterRadialModel[]}) {
@@ -128,7 +128,10 @@ export async function prepareSolidRasters({ sourceDirectory, publicDirectory, ou
     surfaces.push(surface);
   }
   for (const dataset of config.raster.scientific ?? []) {
-    const model = modelForDataset(dataset.id), scienceRadial = model?.radial ?? radial, scienceConfig = model?.config ?? config;
+    // A dataset read from another model of the body (display "body-mesh") is validated and sampled on that model and
+    // kept with the mesh it draws on.
+    const model = modelForDataset(dataset.id), drawnRadial = model?.radial ?? radial, sampled = model?.sampling?.get(dataset.id);
+    const scienceRadial = drawnRadial && sampled ? { ...drawnRadial, grid: sampled.grid } : drawnRadial, scienceConfig = sampled?.config ?? model?.config ?? config;
     await source.validateGroup(dataset.consumer);
     for(const mask of dataset.qualityMasks??[])if(!source.manifest.inputs.some(input=>input.path===mask.path&&input.consumers.includes(dataset.consumer)))
       throw new Error(`Scientific quality mask ${mask.path} lacks a pinned source in ${dataset.consumer}.`);
@@ -169,9 +172,9 @@ export async function prepareSolidRasters({ sourceDirectory, publicDirectory, ou
     // Reuse the already loaded geometry BVH, especially for large OLA meshes.
     const raster = await loadScienceSurface(sourceDirectory, dataset, dataset.surfaceSampling && scienceRadial ? requireTerrainMesh(scienceRadial.grid) : undefined);
     if (dataset.surfaceSampling) {
-      if (!scienceRadial) throw new Error('Source-surface science requires retained terrain.');
-      scienceRadial.scientificSurfaces ??= new Map();
-      scienceRadial.scientificSurfaces.set(dataset.id, raster);
+      if (!drawnRadial) throw new Error('Source-surface science requires retained terrain.');
+      drawnRadial.scientificSurfaces ??= new Map();
+      drawnRadial.scientificSurfaces.set(dataset.id, raster);
     }
     const grid = datasetTextureGrid(dataset, config.raster);
     const preview = scientificPreviewGrid(dataset, { ...config.raster, ...grid });

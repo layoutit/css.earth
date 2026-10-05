@@ -226,7 +226,7 @@
       "latitudeSegments": 20,
       "longitudeSegments": 32,
       "faceBudget": 1600,
-      "texelsPerFace": 16384,
+      "texelsPerFace": 9216,
       "primitive": "u",
       "simplification": {
         "method": "source-meshoptimizer",

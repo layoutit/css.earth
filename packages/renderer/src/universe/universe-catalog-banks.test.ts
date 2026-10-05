@@ -11,7 +11,7 @@ mock.module('../image-layers/prepared-image-layer-runtime.js', { namedExports: {
   mountPreparedCssImageLayers: ({ host, before }: { host: HTMLElement; before: Element }) => {
     const root = host.ownerDocument.createElement('div');
     host.insertBefore(root, before);
-    return { root, publish(_publication: unknown, around: readonly number[] | false = false) { drawnAround.push(around !== false); }, revealLarge() {}, destroy() { root.remove(); } };
+    return { root, ceiling: 0.999, publish(_publication: unknown, around: readonly number[] | false = false) { drawnAround.push(around !== false); }, resume() {}, destroy() { root.remove(); } };
   },
 } });
 // The modules under test import the mocked ones, so they load after the mocks.
@@ -60,7 +60,7 @@ test('a bank whose light lies on walls draws around a body inside its host, the 
   publish(['nebula', 'milky-way']);
   await waitFor(() => assert.equal(root.dataset.imageLayerResidentBankCount, '1'));
   publish(['nebula', 'milky-way']);
-  assert.deepEqual([layers().length, layers()[0]!.style.display, Number(layers()[0]!.style.opacity)], [1, '', 1],
+  assert.deepEqual([layers().length, layers()[0]!.style.display, Number(layers()[0]!.style.opacity)], [1, '', 0.999],
     'the first wall bank declared for the host draws whole around the body inside it');
   assert.equal(drawnAround.at(-1), true, 'and is told where the body it is drawn around stands, so the sheets through it and under the camera are left out');
   publish([]);

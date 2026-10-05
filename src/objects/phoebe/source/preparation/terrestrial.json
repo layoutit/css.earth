@@ -14,7 +14,6 @@
     "observations": [
       {
         "id": "infrared",
-        "textureScale": 0.5,
         "validity": {
           "kind": "geotiff-rgb-bands",
           "samples": [
@@ -130,8 +129,7 @@
             "sampling": "nearest",
             "maximum": 1500
           }
-        ],
-        "textureScale": 0.5
+        ]
       },
       {
         "id": "elevation",
@@ -237,8 +235,7 @@
             0.7071067811865476
           ],
           "ambient": 0.45
-        },
-        "textureScale": 0.5
+        }
       },
       {
         "id": "maplet-resolution",
@@ -274,8 +271,7 @@
           "#fff0a0",
           "#35b5a5",
           "#284675"
-        ],
-        "textureScale": 0.5
+        ]
       },
       {
         "id": "image-count",
@@ -311,8 +307,7 @@
           "#356da7",
           "#3cbbb0",
           "#e9ec8f"
-        ],
-        "textureScale": 0.5
+        ]
       },
       {
         "id": "ice-absorption",
@@ -339,7 +334,6 @@
         "sourceUrl": "https://vims.univ-nantes.fr/cube/1465671822_1",
         "sampling": "nearest",
         "displaySampling": "nearest",
-        "textureScale": 0.5,
         "grid": {
           "width": 1440,
           "height": 720,
@@ -481,7 +475,7 @@
         "expectedFaces": 196608
       },
       "faceBudget": 2000,
-      "texelsPerFace": 16384,
+      "texelsPerFace": 4096,
       "primitive": "u",
       "simplification": {
         "method": "source-meshoptimizer",

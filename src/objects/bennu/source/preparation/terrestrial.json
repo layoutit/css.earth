@@ -530,6 +530,7 @@
     "radialTerrainAlternatives": [
       {
         "datasetId": "gravity-anomaly",
+        "display": "body-mesh",
         "path": "shape/g_03170mm_spc_obj_0000n00000_v042.obj",
         "format": "wavefront-obj",
         "grid": {
@@ -552,6 +553,7 @@
         "additionalDatasetIds": [
           "geopotential"
         ],
+        "display": "body-mesh",
         "path": "shape/g_01680mm_alt_obj_0000n00000_v020.obj",
         "format": "wavefront-obj",
         "grid": {
@@ -571,6 +573,7 @@
       },
       {
         "datasetId": "thermal-inertia",
+        "display": "body-mesh",
         "path": "shape/g_06330mm_spo_obj_0000n00000_v034.obj",
         "format": "wavefront-obj",
         "grid": {
@@ -593,6 +596,7 @@
         "additionalDatasetIds": [
           "carbon"
         ],
+        "display": "body-mesh",
         "path": "shape/g_03170mm_spc_obj_0000n00000_v020.obj",
         "format": "wavefront-obj",
         "grid": {

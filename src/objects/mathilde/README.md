@@ -16,7 +16,7 @@ Four labelled names carry a caption note from the lead of their English Wikipedi
 
 ## Processing
 
-**Shape.** The Stooke grid is welded and simplified with meshoptimizer 1.2.0 to 800 faces. Checked with 8,192 equal-area rays, the mean absolute radial error against the published model is 153.987 m and the maximum 1,245.038 m. These figures measure fit to the published visualization model, not observational truth.
+**Shape.** The Stooke grid is read as a closed mesh of 5,040 triangles and simplified with meshoptimizer 1.2.0 to 800 faces that keep source vertices. meshoptimizer estimates the largest displacement at 596.6 m, under the recipe's 600 m limit. This measures fit to the published visualization model, not observational truth. Every dataset draws on this one mesh; until 5 October 2026 the NEAR close-ups drew on it and the other two datasets on a second 800-face mesh cut from the same grid, whose ray-checked fit (mean 153.987 m, maximum 1,245.038 m) no longer describes what is shown.
 
 **Elevation** encodes Thomas radius minus the 26.4 km JPL reference sphere, in kilometers. It is radial height including broad shape, not gravitational elevation. Exactly 3,688 rows carry the 26.5 km placeholder. It is rejected in source units before interpolation, and any footprint touching it is withheld. The current PDS4 label omits this caveat, so the legacy label is kept. Relief uses no vertical exaggeration.
 

@@ -769,6 +769,30 @@ test('past the Local Group scale the stars give their names to the galaxies', as
   { const values = labelled(1e6).map(body => body.id); assert.ok(['lmc', 'smc'].every(item => values.includes(item)), 'from 1 Mpc the galaxies are'); }
 });
 
+test('beyond the Local Group scale a galaxy is named, not a star or a galaxy inside it on the same pixels', () => {
+  const points = [plan.focus, ...plan.bodies];
+  // The app's tiers: a featured star (M31-V1 in M31, VHK 45 in M33) is admitted before every galaxy.
+  const calculate = createWorldContextPlanner(plan, Object.fromEntries(plan.bodies.map(body =>
+    [body.id, labelImportance(body.classification ?? 'star', false, 0, body.discovery?.featured === true, body.discovery?.imagery === true)])));
+  const input = view();
+  const named = (id: string, parsecs: number) => {
+    // Looking down -z at the body, from `parsecs` above it.
+    const at = plan.bodies.find(body => body.id === id)!;
+    input.world.pose.positionM = [at.positionM[0], at.positionM[1], at.positionM[2] + parsecs * 3.085677581491367e16];
+    return new Set(calculate(input).projectedBodies.filter(body => body.labelShown).map(body => points[body.index]!.id));
+  };
+  const andromeda = named('m31', 4e6);
+  for (const galaxy of ['m31', 'm33']) assert.equal(andromeda.has(galaxy), true, `from 4 Mpc ${galaxy} is named`);
+  for (const inside of ['m31-v1', 'vhk-45', 'm110', 'm32']) assert.equal(andromeda.has(inside), false, `${inside}, within its galaxy's circle, is not`);
+  const home = named('milky-way', 4e6);
+  assert.equal(home.has('milky-way'), true, 'from 4 Mpc the Milky Way is named');
+  assert.equal(home.has('lmc'), false, 'the Large Cloud, within its circle, is not');
+  const near = named('m31-v1', 100e3);
+  for (const body of ['m31-v1', 'm31', 'm110', 'm32']) assert.equal(near.has(body), true, `from 100 kpc, inside the Local Group scale and clear of each other, ${body} is named`);
+  input.bodies[points.findIndex(body => body.id === 'm31-v1')]!.highlighted = true;
+  assert.equal(named('m31', 4e6).has('m31-v1'), true, 'a star the reader highlights keeps its name');
+});
+
 test('past the Solar System only the featured stars and the references keep a dot; past the Local Group no body does', () => {
   const featured = 'betelgeuse';
   assert.equal(plan.bodies.some(body => body.id === featured && !body.orbit), true);
@@ -788,6 +812,8 @@ test('past the Solar System only the featured stars and the references keep a do
 
 test('a body beyond the Local Group keeps its dot at the scale of its cluster, and loses it from the Milky Way', () => {
   const far = plan.bodies.find(body => body.id === 'm87-star')!, calculate = createWorldContextPlanner(plan), input = view();
+  // M87 is left unnamed here: named, it stands for the black hole at its centre (the test above), and its dot covers the black hole's.
+  input.bodies[[plan.focus, ...plan.bodies].findIndex(body => body.id === 'm87')]!.labelHidden = true;
   const dotted = (parsecs: number) => {
     // Looking down -z at M87*, from `parsecs` above it.
     input.world.pose.positionM = [far.positionM[0], far.positionM[1], far.positionM[2] + parsecs * 3.085677581491367e16];
