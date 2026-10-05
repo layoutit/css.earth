@@ -33,6 +33,7 @@ The emissive presentation has no lighting: no Shadows toggle, no directional Sun
 - On the full 13 May frame, every one of the 16.8 million decoded samples equals astropy's raw integer.
 - The [FITS map tests](../../../packages/bake/src/objects/interpretation/fits-map.test.mts) check north and south pixel centres, zero and negative values, BLANK handling and transparent off-limb plates.
 - In the [four-dataset render](source/reference/rendered-lenses.png), active regions sit in the same places in every dataset.
+- The derived frame against the authored one it replaced, in the app on 2026-10-05: [the earlier page, the new one and the pixels that differ](evidence/frame-20261005/derived-frame-against-main.webp), at the opening view and pulled back to 10.47 AU. Pixelmatch at threshold 0.1 counts 1,509 and 30,150 of 1,024,000 pixels (572,999 and 574,545 at threshold 0, the counts on the sheet); two captures of the earlier page differ by 0 and 335 (0 and 1,135). The orbits, stars and labels turn with the frame, and the disc shows the face the IAU spin gives.
 
 ## Known problems
 
@@ -41,7 +42,7 @@ The emissive presentation has no lighting: no Shadows toggle, no directional Sun
 - Ultraviolet colors are display scales for detector counts, not temperature or calibrated radiance. Brightness should not be compared numerically between wavelength bands.
 - Below I/I₀ 0.56 the SDO color table is not measurable; the palette ramps linearly to black there.
 - NASA's 193 Å file has an unterminated WAVELNTH string. The shared FITS reader accepts it with a warning and preserves the original card.
-- The Sun has no entry in the shared solar geometry tables; its 7.25° presentation axis and world frame are authored, not derived from an ephemeris. The prepared sky is not astrometrically registered.
+- The Sun is the origin, so nothing observes it from a direction of its own: its page opens on the design pose every lit body uses, 40° above the ecliptic. Its world frame, its axis (the IAU/WGCCRE elements in the astronomy package, 7.25° from the ecliptic pole) and its sky registration are derived as every body's are.
 - The shape radius is the IAU nominal 695,700 km; the NASA fact sheet's rounded "700,000 km" stays a fact sheet value only.
 
 ## Virtual Telescope API

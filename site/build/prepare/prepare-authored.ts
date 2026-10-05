@@ -1,7 +1,7 @@
 import { readFeatureMapLongitude, readPreparedPanelContentRecord, readComparableSource, readObjectDescriptorRecord, validatePreparedCubicSky, validateDirectionalSunPlan } from '@cssearth/objects';
 import { requireInventory } from '@cssearth/objects/node';
 import { parsePreparedObjectRuntime } from '@cssearth/objects';
-import { parsePreparedWorldContext, readObjectContentDatasets, parseObjectDescriptor } from '@cssearth/objects';
+import { readObjectContentDatasets, parseObjectDescriptor } from '@cssearth/objects';
 import { RASTER_RECIPE_SCHEMA } from '@cssearth/objects';
 import { BANDED_ELLIPSOID_SCHEMA, LAYERED_OBLATE_SCHEMA } from '@cssearth/bake/objects/scene';
 import { readNonArrayRecord } from '@cssearth/core';
@@ -418,16 +418,6 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
     : await prepareCelestialAssets({ sourceDirectory, publicDirectory, outputDirectory, directionalSun: litBySun(descriptor, required(sources, 'presentation').value),
       solarGeometry: await solarGeometry() });
   const geometryConfig = parseGeometryProfile(required(sources, 'geometry').value);
-  // A body outside the ephemeris tables (the Sun) frames its scene from the authored world context.
-  const contextSource = source(sources, 'world-context');
-  let worldContext: unknown;
-  if (contextSource) {
-    const { prepareSpatialContext } = await import(pathToFileURL(resolve(process.cwd(), 'site/build/prepare/prepare-spatial-context.ts')).href) as typeof import('./prepare-spatial-context.ts');
-    const outputPath = resolve(outputDirectory, 'world-context.json');
-    await prepareSpatialContext({ sourcePath: contextSource.path, outputPath, solarGeometryPath: resolve(process.cwd(), 'src/platform/solar-geometry.mts'), objectsDirectory: resolve(objectDirectory, '..') });
-    worldContext = JSON.parse(await readFile(outputPath, 'utf8')) as unknown;
-    parsePreparedWorldContext(worldContext);
-  }
   // Rings the radial lane drew as wedges tell the scene where each ring begins, by the atlas the geometry names.
   const ringWedges = Object.fromEntries((radial?.assets ?? []).flatMap(asset => 'wedges' in asset && asset.wedges ? [[asset.filename, asset.wedges] as const] : []));
   // The datasets name every image a leaf can show, so content is prepared before the scene sizes its leaves.
@@ -442,7 +432,7 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
     return surfaceCoordinateWidth(raster, url, width ?? Number.NaN);
   });
   const scene = await prepareGeometryScene({ profile: geometryConfig, raster: rasterConfig,
-    assets: { ...(raster as unknown as GeometrySceneAssets), ...(Object.keys(ringWedges).length ? { ringWedges } : {}) }, solarSource, starfield: celestial.sky as unknown as Record<string, unknown>, sun: celestial.sun as unknown as Record<string, unknown> | null, ...(worldContext !== undefined ? { worldContext } : {}), adapters: await loadGeometryAdapters(await solarGeometry()), outputDirectory, imagePixels });
+    assets: { ...(raster as unknown as GeometrySceneAssets), ...(Object.keys(ringWedges).length ? { ringWedges } : {}) }, solarSource, starfield: celestial.sky as unknown as Record<string, unknown>, sun: celestial.sun as unknown as Record<string, unknown> | null, adapters: await loadGeometryAdapters(await solarGeometry()), outputDirectory, imagePixels });
   validateCapabilityComposition(descriptor, rasterConfig as unknown as Record<string, unknown>, geometryConfig as unknown as Record<string, unknown>, solarSource, content.datasets);
   const presentation = parsePresentationProfile(required(sources, 'presentation').value);
   // A pulsating star plays its published light curve from the scene epoch: Gaia's model, checked against its own row.

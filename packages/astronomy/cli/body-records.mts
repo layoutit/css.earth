@@ -96,7 +96,8 @@ export async function readBodyRecords(root = packageRoot) {
   if (!ids.size) throw new TypeError('Astronomy records are empty.');
   for (const record of records) {
     if (record.physical.parent !== null && !ids.has(record.physical.parent)) throw new TypeError(`Missing astronomy parent: ${record.id}.`);
-    if (record.hostedOrbit !== undefined && records.find(parent => parent.id === record.physical.parent)?.star === undefined) throw new TypeError(`A hosted orbit's parent must be a placed star or black hole: ${record.id}.`);
+    // A hosted orbit is drawn from its host's place on the sky, so the host is placed at a distance: not the Sun, at distance zero.
+    if (record.hostedOrbit !== undefined && !((records.find(parent => parent.id === record.physical.parent)?.star?.distanceParsecs ?? 0) > 0)) throw new TypeError(`A hosted orbit's parent must be a star or black hole placed at a distance: ${record.id}.`);
     if (record.star?.boundTo !== undefined && records.find(host => host.id === record.star!.boundTo)?.star === undefined) throw new TypeError(`A bound star's companion must be a placed star: ${record.id}.`);
     // A circumbinary orbit is fitted about the centre of mass of its parent and a companion hosted on the same parent; the
     // published masses of both weight that centre.

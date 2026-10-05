@@ -5,7 +5,9 @@ import { resolve } from 'node:path';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import { archiveUrl, DATA, frameSibling, parseSpitzerProgram } from './archive.mts';
-import { naifIdFromHorizonsCode, observationRecords } from './archive-ledger.mts';
+import { naifIdFromHorizonsCode, observationRecords, spitzerShippedObjects } from './archive-ledger.mts';
+import { namedShippedObjects, readJsonOrNull } from '../targets.mts';
+import { shippedSkyObjects } from '../chandra/archive-ledger.mts';
 import { compareMosaics, LIMITS } from './compare.mts';
 import { fileSize } from '@cssearth/telescope/node';
 import { channelInputs, FATAL_IMASK_BITS, fatalImaskMask, mosaicMembers, parseMosaicSummary } from './mosaic.mts';
@@ -114,6 +116,18 @@ function fitsFile(values: readonly number[], width: number, height: number) {
 async function pinned(path: string, role: string) {
   return { path, pin: { role, identity: path.slice(path.lastIndexOf('/') + 1), ...await fileSize(path) } };
 }
+
+test('the Sun and what orbits it are asked by NAIF identity and have no place on the sky; a star is asked by its place', async () => {
+  const asked = new Map((await spitzerShippedObjects()).map(object => [object.id, object.query]));
+  assert.deepEqual(asked.get('sun'), { kind: 'naif', naifId: 10 });
+  assert.deepEqual(asked.get('jupiter'), { kind: 'naif', naifId: 599 });
+  assert.equal(asked.get('betelgeuse')?.kind, 'position');
+  const named = new Map((await namedShippedObjects(readJsonOrNull)).map(object => [object.id, object.position]));
+  assert.equal(named.get('sun'), undefined);
+  assert.ok(named.get('betelgeuse'));
+  const placed = new Set((await shippedSkyObjects()).map(object => object.id));
+  assert.ok(!placed.has('sun') && placed.has('betelgeuse'));
+});
 
 test('two mosaics are compared only on one grid, and agreement is measured against the archive uncertainty', async () => {
   const directory = await mkdtemp(resolve(tmpdir(), 'spitzer-compare-'));

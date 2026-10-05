@@ -15,7 +15,6 @@
         "datasets",
         "starfield",
         "system-markers",
-        "world-context",
         "scene",
         "controls",
         "presentation",
@@ -52,10 +51,6 @@
         {
           "id": "acquisition",
           "path": "source/preparation/acquisition.json"
-        },
-        {
-          "id": "world-context",
-          "path": "source/navigation/universe.json"
         }
       ],
       "shape": {
@@ -117,15 +112,20 @@
         0
       ],
       "presentationToReference": [
-        1,
+        1.0000000000000002,
         0,
+        8.326672684688674e-17,
+        -1.0408340855860843e-16,
+        0.39777715593191376,
+        -0.9174820620691819,
+        -2.7755575615628914e-17,
+        -0.9174820620691818,
+        -0.39777715593191376
+      ],
+      "orbitUpReference": [
         0,
-        0,
-        -1,
-        0,
-        0,
-        0,
-        1
+        -0.39777715593191376,
+        0.9174820620691818
       ],
       "metersPerUnit": 2244193.5483870967,
       "bodyRadiusM": 695700000

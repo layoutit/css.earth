@@ -209,7 +209,7 @@ export { OBJECT_TEXT_SCHEMA, PREPARED_TEXT_SCHEMA, parseCitedText, parseObjectTe
 export { ARCHIVED_CAMERA_SCHEMA, archivedCameraFields, parseArchivedCamera, parseMatrixArchivedCamera, type ArchivedCamera, type SpiceCamera } from './prepared-data/camera/archived-camera.js';
 export { PREPARED_DESTINATIONS_SCHEMA, parsePreparedDestinations, readDestinationSettlements, type PreparedDestination, type PreparedDestinations, type DestinationSearchRecord } from './prepared-data/content/prepared-destinations.js';
 export { AUTHORED_PREPARATION_SCHEMA, type AuthoredPreparationReceipt, readAuthoredPreparationSources, readPublishedPreparationSources } from './prepared-data/source/authored-preparation.js';
-export { WORLD_NAVIGATION_PREPARATION_SCHEMA, type WorldNavigationPreparationReceipt, samePreparedWorldFrame, requireWorldNavigationReceiptIdentity, requireWorldNavigationReceiptContext } from './prepared-data/world/world-navigation-preparation.js';
+export { WORLD_NAVIGATION_PREPARATION_SCHEMA, type WorldNavigationPreparationReceipt, samePreparedWorldFrame, requireWorldNavigationReceiptIdentity } from './prepared-data/world/world-navigation-preparation.js';
 export { PREPARED_FEATURES_SCHEMA, type PreparedFeaturesDescriptor, readPreparedFeaturePins } from './prepared-data/surface/prepared-features.js';
 export { WISE_ATLAS_TILES_SCHEMA, WISE_BAND_NAMES, parseTilePins, type WiseBand, type TilePins } from './prepared-data/surface/wise-atlas-tiles.js';
 export { DISPLAY_ORIENTATION_SCHEMA, parseAuthoredOrientation, type DisplayOrientation } from './prepared-data/orbit/display-orientation.js';

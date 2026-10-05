@@ -1,4 +1,4 @@
-import { requireWorldNavigationReceiptIdentity, requireWorldNavigationReceiptContext, samePreparedWorldFrame } from '@cssearth/objects';
+import { requireWorldNavigationReceiptIdentity, samePreparedWorldFrame } from '@cssearth/objects';
 import { resolve } from 'node:path';
 import { requireRecord, requireArray, requireString, requireFiniteNumber } from '@cssearth/core';
 import type { RuntimeSourceReader } from '../runtime-source/index.ts';
@@ -20,7 +20,7 @@ const fail = (detail: string): never => { throw new TypeError(`Authored physical
 /**
  * The part of the physical frame check that reads tracked files only: the receipt
  * (`prepared/world-navigation.json`) must repeat the descriptor's frame, each recipe source must be
- * declared in the manifest, the frame must carry valid units, and an authored context must reproduce it.
+ * declared in the manifest, and the frame must carry valid units.
  * `requireAuthoredWorldFrame` continues from here with the restored scene and runtime.
  */
 
@@ -41,21 +41,15 @@ export async function requireAuthoredWorldFrameReceipt({ descriptor: descriptorI
     if (!records.some(entry => `source/${String(entry.path)}` === path)) throw new TypeError(`Authored physical frame source ${path} is not declared in the manifest.`);
   }
   requireWorldNavigationReceiptIdentity(receipt, descriptor.id, frame);
-  const context = sources.find(source => source.id === 'world-context');
-  if (context) {
-    const authored = requireRecord(JSON.parse(await readText(resolve(directory, requireString(context.path, 'World context source path')))), 'Authored world context');
-    requireWorldNavigationReceiptContext(receipt, frame, authored.frame);
-  }
-  return { receipt, frame, recipe, contextual: Boolean(context) };
+  return { receipt, frame, recipe };
 }
 
 /** Check the final numerical stage separately from raw geometry intermediates. */
 export async function requireAuthoredWorldFrame({ scene: sceneInput, runtime: runtimeInput, ...input }: AuthoredWorldFrameInput): Promise<void> {
   const scene = requireRecord(sceneInput, 'Authored scene');
   const runtime = requireRecord(runtimeInput, 'Authored runtime');
-  const { receipt, frame, recipe, contextual } = await requireAuthoredWorldFrameReceipt(input);
+  const { receipt, frame, recipe } = await requireAuthoredWorldFrameReceipt(input);
   if (scene.worldFrame !== undefined && !samePreparedWorldFrame(scene.worldFrame, frame)) fail('differs from the source scene frame');
-  if (contextual) return;
   const camera = requireRecord(runtime.camera, 'Authored runtime camera');
   const shape = requireRecord(recipe.shape, 'Authored shape');
   // A scene with no surface stands in the ecliptic presentation frame at the radius its solar-system source authors
