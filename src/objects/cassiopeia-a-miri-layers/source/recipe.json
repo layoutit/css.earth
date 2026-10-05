@@ -1,0 +1,105 @@
+{
+  "schema": "cssearth-image-layer-recipe@1",
+  "id": "cassiopeia-a-miri-layers",
+  "source": {
+    "path": "source.jpg",
+    "dimensions": [
+      4008,
+      4009
+    ],
+    "originalDimensions": [
+      4008,
+      4009
+    ],
+    "publisherUrl": "https://esawebb.org/images/weic2311a/",
+    "downloadUrl": "https://cdn.esawebb.org/archives/images/large/weic2311a.jpg",
+    "credit": "NASA, ESA, CSA, D. Milisavljevic (Purdue University), T. Temim (Princeton University), I. De Looze (UGent), J. DePasquale (STScI)",
+    "license": "CC-BY-4.0"
+  },
+  "observation": {
+    "centerRaDeg": 350.8581524,
+    "centerDecDeg": 58.8181671,
+    "fieldOfViewDeg": [
+      0.123512,
+      0.1235429
+    ],
+    "northClockwiseDeg": -0.46
+  },
+  "target": {
+    "centerRaDeg": 350.8657083,
+    "centerDecDeg": 58.8137222,
+    "distancePc": 3400
+  },
+  "geometry": {
+    "kind": "inclined-disk",
+    "inclinationDeg": 0.005922,
+    "lineOfNodesPaDeg": 48.644,
+    "thicknessKpc": 0.00000366,
+    "depthWeights": [
+      0.25,
+      0.5,
+      0.25
+    ],
+    "supportRadiusKpc": 0.0033989,
+    "supportTaperFraction": 0.9,
+    "depthScales": [
+      1,
+      1,
+      1
+    ],
+    "unit": "pc",
+    "shape": {
+      "source": "publication-delaney-2010-cassiopeia-a-3d",
+      "basis": "DeLaney et al. (2010, Sect. IV.1): the [Ar II] ejecta lie on one spherical shell in free expansion, so a Doppler speed is a distance along the sight line: (r/S)^2 + (v - v_c)^2 = (v_c - v_m)^2 with v_c = 859 ± 100 km/s, v_m = -4077 ± 200 km/s and S = 0.022 ± 0.002 arcsec per km/s. The law here is 1/S; that shell's radius is (v_c - v_m) S = 108.6 arcsec. The shell the smooth light lies on (ring) is the forward shock, a thin ring of X-ray filaments about 300 arcsec across (Sect. I, from Gotthelf et al. 2001), at a radius of 153 arcsec (Sect. IV.1): a sphere. Its expansionKmS is that radius under the law, not a measured speed: the shock is not in free expansion. The model's line, [Ar II] 6.99 µm, lies in this picture's 7.7 µm filter (Milisavljevic et al. 2024, Table 1); the other filters hold dust and other lines, and take the same depths: no other line's speeds are measured here.",
+      "expansionKmSPerArcsec": 45.4545,
+      "ring": {
+        "semiMajorArcsec": 153,
+        "semiMinorArcsec": 153,
+        "majorPaDeg": 0,
+        "polarTiltDeg": 0,
+        "polarLeansToPaDeg": 0,
+        "expansionKmS": [
+          6954.5,
+          6954.5,
+          6954.5
+        ]
+      },
+      "speeds": {
+        "source": "chandra-cassiopeia-a-3d-model",
+        "basis": "The Chandra X-ray Center's files of the model of DeLaney et al. (2010): the [Ar II] 6.99 µm surface (newar-ascii.vtk), 10632 cells of one model unit, each as its place from the expansion centre (arcsec east and north) and its speed along the sight line relative to the shell's centre (km/s, positive away from the Sun); 6078 approach and 4554 recede, from -5,836 to 5,738 km/s. The files' units are not published: measured here, a unit is 3.6 arcsec, x east, z north, y toward the Sun (packages/bake/authoring/cassiopeia-a/ejecta-speeds.mts). A speed is its own depth under the law. A place follows the cells within about 9 arcsec, a presentation value: the paper's [Ar II] map resolves 3.7 arcsec and its model is smoothed to about 6.",
+        "path": "ejecta-speeds.dat",
+        "columns": {
+          "east": 0,
+          "north": 1,
+          "kmS": 2
+        },
+        "reachArcsec": 9,
+        "depth": "speed"
+      },
+      "smoothPixels": 30
+    }
+  },
+  "bake": {
+    "maxFacePixels": 1500,
+    "crossAxisSlices": 32,
+    "crossAxisDepthPixels": 97,
+    "backgroundFloor": 0.03,
+    "encoding": {
+      "format": "webp",
+      "quality": 70,
+      "alphaQuality": 80
+    },
+    "diffuseFacePixels": 80,
+    "crossAxisAlongPixels": 384,
+    "edgeTaperFraction": 0.04,
+    "diffuseFraction": 0.65,
+    "diffuseSigmaPixels": 2,
+    "flat": true,
+    "bulgeSlices": 56,
+    "bulgeFacePixels": 256,
+    "bulgeCrossSlices": 56
+  },
+  "provenance": {
+    "path": "provenance.json"
+  }
+}

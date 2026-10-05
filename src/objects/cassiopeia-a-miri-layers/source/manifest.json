@@ -1,0 +1,118 @@
+{
+  "schema": "cssearth-volume-source-manifest@2",
+  "pathBase": "repository",
+  "inputs": [
+    {
+      "id": "optical",
+      "path": "src/objects/cassiopeia-a-miri-layers/source/source.jpg",
+      "origin": "https://cdn.esawebb.org/archives/images/large/weic2311a.jpg",
+      "sourceUrl": "https://esawebb.org/images/weic2311a/",
+      "title": "Cassiopeia A (MIRI Image)",
+      "credit": "NASA, ESA, CSA, D. Milisavljevic (Purdue University), T. Temim (Princeton University), I. De Looze (UGent), J. DePasquale (STScI)",
+      "displayCredit": "ESA/Webb",
+      "acquisition": "The publisher's JPEG (4008 x 4009 px), downloaded unchanged; not tracked. Its scale and direction on the sky are the file's embedded tags; its place is the tags' own (recipe observation). A display composite, not a calibrated scientific array.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "esawebb-weic2311a",
+            "role": "material",
+            "evidence": "src/objects/cassiopeia-a-miri-layers/source/provenance.json"
+          }
+        ]
+      },
+      "dependencies": [],
+      "datasetId": "optical",
+      "license": "CC-BY-4.0; retain the complete recorded credit.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "webb",
+            "evidence": "https://esawebb.org/images/weic2311a/"
+          }
+        ]
+      }
+    },
+    {
+      "id": "measured-depths",
+      "path": "src/objects/cassiopeia-a-miri-layers/source/ejecta-speeds.dat",
+      "origin": "https://chandra.harvard.edu/graphics/resources/illustrations/3d_files/CasA_supernova_remnant-ascii_vtks.zip",
+      "sourceUrl": "https://chandra.harvard.edu/resources/illustrations/3d_files.html",
+      "title": "The [Ar II] ejecta of Cassiopeia A, 10632 cells of the model of DeLaney et al. (2010) as places and speeds",
+      "credit": "NASA/CXC/SAO; DeLaney et al. (2010)",
+      "displayCredit": "DeLaney et al. (2010)",
+      "acquisition": "Built from the Chandra X-ray Center's zip of the model's ASCII VTK files by the generator, which downloads the zip, reads newar-ascii.vtk and writes each cell of one model unit as a row. Restored from the source cache; not tracked.",
+      "generator": "packages/bake/authoring/cassiopeia-a/ejecta-speeds.mts",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "chandra-cassiopeia-a-3d-model",
+            "role": "material",
+            "evidence": "https://chandra.harvard.edu/resources/illustrations/3d_files.html"
+          },
+          {
+            "catalogueId": "publication-delaney-2010-cassiopeia-a-3d",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/1011.3858"
+          }
+        ]
+      },
+      "license": "NASA material, free to use with the credit NASA/CXC/SAO.",
+      "dependencies": [],
+      "datasetId": "optical",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "spitzer",
+            "evidence": "https://arxiv.org/abs/1011.3858"
+          }
+        ]
+      }
+    }
+  ],
+  "documents": [
+    {
+      "id": "recipe",
+      "path": "src/objects/cassiopeia-a-miri-layers/source/recipe.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned processing, source interpretation or presentation record; the published image is separately bound as a material input."
+      },
+      "kind": "authored-document",
+      "origin": "cssEarth project-authored record",
+      "credit": "cssEarth contributors",
+      "title": "Image-layer preparation recipe",
+      "acquisition": "Checked-in project-authored JSON. This pin identifies local processing or interpretation metadata, not an original publisher document; the published image is separately bound in inputs."
+    },
+    {
+      "id": "provenance",
+      "path": "src/objects/cassiopeia-a-miri-layers/source/provenance.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned processing, source interpretation or presentation record; the published image is separately bound as a material input."
+      },
+      "kind": "authored-document",
+      "origin": "cssEarth project-authored record",
+      "credit": "cssEarth contributors",
+      "title": "Published image interpretation and acquisition record",
+      "acquisition": "Checked-in project-authored JSON. This pin identifies local processing or interpretation metadata, not an original publisher document; the published image is separately bound in inputs."
+    },
+    {
+      "id": "presentation",
+      "path": "src/objects/cassiopeia-a-miri-layers/source/presentation.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned processing, source interpretation or presentation record; the published image is separately bound as a material input."
+      },
+      "kind": "authored-document",
+      "origin": "cssEarth project-authored record",
+      "credit": "cssEarth contributors",
+      "title": "Dataset presentation and prepared-bank bindings",
+      "acquisition": "Checked-in project-authored JSON. This pin identifies local processing or interpretation metadata, not an original publisher document; the published image is separately bound in inputs."
+    }
+  ],
+  "generatedIntermediates": []
+}

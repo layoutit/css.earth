@@ -1,0 +1,57 @@
+{
+  "schema": "cssearth-volume-presentation-source@2",
+  "objectId": "cassiopeia-a-miri-layers",
+  "name": "Cassiopeia A",
+  "defaultDataset": "optical",
+  "bank": {
+    "path": "src/objects/cassiopeia-a-miri-layers/prepared/image-layers.json"
+  },
+  "recipes": [
+    {
+      "id": "image-layer-recipe",
+      "path": "src/objects/cassiopeia-a-miri-layers/source/recipe.json"
+    },
+    {
+      "id": "source-evidence",
+      "path": "src/objects/cassiopeia-a-miri-layers/source/provenance.json"
+    }
+  ],
+  "sharedInputs": [],
+  "datasets": [
+    {
+      "id": "optical",
+      "label": "Webb · mid infrared",
+      "title": "Cassiopeia A in the mid infrared",
+      "description": "ESA/Webb's MIRI picture of Cassiopeia A, at 5.6 to 25.5 µm: warm dust where the blast wave meets the gas the star had shed, the ejecta in argon, neon and oxygen, and the loop called the Green Monster across the middle. The ejecta expand freely, so a speed along the sight line is a depth (DeLaney et al. 2010); where Spitzer's [Ar II] spectra measure one, the picture's fine detail is at that depth, and the 7.7 µm filter holds that same line. The smooth light lies on the forward shock's sphere.",
+      "summary": "Webb's mid-infrared picture as a shell: warm dust on the forward shock's sphere, ejecta at their measured depths.",
+      "detail": "4008 × 4009 px",
+      "facts": [
+        {
+          "id": "bands",
+          "label": "Colors",
+          "value": "5.6, 7.7, 10, 11, 12, 18, 21 and 25 µm"
+        },
+        {
+          "id": "source-pixels",
+          "label": "Source pixels",
+          "value": "4008 × 4009"
+        },
+        {
+          "id": "coverage",
+          "label": "Field",
+          "value": "7.41 × 7.41 arcmin"
+        },
+        {
+          "id": "license",
+          "label": "License",
+          "value": "CC-BY-4.0"
+        }
+      ],
+      "input": "optical",
+      "preview": {
+        "path": "src/objects/cassiopeia-a-miri-layers/source/source.jpg",
+        "url": "https://cdn.esawebb.org/archives/images/large/weic2311a.jpg"
+      }
+    }
+  ]
+}

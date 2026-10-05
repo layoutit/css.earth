@@ -1,0 +1,52 @@
+{
+  "id": "publication-vink-2024-cassiopeia-a-green-monster-x-rays",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Vink et al. (2024): X-ray diagnostics of Cassiopeia A's \"Green Monster\": evidence for dense shocked circumstellar plasma",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2401.02491"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/2041-8213/ad2fc5"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/2401.02491",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/2041-8213/ad2fc5",
+      "label": "The Astrophysical Journal Letters, Volume 964, Issue 1, id.L11, 10 (2024)"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/2401.02491",
+      "checkedOn": "2026-10-05",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Vink et al. (2024), The Astrophysical Journal Letters, Volume 964, Issue 1, id.L11, 10 (2024)",
+      "scope": "citation",
+      "evidence": "https://arxiv.org/abs/2401.02491"
+    }
+  ],
+  "publisher": "The Astrophysical Journal Letters, Volume 964, Issue 1, id.L11, 10 (2024)",
+  "creators": [
+    "Jacco Vink",
+    "Manan Agarwal",
+    "Patrick Slane",
+    "et al."
+  ],
+  "publicationDate": "2024"
+}
