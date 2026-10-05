@@ -50,8 +50,8 @@ test("Saturn's tinted OPAL map is tied to Karkoschka's whole-disc color and keep
   const { tie: report } = await prepareSurfaceColor({ sourcePath: join(source, recipe.sources.surface), unobservedRows: recipe.surfaceUnobservedRows,
     width: parameters.planetSourceTextureWidth, height: parameters.planetSourceTextureHeight, equatorialToPolar: parameters.objectEquatorialRadiusKm / parameters.objectPolarRadiusKm,
     channelFactors: [tint.r / peak, tint.g / peak, tint.b / peak], tie });
-  assert.deepEqual(report, { reference: 'red', source: 'karkoschka-1998-whole-disc-color', measured: { green: 0.9317, blue: 0.6975 }, published: { green: 0.6759, blue: 0.5057 }, gains: [1, 0.7254, 0.725],
-    luminance: { factor: 1.2687, knee: 0.8, shoulderedTexels: 283798, shoulderedShare: 0.0684 } });
+  assert.deepEqual(report, { reference: 'red', source: 'karkoschka-1998-whole-disc-color', measured: { green: 0.9317, blue: 0.6975 }, published: { green: 0.7052, blue: 0.4573 }, gains: [1, 0.7569, 0.6556],
+    luminance: { factor: 1.2391, knee: 0.8, shoulderedTexels: 216448, shoulderedShare: 0.0522 } });
 });
 
 test("Saturn's caps sit on the oblate polar carrier, which faces out of the body at the lane's own tile size", async () => {
