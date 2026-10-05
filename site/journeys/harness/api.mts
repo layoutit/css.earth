@@ -2,15 +2,16 @@
 import { setTimeout as delay } from 'node:timers/promises';
 import type { Page } from 'playwright';
 import type { recorder } from './recorder.mts';
-export interface Journey { id: string; exercises: string[]; orderings?: string[][]; run(api: ReturnType<typeof journeyApi>): Promise<void> }
+export interface Journey { id: string; recipe?: import('./trace.mts').Json; exercises: string[]; orderings?: string[][]; run(api: ReturnType<typeof journeyApi>): Promise<void> }
 export function journeyApi(page: Page, origin: string, record: Awaited<ReturnType<typeof recorder>>) {
   /** Protocol completion can precede native input delivery; acknowledge delivery before stepping fake time. */
-  async function input(type: 'wheel', action: () => Promise<void>) {
+  async function input(type: 'wheel' | 'keydown' | 'pointerdown' | 'pointerup', action: () => Promise<void>) {
     await page.evaluate(eventType => {
       Reflect.set(window, '__journeyInputDelivered', false);
       const listener = (event: Event) => {
         // Native events use the real document clock; wheel animation reads them beside fake RAF timestamps.
-        Object.defineProperty(event, 'timeStamp', { value: performance.now(), configurable: true });
+        if (eventType === 'wheel') Object.defineProperty(event, 'timeStamp', { value: performance.now(), configurable: true });
+        if (!event.isTrusted || ((eventType === 'pointerdown' || eventType === 'pointerup') && (!(event instanceof PointerEvent) || event.pointerType !== 'mouse'))) return;
         Reflect.set(window, '__journeyInputDelivered', true);
       };
       const controller = new AbortController();
@@ -24,6 +25,7 @@ export function journeyApi(page: Page, origin: string, record: Awaited<ReturnTyp
         if (Date.now() >= deadline) throw new Error(`Native ${type} input was not delivered`);
         await delay(2);
       }
+      record.capability(type === 'wheel' ? 'capability:wheelTrackpad' : type === 'keydown' ? 'capability:keyboard' : 'capability:mouse');
     } finally {
       await page.evaluate(() => {
         const controller: unknown = Reflect.get(window, '__journeyInputController');
@@ -120,7 +122,25 @@ export function journeyApi(page: Page, origin: string, record: Awaited<ReturnTyp
     if (page.url() !== 'about:blank') await record.drain();
     const response = await page.goto(origin + url, { waitUntil: 'commit' });
     await barrier(name, new URL(url, origin).pathname);
+    record.capability('capability:directLoad');
+    record.startupEvidence(new URL(url, origin).pathname, await response?.text() ?? '');
+    await record.combinationWitness();
     return response;
+  }
+  let acceptedFlights = 0;
+  async function navigationWitness(interrupted = false) {
+    if (!acceptedFlights || await page.evaluate(() => Reflect.get(window, '__journeyDocumentStayed')) !== true
+      || await page.locator('html').getAttribute('data-ready') !== 'true') throw new Error('Missing completed resident navigation witness');
+    record.capability('capability:inAppNavigation');
+    if (interrupted) {
+      if (acceptedFlights < 2) throw new Error('Interruption needs two accepted flights');
+      record.capability('capability:interruptedNavigation');
+    }
+  }
+  async function deepLinkWitness() {
+    const url = new URL(page.url());
+    if (url.searchParams.get('settings') !== '1' || await page.locator('html').getAttribute('data-ready') !== 'true') throw new Error('Missing restored deep-link witness');
+    record.capability('capability:historyDeepLinks');
   }
   async function fly(id: string) {
     const accepted = await page.evaluate(objectId => {
@@ -131,6 +151,7 @@ export function journeyApi(page: Page, origin: string, record: Awaited<ReturnTyp
       document.dispatchEvent(event); return event.defaultPrevented;
     }, id);
     if (!accepted) throw new Error(`App did not accept flight to ${id}`);
+    acceptedFlights++;
   }
-  return { page, frames, barrier, load, fly, input, playback: record.playback, setStep: record.setStep };
+  return { page, frames, barrier, load, fly, input, navigationWitness, deepLinkWitness, playback: record.playback, setStep: record.setStep };
 }

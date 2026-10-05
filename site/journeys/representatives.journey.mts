@@ -1,12 +1,13 @@
 /** S0 representatives: native settings and dataset controls after a cold direct load. */
+import { json } from './harness/trace.mts';
 import type { Journey } from './harness/api.mts';
 
 export const representatives = [
   { id: 'lmc', startup: 'serverAdoption', dataset: 'vista-infrared' },
-  { id: 'neptune-system', startup: 'runtimeMount', dataset: 'visible-2017a', step: 'visible-2018a' },
-  { id: 'beta-pictoris-system', startup: 'runtimeMount', dataset: 'debris-disc-color', legend: true },
-  { id: 'asteroid-2001-sn263-system', startup: 'runtimeMount', dataset: 'shape', single: true },
-  { id: 'mars-system', startup: 'runtimeMount', dataset: 'chlorine', step: 'iron' },
+  { id: 'neptune-system', host: 'neptune', startup: 'runtimeMount', dataset: 'visible-2017a', step: 'visible-2018a' },
+  { id: 'beta-pictoris-system', host: 'beta-pictoris', startup: 'runtimeMount', dataset: 'debris-disc-color', legend: true },
+  { id: 'asteroid-2001-sn263-system', host: 'asteroid-2001-sn263', startup: 'runtimeMount', dataset: 'shape', single: true },
+  { id: 'mars-system', host: 'mars', startup: 'runtimeMount', dataset: 'chlorine', step: 'iron' },
   { id: 'observable-universe', startup: 'serverAdoption', dataset: 'cutaway', legend: true, tab: true },
   { id: 'abell-1689', startup: 'serverAdoption', dataset: 'optical', single: true },
   { id: 'centaurus-cluster', startup: 'serverAdoption', dataset: 'members', single: true },
@@ -15,7 +16,7 @@ export const representatives = [
 ];
 
 export const journeys: Journey[] = representatives.map(representative => ({
-  id: representative.id,
+  id: representative.id, recipe: json(representative),
   // Opening and closing the native popover drive these three listeners. Desktop dataset clicks
   // are bound by object-control-binding, not the narrow layout's native-select change listener.
   exercises: ['capability:directLoad', `capability:${representative.startup}`,
@@ -27,14 +28,19 @@ export const journeys: Journey[] = representatives.map(representative => ({
     'handler:packages:renderer:src:rendering:object-control-binding:createObjectControlBinding:click:1',
     ...(representative.tab ? ['control:site:components:InformationTabs:input:markup:1',
       'handler:site:tab-panels:bindTabPanels:change:2'] : []),
-    ...(representative.step ? [
-      'control:site:components:SequencePlayer:button:markup:1',
-      'handler:packages:renderer:src:rendering:object-control-binding:createObjectControlBinding:click:2',
-    ] : []),
+
   ],
   async run(api) {
-    const route = `/${representative.id}/`;
+    let route = `/${representative.id}/`;
     await api.load(route, 'direct');
+    if (representative.host) {
+      api.setStep('select-host');
+      await api.page.locator(`.object-information-panel a.object-link[data-object-id="${representative.host}"]`).click();
+      route = `/${representative.host}/`;
+      await api.barrier('select-host', route);
+      if (await api.page.locator('.object-information-panel').getAttribute('data-card-subject') !== 'body')
+        throw new Error('Native host selection did not open its body card');
+    }
     api.setStep('settings-open');
     const gear = api.page.locator('.object-settings-action');
     await gear.click();
@@ -46,8 +52,8 @@ export const journeys: Journey[] = representatives.map(representative => ({
     if (await gear.getAttribute('aria-expanded') !== 'false') throw new Error('Settings did not close');
     if (representative.tab) {
       api.setStep('dataset-tab');
-      const tab = api.page.locator(`#${representative.id}-dataset-tab`);
-      await api.page.locator(`label[for="${representative.id}-dataset-tab"]`).click();
+      const tab = api.page.locator(`#${representative.host ?? representative.id}-dataset-tab`);
+      await api.page.locator(`label[for="${representative.host ?? representative.id}-dataset-tab"]`).click();
       await api.barrier('dataset-tab', route);
       if (!await tab.isChecked()) throw new Error('Dataset tab did not open');
     }

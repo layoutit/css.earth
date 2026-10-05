@@ -39,6 +39,8 @@ export function compareTraces(base: Trace, head: Trace): Difference[] {
     if (result) differences.push({ journey: base.journey, profile: base.profile, family, ...result });
   };
   add('trace', firstDifference(base.volatile ?? [], head.volatile ?? [], '$.volatile'));
+  add('trace', firstDifference(base.combinations ?? [], head.combinations ?? [], '$.combinations'));
+  add('trace', firstDifference(base.observed ?? [], head.observed ?? [], '$.observed'));
   add('trace', firstDifference(base.exercises, head.exercises, '$.exercises'));
   for (const family of families) {
     // Conversion constructs JSON from typed records, with no unchecked cast.

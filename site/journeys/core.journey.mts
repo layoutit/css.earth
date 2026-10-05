@@ -21,6 +21,7 @@ async function chooseDestination(api: Api, id: string, route: string) {
   await api.fly(id === 'earth-system' ? 'earth' : id);
   await api.barrier(`arrive-${id}`, `/${id}/`);
   await assertResident(api);
+  await api.navigationWitness();
 }
 async function assertResident(api: Api) {
   if (await api.page.evaluate(() => Reflect.get(window, '__journeyDocumentStayed')) !== true)
@@ -65,6 +66,7 @@ export const journeys: Journey[] = representatives.flatMap<Journey>(({ id, sourc
       const value: unknown = JSON.parse(settings);
       if (!value || typeof value !== 'object' || id !== 'milky-way' && !('shadows' in value && value.shadows === true))
         throw new Error('Deep link did not restore the requested settings');
+      await api.deepLinkWitness();
     },
   },
   {
@@ -86,6 +88,7 @@ export const journeys: Journey[] = representatives.flatMap<Journey>(({ id, sourc
       // Selecting the host already seen as a moon system opens its body; it does not preserve the system address.
       await api.barrier('interrupted-return', source === 'saturn-system' ? '/saturn/' : `/${source}/`);
       await assertResident(api);
+      await api.navigationWitness(true);
     },
   },
   {
@@ -122,14 +125,14 @@ journeys.push({
     if (!box) throw new Error('Missing input surface');
     const x = box.x + box.width / 2, y = box.y + box.height / 2;
     await api.page.mouse.move(x, y);
-    await api.page.mouse.down();
+    await api.input('pointerdown', () => api.page.mouse.down());
     for (let step = 1; step <= 8; step++) {
       await api.page.mouse.move(x + step * 8, y + step * 2);
       await api.frames(1);
     }
     // Hold before release so this input journey does not also become a coast journey.
     await api.frames(12);
-    await api.page.mouse.up();
+    await api.input('pointerup', () => api.page.mouse.up());
     await api.barrier('drag', '/dione/');
   },
 }, {
@@ -140,7 +143,7 @@ journeys.push({
     const field = api.page.locator('.object-sidebar-search');
     await field.fill('Dione');
     await api.barrier('search', '/dione/');
-    await field.press('ArrowDown');
+    await api.input('keydown', () => field.press('ArrowDown'));
     const focused = await api.page.evaluate(() => Boolean(document.activeElement?.closest('.object-browser')));
     if (!focused) throw new Error('Keyboard step did not move focus to search results');
     await api.barrier('keyboard-step', '/dione/');

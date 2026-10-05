@@ -1,16 +1,17 @@
 /** Qualification, declared exercises and coverage are enforced without a browser or build. */
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
+import { signature } from './qualification.mts';
 import { representatives } from './representatives.journey.mts';
 import { journeys, selectJourneys, type RegisteredJourney } from './registry.mts';
 import { coverage, coverageGate, manifestIds, parseManifest, parseUnreachable, unreachableIds, validateExercises } from './manifest.mts';
 test('defaults are qualified-only and gates refuse experimental pairs', () => {
   for (const profile of ['chromium-desktop', 'webkit-desktop']) {
-    assert.ok(selectJourneys(profile).length >= 8);
-    assert.ok(selectJourneys(profile).every(journey => journey.status[profile] === 'qualified'));
-    assert.equal(journeys.find(journey => journey.id === 'dione-navigation')?.status[profile], 'experimental');
+    const qualified = journeys.filter(journey => journey.status[profile] === 'qualified');
+    if (qualified.length) assert.deepEqual(selectJourneys(profile), qualified);
+    else assert.throws(() => selectJourneys(profile), /No qualified/u);
+    assert.throws(() => selectJourneys(profile, 'dione-warm-cache', true), /experimental/u);
   }
-  assert.throws(() => selectJourneys('webkit-desktop', 'dione-navigation', true), /experimental/u);
   assert.throws(() => selectJourneys('chromium-desktop', 'unknown'), /Unknown/u);
   assert.throws(() => selectJourneys('tablet', undefined, true), /No qualified/u);
 });
@@ -27,9 +28,10 @@ test('coverage never credits an experimental journey', () => {
 test('coverage requirement turns red when an exercise is deleted, or its pair loses qualification', () => {
   const fixture = { id: 'fixture', exercises: ['control:a', 'handler:b', 'capability:c'], status: { profile: 'qualified' as const }, async run() {} };
   const ids = [...fixture.exercises];
-  assert.equal(coverageGate([fixture], ids, []).passed, true);
+  const proof = [{ journey: fixture.id, profile: 'profile', signature: signature(fixture), observed: ids, captures: 40, evidence: 'output/fixture' }];
+  assert.equal(coverageGate([fixture], ids, [], undefined, proof).passed, true);
   for (const deleted of ids) {
-    const result = coverageGate([{ ...fixture, exercises: ids.filter(id => id !== deleted) }], ids, []);
+    const result = coverageGate([{ ...fixture, exercises: ids.filter(id => id !== deleted) }], ids, [], undefined, [{ ...proof[0]!, signature: signature({ ...fixture, exercises: ids.filter(id => id !== deleted) }), observed: ids.filter(id => id !== deleted) }]);
     assert.equal(result.passed, false); assert.deepEqual(result.missing, [deleted]);
   }
   assert.equal(coverageGate([{ ...fixture, status: { profile: 'experimental' } }], ids, []).passed, false);
@@ -37,7 +39,7 @@ test('coverage requirement turns red when an exercise is deleted, or its pair lo
 test('exemptions refuse unknown ids and qualified overlap, including other profiles', async () => {
   const fixture = { id: 'fixture', exercises: ['control:a'], status: { other: 'qualified' as const }, async run() {} };
   assert.throws(() => coverageGate([], ['control:a'], [{ id: 'control:unknown', reason: 'Unknown' }]), /Unknown unreachable/u);
-  assert.throws(() => coverageGate([fixture], ['control:a'], [{ id: 'control:a', reason: 'Reached' }], 'profile'), /reaches exempt/u);
+  assert.throws(() => coverageGate([fixture], ['control:a'], [{ id: 'control:a', reason: 'Reached' }], 'profile', [{ journey: fixture.id, profile: 'other', signature: signature(fixture), observed: ['control:a'], captures: 40, evidence: 'output/fixture' }]), /reaches exempt/u);
   assert.equal(coverageGate([], ['control:a'], [{ id: 'control:a', reason: 'Reviewed' }]).passed, true);
   assert.throws(() => parseUnreachable([{ id: 'control:a', reason: '' }]), /one-line/u);
   assert.throws(() => parseUnreachable([{ id: 'control:a', reason: 'two\nlines' }]), /one-line/u);
@@ -46,8 +48,7 @@ test('exemptions refuse unknown ids and qualified overlap, including other profi
   const exemptions = await unreachableIds();
   assert.deepEqual(exemptions.map(entry => entry.id), ['capability:ipad-import-queue']);
   const result = coverageGate(journeys.filter(journey => !representatives.some(row => row.id === journey.id)), await manifestIds(), exemptions);
-  assert.equal(result.counts, 'controls driven 0/101 | handlers 6/189 | capabilities 8/29 | exempt 1');
-  assert.equal(result.missing.length, 304);
+  assert.equal(result.missing.length, Object.values(result.report).reduce((sum, row) => sum + row.unreached.length, 0) - 1);
 });
 
 test('all ten additional S0 representatives are registered with real settings and dataset actions', () => {
@@ -64,13 +65,15 @@ test('all ten additional S0 representatives are registered with real settings an
 });
 
 test('deleting an exercise from a real qualified journey turns its focused gate red', () => {
-  const journey = journeys.find(row => row.id === 'milky-way');
-  assert.ok(journey);
+  const original = journeys.find(row => row.id === 'milky-way');
+  assert.ok(original);
+  const journey: RegisteredJourney = { ...original, status: { 'chromium-desktop': 'qualified' } };
   const ids = [...journey.exercises];
-  assert.equal(coverageGate([journey], ids, []).passed, true);
+  const proof = [{ journey: journey.id, profile: 'chromium-desktop', signature: signature(journey), observed: ids, captures: 40, evidence: 'output/fixture' }];
+  assert.equal(coverageGate([journey], ids, [], undefined, proof).passed, true);
   for (const deleted of ids) {
     const mutated: RegisteredJourney = { ...journey, exercises: journey.exercises.filter(id => id !== deleted) };
-    assert.equal(coverageGate([mutated], ids, []).passed, false);
-    assert.deepEqual(coverageGate([mutated], ids, []).missing, [deleted]);
+    assert.equal(coverageGate([mutated], ids, [], undefined, [{ ...proof[0]!, signature: signature(mutated), observed: mutated.exercises }]).passed, false);
+    assert.deepEqual(coverageGate([mutated], ids, [], undefined, [{ ...proof[0]!, signature: signature(mutated), observed: mutated.exercises }]).missing, [deleted]);
   }
 });

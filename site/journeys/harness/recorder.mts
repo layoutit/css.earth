@@ -6,6 +6,8 @@ import { json, type Family, type Json, type Trace } from './trace.mts';
 import { boundInitiators, type VolatileInitiator } from './volatile.mts';
 import { canonicalTrace } from './canonical.mts';
 import { historyValues } from './history.mts';
+import type { ListenerWrapper } from './binding-sites.mts';
+import { reachability, requireObserved, type ManifestEntry } from './reachability.mts';
 import { PROBE } from './probe.mts';
 export const elements = ['.object-stage', '.object-input-surface', '.object-footer', '.object-sidebar', '.object-settings-panel', '.object-information-panel', '.prepared-context-marker', '.prepared-context-label', '[data-context-body]'];
 export function normalized(value: Json, origin: string): Json {
@@ -14,7 +16,11 @@ export function normalized(value: Json, origin: string): Json {
   if (value && typeof value === 'object') return Object.fromEntries(Object.entries(value).map(([key, entry]) => [key, normalized(entry, origin)]));
   return value;
 }
-export async function recorder(page: Page, trace: Trace, origin: string, out: string, engine: string, options: { scheduleWorkers?: boolean; orderings?: string[][]; causalOrders?: { before: string; after: string }[]; volatileInitiators?: VolatileInitiator[] } = {}) {
+export async function recorder(page: Page, trace: Trace, origin: string, out: string, engine: string, options: { scheduleWorkers?: boolean; orderings?: string[][]; causalOrders?: { before: string; after: string }[]; volatileInitiators?: VolatileInitiator[]; reachability?: { dist: string; entries: ManifestEntry[]; wrappers: ListenerWrapper[]; checkout?: string } } = {}) {
+  const observe = options.reachability ? await reachability(page, options.reachability.dist, options.reachability.entries, options.reachability.checkout, options.reachability.wrappers) : null;
+  const capabilities = new Set<string>();
+  let startup: { representative: string; paths: string[] } | undefined;
+  const combinations = new Set<string>();
   let step = 'startup', applicationFrame = 0, stepFrame = 0, stepStarted = Date.now();
   const requestSteps = new Map<Request, { frame: number; nativeStarted: number }>();
   // Native transport durations use declared frame ranges, never machine timestamps.
@@ -188,6 +194,49 @@ export async function recorder(page: Page, trace: Trace, origin: string, out: st
       add('content', payload);
       add('dom', { barrier: name, retained: await page.evaluate(selectors => selectors.map(selector => ({ selector,
         nodes: [...document.querySelectorAll(selector)].map(element => element.querySelectorAll('*').length) })), elements) });
+    },
+    capability(id: string) { capabilities.add(id); },
+    startupEvidence(route: string, html: string) {
+      const urls = trace.observations.network.flatMap(row => {
+        const data = row.data;
+        return data && typeof data === 'object' && !Array.isArray(data) && data.kind === 'request' && typeof data.url === 'string' ? [data.url] : [];
+      });
+      const representative = route.replaceAll('/', '');
+      const adopted = urls.includes(`/objects/${representative}/first-view.json`) && /data-prepared-object=/u.test(html);
+      const mounted = urls.some(url => /^\/objects\/[^/]+\/object\.json$/u.test(url));
+      if (adopted) capabilities.add('capability:serverAdoption');
+      else if (mounted) capabilities.add('capability:runtimeMount');
+      const paths = adopted ? ['direct-load:server-adoption'] : mounted && /class="startup-loading"/u.test(html)
+        ? ['direct-load:runtime-mount-behind-startup-billboard'] : [];
+      if (representative.endsWith('-system') && mounted && !/data-prepared-object=/u.test(html)
+        && !urls.some(url => url.endsWith('/first-view.json'))) paths.push('direct-load:system-route-skips-default-object-preload');
+      startup = { representative, paths };
+    },
+    async combinationWitness() {
+      if (!startup) return;
+      const facts = await page.evaluate(() => {
+        const visible = (element: Element) => element.isConnected && !element.closest('[hidden],[inert]') && element.getClientRects().length > 0;
+        const datasets = [...document.querySelectorAll('.object-observation-control[name="dataset"]')].filter(visible);
+        return [
+          ...(datasets.length > 1 ? ['controls.datasets:multiple'] : []),
+          ...([...document.querySelectorAll('[data-dataset-legend]')].some(visible) ? ['controls.datasets.controls.legend'] : []),
+          ...([...document.querySelectorAll('[data-dataset-step][aria-current="step"]')].some(visible) ? ['controls.datasets.controls.step'] : []),
+        ];
+      });
+      for (const fact of facts) for (const path of startup.paths) combinations.add(`${startup.representative} | ${fact} | ${path}`);
+    },
+    async observed() {
+      if (!observe) return;
+      const evidence = await observe();
+      trace.observed = [...new Set([...evidence.observed, ...capabilities])].sort();
+      if (startup) for (const [id, fact] of [
+        ['control:site:components:DatasetList:button:markup:1', 'controls.datasets'],
+        ['control:site:components:ObjectShell:button:markup:4', 'controls.settings'],
+      ]) if (trace.observed.includes(id!)) for (const path of startup.paths) combinations.add(`${startup.representative} | ${fact} | ${path}`);
+      trace.combinations = [...combinations].sort();
+      await mkdir(out, { recursive: true });
+      await writeFile(resolve(out, 'reachability.raw.json'), JSON.stringify(evidence, null, 2) + '\n');
+      requireObserved(trace.exercises, trace.observed);
     },
     async save() {
       await Promise.all([...pendingSizes]);

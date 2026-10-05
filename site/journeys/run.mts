@@ -1,8 +1,8 @@
 /** Browser journey runner; a repeat only passes after exact trace and pixel comparison. */
 import { parseArgs } from 'node:util';
-import { resolve } from 'node:path';
+import { resolve, relative } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { mkdir, mkdtemp, rm, writeFile, readFile, readdir } from 'node:fs/promises';
+import { mkdir, mkdtemp, rm, writeFile, readFile, readdir, rename } from 'node:fs/promises';
 import { chromium, webkit, type Browser } from 'playwright';
 import { startServer } from './harness/server.mts';
 import { profiles } from './harness/profiles.mts';
@@ -13,13 +13,50 @@ import { installLockstep } from './harness/lockstep.mts';
 import { traceHistogram, ambiguousChunks } from './harness/canonical.mts';
 import { compareDirectories } from './harness/differ.mts';
 import { coverageGate, manifestIds, unreachableIds, validateExercises } from './manifest.mts';
+import { combinationReport, combinationContract } from './combinations.mts';
+import { parseWrappers } from './harness/binding-sites.mts';
+import { parseEntries } from './harness/reachability.mts';
+import { signature, qualifications, qualificationFile } from './qualification.mts';
 import { journeys, selectJourneys } from './registry.mts';
 export async function main(args: string[]): Promise<number> {
   const { values } = parseArgs({ args, options: { dist: { type: 'string' }, checkout: { type: 'string' }, out: { type: 'string' }, profile: { type: 'string', default: 'chromium-desktop' },
-    journey: { type: 'string' }, coverage: { type: 'boolean', default: false }, require: { type: 'boolean', default: false }, gate: { type: 'boolean', default: false }, repeat: { type: 'string', default: '2' } } });
+    journey: { type: 'string' }, credit: { type: 'string' }, combinations: { type: 'boolean', default: false }, coverage: { type: 'boolean', default: false }, require: { type: 'boolean', default: false }, gate: { type: 'boolean', default: false }, repeat: { type: 'string', default: '2' } } });
   const ids = await manifestIds();
   validateExercises(journeys, ids);
+  if (values.credit) {
+    if (!values.journey || !values.profile) throw new Error('Credit needs journey/profile');
+    const journey = journeys.find(row => row.id === values.journey);
+    if (!journey) throw new Error('Unknown credit journey');
+    let observed: string[] | undefined, combinations: string[] | undefined;
+    for (let batch = 1; batch <= 4; batch++) {
+      const root = resolve(values.credit, `batch-${batch}`);
+      const result: unknown = JSON.parse(await readFile(resolve(root, 'reachability.json'), 'utf8'));
+      if (!result || typeof result !== 'object' || !('passed' in result) || result.passed !== true || !('repeat' in result) || result.repeat !== 10
+        || !('signature' in result) || result.signature !== signature(journey) || !('observed' in result) || !Array.isArray(result.observed)
+        || !result.observed.every(id => typeof id === 'string')) throw new Error('Missing exact instrumented ten-capture batch');
+      const batchCombinations: unknown = Reflect.get(result, 'combinations');
+      if (!Array.isArray(batchCombinations) || !batchCombinations.every(value => typeof value === 'string')) throw new Error('Missing combination observations');
+      combinations = combinations === undefined ? batchCombinations : combinations.filter(value => batchCombinations.includes(value));
+      const batchObserved = result.observed;
+      observed = observed === undefined ? batchObserved : observed.filter(id => batchObserved.includes(id));
+      if (batch > 1 && (await compareDirectories(resolve(values.credit, 'batch-1/run-1'), resolve(root, 'run-1'))).length) throw new Error('Qualification boundary differs');
+    }
+    const evidence = qualifications().filter(row => row.journey !== journey.id || row.profile !== values.profile);
+    evidence.push({ journey: journey.id, profile: values.profile, signature: signature(journey), observed: observed ?? [], combinations: combinations ?? [], captures: 40, evidence: relative(process.cwd(), resolve(values.credit)) });
+    const pending = new URL('observed-qualification.pending.json', qualificationFile);
+    try {
+      await writeFile(pending, JSON.stringify(evidence, null, 2) + '\n');
+      await rename(pending, qualificationFile);
+    } finally { await rm(pending, { force: true }); }
+    console.log('CREDITED: 40 exact instrumented captures'); return 0;
+  }
   if (values.require && !values.coverage) throw new Error('--require needs --coverage');
+  if (values.combinations) {
+    const profile = args.some(arg => arg === '--profile' || arg.startsWith('--profile=')) ? values.profile : undefined;
+    if (profile && !profiles[profile]) throw new Error('Unknown combination profile');
+    const report = combinationReport(journeys, await combinationContract(), qualifications(), profile);
+    console.log(report.counts); console.log(JSON.stringify(report, null, 2)); return 0;
+  }
   if (values.coverage) {
     if (!profiles[values.profile]) throw new Error(`Unknown profile ${values.profile}`);
     const selectedProfile = args.some(arg => arg === '--profile' || arg.startsWith('--profile=')) ? values.profile : undefined;
@@ -30,6 +67,9 @@ export async function main(args: string[]): Promise<number> {
     return values.require && !result.passed ? 1 : 0;
   }
   if (!values.dist || !values.out) throw new Error('Expected --dist and --out');
+  const manifest: unknown = JSON.parse(await readFile(resolve(import.meta.dirname, 'manifest-entries.json'), 'utf8'));
+  const entries = parseEntries(manifest), wrappers = parseWrappers(manifest);
+  const observedRuns: string[][] = [], combinationRuns: string[][] = [];
   const profile = profiles[values.profile];
   if (!profile) throw new Error(`Unknown profile ${values.profile}`);
   const selected = selectJourneys(values.profile, values.journey, values.gate);
@@ -72,18 +112,19 @@ export async function main(args: string[]): Promise<number> {
             await page.clock.install({ time: new Date('2025-12-31T23:59:59.000Z') });
             await page.clock.pauseAt(new Date('2026-01-01T00:00:00.000Z'));
             const trace = parseTrace({ schema: 'cssearth-journey@1', journey: journey.id, profile: values.profile,
-              chunkAmbiguities, toolchain: { browser: browser.version(), profile: json(profile), node: process.versions.node }, exercises: journey.exercises,
+              observed: [], chunkAmbiguities, toolchain: { browser: browser.version(), profile: json(profile), node: process.versions.node }, exercises: journey.exercises,
               observations: { network: [], dom: [], rendering: [], content: [], errors: [] } });
             const out = resolve(values.out, `run-${run}`, values.profile, journey.id);
             const scheduler = profile.lockstep ? await installLockstep(page) : null;
-            const record = await recorder(page, trace, server.origin, out, profile.engine, { volatileInitiators, scheduleWorkers: true, orderings: journey.orderings, causalOrders: files.filter(file => /^scene-router[.]/u.test(file)).map(file => ({ before: '/world/anywhere.json', after: '/_astro/' + file })) });
-            try { await journey.run(journeyApi(page, server.origin, record)); scheduler?.check(); }
+            const record = await recorder(page, trace, server.origin, out, profile.engine, { reachability: { dist: values.dist, entries, wrappers, checkout: values.checkout }, volatileInitiators, scheduleWorkers: true, orderings: journey.orderings, causalOrders: files.filter(file => /^scene-router[.]/u.test(file)).map(file => ({ before: '/world/anywhere.json', after: '/_astro/' + file })) });
+            try { await journey.run(journeyApi(page, server.origin, record)); scheduler?.check(); await record.observed(); }
             catch (error) {
               assertionFailed = true; record.assertion(error);
               await record.snapshot('journey-assertion');
               console.log(`ASSERTION ${journey.id}: ${error instanceof Error ? error.message : String(error)}`);
             }
             await record.save();
+            observedRuns.push(trace.observed ?? []); combinationRuns.push(trace.combinations ?? []);
             timings.push({ stage: `${journey.id}/${values.profile}/run-${run}`, seconds: (Date.now() - at) / 1000 });
             console.log(`RECORDED ${journey.id}/${values.profile}/run-${run} ${(Date.now() - at) / 1000}s`);
           } finally { await context.close(); }
@@ -104,6 +145,7 @@ export async function main(args: string[]): Promise<number> {
       }
       if (differences.length) changed = true;
     }
+    if (selected.length === 1) await writeFile(resolve(values.out, 'reachability.json'), JSON.stringify({ passed: !changed && !assertionFailed, repeat, signature: signature(selected[0]!), combinations: (combinationRuns[0] ?? []).filter(value => combinationRuns.every(row => row.includes(value))), observed: (observedRuns[0] ?? []).filter(id => observedRuns.every(row => row.includes(id))) }, null, 2) + '\n');
     console.log('HISTOGRAM ' + JSON.stringify(Object.fromEntries([...histogram].sort())));
     await writeFile(resolve(values.out, 'histogram.json'), JSON.stringify(Object.fromEntries(histogram), null, 2) + '\n');
     console.log(assertionFailed ? 'JOURNEY ASSERTION FAILED: partial traces saved' : changed ? 'NONDETERMINISTIC' : repeat >= 2 ? 'DETERMINISTIC: exact repeats match' : 'RECORDED: repeat qualification pending');

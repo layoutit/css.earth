@@ -6,16 +6,14 @@ import { journey as lightCurves } from './light-curves.journey.mts';
 import { journeys as representatives } from './representatives.journey.mts';
 import { journeys as core } from './core.journey.mts';
 import { profiles } from './harness/profiles.mts';
+import { observedFor, qualifications } from './qualification.mts';
 import type { Journey } from './harness/api.mts';
 export type Status = 'qualified' | 'experimental';
 export interface RegisteredJourney extends Journey { status: Record<string, Status> }
-// Measured ten exact plus thirty further captures; native request/readiness drift stays experimental.
-const qualified: Record<string, readonly string[]> = {
-  "chromium-desktop": ["lmc", "milky-way", "earth-system", "dione", "milky-way-deep-link", "dione-deep-link", "dione-interrupted", "dione-drag", "dione-keyboard"],
-  "webkit-desktop": ["lmc", "milky-way", "earth-system", "dione", "milky-way-deep-link", "earth-system-deep-link", "dione-deep-link", "dione-interrupted", "dione-drag", "dione-keyboard"],
-};
+// Instrumented qualification is bound to the current action recipe; historical traces carry no receipt.
+const evidence = qualifications();
 export const journeys: RegisteredJourney[] = [milkyWay, earthSystem, dione, lightCurves, ...core, ...representatives].map(journey => ({
-  ...journey, status: Object.fromEntries(Object.keys(profiles).map(profile => [profile, qualified[profile]?.includes(journey.id) ? 'qualified' : 'experimental'])),
+  ...journey, status: Object.fromEntries(Object.keys(profiles).map(profile => [profile, observedFor(journey, profile, evidence).length > 0 ? 'qualified' : 'experimental'])),
 }));
 export function selectJourneys(profile: string, requested?: string, gate = false): RegisteredJourney[] {
   if (!profiles[profile]) throw new Error(`Unknown profile ${profile}`);

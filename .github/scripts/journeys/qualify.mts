@@ -51,7 +51,10 @@ export async function main(args: string[]): Promise<number> {
         return 1;
       }
       result.exactCaptures += 10;
-      if (batch === 3) result.status = 'qualified';
+      if (batch === 3) {
+        if (!await command(['site/journeys/run.mts', '--credit', pair, '--journey', journey, '--profile', profile], resolve(pair, 'credit.log'), 'CREDITED: 40 exact instrumented captures')) throw new Error('Observed qualification credit failed');
+        result.status = 'qualified';
+      }
       await writeFile(resolve(root, 'results.json'), JSON.stringify(results, null, 2) + '\n');
     }
   }
