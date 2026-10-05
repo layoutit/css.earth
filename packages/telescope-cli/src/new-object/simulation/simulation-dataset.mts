@@ -318,8 +318,11 @@ export function installSimulationDataset(files: PackageFiles, id: string, name: 
   return { minimum, maximum, promoted: openOnMap(files, id, entry.dataset) };
 }
 
-/** Zenodo's guest search answers 30 requests a minute: one is made every PACE_MS, for NAMES_AT_ONCE names, up to PAGES pages. */
-const PACE_MS = 2100, NAMES_AT_ONCE = 40, PAGES = 4;
+/** Zenodo's guest search answers 30 requests a minute: one is made every PACE_MS, for NAMES_AT_ONCE names, up to PAGES pages.
+ * It refuses a long question with HTTP 500, so the survey of 40 names at once had stopped working. Measured 2026-10-05: 20
+ * planets in one question were refused twice running and 16 were answered; asked 10 at a time, all 896 exoplanets of the tree
+ * were answered, in 117 requests. */
+const PACE_MS = 2100, NAMES_AT_ONCE = 10, PAGES = 4;
 
 /** Which of `names` have simulation records on Zenodo, asked once for a whole draft run so no sweep passes one by unseen.
  * `note` gives a host's report the records of its planets. It is a note for a person: a record becomes a dataset only
