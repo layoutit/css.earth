@@ -1,4 +1,5 @@
 import { createImageFocusBank, createPointFocusBank } from './prepared-focus-bank.js';
+import { STACK_OPACITY_CEILING } from '../volume/prepared-volume-runtime.js';
 import type { SceneLifetime } from '@cssearth/engine';
 import { type PreparedCatalogObject, type DensityVolumeFrame } from '@cssearth/objects';
 import { type WorldCameraPose } from '@cssearth/engine';
@@ -225,11 +226,10 @@ export function createUniverseCatalogBanks({ root, end, stage, lifetime, declara
           bank.dotsShown = dotOpacity > 0;
         }
         if (opacity !== bank.publishedOpacity) {
-          // The root stops where its stacks do (the bank's `ceiling`). Under 1 for a bank of sheets: Safari paints every leaf
-          // under the root again when its opacity leaves or reaches 1. At 1 for a bank of patches, which a group under 1
-          // draws with a wedge missing at its nearest view (prepared-image-layer-runtime.ts); such a bank pays that repaint,
-          // 180 to 208 ms each way for Cassiopeia A's 1,397 patches with the camera still on an iPad (2026-10-05).
-          bank.mounted.root.style.opacity = String(Math.min(bank.mounted.ceiling, opacity));
+          // Never 1 (STACK_OPACITY_CEILING), as a stack's own opacity: Safari paints every leaf under the root again when its
+          // opacity leaves or reaches 1. Cassiopeia A's 1,397 patches made a frame of 180 to 208 ms each way with the camera
+          // still on an iPad, and none between 0.999 and 0.99 (2026-10-05): the first frames of every zoom out of a nebula.
+          bank.mounted.root.style.opacity = String(Math.min(STACK_OPACITY_CEILING, opacity));
           if (opacity > 0 && bank.mounted.root.style.display === 'none') bank.mounted.resume();
           bank.mounted.root.style.display = opacity > 0 ? '' : 'none';
           bank.publishedOpacity = opacity;
