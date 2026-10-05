@@ -1,7 +1,7 @@
 /** Layer rules over the file-level import graph. Each rule names the imports it forbids; the committed
  * baseline lists existing debt for ratcheted rules; no-baseline rules fail on every finding. */
 import type { ImportEdge, ImportGraph } from './graph.mts';
-import { byText } from './zones.mts';
+import { byText, isTestPath } from './zones.mts';
 
 export interface LayerRule {
   readonly id: string;
@@ -45,6 +45,13 @@ const AUTHORING_ROOTS = ['packages/bake/authoring/', 'packages/telescope-cli/aut
 const AUTHORING_LEAF_EXCEPTIONS = new Set(['labs/nebula/packages/lab/src/adapters/preparation/circumstellar.ts']);
 
 export const LAYER_RULES: readonly LayerRule[] = [
+  {
+    id: 'production-imports-no-tests',
+    description: 'Site production code may not import tests, fixtures or test helpers (type-only and lazy imports count)',
+    forbids: (from, to) => from.startsWith('site/') && !isTestPath(from) && isTestPath(to),
+    includeTests: true,
+    noBaseline: true,
+  },
   {
     id: 'objects-imports-core-only',
     description: 'objects may import only itself, core, npm dependencies and Node built-ins (tests and type-only imports count)',

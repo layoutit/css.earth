@@ -1,3 +1,4 @@
+/** Documentation links, placement and narrowly admitted executable plan inputs. */
 import assert from 'node:assert/strict';
 import {execFileSync, spawnSync} from 'node:child_process';
 import {mkdirSync, mkdtempSync, rmSync, writeFileSync} from 'node:fs';
@@ -214,4 +215,10 @@ test('the three guide-owned telescope projection records are documentation evide
   for (const name of ['navigation', 'oracle', 'registration'])
     f.write(`docs/fixtures/telescope-projection/europa-${name}.json`, '{}');
   assert.deepEqual(f.check().errors, []);
+});
+
+test('only named executable site-plan inputs are admitted beside the guide', t => {
+  const f = fixture(t);
+  for (const name of ['moves', 'tiers', 'edits', 'references', 'loader-options', 'unexpected']) f.write(`docs/site-architecture/${name}.json`, '{}');
+  assert.deepEqual(f.check().errors.map(error => error.file), ['docs/site-architecture/unexpected.json']);
 });
