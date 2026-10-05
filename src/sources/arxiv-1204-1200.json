@@ -1,0 +1,50 @@
+{
+  "id": "arxiv-1204-1200",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Kaschinski et al. (2012): Radiation-driven winds of hot luminous stars XVII. Parameters of selected central stars of PN from consistent optical and UV spectral analysis and the universality of the mass-luminosity relation",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1204.1200"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/201117266"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/1204.1200",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/201117266",
+      "label": "Journal version"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/1204.1200",
+      "checkedOn": "2026-10-05",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Kaschinski et al. (2012)",
+      "scope": "citation",
+      "evidence": "https://arxiv.org/abs/1204.1200"
+    }
+  ],
+  "creators": [
+    "C. B. Kaschinski",
+    "A. W. A. Pauldrach",
+    "T. L. Hoffmann"
+  ],
+  "publicationDate": "2012"
+}

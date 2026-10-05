@@ -1,6 +1,6 @@
 # NGC 2392
 
-The planetary nebula NGC 2392 as an object of the world: its place, its card and its list marker. The page is titled as SIMBAD and ESA/Hubble name it; SIMBAD hides the nicknames, which stay as aliases so a search finds it. It has no surface. Its dataset shows the [NGC 2392 image layers](../ngc-2392-layers/README.md) bank, whose README holds the sources, processing and known problems of the picture.
+The planetary nebula NGC 2392 as an object of the world: its place, its card and its list marker. The page is titled as SIMBAD and ESA/Hubble name it; SIMBAD hides the nicknames, which stay as aliases so a search finds it. It has no surface. Its three datasets show the [NGC 2392 image layers](../ngc-2392-layers/README.md) bank, Hubble's photograph, and the [infrared layers](../ngc-2392-webb-layers/README.md) and [mid-infrared layers](../ngc-2392-miri-layers/README.md) banks, Webb's two; each README holds the sources, processing and known problems of its picture. Its central star is an object of its own inside it, [HD 59088](../hd-59088/README.md).
 
 ## Sources
 

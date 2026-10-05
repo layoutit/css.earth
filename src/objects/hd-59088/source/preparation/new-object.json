@@ -1,0 +1,51 @@
+{
+  "id": "hd-59088",
+  "name": "HD 59088",
+  "system": "NGC 2392",
+  "description": "HD 59088 is the central star of the planetary nebula NGC 2392, about 1,795 parsecs away.",
+  "aliases": [
+    "BD+21 1609"
+  ],
+  "parent": "ngc-2392",
+  "featured": true,
+  "target": "HD 59088",
+  "gaia": "865037169677723904",
+  "paper": {
+    "url": "https://arxiv.org/abs/1204.1200",
+    "credit": "Kaschinski, Pauldrach & Hoffmann (2012), A&A 542, A45"
+  },
+  "radius": {
+    "value": 1.5,
+    "source": "Kaschinski, Pauldrach & Hoffmann (2012), A&A 542, A45, Table 2: NGC 2392, the hydrodynamically consistent model of Pauldrach et al. (2004)",
+    "url": "https://arxiv.org/abs/1204.1200"
+  },
+  "mass": "unmeasured",
+  "temperature": {
+    "value": 40000,
+    "source": "Kaschinski, Pauldrach & Hoffmann (2012), A&A 542, A45, Table 2: NGC 2392, the hydrodynamically consistent model of Pauldrach et al. (2004)",
+    "url": "https://arxiv.org/abs/1204.1200"
+  },
+  "gravity": {
+    "value": 3.7,
+    "source": "Kaschinski, Pauldrach & Hoffmann (2012), A&A 542, A45, Table 2: NGC 2392, the hydrodynamically consistent model of Pauldrach et al. (2004)",
+    "url": "https://arxiv.org/abs/1204.1200"
+  },
+  "distance": {
+    "value": 1795.0308872481207,
+    "source": "Chornay & Walton (2021), A&A 656, A110; CDS J/A+A/656/A110, Table A.1, PN G197.8+17.3: distance 1,795 pc (1,666 to 1,942) from the Gaia EDR3 parallax of this star, the distance its nebula's page stands at",
+    "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/656/A110"
+  },
+  "planets": [],
+  "companions": [],
+  "notes": [
+    "The star's mass is not measured. Spectral analyses give 0.41 solar masses (Pauldrach et al. 2004) to 0.91 (Kudritzki et al. 1997), both listed by Kaschinski et al. (2012), Table 2 (https://arxiv.org/abs/1204.1200); Miszalski et al. (2019) favour no value (https://arxiv.org/abs/1903.07264).",
+    "It is a single-lined spectroscopic binary with a period of 1.9 days; its unseen companion is probably a hot white dwarf (Miszalski et al. 2019, https://arxiv.org/abs/1903.07264). The companion's mass depends on the orbit's unmeasured tilt, so it is not drawn."
+  ],
+  "radialVelocity": {
+    "value": 84.2,
+    "uncertainty": 2,
+    "source": "SIMBAD's radial velocity for Gaia DR3 865037169677723904 (quality E), from 1953GCRV..C......0W; Gaia DR3 measures none",
+    "url": "https://ui.adsabs.harvard.edu/abs/1953GCRV..C......0W/abstract"
+  },
+  "order": 5776
+}

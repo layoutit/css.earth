@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "hd-59088",
+  "angularDiameterMas": 0.01,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 1,043,550 km at 1795.03 pc = 0.01 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 1795.0308872481207,
+  "distanceSource": "Chornay & Walton (2021), A&A 656, A110; CDS J/A+A/656/A110, Table A.1, PN G197.8+17.3: distance 1,795 pc (1,666 to 1,942) from the Gaia EDR3 parallax of this star, the distance its nebula's page stands at (https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/656/A110): 1795.0308872481207 pc; Gaia DR3 parallax 0.5451 +/- 0.0467 mas (same row, RUWE 1.20), 11.7 standard errors, is not used",
+  "radiusKm": 1043550,
+  "radiusSource": "Radius 1.5 solar radii from Kaschinski, Pauldrach & Hoffmann (2012), A&A 542, A45, Table 2: NGC 2392, the hydrodynamically consistent model of Pauldrach et al. (2004) (https://arxiv.org/abs/1204.1200): 1,043,550 km at 695,700 km per solar radius. No mass is measured, so GM is 0, the records' unpublished value. Temperature 40000 K from Kaschinski, Pauldrach & Hoffmann (2012), A&A 542, A45, Table 2: NGC 2392, the hydrodynamically consistent model of Pauldrach et al. (2004) (https://arxiv.org/abs/1204.1200). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 40000,
+  "effectiveTemperatureSource": "Kaschinski, Pauldrach & Hoffmann (2012), A&A 542, A45, Table 2: NGC 2392, the hydrodynamically consistent model of Pauldrach et al. (2004) (https://arxiv.org/abs/1204.1200)",
+  "surfaceGravityLogg": 3.7,
+  "surfaceGravitySource": "Kaschinski, Pauldrach & Hoffmann (2012), A&A 542, A45, Table 2: NGC 2392, the hydrodynamically consistent model of Pauldrach et al. (2004) (https://arxiv.org/abs/1204.1200)",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}
