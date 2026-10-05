@@ -40,7 +40,8 @@ export async function loadEdge(root: string): Promise<(request: Request) => URL 
 }
 /** Preserve the revision's deploy order, skipping download-only owners whose inputs were restored. */
 export function offlineDeploySteps(scripts: Record<string, string>): string[] {
-  return expandScript(scripts, 'build:deploy').filter(step => ![
+  // The social share images fetch the published arrival images from the asset origin, which an offline build cannot reach and which no server answers.
+  return expandScript(scripts, 'build:deploy').filter(step => !/\bshare-images\b/u.test(step) && ![
     ...expandScript(scripts, 'build:packages'), ...expandScript(scripts, 'setup:asset-data'),
   ].includes(step)).map(step => step.includes('prepare-facilities') && !step.includes('--restored-only') ? step + ' --restored-only' : step);
 }

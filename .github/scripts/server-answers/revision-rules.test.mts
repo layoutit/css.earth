@@ -123,3 +123,8 @@ test('hosting adapter redirects only configured slashless directories and negoti
   }
   assert.equal(hostingHeaders(new Request(url, { headers: { range: 'bytes=0-63' } }), new Headers(), [], true).get('content-encoding'), null);
 });
+
+test('the offline deploy replay leaves out the share images, which need the published asset origin', () => {
+  const scripts = { 'build:packages': 'pnpm -r build', 'setup:asset-data': 'node download.mts', 'build:deploy': 'pnpm build:packages && pnpm setup:asset-data && astro build && node site/build/share-images.mts && node assemble.mts' };
+  assert.deepEqual(offlineDeploySteps(scripts), ['astro build', 'node assemble.mts']);
+});
