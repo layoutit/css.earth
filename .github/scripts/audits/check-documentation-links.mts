@@ -196,7 +196,9 @@ function audit(snapshot: Snapshot): Audit {
   // Owner-designated documentation evidence beside the virtual telescope guide (Wave T).
   const projectionEvidence = new Set(['docs/fixtures/telescope-projection/europa-navigation.json',
     'docs/fixtures/telescope-projection/europa-oracle.json', 'docs/fixtures/telescope-projection/europa-registration.json']);
-  for (const file of docs) if (!guides.has(file) && !illustrations.has(file) && !projectionEvidence.has(file)) errors.push({file, reason: 'docs/ accepts Markdown guides and illustrations under docs/images/; move code, fixtures and raw output to their owner'});
+  // The site proposal is generated from these exact owner-requested inputs; arbitrary JSON stays forbidden.
+  const sitePlanInputs = new Set(['docs/site-architecture/moves.json', 'docs/site-architecture/tiers.json', 'docs/site-architecture/edits.json', 'docs/site-architecture/references.json', 'docs/site-architecture/loader-options.json']);
+  for (const file of docs) if (!guides.has(file) && !illustrations.has(file) && !projectionEvidence.has(file) && !sitePlanInputs.has(file)) errors.push({file, reason: 'docs/ accepts Markdown guides and illustrations under docs/images/; move code, fixtures and raw output to their owner'});
   const index = 'docs/README.md';
   if (!guides.has(index)) errors.push({file: index, reason: 'missing documentation index'});
   const pending = guides.has(index) ? [index] : [];

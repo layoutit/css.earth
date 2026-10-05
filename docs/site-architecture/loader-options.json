@@ -1,0 +1,349 @@
+{
+  "recommended": "owner-local-queued-functions",
+  "options": [
+    {
+      "id": "owner-local-queued-functions",
+      "edits": "edits.json",
+      "autostart": "module evaluation",
+      "registration": "directory runtime only",
+      "proofs": [
+        "one queue chain",
+        "registration before first scene call",
+        "entry modules and bytes",
+        "real-iPad delayed-summary cold loads"
+      ]
+    },
+    {
+      "id": "directory-slot",
+      "autostart": "module evaluation",
+      "registration": "all loaders before router import",
+      "verdict": "viable graph alternative; wider startup registration and consumer proxies",
+      "proofs": [
+        "slot-before-import mutation",
+        "use-time reads",
+        "entry modules and bytes"
+      ],
+      "graphEdits": [
+        {
+          "op": "add-file",
+          "path": "site/model/navigation-href.mts",
+          "imports": [],
+          "change": "Extract held address reader",
+          "note": "Move navigationHref AND its owners WeakMap. Export a registration function for history; preserve deferred URL semantics.",
+          "id": "add-file-navigation-href"
+        },
+        {
+          "op": "add-import",
+          "from": "site/navigation/navigation-history.mts",
+          "to": "site/model/navigation-href.mts",
+          "kind": "value",
+          "change": "Extract held address reader",
+          "note": "History registers and unregisters its held address reader in the same WeakMap; re-export the getter for existing navigation callers.",
+          "id": "add-import-navigation-history-navigation-href"
+        },
+        {
+          "op": "retarget",
+          "from": "site/world/application-world-resources.mts",
+          "to": "site/navigation/navigation-history.mts",
+          "newTo": "site/model/navigation-href.mts",
+          "kind": "value",
+          "change": "Extract held address reader",
+          "note": "Only lower world caller uses navigationHref; other callers retain history behavior.",
+          "id": "retarget-application-world-resources-navigation-href",
+          "line": 18
+        },
+        {
+          "op": "add-file",
+          "path": "site/directory/object-entry-types.mts",
+          "note": "Extract registry aliases from objects; directory must not import the registry that calls it.",
+          "change": "Extract registry types",
+          "imports": [
+            {
+              "to": "site/browser/browser-types.mts",
+              "kind": "type"
+            },
+            {
+              "to": "packages/objects/src/index.ts",
+              "kind": "type"
+            }
+          ],
+          "id": "add-file-object-entry-types"
+        },
+        {
+          "op": "retarget",
+          "from": "site/directory/object-directory.mts",
+          "to": "site/directory/objects.mts",
+          "note": "Use the extracted registry aliases without evaluating the full registry.",
+          "kind": "type",
+          "newTo": "site/directory/object-entry-types.mts",
+          "change": "Extract registry types",
+          "id": "retarget-object-directory-object-entry-types",
+          "line": 3
+        },
+        {
+          "op": "add-import",
+          "to": "site/directory/object-entry-types.mts",
+          "kind": "type",
+          "note": "Registry imports and re-exports its extracted aliases so clients can migrate without duplication.",
+          "from": "site/directory/objects.mts",
+          "change": "Extract registry types",
+          "id": "add-import-objects-object-entry-types"
+        },
+        {
+          "op": "add-file",
+          "path": "site/navigation/navigation-types.mts",
+          "imports": [
+            {
+              "to": "site/browser/browser-types.mts",
+              "kind": "type"
+            },
+            {
+              "to": "packages/renderer/src/runtime/world-navigation-types.ts",
+              "kind": "type"
+            },
+            {
+              "to": "packages/renderer/src/runtime/object-scene.ts",
+              "kind": "type"
+            },
+            {
+              "to": "site/world/scene-subject.mts",
+              "kind": "type"
+            },
+            {
+              "to": "site/world/navigation-scope.mts",
+              "kind": "type"
+            }
+          ],
+          "change": "Extract navigation contracts",
+          "note": "Own WorldHandoff, NavigationHistory and NavigationIntent beside navigation. Import MountOptions, ObjectSceneLifecycle, ObjectWorldNavigation, SceneSubject and PageView; preserve erased aliases SceneView and SelectionTarget.",
+          "id": "add-file-navigation-types"
+        },
+        {
+          "op": "retarget",
+          "from": "site/navigation/prepared-arrival.mts",
+          "to": "site/navigation/prepared-world-navigation.mts",
+          "note": "Arrival reads WorldHandoff from the lower contract; navigation still owns flights.",
+          "kind": "type",
+          "newTo": "site/navigation/navigation-types.mts",
+          "change": "Extract navigation contracts",
+          "id": "retarget-prepared-arrival-navigation-types",
+          "line": 4
+        },
+        {
+          "op": "retarget",
+          "from": "site/navigation/navigation-history.mts",
+          "to": "site/navigation/navigation-request.mts",
+          "newTo": "site/navigation/navigation-types.mts",
+          "kind": "type",
+          "note": "Extract NavigationHistory and NavigationIntent into navigation-types; the history transport must not import request orchestration.",
+          "change": "Extract navigation contracts",
+          "id": "retarget-navigation-history-navigation-types",
+          "line": 4
+        },
+        {
+          "op": "add-import",
+          "to": "site/navigation/navigation-types.mts",
+          "kind": "type",
+          "note": "Flights import and re-export the extracted WorldHandoff contract.",
+          "from": "site/navigation/prepared-world-navigation.mts",
+          "change": "Extract navigation contracts",
+          "id": "add-import-prepared-world-navigation-navigation-types"
+        },
+        {
+          "op": "add-import",
+          "to": "site/navigation/navigation-types.mts",
+          "kind": "type",
+          "note": "Request imports its extracted intent and history types and the plain selection shape; selection behavior is passed in.",
+          "from": "site/navigation/navigation-request.mts",
+          "change": "Extract navigation contracts",
+          "id": "add-import-navigation-request-navigation-types"
+        },
+        {
+          "op": "add-file",
+          "path": "site/content/moon-catalogue.mts",
+          "note": "Split catalogue parsing, cached source catalogue and catalogueMoons into a runtime-safe reader; preparation keeps search-based ordering.",
+          "change": "Split the moon catalogue reader",
+          "imports": [
+            {
+              "to": "site/source/moon-catalogues.json",
+              "kind": "asset"
+            },
+            {
+              "to": "packages/objects/src/sources/index.ts",
+              "kind": "value"
+            }
+          ],
+          "id": "add-file-moon-catalogue"
+        },
+        {
+          "op": "retarget",
+          "from": "site/content/object-children.mts",
+          "to": "site/build/prepare/prepare-body-moons.mts",
+          "note": "Read catalogueMoons from the split reader; production must never import build preparation.",
+          "newTo": "site/content/moon-catalogue.mts",
+          "change": "Split the moon catalogue reader",
+          "id": "retarget-object-children-moon-catalogue",
+          "line": 3
+        },
+        {
+          "op": "remove-import",
+          "from": "site/build/prepare/prepare-body-moons.mts",
+          "to": "site/source/moon-catalogues.json",
+          "note": "Move the source catalogue import with its parser into the reader; preparation calls that reader.",
+          "kind": "asset",
+          "change": "Split the moon catalogue reader",
+          "id": "remove-import-prepare-body-moons-moon-catalogues",
+          "line": 4
+        },
+        {
+          "op": "add-import",
+          "from": "site/build/prepare/prepare-body-moons.mts",
+          "to": "site/content/moon-catalogue.mts",
+          "kind": "value",
+          "note": "Use the single catalogue reader for preparation too; preserve the named-moon eligibility policy in preparation.",
+          "change": "Split the moon catalogue reader",
+          "id": "add-import-prepare-body-moons-moon-catalogue"
+        },
+        {
+          "op": "remove-import",
+          "from": "site/navigation/navigation-request.mts",
+          "to": "site/selection/scene-selection.mts",
+          "note": "Pass selectionTargetFromUrl explicitly through resolveNavigation and readNavigationSelection. Router uses the existing registry export, injects it into createSceneActivation, which forwards all three calls. Import erased SceneView/SelectionTarget aliases from navigation-types; never retain the selection import.",
+          "change": "Pass selection into navigation requests",
+          "id": "remove-import-navigation-request-scene-selection",
+          "line": 11
+        },
+        {
+          "op": "add-import",
+          "to": "site/world/scene-subject.mts",
+          "kind": "value",
+          "note": "Keep existing subject identity helpers in the lower world owner; pass selectionTargetFromUrl as a parameter.",
+          "from": "site/navigation/navigation-request.mts",
+          "change": "Pass selection into navigation requests",
+          "id": "add-import-navigation-request-scene-subject"
+        },
+        {
+          "op": "add-file",
+          "path": "site/scene/scene-frame-presenter.mts",
+          "note": "Extract the structural presenter interface; a session must not import the world coordinator that consumes it.",
+          "change": "Extract the frame presenter contract",
+          "imports": [
+            {
+              "to": "site/world/application-world-context.mts",
+              "kind": "type"
+            },
+            {
+              "to": "site/world/world-viewport.mts",
+              "kind": "type"
+            }
+          ],
+          "id": "add-file-scene-frame-presenter"
+        },
+        {
+          "op": "retarget",
+          "from": "site/scene/scene-session.mts",
+          "to": "site/scene/scene-world.mts",
+          "note": "Session reads SceneFramePresenter from the lower contract, breaking the two-way type dependency.",
+          "kind": "type",
+          "newTo": "site/scene/scene-frame-presenter.mts",
+          "change": "Extract the frame presenter contract",
+          "id": "retarget-scene-session-scene-frame-presenter",
+          "line": 2
+        },
+        {
+          "op": "add-import",
+          "to": "site/scene/scene-frame-presenter.mts",
+          "kind": "type",
+          "note": "World coordinator imports and re-exports the structural presenter contract.",
+          "from": "site/scene/scene-world.mts",
+          "change": "Extract the frame presenter contract",
+          "id": "add-import-scene-world-scene-frame-presenter"
+        },
+        {
+          "op": "add-file",
+          "path": "site/directory/runtime-loaders.mts",
+          "imports": [
+            {
+              "to": "site/browser/browser-types.mts",
+              "kind": "type"
+            }
+          ]
+        },
+        {
+          "op": "remove-import",
+          "from": "site/directory/object-directory.mts",
+          "to": "site/browser/import-queue.mts"
+        },
+        {
+          "op": "add-import",
+          "from": "site/directory/object-directory.mts",
+          "to": "site/directory/runtime-loaders.mts",
+          "kind": "value"
+        },
+        {
+          "op": "remove-import",
+          "from": "site/scene/object-adapter.mts",
+          "to": "site/browser/import-queue.mts"
+        },
+        {
+          "op": "add-import",
+          "from": "site/scene/object-adapter.mts",
+          "to": "site/directory/runtime-loaders.mts",
+          "kind": "value"
+        },
+        {
+          "op": "remove-import",
+          "from": "site/scene/scene-router.mts",
+          "to": "site/startup/shared-imports.mts"
+        },
+        {
+          "op": "add-import",
+          "from": "site/scene/scene-router.mts",
+          "to": "site/directory/runtime-loaders.mts",
+          "kind": "value"
+        },
+        {
+          "op": "remove-import",
+          "from": "site/browser/import-queue.mts",
+          "to": "site/scene/packaged-object-runtime.mts"
+        },
+        {
+          "op": "add-import",
+          "from": "site/startup/shared-imports.mts",
+          "to": "site/scene/packaged-object-runtime.mts",
+          "kind": "lazy"
+        },
+        {
+          "op": "add-import",
+          "from": "site/startup/shared-imports.mts",
+          "to": "site/directory/runtime-loaders.mts",
+          "kind": "value"
+        }
+      ]
+    },
+    {
+      "id": "then-start-di",
+      "autostart": "after import evaluation inside queued thunk",
+      "risks": [
+        "double start on retry",
+        "self-wait deadlock",
+        "adapter frozen default replaced"
+      ],
+      "proofs": [
+        "synchronous start settlement",
+        "no queued await in start",
+        "retry single start",
+        "entry modules and bytes"
+      ]
+    },
+    {
+      "id": "lazy-boundary-exception",
+      "autostart": "module evaluation",
+      "verdict": "abandons zero-cycle acceptance",
+      "proofs": [
+        "explicit upward exceptions",
+        "report service SCCs separately"
+      ]
+    }
+  ]
+}

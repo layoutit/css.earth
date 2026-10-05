@@ -178,7 +178,7 @@ cycle. Share anything else through `@cssearth/core` or another package. Prepared
     reflectance, temperature-pressure, phase and light curves, FITS gallery pictures) and their shared SVG style. It imports
     no topic. The recipe dispatcher is site-owned preparation in
     `site/build/charts/`; the spectrum reader and compact spectrum are in `site/overview/`, because
-    `site/prepare-body-overview.mts` uses them and the runtime may not import the bake.
+    `site/build/charts/charts.ts` uses them and the runtime may not import the bake.
   - `objects/content`: the shared dataset vocabulary, dataset steps and prepared legends, each dataset control's billboard color, and the legend
     labels a palette dataset derives from the stretch its report states. It
     imports no topic. The content preparer that reads factsheets and writes the payload is site-owned preparation in `site/build/content/`

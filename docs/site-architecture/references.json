@@ -1,0 +1,2166 @@
+{
+  "occurrences": [
+    {
+      "file": ".agents/skills/celestial-skill/references/implementation-map.md",
+      "classification": "docs code-span",
+      "scope": "live"
+    },
+    {
+      "file": ".github/ci-areas.json",
+      "classification": "CI routing",
+      "scope": "live"
+    },
+    {
+      "file": ".github/scripts/architecture/architecture.test.mts",
+      "classification": "generator/producer literal",
+      "scope": "live"
+    },
+    {
+      "file": ".github/scripts/architecture/format-schema-exceptions.json",
+      "classification": "generator/producer literal",
+      "scope": "live"
+    },
+    {
+      "file": ".github/scripts/architecture/format-schema-ownership.test.mts",
+      "classification": "generator/producer literal",
+      "scope": "live"
+    },
+    {
+      "file": ".github/scripts/architecture/graph.mts",
+      "classification": "generator/producer literal",
+      "scope": "live"
+    },
+    {
+      "file": ".github/scripts/architecture/moved-format-ownership.test.mts",
+      "classification": "generator/producer literal",
+      "scope": "live"
+    },
+    {
+      "file": ".github/scripts/architecture/nebula-inbound.mts",
+      "classification": "generator/producer literal",
+      "scope": "live"
+    },
+    {
+      "file": ".github/scripts/architecture/nebula-inbound.test.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": ".github/scripts/architecture/nebula-inbound.test.mts",
+      "classification": "generator/producer literal",
+      "scope": "live"
+    },
+    {
+      "file": ".github/scripts/audits/provenance-documentation-inventory.py",
+      "classification": "Python script",
+      "scope": "live"
+    },
+    {
+      "file": ".github/scripts/audits/test_provenance_documentation_inventory.py",
+      "classification": "Python script",
+      "scope": "live"
+    },
+    {
+      "file": ".github/scripts/checks/object-test-relocation.test.mts",
+      "classification": "generator/producer literal",
+      "scope": "live"
+    },
+    {
+      "file": ".github/scripts/checks/package-boundaries.test.mts",
+      "classification": "generator/producer literal",
+      "scope": "live"
+    },
+    {
+      "file": ".github/scripts/checks/typescript-ownership.mts",
+      "classification": "generator/producer literal",
+      "scope": "live"
+    },
+    {
+      "file": ".github/scripts/ci/astroquery-tests.test.mts",
+      "classification": "generator/producer literal",
+      "scope": "live"
+    },
+    {
+      "file": ".github/scripts/ci/check-ci.test.mts",
+      "classification": "generator/producer literal",
+      "scope": "live"
+    },
+    {
+      "file": ".github/scripts/ci/classify-changes.test.mts",
+      "classification": "generator/producer literal",
+      "scope": "live"
+    },
+    {
+      "file": ".github/scripts/ci/object-scope-gate.test.mts",
+      "classification": "generator/producer literal",
+      "scope": "live"
+    },
+    {
+      "file": ".github/scripts/ci/prepare-typecheck.mts",
+      "classification": "generator/producer literal",
+      "scope": "live"
+    },
+    {
+      "file": ".github/scripts/tsconfig.tests.json",
+      "classification": "tsconfig/eslint/package.json",
+      "scope": "live"
+    },
+    {
+      "file": ".github/workflows/audit.yml",
+      "classification": "workflow",
+      "scope": "live"
+    },
+    {
+      "file": ".github/workflows/nightly.yml",
+      "classification": "workflow",
+      "scope": "live"
+    },
+    {
+      "file": ".github/workflows/universe.yml",
+      "classification": "workflow",
+      "scope": "live"
+    },
+    {
+      "file": ".gitignore",
+      "classification": "generator/producer literal",
+      "scope": "live"
+    },
+    {
+      "file": "AGENTS.md",
+      "classification": "AGENTS.md contract text",
+      "scope": "live"
+    },
+    {
+      "file": "CONTRIBUTING.md",
+      "classification": "docs link",
+      "scope": "live"
+    },
+    {
+      "file": "astro.config.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "cloudflare/worker.ts",
+      "classification": "generator/producer literal",
+      "scope": "live"
+    },
+    {
+      "file": "docs/architecture/exploration-catalog.md",
+      "classification": "docs link",
+      "scope": "live"
+    },
+    {
+      "file": "docs/flight-lifecycle.md",
+      "classification": "docs code-span",
+      "scope": "live"
+    },
+    {
+      "file": "docs/galaxies/README.md",
+      "classification": "docs link",
+      "scope": "live"
+    },
+    {
+      "file": "docs/moon-catalogues.md",
+      "classification": "docs code-span",
+      "scope": "live"
+    },
+    {
+      "file": "docs/native-scroll-zoom.md",
+      "classification": "docs code-span",
+      "scope": "live"
+    },
+    {
+      "file": "docs/navigation-identity.md",
+      "classification": "docs link",
+      "scope": "live"
+    },
+    {
+      "file": "docs/navigation-identity.md",
+      "classification": "docs code-span",
+      "scope": "live"
+    },
+    {
+      "file": "docs/object-discovery.md",
+      "classification": "docs code-span",
+      "scope": "live"
+    },
+    {
+      "file": "docs/object-provenance.md",
+      "classification": "docs code-span",
+      "scope": "live"
+    },
+    {
+      "file": "docs/page-navigation-transport.md",
+      "classification": "docs code-span",
+      "scope": "live"
+    },
+    {
+      "file": "docs/performance/marker-declutter.md",
+      "classification": "docs code-span",
+      "scope": "live"
+    },
+    {
+      "file": "docs/performance/startup-billboard.md",
+      "classification": "docs code-span",
+      "scope": "live"
+    },
+    {
+      "file": "docs/performance/startup-gate.md",
+      "classification": "docs link",
+      "scope": "live"
+    },
+    {
+      "file": "docs/performance/world-context-by-system.md",
+      "classification": "docs link",
+      "scope": "live"
+    },
+    {
+      "file": "docs/prepared-navigation-ownership.md",
+      "classification": "docs code-span",
+      "scope": "live"
+    },
+    {
+      "file": "docs/provenance/CONTRACT.md",
+      "classification": "docs code-span",
+      "scope": "live"
+    },
+    {
+      "file": "docs/reader-text.md",
+      "classification": "docs link",
+      "scope": "live"
+    },
+    {
+      "file": "docs/reader-text.md",
+      "classification": "docs code-span",
+      "scope": "live"
+    },
+    {
+      "file": "docs/satellite-system-navigation.md",
+      "classification": "docs link",
+      "scope": "live"
+    },
+    {
+      "file": "docs/seo.md",
+      "classification": "docs code-span",
+      "scope": "live"
+    },
+    {
+      "file": "docs/site-architecture.md",
+      "classification": "docs code-span",
+      "scope": "plan"
+    },
+    {
+      "file": "docs/sources-catalogue.md",
+      "classification": "docs code-span",
+      "scope": "live"
+    },
+    {
+      "file": "eslint.config.mts",
+      "classification": "tsconfig/eslint/package.json",
+      "scope": "live"
+    },
+    {
+      "file": "labs/experiments/native-scroll/tsconfig.json",
+      "classification": "tsconfig/eslint/package.json",
+      "scope": "live"
+    },
+    {
+      "file": "labs/investigations/capture-galaxies.mts",
+      "classification": "generator/producer literal",
+      "scope": "live"
+    },
+    {
+      "file": "labs/nebula/packages/lab/src/adapters/css-earth-shell.css",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "labs/performance/README.md",
+      "classification": "docs code-span",
+      "scope": "live"
+    },
+    {
+      "file": "labs/performance/tsconfig.tests.json",
+      "classification": "tsconfig/eslint/package.json",
+      "scope": "live"
+    },
+    {
+      "file": "netlify.toml",
+      "classification": "generator/producer literal",
+      "scope": "live"
+    },
+    {
+      "file": "netlify/functions/report.ts",
+      "classification": "generator/producer literal",
+      "scope": "live"
+    },
+    {
+      "file": "package.json",
+      "classification": "tsconfig/eslint/package.json",
+      "scope": "live"
+    },
+    {
+      "file": "packages/astronomy/tsconfig.tests.json",
+      "classification": "tsconfig/eslint/package.json",
+      "scope": "live"
+    },
+    {
+      "file": "packages/bake/AGENTS.md",
+      "classification": "AGENTS.md contract text",
+      "scope": "live"
+    },
+    {
+      "file": "packages/bake/README.md",
+      "classification": "docs code-span",
+      "scope": "live"
+    },
+    {
+      "file": "packages/bake/src/delivery/asset-origin-scenes.ts",
+      "classification": "generator/producer literal",
+      "scope": "live"
+    },
+    {
+      "file": "packages/bake/src/delivery/public-runtime-assets.ts",
+      "classification": "generator/producer literal",
+      "scope": "live"
+    },
+    {
+      "file": "packages/bake/src/navigation/prepare-navigation.ts",
+      "classification": "generator/producer literal",
+      "scope": "live"
+    },
+    {
+      "file": "packages/bake/src/prepared-presentation/prepared-presentation-bindings.ts",
+      "classification": "generator/producer literal",
+      "scope": "live"
+    },
+    {
+      "file": "packages/bake/src/presentation/clean-leaves.test.mts",
+      "classification": "generator/producer literal",
+      "scope": "live"
+    },
+    {
+      "file": "packages/bake/src/presentation/clean-leaves.ts",
+      "classification": "generator/producer literal",
+      "scope": "live"
+    },
+    {
+      "file": "packages/bake/src/run-implemented-objects/index.ts",
+      "classification": "generator/producer literal",
+      "scope": "live"
+    },
+    {
+      "file": "packages/bake/src/run-implemented-objects/test-discovery.test.mts",
+      "classification": "generator/producer literal",
+      "scope": "live"
+    },
+    {
+      "file": "packages/bake/src/run-implemented-objects/test-discovery.test.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "packages/bake/src/runtime-source/runtime-source-graph.test.ts",
+      "classification": "generator/producer literal",
+      "scope": "live"
+    },
+    {
+      "file": "packages/bake/src/site-assets/prepare-dataset-billboards.ts",
+      "classification": "generator/producer literal",
+      "scope": "live"
+    },
+    {
+      "file": "packages/bake/src/site-assets/prepare-search-thumbnails.test.mts",
+      "classification": "generator/producer literal",
+      "scope": "live"
+    },
+    {
+      "file": "packages/bake/src/site-assets/prepare-search-thumbnails.test.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "packages/bake/src/site-assets/prepare-search-thumbnails.ts",
+      "classification": "computed import",
+      "scope": "live"
+    },
+    {
+      "file": "packages/bake/src/sources/facility-artwork-refresh.ts",
+      "classification": "generator/producer literal",
+      "scope": "live"
+    },
+    {
+      "file": "packages/bake/src/world-context/plain-star-dots.ts",
+      "classification": "generator/producer literal",
+      "scope": "live"
+    },
+    {
+      "file": "packages/bake/src/world-context/summary.ts",
+      "classification": "generator/producer literal",
+      "scope": "live"
+    },
+    {
+      "file": "packages/bake/tsconfig.tests.json",
+      "classification": "tsconfig/eslint/package.json",
+      "scope": "live"
+    },
+    {
+      "file": "packages/catalog/tsconfig.tests.json",
+      "classification": "tsconfig/eslint/package.json",
+      "scope": "live"
+    },
+    {
+      "file": "packages/core/tsconfig.tests.json",
+      "classification": "tsconfig/eslint/package.json",
+      "scope": "live"
+    },
+    {
+      "file": "packages/engine/tsconfig.tests.json",
+      "classification": "tsconfig/eslint/package.json",
+      "scope": "live"
+    },
+    {
+      "file": "packages/fits/tsconfig.tests.json",
+      "classification": "tsconfig/eslint/package.json",
+      "scope": "live"
+    },
+    {
+      "file": "packages/objects/AGENTS.md",
+      "classification": "AGENTS.md contract text",
+      "scope": "live"
+    },
+    {
+      "file": "packages/objects/README.md",
+      "classification": "docs code-span",
+      "scope": "live"
+    },
+    {
+      "file": "packages/objects/src/node/prepared-registry.ts",
+      "classification": "generator/producer literal",
+      "scope": "live"
+    },
+    {
+      "file": "packages/objects/src/prepared-data/source/format-reader-ledger.ts",
+      "classification": "generator/producer literal",
+      "scope": "live"
+    },
+    {
+      "file": "packages/objects/src/provenance/source-credits.ts",
+      "classification": "generator/producer literal",
+      "scope": "live"
+    },
+    {
+      "file": "packages/objects/src/registry/index.ts",
+      "classification": "generator/producer literal",
+      "scope": "live"
+    },
+    {
+      "file": "packages/objects/tsconfig.tests.json",
+      "classification": "tsconfig/eslint/package.json",
+      "scope": "live"
+    },
+    {
+      "file": "packages/renderer/AGENTS.md",
+      "classification": "AGENTS.md contract text",
+      "scope": "live"
+    },
+    {
+      "file": "packages/renderer/src/labels/surface-feature-labels.ts",
+      "classification": "generator/producer literal",
+      "scope": "live"
+    },
+    {
+      "file": "packages/renderer/src/navigation/camera-layout.ts",
+      "classification": "generator/producer literal",
+      "scope": "live"
+    },
+    {
+      "file": "packages/renderer/src/navigation/eye-relative-readers.test.ts",
+      "classification": "generator/producer literal",
+      "scope": "live"
+    },
+    {
+      "file": "packages/renderer/src/node/test-exports.test.mts",
+      "classification": "generator/producer literal",
+      "scope": "live"
+    },
+    {
+      "file": "packages/renderer/src/rendering/prepared-asset-origin.ts",
+      "classification": "generator/producer literal",
+      "scope": "live"
+    },
+    {
+      "file": "packages/renderer/src/universe/world-context/world-context-orbit-demand.test.ts",
+      "classification": "generator/producer literal",
+      "scope": "live"
+    },
+    {
+      "file": "packages/renderer/src/universe/world-context/world-context-planner.test.ts",
+      "classification": "generator/producer literal",
+      "scope": "live"
+    },
+    {
+      "file": "packages/renderer/tsconfig.tests.json",
+      "classification": "tsconfig/eslint/package.json",
+      "scope": "live"
+    },
+    {
+      "file": "packages/spice/tsconfig.tests.json",
+      "classification": "tsconfig/eslint/package.json",
+      "scope": "live"
+    },
+    {
+      "file": "packages/telescope-cli/src/query.mts",
+      "classification": "generator/producer literal",
+      "scope": "live"
+    },
+    {
+      "file": "packages/telescope-cli/src/sphere/sphere-lane.mts",
+      "classification": "generator/producer literal",
+      "scope": "live"
+    },
+    {
+      "file": "packages/telescope-cli/tsconfig.tests.json",
+      "classification": "tsconfig/eslint/package.json",
+      "scope": "live"
+    },
+    {
+      "file": "packages/telescope/tsconfig.tests.json",
+      "classification": "tsconfig/eslint/package.json",
+      "scope": "live"
+    },
+    {
+      "file": "packages/volume-viewer/tsconfig.tests.json",
+      "classification": "tsconfig/eslint/package.json",
+      "scope": "live"
+    },
+    {
+      "file": "site/application-world-context.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/application-world-frames.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/application-world-resources.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/application-world-resources.mts",
+      "classification": "generator/producer literal",
+      "scope": "live"
+    },
+    {
+      "file": "site/application-world-types.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/application-world-visibility.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/build/bundle-cloudflare-worker.mts",
+      "classification": "generator/producer literal",
+      "scope": "live"
+    },
+    {
+      "file": "site/build/bundle-netlify-functions.mts",
+      "classification": "generator/producer literal",
+      "scope": "live"
+    },
+    {
+      "file": "site/build/content/prepare.ts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/build/function-project-files.mts",
+      "classification": "generator/producer literal",
+      "scope": "live"
+    },
+    {
+      "file": "site/build/object-package-contract.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/build/prepare/check-preparation-inputs.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/build/prepare/prepare-catalog.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/build/prepare/prepare-catalog.mts",
+      "classification": "generator/producer literal",
+      "scope": "live"
+    },
+    {
+      "file": "site/build/prepare/prepare-context-availability.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/build/prepare/prepare-facilities.mts",
+      "classification": "generator/producer literal",
+      "scope": "live"
+    },
+    {
+      "file": "site/build/prepare/prepare-feature-index.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/build/prepare/prepare-feature-index.mts",
+      "classification": "generator/producer literal",
+      "scope": "live"
+    },
+    {
+      "file": "site/build/prepare/prepare-interior-fills.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/build/prepare/prepare-moon-labels.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/build/prepare/prepare-moon-labels.mts",
+      "classification": "generator/producer literal",
+      "scope": "live"
+    },
+    {
+      "file": "site/build/prepare/prepare-object-discovery.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/build/prepare/prepare-object-json.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/build/prepare/prepare-shell-icons.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/build/prepare/prepare-shell-titles.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/build/prepare/prepare-sidebar-thumbnails.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/build/prepare/prepare-spatial-context.ts",
+      "classification": "computed import",
+      "scope": "live"
+    },
+    {
+      "file": "site/build/prepare/prepare-text.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/build/prepare/prepare-text.mts",
+      "classification": "generator/producer literal",
+      "scope": "live"
+    },
+    {
+      "file": "site/build/prepare/prepare-volume-presentation.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/build/prepare/prepare-world-presentation.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/build/prepare/prepare-world-presentation.mts",
+      "classification": "generator/producer literal",
+      "scope": "live"
+    },
+    {
+      "file": "site/build/prepare/refresh-source-icons.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/build/prepare/refresh-source-icons.mts",
+      "classification": "generator/producer literal",
+      "scope": "live"
+    },
+    {
+      "file": "site/build/prepare/system-packages.mts",
+      "classification": "generator/producer literal",
+      "scope": "live"
+    },
+    {
+      "file": "site/build/prepare/system-packages.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/build/prepare/system-text.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/build/share-images.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/catalogue-moon-labels.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/components/ChildList.astro",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/components/ContextNavigationMarker.astro",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/components/CssEarthWordmark.astro",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/components/DatasetContextPanels.astro",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/components/DatasetDescription.astro",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/components/DatasetLegend.astro",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/components/DatasetList.astro",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/components/ObjectBreadcrumbs.astro",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/components/ObjectCardHeader.astro",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/components/ObjectFactsheet.astro",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/components/ObjectInformationPanel.astro",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/components/ObjectNavigationMarker.astro",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/components/ObjectPage.astro",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/components/ObjectPage.astro",
+      "classification": "generator/producer literal",
+      "scope": "live"
+    },
+    {
+      "file": "site/components/ObjectShell.astro",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/components/ObjectSwatchStyles.astro",
+      "classification": "generator/producer literal",
+      "scope": "live"
+    },
+    {
+      "file": "site/components/PreparedObjectPanel.astro",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/components/SequencePlayer.astro",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/components/SourcesLink.astro",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/components/SystemCard.astro",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/dataset-picker.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/dataset-response.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/dot-catalogue-data.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/dot-catalogue-data.mts",
+      "classification": "generator/producer literal",
+      "scope": "live"
+    },
+    {
+      "file": "site/env.d.ts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/exploration-catalog.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/first-view-transport.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/hosted-banks.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/hosted-banks.mts",
+      "classification": "generator/producer literal",
+      "scope": "live"
+    },
+    {
+      "file": "site/import-queue.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/information-card.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/inside-view.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/layout-sections.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/layouts/ObjectLayout.astro",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/layouts/ObjectLayout.astro",
+      "classification": "generator/producer literal",
+      "scope": "live"
+    },
+    {
+      "file": "site/navigation/navigation-content.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/navigation/navigation-fragments.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/navigation/navigation-history.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/navigation/navigation-request.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/navigation/navigation-scope.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/object-adapter.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/object-browser.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/object-children.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/object-directory.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/object-entries.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/object-entry.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/object-page-contract.mts",
+      "classification": "generator/producer literal",
+      "scope": "live"
+    },
+    {
+      "file": "site/object-page-data.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/object-systems.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/object-systems.mts",
+      "classification": "generator/producer literal",
+      "scope": "live"
+    },
+    {
+      "file": "site/object-text.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/objects.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/overview-selection.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/packaged-object-runtime.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/pages/[id].astro",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/pages/catalogues/dots.bin.ts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/pages/index.astro",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/pages/native-input.css.ts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/pages/native-input.css.ts",
+      "classification": "generator/producer literal",
+      "scope": "live"
+    },
+    {
+      "file": "site/pages/navigation/[id].astro",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/pages/objects/[id]/asset-hashes/[group].json.ts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/pages/objects/[id]/datasets/[dataset].json.ts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/pages/objects/[id]/entry.json.ts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/pages/objects/[id]/entry.json.ts",
+      "classification": "generator/producer literal",
+      "scope": "live"
+    },
+    {
+      "file": "site/pages/objects/[id]/first-view.json.ts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/pages/objects/[id]/object.json.ts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/pages/robots.txt.ts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/pages/sitemap.xml.ts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/pages/world/anywhere.json.ts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/pages/world/context-assets/[id].json.ts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/pages/world/dots/[id].bin.ts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/pages/world/orbits/[id].bin.ts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/pages/world/places/[id].json.ts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/pages/world/places/[id].json.ts",
+      "classification": "generator/producer literal",
+      "scope": "live"
+    },
+    {
+      "file": "site/pages/world/system-views/[id].json.ts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/pages/world/system-views/[id].json.ts",
+      "classification": "generator/producer literal",
+      "scope": "live"
+    },
+    {
+      "file": "site/pages/world/systems/[id].json.ts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/pages/world/systems/[id].json.ts",
+      "classification": "generator/producer literal",
+      "scope": "live"
+    },
+    {
+      "file": "site/planetary-system-members.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/planetary-system-members.mts",
+      "classification": "generator/producer literal",
+      "scope": "live"
+    },
+    {
+      "file": "site/prepare-body-moons.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/prepared-arrival.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/prepared-panel-content.shared-readers.test.mts",
+      "classification": "generator/producer literal",
+      "scope": "live"
+    },
+    {
+      "file": "site/prepared-world-navigation.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/prepared-world-navigation.mts",
+      "classification": "generator/producer literal",
+      "scope": "live"
+    },
+    {
+      "file": "site/prepared-world-presentation.mts",
+      "classification": "generator/producer literal",
+      "scope": "live"
+    },
+    {
+      "file": "site/prepared-world-presentation.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/prepared/prepared-world-context-node-source.mts",
+      "classification": "generator/producer literal",
+      "scope": "live"
+    },
+    {
+      "file": "site/root-object.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/satellite-selection.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/satellite-systems.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/scene/camera-handover.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/scene/scene-activation.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/scene/scene-datasets.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/scene/scene-feature.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/scene/scene-publication.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/scene/scene-registry.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/scene/scene-router.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/scene/scene-selection.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/scene/scene-session.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/scene/scene-subject.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/scene/scene-transition.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/scene/scene-transition.mts",
+      "classification": "generator/producer literal",
+      "scope": "live"
+    },
+    {
+      "file": "site/scene/scene-view.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/scene/scene-world.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/search/prepared-catalogue-index.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/search/prepared-catalogue-index.mts",
+      "classification": "generator/producer literal",
+      "scope": "live"
+    },
+    {
+      "file": "site/search/search-client.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/search/search-objects.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/selection-presentation.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/seo-trail.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/seo.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/server/feature-pin.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/server/load-prepared-scene.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/server/search-response.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/server/search-route.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/server/search-server.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/shared-imports.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/shell/object-shell-client.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/shell/object-shell-types.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/shell/shell-settings.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/shell/shell-sheet.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/site.css",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/social-images.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/source-documentation.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/startup-billboard.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/startup-boot.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/startup-world.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/stellar-extents.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/system-card.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/system-framing-radii.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/system-framing.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/system-framing.mts",
+      "classification": "generator/producer literal",
+      "scope": "live"
+    },
+    {
+      "file": "site/tab-panels.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/test/application-world-frames.test.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/test/application-world-visibility.test.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/test/arrival-billboard.test.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/test/asset-origin.test.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/test/body-additions.test.mts",
+      "classification": "generator/producer literal",
+      "scope": "live"
+    },
+    {
+      "file": "site/test/body-moons.test.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/test/browser-node-imports.test.mts",
+      "classification": "generator/producer literal",
+      "scope": "live"
+    },
+    {
+      "file": "site/test/built-pages.test.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/test/camera-handover.test.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/test/category-frames.test.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/test/chart-pixel-alignment.test.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/test/compact-spectrum.test.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/test/dataset-picker.test.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/test/dataset-response.test.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/test/dataset-url.test.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/test/destination-browser.test.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/test/diagnostic-recorder.test.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/test/error-report.test.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/test/first-view-transport.test.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/test/fixtures/objects.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/test/fixtures/saturn-prepared.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/test/hosted-banks.test.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/test/import-queue.test.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/test/in-flight-loader.test.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/test/information-card-sections.test.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/test/initial-shell-context.test.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/test/moon-labels.test.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/test/navigation-fragments.test.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/test/navigation-fragments.test.mts",
+      "classification": "generator/producer literal",
+      "scope": "live"
+    },
+    {
+      "file": "site/test/navigation-history.test.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/test/navigation-ontology.test.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/test/navigation-preparation.test.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/test/navigation-preparation.test.mts",
+      "classification": "generator/producer literal",
+      "scope": "live"
+    },
+    {
+      "file": "site/test/navigation-request.test.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/test/navigation-router-context.mts",
+      "classification": "generator/producer literal",
+      "scope": "live"
+    },
+    {
+      "file": "site/test/navigation-scope.test.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/test/navigation-styles.test.mts",
+      "classification": "generator/producer literal",
+      "scope": "live"
+    },
+    {
+      "file": "site/test/navigation-test-values.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/test/navigation-timing.test.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/test/nebula-search.test.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/test/object-children.test.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/test/object-directory.test.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/test/object-navigation.test.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/test/object-package-contract.test.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/test/object-package-contract.test.mts",
+      "classification": "generator/producer literal",
+      "scope": "live"
+    },
+    {
+      "file": "site/test/object-page-data.test.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/test/object-page-data.test.mts",
+      "classification": "generator/producer literal",
+      "scope": "live"
+    },
+    {
+      "file": "site/test/object-systems.test.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/test/object-text.test.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/test/overview-selection.test.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/test/prepare-context-availability.test.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/test/prepared-arrival.test.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/test/prepared-body-billboards.test.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/test/prepared-dataset-facts.test.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/test/prepared-dataset-legends.test.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/test/prepared-descriptor.test.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/test/prepared-icons.test.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/test/prepared-icons.test.mts",
+      "classification": "generator/producer literal",
+      "scope": "live"
+    },
+    {
+      "file": "site/test/prepared-panel-content.test.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/test/prepared-presentation-bindings.test.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/test/prepared-presentation-bindings.test.mts",
+      "classification": "generator/producer literal",
+      "scope": "live"
+    },
+    {
+      "file": "site/test/prepared-world-context.test.ts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/test/prepared-world-context.test.ts",
+      "classification": "generator/producer literal",
+      "scope": "live"
+    },
+    {
+      "file": "site/test/prepared-world-navigation.test.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/test/restore-inputs.test.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/test/restore-inputs.test.mts",
+      "classification": "generator/producer literal",
+      "scope": "live"
+    },
+    {
+      "file": "site/test/runtime-package.test.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/test/runtime-policy.test.mts",
+      "classification": "generator/producer literal",
+      "scope": "live"
+    },
+    {
+      "file": "site/test/satellite-arrival-framing.test.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/test/satellite-systems.test.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/test/scene-contract.test.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/test/scene-publication.test.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/test/scene-session.test.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/test/scientific-chart-order.test.mts",
+      "classification": "generator/producer literal",
+      "scope": "live"
+    },
+    {
+      "file": "site/test/search-api.test.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/test/search-response.test.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/test/seo-discovery.test.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/test/seo.test.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/test/setup-assets.test.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/test/shell-settings.test.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/test/showcase.test.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/test/source-link.test.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/test/startup-billboard.test.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/test/startup-cover.test.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/test/startup-requests.test.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/test/stellar-extents.test.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/test/system-framing.test.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/test/system-text.test.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/test/system-view-file.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/test/view-readout.test.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/test/view-url-runtime.test.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/test/volume-presentation.test.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/test/web-analytics.test.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/test/world-stars.test.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/test/world-tables.test.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/test/zoom-scope.test.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/view-readout.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/view-url-runtime.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/volume-presentation.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/world-approach.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/world-context-plan.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/world-objects.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/world-objects.mts",
+      "classification": "generator/producer literal",
+      "scope": "live"
+    },
+    {
+      "file": "site/world-places.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/world-system-views.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/world-system-views.mts",
+      "classification": "generator/producer literal",
+      "scope": "live"
+    },
+    {
+      "file": "site/zoom-scope.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "src/objects/README.md",
+      "classification": "docs code-span",
+      "scope": "live"
+    },
+    {
+      "file": "src/objects/antares/README.md",
+      "classification": "docs code-span",
+      "scope": "live"
+    },
+    {
+      "file": "src/objects/eps-indi-ba/README.md",
+      "classification": "docs link",
+      "scope": "live"
+    },
+    {
+      "file": "src/objects/hd-189733-companion/README.md",
+      "classification": "docs link",
+      "scope": "live"
+    },
+    {
+      "file": "src/objects/kelt-9b/README.md",
+      "classification": "docs link",
+      "scope": "live"
+    },
+    {
+      "file": "src/objects/lmc-volume/investigations.json",
+      "classification": "generator/producer literal",
+      "scope": "live"
+    },
+    {
+      "file": "src/objects/luhman-16/README.md",
+      "classification": "docs link",
+      "scope": "live"
+    },
+    {
+      "file": "src/objects/nearby-universe-galaxies/README.md",
+      "classification": "docs link",
+      "scope": "live"
+    },
+    {
+      "file": "src/objects/observable-universe-cmb/README.md",
+      "classification": "docs code-span",
+      "scope": "live"
+    },
+    {
+      "file": "src/objects/observable-universe-cmb/README.md",
+      "classification": "docs link",
+      "scope": "live"
+    },
+    {
+      "file": "src/objects/trappist-1/README.md",
+      "classification": "docs link",
+      "scope": "live"
+    },
+    {
+      "file": "src/objects/trappist-1c/README.md",
+      "classification": "docs link",
+      "scope": "live"
+    },
+    {
+      "file": "src/objects/trappist-1d/README.md",
+      "classification": "docs link",
+      "scope": "live"
+    },
+    {
+      "file": "src/objects/trappist-1e/README.md",
+      "classification": "docs link",
+      "scope": "live"
+    },
+    {
+      "file": "src/objects/trappist-1f/README.md",
+      "classification": "docs link",
+      "scope": "live"
+    },
+    {
+      "file": "src/objects/trappist-1g/README.md",
+      "classification": "docs link",
+      "scope": "live"
+    },
+    {
+      "file": "src/objects/trappist-1h/README.md",
+      "classification": "docs link",
+      "scope": "live"
+    },
+    {
+      "file": "src/objects/wasp-103b/README.md",
+      "classification": "docs link",
+      "scope": "live"
+    },
+    {
+      "file": "src/objects/wasp-121/README.md",
+      "classification": "docs link",
+      "scope": "live"
+    },
+    {
+      "file": "src/objects/wasp-18/README.md",
+      "classification": "docs link",
+      "scope": "live"
+    },
+    {
+      "file": "src/objects/wasp-76/README.md",
+      "classification": "docs link",
+      "scope": "live"
+    },
+    {
+      "file": "src/objects/wasp-76b/README.md",
+      "classification": "docs link",
+      "scope": "live"
+    },
+    {
+      "file": "src/tsconfig.tests.json",
+      "classification": "tsconfig/eslint/package.json",
+      "scope": "live"
+    },
+    {
+      "file": "tsconfig.integration-tests.json",
+      "classification": "tsconfig/eslint/package.json",
+      "scope": "live"
+    },
+    {
+      "file": "tsconfig.scripts.json",
+      "classification": "tsconfig/eslint/package.json",
+      "scope": "live"
+    }
+  ],
+  "relativeReads": [
+    {
+      "file": "site/test/arrival-discovery.test.mts",
+      "destination": "site/build/prepare/arrival-discovery.test.mts"
+    },
+    {
+      "file": "site/test/body-additions.test.mts",
+      "destination": "site/build/prepare/body-additions.test.mts"
+    },
+    {
+      "file": "site/test/category-frames.test.mts",
+      "destination": "site/build/prepare/category-frames.test.mts"
+    },
+    {
+      "file": "site/test/compact-spectrum.test.mts",
+      "destination": "site/overview/compact-spectrum.test.mts"
+    },
+    {
+      "file": "site/test/dataset-response.test.mts",
+      "destination": "site/server/dataset-response.test.mts"
+    },
+    {
+      "file": "site/test/folded-transit.test.mts",
+      "destination": "site/build/charts/folded-transit.test.mts"
+    },
+    {
+      "file": "site/test/hosted-banks.test.mts",
+      "destination": "site/build/prepare/hosted-banks.test.mts"
+    },
+    {
+      "file": "site/test/load-object-content.mts",
+      "destination": "site/build/content/load-object-content.test-support.mts"
+    },
+    {
+      "file": "site/test/lonlat-slice-table.test.mts",
+      "destination": "site/build/prepare/lonlat-slice-table.test.mts"
+    },
+    {
+      "file": "site/test/moon-labels.test.mts",
+      "destination": "site/world/moon-labels.test.mts"
+    },
+    {
+      "file": "site/test/neutral-catalogue-color.test.mts",
+      "destination": "site/journeys/neutral-catalogue-color.test.mts"
+    },
+    {
+      "file": "site/test/object-page-data.test.mts",
+      "destination": "site/server/object-page-data.test.mts"
+    },
+    {
+      "file": "site/test/object-systems.test.mts",
+      "destination": "site/world/object-systems.test.mts"
+    },
+    {
+      "file": "site/test/prepare-spatial-context.test.mts",
+      "destination": "site/build/prepare/prepare-spatial-context.test.mts"
+    },
+    {
+      "file": "site/test/prepared-panel-content.test.mts",
+      "destination": "site/content/prepared-panel-content.test.mts"
+    },
+    {
+      "file": "site/test/prepared-world-context.test.ts",
+      "destination": "site/world/prepared-world-context.test.ts"
+    },
+    {
+      "file": "site/test/satellite-arrival-framing.test.mts",
+      "destination": "site/navigation/satellite-arrival-framing.test.mts"
+    },
+    {
+      "file": "site/test/scene-contract.test.mts",
+      "destination": "site/world/scene-contract.test.mts"
+    },
+    {
+      "file": "site/test/system-framing.test.mts",
+      "destination": "site/world/system-framing.test.mts"
+    },
+    {
+      "file": "site/test/system-text.test.mts",
+      "destination": "site/build/prepare/system-text.test.mts"
+    },
+    {
+      "file": "site/test/system-view-file.mts",
+      "destination": "site/world/system-view-file.test-support.mts"
+    },
+    {
+      "file": "site/test/world-billboards.test.mts",
+      "destination": "site/journeys/world-billboards.test.mts"
+    },
+    {
+      "file": "site/test/world-stars.test.mts",
+      "destination": "site/world/world-stars.test.mts"
+    },
+    {
+      "file": "site/test/world-tables.test.mts",
+      "destination": "site/world/world-tables.test.mts"
+    },
+    {
+      "file": "site/test/zoom-scope.test.mts",
+      "destination": "site/world/zoom-scope.test.mts"
+    }
+  ]
+}

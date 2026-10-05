@@ -1,0 +1,502 @@
+{
+  "tiers": [
+    {
+      "tier": 0,
+      "name": "Browser input, DOM and serialized import queue",
+      "folders": [
+        "site/browser"
+      ]
+    },
+    {
+      "tier": 0,
+      "name": "Preserved input records and artwork",
+      "folders": [
+        "site/source"
+      ]
+    },
+    {
+      "tier": 0,
+      "name": "Preserved third-party notices",
+      "folders": [
+        "site/vendor"
+      ]
+    },
+    {
+      "tier": 0,
+      "name": "Shared page and shell interfaces",
+      "folders": [
+        "site/contracts"
+      ]
+    },
+    {
+      "tier": 0,
+      "name": "Prepared transports and generated inputs",
+      "folders": [
+        "site/prepared"
+      ]
+    },
+    {
+      "tier": 0,
+      "name": "Object identities, routes and held addresses",
+      "folders": [
+        "site/model"
+      ]
+    },
+    {
+      "tier": 1,
+      "name": "Surface-map measurements and view formatting",
+      "folders": [
+        "site/minimap"
+      ]
+    },
+    {
+      "tier": 2,
+      "name": "Shared framing, visibility and camera context",
+      "folders": [
+        "site/world"
+      ]
+    },
+    {
+      "tier": 0,
+      "name": "Prepared spectral overview readers",
+      "folders": [
+        "site/overview"
+      ]
+    },
+    {
+      "tier": 3,
+      "name": "Card content, citations and metadata",
+      "folders": [
+        "site/content"
+      ]
+    },
+    {
+      "tier": 4,
+      "name": "Catalogue search and result presentation",
+      "folders": [
+        "site/search"
+      ]
+    },
+    {
+      "tier": 3,
+      "name": "History, requests, flights and arrivals",
+      "folders": [
+        "site/navigation"
+      ]
+    },
+    {
+      "tier": 4,
+      "name": "Committed selection and camera handovers",
+      "folders": [
+        "site/selection"
+      ]
+    },
+    {
+      "tier": 5,
+      "name": "Retained shell controls and panels",
+      "folders": [
+        "site/shell"
+      ]
+    },
+    {
+      "tier": 6,
+      "name": "Scene sessions, replacement and publication",
+      "folders": [
+        "site/scene"
+      ]
+    },
+    {
+      "tier": 7,
+      "name": "Page boot helpers and router entry",
+      "folders": [
+        "site/startup"
+      ]
+    },
+    {
+      "tier": 6,
+      "name": "SSR readers, responses and host middleware",
+      "folders": [
+        "site/server"
+      ]
+    },
+    {
+      "tier": 8,
+      "name": "Shared page frame and its styles",
+      "folders": [
+        "site/layouts"
+      ]
+    },
+    {
+      "tier": 9,
+      "name": "Reusable Astro markup and SSR composition",
+      "folders": [
+        "site/components"
+      ]
+    },
+    {
+      "tier": 10,
+      "name": "Routes and object-page entries",
+      "folders": [
+        "site/pages"
+      ]
+    },
+    {
+      "tier": 7,
+      "name": "Site preparation and packaging",
+      "folders": [
+        "site/build"
+      ]
+    },
+    {
+      "tier": 11,
+      "name": "Retired test folder; no final occupants",
+      "folders": [
+        "site/test"
+      ]
+    },
+    {
+      "tier": 11,
+      "name": "Cross-cutting journeys and support",
+      "folders": [
+        "site/journeys"
+      ]
+    },
+    {
+      "tier": 1,
+      "name": "Startup reads and object catalogue directory",
+      "folders": [
+        "site/directory"
+      ]
+    },
+    {
+      "tier": 0,
+      "name": "Server and build prepared-asset origin",
+      "folders": [
+        "site/server-assets"
+      ]
+    }
+  ],
+  "root": {
+    "allow": [
+      "site/env.d.ts"
+    ],
+    "entries": [
+      "site/env.d.ts"
+    ],
+    "tier": 11
+  },
+  "lateral": [],
+  "tests": "any-tier",
+  "testFiles": [
+    "site/build/source-maps.test.mts",
+    "site/navigation/evidence/star-click/one-click.jpg",
+    "site/prepared-panel-content.shared-readers.test.mts",
+    "site/test/application-world-frames.test.mts",
+    "site/test/application-world-visibility.test.mts",
+    "site/test/arrival-billboard.test.mts",
+    "site/test/arrival-discovery.test.mts",
+    "site/test/asset-origin.test.mts",
+    "site/test/astro-component-imports.test.mts",
+    "site/test/authored-object-fixture.mts",
+    "site/test/body-additions.test.mts",
+    "site/test/body-moons.test.mts",
+    "site/test/browser-node-imports.test.mts",
+    "site/test/built-pages.test.mts",
+    "site/test/camera-handover.test.mts",
+    "site/test/catalogue-window.test.mts",
+    "site/test/category-frames.test.mts",
+    "site/test/chart-pixel-alignment.test.mts",
+    "site/test/charts.test.ts",
+    "site/test/check-preparation-inputs.test.mts",
+    "site/test/cloudflare-worker.test.mts",
+    "site/test/compact-spectrum.test.mts",
+    "site/test/context-lineage.test.mts",
+    "site/test/dataset-picker.test.mts",
+    "site/test/dataset-response.test.mts",
+    "site/test/dataset-url.test.mts",
+    "site/test/descriptor-roundtrip.test.mts",
+    "site/test/destination-browser.test.mts",
+    "site/test/diagnostic-accessor.test.mts",
+    "site/test/diagnostic-recorder.test.mts",
+    "site/test/error-report.test.mts",
+    "site/test/evidence/passive-minimaps/browser.json",
+    "site/test/evidence/passive-minimaps/earth.png",
+    "site/test/evidence/passive-minimaps/jupiter-sequence.png",
+    "site/test/first-view-transport.test.mts",
+    "site/test/fixtures/anchor-table.mts",
+    "site/test/fixtures/context-package.mts",
+    "site/test/fixtures/galaxies/captures.json",
+    "site/test/fixtures/object-content-fixture.mts",
+    "site/test/fixtures/objects.mts",
+    "site/test/fixtures/prepared-schemas.mts",
+    "site/test/fixtures/saturn-prepared.mts",
+    "site/test/folded-transit.test.mts",
+    "site/test/galactic-focus.test.mts",
+    "site/test/hosted-banks.test.mts",
+    "site/test/import-queue.test.mts",
+    "site/test/in-flight-loader.test.mts",
+    "site/test/information-card-sections.test.mts",
+    "site/test/information-tab-styles.test.mts",
+    "site/test/initial-shell-context.test.mts",
+    "site/test/inline-page-stylesheet.test.mts",
+    "site/test/kept-load.test.mts",
+    "site/test/list-distance.test.mts",
+    "site/test/load-object-content.mts",
+    "site/test/lonlat-slice-table.test.mts",
+    "site/test/moon-labels.test.mts",
+    "site/test/navigation-content.test.mts",
+    "site/test/navigation-fragments.test.mts",
+    "site/test/navigation-history.test.mts",
+    "site/test/navigation-lifecycle.test.mts",
+    "site/test/navigation-ontology.test.mts",
+    "site/test/navigation-preparation.test.mts",
+    "site/test/navigation-readiness.test.mts",
+    "site/test/navigation-request.test.mts",
+    "site/test/navigation-router-context.mts",
+    "site/test/navigation-scope.test.mts",
+    "site/test/navigation-shell-content.test.mts",
+    "site/test/navigation-styles.test.mts",
+    "site/test/navigation-test-values.mts",
+    "site/test/navigation-timing.test.mts",
+    "site/test/nebula-search.test.mts",
+    "site/test/neutral-catalogue-color.test.mts",
+    "site/test/object-children.test.mts",
+    "site/test/object-control-binding.test.mts",
+    "site/test/object-directory.test.mts",
+    "site/test/object-navigation.test.mts",
+    "site/test/object-package-contract.test.mts",
+    "site/test/object-page-data.test.mts",
+    "site/test/object-result.test.mts",
+    "site/test/object-runtime-contract.test.mts",
+    "site/test/object-search-rank.test.mts",
+    "site/test/object-systems.test.mts",
+    "site/test/object-text.test.mts",
+    "site/test/overview-selection.test.mts",
+    "site/test/preparation-boundary.test.mts",
+    "site/test/prepare-authored.test.mts",
+    "site/test/prepare-context-availability.test.mts",
+    "site/test/prepare-object-json.test.mts",
+    "site/test/prepare-spatial-context.test.mts",
+    "site/test/prepare-text.test.mts",
+    "site/test/prepared-arrival.test.mts",
+    "site/test/prepared-body-billboards.test.mts",
+    "site/test/prepared-dataset-facts.test.mts",
+    "site/test/prepared-dataset-labels.test.mts",
+    "site/test/prepared-dataset-legends.test.mts",
+    "site/test/prepared-descriptor.test.mts",
+    "site/test/prepared-icons.test.mts",
+    "site/test/prepared-motion-css.test.mts",
+    "site/test/prepared-panel-content.test.mts",
+    "site/test/prepared-presentation-bindings.test.mts",
+    "site/test/prepared-presentation-contract.test.mts",
+    "site/test/prepared-world-context.test.ts",
+    "site/test/prepared-world-navigation.test.mts",
+    "site/test/preview.test.mts",
+    "site/test/production-diagnostics.test.mts",
+    "site/test/recovery-commands.test.mts",
+    "site/test/refresh-charts.test.mts",
+    "site/test/rendered-page.test.mts",
+    "site/test/restore-inputs.test.mts",
+    "site/test/run-script-chain.test.mts",
+    "site/test/runtime-package.test.mts",
+    "site/test/runtime-policy.test.mts",
+    "site/test/satellite-arrival-framing.test.mts",
+    "site/test/satellite-systems.test.mts",
+    "site/test/scene-contract.test.mts",
+    "site/test/scene-datasets.test.mts",
+    "site/test/scene-frame.test.mts",
+    "site/test/scene-publication.test.mts",
+    "site/test/scene-session.test.mts",
+    "site/test/scientific-chart-order.test.mts",
+    "site/test/search-api.test.mts",
+    "site/test/search-response.test.mts",
+    "site/test/seo-discovery.mts",
+    "site/test/seo-discovery.test.mts",
+    "site/test/seo.test.mts",
+    "site/test/setup-assets.test.mts",
+    "site/test/shell-selectors.test.mts",
+    "site/test/shell-settings.test.mts",
+    "site/test/shell-sheet.test.mts",
+    "site/test/showcase.test.mts",
+    "site/test/source-evidence-values.mts",
+    "site/test/source-link.test.mts",
+    "site/test/startup-billboard.test.mts",
+    "site/test/startup-cover.test.mts",
+    "site/test/startup-requests.test.mts",
+    "site/test/stellar-extents.test.mts",
+    "site/test/surface-label-loop.test.mts",
+    "site/test/surface-minimap.test.mts",
+    "site/test/system-framing.test.mts",
+    "site/test/system-text.test.mts",
+    "site/test/system-view-file.mts",
+    "site/test/view-readout.test.mts",
+    "site/test/view-url-runtime.test.mts",
+    "site/test/volume-presentation.test.mts",
+    "site/test/web-analytics.test.mts",
+    "site/test/world-billboards.test.mts",
+    "site/test/world-stars.test.mts",
+    "site/test/world-tables.test.mts",
+    "site/test/zoom-scope.test.mts"
+  ],
+  "assets": [
+    "site/layouts/cubic-sky.css",
+    "site/moon-labels.prepared.json",
+    "site/navigation/evidence/star-click/one-click.jpg",
+    "site/object-navigation-marker.css",
+    "site/object-shell.css",
+    "site/prepared-catalogue.mjs",
+    "site/prepared-context-bank-assets.json",
+    "site/prepared-context-json.mts",
+    "site/prepared-context-objects.mts",
+    "site/prepared-dataset-billboards.json",
+    "site/prepared-dataset-volumes.json",
+    "site/prepared-dot-catalogues.json",
+    "site/prepared-facilities.json",
+    "site/prepared-feature-index.json",
+    "site/prepared-fit-boxes.json",
+    "site/prepared-hosted-banks.json",
+    "site/prepared-navigation-markers.mjs",
+    "site/prepared-shell-icons.mjs",
+    "site/prepared-shell-titles.mjs",
+    "site/prepared-source-credits.json",
+    "site/prepared-sources.json",
+    "site/prepared-stellar-extents.json",
+    "site/prepared-world-presentation.json",
+    "site/shell/maps-shell.css",
+    "site/shell/settings-panel.css",
+    "site/shell/shell-layout.css",
+    "site/site.css",
+    "site/source/agency-logos.json",
+    "site/source/branding/particle-globe.svg",
+    "site/source/facilities/catalog.json",
+    "site/source/facilities/emblem-library.json",
+    "site/source/facilities/emblems/README.md",
+    "site/source/facilities/emblems/originals/cassini.png",
+    "site/source/facilities/emblems/originals/dawn.png",
+    "site/source/facilities/emblems/originals/galileo.png",
+    "site/source/facilities/emblems/originals/grail-prepared.webp",
+    "site/source/facilities/emblems/originals/hayabusa.jpg",
+    "site/source/facilities/emblems/originals/hayabusa2.png",
+    "site/source/facilities/emblems/originals/hubble-commons.png",
+    "site/source/facilities/emblems/originals/juno.svg",
+    "site/source/facilities/emblems/originals/lro-commons.png",
+    "site/source/facilities/emblems/originals/magellan.png",
+    "site/source/facilities/emblems/originals/mars-global-surveyor-jpl.jpg",
+    "site/source/facilities/emblems/originals/messenger.png",
+    "site/source/facilities/emblems/originals/mro.png",
+    "site/source/facilities/emblems/originals/near-shoemaker.png",
+    "site/source/facilities/emblems/originals/new-horizons.png",
+    "site/source/facilities/emblems/originals/odyssey.png",
+    "site/source/facilities/emblems/originals/osiris-rex.png",
+    "site/source/facilities/emblems/originals/rosetta-patch.png",
+    "site/source/facilities/emblems/originals/sdo.png",
+    "site/source/facilities/emblems/originals/suomi-npp-commons.png",
+    "site/source/facilities/emblems/originals/terra-commons.png",
+    "site/source/facilities/emblems/originals/viking-commons.jpg",
+    "site/source/facilities/emblems/originals/voyager-1.png",
+    "site/source/facilities/emblems/originals/voyager-2.png",
+    "site/source/facilities/emblems/source-records.json",
+    "site/source/facilities/photograph-records.json",
+    "site/source/facilities/render-library.json",
+    "site/source/icons/SOURCE.md",
+    "site/source/icons/codepen-mark-LICENSE.txt",
+    "site/source/icons/github-mark-LICENSE.txt",
+    "site/source/icons/symbol-half-black-circle.svg",
+    "site/source/icons/symbol-proportional-to.svg",
+    "site/source/icons/symbol-quarter-phase.svg",
+    "site/source/icons/symbol-reference-mark.svg",
+    "site/source/icons/symbol-sine-wave.svg",
+    "site/source/icons/symbol-square-crosshatch-fill.svg",
+    "site/source/jpl-small-body-mission-targets.json",
+    "site/source/major-moons.json",
+    "site/source/moon-catalogues.json",
+    "site/source/moon-horizons.json.gz",
+    "site/source/overview-facts.json",
+    "site/source/scientific-charts/planetary-context.json",
+    "site/source/source-icons.json",
+    "site/source/titles/title-factsheet.svg",
+    "site/source/titles/title-reflectance-spectrum.svg",
+    "site/source/titles/title-settings.svg",
+    "site/source/titles/title-sources-resources.svg",
+    "site/source/titles/title-surface-dataset.svg",
+    "site/source/titles/title-surface-photos.svg",
+    "site/source/titles/title-telescope-images.svg",
+    "site/source/titles/title-thermal-profile.svg",
+    "site/test/evidence/passive-minimaps/browser.json",
+    "site/test/evidence/passive-minimaps/earth.png",
+    "site/test/evidence/passive-minimaps/jupiter-sequence.png",
+    "site/test/fixtures/galaxies/captures.json",
+    "site/vendor/cesium-LICENSE.md",
+    "site/wordmark.css"
+  ],
+  "status": "draft",
+  "forbid": [
+    {
+      "from": [
+        "site/browser",
+        "site/source",
+        "site/vendor",
+        "site/contracts",
+        "site/prepared",
+        "site/model",
+        "site/minimap",
+        "site/world",
+        "site/overview",
+        "site/content",
+        "site/search",
+        "site/navigation",
+        "site/selection",
+        "site/shell",
+        "site/scene",
+        "site/startup",
+        "site/directory"
+      ],
+      "to": [
+        "site/server",
+        "site/build",
+        "site/server-assets"
+      ],
+      "reason": "Client owners cannot import server responses or preparation."
+    },
+    {
+      "from": [
+        "site/browser",
+        "site/source",
+        "site/vendor",
+        "site/contracts",
+        "site/prepared",
+        "site/model",
+        "site/minimap",
+        "site/world",
+        "site/overview",
+        "site/content",
+        "site/search",
+        "site/navigation",
+        "site/selection",
+        "site/shell",
+        "site/scene",
+        "site/server",
+        "site/components",
+        "site/build",
+        "site/directory"
+      ],
+      "to": [
+        "site/startup"
+      ],
+      "reason": "Only layout and page entries enter the startup composition root."
+    },
+    {
+      "to": [
+        "site/build"
+      ],
+      "reason": "Page composition cannot import preparation.",
+      "from": [
+        "site/layouts",
+        "site/components",
+        "site/pages"
+      ]
+    }
+  ],
+  "draftUntil": "2026-11-02",
+  "warningCeiling": 1
+}

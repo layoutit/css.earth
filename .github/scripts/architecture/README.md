@@ -93,3 +93,46 @@ without git history; tests pin each ceiling to its current count. Removing debt 
 the ceiling, while any increase requires an explicit reviewed ceiling change. Missing
 budget files fail in every checkout. Unit mutations prove math, sorting, root calls,
 and budget growth fail; tests and comments are excluded through the TypeScript syntax tree.
+
+## Pending site layout
+
+The draft is in docs/site-architecture.md. Moves, sibling tiers, explicit denies,
+atomic edit groups, loader alternatives and a compact path/class inventory live beside it.
+`site-architecture.mts` shares the ordinary check's live graph. Draft findings fail after draftUntil or above warningCeiling; allowed warnings emit Actions annotations.
+`status: "enforced"` makes every finding fail. Existing rules and scanner failures still fail.
+The architecture baseline is unchanged.
+
+Tests are leaf consumers (`tests: "any-tier"`) but remain in file SCCs. Production
+cannot import tests, fixtures or helpers. New helpers use `.test-support.mts`.
+Only env.d.ts remains at the source root; generated declarations sit beside their
+ignored modules in prepared. Lazy and type imports count. Lateral edges are forbidden.
+
+The edits envelope contains `edits` with stable ids and `changes` that partition
+those ids in S3 order. New modules declare imports. Minimality removes each atomic
+change group; a removal must fail. Sequence replays S3 at current paths and S4 with
+unmoved files in synthetic legacy. The doc explains the loader proof limitation.
+
+Acceptance reads declarations from tracked files only, so ignored generated files never change the result. From a clean
+checkout with installed dependencies:
+
+```sh
+export PATH=$HOME/.nvm/versions/node/v22.23.2/bin:$PATH
+pnpm install --frozen-lockfile
+node .github/scripts/architecture/import-declarations.mts --prefix site/ --out output/plan7/imports.json --check-against-scanner
+node .github/scripts/architecture/site-architecture.mts --write
+node .github/scripts/architecture/site-architecture.mts --accept
+node .github/scripts/architecture/site-architecture.mts --identity
+node .github/scripts/architecture/site-architecture.mts --sequence
+node .github/scripts/architecture/site-architecture.mts --minimality
+pnpm check:architecture
+```
+
+Each move PR deletes applied map entries and updates asset/test identities,
+remaining edits, tables, references and wiring. It runs
+`node .github/scripts/architecture/site-architecture.mts --references --old <old-paths>`
+after moves; zero live occurrences are required. Historical and plan pointers are
+reported separately. S3 PRs remove applied groups. L6 removes null deletion entries.
+`--references` prints full line-numbered evidence on demand; do not commit that output. `--write` regenerates all marked tables
+and references. Ordinary additions during the draft do not turn plan warnings into
+application refactors. Strict acceptance, sequence and minimality remain blocking
+proof commands. See the draft for the contributor workflow and S3 behavior gates.
