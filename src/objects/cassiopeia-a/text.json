@@ -22,7 +22,7 @@
     ]
   },
   "introduction": {
-    "text": "ESA/Webb's picture of it is a shell here: its smooth light on the forward shock's sphere, its ejecta as far in front or behind as their measured speeds put them.",
+    "text": "ESA/Webb's pictures of it are shells here: their smooth light on the forward shock's sphere, their ejecta as far in front or behind as measured speeds put them.",
     "sources": [
       {
         "catalogueId": "esawebb-weic2330a",
@@ -30,6 +30,13 @@
         "label": "ESA/Webb weic2330a: NASA, ESA, CSA, STScI, D. Milisavljevic (Purdue University), T. Temim (Princeton University), I. De Looze (University of Gent)",
         "checked": "2026-10-04",
         "locator": "Cas A (NIRCam image); NIRCam 1.62, 3.56 and 4.44 µm"
+      },
+      {
+        "catalogueId": "esawebb-weic2311a",
+        "url": "https://esawebb.org/images/weic2311a/",
+        "label": "ESA/Webb weic2311a: NASA, ESA, CSA, D. Milisavljevic (Purdue University), T. Temim (Princeton University), I. De Looze (UGent), J. DePasquale (STScI)",
+        "checked": "2026-10-05",
+        "locator": "Cassiopeia A (MIRI Image); 5.6 to 25.5 µm"
       },
       {
         "catalogueId": "publication-delaney-2010-cassiopeia-a-3d",
@@ -74,6 +81,55 @@
           "label": "Chandra X-ray Center: Cassiopeia A in 3D, ASCII VTK files created from telescope data (NASA/CXC/SAO)",
           "checked": "2026-10-04",
           "locator": "newar-ascii.vtk: the [Ar II] surface of the paper's model"
+        }
+      ]
+    },
+    "mid-infrared": {
+      "title": "Cassiopeia A in the mid infrared",
+      "detail": "4008 × 4009 px",
+      "summary": "Webb's mid-infrared picture as a shell: warm dust on the forward shock's sphere, ejecta at their measured depths.",
+      "sources": [
+        {
+          "catalogueId": "esawebb-weic2311a",
+          "url": "https://esawebb.org/images/weic2311a/",
+          "label": "ESA/Webb weic2311a: NASA, ESA, CSA, D. Milisavljevic (Purdue University), T. Temim (Princeton University), I. De Looze (UGent), J. DePasquale (STScI)",
+          "checked": "2026-10-05",
+          "locator": "Cassiopeia A (MIRI Image)"
+        },
+        {
+          "catalogueId": "publication-delaney-2010-cassiopeia-a-3d",
+          "url": "https://arxiv.org/abs/1011.3858",
+          "label": "DeLaney et al. (2010), ApJ 725, 2038: the three-dimensional structure of Cassiopeia A",
+          "checked": "2026-10-04",
+          "locator": "Sect. IV.1: the shell fit that turns a Doppler speed into a depth"
+        },
+        {
+          "catalogueId": "chandra-cassiopeia-a-3d-model",
+          "url": "https://chandra.harvard.edu/resources/illustrations/3d_files.html",
+          "label": "Chandra X-ray Center: Cassiopeia A in 3D, ASCII VTK files created from telescope data (NASA/CXC/SAO)",
+          "checked": "2026-10-04",
+          "locator": "newar-ascii.vtk: the [Ar II] surface of the paper's model"
+        },
+        {
+          "catalogueId": "publication-milisavljevic-2024-cassiopeia-a-jwst-survey",
+          "url": "https://arxiv.org/abs/2401.02477",
+          "label": "Milisavljevic et al. (2024): a JWST survey of the supernova remnant Cassiopeia A",
+          "checked": "2026-10-05",
+          "locator": "Table 1: the sources of strong emission in each filter; F770W holds [Ar II] 6.99 µm"
+        },
+        {
+          "catalogueId": "publication-de-looze-2024-cassiopeia-a-green-monster",
+          "url": "https://arxiv.org/abs/2410.05402",
+          "label": "De Looze et al. (2024): the Green Monster hiding in front of Cas A",
+          "checked": "2026-10-05",
+          "locator": "Abstract: the Green Monster is circumstellar material on the near side, in front of the remnant"
+        },
+        {
+          "catalogueId": "publication-vink-2024-cassiopeia-a-green-monster-x-rays",
+          "url": "https://arxiv.org/abs/2401.02491",
+          "label": "Vink et al. (2024): X-ray diagnostics of Cassiopeia A's Green Monster",
+          "checked": "2026-10-05",
+          "locator": "Abstract: every Green Monster spectrum is blueshifted by about 2,300 km/s, so the structure is on the near side"
         }
       ]
     }
