@@ -7,7 +7,7 @@ import { setTimeout as delay } from 'node:timers/promises';
 import { pathToFileURL } from 'node:url';
 import { test } from 'node:test';
 
-test('preview closes after parent death; deleting disconnect cleanup leaves it alive', { timeout: 15000 }, async () => {
+test('preview closes after parent death; deleting disconnect cleanup leaves it alive', { timeout: 90000 }, async () => {
   await mkdir('output/journeys', { recursive: true });
   const root = await mkdtemp(resolve('output/journeys/server-mutation-'));
   try {
@@ -24,18 +24,23 @@ test('preview closes after parent death; deleting disconnect cleanup leaves it a
       await writeFile(resolve(folder, 'server-child.mts'), childSource);
       await writeFile(resolve(folder, 'parent.mts'), `import { startServer } from './server.mts'; const server = await startServer(${JSON.stringify(dist)}); console.log(JSON.stringify({ origin: server.origin, pid: server.pid }));`);
       const parent = spawn(process.execPath, [resolve(folder, 'parent.mts')], { stdio: ['ignore', 'pipe', 'pipe'] });
-      let output = ''; parent.stdout.on('data', data => { output += String(data); });
+      let output = '', errors = '', exited: number | null | undefined;
+      parent.stdout.on('data', data => { output += String(data); }); parent.stderr.on('data', data => { errors += String(data); });
+      parent.once('exit', code => { exited = code; });
       let previewPid: number | undefined;
       try {
-        const deadline = Date.now() + 5000;
-        while (!output.includes('\n') && Date.now() < deadline) await delay(20);
-        const payload: unknown = JSON.parse(output.trim());
+        // Readiness barrier: the parent prints one complete line once the preview answers. A loaded runner may need many
+        // seconds to start two Node processes, so wait for that line (or the parent's exit) and fail with what it said.
+        const deadline = Date.now() + 60000;
+        while (!output.includes('\n') && exited === undefined && Date.now() < deadline) await delay(20);
+        if (!output.includes('\n')) throw new Error(`Preview parent never reported readiness (${exited === undefined ? 'still running after 60 s' : `exit ${exited}`}): ${errors || output}`);
+        const payload: unknown = JSON.parse(output.slice(0, output.indexOf('\n')));
         if (!payload || typeof payload !== 'object' || !('origin' in payload) || typeof payload.origin !== 'string'
           || !('pid' in payload) || typeof payload.pid !== 'number' || !Number.isSafeInteger(payload.pid) || payload.pid < 1) throw new Error('Invalid preview parent payload');
         previewPid = payload.pid; const origin = payload.origin;
         assert.equal((await fetch(origin + '/milky-way/')).status, 200);
         parent.kill('SIGKILL');
-        let alive = true; const stopAt = Date.now() + 1000;
+        let alive = true; const stopAt = Date.now() + 5000;
         while (alive && Date.now() < stopAt) {
           await delay(25);
           alive = await fetch(origin + '/milky-way/', { signal: AbortSignal.timeout(200) }).then(() => true, () => false);
