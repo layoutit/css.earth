@@ -45,3 +45,16 @@ test('a measurement that cannot run fails the stage and skips the comparison', a
     assert.match(performanceSummary(ordinary), /Reported only/u);
   } finally { await rm(out, { recursive: true, force: true }); }
 });
+
+test('cached base skips measurement and produces the same stable report', async () => {
+  const out = await mkdtemp(join(tmpdir(), 'performance-cached-'));
+  try {
+    const calls: string[] = [];
+    const run = async (name: string) => { calls.push(name); return { exitCode: 0, output: name === 'compare' ? 'stable comparison' : 'measured' }; };
+    await performanceStage('/tools', '/base', '/head', out, 'semantic', false, run);
+    const fresh = await readFile(join(out, 'performance.json')); calls.length = 0;
+    await performanceStage('/tools', '/base', '/head', out, 'semantic', false, run, true);
+    assert.deepEqual(calls, ['measure-head', 'compare']);
+    assert.deepEqual(await readFile(join(out, 'performance.json')), fresh);
+  } finally { await rm(out, { recursive: true, force: true }); }
+});
