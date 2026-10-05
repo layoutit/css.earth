@@ -10,7 +10,7 @@ import { createSourceMeshLighting } from '../source-mesh-lighting.ts';
 import { prepareNativePhotographicAtlas, samplePhotographicTexel } from '../native-photograph.ts';
 import { loadNativePhotograph } from '../native-photograph-source.ts';
 import { renderRadialSnapshot } from '../radial-snapshot.ts';
-import { neutralShapeAtlas, shapeFillIllumination } from '../shape-material.ts';
+import { neutralShapeAtlas, shapeFillIllumination, shapeMaterialColor } from '../shape-material.ts';
 import { requireTerrainMesh, closestTrianglePoint } from '../../../geometry/index.ts';
 import { resolve, dirname } from 'node:path';
 import { gzipSync } from 'node:zlib';
@@ -78,10 +78,11 @@ export async function prepareRadialMaterials({ radial, surfaces, config, source,
   let reusedLightingSamples = 0;
   const emit = createRasterEmitter(publicDirectory, config.publicBase);
   for (const surface of surfaces) {
-    const neutralShape = surface.material && requireRecord(surface.material).kind === 'unobserved-neutral';
+    // A shape view's constant material: the neutral gray, or the body's measured whole-disc color.
+    const shapeColor = shapeMaterialColor(surface.material), neutralShape = shapeColor !== null;
     if (neutralShape && !lighting && !surface.textureScale &&
         !config.geometry.radialTerrain.thumbnail && !radial.faces.some(face => face.estimated) && !radial.grid?.imageGrid) {
-      const { flood, shadow } = neutralShapeAtlas(radial, sunDirection);
+      const { flood, shadow } = neutralShapeAtlas(radial, sunDirection, shapeColor);
       const raw = { width: canonicalWidth, height: canonicalHeight, channels: 4 as const };
       // No quality: the emitter writes it in the lossy lane (lossy-lane.ts).
       const encoding = { alphaQuality: 100, effort: 4 };

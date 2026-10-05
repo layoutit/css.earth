@@ -36,23 +36,25 @@
   },
   "datasets": {
     "titleKey": "datasets",
-    "defaultDataset": "model",
+    "defaultDataset": "color",
     "labels": {
-      "model": "Shape model"
+      "color": "Color"
     },
     "controls": [
       {
-        "id": "model",
-        "label": "Shape model",
-        "thumbnail": "/scenes/ymir/ymir-model-thumbnail.webp",
-        "surface": "ymir-model-surface@2x.webp",
-        "poles": "ymir-model-poles@2x.webp",
+        "id": "color",
+        "label": "Color",
+        "qualification": "Whole-disc color from published photometry, painted uniformly. Its brightness is an estimate: nobody has measured this moon's albedo, so it takes the 6% its size assumes. The surface itself is unresolved.",
+        "thumbnail": "/scenes/ymir/ymir-color-thumbnail.webp",
+        "surface": "ymir-color-surface@2x.webp",
+        "poles": "ymir-color-surface@2x.webp",
         "source": {
-          "id": "shape-approximation",
+          "id": "ymir-disc-color",
           "path": "../manifest.json",
-          "url": "https://tilmanndenk.de/outersaturnianmoons/ymir/"
+          "url": "https://doi.org/10.1016/j.icarus.2007.04.020"
         },
-        "notes": "Approximate triangular shape from published 20, 24 and 25 km equatorial sides and an 8 km polar semiaxis. Polar caps and the initial meridian are assumed; the original inversion mesh is unavailable."
+        "falseColor": false,
+        "notes": "Approximate triangular shape from published 20, 24 and 25 km equatorial sides and an 8 km polar semiaxis. Polar caps and the initial meridian are assumed; the original inversion mesh is unavailable. One mean color for the whole disc (Grav and Bauer 2007), scaled to an assumed 6% geometric albedo, an estimate; no terrain, albedo pattern or color variation is drawn."
       }
     ]
   },
@@ -80,6 +82,12 @@
       "role": "observations",
       "description": "Cassini ISS observation archive",
       "href": "https://pds-rings.seti.org/cassini/iss/"
+    },
+    {
+      "label": "Grav and Bauer (2007)",
+      "role": "surface",
+      "description": "Whole-disc colors",
+      "href": "https://doi.org/10.1016/j.icarus.2007.04.020"
     }
   ],
   "provenance": {

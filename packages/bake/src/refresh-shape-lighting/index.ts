@@ -8,7 +8,7 @@ import { resolve, basename } from 'node:path';
 import sharp from 'sharp';
 import { requireRecord, requireArray, requireString } from '@cssearth/core';
 import type { SolarGeometry } from '../objects/scene/index.ts';
-import { parseSolidPreparationSource, SHAPE_MATERIAL, neutralShapeAtlas, createRasterEmitter, retainedShapeAtlas } from '../objects/layers/terrestrial/index.ts';
+import { parseSolidPreparationSource, SHAPE_MATERIAL, neutralShapeAtlas, neutralShapeViews, createRasterEmitter, retainedShapeAtlas } from '../objects/layers/terrestrial/index.ts';
 
 const json = async (path: string) => requireRecord(JSON.parse(await readFile(path, 'utf8')));
 const records = (value: unknown) => requireArray(value).map(value => requireRecord(value));
@@ -22,7 +22,7 @@ export async function stageShapeLighting(id: string, solarGeometry: SolarGeometr
   const surfaces = await json(resolve(directory, 'prepared/surfaces.json'));
   const material = await json(resolve(directory, 'prepared/material.json'));
   const inventory = await json(resolve(directory, 'inventory.json'));
-  const views = config.raster.shapeViews ?? [];
+  const views = neutralShapeViews(config.raster.shapeViews);
   const replacements = new Map<string, Record<string, unknown>>();
   const changed = new Map<string, { filename: string; bytes: number; sha256: string }>();
   const emit = createRasterEmitter(stage, config.publicBase);

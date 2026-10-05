@@ -11,25 +11,23 @@
     "gutter": 64,
     "poleSize": 128,
     "reportMissingPixels": true,
-    "observations": [
-      {
-        "id": "model",
-        "consumer": "model-surface",
-        "validity": {
-          "kind": "image-rgb-no-data",
-          "noData": 160,
-          "centerLongitude": 180
-        },
-        "metadata": {
-          "label": "Shape model",
-          "modeled": true,
-          "coverage": "Approximate triangular shape from published 20, 24 and 25 km equatorial sides and an 8 km polar semiaxis. Polar caps and the initial meridian are assumed; the original inversion mesh is unavailable."
-        }
-      }
-    ],
+    "observations": [],
     "scientific": [],
     "observedColors": [],
-    "mosaics": []
+    "mosaics": [],
+    "shapeViews": [
+      {
+        "id": "color",
+        "label": "Color",
+        "consumer": "shape",
+        "science": {
+          "kind": "disc-integrated-color",
+          "source": "photometry/disc-color.json",
+          "illuminant": "reference/CIE_std_illum_D65.csv",
+          "qualification": "Whole-disc color from published photometry, painted uniformly. Its brightness is an estimate: nobody has measured this moon's albedo, so it takes the 6% its size assumes. The surface itself is unresolved."
+        }
+      }
+    ]
   },
   "geometry": {
     "radius": 230,
@@ -37,8 +35,8 @@
     "camera": {
       "framingScale": 0.6436658250254509
     },
-    "mapUrl": "/scenes/ymir/ymir-model-surface@2x.webp",
-    "polesUrl": "/scenes/ymir/ymir-model-poles@2x.webp",
+    "mapUrl": "/scenes/ymir/ymir-color-surface@2x.webp",
+    "polesUrl": "/scenes/ymir/ymir-color-surface@2x.webp",
     "radialTerrain": {
       "path": "shape/model.tab",
       "format": "pds-radius-table",
@@ -53,7 +51,7 @@
       "texelsPerFace": 4096,
       "simplification": {
         "targetFaces": 480,
-        "maximumErrorMeters": 288.0,
+        "maximumErrorMeters": 288,
         "method": "source-meshoptimizer"
       },
       "primitive": "u"
@@ -63,6 +61,6 @@
     "sunSource": "JPL Saturn-system ephemeris. Published approximate spin pole converted from ecliptic J2000 to ICRF; arbitrary initial meridian. This is not a known current surface phase."
   },
   "presentation": {
-    "defaultDataset": "model"
+    "defaultDataset": "color"
   }
 }

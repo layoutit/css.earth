@@ -1,0 +1,43 @@
+{
+  "id": "grav-2015-neowise-irregular-satellites",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Grav et al. (2015): NEOWISE: Observations of the irregular satellites of Jupiter and Saturn",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.1088/0004-637X/809/1/3"
+    },
+    {
+      "type": "arXiv",
+      "value": "1505.07820"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1088/0004-637X/809/1/3",
+      "label": "Published article"
+    },
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/1505.07820",
+      "label": "arXiv preprint"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/1505.07820",
+      "checkedOn": "2026-10-05",
+      "locator": "Table 3, thermal fit results"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "The Astrophysical Journal 809, 3",
+  "creators": [
+    "T. Grav",
+    "et al."
+  ],
+  "publicationDate": "2015"
+}

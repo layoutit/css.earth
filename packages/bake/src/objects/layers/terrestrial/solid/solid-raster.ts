@@ -4,7 +4,7 @@ import { createRasterEmitter } from '../raster-output.ts';
 import { parseSolidRasterConfig, parseSurfaceSource } from '../records/solid-source.ts';
 import { radialModelForDataset } from '../alternative-datasets.ts';
 import { renderRadialSnapshot } from '../radial-snapshot.ts';
-import { SHAPE_MATERIAL, shapeMaterialRaster } from '../shape-material.ts';
+import { MEASURED_SHAPE_MATERIAL, SHAPE_MATERIAL, shapeMaterialRaster } from '../shape-material.ts';
 import { lambertAttenuationAtlas, type LambertAttenuationParameters, requireTerrainMesh } from '../../../geometry/index.ts';
 import { limbSphereFrame, loadLimbLaw, meanObservedColor } from '../../../../photometry/index.ts';
 import type { LimbBlock } from '@cssearth/objects';
@@ -12,9 +12,10 @@ import type { WebpOptions } from 'sharp';
 import { writeLossyWebp, paintMissingCoverage, applyUnderlay } from '../../../../raster/index.ts';
 import type { createSourceManifest } from '@cssearth/objects/node';
 import type { RadialState, SolidSurface } from './solid-contract.ts';
-import { encodeBandColor, interpolatePalette } from '../../../color/index.ts';
+import { encodeBandColor, interpolatePalette, loadDiscIntegratedColor } from '../../../color/index.ts';
+import { readCie1931ColorMatching } from '../../../sources/index.ts';
 import { shape, text, number, requireRecord, requireString } from '@cssearth/core';
-import { mkdir, writeFile } from 'node:fs/promises';
+import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { basename, resolve } from 'node:path';
 import sharp from 'sharp';
 import { packProjectiveSurfaceRaster, reprojectSolidBodySurfaceRaster, prepareSolidBodyPoleRaster } from '../../../../scene/index.ts';
@@ -97,10 +98,15 @@ export async function prepareSolidRasters({ sourceDirectory, publicDirectory, ou
     const terrain = requireRecord(requireRecord(modelConfig.geometry).radialTerrain);
     const entry = entries.find(input => input.path === terrain.path);
     if (!entry) throw new Error('Shape display is not bound to the rendered source mesh.');
-    const rgb = shapeMaterialRaster(width, height);
+    // A body with published whole-disc photometry shows that one mean color on its shape; any other shape stays neutral gray.
+    const measured = view.science ? await loadDiscIntegratedColor(async path => { await source.validatePath(path); return readFile(resolve(sourceDirectory, path)); },
+      view.science, view.science.source, readCie1931ColorMatching) : null;
+    const rgb = shapeMaterialRaster(width, height, measured?.srgb);
     surfaces.push(await packSurface(view.id, rgb, null, { label: view.label,
-      appearance: SHAPE_MATERIAL.appearance,
-      material: { kind: 'unobserved-neutral', color: SHAPE_MATERIAL.color },
+      ...(measured ? { appearance: MEASURED_SHAPE_MATERIAL.appearance,
+        material: { kind: MEASURED_SHAPE_MATERIAL.kind, color: `#${measured.srgb.map(channel => channel.toString(16).padStart(2, '0')).join('')}`,
+          source: view.science!.source, linearSrgb: measured.linear, filterReflectance: measured.reflectance } }
+      : { appearance: SHAPE_MATERIAL.appearance, material: { kind: 'unobserved-neutral', color: SHAPE_MATERIAL.color } }),
       ...(config.raster.reportMissingPixels ? { missingPixels: width * height } : {}),
       source: { id: entry.id } }));
   }

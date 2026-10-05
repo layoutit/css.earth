@@ -42,10 +42,10 @@
     ]
   },
   "datasets": {
-    "model": {
-      "title": "Triangular shape approximation",
-      "detail": "Approximate shape",
-      "summary": "A triangular shape built from the side lengths of a published light-curve model. The polar caps are assumed."
+    "color": {
+      "title": "Whole-disc color, estimated brightness",
+      "detail": "Color; brightness estimated",
+      "summary": "Measured average color on a triangular light-curve shape. Brightness is an estimate: two moons like it reflect 5% and 6%."
     }
   }
 }

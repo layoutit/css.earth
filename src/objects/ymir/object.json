@@ -53,7 +53,7 @@
           "projection": "equirectangular",
           "datasets": [
             {
-              "id": "model",
+              "id": "color",
               "source": "content",
               "material": "lighting"
             }
@@ -104,12 +104,9 @@
       }
     },
     "catalog": {
-      "illustrationDatasets": [
-        "model"
-      ],
       "name": "Ymir",
       "classification": "satellite",
-      "color": "#9a9a9a",
+      "color": "#9f9991",
       "distanceAu": 9.58,
       "description": "Backward-orbiting outer moon of Saturn with a triangular outline.",
       "systemName": "Solar System",

@@ -15,6 +15,14 @@ wavelengths; a piecewise-linear spectrum through them is integrated with the CIE
 1931 observer under D65 and scaled so V reflectance equals the albedo. The color
 is uniform: it is one measured mean, not a map. Makemake and Eris use it on the raster
 route; Haumea uses the same method through the shape-model route's `surfaces` list.
+On the terrestrial route a `shapeViews` entry names the record in its `science` block
+(`kind: disc-integrated-color`, `source`, `illuminant`), and the view keeps the gentle
+shape shading below with the measured color in place of the gray: Ymir and Siarnaq, with the
+colors of Grav and Bauer (2007). Where nobody has measured the albedo, the record marks the
+assumed value as an estimate and the dataset says so
+([estimates](../.agents/skills/celestial-skill/references/scientific-faithfulness.md#estimates)).
+
+![Ymir and Siarnaq in the app at their default views, each in its measured color](images/shape-only-material/measured-color-ymir-siarnaq.webp)
 All three also carry NASA's illustrative model texture as a second, non-default
 dataset (`glb-base-color`); it is listed in the package's illustration datasets and is
 not an observation. Ten exoplanets (HD 189733 b, GJ 504 b, Kepler-452 b and TRAPPIST-1 b–h)

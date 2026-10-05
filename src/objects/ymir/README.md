@@ -6,6 +6,10 @@
 
 - The separate **9.6 km nominal photometric radius** depends on assumed reflectivity; the source's diameter estimate is approximately 19 km with −3/+5 km uncertainty.
 
+- **Color:** [Grav and Bauer (2007), Table 2](https://doi.org/10.1016/j.icarus.2007.04.020) measured the whole disc at B−V = 0.789 ± 0.024, V−R = 0.438 ± 0.018 and V−I = 0.884 ± 0.018, as the weighted mean of 2 nights: 2005-01-06 (Keck I LRIS, Johnson-Kron-Cousins BVRI filters); 2005-04-13 (Gemini North GMOS, SDSS g'r'i'z' filters converted to BVRI by the authors). [The record](source/photometry/disc-color.json) turns them into one sRGB color, #484541, with the method of [shape-only material](../../../docs/shape-only-material.md).
+
+- **Brightness (an estimate):** nobody has measured Ymir's albedo. The color is scaled to 6%, the value [Denk et al. (2018)](https://tilmanndenk.de/wp-content/uploads/DenkEtAl2018_IrregularMoons.pdf) assume for its size. The two small irregular moons of Saturn with a measured albedo are Albiorix at 6.2 ± 2.8% and Siarnaq at 5.0 ± 1.7%; eleven irregular moons of Jupiter range from 2.9% to 5.7% ([Grav et al. (2015), Table 3](https://doi.org/10.1088/0004-637X/809/1/3)).
+
 ## Evidence
 
 - **Original convex mesh:** the author's actual linked `619_Ymi_5_Shape.obj` endpoint returned HTTP 404 during this survey, consistent with its unavailable status on the page.
@@ -18,9 +22,11 @@
 
 - This elliptical polar-cap law is assumed; it does not recover unseen surface details or reproduce the original inversion solution.
 
-- The author's mass and density estimates are explicitly speculative and are not treated as measured facts. The shared missing-data grid covers the entire shape, with Flood lighting by default and directional Shadows available.
+- The author's mass and density estimates are explicitly speculative and are not treated as measured facts. One whole-disc color covers the entire shape, with Flood lighting by default and directional Shadows available.
 
 - The pole solution does not establish a current landmark phase; the initial meridian is arbitrary.
+
+- The color is one mean for the whole disc, painted evenly: no terrain, albedo pattern or color variation is implied. Its brightness is an estimate and would change with a measured albedo.
 
 [Inputs](source/manifest.json) · [Delivered files](inventory.json) · [Credits](NOTICE.md) · [Investigation ledger](investigations.json)
 

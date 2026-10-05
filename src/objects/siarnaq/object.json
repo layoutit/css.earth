@@ -53,7 +53,7 @@
           "projection": "equirectangular",
           "datasets": [
             {
-              "id": "model",
+              "id": "color",
               "source": "content",
               "material": "lighting"
             }
@@ -104,12 +104,9 @@
       }
     },
     "catalog": {
-      "illustrationDatasets": [
-        "model"
-      ],
       "name": "Siarnaq",
       "classification": "satellite",
-      "color": "#9a9a9a",
+      "color": "#a2998c",
       "distanceAu": 9.58,
       "description": "Largest of Saturn's Inuit-group moons, about 39 km across.",
       "systemName": "Solar System",
