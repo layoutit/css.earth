@@ -49,7 +49,7 @@ The archive uses Claudia Double Prime, which the [GRaND catalogue](https://sbnar
 
 Each grid is read at Claudia longitude + 150°, so no cell is resampled. For scale, mean surface gravity is about 25,300 mGal.
 
-**Geology.** The Yingst et al. (2023) map has 136 polygons in 18 units in the authors' own colors. `geology-grid.py` rasterizes it at 2048 x 1024 in its own coordinates ([plan](source/geology/prepare-grid.json), [units](source/geology/vesta-geologic-units.json)). Contacts and linear features are not drawn.
+**Geology.** The Yingst et al. (2023) map has 136 polygons in 18 units in the authors' own colors. `geology-grid.py` rasterizes it at 2048 x 1024 in its own coordinates ([plan](source/geology/prepare-grid.json), [units](source/geology/vesta-geologic-units.json)). Contacts and linear features are not drawn. Its atlas has every other dataset's size since 5 October 2026: stored at a quarter of it, the dataset was drawn enlarged and cost 293 to 335 ms a switch on an iPad, against 75 to 76 ms now.
 
 **Named features.** `presentation/surface-map.json` puts the map's left edge at 150° in the Gazetteer's Claudia Double Prime frame, and each anchor sits on the shape model.
 

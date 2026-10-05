@@ -22,7 +22,7 @@
         "metadata": {
           "label": "Shape model",
           "modeled": true,
-          "coverage": "ESA/RMOC MTP019 measured nucleus shape, simplified for display. Neutral gray is a model material, not a photograph or an albedo map. The measured north pole is retained; rotational phase is arbitrary. Solar geometry uses the shared 3 September 2026 epoch."
+          "coverage": "SHAP7 measured nucleus shape (Preusker et al.), simplified for display. Neutral gray is a model material, not a photograph or an albedo map. The measured north pole is retained; rotational phase is arbitrary. Solar geometry uses the shared 3 September 2026 epoch."
         }
       }
     ],
@@ -700,17 +700,17 @@
     "mapUrl": "/scenes/comet-67p/comet-67p-model-surface@2x.webp",
     "polesUrl": "/scenes/comet-67p/comet-67p-model-poles@2x.webp",
     "radialTerrain": {
-      "path": "shape/mtp019.obj",
-      "format": "wavefront-obj",
+      "path": "geology/shap7-regions.vtk",
+      "format": "vtk-polydata",
       "grid": {
         "metersPerUnit": 1000,
-        "expectedVertices": 52098,
-        "expectedFaces": 104192
+        "expectedVertices": 62471,
+        "expectedFaces": 124938
       },
       "faceBudget": 2000,
-      "texelsPerFace": 4096,
+      "texelsPerFace": 8192,
       "simplification": {
-        "targetFaces": 1000,
+        "targetFaces": 2000,
         "maximumErrorMeters": 50,
         "method": "source-meshoptimizer"
       },
@@ -747,118 +747,7 @@
           }
         ]
       }
-    },
-    "radialTerrainAlternatives": [
-      {
-        "path": "geology/shap7-regions.vtk",
-        "format": "vtk-polydata",
-        "grid": {
-          "metersPerUnit": 1000,
-          "expectedVertices": 62471,
-          "expectedFaces": 124938
-        },
-        "faceBudget": 2000,
-        "texelsPerFace": 8192,
-        "simplification": {
-          "targetFaces": 2000,
-          "maximumErrorMeters": 50,
-          "method": "source-meshoptimizer"
-        },
-        "primitive": "u",
-        "sourceLighting": {
-          "maximumDistanceMeters": 150,
-          "rayOffsetMeters": 0.25,
-          "ambient": 0.16,
-          "diffuse": 0.84,
-          "floodLights": [
-            {
-              "direction": [
-                0,
-                0,
-                1
-              ],
-              "weight": 0.36
-            },
-            {
-              "direction": [
-                0,
-                1,
-                0
-              ],
-              "weight": 0.24
-            },
-            {
-              "direction": [
-                1,
-                0,
-                0
-              ],
-              "weight": 0.24
-            }
-          ]
-        },
-        "datasetId": "osiris",
-        "additionalDatasetIds": [
-          "regions",
-          "geology"
-        ]
-      },
-      {
-        "path": "science/cg_spc_shap5_097k_cart.wrl",
-        "format": "vrml-mesh",
-        "grid": {
-          "expectedVertices": 48420,
-          "expectedFaces": 96834,
-          "metersPerUnit": 1000
-        },
-        "faceBudget": 2000,
-        "texelsPerFace": 4096,
-        "simplification": {
-          "targetFaces": 1500,
-          "maximumErrorMeters": 50,
-          "method": "source-meshoptimizer"
-        },
-        "primitive": "u",
-        "sourceLighting": {
-          "maximumDistanceMeters": 150,
-          "rayOffsetMeters": 0.25,
-          "ambient": 0.16,
-          "diffuse": 0.84,
-          "floodLights": [
-            {
-              "direction": [
-                0,
-                0,
-                1
-              ],
-              "weight": 0.36
-            },
-            {
-              "direction": [
-                0,
-                1,
-                0
-              ],
-              "weight": 0.24
-            },
-            {
-              "direction": [
-                1,
-                0,
-                0
-              ],
-              "weight": 0.24
-            }
-          ]
-        },
-        "datasetId": "albedo",
-        "additionalDatasetIds": [
-          "slope",
-          "absorption",
-          "ice"
-        ]
-      }
-    ]
+    }
   },
   "celestial": {
     "sunSource": "JPL Horizons osculating elements; ESA/RMOC measured pole in the Cheops frame.",

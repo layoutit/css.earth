@@ -33,14 +33,13 @@
       {
         "id": "shape",
         "label": "Neutral shape model",
-        "value": "ESA/RMOC MTP019",
+        "value": "SHAP7",
         "source": {
-          "url": "https://archives.esac.esa.int/psa/ftp/INTERNATIONAL-ROSETTA-MISSION/SHAPE/RO-C-MULTI-5-67P-SHAPE-V2.0/DATA/TRIPLATE/SPC_ESA/MTP019/CSHP_DV_130_01_LORES_OBJ.OBJ",
-          "label": "Comet 67P · mtp019",
-          "checked": "2026-09-16",
-          "path": "source/shape/mtp019.lbl",
-          "catalogueId": "source-comet-67p-mtp019",
-          "locator": "\"SPC-ESA MTP019 CARTESIAN TRIPLATE MODEL FOR COMET 67P/C-G\""
+          "url": "https://doi.org/10.17632/2845znt54k.1",
+          "label": "Comet 67P · shap7-region-cells",
+          "checked": "2026-10-05",
+          "catalogueId": "source-comet-67p-shap7-region-cells",
+          "locator": "Data for: Regional unit definition for the nucleus of comet 67P/Churyumov-Gerasimenko on the SHAP7 model"
         }
       }
     ],
@@ -67,20 +66,15 @@
         "surface": "comet-67p-model-surface@2x.webp",
         "poles": "comet-67p-model-poles@2x.webp",
         "source": {
-          "id": "mtp019",
+          "id": "shap7-region-cells",
           "path": "../manifest.json",
-          "url": "https://archives.esac.esa.int/psa/ftp/INTERNATIONAL-ROSETTA-MISSION/SHAPE/RO-C-MULTI-5-67P-SHAPE-V2.0/DATA/TRIPLATE/SPC_ESA/MTP019/CSHP_DV_130_01_LORES_OBJ.OBJ"
+          "url": "https://doi.org/10.17632/2845znt54k.1"
         },
         "facts": [
           {
             "id": "model",
             "label": "Model",
-            "value": "RMOC MTP019"
-          },
-          {
-            "id": "observed",
-            "label": "Observed",
-            "value": "Aug 2014 – Aug 2015"
+            "value": "SHAP7"
           }
         ],
         "notes": "Nucleus shape measured by Rosetta and simplified for display. The gray surface is a model material."

@@ -75,4 +75,4 @@ Limb columns: the position-angle residual between the projected limb and the pho
 - **VIMS interpretation:** neither view measures ice abundance. No photometric correction or level matching is applied. Native gaps remain missing, and packing can soften infrared mask edges.
 - **Named features:** outlines are not published nomenclature boundaries.
 - The retained rotation phase has no new qualification. The SBIB regional RGB candidate has no qualified registration to the revised shape and center.
-- Display atlases use half dimensions, which reduces display detail, not the source observations.
+- Every display atlas is 2,774 × 2,953 pixels, 64 × 64 texels a face, which reduces display detail, not the source observations. Until 5 October 2026 the layout was twice those dimensions: the ISS photograph filled it (5,548 × 5,906 from a 0.47 km a pixel frame) and froze an iPad's page at 15 seconds a frame, and the other atlases were stored at half of it and drawn enlarged, 729 to 947 ms a dataset switch against 200 to 210 ms now.

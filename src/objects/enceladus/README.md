@@ -18,7 +18,7 @@ The [investigation ledger](investigations.json) records source choices, trials a
 
 ## Processing
 
-**Monochrome and elevation.** The mosaic (16098 × 8049, 100 m grid, more than 500 Cassini ISS clear-filter images) is stretched linearly from DN 0–16500 to 0–255. The terrain model (8049 × 4025, 200 m grid) uses a blue–neutral–warm palette over −1 to +1 km with northwest hillshade and no exaggeration. Both are resampled to 8192 × 4096, and missing observations get the shared gray grid. Photographic maps use `textureScale: 0.25`.
+**Monochrome and elevation.** The mosaic (16098 × 8049, 100 m grid, more than 500 Cassini ISS clear-filter images) is stretched linearly from DN 0–16500 to 0–255. The terrain model (8049 × 4025, 200 m grid) uses a blue–neutral–warm palette over −1 to +1 km with northwest hillshade and no exaggeration. Both are resampled to 8192 × 4096, and missing observations get the shared gray grid. Their display atlases use quarter dimensions (`textureScale: 0.25`, 2,080 × 1,536 pixels), which reduces display detail, not the source data.
 
 **Infrared color.** NASA's original 8192 × 4096 TIFF is used unchanged. The red channel is the 3.1/1.65 µm ratio, green 2.0 µm and blue 1.8 µm reflectance, combined with ISS camera detail. The published grid puts 0° at the image centre, so the reader rolls it into the 0–360° frame. We used the distributed grid, not the mislabeled longitudes in the paper's Figures 9 and 11 ([corrigendum](https://doi.org/10.1016/j.icarus.2020.113954)).
 
@@ -42,6 +42,7 @@ Each lighting frame is the law relative to the flood-lit disc centre. Akimov's f
 ![Enceladus on the iPad at rest on 2026-09-30: the former 2,000-triangle mesh, the sphere and the IAU ellipsoid](evidence/ipad-mesh-sphere-ellipsoid.webp)
 
 - iPad, stress journey on 2026-09-30, measured with the same 452 leaves as a sphere: frames over 33 ms fell from 71 to 39, the longest from 144 to 102 ms, and composited layers from 213 to 155.
+- iPad, dataset switches on 2026-10-05, longest frame of a switch: picking elevation took 568 to 613 ms and any other dataset 189 to 289 ms. The elevation atlas was 8,320 × 6,144 pixels (7.5 MB of the body's 10.5 MB), and every face kept a 128 px box sized for it, with the smaller atlases drawn enlarged; the bake had never measured this body's faces. With elevation at quarter dimensions and each face in the box its image fills, elevation takes 51 to 68 ms and the others 50 to 85 ms, and the body's download is 3.7 MB.
 
 ## Known problems
 

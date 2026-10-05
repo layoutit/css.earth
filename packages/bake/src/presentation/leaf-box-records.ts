@@ -12,7 +12,7 @@ import { scanCssDeclarations } from './css-declaration-scanner.ts';
 // coefficients and its density, with the steps' initial values on their bindings. The runtime writes a leaf's final
 // values from it (packages/renderer/src/rendering/prepared-leaf-box-direct.ts); no variable, `calc()` or parse reaches
 // the page. A later bindings run expands the records back to the variable form first, so it measures what it always did.
-import { LEAF_BOX_FACTOR, LEAF_BOX_PROPERTY } from './leaf-box.ts';
+import { LEAF_BOX_FACTOR, LEAF_BOX_PROPERTY, leafBoxLengths } from './leaf-box.ts';
 import { SURFACE_SEAM_OUTSET_PROPERTY } from '../scene/index.ts';
 
 interface Property { name: string; value: string; custom: boolean }
@@ -162,8 +162,34 @@ export function withLeafBoxRecords<D extends Definition>(definition: D): D {
   return { ...definition, tree: rebuildPropertyTable({ ...tree, properties }, stripped), viewBindings: bindings };
 }
 
+/** What withLeafBoxRecords leaves of a leaf the bindings did not measure: its matrix and the factor's inverse at one. A
+ * seam term is not restored: its coefficients are not in the constant form. */
+const UNMEASURED = /^matrix3d\([^)]*\) scale\(1\)$/;
+/** The lengths the node builder scales by the leaf's factor (prepared-node-tree.ts). */
+const BOXED = ['width', 'height', 'backgroundSize', 'backgroundPosition'];
+
+/** Leaves stored as constants, back in the variable form: the next bindings run measures those that render by then, and
+ * the others become the same constants again. A leaf missed once otherwise keeps its full box for good. Dione, Rhea and
+ * Enceladus held their 452 leaves in full boxes this way, whatever the image's size, and an iPad took 189 to 289 ms to
+ * switch between Enceladus's quarter-size datasets (2026-10-05). */
+function withVariableConstants<D extends Definition>(definition: D): D {
+  const { tree } = definition, properties = [...tree.properties];
+  let restored = false;
+  const nodes = tree.nodes.map(node => {
+    if (!node.properties.some(id => tree.properties[id]!.name === 'transform' && UNMEASURED.test(tree.properties[id]!.value))) return node;
+    restored = true;
+    return { ...node, properties: node.properties.map(id => {
+      const property = tree.properties[id]!;
+      const value = property.name === 'transform' ? `${property.value.slice(0, -' scale(1)'.length)}${UNSCALE}` : BOXED.includes(property.name) ? leafBoxLengths(property.value) : property.value;
+      return value === property.value ? id : properties.push({ ...property, value }) - 1;
+    }) };
+  });
+  return restored ? { ...definition, tree: rebuildPropertyTable({ ...tree, properties }, nodes) } : definition;
+}
+
 /** The records expanded back to the variable form the bindings measure (the inverse of withLeafBoxRecords). */
-export function withoutLeafBoxRecords<D extends Definition>(definition: D): D {
+export function withoutLeafBoxRecords<D extends Definition>(stored: D): D {
+  const definition = withVariableConstants(stored);
   const binding = definition.viewBindings.find(leafBoxBinding);
   const seam = definition.viewBindings.find(seamBinding);
   if (!binding?.boxes && !seam?.boxes) return definition;

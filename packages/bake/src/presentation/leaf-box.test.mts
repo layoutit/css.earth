@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 
-import { leafBoxBlocks, leafBoxDensity, leafBoxLengths, leafBoxPlacements, prepareLeafBoxBindings, prepareLeafBoxSteps, withLeafBoxes, LEAF_BOX_FACTOR, LEAF_BOX_PROPERTY, LEAF_BOX_SCREEN_PIXELS, LEAF_BOX_UNSCALE, type MeasuredLeafBox, createPreparedNodeTree, withLeafBoxRecords } from '@cssearth/bake/presentation';
+import { leafBoxBlocks, leafBoxDensity, leafBoxLengths, leafBoxPlacements, prepareLeafBoxBindings, prepareLeafBoxSteps, withLeafBoxes, LEAF_BOX_FACTOR, LEAF_BOX_PROPERTY, LEAF_BOX_SCREEN_PIXELS, LEAF_BOX_UNSCALE, type MeasuredLeafBox, createPreparedNodeTree, withLeafBoxRecords, withoutLeafBoxRecords } from '@cssearth/bake/presentation';
 
 const identity = (scale: number, x = 0, y = 0, z = 0) => [scale, 0, 0, 0, 0, scale, 0, 0, 0, 0, 1, 0, x, y, z, 1];
 const layer = (frame: number[], extra: Record<string, unknown> = {}) => ({ schema: 'polycss-prepared-projective-texture-layer@1', rasterScale: 1,
@@ -144,4 +144,19 @@ test('a constant atlas size set after the static style becomes the leaf\'s own l
   const { tree } = withLeafBoxRecords(definition);
   assert.equal(tree.nodes[0]!.style, 'backface-visibility:visible;width:256px;height:256px;');
   assert.deepEqual(tree.nodes[0]!.properties.map(id => tree.properties[id]!.name), ['transform']);
+});
+
+test('a leaf stored as constants returns to the variable form, and unmeasured again it is stored the same', () => {
+  const matrix = 'matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)';
+  const properties = [{ name: 'backgroundPosition', value: '-32px 0px', custom: false }, { name: 'backgroundSize', value: '4160px 3072px', custom: false },
+    { name: 'transform', value: `${matrix} scale(1)`, custom: false }, { name: 'width', value: '128px', custom: false }, { name: 'height', value: '128px', custom: false }];
+  const stored = { id: 'enceladus', viewBindings: [], tree: { nodes: [{ parent: -1, style: '', properties: [0, 1, 2, 3, 4] }], properties } };
+  const { tree } = withoutLeafBoxRecords(stored);
+  const values = Object.fromEntries(tree.nodes[0]!.properties.map(id => [tree.properties[id]!.name, tree.properties[id]!.value]));
+  assert.equal(values.transform, `${matrix} ${LEAF_BOX_UNSCALE}`);
+  assert.equal(values.width, leafBoxLengths('128px'));
+  assert.equal(values.backgroundSize, leafBoxLengths('4160px 3072px'));
+  // A zero address stays as written, as the node builder leaves it.
+  assert.equal(values.backgroundPosition, `${leafBoxLengths('-32px')} 0px`);
+  assert.deepEqual(withLeafBoxRecords(withoutLeafBoxRecords(stored)).tree, stored.tree);
 });
