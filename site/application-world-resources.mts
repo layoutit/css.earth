@@ -15,7 +15,7 @@ import { loadCatalogueDots } from './world/dot-catalogues.mts';
 import { annotationsForBodies, worldVisibilityPolicy } from './application-world-visibility.mts';
 import { STELLAR_EXTENTS } from './stellar-extents.mts';
 import { CONTEXT_DATASETS } from './world/context-datasets.mts';
-import { navigationHref } from './navigation/navigation-history.mts';
+import { navigationHref } from './model/navigation-href.mts';
 import { onObjectEntry } from './directory/object-entries.mts';
 
 /** The view an image mesh package is drawn in: the view of the dataset the mounted object shows of it (context-datasets.mts),

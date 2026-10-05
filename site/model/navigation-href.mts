@@ -6,4 +6,8 @@ export function navigationHref(windowTarget: Window) {
   return owners.get(windowTarget)?.href() ?? windowTarget.location.href;
 }
 
-export { owners };
+/** Register a live address reader; disposal only removes this registration. */
+export function registerNavigationHref(windowTarget: Window, owner: { href(): string }) {
+  owners.set(windowTarget, owner);
+  return () => { if (owners.get(windowTarget) === owner) owners.delete(windowTarget); };
+}

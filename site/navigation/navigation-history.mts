@@ -2,7 +2,7 @@ import type { BrowserWindow } from '../browser/browser-types.mts';
 import { isRecord } from '@cssearth/core';
 import { objectIdAtPath } from '../model/root-object.mts';
 import type { NavigationHistory, NavigationIntent } from './navigation-types.mts';
-import { navigationHref, owners } from '../model/navigation-href.mts';
+import { navigationHref, registerNavigationHref } from '../model/navigation-href.mts';
 export { navigationHref } from '../model/navigation-href.mts';
 type Navigate = (id: string, intent: NavigationIntent) => unknown;
 interface NavigationAnchor { href: string; target?: string; hasAttribute(name: string): boolean; getAttribute(name: string): string | null; }
@@ -189,10 +189,10 @@ export function createNavigationHistory({ windowTarget, capture, navigate, navig
     destroy() {
       if (disposed) return;
       flush(); disposed = true; listening.abort();
-      if (owners.get(windowTarget) === owner) owners.delete(windowTarget);
+      unregisterHref();
     },
   });
-  owners.set(windowTarget, owner);
+  const unregisterHref = registerNavigationHref(windowTarget, owner);
   return owner;
 }
 
