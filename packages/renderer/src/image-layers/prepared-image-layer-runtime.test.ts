@@ -128,6 +128,16 @@ test('around a body, a sheet within one sampling step of the camera or of the bo
   assert.equal(opacity()[1], '0', 'the sheet through the body is left out however far the camera is: the body is drawn in its place');
   publish([0, 0, 50]);
   assert.equal(opacity()[1], '', 'and draws again around a body that stands elsewhere');
+  // Around a body the sheets are out of their scene, under one flat element, and paint farthest first on each side of
+  // the camera; back as the page's subject they are in their scene again, sorted by the browser.
+  const over = () => ['behind', 'middle', 'ahead'].map(id => document.elements.find(element => element.dataset.imageLayerLeaf === id)!.style.zIndex ?? '');
+  assert.deepEqual(over(), ['0', '1', '2'], 'in front of them all, the nearest sheet is painted last');
+  publish([0, 0, .5]);
+  assert.deepEqual(over(), ['0', '1', '0'], 'between two sheets, each side paints toward the camera');
+  publish([0, 0, -5]);
+  assert.deepEqual(over(), ['2', '1', '0'], 'behind them all, the order is the other way');
+  publish([0, 0, -5], false);
+  assert.deepEqual(over(), ['', '', ''], 'in its own scene again a sheet has no paint order of its own');
 });
 
 test('a stack mounts a camera for each of its scenes, and a stack without leaves is not mounted and takes no part', () => {

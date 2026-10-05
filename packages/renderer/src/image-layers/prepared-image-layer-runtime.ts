@@ -48,7 +48,9 @@ export function mountPreparedCssImageLayers({ host, before, payload, resolveReso
     // Same camera-driven scene as a volume: its will-change keeps slice raster scales through rotation. A stack is one
     // scene, or the runs of leaves its view names (sceneSizes): each run under a camera of its own in the stack's
     // projection, painted in the stack's order, so the browser sorts and cuts only one run's leaves against each other.
-    const textures: { element: HTMLElement; own: string; path: string; large: boolean; sheet: Sheet | null; shown: string }[] = [];
+    const textures: { element: HTMLElement; own: string; path: string; large: boolean; sheet: Sheet | null; shown: string;
+      /** Where the leaf stands along its stack's normal, its place in that order, and the paint order last written. */
+      along: number; rank: number; over: string }[] = [];
     const runs: { camera: HTMLElement; scene: HTMLElement; mesh: HTMLElement; leaves: HTMLElement[] }[] = [];
     const view = views.find(view => view.axis === stack.axis);
     let next = 0;
@@ -60,30 +62,33 @@ export function mountPreparedCssImageLayers({ host, before, payload, resolveReso
         element.dataset.imageLayerLeaf = leaf.id;
         Object.assign(element.style, leaf.style);
         textures.push({ element, own: leaf.style.transform, path: leaf.texturePath, large: leaf.widthPx * leaf.heightPx >= LARGE_IMAGE_PIXELS,
-          sheet: leaf.verticesUnits ? sheetOf(leaf.centerUnits, leaf.verticesUnits) : null, shown: '' });
+          sheet: leaf.verticesUnits ? sheetOf(leaf.centerUnits, leaf.verticesUnits) : null, shown: '',
+          along: view ? leaf.centerUnits[0] * view.normalUnits[0] + leaf.centerUnits[1] * view.normalUnits[1] + leaf.centerUnits[2] * view.normalUnits[2] : 0, rank: 0, over: '' });
         mesh.appendChild(element); leaves.push(element);
       }
       next += size;
       scene.appendChild(mesh); camera.appendChild(scene); projection.appendChild(camera);
       runs.push({ camera, scene, mesh, leaves });
     }
+    [...textures].sort((a, b) => a.along - b.along).forEach((texture, rank) => { texture.rank = rank; });
     root.appendChild(projection);
-    return { axis: stack.axis, projection, runs, textures, loaded: false, perspective: '', perspectiveOrigin: '', transform: '', reach: view?.samplingStepUnits ?? 0,
+    return { axis: stack.axis, projection, runs, textures, normal: view?.normalUnits ?? null, loaded: false, perspective: '', perspectiveOrigin: '', transform: '', reach: view?.samplingStepUnits ?? 0,
       patches: view?.sceneSizes !== undefined, apart: null as HTMLElement | null, spare: null as HTMLElement | null };
   });
-  /** A stack of patches leaves its runs' scenes for one flat element (`apart`), or goes back. In a shared scene the
-   * browser cuts a patch along the planes of the others, and seen from inside the surface it does not draw some of the
-   * cut pieces: turning inside the Homunculus, a wall patch 1,010 px wide went black for a step of the drag and came
-   * back, at the same camera places on every pass, and drew whenever one other patch of its run was taken away; the
-   * same turn had 15 such jumps with shared scenes and 1 apart, a patch the camera passes through (headless Chrome,
-   * 2026-10-05). Apart, the element is flat and carries the perspective, and every patch under it carries the camera's
-   * transform before its own: no patch is sorted or cut against another, and they paint in the stack's order, as the
-   * runs already do. A patch's transform is then written each frame: a frame of a drag went from 4.5 to 5.0 ms of
-   * main-thread time with the Homunculus's 1,025 patches and from 4.5 to 5.7 ms with Cassiopeia A's 1,397, so a stack
-   * is apart only while it is drawn around a body. The element stays built when it is not used. Parallel sheets are
-   * never apart: their one scene's sorting is what orders them from either side. */
+  /** A stack leaves its scenes for one flat element (`apart`), or goes back. In a shared scene the browser sorts the
+   * leaves by depth and cuts each along the planes of the others, and seen from inside it does not draw some of them:
+   * turning inside the Homunculus, a wall patch 1,010 px wide went black for a step of the drag and came back, at the
+   * same camera places on every pass, and drew whenever one other patch of its run was taken away; inside NGC 2392 the
+   * sheet beside the camera came and went the same way. The same turns had 15 such jumps of the picture in the
+   * Homunculus and 4 to 6 in NGC 2392 with shared scenes; apart, 1 (a patch the camera passes through) and none
+   * (headless Chrome, 2026-10-05). Apart, the element is flat and carries the perspective, and every leaf under it
+   * carries the camera's transform before its own: no leaf is sorted or cut against another. Patches paint in the
+   * stack's order, as their runs already do; parallel sheets paint farthest first on each side of the camera (`order`).
+   * A leaf's transform is then written each frame: a frame of a drag went from 4.5 to 5.0 ms of main-thread time with
+   * the Homunculus's 1,025 patches and from 4.5 to 5.7 ms with Cassiopeia A's 1,397, so a stack is apart only while it
+   * is drawn around a body. The element stays built when it is not used. */
   const arrange = (bank: (typeof banks)[number], apart: boolean) => {
-    if (!bank.patches || (bank.apart !== null) === apart) return;
+    if ((bank.apart !== null) === apart) return;
     // What was written to the arrangement left behind says nothing of this one: every write is made again.
     bank.perspective = bank.perspectiveOrigin = bank.transform = '';
     if (apart) {
@@ -94,8 +99,19 @@ export function mountPreparedCssImageLayers({ host, before, payload, resolveReso
       return;
     }
     for (const run of bank.runs) { for (const leaf of run.leaves) run.mesh.appendChild(leaf); bank.projection.appendChild(run.camera); }
-    for (const texture of bank.textures) texture.element.style.transform = texture.own;
+    for (const texture of bank.textures) { texture.element.style.transform = texture.own; if (texture.over !== '') { texture.over = ''; texture.element.style.zIndex = ''; } }
     bank.apart?.remove(); bank.apart = null;
+  };
+  /** Parallel sheets that are apart paint farthest first on each side of the camera: a sight line crosses the sheets of
+   * one side only, so the two sides need no order between them, and a sheet's place changes only when the camera
+   * passes its plane, where the sheet is left out. One write a passing, on that sheet. */
+  const order = (bank: (typeof banks)[number], cameraUnits: readonly number[]) => {
+    if (bank.patches || !bank.normal) return;
+    const at = cameraUnits[0]! * bank.normal[0] + cameraUnits[1]! * bank.normal[1] + cameraUnits[2]! * bank.normal[2], last = bank.textures.length - 1;
+    for (const texture of bank.textures) {
+      const over = String(texture.along < at ? texture.rank : last - texture.rank);
+      if (texture.over !== over) { texture.over = over; texture.element.style.zIndex = over; }
+    }
   };
   host.insertBefore(root, before);
   let destroyed = false;
@@ -111,7 +127,7 @@ export function mountPreparedCssImageLayers({ host, before, payload, resolveReso
     /** `around`: the bank is drawn around a body that stands inside it, at that place (reference metres). The sheets the
      * camera stands on are left out, and so are the sheets through the body: they hold the picture's own image of it, a
      * saturated glare many times its size, and the body is drawn in their place (Eta Carinae inside the Homunculus was a
-     * white screen 1,200 AU out, 2026-10-05), and a surface's patches leave their shared scenes (`arrange`). As its
+     * white screen 1,200 AU out, 2026-10-05), and the leaves of each stack leave their shared scenes (`arrange`). As its
      * page's own subject a bank draws every sheet, as it always has. */
     publish(publication: VolumeCameraPublication, around: readonly [number, number, number] | false = false) {
       if (destroyed) return;
@@ -135,6 +151,7 @@ export function mountPreparedCssImageLayers({ host, before, payload, resolveReso
           if (bank.perspective !== perspective) { bank.perspective = perspective; bank.apart.style.perspective = perspective; }
           if (bank.perspectiveOrigin !== origin) { bank.perspectiveOrigin = origin; bank.apart.style.perspectiveOrigin = origin; }
           if (bank.transform !== cssTransform) { bank.transform = cssTransform; for (const texture of bank.textures) texture.element.style.transform = `${cssTransform} ${texture.own}`; }
+          order(bank, local.positionUnits);
         } else {
           if (bank.perspective !== perspective) { bank.perspective = perspective; for (const { camera } of bank.runs) camera.style.perspective = perspective; }
           if (bank.perspectiveOrigin !== perspectiveOrigin) { bank.perspectiveOrigin = perspectiveOrigin; for (const { camera } of bank.runs) camera.style.perspectiveOrigin = perspectiveOrigin; }
