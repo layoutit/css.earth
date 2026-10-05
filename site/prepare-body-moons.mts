@@ -1,7 +1,7 @@
 import { SEARCH_OBJECTS } from './search/search-objects.mts';
 import type { ObjectEntry } from './objects.mts';
 import { systemObjectId } from './navigation/system-address.mts';
-import { catalogues } from './moon-catalogue.mts';
+import { readMoonCatalogue } from './moon-catalogue.mts';
 export { parseMoonCatalogue, catalogueMoons } from './moon-catalogue.mts';
 import { labelEligible } from '@cssearth/renderer/labels/universe-label-policy.ts';
 
@@ -18,7 +18,7 @@ export function hasProperMoonName(moon: { name: string; provisionalDesignation: 
 export function prepareBodyMoons(objectId: string): readonly MoonListEntry[] {
   const system = systemObjectId(objectId);
   const available = SEARCH_OBJECTS.filter(object => object.classification === 'satellite' && object.parent === system);
-  const catalogue = catalogues[objectId];
+  const catalogue = readMoonCatalogue(objectId);
   if (!catalogue) return available.map(object => ({ id: object.id, name: object.name, object }));
   const byId = new Map(available.map(object => [object.id, object]));
   const knownIds = new Set(catalogue.moons.map(moon => moon.id));

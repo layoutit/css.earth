@@ -20,4 +20,5 @@ const catalogues: Readonly<Record<string, ReturnType<typeof parseMoonCatalogue>>
 /** The moons a host's source catalogue names, in the catalogue's order; none for a host without one. */
 export const catalogueMoons = (hostId: string): readonly { readonly id: string; readonly name: string }[] => catalogues[hostId]?.moons ?? [];
 
-export { catalogues };
+/** Read the cached catalogue, preserving the distinction between an absent host and an empty catalogue. */
+export const readMoonCatalogue = (hostId: string) => catalogues[hostId];
