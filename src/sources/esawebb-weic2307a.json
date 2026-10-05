@@ -1,0 +1,52 @@
+{
+  "id": "esawebb-weic2307a",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Wolf-Rayet 124 (NIRCam and MIRI composite image)",
+  "identifiers": [
+    {
+      "type": "ESA/Webb image",
+      "value": "weic2307a"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://esawebb.org/images/weic2307a/",
+      "label": "Published source"
+    },
+    {
+      "role": "original",
+      "url": "https://cdn.esawebb.org/archives/images/large/weic2307a.jpg",
+      "label": "JPEG, 4416 x 4349 px"
+    },
+    {
+      "role": "rights",
+      "url": "https://esawebb.org/copyright/",
+      "label": "Reuse terms"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://esawebb.org/images/weic2307a/",
+      "checkedOn": "2026-10-05",
+      "locator": "4416 x 4349 px over 2.21 × 2.18 arcmin; NIRCam 0.9, 1.5, 2.1, 3.35, 4.44 and 4.7 µm with MIRI 7.7, 11, 12 and 18 µm; released 14 March 2023. The file's embedded sky tags for scale and direction, 0.0300 arcsec per pixel and north 40.64° right of vertical, and the star for place: the middle of WR 124's saturated pixels, pixel 2271.7, 2195.8, is set at SIMBAD's place for the star, so the frame's centre is 287.8791935°, 16.8604008°. The tags alone put the star 0.21 arcsec from there."
+    }
+  ],
+  "publisher": "ESA/Webb",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "NASA, ESA, CSA, STScI, Webb ERO Production Team",
+      "scope": "Published source",
+      "evidence": "https://esawebb.org/images/weic2307a/"
+    },
+    {
+      "kind": "rights",
+      "text": "Creative Commons Attribution 4.0 International; the full credit must be shown.",
+      "scope": "Published source",
+      "evidence": "https://esawebb.org/copyright/"
+    }
+  ]
+}

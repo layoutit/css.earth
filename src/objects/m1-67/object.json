@@ -1,0 +1,100 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "m1-67",
+  "parent": "milky-way",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "M1-67",
+      "steps": [
+        "verify-sources",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 61562515750464
+      },
+      "sources": [
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "M1-67",
+      "systemName": "Milky Way",
+      "classification": "nebula",
+      "color": "#9a9a9a",
+      "distanceAu": 1320094760,
+      "description": "M1-67 is the nebula around the Wolf-Rayet star WR 124, about 6,400 parsecs away.",
+      "aliases": [
+        "M 1-67",
+        "Merrill's Star Nebula",
+        "WR 124",
+        "Wolf-Rayet 124",
+        "Sh 2-80"
+      ],
+      "order": 5393,
+      "context": {}
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        58021580710647310000,
+        -179867449343156600000,
+        57278934831599890000
+      ],
+      "presentationToReference": [
+        0.3776964879301558,
+        0,
+        -0.925929458979044,
+        -0.8495236693546953,
+        0.3977771559319137,
+        -0.34652975258244717,
+        -0.36831358678625975,
+        -0.9174820620691818,
+        -0.15023903477432973
+      ],
+      "orbitUpReference": [
+        0,
+        -0.3977771559319137,
+        0.9174820620691818
+      ],
+      "metersPerUnit": 198588760485367.75,
+      "bodyRadiusM": 61562515750464000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

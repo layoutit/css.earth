@@ -1,0 +1,35 @@
+{
+  "id": "simbad-wr-124",
+  "kind": "reference-page",
+  "identityLevel": "work",
+  "title": "SIMBAD: WR 124",
+  "identifiers": [
+    {
+      "type": "Archive resource",
+      "value": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=WR+124"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=WR+124",
+      "label": "SIMBAD, WR 124"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=WR+124",
+      "checkedOn": "2026-10-05",
+      "locator": "Main identifier Hen 2-427, object type WR*; ICRS coordinates 287.87864548657°, 16.860611371739996° (19 11 30.8749, +16 51 38.201), from Gaia EDR3 (2020yCat.1350....0G); parallax 0.1568 ± 0.014 mas. PN M 1-67, SH 2-80, NAME Merrill's star, V* QR Sge and Gaia DR3 4513494205567536512 are names of the same entry."
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "SIMBAD, CDS, Strasbourg",
+      "scope": "citation",
+      "evidence": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=WR+124"
+    }
+  ]
+}

@@ -1,0 +1,148 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "m1-67",
+  "displayName": "M1-67",
+  "panel": {
+    "facts": [
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "6,400 pc (+2,500, −800)",
+        "source": {
+          "catalogueId": "publication-zavala-2022-m1-67-shape-model",
+          "url": "https://arxiv.org/abs/2204.07778",
+          "label": "Zavala et al. (2022), MNRAS 513, 3317: 3D mapping of the Wolf-Rayet nebula M 1-67; Sect. 1: an estimated distance of 6.4 (+2.5, −0.8) kpc, from Jiménez-Hernández et al. (2020)",
+          "checked": "2026-10-05"
+        }
+      },
+      {
+        "id": "position",
+        "label": "Sky position (ICRS)",
+        "value": "RA 287.879°, Dec 16.861°",
+        "source": {
+          "catalogueId": "simbad-wr-124",
+          "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=WR+124",
+          "label": "SIMBAD, WR 124 (the same entry as PN M 1-67): ICRS 19 11 30.8749, +16 51 38.201, from Gaia EDR3 (2020yCat.1350....0G)",
+          "checked": "2026-10-05"
+        }
+      },
+      {
+        "id": "axis",
+        "label": "Its symmetry axis",
+        "value": "in the plane of the sky, at position angle −40°",
+        "source": {
+          "catalogueId": "publication-zavala-2022-m1-67-shape-model",
+          "url": "https://arxiv.org/abs/2204.07778",
+          "label": "Zavala et al. (2022), MNRAS 513, 3317: 3D mapping of the Wolf-Rayet nebula M 1-67; Sect. 4: the three bipolar structures are contained within the plane of the sky, their symmetry axes at a position angle of −40°",
+          "checked": "2026-10-05"
+        }
+      },
+      {
+        "id": "speeds",
+        "label": "Speed of its expansion",
+        "value": "lobes up to 90 km/s, waist 30 to 60 km/s",
+        "source": {
+          "catalogueId": "publication-zavala-2022-m1-67-shape-model",
+          "url": "https://arxiv.org/abs/2204.07778",
+          "label": "Zavala et al. (2022), MNRAS 513, 3317: 3D mapping of the Wolf-Rayet nebula M 1-67; Sect. 6: the toroidal structure expands at 30 to 60 km/s, the bipolar structure at up to 90 km/s",
+          "checked": "2026-10-05"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age of its expansion",
+        "value": "11,800 years (+4,600, −800)",
+        "source": {
+          "catalogueId": "publication-zavala-2022-m1-67-shape-model",
+          "url": "https://arxiv.org/abs/2204.07778",
+          "label": "Zavala et al. (2022), MNRAS 513, 3317: 3D mapping of the Wolf-Rayet nebula M 1-67; Sect. 6: a kinematic age of 11.8 (+4.6, −0.8) kyr",
+          "checked": "2026-10-05"
+        }
+      },
+      {
+        "id": "picture",
+        "label": "Picture width",
+        "value": "2.21 arcmin, 4.11 pc at its distance",
+        "source": {
+          "catalogueId": "esawebb-weic2307a",
+          "url": "https://esawebb.org/images/weic2307a/",
+          "label": "ESA/Webb weic2307a: NASA, ESA, CSA, STScI, Webb ERO Production Team",
+          "checked": "2026-10-05"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "optical",
+    "controls": [
+      {
+        "id": "optical",
+        "label": "Webb · infrared",
+        "thumbnail": "m1-67-dataset-optical.webp",
+        "volume": {
+          "objectId": "m1-67-layers",
+          "datasetId": "optical",
+          "surface": "optical"
+        },
+        "source": {
+          "id": "m1-67-layers-optical",
+          "path": "../../m1-67-layers/source/manifest.json",
+          "url": "https://esawebb.org/images/weic2307a/"
+        },
+        "falseColor": true
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Zavala et al. (2022), MNRAS 513, 3317: 3D mapping of the Wolf-Rayet nebula M 1-67; Sect. 1: an estimated distance of 6.4 (+2.5, −0.8) kpc, from Jiménez-Hernández et al. (2020)",
+      "href": "https://arxiv.org/abs/2204.07778"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "SIMBAD, WR 124 (the same entry as PN M 1-67): ICRS 19 11 30.8749, +16 51 38.201, from Gaia EDR3 (2020yCat.1350....0G)",
+      "href": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=WR+124"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Zavala et al. (2022), MNRAS 513, 3317: 3D mapping of the Wolf-Rayet nebula M 1-67; Sect. 4: the three bipolar structures are contained within the plane of the sky, their symmetry axes at a position angle of −40°",
+      "href": "https://arxiv.org/abs/2204.07778"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Zavala et al. (2022), MNRAS 513, 3317: 3D mapping of the Wolf-Rayet nebula M 1-67; Sect. 6: the toroidal structure expands at 30 to 60 km/s, the bipolar structure at up to 90 km/s",
+      "href": "https://arxiv.org/abs/2204.07778"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Zavala et al. (2022), MNRAS 513, 3317: 3D mapping of the Wolf-Rayet nebula M 1-67; Sect. 6: a kinematic age of 11.8 (+4.6, −0.8) kyr",
+      "href": "https://arxiv.org/abs/2204.07778"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "ESA/Webb weic2307a: NASA, ESA, CSA, STScI, Webb ERO Production Team",
+      "href": "https://esawebb.org/images/weic2307a/"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://arxiv.org/abs/2204.07778",
+      "credit": "Zavala et al. (2022), MNRAS 513, 3317: 3D mapping of the Wolf-Rayet nebula M 1-67"
+    }
+  }
+}

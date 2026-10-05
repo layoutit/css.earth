@@ -1,0 +1,74 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "m1-67",
+  "card": {
+    "text": "M1-67 is the nebula around the Wolf-Rayet star WR 124, about 6,400 parsecs away.",
+    "sources": [
+      {
+        "catalogueId": "publication-zavala-2022-m1-67-shape-model",
+        "url": "https://arxiv.org/abs/2204.07778",
+        "label": "Zavala et al. (2022), MNRAS 513, 3317: 3D mapping of the Wolf-Rayet nebula M 1-67",
+        "checked": "2026-10-05",
+        "locator": "Sect. 1: an estimated distance of 6.4 (+2.5, −0.8) kpc"
+      },
+      {
+        "catalogueId": "wikipedia-m1-67",
+        "url": "https://en.wikipedia.org/wiki/M1-67",
+        "label": "Wikipedia, \"M1-67\"",
+        "checked": "2026-10-05",
+        "locator": "Lead section, revision 1378228038",
+        "quote": "M1-67, also known as Merrill's Star Nebula, is an ejecta nebula that surrounds the Wolf–Rayet star WR 124, which is about 6.4 kpc from Earth in the constellation of Sagitta."
+      }
+    ]
+  },
+  "introduction": {
+    "text": "The star threw it off about 11,800 years ago: clumps of gas and dust in two lobes and a waist, still expanding at up to 90 km/s.",
+    "sources": [
+      {
+        "catalogueId": "publication-zavala-2022-m1-67-shape-model",
+        "url": "https://arxiv.org/abs/2204.07778",
+        "label": "Zavala et al. (2022), MNRAS 513, 3317: 3D mapping of the Wolf-Rayet nebula M 1-67",
+        "checked": "2026-10-05",
+        "locator": "Sect. 6: a kinematic age of 11.8 (+4.6, −0.8) kyr; a bipolar structure with a torus about it, the bipolar structure with maximum velocities of 90 km/s"
+      },
+      {
+        "catalogueId": "esawebb-weic2307a",
+        "url": "https://esawebb.org/images/weic2307a/",
+        "label": "ESA/Webb weic2307a: NASA, ESA, CSA, STScI, Webb ERO Production Team",
+        "checked": "2026-10-05",
+        "locator": "Wolf-Rayet 124 (NIRCam and MIRI composite image); NIRCam 0.9, 1.5, 2.1, 3.35, 4.44 and 4.7 µm with MIRI 7.7, 11, 12 and 18 µm"
+      },
+      {
+        "catalogueId": "wikipedia-m1-67",
+        "url": "https://en.wikipedia.org/wiki/M1-67",
+        "label": "Wikipedia, \"M1-67\"",
+        "checked": "2026-10-05",
+        "locator": "Lead section, revision 1378228038",
+        "quote": "It contains dust which is caught up in WR 124's solar wind and which absorbs much of the star's light."
+      }
+    ]
+  },
+  "datasets": {
+    "optical": {
+      "title": "M1-67 in the infrared",
+      "detail": "4416 × 4349 px",
+      "summary": "Webb's picture on the walls of a model fitted to the nebula's spectra: the nearer and farther halves of its gas.",
+      "sources": [
+        {
+          "catalogueId": "esawebb-weic2307a",
+          "url": "https://esawebb.org/images/weic2307a/",
+          "label": "ESA/Webb weic2307a: NASA, ESA, CSA, STScI, Webb ERO Production Team",
+          "checked": "2026-10-05",
+          "locator": "Wolf-Rayet 124 (NIRCam and MIRI composite image)"
+        },
+        {
+          "catalogueId": "publication-zavala-2022-m1-67-shape-model",
+          "url": "https://arxiv.org/abs/2204.07778",
+          "label": "Zavala et al. (2022), MNRAS 513, 3317: 3D mapping of the Wolf-Rayet nebula M 1-67",
+          "checked": "2026-10-05",
+          "locator": "Table 2: the sizes and speeds of the model's bodies; Figure 3: the lobes' outline"
+        }
+      ]
+    }
+  }
+}

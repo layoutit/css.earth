@@ -1,0 +1,44 @@
+{
+  "id": "publication-zavala-2022-m1-67-shape-model",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "3D mapping of the Wolf-Rayet nebula M 1-67: clues for post-common envelope evolution in massive stars",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2204.07778"
+    },
+    {
+      "type": "doi",
+      "value": "10.1093/mnras/stac1097"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/2204.07778",
+      "label": "Published reference"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/2204.07778",
+      "checkedOn": "2026-10-05",
+      "locator": "Sect. 1: an estimated distance of 6.4 (+2.5, −0.8) kpc, from Jiménez-Hernández et al. (2020). Sect. 2: 17 spectra at 15 slit positions with the Manchester Echelle Spectrometer on the 2.1 m telescope at San Pedro Mártir, a velocity resolution of 12 km/s. Sect. 4: three concentric structures, each a torus and a bipolar structure; \"each bipolar lobe is modelled by a hollow ellipsoidal component squished at the waist\"; \"the three bipolar structures are contained within the plane of the sky and their symmetry axis are tilted with a PA = −40°\"; velocities increase linearly with distance, v(r) = A (r/B). Table 2, inner, middle and outer structure: hollow ellipsoid a_out 35.0, 55.0, 55.0 arcsec; a_inn 25.0, 43.0, 46.0; b_out 15.8, 24.2, 35.8; b_inn 11.3, 18.9, 29.9; squish 0.55, 0.56, 0.35; v(r) = 90 (r/35), 90 (r/55), 90 (r/55) km/s; torus r_out 30.0, 50.0, 60.0 arcsec; r_inn 13.8, 25.0, 30.0; thickness 14.0, 25.0, 30.0; v(r) = 60 (r/30), 60 (r/50), 60 (r/60) km/s. Sect. 4: the model \"does not model physical density\"; two jets at apparent position angles 120° and 129°, expanding away at 15° and 55° from the plane of the sky, 75 and 56 arcsec long; blowouts on the receding side. Sect. 5: \"it is very likely that there is only a single toroidal structure\". Sect. 6: a kinematic age of 11.8 (+4.6, −0.8) kyr; the torus expands at 30 to 60 km/s, the bipolar structure at up to 90 km/s. Data availability: shared on reasonable request."
+    }
+  ],
+  "creators": [
+    "Zavala, S.",
+    "Toalá, J. A.",
+    "Santamaría, E.",
+    "Ramos-Larios, G.",
+    "Sabin, L.",
+    "Quino-Mendoza, J. A.",
+    "Rubio, G.",
+    "Guerrero, M. A."
+  ],
+  "publisher": "MNRAS 513, 3317",
+  "publicationDate": "2022",
+  "relations": [],
+  "statements": []
+}

@@ -1,0 +1,57 @@
+{
+  "schema": "cssearth-volume-presentation-source@2",
+  "objectId": "m1-67-layers",
+  "name": "M1-67",
+  "defaultDataset": "optical",
+  "bank": {
+    "path": "src/objects/m1-67-layers/prepared/image-layers.json"
+  },
+  "recipes": [
+    {
+      "id": "image-layer-recipe",
+      "path": "src/objects/m1-67-layers/source/recipe.json"
+    },
+    {
+      "id": "source-evidence",
+      "path": "src/objects/m1-67-layers/source/provenance.json"
+    }
+  ],
+  "sharedInputs": [],
+  "datasets": [
+    {
+      "id": "optical",
+      "label": "Webb · infrared",
+      "title": "M1-67 in the infrared",
+      "description": "ESA/Webb's picture of the nebula around WR 124, NIRCam 0.9, 1.5, 2.1, 3.35, 4.44 and 4.7 µm with MIRI 7.7, 11, 12 and 18 µm: gas and dust the star threw off, in clumps. It lies on the walls of a model: Zavala et al. (2022) fit the nebula's spectra with three nested pairs of hollow lobes and a waist about them, seen edge-on, each expanding faster the farther it is from the star. On each sight line the nearer half of the model's gas and the farther half stand at their own middles; those two depths hold the picture's light. No clump's own depth is measured: the model says where gas is, not which clump is in front. The picture's small stars are removed; the bright ones stay.",
+      "summary": "Webb's picture on the walls of a model fitted to the nebula's spectra: the nearer and farther halves of its gas.",
+      "detail": "4416 × 4349 px",
+      "facts": [
+        {
+          "id": "bands",
+          "label": "Colors",
+          "value": "NIRCam 0.9, 1.5, 2.1, 3.35, 4.44 and 4.7 µm with MIRI 7.7, 11, 12 and 18 µm"
+        },
+        {
+          "id": "source-pixels",
+          "label": "Source pixels",
+          "value": "4416 × 4349"
+        },
+        {
+          "id": "coverage",
+          "label": "Field",
+          "value": "2.21 × 2.18 arcmin"
+        },
+        {
+          "id": "license",
+          "label": "License",
+          "value": "CC-BY-4.0"
+        }
+      ],
+      "input": "optical",
+      "preview": {
+        "path": "src/objects/m1-67-layers/source/starless.jpg",
+        "url": "https://cdn.esawebb.org/archives/images/large/weic2307a.jpg"
+      }
+    }
+  ]
+}

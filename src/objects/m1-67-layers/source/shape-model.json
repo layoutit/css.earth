@@ -1,0 +1,86 @@
+{
+  "schema": "cssearth-published-shell-model@1",
+  "source": "publication-zavala-2022-m1-67-shape-model",
+  "locator": "Zavala et al. (2022), Table 2: morphology and velocity parameters of the three main structures of the SHAPE model; Sect. 4: the three bipolar structures are contained within the plane of the sky and their symmetry axes are tilted with a position angle of -40 degrees.",
+  "axisPaDeg": -40,
+  "axisFromSkyDeg": 0,
+  "structures": [
+    {
+      "name": "inner",
+      "lobes": {
+        "semiMajorOuterArcsec": 35,
+        "semiMajorInnerArcsec": 25,
+        "semiMinorOuterArcsec": 15.8,
+        "semiMinorInnerArcsec": 11.3,
+        "squish": 0.55,
+        "speedKmS": 90,
+        "atArcsec": 35,
+        "outline": {
+          "middleOverSemiMajor": 0.409,
+          "widthOverSemiMinor": 1.294
+        }
+      },
+      "torus": {
+        "outerRadiusArcsec": 30,
+        "innerRadiusArcsec": 13.8,
+        "thicknessArcsec": 14,
+        "speedKmS": 60,
+        "atArcsec": 30
+      }
+    },
+    {
+      "name": "middle",
+      "lobes": {
+        "semiMajorOuterArcsec": 55,
+        "semiMajorInnerArcsec": 43,
+        "semiMinorOuterArcsec": 24.2,
+        "semiMinorInnerArcsec": 18.9,
+        "squish": 0.56,
+        "speedKmS": 90,
+        "atArcsec": 55,
+        "outline": {
+          "middleOverSemiMajor": 0.409,
+          "widthOverSemiMinor": 1.294
+        }
+      },
+      "torus": {
+        "outerRadiusArcsec": 50,
+        "innerRadiusArcsec": 25,
+        "thicknessArcsec": 25,
+        "speedKmS": 60,
+        "atArcsec": 50
+      }
+    },
+    {
+      "name": "outer",
+      "lobes": {
+        "semiMajorOuterArcsec": 55,
+        "semiMajorInnerArcsec": 46,
+        "semiMinorOuterArcsec": 35.8,
+        "semiMinorInnerArcsec": 29.9,
+        "squish": 0.35,
+        "speedKmS": 90,
+        "atArcsec": 55,
+        "outline": {
+          "middleOverSemiMajor": 0.354,
+          "widthOverSemiMinor": 1.1
+        }
+      },
+      "torus": {
+        "outerRadiusArcsec": 60,
+        "innerRadiusArcsec": 30,
+        "thicknessArcsec": 30,
+        "speedKmS": 60,
+        "atArcsec": 60
+      }
+    }
+  ],
+  "notApplied": [
+    "the two jets, the blowouts and the outer structure's deformation towards the south-west (Sect. 4): described in words, not in the table"
+  ],
+  "outline": {
+    "source": "publication-zavala-2022-m1-67-shape-model",
+    "locator": "Figure 3, top row: each structure drawn in the plane of the sky",
+    "method": "packages/bake/authoring/m1-67/lobe-outline.mts"
+  }
+}

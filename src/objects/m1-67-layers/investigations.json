@@ -1,0 +1,102 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "m1-67-layers",
+  "entries": [
+    {
+      "id": "weic2307a",
+      "subject": "ESA/Webb weic2307a",
+      "status": "included",
+      "finding": "Wolf-Rayet 124 (NIRCam and MIRI composite image): NIRCam 0.9, 1.5, 2.1, 3.35, 4.44 and 4.7 µm with MIRI 7.7, 11, 12 and 18 µm; 4416 × 4349 px over 2.21 × 2.18 arcmin, released 14 March 2023. The file's embedded sky tags for scale and direction, 0.0300 arcsec per pixel and north 40.64° right of vertical, and the star for place: the middle of WR 124's saturated pixels, pixel 2271.7, 2195.8, is set at SIMBAD's place for the star, so the frame's centre is 287.8791935°, 16.8604008°. The tags alone put the star 0.21 arcsec from there.",
+      "evidence": [
+        "https://esawebb.org/images/weic2307a/",
+        "https://esawebb.org/copyright/"
+      ]
+    },
+    {
+      "id": "shape-model",
+      "subject": "Where the gas is along each sight line",
+      "status": "included",
+      "finding": "Zavala et al. (2022) observed the nebula with the Manchester Echelle Spectrometer on the 2.1 m telescope at San Pedro Mártir, 17 spectra at 15 slit positions, and fit them with a SHAPE model: three nested structures, each a pair of hollow lobes and a torus, the symmetry axis in the plane of the sky at position angle -40°; the tori are seen edge-on. Table 2 prints the sizes and the speeds, each in proportion to distance from the star: 90 km/s at the lobes' ends, 60 km/s at the tori's outer edges. The paper says the model gives the kinematic structures, not the gas's density: its point densities only tune brightness. The bank lays the picture on the nearer and farther halves of that model's gas (packages/bake/src/image-layers/density-grid.ts).",
+      "evidence": [
+        "https://arxiv.org/abs/2204.07778"
+      ]
+    },
+    {
+      "id": "lobe-outline",
+      "subject": "The lobes' outline",
+      "status": "included",
+      "finding": "The paper prints a squish parameter for each pair of lobes (0.55, 0.56, 0.35) and no formula for it. packages/bake/authoring/m1-67/lobe-outline.mts reads the lobes' drawn silhouette in Figure 3 and fits two rounded lobes to it: middles 0.409 of the semi-major axis from the star and 1.294 semi-minor axes wide for the middle structure (the fit misses the drawing by 0.049 semi-minor axes, root mean square), 0.354 and 1.100 for the outer one (0.033). In the drawing the waist is about as wide as the printed semi-minor axis and the lobes are wider. The inner structure's lobes and torus share one color there and are not read: they take the middle structure's proportions. The drawing's axis stands at about −49°; the text's −40° is used.",
+      "evidence": [
+        "https://arxiv.org/abs/2204.07778"
+      ]
+    },
+    {
+      "id": "soft-faces",
+      "subject": "The model's sharp faces",
+      "status": "included",
+      "finding": "Beside a torus's flat face the gas a sight line crosses steps from the torus to the lobe behind it, and the picture laid on the walls came apart there: with sharp faces, 206 of 3,442 neighbouring sight lines along the axis differed by more than 3 arcsec of depth, the largest step 22.3 arcsec. The generator spreads the gas by a Gaussian of 4 arcsec; with the lobes' drawn outline the count is 48 of 6,072 and the largest step 6.1 arcsec. A presentation choice.",
+      "evidence": [
+        "https://arxiv.org/abs/2204.07778"
+      ]
+    },
+    {
+      "id": "equal-density",
+      "subject": "How much gas each body holds",
+      "status": "included",
+      "finding": "The paper does not give the bodies' densities. Every wall has the same density here, so a sight line's two depths are set by how long it runs inside walls. The paper notes that the receding side of the inner structure is the brighter one in the central spectra; no number is printed and the two walls share the light evenly.",
+      "evidence": [
+        "https://arxiv.org/abs/2204.07778"
+      ]
+    },
+    {
+      "id": "jets-blowouts",
+      "subject": "The jets and blowouts",
+      "status": "deferred",
+      "finding": "Sect. 4 adds two fast collimated structures (at position angles 120° and 129°, moving away at 15° and 55° from the plane of the sky, 75 and 56 arcsec long), conical blowouts on the receding side and a deformation of the outer structure towards the south-west. Their widths and shapes are not printed, so they are not in the grid.",
+      "evidence": [
+        "https://arxiv.org/abs/2204.07778"
+      ],
+      "revisitWhen": "The model's file or the bodies' sizes are published."
+    },
+    {
+      "id": "clump-depths",
+      "subject": "Each clump's own depth",
+      "status": "deferred",
+      "finding": "The paper's spectra hold a speed along the sight line for each clump a slit crosses, which under the model's law is a depth. The spectra are shared on request only, and no table of clumps is published, so no clump is placed by its own speed.",
+      "evidence": [
+        "https://arxiv.org/abs/2204.07778"
+      ],
+      "revisitWhen": "A table of clump velocities is published."
+    },
+    {
+      "id": "stars",
+      "subject": "The picture's stars",
+      "status": "included",
+      "finding": "Stars are in front of the nebula or behind it, not on its walls. `node labs/nebula/run.mts remove-stars src/objects/m1-67-layers --star-red-over-blue=0.8` took 22,937 patches from the picture, of which 14,402 are star-colored (red at most 0.8 of blue); 266,219 px were given back to the nebula and 2,302,382 px taken. The brightest stars, with their diffraction spikes, are too wide for it and stay; a coarse pass that removes most of them replaces 20.81% of the picture with predicted light and was not used. WR 124's own spikes cross the whole nebula and lie on the walls with it.",
+      "evidence": [
+        "https://esawebb.org/images/weic2307a/"
+      ]
+    },
+    {
+      "id": "weic2307e",
+      "subject": "Webb's mid-infrared picture and Hubble's",
+      "status": "deferred",
+      "finding": "ESA/Webb weic2307e (MIRI alone) and weic2307f (Hubble WFPC2, 1997) show the same field on the same frame, 4416 × 3704 px. Each would lie on the same walls as one more dataset.",
+      "evidence": [
+        "https://esawebb.org/images/weic2307e/",
+        "https://esawebb.org/images/weic2307f/"
+      ],
+      "revisitWhen": "More datasets are wanted."
+    },
+    {
+      "id": "wr-124",
+      "subject": "The star as an object",
+      "status": "deferred",
+      "finding": "WR 124 itself has no page: the nebula stands at the star's place, and a zoom in ends at the nebula's nearest view.",
+      "evidence": [
+        "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=WR+124"
+      ],
+      "revisitWhen": "The star is added as an object inside the nebula."
+    }
+  ]
+}
