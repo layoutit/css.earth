@@ -191,7 +191,7 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
         Math.abs(selectedY) < height / 2 + focusDiameter / 2;
       const focusShare = focusInView ? focusDiameter / height : 0;
       const fades = closeOrbitFades(plan.camera.presentation.orbitLineFade, focusShare);
-      const outsideFamily = outsideFamilyOrbitOpacity(subject.id === null || subject.hostIsStar ? undefined : byId.get(subject.hostId), host => Math.hypot(...frame.eye(host)), subject.held);
+      const outsideFamily = outsideFamilyOrbitOpacity(subject.id === null || subject.hostIsStar ? undefined : byId.get(subject.hostId), host => Math.hypot(...frame.eye(host)));
       const highlighting = bodies.some(entry => entry.highlighted === true), otherSystems = otherSystemsOpacity(systemFade.of(0), starFieldFade(focusDistanceM, plan.system));
       const near = opacity > 0
         ? Math.max(1, Math.min(...bodies.map(entry => Math.hypot(...frame.eye(entry.body)))) * 0.01) : 1;

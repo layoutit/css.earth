@@ -28,7 +28,8 @@ export interface ContextSubject {
   readonly families: ReadonlySet<string>;
   /** A selected body's own page, with no flight: a host's page fades its moons' paths with the host. */
   readonly page: boolean;
-  /** A moons view is selected: the dimming outside the family holds at every range, the host's own path included. */
+  /** A moons view is selected: it holds its host as the subject, and the dimming outside the family includes the host's
+   * own path. */
   readonly held: boolean;
   /** Beside the page of a body that is not a system's star, that star's minor bodies are not named. */
   readonly quietMinors: boolean;
@@ -69,13 +70,13 @@ export function closeOrbitFades(fade: OrbitLineFade, discHeightShare: number) {
 /** An orbit belongs to the family it circles, not the body travelling on it, so a path outside the subject's family is
  * dim context: the other planets', and the host's own path about its star when the subject is not the host itself.
  * `host` is the family's host, absent without an emphasised body or when it is a star. The dimming relaxes from half to
- * twice the host's distance from its star, where the subject is the parent system again; a moons view holds it.
+ * twice the host's distance from its star, where the view is the parent system again; a moons view relaxes it too.
  * 1/64 steps avoid rewriting opacity for tiny camera changes. */
 export function outsideFamilyOrbitOpacity<Host extends { readonly positionM: readonly number[]; readonly orbit?: { readonly centerPositionM: readonly number[] } | null }>(
-  host: Host | undefined, cameraDistanceM: (host: Host) => number, held: boolean): number {
+  host: Host | undefined, cameraDistanceM: (host: Host) => number): number {
   if (!host?.orbit) return 1;
   const radiusM = Math.hypot(...host.positionM.map((value, axis) => value - host.orbit!.centerPositionM[axis]!));
-  const t = held || !(radiusM > 0) ? 0 : Math.max(0, Math.min(1, Math.log2(cameraDistanceM(host) / (.5 * radiusM)) / 2));
+  const t = !(radiusM > 0) ? 0 : Math.max(0, Math.min(1, Math.log2(cameraDistanceM(host) / (.5 * radiusM)) / 2));
   return 1 - (1 - OUTSIDE_FAMILY_OPACITY) * Math.round((1 - t * t * (3 - 2 * t)) * 64) / 64;
 }
 
