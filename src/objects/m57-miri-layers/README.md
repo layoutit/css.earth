@@ -13,7 +13,7 @@ ESA/Webb's mid-infrared picture of the Ring Nebula, on the walls of its ionised 
 
 ## The picture
 
-- **Registration:** the file's embedded sky tags give scale and direction, 0.1111″ per pixel and north 132.9° right of vertical. The star gives the place: the central star in the picture is set at the place the Ring Nebula's page stands at. The tags alone put it 0.21″ away.
+- **Registration:** the file's embedded sky tags give scale and direction, 0.1111″ per pixel and north 132.9° right of vertical. The star gives the place: the central star in the picture is set at the place the Ring Nebula's page stands at. The tags alone put it 0.04″ away.
 - **The shell:** the Hubble dataset's: 44″ by 30″ on the sky with its long axis at position angle 60°, its pole tipped 6.5° from the sight line, and a lobe through its opening within 19.7″ of the star.
 - **In the Main Ring:** the red and green channels are ionised gas, [S III] its brightest line. They take the ring's [N II] and [S II] speed, 19 km/s, which is 29.2″ along the sight line: [S III] is the shell's lower-ionisation light, against the cavity's [S IV]. The blue channel is molecular hydrogen and takes the molecular shell's speed along the sight line, 24.6 km/s, 37.8″.
 - **Through the opening:** the red channel is [O IV], made by the 55 eV that also makes He II; it takes the Lobes' He II speed, 20 km/s, 30.8″ along the sight line. The green and blue channels hold [S IV], made by the 35 eV that also makes [O III]; they take the Lobes' [O III] speed, 28 km/s, 43.1″.

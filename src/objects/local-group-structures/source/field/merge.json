@@ -1,16 +1,14 @@
 {
   "schema": "cssearth-catalogue-points-merge@1",
   "id": "field",
-  "meaning": "The Local Group's structures that are large enough to see from outside the Milky Way: the globular cluster systems of M31 and the Milky Way, the star clusters of the Magellanic Clouds and the Sagittarius stream.",
+  "meaning": "The Local Group's structures that are large enough to see from outside the Milky Way: the globular cluster systems of M31 and the Milky Way and the Sagittarius stream.",
   "banks": [
     "m31-globular-clusters",
     "milky-way-globular-clusters",
-    "lmc-clusters",
-    "smc-clusters",
     {
       "bank": "sagittarius-stream",
       "keepEvery": 4,
-      "basis": "Presentation choice: the field holds at most 4,000 dots, so of the 2,553 stream stars it keeps one in 4, in catalogue order (Gaia source ids, which follow the sky), after every cluster."
+      "basis": "Presentation choice: of the 2,553 stream stars the field keeps one in 4, in catalogue order (Gaia source ids, which follow the sky), after every cluster."
     }
   ]
 }

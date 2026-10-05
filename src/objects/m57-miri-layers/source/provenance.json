@@ -40,15 +40,15 @@
   "geometryEvidence": {
     "inclinationDeg": 0.001,
     "lineOfNodesPaDeg": 218.521,
-    "reference": "A picture of the sky: the plane is the picture's own tangent plane, perpendicular to the sight line through the picture's centre, so it faces the Sun. That centre is 0.7 arcsec from the star, which is the whole of the recipe's inclination. Not the orientation of the nebula, which is the shell's."
+    "reference": "A picture of the sky: the plane is the picture's own tangent plane, perpendicular to the sight line through the picture's centre, so it faces the Sun. That centre is 0.7 arcsec from the star, which is the whole of the recipe's inclination. Not the orientation of the object itself."
   },
   "registration": {
-    "method": "The file's embedded sky tags for scale and direction, 0.1111 arcsec per pixel and north 132.9° right of vertical, and the star for place: the central star in the picture, pixel 627.5, 513.5, is set at the place the Ring Nebula's page stands at, so the frame's centre is 283.396433°, 33.0290199°. The tags alone put the star 0.21 arcsec from where the picture shows it.",
+    "method": "The file's embedded sky tags for scale and direction, 0.1111 arcsec per pixel and north 132.9° right of vertical, and the star for place: the star in the picture, the peak within 3 arcsec of where the tags put it that stands highest above its surroundings, by 94 of 255, pixel 627.5, 513.5, is set at the recipe's target, so the frame's centre is 283.396433°, 33.0290199°. The tags alone put the star 0.04 arcsec from where the picture shows it.",
     "pixelArcsec": 0.1111,
     "northClockwiseDeg": 132.92
   },
   "displayModel": "Inside the outline of the ionised shell of O'Dell et al. (2013) the picture's light lies on that shell's two walls, in front of the star and behind it, each color at the depth of the speed of the gas it shows; inside the shell's opening it lies on the walls of the lobes. The walls share the smooth light; the fine detail is on the nearer one. Outside the shell's outline the halo lies on the picture's plane.",
-  "coverage": "The published frame inside a circle about the star: the picture fades out between 50.0 and 55.6 arcsec, the largest circle the frame holds, so no straight edge shows.",
+  "coverage": "The published frame inside a circle about the star: the picture fades out between 50.0 and 55.6 arcsec from the star, the largest circle the frame holds, so no straight edge shows.",
   "acquisition": {
     "url": "https://cdn.esawebb.org/archives/images/large/weic2320c.jpg",
     "dimensions": [

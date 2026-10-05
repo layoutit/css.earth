@@ -12,7 +12,7 @@ ESA/Webb's mid-infrared picture of the Southern Ring Nebula (NGC 3132), at the d
 
 ## The picture
 
-- **Registration:** the file's embedded sky tags give scale and direction, 0.1099″ per pixel and north 124.65° right of vertical. The star gives the place: the largest patch of saturated pixels within 1″ of where the tags put SIMBAD's place, 29 pixels, is set at that place. The tags alone put it 0.29″ away.
+- **Registration:** the file's embedded sky tags give scale and direction, 0.1099″ per pixel and north 124.65° right of vertical. The star gives the place: the largest patch of saturated pixels within 1″ of where the tags put SIMBAD's place, 29 pixels, is set at that place. The tags alone put it 0.26″ away.
 - **The walls:** the near-infrared dataset's, unchanged: the grid's first axis the sight line with its high end toward the Sun, its second axis at position angle 325.5°, its third at 55.5°, its middle 1″ west and 0.5″ south of the star. On each sight line the nearer half of the gas's emission and the farther half each stand at their own middle, and share the picture's smooth light.
 - **A second check of the placement:** [grid-fit.mts](../../../packages/bake/authoring/ngc-3132/grid-fit.mts), run on this picture, finds the grid's second axis at 324.5° and its third at 54.5°, its middle 0.5″ west and 1″ south of the star. The grid's emission correlates 0.580 with this picture; half a turn on gives 0.136 and the other handedness 0.316 at best. Another instrument, other wavelengths, the same turn within a degree.
 - **The gas and this light:** the grid is the ionised gas, from H-alpha and [N II]. Whatever makes this picture's light, dust and molecules included, takes the same depths here.

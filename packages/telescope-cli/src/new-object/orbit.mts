@@ -20,7 +20,7 @@ export interface HostedOrbit {
 }
 const round = (value: number, digits: number) => Number(value.toFixed(digits));
 /** The archive writes reference labels as HTML: accented author names arrive as entities. */
-const NAMED_ENTITIES: Record<string, string> = { amp: '&', lt: '<', gt: '>', quot: '"', apos: "'", nbsp: ' ', aacute: 'á', eacute: 'é', iacute: 'í', oacute: 'ó', uacute: 'ú', agrave: 'à', egrave: 'è', ntilde: 'ñ', uuml: 'ü', ouml: 'ö', auml: 'ä', ccedil: 'ç', szlig: 'ß', oslash: 'ø', aring: 'å', Aacute: 'Á', Eacute: 'É', Oslash: 'Ø', ecirc: 'ê', ocirc: 'ô', acirc: 'â', scaron: 'š', zcaron: 'ž', ccaron: 'č' };
+const NAMED_ENTITIES: Record<string, string> = { amp: '&', lt: '<', gt: '>', quot: '"', apos: "'", nbsp: ' ', aacute: 'á', eacute: 'é', iacute: 'í', oacute: 'ó', uacute: 'ú', agrave: 'à', egrave: 'è', ntilde: 'ñ', uuml: 'ü', ouml: 'ö', auml: 'ä', ccedil: 'ç', szlig: 'ß', oslash: 'ø', aring: 'å', Aacute: 'Á', Eacute: 'É', Oslash: 'Ø', ecirc: 'ê', ocirc: 'ô', acirc: 'â', scaron: 'š', zcaron: 'ž', ccaron: 'č', mu: 'µ', deg: '°' };
 export const decodeEntities = (text: string) => text.replace(/&(#x[0-9a-f]+|#\d+|[a-zA-Z]+);/gu, (whole, code: string) =>
   code.startsWith('#x') ? String.fromCodePoint(parseInt(code.slice(2), 16)) : code.startsWith('#') ? String.fromCodePoint(Number(code.slice(1))) : NAMED_ENTITIES[code] ?? whole);
 const mod360 = (value: number) => ((value % 360) + 360) % 360;

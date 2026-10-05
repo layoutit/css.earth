@@ -39,6 +39,11 @@ own through `workspace-commands/new-object.mts`, `new-object-cli.mts` is the sta
 The generated solar geometry (`src/platform/solar-geometry.mts`) stays generated: the entries load it with `solar-epoch.mts` and
 pass the epoch down, so no module here imports it.
 
+A published picture as one more dataset of a page is `src/new-object/pictures/`: `--from-esa` and a spec's `pictures`. `esa-image.mts` reads
+ESA's picture pages and the sky tags in a JPEG, `registration.mts` owns the arithmetic from those tags and one pixel to a recipe's
+observation, plane and rim, `picture-bank.mts` writes one entry's records from the bank it is like, and `pictures.mts` drafts, writes
+and bakes. It never writes a sentence a reader sees and never picks a value for a color: those are the spec's, written by a person.
+
 The star survey behind `telescope stars GALAXY` is `src/stars/`. It and the generator's `--from-table` route
 (`src/new-object/archives/tables/table-stars.mts`) read VizieR's table metadata and SIMBAD through the same two modules,
 `vizier-tables.mts` and `simbad-tap.mts` beside it; a star class is a branch of SIMBAD's own type tree, never a
