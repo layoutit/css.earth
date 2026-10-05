@@ -1,0 +1,16 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "ngc-3132-central-star",
+  "angularDiameterMas": 0,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 27,063 km at 754.00 pc = 0 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 754,
+  "distanceSource": "Monteiro et al. (2025), MNRAS 539, 1756: 754 pc (+18, -15), the Gaia DR3 geometric distance of the bright star beside it, the distance its nebula's page stands at; this star's own Gaia DR3 parallax, 0.51 +/- 0.19 mas, is too weak to place it (https://arxiv.org/abs/2503.20640): 754 pc; Gaia DR3 parallax 0.5116 +/- 0.1936 mas (same row, RUWE 2.07), 2.6 standard errors, is not used",
+  "radiusKm": 27062.7,
+  "radiusSource": "Radius 0.0389 solar radii from De Marco et al. (2022), arXiv:2301.02775, Results: the star their model of the nebula needs has 110 kK and 200 Lsun; the paper prints no radius, and 0.0389 solar radii is the sphere that radiates that luminosity at that temperature (Stefan-Boltzmann law) (https://arxiv.org/abs/2301.02775): 27,063 km at 695,700 km per solar radius. No mass is measured, so GM is 0, the records' unpublished value. Temperature 110000 K from De Marco et al. (2022), arXiv:2301.02775, Results: a model of the nebula's light with a central star of effective temperature 110 kK and luminosity 200 Lsun matches the observations (https://arxiv.org/abs/2301.02775). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 110000,
+  "effectiveTemperatureSource": "De Marco et al. (2022), arXiv:2301.02775, Results: a model of the nebula's light with a central star of effective temperature 110 kK and luminosity 200 Lsun matches the observations (https://arxiv.org/abs/2301.02775)",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

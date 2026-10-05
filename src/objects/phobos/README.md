@@ -48,4 +48,5 @@ We checked the Phobos layers that [NASA Phobos Trek](https://trek.nasa.gov/phobo
 - This is radial height, not elevation above a geoid. This presentation is a low-resolution approximation of the released model, not the original scientific mesh.
 - Shape and cartographic products have different source histories. A display mesh cannot remove the source mosaic's residual control errors.
 - Relative albedo and slope withhold any facet whose released Albedo field is non-finite; this is not a complete photographic coverage mask.
+- Every display atlas is 3,756 × 3,922 pixels, 96 × 96 texels a face, which reduces display detail, not the source mosaic. Until 5 October 2026 the layout was 128 × 128 texels a face and a dataset switch took 312 to 552 ms on an iPad, against 166 to 187 ms on repeat visits now. Until the same day its faces were drawn from both sides, so the far half was drawn and sorted on every frame: a drag had 24 of 390 frames over 33 ms, the longest 160 ms, against 1 and 37 ms now.
 - Feature outlines are not published nomenclature boundaries.

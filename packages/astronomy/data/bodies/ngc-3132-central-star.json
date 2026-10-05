@@ -1,0 +1,30 @@
+{
+ "id": "ngc-3132-central-star",
+ "classification": "star",
+ "order": 5781,
+ "physical": {
+  "name": "NGC 3132 central star",
+  "horizonsCode": null,
+  "meanRadiusKm": 27062.7,
+  "gravitationalParameterKm3PerS2": 0,
+  "parent": null,
+  "effectiveTemperatureK": 110000
+ },
+ "physicalNotes": "Radius 0.0389 solar radii from De Marco et al. (2022), arXiv:2301.02775, Results: the star their model of the nebula needs has 110 kK and 200 Lsun; the paper prints no radius, and 0.0389 solar radii is the sphere that radiates that luminosity at that temperature (Stefan-Boltzmann law) (https://arxiv.org/abs/2301.02775): 27,063 km at 695,700 km per solar radius. No mass is measured, so GM is 0, the records' unpublished value. Temperature 110000 K from De Marco et al. (2022), arXiv:2301.02775, Results: a model of the nebula's light with a central star of effective temperature 110 kK and luminosity 200 Lsun matches the observations (https://arxiv.org/abs/2301.02775). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 151.7568557416905,
+  "declinationDegrees": -40.43674438999238,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 754,
+  "properMotionRaMasPerYear": -7.677450171548887,
+  "properMotionDecMasPerYear": 0.19727499759393125,
+  "radialVelocityKmPerS": 0,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 5420219732233481472 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/ngc-3132-central-star/source/photometry/gaia-dr3-source.csv",
+   "distance": "Monteiro et al. (2025), MNRAS 539, 1756: 754 pc (+18, -15), the Gaia DR3 geometric distance of the bright star beside it, the distance its nebula's page stands at; this star's own Gaia DR3 parallax, 0.51 +/- 0.19 mas, is too weak to place it (https://arxiv.org/abs/2503.20640): 754 pc; Gaia DR3 parallax 0.5116 +/- 0.1936 mas (same row, RUWE 2.07), 2.6 standard errors, is not used",
+   "properMotion": "Gaia DR3 (same row): -7.677, 0.197 mas/yr",
+   "radialVelocity": "No catalogued radial velocity: Gaia DR3 measures none for source 5420219732233481472 and SIMBAD lists none. Zero is assumed; a 30 km/s error moves the star by one part in 200,000 of its distance per century (https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia%20DR3%205420219732233481472)"
+  }
+ }
+}

@@ -402,6 +402,23 @@
           "path": "../opal-dates/hlsp_opal_hst_wfc3-uvis_neptune-2025b_f467m-f547m-f657n_v1_globalmap.tif",
           "url": "https://archive.stsci.edu/hlsp/opal/opal-neptune-cycle-32"
         }
+      },
+      {
+        "id": "voyager-1989",
+        "label": "Voyager 2",
+        "shortLabel": "Voyager",
+        "thumbnail": "/scenes/neptune/neptune-dataset-voyager-1989.webp",
+        "surface": "/scenes/neptune/neptune-surface-voyager-1989@2x.webp",
+        "poles": "/scenes/neptune/neptune-poles-voyager-1989@2x.webp",
+        "falseColor": false,
+        "noData": true,
+        "qualification": "Voyager 2 · 1989-08-20",
+        "notes": "Voyager 2 narrow-angle frames from its 1989 approach, assembled here into one map: detail from 15 green frames of 20 August, color from orange, green and blue frames of 17 and 18 August. Clouds are carried to one moment by their measured drift. The mean color is tied to the Irwin et al. 2024 true-color reconstruction. Gray grid marks latitudes north of 34° N, which Voyager did not see whole. The scene lighting follows the existing body presentation, not the observation date.",
+        "source": {
+          "id": "voyager-2-1989-map",
+          "path": "../voyager/neptune-voyager-2-1989-08-20.png",
+          "url": "https://pds-rings.seti.org/voyager/iss/"
+        }
       }
     ]
   },

@@ -72,6 +72,20 @@ test('a law a paper measured on the star replaces the model grid and leaves the 
   assert.deepEqual(JSON.parse(await star.read(`${star.source}/measurements.json`)), { effectiveTemperatureK: 6432, surfaceGravityLogg: 4.31, surfaceGravitySource: 'a paper' });
 });
 
+test('the row of a model grid nearest a star no grid reaches is read as a model limb, in the record\'s own words', async t => {
+  const star = await starWithEarlierLaw();
+  t.after(() => rm(star.root, { recursive: true, force: true }));
+  await writeFile(join(star.root, star.source, 'photometry/a-grid-limb-darkening.json'), `${JSON.stringify({ schema: 'cssearth-published-limb-darkening@1', objectId: 'a-star', law: 'quadratic', basis: 'model-prior',
+    source: 'A Grid (2020), Table ab (https://doi.org/10.1000/grid)', band: 'Johnson V', u1: { value: 0.0593, fixed: 'the row at 100000 K: a = 0.0593' }, u2: { value: 0.0996, fixed: 'the row at 100000 K: b = 0.0996' },
+    derived: 'of the nearest model A Grid (2020) tabulate, a white dwarf at 100,000 K' }, null, 2)}\n`);
+  const [result] = await starLimb(star.root, ['a-star'], { archive });
+  assert.equal(result?.limb, 'published');
+  const readme = await star.read(`${star.package}/README.md`);
+  assert.match(readme, /\*\*Limb\.\*\* The disc is dimmed toward the limb by the quadratic law \(u1 0\.0593, u2 0\.0996\) of the nearest model A Grid \(2020\) tabulate, a white dwarf at 100,000 K \(Johnson V\)\./u);
+  assert.match(readme, /- \*\*Model limb\.\*\* The limb darkening is the nearest tabulated model atmosphere's, not a measurement of this star\./u);
+  assert.doesNotMatch(readme, /Measured limb, other band/u);
+});
+
 const DECLINED = 'no mass is measured and no spectroscopic surface gravity is published with this radius: A Paper (2017) assume the gravity of their fit (table column 15)';
 const PAPER = 'https://doi.org/10.1000/example', J2000 = { ra: 10.01 - 16000 / 3.6e6 / Math.cos(20 * Math.PI / 180), dec: -20 + 8000 / 3.6e6 };
 /** A generated star with no mass, drawn flat: its record is at Gaia's epoch, 17 arcseconds from where the star was at J2000. */

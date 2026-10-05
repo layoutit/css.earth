@@ -1,0 +1,44 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "wd-1851-329",
+  "entries": [
+    {
+      "id": "placement",
+      "subject": "Placement",
+      "status": "included",
+      "finding": "Gaia DR3 source 2090486618786534784: position at J2016.0. Distance: Chornay & Walton (2021), A&A 656, A110; CDS J/A+A/656/A110, Table A.1, PN G063.1+13.9: distance 790 pc (764 to 818) from the Gaia EDR3 parallax of this star, the distance its nebula's page stands at (https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/656/A110): 790.014153719229 pc; Gaia DR3 parallax 1.2696 +/- 0.0438 mas (same row, RUWE 1.07), 29.0 standard errors, is not used. Proper motion: Gaia DR3 (same row): 1.645, 2.472 mas/yr. Radial velocity from SIMBAD's radial velocity for Gaia DR3 2090486618786534784 (quality E), from 1953GCRV..C......0W; Gaia DR3 measures none.",
+      "evidence": [
+        "https://gea.esac.esa.int/archive/",
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/656/A110",
+        "https://ui.adsabs.harvard.edu/abs/1953GCRV..C......0W/abstract"
+      ]
+    },
+    {
+      "id": "radius-mass-and-temperature",
+      "subject": "Radius, mass and temperature",
+      "status": "included",
+      "finding": "Radius 0.0374 solar radii from González-Santamaría et al. (2021), A&A 656, A51, Table 8: log(L/Lsun) = 2.3 from the star's V magnitude at its Gaia EDR3 distance, and log(Teff) = 5.05; the paper prints no radius, and 0.0374 solar radii is the sphere that radiates that luminosity at that temperature (Stefan-Boltzmann law) (https://arxiv.org/abs/2109.12114). No mass is measured, so GM is 0, the records' unpublished value. Temperature 112200 K from González-Santamaría et al. (2021), A&A 656, A51, Table 8: log(Teff) = 5.05, a temperature from the literature the paper compiles; spectral type hgO(H).",
+      "evidence": [
+        "https://arxiv.org/abs/2109.12114"
+      ]
+    },
+    {
+      "id": "color",
+      "subject": "Color",
+      "status": "included",
+      "finding": "A Planck spectrum at 112,200 K, because no archive holds a spectrum of this star (stis-ngsl: HD 175353 is not in the library; gaia-xp: Gaia DR3 published no sampled BP/RP spectrum of it; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number), through the CIE 1931 2-degree observer: #98b3ff. Routes tried in order: stis-ngsl: HD 175353 is not in the library; gaia-xp: Gaia DR3 published no sampled BP/RP spectrum of it; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; planck: used.",
+      "evidence": [
+        "https://arxiv.org/abs/2109.12114"
+      ]
+    },
+    {
+      "id": "limb-darkening",
+      "subject": "Limb darkening",
+      "status": "included",
+      "finding": "The disc is dimmed toward the limb by the quadratic law (u1 0.0593, u2 0.0996) of the nearest model Claret et al. (2020), A&A 634, A93 tabulate: a pure-hydrogen white dwarf at 100,000 K and log g 7.0, the grid's hottest (Johnson V).",
+      "evidence": [
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/634/A93"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "wd-1111-552",
+  "entries": [
+    {
+      "id": "placement",
+      "subject": "Placement",
+      "status": "included",
+      "finding": "Gaia DR3 source 843950873117830528: position at J2016.0. Distance: Chornay & Walton (2021), A&A 656, A110; CDS J/A+A/656/A110, Table A.1, PN G148.4+57.0: distance 811 pc (782 to 842) from the Gaia EDR3 parallax of this star, the distance its nebula's page stands at (https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/656/A110): 811.014503375056 pc; Gaia DR3 parallax 1.2347 +/- 0.0461 mas (same row, RUWE 1.04), 26.8 standard errors, is not used. Proper motion: Gaia DR3 (same row): 0.076, 1.214 mas/yr. Radial velocity from No catalogued radial velocity: Gaia DR3 measures none for source 843950873117830528 and SIMBAD lists none. Zero is assumed; a 30 km/s error moves the star by one part in 300,000 of its distance per century.",
+      "evidence": [
+        "https://gea.esac.esa.int/archive/",
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/656/A110",
+        "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia%20DR3%20843950873117830528"
+      ]
+    },
+    {
+      "id": "radius-mass-and-temperature",
+      "subject": "Radius, mass and temperature",
+      "status": "included",
+      "finding": "Radius 0.0374 solar radii from González-Santamaría et al. (2021), A&A 656, A51, Table 8: log(L/Lsun) = 1.98 from the star's V magnitude at its Gaia EDR3 distance, and log(Teff) = 4.97; the paper prints no radius, and 0.0374 solar radii is the sphere that radiates that luminosity at that temperature (Stefan-Boltzmann law) (https://arxiv.org/abs/2109.12114). No mass is measured, so GM is 0, the records' unpublished value. Temperature 93300 K from González-Santamaría et al. (2021), A&A 656, A51, Table 8: log(Teff) = 4.97, a temperature from the literature the paper compiles; spectral type DAO.",
+      "evidence": [
+        "https://arxiv.org/abs/2109.12114"
+      ]
+    },
+    {
+      "id": "color",
+      "subject": "Color",
+      "status": "included",
+      "finding": "A Planck spectrum at 93,300 K, because no archive holds a spectrum of this star (stis-ngsl: no HD number in SIMBAD; gaia-xp: Gaia DR3 published no sampled BP/RP spectrum of it; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number), through the CIE 1931 2-degree observer: #98b4ff. Routes tried in order: stis-ngsl: no HD number in SIMBAD; gaia-xp: Gaia DR3 published no sampled BP/RP spectrum of it; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; planck: used.",
+      "evidence": [
+        "https://arxiv.org/abs/2109.12114"
+      ]
+    },
+    {
+      "id": "limb-darkening",
+      "subject": "Limb darkening",
+      "status": "included",
+      "finding": "The disc is dimmed toward the limb by the quadratic law (u1 0.0606, u2 0.1092) of the nearest model Claret et al. (2020), A&A 634, A93 tabulate: a pure-hydrogen white dwarf at 90,000 K and log g 7.0, the nearer of the two it stands between (Johnson V).",
+      "evidence": [
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/634/A93"
+      ]
+    }
+  ]
+}

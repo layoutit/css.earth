@@ -1,0 +1,52 @@
+{
+  "id": "arxiv-2109-12114",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "González-Santamaría et al. (2021): Planetary Nebulae in Gaia EDR3: Central Star identification, properties and binarity",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2109.12114"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/202141916"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/2109.12114",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/202141916",
+      "label": "A&A 656, A51 (2021)"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/2109.12114",
+      "checkedOn": "2026-10-05",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "González-Santamaría et al. (2021), A&A 656, A51 (2021)",
+      "scope": "citation",
+      "evidence": "https://arxiv.org/abs/2109.12114"
+    }
+  ],
+  "publisher": "A&A 656, A51 (2021)",
+  "creators": [
+    "I. González-Santamaría",
+    "M. Manteiga",
+    "A. Manchado",
+    "et al."
+  ],
+  "publicationDate": "2021"
+}

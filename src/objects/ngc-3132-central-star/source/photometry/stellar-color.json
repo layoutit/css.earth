@@ -1,0 +1,16 @@
+{
+  "schema": "cssearth-stellar-photometric-color@1",
+  "objectId": "ngc-3132-central-star",
+  "spectrum": "planck",
+  "temperature": {
+    "published": {
+      "kelvin": 110000,
+      "lowerKelvin": 110000,
+      "upperKelvin": 110000,
+      "citation": "De Marco et al. (2022), arXiv:2301.02775, Results: a model of the nebula's light with a central star of effective temperature 110 kK and luminosity 200 Lsun matches the observations: 110000 K; the source gives no uncertainty, so the range is the value itself, https://arxiv.org/abs/2301.02775"
+    },
+    "note": "No archive holds a spectrum of this star (stis-ngsl: no HD number in SIMBAD; gaia-xp: Gaia DR3 published no sampled BP/RP spectrum of it; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number), so the color is a Planck spectrum at its published temperature."
+  },
+  "whitePoint": "sRGB D65",
+  "normalization": "brightest linear sRGB channel = 1"
+}

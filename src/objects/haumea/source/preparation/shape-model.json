@@ -4,8 +4,8 @@
   "displayRadius": 230,
   "quadBudget": 2000,
   "mesh": {
-    "latitudeSegments": 32,
-    "longitudeSegments": 48,
+    "latitudeSegments": 16,
+    "longitudeSegments": 32,
     "width": 3072,
     "height": 1536,
     "poleSize": 256,

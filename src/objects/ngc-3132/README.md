@@ -14,4 +14,4 @@ The card's facts cite their papers in [source/content/object.json](source/conten
 ## Known problems
 
 - The framing radius is a presentation value, not a measured extent: the ionised gas spans 78 by 64 arcsec, and the faint molecular halo reaches the frame's edge.
-- The nebula stands at its bright central star's place. That star is a companion; the faint star that made the nebula is beside it (ESA/Webb's caption).
+- The nebula stands at its bright central star's place. That star is a companion; the faint star that made the nebula is beside it (ESA/Webb's caption) and has its own page, [NGC 3132 central star](../ngc-3132-central-star/README.md): a zoom in on the nebula goes on into it.

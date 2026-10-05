@@ -1,0 +1,44 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "wd-2226-210",
+  "entries": [
+    {
+      "id": "placement",
+      "subject": "Placement",
+      "status": "included",
+      "finding": "Gaia DR3 source 6628874205642084224: position at J2016.0. Distance: Benedict et al. (2009), HST parallaxes of planetary nebula nuclei: 216 pc (-12/+14) from the trigonometric parallax of this star, the distance its nebula's page stands at (https://arxiv.org/abs/0909.4281): 216 pc; Gaia DR3 parallax 5.0124 +/- 0.0437 mas (same row, RUWE 0.95), 114.8 standard errors, is not used. Proper motion: Gaia DR3 (same row): 38.790, -3.347 mas/yr. Radial velocity from SIMBAD's radial velocity for Gaia DR3 6628874205642084224 (quality E), from 1953GCRV..C......0W; Gaia DR3 measures none.",
+      "evidence": [
+        "https://gea.esac.esa.int/archive/",
+        "https://arxiv.org/abs/0909.4281",
+        "https://ui.adsabs.harvard.edu/abs/1953GCRV..C......0W/abstract"
+      ]
+    },
+    {
+      "id": "radius-mass-and-temperature",
+      "subject": "Radius, mass and temperature",
+      "status": "included",
+      "finding": "Radius 0.0228 solar radii from González-Santamaría et al. (2021), A&A 656, A51, Table 8: log(L/Lsun) = 1.79 from the star's V magnitude at its Gaia EDR3 distance, and log(Teff) = 5.03; the paper prints no radius, and 0.0228 solar radii is the sphere that radiates that luminosity at that temperature (Stefan-Boltzmann law) (https://arxiv.org/abs/2109.12114). No mass is measured, so GM is 0, the records' unpublished value. Temperature 107200 K from González-Santamaría et al. (2021), A&A 656, A51, Table 8: log(Teff) = 5.03, a temperature from the literature the paper compiles; spectral type DAO.5.",
+      "evidence": [
+        "https://arxiv.org/abs/2109.12114"
+      ]
+    },
+    {
+      "id": "color",
+      "subject": "Color",
+      "status": "included",
+      "finding": "Gaia DR3 XP spectrum, source 6628874205642084224, through the CIE 1931 2-degree observer: #96b4ff. Routes tried in order: stis-ngsl: no HD number in SIMBAD; pulkovo: no HR number; kiehling: no HR number; kharitonov: no HR number; burnashev: no HR (BS) number; gaia-xp: used.",
+      "evidence": [
+        "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=6628874205642084224&FORMAT=csv&DATA_STRUCTURE=RAW&RELEASE=Gaia+DR3"
+      ]
+    },
+    {
+      "id": "limb-darkening",
+      "subject": "Limb darkening",
+      "status": "included",
+      "finding": "The disc is dimmed toward the limb by the quadratic law (u1 0.0593, u2 0.0996) of the nearest model Claret et al. (2020), A&A 634, A93 tabulate: a pure-hydrogen white dwarf at 100,000 K and log g 7.0, the grid's hottest (Johnson V).",
+      "evidence": [
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/634/A93"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "wd-2226-210",
+  "angularDiameterMas": 0,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 15,862 km at 216.00 pc = 0 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 216,
+  "distanceSource": "Benedict et al. (2009), HST parallaxes of planetary nebula nuclei: 216 pc (-12/+14) from the trigonometric parallax of this star, the distance its nebula's page stands at (https://arxiv.org/abs/0909.4281): 216 pc; Gaia DR3 parallax 5.0124 +/- 0.0437 mas (same row, RUWE 0.95), 114.8 standard errors, is not used",
+  "radiusKm": 15862,
+  "radiusSource": "Radius 0.0228 solar radii from González-Santamaría et al. (2021), A&A 656, A51, Table 8: log(L/Lsun) = 1.79 from the star's V magnitude at its Gaia EDR3 distance, and log(Teff) = 5.03; the paper prints no radius, and 0.0228 solar radii is the sphere that radiates that luminosity at that temperature (Stefan-Boltzmann law) (https://arxiv.org/abs/2109.12114): 15,862 km at 695,700 km per solar radius. No mass is measured, so GM is 0, the records' unpublished value. Temperature 107200 K from González-Santamaría et al. (2021), A&A 656, A51, Table 8: log(Teff) = 5.03, a temperature from the literature the paper compiles; spectral type DAO.5 (https://arxiv.org/abs/2109.12114). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 107200,
+  "effectiveTemperatureSource": "González-Santamaría et al. (2021), A&A 656, A51, Table 8: log(Teff) = 5.03, a temperature from the literature the paper compiles; spectral type DAO.5 (https://arxiv.org/abs/2109.12114)",
+  "surfaceGravityLogg": 7,
+  "surfaceGravitySource": "Napiwotzki (1999), arXiv:astro-ph/9908181, Table 2: log g from a fit of the star's spectrum (https://arxiv.org/abs/astro-ph/9908181)",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

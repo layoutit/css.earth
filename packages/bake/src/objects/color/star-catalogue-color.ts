@@ -11,7 +11,9 @@ export interface StarTemperature { readonly kelvin: number; readonly source: str
 export function readStarTemperature(measurements: unknown): StarTemperature {
   const record = requireRecord(measurements, 'star measurements');
   const kelvin = requireFiniteNumber(record.effectiveTemperatureK, 'effectiveTemperatureK');
-  if (!(kelvin >= 1000 && kelvin <= 40000)) throw new TypeError('A stellar effective temperature lies between 1,000 and 40,000 K.');
+  // The display fit ends at 40,000 K and holds its color there for a hotter star (temperatureColor): a planetary nebula's
+  // central star is past 100,000 K.
+  if (!(kelvin >= 1000 && kelvin <= 250000)) throw new TypeError('A stellar effective temperature lies between 1,000 and 250,000 K.');
   const source = requireString(record.effectiveTemperatureSource, 'effectiveTemperatureSource');
   if (!/https?:\/\//u.test(source)) throw new TypeError('The effective temperature source names the publication by URL.');
   return { kelvin, source };

@@ -320,6 +320,13 @@
       "origin": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/neptune/hlsp_opal_hst_wfc3-uvis_neptune-2025b_f657n_v1_globalmap.fits",
       "credit": "NASA, ESA, A. A. Simon, M. H. Wong and the OPAL team",
       "license": "CC BY 4.0"
+    },
+    {
+      "id": "voyager-2-1989-map",
+      "path": "voyager/neptune-voyager-2-1989-08-20.png",
+      "generator": "packages/bake/authoring/neptune/author-voyager-map.mts",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit."
     }
   ],
   "datasets": [
@@ -1992,6 +1999,129 @@
         "reverseLongitude": false,
         "longitudeOffsetDegrees": 0,
         "longitudePeriod": 720
+      },
+      "planetographicAxisRatio": 1.0173780863563535
+    },
+    {
+      "id": "voyager-1989",
+      "source": "voyager/neptune-voyager-2-1989-08-20.png",
+      "decode": {
+        "kind": "raster",
+        "channels": 3
+      },
+      "products": [
+        {
+          "kind": "surface",
+          "filename": "neptune-surface-voyager-1989.webp",
+          "transforms": [
+            {
+              "kind": "resize",
+              "width": 2880,
+              "height": 1440
+            }
+          ],
+          "packing": {
+            "bandCount": 20,
+            "gutter": 18
+          },
+          "encoding": {
+            "quality": 80,
+            "smartSubsample": true,
+            "effort": 6
+          }
+        },
+        {
+          "kind": "surface",
+          "filename": "neptune-surface-voyager-1989@2x.webp",
+          "transforms": [
+            {
+              "kind": "resize",
+              "width": 5120,
+              "height": 2560
+            }
+          ],
+          "packing": {
+            "bandCount": 20,
+            "gutter": 32
+          },
+          "encoding": {
+            "quality": 80,
+            "smartSubsample": true,
+            "effort": 6
+          }
+        },
+        {
+          "kind": "poles",
+          "filename": "neptune-poles-voyager-1989.webp",
+          "projection": {
+            "tileSize": 128,
+            "poles": [
+              "north",
+              "south",
+              "north",
+              "south"
+            ],
+            "latitudeSegments": 20,
+            "angularMode": "direct-segment",
+            "sampling": "bilinear-wrapped"
+          },
+          "encoding": {
+            "quality": 80,
+            "smartSubsample": true,
+            "effort": 6,
+            "alphaQuality": 100
+          }
+        },
+        {
+          "kind": "poles",
+          "filename": "neptune-poles-voyager-1989@2x.webp",
+          "projection": {
+            "tileSize": 256,
+            "poles": [
+              "north",
+              "south",
+              "north",
+              "south"
+            ],
+            "latitudeSegments": 20,
+            "angularMode": "direct-segment",
+            "sampling": "bilinear-wrapped"
+          },
+          "encoding": {
+            "quality": 80,
+            "smartSubsample": true,
+            "effort": 6,
+            "alphaQuality": 100
+          }
+        },
+        {
+          "kind": "thumbnail",
+          "filename": "neptune-dataset-voyager-1989.webp",
+          "transforms": [
+            {
+              "kind": "resize",
+              "width": 132,
+              "height": 72
+            }
+          ],
+          "encoding": {
+            "quality": 80,
+            "smartSubsample": true,
+            "effort": 6
+          }
+        }
+      ],
+      "coverage": {
+        "kind": "declared-rows",
+        "unobservedRows": [
+          [
+            0,
+            440
+          ]
+        ],
+        "reverseLongitude": false,
+        "longitudeOffsetDegrees": 0,
+        "longitudePeriod": 2880
       },
       "planetographicAxisRatio": 1.0173780863563535
     }

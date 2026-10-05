@@ -1,0 +1,43 @@
+{
+  "id": "arxiv-2301-02775",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Marco et al. (2023): The messy death of a multiple star system and the resulting planetary nebula as observed by JWST",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2301.02775"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/2301.02775",
+      "label": "arXiv preprint"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/2301.02775",
+      "checkedOn": "2026-10-05",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Marco et al. (2023), Nature Astronomy, 2022, Vol. 6, p. 1421",
+      "scope": "citation",
+      "evidence": "https://arxiv.org/abs/2301.02775"
+    }
+  ],
+  "publisher": "Nature Astronomy, 2022, Vol. 6, p. 1421",
+  "creators": [
+    "Orsola De Marco",
+    "Muhammad Akashi",
+    "Stavros Akras",
+    "et al."
+  ],
+  "publicationDate": "2023"
+}
