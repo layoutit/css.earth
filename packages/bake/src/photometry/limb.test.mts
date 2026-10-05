@@ -22,6 +22,18 @@ test('limb factors are 1 at the flood-lit disc centre, follow the law elsewhere 
   assert.ok(Math.abs(side - Math.exp(-0.5628 * Math.PI / 3) * (0.6424 * 2 * 0.5 / 1.5 + 0.3576 * 0.5)) < 1e-12);
 });
 
+test('a grazing texel under flood light keeps the held law only when its incidence is held with its floored emission', () => {
+  // The fitted edge is 80 degrees in these records. A normal 0.006 degrees from the limb, lit from the viewer, with the
+  // one-texel emission floor of a 256-pixel frame: the emission is floored, the incidence is not.
+  const law = limbLawFromRecords(paths, [minnaert(0.8), minnaert(0.7), minnaert(0.73)]), view = [0, 0, 1];
+  const { incidence, emission, phase } = scatteringAngles([Math.sqrt(1 - 1e-8), 0, 1e-4], view, view, 1 / 256);
+  assert.ok(phase < 1e-6 && incidence > emission && emission > 80 * degrees);
+  // Passed as they are, the angles are not flood light to the law, and the texel falls to a fifth of the held value.
+  const edge = Math.cos(80 * degrees), held = limbFactors(law, emission, emission, phase), collapsed = limbFactors(law, incidence, emission, phase);
+  assert.ok(Math.abs(held[0] - edge ** 0.6) < 1e-12);
+  assert.ok(collapsed[0] < held[0] / 5);
+});
+
 test('the overlay is exact for the reference color and for the channel that sets its alpha', () => {
   const reference = [180, 120, 60] as const, factors = [0.9, 0.5, 1.4];
   const [r, g, b, alpha] = limbOverlay(factors, reference);

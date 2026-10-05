@@ -2881,7 +2881,10 @@ function preparePolarMaterialSample({
 function globeLimbOverlay(normal:ReadonlyVector3, objectLight:ReadonlyVector3, objectView:ReadonlyVector3, emissionFloor:number, directTransmission:number) {
   if (!limbReference) throw new Error("Saturn's limb overlay needs the prepared surface's reference color first.");
   const { incidence, emission, phase } = scatteringAngles(normal, objectLight, objectView, emissionFloor);
-  return limbOverlay(limbFactors(LIMB_LAW, incidence, emission, phase).map((factor) => factor * directTransmission), limbReference);
+  // Flood light is the view, so the incidence is the emission. The emission floor leaves a grazing texel's incidence past
+  // its emission; the law, held at the emission its data reached, would then fall to black on that texel alone.
+  const lit = phase < 1e-6 ? emission : incidence;
+  return limbOverlay(limbFactors(LIMB_LAW, lit, emission, phase).map((factor) => factor * directTransmission), limbReference);
 }
 
 function writeLimbOverlay(output:Uint8Array, offset:number, [r, g, b, alpha]:readonly number[]) {
