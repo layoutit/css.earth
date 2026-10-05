@@ -1,0 +1,33 @@
+{
+  "id": "nasa-tm-86246",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Reports of Planetary Geology Program, 1983 (NASA Technical Memorandum 86246)",
+  "identifiers": [
+    {
+      "type": "NASA report number",
+      "value": "NASA-TM-86246"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://ntrs.nasa.gov/citations/19840015363",
+      "label": "Publication"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/europa/source/manifest.json",
+      "locator": "/documents/24"
+    }
+  ],
+  "creators": [
+    "Alfred S. McEwen",
+    "Laurence A. Soderblom"
+  ],
+  "publisher": "NASA Office of Space Science and Applications",
+  "publicationDate": "1984",
+  "relations": [],
+  "statements": []
+}

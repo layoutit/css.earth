@@ -75,6 +75,11 @@ export function parsePhotometricModel(value: unknown): PhotometricModel {
     const disk: DiskModel = diskFamily === 'lunar-lambert' ? { family: diskFamily, weight: requireFiniteNumber(strict(r.disk, ['family', 'weight'], 'disk function').weight, 'weight') }
       : diskFamily === 'minnaert' ? (() => { const d = strict(r.disk, ['family', 'coefficient', 'coefficientPerDegree'], 'disk function'); return { family: diskFamily, coefficient: requireFiniteNumber(d.coefficient, 'coefficient'), coefficientPerDegree: requireFiniteNumber(d.coefficientPerDegree ?? 0, 'coefficient per degree') }; })()
       : diskFamily === 'lommel-seeliger-lambert' ? (() => { const d = strict(r.disk, ['family', 'lunarFraction', 'lunarFractionPerDegree', 'surfacePhase', 'surfacePhasePerDegree'], 'disk function'); return { family: diskFamily, lunarFraction: requireFiniteNumber(d.lunarFraction, 'lunar fraction'), lunarFractionPerDegree: requireFiniteNumber(d.lunarFractionPerDegree, 'lunar fraction per degree'), surfacePhase: requireFiniteNumber(d.surfacePhase, 'surface phase function'), surfacePhasePerDegree: requireFiniteNumber(d.surfacePhasePerDegree, 'surface phase function per degree') }; })()
+      : diskFamily === 'minnaert-tabulated' ? { family: diskFamily, points: requireArray(strict(r.disk, ['family', 'points'], 'disk function').points, 'exponent points').map(point => {
+          const pair = requireArray(point, 'exponent point');
+          if (pair.length !== 2) throw new TypeError('An exponent point is [degrees, exponent].');
+          return [requireFiniteNumber(pair[0], 'exponent point degrees'), requireFiniteNumber(pair[1], 'exponent point value')] as const;
+        }) }
       : diskFamily === 'lambert' || diskFamily === 'lommel-seeliger' || diskFamily === 'akimov' ? (strict(r.disk, ['family'], 'disk function'), { family: diskFamily })
       : (() => { throw new TypeError(`Unknown disk function: ${diskFamily}.`); })();
     const phase: PhaseModel | undefined = optional(r.phase, value => {

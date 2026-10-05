@@ -251,7 +251,7 @@ The source each decision examined. Watching these is how a decision reopens.
 | `exi-measured-limb-halo` | 1 | mars | EXI Level 2 radiance frames near zero phase are obtained and reduced to limb profiles in the three bands. |
 | `exomoon-candidate` | 1 | hd-206893-b | Further GRAVITY astrometry confirms or rules out the signal. |
 | `expansion-distance` | 1 | m2-9-volume | Choose an explicitly justified distance model and propagate its uncertainty through every frame/extent before changing scale. |
-| `fast-knots` | 1 | m57-nircam-layers | The knots' places and speeds are published as a table. |
+| `fast-knots` | 1 | m57-nircam-layers | — |
 | `feature-outline-geometry` | 1 | mercury | A released dataset supplies mapped nomenclature boundaries for Mercury's features. |
 | `feature-registration-followup` | 1 | pallene | Independent surface controls or an image with stable identifiable features can qualify feature registration. |
 | `filacchione-2022-spectrophotometry` | 1 | enceladus | A released numeric map with coordinates and missing-data definitions is located, or a separately validated reproduction of the published method is undertaken. |
