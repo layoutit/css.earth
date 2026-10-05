@@ -127,9 +127,6 @@ export function mountPreparedCssImageLayers({ host, before, payload, resolveReso
   let destroyed = false;
   const quotable = (address: string) => address.replace(/["\\\n\r]/g, char => `\\${char}`);
   return Object.freeze({ root,
-    /** The opacity the bank's root stops at, as its stacks do (`publish`): 1 for a bank of patches, under 1
-     * (STACK_OPACITY_CEILING) for any other. */
-    ceiling: banks.every(bank => bank.patches) ? 1 : STACK_OPACITY_CEILING,
     /** The bank root is shown again: each stack it draws waits for its images' decode, as one the camera turns to does. */
     resume() { for (const bank of banks) { bank.drawn = false; bank.turn++; } },
     /** `around`: the bank is drawn around a body that stands inside it, at that place (reference metres). The sheets the
@@ -196,12 +193,14 @@ export function mountPreparedCssImageLayers({ host, before, payload, resolveReso
           const shown = body && texture.sheet && (withinReach(texture.sheet, local.positionUnits, bank.reach) || withinReach(texture.sheet, body, bank.reach)) ? '0' : '';
           if (texture.shown !== shown) { texture.shown = shown; texture.element.style.opacity = shown; }
         }
-        // Never 1 for a stack of sheets (STACK_OPACITY_CEILING): a drag across M31 had its longest frame at 108 to 111 ms
-        // with a bank's opacity reaching 1, and 67 to 72 ms under the ceiling (iPad, 2026-10-04). A stack of patches is
-        // the only stack of its bank and keeps the whole weight, so it is drawn at 1: under the ceiling the browser
-        // composites the stack as one group, and at the Homunculus's nearest view a wedge of that group, a third of the
-        // picture, was black for one step of a drag, at the same camera places on every pass (headless Chrome, 2026-10-05).
-        set(bank.projection, 'opacity', String(Math.min(bank.patches ? 1 : STACK_OPACITY_CEILING, weight)));
+        // Never 1 (STACK_OPACITY_CEILING): a drag across M31 had its longest frame at 108 to 111 ms with a bank's opacity
+        // reaching 1, and 67 to 72 ms under the ceiling (iPad, 2026-10-04). A stack of patches was drawn at 1 for a day:
+        // under the ceiling a wedge of the Homunculus had gone black for a step of a drag at its nearest view, in headless
+        // Chrome. That was looked for again and not found. At the nearest view, on the nebula's page and around its star,
+        // the picture under the ceiling matched the picture at 1 at every step: 580 steps in Chrome on a GPU, 90 in the
+        // software-rendered shell, 11 on an iPad. And at 1 the bank crossed 1 on every zoom out: Cassiopeia A's 1,397
+        // patches repainted in one frame of 291 ms on the iPad, 51 ms under the ceiling (2026-10-05).
+        set(bank.projection, 'opacity', String(Math.min(STACK_OPACITY_CEILING, weight)));
         set(bank.projection, 'visibility', wanted && bank.ready ? 'visible' : 'hidden');
         // A zero-weight axis contributes nothing; its 3D leaves leave compositing.
         set(bank.projection, 'display', wanted ? '' : 'none');

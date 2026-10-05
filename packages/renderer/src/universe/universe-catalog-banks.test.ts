@@ -11,7 +11,7 @@ mock.module('../image-layers/prepared-image-layer-runtime.js', { namedExports: {
   mountPreparedCssImageLayers: ({ host, before }: { host: HTMLElement; before: Element }) => {
     const root = host.ownerDocument.createElement('div');
     host.insertBefore(root, before);
-    return { root, ceiling: 0.999, publish(_publication: unknown, around: readonly number[] | false = false) { drawnAround.push(around !== false); }, resume() {}, destroy() { root.remove(); } };
+    return { root, publish(_publication: unknown, around: readonly number[] | false = false) { drawnAround.push(around !== false); }, resume() {}, destroy() { root.remove(); } };
   },
 } });
 // The modules under test import the mocked ones, so they load after the mocks.
