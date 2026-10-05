@@ -20684,28 +20684,34 @@
       }
     },
     {
-      "path": "photometry/dhingra-2021-lommel-seeliger-lambert-clear.json",
-      "purpose": "Lommel-Seeliger plus Lambert law of Europa fitted to Voyager 2, Galileo and New Horizons clear-filter images, used to light the globe.",
+      "path": "photometry/mcewen-1983-dhingra-2021-minnaert-clear.json",
+      "purpose": "Minnaert law of Europa joined from the low-phase fit of McEwen and Soderblom and the 10 to 128 degree fit of Dhingra, Buratti and Seignovert, used to light the globe.",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
           {
+            "catalogueId": "nasa-tm-86246",
+            "role": "method",
+            "evidence": "Page 261 solves Europa's limb darkening from 44 pairs of Voyager images of the same ground. It finds the scattering very uniform across surface materials and wavelength and gives the Minnaert exponent as K(a) = 0.64 - 0.005a + 0.00066a^2 - 0.000012a^3 for phase a from 3 to 30 degrees, correlation coefficient 0.94. The record's points from 3 to 30 degrees are that polynomial evaluated every five degrees, and the exponent is held at its 3 degree value, 0.631, below that. This is the fit made where the flood-lit view sits.",
+            "locator": "Page 261, McEwen and Soderblom, Multi-image photometric solutions for the Galilean satellites"
+          },
+          {
             "catalogueId": "doi-10-3847-psj-ac06d6",
             "role": "method",
-            "evidence": "Dhingra, Buratti and Seignovert (2021) eq. 2 writes I/F = A f(alpha) mu0/(mu + mu0) + B mu0 and sets B = 1 - A. Table 2 gives each coefficient as a line in phase, a alpha + b with alpha in degrees. The ridged plains row, the unit the paper says covers more than half of Europa, reads A = -0.003 alpha + 0.871 and f(alpha) = -0.014 alpha + 1.556. The fitted phase range 10 to 128 degrees is the phase column of Table 1. The paper states no emission range. The fitted emission limit, 84.5 degrees, is derived here, not printed: it is the emission angle at the outermost pixel centre of the finest full-disc image in Table 1, Voyager 2 wide-angle frame C2065221, on a 1560.8 km sphere, arcsin((R - 0.5 pixel)/R). The paper aligned only its full-disc frames to the limb.",
-            "locator": "Eq. 2; Table 2, ridged plains row; Table 1"
+            "evidence": "Table 2, ridged plains, gives the Minnaert parameters as lines in phase from 21 images at 10 to 128 degrees: k = 0.004a + 0.532 and B0 = -0.002a + 0.728. The record follows that line for k from 57 degrees, where it reaches the 1983 value at 30 degrees (0.76), to 128 degrees (1.044), and holds 0.76 between 30 and 57 degrees so the exponent never falls as phase grows; that join is cssEarth's reading, not either paper's. B0 is the record's phase function, held beyond 128 degrees. The paper's own fit of its lowest-phase image, Voyager C2060513 at 10 degrees, is k = 0.65 for the whole disc and 0.64 for ridged plains (Figures 4 and 6), the value the 1983 polynomial gives there (0.644), where the Table 2 line gives 0.57: the reason the line is not used at low phase. The paper states no emission range; the limit 84.5 degrees is derived as before from Voyager 2 wide-angle frame C2065221.",
+            "locator": "Table 2, ridged plains row; Figures 4 and 6; Table 1"
           },
           {
             "catalogueId": "pds-opus-vg-iss-2-j-c2065221",
             "role": "reference",
-            "evidence": "The PDS Ring-Moon Systems Node lists a centre resolution of 14.46542 km per pixel on Europa for Voyager 2 wide-angle frame C2065221, the scale used for the emission limit. Of the full-disc frames in the paper's Table 1 it is the finest; the node lists 14.72 to 22.92 km per pixel for the others.",
+            "evidence": "The PDS Ring-Moon Systems Node lists a centre resolution of 14.46542 km per pixel on Europa for Voyager 2 wide-angle frame C2065221, the scale used for the emission limit: the emission angle at its outermost pixel centre on a 1560.8 km sphere, arcsin((R - 0.5 pixel)/R).",
             "locator": "Europa Surface Geometry Constraints, centerresolution"
           }
         ]
       },
       "origin": "https://doi.org/10.3847/PSJ/ac06d6",
-      "credit": "Rajani D. Dhingra, Bonnie J. Buratti and Benoît Seignovert (2021), The Planetary Science Journal 2, 144, CC BY 4.0; transcription and emission limit: cssEarth.",
-      "acquisition": "Coefficients transcribed from the cited paper into a project document; the emission limit is computed from the image scale the PDS Ring-Moon Systems Node lists; no data file was downloaded."
+      "credit": "Alfred S. McEwen and Laurence A. Soderblom, Reports of Planetary Geology Program 1983 (NASA TM-86246), page 261; Rajani D. Dhingra, Bonnie J. Buratti and Benoît Seignovert (2021), The Planetary Science Journal 2, 144, CC BY 4.0. Transcription, the join between the two fits and the emission limit: cssEarth.",
+      "acquisition": "Coefficients transcribed from the two cited sources into a project document; the emission limit is computed from the image scale the PDS Ring-Moon Systems Node lists; no data file was downloaded."
     }
   ]
 }

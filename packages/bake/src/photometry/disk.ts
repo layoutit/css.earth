@@ -33,9 +33,15 @@ export type DiskModel =
    * (cos beta)^(g/(pi - g)) / cos gamma, with the photometric longitude gamma = arctan[(mu0 - mu cos g)/(mu sin g)] and
    * latitude beta = arccos(mu / cos gamma). It is 1 over the whole disc at zero phase: no limb darkening under flood light.
    */
-  | { readonly family: 'akimov' };
+  | { readonly family: 'akimov' }
+  /**
+   * Minnaert with the exponent a paper gives at stated phase angles, each point [phase in degrees, k], joined by straight
+   * lines and held at the nearest point outside them: D = mu0^k mu^(k - 1). It lets fits made over different phase ranges
+   * each be used inside its own range (McEwen and Soderblom 1983 and Dhingra et al. 2021 for Europa).
+   */
+  | { readonly family: 'minnaert-tabulated'; readonly points: readonly (readonly [number, number])[] };
 
-export const DISK_FAMILIES = ['lambert', 'lommel-seeliger', 'lunar-lambert', 'minnaert', 'lommel-seeliger-lambert', 'akimov'] as const;
+export const DISK_FAMILIES = ['lambert', 'lommel-seeliger', 'lunar-lambert', 'minnaert', 'lommel-seeliger-lambert', 'akimov', 'minnaert-tabulated'] as const;
 
 /** Normal incidence and emission at zero phase: the reference at which every disk function above equals 1, except Lommel-Seeliger plus Lambert, which there gives A0 f0 / 2 + 1 - A0. */
 export const NORMAL_GEOMETRY: DiskGeometry = Object.freeze({ mu0: 1, mu: 1, phase: 0 });
@@ -44,12 +50,21 @@ export const NORMAL_GEOMETRY: DiskGeometry = Object.freeze({ mu0: 1, mu: 1, phas
 export const minnaertExponent = (model: { coefficient: number; coefficientPerDegree: number }, phase: number) =>
   model.coefficient + model.coefficientPerDegree * phase * 180 / Math.PI;
 
+/** The exponent of a tabulated Minnaert law at a phase angle in radians: straight lines between its points, held outside them. */
+export function tabulatedExponent(points: readonly (readonly [number, number])[], phase: number): number {
+  const degrees = phase * 180 / Math.PI, next = points.findIndex(([at]) => at >= degrees);
+  if (next <= 0) return points[next === 0 ? 0 : points.length - 1][1];
+  const [from, low] = points[next - 1], [to, high] = points[next];
+  return low + (high - low) * (degrees - from) / (to - from);
+}
+
 export function diskValue(model: DiskModel, { mu0, mu, phase }: DiskGeometry): number {
   switch (model.family) {
     case 'lambert': return mu0;
     case 'lommel-seeliger': return 2 * mu0 / (mu0 + mu);
     case 'lunar-lambert': return (1 - model.weight) * mu0 + 2 * model.weight * mu0 / (mu0 + mu);
     case 'minnaert': { const k = minnaertExponent(model, phase); return mu0 ** k * mu ** (k - 1); }
+    case 'minnaert-tabulated': { const k = tabulatedExponent(model.points, phase); return mu0 ** k * mu ** (k - 1); }
     case 'akimov': {
       // At zero phase the longitude is undetermined and the function is 1 for every one.
       if (!(Math.sin(phase) > 1e-12)) return 1;
@@ -82,6 +97,11 @@ export function assertDiskModel(model: DiskModel) {
   if (!DISK_FAMILIES.includes(model.family)) throw new TypeError(`Unknown disk function: ${String((model as { family: unknown }).family)}`);
   if (model.family === 'lunar-lambert' && !(Number.isFinite(model.weight) && model.weight >= 0 && model.weight <= 1)) throw new TypeError('Lunar-Lambert weight must lie in [0, 1].');
   if (model.family === 'minnaert' && !(Number.isFinite(model.coefficient) && Number.isFinite(model.coefficientPerDegree))) throw new TypeError('Minnaert coefficients must be finite.');
+  if (model.family === 'minnaert-tabulated') {
+    const { points } = model;
+    if (!(Array.isArray(points) && points.length >= 2) || !points.every(point => Array.isArray(point) && point.length === 2 && point.every(Number.isFinite))) throw new TypeError('A tabulated Minnaert law needs at least two finite [degrees, exponent] points.');
+    if (!points.every(([degrees, k], index) => degrees >= 0 && degrees <= 180 && k > 0 && (index === 0 || degrees > points[index - 1][0]))) throw new TypeError('Tabulated Minnaert points must have increasing phases within [0, 180] degrees and positive exponents.');
+  }
   if (model.family === 'lommel-seeliger-lambert') {
     const { lunarFraction, lunarFractionPerDegree, surfacePhase, surfacePhasePerDegree } = model, lunarAt180 = lunarFraction + lunarFractionPerDegree * 180;
     if (![lunarFraction, lunarFractionPerDegree, surfacePhase, surfacePhasePerDegree].every(Number.isFinite)) throw new TypeError('Lommel-Seeliger plus Lambert coefficients must be finite.');

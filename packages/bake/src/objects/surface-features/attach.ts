@@ -47,8 +47,11 @@ export async function attachSurfaceFeatures({ descriptor, sources, sourceDirecto
   if (hitMesh && surface) throw new TypeError('Surface features anchor on one surface model: a hit mesh or an ellipsoid.');
   // A triaxial recipe drawn without a mesh: the long axis is the mesh radius and the others keep their ratios (solid-scene.ts).
   const shape = descriptor.recipe.shape;
-  const triaxial = !hitMesh && !surface && shape.kind === 'ellipsoid' && shape.secondaryRadiusKm !== undefined
-    ? [meshRadiusUnits, meshRadiusUnits * shape.secondaryRadiusKm / shape.radiusKm, meshRadiusUnits * (shape.polarRadiusKm ?? shape.radiusKm) / shape.radiusKm] as const : undefined;
+  // A flattened globe whose geometry places planetocentric rows (surface.ts, meshLatitude) takes the same cast: an anchor
+  // sits where the line from the centre at its latitude meets the spheroid, which is where its map row is drawn.
+  const planetocentric = (parsed.get('geometry')?.surface as { latitude?: unknown } | undefined)?.latitude === 'planetocentric';
+  const triaxial = !hitMesh && !surface && shape.kind === 'ellipsoid' && (shape.secondaryRadiusKm !== undefined || planetocentric)
+    ? [meshRadiusUnits, meshRadiusUnits * (shape.secondaryRadiusKm ?? shape.radiusKm) / shape.radiusKm, meshRadiusUnits * (shape.polarRadiusKm ?? shape.radiusKm) / shape.radiusKm] as const : undefined;
   const context: SurfaceFeaturePreparationContext & { readonly surface?: ReturnType<typeof ellipsoidSurfaceCast> } = { objectId: descriptor.id, sourceDirectory, publicDirectory, outputDirectory,
     config: config.value, maxEntries: featuresRecipe.maxEntries, radiusKm: descriptor.recipe.shape.radiusKm, meshRadiusUnits,
     tree: definition.tree as Parameters<typeof prepareSurfaceFeatures>[0]['tree'], ...(hitMesh ? { hitMesh } : {}), ...(surface ? { surface: surface.cast } : {}),

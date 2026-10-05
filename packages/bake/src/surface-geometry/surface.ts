@@ -19,9 +19,20 @@ export function ellipsoidPoint(radius: number, polarRadius: number, latitude: nu
     polarRadius * Math.sin(latitude)];
 }
 
+/**
+ * The mesh latitude of a map row. `ellipsoidPoint` takes the spheroid's parametric latitude beta (x = a cos beta,
+ * z = c sin beta). A map counts planetocentric latitude, the angle of the line from the centre, and
+ * tan(beta) = (a / c) tan(planetocentric): the same on a sphere, 2.2 degrees apart at most on Ceres (a / c = 1.081).
+ * A profile that states `latitude: 'planetocentric'` converts; one that does not keeps the row at beta.
+ */
+export function meshLatitude(profile: Pick<SurfaceGeometryProfile, 'radius' | 'polarRadius' | 'latitude'>, latitude: number): number {
+  if (profile.latitude !== 'planetocentric' || profile.radius === profile.polarRadius) return latitude;
+  return Math.atan2(profile.radius * Math.sin(latitude), profile.polarRadius * Math.cos(latitude));
+}
+
 export function createPolarPatch(profile: SurfaceGeometryProfile, pole: Pole, inner = false): SurfacePatch {
   const north = pole === 'north', sign = north ? 1 : -1;
-  const boundaryLatitude = Math.PI / 2 - Math.PI / profile.latitudeSegments;
+  const boundaryLatitude = meshLatitude(profile, Math.PI / 2 - Math.PI / profile.latitudeSegments);
   const parameters = inner ? profile.innerPoles : { radiusScale: profile.polarRadiusScale, offset: profile.polarOffset };
   if (!parameters) throw new TypeError('Inner polar patches need a prepared profile.');
   const radius = profile.radius * Math.cos(boundaryLatitude) * parameters.radiusScale;
@@ -65,7 +76,7 @@ export function createSurfacePatches(profile: SurfaceGeometryProfile, overlap = 
       const u0 = longitudeIndex / profile.longitudeSegments, u1 = (longitudeIndex + 1) / profile.longitudeSegments;
       const latitudeOverlap = Math.PI / profile.latitudeSegments * overlapY;
       const longitudeOverlap = Math.PI * 2 / profile.longitudeSegments * overlapX;
-      const lowLatitude = latitude0 - latitudeOverlap, highLatitude = latitude1 + latitudeOverlap;
+      const lowLatitude = meshLatitude(profile, latitude0 - latitudeOverlap), highLatitude = meshLatitude(profile, latitude1 + latitudeOverlap);
       const lowLongitude = u0 * Math.PI * 2 - longitudeOverlap;
       const highLongitude = profile.closeSeamAtZero !== false && overlapX === 0 && longitudeIndex === profile.longitudeSegments - 1 ? 0 : u1 * Math.PI * 2 + longitudeOverlap;
       // The overlap enlarges the patch by a fraction of its cell on every side; its texture grows by the same amount,

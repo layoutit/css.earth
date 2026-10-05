@@ -7,6 +7,10 @@ export interface SurfaceGeometryProfile {
   poles: { url: string; width: number; height: number }; polarTileSize: number; polarRadiusScale: number; polarOffset: number;
   innerPoles?: { radiusScale: number; offset: number };
   uv: 'global' | 'cell'; color: string; closeSeamAtZero?: boolean;
+  /** The latitude the map's rows count. Absent, a row is placed at the spheroid's parametric latitude, exact on a sphere
+   * and within a pixel on a nearly round body. `planetocentric` places each row where the line from the centre at that
+   * latitude meets the spheroid, which a visibly flattened body needs (Ceres, Iapetus). */
+  latitude?: 'planetocentric';
 }
 
 export interface GeometryProfile {
@@ -53,6 +57,7 @@ export function parseGeometryProfile(value: unknown): GeometryProfile {
   for (const name of ['radius', 'polarRadius', 'surfaceLatitudeHeight', 'polarTileSize', 'polarRadiusScale']) if (Number(surface[name]) <= 0) throw new TypeError(`surface.${name} must be positive.`);
   for (const name of ['latitudeSegments', 'longitudeSegments']) if (!Number.isInteger(surface[name]) || Number(surface[name]) < 3 || Number(surface[name]) > 4096) throw new TypeError('Surface segmentation is invalid.');
   if (!['global', 'cell'].includes(String(surface.uv)) || typeof surface.color !== 'string') throw new TypeError('Surface mapping is invalid.');
+  if (surface.latitude !== undefined && surface.latitude !== 'planetocentric') throw new TypeError('surface.latitude, when stated, is planetocentric.');
   raster(surface.surface, 'surface texture'); raster(surface.poles, 'polar texture');
   if (surface.innerPoles !== undefined) numbers(object(surface.innerPoles, 'inner poles'), ['radiusScale', 'offset'], 'inner poles');
   const projection = object(profile.projection, 'projection');

@@ -1,0 +1,68 @@
+{
+  "schema": "cssearth-photometric-model@1",
+  "id": "mcewen-1983-dhingra-2021-minnaert-clear",
+  "instrument": "Voyager 1 and 2 ISS, Galileo SSI and New Horizons LORRI",
+  "filter": "clear filters, 0.28 to 1.05 um",
+  "quantity": "radiance-factor",
+  "model": {
+    "family": "separable",
+    "disk": {
+      "family": "minnaert-tabulated",
+      "points": [
+        [
+          3,
+          0.631
+        ],
+        [
+          5,
+          0.63
+        ],
+        [
+          10,
+          0.644
+        ],
+        [
+          15,
+          0.673
+        ],
+        [
+          20,
+          0.708
+        ],
+        [
+          25,
+          0.74
+        ],
+        [
+          30,
+          0.76
+        ],
+        [
+          57,
+          0.76
+        ],
+        [
+          128,
+          1.044
+        ]
+      ]
+    },
+    "phase": {
+      "family": "quadratic",
+      "constant": 0.728,
+      "perDegree": -0.002,
+      "perDegreeSquared": 0,
+      "heldBeyondDegrees": 128
+    }
+  },
+  "fit": {
+    "phaseDegrees": [
+      3,
+      128
+    ],
+    "emissionDegrees": [
+      0,
+      84.5
+    ]
+  }
+}
