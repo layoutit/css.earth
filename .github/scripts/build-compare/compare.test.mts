@@ -298,15 +298,21 @@ test('import-edge repartitioning needs declared layout changes and preserves uns
   const wrong = await compare(base, head, {}, 'semantic', undefined, { ...sources, layout: 'changes' });
   assert.equal(wrong.exitCode, 1); assert.equal(wrong.declaration.layoutEligible, false);
 });
-test('layout declaration cannot admit module additions, removals or unseeded import changes', async () => {
+test('layout declaration admits additions and removals of seeds only, never unseeded module changes', async () => {
   for (const operation of ['add', 'remove', 'imports']) {
     const { base, head } = layoutFixture(), entry = head.environments[0]!.chunks[1]!;
     if (operation === 'add') entry.modules.push(module('site/extra.mts'));
     if (operation === 'remove') entry.modules.pop();
     if (operation === 'imports') entry.modules[0]!.importedIds = ['site/extra.mts'];
-    const paths = operation === 'add' ? ['site/a.mts', 'site/extra.mts'] : operation === 'remove' ? ['site/a.mts', 'site/b.mts'] : ['site/a.mts'];
-    const report = await compare(base, head, {}, 'semantic', undefined, { paths, layout: 'changes' });
-    assert.equal(report.exitCode, 1); assert.equal(report.declaration.layoutEligible, false);
+    const seeds = operation === 'add' ? ['site/a.mts', 'site/extra.mts'] : operation === 'remove' ? ['site/a.mts', 'site/b.mts'] : ['site/a.mts'];
+    const report = await compare(base, head, {}, 'semantic', undefined, { paths: seeds, layout: 'changes' });
+    // A seed may appear or disappear with its chunk's identity; an unseeded import change may not.
+    assert.equal(report.declaration.layoutEligible, operation !== 'imports', operation);
+    // An undeclared addition stays an independent change; a removal of what only the seed imported is its orphan, not an independent change.
+    if (operation === 'add') {
+      const undeclared = await compare(base, head, {}, 'semantic', undefined, { paths: ['site/a.mts'], layout: 'changes' });
+      assert.equal(undeclared.exitCode, 1); assert.equal(undeclared.declaration.layoutEligible, false);
+    }
   }
 });
 test('layout URL normalization cannot conceal arbitrary page content', async () => {
@@ -331,14 +337,15 @@ test('package src edits seed bundled dist modules for the four shared owners', a
   }
 });
 
-test('layout invariant excludes changed immediate importers even when semantic closure permits them', async () => {
+test('layout invariant excludes an importer whose code changed; one whose import list changed with a seed is admitted', async () => {
   for (const dimension of ['code', 'imports']) {
     const { base, head } = layoutFixture();
     for (const build of [base, head]) build.environments[0]!.chunks.flatMap(entry => entry.modules).find(entry => entry.id === 'site/b.mts')!.importedIds = ['site/a.mts'];
     const helper = head.environments[0]!.chunks[1]!.modules[0]!;
     if (dimension === 'code') helper.code = 'changed immediate importer'; else helper.importedIds = [];
     const report = await compare(base, head, {}, 'semantic', undefined, { paths: ['site/a.mts'], layout: 'changes' });
-    assert.equal(report.exitCode, 1); assert.equal(report.declaration.layoutEligible, false);
+    assert.equal(report.declaration.layoutEligible, dimension === 'imports', dimension);
+    assert.equal(report.exitCode, dimension === 'imports' ? 0 : 1, dimension);
     assert.ok(report.closure.directImporters.includes('client-0:site/b.mts'));
   }
 });
@@ -411,4 +418,28 @@ test('import and reference diagnostics show additions, removals and pure reorder
   assert.ok((await compare(fixture(), head)).differences.find(diff => diff.dimension === 'references')!.diagnostic);
   const moved = fixture(); moved.environments[0]!.chunks[0]!.modules.push(moved.environments[0]!.chunks[1]!.modules.pop()!);
   assert.ok((await compare(fixture(), moved)).differences.find(diff => diff.dimension === 'membership')!.diagnostic);
+});
+
+test('a dependency only closure modules import leaves with them; one another module still imported stays an independent change', async () => {
+  const orphans = (outsideImporter: boolean) => {
+    const base = fixture(), head = fixture();
+    // site/a.mts is the changed source; site/d.mts is a dependency it dropped, removed from the build. site/c.mts, outside the closure, may also have imported it.
+    const chunks = (build: Build) => build.environments[0]!.chunks;
+    chunks(base)[0]!.modules[0]!.importedIds = ['site/d.mts'];
+    chunks(base)[0]!.modules.push(module('site/d.mts'));
+    chunks(head)[0]!.modules[0]!.code = 'dropped its dependency';
+    if (outsideImporter) {
+      const c = chunk('_astro/c.js', [module('site/c.mts')]); c.modules[0]!.importedIds = ['site/d.mts'];
+      chunks(base).push(c); base.files.set('_astro/c.js', Buffer.from('export const value = 1;'));
+      chunks(head).push(chunk('_astro/c.js', [module('site/c.mts')])); head.files.set('_astro/c.js', Buffer.from('export const value = 1;'));
+    }
+    return compare(base, head, {}, 'semantic', undefined, { paths: ['site/a.mts'], layout: 'changes' });
+  };
+  const gone = (report: Awaited<ReturnType<typeof orphans>>) => report.differences.find(diff => diff.dimension === 'modules' && diff.identity === 'client-0:site/d.mts');
+  const only = await orphans(false);
+  assert.equal(gone(only)?.insideClosure, true);
+  assert.equal(only.exitCode, 0); assert.equal(only.declaration.layoutEligible, true);
+  const shared = await orphans(true);
+  assert.equal(gone(shared)?.insideClosure, false, 'an importer outside the closure keeps the removal independent');
+  assert.equal(shared.exitCode, 1); assert.equal(shared.declaration.layoutEligible, false);
 });
