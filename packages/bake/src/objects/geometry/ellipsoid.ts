@@ -235,3 +235,21 @@ export function planetographicRowsToMeshLatitude(data: Uint8Array, width: number
   }
   return output;
 }
+
+/** Resample an equirectangular map whose rows are samples of planetocentric latitude from +90 to -90 degrees inclusive (the first
+ * and last rows are the poles, as the Cassini ISS global maps of the PDS Atmospheres Node are gridded) onto rows evenly spaced in
+ * the mesh's own latitude: tan(planetocentric) = (b / a) tan(beta). The result has one row fewer than the samples. Rows are
+ * linearly interpolated; columns are unchanged. */
+export function planetocentricSampleRowsToMeshLatitude(data: Uint8Array, width: number, height: number, channels: number, axisRatio: number): Buffer {
+  if (!(axisRatio >= 1) || !Number.isFinite(axisRatio)) throw new RangeError('An axis ratio a / b must be finite and at least 1.');
+  if (!(height >= 2) || data.length !== width * height * channels) throw new RangeError('Map bytes do not match its dimensions.');
+  const rows = height - 1, rowBytes = width * channels, output = Buffer.alloc(rows * rowBytes);
+  for (let y = 0; y < rows; y += 1) {
+    const beta = Math.PI / 2 - (y + 0.5) / rows * Math.PI;
+    const planetocentric = Math.atan2(Math.sin(beta), axisRatio * Math.cos(beta));
+    const source = Math.max(0, Math.min(rows, (Math.PI / 2 - planetocentric) / Math.PI * rows));
+    const y0 = Math.min(rows - 1, Math.floor(source)), y1 = y0 + 1, fraction = source - y0;
+    for (let i = 0; i < rowBytes; i += 1) output[y * rowBytes + i] = Math.round(data[y0 * rowBytes + i]! * (1 - fraction) + data[y1 * rowBytes + i]! * fraction);
+  }
+  return output;
+}
