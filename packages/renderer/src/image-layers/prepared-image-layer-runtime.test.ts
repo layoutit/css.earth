@@ -244,8 +244,8 @@ test('a stack mounts a camera for each of its scenes, and a stack without leaves
   assert.ok(first!.style.transform === camera && second!.style.transform === camera && cameras.every(each => each.style.perspective === '600px'));
   // Seen edge-on the stack is still the only one that draws: it keeps the whole weight.
   publish([Math.SQRT1_2, 0, 0, Math.SQRT1_2]);
-  // A stack of patches is drawn at 1, not under the ceiling a stack of sheets is held to.
-  assert.equal(named('css-volume-projection')[0]!.style.opacity, '1');
+  // A stack of patches stays under the ceiling too, as a stack of sheets does.
+  assert.equal(named('css-volume-projection')[0]!.style.opacity, '0.999');
   assert.equal(named('css-volume-projection')[0]!.style.visibility, 'visible');
   assert.deepEqual(imageLayerAxisWeights([Math.SQRT1_2, 0, 0, Math.SQRT1_2], views.filter(view => view.axis === 'z')), { z: 1 });
 });
