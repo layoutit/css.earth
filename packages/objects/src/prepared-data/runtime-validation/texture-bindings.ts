@@ -1,5 +1,8 @@
 import type { PreparedTree } from '../presentation/runtime-presentation-types.js';
 
+/** The structure of the texture slots. A slot lists the childless elements under its target that draw it, and may list
+ * none (a carrier the depth partitions emptied). Whether a name may be a custom property is the caller's rule: the bindings'
+ * working form names one, a shipped runtime never does (shipped-runtime.ts). */
 export function requireTextureBindings(value: unknown, nodes: PreparedTree['nodes']) {
   if (value === undefined) return;
   function fail(): never { throw new TypeError('Invalid prepared leaf texture binding.'); }
@@ -9,9 +12,8 @@ export function requireTextureBindings(value: unknown, nodes: PreparedTree['node
     if (!entry || typeof entry !== 'object' || Array.isArray(entry) ||
         Object.keys(entry).some(key => !['target', 'name', 'leaves'].includes(key))) fail();
     const { target, name, leaves: targets } = entry;
-    if (!Number.isInteger(target) || target < -1 || target >= nodes.length || typeof name !== 'string' ||
-        !(name.startsWith('--') || name === 'backgroundImage' || name === 'background-image') ||
-        keys.has(`${target}:${name}`) || !Array.isArray(targets) || !targets.length) fail();
+    if (!Number.isInteger(target) || target < -1 || target >= nodes.length || typeof name !== 'string' || !name ||
+        keys.has(`${target}:${name}`) || !Array.isArray(targets)) fail();
     keys.add(`${target}:${name}`);
     for (const leaf of targets) {
       if (!Number.isInteger(leaf) || leaf < 0 || leaf >= nodes.length || parents.has(leaf) || leaves.has(leaf)) fail();

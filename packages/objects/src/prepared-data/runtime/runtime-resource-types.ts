@@ -1,4 +1,5 @@
-export interface PreparedResourceEntry { key: string; url: string; pool: string; decodedBytes?: number; }
+/** `width` and `height` are the image's pixels, stated by the bake (packages/bake/src/prepared-presentation/prepared-image-sizes.ts). */
+export interface PreparedResourceEntry { key: string; url: string; pool: string; decodedBytes?: number; width?: number; height?: number; }
 
 export interface PreparedResourcePool  { id: string; capacity: number; concurrency: number; reuse: boolean; decoding?: "async" | "sync" | "auto"; retention: "mount" | "warm" | "selection"; stabilityMilliseconds?: number; eviction?: "capacity" | "unused"; maximumDecodedBytes?: number; }
 

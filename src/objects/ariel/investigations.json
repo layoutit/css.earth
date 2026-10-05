@@ -85,7 +85,7 @@
       "id": "limb-law",
       "subject": "Photometric law for the lighting overlays",
       "status": "unresolved",
-      "finding": "Helfenstein, Veverka and Thomas (1988) fitted Hapke models to Voyager whole-disc photometry of the five large Uranian moons. Only the abstract could be read (single-scattering albedo from 0.3 for Umbriel to 0.7 for Ariel, g near -0.3), and a whole-disc fit states no emission range. NASA's Reports of Planetary Geology and Geophysics Program for 1986 to 1989, which are open, print disc values for Miranda, Titania, Umbriel and Oberon, and none for Ariel. Schenk's 2020 mosaic history names ISIS photomet without its parameter file. Ariel keeps the shared sphere bank.",
+      "finding": "Helfenstein, Veverka and Thomas (1988) fitted Hapke models to Voyager whole-disc photometry of the five large Uranian moons. Only the abstract could be read (single-scattering albedo from 0.3 for Umbriel to 0.7 for Ariel, g near -0.3), and a whole-disc fit states no emission range. NASA's Reports of Planetary Geology and Geophysics Program for 1986 to 1989, which are open, print disc values for Miranda, Titania, Umbriel and Oberon, and none for Ariel. Schenk's 2020 mosaic history names ISIS photomet without its parameter file. Measured here on 2026-10-05, not a published law: on one calibrated clear frame at 20 degrees phase (FDS 26794.34, a 31 pixel disc) the lunar-Lambert weight that best fits the lit disc is 0.77, close to what Titania shows at that phase. Ariel keeps the shared sphere bank.",
       "evidence": [
         "https://doi.org/10.1016/0019-1035(88)90039-5",
         "https://ntrs.nasa.gov/citations/19880051927",

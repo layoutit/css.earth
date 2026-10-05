@@ -69,7 +69,6 @@
 
 /* The silhouette-fit binding already includes physical framing. Keep the prepared plate's native dimensions. */
 .object-stage[data-object-id="m87-star"] .m87-star-corona-layer {
-  background-image: var(--m87-star-corona-image);
   background-position: center;
   background-repeat: no-repeat;
   background-size:
@@ -79,7 +78,6 @@
 
 /* Limb plate: 496 px = raster.json emission.bodyDiameter = camera.logicalBodyDiameter. */
 .object-stage[data-object-id="m87-star"] .m87-star-limb-layer {
-  background-image: var(--m87-star-limb-image);
   background-position: center;
   background-repeat: no-repeat;
   background-size:

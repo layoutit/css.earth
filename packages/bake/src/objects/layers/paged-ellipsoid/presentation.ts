@@ -16,7 +16,7 @@ export interface PagedPresentationInput { config: PresentationConfiguration; pla
   textureLevels?: Awaited<ReturnType<typeof prepareTextureLevels>>; sky: PreparedCubicSkyPlan; sun: PreparedDirectionalSunPlan; controls: ShellObjectControls;
   catalog?: Awaited<ReturnType<typeof preparePlaces>>; }
 const materialIds = ['atmosphere'] as const;
-import { prepareCssomDeclarationReads, createPreparedNodeTree, textureTileVariables, prepareMaterialTracks } from "../../../presentation/index.ts";
+import { prepareCssomDeclarationReads, createPreparedNodeTree, readsTexture, textureTileVariables, prepareMaterialTracks } from "../../../presentation/index.ts";
 import { seamOutsetBinding, seamOutsetInitialValue } from "../../../scene/index.ts";
 import { surfaceBankInventory } from "./surface-banks.ts";
 
@@ -92,7 +92,8 @@ export async function preparePagedEllipsoidPresentation({ config, plan, datasets
         grouped.set(key,carrier);(isPolar?polar:surface).push(carrier);b.append(parent,carrier);
         if(isPolar)carrier.style.setProperty(`--${config.namespace}-poles-texture`,poles?`url("${poles}")`:"none");else writePages(carrier,urls);
       }
-      for(const leaf of band.leaves)b.append(carrier,b.leaf(leaf));
+      // A cap draws the pole write on its carrier; a page face names its page already.
+      for(const leaf of band.leaves)b.append(carrier,leaf.className?.includes(marker)?readsTexture(b.leaf(leaf),`--${config.namespace}-poles-texture`):b.leaf(leaf));
     }
     return {surface,polar};
   }

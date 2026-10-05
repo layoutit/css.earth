@@ -6,6 +6,7 @@
 // the function that lists them). It imports `presentation` and `raster`.
 export * from './prepared-depth-partitions.ts';
 export * from './prepared-depth-styles.ts';
+export * from './prepared-image-sizes.ts';
 export * from './prepared-interior-fill.ts';
 export * from './prepared-presentation-bindings.ts';
 export * from './prepared-visibility-order.ts';

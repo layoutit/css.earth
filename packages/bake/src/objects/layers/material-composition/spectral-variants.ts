@@ -189,13 +189,15 @@ async function writeProjectiveSurface(source: RawImage, width: number, height: n
     bandCount: latitudeBandCount,
     gutter: height / latitudeBandCount / 4,
   });
-  await sharp(packed.data, { raw: {
+  // A false-color picture of a band's brightness, written in the lossy lane (lossy-lane.ts). Lossless, Saturn's
+  // ultraviolet and methane maps were 5.92 and 3.77 MB and their decode put 150 ms in the frame of a dataset switch on
+  // the iPad (176 to 233 ms, where its lossy maps of the same size take 20 to 27); in the lane they are 0.23 and
+  // 0.14 MB, with 0 and 3 of 12.8 million pixels flagged by pixelmatch at threshold 0.1 (2026-10-05).
+  await writeLossyWebp(sharp(packed.data, { raw: {
     width: packed.packedWidth,
     height: packed.packedHeight,
     channels: resized.info.channels,
-  } })
-    .webp({ lossless: true, effort: 6 })
-    .toFile(outputPath);
+  } }), outputPath);
 }
 
 async function prepareScalarSurface(plan: SpectralDataset): Promise<RawImage> {
@@ -327,9 +329,11 @@ async function preparePolarAtlas(body: RawImage, plan: SpectralDataset, outputPa
       }
     }
   }
-  await sharp(output, {
+  // The caps' picture of the same band, in the lossy lane with its alpha exact (the caps' edges): 0.39 and 0.35 MB
+  // lossless became 0.04 MB each, with no pixel flagged (2026-10-05).
+  await writeLossyWebp(sharp(output, {
     raw: { width: poleAtlasWidth, height: poleAtlasHeight, channels: 4 },
-  }).webp({ lossless: true, effort: 6 }).toFile(outputPath);
+  }), outputPath, { alphaQuality: 100 });
 }
 
 

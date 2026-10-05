@@ -34,6 +34,13 @@ export function preparedDeclarations(text = "", nativeReads: Readonly<Record<str
   }) as typeof methods & StyleValues;
 }
 
+/** Makes `node` read the texture write named `name`, where the bindings find it; what ships is the slot that lists the
+ * node, and no variable (texture-image-records.ts). A node that states its own image keeps it. */
+export function readsTexture(node: PreparedNode, name: string): PreparedNode {
+  if (!node.style.getPropertyValue("background-image")) node.style.backgroundImage = `var(${name})`;
+  return node;
+}
+
 // The preparer resolves grouping, leaf expansion, atlas scaling and final node
 // order. Runtime receives only tag/parent/class/style/attribute records.
 export function createPreparedNodeTree({ cssomReads = new Map() }: { cssomReads?: ReadonlyMap<string, Readonly<Record<string, string>>> } = {}) {

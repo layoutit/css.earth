@@ -12,7 +12,7 @@ import { omittedPreparedNodes } from './prepared-omitted-nodes.js';
 import { selectedPreparedVariant } from './prepared-presentation.js';
 import { initialObjectSelection } from '../runtime/object-contract.js';
 import { leafBoxBindings, leafBoxExact, leafBoxStyles } from './prepared-leaf-box-direct.js';
-import { preparedTexturePixels } from './prepared-texture-levels.js';
+import { preparedTextureSizes } from './prepared-texture-levels.js';
 
 const root = new URL('../../../../', import.meta.url);
 // Saturn's prepared runtime is restored, not tracked; an unrestored checkout skips the file as the site test did through sourceTest().
@@ -81,6 +81,19 @@ test('a view resolves only the textures it writes, and reports them', () => {
   for (const { address } of scene.textures) assert.equal(scene.html.includes(`https://earth-assets.example${address}`.replaceAll('"', '&quot;')), true);
 });
 
+test('the markup writes each image on the elements that draw it, and none through a custom property', () => {
+  const scene = serializePreparedScene(definition), variant = selectedPreparedVariant(definition, initialObjectSelection(definition.controls));
+  assert.equal(/var\(--/u.test(scene.html), false, 'no element reads a custom property');
+  const slots = new Map((definition.tree.textureBindings ?? []).map(slot => [`${slot.target}:${slot.name}`, slot.leaves] as const));
+  const style = (node: number) => new RegExp(`data-prepared-node="${node}"[^>]*style="([^"]*)"`, 'u').exec(scene.html)?.[1] ?? '';
+  let faces = 0;
+  for (const write of variant.writes) if (write.kind === 'texture' && write.resource !== null) {
+    for (const node of slots.get(`${write.target}:${write.name}`) ?? [write.target]) { faces++; assert.match(style(node), /background-image:url\(/u, `node ${node} draws ${write.name}`); }
+  }
+  // Saturn: one ring leaf, four polar caps and 448 faces.
+  assert.equal(faces, 453);
+});
+
 test('a paged body ships each face in the exact box of the level its markup shows', async () => {
   // The Moon's markup shows its first texture level, 1,040 texels wide across a background of 4,096 px at the full
   // 128 px box: a face ships in the 16.25 px that hold it at two texels a pixel, not in the box of its step alone.
@@ -92,7 +105,7 @@ test('a paged body ships each face in the exact box of the level its markup show
   assert.ok(write?.kind === 'texture' && write.resource !== null);
   const leaf = paged.tree.textureBindings!.find(entry => entry.name === write.name)!.leaves.find(node => boxes.boxes.some(box => box.node === node && box.box))!;
   const record = boxes.boxes.find(box => box.node === leaf)!;
-  const exact = leafBoxExact(record, preparedTexturePixels(paged)(paged.textureLevels!.levels[0]!.resources[write.resource]!));
+  const exact = leafBoxExact(record, preparedTextureSizes(paged)(paged.textureLevels!.levels[0]!.resources[write.resource]!));
   assert.deepEqual(exact, { factor: 16.25 / 128, tile: [520, 96], kept: true });
   const full = Object.fromEntries(leafBoxStyles(record, boxes.step, boxes.outset)), shipped = Object.fromEntries(leafBoxStyles(record, boxes.step, boxes.outset, false, exact));
   const tag = new RegExp(`<[^>]*data-prepared-node="${leaf}"[^>]*>`).exec(scene.html)?.[0] ?? '';

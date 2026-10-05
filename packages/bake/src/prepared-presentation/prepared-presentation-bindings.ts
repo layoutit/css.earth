@@ -14,7 +14,7 @@ interface DepthResult {id: string; source: PresentationSource; compiled: Present
 import { readFile } from 'node:fs/promises';
 import { basename, resolve } from 'node:path';
 import { chromium, type Browser } from 'playwright';
-import { prepareActivationGroups, LEAF_BOX_FACTOR, withLeafBoxes, withLeafBoxRecords, withoutLeafBoxRecords, withTextureTileRecords, withoutTextureTileRecords, withCleanLeaves, withoutCleanLeaves } from '../presentation/index.ts';
+import { prepareActivationGroups, LEAF_BOX_FACTOR, withLeafBoxes, withLeafBoxRecords, withoutLeafBoxRecords, withTextureTileRecords, withoutTextureTileRecords, withTextureImageRecords, withoutTextureImageRecords, withCleanLeaves, withoutCleanLeaves } from '../presentation/index.ts';
 import { prepareDepthPartitions, restoreDepthSource } from './prepared-depth-partitions.ts';
 import { verifyDepthStyles } from './prepared-depth-styles.ts';
 
@@ -37,9 +37,9 @@ export async function preparePresentationBindings<T extends PresentationSource>(
   const gapExclusion: SurfaceMeanExclusion | undefined = isMissingCoverageStyle(declaredFill)
     ? { colors: [MISSING_COVERAGE_STYLES[declaredFill].base, MISSING_COVERAGE_STYLES[declaredFill].line], tolerance: 20 }
     : undefined;
-  // Leaf boxes and tiled page leaves are measured in their variable form; a stored runtime carries them as records
-  // (leaf-box-records.ts, texture-tile-records.ts).
-  const definition = restoreDepthSource(withoutPreparedInteriorFill(withoutTextureTileRecords(withoutLeafBoxRecords(withoutCleanLeaves(input)))));
+  // Leaf boxes, tiled page leaves and selected images are measured in their variable form; a stored runtime carries
+  // them as records (leaf-box-records.ts, texture-tile-records.ts, texture-image-records.ts).
+  const definition = restoreDepthSource(withoutPreparedInteriorFill(withoutTextureTileRecords(withoutTextureImageRecords(withoutLeafBoxRecords(withoutCleanLeaves(input))))));
   const descriptor: unknown = JSON.parse(await readFile(resolve(root, 'src/objects', definition.id, 'object.json'), 'utf8'));
   const recipe = isRecord(descriptor) && isRecord(descriptor.properties) && isRecord(descriptor.properties.recipe) ? descriptor.properties.recipe : null;
   const shape = recipe && isRecord(recipe.shape) ? recipe.shape : null;
@@ -397,9 +397,11 @@ export async function preparePresentationBindings<T extends PresentationSource>(
     if (!await verifyDepthStyles(page, source, compiled, surface)) { compiled = source; reason = 'changed CSS cascade'; }
     if (!compiled.depthPartitions) reason ??= 'no decomposition within carrier budget';
     onDepthResult?.({ id: source.id, source, compiled, surface, reason });
-    const textured = { ...compiled, tree: { ...compiled.tree, textureBindings: await prepareTextureBindings(page, compiled) } };
+    const { slots, containers } = await prepareTextureBindings(page, compiled);
+    const textured = { ...compiled, tree: { ...compiled.tree, textureBindings: slots } };
     const activated = { ...textured, tree: { ...textured.tree, activationGroups: prepareActivationGroups(textured) } };
-    // Last: the leaf boxes and tiled page leaves ship as records, never as the variables the steps above measured and partitioned.
-    return withCleanLeaves(withLeafBoxRecords(withTextureTileRecords(await withPreparedInteriorFill(activated, interior, assetRoot, gapExclusion))));
+    // Last: the leaf boxes, tiled page leaves and selected images ship as records, never as the variables the steps above
+    // measured and partitioned.
+    return withCleanLeaves(withLeafBoxRecords(withTextureImageRecords(withTextureTileRecords(await withPreparedInteriorFill(activated, interior, assetRoot, gapExclusion)), containers)));
   } finally { await page.close(); if (!suppliedBrowser) await browser.close(); }
 }

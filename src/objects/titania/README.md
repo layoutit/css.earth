@@ -49,7 +49,7 @@ The checked geology landmark differences are 0.33–0.83° (approximately 4.5–
 
 ## Known problems
 
-- **Lighting law:** The fit is to whole-disc photometry, not to resolved images, and one row lights every terrain. The surge amplitude 0.65 is computed here from the printed S(0); the phase range and the emission limit 86.2° are derived here. The opposition surge puts the point under the Sun at 0.70 of the flood-lit centre at 10° phase, so frames with Shadows on are dimmer than the flood-lit view.
+- **Lighting law:** The fit is to whole-disc photometry, not to resolved images, and one row lights every terrain. Checked against five calibrated Voyager frames from 0.8° to 70° phase, it matches the resolved limb to 0.06 in lunar-Lambert weight (see the [ledger](investigations.json)). The surge amplitude 0.65 is computed here from the printed S(0); the phase range and the emission limit 86.2° are derived here. The opposition surge puts the point under the Sun at 0.70 of the flood-lit centre at 10° phase, so frames with Shadows on are dimmer than the flood-lit view.
 - The Voyager color dataset is false color (green, violet, ultraviolet as red, green, blue) at the observations' own phase angles. A color seam at a footprint edge is a real difference in viewing geometry. Its band ratios are read from a figure at ±0.02, and the ultraviolet calibration carries a stated ±10 % uncertainty. The brightest 0.1 % of texels may clip.
 - Approximate source coverage is 44.8% for monochrome and 27.7% for elevation before interpolation; the unobserved north stays missing.
 - Monochrome processing depends on an unavailable photometric parameter file (`eu_pho10.pvl`). DN values are not calibrated albedo.

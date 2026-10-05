@@ -1,5 +1,5 @@
 import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
-import { OBJECT_SCHEMA, PREPARED_OBJECT_SCHEMA, OBJECT_RUNTIME_SCHEMA, parseObjectDescriptor, PREPARED_CSS_OBJECT_FORMAT } from '@cssearth/objects';
+import { OBJECT_SCHEMA, PREPARED_OBJECT_SCHEMA, OBJECT_RUNTIME_SCHEMA, parseObjectDescriptor, requireShippedRuntime, PREPARED_CSS_OBJECT_FORMAT } from '@cssearth/objects';
 
 // Pinning a prepared object to its transport: the descriptor's `prepared` pin and page reference, and the body's inventory.
 // The `prepared/object.json` transport and the page data are built from the runtime when read (@cssearth/objects/node
@@ -34,6 +34,8 @@ export async function pinPreparedObject(id: string, originalDescriptor: Record<s
   const { preparedDirectory, descriptorPath } = target;
   await mkdir(preparedDirectory, { recursive: true });
   const definition = requireObjectRuntimeDefinition(JSON.parse(await readFile(resolve(preparedDirectory, 'runtime.json'), 'utf8')));
+  // What is pinned ships: records, with no custom property left from the bindings' working form.
+  requireShippedRuntime(definition);
   const runtime: unknown = JSON.parse(await readFile(resolve(preparedDirectory, 'runtime.json'), 'utf8'));
   const originalProperties = requireRecord(originalDescriptor.properties);
   const descriptor = parseObjectDescriptor({ ...originalDescriptor, properties: { ...originalProperties, ...properties } });
