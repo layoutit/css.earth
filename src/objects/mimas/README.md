@@ -35,6 +35,7 @@ Source selections, recorded trials and open questions are in the [investigation 
 - The published rectangular display maps provide no validity mask or missing-value code.
 - The photographic display texture is coarser than the source and adds no scientific resolution.
 - **Elevation and relative brightness:** both GeoTIFF geotransforms end at 359.1517° E and 89.5759° S, short of the labels' nominal global bounds. Those narrow edge gaps show the shared gray grid. Relative brightness can be affected by terrain, shadows and the model solution.
+- Every display atlas is 1,660 × 1,773 pixels, 64 × 64 texels a face, which reduces display detail, not the source data. Until 5 October 2026 the layout was four times those dimensions: the elevation atlas filled it (47 megapixels from a 2.5 megapixel grid) and the photographs were stored at a quarter of it and drawn enlarged, 346 to 398 ms a dataset switch on an iPad against 89 to 94 ms now.
 - The surface is a coarse approximation of the source mesh; it does not reproduce every small crater. Lighting is baked from the mesh normals; photographed local shading is not reconstructed.
 - Feature outlines trace a rim circle for craters and an extent box for other types; they are not published nomenclature boundaries.
 
