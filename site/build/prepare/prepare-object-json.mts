@@ -3,7 +3,7 @@ import { OBJECT_SCHEMA, OBJECT_RUNTIME_SCHEMA, parseObjectDescriptor, parsePrepa
 // Entry script: node site/build/prepare/prepare-object-json.mts [<object-id>...] [--keep-bindings].
 
 import {requireObjectRuntimeDefinition, pinPreparedObject} from '@cssearth/bake/contract';
-import {requireRecord,requireString,isRecord,hasErrorCode} from '@cssearth/core';
+import {requireRecord,hasErrorCode} from '@cssearth/core';
 import type {CheckedObjectRuntimeDefinition} from '@cssearth/bake/contract';
 import type {RecompiledPresentation} from '@cssearth/bake/prepared-presentation';
 /** `keepBindings` re-derives the world frame and default camera over an already bound runtime and keeps its presentation
@@ -110,20 +110,6 @@ export async function prepareObjectJson(ids?:readonly string[]|null, options?:Bi
     results.push(await writeObjectJson(object.id, runtimeDefinition, options));
   }
   if (ids && results.length !== new Set(ids).size) throw new TypeError('A requested object has no registered JSON descriptor.');
-  // Contexts consume finalized body frames. Preparing them first can retain a
-  // previous radius and make an otherwise valid destination fail at handoff.
-  const { prepareSpatialContext } = await import('./prepare-spatial-context.ts');
-  for (const object of SCENE_OBJECTS) {
-    const directory = resolve(root, 'src/objects', object.id);
-    const descriptor = parseObjectDescriptor(await readFile(resolve(directory, 'object.json'), 'utf8'));
-    const recipe=descriptor.properties.recipe;
-    if(!isRecord(recipe)||!Array.isArray(recipe.sources))continue;
-    const source=recipe.sources.map((value:unknown)=>requireRecord(value)).find(source=>source.id==='world-context');
-    if (!source) continue;
-    await prepareSpatialContext({ sourcePath: resolve(directory, requireString(source.path)),
-      outputPath: resolve(directory, 'prepared/world-context.json'),
-      solarGeometryPath: resolve(root, 'src/platform/solar-geometry.mts') });
-  }
   return results;
 }
 
