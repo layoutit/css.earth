@@ -1,11 +1,11 @@
-/** One-way count, declaration and ordered-subsequence guard; improvements are accepted without rewriting a baseline. */
+/** Counted guard: structural counts, declarations and ordered sequences may never get worse; byte measures may grow by at most 1%. Improvements are accepted without rewriting a baseline. */
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { args, isMain } from '../build-compare/records.mts';
 import { parseMeasures, sortedJson } from './build-measures.mts';
 import type { Measures } from './build-measures.mts';
 export type FindingKind = 'increase' | 'order' | 'declaration' | 'removed-route';
-export interface Finding { kind: FindingKind; route: string; measure: string; base: number | string[]; head: number | string[]; verdict: 'FAILURE' | 'IMPROVEMENT' }
+export interface Finding { kind: FindingKind; route: string; measure: string; base: number | string[]; head: number | string[]; verdict: 'FAILURE' | 'IMPROVEMENT' | 'TOLERATED' }
 export interface Comparison { pass: boolean; findings: Finding[]; addedRoutes: string[]; removedRoutes: string[] }
 /** Only deletion with the retained elements in their original order is an ordered improvement. */
 export function subsequence(base: readonly string[], head: readonly string[]): boolean {
@@ -13,12 +13,19 @@ export function subsequence(base: readonly string[], head: readonly string[]): b
   for (const item of head) { while (cursor < base.length && base[cursor] !== item) cursor++; if (cursor === base.length) return false; cursor++; }
   return true;
 }
+/** Owner policy (2026-10-05): bytes may grow by at most this percentage per measure, whether one file or a route's total. */
+export const BYTE_TOLERANCE_PERCENT = 1;
+/** Raw, gzip and Brotli sizes of any file or total. Every other measure is a structural count and never grows. */
+export const isByteMeasure = (measure: string): boolean => /\.(?:raw|gzip|brotli)$/u.test(measure);
 export function compare(base: Measures, head: Measures): Comparison {
   const findings: Finding[] = [];
   const numeric = (route: string, left: Record<string, number>, right: Record<string, number>) => {
     for (const key of [...new Set([...Object.keys(left), ...Object.keys(right)])].sort()) {
       const before = left[key] ?? 0, after = right[key] ?? 0;
-      if (after !== before) findings.push({ kind: 'increase', route, measure: key, base: before, head: after, verdict: after > before ? 'FAILURE' : 'IMPROVEMENT' });
+      if (after === before) continue;
+      // Exact integer arithmetic: a byte measure may reach at most (100 + tolerance)% of its base; a new file (base 0) never does.
+      const tolerated = isByteMeasure(key) && before > 0 && after * 100 <= before * (100 + BYTE_TOLERANCE_PERCENT);
+      findings.push({ kind: 'increase', route, measure: key, base: before, head: after, verdict: after < before ? 'IMPROVEMENT' : tolerated ? 'TOLERATED' : 'FAILURE' });
     }
   };
   numeric('GLOBAL', base.global, head.global);
