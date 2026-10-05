@@ -30,19 +30,28 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
+      # The gate and the selector only diff two trees: a shallow checkout plus the merge base is all they need. Full history made
+      # this checkout hang for the whole job timeout on some runners, so the step is short and a hang fails fast.
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        timeout-minutes: 3
         with:
           ref: ${{ github.event.pull_request.head.sha || github.sha }}
-          fetch-depth: 0
+          fetch-depth: 1
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: '24'
       - name: Load trusted merge-base gate code
+        timeout-minutes: 3
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
           if [ -n "${GITHUB_BASE_REF:-}" ]; then
-            comparison_base=$(git merge-base HEAD "origin/$GITHUB_BASE_REF")
+            range=$(node --input-type=module -e 'import {readFileSync} from "node:fs"; const pr=JSON.parse(readFileSync(process.env.GITHUB_EVENT_PATH,"utf8")).pull_request; console.log(pr.base.sha + "..." + pr.head.sha)')
+            comparison_base=$(gh api "repos/$GITHUB_REPOSITORY/compare/$range" --jq .merge_base_commit.sha)
+            git fetch --no-tags --depth=1 origin "$comparison_base"
           else
-            comparison_base=$(git merge-base HEAD origin/main)
+            git fetch --no-tags --depth=1 origin main
+            comparison_base=$(git rev-parse FETCH_HEAD)
           fi
           use_head_gate=$(node --input-type=module -e 'import {readFileSync} from "node:fs"; const event=JSON.parse(readFileSync(process.env.GITHUB_EVENT_PATH,"utf8")); console.log(event.pull_request?.labels?.some(label=>label.name==="tool-change") ? "true" : "false")')
           mkdir -p "$RUNNER_TEMP/comparison-gate"
@@ -66,19 +75,28 @@ jobs:
     outputs:
       run_production: ${{ steps.classify.outputs.run_production }}
     steps:
+      # The gate and the selector only diff two trees: a shallow checkout plus the merge base is all they need. Full history made
+      # this checkout hang for the whole job timeout on some runners, so the step is short and a hang fails fast.
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        timeout-minutes: 3
         with:
           ref: ${{ github.event.pull_request.head.sha || github.sha }}
-          fetch-depth: 0
+          fetch-depth: 1
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: '24'
       - name: Load trusted merge-base gate code
+        timeout-minutes: 3
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
           if [ -n "${GITHUB_BASE_REF:-}" ]; then
-            comparison_base=$(git merge-base HEAD "origin/$GITHUB_BASE_REF")
+            range=$(node --input-type=module -e 'import {readFileSync} from "node:fs"; const pr=JSON.parse(readFileSync(process.env.GITHUB_EVENT_PATH,"utf8")).pull_request; console.log(pr.base.sha + "..." + pr.head.sha)')
+            comparison_base=$(gh api "repos/$GITHUB_REPOSITORY/compare/$range" --jq .merge_base_commit.sha)
+            git fetch --no-tags --depth=1 origin "$comparison_base"
           else
-            comparison_base=$(git merge-base HEAD origin/main)
+            git fetch --no-tags --depth=1 origin main
+            comparison_base=$(git rev-parse FETCH_HEAD)
           fi
           use_head_gate=$(node --input-type=module -e 'import {readFileSync} from "node:fs"; const event=JSON.parse(readFileSync(process.env.GITHUB_EVENT_PATH,"utf8")); console.log(event.pull_request?.labels?.some(label=>label.name==="tool-change") ? "true" : "false")')
           mkdir -p "$RUNNER_TEMP/comparison-gate"
