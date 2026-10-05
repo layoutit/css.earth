@@ -1,19 +1,5 @@
 /* χ¹ Orionis: the Sun's emissive presentation (body-surfaces.css, SUN block) scoped to this object, loaded after the shared
    body-surfaces.css base rules. No spin: the rotation axis and period are unmeasured. Both plates are transparent: no observation is cast. */
-.object-stage[data-object-id="chi1-orionis"] > :is(.polycss-camera, .chi1-orionis-corona-layer, .chi1-orionis-limb-layer) {
-  --chi1-orionis-scene-side-padding: 16px;
-  --chi1-orionis-reference-width: 1920px;
-  --chi1-orionis-reference-height: 1080px;
-  --chi1-orionis-shell-scale: min(
-    1,
-    calc(
-      (100cqw - var(--chi1-orionis-scene-side-padding) - var(--chi1-orionis-scene-side-padding)) /
-        var(--chi1-orionis-reference-width)
-    ),
-    calc(100cqh / var(--chi1-orionis-reference-height))
-  );
-}
-
 /* The shared stage rule (body-surfaces.css) sizes the camera and the Sun's plates; this object's plates need the same box. */
 .object-stage[data-object-id="chi1-orionis"] > :is(.chi1-orionis-corona-layer, .chi1-orionis-limb-layer) {
   position: absolute;
@@ -80,8 +66,8 @@
 }
 
 .object-stage[data-object-id="chi1-orionis"] .polycss-scene s {
-  width: var(--polycss-atlas-width, var(--polycss-atlas-size, 64px));
-  height: var(--polycss-atlas-height, var(--polycss-atlas-size, 64px));
+  width: 64px;
+  height: 64px;
   transform-style: preserve-3d;
   font: inherit;
   font-weight: normal;

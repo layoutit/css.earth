@@ -8,7 +8,8 @@ export interface PreparedMaterialRotationPolicy { reference: "initial" | "prepar
   physical?: { projection: EllipsoidProjectionPlan; width: number; height?: number } & {systemTransform:string}; }
 
 export type PreparedMaterialRotation = PreparedMaterialRotationPolicy & (
-  { kind: "angle"; property: string } |
+  /** The light's roll about the view axis: the page writes `transform: rotate(<angle>deg)` on the track's target. */
+  { kind: "angle" } |
   { kind: "planar"; width: number; height?: number } |
   ({ kind: "ellipsoid"; systemTransform: string } & { projection: EllipsoidProjectionPlan; width: number; height?: number })
 );

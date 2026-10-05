@@ -1,14 +1,9 @@
 /* Prepared scene presentation, scoped to its mounted object. */
 .object-stage:where([data-object-id="earth"]) > .polycss-camera {
-  --earth-side-padding: 16px;
-  --earth-shell-scale: min(
-    1,
-    calc((100cqw - var(--earth-side-padding) - var(--earth-side-padding)) / 1920px),
-    calc(100cqh / 1080px)
-  );
   position: absolute;
   inset: 0;
-  scale: calc(var(--earth-shell-scale) / var(--object-viewport-zoom-divisor));
+  /* The reference frame fitted to the stage with 16px at each side, never enlarged, over 1 / .88 for breathing room. */
+  scale: calc(min(1, calc((100cqw - 16px - 16px) / 1920px), calc(100cqh / 1080px)) / 1.136364);
   transform-origin: 50% 50%;
   transform-style: preserve-3d;
   pointer-events: none;
@@ -37,8 +32,8 @@
 :where(.object-stage[data-object-id="earth"]) .polycss-scene s {
   position: absolute;
   display: block;
-  width: var(--polycss-atlas-width, 64px);
-  height: var(--polycss-atlas-height, 64px);
+  width: 64px;
+  height: 64px;
   margin: 0;
   padding: 0;
   transform-origin: 0 0;

@@ -528,13 +528,25 @@ its full box. [leaf-box.ts](../packages/bake/src/presentation/leaf-box.ts) holds
     that draw it are the ones its texture write is bound to. The renderer reads both. It never measures an image, works
     a size out of a byte count, or guesses which image a leaf draws: a leaf whose image states no size keeps its step's
     box.
-  - **No variable carries an image.** A texture write names a slot, and the slot lists the elements that draw it
-    (`tree.textureBindings`). The page writes `background-image` on each of those elements, and the served markup
-    does the same; an image a container draws itself is a write of that container's own background. The bake still
-    finds the elements in a headless browser through a custom property, then ships records that name none
-    ([texture-image-records.ts](../packages/bake/src/presentation/texture-image-records.ts)), and the runtime
-    shipped-form check ([shipped-runtime.ts](../packages/objects/src/prepared-data/runtime-validation/shipped-runtime.ts))
-    refuses to pin or mount a runtime whose tree sets a custom property or whose element reads its image from one.
+  - **No variable carries a value.** What ships names no CSS custom property and the page writes none: each value
+    goes on the element that draws it, as a literal.
+    An image: a texture write names a slot, and the slot lists the elements that draw it (`tree.textureBindings`).
+    The page writes `background-image` on each of those elements, and the served markup does the same; an image a
+    container draws itself is a write of that container's own background.
+    An alternative mesh: a body with several shape models lists each mesh's leaves (`tree.meshes`), a selection
+    names the one it mounts (`variant.mesh`), and no leaf carries a display of its own.
+    The far billboard: its color is a write of its own background, and its opacity a view binding on it.
+    The light's roll: the page writes `transform: rotate()` on the lighting material. A stylesheet that also centres
+    or scales that material does so with `translate` and `scale`, which compose before `transform`.
+    The silhouette steps: their bindings and leaf-box groups have plain names, and the page writes each leaf's final
+    values from its record.
+    The bake still measures images, meshes and steps in a headless browser through custom properties, then ships
+    records that name none ([texture-image-records.ts](../packages/bake/src/presentation/texture-image-records.ts),
+    [mesh-records.ts](../packages/bake/src/presentation/mesh-records.ts),
+    [step-name-records.ts](../packages/bake/src/presentation/step-name-records.ts)). The shipped-form check
+    ([shipped-runtime.ts](../packages/objects/src/prepared-data/runtime-validation/shipped-runtime.ts)) refuses to pin
+    or mount a runtime that names or reads one, and `node .github/scripts/checks/check-no-variables.mts` refuses one
+    in a body stylesheet, a stage stylesheet or the renderer's source.
   - **One texel per device pixel.** The box follows the screen's pixel ratio where that is a whole number of two or
     more (a phone's three gives 43.33 px for the same level); any other screen keeps the bake's two texels a CSS
     pixel. The copy is by backing pixel: with the iPad's page scaled to four backing pixels a CSS pixel, Io's faces in
@@ -637,8 +649,8 @@ declares a seam outset, preparation writes two corrections instead:
 - **Stepped seam outset.** Each surface leaf gets a scale per axis, and the body
   a table of silhouette steps
   ([seam-outset.ts](../packages/bake/src/scene/seam-outset.ts)). At
-  runtime the body publishes the value for its projected diameter as
-  `--surface-seam-outset`, and each leaf scales about its centre by
+  runtime the page selects the step for the body's projected diameter and
+  writes each leaf's transform from its record, scaled about its centre by
   `1 + outset × scale`. From a 16-pixel disc to the closest zoom, every step adds
   0.38–0.6 CSS pixels on each edge. The runtime only selects a prepared step.
 

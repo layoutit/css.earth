@@ -58,7 +58,7 @@ function rotation(value: unknown): void {
   for (const key of ['onlyWhenEnabled', 'publishWithAddress']) if (item[key] !== undefined) boolean(item[key], key);
   if (item.systemTransform !== undefined || kind === 'ellipsoid') text(item.systemTransform, 'rotation system transform');
   if (item.polePolicy !== undefined) choice(item.polePolicy, ['azimuth'], 'pole policy');
-  if (kind === 'angle') text(item.property, 'angle property');
+  if (kind === 'angle') { if (item.property !== undefined) fail(`an angle rotation names no property (${String(item.property)}): the page writes its target's transform`); }
   else { positive(item.width, 'rotation width'); positive(item.height, 'rotation height'); }
   if (item.physical!==undefined){
     const physical=record(item.physical,'physical material projection',['width','height','systemTransform','projection']);

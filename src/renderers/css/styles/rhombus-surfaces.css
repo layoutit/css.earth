@@ -1,19 +1,5 @@
 /* Rhombus: the Sun's emissive presentation (body-surfaces.css, SUN block) scoped to this object, loaded after the shared
    body-surfaces.css base rules. No spin: the rotation axis and period are unmeasured. Both plates are transparent: no observation is cast. */
-.object-stage[data-object-id="rhombus"] > :is(.polycss-camera, .rhombus-corona-layer, .rhombus-limb-layer) {
-  --rhombus-scene-side-padding: 16px;
-  --rhombus-reference-width: 1920px;
-  --rhombus-reference-height: 1080px;
-  --rhombus-shell-scale: min(
-    1,
-    calc(
-      (100cqw - var(--rhombus-scene-side-padding) - var(--rhombus-scene-side-padding)) /
-        var(--rhombus-reference-width)
-    ),
-    calc(100cqh / var(--rhombus-reference-height))
-  );
-}
-
 /* The shared stage rule (body-surfaces.css) sizes the camera and the Sun's plates; this object's plates need the same box. */
 .object-stage[data-object-id="rhombus"] > :is(.rhombus-corona-layer, .rhombus-limb-layer) {
   position: absolute;
@@ -80,8 +66,8 @@
 }
 
 .object-stage[data-object-id="rhombus"] .polycss-scene s {
-  width: var(--polycss-atlas-width, var(--polycss-atlas-size, 64px));
-  height: var(--polycss-atlas-height, var(--polycss-atlas-size, 64px));
+  width: 64px;
+  height: 64px;
   transform-style: preserve-3d;
   font: inherit;
   font-weight: normal;

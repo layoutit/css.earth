@@ -5,7 +5,7 @@
 :where(.object-stage > :is(
   .mercury-sun-camera,
   .mercury-camera,
-  .mercury-material-root,
+  .mercury-material-composite,
   .venus-material-composite,
   .mars-material-composite,
   .moon-material-composite,
@@ -80,8 +80,8 @@
 .mercury-interior-sections > s {
   position: absolute;
   display: block;
-  width: var(--polycss-atlas-width, 64px);
-  height: var(--polycss-atlas-height, 64px);
+  width: 64px;
+  height: 64px;
   margin: 0;
   padding: 0;
   transform-origin: 0 0;
@@ -105,67 +105,30 @@
   visibility: hidden;
 }
 
-/* The terminator overlay follows the body's silhouette: the runtime writes
-   its scale from the projected silhouette diameter on every publication. */
-.mercury-material-root {
-  --mercury-disc-size: 460px;
-  --mercury-billboard-opacity: 0;
-  z-index: 3;
+.object-stage[data-object-id="mercury"] .polycss-camera,
+.object-stage[data-object-id="mercury"] .mercury-material-composite {
+  z-index: 1;
 }
 
-/* Level of detail (the stage is `data-lod` on the stage element, the
-   opacities are written per publication):
-     geometry   the retained leaves, the overlay on top;
-     crossfade  the billboard disc fades in over the geometry, beneath the
-                overlay, which now draws from the billboard lighting atlas;
-     billboard  the geometry is hidden beneath the opaque disc;
-     marker     the navigation sprite has faded in over the disc, which hides.
-   The finer stage always stays painted until the coarser one is opaque. */
-.mercury-billboard {
+/* Lambert lighting overlay: 460 px = presentationSize of the lighting bank = logical body diameter.
+   background-image / background-position / background-size come from the material track, and its roll is its transform. */
+.object-stage[data-object-id="mercury"] .mercury-fixed-material {
   position: absolute;
   display: block;
+  z-index: 1;
   top: 50%;
   left: 50%;
-  width: var(--mercury-disc-size);
-  height: var(--mercury-disc-size);
-  margin: calc(var(--mercury-disc-size) / -2) 0 0
-    calc(var(--mercury-disc-size) / -2);
-  border-radius: 50%;
-  background-color: var(--mercury-billboard-color, #484848);
-  opacity: var(--mercury-billboard-opacity);
-  pointer-events: none;
-}
-
-.object-stage[data-lod="billboard"] .mercury-scene,
-.object-stage[data-lod="marker"] .mercury-scene {
-  visibility: hidden;
-}
-
-/* At the marker stage the flat disc gives way to the navigation sprite, but
-   the lighting overlay stays alive over it (floored to the sprite's size by
-   the runtime) so the marker keeps the phase and never steps up to a fully
-   lit sprite brighter than the body it replaces. The material root paints
-   above the orbit overlay for that reason. */
-.object-stage[data-lod="marker"] .mercury-billboard {
-  visibility: hidden;
-}
-
-.mercury-material {
-  position: absolute;
-  display: block;
-  top: 50%;
-  left: 50%;
-  width: var(--mercury-disc-size);
-  height: var(--mercury-disc-size);
-  margin: calc(var(--mercury-disc-size) / -2) 0 0
-    calc(var(--mercury-disc-size) / -2);
+  width: 460px;
+  height: 460px;
+  margin: 0;
+  padding: 0;
+  line-height: 0;
+  text-decoration: none;
+  translate: -50% -50%;
+  transform-origin: 50% 50%;
+  backface-visibility: hidden;
   background-repeat: no-repeat;
-  transform: rotate(var(--mercury-light-roll, 0deg));
   pointer-events: none;
-}
-
-.object-stage.mercury-hide-shadows .mercury-material {
-  transform: none;
 }
 
 /* The orbit toggle hides the line only; the body marker shares the overlay
@@ -174,15 +137,8 @@
   visibility: hidden;
 }
 
-.object-stage[data-view="interior"] .mercury-body,
-.object-stage[data-view="interior"][data-lod="geometry"] .mercury-material-root {
+.object-stage[data-view="interior"] .mercury-body {
   visibility: hidden;
-}
-
-/* The cutaway carries no overlay; from afar it is the exterior billboard, so
-   the overlay fades in with the disc. */
-.object-stage[data-view="interior"] .mercury-material {
-  opacity: var(--mercury-billboard-opacity);
 }
 
 .object-stage[data-view="interior"]:not([data-lod="billboard"]):not([data-lod="marker"])
@@ -202,20 +158,6 @@
 }
 
 /* VENUS */
-.object-stage[data-object-id="venus"] > :is(.polycss-camera, .venus-material-composite) {
-  --venus-scene-side-padding: 16px;
-  --venus-reference-width: 1920px;
-  --venus-reference-height: 1080px;
-  --venus-shell-scale: min(
-    1,
-    calc(
-      (100cqw - var(--venus-scene-side-padding) - var(--venus-scene-side-padding)) /
-        var(--venus-reference-width)
-    ),
-    calc(100cqh / var(--venus-reference-height))
-  );
-}
-
 .object-stage[data-object-id="venus"] .polycss-camera,
 .object-stage[data-object-id="venus"] .venus-material-composite {
   z-index: 1;
@@ -259,7 +201,7 @@
   height: 512px;
   background-image: url("/scenes/venus/venus-material@2x.webp");
   background-size: 4096px 2048px;
-  transform: translate(-50%, -50%) rotate(var(--venus-light-roll, 0deg));
+  translate: -50% -50%;
   transform-origin: 50% 50%;
 }
 
@@ -290,8 +232,8 @@
 }
 
 .object-stage[data-object-id="venus"] .polycss-scene s {
-  width: var(--polycss-atlas-width, var(--polycss-atlas-size, 64px));
-  height: var(--polycss-atlas-height, var(--polycss-atlas-size, 64px));
+  width: 64px;
+  height: 64px;
   transform-style: preserve-3d;
   font: inherit;
   font-weight: normal;
@@ -300,20 +242,6 @@
 }
 
 /* MARS */
-.object-stage[data-object-id="mars"] > :is(.polycss-camera, .mars-material-composite) {
-  --mars-scene-side-padding: 16px;
-  --mars-reference-width: 1920px;
-  --mars-reference-height: 1080px;
-  --mars-shell-scale: min(
-    1,
-    calc(
-      (100cqw - var(--mars-scene-side-padding) - var(--mars-scene-side-padding)) /
-        var(--mars-reference-width)
-    ),
-    calc(100cqh / var(--mars-reference-height))
-  );
-}
-
 .object-stage[data-object-id="mars"] .polycss-camera,
 .object-stage[data-object-id="mars"] .mars-material-composite {
   z-index: 1;
@@ -350,7 +278,7 @@
   height: 512px;
   background-image: url("/scenes/mars/mars-material@2x.webp");
   background-size: 4096px 2048px;
-  transform: translate(-50%, -50%) rotate(var(--mars-light-roll, 0deg));
+  translate: -50% -50%;
   transform-origin: 50% 50%;
 }
 
@@ -379,8 +307,8 @@
 }
 
 .object-stage[data-object-id="mars"] .polycss-scene s {
-  width: var(--polycss-atlas-width, var(--polycss-atlas-size, 64px));
-  height: var(--polycss-atlas-height, var(--polycss-atlas-size, 64px));
+  width: 64px;
+  height: 64px;
   transform-style: preserve-3d;
   font: inherit;
   font-weight: normal;
@@ -389,20 +317,6 @@
 }
 
 /* MOON */
-.object-stage[data-object-id="moon"] > :is(.polycss-camera, .moon-material-composite) {
-  --moon-scene-side-padding: 16px;
-  --moon-reference-width: 1920px;
-  --moon-reference-height: 1080px;
-  --moon-shell-scale: min(
-    1,
-    calc(
-      (100cqw - var(--moon-scene-side-padding) - var(--moon-scene-side-padding)) /
-        var(--moon-reference-width)
-    ),
-    calc(100cqh / var(--moon-reference-height))
-  );
-}
-
 .object-stage[data-object-id="moon"] .polycss-camera,
 .object-stage[data-object-id="moon"] .moon-material-composite {
   z-index: 1;
@@ -439,12 +353,8 @@
   left: 50%;
   width: 460px;
   height: 460px;
-  transform: translate(-50%, -50%) rotate(var(--moon-light-roll, 0deg));
+  translate: -50% -50%;
   transform-origin: 50% 50%;
-}
-
-.object-stage[data-object-id="moon"].moon-hide-shadows .moon-fixed-material {
-  transform: translate(-50%, -50%);
 }
 
 @keyframes moon-body-spin {
@@ -463,8 +373,8 @@
 }
 
 .object-stage[data-object-id="moon"] .polycss-scene s {
-  width: var(--polycss-atlas-width, var(--polycss-atlas-size, 64px));
-  height: var(--polycss-atlas-height, var(--polycss-atlas-size, 64px));
+  width: 64px;
+  height: 64px;
   transform-style: preserve-3d;
   font: inherit;
   font-weight: normal;
@@ -473,20 +383,6 @@
 }
 
 /* PLUTO */
-.object-stage[data-object-id="pluto"] > :is(.polycss-camera, .pluto-material-composite) {
-  --pluto-scene-side-padding: 16px;
-  --pluto-reference-width: 1920px;
-  --pluto-reference-height: 1080px;
-  --pluto-shell-scale: min(
-    1,
-    calc(
-      (100cqw - var(--pluto-scene-side-padding) - var(--pluto-scene-side-padding)) /
-        var(--pluto-reference-width)
-    ),
-    calc(100cqh / var(--pluto-reference-height))
-  );
-}
-
 .object-stage[data-object-id="pluto"] .polycss-camera,
 .object-stage[data-object-id="pluto"] .pluto-material-composite {
   z-index: 1;
@@ -523,12 +419,8 @@
   left: 50%;
   width: 460px;
   height: 460px;
-  transform: translate(-50%, -50%) rotate(var(--pluto-light-roll, 0deg));
+  translate: -50% -50%;
   transform-origin: 50% 50%;
-}
-
-.object-stage[data-object-id="pluto"].pluto-hide-shadows .pluto-fixed-material {
-  transform: translate(-50%, -50%);
 }
 
 @keyframes pluto-body-spin {
@@ -547,27 +439,13 @@
 }
 
 .object-stage[data-object-id="pluto"] .polycss-scene s {
-  width: var(--polycss-atlas-width, var(--polycss-atlas-size, 64px));
-  height: var(--polycss-atlas-height, var(--polycss-atlas-size, 64px));
+  width: 64px;
+  height: 64px;
   transform-style: preserve-3d;
   font: inherit;
   font-weight: normal;
   font-style: normal;
   line-height: 0;
-}
-
-.object-stage[data-object-id="ariel"] > :is(.polycss-camera, .ariel-material-composite) {
-  --ariel-scene-side-padding: 16px;
-  --ariel-reference-width: 1920px;
-  --ariel-reference-height: 1080px;
-  --ariel-shell-scale: min(
-    1,
-    calc(
-      (100cqw - var(--ariel-scene-side-padding) - var(--ariel-scene-side-padding)) /
-        var(--ariel-reference-width)
-    ),
-    calc(100cqh / var(--ariel-reference-height))
-  );
 }
 
 .object-stage[data-object-id="ariel"] .polycss-camera,
@@ -606,12 +484,8 @@
   left: 50%;
   width: 460px;
   height: 460px;
-  transform: translate(-50%, -50%) rotate(var(--ariel-light-roll, 0deg));
+  translate: -50% -50%;
   transform-origin: 50% 50%;
-}
-
-.object-stage[data-object-id="ariel"].ariel-hide-shadows .ariel-fixed-material {
-  transform: translate(-50%, -50%);
 }
 
 @keyframes ariel-body-spin {
@@ -630,27 +504,13 @@
 }
 
 .object-stage[data-object-id="ariel"] .polycss-scene s {
-  width: var(--polycss-atlas-width, var(--polycss-atlas-size, 64px));
-  height: var(--polycss-atlas-height, var(--polycss-atlas-size, 64px));
+  width: 64px;
+  height: 64px;
   transform-style: preserve-3d;
   font: inherit;
   font-weight: normal;
   font-style: normal;
   line-height: 0;
-}
-
-.object-stage[data-object-id="callisto"] > :is(.polycss-camera, .callisto-material-composite) {
-  --callisto-scene-side-padding: 16px;
-  --callisto-reference-width: 1920px;
-  --callisto-reference-height: 1080px;
-  --callisto-shell-scale: min(
-    1,
-    calc(
-      (100cqw - var(--callisto-scene-side-padding) - var(--callisto-scene-side-padding)) /
-        var(--callisto-reference-width)
-    ),
-    calc(100cqh / var(--callisto-reference-height))
-  );
 }
 
 .object-stage[data-object-id="callisto"] .polycss-camera,
@@ -689,12 +549,8 @@
   left: 50%;
   width: 460px;
   height: 460px;
-  transform: translate(-50%, -50%) rotate(var(--callisto-light-roll, 0deg));
+  translate: -50% -50%;
   transform-origin: 50% 50%;
-}
-
-.object-stage[data-object-id="callisto"].callisto-hide-shadows .callisto-fixed-material {
-  transform: translate(-50%, -50%);
 }
 
 @keyframes callisto-body-spin {
@@ -713,27 +569,13 @@
 }
 
 .object-stage[data-object-id="callisto"] .polycss-scene s {
-  width: var(--polycss-atlas-width, var(--polycss-atlas-size, 64px));
-  height: var(--polycss-atlas-height, var(--polycss-atlas-size, 64px));
+  width: 64px;
+  height: 64px;
   transform-style: preserve-3d;
   font: inherit;
   font-weight: normal;
   font-style: normal;
   line-height: 0;
-}
-
-.object-stage[data-object-id="ceres"] > :is(.polycss-camera, .ceres-material-composite) {
-  --ceres-scene-side-padding: 16px;
-  --ceres-reference-width: 1920px;
-  --ceres-reference-height: 1080px;
-  --ceres-shell-scale: min(
-    1,
-    calc(
-      (100cqw - var(--ceres-scene-side-padding) - var(--ceres-scene-side-padding)) /
-        var(--ceres-reference-width)
-    ),
-    calc(100cqh / var(--ceres-reference-height))
-  );
 }
 
 .object-stage[data-object-id="ceres"] .polycss-camera,
@@ -772,12 +614,8 @@
   left: 50%;
   width: 460px;
   height: 460px;
-  transform: translate(-50%, -50%) rotate(var(--ceres-light-roll, 0deg));
+  translate: -50% -50%;
   transform-origin: 50% 50%;
-}
-
-.object-stage[data-object-id="ceres"].ceres-hide-shadows .ceres-fixed-material {
-  transform: translate(-50%, -50%);
 }
 
 @keyframes ceres-body-spin {
@@ -796,27 +634,13 @@
 }
 
 .object-stage[data-object-id="ceres"] .polycss-scene s {
-  width: var(--polycss-atlas-width, var(--polycss-atlas-size, 64px));
-  height: var(--polycss-atlas-height, var(--polycss-atlas-size, 64px));
+  width: 64px;
+  height: 64px;
   transform-style: preserve-3d;
   font: inherit;
   font-weight: normal;
   font-style: normal;
   line-height: 0;
-}
-
-.object-stage[data-object-id="charon"] > :is(.polycss-camera, .charon-material-composite) {
-  --charon-scene-side-padding: 16px;
-  --charon-reference-width: 1920px;
-  --charon-reference-height: 1080px;
-  --charon-shell-scale: min(
-    1,
-    calc(
-      (100cqw - var(--charon-scene-side-padding) - var(--charon-scene-side-padding)) /
-        var(--charon-reference-width)
-    ),
-    calc(100cqh / var(--charon-reference-height))
-  );
 }
 
 .object-stage[data-object-id="charon"] .polycss-camera,
@@ -855,12 +679,8 @@
   left: 50%;
   width: 460px;
   height: 460px;
-  transform: translate(-50%, -50%) rotate(var(--charon-light-roll, 0deg));
+  translate: -50% -50%;
   transform-origin: 50% 50%;
-}
-
-.object-stage[data-object-id="charon"].charon-hide-shadows .charon-fixed-material {
-  transform: translate(-50%, -50%);
 }
 
 @keyframes charon-body-spin {
@@ -879,27 +699,13 @@
 }
 
 .object-stage[data-object-id="charon"] .polycss-scene s {
-  width: var(--polycss-atlas-width, var(--polycss-atlas-size, 64px));
-  height: var(--polycss-atlas-height, var(--polycss-atlas-size, 64px));
+  width: 64px;
+  height: 64px;
   transform-style: preserve-3d;
   font: inherit;
   font-weight: normal;
   font-style: normal;
   line-height: 0;
-}
-
-.object-stage[data-object-id="eris"] > :is(.polycss-camera, .eris-material-composite) {
-  --eris-scene-side-padding: 16px;
-  --eris-reference-width: 1920px;
-  --eris-reference-height: 1080px;
-  --eris-shell-scale: min(
-    1,
-    calc(
-      (100cqw - var(--eris-scene-side-padding) - var(--eris-scene-side-padding)) /
-        var(--eris-reference-width)
-    ),
-    calc(100cqh / var(--eris-reference-height))
-  );
 }
 
 .object-stage[data-object-id="eris"] .polycss-camera,
@@ -938,12 +744,8 @@
   left: 50%;
   width: 460px;
   height: 460px;
-  transform: translate(-50%, -50%) rotate(var(--eris-light-roll, 0deg));
+  translate: -50% -50%;
   transform-origin: 50% 50%;
-}
-
-.object-stage[data-object-id="eris"].eris-hide-shadows .eris-fixed-material {
-  transform: translate(-50%, -50%);
 }
 
 @keyframes eris-body-spin {
@@ -962,27 +764,13 @@
 }
 
 .object-stage[data-object-id="eris"] .polycss-scene s {
-  width: var(--polycss-atlas-width, var(--polycss-atlas-size, 64px));
-  height: var(--polycss-atlas-height, var(--polycss-atlas-size, 64px));
+  width: 64px;
+  height: 64px;
   transform-style: preserve-3d;
   font: inherit;
   font-weight: normal;
   font-style: normal;
   line-height: 0;
-}
-
-.object-stage[data-object-id="europa"] > :is(.polycss-camera, .europa-material-composite) {
-  --europa-scene-side-padding: 16px;
-  --europa-reference-width: 1920px;
-  --europa-reference-height: 1080px;
-  --europa-shell-scale: min(
-    1,
-    calc(
-      (100cqw - var(--europa-scene-side-padding) - var(--europa-scene-side-padding)) /
-        var(--europa-reference-width)
-    ),
-    calc(100cqh / var(--europa-reference-height))
-  );
 }
 
 .object-stage[data-object-id="europa"] .polycss-camera,
@@ -1021,12 +809,8 @@
   left: 50%;
   width: 460px;
   height: 460px;
-  transform: translate(-50%, -50%) rotate(var(--europa-light-roll, 0deg));
+  translate: -50% -50%;
   transform-origin: 50% 50%;
-}
-
-.object-stage[data-object-id="europa"].europa-hide-shadows .europa-fixed-material {
-  transform: translate(-50%, -50%);
 }
 
 @keyframes europa-body-spin {
@@ -1045,27 +829,13 @@
 }
 
 .object-stage[data-object-id="europa"] .polycss-scene s {
-  width: var(--polycss-atlas-width, var(--polycss-atlas-size, 64px));
-  height: var(--polycss-atlas-height, var(--polycss-atlas-size, 64px));
+  width: 64px;
+  height: 64px;
   transform-style: preserve-3d;
   font: inherit;
   font-weight: normal;
   font-style: normal;
   line-height: 0;
-}
-
-.object-stage[data-object-id="ganymede"] > :is(.polycss-camera, .ganymede-material-composite) {
-  --ganymede-scene-side-padding: 16px;
-  --ganymede-reference-width: 1920px;
-  --ganymede-reference-height: 1080px;
-  --ganymede-shell-scale: min(
-    1,
-    calc(
-      (100cqw - var(--ganymede-scene-side-padding) - var(--ganymede-scene-side-padding)) /
-        var(--ganymede-reference-width)
-    ),
-    calc(100cqh / var(--ganymede-reference-height))
-  );
 }
 
 .object-stage[data-object-id="ganymede"] .polycss-camera,
@@ -1104,12 +874,8 @@
   left: 50%;
   width: 460px;
   height: 460px;
-  transform: translate(-50%, -50%) rotate(var(--ganymede-light-roll, 0deg));
+  translate: -50% -50%;
   transform-origin: 50% 50%;
-}
-
-.object-stage[data-object-id="ganymede"].ganymede-hide-shadows .ganymede-fixed-material {
-  transform: translate(-50%, -50%);
 }
 
 @keyframes ganymede-body-spin {
@@ -1128,27 +894,13 @@
 }
 
 .object-stage[data-object-id="ganymede"] .polycss-scene s {
-  width: var(--polycss-atlas-width, var(--polycss-atlas-size, 64px));
-  height: var(--polycss-atlas-height, var(--polycss-atlas-size, 64px));
+  width: 64px;
+  height: 64px;
   transform-style: preserve-3d;
   font: inherit;
   font-weight: normal;
   font-style: normal;
   line-height: 0;
-}
-
-.object-stage[data-object-id="iapetus"] > :is(.polycss-camera, .iapetus-material-composite) {
-  --iapetus-scene-side-padding: 16px;
-  --iapetus-reference-width: 1920px;
-  --iapetus-reference-height: 1080px;
-  --iapetus-shell-scale: min(
-    1,
-    calc(
-      (100cqw - var(--iapetus-scene-side-padding) - var(--iapetus-scene-side-padding)) /
-        var(--iapetus-reference-width)
-    ),
-    calc(100cqh / var(--iapetus-reference-height))
-  );
 }
 
 .object-stage[data-object-id="iapetus"] .polycss-camera,
@@ -1187,12 +939,8 @@
   left: 50%;
   width: 460px;
   height: 460px;
-  transform: translate(-50%, -50%) rotate(var(--iapetus-light-roll, 0deg));
+  translate: -50% -50%;
   transform-origin: 50% 50%;
-}
-
-.object-stage[data-object-id="iapetus"].iapetus-hide-shadows .iapetus-fixed-material {
-  transform: translate(-50%, -50%);
 }
 
 @keyframes iapetus-body-spin {
@@ -1211,27 +959,13 @@
 }
 
 .object-stage[data-object-id="iapetus"] .polycss-scene s {
-  width: var(--polycss-atlas-width, var(--polycss-atlas-size, 64px));
-  height: var(--polycss-atlas-height, var(--polycss-atlas-size, 64px));
+  width: 64px;
+  height: 64px;
   transform-style: preserve-3d;
   font: inherit;
   font-weight: normal;
   font-style: normal;
   line-height: 0;
-}
-
-.object-stage[data-object-id="io"] > :is(.polycss-camera, .io-material-composite) {
-  --io-scene-side-padding: 16px;
-  --io-reference-width: 1920px;
-  --io-reference-height: 1080px;
-  --io-shell-scale: min(
-    1,
-    calc(
-      (100cqw - var(--io-scene-side-padding) - var(--io-scene-side-padding)) /
-        var(--io-reference-width)
-    ),
-    calc(100cqh / var(--io-reference-height))
-  );
 }
 
 .object-stage[data-object-id="io"] .polycss-camera,
@@ -1270,12 +1004,8 @@
   left: 50%;
   width: 460px;
   height: 460px;
-  transform: translate(-50%, -50%) rotate(var(--io-light-roll, 0deg));
+  translate: -50% -50%;
   transform-origin: 50% 50%;
-}
-
-.object-stage[data-object-id="io"].io-hide-shadows .io-fixed-material {
-  transform: translate(-50%, -50%);
 }
 
 @keyframes io-body-spin {
@@ -1294,27 +1024,13 @@
 }
 
 .object-stage[data-object-id="io"] .polycss-scene s {
-  width: var(--polycss-atlas-width, var(--polycss-atlas-size, 64px));
-  height: var(--polycss-atlas-height, var(--polycss-atlas-size, 64px));
+  width: 64px;
+  height: 64px;
   transform-style: preserve-3d;
   font: inherit;
   font-weight: normal;
   font-style: normal;
   line-height: 0;
-}
-
-.object-stage[data-object-id="makemake"] > :is(.polycss-camera, .makemake-material-composite) {
-  --makemake-scene-side-padding: 16px;
-  --makemake-reference-width: 1920px;
-  --makemake-reference-height: 1080px;
-  --makemake-shell-scale: min(
-    1,
-    calc(
-      (100cqw - var(--makemake-scene-side-padding) - var(--makemake-scene-side-padding)) /
-        var(--makemake-reference-width)
-    ),
-    calc(100cqh / var(--makemake-reference-height))
-  );
 }
 
 .object-stage[data-object-id="makemake"] .polycss-camera,
@@ -1353,12 +1069,8 @@
   left: 50%;
   width: 460px;
   height: 460px;
-  transform: translate(-50%, -50%) rotate(var(--makemake-light-roll, 0deg));
+  translate: -50% -50%;
   transform-origin: 50% 50%;
-}
-
-.object-stage[data-object-id="makemake"].makemake-hide-shadows .makemake-fixed-material {
-  transform: translate(-50%, -50%);
 }
 
 @keyframes makemake-body-spin {
@@ -1377,27 +1089,13 @@
 }
 
 .object-stage[data-object-id="makemake"] .polycss-scene s {
-  width: var(--polycss-atlas-width, var(--polycss-atlas-size, 64px));
-  height: var(--polycss-atlas-height, var(--polycss-atlas-size, 64px));
+  width: 64px;
+  height: 64px;
   transform-style: preserve-3d;
   font: inherit;
   font-weight: normal;
   font-style: normal;
   line-height: 0;
-}
-
-.object-stage[data-object-id="miranda"] > :is(.polycss-camera, .miranda-material-composite) {
-  --miranda-scene-side-padding: 16px;
-  --miranda-reference-width: 1920px;
-  --miranda-reference-height: 1080px;
-  --miranda-shell-scale: min(
-    1,
-    calc(
-      (100cqw - var(--miranda-scene-side-padding) - var(--miranda-scene-side-padding)) /
-        var(--miranda-reference-width)
-    ),
-    calc(100cqh / var(--miranda-reference-height))
-  );
 }
 
 .object-stage[data-object-id="miranda"] .polycss-camera,
@@ -1436,12 +1134,8 @@
   left: 50%;
   width: 460px;
   height: 460px;
-  transform: translate(-50%, -50%) rotate(var(--miranda-light-roll, 0deg));
+  translate: -50% -50%;
   transform-origin: 50% 50%;
-}
-
-.object-stage[data-object-id="miranda"].miranda-hide-shadows .miranda-fixed-material {
-  transform: translate(-50%, -50%);
 }
 
 @keyframes miranda-body-spin {
@@ -1460,27 +1154,13 @@
 }
 
 .object-stage[data-object-id="miranda"] .polycss-scene s {
-  width: var(--polycss-atlas-width, var(--polycss-atlas-size, 64px));
-  height: var(--polycss-atlas-height, var(--polycss-atlas-size, 64px));
+  width: 64px;
+  height: 64px;
   transform-style: preserve-3d;
   font: inherit;
   font-weight: normal;
   font-style: normal;
   line-height: 0;
-}
-
-.object-stage[data-object-id="oberon"] > :is(.polycss-camera, .oberon-material-composite) {
-  --oberon-scene-side-padding: 16px;
-  --oberon-reference-width: 1920px;
-  --oberon-reference-height: 1080px;
-  --oberon-shell-scale: min(
-    1,
-    calc(
-      (100cqw - var(--oberon-scene-side-padding) - var(--oberon-scene-side-padding)) /
-        var(--oberon-reference-width)
-    ),
-    calc(100cqh / var(--oberon-reference-height))
-  );
 }
 
 .object-stage[data-object-id="oberon"] .polycss-camera,
@@ -1519,12 +1199,8 @@
   left: 50%;
   width: 460px;
   height: 460px;
-  transform: translate(-50%, -50%) rotate(var(--oberon-light-roll, 0deg));
+  translate: -50% -50%;
   transform-origin: 50% 50%;
-}
-
-.object-stage[data-object-id="oberon"].oberon-hide-shadows .oberon-fixed-material {
-  transform: translate(-50%, -50%);
 }
 
 @keyframes oberon-body-spin {
@@ -1543,27 +1219,13 @@
 }
 
 .object-stage[data-object-id="oberon"] .polycss-scene s {
-  width: var(--polycss-atlas-width, var(--polycss-atlas-size, 64px));
-  height: var(--polycss-atlas-height, var(--polycss-atlas-size, 64px));
+  width: 64px;
+  height: 64px;
   transform-style: preserve-3d;
   font: inherit;
   font-weight: normal;
   font-style: normal;
   line-height: 0;
-}
-
-.object-stage[data-object-id="titan"] > :is(.polycss-camera, .titan-material-composite) {
-  --titan-scene-side-padding: 16px;
-  --titan-reference-width: 1920px;
-  --titan-reference-height: 1080px;
-  --titan-shell-scale: min(
-    1,
-    calc(
-      (100cqw - var(--titan-scene-side-padding) - var(--titan-scene-side-padding)) /
-        var(--titan-reference-width)
-    ),
-    calc(100cqh / var(--titan-reference-height))
-  );
 }
 
 .object-stage[data-object-id="titan"] .polycss-camera,
@@ -1602,12 +1264,8 @@
   left: 50%;
   width: 460px;
   height: 460px;
-  transform: translate(-50%, -50%) rotate(var(--titan-light-roll, 0deg));
+  translate: -50% -50%;
   transform-origin: 50% 50%;
-}
-
-.object-stage[data-object-id="titan"].titan-hide-shadows .titan-fixed-material {
-  transform: translate(-50%, -50%);
 }
 
 @keyframes titan-body-spin {
@@ -1626,27 +1284,13 @@
 }
 
 .object-stage[data-object-id="titan"] .polycss-scene s {
-  width: var(--polycss-atlas-width, var(--polycss-atlas-size, 64px));
-  height: var(--polycss-atlas-height, var(--polycss-atlas-size, 64px));
+  width: 64px;
+  height: 64px;
   transform-style: preserve-3d;
   font: inherit;
   font-weight: normal;
   font-style: normal;
   line-height: 0;
-}
-
-.object-stage[data-object-id="titania"] > :is(.polycss-camera, .titania-material-composite) {
-  --titania-scene-side-padding: 16px;
-  --titania-reference-width: 1920px;
-  --titania-reference-height: 1080px;
-  --titania-shell-scale: min(
-    1,
-    calc(
-      (100cqw - var(--titania-scene-side-padding) - var(--titania-scene-side-padding)) /
-        var(--titania-reference-width)
-    ),
-    calc(100cqh / var(--titania-reference-height))
-  );
 }
 
 .object-stage[data-object-id="titania"] .polycss-camera,
@@ -1685,12 +1329,8 @@
   left: 50%;
   width: 460px;
   height: 460px;
-  transform: translate(-50%, -50%) rotate(var(--titania-light-roll, 0deg));
+  translate: -50% -50%;
   transform-origin: 50% 50%;
-}
-
-.object-stage[data-object-id="titania"].titania-hide-shadows .titania-fixed-material {
-  transform: translate(-50%, -50%);
 }
 
 @keyframes titania-body-spin {
@@ -1709,27 +1349,13 @@
 }
 
 .object-stage[data-object-id="titania"] .polycss-scene s {
-  width: var(--polycss-atlas-width, var(--polycss-atlas-size, 64px));
-  height: var(--polycss-atlas-height, var(--polycss-atlas-size, 64px));
+  width: 64px;
+  height: 64px;
   transform-style: preserve-3d;
   font: inherit;
   font-weight: normal;
   font-style: normal;
   line-height: 0;
-}
-
-.object-stage[data-object-id="triton"] > :is(.polycss-camera, .triton-material-composite) {
-  --triton-scene-side-padding: 16px;
-  --triton-reference-width: 1920px;
-  --triton-reference-height: 1080px;
-  --triton-shell-scale: min(
-    1,
-    calc(
-      (100cqw - var(--triton-scene-side-padding) - var(--triton-scene-side-padding)) /
-        var(--triton-reference-width)
-    ),
-    calc(100cqh / var(--triton-reference-height))
-  );
 }
 
 .object-stage[data-object-id="triton"] .polycss-camera,
@@ -1768,12 +1394,8 @@
   left: 50%;
   width: 460px;
   height: 460px;
-  transform: translate(-50%, -50%) rotate(var(--triton-light-roll, 0deg));
+  translate: -50% -50%;
   transform-origin: 50% 50%;
-}
-
-.object-stage[data-object-id="triton"].triton-hide-shadows .triton-fixed-material {
-  transform: translate(-50%, -50%);
 }
 
 @keyframes triton-body-spin {
@@ -1792,27 +1414,13 @@
 }
 
 .object-stage[data-object-id="triton"] .polycss-scene s {
-  width: var(--polycss-atlas-width, var(--polycss-atlas-size, 64px));
-  height: var(--polycss-atlas-height, var(--polycss-atlas-size, 64px));
+  width: 64px;
+  height: 64px;
   transform-style: preserve-3d;
   font: inherit;
   font-weight: normal;
   font-style: normal;
   line-height: 0;
-}
-
-.object-stage[data-object-id="umbriel"] > :is(.polycss-camera, .umbriel-material-composite) {
-  --umbriel-scene-side-padding: 16px;
-  --umbriel-reference-width: 1920px;
-  --umbriel-reference-height: 1080px;
-  --umbriel-shell-scale: min(
-    1,
-    calc(
-      (100cqw - var(--umbriel-scene-side-padding) - var(--umbriel-scene-side-padding)) /
-        var(--umbriel-reference-width)
-    ),
-    calc(100cqh / var(--umbriel-reference-height))
-  );
 }
 
 .object-stage[data-object-id="umbriel"] .polycss-camera,
@@ -1851,12 +1459,8 @@
   left: 50%;
   width: 460px;
   height: 460px;
-  transform: translate(-50%, -50%) rotate(var(--umbriel-light-roll, 0deg));
+  translate: -50% -50%;
   transform-origin: 50% 50%;
-}
-
-.object-stage[data-object-id="umbriel"].umbriel-hide-shadows .umbriel-fixed-material {
-  transform: translate(-50%, -50%);
 }
 
 @keyframes umbriel-body-spin {
@@ -1875,8 +1479,8 @@
 }
 
 .object-stage[data-object-id="umbriel"] .polycss-scene s {
-  width: var(--polycss-atlas-width, var(--polycss-atlas-size, 64px));
-  height: var(--polycss-atlas-height, var(--polycss-atlas-size, 64px));
+  width: 64px;
+  height: 64px;
   transform-style: preserve-3d;
   font: inherit;
   font-weight: normal;
@@ -1892,20 +1496,6 @@
 }
 
 /* SUN */
-.object-stage[data-object-id="sun"] > :is(.polycss-camera, .sun-corona-layer, .sun-limb-layer) {
-  --sun-scene-side-padding: 16px;
-  --sun-reference-width: 1920px;
-  --sun-reference-height: 1080px;
-  --sun-shell-scale: min(
-    1,
-    calc(
-      (100cqw - var(--sun-scene-side-padding) - var(--sun-scene-side-padding)) /
-        var(--sun-reference-width)
-    ),
-    calc(100cqh / var(--sun-reference-height))
-  );
-}
-
 /* Paint order carried from the retired sun-surfaces.css: off-limb context behind the sphere, limb plate above it. */
 .object-stage[data-object-id="sun"] .sun-corona-layer {
   z-index: 0;
@@ -1979,8 +1569,8 @@
 }
 
 .object-stage[data-object-id="sun"] .polycss-scene s {
-  width: var(--polycss-atlas-width, var(--polycss-atlas-size, 64px));
-  height: var(--polycss-atlas-height, var(--polycss-atlas-size, 64px));
+  width: 64px;
+  height: 64px;
   transform-style: preserve-3d;
   font: inherit;
   font-weight: normal;

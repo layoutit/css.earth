@@ -1,19 +1,5 @@
 /* Kaus Media: the Sun's emissive presentation (body-surfaces.css, SUN block) scoped to this object, loaded after the shared
    body-surfaces.css base rules. No spin: the rotation axis and period are unmeasured. Both plates are transparent: no observation is cast. */
-.object-stage[data-object-id="kaus-media"] > :is(.polycss-camera, .kaus-media-corona-layer, .kaus-media-limb-layer) {
-  --kaus-media-scene-side-padding: 16px;
-  --kaus-media-reference-width: 1920px;
-  --kaus-media-reference-height: 1080px;
-  --kaus-media-shell-scale: min(
-    1,
-    calc(
-      (100cqw - var(--kaus-media-scene-side-padding) - var(--kaus-media-scene-side-padding)) /
-        var(--kaus-media-reference-width)
-    ),
-    calc(100cqh / var(--kaus-media-reference-height))
-  );
-}
-
 /* The shared stage rule (body-surfaces.css) sizes the camera and the Sun's plates; this object's plates need the same box. */
 .object-stage[data-object-id="kaus-media"] > :is(.kaus-media-corona-layer, .kaus-media-limb-layer) {
   position: absolute;
@@ -80,8 +66,8 @@
 }
 
 .object-stage[data-object-id="kaus-media"] .polycss-scene s {
-  width: var(--polycss-atlas-width, var(--polycss-atlas-size, 64px));
-  height: var(--polycss-atlas-height, var(--polycss-atlas-size, 64px));
+  width: 64px;
+  height: 64px;
   transform-style: preserve-3d;
   font: inherit;
   font-weight: normal;

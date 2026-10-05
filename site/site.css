@@ -86,8 +86,6 @@ body {
 }
 
 .object-stage {
-  /* Divide fitted scales by 1 / .88 for consistent breathing room. */
-  --object-viewport-zoom-divisor: 1.136364;
   position: absolute;
   z-index: 0;
   inset: 0;

@@ -1,19 +1,5 @@
 /* Epsilon Leonis: the Sun's emissive presentation (body-surfaces.css, SUN block) scoped to this object, loaded after the shared
    body-surfaces.css base rules. No spin: the rotation axis and period are unmeasured. Both plates are transparent: no observation is cast. */
-.object-stage[data-object-id="epsilon-leonis"] > :is(.polycss-camera, .epsilon-leonis-corona-layer, .epsilon-leonis-limb-layer) {
-  --epsilon-leonis-scene-side-padding: 16px;
-  --epsilon-leonis-reference-width: 1920px;
-  --epsilon-leonis-reference-height: 1080px;
-  --epsilon-leonis-shell-scale: min(
-    1,
-    calc(
-      (100cqw - var(--epsilon-leonis-scene-side-padding) - var(--epsilon-leonis-scene-side-padding)) /
-        var(--epsilon-leonis-reference-width)
-    ),
-    calc(100cqh / var(--epsilon-leonis-reference-height))
-  );
-}
-
 /* The shared stage rule (body-surfaces.css) sizes the camera and the Sun's plates; this object's plates need the same box. */
 .object-stage[data-object-id="epsilon-leonis"] > :is(.epsilon-leonis-corona-layer, .epsilon-leonis-limb-layer) {
   position: absolute;
@@ -80,8 +66,8 @@
 }
 
 .object-stage[data-object-id="epsilon-leonis"] .polycss-scene s {
-  width: var(--polycss-atlas-width, var(--polycss-atlas-size, 64px));
-  height: var(--polycss-atlas-height, var(--polycss-atlas-size, 64px));
+  width: 64px;
+  height: 64px;
   transform-style: preserve-3d;
   font: inherit;
   font-weight: normal;

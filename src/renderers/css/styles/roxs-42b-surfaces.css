@@ -1,19 +1,5 @@
 /* ROXs 42B A: the Sun's emissive presentation (body-surfaces.css, SUN block) scoped to this object, loaded after the shared
    body-surfaces.css base rules. No spin: the rotation axis and period are unmeasured. Both plates are transparent: no observation is cast. */
-.object-stage[data-object-id="roxs-42b"] > :is(.polycss-camera, .roxs-42b-corona-layer, .roxs-42b-limb-layer) {
-  --roxs-42b-scene-side-padding: 16px;
-  --roxs-42b-reference-width: 1920px;
-  --roxs-42b-reference-height: 1080px;
-  --roxs-42b-shell-scale: min(
-    1,
-    calc(
-      (100cqw - var(--roxs-42b-scene-side-padding) - var(--roxs-42b-scene-side-padding)) /
-        var(--roxs-42b-reference-width)
-    ),
-    calc(100cqh / var(--roxs-42b-reference-height))
-  );
-}
-
 /* The shared stage rule (body-surfaces.css) sizes the camera and the Sun's plates; this object's plates need the same box. */
 .object-stage[data-object-id="roxs-42b"] > :is(.roxs-42b-corona-layer, .roxs-42b-limb-layer) {
   position: absolute;
@@ -80,8 +66,8 @@
 }
 
 .object-stage[data-object-id="roxs-42b"] .polycss-scene s {
-  width: var(--polycss-atlas-width, var(--polycss-atlas-size, 64px));
-  height: var(--polycss-atlas-height, var(--polycss-atlas-size, 64px));
+  width: 64px;
+  height: 64px;
   transform-style: preserve-3d;
   font: inherit;
   font-weight: normal;

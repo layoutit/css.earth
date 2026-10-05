@@ -19,8 +19,8 @@
   pointer-events: none;
 }
 .object-stage[data-object-id="__object__"] .polycss-scene s {
-  width: var(--polycss-atlas-width, var(--polycss-atlas-size, 64px));
-  height: var(--polycss-atlas-height, var(--polycss-atlas-size, 64px));
+  width: 64px;
+  height: 64px;
   transform-style: preserve-3d;
 }
 /* The bank clips each frame at 460px; the silhouette binding uses a 496px reference disc. */
@@ -30,8 +30,6 @@
   width: 460px;
   height: 460px;
   transform-origin: 50% 50%;
-  transform: translate(-50%, -50%) rotate(var(--__object__-light-roll, 0deg)) scale(1.0782608695652174);
-}
-.object-stage[data-object-id="__object__"].__object__-hide-shadows .__object__-fixed-material {
-  transform: translate(-50%, -50%) scale(1.0782608695652174);
+  translate: -50% -50%;
+  scale: 1.0782608695652174;
 }

@@ -16,11 +16,11 @@ test('a silhouette step follows the diameter with hysteresis and holds without a
   assert.equal(selectPreparedSilhouetteStep(steps, null, undefined), undefined);
 });
 
-test('silhouette step bindings name a retained node, a custom property and increasing steps', () => {
+test('silhouette step bindings name a retained node, a prepared step and increasing steps', () => {
   const tree = { nodes: [-1, 0, 1].map(parent => ({ tag: 'div', parent, className: null, style: '', properties: [], attributes: {} })),
     properties: [], camera: 0, scene: 1, stageClasses: [] } as PreparedTree;
   const camera = {} as CameraPlan;
-  const binding = { kind: 'silhouette-step-property', target: 2, property: '--surface-seam-outset', ...steps };
+  const binding = { kind: 'silhouette-step-property', target: 2, property: 'surface-seam-outset', ...steps };
   assert.doesNotThrow(() => requireViewBindings([binding], tree, camera));
   for (const invalid of [{ ...binding, property: 'opacity' }, { ...binding, target: 0 }, { ...binding, target: -1 }, { ...binding, hysteresis: 1 },
     { ...binding, levels: steps.levels.slice(1) }, { ...binding, levels: [steps.levels[0], steps.levels[2], steps.levels[1]] }]) {

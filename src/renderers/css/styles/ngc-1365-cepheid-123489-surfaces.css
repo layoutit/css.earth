@@ -1,19 +1,5 @@
 /* NGC 1365 Cepheid 123489: the Sun's emissive presentation (body-surfaces.css, SUN block) scoped to this object, loaded after the shared
    body-surfaces.css base rules. No spin: the rotation axis and period are unmeasured. Both plates are transparent: no observation is cast. */
-.object-stage[data-object-id="ngc-1365-cepheid-123489"] > :is(.polycss-camera, .ngc-1365-cepheid-123489-corona-layer, .ngc-1365-cepheid-123489-limb-layer) {
-  --ngc-1365-cepheid-123489-scene-side-padding: 16px;
-  --ngc-1365-cepheid-123489-reference-width: 1920px;
-  --ngc-1365-cepheid-123489-reference-height: 1080px;
-  --ngc-1365-cepheid-123489-shell-scale: min(
-    1,
-    calc(
-      (100cqw - var(--ngc-1365-cepheid-123489-scene-side-padding) - var(--ngc-1365-cepheid-123489-scene-side-padding)) /
-        var(--ngc-1365-cepheid-123489-reference-width)
-    ),
-    calc(100cqh / var(--ngc-1365-cepheid-123489-reference-height))
-  );
-}
-
 /* The shared stage rule (body-surfaces.css) sizes the camera and the Sun's plates; this object's plates need the same box. */
 .object-stage[data-object-id="ngc-1365-cepheid-123489"] > :is(.ngc-1365-cepheid-123489-corona-layer, .ngc-1365-cepheid-123489-limb-layer) {
   position: absolute;
@@ -80,8 +66,8 @@
 }
 
 .object-stage[data-object-id="ngc-1365-cepheid-123489"] .polycss-scene s {
-  width: var(--polycss-atlas-width, var(--polycss-atlas-size, 64px));
-  height: var(--polycss-atlas-height, var(--polycss-atlas-size, 64px));
+  width: 64px;
+  height: 64px;
   transform-style: preserve-3d;
   font: inherit;
   font-weight: normal;

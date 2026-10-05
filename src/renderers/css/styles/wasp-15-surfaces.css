@@ -1,19 +1,5 @@
 /* Nyamien: the Sun's emissive presentation (body-surfaces.css, SUN block) scoped to this object, loaded after the shared
    body-surfaces.css base rules. No spin: the rotation axis and period are unmeasured. Both plates are transparent: no observation is cast. */
-.object-stage[data-object-id="wasp-15"] > :is(.polycss-camera, .wasp-15-corona-layer, .wasp-15-limb-layer) {
-  --wasp-15-scene-side-padding: 16px;
-  --wasp-15-reference-width: 1920px;
-  --wasp-15-reference-height: 1080px;
-  --wasp-15-shell-scale: min(
-    1,
-    calc(
-      (100cqw - var(--wasp-15-scene-side-padding) - var(--wasp-15-scene-side-padding)) /
-        var(--wasp-15-reference-width)
-    ),
-    calc(100cqh / var(--wasp-15-reference-height))
-  );
-}
-
 /* The shared stage rule (body-surfaces.css) sizes the camera and the Sun's plates; this object's plates need the same box. */
 .object-stage[data-object-id="wasp-15"] > :is(.wasp-15-corona-layer, .wasp-15-limb-layer) {
   position: absolute;
@@ -80,8 +66,8 @@
 }
 
 .object-stage[data-object-id="wasp-15"] .polycss-scene s {
-  width: var(--polycss-atlas-width, var(--polycss-atlas-size, 64px));
-  height: var(--polycss-atlas-height, var(--polycss-atlas-size, 64px));
+  width: 64px;
+  height: 64px;
   transform-style: preserve-3d;
   font: inherit;
   font-weight: normal;

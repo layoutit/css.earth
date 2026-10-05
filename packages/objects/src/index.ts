@@ -86,6 +86,7 @@ export { requireVariants, requireViewBindings } from './prepared-data/runtime-va
 export { requireAssets } from './prepared-data/runtime-validation/resources-tree.js';
 
 export { requireTextureBindings } from './prepared-data/runtime-validation/texture-bindings.js';
+export { requireMeshes } from './prepared-data/runtime-validation/meshes.js';
 export { requireShippedRuntime } from './prepared-data/runtime-validation/shipped-runtime.js';
 export { PREPARED_DATASET_SCHEMA, deferredDatasetIds, preparedDatasetReference, splitPreparedDatasetTables, requireDeferredDatasets, requirePreparedDatasetTables, mergePreparedDatasetTables } from './prepared-data/content/dataset-tables.js';
 export type { PreparedDatasetLevel, PreparedDatasetTables } from './prepared-data/content/dataset-tables.js';
@@ -292,5 +293,5 @@ export { PACKAGED_POINTS_SOURCE_SCHEMA, readPackagedPointsFrame } from './prepar
 export { HOSTED_PLANET_MEASUREMENTS_SCHEMA, NEUTRON_STAR_MEASUREMENTS_SCHEMA, readPreparedChartContentRecord } from './prepared-data/presentation/build-projections.js';
 
 export { MAP_SPHERE_DATASETS_SCHEMA, readMapSphereDatasetPreviews } from './prepared-data/surface/map-sphere-datasets.js';
-export { LEAF_BOX_PROPERTY, LEAF_BOX_FACTOR, SURFACE_SEAM_OUTSET_PROPERTY, TEXELS_PER_CSS_PIXEL } from './prepared-data/presentation/leaf-box-properties.js';
+export { LEAF_BOX_PROPERTY, LEAF_BOX_FACTOR, SURFACE_SEAM_OUTSET_PROPERTY, LEAF_BOX_STEP, SURFACE_SEAM_OUTSET_STEP, TEXELS_PER_CSS_PIXEL } from './prepared-data/presentation/leaf-box-properties.js';
 export { requirePresentationEnvelope } from './prepared-data/runtime-validation/presentation-envelope.js';

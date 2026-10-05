@@ -23,14 +23,15 @@ test('an equal value is written once, whatever the page would read back', () => 
   assert.deepEqual([after.written - before.written, after.skipped - before.skipped], [2, 1]);
 });
 
-test('custom properties, data attributes and separate elements keep separate values', () => {
+test('style properties, data attributes and separate elements keep separate values, and no custom property is written', () => {
   const first = element(), second = element();
-  assert.equal(writeStyle(first, '--native-volume-mix', '0.5'), true);
-  assert.equal(writeStyle(first, '--native-volume-mix', '0.5'), false);
-  assert.equal(first.stored.get('--native-volume-mix'), '0.5');
-  assert.equal(writeStyle(second, '--native-volume-mix', '0.5'), true);
+  assert.equal(writeStyle(first, 'opacity', '0.5'), true);
+  assert.equal(writeStyle(first, 'opacity', '0.5'), false);
+  assert.equal(first.stored.get('opacity'), '0.5');
+  assert.equal(writeStyle(second, 'opacity', '0.5'), true);
   assert.equal(writeData(first, 'opacity', '1'), true);
   assert.equal(writeData(first, 'opacity', '1'), false);
   assert.equal(writeStyle(first, 'opacity', '1'), true);
   assert.equal(first.dataset.opacity, '1');
+  assert.throws(() => writeStyle(first, '--native-volume-mix', '0.5'), /The renderer writes no custom property: --native-volume-mix/u);
 });

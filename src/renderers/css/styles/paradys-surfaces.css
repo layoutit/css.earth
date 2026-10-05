@@ -1,19 +1,5 @@
 /* Paradys: the Sun's emissive presentation (body-surfaces.css, SUN block) scoped to this object, loaded after the shared
    body-surfaces.css base rules. No spin: the rotation axis and period are unmeasured. Both plates are transparent: no observation is cast. */
-.object-stage[data-object-id="paradys"] > :is(.polycss-camera, .paradys-corona-layer, .paradys-limb-layer) {
-  --paradys-scene-side-padding: 16px;
-  --paradys-reference-width: 1920px;
-  --paradys-reference-height: 1080px;
-  --paradys-shell-scale: min(
-    1,
-    calc(
-      (100cqw - var(--paradys-scene-side-padding) - var(--paradys-scene-side-padding)) /
-        var(--paradys-reference-width)
-    ),
-    calc(100cqh / var(--paradys-reference-height))
-  );
-}
-
 /* The shared stage rule (body-surfaces.css) sizes the camera and the Sun's plates; this object's plates need the same box. */
 .object-stage[data-object-id="paradys"] > :is(.paradys-corona-layer, .paradys-limb-layer) {
   position: absolute;
@@ -80,8 +66,8 @@
 }
 
 .object-stage[data-object-id="paradys"] .polycss-scene s {
-  width: var(--polycss-atlas-width, var(--polycss-atlas-size, 64px));
-  height: var(--polycss-atlas-height, var(--polycss-atlas-size, 64px));
+  width: 64px;
+  height: 64px;
   transform-style: preserve-3d;
   font: inherit;
   font-weight: normal;

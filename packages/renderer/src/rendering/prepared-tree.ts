@@ -3,7 +3,7 @@ import { type PreparedTree, type PreparedAssetOrigin } from '@cssearth/objects';
 import { writePreparedStyle } from './style-access.js';
 import { rewritePreparedStyleUrls } from './prepared-asset-origin.js';
 
-import { meshProfile } from './prepared-omitted-nodes.js';
+import { preparedMeshLeaves } from './prepared-omitted-nodes.js';
 
 type Own = (cleanup: () => void) => unknown;
 interface BuiltTree { nodes: HTMLElement[]; roots: HTMLElement[]; }
@@ -71,7 +71,7 @@ export function adoptPreparedTree(tree: PreparedTree, stage: HTMLElement, own: O
   // Prepared records are topological, but need not be in DOM preorder.
   const indexed = new Map(existing.map(node => [node.dataset.preparedNode, node]));
   const nodes = tree.nodes.map((_, index) => indexed.get(String(index)));
-  const built = new Set<number>(), detached = new Set<number>();
+  const built = new Set<number>(), detached = new Set<number>(), meshes = preparedMeshLeaves(tree);
   const resolved = nodes.includes(undefined) ? treeStyles(tree, assetOrigin) : null;
   for (const [index, record] of tree.nodes.entries()) if (!nodes[index]) {
     // An omitted node's parent is either built here too or a server node the selection shows: a subtree the server cut
@@ -80,7 +80,7 @@ export function adoptPreparedTree(tree: PreparedTree, stage: HTMLElement, own: O
     if (!omitted.has(index) || (record.parent !== -1 && !parentBuilt && !parentShown)) throw new TypeError('Initial prepared tree has invalid node identities.');
     nodes[index] = createPreparedNode(tree, index, stage.ownerDocument, resolved);
     built.add(index);
-    if (meshProfile(record.style)) detached.add(index);
+    if (meshes.has(index)) detached.add(index);
   }
   if (indexed.size !== existing.length || existing.length + built.size !== tree.nodes.length) throw new TypeError('Initial prepared tree has a different node count.');
   for (const index of built) if (!detached.has(index)) nodes[tree.nodes[index].parent]!.appendChild(nodes[index]!);

@@ -51,74 +51,51 @@ test('a successor style takes ownership of the same texture property', () => {
   assert.equal(f.nodes[2].style.backgroundImage, 'url("/fixed.webp")');
 });
 
-test('an alternative surface profile is hidden before its shared atlas changes', () => {
-  const values = new Map<string, string>([
-    ['--fixture-surface-image', 'url("/a.webp")'],
-    ['--fixture-a-display', 'block'],
-    ['--fixture-b-display', 'none'],
-  ]);
-  const invalid: string[] = [];
-  const style = {
-    setProperty(name: string, value: string) {
-      values.set(name, value);
-      if (values.get('--fixture-surface-image') === 'url("/b.webp")' && values.get('--fixture-a-display') !== 'none') invalid.push('new atlas with old profile');
-      if (values.get('--fixture-b-display') === 'block' && values.get('--fixture-surface-image') !== 'url("/b.webp")') invalid.push('new profile with old atlas');
-    },
-    getPropertyValue(name: string) { return values.get(name) ?? ''; },
-  };
-  const nodes = [0, 1, 2].map(() => ({ style, parentNode: null }));
-  const stage = { ownerDocument: {}, appendChild(node: typeof nodes[number]) { node.parentNode = this as never; } };
-  const definition = { tree: { nodes: [], camera: 0, scene: 1, stageClasses: [] }, materials: [], animations: [], viewBindings: [],
-    variants: [{ when: { datasetId: 'b' }, writes: [
-      { kind: 'texture', target: 2, name: '--fixture-surface-image', resource: 'b', quoted: true },
-      { kind: 'style', target: 2, name: '--fixture-a-display', value: 'none' },
-      { kind: 'style', target: 2, name: '--fixture-b-display', value: 'block' },
-    ] }],
-  } as unknown as PreparedPresentationDefinition;
-  const presentation = mountPreparedPresentation(stage as unknown as HTMLElement,
-    { own() {}, registerAnimation() {}, seekAnimation() {} }, definition,
-    { claim: () => ({ nodes: nodes as unknown as HTMLElement[], roots: [nodes[0]] as unknown as HTMLElement[] }), destroy() {} });
-  const resources: PreparedResources = {
-    has: key => key === 'b', read: () => null, url: key => key === 'b' ? '/b.webp' : null, readyKeys: () => ['b'],
-  };
-  presentation.commitSelection({ selection: { datasetId: 'b' }, resources });
-  assert.deepEqual(invalid, []);
-  assert.partialDeepStrictEqual(Object.fromEntries(values), {
-    '--fixture-surface-image': 'url("/b.webp")',
-    '--fixture-a-display': 'none',
-    '--fixture-b-display': 'block',
-  });
-});
-
-test('a body with several shape models mounts only the mesh its dataset draws on', async () => {
+/** A body whose node 2 holds two alternative meshes: `a` is leaves 3 and 4, `b` is leaf 5. Node 2 draws their shared atlas. */
+async function meshes() {
   const { parseHTML } = await import('linkedom');
   const { document } = parseHTML('<html><body><main></main></body></html>');
   const stage = document.querySelector('main') as unknown as HTMLElement;
-  const leaf = (profile: string) => ({ parent: 2, tag: 'u', className: null, style: `display:var(--fixture-${profile}-display, none)`, properties: [], attributes: {} });
-  const records = [{ parent: -1, tag: 'div', className: null, style: '', properties: [], attributes: {} },
-    { parent: 0, tag: 'div', className: null, style: '', properties: [], attributes: {} },
-    { parent: 1, tag: 'div', className: null, style: '', properties: [], attributes: {} }, leaf('a'), leaf('a'), leaf('b')];
-  const nodes = records.map(record => { const node = document.createElement(record.tag); if (record.style) node.setAttribute('style', record.style); return node; });
-  records.forEach((record, index) => { if (record.parent !== -1) nodes[record.parent]!.appendChild(nodes[index]!); });
-  const shows = (profile: string, other: string) => [
-    { kind: 'style', target: 2, name: `--fixture-${other}-display`, value: 'none' },
-    { kind: 'style', target: 2, name: `--fixture-${profile}-display`, value: 'block' }];
-  const definition = { tree: { nodes: records, properties: [], camera: 0, scene: 1, stageClasses: [] }, materials: [], animations: [], viewBindings: [],
-    variants: [{ when: { datasetId: 'a' }, writes: shows('a', 'b') }, { when: { datasetId: 'b' }, writes: shows('b', 'a') }],
-  } as unknown as PreparedPresentationDefinition;
+  const record = (parent: number, tag = 'div') => ({ parent, tag, className: null, style: '', properties: [], attributes: {} });
+  const records = [record(-1), record(0), record(1), record(2, 'u'), record(2, 'u'), record(2, 'u')];
+  const nodes = records.map(entry => document.createElement(entry.tag)) as unknown as HTMLElement[];
+  records.forEach((entry, index) => { if (entry.parent !== -1) nodes[entry.parent]!.appendChild(nodes[index]!); });
+  const shows = (mesh: string) => ({ when: { datasetId: mesh }, mesh, writes: [{ kind: 'texture', target: 2, name: 'backgroundImage', resource: mesh, quoted: true }] });
+  const definition = { tree: { nodes: records, properties: [], camera: 0, scene: 1, stageClasses: [],
+      meshes: [{ name: 'a', leaves: [[3, 2]] }, { name: 'b', leaves: [[5, 1]] }] }, materials: [], animations: [], viewBindings: [],
+    variants: [shows('a'), shows('b')] } as unknown as PreparedPresentationDefinition;
   const presentation = mountPreparedPresentation(stage, { own() {}, registerAnimation() {}, seekAnimation() {} }, definition,
-    { claim: () => ({ nodes: nodes as unknown as HTMLElement[], roots: [nodes[0]] as unknown as HTMLElement[] }), destroy() {} });
-  const mounted = () => nodes.slice(3).map(node => node.parentNode !== null);
+    { claim: () => ({ nodes, roots: [nodes[0]!] }), destroy() {} });
+  const resources = { has: () => true, read: () => null, url: (key: string) => `/${key}.webp`, readyKeys: () => ['a', 'b'] } as PreparedResources;
+  return { nodes, select: (datasetId: string) => presentation.commitSelection({ selection: { datasetId }, resources }) };
+}
+
+test('an alternative mesh is unmounted before its shared atlas changes, and the next is mounted after', async () => {
+  const f = await meshes();
+  f.select('a');
+  assert.equal(f.nodes[2]!.style.backgroundImage, 'url("/a.webp")');
+  const invalid: string[] = [], body = f.nodes[2]!, outgoing = f.nodes[3]!;
+  const remove = outgoing.remove.bind(outgoing), append = body.append.bind(body);
+  outgoing.remove = () => { if (body.style.backgroundImage !== 'url("/a.webp")') invalid.push('the old mesh was still mounted under the new atlas'); remove(); };
+  body.append = (...added: (Node | string)[]) => { if (body.style.backgroundImage !== 'url("/b.webp")') invalid.push('the new mesh was mounted under the old atlas'); append(...added); };
+  f.select('b');
+  assert.deepEqual(invalid, []);
+  assert.equal(body.style.backgroundImage, 'url("/b.webp")');
+  assert.deepEqual([...body.children], [f.nodes[5]]);
+});
+
+test('a body with several shape models mounts only the mesh its dataset draws on', async () => {
+  const f = await meshes();
+  const mounted = () => f.nodes.slice(3).map(node => node.parentNode !== null);
   // Before any selection no mesh shows, so none is mounted.
   assert.deepEqual(mounted(), [false, false, false]);
-  const resources: PreparedResources = { has: () => true, read: () => null, url: () => null, readyKeys: () => [] };
-  presentation.commitSelection({ selection: { datasetId: 'a' }, resources });
+  f.select('a');
   assert.deepEqual(mounted(), [true, true, false]);
-  presentation.commitSelection({ selection: { datasetId: 'b' }, resources });
+  f.select('b');
   assert.deepEqual(mounted(), [false, false, true]);
-  presentation.commitSelection({ selection: { datasetId: 'a' }, resources });
+  f.select('a');
   assert.deepEqual(mounted(), [true, true, false]);
-  assert.deepEqual(([...nodes[2]!.children]), [nodes[3], nodes[4]]);
+  assert.deepEqual([...f.nodes[2]!.children], [f.nodes[3], f.nodes[4]]);
 });
 
 test('a hidden subtree such as a cutaway is mounted only while a dataset shows it', async () => {

@@ -8,16 +8,11 @@
 .prepared-leaf { transform-style: preserve-3d; background-repeat: no-repeat; pointer-events: none; }
 
 .object-cubic-sky {
-  --object-cubic-sky-zoom: 1;
-  --object-cubic-sky-camera-distance: max(
-    50cqh,
-    calc(86.60254cqh * var(--object-cubic-sky-zoom))
-  );
   position: absolute;
   z-index: 0;
   inset: 0;
   overflow: hidden;
-  perspective: var(--object-cubic-sky-camera-distance);
+  perspective: 86.60254cqh;
   perspective-origin: 50% 50%;
   pointer-events: none;
 }
@@ -33,7 +28,7 @@
 }
 
 .object-cubic-sky-cube {
-  transform: translateZ(var(--object-cubic-sky-camera-distance));
+  transform: translateZ(86.60254cqh);
 }
 
 .object-drawer-content {

@@ -50,7 +50,7 @@ export function preparedMaterialAddress(state: ReturnType<typeof preparedMateria
 }
 
 export function createPreparedMaterialPublisher(track: PreparedMaterialTrack,element: HTMLElement) {
-  let lastAddress: string | null=null;
+  let lastAddress: string | null=null, lastRoll: string | null=null;
   let state: PreparedMaterialObservation={bank:null,frame:track.defaultFrame,calculatedFrame:track.defaultFrame,appliedFrame:null,appliedRow:null,row:null,mode:null,
     lightRollDegrees:0,addressWrites:0,transformWrites:0,enabled:false,rotationEnabled:false,sunViewDirection:null};
   const rotation = track.rotation;
@@ -113,9 +113,10 @@ export function createPreparedMaterialPublisher(track: PreparedMaterialTrack,ele
           }
           if (write('transform', transform)) state.transformWrites++;
         } else if (rotation.kind === "angle") {
-          if(Math.abs(angle-state.lightRollDegrees)>=1e-9||!selected.rotationEnabled||rotation.publishWithAddress){
-            if(write(rotation.property,`${angle}deg`))state.transformWrites++;
-          }
+          // The light's roll is the target's own transform. The last value written guards the write: a transform reads
+          // back normalized, so a compare with the page would write it again on every frame (retained-write.ts).
+          const transform=`rotate(${angle}deg)`;
+          if(transform!==lastRoll){writePreparedStyle(element.style,"transform",transform);lastRoll=transform;state.transformWrites++;}
         } else throw new TypeError("Unknown prepared material rotation.");
         state.lightRollDegrees=angle;
       }

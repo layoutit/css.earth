@@ -1,19 +1,5 @@
 /* HD 189733 A: the Sun's emissive presentation (body-surfaces.css, SUN block) scoped to this object, loaded after the shared
    body-surfaces.css base rules. The camera-facing plates are static; the orbit source gives a spin axis but no evolving surface map. */
-.object-stage[data-object-id="hd-189733"] > :is(.polycss-camera, .hd-189733-corona-layer, .hd-189733-limb-layer) {
-  --hd-189733-scene-side-padding: 16px;
-  --hd-189733-reference-width: 1920px;
-  --hd-189733-reference-height: 1080px;
-  --hd-189733-shell-scale: min(
-    1,
-    calc(
-      (100cqw - var(--hd-189733-scene-side-padding) - var(--hd-189733-scene-side-padding)) /
-        var(--hd-189733-reference-width)
-    ),
-    calc(100cqh / var(--hd-189733-reference-height))
-  );
-}
-
 /* The shared stage rule (body-surfaces.css) sizes the camera and the Sun's plates; this object's plates need the same box. */
 .object-stage[data-object-id="hd-189733"] > :is(.hd-189733-corona-layer, .hd-189733-limb-layer) {
   position: absolute;
@@ -82,8 +68,8 @@
 }
 
 .object-stage[data-object-id="hd-189733"] .polycss-scene s {
-  width: var(--polycss-atlas-width, var(--polycss-atlas-size, 64px));
-  height: var(--polycss-atlas-height, var(--polycss-atlas-size, 64px));
+  width: 64px;
+  height: 64px;
   transform-style: preserve-3d;
   font: inherit;
   font-weight: normal;

@@ -6,7 +6,7 @@
 :where(.object-stage[data-object-id="__object__"]) .__object__-scene { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-style: preserve-3d; }
 :where(.object-stage[data-object-id="__object__"]) .__object__-camera .polycss-mesh { position: absolute; transform-style: preserve-3d; transform-origin: 0 0 0; }
 :where(.object-stage[data-object-id="__object__"]) .__object__-body > u {
-  position: absolute; display: block; width: var(--polycss-atlas-width, 64px); height: var(--polycss-atlas-height, 64px);
+  position: absolute; display: block; width: 64px; height: 64px;
   margin: 0; padding: 0; border: 0; transform-origin: 0 0; transform-style: flat; backface-visibility: hidden;
   border-top-left-radius: 50% 100%; border-top-right-radius: 50% 100%;
   corner-top-left-shape: bevel; corner-top-right-shape: bevel;
@@ -18,13 +18,12 @@
   transform-origin: 0 0; transform-style: flat; backface-visibility: hidden;
   background-repeat: no-repeat;
 }
-:where(.object-stage[data-object-id="__object__"]) .__object__-material-root { z-index: 3; --__object__-billboard-opacity: 0; }
+:where(.object-stage[data-object-id="__object__"]) .__object__-material-root { z-index: 3; }
 :where(.object-stage[data-object-id="__object__"]) .__object__-material, :where(.object-stage[data-object-id="__object__"]) .__object__-billboard {
   position: absolute; display: block; left: 50%; top: 50%; width: 460px; height: 460px;
   margin: -230px 0 0 -230px; pointer-events: none;
 }
-:where(.object-stage[data-object-id="__object__"]) .__object__-material { background-repeat: no-repeat; transform: rotate(var(--__object__-light-roll, 0deg)); }
-:where(.object-stage[data-object-id="__object__"]) .__object__-billboard { border-radius: 50%; background-color: var(--__object__-billboard-color); opacity: var(--__object__-billboard-opacity); }
+:where(.object-stage[data-object-id="__object__"]) .__object__-material { background-repeat: no-repeat; }
+:where(.object-stage[data-object-id="__object__"]) .__object__-billboard { border-radius: 50%; }
 .object-stage:where([data-object-id="__object__"])[data-lod="billboard"] .__object__-scene, .object-stage:where([data-object-id="__object__"])[data-lod="marker"] .__object__-scene { visibility: hidden; }
-.object-stage:where([data-object-id="__object__"])[data-lod="marker"] .__object__-billboard { opacity: 0; }
 

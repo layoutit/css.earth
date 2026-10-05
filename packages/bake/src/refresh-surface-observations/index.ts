@@ -130,10 +130,15 @@ export async function refreshObservationControls(id: string, datasetIds: readonl
     const path = resolve(outputDirectory, name), document = await json(path);
     const target = name === 'datasets.json' ? document : requireRecord(name === 'controls.json' ? document.datasets : requireRecord(document.controls).datasets);
     target.controls = update(target.controls, name === 'datasets.json');
-    if (name === 'runtime.json') document.variants = records(document.variants).map(variant => {
-      const color = surfaceColors.get(requireString(requireRecord(variant.when).datasetId));
-      return color === undefined ? variant : { ...variant, writes: records(variant.writes).map(write => write.name === `--${id}-billboard-color` ? { ...write, value: color } : write) };
-    });
+    if (name === 'runtime.json') {
+      // The far billboard's color is a write of its own background (solid-scene.ts).
+      const billboards = new Set(records(requireRecord(document.tree).nodes).flatMap((node, index) => String(node.className ?? '').split(' ').includes(`${id}-billboard`) ? [index] : []));
+      document.variants = records(document.variants).map(variant => {
+        const color = surfaceColors.get(requireString(requireRecord(variant.when).datasetId));
+        return color === undefined ? variant : { ...variant, writes: records(variant.writes).map(write =>
+          write.kind === 'style' && write.name === 'backgroundColor' && billboards.has(Number(write.target)) ? { ...write, value: color } : write) };
+      });
+    }
     await save(path, document);
   }
   await repinObjectJson(id, root);

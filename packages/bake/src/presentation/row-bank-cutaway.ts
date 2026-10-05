@@ -79,8 +79,8 @@ export async function prepareRowBankCutaway(input: PresentationInputs, adapters:
   // color fitted to the same silhouette as the overlay above it, which
   // lights it) and the terminator overlay.
   const materialRoot = b.element("div", `${ns}-material-root object-render-root`);
-  materialRoot.style.setProperty(`--${ns}-billboard-color`, normal.billboardColor);
-  const billboardDisc = b.element("s", `${ns}-billboard`), materialLeaf = b.element("s", `${ns}-material`);
+  // The page writes the disc's color and its opacity on the disc itself.
+  const billboardDisc = b.element("s", `${ns}-billboard`, `opacity:0;background-color:${normal.billboardColor}`), materialLeaf = b.element("s", `${ns}-material`);
   b.append(null, materialRoot); b.append(materialRoot, billboardDisc); b.append(materialRoot, materialLeaf);
   const { tree, index } = b.finish({ camera, scene });
   const address = (p: AtlasAddress, resource = `lighting:${p.rowIndex}`, row = p.rowIndex) => ({ resource, frame: p.frameIndex, row,
@@ -98,7 +98,7 @@ export async function prepareRowBankCutaway(input: PresentationInputs, adapters:
     farBank: "billboard",
     demand: { capacity: bank.transport.maximumRetainedRowCount, defaultFrame: bank.transport.defaultFrame },
     rotation: { kind: "angle", source: "view-sun", reference: "prepared", baseDegrees: assets.lighting.baseLightAzimuthDegrees,
-      zeroAtPole: false, property: `--${ns}-light-roll` }, frameAttribute: null, modeAttribute: null, quoted: true };
+      zeroAtPole: false }, frameAttribute: null, modeAttribute: null, quoted: true };
   const variants: PreparedVariant[] = datasets.controls.flatMap(dataset => [false, true].map(shadows => {
     const interior = dataset.view === "interior", writeTexture = (target: PreparedNode, name: string, resource: string): PreparedWrite => ({ kind: "texture", target: index(target), name, resource, quoted: true });
     return { when: { datasetId: dataset.id, shadows }, required: interior
@@ -111,7 +111,7 @@ export async function prepareRowBankCutaway(input: PresentationInputs, adapters:
         { kind: "attribute", target: -1, name: "data-view", value: interior ? "interior" : null },
         { kind: "attribute", target: -1, name: "data-dataset", value: interior || dataset.id === datasets.defaultDataset ? null : dataset.id },
         { kind: "class", target: -1, name: `${ns}-hide-shadows`, value: !shadows },
-        { kind: "style", target: index(materialRoot), name: `--${ns}-billboard-color`, value: dataset.billboardColor },
+        { kind: "style", target: index(billboardDisc), name: "backgroundColor", value: dataset.billboardColor },
       ], materials: [{ track: "lighting", bank: "rows", mode: shadows ? "frames" : "fixed", enabled: true, rotationEnabled: shadows,
         frameOverride: shadows ? null : assets.lighting.frameCount - 1, clearWhenHidden: false, fixedMode: "full-phase-curvature",
         modeLabel: shadows ? "directional-terminator" : "full-phase-curvature",
@@ -137,7 +137,7 @@ export async function prepareRowBankCutaway(input: PresentationInputs, adapters:
         unitScale: 2 / plan.camera.logicalBodyDiameter },
       // Level of detail from the camera's published stage (see styles.css).
       { kind: "view-attribute", target: -1, property: "data-lod", source: "level-of-detail-stage", precision: null },
-      { kind: "view-property", target: index(materialRoot), property: `--${ns}-billboard-opacity`, source: "billboard-opacity", precision: 6 },
+      { kind: "view-property", target: index(billboardDisc), property: "opacity", source: "billboard-opacity", precision: 6 },
       ...(seamOutset ? [seamOutsetBinding(seamOutset, index(system))] : []),
     ],
     animations: interiorPlan && cutaway ? [{ target: index(cutaway), id: `${ns}-interior-presentation-orbit`, mode: "pose", duration: interiorPlan.presentationOrbit.durationMilliseconds,

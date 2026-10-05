@@ -1,19 +1,5 @@
 /* EPIC 248869892: the Sun's emissive presentation (body-surfaces.css, SUN block) scoped to this object, loaded after the shared
    body-surfaces.css base rules. No spin: the rotation axis and period are unmeasured. Both plates are transparent: no observation is cast. */
-.object-stage[data-object-id="epic-248869892"] > :is(.polycss-camera, .epic-248869892-corona-layer, .epic-248869892-limb-layer) {
-  --epic-248869892-scene-side-padding: 16px;
-  --epic-248869892-reference-width: 1920px;
-  --epic-248869892-reference-height: 1080px;
-  --epic-248869892-shell-scale: min(
-    1,
-    calc(
-      (100cqw - var(--epic-248869892-scene-side-padding) - var(--epic-248869892-scene-side-padding)) /
-        var(--epic-248869892-reference-width)
-    ),
-    calc(100cqh / var(--epic-248869892-reference-height))
-  );
-}
-
 /* The shared stage rule (body-surfaces.css) sizes the camera and the Sun's plates; this object's plates need the same box. */
 .object-stage[data-object-id="epic-248869892"] > :is(.epic-248869892-corona-layer, .epic-248869892-limb-layer) {
   position: absolute;
@@ -80,8 +66,8 @@
 }
 
 .object-stage[data-object-id="epic-248869892"] .polycss-scene s {
-  width: var(--polycss-atlas-width, var(--polycss-atlas-size, 64px));
-  height: var(--polycss-atlas-height, var(--polycss-atlas-size, 64px));
+  width: 64px;
+  height: 64px;
   transform-style: preserve-3d;
   font: inherit;
   font-weight: normal;

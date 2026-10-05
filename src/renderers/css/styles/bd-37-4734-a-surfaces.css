@@ -1,19 +1,5 @@
 /* BD+37 4734A: the Sun's emissive presentation (body-surfaces.css, SUN block) scoped to this object, loaded after the shared
    body-surfaces.css base rules. No spin: the rotation axis and period are unmeasured. Both plates are transparent: no observation is cast. */
-.object-stage[data-object-id="bd-37-4734-a"] > :is(.polycss-camera, .bd-37-4734-a-corona-layer, .bd-37-4734-a-limb-layer) {
-  --bd-37-4734-a-scene-side-padding: 16px;
-  --bd-37-4734-a-reference-width: 1920px;
-  --bd-37-4734-a-reference-height: 1080px;
-  --bd-37-4734-a-shell-scale: min(
-    1,
-    calc(
-      (100cqw - var(--bd-37-4734-a-scene-side-padding) - var(--bd-37-4734-a-scene-side-padding)) /
-        var(--bd-37-4734-a-reference-width)
-    ),
-    calc(100cqh / var(--bd-37-4734-a-reference-height))
-  );
-}
-
 /* The shared stage rule (body-surfaces.css) sizes the camera and the Sun's plates; this object's plates need the same box. */
 .object-stage[data-object-id="bd-37-4734-a"] > :is(.bd-37-4734-a-corona-layer, .bd-37-4734-a-limb-layer) {
   position: absolute;
@@ -80,8 +66,8 @@
 }
 
 .object-stage[data-object-id="bd-37-4734-a"] .polycss-scene s {
-  width: var(--polycss-atlas-width, var(--polycss-atlas-size, 64px));
-  height: var(--polycss-atlas-height, var(--polycss-atlas-size, 64px));
+  width: 64px;
+  height: 64px;
   transform-style: preserve-3d;
   font: inherit;
   font-weight: normal;
