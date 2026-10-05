@@ -22,9 +22,9 @@ The dots are the app's catalogue dots: not clickable and not named. A properly n
 
 ## Evidence
 
-![The Saturn system from 14 million km: the paged moons named, the others as 2 px gray dots](evidence/2026-10-01/saturn-system.webp)
+![The Saturn system from 62.5 million km: Ymir keeps its marker; Skathi, Kiviuq, Erriapus and Ijiraq show as plain names](evidence/2026-10-05/saturn-system.webp)
 
-A headless capture of this version's Saturn system overview. The bank reported 96 of its 245 dots inside this view and 25 inside Saturn's default view. The positions run from 4.7 to 36.9 million km from Saturn.
+A capture of this version in the app, zoomed out from Saturn to 62.5 million km. The moons with a page keep a ringed marker (Ymir, Iapetus, Titan). The retired moons in view (Skathi, Kiviuq, Erriapus, Ijiraq) show as plain captions, like Geirrod, Angrboda and Surtur, which never had a page. The 266 positions run from 0.2 million km (Anthe) to 36.9 million km from Saturn; without Anthe the nearest is at 4.7 million km.
 
 ## Known problems
 
