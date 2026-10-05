@@ -2401,19 +2401,26 @@ test('a galaxy wears a diamond, and the flight circle takes its destination\'s s
   layer.destroy();
 });
 
-test('a body inside a nebula takes the name that reads over its picture, also when the nebula arrives after it', async () => {
-  // Venus stands for a nebula with Mercury inside it; Earth for a nebula that arrives later, with Venus inside it.
-  const nested = (base: ReturnType<typeof plan>) => ({ ...base, bodies: base.bodies.map(body => body.id === 'venus' ? { ...body, classification: 'nebula', inside: 'earth' }
-    : body.id === 'mercury' ? { ...body, inside: 'venus' } : body.id === 'earth' ? { ...body, classification: 'nebula' } : body) });
+test('on a nebula\'s page the bodies inside it take the name that reads over its picture, and give it up on any other', async () => {
+  // Venus stands for a nebula with Mercury inside it; Earth, inside it too, arrives while its page is open.
+  const nested = (base: ReturnType<typeof plan>) => ({ ...base, bodies: base.bodies.map(body => body.id === 'venus' ? { ...body, classification: 'nebula' }
+    : body.id === 'mercury' || body.id === 'earth' ? { ...body, inside: 'venus' } : body) });
   const document = new FakeDocument(), host = document.createElement('section'), before = document.createElement('i');
   host.clientWidth = 800; host.clientHeight = 600; host.append(before);
   const layer = mountTestContext({ host: host as unknown as HTMLElement, before: before as unknown as Element, plan: nested(plan(1)),
     sprites: { sun: sprite, mercury: sprite, venus: sprite, earth: sprite } });
   const root = layer.root as unknown as FakeElement, backdrop = (id: string) => find(root, 'contextGroup', id).dataset.contextLabelBackdrop;
-  // The mark is on the marker whose caption reads it, and only a body whose holder is a nebula carries one.
+  // The mark is on the marker whose caption reads it, and only while the nebula that holds the body is selected.
+  assert.deepEqual(['sun', 'mercury', 'venus'].map(backdrop), [undefined, undefined, undefined]);
+  layer.selectObject('venus');
   assert.deepEqual(['sun', 'mercury', 'venus'].map(backdrop), [undefined, 'picture', undefined]);
   layer.addBodies(nested(plan(1, [], true)));
-  assert.deepEqual(['sun', 'mercury', 'venus', 'earth'].map(backdrop), [undefined, 'picture', 'picture', undefined]);
+  assert.equal(backdrop('earth'), 'picture');
+  layer.selectObject('sun');
+  assert.deepEqual(['sun', 'mercury', 'venus', 'earth'].map(backdrop), [undefined, undefined, undefined, undefined]);
+  // Selecting the body itself is not its nebula's page either.
+  layer.selectObject('venus'); layer.selectObject('mercury');
+  assert.deepEqual(['mercury', 'earth'].map(backdrop), [undefined, undefined]);
   // The name and its copy are the caption's pseudo-elements, which the fake cascade leaves out: read from the stylesheet.
   const css = await readFile(new URL('../../packages/renderer/src/styles/world-context.css', import.meta.url), 'utf8');
   const rule = (selector: string) => css.replace(/\/\*[\s\S]*?\*\//gu, '').split('}').filter(block => block.split('{')[0]!.split(',').some(part => part.trim() === selector))

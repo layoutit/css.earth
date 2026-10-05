@@ -28,10 +28,11 @@ does not automatically need a caption on screen.
 - Catalogue-only galaxies remain visible as dots. Without a prepared scene,
   they do not mount a marker or caption in the spatial view.
 - A body inside a nebula, such as its central star, is named over the nebula's
-  picture. Its caption is white at full strength over a dark grey copy of the
-  same text, one pixel down and right, so it reads on the bright and on the
-  dark parts of the picture. The copy is the name painted a second time; no
-  stroke, shadow or blend is used. Its circle is unchanged.
+  picture on that nebula's page. There its caption is white at full strength
+  over a dark grey copy of the same text, one pixel down and right, so it reads
+  on the bright and on the dark parts of the picture. The copy is the name
+  painted a second time; no stroke, shadow or blend is used. Its circle is
+  unchanged, and on every other page the caption is drawn like any other.
 
 ## Priority and crowding
 

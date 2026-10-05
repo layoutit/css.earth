@@ -192,10 +192,9 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
   orbitTemplate.className = orbitRenderer === 'bars' ? 'context-orbit context-orbit-bars' : 'context-orbit';
   // Sprites by body id; a system added later brings its own (addBodies).
   const spriteTable: Record<string, SpriteWithUrl> = { ...sprites };
-  // Each body's classification by id (the first plan's, then each added system's): a body inside a nebula, its central
-  // star, is named over the nebula's picture and wears the name that reads there (world-context.css).
-  const classifications = new Map([plan.focus, ...plan.bodies].map(body => [body.id, body.classification]));
-  const namedOnPicture = (body: PreparedWorldContext['focus'] | PreparedContextBody) => 'inside' in body && body.inside !== undefined && classifications.get(body.inside) === 'nebula';
+  // The selected nebula, if the selection is one: on its page the bodies inside it (its central star) are named over its
+  // picture and wear the name that reads there (world-context.css). On any other page they are named like every body.
+  let picturedHolder: string | null = null;
   const createEntry = (body: PreparedWorldContext['focus'] | PreparedContextBody, index: number) => {
     // A body drawn from its astronomy record has no package, so no prepared sprite and no page: it keeps its ring,
     // name and orbit and is never a navigation target.
@@ -214,7 +213,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
     const color = body.contextColor ?? (unpackaged ? body.color : undefined);
     if (color) marker.style.color = color;
     if (body.labelCase === 'upper') data.contextLabelCase = 'upper';
-    if (namedOnPicture(body)) data.contextLabelBackdrop = 'picture';
+    if (picturedHolder !== null && 'inside' in body && body.inside === picturedHolder) data.contextLabelBackdrop = 'picture';
     // A galaxy's ring is a diamond (world-context.css): its marker is another galaxy, not a body of this one.
     if (body.classification === 'galaxy') data.contextShape = 'diamond';
     if (approximate) {
@@ -539,12 +538,6 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
       const added = next.bodies.filter(body => !entriesById.has(body.id));
       if (!added.length) return;
       Object.assign(spriteTable, nextSprites);
-      // A nebula can arrive after the body inside it: that body, already mounted, takes its name over the picture now.
-      for (const body of added) classifications.set(body.id, body.classification);
-      for (const entry of bodies) {
-        const holder = 'inside' in entry.body ? entry.body.inside : undefined;
-        if (holder !== undefined && added.some(body => body.id === holder) && namedOnPicture(entry.body)) entry.marker.dataset.contextLabelBackdrop = 'picture';
-      }
       const entries = added.map((body, offset) => createEntry(body, bodies.length + offset));
       bodies.push(...entries);
       bodyColumns = createWorldBodyColumns(bodies.length);
@@ -575,6 +568,16 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
       settleHover();
       invalidatePolicy();
       selectedEntry = entry;
+      // The bodies inside a selected nebula take the name that reads over its picture; those of the nebula left give it up.
+      const holder = entry.body.classification === 'nebula' ? id : null;
+      if (holder !== picturedHolder) {
+        for (const { body, marker } of bodies) {
+          const inside = 'inside' in body ? body.inside : undefined;
+          if (inside === undefined) continue;
+          if (inside === holder) marker.dataset.contextLabelBackdrop = 'picture'; else if (inside === picturedHolder) delete marker.dataset.contextLabelBackdrop;
+        }
+        picturedHolder = holder;
+      }
       refreshDepthBodies();
     },
     publish(world: WorldCameraPose, viewport: WorldCameraViewport, preparedFrame: WorldContextFrame) {
