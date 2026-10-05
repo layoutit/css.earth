@@ -71,3 +71,40 @@ test('real child host resolves both origins from inventory and preserves static 
     }
   }
 });
+
+test('the Worker ASSETS binding reads the built site by path under either published origin', async () => {
+  for (const origin of ['https://assets.invalid', 'https://earth-assets.lowpoly.cc']) {
+    const root = await mkdtemp(resolve(tmpdir(), 'answer-binding-host-'));
+    let child: ReturnType<typeof spawn> | undefined;
+    try {
+      await mkdir(resolve(root, 'dist'), { recursive: true });
+      await writeFile(resolve(root, 'dist/binding.json'), '{"binding":true}');
+      await writeFile(resolve(root, 'netlify.toml'), '[functions]\ndirectory = "functions"\n');
+      await writeFile(resolve(root, 'wrangler.jsonc'), '{"main":"worker.mjs","assets":{"run_worker_first":true}}');
+      // cloudflare/assets.ts reads its own site through this exact URL; the binding must serve the path whatever the published origin is.
+      await writeFile(resolve(root, 'worker.mjs'), `export default { fetch(request, env) { return env.ASSETS.fetch(new URL('/binding.json', 'https://assets.invalid')); } };`);
+      child = spawn(process.execPath, [resolve(import.meta.dirname, 'host.mts'), 'cloudflare', resolve(root, 'dist'), origin], { cwd: root, stdio: ['ignore', 'pipe', 'pipe', 'ipc'] });
+      let log = '';
+      child.stderr?.on('data', chunk => { log += String(chunk); });
+      const next = () => new Promise<Record<string, unknown>>((accept, reject) => {
+        const timer = setTimeout(() => { child?.kill('SIGKILL'); reject(new Error(`Host timed out: ${log}`)); }, 10_000);
+        const exited = () => { clearTimeout(timer); reject(new Error(`Host exited: ${log}`)); };
+        child!.once('exit', exited);
+        child!.once('message', message => { clearTimeout(timer); child!.off('exit', exited); accept(object(message)); });
+      });
+      assert.equal((await next()).ready, true);
+      const reply = next();
+      child.send(JSON.stringify({ path: '/binding', method: 'GET', headers: {} }));
+      const answer = await reply;
+      assert.equal(answer.status, 200, log);
+      assert.equal(Buffer.from(String(answer.bytes), 'base64').toString(), '{"binding":true}');
+    } finally {
+      if (child && child.exitCode === null) {
+        const exited = new Promise<void>(accept => child!.once('exit', () => accept()));
+        child.kill('SIGTERM');
+        await exited;
+      }
+      await rm(root, { recursive: true, force: true });
+    }
+  }
+});
