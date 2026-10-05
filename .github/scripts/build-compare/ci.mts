@@ -10,12 +10,12 @@ import { sourceDiff } from './source-diff.mts';
 import { parseMoves, record, strings } from './records.mts';
 
 const execute = promisify(execFile);
-export interface RefactorDeclaration { mode: 'report' | 'pure-move' | 'semantic'; moves: Record<string, string | null>; tools?: 'head'; objects?: string[]; outputs?: { glob: string; reason: string }[]; layout?: 'none' | 'changes'; }
+export interface RefactorDeclaration { mode: 'report' | 'pure-move' | 'semantic'; moves: Record<string, string | null>; tools?: 'head'; objects?: string[]; outputs?: { glob: string; reason: string }[]; layout?: 'none' | 'changes'; change?: string; }
 export function refactorDeclaration(raw: unknown): RefactorDeclaration {
   if (raw === undefined) return { mode: 'report', moves: {} };
   if (raw === null || typeof raw !== 'object' || Array.isArray(raw)) throw new Error('Refactor declaration must be an object.');
   const values = Object.entries(raw), mode = values.find(([key]) => key === 'mode')?.[1];
-  if (values.some(([key]) => !['mode', 'moves', 'tools', 'objects', 'outputs', 'layout'].includes(key)) || !['pure-move', 'semantic'].includes(String(mode)))
+  if (values.some(([key]) => !['mode', 'moves', 'tools', 'objects', 'outputs', 'layout', 'change'].includes(key)) || !['pure-move', 'semantic'].includes(String(mode)))
     throw new Error('Refactor declaration requires mode pure-move or semantic.');
   const moves = values.find(([key]) => key === 'moves')?.[1];
   if (moves === null || typeof moves !== 'object' || Array.isArray(moves)) throw new Error('Refactor moves must be an object.');
@@ -25,7 +25,8 @@ export function refactorDeclaration(raw: unknown): RefactorDeclaration {
   if (objects?.some(id => !/^[a-z0-9-]+$/u.test(id))) throw new Error('Invalid declared object');
   const outputs = rawRecord.outputs === undefined ? undefined : declaredOutputs(rawRecord.outputs);
   if (rawRecord.layout !== undefined && !['none', 'changes'].includes(String(rawRecord.layout))) throw new Error('layout must be none or changes');
-  return { ...(outputs ? { outputs } : {}), ...(rawRecord.layout ? { layout: rawRecord.layout === 'changes' ? 'changes' as const : 'none' as const } : {}), mode: mode === 'pure-move' ? 'pure-move' : 'semantic', moves: parseMoves(moves), ...(rawRecord.tools === 'head' ? { tools: 'head' as const } : {}), ...(objects ? { objects } : {}) };
+  if (rawRecord.change !== undefined && (typeof rawRecord.change !== 'string' || !rawRecord.change.trim() || rawRecord.change.length > 200)) throw new Error('change must name the refactor in 1 to 200 characters');
+  return { ...(typeof rawRecord.change === 'string' ? { change: rawRecord.change } : {}), ...(outputs ? { outputs } : {}), ...(rawRecord.layout ? { layout: rawRecord.layout === 'changes' ? 'changes' as const : 'none' as const } : {}), mode: mode === 'pure-move' ? 'pure-move' : 'semantic', moves: parseMoves(moves), ...(rawRecord.tools === 'head' ? { tools: 'head' as const } : {}), ...(objects ? { objects } : {}) };
 }
 export function declaredOutputs(raw: unknown): { glob: string; reason: string }[] {
   if (!Array.isArray(raw)) throw new Error('outputs must be an array');
@@ -54,7 +55,7 @@ export function skipToolchain(mode: RefactorDeclaration['mode'], label: string, 
 }
 export function requireFreshDeclaration(status: string, current: unknown, prior: unknown): void {
   if (!/^[AM]\s/u.test(status)) throw new Error('Refactor declaration must be added or changed in this PR');
-  const normalized = (raw: unknown): string => { const declaration = refactorDeclaration(raw); return JSON.stringify([declaration.mode, Object.entries(declaration.moves).sort(([a], [b]) => a.localeCompare(b)), declaration.tools ?? 'merge-base', [...(declaration.objects ?? [])].sort(), declaration.outputs ?? [], declaration.layout ?? 'none']); };
+  const normalized = (raw: unknown): string => { const declaration = refactorDeclaration(raw); return JSON.stringify([declaration.mode, Object.entries(declaration.moves).sort(([a], [b]) => a.localeCompare(b)), declaration.tools ?? 'merge-base', [...(declaration.objects ?? [])].sort(), declaration.outputs ?? [], declaration.layout ?? 'none', declaration.change ?? '']); };
   if (prior !== undefined && normalized(prior) === normalized(current)) throw new Error('Base already contains identical declaration');
 }
 /** Which copy of the comparison tools runs. The merge base's, unless the declaration or a label opts into the head's, or the merge base has no
