@@ -74,11 +74,17 @@ export function parseZenodoSearch(value: unknown): readonly ZenodoRecord[] {
 
 const words = (value: string): string => ` ${value.normalize('NFKD').replace(/\p{Diacritic}/gu, '').toLowerCase().replace(/[^\p{L}\p{N}]+/gu, ' ').trim()} `;
 /** A planet is written with and without a space before its letter ("TRAPPIST-1e", "TRAPPIST-1 e"), and a catalogue number
- * with and without one after its letters ("GJ 1214b", "GJ1214b"): every spelling is searched and matched. */
+ * with and without one after its letters ("GJ 1214b", "GJ1214b"): every spelling is searched and matched. So is a planet of
+ * a lettered star: Zenodo's record of WASP-94 A b's model writes "WASP-94A b", and went unfound until this covered it. */
 export function nameForms(names: readonly string[]): string[] {
   return [...new Set(names.map(name => name.trim()).filter(Boolean).flatMap(name => {
     const planet = /^(.*[^\s])\s?([b-z])$/u.exec(name);
-    const forms = planet && /\d$/u.test(planet[1]!) ? [`${planet[1]}${planet[2]}`, `${planet[1]} ${planet[2]}`] : [name];
+    // A planet of a lettered star (A to D) is written with the star's letter joined or set off, on either side: "WASP-94 A b",
+    // "WASP-94A b", "WASP-94 Ab", "WASP-94Ab". A host that ends in a letter keeps the space before its star's letter ("DS Tuc Ab").
+    const lettered = /^(.*\d)\s?([A-D])\s?([b-z])$/u.exec(name) ?? /^(.*[^\s\d])\s([A-D])\s?([b-z])$/u.exec(name);
+    const stars = lettered ? [...(/\d$/u.test(lettered[1]!) ? [`${lettered[1]}${lettered[2]}`] : []), `${lettered[1]} ${lettered[2]}`] : [];
+    const forms = lettered ? stars.flatMap(star => [`${star}${lettered[3]}`, `${star} ${lettered[3]}`])
+      : planet && /\d$/u.test(planet[1]!) ? [`${planet[1]}${planet[2]}`, `${planet[1]} ${planet[2]}`] : [name];
     return forms.flatMap(form => /^[A-Za-z]+ \d/u.test(form) ? [form, form.replace(' ', '')] : [form]);
   }))];
 }
