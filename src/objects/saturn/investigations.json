@@ -13,6 +13,16 @@
       ]
     },
     {
+      "id": "double-size-visible-map",
+      "subject": "The visible body image at 4,096 by 2,048",
+      "status": "excluded",
+      "finding": "The body image is 2,048 by 1,024 texels from a 1,800 by 900 source; Jupiter's source is 3,600 by 1,800. At the default view on a 2x screen one Saturn source pixel covers 1.8 screen pixels (disc radius 511 px), one of Jupiter's 0.9. A 4,096 by 2,048 image prepared from the same source held 4 % more fine detail than the shipped size in a composed flood-lit default view (mean absolute Laplacian 1.188 against 1.140), so the larger image was not shipped: the softness is the source's.",
+      "revisitWhen": "A sharper complete source map exists.",
+      "evidence": [
+        "https://archive.stsci.edu/hlsp/opal/opal-saturn-cycle-32"
+      ]
+    },
+    {
       "id": "opal-unobserved-rows",
       "subject": "Unobserved rows in the OPAL visible map",
       "status": "unresolved",
@@ -31,6 +41,29 @@
       "revisitWhen": "A separate Cassini-era dataset view is requested with a coherent body map and presentation.",
       "evidence": [
         "https://science.nasa.gov/photojournal/saturns-hexagon-as-summer-solstice-approaches/"
+      ]
+    },
+    {
+      "id": "cassini-iss-2011-color-map",
+      "subject": "Cassini ISS contrast-enhanced global color map of 2011-08-11",
+      "status": "included",
+      "finding": "A dataset beside the Hubble dates: the PDS bundle's contrast-enhanced RED/GRN/BL1 map (3,601 by 1,801 samples, 0.1 degrees, planetocentric latitude, west longitude; frames at 161 km per pixel). Its three FITS planes hold 8-bit display values. The first stored row is 90 N although the LAT_C card reads -90:0.1:90; stored column c is west longitude 0.1 c degrees although the LON_W card reads 360.0:-0.1:0.0 (raw frame W1691726068_1 correlates 0.62 with the prepared storm band, 0.23 with its mirror); the first stored column is zero on 1,595 of 1,801 rows and is cropped. Rows 0-110, 898-906, 954-1071 and 1721-1800 are zero (17.7 % of the map) and draw the gray grid; rows 919-953 are dimmed by the rings' shadow and shown as archived. No color change is applied.",
+      "evidence": [
+        "https://doi.org/10.17189/rkkb-6y30",
+        "https://doi.org/10.1038/s41597-025-04392-3",
+        "https://opus.pds-rings.seti.org/opus/#/opusid=co-iss-w1691726068",
+        "https://science.nasa.gov/resource/great-disturbances-2/"
+      ]
+    },
+    {
+      "id": "cassini-2011-default-map",
+      "subject": "Cassini's 2011 color map as the default visible body",
+      "status": "excluded",
+      "finding": "Measured against the Hubble 2025 map: the fine detail's correlation length along longitude is 0.14 to 0.18 degrees between 20 and 60 N against Hubble's 0.23 to 0.33, and a composed default view at the app's on-screen size held 1.27 times Hubble's fine detail (3.9 times in the contrast-enhanced product). But 17.7 % of the map is blank, and with the shadow-dimmed rows about 21 degrees of latitude around the equator would be an interpolated fill; the values are 8-bit (40 to 57 levels per color in the archive's unenhanced product) and from 2011. The user kept Hubble as the default and took the Cassini map as a dataset, 2026-10-05.",
+      "revisitWhen": "A calibrated global color map without the ring-shadow band is released.",
+      "evidence": [
+        "https://doi.org/10.17189/rkkb-6y30",
+        "https://doi.org/10.1038/s41597-025-04392-3"
       ]
     },
     {
@@ -218,18 +251,17 @@
     {
       "id": "dated-test-run",
       "subject": "Dated test or browser run for this record",
-      "status": "unresolved",
-      "finding": "The evidence section states that the record describes source cross-checks and retains a fixed-material comparison image but cites no dated test or browser run, and that the comparison image is not an input to the runtime view.",
-      "revisitWhen": "A dated test or browser run for this Saturn version is recorded in the package.",
+      "status": "included",
+      "finding": "The README's evidence section records a browser run of 2026-10-05: the default view in headless Chrome with a GPU at 2x pixel density, on css.earth v0.6524 and on the version that changed the limb, measured on the same rays, with the before-and-after image it displays.",
       "evidence": [
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/saturn/README.md#L19"
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/saturn/README.md#evidence"
       ]
     },
     {
       "id": "limb-law",
       "subject": "Photometric law for the lighting overlays",
       "status": "included",
-      "finding": "Hubble OPAL Minnaert coefficients of the color map per channel (red F631N 0.80, green F502N 0.65, blue F467M 0.86), the correction OPAL removed before projection, put back relative to the flood-lit disc centre. Blue took F395N's 0.40 until 2026-09-25; see opal-f467m-blue-limb.",
+      "finding": "Hubble OPAL's Minnaert coefficients, the correction OPAL removed before projection, put back relative to the flood-lit disc centre, one law per display channel: red 0.798, green 0.698, blue 0.728. Each is the README's coefficients weighted by the light the channel shows; see display-channel-limb-law. Each channel took its nearest filter (0.80, 0.65, 0.86) from 2026-09-25 to 2026-10-05, and blue took F395N's 0.40 before that; see opal-f467m-blue-limb.",
       "evidence": [
         "https://archive.stsci.edu/missions/hlsp/opal/cycle32/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2025_all_v1_readme.txt"
       ]
@@ -256,7 +288,7 @@
       "id": "karkoschka-whole-disc-color",
       "subject": "Color tie of the OPAL visible map to Karkoschka's 1995 whole-disc spectrum",
       "status": "included",
-      "finding": "The OPAL color TIF is arbitrarily scaled per channel and rendered 1.4 times too blue (map mean blue/red 0.65 in linear light). Karkoschka's full-disc albedo of Saturn (phase 5.7 degrees, rings edge-on, PDS 1995LOW.TAB) times a 5,772 K Planck spectrum through the CIE 1931 observer gives linear sRGB 0.6168, 0.4713, 0.2982 (#ceb794), green/red 0.7640 and blue/red 0.4834. Divided by the limb law's disc means (0.7694, 0.8698, 0.7354) the map targets are green/red 0.6759 and blue/red 0.5057; the solar-tinted map measured 0.9272 and 0.6953 (cosine-weighted, linear), so the gains are red 1, green 0.729, blue 0.7273. The swatch's independent Payne et al. (2026) spectrum agrees under a D65 white: green/red 0.863 and blue/red 0.589 against Karkoschka's 0.863 and 0.593.",
+      "finding": "The OPAL color TIF is arbitrarily scaled per channel and rendered 1.4 times too blue (map mean blue/red 0.65 in linear light). Karkoschka's full-disc albedo of Saturn (phase 5.7 degrees, rings edge-on, PDS 1995LOW.TAB) times a 5,772 K Planck spectrum through the CIE 1931 observer gives linear sRGB 0.6168, 0.4713, 0.2982 (#ceb794), green/red 0.7640 and blue/red 0.4834. Divided by the limb law's disc means (0.7706, 0.8350, 0.8146) the map targets are green/red 0.7052 and blue/red 0.4573; the solar-tinted map measured 0.9317 and 0.6975 (cosine-weighted, linear), so the gains are red 1, green 0.7569, blue 0.6556. With the nearest-filter law of 2026-09-25 the targets were 0.6759 and 0.5057. The swatch's independent Payne et al. (2026) spectrum agrees under a D65 white: green/red 0.863 and blue/red 0.589 against Karkoschka's 0.863 and 0.593.",
       "evidence": [
         "https://pds-atmospheres.nmsu.edu/PDS/data/gbat_0001/data/1995low.lbl",
         "https://doi.org/10.1006/icar.1998.5913",
@@ -277,18 +309,39 @@
     },
     {
       "id": "opal-f467m-blue-limb",
-      "subject": "Minnaert coefficient for the visible map's blue channel",
-      "status": "included",
-      "finding": "The blue channel uses F467M's k 0.86 from the OPAL Cycle 32 README table (\"F467M 0.86 .00507\"), the README filter closest to the sRGB blue primary. F395N's 0.40 is violet light that carries 13 % of the true-color blue channel in Saturn's sunlit spectrum; with it the limb brightened in blue and turned gray-blue (b* -16 at the rim, 0.95-0.99 of the radius) in the app. The map's blue data are still F395N.",
+      "subject": "One README filter per display channel: F631N, F502N and F467M",
+      "status": "excluded",
+      "finding": "From 2026-09-25 to 2026-10-05 each display channel took the README filter nearest its primary: red F631N 0.80, green F502N 0.65, blue F467M 0.86 (\"F467M 0.86 .00507\"; before that blue took F395N's 0.40 and the limb turned gray-blue, b* -16 at the rim). Green then darkened least and the limb turned olive: on css.earth v0.6524 the default view's green/red ratio rose from 0.78, 200 pixels inside the edge, to 1.02, 5 pixels inside, where Jupiter's goes from 0.87 to 0.91. No single filter is a channel's law; see display-channel-limb-law.",
       "evidence": [
         "https://archive.stsci.edu/missions/hlsp/opal/cycle32/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2025_all_v1_readme.txt"
+      ],
+      "revisitWhen": "Nothing: a channel's law is weighted over the wavelengths it shows."
+    },
+    {
+      "id": "display-channel-limb-law",
+      "subject": "Limb law of each display channel, weighted over the README's filters",
+      "status": "included",
+      "finding": "The README gives one Minnaert coefficient per filter (F395N 0.40, F467M 0.86, F502N 0.65, F631N 0.80, F763M 0.85); a display channel shows a range of wavelengths. Each channel's flood-lit profile is the sum of mu^(2k - 1) over 380-780 nm, k interpolated in wavelength between filters and held outside them (a join that is ours), weighted by Saturn's albedo (1995LOW.TAB) times a 5,772 K Planck spectrum through the CIE 1931 observer into linear sRGB; the same spectrum reproduces the whole-disc color record. The methane-band filters FQ727N and FQ889N are left out. The Minnaert exponents that fit those profiles over the disc out to 86.3 degrees are red 0.798, green 0.698 and blue 0.728, departing from the profiles by at most 0.004, 0.0001 and 0.028. At 0.95 of the radius green/red is 1.26 times its centre value and blue/red 1.18 (1.42 and 0.87 with one filter per channel): the limb pales instead of turning olive. On screen, 5 pixels inside the edge of the default view, green/red went from 1.02 to 0.89 and blue/red from 0.55 to 0.66 (2026-10-05).",
+      "evidence": [
+        "https://archive.stsci.edu/missions/hlsp/opal/cycle32/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2025_all_v1_readme.txt",
+        "https://pds-atmospheres.nmsu.edu/PDS/data/gbat_0001/data/1995low.lbl",
+        "https://github.com/layoutit/css.earth/blob/main/packages/bake/authoring/saturn/display-limb.mts"
+      ]
+    },
+    {
+      "id": "limb-overlay-outline",
+      "subject": "Dark dashes along the limb of the flood-lit overlay",
+      "status": "included",
+      "finding": "Under flood light the lane floored a grazing texel's emission at one texel (1/256) but not its incidence, so the limb law was held at the edge of its data on the emission alone and fell to about 2 % of the centre on scattered texels of the outermost ring: alpha up to 235 where the held law gives 136. At 8 screen pixels per texel they read as dark dashes: 29 dark dips along 32 degrees of limb on css.earth v0.6524 at 2x pixel density, none on Jupiter. Serving the frame with those 462 texels capped at 136 left 4 dips, and hiding the overlay showed the dashes were not the body's seams (more overlap between faces changed nothing). The lane now holds the incidence with the emission under flood light: 3 dips on the same rays, 2026-10-05. The overlay's color past the silhouette is also kept by each texel's share inside (4 x 4 samples). Under flood light that alone left the count at 31; with shadows on, where the law brightens the lit limb and the overlay turns black past the silhouette, it took the lit lower-left limb from 32 dips to 19 along 28 degrees and the fine-scale brightness variation from 18.6 to 8.0 levels.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/saturn/README.md#visible-body"
       ]
     },
     {
       "id": "tied-map-luminance",
       "subject": "Brightness of the color-tied visible map",
       "status": "included",
-      "finding": "The tie keeps red and lowers green and blue, so the map lost a fifth of its cosine-weighted luminance (0.426 to 0.337) and Saturn looked brown in the app (whole-disc Y 0.315 against 0.409 on main). The tied map now gets back its untied mean luminance with one factor on all three channels, 1.264, then a soft shoulder, 0.8 + 0.2 (1 - exp(-(m - 0.8) / 0.2)), on each texel's brightest channel, all channels by the same amount: 4.35 % of texels, none clipped, ratios kept. The factor alone clips red on 0.5 % of texels; the largest factor that clips nothing, 1.085, leaves the whole disc at Y 0.326. Chosen by the user on a preview built with the lane's own code, 2026-09-25.",
+      "finding": "The tie keeps red and lowers green and blue, so the map loses cosine-weighted luminance (0.426 to 0.337 with the law of 2026-09-25) and Saturn looked brown in the app (whole-disc Y 0.315 against 0.409 on main). The tied map gets back its untied mean luminance with one factor on all three channels, 1.239 (1.264 on 2026-09-25, 1.269 after the ring-hidden rows were refilled), then a soft shoulder, 0.8 + 0.2 (1 - exp(-(m - 0.8) / 0.2)), on each texel's brightest channel, all channels by the same amount: 5.22 % of texels, none clipped, ratios kept. Chosen by the user on a preview built with the lane's own code, 2026-09-25.",
       "evidence": [
         "https://doi.org/10.1006/icar.1998.5913"
       ]
