@@ -4,7 +4,9 @@ import { mock } from 'node:test';
 mock.module(new URL('./scene/scene-router.mts', import.meta.url).href, { namedExports: { marker: 'router' } });
 mock.module(new URL('./scene/scene-registry.mts', import.meta.url).href, { namedExports: { marker: 'registry' } });
 mock.module(new URL('./packaged-object-runtime.mts', import.meta.url).href, { namedExports: { marker: 'runtime' } });
-const { importSceneRouter, importSceneRegistry, importApplicationWorld, importPackagedObjectRuntime } = await import('./shared-imports.mts');
+const { importSceneRouter } = await import('./shared-imports.mts');
+const { importSceneRegistry, importPackagedObjectRuntime } = await import('./scene-imports.mts');
+const { importApplicationWorld } = await import('./world-imports.mts');
 test('shared import promises are reused and deliver the requested module', async () => {
   for (const [load, marker] of [[importSceneRouter, 'router'], [importSceneRegistry, 'registry'], [importApplicationWorld, 'world'], [importPackagedObjectRuntime, 'runtime']] as const) {
     const first = load();

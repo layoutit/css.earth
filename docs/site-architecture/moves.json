@@ -136,5 +136,10 @@
   "site/world-context-plan.characterization.test.mts": "site/directory/world-context-plan.characterization.test.mts",
   "site/world-places.characterization.test.mts": "site/server/world-places.characterization.test.mts",
   "site/world-system-views.characterization.test.mts": "site/world/world-system-views.characterization.test.mts",
-  "site/zoom-scope.characterization.test.mts": "site/world/zoom-scope.characterization.test.mts"
+  "site/zoom-scope.characterization.test.mts": "site/world/zoom-scope.characterization.test.mts",
+  "site/scene-imports.mts": "site/scene/scene-imports.mts",
+  "site/world-imports.mts": "site/world/world-imports.mts",
+  "site/directory-runtime-loader.test.mts": "site/directory/directory-runtime-loader.test.mts",
+  "site/loader-registration.test.mts": "site/scene/loader-registration.test.mts",
+  "site/loader-owners.test.mts": "site/scene/loader-owners.test.mts"
 }

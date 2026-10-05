@@ -1,4 +1,4 @@
-import { importPackagedObjectRuntime } from './import-queue.mts';
+import { importPackagedObjectRuntime } from './scene-imports.mts';
 import { parseObjectDescriptor, type ObjectDescriptor } from '@cssearth/objects';
 import type { ObjectEntry } from './objects.mts';
 
