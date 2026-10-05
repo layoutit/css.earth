@@ -59,6 +59,20 @@ const unit = (a: readonly number[]): Vector => { const length = Math.hypot(a[0]!
 const minus = (a: readonly number[], b: readonly number[]): Vector => [a[0]! - b[0]!, a[1]! - b[1]!, a[2]! - b[2]!];
 const along = (a: readonly number[], b: readonly number[], scale: number): Vector => [a[0]! - b[0]! * scale, a[1]! - b[1]! * scale, a[2]! - b[2]! * scale];
 
+/** The leaves of a z bank that are whole-picture slices: one quad whose UVs are the picture's corners. A shell's
+ * `shape-*` leaves (shape-patches.ts) each show a part of the picture at its own depth, so they are no slice of the view
+ * from the Sun and are left out. Any other leaf that is not a corner quad, and a bank left with no slice, are errors. */
+export function imageLayerQuadLeaves(id: string, leaves: readonly Record<string, unknown>[]): Record<string, unknown>[] {
+  const quads = leaves.filter(leaf => {
+    if (typeof leaf.id === 'string' && leaf.id.startsWith('shape-')) return false;
+    const vertices = requireArray(leaf.verticesUnits, `${id} ${String(leaf.id)} vertices`);
+    if (vertices.length !== 4 || JSON.stringify(leaf.uvs) !== '[[0,0],[1,0],[1,1],[0,1]]') throw new TypeError(`${id} ${String(leaf.id)}: a slice must be one quad with corner UVs.`);
+    return true;
+  });
+  if (!quads.length) throw new TypeError(`${id}: no source-facing slice is one quad with corner UVs.`);
+  return quads;
+}
+
 /** An image-layer galaxy seen from the Sun: its source-facing (z) slices projected along the line of sight onto a plane
  * through the frame origin, each resized to the size it covers there, then stacked far to near with the straight-alpha
  * "over" the page applies to them, in sRGB as the page does. */
@@ -69,10 +83,8 @@ async function imageLayerBillboard(id: string, descriptor: Record<string, unknow
   const toViewer = unit(presentPhysicalPoseInVolume({ positionM: [0, 0, 0], orientationXyzw: [0, 0, 0, 1] }, frame).positionUnits);
   const bank = requireArray(data.banks, `${id} banks`).map(value => requireRecord(value)).find(value => value.axis === 'z');
   if (!bank) throw new TypeError(`${id}: no source-facing (z) bank.`);
-  const leaves = requireArray(bank.leaves, `${id} z leaves`).map(value => requireRecord(value)).map(leaf => {
+  const leaves = imageLayerQuadLeaves(id, requireArray(bank.leaves, `${id} z leaves`).map(value => requireRecord(value))).map(leaf => {
     const corners = requireArray(leaf.verticesUnits, `${id} ${String(leaf.id)} vertices`).map((value, index) => vector(value, `${id} ${String(leaf.id)} vertex ${index}`));
-    const uvs = JSON.stringify(leaf.uvs);
-    if (corners.length !== 4 || uvs !== '[[0,0],[1,0],[1,1],[0,1]]') throw new TypeError(`${id} ${String(leaf.id)}: a slice must be one quad with corner UVs.`);
     return { id: String(leaf.id), texture: requireString(leaf.texturePath, `${id} ${String(leaf.id)} texture`), corners, depth: dot(vector(leaf.centerUnits, `${id} centre`), toViewer) };
   });
   // The billboard's axes follow the slices' own image axes, laid flat across the line of sight.
