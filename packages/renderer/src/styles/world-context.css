@@ -106,7 +106,8 @@
   pointer-events: none;
 }
 .prepared-world-context [data-context-body]::before,
-.prepared-world-context [data-context-body] > .context-caption::after {
+.prepared-world-context [data-context-body] > .context-caption::after,
+.prepared-world-context [data-context-label-backdrop="picture"] > .context-caption::before {
   visibility: hidden;
 }
 /* The caption is a retained element whose inline transform places the name beside its body (world-context-marker-paint.ts):
@@ -116,7 +117,8 @@
   height: 0;
   transform: translate(12px, -9px);
 }
-.prepared-world-context [data-context-body] > .context-caption::after {
+.prepared-world-context [data-context-body] > .context-caption::after,
+.prepared-world-context [data-context-label-backdrop="picture"] > .context-caption::before {
   position: absolute;
   inset: 0 auto auto 0;
   pointer-events: none;
@@ -162,6 +164,7 @@
 /* Ordinary captions share typography; a body's color and caption case come from its prepared world data, set on its
    marker (prepared-world-context.ts). Geometry owners only place and fade text. */
 .prepared-world-context [data-context-body] > .context-caption::after,
+.prepared-world-context [data-context-label-backdrop="picture"] > .context-caption::before,
 .prepared-context-label {
   width: max-content;
   height: 18px;
@@ -172,6 +175,21 @@
 .prepared-world-context [data-context-body] > .context-caption::after {
   content: attr(data-context-name);
   opacity: .65;
+}
+/* A body inside a nebula (its central star) is named over the nebula's picture, where the body's own color at 65% is lost
+   on the bright parts and black on the dark ones (HD 59088 in NGC 2392: 1% of the name's box reached 3:1, 2026-10-05).
+   Its name is white at full strength over a dark grey copy of itself one pixel down and right: the same text painted a
+   second time under the name, no stroke, shadow or blend. The world marks the body while its nebula is the selected
+   object (prepared-world-context.ts): on any other page the picture is not behind the name, and a white name would stand
+   out among names at 65%. */
+.prepared-world-context [data-context-label-backdrop="picture"] > .context-caption::before {
+  content: attr(data-context-name);
+  color: #404040;
+  transform: translate(1px, 1px);
+}
+.prepared-world-context [data-context-label-backdrop="picture"] > .context-caption::after {
+  color: #fff;
+  opacity: 1;
 }
 .prepared-world-context .context-flight-caption {
   position: absolute;
@@ -194,7 +212,8 @@
 .prepared-world-context [data-context-annotations-animate="true"] > .context-caption::after {
   transition: opacity 200ms linear;
 }
-.prepared-world-context [data-context-label-visible="true"] > .context-caption::after {
+.prepared-world-context [data-context-label-visible="true"] > .context-caption::after,
+.prepared-world-context [data-context-label-backdrop="picture"][data-context-label-visible="true"] > .context-caption::before {
   visibility: inherit;
 }
 .prepared-world-context [data-context-indicator-hovered="true"][data-context-indicator-visible="true"]::before,
