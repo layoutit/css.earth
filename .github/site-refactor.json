@@ -3,5 +3,5 @@
   "moves": {},
   "outputs": [],
   "layout": "none",
-  "change": "S3-3 extract the navigation contracts so history no longer imports request orchestration"
+  "change": "S3-5 navigation requests read subjects from their owner instead of the selection module"
 }
