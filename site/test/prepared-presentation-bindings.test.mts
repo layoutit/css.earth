@@ -96,8 +96,11 @@ test('texture consumers are prepared from CSS inheritance and nearer overrides',
       { kind: 'texture', target: 1, name: '--texture', resource: 'base', quoted: true },
       { kind: 'texture', target: 4, name: '--texture', resource: 'override', quoted: true }],
   })) }, root, { pageStyles: objectPageStyles });
+  // What ships names no custom property: each slot lists its elements under a plain name, and the writes name the slot.
   assert.deepEqual(prepared.tree.textureBindings, [
-    { target: 1, name: '--texture', leaves: [3] },
-    { target: 4, name: '--texture', leaves: [5] },
+    { target: 1, name: 'texture', leaves: [3] },
+    { target: 4, name: 'texture', leaves: [5] },
   ]);
+  assert.deepEqual(prepared.variants.flatMap(variant => variant.writes.flatMap(write => write.kind === 'texture' ? [write.name] : [])).filter((name, at, names) => names.indexOf(name) === at), ['texture']);
+  assert.equal(JSON.stringify(prepared.tree.nodes).includes('--texture'), false);
 }));

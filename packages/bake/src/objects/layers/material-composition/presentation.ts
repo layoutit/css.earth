@@ -126,7 +126,12 @@ export async function prepareLayeredOblatePresentation({publicDirectory,config:i
       const carrier = b.mesh(polar ? `${namespace}-body ${namespace}-body-polar` : `${namespace}-body`, `${plan.meshTransform};animation-duration:${band.visualRotationSeconds}s`);
       b.append(system, carrier); carriers.set(key, carrier);
     }
-    for (const leaf of band.leaves) b.append(carriers.get(key)!, leaf.tag === "s" ? b.leaf(leaf) : b.element(requireString(leaf.tag), null, leaf.style));
+    for (const leaf of band.leaves) {
+      const node = leaf.tag === "s" ? b.leaf(leaf) : b.element(requireString(leaf.tag), null, leaf.style);
+      // A polar cap reads the dataset's pole image as the faces read its surface: from the texture write on its mesh.
+      if (polar && leaf.tag === "s") node.style.backgroundImage = `var(--${namespace}-poles-image)`;
+      b.append(carriers.get(key)!, node);
+    }
   }
   const cutaway = cutawayShown ? b.mesh(`${namespace}-cutaway`) : null;
   if (cutaway) { cutaway.style.display = "none"; b.append(system, cutaway); }
@@ -207,6 +212,11 @@ export async function prepareLayeredOblatePresentation({publicDirectory,config:i
       writes: [...cutaway ? [{ kind: "style", target: index(cutaway), name: "display", value: interiorView ? "block" : "none" }] : [],
         { kind: "attribute", target: -1, name: "data-view", value: interiorView ? "interior" : null },
         { kind: "attribute", target: -1, name: "data-dataset", value: interiorView || dataset.id === datasets.defaultDataset ? null : dataset.id },
+        // The surface is a texture write on each mesh of body faces, which read it (layered-oblate.ts); the bindings list
+        // those faces (prepared-texture-bindings.ts), so the page knows which image each face draws and its stated size.
+        ...[...carriers].map(([key, carrier]) => key.startsWith("polar:")
+          ? { kind: "texture" as const, target: index(carrier), name: `--${namespace}-poles-image`, resource: `poles:${content.id}`, quoted: true }
+          : { kind: "texture" as const, target: index(carrier), name: "--polycss-projective-texture-image", resource: `surface:${content.id}`, quoted: true }),
         { kind: "texture", target: index(ring), name: `--${namespace}-rings`, resource: `rings:${content.id}`, quoted: true },
         { kind: "class", target: -1, name: `${namespace}-hide-rings`, value: !rings },
         { kind: "class", target: -1, name: `${namespace}-hide-shadows`, value: !shadows }],

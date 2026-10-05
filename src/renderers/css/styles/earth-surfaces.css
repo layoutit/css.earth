@@ -56,16 +56,7 @@
   animation-play-state: paused;
 }
 
-:where(.object-stage[data-object-id="earth"]) .earth-body:not(.earth-body-polar) > s,
-:where(.object-stage[data-object-id="earth"]) .earth-cutaway-body:not(.earth-cutaway-body-polar) > s {
-  background-image: var(--earth-surface-texture);
-}
-
 :where(.object-stage[data-object-id="earth"]) .earth-body-polar > s,
-:where(.object-stage[data-object-id="earth"]) .earth-cutaway-body-polar > s {
-  background-image: var(--earth-poles-texture);
-}
-
 /* Out of the layer tree until the interior view: hidden 3D leaves still cost a composited layer each. */
 :where(.object-stage[data-object-id="earth"]) .earth-cutaway {
   display: none;

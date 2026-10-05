@@ -506,6 +506,19 @@ its full box. [leaf-box.ts](../packages/bake/src/presentation/leaf-box.ts) holds
   [prepared-leaf-box-direct.ts](../packages/renderer/src/rendering/prepared-leaf-box-direct.ts)): on an iPad, two
   device pixels a CSS pixel, Io's level 4,160 texels wide gives 65 px of its 128 px box and its widest image 130 px.
   The leaf takes that box with its image, in one write, once its step needs the whole image.
+  - **Stated by the bake.** An image's width and height are on its prepared entry, written from the published file by
+    the last step of every bake (`withImageSizes`,
+    [prepared-image-sizes.ts](../packages/bake/src/prepared-presentation/prepared-image-sizes.ts)), and the leaves
+    that draw it are the ones its texture write is bound to. The renderer reads both. It never measures an image, works
+    a size out of a byte count, or guesses which image a leaf draws: a leaf whose image states no size keeps its step's
+    box.
+  - **No variable carries an image.** A texture write names a slot, and the slot lists the elements that draw it
+    (`tree.textureBindings`). The page writes `background-image` on each of those elements, and the served markup
+    does the same; an image a container draws itself is a write of that container's own background. The bake still
+    finds the elements in a headless browser through a custom property, then ships records that name none
+    ([texture-image-records.ts](../packages/bake/src/presentation/texture-image-records.ts)), and the runtime
+    shipped-form check ([shipped-runtime.ts](../packages/objects/src/prepared-data/runtime-validation/shipped-runtime.ts))
+    refuses to pin or mount a runtime whose tree sets a custom property or whose element reads its image from one.
   - **One texel per device pixel.** The box follows the screen's pixel ratio where that is a whole number of two or
     more (a phone's three gives 43.33 px for the same level); any other screen keeps the bake's two texels a CSS
     pixel. The copy is by backing pixel: with the iPad's page scaled to four backing pixels a CSS pixel, Io's faces in
@@ -669,7 +682,10 @@ These still set their own encoding:
 - Earth's full pages keep the qualities its recipe declares; its smaller
   texture levels follow their page, lossy ones through the lane.
 - Lighting rows and their billboards carry shading in alpha and stay lossless.
-- Saturn's layered and spectral materials keep their encodings.
+- Saturn's layered and spectral materials keep their encodings. Its ultraviolet and methane surface maps and their
+  pole atlases joined the lane on 2026-10-05: the maps, 5.92 and 3.77 MB lossless, became 0.23 and 0.14 MB with 0 and 3
+  of 12.8 million pixels flagged; the atlases, 0.39 and 0.35 MB, became 0.04 MB each with none flagged and alpha exact.
+  Decoding a lossless map took 130 to 141 ms inside the frame of a dataset switch on the iPad.
 - Image-layer galaxies (M31, M33), the LMC and SMC volume banks and the Milky
   Way sky keep their recipe qualities.
 - Volume atlases (density in alpha, seen as stacked slices) and the

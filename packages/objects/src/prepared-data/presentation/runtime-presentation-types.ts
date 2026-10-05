@@ -15,7 +15,8 @@ export interface PreparedVariant { when: Readonly<Record<string, string | number
 export interface PreparedTree {
   /** Offline first-paint batches. Runtime restores these exact retained leaves. */
   activationGroups?: readonly (readonly number[])[];
-  /** Offline CSS consumers of each selection-owned image binding. */
+  /** The texture slots: the elements that draw each selected image, found offline. A texture write names its slot, and the
+   * page writes `background-image` on each element listed; no custom property carries an image. */
   textureBindings?: readonly { target: number; name: string; leaves: readonly number[] }[];
   nodes: readonly { tag: string; parent: number; className: string | null; style: string; properties: readonly number[]; attributes: Readonly<Record<string, string>> }[];
   properties: readonly { name: string; value: string; custom: boolean }[]; camera: number; scene: number; stageClasses: readonly string[];

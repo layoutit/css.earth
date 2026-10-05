@@ -53,7 +53,6 @@
 
 /* The silhouette-fit binding already includes physical framing. Keep the prepared plate's native dimensions. */
 .object-stage[data-object-id="epic-248775564"] .epic-248775564-corona-layer {
-  background-image: var(--epic-248775564-corona-image);
   background-position: center;
   background-repeat: no-repeat;
   background-size:
@@ -63,7 +62,6 @@
 
 /* Limb plate: 496 px = raster.json emission.bodyDiameter = camera.logicalBodyDiameter. */
 .object-stage[data-object-id="epic-248775564"] .epic-248775564-limb-layer {
-  background-image: var(--epic-248775564-limb-image);
   background-position: center;
   background-repeat: no-repeat;
   background-size:

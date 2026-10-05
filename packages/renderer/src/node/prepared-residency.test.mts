@@ -290,9 +290,11 @@ test("committed warm assets release native leases and do not consume later capac
     assert.equal(h.manager.resources.read(key), null);
     assert.equal(h.manager.stats().pools[0].resident, 0);
   }
-  assert.equal(h.jobs.length, 3); assert.equal(h.images.length, 3);
+  // The return to "0" acquires it again: its handle went to retained CSS, so only a new one can bring its pixels back
+  // before the paint that shows it.
+  assert.equal(h.jobs.length, 4); assert.equal(h.images.length, 4);
   assert.equal(h.manager.stats().images.pools[0].slots, 0);
-  assert.deepEqual(h.manager.stats().warmed, ["0", "1", "2"]); h.manager.destroy();
+  assert.deepEqual(h.manager.stats().warmed, ["1", "2", "0"]); h.manager.destroy();
 });
 test("cancelled and failed warm demands never acquire a durable readiness receipt", async () => {
   const h = harness(catalog([0, 1].map(i => `/scenes/mars/warm-failure-${i}.webp`), { capacity: 1, retention: "warm" }));

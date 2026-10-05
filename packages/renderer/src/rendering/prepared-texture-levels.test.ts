@@ -4,7 +4,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 
 import { parseHTML } from 'linkedom';
-import { createTextureTileWriter, preparedTexturePixels, selectPreparedTextureLevel } from './prepared-texture-levels.js';
+import { createTextureTileWriter, preparedTextureSizes, selectPreparedTextureLevel } from './prepared-texture-levels.js';
 
 import { mountPreparedPresentation, preparedTextureLevelKeys, resolvePreparedPresentation } from './prepared-presentation.js';
 
@@ -198,11 +198,11 @@ test('a level switch commits each tiled leaf with its image, and no tile variabl
   assert.doesNotMatch((nodes[1]!.getAttribute('style') ?? ''), /--page-0-/);
 });
 
-// Io's shape: dataset a is drawn at twice dataset b's scale, and each has a level half as wide. Decoded sizes go as the
-// square of the width.
+// Io's shape: dataset a is drawn at twice dataset b's scale, and each has a level half as wide. Every entry states its
+// image's width and height, as the bake writes them.
 const sized = { textureLevels, variants, assets: { entries: [
-  { key: 'a', url: '/a.webp', pool: 'pages', decodedBytes: 8320 * 1536 * 4 }, { key: 'a-small', url: '/a-small.webp', pool: 'pages', decodedBytes: 4160 * 768 * 4 },
-  { key: 'b', url: '/b.webp', pool: 'pages', decodedBytes: 4160 * 768 * 4 }, { key: 'b-small', url: '/b-small.webp', pool: 'pages', decodedBytes: 2080 * 384 * 4 },
+  { key: 'a', url: '/a.webp', pool: 'pages', width: 8320, height: 1536 }, { key: 'a-small', url: '/a-small.webp', pool: 'pages', width: 4160, height: 768 },
+  { key: 'b', url: '/b.webp', pool: 'pages', width: 4160, height: 768 }, { key: 'b-small', url: '/b-small.webp', pool: 'pages', width: 2080, height: 384 },
 ], pools: [], startup: [] } } as unknown as PreparedPresentationDefinition;
 
 test('a level switch lands a page a slice of its leaves a frame, not the page whole', () => {
@@ -258,21 +258,23 @@ test('tile leaf records name one texture write each, with finite placements and 
   assert.throws(() => requireTextureLevels(broken({ extra: 1 }), tiledVariants, resources), /unknown fields extra/);
 });
 
-test('a texture states its pixels from its decoded size; a sheet and an unsized image state none', () => {
-  const pixels = preparedTexturePixels(sized);
-  assert.deepEqual(['a', 'a-small', 'b', 'b-small', 'other'].map(pixels), [8320 * 1536, 4160 * 768, 4160 * 768, 2080 * 384, undefined]);
-  assert.equal(preparedTexturePixels(definition)('a'), undefined);
+test('a texture has the size its entry states; a sheet and an entry without one have none', () => {
+  const sizes = preparedTextureSizes(sized);
+  assert.deepEqual(['a', 'a-small', 'b', 'b-small', 'other'].map(sizes), [[8320, 1536], [4160, 768], [4160, 768], [2080, 384], undefined]);
+  assert.equal(preparedTextureSizes(definition)('a'), undefined);
+  // A byte count alone is no size: the renderer does not work a width out of it.
+  assert.equal(preparedTextureSizes({ ...sized, assets: { entries: [{ key: 'a', url: '/a.webp', pool: 'pages', decodedBytes: 8320 * 1536 * 4 }], pools: [], startup: [] } } as unknown as PreparedPresentationDefinition)('a'), undefined);
   // A dataset whose tables arrive later is adopted into the same definition: its sizes count from then on.
   const growing = { ...sized, assets: { ...sized.assets!, entries: sized.assets!.entries.slice(2) } } as unknown as PreparedPresentationDefinition;
-  const later = preparedTexturePixels(growing);
-  assert.deepEqual(['a', 'b'].map(later), [undefined, 4160 * 768]);
+  const later = preparedTextureSizes(growing);
+  assert.deepEqual(['a', 'b'].map(later), [undefined, [4160, 768]]);
   Object.assign(growing.assets!, { entries: sized.assets!.entries });
-  assert.deepEqual(['a', 'b'].map(later), [8320 * 1536, 4160 * 768]);
+  assert.deepEqual(['a', 'b'].map(later), [[8320, 1536], [4160, 768]]);
   // A sheet's size is its own, not its page's.
   const sheeted = { ...sized, textureLevels: { hysteresis: 0.2, levels: [
     { minimumDiameter: 0, resources: { a: 'sheet', b: 'b-small' }, tiles: { a: { x: 0, y: 0, scale: 4 } } }, { minimumDiameter: 230, resources: { a: 'a', b: 'b' } }] },
-    assets: { entries: [...sized.assets!.entries, { key: 'sheet', url: '/sheet.webp', pool: 'pages', decodedBytes: 16384 * 16384 * 4 }], pools: [], startup: [] } } as unknown as PreparedPresentationDefinition;
-  assert.deepEqual(['sheet', 'a'].map(preparedTexturePixels(sheeted)), [undefined, 8320 * 1536]);
+    assets: { entries: [...sized.assets!.entries, { key: 'sheet', url: '/sheet.webp', pool: 'pages', width: 16384, height: 16384 }], pools: [], startup: [] } } as unknown as PreparedPresentationDefinition;
+  assert.deepEqual(['sheet', 'a'].map(preparedTextureSizes(sheeted)), [undefined, [8320, 1536]]);
 });
 
 test('a dataset lands with its box: each leaf takes its image and its exact box in one write', () => {

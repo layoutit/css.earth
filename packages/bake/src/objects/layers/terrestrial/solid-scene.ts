@@ -15,7 +15,7 @@ import { BASE_TILE } from '@layoutit/polycss';
 import { prepareSolidBodySurface, preparePerspectiveCamera } from '../../../scene/index.ts';
 import { prepareAstrometricSkySceneRegistration, prepareEclipticPresentationFrame, photographDirections, prepareDefaultCameraAngles, prepareSunReferenceViewDirection, type SolarGeometry } from '../../scene/index.ts';
 import { loadAstronomyPackage } from '../../../astronomy/index.ts';
-import { prepareCssomDeclarationReads, createPreparedNodeTree, prepareMaterialTracks, requirePreparedPresentation } from '../../../presentation/index.ts';
+import { prepareCssomDeclarationReads, createPreparedNodeTree, readsTexture, prepareMaterialTracks, requirePreparedPresentation } from '../../../presentation/index.ts';
 import { requirePreparedResourceCatalog } from '../../../contract/index.ts';
 import { restoreDepthSource } from '../../../prepared-presentation/index.ts';
 import { publishedImageSize } from '../shape-model/index.ts';
@@ -167,7 +167,9 @@ export async function prepareSolidPresentation({ config, scene: plan, material: 
   const body = b.mesh(`${id}-body`);
   b.append(null, camera); b.append(camera, scene); b.append(scene, system); b.append(system, body);
   for (const leaf of plan.bodyLeaves) {
-    const node = b.leaf(leaf);
+    // A face draws the surface write and a cap the pole write, both on the body.
+    const cap = (leaf.className ?? '').split(/\s+/u).includes(`${id}-polar`);
+    const node = readsTexture(b.leaf(leaf), `--${id}-${cap ? 'poles' : 'surface'}-image`);
     Object.assign(node.attributes, leaf.attributes ?? {});
     b.append(body, node);
   }

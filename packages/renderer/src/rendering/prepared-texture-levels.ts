@@ -43,22 +43,22 @@ export function createTextureTileWriter(levels: PreparedTextureLevels | undefine
 }
 
 /**
- * The pixels of each image a texture write shows, from its prepared decoded size at four bytes a pixel. A leaf's box
- * takes the size its image fills (prepared-leaf-box-direct.ts). An image without a stated size has none, and neither has
- * a sheet: its size is the sheet's, not its page's.
+ * The width and height of each image a texture write shows, as its prepared entry states them. A leaf's box takes the
+ * size its image fills (prepared-leaf-box-direct.ts). An entry that states none has none, and neither has a sheet: its
+ * size is the sheet's, not its page's.
  */
-export function preparedTexturePixels(definition: Pick<PreparedPresentationDefinition, 'textureLevels' | 'assets'>) {
+export function preparedTextureSizes(definition: Pick<PreparedPresentationDefinition, 'textureLevels' | 'assets'>) {
   // A dataset's tables are adopted into the mounted definition after the first load (prepared-data/dataset-tables.ts):
   // the sizes are read again whenever the entries or the levels are replaced.
-  let read: { entries: unknown; levels: unknown; pixels: Map<string, number> } | null = null;
-  return (shown: string): number | undefined => {
+  let read: { entries: unknown; levels: unknown; sizes: Map<string, readonly [number, number]> } | null = null;
+  return (shown: string): readonly [number, number] | undefined => {
     const { textureLevels } = definition, entries = definition.assets?.entries;
     if (!read || read.entries !== entries || read.levels !== textureLevels) {
       const sheets = new Set((textureLevels?.levels ?? []).flatMap(level => Object.keys(level.tiles ?? {}).map(key => level.resources[key]!)));
       read = { entries, levels: textureLevels,
-        pixels: new Map((entries ?? []).flatMap(entry => entry.decodedBytes && !sheets.has(entry.key) ? [[entry.key, entry.decodedBytes / 4] as const] : [])) };
+        sizes: new Map((entries ?? []).flatMap(entry => entry.width && entry.height && !sheets.has(entry.key) ? [[entry.key, [entry.width, entry.height] as const] as const] : [])) };
     }
-    return read.pixels.get(shown);
+    return read.sizes.get(shown);
   };
 }
 
