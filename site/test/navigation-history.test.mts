@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import { createNavigationHistory, navigationHref } from '../navigation/navigation-history.mts';
+import { navigationHref as heldHref } from '../model/navigation-href.mts';
 import { ROOT_OBJECT_ID } from '../model/root-object.mts';
 
 test('Back to the front page returns to the body it shows, not nowhere', () => {
@@ -230,4 +231,32 @@ test('a view kept for the entry is the one Back returns to after the next push',
   href = 'https://css.earth/earth/?v=near'; state = earth;
   listeners.get('popstate')!({ state: earth } as PopStateEvent);
   assert.equal(calls.at(-1)?.[1].url, 'https://css.earth/earth/?v=near');
+});
+
+test('history registers its live held reader in the model and disposes it', () => {
+  assert.equal(navigationHref, heldHref, 'history re-exports the same getter');
+  const { windowTarget, motion } = readerWindow('https://css.earth/earth/');
+  const history = createNavigationHistory({ windowTarget, capture: () => '/earth/', navigate: () => {} });
+  motion(true);
+  history.commit('/mars/');
+  assert.equal(windowTarget.location.href, 'https://css.earth/earth/');
+  assert.equal(heldHref(windowTarget), 'https://css.earth/mars/');
+  history.commit('/moon/');
+  assert.equal(heldHref(windowTarget), 'https://css.earth/moon/', 'reads the latest held write');
+  history.destroy();
+  // After disposal, reads follow subsequent browser address changes.
+  windowTarget.history.replaceState(null, '', '/venus/');
+  assert.equal(heldHref(windowTarget), 'https://css.earth/venus/');
+});
+
+test('a superseded history that is destroyed leaves the live history reader registered', () => {
+  const { windowTarget, motion } = readerWindow('https://css.earth/earth/');
+  const first = createNavigationHistory({ windowTarget, capture: () => '/earth/', navigate: () => {} });
+  const second = createNavigationHistory({ windowTarget, capture: () => '/earth/', navigate: () => {} });
+  motion(true);
+  second.commit('/mars/');
+  assert.equal(heldHref(windowTarget), 'https://css.earth/mars/');
+  first.destroy();
+  assert.equal(heldHref(windowTarget), 'https://css.earth/mars/', 'only the registration a history still owns is removed');
+  second.destroy();
 });
