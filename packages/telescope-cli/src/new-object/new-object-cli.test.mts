@@ -45,7 +45,7 @@ test('prose the scaffold cannot know is marked, and the package it writes matche
   }
   assert.deepEqual(JSON.parse(files.get('src/objects/antares/source/presentation/solar-system.json')!), JSON.parse(await readFile(resolve(root, 'src/objects/antares/source/presentation/solar-system.json'), 'utf8')));
   assert.throws(() => scaffoldStarFiles({ ...spec, temperatureK: Number.NaN }, record, EPOCH), /effectiveTemperatureK/u);
-  assert.throws(() => scaffoldStarFiles({ ...spec, temperatureK: 100 }, record, EPOCH), /1,000 and 40,000 K/u);
+  assert.throws(() => scaffoldStarFiles({ ...spec, temperatureK: 100 }, record, EPOCH), /1,000 and 250,000 K/u);
   assert.throws(() => scaffoldStarFiles({ ...spec, temperatureSource: 'Ohnaka et al. 2013' }, record, EPOCH), /URL/u);
   assert.throws(() => scaffoldStarFiles(spec, { ...record, star: { ...record.star, presentationUp: undefined } }, EPOCH), /presentationUp/u);
 });

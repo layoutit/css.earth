@@ -3,7 +3,7 @@ import sharp from 'sharp';
 import { lstat, readFile, mkdir, rename, rm } from 'node:fs/promises';
 import { createWriteStream } from 'node:fs';
 import { basename, dirname, resolve } from 'node:path';
-import { Readable } from 'node:stream';
+import { PassThrough, Readable } from 'node:stream';
 import { pipeline } from 'node:stream/promises';
 import { execFile, spawn } from 'node:child_process';
 import { promisify } from 'node:util';
@@ -31,6 +31,19 @@ const rangedEntry=(manifest:SourceManifest,path:string)=>[...manifest.inputs,...
 // default transport names this project; a step's own headers win.
 const SOURCE_USER_AGENT='cssEarth/0.6 (https://github.com/layoutit/css.earth; source restore)';
 const NAMED_TRANSPORT:AcquisitionTransport={fetch:(url,init)=>fetch(url,{...init,headers:{'user-agent':SOURCE_USER_AGENT,...Object.fromEntries(new Headers(init?.headers))}})};
+/** A command's output as a stream. It is piped on at once: Node discards what a finished child wrote that nothing reads yet, so a reader
+ *  that arrives late (publishPinnedSourceStream makes the directory first) got none of a small member, and an empty file was pinned.
+ *  A command that fails ends the stream with the first line of its complaint, under `what`. */
+export function commandOutput(command:string,args:readonly string[],what:string):Readable {
+ const child=spawn(command,args,{stdio:['ignore','pipe','pipe']}),output=child.stdout.pipe(new PassThrough());
+ let complaint='';child.stderr.on('data',(chunk:Buffer)=>{complaint+=chunk.toString();});
+ const exit=new Promise<number|null>(done=>{child.on('close',done);});
+ child.on('error',error=>{output.destroy(error);});
+ return Readable.from((async function*(){
+  for await(const chunk of output)yield chunk as Buffer;
+  if(await exit!==0)throw new Error(`${what}: ${complaint.trim().split('\n')[0]||'no message'}.`);
+ })());
+}
 export async function executeAcquisition({sourceRoot,manifest,plan,group='refresh',transport=NAMED_TRANSPORT,mirrorOrigin=null,objectId=basename(dirname(sourceRoot))}:{sourceRoot:string;manifest:SourceManifest;plan:AcquisitionPlan;group?:string;transport?:AcquisitionTransport;mirrorOrigin?:string|null;objectId?:string}) {
  const selected=plan.operations.filter(step=>step.groups.includes(group));if(!selected.length)throw new Error(`Acquisition group ${group} is undeclared.`);
  const request=async(url:string,init?:RequestInit)=>{const response=await transport.fetch(url,init);if(!response.ok)throw new Error(`Source request failed ${response.status}: ${url}.`);return response;};
@@ -91,13 +104,7 @@ export async function executeAcquisition({sourceRoot,manifest,plan,group='refres
    const entry=[...manifest.inputs,...manifest.generatedIntermediates,...manifest.documents].find(entry=>entry.path===step.path);if(!entry)throw new Error(`Undeclared acquisition target: ${step.path}.`);
    // unzip writes the member straight into the pinned file, so one of hundreds of megabytes is never held in memory. A
    // member unzip could not read whole fails the stream before the file takes its place.
-   const child=spawn('unzip',['-p',archivePath,step.member],{stdio:['ignore','pipe','pipe']});
-   let complaint='';child.stderr.on('data',(chunk:Buffer)=>{complaint+=chunk.toString();});
-   const exit=new Promise<number|null>((done,fail)=>{child.on('close',done);child.on('error',fail);});
-   await publishPinnedSourceStream({sourceRoot,entry,stream:Readable.from((async function*(){
-    for await(const chunk of child.stdout)yield chunk as Buffer;
-    if(await exit!==0)throw new Error(`unzip could not read ${step.member} from ${step.url}: ${complaint.trim().split('\n')[0]??'no message'}.`);
-   })())});
+   await publishPinnedSourceStream({sourceRoot,entry,stream:commandOutput('unzip',['-p',archivePath,step.member],`unzip could not read ${step.member} from ${step.url}`)});
   }
   else if(step.kind==='tar-gz-member'){
    const cache=resolve('.local/source-archives');await mkdir(cache,{recursive:true});

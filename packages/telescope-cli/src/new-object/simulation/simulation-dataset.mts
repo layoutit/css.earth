@@ -30,7 +30,7 @@ import { containedPath, publishPinnedSourceStream } from '@cssearth/bake/objects
 import { assertRangeResponse, rangeRequestHeader } from '@cssearth/objects/node';
 import type { Archive } from '../archives/archives.mts';
 import { bindInputs, json, openOnMap, type PackageFiles } from '../dataset.mts';
-import { MAX_RECORDS, ZENODO_RECORDS, namesObject, parseZenodoRecord, parseZenodoSearch, reuseLicense, sizeText, speaksOfSimulation, zenodoQuery, type ReuseLicense } from '../../simulations/simulations.mts';
+import { MAX_RECORDS, ZENODO_RECORDS, nameForms, namesObject, parseZenodoRecord, parseZenodoSearch, reuseLicense, sizeText, speaksOfSimulation, zenodoQuery, type ReuseLicense } from '../../simulations/simulations.mts';
 
 export interface SimulationEntry {
   /** Dataset id, and the dataset key of its reader text. */
@@ -318,8 +318,22 @@ export function installSimulationDataset(files: PackageFiles, id: string, name: 
   return { minimum, maximum, promoted: openOnMap(files, id, entry.dataset) };
 }
 
-/** Zenodo's guest search answers 30 requests a minute: one is made every PACE_MS, for NAMES_AT_ONCE names, up to PAGES pages. */
-const PACE_MS = 2100, NAMES_AT_ONCE = 40, PAGES = 4;
+/** Zenodo's guest search answers 30 requests a minute: one is made every PACE_MS, up to PAGES pages for a question.
+ * It refuses a long question with HTTP 500, so the survey of 40 names at once had stopped working. A question is sized by
+ * the spellings it asks for (`nameForms`: two for "TOI-1266 c", four for "HD 189733 b", eight for "HD 135344 Ab"), since
+ * that is what its length follows. Measured 2026-10-05 on 110 questions: every one of up to 33 spellings was answered,
+ * those of 40 were answered or refused, and every one of 44 or more was refused. */
+const PACE_MS = 2100, SPELLINGS_AT_ONCE = 32, PAGES = 4;
+
+/** `names` in questions Zenodo answers: in order, each as full as SPELLINGS_AT_ONCE allows; a name with more goes alone. */
+export function surveyQuestions(names: readonly string[]): string[][] {
+  const questions: string[][] = [];
+  for (const name of names) {
+    const open = questions.at(-1);
+    if (open && nameForms([...open, name]).length <= SPELLINGS_AT_ONCE) open.push(name); else questions.push([name]);
+  }
+  return questions;
+}
 
 /** Which of `names` have simulation records on Zenodo, asked once for a whole draft run so no sweep passes one by unseen.
  * `note` gives a host's report the records of its planets. It is a note for a person: a record becomes a dataset only
@@ -328,8 +342,7 @@ export async function simulationSurvey(archive: Archive, names: readonly string[
   const found = new Map<string, string[]>(), unique = [...new Set(names.filter(Boolean))];
   let failure: string | undefined, asked = 0;
   try {
-    for (let start = 0; start < unique.length; start += NAMES_AT_ONCE) {
-      const group = unique.slice(start, start + NAMES_AT_ONCE);
+    for (const group of surveyQuestions(unique)) {
       for (let page = 1; page <= PAGES; page++) {
         if (asked++) await wait(PACE_MS);
         const records = parseZenodoSearch(JSON.parse(await archive.text(`${zenodoQuery(group)}&page=${page}`)));

@@ -47,6 +47,23 @@ test('a planet is matched with and without the space before its letter, as a phr
   assert.match(zenodoQuery(['TRAPPIST-1e']), /^https:\/\/zenodo\.org\/api\/records\?q=%22TRAPPIST-1e%22\+OR\+%22TRAPPIST-1\+e%22&type=dataset&size=25&sort=bestmatch$/u);
 });
 
+test('a planet of a lettered star is matched with the star\'s letter joined or set off', () => {
+  const forms = ['WASP-94Ab', 'WASP-94A b', 'WASP-94 Ab', 'WASP-94 A b'];
+  for (const written of forms) assert.deepEqual(nameForms([written]), forms, written);
+  // A catalogue number is still also written without the space after its letters.
+  assert.deepEqual(nameForms(['GJ 667 C c']), ['GJ 667Cc', 'GJ667Cc', 'GJ 667C c', 'GJ667C c', 'GJ 667 Cc', 'GJ667 Cc', 'GJ 667 C c', 'GJ667 C c']);
+  // A host that ends in a letter keeps the space before its star's letter.
+  assert.deepEqual(nameForms(['DS Tuc A b']), ['DS Tuc Ab', 'DS Tuc A b']);
+  assert.deepEqual(nameForms(['DS Tuc Ab']), ['DS Tuc Ab', 'DS Tuc A b']);
+  // Names without a star's letter before the planet's are left as they were.
+  assert.deepEqual(nameForms(['AU Mic b', 'Proxima Cen b', 'HD 19467 B', 'TOI-1266 c']), ['AU Mic b', 'Proxima Cen b', 'HD 19467 B', 'HD19467 B', 'TOI-1266c', 'TOI-1266 c']);
+  // Zenodo's record of WASP-94 A b's model (10.5281/zenodo.15085825) writes the planet "WASP-94A b".
+  const record = { title: 'Cloudy Mornings and Clear Evenings on a Giant Extrasolar World', description: 'the reduced transmission spectrum of the morning and evening terminators of planet WASP-94A b.' };
+  assert.equal(namesObject(record, ['WASP-94 A b']), true);
+  assert.equal(namesObject({ title: 'Radial velocities of WASP-94 B b', description: '' }, ['WASP-94 A b']), false, 'the other star\'s planet is another planet');
+  assert.equal(new URL(zenodoQuery(['WASP-94 A b'])).searchParams.get('q'), '"WASP-94Ab" OR "WASP-94A b" OR "WASP-94 Ab" OR "WASP-94 A b"');
+});
+
 test('only a license known to allow a derived picture counts as reuse', () => {
   assert.deepEqual(reuseLicense('cc-by-4.0'), { name: 'CC BY 4.0', url: 'https://creativecommons.org/licenses/by/4.0/' });
   assert.equal(reuseLicense('CC-BY-NC-4.0')?.name, 'CC BY-NC 4.0');

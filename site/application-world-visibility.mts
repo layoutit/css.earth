@@ -108,6 +108,9 @@ export function createApplicationWorldVisibility(layer: Pick<ApplicationWorldLay
   // follows its family's rule instead.
   let selectedId: string | null = null;
   let openSystem: ReadonlySet<string> = new Set();
+  // The objects whose walls stand around the selected body (a nebula around its central star): the view is among those
+  // walls, so no marker stands for them (application-world-context.mts).
+  let surrounding: readonly string[] = [];
 
   function update() {
     if (lifetime.disposed) return;
@@ -115,7 +118,7 @@ export function createApplicationWorldVisibility(layer: Pick<ApplicationWorldLay
     const highlightedIds = category?.memberIds, hosts: ReadonlySet<string> = new Set(category?.hostIds);
     const visibility = discoveryVisibility(policy.objects, { illustrations, highlighted, ...(highlightedIds ? { highlightedIds } : {}), defaultFeatures, systemMembers: policy.systemMembers, orbitFeatures });
     layer.setBodyVisibility({
-      bodyHidden: visibility.hiddenBodies.filter(id => !openSystem.has(id) && id !== selectedId),
+      bodyHidden: [...visibility.hiddenBodies.filter(id => !openSystem.has(id) && id !== selectedId), ...surrounding],
       labelHidden: [...visibility.hiddenLabels, ...policy.plainDotIds].filter(id => !openSystem.has(id) && !hosts.has(id)),
       highlighted: [...visibility.highlightedBodies, ...hosts],
       // Mission targets keep circles; an ordinary asteroid drawn for its highlighted category is a bare dot.
@@ -145,6 +148,12 @@ export function createApplicationWorldVisibility(layer: Pick<ApplicationWorldLay
         openSystem = system;
         update();
       }
+    },
+    /** The objects whose walls stand around the selected body: none is marked while that body is selected. */
+    setSurrounding(ids: readonly string[]) {
+      if (lifetime.disposed || ids.length === surrounding.length && ids.every((id, index) => id === surrounding[index])) return;
+      surrounding = [...ids];
+      update();
     },
     setIllustrationModelsEnabled(enabled: boolean) {
       if (lifetime.disposed || illustrations === (enabled === true)) return;

@@ -14,6 +14,8 @@ import { suppressMinorMoonOrbitPaint } from './world/moon-orbit-policy.mts';
 import { mountCatalogueMoonLabels } from './catalogue-moon-labels.mts';
 import { loadApplicationUniverse } from './application-world-resources.mts';
 import { ancestorIds, knownAncestors } from './object-directory.mts';
+import { CONTEXT_OBJECT_DESCRIPTORS } from './prepared-context-objects.mts';
+import { surroundingHosts } from './surrounded-body.mts';
 
 /** The world's prepared data and planner worker, which `startup-boot.mts` starts while the first body still loads. */
 export { loadApplicationUniverse };
@@ -21,6 +23,9 @@ export { prestartWorldContextPlanner as prestartWorldPlanner } from '@cssearth/r
 import { createApplicationWorldFrames } from './application-world-frames.mts';
 import { createApplicationWorldVisibility, worldVisibilityPolicy } from './application-world-visibility.mts';
 import type { ApplicationWorldLayer } from './application-world-types.mts';
+
+/** The objects whose picture lies on walls around their middle (surrounded-body.mts). */
+const WALLED = surroundingHosts(CONTEXT_OBJECT_DESCRIPTORS);
 
 export function createApplicationWorldContext() {
   return {
@@ -104,10 +109,12 @@ export function createApplicationWorldContext() {
             layer.selectObject(id, frame, framingScale, edge);
             moonLabels.selectObject(id);
             // The objects the body is inside, by the object tree, as its own entry names them: a bank of plain-dot stars one of
-            // them hosts (another galaxy's) draws around the body. No other entry is read for this.
+            // them hosts (another galaxy's) draws around the body. No other entry is read for this. One whose picture lies on
+            // walls draws those walls around the body, and is not marked among them.
             selectedId = id;
-            layer.setSelectionHolders(knownAncestors(id).map(object => object.id));
-            void ancestorIds(id).then(ids => { if (!lifetime.disposed && selectedId === id) layer.setSelectionHolders(ids); }, () => {});
+            const hold = (ids: readonly string[]) => { layer.setSelectionHolders(ids); visibility.setSurrounding(ids.filter(holder => WALLED.has(holder))); };
+            hold(knownAncestors(id).map(object => object.id));
+            void ancestorIds(id).then(ids => { if (!lifetime.disposed && selectedId === id) hold(ids); }, () => {});
           },
           setIllustrationModelsEnabled: visibility.setIllustrationModelsEnabled,
           setHighlightedClassification: visibility.setHighlightedClassification,

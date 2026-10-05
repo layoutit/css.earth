@@ -43,7 +43,9 @@ mock.module(new URL('./application-world-frames.mts', import.meta.url).href, { n
   stats: {}, present() {}, createFramePresenter() {}, setNavigationInFlight() {},
   setRotationActive: (active: boolean) => effects.push(['rotation', active]), setCoasting: (active: boolean) => effects.push(['coasting', active]), destroy: () => effects.push(['frames-destroy']) }); } } });
 mock.module(new URL('./application-world-visibility.mts', import.meta.url).href, { namedExports: { worldVisibilityPolicy: { minorMoonIds: [] },
-  createApplicationWorldVisibility: () => ({ selectObject: (id: string) => effects.push(['visibility-select', id]), setIllustrationModelsEnabled() {}, setHighlightedClassification() {} }) } });
+  createApplicationWorldVisibility: () => ({ selectObject: (id: string) => effects.push(['visibility-select', id]), setSurrounding: (ids: readonly string[]) => effects.push(['surrounding', ids]), setIllustrationModelsEnabled() {}, setHighlightedClassification() {} }) } });
+// One holder's picture lies on walls: the bank of 'known' says so.
+mock.module(new URL('./prepared-context-objects.mts', import.meta.url).href, { namedExports: { CONTEXT_OBJECT_DESCRIPTORS: { 'known-layers': { properties: { surrounds: true, host: 'known' } }, 'outer-layers': { properties: { host: 'mars-parent' } } } } });
 mock.module(new URL('./object-directory.mts', import.meta.url).href, { namedExports: { knownAncestors: (...args: unknown[]) => { effects.push(['known-ancestors', ...args]); return [{ id: 'known' }]; }, ancestorIds: (...args: unknown[]) => { effects.push(['ancestor-ids', ...args]); return ancestorResult; } } });
 mock.module(new URL('./world/context-availability.mts', import.meta.url).href, { namedExports: { CONTEXT_AVAILABILITY: {} } });
 mock.module(new URL('./browser/diagnostics-policy.mts', import.meta.url).href, { namedExports: { DIAGNOSTICS_ENABLED: true } });
@@ -80,6 +82,8 @@ test('context selections publish known holders immediately, ignore stale asynchr
   resolve(['stale-earth']); await settle();
   assert.deepEqual(effects.filter(effect => Array.isArray(effect) && ['known-ancestors', 'ancestor-ids'].includes(effect[0])), [['known-ancestors', 'earth'], ['ancestor-ids', 'earth'], ['known-ancestors', 'mars'], ['ancestor-ids', 'mars']]);
   assert.deepEqual(effects.filter(effect => Array.isArray(effect) && effect[0] === 'holders'), [['holders', ['known']], ['holders', ['known']], ['holders', ['mars-parent']]]);
+  // A holder whose walls stand around the selected body is not marked; one whose picture is not on walls is.
+  assert.deepEqual(effects.filter(effect => Array.isArray(effect) && effect[0] === 'surrounding'), [['surrounding', ['known']], ['surrounding', ['known']], ['surrounding', []]]);
   assert.ok(effects.some(effect => Array.isArray(effect) && effect[0] === 'visibility-select' && effect[1] === 'earth'));
   assert.ok(effects.some(effect => Array.isArray(effect) && effect[0] === 'moon-select' && effect[1] === 'earth'));
   orbitLoaded!(); assert.deepEqual(effects.at(-1), ['refresh']);
