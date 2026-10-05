@@ -4,7 +4,10 @@ The comparator checks the complete final Astro output, with production mode,
 `ASSET_ORIGIN=https://earth-assets.lowpoly.cc`, strict prepared-asset availability,
 a pinned source revision and version, UTC and the C locale. It adds hidden client/worker source maps
 and read-only module metadata. It does not run deployment, share-image generation,
-object assembly or server-function bundling.
+object assembly during comparison. After comparison, the safety-net job reuses the
+same two outputs for [server answers](server-answers.md): it bundles Netlify
+functions and the Cloudflare Worker, records preview, Netlify and Cloudflare,
+checks each recording and compares each target. It never builds the site again.
 
 ## Run locally
 
@@ -63,6 +66,7 @@ seed their own permission. Pass `--moves moves.json` for source renames.
   JavaScript, CSS, assets, data, other files and every object inventory are
   compared independently. Route attribution remains visible in the report.
 - **`pure-move`:** every dimension must match, including formatting refactors.
+  Server answers must match exactly too.
 - **`semantic`:** seeds are source-diff paths intersected with metadata modules.
   Source diffs under renderer, engine, core and objects seed that package
   dist bank best effort because bundled outputs lack per-source maps. This is
@@ -78,12 +82,19 @@ seed their own permission. Pass `--moves moves.json` for source renames.
   module set and identical code and ordered imports in every non-seed module.
   Without it, incidental chunk restructuring fails. Inventory changes additionally
   require the affected object in `objects`; downstream outputs still need globs.
+  These permissions apply only to built-output comparison. Server status, headers,
+  bodies, packaged file reads and deployment facts must always match exactly.
+  Neither output declarations nor layout permissions allow server differences.
 - **`report`:** differences are informational. Dependency/toolchain mismatch is
-  recorded as a skipped comparison with a notice; other tool failures still fail.
+  recorded as a skipped comparison with a notice; other L3 tool failures still fail.
+  Once both builds exist, L2 runs in report mode too. Its differences and recording,
+  sanity or tool failures are notices with logs and never fail the job.
 
 Exit codes: **0** allowed result; **1** disallowed differences; **2** invalid
 input or comparator error. Failed build stages fail the workflow independently
 of artifact upload; missing artifacts warn and cannot replace the stage verdict.
+In either declared refactor mode, any server difference fails (1), and any failed
+recording, sanity check or L2 tool fails (2), even if L3 allows the output change.
 
 ## Normalization and evidence
 
@@ -163,9 +174,12 @@ Owner repository settings:
    ruleset requiring the workflow from main adds protection against hostile
    workflow edits that ordinary required-check settings cannot provide.
 
-The gate and the build job take their tools from the merge base. Only the pull request that
-introduces these tools has no merge-base copy: it runs its own tools and prints a visible
-bootstrap warning. Once the tools are on the main branch that path is never taken again.
+The gate and the build job take their comparison and server-answer tools from
+the merge base. The pull request introducing a tool set has no merge-base copy:
+it runs its own tools and prints a visible bootstrap warning. An absent
+server-answer tool directory has the same exception.
+The selected server-answer tools are copied into both checkouts; executable
+entries and deployment configuration still come from each revision.
 
 A rename/specifier-only diff forces pure-move. Report mode skips lockfile or
 installed-toolchain mismatches with a notice. Toolchain records contain lockfile
@@ -202,6 +216,9 @@ come from the actual descriptor URLs and inventory sizes.
 | Restored prepared bank | 3.62 GiB | 7.24 GiB with isolated prepared copies |
 | Production-shaped dist, including added maps | 4.17 GiB | 8.34 GiB |
 | Comparison metadata | 0.12 GiB | 0.24 GiB |
+| Server recordings | About 18 MB per target | About 108 MB for three targets on two sides |
+| Function/Worker bundles and staged place data | Not measured in this lane | Allow 100 MB across both sides |
+| Recording pairs retained for upload | Below 40 MB combined | At most 40 MB extra local copies |
 | Root dependencies | 0.39 GiB | 0.78 GiB, plus workspace dependencies |
 | Checkout histories and working files | about 2.2 GiB per full clone | Worktree shares history; allow 2.2 GiB |
 | pnpm store | about 1 GiB allowance | 1 GiB |
@@ -213,7 +230,8 @@ come from the actual descriptor URLs and inventory sizes.
 
 The two copied prepared banks, outputs, metadata, dependencies and selected
 public inputs need about **17 GiB**. Allow about **3 GiB** for checkout history,
-working files and the pnpm store: **20 GiB total**, plus any extra generated files.
+working files and the pnpm store: **20 GiB total**, plus **250 MB** for L2
+recordings, bundles, staged data, logs and upload copies, and any other generated files.
 Copying the prepared bank instead of sharing inodes costs **3.62 GiB** and
 prevents head preparation from altering base inputs.
 The cache payload is one prepared bank (3.62 GiB), not both outputs or scene banks;
@@ -284,6 +302,31 @@ membership hunks show the first ten module locations on both sides.
 Inventory diagnostics name changed asset entries without content addresses.
 Environment totals and exact emitted HTML/JS/CSS byte equality are recorded
 separately. Full build inputs remain the authoritative detail when retained.
+The L2 stage moves each comparison output back to its checkout’s `dist`, because
+its real readers and package isolation require that path. The output is restored
+to the evidence directory afterward, including on recording failure. Its
+revision-owned Worker bundler also stages place files and `_headers` after L3 comparison. The host routes the build’s
+`https://earth-assets.lowpoly.cc` origin through restored inventory files offline;
+standalone qualification can use `https://assets.invalid`. No full scene-bank
+restore or extra site build is added.
+
+`server-answers.json` records counts, differences, failures and L2 timings. Those
+timings also join `timings.json`. The step summary includes per-target counts,
+first differences and stage timings. On differences, artifacts include the small
+file/dimension summaries, plus both recordings for a differing target only when
+all retained recording pairs together stay below 40 MB. Logs are retained even
+on failure; missing artifact files warn.
+
+The offline unit dry run exercises four bundle commands, six recordings/checks
+and three diffs without a site build. On Node 22.23.2 on macOS, the stubbed
+command dry run took 0.034 seconds; the real child-host origin test took
+0.131 seconds. These measure orchestration and small fixtures, not site replay.
+Hosted addition is estimated at about
+5–10 seconds of bundles per side, 90 seconds of recordings per side and a few
+seconds of checks/diffs: roughly 3–4 minutes. A shared five-minute subprocess
+budget stops unhealthy L2 work; it is a notice in report mode and a failure in
+declared modes. Hosted reuse and duration still need the orchestrator’s proof.
+
 CI writes mode, tool origin (merge-base/head/bootstrap), dimensions,
 environments, closure sizes and stage timings to `GITHUB_STEP_SUMMARY`.
 

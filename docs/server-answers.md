@@ -74,9 +74,39 @@ bundled handler rewrite are qualification gates.
 
 ## Build comparison job
 
-The PR job compares exactly two builds: base and head. Both use `ASSET_ORIGIN=https://assets.invalid`, matching
-production. All three recorders resolve that origin through an inventory-backed fetch adapter in the recorder host,
-including requests made inside preview middleware. Site source needs no test-only routing.
+The [site safety-net lane](build-comparison.md) runs L2 inside its existing
+build-comparison job, after L3 compares the merge base and head. It reuses those
+two production-shaped builds; it adds no Astro build, preparation or clone.
+
+For each checkout it moves the comparison output back to `dist`, resolves and
+runs only the Netlify and Cloudflare bundlers from that revision’s scripts,
+then records and checks preview, Netlify and Cloudflare. The output returns to
+its evidence directory afterward, including on recording failure. The Worker
+bundler also stages place files and `_headers`. Each target is diffed base against head.
+The trusted recording tools come from the merge base, with the comparison
+lane’s explicit tool override and visible bootstrap exception.
+
+The comparison builds use `ASSET_ORIGIN=https://earth-assets.lowpoly.cc`.
+`record.mts --asset-origin <origin>` routes that origin through the host’s
+inventory-backed static adapter, including preview middleware fetches. Its
+default remains `https://assets.invalid` for standalone qualification. Other
+network origins fail. The stage uses the already restored selected inputs and
+rejects missing data; no full scene bank is downloaded for this stage.
+
+Without a fresh declaration, L2 differences and recording/check failures are
+notices with logs. With either `pure-move` or `semantic`, every server difference
+and sanity failure fails the job. L3 output or layout permissions never allow
+server changes. Counts, first differences and timings appear in the job summary
+and `server-answers.json`; small diff summaries are uploaded, and differing
+recording pairs are included only below a combined 40 MB budget. Missing files
+do not fail artifact upload. L2 subprocesses share a five-minute limit.
+
+## Standalone qualification flow
+
+The standalone flow keeps its full offline deployment sequence for qualification,
+repeat runs, version normalization and mutations. It is separate from the lane’s
+post-build reuse stage. Both standalone builds use `ASSET_ORIGIN=https://assets.invalid`,
+a production-origin address shape resolved offline by the recorder host.
 
 The clone helper restores dependencies, downloaded `src/objects/*/prepared` inputs and public inputs. It excludes
 compiled `packages/*/dist`, generated shell modules and generated features/shell outputs. Every clone runs
@@ -97,7 +127,7 @@ route too. Unsupported script/config shapes fail explicitly. No entry is importe
 
 Use **Node 24** for CI qualification. Start from a provisioned checkout with its inventoried data restored.
 The preview baseline requires `src/objects/earth/prepared/runtime.json`; otherwise its prepared probe returns 404.
-The complete PR job is:
+A standalone base/head qualification is:
 
 ```sh
 node --version # must be 24.x
@@ -182,7 +212,8 @@ measured.
 
 | Budget | Local measurement / basis | Hosted-runner planning estimate |
 | --- | --- | --- |
-| PR job | Exactly base + head, sequential clone lifetime | 20–35 minutes including package regeneration; measure before enabling a required job. |
+| Safety-net L2 addition | Reuses L3 base + head; no further builds | About 3–4 minutes; five-minute subprocess cap. Hosted reuse remains unmeasured. |
+| Standalone base/head qualification | Exactly base + head, sequential clone lifetime | 20–35 minutes including package regeneration. |
 | Nightly qualification | Base + repeat + version | 30–55 minutes; no additional origin-only build. |
 | Shared inputs | Review measured roughly 9.1 GB public scenes + 3.6 GB prepared; no clone `du` evidence retained | Provisioned once. Scenes are shared, not copied into clones or Astro output. |
 | Clone/output peak | Updated flow unmeasured; one clone's prepared data, dependencies, compiled packages and scene-free dist | Reserve 15 GB beyond provisioned inputs; verify allocated and apparent `du` on Linux. |
