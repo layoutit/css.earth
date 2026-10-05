@@ -2,8 +2,9 @@
  *
  * The law comes from the first source that holds the star:
  * 1. a law transcribed from a paper beside the star (`source/photometry/<name>-limb-darkening.json`, cssearth-published-limb-darkening@1,
- *    quadratic or power), a measurement or the model a paper fixed for this star. A power law that follows from sizes a paper
- *    prints, not from an exponent it prints, says how in `derived`, and the star's texts say it in those words;
+ *    quadratic or power), a measurement or the model a paper fixed for this star. A law that is not the paper's own value for
+ *    the star says how it follows in `derived`, and the star's texts say it in those words: a power law from sizes a paper
+ *    prints, or the row of a model grid nearest a star no grid reaches (a white dwarf past the grid's hottest model);
  * 2. the model grids of limb.mts, at the star's temperature and gravity (and mass, for spherical models). The gravity is the star's
  *    mass and radius in its astronomy record, else a published spectroscopic value (gravity.mts), searched at the star's J2000
  *    position: the record's, carried back from its own epoch by its proper motion.
@@ -73,10 +74,12 @@ async function publishedLaw(root: string, id: string): Promise<LimbChoice | null
     // A law fitted in this package to a pinned input says so, and names the tool that refits it; any other record is a paper's.
     const terms = coefficients.law === 'power' ? `power law I(mu) = mu^${coefficients.alpha}` : `quadratic law (u1 ${coefficients.u1}, u2 ${coefficients.u2})`;
     const law = fit ? `the ${terms} fitted in this package to ${fit.data} (${record.band})`
-      : coefficients.law === 'power' && record.derived !== undefined ? `the ${terms} ${requireString(record.derived, 'derived')} (${record.band})`
+      : record.derived !== undefined ? `the ${terms} ${requireString(record.derived, 'derived')} (${record.band})`
       : coefficients.law === 'power' ? `the ${terms} that ${credit} fit to the star's resolved disc (${record.band})`
       : `the ${terms} ${credit} ${record.basis === 'model-prior' ? 'fixed from model atmospheres for this star' : 'fit to this star'} (${record.band})`;
-    return { limbDarkening: { law: record.law === 'power' ? 'power' : 'quadratic', published: true, path }, sentence: `dimmed toward the limb by ${law}`, credit: `Limb darkening: ${credit}.`,
+    // A row of a model grid chosen for the star, not a paper's own value for it: the nearest tabulated model.
+    const nearestModel = record.derived !== undefined && record.basis === 'model-prior';
+    return { limbDarkening: { law: record.law === 'power' ? 'power' : 'quadratic', published: true, path }, sentence: `dimmed toward the limb by ${law}`, credit: `Limb darkening: ${credit}.`, ...(nearestModel ? { nearestModel } : {}),
       inputs: [{ id: `${id}-${name.replace(/\.json$/u, '')}`, path, origin: url, credit, license: 'Factual numerical measurements; source attribution retained',
         acquisition: fit ? `Fitted by ${fit.tool} to ${fit.input}` : 'Transcribed from the paper, each value with its quoted cell', redistribution: fit ? 'A fitted parameter with its method; no paper figures' : 'Factual parameter transcription only; no paper figures', consumers: ['assets', 'datasets'],
         sourceBinding: { kind: 'local', reason: fit ? 'Limb-darkening law fitted in this package, with the refit that checks it; repinned when edited.' : 'Published limb-darkening law transcribed with its cells; repinned when edited.' } }] };
@@ -202,7 +205,8 @@ export async function starLimb(root: string, ids: readonly string[], { archive =
     if (respec) files.set(`${o}/${STORED_SPEC}`, respec);
     if (cited) files.set(`${o}/README.md`, String(files.get(`${o}/README.md`) ?? '').replace(STAR_GRAVITY, (_all, before: string) => `${before} log g ${cited.logg} from ${cited.source}.`));
     files.set(`${o}/README.md`, readmeWithLimb(String(files.get(`${o}/README.md`) ?? ''), `**Limb.** The disc is ${limb.sentence}.${readAt}`,
-      measured ? '- **Measured limb, other band.** The law was measured or fixed outside the visible band the color is drawn in; the visible limb is not measured.' : `- **Model limb.** The limb darkening is a model atmosphere at the star's temperature and ${gravity?.kind === 'bounded' ? 'a display gravity' : 'gravity'}, not a measurement of this star.`));
+      limb.nearestModel ? '- **Model limb.** The limb darkening is the nearest tabulated model atmosphere\'s, not a measurement of this star.'
+        : measured ? '- **Measured limb, other band.** The law was measured or fixed outside the visible band the color is drawn in; the visible limb is not measured.' : `- **Model limb.** The limb darkening is a model atmosphere at the star's temperature and ${gravity?.kind === 'bounded' ? 'a display gravity' : 'gravity'}, not a measurement of this star.`));
     // The gravity on record is the one a grid law was read at. A published law is read at none, so the star's cited gravity stays.
     if (gravity && limb.grid && measurements.surfaceGravityLogg !== gravity.logg && gravity.kind !== 'bounded') { measurements.surfaceGravityLogg = gravity.logg; measurements.surfaceGravitySource = `${gravity.sentence}${gravity.url ? ` (${gravity.url})` : ''}`; files.set(`${s}/measurements.json`, json(measurements)); }
     const ledgerPath = `${o}/investigations.json`, ledger = files.has(ledgerPath) ? read(ledgerPath) : { schema: INVESTIGATION_LEDGER_SCHEMA, objectId: id, entries: [] };

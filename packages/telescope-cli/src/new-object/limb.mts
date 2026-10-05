@@ -87,6 +87,8 @@ export interface LimbChoice {
   readonly acquisitions?: readonly Record<string, unknown>[]; readonly inputs?: readonly Record<string, unknown>[]; readonly coefficients?: QuadraticLimbDarkening;
   /** The sentence the dataset qualification, README and NOTICE use. */
   readonly sentence: string; readonly credit?: string; readonly grid?: Grid['key'] | 'howarth' | 'picaso';
+  /** A transcribed row of a model grid, the nearest to a star no grid reaches (star-limb.mts). */
+  readonly nearestModel?: boolean;
 }
 
 // The node range a request names, written as the grid writes its values (the form every existing package restores with).
