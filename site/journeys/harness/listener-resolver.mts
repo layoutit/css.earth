@@ -3,7 +3,7 @@ import { readFile } from 'node:fs/promises';
 import { resolve, relative, isAbsolute } from 'node:path';
 import { SourceMapConsumer, type RawSourceMap } from 'source-map-js';
 import { bindingSites, type ListenerWrapper } from './binding-sites.mts';
-import type { ManifestEntry } from './reachability.mts';
+import type { ManifestEntry } from './binding-sites.mts';
 function sourceMap(input: unknown): RawSourceMap {
   if (!input || typeof input !== 'object' || !('version' in input) || !('sources' in input) || !Array.isArray(input.sources)
     || !input.sources.every(value => typeof value === 'string') || !('names' in input) || !Array.isArray(input.names)

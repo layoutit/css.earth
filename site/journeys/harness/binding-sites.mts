@@ -45,3 +45,6 @@ export function bindingSites(file: string, text: string, wrappers: readonly List
   walk(ast);
   return { sites, offset: (line: number, column: number) => ast.getPositionOfLineAndCharacter(line - 1, column) };
 }
+
+/** One control the manifest declares; the harness reads it here so the resolver and the reachability probe do not import each other. */
+export interface ManifestEntry { id: string; kind: string; source: string; eventTypes?: string[]; mechanism?: string; tag?: string; selector?: string; markup?: string }
