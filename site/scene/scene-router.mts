@@ -1,5 +1,6 @@
 import { prepareStartupBillboard } from '../startup-billboard.mts';
-import { importApplicationWorld, importSceneRegistry } from '../shared-imports.mts';
+import { importApplicationWorld } from '../world-imports.mts';
+import { importSceneRegistry } from '../scene-imports.mts';
 import { afterSceneFrame } from './scene-frame.mts';
 import { retainInputSurface } from '@cssearth/renderer';
 import { holdStartup, releaseStartup } from '@cssearth/renderer/rendering/startup-gate.ts';

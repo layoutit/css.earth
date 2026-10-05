@@ -1,4 +1,4 @@
-import { importPackagedObjectRuntime } from './import-queue.mts';
+import { importPackagedObjectRuntime } from './scene-imports.mts';
 import { catalogueObject, objectSystem, systemHostId } from '@cssearth/objects';
 import type { NavigableObject, ObjectEntry } from './directory/object-entry-types.mts';
 import { readObjectEntry } from './directory/object-entries.mts';

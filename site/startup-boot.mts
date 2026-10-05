@@ -1,4 +1,5 @@
-import { importApplicationWorld, importPackagedObjectRuntime, importSceneRegistry } from './shared-imports.mts';
+import { importPackagedObjectRuntime, importSceneRegistry } from './scene-imports.mts';
+import { importApplicationWorld } from './world-imports.mts';
 
 /** Starts the body runtime and its decoding worker as soon as the page's first script runs, beside the world summary's
  * request instead of after it. Neither depends on the world. The readers own every failure: a read that fails here is
@@ -11,7 +12,7 @@ export function startBodyCode(document: Document) {
 /** Starts the registry with this page's entry and system view, and the world's code with its planner worker, volume and
  * stars, together instead of after the first body's preparation. Both read the world the page loaded before its
  * application (`startup-world.mts`), so this runs once the router has been imported. Each module is imported through
- * `shared-imports.mts`, so the router's own later request takes the same promise. */
+ * the scene/world loader owners, so the router's own later request takes the same promise. */
 export function startViewCode(document: Document) {
   const objectId = document.querySelector<HTMLElement>('.object-stage')?.dataset.objectId;
   if (!objectId) return;
