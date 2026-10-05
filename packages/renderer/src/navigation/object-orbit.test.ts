@@ -7,6 +7,7 @@ import scene from '../../../../src/objects/mercury/prepared/scene.json' with { t
 import { createRetainedCubicSkyOrbit } from './object-orbit.js';
 import { createPerspectiveDolly } from './perspective-dolly.js';
 import { presentWorldCamera } from './world-camera.js';
+import { poleHoldFor, turnPoleHeld } from './pole-held-drag.js';
 import { worldRotationCss, worldRotationFromQuaternion } from '@cssearth/engine';
 
 const frame = Object.freeze({ referenceFrame: 'sun-icrf', epochJdTt: 1, originM: [3e7, 4e7, 5e7] as const,
@@ -97,9 +98,21 @@ it('holds a pole-held drag to the body pole without a stage level-of-detail attr
   const f = fixture(undefined, { ...scene.camera, drag: { model: 'pole-held-tumble' } });
   f.roots[2]!.system = { style: { transform: 'rotateX(90deg)' } };
   assert.equal(f.roots[0]!.dataset.lod, undefined);
-  const pole = f.callbacks.drag.trackballMetrics().pole;
-  assert.ok(Array.isArray(pole), 'pole-held drag lost its pole');
-  assert.ok(Math.abs(Math.hypot(...pole) - 1) < 1e-9);
+  const { pole, meridian } = f.callbacks.drag.trackballMetrics();
+  assert.ok(Array.isArray(pole) && Array.isArray(meridian), 'pole-held drag lost its pole or its meridian');
+  assert.ok(Math.abs(Math.hypot(...pole) - 1) < 1e-9 && Math.abs(Math.hypot(...meridian) - 1) < 1e-9);
+  // The meridian is the system node's +X axis: across the pole.
+  assert.ok(Math.abs(pole[0]! * meridian[0]! + pole[1]! * meridian[1]! + pole[2]! * meridian[2]!) < 1e-9);
+  // With the drawn body and the viewport from the dolly, the controller has all a pole-held drag needs.
+  const metrics = f.callbacks.drag.trackballMetrics(), hold = poleHoldFor(metrics);
+  assert.ok(hold, 'the published trackball does not start a pole-held drag');
+  // The drag turns its own copy of the pole and meridian; the camera, given the same rotation, publishes the same two.
+  const rotation = turnPoleHeld(hold, metrics, { startX: metrics.centerX, startY: metrics.centerY, endX: metrics.centerX + 30, endY: metrics.centerY + 12 });
+  assert.equal(hold.rotating, false, 'the disc centre missed the drawn body');
+  f.callbacks.drag.rotate({ controlPitchDelta: 0, controlYawDelta: 0, rotation });
+  const turned = f.callbacks.drag.trackballMetrics();
+  close(turned.pole, hold.pole, 1e-9); close(turned.meridian, hold.meridian, 1e-9);
+  assert.ok(Math.abs(turned.pole[0] - pole[0]!) + Math.abs(turned.pole[2] - pole[2]!) > 1e-3, 'the drag did not turn the body');
   f.orbit.destroy();
 });
 

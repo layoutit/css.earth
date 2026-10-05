@@ -5,15 +5,16 @@ export type Matrix3 = readonly (readonly number[])[];
 export interface PointerDelta { previousX: number; previousY: number; currentX: number; currentY: number; }
 export interface TrackballMetrics {
   centerX: number; centerY: number; radius: number; surfaceRadius: number;
-  focalLength: number; viewportWidth: number;
+  focalLength: number; viewportWidth: number; viewportHeight?: number;
   opticalCenterX?: number; opticalCenterY?: number;
   viewportCenterX?: number; viewportCenterY?: number;
   angularDegreesPerTrackballRadius?: number; pitchResponse?: number;
   tumbleOnly?: boolean; sceneMatrix?: string | readonly number[];
-  /** The body's north pole as a unit view direction (CSS axes): body drags turn about it and never roll it. */
-  pole?: Vector3;
-  /** The drawn body and the projection that draws it: pole drags keep the grabbed ground under the pointer
-   * (engine pole-drag.ts). It carries its own optical centre and focal length, which interactionTrackball replaces. */
+  /** The body's north pole and its +x axis as unit view directions (CSS axes): body drags turn about the pole and never
+   * roll it, and its hold at the line of sight is placed by the +x axis (engine pole-drag.ts). */
+  pole?: Vector3; meridian?: Vector3;
+  /** The drawn body and the projection that draws it: pole drags pan the surface under the pointer (engine
+   * pole-drag.ts). It carries its own optical centre and focal length, which interactionTrackball replaces. */
   grabSphere?: { center: Vector3; radius: number; opticalCenterX: number; opticalCenterY: number; focalLength: number };
 }
 export interface CameraUpdate { rotX?: number; rotY?: number; zoom?: number; distance?: number; distanceKilometers?: number; }

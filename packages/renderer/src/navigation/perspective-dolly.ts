@@ -55,11 +55,12 @@ export type PerspectivePublication = ReturnType<ReturnType<PerspectiveDolly['pre
 // 0.99 roll share and 11-27 degrees per 240 px stroke off-centre against
 // 82 degrees of pure tumble at the centre. A plan with the
 // "pole-held-tumble" model (Earth's) turns about the body's own pole and
-// across it while its mesh is drawn, as Cesium holds a globe to its axis, so
-// drags never roll the pole (engine pole-drag.ts). On the disc the grabbed
-// ground stays under the pointer (Cesium's constrained pan); off it the turn
-// goes by angle. Its tilt stops with the pole facing the eye. Every other
-// tumble is unbounded. The
+// across it while its mesh is drawn, as CesiumJS turns a globe held to its
+// axis, so drags never roll the pole (engine pole-drag.ts, pole-held-drag.ts):
+// on the disc the pointer pans the surface, from the first frame it leaves the
+// disc the drag turns by viewport share until release, a short press coasts,
+// and the tilt stops with a pole facing the eye. Every other tumble is
+// unbounded. The
 // control pitch anchors in the plan calibrate the affine control-to-scene map
 // and clamp nothing.
 //
@@ -378,6 +379,7 @@ export function createPerspectiveDolly({
         surfaceRadius: radius,
         focalLength: focal * camera.projectionScale,
         viewportWidth: stageBounds.width,
+        viewportHeight: stageBounds.height,
         viewportCenterX: (stageBounds.left ?? 0) + stageBounds.width / 2,
         viewportCenterY: (stageBounds.top ?? 0) + stageBounds.height / 2,
         // Pointer samples are re-based to the centre: tumble everywhere.
