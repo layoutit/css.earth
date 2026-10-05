@@ -9,6 +9,7 @@ import {spawn} from 'node:child_process';
 import {parse} from 'yaml';
 import {requireArray, requireRecord, requireString} from '@cssearth/core';
 import {affectedJobNames, ALWAYS_JOBS, classifyAffectedPaths, HEAVY_JOBS, loadCiAreasConfig, localChangedPaths, needsProductionBuild} from './ci-affected.mts';
+import { universeTestMatrix } from './test-shards.mts';
 import {evaluateObjectScopeGate} from './object-scope-gate.mts';
 
 interface CiStep {name:string;run:string;env:Record<string,string>;}
@@ -74,18 +75,21 @@ export function readCiSteps(source:string,jobName='universe', substitutions:Reco
  if(job.strategy!==undefined){
   const strategy=requireRecord(job.strategy),matrix=requireRecord(strategy.matrix);
   if(!supported||Object.keys(strategy).sort().join(',')!=='fail-fast,matrix'||strategy['fail-fast']!==false||
-     Object.keys(matrix).join(',')!=='lane'||job['continue-on-error']!==undefined||
+     (supported.job==='universe-checks' ? Object.keys(matrix).join(',')!=='include'||matrix.include!=='${{ fromJSON(needs.changes.outputs.test_matrix).include }}' : Object.keys(matrix).join(',')!=='lane')||job['continue-on-error']!==undefined||
      job.needs!=='changes'||requireString(job.if).trim().replace(/\s+/gu,' ')!=='${{ '+selectedMatrixCondition(supported)+' }}'||
      requireRecord(job.env)[supported.laneEnv]!==MATRIX_LANE)
    throw new Error('Local CI supports only the explicit maintained lane matrices with fail-fast disabled.');
-  const lanes=requireArray(matrix.lane).map(value=>requireString(value));
+  const rows=supported.job==='universe-checks'
+   ? universeTestMatrix(resolve(import.meta.dirname,'../../..'),{packages:substitutions['${{ needs.changes.outputs.test_packages }}']??'all',files:substitutions['${{ needs.changes.outputs.test_files }}']??''})
+   : requireArray(matrix.lane).map(value=>({lane:requireString(value),shard:0,total:0}));
+  const lanes=rows.map(row=>row.shard?`${row.lane}-${row.shard}`:row.lane);
   if(!lanes.length||new Set(lanes).size!==lanes.length||lanes.some(lane=>!/^[a-z][a-z0-9-]*$/u.test(lane)))
    throw new Error('Local CI needs unique, nonempty literal matrix lanes.');
-  return lanes.flatMap(lane=>{
-   const steps=readJobSteps(workflow,job,{...substitutions,[MATRIX_LANE]:lane});
+  return rows.flatMap(({lane,shard,total})=>{
+   const steps=readJobSteps(workflow,job,{...substitutions,[MATRIX_LANE]:lane,'${{ matrix.shard }}':String(shard),'${{ matrix.total }}':String(total)});
    if(!steps.length||steps.some(step=>step.env[supported.laneEnv]!==lane))
     throw new Error('Local CI needs executable commands for every matrix lane without lane overrides.');
-   return steps.map(step=>({...step,name:`[${lane}] ${step.name}`}));
+   return steps.map(step=>({...step,name:`[${lane}${shard?` ${shard}/${total}`:''}] ${step.name}`}));
   });
  }
  if(supported)throw new Error('Local CI needs the maintained lane matrix, not a single replacement job.');
@@ -111,8 +115,9 @@ function readJobSteps(workflow:Record<string,unknown>,job:Record<string,unknown>
   // failed prerequisite to report and no parallel job to cancel.
   if(step.if!==undefined&&CI_ONLY_CONDITIONS.includes(String(step.if).trim()))return [];
   const cacheGated=step.if!==undefined&&CACHE_HIT_CONDITION.test(String(step.if).trim());
+  const laneSelected=step.if==="env.CI_LANE_SKIP != 'true'"&&inherited.CI_LANE_SKIP==='false';
   const alwaysRun=step.if!==undefined&&ALWAYS_RUN_CONDITION.test(String(step.if).trim());
-  if((step.if!==undefined&&!cacheGated&&!alwaysRun)||step['working-directory']!==undefined||step['continue-on-error']!==undefined||step.shell!==undefined)
+  if((step.if!==undefined&&!cacheGated&&!alwaysRun&&!laneSelected)||step['working-directory']!==undefined||step['continue-on-error']!==undefined||step.shell!==undefined)
    throw new Error('Local CI needs explicit support for this step execution policy.');
   const result={name:requireString(step.name),run:requireString(step.run),env:{...inherited,...decodeEnvironment(step.env)}};
   if(JSON.stringify(result).includes('${{'))throw new Error('Local CI cannot evaluate GitHub expressions.');

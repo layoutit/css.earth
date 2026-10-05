@@ -1,7 +1,8 @@
 # Saturn sources
 
 Saturn combines a Hubble OPAL visible body map, Hubble spectral maps, a Cassini
-UVIS ring opacity profile, and modeled atmosphere charts.
+map of the 2011 storm clouds, a Cassini UVIS ring opacity profile, and modeled
+atmosphere charts.
 
 Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).
 
@@ -17,6 +18,7 @@ Source selections, recorded trials and open questions are in the [investigation 
 | Interior | [Mankovich and Fuller (2021)](https://doi.org/10.1038/s41550-021-01448-3) and [Movshovitz density profiles](https://doi.org/10.7291/D1P07G) |
 | Atmosphere charts | [NASA Planetary Spectrum Generator](https://psg.gsfc.nasa.gov/), modeled 29 August 2026 |
 | Dated visible maps | Eight [OPAL](https://archive.stsci.edu/hlsp/opal) rotations, 2018 to 2025 (table below) |
+| Storm clouds of 2011 | [Cassini ISS global color map](https://doi.org/10.17189/rkkb-6y30), contrast-enhanced, 2011-08-11 (NASA PDS Atmospheres Node; [Wang et al. 2025](https://doi.org/10.1038/s41597-025-04392-3)) |
 
 [Inputs](source/manifest.json) · [Recipe](object.json) · [Credits](NOTICE.md) · [Contributor guide](../README.md)
 
@@ -53,17 +55,37 @@ full-disc albedo of Saturn, times a 5,772 K Planck spectrum, through the CIE
 [`source/photometry/karkoschka-1998-whole-disc-color.json`](source/photometry/karkoschka-1998-whole-disc-color.json).
 The tie allows for the limb law, so the flood-lit disc integrates to
 Karkoschka's color. The map then gets back its untied luminance with one
-factor on all three channels, 1.269, and a soft shoulder keeps bright texels
+factor on all three channels, 1.239, and a soft shoulder keeps bright texels
 from clipping. Spatial color differences stay the map's own. An independent
 spectrum agrees: Payne et al. (2026) gives green/red 0.863 and blue/red 0.589,
 where Karkoschka's spectrum gives 0.863 and 0.593.
 
-Lighting. The material overlays put back the limb darkening OPAL removed, with
-the Cycle 32 readme's Minnaert coefficients: k 0.80 in F631N (red) and 0.65 in
-F502N (green). The blue channel takes F467M's k 0.86, not F395N's 0.40; with
-F395N's k the limb turned gray-blue. The coefficients are recorded in
-`source/photometry/opal-2025-minnaert-*.json`. A `#fff1ea` solar multiplier,
-from the 5,772 K photosphere of NASA's
+Lighting. The material overlays put back the limb darkening OPAL removed. The
+Cycle 32 readme gives one Minnaert coefficient per filter: 0.40 in F395N, 0.86
+in F467M, 0.65 in F502N, 0.80 in F631N and 0.85 in F763M. A display channel
+shows a range of wavelengths, so each channel takes those coefficients weighted
+by the light it shows: Saturn's spectrum in sunlight through the CIE 1931
+observer, the computation behind the whole-disc color. Between two filters the
+coefficient is interpolated in wavelength, a join that is ours, and the
+methane-band filters FQ727N and FQ889N are left out. The result is k 0.798 for
+red, 0.698 for green and 0.728 for blue, written by
+[`display-limb.mts`](../../../packages/bake/authoring/saturn/display-limb.mts)
+to `source/photometry/opal-2025-minnaert-display-*.json`. A weighted sum of
+Minnaert laws is not a Minnaert law: the recorded power laws depart from the
+weighted profiles by at most 0.004, 0.0001 and 0.028 of the disc-centre
+brightness. Until 2026-10-05 each channel took its nearest filter (0.80, 0.65
+and 0.86): green darkened least and the limb turned olive.
+
+The law is held at the edge of its data, 86.3 degrees of emission, and under
+flood light the incidence is held with it. Until 2026-10-05 the 256-pixel
+frame floored a grazing texel's emission at one texel but not its incidence,
+so the law was held on one angle only and fell to black on scattered texels of
+the outermost ring. A texel is 8 screen pixels at 2x, and those texels read as
+dark dashes along the limb. Past the silhouette the overlay loses its color,
+so over space it only darkens; a texel the silhouette crosses keeps its color
+by the share of it that lies inside.
+
+A `#fff1ea` solar multiplier, from the 5,772 K photosphere of NASA's
 [Sun fact sheet](https://nssdc.gsfc.nasa.gov/planetary/factsheet/sunfact.html),
 is multiplied into the surface during preparation.
 
@@ -181,10 +203,71 @@ graticule marks it. The dates reuse the visible scene's rings and lighting.
 
 ![Dated OPAL map with the shared sequence controls](evidence/opal-dates-desktop.webp)
 
+## Cassini 2011
+
+The Cassini dataset is the contrast-enhanced color map of the PDS bundle
+[Cassini ISS Global Maps of Jupiter and Saturn](https://doi.org/10.17189/rkkb-6y30)
+(Li, West, Jiang and Knowles, 2023), described by
+[Wang, Li, Jiang and West (2025)](https://doi.org/10.1038/s41597-025-04392-3).
+Fifteen wide-angle frames of 2011-08-11, five each in the RED, GRN and BL1
+filters at 161 km per pixel, were mapped on a 0.1 degree grid of planetocentric
+latitude and west longitude. The band of disturbed clouds around the north is
+what the [great storm first seen on 5 December 2010](https://science.nasa.gov/resource/great-disturbances-2/)
+left behind.
+
+It is a dataset, not the default body. Its detail is finer than the Hubble
+map's: north of the equator the fine detail's correlation length along
+longitude is 0.14 to 0.18 degrees, against 0.23 to 0.33 for Hubble's 2025 map.
+But 17.7 % of the map holds no data, its values are 8-bit display levels
+stretched per color, not natural color, and it shows 2011.
+
+Preparation checked the file before using it:
+
+- **Row order.** The first stored row is 90 degrees north, though the `LAT_C`
+  card reads `-90:0.1:90`. The storm, in the north, and the rings' shadow, in
+  the south with the Sun 10.7 degrees north, fix the order.
+- **Longitude direction.** Stored column c is west longitude 0.1 c degrees,
+  though the `LON_W` card reads `360.0:-0.1:0.0`. Raw frame `W1691726068_1`,
+  projected with the geometry the
+  [PDS Ring-Moon Systems Node](https://opus.pds-rings.seti.org/opus/#/opusid=co-iss-w1691726068)
+  gives for it (sub-spacecraft longitude 297.1 degrees west), correlates 0.62
+  with the prepared dataset's storm band and 0.23 with its mirror image.
+- **A blank column.** The first stored column is zero on 1,595 of 1,801 rows.
+  The recipe crops it and takes the 0 degree meridian from the last column.
+- **No data.** The file is zero from 79.0 degrees north and from 82.1 degrees
+  south to the poles (planetocentric), on a line at the equator where the
+  rings crossed the disc, and from 5.4 to 17.1 degrees south, where the rings'
+  shadow fell. The recipe names those rows and the dataset draws the gray grid
+  there. The rows from 1.9 to 5.3 degrees south are dimmed by the same shadow
+  and are shown as archived.
+
+[The observation recipe](source/preparation/observations.json) reads the
+cube's three planes as red, green and blue, moves its rows from planetocentric
+latitude to the mesh's own and changes no color. The columns are point
+samples drawn as cells, 0.05 degrees east of their stated longitude. The
+dataset is lit with the default map's limb law: the archive removed the
+frames' own shading with an empirical method and publishes no coefficients.
+
 ## Evidence
 
 Source inspection found every dated map correlates more strongly with its
 component FITS rows in stored order than after a north/south flip.
+
+On 2026-10-05 the default view was captured in headless Chrome with a GPU, at
+1440 by 900 and 2x pixel density, on css.earth v0.6524 and on this version,
+and measured on the same rays through 32 degrees of the upper-left limb. Dark
+dips deeper than 12 levels, 3 pixels inside the edge, went from 29 to 3;
+Jupiter has none. Five pixels inside the edge, green/red went from 1.02 to
+0.89 and blue/red from 0.55 to 0.66. With shadows on, the lit lower-left limb
+went from 32 dips to 19 along 28 degrees. Safari was not measured: headless
+WebKit drew only the body's fill disc. Left before, right after, under flood
+light, at screen pixels:
+
+![The upper-left limb before and after](evidence/2026-10-05/limb-before-after.webp)
+
+The Cassini dataset in the app:
+
+![The Cassini 2011 dataset on Saturn](evidence/2026-10-05/cassini-2011-desktop.webp)
 
 ## Known problems
 
@@ -193,6 +276,9 @@ component FITS rows in stored order than after a north/south flip.
 - Interior layers are illustrations.
 - Narrow ring features are widened and brightened for readability; they do not establish optical depth or fully resolved ringlets.
 - Rotation is accelerated. The camera, shadows and background orientation are presentation choices, and source observations come from different dates.
-- The visible map's color balance is tied to one whole-disc spectrum from 1995; the 2025 map's own cloud colors are kept, but a seasonal change in Saturn's overall color since 1995 would not show. The tie sets channel ratios only; the map's overall brightness is still the archive TIF's arbitrary scale, kept at its untied mean, and its brightest 7 % of texels are compressed by a soft shoulder.
-- The map's blue channel is F395N (violet) data, displayed as sRGB blue with the F467M limb law. The navigation portrait and context image still crop the untied TIF.
+- The visible map's color balance is tied to one whole-disc spectrum from 1995; the 2025 map's own cloud colors are kept, but a seasonal change in Saturn's overall color since 1995 would not show. The tie sets channel ratios only; the map's overall brightness is still the archive TIF's arbitrary scale, kept at its untied mean, and its brightest 5 % of texels are compressed by a soft shoulder.
+- The map's blue channel is F395N (violet) data, displayed as sRGB blue. Each display channel's limb law is a weighted mean of OPAL's per-filter coefficients, interpolated between filters. The navigation portrait and context image still crop the untied TIF.
+- The visible map is Hubble's, 1,800 pixels around the planet. At the default view on a 2x screen one source pixel covers 1.8 screen pixels, against 0.9 on Jupiter, so Saturn is softer. A 4,096-pixel body image showed 4 % more fine detail than the shipped 2,048 in a composed default view (2026-10-05) and was not shipped.
+- The Cassini 2011 dataset is the archive's contrast-enhanced color with no calibration, lit with the Hubble map's limb law under the present scene's rings.
+- The limb overlay's frames are 256 pixels wide and drawn 4 times larger. With shadows on, the lit limb still shows dashes, fewer and fainter: 19 dark dips along 28 degrees of it, where css.earth v0.6524 had 32, and half the fine-scale brightness variation (8.0 against 18.6 levels). There the law brightens the limb and the overlay turns black past the silhouette.
 - The material overlay has one color and alpha per texel, so the per-channel limb law is exact for the prepared surface's mean color and approximate for colors far from it ([planet limbs](../../../docs/surface-preparation.md#planet-limbs-from-published-laws)). OPAL's coefficients are for near-zero phase; directional frames use them at every phase.

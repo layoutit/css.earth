@@ -6,7 +6,7 @@ import { OBJECTS, SCENE_OBJECTS } from '../objects.mts';
 import { seedObjectDirectory } from '../object-directory.mts';
 // A page knows the objects it has read; this test holds the whole registry.
 seedObjectDirectory(OBJECTS);
-import contextInput from '../../src/objects/sun/prepared/world-context.json' with { type: 'json' };
+import contextInput from '../../src/objects/observable-universe/prepared/world-context.json' with { type: 'json' };
 import { STELLAR_SYSTEMS, SYSTEM_FRAMING_RADII, SYSTEM_VIEWS, SYSTEM_VIEW_HOSTS, loadSystemView, systemFramingRadii, systemFramingRect, systemViewTarget } from '../system-framing.mts';
 import { bodyViewAtCamera } from '../zoom-scope.mts';
 import { createPreparedWorldNavigation } from '../prepared-world-navigation.mts';

@@ -8,11 +8,19 @@ CO-SR-UVIS-HSP-2/4-OCC-V3.0), from the PDS Ring-Moon Systems Node.
 
 The globe's limb law is the Minnaert table of the Hubble OPAL Saturn 2025
 README (NASA, ESA and the OPAL team), transcribed as facts in
-`source/photometry/`. The visible map's color balance is tied to a color
+`source/photometry/` and weighted there over each display channel. The
+visible map's color balance is tied to a color
 computed from E. Karkoschka's 1995 full-disc albedo spectrum of Saturn
 (Icarus 133, 1998), archived by the NASA PDS Atmospheres Node; the computed
 color is recorded in `source/photometry/`, and the table is cited, not
 redistributed.
+
+The Cassini 2011 dataset is the contrast-enhanced color map of the PDS bundle
+Cassini ISS Global Maps of Jupiter and Saturn (L. Li, R. A. West, X. Jiang
+and B. Knowles; Cassini ISS, NASA/JPL-Caltech/Space Science Institute; NASA
+PDS Atmospheres Node, doi:10.17189/rkkb-6y30), a public NASA archive product
+described by Wang, Li, Jiang and West (2025, Scientific Data). No figure of
+that paper is reproduced.
 
 The ultraviolet and methane observation inputs are Hubble OPAL products from
 NASA, ESA, and the OPAL team. The atmospheric charts are NASA Planetary

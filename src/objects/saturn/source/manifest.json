@@ -1676,6 +1676,105 @@
         "kind": "local",
         "reason": "Project-authored processing settings for the separately recorded source observations."
       }
+    },
+    {
+      "id": "cassini-iss-2011-color-map-enhanced",
+      "path": "cassini-iss/Cassini_ISS_RGB_Saturn_global_color_map_contrast_enhance.fits",
+      "origin": "https://pds-atmospheres.nmsu.edu/PDS/data/PDS4/co_iss_global-maps/data_derived/Cassini_ISS_RGB_Saturn_global_color_map_contrast_enhance.fits",
+      "credit": "L. Li, R. A. West, X. Jiang and B. Knowles; Cassini ISS, NASA/JPL-Caltech/Space Science Institute; NASA Planetary Data System, Atmospheres Node",
+      "license": "NASA PDS archive data, urn:nasa:pds:co_iss_global-maps::1.0; not copyrighted, cite the data set",
+      "acquisition": "Product of the PDS bundle Cassini ISS Global Maps of Jupiter and Saturn: the contrast-enhanced RED/GRN/BL1 color map of Saturn, 2011-08-11. Taken on 2026-10-05 from the Internet Archive's 2024-11-18 capture of the bundle archive, co_iss_global-maps.tar.gz, while the node refused connections; the file has the 77,829,120 bytes the PDS registry lists. See preparation/acquisition.json.",
+      "redistribution": "checked scientific archive product with full credit",
+      "consumers": [
+        "datasets"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "cassini",
+            "missionId": "cassini",
+            "evidence": "https://doi.org/10.17189/rkkb-6y30"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-cassini-iss-global-maps-v1",
+            "role": "material",
+            "evidence": "Product cassini_iss_rgb_saturn_global_color_map_contrast_enhance of the bundle's derived data collection; its label is stored beside it.",
+            "locator": "data_derived/Cassini_ISS_RGB_Saturn_global_color_map_contrast_enhance.fits"
+          }
+        ]
+      }
+    },
+    {
+      "id": "cassini-iss-2011-color-map-enhanced-label",
+      "path": "cassini-iss/Cassini_ISS_RGB_Saturn_global_color_map_contrast_enhance.xml",
+      "origin": "https://pds-atmospheres.nmsu.edu/PDS/data/PDS4/co_iss_global-maps/data_derived/Cassini_ISS_RGB_Saturn_global_color_map_contrast_enhance.xml",
+      "credit": "L. Li, R. A. West, X. Jiang and B. Knowles; Cassini ISS, NASA/JPL-Caltech/Space Science Institute; NASA Planetary Data System, Atmospheres Node",
+      "license": "NASA PDS archive data, urn:nasa:pds:co_iss_global-maps::1.0; not copyrighted, cite the data set",
+      "acquisition": "PDS4 label of the color map, from the same capture of the bundle archive: map projection, planetocentric latitude, positive-west longitude, radii and array layout.",
+      "redistribution": "checked scientific archive product with full credit",
+      "consumers": [
+        "datasets"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "cassini",
+            "missionId": "cassini",
+            "evidence": "https://doi.org/10.17189/rkkb-6y30"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-cassini-iss-global-maps-v1",
+            "role": "material",
+            "evidence": "PDS4 label of the color map product.",
+            "locator": "data_derived/Cassini_ISS_RGB_Saturn_global_color_map_contrast_enhance.xml"
+          }
+        ]
+      }
+    },
+    {
+      "id": "cassini-iss-2011-color-map-enhanced-frames",
+      "path": "cassini-iss/Saturn_ISS_RGB_global_map_inf.txt",
+      "origin": "https://pds-atmospheres.nmsu.edu/PDS/data/PDS4/co_iss_global-maps/data_derived/Image_Information/Saturn_ISS_RGB_global_map_inf.txt",
+      "credit": "L. Li, R. A. West, X. Jiang and B. Knowles; Cassini ISS, NASA/JPL-Caltech/Space Science Institute; NASA Planetary Data System, Atmospheres Node",
+      "license": "NASA PDS archive data, urn:nasa:pds:co_iss_global-maps::1.0; not copyrighted, cite the data set",
+      "acquisition": "The bundle's list of the fifteen wide-angle frames the color map was made from, with each frame's time, resolution, phase angle and sub-spacecraft and sub-solar latitudes; from the same capture of the bundle archive.",
+      "redistribution": "checked scientific archive product with full credit",
+      "consumers": [
+        "datasets"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "cassini",
+            "missionId": "cassini",
+            "evidence": "https://doi.org/10.17189/rkkb-6y30"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-cassini-iss-global-maps-v1",
+            "role": "material",
+            "evidence": "Supplemental product of the color map: the frames and geometry it was made from.",
+            "locator": "data_derived/Image_Information/Saturn_ISS_RGB_global_map_inf.txt"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
@@ -1696,14 +1795,14 @@
     },
     {
       "path": "photometry/opal-2025-minnaert-f631n.json",
-      "purpose": "Hubble OPAL Minnaert coefficient of the 2025a color map (F631N, F502N, F395N), red channel (F631N): the correction OPAL divided out of the map, which the lighting overlay puts back.",
+      "purpose": "Hubble OPAL Minnaert coefficient of F631N from the 2025 Saturn README: the correction OPAL divided out of that filter's map, and one of the filters the display channels' limb law weighs.",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
           {
             "catalogueId": "reference-opal-saturn-2025-readme",
             "role": "method",
-            "evidence": "The OPAL README's Minnaert table gives k = 0.8 for F631N, the correction applied to remove limb darkening before projection. The fitted phase range is the Earth-based phase of the map's epoch, 2.4-2.5 degrees on 29-30 August 2025, from JPL Horizons; the README states no angle ranges. The fitted emission range ends at 86.3 degrees: the outermost pixel of the WFC3/UVIS disc at the map's epoch (angular diameter from JPL Horizons, 0.0395 arcsec UVIS pixels), beyond which the observation resolved nothing.",
+            "evidence": "The OPAL README's Minnaert table gives k = 0.80 for F631N (\"F631N 0.80 .00362\"), the correction applied to remove limb darkening before projection. The fitted phase range is the Earth-based phase of the map's epoch, 2.4-2.5 degrees on 29-30 August 2025, from JPL Horizons; the README states no angle ranges. The fitted emission range ends at 86.3 degrees: the outermost pixel of the WFC3/UVIS disc at the map's epoch (angular diameter from JPL Horizons, 0.0395 arcsec UVIS pixels), beyond which the observation resolved nothing.",
             "locator": "Minnaert table, F631N row"
           }
         ]
@@ -1714,14 +1813,14 @@
     },
     {
       "path": "photometry/opal-2025-minnaert-f502n.json",
-      "purpose": "Hubble OPAL Minnaert coefficient of the 2025a color map (F631N, F502N, F395N), green channel (F502N): the correction OPAL divided out of the map, which the lighting overlay puts back.",
+      "purpose": "Hubble OPAL Minnaert coefficient of F502N from the 2025 Saturn README: the correction OPAL divided out of that filter's map, and one of the filters the display channels' limb law weighs.",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
           {
             "catalogueId": "reference-opal-saturn-2025-readme",
             "role": "method",
-            "evidence": "The OPAL README's Minnaert table gives k = 0.65 for F502N, the correction applied to remove limb darkening before projection. The fitted phase range is the Earth-based phase of the map's epoch, 2.4-2.5 degrees on 29-30 August 2025, from JPL Horizons; the README states no angle ranges. The fitted emission range ends at 86.3 degrees: the outermost pixel of the WFC3/UVIS disc at the map's epoch (angular diameter from JPL Horizons, 0.0395 arcsec UVIS pixels), beyond which the observation resolved nothing.",
+            "evidence": "The OPAL README's Minnaert table gives k = 0.65 for F502N (\"F502N 0.65 .00285\"), the correction applied to remove limb darkening before projection. The fitted phase range is the Earth-based phase of the map's epoch, 2.4-2.5 degrees on 29-30 August 2025, from JPL Horizons; the README states no angle ranges. The fitted emission range ends at 86.3 degrees: the outermost pixel of the WFC3/UVIS disc at the map's epoch (angular diameter from JPL Horizons, 0.0395 arcsec UVIS pixels), beyond which the observation resolved nothing.",
             "locator": "Minnaert table, F502N row"
           }
         ]
@@ -1732,14 +1831,14 @@
     },
     {
       "path": "photometry/opal-2025-minnaert-f467m.json",
-      "purpose": "Hubble OPAL Minnaert coefficient for the blue channel of the 2025a color map: the F467M coefficient, not the F395N filter the channel was imaged in, because the map's display color is tied to Saturn's true color, whose blue channel is carried by light near 467 nm. The lighting overlay puts it back relative to the flood-lit disc centre.",
+      "purpose": "Hubble OPAL Minnaert coefficient of F467M from the 2025 Saturn README: the correction OPAL divided out of that filter's map, and one of the filters the display channels' limb law weighs.",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
           {
             "catalogueId": "reference-opal-saturn-2025-readme",
             "role": "method",
-            "evidence": "The OPAL README's Minnaert table gives k = 0.86 for F467M (\"F467M 0.86 .00507\"), the correction applied to remove limb darkening before projection; F467M is the README filter closest to the sRGB blue primary. The F395N coefficient, 0.40, belongs to violet light that the true-color blue channel barely contains (13 % of it comes from 380-429 nm in Saturn's sunlit spectrum). The fitted phase range is the Earth-based phase of the map's epoch, 2.4-2.5 degrees on 29-30 August 2025, from JPL Horizons; the README states no angle ranges. The fitted emission range ends at 86.3 degrees: the outermost pixel of the WFC3/UVIS disc at the map's epoch (angular diameter from JPL Horizons, 0.0395 arcsec UVIS pixels), beyond which the observation resolved nothing.",
+            "evidence": "The OPAL README's Minnaert table gives k = 0.86 for F467M (\"F467M 0.86 .00507\"), the correction applied to remove limb darkening before projection. The fitted phase range is the Earth-based phase of the map's epoch, 2.4-2.5 degrees on 29-30 August 2025, from JPL Horizons; the README states no angle ranges. The fitted emission range ends at 86.3 degrees: the outermost pixel of the WFC3/UVIS disc at the map's epoch (angular diameter from JPL Horizons, 0.0395 arcsec UVIS pixels), beyond which the observation resolved nothing.",
             "locator": "Minnaert table, F467M row"
           }
         ]
@@ -1765,6 +1864,114 @@
       "origin": "https://pds-atmospheres.nmsu.edu/PDS/data/gbat_0001/data/1995low.tab",
       "credit": "E. Karkoschka (1998), Icarus 133, 134-146, archived by the NASA Planetary Data System Atmospheres Node; color computation: cssEarth.",
       "acquisition": "Color computed once from the cited PDS table and recorded in a project document; the table itself is not stored with the body."
+    },
+    {
+      "path": "photometry/opal-2025-minnaert-f395n.json",
+      "purpose": "Hubble OPAL Minnaert coefficient of F395N from the 2025 Saturn README: the correction OPAL divided out of that filter's map, and one of the filters the display channels' limb law weighs.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "reference-opal-saturn-2025-readme",
+            "role": "method",
+            "evidence": "The OPAL README's Minnaert table gives k = 0.40 for F395N (\"F395N 0.40 .00231\"), the correction applied to remove limb darkening before projection. The fitted phase range is the Earth-based phase of the map's epoch, 2.4-2.5 degrees on 29-30 August 2025, from JPL Horizons; the README states no angle ranges. The fitted emission range ends at 86.3 degrees: the outermost pixel of the WFC3/UVIS disc at the map's epoch (angular diameter from JPL Horizons, 0.0395 arcsec UVIS pixels), beyond which the observation resolved nothing.",
+            "locator": "Minnaert table, F395N row"
+          }
+        ]
+      },
+      "origin": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2025_all_v1_readme.txt",
+      "credit": "Hubble OPAL program (A. A. Simon, M. H. Wong and team), NASA/ESA/STScI; transcription: cssEarth.",
+      "acquisition": "Parameter values transcribed from the cited source into a project document; no data file was downloaded."
+    },
+    {
+      "path": "photometry/opal-2025-minnaert-f763m.json",
+      "purpose": "Hubble OPAL Minnaert coefficient of F763M from the 2025 Saturn README: the correction OPAL divided out of that filter's map, and one of the filters the display channels' limb law weighs.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "reference-opal-saturn-2025-readme",
+            "role": "method",
+            "evidence": "The OPAL README's Minnaert table gives k = 0.85 for F763M (\"F763M 0.85 .00376\"), the correction applied to remove limb darkening before projection. The fitted phase range is the Earth-based phase of the map's epoch, 2.4-2.5 degrees on 29-30 August 2025, from JPL Horizons; the README states no angle ranges. The fitted emission range ends at 86.3 degrees: the outermost pixel of the WFC3/UVIS disc at the map's epoch (angular diameter from JPL Horizons, 0.0395 arcsec UVIS pixels), beyond which the observation resolved nothing.",
+            "locator": "Minnaert table, F763M row"
+          }
+        ]
+      },
+      "origin": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2025_all_v1_readme.txt",
+      "credit": "Hubble OPAL program (A. A. Simon, M. H. Wong and team), NASA/ESA/STScI; transcription: cssEarth.",
+      "acquisition": "Parameter values transcribed from the cited source into a project document; no data file was downloaded."
+    },
+    {
+      "path": "photometry/opal-2025-minnaert-display-red.json",
+      "purpose": "Saturn's Minnaert limb coefficient for the display's red channel: the OPAL README's coefficients weighted by the light that channel shows. The lighting overlay puts it back relative to the flood-lit disc centre.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "reference-opal-saturn-2025-readme",
+            "role": "method",
+            "evidence": "Derived by packages/bake/authoring/saturn/display-limb.mts from the README's coefficients for F395N, F467M, F502N, F631N and F763M (0.40, 0.86, 0.65, 0.80, 0.85; the per-filter records beside this one), interpolated in wavelength between filters and held outside them, each wavelength weighted by its share of the sRGB red channel: k = 0.798. A weighted sum of Minnaert laws is not a Minnaert law; this exponent fits the weighted profile over the flood-lit disc out to 86.3 degrees, where the power law departs from the profile by at most 0.004. The methane-band filters FQ727N and FQ889N are left out. The phase and emission ranges are the per-filter records'.",
+            "locator": "Minnaert table, F395N, F467M, F502N, F631N and F763M rows"
+          },
+          {
+            "catalogueId": "karkoschka-1998-jovian-spectrophotometry-1995-low",
+            "role": "reference",
+            "evidence": "The weights are the SATURN ALBEDO column of 1995LOW.TAB times a 5,772 K Planck spectrum through the CIE 1931 2 degree observer into linear sRGB, the computation of the whole-disc color record; the command checks that the same spectrum reproduces that record's channel ratios.",
+            "locator": "1995LOW.TAB, columns 2 (air wavelength) and 5 (Saturn albedo), 380-780 nm"
+          }
+        ]
+      },
+      "origin": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2025_all_v1_readme.txt",
+      "credit": "Hubble OPAL program (A. A. Simon, M. H. Wong and team), NASA/ESA/STScI; E. Karkoschka (1998), Icarus 133, 134-146; weighting: cssEarth.",
+      "acquisition": "Derived by packages/bake/authoring/saturn/display-limb.mts from the per-filter records and the cited PDS table; the table itself is not stored with the body."
+    },
+    {
+      "path": "photometry/opal-2025-minnaert-display-green.json",
+      "purpose": "Saturn's Minnaert limb coefficient for the display's green channel: the OPAL README's coefficients weighted by the light that channel shows. The lighting overlay puts it back relative to the flood-lit disc centre.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "reference-opal-saturn-2025-readme",
+            "role": "method",
+            "evidence": "Derived by packages/bake/authoring/saturn/display-limb.mts from the README's coefficients for F395N, F467M, F502N, F631N and F763M (0.40, 0.86, 0.65, 0.80, 0.85; the per-filter records beside this one), interpolated in wavelength between filters and held outside them, each wavelength weighted by its share of the sRGB green channel: k = 0.698. A weighted sum of Minnaert laws is not a Minnaert law; this exponent fits the weighted profile over the flood-lit disc out to 86.3 degrees, where the power law departs from the profile by at most 0.0001. The methane-band filters FQ727N and FQ889N are left out. The phase and emission ranges are the per-filter records'.",
+            "locator": "Minnaert table, F395N, F467M, F502N, F631N and F763M rows"
+          },
+          {
+            "catalogueId": "karkoschka-1998-jovian-spectrophotometry-1995-low",
+            "role": "reference",
+            "evidence": "The weights are the SATURN ALBEDO column of 1995LOW.TAB times a 5,772 K Planck spectrum through the CIE 1931 2 degree observer into linear sRGB, the computation of the whole-disc color record; the command checks that the same spectrum reproduces that record's channel ratios.",
+            "locator": "1995LOW.TAB, columns 2 (air wavelength) and 5 (Saturn albedo), 380-780 nm"
+          }
+        ]
+      },
+      "origin": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2025_all_v1_readme.txt",
+      "credit": "Hubble OPAL program (A. A. Simon, M. H. Wong and team), NASA/ESA/STScI; E. Karkoschka (1998), Icarus 133, 134-146; weighting: cssEarth.",
+      "acquisition": "Derived by packages/bake/authoring/saturn/display-limb.mts from the per-filter records and the cited PDS table; the table itself is not stored with the body."
+    },
+    {
+      "path": "photometry/opal-2025-minnaert-display-blue.json",
+      "purpose": "Saturn's Minnaert limb coefficient for the display's blue channel: the OPAL README's coefficients weighted by the light that channel shows. The lighting overlay puts it back relative to the flood-lit disc centre.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "reference-opal-saturn-2025-readme",
+            "role": "method",
+            "evidence": "Derived by packages/bake/authoring/saturn/display-limb.mts from the README's coefficients for F395N, F467M, F502N, F631N and F763M (0.40, 0.86, 0.65, 0.80, 0.85; the per-filter records beside this one), interpolated in wavelength between filters and held outside them, each wavelength weighted by its share of the sRGB blue channel: k = 0.728. A weighted sum of Minnaert laws is not a Minnaert law; this exponent fits the weighted profile over the flood-lit disc out to 86.3 degrees, where the power law departs from the profile by at most 0.028. The methane-band filters FQ727N and FQ889N are left out. The phase and emission ranges are the per-filter records'.",
+            "locator": "Minnaert table, F395N, F467M, F502N, F631N and F763M rows"
+          },
+          {
+            "catalogueId": "karkoschka-1998-jovian-spectrophotometry-1995-low",
+            "role": "reference",
+            "evidence": "The weights are the SATURN ALBEDO column of 1995LOW.TAB times a 5,772 K Planck spectrum through the CIE 1931 2 degree observer into linear sRGB, the computation of the whole-disc color record; the command checks that the same spectrum reproduces that record's channel ratios.",
+            "locator": "1995LOW.TAB, columns 2 (air wavelength) and 5 (Saturn albedo), 380-780 nm"
+          }
+        ]
+      },
+      "origin": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2025_all_v1_readme.txt",
+      "credit": "Hubble OPAL program (A. A. Simon, M. H. Wong and team), NASA/ESA/STScI; E. Karkoschka (1998), Icarus 133, 134-146; weighting: cssEarth.",
+      "acquisition": "Derived by packages/bake/authoring/saturn/display-limb.mts from the per-filter records and the cited PDS table; the table itself is not stored with the body."
     }
   ]
 }

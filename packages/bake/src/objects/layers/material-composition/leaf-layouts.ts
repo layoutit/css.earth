@@ -12,8 +12,8 @@ function declarations(stylesheet: string, selector: string): Record<string,strin
 export function prepareLayeredLeafLayouts({scene,stylesheet,config}: {scene: {interior: {shells: readonly {className:string}[]}}; stylesheet: string; config: Pick<LayeredPresentationRecipe,'namespace'|'stylesheet'>}) {
   const pixelLength=/^\d+(?:\.\d+)?px$/;
   const common=declarations(stylesheet,config.stylesheet.scope+'.polycss-scene s');
-  const width=common.width?.match(/^var\(--polycss-atlas-width,\s*([^)]*)\)$/)?.[1];
-  const height=common.height?.match(/^var\(--polycss-atlas-height,\s*([^)]*)\)$/)?.[1];
+  // The stylesheet states the leaf box as plain lengths: no custom property is set where a body is drawn.
+  const {width,height}=common;
   if(!width||!height||!pixelLength.test(width)||!pixelLength.test(height))throw new Error('Prepared leaf defaults must be explicit positive pixel lengths.');
   const classes: Record<string,{width:string;height:string;backgroundSize:string}>={};
   for(const shell of scene.interior.shells) {

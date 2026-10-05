@@ -26,9 +26,9 @@ test('a whole-disc color record refuses unknown keys, a wrong schema and non-pos
 
 test('a map with its limb law divided out is tied through the law\'s disc means, which for Minnaert are 2 / (2k + 1)', async () => {
   const saturn = resolve(projectRoot(import.meta.url), 'src/objects/saturn/source');
-  const law = await loadLimbLaw(saturn, ['photometry/opal-2025-minnaert-f631n.json', 'photometry/opal-2025-minnaert-f502n.json', 'photometry/opal-2025-minnaert-f467m.json']);
+  const law = await loadLimbLaw(saturn, ['photometry/opal-2025-minnaert-display-red.json', 'photometry/opal-2025-minnaert-display-green.json', 'photometry/opal-2025-minnaert-display-blue.json']);
   // Held at 86.3 degrees, the OPAL disc edge, the means stay within 0.001 of the full-disc Minnaert integral.
-  floodDiscMean(law).forEach((mean, channel) => assert.ok(Math.abs(mean - 2 / (2 * [0.8, 0.65, 0.86][channel]! + 1)) < 1e-3, `channel ${channel}: ${mean}`));
+  floodDiscMean(law).forEach((mean, channel) => assert.ok(Math.abs(mean - 2 / (2 * [0.798, 0.698, 0.728][channel]! + 1)) < 1e-3, `channel ${channel}: ${mean}`));
   assert.deepEqual(displayBandRatios(parseWholeDiscColor(record), [0.5, 1, 0.25]).ratios, { green: 0.4, blue: 1 });
   assert.throws(() => displayBandRatios(parseWholeDiscColor(record), [1, 0, 1]), /disc means must be positive/u);
 });

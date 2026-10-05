@@ -5,7 +5,7 @@ import { isDeepStrictEqual } from 'node:util';
 import { parsePreparedWorldContext } from '@cssearth/objects';
 import { createWorldContextPlanner, type WorldContextView } from './world-context-planner.js';
 
-const plan = parsePreparedWorldContext(JSON.parse(await readFile(new URL('../../../../../src/objects/sun/prepared/world-context.json', import.meta.url), 'utf8')));
+const plan = parsePreparedWorldContext(JSON.parse(await readFile(new URL('../../../../../src/objects/observable-universe/prepared/world-context.json', import.meta.url), 'utf8')));
 
 test('a selected satellite overview retains its selected host locator', () => {
   const host = plan.bodies.find(body => body.id === 'jupiter')!;
@@ -35,11 +35,13 @@ test('a selected satellite overview retains its selected host locator', () => {
   const close = orbits(view), closePlain = orbits({ ...view, overviewSelection: false });
   const dimmed = orbits(wide), plain = orbits({ ...wide, overviewSelection: false });
   const hovered = orbits({ ...wide, bodies: wide.bodies.map((body, at) => at === index('saturn') ? { ...body, hovered: true } : body) });
-  for (const id of ['saturn', 'jupiter']) assert.deepEqual([dimmed.get(id), plain.get(id), hovered.get(id)], [.25, 1, id === 'saturn' ? 1 : .25], id);
+  assert.equal(close.get('jupiter'), .25);
   // On the host's own page its path is the subject's and stays whole; the other planets' paths are still context.
-  const page = orbits({ ...wide, overview: false, overviewSelection: false });
+  const page = orbits({ ...wide, overview: false, overviewSelection: false }), relaxed = page.get('saturn')!;
   assert.equal(page.get('jupiter'), 1);
-  assert.ok(page.get('saturn')! >= .25 && page.get('saturn')! < 1);
+  assert.ok(relaxed > .25 && relaxed < 1);
+  // Pulled back towards the parent system, the moons view relaxes the dimming as the page does, the host's own path with it.
+  for (const id of ['saturn', 'jupiter']) assert.deepEqual([dimmed.get(id), plain.get(id), hovered.get(id)], [relaxed, 1, id === 'saturn' ? 1 : relaxed], id);
   assert.ok(moons.some(id => close.get(id) === 1));
   for (const id of moons) assert.equal(close.get(id), closePlain.get(id), id);
   // One emphasis per body: a highlighted set dims the rest, another star's bodies read as not belonging inside the

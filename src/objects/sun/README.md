@@ -14,7 +14,7 @@ Source selections, recorded trials and open questions are in the [investigation 
 | Corona · 171 Å | SDO AIA 171 Å CR2311 FITS | Ultraviolet light from the quiet corona and upper transition region. |
 | Corona · 193 Å | SDO AIA 193 Å CR2311 FITS | A different band sensitive to coronal and hot flare plasma. The arrows switch between the two corona maps. |
 
-The Solar System overview's credits also include the planets, moons, asteroids and comets in the [shared world](source/presentation/solar-system.json). Each body keeps its imagery, measurements and full acknowledgments in its [own object package](../). The [shared orbital preparation](../../../packages/bake/cli/prepare-solar-geometry.mts) combines analytical models with retained Horizons states at the displayed scene epoch; these are not live ephemerides. The [world navigation recipe](source/navigation/universe.json) samples every prepared orbit at 90 vertices.
+The Solar System overview's credits also include the planets, moons, asteroids and comets in the [shared world](source/presentation/solar-system.json). Each body keeps its imagery, measurements and full acknowledgments in its [own object package](../). The [shared orbital preparation](../../../packages/bake/cli/prepare-solar-geometry.mts) combines analytical models with retained Horizons states at the displayed scene epoch; these are not live ephemerides. The [world's definition](../observable-universe/source/navigation/universe.json), in the root object's package, samples every prepared orbit at 90 vertices.
 
 ## Processing
 

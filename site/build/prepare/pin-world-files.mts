@@ -2,7 +2,8 @@
  * Pins the world's per-object files into each object's inventory. The world step writes them into many packages: each
  * object's bodies (`prepared/members.json`), their orbit banks (`prepared/orbits/`), the places of its children's systems
  * (`prepared/places.json`), its system views (`prepared/views/`) and the dots of the plain stars inside it
- * (`prepared/plain-stars.bin`), and the root object's summary and index (`prepared/world.json`, `prepared/world-index.json`).
+ * (`prepared/plain-stars.bin`), and the root object's summary, index and full context (`prepared/world.json`,
+ * `prepared/world-index.json`, `prepared/world-context.json`).
  * `plain-stars-far.bin` was the world's own second bank: its row leaves with the file. Each package's inventory rows
  * for those files are replaced by what the bake left on disk; every other row stays as it is.
  *

@@ -29,52 +29,6 @@
       "line": 18
     },
     {
-      "op": "add-file",
-      "path": "site/content/moon-catalogue.mts",
-      "note": "Split catalogue parsing, cached source catalogue and catalogueMoons into a runtime-safe reader; preparation keeps search-based ordering.",
-      "change": "Split the moon catalogue reader",
-      "imports": [
-        {
-          "to": "site/source/moon-catalogues.json",
-          "kind": "asset"
-        },
-        {
-          "to": "packages/objects/src/sources/index.ts",
-          "kind": "value"
-        }
-      ],
-      "id": "add-file-moon-catalogue"
-    },
-    {
-      "op": "retarget",
-      "from": "site/content/object-children.mts",
-      "to": "site/build/prepare/prepare-body-moons.mts",
-      "note": "Read catalogueMoons from the split reader; production must never import build preparation.",
-      "newTo": "site/content/moon-catalogue.mts",
-      "change": "Split the moon catalogue reader",
-      "id": "retarget-object-children-moon-catalogue",
-      "line": 3
-    },
-    {
-      "op": "remove-import",
-      "from": "site/build/prepare/prepare-body-moons.mts",
-      "to": "site/source/moon-catalogues.json",
-      "note": "Move the source catalogue import with its parser into the reader; preparation calls that reader.",
-      "kind": "asset",
-      "change": "Split the moon catalogue reader",
-      "id": "remove-import-prepare-body-moons-moon-catalogues",
-      "line": 4
-    },
-    {
-      "op": "add-import",
-      "from": "site/build/prepare/prepare-body-moons.mts",
-      "to": "site/content/moon-catalogue.mts",
-      "kind": "value",
-      "note": "Use the single catalogue reader for preparation too; preserve the named-moon eligibility policy in preparation.",
-      "change": "Split the moon catalogue reader",
-      "id": "add-import-prepare-body-moons-moon-catalogue"
-    },
-    {
       "id": "add-file-scene-imports",
       "op": "add-file",
       "change": "Relocate queued loader owners",
@@ -207,15 +161,6 @@
         "add-file-navigation-href",
         "add-import-navigation-history-navigation-href",
         "retarget-application-world-resources-navigation-href"
-      ]
-    },
-    {
-      "id": "split-the-moon-catalogue-reader",
-      "edits": [
-        "add-file-moon-catalogue",
-        "retarget-object-children-moon-catalogue",
-        "remove-import-prepare-body-moons-moon-catalogues",
-        "add-import-prepare-body-moons-moon-catalogue"
       ]
     },
     {
