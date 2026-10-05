@@ -32,7 +32,9 @@ test('workflow always gates refactors and executes selector from merge-base', as
     assert.ok(commands.some(step => step.run.includes('git archive "$comparison_base"')));
     assert.ok(commands.at(-1)?.run.includes('$RUNNER_TEMP/comparison-gate/'));
   }
-  assert.equal(workflow.jobs['build-compare'].if, "needs.changes.outputs.run_production == 'true'");
+  // Pull requests run only the gate; the comparison is local work, runnable here by hand.
+  assert.equal(workflow.jobs.changes.if, "github.event_name == 'workflow_dispatch'");
+  assert.equal(workflow.jobs['build-compare'].if, "github.event_name == 'workflow_dispatch' && needs.changes.outputs.run_production == 'true'");
   const steps = workflow.jobs['build-compare'].steps;
   assert.equal(steps.filter((step: { uses?: string }) => step.uses?.startsWith('actions/checkout@')).length, 1);
   assert.ok(steps.some((step: { run?: string }) => step.run?.includes('git worktree add')));
@@ -152,11 +154,12 @@ test('a declaration names its own change, so two refactors never share one and t
   assert.doesNotThrow(() => requireFreshDeclaration('M\t.github/site-refactor.json', first, { mode: 'semantic', moves: {} }));
 });
 
-test('only main saves sealed base evidence; head starts before restore and the watcher requires a terminal result', async () => {
+test('only a manual run saves sealed base evidence; head starts before restore and the watcher requires a terminal result', async () => {
   const source = await readFile(new URL('../../workflows/site-safety-net.yml', import.meta.url), 'utf8');
   const workflow = parse(source);
-  assert.equal(workflow.jobs['base-cache'].if, "github.event_name == 'push'");
-  assert.deepEqual(workflow.on.push.branches, ['main']);
+  assert.equal(workflow.jobs['base-cache'].if, "github.event_name == 'workflow_dispatch'");
+  assert.equal(workflow.on.push, undefined, 'no push run: CI never builds a comparison base');
+  assert.deepEqual(workflow.on.pull_request.types, ['opened', 'synchronize', 'reopened', 'labeled', 'unlabeled']);
   assert.equal(workflow.on.workflow_dispatch.inputs['no-base-cache'].type, 'boolean');
   const producer = workflow.jobs['base-cache'].steps;
   assert.ok(producer.some((step: { run?: string }) => step.run?.includes('produce-base.mts')));

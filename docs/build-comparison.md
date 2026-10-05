@@ -1,5 +1,7 @@
 # Built-site comparison
 
+**Where it runs.** The comparison is local work. Run it on your machine before you open a refactor PR (`node .github/scripts/build-compare/ci.mts --head <worktree> --base <worktree>`, plus the server answers and the performance guard), and paste its summary into the PR body. Pull requests run only the refactor declaration gate, which takes seconds and builds nothing. The `Site safety net` workflow can still run the full comparison by hand (`workflow_dispatch`), but nothing triggers it automatically.
+
 The comparator checks the complete final Astro output, with production mode,
 `ASSET_ORIGIN=https://earth-assets.lowpoly.cc`, strict prepared-asset availability,
 a pinned source revision and version, UTC and the C locale. It adds hidden client/worker source maps
