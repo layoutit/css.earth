@@ -1,6 +1,6 @@
 # Cassiopeia A
 
-Cassiopeia A, the supernova remnant, as an object of the world: its place, its card and its list marker. It has no surface. Its dataset shows the [Cassiopeia A image layers](../cassiopeia-a-layers/README.md) bank, whose README holds the sources, processing and known problems of the picture.
+Cassiopeia A, the supernova remnant, as an object of the world: its place, its card and its list marker. It has no surface. Its two datasets show the [Cassiopeia A image layers](../cassiopeia-a-layers/README.md) bank, Webb's near-infrared picture, and the [mid-infrared layers](../cassiopeia-a-miri-layers/README.md) bank, its mid-infrared one; each README holds the sources, processing and known problems of its picture.
 
 ## Sources
 

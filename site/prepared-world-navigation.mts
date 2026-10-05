@@ -17,9 +17,8 @@ type FlightSample = ReturnType<typeof createSelectionFlightSample>;
 type FlightAnchors = Parameters<typeof advanceSelectionFlightInto>[1];
 interface Timing {mark(name: string): void;}
 interface TargetRequest {objectId: string; fromId: string; mount?: ShellCamera | null; force?: boolean;}
-export interface WorldHandoff {transferTo(signal: AbortSignal): void; mountOptions: Partial<MountOptions>; afterMount(mount: ObjectSceneLifecycle): Promise<void>;
-  /** Called with the departing scene's navigation just before that scene is retired: the camera's last word from it. */
-  beforeRetire?(departing: ObjectWorldNavigation): void;}
+import type { WorldHandoff } from './navigation/navigation-types.mts';
+export type { WorldHandoff } from './navigation/navigation-types.mts';
 interface FocusRequest {objectId: string; mount: ShellCamera; signal: AbortSignal; reducedMotion?: boolean; targetWorldCamera?: WorldCamera | null; targetFocusPositionM?: WorldFrame['originM'] | null; centerSelection?: boolean; timing?: Timing;}
 interface PrepareRequest {fromId: string; toId: string; fromMount: ShellCamera | null; toFactory: SceneFactory | Promise<SceneFactory>; signal: AbortSignal; stage?: HTMLElement; reducedMotion?: boolean; url?: string | URL | null; targetWorldCamera?: WorldCamera | null; targetFocusPositionM?: WorldFrame['originM'] | null; centerSelection?: boolean; preserveView?: boolean; presentWorld?: ((world: WorldCamera, optics: Optics, options: { signal: AbortSignal; commit?: () => void }) => Promise<boolean> | void) | null; cameraViewport?: Parameters<NonNullable<SceneFactory['navigation']>['prepare']>[0]['cameraViewport']; timing?: Timing;}
 interface WorldFlightRequest {

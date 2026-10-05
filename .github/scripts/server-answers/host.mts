@@ -1,5 +1,6 @@
 /** Child host: real preview/edge/bundled handlers, isolated function packages, and deterministic CDN stand-ins. */
 import fs from 'node:fs';
+import { hostPort } from './host-port.mts';
 import { assetOrigin, fetchRoute } from './asset-origin.mts';
 import promises from 'node:fs/promises';
 import { syncBuiltinESMExports, registerHooks } from 'node:module';
@@ -49,7 +50,7 @@ let origin = 'https://answers.invalid';
 const originalFetch = globalThis.fetch;
 if (target === 'preview') {
   const { previewSite } = await import(pathToFileURL(await previewEntry(root)).href);
-  const server = await previewSite({ root, outDir: dist, port: 0 });
+  const server = await previewSite({ root, outDir: dist, port: hostPort(target ?? '') });
   preview = server;
   const address = server.httpServer.address();
   if (!address || typeof address === 'string') throw new Error('No preview port');
@@ -142,7 +143,12 @@ if (target === 'netlify') {
   if (typeof callable !== 'function') throw new Error('Worker missing fetch');
   worker = async request => {
     const pending: Promise<unknown>[] = [];
-    const response: unknown = await callable(request, { ASSETS: { fetch: globalThis.fetch } }, { waitUntil(work: Promise<unknown>) { pending.push(work); } });
+    // The Workers ASSETS binding reads a built-site path whatever origin the caller names (cloudflare/assets.ts uses `https://assets.invalid`); it never leaves the machine.
+    const ASSETS = { fetch: (input: Request | URL | string, init?: RequestInit) => {
+      const asked = new Request(input, init), url = new URL(asked.url);
+      return scope.exit(() => staticAnswer(url.origin === publishedOrigin ? asked : new Request(`https://answers.invalid${url.pathname}${url.search}`, asked)));
+    } };
+    const response: unknown = await callable(request, { ASSETS }, { waitUntil(work: Promise<unknown>) { pending.push(work); } });
     await Promise.all(pending);
     if (!(response instanceof Response)) throw new Error('Worker invalid response'); return response;
   };

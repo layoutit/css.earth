@@ -10,7 +10,6 @@ import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve, relative } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { readAuthoredSources, verifiedSource } from '@cssearth/bake/objects/sources';
-import { parseWorldContextSource } from '@cssearth/bake/world-context';
 import { SHAPE_MODEL_SCHEMA, authoredPresentationBasis, POLYCSS_SURFACE_PLACEMENT, renderedBodyToPresentation, solveSystemTransform, type SurfaceMapPlacement, LIT_DEFAULT_VIEW, MINIMUM_COVERED_SHARE, openingDirection, photographDirections, prepareDefaultCameraAngles, prepareEclipticPresentationFrame, preparePhysicalWorldFrame, prepareSunReferenceViewDirection, transform, transpose, type Matrix3, type SolarGeometry, type Vector3, preparePhysicalMaterialTracks } from '@cssearth/bake/objects/scene';
 import { readDefaultDatasetCoverage, coverageDirection, coveredShare, visibleCoverageShare, faceDatasetData, readDatasetCoverages, authoredFocusDatasets, bodyFixedCoverage } from '@cssearth/bake/objects/default-view';
 
@@ -23,13 +22,6 @@ export async function prepareWorldNavigationDefinition({ objectDirectory, defini
   // The receipt names the manifest pins each source had, so a later reader can tell which inputs this frame came from.
   const sources = new Map<string, Input>([...bound.sources].map(([id, entry]) => [id, entry.value as Input]));
   if (definition.id !== descriptor.id || definition.schema !== OBJECT_RUNTIME_SCHEMA) throw new TypeError('Physical navigation runtime identity differs.');
-  const contextSource = sources.get('world-context');
-  if (contextSource) {
-    const context = parseWorldContextSource(contextSource);
-    if (context.focus.id !== descriptor.id) throw new TypeError('Authored context focus differs.');
-    return { definition, frame: context.frame, systemTransform: null, defaultCamera: null, receipt: { schema: WORLD_NAVIGATION_PREPARATION_SCHEMA, id: descriptor.id,
-      frame: context.frame, model: 'authored-context-focus' } satisfies WorldNavigationPreparationReceipt };
-  }
   const solar = await import(pathToFileURL(resolve(projectRoot, 'src/platform/solar-geometry.mts')).href) as Input;
   // The generated module satisfies the frame preparers' contract as it is; typing it by the module keeps drift a type error.
   const geometry: SolarGeometry = solar as typeof import('../../../src/platform/solar-geometry.mts');
@@ -99,7 +91,7 @@ export async function prepareWorldNavigationDefinition({ objectDirectory, defini
   const coverage = read && coveredShare(read) >= MINIMUM_COVERED_SHARE ? read : undefined;
   // The minimap step records the default dataset's coverage from its exact mask; a minimap from before that record is read back.
   const datasetCoverages = await readDatasetCoverages(objectDirectory), recorded = coverage && datasetCoverages.get(coverage.dataset);
-  const angles = prepareDefaultCameraAngles(geometry, descriptor.id, { observation, light,
+  const angles = prepareDefaultCameraAngles(geometry, descriptor.id, { observation, light, atOrigin: distanceM === 0,
     coverage: recorded ? bodyFixedCoverage(recorded, placement.mapLeftEdgeLongitudeDeg) : coverage && coverageDirection(coverage) });
   if (coverage && !recorded) {
     const shown = visibleCoverageShare(coverage, openingDirection(geometry, descriptor.id, angles));

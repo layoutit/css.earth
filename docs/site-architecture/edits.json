@@ -30,112 +30,6 @@
     },
     {
       "op": "add-file",
-      "path": "site/directory/object-entry-types.mts",
-      "note": "Extract registry aliases from objects; directory must not import the registry that calls it.",
-      "change": "Extract registry types",
-      "imports": [
-        {
-          "to": "site/browser/browser-types.mts",
-          "kind": "type"
-        },
-        {
-          "to": "packages/objects/src/index.ts",
-          "kind": "type"
-        }
-      ],
-      "id": "add-file-object-entry-types"
-    },
-    {
-      "op": "retarget",
-      "from": "site/directory/object-directory.mts",
-      "to": "site/directory/objects.mts",
-      "note": "Use the extracted registry aliases without evaluating the full registry.",
-      "kind": "type",
-      "newTo": "site/directory/object-entry-types.mts",
-      "change": "Extract registry types",
-      "id": "retarget-object-directory-object-entry-types",
-      "line": 3
-    },
-    {
-      "op": "add-import",
-      "to": "site/directory/object-entry-types.mts",
-      "kind": "type",
-      "note": "Registry imports and re-exports its extracted aliases so clients can migrate without duplication.",
-      "from": "site/directory/objects.mts",
-      "change": "Extract registry types",
-      "id": "add-import-objects-object-entry-types"
-    },
-    {
-      "op": "add-file",
-      "path": "site/navigation/navigation-types.mts",
-      "imports": [
-        {
-          "to": "site/browser/browser-types.mts",
-          "kind": "type"
-        },
-        {
-          "to": "packages/renderer/src/runtime/world-navigation-types.ts",
-          "kind": "type"
-        },
-        {
-          "to": "packages/renderer/src/runtime/object-scene.ts",
-          "kind": "type"
-        },
-        {
-          "to": "site/world/scene-subject.mts",
-          "kind": "type"
-        },
-        {
-          "to": "site/world/navigation-scope.mts",
-          "kind": "type"
-        }
-      ],
-      "change": "Extract navigation contracts",
-      "note": "Own WorldHandoff, NavigationHistory and NavigationIntent beside navigation. Import MountOptions, ObjectSceneLifecycle, ObjectWorldNavigation, SceneSubject and PageView; preserve erased aliases SceneView and SelectionTarget.",
-      "id": "add-file-navigation-types"
-    },
-    {
-      "op": "retarget",
-      "from": "site/navigation/prepared-arrival.mts",
-      "to": "site/navigation/prepared-world-navigation.mts",
-      "note": "Arrival reads WorldHandoff from the lower contract; navigation still owns flights.",
-      "kind": "type",
-      "newTo": "site/navigation/navigation-types.mts",
-      "change": "Extract navigation contracts",
-      "id": "retarget-prepared-arrival-navigation-types",
-      "line": 4
-    },
-    {
-      "op": "retarget",
-      "from": "site/navigation/navigation-history.mts",
-      "to": "site/navigation/navigation-request.mts",
-      "newTo": "site/navigation/navigation-types.mts",
-      "kind": "type",
-      "note": "Extract NavigationHistory and NavigationIntent into navigation-types; the history transport must not import request orchestration.",
-      "change": "Extract navigation contracts",
-      "id": "retarget-navigation-history-navigation-types",
-      "line": 4
-    },
-    {
-      "op": "add-import",
-      "to": "site/navigation/navigation-types.mts",
-      "kind": "type",
-      "note": "Flights import and re-export the extracted WorldHandoff contract.",
-      "from": "site/navigation/prepared-world-navigation.mts",
-      "change": "Extract navigation contracts",
-      "id": "add-import-prepared-world-navigation-navigation-types"
-    },
-    {
-      "op": "add-import",
-      "to": "site/navigation/navigation-types.mts",
-      "kind": "type",
-      "note": "Request imports its extracted intent and history types and the plain selection shape; selection behavior is passed in.",
-      "from": "site/navigation/navigation-request.mts",
-      "change": "Extract navigation contracts",
-      "id": "add-import-navigation-request-navigation-types"
-    },
-    {
-      "op": "add-file",
       "path": "site/content/moon-catalogue.mts",
       "note": "Split catalogue parsing, cached source catalogue and catalogueMoons into a runtime-safe reader; preparation keeps search-based ordering.",
       "change": "Split the moon catalogue reader",
@@ -197,43 +91,6 @@
       "from": "site/navigation/navigation-request.mts",
       "change": "Pass selection into navigation requests",
       "id": "add-import-navigation-request-scene-subject"
-    },
-    {
-      "op": "add-file",
-      "path": "site/scene/scene-frame-presenter.mts",
-      "note": "Extract the structural presenter interface; a session must not import the world coordinator that consumes it.",
-      "change": "Extract the frame presenter contract",
-      "imports": [
-        {
-          "to": "site/world/application-world-context.mts",
-          "kind": "type"
-        },
-        {
-          "to": "site/world/world-viewport.mts",
-          "kind": "type"
-        }
-      ],
-      "id": "add-file-scene-frame-presenter"
-    },
-    {
-      "op": "retarget",
-      "from": "site/scene/scene-session.mts",
-      "to": "site/scene/scene-world.mts",
-      "note": "Session reads SceneFramePresenter from the lower contract, breaking the two-way type dependency.",
-      "kind": "type",
-      "newTo": "site/scene/scene-frame-presenter.mts",
-      "change": "Extract the frame presenter contract",
-      "id": "retarget-scene-session-scene-frame-presenter",
-      "line": 2
-    },
-    {
-      "op": "add-import",
-      "to": "site/scene/scene-frame-presenter.mts",
-      "kind": "type",
-      "note": "World coordinator imports and re-exports the structural presenter contract.",
-      "from": "site/scene/scene-world.mts",
-      "change": "Extract the frame presenter contract",
-      "id": "add-import-scene-world-scene-frame-presenter"
     },
     {
       "id": "add-file-scene-imports",
@@ -371,24 +228,6 @@
       ]
     },
     {
-      "id": "extract-registry-types",
-      "edits": [
-        "add-file-object-entry-types",
-        "retarget-object-directory-object-entry-types",
-        "add-import-objects-object-entry-types"
-      ]
-    },
-    {
-      "id": "extract-navigation-contracts",
-      "edits": [
-        "add-file-navigation-types",
-        "retarget-prepared-arrival-navigation-types",
-        "retarget-navigation-history-navigation-types",
-        "add-import-prepared-world-navigation-navigation-types",
-        "add-import-navigation-request-navigation-types"
-      ]
-    },
-    {
       "id": "split-the-moon-catalogue-reader",
       "edits": [
         "add-file-moon-catalogue",
@@ -402,14 +241,6 @@
       "edits": [
         "remove-import-navigation-request-scene-selection",
         "add-import-navigation-request-scene-subject"
-      ]
-    },
-    {
-      "id": "extract-the-frame-presenter-contract",
-      "edits": [
-        "add-file-scene-frame-presenter",
-        "retarget-scene-session-scene-frame-presenter",
-        "add-import-scene-world-scene-frame-presenter"
       ]
     },
     {

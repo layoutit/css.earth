@@ -1,0 +1,52 @@
+{
+  "id": "esawebb-weic2311a",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Cassiopeia A (MIRI Image)",
+  "identifiers": [
+    {
+      "type": "ESA/Webb image",
+      "value": "weic2311a"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://esawebb.org/images/weic2311a/",
+      "label": "Published source"
+    },
+    {
+      "role": "original",
+      "url": "https://cdn.esawebb.org/archives/images/large/weic2311a.jpg",
+      "label": "JPEG, 4008 x 4009 px"
+    },
+    {
+      "role": "rights",
+      "url": "https://esawebb.org/copyright/",
+      "label": "Reuse terms"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://esawebb.org/images/weic2311a/",
+      "checkedOn": "2026-10-05",
+      "locator": "4008 x 4009 px over 7.41 × 7.41 arcmin; MIRI at 5.6, 7.7, 10, 11, 12, 18, 21 and 25 µm; released 7 April 2023. The file's embedded sky tags, used as they are: 0.1109 arcsec per pixel and north 0.5° left of vertical, the frame's centre at 350.8581524°, 58.8181671°. Not measured against a star here."
+    }
+  ],
+  "publisher": "ESA/Webb",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "NASA, ESA, CSA, D. Milisavljevic (Purdue University), T. Temim (Princeton University), I. De Looze (UGent), J. DePasquale (STScI)",
+      "scope": "Published source",
+      "evidence": "https://esawebb.org/images/weic2311a/"
+    },
+    {
+      "kind": "rights",
+      "text": "Creative Commons Attribution 4.0 International; the full credit must be shown.",
+      "scope": "Published source",
+      "evidence": "https://esawebb.org/copyright/"
+    }
+  ]
+}

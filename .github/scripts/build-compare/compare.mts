@@ -222,6 +222,23 @@ export async function compare(base: Build, head: Build, moves: Moves = {}, mode:
     if (!left || !right || canonical(left.code ?? '<null>', a, moves) !== canonical(right.code ?? '<null>', b)) { changed.add(id); add('modules', id, [id]); }
     if (!left || !right || !same(left.edges, right.edges)) { changed.add(id); add('imports', id, [id]); }
   }
+  // A module that only closure modules import, and that exists in one build only, leaves or enters the bundle with them: its removal is part of the change, not an independent one.
+  // Importers are read from both graphs, so a deleted edge cannot shrink the permitted set; an importer outside the closure keeps it independent.
+  const importersOf = new Map<string, Set<string>>();
+  for (const indexed of [a, b]) for (const [key, module] of indexed.modules) for (const edge of module.edges) {
+    const target = `${module.environment}:${edge.slice(edge.indexOf(':') + 1)}`;
+    importersOf.set(target, (importersOf.get(target) ?? new Set()).add(key));
+  }
+  const orphaned = new Set<string>();
+  const candidates = differences.filter(diff => diff.dimension === 'modules' || diff.dimension === 'imports').map(diff => diff.identity).filter(id => !permittedModules.has(id) && (!a.modules.has(id) || !b.modules.has(id)));
+  for (let grew = true; grew;) {
+    grew = false;
+    for (const id of candidates) {
+      if (permittedModules.has(id)) continue;
+      const importers = [...(importersOf.get(id) ?? [])];
+      if (importers.length > 0 && importers.every(importer => permittedModules.has(importer))) { permittedModules.add(id); orphaned.add(id); grew = true; }
+    }
+  }
   for (const id of sorted([...a.chunks.keys(), ...b.chunks.keys()])) {
     const left = a.chunks.get(id), right = b.chunks.get(id);
     const members = sorted([...(left?.modules ?? []), ...(right?.modules ?? [])]);
@@ -241,7 +258,9 @@ export async function compare(base: Build, head: Build, moves: Moves = {}, mode:
       if (id.endsWith(`:${origin}`) || id.includes(`:${origin}?`)) { if (!changed.has(id)) add('modules', id, [id], [], [], leftName, rightName); changed.add(id); }
     }
   }
-  const layoutEligible = same(sorted(a.modules.keys()), sorted(b.modules.keys())) && !differences.some(diff => (diff.dimension === 'modules' || diff.dimension === 'imports') && !seeded.has(diff.identity));
+  // A module may be added or removed (its modules difference) only if it is a seed or an orphan of one; an importer may differ in its import list, never in its code.
+  const layoutEligible = !differences.some(diff => diff.dimension === 'modules' && !seeded.has(diff.identity) && !orphaned.has(diff.identity))
+    && !differences.some(diff => diff.dimension === 'imports' && !permittedModules.has(diff.identity));
   // Entry facades survive repartitioning. Normalize their URLs only after the
   // declared layout invariant is proved; page content still compares exactly.
   const layoutIndex = (indexed: Indexed, other: Indexed): Indexed => {

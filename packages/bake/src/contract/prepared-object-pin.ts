@@ -3,7 +3,7 @@ import { OBJECT_SCHEMA, PREPARED_OBJECT_SCHEMA, OBJECT_RUNTIME_SCHEMA, parseObje
 
 // Pinning a prepared object to its transport: the descriptor's `prepared` pin and page reference, and the body's inventory.
 // The `prepared/object.json` transport and the page data are built from the runtime when read (@cssearth/objects/node
-// prepared-transport), so no copy is written here. It prepares nothing; the world-navigation and spatial-context finalization that runs
+// prepared-transport), so no copy is written here. It prepares nothing; the world-navigation finalization that runs
 // before it on a fresh bake stays with `site/build/prepare/prepare-object-json.mts`.
 import { mkdir, readFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';

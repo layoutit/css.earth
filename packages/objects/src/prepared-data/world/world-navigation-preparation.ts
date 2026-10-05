@@ -1,4 +1,3 @@
-import { requireRecord } from '@cssearth/core';
 import type { PreparedWorldCameraFrame } from './world-frame.js';
 import type { WorldRotation } from '@cssearth/core';
 
@@ -9,7 +8,6 @@ interface WorldNavigationReceiptBase {
   readonly frame: PreparedWorldCameraFrame;
 }
 export type WorldNavigationPreparationReceipt = WorldNavigationReceiptBase & (
-  | { readonly model: 'authored-context-focus' }
   | { readonly model: 'ecliptic-presentation-frame'; readonly renderedRadiusUnits: number; readonly ephemerisSource: string }
   | { readonly model?: never; readonly bodyToPresentation: WorldRotation; readonly sourceRadiusUnits: number;
       readonly tilePixels: number; readonly sceneScale: number; readonly renderedRadiusUnits: number;
@@ -50,12 +48,4 @@ export function requireWorldNavigationReceiptIdentity(receipt: Record<string, un
     throw new TypeError('Authored physical frame receipt differs from its descriptor.');
   if (typeof frame.epochJdTt !== 'number' || !Number.isFinite(frame.epochJdTt) || ![frame.bodyRadiusM, frame.metersPerUnit].every(value => typeof value === 'number' && Number.isFinite(value) && value > 0))
     throw new TypeError('Authored physical frame has invalid physical units.');
-}
-export function requireWorldNavigationReceiptContext(receipt: Record<string, unknown>, frame: Record<string, unknown>, authored: unknown): void {
-  const authoredFrame = requireRecord(authored, 'Authored context frame');
-  const fields = ['referenceFrame', 'epochJdTt', 'originM', 'presentationToReference', 'metersPerUnit', 'bodyRadiusM'];
-  if (authoredFrame.orbitUpReference !== undefined) fields.push('orbitUpReference');
-  const numerical = Object.fromEntries(fields.map(field => [field, authoredFrame[field]]));
-  if (receipt.model !== 'authored-context-focus' || !samePreparedWorldFrame(frame, numerical))
-    throw new TypeError('Authored physical frame does not reproduce its authored context.');
 }

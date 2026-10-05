@@ -9,7 +9,7 @@ import { TODO } from '../scaffold.mts';
 import { esaPictureAddress, parseEsaPage, skyTags, type EsaPage, type SkyTags } from './esa-image.mts';
 import { colorsPhrase, parsePictures, pictureFiles } from './picture-bank.mts';
 import { draftsFromEsa, runPictures } from './pictures.mts';
-import { locateStar, registerPicture, taggedPixel } from './registration.mts';
+import { lightReachPixels, locateStar, registerPicture, taggedPixel } from './registration.mts';
 
 const test = sourceTest();
 const WEBB = 'https://esawebb.org/images/weic0000a/';
@@ -84,6 +84,22 @@ test('the star a picture shows is its saturated patch, or else its strongest pea
   assert.equal(locateStar(new Uint8Array(3 * 80 * 60).fill(20), 80, 60, 0.1, [38, 27]), undefined);
   // A saturated star farther than an arcsecond from the place is another star.
   assert.equal(locateStar(sourceAt(80, 60, [70, 50], 200, 3), 80, 60, 0.02, [20, 20]), undefined);
+});
+
+test('a picture that does not fill its frame fades where its own light ends, not at the frame', () => {
+  // A disc of light 20 px in radius about 50, 40 in a black frame of 100 by 80, and the same frame filled with light.
+  const disc = new Uint8Array(3 * 100 * 80), full = new Uint8Array(3 * 100 * 80).fill(40);
+  for (let y = 0; y < 80; y++) for (let x = 0; x < 100; x++) if (Math.hypot(x - 50, y - 40) <= 20) disc.fill(120, 3 * (y * 100 + x), 3 * (y * 100 + x) + 3);
+  const reach = lightReachPixels(disc, 100, 80, [50, 40]);
+  assert.ok(reach > 20 && reach < 21.5, String(reach));
+  assert.equal(lightReachPixels(full, 100, 80, [50, 40]), Infinity, 'a picture with no empty border is held by its frame alone');
+  // A dark hole inside the light is not the border: it does not touch the frame's edge.
+  const holed = full.slice(); holed.fill(0, 3 * (40 * 100 + 50), 3 * (40 * 100 + 53));
+  assert.equal(lightReachPixels(holed, 100, 80, [50, 40]), Infinity);
+  const tags: SkyTags = { scaleDeg: 1 / 3600, rotationDeg: 0, reference: [10, 20], referencePixel: [51, 40] };
+  const byLight = registerPicture(tags, [100, 80], [50, 40], { centerRaDeg: 10, centerDecDeg: 20, distancePc: 1000 }, reach), byFrame = registerPicture(tags, [100, 80], [50, 40], { centerRaDeg: 10, centerDecDeg: 20, distancePc: 1000 });
+  assert.deepEqual([byLight.rimAt, byLight.circleArcsec, byFrame.rimAt, byFrame.circleArcsec], ['light', Math.floor(10 * reach) / 10, 'frame', 39]);
+  assert.throws(() => registerPicture(tags, [100, 80], [50, 40], { centerRaDeg: 10, centerDecDeg: 20, distancePc: 1000 }, 0), /empty border reaches the place it is to stand at, pixel 50\.0, 40\.0/u);
 });
 
 const ENTRY = { host: 'm57', image: 'https://esawebb.org/images/weic2320c/', bank: 'm57-miri-layers', like: 'm57-layers', dataset: { id: 'mid-infrared', label: 'Webb · mid infrared', title: 'A title', summary: 'A summary.', description: 'A description.' } };

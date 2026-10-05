@@ -35,10 +35,12 @@ const EXTENDED_IDS: readonly string[] = [...GALAXY_IDS, ...GALAXY_CLUSTER_IDS, .
 
 describe('the body table', () => {
   it('has an entry for the Sun, eight planets, the Moon, every satellite, the five dwarf planets, every placed star, black hole and hosted star, and every exoplanet', () => {
-    assert.equal(BODY_IDS.length, 1 + 8 + 1 + SATELLITE_IDS.length + SCENE_SATELLITE_IDS.length + DWARF_PLANET_IDS.length + SMALL_BODY_IDS.length + COMET_IDS.length + STAR_IDS.length + EXOPLANET_IDS.length + HOSTED_STAR_IDS.length)
+    // The Sun is one of the placed stars: its record places it at distance zero.
+    assert.ok((STAR_IDS as readonly string[]).includes('sun'))
+    assert.equal(BODY_IDS.length, 8 + 1 + SATELLITE_IDS.length + SCENE_SATELLITE_IDS.length + DWARF_PLANET_IDS.length + SMALL_BODY_IDS.length + COMET_IDS.length + STAR_IDS.length + EXOPLANET_IDS.length + HOSTED_STAR_IDS.length)
     // A black hole is placed by its astrometry (Sgr A*) or hosted by the star it orbits (Cygnus X-1).
     for (const id of BLACK_HOLE_IDS) assert.ok(([...STAR_IDS, ...HOSTED_STAR_IDS] as readonly string[]).includes(id))
-    for (const id of ['sun', ...PLANET_IDS, 'moon', ...SATELLITE_IDS, ...SCENE_SATELLITE_IDS, ...DWARF_PLANET_IDS, ...SMALL_BODY_IDS, ...COMET_IDS, ...STAR_IDS, ...EXOPLANET_IDS, ...HOSTED_STAR_IDS] as BodyId[]) {
+    for (const id of [...PLANET_IDS, 'moon', ...SATELLITE_IDS, ...SCENE_SATELLITE_IDS, ...DWARF_PLANET_IDS, ...SMALL_BODY_IDS, ...COMET_IDS, ...STAR_IDS, ...EXOPLANET_IDS, ...HOSTED_STAR_IDS] as BodyId[]) {
       assert.notEqual(BODIES[id], undefined)
       assert.equal(BODIES[id].id, id)
     }
@@ -52,8 +54,8 @@ describe('the body table', () => {
   it('is a tree rooted at the Sun', () => {
     for (const id of BODY_IDS) {
       const parent = bodyData(id).parent
-      // The Sun roots the Solar System; a star placed by its own astrometry orbits nothing here.
-      if (id === 'sun' || STAR_IDS.includes(id as StarId)) {
+      // A star placed by its own astrometry orbits nothing here; the Sun, placed at distance zero, roots the Solar System.
+      if (STAR_IDS.includes(id as StarId)) {
         assert.equal(parent, null)
         continue
       }

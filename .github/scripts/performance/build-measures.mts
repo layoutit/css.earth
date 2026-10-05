@@ -21,6 +21,22 @@ export function parseMeasures(value: unknown): Measures {
     return [route, { counts: counts(entry.counts), sequences: Object.fromEntries(Object.entries(record(entry.sequences)).map(([key, value]) => [key, strings(value)])), declarations: array(entry.declarations) }];
   })) };
 }
+/** Content-addressed file names (`name.<hash>.ext`) change whenever their file does, so every importer's text changes with them. The hash
+ * characters are a naming artefact, not delivered code: compressed sizes are taken with each exact reference to an emitted file carrying a
+ * fixed placeholder of the same length. Raw sizes always come from the real, unnormalised bytes, and any other byte stays counted. */
+export const HASH_PLACEHOLDER = '00000000';
+export function hashReferenceNormalizer(emitted: Iterable<string>): (bytes: Buffer) => Buffer {
+  const names = new Map<string, string>();
+  for (const file of emitted) {
+    const name = posix.basename(file), parts = /^(.+)\.([A-Za-z0-9_-]{8})\.([A-Za-z0-9]+)$/u.exec(name);
+    if (parts) names.set(name, `${parts[1]}.${HASH_PLACEHOLDER}.${parts[3]}`);
+  }
+  if (!names.size) return bytes => bytes;
+  const escaped = [...names.keys()].sort((a, b) => b.length - a.length || (a < b ? -1 : 1)).map(name => name.replace(/[.*+?^${}()|[\]\\]/gu, '\\$&'));
+  const pattern = new RegExp(`(?<![A-Za-z0-9_.@~$-])(?:${escaped.join('|')})(?![A-Za-z0-9_-])`, 'gu');
+  return bytes => Buffer.from(bytes.toString('latin1').replace(pattern, name => names.get(name)!), 'latin1');
+}
+const TEXT_FILE = /\.(?:[cm]?js|css|html?|json|txt|xml|svg|webmanifest)$/u;
 export function localFile(dist: string, url: string): string {
   if (!url.startsWith('/') || url.startsWith('//') || url.includes('\\')) throw new Error(`Not a local URL: ${url}`);
   const path = resolve(dist, '.' + decodeURIComponent(url.split(/[?#]/u)[0]!));
@@ -113,9 +129,11 @@ export async function measure(dist: string, metadata: string, routes: readonly s
   const byFile = new Map(chunks.map(chunk => [chunk.fileName, chunk]));
   if (byFile.size !== chunks.length) throw new Error('Duplicate chunks');
   const graph = new Map<string, ReturnType<typeof imports>>(), sizes = new Map<string, { raw: number; gzip: number; brotli: number }>();
+  const withoutHashText = hashReferenceNormalizer(await files(dist));
+  const withoutHashName = (text: string): string => withoutHashText(Buffer.from(text, 'latin1')).toString('latin1');
   const size = async (url: string) => {
     let cached = sizes.get(url);
-    if (!cached) { const bytes = url.startsWith('data:') ? Buffer.from(url.split(',')[1]!, url.includes(';base64,') ? 'base64' : 'utf8') : await readFile(localFile(dist, url)); cached = { raw: bytes.length, gzip: gzipSync(bytes).length, brotli: brotliCompressSync(bytes, { params: { [constants.BROTLI_PARAM_QUALITY]: 4 } }).length }; sizes.set(url, cached); }
+    if (!cached) { const bytes = url.startsWith('data:') ? Buffer.from(url.split(',')[1]!, url.includes(';base64,') ? 'base64' : 'utf8') : await readFile(localFile(dist, url)); const compressed = !url.startsWith('data:') && TEXT_FILE.test(url.split(/[?#]/u)[0]!) ? withoutHashText(bytes) : bytes; cached = { raw: bytes.length, gzip: gzipSync(compressed).length, brotli: brotliCompressSync(compressed, { params: { [constants.BROTLI_PARAM_QUALITY]: 4 } }).length }; sizes.set(url, cached); }
     return cached;
   };
   for (const chunk of chunks) {
@@ -219,13 +237,13 @@ export async function measure(dist: string, metadata: string, routes: readonly s
       const href = link.getAttribute('href'); if (!href) throw new Error('Link lacks href');
       add(`links.${rel}`, 1);
       const as = link.getAttribute('as') ?? ''; if (as === 'image' || as === 'font') add(`hint.${as}`, 1);
-      declarations.push({ rel, href, as, fetchpriority: link.getAttribute('fetchpriority') ?? '', noscript: !!link.closest('noscript') });
+      declarations.push({ rel, href: withoutHashName(href), as, fetchpriority: link.getAttribute('fetchpriority') ?? '', noscript: !!link.closest('noscript') });
       if (rel === 'stylesheet' && href.startsWith('/')) add('stylesheet.raw', (await stat(localFile(dist, href))).size);
     }
     const entries: string[] = [], inlineDynamic: string[] = [], requests: RequestDeclaration[] = [], deferred: RequestDeclaration[] = [];
     for (const script of document.querySelectorAll('script')) {
       const src = script.getAttribute('src');
-      if (src) { const module = script.getAttribute('type') === 'module'; add(`scripts.${module ? 'module' : 'classic'}`, 1); for (const flag of ['async', 'defer']) if (script.hasAttribute(flag)) add(`scripts.${flag}`, 1); declarations.push({ src, module, async: script.hasAttribute('async'), defer: script.hasAttribute('defer') }); if (module) entries.push(src.replace(/^\//u, '')); }
+      if (src) { const module = script.getAttribute('type') === 'module'; add(`scripts.${module ? 'module' : 'classic'}`, 1); for (const flag of ['async', 'defer']) if (script.hasAttribute(flag)) add(`scripts.${flag}`, 1); declarations.push({ src: withoutHashName(src), module, async: script.hasAttribute('async'), defer: script.hasAttribute('defer') }); if (module) entries.push(src.replace(/^\//u, '')); }
       else { if (script.getAttribute('type') === 'module') {
         const parsed = imports(script.textContent ?? '');
         const target = (url: string) => { const address = new URL(url, 'https://build.invalid' + route); if (address.origin !== 'https://build.invalid') throw new Error('External inline module import'); const file = address.pathname.slice(1); if (!byFile.has(file)) throw new Error('Missing inline import metadata'); return file; };

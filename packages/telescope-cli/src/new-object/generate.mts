@@ -501,7 +501,7 @@ export async function runNewObject(specPath: string, { root = checkoutProjectRoo
     progress(`[${++done}/${total}] ${addition.host}: adding ${[...addition.planets, ...addition.companions].map(body => body.id).join(', ')}`);
     // A star that exists: its astronomy record is the host, its system name the one its package already carries.
     const body = JSON.parse(await readFile(resolve(root, `packages/astronomy/data/bodies/${addition.host}.json`), 'utf8')) as Record<string, any>;
-    if (!body.star) { for (const entry of [...addition.planets, ...addition.companions]) failed(entry.id, entry.kind, new Error(`${addition.host} is not a placed star (its record has no star block)`)); continue; }
+    if (!(Number(body.star?.distanceParsecs) > 0)) { for (const entry of [...addition.planets, ...addition.companions]) failed(entry.id, entry.kind, new Error(`${addition.host} is not a star placed at a distance (its record has no star block, or one at distance zero)`)); continue; }
     const descriptor = JSON.parse(await readFile(resolve(root, `src/objects/${addition.host}/object.json`), 'utf8')) as Record<string, any>;
     const host = { spec: { id: addition.host, system: String(descriptor.properties.catalog.systemName ?? `${body.physical.name} system`) } as StarSpec, body };
     for (const entry of [...addition.planets, ...addition.companions]) await hostedRecordFor(entry, host);

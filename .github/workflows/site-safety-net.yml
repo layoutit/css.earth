@@ -6,10 +6,18 @@ name: Site safety net
 on:
   pull_request:
     types: [opened, synchronize, reopened, labeled, unlabeled]
+  push:
+    branches: [main]
   workflow_dispatch:
+    inputs:
+      no-base-cache:
+        description: Force a fresh base for report identity proof
+        type: boolean
+        default: false
 
 permissions:
   contents: read
+  actions: read
 
 concurrency:
   group: site-safety-net-${{ github.event_name == 'pull_request' && github.ref || github.run_id }}
@@ -17,6 +25,7 @@ concurrency:
 
 jobs:
   gate:
+    if: github.event_name != 'push'
     name: Refactor declaration gate
     runs-on: ubuntu-latest
     timeout-minutes: 5
@@ -33,14 +42,15 @@ jobs:
           if [ -n "${GITHUB_BASE_REF:-}" ]; then
             comparison_base=$(git merge-base HEAD "origin/$GITHUB_BASE_REF")
           else
-            comparison_base=$(git rev-parse HEAD^)
+            comparison_base=$(git merge-base HEAD origin/main)
           fi
+          use_head_gate=$(node --input-type=module -e 'import {readFileSync} from "node:fs"; const event=JSON.parse(readFileSync(process.env.GITHUB_EVENT_PATH,"utf8")); console.log(event.pull_request?.labels?.some(label=>label.name==="tool-change") ? "true" : "false")')
           mkdir -p "$RUNNER_TEMP/comparison-gate"
-          if git cat-file -e "$comparison_base:.github/scripts/build-compare/gate.mts" 2>/dev/null; then
+          if [ "$use_head_gate" != true ] && git cat-file -e "$comparison_base:.github/scripts/build-compare/gate.mts" 2>/dev/null; then
             git archive "$comparison_base" .github/scripts/build-compare/gate.mts .github/scripts/build-compare/source-paths.mts | tar -x -C "$RUNNER_TEMP/comparison-gate"
           else
-            # Only the pull request that introduces the comparison tools reaches this branch: its merge base has none to trust.
-            echo "::warning::Bootstrap: the merge base has no comparison tools; this pull request introduces them, so its own gate code is used"
+            # Head gate only for explicit tool-change or the introducing PR.
+            echo "::warning::Tool gate override/bootstrap: using HEAD gate code"
             mkdir -p "$RUNNER_TEMP/comparison-gate/.github/scripts"
             cp -R .github/scripts/build-compare "$RUNNER_TEMP/comparison-gate/.github/scripts/build-compare"
           fi
@@ -49,6 +59,7 @@ jobs:
         run: node "$RUNNER_TEMP/comparison-gate/.github/scripts/build-compare/gate.mts" "$COMPARISON_BASE"
 
   changes:
+    if: github.event_name != 'push'
     name: Select application build comparison
     runs-on: ubuntu-latest
     timeout-minutes: 5
@@ -67,14 +78,15 @@ jobs:
           if [ -n "${GITHUB_BASE_REF:-}" ]; then
             comparison_base=$(git merge-base HEAD "origin/$GITHUB_BASE_REF")
           else
-            comparison_base=$(git rev-parse HEAD^)
+            comparison_base=$(git merge-base HEAD origin/main)
           fi
+          use_head_gate=$(node --input-type=module -e 'import {readFileSync} from "node:fs"; const event=JSON.parse(readFileSync(process.env.GITHUB_EVENT_PATH,"utf8")); console.log(event.pull_request?.labels?.some(label=>label.name==="tool-change") ? "true" : "false")')
           mkdir -p "$RUNNER_TEMP/comparison-gate"
-          if git cat-file -e "$comparison_base:.github/scripts/build-compare/gate.mts" 2>/dev/null; then
+          if [ "$use_head_gate" != true ] && git cat-file -e "$comparison_base:.github/scripts/build-compare/gate.mts" 2>/dev/null; then
             git archive "$comparison_base" .github/scripts/build-compare/gate.mts .github/scripts/build-compare/source-paths.mts | tar -x -C "$RUNNER_TEMP/comparison-gate"
           else
-            # Only the pull request that introduces the comparison tools reaches this branch: its merge base has none to trust.
-            echo "::warning::Bootstrap: the merge base has no comparison tools; this pull request introduces them, so its own gate code is used"
+            # Head gate only for explicit tool-change or the introducing PR.
+            echo "::warning::Tool gate override/bootstrap: using HEAD gate code"
             mkdir -p "$RUNNER_TEMP/comparison-gate/.github/scripts"
             cp -R .github/scripts/build-compare "$RUNNER_TEMP/comparison-gate/.github/scripts/build-compare"
           fi
@@ -96,6 +108,7 @@ jobs:
       CSSEARTH_SKIP_DECLARATIONS: '1'
       ASSET_ORIGIN: https://earth-assets.lowpoly.cc
       CSSEARTH_ALLOW_MISSING_ASSETS: '0'
+      NO_BASE_CACHE: ${{ inputs.no-base-cache || false }}
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
@@ -106,9 +119,10 @@ jobs:
           if [ -n "${GITHUB_BASE_REF:-}" ]; then
             comparison_base=$(git merge-base HEAD "origin/$GITHUB_BASE_REF")
           else
-            comparison_base=$(git rev-parse HEAD^)
+            comparison_base=$(git merge-base HEAD origin/main)
           fi
           git worktree add --detach ../comparison-head HEAD
+          echo "COMPARISON_BASE=$comparison_base" >> "$GITHUB_ENV"
           git checkout --detach "$comparison_base"
       - uses: pnpm/action-setup@f40ffcd9367d9f12939873eb1018b921a783ffaa # v4
         with:
@@ -135,34 +149,26 @@ jobs:
           path: src/objects/*/prepared
           key: prepared-files-v2-${{ hashFiles('src/objects/*/inventory.json') }}
           restore-keys: prepared-files-v2-
-      - name: Install head orchestration dependencies
-        run: |
-          cd ../comparison-head
-          pnpm install --frozen-lockfile --ignore-scripts
-      - name: Prepare and compare isolated merge-base and HEAD builds
+      - name: Start supervised head install, preparation and build
         run: |
           cd ../comparison-head
           if [ -n "${GITHUB_BASE_REF:-}" ]; then
             comparison_base=$(git merge-base HEAD "origin/$GITHUB_BASE_REF")
           else
-            comparison_base=$(git rev-parse HEAD^)
+            comparison_base=$(git merge-base HEAD origin/main)
           fi
           git -C "$GITHUB_WORKSPACE" checkout --detach "$comparison_base"
           comparison_tools="$GITHUB_WORKSPACE/.github/scripts/build-compare"
           if node --input-type=module -e '
             import {readFileSync,existsSync} from "node:fs";
             const event=process.env.GITHUB_EVENT_PATH ? JSON.parse(readFileSync(process.env.GITHUB_EVENT_PATH,"utf8")) : {};
-            const {execFileSync}=await import("node:child_process");
-            const base=execFileSync("git",["merge-base","HEAD",process.env.GITHUB_BASE_REF ? `origin/${process.env.GITHUB_BASE_REF}` : "HEAD^"],{encoding:"utf8"}).trim();
-            const fresh=/^[AM]\s/m.test(execFileSync("git",["diff","--name-status",`${base}..HEAD`,"--",".github/site-refactor.json"],{encoding:"utf8"}));
-            const declared=fresh && existsSync(".github/site-refactor.json") && JSON.parse(readFileSync(".github/site-refactor.json","utf8")).tools==="head";
-            process.exit(declared || event.pull_request?.labels?.some(label=>label.name==="tool-change") ? 0 : 1);
+            process.exit(event.pull_request?.labels?.some(label=>label.name==="tool-change") ? 0 : 1);
           '; then
             echo "::warning::TOOL TRUST OVERRIDE: using HEAD comparison tools"
             comparison_tools=.github/scripts/build-compare
           fi
           if [ ! -d "$comparison_tools" ]; then
-            # Only the pull request that introduces the comparison tools reaches this branch: its merge base has none to trust.
+            # Head gate only for explicit tool-change or the introducing PR.
             echo "::warning::Bootstrap: the merge base has no comparison tools; this pull request introduces them, so its own tools are used"
             comparison_tools=.github/scripts/build-compare
           fi
@@ -171,12 +177,54 @@ jobs:
             rm -rf .github/scripts/build-compare
             cp -R "$comparison_tools" .github/scripts/build-compare
           fi
-          # A runner that starves for memory or disk is lost without a trace (run 37292426823 ended that way): print its
-          # resources every minute so the log of a lost run shows the last state.
-          ( while sleep 60; do echo "[resources] $(date +%T) $(free -m | awk 'NR==2{print "mem_used_mb="$3" mem_avail_mb="$7}') $(df -m / | awk 'NR==2{print "disk_avail_mb="$4}') load=$(cut -d' ' -f1 /proc/loadavg) $(ps -eo rss,comm --sort=-rss | awk 'NR==2{print "top="$2":"int($1/1024)"mb"}')"; done ) &
-          sampler=$!
-          trap 'kill "$sampler" 2>/dev/null || true' EXIT
-          node .github/scripts/build-compare/ci.mts --head . --base "$GITHUB_WORKSPACE" --out "$GITHUB_WORKSPACE/output/build-comparison"
+          # pnpm install is supervised inside the dependency-free launcher before CI loads.
+          # The head starts before Actions restores the base archive. The final watcher owns termination.
+          mkdir -p "$RUNNER_TEMP/site-base" "$GITHUB_WORKSPACE/output/build-comparison"
+          node .github/scripts/build-compare/launch.mts --head . --base "$GITHUB_WORKSPACE" --out "$GITHUB_WORKSPACE/output/build-comparison" --archive "$RUNNER_TEMP/site-base/base.tgz" --ready "$RUNNER_TEMP/site-base/ready" --state "$RUNNER_TEMP/site-base"
+      - uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        id: site-base
+        timeout-minutes: 10
+        continue-on-error: true # Cache service failure must use the fresh-base path.
+        with:
+          path: ${{ runner.temp }}/site-base/base.tgz
+          key: site-base-v1-${{ env.COMPARISON_BASE }}
+      - name: Restore oversize base artifact on a cache miss
+        timeout-minutes: 5
+        continue-on-error: true # Restore failure must leave the fresh-base path available.
+        if: steps.site-base.outputs.cache-hit != 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          # Only successful main-push producers for the exact base commit may supply evidence.
+          runs=$(gh api "repos/$GITHUB_REPOSITORY/actions/workflows/site-safety-net.yml/runs?event=push&head_sha=$COMPARISON_BASE&status=success&per_page=10" --jq '.workflow_runs[] | select(.head_branch == "main") | .id') || runs=""
+          for run in $runs; do
+            if gh run download "$run" --repo "$GITHUB_REPOSITORY" --name "site-base-v1-$COMPARISON_BASE" --dir "$RUNNER_TEMP/site-base"; then break; fi
+          done
+          # No artifact is a normal miss. ci.mts validates any downloaded payload before use.
+          true
+      - name: Watch comparison until a verified terminal result
+        if: ${{ !cancelled() }}
+        run: |
+          touch "$RUNNER_TEMP/site-base/ready"
+          pid=$(cat "$RUNNER_TEMP/site-base/pid")
+          trap 'kill -- -"$pid" 2>/dev/null || kill "$pid" 2>/dev/null || true' EXIT
+          tail -n +1 -f "$RUNNER_TEMP/site-base/lane.log" &
+          logger=$!
+          deadline=$((SECONDS + 4800))
+          ticks=0
+          while [ ! -f "$RUNNER_TEMP/site-base/exit" ]; do
+            ticks=$((ticks + 1))
+            if [ $((ticks % 6)) = 0 ]; then free -m; df -m /; ps -eo rss,comm --sort=-rss | head -8; fi
+            if ! kill -0 "$pid" 2>/dev/null || [ "$SECONDS" -ge "$deadline" ]; then
+              echo "::error::Comparison exited without a result or exceeded its supervised budget"
+              kill "$logger" 2>/dev/null || true
+              exit 2
+            fi
+            sleep 5
+          done
+          kill "$logger" 2>/dev/null || true
+          cat "$RUNNER_TEMP/site-base/lane.log"
+          exit "$(cat "$RUNNER_TEMP/site-base/exit")"
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         if: ${{ !cancelled() }}
         with:
@@ -189,6 +237,8 @@ jobs:
             output/build-comparison/server-answers.json
             output/build-comparison/server-answers/*.log
             output/build-comparison/server-answers/artifacts/
+            output/build-comparison/comparison.md
+            output/build-comparison/cache.json
             output/build-comparison/report.json
             output/build-comparison/timings.json
             output/build-comparison/inputs.json
@@ -197,4 +247,63 @@ jobs:
             output/build-comparison/base/toolchain.json
             output/build-comparison/head/toolchain.json
           if-no-files-found: warn
+          retention-days: 7
+
+  base-cache:
+    if: github.event_name == 'push'
+    name: Produce commit-addressed production base
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      TZ: UTC
+      LC_ALL: C
+      NODE_OPTIONS: --max-old-space-size=6144
+      CSSEARTH_SKIP_DECLARATIONS: '1'
+      ASSET_ORIGIN: https://earth-assets.lowpoly.cc
+      CSSEARTH_ALLOW_MISSING_ASSETS: '0'
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          fetch-depth: 0
+      - uses: pnpm/action-setup@f40ffcd9367d9f12939873eb1018b921a783ffaa # v4
+        with:
+          package_json_file: package.json
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '24'
+      - name: Free runner disk
+        run: sudo rm -rf /usr/local/lib/android /usr/share/dotnet /opt/ghc
+      - name: Locate pnpm store
+        id: pnpm-store
+        run: echo "path=$(pnpm store path --silent)" >> "$GITHUB_OUTPUT"
+      - uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          path: ${{ steps.pnpm-store.outputs.path }}
+          key: pnpm-store-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}
+      - uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          path: src/objects/*/prepared
+          key: prepared-files-v2-${{ hashFiles('src/objects/*/inventory.json') }}
+          restore-keys: prepared-files-v2-
+      - name: Install producer tooling dependencies
+        run: pnpm install --frozen-lockfile --ignore-scripts
+      - name: Build, qualify, seal and measure the base archive
+        id: produce
+        run: |
+          mkdir -p "$RUNNER_TEMP/site-base"
+          node .github/scripts/build-compare/produce-base.mts --checkout . --out output/site-base --archive "$RUNNER_TEMP/site-base/base.tgz"
+      - uses: actions/cache/save@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        id: save-base
+        continue-on-error: true # A failed cache save retains the qualified archive as an artifact.
+        if: steps.produce.outputs.cacheable == 'true'
+        with:
+          path: ${{ runner.temp }}/site-base/base.tgz
+          key: site-base-v1-${{ github.sha }}
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        if: steps.produce.outputs.cacheable != 'true' || steps.save-base.outcome == 'failure'
+        with:
+          name: site-base-v1-${{ github.sha }}
+          path: ${{ runner.temp }}/site-base/base.tgz
+          compression-level: 0
+          if-no-files-found: error
           retention-days: 7

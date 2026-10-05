@@ -1,11 +1,12 @@
 /** Reuse the two L3 outputs for offline L2 bundles, recordings, sanity checks and exact diffs. */
 import { spawn } from 'node:child_process';
-import { cp, mkdir, readFile, stat, rename, writeFile } from 'node:fs/promises';
+import { cp, mkdir, readFile, stat, rm, writeFile } from 'node:fs/promises';
 import { delimiter, join, resolve } from 'node:path';
 import { scriptsAt, postBuildSteps } from '../server-answers/revision-entries.mts';
 import { readDeploymentConfig } from '../server-answers/deployment-config.mts';
 import { array, files, number, record, string } from './records.mts';
 import { retainRecordingPair, serverVerdict } from './server-policy.mts';
+import { parallel, recordingConcurrency, recordingIsolation } from './parallel.mts';
 
 export interface Timing { stage: string; seconds: number; exitCode: number }
 interface TargetReport { target: string; base: number | null; head: number | null; differences: { file: string; dimension: string }[]; compared: boolean }
@@ -44,7 +45,7 @@ export function supervisedRun(out: string, budgetMs = 300_000): Run {
     });
   };
 }
-export async function serverStage(base: string, head: string, out: string, mode: 'report' | 'pure-move' | 'semantic', publishedOrigin: string, run?: Run): Promise<ServerReport> {
+export async function serverStage(base: string, head: string, out: string, mode: 'report' | 'pure-move' | 'semantic', publishedOrigin: string, run?: Run, options: { cachedBase?: boolean; onlyBase?: boolean } = {}): Promise<ServerReport> {
   const evidence = join(out, 'server-answers');
   await mkdir(evidence, { recursive: true });
   const execute = run ?? supervisedRun(evidence);
@@ -61,13 +62,18 @@ export async function serverStage(base: string, head: string, out: string, mode:
     return result;
   };
   for (const [side, checkout] of [['base', base], ['head', head]] as const) {
+    if (side === 'head' && options.onlyBase) continue;
+    if (side === 'base' && options.cachedBase) {
+      for (const target of report.targets) target.base = array(record(JSON.parse(await readFile(join(evidence, 'base', target.target, 'index.json'), 'utf8'))).requests).map(string).length;
+      continue;
+    }
     const tools = join(checkout, '.github/scripts/server-answers');
-    const env = { ...process.env, PATH: `${join(checkout, 'node_modules/.bin')}${delimiter}${process.env.PATH ?? ''}`, ASSET_ORIGIN: publishedOrigin, CSSEARTH_ALLOW_MISSING_ASSETS: '0', CSSEARTH_SKIP_DECLARATIONS: '1', NODE_OPTIONS: `--max-old-space-size=6144 --import=${join(tools, 'offline.mts')}` };
-    let moved = false;
+    const env = { ...process.env, PATH: `${join(checkout, 'node_modules/.bin')}${delimiter}${process.env.PATH ?? ''}`, ASSET_ORIGIN: publishedOrigin, CSSEARTH_ALLOW_MISSING_ASSETS: '0', CSSEARTH_SKIP_DECLARATIONS: '1', NODE_OPTIONS: `--max-old-space-size=1536 --import=${join(tools, 'offline.mts')}` };
+    let copied = false;
     try {
-      // L2 readers and package isolation require dist inside the checkout, not an escaping symlink.
-      await rename(join(out, side, 'dist'), join(checkout, 'dist'));
-      moved = true;
+      // L2 mutates its checkout copy; L3 and simultaneous L7 keep reading the original.
+      await cp(join(out, side, 'dist'), join(checkout, 'dist'), { recursive: true, errorOnExist: true, force: false });
+      copied = true;
       const steps = postBuildSteps(await scriptsAt(checkout));
       for (const [index, step] of steps.entries()) {
         const result = await stage(`${side}-bundle-${index}`, 'bash', ['--noprofile', '--norc', '-e', '-o', 'pipefail', '-c', step], checkout, env);
@@ -76,33 +82,37 @@ export async function serverStage(base: string, head: string, out: string, mode:
       const config = await readDeploymentConfig(checkout);
       for (const file of [`${config.functionsDirectory}/search.mjs`, config.workerMain]) if (!(await stat(resolve(checkout, file))).size) throw new Error(`Empty bundle: ${file}`);
       // Host owns fetch routing; the offline preload is only for bundling.
-      const recordingEnv = { ...env, NODE_OPTIONS: '--max-old-space-size=6144' };
-      for (const target of report.targets) {
-        const destination = join(evidence, side, target.target);
-        const recorded = await stage(`${side}-record-${target.target}`, process.execPath, [join(tools, 'record.mts'), '--target', target.target, '--dist', join(checkout, 'dist'), '--asset-origin', publishedOrigin, '--out', destination], checkout, recordingEnv);
-        if (recorded.exitCode) continue;
-        const checked = await stage(`${side}-check-${target.target}`, process.execPath, [join(tools, 'check.mts'), '--recorded', destination], checkout, recordingEnv);
-        if (checked.exitCode) continue;
-        if (!checked.output.includes('Sane baseline:')) { fail(`${side} ${target.target}: checker produced no sanity evidence`); continue; }
+      const recordedTargets = await parallel(report.targets, recordingConcurrency, async target => {
+        const isolated = await recordingIsolation(join(evidence, 'temporary'), `${side}-${target.target}`);
         try {
-          const count = array(record(JSON.parse(await readFile(join(destination, 'index.json'), 'utf8'))).requests).map(string).length;
-          if (!count) throw new Error('Empty request catalogue');
-          target[side] = count;
-        }
-        catch (error) { fail(`${side} ${target.target}: missing valid recording index: ${String(error)}`); }
-      }
+          const recordingEnv = { ...env, ...isolated.env, PATH: env.PATH };
+          const destination = join(evidence, side, target.target);
+          const recorded = await stage(`${side}-record-${target.target}`, process.execPath, [join(tools, 'record.mts'), '--target', target.target, '--dist', join(checkout, 'dist'), '--asset-origin', publishedOrigin, '--out', destination], checkout, recordingEnv);
+          if (recorded.exitCode) return;
+          const checked = await stage(`${side}-check-${target.target}`, process.execPath, [join(tools, 'check.mts'), '--recorded', destination], checkout, recordingEnv);
+          if (checked.exitCode) return;
+          if (!checked.output.includes('Sane baseline:')) { fail(`${side} ${target.target}: checker produced no sanity evidence`); return; }
+          try {
+            const count = array(record(JSON.parse(await readFile(join(destination, 'index.json'), 'utf8'))).requests).map(string).length;
+            if (!count) throw new Error('Empty request catalogue');
+            target[side] = count;
+          }
+          catch (error) { fail(`${side} ${target.target}: missing valid recording index: ${String(error)}`); }
+        } finally { await isolated.close(); }
+      });
+      for (const result of recordedTargets) if (result.status === 'rejected') fail(`${side} recording: ${String(result.reason)}`);
     } catch (error) { fail(`${side}: ${String(error)}`); }
     finally {
-      if (moved) {
-        try { await rename(join(checkout, 'dist'), join(out, side, 'dist')); }
-        catch (error) { fail(`${side} restore dist: ${String(error)}`); }
+      if (copied) {
+        try { await rm(join(checkout, 'dist'), { recursive: true, force: true }); }
+        catch (error) { fail(`${side} remove temporary dist: ${String(error)}`); }
       }
     }
   }
-  for (const target of report.targets) {
+  for (const target of options.onlyBase ? [] : report.targets) {
     if (target.base === null || target.head === null) continue;
     const before = join(evidence, 'base', target.target), after = join(evidence, 'head', target.target);
-    const result = await stage(`diff-${target.target}`, process.execPath, [join(base, '.github/scripts/server-answers/diff.mts'), '--base', before, '--head', after, '--summary'], base, { ...process.env, NODE_OPTIONS: '--max-old-space-size=6144' });
+    const result = await stage(`diff-${target.target}`, process.execPath, [join(head, '.github/scripts/server-answers/diff.mts'), '--base', before, '--head', after, '--summary'], head, { ...process.env, NODE_OPTIONS: '--max-old-space-size=1024' });
     if (result.exitCode > 1) continue;
     try {
       target.differences = array(record(JSON.parse(result.output)).differences).map(raw => { const diff = record(raw); return { file: string(diff.file), dimension: string(diff.dimension) }; });
@@ -120,7 +130,7 @@ export async function serverStage(base: string, head: string, out: string, mode:
     } catch (error) { fail(`${target.target} diff evidence: ${String(error)}`); }
   }
   report.exitCode = serverVerdict(mode, report.targets.reduce((sum, target) => sum + target.differences.length, 0), report.failures.length);
-  await writeFile(join(out, 'server-answers.json'), `${JSON.stringify(report, null, 2)}\n`);
+  await writeFile(join(out, 'server-answers.json'), `${JSON.stringify({ ...report, timings: undefined }, null, 2)}\n`);
   console.log(serverSummary(report));
   return report;
 }

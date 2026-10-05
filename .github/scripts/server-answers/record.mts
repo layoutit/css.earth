@@ -13,7 +13,7 @@ export async function record(target: Target, dist: string, out: string, publishe
   if (resolve(dist) !== resolve('dist')) throw new Error('The real search-data reader uses cwd/dist; run from the build checkout with --dist dist.');
   await mkdir(out, { recursive: true });
   if ((await readdir(out)).length) throw new Error('Output directory must be empty');
-  const child = spawn(process.execPath, [resolve(import.meta.dirname, 'host.mts'), target, resolve(dist), assetOrigin(publishedOrigin)], { cwd: process.cwd(), stdio: ['ignore', 'pipe', 'pipe', 'ipc'] });
+  const child = spawn(process.execPath, [resolve(import.meta.dirname, 'host.mts'), target, resolve(dist), assetOrigin(publishedOrigin)], { cwd: process.cwd(), env: { ...process.env, ...(process.env.CSSEARTH_HOST_HEAP_MB ? { NODE_OPTIONS: `--max-old-space-size=${process.env.CSSEARTH_HOST_HEAP_MB}` } : {}) }, stdio: ['ignore', 'pipe', 'pipe', 'ipc'] });
   let log = '';
   if (!child.stderr) throw new Error('Missing child diagnostic pipe');
   child.stderr.on('data', chunk => { log += String(chunk); });

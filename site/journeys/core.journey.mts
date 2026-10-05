@@ -1,5 +1,6 @@
 /** Core representative journeys through shell links, browser history and native input. */
 import type { Journey } from './harness/api.mts';
+import { json } from './harness/trace.mts';
 
 type Api = Parameters<Journey['run']>[0];
 const representatives = [
@@ -13,14 +14,19 @@ const searchExercises = [
   'handler:site:navigation:navigation-history:bindNavigationLinks:objectnavigationquery:1',
 ];
 
-/** Drive the public router event used by the iPad harness; retain a resident reload witness. */
-async function chooseDestination(api: Api, id: string, route: string) {
+/** Drive a native Dione link or the public router event, and retain a resident reload witness. */
+async function chooseDestination(api: Api, id: string, route: string, native = false) {
   await api.page.evaluate(() => { Reflect.set(window, '__journeyDocumentStayed', true); });
   await api.barrier('navigation-ready', route);
   api.setStep(`choose-${id}`);
-  await api.fly(id === 'earth-system' ? 'earth' : id);
+  if (native) await api.page.locator('a.object-link[data-object-id="dione"]').click();
+  else await api.fly(id === 'earth-system' ? 'earth' : id);
   await api.barrier(`arrive-${id}`, `/${id}/`);
+  if (native && (await api.page.locator('.object-information-panel').getAttribute('data-card-subject') !== 'body'
+    || !await api.page.locator('.object-information-panel .object-selected-panel[data-source-subject="object:dione"]').isVisible()))
+    throw new Error('Native Dione link did not present its body card');
   await assertResident(api);
+  await api.navigationWitness(false, route);
 }
 async function assertResident(api: Api) {
   if (await api.page.evaluate(() => Reflect.get(window, '__journeyDocumentStayed')) !== true)
@@ -29,10 +35,11 @@ async function assertResident(api: Api) {
 
 export const journeys: Journey[] = representatives.flatMap<Journey>(({ id, source }) => [
   {
-    id: `${id}-navigation`, exercises: searchExercises,
+    id: `${id}-navigation`, recipe: json({ id, source, chooseDestination: String(chooseDestination), assertResident: String(assertResident) }), exercises: id === 'dione' ? ['capability:inAppNavigation',
+      'handler:site:navigation:navigation-history:bindNavigationLinks:click:1'] : searchExercises,
     async run(api) {
       await api.load(`/${source}/`, 'departure');
-      await chooseDestination(api, id, `/${source}/`);
+      await chooseDestination(api, id, `/${source}/`, id === 'dione');
     },
   },
   {
@@ -51,7 +58,10 @@ export const journeys: Journey[] = representatives.flatMap<Journey>(({ id, sourc
     },
   },
   {
-    id: `${id}-deep-link`, exercises: ['capability:directLoad', 'capability:historyDeepLinks'],
+    id: `${id}-deep-link`, recipe: json({ id }), exercises: ['capability:directLoad', 'capability:historyDeepLinks',
+      ...(id === 'earth-system' ? ['control:site:components:ObjectShell:button:markup:4',
+        'handler:site:shell:shell-settings:createSettingsController:click:1',
+        'handler:site:shell:shell-settings:createSettingsController:beforetoggle:1'] : [])],
     async run(api) {
       // The native settings link is supported by both the preview and enhanced shell.
       const query = id === 'milky-way' ? '?settings=1' : '?settings=1&shadows=on';
@@ -65,6 +75,14 @@ export const journeys: Journey[] = representatives.flatMap<Journey>(({ id, sourc
       const value: unknown = JSON.parse(settings);
       if (!value || typeof value !== 'object' || id !== 'milky-way' && !('shadows' in value && value.shadows === true))
         throw new Error('Deep link did not restore the requested settings');
+      if (id === 'earth-system') {
+        api.setStep('restored-settings');
+        await api.page.locator('.object-settings-action').click();
+        await api.barrier('restored-settings', `/${id}/`);
+        if (!await api.page.locator('.object-settings-panel input[name="shadows"]').isChecked())
+          throw new Error('Runtime settings did not preserve requested shadows');
+      }
+      await api.deepLinkWitness();
     },
   },
   {
@@ -86,6 +104,7 @@ export const journeys: Journey[] = representatives.flatMap<Journey>(({ id, sourc
       // Selecting the host already seen as a moon system opens its body; it does not preserve the system address.
       await api.barrier('interrupted-return', source === 'saturn-system' ? '/saturn/' : `/${source}/`);
       await assertResident(api);
+      await api.navigationWitness(true);
     },
   },
   {
@@ -122,14 +141,14 @@ journeys.push({
     if (!box) throw new Error('Missing input surface');
     const x = box.x + box.width / 2, y = box.y + box.height / 2;
     await api.page.mouse.move(x, y);
-    await api.page.mouse.down();
+    await api.input('pointerdown', () => api.page.mouse.down());
     for (let step = 1; step <= 8; step++) {
       await api.page.mouse.move(x + step * 8, y + step * 2);
       await api.frames(1);
     }
     // Hold before release so this input journey does not also become a coast journey.
     await api.frames(12);
-    await api.page.mouse.up();
+    await api.input('pointerup', () => api.page.mouse.up());
     await api.barrier('drag', '/dione/');
   },
 }, {
@@ -140,7 +159,7 @@ journeys.push({
     const field = api.page.locator('.object-sidebar-search');
     await field.fill('Dione');
     await api.barrier('search', '/dione/');
-    await field.press('ArrowDown');
+    await api.input('keydown', () => field.press('ArrowDown'));
     const focused = await api.page.evaluate(() => Boolean(document.activeElement?.closest('.object-browser')));
     if (!focused) throw new Error('Keyboard step did not move focus to search results');
     await api.barrier('keyboard-step', '/dione/');

@@ -1,0 +1,2690 @@
+{
+  "schema": "plan7-s0-w2-manifest@1",
+  "method": "TypeScript AST + markup candidates + literal module graph. Unknowns are not claims of completeness.",
+  "entries": [
+    {
+      "id": "capability:coldWarmCache",
+      "kind": "capability",
+      "source": "packages/renderer/src/navigation/object-orbit.ts:370"
+    },
+    {
+      "id": "capability:directLoad",
+      "kind": "capability",
+      "source": "packages/renderer/src/navigation/camera-layout.ts:3"
+    },
+    {
+      "id": "capability:docs:performance:motion-freezes-membership:coast-exception:batched-star-points:1",
+      "kind": "capability",
+      "source": "docs/performance/motion-freezes-membership.md:92"
+    },
+    {
+      "id": "capability:docs:performance:motion-freezes-membership:coast-exception:earth's-lighting-frame:1",
+      "kind": "capability",
+      "source": "docs/performance/motion-freezes-membership.md:93"
+    },
+    {
+      "id": "capability:docs:performance:motion-freezes-membership:coast-exception:orbit-strokes:1",
+      "kind": "capability",
+      "source": "docs/performance/motion-freezes-membership.md:91"
+    },
+    {
+      "id": "capability:docs:performance:motion-freezes-membership:coast-exception:sky-faces:1",
+      "kind": "capability",
+      "source": "docs/performance/motion-freezes-membership.md:94"
+    },
+    {
+      "id": "capability:DPR",
+      "kind": "capability",
+      "source": "packages/renderer/src/rendering/prepared-leaf-box-blocks.ts:104"
+    },
+    {
+      "id": "capability:historyDeepLinks",
+      "kind": "capability",
+      "source": "site/layouts/ObjectLayout.astro:163"
+    },
+    {
+      "id": "capability:inAppNavigation",
+      "kind": "capability",
+      "source": "site/env.d.ts:5"
+    },
+    {
+      "id": "capability:interruptedNavigation",
+      "kind": "capability",
+      "source": "packages/renderer/src/labels/surface-feature-catalog.ts:3"
+    },
+    {
+      "id": "capability:ipad-import-queue",
+      "kind": "capability",
+      "source": "site/import-queue.mts:1"
+    },
+    {
+      "id": "capability:keyboard",
+      "kind": "capability",
+      "source": "packages/renderer/src/labels/surface-feature-labels.ts:170"
+    },
+    {
+      "id": "capability:labs:performance:coast-writes:coast-allowed-write:1",
+      "kind": "capability",
+      "source": "labs/performance/coast-writes.mts:16"
+    },
+    {
+      "id": "capability:labs:performance:coast-writes:coast-allowed-write:2",
+      "kind": "capability",
+      "source": "labs/performance/coast-writes.mts:17"
+    },
+    {
+      "id": "capability:labs:performance:coast-writes:coast-allowed-write:3",
+      "kind": "capability",
+      "source": "labs/performance/coast-writes.mts:17"
+    },
+    {
+      "id": "capability:labs:performance:coast-writes:coast-allowed-write:4",
+      "kind": "capability",
+      "source": "labs/performance/coast-writes.mts:17"
+    },
+    {
+      "id": "capability:labs:performance:coast-writes:coast-allowed-write:5",
+      "kind": "capability",
+      "source": "labs/performance/coast-writes.mts:18"
+    },
+    {
+      "id": "capability:labs:performance:coast-writes:coast-allowed-write:6",
+      "kind": "capability",
+      "source": "labs/performance/coast-writes.mts:19"
+    },
+    {
+      "id": "capability:mouse",
+      "kind": "capability",
+      "source": "packages/renderer/src/navigation/camera-input-listeners.ts:20"
+    },
+    {
+      "id": "capability:penPointer",
+      "kind": "capability",
+      "source": "packages/renderer/src/labels/surface-feature-labels.ts:167"
+    },
+    {
+      "id": "capability:reducedMotion",
+      "kind": "capability",
+      "source": "packages/renderer/src/labels/surface-feature-labels.ts:402"
+    },
+    {
+      "id": "capability:responsive",
+      "kind": "capability",
+      "source": "packages/renderer/src/labels/surface-feature-labels.ts:308"
+    },
+    {
+      "id": "capability:runtimeMount",
+      "kind": "capability",
+      "source": "packages/renderer/src/universe/catalogue-points.ts:274"
+    },
+    {
+      "id": "capability:serverAdoption",
+      "kind": "capability",
+      "source": "packages/renderer/src/rendering/prepared-omitted-nodes.ts:23"
+    },
+    {
+      "id": "capability:tabFocus",
+      "kind": "capability",
+      "source": "packages/renderer/src/solar-system/heliocentric-navigation.ts:12"
+    },
+    {
+      "id": "capability:touch",
+      "kind": "capability",
+      "source": "packages/renderer/src/navigation/camera-input.ts:357"
+    },
+    {
+      "id": "capability:visibility",
+      "kind": "capability",
+      "source": "packages/renderer/src/navigation/camera-input-listeners.ts:24"
+    },
+    {
+      "id": "capability:wheelTrackpad",
+      "kind": "capability",
+      "source": "packages/renderer/src/labels/surface-feature-flight.ts:40"
+    },
+    {
+      "id": "capability:worker",
+      "kind": "capability",
+      "source": "packages/renderer/src/prepared-data-worker-client.ts:8"
+    },
+    {
+      "id": "control:packages:renderer:src:labels:surface-feature-caption:surfaceFeatureCaption:role:1",
+      "kind": "control",
+      "source": "packages/renderer/src/labels/surface-feature-caption.ts:13",
+      "selector": "[role=\"tooltip\"]"
+    },
+    {
+      "id": "control:packages:renderer:src:solar-system:heliocentric-navigation:write:role:1",
+      "kind": "control",
+      "source": "packages/renderer/src/solar-system/heliocentric-navigation.ts:121",
+      "selector": "[role=\"button\"]"
+    },
+    {
+      "id": "control:site:build:prepare:prepare-world-navigation:input:markup:1",
+      "kind": "control",
+      "source": "site/build/prepare/prepare-world-navigation.ts:244",
+      "tag": "input",
+      "selector": "input",
+      "markup": "<Input | undefined>"
+    },
+    {
+      "id": "control:site:components:Accordion:details:markup:1",
+      "kind": "control",
+      "source": "site/components/Accordion.astro:6",
+      "tag": "details",
+      "selector": "details",
+      "markup": "<details class:list={['object-accordion', className]} open={open} {...attributes}>"
+    },
+    {
+      "id": "control:site:components:Accordion:summary:markup:1",
+      "kind": "control",
+      "source": "site/components/Accordion.astro:7",
+      "tag": "summary",
+      "selector": ".object-panel-summary",
+      "markup": "<summary class=\"object-panel-summary\">"
+    },
+    {
+      "id": "control:site:components:ChildList:span:markup:1",
+      "kind": "control",
+      "source": "site/components/ChildList.astro:28",
+      "tag": "span",
+      "selector": "[role=\"link\"]",
+      "markup": "<span class=\"object-link object-observation-control object-thumbnail-leading object-result-row\" role=\"link\" aria-disabled=\"true\" title=\"Not available yet\">"
+    },
+    {
+      "id": "control:site:components:CssEarthWordmark:a:markup:1",
+      "kind": "control",
+      "source": "site/components/CssEarthWordmark.astro:6",
+      "tag": "a",
+      "selector": ".maps-brand-button",
+      "markup": "<a class=\"maps-brand-button\" href=\"/\" aria-label=\"Open cssEarth explorer\">"
+    },
+    {
+      "id": "control:site:components:DatasetContextPanels:a:markup:1",
+      "kind": "control",
+      "source": "site/components/DatasetContextPanels.astro:89",
+      "tag": "a",
+      "selector": "a",
+      "markup": "<a class:list={['object-facility-image-link', entry.image.subject && 'object-facility-image-crop']}\n                  style={entry.image.subject && `--frame-w:${entry.image.width};--frame-h:${entry.image.height};--subject-x:${entry.image.subject.left};--subject-y:${entry.image.subject.top};--subject-w:${entry.image.subject.width};--subject-h:${entry.image.subject.height}`}\n                  href={entry.image.sourceUrl} target=\"_blank\" rel=\"noreferrer\" aria-label={`${entry.title} artwork \u2014 ${entry.image.credit}`}>"
+    },
+    {
+      "id": "control:site:components:DatasetContextPanels:a:markup:2",
+      "kind": "control",
+      "source": "site/components/DatasetContextPanels.astro:94",
+      "tag": "a",
+      "selector": ".object-facility-emblem",
+      "markup": "<a class=\"object-facility-emblem\" href={entry.emblem.sourceUrl} target=\"_blank\" rel=\"noreferrer\" aria-label={`${entry.title} emblem \u2014 ${entry.emblem.credit}`}>"
+    },
+    {
+      "id": "control:site:components:DatasetContextPanels:div:markup:1",
+      "kind": "control",
+      "source": "site/components/DatasetContextPanels.astro:66",
+      "tag": "div",
+      "selector": "[data-dataset-context]",
+      "markup": "<div data-dataset-context={context.dataset.id} hidden={context.dataset.id !== datasets?.defaultDataset}>"
+    },
+    {
+      "id": "control:site:components:DatasetContextPanels:div:markup:2",
+      "kind": "control",
+      "source": "site/components/DatasetContextPanels.astro:74",
+      "tag": "div",
+      "selector": "[data-information-group]",
+      "markup": "<div class=\"object-card-tabpanel\"\n          id={tabbed ? `${objectId}-${context.dataset.id}-${entry.id}-panel` : undefined}\n          data-information-group={tabbed ? `context-${objectId}-${context.dataset.id}` : undefined}\n          data-information-panel={tabbed ? entry.id : undefined}\n          role={tabbed ? 'region' : undefined}\n          aria-label={tabbed ? (byBand ? entry.band : entry.title) : undefined}\n          tabindex={tabbed ? 0 : undefined}>"
+    },
+    {
+      "id": "control:site:components:DatasetContextPanels:objectcard:markup:1",
+      "kind": "control",
+      "source": "site/components/DatasetContextPanels.astro:67",
+      "tag": "objectcard",
+      "selector": "[role=\"region\"]",
+      "markup": "<ObjectCard class=\"object-dataset-context-card\" role=\"region\"\n        aria-label={tabbed ? 'Credited machines' : group[0].title}>"
+    },
+    {
+      "id": "control:site:components:DatasetDescription:a:markup:1",
+      "kind": "control",
+      "source": "site/components/DatasetDescription.astro:12",
+      "tag": "a",
+      "selector": ".object-dataset-source-link",
+      "markup": "<a class=\"object-dataset-source-link\" href={dataset.sourceUrl} target=\"_blank\" rel=\"noopener noreferrer\">"
+    },
+    {
+      "id": "control:site:components:DatasetLegend:span:markup:1",
+      "kind": "control",
+      "source": "site/components/DatasetLegend.astro:27",
+      "tag": "span",
+      "selector": "[role=\"img\"]",
+      "markup": "<span class=\"object-dataset-legend-scale object-dataset-legend-segments\" role=\"img\" aria-label={scaleLabel}>"
+    },
+    {
+      "id": "control:site:components:DatasetList:button:markup:1",
+      "kind": "control",
+      "source": "site/components/DatasetList.astro:67",
+      "tag": "button",
+      "selector": ".object-observation-control.object-thumbnail-leading.object-result-row",
+      "markup": "<button\n            class=\"object-observation-control object-thumbnail-leading object-result-row\"\n            type=\"submit\"\n            form={`${objectId}-datasets`}\n            name=\"dataset\"\n            value={dataset.id}\n            aria-pressed={dataset.id === datasets.defaultDataset ? \"true\" : \"false\"}\n            aria-controls={`${objectId}-${dataset.id}-details`}\n            title={dataset.title}\n          >"
+    },
+    {
+      "id": "control:site:components:DatasetList:div:markup:1",
+      "kind": "control",
+      "source": "site/components/DatasetList.astro:45",
+      "tag": "div",
+      "selector": "[data-dataset-picker]",
+      "markup": "<div class=\"object-dataset-picker\" data-dataset-picker>"
+    },
+    {
+      "id": "control:site:components:DatasetList:div:markup:2",
+      "kind": "control",
+      "source": "site/components/DatasetList.astro:64",
+      "tag": "div",
+      "selector": "[data-dataset-option]",
+      "markup": "<div id={`${objectId}-${dataset.id}-option`} class=\"object-observation-option\" data-dataset-option data-system-dataset={dataset.systemDataset ? dataset.id : undefined}\n          data-step-group={dataset.step?.group} data-step-autoplay={dataset.step?.autoplay === false ? 'false' : undefined}\n          data-step-listed={dataset.step ? String(listed(dataset)) : undefined} hidden={!listed(dataset) || undefined}>"
+    },
+    {
+      "id": "control:site:components:DatasetList:div:markup:3",
+      "kind": "control",
+      "source": "site/components/DatasetList.astro:93",
+      "tag": "div",
+      "selector": "[data-dataset-details]",
+      "markup": "<div\n        id={`${objectId}-${dataset.id}-details`}\n        data-dataset-details={page ? undefined : dataset.id}\n        data-system-dataset-details={!page && dataset.systemDataset ? dataset.id : undefined}\n        data-page-dataset-details={page ? dataset.id : undefined}\n        hidden={dataset.id !== datasets.defaultDataset}\n      >"
+    },
+    {
+      "id": "control:site:components:DatasetList:div:markup:4",
+      "kind": "control",
+      "source": "site/components/DatasetList.astro:101",
+      "tag": "div",
+      "selector": "[data-surface-minimap]",
+      "markup": "<div\n              class=\"object-surface-minimap\"\n              data-surface-minimap={dataset.texture.minimap ? JSON.stringify(dataset.texture.minimap) : undefined}\n            >"
+    },
+    {
+      "id": "control:site:components:DatasetList:form:markup:1",
+      "kind": "control",
+      "source": "site/components/DatasetList.astro:41",
+      "tag": "form",
+      "selector": "[data-dataset-form]",
+      "markup": "<form id={`${objectId}-datasets`} action={route ?? undefined} method=\"get\" data-dataset-form data-drawn-page={page} hidden>"
+    },
+    {
+      "id": "control:site:components:DatasetList:input:markup:1",
+      "kind": "control",
+      "source": "site/components/DatasetList.astro:42",
+      "tag": "input",
+      "selector": "[data-view-context]",
+      "markup": "<input type=\"hidden\" name={name} data-view-context disabled />"
+    },
+    {
+      "id": "control:site:components:DatasetList:select:markup:1",
+      "kind": "control",
+      "source": "site/components/DatasetList.astro:56",
+      "tag": "select",
+      "selector": "[data-dataset-native-select]",
+      "markup": "<select class=\"object-dataset-native-select\" data-dataset-native-select aria-label=\"Dataset\">"
+    },
+    {
+      "id": "control:site:components:DatasetList:span:markup:1",
+      "kind": "control",
+      "source": "site/components/DatasetList.astro:48",
+      "tag": "span",
+      "selector": "[data-dataset-selected]",
+      "markup": "<span class=\"object-dataset-picker-selection\"\n            data-dataset-selected={dataset.id} hidden={dataset.id !== defaultListedId}>"
+    },
+    {
+      "id": "control:site:components:InformationTabs:div:markup:1",
+      "kind": "control",
+      "source": "site/components/InformationTabs.astro:20",
+      "tag": "div",
+      "selector": "[data-view-part]",
+      "markup": "<div class:list={[group === 'overview' ? 'object-tabs' : 'object-card-tabs', 'object-native-tabs']}\n  role=\"radiogroup\" aria-label={label} data-view-part={viewPart} {hidden}>"
+    },
+    {
+      "id": "control:site:components:InformationTabs:input:markup:1",
+      "kind": "control",
+      "source": "site/components/InformationTabs.astro:23",
+      "tag": "input",
+      "selector": "[data-information-tab]",
+      "markup": "<input class=\"object-native-tab\" type=\"radio\" name={`${idPrefix}-information`} id={`${idPrefix}-${tab.id}-tab`}\n      data-information-tab={tab.id} data-information-group={group} value={tab.id} aria-controls={`${idPrefix}-${tab.id}-${panelSuffix}`} checked={tab.id === (initialTab ?? tabs[0]?.id)} />"
+    },
+    {
+      "id": "control:site:components:ObjectBreadcrumbs:a:markup:1",
+      "kind": "control",
+      "source": "site/components/ObjectBreadcrumbs.astro:31",
+      "tag": "a",
+      "selector": "a",
+      "markup": "<a href={crumb.href}>"
+    },
+    {
+      "id": "control:site:components:ObjectCardHeader:a:markup:1",
+      "kind": "control",
+      "source": "site/components/ObjectCardHeader.astro:23",
+      "tag": "a",
+      "selector": ".object-learn-more-link",
+      "markup": "<a class=\"object-learn-more-link\" href={wikipediaLearnMoreUrl(title.label, articleUrl)} target=\"_blank\" rel=\"noopener noreferrer\">"
+    },
+    {
+      "id": "control:site:components:ObjectFactsheet:summary:markup:1",
+      "kind": "control",
+      "source": "site/components/ObjectFactsheet.astro:25",
+      "tag": "summary",
+      "selector": ".object-factsheet-header.object-panel-summary",
+      "markup": "<summary class=\"object-factsheet-header object-panel-summary\">"
+    },
+    {
+      "id": "control:site:components:ObjectInformationPanel:a:markup:1",
+      "kind": "control",
+      "source": "site/components/ObjectInformationPanel.astro:99",
+      "tag": "a",
+      "selector": ".object-observation-control.object-thumbnail-leading.object-result-row",
+      "markup": "<a class=\"object-observation-control object-thumbnail-leading object-result-row\" href={source.url} target=\"_blank\" rel=\"noopener noreferrer\">"
+    },
+    {
+      "id": "control:site:components:ObjectInformationPanel:details:markup:1",
+      "kind": "control",
+      "source": "site/components/ObjectInformationPanel.astro:64",
+      "tag": "details",
+      "selector": ".object-gallery-panel",
+      "markup": "<details id={`${objectId}-${gallery.id}`} class=\"object-gallery-panel\" hidden={gallery.hidden}>"
+    },
+    {
+      "id": "control:site:components:ObjectInformationPanel:objectcard:markup:1",
+      "kind": "control",
+      "source": "site/components/ObjectInformationPanel.astro:43",
+      "tag": "objectcard",
+      "selector": "[data-card-subject]",
+      "markup": "<ObjectCard class=\"object-information-panel\" data-card-subject={cardSubject}\n  data-card-view={cardSubject === 'body' ? undefined : 'overview'}>"
+    },
+    {
+      "id": "control:site:components:ObjectInformationPanel:objectcardheader:markup:1",
+      "kind": "control",
+      "source": "site/components/ObjectInformationPanel.astro:46",
+      "tag": "objectcardheader",
+      "selector": "[data-source-subject]",
+      "markup": "<ObjectCardHeader {objectId} {title} {introduction} {articleUrl}\n        data-source-subject={`object:${objectId}`} data-source-document={source.href} data-source-label={source.label}>"
+    },
+    {
+      "id": "control:site:components:ObjectInformationPanel:p:markup:1",
+      "kind": "control",
+      "source": "site/components/ObjectInformationPanel.astro:56",
+      "tag": "p",
+      "selector": "[data-dataset-notice]",
+      "markup": "<p data-dataset-notice role=\"status\" aria-live=\"polite\" hidden>"
+    },
+    {
+      "id": "control:site:components:ObjectInformationPanel:section:markup:1",
+      "kind": "control",
+      "source": "site/components/ObjectInformationPanel.astro:57",
+      "tag": "section",
+      "selector": "[data-information-panel=\"bodies\"]",
+      "markup": "<section class=\"object-results-scroll object-card-tabpanel\" id={`${objectId}-bodies-content`} data-information-panel=\"bodies\" aria-label=\"Celestial bodies\">"
+    },
+    {
+      "id": "control:site:components:ObjectInformationPanel:section:markup:2",
+      "kind": "control",
+      "source": "site/components/ObjectInformationPanel.astro:91",
+      "tag": "section",
+      "selector": "[data-information-panel=\"factsheet\"]",
+      "markup": "<section class=\"object-card-tabpanel object-factsheet-content\" id={`${objectId}-factsheet-content`} data-information-panel=\"factsheet\" aria-label=\"Factsheet\">"
+    },
+    {
+      "id": "control:site:components:ObjectInformationPanel:section:markup:3",
+      "kind": "control",
+      "source": "site/components/ObjectInformationPanel.astro:95",
+      "tag": "section",
+      "selector": "[data-information-panel=\"sources\"]",
+      "markup": "<section class=\"object-results-scroll object-card-tabpanel object-sources-content\" id={`${objectId}-sources-content`} data-information-panel=\"sources\" aria-label=\"Sources\">"
+    },
+    {
+      "id": "control:site:components:ObjectInformationPanel:summary:markup:1",
+      "kind": "control",
+      "source": "site/components/ObjectInformationPanel.astro:65",
+      "tag": "summary",
+      "selector": ".object-panel-summary",
+      "markup": "<summary class=\"object-panel-summary\">"
+    },
+    {
+      "id": "control:site:components:ObjectInformationPanel:treedisclosure:markup:1",
+      "kind": "control",
+      "source": "site/components/ObjectInformationPanel.astro:60",
+      "tag": "treedisclosure",
+      "selector": "[data-information-panel=\"dataset\"]",
+      "markup": "<TreeDisclosure title=\"Datasets\" class=\"object-card-tabpanel object-dataset-content\" id={`${objectId}-dataset-content`} data-information-panel=\"dataset\" data-system-view-datasets={systemDatasets || undefined} open>"
+    },
+    {
+      "id": "control:site:components:ObjectPage:style:markup:1",
+      "kind": "control",
+      "source": "site/components/ObjectPage.astro:30",
+      "tag": "style",
+      "selector": "[data-object-style]",
+      "markup": "<style is:inline data-object-style={path} set:html={css} />"
+    },
+    {
+      "id": "control:site:components:ObjectResults:button:markup:1",
+      "kind": "control",
+      "source": "site/components/ObjectResults.astro:10",
+      "tag": "button",
+      "selector": "[data-search-retry]",
+      "markup": "<button type=\"button\" class=\"object-retry\" data-search-retry>"
+    },
+    {
+      "id": "control:site:components:ObjectResults:div:markup:1",
+      "kind": "control",
+      "source": "site/components/ObjectResults.astro:7",
+      "tag": "div",
+      "selector": "[role=\"region\"]",
+      "markup": "<div id=\"object-category-results\" class=\"object-results-scroll\" role=\"region\" aria-label=\"Search results\" tabindex=\"0\" hidden>"
+    },
+    {
+      "id": "control:site:components:ObjectResults:p:markup:1",
+      "kind": "control",
+      "source": "site/components/ObjectResults.astro:9",
+      "tag": "p",
+      "selector": "[data-search-error]",
+      "markup": "<p class=\"object-error\" role=\"alert\" data-search-error hidden>"
+    },
+    {
+      "id": "control:site:components:ObjectResults:p:markup:2",
+      "kind": "control",
+      "source": "site/components/ObjectResults.astro:12",
+      "tag": "p",
+      "selector": "[data-search-busy]",
+      "markup": "<p class=\"object-empty\" data-search-busy hidden>"
+    },
+    {
+      "id": "control:site:components:ObjectShell:a:markup:1",
+      "kind": "control",
+      "source": "site/components/ObjectShell.astro:72",
+      "tag": "a",
+      "selector": ".explorer-brand-version",
+      "markup": "<a class=\"explorer-brand-version\" title=\"GitHub\" aria-label={`GitHub v${__CSSEARTH_VERSION__}`} href=\"https://github.com/layoutit/cssEarth\" target=\"_blank\" rel=\"noopener noreferrer\">"
+    },
+    {
+      "id": "control:site:components:ObjectShell:a:markup:2",
+      "kind": "control",
+      "source": "site/components/ObjectShell.astro:95",
+      "tag": "a",
+      "selector": ".object-sidebar-search-clear",
+      "markup": "<a class=\"object-sidebar-search-clear\" href={pageRoute ?? activeObject?.route} aria-label=\"Clear search\" title=\"Clear search\">"
+    },
+    {
+      "id": "control:site:components:ObjectShell:a:markup:3",
+      "kind": "control",
+      "source": "site/components/ObjectShell.astro:113",
+      "tag": "a",
+      "selector": ".object-header-link",
+      "markup": "<a class=\"object-header-link\" href=\"https://github.com/layoutit/cssEarth\" target=\"_blank\" rel=\"noopener noreferrer\" aria-label=\"GitHub\" title=\"GitHub\">"
+    },
+    {
+      "id": "control:site:components:ObjectShell:a:markup:4",
+      "kind": "control",
+      "source": "site/components/ObjectShell.astro:249",
+      "tag": "a",
+      "selector": ".explorer-brand-version",
+      "markup": "<a class=\"explorer-brand-version\" title=\"GitHub\" aria-label={`GitHub v${__CSSEARTH_VERSION__}`} href=\"https://github.com/layoutit/cssEarth\" target=\"_blank\" rel=\"noopener noreferrer\">"
+    },
+    {
+      "id": "control:site:components:ObjectShell:button:markup:1",
+      "kind": "control",
+      "source": "site/components/ObjectShell.astro:81",
+      "tag": "button",
+      "selector": "[data-search-submit]",
+      "markup": "<button type=\"submit\" hidden tabindex=\"-1\" aria-hidden=\"true\" data-search-submit>"
+    },
+    {
+      "id": "control:site:components:ObjectShell:button:markup:2",
+      "kind": "control",
+      "source": "site/components/ObjectShell.astro:102",
+      "tag": "button",
+      "selector": "[data-search-query]",
+      "markup": "<button\n      class=\"object-search-category\"\n      type=\"submit\" form={searchFormId} name=\"browse\" value={category.label}\n      data-search-query={category.label}\n      data-search-classification={category.classification}\n      aria-pressed=\"false\"\n    >"
+    },
+    {
+      "id": "control:site:components:ObjectShell:button:markup:3",
+      "kind": "control",
+      "source": "site/components/ObjectShell.astro:111",
+      "tag": "button",
+      "selector": ".object-showcase-action",
+      "markup": "<button class=\"object-showcase-action\" type=\"button\" aria-pressed=\"false\" aria-label=\"Slideshow\"\n      title=\"Slideshow: fly between featured bodies until you take over\">"
+    },
+    {
+      "id": "control:site:components:ObjectShell:button:markup:4",
+      "kind": "control",
+      "source": "site/components/ObjectShell.astro:116",
+      "tag": "button",
+      "selector": ".object-header-action.object-settings-action",
+      "markup": "<button class=\"object-header-action object-settings-action\" type=\"button\" popovertarget=\"object-settings\"\n      aria-label=\"Settings\" title=\"Settings\" aria-controls=\"object-settings\">"
+    },
+    {
+      "id": "control:site:components:ObjectShell:button:markup:5",
+      "kind": "control",
+      "source": "site/components/ObjectShell.astro:192",
+      "tag": "button",
+      "selector": "[data-state]",
+      "markup": "<button class=\"object-setting-control\" type=\"button\" name={setting.name} data-state={setting.state} aria-label={`${setting.label}: ${setting.state}`}>"
+    },
+    {
+      "id": "control:site:components:ObjectShell:button:markup:6",
+      "kind": "control",
+      "source": "site/components/ObjectShell.astro:202",
+      "tag": "button",
+      "selector": ".object-setting-control.object-settings-submit",
+      "markup": "<button class=\"object-setting-control object-settings-submit\" type=\"submit\" form=\"object-settings-form\">"
+    },
+    {
+      "id": "control:site:components:ObjectShell:button:markup:7",
+      "kind": "control",
+      "source": "site/components/ObjectShell.astro:234",
+      "tag": "button",
+      "selector": ".object-destination-back",
+      "markup": "<button class=\"object-destination-back\" type=\"button\">"
+    },
+    {
+      "id": "control:site:components:ObjectShell:button:markup:8",
+      "kind": "control",
+      "source": "site/components/ObjectShell.astro:251",
+      "tag": "button",
+      "selector": "[data-diagnostic-record]",
+      "markup": "<button type=\"button\" class=\"object-diagnostic-record\" data-diagnostic-record aria-label=\"Record diagnostic data\" aria-pressed=\"false\" hidden>"
+    },
+    {
+      "id": "control:site:components:ObjectShell:div:markup:1",
+      "kind": "control",
+      "source": "site/components/ObjectShell.astro:101",
+      "tag": "div",
+      "selector": "[role=\"group\"]",
+      "markup": "<div class=\"object-search-categories\" role=\"group\" aria-label=\"Browse by type\">"
+    },
+    {
+      "id": "control:site:components:ObjectShell:div:markup:2",
+      "kind": "control",
+      "source": "site/components/ObjectShell.astro:110",
+      "tag": "div",
+      "selector": "[role=\"group\"]",
+      "markup": "<div class=\"object-header-actions\" role=\"group\" aria-label=\"App actions\">"
+    },
+    {
+      "id": "control:site:components:ObjectShell:form:markup:1",
+      "kind": "control",
+      "source": "site/components/ObjectShell.astro:76",
+      "tag": "form",
+      "selector": "[data-search-object]",
+      "markup": "<form id={searchFormId} class=\"object-sidebar-search-card\" role=\"search\" aria-label=\"Object search\"\n        action={pageRoute ?? activeObject?.route} method=\"get\" data-search-object={objectId} data-search-prompt={searchPlaceholder}>"
+    },
+    {
+      "id": "control:site:components:ObjectShell:form:markup:2",
+      "kind": "control",
+      "source": "site/components/ObjectShell.astro:126",
+      "tag": "form",
+      "selector": "[data-settings-form]",
+      "markup": "<form id=\"object-settings-form\" action={pageRoute ?? `/${objectId}/`} method=\"get\" data-settings-form hidden>"
+    },
+    {
+      "id": "control:site:components:ObjectShell:input:markup:1",
+      "kind": "control",
+      "source": "site/components/ObjectShell.astro:78",
+      "tag": "input",
+      "selector": "[data-search-context]",
+      "markup": "<input type=\"hidden\" name={name} data-search-context disabled />"
+    },
+    {
+      "id": "control:site:components:ObjectShell:input:markup:10",
+      "kind": "control",
+      "source": "site/components/ObjectShell.astro:176",
+      "tag": "input",
+      "selector": ".object-surface-labels-setting",
+      "markup": "<input class=\"object-surface-labels-setting\" type=\"checkbox\" name=\"surfaceLabels\" disabled />"
+    },
+    {
+      "id": "control:site:components:ObjectShell:input:markup:11",
+      "kind": "control",
+      "source": "site/components/ObjectShell.astro:181",
+      "tag": "input",
+      "selector": ".object-heliosphere-setting",
+      "markup": "<input class=\"object-heliosphere-setting\" type=\"checkbox\" name=\"heliosphere\" disabled />"
+    },
+    {
+      "id": "control:site:components:ObjectShell:input:markup:12",
+      "kind": "control",
+      "source": "site/components/ObjectShell.astro:186",
+      "tag": "input",
+      "selector": ".object-illustration-models-setting",
+      "markup": "<input class=\"object-illustration-models-setting\" type=\"checkbox\" name=\"illustrationModels\" aria-describedby=\"object-illustration-models-description\" disabled />"
+    },
+    {
+      "id": "control:site:components:ObjectShell:input:markup:13",
+      "kind": "control",
+      "source": "site/components/ObjectShell.astro:197",
+      "tag": "input",
+      "selector": "input",
+      "markup": "<input type=\"checkbox\" name={setting.name} checked={setting.checked} form=\"object-settings-form\" />"
+    },
+    {
+      "id": "control:site:components:ObjectShell:input:markup:14",
+      "kind": "control",
+      "source": "site/components/ObjectShell.astro:208",
+      "tag": "input",
+      "selector": ".object-sheet-handle",
+      "markup": "<input class=\"object-sheet-handle\" type=\"checkbox\" aria-label=\"Expand information sheet\" aria-controls={`${objectId}-information`} />"
+    },
+    {
+      "id": "control:site:components:ObjectShell:input:markup:2",
+      "kind": "control",
+      "source": "site/components/ObjectShell.astro:85",
+      "tag": "input",
+      "selector": ".object-sidebar-search",
+      "markup": "<input\n          class=\"object-sidebar-search\"\n          type=\"search\"\n          name=\"q\"\n          maxlength={SEARCH_QUERY_LIMIT}\n          placeholder={searchPlaceholder}\n          aria-label={searchPlaceholder}\n          aria-controls={`${objectId}-object-browser`}\n          autocomplete=\"off\"\n        />"
+    },
+    {
+      "id": "control:site:components:ObjectShell:input:markup:3",
+      "kind": "control",
+      "source": "site/components/ObjectShell.astro:121",
+      "tag": "input",
+      "selector": ".object-facility-toggle",
+      "markup": "<input class=\"object-facility-toggle\" type=\"checkbox\" aria-label=\"Machines\" checked />"
+    },
+    {
+      "id": "control:site:components:ObjectShell:input:markup:4",
+      "kind": "control",
+      "source": "site/components/ObjectShell.astro:127",
+      "tag": "input",
+      "selector": "input",
+      "markup": "<input type=\"hidden\" name=\"settings\" value=\"1\" />"
+    },
+    {
+      "id": "control:site:components:ObjectShell:input:markup:5",
+      "kind": "control",
+      "source": "site/components/ObjectShell.astro:128",
+      "tag": "input",
+      "selector": "[data-view-context]",
+      "markup": "<input type=\"hidden\" name={name} data-view-context disabled />"
+    },
+    {
+      "id": "control:site:components:ObjectShell:input:markup:6",
+      "kind": "control",
+      "source": "site/components/ObjectShell.astro:139",
+      "tag": "input",
+      "selector": ".object-motion-setting",
+      "markup": "<input class=\"object-motion-setting\" type=\"checkbox\" name=\"motion\" aria-describedby=\"object-motion-description\" disabled />"
+    },
+    {
+      "id": "control:site:components:ObjectShell:input:markup:7",
+      "kind": "control",
+      "source": "site/components/ObjectShell.astro:148",
+      "tag": "input",
+      "selector": ".object-light-curves-setting",
+      "markup": "<input class=\"object-light-curves-setting\" type=\"checkbox\" name=\"lightCurves\" aria-describedby=\"object-light-curves-description\" checked disabled />"
+    },
+    {
+      "id": "control:site:components:ObjectShell:input:markup:8",
+      "kind": "control",
+      "source": "site/components/ObjectShell.astro:155",
+      "tag": "input",
+      "selector": "[data-state]",
+      "markup": "<input\n        id=\"object-speed-setting\"\n        class=\"object-speed-setting\"\n        type=\"range\"\n        name={speedSetting.name}\n        form=\"object-settings-form\"\n        min=\"0\"\n        max=\"4\"\n        step=\"1\"\n        value={initialSpeedValue}\n        data-state={initialSpeedState}\n        aria-label={`${speedSetting.label}: ${initialSpeedState}`}\n        disabled\n      />"
+    },
+    {
+      "id": "control:site:components:ObjectShell:input:markup:9",
+      "kind": "control",
+      "source": "site/components/ObjectShell.astro:171",
+      "tag": "input",
+      "selector": "input",
+      "markup": "<input type=\"checkbox\" name={shadowSetting.name} checked={shadowSetting.checked} form=\"object-settings-form\" />"
+    },
+    {
+      "id": "control:site:components:ObjectShell:p:markup:1",
+      "kind": "control",
+      "source": "site/components/ObjectShell.astro:219",
+      "tag": "p",
+      "selector": "[role=\"status\"]",
+      "markup": "<p class=\"object-feature-hint object-destination-hint\" role=\"status\">"
+    },
+    {
+      "id": "control:site:components:ObjectShell:p:markup:2",
+      "kind": "control",
+      "source": "site/components/ObjectShell.astro:237",
+      "tag": "p",
+      "selector": "[role=\"status\"]",
+      "markup": "<p class=\"object-destination-status\" role=\"status\">"
+    },
+    {
+      "id": "control:site:components:ObjectShell:span:markup:1",
+      "kind": "control",
+      "source": "site/components/ObjectShell.astro:67",
+      "tag": "span",
+      "selector": "[role=\"progressbar\"]",
+      "markup": "<span class=\"explorer-navigation-progress\" role=\"progressbar\" aria-label=\"Loading destination\" aria-hidden=\"true\">"
+    },
+    {
+      "id": "control:site:components:ObjectSwatchStyles:style:markup:1",
+      "kind": "control",
+      "source": "site/components/ObjectSwatchStyles.astro:9",
+      "tag": "style",
+      "selector": "[data-object-style=\"site/components/ObjectSwatchStyles.astro\"]",
+      "markup": "<style is:inline data-object-style=\"site/components/ObjectSwatchStyles.astro\" set:html={`.prepared-world-context { color: ${DEFAULT_CONTEXT_COLOR}; }`}>"
+    },
+    {
+      "id": "control:site:components:SequencePlayer:button:markup:1",
+      "kind": "control",
+      "source": "site/components/SequencePlayer.astro:31",
+      "tag": "button",
+      "selector": "[data-dataset-play]",
+      "markup": "<button class=\"object-dataset-play\" type=\"button\" data-dataset-play={dataset.step!.group} disabled\n      aria-label=\"Play sequence\" aria-pressed=\"false\" title=\"Loop through this sequence\">"
+    },
+    {
+      "id": "control:site:components:SequencePlayer:div:markup:1",
+      "kind": "control",
+      "source": "site/components/SequencePlayer.astro:16",
+      "tag": "div",
+      "selector": "[data-sequence-player]",
+      "markup": "<div class=\"object-sequence-player\" data-sequence-player role=\"group\" aria-label={`${dataset.label} steps`}>"
+    },
+    {
+      "id": "control:site:components:SourcesLink:a:markup:1",
+      "kind": "control",
+      "source": "site/components/SourcesLink.astro:6",
+      "tag": "a",
+      "selector": "[data-source-link]",
+      "markup": "<a class=\"object-attribution-footer object-source-link\" data-source-link data-source-document={source.href} data-source-label={source.label}\n  href={source.href} aria-label={source.label} title={source.label} target=\"_blank\" rel=\"noopener noreferrer\">"
+    },
+    {
+      "id": "control:site:components:SourcesLink:span:markup:1",
+      "kind": "control",
+      "source": "site/components/SourcesLink.astro:8",
+      "tag": "span",
+      "selector": "[data-source-link-label]",
+      "markup": "<span data-source-link-label>"
+    },
+    {
+      "id": "control:site:components:SystemCard:div:markup:1",
+      "kind": "control",
+      "source": "site/components/SystemCard.astro:28",
+      "tag": "div",
+      "selector": "[data-view-part=\"system\"]",
+      "markup": "<div id={`${prefix}-bodies-content`} class=\"object-results-scroll object-card-tabpanel\" data-view-part=\"system\"\n    role=\"region\" aria-label={`Bodies in the ${card.system.name}`}>"
+    },
+    {
+      "id": "control:site:components:SystemCard:div:markup:2",
+      "kind": "control",
+      "source": "site/components/SystemCard.astro:32",
+      "tag": "div",
+      "selector": "[data-view-part=\"system\"]",
+      "markup": "<div id={`${prefix}-factsheet-content`} class=\"object-results-scroll object-card-tabpanel\" data-view-part=\"system\"\n    data-information-panel=\"factsheet\" data-information-group=\"system\" role=\"region\" aria-label=\"Factsheet\">"
+    },
+    {
+      "id": "control:site:components:SystemCard:objectcardheader:markup:1",
+      "kind": "control",
+      "source": "site/components/SystemCard.astro:22",
+      "tag": "objectcardheader",
+      "selector": "[data-view-part=\"system\"]",
+      "markup": "<ObjectCardHeader title={{ label: card.system.name }} heading={false} introduction={card.system.description} data-view-part=\"system\"\n    data-source-subject={`object:${card.system.id}`} data-source-document={card.source.href} data-source-label={card.source.label}>"
+    },
+    {
+      "id": "control:site:components:TreeDisclosure:details:markup:1",
+      "kind": "control",
+      "source": "site/components/TreeDisclosure.astro:6",
+      "tag": "details",
+      "selector": "details",
+      "markup": "<details class:list={['atlas-tree-disclosure', className]} open={open} {...attributes}>"
+    },
+    {
+      "id": "control:site:components:TreeDisclosure:summary:markup:1",
+      "kind": "control",
+      "source": "site/components/TreeDisclosure.astro:7",
+      "tag": "summary",
+      "selector": "summary",
+      "markup": "<summary>"
+    },
+    {
+      "id": "control:site:diagnostic-recorder:link:a:1",
+      "kind": "control",
+      "source": "site/diagnostic-recorder.mts:139",
+      "tag": "a",
+      "selector": "a"
+    },
+    {
+      "id": "control:site:layouts:ObjectLayout:body:markup:1",
+      "kind": "control",
+      "source": "site/layouts/ObjectLayout.astro:192",
+      "tag": "body",
+      "selector": "[data-object-shell]",
+      "markup": "<body data-object-shell={objectRecord.id}>"
+    },
+    {
+      "id": "control:site:layouts:ObjectLayout:div:markup:1",
+      "kind": "control",
+      "source": "site/layouts/ObjectLayout.astro:194",
+      "tag": "div",
+      "selector": "[role=\"status\"]",
+      "markup": "<div class=\"startup-loading\" role=\"status\" aria-label=\"Loading scene\">"
+    },
+    {
+      "id": "control:site:layouts:ObjectLayout:div:markup:2",
+      "kind": "control",
+      "source": "site/layouts/ObjectLayout.astro:223",
+      "tag": "div",
+      "selector": "[role=\"group\"]",
+      "markup": "<div class=\"object-input-surface\" tabindex=\"0\" role=\"group\" aria-label={`Explore ${objectRecord.name}`} />"
+    },
+    {
+      "id": "control:site:layouts:ObjectLayout:img:markup:1",
+      "kind": "control",
+      "source": "site/layouts/ObjectLayout.astro:219",
+      "tag": "img",
+      "selector": "[data-startup-billboard]",
+      "markup": "<img data-startup-billboard fetchpriority=\"high\" src={startupImageSource} alt=\"\" aria-hidden=\"true\" draggable=\"false\" style=\"position:absolute;opacity:0;pointer-events:none\" />"
+    },
+    {
+      "id": "control:site:layouts:ObjectLayout:main:markup:1",
+      "kind": "control",
+      "source": "site/layouts/ObjectLayout.astro:207",
+      "tag": "main",
+      "selector": "[data-object-id]",
+      "markup": "<main\n          class:list={['object-stage', ...scene?.classes ?? []]}\n          {...scene?.attributes}\n          style={scene?.style}\n          data-object-id={objectRecord.id}\n          data-prepared-object={scene && !startup ? objectRecord.id : undefined}\n          aria-label={`3D CSS view of ${objectRecord.name}`}\n          set:html={startup ? '' : scene?.html ?? ''}\n        />"
+    },
+    {
+      "id": "control:site:layouts:ObjectLayout:meta:markup:1",
+      "kind": "control",
+      "source": "site/layouts/ObjectLayout.astro:126",
+      "tag": "meta",
+      "selector": "[data-row]",
+      "markup": "<meta name=\"cssearth-world-files\" content={worldFiles.join(' ')} data-row={ownRow ? objectRecord.id : undefined} />"
+    },
+    {
+      "id": "control:site:layouts:ObjectLayout:style:markup:1",
+      "kind": "control",
+      "source": "site/layouts/ObjectLayout.astro:182",
+      "tag": "style",
+      "selector": "[data-object-style]",
+      "markup": "<style is:inline data-object-style={key} set:html={css} />"
+    },
+    {
+      "id": "control:site:native-input:div:markup:1",
+      "kind": "control",
+      "source": "site/native-input.mts:87",
+      "tag": "div",
+      "selector": "[role=\"group\"]",
+      "markup": "<div class=\"native-scene-input\" role=\"group\" aria-label=\"Drag to turn, scroll to zoom\">"
+    },
+    {
+      "id": "control:site:native-input:span:markup:1",
+      "kind": "control",
+      "source": "site/native-input.mts:87",
+      "tag": "span",
+      "selector": ".native-zoom-start",
+      "markup": "<span class=\"native-zoom-start\" aria-hidden=\"true\" tabindex=\"-1\" autofocus>"
+    },
+    {
+      "id": "control:site:native-view-forms:input:input:1",
+      "kind": "control",
+      "source": "site/native-view-forms.mts:17",
+      "tag": "input",
+      "selector": "input"
+    },
+    {
+      "id": "control:site:overview:compact-spectrum:svg:markup:1",
+      "kind": "control",
+      "source": "site/overview/compact-spectrum.mts:18",
+      "tag": "svg",
+      "selector": "[role=\"img\"]",
+      "markup": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 300 90\" role=\"img\" aria-labelledby=\"title desc\" font-family=\"system-ui, sans-serif\" font-size=\"13\">"
+    },
+    {
+      "id": "control:site:search:object-result:anchor:a:1",
+      "kind": "control",
+      "source": "site/search/object-result.mts:58",
+      "tag": "a",
+      "selector": "a"
+    },
+    {
+      "id": "control:site:search:object-result:createObjectResultView:role:1",
+      "kind": "control",
+      "source": "site/search/object-result.mts:57",
+      "selector": "[role=\"listitem\"]"
+    },
+    {
+      "id": "control:site:server:search-response:input:input:1",
+      "kind": "control",
+      "source": "site/server/search-response.mts:41",
+      "tag": "input",
+      "selector": "input"
+    },
+    {
+      "id": "handler:packages:renderer:src:labels:surface-feature-labels:createEntry:click:1",
+      "kind": "handler",
+      "source": "packages/renderer/src/labels/surface-feature-labels.ts:139",
+      "eventTypes": [
+        "click"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:packages:renderer:src:labels:surface-feature-labels:mountSurfaceFeatureLabels:loadingdone:1",
+      "kind": "handler",
+      "source": "packages/renderer/src/labels/surface-feature-labels.ts:113",
+      "eventTypes": [
+        "loadingdone"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:packages:renderer:src:labels:surface-feature-labels:mountSurfaceFeatureLabels:objecthoverchange:1",
+      "kind": "handler",
+      "source": "packages/renderer/src/labels/surface-feature-labels.ts:121",
+      "eventTypes": [
+        "objecthoverchange"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:packages:renderer:src:labels:surface-feature-labels:mountSurfaceFeatureLabels:objectsurfacelabelschange:1",
+      "kind": "handler",
+      "source": "packages/renderer/src/labels/surface-feature-labels.ts:291",
+      "eventTypes": [
+        "objectsurfacelabelschange"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:packages:renderer:src:labels:surface-feature-labels:releaseInput:click:1",
+      "kind": "handler",
+      "source": "packages/renderer/src/labels/surface-feature-labels.ts:169",
+      "eventTypes": [
+        "click"
+      ],
+      "mechanism": "wrapper-call"
+    },
+    {
+      "id": "handler:packages:renderer:src:labels:surface-feature-labels:releaseInput:keydown:1",
+      "kind": "handler",
+      "source": "packages/renderer/src/labels/surface-feature-labels.ts:170",
+      "eventTypes": [
+        "keydown"
+      ],
+      "mechanism": "wrapper-call"
+    },
+    {
+      "id": "handler:packages:renderer:src:labels:surface-feature-labels:releaseInput:pointerdown:1",
+      "kind": "handler",
+      "source": "packages/renderer/src/labels/surface-feature-labels.ts:167",
+      "eventTypes": [
+        "pointerdown"
+      ],
+      "mechanism": "wrapper-call"
+    },
+    {
+      "id": "handler:packages:renderer:src:labels:surface-feature-labels:releaseInput:wheel:1",
+      "kind": "handler",
+      "source": "packages/renderer/src/labels/surface-feature-labels.ts:168",
+      "eventTypes": [
+        "wheel"
+      ],
+      "mechanism": "wrapper-call"
+    },
+    {
+      "id": "handler:packages:renderer:src:navigation:camera-flight:createCameraFlight:abort:1",
+      "kind": "handler",
+      "source": "packages/renderer/src/navigation/camera-flight.ts:66",
+      "eventTypes": [
+        "abort"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:packages:renderer:src:navigation:camera-flight:schedule:animation-frame:1",
+      "kind": "handler",
+      "source": "packages/renderer/src/navigation/camera-flight.ts:42",
+      "eventTypes": [
+        "animation-frame"
+      ],
+      "mechanism": "raf-sole-driver"
+    },
+    {
+      "id": "handler:packages:renderer:src:navigation:camera-input-listeners:bindCameraInputListeners:dblclick:1",
+      "kind": "handler",
+      "source": "packages/renderer/src/navigation/camera-input-listeners.ts:21",
+      "eventTypes": [
+        "dblclick"
+      ],
+      "mechanism": "wrapper-call"
+    },
+    {
+      "id": "handler:packages:renderer:src:navigation:camera-input-listeners:bindCameraInputListeners:dynamic-type:1",
+      "kind": "handler",
+      "source": "packages/renderer/src/navigation/camera-input-listeners.ts:26",
+      "eventTypes": [
+        "keydown",
+        "visibilitychange"
+      ],
+      "mechanism": "wrapper-call"
+    },
+    {
+      "id": "handler:packages:renderer:src:navigation:camera-input-listeners:bindCameraInputListeners:lostpointercapture:1",
+      "kind": "handler",
+      "source": "packages/renderer/src/navigation/camera-input-listeners.ts:19",
+      "eventTypes": [
+        "lostpointercapture"
+      ],
+      "mechanism": "wrapper-call"
+    },
+    {
+      "id": "handler:packages:renderer:src:navigation:camera-input-listeners:bindCameraInputListeners:mousedown:1",
+      "kind": "handler",
+      "source": "packages/renderer/src/navigation/camera-input-listeners.ts:20",
+      "eventTypes": [
+        "mousedown"
+      ],
+      "mechanism": "wrapper-call"
+    },
+    {
+      "id": "handler:packages:renderer:src:navigation:camera-input-listeners:bindCameraInputListeners:pointercancel:1",
+      "kind": "handler",
+      "source": "packages/renderer/src/navigation/camera-input-listeners.ts:18",
+      "eventTypes": [
+        "pointercancel"
+      ],
+      "mechanism": "wrapper-call"
+    },
+    {
+      "id": "handler:packages:renderer:src:navigation:camera-input-listeners:bindCameraInputListeners:pointerdown:1",
+      "kind": "handler",
+      "source": "packages/renderer/src/navigation/camera-input-listeners.ts:15",
+      "eventTypes": [
+        "pointerdown"
+      ],
+      "mechanism": "wrapper-call"
+    },
+    {
+      "id": "handler:packages:renderer:src:navigation:camera-input-listeners:bindCameraInputListeners:pointermove:1",
+      "kind": "handler",
+      "source": "packages/renderer/src/navigation/camera-input-listeners.ts:16",
+      "eventTypes": [
+        "pointermove"
+      ],
+      "mechanism": "wrapper-call"
+    },
+    {
+      "id": "handler:packages:renderer:src:navigation:camera-input-listeners:bindCameraInputListeners:pointerup:1",
+      "kind": "handler",
+      "source": "packages/renderer/src/navigation/camera-input-listeners.ts:17",
+      "eventTypes": [
+        "pointerup"
+      ],
+      "mechanism": "wrapper-call"
+    },
+    {
+      "id": "handler:packages:renderer:src:navigation:camera-input-listeners:bindCameraInputListeners:wheel:1",
+      "kind": "handler",
+      "source": "packages/renderer/src/navigation/camera-input-listeners.ts:22",
+      "eventTypes": [
+        "wheel"
+      ],
+      "mechanism": "wrapper-call"
+    },
+    {
+      "id": "handler:packages:renderer:src:navigation:camera-input-listeners:listen:dynamic-name:1",
+      "kind": "handler",
+      "source": "packages/renderer/src/navigation/camera-input-listeners.ts:13",
+      "eventTypes": [],
+      "mechanism": "wrapper-call"
+    },
+    {
+      "id": "handler:packages:renderer:src:navigation:camera-viewport:createCameraViewport:resize:1",
+      "kind": "handler",
+      "source": "packages/renderer/src/navigation/camera-viewport.ts:88",
+      "eventTypes": [
+        "resize"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:packages:renderer:src:navigation:camera-viewport:createCameraViewport:scroll:1",
+      "kind": "handler",
+      "source": "packages/renderer/src/navigation/camera-viewport.ts:89",
+      "eventTypes": [
+        "scroll"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:packages:renderer:src:navigation:prepared-wheel-zoom:releaseWheel:wheel:1",
+      "kind": "handler",
+      "source": "packages/renderer/src/navigation/prepared-wheel-zoom.ts:255",
+      "eventTypes": [
+        "wheel"
+      ],
+      "mechanism": "wrapper-call"
+    },
+    {
+      "id": "handler:packages:renderer:src:navigation:shared-input-surface:bindInputEvent:dynamic-type:1",
+      "kind": "handler",
+      "source": "packages/renderer/src/navigation/shared-input-surface.ts:28",
+      "eventTypes": [],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:packages:renderer:src:navigation:shared-input-surface:bindInputEvent:dynamic-type:2",
+      "kind": "handler",
+      "source": "packages/renderer/src/navigation/shared-input-surface.ts:40",
+      "eventTypes": [],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:packages:renderer:src:navigation:world-camera-picking:releases:blur:1",
+      "kind": "handler",
+      "source": "packages/renderer/src/navigation/world-camera-picking.ts:174",
+      "eventTypes": [
+        "blur"
+      ],
+      "mechanism": "wrapper-call"
+    },
+    {
+      "id": "handler:packages:renderer:src:navigation:world-camera-picking:releases:click:1",
+      "kind": "handler",
+      "source": "packages/renderer/src/navigation/world-camera-picking.ts:172",
+      "eventTypes": [
+        "click"
+      ],
+      "mechanism": "wrapper-call"
+    },
+    {
+      "id": "handler:packages:renderer:src:navigation:world-camera-picking:releases:dblclick:1",
+      "kind": "handler",
+      "source": "packages/renderer/src/navigation/world-camera-picking.ts:173",
+      "eventTypes": [
+        "dblclick"
+      ],
+      "mechanism": "wrapper-call"
+    },
+    {
+      "id": "handler:packages:renderer:src:navigation:world-camera-picking:releases:mousedown:1",
+      "kind": "handler",
+      "source": "packages/renderer/src/navigation/world-camera-picking.ts:171",
+      "eventTypes": [
+        "mousedown"
+      ],
+      "mechanism": "wrapper-call"
+    },
+    {
+      "id": "handler:packages:renderer:src:navigation:world-camera-picking:releases:pointercancel:1",
+      "kind": "handler",
+      "source": "packages/renderer/src/navigation/world-camera-picking.ts:170",
+      "eventTypes": [
+        "pointercancel"
+      ],
+      "mechanism": "wrapper-call"
+    },
+    {
+      "id": "handler:packages:renderer:src:navigation:world-camera-picking:releases:pointerdown:1",
+      "kind": "handler",
+      "source": "packages/renderer/src/navigation/world-camera-picking.ts:167",
+      "eventTypes": [
+        "pointerdown"
+      ],
+      "mechanism": "wrapper-call"
+    },
+    {
+      "id": "handler:packages:renderer:src:navigation:world-camera-picking:releases:pointerleave:1",
+      "kind": "handler",
+      "source": "packages/renderer/src/navigation/world-camera-picking.ts:176",
+      "eventTypes": [
+        "pointerleave"
+      ],
+      "mechanism": "wrapper-call"
+    },
+    {
+      "id": "handler:packages:renderer:src:navigation:world-camera-picking:releases:pointermove:1",
+      "kind": "handler",
+      "source": "packages/renderer/src/navigation/world-camera-picking.ts:168",
+      "eventTypes": [
+        "pointermove"
+      ],
+      "mechanism": "wrapper-call"
+    },
+    {
+      "id": "handler:packages:renderer:src:navigation:world-camera-picking:releases:pointerup:1",
+      "kind": "handler",
+      "source": "packages/renderer/src/navigation/world-camera-picking.ts:169",
+      "eventTypes": [
+        "pointerup"
+      ],
+      "mechanism": "wrapper-call"
+    },
+    {
+      "id": "handler:packages:renderer:src:navigation:world-camera-picking:releases:wheel:1",
+      "kind": "handler",
+      "source": "packages/renderer/src/navigation/world-camera-picking.ts:175",
+      "eventTypes": [
+        "wheel"
+      ],
+      "mechanism": "wrapper-call"
+    },
+    {
+      "id": "handler:packages:renderer:src:navigation:world-frame-queue:createWorldFrameQueue:abort:1",
+      "kind": "handler",
+      "source": "packages/renderer/src/navigation/world-frame-queue.ts:157",
+      "eventTypes": [
+        "abort"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:packages:renderer:src:prepared-data-worker-client:createPreparedDataReader:abort:1",
+      "kind": "handler",
+      "source": "packages/renderer/src/prepared-data-worker-client.ts:83",
+      "eventTypes": [
+        "abort"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:packages:renderer:src:prepared-data-worker-client:module:pagehide:1",
+      "kind": "handler",
+      "source": "packages/renderer/src/prepared-data-worker-client.ts:108",
+      "eventTypes": [
+        "pagehide"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:packages:renderer:src:prepared-data-worker-client:retire:error:1",
+      "kind": "handler",
+      "source": "packages/renderer/src/prepared-data-worker-client.ts:29",
+      "eventTypes": [
+        "error"
+      ],
+      "mechanism": "event-property"
+    },
+    {
+      "id": "handler:packages:renderer:src:prepared-data-worker-client:retire:message:1",
+      "kind": "handler",
+      "source": "packages/renderer/src/prepared-data-worker-client.ts:29",
+      "eventTypes": [
+        "message"
+      ],
+      "mechanism": "event-property"
+    },
+    {
+      "id": "handler:packages:renderer:src:prepared-data-worker-client:retire:messageerror:1",
+      "kind": "handler",
+      "source": "packages/renderer/src/prepared-data-worker-client.ts:29",
+      "eventTypes": [
+        "messageerror"
+      ],
+      "mechanism": "event-property"
+    },
+    {
+      "id": "handler:packages:renderer:src:prepared-data-worker-client:start:error:1",
+      "kind": "handler",
+      "source": "packages/renderer/src/prepared-data-worker-client.ts:56",
+      "eventTypes": [
+        "error"
+      ],
+      "mechanism": "event-property"
+    },
+    {
+      "id": "handler:packages:renderer:src:prepared-data-worker-client:start:message:1",
+      "kind": "handler",
+      "source": "packages/renderer/src/prepared-data-worker-client.ts:49",
+      "eventTypes": [
+        "message"
+      ],
+      "mechanism": "event-property"
+    },
+    {
+      "id": "handler:packages:renderer:src:prepared-data-worker-client:start:messageerror:1",
+      "kind": "handler",
+      "source": "packages/renderer/src/prepared-data-worker-client.ts:57",
+      "eventTypes": [
+        "messageerror"
+      ],
+      "mechanism": "event-property"
+    },
+    {
+      "id": "handler:packages:renderer:src:prepared-data-worker:module:message:1",
+      "kind": "handler",
+      "source": "packages/renderer/src/prepared-data-worker.ts:9",
+      "eventTypes": [
+        "message"
+      ],
+      "mechanism": "event-property"
+    },
+    {
+      "id": "handler:packages:renderer:src:rendering:object-control-binding:createObjectControlBinding:click:1",
+      "kind": "handler",
+      "source": "packages/renderer/src/rendering/object-control-binding.ts:296",
+      "eventTypes": [
+        "click"
+      ],
+      "mechanism": "wrapper-call"
+    },
+    {
+      "id": "handler:packages:renderer:src:rendering:object-control-binding:createObjectControlBinding:click:2",
+      "kind": "handler",
+      "source": "packages/renderer/src/rendering/object-control-binding.ts:310",
+      "eventTypes": [
+        "click"
+      ],
+      "mechanism": "wrapper-call"
+    },
+    {
+      "id": "handler:packages:renderer:src:rendering:object-control-binding:createObjectControlBinding:click:3",
+      "kind": "handler",
+      "source": "packages/renderer/src/rendering/object-control-binding.ts:320",
+      "eventTypes": [
+        "click"
+      ],
+      "mechanism": "wrapper-call"
+    },
+    {
+      "id": "handler:packages:renderer:src:rendering:object-control-binding:createObjectControlBinding:dynamic-event:1",
+      "kind": "handler",
+      "source": "packages/renderer/src/rendering/object-control-binding.ts:304",
+      "eventTypes": [
+        "focus",
+        "pointerenter",
+        "touchstart"
+      ],
+      "mechanism": "wrapper-call"
+    },
+    {
+      "id": "handler:packages:renderer:src:rendering:object-control-binding:createObjectControlBinding:dynamic-event:2",
+      "kind": "handler",
+      "source": "packages/renderer/src/rendering/object-control-binding.ts:332",
+      "eventTypes": [
+        "change",
+        "click",
+        "input",
+        "range",
+        "toggle"
+      ],
+      "mechanism": "wrapper-call"
+    },
+    {
+      "id": "handler:packages:renderer:src:rendering:object-control-binding:createObjectControlBinding:visibilitychange:1",
+      "kind": "handler",
+      "source": "packages/renderer/src/rendering/object-control-binding.ts:328",
+      "eventTypes": [
+        "visibilitychange"
+      ],
+      "mechanism": "wrapper-call"
+    },
+    {
+      "id": "handler:packages:renderer:src:rendering:object-control-binding:listen:dynamic-event:1",
+      "kind": "handler",
+      "source": "packages/renderer/src/rendering/object-control-binding.ts:213",
+      "eventTypes": [],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:packages:renderer:src:rendering:object-selection-runtime:run:abort:1",
+      "kind": "handler",
+      "source": "packages/renderer/src/rendering/object-selection-runtime.ts:146",
+      "eventTypes": [
+        "abort"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:packages:renderer:src:rendering:prepared-image-store:startDownload:error:1",
+      "kind": "handler",
+      "source": "packages/renderer/src/rendering/prepared-image-store.ts:142",
+      "eventTypes": [
+        "error"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:packages:renderer:src:rendering:prepared-image-store:startDownload:load:1",
+      "kind": "handler",
+      "source": "packages/renderer/src/rendering/prepared-image-store.ts:141",
+      "eventTypes": [
+        "load"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:packages:renderer:src:rendering:prepared-tree:preparePresentationTree:abort:1",
+      "kind": "handler",
+      "source": "packages/renderer/src/rendering/prepared-tree.ts:134",
+      "eventTypes": [
+        "abort"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:packages:renderer:src:runtime:prepared-object-navigation:abortable:abort:1",
+      "kind": "handler",
+      "source": "packages/renderer/src/runtime/prepared-object-navigation.ts:137",
+      "eventTypes": [
+        "abort"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:packages:renderer:src:runtime:prepared-resource-lease:prepareObjectResources:abort:1",
+      "kind": "handler",
+      "source": "packages/renderer/src/runtime/prepared-resource-lease.ts:32",
+      "eventTypes": [
+        "abort"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:packages:renderer:src:runtime:scene-native-waits:waitForSceneDocument:DOMContentLoaded:1",
+      "kind": "handler",
+      "source": "packages/renderer/src/runtime/scene-native-waits.ts:28",
+      "eventTypes": [
+        "DOMContentLoaded"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:packages:renderer:src:solar-system:heliocentric-navigation:bindObjectNavigationTarget:click:1",
+      "kind": "handler",
+      "source": "packages/renderer/src/solar-system/heliocentric-navigation.ts:95",
+      "eventTypes": [
+        "click"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:packages:renderer:src:solar-system:heliocentric-navigation:bindObjectNavigationTarget:dblclick:1",
+      "kind": "handler",
+      "source": "packages/renderer/src/solar-system/heliocentric-navigation.ts:94",
+      "eventTypes": [
+        "dblclick"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:packages:renderer:src:solar-system:heliocentric-navigation:bindObjectNavigationTarget:keydown:1",
+      "kind": "handler",
+      "source": "packages/renderer/src/solar-system/heliocentric-navigation.ts:96",
+      "eventTypes": [
+        "keydown"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:packages:renderer:src:solar-system:heliocentric-navigation:bindObjectNavigationTarget:mousedown:1",
+      "kind": "handler",
+      "source": "packages/renderer/src/solar-system/heliocentric-navigation.ts:92",
+      "eventTypes": [
+        "mousedown"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:packages:renderer:src:solar-system:heliocentric-navigation:bindObjectNavigationTarget:pointerdown:1",
+      "kind": "handler",
+      "source": "packages/renderer/src/solar-system/heliocentric-navigation.ts:91",
+      "eventTypes": [
+        "pointerdown"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:packages:renderer:src:solar-system:heliocentric-navigation:delegatedPresses:mousedown:1",
+      "kind": "handler",
+      "source": "packages/renderer/src/solar-system/heliocentric-navigation.ts:34",
+      "eventTypes": [
+        "mousedown"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:packages:renderer:src:solar-system:heliocentric-navigation:delegatedPresses:pointerdown:1",
+      "kind": "handler",
+      "source": "packages/renderer/src/solar-system/heliocentric-navigation.ts:33",
+      "eventTypes": [
+        "pointerdown"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:packages:renderer:src:solar-system:heliocentric-navigation:motionHold:objectmotionchange:1",
+      "kind": "handler",
+      "source": "packages/renderer/src/solar-system/heliocentric-navigation.ts:58",
+      "eventTypes": [
+        "objectmotionchange"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:packages:renderer:src:stars:opacity-clock:schedule:animation-frame:1",
+      "kind": "handler",
+      "source": "packages/renderer/src/stars/opacity-clock.ts:40",
+      "eventTypes": [
+        "animation-frame"
+      ],
+      "mechanism": "raf-sole-driver"
+    },
+    {
+      "id": "handler:packages:renderer:src:universe:environment-labels:mountEnvironmentLabels:loadingdone:1",
+      "kind": "handler",
+      "source": "packages/renderer/src/universe/environment-labels.ts:72",
+      "eventTypes": [
+        "loadingdone"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:packages:renderer:src:universe:image-mesh:observer:ResizeObserver:1",
+      "kind": "handler",
+      "source": "packages/renderer/src/universe/image-mesh.ts:54",
+      "eventTypes": [
+        "ResizeObserver"
+      ],
+      "mechanism": "observer"
+    },
+    {
+      "id": "handler:packages:renderer:src:universe:prepared-world-context:mountPreparedWorldContext:dynamic-event:1",
+      "kind": "handler",
+      "source": "packages/renderer/src/universe/prepared-world-context.ts:806",
+      "eventTypes": [
+        "focusin",
+        "focusout"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:packages:renderer:src:universe:prepared-world-context:mountPreparedWorldContext:loadingdone:1",
+      "kind": "handler",
+      "source": "packages/renderer/src/universe/prepared-world-context.ts:361",
+      "eventTypes": [
+        "loadingdone"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:packages:renderer:src:universe:prepared-world-context:mountPreparedWorldContext:objecthoverchange:1",
+      "kind": "handler",
+      "source": "packages/renderer/src/universe/prepared-world-context.ts:805",
+      "eventTypes": [
+        "objecthoverchange"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:packages:renderer:src:universe:prepared-world-context:mountPreparedWorldContext:pointerdown:1",
+      "kind": "handler",
+      "source": "packages/renderer/src/universe/prepared-world-context.ts:343",
+      "eventTypes": [
+        "pointerdown"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:packages:renderer:src:universe:prepared-world-context:mountPreparedWorldContext:transitionend:1",
+      "kind": "handler",
+      "source": "packages/renderer/src/universe/prepared-world-context.ts:804",
+      "eventTypes": [
+        "transitionend"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:packages:renderer:src:universe:prepared-world-context:mountPreparedWorldContext:wheel:1",
+      "kind": "handler",
+      "source": "packages/renderer/src/universe/prepared-world-context.ts:344",
+      "eventTypes": [
+        "wheel"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:packages:renderer:src:universe:selected-body-label:observer:ResizeObserver:1",
+      "kind": "handler",
+      "source": "packages/renderer/src/universe/selected-body-label.ts:78",
+      "eventTypes": [
+        "ResizeObserver"
+      ],
+      "mechanism": "observer"
+    },
+    {
+      "id": "handler:packages:renderer:src:universe:world-context:world-context-planner-client:createWorldContextPlannerClient:error:1",
+      "kind": "handler",
+      "source": "packages/renderer/src/universe/world-context/world-context-planner-client.ts:72",
+      "eventTypes": [
+        "error"
+      ],
+      "mechanism": "event-property"
+    },
+    {
+      "id": "handler:packages:renderer:src:universe:world-context:world-context-planner-client:createWorldContextPlannerClient:message:1",
+      "kind": "handler",
+      "source": "packages/renderer/src/universe/world-context/world-context-planner-client.ts:62",
+      "eventTypes": [
+        "message"
+      ],
+      "mechanism": "event-property"
+    },
+    {
+      "id": "handler:packages:renderer:src:universe:world-context:world-context-planner-client:destroy:error:1",
+      "kind": "handler",
+      "source": "packages/renderer/src/universe/world-context/world-context-planner-client.ts:60",
+      "eventTypes": [
+        "error"
+      ],
+      "mechanism": "event-property"
+    },
+    {
+      "id": "handler:packages:renderer:src:universe:world-context:world-context-planner-client:destroy:message:1",
+      "kind": "handler",
+      "source": "packages/renderer/src/universe/world-context/world-context-planner-client.ts:60",
+      "eventTypes": [
+        "message"
+      ],
+      "mechanism": "event-property"
+    },
+    {
+      "id": "handler:packages:renderer:src:universe:world-context:world-context-planner-worker:module:message:1",
+      "kind": "handler",
+      "source": "packages/renderer/src/universe/world-context/world-context-planner-worker.ts:49",
+      "eventTypes": [
+        "message"
+      ],
+      "mechanism": "event-property"
+    },
+    {
+      "id": "handler:site:application-world-context:createApplicationWorldContext:abort:1",
+      "kind": "handler",
+      "source": "site/application-world-context.mts:38",
+      "eventTypes": [
+        "abort"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:site:application-world-context:createApplicationWorldContext:objectmotionchange:1",
+      "kind": "handler",
+      "source": "site/application-world-context.mts:82",
+      "eventTypes": [
+        "objectmotionchange"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:site:application-world-context:createApplicationWorldContext:objectrotationchange:1",
+      "kind": "handler",
+      "source": "site/application-world-context.mts:77",
+      "eventTypes": [
+        "objectrotationchange"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:site:arrival-billboard:prepareArrivalBillboard:abort:1",
+      "kind": "handler",
+      "source": "site/arrival-billboard.mts:61",
+      "eventTypes": [
+        "abort"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:site:catalogue-moon-labels:observer:ResizeObserver:1",
+      "kind": "handler",
+      "source": "site/catalogue-moon-labels.mts:101",
+      "eventTypes": [
+        "ResizeObserver"
+      ],
+      "mechanism": "observer"
+    },
+    {
+      "id": "handler:site:chart-pixel-alignment:createChartPixelAlignmentController:chartchange:1",
+      "kind": "handler",
+      "source": "site/chart-pixel-alignment.mts:47",
+      "eventTypes": [
+        "chartchange"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:site:chart-pixel-alignment:createChartPixelAlignmentController:load:1",
+      "kind": "handler",
+      "source": "site/chart-pixel-alignment.mts:45",
+      "eventTypes": [
+        "load"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:site:chart-pixel-alignment:createChartPixelAlignmentController:resize:1",
+      "kind": "handler",
+      "source": "site/chart-pixel-alignment.mts:48",
+      "eventTypes": [
+        "resize"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:site:dataset-picker:bindDatasetPicker:change:1",
+      "kind": "handler",
+      "source": "site/dataset-picker.mts:18",
+      "eventTypes": [
+        "change"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:site:dataset-picker:mountDatasetPickerLayout:change:1",
+      "kind": "handler",
+      "source": "site/dataset-picker.mts:34",
+      "eventTypes": [
+        "change"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:site:destination-browser:createDestinationBrowser:click:1",
+      "kind": "handler",
+      "source": "site/destination-browser.mts:21",
+      "eventTypes": [
+        "click"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:site:diagnostic-recorder:createDiagnosticRecorder:click:1",
+      "kind": "handler",
+      "source": "site/diagnostic-recorder.mts:92",
+      "eventTypes": [
+        "click"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:site:diagnostic-recorder:start:animation-frame:1",
+      "kind": "handler",
+      "source": "site/diagnostic-recorder.mts:68",
+      "eventTypes": [
+        "animation-frame"
+      ],
+      "mechanism": "raf-sole-driver"
+    },
+    {
+      "id": "handler:site:diagnostic-recorder:start:error:1",
+      "kind": "handler",
+      "source": "site/diagnostic-recorder.mts:70",
+      "eventTypes": [
+        "error"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:site:diagnostic-recorder:start:unhandledrejection:1",
+      "kind": "handler",
+      "source": "site/diagnostic-recorder.mts:70",
+      "eventTypes": [
+        "unhandledrejection"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:site:diagnostic-recorder:tick:animation-frame:1",
+      "kind": "handler",
+      "source": "site/diagnostic-recorder.mts:49",
+      "eventTypes": [
+        "animation-frame"
+      ],
+      "mechanism": "raf-sole-driver"
+    },
+    {
+      "id": "handler:site:error-report:errorReportBootstrap:embedded:error:1",
+      "kind": "handler",
+      "source": "site/error-report.mts:18",
+      "mechanism": "embedded-script"
+    },
+    {
+      "id": "handler:site:error-report:errorReportBootstrap:embedded:unhandledrejection:1",
+      "kind": "handler",
+      "source": "site/error-report.mts:19",
+      "mechanism": "embedded-script"
+    },
+    {
+      "id": "handler:site:feature-browser:createFeatureBrowser:click:1",
+      "kind": "handler",
+      "source": "site/feature-browser.mts:17",
+      "eventTypes": [
+        "click"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:site:information-card:createPanelController:toggle:1",
+      "kind": "handler",
+      "source": "site/information-card.mts:96",
+      "eventTypes": [
+        "toggle"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:site:layout-sections:mountLayoutSections:change:1",
+      "kind": "handler",
+      "source": "site/layout-sections.mts:15",
+      "eventTypes": [
+        "change"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:site:minimap:surface-map-context:createSurfaceMapReader:resize:1",
+      "kind": "handler",
+      "source": "site/minimap/surface-map-context.mts:93",
+      "eventTypes": [
+        "resize"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:site:native-view-forms:bindNativeViewForms:submit:1",
+      "kind": "handler",
+      "source": "site/native-view-forms.mts:28",
+      "eventTypes": [
+        "submit"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:site:navigation:navigation-content:createNavigationContent:abort:1",
+      "kind": "handler",
+      "source": "site/navigation/navigation-content.mts:65",
+      "eventTypes": [
+        "abort"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:site:navigation:navigation-fragments:bindNavigationIntent:focusin:1",
+      "kind": "handler",
+      "source": "site/navigation/navigation-fragments.mts:177",
+      "eventTypes": [
+        "focusin"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:site:navigation:navigation-fragments:bindNavigationIntent:objecthoverchange:1",
+      "kind": "handler",
+      "source": "site/navigation/navigation-fragments.mts:180",
+      "eventTypes": [
+        "objecthoverchange"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:site:navigation:navigation-fragments:bindNavigationIntent:pointerdown:1",
+      "kind": "handler",
+      "source": "site/navigation/navigation-fragments.mts:178",
+      "eventTypes": [
+        "pointerdown"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:site:navigation:navigation-fragments:bindNavigationIntent:pointerover:1",
+      "kind": "handler",
+      "source": "site/navigation/navigation-fragments.mts:176",
+      "eventTypes": [
+        "pointerover"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:site:navigation:navigation-fragments:createNavigationFragments:abort:1",
+      "kind": "handler",
+      "source": "site/navigation/navigation-fragments.mts:140",
+      "eventTypes": [
+        "abort"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:site:navigation:navigation-history:bindNavigationLinks:click:1",
+      "kind": "handler",
+      "source": "site/navigation/navigation-history.mts:230",
+      "eventTypes": [
+        "click"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:site:navigation:navigation-history:bindNavigationLinks:objectnavigate:1",
+      "kind": "handler",
+      "source": "site/navigation/navigation-history.mts:231",
+      "eventTypes": [
+        "objectnavigate"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:site:navigation:navigation-history:bindNavigationLinks:objectnavigationquery:1",
+      "kind": "handler",
+      "source": "site/navigation/navigation-history.mts:232",
+      "eventTypes": [
+        "objectnavigationquery"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:site:navigation:navigation-history:createNavigationHistory:blur:1",
+      "kind": "handler",
+      "source": "site/navigation/navigation-history.mts:155",
+      "eventTypes": [
+        "blur"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:site:navigation:navigation-history:createNavigationHistory:focus:1",
+      "kind": "handler",
+      "source": "site/navigation/navigation-history.mts:156",
+      "eventTypes": [
+        "focus"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:site:navigation:navigation-history:createNavigationHistory:keydown:1",
+      "kind": "handler",
+      "source": "site/navigation/navigation-history.mts:158",
+      "eventTypes": [
+        "keydown"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:site:navigation:navigation-history:createNavigationHistory:objectmotionchange:1",
+      "kind": "handler",
+      "source": "site/navigation/navigation-history.mts:160",
+      "eventTypes": [
+        "objectmotionchange"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:site:navigation:navigation-history:createNavigationHistory:pagehide:1",
+      "kind": "handler",
+      "source": "site/navigation/navigation-history.mts:157",
+      "eventTypes": [
+        "pagehide"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:site:navigation:navigation-history:createNavigationHistory:pointerdown:1",
+      "kind": "handler",
+      "source": "site/navigation/navigation-history.mts:162",
+      "eventTypes": [
+        "pointerdown"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:site:navigation:navigation-history:createNavigationHistory:pointerenter:1",
+      "kind": "handler",
+      "source": "site/navigation/navigation-history.mts:164",
+      "eventTypes": [
+        "pointerenter"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:site:navigation:navigation-history:createNavigationHistory:pointerleave:1",
+      "kind": "handler",
+      "source": "site/navigation/navigation-history.mts:165",
+      "eventTypes": [
+        "pointerleave"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:site:navigation:navigation-history:createNavigationHistory:popstate:1",
+      "kind": "handler",
+      "source": "site/navigation/navigation-history.mts:154",
+      "eventTypes": [
+        "popstate"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:site:navigation:navigation-history:createNavigationHistory:scroll:1",
+      "kind": "handler",
+      "source": "site/navigation/navigation-history.mts:163",
+      "eventTypes": [
+        "scroll"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:site:navigation:navigation-history:createNavigationHistory:visibilitychange:1",
+      "kind": "handler",
+      "source": "site/navigation/navigation-history.mts:161",
+      "eventTypes": [
+        "visibilitychange"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:site:navigation:navigation-history:createNavigationHistory:wheel:1",
+      "kind": "handler",
+      "source": "site/navigation/navigation-history.mts:159",
+      "eventTypes": [
+        "wheel"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:site:navigation:navigation-styles:clear:error:1",
+      "kind": "handler",
+      "source": "site/navigation/navigation-styles.mts:59",
+      "eventTypes": [
+        "error"
+      ],
+      "mechanism": "event-property"
+    },
+    {
+      "id": "handler:site:navigation:navigation-styles:clear:load:1",
+      "kind": "handler",
+      "source": "site/navigation/navigation-styles.mts:59",
+      "eventTypes": [
+        "load"
+      ],
+      "mechanism": "event-property"
+    },
+    {
+      "id": "handler:site:navigation:navigation-styles:createNavigationStyles:abort:1",
+      "kind": "handler",
+      "source": "site/navigation/navigation-styles.mts:33",
+      "eventTypes": [
+        "abort"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:site:navigation:navigation-styles:createNavigationStyles:abort:2",
+      "kind": "handler",
+      "source": "site/navigation/navigation-styles.mts:63",
+      "eventTypes": [
+        "abort"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:site:navigation:navigation-styles:createNavigationStyles:error:1",
+      "kind": "handler",
+      "source": "site/navigation/navigation-styles.mts:62",
+      "eventTypes": [
+        "error"
+      ],
+      "mechanism": "event-property"
+    },
+    {
+      "id": "handler:site:navigation:navigation-styles:createNavigationStyles:load:1",
+      "kind": "handler",
+      "source": "site/navigation/navigation-styles.mts:61",
+      "eventTypes": [
+        "load"
+      ],
+      "mechanism": "event-property"
+    },
+    {
+      "id": "handler:site:object-browser:createObjectBrowserController:click:1",
+      "kind": "handler",
+      "source": "site/object-browser.mts:195",
+      "eventTypes": [
+        "click"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:site:object-browser:createObjectBrowserController:click:2",
+      "kind": "handler",
+      "source": "site/object-browser.mts:201",
+      "eventTypes": [
+        "click"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:site:object-browser:createObjectBrowserController:dynamic-type:1",
+      "kind": "handler",
+      "source": "site/object-browser.mts:270",
+      "eventTypes": [
+        "pointerdown",
+        "wheel"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:site:object-browser:createObjectBrowserController:focus:1",
+      "kind": "handler",
+      "source": "site/object-browser.mts:221",
+      "eventTypes": [
+        "focus"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:site:object-browser:createObjectBrowserController:input:1",
+      "kind": "handler",
+      "source": "site/object-browser.mts:222",
+      "eventTypes": [
+        "input"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:site:object-browser:createObjectBrowserController:keydown:1",
+      "kind": "handler",
+      "source": "site/object-browser.mts:215",
+      "eventTypes": [
+        "keydown"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:site:object-browser:createObjectBrowserController:keydown:2",
+      "kind": "handler",
+      "source": "site/object-browser.mts:230",
+      "eventTypes": [
+        "keydown"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:site:object-browser:createObjectBrowserController:keydown:3",
+      "kind": "handler",
+      "source": "site/object-browser.mts:245",
+      "eventTypes": [
+        "keydown"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:site:object-browser:createObjectBrowserController:pointerdown:1",
+      "kind": "handler",
+      "source": "site/object-browser.mts:272",
+      "eventTypes": [
+        "pointerdown"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:site:object-browser:createObjectBrowserController:scroll:1",
+      "kind": "handler",
+      "source": "site/object-browser.mts:69",
+      "eventTypes": [
+        "scroll"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:site:object-browser:createObjectBrowserController:submit:1",
+      "kind": "handler",
+      "source": "site/object-browser.mts:190",
+      "eventTypes": [
+        "submit"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:site:prepared-arrival:createPreparedArrival:abort:1",
+      "kind": "handler",
+      "source": "site/prepared-arrival.mts:27",
+      "eventTypes": [
+        "abort"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:site:prepared-scene-ownership:createPreparedSceneOwnership:abort:1",
+      "kind": "handler",
+      "source": "site/prepared-scene-ownership.mts:15",
+      "eventTypes": [
+        "abort"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:site:prepared-scene-ownership:createPreparedSceneOwnership:abort:2",
+      "kind": "handler",
+      "source": "site/prepared-scene-ownership.mts:30",
+      "eventTypes": [
+        "abort"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:site:prepared-world-navigation:createPreparedWorldNavigation:wheel:1",
+      "kind": "handler",
+      "source": "site/prepared-world-navigation.mts:63",
+      "eventTypes": [
+        "wheel"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:site:prepared-world-navigation:createWorldFlight:dynamic-event:1",
+      "kind": "handler",
+      "source": "site/prepared-world-navigation.mts:521",
+      "eventTypes": [
+        "keydown",
+        "pointerdown"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:site:runtime-policy:bindResponsiveOrbitPolicy:change:1",
+      "kind": "handler",
+      "source": "site/runtime-policy.mts:209",
+      "eventTypes": [
+        "change"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:site:scene:camera-handover:createCameraHandover:objectmotionchange:1",
+      "kind": "handler",
+      "source": "site/scene/camera-handover.mts:90",
+      "eventTypes": [
+        "objectmotionchange"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:site:scene:scene-datasets:createDatasetEffects:abort:1",
+      "kind": "handler",
+      "source": "site/scene/scene-datasets.mts:43",
+      "eventTypes": [
+        "abort"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:site:scene:scene-feature:selectSceneFeature:abort:1",
+      "kind": "handler",
+      "source": "site/scene/scene-feature.mts:54",
+      "eventTypes": [
+        "abort"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:site:scene:scene-frame:afterSceneFrame:abort:1",
+      "kind": "handler",
+      "source": "site/scene/scene-frame.mts:18",
+      "eventTypes": [
+        "abort"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:site:scene:scene-router:createSceneRouter:change:1",
+      "kind": "handler",
+      "source": "site/scene/scene-router.mts:169",
+      "eventTypes": [
+        "change"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:site:scene:scene-router:createSceneRouter:pagehide:1",
+      "kind": "handler",
+      "source": "site/scene/scene-router.mts:166",
+      "eventTypes": [
+        "pagehide"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:site:scene:scene-router:createSceneRouter:pageshow:1",
+      "kind": "handler",
+      "source": "site/scene/scene-router.mts:167",
+      "eventTypes": [
+        "pageshow"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:site:scene:scene-router:createSceneRouter:visibilitychange:1",
+      "kind": "handler",
+      "source": "site/scene/scene-router.mts:168",
+      "eventTypes": [
+        "visibilitychange"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:site:search:catalogue-window:createCatalogueWindow:scroll:1",
+      "kind": "handler",
+      "source": "site/search/catalogue-window.mts:94",
+      "eventTypes": [
+        "scroll"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:site:search:search-client:createSearchClient:click:1",
+      "kind": "handler",
+      "source": "site/search/search-client.mts:122",
+      "eventTypes": [
+        "click"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:site:shell:object-shell-client:mountObjectShell:objectmotionchange:1",
+      "kind": "handler",
+      "source": "site/shell/object-shell-client.mts:79",
+      "eventTypes": [
+        "objectmotionchange"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:site:shell:shell-settings:createSettingsController:beforetoggle:1",
+      "kind": "handler",
+      "source": "site/shell/shell-settings.mts:50",
+      "eventTypes": [
+        "beforetoggle"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:site:shell:shell-settings:createSettingsController:change:1",
+      "kind": "handler",
+      "source": "site/shell/shell-settings.mts:72",
+      "eventTypes": [
+        "change"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:site:shell:shell-settings:createSettingsController:click:1",
+      "kind": "handler",
+      "source": "site/shell/shell-settings.mts:44",
+      "eventTypes": [
+        "click"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:site:shell:shell-settings:createSettingsController:toggle:1",
+      "kind": "handler",
+      "source": "site/shell/shell-settings.mts:45",
+      "eventTypes": [
+        "toggle"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:site:shell:shell-sheet:createSheetController:change:1",
+      "kind": "handler",
+      "source": "site/shell/shell-sheet.mts:238",
+      "eventTypes": [
+        "change"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:site:shell:shell-sheet:createSheetController:change:2",
+      "kind": "handler",
+      "source": "site/shell/shell-sheet.mts:270",
+      "eventTypes": [
+        "change"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:site:shell:shell-sheet:createSheetController:click:1",
+      "kind": "handler",
+      "source": "site/shell/shell-sheet.mts:230",
+      "eventTypes": [
+        "click"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:site:shell:shell-sheet:createSheetController:click:2",
+      "kind": "handler",
+      "source": "site/shell/shell-sheet.mts:267",
+      "eventTypes": [
+        "click"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:site:shell:shell-sheet:createSheetController:keydown:1",
+      "kind": "handler",
+      "source": "site/shell/shell-sheet.mts:243",
+      "eventTypes": [
+        "keydown"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:site:shell:shell-sheet:createSheetController:pointercancel:1",
+      "kind": "handler",
+      "source": "site/shell/shell-sheet.mts:224",
+      "eventTypes": [
+        "pointercancel"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:site:shell:shell-sheet:createSheetController:pointerdown:1",
+      "kind": "handler",
+      "source": "site/shell/shell-sheet.mts:156",
+      "eventTypes": [
+        "pointerdown"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:site:shell:shell-sheet:createSheetController:pointermove:1",
+      "kind": "handler",
+      "source": "site/shell/shell-sheet.mts:173",
+      "eventTypes": [
+        "pointermove"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:site:shell:shell-sheet:createSheetController:pointerup:1",
+      "kind": "handler",
+      "source": "site/shell/shell-sheet.mts:223",
+      "eventTypes": [
+        "pointerup"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:site:shell:shell-sheet:createSheetController:resize:1",
+      "kind": "handler",
+      "source": "site/shell/shell-sheet.mts:288",
+      "eventTypes": [
+        "resize"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:site:shell:shell-sheet:createSheetController:scroll:1",
+      "kind": "handler",
+      "source": "site/shell/shell-sheet.mts:289",
+      "eventTypes": [
+        "scroll"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:site:shell:shell-sheet:createSheetController:touchmove:1",
+      "kind": "handler",
+      "source": "site/shell/shell-sheet.mts:227",
+      "eventTypes": [
+        "touchmove"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:site:shell:shell-sheet:settle:transitionend:1",
+      "kind": "handler",
+      "source": "site/shell/shell-sheet.mts:139",
+      "eventTypes": [
+        "transitionend"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:site:showcase:createShowcaseController:click:1",
+      "kind": "handler",
+      "source": "site/showcase.mts:52",
+      "eventTypes": [
+        "click"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:site:showcase:start:dynamic-type:1",
+      "kind": "handler",
+      "source": "site/showcase.mts:66",
+      "eventTypes": [
+        "keydown",
+        "pointerdown",
+        "wheel"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:site:showcase:start:popstate:1",
+      "kind": "handler",
+      "source": "site/showcase.mts:68",
+      "eventTypes": [
+        "popstate"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:site:showcase:start:visibilitychange:1",
+      "kind": "handler",
+      "source": "site/showcase.mts:67",
+      "eventTypes": [
+        "visibilitychange"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:site:startup-billboard:prepareStartupBillboard:abort:1",
+      "kind": "handler",
+      "source": "site/startup-billboard.mts:50",
+      "eventTypes": [
+        "abort"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:site:tab-panels:bindTabPanels:change:1",
+      "kind": "handler",
+      "source": "site/tab-panels.mts:36",
+      "eventTypes": [
+        "change"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:site:tab-panels:bindTabPanels:change:2",
+      "kind": "handler",
+      "source": "site/tab-panels.mts:37",
+      "eventTypes": [
+        "change"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:site:view-readout:createViewReadout:objectmotionchange:1",
+      "kind": "handler",
+      "source": "site/view-readout.mts:115",
+      "eventTypes": [
+        "objectmotionchange"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:site:view-readout:createViewReadout:resize:1",
+      "kind": "handler",
+      "source": "site/view-readout.mts:121",
+      "eventTypes": [
+        "resize"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:site:view-readout:createViewReadout:visibilitychange:1",
+      "kind": "handler",
+      "source": "site/view-readout.mts:122",
+      "eventTypes": [
+        "visibilitychange"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:site:view-url-runtime:bindViewUrl:objectmotionchange:1",
+      "kind": "handler",
+      "source": "site/view-url-runtime.mts:86",
+      "eventTypes": [
+        "objectmotionchange"
+      ],
+      "mechanism": "addEventListener"
+    },
+    {
+      "id": "handler:site:world-viewport:stageSized:abort:1",
+      "kind": "handler",
+      "source": "site/world-viewport.mts:27",
+      "eventTypes": [
+        "abort"
+      ],
+      "mechanism": "addEventListener"
+    }
+  ],
+  "wrappers": [
+    {
+      "file": "packages/renderer/src/navigation/camera-input-listeners.ts",
+      "name": "listen",
+      "eventIndex": 0,
+      "targetIndex": -1,
+      "callbackIndex": 1,
+      "optionsIndex": 2,
+      "target": "inputSurface",
+      "source": "packages/renderer/src/navigation/camera-input-listeners.ts:13"
+    },
+    {
+      "file": "packages/renderer/src/navigation/shared-input-surface.ts",
+      "name": "bindInputEvent",
+      "eventIndex": 3,
+      "targetIndex": 2,
+      "callbackIndex": -1,
+      "optionsIndex": 5,
+      "target": "target",
+      "source": "packages/renderer/src/navigation/shared-input-surface.ts:28"
+    },
+    {
+      "file": "packages/renderer/src/navigation/shared-input-surface.ts",
+      "name": "bindInputEvent",
+      "eventIndex": 3,
+      "targetIndex": 2,
+      "callbackIndex": -1,
+      "optionsIndex": 5,
+      "target": "target",
+      "source": "packages/renderer/src/navigation/shared-input-surface.ts:40"
+    },
+    {
+      "file": "packages/renderer/src/rendering/object-control-binding.ts",
+      "name": "listen",
+      "eventIndex": 1,
+      "targetIndex": 0,
+      "callbackIndex": 2,
+      "optionsIndex": 3,
+      "target": "input",
+      "source": "packages/renderer/src/rendering/object-control-binding.ts:213"
+    }
+  ]
+}

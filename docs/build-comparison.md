@@ -78,8 +78,14 @@ seed their own permission. Pass `--moves moves.json` for source renames.
   seed opens all 9,890 pages; declared outputs bound them. Output declarations
   that select files outside the closure fail. HTML changes are grouped by
   identical normalized diff hunk for review.
-  `layout: "changes"` separately permits chunk movement only with an unchanged
-  module set and identical code and ordered imports in every non-seed module.
+  A module that exists in one build only and whose every importer, read from both
+  graphs, is in the closure is an orphaned dependency of the change (it left the
+  bundle because its only importers did): it joins the closure. An importer outside
+  the closure keeps it an independent difference.
+  `layout: "changes"` separately permits chunk movement only when every module
+  difference is a seed or an orphan (modules may therefore be added or removed with
+  their chunks' identities), every import-list difference belongs to a seed, a direct
+  importer or an orphan, and no other module changes its code.
   Without it, incidental chunk restructuring fails. Inventory changes additionally
   require the affected object in `objects`; downstream outputs still need globs.
   These permissions apply only to built-output comparison. Server status, headers,
@@ -135,29 +141,36 @@ checkout before accepting a move.
 
 ## CI and resource budget
 
-[Site safety net](../.github/workflows/site-safety-net.yml) owns its build trigger:
-renames under `site/**`, `src/**`, `packages/*/src/**` and `astro.config.mts`
-(excluding test/spec modules), fresh declarations, refactor markers and explicit
-labels/dispatch. It does not use the shared CI classifier to select this lane. Ordinary application PRs run
-with `compare-build` or manual dispatch. Fresh declarations and application
-renames select the build automatically. A declaration is honored only when this
-PR adds or changes it against the merge-base; a stale declaration means report mode.
+[Site safety net](../.github/workflows/site-safety-net.yml) selects the full lane
+only when the diff touches `applicationSource`: `site/`, `src/`,
+`packages/*/src/` or `astro.config.mts`, excluding test/spec modules. Both names
+of a rename count. `tool-change` and workflow dispatch force the lane.
+Declarations, `refactor`, `compare-build` and an `untangle` branch alone do not
+select builds. Docs/tools/test-only changes rely on the changed tools' own
+universe tests; the selection job says so in its summary. The declaration gate
+still requires a fresh declaration for application renames or `refactor`.
+A declaration is honored only when this PR adds or changes it against the
+merge base; a stale declaration means report mode.
 
 ```json
 {
   "mode": "semantic",
   "moves": {},
   "outputs": [{"glob": "earth/index.html", "reason": "Expected Earth content update"}],
-  "layout": "none"
+  "layout": "none",
+  "change": "Name the refactor this declaration belongs to (optional, 1 to 200 characters)"
 }
 ```
+
+`change` names the refactor. It takes part in the freshness comparison, so two pull
+requests that otherwise declare the same thing (for example JavaScript-only changes with
+no outputs) never carry identical declarations.
 
 The always-running **Refactor declaration gate** requires a fresh declaration
 for application renames or the `refactor` label.
 It uses merge-base tooling, needs no dependencies or builds, and remains a real
-check when the longer build job is skipped. Selection tooling also comes from
-the merge-base. Bootstrap requires the owner to first install this workflow and
-tool folder on main; their absence fails clearly.
+check when the longer build job is skipped. Selection tools also come from the merge base, except for `tool-change`
+or their introducing PR; both exceptions print a warning.
 
 Owner repository settings:
 
@@ -167,15 +180,15 @@ Owner repository settings:
    `.github/scripts/build-compare/**` and `.github/site-refactor.json` in the
    owner's existing CODEOWNERS; enable **Require review from Code Owners**.
    This change does not add a CODEOWNERS file.
-3. Create `compare-build`, `tool-change` and `refactor` labels. Restrict label
-   management to trusted maintainers. `tool-change` or `"tools":"head"` permits
-   head comparison tooling and emits a visible trust-override warning.
+3. Create `tool-change`, `no-base-cache` and `refactor` labels. Restrict label
+   management to trusted maintainers. `tool-change` permits head comparison tooling and emits a visible trust-override warning.
 4. Save asset caches from main only. PR jobs restore only. An organization
    ruleset requiring the workflow from main adds protection against hostile
    workflow edits that ordinary required-check settings cannot provide.
 
-The gate and the build job take their comparison and server-answer tools from
-the merge base. The pull request introducing a tool set has no merge-base copy:
+The gate and build job take all lane tools from the merge base unless
+`tool-change` is present. The legacy `tools: head` declaration field is parsed
+for compatibility but no longer grants a trust override. The pull request introducing a tool set has no merge-base copy:
 it runs its own tools and prints a visible bootstrap warning. An absent
 server-answer tool directory has the same exception.
 The selected server-answer tools are copied into both checkouts; executable
@@ -198,8 +211,8 @@ with an explicit package file and store cache, avoiding a root-package assumptio
 Runs share a PR concurrency group. Cancellation is true only for synchronize
 events; labeled/unlabeled events cannot cancel a running build. A new push may
 cancel the previous run, regardless of which event started it.
-Both CI jobs use Node 24. Hosted Node 24, cold restoration and upload remain
-unmeasured offline.
+All safety-net jobs use Node 24. Cache transfer, new concurrent peak memory
+and warm-lane timing remain unmeasured offline.
 
 This lane owns its trigger independently of the shared CI classifier. Default
 `pnpm check:ci --list` passes on both origin/main and this branch. Explicitly
@@ -234,14 +247,12 @@ working files and the pnpm store: **20 GiB total**, plus **250 MB** for L2
 recordings, bundles, staged data, logs and upload copies, and any other generated files.
 Copying the prepared bank instead of sharing inodes costs **3.62 GiB** and
 prevents head preparation from altering base inputs.
-The cache payload is one prepared bank (3.62 GiB), not both outputs or scene banks;
-it shares the repository-wide 10 GB quota with other workflows.
+The prepared cache payload is one prepared bank (3.62 GiB). The separate
+commit-addressed base archive below shares the repository cache quota with it.
 
-Local final builds plus a comparison cost about **14–17 minutes**.
-Budget **20–40 minutes** on a slower hosted runner before preparation, installation
-and upload; this is an estimate, not a GitHub measurement. The lane's 90-minute
-ceiling covers those unmeasured stages. Ordinary feature PRs opt in so this cost
-does not become the default merge path.
+These are historical two-build costs. A cache hit removes every base-side
+build, bundle, recording and measurement stage. The 90-minute emergency ceiling
+remains; it is not the warm-lane target.
 
 ## Hosted measurement and input diagnostics
 
@@ -302,9 +313,9 @@ membership hunks show the first ten module locations on both sides.
 Inventory diagnostics name changed asset entries without content addresses.
 Environment totals and exact emitted HTML/JS/CSS byte equality are recorded
 separately. Full build inputs remain the authoritative detail when retained.
-The L2 stage moves each comparison output back to its checkout’s `dist`, because
-its real readers and package isolation require that path. The output is restored
-to the evidence directory afterward, including on recording failure. Its
+The L2 stage copies each comparison output to its checkout’s `dist`, because
+its real readers and package isolation require that path. The temporary copy is removed afterward, including on recording failure;
+the original evidence tree remains intact for L3 and simultaneous L7. Its
 revision-owned Worker bundler also stages place files and `_headers` after L3 comparison. The host routes the build’s
 `https://earth-assets.lowpoly.cc` origin through restored inventory files offline;
 standalone qualification can use `https://assets.invalid`. No full scene-bank
@@ -358,4 +369,84 @@ changes without explaining missing files.
 | `bundle-cloudflare-worker.mts` | Object ids are sorted; scene/name iteration uses raw order for independent copies; excluded deployment command. |
 | `object-page-data.mts` | Reads explicit object paths; no directory/glob discovery. Reaches `ObjectPage.astro` directly. |
 
-The same lane also runs the [performance guard](performance-guard.md#in-the-comparison-lane) on these two builds, between the build comparison and the server answers.
+The same lane runs the [performance guard](performance-guard.md#in-the-comparison-lane) concurrently with server answers after L3 comparison.
+
+## Commit-addressed base reuse
+
+Every push to main runs **Produce commit-addressed production base** with main's
+own tools. It installs and prepares once, runs the same pinned production-shaped
+comparison build, bundles the two deployment targets, records and sanity-checks
+all three L2 targets, and measures L7. Failed qualification never seals or saves
+an entry. The key is `site-base-v1-<commit>`; only main saves it, and PRs restore
+only the exact merge-base key without prefix matching.
+
+The compressed archive contains `base/` (pre-L2 `dist`, rollup metadata,
+inventories, lockfile, toolchain and build record), `server-answers/base/`,
+`performance/base/`, `performance/base.md` and `validity.json`. It excludes
+prepared/source banks, dependencies, bundles, logs and producer verdicts.
+The manifest is written last and lists every payload file's byte length and md5.
+A missing/extra file, length/digest mismatch, wrong commit, lockfile or complete
+toolchain record rejects the entry. Extraction rejects traversal, links and
+special files. Rejection removes partial evidence and runs the fresh base path;
+it never skips the lane. Cache hit, miss/fallback or forced fresh is printed,
+saved in `cache.json` and included in the job summary. Toolchain changes may
+leave an immutable old entry unusable; eviction and cache-service failures also
+produce ordinary fresh-base fallbacks.
+
+The producer prints and summarizes the **actual compressed byte count** after
+creating `base.tgz`. No production archive exists in this offline checkout,
+so its compressed size remains **unmeasured**. Previous local evidence suggests
+roughly 4.17 GiB dist + 0.12 GiB metadata + 54 MB recordings before compression;
+this is capacity planning, not a measured archive size. Archives below 10 GB
+use Actions cache; larger archives or failed cache saves use the named main-run artifact with outer
+artifact compression disabled. The PR searches successful main-push runs for
+that exact commit on a cache miss. A missing/expired artifact falls back too.
+The repository cache quota is shared and entries can be evicted; compression
+reduces storage, not that quota.
+
+The head installation starts while Actions restores/downloads the archive;
+extraction runs while head preparation/build progresses. Head builds independently,
+then its full toolchain/lockfile record is compared with the validated base.
+A hit skips base installation, preparation, build, bundles, recordings and measures.
+All trusted comparison/diff/measurement entry points execute from the copied
+head tool directories, using head's dependencies: a cache hit needs no base install.
+
+After L3, L2 runs up to three recordings concurrently, alongside L7. Preview
+binds an OS-assigned port (`0`); Netlify and Cloudflare bind no listening ports
+and communicate through independent IPC hosts. Every recorder has its own
+output and temporary directory, inherited by its host/function packages.
+Bundles finish before recordings; no recorder writes to the retained L3 tree.
+The three recorder heaps are capped at 512 MiB each, their hosts at 768 MiB,
+and L7 at 1536 MiB: 5.25 GiB of maximum JS heaps on a standard 7 GiB runner,
+leaving about 1.75 GiB for native overhead and the supervisor. This makes
+three a finite planning bound; hosted peak RSS still needs proof. The existing
+shared five-minute L2 deadline, readiness/probe limits and process-group
+termination remain. Every parallel target settles even if another fails.
+
+Run `no-base-cache` as a label or the boolean dispatch input to force fresh
+base evidence. Keep head, merge base, labels affecting verdicts and tool origin
+identical between proof runs. Dispatch on a PR branch compares against its
+merge base with `origin/main`. Timing telemetry stays in `timings.json` and
+summaries, outside the stable verdict JSON. `comparison.md` is the complete L3
+report in Markdown; L7's comparison Markdown remains separately retained.
+
+```sh
+export PATH="$HOME/.nvm/versions/node/v22.23.2/bin:$PATH"
+# Download both hosted site-build-comparison artifacts into these local directories first.
+node .github/scripts/build-compare/verify-identical.mts --cached output/proof-cached --fresh output/proof-fresh
+```
+
+The identity tool requires a verified cache hit versus a forced fresh base,
+then the same base/head/mode/tool origin. It
+compares every byte of `report.json`, `server-answers.json`, `performance.json`,
+`comparison.md` and L7's comparison JSON/Markdown. Missing files or any difference
+fail; it neither normalizes reports nor strips fields.
+
+Run 37296091119's supplied hosted timings total about 30 minutes: base
+preparation/build 110/482 s, head preparation/build about 87/498–518 s,
+L3 67–74 s, L7 8 s, and sequential two-sided L2 about 4–5 minutes.
+The target is roughly **10–12 minutes warm**; this is an estimate, not a result.
+Those head costs plus one concurrent L2 critical path suggest about 12 minutes
+before runner/setup/upload overhead. The orchestrator must measure archive
+bytes, transfer, validation, total duration, memory/disk peaks and byte-identical
+reports on hosted runs before claiming the target or identical verdicts.
