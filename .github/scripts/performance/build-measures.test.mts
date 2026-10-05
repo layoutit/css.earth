@@ -308,24 +308,25 @@ test('only exact references to emitted hashed files are normalised', () => {
   for (const other of ['import("./other.ZZZZZZZZ.js")', 'x-entry.AbCdEfGh.js', 'entry.AbCdEfGh.jsx', 'entry.AbCdEfGh', 'index.html', 'entry.AbCdEfGh2.js']) assert.equal(text(other), other);
 });
 
-test('bytes may grow by at most one percent per file and per total; structural counts never grow', () => {
-  assert.equal(BYTE_TOLERANCE_PERCENT, 1);
+test('bytes may grow by at most half a percent per file and per total; structural counts never grow', () => {
+  assert.equal(BYTE_TOLERANCE_PERCENT, 0.5);
   const withBase = (route: Record<string, number>, global: Record<string, number> = {}): Measures => ({ schema: 'build-measures@1', global, routes: { '/': { counts: route, sequences: {}, declarations: [] } } });
-  const base = withBase({ 'static.raw': 1000, 'static.gzip': 400, 'static.brotli': 300, 'static.count': 200, 'startup.requests': 2 }, { 'chunk.router.raw': 50000, 'astro.count': 400 });
-  const verdicts = (head: Measures) => Object.fromEntries(compare(base, head).findings.map(finding => [`${finding.route}:${finding.measure}`, finding.verdict]));
+  const base = withBase({ 'static.raw': 1000, 'static.gzip': 2000, 'static.brotli': 4000, 'static.count': 400, 'startup.requests': 2 }, { 'chunk.router.raw': 50000, 'astro.count': 800 });
   const grown = (key: string, value: number): Measures => { const head = withBase({ ...base.routes['/']!.counts }, { ...base.global }); if (key in head.global) head.global[key] = value; else head.routes['/']!.counts[key] = value; return head; };
-  // Exactly 1% and 0.9% on a file or a route total pass; 1.1% fails.
-  for (const [key, ok, over] of [['static.raw', 1010, 1011], ['static.gzip', 404, 405], ['static.brotli', 303, 304], ['chunk.router.raw', 50500, 50551]] as const) {
-    assert.equal(compare(base, grown(key, ok)).pass, true, `${key} at +1%`);
-    assert.equal(Object.values(verdicts(grown(key, ok))).at(0), 'TOLERATED');
-    assert.equal(compare(base, grown(key, Math.floor(base.global[key] ?? base.routes['/']!.counts[key]!) * 1009 / 1000 | 0)).pass, true, `${key} at +0.9%`);
-    assert.equal(compare(base, grown(key, over)).pass, false, `${key} at +1.1%`);
+  const verdict = (key: string, value: number) => compare(base, grown(key, value)).findings.find(finding => finding.measure === key)?.verdict;
+  // Exactly +0.5% and +0.4% pass and are listed as tolerated; +0.6% fails: for a file, a route total, gzip, Brotli and a global chunk.
+  for (const [key, size] of [['static.raw', 1000], ['static.gzip', 2000], ['static.brotli', 4000], ['chunk.router.raw', 50000]] as const) {
+    assert.equal(verdict(key, size * 1005 / 1000), 'TOLERATED', `${key} at +0.5%`);
+    assert.equal(compare(base, grown(key, size * 1005 / 1000)).pass, true);
+    assert.equal(verdict(key, size * 1004 / 1000), 'TOLERATED', `${key} at +0.4%`);
+    assert.equal(verdict(key, size * 1006 / 1000), 'FAILURE', `${key} at +0.6%`);
+    assert.equal(compare(base, grown(key, size * 1006 / 1000)).pass, false);
   }
   // A new file has no base to be a percentage of; counts, requests and every other structural measure never grow, however large the base.
   assert.equal(compare(base, grown('static.new.raw', 1)).pass, false);
   for (const key of ['static.count', 'startup.requests', 'astro.count']) assert.equal(compare(base, grown(key, (base.global[key] ?? base.routes['/']!.counts[key]!) + 1)).pass, false, key);
   // Decreases stay accepted improvements; a tolerated increase is listed, not hidden.
   assert.equal(compare(base, grown('static.raw', 900)).pass, true);
-  assert.match(summary(compare(base, grown('static.raw', 1005))), /TOLERATED/u);
+  assert.match(summary(compare(base, grown('static.raw', 1004))), /TOLERATED/u);
   assert.equal(isByteMeasure('chunk.scene-router.mts.gzip'), true); assert.equal(isByteMeasure('startup.requests'), false); assert.equal(isByteMeasure('dynamic.count'), false);
 });
