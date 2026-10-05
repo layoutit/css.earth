@@ -224,3 +224,93 @@ Budget **20–40 minutes** on a slower hosted runner before preparation, install
 and upload; this is an estimate, not a GitHub measurement. The lane's 90-minute
 ceiling covers those unmeasured stages. Ordinary feature PRs opt in so this cost
 does not become the default merge path.
+
+## Hosted measurement and input diagnostics
+
+Measured on 2026-10-05 in PR #1303, head `04a3d7ad61` (this PR),
+merge base `19d5ab4958b45877ee30fbca7c1350de4818e8a4`, `ubuntu-latest`,
+Node 24, report mode, head tools. Values come from the retained hosted
+`site-build-comparison` artifact's `inputs.json` and `timings.json`.
+
+| Stage | Base seconds | Head seconds |
+| --- | ---: | ---: |
+| Install | 1.6 | 0.8 |
+| Preparation | 90.9 | 137.7 |
+| Build | 409.1 | 420.1 |
+| Compare (both) | 110.0 | — |
+
+The job took approximately 23 minutes; recorded stages total 1,170.2 seconds.
+The 46,430 emitted files matched. There were 477 prerender differences
+(121 modules, 119 imports, 119 references, 118 membership) and one inventory
+difference, `beta-pictoris-disc`. The original report occupied approximately
+279 MiB. The artifact retains no output trees or disk-usage measurements, so
+checkout/build disk sizes cannot be derived from it.
+
+Verified artifact evidence: `PreparedObjectPanel.astro` lost 118 dynamic
+minimap WebP imports on the head, with no additions. This is a file-membership
+change, not merely ordering. `ObjectPage.astro` contains different temporary
+chunk placeholders; `prepared-source-credits.json` also has different content.
+Local retained identical-input proofs report equality, but cannot establish
+what was present in the hosted caches.
+
+The restore installer reads inventories and writes restored assets; it does
+not rewrite inventories. The deployment nebula CLI, however, calls
+`inventoryPreparedAssets` even after `--if-missing` returns a verified reused
+bank. That inventories all files actually on disk, replacing the prepared
+entries. An extra cached file can therefore change a tracked inventory on
+only one side. `beta-pictoris-disc` declares nebula delivery and takes this
+path. The old lane disabled prepared sharing if base preparation changed any
+inventory. This explains a possible route from cache drift to different
+wildcard memberships; the precise original asset entry cannot be recovered
+because the hosted artifact contains neither inventory copies nor metadata
+input trees. Cache contamination is an inference, not a reproduced hosted
+root cause.
+
+Comparison preparation now removes uninventoried files from inventoried
+prepared directories before restoring, and omits the nebula authoring step:
+restoration supplies the committed bank. It also compares tracked Git diffs
+before and after preparation, failing loudly on any new tracked mutation,
+including inventory edits. Intentional copied comparison tools are part of
+the baseline. Differences remain visible; no glob or import-order
+canonicalization was added.
+
+The JSON artifact keeps every difference identity and verdict, with bounded
+module/chunk/page samples and omission counts, rather than full manifests,
+module code or repeated route lists. Each graph dimension has at most 25
+diagnostic entries. Code hunks show the first mismatch with 80 preceding
+characters, up to 160 following characters, and both lengths. Import and
+reference hunks list added/removed ids (first ten, with omitted counts);
+membership hunks show the first ten module locations on both sides.
+Inventory diagnostics name changed asset entries without content addresses.
+Environment totals and exact emitted HTML/JS/CSS byte equality are recorded
+separately. Full build inputs remain the authoritative detail when retained.
+CI writes mode, tool origin (merge-base/head/bootstrap), dimensions,
+environments, closure sizes and stage timings to `GITHUB_STEP_SUMMARY`.
+
+### Filesystem-order audit
+
+This audit covers all `import.meta.glob` calls under `site/` and `packages/`,
+and directory reads in `site/build/**` and top-level `site/*.mts`.
+The installed Vite glob transform sorts expanded paths before generating
+imports. Sorting them again in the comparator would hide real import-order
+changes without explaining missing files.
+
+| Reader | Order and route to prerender |
+| --- | --- |
+| `ObjectPage.astro` | Globs `prepared/content.json` and `src/**/*.css`; Vite sorts, file membership reaches the named module directly. |
+| `PreparedObjectPanel.astro` | Globs minimap JSON/WebPs, surface maps, text, authored content, raster recipes and datasets; Vite sorts, cache membership reaches the named module directly. |
+| `dot-catalogue-data.mts` | Eager nebula source glob is sorted by Vite; its values feed prerender catalogue data. |
+| `prepare-catalog.mts` | Generates explicit descriptor, prepared datasets/presentation and source-manifest globs; context ids are sorted by `readContextObjects`. These feed prerender context modules. |
+| `catalog-directory.ts` (`readObjectDescriptors`) | Raw directory order survives into a descriptor map; `readCatalog` and `readContextObjects` sort their results before catalog generation. No evidence this changes the named modules. |
+| `prepare-volume-presentation.mts` | Filters and sorts folders before reading; feeds facility source credits and prepared presentation. |
+| `prepare-sidebar-thumbnails.mts` | Both directory scans sort folders; no raw directory-order dependency. |
+| `paged-asteroid-dot-positions.mts` | Sorts directories before preparing banks. |
+| `prepare-spatial-context.ts` | Cleanup loops use raw directory order but only remove files. Packaged-star discovery preserves raw order into a Set used for membership; no named prerender code-order dependence identified. |
+| `check-preparation-inputs.mts` | Raw directory order determines asset-check and missing-file diagnostic order; no named prerender module generation. |
+| `pin-world-files.mts` | Raw folder order determines independent inventory writes and counts; authoring command, outside comparison recipe. |
+| `refresh-photographs.ts` | Raw recursive order determines refresh processing; authoring command outside comparison recipe. |
+| `refresh-content.mts` | Raw order determines independent copied outputs; authoring command outside comparison recipe. |
+| `inline-page-stylesheet.mts` | Raw directory order determines independent page processing after emit; cannot change prerender module graph. |
+| `bundle-netlify-functions.mts` | Raw order determines entry list; deployment command excluded from comparison. |
+| `bundle-cloudflare-worker.mts` | Object ids are sorted; scene/name iteration uses raw order for independent copies; excluded deployment command. |
+| `object-page-data.mts` | Reads explicit object paths; no directory/glob discovery. Reaches `ObjectPage.astro` directly. |

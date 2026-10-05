@@ -379,3 +379,36 @@ test('identical added HTML hunks group across routes', async () => {
   for (const path of ['new/first/index.html', 'new/second/index.html']) head.files.set(path, Buffer.from('<p>new page</p>'));
   assert.deepEqual((await compare(base, head)).htmlGroups, [{ pages: ['new/first/index.html', 'new/second/index.html'], base: '', head: '<p>new page</p>' }]);
 });
+
+test('diagnostics are bounded, retain environment counts and distinguish bytes from semantics', async () => {
+  const { compactReport, codeHunk } = await import('./compare.mts');
+  const base = fixture(), head = fixture();
+  for (const build of [base, head]) {
+    build.environments[0]!.environment = 'prerender-0';
+    build.environments[0]!.chunks[0]!.modules = Array.from({ length: 30 }, (_, i) => module(`site/${i}.mts`, 'x'.repeat(10000) + (build === base ? 'a' : 'b')));
+  }
+  const report = await compare(base, head);
+  assert.equal(report.diagnostics.environments['prerender-0']!.modules, 30);
+  assert.equal(report.diagnostics.omitted.modules, 5);
+  assert.deepEqual(report.diagnostics.environmentTotals, { prerender: 30, client: 0, worker: 0, other: 0 });
+  assert.equal(report.differences.filter(diff => diff.dimension === 'modules' && diff.diagnostic).length, 25);
+  assert.deepEqual(report.diagnostics.emittedBytesEqual, { html: true, js: true, css: true });
+  assert.deepEqual(codeHunk('x'.repeat(100) + 'a', 'x'.repeat(100) + 'b'), { offset: 100, baseLength: 101, headLength: 101, base: 'x'.repeat(80) + 'a', head: 'x'.repeat(80) + 'b' });
+  assert.ok(Buffer.byteLength(JSON.stringify(compactReport(report))) < 2000000);
+  head.files.set('_astro/a.111.js', Buffer.from('changed'));
+  assert.equal((await compare(base, head)).diagnostics.emittedBytesEqual.js, false);
+});
+test('inventory diagnostic identifies asset names without content addresses', async () => {
+  const base = fixture(), head = fixture();
+  const inventory = (bytes: number) => Buffer.from(JSON.stringify({ assets: [{ location: 'prepared', filename: 'bank.bin', bytes }] }));
+  base.inventories = new Map([['earth', inventory(1)]]); head.inventories = new Map([['earth', inventory(2)]]);
+  assert.deepEqual((await compare(base, head)).differences.find(diff => diff.dimension === 'inventory')!.diagnostic, { assets: ['prepared:bank.bin'] });
+});
+test('import and reference diagnostics show additions, removals and pure reordering', async () => {
+  const head = fixture(); head.environments[0]!.chunks[0]!.modules[0]!.importedIds.push('new.mts');
+  assert.deepEqual((await compare(fixture(), head)).differences.find(diff => diff.dimension === 'imports')!.diagnostic, { added: ['static:new.mts'], removed: [], addedOmitted: 0, removedOmitted: 0, orderChanged: false });
+  head.environments[0]!.chunks[0]!.imports.push('_astro/b.111.js');
+  assert.ok((await compare(fixture(), head)).differences.find(diff => diff.dimension === 'references')!.diagnostic);
+  const moved = fixture(); moved.environments[0]!.chunks[0]!.modules.push(moved.environments[0]!.chunks[1]!.modules.pop()!);
+  assert.ok((await compare(fixture(), moved)).differences.find(diff => diff.dimension === 'membership')!.diagnostic);
+});

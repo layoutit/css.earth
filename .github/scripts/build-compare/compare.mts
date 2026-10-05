@@ -10,11 +10,32 @@ import type { OutputPermission } from './semantic-policy.mts';
 
 export type Mode = 'report' | 'pure-move' | 'semantic';
 export type Dimension = 'modules' | 'imports' | 'membership' | 'references' | 'html' | 'css' | 'js' | 'asset' | 'data' | 'other' | 'files' | 'inventory' | 'order';
-export interface Difference { dimension: Dimension; identity: string; base?: string; head?: string; insideClosure: boolean; declaredOutput?: boolean; layoutOnly?: boolean; modules: string[]; chunks: string[]; pages: string[]; detail?: { base: unknown; head: unknown } }
-export interface Report { semanticEqual: boolean; layoutEqual: boolean; equal: boolean; mode: Mode; exitCode: number; differences: Difference[]; closure: { modules: string[]; directImporters: string[]; chunks: string[]; pages: string[]; assets: string[]; outputs: string[] }; manifest: { base: Record<string, string>; head: Record<string, string>; metadata: { base: unknown; head: unknown } }; routes: Record<string, number[]>; htmlGroups: { pages: string[]; base: string; head: string }[]; declaration: { outputs: OutputPermission[]; layout: 'none' | 'changes'; layoutEligible: boolean; outsideClosure: string[] } }
+export interface Difference { dimension: Dimension; identity: string; base?: string; head?: string; insideClosure: boolean; declaredOutput?: boolean; layoutOnly?: boolean; modules: string[]; chunks: string[]; pages: string[]; detail?: { base: unknown; head: unknown }; diagnostic?: unknown }
+export interface Report { diagnostics: { omitted: Record<string, number>; environments: Record<string, Record<string, number>>; environmentTotals: Record<string, number>; emittedBytesEqual: Record<string, boolean> }; semanticEqual: boolean; layoutEqual: boolean; equal: boolean; mode: Mode; exitCode: number; differences: Difference[]; closure: { modules: string[]; directImporters: string[]; chunks: string[]; pages: string[]; assets: string[]; outputs: string[] }; manifest: { base: Record<string, string>; head: Record<string, string>; metadata: { base: unknown; head: unknown } }; routes: Record<string, number[]>; htmlGroups: { pages: string[]; base: string; head: string }[]; declaration: { outputs: OutputPermission[]; layout: 'none' | 'changes'; layoutEligible: boolean; outsideClosure: string[] } }
 const sorted = (values: Iterable<string>): string[] => [...new Set(values)].sort();
 const same = (a: unknown, b: unknown): boolean => JSON.stringify(a) === JSON.stringify(b);
 const digest = (value: string): string => createHash('md5').update(value).digest('hex');
+/** Bounded first differing region, including context without copying a whole module. */
+export function codeHunk(base: string, head: string) {
+  let start = 0;
+  while (start < Math.min(base.length, head.length) && base[start] === head[start]) start++;
+  const from = Math.max(0, start - 80);
+  return { offset: start, baseLength: base.length, headLength: head.length,
+    base: base.slice(from, start + 160), head: head.slice(from, start + 160) };
+}
+/** The artifact is a bounded review view; full inputs remain in each build's metadata/dist. */
+export function compactReport(report: Report) {
+  const bounded = (items: string[]) => ({ values: items.slice(0, 10), omitted: Math.max(0, items.length - 10) });
+  return { ...report,
+    differences: report.differences.map(({ detail, modules, chunks, pages, ...diff }) => ({ ...diff,
+      ...(diff.dimension === 'html' && detail ? { detail: codeHunk(String(detail.base ?? ''), String(detail.head ?? '')) } : {}), modules: bounded(modules), chunks: bounded(chunks), pages: bounded(pages) })),
+    closure: Object.fromEntries(Object.entries(report.closure).map(([key, values]) => [key, { count: values.length, ...bounded(values) }])),
+    manifest: Object.fromEntries((['base', 'head'] as const).map(side => [side, { files: Object.keys(report.manifest[side]).length,
+      dimensions: Object.fromEntries(sorted(Object.values(report.manifest[side])).map(dimension => [dimension, Object.values(report.manifest[side]).filter(value => value === dimension).length])) }])),
+    routes: { count: Object.keys(report.routes).length, affected: Object.values(report.routes).filter(values => values.length).length },
+    htmlGroups: report.htmlGroups.slice(0, 25).map(group => ({ ...codeHunk(group.base, group.head), pages: bounded(group.pages) })),
+    declaration: { ...report.declaration, outsideClosure: bounded(report.declaration.outsideClosure) } };
+}
 export function classify(path: string): Dimension {
   if (/\.html$/u.test(path)) return 'html'; if (/\.css$/u.test(path)) return 'css'; if (/\.m?js$/u.test(path)) return 'js';
   if (/\.(?:json|bin|csv|xml|txt)$/u.test(path)) return 'data';
@@ -187,7 +208,14 @@ export async function compare(base: Build, head: Build, moves: Moves = {}, mode:
   const permittedModules = new Set([...seeded, ...directImporters]);
   for (const object of sorted([...(base.inventories?.keys() ?? []), ...(head.inventories?.keys() ?? [])])) {
     const left = base.inventories?.get(object), right = head.inventories?.get(object);
-    if (!left || !right || !(await bytes(left)).equals(await bytes(right))) add('inventory', object);
+    if (!left || !right || !(await bytes(left)).equals(await bytes(right))) {
+      add('inventory', object);
+      const entries = async (value: Buffer | string | undefined) => new Map(value === undefined ? [] : array(record(JSON.parse((await bytes(value)).toString('utf8'))).assets ?? []).map(raw => {
+        const asset = record(raw); return [String(asset.location) + ':' + String(asset.filename), JSON.stringify(asset)] as const;
+      }));
+      const x = await entries(left), y = await entries(right);
+      differences.at(-1)!.diagnostic = { assets: sorted([...x.keys(), ...y.keys()]).filter(name => x.get(name) !== y.get(name)) };
+    }
   }
   for (const id of sorted([...a.modules.keys(), ...b.modules.keys()])) {
     const left = a.modules.get(id), right = b.modules.get(id);
@@ -311,7 +339,7 @@ export async function compare(base: Build, head: Build, moves: Moves = {}, mode:
   const contexts = differences.map(diff => {
     if (diff.dimension === 'modules' || diff.dimension === 'imports') {
       diff.chunks = sorted([a, b].flatMap(indexed => [...indexed.chunks].filter(([id, entry]) => entry.modules.some(module => diff.identity === `${id.slice(0, id.indexOf(':chunk:'))}:${module}`)).map(([id]) => id)));
-      diff.detail = diff.dimension === 'imports' ? { base: a.modules.get(diff.identity)?.edges, head: b.modules.get(diff.identity)?.edges } : { base: a.modules.get(diff.identity)?.code, head: b.modules.get(diff.identity)?.code };
+
     }
     if (!diff.chunks.length && (a.assetOwners.has(diff.identity) || b.assetOwners.has(diff.identity))) {
       const owners = sorted([...(a.assetOwners.get(diff.identity) ?? []), ...(b.assetOwners.get(diff.identity) ?? [])]); diff.modules = owners;
@@ -359,7 +387,42 @@ export async function compare(base: Build, head: Build, moves: Moves = {}, mode:
   const layoutEqual = !differences.some(diff => diff.dimension !== 'modules' && diff.dimension !== 'imports');
   const equal = semanticEqual && layoutEqual;
   const routes = Object.fromEntries(sorted([...base.files.keys(), ...head.files.keys()].filter(name => classify(name) === 'html')).map(page => [page, differences.flatMap((diff, index) => diff.pages.includes(page) ? [index] : [])]));
-  return { semanticEqual, layoutEqual, equal, mode, exitCode: mode === 'report' ? 0 : mode === 'pure-move' ? equal ? 0 : 1 : semanticViolation ? 1 : 0,
+  const omitted: Record<string, number> = {}, environments: Record<string, Record<string, number>> = {};
+  const seen: Record<string, number> = {};
+  for (const diff of differences) {
+    const environment = /^(prerender-[^:]+|client-[^:]+|worker):/u.exec(diff.identity)?.[1] ?? 'other';
+    const counts = environments[environment] ??= {};
+    counts[diff.dimension] = (counts[diff.dimension] ?? 0) + 1;
+    if (!['modules', 'imports', 'references', 'membership'].includes(diff.dimension)) continue;
+    seen[diff.dimension] = (seen[diff.dimension] ?? 0) + 1;
+    if (seen[diff.dimension]! > 25) { omitted[diff.dimension] = (omitted[diff.dimension] ?? 0) + 1; continue; }
+    if (diff.dimension === 'modules') { const hunk = codeHunk(a.modules.get(diff.identity)?.code ?? '', b.modules.get(diff.identity)?.code ?? ''); diff.diagnostic = hunk; diff.detail = { base: hunk.base, head: hunk.head }; }
+    else if (diff.dimension === 'membership') {
+      const env = diff.identity.slice(0, diff.identity.indexOf(':chunk:'));
+      diff.diagnostic = { moved: diff.modules.slice(0, 10).map(module => ({ module,
+        base: [...a.chunks].filter(([id, chunk]) => id.startsWith(`${env}:chunk:`) && chunk.modules.includes(module)).map(([id]) => id),
+        head: [...b.chunks].filter(([id, chunk]) => id.startsWith(`${env}:chunk:`) && chunk.modules.includes(module)).map(([id]) => id) })), omitted: Math.max(0, diff.modules.length - 10) };
+    } else {
+      const x = (diff.dimension === 'imports' ? a.modules.get(diff.identity) : a.chunks.get(diff.identity))?.edges ?? [];
+      const y = (diff.dimension === 'imports' ? b.modules.get(diff.identity) : b.chunks.get(diff.identity))?.edges ?? [];
+      const removed = x.filter(id => !y.includes(id)), added = y.filter(id => !x.includes(id));
+      diff.diagnostic = { removed: removed.slice(0, 10), added: added.slice(0, 10), removedOmitted: Math.max(0, removed.length - 10), addedOmitted: Math.max(0, added.length - 10), orderChanged: !same(x, y) && !removed.length && !added.length };
+    }
+  }
+  const environmentTotals: Record<string, number> = { prerender: 0, client: 0, worker: 0, other: 0 };
+  for (const [environment, counts] of Object.entries(environments)) {
+    const group = environment.startsWith('prerender-') ? 'prerender' : environment.startsWith('client-') ? 'client' : environment === 'worker' ? 'worker' : 'other';
+    environmentTotals[group]! += Object.values(counts).reduce((sum, count) => sum + count, 0);
+  }
+  const emittedBytesEqual: Record<string, boolean> = {};
+  for (const dimension of ['html', 'js', 'css']) {
+    emittedBytesEqual[dimension] = true;
+    for (const name of sorted([...base.files.keys(), ...head.files.keys()]).filter(name => classify(name) === dimension)) {
+      const x = base.files.get(name), y = head.files.get(name);
+      if (x === undefined || y === undefined || !(await bytes(x)).equals(await bytes(y))) { emittedBytesEqual[dimension] = false; break; }
+    }
+  }
+  return { diagnostics: { omitted, environments, environmentTotals, emittedBytesEqual }, semanticEqual, layoutEqual, equal, mode, exitCode: mode === 'report' ? 0 : mode === 'pure-move' ? equal ? 0 : 1 : semanticViolation ? 1 : 0,
     differences, closure: { modules: sorted(seeded), directImporters: sorted(directImporters), chunks: sorted(closureChunks), pages: sorted(closurePages), assets: sorted(closureAssets), outputs: sorted(closureOutputs) },
     manifest: { base: Object.fromEntries([...base.files.keys()].map(name => [name, classify(name)])), head: Object.fromEntries([...head.files.keys()].map(name => [name, classify(name)])), metadata: { base: { chunks: [...a.chunks].map(([id, chunk]) => ({ identity: id, fileName: chunk.chunk.fileName, modules: chunk.modules, references: chunk.edges, assets: chunk.assets })), assets: [...a.assetOwners] }, head: { chunks: [...b.chunks].map(([id, chunk]) => ({ identity: id, fileName: chunk.chunk.fileName, modules: chunk.modules, references: chunk.edges, assets: chunk.assets })), assets: [...b.assetOwners] } } }, routes, htmlGroups, declaration: { ...policy, layoutEligible, outsideClosure } };
 }
@@ -372,7 +435,7 @@ if (isMain(import.meta.url)) {
     const requireSources = flags.has('--sources') ? await readFile(flags.get('--sources')!, 'utf8') : '{}';
     const started = performance.now();
     const report = await compare(await loadBuild(base), await loadBuild(head), moves, mode === 'semantic' ? 'semantic' : mode === 'pure-move' ? 'pure-move' : 'report', message => console.error(`[${((performance.now() - started) / 1000).toFixed(1)}s] ${message}`), flags.has('--sources') ? (() => { const raw = record(JSON.parse(requireSources)); return { paths: strings(raw.paths), objects: strings(raw.objects ?? []), ...semanticPolicy(raw) }; })() : { paths: [] });
-    if (flags.has('--json')) await writeFile(flags.get('--json')!, JSON.stringify(report, null, 2));
+    if (flags.has('--json')) await writeFile(flags.get('--json')!, JSON.stringify(compactReport(report)));
     console.log(JSON.stringify({ semanticEqual: report.semanticEqual, layoutEqual: report.layoutEqual, differences: report.differences.length, closure: Object.fromEntries(Object.entries(report.closure).map(([key, values]) => [key, values.length])), counts: Object.fromEntries((['base', 'head'] as const).map(side => { const metadata = record(report.manifest.metadata[side]); const chunks = array(metadata.chunks).map(record); return [side, { files: Object.keys(report.manifest[side]).length, modules: new Set(chunks.flatMap(chunk => strings(chunk.modules))).size, chunks: chunks.length, pages: Object.values(report.manifest[side]).filter(value => value === 'html').length }]; })), exitCode: report.exitCode }));
     for (const diff of report.differences) console.log(`${diff.insideClosure ? 'inside' : 'OUTSIDE'} ${diff.dimension} ${diff.identity}`);
     process.exitCode = report.exitCode;
