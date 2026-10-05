@@ -8,6 +8,10 @@
 
 - The whole approximation is volume-normalized to radius 19.5 km, using the approximately **39 ± 6 km thermal diameter** summarized in the [author's physical table](https://tilmanndenk.de/outersaturnianmoons/siarnaq/).
 
+- **Color:** [Grav and Bauer (2007), Table 2](https://doi.org/10.1016/j.icarus.2007.04.020) measured the whole disc at B−V = 0.875 ± 0.007, V−R = 0.485 ± 0.007 and V−I = 1.025 ± 0.007, as the weighted mean of 2 nights: 2005-01-06 (Keck I LRIS, Johnson-Kron-Cousins BVRI filters); 2005-04-15 (Gemini North GMOS, SDSS g'r'i'z' filters converted to BVRI by the authors). [The record](source/photometry/disc-color.json) turns them into one sRGB color, #433f39, with the method of [shape-only material](../../../docs/shape-only-material.md).
+
+- **Brightness:** [Grav et al. (2015), Table 3](https://doi.org/10.1088/0004-637X/809/1/3) measured a visible geometric albedo of 5.0 ± 1.7% from NEOWISE thermal data. The color is scaled to it.
+
 ## Evidence
 
 - **Original convex mesh:** no native OBJ was linked on the reviewed page; checking the analogous author-file URL also returned HTTP 404.
@@ -20,9 +24,11 @@
 
 - Equating that effective diameter with a volume diameter is a display convention, not a measured volume or three measured axes. This construction does not reproduce the exact inversion model or its lightcurves.
 
-- No registered photographic surface product was qualified, so they do not become a texture dataset. The ordinary shared missing-data grid covers the entire shape.
+- No registered photographic surface product was qualified, so they do not become a texture dataset. One whole-disc color covers the entire shape.
 
 - This constrains the approximate spin axis, not a current prime-meridian or landmark phase; the initial meridian is arbitrary.
+
+- The color is one mean for the whole disc, painted evenly: no terrain, albedo pattern or color variation is implied.
 
 [Inputs](source/manifest.json) · [Delivered files](inventory.json) · [Credits](NOTICE.md) · [Investigation ledger](investigations.json)
 

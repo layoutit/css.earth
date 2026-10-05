@@ -106,7 +106,9 @@ export function lineageProducts({ id, recipes, inputs, paths: declared, controls
         const used = paths(plan);
         if (plan.consumer) used.push(...group(text(plan.consumer)));
         if (family === 'shapeViews') used.push(...paths(geometry.radialTerrain));
-        add(plan.id, used, { parents: plan.monochromeBase ? [text(plan.monochromeBase)] : [], interpretation: kind(family) });
+        // A shape view painted with its published whole-disc color is that measurement, not a neutral shape.
+        const science = family === 'shapeViews' ? maybeRecord(plan.science)?.kind : undefined;
+        add(plan.id, used, { parents: plan.monochromeBase ? [text(plan.monochromeBase)] : [], interpretation: kind(typeof science === 'string' ? science : family) });
       });
     }
     // Mesh geometry changes the final sampled surface as well as its silhouette.

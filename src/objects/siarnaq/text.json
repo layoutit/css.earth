@@ -42,10 +42,10 @@
     ]
   },
   "datasets": {
-    "model": {
-      "title": "Convex-model envelope approximation",
-      "detail": "Approximate shape",
-      "summary": "A rough outline traced from views of a published convex model. Its depth and polar caps are approximate."
+    "color": {
+      "title": "Whole-disc color and albedo",
+      "detail": "Measured color",
+      "summary": "Siarnaq’s measured average color and brightness on an outline traced from a published model. No surface detail has been seen."
     }
   }
 }

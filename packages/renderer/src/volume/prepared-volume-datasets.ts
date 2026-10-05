@@ -169,7 +169,8 @@ export function createPreparedVolumeDatasets({ payload, resolveResource }: {
       // The dataset the server rendered, when its files are read; otherwise the bank's default, which the loader reads.
       let selected = selectedNative !== undefined && source.volume(selectedNative) ? selectedNative : data.defaultDataset, destroyed = false, latest: VolumeCameraPublication | null = null;
       // The dataset asked for last: a selection whose files are still being read is shown when they arrive, unless another was asked for since.
-      let wanted = selected;
+      // `staged`: the caller shows it instead, once its images are decoded (`stagedDataset`).
+      let wanted = selected, staged = false;
       let starsVisible = data.starsEnabled ?? true;
       const listeners = new Set<(state: PreparedVolumeDatasetState) => void>();
       const datasetContent = Object.freeze(data.datasets.map(({ id, label, title, description, sourceUrl }) =>
@@ -285,8 +286,10 @@ export function createPreparedVolumeDatasets({ payload, resolveResource }: {
         return Object.freeze({ root, frontRoot, publish, state, destroy,
           /** Distant approach warms the contributing axis. Detail admission owns the selected dataset's
            * full rotation bank, so dragging cannot release an axis and hide the cloud to decode it again. */
-          textureUrls(publication: VolumeCameraPublication, approaching = false): readonly string[] {
-            const volume = datasetById.get(selected)!.volume;
+          textureUrls(publication: VolumeCameraPublication, approaching = false, id: string = selected): readonly string[] {
+            const dataset = datasetById.get(id);
+            if (!dataset) throw new TypeError(`Unknown prepared volume dataset: ${id}.`);
+            const volume = dataset.volume;
             const projection = volume.impostors ? projectVolumeImpostors(publication, volume.frame, volume.impostors) : null;
             const paths = new Set<string>();
             if (!projection || (projection.visible && projection.volumeMix > 0)) {
@@ -312,19 +315,25 @@ export function createPreparedVolumeDatasets({ payload, resolveResource }: {
             if (latest) publish(latest);
             notify();
           },
+          /** Read dataset `id`'s files ahead of showing it. */
+          read: (id: string) => source.load(id),
+          /** The dataset staged and not yet shown, once its files are read. */
+          stagedDataset: (): string | null => !destroyed && staged && wanted !== selected && source.volume(wanted) && source.stars(wanted) ? wanted : null,
           /** Show dataset `id`. One whose files are not read yet is read first and shown on arrival; the bank keeps the
-           * dataset it shows until then. */
-          selectDataset(id: string) {
+           * dataset it shows until then. `stage` only asks for it: the bank is on screen, and the caller decodes the
+           * dataset's images before it selects it again without `stage` (`stagedDataset` names it meanwhile). */
+          selectDataset(id: string, stage = false) {
             if (destroyed) return;
             const next = datasetById.get(id);
             if (!next) throw new TypeError(`Unknown prepared volume dataset: ${id}.`);
-            wanted = id;
+            wanted = id; staged = stage;
             if (id === selected) return;
             if (!source.volume(id) || !source.stars(id)) {
-              source.load(id).then(() => { if (!destroyed && wanted === id) this.selectDataset(id); },
+              source.load(id).then(() => { if (!destroyed && wanted === id && !staged) this.selectDataset(id); },
                 (error: unknown) => { if (wanted === id) wanted = selected; console.error(`Volume dataset bank ${data.id}: dataset ${id} could not be read.`, error); });
               return;
             }
+            if (stage) return;
             stars?.setPresentation(next.stars);
             const family = ensureFamily(next);
             family.active.dataset = next;

@@ -4,8 +4,8 @@
     {
       "location": "prepared",
       "filename": "members.json",
-      "bytes": 18800,
-      "sha256": "6cebd44f8335e2abd8dbead22d2a1078f156580c029252c2ccaac07875146124"
+      "bytes": 10479,
+      "sha256": "27c9522543acc4baef4b78b2f46b1e3ee7e120f07d7d2aef87aaf46c883c44f9"
     },
     {
       "location": "prepared",
@@ -15,39 +15,9 @@
     },
     {
       "location": "prepared",
-      "filename": "orbits/albiorix.bin",
-      "bytes": 2267,
-      "sha256": "228c87d410357c05f3be10820f5f31e2f7fc676739d4c42f48a316aa6c77ee7f"
-    },
-    {
-      "location": "prepared",
-      "filename": "orbits/anthe.bin",
-      "bytes": 2258,
-      "sha256": "8f72d44aca937c5e265f0cbd7f4f12ea5b1b99119e5fa89445baa8f7b9342ec6"
-    },
-    {
-      "location": "prepared",
       "filename": "orbits/atlas.bin",
       "bytes": 2254,
       "sha256": "d508360fc6a9b9bfad49a7dd6f82feac7fe63c9864f50054c0182f1732cef155"
-    },
-    {
-      "location": "prepared",
-      "filename": "orbits/bebhionn.bin",
-      "bytes": 2262,
-      "sha256": "46f741fea5c99ec564d9fcaa6f043ba8a840d0ec5940ccbed4fe119561350c25"
-    },
-    {
-      "location": "prepared",
-      "filename": "orbits/bergelmir.bin",
-      "bytes": 2259,
-      "sha256": "dc59853dfc0437b82c3ab182abbf61dba3936370d95005fe70368420349ce16f"
-    },
-    {
-      "location": "prepared",
-      "filename": "orbits/bestla.bin",
-      "bytes": 2255,
-      "sha256": "8e5d640cc495cacb6d35124b1e299e3f8649c9c988df69fa78abd379446bbe93"
     },
     {
       "location": "prepared",
@@ -81,30 +51,6 @@
     },
     {
       "location": "prepared",
-      "filename": "orbits/erriapus.bin",
-      "bytes": 2268,
-      "sha256": "aef17508858bebc0c832e1985309374741c5aff0f90590d9b10a26b026de4876"
-    },
-    {
-      "location": "prepared",
-      "filename": "orbits/fornjot.bin",
-      "bytes": 2251,
-      "sha256": "f1fccfb1ec4c617f868510bddcba81053654acca6a5a5221447432b5bf0b6d74"
-    },
-    {
-      "location": "prepared",
-      "filename": "orbits/greip.bin",
-      "bytes": 2259,
-      "sha256": "64dc29afef00e225d1b3c9f02529d02c61384d02cf2ee54ecab0ead47475fe0f"
-    },
-    {
-      "location": "prepared",
-      "filename": "orbits/hati.bin",
-      "bytes": 2260,
-      "sha256": "c5bc3d1f7c611f0ed6cc93bed120421b2ab96775a77b1427610e23207ea16454"
-    },
-    {
-      "location": "prepared",
       "filename": "orbits/helene.bin",
       "bytes": 2258,
       "sha256": "1cf4236900e7106dd5825fdce8052d07a3547984e7517e3497b5d3a6bf1cbf63"
@@ -117,39 +63,15 @@
     },
     {
       "location": "prepared",
-      "filename": "orbits/hyrrokkin.bin",
-      "bytes": 2268,
-      "sha256": "41b895abb627d2f2033bd1f3d8340bdcea7d9e850841cfacf4f0ba87757523f6"
-    },
-    {
-      "location": "prepared",
       "filename": "orbits/iapetus.bin",
       "bytes": 2260,
       "sha256": "693830e9383d1ef24d0b420abe29ea0c56a821b78b5b33dccc447070dd154779"
     },
     {
       "location": "prepared",
-      "filename": "orbits/ijiraq.bin",
-      "bytes": 2257,
-      "sha256": "c43c00311c48530d84d810b63782403c7068550b1dad54723b2da54a6c87b385"
-    },
-    {
-      "location": "prepared",
       "filename": "orbits/janus.bin",
       "bytes": 2256,
       "sha256": "939955fdaa0b9bd07b6865d820a9b9f5faafe4ea634ad80b682bacb1494919ec"
-    },
-    {
-      "location": "prepared",
-      "filename": "orbits/kiviuq.bin",
-      "bytes": 2267,
-      "sha256": "425dc4bbb5161fd3f9f07a1414aacc829194426d07ce618bdd1117271b5d7be0"
-    },
-    {
-      "location": "prepared",
-      "filename": "orbits/loge.bin",
-      "bytes": 2256,
-      "sha256": "99de91140e98745c521c85fcafd21312c3fd332a83c7d1d659abd74071a12423"
     },
     {
       "location": "prepared",
@@ -162,18 +84,6 @@
       "filename": "orbits/mimas.bin",
       "bytes": 2257,
       "sha256": "4bc92fc75f067e324efa66542352a7a35b51cf2e104a26a832c0379fc456507f"
-    },
-    {
-      "location": "prepared",
-      "filename": "orbits/mundilfari.bin",
-      "bytes": 2261,
-      "sha256": "bf9d0a0267a1df73c95fc59219add9261b885c558107200dd5e8d7a4706b264e"
-    },
-    {
-      "location": "prepared",
-      "filename": "orbits/paaliaq.bin",
-      "bytes": 2252,
-      "sha256": "f133bbf70c0e8dd38996b7f48f4b4895a38e5bd5d5efe15c0ef129bf15125ea2"
     },
     {
       "location": "prepared",
@@ -225,36 +135,6 @@
     },
     {
       "location": "prepared",
-      "filename": "orbits/skathi.bin",
-      "bytes": 2259,
-      "sha256": "6c9a61d821844ea11cd7ca93edeb7ecb144ca0b4d60b02d5fed40275a5e28422"
-    },
-    {
-      "location": "prepared",
-      "filename": "orbits/skoll.bin",
-      "bytes": 2256,
-      "sha256": "ac0bfbfd0ad27b0e943fd9492be68b8cffac8d2e280b58ed58ea410f1cf0a570"
-    },
-    {
-      "location": "prepared",
-      "filename": "orbits/suttungr.bin",
-      "bytes": 2270,
-      "sha256": "92215d36f5447d3b9ea608bf040cb3c71d12bcb7feb2d8b66aee6f458c866b7c"
-    },
-    {
-      "location": "prepared",
-      "filename": "orbits/tarqeq.bin",
-      "bytes": 2263,
-      "sha256": "1d2fcf214a68b31436d3ae86456310a9c61174d073e728d660d7374f4e5a3cb3"
-    },
-    {
-      "location": "prepared",
-      "filename": "orbits/tarvos.bin",
-      "bytes": 2263,
-      "sha256": "6ae512dc5e048053b7c5f29200ab1e3a630a3fdc8b33af67cff40c6502711cbe"
-    },
-    {
-      "location": "prepared",
       "filename": "orbits/telesto.bin",
       "bytes": 2252,
       "sha256": "39d4b78f36586970870648379b8c9c972d319e181ed5cff814a207541a462f8d"
@@ -264,12 +144,6 @@
       "filename": "orbits/tethys.bin",
       "bytes": 2261,
       "sha256": "45b6cf41ade7d86bf2fb1d629fca78774a636a98a4e72c4b25626ddf64723cc4"
-    },
-    {
-      "location": "prepared",
-      "filename": "orbits/thrymr.bin",
-      "bytes": 2261,
-      "sha256": "ac9d4abcdb763b13d4d96babf57981d68d23e5149c717013cd0577e24ad99725"
     },
     {
       "location": "prepared",

@@ -3,6 +3,7 @@ import { validateTerrestrialRings } from './rings.ts';
 import { parseSolidPreparationSource } from './records/profile-source.ts';
 import { scientificPreviewGrid, datasetTextureGrid } from './raster-grid.ts';
 import { radialTerrainForDataset } from './alternative-datasets.ts';
+import { MEASURED_SHAPE_MATERIAL } from './shape-material.ts';
 import { isArray, requireRecord, requireFiniteNumber, requireString } from '@cssearth/core';
 import type { parseSolidScience } from './records/solid-source.ts';
 import type { ContentPreparationContext, PreparedObjectContentAssets } from '../../content/index.ts';
@@ -67,6 +68,8 @@ export function parseTerrestrialProfile(input:unknown) {
     if (!/^[a-z][a-z0-9-]*$/.test(view.id) || typeof view.label !== 'string' || !view.label.trim() ||
         !/^[a-z][a-z0-9-]*$/.test(view.consumer) ||
         !value.geometry.radialTerrain?.path) throw new TypeError('Shape views require a pinned mesh and a source consumer.');
+    if (view.science !== undefined && view.science.kind !== MEASURED_SHAPE_MATERIAL.kind)
+      throw new TypeError(`${value.namespace}/${view.id}: a shape view's science is its published whole-disc color (${MEASURED_SHAPE_MATERIAL.kind}).`);
   }
   for (const dataset of value.raster.scientific ?? []) {
     const terrain = radialTerrainForDataset(value, dataset.id);

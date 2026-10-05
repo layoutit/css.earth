@@ -7,6 +7,29 @@ export const SHAPE_MATERIAL = Object.freeze({
   appearance: 'Neutral gray with gentle prepared shape shading; a display convention, not observed surface color or albedo.',
 });
 
+/** A shape view painted with the body's published whole-disc color in place of the neutral gray: one measured mean, no map. */
+export const MEASURED_SHAPE_MATERIAL = Object.freeze({
+  kind: 'disc-integrated-color',
+  appearance: 'One whole-disc color from published photometry with gentle prepared shape shading; no map, terrain or color variation is implied.',
+});
+
+type Rgb = readonly [number, number, number];
+const NEUTRAL: Rgb = [SHAPE_MATERIAL.channel, SHAPE_MATERIAL.channel, SHAPE_MATERIAL.channel];
+const HEX = /^#[0-9a-f]{6}$/u;
+
+/** The constant sRGB color of a shape view's material, or null for any other surface. */
+export function shapeMaterialColor(material: unknown): Rgb | null {
+  if (!material || typeof material !== 'object') return null;
+  const { kind, color } = material as { kind?: unknown; color?: unknown };
+  if (kind !== 'unobserved-neutral' && kind !== MEASURED_SHAPE_MATERIAL.kind) return null;
+  if (typeof color !== 'string' || !HEX.test(color)) throw new TypeError('A shape material names its color as #rrggbb.');
+  return [1, 3, 5].map(offset => Number.parseInt(color.slice(offset, offset + 2), 16)) as unknown as Rgb;
+}
+
+/** Shape views a recipe leaves in the neutral convention: the ones the neutral refresh tools repaint. */
+export const neutralShapeViews = <View extends { science?: unknown }>(views: readonly View[] | undefined): View[] =>
+  (views ?? []).filter(view => view.science === undefined);
+
 /** Broad fill around the existing prepared Sun direction: no hard terminator
  * or cast shadows in the default view. This is illustrative shape lighting.
  */
@@ -14,10 +37,12 @@ export function shapeFillIllumination(incidence: number): number {
   return .775 + .225 * Math.max(-1, Math.min(1, incidence));
 }
 
-export function shapeMaterialRaster(width: number, height: number): Buffer {
+export function shapeMaterialRaster(width: number, height: number, color: Rgb = NEUTRAL): Buffer {
   if (![width, height].every(value => Number.isSafeInteger(value) && value > 0))
     throw new TypeError('Shape material requires positive integer dimensions.');
-  return Buffer.alloc(width * height * 3, SHAPE_MATERIAL.channel);
+  const raster = Buffer.alloc(width * height * 3);
+  for (let offset = 0; offset < raster.length; offset += 3) raster.set(color, offset);
+  return raster;
 }
 
 import { BASE_TILE } from '@layoutit/polycss';
@@ -32,7 +57,7 @@ interface ShapeAtlas {
 /** Same interpolated normals and Lambert law as radial materials, without
  * sampling a constant cylindrical image millions of times. Preparation only.
  */
-export function neutralShapeAtlas(atlas: ShapeAtlas, sun: readonly number[]) {
+export function neutralShapeAtlas(atlas: ShapeAtlas, sun: readonly number[], material: Rgb = NEUTRAL) {
   const { width, height } = atlas;
   if (![width, height].every(n => Number.isSafeInteger(n) && n > 0) || sun.length !== 3 || !sun.every(Number.isFinite))
     throw new TypeError('Invalid neutral shape atlas.');
@@ -62,10 +87,12 @@ export function neutralShapeAtlas(atlas: ShapeAtlas, sun: readonly number[]) {
       for (let px = 0; px < rect.width; px++) {
         const x = base[0] + dx[0] * px + dy[0] * py, y = base[1] + dx[1] * px + dy[1] * py, z = base[2] + dx[2] * px + dy[2] * py;
         const incidence = (x * sun[0] + y * sun[1] + z * sun[2]) / Math.hypot(x, y, z);
-        const color = Math.round(SHAPE_MATERIAL.channel * (.12 + .88 * Math.max(0, incidence))), offset = row + px * 4;
-        const fill = Math.round(SHAPE_MATERIAL.channel * shapeFillIllumination(incidence));
-        flood[offset] = flood[offset + 1] = flood[offset + 2] = fill; flood[offset + 3] = 255;
-        shadow[offset] = shadow[offset + 1] = shadow[offset + 2] = color; shadow[offset + 3] = 255;
+        const lit = .12 + .88 * Math.max(0, incidence), fill = shapeFillIllumination(incidence), offset = row + px * 4;
+        for (let channel = 0; channel < 3; channel++) {
+          flood[offset + channel] = Math.round(material[channel]! * fill);
+          shadow[offset + channel] = Math.round(material[channel]! * lit);
+        }
+        flood[offset + 3] = shadow[offset + 3] = 255;
       }
     }
   }

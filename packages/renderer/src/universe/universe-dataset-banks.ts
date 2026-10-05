@@ -180,6 +180,23 @@ export function createUniverseDatasetBanks({ root, end, frontRoot, frontEnd, lif
     return loading;
   }
 
+  /** Whether the images the bank's view demands are decoded. A dataset asked for while another is on screen decodes
+   * behind it: the bank keeps the images it shows until every image of the next is decoded, then takes them in one
+   * frame. Written at once, each atlas painted as it landed: picking a dataset on M42 on the iPad made frames of 99, 77
+   * and 75 ms, and one of 143 ms when the last atlas came off the network three seconds later (2026-10-05). */
+  function texturesReady(bank: DatasetBank, publication: { world: WorldCameraPose; viewport: WorldCameraViewport }, demanded: boolean, incoming: boolean): boolean {
+    const { mounted, textures } = bank;
+    if (!mounted || !textures) return false;
+    const urls = () => demanded ? mounted.textureUrls(publication, incoming) : [];
+    const next = mounted.stagedDataset(), shown = urls();
+    if (next === null) return textures.ready(shown);
+    // Nothing of the shown dataset is on screen to keep.
+    if (!shown.length || !shown.every(url => textures.decoded(url))) { mounted.selectDataset(next); return textures.ready(urls()); }
+    // The swap is a change of images: it waits for a coast to stop (motion-freezes-membership.md).
+    if (textures.ready([...new Set([...shown, ...mounted.textureUrls(publication, incoming, next)])]) && !coasting) mounted.selectDataset(next);
+    return true;
+  }
+
   function select(id: string, dataset: string) {
     if (lifetime.disposed) return;
     const bank = byId.get(id);
@@ -187,7 +204,9 @@ export function createUniverseDatasetBanks({ root, end, frontRoot, frontEnd, lif
     bank.pendingSelection = dataset;
     bank.lastUsed = ++useClock;
     if (bank.mounted) {
-      bank.mounted.selectDataset(dataset);
+      // A bank on screen keeps the dataset it shows until the next one's images are decoded (texturesReady).
+      bank.mounted.selectDataset(dataset, bank.visible);
+      if (bank.visible) void bank.mounted.read(dataset).then(() => { requestPublication?.(); }, () => {});
       updateWeight(bank);
       trimWarmResidency();
     } else void ensureLoaded(bank).catch(() => {});
@@ -275,8 +294,7 @@ export function createUniverseDatasetBanks({ root, end, frontRoot, frontEnd, lif
         const shown = bank.enabled || bank.id === detailedObjectId ? presentationOpacity * contextOpacity : 0;
         const requestedOpacity = shown * projectedVolumeOpacity(world, viewport, frame, radiusUnits, visibility);
         const incoming = bank.id === detailedObjectId;
-        const ready = bank.mounted && bank.textures?.ready(shown > 0 && (requestedOpacity > 0 || incoming)
-          ? bank.mounted.textureUrls({ world, viewport }, incoming) : []);
+        const ready = texturesReady(bank, { world, viewport }, shown > 0 && (requestedOpacity > 0 || incoming), incoming);
         const opacity = ready ? requestedOpacity : 0;
         if (billboards && bank.billboardIndex >= 0) {
           // The billboard pictures the selected dataset; a dataset with no view of its own draws none.

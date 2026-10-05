@@ -23,7 +23,8 @@ for (const id of requested) {
     let recipe;
     try { recipe = await json(resolve(projectRoot, 'src/objects', id, 'source/preparation/terrestrial.json')); }
     catch (error) { if (error instanceof Error && 'code' in error && error.code === 'ENOENT') continue; throw error; }
-    if (!requireArray(requireRecord(recipe.raster).shapeViews ?? []).length) continue;
+    // A shape view that names its measured color is not neutral material; the full preparation owns it.
+    if (!requireArray(requireRecord(recipe.raster).shapeViews ?? []).some(view => requireRecord(view).science === undefined)) continue;
   }
   ids.push(id);
 }
