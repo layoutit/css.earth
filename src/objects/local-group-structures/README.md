@@ -23,7 +23,8 @@ Sagittarius stream. It has no page. The world draws it once the camera is outsid
    each recipe; the downloaded files are not tracked.
 2. M31's clusters take the depths of M31's own bank: the recipe copies its profile and seeds the draws with that bank's
    id (`frame.seed`, [catalogue-spheroid.ts](../../../packages/bake/src/volume/node/catalogue-spheroid.ts)), so a cluster
-   is at the same place in both. The Milky Way's clusters are at their measured distances.
+   is at the same place in both: every dot here is within 0.1 pc of its twin in that bank (decoded and compared on
+   2026-10-04). The Milky Way's clusters are at their measured distances.
 3. Every Magellanic cluster sits at its Cloud's distance.
 4. The stream keeps the 2,553 RR Lyrae with a distance above zero and `ProbSGR` above 0.9, each at its own distance.
    They lie between 7 and 92 kpc from the Sun, half of them within 29 kpc.
