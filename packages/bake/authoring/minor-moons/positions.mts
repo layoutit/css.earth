@@ -6,6 +6,7 @@
  * host's centre, ICRF axes, kilometres, at the host's prepared epoch, and writes `name,xKm,yKm,zKm` into the
  * `<host>-minor-moons` package. A moon without an ephemeris is left out and named: the catalogue gives it no code, or
  * Horizons answers that code with another body (a new moon's code can be an asteroid's number). One request at a time.
+ * A moon already in the table keeps its row: the table holds one epoch, so only a moon it lacks is asked for.
  *
  * Usage: node packages/bake/authoring/minor-moons/positions.mts <host id>
  */
@@ -13,7 +14,7 @@ import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 import { existsSync } from 'node:fs';
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { gzipSync } from 'node:zlib';
+import { gunzipSync, gzipSync } from 'node:zlib';
 
 /** The Horizons code of each planet's centre, the origin its moons are asked relative to. */
 const HOST_CENTRES: Readonly<Record<string, string>> = { mars: '499', jupiter: '599', saturn: '699', uranus: '799', neptune: '899', pluto: '999' };
@@ -53,8 +54,14 @@ async function position(moon: { name: string; code: string | null }): Promise<{ 
   }
 }
 
+const output = resolve(objects, `${host}-minor-moons/source/dots/positions.csv.gz`);
+const kept = new Map(existsSync(output) ? gunzipSync(await readFile(output)).toString('utf8').split('\n').slice(1).filter(Boolean).map(row => [row.slice(0, row.indexOf(',')), row] as const) : []);
 const rows: string[] = [], solutions = new Map<string, number>();
+let asked = 0;
 for (const [index, moon] of wanted.entries()) {
+  const row = kept.get(moon.name);
+  if (row) { rows.push(row); continue; }
+  asked++;
   const found = await position(moon);
   if (!found) { withoutEphemeris.push(moon); continue; }
   const { km, solution } = found;
@@ -62,8 +69,7 @@ for (const [index, moon] of wanted.entries()) {
   solutions.set(solution, (solutions.get(solution) ?? 0) + 1);
   if ((index + 1) % 25 === 0 || index + 1 === wanted.length) console.log(`${index + 1}/${wanted.length}`);
 }
-const output = resolve(objects, `${host}-minor-moons/source/dots/positions.csv.gz`);
 await writeFile(output, gzipSync(`name,xKm,yKm,zKm\n${rows.join('\n')}\n`));
 console.log(`Wrote ${rows.length} positions at JD ${epochJdTt} TT to ${output}.`);
-console.log(`Horizons solutions: ${[...solutions].map(([name, count]) => `${name} (${count})`).join(', ')}.`);
+console.log(`Asked Horizons for ${asked} of them; their solutions: ${[...solutions].map(([name, count]) => `${name} (${count})`).join(', ') || 'none'}.`);
 console.log(`Without an ephemeris, left out: ${withoutEphemeris.map(moon => moon.name).join(', ') || 'none'}.`);

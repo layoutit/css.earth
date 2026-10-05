@@ -55,9 +55,9 @@ a scene position.
 
 ## Coverage and preparation
 
-There are 79 named, unavailable-moon captions with published positions: 48 at
-Jupiter, 17 at Saturn, 8 at Uranus and 6 at Neptune. Saturn has 63 named moons
-eligible across its existing scene bodies and extra catalogue captions; the
+There are 71 named, unavailable-moon captions with published positions: 29 at
+Jupiter, 38 at Saturn, 3 at Uranus and 1 at Neptune. Saturn has 63 named moons
+eligible across its 25 scene bodies and 38 catalogue captions; the
 sidebar still includes all 293 confirmed moons. View scale, occlusion and label
 collisions determine which eligible captions actually appear.
 
@@ -67,6 +67,12 @@ labels, including significant objects known by catalogue designations. Saturn's
 S/2009 S1 and S/2009 S2 have no full ephemerides in these inputs; Uranus's
 S/2025 U1 has the identity conflict above. All three remain in the sidebar.
 There are no invented phases, spheres or fallback locations.
+
+A moon has a page only when its shape was measured: a published shape model, measured
+axes or resolved images. Twenty-one moons of Saturn once had a page drawn as an
+ellipsoid from a light-curve elongation limit and a size from an assumed albedo, or
+as a nominal sphere (Anthe). Those pages were retired; each is now a dot with its name
+([when a body gets a scene](../.agents/skills/celestial-skill/references/scientific-faithfulness.md#a-scene-needs-a-measured-shape)).
 
 Run `node site/build/prepare/prepare-moon-labels.mts` to reproduce the ignored
 `site/moon-labels.prepared.json` from the pinned source archive and current world
