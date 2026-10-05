@@ -65,7 +65,7 @@ test('material paths and parameters fail before source work',()=>{
 });
 
 test('projective leaf layout is derived from the scoped CSS it reads',()=>{
- const stylesheet='.scope .polycss-scene s{width:var(--polycss-atlas-width, 64px);height:var(--polycss-atlas-height, 64px)}.scope .shell > s:not(.demo-interior-pole){background-size:1024px 512px}';
+ const stylesheet='.scope .polycss-scene s{width:64px;height:64px}.scope .shell > s:not(.demo-interior-pole){background-size:1024px 512px}';
  const config={namespace:'demo',stylesheet:{path:'scoped.css',scope:'.scope '}};
  const result=prepareLayeredLeafLayouts({scene:{interior:{shells:[{className:'shell'}]}},stylesheet,config});
  assert.deepEqual(result.classes.shell,{width:'64px',height:'64px',backgroundSize:'1024px 512px'});
