@@ -177,6 +177,10 @@ jobs:
         with:
           name: site-build-comparison
           path: |
+            output/build-comparison/performance.json
+            output/build-comparison/performance/*.md
+            output/build-comparison/performance/*.log
+            output/build-comparison/performance/comparison.json
             output/build-comparison/server-answers.json
             output/build-comparison/server-answers/*.log
             output/build-comparison/server-answers/artifacts/
