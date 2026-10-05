@@ -167,7 +167,8 @@ test('selecting the Milky Way from Local Group zooms in to the galaxy while keep
   const target = required(navigation.overviewTarget({ objectId: 'sun', fromId: 'sun', mount: distantMount, scope: 'milky-way' }));
   assert.ok(Math.hypot(...target.world.pose.positionM) < Math.hypot(...far.pose.positionM) / 5,
     'The arrival must leave Local Group range instead of preserving its departure distance');
-  assert.deepEqual(target.world.pose.orientationXyzw, far.pose.orientationXyzw);
+  // Kept to rounding: the Sun's frame is derived, and a turn through it and back leaves 1e-16 where an authored frame left 0.
+  assert.ok(target.world.pose.orientationXyzw.every((value, axis) => Math.abs(value - far.pose.orientationXyzw[axis]!) < 1e-12), `orientation ${target.world.pose.orientationXyzw.join(', ')}`);
   assert.equal(zoomScopeAtCamera(target.world, 'milky-way', undefined, undefined, steps), 'milky-way');
 });
 

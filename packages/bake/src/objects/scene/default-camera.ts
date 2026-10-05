@@ -94,14 +94,16 @@ export function photographDirections(bodyId: string, recipe: { raster?: { surfac
  * - a planet of another star: its substellar point, where its synchronous rotation record puts longitude 0 facing the host
  *   star that lights the map;
  * - a placed star: the direction of the Sun, where Earth observes it from;
+ * - a star's own surface at the origin (`atOrigin`, distance zero: the Sun): nothing observes it from elsewhere and its record's
+ *   direction stands for none, so the lit design pose, from which its planets' orbits open out when the camera pulls back;
  * - a lit body whose default map covers mostly one side (`coverage`, the mean direction of its covered pixels, at least
  *   LOPSIDED_COVERAGE long): the design pose's tilt, turned to face the centre of that data, and on the south side of the
  *   ecliptic when that centre is south of it;
  * - any other body: the lit design pose. */
-export function prepareDefaultCameraAngles(geometry: SolarGeometry, bodyId: string, { observation, light = 'sun', coverage }: { observation?: readonly Vector3[]; light?: 'sun' | 'self' | 'host'; coverage?: Vector3 } = {}): DefaultCameraAngles {
+export function prepareDefaultCameraAngles(geometry: SolarGeometry, bodyId: string, { observation, light = 'sun', coverage, atOrigin = false }: { observation?: readonly Vector3[]; light?: 'sun' | 'self' | 'host'; coverage?: Vector3; atOrigin?: boolean } = {}): DefaultCameraAngles {
   if (observation?.length) return prepareFacingCameraAngles(geometry, bodyId, observationCentroid(bodyId, observation));
   if (light === 'host') return prepareFacingCameraAngles(geometry, bodyId, [1, 0, 0]);
-  if (light === 'self') return prepareFacingCameraAngles(geometry, bodyId, geometry.requireBodyFixedSunDirection(bodyId));
+  if (light === 'self') return atOrigin ? LIT_DEFAULT_VIEW : prepareFacingCameraAngles(geometry, bodyId, geometry.requireBodyFixedSunDirection(bodyId));
   if (coverage && Math.hypot(...coverage) >= LOPSIDED_COVERAGE) {
     // The design tilt, taken on the south side of the ecliptic when the data centre lies south of it.
     const facing = prepareFacingCameraAngles(geometry, bodyId, coverage), tilt = Math.abs(LIT_DEFAULT_VIEW.initialScenePitchDegrees);

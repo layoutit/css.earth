@@ -1,5 +1,5 @@
 import type {BodyId} from '@cssearth/astronomy';
-import { type PreparedCubicSkyPlan, parsePreparedWorldContext } from '@cssearth/objects';
+import type { PreparedCubicSkyPlan } from '@cssearth/objects';
 import {requireFiniteNumber} from '@cssearth/core';
 interface SolarCameraOptions {bodyRadiusUnits:number;defaultZoom:number;skyProjection:{horizontalFovDegrees:number;focalLengthOverViewportWidth:number;cssPerspective:string};geometryScale?:number;initialScenePitchDegrees:number;defaultControlYawDegrees:number;
   /** The closest framing, in the default framing's units (4 unless the body says otherwise). A black hole stops at its
@@ -12,7 +12,7 @@ interface SolarSceneOptions extends Omit<SolarCameraOptions,'skyProjection'|'ini
 // Geometry stays in the existing preparers; object facts enter through config.
 import { buildPolyCameraSceneTransform } from "@layoutit/polycss";
 import { prepareEclipticPresentationFrame } from './solar-presentation-frame.ts';
-import { LIT_DEFAULT_VIEW, prepareDefaultCameraAngles, refuseAuthoredCameraAngles } from './default-camera.ts';
+import { prepareDefaultCameraAngles, refuseAuthoredCameraAngles } from './default-camera.ts';
 import { prepareAstrometricSkySceneRegistration } from './astrometric-sky-registration.ts';
 import { prepareSunReferenceViewDirection } from './prepare-sun-view-direction.ts';
 import type { Vector3 } from '@cssearth/engine';
@@ -126,32 +126,6 @@ export async function prepareSolarSystemScene(solarGeometry: SolarGeometry, opti
       sceneRegistrationChain: registration.chain, sceneRegistrationEpoch: registration.epoch }),
     // The mesh is drawn at geometryScale times its source radius; the world frame measures what is drawn.
     worldFrame: prepareWorldFrame(solarGeometry, bodyId, frame, bodyRadiusUnits * geometryScale, bodyRadiusKilometers),
-  });
-}
-
-/** A star at the origin of the heliocentric frame: no ephemeris pole, Sun direction, orbit or planetary system.
- * The presentation axis is authored (`star`) and the camera, sky registration and world frame come from the authored
- * world context, exactly as the retired static lane merged them; nothing here claims an ephemeris-derived frame. */
-export function prepareStarCentredScene(options:Omit<SolarSceneOptions,'starfield'|'bodyId'|'light'> & {bodyId:string;starfield:PreparedCubicSkyPlan;
-  star:{model:string;systemTransform:string;axialTiltDegrees:number};context:unknown}) {
-  refuseAuthoredCameraAngles(options);
-  const { bodyId, bodyRadiusUnits, bodyRadiusKilometers, defaultZoom, starfield, star, context, geometryScale = 1 } = options;
-  // No ephemeris places the scene's own star relative to a light or an observer, so it opens on the design pose.
-  const { initialScenePitchDegrees, defaultControlYawDegrees } = LIT_DEFAULT_VIEW;
-  const checked = parsePreparedWorldContext(context);
-  if (checked.focus.id !== bodyId || checked.frame.bodyRadiusM !== bodyRadiusKilometers * 1000) throw new TypeError("Star-centred scene context identity differs.");
-  if (!starfield.projection) throw new TypeError("Physical sky requires its prepared projection.");
-  if (!Number.isFinite(star.axialTiltDegrees) || !star.systemTransform.trim() || !star.model.trim()) throw new TypeError("Star-centred scene needs its authored axis presentation.");
-  const base = prepareSolarSystemCamera({ bodyRadiusUnits, defaultZoom, geometryScale, initialScenePitchDegrees, defaultControlYawDegrees,
-    skyProjection: { ...starfield.projection, focalLengthOverViewportWidth: requireFiniteNumber(starfield.projection.focalLengthOverViewportWidth) } });
-  // The authored context owns projection, dolly, level of detail, orbit fade and drag.
-  const camera = Object.freeze({ ...base, ...checked.camera.presentation });
-  return Object.freeze({
-    camera, systemTransform: star.systemTransform,
-    presentationFrame: Object.freeze({ model: star.model, poleTiltDegrees: star.axialTiltDegrees, sunDirection: null, poleDirection: Object.freeze([0, 0, 1]) }),
-    starfield: Object.freeze({ ...starfield, cameraContract: "scene-locked-unbounded-accumulated-matrix3d",
-      sceneRegistration: checked.sky.sceneRegistration, sceneRegistrationModel: "world-context-sky-baseline" }),
-    worldFrame: checked.frame,
   });
 }
 

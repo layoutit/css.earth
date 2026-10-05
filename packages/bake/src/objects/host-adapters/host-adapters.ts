@@ -1,6 +1,6 @@
 import { validatePreparedCubicSky } from '@cssearth/objects';
 import { BODIES, HOSTED_PLANET_IDS, STAR_IDS, type BodyId } from '@cssearth/astronomy';
-import { requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
+import { requireFiniteNumber } from '@cssearth/core';
 import type { ScenePreparationAdapters } from '../../scene/index.ts';
 import type { PresentationHostAdapters } from '../../presentation/index.ts';
 import { prepareMaterialTracks } from '../../presentation/index.ts';
@@ -21,16 +21,6 @@ export async function loadGeometryAdapters(geometry: SolarGeometry): Promise<Sce
   return {
     async preparePhysicalScene(input) {
       const starfield = validatePreparedCubicSky(input.starfield);
-      if (input.worldContext !== undefined) {
-        // A body the ephemeris tables do not place (the Sun) carries an authored world context and star axis.
-        const star = requireRecord(requireRecord(input).star, 'star presentation');
-        if (input.sun !== null) throw new TypeError('A star-centred scene carries no directional Sun.');
-        return scene.prepareStarCentredScene({ bodyId: input.bodyId,
-          bodyRadiusUnits: input.bodyRadiusUnits, bodyRadiusKilometers: input.bodyRadiusKilometers,
-          defaultZoom: requireFiniteNumber(input.defaultZoom), geometryScale: optionalNumber(input.geometryScale),
-          starfield, star: { model: requireString(star.model), systemTransform: requireString(star.systemTransform), axialTiltDegrees: requireFiniteNumber(star.axialTiltDegrees) },
-          context: input.worldContext });
-      }
       if (!Object.hasOwn(BODIES, input.bodyId)) throw new TypeError('Physical scene requires a known astronomy body.');
       // A placed star is self-luminous: it has a presentation frame and a world frame from its astrometry, but no directional Sun.
       // A planet of another star is lit by its host, not the Sun; its prepared map is emissive, so it carries none either.

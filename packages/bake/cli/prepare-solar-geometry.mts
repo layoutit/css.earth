@@ -57,7 +57,7 @@ export async function prepareSolarGeometry() {
     BODIES: ASTRONOMY_BODY_DATA,
   } = await loadAstronomyPackage();
 
-  // A star other than the Sun is placed by its catalogue astrometry; the Sun itself is the origin and has no entry.
+  // A star is placed by its catalogue astrometry; the Sun's record places it at distance zero, the origin.
   const isPlacedStar = (id: string) => isIncluded(STAR_IDS, id);
   // A planet of another star orbits a placed star on its transit-fitted orbit; its host is its light source.
   const isHostedPlanet = (id: string) => isIncluded(HOSTED_PLANET_IDS, id);

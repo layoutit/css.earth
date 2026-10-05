@@ -23,7 +23,7 @@ export interface PhysicalScene {
 }
 export type { SolarSceneSource } from '@cssearth/objects';
 export interface ScenePreparationAdapters {
- preparePhysicalScene(input:SolarSceneSource & {starfield:Record<string,unknown>;sun:Record<string,unknown>|null;worldContext?:unknown}):Promise<PhysicalScene>;
+ preparePhysicalScene(input:SolarSceneSource & {starfield:Record<string,unknown>;sun:Record<string,unknown>|null}):Promise<PhysicalScene>;
  bodyFixedSunDirection(id:string):[number,number,number];
  sunReferenceViewDirection(source:SolarSceneSource):readonly number[];
 }
@@ -39,16 +39,14 @@ export interface GeometrySceneAssets {
 export interface GeometrySceneOptions {
  profile:GeometryProfile;raster:RasterRecipe;assets:GeometrySceneAssets;solarSource:SolarSceneSource;
  starfield:Record<string,unknown>;sun:Record<string,unknown>|null;
- /** The authored world context (prepared spatial context) of a body the ephemeris tables do not place, such as the Sun. */
- worldContext?:unknown;
  adapters:ScenePreparationAdapters;outputDirectory:string;
  /** Pixel width of the widest published image each leaf texture can show (leaf-images.ts measures the run's own files). */
  imagePixels:LeafImagePixels;
 }
 
-export async function prepareGeometryScene({profile,raster,assets,solarSource,starfield,sun,worldContext,adapters,outputDirectory,imagePixels}:GeometrySceneOptions) {
+export async function prepareGeometryScene({profile,raster,assets,solarSource,starfield,sun,adapters,outputDirectory,imagePixels}:GeometrySceneOptions) {
  if(profile.surface.radius!==solarSource.bodyRadiusUnits)throw new TypeError('Authored surface radius differs from the physical scene scale.');
- const physical=await adapters.preparePhysicalScene({...solarSource,starfield,sun,...(worldContext!==undefined?{worldContext}:{})});
+ const physical=await adapters.preparePhysicalScene({...solarSource,starfield,sun});
  const polygons=createSurfacePatches(profile.surface,profile.projection.overlap,profile.projection.rasterScale,profile.projection.rasterOverscan);
  const topology=createSurfacePatches(profile.surface,0);
  const seamEdges=buildSeamBleedPolygonEdges(topology.map(rendererPolygon),{tileSize:profile.projection.tileSize,layerElevation:profile.projection.layerElevation});
