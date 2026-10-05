@@ -188,8 +188,18 @@ export function mountPreparedPresentation(stage: HTMLElement, context: PreparedP
   // nodes stay built but unattached, and a selection swaps them.
   const detachable = new Map<string, { parent: HTMLElement; leaves: HTMLElement[] }>();
   const meshes = definition.tree.meshes ?? [], meshKey = (name: string) => `mesh:${name}`;
-  for (const mesh of meshes) detachable.set(meshKey(mesh.name), { parent: nodes[definition.tree.nodes[mesh.leaves[0]![0]].parent],
-    leaves: mesh.leaves.flatMap(([first, count]) => nodes.slice(first, first + count)) });
+  // A slot lists the leaves of every mesh that draws it; a selection writes only the leaves of the mesh it mounts. Comet
+  // 67P's surface slot lists 4,490 leaves across three meshes: writing them all made the commit that returns to its
+  // 1,992-face mesh a 214 ms frame on an iPad, and writing that mesh's alone 62 to 65 ms (2026-10-05). A mesh's leaves
+  // take their image in the commit that attaches them.
+  const meshOf = new Map<HTMLElement, string>();
+  let mountedMesh: string | undefined;
+  for (const mesh of meshes) {
+    const leaves = mesh.leaves.flatMap(([first, count]) => nodes.slice(first, first + count));
+    detachable.set(meshKey(mesh.name), { parent: nodes[definition.tree.nodes[mesh.leaves[0]![0]].parent], leaves });
+    for (const leaf of leaves) meshOf.set(leaf, mesh.name);
+  }
+  const drawn = (leaf: HTMLElement) => { const mesh = meshOf.get(leaf); return mesh === undefined || mesh === mountedMesh; };
   const hiddenRoots = new Set(definition.variants.flatMap(variant => [...hiddenSubtreeRoots(variant)]));
   const subtreeKey = (root: number) => `subtree:${root}`;
   for (const root of hiddenRoots) detachable.set(subtreeKey(root), { parent: nodes[root],
@@ -286,9 +296,11 @@ export function mountPreparedPresentation(stage: HTMLElement, context: PreparedP
     textureActivation.write(leaf, image);
     if (shown !== undefined) styleWrites += framePublisher.showLeafImage(leafIndex.get(leaf)!, textureSize(shown));
   };
+  /** The leaves of a slot that the committed selection draws: all of them, or those outside the meshes it leaves unmounted. */
+  const slotLeaves = (key: `${number}:${string}`) => { const leaves = textureBindings.get(key); return leaves && meshOf.size ? leaves.filter(drawn) : leaves; };
   function publishStyle(index: number, name: string, value: string, shown?: string) {
     if (name === 'display' && textureActivation.deferDisplay(target(index), value)) return;
-    const leaves = textureBindings.get(`${index}:${name}`);
+    const leaves = slotLeaves(`${index}:${name}`);
     if (leaves) {
       for (const leaf of leaves) writeLeafTexture(leaf, value, shown);
       styleWrites += leaves.length;
@@ -365,6 +377,7 @@ export function mountPreparedPresentation(stage: HTMLElement, context: PreparedP
       // If publication is interrupted, the body fails closed instead of
       // rendering one mesh with another mesh's texel addresses.
       for (const mesh of meshes) if (mesh.name !== variant.mesh) mountDetachable(meshKey(mesh.name), false);
+      mountedMesh = variant.mesh;
       if (meshQueue && meshQueue.mesh !== variant.mesh) meshQueue = null;
       const hiddenNow = hiddenSubtreeRoots(variant);
       for (const root of hiddenRoots) if (hiddenNow.has(root)) mountDetachable(subtreeKey(root), false);
@@ -372,7 +385,7 @@ export function mountPreparedPresentation(stage: HTMLElement, context: PreparedP
         publishStyle(binding.target, binding.name, "none");
       }
       for (let index = 0; index < writes.length; index++) {
-        const binding = writes[index]!, leaves = binding.kind === "style" ? textureBindings.get(`${binding.target}:${binding.name}`) : undefined;
+        const binding = writes[index]!, leaves = binding.kind === "style" ? slotLeaves(`${binding.target}:${binding.name}`) : undefined;
         if (!levelOnly || binding.kind !== "style" || !leaves?.some(leaf => leaf.style.backgroundImage !== binding.value)) { publish(binding); continue; }
         // A page's image and its tile placement land together.
         const next = writes[index + 1];

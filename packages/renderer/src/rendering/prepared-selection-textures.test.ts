@@ -135,6 +135,35 @@ test('a mesh is attached a slice of leaves a frame, and a switch away drops what
   } finally { unstubAllGlobals(); }
 });
 
+test('a dataset writes its image on the leaves of the mesh it mounts, and leaves the other meshes alone', async () => {
+  const { parseHTML } = await import('linkedom');
+  const { document } = parseHTML('<html><body><main></main></body></html>');
+  const stage = document.querySelector('main') as unknown as HTMLElement;
+  const record = (parent: number, tag = 'div') => ({ parent, tag, className: null, style: '', properties: [], attributes: {} });
+  // Node 2 holds mesh `a` (leaves 3 and 4) and mesh `b` (leaf 5); one surface slot lists all three, and leaf 6 is in no mesh.
+  const records = [record(-1), record(0), record(1), record(2, 'u'), record(2, 'u'), record(2, 'u'), record(2, 's')];
+  const nodes = records.map(entry => document.createElement(entry.tag)) as unknown as HTMLElement[];
+  records.forEach((entry, index) => { if (entry.parent !== -1) nodes[entry.parent]!.appendChild(nodes[index]!); });
+  const shows = (datasetId: string, mesh: string) => ({ when: { datasetId }, mesh, writes: [{ kind: 'texture', target: 2, name: 'surface', resource: datasetId, quoted: true }] });
+  const definition = { tree: { nodes: records, properties: [], camera: 0, scene: 1, stageClasses: [], textureBindings: [{ target: 2, name: 'surface', leaves: [3, 4, 5, 6] }],
+      meshes: [{ name: 'a', leaves: [[3, 2]] }, { name: 'b', leaves: [[5, 1]] }] }, materials: [], animations: [], viewBindings: [],
+    variants: [shows('one', 'a'), shows('two', 'a'), shows('three', 'b')] } as unknown as PreparedPresentationDefinition;
+  const presentation = mountPreparedPresentation(stage, { own() {}, registerAnimation() {}, seekAnimation() {} }, definition,
+    { claim: () => ({ nodes, roots: [nodes[0]!] }), destroy() {} });
+  const resources = { has: () => true, read: () => null, url: (key: string) => `/${key}.webp`, readyKeys: () => ['one', 'two', 'three'] } as PreparedResources;
+  const images = () => nodes.slice(3).map(node => /\/(\w+)\.webp/u.exec(node.style.backgroundImage)?.[1] ?? '');
+  presentation.commitSelection({ selection: { datasetId: 'one' }, resources });
+  assert.deepEqual(images(), ['one', 'one', '', 'one']);
+  presentation.commitSelection({ selection: { datasetId: 'two' }, resources });
+  assert.deepEqual(images(), ['two', 'two', '', 'two']);
+  // The other mesh takes its image in the commit that mounts it; the unmounted one keeps what it last drew.
+  presentation.commitSelection({ selection: { datasetId: 'three' }, resources });
+  assert.deepEqual(images(), ['two', 'two', 'three', 'three']);
+  assert.deepEqual([...nodes[2]!.children], [nodes[6], nodes[5]]);
+  presentation.commitSelection({ selection: { datasetId: 'one' }, resources });
+  assert.deepEqual(images(), ['one', 'one', 'three', 'one']);
+});
+
 test('a hidden subtree such as a cutaway is mounted only while a dataset shows it', async () => {
   const { parseHTML } = await import('linkedom');
   const { document } = parseHTML('<html><body><main></main></body></html>');
