@@ -153,10 +153,10 @@ The reference scan covers full/extensionless/relative file strings plus the reti
 | live: CI routing | 1 |
 | live: Python script | 2 |
 | live: computed import | 5 |
-| live: docs code-span | 21 |
+| live: docs code-span | 22 |
 | live: docs link | 26 |
-| live: generator/producer literal | 118 |
-| live: source import | 301 |
+| live: generator/producer literal | 119 |
+| live: source import | 303 |
 | live: tsconfig/eslint/package.json | 20 |
 | live: workflow | 3 |
 | plan: docs code-span | 1 |
