@@ -1,0 +1,59 @@
+{
+  "schema": "cssearth-image-layer-provenance@1",
+  "title": "Cassiopeia A (MIRI Image)",
+  "publisher": "ESA/Webb",
+  "sourceId": "weic2311a",
+  "sourcePage": "https://esawebb.org/images/weic2311a/",
+  "download": "https://cdn.esawebb.org/archives/images/large/weic2311a.jpg",
+  "credit": "NASA, ESA, CSA, D. Milisavljevic (Purdue University), T. Temim (Princeton University), I. De Looze (UGent), J. DePasquale (STScI)",
+  "license": "CC-BY-4.0",
+  "original": {
+    "dimensions": [
+      4008,
+      4009
+    ],
+    "bands": [
+      "Webb",
+      "MIRI",
+      "5.6 µm",
+      "7.7 µm",
+      "10 µm",
+      "11 µm",
+      "12 µm",
+      "18 µm",
+      "21 µm",
+      "25 µm"
+    ],
+    "fieldOfViewDeg": [
+      0.123512,
+      0.1235429
+    ]
+  },
+  "checkedSource": {
+    "kind": "Published JPEG",
+    "dimensions": [
+      4008,
+      4009
+    ]
+  },
+  "geometryEvidence": {
+    "inclinationDeg": 0.005922,
+    "lineOfNodesPaDeg": 48.644,
+    "reference": "A picture of the sky: the plane is the picture's own tangent plane, perpendicular to the sight line through the picture's centre, so it faces the Sun. That centre is 21.3 arcsec from the recipe's target, which is the whole of the recipe's inclination. Not the orientation of the object itself."
+  },
+  "registration": {
+    "method": "The file's embedded sky tags, used as they are: 0.1109 arcsec per pixel and north 0.5° left of vertical, the frame's centre at 350.8581524°, 58.8181671°. Not measured against a star here.",
+    "pixelArcsec": 0.1109,
+    "northClockwiseDeg": -0.46
+  },
+  "displayModel": "The picture's smooth light, the picture blurred over 4.6 arcsec, lies on the forward shock, a sphere of 153 arcsec about the expansion centre. One picture cannot tell the sphere's two halves apart, and two copies of one picture come apart from any camera nearer than the Sun: so the halves share only the light's broad part, the picture blurred over 37 arcsec, half each, and the half behind the picture's plane holds the rest. The plane faces the Sun through the centre of the shell DeLaney et al. (2010) fit to the [Ar II] ejecta. Where that paper's model has [Ar II] ejecta within about 9 arcsec, the picture's fine detail lies on two surfaces of its own: one in front of the plane at the depth of the approaching ejecta there, one behind it at the depth of the receding ones, each taking the share of the detail that the measurements on its side hold. A depth is a speed times 0.022 arcsec per km/s. The fine detail nothing measures stays on the plane. The surfaces are meshes of flat patches.",
+  "coverage": "The published frame inside a circle about the recipe's target: the picture fades out between 128.5 and 142.8 arcsec from the recipe's target, the largest circle the picture's own light fills (its frame has an empty border), so no straight edge shows.",
+  "acquisition": {
+    "url": "https://cdn.esawebb.org/archives/images/large/weic2311a.jpg",
+    "dimensions": [
+      4008,
+      4009
+    ],
+    "operation": "Download the publisher's JPEG; no crop or resample."
+  }
+}

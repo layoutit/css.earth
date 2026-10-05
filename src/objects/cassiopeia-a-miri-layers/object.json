@@ -1,0 +1,44 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "cassiopeia-a-miri-layers",
+  "type": "image-layer-bank",
+  "properties": {
+    "preparation": {
+      "source": "source/recipe.json"
+    },
+    "host": "cassiopeia-a",
+    "surrounds": true,
+    "frame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        53637380144868560000,
+        -8624245245090758000,
+        89751876523140600000
+      ],
+      "localToReferenceXyzw": [
+        0.2046049773629414,
+        0.1743348855486145,
+        0.6246861957307384,
+        0.7331516267338697
+      ],
+      "metersPerUnit": 30856775814913670,
+      "boundsUnits": {
+        "min": [
+          -2.342754885206299,
+          -2.336364865175078,
+          -2.521816021718223
+        ],
+        "max": [
+          2.3516768530234,
+          2.3515287576309536,
+          2.5218128146798335
+        ]
+      }
+    }
+  },
+  "prepared": {
+    "format": "cssearth-image-layer-bank@1",
+    "url": "prepared/image-layers.json"
+  }
+}

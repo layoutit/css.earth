@@ -1,0 +1,45 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "cassiopeia-a-miri-layers",
+  "entries": [
+    {
+      "id": "weic2311a",
+      "subject": "ESA/Webb weic2311a",
+      "status": "included",
+      "finding": "Cassiopeia A (MIRI Image): MIRI at 5.6, 7.7, 10, 11, 12, 18, 21 and 25 µm; 4008 × 4009 px over 7.41 × 7.41 arcmin, released 7 April 2023. The file's embedded sky tags, used as they are: 0.1109 arcsec per pixel and north 0.5° left of vertical, the frame's centre at 350.8581524°, 58.8181671°. Not measured against a star here.",
+      "evidence": [
+        "https://esawebb.org/images/weic2311a/",
+        "https://esawebb.org/copyright/"
+      ]
+    },
+    {
+      "id": "colors",
+      "subject": "What the picture's colors show",
+      "status": "included",
+      "finding": "ESA/Webb's release: red is 25.5 µm, orange-red 21, orange 18, yellow 12.8, green 11.3, cyan 10, light blue 7.7 and blue 5.6 µm. Milisavljevic et al. (2024), Table 1, give each filter's sources of strong emission: [Mg V] and dust at 5.6; [Ar II] 6.99, PAHs and dust at 7.7; [Ar III] and [S IV] at 10; PAHs and dust at 11.3; [Ne II] and [Ne V] at 12.8; [Fe II], [S III] and dust at 18; [S III] and dust at 21; [O IV] and dust at 25.5 µm.",
+      "evidence": [
+        "https://esawebb.org/images/weic2311a/",
+        "https://arxiv.org/abs/2401.02477"
+      ]
+    },
+    {
+      "id": "green-monster",
+      "subject": "The Green Monster's place",
+      "status": "deferred",
+      "finding": "The loop across the middle, green in this picture (11.3 and 12.8 µm), is circumstellar material on the near side of the remnant: every X-ray spectrum of it is blueshifted by about 2,300 km/s (Vink et al. 2024), and De Looze et al. (2024) place the whole structure in front of Cas A. No table gives its outline, so it is not laid on the near half of the shock's sphere by itself: its light lies with the rest of the smooth light.",
+      "evidence": [
+        "https://arxiv.org/abs/2401.02491",
+        "https://arxiv.org/abs/2410.05402"
+      ]
+    },
+    {
+      "id": "stars",
+      "subject": "The picture's stars",
+      "status": "excluded",
+      "finding": "Not removed: the mid-infrared picture shows few stars, and on the near-infrared one the remover needed a color gate to spare the ejecta knots (src/objects/cassiopeia-a-layers/investigations.json). The stars it shows lie on the shell with the smooth light.",
+      "evidence": [
+        "https://esawebb.org/images/weic2311a/"
+      ]
+    }
+  ]
+}

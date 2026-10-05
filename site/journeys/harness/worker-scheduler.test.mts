@@ -9,15 +9,15 @@ const code = PROBE.slice(start, end);
 const clearError = "        if (event.data && typeof event.data.error === 'string') jobs.clear();\n";
 function completion(source: string, request: unknown, reply: unknown) {
   const output: unknown = runInNewContext(`
-    const workers = new Map(), workerReplies = [], releasedReplies = new WeakSet(), errors = [];
-    let workerSerial = 0, messages = 0;
+    const workers = new Map(), workerReplies = [], releasedReplies = new WeakSet(), errors = [], workerEvidence = [];
+    let workerSerial = 0, messages = 0, nativeWorkerMessages = 0;
     class FixtureWorker extends EventTarget { postMessage() {} terminate() {} }
     const window = { Worker: FixtureWorker, __journeyScheduleWorkers: true };
     ${source}
-    const worker = new window.Worker(); worker.postMessage(request);
+    const worker = new window.Worker('/worker.js'); worker.postMessage(request);
     worker.dispatchEvent(new MessageEvent('message', { data: reply }));
     JSON.stringify({ jobs: workers.get(worker).size, queued: workerReplies.length, errors: errors.length, messages });
-  `, { EventTarget, MessageEvent, request, reply });
+  `, { EventTarget, MessageEvent, URL, document: { baseURI: 'http://127.0.0.1/fixture/' }, request, reply });
   if (typeof output !== 'string') throw new Error('Invalid scheduler fixture output');
   const value: unknown = JSON.parse(output);
   if (!value || typeof value !== 'object' || !('jobs' in value) || typeof value.jobs !== 'number'

@@ -30,75 +30,6 @@
     },
     {
       "op": "add-file",
-      "path": "site/navigation/navigation-types.mts",
-      "imports": [
-        {
-          "to": "site/browser/browser-types.mts",
-          "kind": "type"
-        },
-        {
-          "to": "packages/renderer/src/runtime/world-navigation-types.ts",
-          "kind": "type"
-        },
-        {
-          "to": "packages/renderer/src/runtime/object-scene.ts",
-          "kind": "type"
-        },
-        {
-          "to": "site/world/scene-subject.mts",
-          "kind": "type"
-        },
-        {
-          "to": "site/world/navigation-scope.mts",
-          "kind": "type"
-        }
-      ],
-      "change": "Extract navigation contracts",
-      "note": "Own WorldHandoff, NavigationHistory and NavigationIntent beside navigation. Import MountOptions, ObjectSceneLifecycle, ObjectWorldNavigation, SceneSubject and PageView; preserve erased aliases SceneView and SelectionTarget.",
-      "id": "add-file-navigation-types"
-    },
-    {
-      "op": "retarget",
-      "from": "site/navigation/prepared-arrival.mts",
-      "to": "site/navigation/prepared-world-navigation.mts",
-      "note": "Arrival reads WorldHandoff from the lower contract; navigation still owns flights.",
-      "kind": "type",
-      "newTo": "site/navigation/navigation-types.mts",
-      "change": "Extract navigation contracts",
-      "id": "retarget-prepared-arrival-navigation-types",
-      "line": 4
-    },
-    {
-      "op": "retarget",
-      "from": "site/navigation/navigation-history.mts",
-      "to": "site/navigation/navigation-request.mts",
-      "newTo": "site/navigation/navigation-types.mts",
-      "kind": "type",
-      "note": "Extract NavigationHistory and NavigationIntent into navigation-types; the history transport must not import request orchestration.",
-      "change": "Extract navigation contracts",
-      "id": "retarget-navigation-history-navigation-types",
-      "line": 4
-    },
-    {
-      "op": "add-import",
-      "to": "site/navigation/navigation-types.mts",
-      "kind": "type",
-      "note": "Flights import and re-export the extracted WorldHandoff contract.",
-      "from": "site/navigation/prepared-world-navigation.mts",
-      "change": "Extract navigation contracts",
-      "id": "add-import-prepared-world-navigation-navigation-types"
-    },
-    {
-      "op": "add-import",
-      "to": "site/navigation/navigation-types.mts",
-      "kind": "type",
-      "note": "Request imports its extracted intent and history types and the plain selection shape; selection behavior is passed in.",
-      "from": "site/navigation/navigation-request.mts",
-      "change": "Extract navigation contracts",
-      "id": "add-import-navigation-request-navigation-types"
-    },
-    {
-      "op": "add-file",
       "path": "site/content/moon-catalogue.mts",
       "note": "Split catalogue parsing, cached source catalogue and catalogueMoons into a runtime-safe reader; preparation keeps search-based ordering.",
       "change": "Split the moon catalogue reader",
@@ -294,16 +225,6 @@
         "add-file-navigation-href",
         "add-import-navigation-history-navigation-href",
         "retarget-application-world-resources-navigation-href"
-      ]
-    },
-    {
-      "id": "extract-navigation-contracts",
-      "edits": [
-        "add-file-navigation-types",
-        "retarget-prepared-arrival-navigation-types",
-        "retarget-navigation-history-navigation-types",
-        "add-import-prepared-world-navigation-navigation-types",
-        "add-import-navigation-request-navigation-types"
       ]
     },
     {

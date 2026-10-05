@@ -10,7 +10,7 @@ import { fetchPublication, type Archive } from '../archives/archives.mts';
 import { TODO } from '../scaffold.mts';
 import { esaPictureAddress, readEsaPage, skyTags, type EsaPage } from './esa-image.mts';
 import { colorsPhrase, pageColors, parsePictures, pictureFiles, type PictureEntry } from './picture-bank.mts';
-import { locateStar, registerPicture, taggedPixel, type Place } from './registration.mts';
+import { lightReachPixels, locateStar, registerPicture, taggedPixel, type Place } from './registration.mts';
 
 interface Context { readonly root: string; readonly archive: Archive; readonly progress: (line: string) => void }
 export interface PictureResult { readonly id: string; readonly host: string; readonly dataset: string; readonly files: number; readonly todo: readonly string[]; readonly failed?: string }
@@ -53,7 +53,7 @@ export async function draftsFromEsa(names: readonly string[], context: Context):
       const page = await readEsaPage(address, context.archive), like = bankOf(await readJson(context.root, `src/objects/${host}/source/content/object.json`, `${host}: no such page`), host);
       const target = requireRecord((await readJson(context.root, `src/objects/${like}/source/recipe.json`, `${like}: not a layer bank`)).target, `${like} recipe target`) as unknown as Place;
       const sky = await pictureOnSky(page, target, context), pixelArcsec = sky.tags.scaleDeg * 3600, star = locateStar(sky.rgb, ...sky.dimensions, pixelArcsec, sky.tagged);
-      registerPicture(sky.tags, sky.dimensions, star?.pixel ?? sky.tagged, target);
+      const stands = star?.pixel ?? sky.tagged, registered = registerPicture(sky.tags, sky.dimensions, stands, target, lightReachPixels(sky.rgb, ...sky.dimensions, stands));
       const name = requireString((await readJson(context.root, `src/objects/${like}/source/presentation.json`, like)).name, `${like} presentation name`), colors = pageColors(page.colors);
       const instruments = [...new Set(page.colors.map(color => color.instrument).filter(Boolean))], light = instruments.length === 1 ? LIGHT[instruments[0]!] ?? instruments[0]! : instruments.join(' + ');
       const slug = (words: string) => words.toLowerCase().replace(/[^a-z0-9]+/gu, '-'), write = (what: string) => `${TODO}: ${what}`;
@@ -62,7 +62,8 @@ export async function draftsFromEsa(names: readonly string[], context: Context):
         colors, ...(star ? { star: star.pixel.map(value => Number(value.toFixed(1))), starFound: star.found } : {}), geometry: {}, sources: [], ledger: [] });
       report.push(`${page.id} on ${host}, like ${like}: ${page.title}; ${sky.dimensions.join(' x ')} px, ${instruments.join(' and ')} at ${colorsPhrase(colors)}. ` + (star
         ? `The star: ${star.found}, at ${star.pixel.map(value => value.toFixed(1)).join(', ')}, ${(Math.hypot(star.pixel[0] - sky.tagged[0], star.pixel[1] - sky.tagged[1]) * pixelArcsec).toFixed(2)} arcsec from where the tags put the page's place. Remove "star" and "starFound" where the page stands at no star.`
-        : 'No star near the page\'s place: the picture is placed by its tags.') + ` What its colors show: telescope papers ${JSON.stringify(name)} --instrument ${instruments[0]}`);
+        : 'No star near the page\'s place: the picture is placed by its tags.')
+        + (registered.rimAt === 'light' ? ` The picture does not fill its frame: its own light reaches ${registered.circleArcsec} arcsec from that place, and the rim fades there.` : '') + ` What its colors show: telescope papers ${JSON.stringify(name)} --instrument ${instruments[0]}`);
     } catch (error) { report.push(`${asked}: not drafted: ${reason(error)}`); }
   }
   return { stars: [], pictures, report };
@@ -93,7 +94,7 @@ async function writePicture(entry: PictureEntry, context: Context): Promise<Pict
     presentation: await readJson(root, `src/objects/${entry.like}/source/presentation.json`, entry.like), provenance: await readJson(root, `src/objects/${entry.like}/source/provenance.json`, entry.like) };
   const host = { content: await readJson(root, `src/objects/${entry.host}/source/content/object.json`, `${entry.host}: no such page`), text: await readJson(root, `src/objects/${entry.host}/text.json`, entry.host) };
   const sky = await pictureOnSky(page, requireRecord(like.recipe.target, `${entry.like} recipe target`) as unknown as Place, context), records = await sourceRecords(entry, context);
-  const { files, readme, carried, todo } = pictureFiles(entry, { page, tags: sky.tags, dimensions: sky.dimensions, tagged: sky.tagged, like, host, checked: new Date().toISOString().slice(0, 10) });
+  const { files, readme, carried, todo } = pictureFiles(entry, { page, tags: sky.tags, dimensions: sky.dimensions, tagged: sky.tagged, lightReach: at => lightReachPixels(sky.rgb, ...sky.dimensions, at), like, host, checked: new Date().toISOString().slice(0, 10) });
   for (const { from } of carried) if (!await exists(inTree(from))) throw new Error(`${entry.bank}: ${from}, which the ${entry.like} bank reads, is not restored; its manifest names where it comes from.`);
   let written = 0;
   const put = async (path: string, value: string | Buffer) => { await mkdir(dirname(inTree(path)), { recursive: true }); await writeFile(inTree(path), value); written++; };

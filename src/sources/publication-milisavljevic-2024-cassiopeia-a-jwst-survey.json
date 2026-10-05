@@ -1,0 +1,52 @@
+{
+  "id": "publication-milisavljevic-2024-cassiopeia-a-jwst-survey",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Milisavljevic et al. (2024): A JWST Survey of the Supernova Remnant Cassiopeia A",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2401.02477"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/2041-8213/ad324b"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/2401.02477",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/2041-8213/ad324b",
+      "label": "ApJL 965 (2024) L27 (21pp)"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/2401.02477",
+      "checkedOn": "2026-10-05",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Milisavljevic et al. (2024), ApJL 965 (2024) L27 (21pp)",
+      "scope": "citation",
+      "evidence": "https://arxiv.org/abs/2401.02477"
+    }
+  ],
+  "publisher": "ApJL 965 (2024) L27 (21pp)",
+  "creators": [
+    "Dan Milisavljevic",
+    "Tea Temim",
+    "Ilse De Looze",
+    "et al."
+  ],
+  "publicationDate": "2024"
+}

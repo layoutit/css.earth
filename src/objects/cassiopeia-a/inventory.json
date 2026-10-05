@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "cassiopeia-a-dataset-mid-infrared.webp",
+      "bytes": 20464,
+      "sha256": "d8364e21bea516e4a4b0547d42c2482a802c1f25aaa73b61746a68d2b63ed188"
+    },
+    {
+      "location": "public",
       "filename": "cassiopeia-a-dataset-optical.webp",
       "bytes": 19832,
       "sha256": "bb41a73851848f0a804749979f0dd3b92fd260d95c51e12412c5022242c319b3"
@@ -16,20 +22,20 @@
     {
       "location": "prepared",
       "filename": "controls.json",
-      "bytes": 482,
-      "sha256": "176eb7df4e5c70bcd4a812ccec5338fae8d463387676a262ce26c09fd328764a"
+      "bytes": 708,
+      "sha256": "d93ba38fac8446c0e1d9298d9a936e1f891609b3cc2561ae24ae89aaf440fda6"
     },
     {
       "location": "prepared",
       "filename": "datasets.json",
-      "bytes": 585,
-      "sha256": "4a97116bafced8219e21bde2b69487215ec369a49c86b16749127eaf895664f8"
+      "bytes": 987,
+      "sha256": "346f1f92088956b4d72a0ca675170d2353ba530d5aa11a9f1d84bd09e2980864"
     },
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 4632,
-      "sha256": "b7ab5da9f1b5e8bc51069fd4211bc776fc47fd768d96d4fecdc55a949b0cfa29"
+      "bytes": 4937,
+      "sha256": "09f0471075a4bfbb79a8d0bb8677fdbf393cc9e01a92a1383b07b9874d72901d"
     },
     {
       "location": "prepared",
@@ -40,8 +46,8 @@
     {
       "location": "prepared",
       "filename": "text.json",
-      "bytes": 3322,
-      "sha256": "48b08cd5f3d9fdc84c8ae5327b5ea6a50ad44065113aee061df3f712023be5d1"
+      "bytes": 5779,
+      "sha256": "fec8a2e9eaa11f5398690aed4a4b5f0b3eee8684afedc6ac9e43c68104a7d1d3"
     },
     {
       "location": "prepared",

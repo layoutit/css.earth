@@ -82,6 +82,22 @@
           "url": "https://esawebb.org/images/weic2330a/"
         },
         "falseColor": true
+      },
+      {
+        "id": "mid-infrared",
+        "label": "Webb · mid infrared",
+        "thumbnail": "cassiopeia-a-dataset-mid-infrared.webp",
+        "volume": {
+          "objectId": "cassiopeia-a-miri-layers",
+          "datasetId": "optical",
+          "surface": "mid-infrared"
+        },
+        "source": {
+          "id": "cassiopeia-a-miri-layers-optical",
+          "path": "../../cassiopeia-a-miri-layers/source/manifest.json",
+          "url": "https://esawebb.org/images/weic2311a/"
+        },
+        "falseColor": true
       }
     ]
   },
