@@ -1,0 +1,45 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "ngc-2392-webb-layers",
+  "entries": [
+    {
+      "id": "weic2616a",
+      "subject": "ESA/Webb weic2616a",
+      "status": "included",
+      "finding": "Lion Nebula (NIRCam + MIRI image): NIRCam and MIRI at 1.15, 1.87, 2.12, 3.35 and 10 µm; 3505 × 3505 px over 1.77 × 1.77 arcmin, released 10 August 2026. The file's embedded sky tags for scale and direction, 0.0304 arcsec per pixel and north 170.0° left of vertical, and the star for place: the star in the picture, the largest patch of saturated pixels within 1 arcsec of where the tags put it, 51 px, pixel 1733.9, 1715.5, is set at the recipe's target, so the frame's centre is 112.2950734°, 20.9120789°. The tags alone put the star 0.22 arcsec from where the picture shows it.",
+      "evidence": [
+        "https://esawebb.org/images/weic2616a/",
+        "https://esawebb.org/copyright/"
+      ]
+    },
+    {
+      "id": "colors",
+      "subject": "What the picture's colors show",
+      "status": "included",
+      "finding": "ESA/Webb's release of 10 August 2026 and its table: 1.15 µm in blue, Paschen-alpha at 1.87 µm in cyan, molecular hydrogen at 2.12 µm in yellow and PAH at 3.35 µm in orange (NIRCam), silicate at 10 µm in red (MIRI). In its words the star makes \"a bubble of ionized hydrogen gas\", the nebula's face; the mane around it \"is the interior of a dust shell\" lit by the star, with compact clumps of dust in red and orange and clumps of molecular hydrogen in yellow.",
+      "evidence": [
+        "https://esawebb.org/images/weic2616a/"
+      ]
+    },
+    {
+      "id": "speeds",
+      "subject": "Which speed each color takes",
+      "status": "included",
+      "finding": "No speed is measured in the infrared light this picture shows, and no paper on Webb's observations of NGC 2392 was found (telescope papers \"NGC 2392\" --instrument JWST, OpenAlex, 2026-10-05: no work). Every color takes the [N II] speeds of the two shells (García-Díaz et al. 2012) and of the 536 measured structures (García-Díaz et al. 2015), as the Hubble dataset's colors do: the bubble's Paschen-alpha is the same ionised gas as its H-alpha, and the clumps of the mane are where the model has its cometary knots, at rest on the equatorial disc. Dust and molecular hydrogen are drawn at the ionised gas's depths.",
+      "evidence": [
+        "https://arxiv.org/abs/1211.6717",
+        "https://arxiv.org/abs/1411.0042",
+        "https://esawebb.org/images/weic2616a/"
+      ]
+    },
+    {
+      "id": "inner-rim",
+      "subject": "The inner shell's outline in this picture",
+      "status": "included",
+      "finding": "The rim measured again on this picture by the Hubble bank's script (packages/bake/authoring/ngc-2392/inner-shell-rim.mts ngc-2392-webb-layers): the smallest ellipse about the star that holds it has semi-axes of 10.82 and 9.09 arcsec, the long one toward position angle 25 degrees. On Hubble's photograph of 2000 the same script gives 10.80 and 9.15 arcsec toward 28 degrees. The wall's outline, 11.0 by 9.2 arcsec, holds both.",
+      "evidence": [
+        "https://arxiv.org/abs/1211.6717"
+      ]
+    }
+  ]
+}

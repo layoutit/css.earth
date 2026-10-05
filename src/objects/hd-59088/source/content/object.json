@@ -1,0 +1,81 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "hd-59088",
+  "displayName": "HD 59088",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "1.5 solar radii",
+        "source": {
+          "catalogueId": "arxiv-1204-1200",
+          "url": "https://arxiv.org/abs/1204.1200",
+          "label": "Kaschinski et al. (2012)",
+          "checked": "2026-10-05",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "1,795 parsecs",
+        "source": {
+          "catalogueId": "page-cdsarc-cds-unistra-fr-viz-bin-cat-j-a-a-656-a110",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/656/A110",
+          "label": "Chornay & Walton (2021), A&A 656, A110; CDS J/A+A/656/A110, Table A.1, PN G197.8+17.3: distance 1,795 pc (1,666 to 1,942) from the Gaia EDR3 parallax of this star, the distance its nebula's page stands at",
+          "checked": "2026-10-05",
+          "path": "source/measurements.json",
+          "locator": "distanceParsecs; distanceSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "color",
+    "controls": [
+      {
+        "id": "color",
+        "label": "Color",
+        "qualification": "Color from Gaia's spectrum of the star; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
+        "thumbnail": "hd-59088-dataset-color.webp",
+        "surface": "hd-59088-surface-color@2x.webp",
+        "poles": "hd-59088-poles-color@2x.webp",
+        "source": {
+          "id": "hd-59088-stellar-color",
+          "path": "../manifest.json",
+          "url": "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=865037169677723904&FORMAT=csv&DATA_STRUCTURE=RAW&RELEASE=Gaia+DR3"
+        },
+        "falseColor": false,
+        "notes": "The color of the star's Gaia DR3 BP/RP spectrum. The darkening toward the edge is the quadratic law Reeve & Howarth (2016), MNRAS 456, 1294 compute from non-LTE TLUSTY model atmospheres for the Bessell V band at 40,000 K and log g 3.7 (u1 0.089, u2 0.327): a model, because no fit of this star's limb is used. The spin axis's direction on the sky is a display convention."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Kaschinski, Pauldrach & Hoffmann (2012), A&A 542, A45",
+      "href": "https://arxiv.org/abs/1204.1200"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://arxiv.org/abs/1204.1200",
+      "credit": "Kaschinski, Pauldrach & Hoffmann (2012), A&A 542, A45"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/hd-59088.json",
+      "credit": "Kaschinski, Pauldrach & Hoffmann radius; Gaia DR3 position; cited distance; no measured rotation axis (display convention)"
+    }
+  }
+}
