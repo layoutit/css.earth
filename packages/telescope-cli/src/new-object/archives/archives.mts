@@ -229,7 +229,7 @@ export function parseArxivEntry(xml: string, arxiv: string, url: string): Public
   if (!title || !published) throw new TypeError(`arXiv ${arxiv}: the entry has no title or date.`);
   const creators = [...entry.matchAll(/<author>\s*<name>([\s\S]*?)<\/name>/gu)].map(m => clean(m[1]!));
   const doi = field('doi'), journal = field('journal_ref');
-  return { id: `arxiv-${arxiv.replace(/\./gu, '-')}`, title: clean(title), creators, year: published.slice(0, 4), url,
+  return { id: `arxiv-${arxiv.replace(/[./]/gu, '-')}`, title: clean(title), creators, year: published.slice(0, 4), url,
     ...(journal ? { publisher: clean(journal) } : {}), ...(doi ? { doi: clean(doi) } : {}), arxiv };
 }
 /** A DOI resolved through Crossref. */
@@ -276,7 +276,8 @@ export function fetchPublication(archive: Archive, url: string): Promise<Publica
   return publication;
 }
 async function readPublication(archive: Archive, url: string): Promise<Publication | undefined> {
-  const arxiv = /arxiv\.org\/abs\/([0-9]{4}\.[0-9]{4,5})/u.exec(url)?.[1];
+  // An arXiv number as issued since 2007 (2401.02477) or before it, under its archive (astro-ph/0602464).
+  const arxiv = /arxiv\.org\/abs\/([0-9]{4}\.[0-9]{4,5}|[a-z-]+(?:\.[A-Z]{2})?\/[0-9]{7})/u.exec(url)?.[1];
   if (arxiv) return parseArxivEntry(await archive.text(`https://export.arxiv.org/api/query?id_list=${arxiv}`), arxiv, url);
   const bibcode = /adsabs\.harvard\.edu\/abs\/([^/?#]+)/u.exec(url)?.[1];
   if (bibcode) {
