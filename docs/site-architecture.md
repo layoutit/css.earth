@@ -2,40 +2,40 @@
 
 **Option 3 was decided by the owner on 2026-10-05: relocate queued loader functions to their owners.** The router starts at module evaluation exactly as today, and all loading uses the same single serialized queue chain. S2 changes only documentation and tools; it moves no application files. The projection proves connectivity, not runtime behavior or generated chunk bytes. This PR is ready for the owner to merge.
 
-[moves.json](site-architecture/moves.json) records destinations; [tiers.json](site-architecture/tiers.json) records layers, denies and planned/enforced status; [edits.json](site-architecture/edits.json) records the decided semantic changes; [references.json](site-architecture/references.json) is a compact path-and-class inventory.
+[moves.json](site-architecture/moves.json) records destinations; [tiers.json](site-architecture/tiers.json) records layers, denies and planned/enforced status; [edits.json](site-architecture/edits.json) records the decided semantic changes. Only structural tables are committed here (the folders and the S3 changes); counts that move with every ordinary import are printed by `--tables` and written to the CI job summary.
 
 ## Folder ownership
 
 A folder imports itself or strictly lower layers. Sibling folders, including L0 siblings, cannot import each other. Value, lazy, type, CSS and JSON edges all count. Tests are leaf consumers above production. There are no lateral allowances. For a legitimate new sibling edge, re-derive longest-path levels for the production DAG and regenerate all tables; a cycle requires an ownership change, not a tier exemption.
 
 <!-- generated:folders -->
-| Tier | Folder | Purpose | Final files | Incoming moves |
-| ---: | --- | --- | ---: | --- |
-| 0 | `browser/` | Browser input, DOM and serialized import queue | 18 | 16; `runtime-policy.mts`, `diagnostics-policy.mts`, `in-flight-loader.mts`, `next-frame.mts` |
-| 0 | `model/` | Object identities, routes and held addresses | 9 | 8; `navigation/system-address.mts`, `root-object.mts`, `orbit-root.mts`, `planetary-system-members.mts` |
-| 0 | `overview/` | Prepared spectral overview readers | 4 | 2 |
-| 0 | `prepared/` | Prepared transports and generated inputs | 25 | 24; `prepared-catalogue.d.mts`, `prepared-navigation-markers.d.mts`, `prepared-object-path.mts`, `prepared-shell-icons.d.mts` |
-| 0 | `source/` | Preserved input records and artwork | 60 | 0 |
-| 0 | `vendor/` | Preserved third-party notices | 1 | 0 |
-| 0 | `server-assets/` | Server and build prepared-asset origin | 2 | 2; `asset-origin.mts` |
-| 0 | `contracts/` | Shared page and shell interfaces | 3 | 3; `object-shell-types.ts`, `object-page-contract.mts` |
-| 1 | `directory/` | Startup reads and object catalogue directory | 15 | 14; `startup-world.mts`, `startup-requests.mts`, `object-entries.mts`, `object-directory.mts` |
-| 1 | `minimap/` | Surface-map measurements and view formatting | 7 | 4 |
-| 2 | `world/` | Shared framing, visibility and camera context | 74 | 73; `world-objects.mts`, `world-system-views.mts`, `context-availability.mts`, `context-datasets.mts` |
-| 3 | `content/` | Card content, citations and metadata | 30 | 29; `dataset-content.mts`, `dataset-context.mts`, `object-text.mts`, `prepared-panel-content.mts` |
-| 3 | `navigation/` | History, requests, flights and arrivals | 37 | 25; `prepared-arrival.mts`, `prepared-scene-ownership.mts`, `arrival-billboard.mts`, `prepared-world-navigation.mts` |
-| 4 | `search/` | Catalogue search and result presentation | 17 | 6 |
-| 4 | `selection/` | Committed selection and camera handovers | 8 | 8; `scene/scene-selection.mts`, `satellite-selection.mts`, `overview-selection.mts`, `showcase.mts` |
-| 5 | `shell/` | Retained shell controls and panels | 37 | 30; `object-browser.mts`, `feature-browser.mts`, `destination-browser.mts`, `selection-presentation.mts` |
-| 6 | `server/` | SSR readers, responses and host middleware | 36 | 23; `object-page-data.mts`, `first-view-transport.mts`, `object-entry.mts`, `world-places.mts` |
-| 6 | `scene/` | Scene sessions, replacement and publication | 31 | 16; `object-adapter.mts`, `packaged-object-runtime.mts`, `startup-billboard.mts`, `initial-scene.mts` |
-| 7 | `startup/` | Page boot helpers and router entry | 10 | 10; `shared-imports.mts`, `startup-boot.mts`, `startup-cover.mts`, `initial-shell-context.mts` |
-| 7 | `build/` | Site preparation and packaging | 83 | 32; `prepare-body-moons.mts` |
-| 8 | `layouts/` | Shared page frame and its styles | 7 | 5; `components/ObjectSwatchStyles.astro`, `site.css`, `object-shell.css`, `wordmark.css` |
-| 9 | `components/` | Reusable Astro markup and SSR composition | 29 | 0 |
-| 10 | `pages/` | Routes and object-page entries | 20 | 0 |
-| 11 | `journeys/` | Cross-cutting journeys and support | 19 | 19 |
-| 11 | `test/` | Retired test folder; no final occupants | 2 | 0 |
+| Tier | Folder | Purpose | Incoming moves |
+| ---: | --- | --- | --- |
+| 0 | `browser/` | Browser input, DOM and serialized import queue | 16; `runtime-policy.mts`, `diagnostics-policy.mts`, `in-flight-loader.mts`, `next-frame.mts` |
+| 0 | `model/` | Object identities, routes and held addresses | 8; `navigation/system-address.mts`, `root-object.mts`, `orbit-root.mts`, `planetary-system-members.mts` |
+| 0 | `overview/` | Prepared spectral overview readers | 2 |
+| 0 | `prepared/` | Prepared transports and generated inputs | 24; `prepared-catalogue.d.mts`, `prepared-navigation-markers.d.mts`, `prepared-object-path.mts`, `prepared-shell-icons.d.mts` |
+| 0 | `source/` | Preserved input records and artwork | 0 |
+| 0 | `vendor/` | Preserved third-party notices | 0 |
+| 0 | `server-assets/` | Server and build prepared-asset origin | 2; `asset-origin.mts` |
+| 0 | `contracts/` | Shared page and shell interfaces | 3; `object-shell-types.ts`, `object-page-contract.mts` |
+| 1 | `directory/` | Startup reads and object catalogue directory | 14; `startup-world.mts`, `startup-requests.mts`, `object-entries.mts`, `object-directory.mts` |
+| 1 | `minimap/` | Surface-map measurements and view formatting | 4 |
+| 2 | `world/` | Shared framing, visibility and camera context | 73; `world-objects.mts`, `world-system-views.mts`, `context-availability.mts`, `context-datasets.mts` |
+| 3 | `content/` | Card content, citations and metadata | 29; `dataset-content.mts`, `dataset-context.mts`, `object-text.mts`, `prepared-panel-content.mts` |
+| 3 | `navigation/` | History, requests, flights and arrivals | 25; `prepared-arrival.mts`, `prepared-scene-ownership.mts`, `arrival-billboard.mts`, `prepared-world-navigation.mts` |
+| 4 | `search/` | Catalogue search and result presentation | 6 |
+| 4 | `selection/` | Committed selection and camera handovers | 8; `scene/scene-selection.mts`, `satellite-selection.mts`, `overview-selection.mts`, `showcase.mts` |
+| 5 | `shell/` | Retained shell controls and panels | 30; `object-browser.mts`, `feature-browser.mts`, `destination-browser.mts`, `selection-presentation.mts` |
+| 6 | `server/` | SSR readers, responses and host middleware | 23; `object-page-data.mts`, `first-view-transport.mts`, `object-entry.mts`, `world-places.mts` |
+| 6 | `scene/` | Scene sessions, replacement and publication | 16; `object-adapter.mts`, `packaged-object-runtime.mts`, `startup-billboard.mts`, `initial-scene.mts` |
+| 7 | `startup/` | Page boot helpers and router entry | 10; `shared-imports.mts`, `startup-boot.mts`, `startup-cover.mts`, `initial-shell-context.mts` |
+| 7 | `build/` | Site preparation and packaging | 32; `prepare-body-moons.mts` |
+| 8 | `layouts/` | Shared page frame and its styles | 5; `components/ObjectSwatchStyles.astro`, `site.css`, `object-shell.css`, `wordmark.css` |
+| 9 | `components/` | Reusable Astro markup and SSR composition | 0 |
+| 10 | `pages/` | Routes and object-page entries | 0 |
+| 11 | `journeys/` | Cross-cutting journeys and support | 19 |
+| 11 | `test/` | Retired test folder; no final occupants | 0 |
 <!-- /generated:folders -->
 
 The table is the final layering. Directory owns startup requests, startup world reads, object entries, registry and world context plan: it is the lower world family. World owns framing, visibility, datasets and camera context. History and fragments belong to navigation. The model's held-address reader carries its WeakMap and registration/disposal state; history keeps its re-export.
@@ -48,7 +48,7 @@ Registry types live in directory, navigation types in navigation and presenter t
 
 ## Contributor workflow
 
-There is no deadline. With `status: "planned"`, a plan finding is a WARNING with the fix command and a GitHub Actions annotation; it never fails `pnpm check:architecture`. The check reports the first plan finding. With `status: "enforced"`, every plan finding fails. The owner changes the status when S4 ends. Existing architecture rules and scanner failures always fail. Strict `--accept` always fails on plan findings.
+There is no deadline. With `status: "planned"`, a plan finding is a WARNING with the fix command and a GitHub Actions annotation; it never fails `pnpm check:architecture`. The check reports the first plan finding. With `status: "enforced"`, every plan finding fails. The owner changes the status when S4 ends. Existing architecture rules and scanner failures always fail. Strict `--accept` always fails on plan findings. Stale generated tables are the exception to the warning: `pnpm check:architecture` fails whenever the committed folder and change tables differ from what `--write` would produce, in either status. They change only with `moves.json`, `tiers.json` or `edits.json`, so an ordinary pull request that adds an import never touches this document.
 
 When a warning names your file, update its destination or semantic edits and run `node .github/scripts/architecture/site-architecture.mts --write`, then strict `--accept`. Do not change application behavior just to silence a plan warning. Every mapped path is checked for existence, including deleted mapped files; generated inputs are explicit exceptions. Routine checks rescan the compact inventory so stale references produce findings.
 
@@ -107,60 +107,11 @@ Update producers and readers together: site prepare-catalog, shell-icons/titles,
 
 S3 replays current locations with root-level additions. File SCCs cannot increase, folder SCCs must remain contained in the baseline, and the final S3 prefix must have zero file SCCs. S3 tier counts are n/a because current folders are not final layers. S4's synthetic top-tier legacy replay is a **corollary of the final DAG**, not an independent proof: moving folders in tier order cannot fail when the final projection passes. S4's real risks are references and executed-test identities.
 
-<!-- generated:sequence -->
-| Phase | Step | File SCCs | Folder SCCs | Upward | Lateral | Result |
-| --- | --- | ---: | ---: | ---: | ---: | --- |
-| S3 | extract-held-address-reader | 4 | 2 | n/a | n/a | pass |
-| S3 | extract-registry-types | 4 | 2 | n/a | n/a | pass |
-| S3 | extract-navigation-contracts | 3 | 2 | n/a | n/a | pass |
-| S3 | split-the-moon-catalogue-reader | 3 | 2 | n/a | n/a | pass |
-| S3 | pass-selection-into-navigation-requests | 3 | 2 | n/a | n/a | pass |
-| S3 | extract-the-frame-presenter-contract | 2 | 2 | n/a | n/a | pass |
-| S3 | relocate-queued-loader-owners | 0 | 2 | n/a | n/a | pass |
-| S4 | site/browser | 0 | 0 | 0 | 0 | pass |
-| S4 | site/contracts | 0 | 0 | 0 | 0 | pass |
-| S4 | site/model | 0 | 0 | 0 | 0 | pass |
-| S4 | site/overview | 0 | 0 | 0 | 0 | pass |
-| S4 | site/prepared | 0 | 0 | 0 | 0 | pass |
-| S4 | site/server-assets | 0 | 0 | 0 | 0 | pass |
-| S4 | site/source | 0 | 0 | 0 | 0 | pass |
-| S4 | site/vendor | 0 | 0 | 0 | 0 | pass |
-| S4 | site/directory | 0 | 0 | 0 | 0 | pass |
-| S4 | site/minimap | 0 | 0 | 0 | 0 | pass |
-| S4 | site/world | 0 | 0 | 0 | 0 | pass |
-| S4 | site/content | 0 | 0 | 0 | 0 | pass |
-| S4 | site/navigation | 0 | 0 | 0 | 0 | pass |
-| S4 | site/search | 0 | 0 | 0 | 0 | pass |
-| S4 | site/selection | 0 | 0 | 0 | 0 | pass |
-| S4 | site/shell | 0 | 0 | 0 | 0 | pass |
-| S4 | site/scene | 0 | 0 | 0 | 0 | pass |
-| S4 | site/server | 0 | 0 | 0 | 0 | pass |
-| S4 | site/build | 0 | 0 | 0 | 0 | pass |
-| S4 | site/startup | 0 | 0 | 0 | 0 | pass |
-| S4 | site/layouts | 0 | 0 | 0 | 0 | pass |
-| S4 | site/components | 0 | 0 | 0 | 0 | pass |
-| S4 | site/pages | 0 | 0 | 0 | 0 | pass |
-| S4 | site/journeys | 0 | 0 | 0 | 0 | pass |
-| S4 | site/test | 0 | 0 | 0 | 0 | pass |
-<!-- /generated:sequence -->
+The sequence table (one row per S3 and S4 step: file and folder SCCs, upward and lateral edges, result) is derived from the live import graph, so it is not committed. Print it with `node .github/scripts/architecture/site-architecture.mts --tables`; CI writes it to the job summary.
 
 The reference scan covers full/extensionless/relative file strings plus the retired site/test/ folder prefix, including site/test/** and site/test/* globs. It does not prove arbitrary computed paths or every possible folder spelling. Plan-internal inventories and plan-checker implementation files are excluded. Generated tables exclude themselves. Dated history stays separate from live references. Full line-numbered output exists only on demand with --references; it is not committed.
 
-<!-- generated:references -->
-| Scope and class | Path/class pairs |
-| --- | ---: |
-| live: AGENTS.md contract text | 4 |
-| live: CI routing | 1 |
-| live: Python script | 2 |
-| live: computed import | 5 |
-| live: docs code-span | 22 |
-| live: docs link | 26 |
-| live: generator/producer literal | 119 |
-| live: source import | 303 |
-| live: tsconfig/eslint/package.json | 20 |
-| live: workflow | 3 |
-| plan: docs code-span | 1 |
-<!-- /generated:references -->
+The live reference counts by scope and class are derived on demand with `--tables`, or in full with `--references`.
 
 Before **every moved-test PR**, capture the actual executed test-file list. After the move, require every old test's mapped destination in the executed list, with no lost identity. Check both local wiring and each affected CI command. Node 22 may exit zero for a no-match glob alongside valid files; an exit code alone is insufficient.
 
@@ -171,52 +122,13 @@ Required reference updates include:
 - labs/investigations/capture-galaxies.mts:10 fixture output; typescript ownership and nebula inbound prefix checks; site tsconfigs, lint selectors, preload, rendered routes, affected-test wiring, directory growth baseline and CI areas.
 - Root/object/bake contracts and outside-site producers/imports. Inspect computed import/read producers during each move. Compare actual typechecked files so tests/helpers do not silently enter production lint/typecheck policy.
 
-<!-- generated:relative-reads -->
-| Test with depth-sensitive reads | Destination |
-| --- | --- |
-| site/application-world-resources.characterization.test.mts | site/world/application-world-resources.characterization.test.mts |
-| site/test/arrival-discovery.test.mts | site/build/prepare/arrival-discovery.test.mts |
-| site/test/body-additions.test.mts | site/build/prepare/body-additions.test.mts |
-| site/test/category-frames.test.mts | site/build/prepare/category-frames.test.mts |
-| site/test/compact-spectrum.test.mts | site/overview/compact-spectrum.test.mts |
-| site/test/dataset-response.test.mts | site/server/dataset-response.test.mts |
-| site/test/folded-transit.test.mts | site/build/charts/folded-transit.test.mts |
-| site/test/hosted-banks.test.mts | site/build/prepare/hosted-banks.test.mts |
-| site/test/load-object-content.mts | site/build/content/load-object-content.test-support.mts |
-| site/test/lonlat-slice-table.test.mts | site/build/prepare/lonlat-slice-table.test.mts |
-| site/test/moon-labels.test.mts | site/world/moon-labels.test.mts |
-| site/test/neutral-catalogue-color.test.mts | site/journeys/neutral-catalogue-color.test.mts |
-| site/test/object-page-data.test.mts | site/server/object-page-data.test.mts |
-| site/test/object-systems.test.mts | site/world/object-systems.test.mts |
-| site/test/prepare-spatial-context.test.mts | site/build/prepare/prepare-spatial-context.test.mts |
-| site/test/prepared-panel-content.test.mts | site/content/prepared-panel-content.test.mts |
-| site/test/prepared-world-context.test.ts | site/world/prepared-world-context.test.ts |
-| site/test/satellite-arrival-framing.test.mts | site/navigation/satellite-arrival-framing.test.mts |
-| site/test/scene-contract.test.mts | site/world/scene-contract.test.mts |
-| site/test/system-framing.test.mts | site/world/system-framing.test.mts |
-| site/test/system-text.test.mts | site/build/prepare/system-text.test.mts |
-| site/test/system-view-file.mts | site/world/system-view-file.test-support.mts |
-| site/test/world-billboards.test.mts | site/journeys/world-billboards.test.mts |
-| site/test/world-stars.test.mts | site/world/world-stars.test.mts |
-| site/test/world-tables.test.mts | site/world/world-tables.test.mts |
-| site/test/zoom-scope.test.mts | site/world/zoom-scope.test.mts |
-<!-- /generated:relative-reads -->
+Tests with depth-sensitive relative reads are listed by `--tables`.
 
 Move PRs delete applied mappings/groups, retarget pending edits and regenerate tables. The --references --old gate fails live old-file references and also prints covering folder/glob references for review. During partial moves, old globs may still serve remaining tests: extend wiring for the moved tests and prove executed identities. Once the folder is retired, run --references --old site/test/ and require zero live folder/glob references. Both gates work after removing applied map entries.
 
 ## Executable projection
 
-<!-- generated:numbers -->
-| View | Before file SCCs | Before folder SCCs | Before upward | Before lateral | After file SCCs | After folder SCCs | After upward | After lateral |
-| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| value | 0 | 2 | 30 | 10 | 0 | 0 | 0 | 0 |
-| value+lazy | 2 | 2 | 32 | 11 | 0 | 0 | 0 | 0 |
-| value+lazy+type | 4 | 2 | 43 | 24 | 0 | 0 | 0 | 0 |
-| all | 4 | 2 | 43 | 26 | 0 | 0 | 0 | 0 |
-
-Unassigned files: before 0; after 0. No lateral allowances.
-Identity uses the proposed numbers on existing folders and tier zero for loose root files. It applies no moves or edits.
-<!-- /generated:numbers -->
+The before and after projection numbers (file and folder SCCs, upward and lateral edges, unassigned files) are derived from the live import graph and printed by `--tables`; CI writes them to the job summary. No lateral allowances exist.
 
 Counts represent declarations and cyclic components. External package boundaries remain under the ordinary architecture rules. Acceptance scans live tracked declarations and live compact references; it requires no ignored snapshot. No independent review is claimed unless a completed cited report exists.
 
@@ -230,6 +142,7 @@ node .github/scripts/architecture/site-architecture.mts --accept
 node .github/scripts/architecture/site-architecture.mts --identity
 node .github/scripts/architecture/site-architecture.mts --sequence
 node .github/scripts/architecture/site-architecture.mts --minimality
+node .github/scripts/architecture/site-architecture.mts --tables
 node .github/scripts/architecture/site-architecture.mts --references > /tmp/site-architecture-references.json
 pnpm check:architecture
 # When changing plan data, regenerate first, then rerun acceptance:

@@ -1,5 +1,5 @@
 /** Validate the pending site layout against one live declaration scan and reproduce its marked tables. */
-import { readFileSync, writeFileSync } from 'node:fs';
+import { appendFileSync, readFileSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { readImportDeclarations } from './import-declarations.mts';
@@ -29,23 +29,15 @@ export function renderTables(input: ProjectionInput): Record<string, string> {
   const tiers = list(tierData.tiers).map(value => {
     const entry = record(value); return { tier: number(entry.tier), name: text(entry.name), folders: list(entry.folders).map(text) };
   }).sort((a, b) => a.tier - b.tier || byText(a.name, b.name));
-  const inventory = record(input.declarations), summary = record(inventory.summary);
-  const originals = new Set([...list(summary.files).map(text), ...list(tierData.assets ?? []).map(text), ...list(tierData.testFiles ?? []).map(text)]);
-  const deleted = new Set(editList(input.edits).map(record).filter(edit => edit.op === 'remove-file').map(edit => text(edit.path)));
-  const destinations = new Set([...originals].map(file => map[file] === undefined ? file : map[file] === null ? '' : text(map[file])).filter(file => file && !deleted.has(file)));
   const edits = editList(input.edits).map(record);
-  for (const edit of edits) {
-    if (!edit.note || !edit.change) throw new Error('Each plan edit needs a note and a change name');
-    if (edit.op === 'add-file') destinations.add(text(edit.path));
-  }
+  for (const edit of edits) if (!edit.note || !edit.change) throw new Error('Each plan edit needs a note and a change name');
   const owner = (file: string) => tiers.flatMap(tier => tier.folders.map(folder => ({ ...tier, folder })))
     .sort((a, b) => b.folder.length - a.folder.length).find(entry => file.startsWith(`${entry.folder}/`));
-  const folders = [row(['Tier', 'Folder', 'Purpose', 'Final files', 'Incoming moves']), row(['---:', '---', '---', '---:', '---'])];
+  const folders = [row(['Tier', 'Folder', 'Purpose', 'Incoming moves']), row(['---:', '---', '---', '---'])];
   for (const tier of tiers) for (const folder of tier.folders) {
-    const count = [...destinations].filter(file => owner(file)?.folder === folder).length;
     const incoming = Object.entries(map).filter(([from, to]) => typeof to === 'string' && owner(to)?.folder === folder && from !== to);
     const notable = incoming.filter(([from]) => !isTestPath(from)).slice(0, 4).map(([from]) => `\`${from.slice(5)}\``);
-    folders.push(row([tier.tier, `\`${folder.slice(5)}/\``, tier.name, count, `${incoming.length}${notable.length ? `; ${notable.join(', ')}` : ''}`]));
+    folders.push(row([tier.tier, `\`${folder.slice(5)}/\``, tier.name, `${incoming.length}${notable.length ? `; ${notable.join(', ')}` : ''}`]));
   }
   const groups = new Map<string, { tier: number; ids: string[]; notes: Set<string> }>();
   edits.forEach(edit => {
@@ -59,6 +51,14 @@ export function renderTables(input: ProjectionInput): Record<string, string> {
   for (const [name, group] of groups) {
     changes.push(row([group.tier, name, group.ids.join(', '), [...group.notes].join(' ')]));
   }
+  return { folders: folders.join('\n'), changes: changes.join('\n') };
+}
+
+/** Derived counts that move with every ordinary import: printed on demand and written to the CI job summary, never committed. */
+export function renderNumbers(input: ProjectionInput): string {
+  const after = project(input), tierData = record(input.tiers);
+  const inventory = record(input.declarations), summary = record(inventory.summary);
+  const originals = new Set([...list(summary.files).map(text), ...list(tierData.assets ?? []).map(text), ...list(tierData.testFiles ?? []).map(text)]);
   // Identity retains the same proposed tier numbers for existing folders; loose root files are tier zero.
   const before = project({ declarations: input.declarations, moves: {}, tiers: { ...tierData,
     root: { allow: [...originals].filter(file => file.startsWith('site/') && file.split('/').length === 2) } } });
@@ -71,7 +71,24 @@ export function renderTables(input: ProjectionInput): Record<string, string> {
   }
   numbers.push('', `Unassigned files: before ${before.unassigned.length}; after ${after.unassigned.length}. No lateral allowances.`,
     'Identity uses the proposed numbers on existing folders and tier zero for loose root files. It applies no moves or edits.');
-  return { folders: folders.join('\n'), changes: changes.join('\n'), numbers: numbers.join('\n') };
+  return numbers.join('\n');
+}
+
+/** Everything that moves with an ordinary import or test: printed by `--tables` and appended to the CI job summary; the committed document holds only the structural tables. */
+export function volatileTables(root: string, moves: unknown, declarations: ProjectionInput['declarations'], tiers: unknown, edits: unknown): string {
+  const input = { declarations, moves, tiers, edits };
+  const parts = ['### Projection numbers', '', renderNumbers(input)];
+  if (!Array.isArray(edits)) {
+    const proof = sequence(input);
+    parts.push('', '### Sequence', '', [row(['Phase', 'Step', 'File SCCs', 'Folder SCCs', 'Upward', 'Lateral', 'Result']), row(['---', '---', '---:', '---:', '---:', '---:', '---']),
+      ...proof.steps.map(step => row([step.phase, step.step, step.fileSccs, step.folderSccs, step.phase === 'S3' ? 'n/a' : step.upward, step.phase === 'S3' ? 'n/a' : step.lateral, step.failed ? 'FAIL' : 'pass']))].join('\n'));
+    const inventory = record(compactReferences(references(root, record(moves)))), counts = new Map<string, number>();
+    for (const value of list(inventory.occurrences)) { const entry = record(value); const key = `${text(entry.scope)}: ${text(entry.classification)}`; counts.set(key, (counts.get(key) ?? 0) + 1); }
+    parts.push('', '### References', '', [row(['Scope and class', 'Path/class pairs']), row(['---', '---:']), ...[...counts].sort().map(([key, count]) => row([key, count]))].join('\n'),
+      '', '### Tests with depth-sensitive reads', '', [row(['Test', 'Destination']), row(['---', '---']),
+        ...list(inventory.relativeReads).map(value => { const entry = record(value); return row([text(entry.file), text(entry.destination)]); })].join('\n'));
+  }
+  return parts.join('\n');
 }
 
 /** Replace only marked tables, rejecting missing or duplicated markers. */
@@ -89,20 +106,20 @@ export function updateTables(document: string, tables: Readonly<Record<string, s
 
 /** Fail on stale generated content; exported to mutation-test the actual throw. */
 export function assertCurrent(document: string, next: string): void {
-  if (document !== next) throw new Error('Site architecture tables are stale; run node .github/scripts/architecture/site-architecture.mts --write');
+  if (document !== next) throw Object.assign(new Error('Site architecture tables are stale; run node .github/scripts/architecture/site-architecture.mts --write'), { staleTables: true });
 }
-/** Planned findings warn without a deadline; enforced and strict acceptance findings throw. */
+/** Planned plan findings warn without a deadline; enforced and strict acceptance findings throw. Stale generated tables always throw, in either status, so the committed tables cannot drift from the code. */
 export function planFinding(status: unknown, check: () => void, policy: { actions?: boolean } = {}): void {
   if (status !== 'planned' && status !== 'enforced') throw new TypeError('status: expected planned or enforced');
   try { check(); } catch (error) {
-    if (status !== 'planned') throw error;
+    if (status !== 'planned' || (error instanceof Error && 'staleTables' in error)) throw error;
     const message = `SITE_PLAN_WARNING: ${String(error)}. Fix: node .github/scripts/architecture/site-architecture.mts --write`;
     console.warn(message);
     if (policy.actions ?? process.env.GITHUB_ACTIONS === 'true') console.warn(`::warning file=docs/site-architecture.md::${message.replaceAll('%', '%25').replaceAll('\r', '%0D').replaceAll('\n', '%0A')}`);
   }
 }
 
-export async function checkSiteArchitecture(root: string, options: { readonly graph?: ImportGraph; readonly write?: boolean; readonly sequence?: boolean; readonly minimality?: boolean; readonly identity?: boolean; readonly accept?: boolean; readonly references?: boolean; readonly old?: readonly string[] } = {}): Promise<void> {
+export async function checkSiteArchitecture(root: string, options: { readonly graph?: ImportGraph; readonly write?: boolean; readonly sequence?: boolean; readonly minimality?: boolean; readonly identity?: boolean; readonly accept?: boolean; readonly references?: boolean; readonly tables?: boolean; readonly old?: readonly string[] } = {}): Promise<void> {
   const started = performance.now();
   const read = (name: string): unknown => JSON.parse(readFileSync(resolve(root, DATA, `${name}.json`), 'utf8'));
   const moves = read('moves'), tiers = read('tiers'), edits = read('edits');
@@ -114,6 +131,7 @@ export async function checkSiteArchitecture(root: string, options: { readonly gr
     } else console.log(JSON.stringify(inventory, null, 2));
     return;
   }
+  if (options.tables) { console.log(volatileTables(root, moves, await readImportDeclarations(root, { prefix: 'site/', graph: options.graph, checkAgainstScanner: true }), tiers, edits)); return; }
   const declarations = await readImportDeclarations(root, { prefix: 'site/', graph: options.graph, checkAgainstScanner: true });
   if (declarations.summary.scanner.unexplained) throw new Error('Site declarations disagree with the production scanner');
   const known = new Set(repositoryFiles(root));
@@ -139,22 +157,8 @@ export async function checkSiteArchitecture(root: string, options: { readonly gr
     validateInputs();
     const tables = renderTables(input);
     if (!Array.isArray(edits)) {
-      const proof = sequence(input);
-      tables.sequence = [row(['Phase', 'Step', 'File SCCs', 'Folder SCCs', 'Upward', 'Lateral', 'Result']), row(['---', '---', '---:', '---:', '---:', '---:', '---']),
-        ...proof.steps.map(step => row([step.phase, step.step, step.fileSccs, step.folderSccs, step.phase === 'S3' ? 'n/a' : step.upward, step.phase === 'S3' ? 'n/a' : step.lateral, step.failed ? 'FAIL' : 'pass']))].join('\n');
-      if (proof.failed) throw new Error('Sequence proof failed; run node .github/scripts/architecture/site-architecture.mts --sequence');
+      if (sequence(input).failed) throw new Error('Sequence proof failed; run node .github/scripts/architecture/site-architecture.mts --sequence');
       if (minimality(input).failed) throw new Error('Minimality proof failed; run node .github/scripts/architecture/site-architecture.mts --minimality');
-      const inventory = compactReferences(references(root, record(moves)));
-      const stored = readFileSync(resolve(root, DATA, 'references.json'), 'utf8');
-      if (!options.write) assertCurrent(stored, `${JSON.stringify(inventory, null, 2)}\n`);
-      const referenceData = record(inventory);
-      const counts = new Map<string, number>();
-      for (const value of list(referenceData.occurrences)) { const entry = record(value); const key = `${text(entry.scope)}: ${text(entry.classification)}`; counts.set(key, (counts.get(key) ?? 0) + 1); }
-      tables.references = [row(['Scope and class', 'Path/class pairs']), row(['---', '---:']), ...[...counts].sort().map(([key, count]) => row([key, count]))].join('\n');
-      tables['relative-reads'] = [row(['Test with depth-sensitive reads', 'Destination']), row(['---', '---']),
-        ...list(referenceData.relativeReads).map(value => { const entry = record(value); return row([text(entry.file), text(entry.destination)]); })].join('\n');
-      const refPath = resolve(root, DATA, 'references.json'), expected = `${JSON.stringify(inventory, null, 2)}\n`;
-      if (options.write) writeFileSync(refPath, expected);
     }
     const docPath = resolve(root, DOC), document = readFileSync(docPath, 'utf8'), next = updateTables(document, tables);
     if (options.write) {
@@ -162,17 +166,19 @@ export async function checkSiteArchitecture(root: string, options: { readonly gr
     } else assertCurrent(document, next);
     console.log(`SITE_PLAN_OK: all views clear; tables match (${((performance.now() - started) / 1000).toFixed(1)} s${options.graph ? ', shared graph' : ', including scan'}).`);
   });
+  if (!options.write && !options.accept && process.env.GITHUB_STEP_SUMMARY)
+    appendFileSync(process.env.GITHUB_STEP_SUMMARY, `## Site plan, derived counts\n\n${volatileTables(root, moves, declarations, tiers, edits)}\n`);
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
   try {
     const args = process.argv.slice(2);
-    const modes = ['--write', '--sequence', '--minimality', '--identity', '--references', '--accept'];
+    const modes = ['--write', '--sequence', '--minimality', '--identity', '--references', '--accept', '--tables'];
     const mode = args[0];
-    if (mode && !modes.includes(mode)) throw new Error('Usage: site-architecture.mts [--accept|--write|--sequence|--minimality|--identity|--references [--old paths...]]');
+    if (mode && !modes.includes(mode)) throw new Error('Usage: site-architecture.mts [--accept|--write|--tables|--sequence|--minimality|--identity|--references [--old paths...]]');
     const old = mode === '--references' && args[1] === '--old' ? args.slice(2) : [];
     if (args.length > 1 && !old.length) throw new Error('Unexpected arguments');
     await checkSiteArchitecture(resolve(import.meta.dirname, '../../..'), { write: mode === '--write', sequence: mode === '--sequence',
-      minimality: mode === '--minimality', identity: mode === '--identity', references: mode === '--references', old, accept: mode === '--accept' });
+      minimality: mode === '--minimality', identity: mode === '--identity', references: mode === '--references', tables: mode === '--tables', old, accept: mode === '--accept' });
   } catch (error) { console.error(error); process.exitCode = 1; }
 }

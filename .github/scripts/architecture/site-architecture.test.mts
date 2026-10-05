@@ -4,7 +4,7 @@ import { test } from 'node:test';
 import { readFileSync } from 'node:fs';
 import { spawnSync } from 'node:child_process';
 import ts from 'typescript';
-import { renderTables, updateTables } from './site-architecture.mts';
+import { renderNumbers, renderTables, updateTables } from './site-architecture.mts';
 const input = {
   declarations: { declarations: [{ from: 'site/a.mts', to: 'site/base/base.mts', kind: 'value' }], summary: { files: ['site/a.mts', 'site/base/base.mts'] } },
   moves: { 'site/a.mts': 'site/app/a.mts' },
@@ -12,8 +12,9 @@ const input = {
 };
 test('renders counts, before/after and exact marked tables; changed data changes the document', () => {
   const tables = renderTables(input);
-  assert.match(tables.folders!, /Application \| 1 \| 1/u);
-  assert.match(tables.numbers!, /\| all \| 0 \| 0 \| 1 \| 0 \| 0 \| 0 \| 0 \| 0 \|/u);
+  assert.match(tables.folders!, /Application \| 1; `a\.mts`/u);
+  assert.deepEqual(Object.keys(tables).sort(), ['changes', 'folders']);
+  assert.match(renderNumbers(input), /\| all \| 0 \| 0 \| 1 \| 0 \| 0 \| 0 \| 0 \| 0 \|/u);
   const document = Object.keys(tables).map(name => `<!-- generated:${name} -->\n<!-- /generated:${name} -->`).join('\n');
   const written = updateTables(document, tables);
   assert.notEqual(document, written); assert.equal(updateTables(written, tables), written);
@@ -21,6 +22,21 @@ test('renders counts, before/after and exact marked tables; changed data changes
     tiers: input.tiers.tiers.map(tier => ({ ...tier, name: `${tier.name} changed` })) } })), written);
   assert.throws(() => updateTables('', tables), /markers/u);
   assert.throws(() => updateTables(document + document, tables), /markers/u);
+});
+test('an ordinary new file and import leaves every committed table unchanged; only the on-demand numbers move', () => {
+  const before = renderTables(input);
+  const grown = { ...input, declarations: { declarations: [...input.declarations.declarations, { from: 'site/app/b.mts', to: 'site/base/base.mts', kind: 'value' }, { from: 'site/app/b.mts', to: 'site/a.mts', kind: 'lazy' }],
+    summary: { files: [...input.declarations.summary.files, 'site/app/b.mts'] } } };
+  assert.deepEqual(renderTables(grown), before);
+  const withoutMove = renderTables({ ...input, declarations: { ...input.declarations, declarations: [...input.declarations.declarations, { from: 'site/a.mts', to: 'site/base/base.mts', kind: 'type' }] } });
+  assert.deepEqual(withoutMove, before);
+  assert.notEqual(renderNumbers({ ...input, declarations: { ...input.declarations, declarations: [...input.declarations.declarations, { from: 'site/a.mts', to: 'site/base/base.mts', kind: 'type' }] } }), renderNumbers(input));
+});
+test('a structural change makes the committed folder and change tables differ', () => {
+  const before = renderTables(input);
+  assert.notEqual(renderTables({ ...input, tiers: { ...input.tiers, tiers: input.tiers.tiers.map(tier => ({ ...tier, name: `${tier.name} moved` })) } }).folders, before.folders);
+  const edited = renderTables({ ...input, edits: [{ op: 'add-file', path: 'site/app/c.mts', imports: [], id: 'x', change: 'New edit', note: 'Structural edit.' }] });
+  assert.notEqual(edited.changes, before.changes);
 });
 test('refuses to render a plan with cycles or uncovered root files', () => {
   assert.throws(() => renderTables({ ...input, moves: {} }), /fails projection/u);
@@ -48,6 +64,30 @@ test('planned findings only warn, enforced findings throw, and invalid statuses 
   } finally { console.warn = warn; }
 });
 
+test('stale generated tables fail even while the plan status is planned', async () => {
+  const { assertCurrent, planFinding } = await import('./site-architecture.mts');
+  const warn = console.warn; console.warn = () => {};
+  try {
+    assert.throws(() => planFinding('planned', () => assertCurrent('committed', 'generated'), { actions: false }), /tables are stale.*--write/u);
+    assert.throws(() => planFinding('enforced', () => assertCurrent('committed', 'generated')), /tables are stale/u);
+    assert.doesNotThrow(() => planFinding('planned', () => assertCurrent('same', 'same'), { actions: false }));
+  } finally { console.warn = warn; }
+});
+
+test('deleting the stale-table rethrow turns the planned stale-table assertion red', () => {
+  const source = readFileSync(new URL('./site-architecture.mts', import.meta.url), 'utf8');
+  const rule = " || (error instanceof Error && 'staleTables' in error)";
+  assert.ok(source.includes(rule));
+  const start = source.indexOf('export function assertCurrent('), end = source.indexOf('\nexport async function checkSiteArchitecture', start);
+  const original = source.slice(start, end);
+  const probe = (implementation: string) => {
+    const code = ts.transpileModule(implementation, { compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022 } }).outputText;
+    return spawnSync(process.execPath, ['-e', `${code}\nrequire('node:assert/strict').throws(() => planFinding('planned', () => assertCurrent('a', 'b'), { actions: false }), /stale/);`], { encoding: 'utf8' });
+  };
+  assert.equal(probe(original).status, 0);
+  assert.notEqual(probe(original.replace(rule, '')).status, 0);
+});
+
 test('planned findings always emit Actions warnings, without a count ceiling', async () => {
   const { planFinding } = await import('./site-architecture.mts');
   const warn = console.warn, messages: string[] = []; console.warn = value => { messages.push(String(value)); };
@@ -69,7 +109,7 @@ test('deleting the planned warn-only rule turns the same finding assertion red',
   const start = source.indexOf('export function planFinding('), end = source.indexOf('\nexport async function checkSiteArchitecture', start);
   assert.ok(start >= 0 && end > start);
   const original = source.slice(start, end);
-  const mutant = original.replace("if (status !== 'planned') throw error;", 'throw error;');
+  const mutant = original.replace("if (status !== 'planned' || (error instanceof Error && 'staleTables' in error)) throw error;", 'throw error;');
   assert.notEqual(mutant, original);
   const probe = (implementation: string) => {
     const code = ts.transpileModule(implementation, { compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022 } }).outputText;
