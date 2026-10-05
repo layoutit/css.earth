@@ -785,7 +785,7 @@ test('context alignment accepts observed Linux roundoff but rejects detached ori
 
 // Every malformed case parses the whole generated universe again, so the test's time grows with the number of bodies.
 test('accepts the generated Sun context and rejects detached or malformed prepared data', { timeout: 20000 }, async () => {
-  const source = JSON.parse(await readFile(fileURLToPath(new URL('../../src/objects/sun/prepared/world-context.json', import.meta.url)), 'utf8')) as Record<string, unknown>;
+  const source = JSON.parse(await readFile(fileURLToPath(new URL('../../src/objects/observable-universe/prepared/world-context.json', import.meta.url)), 'utf8')) as Record<string, unknown>;
   const [{ readCatalog }, { parseNavigationDistance }] = await Promise.all([import('@cssearth/objects/node'), import('@cssearth/objects')]);
   // Each entry's distance as `prepare:catalog` placed it in the registry.
   // Every body of the world: the scenes, the packages the host draws (galaxies, clusters, nebulae) and the objects seen from inside.
@@ -842,7 +842,7 @@ test('accepts the generated Sun context and rejects detached or malformed prepar
 });
 
 test('the Earth reference remains painted when its physical marker has faded at outer-system scale', async () => {
-  const context = parsePreparedWorldContext(JSON.parse(await readFile(new URL('../../src/objects/sun/prepared/world-context.json', import.meta.url), 'utf8')));
+  const context = parsePreparedWorldContext(JSON.parse(await readFile(new URL('../../src/objects/observable-universe/prepared/world-context.json', import.meta.url), 'utf8')));
   const document = new FakeDocument(), host = document.createElement('section'), before = document.createElement('i');
   host.clientWidth = 1280; host.clientHeight = 720; host.append(before);
   const layer = mountTestContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
@@ -864,7 +864,7 @@ test('the Earth reference remains painted when its physical marker has faded at 
 });
 
 test('prepared planetary systems retain identified moon paths and retire offscreen context annotations', async () => {
-  const context = parsePreparedWorldContext(JSON.parse(await readFile(new URL('../../src/objects/sun/prepared/world-context.json', import.meta.url), 'utf8')));
+  const context = parsePreparedWorldContext(JSON.parse(await readFile(new URL('../../src/objects/observable-universe/prepared/world-context.json', import.meta.url), 'utf8')));
   const document = new FakeDocument(), host = document.createElement('section'), before = document.createElement('i');
   host.clientWidth = 800; host.clientHeight = 600; host.append(before);
   const layer = mountTestContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
@@ -962,7 +962,7 @@ for (const orbitRenderer of ['bars', 'strokes'] as const) test(`${orbitRenderer}
 // Parsed once for both systems below. The code is the same for every host: a planet with many moons and a star with planets.
 let worldContext: Promise<ReturnType<typeof parsePreparedWorldContext>> | undefined;
 for (const planet of ['saturn', 'trappist-1']) test(`${planet} moon orbits stay complete across selection, hover, flight and zoom`, async () => {
-  worldContext ??= readFile(new URL('../../src/objects/sun/prepared/world-context.json', import.meta.url), 'utf8').then(text => parsePreparedWorldContext(JSON.parse(text)));
+  worldContext ??= readFile(new URL('../../src/objects/observable-universe/prepared/world-context.json', import.meta.url), 'utf8').then(text => parsePreparedWorldContext(JSON.parse(text)));
   // The system alone is mounted: mounting the whole universe once per system grew with systems times bodies, and ~1,000 exoplanet
   // hosts (batch 1, 2026-09-29) made this test run for most of an hour.
   const universe = await worldContext, systemIds = new Set([planet, ...required([universe.focus, ...universe.bodies].find(body => body.id === planet)!.systemView).memberIds]);
@@ -1008,7 +1008,7 @@ for (const planet of ['saturn', 'trappist-1']) test(`${planet} moon orbits stay 
 });
 
 test('initial Jupiter system framing makes the four large moons and their labels readable', async () => {
-  const context = parsePreparedWorldContext(JSON.parse(await readFile(new URL('../../src/objects/sun/prepared/world-context.json', import.meta.url), 'utf8')));
+  const context = parsePreparedWorldContext(JSON.parse(await readFile(new URL('../../src/objects/observable-universe/prepared/world-context.json', import.meta.url), 'utf8')));
   const document = new FakeDocument(), host = document.createElement('section'), before = document.createElement('i');
   host.clientWidth = 1280; host.clientHeight = 720; host.append(before);
   const viewport = { focalPixels: 1100, framingRadiusPixels: 200, principalOffsetPixels: [0, 0] as const,
@@ -2819,7 +2819,7 @@ test('CSSOM transform serialization cannot turn an unchanged publication into an
 // (2026-10-04), where a 30 s limit passed on one run and failed on the next.
 test('the orbit banks decode to the orbits of the full prepared file, each vertex within half an Int32 step', { timeout: 120_000 }, async () => {
   const objects = new URL('../../src/objects/', import.meta.url);
-  const full = parsePreparedWorldContext(JSON.parse(await readFile(new URL('sun/prepared/world-context.json', objects), 'utf8')));
+  const full = parsePreparedWorldContext(JSON.parse(await readFile(new URL('observable-universe/prepared/world-context.json', objects), 'utf8')));
   // Every object's file read, as Node reads the world (site/world-context-plan.mts): the summary and the index are the root object's.
   const index = JSON.parse(await readFile(new URL('observable-universe/prepared/world-index.json', objects), 'utf8')) as { files: string[] };
   const summary = await parseCompleteWorldContext(JSON.parse(await readFile(new URL('observable-universe/prepared/world.json', objects), 'utf8')),
@@ -2897,7 +2897,7 @@ test('a body circle holds a dot in the body color until its own disc outgrows th
 });
 
 test('inside the Solar System, moons without a circle stay inside their planet dot and other stars are dimmed', async () => {
-  const context = parsePreparedWorldContext(JSON.parse(await readFile(new URL('../../src/objects/sun/prepared/world-context.json', import.meta.url), 'utf8')));
+  const context = parsePreparedWorldContext(JSON.parse(await readFile(new URL('../../src/objects/observable-universe/prepared/world-context.json', import.meta.url), 'utf8')));
   const document = new FakeDocument(), host = document.createElement('section'), before = document.createElement('i');
   host.clientWidth = 1280; host.clientHeight = 720; host.append(before);
   const layer = mountTestContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
@@ -2924,7 +2924,7 @@ test('inside the Solar System, moons without a circle stay inside their planet d
 // The inertia gate (docs/performance/motion-freezes-membership.md): while the camera coasts, retained DOM changes only
 // transform and opacity, plus the orbit strokes' paint exception. Production shape: strokes, and a coast reports rotation.
 async function orbitEarth(options: { coast: boolean }) {
-  const context = parsePreparedWorldContext(JSON.parse(await readFile(new URL('../../src/objects/sun/prepared/world-context.json', import.meta.url), 'utf8')));
+  const context = parsePreparedWorldContext(JSON.parse(await readFile(new URL('../../src/objects/observable-universe/prepared/world-context.json', import.meta.url), 'utf8')));
   const document = new FakeDocument(), host = document.createElement('section'), before = document.createElement('i');
   host.clientWidth = 820; host.clientHeight = 1094; host.append(before);
   const layer = mountTestContext({ host: host as unknown as HTMLElement, before: before as unknown as Element, orbitRenderer: 'strokes',

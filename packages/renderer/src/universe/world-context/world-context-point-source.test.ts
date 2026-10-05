@@ -58,7 +58,7 @@ test('point source uses the prepared star photometry, nearest atlas color, and s
 });
 
 test('the prepared Sun landmark grows smoothly from the light-year handoff without changing its physical disc', async () => {
-  const source = JSON.parse(await readFile(new URL('../../../../../src/objects/sun/prepared/world-context.json', import.meta.url), 'utf8'));
+  const source = JSON.parse(await readFile(new URL('../../../../../src/objects/observable-universe/prepared/world-context.json', import.meta.url), 'utf8'));
   const solarPlan = parsePreparedWorldContext(source), au = 149597870700, lightYearM = 299792458 * 31557600;
   const sample = (distanceAu: number, context = solarPlan) => worldContextPointAppearance(context, field,
     { ...world(distanceAu * au), epochJdTt: context.frame.epochJdTt }, { ...viewport, focalPixels: 1280 * Math.sqrt(3) / 2 }, { selectedDetail: true })!;

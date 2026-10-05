@@ -21,3 +21,28 @@ test('catalogue hosts retain source order, and unknown hosts have no moons', () 
   assert.deepEqual(catalogueMoons('not-a-host'), []);
   assert.deepEqual(prepareBodyMoons('not-a-host'), []);
 });
+
+// Whole-catalogue parity uses the actual production registry and search order.
+test('preparation preserves the old serialized results, ordering and named-label eligibility', async () => {
+  const { default: input } = await import('./source/moon-catalogues.json', { with: { type: 'json' } });
+  const { SEARCH_OBJECTS } = await import('./search/search-objects.mts');
+  const { systemObjectId } = await import('./navigation/system-address.mts');
+  const { readMoonCatalogue } = await import('./moon-catalogue.mts');
+  for (const hostId of [...input.systems.map(system => system.id), ...new Set(SEARCH_OBJECTS.map(object => object.id)), 'not-a-host']) {
+    const available = SEARCH_OBJECTS.filter(object => object.classification === 'satellite' && object.parent === systemObjectId(hostId));
+    const source = input.systems.find(system => system.id === hostId);
+    const byId = new Map(available.map(object => [object.id, object]));
+    const old = source ? source.moons.map(moon => ({ id: moon.id, name: moon.name, object: byId.get(moon.id) }))
+      : available.map(object => ({ id: object.id, name: object.name, object }));
+    assert.equal(JSON.stringify(prepareBodyMoons(hostId)), JSON.stringify(old), hostId);
+    if (source) assert.deepEqual(source.moons.filter(moon => hasProperMoonName(moon)),
+      source.moons.filter(moon => moon.name !== moon.provisionalDesignation));
+  }
+  // The default production call must observe the shared cache, not another parse.
+  const cached = readMoonCatalogue('mars')!;
+  const original = cached.moons;
+  try {
+    cached.moons = [...original].reverse();
+    assert.deepEqual(prepareBodyMoons('mars').map(moon => moon.id), cached.moons.map(moon => moon.id));
+  } finally { cached.moons = original; }
+});

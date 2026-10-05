@@ -35,6 +35,13 @@
     },
     {
       "path": "preparation/navigation.json"
+    },
+    {
+      "path": "navigation/universe.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored definition of the world every page shares: its reference frame, epoch and orientation, the body at its origin, catalogue membership, the camera's range and the distances its layers fade over. The world step (pnpm prepare:world-context) reads it by rule; it is no recipe source of this object."
+      }
     }
   ]
 }

@@ -11,7 +11,7 @@ import { FEATURED_STAR_TIER, labelImportance } from '../../labels/universe-label
 import { unpackPreparedBinary } from '@cssearth/objects/node';
 
 const plan = parsePreparedWorldContext(JSON.parse(await readFile(
-  new URL('../../../../../src/objects/sun/prepared/world-context.json', import.meta.url), 'utf8')));
+  new URL('../../../../../src/objects/observable-universe/prepared/world-context.json', import.meta.url), 'utf8')));
 const freeze = <T>(value: T): T => {
   // Typed orbit arrays cannot be frozen; the test compares their contents instead.
   if (value && typeof value === 'object' && !ArrayBuffer.isView(value)) {
