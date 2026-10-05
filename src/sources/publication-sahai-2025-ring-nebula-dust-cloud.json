@@ -1,0 +1,34 @@
+{
+  "id": "publication-sahai-2025-ring-nebula-dust-cloud",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "JWST observations of the Ring Nebula (NGC 6720): III. A dusty disk around its Central Star",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2504.01188"
+    },
+    {
+      "type": "doi",
+      "value": "10.3847/1538-4357/adc91c"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/2504.01188",
+      "label": "Published reference"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/2504.01188",
+      "checkedOn": "2026-10-05",
+      "locator": "Abstract: the central star is surrounded by a dust cloud with a size of about 2600 au, of small amorphous silicate grains (radius about 0.01 µm) with a total mass of 1.9e-6 Earth masses. Sect. IV.1: the best-fit DUSTY model is a shell with an inner radius of 10.5 au and a density power-law exponent p of about -0.8, density increasing outwards with radius; the modelling is one-dimensional, and a disk is not excluded. Table 4: inner radius 0.013 arcsec, 10.5 au; outer radius 1.66 arcsec, 1310 au; exponent n = -0.8 for a density going as r^-n; optical depth at 0.55 µm 1.3e-8; dust mass 1.86e-6 Earth masses."
+    }
+  ],
+  "publisher": "Sahai et al. (2025), arXiv:2504.01188",
+  "publicationDate": "2025",
+  "relations": [],
+  "statements": []
+}

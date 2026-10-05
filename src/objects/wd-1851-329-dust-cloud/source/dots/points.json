@@ -1,0 +1,23 @@
+{
+  "schema": "cssearth-body-points-source@1",
+  "id": "dots",
+  "published": true,
+  "host": "wd-1851-329",
+  "source": "publication-sahai-2025-ring-nebula-dust-cloud",
+  "meaning": "Dots through the cloud of dust around the Ring Nebula's central star, spread as the shell model Sahai et al. (2025) fit to Webb's mid-infrared light of the star: from 10.5 to 1,310 au, the density rising outward as r^0.8. The cloud is far too thin to see in visible light, so the dots stand for dust an eye would not see. The position of a single dot is not a measurement: it comes from a seeded generator.",
+  "table": {
+    "path": "positions.csv.gz",
+    "origin": "https://arxiv.org/abs/2504.01188",
+    "generator": "packages/bake/authoring/dust-shell/positions.mts"
+  },
+  "frame": {
+    "input": "host-centred-icrf-km",
+    "output": "sun-icrf",
+    "epochJdTt": 2461286.5
+  },
+  "appearance": {
+    "colorCss": "#9a9a9a",
+    "radiusPx": 0.75,
+    "opacity": 1
+  }
+}
