@@ -1,13 +1,8 @@
 import { checkObjectTree, defineObjects } from '@cssearth/objects';
-import type { CatalogEntry as RegistryCatalogEntry, NavigableObject as RegistryNavigableObject, ObjectEntry as RegistryObjectEntry } from '@cssearth/objects';
 import { CATALOGUE_ENTRIES } from './prepared-catalogue.mjs';
 import { objectFromEntry } from './object-directory.mts';
-import type { SceneFactory } from './browser/browser-types.mts';
-
-/** The shared registry types, bound to the shell's scene loader and its abort signal. */
-export type ObjectEntry = RegistryObjectEntry<SceneFactory, AbortSignal>;
-export type CatalogEntry = RegistryCatalogEntry<SceneFactory, AbortSignal>;
-export type NavigableObject = RegistryNavigableObject<SceneFactory, AbortSignal>;
+import type { NavigableObject } from './object-entry-types.mts';
+export type { ObjectEntry, CatalogEntry, NavigableObject } from './object-entry-types.mts';
 
 /** The single application registry: every entry of the prepared catalogue (`pnpm prepare:catalog`), decoded as a page's
  * object directory decodes the one entry it loads. */
