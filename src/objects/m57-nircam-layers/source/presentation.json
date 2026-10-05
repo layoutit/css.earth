@@ -1,0 +1,57 @@
+{
+  "schema": "cssearth-volume-presentation-source@2",
+  "objectId": "m57-nircam-layers",
+  "name": "Ring Nebula",
+  "defaultDataset": "optical",
+  "bank": {
+    "path": "src/objects/m57-nircam-layers/prepared/image-layers.json"
+  },
+  "recipes": [
+    {
+      "id": "image-layer-recipe",
+      "path": "src/objects/m57-nircam-layers/source/recipe.json"
+    },
+    {
+      "id": "source-evidence",
+      "path": "src/objects/m57-nircam-layers/source/provenance.json"
+    }
+  ],
+  "sharedInputs": [],
+  "datasets": [
+    {
+      "id": "optical",
+      "label": "Webb · near infrared",
+      "title": "Ring Nebula in the near infrared",
+      "description": "ESA/Webb's picture of the Ring Nebula, NIRCam at 1.62, 2.12, 3.0 and 3.35 µm. Molecular hydrogen makes most of its light: the main ring's thousands of small knots and the arcs of the halo. It lies on the shell of molecular gas Kastner et al. (2025) measured around the ionised gas, an ellipsoid seen almost pole-on, and through that shell's polar opening on the ionised lobes (O'Dell et al. 2013).",
+      "summary": "Webb's picture on the nebula's molecular shell: a thin ellipsoid seen almost pole-on, open at its poles.",
+      "detail": "4097 × 4156 px",
+      "facts": [
+        {
+          "id": "bands",
+          "label": "Colors",
+          "value": "1.62, 2.12, 3.0 and 3.35 µm"
+        },
+        {
+          "id": "source-pixels",
+          "label": "Source pixels",
+          "value": "4097 × 4156"
+        },
+        {
+          "id": "coverage",
+          "label": "Field",
+          "value": "2.14 × 2.17 arcmin"
+        },
+        {
+          "id": "license",
+          "label": "License",
+          "value": "CC-BY-4.0"
+        }
+      ],
+      "input": "optical",
+      "preview": {
+        "path": "src/objects/m57-nircam-layers/source/source.jpg",
+        "url": "https://cdn.esawebb.org/archives/images/large/weic2320b.jpg"
+      }
+    }
+  ]
+}
