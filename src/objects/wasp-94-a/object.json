@@ -1,0 +1,141 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "wasp-94-a",
+  "parent": "wasp-94-a-system",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "WASP-94 A",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 1029636
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/wasp-94-a-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "WASP-94 A",
+      "classification": "star",
+      "color": "#fff7fd",
+      "distanceAu": 43425864.2,
+      "description": "WASP-94 A b crosses WASP-94 A as seen from Earth, which is how it was found.",
+      "systemName": "WASP-94 system",
+      "order": 5778,
+      "context": {
+        "order": 5775
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        3720623772194467000,
+        -3882089733927324700,
+        -3645513620204698600
+      ],
+      "presentationToReference": [
+        0.572720276913402,
+        -0.38828159869801654,
+        -0.7219618303793828,
+        -0.5975749346238792,
+        0.40513341263663627,
+        -0.6919328836488836,
+        -0.5611556663899089,
+        -0.8277102863187732,
+        -7.693145033235067e-7
+      ],
+      "orbitUpReference": [
+        0.38828159869801654,
+        -0.40513341263663627,
+        0.8277102863187732
+      ],
+      "metersPerUnit": 3321406.4516129033,
+      "bodyRadiusM": 1029636000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

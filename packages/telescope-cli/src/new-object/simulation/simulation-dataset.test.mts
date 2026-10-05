@@ -3,7 +3,8 @@
  * reference library's small NetCDF fixture standing in for the released file, served by range as Zenodo serves one. No dataset
  * is committed by this test. */
 import assert from 'node:assert/strict';
-import { cp, mkdtemp, readFile, rm, stat, writeFile } from 'node:fs/promises';
+import { execFileSync } from 'node:child_process';
+import { cp, mkdtemp, readdir, readFile, rm, stat, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import test from 'node:test';
@@ -11,7 +12,7 @@ import { loadNetcdfLonLatField } from '@cssearth/bake/objects/raster';
 import { WORKSPACE } from '@cssearth/telescope/node';
 import type { Archive } from '../archives/archives.mts';
 import { rebuildExistingDatasets } from '../planet-datasets.mts';
-import { installSimulationDataset, parseSimulationEntries, restoreSimulationField, roundedRange, simulationPaths, simulationRecipe, simulationRelease, simulationSurvey } from './simulation-dataset.mts';
+import { installSimulationDataset, parseSimulationEntries, restoreSimulationField, restoreSimulationMember, roundedRange, simulationPaths, simulationRecipe, simulationRelease, simulationSurvey } from './simulation-dataset.mts';
 
 const id = 'trappist-1f', o = `src/objects/${id}`;
 const fixture = resolve(WORKSPACE, 'packages/bake/src/objects/raster/netcdf/fixtures/field-cdf2.nc');
@@ -108,7 +109,7 @@ test('the dataset is labelled as a model with its scenario, its range is the fil
     'The map is the mean state the release holds. Nobody has detected an atmosphere on TRAPPIST-1f. JWST has neither shown nor excluded one (Glidden et al. 2025). Three other models of the same case differ from it. Gray caps: no released grid samples beyond 67.5° north or south. ' +
     'The false color runs from 300 to 340 K; it is not what an eye would see. With shadows on, the star\'s light darkens the night half.');
   assert.deepEqual(after('text.json').datasets['climate-model'], { title: 'ExoCAM simulation', detail: 'Published simulation',
-    summary: 'Surface temperature in a published model, in false color. It shows one scenario, not a measurement. Gray caps lack released samples.' });
+    summary: 'Surface temperature in a published model, in false color. One scenario, not a measurement; gray caps lack samples.' });
   // The two kept parts are declared with their ranges, exact bytes of the release, and restored by range.
   const [input, grid] = after('source/manifest.json').inputs.slice(-2), url = 'https://zenodo.org/records/5532765/files/field-cdf2.nc?download=1';
   assert.deepEqual([input.id, input.path, input.range, input.origin, input.productId, input.version, input.license, input.licenseEvidence, input.consumers],
@@ -160,6 +161,49 @@ test('two range requests bring the header with the coordinates and the selected 
     await refused({ coordinates: { longitude: 'lon', latitude: 'time' } }, /the latitude variable time is stored in records, not among the file's first bytes \(field coordinates\.latitude\)/u);
     await refused({ variable: 'TSD', select: {} }, /TSD varies along latd, lon; its grid is kept as one run of bytes, which needs its longitude and latitude last \(field variable\)/u);
   } finally { await rm(sourceRoot, { recursive: true, force: true }); }
+});
+
+test('a NetCDF-4 model file inside a ZIP release is kept whole, and its field can be read at one pressure', async () => {
+  // The reference library's NetCDF-4 fixture stands in for the model file, zipped as a release zips one.
+  const netcdf4 = resolve(fixture, '../field-nc4.nc'), member = { file: 'release.zip', member: 'run/field-nc4.nc', path: 'science/wolf-2022/field-nc4.nc', variable: 'T', select: { time: 0 },
+    isobar: { along: 'lev', pressure: 'P', pressureUnits: 'Pa', at: 150 }, quantity: 'Temperature at 1.5 millibar' };
+  const entry = entryOf(member);
+  assert.deepEqual(simulationRecipe(entry), { format: 'netcdf-lonlat-field', path: 'science/wolf-2022/field-nc4.nc', variable: 'T', coordinates: { longitude: 'lon', latitude: 'lat' }, select: { time: 0 },
+    isobar: { along: 'lev', pressure: 'P', pressureUnits: 'Pa', at: 150 }, sourceUnits: 'K', longitudeZeroAt: 180, coordinateToleranceDegrees: 0.005 });
+  assert.throws(() => entryOf({ ...member, file: 'field-nc4.nc' }), /member run\/field-nc4\.nc: the path of the model file inside field-nc4\.nc, which must then be a ZIP archive/u);
+  assert.throws(() => entryOf({ ...member, member: '../field-nc4.nc' }), /the path of the model file inside release\.zip/u);
+  assert.throws(() => entryOf({ isobar: member.isobar }), /isobar reads every level of the model, which the two kept parts of a classic release do not hold/u);
+  const scratch = await mkdtemp(resolve(tmpdir(), 'simulation-member-')), sourceRoot = resolve(scratch, 'source'), archives = resolve('.local/source-archives');
+  const cached = async () => new Set(await readdir(archives).catch(() => []));
+  const before = await cached();
+  try {
+    await cp(netcdf4, resolve(scratch, 'run/field-nc4.nc'));
+    execFileSync('zip', ['-q', 'release.zip', 'run/field-nc4.nc'], { cwd: scratch });
+    const zip = await readFile(resolve(scratch, 'release.zip')), asked: string[] = [];
+    const release = await simulationRelease(archive(await record(exocam => { exocam.files = [{ key: 'release.zip', size: zip.length }, ...exocam.files]; })), id, ['TRAPPIST-1f'], entry);
+    const files = new Map<string, string | Buffer>(await Promise.all(PACKAGE.map(async path => [`${o}/${path}`, await readFile(resolve(WORKSPACE, o, path), 'utf8')] as const)));
+    const zenodo = (async (url: unknown) => { asked.push(String(url)); return new Response(new Uint8Array(zip)); }) as typeof fetch;
+    // The archive is fetched once and the member taken out of it by the step the package then declares.
+    assert.equal(await restoreSimulationMember(files, id, sourceRoot, entry, release, zenodo), zip.length);
+    assert.deepEqual(asked, [release.fileUrl]);
+    assert.deepEqual(await readFile(resolve(sourceRoot, entry.path)), await readFile(netcdf4));
+    assert.equal(await restoreSimulationMember(files, id, sourceRoot, entry, release, (async () => { throw new Error('a file already there is kept'); }) as typeof fetch), 0);
+    const field = await loadNetcdfLonLatField(sourceRoot, simulationRecipe(entry), new Map());
+    // T = 1000 + 10 i + j on the first level and 100 K less on the second; 150 Pa lies between them where the first holds 1000 Pa.
+    assert.ok(Math.abs(field.sample(22.5 - 180, -67.5)! - (1000 - 100 * Math.log(0.15) / Math.log(0.1))) < 1e-9);
+    assert.throws(() => installSimulationDataset(files, id, 'TRAPPIST-1f', entry, release, field.report, RANGES), /a classic release is installed with the ranges of its two kept parts, a ZIP member without/u);
+    installSimulationDataset(files, id, 'TRAPPIST-1f', entry, release, field.report);
+    const after = (path: string) => JSON.parse(String(files.get(`${o}/${path}`))) as Record<string, any>, surface = after('source/preparation/raster.json').surfaces.at(-1);
+    assert.deepEqual([surface.source, surface.science.path, surface.science.field, surface.science.isobar], ['science/wolf-2022/field-nc4.nc', 'science/wolf-2022/field-nc4.nc', undefined, member.isobar]);
+    const input = after('source/manifest.json').inputs.at(-1);
+    assert.deepEqual([input.id, input.path, input.range, input.origin, input.productId], ['trappist-1f-climate-model-simulation', 'science/wolf-2022/field-nc4.nc', undefined, release.fileUrl, 'run/field-nc4.nc']);
+    assert.equal(input.acquisition, `Restored through source/preparation/acquisition.json from Zenodo record 10.5281/zenodo.5532765: the member run/field-nc4.nc of release.zip (${(zip.length / 1000).toFixed(1)} kB), unchanged and whole, because a NetCDF-4 file spreads its structure through itself. A model output, not an observation.`);
+    assert.equal(input.redistribution, 'Not redistributed in git; restored from Zenodo. CC BY 4.0 with attribution.');
+    assert.deepEqual(after('source/preparation/acquisition.json').operations.at(-1), { kind: 'zip-member', groups: ['restore', 'refresh'], path: 'science/wolf-2022/field-nc4.nc', url: release.fileUrl, member: 'run/field-nc4.nc' });
+  } finally {
+    for (const name of await cached()) if (!before.has(name)) await rm(resolve(archives, name), { force: true });
+    await rm(scratch, { recursive: true, force: true });
+  }
 });
 
 test('new-object --simulation writes the package of a body already in the tree, and refuses what the file does not hold', async () => {

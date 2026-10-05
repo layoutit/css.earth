@@ -15,11 +15,17 @@
  *
  * A model writes files of gigabytes, and one map is a few kilobytes of one. The release is never fetched whole: two range
  * requests bring its first bytes (the header and the coordinate variables) and the bytes of the selected grid, and the
- * package keeps those two parts as exact bytes of the release, each declared with its range in the source manifest. */
+ * package keeps those two parts as exact bytes of the release, each declared with its range in the source manifest.
+ *
+ * A release that is a ZIP archive holding a NetCDF-4 model file adds `member`, the file's path inside the archive. NetCDF-4
+ * spreads its structure through the file, so that file is kept whole, outside git, and restored by the package's own
+ * acquisition step. Such an entry may add `isobar` ({ along, pressure, pressureUnits, at }) to read the field at one
+ * pressure, as a paper draws a model whose levels are heights (netcdf-isobar.ts). */
 import { stat } from 'node:fs/promises';
 import { Readable } from 'node:stream';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { NetcdfHeaderIncomplete, parseClassicNetcdfHeader, valueRange, type ByteRange, type NetcdfHeader } from '@cssearth/bake/objects/raster';
+import { executeAcquisition, parseAcquisitionPlan } from '@cssearth/bake/objects/acquisition';
+import { NetcdfHeaderIncomplete, parseClassicNetcdfHeader, parseIsobar, valueRange, type ByteRange, type Isobar, type NetcdfHeader } from '@cssearth/bake/objects/raster';
 import { containedPath, publishPinnedSourceStream } from '@cssearth/bake/objects/sources';
 import { assertRangeResponse, rangeRequestHeader } from '@cssearth/objects/node';
 import type { Archive } from '../archives/archives.mts';
@@ -55,6 +61,10 @@ export interface SimulationEntry {
   readonly others?: { readonly text: string; readonly url: string };
   /** The legend's limits, when the paper's own color scale is used; the released range rounded outward otherwise. */
   readonly range?: readonly [number, number];
+  /** When `file` is a ZIP archive: the path inside it of the NetCDF-4 model file, which is kept whole at `path`. */
+  readonly member?: string;
+  /** The pressure the field is read at, for a model whose levels are not pressures; only with `member`. */
+  readonly isobar?: Isobar;
 }
 
 /** The inferno ramp WASP-103 b's hand-made climate simulation draws. */
@@ -67,7 +77,7 @@ export function simulationEntry(value: unknown, label: string): SimulationEntry 
     if (!words) throw new TypeError(`${label}.${key} is empty.`);
     return words;
   };
-  const known = new Set(['id', 'dataset', 'label', 'quantity', 'record', 'file', 'path', 'variable', 'coordinates', 'select', 'units', 'displayUnits', 'longitudeZeroAt', 'model', 'credit', 'url', 'scenario', 'time', 'detected', 'undetected', 'observed', 'others', 'range']);
+  const known = new Set(['id', 'dataset', 'label', 'quantity', 'record', 'file', 'path', 'variable', 'coordinates', 'select', 'units', 'displayUnits', 'longitudeZeroAt', 'model', 'credit', 'url', 'scenario', 'time', 'detected', 'undetected', 'observed', 'others', 'range', 'member', 'isobar']);
   const unknown = Object.keys(input).filter(key => !known.has(key));
   if (unknown.length) throw new TypeError(`${label}: unknown fields ${unknown.join(', ')}.`);
   const dataset = text('dataset'), record = text('record'), file = text('file'), path = text('path'), url = text('url');
@@ -82,6 +92,10 @@ export function simulationEntry(value: unknown, label: string): SimulationEntry 
   // The kept part is named after the variable and the selection, so both are plain names.
   for (const [field, name] of [['variable', variable], ...Object.keys(select).map(dimension => ['select', dimension])] as const)
     if (!/^[A-Za-z0-9_]+$/u.test(name)) throw new TypeError(`${label}.${field} ${name}: a NetCDF name of letters, digits and underscores.`);
+  const member = input.member === undefined ? undefined : text('member'), isobar = input.isobar === undefined ? undefined : parseIsobar(input.isobar, `${label}.isobar`);
+  if (member !== undefined && !(/\.zip$/u.test(file) && /^[A-Za-z0-9_][A-Za-z0-9._-]*(?:\/[A-Za-z0-9_][A-Za-z0-9._-]*)*$/u.test(member)))
+    throw new TypeError(`${label}.member ${member}: the path of the model file inside ${file}, which must then be a ZIP archive.`);
+  if (isobar && member === undefined) throw new TypeError(`${label}.isobar reads every level of the model, which the two kept parts of a classic release do not hold; it needs a NetCDF-4 file named by member.`);
   const scenario = text('scenario'), time = text('time');
   if (/[.!?]$/u.test(scenario)) throw new TypeError(`${label}.scenario is the rest of the sentence "The run assumes ..."; leave out its final period.`);
   if (/[.!?]$/u.test(time)) throw new TypeError(`${label}.time is the rest of the sentence "The map is ..."; leave out its final period.`);
@@ -102,7 +116,8 @@ export function simulationEntry(value: unknown, label: string): SimulationEntry 
   return { dataset, label: text('label'), quantity: text('quantity'), record, file, path, variable,
     coordinates: { longitude: requireString(coordinates.longitude, `${label}.coordinates.longitude`), latitude: requireString(coordinates.latitude, `${label}.coordinates.latitude`) },
     select: select as Record<string, number>, units: text('units'), ...(input.displayUnits === undefined ? {} : { displayUnits: text('displayUnits') }), longitudeZeroAt: requireFiniteNumber(input.longitudeZeroAt, `${label}.longitudeZeroAt`), model: text('model'), credit: text('credit'), url, scenario, time,
-    detected: input.detected, ...(input.undetected === undefined ? {} : { undetected: text('undetected') }), ...(observed ? { observed } : {}), ...(others ? { others } : {}), ...(range ? { range } : {}) };
+    detected: input.detected, ...(input.undetected === undefined ? {} : { undetected: text('undetected') }), ...(observed ? { observed } : {}), ...(others ? { others } : {}), ...(range ? { range } : {}),
+    ...(member === undefined ? {} : { member }), ...(isobar ? { isobar } : {}) };
 }
 
 /** `--simulation entries.json`: the entries for bodies already in the tree, by body id. */
@@ -202,10 +217,26 @@ export async function restoreSimulationField(sourceRoot: string, id: string, ent
   return { ...ranges, fetched };
 }
 
-/** What the field reader is asked for: the entry's statements about the file, its two kept parts, and the tolerance WASP-103 b's table uses. */
+/** The step that takes a ZIP release's model file whole into the package, as the package's acquisition plan declares it. */
+const memberStep = (entry: SimulationEntry, release: SimulationRelease) => ({ kind: 'zip-member', groups: ['restore', 'refresh'], path: entry.path, url: release.fileUrl, member: entry.member });
+
+/** The model file of a ZIP release in the package's source directory, taken by the acquisition step the package will declare
+ * for it, read with the plan and manifest already in `files`. A file already there is kept. Returns the bytes fetched. */
+export async function restoreSimulationMember(files: PackageFiles, id: string, sourceRoot: string, entry: SimulationEntry, release: SimulationRelease, fetcher: typeof fetch = fetch): Promise<number> {
+  const here = await stat(containedPath(sourceRoot, entry.path)).then(info => info.size > 0, (error: NodeJS.ErrnoException) => { if (error.code === 'ENOENT') return false; throw error; });
+  if (here) return 0;
+  const read = (path: string) => requireRecord(JSON.parse(String(files.get(`src/objects/${id}/source/${path}`))), path);
+  await executeAcquisition({ sourceRoot, group: 'restore', plan: parseAcquisitionPlan({ ...read('preparation/acquisition.json'), operations: [memberStep(entry, release)] }),
+    manifest: { schema: requireString(read('manifest.json').schema, 'manifest schema'), inputs: [{ path: entry.path, origin: release.fileUrl }], generatedIntermediates: [], documents: [] },
+    // The acquisition's own transport names this project to Zenodo; a test passes its own.
+    ...(fetcher === fetch ? {} : { transport: { fetch: (url: string, init?: RequestInit) => fetcher(url, init) } }) });
+  return release.bytes;
+}
+
+/** What the field reader is asked for: the entry's statements about the file, its two kept parts or its whole model file, and the tolerance WASP-103 b's table uses. */
 export function simulationRecipe(entry: SimulationEntry) {
-  const paths = simulationPaths(entry);
-  return { format: 'netcdf-lonlat-field', path: paths.head, field: paths.field, variable: entry.variable, coordinates: entry.coordinates, select: entry.select,
+  const paths = simulationPaths(entry), kept = entry.member === undefined ? { path: paths.head, field: paths.field } : { path: entry.path };
+  return { format: 'netcdf-lonlat-field', ...kept, variable: entry.variable, coordinates: entry.coordinates, select: entry.select, ...(entry.isobar ? { isobar: entry.isobar } : {}),
     sourceUnits: entry.units, longitudeZeroAt: entry.longitudeZeroAt, coordinateToleranceDegrees: 0.005 };
 }
 
@@ -220,11 +251,12 @@ export interface FieldReport { readonly minimum: number; readonly maximum: numbe
 
 /** Add the dataset to the package in `files`. It becomes the default where the default was one color or the neutral shape; a
  * default that is a measured map stays. Returns the range drawn and whether the default changed. */
-export function installSimulationDataset(files: PackageFiles, id: string, name: string, entry: SimulationEntry, release: SimulationRelease, field: FieldReport, ranges: SimulationRanges) {
+export function installSimulationDataset(files: PackageFiles, id: string, name: string, entry: SimulationEntry, release: SimulationRelease, field: FieldReport, ranges?: SimulationRanges) {
+  if ((ranges === undefined) !== (entry.member !== undefined)) throw new TypeError(`${id}, dataset ${entry.dataset}: a classic release is installed with the ranges of its two kept parts, a ZIP member without.`);
   const o = `src/objects/${id}`, s = `${o}/source`, read = (path: string) => requireRecord(JSON.parse(String(files.get(path))), path);
   const others = (list: unknown, where: string, key: string, value: string) => requireArray(list, where).filter(item => requireRecord(item, where)[key] !== value);
   const [minimum, maximum] = entry.range ?? roundedRange(field.minimum, field.maximum), number = (value: number) => String(Number(value.toPrecision(12)));
-  const units = entry.displayUnits ?? entry.units, paths = simulationPaths(entry);
+  const units = entry.displayUnits ?? entry.units, paths = simulationPaths(entry), readFrom = ranges ? paths.head : entry.path;
   if (field.minimum < minimum || field.maximum > maximum)
     throw new RangeError(`${id}, dataset ${entry.dataset}: ${entry.variable} in ${entry.file} runs from ${field.minimum} to ${field.maximum} ${entry.units}, outside the range ${minimum} to ${maximum} the entry gives (field range).`);
   const labels = [minimum, (minimum + maximum) / 2, maximum].map(number);
@@ -238,7 +270,7 @@ export function installSimulationDataset(files: PackageFiles, id: string, name: 
     outputLongitudeOrigin: 0, units, minimum, maximum, colors: INFERNO, labels,
     description: `Simulated ${quantity} from the ${entry.model} model, a published simulation and not a measurement.${caps}${gaps}`, title: `${entry.label} · ${entry.model} simulation`, sourceUrl: entry.url };
   raster.surfaces = [...others(raster.surfaces, `${id} raster surfaces`, 'id', entry.dataset),
-    { id: entry.dataset, output: `${id}-surface-{id}{suffix}.webp`, thumbnail: `${id}-dataset-{id}.webp`, source: paths.head, falseColor: true, science }];
+    { id: entry.dataset, output: `${id}-surface-{id}{suffix}.webp`, thumbnail: `${id}-dataset-{id}.webp`, source: readFrom, falseColor: true, science }];
   files.set(`${s}/preparation/raster.json`, json(raster));
   const descriptor = read(`${o}/object.json`), recipe = requireRecord(requireRecord(descriptor.properties, `${id} properties`).recipe, `${id} recipe`);
   const surface = requireRecord(requireArray(recipe.surfaces, `${id} recipe surfaces`)[0], `${id} recipe surface`);
@@ -256,7 +288,8 @@ export function installSimulationDataset(files: PackageFiles, id: string, name: 
   files.set(`${s}/content/object.json`, json(content));
   const text = read(`${o}/text.json`);
   text.datasets = { ...requireRecord(text.datasets ?? {}, `${id} text datasets`), [entry.dataset]: { title: `${entry.model} simulation`, detail: 'Published simulation',
-    summary: `${entry.quantity} in a published model, in false color. It shows one scenario, not a measurement.${short ? ' Gray caps lack released samples.' : ''}` } };
+    // Two sentences, the summary's budget, with or without the caps.
+    summary: `${entry.quantity} in a published model, in false color. ${short ? 'One scenario, not a measurement; gray caps lack samples.' : 'It shows one scenario, not a measurement.'}` } };
   files.set(`${o}/text.json`, json(text));
 
   // The two kept parts are exact bytes of the release, each one declared with its range and restored by one range request.
@@ -264,15 +297,20 @@ export function installSimulationDataset(files: PackageFiles, id: string, name: 
   const shared = { origin: release.fileUrl, productId: entry.file, version: release.doi, sourceUrl: release.recordUrl, credit: `${entry.credit}; ${entry.model} simulation`, displayCredit: `${entry.credit} · ${entry.model}`,
     license: release.license.name, licenseEvidence: [release.recordUrl, release.license.url] };
   const kept = { redistribution: `Exact bytes of the release; ${release.license.name} with attribution.`, consumers: [consumer] };
+  const title = `${entry.quantity} (${entry.variable}) of ${name} in the ${entry.model} simulation: ${release.title}`;
   manifest.inputs = [...requireArray(manifest.inputs, `${id} manifest inputs`).filter(item => ![input, grid].includes(String(requireRecord(item, `${id} manifest input`).id))),
-    { id: input, path: paths.field, range: ranges.field, ...shared, title: `${entry.quantity} (${entry.variable}) of ${name} in the ${entry.model} simulation: ${release.title}`,
+    ...(ranges ? [{ id: input, path: paths.field, range: ranges.field, ...shared, title,
       acquisition: `One range request to Zenodo record ${release.doi}: the bytes of ${entry.variable}${selection} in ${entry.file}, where the file's header puts them. The ${sizeText(release.bytes)} file is never fetched whole. A model output, not an observation.`, ...kept },
     { id: grid, path: paths.head, range: ranges.head, ...shared, title: `Header and coordinate variables of ${entry.file}, the ${entry.model} simulation of ${name}`,
-      acquisition: `One range request to Zenodo record ${release.doi}: the first ${ranges.head.length.toLocaleString('en-US')} bytes of ${entry.file}, its header and its coordinate variables.`, ...kept }];
+      acquisition: `One range request to Zenodo record ${release.doi}: the first ${ranges.head.length.toLocaleString('en-US')} bytes of ${entry.file}, its header and its coordinate variables.`, ...kept }]
+    // A NetCDF-4 model file out of a ZIP release: one input, the whole member, which git does not hold.
+    : [{ id: input, path: entry.path, ...shared, productId: entry.member, title,
+      acquisition: `Restored through source/preparation/acquisition.json from Zenodo record ${release.doi}: the member ${entry.member} of ${entry.file} (${sizeText(release.bytes)}), unchanged and whole, because a NetCDF-4 file spreads its structure through itself. A model output, not an observation.`,
+      redistribution: `Not redistributed in git; restored from Zenodo. ${release.license.name} with attribution.`, consumers: [consumer] }])];
   files.set(`${s}/manifest.json`, json(manifest));
-  const plan = read(`${s}/preparation/acquisition.json`);
-  plan.operations = [...requireArray(plan.operations, `${id} acquisition operations`).filter(item => ![paths.field, paths.head].includes(String(requireRecord(item, `${id} acquisition operation`).path))),
-    ...[paths.field, paths.head].map(target => ({ kind: 'download', groups: ['restore', 'refresh'], path: target, url: release.fileUrl }))];
+  const plan = read(`${s}/preparation/acquisition.json`), targets = ranges ? [paths.field, paths.head] : [entry.path];
+  plan.operations = [...requireArray(plan.operations, `${id} acquisition operations`).filter(item => !targets.includes(String(requireRecord(item, `${id} acquisition operation`).path))),
+    ...(ranges ? targets.map(target => ({ kind: 'download', groups: ['restore', 'refresh'], path: target, url: release.fileUrl })) : [memberStep(entry, release)])];
   files.set(`${s}/preparation/acquisition.json`, json(plan));
   bindInputs(files, id);
   // A body opens on the best dataset it has: the simulation takes the default from one color or the neutral shape, never from

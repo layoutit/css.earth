@@ -122,6 +122,67 @@ test('a grid that ends on its first longitude again is read without the repeat',
   await assert.rejects(decodeNetcdfLonLatField(source(7), recipe, 'lmd.nc'), /lmd\.nc: tsurf ends on its first longitude again, and row 0 holds 0 there and 7 360 degrees on/u);
 });
 
+/** The NetCDF-4 fixture's fields (fixtures/README.md): its longitudes start at 22.5, and T and P lie on three levels. */
+const netcdf4 = (overrides: Record<string, unknown> = {}) => field({ path: 'field-nc4.nc', ...overrides });
+const isobar = (at: number, overrides: Record<string, unknown> = {}) => netcdf4({ variable: 'T', select: { time: 0 },
+  isobar: { along: 'lev', pressure: 'P', pressureUnits: 'Pa', at, ...overrides } });
+
+test('a NetCDF-4 file is read through the same recipe', async () => {
+  const map = await loadNetcdfLonLatField(root, netcdf4());
+  for (let i = 0; i < 4; i++) for (let j = 0; j < 8; j++) assert.equal(map.sample(22.5 + j * 45, -67.5 + i * 45), surface(1, i, j), `node ${i},${j}`);
+  assert.deepEqual([map.report.format, map.report.width, map.report.height, map.report.longitudeRange, map.report.missing], ['netcdf-lonlat-field', 8, 4, [22.5, 337.5], 0]);
+  const packed = await loadNetcdfLonLatField(root, netcdf4({ variable: 'PACKED', select: {} }));
+  assert.equal(packed.sample(157.5, -22.5), 200 + 0.5 * 13);
+  assert.equal(packed.sample(112.5, -22.5), null, 'the cell at the fill value has no value');
+  await assert.rejects(loadNetcdfLonLatField(root, netcdf4({ variable: 'SQUEEZED', select: {} })), /variable SQUEEZED is stored chunked/u);
+  await assert.rejects(loadNetcdfLonLatField(root, netcdf4({ field: 'field.TS-time1.dat' })), /field-nc4\.nc is NetCDF-4, which is kept whole/u);
+});
+
+test('a field is read at one pressure, between the two levels either side of it', async () => {
+  // T[k, i, j] = 1000 - 100 k + 10 i + j at the first time, and P[k, j] = 1000 * 10^-k * (1 + j / 8) Pa: the pressure of 150 Pa
+  // lies between the first two levels in the columns j < 4, on the second level exactly at j = 4, and above it beyond.
+  const map = await loadNetcdfLonLatField(root, isobar(150));
+  for (let i = 0; i < 4; i++) for (let j = 0; j < 8; j++) {
+    const k = j < 4 ? 0 : 1, lower = 1000 * 10 ** -k * (1 + j / 8), share = Math.log(150 / lower) / Math.log(0.1);
+    const expected = 1000 - 100 * k + 10 * i + j - 100 * share, value = map.sample(22.5 + j * 45, -67.5 + i * 45)!;
+    assert.ok(Math.abs(value - expected) < 1e-9, `column ${i},${j}: ${value} for ${expected}`);
+  }
+  assert.equal(map.sample(22.5 + 4 * 45, -67.5), 904, 'on a level exactly, the value is that level\'s own');
+  assert.deepEqual([map.report.select, map.report.isobar, map.report.missing], [{ time: 0 }, { along: 'lev', pressure: 'P', pressureUnits: 'Pa', at: 150, levels: 3 }, 0]);
+  assert.equal((await loadNetcdfLonLatField(root, isobar(150, {}))).sample(22.5, -67.5), 1000 - 100 * Math.log(0.15) / Math.log(0.1));
+  // 1200 Pa is deeper than the first level of the columns j < 2, which hold 1000 and 1125 Pa there: they have no value.
+  const deep = await loadNetcdfLonLatField(root, isobar(1200));
+  assert.equal(deep.report.missing, 8);
+  assert.equal(deep.sample(22.5, -67.5), null, 'nothing is extrapolated below the first level');
+  assert.ok(Math.abs(deep.sample(22.5 + 2 * 45, -67.5)! - (1002 - 100 * Math.log(1200 / 1250) / Math.log(0.1))) < 1e-9);
+  await assert.rejects(loadNetcdfLonLatField(root, isobar(5000)), /every cell of T is a missing value/u);
+});
+
+test('an isobar the file cannot give is refused with the reason', async () => {
+  await assert.rejects(loadNetcdfLonLatField(root, isobar(0)), /isobar\.at must be a pressure above zero/u);
+  await assert.rejects(loadNetcdfLonLatField(root, isobar(150, { along: 'lat' })), /isobar\.along is lat, which is not a level dimension of T; it varies along time, lev, lat, lon/u);
+  await assert.rejects(loadNetcdfLonLatField(root, isobar(150, { along: 'height' })), /isobar\.along is height, which is not a level dimension of T/u);
+  await assert.rejects(loadNetcdfLonLatField(root, netcdf4({ variable: 'T', select: { time: 0, lev: 1 }, isobar: { along: 'lev', pressure: 'P', pressureUnits: 'Pa', at: 150 } })),
+    /select names lev, which T is not selected along/u);
+  await assert.rejects(loadNetcdfLonLatField(root, isobar(150, { pressure: 'PRES' })), /field-nc4\.nc has no pressure variable PRES/u);
+  await assert.rejects(loadNetcdfLonLatField(root, isobar(150, { pressure: 'TS' })), /TS varies along time, lat, lon, not on the grid of T \(time, lev, lat, lon\)/u);
+  await assert.rejects(loadNetcdfLonLatField(root, isobar(150, { pressureUnits: 'hPa' })), /isobar\.pressureUnits is "hPa", and the file gives P the units "Pa"/u);
+  // A model's pressure can waver near its top. Away from the pressure asked for that changes nothing; a column that passes
+  // it more than once has no one surface at that pressure.
+  const variable = (name: string, dimensions: string[], shape: number[], units: string): NetcdfVariable => ({ name, dimensions, shape, type: 'double', attributes: { units } });
+  const pressures = [100, 10, 1, 1.2, 0.9], temperatures = [500, 400, 300, 200, 100];
+  const source = { variables: new Map([['T', variable('T', ['level', 'lat', 'lon'], [5, 2, 2], 'K')], ['P', variable('P', ['level', 'lat', 'lon'], [5, 2, 2], 'Pa')],
+      ['lon', variable('lon', ['lon'], [2], 'degrees_east')], ['lat', variable('lat', ['lat'], [2], 'degrees_north')]]),
+    values: async (name: string) => name === 'lon' ? Float64Array.of(0, 180) : name === 'lat' ? Float64Array.of(-45, 45)
+      : Float64Array.from({ length: 20 }, (_, index) => (name === 'P' ? pressures : temperatures)[Math.floor(index / 4)]!),
+    slice: async () => { throw new Error('an isobar reads every level'); } };
+  const wavering = (at: number) => decodeNetcdfLonLatField(source, { variable: 'T', coordinates: { longitude: 'lon', latitude: 'lat' }, select: {}, isobar: { along: 'level', pressure: 'P', pressureUnits: 'Pa', at },
+    sourceUnits: 'K', longitudeZeroAt: 0, coordinateToleranceDegrees: 0.005 }, 'model.nc');
+  assert.equal((await wavering(10)).sample(0, 45), 400);
+  assert.ok(Math.abs((await wavering(31.622776601683793)).sample(0, 45)! - 450) < 1e-9, 'halfway between two levels in the logarithm of pressure');
+  await assert.rejects(wavering(1.1), /model\.nc: a column's pressure passes 1\.1 3 times along its levels, so no one surface there has that pressure/u);
+});
+
 test('the scientific raster interpreter reads the format', async () => {
   const map = await loadScienceSurface(root, { kind: 'terrestrial-scientific', id: 'surface-temperature', label: 'Surface temperature', consumer: 'fixture', units: 'K', minimum: 200, maximum: 340,
     colors: ['#000004', '#fcffa4'], ...field() });

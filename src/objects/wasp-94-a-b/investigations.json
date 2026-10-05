@@ -1,0 +1,75 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "wasp-94-a-b",
+  "entries": [
+    {
+      "id": "radius",
+      "subject": "Radius",
+      "status": "included",
+      "finding": "1.58 Jupiter radii from Stassun et al. 2017 (2017AJ....153..136S), via the NASA Exoplanet Archive.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract"
+      ]
+    },
+    {
+      "id": "mass",
+      "subject": "Mass",
+      "status": "included",
+      "finding": "0.5 Jupiter masses: Stassun et al. 2017, the mass the NASA Exoplanet Archive's composite table adopts (2017AJ....153..136S), via the NASA Exoplanet Archive (https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract).",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract"
+      ]
+    },
+    {
+      "id": "orbit",
+      "subject": "Orbit",
+      "status": "included",
+      "finding": "Kokori et al. 2023 (2023ApJS..265....4K), via the NASA Exoplanet Archive ps table (pl_refname KOKORI_ET_AL__2023): P 3.9502001 d; Stassun et al. 2017 (2017AJ....153..136S), via the NASA Exoplanet Archive ps table (pl_refname STASSUN_ET_AL__2017): a/R* 8.44; Stassun et al. 2017 (2017AJ....153..136S), via the NASA Exoplanet Archive ps table (pl_refname STASSUN_ET_AL__2017): inclination 88.7 degrees; Stassun et al. 2017 (2017AJ....153..136S), via the NASA Exoplanet Archive ps table (pl_refname STASSUN_ET_AL__2017): e 0; Kokori et al. 2023 (2023ApJS..265....4K), via the NASA Exoplanet Archive ps table (pl_refname KOKORI_ET_AL__2023): transit mid-time 2458300.64763 BJD, taken as BJD_TDB; with its period, the row that predicts 2026-01-01 best (1 sigma 1 min); Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)..",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+        "https://ui.adsabs.harvard.edu/abs/2023ApJS..265....4K/abstract"
+      ]
+    },
+    {
+      "id": "color",
+      "subject": "Color",
+      "status": "included",
+      "finding": "A black body at the 1,535 K dayside brightness temperature measured in secondary eclipse at 3.6 µm (Deming et al. 2023, dayside brightness temperature at 3.6 µm (uniform reanalysis of Spitzer's eclipses, CDS J/AJ/165/104 table 2)): #ff6f00. Chosen from the archive's emission rows by rule: 2 measured of 2 rows; the smallest relative uncertainty, then the longest wavelength. Reflected starlight is not included.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2023AJ....165..104D/abstract"
+      ]
+    },
+    {
+      "id": "climate-model",
+      "subject": "Climate model of Mukherjee et al. (2025)",
+      "status": "included",
+      "finding": "The Met Office Unified Model run the paper released (Zenodo 10.5281/zenodo.15085825, CC BY 4.0) is shown as its own dataset, labelled as a model: its temperature at 1 millibar, 955.9 to 1,650.8 K. The evening edge is 289 K hotter than the morning edge at the equator and 263 K hotter over all latitudes; the paper states about 300 K and about 265 K.",
+      "evidence": [
+        "https://arxiv.org/abs/2505.10910",
+        "https://zenodo.org/records/15085825"
+      ]
+    },
+    {
+      "id": "transit-limbs",
+      "subject": "Evening and morning edges from the JWST NIRISS transit of 11 to 12 October 2024",
+      "status": "unresolved",
+      "finding": "The released FIREFLy.csv gives each edge's transit depth in 59 wavelength bins from 0.87 to 2.80 micrometres: the morning edge is 0.1045 to 0.1094 of the star's radius and the evening edge 0.1022 to 0.1114. They are two spectra, not a map, and the page does not draw them. A drawing of them as two arcs on the day-night circle, as the paper's Figure 2 has them, was built on 5 October 2026 and left out.",
+      "evidence": [
+        "https://arxiv.org/abs/2505.10910",
+        "https://zenodo.org/records/15085825"
+      ],
+      "revisitWhen": "When the page gains a chart for a planet's two edge spectra."
+    },
+    {
+      "id": "cloud-map",
+      "subject": "The paper's night-side cloud map (its Figures 2 B and S19 B)",
+      "status": "unresolved",
+      "finding": "The paper maps cloud optical depth by running the VIRGA cloud model on the climate model's output. The release holds the climate model and no cloud field, so the map cannot be drawn from released numbers and is not shown.",
+      "evidence": [
+        "https://arxiv.org/abs/2505.10910",
+        "https://zenodo.org/records/15085825"
+      ],
+      "revisitWhen": "When the authors release the cloud optical depth map, or a later paper releases one for this planet."
+    }
+  ]
+}

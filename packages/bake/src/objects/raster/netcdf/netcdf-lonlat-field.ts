@@ -1,7 +1,8 @@
 /**
- * One scalar field on a model's own longitude/latitude grid, read from a classic NetCDF file a paper released
- * (classic-netcdf.ts): a climate simulation's surface temperature, for example. The recipe states everything the file does
- * not make certain, and each statement is checked against the file:
+ * One scalar field on a model's own longitude/latitude grid, read from a NetCDF file a paper released, classic
+ * (classic-netcdf.ts) or NetCDF-4 (hdf5-netcdf.ts), told apart by the file's first bytes: a climate simulation's surface
+ * temperature, for example. The recipe states everything the file does not make certain, and each statement is checked
+ * against the file:
  *
  *   { "format": "netcdf-lonlat-field", "path": "science/<paper>/<file>.nc", "variable": "TS",
  *     "coordinates": { "longitude": "lon", "latitude": "lat" }, "select": { "time": 0 },
@@ -13,8 +14,10 @@
  * - `sourceUnits` is the variable's `units` attribute, letter for letter.
  * - `longitudeZeroAt` is the grid longitude, in degrees east, that the body's zero meridian falls on. For a planet that keeps
  *   one face to its star this is the longitude where the model put the star overhead, as its paper states it.
+ * - `isobar`, when given, reads the field at one pressure instead of on one level (netcdf-isobar.ts). Its level dimension
+ *   is then not in `select`.
  *
- * A release too large to keep whole is kept as two of its byte ranges, exact bytes both, which the manifest declares:
+ * A classic release too large to keep whole is kept as two of its byte ranges, exact bytes both, which the manifest declares:
  *
  *   { ..., "path": "science/<paper>/<file>.head.dat", "field": "science/<paper>/<file>.<variable>-<selection>.dat" }
  *
@@ -22,17 +25,21 @@
  * grid. The header says where that selection lies in the release, and the manifest must declare that very range for `field`.
  * This needs the longitude and latitude to be the variable's last two dimensions, so the selection is one run of bytes.
  *
+ * A NetCDF-4 file keeps its structure throughout itself, not in a header, so it is kept whole.
+ *
  * The grid must go all the way around in even longitude steps. A grid that ends on its first longitude again, 360 degrees
  * on, must hold the same values in both columns; the column is read once. Latitude coverage ends at the released rows: nothing is
  * extrapolated to a pole. Values equal to the file's `_FillValue` or `missing_value` are cells without a value, and a sample
  * that would use one has none. `scale_factor` and `add_offset` are applied as the file states them. No averaging, fitting or
  * smoothing is done here: a time mean is whatever the release itself wrote.
  */
-import { readFile } from 'node:fs/promises';
+import { open, readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { periodicLonLatGrid } from '../lonlat/lonlat-grid.ts';
 import { openClassicNetcdf, storedValues, valueRange, type NetcdfAttribute, type NetcdfVariable } from './classic-netcdf.ts';
+import { openHdf5Netcdf } from './hdf5-netcdf.ts';
+import { isobarValue, parseIsobar } from './netcdf-isobar.ts';
 
 /** What the field reader needs of an opened file; a test passes its own. */
 export interface NetcdfSource {
@@ -71,23 +78,46 @@ export async function decodeNetcdfLonLatField(source: NetcdfSource, value: unkno
   const descending = latitude.nodes[0]! > latitude.nodes.at(-1)!, latitudes = descending ? [...latitude.nodes].reverse() : latitude.nodes;
   for (let i = 1; i < latitudes.length; i++) if (!(latitudes[i]! > latitudes[i - 1]!)) throw new TypeError(`${label}: latitudes must run one way from pole to pole.`);
 
+  const isobar = dataset.isobar === undefined ? undefined : parseIsobar(dataset.isobar, at('isobar')), along = isobar ? variable.dimensions.indexOf(isobar.along) : -1;
+  if (isobar && (along < 0 || along === longitude.position || along === latitude.position))
+    throw new TypeError(`${at('isobar.along')} is ${isobar.along}, which is not a level dimension of ${name}; it varies along ${variable.dimensions.join(', ')}.`);
   // Every other dimension takes the index the recipe states for it.
   const fixed = variable.dimensions.map((dimension, position) => {
-    if (position === longitude.position || position === latitude.position) return 0;
+    if (position === longitude.position || position === latitude.position || position === along) return 0;
     if (!(dimension in select)) throw new TypeError(`${at('select')} gives no index along ${dimension}; ${name} varies along ${variable.dimensions.join(', ')}.`);
     const index = requireFiniteNumber(select[dimension], at(`select.${dimension}`));
     if (!Number.isSafeInteger(index) || index < 0 || index >= variable.shape[position]!) throw new RangeError(`${at(`select.${dimension}`)} is ${index}; ${dimension} has ${variable.shape[position]} entries, counted from 0.`);
     return index;
   });
-  const unknown = Object.keys(select).filter(key => !variable.dimensions.includes(key) || key === variable.dimensions[longitude.position] || key === variable.dimensions[latitude.position]);
+  const unknown = Object.keys(select).filter(key => !variable.dimensions.includes(key) || key === variable.dimensions[longitude.position] || key === variable.dimensions[latitude.position] || key === isobar?.along);
   if (unknown.length) throw new TypeError(`${at('select')} names ${unknown.join(', ')}, which ${name} is not selected along.`);
 
+  const fill = [one(variable.attributes._FillValue), one(variable.attributes.missing_value)].filter((n): n is number => n !== undefined);
   const strides = variable.shape.map((_, position) => variable.shape.slice(position + 1).reduce((product, length) => product * length, 1));
   const base = fixed.reduce((sum, index, position) => sum + index * strides[position]!, 0), last = variable.shape.length - 1;
-  // With longitude and latitude last, the selected grid is one run of the variable's values, and only that run is read.
-  const run = Math.min(longitude.position, latitude.position) === last - 1 && Math.max(longitude.position, latitude.position) === last;
-  const stored = run ? await source.slice(name, base, longitude.nodes.length * latitude.nodes.length) : await source.values(name), origin = run ? 0 : base;
-  const cell = (row: number, column: number) => stored[origin + row * strides[latitude.position]! + column * strides[longitude.position]!]!;
+  const step = { row: strides[latitude.position]!, column: strides[longitude.position]! }, columns = longitude.nodes.length;
+  let cell: (row: number, column: number) => number;
+  if (isobar) {
+    const pressure = source.variables.get(isobar.pressure);
+    if (!pressure) throw new TypeError(`${label} has no pressure variable ${isobar.pressure}.`);
+    if (pressure.dimensions.join() !== variable.dimensions.join() || pressure.shape.join() !== variable.shape.join())
+      throw new TypeError(`${label}: ${isobar.pressure} varies along ${pressure.dimensions.join(', ')}, not on the grid of ${name} (${variable.dimensions.join(', ')}).`);
+    if (pressure.attributes.units !== isobar.pressureUnits)
+      throw new TypeError(`${at('isobar.pressureUnits')} is ${JSON.stringify(isobar.pressureUnits)}, and the file gives ${isobar.pressure} the units ${JSON.stringify(pressure.attributes.units ?? null)}.`);
+    const values = await source.values(name), pressures = await source.values(isobar.pressure), levels = variable.shape[along]!, rise = strides[along]!;
+    const absent = [one(pressure.attributes._FillValue), one(pressure.attributes.missing_value)];
+    const surface = Float64Array.from({ length: latitude.nodes.length * columns }, (_, index) => {
+      const origin = base + Math.floor(index / columns) * step.row + (index % columns) * step.column;
+      return isobarValue(levels, level => { const stored = pressures[origin + level * rise]!; return absent.includes(stored) ? NaN : stored; },
+        level => { const stored = values[origin + level * rise]!; return fill.includes(stored) ? NaN : stored; }, isobar.at, label);
+    });
+    cell = (row, column) => surface[row * columns + column]!;
+  } else {
+    // With longitude and latitude last, the selected grid is one run of the variable's values, and only that run is read.
+    const run = Math.min(longitude.position, latitude.position) === last - 1 && Math.max(longitude.position, latitude.position) === last;
+    const stored = run ? await source.slice(name, base, columns * latitude.nodes.length) : await source.values(name), origin = run ? 0 : base;
+    cell = (row, column) => stored[origin + row * step.row + column * step.column]!;
+  }
   // The LMD models write the first meridian twice, at both ends of the row: the repeat is checked and left out.
   if (Math.abs(longitude.nodes.at(-1)! - longitude.nodes[0]! - 360) <= 2 * tolerance) {
     const end = longitude.nodes.length - 1;
@@ -95,7 +125,6 @@ export async function decodeNetcdfLonLatField(source: NetcdfSource, value: unkno
       throw new TypeError(`${label}: ${name} ends on its first longitude again, and row ${row} holds ${cell(row, 0)} there and ${cell(row, end)} 360 degrees on.`);
     longitude.nodes.pop();
   }
-  const fill = [one(variable.attributes._FillValue), one(variable.attributes.missing_value)].filter((n): n is number => n !== undefined);
   const scale = one(variable.attributes.scale_factor) ?? 1, offset = one(variable.attributes.add_offset) ?? 0;
   const width = longitude.nodes.length, height = latitudes.length, grid = new Float64Array(width * height);
   let minimum = Infinity, maximum = -Infinity, missing = 0;
@@ -110,7 +139,8 @@ export async function decodeNetcdfLonLatField(source: NetcdfSource, value: unkno
   return {
     sample: (bodyLongitude: number, bodyLatitude: number) => sampler.sample(bodyLongitude + zeroAt, bodyLatitude),
     report: { format: 'netcdf-lonlat-field', variable: name, dimensions: variable.dimensions, select: Object.fromEntries(variable.dimensions.flatMap((dimension, position) =>
-        position === longitude.position || position === latitude.position ? [] : [[dimension, fixed[position]!]])), units: sourceUnits, longitudeZeroAt: zeroAt,
+        position === longitude.position || position === latitude.position || position === along ? [] : [[dimension, fixed[position]!]])),
+      ...(isobar ? { isobar: { ...isobar, levels: variable.shape[along]! } } : {}), units: sourceUnits, longitudeZeroAt: zeroAt,
       width, height, longitudeRange: [longitude.nodes[0], longitude.nodes.at(-1)], latitudeRange: [latitudes[0], latitudes.at(-1)], minimum, maximum, missing,
       polarCoverage: 'No extrapolation beyond the released latitude samples.' },
   };
@@ -134,10 +164,21 @@ const inside = (path: string) => {
   return path;
 };
 
+/** Whether a file opens with the HDF5 signature, the container of NetCDF-4. */
+async function isHdf5(path: string): Promise<boolean> {
+  const file = await open(path, 'r');
+  try { return (await file.read(Buffer.alloc(8), 0, 8, 0)).buffer.equals(Buffer.from([0x89, 0x48, 0x44, 0x46, 0x0d, 0x0a, 0x1a, 0x0a])); } finally { await file.close(); }
+}
+
 /** Read the field a recipe names. `declared` gives the byte ranges of a release kept in two parts; the manifest's are read when it is left out. */
 export async function loadNetcdfLonLatField(root: string, value: unknown, declared?: ReadonlyMap<string, ByteRange>) {
   const recipe = requireRecord(value), path = inside(requireString(recipe.path, 'path'));
   const kept = recipe.field === undefined ? undefined : inside(requireString(recipe.field, 'field'));
+  if (await isHdf5(resolve(root, path))) {
+    if (kept !== undefined) throw new TypeError(`${path} is NetCDF-4, which is kept whole: its structure is spread through the file, so no header and field stand apart.`);
+    const netcdf4 = await openHdf5Netcdf(resolve(root, path));
+    try { return await decodeNetcdfLonLatField(netcdf4, value, path); } finally { await netcdf4.close(); }
+  }
   const file = await openClassicNetcdf(resolve(root, path));
   try {
     if (kept === undefined) return await decodeNetcdfLonLatField(file, value, path);

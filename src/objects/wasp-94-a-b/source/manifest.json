@@ -1,0 +1,280 @@
+{
+  "schema": "cssearth-authoritative-sources@3",
+  "inputs": [
+    {
+      "id": "wasp-94-a-b-observational-measurements",
+      "path": "measurements.json",
+      "origin": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+      "credit": "Stassun et al. 2017",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "Transcribed published measurements with their sources",
+      "redistribution": "Factual parameter transcription only; no paper figures",
+      "consumers": [
+        "shape-model"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Measurements transcribed in this package with their sources; repinned when edited."
+      }
+    },
+    {
+      "id": "wasp-94-a-b-preparation-raster",
+      "path": "preparation/raster.json",
+      "origin": "Repository-authored raster recipe: the shared neutral gray on the reference sphere, lit by the host star",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "assets",
+        "datasets"
+      ]
+    },
+    {
+      "id": "wasp-94-a-b-preparation-geometry",
+      "path": "preparation/geometry.json",
+      "origin": "Repository-authored CSS geometry profile: 248-unit sphere, 16 x 32 leaves, lit material",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "scene",
+        "presentation"
+      ]
+    },
+    {
+      "id": "wasp-94-a-b-preparation-presentation",
+      "path": "preparation/presentation.json",
+      "origin": "Repository-authored presentation profile: composite mode",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "presentation"
+      ]
+    },
+    {
+      "id": "wasp-94-a-b-physical-solar-system-recipe",
+      "path": "presentation/solar-system.json",
+      "origin": "Repository-authored scene recipe: published radius, camera plan",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "scene"
+      ]
+    },
+    {
+      "id": "wasp-94-a-b-thermal-color",
+      "path": "photometry/thermal-color.json",
+      "origin": "https://ui.adsabs.harvard.edu/abs/2023AJ....165..104D/abstract",
+      "credit": "Deming et al. 2023, dayside brightness temperature at 3.6 µm (uniform reanalysis of Spitzer's eclipses, CDS J/AJ/165/104 table 2); CIE 1931 2° observer",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "Authored method record: names the archive row chosen and the color computation applied",
+      "redistribution": "Method record only",
+      "consumers": [
+        "assets",
+        "datasets"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored color recipe naming the cited brightness temperature; repinned when edited."
+      }
+    },
+    {
+      "id": "wasp-94-a-b-tess-sector-68",
+      "path": "photometry/tess/tess2023209231226-s0068-0000000092352620-0262-s_lc.fits",
+      "origin": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2023209231226-s0068-0000000092352620-0262-s_lc.fits",
+      "productId": "tess2023209231226-s0068-0000000092352620-0262-s_lc.fits",
+      "title": "TESS SPOC 2-minute light curve of WASP-94 A b's star (TIC 92352620), sector 68",
+      "sourceUrl": "https://mast.stsci.edu/portal/Mashup/Clients/Mast/Portal.html",
+      "credit": "NASA TESS mission; SPOC pipeline (Jenkins et al. 2016); obtained from MAST",
+      "displayCredit": "TESS · SPOC",
+      "license": "Public NASA mission data (MAST)",
+      "licenseEvidence": [
+        "https://archive.stsci.edu/publishing/data-use"
+      ],
+      "acquisition": "MAST download of the SPOC light-curve file, unchanged; restored through source/preparation/acquisition.json.",
+      "redistribution": "Not redistributed in git; restored from MAST.",
+      "consumers": [
+        "charts"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "mast-tess-spoc-tic-92352620",
+            "role": "material",
+            "evidence": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2023209231226-s0068-0000000092352620-0262-s_lc.fits"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wasp-94-a-b-tess-sector-95",
+      "path": "photometry/tess/tess2025206162959-s0095-0000000092352620-0292-s_lc.fits",
+      "origin": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2025206162959-s0095-0000000092352620-0292-s_lc.fits",
+      "productId": "tess2025206162959-s0095-0000000092352620-0292-s_lc.fits",
+      "title": "TESS SPOC 2-minute light curve of WASP-94 A b's star (TIC 92352620), sector 95",
+      "sourceUrl": "https://mast.stsci.edu/portal/Mashup/Clients/Mast/Portal.html",
+      "credit": "NASA TESS mission; SPOC pipeline (Jenkins et al. 2016); obtained from MAST",
+      "displayCredit": "TESS · SPOC",
+      "license": "Public NASA mission data (MAST)",
+      "licenseEvidence": [
+        "https://archive.stsci.edu/publishing/data-use"
+      ],
+      "acquisition": "MAST download of the SPOC light-curve file, unchanged; restored through source/preparation/acquisition.json.",
+      "redistribution": "Not redistributed in git; restored from MAST.",
+      "consumers": [
+        "charts"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "mast-tess-spoc-tic-92352620",
+            "role": "material",
+            "evidence": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2025206162959-s0095-0000000092352620-0292-s_lc.fits"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wasp-94-a-b-tess-sector-105",
+      "path": "photometry/tess/tess2026164183000-s0105-0000000092352620-0307-s_lc.fits",
+      "origin": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2026164183000-s0105-0000000092352620-0307-s_lc.fits",
+      "productId": "tess2026164183000-s0105-0000000092352620-0307-s_lc.fits",
+      "title": "TESS SPOC 2-minute light curve of WASP-94 A b's star (TIC 92352620), sector 105",
+      "sourceUrl": "https://mast.stsci.edu/portal/Mashup/Clients/Mast/Portal.html",
+      "credit": "NASA TESS mission; SPOC pipeline (Jenkins et al. 2016); obtained from MAST",
+      "displayCredit": "TESS · SPOC",
+      "license": "Public NASA mission data (MAST)",
+      "licenseEvidence": [
+        "https://archive.stsci.edu/publishing/data-use"
+      ],
+      "acquisition": "MAST download of the SPOC light-curve file, unchanged; restored through source/preparation/acquisition.json.",
+      "redistribution": "Not redistributed in git; restored from MAST.",
+      "consumers": [
+        "charts"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "mast-tess-spoc-tic-92352620",
+            "role": "material",
+            "evidence": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2026164183000-s0105-0000000092352620-0307-s_lc.fits"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wasp-94-a-b-climate-model-simulation",
+      "path": "science/mukherjee-2025/WASP-94Ab_GCM.nc",
+      "origin": "https://zenodo.org/records/15085825/files/GCM_products.zip?download=1",
+      "productId": "GCM_products/WASP-94Ab_GCM.nc",
+      "version": "10.5281/zenodo.15085825",
+      "sourceUrl": "https://zenodo.org/records/15085825",
+      "credit": "Mukherjee et al. (2025); Met Office UM simulation",
+      "displayCredit": "Mukherjee et al. (2025) · Met Office UM",
+      "license": "CC BY 4.0",
+      "licenseEvidence": [
+        "https://zenodo.org/records/15085825",
+        "https://creativecommons.org/licenses/by/4.0/"
+      ],
+      "title": "Temperature at 1 millibar (air_temperature) of WASP-94 A b in the Met Office UM simulation: Cloudy Mornings and Clear Evenings on a Giant Extrasolar World",
+      "acquisition": "Restored through source/preparation/acquisition.json from Zenodo record 10.5281/zenodo.15085825: the member GCM_products/WASP-94Ab_GCM.nc of GCM_products.zip (546.1 MB), unchanged and whole, because a NetCDF-4 file spreads its structure through itself. A model output, not an observation.",
+      "redistribution": "Not redistributed in git; restored from Zenodo. CC BY 4.0 with attribution.",
+      "consumers": [
+        "climate-model-simulation"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-wasp-94-a-b-climate-model-simulation",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "dataset-color-context-marker",
+      "path": "presentation/context.png",
+      "origin": "https://ui.adsabs.harvard.edu/abs/2017AJ....153..136S/abstract",
+      "credit": "The default dataset's color as a disc; rendered by packages/telescope-cli/src/source-authoring/context-markers.mts",
+      "license": "Project-authored display derivative.",
+      "consumers": [
+        "navigation"
+      ],
+      "recipe": {
+        "generator": "packages/telescope-cli/src/source-authoring/context-markers.mts",
+        "inputs": [
+          "wasp-94-a-b-observational-measurements",
+          "wasp-94-a-b-preparation-raster",
+          "wasp-94-a-b-thermal-color",
+          "wasp-94-a-b-climate-model-simulation"
+        ]
+      },
+      "generator": "packages/telescope-cli/src/source-authoring/context-markers.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "The default dataset drawn as a disc; `context-markers.mts --check` recomputes it."
+      }
+    }
+  ],
+  "documents": [
+    {
+      "path": "content/object.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored factsheet, dataset recipe and legend."
+      }
+    },
+    {
+      "path": "preparation/acquisition.json"
+    },
+    {
+      "path": "preparation/navigation.json"
+    },
+    {
+      "path": "preparation/rotation.json"
+    },
+    {
+      "path": "preparation/new-object.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "The spec telescope new-object generated this package from, with the order it was given; `telescope new-object --refresh` regenerates from it."
+      }
+    },
+    {
+      "path": "content/charts.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Prepared chart recipes: the orbits drawn from the hosted-orbit records, and archive spectra with their units, errors and source paths."
+      }
+    }
+  ]
+}

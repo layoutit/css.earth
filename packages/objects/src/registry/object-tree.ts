@@ -79,6 +79,9 @@ export function checkBoundStars(objects: readonly TreeNode[], bonds: Iterable<re
     if (!other) throw new TypeError(`${where}: ${star} is bound to ${host}, which is no object of the registry.`);
     // The object the star, with any system it hosts, is inside.
     const inside = own.parent === systemObjectId(star) ? byId.get(own.parent)?.parent : own.parent;
+    // A new pair before its first bake: the bound star already names the host's system, which the systems step has not
+    // written yet, and the host still sits where that system will (site/build/prepare/system-packages.mts moves it in).
+    if (inside === systemObjectId(host) && !byId.has(inside)) continue;
     if (inside !== other.parent) {
       throw new TypeError(`${where}: ${star} is bound to ${host}, so it is inside what ${host} is inside ("${other.parent ?? 'nothing'}"); its parent is "${own.parent ?? 'none'}".`);
     }

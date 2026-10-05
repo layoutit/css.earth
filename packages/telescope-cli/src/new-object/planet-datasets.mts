@@ -25,7 +25,7 @@ import { HOSTED_PLANET_STYLESHEET } from './new-hosted-planet.mts';
 import { installPhaseCurveDataset, type PhaseCurveEntry } from './phase-curve-dataset.mts';
 import { daysideLine, installDaysideDataset } from './thermal/dayside-dataset.mts';
 import { WORKSPACE } from '@cssearth/telescope/node';
-import { installSimulationDataset, restoreSimulationField, simulationPaths, simulationRecipe, simulationRelease, type SimulationEntry } from './simulation/simulation-dataset.mts';
+import { installSimulationDataset, restoreSimulationField, restoreSimulationMember, simulationPaths, simulationRecipe, simulationRelease, type SimulationEntry } from './simulation/simulation-dataset.mts';
 import { loadNetcdfLonLatField } from '@cssearth/bake/objects/raster';
 
 export const EMISSION_COLUMNS = 'plntname,centralwavelng,bandwidth,especlipdep,especlipdeperr1,especlipdeperr2,especlipdeplim,espbritemp,espbritemperr1,espbritemperr2,espbritemplim,facility,instrument,plntreflink';
@@ -365,9 +365,11 @@ export async function rebuildExistingDatasets(root: string, ids: readonly string
       let promoted = false;
       for (const entry of simulations.get(id) ?? []) {
         const release = await simulationRelease(archive, id, names, entry);
-        const ranges = await restoreSimulationField(resolve(o, 'source'), id, entry, release, fetcher), paths = simulationPaths(entry);
-        if (ranges.fetched) progress(`${id}: ${ranges.fetched.toLocaleString('en-US')} bytes of ${entry.file} fetched from Zenodo record ${release.doi}`);
-        const field = await loadNetcdfLonLatField(resolve(o, 'source'), simulationRecipe(entry), new Map([[paths.head, ranges.head], [paths.field, ranges.field]]));
+        // A classic release is kept as two of its byte ranges; a NetCDF-4 file inside a ZIP release is kept whole.
+        const ranges = entry.member === undefined ? await restoreSimulationField(resolve(o, 'source'), id, entry, release, fetcher) : undefined, paths = simulationPaths(entry);
+        const fetched = ranges ? ranges.fetched : await restoreSimulationMember(files, id, resolve(o, 'source'), entry, release, fetcher);
+        if (fetched) progress(`${id}: ${fetched.toLocaleString('en-US')} bytes of ${entry.file} fetched from Zenodo record ${release.doi}`);
+        const field = await loadNetcdfLonLatField(resolve(o, 'source'), simulationRecipe(entry), new Map(ranges ? [[paths.head, ranges.head], [paths.field, ranges.field]] : []));
         const installed = installSimulationDataset(files, id, descriptor.displayName, entry, release, field.report, ranges);
         promoted ||= installed.promoted;
         lines.push(`${id}: ${entry.dataset} dataset from the ${entry.model} simulation of ${entry.credit}, ${installed.minimum}-${installed.maximum} ${entry.displayUnits ?? entry.units}, ${release.license.name}${installed.promoted ? '; the page now opens on it' : ''}`); progress(lines.at(-1)!);

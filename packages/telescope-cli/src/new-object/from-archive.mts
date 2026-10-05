@@ -106,12 +106,13 @@ export async function archiveSpec(archive: Archive, hostname: string, universe: 
     if (measured) note.push(`${name}: found by ${method}; its whole orbit is ${defaultRow.label}'s fit${defaultRow.isDefault ? ', the archive\'s default' : ''}${modelSize ? ", and its size the archive's model from its mass" : ''}`);
     const massText = assembled.mass.unmeasured ? 'no pl_bmassj in pscomppars' : `pl_bmassj ${mass}`;
     // The factsheet shows the planet's size, mass and year; the text says what it cannot: how and when the planet was found, and
-    // how many planets its star has (the archive's sy_pnum, planets found by any method).
+    // how many planets its star has: the planets the archive lists under this host, found by any method. The archive's
+    // sy_pnum counts the whole system, so in a pair of stars it also counts the other star's planets (WASP-94 B b).
     // A facility the archive names with its abbreviation reads by it (TESS); "Multiple Observatories" names none.
     const facility = row.facility === undefined || /^multiple observatories$/iu.test(row.facility) ? undefined : /\(([^()]+)\)$/u.exec(row.facility)?.[1] ?? row.facility;
-    const discovered = `${row.year ? ` in ${row.year}` : ''}${facility ? ` by ${facility}` : ''}`, count = row.systemPlanets ?? 0;
+    const discovered = `${row.year ? ` in ${row.year}` : ''}${facility ? ` by ${facility}` : ''}`, system = row.systemPlanets ?? 0, count = system ? rows.length : 0;
     const family = count > 1 ? `It is one of ${count} planets known around ${hostname}.` : count === 1 ? `It is the only planet known around ${hostname}.` : '';
-    const facts = `disc_year ${row.year ?? 'none'}, disc_facility ${row.facility ?? 'none'}, sy_pnum ${count || 'none'}`;
+    const facts = `disc_year ${row.year ?? 'none'}, disc_facility ${row.facility ?? 'none'}, sy_pnum ${system || 'none'}${system > count ? `, ${count} of them with hostname ${hostname}` : ''}`;
     const text = measured ? {
       card: fit(110, `${name} was found${discovered} by ${method}; it does not cross its star.`, `${name} was found by ${method}; it does not cross its star.`),
       introduction: fit(180, `${family} Its orbit, tilt included, follows ${defaultRow.label}'s fit${modelSize ? ", and its size is the archive's model from its mass" : ''}.`.trim(),

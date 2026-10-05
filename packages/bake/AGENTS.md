@@ -164,7 +164,7 @@ cycle. Share anything else through `@cssearth/core` or another package. Prepared
     sphere is written with. The solar geometry is generated into the checkout (`src/platform/solar-geometry.mts`) after the packages build,
     so callers pass `SolarGeometry` or use `loadSolarGeometry` from `@cssearth/bake/objects/scene` to load and validate the generated file. The prepared sky and Sun contracts belong to `@cssearth/objects`; their authored standards and preparers
     belong to `presentation`, which the scene imports as a lower topic.
-  - `objects/raster`: scientific surfaces from PDS, ISIS, FITS, GeoTIFF, VTK, NumPy, HEALPix, Tecplot and classic NetCDF products,
+  - `objects/raster`: scientific surfaces from PDS, ISIS, FITS, GeoTIFF, VTK, NumPy, HEALPix, Tecplot, classic NetCDF and NetCDF-4 products,
     categorical geology and symbols, exoplanet eclipse and published phase-curve maps, observed color rasters and their
     photometric composition, a planet's whole-disc color record and the band-ratio tie to it, the source records they read, the WISE atlas mosaic grid, FITS binary tables (OIFITS and archive
     tables) and a star's limb darkening fitted to TESS transits. It imports `objects/scene`,
