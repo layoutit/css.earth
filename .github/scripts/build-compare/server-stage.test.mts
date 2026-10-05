@@ -56,6 +56,7 @@ async function dryRun(mode: 'report' | 'pure-move' | 'semantic', broken = false)
       assert.ok(!args.includes('astro build'));
       if (stage.includes('-bundle-')) {
         assert.match(env.NODE_OPTIONS ?? '', /offline\.mts/u);
+        await writeFile(join(cwd, 'dist/staged-by-bundler.txt'), 'L2 only');
         assert.match(args.at(-1) ?? '', /node moved\/(netlify|worker)\.mts$/u);
         assert.ok(!(args.at(-1) ?? '').includes('--noindex'));
       }
@@ -85,6 +86,17 @@ async function dryRun(mode: 'report' | 'pure-move' | 'semantic', broken = false)
     assert.ok((await readFile(join(out, 'server-answers/artifacts/preview-diff.json'), 'utf8')).includes('cache-control'));
     assert.ok(report.retainedBytes > 0);
     for (const side of ['base', 'head']) assert.equal(await readFile(join(out, side, 'dist/catalogue/index.json'), 'utf8'), '{"entries":[]}');
+    await assert.rejects(readFile(join(out, 'head/dist/staged-by-bundler.txt')), /ENOENT/u);
+    if (!broken) {
+      const before = await readFile(join(out, 'server-answers.json'));
+      calls.length = 0;
+      const cached = await serverStage(base, head, out, mode, 'https://earth-assets.lowpoly.cc', run, { cachedBase: true });
+      assert.equal(cached.exitCode, report.exitCode);
+      assert.ok(!calls.some(call => call.startsWith('base-')), 'no base bundles, recordings or checks on a cache hit');
+      assert.equal(calls.filter(call => call.startsWith('head-record-')).length, 3);
+      assert.deepEqual(await readFile(join(out, 'server-answers.json')), before, 'cached and fresh L2 reports are byte-identical');
+    }
+
   } finally { await rm(root, { recursive: true, force: true }); }
 }
 test('offline dry run reuses both outputs, resolves moved bundles, checks six recordings and retains small diffs', async () => { await dryRun('semantic'); });

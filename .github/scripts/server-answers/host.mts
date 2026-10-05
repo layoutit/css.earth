@@ -1,5 +1,6 @@
 /** Child host: real preview/edge/bundled handlers, isolated function packages, and deterministic CDN stand-ins. */
 import fs from 'node:fs';
+import { hostPort } from './host-port.mts';
 import { assetOrigin, fetchRoute } from './asset-origin.mts';
 import promises from 'node:fs/promises';
 import { syncBuiltinESMExports, registerHooks } from 'node:module';
@@ -49,7 +50,7 @@ let origin = 'https://answers.invalid';
 const originalFetch = globalThis.fetch;
 if (target === 'preview') {
   const { previewSite } = await import(pathToFileURL(await previewEntry(root)).href);
-  const server = await previewSite({ root, outDir: dist, port: 0 });
+  const server = await previewSite({ root, outDir: dist, port: hostPort(target ?? '') });
   preview = server;
   const address = server.httpServer.address();
   if (!address || typeof address === 'string') throw new Error('No preview port');
