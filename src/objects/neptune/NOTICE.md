@@ -5,6 +5,9 @@
 - Neptune true-color calibration reference: Patrick Irwin, University of
   Oxford, and NASA; distributed by the Royal Astronomical Society under
   CC BY 4.0.
+- Voyager 2 narrow-angle frames: NASA/JPL Voyager 2 Imaging Science Subsystem,
+  calibrated and archived by the NASA Planetary Data System Ring-Moon Systems
+  Node, SETI Institute. The 1989 map is assembled from them in this repository.
 - Neptune facts and Planetary Spectrum Generator products: NASA.
 - Satellite tables: NASA/JPL Solar System Dynamics.
 - Ring table: NASA Planetary Data System Rings Node, SETI Institute.

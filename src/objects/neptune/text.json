@@ -193,6 +193,20 @@
           "locator": "Rotation 2025b; FITS DATE-OBS"
         }
       ]
+    },
+    "voyager-1989": {
+      "title": "Voyager 2, August 1989",
+      "detail": "Orange / green / blue",
+      "summary": "Voyager 2’s approach frames as one map, Great Dark Spot included. The far north was in darkness.",
+      "sources": [
+        {
+          "catalogueId": "source-neptune-voyager-iss-geomed",
+          "url": "https://pds-rings.seti.org/voyager/iss/",
+          "label": "PDS Ring-Moon Systems Node · Voyager 2 ISS",
+          "checked": "2026-10-05",
+          "locator": "GEOMED frames C1116026 to C1126448, 17 to 20 August 1989"
+        }
+      ]
     }
   }
 }

@@ -148,6 +148,36 @@
         "https://archive.stsci.edu/hlsp/opal/opal-neptune-cycle-22",
         "https://archive.stsci.edu/hlsp/opal/opal-neptune-cycle-23"
       ]
+    },
+    {
+      "id": "voyager-1989-map",
+      "subject": "Voyager 2 approach frames as a color map",
+      "status": "included",
+      "finding": "Built from 89 PDS GEOMED narrow-angle frames: detail from 15 green frames of 1989-08-20 at 48 to 59 km per pixel, color from 59 orange, green and blue frames of 17 and 18 August. Frames are placed by the limb of the flattened planet (residual median 0.45 px, largest 0.98 px), carried to one moment by cloud drift measured between frame pairs (2.67 to 2.83 degrees per hour westward from 3 N to 27 S) and the Sromovsky et al. 1993 wind fit elsewhere, and tied in mean color to the Irwin et al. 2024 reconstruction. Every longitude is seen from 34.8 N to the south pole.",
+      "evidence": [
+        "https://pds-rings.seti.org/voyager/iss/",
+        "https://arxiv.org/abs/1312.2676",
+        "README.md#voyager-2-august-1989"
+      ]
+    },
+    {
+      "id": "voyager-1989-08-21-frames",
+      "subject": "Voyager 2 frames of 21 August 1989",
+      "status": "deferred",
+      "finding": "The 98 green and clear narrow-angle frames of 1989-08-21 are 37 to 48 km per pixel, finer than the map’s 48 to 59. The planet no longer fits a frame: 50 of them show no limb and 12 an arc too short to fit, so 62 cannot be placed by the limb. The 36 that can were not enough to cover the planet.",
+      "revisitWhen": "Frames without a limb are placed by registering them against the map made from the frames that have one.",
+      "evidence": [
+        "https://opus.pds-rings.seti.org/opus/api/meta/result_count.json?instrument=Voyager+ISS&target=Neptune&time1=1989-08-21T00:00:00&time2=1989-08-22T00:00:00"
+      ]
+    },
+    {
+      "id": "jonsson-voyager-map",
+      "subject": "Björn Jónsson’s Voyager 2 map of Neptune",
+      "status": "excluded",
+      "finding": "A finished 1,800 x 900 map made from Voyager 2 frames of 1989-08-17 and 18. Its author’s terms allow use with credit and ask that no copy be placed on another site, so it is not shipped.",
+      "evidence": [
+        "https://bjj.mmedia.is/data/planetary_maps.html"
+      ]
     }
   ]
 }
