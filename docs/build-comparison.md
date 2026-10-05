@@ -450,3 +450,6 @@ Those head costs plus one concurrent L2 critical path suggest about 12 minutes
 before runner/setup/upload overhead. The orchestrator must measure archive
 bytes, transfer, validation, total duration, memory/disk peaks and byte-identical
 reports on hosted runs before claiming the target or identical verdicts.
+
+The lane also runs the qualified [browser journeys](site-journeys.md) on both builds, concurrently with the server answers and the performance guard (`build-compare/journeys-stage.mts`). Each declared-qualified journey/profile pair (Chromium and WebKit) is recorded twice per side (`--gate --repeat 2`, so a side that is not exact against itself fails), then the base and head recordings are compared exactly. A declared refactor fails on any difference or on a run that cannot finish; an ordinary pull request only reports. The merge-base harness records both sides, each served by its own checkout; the browsers install in the background while the head builds, and the stage waits for that install's status file. Evidence is `journeys.json` and the per-run logs in the lane artifact.
+

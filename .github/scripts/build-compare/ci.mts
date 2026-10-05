@@ -6,6 +6,7 @@ import { pathToFileURL } from 'node:url';
 import { promisify } from 'node:util';
 import { serverVerdict } from './server-policy.mts';
 import { performanceStage, performanceSummary, performanceVerdict } from './performance-stage.mts';
+import { journeysStage, journeysSummary, journeysVerdict } from './journeys-stage.mts';
 import { sourceDiff } from './source-diff.mts';
 import { useCache, unpackCache } from './base-cache.mts';
 import { toolchainMatches } from './build.mts';
@@ -115,7 +116,7 @@ async function main(): Promise<number> {
   const args = process.argv.slice(2), options = new Map<string, string>();
   for (let index = 0; index < args.length; index += 2) {
     const key = args[index], value = args[index + 1];
-    if (!key || !['--head', '--base', '--out', '--base-cache', '--cache-ready', '--no-base-cache'].includes(key) || !value || value.startsWith('--') || options.has(key))
+    if (!key || !['--head', '--base', '--out', '--base-cache', '--cache-ready', '--no-base-cache', '--browsers-ready'].includes(key) || !value || value.startsWith('--') || options.has(key))
       throw new Error('Usage: ci.mts --head <checkout> --base <isolated checkout> --out <directory>');
     options.set(key, value);
   }
@@ -300,11 +301,36 @@ async function main(): Promise<number> {
       await writeFile(join(out, 'server-answers.json'), JSON.stringify({ exitCode: answerExit, failure: String(error) }));
     }
   })();
-  await Promise.all([performanceTask, answerTask]);
+  let journeysExit = 0;
+  const journeysTask = (async () => {
+    try {
+      // L1 follows the same trust selection as L2 and L7: the merge-base harness, except for the pull request that introduces it.
+      let harness = headTools ? head : base;
+      if (!headTools && !await stat(join(harness, 'site/journeys/run.mts')).catch(() => undefined)) {
+        console.warn('::warning::Bootstrap: merge base has no journey harness; using HEAD journey harness');
+        harness = head;
+      }
+      const ready = options.get('--browsers-ready');
+      if (ready) {
+        await waitForFile(ready, 600_000);
+        if ((await readFile(ready, 'utf8')).trim() !== 'ok') throw new Error('Browser installation failed; see the install log');
+      }
+      const guard = await journeysStage(harness, base, head, out, declaration.mode);
+      timings.push(...guard.timings);
+      journeysExit = guard.exitCode;
+      answerSummary += journeysSummary(guard);
+    } catch (error) {
+      console.warn(`::${declaration.mode === 'report' ? 'notice' : 'error'}::Browser journeys stage failed: ${String(error).replaceAll('\n', '%0A').replaceAll('\r', '%0D')}`);
+      journeysExit = journeysVerdict(declaration.mode, 1, 0);
+      answerSummary += `\n## Browser journeys\n\nStage failed: ${String(error)}. Exit: ${journeysExit}.\n`;
+      await writeFile(join(out, 'journeys.json'), JSON.stringify({ exitCode: journeysExit, failure: String(error) }));
+    }
+  })();
+  await Promise.all([performanceTask, answerTask, journeysTask]);
   await writeFile(join(out, 'comparison.md'), comparisonMarkdown(JSON.parse(await readFile(join(out, 'report.json'), 'utf8'))));
   await writeFile(join(out, 'timings.json'), `${JSON.stringify(timings, null, 2)}\n`);
   if (process.env.GITHUB_STEP_SUMMARY) await appendFile(process.env.GITHUB_STEP_SUMMARY, jobSummary(JSON.parse(await readFile(join(out, 'report.json'), 'utf8')), timings, declaration.mode, source) + answerSummary);
-  return comparisonExit || answerExit || performanceExit;
+  return comparisonExit || answerExit || performanceExit || journeysExit;
 }
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
   try { process.exitCode = await main(); }

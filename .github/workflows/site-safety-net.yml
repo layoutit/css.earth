@@ -231,6 +231,8 @@ jobs:
           name: site-build-comparison
           path: |
             output/build-comparison/performance.json
+            output/build-comparison/journeys.json
+            output/build-comparison/journeys/*.log
             output/build-comparison/performance/*.md
             output/build-comparison/performance/*.log
             output/build-comparison/performance/comparison.json

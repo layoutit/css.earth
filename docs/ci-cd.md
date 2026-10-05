@@ -9,8 +9,9 @@ timings before claiming it is met. Report cold and warm-cache runs separately.
 
 The [counted performance guard](performance-guard.md) compares emitted build counts against the merge base. Part A is local tooling; CI wiring is a separate task.
 
-The planned browser lane and its current implementation limits are documented in
-[browser journeys](site-journeys.md). It is not wired into CI yet.
+The declared-qualified [browser journeys](site-journeys.md) run on both builds inside the
+build comparison lane ([build comparison](build-comparison.md)); the wider journey manifest is
+non-blocking hardening documented there.
 
 ## What runs where
 

@@ -15,7 +15,11 @@ export async function worker(options: LaunchOptions, execute: WorkerRun = run): 
   let code = 2;
   try {
     code = await execute('pnpm', ['install', '--frozen-lockfile', '--ignore-scripts'], options.head, process.env);
-    if (!code) code = await execute(process.execPath, [join(options.head, '.github/scripts/build-compare/ci.mts'), '--head', options.head, '--base', options.base, '--out', options.out, '--base-cache', options.archive, '--cache-ready', options.ready], options.head, { ...process.env, HEAD_INSTALLED: 'true' });
+    // The browsers for the journey stage install while the head prepares and builds; their status file is the stage's barrier.
+    const browsers = code ? Promise.resolve() : execute('pnpm', ['exec', 'playwright', 'install', '--with-deps', 'chromium', 'webkit'], options.head, process.env)
+      .catch(() => 1).then(status => writeFile(join(options.state, 'browsers'), status ? 'failed\n' : 'ok\n'));
+    if (!code) code = await execute(process.execPath, [join(options.head, '.github/scripts/build-compare/ci.mts'), '--head', options.head, '--base', options.base, '--out', options.out, '--base-cache', options.archive, '--cache-ready', options.ready, '--browsers-ready', join(options.state, 'browsers')], options.head, { ...process.env, HEAD_INSTALLED: 'true' });
+    await browsers;
   } catch (error) { console.error(error); code = 2; }
   await writeFile(join(options.state, 'exit'), `${code}\n`);
   return code;
