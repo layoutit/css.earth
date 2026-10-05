@@ -82,7 +82,9 @@ export async function shippedSkyObjects(): Promise<ShippedObject[]> {
     const id = file.slice(0, -'.json'.length);
     if (!ids.has(id) || found.has(id)) continue;
     const body = requireRecord(JSON.parse(await readFile(resolve(BODIES, file), 'utf8')) as unknown, file);
-    const star = body.star;
+    const star = body.star, code = (body.physical as Record<string, unknown> | undefined)?.horizonsCode;
+    // A body with a Horizons code moves on the sky, so it states no place there: the Sun's star record stands for no direction.
+    if (typeof code === 'string' && code.trim()) continue;
     if (star && typeof star === 'object' && typeof (star as Record<string, unknown>).rightAscensionDegrees === 'number')
       add(id, (star as Record<string, unknown>).rightAscensionDegrees, (star as Record<string, unknown>).declinationDegrees, `packages/astronomy/data/bodies/${file}`);
   }

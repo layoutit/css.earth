@@ -92,7 +92,7 @@ cycle. Share anything else through `@cssearth/core` or another package. Prepared
   run for each object by the `audit` step of `prepare-object`. `prepared-object-pin.ts` pins a prepared object to its
   transport (the descriptor's `prepared` pin and page reference, and the inventory; the transports themselves are built from
   the runtime when read); the world-navigation
-  and spatial-context finalization before it stays in `site/build/prepare/prepare-object-json.mts`, site-owned preparation.
+  finalization before it stays in `site/build/prepare/prepare-object-json.mts`, site-owned preparation.
   Its tests are in `src/contract/`.
 - `src/asset-publication/` is published as `@cssearth/bake/asset-publication` (Node only): the commands around the runtime
   asset host. Staging a pull request's baked bytes against its frozen inventories, publishing the inventoried files, the

@@ -58,12 +58,13 @@ export interface Existing { readonly ids: ReadonlySet<string>; readonly names: R
 export async function existingBodies(root: string): Promise<Existing> {
   const directory = resolve(root, 'packages/astronomy/data/bodies'), ids = new Set<string>(), names = new Map<string, string>(), stars: Placed[] = [], gaia = new Map<string, string>(), systems = new Map<string, string>();
   for (const name of await readdir(directory)) {
-    const body = JSON.parse(await readFile(resolve(directory, name), 'utf8')) as { id: string; physical?: { name?: string }; star?: Record<string, number> & { sources?: { position?: string } } };
+    const body = JSON.parse(await readFile(resolve(directory, name), 'utf8')) as { id: string; physical?: { name?: string; horizonsCode?: string | null }; star?: Record<string, number> & { sources?: { position?: string } } };
     const source = /Gaia DR3 source (\d+)/u.exec(body.star?.sources?.position ?? '')?.[1];
     if (source) gaia.set(source, body.id);
     ids.add(body.id);
     if (body.physical?.name) names.set(normal(body.physical.name), body.id);
-    const s = body.star;
+    // A body with a Horizons code moves on the sky: the Sun's star record stands for no direction, so no new star is the Sun.
+    const s = body.physical?.horizonsCode ? undefined : body.star;
     if (s && Number.isFinite(s.rightAscensionDegrees) && Number.isFinite(s.declinationDegrees))
     { const row = citedRow(body.star?.sources?.position ?? '');
       stars.push({ id: body.id, ra: s.rightAscensionDegrees!, dec: s.declinationDegrees!, epoch: s.positionEpochJulianYear ?? 2016, pmra: s.properMotionRaMasPerYear ?? 0, pmdec: s.properMotionDecMasPerYear ?? 0, ...(row ? { row } : {}) }); }

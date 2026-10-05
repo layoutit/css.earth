@@ -33,6 +33,16 @@ test('a map complete enough to have no data side keeps the design pose, and a ph
   assert.deepEqual(prepareDefaultCameraAngles(solarGeometry, 'pluto', { observation: [photograph], coverage: point(-30, -10) }), prepareFacingCameraAngles(solarGeometry, 'pluto', photograph));
 });
 
+test('a placed star faces the Sun, where Earth observes it from; a self-lit surface at the origin takes the design pose', () => {
+  const facing = prepareDefaultCameraAngles(solarGeometry, 'betelgeuse', { light: 'self' });
+  assert.ok(distance(openingDirection(solarGeometry, 'betelgeuse', facing), solarGeometry.requireBodyFixedSunDirection('betelgeuse') as unknown as Vector3) < 1e-12);
+  // The Sun is at the origin: nothing observes it from a direction, and facing its record's stand-in direction would put the
+  // camera in the ecliptic, where every planet's orbit is seen edge-on.
+  assert.equal(solarGeometry.requireBodyOrbit('sun').heliocentricDistanceAu, 0);
+  assert.equal(prepareDefaultCameraAngles(solarGeometry, 'sun', { light: 'self' }).initialScenePitchDegrees, 0);
+  assert.deepEqual(prepareDefaultCameraAngles(solarGeometry, 'sun', { light: 'self', atOrigin: true }), LIT_DEFAULT_VIEW);
+});
+
 test('the painted gap is found in a noisy copy, and a gray surface of the same tone is not', () => {
   // The minimaps this reads are 640 × 320.
   const width = 640, height = 320, channels = 3, data = new Uint8Array(width * height * channels);
