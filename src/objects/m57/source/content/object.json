@@ -76,6 +76,22 @@
           "url": "https://esawebb.org/images/weic2320b/"
         },
         "falseColor": true
+      },
+      {
+        "id": "mid-infrared",
+        "label": "Webb · mid infrared",
+        "thumbnail": "m57-dataset-mid-infrared.webp",
+        "volume": {
+          "objectId": "m57-miri-layers",
+          "datasetId": "optical",
+          "surface": "mid-infrared"
+        },
+        "source": {
+          "id": "m57-miri-layers-optical",
+          "path": "../../m57-miri-layers/source/manifest.json",
+          "url": "https://esawebb.org/images/weic2320c/"
+        },
+        "falseColor": true
       }
     ]
   },

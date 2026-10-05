@@ -1,6 +1,6 @@
 # Southern Ring Nebula
 
-The Southern Ring Nebula (NGC 3132), a planetary nebula, as an object of the world: its place, its card and its list marker. It has no surface of its own here. Its dataset shows the [Southern Ring Nebula image layers](../ngc-3132-layers/README.md) bank, whose README holds the sources, processing and known problems of the picture.
+The Southern Ring Nebula (NGC 3132), a planetary nebula, as an object of the world: its place, its card and its list marker. It has no surface of its own here. Its two datasets show the [Southern Ring Nebula image layers](../ngc-3132-layers/README.md) bank, Webb's near-infrared picture, and the [mid-infrared layers](../ngc-3132-miri-layers/README.md) bank; each README holds the sources, processing and known problems of its picture.
 
 ## Sources
 

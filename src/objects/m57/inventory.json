@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "m57-dataset-mid-infrared.webp",
+      "bytes": 20926,
+      "sha256": "aaf68af5af44de7bb4b911f4a095a510734f392c22766e2934b8ca2659afc710"
+    },
+    {
+      "location": "public",
       "filename": "m57-dataset-near-infrared.webp",
       "bytes": 19184,
       "sha256": "5a4ed909c7c8b3ad18c0f2fa88274199616e5e72580583e83339e931f2a9844f"
@@ -22,20 +28,20 @@
     {
       "location": "prepared",
       "filename": "controls.json",
-      "bytes": 656,
-      "sha256": "e95759053b5229c227f9658d67eeaaeb8d0330f1141ecf338982f9ebc13627d4"
+      "bytes": 855,
+      "sha256": "8e2ec5469b05781367c59af7d47753d1fb5c42e8baefcc2ed4e396e8e83fb0ce"
     },
     {
       "location": "prepared",
       "filename": "datasets.json",
-      "bytes": 896,
-      "sha256": "5baca9598482ac5db9e51208249bd5181c9cd3d36caea600db0613ec88c48416"
+      "bytes": 1253,
+      "sha256": "66bfa4da38f9d0256805c6b0cef7e1226982eece6a719e7fd329548d2105db31"
     },
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 4916,
-      "sha256": "bd0065426dca98a0edd59207df18e33b5aa0f5ee3eeafce7c30ff95475e3b926"
+      "bytes": 5194,
+      "sha256": "31a4125046db423bbe5ea199b72052ddf61b755a6274414f1a3ad769fb3cfebc"
     },
     {
       "location": "prepared",
@@ -46,8 +52,8 @@
     {
       "location": "prepared",
       "filename": "text.json",
-      "bytes": 5554,
-      "sha256": "00e3c3f3088a1e78d20d8bc7ddc3dc0912ec9fbf21b5b12b2fdb4c441438873c"
+      "bytes": 7049,
+      "sha256": "b11d237dbb1670aa033cb1ae1ceab47baf1a8c2739dc20c5a77bc1af61026dc4"
     },
     {
       "location": "prepared",

@@ -3,6 +3,12 @@
   "assets": [
     {
       "location": "public",
+      "filename": "ngc-3132-dataset-mid-infrared.webp",
+      "bytes": 7714,
+      "sha256": "571b361169a4ef930aa65abbc70bb6162b13ceb3aa6ca177b631685a7dbdfc61"
+    },
+    {
+      "location": "public",
       "filename": "ngc-3132-dataset-optical.webp",
       "bytes": 12906,
       "sha256": "396b08faeae96bdb0f0296b889930aef4d10bcace345566114941b4fdbeedfd2"
@@ -16,20 +22,20 @@
     {
       "location": "prepared",
       "filename": "controls.json",
-      "bytes": 470,
-      "sha256": "92eaeebdb6532270def052b672504f9f1bca178890af0ac8a9244d5e48822af8"
+      "bytes": 684,
+      "sha256": "97db37ad45daea2e79da435c4844b020f7d711876337f79882337e88e561bbea"
     },
     {
       "location": "prepared",
       "filename": "datasets.json",
-      "bytes": 561,
-      "sha256": "332a5ff15a7a3c0dd6904dbbf4f8fb6d7d7702cb5174c85083d8df8946ea277c"
+      "bytes": 943,
+      "sha256": "0fdf4b276506cda179228035ea3364d22005161321530ed595587970b3c39fd7"
     },
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 4610,
-      "sha256": "15a577613702d4f42799c4a64c0879dbd3d3dce545f9ae514f2d633dc2fec29d"
+      "bytes": 4903,
+      "sha256": "813f549dff2127f2d33682f1b988e225e0e798709c85750633ebd0452b9830e5"
     },
     {
       "location": "prepared",
@@ -40,8 +46,8 @@
     {
       "location": "prepared",
       "filename": "text.json",
-      "bytes": 3340,
-      "sha256": "c46f29afbe69f62ce63ea01d24c397a25e4717e5b8a463ae776b8cdd36a50aa9"
+      "bytes": 4685,
+      "sha256": "6722c135656b4d9b2b73abd809cecf36f9c06505ba77f67231c13e9bab9df9ec"
     },
     {
       "location": "prepared",

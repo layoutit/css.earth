@@ -1,0 +1,118 @@
+{
+  "schema": "cssearth-volume-source-manifest@2",
+  "pathBase": "repository",
+  "inputs": [
+    {
+      "id": "optical",
+      "path": "src/objects/ngc-3132-miri-layers/source/source.jpg",
+      "origin": "https://cdn.esawebb.org/archives/images/large/weic2207c.jpg",
+      "sourceUrl": "https://esawebb.org/images/weic2207c/",
+      "title": "Southern Ring Nebula (MIRI Image)",
+      "credit": "NASA, ESA, CSA, STScI, and the Webb ERO Production Team",
+      "displayCredit": "ESA/Webb",
+      "acquisition": "The publisher's JPEG (1306 x 1133 px), downloaded unchanged; not tracked. Its scale and direction on the sky are the file's embedded tags; its place is set by the star (recipe observation). A display composite, not a calibrated scientific array.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "esawebb-weic2207c",
+            "role": "material",
+            "evidence": "src/objects/ngc-3132-miri-layers/source/provenance.json"
+          }
+        ]
+      },
+      "dependencies": [],
+      "datasetId": "optical",
+      "license": "CC-BY-4.0; retain the complete recorded credit.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "webb",
+            "evidence": "https://esawebb.org/images/weic2207c/"
+          }
+        ]
+      }
+    },
+    {
+      "id": "density-grid",
+      "path": "src/objects/ngc-3132-miri-layers/source/ngc3132_density_structure_101.dat",
+      "origin": "https://raw.githubusercontent.com/hektor-monteiro/NGC3132_model/HEAD/structure_visualization/ngc3132_density_structure_101.dat",
+      "sourceUrl": "https://github.com/hektor-monteiro/NGC3132_model",
+      "title": "NGC 3132: the gas density of Monteiro et al. (2025) on a grid of 101 cells a side",
+      "credit": "Monteiro et al. (2025)",
+      "displayCredit": "Monteiro et al. (2025)",
+      "acquisition": "The text file as the authors' repository serves it (structure_visualization/), downloaded unchanged; not tracked and not republished. Read by the image-layer bake for where each sight line's gas is.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "github-ngc3132-model",
+            "role": "material",
+            "evidence": "https://github.com/hektor-monteiro/NGC3132_model"
+          },
+          {
+            "catalogueId": "publication-monteiro-2025-ngc-3132-model",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/2503.20640"
+          }
+        ]
+      },
+      "license": "The repository states no licence; the paper says its model's files \"have been made available\" there. Used as published numbers, with the paper cited.",
+      "dependencies": [],
+      "datasetId": "optical",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "unresolved",
+            "label": "SOAR SAM-FP",
+            "evidence": "https://arxiv.org/abs/2503.20640",
+            "reason": "A density made from SOAR SAM-FP Fabry-Perot velocity cubes, not an observation of its own."
+          }
+        ]
+      }
+    }
+  ],
+  "documents": [
+    {
+      "id": "recipe",
+      "path": "src/objects/ngc-3132-miri-layers/source/recipe.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned processing, source interpretation or presentation record; the published image is separately bound as a material input."
+      },
+      "kind": "authored-document",
+      "origin": "cssEarth project-authored record",
+      "credit": "cssEarth contributors",
+      "title": "Image-layer preparation recipe",
+      "acquisition": "Checked-in project-authored JSON. This pin identifies local processing or interpretation metadata, not an original publisher document; the published image is separately bound in inputs."
+    },
+    {
+      "id": "provenance",
+      "path": "src/objects/ngc-3132-miri-layers/source/provenance.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned processing, source interpretation or presentation record; the published image is separately bound as a material input."
+      },
+      "kind": "authored-document",
+      "origin": "cssEarth project-authored record",
+      "credit": "cssEarth contributors",
+      "title": "Published image interpretation and acquisition record",
+      "acquisition": "Checked-in project-authored JSON. This pin identifies local processing or interpretation metadata, not an original publisher document; the published image is separately bound in inputs."
+    },
+    {
+      "id": "presentation",
+      "path": "src/objects/ngc-3132-miri-layers/source/presentation.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned processing, source interpretation or presentation record; the published image is separately bound as a material input."
+      },
+      "kind": "authored-document",
+      "origin": "cssEarth project-authored record",
+      "credit": "cssEarth contributors",
+      "title": "Dataset presentation and prepared-bank bindings",
+      "acquisition": "Checked-in project-authored JSON. This pin identifies local processing or interpretation metadata, not an original publisher document; the published image is separately bound in inputs."
+    }
+  ],
+  "generatedIntermediates": []
+}
