@@ -1,0 +1,30 @@
+{
+ "id": "hd-59088",
+ "classification": "star",
+ "order": 5776,
+ "physical": {
+  "name": "HD 59088",
+  "horizonsCode": null,
+  "meanRadiusKm": 1043550,
+  "gravitationalParameterKm3PerS2": 0,
+  "parent": null,
+  "effectiveTemperatureK": 40000
+ },
+ "physicalNotes": "Radius 1.5 solar radii from Kaschinski, Pauldrach & Hoffmann (2012), A&A 542, A45, Table 2: NGC 2392, the hydrodynamically consistent model of Pauldrach et al. (2004) (https://arxiv.org/abs/1204.1200): 1,043,550 km at 695,700 km per solar radius. No mass is measured, so GM is 0, the records' unpublished value. Temperature 40000 K from Kaschinski, Pauldrach & Hoffmann (2012), A&A 542, A45, Table 2: NGC 2392, the hydrodynamically consistent model of Pauldrach et al. (2004) (https://arxiv.org/abs/1204.1200). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 112.2948554070362,
+  "declinationDegrees": 20.911802087056024,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 1795.0308872481207,
+  "properMotionRaMasPerYear": -1.6132338018249248,
+  "properMotionDecMasPerYear": 0.7890840945644575,
+  "radialVelocityKmPerS": 84.2,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 865037169677723904 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/hd-59088/source/photometry/gaia-dr3-source.csv; cross-identification HD 59088, HIP 36369: https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia+DR3+865037169677723904",
+   "distance": "Chornay & Walton (2021), A&A 656, A110; CDS J/A+A/656/A110, Table A.1, PN G197.8+17.3: distance 1,795 pc (1,666 to 1,942) from the Gaia EDR3 parallax of this star, the distance its nebula's page stands at (https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/656/A110): 1795.0308872481207 pc; Gaia DR3 parallax 0.5451 +/- 0.0467 mas (same row, RUWE 1.20), 11.7 standard errors, is not used",
+   "properMotion": "Gaia DR3 (same row): -1.613, 0.789 mas/yr",
+   "radialVelocity": "SIMBAD's radial velocity for Gaia DR3 865037169677723904 (quality E), from 1953GCRV..C......0W; Gaia DR3 measures none (https://ui.adsabs.harvard.edu/abs/1953GCRV..C......0W/abstract)"
+  }
+ }
+}
