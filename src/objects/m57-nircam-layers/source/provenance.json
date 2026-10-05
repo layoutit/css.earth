@@ -1,0 +1,55 @@
+{
+  "schema": "cssearth-image-layer-provenance@1",
+  "title": "Webb captures detailed beauty of Ring Nebula (NIRCam image)",
+  "publisher": "ESA/Webb",
+  "sourceId": "weic2320b",
+  "sourcePage": "https://esawebb.org/images/weic2320b/",
+  "download": "https://cdn.esawebb.org/archives/images/large/weic2320b.jpg",
+  "credit": "ESA/Webb, NASA, CSA, M. Barlow, N. Cox, R. Wesson",
+  "license": "CC-BY-4.0",
+  "original": {
+    "dimensions": [
+      4097,
+      4156
+    ],
+    "bands": [
+      "Webb",
+      "NIRCam",
+      "F162M",
+      "F212N",
+      "F300M",
+      "F335M"
+    ],
+    "fieldOfViewDeg": [
+      0.035726,
+      0.03624048
+    ]
+  },
+  "checkedSource": {
+    "kind": "Published JPEG",
+    "dimensions": [
+      4097,
+      4156
+    ]
+  },
+  "geometryEvidence": {
+    "inclinationDeg": 0.001,
+    "lineOfNodesPaDeg": 9.142,
+    "reference": "A picture of the sky: the plane is the picture's own tangent plane, perpendicular to the sight line through the picture's centre, so it faces the Sun. That centre is 3.6 arcsec from the star, which is the whole of the recipe's inclination. Not the orientation of the nebula, which is the shell's."
+  },
+  "registration": {
+    "method": "The file's embedded sky tags for scale and direction, 0.0314 arcsec per pixel and north 140.2° right of vertical, and the star for place: the central star in the picture, pixel 2123, 1991.4, is set at the place the Ring Nebula's page stands at, so the frame's centre is 283.3950727°, 33.0293034°. The tags alone put the star 0.13 arcsec from where the picture shows it.",
+    "pixelArcsec": 0.03139,
+    "northClockwiseDeg": 140.2
+  },
+  "displayModel": "Inside the outline of the molecular shell of Kastner et al. (2025) the picture's light lies on that shell's two walls, in front of the star and behind it; inside the shell's polar opening it lies on the walls of the ionised lobes (O'Dell et al. 2013). The walls share the smooth light; the fine detail, the knots, is on the nearer one. Outside the shell's outline the halo lies on the picture's plane.",
+  "coverage": "The published frame inside a circle about the star: the picture fades out between 55.7 and 61.9 arcsec, the largest circle the frame holds, so no straight edge shows.",
+  "acquisition": {
+    "url": "https://cdn.esawebb.org/archives/images/large/weic2320b.jpg",
+    "dimensions": [
+      4097,
+      4156
+    ],
+    "operation": "Download the publisher's JPEG; no crop or resample."
+  }
+}

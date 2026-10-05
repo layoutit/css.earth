@@ -60,6 +60,22 @@
           "url": "https://esahubble.org/images/heic1310a/"
         },
         "falseColor": true
+      },
+      {
+        "id": "near-infrared",
+        "label": "Webb · near infrared",
+        "thumbnail": "m57-dataset-near-infrared.webp",
+        "volume": {
+          "objectId": "m57-nircam-layers",
+          "datasetId": "optical",
+          "surface": "near-infrared"
+        },
+        "source": {
+          "id": "m57-nircam-layers-optical",
+          "path": "../../m57-nircam-layers/source/manifest.json",
+          "url": "https://esawebb.org/images/weic2320b/"
+        },
+        "falseColor": true
       }
     ]
   },
