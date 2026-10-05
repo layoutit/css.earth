@@ -1,9 +1,9 @@
 /** Listener tap ported from the performance probe; registration stacks resolve through the supplied build's maps. */
 import { listenerResolver } from './listener-resolver.mts';
-import type { ListenerWrapper } from './binding-sites.mts';
+import type { ListenerWrapper, ManifestEntry } from './binding-sites.mts';
+export type { ManifestEntry } from './binding-sites.mts';
 import type { Page } from 'playwright';
 
-export interface ManifestEntry { id: string; kind: string; source: string; eventTypes?: string[]; mechanism?: string; tag?: string; selector?: string; markup?: string }
 export function parseEntries(input: unknown): ManifestEntry[] {
   if (!input || typeof input !== 'object' || !('entries' in input) || !Array.isArray(input.entries)) throw new Error('Expected S0 entries');
   return input.entries.map((row: unknown) => {
