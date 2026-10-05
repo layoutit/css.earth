@@ -43,7 +43,7 @@ async function markerPicture(projectRoot: string, id: string): Promise<Buffer | 
 /** Featured stars already publish an arrival image with their prepared photospheric color and limb law.
  * Reuse those pixels for the sidebar and search, rather than the flat catalogue context disc. */
 async function featuredStarPreviews(projectRoot: string): Promise<ReadonlyMap<string, string>> {
-  const module: unknown = await import(pathToFileURL(resolve(projectRoot, 'site/prepared-catalogue.mjs')).href);
+  const module: unknown = await import(pathToFileURL(resolve(projectRoot, 'site/prepared/prepared-catalogue.mjs')).href);
   if (!isRecord(module) || !Array.isArray(module.CATALOGUE_ENTRIES)) throw new TypeError('Invalid prepared catalogue.');
   const previews = new Map<string, string>();
   for (const entry of module.CATALOGUE_ENTRIES) {
@@ -63,7 +63,7 @@ async function featuredStarPreviews(projectRoot: string): Promise<ReadonlyMap<st
 
 export async function prepareSearchThumbnails(projectRoot = root) {
   const stellarPreviews = await featuredStarPreviews(projectRoot);
-  const { PREPARED_NAVIGATION_MARKERS } = await import(pathToFileURL(resolve(projectRoot, 'site/prepared-navigation-markers.mjs')).href) as
+  const { PREPARED_NAVIGATION_MARKERS } = await import(pathToFileURL(resolve(projectRoot, 'site/prepared/prepared-navigation-markers.mjs')).href) as
     { PREPARED_NAVIGATION_MARKERS: Record<string, { context?: { url: string } }> };
   const output = resolve(projectRoot, 'public/navigation/search');
   await mkdir(output, { recursive: true });

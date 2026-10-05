@@ -7,7 +7,7 @@ const test = sourceTest();
 import { SourceEvidence } from "../../overview/source-evidence-values.test-support.mts";
 
 import { prepareShellIcons } from "./prepare-shell-icons.mts";
-import { PREPARED_SHELL_ICONS } from "../../prepared-shell-icons.mjs";
+import { PREPARED_SHELL_ICONS } from "../../prepared/prepared-shell-icons.mjs";
 import { SHELL_ICON_SOURCES } from "../../source/icons/manifest.mts";
 
 const projectRoot = resolve(import.meta.dirname, "../..");
@@ -25,7 +25,7 @@ test("prepares one source-bound 20px SVG family for sidebar sections", async (co
 
   assert.equal(
     result.moduleSource,
-    await readFile(resolve(projectRoot, "site/prepared-shell-icons.mjs"), "utf8"),
+    await readFile(resolve(projectRoot, "site/prepared/prepared-shell-icons.mjs"), "utf8"),
   );
   assert.deepEqual(Object.keys(result.prepared), [
     "facts",

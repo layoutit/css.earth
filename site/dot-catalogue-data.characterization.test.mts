@@ -8,7 +8,7 @@ import { pathToFileURL } from 'node:url';
 
 const subject = new URL('./dot-catalogue-data.mts', import.meta.url);
 const nodeSource = new URL('./prepared/prepared-world-context-node-source.mts', import.meta.url);
-const idsSource = new URL('./prepared-dot-catalogues.json', import.meta.url);
+const idsSource = new URL('./prepared/prepared-dot-catalogues.json', import.meta.url);
 const part = (sources: unknown[], objects: unknown[]) => ({ schema: 'nebula', sources, objects });
 
 function evaluate(ids: unknown = { galaxies: 'galaxy', clusters: 'cluster' }, parts = [

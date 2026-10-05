@@ -25,9 +25,9 @@ and ESA's own images are share-alike. Each render-library entry carries its own
 `license`, so the obligation stays attached to the file it covers. Reusing that
 file elsewhere carries the share-alike terms with it.
 
-`site/prepared-sources.json` and `site/prepared-facilities.json` are generated
+`site/prepared/prepared-sources.json` and `site/prepared/prepared-facilities.json` are generated
 from these records and the existing product lineage, with
-`site/prepared-source-credits.json`: the short provider list each page's
+`site/prepared/prepared-source-credits.json`: the short provider list each page's
 "Sources" link shows, and the rows of the body card's Sources tab. A published
 work is one row: its title, kind, publisher and landing page. Files that have no
 published title are one row per credit line, with their count and the datasets

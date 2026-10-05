@@ -2,7 +2,7 @@ import { fromEyeM } from '@cssearth/engine';
 import { createOpacityFader } from '@cssearth/renderer';
 import type { OpacityClock } from '@cssearth/renderer/stars/opacity-clock.ts';
 import { admitStableLabels } from '@cssearth/renderer/labels/stable-label-layout.ts';
-import prepared from './moon-labels.prepared.json' with { type: 'json' };
+import prepared from './prepared/moon-labels.prepared.json' with { type: 'json' };
 import { sourceArray, sourceId, sourceObject, sourceText, sourceUnique } from '@cssearth/objects/sources';
 import { cssViewFromOrientation, rotateWorldPosition } from '@cssearth/engine';
 import { rayHitsSphereBefore } from '@cssearth/engine';

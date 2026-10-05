@@ -10,7 +10,7 @@ import { objectNavigation, SEARCH_OBJECTS, PLANET_NAVIGATION_OBJECTS } from "../
 import { BODY_MARKER_ATLAS_PAGE_SIZE, loadMarkerDescriptors } from "@cssearth/bake/navigation";
 import { markerStyle, resolveMarkerStyle } from '@cssearth/renderer/navigation/marker-presentation.ts';
 import { validateMarkerPresentation } from '@cssearth/objects';
-import { PREPARED_NAVIGATION_MARKERS } from "../prepared-navigation-markers.mjs";
+import { PREPARED_NAVIGATION_MARKERS } from "../prepared/prepared-navigation-markers.mjs";
 
 test("search contains every object, including the Sun and the objects seen from inside; only planets enter the scale", () => {
   // An object seen from inside (the Milky Way, the Local Group) is an object like any other, with one search row.

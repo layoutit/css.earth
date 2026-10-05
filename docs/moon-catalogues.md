@@ -75,7 +75,7 @@ as a nominal sphere (Anthe). Those pages were retired; each is now a dot with it
 ([when a body gets a scene](../.agents/skills/celestial-skill/references/scientific-faithfulness.md#a-scene-needs-a-measured-shape)).
 
 Run `node site/build/prepare/prepare-moon-labels.mts` to reproduce the ignored
-`site/moon-labels.prepared.json` from the pinned source archive and current world
+`site/prepared/moon-labels.prepared.json` from the pinned source archive and current world
 context. `pnpm prepare:world-context` runs this step after preparing the world.
 The browser only projects these fixed positions; it performs no ephemeris work.
 

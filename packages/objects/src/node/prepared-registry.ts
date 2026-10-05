@@ -10,7 +10,7 @@ import type { NavigableObject, NavigationDistance, ObjectDiscovery, WorldBody } 
 /** The catalogue file, relative to the checkout: a module of each object's descriptor, as its folder's object.json holds
  * it, with its distance and discovery, in registry order. A page never loads it: it reads one entry at a time. */
 export const PREPARED_CATALOGUE = Object.freeze({
-  entries: 'site/prepared-catalogue.mjs',
+  entries: 'site/prepared/prepared-catalogue.mjs',
 });
 
 /** One row of the prepared catalogue: a package's descriptor with its distance and discovery. Every object's row has this

@@ -1,4 +1,4 @@
-import extents from './prepared-stellar-extents.json' with { type: 'json' };
+import extents from './prepared/prepared-stellar-extents.json' with { type: 'json' };
 
 /** Published stellar extents, radius in metres by object id, prepared from each object's `source/stellar-extent.json`
  * by `pnpm prepare:catalog`. */

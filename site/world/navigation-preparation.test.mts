@@ -66,7 +66,7 @@ test('metadata-only preparation does not replace or remove images', async contex
 
 test('body markers and resolved context images leave space outside their silhouette transparent', async () => {
   const descriptors = await markersOf(['earth', 'moon', 'saturn', 'comet-67p']);
-  const { PREPARED_NAVIGATION_MARKERS } = await import('../prepared-navigation-markers.mjs');
+  const { PREPARED_NAVIGATION_MARKERS } = await import('../prepared/prepared-navigation-markers.mjs');
   for (const { objectId } of descriptors) {
     const context = PREPARED_NAVIGATION_MARKERS[objectId]?.context;
     const images = [`body-${objectId}@2x.webp`,
@@ -81,7 +81,7 @@ test('body markers and resolved context images leave space outside their silhoue
 });
 
 test('every context image has its committed search preview, and no preview outlives its image', async () => {
-  const { PREPARED_NAVIGATION_MARKERS } = await import('../prepared-navigation-markers.mjs');
+  const { PREPARED_NAVIGATION_MARKERS } = await import('../prepared/prepared-navigation-markers.mjs');
   const expected = Object.entries(PREPARED_NAVIGATION_MARKERS).filter(([, marker]) => marker.context).map(([id]) => `${id}@2x.webp`).sort();
   assert.deepEqual((await readdir(resolve(projectRoot, 'public/navigation/search'))).sort(), expected,
     'run node packages/bake/cli/prepare-navigation.mts <id> after drawing a context image');
@@ -116,7 +116,7 @@ for (const failure of ["object source", "late utility source", "publication", "r
       ...expectedOutputFiles.filter((filename) => filename !== "body-download@2x.webp").map((filename) => [resolve(outputRoot, filename), `accepted ${filename}`] as const),
       [resolve(outputRoot, "new-body.webp"), "accepted legacy marker"],
       [resolve(outputRoot, "unrelated.txt"), "unrelated output"],
-      [resolve(root, "site/prepared-navigation-markers.mjs"), "accepted presentation"],
+      [resolve(root, "site/prepared/prepared-navigation-markers.mjs"), "accepted presentation"],
     ]);
     for (const [path, bytes] of previous) await writeFile(path, bytes);
     const filenames = (await readdir(outputRoot)).sort();

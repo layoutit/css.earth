@@ -2,11 +2,11 @@ import { PREPARED_NEBULA_CATALOG_SCHEMA, parsePreparedGalaxyCatalog, parsePrepar
 import { nodeProjectFileUrl } from './prepared/prepared-world-context-node-source.mts';
 // Build-owned catalogues: their contents are not application JavaScript, and no page fetches one whole.
 // Each dot layer's catalogue is the one context object of its type (site/build/prepare/prepare-catalog.mts dotCatalogueIds).
-import catalogueIds from './prepared-dot-catalogues.json' with { type: 'json' };
+import catalogueIds from './prepared/prepared-dot-catalogues.json' with { type: 'json' };
 
 async function catalogue(layer: 'galaxies' | 'clusters'): Promise<unknown> {
   const id: unknown = (catalogueIds as Record<string, unknown>)[layer];
-  if (typeof id !== 'string') throw new TypeError(`site/prepared-dot-catalogues.json names no catalogue for the ${layer} dot layer. Run pnpm prepare:catalog.`);
+  if (typeof id !== 'string') throw new TypeError(`site/prepared/prepared-dot-catalogues.json names no catalogue for the ${layer} dot layer. Run pnpm prepare:catalog.`);
   return (await import(/* @vite-ignore */ nodeProjectFileUrl(import.meta.url, `src/objects/${id}/prepared/catalogue.json`), { with: { type: 'json' } })).default;
 }
 const galaxies = parsePreparedGalaxyCatalog(await catalogue('galaxies')), clusters = parsePreparedClusterCatalog(await catalogue('clusters'));
