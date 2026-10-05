@@ -1,0 +1,65 @@
+{
+  "schema": "cssearth-raster-recipe@2",
+  "publicBase": "/scenes/wd-1851-329/",
+  "sourceWidth": 1024,
+  "sourceHeight": 512,
+  "width": 1024,
+  "height": 512,
+  "latitudeBands": 16,
+  "polarTile": 256,
+  "resample": "density-before-pack",
+  "polarProjection": "orthographic-bilinear",
+  "polesOutput": "wd-1851-329-poles-{id}{suffix}.webp",
+  "surfaceMetadata": {
+    "schema": "csswd-1851-329-prepared-assets@1"
+  },
+  "thumbnail": {
+    "size": 64,
+    "centerLongitudeDegrees": 0
+  },
+  "surfaces": [
+    {
+      "id": "color",
+      "output": "wd-1851-329-surface-{id}{suffix}.webp",
+      "thumbnail": "wd-1851-329-dataset-{id}.webp",
+      "source": "photometry/stellar-color.json",
+      "falseColor": false,
+      "science": {
+        "kind": "stellar-photometric-color",
+        "qualification": "Photosphere color from a blackbody at the star's published temperature. The disc is unresolved: no map or absolute brightness is implied. Self-luminous, so no lighting. The disc is dimmed toward the limb by the quadratic law (u1 0.0593, u2 0.0996) of the nearest model Claret et al. (2020), A&A 634, A93 tabulate: a pure-hydrogen white dwarf at 100,000 K and log g 7.0, the grid's hottest (Johnson V).",
+        "limbDarkening": {
+          "law": "quadratic",
+          "published": true,
+          "path": "photometry/claret-2020-limb-darkening.json"
+        }
+      }
+    }
+  ],
+  "emission": {
+    "offLimbSize": 600,
+    "limbSize": 512,
+    "bodyDiameter": 496,
+    "offLimbOutput": "wd-1851-329-context-{id}{suffix}.webp",
+    "limbOutput": "wd-1851-329-limb-{id}{suffix}.webp",
+    "metadata": {
+      "schema": "csswd-1851-329-prepared-emission@1",
+      "presentation": "prepared-emissive-surface-with-stationary-off-limb-context-and-limb-plate",
+      "offLimbContext": {
+        "logicalSize": 600,
+        "source": "none: no observation, a transparent plate",
+        "composition": "transparent",
+        "rotation": "none",
+        "runtimeAlphaProcessing": false
+      },
+      "limbMaterial": {
+        "logicalSize": 496,
+        "composition": "black alpha darkens the photosphere according to the selected limb-darkening law; transparent outside the silhouette",
+        "surfaceReplacement": false,
+        "runtimeAlphaProcessing": false
+      },
+      "lighting": false,
+      "shadows": false,
+      "runtimeLighting": false
+    }
+  }
+}

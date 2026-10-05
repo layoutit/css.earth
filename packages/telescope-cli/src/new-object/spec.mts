@@ -396,7 +396,8 @@ export function parseStarSpec(value: unknown): StarSpec {
     ...(input.order === undefined ? {} : { order: requireFiniteNumber(input.order, at('order')) }), ...(target ? { target } : {}), ...(gaia ? { gaia } : {}),
     paper: { url: requireString(paper.url, at('paper.url')), credit: requireString(paper.credit, at('paper.credit')) },
     radius: citedOrFlame(input.radius, at('radius'), [0.005, 3000]), mass: input.mass === 'unmeasured' ? 'unmeasured' : citedOrFlame(input.mass, at('mass'), [0.01, 300]),
-    temperature: cited(input.temperature, at('temperature'), [1000, 60000]),
+    // The bound refuses a typing slip, not a star: a planetary nebula's central star is past 100,000 K.
+    temperature: cited(input.temperature, at('temperature'), [1000, 250000]),
     ...(input.gravity === undefined ? {} : { gravity: cited(input.gravity, at('gravity'), [-1, 9]) }),
     ...(input.gravityRange === undefined ? {} : { gravityRange: (() => {
       const r = requireRecord(input.gravityRange, at('gravityRange')), min = requireFiniteNumber(r.min, at('gravityRange.min')), max = requireFiniteNumber(r.max, at('gravityRange.max'));

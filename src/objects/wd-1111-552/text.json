@@ -1,0 +1,35 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "wd-1111-552",
+  "card": {
+    "text": "WD 1111+552 is the central star of the Owl Nebula, about 811 parsecs away.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-2109-12114",
+        "url": "https://arxiv.org/abs/2109.12114",
+        "label": "González-Santamaría et al. (2021), A&A 656, A51 (2021)",
+        "checked": "2026-10-05",
+        "locator": "Table 8: NGC 3587, log(L/Lsun) = 1.98, log(Teff) = 4.97"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "The Owl's central star shines at 93,000 K with 95 times the Sun's light. Its sphere is about four times Earth's size.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-2109-12114",
+        "url": "https://arxiv.org/abs/2109.12114",
+        "label": "González-Santamaría et al. (2021), A&A 656, A51 (2021)",
+        "checked": "2026-10-05",
+        "locator": "Table 8: NGC 3587, log(L/Lsun) = 1.98, log(Teff) = 4.97"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its temperature",
+      "summary": "The color of the star's light."
+    }
+  }
+}

@@ -1,0 +1,146 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "wd-1851-329",
+  "parent": "m57",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "WD 1851+329",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 26019.2
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/wd-1851-329-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "WD 1851+329",
+      "classification": "star",
+      "color": "#98b3ff",
+      "distanceAu": 162952073.4,
+      "description": "WD 1851+329 is the central star of the Ring Nebula, about 790 parsecs away.",
+      "systemName": "Ring Nebula",
+      "aliases": [
+        "HD 175353",
+        "BD+32 3246"
+      ],
+      "order": 5778,
+      "context": {
+        "order": 5775
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        4735105292034908000,
+        -19881661963988586000,
+        13287220613865736000
+      ],
+      "presentationToReference": [
+        0.19424255143219468,
+        0.1262830578435906,
+        -0.9727910466872028,
+        -0.8155815992294593,
+        -0.5302349248334208,
+        -0.23168422364333377,
+        0.5450655797346123,
+        -0.8383934123003167,
+        4.638643971148073e-8
+      ],
+      "orbitUpReference": [
+        -0.1262830578435906,
+        0.5302349248334208,
+        0.8383934123003167
+      ],
+      "metersPerUnit": 83932.90322580645,
+      "bodyRadiusM": 26019200
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

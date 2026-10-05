@@ -34,3 +34,10 @@ test('the spec takes a cited atmosphere class and refuses one no grid tabulates'
   assert.equal(parseStarSpec({ ...star, whiteDwarf: { atmosphere: 'DA', source: 'a paper', url: cited.url } }).whiteDwarf?.atmosphere, 'DA');
   assert.throws(() => parseStarSpec({ ...star, whiteDwarf: { atmosphere: 'DQZ', source: 'a paper', url: cited.url } }), /whiteDwarf\.atmosphere is DA, DB, DBA, not DQZ: no other white-dwarf atmosphere has a limb-darkening grid here/u);
 });
+
+test('the spec takes a planetary nebula\'s central star, past 100,000 K, and refuses a temperature no star has', () => {
+  const cited = { value: 1, source: 'a paper', url: 'https://doi.org/10.3847/1538-4357/aa6af8' };
+  const star = { id: 'a-nucleus', name: 'A Nucleus', description: 'A central star.', target: 'A Nucleus', paper: { url: cited.url, credit: 'A paper' }, radius: { ...cited, value: 0.0374 }, mass: 'unmeasured' };
+  assert.equal(parseStarSpec({ ...star, temperature: { ...cited, value: 112200 } }).temperature.value, 112200);
+  assert.throws(() => parseStarSpec({ ...star, temperature: { ...cited, value: 300000 } }), /temperature\.value 300000 is outside 1000 to 250000/u);
+});

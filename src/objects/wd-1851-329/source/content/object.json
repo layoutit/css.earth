@@ -1,0 +1,81 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "wd-1851-329",
+  "displayName": "WD 1851+329",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "0.037 solar radii",
+        "source": {
+          "catalogueId": "arxiv-2109-12114",
+          "url": "https://arxiv.org/abs/2109.12114",
+          "label": "González-Santamaría et al. (2021), A&A 656, A51 (2021)",
+          "checked": "2026-10-05",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "790 parsecs",
+        "source": {
+          "catalogueId": "page-cdsarc-cds-unistra-fr-viz-bin-cat-j-a-a-656-a110",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/656/A110",
+          "label": "Chornay & Walton (2021), A&A 656, A110; CDS J/A+A/656/A110, Table A.1, PN G063.1+13.9: distance 790 pc (764 to 818) from the Gaia EDR3 parallax of this star, the distance its nebula's page stands at",
+          "checked": "2026-10-05",
+          "path": "source/measurements.json",
+          "locator": "distanceParsecs; distanceSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "color",
+    "controls": [
+      {
+        "id": "color",
+        "label": "Color",
+        "qualification": "Color of a blackbody at the star's temperature. The disc itself is unresolved; darkening toward the edge from a published law.",
+        "thumbnail": "wd-1851-329-dataset-color.webp",
+        "surface": "wd-1851-329-surface-color@2x.webp",
+        "poles": "wd-1851-329-poles-color@2x.webp",
+        "source": {
+          "id": "wd-1851-329-stellar-color",
+          "path": "../manifest.json",
+          "url": "https://arxiv.org/abs/2109.12114"
+        },
+        "falseColor": false,
+        "notes": "The color of a blackbody at the star's published temperature. The spin axis's direction on the sky is a display convention. The darkening toward the edge is the quadratic law (u1 0.0593, u2 0.0996) of the nearest model Claret et al. (2020), A&A 634, A93 tabulate: a pure-hydrogen white dwarf at 100,000 K and log g 7.0, the grid's hottest (Johnson V)."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "González-Santamaría et al. (2021), A&A 656, A51",
+      "href": "https://arxiv.org/abs/2109.12114"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://arxiv.org/abs/2109.12114",
+      "credit": "González-Santamaría et al. (2021), A&A 656, A51"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/wd-1851-329.json",
+      "credit": "González-Santamaría et al. radius; Gaia DR3 position; cited distance; no measured rotation axis (display convention)"
+    }
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "wd-1111-552",
+  "angularDiameterMas": 0,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 26,019 km at 811.01 pc = 0 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 811.014503375056,
+  "distanceSource": "Chornay & Walton (2021), A&A 656, A110; CDS J/A+A/656/A110, Table A.1, PN G148.4+57.0: distance 811 pc (782 to 842) from the Gaia EDR3 parallax of this star, the distance its nebula's page stands at (https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/656/A110): 811.014503375056 pc; Gaia DR3 parallax 1.2347 +/- 0.0461 mas (same row, RUWE 1.04), 26.8 standard errors, is not used",
+  "radiusKm": 26019.2,
+  "radiusSource": "Radius 0.0374 solar radii from González-Santamaría et al. (2021), A&A 656, A51, Table 8: log(L/Lsun) = 1.98 from the star's V magnitude at its Gaia EDR3 distance, and log(Teff) = 4.97; the paper prints no radius, and 0.0374 solar radii is the sphere that radiates that luminosity at that temperature (Stefan-Boltzmann law) (https://arxiv.org/abs/2109.12114): 26,019 km at 695,700 km per solar radius. No mass is measured, so GM is 0, the records' unpublished value. Temperature 93300 K from González-Santamaría et al. (2021), A&A 656, A51, Table 8: log(Teff) = 4.97, a temperature from the literature the paper compiles; spectral type DAO (https://arxiv.org/abs/2109.12114). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 93300,
+  "effectiveTemperatureSource": "González-Santamaría et al. (2021), A&A 656, A51, Table 8: log(Teff) = 4.97, a temperature from the literature the paper compiles; spectral type DAO (https://arxiv.org/abs/2109.12114)",
+  "surfaceGravityLogg": 6.94,
+  "surfaceGravitySource": "Napiwotzki (1999), arXiv:astro-ph/9908181, Table 2: log g from a fit of the star's spectrum (https://arxiv.org/abs/astro-ph/9908181)",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

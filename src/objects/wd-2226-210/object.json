@@ -1,0 +1,146 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "wd-2226-210",
+  "parent": "helix",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "WD 2226-210",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "panel-content",
+        "datasets",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@2",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "datasets": [
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 15862
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/body-surfaces.css",
+        "src/renderers/css/styles/wd-2226-210-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "WD 2226-210",
+      "classification": "star",
+      "color": "#96b4ff",
+      "distanceAu": 44553164.4,
+      "description": "WD 2226-210 is the central star of the Helix Nebula, about 216 parsecs away.",
+      "systemName": "Helix Nebula",
+      "aliases": [
+        "GJ 9785",
+        "PHL 287"
+      ],
+      "order": 5780,
+      "context": {
+        "order": 5777
+      },
+      "featured": true
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        5751253064334269000,
+        -2392730415631053000,
+        -2370851005041635000
+      ],
+      "presentationToReference": [
+        0.862896165404087,
+        -0.32842388615751095,
+        -0.38411971927007443,
+        -0.3589961835097203,
+        0.13663710681248178,
+        -0.9232832941558996,
+        -0.3557132946016746,
+        -0.9345951273375614,
+        -7.138164218768031e-7
+      ],
+      "orbitUpReference": [
+        0.32842388615751095,
+        -0.13663710681248178,
+        0.9345951273375614
+      ],
+      "metersPerUnit": 51167.74193548387,
+      "bodyRadiusM": 15862000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-published-limb-darkening@1",
+  "objectId": "wd-2226-210",
+  "law": "quadratic",
+  "basis": "model-prior",
+  "source": "Claret et al. (2020), A&A 634, A93, Table ab of the CDS catalogue J/A+A/634/A93 (tableab.dat): quadratic limb-darkening coefficients of white-dwarf model atmospheres (https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/634/A93)",
+  "band": "Johnson V",
+  "u1": {
+    "value": 0.0593,
+    "fixed": "the row \"DA-NLTE 7.00 100000.0 0.0000 0.0593 0.0996 0.0015 0.261803E-02 1.8651 V\": a = 0.0593"
+  },
+  "u2": {
+    "value": 0.0996,
+    "fixed": "the row \"DA-NLTE 7.00 100000.0 0.0000 0.0593 0.0996 0.0015 0.261803E-02 1.8651 V\": b = 0.0996"
+  },
+  "derived": "of the nearest model Claret et al. (2020), A&A 634, A93 tabulate: a pure-hydrogen white dwarf at 100,000 K and log g 7.0, the grid's hottest",
+  "note": "The star is hotter than the grid's hottest model, 107,200 K against 100,000 K. Between the grid's last two temperatures, 90,000 and 100,000 K, the edge of the disc brightens by 0.011 of the centre's light at log g 7.0 (0.830 to 0.841), so the model's distance from the star changes the edge by about that much. The model is pure hydrogen (He/H = 0) in non-LTE; the star's type, DAO.5, is hydrogen-rich with helium lines. Its log g is 7.00 (Napiwotzki 1999, Table 2); the row is the grid's log g 7.00, the nearest. The law is the model's, not a measurement of this star."
+}

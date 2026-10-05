@@ -1,0 +1,51 @@
+{
+  "id": "arxiv-0909-4281",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Benedict et al. (2009): Astrometry with the Hubble Space Telescope: Trigonometric Parallaxes of Planetary Nebula Nuclei: NGC 6853, NGC 7293, Abell 31, and DeHt 5",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "0909.4281"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1088/0004-6256/138/6/1969"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/0909.4281",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1088/0004-6256/138/6/1969",
+      "label": "Journal version"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/0909.4281",
+      "checkedOn": "2026-10-05",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Benedict et al. (2009)",
+      "scope": "citation",
+      "evidence": "https://arxiv.org/abs/0909.4281"
+    }
+  ],
+  "creators": [
+    "G. Fritz Benedict",
+    "Barbara E. McArthur",
+    "Ralf Napiwotzki",
+    "et al."
+  ],
+  "publicationDate": "2009"
+}
