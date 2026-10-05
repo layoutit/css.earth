@@ -7,7 +7,10 @@ export interface PreparedImage {
 export interface PreparedImagePool { id: string | null; capacity: number; concurrency: number; reuse: boolean; decoding?: PreparedImage["decoding"];
   /** A pool that budgets decoded bytes holds images large enough to overflow the browser's own decode budget. */
   maximumDecodedBytes?: number; }
-export interface PreparedImageStoreOptions { createImage?: () => PreparedImage; decoding?: PreparedImage["decoding"]; pools?: readonly PreparedImagePool[]; }
+export interface PreparedImageStoreOptions { createImage?: () => PreparedImage; decoding?: PreparedImage["decoding"]; pools?: readonly PreparedImagePool[];
+  /** Runs `release` once the frame that replaces an image has painted: two animation frames on by default, at once where
+   * there are none (Node). */
+  afterPaint?: (release: () => void) => void; }
 export interface PreparedImageLease {
   readonly role: string; load(url: string, options?: { pool?: string | null }): Promise<PreparedImage | null>;
   handoff(url: string): boolean; release(url: string): boolean; destroy(): void; keys(): readonly string[];
@@ -56,7 +59,11 @@ export function releasePreparedImage(image: PreparedImage) {
 // abandoned consumer cannot release another consumer's committed material.
 export function createPreparedImageStore({
   createImage = () => new Image(), decoding = "async", pools = [],
+  afterPaint = typeof globalThis.requestAnimationFrame === "function"
+    ? release => { globalThis.requestAnimationFrame(() => globalThis.requestAnimationFrame(release)); } : release => { release(); },
 }: PreparedImageStoreOptions = {}) {
+  // The handles of slots that are not reused, between their retirement and the paint after it.
+  const leaving = new Set<PreparedImage>();
   const entries = new Map<string, ImageEntry>(), leases = new Set<PreparedImageLease>(), poolStates = new Map<string | null, PoolState>();
   let destroyed = false, pumping = false, retiringOwners = 0, allocations = 0, releases = 0;
   for (const policy of [{ id: null, capacity: Infinity, concurrency: Infinity, reuse: false }, ...pools]) {
@@ -92,14 +99,22 @@ export function createPreparedImageStore({
       entry.pool.slots.splice(entry.pool.slots.indexOf(slot), 1);
       return;
     }
+    // A slot that is not reused gives up its native handle once the frame that replaces its image has painted. Removing
+    // `src` in the frame of the switch made WebKit decode the replacement again inside its first paint: between two of
+    // Saturn's 4,160 px datasets that frame was 93 to 105 ms on the iPad, 43 to 59 ms of it the decode, and 63 to 65 ms
+    // with the old handle released two frames on (2026-10-05).
+    if (!entry.pool.reuse) {
+      const image = slot.image;
+      entry.pool.slots.splice(entry.pool.slots.indexOf(slot), 1);
+      leaving.add(image);
+      afterPaint(() => { if (leaving.delete(image)) releasePreparedImage(image); });
+      return;
+    }
+    // A reused slot clears its handle now: the next image takes it.
     try { releasePreparedImage(slot.image); }
     catch (error) {
       entry.pool.slots.splice(entry.pool.slots.indexOf(slot), 1);
       throw error;
-    } finally {
-      if (!entry.pool.reuse && entry.pool.slots.includes(slot)) {
-        entry.pool.slots.splice(entry.pool.slots.indexOf(slot), 1);
-      }
     }
   }
 
@@ -304,6 +319,8 @@ export function createPreparedImageStore({
       for (const lease of leases) {
         try { lease.destroy(); } catch (error) { errors.push(error); }
       }
+      // What was waiting for its paint is released with the store.
+      for (const image of [...leaving]) { leaving.delete(image); try { releasePreparedImage(image); } catch (error) { errors.push(error); } }
       if (errors.length) throw new AggregateError(errors, "Prepared image cleanup failed.");
     },
     stats() {
