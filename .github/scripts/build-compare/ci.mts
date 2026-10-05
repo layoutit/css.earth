@@ -222,13 +222,13 @@ async function main(): Promise<number> {
       await cp(performanceRoot, destination, { recursive: true });
     }
     const approved = Array.isArray(labels) && labels.some(label => record(label).name === 'performance-increase-approved');
-    const guard = await performanceStage(join(head, '.github/scripts/performance'), base, head, out, approved);
+    const guard = await performanceStage(join(head, '.github/scripts/performance'), base, head, out, declaration.mode, approved);
     timings.push(...guard.timings);
     performanceExit = guard.exitCode;
     answerSummary += performanceSummary(guard);
   } catch (error) {
-    console.warn(`::error::Performance guard stage failed: ${String(error).replaceAll('\n', '%0A').replaceAll('\r', '%0D')}`);
-    performanceExit = performanceVerdict(undefined, 1, false);
+    console.warn(`::${declaration.mode === 'report' ? 'notice' : 'error'}::Performance guard stage failed: ${String(error).replaceAll('\n', '%0A').replaceAll('\r', '%0D')}`);
+    performanceExit = performanceVerdict(declaration.mode, undefined, 1, false);
     answerSummary += `\n## Performance guard\n\nStage failed: ${String(error)}. Exit: ${performanceExit}.\n`;
     await writeFile(join(out, 'performance.json'), JSON.stringify({ exitCode: performanceExit, failure: String(error) }));
   }

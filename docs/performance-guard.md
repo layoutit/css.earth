@@ -54,8 +54,9 @@ The default is the thirteen S0 capability representatives plus `/earth/` and `/`
 
 The [build comparison lane](build-comparison.md) runs the guard on the two builds it already made, after the build comparison and before the server answers (`.github/scripts/build-compare/performance-stage.mts`): it measures `<out>/base` and `<out>/head` (their `dist/` and `metadata/`), compares them, writes `performance.json` and the Markdown comparison to the job summary, and uploads both with the lane artifacts. The tools come from the merge base, like the other lane tools, except for the pull request that introduces them.
 
-- Any increase fails the lane, in an ordinary pull request as well as in a declared refactor. A stage that cannot run fails the lane too, since a guard that silently skips guards nothing.
-- The owner may approve a deliberate increase with the label `performance-increase-approved`: the lane still reports every increase and then passes. Nothing else disables it.
+- A declared refactor (`.github/site-refactor.json`, every plan-7 pull request) is fully strict: any increase fails the lane, and a stage that cannot run fails closed, since a guard that silently skips guards nothing.
+- An ordinary feature pull request only reports: the increases appear in the job summary and the lane does not fail, because a new feature legitimately adds bytes.
+- The label `performance-increase-approved` applies to a declared refactor only and only the owner may set it: the lane still reports every increase and then passes. Nothing else disables the rule.
 - A decrease is an improvement and needs nothing: the next pull request compares against the merged result.
 
 ## Existing contracts and the build boundary
