@@ -5,7 +5,7 @@
 :where(.object-stage > :is(
   .mercury-sun-camera,
   .mercury-camera,
-  .mercury-material-root,
+  .mercury-material-composite,
   .venus-material-composite,
   .mars-material-composite,
   .moon-material-composite,
@@ -105,62 +105,30 @@
   visibility: hidden;
 }
 
-/* The terminator overlay follows the body's silhouette: the runtime writes
-   its scale from the projected silhouette diameter on every publication. */
-.mercury-material-root {
-  z-index: 3;
+.object-stage[data-object-id="mercury"] .polycss-camera,
+.object-stage[data-object-id="mercury"] .mercury-material-composite {
+  z-index: 1;
 }
 
-/* Level of detail (the stage is `data-lod` on the stage element, the
-   opacities are written per publication):
-     geometry   the retained leaves, the overlay on top;
-     crossfade  the billboard disc fades in over the geometry, beneath the
-                overlay, which now draws from the billboard lighting atlas;
-     billboard  the geometry is hidden beneath the opaque disc;
-     marker     the navigation sprite has faded in over the disc, which hides.
-   The finer stage always stays painted until the coarser one is opaque. */
-.mercury-billboard {
+/* Lambert lighting overlay: 460 px = presentationSize of the lighting bank = logical body diameter.
+   background-image / background-position / background-size come from the material track, and its roll is its transform. */
+.object-stage[data-object-id="mercury"] .mercury-fixed-material {
   position: absolute;
   display: block;
+  z-index: 1;
   top: 50%;
   left: 50%;
   width: 460px;
   height: 460px;
-  margin: calc(460px / -2) 0 0
-    calc(460px / -2);
-  border-radius: 50%;
-  pointer-events: none;
-}
-
-.object-stage[data-lod="billboard"] .mercury-scene,
-.object-stage[data-lod="marker"] .mercury-scene {
-  visibility: hidden;
-}
-
-/* At the marker stage the flat disc gives way to the navigation sprite, but
-   the lighting overlay stays alive over it (floored to the sprite's size by
-   the runtime) so the marker keeps the phase and never steps up to a fully
-   lit sprite brighter than the body it replaces. The material root paints
-   above the orbit overlay for that reason. */
-.object-stage[data-lod="marker"] .mercury-billboard {
-  visibility: hidden;
-}
-
-.mercury-material {
-  position: absolute;
-  display: block;
-  top: 50%;
-  left: 50%;
-  width: 460px;
-  height: 460px;
-  margin: calc(460px / -2) 0 0
-    calc(460px / -2);
+  margin: 0;
+  padding: 0;
+  line-height: 0;
+  text-decoration: none;
+  translate: -50% -50%;
+  transform-origin: 50% 50%;
+  backface-visibility: hidden;
   background-repeat: no-repeat;
   pointer-events: none;
-}
-
-.object-stage.mercury-hide-shadows .mercury-material {
-  transform: none;
 }
 
 /* The orbit toggle hides the line only; the body marker shares the overlay
@@ -169,13 +137,10 @@
   visibility: hidden;
 }
 
-.object-stage[data-view="interior"] .mercury-body,
-.object-stage[data-view="interior"][data-lod="geometry"] .mercury-material-root {
+.object-stage[data-view="interior"] .mercury-body {
   visibility: hidden;
 }
 
-/* The cutaway carries no overlay; from afar it is the exterior billboard, so
-   the overlay fades in with the disc. */
 .object-stage[data-view="interior"]:not([data-lod="billboard"]):not([data-lod="marker"])
   .mercury-cutaway {
   display: block;
