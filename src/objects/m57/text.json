@@ -22,7 +22,7 @@
     ]
   },
   "introduction": {
-    "text": "ESA/Hubble's photograph of it lies here on the walls its spectra give: a shell 0.34 pc across and a lobe through its opening, pointed almost at the Sun.",
+    "text": "Hubble's and Webb's pictures of it lie here on the walls its spectra give: a shell seen almost pole-on and a lobe through its opening.",
     "sources": [
       {
         "catalogueId": "esahubble-heic1310a",
@@ -52,6 +52,13 @@
         "label": "Kastner et al. (2025), ApJ: The structure of the molecular envelope of the Ring Nebula (NGC 6720)",
         "checked": "2026-10-03",
         "locator": "Sect. IV: an elongated ellipsoid of radius 2.3e17 cm through the polar openings of the molecular shell"
+      },
+      {
+        "catalogueId": "esawebb-weic2320b",
+        "url": "https://esawebb.org/images/weic2320b/",
+        "label": "ESA/Webb weic2320b: ESA/Webb, NASA, CSA, M. Barlow, N. Cox, R. Wesson",
+        "checked": "2026-10-04",
+        "locator": "Webb captures detailed beauty of Ring Nebula (NIRCam image); NIRCam 1.62, 2.12, 3.0 and 3.35 µm"
       }
     ]
   },
@@ -81,6 +88,76 @@
           "label": "Kastner et al. (2025), ApJ: The structure of the molecular envelope of the Ring Nebula (NGC 6720)",
           "checked": "2026-10-03",
           "locator": "Sect. IV: an elongated ellipsoid of radius 2.3e17 cm through the polar openings of the molecular shell"
+        }
+      ]
+    },
+    "near-infrared": {
+      "title": "Ring Nebula in the near infrared",
+      "detail": "4097 × 4156 px",
+      "summary": "Webb's picture on the nebula's molecular shell: a thin ellipsoid seen almost pole-on, open at its poles.",
+      "sources": [
+        {
+          "catalogueId": "esawebb-weic2320b",
+          "url": "https://esawebb.org/images/weic2320b/",
+          "label": "ESA/Webb weic2320b: ESA/Webb, NASA, CSA, M. Barlow, N. Cox, R. Wesson",
+          "checked": "2026-10-04",
+          "locator": "Webb captures detailed beauty of Ring Nebula (NIRCam image)"
+        },
+        {
+          "catalogueId": "publication-kastner-2025-ring-nebula-molecular-envelope",
+          "url": "https://arxiv.org/abs/2501.12223",
+          "label": "Kastner et al. (2025), ApJ: the structure of the molecular envelope of the Ring Nebula (NGC 6720)",
+          "checked": "2026-10-04",
+          "locator": "Sect. IV: the molecular envelope as a thin ellipsoidal shell, open at its poles"
+        },
+        {
+          "catalogueId": "publication-wesson-2024-ring-nebula-jwst",
+          "url": "https://arxiv.org/abs/2308.09027",
+          "label": "Wesson et al. (2024), MNRAS 528, 3392: JWST observations of the Ring Nebula (NGC 6720): I. Imaging of the rings, globules, and arcs",
+          "checked": "2026-10-04",
+          "locator": "Sect. 5.5: molecular hydrogen dominates three of the four NIRCam filters"
+        },
+        {
+          "catalogueId": "publication-odell-2013-ring-nebula-structure",
+          "url": "https://arxiv.org/abs/1301.6636",
+          "label": "O'Dell et al. (2013), AJ 145, 92: studies of NGC 6720 with calibrated HST/WFC3 emission-line filter images. I. Structure and evolution",
+          "checked": "2026-10-04",
+          "locator": "Sect. III.3: the Main Ring's and the Lobes' speeds"
+        }
+      ]
+    },
+    "mid-infrared": {
+      "title": "Ring Nebula in the mid infrared",
+      "detail": "1257 × 1015 px",
+      "summary": "Webb's mid-infrared picture on the nebula's ionised shell, each color at the speed of the gas it shows.",
+      "sources": [
+        {
+          "catalogueId": "esawebb-weic2320c",
+          "url": "https://esawebb.org/images/weic2320c/",
+          "label": "ESA/Webb weic2320c: ESA/Webb, NASA, CSA, M. Barlow, N. Cox, R. Wesson",
+          "checked": "2026-10-04",
+          "locator": "Webb captures detailed beauty of Ring Nebula (MIRI image)"
+        },
+        {
+          "catalogueId": "publication-odell-2013-ring-nebula-structure",
+          "url": "https://arxiv.org/abs/1301.6636",
+          "label": "O'Dell et al. (2013), AJ 145, 92: studies of NGC 6720 with calibrated HST/WFC3 emission-line filter images. I. Structure and evolution",
+          "checked": "2026-10-04",
+          "locator": "Sect. III.1 and III.3: the shell, and the Main Ring's and the Lobes' speeds"
+        },
+        {
+          "catalogueId": "publication-wesson-2024-ring-nebula-jwst",
+          "url": "https://arxiv.org/abs/2308.09027",
+          "label": "Wesson et al. (2024), MNRAS 528, 3392: JWST observations of the Ring Nebula (NGC 6720): I. Imaging of the rings, globules, and arcs",
+          "checked": "2026-10-04",
+          "locator": "Sect. 4.1: what the mid-infrared filters show in the cavity and the halo"
+        },
+        {
+          "catalogueId": "publication-kastner-2025-ring-nebula-molecular-envelope",
+          "url": "https://arxiv.org/abs/2501.12223",
+          "label": "Kastner et al. (2025), ApJ: the structure of the molecular envelope of the Ring Nebula (NGC 6720)",
+          "checked": "2026-10-04",
+          "locator": "Sect. IV: the molecular shell's speed along the sight line"
         }
       ]
     }

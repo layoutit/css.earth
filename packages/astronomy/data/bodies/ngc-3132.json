@@ -1,0 +1,28 @@
+{
+  "id": "ngc-3132",
+  "classification": "nebula",
+  "order": 5392,
+  "physical": {
+    "name": "Southern Ring Nebula",
+    "horizonsCode": null,
+    "meanRadiusKm": 0,
+    "gravitationalParameterKm3PerS2": 0,
+    "parent": null
+  },
+  "physicalNotes": "No radius or mass of the Southern Ring Nebula is recorded: it is an extended nebula, and its package frames it at 0.231 pc (object.json worldFrame.bodyRadiusM), the circle its picture is drawn in, a presentation value.",
+  "star": {
+    "rightAscensionDegrees": 151.75735684271,
+    "declinationDegrees": -40.43642515362,
+    "positionEpochJulianYear": 2000,
+    "distanceParsecs": 754,
+    "properMotionRaMasPerYear": 0,
+    "properMotionDecMasPerYear": 0,
+    "radialVelocityKmPerS": 0,
+    "sources": {
+      "position": "SIMBAD, NGC 3132: ICRS 10 07 01.7656, -40 26 11.131, from Gaia EDR3 (2020yCat.1350....0G) (https://simbad.cds.unistra.fr/simbad/sim-id?Ident=NGC+3132)",
+      "distance": "Monteiro et al. (2025), MNRAS 539, 1756: the planetary nebula NGC 3132 revisited, a high definition 3D photoionization model: 754 pc (+18, −15), the Gaia DR3 geometric distance of the bright central star (https://arxiv.org/abs/2503.20640)",
+      "properMotion": "Zero: the nebula is held at the star's catalogued place; no motion across the sky is applied.",
+      "radialVelocity": "Zero: no radial velocity is recorded for the nebula here."
+    }
+  }
+}

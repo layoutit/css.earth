@@ -3,6 +3,8 @@
   "include": [
     "test/**/*.ts",
     "test/**/*.mts",
+    "**/*.test.ts",
+    "**/*.test.mts",
     "env.d.ts",
     "../packages/bake/src/delivery/fixtures/external-modules.d.mts"
   ],

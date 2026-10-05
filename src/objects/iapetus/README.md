@@ -14,6 +14,8 @@ Iapetus shows a Cassini/Voyager monochrome mosaic, an enhanced-color map, two Ca
 
 Physical facts are from [NASA](https://science.nasa.gov/saturn/moons/iapetus/). The sphere uses the [JPL satellite table](https://ssd.jpl.nasa.gov/sats/phys_par/sep.html) mean radius of 734.30 km. Feature notes for 11 names are the lead summary of their English Wikipedia article (CC BY-SA 4.0), recorded in `source/features/notes.json` and credited in the caption.
 
+Lighting uses the lunar-like (Lommel–Seeliger) law and phase function [Buratti and Mosher (1995)](https://doi.org/10.1006/icar.1995.1093) fitted to Voyager images. See [Lighting law](#lighting-law).
+
 Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).
 
 [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
@@ -30,6 +32,12 @@ Source selections, recorded trials and open questions are in the [investigation 
 
 The globe uses the shared raster lane and its Lambert lighting bank, with no atmosphere, fake elevation or gap filling. [The shared preparation guide](../../../docs/surface-preparation.md#preserve-photographic-detail-through-preparation) describes how polar sprites sample the original photographs directly.
 
+## Lighting law
+
+The globe is lit with the law [Buratti and Mosher (1995)](https://doi.org/10.1006/icar.1995.1093) fitted to each Voyager image of Iapetus: I/F = f(α) A μ0/(μ0 + μ) + (1 − A) μ0, with A = 1 for all of them. That leaves the Lommel–Seeliger law, which has no parameter. It was read in the paper's [JPL Open Repository preprint](https://dataverse.jpl.nasa.gov/dataset.xhtml?persistentId=hdl:2014/29299), page 6. The phase function f is the paper's Table 1, clear-filter rows: 0.937 at 14° falling to 0.532 at 90°, joined by straight lines, with f = 1 at 0° and held beyond 90°. The law is recorded in [`source/photometry/buratti-mosher-1995-lommel-seeliger-clear.json`](source/photometry/buratti-mosher-1995-lommel-seeliger-clear.json).
+
+Each lighting frame is the law relative to the flood-lit disc centre. With the Sun behind the viewer this law is flat: the limb is as bright as the centre. At 0.98 of the radius the overlay alpha is 0, where the authored bank this replaces reached 0.49. With Shadows on, the lit side dims with phase as f does. See [planet limbs](../../../docs/surface-preparation.md#planet-limbs-from-published-laws).
+
 ## Evidence
 
 The prepared map starts at 0° E, set in `source/presentation/surface-map.json` ([where the prepared map starts](../../../docs/surface-preparation.md#where-the-prepared-map-starts)). Three measurements on the prepared files agree:
@@ -42,6 +50,7 @@ The temperature crop keeps 18.0% of the sphere by area. Against the base mosaic,
 
 ## Known problems
 
+- **Lighting law:** The paper uses one phase value per image for bright and dark terrain alike. Its values are joined by straight lines here, and held beyond 90° phase. Its emission limit, 83.6°, is derived here. The Icarus version of the paper was not read, only its preprint.
 - Feature outlines are not published nomenclature boundaries. Craters and faculae trace a rim circle, other types their published extent box.
 - Both VIMS maps cover about 23.4% of reference-sphere solid angle, not measured physical surface area. Native scan gaps stay missing. Infrared bilinear/WebP sampling can soften mask edges.
 - The independent USGS comparison supports gross VIMS framing; precise local absolute registration remains unqualified.

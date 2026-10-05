@@ -1,0 +1,34 @@
+{
+  "schema": "cssearth-catalogue-points-source@1",
+  "id": "lmc-clusters",
+  "table": {
+    "path": "table.csv",
+    "origin": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&MAXREC=100000&QUERY=SELECT+recno%2C+RAJ2000%2C+DEJ2000%2C+49590.6727505+AS+distpc+FROM+%22J%2FMNRAS%2F389%2F678%2Ftable3%22+WHERE+Type+%3D+'C'+AND+RAJ2000+BETWEEN+60+AND+100+ORDER+BY+recno",
+    "bytes": 123991,
+    "format": "csv",
+    "columns": {
+      "name": 1,
+      "raDeg": 2,
+      "decDeg": 3,
+      "distance": 4
+    },
+    "distanceUnit": "pc",
+    "note": "The query keeps the ordinary clusters (type C) the catalogue's own rule gives to the Large Magellanic Cloud (4 h < RA < 6 h 40 min, Bica et al. 2008, Sect. 3) and writes the Cloud's distance, Pietrzyński et al.'s (2019) 49.59 kpc, into each row. No cluster's own distance is measured: every one sits at its Cloud's distance, so the Cloud's depth is not drawn.",
+    "distanceSource": "publication-pietrzynski2019natur-567-200p"
+  },
+  "filters": [],
+  "frame": {
+    "input": "icrs",
+    "output": "sun-icrf",
+    "epochJdTt": 2461286.5,
+    "converter": "Astropy SkyCoord ICRS, heliocentric Cartesian"
+  },
+  "source": "bica-2008-magellanic-extended-objects",
+  "meaning": "Star clusters of the Large Magellanic Cloud from Bica et al.'s (2008) catalogue of extended objects: one dot per ordinary cluster at its catalogue sky position, at the Cloud's distance.",
+  "appearance": {
+    "colorCss": "#9fd4ff",
+    "radiusPx": 0.75,
+    "opacity": 1,
+    "note": "Presentation only: the Milky Way open-cluster layer's blue-white and size."
+  }
+}

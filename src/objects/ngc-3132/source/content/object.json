@@ -1,0 +1,147 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "ngc-3132",
+  "displayName": "Southern Ring Nebula",
+  "panel": {
+    "facts": [
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "754 pc (+18, −15)",
+        "source": {
+          "catalogueId": "publication-monteiro-2025-ngc-3132-model",
+          "url": "https://arxiv.org/abs/2503.20640",
+          "label": "Monteiro et al. (2025), MNRAS 539, 1756: the planetary nebula NGC 3132 revisited, a high definition 3D photoionization model; Sect. 1: the Gaia DR3 geometric distance of the bright A star, 754 pc (+18, −15)",
+          "checked": "2026-10-04"
+        }
+      },
+      {
+        "id": "position",
+        "label": "Sky position (ICRS)",
+        "value": "RA 151.757°, Dec -40.436°",
+        "source": {
+          "catalogueId": "simbad-ngc-3132",
+          "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=NGC+3132",
+          "label": "SIMBAD, NGC 3132: ICRS 10 07 01.7656, -40 26 11.131, from Gaia EDR3 (2020yCat.1350....0G)",
+          "checked": "2026-10-04"
+        }
+      },
+      {
+        "id": "ring-tilt",
+        "label": "Its main ring's axis",
+        "value": "about 30° from the sight line",
+        "source": {
+          "catalogueId": "publication-monteiro-2025-ngc-3132-model",
+          "url": "https://arxiv.org/abs/2503.20640",
+          "label": "Monteiro et al. (2025), MNRAS 539, 1756: the planetary nebula NGC 3132 revisited, a high definition 3D photoionization model; Sect. 3.1: the main dense inner ring's symmetry axis is inclined to the line of sight by about 30 degrees",
+          "checked": "2026-10-04"
+        }
+      },
+      {
+        "id": "age",
+        "label": "Age of its expansion",
+        "value": "2,061 ± 412 years",
+        "source": {
+          "catalogueId": "publication-monteiro-2025-ngc-3132-model",
+          "url": "https://arxiv.org/abs/2503.20640",
+          "label": "Monteiro et al. (2025), MNRAS 539, 1756: the planetary nebula NGC 3132 revisited, a high definition 3D photoionization model; Sect. 4: a dynamical age of 2061 ± 412 yr from the fitted velocity field",
+          "checked": "2026-10-04"
+        }
+      },
+      {
+        "id": "picture",
+        "label": "Picture width",
+        "value": "2.42 arcmin, 0.53 pc at its distance",
+        "source": {
+          "catalogueId": "esawebb-weic2207b",
+          "url": "https://esawebb.org/images/weic2207b/",
+          "label": "ESA/Webb weic2207b: NASA, ESA, CSA, STScI, and the Webb ERO Production Team",
+          "checked": "2026-10-04"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "optical",
+    "controls": [
+      {
+        "id": "optical",
+        "label": "Webb · near infrared",
+        "thumbnail": "ngc-3132-dataset-optical.webp",
+        "volume": {
+          "objectId": "ngc-3132-layers",
+          "datasetId": "optical",
+          "surface": "optical"
+        },
+        "source": {
+          "id": "ngc-3132-layers-optical",
+          "path": "../../ngc-3132-layers/source/manifest.json",
+          "url": "https://esawebb.org/images/weic2207b/"
+        },
+        "falseColor": true
+      },
+      {
+        "id": "mid-infrared",
+        "label": "Webb · mid infrared",
+        "thumbnail": "ngc-3132-dataset-mid-infrared.webp",
+        "volume": {
+          "objectId": "ngc-3132-miri-layers",
+          "datasetId": "optical",
+          "surface": "mid-infrared"
+        },
+        "source": {
+          "id": "ngc-3132-miri-layers-optical",
+          "path": "../../ngc-3132-miri-layers/source/manifest.json",
+          "url": "https://esawebb.org/images/weic2207c/"
+        },
+        "falseColor": true
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Monteiro et al. (2025), MNRAS 539, 1756: the planetary nebula NGC 3132 revisited, a high definition 3D photoionization model; Sect. 1: the Gaia DR3 geometric distance of the bright A star, 754 pc (+18, −15)",
+      "href": "https://arxiv.org/abs/2503.20640"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "SIMBAD, NGC 3132: ICRS 10 07 01.7656, -40 26 11.131, from Gaia EDR3 (2020yCat.1350....0G)",
+      "href": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=NGC+3132"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Monteiro et al. (2025), MNRAS 539, 1756: the planetary nebula NGC 3132 revisited, a high definition 3D photoionization model; Sect. 3.1: the main dense inner ring's symmetry axis is inclined to the line of sight by about 30 degrees",
+      "href": "https://arxiv.org/abs/2503.20640"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Monteiro et al. (2025), MNRAS 539, 1756: the planetary nebula NGC 3132 revisited, a high definition 3D photoionization model; Sect. 4: a dynamical age of 2061 ± 412 yr from the fitted velocity field",
+      "href": "https://arxiv.org/abs/2503.20640"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "ESA/Webb weic2207b: NASA, ESA, CSA, STScI, and the Webb ERO Production Team",
+      "href": "https://esawebb.org/images/weic2207b/"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://arxiv.org/abs/2503.20640",
+      "credit": "Monteiro et al. (2025), MNRAS 539, 1756: the planetary nebula NGC 3132 revisited, a high definition 3D photoionization model"
+    }
+  }
+}

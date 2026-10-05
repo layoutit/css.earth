@@ -1169,6 +1169,36 @@
         "kind": "local",
         "reason": "Project-authored selection of exact published numerical fields, wavelengths and output coordinates."
       }
+    },
+    {
+      "path": "photometry/squyres-veverka-1981-lommel-seeliger-clear.json",
+      "purpose": "Lunar-like (Lommel-Seeliger) law Squyres and Veverka found for Ganymede in Voyager images, used to light the globe.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "nasa-tm-82385",
+            "role": "method",
+            "evidence": "Page 67 is the authors' own summary of the study. It says Voyager CLEAR-filter images (effective wavelength 0.5 micrometres) at phase angles from 10 to 124 degrees were used, the record's fitted phase range, and that the photometric properties of Ganymede's Cratered and Grooved Terrain are described closely by a simple scattering function of the form I = A F(alpha) mu0/(mu + mu0), with A a constant: the Lommel-Seeliger law, the record's disk function. F(alpha) is drawn in the report's Figure 1 and not printed, so the record has no phase term. The report states no emission range.",
+            "locator": "Page 67, Squyres and Veverka, Voyager photometry of surface features on Ganymede and Callisto"
+          },
+          {
+            "catalogueId": "doi-10-1016-0019-1035-81-90203-7",
+            "role": "reference",
+            "evidence": "The paper the report summarizes. It is closed and was not read; its abstract gives the same images, phase range and finding.",
+            "locator": "Abstract, NASA Technical Reports Server record 19810058926"
+          },
+          {
+            "catalogueId": "pds-opus-vg-iss-2-j-c2063551",
+            "role": "reference",
+            "evidence": "The fitted emission limit, 86.2 degrees, is derived here, not printed: it is the emission angle at the outermost pixel centre of the finest clear-filter Voyager frame that holds the whole disc of Ganymede, Voyager 2 wide-angle clear frame C2063551 at 32.6 degrees phase, on a 2631.2 km sphere, arcsin((R - 0.5 pixel)/R). The PDS Ring-Moon Systems Node lists its centre resolution as 11.28633 km per pixel.",
+            "locator": "Ganymede Surface Geometry Constraints, centerresolution"
+          }
+        ]
+      },
+      "origin": "https://doi.org/10.1016/0019-1035(81)90203-7",
+      "credit": "Steven W. Squyres and Joseph Veverka, Reports of Planetary Geology Program 1980 (NASA TM-82385), page 67, and Icarus 46, 137 (1981). Transcription and emission limit: cssEarth.",
+      "acquisition": "Law transcribed from the authors' summary in NASA TM-82385 into a project document; the emission limit is computed from the image scale the PDS Ring-Moon Systems Node lists; no data file was downloaded."
     }
   ]
 }

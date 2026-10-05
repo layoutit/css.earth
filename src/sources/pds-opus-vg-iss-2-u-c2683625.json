@@ -1,0 +1,27 @@
+{
+  "id": "pds-opus-vg-iss-2-u-c2683625",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "PDS Ring-Moon Systems Node observation record · Voyager 2 narrow-angle frame C2683625 of Oberon",
+  "identifiers": [
+    {
+      "type": "OPUS ID",
+      "value": "vg-iss-2-u-c2683625"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://opus.pds-rings.seti.org/opus/api/metadata/vg-iss-2-u-c2683625.json",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/oberon/source/manifest.json",
+      "locator": "/documents/6"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

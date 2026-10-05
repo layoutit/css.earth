@@ -1,0 +1,33 @@
+{
+  "schema": "cssearth-catalogue-points-source@1",
+  "id": "sagittarius-stream",
+  "table": {
+    "path": "table.csv",
+    "origin": "https://tapvizier.cds.unistra.fr/TAPVizieR/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&MAXREC=100000&QUERY=SELECT+GaiaEDR3%2C+RA_ICRS%2C+DE_ICRS%2C+DistWGBPRP+FROM+%22J%2FA%2BA%2F666%2FA64%2Ftablec1%22+WHERE+DistWGBPRP+%3E+0+AND+ProbSGR+%3E+0.9+ORDER+BY+GaiaEDR3",
+    "bytes": 161678,
+    "format": "csv",
+    "columns": {
+      "name": 1,
+      "raDeg": 2,
+      "decDeg": 3,
+      "distance": 4
+    },
+    "distanceUnit": "kpc",
+    "note": "The query keeps the stars with a photometric distance above zero (the table gives one only for RR Lyrae, and writes 0 for some) whose probability of belonging to the Sagittarius stream is above 0.9 (ProbSGR, the authors' own number; the threshold is a presentation choice). Each sits at its own distance, measured to about 9%: that error stretches every clump along the line to the Sun."
+  },
+  "filters": [],
+  "frame": {
+    "input": "icrs",
+    "output": "sun-icrf",
+    "epochJdTt": 2461286.5,
+    "converter": "Astropy SkyCoord ICRS, heliocentric Cartesian"
+  },
+  "source": "ramos-2022-sagittarius-stream",
+  "meaning": "RR Lyrae stars of the Sagittarius dwarf galaxy and the stream of stars it leaves around the Milky Way, from Ramos et al.'s (2022) Gaia EDR3 sample: one dot per star at its measured sky position and distance.",
+  "appearance": {
+    "colorCss": "#ffefd2",
+    "radiusPx": 1,
+    "opacity": 1,
+    "note": "Presentation only: the warm white of the Milky Way's RR Lyrae dots, at the field's 1 px size."
+  }
+}

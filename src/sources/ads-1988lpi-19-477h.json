@@ -1,0 +1,38 @@
+{
+  "id": "ads-1988lpi-19-477h",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Helfenstein and Veverka (1988): Early resurfacing of Umbriel: evidence from Voyager II photometry",
+  "identifiers": [
+    {
+      "type": "ADS bibcode",
+      "value": "1988LPI....19..477H"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://ui.adsabs.harvard.edu/abs/1988LPI....19..477H",
+      "label": "Publication"
+    },
+    {
+      "role": "original",
+      "url": "https://articles.adsabs.harvard.edu/pdf/1988LPI....19..477H",
+      "label": "Scan, NASA Astrophysics Data System"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/umbriel/source/manifest.json",
+      "locator": "/documents/6"
+    }
+  ],
+  "creators": [
+    "Paul Helfenstein",
+    "Joseph Veverka"
+  ],
+  "publisher": "Lunar and Planetary Science XIX, 477-478",
+  "publicationDate": "1988",
+  "relations": [],
+  "statements": []
+}
