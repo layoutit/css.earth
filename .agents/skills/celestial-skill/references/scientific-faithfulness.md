@@ -206,6 +206,17 @@ Add regression cases for demonstrated mechanisms, not tests of prose or one
 declaration per body. Run the relevant [qualification](qualification.md) checks;
 do not call unresolved external restoration or failed aggregate checks green.
 
+## A scene needs a measured shape
+
+A page shows a body up close, so its outline is a claim. Give a body a scene only when
+someone measured its shape: resolved images, a published shape model, or measured axes.
+A size computed from an assumed albedo, a minimum elongation from a light curve, or a
+nominal radius is a fact for a card, not a shape. A body with only those stays a named
+dot in its host's bank of moons without a page, and is not drawn as a sphere or an
+ellipsoid of assumed depth and orientation. Saturn's irregular moons follow this: Ymir
+and Siarnaq have published light-curve shape models and keep their pages; twenty with
+only an elongation limit, and Anthe, are dots ([moon lists](../../../../docs/moon-catalogues.md)).
+
 ## Estimates
 
 An estimate is a number nobody measured for this object: an equilibrium temperature
