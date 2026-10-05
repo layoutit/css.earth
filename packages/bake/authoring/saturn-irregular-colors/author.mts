@@ -15,7 +15,7 @@ import { readFile, rm, writeFile, mkdir } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
-import { parseDiscColorRecord } from '@cssearth/objects';
+import { DISC_INTEGRATED_COLOR_SCHEMA, parseDiscColorRecord } from '@cssearth/objects';
 import { discIntegratedColor, linearToSrgb, parseCieTable } from '@cssearth/bake/objects/color';
 import { readCie1931ColorMatching } from '@cssearth/bake/objects/sources';
 
@@ -86,7 +86,7 @@ for (const body of records(inputs.bodies)) {
 
   // 1. The cited record the bake reads.
   const record = {
-    schema: 'cssearth-disc-integrated-color@1', objectId: id,
+    schema: DISC_INTEGRATED_COLOR_SCHEMA, objectId: id,
     object: {
       source: requireString(colors.citation), locator: requireString(colors.locator), system: requireString(colors.system),
       note: `${nights.length === 1 ? 'One night' : `Inverse-variance mean of ${nights.length} nights; each uncertainty is the formal error or the nights' weighted scatter, whichever is larger`}: ${observed}.${variation}${paperName}`,
