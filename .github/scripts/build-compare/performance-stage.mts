@@ -15,7 +15,7 @@ export function performanceVerdict(mode: PerformanceMode, compareExit: number | 
 }
 export function runNode(stage: string, args: string[], cwd: string): ReturnType<PerformanceRun> {
   return new Promise((accept, reject) => {
-    const child = spawn(process.execPath, args, { cwd, stdio: ['ignore', 'pipe', 'pipe'] });
+    const child = spawn(process.execPath, args, { cwd, env: { ...process.env, NODE_OPTIONS: '--max-old-space-size=1536' }, stdio: ['ignore', 'pipe', 'pipe'] });
     let output = '';
     child.stdout.on('data', chunk => { output += String(chunk); });
     child.stderr.on('data', chunk => { output += String(chunk); });
@@ -23,7 +23,7 @@ export function runNode(stage: string, args: string[], cwd: string): ReturnType<
     child.once('close', code => accept({ exitCode: code ?? 2, output }));
   });
 }
-export async function performanceStage(tools: string, base: string, head: string, out: string, mode: PerformanceMode, approved: boolean, run: PerformanceRun = runNode): Promise<PerformanceStageReport> {
+export async function performanceStage(tools: string, base: string, head: string, out: string, mode: PerformanceMode, approved: boolean, run: PerformanceRun = runNode, cachedBase = false): Promise<PerformanceStageReport> {
   const evidence = join(out, 'performance');
   await mkdir(evidence, { recursive: true });
   const report: PerformanceStageReport = { exitCode: 0, mode, approved, failures: [], timings: [], summary: '' };
@@ -37,6 +37,7 @@ export async function performanceStage(tools: string, base: string, head: string
     return result;
   };
   for (const side of ['base', 'head'] as const) {
+    if (side === 'base' && cachedBase) continue;
     const measured = await step(`measure-${side}`, [join(tools, 'measure.mts'), '--dist', join(out, side, 'dist'), '--metadata', join(out, side, 'metadata'), '--out', join(evidence, side), '--summary', join(evidence, `${side}.md`)]);
     if (measured.exitCode) report.failures.push(`${side} measurement exited ${measured.exitCode}: ${measured.output.slice(-400)}`);
   }
@@ -48,7 +49,7 @@ export async function performanceStage(tools: string, base: string, head: string
   }
   report.exitCode = performanceVerdict(mode, compareExit, report.failures.length, approved);
   if (report.failures.length) report.summary = `Performance guard could not run: ${report.failures.join('; ')}`;
-  await writeFile(join(out, 'performance.json'), `${JSON.stringify(report, null, 2)}\n`);
+  await writeFile(join(out, 'performance.json'), `${JSON.stringify({ ...report, timings: undefined }, null, 2)}\n`);
   return report;
 }
 export function performanceSummary(report: PerformanceStageReport): string {

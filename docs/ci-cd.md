@@ -20,7 +20,7 @@ The planned browser lane and its current implementation limits are documented in
 | [Repository audit](../.github/workflows/audit.yml) | Main pushes, scheduled runs and manual dispatch: documentation, repository completeness, source-catalogue reconciliation and bake reproduction. Advisory; does not run on PRs or gate deployment. |
 | [Object-scope gate](../.github/workflows/object-scope.yml) | Every PR: more than 12 changed object directories needs the `pipeline-change` label. Labels re-evaluate this gate. |
 | [Nightly asset sweep](../.github/workflows/nightly.yml) | Scheduled/manual runs check published keys, test types and a production build/browser probe. They do not publish the site or run on PRs. |
-| [Site safety net](../.github/workflows/site-safety-net.yml) | Always-running declaration gate for refactor branches/labels and application renames; require this gate in branch protection. Fresh declarations, renames, `compare-build` and dispatch select the longer production-shaped comparison. Semantic outputs require declared globs within the computed closure. [Modes, settings and cost](build-comparison.md). |
+| [Site safety net](../.github/workflows/site-safety-net.yml) | PR declaration gate for refactor labels and application renames; require this gate in branch protection. Application inputs (tests excluded), `tool-change` or dispatch select the full comparison. Docs/tools-only changes run universe tests without builds. Main pushes produce one commit-addressed base archive. Semantic outputs require declared globs within the computed closure. [Modes, settings and cost](build-comparison.md). |
 | [Deploy](../.github/workflows/deploy.yml) | Manual dispatch only. The default R2 deployment checks build asset references and requires verified published keys before shipping, then publishes to Cloudflare; the `host` input can publish to Netlify instead. Merging validates the gate; it does not deploy. |
 
 The astroquery filter covers the owning workspaces of its discovered test files and their transitive runtime dependencies, toolchain pins and lane configuration. Its pip and toolchain caches are keyed on the pinned requirements and toolchain record. A skipped test or an incomplete derived file run fails the lane.
@@ -272,3 +272,39 @@ Checks need no git history, fail on missing budgets and reject counts above the
 ceiling. Tests pin each ceiling to the current entry/export count. Lowering the
 budget means removing allowances and editing the ceiling; raising a ceiling is
 an explicit reviewed change in the same diff as its justified additions.
+
+### Cached safety-net base
+
+Main's **Produce commit-addressed production base** job builds and qualifies
+one production-shaped base for each main push, using main's tools. It saves the
+consumer closure under `site-base-v1-<commit>`: L3 dist/metadata, inventories,
+lockfile/toolchain/build records, all sane L2 recordings and L7 measures.
+The producer measures compressed archive bytes; no production size is measured
+in this offline tool change. Entries below 10 GB use Actions cache, larger
+ones or failed cache saves use a named main-run artifact. Cache quota is shared with prepared/dependency
+banks and eviction is expected. PRs only restore the exact merge-base entry.
+
+The validity manifest is written last, with every file's byte length and md5.
+Wrong commit/toolchain/lockfile, missing/incomplete data, integrity failure,
+archive rejection or unavailable cache/artifact takes the full fresh-base path.
+Cache state is logged, retained and summarized. A hit skips all base-side
+install/preparation/build/bundle/record/measure stages. Head installation and
+preparation/build overlap restoration/extraction; three isolated L2 head
+recorders and L7 run concurrently after L3. The five-minute L2 budget remains.
+Heap limits allow 5.25 GiB total JS heaps; hosted RSS and disk peaks need proof.
+
+All lane tools, including selection, use the merge base except for their
+introducing PR or `tool-change`; the legacy declaration `tools: head` field
+no longer authorizes head tools. `refactor` still requires a declaration but
+cannot select a build without application inputs. `compare-build`, declarations
+and branch names alone also cannot select it. Both paths of a rename count.
+Selection summaries explicitly name universe tool tests for skipped builds.
+
+The `no-base-cache` label/dispatch input forces fresh evidence. Download two
+runs of the same PR and run the strict
+[identity tool](../.github/scripts/build-compare/verify-identical.mts); it requires a cache hit versus forced fresh and checks
+the same base/head/tool origin and every report/comparison Markdown byte.
+Telemetry is separate from verdict reports. The supplied hosted old-lane run
+37296091119 took about 30 minutes. Warm target: roughly 10–12 minutes, pending
+hosted archive-size, transfer, memory and identical-report proofs. Detailed
+payload, bounds and proof commands are in [build comparison](build-comparison.md#commit-addressed-base-reuse).

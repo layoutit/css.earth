@@ -25,7 +25,7 @@ test('CI uses only preparation before the production build boundary', () => {
 test('workflow always gates refactors and executes selector from merge-base', async () => {
   const source = await readFile(new URL('../../workflows/site-safety-net.yml', import.meta.url), 'utf8');
   const workflow = parse(source);
-  assert.equal(workflow.jobs.gate.if, undefined);
+  assert.equal(workflow.jobs.gate.if, "github.event_name != 'push'");
   assert.equal(workflow.jobs.gate.name, 'Refactor declaration gate');
   for (const name of ['gate', 'changes']) {
     const commands = readCiSteps(source, name);
@@ -54,7 +54,7 @@ test('workflow has no scenes cache, uses Node 24 throughout, and limits ordinary
   const source = await readFile(new URL('../../workflows/site-safety-net.yml', import.meta.url), 'utf8');
   assert.ok(!source.includes('public/scenes'));
   assert.ok(source.includes('--select'));
-  assert.ok((await readFile(new URL('./gate.mts', import.meta.url), 'utf8')).includes('compare-build'));
+  assert.ok((await readFile(new URL('./gate.mts', import.meta.url), 'utf8')).includes('tool-change'));
   assert.ok(source.includes('prepared-files-v2-'));
   const workflow = parse(source);
   for (const job of Object.values(workflow.jobs)) {
@@ -75,8 +75,8 @@ test('tool trust defaults to merge-base and changes only through explicit opt-in
   assert.equal(toolSource(refactorDeclaration(undefined), ['compare-build']), 'merge-base');
   assert.equal(toolSource(refactorDeclaration(undefined), ['tool-change']), 'head');
   assert.equal(toolSource(refactorDeclaration(undefined), [], false), 'bootstrap', 'a merge base without tools: only the introducing pull request');
-  assert.equal(toolSource(refactorDeclaration({ mode: 'pure-move', moves: {}, tools: 'head' }), [], false), 'head');
-  assert.equal(toolSource(refactorDeclaration({ mode: 'pure-move', moves: {}, tools: 'head' }), []), 'head');
+  assert.equal(toolSource(refactorDeclaration({ mode: 'pure-move', moves: {}, tools: 'head' }), [], false), 'bootstrap');
+  assert.equal(toolSource(refactorDeclaration({ mode: 'pure-move', moves: {}, tools: 'head' }), []), 'merge-base');
 });
 
 test('reordering declaration keys cannot renew a stale declaration', () => {
@@ -150,4 +150,21 @@ test('a declaration names its own change, so two refactors never share one and t
   assert.throws(() => requireFreshDeclaration('M\t.github/site-refactor.json', first, { ...first }), /identical/u);
   assert.doesNotThrow(() => requireFreshDeclaration('M\t.github/site-refactor.json', { ...first, change: 'S3-3 extract the navigation contracts' }, first));
   assert.doesNotThrow(() => requireFreshDeclaration('M\t.github/site-refactor.json', first, { mode: 'semantic', moves: {} }));
+});
+
+test('only main saves sealed base evidence; head starts before restore and the watcher requires a terminal result', async () => {
+  const source = await readFile(new URL('../../workflows/site-safety-net.yml', import.meta.url), 'utf8');
+  const workflow = parse(source);
+  assert.equal(workflow.jobs['base-cache'].if, "github.event_name == 'push'");
+  assert.deepEqual(workflow.on.push.branches, ['main']);
+  assert.equal(workflow.on.workflow_dispatch.inputs['no-base-cache'].type, 'boolean');
+  const producer = workflow.jobs['base-cache'].steps;
+  assert.ok(producer.some((step: { run?: string }) => step.run?.includes('produce-base.mts')));
+  const save = producer.find((step: { uses?: string }) => step.uses?.startsWith('actions/cache/save@'));
+  assert.equal(save.with.key, 'site-base-v1-${{ github.sha }}');
+  const steps = workflow.jobs['build-compare'].steps;
+  const start = steps.findIndex((step: { run?: string }) => step.run?.includes('build-compare/launch.mts'));
+  const restore = steps.findIndex((step: { with?: { key?: string } }) => step.with?.key === 'site-base-v1-${{ env.COMPARISON_BASE }}');
+  assert.ok(start >= 0 && start < restore);
+  assert.ok(steps.some((step: { run?: string }) => step.run?.includes('touch "$RUNNER_TEMP/site-base/ready"') && step.run.includes('4800') && step.run.includes('exit "$(cat')));
 });
