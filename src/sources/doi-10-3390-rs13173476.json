@@ -1,0 +1,29 @@
+{
+  "id": "doi-10-3390-rs13173476",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Schenk et al. (2021): Triton: Topography and Geology of a Probable Ocean World with Comparison to Pluto and Charon",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.3390/rs13173476"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3390/rs13173476",
+      "label": "Publication"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/triton/source/manifest.json",
+      "locator": "/documents/7"
+    }
+  ],
+  "publisher": "Remote Sensing 13, 3476",
+  "publicationDate": "2021",
+  "relations": [],
+  "statements": []
+}
