@@ -31,19 +31,19 @@ export interface SpatialContextPreparationOptions {
   readonly sourcePath: string;
   readonly outputPath: string;
   readonly solarGeometryPath: string;
-  /** Directory containing object descriptor folders; inferred beside a navigation source when omitted. */
+  /** Directory containing object descriptor folders; the checkout's `src/objects` when omitted. */
   readonly objectsDirectory?: string;
 }
 
 export type SpatialContextCommandOptions = SpatialContextPreparationOptions;
 
-/** Parse the CLI. No manifest pins the generated context, so there is nothing to refresh after writing it. */
+/** Parse the CLI. The world's source and its full context are the root object's, by rule: the command names no path.
+ * `--objects=<dir>` is for a fixture's objects folder. */
 export function parseSpatialContextCommand(args: readonly string[], cwd = process.cwd()): SpatialContextCommandOptions {
-  const [sourcePath, outputPath, solarGeometryPath = resolve(cwd, 'src/platform/solar-geometry.mts'), ...extra] = args;
-  if (!sourcePath || !outputPath || extra.length > 0 || args.some(argument => argument.startsWith('--'))) {
-    throw new TypeError('Usage: prepare-spatial-context <source.json> <world-context.json> [solar-geometry.mts]');
-  }
-  return { sourcePath: resolve(cwd, sourcePath), outputPath: resolve(cwd, outputPath), solarGeometryPath: resolve(cwd, solarGeometryPath) };
+  const [objects = '--objects=src/objects', ...extra] = args, option = '--objects=';
+  if (extra.length > 0 || !objects.startsWith(option) || objects.length === option.length) throw new TypeError('Usage: prepare-spatial-context [--objects=<objects directory>]');
+  const objectsDirectory = resolve(cwd, objects.slice(option.length));
+  return { sourcePath: worldSourcePath(objectsDirectory), outputPath: worldContextPath(objectsDirectory), solarGeometryPath: resolve(cwd, 'src/platform/solar-geometry.mts'), objectsDirectory };
 }
 
 /** The sRGB hex of a Planck spectrum at a temperature, through a CIE color-matching table (the route a star without a measured
@@ -88,7 +88,7 @@ export async function prepareSpatialContext(options: SpatialContextPreparationOp
     const { contextColor } = await import('@cssearth/objects');
     const { contextAnnotationOpacity } = await import('@cssearth/renderer/navigation/marker-presentation.ts');
         const { isJplMissionTarget } = await import(pathToFileURL(resolve(process.cwd(), 'site/build/prepare/jpl-mission-targets.mts')).href) as typeof import('./jpl-mission-targets.mts');
-    const objectsRoot = options.objectsDirectory ?? dirname(dirname(dirname(dirname(options.sourcePath))));
+    const objectsRoot = options.objectsDirectory ?? resolve(process.cwd(), 'src/objects');
     const byId = new Map(registry.map(object => [object.id, object]));
     // The catalogue step's discovery records, as the prepared catalogue holds them: what the world's visibility reads per body.
     const discoveries: Record<string, unknown> = Object.fromEntries(registry.map(object => [object.id, object.discovery]));
@@ -143,7 +143,7 @@ export async function prepareSpatialContext(options: SpatialContextPreparationOp
   };
   if (source.frame.epochJdTt !== geometry.SOLAR_GEOMETRY_EPOCH_JD_TT) throw new TypeError('World context and solar geometry epochs differ.');
   const auM = geometry.ASTRONOMICAL_UNIT_KILOMETERS * M_PER_KM;
-  const objectsDirectory = options.objectsDirectory ?? dirname(dirname(dirname(dirname(options.sourcePath))));
+  const objectsDirectory = options.objectsDirectory ?? resolve(process.cwd(), 'src/objects');
   const facts: Record<string, WorldContextBodyFact> = {}, states: Record<string, OrbitalState> = {};
   for (const body of source.bodies) {
     const data = (BODIES as Readonly<Record<string, { readonly meanRadiusKm: number }>>)[body.id];
@@ -245,14 +245,11 @@ export async function prepareSpatialContext(options: SpatialContextPreparationOp
     return { id, bank: plainStarDotBank(id, stars, { referenceFrame: prepared.frame.referenceFrame, epochJdTt: prepared.frame.epochJdTt, originM: centre.originM })! };
   });
   for (const { id, bank } of dotBanks) await writeCatalogueBank({ objectDirectory: resolve(objectsRoot, id), id: bank.id, bank, published: true, inventory: async () => undefined });
-  // The Sun's package held the world's own banks before the root's did.
-  for (const id of [PLAIN_STAR_DOT_BANK, RETIRED_PLAIN_STAR_DOT_BANK]) await rm(resolve(dirname(options.outputPath), `${id}.bin`), { force: true });
   // The summary and the build's index are in the root object's package, the object nothing is outside of. The summary names
   // the objects this bake wrote a dot bank for, so the site asks for no other.
   await writeIfChanged(worldSummaryPath(objectsRoot), `${JSON.stringify({ ...summary, ...(dotBanks.length ? { dotBanks: dotBanks.map(({ id }) => id) } : {}) })}\n`);
   // Read by the build and Node tools only: every body's place in the world's order, and the rows object entries carry.
   await writeIfChanged(worldIndexPath(objectsRoot), `${JSON.stringify(index)}\n`);
-  for (const old of ['world-stars.json', 'world-context-summary.json', 'world-index.json']) await rm(resolve(dirname(options.outputPath), old), { force: true });
   // Each holder is an object: a star's system, or the asteroid dot bank. Its members are its own package's prepared file,
   // published with it; a holder without a package is refused, named.
   const holders = new Set<string>(), placed = new Set<string>();
@@ -284,9 +281,12 @@ export async function prepareSpatialContext(options: SpatialContextPreparationOp
     placed.add(table.id);
     await writeIfChanged(placesFilePath(objectsRoot, table.id), `${JSON.stringify(table.file)}\n`);
   }
-  // A package that holds no members, places or orbit any more loses its file, and the Sun's old folders of them go.
+  // A package that holds no members, places or orbit any more loses its file.
   for (const entry of await readdir(objectsRoot, { withFileTypes: true })) {
     if (!entry.isDirectory()) continue;
+    // The summary, the index and the full context are the root object's alone: a copy in another package is from before they
+    // were, and the pins would publish it as that package's.
+    if (entry.name !== OBJECT_TREE_ROOT) for (const name of ['world.json', 'world-index.json', 'world-context.json']) await rm(resolve(objectsRoot, entry.name, 'prepared', name), { force: true });
     if (!holders.has(entry.name)) await rm(memberFilePath(objectsRoot, entry.name), { force: true });
     if (!placed.has(entry.name)) await rm(placesFilePath(objectsRoot, entry.name), { force: true });
     const directory = resolve(objectsRoot, entry.name, 'prepared', 'orbits'), kept = orbits.get(entry.name);
@@ -295,8 +295,6 @@ export async function prepareSpatialContext(options: SpatialContextPreparationOp
     if (!starsInside.has(entry.name)) await rm(resolve(objectsRoot, entry.name, 'prepared', `${PLAIN_STAR_DOT_BANK}.bin`), { force: true });
     await rm(resolve(objectsRoot, entry.name, 'prepared', `${RETIRED_PLAIN_STAR_DOT_BANK}.bin`), { force: true });
   }
-  for (const old of ['world-systems', 'world-orbits']) await rm(resolve(dirname(options.outputPath), old), { recursive: true, force: true });
-  await rm(resolve(dirname(options.outputPath), 'world-orbits.bin'), { force: true });
   // System framing's camera candidates, one file per host, read when navigation frames that system: each in the package of
   // the system the host is inside (its parent), which a host with members always is.
   const owned = new Map<string, Set<string>>();
@@ -313,8 +311,6 @@ export async function prepareSpatialContext(options: SpatialContextPreparationOp
     const directory = resolve(objectsRoot, entry.name, 'prepared', 'views'), kept = owned.get(entry.name);
     for (const name of await readdir(directory).catch(() => [] as string[])) if (!kept?.has(name)) await rm(resolve(directory, name));
   }
-  await rm(resolve(dirname(options.outputPath), 'system-views'), { recursive: true, force: true });
-  await rm(resolve(dirname(options.outputPath), 'world-system-views.json'), { force: true });
 }
 
 /** The star packages that are dots of a galaxy's own bank, by id: the names of each bank's tracked table
@@ -334,12 +330,24 @@ async function packagedGalaxyStars(objectsRoot: string): Promise<ReadonlySet<str
 }
 
 /** The objects directory the world's per-object files are written into: the one given; else the one the output is in, when
- * the output is an object's prepared file (`<objects>/<id>/prepared/world-context.json`); else the output's own folder, so a
- * run that writes its context anywhere else (a test's temporary folder) keeps every file it writes beside it. */
+ * the output is the root object's prepared file (`<objects>/<root>/prepared/world-context.json`); else the output's own folder,
+ * so a run that writes its context anywhere else (a test's temporary folder) keeps every file it writes beside it. */
 export function worldFilesRoot(options: Pick<SpatialContextPreparationOptions, 'outputPath' | 'objectsDirectory'>): string {
   if (options.objectsDirectory !== undefined) return options.objectsDirectory;
   const folder = dirname(options.outputPath);
   return basename(folder) === 'prepared' ? dirname(dirname(folder)) : folder;
+}
+
+/** The world's definition: the root object's source, `source/navigation/universe.json` (frame, focus, catalogue membership,
+ * camera, sky and the distances its layers fade over). */
+export function worldSourcePath(objectsRoot: string): string {
+  return resolve(objectsRoot, OBJECT_TREE_ROOT, 'source', 'navigation', 'universe.json');
+}
+
+/** Every body of the world in one file, for the build's tools and tests: the root object's prepared `world-context.json`.
+ * No page reads it. */
+export function worldContextPath(objectsRoot: string): string {
+  return resolve(objectsRoot, OBJECT_TREE_ROOT, 'prepared', 'world-context.json');
 }
 
 /** The world file every page reads: the root object's prepared `world.json` (frame, camera and sky facts and the focus). */

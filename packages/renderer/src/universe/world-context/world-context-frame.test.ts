@@ -12,7 +12,7 @@ const defined = (value: unknown): unknown => Array.isArray(value) ? value.map(de
   : value && typeof value === 'object' && Object.getPrototypeOf(value) === Object.prototype
     ? Object.fromEntries(Object.entries(value).filter(([, item]) => item !== undefined).map(([key, item]) => [key, defined(item)])) : value;
 
-const plan = parsePreparedWorldContext(JSON.parse(await readFile(new URL('../../../../../src/objects/sun/prepared/world-context.json', import.meta.url), 'utf8')));
+const plan = parsePreparedWorldContext(JSON.parse(await readFile(new URL('../../../../../src/objects/observable-universe/prepared/world-context.json', import.meta.url), 'utf8')));
 // Tests move the observer in place; the planner itself receives the readonly view.
 type World = WorldContextView['world'];
 type TestView = Omit<WorldContextView, 'world'> & { world: Omit<World, 'pose'> & { pose: Omit<World['pose'], 'positionM'> & { positionM: [number, number, number] } } };

@@ -1344,22 +1344,6 @@
       }
     },
     {
-      "id": "sun-world-context-navigation",
-      "path": "navigation/universe.json",
-      "origin": "Project-authored physical navigation context at the pinned solar-geometry epoch",
-      "credit": "cssEarth project authors",
-      "license": "Project-authored data",
-      "acquisition": "Authored numerical source validated against the checked-in solar geometry adapter",
-      "redistribution": "Project-authored source data",
-      "consumers": [
-        "world-context"
-      ],
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Project-authored navigation context with physical records and a pinned epoch; its component sources remain cited in the navigation data."
-      }
-    },
-    {
       "id": "sun-preparation-raster",
       "path": "preparation/raster.json",
       "origin": "Repository-authored raster recipe: four CR2311 synoptic surfaces interpreted by the shared observation adapter (continuum mosaic, HMI and AIA FITS maps), polar bands, off-limb and limb plates",
