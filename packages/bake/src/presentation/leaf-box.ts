@@ -28,7 +28,8 @@ export { LEAF_BOX_FACTOR } from '@cssearth/objects';
 export const LEAF_BOX_SCREEN_PIXELS = 2;
 /** Leaves per group: the smallest repaint the runtime can schedule in one frame (prepared-leaf-box-blocks.ts paces the
  * groups by the frames they cost). In the iOS simulator a Moon leaf repaints in about 0.7 ms and a Haumea leaf in about
- * 2.5 ms, so a group of 8 stays near one frame on either. The Moon's 448 leaves make 56 blocks, Haumea's 1,444 make 180. */
+ * 2.5 ms, so a group of 8 stays near one frame on either. The Moon's 448 leaves make 56 blocks; Haumea's 1,444 made 180
+ * until its mesh went from 32 by 48 to 16 by 32 on 2026-10-05. */
 export const LEAF_BOX_GROUP_LEAVES = 8;
 /** Leaf boxes never shrink below this many silhouette pixels' worth: a body smaller than this on screen keeps its first step. */
 const FIRST_STEP = 16;

@@ -40,6 +40,8 @@ The shared `disc-integrated-color` method ([disc-integrated-color.ts](../../../p
 
 For the Illustration, each texel is found through the model's own texture coordinates on its ellipsoid and placed on the measured triaxial shape at the same normalized direction; the texture is not repainted. Its longitudes are arbitrary. Color stays the default dataset, and the illustration never counts as imagery: Haumea stays "Shape only".
 
+The ellipsoid is drawn as 16 latitude bands of 32 faces and four polar caps (452 faces), as the other globes are. Its flat faces sit at most 2.19 px from the true ellipsoid at rest, against 2.20 px for a sphere on the same mesh. Until 5 October 2026 it had 32 bands of 48 (1,444 faces, 0.77 px): a dataset switch repaints every face and took 177 to 225 ms on an iPad, against 47 to 106 ms now.
+
 ## Evidence
 
 Each published color uncertainty moves an sRGB channel by at most 2 of 255, and the albedo uncertainty moves every channel by 3. The [MBOSS](https://doi.org/10.26093/cds/vizier.35460115) three-epoch mean (B−V 0.631, V−R 0.370, V−I 0.687) gives 190, 189, 191. The Herschel and Spitzer albedo of 0.804 that Ortiz et al. (2017) replace would give 230, 232, 234.
