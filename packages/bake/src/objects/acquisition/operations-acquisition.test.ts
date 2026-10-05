@@ -5,7 +5,7 @@ import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 import { execFileSync } from 'node:child_process';
 import { randomUUID } from 'node:crypto';
-import { executeAcquisition, parseAcquisitionPlan, convertMappedComposition, parseMappedCompositionRecipe } from '@cssearth/bake/objects/acquisition';
+import { commandOutput, executeAcquisition, parseAcquisitionPlan, convertMappedComposition, parseMappedCompositionRecipe } from '@cssearth/bake/objects/acquisition';
 import { acquirePinnedDownloads, verifySources, type SourceManifest } from '@cssearth/bake/objects/sources';
 import { gzipSync } from 'node:zlib';
 const test = sourceTest();
@@ -283,6 +283,19 @@ test('ZIP restoration verifies both the streamed archive and its exact extracted
     for (const name of await listArchives()) if (!before.has(name)) await rm(join(archives, name), { recursive: true, force: true });
     await rm(directory,{recursive:true,force:true});
   }
+});
+
+// The ZIP test above restored an empty file on CI: unzip had finished a 59-byte member before the pinned write began to
+// read it, and Node discards what a finished child wrote that nothing reads yet. The reader here arrives late on purpose.
+test('a command\'s output is kept for a reader that arrives after the command has finished', async () => {
+  const output = commandOutput(process.execPath, ['-e', 'process.stdout.write("a small member")'], 'node');
+  await new Promise(done => { setTimeout(done, 400); });
+  const parts: Buffer[] = [];
+  for await (const chunk of output) parts.push(chunk as Buffer);
+  assert.equal(Buffer.concat(parts).toString(), 'a small member');
+  // A command that fails ends the stream with the first line of its complaint.
+  const failing = commandOutput(process.execPath, ['-e', 'process.stdout.write("part");console.error("caution: filename not matched\\nmore");process.exit(11)'], 'unzip could not read member.bin');
+  await assert.rejects(async () => { for await (const _chunk of failing) { /* read to the end */ } }, /^Error: unzip could not read member\.bin: caution: filename not matched\.$/u);
 });
 
 // A pinned slice of an archive member too large to keep whole: the request must be honoured as 206 Partial Content,

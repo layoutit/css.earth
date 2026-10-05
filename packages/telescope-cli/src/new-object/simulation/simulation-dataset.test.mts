@@ -12,7 +12,7 @@ import { loadNetcdfLonLatField } from '@cssearth/bake/objects/raster';
 import { WORKSPACE } from '@cssearth/telescope/node';
 import type { Archive } from '../archives/archives.mts';
 import { rebuildExistingDatasets } from '../planet-datasets.mts';
-import { installSimulationDataset, parseSimulationEntries, restoreSimulationField, restoreSimulationMember, roundedRange, simulationPaths, simulationRecipe, simulationRelease, simulationSurvey } from './simulation-dataset.mts';
+import { installSimulationDataset, parseSimulationEntries, restoreSimulationField, restoreSimulationMember, roundedRange, simulationPaths, simulationRecipe, simulationRelease, simulationSurvey, surveyQuestions } from './simulation-dataset.mts';
 
 const id = 'trappist-1f', o = `src/objects/${id}`;
 const fixture = resolve(WORKSPACE, 'packages/bake/src/objects/raster/netcdf/fixtures/field-cdf2.nc');
@@ -240,12 +240,18 @@ test('a draft run asks Zenodo once for all its planets, paces its requests and s
   assert.equal(survey.note(['TRAPPIST-1 e', 'TRAPPIST-1 f']), '; published simulations on Zenodo, to read before any is shown: TRAPPIST-1 e 10.5281/zenodo.5532765, 10.5281/zenodo.7752337, 10.5281/zenodo.10209661');
   assert.equal(survey.note(['TRAPPIST-1 f']), '');
   assert.equal(survey.failure, undefined);
-  // Forty names go in one request; a full page asks for the next, 2.1 seconds later.
-  const many = Array.from({ length: 41 }, (_, index) => `Planet-${index + 1} b`), full = { hits: { hits: Array.from({ length: 25 }, () => body.hits.hits[3]!) } };
+  // A question holds 32 spellings, the size Zenodo answers: sixteen of these planets; a full page asks for the next, 2.1 seconds later.
+  const many = Array.from({ length: 17 }, (_, index) => `Planet-${index + 1} b`), full = { hits: { hits: Array.from({ length: 25 }, () => body.hits.hits[3]!) } };
   let calls = 0;
-  const paged: Archive = { ...archive(null), text: async () => JSON.stringify(calls++ === 0 ? full : { hits: { hits: [] } }) };
+  const questions: string[] = [];
+  const paged: Archive = { ...archive(null), text: async url => { questions.push(url); return JSON.stringify(calls++ === 0 ? full : { hits: { hits: [] } }); } };
   assert.equal((await simulationSurvey(paged, many, async ms => { waits.push(ms); })).requests, 3);
   assert.deepEqual(waits, [2100, 2100]);
+  // The first sixteen planets twice, a page apart, then the seventeenth alone.
+  assert.deepEqual(questions.map(url => [(decodeURIComponent(url).match(/Planet-\d+b/gu) ?? []).length, new URL(url).searchParams.get('page')]), [[16, '1'], [16, '2'], [1, '1']]);
+  // A name written more ways takes more of a question: four spellings for a catalogue number, eight for a planet of a lettered star.
+  assert.deepEqual(surveyQuestions(['HD 1 b', 'HD 2 b', 'HD 3 b', 'HD 4 b', 'HD 5 b', 'HD 6 b', 'HD 7 b', 'HD 8 b', 'HD 9 b']).map(question => question.length), [8, 1]);
+  assert.deepEqual(surveyQuestions(['HD 135344 Ab', 'HD 93963 A b', 'HD 93963 A c', 'HD 202772 A b', 'HD 1 b']).map(question => question.length), [4, 1]);
   const failing: Archive = { ...archive(null), text: async () => { throw new Error('HTTP 429 from https://zenodo.org/api/records'); } };
   const failed = await simulationSurvey(failing, ['TRAPPIST-1 e']);
   assert.equal(failed.failure, 'Zenodo could not be asked for published simulations of every planet (HTTP 429 from https://zenodo.org/api/records); ask with telescope simulations OBJECT.');
