@@ -1,0 +1,42 @@
+import assert from 'node:assert/strict';
+import { test } from 'node:test';
+import { parseHTML } from 'linkedom';
+import { sectionElements } from '@cssearth/renderer';
+import { bindNativeViewForms } from './native-view-forms.mts';
+test('native submit carries current URL and checked or enabled settings, then unsubscribes', t => {
+  const { document, window } = parseHTML(`<html><body><form data-dataset-form><input name="v" data-view-context><input name="dataset" data-view-context><input name="feature" data-search-context><input name="other" data-view-context><input data-current-setting name="stale"></form><form data-settings-form><input name="v" data-view-context></form><form id="other"></form><template data-detached-section><div class="object-settings"><input form="settings" name="motion" type="checkbox"><input form="settings" name="unchecked" type="checkbox"><input form="settings" name="speed" value="2"><input form="settings" name="disabled" disabled value="x"></div></template></body></html>`);
+  // Linkedom creates generic form elements; use its form constructor for this DOM's native submit target.
+  t.mock.method(globalThis, 'fetch', async () => { throw new Error('No network'); });
+  Object.defineProperty(globalThis, 'HTMLFormElement', { configurable: true, value: window.HTMLElement }); t.after(() => Reflect.deleteProperty(globalThis, 'HTMLFormElement'));
+  const checked = sectionElements<HTMLInputElement>(document, '[name="motion"]')[0]; checked.checked = true;
+  const form = document.querySelector<HTMLFormElement>('[data-dataset-form]')!, settings = document.querySelector<HTMLFormElement>('[data-settings-form]')!;
+  const location = { href: 'https://example.test/earth/?v=pose&feature=crater&other=forbidden' };
+  const registrations: unknown[] = [];
+  const add = document.addEventListener.bind(document);
+  t.mock.method(document, 'addEventListener', (type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions) => {
+    if (type === 'submit') registrations.push(options);
+    add(type, listener, options);
+  });
+  const stop = bindNativeViewForms(document, { location: location as Location });
+  assert.deepEqual(registrations, [{ capture: true }]);
+  const submit = (node: Element) => node.dispatchEvent(new window.Event('submit', { bubbles: true }));
+  submit(document.body); submit(document.querySelector('#other')!); submit(form);
+  assert.equal(form.querySelector<HTMLInputElement>('[name="v"]')!.value, 'pose');
+  assert.equal(form.querySelector<HTMLInputElement>('[name="dataset"]')!.disabled, true);
+  assert.equal(form.querySelector<HTMLInputElement>('[name="dataset"]')!.value, '');
+  assert.equal(form.querySelector<HTMLInputElement>('[name="feature"]')!.value, 'crater');
+  assert.equal(form.querySelector<HTMLInputElement>('[name="other"]')!.disabled, true);
+  assert.equal(form.querySelector<HTMLInputElement>('[name="other"]')!.value, '');
+  assert.equal(Boolean(form.querySelector('[name="stale"]')), false, 'stale settings are removed before current values are carried');
+  const values = () => [...form.querySelectorAll<HTMLInputElement>('[data-current-setting]')].map(input => [input.name, input.value]);
+  assert.deepEqual(values(), [['settings', '1'], ['motion', 'on'], ['speed', '2']]);
+  submit(form);
+  assert.equal(values().length, 3);
+  submit(settings);
+  assert.equal(Boolean(settings.querySelector('[data-current-setting]')), false);
+  assert.equal(settings.querySelector<HTMLInputElement>('input')!.value, 'pose');
+  stop();
+  location.href = 'https://example.test/?v=new';
+  submit(form);
+  assert.equal(form.querySelector<HTMLInputElement>('[name="v"]')!.value, 'pose');
+});

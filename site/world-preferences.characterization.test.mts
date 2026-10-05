@@ -1,0 +1,26 @@
+import assert from 'node:assert/strict';
+import { test } from 'node:test';
+import { createWorldPreferences } from './world-preferences.mts';
+test('preferences retain frozen state, publish changed keys and gate stale scene bindings', () => {
+  const calls: unknown[] = [], changed: string[] = []; let motions = 0, present = true;
+  const world = { setHeliosphereEnabled(value: boolean) { calls.push(['heliosphere', value]); }, setIllustrationModelsEnabled(value: boolean) { calls.push(['illustration', value]); }, setHighlightedClassification(value: string | null) { calls.push(['highlight', value]); } };
+  const prefs = createWorldPreferences({ getWorld: () => present ? world : null, onMotionChange() { motions++; } });
+  assert.deepEqual(prefs.state, { motionEnabled: false, lightCurvesEnabled: true, heliosphereEnabled: false, illustrationModelsEnabled: false, surfaceLabelsEnabled: false, highlightedClassification: null });
+  const initial = prefs.state; const stop = prefs.subscribe(key => changed.push(key)); prefs.set('motionEnabled', false);
+  assert.equal(prefs.state, initial);
+  prefs.set('motionEnabled', true); prefs.set('lightCurvesEnabled', false); prefs.set('surfaceLabelsEnabled', true);
+  prefs.set('heliosphereEnabled', true); prefs.set('illustrationModelsEnabled', true); prefs.set('highlightedClassification', 'star');
+  assert.equal(motions, 2);
+  assert.ok(Object.isFrozen(prefs.state));
+  assert.equal(initial.motionEnabled, false);
+  assert.deepEqual(calls, [['heliosphere', true], ['illustration', true], ['highlight', 'star']]);
+  assert.deepEqual(changed, ['motionEnabled', 'lightCurvesEnabled', 'surfaceLabelsEnabled', 'heliosphereEnabled', 'illustrationModelsEnabled', 'highlightedClassification']);
+  const inactive = prefs.bind(() => false); inactive.set('motionEnabled', false);
+  assert.equal(inactive.state.motionEnabled, true);
+  const active = prefs.bind(() => true); active.set('highlightedClassification', null);
+  assert.equal(active.state.highlightedClassification, null);
+  stop(); present = false; prefs.set('heliosphereEnabled', false);
+  assert.equal(changed.length, 7);
+  prefs.apply({}); calls.length = 0; prefs.apply(world);
+  assert.deepEqual(calls, [['heliosphere', false], ['illustration', true], ['highlight', null]]);
+});
