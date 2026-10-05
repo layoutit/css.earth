@@ -1,0 +1,42 @@
+{
+  "id": "publication-de-looze-2024-cassiopeia-a-green-monster",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Looze et al. (2024): The Green Monster hiding in front of Cas A: JWST reveals a dense and dusty circumstellar structure pockmarked by ejecta interactions",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2410.05402"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/2410.05402",
+      "label": "arXiv preprint"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/2410.05402",
+      "checkedOn": "2026-10-05",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Looze et al. (2024)",
+      "scope": "citation",
+      "evidence": "https://arxiv.org/abs/2410.05402"
+    }
+  ],
+  "creators": [
+    "Ilse De Looze",
+    "Dan Milisavljevic",
+    "Tea Temim",
+    "et al."
+  ],
+  "publicationDate": "2024"
+}
