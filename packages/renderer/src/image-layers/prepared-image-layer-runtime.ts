@@ -79,13 +79,16 @@ export function mountPreparedCssImageLayers({ host, before, payload, resolveReso
   return Object.freeze({ root,
     /** The bank root is shown again: its large leaves wait for their decode (layer-reveal.ts). */
     revealLarge() { for (const bank of banks) if (bank.projection.style.display !== 'none') revealLarge(bank); },
-    /** `around`: the bank is drawn around a body that stands inside it, so the sheets the camera stands on are left out;
-     * as its page's own subject a bank draws every sheet, as it always has. */
-    publish(publication: VolumeCameraPublication, around = false) {
+    /** `around`: the bank is drawn around a body that stands inside it, at that place (reference metres). The sheets the
+     * camera stands on are left out, and so are the sheets through the body: they hold the picture's own image of it, a
+     * saturated glare many times its size, and the body is drawn in their place (Eta Carinae inside the Homunculus was a
+     * white screen 1,200 AU out, 2026-10-05). As its page's own subject a bank draws every sheet, as it always has. */
+    publish(publication: VolumeCameraPublication, around: readonly [number, number, number] | false = false) {
       if (destroyed) return;
       const transform = preparedVolumeCameraTransform(publication, payload.frame);
       const cssTransform = `translate3d(${transform.translationCssPixels.map(value => `${value}px`).join(',')}) ${worldRotationCss(transform.rotation)}`;
       const local = presentPhysicalPoseInVolume(publication.world.pose, payload.frame);
+      const body = around ? presentPhysicalPoseInVolume({ positionM: around, orientationXyzw: publication.world.pose.orientationXyzw }, payload.frame).positionUnits : null;
       const weights = imageLayerAxisWeights(local.orientationXyzw, views);
       const [ox, oy] = publication.viewport.principalOffsetPixels;
       const perspective = `${transform.focalPixels}px`, perspectiveOrigin = `calc(50% + ${ox}px) calc(50% + ${oy}px)`;
@@ -111,10 +114,10 @@ export function mountPreparedCssImageLayers({ host, before, payload, resolveReso
           bank.loaded = true;
         }
         if (returning) revealLarge(bank);
-        // Around a body, the sheets the camera stands within one sampling step of are left out (Sheet): an opacity write on
-        // change only, and every sheet back when the bank is its page's subject again.
+        // Around a body, the sheets within one sampling step of the camera or of the body are left out (Sheet): an opacity
+        // write on change only, and every sheet back when the bank is its page's subject again.
         if (weight > 0 && bank.reach > 0) for (const texture of bank.textures) {
-          const shown = around && texture.sheet && withinReach(texture.sheet, local.positionUnits, bank.reach) ? '0' : '';
+          const shown = body && texture.sheet && (withinReach(texture.sheet, local.positionUnits, bank.reach) || withinReach(texture.sheet, body, bank.reach)) ? '0' : '';
           if (texture.shown !== shown) { texture.shown = shown; texture.element.style.opacity = shown; }
         }
         // Never 1 (STACK_OPACITY_CEILING): a drag across M31 had its longest frame at 108 to 111 ms with a bank's opacity

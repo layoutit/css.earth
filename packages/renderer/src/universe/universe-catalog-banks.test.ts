@@ -11,7 +11,7 @@ mock.module('../image-layers/prepared-image-layer-runtime.js', { namedExports: {
   mountPreparedCssImageLayers: ({ host, before }: { host: HTMLElement; before: Element }) => {
     const root = host.ownerDocument.createElement('div');
     host.insertBefore(root, before);
-    return { root, publish(_publication: unknown, around = false) { drawnAround.push(around); }, revealLarge() {}, destroy() { root.remove(); } };
+    return { root, publish(_publication: unknown, around: readonly number[] | false = false) { drawnAround.push(around !== false); }, revealLarge() {}, destroy() { root.remove(); } };
   },
 } });
 // The modules under test import the mocked ones, so they load after the mocks.
@@ -53,7 +53,7 @@ test('a bank whose light lies on walls draws around a body inside its host, the 
     loadImageLayer: async id => ({ payload: { id, frame } }) as never });
   // The camera stands inside every bank's framing sphere; `within` is what the selected body is inside, by the object tree.
   const publish = (within: readonly string[]) => banks.publishImages({ referenceFrame: 'fixture', epochJdTt: 1, pose: { positionM: [0, 0, .5], orientationXyzw: [0, 0, 0, 1] } },
-    { focalPixels: 1000, principalOffsetPixels: [0, 0], widthPixels: 400, heightPixels: 300 }, 1, undefined, undefined, within);
+    { focalPixels: 1000, principalOffsetPixels: [0, 0], widthPixels: 400, heightPixels: 300 }, 1, undefined, undefined, within, [0, 0, 0]);
   const layers = () => [...root.children].filter(node => node.tagName === 'DIV') as HTMLElement[];
   publish(['galaxy', 'local-group']);
   assert.deepEqual([layers().length, root.dataset.imageLayerResidentBankCount ?? '0'], [0, '0'], 'a photograph seen from outside is not drawn around a star inside its galaxy');
@@ -62,7 +62,7 @@ test('a bank whose light lies on walls draws around a body inside its host, the 
   publish(['nebula', 'milky-way']);
   assert.deepEqual([layers().length, layers()[0]!.style.display, Number(layers()[0]!.style.opacity)], [1, '', 1],
     'the first wall bank declared for the host draws whole around the body inside it');
-  assert.equal(drawnAround.at(-1), true, 'and is told it is drawn around a body, so the sheets the camera stands on are left out');
+  assert.equal(drawnAround.at(-1), true, 'and is told where the body it is drawn around stands, so the sheets through it and under the camera are left out');
   publish([]);
   assert.equal(layers()[0]!.style.display, 'none', 'around a body inside no such host nothing draws');
 });

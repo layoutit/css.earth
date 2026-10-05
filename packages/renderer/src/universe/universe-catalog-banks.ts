@@ -197,9 +197,10 @@ export function createUniverseCatalogBanks({ root, end, stage, lifetime, declara
     /** `inside` is the galaxy the selected body is in, and how much of its dots show: a star of M33 stands among M33's
      * catalogue dots, without the photograph that is the galaxy seen from outside. `within` is the objects the selected body
      * is inside, by the object tree: a bank whose light lies on walls (`surrounds`) draws around a body inside its host, as
-     * a nebula's walls around its central star; the first such bank declared for that host stands for it. */
+     * a nebula's walls around its central star; the first such bank declared for that host stands for it. `bodyM` is
+     * that body's place: the sheets through it are left out (prepared-image-layer-runtime.ts). */
     publishImages(world: WorldCameraPose, viewport: WorldCameraViewport, volumeOpacity: number, detailedObjectId?: string,
-      inside?: { readonly objectId: string; readonly opacity: number }, within: readonly string[] = []) {
+      inside?: { readonly objectId: string; readonly opacity: number }, within: readonly string[] = [], bodyM?: readonly [number, number, number]) {
       if (lifetime.disposed) return;
       let around: string | undefined;
       if (within.length) for (const bank of images) if (bank.surrounds && bank.host !== undefined && within.includes(bank.host)) { around = bank.id; break; }
@@ -229,7 +230,7 @@ export function createUniverseCatalogBanks({ root, end, stage, lifetime, declara
           bank.mounted.root.style.display = opacity > 0 ? '' : 'none';
           bank.publishedOpacity = opacity;
         }
-        if (opacity > 0) bank.mounted.publish({ world, viewport }, bank.id === around && bank.id !== detailedObjectId);
+        if (opacity > 0) bank.mounted.publish({ world, viewport }, bank.id === around && bank.id !== detailedObjectId && bodyM !== undefined ? bodyM : false);
       }
     },
   };

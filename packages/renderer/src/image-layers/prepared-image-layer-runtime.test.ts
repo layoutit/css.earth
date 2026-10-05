@@ -90,7 +90,7 @@ test('image textures are demanded once when their retained axis first contribute
   assert.equal(resolveResource.mock.callCount(), 2);
 });
 
-test('around a body, a sheet within one sampling step of the camera is left out, by its prepared corners, and draws again farther away', () => {
+test('around a body, a sheet within one sampling step of the camera or of the body is left out, by its prepared corners', () => {
   const document = new ImageDocument(), host = document.createElement(), before = document.createElement();
   host.appendChild(before);
   const style = { width: '1px', height: '1px', transform: 'translate3d(0,0,0)', backgroundSize: '1px 1px', backgroundPosition: '0px 0px' };
@@ -107,7 +107,8 @@ test('around a body, a sheet within one sampling step of the camera is left out,
   };
   const runtime = mountPreparedCssImageLayers({ host: host as unknown as HTMLElement, before: before as unknown as Element, payload, resolveResource: path => `/prepared/${path}` });
   const opacity = () => ['behind', 'middle', 'ahead'].map(id => document.elements.find(element => element.dataset.imageLayerLeaf === id)!.style.opacity ?? '');
-  const publish = (positionM: readonly [number, number, number], around = true) => runtime.publish({
+  // The body stands far behind every sheet unless a case says otherwise.
+  const publish = (positionM: readonly [number, number, number], around: readonly [number, number, number] | false = [0, 0, -90]) => runtime.publish({
     world: { referenceFrame: 'fixture', epochJdTt: 123, pose: { positionM, orientationXyzw: [0, 0, 0, 1] } }, viewport: { focalPixels: 600, principalOffsetPixels: [0, 0] } }, around);
   publish([0, 0, .2], false);
   assert.deepEqual(opacity(), ['', '', ''], 'as its page\'s own subject a bank draws every sheet');
@@ -119,6 +120,10 @@ test('around a body, a sheet within one sampling step of the camera is left out,
   assert.deepEqual(opacity(), ['', '', ''], 'a sheet beside the camera, past its edge, draws');
   publish([0, 0, .2]); publish([0, 0, .2], false);
   assert.deepEqual(opacity(), ['', '', ''], 'left-out sheets draw again when the bank is its page\'s subject');
+  publish([0, 0, 50], [0, 0, 0]);
+  assert.equal(opacity()[1], '0', 'the sheet through the body is left out however far the camera is: the body is drawn in its place');
+  publish([0, 0, 50]);
+  assert.equal(opacity()[1], '', 'and draws again around a body that stands elsewhere');
 });
 
 test('a stack mounts a camera for each of its scenes, and a stack without leaves is not mounted and takes no part', () => {
