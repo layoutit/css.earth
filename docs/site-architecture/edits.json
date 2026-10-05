@@ -1,34 +1,6 @@
 {
   "edits": [
     {
-      "op": "add-file",
-      "path": "site/model/navigation-href.mts",
-      "imports": [],
-      "change": "Extract held address reader",
-      "note": "Move navigationHref AND its owners WeakMap. Export a registration function for history; preserve deferred URL semantics.",
-      "id": "add-file-navigation-href"
-    },
-    {
-      "op": "add-import",
-      "from": "site/navigation/navigation-history.mts",
-      "to": "site/model/navigation-href.mts",
-      "kind": "value",
-      "change": "Extract held address reader",
-      "note": "History registers and unregisters its held address reader in the same WeakMap; re-export the getter for existing navigation callers.",
-      "id": "add-import-navigation-history-navigation-href"
-    },
-    {
-      "op": "retarget",
-      "from": "site/world/application-world-resources.mts",
-      "to": "site/navigation/navigation-history.mts",
-      "newTo": "site/model/navigation-href.mts",
-      "kind": "value",
-      "change": "Extract held address reader",
-      "note": "Only lower world caller uses navigationHref; other callers retain history behavior.",
-      "id": "retarget-application-world-resources-navigation-href",
-      "line": 18
-    },
-    {
       "id": "add-file-scene-imports",
       "op": "add-file",
       "change": "Relocate queued loader owners",
@@ -155,14 +127,6 @@
     }
   ],
   "changes": [
-    {
-      "id": "extract-held-address-reader",
-      "edits": [
-        "add-file-navigation-href",
-        "add-import-navigation-history-navigation-href",
-        "retarget-application-world-resources-navigation-href"
-      ]
-    },
     {
       "id": "relocate-queued-loader-owners",
       "edits": [
