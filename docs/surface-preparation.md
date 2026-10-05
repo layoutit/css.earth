@@ -764,10 +764,12 @@ same published law, so the limb in the app is the limb the instrument saw.
   | Iapetus | Lommel–Seeliger, with the phase values the paper prints per image | [Buratti and Mosher 1995](https://doi.org/10.1006/icar.1995.1093), Voyager images, read in its [JPL preprint](https://dataverse.jpl.nasa.gov/dataset.xhtml?persistentId=hdl:2014/29299). Flat at zero phase. The limb limit is the outermost pixel of the finest image in its Table 1, derived here |
   | Oberon | Hapke (1986): single-scattering albedo 0.41, asymmetry −0.29, roughness 21°, opposition surge 1.03 and 0.007 | Helfenstein, Hillier, Weitz and Veverka, Voyager clear-filter images and Earth-based photometry, read in the authors' summary, pages 230 and 231 of [NASA TM-4210](https://ntrs.nasa.gov/citations/19900018290). The limb limit is the outermost pixel of the frame it names as its finest, derived here |
   | Umbriel | Hapke (1986): single-scattering albedo 0.34, asymmetry −0.18, roughness 28°, opposition surge width 0.06 and S(0) 1.28 | [Helfenstein and Veverka 1988](https://ui.adsabs.harvard.edu/abs/1988LPI....19..477H), five Voyager clear-filter images at 10.4° to 142.9° phase, an open conference abstract. The surge amplitude follows from S(0) by the authors' definition; the limb limit is the outermost pixel of its finest frame, derived here |
+  | Titania | Hapke (1986): single-scattering albedo 0.48, asymmetry −0.28, roughness 23°, opposition surge width 0.018 and S(0) 0.77 | Veverka et al. 1987, a fit to whole-disc Voyager photometry, read in the table on page 181 of [NASA TM-4041](https://ntrs.nasa.gov/citations/19880017749). The same group reports that whole-disc and disc-resolved fits agree for Titania. The phase range and limb limit are derived here |
+  | Triton | Hapke surface: single-scattering albedo 0.995, asymmetry −0.281, roughness 14.7°; no opposition surge, and its thin haze is not drawn | Hillier, Helfenstein, Verbiscer and Veverka, a fit to whole-disc Voyager photometry at 11° to 159° phase, green filter, page 227 of [NASA TM-4210](https://ntrs.nasa.gov/citations/19900018290). Chosen over the misprinted line of Schenk et al. 2021 by fitting five calibrated Voyager frames at 15° to 38° phase. The limb limit is derived here |
   | Rhea, Dione, Enceladus | Akimov, with a quadratic phase curve at 0.55 µm | [Filacchione et al. 2022](https://doi.org/10.1016/j.icarus.2021.114803), Cassini VIMS; flat at zero phase |
   | Pluto, Charon | Lunar-Lambert, A 0.70 | [Buratti et al. 2017](https://doi.org/10.1016/j.icarus.2016.11.012), LORRI approach images; the limb limit is the outermost pixel of the finest image in its Table 1, derived here |
 
-  Titan, Miranda, Ariel, Titania, Triton,
+  Titan, Miranda, Ariel,
   Eris and Makemake keep the shared `sphere` bank. Each
   has a `limb-law` entry in its `investigations.json` that says what was found
   and what is missing: no law exists, the published one could not be read, it
@@ -823,6 +825,14 @@ same published law, so the limb in the app is the limb the instrument saw.
 
   ![Ganymede before and after](images/planet-limbs/ganymede-before-after.webp)
   ![Iapetus before and after](images/planet-limbs/iapetus-before-after.webp)
+
+  Titania and Triton, the same day, with Hapke fits to whole-disc Voyager
+  photometry. Titania's fit has a narrow opposition surge, so its frames with
+  Shadows on are dim against the flood-lit view. Triton's bright, multiply
+  scattering surface darkens toward the limb even when flood-lit.
+
+  ![Titania before and after](images/planet-limbs/titania-before-after.webp)
+  ![Triton before and after](images/planet-limbs/triton-before-after.webp)
 - **One overlay per pixel.** A CSS overlay has one color and one alpha, and
   blend modes are not used. The overlay is exact for the map's mean color,
   measured at bake, and for every pixel in the channel that sets its alpha. A

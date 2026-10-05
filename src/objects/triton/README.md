@@ -13,6 +13,8 @@ The [navigation marker](source/preparation/navigation.json) keeps its source-map
 - The camera comes from a pinned [Voyager 2 Neptune kernel bank](../../spice/voyager/manifest.json); Sun and observer positions from JPL Horizons.
 - Named features come from the IAU/USGS Gazetteer of Planetary Nomenclature centre-point shapefile (retrieved 2026-09-11, public domain per its FGDC metadata). Seven labelled names carry a caption note from the lead of their English Wikipedia article (CC BY-SA 4.0, retrieved 2026-09-12), credited in the caption beside the IAU naming year.
 
+Lighting uses the Hapke surface Hillier, Helfenstein, Verbiscer and Veverka fitted to Voyager whole-disc photometry of Triton ([NASA TM-4210](https://ntrs.nasa.gov/citations/19900018290), page 227). See [Lighting law](#lighting-law).
+
 Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).
 
 ## Processing
@@ -27,6 +29,14 @@ The two calibrations disagree: Bland's `voycal` I/F is darker than GEOMED by a d
 
 The sphere uses the 1,352.6 km mean radius with synchronous retrograde rotation. The prepared map starts at 0° E; preparation refuses a declared edge the source contradicts ([where the prepared map starts](../../../docs/surface-preparation.md#where-the-prepared-map-starts)).
 
+## Lighting law
+
+The globe is lit with Hapke's model and the surface parameters Hillier, Helfenstein, Verbiscer and Veverka fitted to Voyager whole-disc photometry of Triton at about 11° to 159° phase: green filter (0.56 µm), single-scattering albedo 0.995, roughness 14.7°, asymmetry −0.281. They are Table 1 of the authors' summary, page 227 of NASA's [Reports of Planetary Geology and Geophysics Program 1989](https://ntrs.nasa.gov/citations/19900018290). Their fit also has a thin haze (optical depth 0.03), which this preparation does not draw. The law is recorded in [`source/photometry/hillier-1989-hapke-green.json`](source/photometry/hillier-1989-hapke-green.json).
+
+[Schenk et al. (2021)](https://doi.org/10.3390/rs13173476) print a different description, a lunar-Lambert weight fitted to resolved images at 39° to 135° phase, with a misprinted last term. The two disagree at low phase, so both were set against five calibrated Voyager 2 frames at 15° to 38° phase. The lunar-Lambert weight that best fits the lit disc is 0.10 to 0.19; this Hapke surface gives 0.18 to 0.28 for the same geometry, and Schenk's line 0.35 to 0.68. The Hapke surface is the one that describes the limb there.
+
+Each lighting frame is the law relative to the flood-lit disc centre, so the centre of the default view shows the map as published. With the Sun behind the viewer the limb darkens to 0.51 of the centre at 0.98 of the radius, an overlay alpha of 0.27, where the authored bank this replaces reached 0.49. See [planet limbs](../../../docs/surface-preparation.md#planet-limbs-from-published-laws).
+
 ## Evidence
 
 Read through its georeferenced source, the prepared enhanced map correlates 0.96 from 0° E and 0.62 from 180° E.
@@ -35,6 +45,7 @@ The limb fits removed SEDR errors of 49–256 pixels; every accepted fit has at 
 
 ## Known problems
 
+- **Lighting law:** The fit is to whole-disc photometry; it was checked against resolved frames here, not fitted to them. Its thin haze is not drawn, which matters above about 140° phase. The data start at 11° phase and the table prints no opposition surge, so the flood-lit view is the model below its data. One green-filter row lights every channel and terrain. The emission limit 86.6° is derived here.
 - The Voyager color dataset is false color (green, violet, ultraviolet as red, green, blue) at the observations' own phase angles, 39°–62° for the Bland set and wider for the approach frames. A color seam at a footprint edge is a real difference in viewing geometry. The limb-placed frames carry the release's roughly one-degree alignment plus the 2–4 km scatter of our fit. The brightest 0.1 % of texels may clip.
 - The per-frame Lunar-Lambert correction reduces acquisition shading; it is not a calibrated albedo map. Local terrain shading, resolution changes and some patch transitions remain. No phase, atmosphere-scattering or terrain-shadow inversion is claimed.
 - The Gazetteer export gives a diameter for only 4 of Triton's 63 adopted names (the four craters), so only those four are labelled until the export carries sizes. Outlines are not published nomenclature boundaries.
