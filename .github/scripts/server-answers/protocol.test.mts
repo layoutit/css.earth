@@ -1,3 +1,9 @@
+  const catalogue = new URL('../../../dist/catalogue/index.json', import.meta.url);
+  const created: URL[] = [];
+  for (const directory of [new URL('../../../dist/', import.meta.url), new URL('../../../dist/catalogue/', import.meta.url)]) {
+    if (!existsSync(directory)) { mkdirSync(directory); created.push(directory); }
+  }
+  if (!existsSync(catalogue)) { writeFileSync(catalogue, '{"schema":"cssearth-catalogue-index@1","entries":[]}'); created.push(catalogue); }
 /** Check protocol expectations against their actual route, find handler and Worker fallback owners. */
 import assert from 'node:assert/strict';
 import test from 'node:test';
@@ -77,13 +83,16 @@ test('real rewritten page removes every static validator and transport header', 
   const headers = { 'content-type': 'text/html', 'content-length': String(page.length), 'content-encoding': 'gzip', etag: '"static"', 'last-modified': 'Tue, 01 Jan 2000 00:00:00 GMT', expires: 'Tue, 01 Jan 2000 00:00:00 GMT' };
   // The function reads the built object catalogue from `dist/`. A clean checkout has none: write an empty one for this test and remove it afterwards.
   const catalogue = new URL('../../../dist/catalogue/index.json', import.meta.url);
-  const provided = !existsSync(catalogue);
-  if (provided) { mkdirSync(new URL('./', catalogue), { recursive: true }); writeFileSync(catalogue, '{"schema":"cssearth-catalogue-index@1","entries":[]}'); }
+  const created: URL[] = [];
+  for (const directory of [new URL('../../../dist/', import.meta.url), new URL('../../../dist/catalogue/', import.meta.url)]) {
+    if (!existsSync(directory)) { mkdirSync(directory); created.push(directory); }
+  }
+  if (!existsSync(catalogue)) { writeFileSync(catalogue, '{"schema":"cssearth-catalogue-index@1","entries":[]}'); created.push(catalogue); }
   const original = globalThis.fetch;
   globalThis.fetch = async () => new Response(page, { headers });
   let response: Response;
   try { response = await handleSearchRequest(new Request('https://answers.invalid/.netlify/functions/search?object=earth&q=europa')); }
-  finally { globalThis.fetch = original; if (provided) rmSync(new URL('../', catalogue), { recursive: true, force: true }); }
+  finally { globalThis.fetch = original; for (const path of created.reverse()) rmSync(path, { recursive: true, force: true }); }
   assert.equal(response.status, 200);
   for (const name of ['content-length', 'content-encoding', 'etag', 'last-modified', 'expires']) assert.equal(response.headers.get(name), null, name);
 });

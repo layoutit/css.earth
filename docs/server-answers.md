@@ -171,7 +171,14 @@ Linux and Node 24 clean comparisons have not been run.
 | Sanity per target | 0.50–0.89 s | 0.43–0.46 s | 0.51–0.68 s | 0.47–0.61 s |
 | Comparison per target | — | 0.44–0.51 s; diff 0 | 0.45–0.53 s; diff 0 | Sanity only |
 
-The measured four-build run took **2,502.27 s (41.70 minutes)**. No hosted-runner timing is measured.
+The measured four-build run took **2,502.27 s (41.70 minutes)**.
+
+The pull-request flow (the base `origin/main` against this branch, production-origin shape, packages and shell
+modules rebuilt in each clone, each clone deleted after its recording) was measured on the same machine with commit
+**5fb66421** as the head: **935 s** in total, a built clone **12.5 GB** allocated (restored: 8.3 to 8.6 GB, shared
+scenes not counted), and **diff 0 on preview, Netlify and Cloudflare**. A change inside `packages/renderer` made in a
+rebuilt clone differs on all three targets (209 to 215 recordings) and restores to diff 0. No hosted-runner timing is
+measured.
 
 | Budget | Local measurement / basis | Hosted-runner planning estimate |
 | --- | --- | --- |
