@@ -456,6 +456,7 @@ test('ids follow one rule, and a body the universe holds is found whatever its i
   const trappist = JSON.parse(await readFile(resolve(root, 'packages/astronomy/data/bodies/trappist-1.json'), 'utf8')).star;
   assert.equal(duplicateStar(universe, { ra: trappist.rightAscensionDegrees + 1 / 3600, dec: trappist.declinationDegrees, epoch: 2016 }), 'trappist-1', 'one arcsecond away is the same star');
   assert.equal(duplicateStar(universe, { ra: trappist.rightAscensionDegrees, dec: trappist.declinationDegrees, epoch: 2016 }, 'trappist-1'), undefined, 'a refresh does not find itself');
+  assert.equal(duplicateStar(universe, { ra: trappist.rightAscensionDegrees, dec: trappist.declinationDegrees, epoch: 2016 }, undefined, 'trappist-1'), undefined, 'the object a star is inside is not that star');
   assert.equal(duplicateStar(universe, { ra: trappist.rightAscensionDegrees + 0.1, dec: trappist.declinationDegrees, epoch: 2016 }), undefined);
 });
 
