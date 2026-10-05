@@ -897,7 +897,7 @@
     {
       "id": "control:site:native-input:div:markup:1",
       "kind": "control",
-      "source": "site/native-input.mts:87",
+      "source": "site/browser/native-input.mts:87",
       "tag": "div",
       "selector": "[role=\"group\"]",
       "markup": "<div class=\"native-scene-input\" role=\"group\" aria-label=\"Drag to turn, scroll to zoom\">"
@@ -905,7 +905,7 @@
     {
       "id": "control:site:native-input:span:markup:1",
       "kind": "control",
-      "source": "site/native-input.mts:87",
+      "source": "site/browser/native-input.mts:87",
       "tag": "span",
       "selector": ".native-zoom-start",
       "markup": "<span class=\"native-zoom-start\" aria-hidden=\"true\" tabindex=\"-1\" autofocus>"
@@ -913,7 +913,7 @@
     {
       "id": "control:site:native-view-forms:input:input:1",
       "kind": "control",
-      "source": "site/native-view-forms.mts:17",
+      "source": "site/shell/native-view-forms.mts:17",
       "tag": "input",
       "selector": "input"
     },
@@ -1713,7 +1713,7 @@
     {
       "id": "handler:site:arrival-billboard:prepareArrivalBillboard:abort:1",
       "kind": "handler",
-      "source": "site/arrival-billboard.mts:61",
+      "source": "site/navigation/arrival-billboard.mts:61",
       "eventTypes": [
         "abort"
       ],
@@ -1731,7 +1731,7 @@
     {
       "id": "handler:site:chart-pixel-alignment:createChartPixelAlignmentController:chartchange:1",
       "kind": "handler",
-      "source": "site/chart-pixel-alignment.mts:47",
+      "source": "site/shell/chart-pixel-alignment.mts:47",
       "eventTypes": [
         "chartchange"
       ],
@@ -1740,7 +1740,7 @@
     {
       "id": "handler:site:chart-pixel-alignment:createChartPixelAlignmentController:load:1",
       "kind": "handler",
-      "source": "site/chart-pixel-alignment.mts:45",
+      "source": "site/shell/chart-pixel-alignment.mts:45",
       "eventTypes": [
         "load"
       ],
@@ -1749,7 +1749,7 @@
     {
       "id": "handler:site:chart-pixel-alignment:createChartPixelAlignmentController:resize:1",
       "kind": "handler",
-      "source": "site/chart-pixel-alignment.mts:48",
+      "source": "site/shell/chart-pixel-alignment.mts:48",
       "eventTypes": [
         "resize"
       ],
@@ -1758,7 +1758,7 @@
     {
       "id": "handler:site:dataset-picker:bindDatasetPicker:change:1",
       "kind": "handler",
-      "source": "site/dataset-picker.mts:18",
+      "source": "site/shell/dataset-picker.mts:18",
       "eventTypes": [
         "change"
       ],
@@ -1767,7 +1767,7 @@
     {
       "id": "handler:site:dataset-picker:mountDatasetPickerLayout:change:1",
       "kind": "handler",
-      "source": "site/dataset-picker.mts:34",
+      "source": "site/shell/dataset-picker.mts:34",
       "eventTypes": [
         "change"
       ],
@@ -1830,13 +1830,13 @@
     {
       "id": "handler:site:error-report:errorReportBootstrap:embedded:error:1",
       "kind": "handler",
-      "source": "site/error-report.mts:18",
+      "source": "site/startup/error-report.mts:18",
       "mechanism": "embedded-script"
     },
     {
       "id": "handler:site:error-report:errorReportBootstrap:embedded:unhandledrejection:1",
       "kind": "handler",
-      "source": "site/error-report.mts:19",
+      "source": "site/startup/error-report.mts:19",
       "mechanism": "embedded-script"
     },
     {
@@ -1851,7 +1851,7 @@
     {
       "id": "handler:site:information-card:createPanelController:toggle:1",
       "kind": "handler",
-      "source": "site/information-card.mts:96",
+      "source": "site/shell/information-card.mts:96",
       "eventTypes": [
         "toggle"
       ],
@@ -1860,7 +1860,7 @@
     {
       "id": "handler:site:layout-sections:mountLayoutSections:change:1",
       "kind": "handler",
-      "source": "site/layout-sections.mts:15",
+      "source": "site/shell/layout-sections.mts:15",
       "eventTypes": [
         "change"
       ],
@@ -1878,7 +1878,7 @@
     {
       "id": "handler:site:native-view-forms:bindNativeViewForms:submit:1",
       "kind": "handler",
-      "source": "site/native-view-forms.mts:28",
+      "source": "site/shell/native-view-forms.mts:28",
       "eventTypes": [
         "submit"
       ],
@@ -2239,7 +2239,7 @@
     {
       "id": "handler:site:prepared-scene-ownership:createPreparedSceneOwnership:abort:1",
       "kind": "handler",
-      "source": "site/prepared-scene-ownership.mts:15",
+      "source": "site/navigation/prepared-scene-ownership.mts:15",
       "eventTypes": [
         "abort"
       ],
@@ -2248,7 +2248,7 @@
     {
       "id": "handler:site:prepared-scene-ownership:createPreparedSceneOwnership:abort:2",
       "kind": "handler",
-      "source": "site/prepared-scene-ownership.mts:30",
+      "source": "site/navigation/prepared-scene-ownership.mts:30",
       "eventTypes": [
         "abort"
       ],
@@ -2276,7 +2276,7 @@
     {
       "id": "handler:site:runtime-policy:bindResponsiveOrbitPolicy:change:1",
       "kind": "handler",
-      "source": "site/runtime-policy.mts:209",
+      "source": "site/browser/runtime-policy.mts:209",
       "eventTypes": [
         "change"
       ],
@@ -2584,7 +2584,7 @@
     {
       "id": "handler:site:tab-panels:bindTabPanels:change:1",
       "kind": "handler",
-      "source": "site/tab-panels.mts:36",
+      "source": "site/shell/tab-panels.mts:36",
       "eventTypes": [
         "change"
       ],
@@ -2593,7 +2593,7 @@
     {
       "id": "handler:site:tab-panels:bindTabPanels:change:2",
       "kind": "handler",
-      "source": "site/tab-panels.mts:37",
+      "source": "site/shell/tab-panels.mts:37",
       "eventTypes": [
         "change"
       ],
@@ -2629,7 +2629,7 @@
     {
       "id": "handler:site:view-url-runtime:bindViewUrl:objectmotionchange:1",
       "kind": "handler",
-      "source": "site/view-url-runtime.mts:86",
+      "source": "site/navigation/view-url-runtime.mts:86",
       "eventTypes": [
         "objectmotionchange"
       ],
@@ -2638,7 +2638,7 @@
     {
       "id": "handler:site:world-viewport:stageSized:abort:1",
       "kind": "handler",
-      "source": "site/world-viewport.mts:27",
+      "source": "site/world/world-viewport.mts:27",
       "eventTypes": [
         "abort"
       ],

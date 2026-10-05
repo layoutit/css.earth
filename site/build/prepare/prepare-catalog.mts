@@ -13,7 +13,7 @@ import { prepareSceneDistance } from '@cssearth/bake/navigation';
 
 import { prepareObjectDiscovery } from './prepare-object-discovery.mts';
 import { BODIES, M_PER_PC, STAR_IDS, starAstrometry } from '@cssearth/astronomy';
-import { assetOrigin } from '../../asset-origin.mts';
+import { assetOrigin } from '../../server-assets/asset-origin.mts';
 import { readInventory } from '@cssearth/objects/node';
 
 const root = resolve(import.meta.dirname, '../../..');

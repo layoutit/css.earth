@@ -3,7 +3,7 @@ import { basename, resolve, sep } from 'node:path';
 import { hasErrorCode, isRecord } from '@cssearth/core';
 import { readShapeModelDiscovery, readRasterDiscovery, readRuntimeCamera, readRuntimeCameraPrefix, parseObjectDescriptor, readObjectContentDatasets, requireCamera, parseArrivalView, parseArrivalBillboard, type CameraPlan, type ObjectDiscovery } from '@cssearth/objects';
 import { preparedDefaultViewRotation } from '@cssearth/engine';
-import { resolveBuildSceneAddress } from '../../asset-origin.mts';
+import { resolveBuildSceneAddress } from '../../server-assets/asset-origin.mts';
 
 /** Authored exceptions describe illustrative datasets, not a permanent body blacklist. */
 export function discoveryPolicy(value: unknown) {

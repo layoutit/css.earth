@@ -137,7 +137,7 @@ export async function prepareSpatialContext(options: SpatialContextPreparationOp
   // A planet of another star closes its orbit. A star on a hosted orbit (an S-star around Sgr A*) draws the half-orbit trail a
   // comet does: dozens of eccentric ellipses around one host read as a tangle, their recent paths as motion.
   const hostedIds = new Set<string>(HOSTED_PLANET_IDS), hostedStarIds = new Set<string>(HOSTED_PLANET_IDS.filter(id => !(EXOPLANET_IDS as readonly string[]).includes(id)));
-  const { SYSTEM_FRAMING_MIN_MOON_RADIUS_SHARE, SYSTEM_FRAMING_ANGLES } = await import(pathToFileURL(resolve(process.cwd(), 'site/runtime-policy.mts')).href) as {
+  const { SYSTEM_FRAMING_MIN_MOON_RADIUS_SHARE, SYSTEM_FRAMING_ANGLES } = await import(pathToFileURL(resolve(process.cwd(), 'site/browser/runtime-policy.mts')).href) as {
     SYSTEM_FRAMING_MIN_MOON_RADIUS_SHARE: number;
     SYSTEM_FRAMING_ANGLES: { readonly elevationsDegrees: readonly number[]; readonly azimuthStepDegrees: number };
   };

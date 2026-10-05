@@ -18,7 +18,7 @@ import { resolve } from 'node:path';
 import { SCENE_OBJECTS } from '../../objects.mts';
 import { allPlanetarySystems, SOLAR_SYSTEM_ID } from '../../object-systems.mts';
 import { allSatelliteSystems } from '../../satellite-systems.mts';
-import { systemObjectId } from '../../navigation/system-address.mts';
+import { systemObjectId } from '../../model/system-address.mts';
 import { readSourceCatalog } from '@cssearth/bake/sources';
 import { prepareSystemIntroductions } from './system-text.mts';
 import { APPLICATION_WORLD_CONTEXT } from '../../world-context-plan.mts';

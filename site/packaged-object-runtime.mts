@@ -3,15 +3,15 @@ import { type ObjectRuntimeDefinition, type PreparedWorldCameraFrame, parseObjec
 import type { SceneFactory } from './browser/browser-types.mts';
 import { requiredElement } from './browser/browser-types.mts';
 
-import { DIAGNOSTICS_ENABLED } from './diagnostics-policy.mts';
+import { DIAGNOSTICS_ENABLED } from './browser/diagnostics-policy.mts';
 import { loadNavigableObject, preparedObjectCapabilities,
   createWorldContextObjectRuntime } from '@cssearth/renderer';
-import { APPLICATION_WORLD_CAMERA } from './world-camera.mts';
-import * as runtimePolicy from './runtime-policy.mts';
-import { startupFetch } from './startup-requests.mts';
+import { APPLICATION_WORLD_CAMERA } from './world/world-camera.mts';
+import * as runtimePolicy from './browser/runtime-policy.mts';
+import { startupFetch } from './directory/startup-requests.mts';
 /** Started at boot (`startup-boot.mts`), so the decoding worker's script loads beside the first object's bytes. */
 export { prestartPreparedObjectDecoding as prestartObjectDecoding } from '@cssearth/renderer';
-import { preparedObjectUrl } from './prepared-object-path.mts';
+import { preparedObjectUrl } from './prepared/prepared-object-path.mts';
 import { insideViewDescriptor } from './inside-view.mts';
 
 // The application supplies its shell nodes and authoritative input policy.

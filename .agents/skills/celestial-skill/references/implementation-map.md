@@ -52,8 +52,8 @@ fallback requirements are not the current authored-package template.
 | Preparation dispatch and publication | `site/build/prepare/prepare-authored.ts`, `packages/bake/src/delivery/publication.ts`, `site/build/prepare/prepare-object-json.mts` |
 | Source acquisition, verification and runtime inventory | `packages/bake/src/objects/acquisition/operations-acquisition.ts`, `packages/bake/src/objects/sources/source-files.ts`, `packages/bake/src/objects/acquisition/object-operations.ts`, package source manifests and acquisition JSON |
 | Retained scene, selection, resources and lifecycle | `packages/renderer/src/runtime/object-runtime.ts`, `packages/renderer/src/rendering/`, `packages/renderer/src/runtime/shell-contract.ts`, `site/scene/scene-router.mts` |
-| Shared input, world camera and physical registration | `site/runtime-policy.mts`, `packages/renderer/src/navigation/`, `packages/renderer/src/rendering/prepared-camera-runtime.ts`, `packages/bake/src/objects/scene/world-navigation.ts` |
-| Shared page and content presentation | `site/pages/[id].astro`, `site/components/ObjectPage.astro`, `site/object-page-data.mts`, `site/object-page-contract.mts`, `site/layouts/ObjectLayout.astro` |
+| Shared input, world camera and physical registration | `site/browser/runtime-policy.mts`, `packages/renderer/src/navigation/`, `packages/renderer/src/rendering/prepared-camera-runtime.ts`, `packages/bake/src/objects/scene/world-navigation.ts` |
+| Shared page and content presentation | `site/pages/[id].astro`, `site/components/ObjectPage.astro`, `site/server/object-page-data.mts`, `site/contracts/object-page-contract.mts`, `site/layouts/ObjectLayout.astro` |
 | Content, dataset labels and minimap preparation | `@cssearth/bake/objects/content` (the content contract, dataset labels, dataset steps and legends), `site/build/content/prepare.ts`, `@cssearth/bake/surface-previews` (`surface-minimaps.ts`) |
 | Search and marker presentation | `site/search/search-objects.mts`, `packages/bake/src/navigation/prepare-navigation.ts`, `packages/renderer/src/navigation/marker-presentation.ts` |
 | Open hyperbolic trajectories | `packages/astronomy/src/kepler.ts`, `packages/bake/src/world-context/hyperbolic-path.ts`, shared world-context preparation and orbit validation/projector |
@@ -475,7 +475,7 @@ are retired. `pnpm test` runs packages, renderer, native tests, the preparation
 subset and lab checks; use the affected suite or direct test files for a focused
 change. The shared runtime-package test exercises registered object packages.
 
-`site/test/rendered-page.test.mts` reads an existing build and checks that the
+`site/journeys/rendered-page.test.mts` reads an existing build and checks that the
 information-tab rules live in the scene head. It does not build every object or test
 interaction, raster appearance or line wrapping. The old Playwright conformance
 profiles are retired; inspect changed browser views and interactions as required

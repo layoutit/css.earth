@@ -1,6 +1,6 @@
 import type { SceneLifetime } from '@cssearth/engine';
 import type { BrowserWindow, PlaybackState } from '../browser/browser-types.mts';
-import type { WorldPreferences } from '../world-preferences.mts';
+import type { WorldPreferences } from '../world/world-preferences.mts';
 import { requiredElement, requiredSection } from '../browser/browser-types.mts';
 import { showSection } from '@cssearth/renderer';
 

@@ -1,9 +1,9 @@
 import { parseCompleteWorldContext, parsePreparedWorldIndex, systemObjectId } from '@cssearth/objects';
 import { extendWorldContext, parsePreparedWorldContextSummary, parsePreparedWorldSystem } from '@cssearth/objects';
 import { WORLD_ANYWHERE_SOURCE, WORLD_SUMMARY_SOURCE, anywhereFiles, pageWorldFiles, startupWorld } from './startup-world.mts';
-import { readWorldPlace } from './object-entries.mts';
+import { readWorldPlace } from './directory/object-entries.mts';
 import type { PreparedWorldContext, PreparedWorldIndex, PreparedWorldSystem } from '@cssearth/objects';
-import { startupFetch } from './startup-requests.mts';
+import { startupFetch } from './directory/startup-requests.mts';
 
 // The application's prepared world context, validated once. Startup, framing and
 // every detail mount share this immutable plan. The browser fetches the prepared

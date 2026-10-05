@@ -11,30 +11,30 @@ A folder imports itself or strictly lower layers. Sibling folders, including L0 
 <!-- generated:folders -->
 | Tier | Folder | Purpose | Incoming moves |
 | ---: | --- | --- | --- |
-| 0 | `browser/` | Browser input, DOM and serialized import queue | 16; `runtime-policy.mts`, `diagnostics-policy.mts`, `in-flight-loader.mts`, `next-frame.mts` |
-| 0 | `model/` | Object identities, routes and held addresses | 8; `navigation/system-address.mts`, `root-object.mts`, `orbit-root.mts`, `planetary-system-members.mts` |
-| 0 | `overview/` | Prepared spectral overview readers | 2 |
-| 0 | `prepared/` | Prepared transports and generated inputs | 24; `prepared-catalogue.d.mts`, `prepared-navigation-markers.d.mts`, `prepared-object-path.mts`, `prepared-shell-icons.d.mts` |
+| 0 | `browser/` | Browser input, DOM and serialized import queue | 2; `import-queue.mts` |
+| 0 | `model/` | Object identities, routes and held addresses | 0 |
+| 0 | `overview/` | Prepared spectral overview readers | 1 |
+| 0 | `prepared/` | Prepared transports and generated inputs | 23; `prepared-catalogue.d.mts`, `prepared-navigation-markers.d.mts`, `prepared-shell-icons.d.mts`, `prepared-shell-titles.d.mts` |
 | 0 | `source/` | Preserved input records and artwork | 0 |
 | 0 | `vendor/` | Preserved third-party notices | 0 |
-| 0 | `server-assets/` | Server and build prepared-asset origin | 2; `asset-origin.mts` |
-| 0 | `contracts/` | Shared page and shell interfaces | 3; `object-shell-types.ts`, `object-page-contract.mts` |
-| 1 | `directory/` | Startup reads and object catalogue directory | 16; `startup-world.mts`, `startup-requests.mts`, `object-entries.mts`, `object-directory.mts` |
-| 1 | `minimap/` | Surface-map measurements and view formatting | 4 |
-| 2 | `world/` | Shared framing, visibility and camera context | 73; `world-objects.mts`, `world-system-views.mts`, `context-availability.mts`, `context-datasets.mts` |
-| 3 | `content/` | Card content, citations and metadata | 31; `dataset-content.mts`, `dataset-context.mts`, `object-text.mts`, `prepared-panel-content.mts` |
-| 3 | `navigation/` | History, requests, flights and arrivals | 25; `prepared-arrival.mts`, `prepared-scene-ownership.mts`, `arrival-billboard.mts`, `prepared-world-navigation.mts` |
-| 4 | `search/` | Catalogue search and result presentation | 6 |
+| 0 | `server-assets/` | Server and build prepared-asset origin | 0 |
+| 0 | `contracts/` | Shared page and shell interfaces | 0 |
+| 1 | `directory/` | Startup reads and object catalogue directory | 9; `startup-world.mts`, `object-directory.mts`, `objects.mts`, `world-context-plan.mts` |
+| 1 | `minimap/` | Surface-map measurements and view formatting | 0 |
+| 2 | `world/` | Shared framing, visibility and camera context | 52; `world-objects.mts`, `world-system-views.mts`, `stellar-extents.mts`, `hosted-banks.mts` |
+| 3 | `content/` | Card content, citations and metadata | 13; `exploration-catalog.mts`, `source-documentation.mts`, `seo.mts`, `seo-trail.mts` |
+| 3 | `navigation/` | History, requests, flights and arrivals | 10; `prepared-arrival.mts`, `prepared-world-navigation.mts` |
+| 4 | `search/` | Catalogue search and result presentation | 0 |
 | 4 | `selection/` | Committed selection and camera handovers | 8; `scene/scene-selection.mts`, `satellite-selection.mts`, `overview-selection.mts`, `showcase.mts` |
-| 5 | `shell/` | Retained shell controls and panels | 30; `object-browser.mts`, `feature-browser.mts`, `destination-browser.mts`, `selection-presentation.mts` |
-| 6 | `server/` | SSR readers, responses and host middleware | 23; `object-page-data.mts`, `first-view-transport.mts`, `object-entry.mts`, `world-places.mts` |
-| 6 | `scene/` | Scene sessions, replacement and publication | 16; `object-adapter.mts`, `packaged-object-runtime.mts`, `startup-billboard.mts`, `initial-scene.mts` |
-| 7 | `startup/` | Page boot helpers and router entry | 10; `shared-imports.mts`, `startup-boot.mts`, `startup-cover.mts`, `initial-shell-context.mts` |
-| 7 | `build/` | Site preparation and packaging | 32; `prepare-body-moons.mts` |
-| 8 | `layouts/` | Shared page frame and its styles | 5; `components/ObjectSwatchStyles.astro`, `site.css`, `object-shell.css`, `wordmark.css` |
+| 5 | `shell/` | Retained shell controls and panels | 14; `object-browser.mts`, `feature-browser.mts`, `destination-browser.mts`, `selection-presentation.mts` |
+| 6 | `server/` | SSR readers, responses and host middleware | 8; `object-entry.mts`, `world-places.mts`, `dot-catalogue-data.mts`, `social-images.mts` |
+| 6 | `scene/` | Scene sessions, replacement and publication | 8; `object-adapter.mts`, `packaged-object-runtime.mts`, `startup-billboard.mts` |
+| 7 | `startup/` | Page boot helpers and router entry | 5; `shared-imports.mts`, `startup-boot.mts` |
+| 7 | `build/` | Site preparation and packaging | 8; `prepare-body-moons.mts` |
+| 8 | `layouts/` | Shared page frame and its styles | 2; `components/ObjectSwatchStyles.astro`, `object-shell.css` |
 | 9 | `components/` | Reusable Astro markup and SSR composition | 0 |
 | 10 | `pages/` | Routes and object-page entries | 0 |
-| 11 | `journeys/` | Cross-cutting journeys and support | 19 |
+| 11 | `journeys/` | Cross-cutting journeys and support | 1 |
 | 11 | `test/` | Retired test folder; no final occupants | 0 |
 <!-- /generated:folders -->
 

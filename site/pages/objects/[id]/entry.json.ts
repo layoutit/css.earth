@@ -1,6 +1,6 @@
 import type { APIRoute, GetStaticPaths } from 'astro';
 import { OBJECT_ENTRY_IDS, objectEntry } from '../../../object-entry.mts';
-import { resolveSceneAddressesDeep } from '../../../asset-origin.mts';
+import { resolveSceneAddressesDeep } from '../../../server-assets/asset-origin.mts';
 import { worldPlaceOf } from '../../../world-places.mts';
 import { OBJECTS, ancestorsOf } from '../../../objects.mts';
 import { APPLICATION_WORLD_CONTEXT } from '../../../world-context-plan.mts';

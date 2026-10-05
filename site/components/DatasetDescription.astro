@@ -1,7 +1,7 @@
 ---
-import type { Props as ShellProps } from '../object-shell-types';
+import type { Props as ShellProps } from '../contracts/object-shell-types';
 interface Props { dataset: NonNullable<ShellProps['datasets']>['controls'][number]; }
-import { validateDatasetText } from "../dataset-content.mts";
+import { validateDatasetText } from "../content/dataset-content.mts";
 import SelectedContent from "./SelectedContent.astro";
 const { dataset } = Astro.props;
 const { title } = validateDatasetText(dataset);

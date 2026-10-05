@@ -1,4 +1,4 @@
-// A page's report of its own failure (site/error-report.mts), written to the function log and answered with no content.
+// A page's report of its own failure (site/startup/error-report.mts), written to the function log and answered with no content.
 // Nothing is stored. The body is capped: this endpoint is public.
 export default async (request: Request) => {
   if (request.method !== 'POST') return new Response(null, { status: 405 });

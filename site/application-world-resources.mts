@@ -1,5 +1,5 @@
 import { IMAGE_MESH_SCHEMA, bankCataloguePoints, parseDatasetBillboards, parseCataloguePointBankDescriptor, parseDensityVolumeFrame, parseImageLayerBankDescriptor, parseObjectDescriptor } from '@cssearth/objects';
-import { DATASET_VISIBILITY } from './runtime-policy.mts';
+import { DATASET_VISIBILITY } from './browser/runtime-policy.mts';
 import { isRecord } from '@cssearth/core';
 // Generated after the prepared dataset payloads are restored: text now, validated below.
 import datasetBillboardText from './prepared-dataset-billboards.json?raw';
@@ -7,16 +7,16 @@ import { createPreparedUniverse, loadPreparedCssVolume, loadPreparedPointAppeara
 import { APPLICATION_WORLD_CONTEXT as applicationContext, APPLICATION_WORLD_PLANNER_SOURCE, WORLD_DOT_BANKS, onWorldSystems } from './world-context-plan.mts';
 import { preparedBodyBillboards } from '@cssearth/renderer/navigation/prepared-body-billboards.ts';
 import { CONTEXT_OBJECT_ASSET_URLS, CONTEXT_OBJECT_DESCRIPTORS } from './prepared-context-objects.mts';
-import { CONTEXT_AVAILABILITY } from './context-availability.mts';
+import { CONTEXT_AVAILABILITY } from './world/context-availability.mts';
 import { PREPARED_WORLD_PRESENTATION } from './prepared-world-presentation.mts';
-import { createInFlightLoader } from './in-flight-loader.mts';
-import { startupFetch } from './startup-requests.mts';
-import { loadCatalogueDots } from './dot-catalogues.mts';
+import { createInFlightLoader } from './browser/in-flight-loader.mts';
+import { startupFetch } from './directory/startup-requests.mts';
+import { loadCatalogueDots } from './world/dot-catalogues.mts';
 import { annotationsForBodies, worldVisibilityPolicy } from './application-world-visibility.mts';
 import { STELLAR_EXTENTS } from './stellar-extents.mts';
-import { CONTEXT_DATASETS } from './context-datasets.mts';
+import { CONTEXT_DATASETS } from './world/context-datasets.mts';
 import { navigationHref } from './navigation/navigation-history.mts';
-import { onObjectEntry } from './object-entries.mts';
+import { onObjectEntry } from './directory/object-entries.mts';
 
 /** The view an image mesh package is drawn in: the view of the dataset the mounted object shows of it (context-datasets.mts),
  * or of its default dataset; its descriptor names each dataset's view (`properties.views`). A package without views is cut open. */

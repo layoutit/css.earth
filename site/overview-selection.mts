@@ -11,7 +11,7 @@ export interface OverviewSelection { overview: boolean; objectId: string; }
  * shows it from outside, so `radiusM` is its body's (`worldFrame.bodyRadiusM`). */
 export interface InsideBody { readonly id: string; readonly originM: PositionM; readonly radiusM: number }
 import { presentWorldCamera } from '@cssearth/renderer/navigation/world-camera.ts';
-import { OVERVIEW_SELECTION_POLICY as policy } from './runtime-policy.mts';
+import { OVERVIEW_SELECTION_POLICY as policy } from './browser/runtime-policy.mts';
 import { SOLAR_SYSTEM_ID, systemOfObject } from './object-systems.mts';
 import { systemOverviewDistance } from './system-framing.mts';
 import { leaveDistanceM, zoomStepOf } from './inside-view.mts';

@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import { createNavigationHistory, navigationHref } from '../navigation/navigation-history.mts';
-import { ROOT_OBJECT_ID } from '../root-object.mts';
+import { ROOT_OBJECT_ID } from '../model/root-object.mts';
 
 test('Back to the front page returns to the body it shows, not nowhere', () => {
   const listeners = new Map<string, (event: PopStateEvent) => void>(), calls: [string, unknown][] = [];

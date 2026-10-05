@@ -7,9 +7,9 @@ import { dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import sharp from 'sharp';
 
-import type { Dataset } from '../../object-shell-types.ts';
-import { validateDatasetText } from '../../dataset-content.mts';
-import { parsePreparedVolumePresentation } from '../../volume-presentation.mts';
+import type { Dataset } from '../../contracts/object-shell-types.ts';
+import { validateDatasetText } from '../../content/dataset-content.mts';
+import { parsePreparedVolumePresentation } from '../../content/volume-presentation.mts';
 import { checkLineage, lineageSource } from '@cssearth/objects/provenance';
 import type { ObjectLineage } from '@cssearth/objects/provenance';
 import { sourceArray, sourceId, sourceObject, sourcePath, sourceText, sourceUnique, sourceUrl } from '@cssearth/objects/sources';
@@ -21,7 +21,7 @@ import { composeSkyBandPng, verifySkyBandRecipe } from '@cssearth/telescope-cli/
 import { RUNTIME_ASSET_ORIGIN, fetchWithRetry, sourceCacheUrl } from '@cssearth/bake/objects/sources';
 import { DECORATIVE_WEBP } from '@cssearth/bake/raster';
 
-export const volumePresentationCompilerClosure = ['site/build/prepare/prepare-volume-presentation.mts', 'site/dataset-content.mts', 'packages/bake/src/sources/context-source-records.ts',
+export const volumePresentationCompilerClosure = ['site/build/prepare/prepare-volume-presentation.mts', 'site/content/dataset-content.mts', 'packages/bake/src/sources/context-source-records.ts',
   'packages/objects/src/prepared-data/source/volume-source-manifest.ts', 'packages/objects/src/prepared-data/source/volume-presentation-source.ts',
   'packages/telescope-cli/src/sky/sky-band-composite.mts', 'packages/bake/src/objects/raster/wise-atlas-mosaic.ts', 'packages/bake/src/objects/color/color-transfer.ts', 'packages/fits/src/fits.ts', 'packages/fits/src/node/file.ts', 'packages/bake/src/raster/lossy-lane.ts'] as const;
 

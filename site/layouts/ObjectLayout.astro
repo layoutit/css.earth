@@ -2,14 +2,14 @@
 import { worldPlaceOf, worldStartupFiles } from '../world-places.mts';
 import { informationTabStyles } from '../server/information-tab-styles.mts';
 import ObjectSwatchStyles from "../components/ObjectSwatchStyles.astro";
-import { webAnalyticsBootstrap } from "../web-analytics.mts";
-import { errorReportBootstrap } from "../error-report.mts";
-import { initialShellContextBootstrap } from '../initial-shell-context.mts';
-import { startupRequestsBootstrap } from '../startup-requests.mts';
-import { defaultDatasetBank } from '../object-page-data.mts';
+import { webAnalyticsBootstrap } from "../startup/web-analytics.mts";
+import { errorReportBootstrap } from "../startup/error-report.mts";
+import { initialShellContextBootstrap } from '../startup/initial-shell-context.mts';
+import { startupRequestsBootstrap } from '../directory/startup-requests.mts';
+import { defaultDatasetBank } from '../server/object-page-data.mts';
 import contextBankAssets from '../prepared-context-bank-assets.json';
 import { SYSTEM_VIEW_HOSTS } from '../system-framing.mts';
-import { inlineSceneImage, resolveBuildSceneAddress } from '../asset-origin.mts';
+import { inlineSceneImage, resolveBuildSceneAddress } from '../server-assets/asset-origin.mts';
 import { SCENE_OBJECTS, requireObject } from "../objects.mts";
 import { breadcrumbJsonLd, homeSeo, objectSeo, websiteJsonLd } from "../seo.mts";
 import { pageTrail } from "../seo-trail.mts";
@@ -18,22 +18,22 @@ import "./cubic-sky.css";
 import "@cssearth/renderer/styles/volume.css";
 import "@cssearth/renderer/styles/world-context.css";
 import "@cssearth/renderer/styles/triangle-faces.css";
-import "../site.css";
+import "./site.css";
 import "../shell/maps-shell.css";
 import "../shell/settings-panel.css";
 import "../shell/shell-layout.css";
 import type { PreparedSceneMarkup } from '@cssearth/renderer';
 import type { loadPreparedSceneMarkup } from '../server/load-prepared-scene.mts';
 import type { ObjectDescriptor } from '@cssearth/objects';
-// The world camera a body mounts with (`site/world-camera.mts`): the summary's frame, focus and camera, so the first
+// The world camera a body mounts with (`site/world/world-camera.mts`): the summary's frame, focus and camera, so the first
 // body mounts before the world summary itself downloads.
 import worldSummary from '../../src/objects/observable-universe/prepared/world.json';
 // The same hashed file the client's `world-context-plan.mts` fetches, requested by the head (startup-requests.mts).
 import worldSummaryUrl from '../../src/objects/observable-universe/prepared/world.json?url';
 import { worldCameraOf } from '@cssearth/objects';
-import { MOBILE_VIEWPORT_QUERY } from '../runtime-policy.mts';
-import { defaultWidthShare } from '../default-width-share.mts';
-import { nativeInputMarkup } from '../native-input.mts';
+import { MOBILE_VIEWPORT_QUERY } from '../browser/runtime-policy.mts';
+import { defaultWidthShare } from '../world/default-width-share.mts';
+import { nativeInputMarkup } from '../browser/native-input.mts';
 import { billboardBodyRadiusPixels } from '@cssearth/renderer/navigation/prepared-body-billboards.ts';
 const worldCamera = worldCameraOf(worldSummary);
 
@@ -156,11 +156,11 @@ const structuredData = JSON.stringify(home ? websiteJsonLd() : breadcrumbJsonLd(
     {/* The arrival photograph takes its place from the HTML before the application's code and data (startup-cover.mts).
         It comes first: module scripts run in document order, and its few modules are a small part of the graph. */}
     {startupCover && <script>
-      import '../startup-cover.mts';
+      import '../startup/startup-cover.mts';
     </script>}
     {/* In the head the application script downloads with the HTML; as a module it still runs after parsing. */}
     {!navigation && <script>
-      import { bindNativeViewForms } from '../native-view-forms.mts';
+      import { bindNativeViewForms } from '../shell/native-view-forms.mts';
       import { startBodyCode, startViewCode } from '../startup-boot.mts';
       import { importSceneRouter } from '../shared-imports.mts';
       import { loadStartupWorld } from '../startup-world.mts';

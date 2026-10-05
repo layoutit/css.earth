@@ -166,10 +166,10 @@ test('finite computed references in moved importers still refuse', () => {
 });
 
 test('every tracked owner is scanned, including CSS, Astro styles, config and exact globs', () => {
-  fixture({ 'site/leaf.css': 'body{}', 'site/site.css': "@import './leaf.css';", 'site/page.astro': "<style>@import './leaf.css'; a{background:url('./leaf.css')}</style>", 'astro.config.mts': "import './site/leaf.css';", 'packages/check.mts': "import '../site/leaf.css';", 'site/glob.mts': "import.meta.glob('./leaf.css');" }, root => {
+  fixture({ 'site/leaf.css': 'body{}', 'site/sheet.css': "@import './leaf.css';", 'site/page.astro': "<style>@import './leaf.css'; a{background:url('./leaf.css')}</style>", 'astro.config.mts': "import './site/leaf.css';", 'packages/check.mts': "import '../site/leaf.css';", 'site/glob.mts': "import.meta.glob('./leaf.css');" }, root => {
     const plan = applyMoves(root, { 'site/leaf.css': 'site/styles/leaf.css' });
     assert.equal(plan.rewritten, 5);
-    assert.match(readFileSync(resolve(root, 'site/site.css'), 'utf8'), /styles\/leaf.css/u);
+    assert.match(readFileSync(resolve(root, 'site/sheet.css'), 'utf8'), /styles\/leaf.css/u);
     assert.match(readFileSync(resolve(root, 'astro.config.mts'), 'utf8'), /styles\/leaf.css/u);
     assert.match(readFileSync(resolve(root, 'packages/check.mts'), 'utf8'), /styles\/leaf.css/u);
     assert.match(readFileSync(resolve(root, 'site/page.astro'), 'utf8'), /styles\/leaf.css/u);

@@ -1,6 +1,6 @@
 import { eyeDistanceM } from '@cssearth/engine';
 import type { WorldCameraPose } from '@cssearth/engine';
-import { OVERVIEW_SELECTION_POLICY } from '../runtime-policy.mts';
+import { OVERVIEW_SELECTION_POLICY } from '../browser/runtime-policy.mts';
 import { markHandover, type HandoverDetail } from '../navigation/navigation-timing.mts';
 import { selectionKey, subjectHost, type SceneSubject } from './scene-subject.mts';
 

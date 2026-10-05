@@ -3,7 +3,7 @@ import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { isRecord } from '@cssearth/core';
 import { normalizeDestinationQuery, readDestinationSettlements, readFeatureSearchCatalog, readRuntimeFeatureDatasets, readPreparedFeaturePins } from '@cssearth/objects';
-import { resolveBuildSceneAddress } from '../../asset-origin.mts';
+import { resolveBuildSceneAddress } from '../../server-assets/asset-origin.mts';
 import { readPreparedObjects } from '@cssearth/objects/node';
 
 const SCENE_OBJECTS = readPreparedObjects(resolve(import.meta.dirname, '../../..')).sceneObjects;

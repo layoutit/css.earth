@@ -8,7 +8,7 @@ import { dirname, resolve } from "node:path";
 
 import { required } from './navigation-test-values.mts';
 import { SCENE_OBJECTS } from "../objects.mts";
-import { authoredObjectFixture } from "./authored-object-fixture.mts";
+import { authoredObjectFixture } from "../build/fixtures/authored-object-fixture.mts";
 import { objectInformationSource, validateObjectEditorial } from "@cssearth/bake/sources";
 import {
   objectPackagePaths,

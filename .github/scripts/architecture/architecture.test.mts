@@ -433,7 +433,7 @@ test('nothing-imports-applications covers tests and every non-application tree, 
   const rule = LAYER_RULES.find(item => item.id === 'nothing-imports-applications')!;
   const found = (...pairs: readonly (readonly [string, string])[]) => measure(graph(...pairs), [rule]).rules.get(rule.id)!.length;
   for (const from of ['src/platform/x.mts', 'src/platform/x.test.mts', 'integration/x.test.mts', 'packages/core/src/x.test.ts', 'labs/other/x.test.mts'])
-    assert.equal(found([from, 'site/runtime-policy.mts']), 1, `${from} -> site/ fails`);
+    assert.equal(found([from, 'site/browser/runtime-policy.mts']), 1, `${from} -> site/ fails`);
   assert.equal(found(['src/platform/x.mts', 'labs/nebula/y.mts']), 1, 'src -> labs fails');
   assert.equal(found(['src/platform/x.mts', '.github/scripts/y.mts']), 1, 'src -> .github fails');
   assert.equal(found(['labs/performance/source-maps.test.mts', 'site/build/source-maps.mts']), 1, 'the former named exception fails');

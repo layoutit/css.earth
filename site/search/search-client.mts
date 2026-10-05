@@ -1,8 +1,8 @@
 import type { SceneLifetime } from '@cssearth/engine';
 import type { BrowserWindow } from '../browser/browser-types.mts';
 import { requiredElement } from '../browser/browser-types.mts';
-import { nextFrame } from '../next-frame.mts';
-import { sourceDocuments, type SourceDocumentReference } from '../source-link.mts';
+import { nextFrame } from '../browser/next-frame.mts';
+import { sourceDocuments, type SourceDocumentReference } from '../browser/source-link.mts';
 import { createCatalogueWindow, type CatalogueSelection } from './catalogue-window.mts';
 import { FIND_PAGE_ROWS, FIND_PATH, parseFindResponse, type FindResponse } from './find-protocol.mts';
 

@@ -1,6 +1,6 @@
 import { SEARCH_OBJECTS } from './search/search-objects.mts';
 import type { ObjectEntry } from './objects.mts';
-import { systemObjectId } from './navigation/system-address.mts';
+import { systemObjectId } from './model/system-address.mts';
 import { readMoonCatalogue } from './moon-catalogue.mts';
 export { parseMoonCatalogue, catalogueMoons } from './moon-catalogue.mts';
 import { labelEligible } from '@cssearth/renderer/labels/universe-label-policy.ts';

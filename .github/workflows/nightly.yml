@@ -142,4 +142,4 @@ jobs:
       - name: Check production page invariants and asset URLs
         env:
           ASSET_ORIGIN: https://earth-assets.lowpoly.cc
-        run: node --test site/test/rendered-page.test.mts site/test/asset-origin.test.mts
+        run: node --test site/journeys/rendered-page.test.mts site/server/asset-origin.test.mts

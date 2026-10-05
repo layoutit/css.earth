@@ -12,7 +12,7 @@ import { isRecord } from '@cssearth/core';
 import { resolveSpatialCitation } from '@cssearth/catalog';
 import { parsePreparedGalaxyCatalog } from '@cssearth/objects';
 import { resolve } from 'node:path';
-import { systemHostId, systemObjectId } from '../navigation/system-address.mts';
+import { systemHostId, systemObjectId } from '../model/system-address.mts';
 
 test('every scene and every package the host draws has exactly one searchable destination, built from its own descriptor', async () => {
   const descriptors = await readObjectDescriptors(resolve('src/objects'));

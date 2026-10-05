@@ -1,0 +1,309 @@
+import assert from 'node:assert/strict';
+import test from 'node:test';
+import { parseHTML } from 'linkedom';
+import { createSceneLifetime } from '@cssearth/engine';
+import type { BrowserWindow } from '../browser/browser-types.mts';
+import { createSheetController } from './shell-sheet.mts';
+
+// Synthetic snap heights for a 690 px sheet: the peek rests 538 px below the open sheet,
+// and the half stop rests 253 px below it. The gesture behavior does not depend on the CSS peek size.
+const SHELL = `<html><body data-object-shell>
+  <header class="explorer-shell-header"><div class="object-search-toolbar"><input class="object-sidebar-search" type="search"></div>
+  <div class="object-search-categories"></div></header>
+  <aside class="object-sidebar"><div class="object-drawer-content"><input class="object-sheet-handle" type="checkbox"></div></aside>
+</body></html>`;
+const REST: Readonly<Record<string, number>> = { tucked: 670, peek: 538, half: 253, full: 0 };
+const SHEET_TRANSFORM = /^translate\(0, calc\((-?[\d.]+)px - var\(--sheet-rest\)\)\)$/u;
+
+function mountSheet(shell = SHELL) {
+  const { document, window } = parseHTML(shell);
+  const sheet = document.querySelector<HTMLElement>('.object-sidebar')!;
+  const toolbar = document.querySelector<HTMLElement>('.object-search-toolbar')!;
+  const categories = document.querySelector<HTMLElement>('.object-search-categories')!;
+  const search = document.querySelector<HTMLInputElement>('.object-sidebar-search')!;
+  // A browser checks an input that arrives with the attribute.
+  const handle = document.querySelector<HTMLInputElement>('.object-sheet-handle')!;
+  if (handle.hasAttribute('checked')) handle.checked = true;
+  Object.defineProperty(sheet, 'offsetHeight', { value: 690 });
+  for (const surface of [sheet, toolbar, categories]) Object.assign(surface, { setPointerCapture() {} });
+  const frames: FrameRequestCallback[] = [];
+  const mobile = { matches: true, listeners: [] as (() => void)[],
+    addEventListener(_type: string, listener: () => void) { this.listeners.push(listener); } };
+  const visualViewport = Object.assign(new EventTarget(), { height: 874, offsetTop: 0 });
+  // Every forced style read, in order: what the sheet held and which class it wore when the page was restyled.
+  const styleReads: { transform: string; classes: string }[] = [];
+  // The sheet's inline snap duration at each of those reads.
+  const snapAtRead: string[] = [];
+  Object.assign(window, {
+    innerHeight: 874,
+    visualViewport,
+    matchMedia: () => mobile,
+    requestAnimationFrame(callback: FrameRequestCallback) { frames.push(callback); return frames.length; },
+    cancelAnimationFrame() {},
+    setTimeout: () => 1,
+    clearTimeout() {},
+    // Computes the sheet's transform the way shell-layout.css does: its inline offset less the state's rest.
+    getComputedStyle(element: HTMLElement) {
+      if (element === sheet) { styleReads.push({ transform: sheet.style.transform, classes: sheet.className }); snapAtRead.push(sheet.style.getPropertyValue('--sheet-snap-duration')); }
+      const offset = SHEET_TRANSFORM.exec(element.style.transform);
+      const rest = REST[document.body.dataset.sheet ?? 'peek'] ?? 0;
+      return {
+        transform: offset ? `matrix(1, 0, 0, 1, 0, ${Number(offset[1]) - rest})` : 'none',
+        transitionProperty: 'transform',
+        getPropertyValue: (name: string) => ({ '--sheet-tucked': '20px', '--sheet-peek': '152px', '--sheet-half': '437px' })[name] ?? '',
+      };
+    },
+    DOMMatrixReadOnly: class { readonly m42: number; constructor(matrix: string) { this.m42 = Number(/(-?[\d.]+)\)$/u.exec(matrix)?.[1]); } },
+  });
+  const lifetime = createSceneLifetime();
+  const controller = createSheetController(document, window as unknown as BrowserWindow, lifetime, () => 'europa:');
+  let time = 0;
+  const pointer = (type: string, target: EventTarget, clientY: number, elapsed = 16, clientX = 200) => {
+    time += elapsed;
+    const event = new window.Event(type, { bubbles: true });
+    Object.defineProperties(event, { pointerId: { value: 1 }, isPrimary: { value: true }, button: { value: 0 },
+      clientX: { value: clientX }, clientY: { value: clientY }, timeStamp: { value: time } });
+    target.dispatchEvent(event);
+  };
+  const runFrames = () => { for (const frame of frames.splice(0)) frame(time); };
+  const inline = (element: HTMLElement) => ({ transform: element.style.transform, duration: element.style.getPropertyValue('--sheet-snap-duration') });
+  return { document, window, sheet, toolbar, categories, search, mobile, visualViewport, styleReads, snapAtRead, controller, lifetime,
+    pointer, runFrames, inline, readers: [sheet, toolbar, categories] };
+}
+
+test('replacing selected card content leaves the resting sheet and camera layout untouched', async () => {
+  const { document, sheet, toolbar, categories, runFrames, controller } = mountSheet();
+  const bodyStyle = document.body.getAttribute('style');
+  const drawer = sheet.querySelector('.object-drawer-content')!;
+  const selected = document.createElement('section');
+  selected.className = 'object-selected-panel';
+  let geometryReads = 0;
+  Object.assign(selected, {
+    getClientRects() { geometryReads++; return []; },
+    getBoundingClientRect() { geometryReads++; return { top: 0, bottom: 194.125 }; },
+  });
+  drawer.append(selected);
+  for (const introduction of ['Short introduction.', 'An introduction with enough text to wrap onto another line.']) {
+    selected.textContent = introduction;
+    selected.setAttribute('data-card-subject', introduction);
+    await Promise.resolve();
+    runFrames();
+    assert.equal(geometryReads, 0, 'card changes never measure a new resting stop');
+    assert.equal(document.body.getAttribute('style'), bodyStyle, 'card changes cannot resize the shared viewport');
+    assert.equal(document.body.dataset.sheet, 'peek');
+    for (const element of [sheet, toolbar, categories]) assert.equal(element.style.transform ?? '', '');
+  }
+  controller.destroy();
+});
+
+test('a drag writes its offset on the sheet and the search riding on it, never on the body', () => {
+  const { document, sheet, toolbar, categories, pointer, inline } = mountSheet();
+  const body = document.body.getAttribute('style');
+  pointer('pointerdown', sheet, 800);
+  pointer('pointermove', document, 700);
+  assert.ok(sheet.classList.contains('is-dragging'));
+  // The riders are held with the sheet by their own class: no rule reads the sheet's from the body.
+  assert.ok(toolbar.classList.contains('is-dragging') && categories.classList.contains('is-dragging'));
+  assert.equal(toolbar.style.transform, 'translate3d(0, 438px, 0)');
+  assert.equal(categories.style.transform, 'translate3d(0, 438px, 0)');
+  // The sheet rests at --sheet-rest, so it moves by the rest of the way.
+  assert.equal(sheet.style.transform, 'translate(0, calc(438px - var(--sheet-rest)))');
+  pointer('pointermove', document, 650);
+  assert.deepEqual(inline(toolbar), { transform: 'translate3d(0, 388px, 0)', duration: '' });
+  assert.equal(sheet.style.transform, 'translate(0, calc(388px - var(--sheet-rest)))');
+  assert.equal(document.body.getAttribute('style'), body, 'a move writes nothing on the body');
+  assert.equal(document.body.style.getPropertyValue('--sheet-offset'), '');
+});
+
+test('filter and search swipes tuck and reveal the sheet without stealing horizontal pill swipes', () => {
+  const { document, sheet, toolbar, categories, pointer, runFrames } = mountSheet();
+  pointer('pointerdown', categories, 400);
+  pointer('pointermove', document, 510);
+  pointer('pointerup', document, 510, 200);
+  assert.equal(document.body.dataset.sheet, 'tucked');
+  assert.equal(sheet.querySelector('.object-sheet-handle')?.getAttribute('aria-label'), 'Show information sheet');
+  runFrames();
+
+  pointer('pointerdown', categories, 400);
+  pointer('pointermove', document, 410, 16, 300);
+  pointer('pointerup', document, 410, 200, 300);
+  assert.equal(document.body.dataset.sheet, 'tucked', 'horizontal pill swipes do not move the sheet');
+
+  pointer('pointerdown', toolbar, 500);
+  pointer('pointermove', document, 390);
+  pointer('pointerup', document, 390, 200);
+  assert.equal(document.body.dataset.sheet, 'peek');
+  runFrames();
+});
+
+test('a swipe on the search field reveals the sheet, and a tap leaves it where it is', () => {
+  const { document, window, categories, search, pointer, runFrames } = mountSheet();
+  pointer('pointerdown', categories, 400);
+  pointer('pointermove', document, 510);
+  pointer('pointerup', document, 510, 200);
+  runFrames();
+  assert.equal(document.body.dataset.sheet, 'tucked');
+
+  pointer('pointerdown', search, 500);
+  pointer('pointermove', document, 380);
+  pointer('pointerup', document, 380, 200);
+  assert.equal(document.body.dataset.sheet, 'peek');
+  runFrames();
+
+  pointer('pointerdown', search, 500);
+  search.dispatchEvent(new window.Event('focus'));
+  pointer('pointerup', document, 500);
+  assert.equal(document.body.dataset.sheet, 'peek', 'focus alone does not open the sheet');
+});
+
+test('a release holds the sheet where the finger left it, then clears the hold on the next frame', () => {
+  const { window, document, sheet, toolbar, categories, styleReads, pointer, runFrames, inline, readers } = mountSheet();
+  pointer('pointerdown', sheet, 800);
+  pointer('pointermove', document, 700);
+  pointer('pointermove', document, 650);
+  styleReads.length = 0;
+  // A pause before the release: no fling, so the nearest stop takes it.
+  pointer('pointerup', document, 650, 200);
+  assert.equal(document.body.dataset.sheet, 'half');
+  // 388 px, 135 px from the half stop over a 538 px peek: 220 + 120 × 0.25 ms.
+  for (const rider of [toolbar, categories]) assert.deepEqual(inline(rider), { transform: 'translate3d(0, 388px, 0)', duration: '250ms' });
+  assert.deepEqual(inline(sheet), { transform: 'translate(0, calc(388px - var(--sheet-rest)))', duration: '250ms' });
+  // WebKit starts no transition when the transition turns on in the same style update as the transform it animates, so
+  // the page is restyled holding the sheet untransitioned, then again with the transition on, before the hold clears.
+  const held = 'translate(0, calc(388px - var(--sheet-rest)))';
+  assert.deepEqual(styleReads.slice(-2), [{ transform: held, classes: 'object-sidebar is-dragging' },
+    { transform: held, classes: 'object-sidebar is-settling' }]);
+  runFrames();
+  for (const reader of readers) assert.deepEqual(inline(reader), { transform: '', duration: '250ms' });
+  assert.ok(sheet.classList.contains('is-settling'), 'the snap runs until the sheet\'s own transform ends');
+  const inner = new window.Event('transitionend', { bubbles: true });
+  Object.defineProperties(inner, { propertyName: { value: 'transform' } });
+  toolbar.dispatchEvent(inner);
+  assert.ok(sheet.classList.contains('is-settling'), 'only the sheet ends the snap');
+  const own = new window.Event('transitionend');
+  Object.defineProperties(own, { propertyName: { value: 'transform' } });
+  sheet.dispatchEvent(own);
+  assert.ok(!sheet.classList.contains('is-settling'));
+  for (const reader of readers) assert.deepEqual(inline(reader), { transform: '', duration: '' });
+  assert.equal(document.body.style.getPropertyValue('--sheet-offset'), '');
+  assert.equal(document.body.style.getPropertyValue('--sheet-snap-duration'), '');
+});
+
+test('search results open the whole sheet over the keyboard and leave no transform behind', () => {
+  const { window, document, search, controller, visualViewport, runFrames, inline, readers } = mountSheet();
+  search.dispatchEvent(new window.Event('focus'));
+  assert.equal(document.body.dataset.sheet, 'peek', 'focus waits for results');
+  controller.followSearch(true);
+  assert.equal(document.body.dataset.sheet, 'full');
+  runFrames();
+  for (const reader of readers) assert.equal(inline(reader).transform, '');
+  // The keyboard covers the bottom of the layout viewport; the sheet gives up that room.
+  visualViewport.height = 538;
+  visualViewport.dispatchEvent(new Event('resize'));
+  assert.equal(document.body.style.getPropertyValue('--sheet-keyboard'), '336px');
+  for (const reader of readers) assert.equal(inline(reader).transform, '');
+  visualViewport.height = 874;
+  visualViewport.dispatchEvent(new Event('resize'));
+  assert.equal(document.body.style.getPropertyValue('--sheet-keyboard'), '');
+  controller.followSearch(false);
+  assert.equal(document.body.dataset.sheet, 'peek', 'closing the results returns the sheet to where they found it');
+});
+
+test('leaving the phone layout clears a drag or a hold from the sheet and its riders', () => {
+  const { document, sheet, mobile, pointer, inline, readers } = mountSheet();
+  pointer('pointerdown', sheet, 800);
+  pointer('pointermove', document, 700);
+  mobile.matches = false;
+  for (const listener of mobile.listeners) listener();
+  assert.ok(!sheet.classList.contains('is-dragging'));
+  for (const reader of readers) assert.deepEqual(inline(reader), { transform: '', duration: '' });
+  // A snap caught before its frame clears too.
+  mobile.matches = true;
+  pointer('pointerdown', sheet, 800);
+  pointer('pointermove', document, 700);
+  pointer('pointerup', document, 700, 200);
+  assert.equal(inline(sheet).duration.endsWith('ms'), true);
+  mobile.matches = false;
+  for (const listener of mobile.listeners) listener();
+  assert.ok(!sheet.classList.contains('is-settling'));
+  for (const reader of readers) assert.deepEqual(inline(reader), { transform: '', duration: '' });
+});
+
+test('destroy leaves the sheet, its riders and the body as the markup made them', () => {
+  const { document, sheet, controller, pointer, inline, readers } = mountSheet();
+  pointer('pointerdown', sheet, 800);
+  pointer('pointermove', document, 700);
+  pointer('pointerup', document, 700, 200);
+  controller.destroy();
+  for (const reader of readers) assert.deepEqual(inline(reader), { transform: '', duration: '' });
+  assert.ok(!sheet.classList.contains('is-dragging') && !sheet.classList.contains('is-settling'));
+  assert.equal(document.body.dataset.sheet, undefined);
+});
+
+
+test('passive maps allow sheet scrolling while sequence controls retain their gestures', () => {
+  for (const player of [false, true]) {
+    const { document, sheet, controller, pointer } = mountSheet();
+    const map = document.createElement('div');
+    map.dataset.surfaceMinimap = '{}';
+    if (player) map.dataset.sequencePlayer = '';
+    const imageOrControl = document.createElement(player ? 'button' : 'img');
+    map.append(imageOrControl); sheet.querySelector('.object-drawer-content')!.append(map);
+    pointer('pointerdown', imageOrControl, 800);
+    pointer('pointermove', document, 700);
+    assert.equal(sheet.classList.contains('is-dragging'), !player);
+    controller.destroy();
+  }
+});
+
+test('a pill leaves its results at the peek so the map shows the category it frames; typing takes the whole sheet', () => {
+  const { document, controller } = mountSheet();
+  assert.equal(document.body.dataset.sheet, 'peek');
+  controller.followSearch(true);
+  assert.equal(document.body.dataset.sheet, 'full');
+  controller.followSearch(true, true);
+  assert.equal(document.body.dataset.sheet, 'peek', 'a pill pressed over full typed results lowers them');
+  controller.followSearch(false);
+  assert.equal(document.body.dataset.sheet, 'peek', 'closing returns to where the search found the sheet');
+});
+
+test('a camera fit waits for the sheet to come to rest', async () => {
+  const { window, sheet, controller, runFrames } = mountSheet();
+  let rested = false;
+  await controller.whenSettled();
+  controller.followSearch(true);
+  void controller.whenSettled().then(() => { rested = true; });
+  await Promise.resolve();
+  assert.equal(rested, false, 'the sheet is still snapping');
+  runFrames();
+  const end = new window.Event('transitionend');
+  Object.defineProperties(end, { propertyName: { value: 'transform' } });
+  sheet.dispatchEvent(end);
+  await Promise.resolve();
+  assert.equal(rested, true);
+});
+
+test('a sheet whose handle arrives checked rests open from its first publication, with no snap', () => {
+  // The server opens the sheet for a search or a dataset by checking its handle; no stylesheet rule reads the handle.
+  const { document, readers, styleReads, snapAtRead, inline, controller } = mountSheet(SHELL.replace('type="checkbox"', 'type="checkbox" checked'));
+  assert.equal(document.body.dataset.sheet, 'full');
+  assert.deepEqual([styleReads.length, snapAtRead], [1, ['0ms']], 'the open rest is committed with the snap duration at zero');
+  for (const reader of readers) assert.equal(inline(reader).duration, '', 'and the duration is given back');
+  controller.destroy();
+});
+
+test('a sheet that starts at its peek publishes it without touching the snap duration', () => {
+  const { document, styleReads, controller } = mountSheet();
+  assert.equal(document.body.dataset.sheet, 'peek');
+  assert.equal(styleReads.length, 0);
+  controller.destroy();
+});
+
+test('no rule of the shell stylesheets anchors :has() on the body: a page restyles whole when an element is added under such an anchor', async () => {
+  const { readFile } = await import('node:fs/promises');
+  for (const sheet of ['shell-layout.css', 'maps-shell.css', 'settings-panel.css', '../object-shell.css']) {
+    const text = (await readFile(new URL(`./${sheet}`, import.meta.url), 'utf8')).replace(/\/\*[\s\S]*?\*\//gu, '');
+    const anchored = [...text.matchAll(/(?:^|[{},])\s*((?:html|body)[^{},]*:has\([^{]*)/gmu)].map(match => match[1]!.trim());
+    assert.deepEqual(anchored, [], `${sheet}: ${anchored.join(' | ')}`);
+  }
+});

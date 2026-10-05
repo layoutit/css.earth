@@ -1,7 +1,7 @@
 import { designationNames } from './object-search.mts';
 import { distanceDescription } from '@cssearth/objects';
 import { objectTypeLabel, SEARCH_OBJECTS } from './search-objects.mts';
-import { sidebarThumbnail } from '../sidebar-thumbnails.mts';
+import { sidebarThumbnail } from '../content/sidebar-thumbnails.mts';
 import { PREPARED_NAVIGATION_MARKERS } from '../prepared-navigation-markers.mjs';
 import { markerStyle } from '@cssearth/renderer/navigation/marker-presentation.ts';
 import { sourceDocumentation } from '../source-documentation.mts';

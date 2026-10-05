@@ -10,7 +10,7 @@ import { createDestinationBrowser } from './destination-browser.mts';
 import { createFeatureBrowser } from './feature-browser.mts';
 import { createSearchPresentation } from './search/search-results-presentation.mts';
 import { WORLD_OBJECTS } from './world-objects.mts';
-import { SEARCH_SUGGESTION_MIN_CHARACTERS } from './runtime-policy.mts';
+import { SEARCH_SUGGESTION_MIN_CHARACTERS } from './browser/runtime-policy.mts';
 
 export interface ObjectBrowserOptions {
   readSelection(): SceneSubject;

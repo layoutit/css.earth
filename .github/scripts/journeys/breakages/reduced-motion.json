@@ -13,7 +13,7 @@
   ],
   "substitutions": [
     {
-      "file": "site/runtime-policy.mts",
+      "file": "site/browser/runtime-policy.mts",
       "before": "const lightCurves = sceneState === \"ready\" && lightCurvesRequested && !documentHidden && !reducedMotion;",
       "after": "const lightCurves = sceneState === \"ready\" && lightCurvesRequested && !documentHidden;",
       "occurrences": 1

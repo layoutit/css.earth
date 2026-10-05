@@ -1,8 +1,8 @@
 import type { APIRoute, GetStaticPaths } from 'astro';
 import { OBJECTS, SCENE_OBJECTS, PAGES } from '../../../../objects.mts';
-import { ROOT_OBJECT_ID } from '../../../../root-object.mts';
-import { builtScenePaths } from '../../../../built-pages.mts';
-import { preparedDatasetIds, readPreparedDatasetBytes } from '../../../../object-page-data.mts';
+import { ROOT_OBJECT_ID } from '../../../../model/root-object.mts';
+import { builtScenePaths } from '../../../../server/built-pages.mts';
+import { preparedDatasetIds, readPreparedDatasetBytes } from '../../../../server/object-page-data.mts';
 
 // A dataset's tables, which the object transport leaves out and a selection reads when it shows that dataset
 // (dataset-tables.ts in @cssearth/objects). Only the scenes a build prerenders read their datasets.

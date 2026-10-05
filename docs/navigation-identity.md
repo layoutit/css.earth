@@ -61,7 +61,7 @@ A planetary system is a star and every prepared body inside its system in the
 object tree, at any depth. The Solar System is the Sun's; WASP-43 and its planet
 WASP-43b form another. Each world row says which object its body is inside: the
 object whose file the row arrives in.
-[`planetary-system-members.mts`](../site/planetary-system-members.mts) reads each
+[`planetary-system-members.mts`](../site/model/planetary-system-members.mts) reads each
 system's members from that, and
 [`object-systems.mts`](../site/object-systems.mts) joins them with the registry,
 so no list names the systems and nothing walks orbits or bonds to find them. The
@@ -206,6 +206,6 @@ owners. Its test preload rejects accidental use of application boot; it does
 not prove the Vite-generated context inventory or browser startup.
 
 Scene conformance remains derived from the scene capability filter. Run
-`pnpm test:site` (the browser suites were retired; scene retention is checked in `site/test/scene-session.test.mts`) to check search, selection, saved links and retained
+`pnpm test:site` (the browser suites were retired; scene retention is checked in `site/scene/scene-session.test.mts`) to check search, selection, saved links and retained
 camera ownership. These checks do not establish the scientific accuracy of a
 catalogue measurement or a reconstructed volume.

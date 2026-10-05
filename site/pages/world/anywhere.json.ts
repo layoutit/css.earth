@@ -1,7 +1,7 @@
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import type { APIRoute } from 'astro';
-import { resolveWorldBillboards } from '../../asset-origin.mts';
+import { resolveWorldBillboards } from '../../server-assets/asset-origin.mts';
 import { worldAnywhereFiles } from '../../world-places.mts';
 
 // The files every page reads at startup, root first, in one response: each object's own `prepared/members.json` whose

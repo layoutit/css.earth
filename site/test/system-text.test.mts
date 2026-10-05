@@ -4,7 +4,7 @@ import { readSourceCatalog } from '@cssearth/bake/sources';
 import input from '../../src/navigation/system-text.json' with { type: 'json' };
 import { allSatelliteSystems } from '../satellite-systems.mts';
 import { requireObject } from '../objects.mts';
-import { systemObjectId } from '../navigation/system-address.mts';
+import { systemObjectId } from '../model/system-address.mts';
 import { prepareSystemIntroductions } from '../build/prepare/system-text.mts';
 import { showsDefaultContextOrbit } from '../build/prepare/prepare-world-presentation.mts';
 const test = sourceTest();

@@ -14,7 +14,7 @@ mock.module(new URL('./startup-world.mts', import.meta.url).href, { namedExports
   startupWorld: () => ({ summary, files: [{ id: 'solar-system', value: solar }] }),
   anywhereFiles: () => [], pageWorldFiles: () => ({ files: [] }),
 } });
-mock.module(new URL('./object-entries.mts', import.meta.url).href, { namedExports: {
+mock.module(new URL('./directory/object-entries.mts', import.meta.url).href, { namedExports: {
   readWorldPlace: async (id: string) => id === 'earth' ? { files: ['solar-system', 'earth-system'] }
     : id === rowId ? { files: [], row: fixture.read('row') } : null,
 } });

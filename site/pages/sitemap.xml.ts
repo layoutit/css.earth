@@ -1,6 +1,6 @@
 import { OBJECTS } from "../objects.mts";
 import { homeSeo, objectSeo } from "../seo.mts";
-import { ROOT_OBJECT_ID } from "../root-object.mts";
+import { ROOT_OBJECT_ID } from "../model/root-object.mts";
 
 /** The site's own page, `/`, then every page `/<id>/`: each object's. */
 export function GET() {

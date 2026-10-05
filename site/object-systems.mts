@@ -1,8 +1,8 @@
 import type { PositionM } from '@cssearth/engine';
 import type { PreparedWorldContext } from '@cssearth/objects';
 import type { ObjectEntry } from './objects.mts';
-import { planetarySystemMembers, type PlanetarySystemMembers } from './planetary-system-members.mts';
-import { OVERVIEW_SELECTION_POLICY as policy } from './runtime-policy.mts';
+import { planetarySystemMembers, type PlanetarySystemMembers } from './model/planetary-system-members.mts';
+import { OVERVIEW_SELECTION_POLICY as policy } from './browser/runtime-policy.mts';
 import { SYSTEM_FRAMING_RADII, systemFramingRadii } from './system-framing.mts';
 import { APPLICATION_WORLD_CONTEXT as context } from './world-context-plan.mts';
 import { systemFadeDistances } from '@cssearth/renderer/universe/world-context/context-scale.ts';

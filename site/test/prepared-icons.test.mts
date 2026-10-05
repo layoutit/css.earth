@@ -4,7 +4,7 @@ import { tmpdir } from "node:os";
 import { resolve } from "node:path";
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
-import { SourceEvidence } from "./source-evidence-values.mts";
+import { SourceEvidence } from "../overview/source-evidence-values.test-support.mts";
 
 import { prepareShellIcons } from "../build/prepare/prepare-shell-icons.mts";
 import { PREPARED_SHELL_ICONS } from "../prepared-shell-icons.mjs";
