@@ -18,3 +18,8 @@ test('rejects malformed physical frames and uncontained source references', () =
   const escaped = descriptor(); escaped.properties.preparation.source = '../recipe.json';
   assert.throws(() => parseImageLayerBankDescriptor(escaped), /contained/);
 });
+test('a bank says whether its light surrounds what stands inside it', () => {
+  assert.equal(parseImageLayerBankDescriptor(descriptor()).surrounds, false);
+  assert.equal(parseImageLayerBankDescriptor({ ...descriptor(), properties: { ...descriptor().properties, surrounds: true } }).surrounds, true);
+  assert.throws(() => parseImageLayerBankDescriptor({ ...descriptor(), properties: { ...descriptor().properties, surrounds: 'yes' } }), /src\/objects\/cloud\/object\.json properties\.surrounds is true or absent, not "yes"/u);
+});

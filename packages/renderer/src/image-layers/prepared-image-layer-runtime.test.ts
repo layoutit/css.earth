@@ -90,6 +90,37 @@ test('image textures are demanded once when their retained axis first contribute
   assert.equal(resolveResource.mock.callCount(), 2);
 });
 
+test('around a body, a sheet within one sampling step of the camera is left out, by its prepared corners, and draws again farther away', () => {
+  const document = new ImageDocument(), host = document.createElement(), before = document.createElement();
+  host.appendChild(before);
+  const style = { width: '1px', height: '1px', transform: 'translate3d(0,0,0)', backgroundSize: '1px 1px', backgroundPosition: '0px 0px' };
+  type Corner = [number, number, number];
+  const sheet = (id: string, z: number) => ({ id, centerUnits: [0, 0, z] as Corner, texturePath: 'atlas.png', widthPx: 1, heightPx: 1, style,
+    verticesUnits: [[-1, -1, z], [1, -1, z], [1, 1, z], [-1, 1, z]] as [Corner, Corner, Corner, Corner] });
+  const payload: PreparedCssImageLayers = {
+    schema: 'cssearth-css-volume@1', id: 'fixture',
+    frame: { referenceFrame: 'fixture', epochJdTt: 123, originM: [0, 0, 0], localToReferenceXyzw: [0, 0, 0, 1],
+      metersPerUnit: 1, boundsUnits: { min: [-1, -1, -1], max: [1, 1, 1] } },
+    anchors: [], bankViews: views.filter(view => view.axis === 'z'),
+    stacks: [{ axis: 'z', leaves: [sheet('behind', -1), sheet('middle', 0), sheet('ahead', 1)] }],
+    resources: [{ path: 'atlas.png', bytes: 1, width: 1, height: 1 }], provenance: {}, approximation: {},
+  };
+  const runtime = mountPreparedCssImageLayers({ host: host as unknown as HTMLElement, before: before as unknown as Element, payload, resolveResource: path => `/prepared/${path}` });
+  const opacity = () => ['behind', 'middle', 'ahead'].map(id => document.elements.find(element => element.dataset.imageLayerLeaf === id)!.style.opacity ?? '');
+  const publish = (positionM: readonly [number, number, number], around = true) => runtime.publish({
+    world: { referenceFrame: 'fixture', epochJdTt: 123, pose: { positionM, orientationXyzw: [0, 0, 0, 1] } }, viewport: { focalPixels: 600, principalOffsetPixels: [0, 0] } }, around);
+  publish([0, 0, .2], false);
+  assert.deepEqual(opacity(), ['', '', ''], 'as its page\'s own subject a bank draws every sheet');
+  publish([0, 0, .2]);
+  assert.deepEqual(opacity(), ['', '0', '0'], 'the sheets within one step of the camera are left out');
+  publish([0, 0, 5]);
+  assert.deepEqual(opacity(), ['', '', ''], 'farther away every sheet draws');
+  publish([3, 0, 0]);
+  assert.deepEqual(opacity(), ['', '', ''], 'a sheet beside the camera, past its edge, draws');
+  publish([0, 0, .2]); publish([0, 0, .2], false);
+  assert.deepEqual(opacity(), ['', '', ''], 'left-out sheets draw again when the bank is its page\'s subject');
+});
+
 test('a stack mounts a camera for each of its scenes, and a stack without leaves is not mounted and takes no part', () => {
   const document = new ImageDocument(), host = document.createElement(), before = document.createElement();
   host.appendChild(before);

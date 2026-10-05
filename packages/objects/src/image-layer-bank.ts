@@ -10,6 +10,11 @@ export interface ImageLayerBankDescriptor extends ObjectDescriptor {
   readonly preparation: DensityVolumePreparationReference;
   /** The published catalogues drawn over the layers, placed on the galaxy's disc plane: each a bank at `prepared/<id>.bin`. */
   readonly cataloguePoints: readonly string[];
+  /** The bank's light lies on walls or a surface around its middle (a nebula on its shell), not on one sheet seen from outside
+   * (a galaxy's photograph): the world draws it around a body that stands inside it (`properties.surrounds`, the bake's). */
+  readonly surrounds: boolean;
+  /** The object the bank draws for (`properties.host`): a body inside that object stands inside a bank that surrounds. */
+  readonly host: string | undefined;
 }
 
 /** The published catalogues a bank draws with itself (`properties.cataloguePoints`): each a bank at `prepared/<id>.bin`. */
@@ -25,9 +30,11 @@ export function parseImageLayerBankDescriptor(input: unknown): ImageLayerBankDes
   const descriptor = parseObjectDescriptor(input);
   if (descriptor.type !== 'image-layer-bank') throw new TypeError('Object is not an image-layer bank.');
   const properties = descriptor.properties;
-  const unknown = Object.keys(properties).filter(key => !['frame', 'preparation', 'cataloguePoints', 'host'].includes(key));
+  const unknown = Object.keys(properties).filter(key => !['frame', 'preparation', 'cataloguePoints', 'host', 'surrounds'].includes(key));
   if (unknown.length) throw new TypeError(`Unknown image-layer property: ${unknown.join(', ')}.`);
   const cataloguePoints = bankCataloguePoints(descriptor);
+  if (properties.surrounds !== undefined && properties.surrounds !== true) throw new TypeError(`src/objects/${descriptor.id}/object.json properties.surrounds is true or absent, not ${JSON.stringify(properties.surrounds)}.`);
+  if (properties.host !== undefined && (typeof properties.host !== 'string' || !/^[a-z][a-z0-9-]*$/u.test(properties.host))) throw new TypeError(`src/objects/${descriptor.id}/object.json properties.host is an object id or absent, not ${JSON.stringify(properties.host)}.`);
   const frame = parseDensityVolumeFrame(properties.frame);
   const preparation = properties.preparation;
   if (!preparation || typeof preparation !== 'object' || Array.isArray(preparation)) throw new TypeError('Image layers need a preparation reference.');
@@ -38,5 +45,6 @@ export function parseImageLayerBankDescriptor(input: unknown): ImageLayerBankDes
     throw new TypeError('Image-layer preparation must be a contained source.');
   }
   return Object.freeze({ ...descriptor, type: 'image-layer-bank', frame,
-    preparation: Object.freeze({ source: reference.source }), cataloguePoints });
+    preparation: Object.freeze({ source: reference.source }), cataloguePoints, surrounds: properties.surrounds === true,
+    host: typeof properties.host === 'string' ? properties.host : undefined });
 }
