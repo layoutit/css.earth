@@ -7,6 +7,8 @@ whole required path, not each job. Job timeouts are emergency limits, not target
 The budget is a review policy, not an automated timing gate; record actual GitHub
 timings before claiming it is met. Report cold and warm-cache runs separately.
 
+The [counted performance guard](performance-guard.md) compares emitted build counts against the merge base. Part A is local tooling; CI wiring is a separate task.
+
 ## What runs where
 
 | Workflow | Trigger and responsibility |
