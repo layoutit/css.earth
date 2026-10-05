@@ -21,7 +21,7 @@ export default [
       'no-multiple-empty-lines': ['error', { max: 10000, maxEOF: 0 }],
     },
   },
-  { ignores: ['**/node_modules/**', '**/dist/**', '**/.cache/**', '**/coverage/**',
+  { ignores: ['**/node_modules/**', '**/dist/**', '**/.cache/**', 'coverage/**',
     // Generated output and the open-ended registries. `src/platform/solar-geometry.mts` alone is
     // 26,968 generated lines; `src/objects` is 586 authored body packages, not modules.
     '**/prepared/**', '**/generated/**', 'src/objects/**/*', '!src/objects/**/', '!src/objects/**/*.test.mts', 'src/sources/**/*', '!src/sources/**/*.test.mts',

@@ -102,7 +102,10 @@
     "oracles:setup": "node packages/core/src/node/oracle/setup.mts",
     "oracles:run": "node packages/core/src/node/oracle/run.mts",
     "setup:checkout": "node .github/scripts/ci/checkout/setup.mts",
-    "typecheck:all": "pnpm typecheck:pr && pnpm typecheck:tests && pnpm typecheck:nebula"
+    "typecheck:all": "pnpm typecheck:pr && pnpm typecheck:tests && pnpm typecheck:nebula",
+    "coverage:node": "node .github/scripts/coverage/collect-node.mts",
+    "coverage:report": "node .github/scripts/coverage/report.mts",
+    "coverage:ratchet": "node .github/scripts/coverage/ratchet.mts"
   },
   "dependencies": {
     "@layoutit/polycss": "0.2.11",
