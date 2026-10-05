@@ -11,7 +11,7 @@ import { createWorldFrameProjection } from '../world-frame-projection.js';
 import { admitStableLabels, type StableLabelCandidate } from '../../labels/stable-label-layout.js';
 import { createMarkerDeclutter } from './marker-declutter.js';
 import type { LabelScreenRect } from '../../labels/screen-label-layout.js';
-import { coveredTopRects, createLabelBudget, FEATURED_STAR_TIER, labelExtentOpacity, labelLimit, inGalaxyField, markerScale, UNIVERSE_LABEL_POLICY } from '../../labels/universe-label-policy.js';
+import { coveredTopRects, createLabelBudget, FEATURED_STAR_TIER, labelExtentOpacity, labelLimit, inGalaxyField, LOCAL_GROUP_SCALE, markerScale, UNIVERSE_LABEL_POLICY } from '../../labels/universe-label-policy.js';
 const ORBIT_LOD_PIXELS = 0.1;
 // Keep the existing exit thresholds. A hidden annotation must clear a small
 // entry margin before returning, so a boundary cannot reverse its fade each
@@ -116,7 +116,7 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
     const satellite = parent !== null && !systemFade.isSystemStar(parent.id), planet = orbit !== null && systemFade.isSystemStar(orbit.centerBodyId);
     const prominent = planet && (tier ?? 0) >= 3;
     return { body, orbit, levels, parent, satellite, planet, prominent, hosted: prominent && orbit!.centerBodyId !== plan.focus.id, minor: (tier ?? 2) < 2, scale: markerScale(distanceFromSunM, placedStar ? plan.volume : undefined),
-      galaxyField: !placedStar || inGalaxyField(distanceFromSunM, plan.volume), kind: 'classification' in body ? body.classification : undefined, extended: 'classification' in body && isExtendedClassification(body.classification),
+      galaxyField: !placedStar || inGalaxyField(distanceFromSunM, plan.volume), kind: 'classification' in body ? body.classification : undefined, inside: 'inside' in body ? body.inside : undefined, extended: 'classification' in body && isExtendedClassification(body.classification),
       closedOrbit: orbit?.fullTrail === true, drawnRadiusM: body.radiusM * ('billboard' in body && body.billboard ? Math.max(1, billboardImageScale(body.billboard, body.radiusM)) : 1),
       orbitProjection: createRetainedRingProjection(orbit ? orbit.vertexCount * 2 : 0),
       // A hidden body is the same retired stub every frame: no projection, no allocation, no packet.
@@ -371,9 +371,23 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
       // inside the viewport below, while partially clipped circles are left to
       // normal browser clipping. The viewport width still owns density only.
       const candidates: (StableLabelCandidate & { projected: ProjectedBody<Entry> })[] = [];
+      // Beyond the Local Group scale a galaxy stands for what is inside it: a star, or a galaxy it holds (M110 in M31, the Large
+      // Cloud in the Milky Way), whose marker falls within the galaxy's circle is not named, so the galaxy is. By tier a
+      // featured star is admitted before a galaxy and held M31's name across the Local Group; by id M110 took it. The holder
+      // is found each frame (its row can arrive after the body's, `extend`); one named elsewhere or hidden stands for nothing.
+      const withinHolder = (entry: Entry, x: number, y: number) => {
+        for (let holder = bodies[indexById.get(entry.inside ?? '') ?? -1]; holder; holder = bodies[indexById.get(holder.inside ?? '') ?? -1]) {
+          if (holder.kind !== 'galaxy' || holder.labelSuppressed || holder.labelHidden || holder.bodyHidden) continue;
+          const [holderX, holderY] = project(frame.eye(holder.body));
+          if (Math.hypot(holderX! - x, holderY! - y) < BODY_INDICATOR_DIAMETER + UNIVERSE_LABEL_POLICY.spacingPixels) return true;
+        }
+        return false;
+      };
       for (const projected of projectedBodies) {
         if (projected.entry.retired) continue; // retired with its faded system: never named
         const { entry, x, y, diameter, annotationVisible, hovered, priority, emphasised, targeted } = projected;
+        const fromCamera = Math.hypot(...frame.eye(entry.body));
+        if (!targeted && fromCamera > LOCAL_GROUP_SCALE.enterDistanceM && withinHolder(entry, x, y)) { projected.nameable = false; continue; }
         let { circle } = projected;
         const { body, labelSize: size } = entry;
         const prominentOrbiter = entry.prominent;
@@ -420,7 +434,7 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
         // read as neighbourhood: an inner planet is not less part of its system because the camera frames the outer one.
         // Past the Local Group scale the galaxies are named, not the stars inside them: a name fades with the body's distance
         // from the camera over the band where the overview becomes the Local Group (the cluster scale beyond it).
-        const galactic = 1 - (extendedRetirement(entry.kind, fromFocus) ?? logarithmicFade(Math.hypot(...frame.eye(body)), entry.scale.returnDistanceM, entry.scale.enterDistanceM));
+        const galactic = 1 - (extendedRetirement(entry.kind, fromFocus) ?? logarithmicFade(fromCamera, entry.scale.returnDistanceM, entry.scale.enterDistanceM));
         const alpha = flightDestination ? 1 : referenceAnnotationOnly ? galactic : targeted ? markerOpacity : Math.min(markerOpacity, galactic, resolvedDisc || hostedPlanet ? 1 : labelExtentOpacity(localExtent));
         // Naming policy, decided before any slot is contested: suppressed, unresolved, too faint
         // or out of context here, and the body is not one this camera names at all.
