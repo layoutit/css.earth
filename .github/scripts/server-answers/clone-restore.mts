@@ -1,7 +1,7 @@
 /** Clone a revision and restore local build inputs without preparation or downloads. */
 import { spawn, type ChildProcess } from 'node:child_process';
 import { constants } from 'node:fs';
-import { cp, lstat, realpath, rm } from 'node:fs/promises';
+import { cp, lstat, realpath, rm, mkdir, symlink } from 'node:fs/promises';
 import { dirname, relative, resolve, sep } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { parseArgs } from 'node:util';
@@ -27,7 +27,12 @@ export async function command(program: string, args: string[], cwd: string): Pro
   });
 }
 
-/** All symlinks remain relative: copied workspace links point into the clone. */
+/** Only dependencies and downloaded inputs cross revisions; generated outputs are rebuilt. */
+export function restoreInput(path: string): boolean {
+  return /^(?:node_modules|packages\/[^/]+\/node_modules)(?:\/|$)/u.test(path) ||
+    /^src\/objects\/[^/]+\/prepared(?:\/|$)/u.test(path) ||
+    /^public\/(?!features(?:\/|$)|shell(?:\/|$)|scenes(?:\/|$))/u.test(path);
+}
 export async function cloneRestore(source: string, destination: string, revision = 'HEAD'): Promise<{ revision: string; restored: number }> {
   const root = await realpath(source), target = resolve(destination);
   if (dirname(target) !== dirname(root) || !target.startsWith(`${root}-`)) throw new Error('Destination must be a new sibling named after the source with a suffix.');
@@ -40,13 +45,16 @@ export async function cloneRestore(source: string, destination: string, revision
     const ignored = (await command('git', ['ls-files', '--others', '--ignored', '--exclude-standard', '--directory', '-z'], root)).split('\0').filter(Boolean);
     let restored = 0;
     for (const path of ignored) {
-      if (/^(?:dist(?:-perf)?|output|\.astro|\.cache|netlify\/functions-bundled|cloudflare\/bundled)(?:\/|$)/u.test(path) || /(?:^|\/)\.DS_Store$/u.test(path)) continue;
+      if (!restoreInput(path)) continue;
       const from = resolve(root, path), to = resolve(target, path);
       if (!from.startsWith(root + sep) || relative(target, to).startsWith('..')) throw new Error(`Invalid restored path: ${path}`);
       // COPYFILE_FICLONE attempts a reflink and falls back to an ordinary file copy.
       await cp(from, to, { recursive: true, verbatimSymlinks: true, mode: constants.COPYFILE_FICLONE });
       restored++;
     }
+    // Shared downloaded public inputs are read only by the comparison. Never copied into a clone.
+    await mkdir(resolve(target, 'public'), { recursive: true });
+    await symlink(resolve(root, 'public/scenes'), resolve(target, 'public/scenes'));
     return { revision: commit, restored };
   } catch (error) {
     await rm(target, { recursive: true, force: true });

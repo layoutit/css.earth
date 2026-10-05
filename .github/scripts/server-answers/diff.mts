@@ -23,7 +23,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
     const differences = await compare(values.base, values.head);
     const report = { normalisations, differences };
     if (values.json) await writeFile(values.json, serialise(report));
-    console.log(serialise(!values.full ? { normalisations, differences: differences.map(({ file, dimension }) => ({ file, dimension })) } : report));
+    console.log(serialise(!values.full ? { normalisations, differences: differences.map(({ file, dimension }) => ({ file, dimension, ...(dimension.startsWith('body.static.') ? { category: 'built output' } : {}) })) } : report));
     process.exitCode = differences.length ? 1 : 0;
   } catch (error) { console.error(String(error)); process.exitCode = 2; }
 }

@@ -1,18 +1,18 @@
 /** Deterministic answer format and validation shared by the offline safety check. */
 import { gzipSync, gunzipSync } from 'node:zlib';
 import { createHash } from 'node:crypto';
-import { readFile, readdir } from 'node:fs/promises';
+import { readFile, readdir, stat } from 'node:fs/promises';
 import { resolve } from 'node:path';
 export type Target = 'preview' | 'netlify' | 'cloudflare';
 export interface AnswerRequest { id: string; path: string; method?: string; headers?: Record<string, string>; body?: string; expected?: number; title?: string; html?: boolean; conditional?: 'etag' | 'modified'; }
 export interface Answer { id: string; status: number; headers: Record<string, string>; body: unknown; }
 export const normalisations = [
   'Only explorer-brand-version link text and its GitHub aria-label counter become vPINNED; commit counts change build version.',
-  'HTML and catalogue /_astro/<name>.<hash>.<ext> addresses become /_astro/<name>.HASH.<ext>; browser bundle bytes belong to L3.',
+  'HTML and catalogue /_astro/<name>.<hash>.<ext> addresses retain name, extension and byte-size class, not hash; browser bundle contents belong to L3.',
   'HTML retains rewritten marker regions and static page/remainder lengths plus md5; unchanged regions reference the static file.',
   'Repository source-link commit ids become 40 zeros in all recorded text; build provenance is not server behavior, paths remain exact.',
   'JSON object keys sorted recursively; array order preserved.',
-  'All headers retained except date, server, connection, keep-alive, last-modified and host-derived provider/request identifiers.',
+  'All headers retained except date, server, connection, keep-alive and host-derived provider/request identifiers.',
   'ETag retains presence and weak/strong kind; values contain file timestamps and can change between recordings of the same build.',
   'Content-Length reduced to absent/zero/nonzero: exact body size is retained in the body.',
   'Loopback origins in retained header values replaced with https://answers.invalid; ephemeral port is not build behavior.',
@@ -40,10 +40,26 @@ function canonicalJson(value: unknown): unknown {
   if (!isObject(value)) return value;
   return Object.fromEntries(Object.entries(value).map(([key, item]) => [key, canonicalJson(item)]));
 }
+const astroClasses = new Map<string, string>();
+/** A name+extension+byte-size class distinguishes same-name chunks without retaining a content hash. */
+export async function prepareAstroClasses(dist: string): Promise<void> {
+  astroClasses.clear();
+  for (const filename of await readdir(resolve(dist, '_astro'))) {
+    const match = /^(.*)\.[A-Za-z0-9_-]+\.(js|css|mjs)$/u.exec(filename);
+    if (match) astroClasses.set(`/_astro/${filename}`, `/_astro/${match[1]}.SIZE${(await stat(resolve(dist, '_astro', filename))).size}.${match[2]}`);
+  }
+}
 export function canonicalHtml(value: string): string {
+  const chunks = new Map<string, string>();
+  const classes = new Map<string, number>();
   return canonicalSourceLinks(value).replace(/<a\b[^>]*\bclass="explorer-brand-version"[^>]*>v\d+\.\d+<\/a>/gu,
     link => link.replace(/aria-label="GitHub v\d+\.\d+"/u, 'aria-label="GitHub vPINNED"').replace(/>v\d+\.\d+<\/a>$/u, '>vPINNED</a>'))
-    .replace(/\/_astro\/([^/\s"'<>?]+)\.[A-Za-z0-9_-]+\.(js|css|mjs)(?=[\s"'<>?]|$)/gu, '/_astro/$1.HASH.$2');
+    .replace(/\/_astro\/([^/\s"'<>?]+)\.[A-Za-z0-9_-]+\.(js|css|mjs)(?=[\s"'<>?]|$)/gu, (url, name: string, extension: string) => {
+      const known = astroClasses.get(url); if (known) return known;
+      const previous = chunks.get(url); if (previous) return previous;
+      const key = `${name}.${extension}`, ordinal = (classes.get(key) ?? 0) + 1; classes.set(key, ordinal);
+      const placeholder = `/_astro/${name}.HASH${ordinal}.${extension}`; chunks.set(url, placeholder); return placeholder;
+    });
 }
 export const byteSummary = (value: string | Buffer) => {
   const bytes = typeof value === 'string' ? Buffer.from(value) : value;
@@ -78,12 +94,14 @@ export function compactHtml(value: string, staticHtml: string, file: string, req
     firstView: /data-startup-discovery|data-prepared-descriptor/u.test(value), searchSubmitted: value.includes('data-search-submitted') };
 }
 // Provider clocks and routing/request identifiers describe the host, not the application.
-export const volatileHeaders = new Set(['date', 'server', 'connection', 'keep-alive', 'last-modified', 'host', 'x-nf-request-id', 'cf-ray', 'cf-cache-status', 'age', 'server-timing', 'x-served-by', 'x-cache', 'x-cache-hits', 'via']);
+export const volatileHeaders = new Set(['date', 'server', 'connection', 'keep-alive', 'host', 'x-nf-request-id', 'cf-ray', 'cf-cache-status', 'age', 'server-timing', 'x-served-by', 'x-cache', 'x-cache-hits', 'via']);
 export async function recordAnswer(id: string, response: Response, origin: string, page?: { html: string; file: string; request: AnswerRequest }): Promise<Answer> {
   const headers: Record<string, string> = {};
   for (const [name, value] of response.headers) {
     if (volatileHeaders.has(name)) continue;
     headers[name] = canonicalSourceLinks(value.replaceAll(origin, 'https://answers.invalid'));
+    if (name === 'last-modified') headers[name] = 'present';
+    if (name === 'expires') headers[name] = 'present';
     if (name === 'etag') headers[name] = /^W\//u.test(value) ? 'present:weak' : 'present:strong';
     if (id.startsWith('static-') && name === 'content-range') headers[name] = value.replace(/\/\d+$/u, '/BUNDLE_LENGTH');
     if (name === 'content-length') headers[name] = value === '0' ? 'zero' : 'nonzero';
@@ -125,7 +143,7 @@ export async function readRecording(dir: string): Promise<Map<string, unknown>> 
       const page = object(body.static), outside = object(body.outside); object(body.regions);
       for (const part of [page, outside]) if (!Number.isInteger(part.length) || typeof part.length !== 'number' || part.length < 0 || typeof part.md5 !== 'string' || !/^[0-9a-f]{32}$/u.test(part.md5)) throw new Error(`Invalid HTML summary ${id}`);
       if (typeof page.file !== 'string' || typeof outside.equal !== 'boolean' || ![body.titlePresent, body.firstView, body.searchSubmitted].every(value => typeof value === 'boolean')) throw new Error(`Invalid HTML attestation ${id}`);
-      for (const item of Object.values(object(body.regions))) { const region = object(item); if (region.kind !== 'static' && !(region.kind === 'rewritten' && region.encoding === 'gzip-base64' && (typeof region.value === 'string' || region.value === null))) throw new Error(`Invalid HTML region ${id}`); if (region.kind === 'rewritten' && typeof region.value === 'string') gunzipSync(Buffer.from(region.value, 'base64')); }
+      for (const item of Object.values(object(body.regions))) { const region = object(item); if (region.kind !== 'static' && !(region.kind === 'rewritten' && region.encoding === 'gzip-base64' && (typeof region.value === 'string' || region.value === null))) throw new Error(`Invalid HTML region ${id}`); if (region.kind === 'rewritten') { if (typeof region.value === 'string') region.value = gunzipSync(Buffer.from(region.value, 'base64')).toString('utf8'); delete region.encoding; } }
     }
     else if (body.kind === 'json') { if (!('value' in body)) throw new Error(`Missing JSON body ${id}`); if (body.encoding !== undefined) { if (body.encoding !== 'gzip-base64' || typeof body.value !== 'string') throw new Error(`Invalid compressed JSON ${id}`); body.value = JSON.parse(gunzipSync(Buffer.from(body.value, 'base64')).toString('utf8')); delete body.encoding; } }
     else if (body.kind === 'binary') {
@@ -133,4 +151,13 @@ export async function readRecording(dir: string): Promise<Map<string, unknown>> 
     } else throw new Error(`Invalid body kind ${id}`);
   }
   return result;
+}
+
+/** Fail before normalizing a missing or escaping browser asset reference. */
+export async function validateAstroReferences(value: string, dist: string): Promise<void> {
+  for (const match of value.matchAll(/\/_astro\/[^\s"'<>?]+/gu)) {
+    const file = resolve(dist, `.${match[0]}`);
+    if (!file.startsWith(resolve(dist, '_astro') + '/')) throw new Error(`Unsafe asset reference: ${match[0]}`);
+    await readFile(file);
+  }
 }

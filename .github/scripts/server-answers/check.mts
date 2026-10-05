@@ -7,8 +7,8 @@ import { parseArgs } from 'node:util';
 import { matchesPatterns } from './deployment-config.mts';
 import { catalogue, requestsForTarget } from './requests.mts';
 import { expectation } from './expectations.mts';
-import edgeRoute from '../../../netlify/edge-functions/search-route.ts';
-import { canonicalHtml, object, readRecording, serialise } from './model.mts';
+import { loadEdge } from './revision-entries.mts';
+import { canonicalHtml, prepareAstroClasses, object, readRecording, serialise } from './model.mts';
 export const covered = matchesPatterns;
 function stringPatterns(value: unknown, fallback: string[]): string[] {
   if (value === undefined) return fallback;
@@ -16,12 +16,14 @@ function stringPatterns(value: unknown, fallback: string[]): string[] {
   return value;
 }
 export async function check(dir: string, root?: string): Promise<void> {
+  const edgeRoute = await loadEdge(root ?? process.cwd());
   const records = await readRecording(dir);
   const index = object(records.get('index.json'));
   assert.ok(Array.isArray(index.catalogue), 'Missing catalogue');
   const target = index.target;
   if (target !== 'preview' && target !== 'netlify' && target !== 'cloudflare') throw new Error('Invalid recorded target');
   if (root) {
+    await prepareAstroClasses(resolve(root, 'dist'));
     assert.equal(serialise(index.catalogue), serialise(requestsForTarget(await catalogue(resolve(root, 'dist')), target).map(request => ({ ...request, path: canonicalHtml(request.path) }))), 'Recorded catalogue omits or changes a required request');
   }
   const ids = new Set<string>();

@@ -64,3 +64,21 @@ test('real Worker redirects www and explicitly reports its static fallback after
   assert.ok(calls >= 2, 'Handler fetch and fallback must both run');
   assert.ok(messages.some(message => message.startsWith('page-handler-fallback ') && message.includes('Prepared search shell is missing')), 'Worker failure must be visible in the diagnostic log');
 });
+
+// Minimal native-search shell follows the real handler fixture; no built page is required.
+test('real rewritten page removes every static validator and transport header', async () => {
+  const page = '<!doctype html><html><body><!--search-shell:start-->' +
+    '<form class="object-sidebar-search-card" data-search-object="earth"><input class="object-sidebar-search" name="q"></form>' +
+    '<input class="object-sheet-handle" type="checkbox"><div class="object-drawer-content">' +
+    '<nav class="object-browser"><div id="object-category-results"><ul data-catalogue-list></ul><p data-search-empty></p></div></nav>' +
+    '<div class="object-selected-content"><section class="object-information-panel"></section></div></div>' +
+    '<!--search-shell:end--></body></html>';
+  const headers = { 'content-type': 'text/html', 'content-length': String(page.length), 'content-encoding': 'gzip', etag: '"static"', 'last-modified': 'Tue, 01 Jan 2000 00:00:00 GMT', expires: 'Tue, 01 Jan 2000 00:00:00 GMT' };
+  const original = globalThis.fetch;
+  globalThis.fetch = async () => new Response(page, { headers });
+  let response: Response;
+  try { response = await handleSearchRequest(new Request('https://answers.invalid/.netlify/functions/search?object=earth&q=europa')); }
+  finally { globalThis.fetch = original; }
+  assert.equal(response.status, 200);
+  for (const name of ['content-length', 'content-encoding', 'etag', 'last-modified', 'expires']) assert.equal(response.headers.get(name), null, name);
+});

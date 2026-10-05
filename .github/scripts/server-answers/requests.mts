@@ -5,7 +5,7 @@ import { parseHTML } from 'linkedom';
 import { CAMERA_POSE_SCHEMA } from '@cssearth/objects';
 import { formatSharedView } from '@cssearth/renderer/navigation';
 import { object, type AnswerRequest, type Target } from './model.mts';
-// Capability cover recorded in output/plan7/representatives.md by S0, plus root and feature fixtures.
+// Registry capability cover: systems, clusters, galaxy, universe, terrestrial and gas surfaces, and named features.
 export const representatives = ['earth-system', 'lmc', 'neptune-system', 'beta-pictoris-system', 'asteroid-2001-sn263-system', 'mars-system', 'observable-universe', 'abell-1689', 'centaurus-cluster', 'dione', 'great-attractor', 'local-group', 'milky-way', 'earth', 'saturn'];
 export async function catalogue(dist: string): Promise<AnswerRequest[]> {
   const index = object(JSON.parse(await readFile(resolve(dist, 'catalogue/index.json'), 'utf8')));

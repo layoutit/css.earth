@@ -5,7 +5,7 @@ import { resolve } from 'node:path';
 import { parseArgs } from 'node:util';
 import { pathToFileURL } from 'node:url';
 import { catalogue, requestsForTarget } from './requests.mts';
-import { canonicalHtml, object, normalisations, recordAnswer, serialise, storedAnswer, type Target } from './model.mts';
+import { canonicalHtml, prepareAstroClasses, validateAstroReferences, object, normalisations, recordAnswer, serialise, storedAnswer, type Target } from './model.mts';
 import { readDeploymentConfig } from './deployment-config.mts';
 export function assertNoFallback(log: string): void { if (log.includes('page-handler-fallback')) throw new Error(`Worker fallback rejected: ${log.slice(-2000)}`); }
 export async function record(target: Target, dist: string, out: string): Promise<void> {
@@ -49,12 +49,13 @@ export async function record(target: Target, dist: string, out: string): Promise
     };
     await send({ command: 'warmup' });
     rejectFallback();
+    await prepareAstroClasses(dist);
     const all = await catalogue(dist);
     const requests = requestsForTarget(all, target);
     for (const request of requests) {
-      const headers: Record<string, string> = { 'Accept-Encoding': 'identity', ...request.headers };
+      const headers: Record<string, string> = { 'Accept-Encoding': 'gzip', ...request.headers };
       if (request.conditional) {
-        const initial = await ask(request.path, 'GET', { 'Accept-Encoding': 'identity' });
+        const initial = await ask(request.path, 'GET', { 'Accept-Encoding': 'gzip' });
         const value = initial.headers.get(request.conditional === 'etag' ? 'etag' : 'last-modified');
         if (!value) throw new Error(`Missing validator for ${request.id}`);
         headers[request.conditional === 'etag' ? 'If-None-Match' : 'If-Modified-Since'] = value;
@@ -65,13 +66,14 @@ export async function record(target: Target, dist: string, out: string): Promise
       const pageId = url.pathname === '/.netlify/functions/search' ? url.searchParams.get('object') : url.pathname.split('/').filter(Boolean)[0];
       const file = pageId ? `${pageId}/index.html` : url.search ? 'earth/index.html' : 'index.html';
       const html = response.headers.get('content-type')?.includes('text/html') ? await readFile(resolve(dist, file), 'utf8').catch(() => undefined) : undefined;
+      if (html !== undefined) await validateAstroReferences(html, dist);
+      if (response.headers.get('content-type')?.includes('text/html')) await validateAstroReferences(await response.clone().text(), dist);
       const answer = await recordAnswer(request.id, response, ready.origin, html !== undefined ? { html, file, request } : undefined);
       await writeFile(resolve(out, `${request.id}.json`), serialise(storedAnswer(answer)));
     }
-    const rawClosure = object((await send({ command: 'closure' })).functions);
     const config = await readDeploymentConfig(process.cwd(), resolve(dist));
     const closureReply = await send({ command: 'closure' });
-    await writeFile(resolve(out, 'closure.json'), serialise({ functions: rawClosure, included: closureReply.included ?? config.included, includedByFunction: closureReply.includedByFunction }));
+    await writeFile(resolve(out, 'closure.json'), serialise({ functions: object(closureReply.functions), included: closureReply.included ?? config.included, includedByFunction: closureReply.includedByFunction }));
     await writeFile(resolve(out, 'index.json'), serialise({ schema: 2, target, requests: requests.map(request => request.id), catalogue: requests.map(request => ({ ...request, path: canonicalHtml(request.path) })), config: config.facts, normalisations }));
     rejectFallback();
     console.log(`Recorded ${requests.length} ${target} answers in ${out}`);

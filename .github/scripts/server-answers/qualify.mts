@@ -4,6 +4,7 @@ import { readFile, writeFile, mkdir, rename } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { parseArgs } from 'node:util';
 import { command } from './clone-restore.mts';
+import { readDeploymentConfig } from './deployment-config.mts';
 import { serialise } from './model.mts';
 const { values } = parseArgs({ options: { out: { type: 'string' } } });
 if (!values.out) throw new Error('Usage: qualify.mts --out <new evidence directory>');
@@ -42,17 +43,18 @@ async function mutation(label: string, target: string, file: string, from: strin
   try { await writeFile(file, original.replace(from, to)); await record(target, label); await diff(target, label, 1); }
   finally { await writeFile(file, original); }
 }
+const config = await readDeploymentConfig(process.cwd());
 try {
   for (const target of ['preview', 'netlify', 'cloudflare']) {
     await record(target, 'base'); await run(`${target}-base-check`, 'check.mts', ['--recorded', resolve(out, target, 'base')]);
     await record(target, 'repeat'); await diff(target, 'repeat', 0);
   }
   await mutation('static-byte', 'preview', 'dist/earth/index.html', '<!DOCTYPE html>', '<!DOCTYPE htmL>');
-  const bundle = 'netlify/functions-bundled/search.mjs';
+  const bundle = `${config.functionsDirectory}/search.mjs`;
   await mutation('handler-rewrite', 'netlify', bundle, 'html.slice(0, start) + document2.body.innerHTML', 'html.slice(0, start) + "<!-- L2 rewrite mutation -->" + document2.body.innerHTML');
   await mutation('header', 'netlify', bundle, 'headers.set("cache-control", "private, no-store")', 'headers.set("cache-control", "public, max-age=9")');
-  await mutation('status', 'netlify', 'netlify/functions-bundled/find.mjs', 'return json({ error: "Pass object=<body id>." }, 400)', 'return json({ error: "Pass object=<body id>." }, 401)');
-  await mutation('body', 'netlify', 'netlify/functions-bundled/find.mjs', 'Pass object=<body id>.', 'Deliberately changed response.');
+  await mutation('status', 'netlify', `${config.functionsDirectory}/find.mjs`, 'return json({ error: "Pass object=<body id>." }, 400)', 'return json({ error: "Pass object=<body id>." }, 401)');
+  await mutation('body', 'netlify', `${config.functionsDirectory}/find.mjs`, 'Pass object=<body id>.', 'Deliberately changed response.');
   const file = 'src/objects/observable-universe/prepared/world-index.json';
   await rename(file, file + '.l2-mutation');
   try { await record('netlify', 'missing-closure', 2); }

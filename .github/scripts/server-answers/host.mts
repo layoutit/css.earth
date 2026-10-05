@@ -6,8 +6,9 @@ import { extname, relative, resolve, sep } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { AsyncLocalStorage } from 'node:async_hooks';
 import { createHash } from 'node:crypto';
+import { previewEntry, loadEdge } from './revision-entries.mts';
 import { object } from './model.mts';
-import { packagedFunction, readDeploymentConfig } from './deployment-config.mts';
+import { packagedFunction, readDeploymentConfig, matchesRoutes, directoryRedirect, hostingHeaders } from './deployment-config.mts';
 let fallback = false;
 const logError = console.error;
 console.error = (...values: unknown[]) => { if (values.some(value => String(value).includes('page-handler-fallback'))) fallback = true; logError(...values); };
@@ -45,7 +46,7 @@ let preview: { close(): Promise<void> } | undefined;
 let origin = 'https://answers.invalid';
 const originalFetch = globalThis.fetch;
 if (target === 'preview') {
-  const { previewSite } = await import(pathToFileURL(resolve(root, 'site/server/preview.mts')).href);
+  const { previewSite } = await import(pathToFileURL(await previewEntry(root)).href);
   const server = await previewSite({ root, outDir: dist, port: 0 });
   preview = server;
   const address = server.httpServer.address();
@@ -78,15 +79,21 @@ async function staticAnswer(request: Request): Promise<Response> {
   const url = new URL(request.url);
   let file = resolve(dist!, `.${url.pathname.endsWith('/') ? url.pathname + 'index.html' : url.pathname}`);
   if (!file.startsWith(resolve(dist!) + sep)) return new Response(null, { status: 404 });
-  // wrangler html_handling chooses the directory page for a slashless address.
-  if (!extname(file) && await promises.stat(resolve(file, 'index.html')).catch(() => null)) file = resolve(file, 'index.html');
+  // auto-trailing-slash redirects directory pages before serving their index.
+  if (!extname(file) && await promises.stat(resolve(file, 'index.html')).catch(() => null)) {
+    const redirect = target === 'cloudflare' ? directoryRedirect(url, config.assets) : undefined;
+    if (redirect) return redirect;
+    file = resolve(file, 'index.html');
+  }
   if (!await promises.stat(file).catch(() => null) && url.origin === 'https://assets.invalid') file = await publishedFile(url.pathname) ?? file;
   try {
     const bytes = await promises.readFile(file), stat = await promises.stat(file);
     const types: Record<string, string> = { '.html': 'text/html; charset=utf-8', '.json': 'application/json', '.xml': 'application/xml', '.txt': 'text/plain', '.js': 'text/javascript', '.css': 'text/css', '.webp': 'image/webp', '.svg': 'image/svg+xml' };
-    // CDN validators and length exercise search-response's deletion. No compression is negotiated (identity catalogue).
+    // Fetch-decoded static bytes carry negotiated encoding and validators to exercise rewrite cleanup.
     // Cache rule comes from netlify.toml / dist/_headers; the default is Netlify's documented revalidation policy.
     const headers = new Headers({ 'content-type': types[extname(file)] ?? 'application/octet-stream', 'content-length': String(bytes.length), etag: `"${createHash('sha1').update(bytes).digest('hex')}"`, 'last-modified': stat.mtime.toUTCString(), 'cache-control': url.pathname.startsWith('/_astro/') ? (target === 'netlify' ? config.immutableCache.netlify : config.immutableCache.assets) ?? 'public, max-age=0, must-revalidate' : 'public, max-age=0, must-revalidate' });
+    headers.set('expires', stat.mtime.toUTCString());
+    hostingHeaders(request, headers, target === 'netlify' ? config.headerRules.netlify : config.headerRules.assets, /\.(?:html|json|js|css)$/u.test(file));
     if (request.headers.get('if-none-match') === headers.get('etag') || (!request.headers.has('if-none-match') && request.headers.get('if-modified-since') === headers.get('last-modified'))) { headers.delete('content-type'); headers.delete('content-length'); return new Response(null, { status: 304, headers }); }
     headers.set('accept-ranges', 'bytes');
     const range = request.headers.get('range');
@@ -104,6 +111,7 @@ async function staticAnswer(request: Request): Promise<Response> {
 globalThis.fetch = async (input, init) => {
   const request = new Request(input, init), url = new URL(request.url);
   if (!['https://answers.invalid', 'https://www.answers.invalid', 'https://assets.invalid', origin].includes(url.origin)) throw new Error(`Network forbidden: ${url.origin}`);
+  if (url.origin === 'https://assets.invalid') return scope.exit(() => staticAnswer(request));
   if (preview) return originalFetch(new Request(origin + url.pathname + url.search, request));
   return scope.exit(() => staticAnswer(request));
 };
@@ -117,12 +125,7 @@ for (const signal of ['SIGTERM', 'SIGINT']) process.once(signal, () => { void cl
 process.once('uncaughtException', error => { console.error(error); void close(); });
 process.once('unhandledRejection', error => { console.error(error); void close(); });
 if (target === 'netlify') {
-  const route = config.edgeFunctions.find(entry => entry.path === '/*');
-  if (!route) throw new Error('Missing page edge route');
-  const entry = object(await import(pathToFileURL(resolve(root, 'netlify/edge-functions', `${route.function}.ts`)).href));
-  if (typeof entry.default !== 'function') throw new Error('Invalid edge handler');
-  const edgeCallable = entry.default;
-  edge = request => { const value: unknown = edgeCallable(request); if (value !== undefined && !(value instanceof URL)) throw new Error('Invalid edge rewrite'); return value; };
+  edge = await loadEdge(root);
   for (const name of ['find', 'search', 'report']) {
     reads.set(name, new Set());
     const pack = await packagedFunction(root, name, config); packages.set(name, pack); process.chdir(pack.root);
@@ -147,7 +150,9 @@ async function answer(probe: Request): Promise<Response> {
   const route = edge?.(probe), request = route ? new Request(route, probe) : probe;
   const name = /^\/\.netlify\/functions\/(find|search|report)$/u.exec(new URL(request.url).pathname)?.[1];
   const handler = name ? handlers.get(name) : undefined;
-  return worker ? worker(probe) : handler ? scope.run(name ?? '', () => handler(request)) : globalThis.fetch(request);
+  const patterns = config.assets.run_worker_first;
+  const workerFirst = patterns === true || (Array.isArray(patterns) && matchesRoutes(new URL(probe.url).pathname, patterns.map(String)));
+  return worker ? workerFirst ? worker(probe) : staticAnswer(probe) : handler ? scope.run(name ?? '', () => handler(request)) : globalThis.fetch(request);
 }
 process.on('message', async (message: unknown) => {
   try {
