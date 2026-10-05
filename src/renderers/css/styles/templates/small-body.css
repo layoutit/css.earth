@@ -24,6 +24,9 @@
   margin: -230px 0 0 -230px; pointer-events: none;
 }
 :where(.object-stage[data-object-id="__object__"]) .__object__-material { background-repeat: no-repeat; }
-:where(.object-stage[data-object-id="__object__"]) .__object__-billboard { border-radius: 50%; }
+/* The far billboard fades in over the lighting picture as the body shrinks. On a layer of its own its fade repaints
+   nothing; in the lighting picture's layer every step of the fade painted that picture again: seven frames of 44 to
+   86 ms in a row zooming out from Enceladus on an iPad (2026-10-05). */
+:where(.object-stage[data-object-id="__object__"]) .__object__-billboard { border-radius: 50%; will-change: opacity; }
 .object-stage:where([data-object-id="__object__"])[data-lod="billboard"] .__object__-scene, .object-stage:where([data-object-id="__object__"])[data-lod="marker"] .__object__-scene { visibility: hidden; }
 
