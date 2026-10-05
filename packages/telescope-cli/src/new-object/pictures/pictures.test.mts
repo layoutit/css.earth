@@ -17,7 +17,7 @@ const WEBB = 'https://esawebb.org/images/weic0000a/';
 const row = (band: string, wavelength: string, instrument: string) => `<tr><td>${band}</td><td>${wavelength}</td><td>\n  Some Space Telescope\n <br/><span class="band_instrument">${instrument}</span></td></tr>`;
 const page = (title: string, credit: string, rows: string) => `<html><head><title>${title} | ESA/Webb</title><script>var Size = 'no';</script></head><body><strong>Credit:</strong>\n<div class="credit"><p>${credit}</p></div>
 <table><tr><td>Release date:</td><td>21 August 2023, 16:00</td></tr><tr><td>Size:</td><td>40 x 30 px</td></tr></table>
-<div class="object-info"><h3 id="c">Colours &amp; filters</h3><table class="table"><tr><th>Band</th><th>Wavelength</th><th>Telescope</th></tr>${rows}</table></div></body></html>`;
+<div class="object-info"><h3 id="c">Colours & filters</h3><table class="table"><tr><th>Band</th><th>Wavelength</th><th>Telescope</th></tr>${rows}</table></div></body></html>`;
 const WEBB_PAGE = page('A nebula (MIRI image)', 'ESA/Webb, NASA, CSA, A. Person', row('<span class="band_Blue">\n Infrared\n <span class="visually-hidden"> (Blue)</span></span><br /><span class="band_instrument">PAH</span>', '7.7 &mu;m', 'MIRI') + row('<span class="band_Red"> Infrared <span class="visually-hidden"> (Red)</span></span>', '18 &mu;m', 'MIRI'));
 
 test('a picture\'s page gives its title, credit, date, size and colors, on either site\'s markup', () => {

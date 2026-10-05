@@ -32,7 +32,7 @@ export function parseEsaPage(address: string, html: string): EsaPage {
   const size = /^(\d+) x (\d+) px$/u.exec(lines.includes('Size:') ? after('Size:') : '') ?? lacks('"Size: W x H px"');
   const released = /^\d{1,2} [A-Z][a-z]+ \d{4}/u.exec(lines.includes('Release date:') ? after('Release date:') : '')?.[0] ?? lacks('release date');
   // The colors table: a row is the band with the color it is shown in and the line's name where the page gives one, the wavelength, and the telescope with its instrument.
-  const table = /<h3[^>]*>Colours &(?:amp;)? filters<\/h3>\s*<table[\s\S]*?<\/table>/u.exec(html)?.[0] ?? '', colors: PictureColor[] = [];
+  const table = /<h3[^>]*>Colou?rs &(?:amp;)? filters<\/h3>\s*<table[\s\S]*?<\/table>/u.exec(html)?.[0] ?? '', colors: PictureColor[] = [];
   for (const row of table.matchAll(/<tr>([\s\S]*?)<\/tr>/gu)) {
     const cells = [...row[1]!.matchAll(/<td>([\s\S]*?)<\/td>/gu)].map(cell => cell[1]!);
     if (cells.length !== 3) continue;
