@@ -162,6 +162,15 @@
         "https://archive.stsci.edu/hlsp/opal/opal-uranus-cycle-32",
         "https://archive.stsci.edu/hlsp/opal/opal-uranus-cycle-33"
       ]
+    },
+    {
+      "id": "voyager-1986-map",
+      "subject": "Voyager 2 frames as a sharper map",
+      "status": "excluded",
+      "finding": "Hubble sees Uranus about 93 pixels wide (0.04 arcsecond pixels, 3.7 arcsecond disc), so the 721-pixel OPAL map is already an enlargement and only Voyager 2’s 1986 frames are sharper. They show the southern hemisphere alone, and Karkoschka (2015) needed 1,600 of them, each smoothed over dozens of pixels and averaged, to find discrete features. A map built from them would add pixels and no visible detail.",
+      "evidence": [
+        "https://ui.adsabs.harvard.edu/abs/2015Icar..250..294K/abstract"
+      ]
     }
   ]
 }

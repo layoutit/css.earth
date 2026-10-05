@@ -207,6 +207,12 @@
     },
     {
       "location": "public",
+      "filename": "neptune-dataset-voyager-1989.webp",
+      "bytes": 318,
+      "sha256": "c9314f1f923cb3e2e1f852f7d06aa8ded77af3c41e46071c90f7ab2bd4e953fa"
+    },
+    {
+      "location": "public",
       "filename": "neptune-photometric-phase-curve.svg",
       "bytes": 5281,
       "sha256": "2e59445a68952fa8fa8146303d52fbe32c570b1def15a7ee9901d865219eab3b"
@@ -354,6 +360,18 @@
       "filename": "neptune-poles-visible-2025b@2x.webp",
       "bytes": 5046,
       "sha256": "02302f03075588f77a32aa70e018a6d85bb3f7076016021f78b35c29cbbfdc8b"
+    },
+    {
+      "location": "public",
+      "filename": "neptune-poles-voyager-1989.webp",
+      "bytes": 2150,
+      "sha256": "1ed89157fcbae80314ec7b98bd7ac394732e8478df24a60fb3a47418b2734361"
+    },
+    {
+      "location": "public",
+      "filename": "neptune-poles-voyager-1989@2x.webp",
+      "bytes": 4256,
+      "sha256": "1fbf06614e9359b4899dbf699ed62683e26146735f192d27fc7bbe94c6ce7119"
     },
     {
       "location": "public",
@@ -507,6 +525,18 @@
     },
     {
       "location": "public",
+      "filename": "neptune-surface-voyager-1989.webp",
+      "bytes": 30224,
+      "sha256": "738a8a6592aaf212b196d16b3eb9bf2ad8a5f3045612fd9ecd252b43bcacee82"
+    },
+    {
+      "location": "public",
+      "filename": "neptune-surface-voyager-1989@2x.webp",
+      "bytes": 74544,
+      "sha256": "17a78f249e68bf4a84866e8aae4653e7a97808e6d65492c2a6ccec5589fc2b00"
+    },
+    {
+      "location": "public",
       "filename": "neptune-temperature-pressure-profile.svg",
       "bytes": 2617,
       "sha256": "2aa37dbd4ecc7ec2c88dc776294dfd6d4fe921388557aea3e5340839e54d4cae"
@@ -538,20 +568,20 @@
     {
       "location": "prepared",
       "filename": "controls.json",
-      "bytes": 4998,
-      "sha256": "4cbee9e348ba66a3df189612a0f4b5ddf5baacc018fe43ab4c5713770456668f"
+      "bytes": 5121,
+      "sha256": "1c17e3cae80ef463b92b30a7ccaba4cd2dcebab0b42099130a2dd99f7f641c86"
     },
     {
       "location": "prepared",
       "filename": "datasets.json",
-      "bytes": 11091,
-      "sha256": "bb5b3663adabc6262f2a16e24e00f4b76da953136d92263920651b3ce8825f03"
+      "bytes": 11731,
+      "sha256": "b77975cf5f39756d98c7bdae019e2d7b505716e3079dce4c74a7f38bb57a1aef"
     },
     {
       "location": "prepared",
       "filename": "minimaps.json",
-      "bytes": 1387,
-      "sha256": "15945177660bc689b0ec1f6e8426afe3d483264508591adc38e163982f38edfb"
+      "bytes": 1495,
+      "sha256": "e111c973fa57291724e71526576a48a8af8cc517a377cc99d9bfca114e98fab9"
     },
     {
       "location": "prepared",
@@ -627,9 +657,15 @@
     },
     {
       "location": "prepared",
+      "filename": "minimaps/voyager-1989.webp",
+      "bytes": 1340,
+      "sha256": "7671a93ee10ec9b9cee38d4d33f76ed8d91c3018a9def1afbe25dd84c7129ed0"
+    },
+    {
+      "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 559823,
-      "sha256": "0042f8a0159cb708857684b3115be5ba52babbb57d77916582ae9a3b32ede12d"
+      "bytes": 565729,
+      "sha256": "835beaa12b11e57bf06e98893a1c6ef939723461ccf52ffe2479a1c6f044d06d"
     },
     {
       "location": "prepared",
@@ -652,8 +688,8 @@
     {
       "location": "prepared",
       "filename": "text.json",
-      "bytes": 5723,
-      "sha256": "b418929a230eb1104ef6ea1e4f53409bc0483895e2a8f8fd6bc3652fe255541a"
+      "bytes": 6175,
+      "sha256": "aa9aa6f0cf9cc9c9f46c25ae201af6887c54877ca1f089f69fc7412b24186807"
     },
     {
       "location": "prepared",
