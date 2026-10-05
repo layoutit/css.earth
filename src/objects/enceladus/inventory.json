@@ -4,14 +4,14 @@
     {
       "location": "public",
       "filename": "enceladus-arrival.webp",
-      "bytes": 77454,
-      "sha256": "1aec0857c185eafde79a4e9a4fafb078f4545bc3f09fc2433b112e9c5c807415"
+      "bytes": 77808,
+      "sha256": "8eaa874c96375007d5065a61cb47234b57e8b755127b32e4c3fae2b0d82ac414"
     },
     {
       "location": "public",
       "filename": "enceladus-billboard.webp",
-      "bytes": 6054,
-      "sha256": "624daf445809a1518476a14642d615adc0a5cadae0315b9f84797813d2e72daf"
+      "bytes": 7014,
+      "sha256": "6c7c48d19573b8eed87bb33af3583100a325de23cc8e6b81dda2a12d77db919a"
     },
     {
       "location": "public",
@@ -22,20 +22,20 @@
     {
       "location": "public",
       "filename": "enceladus-elevation-poles@2x.webp",
-      "bytes": 193684,
-      "sha256": "25b1bc3e51aca7619c10fcfaa07397cd7ee5c2c041660f99f2f1c20dd012688f"
+      "bytes": 30198,
+      "sha256": "d407deda89df71acce93d86d3369f1e15fb44ba70e89a8ebf6ac083ba5883308"
     },
     {
       "location": "public",
       "filename": "enceladus-elevation-surface@2x.webp",
-      "bytes": 7466654,
-      "sha256": "41b6a3cbe10fe2d463f510ad458293340841bf34087422686efaf9f3c711a05d"
+      "bytes": 839544,
+      "sha256": "13fda9329b0ffe5411d8b1fed2e2885478c1a85a2b8f569ee80145341fa51fb8"
     },
     {
       "location": "public",
       "filename": "enceladus-elevation-thumbnail.webp",
-      "bytes": 8066,
-      "sha256": "eef7b61cc108d1146a560fb5d5b7dded77dcda4e03e29df0342609a5fc431588"
+      "bytes": 8092,
+      "sha256": "8e92f6310a2f1af85ca93dd31d1276dc096595b668a46198871ce4741318ca63"
     },
     {
       "location": "public",
@@ -179,7 +179,7 @@
       "location": "prepared",
       "filename": "datasets.json",
       "bytes": 5329,
-      "sha256": "ad1dadf3558dd60b8641f559e5dd72410e82f94cb057eff560e5d3f4d0ffabb1"
+      "sha256": "63f7512f7567f19efc5f17ab7ca4db634990f7e61f8534573e55bdc12335207c"
     },
     {
       "location": "prepared",
@@ -190,8 +190,8 @@
     {
       "location": "prepared",
       "filename": "material.json",
-      "bytes": 25750,
-      "sha256": "01133c9f58ff27050cb8163ecd29408bffdc066175236c188c1f8b30fc3e5163"
+      "bytes": 25729,
+      "sha256": "de8d5a7bc49c0ea19e569b85d9bde068ee300435e2126151f80b2afb23a94d82"
     },
     {
       "location": "prepared",
@@ -202,8 +202,8 @@
     {
       "location": "prepared",
       "filename": "minimaps/elevation.webp",
-      "bytes": 36666,
-      "sha256": "ebf3aba2cd6dc22204918035abd25b8fbb6a9051a4254f9f2f81f8f11c02faea"
+      "bytes": 35216,
+      "sha256": "05330c00e1b3e2c7f1da0f5f657d27f48abba1dc4db91cf4834e0dfbab50f5e2"
     },
     {
       "location": "prepared",
@@ -238,14 +238,14 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 230043,
-      "sha256": "f57493af233eca8fc55ed131c117a9f99349c5f0476a5366cefb9ee8e79e4455"
+      "bytes": 233915,
+      "sha256": "a7c30f0aa895a2508ec75cf9deacc11222f35521e80436dfde0d82857d57312a"
     },
     {
       "location": "prepared",
       "filename": "scene.json",
-      "bytes": 291563,
-      "sha256": "751195ebe101001fee085e59c396cc26be9b4ff20bea93fa8445591b267ec8a8"
+      "bytes": 292171,
+      "sha256": "dab722bc29fad46f25d4bdef6eaf4ffe601d8c0a35f3b76bafb53e3c0001fc46"
     },
     {
       "location": "prepared",
@@ -262,8 +262,8 @@
     {
       "location": "prepared",
       "filename": "surfaces.json",
-      "bytes": 10506,
-      "sha256": "5ff564fc9f7eb5c3ee390978319e8bb4bef3d5974c0df0fcf03c332bf8f682d6"
+      "bytes": 10485,
+      "sha256": "38c945654bf728504680c002a30bb0d5f1abf83d55bb379e79f35b61a039d170"
     },
     {
       "location": "prepared",

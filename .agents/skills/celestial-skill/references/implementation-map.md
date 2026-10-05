@@ -114,7 +114,10 @@ instead of editing a shared list or atlas position.
   drawn enlarged, which Safari does with a cropped copy for each face: comet
   67P's 1,992 faces took 731 to 842 ms to switch to a half-size atlas and 202 to
   236 ms to a full-size one on an iPad (2026-10-05). Set `texelsPerFace` to what
-  the datasets need and leave `textureScale` out.
+  the datasets need and leave `textureScale` out. A banded sphere follows the
+  same rule with one `textureScale` for its maps: Enceladus's elevation atlas
+  at full size, 8,320 pixels wide among 2,080 pixel ones, took 568 to 613 ms to
+  pick and 51 to 68 ms at their size.
 - **Observation mosaics:** Triton's `source/preparation/terrestrial.json` uses
   the shared terrestrial path (`packages/bake/src/objects/layers/terrestrial/`) for native image geometry,
   photometric correction, compositing and gaps. Reuse the capability with the
