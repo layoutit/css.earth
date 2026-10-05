@@ -18,7 +18,7 @@ test('a dataset read from another model of the body draws on the body\'s mesh, a
     await writeFile(join(directory, 'survey.obj'), tetrahedron(1.01));
     await writeFile(join(directory, 'other.obj'), tetrahedron(2));
     const source = await fixtureSource(directory, ['body', 'survey', 'other'].map(id => ({ id, path: `${id}.obj`, consumers: ['geometry'] })));
-    const config = (alternatives: Record<string, unknown>[]) => ({ namespace: 'fixture', presentation: { defaultDataset: 'shape' },
+    const config = (alternatives: (Record<string, unknown> & { datasetId: string; additionalDatasetIds?: string[]; display?: unknown })[]) => ({ namespace: 'fixture', presentation: { defaultDataset: 'shape' },
       raster: { observations: [{ id: 'shape' }, { id: 'photograph' }], scientific: [{ id: 'gravity' }, { id: 'slope' }, { id: 'second-shape' }] },
       geometry: { radius: 1, radiusKm: .001, radialTerrain: profile('body.obj'), radialTerrainAlternatives: alternatives } });
     const models = await loadRadialModels({ sourceDirectory: directory, source, config: config([
