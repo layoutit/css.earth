@@ -1,7 +1,12 @@
-import { importPackagedObjectRuntime } from './scene-imports.mts';
 import { catalogueObject, objectSystem, systemHostId } from '@cssearth/objects';
 import type { NavigableObject, ObjectEntry } from './directory/object-entry-types.mts';
 import { readObjectEntry } from './directory/object-entries.mts';
+import type { SceneFactory } from './browser/browser-types.mts';
+
+export type DirectoryRuntimeLoader = () => Promise<{ loadPackagedObject(descriptor: unknown, signal?: AbortSignal): Promise<SceneFactory> }>;
+let runtimeLoader: DirectoryRuntimeLoader | undefined;
+/** Bind the browser runtime without loading scene code while constructing catalogue metadata. */
+export function registerDirectoryRuntimeLoader(load: DirectoryRuntimeLoader): void { runtimeLoader = load; }
 
 /** The objects a page knows, read one at a time from their prepared entries (`pages/objects/[id]/entry.json.ts`) the first
  * time the page needs them: its own, the objects it is inside, the Sun's, and whatever it navigates to. A page never loads
@@ -80,7 +85,8 @@ export function objectFromEntry(value: unknown): NavigableObject {
       if (!host) throw new Error(`System ${String(descriptor.id)} is hosted by ${system.host}, which has no prepared entry.`);
       return host.loadScene(signal);
     }
-    const { loadPackagedObject } = await importPackagedObjectRuntime();
+    if (!runtimeLoader) throw new Error('Object directory runtime loader is not registered.');
+    const { loadPackagedObject } = await runtimeLoader();
     return loadPackagedObject(descriptor, signal);
   });
 }

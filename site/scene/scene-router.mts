@@ -1,6 +1,6 @@
 import { prepareStartupBillboard } from '../startup-billboard.mts';
 import { importApplicationWorld } from '../world-imports.mts';
-import { importSceneRegistry } from '../scene-imports.mts';
+import { importSceneRegistry, importPackagedObjectRuntime } from '../scene-imports.mts';
 import { afterSceneFrame } from './scene-frame.mts';
 import { retainInputSurface } from '@cssearth/renderer';
 import { holdStartup, releaseStartup } from '@cssearth/renderer/rendering/startup-gate.ts';
@@ -31,7 +31,7 @@ import { createCameraMotion } from '@cssearth/renderer/navigation';
 import { WORLD_HOST_ID, namesSystem } from '../navigation/navigation-scope.mts';
 import { systemHostId } from '../model/system-address.mts';
 import { insideBody, pastCentreGalaxy, setZoomCentre, zoomStepOf } from '../inside-view.mts';
-import { knownInner, loadAncestors, loadHolder, loadInner } from '../object-directory.mts';
+import { knownInner, loadAncestors, loadHolder, loadInner, registerDirectoryRuntimeLoader } from '../object-directory.mts';
 import { bodyInView, createCameraHandover } from './camera-handover.mts';
 import { OVERVIEW_SELECTION_POLICY } from '../browser/runtime-policy.mts';
 import { createNavigationTiming } from '../navigation/navigation-timing.mts';
@@ -839,6 +839,8 @@ function createWorldContextOwner(): WorldContextOwner {
     },
   } satisfies WorldContextOwner;
 }
+
+registerDirectoryRuntimeLoader(importPackagedObjectRuntime);
 
 if (typeof document !== "undefined") {
   const stage = document.querySelector(".object-stage");
