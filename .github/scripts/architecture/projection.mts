@@ -10,7 +10,7 @@ import { byText, isTestPath } from './zones.mts';
 
 export interface Edge { readonly from: string; readonly to: string; readonly kind: Kind; readonly line?: number }
 interface Tier { readonly tier: number; readonly name: string; readonly folders: string[] }
-interface TierMap { readonly tiers: Tier[]; readonly root: { readonly allow: string[]; readonly entries: string[]; readonly tier: number }; readonly lateral: string[][]; readonly tests?: 'any-tier'; readonly testFiles: string[]; readonly assets: string[]; readonly status?: 'draft' | 'enforced'; readonly forbid: { from: string[]; to: string[]; reason: string }[] }
+interface TierMap { readonly tiers: Tier[]; readonly root: { readonly allow: string[]; readonly entries: string[]; readonly tier: number }; readonly lateral: string[][]; readonly tests?: 'any-tier'; readonly testFiles: string[]; readonly assets: string[]; readonly status?: 'planned' | 'enforced'; readonly forbid: { from: string[]; to: string[]; reason: string }[] }
 export interface ProjectionInput { readonly declarations: unknown; readonly moves: unknown; readonly tiers: unknown; readonly edits?: unknown }
 function record(value: unknown, label: string): Record<string, unknown> {
   if (value === null || typeof value !== 'object' || Array.isArray(value)) throw new TypeError(`${label}: expected object`);
@@ -37,12 +37,8 @@ function kind(value: unknown): Kind {
   throw new TypeError(`Unknown import kind: ${String(value)}`);
 }
 function tierMap(value: unknown): TierMap {
-  const map = record(value, 'tiers'); keys(map, ['tiers', 'root', 'lateral', 'tests', 'testFiles', 'assets', 'status', 'forbid', 'draftUntil', 'warningCeiling'], 'tiers');
-  if (map.status !== undefined && map.status !== 'draft' && map.status !== 'enforced') throw new TypeError('status: expected draft or enforced');
-  if (map.draftUntil !== undefined && (typeof map.draftUntil !== 'string' || !/^\d{4}-\d{2}-\d{2}$/u.test(map.draftUntil)
-    || !Number.isFinite(Date.parse(map.draftUntil)) || new Date(map.draftUntil).toISOString().slice(0, 10) !== map.draftUntil)) throw new TypeError('draftUntil: expected ISO date');
-  if (map.warningCeiling !== undefined && (typeof map.warningCeiling !== 'number' || !Number.isSafeInteger(map.warningCeiling) || map.warningCeiling < 0)) throw new TypeError('warningCeiling: expected nonnegative integer');
-  if (map.status === 'draft' && (map.draftUntil === undefined || map.warningCeiling === undefined)) throw new TypeError('draft requires draftUntil and warningCeiling');
+  const map = record(value, 'tiers'); keys(map, ['tiers', 'root', 'lateral', 'tests', 'testFiles', 'assets', 'status', 'forbid'], 'tiers');
+  if (map.status !== undefined && map.status !== 'planned' && map.status !== 'enforced') throw new TypeError('status: expected planned or enforced');
   const forbid = array(map.forbid ?? [], 'forbid').map(value => {
     const rule = record(value, 'forbid'); keys(rule, ['from', 'to', 'reason'], 'forbid');
     return { from: array(rule.from, 'forbid.from').map(value => path(value, 'folder')), to: array(rule.to, 'forbid.to').map(value => path(value, 'folder')), reason: string(rule.reason, 'forbid.reason') };

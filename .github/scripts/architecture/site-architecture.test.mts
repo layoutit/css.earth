@@ -1,6 +1,9 @@
 /** The plan's generated tables must expose connectivity failures and become stale on data changes. */
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
+import { readFileSync } from 'node:fs';
+import { spawnSync } from 'node:child_process';
+import ts from 'typescript';
 import { renderTables, updateTables } from './site-architecture.mts';
 const input = {
   declarations: { declarations: [{ from: 'site/a.mts', to: 'site/base/base.mts', kind: 'value' }], summary: { files: ['site/a.mts', 'site/base/base.mts'] } },
@@ -30,32 +33,50 @@ test('the stale-table guard throws; equal content passes', async () => {
   assert.throws(() => assertCurrent('stale', 'current'), /stale/u);
   assert.doesNotThrow(() => assertCurrent('current', 'current'));
 });
-test('draft findings warn and enforced findings throw; malformed status fails', async () => {
+test('planned findings only warn, enforced findings throw, and invalid statuses fail', async () => {
   const { planFinding } = await import('./site-architecture.mts');
   const failure = () => { throw new Error('plan changed'); };
-  const warn = console.warn, messages: unknown[] = []; console.warn = value => { messages.push(value); };
-  try {
-    assert.doesNotThrow(() => planFinding('draft', failure, { draftUntil: '2026-11-02', today: '2026-10-05', warningCeiling: 1 })); assert.match(String(messages[0]), /WARNING.*--write/u);
-    assert.throws(() => planFinding('enforced', failure), /plan changed/u);
-    assert.throws(() => planFinding('unsigned', failure), /status/u);
-  } finally { console.warn = warn; }
-});
-
-test('expired draft findings fail and a zero warning ceiling fails; Actions annotates allowed findings', async () => {
-  const { planFinding } = await import('./site-architecture.mts');
-  const failure = () => { throw new Error('changed'); };
-  assert.throws(() => planFinding('draft', failure, { draftUntil: '2000-01-01', today: '2026-10-05', warningCeiling: 1 }), /expired/u);
-  assert.throws(() => planFinding('draft', failure, { draftUntil: '2026-11-02', today: '2026-10-05', warningCeiling: 0 }), /ceiling/u);
   const warn = console.warn, messages: string[] = []; console.warn = value => { messages.push(String(value)); };
   try {
-    planFinding('draft', failure, { draftUntil: '2026-11-02', today: '2026-10-05', warningCeiling: 1, actions: true });
-    assert.ok(messages.some(message => message.startsWith('::warning file=')));
+    // Removing the warn-only branch makes this assertion fail on the real finding.
+    assert.doesNotThrow(() => planFinding('planned', failure, { actions: false }));
+    assert.equal(messages.length, 1);
+    assert.match(messages[0]!, /WARNING.*plan changed.*Fix: node .*--write/u);
+    assert.throws(() => planFinding('enforced', failure), /plan changed/u);
+    for (const status of ['unsigned', 'draft', undefined, null]) assert.throws(() => planFinding(status, failure), /status/u);
+    assert.doesNotThrow(() => planFinding('enforced', () => {}));
   } finally { console.warn = warn; }
 });
 
-test('draft policy requires a valid calendar date and a nonnegative warning ceiling', () => {
-  const tiers = { ...input.tiers, status: 'draft', draftUntil: '2026-11-02', warningCeiling: 0 };
-  assert.doesNotThrow(() => renderTables({ ...input, tiers }));
-  assert.throws(() => renderTables({ ...input, tiers: { ...tiers, draftUntil: '2026-02-30' } }), /draftUntil/u);
-  assert.throws(() => renderTables({ ...input, tiers: { ...tiers, warningCeiling: -1 } }), /warningCeiling/u);
+test('planned findings always emit Actions warnings, without a count ceiling', async () => {
+  const { planFinding } = await import('./site-architecture.mts');
+  const warn = console.warn, messages: string[] = []; console.warn = value => { messages.push(String(value)); };
+  try {
+    for (let i = 0; i < 3; i++) planFinding('planned', () => { throw new Error('changed%\nnext'); }, { actions: true });
+    assert.equal(messages.length, 6);
+    assert.equal(messages.filter(message => message.startsWith('::warning file=docs/site-architecture.md::')).length, 3);
+    assert.match(messages[1]!, /changed%25%0Anext.*--write/u);
+  } finally { console.warn = warn; }
+});
+
+test('plan schema accepts only planned and enforced statuses', () => {
+  for (const status of ['planned', 'enforced']) assert.doesNotThrow(() => renderTables({ ...input, tiers: { ...input.tiers, status } }));
+  for (const status of ['draft', 'unsigned', null]) assert.throws(() => renderTables({ ...input, tiers: { ...input.tiers, status } }), /status/u);
+});
+
+test('deleting the planned warn-only rule turns the same finding assertion red', () => {
+  const source = readFileSync(new URL('./site-architecture.mts', import.meta.url), 'utf8');
+  const start = source.indexOf('export function planFinding('), end = source.indexOf('\nexport async function checkSiteArchitecture', start);
+  assert.ok(start >= 0 && end > start);
+  const original = source.slice(start, end);
+  const mutant = original.replace("if (status !== 'planned') throw error;", 'throw error;');
+  assert.notEqual(mutant, original);
+  const probe = (implementation: string) => {
+    const code = ts.transpileModule(implementation, { compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022 } }).outputText;
+    return spawnSync(process.execPath, ['-e', `${code}\nrequire('node:assert/strict').doesNotThrow(() => planFinding('planned', () => { throw new Error('plan changed'); }, { actions: false }));`], { encoding: 'utf8' });
+  };
+  const passing = probe(original); assert.equal(passing.status, 0, passing.stderr);
+  assert.match(passing.stderr, /SITE_PLAN_WARNING.*plan changed.*--write/u);
+  const failing = probe(mutant); assert.equal(failing.status, 1, failing.stderr);
+  assert.match(failing.stderr, /AssertionError.*|Got unwanted exception/u);
 });

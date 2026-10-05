@@ -188,9 +188,26 @@
   "lateral": [],
   "tests": "any-tier",
   "testFiles": [
+    "site/asset-origin.characterization.test.mts",
     "site/build/source-maps.test.mts",
+    "site/dataset-picker.characterization.test.mts",
+    "site/dataset-response.characterization.test.mts",
+    "site/destination-browser.characterization.test.mts",
+    "site/diagnostic-recorder.characterization.test.mts",
+    "site/feature-browser.characterization.test.mts",
     "site/navigation/evidence/star-click/one-click.jpg",
+    "site/object-adapter.characterization.test.mts",
+    "site/object-browser.characterization.test.mts",
+    "site/object-children.characterization.test.mts",
+    "site/object-directory.characterization.test.mts",
+    "site/object-page-data.characterization.test.mts",
+    "site/packaged-object-runtime.characterization.test.mts",
+    "site/prepare-body-moons.characterization.test.mts",
     "site/prepared-panel-content.shared-readers.test.mts",
+    "site/startup-billboard.characterization.test.mts",
+    "site/startup-boot.characterization.test.mts",
+    "site/startup-requests.characterization.test.mts",
+    "site/startup-world.characterization.test.mts",
     "site/test/application-world-frames.test.mts",
     "site/test/application-world-visibility.test.mts",
     "site/test/arrival-billboard.test.mts",
@@ -224,6 +241,7 @@
     "site/test/evidence/passive-minimaps/jupiter-sequence.png",
     "site/test/first-view-transport.test.mts",
     "site/test/fixtures/anchor-table.mts",
+    "site/test/fixtures/characterization-runtime.mts",
     "site/test/fixtures/context-package.mts",
     "site/test/fixtures/galaxies/captures.json",
     "site/test/fixtures/object-content-fixture.mts",
@@ -336,7 +354,8 @@
     "site/test/world-billboards.test.mts",
     "site/test/world-stars.test.mts",
     "site/test/world-tables.test.mts",
-    "site/test/zoom-scope.test.mts"
+    "site/test/zoom-scope.test.mts",
+    "site/view-url-runtime.characterization.test.mts"
   ],
   "assets": [
     "site/layouts/cubic-sky.css",
@@ -429,7 +448,7 @@
     "site/vendor/cesium-LICENSE.md",
     "site/wordmark.css"
   ],
-  "status": "draft",
+  "status": "planned",
   "forbid": [
     {
       "from": [
@@ -496,7 +515,5 @@
         "site/pages"
       ]
     }
-  ],
-  "draftUntil": "2026-11-02",
-  "warningCeiling": 1
+  ]
 }

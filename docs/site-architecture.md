@@ -1,8 +1,8 @@
-# Proposed site architecture
+# Site architecture plan
 
-**Recommend option 3: relocate queued loader functions to their owners.** This draft requires owner and alowpoly sign-off before S3. S2 changes only the plan and checker; it moves no application files. The projection proves connectivity, not runtime behavior or generated chunk bytes.
+**Option 3 was decided by the owner on 2026-10-05: relocate queued loader functions to their owners.** The router starts at module evaluation exactly as today, and all loading uses the same single serialized queue chain. S2 changes only documentation and tools; it moves no application files. The projection proves connectivity, not runtime behavior or generated chunk bytes. This PR is ready for the owner to merge.
 
-[moves.json](site-architecture/moves.json) records destinations; [tiers.json](site-architecture/tiers.json) records layers, denies and draft policy; [edits.json](site-architecture/edits.json) records the recommended semantic changes; [loader-options.json](site-architecture/loader-options.json) records alternatives; [references.json](site-architecture/references.json) is a compact path-and-class inventory.
+[moves.json](site-architecture/moves.json) records destinations; [tiers.json](site-architecture/tiers.json) records layers, denies and planned/enforced status; [edits.json](site-architecture/edits.json) records the decided semantic changes; [references.json](site-architecture/references.json) is a compact path-and-class inventory.
 
 ## Folder ownership
 
@@ -17,20 +17,20 @@ A folder imports itself or strictly lower layers. Sibling folders, including L0 
 | 0 | `prepared/` | Prepared transports and generated inputs | 25 | 24; `prepared-catalogue.d.mts`, `prepared-navigation-markers.d.mts`, `prepared-object-path.mts`, `prepared-shell-icons.d.mts` |
 | 0 | `source/` | Preserved input records and artwork | 60 | 0 |
 | 0 | `vendor/` | Preserved third-party notices | 1 | 0 |
-| 0 | `server-assets/` | Server and build prepared-asset origin | 1 | 1; `asset-origin.mts` |
+| 0 | `server-assets/` | Server and build prepared-asset origin | 2 | 2; `asset-origin.mts` |
 | 0 | `contracts/` | Shared page and shell interfaces | 3 | 3; `object-shell-types.ts`, `object-page-contract.mts` |
-| 1 | `directory/` | Startup reads and object catalogue directory | 10 | 9; `startup-world.mts`, `startup-requests.mts`, `object-entries.mts`, `object-directory.mts` |
+| 1 | `directory/` | Startup reads and object catalogue directory | 13 | 12; `startup-world.mts`, `startup-requests.mts`, `object-entries.mts`, `object-directory.mts` |
 | 1 | `minimap/` | Surface-map measurements and view formatting | 7 | 4 |
 | 2 | `world/` | Shared framing, visibility and camera context | 54 | 53; `world-objects.mts`, `world-system-views.mts`, `context-availability.mts`, `context-datasets.mts` |
-| 3 | `content/` | Card content, citations and metadata | 21 | 20; `dataset-content.mts`, `dataset-context.mts`, `object-text.mts`, `prepared-panel-content.mts` |
-| 3 | `navigation/` | History, requests, flights and arrivals | 34 | 22; `prepared-arrival.mts`, `prepared-scene-ownership.mts`, `arrival-billboard.mts`, `prepared-world-navigation.mts` |
+| 3 | `content/` | Card content, citations and metadata | 22 | 21; `dataset-content.mts`, `dataset-context.mts`, `object-text.mts`, `prepared-panel-content.mts` |
+| 3 | `navigation/` | History, requests, flights and arrivals | 35 | 23; `prepared-arrival.mts`, `prepared-scene-ownership.mts`, `arrival-billboard.mts`, `prepared-world-navigation.mts` |
 | 4 | `search/` | Catalogue search and result presentation | 17 | 6 |
 | 4 | `selection/` | Committed selection and camera handovers | 6 | 6; `scene/scene-selection.mts`, `satellite-selection.mts`, `overview-selection.mts`, `showcase.mts` |
-| 5 | `shell/` | Retained shell controls and panels | 27 | 20; `object-browser.mts`, `feature-browser.mts`, `destination-browser.mts`, `selection-presentation.mts` |
-| 6 | `server/` | SSR readers, responses and host middleware | 30 | 17; `object-page-data.mts`, `first-view-transport.mts`, `object-entry.mts`, `world-places.mts` |
-| 6 | `scene/` | Scene sessions, replacement and publication | 26 | 11; `object-adapter.mts`, `packaged-object-runtime.mts`, `startup-billboard.mts`, `initial-scene.mts` |
-| 7 | `startup/` | Page boot helpers and router entry | 7 | 7; `shared-imports.mts`, `startup-boot.mts`, `startup-cover.mts`, `initial-shell-context.mts` |
-| 7 | `build/` | Site preparation and packaging | 82 | 31; `prepare-body-moons.mts` |
+| 5 | `shell/` | Retained shell controls and panels | 32 | 25; `object-browser.mts`, `feature-browser.mts`, `destination-browser.mts`, `selection-presentation.mts` |
+| 6 | `server/` | SSR readers, responses and host middleware | 32 | 19; `object-page-data.mts`, `first-view-transport.mts`, `object-entry.mts`, `world-places.mts` |
+| 6 | `scene/` | Scene sessions, replacement and publication | 30 | 15; `object-adapter.mts`, `packaged-object-runtime.mts`, `startup-billboard.mts`, `initial-scene.mts` |
+| 7 | `startup/` | Page boot helpers and router entry | 8 | 8; `shared-imports.mts`, `startup-boot.mts`, `startup-cover.mts`, `initial-shell-context.mts` |
+| 7 | `build/` | Site preparation and packaging | 83 | 32; `prepare-body-moons.mts` |
 | 8 | `layouts/` | Shared page frame and its styles | 7 | 5; `components/ObjectSwatchStyles.astro`, `site.css`, `object-shell.css`, `wordmark.css` |
 | 9 | `components/` | Reusable Astro markup and SSR composition | 29 | 0 |
 | 10 | `pages/` | Routes and object-page entries | 20 | 0 |
@@ -46,11 +46,11 @@ Server/search-response deliberately shares shell/selection-presentation and sele
 
 Registry types live in directory, navigation types in navigation and presenter types in scene. Their declared imports model implementation dependencies; adding an edge cannot establish necessity.
 
-## Draft workflow
+## Contributor workflow
 
-The draft deadline is **2026-11-02**, inclusive. The owner may extend draftUntil explicitly in tiers.json before expiry. Until then a plan finding is a warning: the check prints it with the fix command and, in GitHub Actions, as an annotation, and a contributor's PR is not blocked (the check stops at the first finding, so the ceiling `warningCeiling: 1` allows exactly that one warning). After the deadline every plan finding fails. Existing scanner/rule failures always fail. Strict --accept always fails on findings.
+There is no deadline. With `status: "planned"`, a plan finding is a WARNING with the fix command and a GitHub Actions annotation; it never fails `pnpm check:architecture`. The check reports the first plan finding. With `status: "enforced"`, every plan finding fails. The owner changes the status when S4 ends. Existing architecture rules and scanner failures always fail. Strict `--accept` always fails on plan findings.
 
-When an unsigned plan drifts, update its destination/semantic edits and regenerate it. Do not reshape application behavior solely to silence a draft. Sign-off changes status from draft to enforced. Every mapped path is checked for existence, including deleted mapped files; generated inputs are explicit exceptions. Routine checks rescan the compact inventory so stale references fail rather than persist invisibly.
+When a warning names your file, update its destination or semantic edits and run `node .github/scripts/architecture/site-architecture.mts --write`, then strict `--accept`. Do not change application behavior just to silence a plan warning. Every mapped path is checked for existence, including deleted mapped files; generated inputs are explicit exceptions. Routine checks rescan the compact inventory so stale references produce findings.
 
 ## S3 atomic changes
 
@@ -65,10 +65,10 @@ The changes array partitions stable edit ids into atomic groups. All seven group
 | 3 | Split the moon catalogue reader | add-file-moon-catalogue, retarget-object-children-moon-catalogue, remove-import-prepare-body-moons-moon-catalogues, add-import-prepare-body-moons-moon-catalogue | Split catalogue parsing, cached source catalogue and catalogueMoons into a runtime-safe reader; preparation keeps search-based ordering. Read catalogueMoons from the split reader; production must never import build preparation. Move the source catalogue import with its parser into the reader; preparation calls that reader. Use the single catalogue reader for preparation too; preserve the named-moon eligibility policy in preparation. |
 | 3 | Pass selection into navigation requests | remove-import-navigation-request-scene-selection, add-import-navigation-request-scene-subject | Pass selectionTargetFromUrl explicitly through resolveNavigation and readNavigationSelection. Router uses the existing registry export, injects it into createSceneActivation, which forwards all three calls. Import erased SceneView/SelectionTarget aliases from navigation-types; never retain the selection import. Keep existing subject identity helpers in the lower world owner; pass selectionTargetFromUrl as a parameter. |
 | 6 | Extract the frame presenter contract | add-file-scene-frame-presenter, retarget-scene-session-scene-frame-presenter, add-import-scene-world-scene-frame-presenter | Extract the structural presenter interface; a session must not import the world coordinator that consumes it. Session reads SceneFramePresenter from the lower contract, breaking the two-way type dependency. World coordinator imports and re-exports the structural presenter contract. |
-| 0 | Relocate queued loader owners | add-file-scene-imports, add-file-world-imports, remove-queue-runtime, remove-shared-registry, remove-shared-world, retarget-adapter-scene-imports, retarget-router-world-imports, add-router-scene-imports, remove-directory-queue, retarget-boot-scene-imports, add-boot-world-imports | Own queued registry and packaged-runtime functions in scene; share browser queuedImport and its single last chain. Own the queued application-world import in world; no initializer inside the thunk. Move the runtime function out of the import-free browser queue implementation. Leave only importSceneRouter in startup/shared-imports. Move the world function to its owner. Adapter directly uses the same queued runtime function; preserve the frozen default adapter. Split router loader imports; preserve module-evaluation autostart. Import registry/runtime functions and register only the directory runtime loader using the existing object-directory import before first scene call. Directory accepts a typed runtime-loader registration; read the slot at scene invocation, not metadata construction. Missing registration fails explicitly. Body prestart and registry prestart reuse scene-owned promises. View prestart reuses the world-owned promise. |
+| 0 | Relocate queued loader owners | add-file-scene-imports, add-file-world-imports, remove-queue-runtime, remove-shared-registry, remove-shared-world, retarget-adapter-scene-imports, retarget-router-world-imports, add-router-scene-imports, remove-directory-queue, retarget-boot-scene-imports, add-boot-world-imports | Decided by the owner: loader modules hold only import() calls through the existing queue. Own registry and packaged-runtime functions in scene; move the single last chain to lower browser/import-queue. Prove one queue chain, registration before the first scene call, the same entry-chunk modules and bytes, identical L1/L2/L3, L7 no worse and the real-iPad startup journey. Own the queued application-world import in world; no initializer inside the thunk. Move the runtime function out of the import-free browser queue implementation. Leave only importSceneRouter in startup/shared-imports. Move the world function to its owner. Adapter directly uses the same queued runtime function; preserve the frozen default adapter. Split router loader imports; preserve module-evaluation autostart. Import registry/runtime functions and register only the directory runtime loader using the existing object-directory import before first scene call. Directory accepts a typed runtime-loader registration; read the slot at scene invocation, not metadata construction. Missing registration fails explicitly. Body prestart and registry prestart reuse scene-owned promises. View prestart reuses the world-owned promise. |
 <!-- /generated:changes -->
 
-## Recommended loader design: option 3
+## Decided loader design: option 3
 
 Read sources: site/import-queue.mts:13–26, site/shared-imports.mts:1–7, site/startup-boot.mts:1–24, site/layouts/ObjectLayout.astro:162–178, site/object-directory.mts:55–72, site/object-adapter.mts:1–20 and site/scene/scene-router.mts:839–845.
 
@@ -86,13 +86,11 @@ router → directory runtime-loader registration → first scene call
 - Directory exports a typed registration function. It reads the configured loader at scene invocation, never during objectFromEntry or registry construction. Missing registration fails clearly. Metadata callers in build, Astro SSR and server endpoints remain valid without a loader. System-host recursion, abort signals, retry and entry identity must remain identical.
 - Root-level scene-imports/world-imports exist during S3; imports point at current paths until S4. No thunk awaits a queued function behind itself. The router's rejection remains a module-evaluation failure with the existing retry behavior and layout failure cleanup.
 
-S3 must prove one shared queue chain, registration before the first scene call, metadata construction without registration, registration/retry/abort behavior, and queue settlement/error cleanup by tests with mutations. Compare entry-chunk module membership and bytes: the predicted additions are exactly the two tiny scene/world loader modules containing import() calls. This is an inference until an actual build comparison proves it. Reuse of functions does not prove unchanged bytes.
+S3 must prove one shared queue chain, registration before the first scene call, metadata construction without registration, registration/retry/abort behavior, and queue settlement/error cleanup by tests with mutations. Require the same entry-chunk module membership and bytes, identical L1/L2/L3 results, L7 performance no worse, and the real-iPad startup journey (including delayed-summary cold loads). The extracted loader modules hold only import() calls through the shared queue; the single last chain lives in the lower browser module. These are S3 acceptance requirements, not results established by the S2 graph projection. Reuse of functions does not prove unchanged bytes. No functionality may break anywhere; performance must stay the same or improve. L7 is a performance guard beside the behavior checks.
 
-## Loader alternatives
+## Options not taken
 
-1. **Import-free directory slot**, registered by the existing layout startup script before importSceneRouter (or a new startup/main if separately justified). Move loader implementations to startup and let router/adapter/directory read typed slot functions. It can preserve module autostart and downward edges; DI in general is not an impasse. The graph variant is recorded in loader-options.json. It is not recommended because it adds page-owned registration of registry/world/runtime plus use-time proxies across three consumers, where option 3 needs only directory registration and keeps function ownership beside their modules. It would require slot-before-import mutation tests and entry-chunk measurements; no S2 behavioral proof exists.
-2. **Queued .then(start) DI**: pass loaders into a router initializer and adapter factory. Queue settlement may follow synchronous start, but module-evaluation phase differs, a retry can start twice, and any await of another queued loader inside start can deadlock. Prove these separately; a graph pass is not an equivalent-startup proof. This variant is not selected.
-3. **Lazy-boundary exception**: preserve current service imports and explicitly exempt only the directory/adapter/router upward loader edges. Report service SCCs separately. This preserves current startup behavior but abandons the zero-cycle acceptance claim and requires changed rules; it is not selected.
+Parameter injection with a changed router start changes the router's evaluation phase. An explicit lazy-boundary exception gives up the zero-cycle claim. Neither is part of the plan.
 
 ## Other S3 risks
 
@@ -153,11 +151,11 @@ The reference scan covers full/extensionless/relative file strings plus the reti
 | live: AGENTS.md contract text | 4 |
 | live: CI routing | 1 |
 | live: Python script | 2 |
-| live: computed import | 2 |
+| live: computed import | 4 |
 | live: docs code-span | 21 |
 | live: docs link | 26 |
-| live: generator/producer literal | 96 |
-| live: source import | 236 |
+| live: generator/producer literal | 106 |
+| live: source import | 256 |
 | live: tsconfig/eslint/package.json | 20 |
 | live: workflow | 3 |
 | plan: docs code-span | 1 |
@@ -239,9 +237,9 @@ node .github/scripts/architecture/site-architecture.mts --accept
 node .github/scripts/architecture/site-architecture.mts --references --old site/test/source-link.test.mts
 ```
 
-## Owner decisions
+## Owner decisions and remaining ownership
 
-- Approve recommended option 3, or select a documented loader alternative and its different proofs.
-- Approve page-boot helpers in startup and the final layer ownership.
-- Sign off by November 2, or explicitly extend draftUntil; name the real-iPad startup-proof owner.
-- Coordinate alowpoly's S3/S4 timing with performance branches touching scene-router, startup-boot and ObjectLayout.
+- Option 3 and the final folder ownership, including page-boot helpers in startup, were decided by the owner.
+- There is no deadline. The owner sets S4/S5 timing and changes planned to enforced when S4 ends.
+- Branches touching scene-router, startup-boot and ObjectLayout are timed together so they do not collide.
+- The real-iPad startup-proof device owner remains to be assigned.

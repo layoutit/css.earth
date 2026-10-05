@@ -96,10 +96,10 @@ and budget growth fail; tests and comments are excluded through the TypeScript s
 
 ## Pending site layout
 
-The draft is in docs/site-architecture.md. Moves, sibling tiers, explicit denies,
-atomic edit groups, loader alternatives and a compact path/class inventory live beside it.
-`site-architecture.mts` shares the ordinary check's live graph. Draft findings fail after draftUntil or above warningCeiling; allowed warnings emit Actions annotations.
-`status: "enforced"` makes every finding fail. Existing rules and scanner failures still fail.
+The owner-decided plan is in docs/site-architecture.md. Moves, sibling tiers, explicit denies,
+atomic edit groups, the decided loader design and a compact path/class inventory live beside it.
+`site-architecture.mts` shares the ordinary check's live graph. `status: "planned"` findings always warn with a fix command and Actions annotation; there is no deadline or warning ceiling.
+`status: "enforced"` makes every plan finding fail; the owner flips it when S4 ends. Strict `--accept` always fails on plan findings. Existing rules and scanner failures still fail.
 The architecture baseline is unchanged.
 
 Tests are leaf consumers (`tests: "any-tier"`) but remain in file SCCs. Production
@@ -133,6 +133,10 @@ remaining edits, tables, references and wiring. It runs
 after moves; zero live occurrences are required. Historical and plan pointers are
 reported separately. S3 PRs remove applied groups. L6 removes null deletion entries.
 `--references` prints full line-numbered evidence on demand; do not commit that output. `--write` regenerates all marked tables
-and references. Ordinary additions during the draft do not turn plan warnings into
+and references. Ordinary additions while planned do not turn plan warnings into
 application refactors. Strict acceptance, sequence and minimality remain blocking
-proof commands. See the draft for the contributor workflow and S3 behavior gates.
+proof commands. See the plan for the contributor workflow and S3 behavior gates.
+
+When a warning names your file, update its mapping or semantic edits, run `--write`,
+then `--accept`. Keep application behavior unchanged; a planned warning never blocks
+`pnpm check:architecture`.

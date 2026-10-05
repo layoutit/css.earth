@@ -91,14 +91,11 @@ export function updateTables(document: string, tables: Readonly<Record<string, s
 export function assertCurrent(document: string, next: string): void {
   if (document !== next) throw new Error('Site architecture tables are stale; run node .github/scripts/architecture/site-architecture.mts --write');
 }
-/** Findings have a fixed draft deadline and a checked warning budget; strict modes always throw. */
-export function planFinding(status: unknown, check: () => void, policy: { draftUntil?: string; warningCeiling?: number; today?: string; actions?: boolean } = {}): void {
-  if (status !== 'draft' && status !== 'enforced' && status !== undefined) throw new TypeError('status: expected draft or enforced');
+/** Planned findings warn without a deadline; enforced and strict acceptance findings throw. */
+export function planFinding(status: unknown, check: () => void, policy: { actions?: boolean } = {}): void {
+  if (status !== 'planned' && status !== 'enforced') throw new TypeError('status: expected planned or enforced');
   try { check(); } catch (error) {
-    if (status !== 'draft') throw error;
-    const today = policy.today ?? new Date().toISOString().slice(0, 10);
-    if (!policy.draftUntil || today > policy.draftUntil) throw new Error(`Draft expired: ${policy.draftUntil ?? 'no deadline'}; ${String(error)}`);
-    if (1 > (policy.warningCeiling ?? 0)) throw new Error(`Draft warning ceiling exceeded (1 > ${policy.warningCeiling ?? 0}); ${String(error)}`);
+    if (status !== 'planned') throw error;
     const message = `SITE_PLAN_WARNING: ${String(error)}. Fix: node .github/scripts/architecture/site-architecture.mts --write`;
     console.warn(message);
     if (policy.actions ?? process.env.GITHUB_ACTIONS === 'true') console.warn(`::warning file=docs/site-architecture.md::${message.replaceAll('%', '%25').replaceAll('\r', '%0D').replaceAll('\n', '%0A')}`);
@@ -164,7 +161,7 @@ export async function checkSiteArchitecture(root: string, options: { readonly gr
       writeFileSync(docPath, next);
     } else assertCurrent(document, next);
     console.log(`SITE_PLAN_OK: all views clear; tables match (${((performance.now() - started) / 1000).toFixed(1)} s${options.graph ? ', shared graph' : ', including scan'}).`);
-  }, { draftUntil: text(tierData.draftUntil), warningCeiling: number(tierData.warningCeiling) });
+  });
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {

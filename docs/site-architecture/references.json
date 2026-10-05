@@ -11,6 +11,16 @@
       "scope": "live"
     },
     {
+      "file": ".github/coverage-ratchet.json",
+      "classification": "generator/producer literal",
+      "scope": "live"
+    },
+    {
+      "file": ".github/coverage-ratchet.json",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
       "file": ".github/scripts/architecture/architecture.test.mts",
       "classification": "generator/producer literal",
       "scope": "live"
@@ -61,6 +71,21 @@
       "scope": "live"
     },
     {
+      "file": ".github/scripts/build-compare/apply-moves.test.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": ".github/scripts/build-compare/apply-moves.test.mts",
+      "classification": "generator/producer literal",
+      "scope": "live"
+    },
+    {
+      "file": ".github/scripts/build-compare/compare.test.mts",
+      "classification": "generator/producer literal",
+      "scope": "live"
+    },
+    {
       "file": ".github/scripts/checks/object-test-relocation.test.mts",
       "classification": "generator/producer literal",
       "scope": "live"
@@ -97,6 +122,16 @@
     },
     {
       "file": ".github/scripts/ci/prepare-typecheck.mts",
+      "classification": "generator/producer literal",
+      "scope": "live"
+    },
+    {
+      "file": ".github/scripts/coverage/ratchet.test.mts",
+      "classification": "generator/producer literal",
+      "scope": "live"
+    },
+    {
+      "file": ".github/scripts/coverage/report.mts",
       "classification": "generator/producer literal",
       "scope": "live"
     },
@@ -566,6 +601,11 @@
       "scope": "live"
     },
     {
+      "file": "site/asset-origin.characterization.test.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
       "file": "site/build/bundle-cloudflare-worker.mts",
       "classification": "generator/producer literal",
       "scope": "live"
@@ -831,12 +871,32 @@
       "scope": "live"
     },
     {
+      "file": "site/dataset-picker.characterization.test.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
       "file": "site/dataset-picker.mts",
       "classification": "source import",
       "scope": "live"
     },
     {
+      "file": "site/dataset-response.characterization.test.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
       "file": "site/dataset-response.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/destination-browser.characterization.test.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/diagnostic-recorder.characterization.test.mts",
       "classification": "source import",
       "scope": "live"
     },
@@ -857,6 +917,11 @@
     },
     {
       "file": "site/exploration-catalog.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/feature-browser.characterization.test.mts",
       "classification": "source import",
       "scope": "live"
     },
@@ -931,7 +996,22 @@
       "scope": "live"
     },
     {
+      "file": "site/object-adapter.characterization.test.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/object-adapter.characterization.test.mts",
+      "classification": "generator/producer literal",
+      "scope": "live"
+    },
+    {
       "file": "site/object-adapter.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/object-browser.characterization.test.mts",
       "classification": "source import",
       "scope": "live"
     },
@@ -941,7 +1021,17 @@
       "scope": "live"
     },
     {
+      "file": "site/object-children.characterization.test.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
       "file": "site/object-children.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/object-directory.characterization.test.mts",
       "classification": "source import",
       "scope": "live"
     },
@@ -963,6 +1053,11 @@
     {
       "file": "site/object-page-contract.mts",
       "classification": "generator/producer literal",
+      "scope": "live"
+    },
+    {
+      "file": "site/object-page-data.characterization.test.mts",
+      "classification": "source import",
       "scope": "live"
     },
     {
@@ -993,6 +1088,21 @@
     {
       "file": "site/overview-selection.mts",
       "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/packaged-object-runtime.characterization.test.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/packaged-object-runtime.characterization.test.mts",
+      "classification": "generator/producer literal",
+      "scope": "live"
+    },
+    {
+      "file": "site/packaged-object-runtime.characterization.test.mts",
+      "classification": "computed import",
       "scope": "live"
     },
     {
@@ -1128,6 +1238,11 @@
     {
       "file": "site/planetary-system-members.mts",
       "classification": "generator/producer literal",
+      "scope": "live"
+    },
+    {
+      "file": "site/prepare-body-moons.characterization.test.mts",
+      "classification": "source import",
       "scope": "live"
     },
     {
@@ -1356,12 +1471,52 @@
       "scope": "live"
     },
     {
+      "file": "site/startup-billboard.characterization.test.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/startup-billboard.characterization.test.mts",
+      "classification": "generator/producer literal",
+      "scope": "live"
+    },
+    {
       "file": "site/startup-billboard.mts",
       "classification": "source import",
       "scope": "live"
     },
     {
+      "file": "site/startup-boot.characterization.test.mts",
+      "classification": "generator/producer literal",
+      "scope": "live"
+    },
+    {
+      "file": "site/startup-boot.characterization.test.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
       "file": "site/startup-boot.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/startup-requests.characterization.test.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/startup-requests.characterization.test.mts",
+      "classification": "computed import",
+      "scope": "live"
+    },
+    {
+      "file": "site/startup-world.characterization.test.mts",
+      "classification": "generator/producer literal",
+      "scope": "live"
+    },
+    {
+      "file": "site/startup-world.characterization.test.mts",
       "classification": "source import",
       "scope": "live"
     },
@@ -1882,6 +2037,11 @@
     },
     {
       "file": "site/view-readout.mts",
+      "classification": "source import",
+      "scope": "live"
+    },
+    {
+      "file": "site/view-url-runtime.characterization.test.mts",
       "classification": "source import",
       "scope": "live"
     },
