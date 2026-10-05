@@ -1,0 +1,43 @@
+{
+  "id": "grav-bauer-2007-saturn-irregular-colors",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Grav and Bauer (2007): A deeper look at the colors of the Saturnian irregular satellites",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.1016/j.icarus.2007.04.020"
+    },
+    {
+      "type": "arXiv",
+      "value": "astro-ph/0611590"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1016/j.icarus.2007.04.020",
+      "label": "Published article"
+    },
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/astro-ph/0611590",
+      "label": "arXiv preprint"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/astro-ph/0611590",
+      "checkedOn": "2026-10-05",
+      "locator": "Table 2, color photometry"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "Icarus 191, 267-285",
+  "creators": [
+    "T. Grav",
+    "J. Bauer"
+  ],
+  "publicationDate": "2007"
+}

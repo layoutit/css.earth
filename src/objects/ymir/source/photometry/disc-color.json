@@ -1,0 +1,99 @@
+{
+  "schema": "cssearth-disc-integrated-color@1",
+  "objectId": "ymir",
+  "object": {
+    "source": "Grav and Bauer (2007), A deeper look at the colors of the Saturnian irregular satellites, Icarus 191, 267-285, doi:10.1016/j.icarus.2007.04.020, arXiv:astro-ph/0611590",
+    "locator": "Table 1 (observing circumstances) and Table 2 (V, B-V, V-R and V-I per night)",
+    "system": "Johnson-Kron-Cousins BVRI",
+    "note": "Inverse-variance mean of 2 nights; each uncertainty is the formal error or the nights' weighted scatter, whichever is larger: 2005-01-06 (Keck I LRIS, Johnson-Kron-Cousins BVRI filters); 2005-04-13 (Gemini North GMOS, SDSS g'r'i'z' filters converted to BVRI by the authors).",
+    "nights": [
+      {
+        "label": "a",
+        "date": "2005-01-06",
+        "instrument": "Keck I LRIS, Johnson-Kron-Cousins BVRI filters",
+        "B-V": {
+          "value": 0.8,
+          "uncertainty": 0.03
+        },
+        "V-R": {
+          "value": 0.45,
+          "uncertainty": 0.02
+        },
+        "V-I": {
+          "value": 0.89,
+          "uncertainty": 0.02
+        }
+      },
+      {
+        "label": "b",
+        "date": "2005-04-13",
+        "instrument": "Gemini North GMOS, SDSS g'r'i'z' filters converted to BVRI by the authors",
+        "B-V": {
+          "value": 0.77,
+          "uncertainty": 0.04
+        },
+        "V-R": {
+          "value": 0.41,
+          "uncertainty": 0.03
+        },
+        "V-I": {
+          "value": 0.86,
+          "uncertainty": 0.04
+        }
+      }
+    ],
+    "indices": {
+      "B-V": {
+        "value": 0.789,
+        "uncertainty": 0.024
+      },
+      "V-R": {
+        "value": 0.438,
+        "uncertainty": 0.018
+      },
+      "V-I": {
+        "value": 0.884,
+        "uncertainty": 0.018
+      }
+    }
+  },
+  "geometricAlbedo": {
+    "source": "Denk et al. (2018), The irregular satellites of Saturn, in Enceladus and the Icy Moons of Saturn (University of Arizona Press)",
+    "locator": "Sizes are computed from absolute magnitude with an assumed albedo of 0.06 (the author's table of irregular moons, note 9)",
+    "band": "V",
+    "value": 0.06,
+    "estimate": true,
+    "test": "Grav et al. (2015), Table 3, measured the two small irregular moons of Saturn NEOWISE detected: Albiorix 6.2 ± 2.8% and Siarnaq 5.0 ± 1.7%. Its eleven irregular moons of Jupiter range from 2.9% to 5.7%.",
+    "note": "Nobody has measured Ymir's albedo. The color is scaled to the value its published size already assumes; a measurement replaces it."
+  },
+  "sun": {
+    "source": "Ramírez et al. (2012), The UBV(RI)C colors of the Sun, ApJ 752, 5, doi:10.1088/0004-637X/752/1/5, arXiv:1204.0828",
+    "locator": "Abstract, model-independent line-depth-ratio solution",
+    "system": "Johnson-Cousins BVRI",
+    "indices": {
+      "B-V": {
+        "value": 0.653,
+        "uncertainty": 0.003
+      },
+      "V-R": {
+        "value": 0.356,
+        "uncertainty": 0.003
+      },
+      "V-I": {
+        "value": 0.701,
+        "uncertainty": 0.003
+      }
+    }
+  },
+  "effectiveWavelengths": {
+    "source": "SVO Filter Profile Service, Generic/Bessell.B, .V, .R and .I, WavelengthEff",
+    "url": "http://svo2.cab.inta-csic.es/theory/fps/fps.php?ID=Generic/Bessell.V",
+    "checked": "2026-09-16",
+    "nanometres": {
+      "B": 438.1,
+      "V": 544.5,
+      "R": 641.1,
+      "I": 798.2
+    }
+  }
+}

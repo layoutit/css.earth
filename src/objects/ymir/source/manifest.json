@@ -5,7 +5,7 @@
       "id": "shape-approximation",
       "path": "shape/model.tab",
       "origin": "https://tilmanndenk.de/outersaturnianmoons/ymir/",
-      "credit": "Denk et al. model constraints; cssEarth approximate envelope and standard grid",
+      "credit": "Denk et al. model constraints; cssEarth approximate envelope",
       "license": "MIT authored approximation from cited scientific constraints",
       "licenseEvidence": [
         "https://tilmanndenk.de/outersaturnianmoons/ymir/"
@@ -33,37 +33,63 @@
       }
     },
     {
-      "id": "model-surface",
-      "path": "material/neutral.png",
-      "origin": "https://tilmanndenk.de/outersaturnianmoons/ymir/",
-      "credit": "Denk et al. model constraints; cssEarth approximate envelope and standard grid",
-      "license": "MIT authored approximation from cited scientific constraints",
-      "licenseEvidence": [
-        "https://tilmanndenk.de/outersaturnianmoons/ymir/"
-      ],
-      "acquisition": "Checked-in numeric approximation; constraints, assumptions, polygon and radial formula in measurements.json.",
-      "redistribution": "Retain source attribution and modeled status.",
+      "id": "ymir-disc-color",
+      "path": "photometry/disc-color.json",
+      "origin": "https://doi.org/10.1016/j.icarus.2007.04.020",
+      "credit": "Grav and Bauer (2007), Icarus 191, 267; albedo Denk et al. (2018), assumed value; solar colors Ramírez et al. (2012), ApJ 752, 5; filter wavelengths SVO Filter Profile Service",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "Transcribed B-V, V-R and V-I per night (Grav and Bauer (2007), Table 2) into packages/bake/authoring/saturn-irregular-colors/inputs.json and combined by packages/bake/authoring/saturn-irregular-colors/author.mts; assumed albedo (Denk et al. 2018); solar color indices and Generic/Bessell effective wavelengths as in src/objects/eris/source/photometry/disc-color.json",
+      "redistribution": "Factual parameter transcription only; no article text or figures",
       "consumers": [
-        "surfaces"
+        "color"
       ],
-      "coverage": "Approximate triangular shape from published 20, 24 and 25 km equatorial sides and an 8 km polar semiaxis. Polar caps and the initial meridian are assumed; the original inversion mesh is unavailable.",
-      "projection": {
-        "type": "equirectangular",
-        "longitudeDirection": "east-positive",
-        "referenceRadiusMeters": 9600
-      },
-      "width": 64,
-      "height": 32,
-      "datasetId": "model",
-      "label": "Shape model",
-      "falseColor": false,
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "source-ymir-model-surface",
+            "catalogueId": "grav-bauer-2007-saturn-irregular-colors",
             "role": "material",
-            "evidence": "Origin and product identifier recorded on this manifest entry."
+            "evidence": "src/objects/ymir/source/photometry/disc-color.json#/object"
+          },
+          {
+            "catalogueId": "denk-2018-irregular-moons",
+            "role": "material",
+            "evidence": "src/objects/ymir/source/photometry/disc-color.json#/geometricAlbedo"
+          },
+          {
+            "catalogueId": "ramirez-2012-solar-colors",
+            "role": "reference",
+            "evidence": "src/objects/ymir/source/photometry/disc-color.json#/sun"
+          },
+          {
+            "catalogueId": "svo-fps-generic-bessell",
+            "role": "reference",
+            "evidence": "src/objects/ymir/source/photometry/disc-color.json#/effectiveWavelengths"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ymir-cie-std-illuminant-d65",
+      "path": "reference/CIE_std_illum_D65.csv",
+      "origin": "https://files.cie.co.at/Publications-datasets/CIE_std_illum_D65.csv",
+      "credit": "International Commission on Illumination (CIE), CIE standard illuminant D65",
+      "license": "CC BY-SA 4.0",
+      "licenseEvidence": [
+        "https://files.cie.co.at/Publications-datasets/CIE_std_illum_D65.csv_metadata_v2.json"
+      ],
+      "acquisition": "Downloaded unchanged; the bytes match the checksum in the CIE dataset metadata",
+      "redistribution": "Unchanged CSV under CC BY-SA 4.0 with attribution",
+      "consumers": [
+        "color"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "cie-std-illuminant-d65",
+            "role": "method",
+            "evidence": "https://files.cie.co.at/Publications-datasets/CIE_std_illum_D65.csv_metadata_v2.json#/checksums"
           }
         ]
       }
@@ -108,7 +134,7 @@
       "id": "prepared-shape-context",
       "path": "presentation/context.png",
       "origin": "https://tilmanndenk.de/outersaturnianmoons/ymir/",
-      "credit": "Denk et al. model constraints; cssEarth approximate envelope and standard grid",
+      "credit": "Denk et al. model constraints; cssEarth approximate envelope",
       "license": "MIT display representation from published scientific measurements; retain source citation.",
       "consumers": [
         "navigation"
@@ -117,14 +143,14 @@
         "generator": "packages/bake/src/objects/layers/terrestrial/radial-snapshot.ts",
         "inputs": [
           "shape-approximation",
-          "model-surface"
+          "ymir-disc-color"
         ],
         "size": 512,
         "longitudeDegrees": 55,
         "latitudeDegrees": 35,
         "ambient": 0.45,
         "diffuse": 0.55,
-        "datasetId": "model"
+        "datasetId": "color"
       },
       "generator": "packages/bake/src/objects/layers/terrestrial/radial-snapshot.ts"
     }

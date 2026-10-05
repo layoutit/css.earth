@@ -39,7 +39,8 @@ export const parseSolidRasterConfig = shape({namespace:text,publicBase:text,
   geometry:optional(shape({radius:number,radiusKm:number,radialTerrain:optional(shape({path:text}))})),
   raster:shape({width:number,height:number,bandCount:number,gutter:number,poleSize:number,reportMissingPixels:optional(boolean),
     observations:array(parseSolidObservation),scientific:optional(array(parseSolidScience)),
-    shapeViews:optional(array(shape({...identity,label:text}))),
+    // A shape view is neutral gray unless `science` names the body's published whole-disc color (shape-material.ts).
+    shapeViews:optional(array(shape({...identity,label:text,science:optional(shape({kind:text,source:text,illuminant:text,qualification:text}))}))),
     surfaceObservations:optional(array(shape(identity))),
     observedColors:optional(array(shape({...identity,profile:requireRecord,monochromeBase:text,photometry:optional(parseColorPhotometry)})))})});
 

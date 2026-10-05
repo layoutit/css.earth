@@ -1,0 +1,97 @@
+{
+  "schema": "cssearth-disc-integrated-color@1",
+  "objectId": "siarnaq",
+  "object": {
+    "source": "Grav and Bauer (2007), A deeper look at the colors of the Saturnian irregular satellites, Icarus 191, 267-285, doi:10.1016/j.icarus.2007.04.020, arXiv:astro-ph/0611590",
+    "locator": "Table 1 (observing circumstances) and Table 2 (V, B-V, V-R and V-I per night)",
+    "system": "Johnson-Kron-Cousins BVRI",
+    "note": "Inverse-variance mean of 2 nights; each uncertainty is the formal error or the nights' weighted scatter, whichever is larger: 2005-01-06 (Keck I LRIS, Johnson-Kron-Cousins BVRI filters); 2005-04-15 (Gemini North GMOS, SDSS g'r'i'z' filters converted to BVRI by the authors).",
+    "nights": [
+      {
+        "label": "a",
+        "date": "2005-01-06",
+        "instrument": "Keck I LRIS, Johnson-Kron-Cousins BVRI filters",
+        "B-V": {
+          "value": 0.87,
+          "uncertainty": 0.01
+        },
+        "V-R": {
+          "value": 0.48,
+          "uncertainty": 0.01
+        },
+        "V-I": {
+          "value": 1.03,
+          "uncertainty": 0.01
+        }
+      },
+      {
+        "label": "b",
+        "date": "2005-04-15",
+        "instrument": "Gemini North GMOS, SDSS g'r'i'z' filters converted to BVRI by the authors",
+        "B-V": {
+          "value": 0.88,
+          "uncertainty": 0.01
+        },
+        "V-R": {
+          "value": 0.49,
+          "uncertainty": 0.01
+        },
+        "V-I": {
+          "value": 1.02,
+          "uncertainty": 0.01
+        }
+      }
+    ],
+    "indices": {
+      "B-V": {
+        "value": 0.875,
+        "uncertainty": 0.007
+      },
+      "V-R": {
+        "value": 0.485,
+        "uncertainty": 0.007
+      },
+      "V-I": {
+        "value": 1.025,
+        "uncertainty": 0.007
+      }
+    }
+  },
+  "geometricAlbedo": {
+    "source": "Grav et al. (2015), NEOWISE: Observations of the irregular satellites of Jupiter and Saturn, ApJ 809, 3, doi:10.1088/0004-637X/809/1/3, arXiv:1505.07820",
+    "locator": "Table 3, visible albedo from the thermal fit to stacked NEOWISE 22 micrometre detections",
+    "band": "V",
+    "value": 0.05,
+    "uncertainty": 0.017
+  },
+  "sun": {
+    "source": "Ramírez et al. (2012), The UBV(RI)C colors of the Sun, ApJ 752, 5, doi:10.1088/0004-637X/752/1/5, arXiv:1204.0828",
+    "locator": "Abstract, model-independent line-depth-ratio solution",
+    "system": "Johnson-Cousins BVRI",
+    "indices": {
+      "B-V": {
+        "value": 0.653,
+        "uncertainty": 0.003
+      },
+      "V-R": {
+        "value": 0.356,
+        "uncertainty": 0.003
+      },
+      "V-I": {
+        "value": 0.701,
+        "uncertainty": 0.003
+      }
+    }
+  },
+  "effectiveWavelengths": {
+    "source": "SVO Filter Profile Service, Generic/Bessell.B, .V, .R and .I, WavelengthEff",
+    "url": "http://svo2.cab.inta-csic.es/theory/fps/fps.php?ID=Generic/Bessell.V",
+    "checked": "2026-09-16",
+    "nanometres": {
+      "B": 438.1,
+      "V": 544.5,
+      "R": 641.1,
+      "I": 798.2
+    }
+  }
+}

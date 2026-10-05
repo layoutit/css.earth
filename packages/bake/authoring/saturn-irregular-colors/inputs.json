@@ -1,0 +1,43 @@
+{
+  "checkedOn": "2026-10-05",
+  "colors": {
+    "catalogueId": "grav-bauer-2007-saturn-irregular-colors",
+    "citation": "Grav and Bauer (2007), A deeper look at the colors of the Saturnian irregular satellites, Icarus 191, 267-285, doi:10.1016/j.icarus.2007.04.020, arXiv:astro-ph/0611590",
+    "short": "Grav and Bauer (2007)",
+    "url": "https://doi.org/10.1016/j.icarus.2007.04.020",
+    "locator": "Table 1 (observing circumstances) and Table 2 (V, B-V, V-R and V-I per night)",
+    "system": "Johnson-Kron-Cousins BVRI",
+    "instruments": {
+      "lris": "Keck I LRIS, Johnson-Kron-Cousins BVRI filters",
+      "gmos": "Gemini North GMOS, SDSS g'r'i'z' filters converted to BVRI by the authors"
+    }
+  },
+  "measuredAlbedo": {
+    "catalogueId": "grav-2015-neowise-irregular-satellites",
+    "citation": "Grav et al. (2015), NEOWISE: Observations of the irregular satellites of Jupiter and Saturn, ApJ 809, 3, doi:10.1088/0004-637X/809/1/3, arXiv:1505.07820",
+    "short": "Grav et al. (2015)",
+    "url": "https://doi.org/10.1088/0004-637X/809/1/3",
+    "locator": "Table 3, visible albedo from the thermal fit to stacked NEOWISE 22 micrometre detections"
+  },
+  "estimatedAlbedo": {
+    "catalogueId": "denk-2018-irregular-moons",
+    "citation": "Denk et al. (2018), The irregular satellites of Saturn, in Enceladus and the Icy Moons of Saturn (University of Arizona Press)",
+    "short": "Denk et al. (2018)",
+    "url": "https://tilmanndenk.de/wp-content/uploads/DenkEtAl2018_IrregularMoons.pdf",
+    "locator": "Sizes are computed from absolute magnitude with an assumed albedo of 0.06 (the author's table of irregular moons, note 9)",
+    "value": 0.06,
+    "test": "Grav et al. (2015), Table 3, measured the two small irregular moons of Saturn NEOWISE detected: Albiorix 6.2 ± 2.8% and Siarnaq 5.0 ± 1.7%. Its eleven irregular moons of Jupiter range from 2.9% to 5.7%."
+  },
+  "bodies": [
+    { "id": "siarnaq", "name": "Siarnaq", "albedo": {"value": 0.05, "uncertainty": 0.017},
+      "nights": [
+        { "label": "a", "date": "2005-01-06", "instrument": "lris", "B-V": [0.87, 0.01], "V-R": [0.48, 0.01], "V-I": [1.03, 0.01] },
+        { "label": "b", "date": "2005-04-15", "instrument": "gmos", "B-V": [0.88, 0.01], "V-R": [0.49, 0.01], "V-I": [1.02, 0.01] }
+      ] },
+    { "id": "ymir", "name": "Ymir",
+      "nights": [
+        { "label": "a", "date": "2005-01-06", "instrument": "lris", "B-V": [0.8, 0.03], "V-R": [0.45, 0.02], "V-I": [0.89, 0.02] },
+        { "label": "b", "date": "2005-04-13", "instrument": "gmos", "B-V": [0.77, 0.04], "V-R": [0.41, 0.03], "V-I": [0.86, 0.04] }
+      ] }
+  ]
+}

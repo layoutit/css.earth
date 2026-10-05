@@ -2,7 +2,7 @@
  * shared material preparer. `packages/bake/cli/refresh-shape-materials.mts <object-id>... | --all [--resume]
  * [--descriptions-only] [--source-root=<path>] [--shard=<index>/<count>]` is its command. The generated solar geometry is
  * written after the packages build, so the host passes it in (`SolarGeometry`). */
-import { retainedShapeAtlas, alternativeForDataset, createRasterEmitter, parseRadialSnapshot, SHAPE_MATERIAL, shapeMaterialRaster, renderRadialSnapshot, parseSolidPreparationSource, loadRadialTerrain, prepareRadialMaterials } from '../objects/layers/terrestrial/index.ts';
+import { retainedShapeAtlas, alternativeForDataset, createRasterEmitter, parseRadialSnapshot, SHAPE_MATERIAL, shapeMaterialRaster, neutralShapeViews, renderRadialSnapshot, parseSolidPreparationSource, loadRadialTerrain, prepareRadialMaterials } from '../objects/layers/terrestrial/index.ts';
 import type { RadialMaterialSurface } from '../objects/layers/terrestrial/index.ts';
 import { shapeMaterialPath } from './paths.ts';
 import { sha256 } from '@cssearth/core/node';
@@ -42,7 +42,7 @@ function describeNeutralMaterial(text: string): string {
 export async function refreshShapeMaterialDescriptions(id: string) {
   const objectDirectory = shapeMaterialPath('src/objects', id), sourceDirectory = resolve(objectDirectory, 'source');
   const recipe = await json(resolve(sourceDirectory, 'preparation/terrestrial.json'));
-  const datasetIds = records(requireRecord(recipe.raster).shapeViews ?? []).map(view => requireString(view.id));
+  const datasetIds = neutralShapeViews(records(requireRecord(recipe.raster).shapeViews ?? [])).map(view => requireString(view.id));
   if (!datasetIds.length) return;
   const contentPath = resolve(sourceDirectory, 'content/object.json'), content = await json(contentPath);
   let edited = false;
@@ -71,7 +71,7 @@ export async function refreshShapeMaterials(id: string, solarGeometry: SolarGeom
   const started = performance.now(), objectDirectory = shapeMaterialPath('src/objects', id), outputDirectory = resolve(objectDirectory, 'prepared');
   const publicDirectory = shapeMaterialPath('public/scenes', id), stage = shapeMaterialPath('output/shape-material-refresh', id);
   const recipePath = resolve(objectDirectory, 'source/preparation/terrestrial.json'), recipeBytes = await readFile(recipePath);
-  const config = parseSolidPreparationSource(JSON.parse(recipeBytes.toString('utf8'))), views = config.raster.shapeViews ?? [];
+  const config = parseSolidPreparationSource(JSON.parse(recipeBytes.toString('utf8'))), views = neutralShapeViews(config.raster.shapeViews);
   if (!views.length) throw new Error(`${id} has no shape-only dataset.`);
   await readAuthoredSources(objectDirectory);
   const originals = new Map<string, Buffer>();

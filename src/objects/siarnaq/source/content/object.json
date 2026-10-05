@@ -36,23 +36,25 @@
   },
   "datasets": {
     "titleKey": "datasets",
-    "defaultDataset": "model",
+    "defaultDataset": "color",
     "labels": {
-      "model": "Shape model"
+      "color": "Color"
     },
     "controls": [
       {
-        "id": "model",
-        "label": "Shape model",
-        "thumbnail": "/scenes/siarnaq/siarnaq-model-thumbnail.webp",
-        "surface": "siarnaq-model-surface@2x.webp",
-        "poles": "siarnaq-model-poles@2x.webp",
+        "id": "color",
+        "label": "Color",
+        "qualification": "Whole-disc color and V geometric albedo from published photometry, painted uniformly; the surface itself is unresolved.",
+        "thumbnail": "/scenes/siarnaq/siarnaq-color-thumbnail.webp",
+        "surface": "siarnaq-color-surface@2x.webp",
+        "poles": "siarnaq-color-surface@2x.webp",
         "source": {
-          "id": "shape-approximation",
+          "id": "siarnaq-disc-color",
           "path": "../manifest.json",
-          "url": "https://tilmanndenk.de/outersaturnianmoons/siarnaq/"
+          "url": "https://doi.org/10.1016/j.icarus.2007.04.020"
         },
-        "notes": "Coarse envelope of the published convex-model views, volume-scaled to a 39 ± 6 km diameter. Projection, depth, polar caps and initial meridian are approximate; this is not the original inversion mesh."
+        "falseColor": false,
+        "notes": "Coarse envelope of the published convex-model views, volume-scaled to a 39 ± 6 km diameter. Projection, depth, polar caps and initial meridian are approximate; this is not the original inversion mesh. One mean color for the whole disc (Grav and Bauer 2007), scaled to the measured 5% geometric albedo; no terrain, albedo pattern or color variation is drawn."
       }
     ]
   },
@@ -80,6 +82,18 @@
       "role": "observations",
       "description": "Cassini ISS observation archive",
       "href": "https://pds-rings.seti.org/cassini/iss/"
+    },
+    {
+      "label": "Grav and Bauer (2007)",
+      "role": "surface",
+      "description": "Whole-disc colors",
+      "href": "https://doi.org/10.1016/j.icarus.2007.04.020"
+    },
+    {
+      "label": "Grav et al. (2015)",
+      "role": "surface",
+      "description": "NEOWISE albedo",
+      "href": "https://doi.org/10.1088/0004-637X/809/1/3"
     }
   ],
   "provenance": {

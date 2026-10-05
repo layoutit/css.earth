@@ -54,6 +54,19 @@
         "https://tilmanndenk.de/wp-content/uploads/619_ymi_4_lc064.txt"
       ],
       "revisitWhen": "An observation view is in scope and the original time-series samples are validated for units, cadence and uncertainties."
+    },
+    {
+      "id": "whole-disc-color",
+      "subject": "Ymir whole-disc color",
+      "status": "included",
+      "finding": "Grav and Bauer (2007), Table 2, measured the unresolved disc: B-V 0.789 ± 0.024, V-R 0.438 ± 0.018, V-I 0.884 ± 0.018 (mean of 2 nights). The shape is painted in that one color (#484541 in sRGB) through the shared disc-integrated-color method, scaled to an assumed 6% geometric albedo, an estimate. It is one mean, not a map.",
+      "revisitWhen": "A measured albedo for Ymir replaces the assumed 6%.",
+      "evidence": [
+        "https://doi.org/10.1016/j.icarus.2007.04.020",
+        "https://tilmanndenk.de/wp-content/uploads/DenkEtAl2018_IrregularMoons.pdf",
+        "https://doi.org/10.1088/0004-637X/809/1/3",
+        "https://github.com/layoutit/css.earth/blob/main/src/objects/ymir/source/photometry/disc-color.json"
+      ]
     }
   ]
 }
