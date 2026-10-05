@@ -1,0 +1,60 @@
+{
+  "schema": "cssearth-raster-recipe@2",
+  "publicBase": "/scenes/eta-carinae/",
+  "sourceWidth": 1024,
+  "sourceHeight": 512,
+  "width": 1024,
+  "height": 512,
+  "latitudeBands": 16,
+  "polarTile": 256,
+  "resample": "density-before-pack",
+  "polarProjection": "orthographic-bilinear",
+  "polesOutput": "eta-carinae-poles-{id}{suffix}.webp",
+  "surfaceMetadata": {
+    "schema": "csseta-carinae-prepared-assets@1"
+  },
+  "thumbnail": {
+    "size": 64,
+    "centerLongitudeDegrees": 0
+  },
+  "surfaces": [
+    {
+      "id": "color",
+      "output": "eta-carinae-surface-{id}{suffix}.webp",
+      "thumbnail": "eta-carinae-dataset-{id}.webp",
+      "source": "photometry/stellar-color.json",
+      "falseColor": false,
+      "science": {
+        "kind": "stellar-photometric-color",
+        "qualification": "Uniform photosphere color from a blackbody at the star's published temperature. No limb darkening is drawn: The light comes from an opaque wind many times larger than the star under it, not from a surface a limb-darkening law describes.. The disc is unresolved: no map or absolute brightness is implied. Self-luminous, so no lighting."
+      }
+    }
+  ],
+  "emission": {
+    "offLimbSize": 600,
+    "limbSize": 512,
+    "bodyDiameter": 496,
+    "offLimbOutput": "eta-carinae-context-{id}{suffix}.webp",
+    "limbOutput": "eta-carinae-limb-{id}{suffix}.webp",
+    "metadata": {
+      "schema": "csseta-carinae-prepared-emission@1",
+      "presentation": "prepared-emissive-surface-with-stationary-off-limb-context-and-limb-plate",
+      "offLimbContext": {
+        "logicalSize": 600,
+        "source": "none: no observation, a transparent plate",
+        "composition": "transparent",
+        "rotation": "none",
+        "runtimeAlphaProcessing": false
+      },
+      "limbMaterial": {
+        "logicalSize": 496,
+        "composition": "transparent: the sphere's own silhouette is the limb; the light just outside it is on the off-limb plate",
+        "surfaceReplacement": false,
+        "runtimeAlphaProcessing": false
+      },
+      "lighting": false,
+      "shadows": false,
+      "runtimeLighting": false
+    }
+  }
+}

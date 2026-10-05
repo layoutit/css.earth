@@ -1,0 +1,51 @@
+{
+  "id": "arxiv-1006-4816",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Groh et al. (2010): Is Eta Carinae a fast rotator, and how much does the companion influence the inner wind structure?",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1006.4816"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1088/2041-8205/716/2/L223"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/1006.4816",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1088/2041-8205/716/2/L223",
+      "label": "Journal version"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/1006.4816",
+      "checkedOn": "2026-10-05",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Groh et al. (2010)",
+      "scope": "citation",
+      "evidence": "https://arxiv.org/abs/1006.4816"
+    }
+  ],
+  "creators": [
+    "Jose H. Groh",
+    "Thomas I. Madura",
+    "Stanley P. Owocki",
+    "et al."
+  ],
+  "publicationDate": "2010"
+}

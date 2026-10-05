@@ -1,0 +1,42 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "eta-carinae",
+  "card": {
+    "text": "Eta Carinae is the star inside the Homunculus Nebula, about 2,350 parsecs away.",
+    "sources": [
+      {
+        "catalogueId": "publication-smith-2006-homunculus-shape",
+        "url": "https://arxiv.org/abs/astro-ph/0602464",
+        "label": "Smith (2006), ApJ 644, 1151",
+        "checked": "2026-10-05",
+        "locator": "The Homunculus's shape and expansion give 2350 ± 50 pc"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Half of its near-infrared light comes from within 4.8 au, about a thousand Suns across; its wind turns opaque at 9,400 K. An unseen companion circles it every 5.54 years.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-1006-4816",
+        "url": "https://arxiv.org/abs/1006.4816",
+        "label": "Groh et al. (2010), arXiv:1006.4816",
+        "checked": "2026-10-05",
+        "locator": "Sect. 4: most of the K-band light comes from a region with a 50% encircled-energy radius of 4.8 AU (Weigelt et al. 2007)"
+      },
+      {
+        "catalogueId": "arxiv-1204-1963",
+        "url": "https://arxiv.org/abs/1204.1963",
+        "label": "Groh et al. (2012), arXiv:1204.1963",
+        "checked": "2026-10-05",
+        "locator": "Table 2: effective temperature 9400 K at Rosseland optical depth 2/3; orbital parameters adopted from Madura et al. (2012). Sect. 1: an eccentric binary with a period of 5.54 yr"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere color",
+      "detail": "From its temperature",
+      "summary": "The color of the star's light."
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "eta-carinae",
+  "angularDiameterMas": 4.08,
+  "angularDiameterSource": "Computed here from the record's radius and distance: 2 x 717,962,400 km at 2350.00 pc = 4.08 mas. No interferometric diameter of this star is used.",
+  "distanceParsecs": 2350,
+  "distanceSource": "Smith (2006), ApJ 644, 1151: 2350 ± 50 pc from the Homunculus's shape and expansion, the distance its nebula's page stands at (https://arxiv.org/abs/astro-ph/0602464): 2350 pc; Gaia DR3 gives this source no parallax (a two-parameter solution)",
+  "radiusKm": 717962400,
+  "radiusSource": "Radius 1032 solar radii from Groh et al. (2010), arXiv:1006.4816, Sect. 4: most of the star's K-band light comes from a region with a 50% encircled-energy radius of 4.8 AU, measured with VLTI/AMBER by Weigelt et al. (2007); 4.8 AU is 1,032 solar radii (https://arxiv.org/abs/1006.4816): 717,962,400 km at 695,700 km per solar radius. No mass is measured, so GM is 0, the records' unpublished value. Temperature 9400 K from Groh et al. (2012), arXiv:1204.1963, Table 2: the primary's effective temperature where its wind turns opaque (Rosseland optical depth 2/3) (https://arxiv.org/abs/1204.1963). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+  "effectiveTemperatureK": 9400,
+  "effectiveTemperatureSource": "Groh et al. (2012), arXiv:1204.1963, Table 2: the primary's effective temperature where its wind turns opaque (Rosseland optical depth 2/3) (https://arxiv.org/abs/1204.1963)",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."
+  }
+}

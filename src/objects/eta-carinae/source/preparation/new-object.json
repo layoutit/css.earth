@@ -1,0 +1,52 @@
+{
+  "id": "eta-carinae",
+  "name": "Eta Carinae",
+  "system": "Homunculus Nebula",
+  "description": "Eta Carinae is the star inside the Homunculus Nebula, about 2,350 parsecs away.",
+  "aliases": [
+    "HD 93308",
+    "HR 4210"
+  ],
+  "parent": "homunculus-nebula",
+  "featured": true,
+  "target": "eta Car",
+  "gaia": "5350358584482202880",
+  "paper": {
+    "url": "https://arxiv.org/abs/1204.1963",
+    "credit": "Groh et al. (2012), arXiv:1204.1963"
+  },
+  "radius": {
+    "value": 1032,
+    "source": "Groh et al. (2010), arXiv:1006.4816, Sect. 4: most of the star's K-band light comes from a region with a 50% encircled-energy radius of 4.8 AU, measured with VLTI/AMBER by Weigelt et al. (2007); 4.8 AU is 1,032 solar radii",
+    "url": "https://arxiv.org/abs/1006.4816"
+  },
+  "mass": "unmeasured",
+  "temperature": {
+    "value": 9400,
+    "source": "Groh et al. (2012), arXiv:1204.1963, Table 2: the primary's effective temperature where its wind turns opaque (Rosseland optical depth 2/3)",
+    "url": "https://arxiv.org/abs/1204.1963"
+  },
+  "distance": {
+    "value": 2350,
+    "source": "Smith (2006), ApJ 644, 1151: 2350 ± 50 pc from the Homunculus's shape and expansion, the distance its nebula's page stands at",
+    "url": "https://arxiv.org/abs/astro-ph/0602464"
+  },
+  "limb": {
+    "none": "The light comes from an opaque wind many times larger than the star under it, not from a surface a limb-darkening law describes."
+  },
+  "planets": [],
+  "companions": [],
+  "notes": [
+    "What is drawn is the star's wind, not its surface. The star under the wind is modelled at 60 solar radii and 35,200 K, and models from 60 to 480 solar radii fit its spectrum equally (Groh et al. 2012, Table 2 and Sect. 3, https://arxiv.org/abs/1204.1963).",
+    "The near-infrared light is not round: VLTI measurements find it elongated, which fast rotation or the companion's cavity in the wind both explain (Groh et al. 2010, https://arxiv.org/abs/1006.4816). It is drawn as a sphere.",
+    "It is a binary with a period of 5.54 years. The companion is not seen directly, and the orbit's tilt and direction come from models of the colliding winds (Madura et al. 2012, as adopted by Groh et al. 2012, Table 2: inclination 138 degrees, longitude of periastron 260 degrees). The companion is not drawn.",
+    "The star's mass is not measured."
+  ],
+  "radialVelocity": {
+    "value": -25,
+    "uncertainty": 2,
+    "source": "SIMBAD's radial velocity for Gaia DR3 5350358584482202880 (quality E), from 1953GCRV..C......0W; Gaia DR3 measures none",
+    "url": "https://ui.adsabs.harvard.edu/abs/1953GCRV..C......0W/abstract"
+  },
+  "order": 5777
+}

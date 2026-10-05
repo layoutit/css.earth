@@ -1,0 +1,30 @@
+{
+ "id": "eta-carinae",
+ "classification": "star",
+ "order": 5777,
+ "physical": {
+  "name": "Eta Carinae",
+  "horizonsCode": null,
+  "meanRadiusKm": 717962400,
+  "gravitationalParameterKm3PerS2": 0,
+  "parent": null,
+  "effectiveTemperatureK": 9400
+ },
+ "physicalNotes": "Radius 1032 solar radii from Groh et al. (2010), arXiv:1006.4816, Sect. 4: most of the star's K-band light comes from a region with a 50% encircled-energy radius of 4.8 AU, measured with VLTI/AMBER by Weigelt et al. (2007); 4.8 AU is 1,032 solar radii (https://arxiv.org/abs/1006.4816): 717,962,400 km at 695,700 km per solar radius. No mass is measured, so GM is 0, the records' unpublished value. Temperature 9400 K from Groh et al. (2012), arXiv:1204.1963, Table 2: the primary's effective temperature where its wind turns opaque (Rosseland optical depth 2/3) (https://arxiv.org/abs/1204.1963). presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.",
+ "star": {
+  "rightAscensionDegrees": 161.2647407537247,
+  "declinationDegrees": -59.68445877770452,
+  "positionEpochJulianYear": 2016,
+  "distanceParsecs": 2350,
+  "properMotionRaMasPerYear": 0,
+  "properMotionDecMasPerYear": 0,
+  "radialVelocityKmPerS": -25,
+  "presentationUp": "display-axis",
+  "sources": {
+   "position": "Gaia DR3 source 5350358584482202880 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/eta-carinae/source/photometry/gaia-dr3-source.csv; cross-identification HD 93308, HR 4210: https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Gaia+DR3+5350358584482202880",
+   "distance": "Smith (2006), ApJ 644, 1151: 2350 ± 50 pc from the Homunculus's shape and expansion, the distance its nebula's page stands at (https://arxiv.org/abs/astro-ph/0602464): 2350 pc; Gaia DR3 gives this source no parallax (a two-parameter solution)",
+   "properMotion": "Gaia DR3 source 5350358584482202880 is a two-parameter solution with no proper motion; zero is assumed (at 2,350 pc, 1 mas/yr would be 11 km/s across the sky)",
+   "radialVelocity": "SIMBAD's radial velocity for Gaia DR3 5350358584482202880 (quality E), from 1953GCRV..C......0W; Gaia DR3 measures none (https://ui.adsabs.harvard.edu/abs/1953GCRV..C......0W/abstract)"
+  }
+ }
+}

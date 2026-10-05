@@ -1,0 +1,81 @@
+{
+  "schema": "cssearth-object-content@2",
+  "version": 1,
+  "id": "eta-carinae",
+  "displayName": "Eta Carinae",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "1032 solar radii",
+        "source": {
+          "catalogueId": "arxiv-1006-4816",
+          "url": "https://arxiv.org/abs/1006.4816",
+          "label": "Groh et al. (2010)",
+          "checked": "2026-10-05",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "2,350 parsecs",
+        "source": {
+          "catalogueId": "publication-smith-2006-homunculus-shape",
+          "url": "https://arxiv.org/abs/astro-ph/0602464",
+          "label": "Smith (2006), ApJ 644, 1151: 2350 ± 50 pc from the Homunculus's shape and expansion, the distance its nebula's page stands at",
+          "checked": "2026-10-05",
+          "path": "source/measurements.json",
+          "locator": "distanceParsecs; distanceSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "datasets": {
+    "titleKey": "datasets",
+    "defaultDataset": "color",
+    "controls": [
+      {
+        "id": "color",
+        "label": "Color",
+        "qualification": "Color of a blackbody at the star's temperature. The disc itself is unresolved.",
+        "thumbnail": "eta-carinae-dataset-color.webp",
+        "surface": "eta-carinae-surface-color@2x.webp",
+        "poles": "eta-carinae-poles-color@2x.webp",
+        "source": {
+          "id": "eta-carinae-stellar-color",
+          "path": "../manifest.json",
+          "url": "https://arxiv.org/abs/1204.1963"
+        },
+        "falseColor": false,
+        "notes": "The color of a blackbody at the star's published temperature. No limb darkening is drawn: The light comes from an opaque wind many times larger than the star under it, not from a surface a limb-darkening law describes.. The spin axis's direction on the sky is a display convention."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Groh et al. (2012), arXiv:1204.1963",
+      "href": "https://arxiv.org/abs/1204.1963"
+    }
+  ],
+  "provenance": {
+    "editorial": {
+      "url": "https://arxiv.org/abs/1204.1963",
+      "credit": "Groh et al. (2012), arXiv:1204.1963"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/eta-carinae.json",
+      "credit": "Groh et al. radius; Gaia DR3 position; cited distance; no measured rotation axis (display convention)"
+    }
+  }
+}

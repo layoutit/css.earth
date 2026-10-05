@@ -1,6 +1,6 @@
 # Homunculus Nebula
 
-The Homunculus Nebula, the two-lobed cloud of dust around the star Eta Carinae, as an object of the world: its place, its card and its list marker. It has no surface of its own here. Its dataset shows the [Homunculus Nebula image layers](../homunculus-nebula-layers/README.md) bank, whose README holds the sources, processing and known problems of the picture.
+The Homunculus Nebula, the two-lobed cloud of dust around the star Eta Carinae, as an object of the world: its place, its card and its list marker. It has no surface of its own here. Its dataset shows the [Homunculus Nebula image layers](../homunculus-nebula-layers/README.md) bank, whose README holds the sources, processing and known problems of the picture. The star is an object of its own inside it, [Eta Carinae](../eta-carinae/README.md).
 
 ## Sources
 
