@@ -126,6 +126,13 @@ gives cloud-top periods, recorded on 16 latitude bands.
 The ultraviolet and methane views use OPAL Cycle 32 F225W and FQ889N maps.
 Preparation keeps rotation A, fills the same unmeasured rows and applies a
 false-color palette. No visible-light detail is added.
+Since 2026-10-05 both maps and their pole atlases are written in the
+[lossy lane](../../../docs/surface-preparation.md#the-lossy-lane): the maps went from
+5.92 and 3.77 MB to 0.23 and 0.14 MB with 0 and 3 of 12.8 million pixels flagged by
+pixelmatch at threshold 0.1, the atlases from 0.39 and 0.35 MB to 0.04 MB each with
+none flagged and their alpha exact. Decoding a lossless map took 130 to 141 ms inside
+the frame of a dataset switch on an iPad; a switch to either view is now 93 to 105 ms
+(was 193 to 233).
 The FQ889N identification follows the
 [WFC3 UVIS filter reference](https://hst-docs.stsci.edu/wfc3ihb/chapter-6-uvis-imaging-with-wfc3/6-5-uvis-spectral-elements).
 There is no thermal view: no measured global thermal raster of Saturn is
