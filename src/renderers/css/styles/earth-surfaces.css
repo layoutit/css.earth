@@ -51,7 +51,6 @@
   animation-play-state: paused;
 }
 
-:where(.object-stage[data-object-id="earth"]) .earth-body-polar > s,
 /* Out of the layer tree until the interior view: hidden 3D leaves still cost a composited layer each. */
 :where(.object-stage[data-object-id="earth"]) .earth-cutaway {
   display: none;
