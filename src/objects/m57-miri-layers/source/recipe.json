@@ -1,0 +1,102 @@
+{
+  "schema": "cssearth-image-layer-recipe@1",
+  "id": "m57-miri-layers",
+  "source": {
+    "path": "source.jpg",
+    "dimensions": [
+      1257,
+      1015
+    ],
+    "originalDimensions": [
+      1257,
+      1015
+    ],
+    "publisherUrl": "https://esawebb.org/images/weic2320c/",
+    "downloadUrl": "https://cdn.esawebb.org/archives/images/large/weic2320c.jpg",
+    "credit": "ESA/Webb, NASA, CSA, M. Barlow, N. Cox, R. Wesson",
+    "license": "CC-BY-4.0"
+  },
+  "observation": {
+    "centerRaDeg": 283.396433,
+    "centerDecDeg": 33.0290199,
+    "fieldOfViewDeg": [
+      0.03879823,
+      0.03132872
+    ],
+    "northClockwiseDeg": 132.92
+  },
+  "target": {
+    "centerRaDeg": 283.39624524513,
+    "centerDecDeg": 33.02914523473,
+    "distancePc": 790.014153719229
+  },
+  "geometry": {
+    "kind": "inclined-disk",
+    "inclinationDeg": 0.001,
+    "lineOfNodesPaDeg": 218.521,
+    "thicknessKpc": 2.67e-7,
+    "depthWeights": [
+      0.25,
+      0.5,
+      0.25
+    ],
+    "supportRadiusKpc": 0.00021295,
+    "supportTaperFraction": 0.9,
+    "depthScales": [
+      1,
+      1,
+      1
+    ],
+    "unit": "pc",
+    "shape": {
+      "source": "publication-odell-2013-ring-nebula-structure",
+      "basis": "Wesson et al. (2024): the central cavity emits mainly in the 10 and 25 µm filters, which hold the high-excitation [S IV] (35 eV) and [O IV] (55 eV) lines (Sect. 4.1); the 18 µm filter is dominated by [S III] and the 10 µm one by [S IV]; the 5.6 and 7.7 µm filters, which show the halo, are dominated by molecular hydrogen. The release shows 5.6 µm in purple, 7.7 in blue, 10 and 11 in cyan, 12 and 15 in green, 18 in yellow, 21 in orange and 25 in red. The ionised gas's shell is O'Dell et al.'s (2013, Sect. III.1 and III.3), as in the Hubble dataset: semi-axes 44 and 30 arcsec along position angle 60 degrees and across it, the pole tipped 6.5 degrees from the line of sight, expansion of 0.65 km/s per arcsec; the Main Ring 19 km/s in [N II] and [S II] and 9 km/s in [O III]; the Lobes 36 km/s in [N II], 28 in [O III] and 20 in He II. Which of those speeds each color takes is chosen here by the gas it shows. In the Main Ring the red and green channels, ionised gas with [S III] its brightest line, take the ring's [N II] and [S II] speed, 19 km/s: [S III] is the shell's lower-ionisation light, against the cavity's [S IV]. The blue channel there, molecular hydrogen, takes the molecular shell's speed along the sight line, 24.6 km/s (Kastner et al. 2025, Sect. IV: 0.82 of 30 km/s). Through the shell's opening, 19.7 arcsec from the star, the red channel is [O IV], made by the 55 eV that also makes He II, and takes the Lobes' He II speed, 20 km/s; the green and blue channels, with [S IV] at the 35 eV that also makes [O III], take the Lobes' [O III] speed, 28 km/s. The smooth light is read over 16 face pixels, a presentation value.",
+      "expansionKmSPerArcsec": 0.65,
+      "ring": {
+        "semiMajorArcsec": 44,
+        "semiMinorArcsec": 30,
+        "majorPaDeg": 60,
+        "polarTiltDeg": 6.5,
+        "polarLeansToPaDeg": 240,
+        "expansionKmS": [
+          19,
+          19,
+          24.6
+        ]
+      },
+      "lobe": {
+        "source": "publication-kastner-2025-ring-nebula-molecular-envelope",
+        "radiusArcsec": 19.7,
+        "expansionKmS": [
+          20,
+          28,
+          28
+        ]
+      },
+      "smoothPixels": 16
+    }
+  },
+  "bake": {
+    "maxFacePixels": 1257,
+    "crossAxisSlices": 32,
+    "crossAxisDepthPixels": 97,
+    "backgroundFloor": 0.03,
+    "encoding": {
+      "format": "webp",
+      "quality": 70,
+      "alphaQuality": 80
+    },
+    "diffuseFacePixels": 80,
+    "crossAxisAlongPixels": 384,
+    "edgeTaperFraction": 0.04,
+    "diffuseFraction": 0.65,
+    "diffuseSigmaPixels": 2,
+    "flat": true,
+    "bulgeSlices": 56,
+    "bulgeFacePixels": 256,
+    "bulgeCrossSlices": 56
+  },
+  "provenance": {
+    "path": "provenance.json"
+  }
+}

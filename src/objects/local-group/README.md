@@ -1,6 +1,6 @@
 # Local Group
 
-The Local Group as an object of the world: its place (the mid-point of the Milky Way and M31), its card and its list marker. It has no surface. What the world draws of it, one dot per catalogued galaxy, is the [Local Group galaxies](../local-group-galaxies/README.md) bank, whose README holds the sources, processing, evidence and known problems.
+The Local Group as an object of the world: its place (the mid-point of the Milky Way and M31), its card and its list marker. It has no surface. What the world draws of it, one dot per catalogued galaxy, is the [Local Group galaxies](../local-group-galaxies/README.md) bank, whose README holds the sources, processing, evidence and known problems. The [Local Group's structures](../local-group-structures/README.md) field adds the cluster systems of M31 and the Milky Way, the Magellanic Clouds' star clusters and the Sagittarius stream.
 
 It is inside the Nearby Universe, and the Milky Way and Andromeda are inside it ([object.json](object.json) `parent`; McConnachie 2012 puts the Magellanic Clouds in the Milky Way's subgroup and Triangulum in Andromeda's). It is seen from inside ([object.json](object.json) `zoom`): zooming out of anything inside it far enough hands the view to this object, with the camera kept where it was and still centred on the star the zoom started from.
 

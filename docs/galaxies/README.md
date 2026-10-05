@@ -52,7 +52,7 @@ The Milky Way overview enables the galaxy's prepared depth layers; other destina
 
 ## Cluster dots
 
-Galaxies draw their catalogued star clusters as dots, each at its published position on the sky. On a flat picture a dot lies on the picture's disc or plane and takes its tone from the photograph. Through a volume it sits at a depth drawn from the volume's spheroid. [M31's globular clusters](../../src/objects/m31-globular-clusters/README.md) are a bank of their own, spread in depth by the cluster system's published radial profile out to 150 kpc. No cluster's depth is measured. Each bank's README names its table and counts the clusters that lie beyond its photograph.
+Galaxies draw their catalogued star clusters as dots, each at its published position on the sky. On a flat picture a dot lies on the picture's disc or plane and takes its tone from the photograph. Through a volume it sits at a depth drawn from the volume's spheroid. [M31's globular clusters](../../src/objects/m31-globular-clusters/README.md) are a bank of their own, spread in depth by the cluster system's published radial profile out to 150 kpc. No cluster's depth is measured. Each bank's README names its table and counts the clusters that lie beyond its photograph. From outside the Milky Way the world also draws the [Local Group's structures](../../src/objects/local-group-structures/README.md): the cluster systems of M31 and the Milky Way, the Magellanic Clouds' star clusters and the Sagittarius stream, under 4,000 dots in one file.
 
 ![Thirteen galaxies with their cluster dots as their pages open, and M31 pulled back](../images/galaxies/cluster-dots.webp)
 

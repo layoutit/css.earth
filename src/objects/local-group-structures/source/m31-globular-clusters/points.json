@@ -1,0 +1,80 @@
+{
+  "schema": "cssearth-catalogue-points-source@1",
+  "id": "m31-globular-clusters",
+  "table": {
+    "path": "../../../m31-globular-clusters/source/dots/table1.dat",
+    "origin": "https://cdsarc.cds.unistra.fr/ftp/J/ApJ/824/42/table1.dat",
+    "bytes": 38367,
+    "format": "fixed-width",
+    "columns": {
+      "name": [
+        1,
+        10
+      ],
+      "raH": [
+        12,
+        13
+      ],
+      "raM": [
+        15,
+        16
+      ],
+      "raS": [
+        18,
+        22
+      ],
+      "decSign": [
+        24,
+        24
+      ],
+      "decD": [
+        25,
+        26
+      ],
+      "decM": [
+        28,
+        29
+      ],
+      "decS": [
+        31,
+        34
+      ]
+    }
+  },
+  "filters": [],
+  "frame": {
+    "input": "icrs",
+    "output": "sun-icrf",
+    "epochJdTt": 2461286.5,
+    "placement": "spheroid",
+    "seed": "dots",
+    "converter": "Each sky position at a depth drawn from the halo's density along its sight line (frame.spheroid.projectedPowerLaw), seeded as M31's own bank is (frame.seed), so a cluster sits at the same place in both.",
+    "spheroid": {
+      "centerRaDeg": 10.683916666666665,
+      "centerDecDeg": 41.26566666666666,
+      "distancePc": 776247.116629,
+      "projectedPowerLaw": {
+        "indices": [
+          -0.8,
+          -2.88,
+          -2.37
+        ],
+        "breaksKpc": [
+          5,
+          25
+        ],
+        "endKpc": 150
+      },
+      "source": "mackey-2019-m31-outer-halo-clusters",
+      "basis": "No cluster's distance is used: each depth is drawn from the system's published radial profile, taken as round. Projected surface density falls as a power law of index -0.80 +/- 0.10 inside about 5 kpc and -2.88 +/- 0.13 from there to the break (Huxor et al. 2011, Sect. 3.3, their Fig. 7), and -2.37 +/- 0.17 from 25 to 150 kpc (Mackey et al. 2019, Sect. 3.1, their Fig. 4, which replaces Huxor et al.'s outer slope with the whole PAndAS survey). A round system with a projected power law of index G has a space density of index G - 1; the three ranges are joined at 5 and 25 kpc, and the density ends at 150 kpc, where Mackey et al.'s profile ends. Mackey et al. take the halo beyond 25 kpc as close to spherical (their footnote 5, after Gilbert et al. 2012 and Ibata et al. 2014); nearer in, Caldwell & Romanowsky (2016) find that the metal-rich clusters lie and move like M31's disc, so the round profile is an assumption there. Huxor et al. call their broken power law a poor description at intermediate radii, and say the flat inner range may be clusters missed against the bright bulge; here the profile only spreads the clusters in depth. Centre and distance are M31's own in the world (its astronomy record: the Local Volume Database's position, 776.2 kpc)."
+    }
+  },
+  "source": "caldwell-2016-m31-globular-clusters",
+  "meaning": "M31's globular clusters from Caldwell & Romanowsky's (2016) table, from the bulge out to the far halo: one dot per cluster at its catalogue sky position, at the depth M31's own cluster bank draws for it.",
+  "appearance": {
+    "colorCss": "#ffb38a",
+    "radiusPx": 1,
+    "opacity": 1,
+    "note": "Presentation only: the Milky Way globular clusters' warm orange."
+  }
+}

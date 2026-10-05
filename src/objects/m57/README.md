@@ -1,6 +1,6 @@
 # Ring Nebula
 
-Ring Nebula as an object of the world: its place, its card and its list marker. It has no surface. Its two datasets show the [Ring Nebula image layers](../m57-layers/README.md) bank, Hubble's picture, and the [near-infrared layers](../m57-nircam-layers/README.md) bank, Webb's; each README holds the sources, processing and known problems of its picture.
+Ring Nebula as an object of the world: its place, its card and its list marker. It has no surface. Its three datasets show the [Ring Nebula image layers](../m57-layers/README.md) bank, Hubble's picture, and the [near-infrared layers](../m57-nircam-layers/README.md) and [mid-infrared layers](../m57-miri-layers/README.md) banks, Webb's two; each README holds the sources, processing and known problems of its picture.
 
 ## Sources
 
