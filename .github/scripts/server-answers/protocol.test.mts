@@ -4,6 +4,7 @@ import test from 'node:test';
 import handleFindRequest from '../../../netlify/functions/find.ts';
 import handleSearchRequest from '../../../netlify/functions/search.ts';
 import edgeRoute from '../../../netlify/edge-functions/search-route.ts';
+import { handleSearchRequest as handleSearchWith } from '../../../site/server/search-response.mts';
 import worker from '../../../cloudflare/worker.ts';
 import { expectation } from './expectations.mts';
 
@@ -74,11 +75,9 @@ test('real rewritten page removes every static validator and transport header', 
     '<div class="object-selected-content"><section class="object-information-panel"></section></div></div>' +
     '<!--search-shell:end--></body></html>';
   const headers = { 'content-type': 'text/html', 'content-length': String(page.length), 'content-encoding': 'gzip', etag: '"static"', 'last-modified': 'Tue, 01 Jan 2000 00:00:00 GMT', expires: 'Tue, 01 Jan 2000 00:00:00 GMT' };
-  const original = globalThis.fetch;
-  globalThis.fetch = async () => new Response(page, { headers });
-  let response: Response;
-  try { response = await handleSearchRequest(new Request('https://answers.invalid/.netlify/functions/search?object=earth&q=europa')); }
-  finally { globalThis.fetch = original; }
+  // The real handler with injected data and fetcher: the built catalogue (`dist/`) is not needed, so the test runs on a clean checkout.
+  const data = { pin: null, read: async () => { throw new Error('unused'); }, catalogue: async () => [] };
+  const response = await handleSearchWith(new Request('https://answers.invalid/.netlify/functions/search?object=earth&q=europa'), data, async () => new Response(page, { headers }));
   assert.equal(response.status, 200);
   for (const name of ['content-length', 'content-encoding', 'etag', 'last-modified', 'expires']) assert.equal(response.headers.get(name), null, name);
 });
