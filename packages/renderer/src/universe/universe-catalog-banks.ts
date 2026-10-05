@@ -5,6 +5,7 @@ import { type WorldCameraPose } from '@cssearth/engine';
 import type { WorldCameraViewport } from '../navigation/world-camera.js';
 import { mountPreparedCssImageLayers } from '../image-layers/prepared-image-layer-runtime.js';
 import { outsideVolumeOpacity, projectedVolumeOpacity, volumeFramingRadiusUnits } from '../volume/projected-volume-visibility.js';
+import { STACK_OPACITY_CEILING } from '../volume/prepared-volume-runtime.js';
 import { mountPreparedGalaxyCatalog } from './prepared-galaxy-catalog.js';
 import { mountDatasetBillboards } from './dataset-billboards.js';
 import { mountCataloguePoints } from './catalogue-points.js';
@@ -224,8 +225,11 @@ export function createUniverseCatalogBanks({ root, end, stage, lifetime, declara
           bank.dotsShown = dotOpacity > 0;
         }
         if (opacity !== bank.publishedOpacity) {
-          bank.mounted.root.style.opacity = String(opacity);
-          if (opacity > 0 && bank.mounted.root.style.display === 'none') bank.mounted.revealLarge();
+          // Never 1 (STACK_OPACITY_CEILING), as a stack's own opacity: Safari paints every leaf under the root again when its
+          // opacity leaves or reaches 1. Cassiopeia A's 1,397 leaves made a frame of 180 to 208 ms each way with the camera
+          // still on an iPad, and none between 0.999 and 0.99 (2026-10-05): the first frames of every zoom out of a nebula.
+          bank.mounted.root.style.opacity = String(Math.min(STACK_OPACITY_CEILING, opacity));
+          if (opacity > 0 && bank.mounted.root.style.display === 'none') bank.mounted.resume();
           bank.mounted.root.style.display = opacity > 0 ? '' : 'none';
           bank.publishedOpacity = opacity;
         }

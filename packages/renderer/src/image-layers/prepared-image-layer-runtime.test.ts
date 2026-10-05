@@ -90,6 +90,55 @@ test('image textures are demanded once when their retained axis first contribute
   assert.equal(resolveResource.mock.callCount(), 2);
 });
 
+test('a stack coming into the drawing stays hidden until its images are decoded, and one that left first never shows', async () => {
+  // Each decode is held until the test settles it: the document's Image is what the runtime asks.
+  const waiting: { src: string; settle(): void }[] = [];
+  class HeldImage { src = ''; decode() { return new Promise<void>(settle => { waiting.push({ src: this.src, settle }); }); } }
+  const document = Object.assign(new ImageDocument(), { defaultView: { Image: HeldImage } }), host = document.createElement(), before = document.createElement();
+  host.appendChild(before);
+  const style = { width: '1px', height: '1px', transform: 'translate3d(0,0,0)', backgroundSize: '1px 1px', backgroundPosition: '0px 0px' };
+  const payload: PreparedCssImageLayers = {
+    schema: 'cssearth-css-volume@1', id: 'fixture',
+    frame: { referenceFrame: 'fixture', epochJdTt: 123, originM: [0, 0, 0], localToReferenceXyzw: [0, 0, 0, 1],
+      metersPerUnit: 1, boundsUnits: { min: [-1, -1, -1], max: [1, 1, 1] } },
+    anchors: [], bankViews: views,
+    stacks: views.map(({ axis }) => ({ axis, leaves: ['a', 'b'].map(id => ({ id: `${axis}-${id}`, centerUnits: [0, 0, 0] as [number, number, number], texturePath: `${axis}.png`, widthPx: 1, heightPx: 1, style })) })),
+    resources: views.map(({ axis }) => ({ path: `${axis}.png`, bytes: 1, width: 1, height: 1 })),
+    provenance: {}, approximation: {},
+  };
+  const runtime = mountPreparedCssImageLayers({ host: host as unknown as HTMLElement, before: before as unknown as Element, payload, resolveResource: path => `/prepared/${path}` });
+  const bank = (axis: string) => document.elements.find(element => element.dataset.imageLayerAxis === axis)!;
+  const publish = (orientationXyzw: readonly [number, number, number, number]) => runtime.publish({
+    world: { referenceFrame: 'fixture', epochJdTt: 123, pose: { positionM: [0, 0, 10], orientationXyzw } },
+    viewport: { focalPixels: 600, principalOffsetPixels: [0, 0] },
+  });
+  const settle = async () => { for (const each of waiting.splice(0)) each.settle(); await new Promise(done => setTimeout(done, 0)); };
+  publish([0, 0, 0, 1]);
+  // In the drawing, its images on its leaves and one decode asked for each image, but not painted yet.
+  assert.deepEqual([bank('z').style.display, bank('z').style.visibility, waiting.map(each => each.src)], ['', 'hidden', ['/prepared/z.png']]);
+  publish([0, 0, 0, 1]);
+  assert.equal(bank('z').style.visibility, 'hidden', 'a later frame does not show it early');
+  await settle();
+  assert.equal(bank('z').style.visibility, 'visible');
+  // Turned to another stack and away again before its images are ready: its late decode shows nothing.
+  publish([Math.SQRT1_2, 0, 0, Math.SQRT1_2]);
+  assert.deepEqual([bank('y').style.visibility, waiting.map(each => each.src)], ['hidden', ['/prepared/y.png']]);
+  publish([0, 0, 0, 1]);
+  assert.deepEqual([bank('y').style.display, bank('z').style.visibility], ['none', 'hidden'], 'the stack turned back to waits for its own decode again');
+  const late = waiting.splice(0, 1);
+  for (const each of late) each.settle();
+  await new Promise(done => setTimeout(done, 0));
+  assert.equal(bank('y').style.visibility, 'hidden');
+  await settle();
+  assert.equal(bank('z').style.visibility, 'visible');
+  // The bank root shown again: the stack it draws waits once more.
+  runtime.resume();
+  publish([0, 0, 0, 1]);
+  assert.equal(bank('z').style.visibility, 'hidden');
+  await settle();
+  assert.equal(bank('z').style.visibility, 'visible');
+});
+
 test('around a body, a sheet within one sampling step of the camera is left out, by its prepared corners, and draws again farther away', () => {
   const document = new ImageDocument(), host = document.createElement(), before = document.createElement();
   host.appendChild(before);
