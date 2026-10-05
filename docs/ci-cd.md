@@ -144,6 +144,13 @@ later introduced the current pattern and documented its checked consumers and
 original nebula exception. Neither an older timing nor the smaller checkout alone proves
 that today's required feedback meets the budget; measure the current workflow.
 
+## Server answer comparison
+
+The local [server answers safety net](server-answers.md) records and compares real preview middleware and built
+deployment handlers, checks baseline sanity and verifies the observed Netlify package closure. Its guide supplies
+the base/head job sequence, normalisations, mutation replay and measured offline coverage. The site safety-net
+workflow should call this runner after both builds.
+
 ## Adding tests
 
 Selection belongs in the existing test runner's configuration or
