@@ -1,0 +1,25 @@
+{
+  "schema": "journey-breakage@1",
+  "id": "duplicate-fetch",
+  "description": "Issue a second real request for every startup URL, retaining the original response for readers.",
+  "expectedFamilies": [
+    "network"
+  ],
+  "journeys": [
+    "milky-way",
+    "dione"
+  ],
+  "profiles": [
+    "chromium-desktop",
+    "webkit-desktop"
+  ],
+  "substitutions": [
+    {
+      "file": "site/startup-requests.mts",
+      "before": "    const response = fetch(url);",
+      "after": "    const response = fetch(url);\n    void fetch(url).catch(() => {});",
+      "occurrences": 1
+    }
+  ],
+  "limitation": "Each startup URL is issued twice; the canonical request count must rise from one to two. Native metadata and parser text can also differ. The network count is the targeted signal."
+}

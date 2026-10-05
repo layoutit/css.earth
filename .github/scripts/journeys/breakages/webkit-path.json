@@ -1,0 +1,24 @@
+{
+  "schema": "journey-breakage@1",
+  "id": "webkit-path",
+  "description": "Throw from the real startup entry point only for Safari/WebKit user agents, excluding Chromium and Edge.",
+  "expectedFamilies": [
+    "errors"
+  ],
+  "journeys": [
+    "milky-way",
+    "dione"
+  ],
+  "profiles": [
+    "webkit-desktop"
+  ],
+  "substitutions": [
+    {
+      "file": "site/startup-boot.mts",
+      "before": "export function startBodyCode(document: Document) {",
+      "after": "export function startBodyCode(document: Document) {\n  const journeyAgent = document.defaultView?.navigator.userAgent ?? \"\";\n  if (/AppleWebKit/u.test(journeyAgent) && /Safari/u.test(journeyAgent) && !/Chrome|Chromium|Edg/u.test(journeyAgent)) throw new Error(\"Deliberate WebKit startup breakage\");",
+      "occurrences": 1
+    }
+  ],
+  "limitation": "Synthetic user-agent-specific fault injection in startup, not coverage of an existing browser-specific feature branch. Chromium is the negative control; WebKit should save page and journey-assertion errors."
+}
