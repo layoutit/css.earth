@@ -82,7 +82,8 @@ export function selectionAtCamera({ world, viewport, objects, systems, objectId,
 /** The selection the camera frames from the scene of body `objectId` when it is not the committed one, farthest first:
  * out of the body, its star's system or the object it is inside (selectionAtCamera); short of that, its planet's
  * system or its own moons' (satelliteSelectionAtCamera); and back in, the body. Null while the camera frames
- * `selection` still. A system is named by its own object id. */
+ * `selection` still. A system is named by its own object id. A zoom in past the scene's near limit is the watcher's
+ * (watchCameraSelection `inward`). */
 export function framedAtCamera({ selection, optics, ...facts }: Omit<Parameters<typeof selectionAtCamera>[0], 'overview'> & {
   /** The committed selection of the mounted scene: the body, or its system. */
   selection: SceneSubject;
@@ -98,13 +99,19 @@ export function framedAtCamera({ selection, optics, ...facts }: Omit<Parameters<
  * is reported at once. A crossing is reported once, until the camera comes back (`onReturn`) or frames another: what it
  * names (another scene, or the body's own system or the body itself, which share the mounted scene) takes the card and
  * the address only when the camera rests (scene/camera-handover.mts), and this watcher goes on with the committed
- * selection until then. */
+ * selection until then.
+ *
+ * A zoom in on an object whose walls surround a body (`inner`: a nebula and its central star) goes on into that body: once
+ * the camera is as near as the object's scene lets it come, the body's scene takes the view where the camera is, draws the
+ * walls around it, and has the rest of the way in. Zooming back out returns the same way (`inside`). */
 export function watchCameraSelection({ navigation, objects, systems, objectId, getSelection, isAvailable,
-  onChange, onReturn, windowTarget, inside }: { navigation: ObjectWorldNavigation; objects: readonly Pick<ObjectEntry, 'id' | 'worldFrame'>[]; systems: SystemObjects; objectId: string;
+  onChange, onReturn, windowTarget, inside, inner }: { navigation: ObjectWorldNavigation; objects: readonly Pick<ObjectEntry, 'id' | 'worldFrame'>[]; systems: SystemObjects; objectId: string;
   /** The committed selection of the mounted scene. */
   getSelection(): SceneSubject; isAvailable(): boolean;
   /** The object the body is inside, when it has a scene of its own; asked on each camera, as its entry may be read late. */
   inside?(): InsideBody | null;
+  /** The body the mounted object's walls surround, once the page has read it (object-directory.mts `knownInner`). */
+  inner?(): string | null;
   /** `landed`: a flight to a framing has just landed here, so the camera is at rest. */
   onChange(selection: SceneSubject, landed: boolean): void;
   /** The camera frames the committed selection again after a crossing was reported. */
@@ -122,8 +129,16 @@ export function watchCameraSelection({ navigation, objects, systems, objectId, g
   };
   // What every reading of the camera is asked with.
   const facts = (publication: SelectionPublication) => ({ ...publication, objects, systems, objectId, inside: inside?.() ?? null, restRangeM: restRangeM ?? 0 });
+  // The zoom in has reached the scene's near limit, on the body's own selection. Not where the scene came to rest: a page
+  // opened on its nearest view stays the object's, and a camera handed in from the body it surrounds is on its way out.
+  const inward = (publication: SelectionPublication): SceneSubject | null => {
+    const body = inner?.() ?? null;
+    return body !== null && getSelection().objectId === objectId && navigation.nearest?.() === true
+      && restRangeM !== null && range(publication.world) < restRangeM ? { objectId: body } : null;
+  };
   const framed = (publication: SelectionPublication, landed = false) =>
-    framedAtCamera({ ...facts(publication), selection: getSelection(), optics: navigation.optics?.() ?? null, landed });
+    framedAtCamera({ ...facts(publication), selection: getSelection(), optics: navigation.optics?.() ?? null, landed })
+      ?? (landed ? null : inward(publication));
   /** Whether the camera is clearly past an exit out of the body: no wait is needed to know it has left. */
   const clearlyOut = (publication: SelectionPublication) => zoomStepOf(getSelection()) === null
     && selectionAtCamera({ ...facts(publication), overview: false, exitScale: policy.clearExitScale }) !== null;

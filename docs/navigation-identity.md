@@ -34,7 +34,10 @@ body from outside, so it takes the view once the camera is outside it: as far fr
 the body as that object's centre and its radius. A star of the Large Magellanic Cloud
 zooms out into the Cloud, M87* into M87, M87 into the Virgo Cluster. That scene is
 then left the way any body's is ([overview-selection.mts](../site/overview-selection.mts),
-[inside-view.mts](../site/inside-view.mts)). A system can be inside another: a star
+[inside-view.mts](../site/inside-view.mts)). The way back in needs no click where the object's walls
+surround a body: its entry names that body (`inner`, [surrounded-body.mts](../site/surrounded-body.mts)), and
+a zoom in that reaches the nearest view the object's scene allows goes on into the body's scene, which draws
+the walls around it. The Homunculus Nebula zooms in to Eta Carinae, NGC 2392 to HD 59088. A system can be inside another: a star
 bound to another, with bodies of its own, hosts its system inside that star's. The
 brown dwarfs Epsilon Indi Ba and Bb are Epsilon Indi B, inside Epsilon Indi A's
 system, and zooming out of Epsilon Indi B hands the view to that system the same way.

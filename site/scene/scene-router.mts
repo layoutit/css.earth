@@ -30,7 +30,7 @@ import { createCameraMotion } from '@cssearth/renderer/navigation';
 import { WORLD_HOST_ID, namesSystem } from '../navigation/navigation-scope.mts';
 import { systemHostId } from '../navigation/system-address.mts';
 import { insideBody, pastCentreGalaxy, setZoomCentre, zoomStepOf } from '../inside-view.mts';
-import { loadAncestors, loadHolder } from '../object-directory.mts';
+import { knownInner, loadAncestors, loadHolder, loadInner } from '../object-directory.mts';
 import { bodyInView, createCameraHandover } from './camera-handover.mts';
 import { OVERVIEW_SELECTION_POLICY } from '../runtime-policy.mts';
 import { createNavigationTiming } from '../navigation/navigation-timing.mts';
@@ -754,8 +754,8 @@ export function createSceneRouter({
       .catch((error: unknown) => { if (!session.signal.aborted) reportError(error); });
   }
   /** One watcher follows the camera on a body's scene: out to its own system, its planet's or its star's, out to the
-   * object it is inside, and back onto the body. The scene of an object seen from inside is left by zooming
-   * (followSelectionCamera), not by this watcher. */
+   * object it is inside, back onto the body, and in to the body its walls surround. The scene of an object seen from
+   * inside is left by zooming (followSelectionCamera), not by this watcher. */
   function connectCameraSelection(ready: RouterContext, session: Session) {
     const owner = session.mount?.navigation;
     if (!owner) return;
@@ -763,8 +763,11 @@ export function createSceneRouter({
     // The object the mounted body is inside is read now, when the page has not read it (another galaxy): it takes the view
     // as the camera backs out of the body.
     void loadHolder(objectId).catch(error => console.error(`The object ${objectId} is inside could not be read; zooming out of it skips it.`, error));
+    // The body its walls surround is read too, when its entry names one: it takes the view as the camera zooms in on it.
+    void loadInner(objectId).catch(error => console.error(`The body inside ${objectId} could not be read; zooming in on it stops at its nearest view.`, error));
     const watch = registry.watchCameraSelection({ navigation: owner, objects: registry.SCENE_OBJECTS, systems: objects, objectId,
       inside: () => { const frame = insideBody(objectId)?.worldFrame, id = insideBody(objectId)?.id; return frame && id !== undefined ? { id, originM: frame.originM, radiusM: frame.bodyRadiusM } : null; },
+      inner: () => knownInner(objectId)?.id ?? null,
       getSelection: () => current.context,
       // The pending flight owns the camera; repeat-click bookkeeping must not
       // suppress zoom-out deselection after that flight has finished.

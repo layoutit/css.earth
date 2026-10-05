@@ -21,6 +21,8 @@ export interface ObjectWorldNavigation {
   setZoomOutCentering?(enabled: boolean): void;
   /** A wider scene can take the camera over as it zooms out: this scene's own far limit does not stop the zoom. */
   setZoomOutOpen?(open: boolean): void;
+  /** Whether the camera is as near the body as this scene lets it come: a zoom in has reached the scene's near limit. */
+  nearest?(): boolean;
   /** The signed log rate per millisecond a wheel zoom is moving the camera at now (positive recedes), 0 at rest. */
   zoomRate?(): number;
   /** Take up a zoom carried from the scene before this one: glide on from that rate. */

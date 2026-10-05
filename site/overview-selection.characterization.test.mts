@@ -40,3 +40,29 @@ test('unavailable camera publications preserve a crossing until an available ret
   dispose(); assert.equal(unsubscribed, 1);
   dispose.refresh(); assert.equal(changes.length, 1);
 });
+
+test('a zoom in that reaches the near limit goes on into the body the walls surround', () => {
+  // A nebula of radius 1 with nothing it is inside but the Sun's world, opened from 3 radii out.
+  const nebula = frame(1000 * au), around = [...objects, objectFixture('nebula', nebula, { classification: 'nebula', systemName: 'Nebula' })];
+  const from = (range: number) => worldCameraFromCenteredPresentation({ rotation: [1, 0, 0, 0, 1, 0, 0, 0, 1], distanceUnits: range }, nebula, viewport);
+  let listener: ObjectWorldNavigationListener | null = null, nearest = false, returns = 0;
+  const timers = new Map<number, () => void>(), changes: unknown[] = [];
+  const watch = (inner: string | null) => watchCameraSelection({ objects: around, systems: around, objectId: 'nebula', getSelection: () => ({ objectId: 'nebula' }),
+    isAvailable: () => true, inner: () => inner, onChange: next => changes.push(next), onReturn: () => { returns++; },
+    navigation: { ...navigationFixture(nebula, () => from(3), () => ({ ...viewport, framingRadiusPixels: 1, detailHandoffDiameterPixels: 1, visibleRect: null })), nearest: () => nearest, subscribe(value) { listener = value; return () => {}; } },
+    windowTarget: { setTimeout(callback: () => void) { timers.set(1, callback); return 1; }, clearTimeout(id: number) { timers.delete(id); } } as unknown as Window });
+  const publish = (range: number) => required(listener)(from(range), viewport);
+  const settle = () => { required(timers.get(1))(); timers.clear(); };
+
+  watch('star');
+  publish(3); publish(2); assert.equal(timers.size, 0);
+  nearest = true; publish(1.2); settle();
+  assert.deepEqual(changes, [{ objectId: 'star' }]);
+  nearest = false; publish(1.5); assert.equal(returns, 1);
+
+  // A page that came to rest on its nearest view stays the nebula's, and so does a nebula with no body inside.
+  changes.length = 0; nearest = true;
+  watch('star'); publish(1.2); publish(1.2); assert.equal(timers.size, 0);
+  watch(null); publish(3); publish(1.2); assert.equal(timers.size, 0);
+  assert.deepEqual(changes, []);
+});
