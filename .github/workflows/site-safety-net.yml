@@ -1,0 +1,169 @@
+name: Site safety net
+
+# Change-selected qualification, separate from the 2-minute target / 3-minute
+# maximum merge-required path. Refactors require a declaration in their own diff.
+# Maintenance, modes and timing evidence: docs/build-comparison.md and docs/ci-cd.md.
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, labeled, unlabeled]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: site-safety-net-${{ github.event_name == 'pull_request' && github.ref || github.run_id }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' && github.event.action == 'synchronize' }}
+
+jobs:
+  gate:
+    name: Refactor declaration gate
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 0
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '24'
+      - name: Load trusted merge-base gate code
+        run: |
+          if [ -n "${GITHUB_BASE_REF:-}" ]; then
+            comparison_base=$(git merge-base HEAD "origin/$GITHUB_BASE_REF")
+          else
+            comparison_base=$(git rev-parse HEAD^)
+          fi
+          mkdir -p "$RUNNER_TEMP/comparison-gate"
+          git archive "$comparison_base" .github/scripts/build-compare/gate.mts .github/scripts/build-compare/source-paths.mts | tar -x -C "$RUNNER_TEMP/comparison-gate"
+          echo "COMPARISON_BASE=$comparison_base" >> "$GITHUB_ENV"
+      - name: Require a declaration for application refactors
+        run: node "$RUNNER_TEMP/comparison-gate/.github/scripts/build-compare/gate.mts" "$COMPARISON_BASE"
+
+  changes:
+    name: Select application build comparison
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      run_production: ${{ steps.classify.outputs.run_production }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 0
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '24'
+      - name: Load trusted merge-base gate code
+        run: |
+          if [ -n "${GITHUB_BASE_REF:-}" ]; then
+            comparison_base=$(git merge-base HEAD "origin/$GITHUB_BASE_REF")
+          else
+            comparison_base=$(git rev-parse HEAD^)
+          fi
+          mkdir -p "$RUNNER_TEMP/comparison-gate"
+          git archive "$comparison_base" .github/scripts/build-compare/gate.mts .github/scripts/build-compare/source-paths.mts | tar -x -C "$RUNNER_TEMP/comparison-gate"
+          echo "COMPARISON_BASE=$comparison_base" >> "$GITHUB_ENV"
+      - name: Select comparison using trusted gate code
+        id: classify
+        run: node "$RUNNER_TEMP/comparison-gate/.github/scripts/build-compare/gate.mts" "$COMPARISON_BASE" --select
+
+  build-compare:
+    needs: changes
+    if: needs.changes.outputs.run_production == 'true'
+    name: Compare the complete built site
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    env:
+      TZ: UTC
+      LC_ALL: C
+      NODE_OPTIONS: --max-old-space-size=6144
+      CSSEARTH_SKIP_DECLARATIONS: '1'
+      ASSET_ORIGIN: https://earth-assets.lowpoly.cc
+      CSSEARTH_ALLOW_MISSING_ASSETS: '0'
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 0
+      - name: Create merge-base worktree before computing cache identity
+        run: |
+          if [ -n "${GITHUB_BASE_REF:-}" ]; then
+            comparison_base=$(git merge-base HEAD "origin/$GITHUB_BASE_REF")
+          else
+            comparison_base=$(git rev-parse HEAD^)
+          fi
+          git worktree add --detach ../comparison-head HEAD
+          git checkout --detach "$comparison_base"
+      - uses: pnpm/action-setup@f40ffcd9367d9f12939873eb1018b921a783ffaa # v4
+        with:
+          package_json_file: package.json
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '24'
+      - name: Free runner disk before restoring prepared data
+        run: |
+          if [ -n "${GITHUB_ACTIONS:-}" ]; then
+            sudo rm -rf /usr/local/lib/android /usr/share/dotnet /opt/ghc
+          fi
+          df -h .
+      - name: Locate pnpm store explicitly
+        id: pnpm-store
+        run: echo "path=$(pnpm store path --silent)" >> "$GITHUB_OUTPUT"
+      - uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          path: ${{ steps.pnpm-store.outputs.path }}
+          key: pnpm-store-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}
+      - uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          # Same prepared bank as universe.yml; compute before preparation changes inventories.
+          path: src/objects/*/prepared
+          key: prepared-files-v2-${{ hashFiles('src/objects/*/inventory.json') }}
+          restore-keys: prepared-files-v2-
+      - name: Install head orchestration dependencies
+        run: |
+          cd ../comparison-head
+          pnpm install --frozen-lockfile --ignore-scripts
+      - name: Prepare and compare isolated merge-base and HEAD builds
+        run: |
+          cd ../comparison-head
+          if [ -n "${GITHUB_BASE_REF:-}" ]; then
+            comparison_base=$(git merge-base HEAD "origin/$GITHUB_BASE_REF")
+          else
+            comparison_base=$(git rev-parse HEAD^)
+          fi
+          git -C "$GITHUB_WORKSPACE" checkout --detach "$comparison_base"
+          comparison_tools="$GITHUB_WORKSPACE/.github/scripts/build-compare"
+          if node --input-type=module -e '
+            import {readFileSync,existsSync} from "node:fs";
+            const event=process.env.GITHUB_EVENT_PATH ? JSON.parse(readFileSync(process.env.GITHUB_EVENT_PATH,"utf8")) : {};
+            const {execFileSync}=await import("node:child_process");
+            const base=execFileSync("git",["merge-base","HEAD",process.env.GITHUB_BASE_REF ? `origin/${process.env.GITHUB_BASE_REF}` : "HEAD^"],{encoding:"utf8"}).trim();
+            const fresh=/^[AM]\s/m.test(execFileSync("git",["diff","--name-status",`${base}..HEAD","--",".github/site-refactor.json"],{encoding:"utf8"}));
+            const declared=fresh && existsSync(".github/site-refactor.json") && JSON.parse(readFileSync(".github/site-refactor.json","utf8")).tools==="head";
+            process.exit(declared || event.pull_request?.labels?.some(label=>label.name==="tool-change") ? 0 : 1);
+          '; then
+            echo "::warning::TOOL TRUST OVERRIDE: using HEAD comparison tools"
+            comparison_tools=.github/scripts/build-compare
+          fi
+          test -f "$comparison_tools/ci.mts" || { echo "::error::Merge-base tools absent; explicit tool-change opt-in required"; exit 2; }
+          if [ "$comparison_tools" != .github/scripts/build-compare ]; then
+            rm -rf .github/scripts/build-compare
+            cp -R "$comparison_tools" .github/scripts/build-compare
+          fi
+          node .github/scripts/build-compare/ci.mts --head . --base "$GITHUB_WORKSPACE" --out "$GITHUB_WORKSPACE/output/build-comparison"
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        if: ${{ !cancelled() }}
+        with:
+          name: site-build-comparison
+          path: |
+            output/build-comparison/report.json
+            output/build-comparison/timings.json
+            output/build-comparison/inputs.json
+            output/build-comparison/moves.json
+            output/build-comparison/sources.json
+            output/build-comparison/base/toolchain.json
+            output/build-comparison/head/toolchain.json
+          if-no-files-found: warn
+          retention-days: 7
