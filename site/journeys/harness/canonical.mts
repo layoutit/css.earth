@@ -1,4 +1,5 @@
 /** Causal request multisets and per-subject lifecycles; concurrent interleaving carries no contract. */
+import { applyKnownVariations } from './known-variations.mts';
 import { json, parseTrace, type Json, type Observation, type Trace } from './trace.mts';
 /** Compare-time only: chunk names retain identity; content-address suffixes belong to the build layer. */
 export function canonicalChunkNames(value: Json, ambiguous: readonly string[] = []): Json {
@@ -135,7 +136,7 @@ export function canonicalTrace(trace: Trace, compareChunks = false): Trace {
     for (const write of data.writes) { const value = object(write); if (value?.volatile === 'html-parser-text-chunks' && typeof value.parserFinalText === 'string') declarations.push({ family: 'dom', subject: data.subject ?? '', feature: 'html-parser-text-chunks', cause: value.cause ?? '', bound: { minimumChunks: 0, maximumChunks: value.parserFinalText.length, finalTextExact: true } }); }
   }
   const existing = (trace.volatile ?? []).filter(value => object(value)?.family !== 'dom');
-  return { ...trace, volatile: [...existing, ...declarations], observations: { ...trace.observations, network: canonicalNetwork(trace.observations.network), dom } };
+  return applyKnownVariations({ ...trace, volatile: [...existing, ...declarations], observations: { ...trace.observations, network: canonicalNetwork(trace.observations.network), dom } });
 }
 /** Histogram includes all changed leaves, collapsed to path templates; never changes comparison. */
 export function differenceHistogram(base: Json, head: Json, path = '$', result = new Map<string, number>()): Map<string, number> {

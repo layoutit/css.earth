@@ -131,7 +131,7 @@ test('deleting each differ detector makes its qualification red', async () => {
   const directory = await mkdtemp(resolve('output/journeys/journey-deleted-detector-'));
   const source = await readFile(resolve(import.meta.dirname, 'differ.mts'), 'utf8');
   try {
-    for (const name of ['trace.mts', 'differ.mts', 'png.mts', 'canonical.mts', 'differ.test.mts']) await cp(resolve(import.meta.dirname, name), resolve(directory, name));
+    for (const name of ['trace.mts', 'differ.mts', 'png.mts', 'canonical.mts', 'known-variations.mts', 'differ.test.mts']) await cp(resolve(import.meta.dirname, name), resolve(directory, name));
     await cp(resolve(import.meta.dirname, '../compare.mts'), resolve(directory, 'compare.mts'));
     await symlink(resolve(import.meta.dirname, '../../../node_modules'), resolve(directory, 'node_modules'));
     for (const family of families) {

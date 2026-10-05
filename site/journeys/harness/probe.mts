@@ -16,7 +16,10 @@ export const CLASSIFICATION_HELPERS = `  const describe = element => {
 `;
 export const PROBE = `(() => {
   const dom = [], errors = [], workers = new Map(), workerReplies = [], releasedReplies = new WeakSet();
-  let workerSerial = 0;
+  const workerEvidence = [];
+  let nativeWorkerMessages = 0;
+  let workerSerial = 0, coastCompleted = false, coastStarted = false;
+  let flushMotion = () => {};
   let announced = false, coasting = false, wheelUntil = 0, mutations = 0, messages = 0, imageJobs = 0;
   const idleCallbacks = new Map(); let idleSerial = 0;
   if (typeof window.requestIdleCallback === 'function') {
@@ -32,7 +35,7 @@ export const PROBE = `(() => {
   const moving = () => announced || performance.now() < wheelUntil;
   const onMotion = event => { announced = Boolean(event.detail && event.detail.active); if (event.type === 'objectmotionchange') coasting = Boolean(event.detail && event.detail.coasting); };
   const onWheel = () => { wheelUntil = performance.now() + 700; };
-  for (const type of ['objectrotationchange', 'objectmotionchange']) document.addEventListener(type, onMotion, true);
+  for (const type of ['objectrotationchange', 'objectmotionchange']) document.addEventListener(type, event => { flushMotion(); onMotion(event); if (event.type === 'objectmotionchange') { if (coasting) { coastStarted = true; coastCompleted = false; } if (coastStarted && !announced && !coasting) coastCompleted = true; } }, true);
   addEventListener('wheel', onWheel, { capture: true, passive: true });
   ${CLASSIFICATION_HELPERS}
   const scriptText = new WeakSet(), parserText = new Map();
@@ -103,13 +106,16 @@ export const PROBE = `(() => {
     }
   };
   const observer = new MutationObserver(observe);
+  flushMotion = () => observe(observer.takeRecords());
   observer.observe(document, { subtree: true, attributes: true, attributeOldValue: true, childList: true, characterData: true, characterDataOldValue: true });
   addEventListener('unhandledrejection', event => errors.push({ source: 'unhandledrejection', message: String(event.reason) }));
   const NativeWorker = window.Worker;
   if (NativeWorker) window.Worker = class extends NativeWorker {
     constructor(...args) {
       super(...args); const jobs = new Set(), serial = ++workerSerial; workers.set(this, jobs);
+      const evidence = { url: new URL(String(args[0]), document.baseURI).href, serial, nativeReplies: 0, jobs }; workerEvidence.push(evidence);
       this.addEventListener('message', event => {
+        if (event.isTrusted) { nativeWorkerMessages++; evidence.nativeReplies++; }
         if (!window.__journeyScheduleWorkers || releasedReplies.has(event)) return;
         event.stopImmediatePropagation();
         if (event.data && typeof event.data.id === 'number') jobs.delete(event.data.id);
@@ -122,7 +128,7 @@ export const PROBE = `(() => {
       this.addEventListener('messageerror', () => { jobs.clear(); errors.push({ source: 'worker-messageerror', message: 'Worker response decode failed' }); });
     }
     postMessage(...args) { const data = args[0]; if (data && typeof data.id === 'number') workers.get(this).add(data.id); else if (data && data.validatedPlan) workers.get(this).add('initialise'); try { return super.postMessage(...args); } catch (error) { if (data) workers.get(this).delete(data.id ?? 'initialise'); throw error; } }
-    terminate() { workers.delete(this); return super.terminate(); }
+    terminate() { const jobs = workers.get(this); if (jobs) jobs.clear(); workers.delete(this); return super.terminate(); }
   };
   const decodedImages = new Map();
   // Observe only already-requested document images. Creating background/lazy Images changes app traffic.
@@ -152,5 +158,5 @@ export const PROBE = `(() => {
       const pending = [...document.images].map(decodeOnce);
       await Promise.all(pending);
     }, drain() { observe(observer.takeRecords()); return { dom: dom.splice(0).map(row => parserText.has(row.subject) ? { ...row, parserFinalText: parserText.get(row.subject).textContent } : row), errors: errors.splice(0) }; },
-    status() { observe(observer.takeRecords()); return { mutations, messages, replies: workerReplies.length, idle: idleCallbacks.size, moving: moving(), jobs: imageJobs + [...workers.values()].reduce((sum, jobs) => sum + jobs.size, 0) }; } };
+    status() { observe(observer.takeRecords()); return { mutations, messages, replies: workerReplies.length, idle: idleCallbacks.size, moving: moving(), coastCompleted, nativeWorkerMessages, workerEvidence: workerEvidence.map(entry => ({ url: entry.url, nativeReplies: entry.nativeReplies, jobs: entry.jobs.size, replies: workerReplies.filter(reply => reply.serial === entry.serial).length })), jobs: imageJobs + [...workers.values()].reduce((sum, jobs) => sum + jobs.size, 0) }; } };
 })()`;
