@@ -1,10 +1,29 @@
 /** Restore prepared packages and only the selected preparation/prerender public inputs. */
 import {resolve,join} from 'node:path';
-import {copyFile,rename,stat,readdir} from 'node:fs/promises';
+import {copyFile,rename,stat,readdir,readFile,rm} from 'node:fs/promises';
 import {setupAssets,installRuntimeAssets} from '@cssearth/bake/asset-publication';
 import {inventoryAssets} from '@cssearth/bake/delivery';
 import {preparationUrls} from './preparation-inputs.mts';
-import {args,isMain} from './records.mts';
+import {args,isMain,files,record,array,string} from './records.mts';
+/** A warm cache must not add modules to wildcard imports that a clean restore cannot see. */
+export async function prunePreparedExtras(root: string): Promise<string[]> {
+  const removed: string[] = [];
+  for (const entry of await readdir(join(root, 'src/objects'), {withFileTypes:true})) {
+    if (!entry.isDirectory()) continue;
+    const directory = join(root, 'src/objects', entry.name);
+    const inventory = await readFile(join(directory, 'inventory.json'), 'utf8').catch((error: unknown) => {
+      if (error instanceof Error && 'code' in error && error.code === 'ENOENT') return undefined;
+      throw error;
+    });
+    if (inventory === undefined || !(await stat(join(directory, 'prepared')).catch(() => undefined))?.isDirectory()) continue;
+    const published = new Set(array(record(JSON.parse(inventory)).assets).map(record).filter(asset => asset.location === 'prepared').map(asset => string(asset.filename)));
+    for (const path of await files(join(directory, 'prepared'))) if (!published.has(path)) {
+      await rm(join(directory, 'prepared', path)); removed.push(`${entry.name}/prepared/${path}`);
+    }
+  }
+  console.log(`PREPARED CACHE CLOSURE PASS: removed ${removed.length} uninventoried files`);
+  return removed.sort();
+}
 export async function isolatePreparedWrites(root: string): Promise<void> {
   // The recipe republishes facts with writeFile. Detach those two files before it
   // runs: all other restored files remain hardlinked, and base output cannot change.
@@ -20,6 +39,7 @@ export async function isolatePreparedWrites(root: string): Promise<void> {
   }
 }
 export async function restorePreparation(root: string): Promise<void> {
+  await prunePreparedExtras(root);
   await setupAssets(['--location=prepared'], root);
   await isolatePreparedWrites(root);
   const urls = await preparationUrls(root), requested = new Set(urls);

@@ -1,6 +1,6 @@
 /** CI orchestration: prepare isolated checkouts, compare merge-base to HEAD, and retain stage timings. */
 import { spawn, execFile } from 'node:child_process';
-import { cp, mkdir, readFile, writeFile, rm, stat } from 'node:fs/promises';
+import { cp, mkdir, readFile, writeFile, appendFile, rm, stat } from 'node:fs/promises';
 import { resolve, join } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { promisify } from 'node:util';
@@ -76,7 +76,22 @@ export function comparisonPreparation(raw: unknown): string {
   const recipe = preparationCommand(raw);
   const steps = recipe.split(' && ');
   if (steps.filter(step => step === 'pnpm setup:asset-data').length !== 1) throw new Error('Preparation recipe must contain exactly one standalone pnpm setup:asset-data; renamed or substituted asset restore is unsafe');
-  return steps.map(step => step === 'pnpm setup:asset-data' ? 'node .github/scripts/build-compare/restore-preparation.mts --checkout .' : step).join(' && ');
+  if (steps.some(step => step.includes('prepare-nebulae.mts') && step !== 'node packages/bake/cli/prepare-nebulae.mts --if-missing')) throw new Error('Unknown nebula authoring step in comparison preparation');
+  // Restore already supplies the pinned bank. The authoring CLI re-inventories even a reused bank.
+  return steps.filter(step => step !== 'node packages/bake/cli/prepare-nebulae.mts --if-missing').map(step => step === 'pnpm setup:asset-data' ? 'node .github/scripts/build-compare/restore-preparation.mts --checkout .' : step).join(' && ');
+}
+/** Compare against the pre-preparation state, including intentional tool-copy edits. */
+export function requireUnchangedTracked(before: string, after: string): void {
+  if (before !== after) throw new Error('Preparation modified tracked files; comparison inputs are no longer the requested commits. Inspect git status --short and git diff in the failing checkout.');
+}
+export function jobSummary(raw: unknown, timings: { stage: string; seconds: number; exitCode: number }[], mode: string, tools: string): string {
+  const report = record(raw), diagnostics = record(report.diagnostics ?? {});
+  const environments = record(diagnostics.environments ?? {});
+  const dimensions = new Set(Object.values(environments).flatMap(value => Object.keys(record(value))));
+  const rows = [...dimensions].sort().map(dimension => `| ${dimension} | ${Object.values(environments).reduce<number>((sum, value) => sum + Number(record(value)[dimension] ?? 0), 0)} |`);
+  const environmentRows = Object.entries(environments).map(([environment, counts]) => `| ${environment} | ${Object.values(record(counts)).reduce<number>((sum, n) => sum + Number(n), 0)} |`);
+  const closure = record(report.closure ?? {});
+  return `## Built-site comparison\n\nMode: ${mode}; tools: ${tools}.\n\nEnvironment totals: ${JSON.stringify(diagnostics.environmentTotals ?? {})}.\n\nEmitted HTML/JS/CSS byte equality: ${JSON.stringify(diagnostics.emittedBytesEqual ?? {})}.\n\nClosure size: ${Object.entries(closure).map(([key, value]) => `${key}=${Array.isArray(value) ? value.length : record(value).count}`).join(', ')}.\n\n| Dimension | Differences |\n| --- | ---: |\n${rows.join('\n')}\n\n| Environment | Differences |\n| --- | ---: |\n${environmentRows.join('\n')}\n\n| Stage | Seconds | Exit |\n| --- | ---: | ---: |\n${timings.map(time => `| ${time.stage} | ${time.seconds.toFixed(1)} | ${time.exitCode} |`).join('\n')}\n`;
 }
 async function command(program: string, args: string[], cwd: string): Promise<number> {
   return new Promise((accept, reject) => {
@@ -150,7 +165,7 @@ async function main(): Promise<number> {
   for (const path of inventoryPaths) if (sharePrepared && !(await readFile(join(base, path))).equals(await readFile(join(head, path)))) sharePrepared = false;
   const moves = join(out, 'moves.json');
   await writeFile(moves, `${JSON.stringify(declaration.moves, null, 2)}\n`);
-  await writeFile(join(out, 'inputs.json'), `${JSON.stringify({ base: revision, mode: declaration.mode, tools: headTools ? 'head' : 'merge-base', sharePrepared }, null, 2)}\n`);
+  await writeFile(join(out, 'inputs.json'), `${JSON.stringify({ base: revision, mode: declaration.mode, tools: source, sharePrepared }, null, 2)}\n`);
   for (const [label, checkout] of [['base', base], ['head', head]] as const) {
     let result = await stage(`${label} install`, 'pnpm', ['install', '--frozen-lockfile', '--ignore-scripts'], checkout);
     if (result) return result;
@@ -172,7 +187,10 @@ async function main(): Promise<number> {
       }
     }
     const preparation = comparisonPreparation(JSON.parse(await readFile(join(checkout, 'package.json'), 'utf8')));
+    const trackedDiff = async () => (await execute('git', ['diff', '--binary', '--no-ext-diff', 'HEAD', '--'], { cwd: checkout, maxBuffer: 32 * 1024 * 1024 })).stdout;
+    const beforePreparation = await trackedDiff();
     result = await stage(`${label} preparation`, 'bash', ['--noprofile', '--norc', '-e', '-o', 'pipefail', '-c', preparation], checkout);
+    requireUnchangedTracked(beforePreparation, await trackedDiff());
     if (result) return result;
     const values = [join(toolRoot, 'build.mts'), '--checkout', checkout, '--out', join(out, label)];
     if (label === 'head') values.push('--toolchain', join(out, 'base/toolchain.json'));
@@ -185,8 +203,10 @@ async function main(): Promise<number> {
       return result;
     }
   }
-  return stage('compare', process.execPath, [join(toolRoot, 'compare.mts'), '--base', join(out, 'base'),
+  const comparisonExit = await stage('compare', process.execPath, [join(toolRoot, 'compare.mts'), '--base', join(out, 'base'),
     '--head', join(out, 'head'), '--mode', declaration.mode, '--moves', moves, '--sources', sourcesPath, '--json', join(out, 'report.json')], head);
+  if (process.env.GITHUB_STEP_SUMMARY) await appendFile(process.env.GITHUB_STEP_SUMMARY, jobSummary(JSON.parse(await readFile(join(out, 'report.json'), 'utf8')), timings, declaration.mode, source));
+  return comparisonExit;
 }
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
   try { process.exitCode = await main(); }

@@ -111,3 +111,19 @@ test('semantic output declarations validate reasons and layout', () => {
   assert.equal(refactorDeclaration(value).layout, 'changes');
   for (const extra of [{ outputs: [{ glob: '../bad', reason: 'escape' }] }, { outputs: [{ glob: 'index.html', reason: '' }] }, { layout: 'any' }]) assert.throws(() => refactorDeclaration({ mode: 'semantic', moves: {}, ...extra }));
 });
+
+test('comparison excludes nebula re-inventory and refuses unknown variants', () => {
+  const recipe = 'pnpm a && pnpm setup:asset-data && node packages/bake/cli/prepare-nebulae.mts --if-missing && astro build';
+  assert.ok(!comparisonPreparation({ scripts: { 'build:deploy': recipe } }).includes('prepare-nebulae'));
+  assert.throws(() => comparisonPreparation({ scripts: { 'build:deploy': recipe.replace('--if-missing', '--allow-missing') } }), /Unknown nebula/u);
+});
+test('tracked preparation mutations fail even in report mode; summary includes dimensions and environments', async () => {
+  const { requireUnchangedTracked, jobSummary } = await import('./ci.mts');
+  assert.doesNotThrow(() => requireUnchangedTracked('prior tool edit', 'prior tool edit'));
+  assert.throws(() => requireUnchangedTracked('prior tool edit', 'inventory rewritten'), /modified tracked/u);
+  const summary = jobSummary({ diagnostics: { environments: { 'prerender-0': { modules: 121 }, 'client-0': { imports: 2 } }, emittedBytesEqual: { html: true } }, closure: { modules: { count: 3 } } }, [{ stage: 'compare', seconds: 110, exitCode: 0 }], 'report', 'bootstrap');
+  for (const value of ['prerender-0 | 121', 'client-0 | 2', 'modules | 121', '110.0', 'modules=3', 'tools: bootstrap', 'Mode: report']) assert.ok(summary.includes(value), value);
+  const source = await readFile(new URL('./ci.mts', import.meta.url), 'utf8');
+  assert.ok(source.includes('requireUnchangedTracked(beforePreparation, await trackedDiff())'));
+  assert.ok(source.includes('appendFile(process.env.GITHUB_STEP_SUMMARY'));
+});
