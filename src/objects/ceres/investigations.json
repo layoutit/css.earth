@@ -345,6 +345,18 @@
         "https://doi.org/10.3847/1538-3881/ab8305"
       ],
       "revisitWhen": "A published resolved thermal-inertia or emissivity map of Ceres from these ALMA data, or a new ALMA epoch whose surface-fixed residuals repeat between independent epochs."
+    },
+    {
+      "id": "oblate-figure",
+      "subject": "Figure of the globe",
+      "status": "deferred",
+      "finding": "The globe is a 469.7 km mean-radius sphere, but Ceres is flattened: the Dawn project's NAIF kernel dawn_ceres_v05.tpc gives an average equatorial radius of 482 km and a polar radius of 446 km (equivalent sphere 470 km), so the poles sit 7.5% closer to the centre than the equator, about 17 pixels of the 460 pixel globe. Tried on 2026-10-05 and withdrawn: setting the recipe to that spheroid stops the bake, and the stop is right. Three things in the shared sphere lane hold only for a nearly round body such as Mars (0.6%). The feature step compares the Gazetteer's 470 km datum sphere with the authored radius, which becomes the 482 km equatorial radius, and refuses beyond 1%. It then places anchors on a sphere, so at 7.5% labels would float above the poles. And the mesh places a map latitude at the spheroid's parametric latitude, up to 2.2 degrees from the planetocentric latitude the maps use. Drawing the figure correctly means changing that shared geometry, which also moves Mars, Uranus and Neptune.",
+      "evidence": [
+        "https://naif.jpl.nasa.gov/pub/naif/DAWN/kernels/pck/dawn_ceres_v05.tpc",
+        "https://github.com/layoutit/css.earth/blob/main/packages/bake/src/surface-geometry/surface.ts",
+        "https://github.com/layoutit/css.earth/blob/main/packages/bake/src/objects/surface-features/surface-features.ts"
+      ],
+      "revisitWhen": "The shared sphere geometry places planetocentric latitudes on a spheroid and casts feature anchors onto it."
     }
   ]
 }
