@@ -85,6 +85,12 @@ export function parsePhotometricModel(value: unknown): PhotometricModel {
         return assertPhaseModel({ family: 'quadratic', constant: requireFiniteNumber(q.constant, 'phase constant'), perDegree: requireFiniteNumber(q.perDegree, 'phase term per degree'),
           perDegreeSquared: requireFiniteNumber(q.perDegreeSquared, 'phase term per degree squared'), heldBeyondDegrees: requireFiniteNumber(q.heldBeyondDegrees, 'phase held beyond') });
       }
+      if (requireRecord(value, 'phase function').family === 'tabulated')
+        return assertPhaseModel({ family: 'tabulated', points: requireArray(strict(value, ['family', 'points'], 'phase function').points, 'phase points').map(point => {
+          const pair = requireArray(point, 'phase point');
+          if (pair.length !== 2) throw new TypeError('A phase point is [degrees, value].');
+          return [requireFiniteNumber(pair[0], 'phase point degrees'), requireFiniteNumber(pair[1], 'phase point value')] as const;
+        }) });
       const p = strict(value, ['family', 'asymmetry', 'amplitude', 'width'], 'phase function');
       return assertPhaseModel({ family: oneOf(p.family, ['hg-shadow-hiding'] as const, 'phase family'), asymmetry: requireFiniteNumber(p.asymmetry, 'asymmetry'), amplitude: requireFiniteNumber(p.amplitude, 'amplitude'), width: requireFiniteNumber(p.width, 'width') });
     });

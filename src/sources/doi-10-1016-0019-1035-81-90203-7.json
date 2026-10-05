@@ -1,0 +1,42 @@
+{
+  "id": "doi-10-1016-0019-1035-81-90203-7",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Squyres and Veverka (1981): Voyager photometry of surface features on Ganymede and Callisto",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.1016/0019-1035(81)90203-7"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1016/0019-1035(81)90203-7",
+      "label": "Publication"
+    },
+    {
+      "role": "archive",
+      "url": "https://ntrs.nasa.gov/citations/19810058926",
+      "label": "Abstract, NASA Technical Reports Server"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/ganymede/source/manifest.json",
+      "locator": "/documents/25"
+    },
+    {
+      "path": "src/objects/callisto/source/manifest.json",
+      "locator": "/documents/25"
+    }
+  ],
+  "creators": [
+    "Steven W. Squyres",
+    "Joseph Veverka"
+  ],
+  "publisher": "Icarus 46, 137-155",
+  "publicationDate": "1981",
+  "relations": [],
+  "statements": []
+}

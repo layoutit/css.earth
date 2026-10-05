@@ -96,13 +96,27 @@
     {
       "id": "limb-law",
       "subject": "Photometric law for the lighting overlays",
-      "status": "unresolved",
-      "finding": "Helfenstein, Veverka and Thomas (1988) fitted Hapke models to Voyager whole-disc photometry of the five large Uranian moons. Only the abstract could be read (single-scattering albedo from 0.3 for Umbriel to 0.7 for Ariel, g near -0.3), and a whole-disc fit states no emission range. Schenk's 2020 mosaic history names ISIS photomet without its parameter file. Umbriel keeps the shared sphere bank.",
+      "status": "included",
+      "finding": "Hapke law of Helfenstein and Veverka (1988), an open conference abstract (Lunar and Planetary Science XIX, 477). They fitted Hapke's 1986 equation to disc-resolved brightness in five Voyager clear-filter images at 10.4 to 142.9 degrees phase. Table I, disc-resolved row: w = 0.34, h = 0.06 (fixed at the whole-disc value), S(0) = 1.28, g = -0.18, roughness 28 degrees. The model here takes the opposition amplitude B0, so S(0) is converted with the authors' own definition, B0 = S(0)/(w P(0)), printed in their 1986 NASA summary on the Moon: B0 = 2.145. Flood-lit, the limb is 0.99 of the centre; the opposition surge puts the point under the Sun at 0.61 of that centre at 10 degrees phase, so frames with Shadows on are dimmer than the flood-lit view. It is second class: no emission range is printed, and the limit 84.6 degrees is derived here from the outermost pixel of the finest of the five frames (FDS 26840.04, 5.167 km per pixel). The authors' later summary in NASA TM-4130 fits whole-disc and disc-resolved data together (0.372, -0.235, 26 degrees) but prints no opposition surge values, so the abstract's complete row is used. Helfenstein, Veverka and Thomas (1988), the whole-disc fits of the five moons, could not be read.",
       "evidence": [
-        "https://doi.org/10.1016/0019-1035(88)90039-5",
-        "https://ntrs.nasa.gov/citations/19880051927"
+        "https://ui.adsabs.harvard.edu/abs/1988LPI....19..477H",
+        "https://articles.adsabs.harvard.edu/pdf/1988LPI....19..477H",
+        "https://ntrs.nasa.gov/citations/19870013908",
+        "https://opus.pds-rings.seti.org/opus/api/metadata/vg-iss-2-u-c2684004.json",
+        "https://ntrs.nasa.gov/citations/19900003138",
+        "https://doi.org/10.1016/0019-1035(88)90039-5"
       ],
-      "revisitWhen": "A disc-resolved law for Umbriel with its fitted emission range is read in the paper, or the photometric parameter file of Schenk's mosaic is released."
+      "revisitWhen": "The fitted emission range, or a fit of whole-disc and disc-resolved data together with its opposition surge values, is read in a paper."
+    },
+    {
+      "id": "authored-limb-lighting",
+      "subject": "Shared sphere bank lighting (Lambert with a 0.35 flood floor and 0.05 ambient term, adapted from OpenSpace)",
+      "status": "excluded",
+      "finding": "Replaced by the Hapke law of Helfenstein and Veverka (1988); Umbriel now bakes its own bank.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/main/packages/bake/src/raster/lighting-banks.ts"
+      ],
+      "revisitWhen": "Nothing: an authored limb is not reopened once a published law exists."
     },
     {
       "id": "map-left-edge-2026-09-28",

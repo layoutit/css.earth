@@ -7,6 +7,7 @@ Callisto is a moon of Jupiter, shown as a mean-radius sphere with three surface 
 - The **Monochrome** dataset uses the public-domain USGS [Voyager/Galileo global mosaic](https://astrogeology.usgs.gov/search/map/callisto_galileo_voyager_global_mosaic_1km).
 - The **Galileo color** dataset uses the official USGS RGBA copy of NASA/JPL/DLR [PIA03456](https://science.nasa.gov/photojournal/global-callisto-in-color/), recorded in May 2001 and released on August 22, 2001. The [USGS release](https://www.usgs.gov/media/images/callisto-galileo-ssi-color-mosaic) marks it public domain.
 - The **infrared** view uses [the registered Galileo NIMS archive](https://doi.org/10.17189/4sq6-x165), observations G8CNADLIND01A and G8CNGLOBAL02A, Minnaert-corrected CIOF products.
+- **Lighting:** the lunar-like (Lommel–Seeliger) law [Squyres and Veverka (1981)](https://doi.org/10.1016/0019-1035%2881%2990203-7) found in Voyager images. See [Lighting law](#lighting-law).
 - **Named features** come from the IAU/USGS Gazetteer of Planetary Nomenclature centre-point shapefile for Callisto (public domain per its FGDC metadata), kept under `source/features/`. 12 labelled names carry a caption note, the lead summary of their English Wikipedia article (CC BY-SA 4.0), kept with the article link and revision in `source/features/notes.json`; the caption credits Wikipedia beside the IAU naming year.
 - [NASA's facts](https://science.nasa.gov/jupiter/jupiter-moons/callisto/facts/) provide the brief introductory content.
 
@@ -30,6 +31,12 @@ Use `--output-directory /tmp/callisto-reproduction` for an isolated comparison. 
 
 The [marker recipe](source/preparation/navigation.json) crops and resizes the source map as a stylized navigation marker with the shared full-phase curvature shading (35% ambient, 65% diffuse). It is not a view at the scene epoch.
 
+## Lighting law
+
+The globe is lit with the lunar-like law [Squyres and Veverka (1981)](https://doi.org/10.1016/0019-1035%2881%2990203-7) found in Voyager clear-filter images at 10° to 124° phase: I = A F(α) μ0/(μ0 + μ), the Lommel–Seeliger law, which has no parameter. That paper is closed. The authors' own summary, page 67 of NASA's [Reports of Planetary Geology Program 1980](https://ntrs.nasa.gov/citations/19810007392), is open and prints the function for Callisto's cratered terrain. The law is recorded in [`source/photometry/squyres-veverka-1981-lommel-seeliger-clear.json`](source/photometry/squyres-veverka-1981-lommel-seeliger-clear.json).
+
+Each lighting frame is the law relative to the flood-lit disc centre. With the Sun behind the viewer this law is flat: the limb is as bright as the centre. At 0.98 of the radius the overlay alpha is 0, where the authored bank this replaces reached 0.49. See [planet limbs](../../../docs/surface-preparation.md#planet-limbs-from-published-laws).
+
 ## Evidence
 
 The Galileo color fit's two training quadrants and two disjoint held-out quadrants are recorded in [source/validation/galileo-color-registration.json](source/validation/galileo-color-registration.json). An independent review sampled the original 15,138 × 7,569 reference at its exact GeoTIFF coordinates without adjusting the fit: upper-right and lower-left unblurred correlations were 0.713 and 0.573.
@@ -38,6 +45,7 @@ Gazetteer rims drawn over the prepared minimap agree with the declared `mapLeftE
 
 ## Known problems
 
+- **Lighting law:** One law lights the whole globe; the authors say bright craters follow it only approximately. Its phase function is drawn in a figure and not printed, so frames with Shadows on carry no phase term. Its emission limit, 86.3°, is derived here.
 - Original observations range from 400 m to 60 km per pixel. Coarse observed patches are retained; a fine grid spacing does not make them high resolution.
 - **Galileo color:** These are published processed colors, not calibrated I/F, reflectance ratios or measured albedo. An explicit 65° emission limit retains 28.735% of the sphere; unseen, grazing and nonopaque source regions remain missing. Photographed shading, soft detail and color fringing remain.
 - Local 0–1 pixel diagnostic offsets were never applied and do not establish a global absolute positional accuracy. The scene is a mean-radius sphere, not a measured terrain mesh.

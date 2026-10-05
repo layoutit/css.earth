@@ -1,0 +1,40 @@
+{
+  "id": "doi-10-1016-0019-1035-84-90111-8",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Squyres, Buratti, Veverka and Sagan (1984): Voyager photometry of Iapetus",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.1016/0019-1035(84)90111-8"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1016/0019-1035(84)90111-8",
+      "label": "Publication"
+    },
+    {
+      "role": "archive",
+      "url": "https://ntrs.nasa.gov/citations/19840066646",
+      "label": "Abstract, NASA Technical Reports Server"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/iapetus/source/manifest.json",
+      "locator": "/documents/13"
+    }
+  ],
+  "creators": [
+    "Steven W. Squyres",
+    "Bonnie Buratti",
+    "Joseph Veverka",
+    "Carl Sagan"
+  ],
+  "publisher": "Icarus 59, 426-435",
+  "publicationDate": "1984",
+  "relations": [],
+  "statements": []
+}

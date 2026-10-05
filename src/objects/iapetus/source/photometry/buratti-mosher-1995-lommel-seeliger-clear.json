@@ -1,0 +1,76 @@
+{
+  "schema": "cssearth-photometric-model@1",
+  "id": "buratti-mosher-1995-lommel-seeliger-clear",
+  "instrument": "Voyager 1 and 2 ISS",
+  "filter": "clear filter, 0.47 um",
+  "quantity": "radiance-factor",
+  "model": {
+    "family": "separable",
+    "disk": {
+      "family": "lommel-seeliger"
+    },
+    "phase": {
+      "family": "tabulated",
+      "points": [
+        [
+          0,
+          1
+        ],
+        [
+          14,
+          0.937
+        ],
+        [
+          19,
+          0.9
+        ],
+        [
+          23,
+          0.879
+        ],
+        [
+          31,
+          0.805
+        ],
+        [
+          39,
+          0.8
+        ],
+        [
+          41,
+          0.79
+        ],
+        [
+          48,
+          0.753
+        ],
+        [
+          60,
+          0.69
+        ],
+        [
+          68,
+          0.648
+        ],
+        [
+          81,
+          0.579
+        ],
+        [
+          90,
+          0.532
+        ]
+      ]
+    }
+  },
+  "fit": {
+    "phaseDegrees": [
+      14,
+      90
+    ],
+    "emissionDegrees": [
+      0,
+      83.6
+    ]
+  }
+}
