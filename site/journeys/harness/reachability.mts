@@ -36,6 +36,14 @@ export function installTap(controls: { id: string; selector: string }[]) {
   const add = EventTarget.prototype.addEventListener, remove = EventTarget.prototype.removeEventListener;
   const records: { type: string; stack: string; controls: string[] }[] = [];
   const driven = new Set<string>();
+  const raf = window.requestAnimationFrame;
+  window.requestAnimationFrame = function(callback) {
+    const stack = new Error().stack ?? '';
+    return Reflect.apply(raf, this, [(time: number) => {
+      records.push({ type: 'animation-frame', stack, controls: [] });
+      return Reflect.apply(callback, window, [time]);
+    }]);
+  };
   const wrappers = new WeakMap<EventTarget, Map<string, WeakMap<object, { wrapped: EventListener; active: boolean; signal?: AbortSignal }>>>();
   const capture = (options?: boolean | AddEventListenerOptions | EventListenerOptions) => typeof options === 'boolean' ? options : options?.capture === true;
   function controlsFor(event: Event) {

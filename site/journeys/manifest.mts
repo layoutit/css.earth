@@ -34,11 +34,25 @@ export function coverage(journeys: readonly RegisteredJourney[], ids: readonly s
 export interface Exemption { id: string; reason: string }
 /** S0-reviewed exclusions only; new exclusions require review before changing the committed list. */
 export function parseUnreachable(input: unknown): Exemption[] {
-  if (!Array.isArray(input)) throw new TypeError('Invalid unreachable list');
+  if (!Array.isArray(input)) {
+    if (!input || typeof input !== 'object' || !('reviewed' in input) || !('proposed' in input)
+      || !Array.isArray(input.proposed) || Object.keys(input).some(key => !['reviewed', 'proposed'].includes(key))) throw new TypeError('Invalid unreachable sections');
+    const reviewed = parseUnreachable(input.reviewed);
+    const proposed = input.proposed.map((entry: unknown) => {
+      if (!entry || typeof entry !== 'object' || !('evidence' in entry) || typeof entry.evidence !== 'string' || !entry.evidence.trim()
+        || Object.keys(entry).some(key => !['id', 'reason', 'evidence'].includes(key))) throw new TypeError('Proposed exclusion needs exact evidence');
+      const [validated] = parseUnreachable([{ id: Reflect.get(entry, 'id'), reason: Reflect.get(entry, 'reason') }]);
+      if (!validated) throw new TypeError('Missing proposal');
+      return validated;
+    });
+    if (new Set([...reviewed, ...proposed].map(row => row.id)).size !== reviewed.length + proposed.length) throw new TypeError('Duplicate unreachable id');
+    return reviewed;
+  }
   const entries = input.map((entry: unknown) => {
     if (!entry || typeof entry !== 'object' || !('id' in entry) || typeof entry.id !== 'string'
       || !('reason' in entry) || typeof entry.reason !== 'string' || !entry.reason.trim()
-      || /[\r\n]/u.test(entry.reason) || Object.keys(entry).some(key => !['id', 'reason'].includes(key)))
+      || /[\r\n]/u.test(entry.reason) || Object.keys(entry).some(key => !['id', 'reason', 'evidence'].includes(key))
+      || ('evidence' in entry && (typeof entry.evidence !== 'string' || !entry.evidence.trim())))
       throw new TypeError('Invalid unreachable entry: expected id and one-line reason');
     return { id: entry.id, reason: entry.reason };
   });

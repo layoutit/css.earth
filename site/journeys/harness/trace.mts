@@ -12,6 +12,7 @@ export interface Trace {
   observed?: string[];
   combinations?: string[];
   volatile?: Json[];
+  knownVariations?: Json[];
   chunkAmbiguities?: string[];
   observations: Record<Family, Observation[]>;
 }
@@ -63,7 +64,7 @@ function observations(value: unknown, family: Family): Observation[] {
 }
 export function parseTrace(input: unknown): Trace {
   const value = record(input, '$');
-  keys(value, ['schema', 'journey', 'profile', 'toolchain', 'exercises', 'observations', 'volatile', 'chunkAmbiguities', 'observed', 'combinations'], '$');
+  keys(value, ['schema', 'journey', 'profile', 'toolchain', 'exercises', 'observations', 'volatile', 'chunkAmbiguities', 'observed', 'combinations', 'knownVariations'], '$');
   if (value.schema !== 'cssearth-journey@1') throw new TypeError('$.schema: unsupported journey trace schema');
   const rows = record(value.observations, '$.observations');
   keys(rows, families, '$.observations');
@@ -82,6 +83,10 @@ export function parseTrace(input: unknown): Trace {
       if (!Array.isArray(value.observed) || !value.observed.every(id => typeof id === 'string' && /^(?:control|handler|capability):/u.test(id))
         || new Set(value.observed).size !== value.observed.length) throw new TypeError('Invalid observed manifest ids');
       return value.observed;
+    })() }),
+    ...(value.knownVariations === undefined ? {} : { knownVariations: (() => {
+      if (!Array.isArray(value.knownVariations)) throw new TypeError('Expected known variation declarations');
+      return value.knownVariations.map(entry => json(entry));
     })() }),
     ...(value.volatile === undefined ? {} : { volatile: (() => { if (!Array.isArray(value.volatile)) throw new TypeError('$.volatile: expected declarations'); return value.volatile.map(entry => { const declaration = record(entry, '$.volatile[]'); for (const key of ['family', 'feature', 'subject', 'cause']) text(declaration[key], '$.volatile[].' + key); if (!families.some(family => family === declaration.family)) throw new TypeError('Invalid volatile family'); json(declaration.bound); return json(declaration); }); })() }),
     ...(value.chunkAmbiguities === undefined ? {} : { chunkAmbiguities: (() => {

@@ -1,6 +1,7 @@
 /** Journey API: stepped frames, observed completion barriers and public navigation events. */
 import { setTimeout as delay } from 'node:timers/promises';
 import type { Page } from 'playwright';
+import { nativeVisibilityTransition } from './native-visibility.mts';
 import type { recorder } from './recorder.mts';
 export interface Journey { id: string; recipe?: import('./trace.mts').Json; exercises: string[]; orderings?: string[][]; run(api: ReturnType<typeof journeyApi>): Promise<void> }
 export function journeyApi(page: Page, origin: string, record: Awaited<ReturnType<typeof recorder>>) {
@@ -34,6 +35,10 @@ export function journeyApi(page: Page, origin: string, record: Awaited<ReturnTyp
         Reflect.deleteProperty(window, '__journeyInputDelivered'); Reflect.deleteProperty(window, '__journeyInputController');
       });
     }
+  }
+  async function visibilityTransition(hidden?: () => Promise<void>) {
+    await nativeVisibilityTransition(page, hidden);
+    await record.capabilityWitness('visibility');
   }
   async function frames(count: number, settleIO = false) {
     for (let index = 0; index < count; index++) {
@@ -120,6 +125,7 @@ export function journeyApi(page: Page, origin: string, record: Awaited<ReturnTyp
   async function load(url: string, name: string) {
     record.setStep(name);
     if (page.url() !== 'about:blank') await record.drain();
+    record.loadStarted(url);
     const response = await page.goto(origin + url, { waitUntil: 'commit' });
     await barrier(name, new URL(url, origin).pathname);
     record.capability('capability:directLoad');
@@ -153,5 +159,5 @@ export function journeyApi(page: Page, origin: string, record: Awaited<ReturnTyp
     if (!accepted) throw new Error(`App did not accept flight to ${id}`);
     acceptedFlights++;
   }
-  return { page, frames, barrier, load, fly, input, navigationWitness, deepLinkWitness, playback: record.playback, setStep: record.setStep };
+  return { page, visibilityTransition, frames, barrier, load, fly, input, capabilityWitness: record.capabilityWitness, navigationWitness, deepLinkWitness, playback: record.playback, setStep: record.setStep };
 }

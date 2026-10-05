@@ -17,3 +17,9 @@ test('forwarded camera and control bindings reuse S0 wrapper event positions', (
   assert.deepEqual(bindingSites('site/controls.mts', 'function bind() { listen(button, "click", callback); }', wrappers).sites.map(row => row.id), ['handler:site:controls:bind:click:1']);
   assert.throws(() => parseWrappers({ wrappers: [{ eventIndex: -1 }] }), /Invalid/u);
 });
+test('RAF registrations keep owner identity and never alias ordinary listeners', () => {
+  const source = 'function start() { w.requestAnimationFrame(tick); w.addEventListener("error", error); } const tick = () => { w.requestAnimationFrame(tick); };';
+  const ids = bindingSites('site/diagnostic-recorder.mts', source, []).sites.map(row => row.id);
+  assert.deepEqual(ids, ['handler:site:diagnostic-recorder:start:animation-frame:1', 'handler:site:diagnostic-recorder:start:error:1', 'handler:site:diagnostic-recorder:tick:animation-frame:1']);
+  assert.deepEqual(bindingSites('site/diagnostic-recorder.mts', '\n\n' + source, []).sites.map(row => row.id), ids);
+});

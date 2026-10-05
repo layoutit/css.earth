@@ -25,14 +25,15 @@ export function bindingSites(file: string, text: string, wrappers: readonly List
   function walk(node: ts.Node) {
     if (ts.isCallExpression(node)) {
       let event: ts.Expression | undefined;
+      const raf = ts.isPropertyAccessExpression(node.expression) && node.expression.name.text === 'requestAnimationFrame' || ts.isIdentifier(node.expression) && node.expression.text === 'requestAnimationFrame';
       if (ts.isPropertyAccessExpression(node.expression) && node.expression.name.text === 'addEventListener') event = node.arguments[0];
       else {
         const name = node.expression.getText(ast), candidates = wrappers.filter(wrapper => wrapper.name === name);
         const wrapper = candidates.find(wrapper => wrapper.file === file) ?? (new Set(candidates.map(wrapper => wrapper.file)).size === 1 ? candidates[0] : undefined);
         if (wrapper) event = node.arguments[wrapper.eventIndex];
       }
-      if (event) {
-        const type = ts.isStringLiteralLike(event) ? event.text : `dynamic:${event.getText(ast)}`;
+      if (event || raf) {
+        const type = raf ? 'animation-frame' : event && ts.isStringLiteralLike(event) ? event.text : `dynamic:${event?.getText(ast)}`;
         const stem = `handler:${file.replace(/\.[^.]+$/u, '').replaceAll('/', ':')}:${owner(node)}:${type.replace(/[^a-zA-Z0-9_-]/gu, '-')}`;
         const ordinal = (counts.get(stem) ?? 0) + 1; counts.set(stem, ordinal);
         sites.push({ id: `${stem}:${ordinal}`, start: node.getStart(ast), end: node.end,

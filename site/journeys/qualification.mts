@@ -1,9 +1,26 @@
 /** Only measured 40-capture evidence for the current journey implementation can contribute coverage. */
+import { variationsFor } from './harness/known-variations.mts';
+import { isDeepStrictEqual } from 'node:util';
+import { profiles } from './harness/profiles.mts';
+import type { Trace } from './harness/trace.mts';
 import { readFileSync } from 'node:fs';
 import type { Journey } from './harness/api.mts';
 export interface QualifiedObservation { journey: string; profile: string; signature: string; observed: string[]; captures: number; combinations?: string[]; evidence: string }
+/** Current-lane evidence needs no ignored qualification receipt. */
+export function parseRunObservations(input: unknown): QualifiedObservation[] {
+  if (!Array.isArray(input)) throw new Error('Expected run observations');
+  const rows = input.map((row: unknown) => {
+    if (!row || typeof row !== 'object' || !('captures' in row) || typeof row.captures !== 'number' || !Number.isInteger(row.captures) || row.captures < 1 || row.captures > 20)
+      throw new Error('Invalid run capture count');
+    const [validated] = parseQualifications([{ ...row, captures: 40 }]);
+    if (!validated) throw new Error('Missing run observation');
+    return { ...validated, captures: row.captures };
+  });
+  if (new Set(rows.map(row => row.journey + '/' + row.profile)).size !== rows.length) throw new Error('Duplicate run pair');
+  return rows;
+}
 export function signature(journey: Journey) {
-  return JSON.stringify({ id: journey.id, recipe: journey.recipe ?? null, exercises: journey.exercises, run: String(journey.run), orderings: journey.orderings ?? [] });
+  return JSON.stringify({ id: journey.id, recipe: journey.recipe ?? null, knownVariations: variationsFor(journey.id), exercises: journey.exercises, run: String(journey.run), orderings: journey.orderings ?? [] });
 }
 export function parseQualifications(input: unknown): QualifiedObservation[] {
   if (!Array.isArray(input)) throw new Error('Expected qualification evidence array');
@@ -18,6 +35,27 @@ export function parseQualifications(input: unknown): QualifiedObservation[] {
   });
   if (new Set(rows.map(row => row.journey + '/' + row.profile)).size !== rows.length) throw new Error('Duplicate qualified pair');
   return rows;
+}
+/** Recompute receipt credit from actual captures, never from summary claims alone. */
+export function validateQualificationBatch(journey: Journey, profile: string, input: unknown, actual: readonly Trace[]) {
+  if (!profiles[profile] || actual.length !== 10 || !input || typeof input !== 'object' || !('passed' in input) || input.passed !== true
+    || !('repeat' in input) || input.repeat !== 10 || !('profile' in input) || input.profile !== profile
+    || !('signature' in input) || input.signature !== signature(journey)) throw new Error('Missing exact instrumented ten-capture batch');
+  for (const trace of actual) {
+    const toolchain = trace.toolchain;
+    if (trace.journey !== journey.id || trace.profile !== profile || !toolchain || typeof toolchain !== 'object' || Array.isArray(toolchain)
+      || !isDeepStrictEqual(toolchain.profile, profiles[profile]) || trace.observations.errors.length
+      || !isDeepStrictEqual(trace.exercises, journey.exercises)) throw new Error('Qualification capture has wrong identity, profile or errors');
+    if (journey.exercises.some(id => !trace.observed?.includes(id))) throw new Error('Qualification capture loses a declared id');
+  }
+  const observed = (actual[0]?.observed ?? []).filter(id => actual.every(trace => trace.observed?.includes(id))).sort();
+  const combinations = (actual[0]?.combinations ?? []).filter(value => actual.every(trace => trace.combinations?.includes(value))).sort();
+  for (const [key, expected] of [['observed', observed], ['combinations', combinations]] as const) {
+    const claimed: unknown = Reflect.get(input, key);
+    if (!Array.isArray(claimed) || !claimed.every(value => typeof value === 'string') || new Set(claimed).size !== claimed.length
+      || !isDeepStrictEqual([...claimed].sort(), expected)) throw new Error('Qualification summary differs from actual ' + key);
+  }
+  return { observed, combinations };
 }
 export const qualificationFile = new URL('../../output/journeys/observed-qualification.json', import.meta.url);
 export function qualifications(): QualifiedObservation[] {

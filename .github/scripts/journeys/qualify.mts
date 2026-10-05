@@ -7,7 +7,7 @@ import { pathToFileURL } from 'node:url';
 
 export async function main(args: string[]): Promise<number> {
   const { values } = parseArgs({ args, options: { dist: { type: 'string' }, out: { type: 'string' },
-    journey: { type: 'string' }, profile: { type: 'string' } } });
+    journey: { type: 'string' }, profile: { type: 'string' }, 'cache-preserving': { type: 'boolean', default: false } } });
   if (!values.dist || !values.out || !values.journey || !values.profile) throw new Error('Expected --dist --out --journey --profile');
   const root = resolve(values.out);
   await mkdir(root, { recursive: true });
@@ -32,7 +32,7 @@ export async function main(args: string[]): Promise<number> {
     }
   }
   for (const journey of values.journey.split(',')) for (const profile of values.profile.split(',')) {
-    if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/u.test(journey) || !['chromium-desktop', 'webkit-desktop'].includes(profile)) throw new Error('Invalid journey/profile');
+    if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/u.test(journey) || !/^[a-z0-9]+(?:-[a-z0-9]+)*$/u.test(profile)) throw new Error('Invalid journey/profile');
     const result = { journey, profile, exactCaptures: 0, status: 'experimental' };
     results.push(result);
     const pair = resolve(root, profile, journey);
@@ -42,7 +42,7 @@ export async function main(args: string[]): Promise<number> {
       if (await stat(out).catch(() => null)) throw new Error(`Refusing existing qualification artifacts ${out}`);
       console.log(`CAPTURING ${journey}/${profile} batch ${batch + 1}/4`);
       let passed = await command(['site/journeys/run.mts', '--dist', values.dist, '--out', out,
-        '--journey', journey, '--profile', profile, '--repeat', '10'], resolve(pair, `batch-${batch + 1}.log`), 'DETERMINISTIC: exact repeats match');
+        '--journey', journey, '--profile', profile, '--repeat', '10', ...(values['cache-preserving'] ? ['--cache-preserving'] : [])], resolve(pair, `batch-${batch + 1}.log`), 'DETERMINISTIC: exact repeats match');
       if (passed && batch > 0) passed = await command(['site/journeys/compare.mts', '--base', resolve(pair, 'batch-1/run-1'),
         '--head', resolve(out, 'run-1')], resolve(pair, `boundary-${batch + 1}.log`), 'IDENTICAL: validated traces and screenshots');
       if (!passed) {

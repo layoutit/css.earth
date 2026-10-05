@@ -169,7 +169,7 @@ test('deleted chunk suffix, count, name and status protections turn their focuse
   const root = await mkdtemp(resolve(parent, 'deleted-chunk-'));
   const exec = promisify(execFile), original = await readFile(resolve(import.meta.dirname, 'canonical.mts'), 'utf8');
   try {
-    for (const name of ['trace.mts', 'canonical.mts', 'canonical.test.mts', 'differ.mts', 'png.mts'])
+    for (const name of ['trace.mts', 'canonical.mts', 'known-variations.mts', 'canonical.test.mts', 'differ.mts', 'png.mts'])
       await copyFile(resolve(import.meta.dirname, name), resolve(root, name));
     for (const [before, after, pattern] of [
       ["if (compareChunks) trace = parseTrace(canonicalChunkNames(json(trace), trace.chunkAmbiguities));", '', 'chunk suffixes normalize only'],
@@ -225,7 +225,7 @@ test('deleting step identity or lifecycle order turns its detector red', async (
   const root = await mkdtemp(resolve(parent, 'deleted-step-'));
   const exec = promisify(execFile), original = await readFile(resolve(import.meta.dirname, 'canonical.mts'), 'utf8');
   try {
-    for (const name of ['trace.mts', 'canonical.mts', 'canonical.test.mts', 'differ.mts', 'png.mts'])
+    for (const name of ['trace.mts', 'canonical.mts', 'known-variations.mts', 'canonical.test.mts', 'differ.mts', 'png.mts'])
       await copyFile(resolve(import.meta.dirname, name), resolve(root, name));
     for (const [before, after, pattern] of [
       ['stableKey([request.step, data])', 'stableKey(data)', 'multi-step identical requests'],

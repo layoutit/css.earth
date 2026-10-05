@@ -24,11 +24,11 @@ Install Playwright's clock before navigation at a fixed date, then pause at a fi
 
 A barrier requires the expected route, `data-ready=true`, loaded fonts, no motion, requests, worker jobs or idle callbacks, and sixteen unchanged frames. Decode only complete, already-requested document images and fonts, then require sixteen more quiet frames. IO/barrier timeout is 120 seconds; decode timeout is 30 seconds. Real IO can move an event between fake frames, so frame numbers and frames-to-quiet are diagnostics.
 
-`--repeat 2` requires exact traces and pixels. Qualification requires ten identical captures and thirty further captures, including batch boundaries. A pair that drifts remains experimental; `--gate` rejects it. Defaults select only qualified pairs. A repeated saved journey assertion still exits 1, with focused content, PNG and a partial trace.
+`--repeat 2` requires exact traces and pixels. Qualification requires ten identical captures and thirty further captures, including batch boundaries. A drifting run fails and earns no qualification receipt. Tracked status changes require an explicit reviewed declaration; `--gate` refuses experimental entries. Defaults select only qualified pairs. A repeated saved journey assertion still exits 1, with focused content, PNG and a partial trace.
 
 | Observer | Known effect |
 | --- | --- |
-| Network guard | Blocks non-loopback traffic. Playwright routing disables HTTP cache, so revisit journeys do not qualify native warm-cache behavior. Service workers are blocked; local `scenes/` is required. |
+| Network guard | Blocks non-loopback traffic. Default Playwright routing disables HTTP cache; native warm-cache journeys use the verified proxy mode below. Service workers are blocked; local `scenes/` is required. |
 | Worker scheduler | Replaces native reply arrival order with deterministic release. Real-time runs must test native ordering separately. |
 | Decode | Does not create background-image requests or activate lazy images. GPU/background-image presentation completion is not proved. |
 | Screenshot | Disables animations during capture, then restores paused permission/pose. It does not prove an unperturbed native animation timeline. |
@@ -47,58 +47,55 @@ Indistinguishable nodes receive occurrence identities in observation order; swap
 
 ## Journeys and measured qualification
 
-The [registry](../site/journeys/registry.mts) derives qualified status from current local 40-capture observation receipts in ignored output. A clean checkout has no instrumented qualified defaults. Historical qualification below describes the earlier uninstrumented version and provides no current coverage credit. Profiles include engine, viewport, DPR, touch, reduced motion and color scheme. Chromium/WebKit desktop and Chromium-reduced are launched paths; touch/tablet and lockstep remain experimental.
+The [registry](../site/journeys/registry.mts) reads tracked [qualification declarations](../site/journeys/manifest-qualification.mts). A qualified entry must name its date-free measurement contract: forty captures, engine identities, four ten-capture batches, three compared boundaries, exact traces, RGBA pixels and observed IDs. A fresh checkout selects those pairs without receipts. Experimental pairs need an explicit selection and cannot enter `--gate`.
 
-Flights use the application's public events, as the [iPad journey](../labs/performance/ipad-journey.mts) does, and verify a resident document witness. They are page-dispatched flights. Earth-system uses host Earth; Dione departs from Saturn-system; its navigation journey now uses the native Dione anchor rather than the host-oriented public event. The native journey verifies the visible Dione body card and a resident document. Its ten Chromium captures complete those checks but still vary dataset requests and initiator/cache evidence; it remains unqualified. WebKit native diagnostics still vary: one ResizeObserver arrival error and one successful resident Dione body-card arrival. Interruption waits for visible pending progress. Settings deep links use `settings=1` and verify the served prepared settings. Earth-system also opens settings and checks the live restored shadows checkbox; its fourth Chromium batch still reproduces a texture request count of one versus two.
+The [qualification command](../.github/scripts/journeys/qualify.mts) runs the four batches, compares every boundary, requires positive completion signals and checks all forty actual traces for profile identity, declared observations and errors. Its ignored local receipt records the current action recipe, known variations and common observed IDs. A declaration records the reviewed status; a receipt records local measurement. After measuring a new pair, explicitly update its tracked declaration with the measurement contract. Observer/helper changes require fresh qualification; an old receipt is not evidence for a changed harness.
 
-| Journey | Chromium desktop | WebKit desktop |
-| --- | --- | --- |
-| milky-way | 10+30 exact | 10+30 exact |
-| earth-system | 10+30 exact | 10+30 exact |
-| dione | 10+30 exact | 10+30 exact |
-| milky-way-deep-link | 10+30 exact | 10+30 exact |
-| earth-system-deep-link | experimental | 10+30 exact |
-| dione-deep-link | 10+30 exact | 10+30 exact |
-| dione-navigation | experimental | experimental |
-| dione-interrupted | 10+30 exact | 10+30 exact |
-| dione-drag | 10+30 exact | 10+30 exact |
-| dione-keyboard | 10+30 exact | 10+30 exact |
+The [CI lane](../.github/scripts/journeys/gate.mts) runs declared-qualified pairs in the requested profiles, then credits only observed IDs common to that lane's captures. It aggregates the engine runs before checking the full manifest. It reads no local qualification receipt. Removing an action makes its declared control or handler unobserved and fails the run, including in a fresh checkout. Removing its declaration too leaves the manifest ID missing and fails coverage.
 
-Chromium Earth-system settings: five request-count differences in ten captures; texture consumers issue one versus two requests. Chromium Dione navigation: ten saved captures compare exactly after excluding global interleaving, but fifteen further captures vary network requests/counts/initiators/cache evidence (full histogram in corrected-results.json). WebKit Dione navigation: route/readiness assertions and actual content/rendering changes; remains experimental. Interruption passed in both engines.
+The [manifest](../site/journeys/manifest-ids.json) preserves 101 controls, 189 handlers and 29 capabilities. Local `--coverage` reports current receipt-backed observations; `--coverage --require` fails if any ID lacks evidence or a reviewed exemption. `--evidence` instead reads a current lane's observations. `--coverage --require --dist ... --out ... --gate` records and gates one profile directly. Without an explicit profile, reports aggregate qualified profiles.
 
-Passing batches captured under the stricter global-order comparison remain valid after removing only that nondeterministic field; no recording, clock, geometry or pixel contract changed. WebKit Dione settings was re-compared ten times and captured thirty further times under the corrected contract. All batch boundaries were compared.
+Coverage credits trusted native control activation with unique exact static markup fingerprints. Tag-only, colliding or unresolved controls get no credit. Invoked listener and RAF registration stacks resolve through production hidden source maps and stable AST owner/event/ordinal identities. Registration alone is insufficient; a cancelled RAF gets no credit. Raw invocation evidence stays beside the trace. Property handlers, observer callbacks and worker-global bindings still need their own mechanism attribution.
 
+The [unreachable file](../site/journeys/unreachable.json) separates `reviewed` exclusions from source-backed `proposed` dispositions. Only reviewed entries affect the gate. Every proposal names its reason and exact evidence; the owner must approve it by moving it to reviewed. The physical-iPad import-queue exclusion is reviewed. The hidden diagnostic recorder, production-host-only error-report bootstrap and loading-world disposal abort are proposals, with no exemption credit. Unknown reviewed IDs, duplicate dispositions and qualified/exempt overlap fail.
 
-Milky Way/Earth transitions, history, wheel and native warm cache are experimental. Application DOM/subpixel differences and WebKit viewport/ResizeObserver failures are not masked or repaired by this tooling.
+`--combinations` reports the thirteen representatives against the preserved 159 capability/startup combinations. It accepts current-lane evidence too. Credit requires actual transport/startup plus resident or driven-action witnesses; neither object declarations nor a direct-load witness establish in-app startup combinations. Post-selection facts and destination startup ownership still need stronger witnesses.
 
-Journeys and their harness live under `site/journeys/`: [architecture rules](../.github/scripts/architecture/rules.mts) prohibit imports across site/labs/CI trees, including types. Copy/build/proof commands live under `.github/scripts/journeys/` and use subprocess boundaries. No architecture baseline increase is needed. Browser journeys have a separate command; synthetic tests use the existing unit globs.
+Current local measurement: **controls 2/101, handlers 31/189, capabilities 2/29, combinations 4/159**. Neptune and 2001 SN263 have current forty-capture receipts in both desktop engines. Other declared representatives require fresh receipts after harness changes; declaration alone earns no coverage. The full coverage gate remains incomplete.
 
-The [manifest ID contract](../site/journeys/manifest-ids.json) preserves all 319 S0 ids and validates each `exercises` entry. `node site/journeys/run.mts --coverage --require` exits **1** when any id lacks a qualified journey/profile pair or reviewed exemption, listing every missing id; complete coverage exits **0**. Current fresh receipts report controls **3/101**, handlers **31/189**, capabilities **3/29**, and combinations **6/159**. Counts report observed controls out of 101, handlers out of 189 and capabilities out of 29; the previous declaration-audited counts are not retained as evidence. Without `--require`, coverage reports the reached and unreached lists. An explicit `--profile` restricts the report to that profile; otherwise qualified pairs across all profiles contribute.
+## Capability witnesses
 
-The committed [unreachable list](../site/journeys/unreachable.json) contains only the S0-reviewed physical-iPad import-queue exclusion, with its one-line reason. Unknown ids, duplicate exemptions and ids exercised by any qualified pair are refused. New exemptions require review; lack of a journey is not a reason for exemption. Removing a native action makes its declared control/handler unobserved and turns the journey red in both-engine mutation tests. Stale action recipes and experimental pairs cannot add coverage.
+Journeys call `api.capabilityWitness(kind)` after the relevant native action. Witnesses read harness-owned observations and live state; callers cannot submit arbitrary evidence.
 
-Coverage credits only observed IDs common to every capture of a qualified pair. Trusted native events identify controls using unique, exact static markup fingerprints; tag-only, colliding or unresolved controls receive no credit. Listener invocation stacks resolve through the supplied build’s hidden source maps and S0’s AST owner/event/ordinal identities. Property handlers, observer callbacks and RAF sites remain uncredited until their mechanisms are instrumented. Raw registration evidence is saved beside the trace. Every declared ID must be observed or the journey fails.
+| Kind | Required evidence |
+| --- | --- |
+| DPR | Configured profile DPR, matching native `devicePixelRatio`, visible resident rendering geometry and surface dimensions |
+| responsive | Trusted native resize delivery, changed viewport, resulting resident layout |
+| reducedMotion | Matching media query and CV Mon prepared animation playback permission, sampled before and after a preference transition |
+| tabFocus | Trusted Tab delivery followed by changed visible `:focus-visible` focus with a measured nonzero, nontransparent outline |
+| touch / penPointer | Trusted browser-delivered pointer of the requested kind; touch also requires a touch profile |
+| visibility | Trusted real hidden-to-visible `visibilitychange` sequence through native tab activation |
+| worker | One application worker's URL, that same worker's completed native reply, zero jobs and held replies |
+| coldWarmCache | Same-context cold load and revisit, same successful resource fetched cold then served from a native cache |
+| coast | Application coasting followed by current rest, with actual changed writes during the coast |
 
-`--combinations` reports each representative’s reached and unreached combinations against the preserved 159-entry S0 universe. Credit requires actual transport/startup and DOM or driven-action evidence in a qualified pair; declarations do not count. Direct startup evidence does not establish the in-app startup paths. The full coverage requirement remains red.
+Profiles include desktop DPR 1 and DPR 2 in both engines, Chromium mobile/tablet and equivalent WebKit DPR 2 touch profiles. Qualification accepts any registered profile and keeps its identity in the receipt. Native pen protocol input is available in Chromium; Playwright exposes no equivalent WebKit pen or multi-touch protocol API.
 
-| Additional representative | Dataset action | Fresh Chromium evidence | Fresh WebKit evidence |
-| --- | --- | --- | --- |
-| lmc | VISTA infrared | pending fresh qualification | pending fresh qualification |
-| neptune-system | 2017 visible, then 2018 step | 10+30 exact | 10+30 exact |
-| beta-pictoris-system | Debris-disc color; require legend | application DOM drift | unattempted |
-| asteroid-2001-sn263-system | Reselect sole shape dataset | 10+30 exact | 10+30 exact |
-| mars-system | Chlorine, then iron step | surface pixel drift | unattempted |
-| observable-universe | Cutaway; require legend | pixel drift after 10 exact | unattempted |
-| abell-1689 | Reselect sole optical dataset | 10+30 exact | 10+30 exact |
-| centaurus-cluster | Reselect sole members dataset | 10+30 exact | 10+30 exact |
-| great-attractor | Reselect sole galaxies dataset | 10+30 exact | 10+30 exact |
-| local-group | Reselect sole galaxies dataset | 10+30 exact | 10+30 exact |
+Cache-preserving captures use a verified Chromium browser-owned loopback HTTP proxy, with all foreign HTTP, CONNECT and upgrade transport refused before forwarding. Routing is disabled in this mode so native HTTP cache works. Warm-cache journeys select it automatically; `--cache-preserving` selects it explicitly for other recipes. Chromium CDP must report a memory/disk cache hit for a resource fetched on the cold load. WebKit has no exposed native-hit metadata and is refused for this qualification mode.
 
-Together with Milky Way, Earth-system and Dione above, these are all thirteen S0 representatives. The new journeys are intended to open and close settings, then use a native dataset button; fresh instrumented qualification is measured separately from the earlier LMC result. Single-dataset objects have no alternative to switch to; legends are static panels with no toggle listener.
+The headed `chromium-desktop-visibility` profile provides a real visibility path. It attaches with Playwright's public `connectOverCDP({ noDefaults: true })`, which omits focus emulation, and runs one explicit journey per fresh browser. `api.visibilityTransition(hiddenCallback?)` activates another native tab, waits for actual hidden state, optionally inspects hidden playback, activates the journey tab again and validates the trusted transition. The browser profile stays under output, and its verified loopback proxy also blocks service-worker scripts before forwarding.
 
-The four system journeys select their host using its visible native link and require the body card before datasets/settings. Neptune then selects the 2018 step; Mars selects the iron step. These are dataset actions, not SequencePlayer Play actions. Neptune has completed fresh 10+30 qualification in both engines. Beta Pictoris Chromium completes its actions but varies transient world-caption writes during native host selection. It remains experimental; no DOM history or pixels are masked. Mars Chromium completes every action but varies 40 Mars surface pixels during settings snapshots while DOM, geometry and dataset/step endpoints match. Its native paint cause remains unresolved; it receives no credit.
+Headless Chromium, ordinary focus-emulated contexts and WebKit did not produce a real transition in these tests. Frozen/active lifecycle commands alone did not change visibility. These modes remain unsupported; no property replacement or synthetic visibility event is used.
 
-The [qualification command](../.github/scripts/journeys/qualify.mts) runs four ten-capture batches per pair, compares every batch to the first, requires positive comparison output and stops at the first unstable pair. After all four exact batches and boundaries, it saves the observed-ID intersection and current action recipe as a local qualification receipt. Changing the journey action body or recipe invalidates its receipt. Shared helper or observer changes require explicit withdrawal and requalification; historical receipts are not portable evidence.
+The recorder attributes the four documented coast exceptions and six lab write patterns only to matching writes with their actual subject, property and application coasting state. It flushes pending mutations before motion state changes and requires completed rest. Selecting Earth, an orbit, a sky or a star bank alone earns no exception credit. Raw witness evidence is retained in `capabilities.raw.json`.
+
+## Known application variation
+
+[Tracked variations](../site/journeys/harness/known-variations.mts) name `{ id, step, measure, allowed, reason }`. Each measure is an exact family/subject-or-URL/field identity. There are no wildcard subjects, ranges, thresholds or pixel masks. Comparison permits only a value in that declared finite set; a changed neighbor or an unseen value fails. The declaration is recorded in the trace, while its actual observed value remains in the raw recording. A different declaration cannot be smuggled in through a trace.
+
+Earth's settings deep link permits request count 1/2 for five individually named texture URLs. Every other request field remains exact. Beta Pictoris native host selection permits the two observed full ordered Naledi caption histories and their counts 7/8, as separate exact measures. These sets come from locked captures; fresh forty-capture qualification is still required before status promotion.
+
+Wheel jitter affects ruler writes, altitude text and endpoint pixels; it has no supported bounded rendering set and remains experimental. Mars/Observable Universe paint drift, Dione transport/arrival errors and WebKit worker publication drift also remain experimental. Application fixes are outside the harness's ownership.
 
 ## Run base versus head locally
 
@@ -117,8 +114,6 @@ mkdir -p "$TMPDIR" output/journeys
 export JOURNEY_OUTPUT="$(mktemp -d "$PWD/output/journeys/compare-XXXXXX")"
 node --test site/journeys/harness/*.test.mts site/journeys/registry.test.mts .github/scripts/journeys/breakages/*.test.mts
 pnpm journeys:mutations
-node site/journeys/run.mts --combinations
-node site/journeys/run.mts --coverage --require
 for JOURNEY_PROFILE in chromium-desktop webkit-desktop; do
   node site/journeys/run.mts --checkout "$BASE_CHECKOUT" --dist "$BASE_CHECKOUT/dist" --out "$JOURNEY_OUTPUT/base/$JOURNEY_PROFILE" --profile "$JOURNEY_PROFILE" --gate --repeat 2
   node site/journeys/run.mts --checkout "$HEAD_CHECKOUT" --dist "$HEAD_CHECKOUT/dist" --out "$JOURNEY_OUTPUT/head/$JOURNEY_PROFILE" --profile "$JOURNEY_PROFILE" --gate --repeat 2
@@ -128,7 +123,7 @@ done
 
 `--checkout` names the preview owner; otherwise it is inferred from the distribution's ancestors. Exit **0** means equal complete artifacts, **1** means differences or saved journey assertions, **2** means tool/infrastructure error. Previews, contexts and temporary browser roots close on normal/error shutdown; the preview child also closes on parent IPC disconnect.
 
-To add a journey, export a typed `journey` with a unique id, validated `exercises`, any proven issue-order declarations and `run(api)`. Register it as experimental, set the step before actions, use the application navigation/input path and route/motion barriers, then run four ten-capture batches with the qualification command to produce its current local receipt. Build in performance mode to preserve the hidden maps required for listener identity; use a 6144 MB Node heap for this production build.
+To add a journey, export a typed `journey` with a unique id, validated `exercises`, any proven issue-order declarations and `run(api)`. Register it as experimental, set the step before actions, use native input and route/motion barriers, then run four ten-capture batches with the qualification command. Review its local receipt before adding the tracked qualified declaration. Build in performance mode to preserve the hidden maps required for listener identity; use a 6144 MB Node heap for this production build.
 
 ## Detector and source proofs
 
@@ -140,7 +135,7 @@ To add a journey, export a typed `journey` with a unique id, validated `exercise
 | Content | Text, title, URL/history values, root data | Both |
 | Errors | Page error, rejection, console error/warning, worker error | Both |
 
-The full browser lane passes 65 tests in 200 seconds, including all 49 focused recorder cases with stable controls, family-detector deletions in both engines, native-playback/timestamp deletions, worker scheduling and foreign-request safety. Synthetic units pass 86 tests; six browser-only tests are skipped there. Individual-field deletion coverage beyond the named checks remains incomplete.
+The browser mutation lane checks stable controls, family-detector deletions in both engines, native playback/timestamp deletion, worker scheduling and foreign-request safety. Native reachability tests delete driven actions and RAF scheduling; capability tests reject missing native delivery and forged input. Individual-field deletion coverage beyond these named checks remains incomplete.
 
 Tests require an equal unperturbed control and the declared targeted family set. Deleting each family detector must make the focused browser test fail in both engines. Units also defend step identity, per-subject lifecycle order, chunk collisions/counts/status/names, exact alpha/color pixels and declared issuance. Timing exclusions are tested independently and preserve raw traces.
 
@@ -156,7 +151,7 @@ Tests require an equal unperturbed control and the declared targeted family set.
 | Reduced-motion branch | 0 / 1, Chromium reduced | Native playback permission |
 | WebKit-specific fault | Healthy A/B exact in both; fault Chromium exact, WebKit red | Errors; equal-length one-byte startup tripwire |
 
-Saved rebuilt-source recordings were re-compared with the corrected differ. They remain applicable because the source substitutions and retained observers are unchanged. The older WebKit fault recordings could not establish a matching Chromium control because rebuild names/byte classes and versions differed. The new equal-artifact proof independently starts two identical healthy views in each engine, then a third view changing only `0` to `1` in an equal-length tripwire in the real startup module. Hidden maps shift their generated line while preserving original source positions. Healthy repeats and cross-copy comparisons are exact in both engines; Chromium’s fault view is exact green and WebKit’s fault view is errors red. Unchanged prepared files are shared read-only; the tested route HTML, module and map are independent files. No normalizer or detector changes are used.
+The equal-artifact engine proof starts two identical healthy views in each engine, then changes one byte in an equal-length tripwire inside the real startup module. Hidden maps preserve original source positions. Healthy repeats and cross-copy comparisons are exact in both engines; the fault is Chromium green and WebKit errors red. Unchanged prepared files are shared read-only; the tested route HTML, module and map are independent files.
 
 The WebKit fault is a synthetic engine-specific startup exception, not an existing feature branch. Reduced-motion source evidence exercises CV Mon's native playback permission.
 
@@ -180,25 +175,25 @@ pnpm exec playwright install --with-deps chromium webkit
 (cd "$HEAD_CHECKOUT" && NODE_OPTIONS=--max-old-space-size=6144 pnpm exec astro build --mode performance --outDir dist-journeys)
 export JOURNEY_OUTPUT="$(mktemp -d "$PWD/output/journeys/ci-XXXXXX")"
 pnpm journeys:mutations
-node site/journeys/run.mts --combinations
-node site/journeys/run.mts --coverage --require
 for JOURNEY_PROFILE in chromium-desktop webkit-desktop; do
   node site/journeys/run.mts --checkout "$BASE_CHECKOUT" --dist "$BASE_CHECKOUT/dist-journeys" --out "$JOURNEY_OUTPUT/base/$JOURNEY_PROFILE" --profile "$JOURNEY_PROFILE" --gate --repeat 2
   node site/journeys/run.mts --checkout "$HEAD_CHECKOUT" --dist "$HEAD_CHECKOUT/dist-journeys" --out "$JOURNEY_OUTPUT/head/$JOURNEY_PROFILE" --profile "$JOURNEY_PROFILE" --gate --repeat 2
   node site/journeys/compare.mts --base "$JOURNEY_OUTPUT/base/$JOURNEY_PROFILE/run-1" --head "$JOURNEY_OUTPUT/head/$JOURNEY_PROFILE/run-1"
 done
+node .github/scripts/journeys/gate.mts --checkout "$HEAD_CHECKOUT" --dist "$HEAD_CHECKOUT/dist-journeys" --out "$JOURNEY_OUTPUT/current-lane"
 ```
 
 | Stage | Measured local cost |
 | --- | --- |
 | Direct journey, one capture | Approximately 2–7 seconds, depending on engine/object |
 | Dione flight, one capture | Approximately 21–23 seconds |
-| Recorder mutations, 49 focused cases | 145 seconds |
-| Complete browser mutation lane, 65 tests | 200 seconds |
+| Recorder mutations, 49 focused cases | Approximately 147 seconds |
+| Complete browser mutation lane, 77 tests | Approximately 247 seconds |
 | Full production build, preserved source proofs | 265–357 seconds per build |
 | Direct qualification, 10+30 per object | Approximately 93–270 seconds per engine/object |
+| Multi-step Neptune qualification, 10+30 | Approximately 13 minutes per desktop engine |
 | Compare one direct pair | Approximately 0.3–0.8 seconds |
 
 These are local measurements, not CI guarantees. Browser installation, input restoration and hosted runners remain unmeasured.
 
-Tranche 2 completes unfinished representative qualification and startup-combination coverage, remaining listener mechanisms and control families, real-time latency and perturbation runs, touch/tablet profiles, coast journeys and the physical iPad path. Native HTTP cache fidelity and complete cache/dependency evidence remain limitations.
+Remaining work includes uncovered control/listener mechanisms and startup combinations, real-time latency/native scheduling, headless/WebKit visibility, WebKit cache evidence and the physical iPad path.

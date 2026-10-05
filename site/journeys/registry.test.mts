@@ -77,3 +77,13 @@ test('deleting an exercise from a real qualified journey turns its focused gate 
     assert.deepEqual(coverageGate([mutated], ids, [], undefined, [{ ...proof[0]!, signature: signature(mutated), observed: mutated.exercises }]).missing, [deleted]);
   }
 });
+
+test('proposed unreachable entries never affect the gate until the owner reviews them', () => {
+  const proposal = { id: 'handler:unreached', reason: 'No permitted native path', evidence: 'Exact source and native probe evidence' };
+  const parsed = parseUnreachable({ reviewed: [], proposed: [proposal] });
+  assert.deepEqual(parsed, []);
+  assert.equal(coverageGate([], [proposal.id], parsed, undefined, []).passed, false);
+  assert.equal(coverageGate([], [proposal.id], parseUnreachable({ reviewed: [proposal], proposed: [] }), undefined, []).passed, true);
+  assert.throws(() => parseUnreachable({ reviewed: [{ ...proposal, evidence: '' }], proposed: [] }), /Invalid unreachable/u);
+  assert.throws(() => parseUnreachable({ reviewed: [], proposed: [{ id: proposal.id, reason: proposal.reason }] }), /exact evidence/u);
+});

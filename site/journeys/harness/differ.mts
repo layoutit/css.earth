@@ -38,6 +38,7 @@ export function compareTraces(base: Trace, head: Trace): Difference[] {
   const add = (family: Difference['family'], result: ValueDifference | null) => {
     if (result) differences.push({ journey: base.journey, profile: base.profile, family, ...result });
   };
+  add('trace', firstDifference(base.knownVariations ?? [], head.knownVariations ?? [], '$.knownVariations'));
   add('trace', firstDifference(base.volatile ?? [], head.volatile ?? [], '$.volatile'));
   add('trace', firstDifference(base.combinations ?? [], head.combinations ?? [], '$.combinations'));
   add('trace', firstDifference(base.observed ?? [], head.observed ?? [], '$.observed'));

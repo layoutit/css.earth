@@ -6,14 +6,13 @@ import { journey as lightCurves } from './light-curves.journey.mts';
 import { journeys as representatives } from './representatives.journey.mts';
 import { journeys as core } from './core.journey.mts';
 import { profiles } from './harness/profiles.mts';
-import { observedFor, qualifications } from './qualification.mts';
+import { declarations, validateDeclaration, type Declaration, type Status } from './manifest-qualification.mts';
 import type { Journey } from './harness/api.mts';
-export type Status = 'qualified' | 'experimental';
-export interface RegisteredJourney extends Journey { status: Record<string, Status> }
-// Instrumented qualification is bound to the current action recipe; historical traces carry no receipt.
-const evidence = qualifications();
+export type { Status } from './manifest-qualification.mts';
+export interface RegisteredJourney extends Journey { status: Record<string, Status>; qualification?: Record<string, Declaration> }
 export const journeys: RegisteredJourney[] = [milkyWay, earthSystem, dione, lightCurves, ...core, ...representatives].map(journey => ({
-  ...journey, status: Object.fromEntries(Object.keys(profiles).map(profile => [profile, observedFor(journey, profile, evidence).length > 0 ? 'qualified' : 'experimental'])),
+  ...journey, qualification: declarations[journey.id] ?? {},
+  status: Object.fromEntries(Object.keys(profiles).map(profile => [profile, validateDeclaration(declarations[journey.id]?.[profile] ?? { status: 'experimental' }, profile).status])),
 }));
 export function selectJourneys(profile: string, requested?: string, gate = false): RegisteredJourney[] {
   if (!profiles[profile]) throw new Error(`Unknown profile ${profile}`);
