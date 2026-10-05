@@ -1,6 +1,6 @@
 import type { Vector3 } from '../emission/coordinates.js';
 import { PREPARED_IMAGE_LAYER_BANK_SCHEMA } from './volume-schemas.js';
-import type { VolumeAxis, PreparedCssVolume } from './css-volume-types.js';
+import type { VolumeAxis, PreparedCssVolume, PreparedVolumeStack, PreparedVolumeLeaf } from './css-volume-types.js';
 
 export interface ImageLayerObservation { centerRaDeg: number; centerDecDeg: number; fieldOfViewDeg: [number, number]; northClockwiseDeg: number }
 
@@ -28,4 +28,7 @@ export interface PreparedImageLayerView {
 }
 export interface PreparedCssImageLayers extends PreparedCssVolume {
   readonly bankViews: readonly PreparedImageLayerView[];
+  /** The common leaves, each with its four prepared corners (bank units) when the file has them: the sheet a camera
+   * stands on is left out of the drawing. */
+  readonly stacks: readonly (Omit<PreparedVolumeStack, 'leaves'> & { readonly leaves: readonly (PreparedVolumeLeaf & { readonly verticesUnits?: readonly [Vector3, Vector3, Vector3, Vector3] })[] })[];
 }

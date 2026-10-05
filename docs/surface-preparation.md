@@ -430,6 +430,22 @@ through the archived camera at right. Compare the marked landmarks; the display
 stretches differ. Both use related observations, so this is a registration check.
 [Gaspra's README](../src/objects/gaspra/README.md) records the source, residuals and limits.
 
+### A flattened body
+
+A body that is shorter from pole to pole than across states its two radii: `shape` in `object.json` becomes
+`{ "kind": "ellipsoid", "radiusKm": <equatorial>, "polarRadiusKm": <polar> }`, and `surface.polarRadius` in
+`source/preparation/geometry.json` is `radius × polar / equatorial`. The lighting frames and the silhouette follow.
+
+Where the flattening is more than a pixel or two, the profile also states `"latitude": "planetocentric"`. A map's rows
+count planetocentric latitude, the angle of the line from the centre. With that setting
+[`meshLatitude`](../packages/bake/src/surface-geometry/surface.ts) draws each row where that line meets the spheroid,
+and the feature step casts label anchors onto the same surface, so labels sit on the ground at the poles. Without it a
+row is placed at the spheroid's parametric latitude, which is exact on a sphere and within a pixel on Mars. Ceres
+(482 by 446 km, 7.5%) and Iapetus (745.7 by 712.1 km, 4.5%) use it; without it their features would sit up to 2.2° and
+1.3° of latitude from their rows. The Gazetteer's datum sphere is then compared with the spheroid's volume-equivalent
+radius. The coordinate readout still measures on a sphere of the equatorial radius, and the lighting overlay
+is still a round body's.
+
 ## Reduce geometry and bake the atlas
 
 [radial-mesh.ts](../packages/bake/src/objects/geometry/radial-mesh.ts)
@@ -774,7 +790,7 @@ same published law, so the limb in the app is the limb the instrument saw.
   | Moon | Hapke at 643 nm | [Sato et al. 2014](https://doi.org/10.1002/2013JE004580), the correction of the LROC WAC mosaic; w, b and h_S are medians of its PDS parameter map |
   | Ceres (dwarf planet) | Hapke at 749 nm | [Li et al. 2019](https://doi.org/10.1016/j.icarus.2018.12.038), Dawn Framing Camera |
   | Io | Lunar-Lambert, weight 0.7 | the [USGS mosaics'](https://astrogeology.usgs.gov/search/map/io_voyager_galileo_ssi_global_mosaic_1km) own limb-darkening correction, at the phase [SIM 3168](https://pubs.usgs.gov/sim/3168/) gives; the limb limit is the outermost pixel of the finest full-disc Galileo frame at that phase, derived here |
-  | Europa | Lommel–Seeliger plus Lambert, coefficients linear in phase | [Dhingra et al. 2021](https://doi.org/10.3847/PSJ/ac06d6), Voyager 2, Galileo and New Horizons clear-filter images, ridged-plains row; the limb limit is the outermost pixel of the finest full-disc image in its Table 1, derived here |
+  | Europa | Minnaert, with the limb exponent of two fits joined by phase | [McEwen and Soderblom 1983](https://ntrs.nasa.gov/citations/19840015363), 44 pairs of Voyager images, to 30° phase; [Dhingra et al. 2021](https://doi.org/10.3847/PSJ/ac06d6), ridged-plains line of Table 2, from 57°; held between, a join that is ours. The 2021 paper's own 10° image agrees with the 1983 fit, not with its line. The limb limit is the outermost pixel of the finest full-disc image in the 2021 paper's Table 1, derived here |
   | Ganymede, Callisto | Lommel–Seeliger (lunar-like), which has no parameter | [Squyres and Veverka 1981](https://doi.org/10.1016/0019-1035%2881%2990203-7), Voyager clear-filter images. The paper is closed; the function is read in the authors' summary, page 67 of [NASA TM-82385](https://ntrs.nasa.gov/citations/19810007392). Flat at zero phase. No phase function is printed. The limb limit is the outermost pixel of the finest whole-disc Voyager frame, derived here |
   | Iapetus | Lommel–Seeliger, with the phase values the paper prints per image | [Buratti and Mosher 1995](https://doi.org/10.1006/icar.1995.1093), Voyager images, read in its [JPL preprint](https://dataverse.jpl.nasa.gov/dataset.xhtml?persistentId=hdl:2014/29299). Flat at zero phase. The limb limit is the outermost pixel of the finest image in its Table 1, derived here |
   | Oberon | Hapke (1986): single-scattering albedo 0.41, asymmetry −0.29, roughness 21°, opposition surge 1.03 and 0.007 | Helfenstein, Hillier, Weitz and Veverka, Voyager clear-filter images and Earth-based photometry, read in the authors' summary, pages 230 and 231 of [NASA TM-4210](https://ntrs.nasa.gov/citations/19900018290). The limb limit is the outermost pixel of the frame it names as its finest, derived here |
@@ -817,9 +833,10 @@ same published law, so the limb in the app is the limb the instrument saw.
   ![Pluto before and after](images/planet-limbs/pluto-before-after.webp)
   ![Charon before and after](images/planet-limbs/charon-before-after.webp)
 
-  Europa on css.earth with the shared bank (left) and with its published law
-  (right), 4 October 2026: Shadows off above, on below. Its law gives an
-  overlay alpha of 0.06 at 0.98 of the radius.
+  Europa with the 2021 lines alone (left) and with the low-phase fit joined to
+  them (right), 5 October 2026: Shadows off above, on below. The joined law
+  gives an overlay alpha of 0.18 at 0.98 of the radius, where the lines alone
+  gave 0.06 and the authored bank 0.49.
 
   ![Europa before and after](images/planet-limbs/europa-before-after.webp)
 

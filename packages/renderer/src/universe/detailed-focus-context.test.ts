@@ -30,3 +30,13 @@ test('body close-ups suppress distant clouds by projected size across viewports 
     assert.equal(selectedBodyContextOpacity({ ...world(16), projectionScale: 2 }, viewport, body), 0);
   }
 });
+
+test('two prepared positions are one place to the last bits a double holds at that distance, and no farther', async () => {
+  const { samePlaceM } = await import('./detailed-focus-context.js');
+  // HD 59088, 1,795 pc out: its own frame and its nebula's member list, one double's step (4,096 m) apart on one axis.
+  assert.equal(samePlaceM([-19628941377457766000, 47872559906344755000, 19769983547037815000], [-19628941377457766000, 47872559906344755000, 19769983547037810000]), true);
+  assert.equal(samePlaceM([-19628941377457766000, 47872559906344755000, 19769983547037815000], [-19628941377457766000, 47872559906344755000, 19769983547137815000]), false, 'a hundred thousand kilometres off is another place');
+  assert.equal(samePlaceM([1.5e11, 0, 0], [1.5e11 + 0.0005, 0, 0]), true);
+  assert.equal(samePlaceM([1.5e11, 0, 0], [1.5e11 + 0.01, 0, 0]), false, 'a planet a centimetre off is refused as before');
+  assert.equal(samePlaceM([1, 2, 3], [1, 2]), false);
+});

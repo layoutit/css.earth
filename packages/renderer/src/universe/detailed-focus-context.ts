@@ -4,6 +4,12 @@ import type { WorldCameraPose } from '@cssearth/engine';
 
 /** The selected bank package: where it is and the radius its page frames. */
 export interface SelectedBank { readonly positionM: readonly [number, number, number]; readonly framingRadiusM: number; }
+/** Whether two prepared positions are one place: equal to a millimetre, or to the last bits a double holds at that distance.
+ * A star's own frame and its holder's member list are written by two steps, and at 2e19 m (1,800 pc) a double's step is
+ * 4 km: HD 59088's two records differed by one such step, and an exact match refused the click that opens it (2026-10-05). */
+export const samePlaceM = (a: readonly number[], b: readonly number[]) => a.length === b.length
+  && a.every((value, axis) => Math.abs(value - b[axis]!) <= Math.max(.001, 8 * Number.EPSILON * Math.abs(value)));
+
 /** Presentation only: normal focus arrival is about 6.1 authored radii. */
 const HIDDEN_WITHIN_RADII = 8;
 const RESTORED_BY_RADII = 32;

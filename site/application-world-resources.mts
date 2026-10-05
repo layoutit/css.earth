@@ -114,7 +114,8 @@ export function loadApplicationUniverse(): Promise<ApplicationUniverse> {
       .map(parseImageLayerBankDescriptor);
     const imageLayerIds = new Set(imageLayerDescriptors.map(descriptor => descriptor.id));
     const imageLayerCataloguePoints = new Map(imageLayerDescriptors.map(descriptor => [descriptor.id, descriptor.cataloguePoints]));
-    const imageLayerBanks = imageLayerDescriptors.map(descriptor => ({ id: descriptor.id, frame: descriptor.frame }));
+    const imageLayerBanks = imageLayerDescriptors.map(descriptor => ({ id: descriptor.id, frame: descriptor.frame,
+      ...(descriptor.surrounds ? { surrounds: true as const } : {}), ...(descriptor.host === undefined ? {} : { host: descriptor.host }) }));
     const loadImageLayer = createInFlightLoader(async (id: string) => {
       if (!imageLayerIds.has(id)) throw new TypeError(`Unknown prepared image-layer bank: ${id}.`);
       const set = await bankSet(id);

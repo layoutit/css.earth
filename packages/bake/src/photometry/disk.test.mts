@@ -114,6 +114,21 @@ test('the Akimov disk function is flat at zero phase and follows its printed for
   assert.equal(assertDiskModel(akimov), akimov);
 });
 
+test('a tabulated Minnaert law follows its points and is held outside them', () => {
+  // Europa: McEwen and Soderblom (1983) to 30 degrees, held to where the line of Dhingra et al. (2021) reaches it, then that line.
+  const europa: DiskModel = { family: 'minnaert-tabulated', points: [[3, 0.631], [10, 0.644], [20, 0.708], [30, 0.76], [57, 0.76], [128, 1.044]] };
+  const degree = Math.PI / 180, at = (emission: number, phase: number) => diskValue(europa, { mu0: Math.cos(emission * degree), mu: Math.cos(emission * degree), phase: phase * degree });
+  // Flood-lit, mu0 = mu: D = mu^(2k - 1), with k held at its first point.
+  assert.ok(Math.abs(at(60, 0) - 0.5 ** (2 * 0.631 - 1)) < 1e-12);
+  assert.ok(Math.abs(at(60, 15) - 0.5 ** (2 * 0.676 - 1)) < 1e-12, 'midway between the 10 and 20 degree points');
+  assert.ok(Math.abs(at(60, 45) - 0.5 ** (2 * 0.76 - 1)) < 1e-12, 'held between the two fitted ranges');
+  assert.ok(Math.abs(at(60, 170) - 0.5 ** (2 * 1.044 - 1)) < 1e-12, 'held beyond the last point');
+  assert.equal(diskValue(europa, NORMAL_GEOMETRY), 1);
+  assert.equal(assertDiskModel(europa), europa);
+  assert.throws(() => assertDiskModel({ family: 'minnaert-tabulated', points: [[3, 0.631]] }), /at least two/);
+  assert.throws(() => assertDiskModel({ family: 'minnaert-tabulated', points: [[10, 0.644], [3, 0.631]] }), /increasing/);
+});
+
 test('a tabulated phase function passes through its printed points and is held outside them', () => {
   // Iapetus, clear filter, Buratti and Mosher (1995) Table 1; the paper normalizes f to zero phase.
   const iapetus = { family: 'tabulated' as const, points: [[0, 1], [14, 0.937], [19, 0.9], [23, 0.879], [31, 0.805], [39, 0.8], [41, 0.79], [48, 0.753], [60, 0.69], [68, 0.648], [81, 0.579], [90, 0.532]] as const };

@@ -14,9 +14,9 @@ HD 59088 (HIP 36369) is 1795.0 parsecs away. It is the central star of the plane
 
 Generated 2026-10-05 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts) from Gaia DR3, SIMBAD and the archives named above; each choice was read with the dataset's own reader.
 
-![The nebula's page with the star's marker at its centre, and the star's own page](evidence/2026-10-05/pages.jpg)
+![The star's page inside the nebula at four distances, and the click that opens it from the nebula's page](evidence/2026-10-05/pages.jpg)
 
-Headless Chromium at 1440 × 900 on 2026-10-05, no page errors. Left: the page of NGC 2392, zoomed in, with this star's marker and name at its centre; a click opens the star. Right: the star's own page as it opens. On that page the nebula is not drawn.
+Headless Chromium at 1440 × 900 on 2026-10-05, no page errors. Top row: the star's own page as it opens, 7.3 million km from the star, and 4, 8 and 12 wheel steps out (2.95 AU, 156 AU and 8,284 AU). The walls of the nebula's first picture bank ([NGC 2392 image layers](../ngc-2392-layers/README.md)) are drawn around the star at every distance, without the two or three sheets the camera stands on. In the last view the soft glow about the star is the photograph's own image of the star, on the sheets through the nebula's middle. Bottom row: the nebula's page, the flight after a click on the star's marker, and the arrival.
 
 ## Known problems
 
@@ -25,5 +25,6 @@ Headless Chromium at 1440 × 900 on 2026-10-05, no page errors. Left: the page o
 - **Not shown.** The star's mass is not measured. Spectral analyses give 0.41 solar masses (Pauldrach et al. 2004) to 0.91 (Kudritzki et al. 1997), both listed by Kaschinski et al. (2012), Table 2 (https://arxiv.org/abs/1204.1200); Miszalski et al. (2019) favour no value (https://arxiv.org/abs/1903.07264).
 - **Not shown.** It is a single-lined spectroscopic binary with a period of 1.9 days; its unseen companion is probably a hot white dwarf (Miszalski et al. 2019, https://arxiv.org/abs/1903.07264). The companion's mass depends on the orbit's unmeasured tilt, so it is not drawn.
 - **Not shown.** Gaia's spectrum of the star is taken through the nebula's inner bubble and through interstellar dust; neither is removed from the color.
+- **The nebula around it.** From the star the walls are the Hubble dataset's whichever dataset the nebula's page last showed, and the picture has one pixel for every 90 AU: near the star its light is a soft glow, not detail.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

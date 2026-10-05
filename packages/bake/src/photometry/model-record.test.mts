@@ -38,6 +38,9 @@ test('records refuse unknown keys, impossible parameters and malformed ranges', 
   assert.deepEqual(parsePhotometricModelRecord({ ...hapkeRecord, model: { family: 'separable', disk: { family: 'akimov' }, phase: curve } }).model, { family: 'separable', disk: { family: 'akimov' }, phase: curve });
   assert.throws(() => parsePhotometricModelRecord({ ...hapkeRecord, model: { family: 'separable', disk: { family: 'akimov', weight: 1 } } }), /unknown keys: weight/);
   assert.throws(() => parsePhotometricModelRecord({ ...hapkeRecord, model: { family: 'separable', disk: { family: 'akimov' }, phase: { ...curve, heldBeyondDegrees: undefined } } }), /phase held beyond/);
+  const exponents = { family: 'minnaert-tabulated', points: [[3, 0.631], [30, 0.76], [128, 1.044]] };
+  assert.deepEqual(parsePhotometricModelRecord({ ...hapkeRecord, model: { family: 'separable', disk: exponents } }).model, { family: 'separable', disk: exponents });
+  assert.throws(() => parsePhotometricModelRecord({ ...hapkeRecord, model: { family: 'separable', disk: { ...exponents, coefficient: 0.6 } } }), /unknown keys: coefficient/);
   const table = { family: 'tabulated', points: [[0, 1], [14, 0.937], [90, 0.532]] };
   assert.deepEqual(parsePhotometricModelRecord({ ...hapkeRecord, model: { family: 'separable', disk: { family: 'lommel-seeliger' }, phase: table } }).model, { family: 'separable', disk: { family: 'lommel-seeliger' }, phase: table });
   assert.throws(() => parsePhotometricModelRecord({ ...hapkeRecord, model: { family: 'separable', disk: { family: 'lommel-seeliger' }, phase: { ...table, points: [[0, 1], [14]] } } }), /phase point/);
