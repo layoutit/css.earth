@@ -1,0 +1,25 @@
+{
+  "schema": "journey-breakage@1",
+  "id": "dropped-listener",
+  "description": "Remove the search-field keydown listener: ArrowDown no longer moves focus into results.",
+  "expectedFamilies": [
+    "errors",
+    "content"
+  ],
+  "journeys": [
+    "dione-keyboard"
+  ],
+  "profiles": [
+    "chromium-desktop",
+    "webkit-desktop"
+  ],
+  "substitutions": [
+    {
+      "file": "site/object-browser.mts",
+      "before": "  search.addEventListener(\"keydown\", (event) => {\n    if (open && (event.key === \"Enter\" || event.key === \"ArrowDown\")) {\n      const first = [...browser.querySelectorAll<HTMLElement>(\"summary, a, button\")]\n        .find(visibleControl);\n      if (first) {\n        event.preventDefault();\n        if (event.key === \"Enter\") first.click(); else first.focus();\n      }\n    } else if (event.key === \"Enter\") {\n      event.preventDefault(); showResults(); return;\n    }\n    if (event.key !== \"Escape\" || !open) return;\n    event.preventDefault();\n    setOpen(false);\n  }, { signal: events.signal });\n",
+      "after": "",
+      "occurrences": 1
+    }
+  ],
+  "limitation": "The missing search keydown listener fails the focus assertion. The runner saves a journey-assertion errors row, focused content and a partial trace; it exits 1. Other families can also differ."
+}

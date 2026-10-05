@@ -1,0 +1,25 @@
+{
+  "schema": "journey-breakage@1",
+  "id": "transient-detach",
+  "description": "Detach and reinsert the stage in the same publication call, leaving final membership equal.",
+  "expectedFamilies": [
+    "dom"
+  ],
+  "journeys": [
+    "milky-way",
+    "dione"
+  ],
+  "profiles": [
+    "chromium-desktop",
+    "webkit-desktop"
+  ],
+  "substitutions": [
+    {
+      "file": "site/scene/scene-publication.mts",
+      "before": "    const root = documentTarget.documentElement;",
+      "after": "    const root = documentTarget.documentElement;\n    const journeyParent = stage.parentNode, journeyNext = stage.nextSibling;\n    if (journeyParent) { stage.remove(); journeyParent.insertBefore(stage, journeyNext); }",
+      "occurrences": 1
+    }
+  ],
+  "limitation": "The same publication call detaches and reinserts the stage, preserving final membership. The ordered DOM membership detector must observe both events; endpoint snapshots alone are insufficient."
+}
