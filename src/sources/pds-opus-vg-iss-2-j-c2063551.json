@@ -1,0 +1,27 @@
+{
+  "id": "pds-opus-vg-iss-2-j-c2063551",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "PDS Ring-Moon Systems Node observation record · Voyager 2 wide-angle frame C2063551 of Ganymede",
+  "identifiers": [
+    {
+      "type": "OPUS ID",
+      "value": "vg-iss-2-j-c2063551"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://opus.pds-rings.seti.org/opus/api/metadata/vg-iss-2-j-c2063551.json",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/ganymede/source/manifest.json",
+      "locator": "/documents/25"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}

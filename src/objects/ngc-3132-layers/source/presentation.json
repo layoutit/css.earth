@@ -1,0 +1,57 @@
+{
+  "schema": "cssearth-volume-presentation-source@2",
+  "objectId": "ngc-3132-layers",
+  "name": "Southern Ring Nebula",
+  "defaultDataset": "optical",
+  "bank": {
+    "path": "src/objects/ngc-3132-layers/prepared/image-layers.json"
+  },
+  "recipes": [
+    {
+      "id": "image-layer-recipe",
+      "path": "src/objects/ngc-3132-layers/source/recipe.json"
+    },
+    {
+      "id": "source-evidence",
+      "path": "src/objects/ngc-3132-layers/source/provenance.json"
+    }
+  ],
+  "sharedInputs": [],
+  "datasets": [
+    {
+      "id": "optical",
+      "label": "Webb · near infrared",
+      "title": "The Southern Ring in the near infrared",
+      "description": "ESA/Webb's picture of the Southern Ring Nebula, NIRCam at 0.90, 1.87, 2.12, 3.56, 4.05 and 4.70 µm: ionised gas in blue, molecular hydrogen in orange. It lies at the depths the gas was measured at: Monteiro et al. (2025) turned velocity cubes of the nebula into its density, a speed standing for a depth. On each sight line the nearer half of the gas's emission and the farther half each stand at their own middle, and the picture's light is shared between the two.",
+      "summary": "Webb's picture at the depths its gas was measured at: the nearer and farther halves of each sight line's emission.",
+      "detail": "4833 × 4501 px",
+      "facts": [
+        {
+          "id": "bands",
+          "label": "Colors",
+          "value": "0.90, 1.87, 2.12, 3.56, 4.05 and 4.70 µm"
+        },
+        {
+          "id": "source-pixels",
+          "label": "Source pixels",
+          "value": "4833 × 4501"
+        },
+        {
+          "id": "coverage",
+          "label": "Field",
+          "value": "2.42 × 2.25 arcmin"
+        },
+        {
+          "id": "license",
+          "label": "License",
+          "value": "CC-BY-4.0"
+        }
+      ],
+      "input": "optical",
+      "preview": {
+        "path": "src/objects/ngc-3132-layers/source/source.jpg",
+        "url": "https://cdn.esawebb.org/archives/images/large/weic2207b.jpg"
+      }
+    }
+  ]
+}

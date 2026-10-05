@@ -1,0 +1,66 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "ngc-3132-layers",
+  "entries": [
+    {
+      "id": "weic2207b",
+      "subject": "ESA/Webb weic2207b",
+      "status": "included",
+      "finding": "Southern Ring Nebula (NIRCam Image): NIRCam at 0.90, 1.87, 2.12, 3.56, 4.05 and 4.70 µm; 4833 × 4501 px over 2.42 × 2.25 arcmin, released 12 July 2022. The file's embedded sky tags for scale and direction, 0.0300 arcsec per pixel and north 111.99° right of vertical, and the star for place: the middle of the bright central star's saturated pixels, pixel 2411.6, 2112.8, is set at SIMBAD's place for NGC 3132, so the frame's centre is 151.7559818°, -40.435963°.",
+      "evidence": [
+        "https://esawebb.org/images/weic2207b/",
+        "https://esawebb.org/copyright/"
+      ]
+    },
+    {
+      "id": "density-grid",
+      "subject": "Where the gas is along each sight line",
+      "status": "included",
+      "finding": "Monteiro et al. (2025) observed the nebula with the SAM-FP Fabry-Perot on SOAR in H-alpha and [N II] 6584 and turned the velocity cubes into gas density: with the gas's speed in proportion to its distance from the star, a speed along the sight line is a depth, and a line's intensity goes as the density squared (Sect. 3.1). They publish the density on a grid of 101 cells a side. The bake reads, on each sight line, the middle of the nearer half of the emission and of the farther half.",
+      "evidence": [
+        "https://arxiv.org/abs/2503.20640",
+        "https://github.com/hektor-monteiro/NGC3132_model"
+      ]
+    },
+    {
+      "id": "grid-fit",
+      "subject": "How the grid lies on the picture",
+      "status": "included",
+      "finding": "The file prints its cells' places in centimetres and nothing of their directions. Measured here (packages/bake/authoring/ngc-3132/grid-fit.mts): the first axis is the sight line, the axis with the least detail a cell wide; its first axis is the sight line, its high end toward the Sun; its second axis points to position angle 325.5° and its third to 55.5°; its middle is 1 arcsec west and 0.5 arcsec south of the star. The grid's emission, summed along the sight line, then correlates 0.673 with the picture once the mean in rings about the star is taken off both; half a turn on gives 0.094 and the other handedness 0.328 at best. Two printed checks: Kastner et al. (2024) measure the main ring's major axis at position angle about 330 degrees, and find the ring's eastern edge approaching, as the gas east of the star stands toward the grid's high end.",
+      "evidence": [
+        "https://github.com/hektor-monteiro/NGC3132_model",
+        "https://arxiv.org/abs/2402.11850",
+        "https://arxiv.org/abs/2503.20640"
+      ]
+    },
+    {
+      "id": "depth-sharpness",
+      "subject": "How sharp the depths are",
+      "status": "included",
+      "finding": "A grid cell is 0.8998 arcsec on the sky, thirty times a pixel of the picture, and along the sight line the instrument's line width, 26.8 km/s (Sect. 2.1), is many cells of depth even after the paper's deconvolution. The walls are smooth surfaces that follow the gas at that sharpness; the picture's detail on them is the picture's own.",
+      "evidence": [
+        "https://arxiv.org/abs/2503.20640"
+      ]
+    },
+    {
+      "id": "outer-halo",
+      "subject": "The molecular halo outside the grid",
+      "status": "deferred",
+      "finding": "The grid holds the ionised gas, 78 by 64 arcsec. The fainter molecular hydrogen around it, out to the frame's edge, has no published depth here and stays on the picture's plane. Kastner et al. (2024) model the molecular gas as two rings from SMA CO data; they print no file of it.",
+      "evidence": [
+        "https://arxiv.org/abs/2402.11850"
+      ],
+      "revisitWhen": "A published three-dimensional structure of the molecular halo exists as data."
+    },
+    {
+      "id": "weic2207c",
+      "subject": "Webb's mid-infrared picture",
+      "status": "deferred",
+      "finding": "ESA/Webb weic2207c (MIRI, 1306 × 1133 px) shows the same nebula in the mid infrared. It would lie on the same walls as a second dataset.",
+      "evidence": [
+        "https://esawebb.org/images/weic2207c/"
+      ],
+      "revisitWhen": "A second dataset is wanted."
+    }
+  ]
+}

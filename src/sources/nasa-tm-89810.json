@@ -1,0 +1,29 @@
+{
+  "id": "nasa-tm-89810",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Reports of Planetary Geology and Geophysics Program, 1986 (NASA Technical Memorandum 89810)",
+  "identifiers": [
+    {
+      "type": "NASA report number",
+      "value": "NASA-TM-89810"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://ntrs.nasa.gov/citations/19870013908",
+      "label": "Publication"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/umbriel/source/manifest.json",
+      "locator": "/documents/6"
+    }
+  ],
+  "publisher": "NASA Office of Space Science and Applications",
+  "publicationDate": "1987",
+  "relations": [],
+  "statements": []
+}

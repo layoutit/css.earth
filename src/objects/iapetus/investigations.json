@@ -66,13 +66,25 @@
     {
       "id": "limb-law",
       "subject": "Photometric law for the lighting overlays",
-      "status": "unresolved",
-      "finding": "Squyres et al. (1984) found a lunar-like law (Lommel-Seeliger, which has no parameter) adequate for Voyager images at 8 to 90 degrees phase, with a phase function that varies with albedo. Only the abstract could be read, so the emission range and the phase function are unknown. Iapetus keeps the shared sphere bank.",
+      "status": "included",
+      "finding": "Lunar-like (Lommel-Seeliger) law of Buratti and Mosher (1995), read in the JPL Open Repository preprint; the Icarus version was not read. Each Voyager image was fitted to I/F = f(alpha) A mu0/(mu + mu0) + (1 - A) mu0, and the paper finds that A = 1 adequately describes all observations. Its Table 1 prints f for each image. The lighting uses the clear-filter rows (0.47 micrometres, 14 to 90 degrees phase, 0.937 falling to 0.532), joined by straight lines and held beyond 90 degrees, with f = 1 at zero phase, to which the paper says f is normalized; the scan prints that angle unclearly. Flood-lit, this law is flat to the limb. The paper uses one f per image for bright and dark terrain alike. No emission range is printed; the limit 83.6 degrees is derived here from the outermost pixel of the finest image in Table 1 (9.1 km per pixel) and is second class. Squyres et al. (1984), closed, found the same lunarlike function in these images at 8 to 90 degrees phase, per its abstract.",
       "evidence": [
+        "https://dataverse.jpl.nasa.gov/dataset.xhtml?persistentId=hdl:2014/29299",
+        "https://doi.org/10.1006/icar.1995.1093",
         "https://doi.org/10.1016/0019-1035(84)90111-8",
         "https://ntrs.nasa.gov/citations/19840066646"
       ],
-      "revisitWhen": "The fitted emission range of Squyres et al. (1984), or a Cassini disc-resolved Iapetus law with its ranges, is read in the paper."
+      "revisitWhen": "A Cassini disc-resolved Iapetus law with its fitted ranges is read in the paper."
+    },
+    {
+      "id": "authored-limb-lighting",
+      "subject": "Shared sphere bank lighting (Lambert with a 0.35 flood floor and 0.05 ambient term, adapted from OpenSpace)",
+      "status": "excluded",
+      "finding": "Replaced by the lunar-like law of Buratti and Mosher (1995); Iapetus now bakes its own bank.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/main/packages/bake/src/raster/lighting-banks.ts"
+      ],
+      "revisitWhen": "Nothing: an authored limb is not reopened once a published law exists."
     },
     {
       "id": "photojournal-pia07005-cirs-temperature",
