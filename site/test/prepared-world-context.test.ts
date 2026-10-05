@@ -2401,6 +2401,35 @@ test('a galaxy wears a diamond, and the flight circle takes its destination\'s s
   layer.destroy();
 });
 
+test('a body inside a nebula takes the name that reads over its picture, also when the nebula arrives after it', async () => {
+  // Venus stands for a nebula with Mercury inside it; Earth for a nebula that arrives later, with Venus inside it.
+  const nested = (base: ReturnType<typeof plan>) => ({ ...base, bodies: base.bodies.map(body => body.id === 'venus' ? { ...body, classification: 'nebula', inside: 'earth' }
+    : body.id === 'mercury' ? { ...body, inside: 'venus' } : body.id === 'earth' ? { ...body, classification: 'nebula' } : body) });
+  const document = new FakeDocument(), host = document.createElement('section'), before = document.createElement('i');
+  host.clientWidth = 800; host.clientHeight = 600; host.append(before);
+  const layer = mountTestContext({ host: host as unknown as HTMLElement, before: before as unknown as Element, plan: nested(plan(1)),
+    sprites: { sun: sprite, mercury: sprite, venus: sprite, earth: sprite } });
+  const root = layer.root as unknown as FakeElement, backdrop = (id: string) => find(root, 'contextGroup', id).dataset.contextLabelBackdrop;
+  // The mark is on the marker whose caption reads it, and only a body whose holder is a nebula carries one.
+  assert.deepEqual(['sun', 'mercury', 'venus'].map(backdrop), [undefined, 'picture', undefined]);
+  layer.addBodies(nested(plan(1, [], true)));
+  assert.deepEqual(['sun', 'mercury', 'venus', 'earth'].map(backdrop), [undefined, 'picture', 'picture', undefined]);
+  // The name and its copy are the caption's pseudo-elements, which the fake cascade leaves out: read from the stylesheet.
+  const css = await readFile(new URL('../../packages/renderer/src/styles/world-context.css', import.meta.url), 'utf8');
+  const rule = (selector: string) => css.replace(/\/\*[\s\S]*?\*\//gu, '').split('}').filter(block => block.split('{')[0]!.split(',').some(part => part.trim() === selector))
+    .map(block => block.split('{')[1]).join('');
+  const marked = '.prepared-world-context [data-context-label-backdrop="picture"]';
+  const name = rule(`${marked} > .context-caption::after`), copy = rule(`${marked} > .context-caption::before`);
+  assert.match(name, /color: #fff;/u);
+  assert.match(name, /opacity: 1;/u);
+  // The copy is the same text in the name's own box, hidden with it, one pixel down and right in dark grey.
+  for (const declaration of [/content: attr\(data-context-name\);/u, /color: #404040;/u, /transform: translate\(1px, 1px\);/u, /position: absolute;/u, /width: max-content;/u, /visibility: hidden;/u]) assert.match(copy, declaration);
+  assert.match(rule(`${marked}[data-context-label-visible="true"] > .context-caption::before`), /visibility: inherit;/u);
+  // No stroke, shadow, filter or blend draws it.
+  assert.doesNotMatch(name + copy, /shadow|stroke|blend|filter/u);
+  layer.destroy();
+});
+
 for (const destination of [null, 'venus']) test(`flights to ${destination} retain system annotations and orbit cutouts without enabling picking`, () => {
   const root = mount(1), layer = mounted.get(root)!;
   const nodes = all(root);
