@@ -85,3 +85,15 @@ test('a pill category highlights its bodies, the galaxies among them', () => {
   visibility.setHighlightedClassification(null);
   assert.deepEqual(latest().highlighted, []);
 });
+
+test('an object whose walls stand around the selected body is not marked', () => {
+  const { visibility, publications, latest } = fixture();
+  assert.ok(!latest().bodyHidden?.includes('m57'));
+  visibility.setSurrounding(['m57']);
+  assert.ok(latest().bodyHidden?.includes('m57'));
+  const count = publications.length;
+  visibility.setSurrounding(['m57']);
+  assert.equal(publications.length, count, 'the same holders publish nothing');
+  visibility.setSurrounding([]);
+  assert.ok(!latest().bodyHidden?.includes('m57'));
+});
