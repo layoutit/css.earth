@@ -36,11 +36,13 @@ for the stream, each the color the Milky Way's dots of that kind already have); 
 
 ## Evidence
 
-![The Local Group page as it opens, and M31 pulled back one wheel step](evidence/2026-10-04/app-views.jpg)
+![The Local Group page as it opens, M31 pulled back, and the Milky Way pulled back](evidence/2026-10-04/app-views.jpg)
 
 The app on 2026-10-04. Left: the Local Group page as it opens, 7.3 million light-years from the Sun, with the Milky Way
-at the left and M31 at the lower right. Right: M31 pulled back one wheel step, with the Milky Way and the Magellanic
-Clouds beyond it.
+at the left and M31 at the lower right. Middle: M31 pulled back one wheel step, with the Milky Way and the Magellanic
+Clouds beyond it. Right: the Milky Way pulled back one wheel step, 289,000 light-years from the Sun, with its globular
+clusters in orange, the Sagittarius stream to the right of the centre and the Large Magellanic Cloud's clusters at the
+top.
 
 ## Known problems
 
