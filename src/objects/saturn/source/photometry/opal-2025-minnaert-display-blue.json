@@ -1,0 +1,25 @@
+{
+  "schema": "cssearth-photometric-model@1",
+  "id": "opal-2025-minnaert-display-blue",
+  "instrument": "Hubble WFC3/UVIS (OPAL)",
+  "filter": "sRGB blue: the README's continuum filters weighted by Saturn's sunlit spectrum through the CIE 1931 observer",
+  "quantity": "radiance-factor",
+  "model": {
+    "family": "separable",
+    "disk": {
+      "family": "minnaert",
+      "coefficient": 0.728,
+      "coefficientPerDegree": 0
+    }
+  },
+  "fit": {
+    "phaseDegrees": [
+      2.4,
+      2.5
+    ],
+    "emissionDegrees": [
+      0,
+      86.3
+    ]
+  }
+}
