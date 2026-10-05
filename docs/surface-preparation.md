@@ -126,6 +126,14 @@ going back to its surface map spent 117 of 219 main-thread samples of its long f
 images that stayed resident undrawn waits for a second `decode()`, off that thread, before it is ready
 ([prepared-residency.ts](../packages/renderer/src/rendering/prepared-residency.ts)).
 
+A small body keeps the images of the dataset it has just left. Its dataset pool is marked to keep images until it is
+full, and the last bake step states the pool's byte budget from the image sizes: two selections, the one on screen and
+the one before it, never above what Io states for its pages
+([prepared-pool-budgets.ts](../packages/bake/src/prepared-presentation/prepared-pool-budgets.ts)). On an iPad, going
+back to a dataset of Bennu took 280 ms and 180 ms after its 13-megapixel atlas had been released, and 82 ms and 75 ms
+with it kept; a first visit is unchanged. Six bodies whose two selections exceed that ceiling (Mimas, Phoebe, Tethys,
+Enceladus, Deimos and Phobos) release what a selection leaves, as before.
+
 How the surface is cut into images matters less. Io and Mercury baked as square pages of four faces, 112 pages a
 surface, switched in 158 to 298 ms and 129 to 146 ms at their default views: no gain for Io, and twice Mercury's time
 on its one page. Zoomed in, where only the pages in view are decoded, Io took 75 to 108 ms against 108 to 178 ms.
