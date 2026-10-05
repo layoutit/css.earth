@@ -11,31 +11,31 @@ A folder imports itself or strictly lower layers. Sibling folders, including L0 
 <!-- generated:folders -->
 | Tier | Folder | Purpose | Final files | Incoming moves |
 | ---: | --- | --- | ---: | --- |
-| 0 | `browser/` | Browser input, DOM and serialized import queue | 17 | 15; `runtime-policy.mts`, `diagnostics-policy.mts`, `in-flight-loader.mts`, `next-frame.mts` |
-| 0 | `model/` | Object identities, routes and held addresses | 8 | 7; `navigation/system-address.mts`, `root-object.mts`, `orbit-root.mts`, `planetary-system-members.mts` |
+| 0 | `browser/` | Browser input, DOM and serialized import queue | 18 | 16; `runtime-policy.mts`, `diagnostics-policy.mts`, `in-flight-loader.mts`, `next-frame.mts` |
+| 0 | `model/` | Object identities, routes and held addresses | 9 | 8; `navigation/system-address.mts`, `root-object.mts`, `orbit-root.mts`, `planetary-system-members.mts` |
 | 0 | `overview/` | Prepared spectral overview readers | 4 | 2 |
 | 0 | `prepared/` | Prepared transports and generated inputs | 25 | 24; `prepared-catalogue.d.mts`, `prepared-navigation-markers.d.mts`, `prepared-object-path.mts`, `prepared-shell-icons.d.mts` |
 | 0 | `source/` | Preserved input records and artwork | 60 | 0 |
 | 0 | `vendor/` | Preserved third-party notices | 1 | 0 |
 | 0 | `server-assets/` | Server and build prepared-asset origin | 2 | 2; `asset-origin.mts` |
 | 0 | `contracts/` | Shared page and shell interfaces | 3 | 3; `object-shell-types.ts`, `object-page-contract.mts` |
-| 1 | `directory/` | Startup reads and object catalogue directory | 13 | 12; `startup-world.mts`, `startup-requests.mts`, `object-entries.mts`, `object-directory.mts` |
+| 1 | `directory/` | Startup reads and object catalogue directory | 15 | 14; `startup-world.mts`, `startup-requests.mts`, `object-entries.mts`, `object-directory.mts` |
 | 1 | `minimap/` | Surface-map measurements and view formatting | 7 | 4 |
-| 2 | `world/` | Shared framing, visibility and camera context | 54 | 53; `world-objects.mts`, `world-system-views.mts`, `context-availability.mts`, `context-datasets.mts` |
-| 3 | `content/` | Card content, citations and metadata | 22 | 21; `dataset-content.mts`, `dataset-context.mts`, `object-text.mts`, `prepared-panel-content.mts` |
-| 3 | `navigation/` | History, requests, flights and arrivals | 35 | 23; `prepared-arrival.mts`, `prepared-scene-ownership.mts`, `arrival-billboard.mts`, `prepared-world-navigation.mts` |
+| 2 | `world/` | Shared framing, visibility and camera context | 74 | 73; `world-objects.mts`, `world-system-views.mts`, `context-availability.mts`, `context-datasets.mts` |
+| 3 | `content/` | Card content, citations and metadata | 30 | 29; `dataset-content.mts`, `dataset-context.mts`, `object-text.mts`, `prepared-panel-content.mts` |
+| 3 | `navigation/` | History, requests, flights and arrivals | 37 | 25; `prepared-arrival.mts`, `prepared-scene-ownership.mts`, `arrival-billboard.mts`, `prepared-world-navigation.mts` |
 | 4 | `search/` | Catalogue search and result presentation | 17 | 6 |
-| 4 | `selection/` | Committed selection and camera handovers | 6 | 6; `scene/scene-selection.mts`, `satellite-selection.mts`, `overview-selection.mts`, `showcase.mts` |
-| 5 | `shell/` | Retained shell controls and panels | 32 | 25; `object-browser.mts`, `feature-browser.mts`, `destination-browser.mts`, `selection-presentation.mts` |
-| 6 | `server/` | SSR readers, responses and host middleware | 32 | 19; `object-page-data.mts`, `first-view-transport.mts`, `object-entry.mts`, `world-places.mts` |
-| 6 | `scene/` | Scene sessions, replacement and publication | 30 | 15; `object-adapter.mts`, `packaged-object-runtime.mts`, `startup-billboard.mts`, `initial-scene.mts` |
-| 7 | `startup/` | Page boot helpers and router entry | 8 | 8; `shared-imports.mts`, `startup-boot.mts`, `startup-cover.mts`, `initial-shell-context.mts` |
+| 4 | `selection/` | Committed selection and camera handovers | 8 | 8; `scene/scene-selection.mts`, `satellite-selection.mts`, `overview-selection.mts`, `showcase.mts` |
+| 5 | `shell/` | Retained shell controls and panels | 37 | 30; `object-browser.mts`, `feature-browser.mts`, `destination-browser.mts`, `selection-presentation.mts` |
+| 6 | `server/` | SSR readers, responses and host middleware | 36 | 23; `object-page-data.mts`, `first-view-transport.mts`, `object-entry.mts`, `world-places.mts` |
+| 6 | `scene/` | Scene sessions, replacement and publication | 31 | 16; `object-adapter.mts`, `packaged-object-runtime.mts`, `startup-billboard.mts`, `initial-scene.mts` |
+| 7 | `startup/` | Page boot helpers and router entry | 10 | 10; `shared-imports.mts`, `startup-boot.mts`, `startup-cover.mts`, `initial-shell-context.mts` |
 | 7 | `build/` | Site preparation and packaging | 83 | 32; `prepare-body-moons.mts` |
 | 8 | `layouts/` | Shared page frame and its styles | 7 | 5; `components/ObjectSwatchStyles.astro`, `site.css`, `object-shell.css`, `wordmark.css` |
 | 9 | `components/` | Reusable Astro markup and SSR composition | 29 | 0 |
 | 10 | `pages/` | Routes and object-page entries | 20 | 0 |
 | 11 | `journeys/` | Cross-cutting journeys and support | 19 | 19 |
-| 11 | `test/` | Retired test folder; no final occupants | 0 | 0 |
+| 11 | `test/` | Retired test folder; no final occupants | 2 | 0 |
 <!-- /generated:folders -->
 
 The table is the final layering. Directory owns startup requests, startup world reads, object entries, registry and world context plan: it is the lower world family. World owns framing, visibility, datasets and camera context. History and fragments belong to navigation. The model's held-address reader carries its WeakMap and registration/disposal state; history keeps its re-export.
@@ -94,6 +94,7 @@ Parameter injection with a changed router start changes the router's evaluation 
 
 ## Other S3 risks
 
+- **Chunk layout is a constraint.** The performance guard fails any rise in raw, gzip or Brotli bytes, request counts, chain lengths or preloads. A real graph edit that moved the registry into the router chunk lowered raw bytes by 57 and raised gzip by 55 and Brotli by 145, so it fails. S3's loader change must keep the existing chunk assignment (pin it), or show every compressed size at or below the baseline.
 - Moon catalogue split changes build/SSR chunk membership, checkObjectTree timing and client bytes from the source parsers. The single reader owns parsing/cache/catalogueMoons; preparation retains search ordering and eligibility. Compare outputs, errors, timing and chunks before S3.
 - Selection is passed into navigation requests. Router and activation must forward the registry function on all three readNavigationSelection calls. Test the **default production URL path** and mutation-remove its wiring; passing a non-default callback that routes around the defect is insufficient.
 - Type-owner extractions must preserve aliases and re-exports. The held-address extraction must preserve deferred reads and disposal in the same WeakMap.
@@ -151,11 +152,11 @@ The reference scan covers full/extensionless/relative file strings plus the reti
 | live: AGENTS.md contract text | 4 |
 | live: CI routing | 1 |
 | live: Python script | 2 |
-| live: computed import | 4 |
+| live: computed import | 5 |
 | live: docs code-span | 21 |
 | live: docs link | 26 |
-| live: generator/producer literal | 106 |
-| live: source import | 256 |
+| live: generator/producer literal | 118 |
+| live: source import | 301 |
 | live: tsconfig/eslint/package.json | 20 |
 | live: workflow | 3 |
 | plan: docs code-span | 1 |
@@ -173,6 +174,7 @@ Required reference updates include:
 <!-- generated:relative-reads -->
 | Test with depth-sensitive reads | Destination |
 | --- | --- |
+| site/application-world-resources.characterization.test.mts | site/world/application-world-resources.characterization.test.mts |
 | site/test/arrival-discovery.test.mts | site/build/prepare/arrival-discovery.test.mts |
 | site/test/body-additions.test.mts | site/build/prepare/body-additions.test.mts |
 | site/test/category-frames.test.mts | site/build/prepare/category-frames.test.mts |
