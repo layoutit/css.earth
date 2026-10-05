@@ -21,7 +21,9 @@ zoom out on Earth made its off-screen faces again in frames of 124 to 253 ms on 
 body's camera element, paused two frames after it starts, makes Safari keep them; the same zoom out then had no frame
 over 47 ms. The price is paid at rest: the sharper pages a zoom in asks for are painted on the faces off screen too
 (about ten frames of 33 to 49 ms where there were two), and those faces hold 58 MB more in the page's process
-(2026-10-05).
+(2026-10-05). Those pages land a slice a frame, and what is left of them waits whenever the camera moves again
+(`rendering/prepared-presentation.ts`): a drag begun a third of a second after a zoom in had seven or eight frames of
+29 to 54 ms in its first half second, and none once the rest waited for the next pause.
 
 Annotations (markers, names, orbits, the footer) and content (sky faces, a nebula's slice stack changing axis) are
 held differently while coasting:

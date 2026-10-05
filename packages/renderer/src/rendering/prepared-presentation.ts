@@ -361,7 +361,11 @@ export function mountPreparedPresentation(stage: HTMLElement, context: PreparedP
       }
       if (pendingLevels.size) {
         if (!levelPacer) context.own(() => levelPacer?.destroy());
-        levelPacer ??= createSettlePacer(budget => {
+        levelPacer ??= createSettlePacer((budget, moving) => {
+          // What is left of a level waits while the camera moves, like the commit that started it. A drag begun a third
+          // of a second after a zoom in on Earth ran into the pages still landing: seven or eight frames of 29 to 54 ms
+          // in its first half second on the iPad, and none with the rest held for the next pause (2026-10-05).
+          if (moving) return 0;
           let written = 0;
           for (const [key, unit] of pendingLevels) {
             if (written >= budget) break;
