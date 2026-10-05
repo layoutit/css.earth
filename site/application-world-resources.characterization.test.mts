@@ -1,6 +1,9 @@
 import assert from 'node:assert/strict';
 import { test, mock, beforeEach, after } from 'node:test';
-import { existsSync, rmSync, writeFileSync } from 'node:fs';
+import { mkdtempSync, rmSync, writeFileSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
+import { pathToFileURL } from 'node:url';
 import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import { OBJECT_SCHEMA } from '@cssearth/objects';
@@ -40,13 +43,6 @@ let bankResponse: Response | null = null;
 let catalogLoads = 0, plannerCount = 0;
 let loadFailure: Error | null = new Error('initial volume decode');
 mock.module(new URL('./prepared-context-objects.mts', import.meta.url).href, { namedExports: { CONTEXT_OBJECT_DESCRIPTORS: declarations, CONTEXT_OBJECT_ASSET_URLS: assets, CONTEXT_GALAXY_SAMPLE: {} } });
-// The generated billboard table is not tracked and CI does not restore it. The runner process writes a valid empty table
-// when the file is absent and removes it afterwards; each isolated case process (RESOURCE_CASE) only reads it.
-const billboardTable = new URL('./prepared-dataset-billboards.json', import.meta.url);
-if (!process.env.RESOURCE_CASE && !existsSync(billboardTable)) {
-  writeFileSync(billboardTable, JSON.stringify({ schema: 'cssearth-dataset-billboards@2', imagePx: 256, banks: [] }));
-  after(() => rmSync(billboardTable, { force: true }));
-}
 mock.module(new URL('./context-availability.mts', import.meta.url).href, { namedExports: { CONTEXT_AVAILABILITY: availability } });
 mock.module(new URL('./world-context-plan.mts', import.meta.url).href, { namedExports: { ...world,
   WORLD_DOT_BANKS: ['inside'], onWorldSystems: (callback: typeof onSystems) => { onSystems = callback; return () => {}; } } });
@@ -71,12 +67,27 @@ let loadApplicationUniverse: typeof import('./application-world-resources.mts')[
 // This resets the private universe singleton without query URLs (which L4 does
 // not attribute to canonical sources). Mutable collaborators and dataset state
 // are reset below. Any case can run alone via --test-name-pattern.
+// The generated billboard table is not tracked and CI does not restore it. Each isolated case process starts with a loader
+// hook, written to a temporary directory, that answers the module's `?raw` import of that file with a valid empty table.
+// Nothing is written beside the sources and the real file, when present, is never read.
+const hookDirectory = process.env.RESOURCE_CASE ? '' : mkdtempSync(join(tmpdir(), 'resources-hook-'));
+if (hookDirectory) {
+  const table = JSON.stringify({ schema: 'cssearth-dataset-billboards@2', imagePx: 256, banks: [] });
+  writeFileSync(join(hookDirectory, 'hook.mjs'), `const ID = 'cssearth-fixture:dataset-billboards';
+export const resolve = (specifier, context, next) => specifier.endsWith('prepared-dataset-billboards.json?raw')
+  ? { url: ID, format: 'module', shortCircuit: true } : next(specifier, context);
+export const load = (url, context, next) => url === ID
+  ? { format: 'module', shortCircuit: true, source: ${JSON.stringify(`export default ${JSON.stringify(table)};`)} } : next(url, context);
+`);
+  writeFileSync(join(hookDirectory, 'register.mjs'), `import { register } from 'node:module';\nregister(${JSON.stringify(pathToFileURL(join(hookDirectory, 'hook.mjs')).href)});\n`);
+  after(() => rmSync(hookDirectory, { recursive: true, force: true }));
+}
 function isolatedTest(name: string, run: () => Promise<void>, phone = false) {
   test(name, async () => {
     if (process.env.RESOURCE_CASE === name) { await run(); return; }
     const env: NodeJS.ProcessEnv = { ...process.env, RESOURCE_CASE: name, RESOURCE_PHONE: String(phone) };
     delete env.NODE_TEST_CONTEXT; // Start an independent runner, not an IPC child of this one.
-    const child = spawnSync(process.execPath, [...process.execArgv, '--test', '--test-name-pattern', name, fileURLToPath(import.meta.url)],
+    const child = spawnSync(process.execPath, [...process.execArgv, '--import', pathToFileURL(join(hookDirectory, 'register.mjs')).href, '--test', '--test-name-pattern', name, fileURLToPath(import.meta.url)],
       { encoding: 'utf8', timeout: 30000, env });
     assert.equal(child.status, 0, child.stdout + child.stderr);
     assert.match(child.stdout, /# pass 1(?:\n|\r)/u, 'the isolated case must actually run');
