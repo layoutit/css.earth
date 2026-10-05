@@ -163,6 +163,10 @@ Owner repository settings:
    ruleset requiring the workflow from main adds protection against hostile
    workflow edits that ordinary required-check settings cannot provide.
 
+The gate and the build job take their tools from the merge base. Only the pull request that
+introduces these tools has no merge-base copy: it runs its own tools and prints a visible
+bootstrap warning. Once the tools are on the main branch that path is never taken again.
+
 A rename/specifier-only diff forces pure-move. Report mode skips lockfile or
 installed-toolchain mismatches with a notice. Toolchain records contain lockfile
 byte length; separate lockfile files are compared byte for byte.
