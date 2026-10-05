@@ -5,7 +5,7 @@ import { createSceneSessions } from './scene-session.mts';
 import { createPreparedSceneOwnership } from '../navigation/prepared-scene-ownership.mts';
 import type { SceneFactory } from '../browser/browser-types.mts';
 import type { ObjectSceneLifecycle } from '@cssearth/renderer/runtime/object-scene.ts';
-import { unusedSharedView, unusedMountOptions } from '../test/navigation-test-values.mts';
+import { unusedSharedView, unusedMountOptions } from '../navigation/navigation-test-values.test-support.mts';
 
 function deferred<T>() {
   let resolve!: (value: T) => void, reject!: (error: unknown) => void;

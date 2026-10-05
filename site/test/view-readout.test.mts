@@ -2,7 +2,7 @@ import { sourceTest } from '@cssearth/objects/node/source-test';
 import assert from 'node:assert/strict';
 import type { WorldRotation } from '@cssearth/core';
 import { type WorldCameraPose } from '@cssearth/engine';
-import { required } from './navigation-test-values.mts';
+import { required } from '../navigation/navigation-test-values.test-support.mts';
 import { formatViewCoordinate, formatViewDate, formatViewDistance, viewScale } from '../minimap/view-format.mts';
 import { measureExtendedSubjectView } from '../view-readout.mts';
 import { measureView, pickUnitSphere } from '../minimap/view-measure.mts';

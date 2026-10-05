@@ -21,7 +21,7 @@ test('renderer fixture exports are exactly the imported test entries', () => {
   }
   const exported = Object.keys(entries).filter(key => key.startsWith('./test/'));
   assert.deepEqual(exported.sort(), [...imports].sort());
-  assert.deepEqual([...external], ['site/test/runtime-package.test.mts']);
+  assert.deepEqual([...external], ['site/world/runtime-package.test.mts']);
   for (const entry of exported) {
     assert.equal(requireString(entries[entry]), entry);
     assert.ok(import.meta.resolve(`@cssearth/renderer/${entry.slice(2)}`).endsWith(entry.slice(1)));

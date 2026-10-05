@@ -3,7 +3,7 @@ import { test } from 'node:test';
 import { setImmediate as nextTurn } from 'node:timers/promises';
 import { createPreparedWorldNavigation } from './prepared-world-navigation.mts';
 import { CATEGORY_FRAMES, DATASET_VOLUMES, volumeZoomTarget } from './system-framing.mts';
-import { navigationFixture, unusedSharedView, required } from './test/navigation-test-values.mts';
+import { navigationFixture, unusedSharedView, required } from './navigation/navigation-test-values.test-support.mts';
 import { presentWorldCamera } from '@cssearth/renderer/navigation/world-camera.ts';
 import { formatSharedView, savedWorldCamera } from '@cssearth/renderer/navigation';
 import type { WorldCameraPose } from '@cssearth/engine';

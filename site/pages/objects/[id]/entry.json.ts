@@ -5,7 +5,7 @@ import { worldPlaceOf } from '../../../world-places.mts';
 import { OBJECTS, ancestorsOf } from '../../../objects.mts';
 import { APPLICATION_WORLD_CONTEXT } from '../../../world-context-plan.mts';
 import { hostedBanksOf } from '../../../hosted-banks.mts';
-import { surroundedBody, surroundingHosts } from '../../../surrounded-body.mts';
+import { surroundedBody, surroundingHosts } from '../../../world/surrounded-body.mts';
 import bankAssets from '../../../prepared-context-bank-assets.json' with { type: 'json' };
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';

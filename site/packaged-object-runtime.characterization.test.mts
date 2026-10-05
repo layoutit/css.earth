@@ -7,7 +7,7 @@ import { join } from 'node:path';
 import * as renderer from '@cssearth/renderer';
 import { parsePreparedObjectRuntime, type PreparedWorldCameraFrame } from '@cssearth/objects';
 import { characterizationRuntime } from './scene/fixtures/characterization-runtime.mts';
-import { unusedMountOptions, required } from './test/navigation-test-values.mts';
+import { unusedMountOptions, required } from './navigation/navigation-test-values.test-support.mts';
 import { DIAGNOSTICS_ENABLED } from './browser/diagnostics-policy.mts';
 import * as runtimePolicy from './browser/runtime-policy.mts';
 

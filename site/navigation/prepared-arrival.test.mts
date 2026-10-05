@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { createPreparedArrival } from '../prepared-arrival.mts';
+import { createPreparedArrival } from './prepared-arrival.mts';
 import type { SceneFactory } from '../browser/browser-types.mts';
 import type { ObjectSceneLifecycle } from '@cssearth/renderer/runtime/object-scene.ts';
 import type { ObjectPreparationView } from '@cssearth/renderer/runtime/prepared-object-navigation.ts';

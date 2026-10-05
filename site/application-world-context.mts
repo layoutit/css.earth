@@ -15,7 +15,7 @@ import { mountCatalogueMoonLabels } from './catalogue-moon-labels.mts';
 import { loadApplicationUniverse } from './application-world-resources.mts';
 import { ancestorIds, knownAncestors } from './object-directory.mts';
 import { CONTEXT_OBJECT_DESCRIPTORS } from './prepared-context-objects.mts';
-import { surroundingHosts } from './surrounded-body.mts';
+import { surroundingHosts } from './world/surrounded-body.mts';
 
 /** The world's prepared data and planner worker, which `startup-boot.mts` starts while the first body still loads. */
 export { loadApplicationUniverse };

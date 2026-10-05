@@ -9,7 +9,7 @@ import { discoverObjectTests } from '@cssearth/bake/run-implemented-objects/sour
 const root = projectRoot(import.meta.url);
 test('per-object discovery keeps shared suites and every body-owned suite collected in root lanes', async () => {
   const files = await discoverObjectTests('earth', { projectRoot: root });
-  assert.ok(files.includes(resolve(root, 'site/test/runtime-package.test.mts')));
+  assert.ok(files.includes(resolve(root, 'site/world/runtime-package.test.mts')));
   assert.ok(files.includes(resolve(root, 'packages/bake/src/raster/raster-pages.test.mts')));
   const lanes = testLaneFiles(root, JSON.parse(readFileSync(resolve(root, 'package.json'), 'utf8')) as unknown, ['test:packages', 'test:site']);
   for (const file of [...lanes.packages, ...lanes.site].filter(file => file.startsWith('src/objects/earth/')))

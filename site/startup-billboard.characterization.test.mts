@@ -10,7 +10,7 @@ let coverAvailable = true, prepareFails = false, initialFails = false;
 const cover = { publish(...args: unknown[]) { calls.push(['publish', ...args]); } };
 const handoff = { mountOptions: { arriving: true } };
 mock.module(new URL('./navigation/arrival-billboard.mts', import.meta.url).href, { namedExports: { async prepareArrivalBillboard(...args: unknown[]) { calls.push(['cover', ...args]); return coverAvailable ? cover : null; } } });
-mock.module(new URL('./prepared-arrival.mts', import.meta.url).href, { namedExports: {
+mock.module(new URL('./navigation/prepared-arrival.mts', import.meta.url).href, { namedExports: {
   createPreparedArrival(signal: AbortSignal, value: unknown, reveal: () => void, input: unknown) {
     calls.push(['arrival', signal, value, input]);
     return {

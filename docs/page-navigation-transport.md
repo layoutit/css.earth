@@ -204,7 +204,7 @@ After building the packages and renderer, check page metadata with:
 node --test site/server/object-page-data.test.mts
 pnpm test:packages   # includes rendering/prepared-scene-serialization.test.ts
 node --test site/journeys/rendered-page.test.mts
-node --test site/test/search-response.test.mts
+node --test site/server/search-response.test.mts
 node --test site/server/dataset-response.test.mts site/model/dataset-url.test.mts
 node --test site/scene/scene-session.test.mts
 ```

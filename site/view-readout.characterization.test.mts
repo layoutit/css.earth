@@ -3,7 +3,7 @@ import { test } from 'node:test';
 import { parseHTML } from 'linkedom';
 import { createViewReadout } from './view-readout.mts';
 import type { BrowserWindow, ShellCamera } from './browser/browser-types.mts';
-import { navigationFixture, unusedSharedView } from './test/navigation-test-values.mts';
+import { navigationFixture, unusedSharedView } from './navigation/navigation-test-values.test-support.mts';
 import type { ObjectWorldNavigation } from '@cssearth/renderer/runtime/world-navigation-types.ts';
 import type { WorldCameraPose } from '@cssearth/engine';
 

@@ -2,9 +2,9 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { sourceTest } from '@cssearth/objects/node/source-test';
-import { notableBodies, prepareCategoryFrame, CATEGORY_FRAMED_SHARE } from '../build/prepare/prepare-world-presentation.mts';
-import { PREPARED_WORLD_PRESENTATION } from '../prepared-world-presentation.mts';
-import { CATEGORY_FRAMES, categoryZoomTarget } from '../system-framing.mts';
+import { notableBodies, prepareCategoryFrame, CATEGORY_FRAMED_SHARE } from './prepare-world-presentation.mts';
+import { PREPARED_WORLD_PRESENTATION } from '../../prepared-world-presentation.mts';
+import { CATEGORY_FRAMES, categoryZoomTarget } from '../../system-framing.mts';
 const test = sourceTest();
 
 test('a category frames the nearest members around their own centre, leaving the far outliers out', () => {

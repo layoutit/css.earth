@@ -74,7 +74,7 @@ the page draws it from the same map, limb law and opacities
   same camera. An earlier capture, from before the cutaway, shows
   the whole sphere from outside seamless across its 450 patches.
 - The registry tests check that the object tree is whole and that zooming out from the Sun walks the objects it is
-  inside in their order (`site/test/navigation-ontology.test.mts`, `site/test/zoom-scope.test.mts`).
+  inside in their order (`site/world/navigation-ontology.test.mts`, `site/test/zoom-scope.test.mts`).
 - The [context lineage test](../../../site/journeys/context-lineage.test.mts) checks that its products read only its source records.
 
 ## Known problems

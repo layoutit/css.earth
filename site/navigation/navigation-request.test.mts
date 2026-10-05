@@ -3,7 +3,7 @@ import { test } from 'node:test';
 import { requireObject } from '../objects.mts';
 import { subjectView } from '../scene/scene-subject.mts';
 import { WORLD_OBJECTS } from '../world-objects.mts';
-import { resolveNavigation } from '../navigation/navigation-request.mts';
+import { resolveNavigation } from './navigation-request.mts';
 
 test('a body without a hosted system opens detail on the first click', () => {
   for (const id of ['venus', 'mercury']) {

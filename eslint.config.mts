@@ -179,7 +179,7 @@ export default [
     // Modules over the line limit that are not split yet.
     files: [
       'packages/renderer/src/universe/prepared-world-context.ts',
-      'site/test/prepared-world-context.test.ts',
+      'site/world/prepared-world-context.test.ts',
       'packages/renderer/src/universe/world-context/world-context-planner.test.ts',
       'packages/renderer/src/sky/prepared-sky-runtime.test.ts',
       'packages/telescope-cli/src/archives/interferometry/alma-disc-selfcal.mts',

@@ -4,7 +4,7 @@ import { parseHTML } from 'linkedom';
 import { isRecord } from '@cssearth/core';
 import { createDiagnosticRecorder, mountDiagnosticRecorder } from './diagnostic-recorder.mts';
 import type { BrowserWindow } from './browser/browser-types.mts';
-import { required } from './test/navigation-test-values.mts';
+import { required } from './navigation/navigation-test-values.test-support.mts';
 
 function fixture(markup = '<button data-diagnostic-record></button>') {
   const { document, window } = parseHTML(`<html><head></head><body>${markup}</body></html>`);

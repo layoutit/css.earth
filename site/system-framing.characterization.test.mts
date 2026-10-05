@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { loadSystemView, systemViewLoaded, systemViewTarget, drawnGalaxiesZoomTarget, systemFramingRect } from './system-framing.mts';
-import { readSystemViewFile } from './test/system-view-file.mts';
+import { readSystemViewFile } from './world/system-view-file.test-support.mts';
 import type { WorldCameraPose } from '@cssearth/engine';
 
 const world: WorldCameraPose = { referenceFrame: 'test', epochJdTt: 1, pose: { positionM: [0, 0, 10], orientationXyzw: [0, 0, 0, 1] } };

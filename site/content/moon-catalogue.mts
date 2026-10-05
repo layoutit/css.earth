@@ -1,4 +1,4 @@
-import moonCatalogues from './source/moon-catalogues.json' with { type: 'json' };
+import moonCatalogues from '../source/moon-catalogues.json' with { type: 'json' };
 import { sourceArray, sourceId, sourceObject, sourceText, sourceUnique } from '@cssearth/objects/sources';
 
 /** Read names from the source catalogue without creating scene objects or invented positions. */

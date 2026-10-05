@@ -6,16 +6,16 @@ import { mkdtemp, mkdir, writeFile, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { dirname, resolve } from "node:path";
 
-import { required } from './navigation-test-values.mts';
+import { required } from '../navigation/navigation-test-values.test-support.mts';
 import { SCENE_OBJECTS } from "../objects.mts";
-import { authoredObjectFixture } from "../build/fixtures/authored-object-fixture.mts";
+import { authoredObjectFixture } from "./fixtures/authored-object-fixture.mts";
 import { objectInformationSource, validateObjectEditorial } from "@cssearth/bake/sources";
 import {
   objectPackagePaths,
   validateObjectPackageFiles,
   validateObjectData,
   validateInventory,
-} from "../build/object-package-contract.mts";
+} from "./object-package-contract.mts";
 
 const implemented = SCENE_OBJECTS;
 

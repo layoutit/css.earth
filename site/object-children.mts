@@ -1,6 +1,6 @@
 import { OBJECTS, ancestorsOf, type NavigableObject } from './objects.mts';
 import { WORLD_HOST_ID } from './navigation/navigation-scope.mts';
-import { catalogueMoons } from './moon-catalogue.mts';
+import { catalogueMoons } from './content/moon-catalogue.mts';
 import { APPLICATION_WORLD_CONTEXT, APPLICATION_WORLD_FILE_OF } from './world-context-plan.mts';
 
 const PARSEC_M = 3.085677581491367e16;

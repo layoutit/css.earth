@@ -62,7 +62,7 @@
       "site/packaged-object-runtime.mts",
       "site/model/planetary-system-members.mts",
       "site/prepare-body-moons.mts",
-      "site/prepared-arrival.mts",
+      "site/navigation/prepared-arrival.mts",
       "site/navigation/prepared-descriptor.mts",
       "site/prepared/prepared-object-path.mts",
       "site/content/prepared-panel-content.mts",
@@ -410,7 +410,7 @@
       "branches": 87.5,
       "functions": 91.6
     },
-    "site/prepared-arrival.mts": {
+    "site/navigation/prepared-arrival.mts": {
       "lines": 100,
       "branches": 100,
       "functions": 100

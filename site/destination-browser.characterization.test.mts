@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import { parseHTML } from 'linkedom';
 import { createDestinationBrowser } from './destination-browser.mts';
-import { required } from './test/navigation-test-values.mts';
+import { required } from './navigation/navigation-test-values.test-support.mts';
 
 test('destination panel publishes city fields, opens only once per selection and forwards reset', () => {
   const { document } = parseHTML('<section class="object-destination-panel" hidden><button class="object-destination-back"></button><h2 class="object-destination-name"></h2><p class="object-destination-context"></p><p class="object-destination-status"></p></section>');
