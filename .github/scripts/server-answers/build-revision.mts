@@ -1,7 +1,7 @@
 /** Rebuild a restored revision's complete offline deploy outputs with no shared scene copy. */
 import { spawn } from 'node:child_process';
 import { lstat, rename, stat, readFile } from 'node:fs/promises';
-import { resolve } from 'node:path';
+import { delimiter, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { terminate } from './clone-restore.mts';
 import { readDeploymentConfig } from './deployment-config.mts';
@@ -9,7 +9,8 @@ import { scriptsAt, expandScript, offlineDeploySteps } from './revision-entries.
 
 export async function buildRevision(root: string, run: (step: string, index: number, env: NodeJS.ProcessEnv) => Promise<void>): Promise<void> {
   const scripts = await scriptsAt(root);
-  const env = { ...process.env, CSSEARTH_SKIP_DECLARATIONS: '1', ASSET_ORIGIN: 'https://assets.invalid', NODE_OPTIONS: `--max-old-space-size=6144 --import=${resolve(import.meta.dirname, 'offline.mts')}` };
+  // A deploy script names workspace binaries (`astro build`) that `pnpm run` finds through node_modules/.bin: put it on PATH as pnpm would.
+  const env = { ...process.env, PATH: `${resolve(root, 'node_modules/.bin')}${delimiter}${process.env.PATH ?? ''}`, CSSEARTH_SKIP_DECLARATIONS: '1', ASSET_ORIGIN: 'https://assets.invalid', NODE_OPTIONS: `--max-old-space-size=6144 --import=${resolve(import.meta.dirname, 'offline.mts')}` };
   const steps = ['pnpm build:packages', 'pnpm prepare:shell', ...offlineDeploySteps(scripts)];
   const workerBuild = expandScript(scripts, 'deploy:cloudflare-preview').find(step => step.startsWith('node '));
   if (!workerBuild) throw new Error('Missing Cloudflare bundler');
