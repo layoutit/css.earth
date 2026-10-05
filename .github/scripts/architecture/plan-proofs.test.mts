@@ -33,10 +33,14 @@ test('a droppable group fails minimality; removing a required cut breaks accepta
 test('generated module maps to its declaration in the same prepared folder', () => {
   assert.equal(trackedStandIn('site/prepared/prepared-shell-icons.mjs', new Set(['site/prepared/prepared-shell-icons.d.mts'])), 'site/prepared/prepared-shell-icons.d.mts');
 });
-test('committed plan has seven ordered, necessary change groups', () => {
+test('the committed plan keeps only unique change groups of the original seven', () => {
+  // Each S3 pull request removes the group it applies, so the count can only fall; `--minimality` proves the rest are necessary.
   const data = JSON.parse(readFileSync('docs/site-architecture/edits.json', 'utf8')) as unknown;
   assert.ok(data && typeof data === 'object' && 'changes' in data && Array.isArray(data.changes));
-  assert.equal(data.changes.length, 7);
+  assert.ok(data.changes.length <= 7);
+  const ids = data.changes.map((change: unknown) => change && typeof change === 'object' && 'id' in change ? String(change.id) : '');
+  assert.equal(new Set(ids).size, ids.length);
+  assert.ok(ids.every((id: string) => id));
 });
 
 test('the last S3 prefix must eliminate pre-existing file cycles even without increasing them', () => {
