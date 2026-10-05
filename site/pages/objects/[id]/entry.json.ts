@@ -6,7 +6,9 @@ import { OBJECTS, ancestorsOf } from '../../../objects.mts';
 import { APPLICATION_WORLD_CONTEXT } from '../../../world-context-plan.mts';
 import { hostedBanksOf } from '../../../hosted-banks.mts';
 import { surroundedBody, surroundingHosts } from '../../../surrounded-body.mts';
-import { CONTEXT_OBJECT_DESCRIPTORS } from '../../../prepared-context-objects.mts';
+import bankAssets from '../../../prepared-context-bank-assets.json' with { type: 'json' };
+import { readFile } from 'node:fs/promises';
+import { resolve } from 'node:path';
 
 // One navigable object's prepared entry, read by the page's object directory (site/object-directory.mts) the first time
 // it needs that object.
@@ -14,8 +16,12 @@ export const getStaticPaths: GetStaticPaths = async () => OBJECT_ENTRY_IDS.map(i
 
 // The body each world body orbits, read once: the build reads the whole world (world-context-plan.mts).
 let centres: ReadonlyMap<string, string> | null = null;
-// The objects whose picture lies on walls around their middle, read once from the world's context descriptors.
-let surrounding: ReadonlySet<string> | null = null;
+// The objects whose picture lies on walls around their middle, read once: each context bank's descriptor says it
+// (`properties.surrounds`). The banks are the ones the catalogue prepared; their descriptors are read from the tree, as
+// the page data is (object-page-data.mts), because the module that holds them is the browser's.
+let surrounding: Promise<ReadonlySet<string>> | null = null;
+const readSurrounding = async (root = process.cwd()) => surroundingHosts(Object.fromEntries(await Promise.all(Object.keys(bankAssets).map(async id =>
+  [id, JSON.parse(await readFile(resolve(root, 'src/objects', id, 'object.json'), 'utf8')) as unknown] as const))));
 export const GET: APIRoute = async ({ params }) => {
   const found = params.id ? objectEntry(params.id) : null;
   if (!found) return new Response('Not found', { status: 404 });
@@ -29,8 +35,7 @@ export const GET: APIRoute = async ({ params }) => {
   centres ??= new Map(APPLICATION_WORLD_CONTEXT.bodies.flatMap(body => body.orbit ? [[body.id, body.orbit.centerBodyId] as const] : []));
   const banks = hostedBanksOf(params.id!, centres.get(params.id!));
   // The body its walls surround, when its picture lies on walls: a zoom in on it leads to that body (object-directory.mts `loadInner`).
-  surrounding ??= surroundingHosts(CONTEXT_OBJECT_DESCRIPTORS);
-  const inner = surroundedBody(OBJECTS, surrounding, params.id!);
+  const inner = surroundedBody(OBJECTS, await (surrounding ??= readSurrounding()), params.id!);
   const entry = { ...(found as Record<string, unknown>), ...(ancestors.length ? { ancestors } : {}), ...(inner ? { inner } : {}), ...(world ? { world } : {}), ...(banks.length ? { banks } : {}) };
   // A flight covers its arrival with the entry's photograph, read as written: it carries its published address.
   return new Response(JSON.stringify(await resolveSceneAddressesDeep(entry)), { headers: {
