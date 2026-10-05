@@ -1,0 +1,52 @@
+{
+  "id": "esawebb-weic2320c",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Webb captures detailed beauty of Ring Nebula (MIRI image)",
+  "identifiers": [
+    {
+      "type": "ESA/Webb image",
+      "value": "weic2320c"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://esawebb.org/images/weic2320c/",
+      "label": "Published source"
+    },
+    {
+      "role": "original",
+      "url": "https://cdn.esawebb.org/archives/images/large/weic2320c.jpg",
+      "label": "JPEG, 1257 x 1015 px"
+    },
+    {
+      "role": "rights",
+      "url": "https://esawebb.org/copyright/",
+      "label": "Reuse terms"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://esawebb.org/images/weic2320c/",
+      "checkedOn": "2026-10-04",
+      "locator": "1257 x 1015 px over 2.33 × 1.88 arcmin; MIRI 5.6, 7.7, 10, 11, 12, 15, 18, 21 and 25 µm; released 21 August 2023. The file's embedded sky tags for scale and direction, 0.1111 arcsec per pixel and north 132.9° right of vertical, and the star for place: the central star in the picture, pixel 627.5, 513.5, is set at the place the Ring Nebula's page stands at, so the frame's centre is 283.396433°, 33.0290199°. The tags alone put the star 0.21 arcsec from where the picture shows it."
+    }
+  ],
+  "publisher": "ESA/Webb",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "ESA/Webb, NASA, CSA, M. Barlow, N. Cox, R. Wesson",
+      "scope": "Published source",
+      "evidence": "https://esawebb.org/images/weic2320c/"
+    },
+    {
+      "kind": "rights",
+      "text": "Creative Commons Attribution 4.0 International; the full credit must be shown.",
+      "scope": "Published source",
+      "evidence": "https://esawebb.org/copyright/"
+    }
+  ]
+}
