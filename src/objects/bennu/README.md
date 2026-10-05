@@ -21,7 +21,7 @@ The wavelength arrows select four MapCam maps from the USGS v2 release (4 August
 
 ## Derived maps
 
-Six datasets show the mission's own derived facet tables, one value per triangle of the shape model it was computed on. Each dataset is drawn on its own archived mesh, simplified to 800 triangles. A texel takes the value of the nearest triangle of the full mesh, within 10 m; nothing is interpolated between triangles. The meshes share Bennu's body-fixed frame, so switching datasets barely changes the outline.
+Six datasets show the mission's own derived facet tables, one value per triangle of the shape model it was computed on. Each dataset is read from its own archived mesh and drawn on the body's one mesh, the OLA v20 model at 800 triangles: a texel takes the value of the nearest triangle of the dataset's full mesh, within 10 m of the point it is drawn at; nothing is interpolated between triangles. The meshes share Bennu's body-fixed frame. Until 5 October 2026 each of the four archived meshes was also drawn, simplified to 800 triangles of its own, and picking one of these datasets swapped the whole mesh. Read across models, a map withholds at most 0.05 points more of its texels (the OVIRS maps 0.27% against 0.22%, thermal inertia 0.48% against 0.45%).
 
 | Dataset | Product (PDS4 LIDVID ends `::1.0`) | Mesh | Archived values | Display range |
 | --- | --- | --- | --- | --- |
