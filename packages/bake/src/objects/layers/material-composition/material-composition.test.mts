@@ -4,7 +4,7 @@ import assert from 'node:assert/strict';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import {readFile} from 'node:fs/promises';
-import {intersectViewRayWithEllipsoid,rotateSequence,convexHull2d,prepareProjectedEllipsoidSilhouetteCoverage,planetographicRowsToMeshLatitude} from '@cssearth/bake/objects/geometry';
+import {intersectViewRayWithEllipsoid,rotateSequence,convexHull2d,prepareProjectedEllipsoidSilhouetteCoverage,planetocentricSampleRowsToMeshLatitude,planetographicRowsToMeshLatitude} from '@cssearth/bake/objects/geometry';
 import { polarQuad, validateMaterialRecipe, prepareLayeredLeafLayouts, prepareLayeredOblateObject, isLayeredOblateRecipe } from '@cssearth/bake/objects/layers/material-composition';
 import { writeMaterialAtlasTile, sampleRgbaBilinear, sampleAlphaBilinear, validateRelativePath } from '@cssearth/bake/objects/layers/giant';
 import {fitTextureGeometry} from '@cssearth/bake/scene';
@@ -87,4 +87,19 @@ test('planetographic map rows move to the parametric latitude of the mesh',()=>{
  assert.equal(mesh[89],89);assert.equal(mesh[90],90);assert.ok(mesh[0]===0&&mesh[179]===179);
  assert.deepEqual([...planetographicRowsToMeshLatitude(rows,1,height,1,1)],[...rows]);
  assert.throws(()=>planetographicRowsToMeshLatitude(rows,1,height,1,0.9),/axis ratio/);
+});
+
+test('planetocentric sample rows, poles included, move to the parametric latitude of the mesh',()=>{
+ const samples=181,axisRatio=60268/54364,rows=Uint8Array.from({length:samples},(_,y)=>y);
+ const mesh=planetocentricSampleRowsToMeshLatitude(rows,1,samples,1,axisRatio);
+ assert.equal(mesh.length,180);
+ // Mesh row 45 sits at parametric latitude 44.5 deg; its planetocentric latitude is atan(b/a tan 44.5) = 41.6 deg, sample 48.4.
+ const beta=44.5*Math.PI/180,expected=90-Math.atan(Math.tan(beta)/axisRatio)*180/Math.PI;
+ assert.equal(mesh[45],Math.round(expected));
+ // The first and last mesh rows lie half a row inside the poles: samples 0.55 and 179.45.
+ assert.ok(mesh[0]===1&&mesh[179]===179);
+ // On a sphere every mesh row lies midway between two samples.
+ assert.ok([...planetocentricSampleRowsToMeshLatitude(rows,1,samples,1,1)].every((value,y)=>value===y||value===y+1));
+ assert.throws(()=>planetocentricSampleRowsToMeshLatitude(rows,1,samples,1,0.9),/axis ratio/);
+ assert.throws(()=>planetocentricSampleRowsToMeshLatitude(rows,1,samples+1,1,axisRatio),/dimensions/);
 });
