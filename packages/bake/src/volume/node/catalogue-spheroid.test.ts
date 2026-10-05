@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { parseCatalogueSpheroid, placeSpheroidRows } from './catalogue-spheroid.ts';
+import { parseCatalogueSpheroid, placeSpheroidRows, spheroidSeed } from './catalogue-spheroid.ts';
 
 const PC_M = 3.0856775814913673e16;
 // A round spheroid 10 pc in half-light radius, 8 kpc away toward +x, ending at two half-light radii.
@@ -75,4 +75,13 @@ test('a halo needs falling power laws, their breaks in order and an end', () => 
   assert.throws(law({ indices: [-1, -2], breaksKpc: [], endKpc: 100 }), /frame\.spheroid\.projectedPowerLaw needs negative indices, one more than its rising breaksKpc.*"breaksKpc":\[\]/);
   assert.throws(law({ indices: [-1, -2], breaksKpc: [30], endKpc: 20 }), /an endKpc beyond the last break/);
   assert.throws(law({ indices: [1], breaksKpc: [], endKpc: 20 }), /needs negative indices/);
+});
+
+test('a placement seeded with another bank\'s id draws that bank\'s depths', () => {
+  assert.equal(spheroidSeed({ placement: 'spheroid' }, 'own', 'frame.seed'), 'own');
+  assert.equal(spheroidSeed({ seed: 'dots' }, 'own', 'frame.seed'), 'dots');
+  assert.throws(() => spheroidSeed({ seed: 7 }, 'own', 'frame.seed'), /frame\.seed names a bank id to seed the depth draws with; got 7/);
+  const sky = sightLines(10), as = (id: string) => placeSpheroidRows({ sky, spheroid: halo, id, at: 'frame.spheroid' }).points;
+  assert.deepEqual(as(spheroidSeed({ seed: 'dots' }, 'field', 'frame.seed')), as('dots'));
+  assert.notDeepEqual(as('field'), as('dots'));
 });
