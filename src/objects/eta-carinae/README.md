@@ -16,7 +16,7 @@ Generated 2026-10-05 by [new-object-cli.mts](../../../packages/telescope-cli/src
 
 ![The star's page inside the Homunculus at four distances, and a zoom in on the nebula's page with the wheel alone](evidence/2026-10-05/pages.jpg)
 
-Headless Chromium at 1440 × 900, device pixel ratio 2, on 2026-10-05, no page errors. Top row: the star's own page as it opens, 32 AU from the star, its disc dimmed toward the edge; then 4, 8 and 12 wheel steps out, at 263, 1,890 and 11,877 AU, with the nebula's surface ([Homunculus Nebula image layers](../homunculus-nebula-layers/README.md)) drawn around it without the sheet through the star. Bottom row: the nebula's page, then a zoom in with the wheel alone, no click: 4 steps in, the view has handed over to the star, 42,973 AU from it; 8 and 13 steps in, 6,079 and 522 AU.
+Headless Chromium at 1440 × 900, device pixel ratio 2, on 2026-10-05, no page errors. Top row: the star's own page as it opens, 42 AU from the star, its disc dimmed toward the edge; then 4, 8 and 12 wheel steps out, at 333, 2,388 and 16,890 AU, with the nebula's surface ([Homunculus Nebula image layers](../homunculus-nebula-layers/README.md)) drawn around it without the sheet through the star. Bottom row: the nebula's page, then a zoom in with the wheel alone, no click: 4 steps in, the view has handed over to the star, 42,973 AU from it; 8 and 13 steps in, 6,083 and 523 AU.
 
 ## Known problems
 
