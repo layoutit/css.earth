@@ -4,6 +4,32 @@ import type { VolumeCameraPublication } from '../volume/types.js';
 import type { PreparedCssImageLayers, PreparedImageLayerView } from '@cssearth/objects';
 import { revealLayer } from '../rendering/layer-reveal.js';
 
+/** A leaf as a rectangle in bank units: its centre, its unit edge directions, its half extents and its normal, from the
+ * prepared corners. A sheet is left out of the drawing while the camera stands within one of its stack's sampling steps
+ * of it (`publish`): a camera inside the bank, at a nebula's central star, would otherwise see the sheets through the
+ * middle, which carry the star's own light, with texels larger than the view, and a sheet crossing the camera plane. */
+interface Sheet { readonly c: readonly [number, number, number]; readonly u: readonly [number, number, number]; readonly v: readonly [number, number, number];
+  readonly n: readonly [number, number, number]; readonly hu: number; readonly hv: number }
+function sheetOf(centre: readonly [number, number, number], corners: readonly (readonly [number, number, number])[]): Sheet | null {
+  const [a, b, , d] = corners;
+  if (!a || !b || !d) return null;
+  const u = [b[0] - a[0], b[1] - a[1], b[2] - a[2]], v = [d[0] - a[0], d[1] - a[1], d[2] - a[2]];
+  const lu = Math.hypot(...u), lv = Math.hypot(...v);
+  if (!(lu > 0) || !(lv > 0)) return null;
+  const eu = [u[0]! / lu, u[1]! / lu, u[2]! / lu] as const, ev = [v[0]! / lv, v[1]! / lv, v[2]! / lv] as const;
+  const n = [eu[1] * ev[2] - eu[2] * ev[1], eu[2] * ev[0] - eu[0] * ev[2], eu[0] * ev[1] - eu[1] * ev[0]], ln = Math.hypot(...n);
+  if (!(ln > 0)) return null;
+  return { c: centre, u: eu, v: ev, n: [n[0]! / ln, n[1]! / ln, n[2]! / ln], hu: lu / 2, hv: lv / 2 };
+}
+/** Whether the camera at `p` (bank units) is nearer than `reach` to the sheet: the distance from a point to a rectangle. */
+function withinReach(sheet: Sheet, p: readonly number[], reach: number): boolean {
+  const dx = p[0]! - sheet.c[0], dy = p[1]! - sheet.c[1], dz = p[2]! - sheet.c[2];
+  const along = dx * sheet.n[0] + dy * sheet.n[1] + dz * sheet.n[2];
+  const across = Math.max(0, Math.abs(dx * sheet.u[0] + dy * sheet.u[1] + dz * sheet.u[2]) - sheet.hu);
+  const down = Math.max(0, Math.abs(dx * sheet.v[0] + dy * sheet.v[1] + dz * sheet.v[2]) - sheet.hv);
+  return along * along + across * across + down * down < reach * reach;
+}
+
 /** Transparent prepared layer banks. No opaque viewport matte is allowed here. */
 export function mountPreparedCssImageLayers({ host, before, payload, resolveResource }: {
   host: HTMLElement; before: Element; payload: PreparedCssImageLayers; resolveResource(path: string): string;
@@ -22,23 +48,25 @@ export function mountPreparedCssImageLayers({ host, before, payload, resolveReso
     // Same camera-driven scene as a volume: its will-change keeps slice raster scales through rotation. A stack is one
     // scene, or the runs of leaves its view names (sceneSizes): each run under a camera of its own in the stack's
     // projection, painted in the stack's order, so the browser sorts and cuts only one run's leaves against each other.
-    const textures: { element: HTMLElement; path: string; large: boolean }[] = [], scenes: { camera: HTMLElement; scene: HTMLElement }[] = [];
+    const textures: { element: HTMLElement; path: string; large: boolean; sheet: Sheet | null; shown: string }[] = [], scenes: { camera: HTMLElement; scene: HTMLElement }[] = [];
+    const view = views.find(view => view.axis === stack.axis);
     let next = 0;
-    for (const size of views.find(view => view.axis === stack.axis)?.sceneSizes ?? [stack.leaves.length]) {
+    for (const size of view?.sceneSizes ?? [stack.leaves.length]) {
       const camera = document.createElement('div'), scene = document.createElement('div'), mesh = document.createElement('div');
       camera.className = 'css-volume-camera'; scene.className = 'css-volume-scene'; mesh.className = 'css-volume-mesh';
       for (const leaf of stack.leaves.slice(next, next + size)) {
         const element = document.createElement('s');
         element.dataset.imageLayerLeaf = leaf.id;
         Object.assign(element.style, leaf.style);
-        textures.push({ element, path: leaf.texturePath, large: leaf.widthPx * leaf.heightPx >= LARGE_IMAGE_PIXELS });
+        textures.push({ element, path: leaf.texturePath, large: leaf.widthPx * leaf.heightPx >= LARGE_IMAGE_PIXELS,
+          sheet: leaf.verticesUnits ? sheetOf(leaf.centerUnits, leaf.verticesUnits) : null, shown: '' });
         mesh.appendChild(element);
       }
       next += size;
       scene.appendChild(mesh); camera.appendChild(scene); projection.appendChild(camera); scenes.push({ camera, scene });
     }
     root.appendChild(projection);
-    return { axis: stack.axis, projection, scenes, textures, loaded: false, perspective: '', perspectiveOrigin: '', transform: '' };
+    return { axis: stack.axis, projection, scenes, textures, loaded: false, perspective: '', perspectiveOrigin: '', transform: '', reach: view?.samplingStepUnits ?? 0 };
   });
   host.insertBefore(root, before);
   let destroyed = false;
@@ -51,7 +79,9 @@ export function mountPreparedCssImageLayers({ host, before, payload, resolveReso
   return Object.freeze({ root,
     /** The bank root is shown again: its large leaves wait for their decode (layer-reveal.ts). */
     revealLarge() { for (const bank of banks) if (bank.projection.style.display !== 'none') revealLarge(bank); },
-    publish(publication: VolumeCameraPublication) {
+    /** `around`: the bank is drawn around a body that stands inside it, so the sheets the camera stands on are left out;
+     * as its page's own subject a bank draws every sheet, as it always has. */
+    publish(publication: VolumeCameraPublication, around = false) {
       if (destroyed) return;
       const transform = preparedVolumeCameraTransform(publication, payload.frame);
       const cssTransform = `translate3d(${transform.translationCssPixels.map(value => `${value}px`).join(',')}) ${worldRotationCss(transform.rotation)}`;
@@ -81,6 +111,12 @@ export function mountPreparedCssImageLayers({ host, before, payload, resolveReso
           bank.loaded = true;
         }
         if (returning) revealLarge(bank);
+        // Around a body, the sheets the camera stands within one sampling step of are left out (Sheet): an opacity write on
+        // change only, and every sheet back when the bank is its page's subject again.
+        if (weight > 0 && bank.reach > 0) for (const texture of bank.textures) {
+          const shown = around && texture.sheet && withinReach(texture.sheet, local.positionUnits, bank.reach) ? '0' : '';
+          if (texture.shown !== shown) { texture.shown = shown; texture.element.style.opacity = shown; }
+        }
         // Never 1 (STACK_OPACITY_CEILING): a drag across M31 had its longest frame at 108 to 111 ms with a bank's opacity
         // reaching 1, and 67 to 72 ms under the ceiling (iPad, 2026-10-04).
         set(bank.projection, 'opacity', String(Math.min(STACK_OPACITY_CEILING, weight)));

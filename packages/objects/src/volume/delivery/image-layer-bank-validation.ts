@@ -30,13 +30,32 @@ export function validatePreparedImageLayerBank(input: unknown): PreparedCssImage
         widthPx: leaf.widthPx, heightPx: leaf.heightPx, style: leaf.style };
     }) };
   });
+  // Each leaf's prepared corners, kept beside the common leaf: a sheet the camera stands on is left out of the drawing. A
+  // leaf without them (a fixture) is never left out.
+  const corners = data.banks.map(input => (record(input).leaves as unknown[]).map(leaf => {
+    const vertices = record(leaf).verticesUnits;
+    if (vertices === undefined) return undefined;
+    if (!Array.isArray(vertices) || vertices.length !== 4) throw new TypeError('Image-layer leaf corners are four prepared points.');
+    return [corner(vertices[0]), corner(vertices[1]), corner(vertices[2]), corner(vertices[3])] as const;
+  }));
   if (bankViews.length === 3) {
     const [a, b, c] = bankViews.map(view => view.normalUnits);
     const determinant = a[0] * (b[1] * c[2] - b[2] * c[1]) - a[1] * (b[0] * c[2] - b[2] * c[0]) + a[2] * (b[0] * c[1] - b[1] * c[0]);
     if (Math.abs(determinant) < 1e-8) throw new TypeError('Image-layer views must cover three independent directions.');
   }
-  return { ...validatePreparedCssVolume({ schema: PREPARED_CSS_VOLUME_SCHEMA, id: data.id, frame: data.frame,
-    anchors: [], stacks, resources: data.resources, provenance: data.provenance, approximation: data.approximation }), bankViews };
+  const volume = validatePreparedCssVolume({ schema: PREPARED_CSS_VOLUME_SCHEMA, id: data.id, frame: data.frame,
+    anchors: [], stacks, resources: data.resources, provenance: data.provenance, approximation: data.approximation });
+  return { ...volume, stacks: volume.stacks.map((stack, index) => ({ ...stack, leaves: stack.leaves.map((leaf, order) => {
+    const vertices = corners[index]![order];
+    return vertices === undefined ? leaf : { ...leaf, verticesUnits: vertices };
+  }) })), bankViews };
+}
+
+function corner(input: unknown): [number, number, number] {
+  if (!Array.isArray(input) || input.length !== 3 || !input.every(value => typeof value === 'number' && Number.isFinite(value))) {
+    throw new TypeError('An image-layer leaf corner is three finite bank units.');
+  }
+  return [input[0] as number, input[1] as number, input[2] as number];
 }
 
 function record(input: unknown): Record<string, unknown> {

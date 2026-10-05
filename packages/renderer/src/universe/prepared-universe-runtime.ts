@@ -22,7 +22,7 @@ import { mountEnvironmentLabels } from './environment-labels.js';
 
 import type { PreparedLabelEdge } from '../navigation/prepared-label-edge.js';
 import { createContextFocusBank } from './prepared-focus-bank.js';
-import { detailedFocusContextOpacity, selectedBodyContextOpacity } from './detailed-focus-context.js';
+import { detailedFocusContextOpacity, samePlaceM, selectedBodyContextOpacity } from './detailed-focus-context.js';
 import type { SelectedBank } from './detailed-focus-context.js';
 
 import type { WorldContextFrame } from './world-context/world-context-frame.js';
@@ -371,7 +371,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
           selectObject(id: string, frame: PreparedWorldCameraFrame, framingScale = 1, edge?: PreparedLabelEdge) {
             const body = [plan.focus, ...plan.bodies].find(body => body.id === id);
             if (!body || frame.referenceFrame !== plan.frame.referenceFrame || frame.epochJdTt !== plan.frame.epochJdTt ||
-                frame.bodyRadiusM !== body.radiusM || !body.positionM.every((value, axis) => Math.abs(value - frame.originM[axis]) < .001)) {
+                frame.bodyRadiusM !== body.radiusM || !samePlaceM(body.positionM, frame.originM)) {
               // Name what disagrees: the bare sentence left a black page with nothing to act on (2026-10-02).
               throw new TypeError(`Selected detail ${id} does not match its prepared world context (focus ${plan.focus.id}): ${!body ? 'the context has no such body'
                 : `frame ${frame.referenceFrame} at ${frame.epochJdTt}, radius ${frame.bodyRadiusM} m, origin ${frame.originM.join(', ')}; context ${plan.frame.referenceFrame} at ${plan.frame.epochJdTt}, radius ${body.radiusM} m, position ${body.positionM.join(', ')}`}.`);
@@ -421,10 +421,11 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
               }
               const volumeOpacity = background.publish(world, viewport, distanceM, selected.positionM, detailContextOpacity, starPlaces);
               // A body inside a galaxy other than the page's own stands among that galaxy's catalogue dots once the camera has left
-              // the body's own system, over the band the stellar neighbourhood takes around the Sun.
+              // the body's own system, over the band the stellar neighbourhood takes around the Sun. A body inside an object whose
+              // picture lies on walls (a nebula's central star) stands inside those walls (`selectionHolders`).
               const insideGalaxy = catalogBanks.imageBankContaining(selected.positionM);
               catalogBanks.publishImages(world, viewport, volumeOpacity, detailedFocus?.objectId, insideGalaxy === undefined || insideGalaxy === detailedFocus?.objectId ? undefined
-                : { objectId: insideGalaxy, opacity: logarithmicFade(eyeDistanceM(world.pose, selected.positionM), plan.stars.fadeStartDistanceM, plan.stars.fullDistanceM) });
+                : { objectId: insideGalaxy, opacity: logarithmicFade(eyeDistanceM(world.pose, selected.positionM), plan.stars.fadeStartDistanceM, plan.stars.fullDistanceM) }, selectionHolders);
               // A bank of plain-dot stars dims like every marker outside a highlighted category and like every body outside
               // the focus star's system (the frame's `otherSystems`).
               catalogBanks.publishPoints(world, viewport, companion ?? undefined, selectedSystem,
