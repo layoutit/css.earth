@@ -82,7 +82,7 @@ test('the retained material publisher fits angle-only textures in their actual C
   const element={style,setAttribute(){},removeAttribute(){}} as unknown as HTMLElement;
   const address={resource:null,frame:0,row:0,backgroundPosition:'0px 0px',backgroundSize:'100px 80px'};
   const track:PreparedMaterialTrack={id:'material',target:0,frame:{thresholds:[],indices:[0]},defaultFrame:0,
-    banks:[{id:'bank',frames:[address],default:address,fixed:address}],rotation:{kind:'angle',property:'rotate',reference:'initial',baseDegrees:0,
+    banks:[{id:'bank',frames:[address],default:address,fixed:address}],rotation:{kind:'angle',reference:'initial',baseDegrees:0,
       physical:{projection:f.projection,width:f.width,height:f.height,systemTransform:`matrix3d(${identity})`}}};
   const publisher=createPreparedMaterialPublisher(track,element),physical:PhysicalProjection={eyeFromScene:translation(28,-9,-70),focalPixels:800,principalOffsetPixels:[-170,0]};
   const view={controlPitch:0,controlYaw:0,zoom:1,sceneMatrix:`matrix3d(${identity})`,sunViewDirection:[1,0,0],

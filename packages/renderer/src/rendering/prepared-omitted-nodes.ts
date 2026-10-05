@@ -1,15 +1,17 @@
 import { type PreparedTree, type PreparedVariant } from '@cssearth/objects';
 
-/** The alternative mesh a leaf belongs to: its display reads `var(--<id>-<profile>-display, none)`. A body with several
- * shape models (67P, Bennu, Psyche and 38 others) carries one such profile per model; a selection shows one of them. */
-export function meshProfile(style: string | null | undefined): string | null {
-  return /display:\s*var\((--[\w-]+-display)\b/u.exec(style ?? '')?.[1] ?? null;
-}
+const meshLeaves = new WeakMap<PreparedTree, ReadonlyMap<number, string>>();
 
-/** The mesh profiles a selection hides: the display variables its writes set to `none`. */
-export function hiddenMeshProfiles(variant: PreparedVariant | undefined): Set<string> {
-  return new Set((variant?.writes ?? []).flatMap(write => write.kind === 'style' && write.name.startsWith('--') &&
-    write.name.endsWith('-display') && write.value === 'none' ? [write.name] : []));
+/** The alternative mesh each leaf belongs to (`tree.meshes`). A body with several shape models (67P, Bennu, Psyche and
+ * 38 others) carries one mesh per model; a selection mounts the one it names (`variant.mesh`). */
+export function preparedMeshLeaves(tree: PreparedTree): ReadonlyMap<number, string> {
+  let leaves = meshLeaves.get(tree);
+  if (!leaves) {
+    const found = new Map<number, string>();
+    for (const mesh of tree.meshes ?? []) for (const [first, count] of mesh.leaves) for (let leaf = first; leaf < first + count; leaf++) found.set(leaf, mesh.name);
+    meshLeaves.set(tree, leaves = found);
+  }
+  return leaves;
 }
 
 /** The subtrees a selection hides: those it declares (`hiddenSubtrees`, Earth's cutaway) and every node it writes
@@ -20,14 +22,14 @@ export function hiddenSubtreeRoots(variant: PreparedVariant | undefined): Set<nu
 }
 
 /** The nodes a selection leaves out of the page: the descendants of every subtree it hides (`hiddenSubtrees`), and the
- * leaves of every alternative mesh it hides. The server omits them from its markup, the first-view transport keeps their
- * records whole, and a mount creates them without attaching the mesh leaves: only the mesh the dataset draws on is
- * mounted (`commitSelection` swaps meshes when the dataset changes). */
+ * leaves of every alternative mesh but the one it draws on. The server omits them from its markup, the first-view
+ * transport keeps their records whole, and a mount creates them without attaching the mesh leaves: only the mesh the
+ * dataset draws on is mounted (`commitSelection` swaps meshes when the dataset changes). */
 export function omittedPreparedNodes(tree: PreparedTree, variant: PreparedVariant | undefined): Set<number> {
-  const hidden = hiddenSubtreeRoots(variant), profiles = hiddenMeshProfiles(variant), omitted = new Set<number>();
+  const hidden = hiddenSubtreeRoots(variant), meshes = preparedMeshLeaves(tree), omitted = new Set<number>();
   tree.nodes.forEach((record, index) => {
     if (hidden.has(record.parent) || omitted.has(record.parent)) omitted.add(index);
-    else { const profile = meshProfile(record.style); if (profile && profiles.has(profile)) omitted.add(index); }
+    else if (variant && meshes.size) { const mesh = meshes.get(index); if (mesh !== undefined && mesh !== variant.mesh) omitted.add(index); }
   });
   return omitted;
 }

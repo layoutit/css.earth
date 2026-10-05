@@ -1,19 +1,5 @@
 /* Beta Pictoris: the Sun's emissive presentation (body-surfaces.css, SUN block) scoped to this object, loaded after the shared
    body-surfaces.css base rules. No spin: the rotation axis and period are unmeasured. Both plates are transparent: no observation is cast. */
-.object-stage[data-object-id="beta-pictoris"] > :is(.polycss-camera, .beta-pictoris-corona-layer, .beta-pictoris-limb-layer) {
-  --beta-pictoris-scene-side-padding: 16px;
-  --beta-pictoris-reference-width: 1920px;
-  --beta-pictoris-reference-height: 1080px;
-  --beta-pictoris-shell-scale: min(
-    1,
-    calc(
-      (100cqw - var(--beta-pictoris-scene-side-padding) - var(--beta-pictoris-scene-side-padding)) /
-        var(--beta-pictoris-reference-width)
-    ),
-    calc(100cqh / var(--beta-pictoris-reference-height))
-  );
-}
-
 /* The shared stage rule (body-surfaces.css) sizes the camera and the Sun's plates; this object's plates need the same box. */
 .object-stage[data-object-id="beta-pictoris"] > :is(.beta-pictoris-corona-layer, .beta-pictoris-limb-layer) {
   position: absolute;
@@ -82,8 +68,8 @@
 }
 
 .object-stage[data-object-id="beta-pictoris"] .polycss-scene s {
-  width: var(--polycss-atlas-width, var(--polycss-atlas-size, 64px));
-  height: var(--polycss-atlas-height, var(--polycss-atlas-size, 64px));
+  width: 64px;
+  height: 64px;
   transform-style: preserve-3d;
   font: inherit;
   font-weight: normal;

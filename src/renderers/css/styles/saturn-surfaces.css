@@ -1,23 +1,9 @@
 /* Prepared scene presentation, scoped to its mounted object. */
 .object-stage:where([data-object-id="saturn"]) > .polycss-camera {
-  --saturn-scene-side-padding: 16px;
-  --saturn-reference-width: 1920px;
-  --saturn-reference-height: 1080px;
-  --saturn-point-size: 2px;
-  --saturn-shell-scale: min(
-    1,
-    calc(
-      (
-        100cqw
-        - var(--saturn-scene-side-padding)
-        - var(--saturn-scene-side-padding)
-      ) / var(--saturn-reference-width)
-    ),
-    calc(100cqh / var(--saturn-reference-height))
-  );
   position: absolute;
   inset: 0;
-  scale: calc(var(--saturn-shell-scale) / var(--object-viewport-zoom-divisor));
+  /* The reference frame fitted to the stage with 16px at each side, never enlarged, over 1 / .88 for breathing room. */
+  scale: calc(min(1, calc((100cqw - 16px - 16px) / 1920px), calc(100cqh / 1080px)) / 1.136364);
   transform-origin: 50% 50%;
   transform-style: preserve-3d;
   pointer-events: none;
@@ -98,15 +84,15 @@
 }
 
 :where(.object-stage[data-object-id="saturn"]) .polycss-scene b {
-  width: calc(var(--saturn-point-size) / var(--saturn-shell-scale));
-  height: calc(var(--saturn-point-size) / var(--saturn-shell-scale));
+  width: calc(2px / min(1, calc((100cqw - 16px - 16px) / 1920px), calc(100cqh / 1080px)));
+  height: calc(2px / min(1, calc((100cqw - 16px - 16px) / 1920px), calc(100cqh / 1080px)));
   background: currentColor;
   backface-visibility: visible;
 }
 
 :where(.object-stage[data-object-id="saturn"]) .polycss-scene s {
-  width: var(--polycss-atlas-width, 64px);
-  height: var(--polycss-atlas-height, 64px);
+  width: 64px;
+  height: 64px;
   background-origin: border-box;
   background-clip: border-box;
 }

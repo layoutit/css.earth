@@ -1,19 +1,5 @@
 /* Sham: the Sun's emissive presentation (body-surfaces.css, SUN block) scoped to this object, loaded after the shared
    body-surfaces.css base rules. No spin: the rotation axis and period are unmeasured. Both plates are transparent: no observation is cast. */
-.object-stage[data-object-id="sham"] > :is(.polycss-camera, .sham-corona-layer, .sham-limb-layer) {
-  --sham-scene-side-padding: 16px;
-  --sham-reference-width: 1920px;
-  --sham-reference-height: 1080px;
-  --sham-shell-scale: min(
-    1,
-    calc(
-      (100cqw - var(--sham-scene-side-padding) - var(--sham-scene-side-padding)) /
-        var(--sham-reference-width)
-    ),
-    calc(100cqh / var(--sham-reference-height))
-  );
-}
-
 /* The shared stage rule (body-surfaces.css) sizes the camera and the Sun's plates; this object's plates need the same box. */
 .object-stage[data-object-id="sham"] > :is(.sham-corona-layer, .sham-limb-layer) {
   position: absolute;
@@ -80,8 +66,8 @@
 }
 
 .object-stage[data-object-id="sham"] .polycss-scene s {
-  width: var(--polycss-atlas-width, var(--polycss-atlas-size, 64px));
-  height: var(--polycss-atlas-height, var(--polycss-atlas-size, 64px));
+  width: 64px;
+  height: 64px;
   transform-style: preserve-3d;
   font: inherit;
   font-weight: normal;

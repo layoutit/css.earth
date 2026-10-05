@@ -18,10 +18,10 @@
  * wide, repainted in 217 to 246 ms with their background as a share and in 64 to 67 ms with it in pixels.
  */
 import { EXTRA_BYTES } from './prepared-leaf-box-blocks.js';
-import { LEAF_BOX_PROPERTY as LEAF_BOX_STEP, SURFACE_SEAM_OUTSET_PROPERTY as SEAM_OUTSET, TEXELS_PER_CSS_PIXEL, type LeafBoxComponent, type PreparedLeafBox, type PreparedViewBinding } from '@cssearth/objects';
+import { LEAF_BOX_STEP, SURFACE_SEAM_OUTSET_STEP as SEAM_OUTSET, TEXELS_PER_CSS_PIXEL, type LeafBoxComponent, type PreparedLeafBox, type PreparedViewBinding } from '@cssearth/objects';
 
 
-export { LEAF_BOX_PROPERTY as LEAF_BOX_STEP, SURFACE_SEAM_OUTSET_PROPERTY as SEAM_OUTSET } from '@cssearth/objects';
+export { LEAF_BOX_STEP, SURFACE_SEAM_OUTSET_STEP as SEAM_OUTSET } from '@cssearth/objects';
 
 type StepBinding = Extract<PreparedViewBinding, { kind: 'silhouette-step-property' }>;
 

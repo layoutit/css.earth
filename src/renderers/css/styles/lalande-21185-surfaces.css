@@ -1,19 +1,5 @@
 /* Lalande 21185: the Sun's emissive presentation (body-surfaces.css, SUN block) scoped to this object, loaded after the shared
    body-surfaces.css base rules. No spin: the rotation axis and period are unmeasured. Both plates are transparent: no observation is cast. */
-.object-stage[data-object-id="lalande-21185"] > :is(.polycss-camera, .lalande-21185-corona-layer, .lalande-21185-limb-layer) {
-  --lalande-21185-scene-side-padding: 16px;
-  --lalande-21185-reference-width: 1920px;
-  --lalande-21185-reference-height: 1080px;
-  --lalande-21185-shell-scale: min(
-    1,
-    calc(
-      (100cqw - var(--lalande-21185-scene-side-padding) - var(--lalande-21185-scene-side-padding)) /
-        var(--lalande-21185-reference-width)
-    ),
-    calc(100cqh / var(--lalande-21185-reference-height))
-  );
-}
-
 /* The shared stage rule (body-surfaces.css) sizes the camera and the Sun's plates; this object's plates need the same box. */
 .object-stage[data-object-id="lalande-21185"] > :is(.lalande-21185-corona-layer, .lalande-21185-limb-layer) {
   position: absolute;
@@ -80,8 +66,8 @@
 }
 
 .object-stage[data-object-id="lalande-21185"] .polycss-scene s {
-  width: var(--polycss-atlas-width, var(--polycss-atlas-size, 64px));
-  height: var(--polycss-atlas-height, var(--polycss-atlas-size, 64px));
+  width: 64px;
+  height: 64px;
   transform-style: preserve-3d;
   font: inherit;
   font-weight: normal;

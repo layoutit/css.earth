@@ -1,19 +1,5 @@
 /* Revati: the Sun's emissive presentation (body-surfaces.css, SUN block) scoped to this object, loaded after the shared
    body-surfaces.css base rules. No spin: the rotation axis and period are unmeasured. Both plates are transparent: no observation is cast. */
-.object-stage[data-object-id="revati"] > :is(.polycss-camera, .revati-corona-layer, .revati-limb-layer) {
-  --revati-scene-side-padding: 16px;
-  --revati-reference-width: 1920px;
-  --revati-reference-height: 1080px;
-  --revati-shell-scale: min(
-    1,
-    calc(
-      (100cqw - var(--revati-scene-side-padding) - var(--revati-scene-side-padding)) /
-        var(--revati-reference-width)
-    ),
-    calc(100cqh / var(--revati-reference-height))
-  );
-}
-
 /* The shared stage rule (body-surfaces.css) sizes the camera and the Sun's plates; this object's plates need the same box. */
 .object-stage[data-object-id="revati"] > :is(.revati-corona-layer, .revati-limb-layer) {
   position: absolute;
@@ -80,8 +66,8 @@
 }
 
 .object-stage[data-object-id="revati"] .polycss-scene s {
-  width: var(--polycss-atlas-width, var(--polycss-atlas-size, 64px));
-  height: var(--polycss-atlas-height, var(--polycss-atlas-size, 64px));
+  width: 64px;
+  height: 64px;
   transform-style: preserve-3d;
   font: inherit;
   font-weight: normal;

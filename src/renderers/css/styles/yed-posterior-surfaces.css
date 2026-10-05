@@ -1,19 +1,5 @@
 /* Yed Posterior: the Sun's emissive presentation (body-surfaces.css, SUN block) scoped to this object, loaded after the shared
    body-surfaces.css base rules. No spin: the rotation axis and period are unmeasured. Both plates are transparent: no observation is cast. */
-.object-stage[data-object-id="yed-posterior"] > :is(.polycss-camera, .yed-posterior-corona-layer, .yed-posterior-limb-layer) {
-  --yed-posterior-scene-side-padding: 16px;
-  --yed-posterior-reference-width: 1920px;
-  --yed-posterior-reference-height: 1080px;
-  --yed-posterior-shell-scale: min(
-    1,
-    calc(
-      (100cqw - var(--yed-posterior-scene-side-padding) - var(--yed-posterior-scene-side-padding)) /
-        var(--yed-posterior-reference-width)
-    ),
-    calc(100cqh / var(--yed-posterior-reference-height))
-  );
-}
-
 /* The shared stage rule (body-surfaces.css) sizes the camera and the Sun's plates; this object's plates need the same box. */
 .object-stage[data-object-id="yed-posterior"] > :is(.yed-posterior-corona-layer, .yed-posterior-limb-layer) {
   position: absolute;
@@ -80,8 +66,8 @@
 }
 
 .object-stage[data-object-id="yed-posterior"] .polycss-scene s {
-  width: var(--polycss-atlas-width, var(--polycss-atlas-size, 64px));
-  height: var(--polycss-atlas-height, var(--polycss-atlas-size, 64px));
+  width: 64px;
+  height: 64px;
   transform-style: preserve-3d;
   font: inherit;
   font-weight: normal;

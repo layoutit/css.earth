@@ -220,8 +220,8 @@ test('a level switch lands a page a slice of its leaves a frame, not the page wh
     // Io's faces: every leaf's step asks for its full 128 px box, so the image it shows decides its size.
     const matrix = 'matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)', boxes = nodes.slice(2).map((_, index) => ({ node: index + 2, density: 1, box: [128, 128], backgroundSize: [4096, 756.184], matrix }));
     const leaves = nodes.slice(2), paged = { textureLevels, assets: sized.assets, materials: [], animations: [],
-      viewBindings: [{ kind: 'silhouette-step-property', target: 0, property: '--silhouette-step', hysteresis: .1, levels: [{ minimumDiameter: 0, value: '16' }, { minimumDiameter: 100, value: '362' }],
-        groups: { '--silhouette-step-0': boxes.map(box => box.node) }, initial: '362', boxes }],
+      viewBindings: [{ kind: 'silhouette-step-property', target: 0, property: 'silhouette-step', hysteresis: .1, levels: [{ minimumDiameter: 0, value: '16' }, { minimumDiameter: 100, value: '362' }],
+        groups: { 'silhouette-step-0': boxes.map(box => box.node) }, initial: '362', boxes }],
       variants: [{ when: { datasetId: 'a' }, required: ['a'], materials: [], writes: [{ kind: 'texture' as const, resource: 'a', target: 1, name: 'backgroundImage', quoted: true }] }],
       tree: { nodes: [], camera: 0, scene: 0, stageClasses: [], textureBindings: [{ target: 1, name: 'backgroundImage', leaves: leaves.map((_, index) => index + 2) }] } } as unknown as PreparedPresentationDefinition;
     const presentation = mountPreparedPresentation(stage as unknown as HTMLElement, { own() {}, registerAnimation() {}, seekAnimation() {} }, paged,
@@ -292,8 +292,8 @@ test('a dataset lands with its box: each leaf takes its image and its exact box 
     // Io's faces: every leaf's step asks for its full 128 px box, so the image alone decides its size.
     const boxed = { ...sized, materials: [], animations: [],
       variants: ['a', 'b'].map(datasetId => ({ when: { datasetId }, required: [datasetId], materials: [], writes: [{ kind: 'texture' as const, resource: datasetId, target: 1, name: 'backgroundImage', quoted: true }] })),
-      viewBindings: [{ kind: 'silhouette-step-property', target: 0, property: '--silhouette-step', hysteresis: .1, levels: [{ minimumDiameter: 0, value: '16' }, { minimumDiameter: 100, value: '362' }],
-        groups: { '--silhouette-step-0': leaves }, initial: '362', boxes: leaves.map(node => ({ node, density: 1, box: [128, 128], backgroundSize: [4096, 756.184], matrix })) }],
+      viewBindings: [{ kind: 'silhouette-step-property', target: 0, property: 'silhouette-step', hysteresis: .1, levels: [{ minimumDiameter: 0, value: '16' }, { minimumDiameter: 100, value: '362' }],
+        groups: { 'silhouette-step-0': leaves }, initial: '362', boxes: leaves.map(node => ({ node, density: 1, box: [128, 128], backgroundSize: [4096, 756.184], matrix })) }],
       tree: { nodes: [], camera: 0, scene: 0, stageClasses: [], textureBindings: [{ target: 1, name: 'backgroundImage', leaves }] } } as unknown as PreparedPresentationDefinition;
     const presentation = mountPreparedPresentation(stage as unknown as HTMLElement, { own() {}, registerAnimation() {}, seekAnimation() {} }, boxed,
       { claim: () => ({ nodes: nodes as unknown as HTMLElement[], roots: [nodes[0]] as unknown as HTMLElement[] }), destroy() {} });

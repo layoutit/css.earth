@@ -1,19 +1,5 @@
 /* Emiw: the Sun's emissive presentation (body-surfaces.css, SUN block) scoped to this object, loaded after the shared
    body-surfaces.css base rules. No spin: the rotation axis and period are unmeasured. Both plates are transparent: no observation is cast. */
-.object-stage[data-object-id="emiw"] > :is(.polycss-camera, .emiw-corona-layer, .emiw-limb-layer) {
-  --emiw-scene-side-padding: 16px;
-  --emiw-reference-width: 1920px;
-  --emiw-reference-height: 1080px;
-  --emiw-shell-scale: min(
-    1,
-    calc(
-      (100cqw - var(--emiw-scene-side-padding) - var(--emiw-scene-side-padding)) /
-        var(--emiw-reference-width)
-    ),
-    calc(100cqh / var(--emiw-reference-height))
-  );
-}
-
 /* The shared stage rule (body-surfaces.css) sizes the camera and the Sun's plates; this object's plates need the same box. */
 .object-stage[data-object-id="emiw"] > :is(.emiw-corona-layer, .emiw-limb-layer) {
   position: absolute;
@@ -80,8 +66,8 @@
 }
 
 .object-stage[data-object-id="emiw"] .polycss-scene s {
-  width: var(--polycss-atlas-width, var(--polycss-atlas-size, 64px));
-  height: var(--polycss-atlas-height, var(--polycss-atlas-size, 64px));
+  width: 64px;
+  height: 64px;
   transform-style: preserve-3d;
   font: inherit;
   font-weight: normal;

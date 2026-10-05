@@ -1,26 +1,10 @@
 /* Prepared scene presentation, scoped to its mounted object. */
-.jupiter-stage:where([data-object-id="jupiter"]) {
-  --object-render-reference-width: 1280px;
-  --object-render-reference-height: 720px;
-  --object-render-side-padding: 16px;
-
-}
 .jupiter-stage:where([data-object-id="jupiter"]) > .object-render-root {
-  --jupiter-shell-scale: min(
-    1,
-    calc(
-      (
-        100cqw
-        - var(--object-render-side-padding)
-        - var(--object-render-side-padding)
-      ) / var(--object-render-reference-width)
-    ),
-    calc(100cqh / var(--object-render-reference-height))
-  );
   position: absolute;
   inset: 0;
+  /* The reference frame fitted to the stage with 16px at each side, never enlarged, over 1 / .88 for breathing room. */
   scale: calc(
-    var(--jupiter-shell-scale) / var(--object-viewport-zoom-divisor)
+    min(1, calc((100cqw - 16px - 16px) / 1280px), calc(100cqh / 720px)) / 1.136364
   );
   transform-origin: 50% 50%;
   transform-style: preserve-3d;

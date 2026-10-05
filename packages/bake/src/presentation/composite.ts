@@ -69,7 +69,7 @@ export async function prepareComposite(input: PresentationInputs, adapters: Pres
       resource:null,frame,row:null,backgroundPosition,backgroundSize:material.backgroundSize})),default:null,fixed:null}],
     demand:{ capacity:1, defaultFrame:material.defaultFrame },
     rotation:{kind:"angle",source:"view-sun",reference:"prepared",baseDegrees:material.baseLightAzimuthDegrees,
-      zeroAtPole:false,property:`--${ns}-light-roll`},frameAttribute:null,modeAttribute:null,quoted:true}
+      zeroAtPole:false},frameAttribute:null,modeAttribute:null,quoted:true}
   :{id:"lighting",target:index(plane),frame:{source:"sun-z",minimum:assets.lighting.minimumLightViewZ,maximum:assets.lighting.maximumLightViewZ,
       count:assets.lighting.frameCount,baseFrame:0,remap:null},
     banks:[{id:"rows",frames:bank!.presentations.map(p=>address(p)),default:null,fixed:{resource:"shadowless",frame:bank!.shadowless.frameIndex,row:null,backgroundPosition:bank!.shadowless.backgroundPosition,backgroundSize:bank!.shadowless.backgroundSize},
@@ -81,7 +81,7 @@ export async function prepareComposite(input: PresentationInputs, adapters: Pres
     farBank:"billboard",
     demand:{capacity:bank!.transport.maximumRetainedRowCount,defaultFrame:bank!.transport.defaultFrame},
     rotation:{kind:"angle",source:"view-sun",reference:"prepared",baseDegrees:assets.lighting.baseLightAzimuthDegrees,
-      zeroAtPole:false,property:`--${ns}-light-roll`},frameAttribute:null,modeAttribute:null,quoted:true};
+      zeroAtPole:false},frameAttribute:null,modeAttribute:null,quoted:true};
   const variants: PreparedVariant[]=[];
   const atmospheres: (boolean|null)[]=atmospheric?[false,true]:[null];
   const ringNode = planeNodes.get('rings');

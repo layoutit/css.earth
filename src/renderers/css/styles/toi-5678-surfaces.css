@@ -1,19 +1,5 @@
 /* TOI-5678: the Sun's emissive presentation (body-surfaces.css, SUN block) scoped to this object, loaded after the shared
    body-surfaces.css base rules. No spin: the rotation axis and period are unmeasured. Both plates are transparent: no observation is cast. */
-.object-stage[data-object-id="toi-5678"] > :is(.polycss-camera, .toi-5678-corona-layer, .toi-5678-limb-layer) {
-  --toi-5678-scene-side-padding: 16px;
-  --toi-5678-reference-width: 1920px;
-  --toi-5678-reference-height: 1080px;
-  --toi-5678-shell-scale: min(
-    1,
-    calc(
-      (100cqw - var(--toi-5678-scene-side-padding) - var(--toi-5678-scene-side-padding)) /
-        var(--toi-5678-reference-width)
-    ),
-    calc(100cqh / var(--toi-5678-reference-height))
-  );
-}
-
 /* The shared stage rule (body-surfaces.css) sizes the camera and the Sun's plates; this object's plates need the same box. */
 .object-stage[data-object-id="toi-5678"] > :is(.toi-5678-corona-layer, .toi-5678-limb-layer) {
   position: absolute;
@@ -80,8 +66,8 @@
 }
 
 .object-stage[data-object-id="toi-5678"] .polycss-scene s {
-  width: var(--polycss-atlas-width, var(--polycss-atlas-size, 64px));
-  height: var(--polycss-atlas-height, var(--polycss-atlas-size, 64px));
+  width: 64px;
+  height: 64px;
   transform-style: preserve-3d;
   font: inherit;
   font-weight: normal;

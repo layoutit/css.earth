@@ -183,7 +183,8 @@ export async function prepareSolidPresentation({ config, scene: plan, material: 
     }
   }
   const materialRoot = b.element('div', `${id}-material-root object-render-root`);
-  const billboard = b.element('s', `${id}-billboard`), material = b.element('s', `${id}-material`);
+  // The far billboard is a disc of the dataset's mean color; the page writes its color and its opacity on it.
+  const billboard = b.element('s', `${id}-billboard`, 'opacity:0'), material = b.element('s', `${id}-material`);
   b.append(null, materialRoot); b.append(materialRoot, billboard); b.append(materialRoot, material);
   const { tree, index } = b.finish({ camera, scene });
   const track:MaterialSourceTrack|null = lighting && { id: 'lighting', target: index(material),
@@ -192,7 +193,7 @@ export async function prepareSolidPresentation({ config, scene: plan, material: 
       rows: [{ row: 0, resource: 'lighting', firstFrame: 0, lastFrame: lighting.frameCount - 1 }] }],
     demand: { capacity: 1, defaultFrame: Math.floor(lighting.frameCount / 2) },
     rotation: { kind: 'angle', source: 'view-sun', reference: 'prepared', baseDegrees: 0,
-      zeroAtPole: false, property: `--${id}-light-roll` }, frameAttribute: null, modeAttribute: null, quoted: true };
+      zeroAtPole: false }, frameAttribute: null, modeAttribute: null, quoted: true };
   const focus = new Map((['observations','scientific','observedColors','surfaceObservations'] as const).flatMap(kind =>
     (config.raster[kind]??[]).filter(dataset=>dataset.focus).map(dataset=>[dataset.id,dataset.focus] as const)));
   const variants = surfaces.flatMap(s => [false, true].map((shadows):PreparedVariant => ({
@@ -206,7 +207,7 @@ export async function prepareSolidPresentation({ config, scene: plan, material: 
         kind: 'style' as const, target: index(body), name: `--${id}-${model}-display`,
         value: surfaceModel(s.id) === model ? 'block' : 'none',
       })),
-      { kind: 'style', target: index(materialRoot), name: `--${id}-billboard-color`, value: requireString(s.billboardColor) },
+      { kind: 'style', target: index(billboard), name: 'backgroundColor', value: requireString(s.billboardColor) },
       { kind: 'attribute', target: -1, name: 'data-dataset', value: s.id },
     ],
     materials: !track ? [] : [{ track: 'lighting', bank: 'atlas', mode: shadows ? 'frames' : 'fixed', enabled: true,
@@ -230,7 +231,7 @@ export async function prepareSolidPresentation({ config, scene: plan, material: 
     viewBindings: [
       { kind: 'silhouette-fit', target: index(materialRoot), minimumRadius: 1.5, unitScale: 2 / plan.camera.logicalBodyDiameter },
       { kind: 'view-attribute', target: -1, property: 'data-lod', source: 'level-of-detail-stage', precision: null },
-      { kind: 'view-property', target: index(materialRoot), property: `--${id}-billboard-opacity`, source: 'billboard-opacity', precision: 6 },
+      { kind: 'view-property', target: index(billboard), property: 'opacity', source: 'billboard-opacity', precision: 6 },
     ],
   };
   const prepared = { ...presentation, materials: prepareMaterialTracks(presentation) };

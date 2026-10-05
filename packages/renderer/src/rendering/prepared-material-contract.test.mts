@@ -42,7 +42,7 @@ test("Venus preserves roll and shadow boundaries while selecting physical direct
         shadowsEnabled:actual.rotationEnabled},{...record.expected,frame});
       assert.equal(element.style.backgroundPosition,`${-(frame % 8) * 512}px ${-Math.floor(frame / 8) * 512}px`);
       assert.equal(element.style.backgroundSize,record.backgroundSize);
-      assert.equal(element.style.getPropertyValue("--venus-light-roll"),record.rotation);
+      assert.equal(element.style.transform,`rotate(${record.rotation})`);
     }
     const writes=publisher.observe();
     assert.ok(writes.addressWrites>0);assert.ok(writes.transformWrites>0);

@@ -21,6 +21,9 @@ Camera projection, star loading and navigation remain here.
   opacities and lengths, so a read-back compare rewrites them every frame. Statistics belong in `stats()` or
   `inspect()`, not in attributes written on each publication.
 - No runtime `clip-path`, CSS masks, filters, CSS gradients, blend modes, canvas or WebGL. Detailed bodies are PolyCSS.
+- Write no CSS custom property and read none. A value goes on the element that draws it, as a literal: `writeStyle`
+  refuses a custom property, a prepared runtime that names one is refused where it is decoded, and
+  `node .github/scripts/checks/check-no-variables.mts` checks these sources and the stylesheets.
 - No per-object folders, planet-specific implementations or branches on named object ids: every object fact arrives in
   its prepared data. Object page stylesheets (`src/renderers/css/styles/*-surfaces.css`) belong to the objects, not here.
 - Validate every external value where it enters (prepared runtime validators in `@cssearth/objects`); no `any` and no TypeScript suppression comments.

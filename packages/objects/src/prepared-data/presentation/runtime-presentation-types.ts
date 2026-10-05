@@ -10,7 +10,9 @@ export interface PreparedSelectionNavigation { maximumZoom: number; camera?: { c
 
 export interface PreparedVariant { when: Readonly<Record<string, string | number | boolean | null>>; required: readonly string[]; materials: readonly PreparedMaterialSelection[]; writes: readonly PreparedWrite[]; navigation?: PreparedSelectionNavigation;
   /** Containers this selection does not show. Server markup for it omits their descendants; the runtime builds any it adopts without. */
-  hiddenSubtrees?: readonly number[]; }
+  hiddenSubtrees?: readonly number[];
+  /** The mesh this selection draws on, by its name in `tree.meshes`. The page mounts that mesh's leaves and no other. */
+  mesh?: string; }
 
 export interface PreparedTree {
   /** Offline first-paint batches. Runtime restores these exact retained leaves. */
@@ -18,13 +20,17 @@ export interface PreparedTree {
   /** The texture slots: the elements that draw each selected image, found offline. A texture write names its slot, and the
    * page writes `background-image` on each element listed; no custom property carries an image. */
   textureBindings?: readonly { target: number; name: string; leaves: readonly number[] }[];
+  /** The alternative meshes of a body with several shape models: each one's leaves, as runs of [first node, count] under
+   * one parent. A selection names the one it mounts (`variant.mesh`); no leaf carries a display of its own. */
+  meshes?: readonly { name: string; leaves: readonly (readonly [number, number])[] }[];
   nodes: readonly { tag: string; parent: number; className: string | null; style: string; properties: readonly number[]; attributes: Readonly<Record<string, string>> }[];
   properties: readonly { name: string; value: string; custom: boolean }[]; camera: number; scene: number; stageClasses: readonly string[];
 }
 
 export type PreparedViewBinding = { target: number } & (
   { kind: "view-attribute"; property: string; source: "scene-pitch" | "control-yaw" | "zoom" | "level-of-detail-stage" | "scene-matrix"; precision: number | null } |
-  { kind: "view-property"; property: string; source: "billboard-opacity" | "marker-opacity"; precision: number | null } |
+  /** An opacity the camera's distance sets, written on the element that draws it (the far billboard). */
+  { kind: "view-property"; property: "opacity"; source: "billboard-opacity" | "marker-opacity"; precision: number | null } |
   { kind: "silhouette-fit"; minimumRadius: number; unitScale: number } |
   ({ kind: "interior-disc" } & PreparedInteriorDisc) |
   ({ kind: "silhouette-step-property"; property: string; placements?: PreparedTexturePlacements;

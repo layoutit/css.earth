@@ -15,8 +15,8 @@ const boxes: PreparedLeafBox[] = [
 ];
 const levels = [{ minimumDiameter: 0, value: '16' }, { minimumDiameter: 100, value: '362' }];
 const bindings = [
-  { kind: 'silhouette-step-property', target: 0, property: '--silhouette-step', hysteresis: .1, levels, groups: { '--silhouette-step-0': [1, 2] }, initial: '362', boxes },
-  { kind: 'silhouette-step-property', target: 0, property: '--surface-seam-outset', hysteresis: .1, levels, initial: '0.00116133' },
+  { kind: 'silhouette-step-property', target: 0, property: 'silhouette-step', hysteresis: .1, levels, groups: { 'silhouette-step-0': [1, 2] }, initial: '362', boxes },
+  { kind: 'silhouette-step-property', target: 0, property: 'surface-seam-outset', hysteresis: .1, levels, initial: '0.00116133' },
 ] as unknown as PreparedViewBinding[];
 
 test('a leaf box record gives the final values at a step and seam outset', () => {
@@ -43,33 +43,33 @@ test('a mounted leaf receives its values from the record and writes only what ch
   assert.equal(nodes[1]!.style.getPropertyValue('width'), '64px');
   assert.doesNotMatch(nodes[1]!.getAttribute('style') ?? '', /var\(|calc\(|--/);
   writes.length = 0;
-  writer.set(1, '--silhouette-step', '100');
+  writer.set(1, 'silhouette-step', '100');
   // A step resizes the box and its background with it, in pixels, never as a share of the box or a calc().
   assert.deepEqual(writes, [[1, 'backgroundPosition'], [1, 'backgroundSize'], [1, 'transform'], [1, 'width'], [1, 'height']]);
   assert.doesNotMatch(nodes[1]!.getAttribute('style') ?? '', /var\(|calc\(|--|\d%[; ]/);
-  assert.equal(writer.read(1, '--silhouette-step'), '100');
-  assert.equal(writer.read(2, '--silhouette-step'), '362');
+  assert.equal(writer.read(1, 'silhouette-step'), '100');
+  assert.equal(writer.read(2, 'silhouette-step'), '362');
   writes.length = 0;
-  writer.set(1, '--silhouette-step', '100');
+  writer.set(1, 'silhouette-step', '100');
   assert.deepEqual(writes, []);
   // The seam outset rewrites only transforms, and only on leaves it reaches.
-  writer.set(0, '--surface-seam-outset', '0.002');
+  writer.set(0, 'surface-seam-outset', '0.002');
   assert.deepEqual(writes, [[1, 'transform']]);
-  assert.equal(writer.owns(0, '--surface-seam-outset'), true);
-  assert.equal(writer.owns(2, '--silhouette-step'), true);
+  assert.equal(writer.owns(0, 'surface-seam-outset'), true);
+  assert.equal(writer.owns(2, 'silhouette-step'), true);
 });
 
 test('a seam outset change lands a slice of leaves at a time', () => {
   const { document } = parseHTML('<html><body></body></html>');
   const seamed = Array.from({ length: 5 }, (_, index) => ({ ...boxes[0]!, node: index + 1 }));
-  const records = [{ ...bindings[0]!, groups: { '--silhouette-step-0': [1, 2, 3, 4, 5] }, boxes: seamed }, bindings[1]!] as unknown as PreparedViewBinding[];
+  const records = [{ ...bindings[0]!, groups: { 'silhouette-step-0': [1, 2, 3, 4, 5] }, boxes: seamed }, bindings[1]!] as unknown as PreparedViewBinding[];
   const nodes = Array.from({ length: 6 }, () => document.createElement('s'));
   const written: number[] = [];
   const writer = createLeafBoxWriter(records, nodes, (element, name, value) => { written.push(nodes.indexOf(element)); element.style.setProperty(name.replace(/[A-Z]/g, l => `-${l.toLowerCase()}`), value); });
   written.length = 0;
   assert.equal(writer.drainOutset('0.002', 2), 2);
   assert.deepEqual(written, [1, 2]);
-  assert.equal(writer.read(0, '--surface-seam-outset'), '0.002');
+  assert.equal(writer.read(0, 'surface-seam-outset'), '0.002');
   // A new outset before the drain ends restarts it; each leaf still takes only what changed.
   assert.equal(writer.drainOutset('0.003', 2), 2);
   assert.equal(writer.drainOutset('0.003', 2), 2);
@@ -149,8 +149,8 @@ test('a leaf showing a sized image takes its exact box and draws the image at it
   assert.equal(nodes[2]!.style.getPropertyValue('width'), '64px');
   assert.equal(writer.image(1, [2080, 1536]), 0);
   // The leaf keeps that box at any step: a step writes nothing on it.
-  assert.equal(writer.set(1, '--silhouette-step', '100'), 0);
-  assert.equal(writer.set(1, '--silhouette-step', '16'), 0);
+  assert.equal(writer.set(1, 'silhouette-step', '100'), 0);
+  assert.equal(writer.set(1, 'silhouette-step', '16'), 0);
   // An image without a stated size leaves the box to the step.
   assert.equal(writer.image(1, undefined), 5);
   assert.equal(nodes[1]!.style.getPropertyValue('width'), '3.331072px');

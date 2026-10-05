@@ -1,19 +1,5 @@
 /* Rigel: the Sun's emissive presentation (body-surfaces.css, SUN block) scoped to this object, loaded after the shared
    body-surfaces.css base rules. No spin: the rotation axis and period are unmeasured. Both plates are transparent: no observation is cast. */
-.object-stage[data-object-id="rigel"] > :is(.polycss-camera, .rigel-corona-layer, .rigel-limb-layer) {
-  --rigel-scene-side-padding: 16px;
-  --rigel-reference-width: 1920px;
-  --rigel-reference-height: 1080px;
-  --rigel-shell-scale: min(
-    1,
-    calc(
-      (100cqw - var(--rigel-scene-side-padding) - var(--rigel-scene-side-padding)) /
-        var(--rigel-reference-width)
-    ),
-    calc(100cqh / var(--rigel-reference-height))
-  );
-}
-
 /* The shared stage rule (body-surfaces.css) sizes the camera and the Sun's plates; this object's plates need the same box. */
 .object-stage[data-object-id="rigel"] > :is(.rigel-corona-layer, .rigel-limb-layer) {
   position: absolute;
@@ -80,8 +66,8 @@
 }
 
 .object-stage[data-object-id="rigel"] .polycss-scene s {
-  width: var(--polycss-atlas-width, var(--polycss-atlas-size, 64px));
-  height: var(--polycss-atlas-height, var(--polycss-atlas-size, 64px));
+  width: 64px;
+  height: 64px;
   transform-style: preserve-3d;
   font: inherit;
   font-weight: normal;
