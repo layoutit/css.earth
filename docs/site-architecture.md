@@ -94,6 +94,7 @@ Parameter injection with a changed router start changes the router's evaluation 
 
 ## Other S3 risks
 
+- **Chunk layout is a constraint.** The performance guard fails any rise in raw, gzip or Brotli bytes, request counts, chain lengths or preloads. A real graph edit that moved the registry into the router chunk lowered raw bytes by 57 and raised gzip by 55 and Brotli by 145, so it fails. S3's loader change must keep the existing chunk assignment (pin it), or show every compressed size at or below the baseline.
 - Moon catalogue split changes build/SSR chunk membership, checkObjectTree timing and client bytes from the source parsers. The single reader owns parsing/cache/catalogueMoons; preparation retains search ordering and eligibility. Compare outputs, errors, timing and chunks before S3.
 - Selection is passed into navigation requests. Router and activation must forward the registry function on all three readNavigationSelection calls. Test the **default production URL path** and mutation-remove its wiring; passing a non-default callback that routes around the defect is insufficient.
 - Type-owner extractions must preserve aliases and re-exports. The held-address extraction must preserve deferred reads and disposal in the same WeakMap.
