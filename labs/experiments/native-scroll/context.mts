@@ -17,7 +17,7 @@ import { prepareNativeOrbitCulling,nativeOrbitCullingCss } from './orbit-culling
 import { BODY_INDICATOR_DIAMETER } from '@cssearth/renderer/universe/world-context/context-scale.ts';
 
 const root = pathToFileURL(resolve('.') + '/');
-const plan = parsePreparedWorldContext(JSON.parse(await readFile(new URL('src/objects/sun/prepared/world-context.json', root), 'utf8')));
+const plan = parsePreparedWorldContext(JSON.parse(await readFile(new URL('src/objects/observable-universe/prepared/world-context.json', root), 'utf8')));
 const descriptor: unknown = JSON.parse(await readFile(new URL('src/objects/milky-way-volume/object.json', root), 'utf8'));
 const volume = await loadPreparedCssVolume(descriptor, { read: async path => {
   const bytes = await readFile(new URL(`src/objects/milky-way-volume/${path}`, root));

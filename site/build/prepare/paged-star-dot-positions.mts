@@ -18,12 +18,12 @@ import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { gzipSync } from 'node:zlib';
 import { hasErrorCode, isRecord } from '@cssearth/core';
-import { systemHostId, parsePreparedWorldContextPlan } from '@cssearth/objects';
+import { OBJECT_TREE_ROOT, systemHostId, parsePreparedWorldContextPlan } from '@cssearth/objects';
 import { readObjectDescriptors } from '@cssearth/objects/node';
 
 const KPC_M = 3.0856775814913673e19;
 const objects = resolve(import.meta.dirname, '../../../src/objects');
-const worldPath = resolve(objects, 'sun/prepared/world-context.json');
+const worldPath = resolve(objects, OBJECT_TREE_ROOT, 'prepared/world-context.json');
 const world = parsePreparedWorldContextPlan(JSON.parse(await readFile(worldPath, 'utf8')));
 const bodies = new Map(world.bodies.map(body => [body.id, body]));
 /** The object a body is inside past any system: its own, or the one of the star it is bound to (each row's `inside`,

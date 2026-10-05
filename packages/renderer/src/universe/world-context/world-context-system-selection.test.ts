@@ -5,7 +5,7 @@ import { isDeepStrictEqual } from 'node:util';
 import { parsePreparedWorldContext } from '@cssearth/objects';
 import { createWorldContextPlanner, type WorldContextView } from './world-context-planner.js';
 
-const plan = parsePreparedWorldContext(JSON.parse(await readFile(new URL('../../../../../src/objects/sun/prepared/world-context.json', import.meta.url), 'utf8')));
+const plan = parsePreparedWorldContext(JSON.parse(await readFile(new URL('../../../../../src/objects/observable-universe/prepared/world-context.json', import.meta.url), 'utf8')));
 
 test('a selected satellite overview retains its selected host locator', () => {
   const host = plan.bodies.find(body => body.id === 'jupiter')!;
