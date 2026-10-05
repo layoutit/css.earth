@@ -30,43 +30,6 @@
     },
     {
       "op": "add-file",
-      "path": "site/directory/object-entry-types.mts",
-      "note": "Extract registry aliases from objects; directory must not import the registry that calls it.",
-      "change": "Extract registry types",
-      "imports": [
-        {
-          "to": "site/browser/browser-types.mts",
-          "kind": "type"
-        },
-        {
-          "to": "packages/objects/src/index.ts",
-          "kind": "type"
-        }
-      ],
-      "id": "add-file-object-entry-types"
-    },
-    {
-      "op": "retarget",
-      "from": "site/directory/object-directory.mts",
-      "to": "site/directory/objects.mts",
-      "note": "Use the extracted registry aliases without evaluating the full registry.",
-      "kind": "type",
-      "newTo": "site/directory/object-entry-types.mts",
-      "change": "Extract registry types",
-      "id": "retarget-object-directory-object-entry-types",
-      "line": 3
-    },
-    {
-      "op": "add-import",
-      "to": "site/directory/object-entry-types.mts",
-      "kind": "type",
-      "note": "Registry imports and re-exports its extracted aliases so clients can migrate without duplication.",
-      "from": "site/directory/objects.mts",
-      "change": "Extract registry types",
-      "id": "add-import-objects-object-entry-types"
-    },
-    {
-      "op": "add-file",
       "path": "site/navigation/navigation-types.mts",
       "imports": [
         {
@@ -197,43 +160,6 @@
       "from": "site/navigation/navigation-request.mts",
       "change": "Pass selection into navigation requests",
       "id": "add-import-navigation-request-scene-subject"
-    },
-    {
-      "op": "add-file",
-      "path": "site/scene/scene-frame-presenter.mts",
-      "note": "Extract the structural presenter interface; a session must not import the world coordinator that consumes it.",
-      "change": "Extract the frame presenter contract",
-      "imports": [
-        {
-          "to": "site/world/application-world-context.mts",
-          "kind": "type"
-        },
-        {
-          "to": "site/world/world-viewport.mts",
-          "kind": "type"
-        }
-      ],
-      "id": "add-file-scene-frame-presenter"
-    },
-    {
-      "op": "retarget",
-      "from": "site/scene/scene-session.mts",
-      "to": "site/scene/scene-world.mts",
-      "note": "Session reads SceneFramePresenter from the lower contract, breaking the two-way type dependency.",
-      "kind": "type",
-      "newTo": "site/scene/scene-frame-presenter.mts",
-      "change": "Extract the frame presenter contract",
-      "id": "retarget-scene-session-scene-frame-presenter",
-      "line": 2
-    },
-    {
-      "op": "add-import",
-      "to": "site/scene/scene-frame-presenter.mts",
-      "kind": "type",
-      "note": "World coordinator imports and re-exports the structural presenter contract.",
-      "from": "site/scene/scene-world.mts",
-      "change": "Extract the frame presenter contract",
-      "id": "add-import-scene-world-scene-frame-presenter"
     },
     {
       "id": "add-file-scene-imports",
@@ -371,14 +297,6 @@
       ]
     },
     {
-      "id": "extract-registry-types",
-      "edits": [
-        "add-file-object-entry-types",
-        "retarget-object-directory-object-entry-types",
-        "add-import-objects-object-entry-types"
-      ]
-    },
-    {
       "id": "extract-navigation-contracts",
       "edits": [
         "add-file-navigation-types",
@@ -402,14 +320,6 @@
       "edits": [
         "remove-import-navigation-request-scene-selection",
         "add-import-navigation-request-scene-subject"
-      ]
-    },
-    {
-      "id": "extract-the-frame-presenter-contract",
-      "edits": [
-        "add-file-scene-frame-presenter",
-        "retarget-scene-session-scene-frame-presenter",
-        "add-import-scene-world-scene-frame-presenter"
       ]
     },
     {

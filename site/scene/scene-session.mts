@@ -1,5 +1,5 @@
 import { createSceneLifetime } from '@cssearth/engine';
-import type { SceneFramePresenter } from './scene-world.mts';
+import type { SceneFramePresenter } from './scene-frame-presenter.mts';
 import type { ObjectSceneLifecycle } from '@cssearth/renderer/runtime/object-scene.ts';
 import type { MountOptions, SceneFactory } from '../browser/browser-types.mts';
 import { errorMessage } from '../browser/browser-types.mts';

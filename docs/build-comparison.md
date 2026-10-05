@@ -78,8 +78,14 @@ seed their own permission. Pass `--moves moves.json` for source renames.
   seed opens all 9,890 pages; declared outputs bound them. Output declarations
   that select files outside the closure fail. HTML changes are grouped by
   identical normalized diff hunk for review.
-  `layout: "changes"` separately permits chunk movement only with an unchanged
-  module set and identical code and ordered imports in every non-seed module.
+  A module that exists in one build only and whose every importer, read from both
+  graphs, is in the closure is an orphaned dependency of the change (it left the
+  bundle because its only importers did): it joins the closure. An importer outside
+  the closure keeps it an independent difference.
+  `layout: "changes"` separately permits chunk movement only when every module
+  difference is a seed or an orphan (modules may therefore be added or removed with
+  their chunks' identities), every import-list difference belongs to a seed, a direct
+  importer or an orphan, and no other module changes its code.
   Without it, incidental chunk restructuring fails. Inventory changes additionally
   require the affected object in `objects`; downstream outputs still need globs.
   These permissions apply only to built-output comparison. Server status, headers,
@@ -148,9 +154,14 @@ PR adds or changes it against the merge-base; a stale declaration means report m
   "mode": "semantic",
   "moves": {},
   "outputs": [{"glob": "earth/index.html", "reason": "Expected Earth content update"}],
-  "layout": "none"
+  "layout": "none",
+  "change": "Name the refactor this declaration belongs to (optional, 1 to 200 characters)"
 }
 ```
+
+`change` names the refactor. It takes part in the freshness comparison, so two pull
+requests that otherwise declare the same thing (for example JavaScript-only changes with
+no outputs) never carry identical declarations.
 
 The always-running **Refactor declaration gate** requires a fresh declaration
 for application renames or the `refactor` label.

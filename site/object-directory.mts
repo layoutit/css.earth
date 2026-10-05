@@ -1,6 +1,6 @@
 import { importPackagedObjectRuntime } from './import-queue.mts';
 import { catalogueObject, objectSystem, systemHostId } from '@cssearth/objects';
-import type { NavigableObject, ObjectEntry } from './objects.mts';
+import type { NavigableObject, ObjectEntry } from './object-entry-types.mts';
 import { readObjectEntry } from './object-entries.mts';
 
 /** The objects a page knows, read one at a time from their prepared entries (`pages/objects/[id]/entry.json.ts`) the first

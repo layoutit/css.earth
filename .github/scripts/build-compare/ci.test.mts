@@ -141,3 +141,13 @@ test('L2 runs after comparison, shares the selected tools and publishes bounded 
   assert.ok(!upload.with.path.includes('server-answers/base/'));
   assert.ok(!upload.with.path.includes('server-answers/head/'));
 });
+
+test('a declaration names its own change, so two refactors never share one and the freshness check stays meaningful', () => {
+  const first = { mode: 'semantic', moves: {}, change: 'S3-2 extract the registry type aliases' };
+  assert.equal(refactorDeclaration(first).change, first.change);
+  assert.equal(refactorDeclaration({ mode: 'semantic', moves: {} }).change, undefined);
+  for (const change of ['', '   ', 7, 'x'.repeat(201)]) assert.throws(() => refactorDeclaration({ mode: 'semantic', moves: {}, change }), /change/u);
+  assert.throws(() => requireFreshDeclaration('M\t.github/site-refactor.json', first, { ...first }), /identical/u);
+  assert.doesNotThrow(() => requireFreshDeclaration('M\t.github/site-refactor.json', { ...first, change: 'S3-3 extract the navigation contracts' }, first));
+  assert.doesNotThrow(() => requireFreshDeclaration('M\t.github/site-refactor.json', first, { mode: 'semantic', moves: {} }));
+});

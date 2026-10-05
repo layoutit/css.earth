@@ -6,8 +6,8 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { gzipSync, brotliCompressSync, constants } from 'node:zlib';
 import { parseEnvironment } from '../build-compare/records.mts';
-import { measure, sortedJson, imports, startup, startupDeclarations, parseMeasures, localFile } from './build-measures.mts';
-import { compare, subsequence, summary, failureCounts } from './compare-measures.mts';
+import { measure, sortedJson, imports, startup, startupDeclarations, parseMeasures, localFile, hashReferenceNormalizer, HASH_PLACEHOLDER } from './build-measures.mts';
+import { compare, subsequence, summary, failureCounts, isByteMeasure, BYTE_TOLERANCE_PERCENT } from './compare-measures.mts';
 import { representativeRoutes } from './measure.mts';
 import type { Measures } from './build-measures.mts';
 
@@ -258,4 +258,75 @@ test('shipped default coverage includes both Earth pages and fifteen unique rout
   const routes = await representativeRoutes();
   assert.equal(routes.length, 15); assert.equal(new Set(routes).size, 15);
   assert.ok(routes.includes('/earth/')); assert.ok(routes.includes('/earth-system/')); assert.ok(routes.includes('/'));
+});
+
+/** An emitted site whose chunks reference each other by content-hashed names, as the build writes them. */
+const SIBLINGS = Array.from({ length: 12 }, (_, index) => `part${index}`);
+async function hashedSite(hash: Record<string, string>, extraByte = '') {
+  const root = await mkdtemp(join(tmpdir(), 'hashed-build-'));
+  const dist = join(root, 'dist'), metadata = join(root, 'metadata');
+  await mkdir(join(dist, '_astro'), { recursive: true }); await mkdir(metadata);
+  const ref = (name: string) => `${name}.${hash[name]}.js`;
+  const code = new Map([['entry', `${SIBLINGS.map(name => `import("./${ref(name)}");`).join(' ')}${extraByte}`], ...SIBLINGS.map(name => [name, `export const ${name}=1;`] as const)]);
+  const chunks = [...code].map(([name, source]) => ({ fileName: `_astro/${ref(name)}`, name, isEntry: name === 'entry', isDynamicEntry: name !== 'entry', facadeModuleId: `${name}.mts`, imports: [...new Set(imports(source).static)].map(path => '_astro/' + path.slice(2)), dynamicImports: imports(source).dynamic.map(path => '_astro/' + path.slice(2)), modules: [], importedCss: [], importedAssets: [] }));
+  for (const [name, source] of code) await writeFile(join(dist, `_astro/${ref(name)}`), source);
+  await writeFile(join(metadata, 'client.json'), JSON.stringify({ environment: 'client-1', chunks, assets: [] }));
+  await writeFile(join(dist, 'index.html'), `<html><head><script type="module" src="/_astro/${ref('entry')}"></script></head></html>`);
+  return { root, dist, metadata };
+}
+const ALPHABET = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_-';
+const hashSet = (seed: number): Record<string, string> => Object.fromEntries(['entry', ...SIBLINGS].map((name, index) => [name, Array.from({ length: 8 }, (_, position) => ALPHABET[(seed * 31 + index * 17 + position * 7 + seed * position * position + index * seed) % 64]).join('')]));
+
+test('compressed sizes are net of content-hash text; raw sizes and any other byte stay counted', async () => {
+  // Two hash sets that compress differently for the very same content: the churn a rebuilt dependency causes in its importers.
+  const entryText = (seed: number) => Buffer.from(SIBLINGS.map(name => `import("./${name}.${hashSet(seed)[name]}.js");`).join(' '));
+  let pair: [number, number] | undefined;
+  for (let first = 1; first < 60 && !pair; first++) for (let second = first + 1; second < 60 && !pair; second++) {
+    if (gzipSync(entryText(first)).length !== gzipSync(entryText(second)).length) pair = [first, second];
+  }
+  assert.ok(pair, 'the fixture needs two hash sets whose raw gzip sizes differ');
+  const sites = await Promise.all([hashedSite(hashSet(pair[0])), hashedSite(hashSet(pair[1])), hashedSite(hashSet(pair[0]), ' export const z=3;')]);
+  try {
+    const [a, b, bigger] = await Promise.all(sites.map(site => measure(site.dist, site.metadata, ['/'])));
+    // Hash churn alone changes no measure: every compressed and raw leaf is equal, and the guard passes.
+    assert.deepEqual(a!.global, b!.global); assert.deepEqual(a!.routes['/']!.counts, b!.routes['/']!.counts);
+    assert.deepEqual(compare(a!, b!).findings.filter(finding => finding.verdict === 'FAILURE'), []);
+    // A real code byte in an importer still fails, in raw and compressed leaves alike.
+    const failures = compare(a!, bigger!).findings.filter(finding => finding.verdict === 'FAILURE');
+    assert.ok(failures.some(finding => /\.raw$/u.test(finding.measure)), 'raw');
+    assert.ok(failures.some(finding => /\.gzip$/u.test(finding.measure)), 'gzip');
+    // Raw sizes come from the real files, never the normalised text.
+    const real = await Promise.all(['entry', ...SIBLINGS].map(async name => (await readFile(join(sites[0]!.dist, `_astro/${name}.${hashSet(pair![0])[name]}.js`))).length));
+    assert.equal(a!.global['astro.raw'], real.reduce((sum, size) => sum + size, 0));
+  } finally { await Promise.all(sites.map(site => rm(site.root, { recursive: true, force: true }))); }
+});
+
+test('only exact references to emitted hashed files are normalised', () => {
+  const normalise = hashReferenceNormalizer(['_astro/entry.AbCdEfGh.js', '_astro/page.12345678.css', 'index.html']);
+  const text = (value: string) => normalise(Buffer.from(value)).toString();
+  assert.equal(text('import("./entry.AbCdEfGh.js"); href="/_astro/page.12345678.css"'), `import("./entry.${HASH_PLACEHOLDER}.js"); href="/_astro/page.${HASH_PLACEHOLDER}.css"`);
+  for (const other of ['import("./other.ZZZZZZZZ.js")', 'x-entry.AbCdEfGh.js', 'entry.AbCdEfGh.jsx', 'entry.AbCdEfGh', 'index.html', 'entry.AbCdEfGh2.js']) assert.equal(text(other), other);
+});
+
+test('bytes may grow by at most half a percent per file and per total; structural counts never grow', () => {
+  assert.equal(BYTE_TOLERANCE_PERCENT, 0.5);
+  const withBase = (route: Record<string, number>, global: Record<string, number> = {}): Measures => ({ schema: 'build-measures@1', global, routes: { '/': { counts: route, sequences: {}, declarations: [] } } });
+  const base = withBase({ 'static.raw': 1000, 'static.gzip': 2000, 'static.brotli': 4000, 'static.count': 400, 'startup.requests': 2 }, { 'chunk.router.raw': 50000, 'astro.count': 800 });
+  const grown = (key: string, value: number): Measures => { const head = withBase({ ...base.routes['/']!.counts }, { ...base.global }); if (key in head.global) head.global[key] = value; else head.routes['/']!.counts[key] = value; return head; };
+  const verdict = (key: string, value: number) => compare(base, grown(key, value)).findings.find(finding => finding.measure === key)?.verdict;
+  // Exactly +0.5% and +0.4% pass and are listed as tolerated; +0.6% fails: for a file, a route total, gzip, Brotli and a global chunk.
+  for (const [key, size] of [['static.raw', 1000], ['static.gzip', 2000], ['static.brotli', 4000], ['chunk.router.raw', 50000]] as const) {
+    assert.equal(verdict(key, size * 1005 / 1000), 'TOLERATED', `${key} at +0.5%`);
+    assert.equal(compare(base, grown(key, size * 1005 / 1000)).pass, true);
+    assert.equal(verdict(key, size * 1004 / 1000), 'TOLERATED', `${key} at +0.4%`);
+    assert.equal(verdict(key, size * 1006 / 1000), 'FAILURE', `${key} at +0.6%`);
+    assert.equal(compare(base, grown(key, size * 1006 / 1000)).pass, false);
+  }
+  // A new file has no base to be a percentage of; counts, requests and every other structural measure never grow, however large the base.
+  assert.equal(compare(base, grown('static.new.raw', 1)).pass, false);
+  for (const key of ['static.count', 'startup.requests', 'astro.count']) assert.equal(compare(base, grown(key, (base.global[key] ?? base.routes['/']!.counts[key]!) + 1)).pass, false, key);
+  // Decreases stay accepted improvements; a tolerated increase is listed, not hidden.
+  assert.equal(compare(base, grown('static.raw', 900)).pass, true);
+  assert.match(summary(compare(base, grown('static.raw', 1004))), /TOLERATED/u);
+  assert.equal(isByteMeasure('chunk.scene-router.mts.gzip'), true); assert.equal(isByteMeasure('startup.requests'), false); assert.equal(isByteMeasure('dynamic.count'), false);
 });
