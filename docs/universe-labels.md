@@ -85,7 +85,7 @@ A path's opacity follows from that:
 | Any path in an overview, or one the reader points at | Softens to 30% up close; never dimmed by family. |
 
 The outside dimming eases away between half and twice the host's distance from
-its star as the camera pulls back; a moons view holds it. Viewport clipping,
+its star as the camera pulls back, in a moons view too. Viewport clipping,
 body occlusion, the system's distance fade, the on-screen size fade and explicit
 hidden-orbit settings still apply.
 

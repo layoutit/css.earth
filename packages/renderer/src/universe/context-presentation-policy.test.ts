@@ -59,14 +59,13 @@ test('the close-up fades keep a floor for context and none for the focused body\
   assert.deepEqual(closeOrbitFades(fade, .5), { context: .3, own: 0 });
 });
 
-test('the dimming outside a family relaxes as the camera reaches the parent system, and a moons view holds it', () => {
+test('the dimming outside a family relaxes as the camera reaches the parent system', () => {
   const host = { positionM: [10, 0, 0], orbit: { centerPositionM: [0, 0, 0] } };
-  const at = (distance: number, held = false) => outsideFamilyOrbitOpacity(host, () => distance, held);
+  const at = (distance: number) => outsideFamilyOrbitOpacity(host, () => distance);
   assert.deepEqual([at(1), at(5), at(20), at(100)], [.25, .25, 1, 1]);
   assert.ok(at(10) > .25 && at(10) < 1);
-  assert.equal(at(100, true), .25);
-  assert.equal(outsideFamilyOrbitOpacity(undefined, () => 1, false), 1);
-  assert.equal(outsideFamilyOrbitOpacity({ positionM: [0, 0, 0] }, () => 1, false), 1);
+  assert.equal(outsideFamilyOrbitOpacity(undefined, () => 1), 1);
+  assert.equal(outsideFamilyOrbitOpacity({ positionM: [0, 0, 0] }, () => 1), 1);
 });
 
 test('a moon is named inside the kept families, and beside a planet or a moon its star\'s minor bodies are not', () => {
