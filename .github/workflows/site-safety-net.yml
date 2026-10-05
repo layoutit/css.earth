@@ -1,13 +1,12 @@
 name: Site safety net
 
-# Change-selected qualification, separate from the 2-minute target / 3-minute
-# maximum merge-required path. Refactors require a declaration in their own diff.
+# Pull requests run only the refactor declaration gate (seconds, no build).
+# The base-vs-head comparison is local work (docs/build-comparison.md); this
+# workflow can still run it by hand through workflow_dispatch.
 # Maintenance, modes and timing evidence: docs/build-comparison.md and docs/ci-cd.md.
 on:
   pull_request:
     types: [opened, synchronize, reopened, labeled, unlabeled]
-  push:
-    branches: [main]
   workflow_dispatch:
     inputs:
       no-base-cache:
@@ -59,7 +58,7 @@ jobs:
         run: node "$RUNNER_TEMP/comparison-gate/.github/scripts/build-compare/gate.mts" "$COMPARISON_BASE"
 
   changes:
-    if: github.event_name != 'push'
+    if: github.event_name == 'workflow_dispatch'
     name: Select application build comparison
     runs-on: ubuntu-latest
     timeout-minutes: 5
@@ -97,7 +96,7 @@ jobs:
 
   build-compare:
     needs: changes
-    if: needs.changes.outputs.run_production == 'true'
+    if: github.event_name == 'workflow_dispatch' && needs.changes.outputs.run_production == 'true'
     name: Compare the complete built site
     runs-on: ubuntu-latest
     timeout-minutes: 90
@@ -250,7 +249,7 @@ jobs:
           retention-days: 7
 
   base-cache:
-    if: github.event_name == 'push'
+    if: github.event_name == 'workflow_dispatch'
     name: Produce commit-addressed production base
     runs-on: ubuntu-latest
     timeout-minutes: 45
