@@ -1,5 +1,5 @@
 import { OBJECTS, SCENE_OBJECTS, type ObjectEntry } from './objects.mts';
-import { systemObjectId } from './navigation/system-address.mts';
+import { systemObjectId } from './model/system-address.mts';
 import { childrenOf } from './object-children.mts';
 import { systemSourceDocumentation } from './source-documentation.mts';
 import { APPLICATION_WORLD_CONTEXT } from './world-context-plan.mts';

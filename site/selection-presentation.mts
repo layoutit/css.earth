@@ -2,7 +2,7 @@ import type { SceneView, SelectionTarget } from './scene/scene-selection.mts';
 import { selectionKey, starSystem, subjectHost, subjectView } from './scene/scene-selection.mts';
 import { requiredSection, setLinkSelected } from './browser/browser-types.mts';
 import type { CatalogueSelection } from './search/catalogue-window.mts';
-import { renderSourceLink, type SourceDocumentReference } from './source-link.mts';
+import { renderSourceLink, type SourceDocumentReference } from './browser/source-link.mts';
 import { sectionElements, sectionPlaceholder, showSection } from '@cssearth/renderer';
 
 /** The view a card can show of its object: its system when the card carries the system's parts (a host's card does),

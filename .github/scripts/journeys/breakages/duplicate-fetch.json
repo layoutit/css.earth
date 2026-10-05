@@ -15,7 +15,7 @@
   ],
   "substitutions": [
     {
-      "file": "site/startup-requests.mts",
+      "file": "site/directory/startup-requests.mts",
       "before": "    const response = fetch(url);",
       "after": "    const response = fetch(url);\n    void fetch(url).catch(() => {});",
       "occurrences": 1

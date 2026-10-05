@@ -8,11 +8,11 @@ import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import { OBJECT_SCHEMA } from '@cssearth/objects';
 import { APPLICATION_WORLD_CONTEXT } from './world-context-plan.mts';
-import { CONTEXT_DATASETS } from './context-datasets.mts';
+import { CONTEXT_DATASETS } from './world/context-datasets.mts';
 
 const renderer = await import('@cssearth/renderer/universe');
 const world = await import('./world-context-plan.mts');
-const entries = await import('./object-entries.mts');
+const entries = await import('./directory/object-entries.mts');
 const visibility = await import('./application-world-visibility.mts');
 mock.module(new URL('./application-world-visibility.mts', import.meta.url).href, { namedExports: { ...visibility, worldVisibilityPolicy: { ...visibility.worldVisibilityPolicy, compact: process.env.RESOURCE_PHONE === 'true' } } });
 const frame = { referenceFrame: 'sun-icrf', epochJdTt: 1, originM: [0, 0, 0], localToReferenceXyzw: [0, 0, 0, 1], metersPerUnit: 1, boundsUnits: { min: [-1, -1, -1], max: [1, 1, 1] } };
@@ -43,11 +43,11 @@ let bankResponse: Response | null = null;
 let catalogLoads = 0, plannerCount = 0;
 let loadFailure: Error | null = new Error('initial volume decode');
 mock.module(new URL('./prepared-context-objects.mts', import.meta.url).href, { namedExports: { CONTEXT_OBJECT_DESCRIPTORS: declarations, CONTEXT_OBJECT_ASSET_URLS: assets, CONTEXT_GALAXY_SAMPLE: {} } });
-mock.module(new URL('./context-availability.mts', import.meta.url).href, { namedExports: { CONTEXT_AVAILABILITY: availability } });
+mock.module(new URL('./world/context-availability.mts', import.meta.url).href, { namedExports: { CONTEXT_AVAILABILITY: availability } });
 mock.module(new URL('./world-context-plan.mts', import.meta.url).href, { namedExports: { ...world,
   WORLD_DOT_BANKS: ['inside'], onWorldSystems: (callback: typeof onSystems) => { onSystems = callback; return () => {}; } } });
-mock.module(new URL('./object-entries.mts', import.meta.url).href, { namedExports: { ...entries, onObjectEntry: (callback: typeof onEntry) => { onEntry = callback; return () => {}; } } });
-mock.module(new URL('./dot-catalogues.mts', import.meta.url).href, { namedExports: { loadCatalogueDots: async () => { catalogLoads++; return { fixture: true }; } } });
+mock.module(new URL('./directory/object-entries.mts', import.meta.url).href, { namedExports: { ...entries, onObjectEntry: (callback: typeof onEntry) => { onEntry = callback; return () => {}; } } });
+mock.module(new URL('./world/dot-catalogues.mts', import.meta.url).href, { namedExports: { loadCatalogueDots: async () => { catalogLoads++; return { fixture: true }; } } });
 mock.module('@cssearth/renderer/universe', { namedExports: { ...renderer,
   loadPreparedCssVolume: async () => { if (loadFailure) throw loadFailure; return { volume: true }; },
   loadPreparedPointAppearance: async () => ({ points: true }),

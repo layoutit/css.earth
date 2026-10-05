@@ -1,4 +1,4 @@
-import { MOBILE_VIEWPORT_QUERY } from './runtime-policy.mts';
+import { MOBILE_VIEWPORT_QUERY } from './browser/runtime-policy.mts';
 // Every world body's classification and discovery come with the world summary, not the object registry.
 import { WORLD_OBJECTS, worldObjects, type WorldObject } from './world-objects.mts';
 import { contextAnnotationOpacity } from '@cssearth/renderer/navigation/marker-presentation.ts';
@@ -7,8 +7,8 @@ import { labelImportance } from '@cssearth/renderer/labels/universe-label-policy
 import { APPLICATION_WORLD_CONTEXT as applicationContext, loadWorldHolder, onWorldSystems } from './world-context-plan.mts';
 import { PREPARED_WORLD_PRESENTATION as prepared } from './prepared-world-presentation.mts';
 import { satelliteSystemByHost, satelliteSystemOfMember } from './satellite-systems.mts';
-import { planetarySystemParents } from './planetary-system-members.mts';
-import { orbitRoot } from './orbit-root.mts';
+import { planetarySystemParents } from './model/planetary-system-members.mts';
+import { orbitRoot } from './model/orbit-root.mts';
 import type { SceneLifetime } from '@cssearth/engine';
 import type { ApplicationWorldLayer } from './application-world-types.mts';
 

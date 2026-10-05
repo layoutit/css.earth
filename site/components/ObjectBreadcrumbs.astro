@@ -2,7 +2,7 @@
 import type { HTMLAttributes } from 'astro/types';
 interface Props extends HTMLAttributes<'nav'> { objectId?: string; scope?: string; system?: boolean; includeObject?: boolean; currentPage?: boolean; }
 import { OBJECTS, ancestorsOf } from '../objects.mts';
-import { systemObjectId } from '../navigation/system-address.mts';
+import { systemObjectId } from '../model/system-address.mts';
 
 const { objectId, scope, system = false, includeObject: requestedIncludeObject,
   currentPage: requestedCurrentPage, ...attributes } = Astro.props;

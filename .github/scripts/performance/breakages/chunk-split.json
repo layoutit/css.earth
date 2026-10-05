@@ -5,7 +5,7 @@
     {
       "file": "astro.config.mts",
       "before": "{ build: { modulePreload: false } }",
-      "after": "{ build: { modulePreload: false, rollupOptions: { output: { manualChunks: (id: string) => id.endsWith('/site/native-view-forms.mts') ? 'l7a-forced-split' : undefined } } } }"
+      "after": "{ build: { modulePreload: false, rollupOptions: { output: { manualChunks: (id: string) => id.endsWith('/site/shell/native-view-forms.mts') ? 'l7a-forced-split' : undefined } } } }"
     }
   ]
 }

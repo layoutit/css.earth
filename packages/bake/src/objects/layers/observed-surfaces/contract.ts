@@ -11,12 +11,12 @@ const continuation = obj({boundaryFraction: n, exponent: n, minimumBoundarySum: 
 export type BoundaryContinuation = s.Infer<typeof continuation>;
 const color = obj({channels: s.literal(3, 4), palette: s.tuple(vector3, vector3, vector3), percentiles: vector2, transfer: s.literal('sqrt', 'power'), exponent: n, minimumCoverage: n, positiveValidity: opt(s.boolean)});
 export type FalseColor = s.Infer<typeof color>;
-const decode = s.union(obj({kind: s.literal('raster'), channels: s.literal(3, 4), crop: opt(region), continuation: opt(continuation)}), obj({kind: s.literal('fits'), bitpix: n, width: n, height: n, color, continuation: opt(continuation)}));
+const decode = s.union(obj({kind: s.literal('raster'), channels: s.literal(3, 4), crop: opt(region), continuation: opt(continuation)}), obj({kind: s.literal('fits'), bitpix: n, width: n, height: n, color, continuation: opt(continuation)}), obj({kind: s.literal('fits-planes'), bitpix: n, width: n, height: n, firstRow: s.literal('north', 'south'), crop: opt(region)}));
 const provenance = obj({authority: str, model: str, sourcePath: opt(str)});
 export type BaselineProvenance = s.Infer<typeof provenance>;
 const pixelPresence = {alphaValidity: opt(s.boolean), minimumBrightness: n};
 export interface PixelPresence {alphaValidity?: boolean; minimumBrightness: number}
-const coverage = s.union(obj({kind: s.literal('component-fits'), sources: s.tuple(str,str,str), unobservedRows: arr(vector2), reverseLongitude: s.boolean, longitudeOffsetDegrees: n, longitudePeriod: n}), obj({kind: s.literal('boundary-mean'), boundaryFraction: n, exponent: n, minimumBoundarySum: opt(n)}), obj({kind: s.literal('uniform-baseline'), ...pixelPresence, minimumCoverage: n, minimumRowCoverage: n, equatorialInsetRows: n, allowedBoundaryRange: vector2, transitionRows: n, baseline: opt(str), baselineProvenance: opt(provenance)}));
+const coverage = s.union(obj({kind: s.literal('component-fits'), sources: s.tuple(str,str,str), unobservedRows: arr(vector2), reverseLongitude: s.boolean, longitudeOffsetDegrees: n, longitudePeriod: n}), obj({kind: s.literal('declared-rows'), unobservedRows: arr(vector2), reverseLongitude: s.boolean, longitudeOffsetDegrees: n, longitudePeriod: n}), obj({kind: s.literal('boundary-mean'), boundaryFraction: n, exponent: n, minimumBoundarySum: opt(n)}), obj({kind: s.literal('uniform-baseline'), ...pixelPresence, minimumCoverage: n, minimumRowCoverage: n, equatorialInsetRows: n, allowedBoundaryRange: vector2, transitionRows: n, baseline: opt(str), baselineProvenance: opt(provenance)}));
 export type UniformCoverage = Extract<s.Infer<typeof coverage>, {kind: 'uniform-baseline'}>;
 const baseline = obj({id: str, source: str, minimumBrightness: n, minimumCoverage: n, radiusFraction: n, minimumSampleShare: n, provenance});
 export type DiscBaseline = s.Infer<typeof baseline>;
@@ -28,7 +28,7 @@ const polarProjection = obj({tileSize: n, poles: arr(s.literal('north', 'south')
 export type PolarProjection = s.Infer<typeof polarProjection>;
 const productCommon = {filename: str, encoding: webpEncoding, transforms: opt(arr(transform)), removeAlpha: opt(s.boolean)};
 const product = s.union(obj({...productCommon, kind: s.literal('surface'), packing: obj({bandCount: n, gutter: n, overscan: opt(n)})}), obj({...productCommon, kind: s.literal('poles'), projection: polarProjection}), obj({...productCommon, kind: s.literal('thumbnail')}));
-const dataset = obj({id: str, source: str, decode, products: arr(product), transforms: opt(arr(transform)), coverage: opt(coverage), calibration: opt(calibration), atmosphereColor: opt(brightTail), planetographicAxisRatio: opt(n)});
+const dataset = obj({id: str, source: str, decode, products: arr(product), transforms: opt(arr(transform)), coverage: opt(coverage), calibration: opt(calibration), atmosphereColor: opt(brightTail), planetographicAxisRatio: opt(n), planetocentricSampleRows: opt(n)});
 export const observedRecipe = obj({schema: s.literal('cssearth-observed-surfaces@2'), sources: arr(sourcePin), datasets: arr(dataset), baselines: opt(arr(baseline))});
 export type ObservedSurfaceRecipe = s.Infer<typeof observedRecipe>;
 export interface RasterMap {data: Buffer; width: number; height: number; channels: 1 | 2 | 3 | 4; missing?: Uint8Array; atmosphereColor?: number[]; calibration?: unknown; coverage?: {baselineColor: readonly number[]}; stretch?: number[]}

@@ -65,7 +65,7 @@ The same camera before (left) and after (right) the WISE × SuperCOSMOS and 2MRS
 
 ![The quasar shell from the Observable Universe page, and the field from 100 Mpc](evidence/2026-09-30/filled-shell-and-field.jpg)
 
-Browser captures of this version: the Observable Universe page's default view, where the quasars close into one shell, and the whole field from 100 Mpc, where the Virgo Cluster is a dense patch under its marker. The earlier thinned field drew 4 of Virgo's 175 catalogued galaxies there. The renderer's catalogue point tests (`packages/renderer/src/universe/catalogue-points.test.ts`) check that a stacked bank only adds dots as the view narrows. The [context lineage test](../../../site/test/context-lineage.test.mts) checks that its products read only its source records.
+Browser captures of this version: the Observable Universe page's default view, where the quasars close into one shell, and the whole field from 100 Mpc, where the Virgo Cluster is a dense patch under its marker. The earlier thinned field drew 4 of Virgo's 175 catalogued galaxies there. The renderer's catalogue point tests (`packages/renderer/src/universe/catalogue-points.test.ts`) check that a stacked bank only adds dots as the view narrows. The [context lineage test](../../../site/journeys/context-lineage.test.mts) checks that its products read only its source records.
 
 ## Known problems
 

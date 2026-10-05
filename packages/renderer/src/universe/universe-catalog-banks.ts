@@ -5,7 +5,6 @@ import { type WorldCameraPose } from '@cssearth/engine';
 import type { WorldCameraViewport } from '../navigation/world-camera.js';
 import { mountPreparedCssImageLayers } from '../image-layers/prepared-image-layer-runtime.js';
 import { outsideVolumeOpacity, projectedVolumeOpacity, volumeFramingRadiusUnits } from '../volume/projected-volume-visibility.js';
-import { STACK_OPACITY_CEILING } from '../volume/prepared-volume-runtime.js';
 import { mountPreparedGalaxyCatalog } from './prepared-galaxy-catalog.js';
 import { mountDatasetBillboards } from './dataset-billboards.js';
 import { mountCataloguePoints } from './catalogue-points.js';
@@ -198,9 +197,10 @@ export function createUniverseCatalogBanks({ root, end, stage, lifetime, declara
     /** `inside` is the galaxy the selected body is in, and how much of its dots show: a star of M33 stands among M33's
      * catalogue dots, without the photograph that is the galaxy seen from outside. `within` is the objects the selected body
      * is inside, by the object tree: a bank whose light lies on walls (`surrounds`) draws around a body inside its host, as
-     * a nebula's walls around its central star; the first such bank declared for that host stands for it. */
+     * a nebula's walls around its central star; the first such bank declared for that host stands for it. `bodyM` is
+     * that body's place: the sheets through it are left out (prepared-image-layer-runtime.ts). */
     publishImages(world: WorldCameraPose, viewport: WorldCameraViewport, volumeOpacity: number, detailedObjectId?: string,
-      inside?: { readonly objectId: string; readonly opacity: number }, within: readonly string[] = []) {
+      inside?: { readonly objectId: string; readonly opacity: number }, within: readonly string[] = [], bodyM?: readonly [number, number, number]) {
       if (lifetime.disposed) return;
       let around: string | undefined;
       if (within.length) for (const bank of images) if (bank.surrounds && bank.host !== undefined && within.includes(bank.host)) { around = bank.id; break; }
@@ -225,15 +225,16 @@ export function createUniverseCatalogBanks({ root, end, stage, lifetime, declara
           bank.dotsShown = dotOpacity > 0;
         }
         if (opacity !== bank.publishedOpacity) {
-          // Never 1 (STACK_OPACITY_CEILING), as a stack's own opacity: Safari paints every leaf under the root again when its
-          // opacity leaves or reaches 1. Cassiopeia A's 1,397 leaves made a frame of 180 to 208 ms each way with the camera
-          // still on an iPad, and none between 0.999 and 0.99 (2026-10-05): the first frames of every zoom out of a nebula.
-          bank.mounted.root.style.opacity = String(Math.min(STACK_OPACITY_CEILING, opacity));
+          // The root stops where its stacks do (the bank's `ceiling`). Under 1 for a bank of sheets: Safari paints every leaf
+          // under the root again when its opacity leaves or reaches 1. At 1 for a bank of patches, which a group under 1
+          // draws with a wedge missing at its nearest view (prepared-image-layer-runtime.ts); such a bank pays that repaint,
+          // 180 to 208 ms each way for Cassiopeia A's 1,397 patches with the camera still on an iPad (2026-10-05).
+          bank.mounted.root.style.opacity = String(Math.min(bank.mounted.ceiling, opacity));
           if (opacity > 0 && bank.mounted.root.style.display === 'none') bank.mounted.resume();
           bank.mounted.root.style.display = opacity > 0 ? '' : 'none';
           bank.publishedOpacity = opacity;
         }
-        if (opacity > 0) bank.mounted.publish({ world, viewport }, bank.id === around && bank.id !== detailedObjectId);
+        if (opacity > 0) bank.mounted.publish({ world, viewport }, bank.id === around && bank.id !== detailedObjectId && bodyM !== undefined ? bodyM : false);
       }
     },
   };

@@ -26,7 +26,7 @@ test('catalogue hosts retain source order, and unknown hosts have no moons', () 
 test('preparation preserves the old serialized results, ordering and named-label eligibility', async () => {
   const { default: input } = await import('./source/moon-catalogues.json', { with: { type: 'json' } });
   const { SEARCH_OBJECTS } = await import('./search/search-objects.mts');
-  const { systemObjectId } = await import('./navigation/system-address.mts');
+  const { systemObjectId } = await import('./model/system-address.mts');
   const { readMoonCatalogue } = await import('./moon-catalogue.mts');
   for (const hostId of [...input.systems.map(system => system.id), ...new Set(SEARCH_OBJECTS.map(object => object.id)), 'not-a-host']) {
     const available = SEARCH_OBJECTS.filter(object => object.classification === 'satellite' && object.parent === systemObjectId(hostId));

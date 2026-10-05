@@ -1,4 +1,4 @@
-import type { WorldPreferences } from '../world-preferences.mts';
+import type { WorldPreferences } from '../world/world-preferences.mts';
 import type { BrowserWindow, ShellCamera, PlaybackState } from '../browser/browser-types.mts';
 import type { NavigationContent } from '../navigation/navigation-content.mts';
 import type { ObjectEntry } from '../objects.mts';

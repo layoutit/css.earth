@@ -4,9 +4,9 @@ import { loadPreparedCssObject } from '@cssearth/renderer';
 import { createPreparedObjectNavigation } from '@cssearth/renderer/runtime/prepared-object-navigation.ts';
 import { presentWorldCamera } from '@cssearth/renderer/navigation/world-camera.ts';
 import { billboardBodyRadiusPixels } from '@cssearth/renderer/navigation/prepared-body-billboards.ts';
-import { readPreparedObjectBytes } from '../object-page-data.mts';
+import { readPreparedObjectBytes } from '../server/object-page-data.mts';
 import { requireObject } from '../objects.mts';
-import { parseStartupCover, startupCoverPlacement } from '../startup-cover.mts';
+import { parseStartupCover, startupCoverPlacement } from '../startup/startup-cover.mts';
 import { loadPreparedSceneMarkup } from '../server/load-prepared-scene.mts';
 
 test('the baked cover places the photograph where the scene publishes it', async () => {

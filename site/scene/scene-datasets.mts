@@ -1,12 +1,12 @@
 import { type DatasetVolume } from '@cssearth/objects';
 
-import { CONTEXT_DATASETS } from '../context-datasets.mts';
+import { CONTEXT_DATASETS } from '../world/context-datasets.mts';
 
 import type { ObjectMountOptions } from '@cssearth/renderer/runtime/object-runtime-types.ts';
 import type { PreparedFocusBank } from '@cssearth/renderer/universe/prepared-focus-bank.ts';
 import type { SceneSession } from './scene-session.mts';
 import { errorMessage } from '../browser/browser-types.mts';
-import { readSceneDatasetUrl } from '../dataset-url.mts';
+import { readSceneDatasetUrl } from '../model/dataset-url.mts';
 
 interface CompanionClouds {
   focusBank(objectId: string): PreparedFocusBank | null;

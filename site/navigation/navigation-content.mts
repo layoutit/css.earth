@@ -3,7 +3,7 @@ import { requiredElement, requiredSection, sectionElement, setLinkSelected } fro
 import type { ObjectEntry } from '../objects.mts';
 import { navigationFragments, type NavigationFragments } from './navigation-fragments.mts';
 import { createNavigationStyles, type NavigationStyleStage } from './navigation-styles.mts';
-import { publishPreparedDescriptor, readPreparedDescriptor } from '../prepared-descriptor.mts';
+import { publishPreparedDescriptor, readPreparedDescriptor } from './prepared-descriptor.mts';
 import { updateSettingsPanel, updateShellElement } from './navigation-shell-content.mts';
 export interface NavigationContent {
   readonly id: string;

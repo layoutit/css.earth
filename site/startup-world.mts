@@ -1,5 +1,5 @@
-import { startupFetch } from './startup-requests.mts';
-import { readWorldPlace } from './object-entries.mts';
+import { startupFetch } from './directory/startup-requests.mts';
+import { readWorldPlace } from './directory/object-entries.mts';
 
 /** The world summary's address: bundled by Vite for the browser, the checked-in file in Node (`world-context-plan.mts`). */
 export const WORLD_SUMMARY_SOURCE = new URL('../src/objects/observable-universe/prepared/world.json', import.meta.url);

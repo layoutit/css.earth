@@ -5,7 +5,7 @@ import { readFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import { SCENE_OBJECTS } from '../objects.mts';
 import { required } from './navigation-test-values.mts';
-import { SourceEvidence } from './source-evidence-values.mts';
+import { SourceEvidence } from '../overview/source-evidence-values.test-support.mts';
 import { hasErrorCode } from '@cssearth/core';
 import { parseSpectrumRecipe, readSpectrumData } from '../overview/spectrum-data.mts';
 import { renderCompactSpectrum } from '../overview/compact-spectrum.mts';

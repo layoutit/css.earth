@@ -201,12 +201,12 @@ For the camera handoff and interruption behavior, read [flight lifecycle](flight
 After building the packages and renderer, check page metadata with:
 
 ```sh
-node --test site/test/object-page-data.test.mts
+node --test site/server/object-page-data.test.mts
 pnpm test:packages   # includes rendering/prepared-scene-serialization.test.ts
-node --test site/test/rendered-page.test.mts
+node --test site/journeys/rendered-page.test.mts
 node --test site/test/search-response.test.mts
-node --test site/test/dataset-response.test.mts site/test/dataset-url.test.mts
-node --test site/test/scene-session.test.mts
+node --test site/server/dataset-response.test.mts site/model/dataset-url.test.mts
+node --test site/scene/scene-session.test.mts
 ```
 
 Worker reuse, cancellation and disposal are covered by
@@ -253,14 +253,14 @@ search field listed the planets, because the first browse pill was the form's de
 its own. A dataset, settings or saved-view response drew its scene under the default arrival photograph; the
 photograph now shows only over the empty default stage. At phone width the sheet, with search and the card, stayed
 hidden waiting for its controller; it now rests at its peek, and its handle opens it.
-`site/test/rendered-page.test.mts` checks all three in the built pages.
+`site/journeys/rendered-page.test.mts` checks all three in the built pages.
 
 ![Saturn at phone width with JavaScript disabled: the search field and the card's sheet at its peek](images/native-phone.png)
 
 A dataset, settings or feature response without a saved view used to keep the prepared tree's mount pose: depth was
 left unscaled, which drew each polar cap as a hole, and the body had one fixed size that overflowed a phone. It now takes
 the pose of a fresh mount, framed at the share of the viewport width the live camera fits a body to
-(`site/default-width-share.mts`), and the photograph of a page without script is sized by the same share. The live
+(`site/world/default-width-share.mts`), and the photograph of a page without script is sized by the same share. The live
 camera also keeps a body within a share of the viewport's height; a page without script now takes the smaller of the
 two, as a scale on the drawn stage and a cap on the photograph. Before that a window wide for its height drew the body
 too large: Saturn was 475 px across at 1320×559 against 338 px with script, and is 338 px in Chromium 148, WebKit 26.4
@@ -269,7 +269,7 @@ and after.
 
 ![The Moon and Europa drawn by a native response, before and after the default view](images/native-default-view.png)
 
-A drawn body also takes a drag and the wheel without script (`site/native-input.mts`, which those pages link as
+A drawn body also takes a drag and the wheel without script (`site/browser/native-input.mts`, which those pages link as
 `/native-input.css`; a page with script never requests it). Dragging turns the body's prepared rotation: the browser's
 resize handle holds the drag, a row of hover strips keeps that handle under the pointer, and anchor positioning carries
 the stored width to the body. A body without a prepared rotation, such as a star, only zooms. The wheel scales the whole

@@ -31,7 +31,7 @@ export function references(root: string, moves: Readonly<Record<string, unknown>
   const selected = only ?? [...new Set([...grep.stdout.split('\n').filter(Boolean), ...untracked, ...paths.filter(path => !path.endsWith('/') && isTestPath(path))])].sort();
   for (const file of selected) {
     if (!existsSync(resolve(root, file))) continue;
-    if (file.startsWith('docs/site-architecture/') || /^\.github\/scripts\/architecture\/(?:site-architecture|projection|plan-proofs|plan-references|import-declarations)(?:\.test)?\.mts$/u.test(file)) continue; // The inventory cannot inventory its own serialization.
+    if (file === '.github/site-refactor.json' || file.startsWith('docs/site-architecture/') || /^\.github\/scripts\/architecture\/(?:site-architecture|projection|plan-proofs|plan-references|import-declarations)(?:\.test)?\.mts$/u.test(file)) continue; // The inventory cannot inventory its own serialization.
     const bytes = readFileSync(resolve(root, file)); if (bytes.includes(0)) continue;
     const content = bytes.toString('utf8');
     const candidates = paths.filter(old => {
@@ -42,7 +42,7 @@ export function references(root: string, moves: Readonly<Record<string, unknown>
     });
     if (!candidates.length && !(isTestPath(file) && typeof moves[file] === 'string')) continue;
     const lines = content.split('\n');
-    const scope = file.startsWith('docs/site-architecture') || /^\.github\/scripts\/architecture\/(?:site-architecture|projection|plan-proofs|plan-references|import-declarations)(?:\.test)?\.mts$/u.test(file) ? 'plan'
+    const scope = file === '.github/site-refactor.json' || file.startsWith('docs/site-architecture') || /^\.github\/scripts\/architecture\/(?:site-architecture|projection|plan-proofs|plan-references|import-declarations)(?:\.test)?\.mts$/u.test(file) ? 'plan'
       : /(?:^untangle\/|\/history\/|\/archive\/|\/done\/|(?:^|\/)(?:reports|records)\/)/u.test(file) ? 'history' : 'live';
     let generated = false;
     for (const [index, line] of lines.entries()) {

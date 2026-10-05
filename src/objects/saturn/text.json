@@ -152,6 +152,20 @@
           "locator": "Rotation 2025a; FITS DATE-OBS"
         }
       ]
+    },
+    "cassini-2011": {
+      "title": "Cassini 2011-08-11",
+      "detail": "RED / GRN / BL1, enhanced",
+      "summary": "Clouds of the great storm circle the north, in the archive's enhanced color. Gray grid marks what Cassini did not map.",
+      "sources": [
+        {
+          "catalogueId": "pds-cassini-iss-global-maps-v1",
+          "url": "https://doi.org/10.17189/rkkb-6y30",
+          "label": "NASA PDS · Cassini ISS global maps",
+          "checked": "2026-10-05",
+          "locator": "Cassini_ISS_RGB_Saturn_global_color_map_contrast_enhance; FITS DATE-STA"
+        }
+      ]
     }
   }
 }

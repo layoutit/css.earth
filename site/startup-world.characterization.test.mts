@@ -3,7 +3,7 @@ import test, { mock } from 'node:test';
 import { parseHTML } from 'linkedom';
 
 let row: unknown = { row: { id: 'star', color: '#fff' } };
-mock.module(new URL('./object-entries.mts', import.meta.url).href, { namedExports: { readWorldPlace: async () => row } });
+mock.module(new URL('./directory/object-entries.mts', import.meta.url).href, { namedExports: { readWorldPlace: async () => row } });
 const { anywhereFiles, pageWorldFiles, startupWorld, loadStartupWorld } = await import('./startup-world.mts');
 
 test('world startup rejects malformed files and preserves opaque file values and duplicate ids', () => {

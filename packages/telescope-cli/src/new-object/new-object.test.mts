@@ -975,3 +975,13 @@ test('a binary whose primary Gaia sees eclipsing on another period is refused; l
   assert.equal(eclipsingPeriodAgrees(214.3655, 2.998979), true, 'a long orbit Gaia saw twice is not checked');
   assert.ok(GAIA_EB_CHECKED_DAYS > 100 && GAIA_EB_CHECKED_DAYS < 110);
 });
+
+test('a paper cited by an arXiv number from before 2007 is read as that paper, not as a web page', async () => {
+  const { fetchPublication } = await import('./archives/archives.mts');
+  const asked: string[] = [], archive = { text: async (url: string) => { asked.push(url);
+    return '<feed><entry><title>The Structure of the Homunculus</title><published>2006-02-21T00:00:00Z</published><author><name>Nathan Smith</name></author></entry></feed>'; },
+  bytes: async () => Buffer.alloc(0), exists: async () => true };
+  const old = await fetchPublication(archive, 'https://arxiv.org/abs/astro-ph/0602464');
+  assert.deepEqual([old?.id, old?.arxiv, old?.year, asked[0]], ['arxiv-astro-ph-0602464', 'astro-ph/0602464', '2006', 'https://export.arxiv.org/api/query?id_list=astro-ph/0602464']);
+  assert.equal((await fetchPublication(archive, 'https://arxiv.org/abs/2401.02477'))?.id, 'arxiv-2401-02477');
+});

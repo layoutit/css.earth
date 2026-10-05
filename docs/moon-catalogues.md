@@ -80,6 +80,6 @@ identity and ephemeris coverage before accepting refreshed inputs. Do not reuse
 cached replies for a different epoch or reference frame.
 
 Focused checks: `node --test site/test/body-moons.test.mts
-site/test/moon-labels.test.mts site/test/source-link.test.mts`. They verify full
+site/test/moon-labels.test.mts site/browser/source-link.test.mts`. They verify full
 catalogue membership, available destinations, major/minor orbit policy, planet
 occlusion, caption collision and overview hiding.

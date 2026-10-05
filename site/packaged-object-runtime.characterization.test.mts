@@ -6,10 +6,10 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import * as renderer from '@cssearth/renderer';
 import { parsePreparedObjectRuntime, type PreparedWorldCameraFrame } from '@cssearth/objects';
-import { characterizationRuntime } from './test/fixtures/characterization-runtime.mts';
+import { characterizationRuntime } from './scene/fixtures/characterization-runtime.mts';
 import { unusedMountOptions, required } from './test/navigation-test-values.mts';
-import { DIAGNOSTICS_ENABLED } from './diagnostics-policy.mts';
-import * as runtimePolicy from './runtime-policy.mts';
+import { DIAGNOSTICS_ENABLED } from './browser/diagnostics-policy.mts';
+import * as runtimePolicy from './browser/runtime-policy.mts';
 
 const frame: PreparedWorldCameraFrame = { referenceFrame: 'ICRF', epochJdTt: 2451545, originM: [0, 0, 0], presentationToReference: [1, 0, 0, 0, 1, 0, 0, 0, -1], metersPerUnit: 1, bodyRadiusM: 1 };
 const requests: { url: string; signal?: AbortSignal }[] = [];
@@ -20,7 +20,7 @@ mock.module('@cssearth/renderer', { namedExports: { ...renderer,
   async loadNavigableObject(_descriptor: unknown, reader: { read(reference: string, signal?: AbortSignal): Promise<ArrayBuffer> }, _bind: unknown, signal?: AbortSignal) { return reader.read(reference, signal); },
 } });
 mock.module(new URL('./inside-view.mts', import.meta.url).href, { namedExports: { insideViewDescriptor: async (value: unknown) => value } });
-mock.module(new URL('./startup-requests.mts', import.meta.url).href, { namedExports: {
+mock.module(new URL('./directory/startup-requests.mts', import.meta.url).href, { namedExports: {
   async startupFetch(url: string, options: { signal?: AbortSignal }) { requests.push({ url, signal: options.signal }); return new Response(new Uint8Array([1, 2, 3]), { status }); },
 } });
 

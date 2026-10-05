@@ -13,7 +13,7 @@ export interface ZoomStep { readonly id: string; readonly zoom: Pick<ObjectZoom,
 import { GALAXY_SCALE } from '@cssearth/renderer/labels/universe-label-policy.ts';
 import { APPLICATION_WORLD_CONTEXT as context } from './world-context-plan.mts';
 import { systemFadeDistances } from '@cssearth/renderer/universe/world-context/context-scale.ts';
-import { systemHostId, systemObjectId } from './navigation/system-address.mts';
+import { systemHostId, systemObjectId } from './model/system-address.mts';
 
 const PARSEC_M = 3.085677581491367e16;
 

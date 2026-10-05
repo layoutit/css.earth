@@ -2,7 +2,7 @@ import { isRecord } from '@cssearth/core';
 import { knownAncestors, knownObject, loadAncestors, loadObject } from './object-directory.mts';
 import { SOLAR_SYSTEM_ID } from './object-systems.mts';
 import { starSystem, subjectHost, subjectView, type SceneSubject } from './scene/scene-subject.mts';
-import { systemHostId } from './navigation/system-address.mts';
+import { systemHostId } from './model/system-address.mts';
 import type { ZoomStep } from './zoom-scope.mts';
 
 /** An object the view hands over to as the camera backs out of something inside it (the Milky Way) is seen from inside: its

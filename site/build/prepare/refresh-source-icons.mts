@@ -9,7 +9,7 @@ import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { projectRoot } from '@cssearth/core/node';
 import { parseSourceCredits } from '@cssearth/objects/provenance';
-import { parseSourceIcons, type SourceIcon } from '../../source-icons.mts';
+import { parseSourceIcons, type SourceIcon } from '../../content/source-icons.mts';
 
 const TIMEOUT_MS = 20_000;
 const HEADERS = { 'user-agent': 'Mozilla/5.0 (compatible; cssEarth source icons; +https://css.earth)', accept: '*/*' };

@@ -8,7 +8,7 @@ aliases and classification tabs use this inventory.
 | Object | A package with a catalogue entry: a route, a prepared world frame and a scene loader. A planet, a star, a system, a galaxy, a nebula and a cluster of galaxies are all this. `?dataset=` selects one of its datasets. |
 | Parent | The one object an object is inside (`parent` in its object.json). The Observable Universe is the root, with none. The registry refuses a missing parent, an unknown parent or a loop ([object-tree.ts](../packages/objects/src/registry/object-tree.ts)). |
 | Zoom facts | An object seen from inside (the Milky Way, the Local Group, the Nearby and the Observable Universe) authors when the camera's view hands over to it and how its page frames the camera (`properties.zoom`). Its scene has no body and is seen from inside, centred on the star the zoom came from (the Sun on a page opened cold). |
-| Rendering resource | A volume, image bank, point field or other prepared content, attached to the object it draws for (`properties.host`). A resource descriptor alone does not publish a destination. An image bank whose light lies on walls around its middle says so (`properties.surrounds`, written by its bake): the world draws the first such bank of an object around a body that stands inside that object, as a nebula's walls around its central star, leaving out the sheets the camera stands on. A galaxy's photograph, one sheet seen from outside, is not drawn around a star inside it. |
+| Rendering resource | A volume, image bank, point field or other prepared content, attached to the object it draws for (`properties.host`). A resource descriptor alone does not publish a destination. An image bank whose light lies on walls around its middle says so (`properties.surrounds`, written by its bake): the world draws the first such bank of an object around a body that stands inside that object, as a nebula's walls around its central star, leaving out the sheets the camera stands on and the sheets through the body, and with its sheets and patches taken out of their shared 3D scenes, so the browser neither cuts one along another's plane nor leaves one undrawn. A galaxy's photograph, one sheet seen from outside, is not drawn around a star inside it. |
 | Dataset view | A selectable `(objectId, datasetId)` presentation, which may combine several products and published sources. |
 | Published source | A scientific work, release or product identified in the source catalogue; a local file hash identifies retained bytes separately. |
 
@@ -34,7 +34,10 @@ body from outside, so it takes the view once the camera is outside it: as far fr
 the body as that object's centre and its radius. A star of the Large Magellanic Cloud
 zooms out into the Cloud, M87* into M87, M87 into the Virgo Cluster. That scene is
 then left the way any body's is ([overview-selection.mts](../site/overview-selection.mts),
-[inside-view.mts](../site/inside-view.mts)). A system can be inside another: a star
+[inside-view.mts](../site/inside-view.mts)). The way back in needs no click where the object's walls
+surround a body: its entry names that body (`inner`, [surrounded-body.mts](../site/surrounded-body.mts)), and
+a zoom in that reaches the nearest view the object's scene allows goes on into the body's scene, which draws
+the walls around it. The Homunculus Nebula zooms in to Eta Carinae, NGC 2392 to HD 59088. A system can be inside another: a star
 bound to another, with bodies of its own, hosts its system inside that star's. The
 brown dwarfs Epsilon Indi Ba and Bb are Epsilon Indi B, inside Epsilon Indi A's
 system, and zooming out of Epsilon Indi B hands the view to that system the same way.
@@ -58,7 +61,7 @@ A planetary system is a star and every prepared body inside its system in the
 object tree, at any depth. The Solar System is the Sun's; WASP-43 and its planet
 WASP-43b form another. Each world row says which object its body is inside: the
 object whose file the row arrives in.
-[`planetary-system-members.mts`](../site/planetary-system-members.mts) reads each
+[`planetary-system-members.mts`](../site/model/planetary-system-members.mts) reads each
 system's members from that, and
 [`object-systems.mts`](../site/object-systems.mts) joins them with the registry,
 so no list names the systems and nothing walks orbits or bonds to find them. The
@@ -203,6 +206,6 @@ owners. Its test preload rejects accidental use of application boot; it does
 not prove the Vite-generated context inventory or browser startup.
 
 Scene conformance remains derived from the scene capability filter. Run
-`pnpm test:site` (the browser suites were retired; scene retention is checked in `site/test/scene-session.test.mts`) to check search, selection, saved links and retained
+`pnpm test:site` (the browser suites were retired; scene retention is checked in `site/scene/scene-session.test.mts`) to check search, selection, saved links and retained
 camera ownership. These checks do not establish the scientific accuracy of a
 catalogue measurement or a reconstructed volume.

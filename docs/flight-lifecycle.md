@@ -228,7 +228,7 @@ replacement selection therefore settles the old navigation immediately, even
 when the underlying restoration is still completing. Late transport results
 release their resources and cannot commit a replacement's history or readiness.
 
-`site/world-preferences.mts` owns motion and display intent independently of
+`site/world/world-preferences.mts` owns motion and display intent independently of
 navigation. Settings controls and search read its current state and issue
 commands to it; replacing a card never reads preferences back from the DOM.
 A newly mounted world receives the latest settings. Playback permission remains
@@ -259,7 +259,7 @@ releasing resources; a failed URL flush or destructor cannot skip the remaining
 cleanup. Cancelled activation observes late promise rejection without mounting
 another scene.
 
-`site/prepared-scene-ownership.mts` keeps the prepared bank under the request's
+`site/navigation/prepared-scene-ownership.mts` keeps the prepared bank under the request's
 abort signal until `WorldHandoff.transferTo` assigns it to the session immediately
 before mounting. A failed mount releases unclaimed preparation through the
 session signal. Successful renderer claims continue owning native residency and
@@ -270,7 +270,7 @@ Both preserved-view and animated handoffs use this transfer.
 
 `pnpm test:site` covers interrupted flights, history, dataset selection,
 late transport disposal and superseded saved-view restoration. The focused
-`site/test/navigation-lifecycle.test.mts` suite checks commit authority and
+`site/navigation/navigation-lifecycle.test.mts` suite checks commit authority and
 cleanup ordering, including abort callbacks and failed destructors.
 
 Use an immutable build for sustained recording; repeated preparation and HMR
@@ -287,9 +287,9 @@ Choose checks for the changed behavior after building and preparing its inputs:
 
 ```sh
 node --test packages/objects/src/node/prepared-activation-transport.test.mts
-node --test site/test/navigation-lifecycle.test.mts
-node --test site/test/scene-session.test.mts
-node --test site/test/rendered-page.test.mts
+node --test site/navigation/navigation-lifecycle.test.mts
+node --test site/scene/scene-session.test.mts
+node --test site/journeys/rendered-page.test.mts
 ```
 
 The rendered-page test parses built HTML for the information-tab rules; it does

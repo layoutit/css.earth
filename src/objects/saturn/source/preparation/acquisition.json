@@ -393,6 +393,14 @@
       ],
       "path": "opal-dates/hlsp_opal_hst_wfc3-uvis_saturn-2025a_f631n_v1_globalmap.fits",
       "url": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2025a_f631n_v1_globalmap.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "refresh"
+      ],
+      "path": "cassini-iss/Cassini_ISS_RGB_Saturn_global_color_map_contrast_enhance.fits",
+      "url": "https://pds-atmospheres.nmsu.edu/PDS/data/PDS4/co_iss_global-maps/data_derived/Cassini_ISS_RGB_Saturn_global_color_map_contrast_enhance.fits"
     }
   ]
 }

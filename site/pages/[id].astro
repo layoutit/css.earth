@@ -1,7 +1,7 @@
 ---
 import ObjectPage from '../components/ObjectPage.astro';
 import { PAGES } from '../objects.mts';
-import { builtObjectPages } from '../built-pages.mts';
+import { builtObjectPages } from '../server/built-pages.mts';
 export function getStaticPaths() {
   // Every object has its page, `/<id>/`, which mounts its scene. An object seen from inside has a page too: the world
   // host's scene at that zoom, with that object selected.

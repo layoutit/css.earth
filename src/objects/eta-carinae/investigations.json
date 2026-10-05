@@ -1,0 +1,45 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "eta-carinae",
+  "entries": [
+    {
+      "id": "placement",
+      "subject": "Placement",
+      "status": "included",
+      "finding": "Gaia DR3 source 5350358584482202880: position at J2016.0. Distance: Smith (2006), ApJ 644, 1151: 2350 ± 50 pc from the Homunculus's shape and expansion, the distance its nebula's page stands at (https://arxiv.org/abs/astro-ph/0602464): 2350 pc; Gaia DR3 gives this source no parallax (a two-parameter solution). Proper motion: Gaia DR3 source 5350358584482202880 is a two-parameter solution with no proper motion; zero is assumed (at 2,350 pc, 1 mas/yr would be 11 km/s across the sky). Radial velocity from SIMBAD's radial velocity for Gaia DR3 5350358584482202880 (quality E), from 1953GCRV..C......0W; Gaia DR3 measures none.",
+      "evidence": [
+        "https://gea.esac.esa.int/archive/",
+        "https://arxiv.org/abs/astro-ph/0602464",
+        "https://ui.adsabs.harvard.edu/abs/1953GCRV..C......0W/abstract"
+      ]
+    },
+    {
+      "id": "radius-mass-and-temperature",
+      "subject": "Radius, mass and temperature",
+      "status": "included",
+      "finding": "Radius 1032 solar radii from Groh et al. (2010), arXiv:1006.4816, Sect. 4: most of the star's K-band light comes from a region with a 50% encircled-energy radius of 4.8 AU, measured with VLTI/AMBER by Weigelt et al. (2007); 4.8 AU is 1,032 solar radii (https://arxiv.org/abs/1006.4816). No mass is measured, so GM is 0, the records' unpublished value. Temperature 9400 K from Groh et al. (2012), arXiv:1204.1963, Table 2: the primary's effective temperature where its wind turns opaque (Rosseland optical depth 2/3).",
+      "evidence": [
+        "https://arxiv.org/abs/1204.1963",
+        "https://arxiv.org/abs/1006.4816"
+      ]
+    },
+    {
+      "id": "color",
+      "subject": "Color",
+      "status": "included",
+      "finding": "A Planck spectrum at 9,400 K, because no archive holds a spectrum of this star (stis-ngsl: HD 93308 is not in the library; gaia-xp: Gaia DR3 published no sampled BP/RP spectrum of it; pulkovo: HR 4210 is not in the catalogue; kiehling: HR 4210 is not among its 60 stars; kharitonov: HR 4210 is not in the catalogue; burnashev: BS 4210 is not in part2), through the CIE 1931 2-degree observer: #d2ddff. Routes tried in order: stis-ngsl: HD 93308 is not in the library; gaia-xp: Gaia DR3 published no sampled BP/RP spectrum of it; pulkovo: HR 4210 is not in the catalogue; kiehling: HR 4210 is not among its 60 stars; kharitonov: HR 4210 is not in the catalogue; burnashev: BS 4210 is not in part2; planck: used.",
+      "evidence": [
+        "https://arxiv.org/abs/1204.1963"
+      ]
+    },
+    {
+      "id": "limb-darkening",
+      "subject": "Limb darkening",
+      "status": "included",
+      "finding": "The disc is dimmed toward the limb by the power law I(mu) = mu^6.05 whose brightness is half the centre's at the diameter Weigelt et al. (2007), arXiv:astro-ph/0609715 measured for it, 2.33 mas, on a disc that ends at their tenth-brightness diameter, 5.15 mas (VLTI/AMBER K-band continuum at 2.174 um; not a visible band).",
+      "evidence": [
+        "https://arxiv.org/abs/astro-ph/0609715"
+      ]
+    }
+  ]
+}

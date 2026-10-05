@@ -177,6 +177,7 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
       ...(definition.camera.framingScale === undefined ? {} : { framingScale: definition.camera.framingScale }),
       setZoomOutCentering(enabled: boolean) { if (!lifetime.disposed) getOrbit().setZoomOutCentering(enabled); },
       setZoomOutOpen(open: boolean) { if (!lifetime.disposed) getOrbit().setZoomOutOpen(open); },
+      nearest: () => !lifetime.disposed && getOrbit().nearest(),
       zoomRate: () => lifetime.disposed ? 0 : getOrbit().zoomRate(),
       resumeZoom(rate: number) { if (!lifetime.disposed) getOrbit().resumeZoom(rate); },
       holdPresentation() { return getSelection().holdPresentation(); },

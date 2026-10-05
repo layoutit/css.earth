@@ -5,8 +5,8 @@ import type {SourcePin} from '../../geometry/index.ts';
 import { mkdir, readFile, realpath, writeFile } from 'node:fs/promises';
 import { relative, resolve, sep } from 'node:path';
 import sharp from 'sharp';
-import { readFitsPrimary } from '@cssearth/fits';
-import { planetographicRowsToMeshLatitude } from '../../geometry/index.ts';
+import { readFitsImage, readFitsPrimary } from '@cssearth/fits';
+import { planetocentricSampleRowsToMeshLatitude, planetographicRowsToMeshLatitude } from '../../geometry/index.ts';
 import { packProjectiveSurfaceRaster } from '../../../scene/index.ts';
 import { missingCoverageColor } from '../../../raster/index.ts';
 import { resizeObservedRgb, sampleObservedRgb } from './coverage.ts';
@@ -31,14 +31,20 @@ export function parseObservedSurfaceRecipe(input: unknown) {
   const operations=(items: readonly ObservationTransform[] | undefined)=>{for(const op of items??[]){if(!['flip','crop','resize','sharpen'].includes(op.kind))throw new TypeError('Unsupported observation transform.');if(op.kind==='resize'&&!dimensions(op.width,op.height))throw new TypeError('Invalid resize dimensions.');if(op.kind==='crop'&&(!op.region||!dimensions(op.region.width,op.region.height)||![op.region.left,op.region.top].every(v=>Number.isSafeInteger(v)&&v>=0)))throw new TypeError('Invalid crop dimensions.');if(op.kind==='sharpen'&&!positive(op.options?.sigma))throw new TypeError('Invalid sharpening radius.');}};
   for(const dataset of config.datasets){
     if(!OBSERVATION_RECIPE_POLICY.identifier.test(dataset.id)||ids.has(dataset.id)||!sourcePaths.has(dataset.source)||!dataset.decode)throw new TypeError('Invalid observation identity.');ids.add(dataset.id);
-    if(!['raster','fits'].includes(dataset.decode.kind))throw new TypeError('Unsupported observation decoder.');
+    if(!['raster','fits','fits-planes'].includes(dataset.decode.kind))throw new TypeError('Unsupported observation decoder.');
+    if(dataset.decode.kind==='fits-planes'){
+      const {bitpix,width,height,crop}=dataset.decode;
+      if(bitpix!==-32||!dimensions(width,height)||crop&&(!dimensions(crop.width,crop.height)||![crop.left,crop.top].every(v=>Number.isSafeInteger(v)&&v>=0)||crop.left+crop.width>width||crop.top+crop.height>height))throw new TypeError('Invalid FITS plane geometry.');
+    }
+    if(dataset.coverage?.kind==='declared-rows'&&dataset.calibration)throw new TypeError('Declared-row coverage does not take a calibration.');
+    if(dataset.planetographicAxisRatio!==undefined&&dataset.planetocentricSampleRows!==undefined)throw new TypeError('A map states one latitude convention.');
     if(dataset.decode.kind==='raster'&&![3,4].includes(dataset.decode.channels))throw new TypeError('Invalid raster channels.');
     if(dataset.decode.kind==='fits'){
       const color=dataset.decode.color;
       if(dataset.decode.bitpix!==-32||!dimensions(dataset.decode.width,dataset.decode.height)||!color||![3,4].includes(color.channels)||!isArray(color.palette)||color.palette.length!==3||color.palette.some(rgb=>!isArray(rgb)||rgb.length!==3||rgb.some(c=>!Number.isSafeInteger(c)||c<0||c>255))||!isArray(color.percentiles)||color.percentiles.length!==2||!color.percentiles.every(fraction)||color.percentiles[0]>=color.percentiles[1]||color.percentiles[1]===1||!['sqrt','power'].includes(color.transfer)||!positive(color.exponent)||!fraction(color.minimumCoverage))throw new TypeError('Invalid scientific color mapping.');
     }
     if(dataset.coverage?.kind==='component-fits'&&(dataset.decode.kind!=='raster'||dataset.decode.crop||dataset.calibration||dataset.coverage.sources.some(path=>!sourcePaths.has(path))))throw new TypeError('Component coverage requires an uncropped RGB map and declared FITS sources.');
-    for(const continuation of[dataset.decode.continuation,dataset.coverage?.kind==='boundary-mean'?dataset.coverage:null])if(continuation&&(!positive(continuation.exponent)||!positive(continuation.boundaryFraction)||continuation.boundaryFraction>=1||!Number.isFinite(continuation.minimumBoundarySum ?? 0)))throw new TypeError('Invalid boundary continuation.');
+    for(const continuation of[dataset.decode.kind==='fits-planes'?undefined:dataset.decode.continuation,dataset.coverage?.kind==='boundary-mean'?dataset.coverage:null])if(continuation&&(!positive(continuation.exponent)||!positive(continuation.boundaryFraction)||continuation.boundaryFraction>=1||!Number.isFinite(continuation.minimumBoundarySum ?? 0)))throw new TypeError('Invalid boundary continuation.');
     if(dataset.calibration&&(!sourcePaths.has(dataset.calibration.source)||(dataset.decode.kind !== 'raster' || dataset.decode.channels!==3)))throw new TypeError('Invalid true-color calibration input.');
     operations(dataset.transforms);
     if(!isArray(dataset.products)||!dataset.products.length)throw new TypeError('Observation has no products.');
@@ -212,6 +218,25 @@ async function decodeRaster(bytes: Buffer | undefined,config: {channels: 3 | 4; 
   const {data,info}=await pipeline.raw().toBuffer({resolveWithObject:true});return {data,width:info.width,height:info.height,channels:info.channels};
 }
 
+/** A publisher's color cube: three FITS planes that hold display values, 0 to 255, read as red, green and blue. FITS
+ * stores its first row first; the recipe says which pole that row is, because a header can describe the other order.
+ * A crop, counted from the north-up map's top left, leaves out rows or columns the file holds no map in. */
+function decodeFitsPlanes(bytes: Buffer | undefined,config: {bitpix: number; width: number; height: number; firstRow: 'north' | 'south'; crop?: Region}): RasterMap {
+  if (!bytes) throw new TypeError('Observation has no verified source.');
+  const planes=[1,2,3].map(plane=>readFitsImage(bytes,{plane})),{left,top,width,height}=config.crop??{left:0,top:0,width:config.width,height:config.height};
+  if(planes.some(plane=>plane.planes!==3||plane.bitpix!==config.bitpix||plane.width!==config.width||plane.height!==config.height))throw new Error('Observed FITS geometry drifted.');
+  const data=Buffer.alloc(width*height*3);
+  for(let y=0;y<height;y++){
+    const row=(config.firstRow==='north'?top+y:config.height-1-top-y)*config.width+left;
+    for(let x=0;x<width;x++)for(let c=0;c<3;c++){
+      const value=planes[c].values[row+x];
+      if(!Number.isInteger(value)||value<0||value>255)throw new Error('Observed FITS planes are not 8-bit display values.');
+      data[(y*width+x)*3+c]=value;
+    }
+  }
+  return {data,width,height,channels:3};
+}
+
 /** Intersect the three measured filters before resampling the publisher's RGB image.
  * The recipe names whether the longitude endpoint repeats. Reversal and the
  * declared offset put releases with different origins in the same body frame. */
@@ -222,6 +247,11 @@ function componentCoverage(map: RasterMap, config: Extract<NonNullable<ReturnTyp
     if(scalar.width!==map.width||scalar.height!==map.height)throw new Error('RGB component coverage dimensions differ.');
     return measureScalarCoverage(scalar,{noData:0,coverage:'polar-connected-zero',seedRows:config.unobservedRows.flatMap(([first,last])=>[first,last])}).missing;
   });
+  return declaredCoverage(map,config,masks);
+}
+/** The rows a recipe declares unobserved, with any measured masks, laid out in the body frame: the map loses its color
+ * there and nothing is detected from pixel values. A source whose own file marks no missing sample takes this alone. */
+function declaredCoverage(map: RasterMap, config: {unobservedRows: readonly (readonly [number,number])[]; reverseLongitude: boolean; longitudeOffsetDegrees: number; longitudePeriod: number}, masks: readonly Uint8Array[]=[new Uint8Array(map.width*map.height)]) : RasterMap {
   const {width,height}=map,period=config.longitudePeriod,shift=config.longitudeOffsetDegrees/360*period;
   if(!Number.isInteger(shift)||!Number.isInteger(period)||![width,width-1].includes(period)||period<1)throw new Error('Map longitude offset must match the source grid.');
   for(const [first,last] of config.unobservedRows){
@@ -280,8 +310,10 @@ export async function prepareObservedSurfaces({sourceDirectory,publicDirectory,c
       const fits=readFitsPrimary(inputs.get(dataset.source));if(fits.bitpix!==dataset.decode.bitpix||fits.width!==dataset.decode.width||fits.height!==dataset.decode.height)throw new Error('Observed FITS geometry drifted.');
       let values=new Float32Array(fits.values);if(dataset.decode.continuation)values=continueBoundaryMean(values,{width:fits.width,height:fits.height,channels:1,...dataset.decode.continuation});
       map=percentileFalseColor(values,fits.width,fits.height,dataset.decode.color);
-    }else throw new TypeError('Unsupported observation decoder.');
+    }else if(dataset.decode.kind==='fits-planes')map=decodeFitsPlanes(inputs.get(dataset.source),dataset.decode);
+    else throw new TypeError('Unsupported observation decoder.');
     if(dataset.coverage?.kind==='component-fits')map=componentCoverage(map,dataset.coverage,inputs);
+    if(dataset.coverage?.kind==='declared-rows')map=declaredCoverage(map,dataset.coverage);
     let calibration;
     if(dataset.calibration){const target=await decodeRaster(inputs.get(dataset.calibration.source),{crop:dataset.calibration.targetSample,channels:3});calibration=affineColorCalibration(map,target,dataset.calibration);}
     if(dataset.coverage?.kind==='boundary-mean')map={...map,data:continueBoundaryMean(map.data,{...map,...dataset.coverage})};
@@ -293,6 +325,8 @@ export async function prepareObservedSurfaces({sourceDirectory,publicDirectory,c
     if(calibration){const data=Buffer.allocUnsafe(map.data.length);for(let offset=0;offset<data.length;offset+=3)for(let c=0;c<3;c++)data[offset+c]=Math.round(clamp(map.data[offset+c]*calibration.scale[c]+calibration.offset[c],0,255));map={...map,data,calibration};}
     // Maps indexed by planetographic latitude move to the parametric rows of the drawn ellipsoid.
     if(dataset.planetographicAxisRatio!==undefined)map={...map,data:planetographicRowsToMeshLatitude(map.data,map.width,map.height,map.channels,dataset.planetographicAxisRatio)};
+    // Sample rows of planetocentric latitude, poles included, move there too and come out one row fewer.
+    if(dataset.planetocentricSampleRows!==undefined)map={...map,height:map.height-1,data:planetocentricSampleRowsToMeshLatitude(map.data,map.width,map.height,map.channels,dataset.planetocentricSampleRows)};
     if(map.missing)map.missing=Uint8Array.from({length:map.width*map.height},(_,i)=>map.data[i*4+3]===255?0:1);
     const nativePoleMap=map,transformedMap=await transformMap(map,dataset.transforms);
     if(dataset.atmosphereColor)transformedMap.atmosphereColor=brightTailColor(transformedMap.data,dataset.atmosphereColor);maps.set(dataset.id,transformedMap);

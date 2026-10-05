@@ -10,7 +10,7 @@ import { inlinePageStylesheets } from "./site/build/inline-page-stylesheet.mts";
 import { searchServer } from './site/server/search-server.mts';
 import { prepareContextAvailability } from "./site/build/prepare/prepare-context-availability.mts";
 import { preparedMotionCss } from "./site/build/prepared-motion-css.mts";
-import { assetOrigin, resolveWorldBillboards } from "./site/asset-origin.mts";
+import { assetOrigin, resolveWorldBillboards } from "./site/server-assets/asset-origin.mts";
 
 function cssEarthVersion() {
   try {

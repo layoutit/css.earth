@@ -38,7 +38,7 @@ pnpm build
 node site/build/prepare/prepare-social-images.mts                  # all registered objects
 # node site/build/prepare/prepare-social-images.mts --object=earth # one object
 pnpm build                          # include the new images
-node --test site/test/seo-discovery.test.mts
+node --test site/journeys/seo-discovery.test.mts
 ```
 
 Inspect the images before committing them. A new object needs its own capture.
@@ -48,7 +48,7 @@ The social-image preparer starts and closes a preview on port 4266; pass
 ## Check metadata and deployment
 
 `site/test/seo.test.mts` checks the homepage metadata, the breadcrumb trails and
-that every scene page has a share image of its own. `site/test/seo-discovery.test.mts` checks the reachability algorithm with synthetic
+that every scene page has a share image of its own. `site/journeys/seo-discovery.test.mts` checks the reachability algorithm with synthetic
 page graphs. It does not crawl a running site. Inspect the built HTML and an
 already-running preview for titles, descriptions, canonical URLs, headings,
 sitemap coverage and image dimensions. The retired `seo-browser.mts` runner and

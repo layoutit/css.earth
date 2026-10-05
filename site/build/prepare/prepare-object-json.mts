@@ -26,7 +26,7 @@ import { basename, resolve, sep } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { authoredObject } from '@cssearth/bake/sources';
 import { preparePresentationBindings, withImageSizes, withKeptPoolBudgets } from '@cssearth/bake/prepared-presentation';
-import { objectPageStyles } from '../../object-page-contract.mts';
+import { objectPageStyles } from '../../contracts/object-page-contract.mts';
 import { readPreparedObjects } from '@cssearth/objects/node';
 
 const SCENE_OBJECTS = readPreparedObjects(resolve(import.meta.dirname, '../../..')).sceneObjects;

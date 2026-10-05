@@ -1,6 +1,6 @@
 import type { BrowserWindow } from '../browser/browser-types.mts';
 import { isRecord } from '@cssearth/core';
-import { objectIdAtPath } from '../root-object.mts';
+import { objectIdAtPath } from '../model/root-object.mts';
 import type { NavigationHistory, NavigationIntent } from './navigation-types.mts';
 type Navigate = (id: string, intent: NavigationIntent) => unknown;
 interface NavigationAnchor { href: string; target?: string; hasAttribute(name: string): boolean; getAttribute(name: string): string | null; }

@@ -1,0 +1,48 @@
+{
+  "id": "arxiv-astro-ph-0609715",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Weigelt (2006): Near-Infrared interferometry of Eta Carinae with high spatial and spectral resolution using the VLTI and the AMBER instrument",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "astro-ph/0609715"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361:20065577"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/astro-ph/0609715",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361:20065577",
+      "label": "Journal version"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/astro-ph/0609715",
+      "checkedOn": "2026-10-05",
+      "locator": "arXiv API record: title, authors, journal reference"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Weigelt (2006)",
+      "scope": "citation",
+      "evidence": "https://arxiv.org/abs/astro-ph/0609715"
+    }
+  ],
+  "creators": [
+    "G. Weigelt"
+  ],
+  "publicationDate": "2006"
+}

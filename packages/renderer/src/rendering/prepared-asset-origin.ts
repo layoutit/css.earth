@@ -32,7 +32,7 @@ export function resolvePreparedAssetUrl(address: string, assetOrigin: PreparedAs
   return `${assetOrigin.origin}/runtime-assets/${digest}/${filename}`;
 }
 
-// Matches `site/asset-origin.mts`'s `CSS_SCENE_URL`: `url(` and its closing `)` may wrap
+// Matches `site/server-assets/asset-origin.mts`'s `CSS_SCENE_URL`: `url(` and its closing `)` may wrap
 // the quoted address across lines, so whitespace is allowed around it but excluded from it.
 const STYLE_SCENE_URL = /url\(\s*(["']?)(\/scenes\/[a-z][a-z0-9-]*\/[^\s"')]+)\1\s*\)/gu;
 

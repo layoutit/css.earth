@@ -19,7 +19,7 @@ import { prepareDepthPartitions, restoreDepthSource } from './prepared-depth-par
 import { verifyDepthStyles } from './prepared-depth-styles.ts';
 
 /** The stylesheets an object's page loads, in cascade order, as repository paths. The application owns its page, so it
- * passes this in (`objectPageStyles` in `site/object-page-contract.mts`). */
+ * passes this in (`objectPageStyles` in `site/contracts/object-page-contract.mts`). */
 export type ObjectPageStyles = (descriptor: unknown) => readonly string[];
 
 /** Resolve authored motion offline. Runtime receives explicit animation

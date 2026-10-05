@@ -1,6 +1,6 @@
 import { type CameraPlan } from '@cssearth/objects';
 
-/** The camera plan fields the responsive fit reads; a page bakes them for its startup cover (site/startup-cover.mts). */
+/** The camera plan fields the responsive fit reads; a page bakes them for its startup cover (site/startup/startup-cover.mts). */
 export type ResponsiveZoomPlan = Pick<CameraPlan, 'responsiveFit' | 'logicalBodyDiameter' | 'defaultZoom' | 'framingScale' | 'projection'>;
 export interface ResponsiveZoomOptions { plan: ResponsiveZoomPlan; mobile: boolean; framingReferenceZoom?: number; viewport: import('./camera-viewport.js').CameraViewport; }
 import { smoothstep } from "@cssearth/engine";

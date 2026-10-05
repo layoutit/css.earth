@@ -797,7 +797,8 @@ same published law, so the limb in the app is the limb the instrument saw.
   | Venus | Minnaert, k 1.32 to 1.36 | [Pérez-Hoyos et al. 2018](https://doi.org/10.1002/2017JE005406), MESSENGER MASCS |
   | Mars | Hapke, surface only | [Vincendon 2013](https://doi.org/10.1016/j.pss.2012.12.005), OMEGA and CRISM |
   | Jupiter | Minnaert per channel | [Simon et al. 2015](https://doi.org/10.1088/0004-637X/812/1/55), OPAL |
-  | Saturn, Uranus, Neptune | Minnaert per channel | the OPAL README of each map |
+  | Saturn | Minnaert per display channel: the README's exponents weighted by the light each channel shows | the [OPAL README](https://archive.stsci.edu/missions/hlsp/opal/cycle32/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2025_all_v1_readme.txt) of its map and the spectrum of [Karkoschka 1998](https://doi.org/10.1006/icar.1998.5913), weighted by [display-limb.mts](../packages/bake/authoring/saturn/display-limb.mts) |
+  | Uranus, Neptune | Minnaert per channel | the OPAL README of each map |
   | Earth | Minnaert per channel | fitted here to six [DSCOVR EPIC](https://epic.gsfc.nasa.gov/about) Level 1B frames ([fit-epic-limb.mts](../packages/bake/cli/fit-epic-limb.mts)) |
   | Moon | Hapke at 643 nm | [Sato et al. 2014](https://doi.org/10.1002/2013JE004580), the correction of the LROC WAC mosaic; w, b and h_S are medians of its PDS parameter map |
   | Ceres (dwarf planet) | Hapke at 749 nm | [Li et al. 2019](https://doi.org/10.1016/j.icarus.2018.12.038), Dawn Framing Camera |

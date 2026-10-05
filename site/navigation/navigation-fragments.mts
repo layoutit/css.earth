@@ -1,4 +1,4 @@
-import { objectIdAtPath } from '../root-object.mts';
+import { objectIdAtPath } from '../model/root-object.mts';
 import type { BrowserWindow } from '../browser/browser-types.mts';
 
 /**

@@ -6,7 +6,7 @@ import { errorMessage } from '../browser/browser-types.mts';
 import type { NavigationRequest } from '../navigation/navigation-lifecycle.mts';
 import type { ObjectShell } from '../shell/object-shell-types.mts';
 import type { WorldHandoff } from '../prepared-world-navigation.mts';
-import type { bindViewUrl } from '../view-url-runtime.mts';
+import type { bindViewUrl } from '../navigation/view-url-runtime.mts';
 import { requireSceneLifecycle } from '@cssearth/renderer/runtime/shell-contract.ts';
 
 export type SceneSessionState =

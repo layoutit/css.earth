@@ -207,10 +207,10 @@ For changes to dataset selection or routing, also run the affected
 router tests for cancellation and history.
 
 For dataset navigation or card presentation changes, run the affected
-[dataset response](../../site/test/dataset-response.test.mts),
-[URL](../../site/test/dataset-url.test.mts) and
-[scene session](../../site/test/scene-session.test.mts) tests. After a build,
-[`rendered-page.test.mts`](../../site/test/rendered-page.test.mts) parses the
+[dataset response](../../site/server/dataset-response.test.mts),
+[URL](../../site/model/dataset-url.test.mts) and
+[scene session](../../site/scene/scene-session.test.mts) tests. After a build,
+[`rendered-page.test.mts`](../../site/journeys/rendered-page.test.mts) parses the
 built HTML to check that the information-tab rules live in the scene head, not in
 the replaceable card. It does not exercise navigation or inspect browser screenshots.
 A source association does not certify texture delivery or scientific accuracy.

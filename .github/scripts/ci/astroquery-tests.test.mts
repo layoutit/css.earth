@@ -20,7 +20,7 @@ test('astroquery classification and workflow preserve the protected lane', async
   const config = await loadCiAreasConfig();
   for (const path of ['packages/telescope/src/node/toolchain/python.ts', 'packages/telescope/toolchains/toolchain.json', 'packages/telescope/toolchains/requirements.lock', 'packages/telescope-cli/src/toolchains/astronomy-toolchains.mts', 'packages/telescope-cli/src/archives/jwst/toolchain.json', 'packages/telescope-cli/src/archives/toolchain-descriptor.mts', 'packages/telescope-cli/src/vo/package.mts', 'packages/telescope-cli/src/families/f07-dynamic-spectrum.mts', '.github/ci-areas.json', 'packages/telescope-cli/src/families/f07-dynamic-spectrum.test.mts', 'packages/telescope-cli/src/vo/package.test.mts', '.github/workflows/universe.yml'])
     assert.ok(classifyAffectedPaths([path], config).jobs.has('astroquery'), path);
-  for (const path of ['README.md', 'site/runtime-policy.mts'])
+  for (const path of ['README.md', 'site/browser/runtime-policy.mts'])
     assert.equal(classifyAffectedPaths([path], config).jobs.has('astroquery'), false, path);
   const workflow = requireRecord(parse(await readFile(new URL('../../workflows/universe.yml', import.meta.url), 'utf8')));
   const jobs = requireRecord(workflow.jobs), job = requireRecord(jobs.astroquery);

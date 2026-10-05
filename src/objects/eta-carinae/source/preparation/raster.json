@@ -1,0 +1,65 @@
+{
+  "schema": "cssearth-raster-recipe@2",
+  "publicBase": "/scenes/eta-carinae/",
+  "sourceWidth": 1024,
+  "sourceHeight": 512,
+  "width": 1024,
+  "height": 512,
+  "latitudeBands": 16,
+  "polarTile": 256,
+  "resample": "density-before-pack",
+  "polarProjection": "orthographic-bilinear",
+  "polesOutput": "eta-carinae-poles-{id}{suffix}.webp",
+  "surfaceMetadata": {
+    "schema": "csseta-carinae-prepared-assets@1"
+  },
+  "thumbnail": {
+    "size": 64,
+    "centerLongitudeDegrees": 0
+  },
+  "surfaces": [
+    {
+      "id": "color",
+      "output": "eta-carinae-surface-{id}{suffix}.webp",
+      "thumbnail": "eta-carinae-dataset-{id}.webp",
+      "source": "photometry/stellar-color.json",
+      "falseColor": false,
+      "science": {
+        "kind": "stellar-photometric-color",
+        "qualification": "Photosphere color from a blackbody at the star's published temperature. The wind's measured brightness profile is drawn from its record beside the star (source/photometry, new-object --star-limb).. The disc is unresolved: no map or absolute brightness is implied. Self-luminous, so no lighting. The disc is dimmed toward the limb by the power law I(mu) = mu^6.05 whose brightness is half the centre's at the diameter Weigelt et al. (2007), arXiv:astro-ph/0609715 measured for it, 2.33 mas, on a disc that ends at their tenth-brightness diameter, 5.15 mas (VLTI/AMBER K-band continuum at 2.174 um; not a visible band).",
+        "limbDarkening": {
+          "law": "power",
+          "published": true,
+          "path": "photometry/weigelt-2007-limb-darkening.json"
+        }
+      }
+    }
+  ],
+  "emission": {
+    "offLimbSize": 600,
+    "limbSize": 512,
+    "bodyDiameter": 496,
+    "offLimbOutput": "eta-carinae-context-{id}{suffix}.webp",
+    "limbOutput": "eta-carinae-limb-{id}{suffix}.webp",
+    "metadata": {
+      "schema": "csseta-carinae-prepared-emission@1",
+      "presentation": "prepared-emissive-surface-with-stationary-off-limb-context-and-limb-plate",
+      "offLimbContext": {
+        "logicalSize": 600,
+        "source": "none: no observation, a transparent plate",
+        "composition": "transparent",
+        "rotation": "none",
+        "runtimeAlphaProcessing": false
+      },
+      "limbMaterial": {
+        "logicalSize": 496,
+        "composition": "black alpha darkens the photosphere according to the selected limb-darkening law; transparent outside the silhouette",
+        "surfaceReplacement": false,
+        "runtimeAlphaProcessing": false
+      },
+      "lighting": false,
+      "shadows": false,
+      "runtimeLighting": false
+    }
+  }
+}

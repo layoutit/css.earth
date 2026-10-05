@@ -7,7 +7,7 @@ import { resolve } from 'node:path';
 import sharp from 'sharp';
 import { SCENE_OBJECTS } from '../objects.mts';
 import { billboardSocialImages } from '../social-images.mts';
-import { resolveBuildSceneAddress } from '../asset-origin.mts';
+import { resolveBuildSceneAddress } from '../server-assets/asset-origin.mts';
 
 const root = resolve(import.meta.dirname, '../..');
 const WIDTH = 1200, HEIGHT = 630;

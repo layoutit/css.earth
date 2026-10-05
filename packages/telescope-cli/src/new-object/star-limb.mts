@@ -2,7 +2,8 @@
  *
  * The law comes from the first source that holds the star:
  * 1. a law transcribed from a paper beside the star (`source/photometry/<name>-limb-darkening.json`, cssearth-published-limb-darkening@1,
- *    quadratic or power), a measurement or the model a paper fixed for this star;
+ *    quadratic or power), a measurement or the model a paper fixed for this star. A power law that follows from sizes a paper
+ *    prints, not from an exponent it prints, says how in `derived`, and the star's texts say it in those words;
  * 2. the model grids of limb.mts, at the star's temperature and gravity (and mass, for spherical models). The gravity is the star's
  *    mass and radius in its astronomy record, else a published spectroscopic value (gravity.mts), searched at the star's J2000
  *    position: the record's, carried back from its own epoch by its proper motion.
@@ -72,6 +73,7 @@ async function publishedLaw(root: string, id: string): Promise<LimbChoice | null
     // A law fitted in this package to a pinned input says so, and names the tool that refits it; any other record is a paper's.
     const terms = coefficients.law === 'power' ? `power law I(mu) = mu^${coefficients.alpha}` : `quadratic law (u1 ${coefficients.u1}, u2 ${coefficients.u2})`;
     const law = fit ? `the ${terms} fitted in this package to ${fit.data} (${record.band})`
+      : coefficients.law === 'power' && record.derived !== undefined ? `the ${terms} ${requireString(record.derived, 'derived')} (${record.band})`
       : coefficients.law === 'power' ? `the ${terms} that ${credit} fit to the star's resolved disc (${record.band})`
       : `the ${terms} ${credit} ${record.basis === 'model-prior' ? 'fixed from model atmospheres for this star' : 'fit to this star'} (${record.band})`;
     return { limbDarkening: { law: record.law === 'power' ? 'power' : 'quadratic', published: true, path }, sentence: `dimmed toward the limb by ${law}`, credit: `Limb darkening: ${credit}.`,

@@ -381,6 +381,23 @@
           "path": "../opal-dates/hlsp_opal_hst_wfc3-uvis_saturn-2025a_f395n-f502n-f631n_v1_globalmap.tif",
           "url": "https://archive.stsci.edu/hlsp/opal/opal-saturn-cycle-32"
         }
+      },
+      {
+        "id": "cassini-2011",
+        "label": "Cassini 2011",
+        "shortLabel": "Cassini",
+        "thumbnail": "/scenes/saturn/saturn-dataset-cassini-2011.webp",
+        "surface": "/scenes/saturn/saturn-surface-cassini-2011@2x.webp",
+        "poles": "/scenes/saturn/saturn-poles-cassini-2011.webp",
+        "falseColor": false,
+        "noData": true,
+        "qualification": "Cassini ISS · 2011-08-11 · enhanced color",
+        "notes": "Cassini wide-angle frames of 2011-08-11 in the RED, GRN and BL1 filters, mapped by Li, West, Jiang and Knowles (NASA PDS Atmospheres Node). This is the archive's contrast-enhanced color map: each color was stretched on its own, so the colors are stronger than the eye would see. The band of disturbed clouds around the north is what the great storm first seen on 5 December 2010 left behind. Gray grid marks what the map does not hold: both polar caps, the rings' line at the equator and the rings' shadow from 5 to 17 degrees south. The darker strip above that band is the edge of the same shadow. The scene lighting and rings follow the existing body presentation, not the observation date.",
+        "source": {
+          "id": "cassini-iss-2011-color-map-enhanced",
+          "path": "../cassini-iss/Cassini_ISS_RGB_Saturn_global_color_map_contrast_enhance.fits",
+          "url": "https://doi.org/10.17189/rkkb-6y30"
+        }
       }
     ]
   },
