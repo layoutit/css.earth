@@ -33,7 +33,9 @@ type Residency = ReturnType<NonNullable<RuntimeServices["createResources"]>>;
 type Lifetime = ReturnType<NonNullable<RuntimeServices["createLifetime"]>>;
 type Playback = ReturnType<NonNullable<RuntimeServices["createPlayback"]>>;
 type Orbit = ReturnType<NonNullable<RuntimeServices["createOrbit"]>>;
-interface HarnessOptions { initialWorldCamera?: ObjectMountOptions["initialWorldCamera"]; definition?: ObjectRuntimeDefinition; failAtElement?: number | null; stageId?: string | null; runtimeFactory?: RuntimeFactory; diagnostics?: boolean; }
+interface HarnessOptions { initialWorldCamera?: ObjectMountOptions["initialWorldCamera"]; definition?: ObjectRuntimeDefinition; failAtElement?: number | null; stageId?: string | null; runtimeFactory?: RuntimeFactory; diagnostics?: boolean;
+  /** The view the stand-in camera publishes when it is invalidated: the fixture's own by default. */
+  invalidated?: () => OrbitPublication | null; }
 interface DecodeJob { resolve(): void; reject(error: unknown): void; image: ControlledImage; done: boolean; }
 class ControlledImage implements PreparedImage {
   src = ""; naturalWidth = 1; naturalHeight = 1; decoding: "async" = "async";
@@ -83,6 +85,7 @@ function harness(options: HarnessOptions = {}, overrides: Partial<RuntimeService
     };
     created.push(node as unknown as HTMLElement); return node;
   };
+  let invalidations = 0;
   let lifetime: Lifetime | null = null, playback: Playback | null = null, resources: Residency | null = null, resourceOptions: ResourceOptions | null = null, orbitArguments: OrbitOptions | null = null, coordinator: Selection | null = null;
   const publication: OrbitPublication = { ...objectView(definition), sunViewDirection: [1, 0, 0] };
   let runtime: Runtime;
@@ -102,7 +105,7 @@ function harness(options: HarnessOptions = {}, overrides: Partial<RuntimeService
         const state = (): ReturnType<Orbit["state"]> => ({ ...publication,
           distance: 12345000, distanceKilometers: 12345, distanceRadii: 12345000, focal: 1000, projectionScale: 1, principalOffset: [0,0], visibleRect: null, offAxisDegrees: null, silhouetteRadius: null,
           levelOfDetail: { stage: 'geometry', silhouetteDiameter: 400, billboardOpacity: 0, markerOpacity: 0, proxyOpacity: 0 }, pitch: publication.controlPitch, pose: { schema: "cssearth-camera-pose@2" as const, scene: matrix } });
-        return { publicationState: () => ({ requestedRevision: 0, presentedRevision: 0, presentedWorld: null }), mobilePageFlow: () => false, initialResponsiveZoom: () => definition.camera.defaultZoom, currentResponsiveZoom: () => definition.camera.defaultZoom, setZoomOutCentering() {}, setZoomOutOpen() {}, nearest: () => false, zoomRate: () => 0, resumeZoom() {}, captureWorldCamera() { throw new Error("unused"); }, applyWorldCamera() {}, rebaseScene() {}, flyToState: async (...args: Parameters<Orbit["flyToState"]>) => { flights.push(args); return { completed: true }; }, turn: async () => ({ completed: true }), invalidate: () => orbitConfiguration.onPublish?.(publication), refresh: () => orbitConfiguration.onPublish?.(publication), setState: (value: Parameters<Orbit["setState"]>[0]) => { events.push("camera:reset"); Object.assign(publication, value); return state(); }, state, sharedState: () => ({ distanceKilometers: 12345, pose: { schema: "cssearth-camera-pose@2", scene: matrix } }), skyState: () => ({ sunViewDirection: null, sunVisible: false, sunClassification: "absent" }), stats: (): never => { throw new Error("Orbit stats are outside this mount harness."); }, destroy() { events.push("remove:orbit"); } } satisfies Orbit;
+        return { publicationState: () => ({ requestedRevision: 0, presentedRevision: 0, presentedWorld: null }), mobilePageFlow: () => false, initialResponsiveZoom: () => definition.camera.defaultZoom, currentResponsiveZoom: () => definition.camera.defaultZoom, setZoomOutCentering() {}, setZoomOutOpen() {}, nearest: () => false, zoomRate: () => 0, resumeZoom() {}, captureWorldCamera() { throw new Error("unused"); }, applyWorldCamera() {}, rebaseScene() {}, flyToState: async (...args: Parameters<Orbit["flyToState"]>) => { flights.push(args); return { completed: true }; }, turn: async () => ({ completed: true }), invalidate: () => { invalidations++; const view = options.invalidated ? options.invalidated() : publication; if (view) orbitConfiguration.onPublish?.(view); }, refresh: () => orbitConfiguration.onPublish?.(publication), setState: (value: Parameters<Orbit["setState"]>[0]) => { events.push("camera:reset"); Object.assign(publication, value); return state(); }, state, sharedState: () => ({ distanceKilometers: 12345, pose: { schema: "cssearth-camera-pose@2", scene: matrix } }), skyState: () => ({ sunViewDirection: null, sunVisible: false, sunClassification: "absent" }), stats: (): never => { throw new Error("Orbit stats are outside this mount harness."); }, destroy() { events.push("remove:orbit"); } } satisfies Orbit;
       },
       waitDocument: () => Promise.resolve(), waitPaint: () => Promise.resolve(), ...overrides,
     });
@@ -124,7 +127,7 @@ function harness(options: HarnessOptions = {}, overrides: Partial<RuntimeService
   function restore() { try { runtime.destroy(); } finally { f.restore(); } }
   return { ...f, runtime, errors, jobs, events, flights, native, created, complete, resolveJobs, restore,
     lifetime: () => required(lifetime, "lifetime"), playback: () => required(playback, "playback"), selection: () => required(coordinator, "selection"),
-    resources: () => required(resources, "resources"), resourceOptions: () => required(resourceOptions, "resource options"), orbitArguments: () => required(orbitArguments, "orbit options") };
+    resources: () => required(resources, "resources"), resourceOptions: () => required(resourceOptions, "resource options"), orbitArguments: () => required(orbitArguments, "orbit options"), invalidations: () => invalidations };
 }
 
 test("production mount restores camera and native playback through its shared view contract", async t => {
@@ -208,6 +211,29 @@ test("optional warm decode failure is recoverable while native cleanup failure i
 test('mount rejects an uncompiled motion document instead of discovering live CSS animations', () => {
   const { motion, ...uncompiled } = moonDefinition;
   assert.throws(() => createObjectRuntime(uncompiled), /motion bindings must be prepared/);
+});
+
+test("a commit that changes whether the mesh has its textures publishes the view again", async t => {
+  // The stand-in camera publishes the view it was last given, as the camera does at rest.
+  let last: OrbitPublication | null = null;
+  // The commits the selection had made at each invalidation.
+  const commitsSeen: number[] = [];
+  const h = harness({ invalidated: () => { commitsSeen.push(h.selection().stats().commits); return last; } }); t.after(h.restore); await h.complete();
+  const canReveal = h.orbitArguments().canReveal!, deferred = () => h.selection().state().plan?.deferredTextures === true;
+  const publish = (view: OrbitPublication) => { last = view; h.orbitArguments().onPublish!(view); };
+  const near: OrbitPublication = { ...publicationForTest(), sunViewDirection: [1, 0, 0] };
+  const far: OrbitPublication = { ...near, levelOfDetail: { ...near.levelOfDetail, stage: "marker" } };
+  assert.equal(canReveal(), true);
+  // Too far to draw: the plan defers the textures, and the camera hears of it without moving.
+  let before = h.invalidations();
+  publish(far); await h.resolveJobs();
+  assert.equal(deferred(), true); assert.equal(canReveal(), false);
+  assert.equal(h.invalidations(), before + 1);
+  // Near again: the commit that brings the textures back lands after the camera's last publication.
+  publish(near); await h.resolveJobs();
+  assert.equal(deferred(), false); assert.equal(canReveal(), true);
+  assert.equal(commitsSeen.at(-1), h.selection().stats().commits, "the view is published again after the commit, not only before it");
+  assert.deepEqual(h.errors, []);
 });
 
 test("hidden departure frames keep world publication without rescheduling detail or readouts", async t => {
