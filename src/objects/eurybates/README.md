@@ -29,7 +29,7 @@ Checked 2026-10-06 against the deposit's files.
 - Pole: solution 2 is 2.3° from the pole of Mottola et al. (2023), (320°, −60°), which an occultation told apart from its mirror; solution 1 is 74.1° away. Solution 2 is shown.
 - Period: 8.702737 h against their 8.7027283 ± 0.0000029 h.
 - Dimensions: at the adopted volume the mesh measures 81.7 × 79.9 × 63.1 km where their Table 3 lists 77.5 × 71.3 × 61.8 km for their own model: 5%, 12% and 2% larger.
-- Display shape: 800 faces from the source's 1144, with an estimated error of 118.9 m inside the 683 m allowance (2% of the radius).
+- Display shape: the fewest faces the error allowance permits, 348 of at most 800, from the source's 1144. The farthest sampled point of the source lies 650.8 m from it, inside the 683 m allowance (2% of the radius).
 - Browser: the default view below, in headless Chrome 1280 × 800 from the local site after the bake, with every image loaded and no page error.
 
 ![Eurybates in the app, default view](evidence/2026-10-06/default-view.jpg)

@@ -29,7 +29,7 @@ Checked 2026-10-06 against the deposit's files.
 - Proportions about the spin axis: solution 1 has 2.028 × 1.042 × 1, solution 2 has 2.317 × 1.423 × 1; Oberst et al. (2001) give 2.1 × 1 × 1 km from two Deep Space 1 images and ground-based photometry. Solution 1 is shown.
 - Period: the model's sidereal 227.854386 h against the published synodic estimate of 226.4 ± 1.3 h.
 - Size: at the adopted scale the mesh measures 2.07 × 1.06 × 1.02 km.
-- Display shape: 800 faces from the source's 1144, with an estimated error of 1.4 m inside the 11.9 m allowance (2% of the radius).
+- Display shape: the fewest faces the error allowance permits, 244 of at most 800, from the source's 1144. The farthest sampled point of the source lies 9.3 m from it, inside the 11.9 m allowance (2% of the radius).
 - Browser: the default view below, in headless Chrome 1280 × 800 from the local site after the bake, with every image loaded and no page error.
 
 ![Braille in the app, default view](evidence/2026-10-06/default-view.jpg)

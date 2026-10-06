@@ -29,7 +29,7 @@ Checked 2026-10-06 against the deposit's files.
 - Period: the model's 1303.393531 h is 1.3% from the 1320 h the JPL Small-Body Database quotes from the Lightcurve Database ([pinned record](source/reference/sbdb.json), `rot_per`). The model this package showed before, DAMIT 5835, had 46.22 h; Table 2 of the paper lists it among the DAMIT periods it corrects.
 - Pole: the new solution (285.6°, 56.9°) is 30° from DAMIT 5835's (269°, 87°). Nothing independent measures the pole.
 - Proportions about the spin axis: 2.217 × 0.958 × 1 (longest extent across the axis, the extent at right angles to it, the extent along it).
-- Display shape: 800 faces from the source's 1144, with an estimated error of 3.9 m inside the 48.39 m allowance (2% of the radius).
+- Display shape: the fewest faces the error allowance permits, 264 of at most 800, from the source's 1144. The farthest sampled point of the source lies 42.7 m from it, inside the 48.39 m allowance (2% of the radius).
 - Browser: the default view below, in headless Chrome 1280 × 800 from the local site after the bake, with every image loaded and no page error.
 
 ![Raup in the app, default view](evidence/2026-10-06/default-view.jpg)

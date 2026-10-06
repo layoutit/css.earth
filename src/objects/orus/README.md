@@ -29,7 +29,7 @@ Checked 2026-10-06 against the deposit's files.
 - Pole: solution 1 is 5.4° from the pole of Mottola et al. (2023), (33°, −59°), which an occultation told apart from its mirror; solution 2 is 57° away. Solution 1 is shown.
 - Period: 13.486235 h against their 13.486190 ± 0.000017 h.
 - Dimensions: at the adopted volume the mesh measures 70.4 × 59.8 × 58.2 km where their Table 3 lists 70.7 × 63 × 51.4 km for their own model: the mesh is 13% thicker along the spin axis and 5% narrower across it.
-- Display shape: 800 faces from the source's 1144, with an estimated error of 78.9 m inside the 600 m allowance (2% of the radius).
+- Display shape: the fewest faces the error allowance permits, 282 of at most 800, from the source's 1144. The farthest sampled point of the source lies 521.6 m from it, inside the 600 m allowance (2% of the radius).
 - Browser: the default view below, in headless Chrome 1280 × 800 from the local site after the bake, with every image loaded and no page error.
 
 ![Orus in the app, default view](evidence/2026-10-06/default-view.jpg)
