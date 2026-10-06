@@ -37,9 +37,10 @@ const PARSEC_M = 3.085677581491367e16;
 /** How far gone a galaxy or a cluster of galaxies is, 0 to 1, by the camera's distance from the focus; null for any other
  * body. Each is named at its own scale (UI thresholds, the ones the catalogue drew them by): a galaxy from 1 to 10 kpc out,
  * giving way over 12 to 40 Mpc; a cluster from 3 to 10 Mpc out. A nebula or a globular cluster is a body of the Milky Way
- * and fades as its stars do. */
-export function extendedRetirement(classification: string | undefined, cameraFromFocusM: number): number | null {
-  if (classification === 'galaxy') return 1 - logarithmicFade(cameraFromFocusM, 1e3 * PARSEC_M, 10e3 * PARSEC_M) * (1 - logarithmicFade(cameraFromFocusM, 12e6 * PARSEC_M, 40e6 * PARSEC_M));
+ * and fades as its stars do. `kept`: a galaxy of a highlighted category does not give way. The Galaxies pill frames the
+ * Nearby Universe's galaxies from 70 Mpc, where every one had gone and the pill marked none (2026-10-06). */
+export function extendedRetirement(classification: string | undefined, cameraFromFocusM: number, kept = false): number | null {
+  if (classification === 'galaxy') return 1 - logarithmicFade(cameraFromFocusM, 1e3 * PARSEC_M, 10e3 * PARSEC_M) * (kept ? 1 : 1 - logarithmicFade(cameraFromFocusM, 12e6 * PARSEC_M, 40e6 * PARSEC_M));
   if (classification === 'galaxy-cluster') return 1 - logarithmicFade(cameraFromFocusM, 3e6 * PARSEC_M, 10e6 * PARSEC_M);
   return null;
 }
