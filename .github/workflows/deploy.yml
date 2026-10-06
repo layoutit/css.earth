@@ -27,7 +27,7 @@ jobs:
         with:
           # An automatic run checks out the exact main commit whose checks passed.
           ref: ${{ github.event_name == 'workflow_run' && github.event.workflow_run.head_sha || '' }}
-          # __CSSEARTH_VERSION__ (astro.config.mts) counts commits with `git rev-list --count HEAD`;
+          # __CSSEARTH_VERSION__ (site/astro.config.mts) counts commits with `git rev-list --count HEAD`;
           # a shallow checkout would undercount it.
           fetch-depth: 0
       - uses: pnpm/action-setup@f40ffcd9367d9f12939873eb1018b921a783ffaa # v4
@@ -47,7 +47,7 @@ jobs:
         # R2 closure. Its catalog-only preparation does not publish preview bytes or rewrite asset inventories;
         # those authoring outputs must be published explicitly before a deploy is allowed to reference them.
         # ASSET_ORIGIN points every texture, scene JSON and startup preload at the published R2
-        # bucket instead of bundling site/public/scenes (1.44 GB) into the deploy; astro.config.mts
+        # bucket instead of bundling site/public/scenes (1.44 GB) into the deploy; site/astro.config.mts
         # removes dist/scenes once the build finishes and the assemble step tolerates its absence.
         # Publication proof: with no restored cache, the build's first setup downloads every inventoried key from that
         # R2 origin and checks its bytes against the inventory's content address (about 30 s for 19,954 keys); a key R2 does not serve fails the

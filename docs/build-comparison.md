@@ -145,7 +145,7 @@ checkout before accepting a move.
 
 [Site safety net](../.github/workflows/site-safety-net.yml) selects the full lane
 only when the diff touches `applicationSource`: `site/`, `src/`,
-`packages/*/src/` or `astro.config.mts`, excluding test/spec modules. Both names
+`packages/*/src/`, which holds the Astro config `site/astro.config.mts` too, excluding test/spec modules. Both names
 of a rename count. `tool-change` and workflow dispatch force the lane.
 Declarations, `refactor`, `compare-build` and an `untangle` branch alone do not
 select builds. Docs/tools/test-only changes rely on the changed tools' own

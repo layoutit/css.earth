@@ -76,7 +76,7 @@ async function prepare() {
 
 async function startServer(port: number) {
   await prepare();
-  const child = spawn('pnpm', ['exec', 'astro', 'dev', '--host', '0.0.0.0', '--port', String(port)],
+  const child = spawn('pnpm', ['exec', 'astro', 'dev', '--config', 'site/astro.config.mts', '--host', '0.0.0.0', '--port', String(port)],
     { cwd: root, stdio: 'inherit' });
   let exit: number | null | undefined;
   child.once('exit', code => { exit = code; });

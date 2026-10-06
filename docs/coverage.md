@@ -148,7 +148,7 @@ export TMPDIR="$RUN_DIR/tmp"
 cat > "$RUN_DIR/unminified.config.mts" <<'TS'
 import { defineConfig } from 'astro/config';
 import { pathToFileURL } from 'node:url';
-const { default: original } = await import(pathToFileURL(`${process.cwd()}/astro.config.mts`).href);
+const { default: original } = await import(pathToFileURL(`${process.cwd()}/site/astro.config.mts`).href);
 export default defineConfig({ ...original, vite: {
   ...original.vite,
   build: { ...original.vite?.build, minify: false, sourcemap: 'hidden' },

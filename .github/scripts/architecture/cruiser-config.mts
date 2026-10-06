@@ -2,7 +2,7 @@
  * the rules live in `rules.mts` and are evaluated against the committed baseline. */
 import type { ICruiseOptions } from 'dependency-cruiser';
 
-/** Source trees the cruise starts from. Root configuration files (`astro.config.mts` and other
+/** Source trees the cruise starts from. Root configuration files (`eslint.config.mts` and other
  * `*.config.*`) are added from the tracked file list, and `.astro` files are scanned separately
  * (`astro-imports.mts`), because dependency-cruiser has no `.astro` transpiler. `.github/scripts` holds the CI and
  * repository checks. */

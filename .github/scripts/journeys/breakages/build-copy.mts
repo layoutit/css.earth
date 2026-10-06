@@ -19,7 +19,7 @@ await mkdir(resolve(copy, 'output/tmp'), { recursive: true });
 if (id !== 'control') await apply(copy, id);
 const at = Date.now(), log = await open(resolve(evidence, 'build.log'), 'w');
 await writeFile(resolve(evidence, 'status.json'), JSON.stringify({ state: 'building', copy }));
-const child = spawn('pnpm', ['exec', 'astro', 'build', '--outDir', 'dist-proof'], { cwd: copy,
+const child = spawn('pnpm', ['exec', 'astro', 'build', '--config', 'site/astro.config.mts', '--outDir', 'dist-proof'], { cwd: copy,
   env: { ...process.env, TMPDIR: resolve(copy, 'output/tmp'), NODE_OPTIONS: '--max-old-space-size=6144', ASTRO_TELEMETRY_DISABLED: '1', TELEMETRY_DISABLED: '1' },
   detached: true, stdio: ['ignore', log.fd, log.fd] });
 const stop = () => { if (child.pid) { try { process.kill(-child.pid, 'SIGTERM'); } catch { /* Already closed. */ } } };

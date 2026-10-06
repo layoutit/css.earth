@@ -24,7 +24,7 @@ assets are already available. Follow [CONTRIBUTING](../.github/CONTRIBUTING.md) 
 From the repository root, start the existing site and then the experiment:
 
 ```sh
-pnpm exec astro dev --host 127.0.0.1 --port 4349
+pnpm exec astro dev --config site/astro.config.mts --host 127.0.0.1 --port 4349
 node labs/experiments/native-scroll/run.mts
 ```
 
