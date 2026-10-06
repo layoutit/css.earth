@@ -21,7 +21,7 @@ export type AstroqueryRequest =
   | { readonly operation: 'vo-parse'; readonly file: string; readonly url: string; readonly byteLimit: number; readonly timeFormat?: 'mjd' | 'jd'; readonly timeScale?: 'utc' | 'tai' | 'tt' | 'tdb'; readonly timeModel?: 'epn-tap-2.0' }
   | { readonly operation: 'mast-service'; readonly service: string; readonly parameters: Readonly<Record<string, unknown>>; readonly pagesize?: number; readonly page?: number }
   | { readonly operation: 'mast-download'; readonly uri: string; readonly destination: string }
-  | { readonly operation: 'tap-query'; readonly service: string; readonly query: string; readonly maxrec?: number; readonly mode?: 'async' }
+  | { readonly operation: 'tap-query'; readonly service: string; readonly query: string; readonly maxrec?: number; readonly mode?: 'async'; readonly allowedPrivateHosts?: readonly string[] }
   | { readonly operation: 'alma-data-info'; readonly ids: readonly string[]; readonly expandTarfiles?: boolean }
   | { readonly operation: 'vizier-region'; readonly catalog: string; readonly ra: number; readonly dec: number; readonly radiusDegrees: number; readonly columns: readonly string[] }
   | { readonly operation: 'horizons-ephemerides'; readonly id: string; readonly location: string; readonly epochs: HorizonsEpochs; readonly quantities: string; readonly raw?: boolean }

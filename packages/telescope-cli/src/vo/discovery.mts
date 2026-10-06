@@ -42,7 +42,7 @@ export interface DiscoveryRequest {
   readonly transferLimits?: TransferLimits;
 }
 /** A bounded service list, with no target-specific selection rules. `authority` is the service's identifier in the registry of
- * Virtual Observatory services, which says what address it has (registry.test.mts asks it); the address stays pinned here. */
+ * Virtual Observatory services, which says what address it has (registry-check.mts asks it); the address stays pinned here. */
 export const SERVICES: readonly ServiceProfile[] = [
   { authority: 'ivo://eso.org/tap_obs', service: 'https://archive.eso.org/tap_obs', table: 'ivoa.ObsCore', model: 'obscore-1.1', identityColumns: ['obs_publisher_did', 'obs_id'], timeScale: 'utc', documentation: 'https://archive.eso.org/tap_obs' },
   { authority: 'ivo://jao.alma/tap_eu', service: 'https://almascience.eso.org/tap', table: 'ivoa.obscore', model: 'obscore-1.1', identityColumns: ['obs_publisher_did', 'obs_id'], timeScale: 'utc', documentation: 'https://almascience.eso.org/alma-data/archive/archive-notebooks/nb9_ALMA_Download_data.html' },
