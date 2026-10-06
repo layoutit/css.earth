@@ -44,6 +44,25 @@ test('a galaxy drawn from image layers shows its billboard from afar and hands i
   assert.equal((billboard.style.display === 'none' || Number(billboard.style.opacity) === 0), true, 'its loaded slices replace the billboard');
 });
 
+test("a host's other bank gives its billboard way to the bank selected for that host, and another host's billboard stays", async () => {
+  const { document } = parseHTML('<div id="root"><span></span></div>');
+  const root = document.getElementById('root')!, lifetime = createSceneLifetime(), billboard = { radiusUnits: 1, back: [0, 0, 1], right: [1, 0, 0], down: [0, 1, 0] };
+  const both = parseDatasetBillboards({ schema: 'cssearth-dataset-billboards@2', imagePx: 256, banks: ['picture', 'gas', 'elsewhere'].map(id => ({ id, contextVisibility: 'galactic', attached: false, billboard })) });
+  const banks = createUniverseCatalogBanks({ prepareBillboardImage: () => true, root, end: root.firstElementChild!, stage: root, lifetime,
+    declarations: [{ id: 'picture', frame, host: 'cluster' }, { id: 'gas', frame, surrounds: true, host: 'cluster' }, { id: 'elsewhere', frame, host: 'other-cluster' }],
+    initialImages: new Map(), volumeDeclarations: [], catalogBank: undefined, loadCatalog: undefined,
+    loadImageLayer: async id => ({ payload: { id, frame } }) as never, billboards: { plan: both, imageUrl: id => `/billboards/${id}.webp` } });
+  const shown = (id: string) => { const node = root.querySelector<HTMLElement>(`[data-dataset-billboard="${id}"]`)!; return node.style.display === 'block' && Number(node.style.opacity) > 0; };
+  const publish = (detailed?: string) => banks.publishImages({ referenceFrame: 'fixture', epochJdTt: 1, pose: { positionM: [0, 0, 10], orientationXyzw: [0, 0, 0, 1] } },
+    { focalPixels: 1000, principalOffsetPixels: [0, 0], widthPixels: 400, heightPixels: 300 }, 1, detailed);
+  publish();
+  assert.deepEqual([shown('picture'), shown('gas'), shown('elsewhere')], [true, true, true], 'with no bank selected every billboard shows');
+  publish('gas');
+  await waitFor(() => assert.equal(root.dataset.imageLayerResidentBankCount, '1'));
+  publish('gas');
+  assert.deepEqual([shown('picture'), shown('gas'), shown('elsewhere')], [false, false, true], "the selected bank's slices stand for the cluster: neither of its billboards shows");
+});
+
 test('a bank whose light lies on walls draws around a body inside its host, the first declared for that host; a photograph never does', async () => {
   const { document } = parseHTML('<div id="root"><span></span></div>');
   const root = document.getElementById('root')!, lifetime = createSceneLifetime();

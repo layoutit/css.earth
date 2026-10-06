@@ -205,6 +205,11 @@ export function createUniverseCatalogBanks({ root, end, stage, lifetime, declara
       if (lifetime.disposed) return;
       let around: string | undefined;
       if (within.length) for (const bank of images) if (bank.surrounds && bank.host !== undefined && within.includes(bank.host)) { around = bank.id; break; }
+      // A host with several banks shows one dataset at a time: the selected bank's slices stand for the host, so its other
+      // banks' billboards give way with the selected bank's own. Near a nebula the context's fade hid them already; a
+      // cluster's two banks are seen from where that context is in full view.
+      const selected = images.find(bank => bank.id === detailedObjectId && bank.host !== undefined && bank.mounted);
+      const selectedOpacity = selected ? projectedVolumeOpacity(world, viewport, selected.frame, selected.radiusUnits) : 0;
       for (const bank of images) {
         // A galaxy's slices paint only for the observer who selected it, at any distance from it: the context's distance
         // fade is measured from the selected body, which is the galaxy itself. Walls paint around a body inside them too.
@@ -212,7 +217,8 @@ export function createUniverseCatalogBanks({ root, end, stage, lifetime, declara
         // Its billboard shows it from everywhere else, and gives way as the loaded slices fade in.
         if (billboards && bank.billboardIndex >= 0) {
           const context = bank.independent ? 1 : volumeOpacity;
-          const handoff = bank.mounted ? Math.min(1, opacity / Math.max(context, Number.MIN_VALUE)) : 0;
+          const sibling = selected !== undefined && bank !== selected && bank.host === selected.host;
+          const handoff = sibling || bank.mounted ? Math.min(1, (sibling ? selectedOpacity : opacity) / Math.max(context, Number.MIN_VALUE)) : 0;
           billboards.publish(bank.billboardIndex, context * projectedVolumeOpacity(world, viewport, bank.frame, bank.billboardRadiusUnits) * (1 - handoff) *
             outsideVolumeOpacity(world, bank.frame, bank.radiusUnits), world, viewport);
         }
