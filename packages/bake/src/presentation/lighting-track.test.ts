@@ -13,6 +13,8 @@ it('a sphere draws every phase from one sheet and loads only the flood-lit frame
   const sheet = prepareSheetLighting(lighting);
   assert.deepEqual(sheet.entries, [{ key: 'shadowless', url: '/scenes/test/lighting-shadowless.webp', pool: 'warm' }, { key: 'lighting', url: '/scenes/test/lighting-sheet.webp', pool: 'lighting' }]);
   assert.deepEqual(sheet.required, ['shadowless']);
+  // A lane names the pool of its startup images, where the flood-lit frame belongs.
+  assert.deepEqual(prepareSheetLighting(lighting, 'mounted').entries.map(entry => entry.pool), ['mounted', 'lighting']);
   assert.deepEqual(sheet.pool(sheet.entries), { id: 'lighting', capacity: 1, concurrency: 1, retention: 'selection', reuse: false, decoding: 'sync' });
   const [track] = prepareMaterialTracks({ sun: null, materials: [sheet.track(7)] });
   assert.deepEqual([track!.target, track!.defaultFrame, track!.banks.map(bank => bank.id), track!.frame.indices], [7, 4, ['sheet'], [0, 1, 2, 3, 4]]);

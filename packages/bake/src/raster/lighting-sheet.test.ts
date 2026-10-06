@@ -69,6 +69,8 @@ describe('lighting sheet', () => {
       assert.ok(copied.data.equals(tracked.data));
       // A bank's flood-lit frame is baked for one overlay size; a body with another states its own lighting.
       await assert.rejects(prepareLighting({ publicBase: '/scenes/test/' }, { ...LIGHTING_BANKS.sphere!, bank: 'sphere', presentationSize: 256 }, directory), /states its own lighting/);
+      // Nor can a bank serve a lane whose lit disc is another size; that lane encodes the law itself.
+      await assert.rejects(prepareLighting({ publicBase: '/scenes/test/' }, { ...LIGHTING_BANKS.sphere!, bank: 'sphere', presentationSize: 460 }, directory, undefined, { radiusScale: 0.5 }), /lit disc of 0\.505/);
       await assert.rejects(prepareLighting({ publicBase: '/scenes/test/' }, { bank: 'sphere', presentationSize: 460, limb: { models: ['a.json', 'a.json', 'a.json'] } } as never, directory), /lighting\.limb names models that were not loaded/);
     } finally { await rm(directory, { recursive: true, force: true }); }
   });

@@ -15,7 +15,7 @@ import { BASE_TILE } from '@layoutit/polycss';
 import { prepareSolidBodySurface, preparePerspectiveCamera } from '../../../scene/index.ts';
 import { prepareAstrometricSkySceneRegistration, prepareEclipticPresentationFrame, photographDirections, prepareDefaultCameraAngles, prepareSunReferenceViewDirection, type SolarGeometry } from '../../scene/index.ts';
 import { loadAstronomyPackage } from '../../../astronomy/index.ts';
-import { prepareCssomDeclarationReads, createPreparedNodeTree, readsTexture, prepareMaterialTracks, requirePreparedPresentation } from '../../../presentation/index.ts';
+import { prepareCssomDeclarationReads, createPreparedNodeTree, readsTexture, prepareMaterialTracks, prepareSheetLighting, requirePreparedPresentation } from '../../../presentation/index.ts';
 import { requirePreparedResourceCatalog } from '../../../contract/index.ts';
 import { restoreDepthSource } from '../../../prepared-presentation/index.ts';
 import { publishedImageSize } from '../shape-model/index.ts';
@@ -151,10 +151,11 @@ export async function refreshSolidSceneEpoch<T extends {sky:PreparedCubicSkyPlan
 }
 
 export async function prepareSolidPresentation({ config, scene: plan, material: { surfaces, lighting }, controls, source, sourceDirectory, publicDirectory, outputDirectory, solarGeometry }:{config:SolidSceneConfig;scene:SolidScene;material:Awaited<ReturnType<typeof prepareSolidMaterial>>;controls:unknown;source:Awaited<ReturnType<typeof createSourceManifest>>;sourceDirectory:string;publicDirectory:string;outputDirectory:string;solarGeometry:SolarGeometry}) {
-  const id = config.namespace;
+  const id = config.namespace, sheet = lighting ? prepareSheetLighting(lighting, 'mounted') : null;
   const entries = [
     ...(plan.rings ? [plan.rings.resource] : []),
-    ...(lighting ? [{ key: 'lighting', url: lighting.url, pool: 'mounted' }] : []),
+    // The flood-lit frame loads with the page; the sheet loads when shadows are turned on (presentation/lighting-track.ts).
+    ...(sheet ? sheet.entries : []),
     ...surfaces.flatMap(s => [
       { key: `surface:${s.id}`, url: s.surface.url, pool: s.id === config.presentation.defaultDataset ? 'mounted' : 'datasets' },
       { key: `poles:${s.id}`, url: requireString(s.polesUrl), pool: s.id === config.presentation.defaultDataset ? 'mounted' : 'datasets' },
@@ -187,18 +188,12 @@ export async function prepareSolidPresentation({ config, scene: plan, material: 
   const billboard = b.element('s', `${id}-billboard`, 'opacity:0'), material = b.element('s', `${id}-material`);
   b.append(null, materialRoot); b.append(materialRoot, billboard); b.append(materialRoot, material);
   const { tree, index } = b.finish({ camera, scene });
-  const track:MaterialSourceTrack|null = lighting && { id: 'lighting', target: index(material),
-    frame: { source: 'sun-z', minimum: -1, maximum: 1, count: lighting.frameCount, baseFrame: 0, remap: null },
-    banks: [{ id: 'atlas', frames: lighting.frames, default: null, fixed: lighting.frames[lighting.frames.length-1],
-      rows: [{ row: 0, resource: 'lighting', firstFrame: 0, lastFrame: lighting.frameCount - 1 }] }],
-    demand: { capacity: 1, defaultFrame: Math.floor(lighting.frameCount / 2) },
-    rotation: { kind: 'angle', source: 'view-sun', reference: 'prepared', baseDegrees: 0,
-      zeroAtPole: false }, frameAttribute: null, modeAttribute: null, quoted: true };
+  const track:MaterialSourceTrack|null = sheet && sheet.track(index(material));
   const focus = new Map((['observations','scientific','observedColors','surfaceObservations'] as const).flatMap(kind =>
     (config.raster[kind]??[]).filter(dataset=>dataset.focus).map(dataset=>[dataset.id,dataset.focus] as const)));
   const variants = surfaces.flatMap(s => [false, true].map((shadows):PreparedVariant => ({
     ...(focus.has(s.id) ? {navigation: prepareScientificNavigation(solarGeometry, id, focus.get(s.id), plan.camera)} : {}),
-    when: { datasetId: s.id, shadows }, required: [s.shadowSurface && shadows ? `shadow:${s.id}` : `surface:${s.id}`, `poles:${s.id}`, ...(lighting ? ['lighting'] : []), ...(rings ? ['rings'] : [])],
+    when: { datasetId: s.id, shadows }, required: [s.shadowSurface && shadows ? `shadow:${s.id}` : `surface:${s.id}`, `poles:${s.id}`, ...(sheet?.required ?? []), ...(rings ? ['rings'] : [])],
     writes: [
       ...(rings ? [{ kind: 'texture' as const, target: index(rings), name: `--${id}-ring-image`, resource: 'rings', quoted: true }] : []),
       { kind: 'texture', target: index(body), name: `--${id}-surface-image`, resource: s.shadowSurface && shadows ? `shadow:${s.id}` : `surface:${s.id}`, quoted: true },
@@ -210,8 +205,7 @@ export async function prepareSolidPresentation({ config, scene: plan, material: 
       { kind: 'style', target: index(billboard), name: 'backgroundColor', value: requireString(s.billboardColor) },
       { kind: 'attribute', target: -1, name: 'data-dataset', value: s.id },
     ],
-    materials: !track ? [] : [{ track: 'lighting', bank: 'atlas', mode: shadows ? 'frames' : 'fixed', enabled: true,
-      rotationEnabled: shadows, frameOverride: null, clearWhenHidden: true, fixedMode: 'full-phase-curvature' }],
+    materials: sheet ? [sheet.selection(shadows)] : [],
   })));
   function surfaceModel(datasetId:string) {
     const range=plan.surfaceDatasetRanges?.find(range=>range.datasetId===datasetId);
@@ -224,7 +218,8 @@ export async function prepareSolidPresentation({ config, scene: plan, material: 
         // A dataset's images stay until the pool is full, so coming back to one repaints from an image already in place; the
         // last bake step states the pool's byte budget, or takes the mark off where two selections are too large
         // (packages/bake/src/prepared-presentation/prepared-pool-budgets.ts).
-        ? [preparedResourcePool('datasets', entries, { retention: 'selection', capacity: 4, concurrency: 2, eviction: 'capacity' })] : [])],
+        ? [preparedResourcePool('datasets', entries, { retention: 'selection', capacity: 4, concurrency: 2, eviction: 'capacity' })] : []),
+      ...(sheet ? [sheet.pool(entries)] : [])],
     startup: entries.filter(entry => entry.pool === 'mounted').map(entry => entry.key) },
     tree, variants, materials: track ? [track] : [], animations: [],
     ...(plan.surfaceTriangles ? { surfaceHit: { target: index(body), triangles: plan.surfaceTriangles,

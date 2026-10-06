@@ -323,10 +323,7 @@
     "observedColors": []
   },
   "lighting": {
-    "frameSize": 512,
-    "columns": 8,
-    "frameCount": 128,
-    "logicalSize": 460,
+    "presentationSize": 460,
     "limb": {
       "models": [
         "photometry/filacchione-2022-akimov-549nm.json",

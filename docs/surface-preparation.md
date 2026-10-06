@@ -792,8 +792,8 @@ as the old bank did from 5° outward.
 Titan and Pluto on css.earth with shadows on, each drawn in one page from the
 32-file bank (left of its pair) and from the sheet (right), 6 October 2026. Over
 the body, 0.002% of Titan's pixels and 0.2% of Pluto's differ by more than 8 of
-255 levels. Uranus had the most of the nine bodies checked: 0.7%. With shadows
-off none of the nine differed in any pixel. These and the sheet's figure in the
+255 levels. Enceladus had the most of the twelve bodies checked: 0.8%. With
+shadows off none of the twelve differed in any pixel. These and the sheet's figure in the
 table's last row were read in a headless browser on the deployed app, with each
 body's new prepared data served in place of the published one.
 
@@ -865,7 +865,11 @@ same published law, so the limb in the app is the limb the instrument saw.
   The terrestrial lane lights its sphere bodies the same way: Rhea, Dione and
   Enceladus name a `limb` block in the `lighting` of their recipe, and
   [refresh-sphere-lighting.mts](../packages/bake/cli/refresh-sphere-lighting.mts)
-  rebakes only that atlas, without the source maps. The lane's shape-model
+  rebakes only their sheet and flood-lit frame, without the source maps. Their
+  sheet is the one above with the lit disc at half the box, where this lane's
+  mesh ends. Until 6 October 2026 each had its 128 frames in one 4096×8192 file
+  that loaded with the page, 878 KB of Dione's 2,580 KB, shadows on or off; now
+  the page loads an 84-byte flood-lit frame. The lane's shape-model
   bodies, Phobos, Deimos, Mimas and Tethys among them, draw no lighting
   frames, and their recipes state no `lighting` block: the parser refuses one
   there, since nothing would read it. Their flood-lit bank is the map unshaded, which is what a law that
