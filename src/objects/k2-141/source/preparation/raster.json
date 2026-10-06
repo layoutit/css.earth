@@ -117,6 +117,7 @@
           "104%"
         ],
         "limbOf": "color",
+        "limbStrength": 1.5,
         "description": "The star's color (#ffccac, its Color dataset) over the brightness map this project made from the star's light in K2 campaign 12 (December 2016 to March 2017): the map's scale, 96% to 104% of the mean surface, runs from a darker, richer tone of the same hue to the color itself. The contrast is drawn far stronger than it is, so the parts can be told apart: the darkest part gives 7.2% less light than the brightest. Longitudes are fixed by the light curve; latitudes and shapes are not. No color change of the spots is drawn: none is measured. A reduction made in this project, not a published map.",
         "title": "K2 · the star in its color over its brightness map · December 2016 to March 2017",
         "sourceUrl": "https://archive.stsci.edu/missions-and-data/k2"
