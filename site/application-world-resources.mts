@@ -8,12 +8,12 @@ import { APPLICATION_WORLD_CONTEXT as applicationContext, APPLICATION_WORLD_PLAN
 import { preparedBodyBillboards } from '@cssearth/renderer/navigation/prepared-body-billboards.ts';
 import { CONTEXT_OBJECT_ASSET_URLS, CONTEXT_OBJECT_DESCRIPTORS } from './prepared/prepared-context-objects.mts';
 import { CONTEXT_AVAILABILITY } from './world/context-availability.mts';
-import { PREPARED_WORLD_PRESENTATION } from './prepared-world-presentation.mts';
+import { PREPARED_WORLD_PRESENTATION } from './world/prepared-world-presentation.mts';
 import { createInFlightLoader } from './browser/in-flight-loader.mts';
 import { startupFetch } from './directory/startup-requests.mts';
 import { loadCatalogueDots } from './world/dot-catalogues.mts';
 import { annotationsForBodies, worldVisibilityPolicy } from './application-world-visibility.mts';
-import { STELLAR_EXTENTS } from './stellar-extents.mts';
+import { STELLAR_EXTENTS } from './world/stellar-extents.mts';
 import { CONTEXT_DATASETS } from './world/context-datasets.mts';
 import { navigationHref } from './model/navigation-href.mts';
 import { onObjectEntry } from './directory/object-entries.mts';
@@ -202,7 +202,7 @@ export function loadApplicationUniverse(): Promise<ApplicationUniverse> {
       resolveResource: path => volumeSet.resolve(`prepared/${path}`),
       resolvePointResource: path => starSet.resolve(`prepared/${path}`) });
     // A bank drawn only for the bodies that hold it arrives in their object entries (`/objects/<id>/entry.json` `banks`,
-    // site/hosted-banks.mts): a page reads the entry of each object it opens before it mounts it, so the bank is declared
+    // site/world/hosted-banks.mts): a page reads the entry of each object it opens before it mounts it, so the bank is declared
     // before that object's datasets ask for it. Only volume dataset banks and packages of catalogue dots travel this way.
     onObjectEntry((objectId, entry) => {
       const carried = isRecord(entry) ? entry.banks : undefined;

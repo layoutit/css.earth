@@ -3,7 +3,7 @@ import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import { readFile } from 'node:fs/promises';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
-import { projectMoonLabels } from '../catalogue-moon-labels.mts';
+import { projectMoonLabels } from './catalogue-moon-labels.mts';
 import { minorMoonOrbitIds } from '../build/prepare/prepare-world-presentation.mts';
 
 test('disabled captions respect foreground labels, planet occlusion and overview scale', () => {

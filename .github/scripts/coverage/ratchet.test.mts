@@ -148,7 +148,7 @@ test('move cycles fail fast in an isolated process', { timeout: 5000 }, () => {
 });
 
 test('base comparison consults tracked head by default for the real hand-edit attack', () => {
-  const file='site/object-browser.mts';
+  const file='site/shell/object-browser.mts';
   const base={...floors(),files:{[file]:floors().aggregate}};
   const attack={...base,files:{},retired:{[file]:'deleted'}};
   assert.match(compareFloors(base,attack).join(),/Retired path exists at head/);

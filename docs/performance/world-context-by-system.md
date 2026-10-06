@@ -58,7 +58,7 @@ A row says what its body is inside by the file it is in: a page reads a system's
 systems. A file whose bodies are inside another object says which (`inside`): the asteroid dot bank's are inside the Solar
 System. The full context, which Node tools read, writes it on every row.
 
-The build tells each page and each object entry which files it needs ([world-places.mts](../../site/world-places.mts)),
+The build tells each page and each object entry which files it needs ([world-places.mts](../../site/server/world-places.mts)),
 root first, so an orbit's parent is placed before it: the page names its own in its head
 (`<meta name="cssearth-world-files">`), and `/objects/<id>/entry.json` carries `world: { files, row? }`.
 

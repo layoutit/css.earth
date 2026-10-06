@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { ancestorIds, knownAncestors, knownObject, loadHolder, loadObject, NAVIGABLE_OBJECTS, objectFromEntry, seedObjectDirectory } from './object-directory.mts';
-import { objectEntry } from './object-entry.mts';
+import { objectEntry } from './server/object-entry.mts';
 
 test('absent ancestor metadata is empty, but explicit non-list metadata is refused', async () => {
   for (const value of [null, undefined, 3, {}, { unrelated: true }]) {
