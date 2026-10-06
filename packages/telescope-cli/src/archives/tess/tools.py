@@ -13,6 +13,9 @@ computed here.
                                            autocorrelation (star-privateer, Breton et al. 2024), after the paper's own
                                            preparation of the light curve
 
+  tools.py spinspotter <job.json>          a star's TESS 2-minute light curves through SpinSpotter (Holcomb et al.
+                                           2022), as its authors call it: each sector and the stitched light curve
+
   tools.py map <job.json>                  the brightness map that reproduces a rotational light curve (starry); run
                                            with the starry toolchain's interpreter
 
@@ -110,6 +113,42 @@ def rotation(job):
             'time': [round(float(value), 5) for value in grid], 'flux': [round(float(value), 6) for value in light]}
 
 
+def spinspotter(job):
+    """Holcomb et al. (2022), Sect. II: SpinSpotter on each sector's light curve and, for several sectors, on the
+    stitched one, with the package's own cleaning (transits masked when given, bins of the job's size, normalized
+    about zero). What is returned of each is what the paper's criteria read: the period, and the height, width and fit
+    of the autocorrelation's peaks; and the midpoint and distance of the light's 5th and 95th percentiles (the paper's
+    X_var and Y_var). lightkurve reads each file's PDC-MAP flux. Deciding is methods.mts's."""
+    warnings.filterwarnings('ignore')
+    import numpy as np
+    import lightkurve as lk
+    import SpinSpotter as ss
+    from importlib.metadata import version
+
+    size, transit = job['binSeconds'], job.get('transit')
+
+    def measured(fits, result):
+        light = np.asarray(fits['flux_even'], dtype=float)
+        time = np.asarray(fits['time_even'], dtype=float)
+        seen = np.isfinite(light)
+        low, high = np.percentile(light[seen], 5), np.percentile(light[seen], 95)
+        number = lambda value: float(value) if np.isfinite(value) else None
+        return {'periodDays': number(ss.bins_to_days(result['P_avg'], size)), 'height': number(result['A_avg']), 'width': number(result['B_avg']), 'fit': number(result['R_avg']),
+                'centre': float((low + high) / 2), 'range': float(high - low),
+                # The package counts time in Julian days; the mission's own clock starts at `timeZero`.
+                'time': [round(float(value) - job['timeZero'], 5) for value in time[seen]], 'flux': [round(float(value) + 1, 6) for value in light[seen]]}
+
+    curves = [lk.read(path) for path in job['files']]
+    sectors = [{'sector': int(curve.meta['SECTOR']), 'pipeline': str(curve.meta.get('PROCVER', '')), 'frames': int(len(curve)), **measured(*ss.process_LightCurve(curve, bs=size, transit=transit))} for curve in curves]
+    stitched = None
+    if len(curves) > 1:
+        # The authors' own stitching (each sector normalized by its median), with transits taken out of each sector first as their cleaning does.
+        clean = [curve[~curve.create_transit_mask(*transit)] if transit else curve for curve in curves]
+        whole = measured(*ss.process_LightCurve(ss.prep_LightCurveCollection(lk.LightCurveCollection(clean), bs=size), bs=size, precleaned=True))
+        stitched = {key: value for key, value in whole.items() if key not in ('time', 'flux')}
+    return {'spinSpotter': version('spinspotter'), 'sectors': sectors, 'stitched': stitched}
+
+
 def brightness_map(job):
     """starry's own inversion of a rotational light curve (Luger et al. 2019): the spherical-harmonic map, seen at the
     star's tilt and turning with its period, that reproduces the light curve, with starry's Gaussian prior on the map."""
@@ -148,6 +187,9 @@ if __name__ == '__main__':
     elif len(sys.argv) == 3 and sys.argv[1] == 'rotation':
         with open(sys.argv[2]) as handle:
             result = rotation(json.load(handle))
+    elif len(sys.argv) == 3 and sys.argv[1] == 'spinspotter':
+        with open(sys.argv[2]) as handle:
+            result = spinspotter(json.load(handle))
     elif len(sys.argv) == 3 and sys.argv[1] == 'map':
         with open(sys.argv[2]) as handle:
             result = brightness_map(json.load(handle))
