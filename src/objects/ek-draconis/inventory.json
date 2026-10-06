@@ -4,14 +4,26 @@
     {
       "location": "public",
       "filename": "ek-draconis-arrival.webp",
-      "bytes": 27704,
-      "sha256": "6f4e4a7dd50234392c052c5dfc52b0cae5317d1f09122722df8dd542e7fff078"
+      "bytes": 27418,
+      "sha256": "ca6fa6fbfd056fbd14f03f136d90c75952300ebb87db90ff95ef4ed1ba34a014"
     },
     {
       "location": "public",
       "filename": "ek-draconis-billboard.webp",
-      "bytes": 4900,
-      "sha256": "7293be79e55e9de1eb06eb86fc188aff3e8db3bc5d372bd5d50411f241c7fb12"
+      "bytes": 4672,
+      "sha256": "8f477eb51de28d7a706f89084a610af9d8b47995a6b2726ee0411f6bb8eaed45"
+    },
+    {
+      "location": "public",
+      "filename": "ek-draconis-dataset-brightness-sector-50.webp",
+      "bytes": 178,
+      "sha256": "75b226f8d2ac873e616fe417a8daaca48198e0524d2adfd55d2cc55cfc36bbe6"
+    },
+    {
+      "location": "public",
+      "filename": "ek-draconis-dataset-color-brightness.webp",
+      "bytes": 198,
+      "sha256": "f2eb88bc4a1cde7ba58f1f459ce1c12cb1523ebd816fd2667446a4302e03ced1"
     },
     {
       "location": "public",
@@ -27,9 +39,27 @@
     },
     {
       "location": "public",
+      "filename": "ek-draconis-limb-color-brightness@2x.webp",
+      "bytes": 98586,
+      "sha256": "c2d6b287d357921ac5a4081d2f7e54df736dcb7018b45a0d9a16f8c1dc906b81"
+    },
+    {
+      "location": "public",
       "filename": "ek-draconis-limb-color@2x.webp",
       "bytes": 98586,
       "sha256": "c2d6b287d357921ac5a4081d2f7e54df736dcb7018b45a0d9a16f8c1dc906b81"
+    },
+    {
+      "location": "public",
+      "filename": "ek-draconis-poles-brightness-sector-50@2x.webp",
+      "bytes": 13822,
+      "sha256": "5ce9eaa235f1cfc88572c65f1d3a77ef67c82ef97f7d92d624ee8709682240a3"
+    },
+    {
+      "location": "public",
+      "filename": "ek-draconis-poles-color-brightness@2x.webp",
+      "bytes": 26668,
+      "sha256": "cd1c99289664a374e1d0c9d7b3ac59e155ed255fee87391ca0d621322ac6fdf5"
     },
     {
       "location": "public",
@@ -42,6 +72,18 @@
       "filename": "ek-draconis-poles-radial-field-2006-12@2x.webp",
       "bytes": 41486,
       "sha256": "e6d8722451095c5ef1175c2606f5c6f3225e01837d00ef733aeacdf695b7cac2"
+    },
+    {
+      "location": "public",
+      "filename": "ek-draconis-surface-brightness-sector-50@2x.webp",
+      "bytes": 14658,
+      "sha256": "6ad234022fc5becbbbb67e905fb81305d217f555d03f0b44a69c59c1fff5f735"
+    },
+    {
+      "location": "public",
+      "filename": "ek-draconis-surface-color-brightness@2x.webp",
+      "bytes": 16560,
+      "sha256": "1315c09d7102caac7d01186c3bfd2ea0491e8d8b0bf6c4697afa17c98d27f18f"
     },
     {
       "location": "public",
@@ -58,14 +100,14 @@
     {
       "location": "prepared",
       "filename": "arrival-billboard.json",
-      "bytes": 375,
-      "sha256": "be300f8d859c6bdf9016587dbb13f7a87de50f3fbf209387bf8322ec3c377b1b"
+      "bytes": 388,
+      "sha256": "2811832b3c6c5b22e300c3b4abcde434505ffac5d32bce3e6fdffcd78745d619"
     },
     {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 2210,
-      "sha256": "79f6f39e2e9944ed4b5d3b5deb79b512626b80d11c90c52798e43b086686f8ba"
+      "bytes": 2799,
+      "sha256": "fca0512fed280acfd5c050b782af4b82d49289096dad9c75dc23914f79ac1eab"
     },
     {
       "location": "prepared",
@@ -82,20 +124,32 @@
     {
       "location": "prepared",
       "filename": "controls.json",
-      "bytes": 1931,
-      "sha256": "4c4da4272438f3d2f879595c814a8494f79f9e17cbc850bb2b1421566ebeb8c5"
+      "bytes": 3671,
+      "sha256": "bb1047f5ff8008b58c8f52fcc340b3fa9a5342fee8ec60cb358374702655c65b"
     },
     {
       "location": "prepared",
       "filename": "datasets.json",
-      "bytes": 3209,
-      "sha256": "6157b522d7298d312ec7b6a298ceaa090d89f4ea960d9f7dedc53868d6d66681"
+      "bytes": 6310,
+      "sha256": "ab382e2ffc84e01b04c093f5b1ed09c79f0e06d0c76569fbd44e47f84bb701aa"
     },
     {
       "location": "prepared",
       "filename": "minimaps.json",
-      "bytes": 219,
-      "sha256": "1e11aa431936fdc756e9b8520345300705f17de879fe98f37d308572e35a0bd1"
+      "bytes": 447,
+      "sha256": "daae5ab7917c8c4ff242df22b51cb3a4e7da8ec852248f2d6f25f5af7427e3bc"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/brightness-sector-50.webp",
+      "bytes": 1316,
+      "sha256": "bc324f5635bec6af4000877684d39b0bc61dc113330eeb6ef33c295b751c95a7"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/color-brightness.webp",
+      "bytes": 1388,
+      "sha256": "c4bb446e3723a9ed8ac63c9892d3ec149b4f40ff751749490ac3384587067d41"
     },
     {
       "location": "prepared",
@@ -112,8 +166,8 @@
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 252295,
-      "sha256": "edbce479c87190d58d6aad1beac870c780827c9fba407b9e595de7c9f612560f"
+      "bytes": 256592,
+      "sha256": "3815ad47065d805fb1d95494f66eeb0266b058c3bdec58894fa99efc8dc61620"
     },
     {
       "location": "prepared",
@@ -136,8 +190,8 @@
     {
       "location": "prepared",
       "filename": "text.json",
-      "bytes": 1097,
-      "sha256": "a3f64878dd5713ea03fcbe1f9a4fd67a9df1992ca8d4d2aff3c205a4c5450dd0"
+      "bytes": 1530,
+      "sha256": "b78ce5bbb1f23cd117441a996e77505c4cee0e0830c51d361ffaca133adb9adb"
     },
     {
       "location": "prepared",

@@ -185,6 +185,46 @@
           }
         ]
       }
+    },
+    {
+      "id": "bd-16-351-tess-map-brightness-sector-30",
+      "path": "science/tess/bd-16-351-s0030.dat",
+      "origin": "https://mast.stsci.edu/tesscut/",
+      "productId": "Brightness map of BD-16 351 from its light in TESS sector 30",
+      "title": "Brightness map of BD-16 351 from its light curve in TESS sector 30, measured from the full-frame images: brightness on a longitude-latitude grid",
+      "sourceUrl": "https://mast.stsci.edu/tesscut/",
+      "credit": "NASA TESS full-frame images, sector 30, from MAST's TESScut; photometry and map made in this project with lightkurve 2.6.0 and starry 1.2.0. This work includes data collected by the TESS mission, funded by the NASA Explorer Program, obtained from the Mikulski Archive for Space Telescopes (MAST).",
+      "displayCredit": "NASA TESS · mapped here",
+      "license": "Public NASA mission data (MAST); reduction by this project",
+      "licenseEvidence": [
+        "https://archive.stsci.edu/publishing/data-use"
+      ],
+      "acquisition": "Built by the generator for this star, from the pixels TESScut cuts out of the sector's full-frame images. Restored from the source cache; not tracked. The receipt (the sector's request, what was measured and the codes) is written again by the generator under output/tess and is not kept in git.",
+      "generator": "packages/telescope-cli/src/archives/tess/reduce.mts",
+      "redistribution": "Public TESS data, reduced here.",
+      "consumers": [
+        "tess-starry"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "mast-tess-full-frame-images",
+            "role": "material",
+            "evidence": "https://mast.stsci.edu/tesscut/"
+          },
+          {
+            "catalogueId": "arxiv-1810-06559",
+            "role": "method",
+            "evidence": "https://arxiv.org/abs/1810.06559"
+          },
+          {
+            "catalogueId": "gaia-2023-dr3",
+            "role": "reference",
+            "evidence": "https://cdsarc.cds.unistra.fr/viz-bin/cat/I/355"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [

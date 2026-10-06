@@ -27,15 +27,21 @@ polarised profile for each spectrum, and ZDIpy fits the field to each run's prof
 ([rotation.json](source/preparation/rotation.json)). Longitude 0 faces us at the middle of each run. One color scale, ±150 G, serves
 the map.
 
+**Brightness from TESS.** The Color + brightness and Brightness map datasets are made in this project from the star's light in TESS's full-frame images of sector 50 (March and April 2022), cut at the star's place by MAST's [TESScut](https://mast.stsci.edu/tesscut/) ([source record](../../sources/mast-tess-full-frame-images.json)). lightkurve measures the light, astropy its period, and starry (Luger et al. 2019) the map that reproduces it ([method](../../../docs/stellar-brightness-maps-from-tess.md)). The map's table is built by `packages/telescope-cli/src/archives/tess/reduce.mts` and restored from the source cache.
+
 ## Evidence
 
 Generated 2026-10-06 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts) from Gaia DR3, SIMBAD and the archives named above; each choice was read with the dataset's own reader.
 - Dec 2006: the map reaches a reduced chi-square of 1.25, against 8.51 with no field; mean field 92.8 G, 80% of its energy toroidal. Waite, Ian et al., arXiv:1611.07751 give 90 G and 83% for this run (instruments ESPaDOnS; poloidalPct: 17).
 
+**Brightness from TESS.** In sector 50 the light swings by 2.3% with a period of 2.71 d, and each of the sector's two orbits alone shows the same period within 20%. The star's record holds 2.64 d from the catalogues. The map's light curve leaves a scatter of 0.33% about the light, whose own noise is 0.06%. Gaia DR3 lists 2 other stars within 63 arcseconds, giving under 0.1% of the light in the star's pixels.
+
 ## Known problems
 
 - **Assumptions of the frame.** The axis's position angle and the rotation phase are conventions.
 - **Model limb.** The limb darkening is a model atmosphere at the catalogued temperature and gravity, not a measurement of this star.
+
+- **Brightness from TESS.** Which longitudes are darker, and by how much, is measured. The latitude and shape of each patch are the smoothest that reproduce the light, and no color change of the spots is drawn. Color + brightness draws the contrast far stronger than it is, on the Brightness map's scale, so it can be seen; Brightness map has the measured values. The map is made at the tilt the page draws, 60°. The map is of March and April 2022: spots come and go within weeks or months.
 
 [Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
 - **The magnetic maps are this project's reduction, not published maps.** How tightly a map is fitted is a choice the

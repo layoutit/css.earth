@@ -110,6 +110,8 @@ A star with a brightness map opens on **Color + brightness**: the star's own col
 was darker. The page then lists the **Brightness map** itself, on a gray scale with its legend and the measured values, and
 the flat **Color** the star had.
 
+![The first five stars in the app: Color + brightness above, Brightness map below](images/stellar-brightness-maps.webp)
+
 | Drawn | From |
 | --- | --- |
 | Which longitudes are darker | The light curve |
