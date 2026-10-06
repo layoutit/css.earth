@@ -90,11 +90,11 @@ export async function bakeSurfaceMaps(results: readonly SurfaceMapResult[], { ro
   for (const group of groups(hosts)) for (const args of [['packages/bake/cli/setup-assets.mts', ...group.map(host => `--object=${host}`)], ['packages/bake/cli/restore-source-inputs.mts', ...group.map(host => `--object=${host}`)]]) if (!await run(args)) return false;
   // A star with a new default view: its arrival record and world billboard are of the old one, and the restore above put them
   // back. They go before the bake (the catalogue step refuses a picture of another view) and are taken again from the running site.
-  // The stored record says which dataset the photograph is of: a page that now opens on another one has a new view too,
-  // whichever run wrote its records.
+  // The stored record says which dataset the photograph is of: a page that now opens on another one, or has no photograph
+  // left from an earlier run, is to be photographed too, whichever run wrote its records.
   const photographed = async (host: string) => { const record: unknown = await readFile(resolve(root, 'src/objects', host, 'prepared/arrival-billboard.json'), 'utf8').then(text => JSON.parse(text) as unknown, () => undefined); return isRecord(record) ? record.dataset : undefined; };
   const opensOn = async (host: string) => requireRecord(requireRecord(await readJson(resolve(root, 'src/objects', host, 'source/content/object.json'), host), host).datasets, `${host} datasets`).defaultDataset;
-  const changed: string[] = []; for (const host of hosts) { const taken = await photographed(host); if (flagged.has(host) || (taken !== undefined && taken !== await opensOn(host))) changed.push(host); }
+  const changed: string[] = []; for (const host of hosts) { const taken = await photographed(host); if (flagged.has(host) || taken !== await opensOn(host)) changed.push(host); }
   const kept = hosts.filter(host => !changed.includes(host));
   for (const host of changed) { await rm(resolve(root, 'src/objects', host, 'prepared/arrival-billboard.json'), { force: true }); await rm(resolve(root, 'site/public/scenes', host, `${host}-billboard.webp`), { force: true }); }
   for (const group of groups(hosts)) if (!await run(['packages/bake/cli/prepare-object.mts', ...group, '--to', 'text'])) return false;
