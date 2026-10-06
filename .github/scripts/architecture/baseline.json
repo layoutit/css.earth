@@ -1,23 +1,9 @@
 {
   "schema": "cssearth-architecture-baseline@1",
   "cycles": {
-    "largestCycle": 5,
-    "layerOrder": [
-      "site/scene",
-      "site/shell",
-      "site/navigation",
-      "site/search",
-      "site(root)",
-      "site/components",
-      "site/layouts"
-    ],
-    "cycleClosingEdges": [
-      {"from":"site(root)","to":"site/navigation","imports":6},
-      {"from":"site(root)","to":"site/scene","imports":5},
-      {"from":"site/shell","to":"site/scene","imports":2},
-      {"from":"site/layouts","to":"site/components","imports":1},
-      {"from":"site/navigation","to":"site/scene","imports":1}
-    ]
+    "largestCycle": 0,
+    "layerOrder": [],
+    "cycleClosingEdges": []
   },
   "rules": {
     "authoring-is-leaf": [],
