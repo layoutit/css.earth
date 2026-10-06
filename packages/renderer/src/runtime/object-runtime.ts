@@ -83,6 +83,8 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
     let currentView: ObjectRuntimeView | null = null, reference: OrbitPublication | null = null, previousPublication: OrbitPublication | null = null;
     let surfaceFeatures: SurfaceFeatureLayerRuntime | null = null, featuresInFlight = arriving;
     let allowed = false, navigatedDataset: string | null = null, maximumZoom = definition.camera.maximumZoom;
+    /** Whether the committed plan drew the mesh's textures (publishCommittedTextures). */
+    let texturesCommitted = true;
     const cameraPlan = Object.freeze({ ...definition.camera, get maximumZoom() { return maximumZoom; } });
     let startupDecodedAssets = 0;
     /** The dataset and level whose neighbours last read their hash groups. */
@@ -286,6 +288,18 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
       currentView = Object.freeze({ ...currentView, motionAtRest: atRest, revision: ++revision });
       selection?.setView(currentView);
     }
+    /** Whether the committed plan drew the mesh's textures: one of the things a hidden mesh waits for (`canReveal`). The
+     * camera reads it only when it publishes a view, and a commit lands outside any publication: at rest, when it waited
+     * for the camera to stop. So the change publishes the view again. Without that the mesh stayed hidden until the
+     * camera next moved and was mounted inside that gesture: after a zoom out from the Moon handed over to Earth and a
+     * zoom back in, Earth's 458 nodes came in 0.35 s into the next drag, in a frame of 620 to 688 ms on the iPad
+     * (2026-10-05). */
+    function publishCommittedTextures(state: Readonly<ObjectSelectionState>) {
+      const committed = state.plan?.deferredTextures !== true;
+      if (committed === texturesCommitted) return;
+      texturesCommitted = committed;
+      guarded(() => orbit?.invalidate());
+    }
     function stopMotion() { onMotionRequest(false); setAllowed(false); }
     function alignMotionFrame() {
       const elements = mounted?.motionFrame;
@@ -395,11 +409,11 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
           surfaceFeatures?.setDataset({ id: next.datasetId }); syncPagePlayback(next.speed ?? 1); republishMotion();
           prefetchAdjacentLevelHashes(next, plan.textureLevel);
         }, onFatalError: fatal,
-        onChange: state => publishSelection(state),
+        onChange: state => { publishSelection(state); publishCommittedTextures(state); },
         onMaterialError: error => console.error(error) });
       context.own(() => selection?.destroy());
       mountMark('selection-created');
-      const canReveal = () => selection?.state().plan?.deferredTextures !== true
+      const canReveal = () => texturesCommitted
         && (phase === 'mounting' || !mounted!.sceneElement.hidden || revealDecode.ready());
       orbit = environment.createOrbit({ stage, inputSurface, runtimePolicy, cameraElement: mounted.cameraElement, sceneElement: mounted.sceneElement,
         ...(mounted.revealGroups ? { revealGroups: mounted.revealGroups } : {}),

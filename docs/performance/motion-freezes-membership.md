@@ -25,6 +25,12 @@ over 47 ms. The price is paid at rest: the sharper pages a zoom in asks for are 
 (`rendering/prepared-presentation.ts`): a drag begun a third of a second after a zoom in had seven or eight frames of
 29 to 54 ms in its first half second, and none once the rest waited for the next pause.
 
+A body's mesh is shown or hidden when the camera publishes a view, and everything that decision reads must ask for a
+publication when it changes with the camera still: the end of a motion that kept detail resident, the decode a hidden
+mesh waits for, and the commit that gives it its textures (`runtime/object-runtime.ts`). The last one did not: after a
+zoom out from the Moon handed over to Earth and a zoom back in, the commit landed at rest and Earth's mesh stayed
+hidden until the next drag, which then mounted its 458 nodes in a frame of 620 to 688 ms on the iPad (2026-10-05).
+
 Annotations (markers, names, orbits, the footer) and content (sky faces, a nebula's slice stack changing axis) are
 held differently while coasting:
 
