@@ -20,7 +20,7 @@ The saved HTML is evidence only; its viewer scripts are never evaluated or inclu
 
 The asteroid validation report records the earlier source, preparation and browser checks. Some raw captures cited there have local `output/` paths.
 
-Independent 8192 area-stratified samples in each direction measured nearest-triangle distances: p95 13.929 m, maximum 59.740 m. These are sampled distances, not exhaustive error bounds. All source face centroids and 8192 sphere directions were checked for radial ambiguity; no second radial intersection was found. Re-prepared 2026-10-06: the error allowance now decides the face count, 644 faces at 99.93 m estimated simplifier error; checks and sampled distances recorded here before that date describe the earlier 800-face mesh.
+Independent 8192 area-stratified samples in each direction measured nearest-triangle distances: p95 13.929 m, maximum 59.740 m. These are sampled distances, not exhaustive error bounds. All source face centroids and 8192 sphere directions were checked for radial ambiguity; no second radial intersection was found. Re-prepared 2026-10-06: the error allowance now decides the face count, 658 faces at 94.09 m estimated simplifier error; checks and sampled distances recorded here before that date describe the earlier 800-face mesh.
 
 Source/reduced snapshots cover front, back and both poles, each normalized to its own maximum radius; they are geometry inspection, not browser pixel parity.
 
@@ -60,7 +60,7 @@ The record gives diameter 28.4 km, period 14.60796 h and ecliptic J2000 pole (10
 <details>
 <summary>Appearance and preparation</summary>
 
-The existing source-meshoptimizer recipe reduces the original connected surface to the fewest triangles within the authored 100 m stopping threshold, 644. Meshoptimizer 1.2.0 reports 99.93 m estimated error; this estimate is not a Hausdorff bound. The model uses 644 native PolyCSS u raster leaves in a 3406 × 3823 atlas, with lighting and texels prepared ahead of runtime.
+The existing source-meshoptimizer recipe reduces the original connected surface to the fewest triangles within the authored 100 m stopping threshold, 658. Meshoptimizer 1.2.0 reports 94.09 m estimated error; this estimate is not a Hausdorff bound. The model uses 658 native PolyCSS u raster leaves in a 3438 × 3807 atlas, with lighting and texels prepared ahead of runtime.
 
 The surface remains one closed component with Euler characteristic 2.
 

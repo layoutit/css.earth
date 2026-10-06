@@ -56,7 +56,7 @@ Limb columns: the position-angle residual between the projected limb and the pho
 
 ### Shape
 
-Source and output are each one closed component with Euler characteristic 2. Meshoptimizer estimates 1793.5 m error; the authored stopping threshold is 1800 m. This estimate is not a Hausdorff bound. Independent nearest-triangle sampling (8192 area-stratified samples each way) measured p95 1004.2 m and maximum 1907.5 m. No source face centroid or sphere direction has a repeated radial intersection, which supports the radial-height dataset. Reduction softens small features. Re-prepared 2026-10-06: the error allowance now decides the face count, 764 faces at 1793 m estimated simplifier error; checks and sampled distances recorded here before that date describe the earlier 800-face mesh.
+Source and output are each one closed component with Euler characteristic 2. Meshoptimizer estimates 1793.5 m error; the authored stopping threshold is 1800 m. This estimate is not a Hausdorff bound. Independent nearest-triangle sampling (8192 area-stratified samples each way) measured p95 1004.2 m and maximum 1907.5 m. No source face centroid or sphere direction has a repeated radial intersection, which supports the radial-height dataset. Reduction softens small features.
 
 ## Known problems
 
@@ -79,7 +79,7 @@ The SPHERE photograph is photographed illumination from the survey's deconvolved
 <details>
 <summary>Shape, frame and reproduction</summary>
 
-The connected surface is simplified with meshoptimizer 1.2.0, ErrorAbsolute and RegularizeLight, to 764 native PolyCSS triangles, the fewest within its 1800 m error allowance. Each raster leaf is 128 × 128 px in a 2048 × 6400 atlas. Geometry and per-texel flood/directional lighting are prepared ahead of runtime. The scientific preparer samples 721 × 361 source directions and applies its recorded cartographic hillshade.
+The connected surface is simplified with meshoptimizer 1.2.0, ErrorAbsolute and RegularizeLight, to 800 native PolyCSS triangles. Each raster leaf is 128 × 128 px in a 2048 × 6400 atlas. Geometry and per-texel flood/directional lighting are prepared ahead of runtime. The scientific preparer samples 721 × 361 source directions and applies its recorded cartographic hillshade.
 
 The original Cartesian frame is retained with +Z north and east-positive longitude. The published ecliptic pole is converted to equatorial J2000 with obliquity 23.439291111°. The release's unlabeled parameter file is preserved as evidence and is not read as an IAU W model. JPL Horizons elements and independent vectors are taken at JD 2461286.5 (2026-09-03). Heliocentric ICRF conics serve the fixed-date context, not long-term perturbation ephemerides. TDB is approximated as TT within 2 ms.
 

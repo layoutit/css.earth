@@ -45,7 +45,7 @@ OPUS intended-target searches omit Galatea because those archival frames targete
 
 ## Preparation and restoration
 
-The existing radial-terrain preparer starts from 5,040 sampled triangles and uses meshoptimizer to keep the fewest its error allowance permits, 448 native PolyCSS `u` raster triangles within a 1,500 m simplifier error setting. Its estimated simplifier error is 1.484 km. No body-specific runtime is introduced.
+The existing radial-terrain preparer starts from 5,040 sampled triangles and uses meshoptimizer to target 480 native PolyCSS `u` raster triangles within a 1,500 m simplifier error setting. Its estimated simplifier error is 1.484 km. No body-specific runtime is introduced.
 
 `source/manifest.json` pins the authored radius table, material, scientific metadata and title font. The compact model inputs are checked in; `source/preparation/acquisition.json` restores the external font input.
 

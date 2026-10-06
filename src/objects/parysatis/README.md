@@ -48,7 +48,7 @@ The displayed phase is not propagated from the historical source epoch and does 
 
 Model publication: [Asteroid models reconstructed from ATLAS photometry](https://damit.cuni.cz/projects/damit/references/view/658).
 
-The refreshed DAMIT search on 2026-09-08 found no size-calibrated same-body mesh. A published physical size is therefore applied through the existing `metersPerUnit` source conversion, before the established meshoptimizer/PolyCSS raster preparation, which keeps the fewest faces its error allowance permits, 308 of at most 800.
+The refreshed DAMIT search on 2026-09-08 found no size-calibrated same-body mesh. A published physical size is therefore applied through the existing `metersPerUnit` source conversion, before the established meshoptimizer/PolyCSS raster preparation, which keeps the fewest faces its error allowance permits, 314 of at most 800.
 
 </details>
 

@@ -20,7 +20,7 @@ Urania is a main-belt asteroid observed in the ESO/VLT/SPHERE survey. Its publis
 
 ## Processing
 
-The MPCD surface is simplified with meshoptimizer 1.2.0 to 628 native PolyCSS u triangles, the fewest within its 900 m error allowance in a 3497 × 3714 atlas, with a 900 m stopping threshold. Geometry and lighting are prepared ahead of runtime.
+The MPCD surface is simplified with meshoptimizer 1.2.0 to 800 native PolyCSS u triangles, each a 128 × 128 px leaf in a 2048 × 6400 atlas, with a 900 m stopping threshold. Geometry and lighting are prepared ahead of runtime.
 
 Elevation samples the original mesh radius minus a 44 km reference sphere, with a -20 to 30 km legend, from 721 × 361 source directions with a cartographic hillshade.
 
@@ -61,7 +61,7 @@ Limb columns: the position-angle residual between the projected limb and the pho
 
 ### Shape
 
-Source and output are each one closed component with Euler characteristic 2. Meshoptimizer estimates 898.6 m error, which is not a Hausdorff bound. Independent nearest-triangle sampling (8192 samples each way) measured p95 424.9 m and maximum 828.9 m. No repeated radial intersection was found, which supports the radial-height dataset. Reduction softens small features. Re-prepared 2026-10-06: the error allowance now decides the face count, 628 faces at 898.6 m estimated simplifier error; checks and sampled distances recorded here before that date describe the earlier 800-face mesh.
+Source and output are each one closed component with Euler characteristic 2. Meshoptimizer estimates 814.1 m error, which is not a Hausdorff bound. Independent nearest-triangle sampling (8192 samples each way) measured p95 424.9 m and maximum 828.9 m. No repeated radial intersection was found, which supports the radial-height dataset. Reduction softens small features.
 
 ## Known problems
 

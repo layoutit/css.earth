@@ -52,7 +52,7 @@ The source-survey dispositions and evidence are recorded in the [investigation l
 
 `source/kernels/pck00011.tpc` supplies NAIF body **714 / IAU_BELINDA**. Its legacy 33-km spherical radius is excluded in favor of the later published prolate model. SPICE evaluates the pole and prime meridian, including periodic terms, at JD 2461286.5 TT: RA 257.3371803794°, Dec −15.1673024814°, W 197.5872640108°.
 
-The analytic 5° radius table has 2,522 vertices and 5,040 triangles. The shared meshoptimizer retains **322 native `u` triangles**, a closed single-component mesh (Euler characteristic 2), with estimated simplification error 995.16 m. This is display tessellation of the measured approximation, not additional observed detail. The minimap and 512-pixel context portrait use the same grid and shape.
+The analytic 5° radius table has 2,522 vertices and 5,040 triangles. The shared meshoptimizer retains **468 native `u` triangles**, a closed single-component mesh (Euler characteristic 2), with estimated simplification error 724.57 m. This is display tessellation of the measured approximation, not additional observed detail. The minimap and 512-pixel context portrait use the same grid and shape.
 
 All source bytes are pinned by `source/manifest.json`; acquisition operations restore the NAIF text kernels by their real source URLs. The authored table and compact evidence are checked in. Runtime scene assets are produced only by the shared object preparer.
 

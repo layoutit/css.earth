@@ -9,6 +9,12 @@
     },
     {
       "location": "public",
+      "filename": "melpomene-billboard.webp",
+      "bytes": 5026,
+      "sha256": "d5c400c753cd51c04ca0a46070fa83c9e0634122f4cf50580c1b60ac8dce2fbb"
+    },
+    {
+      "location": "public",
       "filename": "melpomene-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -16,26 +22,26 @@
     {
       "location": "public",
       "filename": "melpomene-elevation-shadow-alpha@2x.webp",
-      "bytes": 612090,
-      "sha256": "8c18fe009a58eea8744f8bc2f321e18d5a84a79a11e9a329b932d28a0f4efd20"
+      "bytes": 624022,
+      "sha256": "1732836f720addbdf11c31d752fd9128b43b1f3107a34703a3242421cffb1077"
     },
     {
       "location": "public",
       "filename": "melpomene-elevation-shadow@2x.webp",
-      "bytes": 131260,
-      "sha256": "e97b3206caa01d1f6c399c8b37499eb71935189b041479559d854e8340a183ec"
+      "bytes": 137846,
+      "sha256": "a8578f3a046d9c683f05d255f9f3bf8144fc92051a1c21665a6cb43445012158"
     },
     {
       "location": "public",
       "filename": "melpomene-elevation-surface-alpha@2x.webp",
-      "bytes": 672736,
-      "sha256": "3bc63612c5528c897989513beaa3a87276856d937311c061e6680a9e715c3735"
+      "bytes": 685104,
+      "sha256": "8fcc16cd3e3acd8efd1f538f1859455758947802ca869c99ba8e766f20ff53dd"
     },
     {
       "location": "public",
       "filename": "melpomene-elevation-surface@2x.webp",
-      "bytes": 206846,
-      "sha256": "120eba20366b87c4eaeb4b09655e6c50b02463041dc43e71e39dc0b3797cccb4"
+      "bytes": 210262,
+      "sha256": "53307a8d300a84ffcd9e6e353efd3930fa81c9f6c0405718fabfcad65eb172f5"
     },
     {
       "location": "public",
@@ -46,26 +52,26 @@
     {
       "location": "public",
       "filename": "melpomene-shape-shadow-alpha@2x.webp",
-      "bytes": 525122,
-      "sha256": "7188091d600af6ec003e00fdbc6961eb63a454988936dd4b1ac2b95f04ff2c37"
+      "bytes": 533836,
+      "sha256": "a8fffc4314675a790736bb210dae01c96902c387880ea6382ae6e316b802626b"
     },
     {
       "location": "public",
       "filename": "melpomene-shape-shadow@2x.webp",
-      "bytes": 62088,
-      "sha256": "48b596d499c5d31651a064a5fde973a0e46d201dfa22875c413bf75c7a0ac7fc"
+      "bytes": 62786,
+      "sha256": "f65c820d2ec3c7efdd0d0f6baaef40b02237dde0038363c3859754d3d3bec1a6"
     },
     {
       "location": "public",
       "filename": "melpomene-shape-surface-alpha@2x.webp",
-      "bytes": 520444,
-      "sha256": "bb56cccda4b34b5d32390eb17c9f2c8f4579ecf9304303297706ced116199505"
+      "bytes": 529342,
+      "sha256": "121cf2851184abb7bce810984e23900c150434fd14e0d2c965cdc9f5ce12fff3"
     },
     {
       "location": "public",
       "filename": "melpomene-shape-surface@2x.webp",
-      "bytes": 53896,
-      "sha256": "43662e67bcb37b835b0f9e484a3557ed47681f108de40c80e2114e83fe0c27e5"
+      "bytes": 54368,
+      "sha256": "93878de61c342e10c0d9de5fe44458b7ca5063725fefc75e0326d13ec0a29129"
     },
     {
       "location": "public",
@@ -76,20 +82,20 @@
     {
       "location": "public",
       "filename": "melpomene-zimpol-surface-alpha@2x.webp",
-      "bytes": 577278,
-      "sha256": "2cf3ebb74046d3bbcd403a6186b012068734235a7155130c958c7d7155ce52eb"
+      "bytes": 593114,
+      "sha256": "84d93bc5461119a85928b1263b6bac070126231ee13dd830c77ad5570a6c205f"
     },
     {
       "location": "public",
       "filename": "melpomene-zimpol-surface@2x.webp",
-      "bytes": 122404,
-      "sha256": "3b349d4e1b220df3c13f0366c88202a041d587f2cee975825d413bad123c6417"
+      "bytes": 122946,
+      "sha256": "bc3f9f4114b1545b31f0600f40fbd0b28d3bc2073f65791d70fbc997a761db30"
     },
     {
       "location": "public",
       "filename": "melpomene-zimpol-thumbnail.webp",
-      "bytes": 1746,
-      "sha256": "05a5295383638765a6de7bbcf9e3d0d5abfdc97924a13dc8f6889b0ff2b2b373"
+      "bytes": 1718,
+      "sha256": "ebf245734fc5be6b0e8b04ed6a6534ba2cd4d22cacdd6b98c0b6b38df755a48a"
     },
     {
       "location": "prepared",
@@ -119,19 +125,19 @@
       "location": "prepared",
       "filename": "datasets.json",
       "bytes": 1930,
-      "sha256": "b7931d72bbeb5468745ecdb993bc9d5a5cc22fae24ee6c2eb94269713d7468bc"
+      "sha256": "1036b26b5d1ae06e7c5012598f96d66e6bc9c8c80d9b0cc093d1d1f4b3fbba77"
     },
     {
       "location": "prepared",
       "filename": "material.json",
-      "bytes": 141995,
-      "sha256": "0e46e0f284f8325bd3d0ae576ec5ad7facc6f1f95c3feb30c0e1ba06df36e890"
+      "bytes": 142067,
+      "sha256": "fa6834a9bf45b8dbb41a205806cb32cc28f151cb6ad9c174e70ae129978444dc"
     },
     {
       "location": "prepared",
       "filename": "minimaps.json",
-      "bytes": 302,
-      "sha256": "52e12adb03fd6feba3bd6e49e924bb760d340cfaaa38ba0816465719eb63590e"
+      "bytes": 303,
+      "sha256": "c611732c5f3d83a6cefa2b8af892804d0d7271fba72e5f790e2c9134ba52af7f"
     },
     {
       "location": "prepared",
@@ -148,20 +154,20 @@
     {
       "location": "prepared",
       "filename": "minimaps/zimpol.webp",
-      "bytes": 2718,
-      "sha256": "bf6323a587d68ebaf11cf0c4c40fd5ab463b40af3661f2e1f0e00cd4aed96681"
+      "bytes": 2766,
+      "sha256": "4f058dc6f9722fd4e59b17c69acfe71ec3d94508f71415a4fa4937edbbfbcf0b"
     },
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 974936,
-      "sha256": "355a64a41aa96b51731a9ad23ca6e4828445786d1eb98b833260e4e4303f2af3"
+      "bytes": 1024757,
+      "sha256": "dcb33b381c7adae2e79caf0952574443fb0b22e7a33f81b3be975a543a2a73de"
     },
     {
       "location": "prepared",
       "filename": "scene.json",
-      "bytes": 1235698,
-      "sha256": "7f07bfe1bee562c7889ed1e422ca7c4b05b72e7fa9a461b518d34579773e5372"
+      "bytes": 1300299,
+      "sha256": "f119e7a170eb37d67fa818ddfc43c5fea368dd3a77a7bfd2985fdbd3cebe0027"
     },
     {
       "location": "prepared",
@@ -178,8 +184,8 @@
     {
       "location": "prepared",
       "filename": "surfaces.json",
-      "bytes": 142002,
-      "sha256": "4c7855a4b326a3a206cbe707e314ccf512ff8f78aed247e7ddc4ff33155d5dda"
+      "bytes": 142074,
+      "sha256": "658095e14cfd3809e34fe943ab77f7efa33ddf2c8a2428a637152faf37b98583"
     },
     {
       "location": "prepared",

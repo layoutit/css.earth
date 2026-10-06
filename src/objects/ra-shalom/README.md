@@ -12,7 +12,7 @@ Shape uses the shared missing-imagery grid. Elevation shows original model radiu
 
 ## Evidence
 
-Independent 8,192 area-stratified samples in each direction measured nearest-triangle distances: source-to-display p95 9.615730 m and maximum 20.132628 m; display-to-source p95 9.684616 m and maximum 29.433514 m. These are sampled distances, not exhaustive Hausdorff bounds or observational uncertainties. Re-prepared 2026-10-06: the error allowance now decides the face count, 744 faces at 23.68 m estimated simplifier error; checks and sampled distances recorded here before that date describe the earlier 800-face mesh.
+Independent 8,192 area-stratified samples in each direction measured nearest-triangle distances: source-to-display p95 9.615730 m and maximum 20.132628 m; display-to-source p95 9.684616 m and maximum 29.433514 m. These are sampled distances, not exhaustive Hausdorff bounds or observational uncertainties.
 
 The recorded source-scalar and decoded-atlas checks are detailed below; their sampled results do not establish browser pixel parity.
 
@@ -45,7 +45,7 @@ The selected source pole is ecliptic J2000 (75°, 16°), with period 19.793 h. P
 
 **Reduction and delivery**
 
-Meshoptimizer 1.2.0, with ErrorAbsolute and RegularizeLight, reduces the original connectivity to 744 triangles, the fewest within the authored 24 m stopping threshold. Its error estimate is 23.68 m; that estimate is not a geometric bound. Source and display remain one closed, outward-wound component with Euler characteristic 2; no opposite faces are removed. Native PolyCSS u raster leaves share a 3499 × 3736 atlas. Geometry, texels and lighting are prepared ahead of runtime.
+Meshoptimizer 1.2.0, with ErrorAbsolute and RegularizeLight, reduces the original connectivity to 800 triangles at the authored 24 m stopping threshold. Its error estimate is 23.015841 m; that estimate is not a geometric bound. Source and display remain one closed, outward-wound component with Euler characteristic 2; no opposite faces are removed. Native PolyCSS u raster leaves use 128 × 128 px cells in a 2048 × 6400 atlas. Geometry, texels and lighting are prepared ahead of runtime.
 
 Pinned JPL Horizons elements and independent vectors at JD 2461286.5 and ±30 days supply heliocentric ICRF context. The fixed-epoch conic is a display approximation, not a long-term perturbation ephemeris; TDB is approximated as TT within 2 ms. GM is the pinned Horizons physical value, or zero when unavailable, without an assumed density.
 

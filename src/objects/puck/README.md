@@ -18,7 +18,7 @@ The VICAR raster is 1,000 × 1,000 signed 16-bit samples, converted to I/F by th
 
 A bounded 50/50 Lommel-Seeliger/Lambert normalization is applied to calibrated I/F, displayed over 0–0.0594 I/F (the 99.5th percentile of displayed samples). Only edge-connected low-signal sky is masked, with a two-pixel boundary inset. Samples beyond 75° incidence, 70° emission or 2.5× gain are withheld.
 
-The scene rotation uses the IAU/WGCCRE model with PCK periodic terms evaluated at the 4 September 2026 TT reference epoch (JD 2461287.5). The radius table samples the reference sphere every 5°, simplified to **432 native PolyCSS `u` leaves** in one closed component.
+The scene rotation uses the IAU/WGCCRE model with PCK periodic terms evaluated at the 4 September 2026 TT reference epoch (JD 2461287.5). The radius table samples the reference sphere every 5°, simplified to **480 native PolyCSS `u` leaves** in one closed component.
 
 ## Evidence
 

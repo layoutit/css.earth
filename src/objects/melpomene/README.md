@@ -18,7 +18,7 @@ Vernazza et al. (2021) give a volume-equivalent diameter of 141 km, ecliptic J20
 
 ## Processing
 
-The mesh is simplified with meshoptimizer 1.2.0 to 772 native PolyCSS triangles, the fewest within its 1200 m error allowance. Geometry and lighting are prepared ahead of runtime. The original frame is kept with +Z north and east-positive longitude. Rotation has an arbitrary display meridian, not an absolute rotational phase.
+The mesh is simplified with meshoptimizer 1.2.0 to 800 native PolyCSS triangles, each a 128 × 128 px raster leaf. Geometry and lighting are prepared ahead of runtime. The original frame is kept with +Z north and east-positive longitude. Rotation has an arbitrary display meridian, not an absolute rotational phase.
 
 Elevation samples the original mesh radius minus a 70.5 km reference sphere, with a -20 to 20 km legend. It includes global shape, not height above a gravitational equipotential.
 
@@ -59,7 +59,7 @@ Limb columns: the position-angle residual between the projected limb and the pho
 
 ### Shape
 
-Independent nearest-triangle sampling (8192 area-stratified samples each way) measured p95 667.6 m and maximum 1193.7 m between source and display mesh. No repeated radial intersection was found, which supports the radial-height dataset. Reduction softens small features. Re-prepared 2026-10-06: the error allowance now decides the face count, 772 faces at 1181 m estimated simplifier error; checks and sampled distances recorded here before that date describe the earlier 800-face mesh.
+Independent nearest-triangle sampling (8192 area-stratified samples each way) measured p95 667.6 m and maximum 1193.7 m between source and display mesh. No repeated radial intersection was found, which supports the radial-height dataset. Reduction softens small features.
 
 ## Known problems
 

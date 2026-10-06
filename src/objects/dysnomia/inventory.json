@@ -9,27 +9,33 @@
     },
     {
       "location": "public",
+      "filename": "dysnomia-billboard.webp",
+      "bytes": 5264,
+      "sha256": "f79d4edda3c6b6b37afa4aaa3115045023a52e46af23a433b03ea64eccfa2827"
+    },
+    {
+      "location": "public",
       "filename": "dysnomia-model-shadow-alpha@2x.webp",
-      "bytes": 117034,
-      "sha256": "b02505c844d045b6884d36f3bfe65402d6bbcd6e0f577c4de504ce91b6182dac"
+      "bytes": 128064,
+      "sha256": "0c1245c73f39eacf07d97444dc61e0fd1738b93a04a96eb62dbcaefe1a4f547e"
     },
     {
       "location": "public",
       "filename": "dysnomia-model-shadow@2x.webp",
-      "bytes": 19462,
-      "sha256": "2e9302136611e4683f75b92b88a19bb9359e5fd7a720e4a5c0b7732142c33fb5"
+      "bytes": 21136,
+      "sha256": "05cf7f1fc22d6a4b5726d5f644d6cdea539eb457ddc562262ae9a2478ab1cc1b"
     },
     {
       "location": "public",
       "filename": "dysnomia-model-surface-alpha@2x.webp",
-      "bytes": 120012,
-      "sha256": "1093f108276ac6c06e785a39e417bdf421f78096e23e544eb17c1cef1d2a5c45"
+      "bytes": 130732,
+      "sha256": "ab82b63b0d72d0ba73f3e006af2c72980a44943805540dd210502293220988c2"
     },
     {
       "location": "public",
       "filename": "dysnomia-model-surface@2x.webp",
-      "bytes": 26042,
-      "sha256": "63b347a3a4bc4d930c4a74e1c0e000a23d93907c239d54256aa7c47ad02deb26"
+      "bytes": 27570,
+      "sha256": "4e679304805d4d2ab169ffffcf270f2b1ca7a9d2c3eb33fe77807dae6fb044a1"
     },
     {
       "location": "public",
@@ -65,37 +71,37 @@
       "location": "prepared",
       "filename": "datasets.json",
       "bytes": 703,
-      "sha256": "a3d4676575ec202e17fcdad02a8b65a648102d2ffec974a871c643562f4bba80"
+      "sha256": "7d2fc256738c5fe36ce9cd30a88e0fd244df3b3d99df3cebca8b4d1f4f26c46a"
     },
     {
       "location": "prepared",
       "filename": "material.json",
       "bytes": 2060,
-      "sha256": "20050d706c0c82fe65ed13668ded88daa0f5c5a5c93a798282dd5433f05fe0c8"
+      "sha256": "a743f634219b956439f9f6f812b6e79aa1dd7a1ce116fa562b4581d3e91ba1f8"
     },
     {
       "location": "prepared",
       "filename": "minimaps.json",
-      "bytes": 101,
-      "sha256": "33a55f589f67b8e6f4695895930a895111f1d7816b4ff4c953aedad1cf560513"
+      "bytes": 82,
+      "sha256": "d2c1add892ab2a7bb9eb7ecfbef8b3a837f8635234c8bf4b4fee2193a02adc18"
     },
     {
       "location": "prepared",
       "filename": "minimaps/model.webp",
-      "bytes": 1110,
-      "sha256": "2a9588eb084c560c51e934f79a7eec84b346bb855605d5b5a2485ceec15ceabb"
+      "bytes": 1260,
+      "sha256": "568c9019ec1d61eeac9d6bef82dfeca646f93fbd1b85afa22d90cb3c407079a4"
     },
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 210907,
-      "sha256": "37244509de7a93ac029745fce9db7f6581460d8b5f04a77d7d922799973f6a9a"
+      "bytes": 305564,
+      "sha256": "492f2db39257e03fa596a923db3692be2e6db49ee43385f6da1e039fe4622581"
     },
     {
       "location": "prepared",
       "filename": "scene.json",
-      "bytes": 242526,
-      "sha256": "f5f33e420db6943ea136fb6c3364c4d32693aeaefafe83d617e9837ce430161c"
+      "bytes": 354489,
+      "sha256": "2e6b21782c81c8d7e85741c630320c41792e2e3687c8ad374b0b370e474964a2"
     },
     {
       "location": "prepared",
@@ -113,7 +119,7 @@
       "location": "prepared",
       "filename": "surfaces.json",
       "bytes": 2066,
-      "sha256": "992db4df5a34e1a05459f8726983d928ca911a14931b4d16d202f364db4bf38f"
+      "sha256": "8b8609c8121e7eda4f8b8003cf4849c5575eac00fdfc51d9b7c93f671327ad86"
     },
     {
       "location": "prepared",

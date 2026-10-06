@@ -18,7 +18,7 @@ The survey gives a volume-equivalent diameter of 254 km, an ecliptic J2000 pole 
 
 ## Processing
 
-The MPCD surface is simplified with meshoptimizer 1.2.0 to 736 PolyCSS triangles, the fewest within its 2400 m error allowance in a 3513 × 3731 atlas, with lighting prepared ahead of runtime. Elevation is the mesh radius minus a 127 km reference sphere, sampled at 721 × 361 directions, on a -40 to 40 km legend with cartographic hillshade.
+The MPCD surface is simplified with meshoptimizer 1.2.0 to 800 PolyCSS triangles, each a 128 × 128 px leaf in a 2048 × 6400 atlas, with lighting prepared ahead of runtime. Elevation is the mesh radius minus a 127 km reference sphere, sampled at 721 × 361 directions, on a -40 to 40 km legend with cartographic hillshade.
 
 The SPHERE photograph matches relative frame levels, averages where frames overlap and fades each frame toward its disc edge. The reduced `Red/` products are not used.
 
@@ -26,7 +26,7 @@ The mesh keeps +Z north and east-positive longitude. The ecliptic pole is conver
 
 ## Evidence
 
-Source and output are each one closed component with Euler characteristic 2. Meshoptimizer estimates 2385.0 m error against a 2400 m threshold; this is not a Hausdorff bound. Nearest-triangle sampling (8192 samples each way) measured p95 1208.7 m and maximum 3217.3 m. No repeated radial intersection was found, which supports the radial-height dataset. Re-prepared 2026-10-06: the error allowance now decides the face count, 736 faces at 2385 m estimated simplifier error; checks and sampled distances recorded here before that date describe the earlier 800-face mesh.
+Source and output are each one closed component with Euler characteristic 2. Meshoptimizer estimates 2298.1 m error against a 2400 m threshold; this is not a Hausdorff bound. Nearest-triangle sampling (8192 samples each way) measured p95 1208.7 m and maximum 3217.3 m. No repeated radial intersection was found, which supports the radial-height dataset.
 
 ### SPHERE photograph
 

@@ -42,7 +42,7 @@ Original +Z spin axis and +X reference meridian are retained. The selected eclip
 
 ### Preparation
 
-The [terrestrial recipe](source/preparation/terrestrial.json) reads the original mesh through `source-meshoptimizer` and reduces it to the fewest native PolyCSS `u` raster triangles its error allowance permits, 266 of at most 800, in an atlas of 13,107,200 texels. Its error allowance is 507.99 m. Sampled source-fit distances measure preparation error separately from source accuracy; they are not exhaustive Hausdorff bounds.
+The [terrestrial recipe](source/preparation/terrestrial.json) reads the original mesh through `source-meshoptimizer` and reduces it to the fewest native PolyCSS `u` raster triangles its error allowance permits, 282 of at most 800, in an atlas of 13,107,200 texels. Its error allowance is 507.99 m. Sampled source-fit distances measure preparation error separately from source accuracy; they are not exhaustive Hausdorff bounds.
 
 Shadows and asteroid orbit visibility are off by default. The family report records source/result comparisons, numerical checks, runtime cases and delivery. Orbit fixtures sample the epoch and ±30 days; they do not bound the whole interval or establish long-term accuracy.
 

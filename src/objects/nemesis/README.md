@@ -21,7 +21,7 @@ Nemesis is a main-belt asteroid observed in the ESO/VLT/SPHERE survey. Its publi
 
 The asteroid validation report records the earlier source, preparation and browser checks. Some raw captures cited there have local `output/` paths.
 
-Source and output are each one closed component with Euler characteristic 2. Meshoptimizer estimates 1487.4 m error; the authored stopping threshold is 1500 m. This estimate is not a Hausdorff bound. Independent nearest-triangle sampling (8192 area-stratified samples each way) measured p95 722.8 m and maximum 1716.8 m. Re-prepared 2026-10-06: the error allowance now decides the face count, 718 faces at 1487 m estimated simplifier error; checks and sampled distances recorded here before that date describe the earlier 800-face mesh.
+Source and output are each one closed component with Euler characteristic 2. Meshoptimizer estimates 1439.4 m error; the authored stopping threshold is 1500 m. This estimate is not a Hausdorff bound. Independent nearest-triangle sampling (8192 area-stratified samples each way) measured p95 722.8 m and maximum 1716.8 m.
 
 Full source face-centroid checks and 8192 sphere directions found no repeated radial intersection; this supports the radial-height dataset, with the sampling limits stated. Reduction softens small features.
 
@@ -53,7 +53,7 @@ Rotation has an explicitly arbitrary display meridian, not an absolute rotationa
 <details>
 <summary>Shape, elevation and lighting</summary>
 
-The original connected surface is simplified with meshoptimizer 1.2.0, ErrorAbsolute and RegularizeLight, to 718 native PolyCSS u triangles, the fewest within its 1500 m error allowance. Each raster leaf is 128 × 128 px in a 2048 × 6400 atlas. Geometry and per-texel flood/directional lighting are prepared ahead of runtime.
+The original connected surface is simplified with meshoptimizer 1.2.0, ErrorAbsolute and RegularizeLight, to 800 native PolyCSS u triangles. Each raster leaf is 128 × 128 px in a 2048 × 6400 atlas. Geometry and per-texel flood/directional lighting are prepared ahead of runtime.
 
 No radial substitute, runtime triangulation, fabricated texture or additional renderer is used.
 

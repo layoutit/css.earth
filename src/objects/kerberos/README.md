@@ -8,7 +8,7 @@
 
 ## Evidence
 
-- The shared radial-terrain preparer samples 5,040 source triangles and simplifies to **368 native PolyCSS `u` leaves**, with a 100 m simplifier-error setting. It returns one closed component with Euler characteristic 2 and an estimated simplifier error of 98.7 m. That estimate concerns display simplification, not scientific shape uncertainty or a maximum error for every ray.
+- The shared radial-terrain preparer samples 5,040 source triangles and simplifies to **480 native PolyCSS `u` leaves**, with a 100 m simplifier-error setting. It returns one closed component with Euler characteristic 2 and an estimated simplifier error of 82.4 m. That estimate concerns display simplification, not scientific shape uncertainty or a maximum error for every ray.
 
 - The compact radius table, constant material, context portrait and source evidence are checked in.
 

@@ -31,7 +31,7 @@ The candidate dispositions and their source evidence are recorded in the [invest
 
 ## Included: measured shape
 
-Longitude is east-positive in the authored radius table. `source/measurements.json` records the exact ellipsoid equation and 10° sampling; `shape/ellipsoid.tab` includes matching seams and poles. Shared meshoptimizer preparation reduces the sampled ellipsoid to the fewest its error allowance permits, 470 native raster triangles, with a 1.4 km meshoptimizer estimated-error setting. This is not an exhaustive surface-deviation bound. No craters are invented.
+Longitude is east-positive in the authored radius table. `source/measurements.json` records the exact ellipsoid equation and 10° sampling; `shape/ellipsoid.tab` includes matching seams and poles. Shared meshoptimizer preparation reduces the sampled ellipsoid to a target of 480 native raster triangles, with a 1.4 km meshoptimizer estimated-error setting. This is not an exhaustive surface-deviation bound. No craters are invented.
 
 Body-fixed orientation and rotation use IAU_DESPINA through the shared astronomy owner.
 

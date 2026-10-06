@@ -16,15 +16,15 @@ Source selections, recorded trials and open questions are in the
 ## Processing
 
 `shape/ellipsoid.tab` is an analytic realization of those dimensions, not a
-detailed measured mesh. Meshoptimizer reduces it to 448 native PolyCSS
-triangles, the fewest within its 40 m error allowance, which differ from the ellipsoid by 40.138 m at the 95th percentile.
+detailed measured mesh. Meshoptimizer reduces it to 480 native PolyCSS
+triangles, which differ from the ellipsoid by 40.138 m at the 95th percentile.
 
 The camera's north azimuth, 269.776104884°, comes from the kernels. Preparation
 rejects sky at I/F ≤0.02, requires incidence and emission ≤55°, and normalizes
 the surface with a Lommel–Seeliger term, `gain=(mu0+mu)/(2*mu0)`, with gain≤2.
 The display range is 0–0.492 I/F, shown linearly. Shared commands are
 `node packages/bake/cli/object-operations.mts acquire pallene --verify-only` and
-`node site/build/prepare/prepare-authored.ts pallene --write`.
+`node site/build/prepare/authored/prepare-authored.ts pallene --write`.
 
 ## Evidence
 

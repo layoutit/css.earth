@@ -20,7 +20,7 @@ and production browser record
 retain their original build identities. All three routes passed at DPR 1 and 2;
 those captures predate the combined population build.
 
-The recorded scene has 480 native body triangles, with Shadows and Orbit off. Re-prepared 2026-10-06: the error allowance now decides the face count, 314 faces at 7898 m estimated simplifier error; checks and sampled distances recorded here before that date describe the earlier 480-face mesh.
+The recorded scene has 480 native body triangles, with Shadows and Orbit off.
 Inspected default view.
 
 ## Known problems
@@ -47,7 +47,7 @@ alignment. The reference meridian is arbitrary. The 11.05 h photometric period
 has aliases, so no qualified sidereal spin or absolute surface attitude is claimed.
 
 Source recipes pin units, assumptions and numerical axes. Geometry is prepared
-before runtime and uses 314 native raster triangles. Shadows defaults off.
+before runtime and uses 480 native raster triangles. Shadows defaults off.
 
 The [table tool](../../../packages/telescope-cli/src/source-authoring/README.md) reproduces the
 pinned radii from [measurements](source/measurements.json).

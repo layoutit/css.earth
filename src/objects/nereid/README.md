@@ -56,7 +56,7 @@ The source-survey dispositions and evidence are recorded in the [investigation l
 
 The Shape model dataset shows the **approximate ellipsoid** above, with its model origin and non-unique shape/pole visible beside the active dataset. The entire surface uses the ordinary shared missing-data grid. No terrain, albedo, rings or atmosphere are invented. Thermal roughness does not supply crater locations, so none are synthesized.
 
-The 5° radius table follows `r(lon,lat)=1/sqrt((cos(lat)cos(lon)/a)²+(cos(lat)sin(lon)/b)²+(sin(lat)/c)²)`. Its exact axes, family and scaling formula are in `source/measurements.json`. The shared meshoptimizer recipe keeps the fewest its error allowance permits, 328 native triangle leaves with a 2,000-leaf maximum. Simplification tolerance is separate from physical model uncertainty. Shared Flood lighting is the default; directional Shadows remains available. Minimap, thumbnail and context billboard must be regenerated from this same approximation.
+The 5° radius table follows `r(lon,lat)=1/sqrt((cos(lat)cos(lon)/a)²+(cos(lat)sin(lon)/b)²+(sin(lat)/c)²)`. Its exact axes, family and scaling formula are in `source/measurements.json`. The shared meshoptimizer recipe targets 480 native triangle leaves with a 2,000-leaf maximum. Simplification tolerance is separate from physical model uncertainty. Shared Flood lighting is the default; directional Shadows remains available. Minimap, thumbnail and context billboard must be regenerated from this same approximation.
 
 Source inputs and authored documents are pinned in `source/manifest.json`. External preparation inputs are restored by `preparation/acquisition.json`. Archive images surveyed but not used to bake assets are recorded as evidence rather than required runtime downloads.
 

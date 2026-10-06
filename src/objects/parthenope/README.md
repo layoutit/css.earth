@@ -22,7 +22,7 @@ Parthenope is a main-belt asteroid observed in the ESO/VLT/SPHERE survey. It is 
 
 ## Processing
 
-The original surface is simplified with meshoptimizer 1.2.0 to 740 PolyCSS triangles, the fewest within its 1300 m error allowance, with geometry and lighting prepared ahead of runtime. Elevation samples the original mesh radius minus a 74.5 km reference sphere, with a -20 to 20 km legend. The published ecliptic pole is converted to equatorial J2000; JPL Horizons elements place the orbit.
+The original surface is simplified with meshoptimizer 1.2.0 to 800 PolyCSS triangles, with geometry and lighting prepared ahead of runtime. Elevation samples the original mesh radius minus a 74.5 km reference sphere, with a -20 to 20 km legend. The published ecliptic pole is converted to equatorial J2000; JPL Horizons elements place the orbit.
 
 ## Evidence
 
@@ -58,7 +58,7 @@ Limb columns: the position-angle residual between the projected limb and the pho
 
 ### Shape
 
-Meshoptimizer estimates 1292.1 m error; this is not a Hausdorff bound. Independent nearest-triangle sampling (8192 area-stratified samples each way) measured p95 679.8 m and maximum 1455.4 m. Face-centroid checks and 8192 sphere directions found no repeated radial intersection, which supports the radial-height dataset. Reduction softens small features. Re-prepared 2026-10-06: the error allowance now decides the face count, 740 faces at 1292 m estimated simplifier error; checks and sampled distances recorded here before that date describe the earlier 800-face mesh.
+Meshoptimizer estimates 1238.3 m error; this is not a Hausdorff bound. Independent nearest-triangle sampling (8192 area-stratified samples each way) measured p95 679.8 m and maximum 1455.4 m. Face-centroid checks and 8192 sphere directions found no repeated radial intersection, which supports the radial-height dataset. Reduction softens small features.
 
 ## Known problems
 

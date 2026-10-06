@@ -51,7 +51,7 @@ Two source face-centroid rays select a different surface sheet (up to 72.280338 
 
 **Preparation checks**
 
-The shared meshoptimizer 1.2.0 source-connectivity path outputs 756 native PolyCSS u triangles, with ErrorAbsolute and RegularizeLight. Its authored stopping threshold is 30 m and its estimated error is 29.584621 m. Source and output are each one closed outward-wound component with Euler characteristic 2; zero opposite faces were removed. Estimated error is not a geometric bound.
+The shared meshoptimizer 1.2.0 source-connectivity path outputs 800 native PolyCSS u triangles, 128 px raster cells, with ErrorAbsolute and RegularizeLight. Its authored stopping threshold is 30 m and its estimated error is 29.385834 m. Source and output are each one closed outward-wound component with Euler characteristic 2; zero opposite faces were removed. Estimated error is not a geometric bound.
 
 Pinned JPL Horizons geometric heliocentric ICRF elements at JD 2461286.5 and vectors at that epoch and ±30 days support the fixed scene. The conic is a display approximation, not a perturbation ephemeris; the astronomy tests check the position independently.
 

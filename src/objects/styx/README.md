@@ -35,7 +35,7 @@ It is not a uniquely measured pose or a prediction of long-term chaotic rotation
 
 Source selections and alternative products are recorded in the [investigation ledger](investigations.json).
 
-Shape, thumbnail, minimap and context portrait all use that grid. Flood and Shadows are prepared on the same mesh. No elevation, photometric correction, color reconstruction, fabricated terrain, or body-specific runtime controller is introduced. Preparation keeps the fewest its error allowance permits, 220 native `u` leaves with a hard 2,000-leaf maximum.
+Shape, thumbnail, minimap and context portrait all use that grid. Flood and Shadows are prepared on the same mesh. No elevation, photometric correction, color reconstruction, fabricated terrain, or body-specific runtime controller is introduced. Preparation keeps the fewest its error allowance permits, 354 native `u` leaves with a hard 2,000-leaf maximum.
 
 The small analytic radius table, neutral no-data sentinel and context portrait are versioned source inputs.
 

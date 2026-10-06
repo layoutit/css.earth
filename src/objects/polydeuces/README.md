@@ -45,7 +45,7 @@ Limb columns: the position-angle residual between the projected limb and the pho
 
 Appendix B revises the older 1.5 × 1.2 × 1.0 km values.
 
-Physical scale uses the volume-equivalent radius 1.525973578806757 km. The 5° radius table and formula are checked in. Meshoptimizer prepares 346 native triangle leaves; its 38.149339470168925 m error allowance is a simplifier parameter, not a physical measurement uncertainty.
+Physical scale uses the volume-equivalent radius 1.525973578806757 km. The 5° radius table and formula are checked in. Meshoptimizer prepares 480 native triangle leaves; its 38.149339470168925 m error allowance is a simplifier parameter, not a physical measurement uncertainty.
 
 Table 7 provides camera center, north azimuth, observer/Sun coordinates and range; the shared camera projection uses the measured-axis approximation.
 

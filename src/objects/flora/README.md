@@ -21,7 +21,7 @@ Flora is a main-belt asteroid observed in the ESO/VLT/SPHERE survey. It is shown
 
 ## Processing
 
-The original surface is simplified with meshoptimizer 1.2.0 to 730 PolyCSS triangles, the fewest within its 1300 m error allowance, with geometry and lighting prepared ahead of runtime. Elevation samples the original mesh radius minus a 73 km reference sphere, with a -20 to 10 km legend. The published ecliptic pole is converted to equatorial J2000; JPL Horizons elements place the orbit.
+The original surface is simplified with meshoptimizer 1.2.0 to 800 PolyCSS triangles, with geometry and lighting prepared ahead of runtime. Elevation samples the original mesh radius minus a 73 km reference sphere, with a -20 to 10 km legend. The published ecliptic pole is converted to equatorial J2000; JPL Horizons elements place the orbit.
 
 ## Evidence
 
@@ -56,7 +56,7 @@ Limb columns: the position-angle residual between the projected limb and the pho
 
 ### Shape
 
-Meshoptimizer estimates 1280.9 m error; this is not a Hausdorff bound. Independent nearest-triangle sampling (8192 area-stratified samples each way) measured p95 649.8 m and maximum 1310.7 m. Face-centroid checks and 8192 sphere directions found no repeated radial intersection, which supports the radial-height dataset. Reduction softens small features. Re-prepared 2026-10-06: the error allowance now decides the face count, 730 faces at 1281 m estimated simplifier error; checks and sampled distances recorded here before that date describe the earlier 800-face mesh.
+Meshoptimizer estimates 1235.5 m error; this is not a Hausdorff bound. Independent nearest-triangle sampling (8192 area-stratified samples each way) measured p95 649.8 m and maximum 1310.7 m. Face-centroid checks and 8192 sphere directions found no repeated radial intersection, which supports the radial-height dataset. Reduction softens small features.
 
 ## Known problems
 

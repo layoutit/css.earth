@@ -21,7 +21,7 @@ and production browser record
 retain their original build identities. All three routes passed at DPR 1 and 2;
 those captures predate the combined population build.
 
-The recorded scene has 480 body triangles and 20 retained ring tiles. Re-prepared 2026-10-06: the error allowance now decides the face count, 304 faces at 1.358e+04 m estimated simplifier error; checks and sampled distances recorded here before that date describe the earlier 480-face mesh.
+The recorded scene has 480 body triangles and 20 retained ring tiles.
 Ring-image check · Inspected views.
 
 ## Known problems
@@ -48,7 +48,7 @@ inherits the measured ring-plane prior; the meridian is arbitrary. A competing
 triaxial interpretation remains possible. The 8.8394 h and 17.6788 h period
 interpretations are model-dependent, so neither is installed as a sidereal spin.
 
-The source recipe pins units, assumptions and numerical axes. The scene uses 304
+The source recipe pins units, assumptions and numerical axes. The scene uses 480
 prepared native raster triangles. Shadows defaults off; the grid marks
 unmapped terrain.
 

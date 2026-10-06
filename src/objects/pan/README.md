@@ -18,7 +18,7 @@ Every examined source, with its decision and what would reopen it, is in the [in
 
 ## Processing
 
-The shared meshoptimizer preparer simplifies the source to 454 triangles. No ellipsoid is substituted for the equatorial ridge.
+The shared meshoptimizer preparer simplifies the source to 800 triangles. No ellipsoid is substituted for the equatorial ridge.
 
 Each image is projected onto the shape using its own sub-spacecraft and subsolar coordinates, distance, north angle and image center from Table 1 of `pan_document.pdf`, with the ideal perspective camera of NAIF `cas_iss_v10.ti`. The calibrated VICAR header controls raster addressing, because the detached labels carry a stale image pointer that would shift the image by one row.
 

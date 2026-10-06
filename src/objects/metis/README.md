@@ -16,7 +16,7 @@ The eight-bit SSI data are decoded from their VICAR layout; the original files a
 
 A measured empty-sky median is removed, then the shared bounded lunar-Lambert approximation (weight 0.5, maximum gain 1.5, incidence and emission below 70 degrees) reduces photographed illumination. The 1.5 cap withholds 5,057 of C0394682801's 5,445 samples and lowers area coverage from 60.4% to 53.9%. Overlap level matching needs gains up to 1.75 (C0394682801).
 
-`source/shape/model.json` records the ellipsoid formula, and `metis-ellipsoid.tab` samples it every 5 degrees; these are not radius measurements. Meshoptimizer simplifies its 5,040 triangles to 336 within a 500 m allowance, a preparation setting rather than an uncertainty.
+`source/shape/model.json` records the ellipsoid formula, and `metis-ellipsoid.tab` samples it every 5 degrees; these are not radius measurements. Meshoptimizer simplifies its 5,040 triangles to 480 within a 500 m allowance, a preparation setting rather than an uncertainty.
 
 ## Evidence
 

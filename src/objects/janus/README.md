@@ -25,7 +25,7 @@ examined source, with its decision and what would reopen it, is in the [investig
 
 ## Processing
 
-The shape is simplified to 516 native PolyCSS triangles, the fewest within its 1300 m error allowance before texture baking. Photographs are mapped with each
+The shape is simplified to 720 native PolyCSS triangles before texture baking. Photographs are mapped with each
 frame's measured perspective, the source shape and the NAC pixel scale of 12 µm / 2003.44 mm from the
 [Cassini instrument kernel](https://naif.jpl.nasa.gov/pub/naif/CASSINI/kernels/ik/cas_iss_v10.ti). No camera alignment
 is fitted by eye. The calibrated pixels begin at byte 8192, after a telemetry record; some detached PDS labels have a

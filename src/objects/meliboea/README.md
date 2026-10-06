@@ -55,7 +55,7 @@ The [investigation ledger](investigations.json) records the source survey and al
 <details>
 <summary>Preparation and qualification</summary>
 
-The established source-meshoptimizer path retains source connectivity, reduces to the fewest faces the error allowance permits, 350 of at most 800, and emits native PolyCSS `u` triangles from an atlas of 13,107,200 texels. The error allowance is 1437.7 m; sampled source-fit error is qualified separately from source accuracy.
+The established source-meshoptimizer path retains source connectivity, reduces to the fewest faces the error allowance permits, 362 of at most 800, and emits native PolyCSS `u` triangles from an atlas of 13,107,200 texels. The error allowance is 1437.7 m; sampled source-fit error is qualified separately from source accuracy.
 
 Elevation uses closest-source-surface sampling with the same physical scale. Shadows are off by default.
 

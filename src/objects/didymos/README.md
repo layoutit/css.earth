@@ -16,7 +16,7 @@ The shape bundle is Daly, T., Barnouin, O., Ernst, C., Nair, H., Espiritu, R., a
 
 ## Processing
 
-The shape has 24,578 vertices and 49,152 triangles in the released body-fixed frame, kept without recentering or stretching. Meshoptimizer 1.2.0 simplifies it to one closed 534-face surface with an 8 m error allowance. The display scale uses the 365 m mean radius from the shape-coordinate document, whose pole (RA 66.83°, Dec −73.0°) and 2.26000523 h period are used. The prime-meridian phase is an arbitrary display choice.
+The shape has 24,578 vertices and 49,152 triangles in the released body-fixed frame, kept without recentering or stretching. Meshoptimizer 1.2.0 simplifies it to one closed 734-face surface with an 8 m error allowance. The display scale uses the 365 m mean radius from the shape-coordinate document, whose pole (RA 66.83°, Dec −73.0°) and 2.26000523 h period are used. The prime-meridian phase is an arbitrary display choice.
 
 Relative albedo shows the v003 SPC facet field for the 25,686 faces with positive finite sigma. Sigma-zero values are withheld even when their nominal albedo is 1. Elevation includes whole-body flattening and the equatorial ridge.
 

@@ -47,6 +47,6 @@ Source pole: ecliptic J2000 (311°,-78°). Reference sidereal period: 6.80329 h.
 
 ## Preparation
 
-Existing source-meshoptimizer preparation retains source connectivity, reduces to the fewest native u faces its allowance permits, 296 of at most 800, in an atlas of 13,107,200 texels. The source-fit allowance is 12 m; source-model accuracy and simplification error remain separate. Shadows starts off.
+Existing source-meshoptimizer preparation retains source connectivity, reduces to the fewest native u faces its allowance permits, 330 of at most 800, in an atlas of 13,107,200 texels. The source-fit allowance is 12 m; source-model accuracy and simplification error remain separate. Shadows starts off.
 
 </details>

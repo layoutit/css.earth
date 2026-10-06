@@ -15,7 +15,7 @@ Itokawa is shown on the Gaskell shape model with a partial, controlled AMICA pho
 
 ## Processing
 
-The shared preparer scales the source shape by the 0.165 km radius and simplifies it with meshoptimizer 1.2.0 to 794 faces, with 5.982 m estimated error. The result has one connected component and Euler characteristic two. Elevation is radial height above the 165 m sphere, taken from the nearest point on the full source surface within 6 m; samples beyond that bound are withheld with the shared gray grid.
+The shared preparer scales the source shape by the 0.165 km radius and simplifies it with meshoptimizer 1.2.0 to 794 faces, with 5.259 m estimated error. The result has one connected component and Euler characteristic two. Elevation is radial height above the 165 m sphere, taken from the nearest point on the full source surface within 6 m; samples beyond that bound are withheld with the shared gray grid.
 
 The AMICA frames use the original Gaskell-controlled DDR Cartesian backplanes. Preparation verifies every DDR image sample against the vertically reversed original FITS array, then applies the preflight flat and exposure normalization. Clipped 255 values and defective flat pixels are withheld. A bounded Lommel–Seeliger disk correction follows the AMICA use described by Li, Le Corre and Reddy, LPSC 2018 abstract 1957; incidence and emission are limited to 70 degrees and gain to 1.5. Frame `2481672682` sets the brightness reference; the other frames follow in increasing median pixel footprint.
 

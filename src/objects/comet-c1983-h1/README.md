@@ -21,7 +21,7 @@ One **Shape approximation** dataset shows an ellipsoid at the published effectiv
 
 ## Evidence
 
-Run of 2026-09-16 (this version): [`node site/build/prepare/prepare-authored.ts comet-c1983-h1 --write`](../../../site/build/prepare/prepare-authored.ts) prepared the package from the ellipsoid parameters. `node --test packages/bake/src/objects/layers/terrestrial/fixtures/comets/comet-radius-models.test.mts` passes for all twenty radius-model comets: the prepared 800-triangle surface is closed, matches the published radius and elongation in its own anchor table and in `packages/astronomy`, carries the missing-imagery grid with Shadows off, and the source manifest verifies. The earlier source, delivery and browser reports tested the retired Celestia mesh and were removed with it. Re-prepared 2026-10-06: the error allowance now decides the face count, 198 faces at 183.9 m estimated simplifier error; checks and sampled distances recorded here before that date describe the earlier 800-face mesh.
+Run of 2026-09-16 (this version): [`node site/build/prepare/authored/prepare-authored.ts comet-c1983-h1 --write`](../../../site/build/prepare/authored/prepare-authored.ts) prepared the package from the ellipsoid parameters. `node --test packages/bake/src/objects/layers/terrestrial/fixtures/comets/comet-radius-models.test.mts` passes for all twenty radius-model comets: the prepared 800-triangle surface is closed, matches the published radius and elongation in its own anchor table and in `packages/astronomy`, carries the missing-imagery grid with Shadows off, and the source manifest verifies. The earlier source, delivery and browser reports tested the retired Celestia mesh and were removed with it. Re-prepared 2026-10-06: the error allowance now decides the face count, 290 faces at 124.5 m estimated simplifier error; checks and sampled distances recorded here before that date describe the earlier 800-face mesh.
 
 ## Known problems
 
@@ -32,6 +32,6 @@ Position is fixed at the explorer's epoch; nearby conics are placement approxima
 <details>
 <summary>Shape preparation</summary>
 
-The published effective radius scales a subdivided octahedron with the stated axis ratios as a volume-equivalent ellipsoid, in metres, reduced offline to 198 display triangles. The camera uses the same radius. Geometry, grid texels, optional shadows and lighting are prepared once; the browser performs no runtime mesh work.
+The published effective radius scales a subdivided octahedron with the stated axis ratios as a volume-equivalent ellipsoid, in metres, reduced offline to 290 display triangles. The camera uses the same radius. Geometry, grid texels, optional shadows and lighting are prepared once; the browser performs no runtime mesh work.
 
 </details>

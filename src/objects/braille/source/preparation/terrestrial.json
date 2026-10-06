@@ -50,8 +50,9 @@
         "longitudeDirection": "east-positive"
       },
       "faceBudget": 2000,
-      "atlasTexels": 1966080,
+      "texelsPerFace": 4096,
       "simplification": {
+        "targetFaces": 480,
         "maximumErrorMeters": 16.007239562343678,
         "method": "source-meshoptimizer"
       },

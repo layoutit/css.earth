@@ -9,6 +9,12 @@
     },
     {
       "location": "public",
+      "filename": "iris-billboard.webp",
+      "bytes": 6034,
+      "sha256": "e0f8aedd83143ad699bd4f1f17fef830edc838ed6f2957831dfd218d6bffcc1b"
+    },
+    {
+      "location": "public",
       "filename": "iris-elevation-legend.webp",
       "bytes": 298,
       "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
@@ -16,26 +22,26 @@
     {
       "location": "public",
       "filename": "iris-elevation-shadow-alpha@2x.webp",
-      "bytes": 603760,
-      "sha256": "8e86be36fec4d584ec59378d05b2082ecf61e322add0a2f839861d3dc2cccdd0"
+      "bytes": 629886,
+      "sha256": "17451ebf40f51c1c28d48ce6b06a3bdd8c070881f6157bcd88c676ee64088021"
     },
     {
       "location": "public",
       "filename": "iris-elevation-shadow@2x.webp",
-      "bytes": 153962,
-      "sha256": "0bd4f80cd88289920dcf2bf99a6d4c360d78ec58f78b7e3e1deeb912fbaa7678"
+      "bytes": 160018,
+      "sha256": "9847260f95ff97c54662973f9e326239623ca4a521a4fd35173374d057ffa99f"
     },
     {
       "location": "public",
       "filename": "iris-elevation-surface-alpha@2x.webp",
-      "bytes": 675396,
-      "sha256": "fd6278f1b6a26b598c244f6867e95506c4f5899cac99928c28904b51065807ba"
+      "bytes": 703980,
+      "sha256": "960f164af60ed4fb34c2e55d4a06d912413ec55c512a65a143b4367789e766e8"
     },
     {
       "location": "public",
       "filename": "iris-elevation-surface@2x.webp",
-      "bytes": 245662,
-      "sha256": "f0dc8cee8155c8ad127ca77b200378bc0438e1582af79fd8030254496066b0e8"
+      "bytes": 253708,
+      "sha256": "c8989b9a8775a5ded9acb33f87fb6d2b1170e05d66c071e6e0345dbc4630ee97"
     },
     {
       "location": "public",
@@ -46,26 +52,26 @@
     {
       "location": "public",
       "filename": "iris-shape-shadow-alpha@2x.webp",
-      "bytes": 500170,
-      "sha256": "52cd4ca1f78c5f2e2a5687458eeaafe7f352c3fc9931c897ac5672b726576cba"
+      "bytes": 519776,
+      "sha256": "9b1b4b2998f47966118129597ccc65e00aa0996be0bef0547ceb7498f7a64d4e"
     },
     {
       "location": "public",
       "filename": "iris-shape-shadow@2x.webp",
-      "bytes": 63102,
-      "sha256": "f6ee8de29c642466a7b3fbd650eae3b7ef515c8b5730847d4893abb9fe7b71b4"
+      "bytes": 64288,
+      "sha256": "72bad5469c1105fb819fc310283e71b78db1f39a7e026792c16ce963580d8ecc"
     },
     {
       "location": "public",
       "filename": "iris-shape-surface-alpha@2x.webp",
-      "bytes": 495634,
-      "sha256": "1f60a3e47d9fa8d326ad78a7d6b16dcf3abb272472b0ca2c0531cd4781525ee0"
+      "bytes": 514734,
+      "sha256": "91f88426f465e564a21382b6d6656a2923581c5e1d05bf0734dd21f9296ab956"
     },
     {
       "location": "public",
       "filename": "iris-shape-surface@2x.webp",
-      "bytes": 56478,
-      "sha256": "b3c648f39039ae0b89dee35c4c83b44087fc9971405b28c545ed8599d9ebf735"
+      "bytes": 56688,
+      "sha256": "f5d257db436d331b6c9a60e18de9aa3a51a5ce1311217351efc6ede4eced3f61"
     },
     {
       "location": "public",
@@ -76,20 +82,20 @@
     {
       "location": "public",
       "filename": "iris-zimpol-surface-alpha@2x.webp",
-      "bytes": 526360,
-      "sha256": "62c51c676257675af03c3967d79075150bc7a4fdf47422c39bd839d1ee4d1f64"
+      "bytes": 607528,
+      "sha256": "1588d67b99716b26ff0898a77b838828a34fa90b8e35aab5e6f6dabbfeecda2b"
     },
     {
       "location": "public",
       "filename": "iris-zimpol-surface@2x.webp",
-      "bytes": 142366,
-      "sha256": "9069de59933a44825558113e342dfd0e9f329911b0e96888575f22a607ac0855"
+      "bytes": 151774,
+      "sha256": "74953b796d8bc732780525841b55d9ce56b1677703c4b911ef68335cba0086b9"
     },
     {
       "location": "public",
       "filename": "iris-zimpol-thumbnail.webp",
-      "bytes": 1774,
-      "sha256": "6803bb3ec458e8301a9c9ef74f67739e265e867a5a26594a58849a7ea5e6a7cb"
+      "bytes": 1836,
+      "sha256": "5878cd9793b61dcbbd25eb7af2b022f42698d1785a8b79650fe035e816faac6b"
     },
     {
       "location": "prepared",
@@ -119,19 +125,19 @@
       "location": "prepared",
       "filename": "datasets.json",
       "bytes": 1744,
-      "sha256": "93a332f91177d1e7b7bcc9ef3541b6baba0ff82b25b8fe536f6d9de73862dec7"
+      "sha256": "7341b2f1c3c400441cbcce562ddca8e6a282bcb75824852d7bc6ef2f778d7608"
     },
     {
       "location": "prepared",
       "filename": "material.json",
-      "bytes": 103047,
-      "sha256": "8a6b616c3d71e448f709dd1287f93ba4058a390e1d5cbcec1e65d96c8a829292"
+      "bytes": 103044,
+      "sha256": "622dee26913e8f0dd1d372e47ad857440e18fbf114f0c2f9cc4c2d0e74b6e8be"
     },
     {
       "location": "prepared",
       "filename": "minimaps.json",
       "bytes": 304,
-      "sha256": "10868fff30344fc6bc441bba1783336273725fc3693680abc2fb89d246dd102c"
+      "sha256": "3e0c5f5a10d0e85b9f27eaa8974c2b6d7f0388dd629061cb00af0a27132f17c7"
     },
     {
       "location": "prepared",
@@ -148,20 +154,20 @@
     {
       "location": "prepared",
       "filename": "minimaps/zimpol.webp",
-      "bytes": 2736,
-      "sha256": "6db849fad9d2c0ab1f6f9682c70900fbf91ec964d1f72ae59372cf37740d3812"
+      "bytes": 2726,
+      "sha256": "ae8120a14bcf3320771920b7b04a00d5c21ec845b0c60c660c241a0601e46e05"
     },
     {
       "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 833852,
-      "sha256": "2900d4b5f4e767c76c558942458052644772e717a093bf20d3c4fa0691646548"
+      "bytes": 1025657,
+      "sha256": "3df7d245aed7cc99e57b7e9e8beb9c3254e8380fa87955967cd00e766dfcddfd"
     },
     {
       "location": "prepared",
       "filename": "scene.json",
-      "bytes": 1049739,
-      "sha256": "19d24fb73428bf95b1a30bcf2a3cf165bca0f9540245e2927bb59ea33a358f21"
+      "bytes": 1293518,
+      "sha256": "f1da2b76a39850a2d8c444578c2f97f49f19b1a5c981a08c90ba0f5540270bb7"
     },
     {
       "location": "prepared",
@@ -178,8 +184,8 @@
     {
       "location": "prepared",
       "filename": "surfaces.json",
-      "bytes": 103049,
-      "sha256": "6df28798d5d78a3c138973ab5097bb0338862249f836a34d9dd47baf7f12d3c1"
+      "bytes": 103046,
+      "sha256": "3aa5cecf44fd42c0653ec6288b68047e8e47ce187453ae4e65e68954b6756b63"
     },
     {
       "location": "prepared",
