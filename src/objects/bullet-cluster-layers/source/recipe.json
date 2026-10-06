@@ -2,7 +2,7 @@
   "schema": "cssearth-image-layer-recipe@1",
   "id": "bullet-cluster-layers",
   "source": {
-    "path": "source.jpg",
+    "path": "starless.jpg",
     "dimensions": [
       3000,
       2168
@@ -11,10 +11,10 @@
       3000,
       2168
     ],
-    "publisherUrl": "https://esahubble.org/images/opo0639a/",
-    "downloadUrl": "https://cdn.esahubble.org/archives/images/large/opo0639a.jpg",
-    "credit": "X-ray: NASA/CXC/M.Markevitch et al. Optical: NASA/STScI; Magellan/U.Arizona/D.Clowe et al. Lensing Map: NASA/STScI; ESO WFI; Magellan/U.Arizona/D.Clowe et al.",
-    "license": "CC-BY-4.0"
+    "publisherUrl": "https://chandra.harvard.edu/photo/2006/1e0657/",
+    "downloadUrl": "https://chandra.harvard.edu/photo/2006/1e0657/1e0657_opt.tif",
+    "credit": "Optical: NASA/STScI; Magellan/U.Arizona/D.Clowe et al. X-ray: NASA/CXC/CfA/M.Markevitch et al. Lensing Map: NASA/STScI; ESO WFI; Magellan/U.Arizona/D.Clowe et al.",
+    "license": "NASA-SAO"
   },
   "observation": {
     "centerRaDeg": 104.6170272,
@@ -46,7 +46,37 @@
       1,
       1,
       1
-    ]
+    ],
+    "collision": {
+      "source": "publication-clowe-2006-bullet-cluster-dark-matter",
+      "basis": "Clowe et al. (2006) give the places. Gas (Table 2): the main cluster's plasma at 06:58:30.2, -55:56:35.9 and the subcluster's at 06:58:21.2, -55:56:30.0 (J2000). Mass (Sect. III): the main peak 21.2 arcsec west and 17.7 north of the main cluster's southern brightest galaxy (06:58:35.3, -55:56:56.3) and the subcluster's 7.1 arcsec east and 6.5 north of its brightest galaxy (06:58:16.0, -55:56:35.1). Markevitch et al. (2002, Sect. 4.1) fit the gas about the bullet as round about the line it moves along, and Springel & Farrar (2007, Sect. V.1) find the cones of its bow shock and cold front round about that line, as a central collision gives; they and Clowe et al. fit the mass with two round halos. Barrena et al. (2002) put the line 5 to 15 degrees from the plane of the sky, from the subcluster's galaxies receding 616 km/s in the cluster's frame; Lage & Farrar (2014, Sect. 4.3) fit about 10 degrees, the subcluster receding.",
+      "tiltDeg": 10,
+      "gas": {
+        "source": "chandra-2006-1e0657-layers",
+        "path": "gas.png",
+        "from": {
+          "raDeg": 104.6258333,
+          "decDeg": -55.9433056
+        },
+        "to": {
+          "raDeg": 104.5883333,
+          "decDeg": -55.9416667
+        },
+        "pointSourceArcsec": 3
+      },
+      "mass": {
+        "source": "chandra-2006-1e0657-layers",
+        "path": "mass.png",
+        "from": {
+          "raDeg": 104.6365672,
+          "decDeg": -55.9440556
+        },
+        "to": {
+          "raDeg": 104.5701886,
+          "decDeg": -55.9412778
+        }
+      }
+    }
   },
   "bake": {
     "maxFacePixels": 1024,
@@ -63,7 +93,10 @@
     "edgeTaperFraction": 0.04,
     "diffuseFraction": 0.65,
     "diffuseSigmaPixels": 2,
-    "flat": true
+    "flat": true,
+    "bulgeSlices": 32,
+    "bulgeFacePixels": 256,
+    "bulgeCrossSlices": 40
   },
   "provenance": {
     "path": "provenance.json"

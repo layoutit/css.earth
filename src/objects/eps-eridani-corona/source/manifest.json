@@ -1,0 +1,363 @@
+{
+  "schema": "cssearth-volume-source-manifest@2",
+  "pathBase": "repository",
+  "inputs": [
+    {
+      "id": "run-2008-01-equator",
+      "dependencies": [],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "zenodo-5575241-eps-eridani-cme-simulations",
+            "role": "material",
+            "evidence": "eEri_CME_simulations.tar.gz: open_data/january2008_10min_CME/jan08eq_3dmhd_t00001000_n00152652.plt"
+          }
+        ]
+      },
+      "path": ".local/eps-eridani-corona/open_data/january2008_10min_CME/jan08eq_3dmhd_t00001000_n00152652.plt",
+      "bytes": 864145360,
+      "origin": "https://zenodo.org/api/records/5575241/files/eEri_CME_simulations.tar.gz/content",
+      "sourceUrl": "https://zenodo.org/records/5575241",
+      "title": "ε Eridani simulation · January 2008 magnetic map, eruption near the equator",
+      "credit": "Ó Fionnagáin, Kavanagh, Vidotto et al. (2022), ApJ 924, 115; data https://doi.org/10.5281/zenodo.5575241 (CC-BY-4.0)",
+      "displayCredit": "Ó Fionnagáin et al. (2022)",
+      "acquisition": "Member open_data/january2008_10min_CME/jan08eq_3dmhd_t00001000_n00152652.plt of eEri_CME_simulations.tar.gz (6355199342 bytes), extracted unchanged. This run is drawn: its eruption disturbs the least of the drawn volume.",
+      "license": "CC-BY-4.0. Released on Zenodo under the Creative Commons Attribution 4.0 International licence; retain the citation.",
+      "datasetId": "simulation-2008-01"
+    },
+    {
+      "id": "run-2008-01-north",
+      "dependencies": [],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "zenodo-5575241-eps-eridani-cme-simulations",
+            "role": "material",
+            "evidence": "eEri_CME_simulations.tar.gz: open_data/january2008_10min_CME/jan08poleN_3dmhd_t00001000_n00153068.plt"
+          }
+        ]
+      },
+      "path": ".local/eps-eridani-corona/open_data/january2008_10min_CME/jan08poleN_3dmhd_t00001000_n00153068.plt",
+      "bytes": 1124045428,
+      "origin": "https://zenodo.org/api/records/5575241/files/eEri_CME_simulations.tar.gz/content",
+      "sourceUrl": "https://zenodo.org/records/5575241",
+      "title": "ε Eridani simulation · January 2008 magnetic map, eruption near the north pole",
+      "credit": "Ó Fionnagáin, Kavanagh, Vidotto et al. (2022), ApJ 924, 115; data https://doi.org/10.5281/zenodo.5575241 (CC-BY-4.0)",
+      "displayCredit": "Ó Fionnagáin et al. (2022)",
+      "acquisition": "Member open_data/january2008_10min_CME/jan08poleN_3dmhd_t00001000_n00153068.plt of eEri_CME_simulations.tar.gz (6355199342 bytes), extracted unchanged. Read only to measure how much of the drawn volume each run’s eruption disturbs.",
+      "license": "CC-BY-4.0. Released on Zenodo under the Creative Commons Attribution 4.0 International licence; retain the citation."
+    },
+    {
+      "id": "run-2008-01-south",
+      "dependencies": [],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "zenodo-5575241-eps-eridani-cme-simulations",
+            "role": "material",
+            "evidence": "eEri_CME_simulations.tar.gz: open_data/january2008_10min_CME/jan08poleS_3dmhd_t00001000_n00143955.plt"
+          }
+        ]
+      },
+      "path": ".local/eps-eridani-corona/open_data/january2008_10min_CME/jan08poleS_3dmhd_t00001000_n00143955.plt",
+      "bytes": 1045110960,
+      "origin": "https://zenodo.org/api/records/5575241/files/eEri_CME_simulations.tar.gz/content",
+      "sourceUrl": "https://zenodo.org/records/5575241",
+      "title": "ε Eridani simulation · January 2008 magnetic map, eruption near the south pole",
+      "credit": "Ó Fionnagáin, Kavanagh, Vidotto et al. (2022), ApJ 924, 115; data https://doi.org/10.5281/zenodo.5575241 (CC-BY-4.0)",
+      "displayCredit": "Ó Fionnagáin et al. (2022)",
+      "acquisition": "Member open_data/january2008_10min_CME/jan08poleS_3dmhd_t00001000_n00143955.plt of eEri_CME_simulations.tar.gz (6355199342 bytes), extracted unchanged. Read only to measure how much of the drawn volume each run’s eruption disturbs.",
+      "license": "CC-BY-4.0. Released on Zenodo under the Creative Commons Attribution 4.0 International licence; retain the citation."
+    },
+    {
+      "id": "run-2011-10-equator",
+      "dependencies": [],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "zenodo-5575241-eps-eridani-cme-simulations",
+            "role": "material",
+            "evidence": "eEri_CME_simulations.tar.gz: open_data/october2011_10min_CME/oct11eq_3dmhd_t00001000_n00141228.plt"
+          }
+        ]
+      },
+      "path": ".local/eps-eridani-corona/open_data/october2011_10min_CME/oct11eq_3dmhd_t00001000_n00141228.plt",
+      "bytes": 881330704,
+      "origin": "https://zenodo.org/api/records/5575241/files/eEri_CME_simulations.tar.gz/content",
+      "sourceUrl": "https://zenodo.org/records/5575241",
+      "title": "ε Eridani simulation · October 2011 magnetic map, eruption near the equator",
+      "credit": "Ó Fionnagáin, Kavanagh, Vidotto et al. (2022), ApJ 924, 115; data https://doi.org/10.5281/zenodo.5575241 (CC-BY-4.0)",
+      "displayCredit": "Ó Fionnagáin et al. (2022)",
+      "acquisition": "Member open_data/october2011_10min_CME/oct11eq_3dmhd_t00001000_n00141228.plt of eEri_CME_simulations.tar.gz (6355199342 bytes), extracted unchanged. This run is drawn: its eruption disturbs the least of the drawn volume.",
+      "license": "CC-BY-4.0. Released on Zenodo under the Creative Commons Attribution 4.0 International licence; retain the citation.",
+      "datasetId": "simulation-2011-10"
+    },
+    {
+      "id": "run-2011-10-north",
+      "dependencies": [],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "zenodo-5575241-eps-eridani-cme-simulations",
+            "role": "material",
+            "evidence": "eEri_CME_simulations.tar.gz: open_data/october2011_10min_CME/oct11poleN_3dmhd_t00001000_n00132318.plt"
+          }
+        ]
+      },
+      "path": ".local/eps-eridani-corona/open_data/october2011_10min_CME/oct11poleN_3dmhd_t00001000_n00132318.plt",
+      "bytes": 1131266644,
+      "origin": "https://zenodo.org/api/records/5575241/files/eEri_CME_simulations.tar.gz/content",
+      "sourceUrl": "https://zenodo.org/records/5575241",
+      "title": "ε Eridani simulation · October 2011 magnetic map, eruption near the north pole",
+      "credit": "Ó Fionnagáin, Kavanagh, Vidotto et al. (2022), ApJ 924, 115; data https://doi.org/10.5281/zenodo.5575241 (CC-BY-4.0)",
+      "displayCredit": "Ó Fionnagáin et al. (2022)",
+      "acquisition": "Member open_data/october2011_10min_CME/oct11poleN_3dmhd_t00001000_n00132318.plt of eEri_CME_simulations.tar.gz (6355199342 bytes), extracted unchanged. Read only to measure how much of the drawn volume each run’s eruption disturbs.",
+      "license": "CC-BY-4.0. Released on Zenodo under the Creative Commons Attribution 4.0 International licence; retain the citation."
+    },
+    {
+      "id": "run-2011-10-south",
+      "dependencies": [],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "zenodo-5575241-eps-eridani-cme-simulations",
+            "role": "material",
+            "evidence": "eEri_CME_simulations.tar.gz: open_data/october2011_10min_CME/oct11poleS_3dmhd_t00001000_n00128423.plt"
+          }
+        ]
+      },
+      "path": ".local/eps-eridani-corona/open_data/october2011_10min_CME/oct11poleS_3dmhd_t00001000_n00128423.plt",
+      "bytes": 1053683024,
+      "origin": "https://zenodo.org/api/records/5575241/files/eEri_CME_simulations.tar.gz/content",
+      "sourceUrl": "https://zenodo.org/records/5575241",
+      "title": "ε Eridani simulation · October 2011 magnetic map, eruption near the south pole",
+      "credit": "Ó Fionnagáin, Kavanagh, Vidotto et al. (2022), ApJ 924, 115; data https://doi.org/10.5281/zenodo.5575241 (CC-BY-4.0)",
+      "displayCredit": "Ó Fionnagáin et al. (2022)",
+      "acquisition": "Member open_data/october2011_10min_CME/oct11poleS_3dmhd_t00001000_n00128423.plt of eEri_CME_simulations.tar.gz (6355199342 bytes), extracted unchanged. Read only to measure how much of the drawn volume each run’s eruption disturbs.",
+      "license": "CC-BY-4.0. Released on Zenodo under the Creative Commons Attribution 4.0 International licence; retain the citation."
+    },
+    {
+      "id": "run-2013-10-equator",
+      "dependencies": [],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "zenodo-5575241-eps-eridani-cme-simulations",
+            "role": "material",
+            "evidence": "eEri_CME_simulations.tar.gz: open_data/october2013_10min_CME/oct13_3dmhd_t00001000_n00115012.plt"
+          }
+        ]
+      },
+      "path": ".local/eps-eridani-corona/open_data/october2013_10min_CME/oct13_3dmhd_t00001000_n00115012.plt",
+      "bytes": 970731792,
+      "origin": "https://zenodo.org/api/records/5575241/files/eEri_CME_simulations.tar.gz/content",
+      "sourceUrl": "https://zenodo.org/records/5575241",
+      "title": "ε Eridani simulation · October 2013 magnetic map, eruption near the equator",
+      "credit": "Ó Fionnagáin, Kavanagh, Vidotto et al. (2022), ApJ 924, 115; data https://doi.org/10.5281/zenodo.5575241 (CC-BY-4.0)",
+      "displayCredit": "Ó Fionnagáin et al. (2022)",
+      "acquisition": "Member open_data/october2013_10min_CME/oct13_3dmhd_t00001000_n00115012.plt of eEri_CME_simulations.tar.gz (6355199342 bytes), extracted unchanged. This run is drawn: its eruption disturbs the least of the drawn volume.",
+      "license": "CC-BY-4.0. Released on Zenodo under the Creative Commons Attribution 4.0 International licence; retain the citation.",
+      "datasetId": "simulation-2013-10"
+    },
+    {
+      "id": "run-2013-10-north",
+      "dependencies": [],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "zenodo-5575241-eps-eridani-cme-simulations",
+            "role": "material",
+            "evidence": "eEri_CME_simulations.tar.gz: open_data/october2013_10min_CME/oct13poleN_3dmhd_t00001000_n00123792.plt"
+          }
+        ]
+      },
+      "path": ".local/eps-eridani-corona/open_data/october2013_10min_CME/oct13poleN_3dmhd_t00001000_n00123792.plt",
+      "bytes": 1134553108,
+      "origin": "https://zenodo.org/api/records/5575241/files/eEri_CME_simulations.tar.gz/content",
+      "sourceUrl": "https://zenodo.org/records/5575241",
+      "title": "ε Eridani simulation · October 2013 magnetic map, eruption near the north pole",
+      "credit": "Ó Fionnagáin, Kavanagh, Vidotto et al. (2022), ApJ 924, 115; data https://doi.org/10.5281/zenodo.5575241 (CC-BY-4.0)",
+      "displayCredit": "Ó Fionnagáin et al. (2022)",
+      "acquisition": "Member open_data/october2013_10min_CME/oct13poleN_3dmhd_t00001000_n00123792.plt of eEri_CME_simulations.tar.gz (6355199342 bytes), extracted unchanged. Read only to measure how much of the drawn volume each run’s eruption disturbs.",
+      "license": "CC-BY-4.0. Released on Zenodo under the Creative Commons Attribution 4.0 International licence; retain the citation."
+    },
+    {
+      "id": "run-2013-10-south",
+      "dependencies": [],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "zenodo-5575241-eps-eridani-cme-simulations",
+            "role": "material",
+            "evidence": "eEri_CME_simulations.tar.gz: open_data/october2013_10min_CME/oct13poleS_3dmhd_t00001000_n00125626.plt"
+          }
+        ]
+      },
+      "path": ".local/eps-eridani-corona/open_data/october2013_10min_CME/oct13poleS_3dmhd_t00001000_n00125626.plt",
+      "bytes": 1078127600,
+      "origin": "https://zenodo.org/api/records/5575241/files/eEri_CME_simulations.tar.gz/content",
+      "sourceUrl": "https://zenodo.org/records/5575241",
+      "title": "ε Eridani simulation · October 2013 magnetic map, eruption near the south pole",
+      "credit": "Ó Fionnagáin, Kavanagh, Vidotto et al. (2022), ApJ 924, 115; data https://doi.org/10.5281/zenodo.5575241 (CC-BY-4.0)",
+      "displayCredit": "Ó Fionnagáin et al. (2022)",
+      "acquisition": "Member open_data/october2013_10min_CME/oct13poleS_3dmhd_t00001000_n00125626.plt of eEri_CME_simulations.tar.gz (6355199342 bytes), extracted unchanged. Read only to measure how much of the drawn volume each run’s eruption disturbs.",
+      "license": "CC-BY-4.0. Released on Zenodo under the Creative Commons Attribution 4.0 International licence; retain the citation."
+    },
+    {
+      "id": "wind-parameters",
+      "dependencies": [],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-eps-eridani-corona-wind-parameters",
+            "role": "material",
+            "evidence": "src/objects/eps-eridani-corona/source/manifest.json#/inputs/9"
+          }
+        ]
+      },
+      "path": "src/objects/eps-eridani-corona/source/wind-parameters.json",
+      "origin": "https://doi.org/10.1086/340797",
+      "sourceUrl": "https://arxiv.org/abs/astro-ph/0203437",
+      "title": "Wood et al. 2002 · mass-loss rate of ε Eridani, with the X-ray temperature of Bennedik et al. 2026",
+      "credit": "Wood et al. 2002, ApJ 574, 412, Table 1; Bennedik et al. 2026, arXiv:2607.27832, Table 5; Parker 1958, ApJ 128, 664",
+      "displayCredit": "Wood et al. (2002)",
+      "acquisition": "Published numbers transcribed from the papers, and the densities this package computes from them. This record identifies the transcription; the papers are the source.",
+      "license": "Published numbers cited under normal scholarly citation; the papers are not redistributed here.",
+      "datasetId": "wind"
+    }
+  ],
+  "documents": [
+    {
+      "id": "delivery-json",
+      "path": "src/objects/eps-eridani-corona/source/delivery.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, provenance or presentation record; the published inputs it cites are bound above."
+      }
+    },
+    {
+      "id": "presentation-json",
+      "path": "src/objects/eps-eridani-corona/source/presentation.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, provenance or presentation record; the published inputs it cites are bound above."
+      }
+    },
+    {
+      "id": "provenance-json",
+      "path": "src/objects/eps-eridani-corona/source/provenance.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, provenance or presentation record; the published inputs it cites are bound above."
+      }
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "density-simulation-2008-01-ktx2",
+      "path": "src/objects/eps-eridani-corona/source/density-simulation-2008-01.ktx2",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Density grid, slab recipe or preview written by packages/bake/authoring/eps-eridani-corona/author.mts from the inputs bound above."
+      }
+    },
+    {
+      "id": "volume-simulation-2008-01-json",
+      "path": "src/objects/eps-eridani-corona/source/volume-simulation-2008-01.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Density grid, slab recipe or preview written by packages/bake/authoring/eps-eridani-corona/author.mts from the inputs bound above."
+      }
+    },
+    {
+      "id": "previews-simulation-2008-01-png",
+      "path": "src/objects/eps-eridani-corona/source/previews/simulation-2008-01.png",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Density grid, slab recipe or preview written by packages/bake/authoring/eps-eridani-corona/author.mts from the inputs bound above."
+      }
+    },
+    {
+      "id": "density-simulation-2011-10-ktx2",
+      "path": "src/objects/eps-eridani-corona/source/density-simulation-2011-10.ktx2",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Density grid, slab recipe or preview written by packages/bake/authoring/eps-eridani-corona/author.mts from the inputs bound above."
+      }
+    },
+    {
+      "id": "volume-simulation-2011-10-json",
+      "path": "src/objects/eps-eridani-corona/source/volume-simulation-2011-10.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Density grid, slab recipe or preview written by packages/bake/authoring/eps-eridani-corona/author.mts from the inputs bound above."
+      }
+    },
+    {
+      "id": "previews-simulation-2011-10-png",
+      "path": "src/objects/eps-eridani-corona/source/previews/simulation-2011-10.png",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Density grid, slab recipe or preview written by packages/bake/authoring/eps-eridani-corona/author.mts from the inputs bound above."
+      }
+    },
+    {
+      "id": "density-simulation-2013-10-ktx2",
+      "path": "src/objects/eps-eridani-corona/source/density-simulation-2013-10.ktx2",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Density grid, slab recipe or preview written by packages/bake/authoring/eps-eridani-corona/author.mts from the inputs bound above."
+      }
+    },
+    {
+      "id": "volume-simulation-2013-10-json",
+      "path": "src/objects/eps-eridani-corona/source/volume-simulation-2013-10.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Density grid, slab recipe or preview written by packages/bake/authoring/eps-eridani-corona/author.mts from the inputs bound above."
+      }
+    },
+    {
+      "id": "previews-simulation-2013-10-png",
+      "path": "src/objects/eps-eridani-corona/source/previews/simulation-2013-10.png",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Density grid, slab recipe or preview written by packages/bake/authoring/eps-eridani-corona/author.mts from the inputs bound above."
+      }
+    },
+    {
+      "id": "density-wind-ktx2",
+      "path": "src/objects/eps-eridani-corona/source/density-wind.ktx2",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Density grid, slab recipe or preview written by packages/bake/authoring/eps-eridani-corona/author.mts from the inputs bound above."
+      }
+    },
+    {
+      "id": "volume-wind-json",
+      "path": "src/objects/eps-eridani-corona/source/volume-wind.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Density grid, slab recipe or preview written by packages/bake/authoring/eps-eridani-corona/author.mts from the inputs bound above."
+      }
+    },
+    {
+      "id": "previews-wind-png",
+      "path": "src/objects/eps-eridani-corona/source/previews/wind.png",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Density grid, slab recipe or preview written by packages/bake/authoring/eps-eridani-corona/author.mts from the inputs bound above."
+      }
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 # El Gordo
 
-El Gordo as an object of the world: its place, its card and its list marker. It has no surface. Its one dataset shows the [El Gordo picture](../el-gordo-layers/README.md) bank, whose README holds the picture's source, placement, evidence and known problems.
+El Gordo as an object of the world: its place, its card and its list marker. It has no surface. Its second dataset is the [gas and mass](../el-gordo-hubble-layers/README.md) bank, the 2014 Hubble release in its layers with a modelled depth. Its first dataset shows the [El Gordo picture](../el-gordo-layers/README.md) bank, whose README holds the picture's source, placement, evidence and known problems.
 
 ## Sources
 

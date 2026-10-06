@@ -1,0 +1,44 @@
+{
+  "id": "publication-menanteau-2012-el-gordo",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "The Atacama Cosmology Telescope: ACT-CL J0102-4915 \"El Gordo,\" a Massive Merging Cluster at Redshift 0.87",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1109.0953"
+    },
+    {
+      "type": "doi",
+      "value": "10.1088/0004-637X/748/1/7"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/1109.0953",
+      "label": "Published reference"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/1109.0953",
+      "checkedOn": "2026-10-05",
+      "locator": "Sect. III.2.2: the gas is deprojected as rotationally symmetric about an axis chosen to run through the peak X-ray emission at the bullet and the surface-brightness depression toward the north-west, centred on R.A. 01:02:54.9, Dec. -49:15:52.5 and oriented at a position angle of 136 degrees. Sect. III.1: the south-eastern component has a line-of-sight peculiar velocity of 586 +/- 96 km/s with respect to the main north-western one. Sect. IV: the steep fall-off of the X-ray brightness to the south-east and the wake to the north-west indicate that the bullet moves toward the south-east; the collision is likely close to the plane of the sky."
+    }
+  ],
+  "creators": [
+    "Menanteau, F.",
+    "Hughes, J. P.",
+    "Sifón, C.",
+    "Hilton, M.",
+    "González, J.",
+    "Infante, L.",
+    "Barrientos, L. F.",
+    "et al."
+  ],
+  "publisher": "ApJ 748, 7",
+  "publicationDate": "2012",
+  "relations": [],
+  "statements": []
+}

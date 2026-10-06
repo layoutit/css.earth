@@ -1,0 +1,44 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "el-gordo-hubble-layers",
+  "type": "image-layer-bank",
+  "properties": {
+    "preparation": {
+      "source": "source/recipe.json"
+    },
+    "host": "el-gordo",
+    "frame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        5.9330797757998475e+25,
+        1.6698087061988595e+25,
+        -7.153044411203761e+25
+      ],
+      "localToReferenceXyzw": [
+        0.5659966481914256,
+        0.7472798148728412,
+        0.27754389579416283,
+        0.21021431546657937
+      ],
+      "metersPerUnit": 30856775814913670000,
+      "boundsUnits": {
+        "min": [
+          -2110.492177244048,
+          -2960.5443894584428,
+          -1696.0664657172747
+        ],
+        "max": [
+          2933.2642040562287,
+          2332.816584610354,
+          1696.2405328052118
+        ]
+      }
+    },
+    "surrounds": true
+  },
+  "prepared": {
+    "format": "cssearth-image-layer-bank@1",
+    "url": "prepared/image-layers.json"
+  }
+}

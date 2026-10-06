@@ -86,6 +86,68 @@
             }
           ]
         }
+      },
+      {
+        "id": "corona-2008-01",
+        "label": "Simulated corona",
+        "thumbnail": "eps-eridani-dataset-color.webp",
+        "volume": {
+          "objectId": "eps-eridani-corona",
+          "datasetId": "simulation-2008-01",
+          "surface": "color"
+        },
+        "notes": "The gas density in the magnetohydrodynamic simulation Ó Fionnagáin et al. (2022) ran for ε Eridani, driven by the map of its surface magnetic field observed in January 2008 (Jeffers et al. 2014), from the data they released on Zenodo. The released state is ten minutes after the authors set off an eruption in the model; of the three runs released for this map, the one drawn is the one whose eruption disturbs the least of the volume shown. It is shown the way coronagraph pictures are: at each distance from the star brightness is proportional to the density there, and only the steep fall-off with distance is compressed. It is drawn out to 4 stellar radii in the star's own color. Nobody has imaged this star's corona. The rotation axis is tilted 46° from the line of sight, as the magnetic maps were fitted; these sources give neither where it points on the sky nor the star's rotation phase today, so both are drawn by convention.",
+        "step": {
+          "group": "corona-maps",
+          "label": "January 2008",
+          "autoplay": false,
+          "opens": "last"
+        }
+      },
+      {
+        "id": "corona-2011-10",
+        "label": "Simulated corona",
+        "thumbnail": "eps-eridani-dataset-color.webp",
+        "volume": {
+          "objectId": "eps-eridani-corona",
+          "datasetId": "simulation-2011-10",
+          "surface": "color"
+        },
+        "notes": "The gas density in the magnetohydrodynamic simulation Ó Fionnagáin et al. (2022) ran for ε Eridani, driven by the map of its surface magnetic field observed in October 2011 (Jeffers et al. 2014), from the data they released on Zenodo. The released state is ten minutes after the authors set off an eruption in the model; of the three runs released for this map, the one drawn is the one whose eruption disturbs the least of the volume shown. It is shown the way coronagraph pictures are: at each distance from the star brightness is proportional to the density there, and only the steep fall-off with distance is compressed. It is drawn out to 4 stellar radii in the star's own color. Nobody has imaged this star's corona. The rotation axis is tilted 46° from the line of sight, as the magnetic maps were fitted; these sources give neither where it points on the sky nor the star's rotation phase today, so both are drawn by convention.",
+        "step": {
+          "group": "corona-maps",
+          "label": "October 2011",
+          "autoplay": false,
+          "opens": "last"
+        }
+      },
+      {
+        "id": "corona-2013-10",
+        "label": "Simulated corona",
+        "thumbnail": "eps-eridani-dataset-color.webp",
+        "volume": {
+          "objectId": "eps-eridani-corona",
+          "datasetId": "simulation-2013-10",
+          "surface": "color"
+        },
+        "notes": "The gas density in the magnetohydrodynamic simulation Ó Fionnagáin et al. (2022) ran for ε Eridani, driven by the map of its surface magnetic field observed in October 2013 (Jeffers et al. 2014), from the data they released on Zenodo. The released state is ten minutes after the authors set off an eruption in the model; of the three runs released for this map, the one drawn is the one whose eruption disturbs the least of the volume shown. It is shown the way coronagraph pictures are: at each distance from the star brightness is proportional to the density there, and only the steep fall-off with distance is compressed. It is drawn out to 4 stellar radii in the star's own color. Nobody has imaged this star's corona. The rotation axis is tilted 46° from the line of sight, as the magnetic maps were fitted; these sources give neither where it points on the sky nor the star's rotation phase today, so both are drawn by convention.",
+        "step": {
+          "group": "corona-maps",
+          "label": "October 2013",
+          "autoplay": false,
+          "opens": "last"
+        }
+      },
+      {
+        "id": "corona-wind",
+        "label": "Modelled wind · measured mass loss",
+        "thumbnail": "eps-eridani-dataset-color.webp",
+        "volume": {
+          "objectId": "eps-eridani-corona",
+          "datasetId": "wind",
+          "surface": "color"
+        },
+        "notes": "The wind Parker (1958) derives for gas at 4.06 million kelvin, the temperature measured from the star's X-ray spectrum (Bennedik et al. 2026), carrying 30 times the Sun's mass loss, which Wood et al. (2002) measure from the star's astrosphere. It is a model from published numbers, drawn out to 4 stellar radii in the star's own color on a logarithmic density scale. It is the same in every direction, because the model has no magnetic field; the simulated corona shows what the field does to it. Nobody has imaged this star's corona."
       }
     ]
   },

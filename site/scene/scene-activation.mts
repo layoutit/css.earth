@@ -5,7 +5,7 @@ import { errorMessage } from '../browser/browser-types.mts';
 import { isRecord } from '@cssearth/core';
 import { readNavigationSelection } from '../navigation/navigation-request.mts';
 import { withSceneDataset } from '../model/dataset-url.mts';
-import type { createPreparedWorldNavigation, WorldHandoff } from '../prepared-world-navigation.mts';
+import type { createPreparedWorldNavigation, WorldHandoff } from '../navigation/prepared-world-navigation.mts';
 import { selectSceneDataset } from './scene-datasets.mts';
 import type { SceneSession } from './scene-session.mts';
 import type { SceneView } from './scene-view.mts';

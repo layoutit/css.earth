@@ -34,8 +34,12 @@ src/objects/cassiopeia-a-layers/source/ejecta-speeds.dat
 src/objects/cassiopeia-a-miri-layers/source/ejecta-speeds.dat
 # M1-67's model grid (17 MB); built by packages/bake/authoring/m1-67/shell-grid.mts, restored from the source mirror.
 src/objects/m1-67-layers/source/shell-grid.dat
+# The Crab's measured filaments (416,573 rows, 11.5 MB); built by packages/bake/authoring/m1/filament-speeds.mts, restored from the source mirror.
+src/objects/m1-layers/source/filament-speeds.dat
 # The Homunculus's published surface (855 kB); restored from its NASA 3D Resources origin (src/objects/homunculus-nebula-layers/source/manifest.json).
 src/objects/homunculus-nebula-layers/source/homunculus.stl
+# The Little Dumbbell's ring and lobes as a surface (912 kB); built by packages/bake/authoring/m76/lobe-surface.mts, restored from the source mirror.
+src/objects/m76-layers/source/lobes.stl
 # Earth's dated NASA MUR tile archives (45 MB a day); restored from the source mirror (src/objects/earth/source/manifest.json).
 src/objects/earth/source/science/mur/*/tiles.tar.gz
 src/objects/*/source/**/*.fits
@@ -89,6 +93,7 @@ src/objects/venus/source/akatsuki/*.nc
 # Previews a package's own author draws from its pinned downloads; no checkout without those downloads can redraw them.
 !src/objects/betelgeuse-shell/source/previews/emission-2020-off-limb.png
 !src/objects/betelgeuse-shell/source/previews/sio-2023-integrated-line.png
+!src/objects/eps-eridani-corona/source/previews/*.png
 !src/objects/eps-eridani-disc/source/previews/dust.png
 !src/objects/hd-181327-disc/source/previews/reflectance.png
 !src/objects/sun-cor1-density/source/previews/cor1-density.png

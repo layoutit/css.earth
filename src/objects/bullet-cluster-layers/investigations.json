@@ -6,7 +6,7 @@
       "id": "opo0639a",
       "subject": "ESA/Hubble opo0639a (Chandra, Hubble, Magellan composite)",
       "status": "included",
-      "finding": "The 2006 composite: X-ray gas in pink, lensing mass map in blue, over a visible-light image; 3000 x 2168 px over 7.45 x 5.38 arcmin, north up, CC BY 4.0. Registered against Gaia DR3.",
+      "finding": "The 2006 composite with its three layers together: 3000 x 2168 px over 7.45 x 5.38 arcmin, north up, CC BY 4.0. Registered against Gaia DR3. It gives the frame its place on the sky, checks the lifted layers and is the dataset's preview; the bank's photograph is now the publisher's visible-light layer.",
       "evidence": [
         "https://esahubble.org/images/opo0639a/",
         "https://esahubble.org/copyright/"
@@ -21,6 +21,60 @@
         "https://esawebb.org/images/bullet-cluster/"
       ],
       "revisitWhen": "A second dataset of the cluster is wanted."
+    },
+    {
+      "id": "chandra-layers",
+      "subject": "Chandra X-ray Center: the 2006 composite in layers",
+      "status": "included",
+      "finding": "Visible light alone, with the X-ray gas and with the lensing mass map, each a TIFF of 3000 x 2168 px on ESA's frame. The layers were added by a screen (it fits 3 to 4 of 255; adding fits 20 to 32), so the gas and the mass are lifted out as pictures of their own; screened back with the visible-light layer they differ from ESA's composite by 2.7 of 255 on average. The publisher's 1e0657_xray.tif and 1e0657_lens.tif (2250 px wide) are another frame and another stretch, and the second holds gas and mass together: not used.",
+      "evidence": [
+        "https://chandra.harvard.edu/photo/2006/1e0657/more.html",
+        "https://chandra.harvard.edu/photo/image_use.html"
+      ]
+    },
+    {
+      "id": "collision-line",
+      "subject": "Depth of the gas and the mass",
+      "status": "included",
+      "finding": "Nothing measures depth in the cluster: it is bound and does not expand, so no speed stands for a depth. The papers give a symmetry and a tilt. Clowe et al. (2006) print the places of the two gas clouds and of the two mass peaks; Markevitch et al. (2002) fit the gas as round about the bullet's line of motion and Springel & Farrar (2007) find its shock and cold-front cones round about it, and fit the mass with two round halos; Barrena et al. (2002) and Lage & Farrar (2014) put the line 5 to 15 degrees from the plane of the sky, about 10 in the fitted simulation, the subcluster receding. Each picture is taken apart as a body of revolution about its line. Measured: 19.2% of the gas light and 43.5% of the mass light differ between the two sides of their lines; the gas picture's own most symmetric line is 2 degrees and 2.4 arcsec from the published one.",
+      "evidence": [
+        "https://arxiv.org/abs/astro-ph/0608407",
+        "https://arxiv.org/abs/astro-ph/0110468",
+        "https://arxiv.org/abs/astro-ph/0703232",
+        "https://arxiv.org/abs/astro-ph/0202323",
+        "https://arxiv.org/abs/1312.0959"
+      ]
+    },
+    {
+      "id": "fitted-simulation",
+      "subject": "Lage & Farrar (2014) constrained simulation",
+      "status": "excluded",
+      "finding": "The one three-dimensional model fitted to the lensing and X-ray maps. Its repository holds the code, the best fit's starting conditions and the observed maps, with no licence; the fitted snapshot, about 100 GB, was not uploaded. A Zenodo search for the cluster returns four records, none a simulation of it by a published method.",
+      "evidence": [
+        "https://github.com/craiglagegit/Bullet_Cluster",
+        "https://arxiv.org/abs/1312.0959"
+      ],
+      "revisitWhen": "The fitted snapshot, or another simulation fitted to the maps, is published."
+    },
+    {
+      "id": "lens-model-halos",
+      "subject": "Paraficz et al. (2016) lens model",
+      "status": "deferred",
+      "finding": "Table 6 prints three dark-matter clumps (two in the main cluster, one in the subcluster) as dPIE profiles: offsets from the main cluster's southern brightest galaxy with west positive (checked against the second galaxy's offset), ellipticity, angle, core radius and velocity dispersion. The convention of the angle is not stated where it was read, so the clumps are not drawn; the mass is turned about the line through Clowe et al.'s two peaks.",
+      "evidence": [
+        "https://arxiv.org/abs/1209.0384"
+      ],
+      "revisitWhen": "The angle convention is checked against the paper's mass map."
+    },
+    {
+      "id": "star-removal",
+      "subject": "NOX star removal on the visible-light layer",
+      "status": "included",
+      "finding": "NOX over 1e0657_opt.tif, then again over a copy a quarter of the size for the saturated stars (10.74% of the picture took that pass). NOX takes compact light whatever it is: of 4,188 sources that stand 30 of 255 over their surroundings it took more than half the contrast of 3,996 (95%), the cluster's galaxies with the Milky Way's stars; 6.2% of the picture is left above the sky floor. The gas and mass pictures hold no stars either: where the visible-light layer is bright they take the layer around them.",
+      "evidence": [
+        "https://chandra.harvard.edu/photo/2006/1e0657/more.html"
+      ],
+      "revisitWhen": "The cluster's galaxies are to come back: as dots at catalogued places, or by removing only the Gaia stars the frame was registered with."
     }
   ]
 }

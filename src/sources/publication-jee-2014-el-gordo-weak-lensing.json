@@ -1,0 +1,44 @@
+{
+  "id": "publication-jee-2014-el-gordo-weak-lensing",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Weighing \"El Gordo\" with a Precision Scale: Hubble Space Telescope Weak-lensing Analysis of the Merging Galaxy Cluster ACT-CL J0102-4915 at z=0.87",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1309.5097"
+    },
+    {
+      "type": "doi",
+      "value": "10.1088/0004-637X/785/1/20"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/1309.5097",
+      "label": "Published reference"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/1309.5097",
+      "checkedOn": "2026-10-05",
+      "locator": "Sect. IV.2 and Figure 8: the shear peaks are at R.A. 01:02:50.601, Decl. -49:15:04.48 (north-western) and R.A. 01:02:56.312, Decl. -49:16:23.15 (south-eastern), two subclusters about 700 kpc apart, each centroid constrained to about 4 arcsec; the X-ray and south-eastern mass peaks are about 8 arcsec apart. Sect. IV.3: two NFW halos are fitted; the small line-of-sight velocity difference and the double radio relics favour a merger nearly in the plane of the sky, and no study has yet constrained the three-dimensional geometry."
+    }
+  ],
+  "creators": [
+    "Jee, M. J.",
+    "Hughes, J. P.",
+    "Menanteau, F.",
+    "Sifón, C.",
+    "Mandelbaum, R.",
+    "Barrientos, L. F.",
+    "Infante, L.",
+    "Ng, K. Y."
+  ],
+  "publisher": "ApJ 785, 20",
+  "publicationDate": "2014",
+  "relations": [],
+  "statements": []
+}

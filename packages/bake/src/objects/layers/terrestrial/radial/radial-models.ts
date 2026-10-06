@@ -25,9 +25,16 @@ export async function loadRadialModels<T extends ModelConfig>(context: Omit<Terr
   const alternatives = config.geometry.radialTerrainAlternatives ?? [];
   if (!Array.isArray(alternatives) || alternatives.length > 7) throw new TypeError('Invalid alternative surface models.');
   if (!config.geometry.radialTerrain && !alternatives.length) return [];
-  const ids = [config.presentation.defaultDataset, ...alternatives.flatMap(alternativeDatasetIds)];
   const datasets = datasetGroups
     .flatMap(key => (config.raster[key] ?? []).map(dataset => dataset.id));
+  // The body's mesh is named after the default dataset. A default that draws on another model's mesh leaves the body's
+  // mesh named after its shape view, or its first dataset.
+  const alternativeIds = alternatives.flatMap(alternativeDatasetIds), own = datasets.filter(id => !alternativeIds.includes(id));
+  const bodyId = alternativeIds.includes(config.presentation.defaultDataset)
+    ? (config.raster.shapeViews ?? []).map(dataset => dataset.id).find(id => own.includes(id)) ?? own[0]
+    : config.presentation.defaultDataset;
+  if (bodyId === undefined) throw new TypeError('Invalid alternative surface models.');
+  const ids = [bodyId, ...alternativeIds];
   if (new Set(ids).size !== ids.length ||
       ids.some(id => !/^[a-z][a-z0-9-]*$/.test(id) || !datasets.includes(id)) ||
       alternatives.length && !config.geometry.radialTerrain) throw new TypeError('Invalid alternative surface models.');

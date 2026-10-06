@@ -1,5 +1,5 @@
 ---
-import { worldPlaceOf, worldStartupFiles } from '../world-places.mts';
+import { worldPlaceOf, worldStartupFiles } from '../server/world-places.mts';
 import { informationTabStyles } from '../server/information-tab-styles.mts';
 import ObjectSwatchStyles from "../components/ObjectSwatchStyles.astro";
 import { webAnalyticsBootstrap } from "../startup/web-analytics.mts";
@@ -13,7 +13,7 @@ import { inlineSceneImage, resolveBuildSceneAddress } from '../server-assets/ass
 import { SCENE_OBJECTS, requireObject } from "../objects.mts";
 import { breadcrumbJsonLd, homeSeo, objectSeo, websiteJsonLd } from "../seo.mts";
 import { pageTrail } from "../seo-trail.mts";
-import { availableSocialImages, DEFAULT_SOCIAL_IMAGE_ID } from "../social-images.mts";
+import { availableSocialImages, DEFAULT_SOCIAL_IMAGE_ID } from "../server/social-images.mts";
 import "./cubic-sky.css";
 import "@cssearth/renderer/styles/volume.css";
 import "@cssearth/renderer/styles/world-context.css";
@@ -52,7 +52,7 @@ const { objectId, pageId = objectId, navigation = false, scene, descriptor, home
 const objectUi = await Astro.slots.render('object-ui');
 const tabStyles = informationTabStyles(Astro.locals, objectUi);
 const objectRecord = requireObject(objectId);
-// The world files the page reads at startup, root first, and its body's own row when no file has it (site/world-places.mts).
+// The world files the page reads at startup, root first, and its body's own row when no file has it (site/server/world-places.mts).
 const worldFiles = worldStartupFiles(pageId);
 const ownRow = worldPlaceOf(objectRecord.id)?.row !== undefined;
 // Rules for a page without script. The phone sheet waits, hidden, for its controller to publish a snap state
@@ -161,7 +161,7 @@ const structuredData = JSON.stringify(home ? websiteJsonLd() : breadcrumbJsonLd(
     {/* In the head the application script downloads with the HTML; as a module it still runs after parsing. */}
     {!navigation && <script>
       import { bindNativeViewForms } from '../shell/native-view-forms.mts';
-      import { startBodyCode, startViewCode } from '../startup-boot.mts';
+      import { startBodyCode, startViewCode } from '../startup/startup-boot.mts';
       import { importSceneRouter } from '../shared-imports.mts';
       import { loadStartupWorld } from '../startup-world.mts';
       bindNativeViewForms(document, window);

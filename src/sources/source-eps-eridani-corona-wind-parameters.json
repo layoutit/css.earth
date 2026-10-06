@@ -1,0 +1,35 @@
+{
+  "id": "source-eps-eridani-corona-wind-parameters",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Eps Eridani Corona · wind parameters",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1086/340797",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/eps-eridani-corona/source/manifest.json",
+      "locator": "/inputs/9"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Wood et al. 2002, ApJ 574, 412, Table 1; Bennedik et al. 2026, arXiv:2607.27832, Table 5; Parker 1958, ApJ 128, 664",
+      "scope": "The wind parameters input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "Published numbers cited under normal scholarly citation; the papers are not redistributed here.",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

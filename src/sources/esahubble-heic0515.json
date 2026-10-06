@@ -1,0 +1,35 @@
+{
+  "id": "esahubble-heic0515",
+  "kind": "reference-page",
+  "identityLevel": "work",
+  "title": "ESA/Hubble release heic0515: Hubble's most detailed image of the Crab Nebula",
+  "identifiers": [
+    {
+      "type": "Archive resource",
+      "value": "https://esahubble.org/news/heic0515/"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://esahubble.org/news/heic0515/",
+      "label": "ESA/Hubble release heic0515"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://esahubble.org/news/heic0515/",
+      "checkedOn": "2026-10-05",
+      "locator": "\"The newly composed image was assembled from individual Wide Field and Planetary Camera 2 exposures taken in October 1999, January 2000, and December 2000.\""
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "ESA/Hubble",
+      "scope": "citation",
+      "evidence": "https://esahubble.org/news/heic0515/"
+    }
+  ]
+}

@@ -4,13 +4,193 @@
   "inputs": [
     {
       "id": "optical",
+      "path": "src/objects/bullet-cluster-layers/source/starless.jpg",
+      "generator": "labs/nebula/run.mts remove-stars",
+      "origin": "https://chandra.harvard.edu/photo/2006/1e0657/1e0657_opt.tif",
+      "sourceUrl": "https://chandra.harvard.edu/photo/2006/1e0657/more.html",
+      "title": "1E 0657-56: visible light, stars removed",
+      "credit": "X-ray: NASA/CXC/CfA/M.Markevitch et al. Optical: NASA/STScI; Magellan/U.Arizona/D.Clowe et al. Lensing Map: NASA/STScI; ESO WFI; Magellan/U.Arizona/D.Clowe et al.",
+      "displayCredit": "Chandra X-ray Center",
+      "acquisition": "The publisher's visible-light layer with its stars removed by `node labs/nebula/run.mts remove-stars src/objects/bullet-cluster-layers --from=1e0657_opt.tif --coarse=4` (NOX over the whole picture, then again over a copy a quarter of the size, 750 x 542 px, for the saturated stars: 10.74% of the picture took that pass's result). NOX takes compact light whatever it is: of 4,188 sources it took 3,996, the cluster's galaxies with the Milky Way's stars, and 6.2% of the picture is left above the sky floor. Not tracked. A display picture, not a calibrated scientific array.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "chandra-2006-1e0657-layers",
+            "role": "material",
+            "evidence": "src/objects/bullet-cluster-layers/source/provenance.json"
+          }
+        ]
+      },
+      "dependencies": [
+        "visible"
+      ],
+      "datasetId": "optical",
+      "license": "No copyright is asserted on Chandra content (https://chandra.harvard.edu/photo/image_use.html); retain the complete recorded credit.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "unresolved",
+            "label": "Hubble ACS F435W F606W F814W Magellan optical",
+            "evidence": "https://chandra.harvard.edu/photo/2006/1e0657/",
+            "reason": "The publisher's color composite; the retained record does not identify the individual exposures."
+          }
+        ]
+      }
+    },
+    {
+      "id": "visible",
+      "path": "src/objects/bullet-cluster-layers/source/1e0657_opt.tif",
+      "origin": "https://chandra.harvard.edu/photo/2006/1e0657/1e0657_opt.tif",
+      "sourceUrl": "https://chandra.harvard.edu/photo/2006/1e0657/more.html",
+      "title": "1E 0657-56: visible light",
+      "credit": "X-ray: NASA/CXC/CfA/M.Markevitch et al. Optical: NASA/STScI; Magellan/U.Arizona/D.Clowe et al. Lensing Map: NASA/STScI; ESO WFI; Magellan/U.Arizona/D.Clowe et al.",
+      "displayCredit": "Chandra X-ray Center",
+      "acquisition": "The publisher's TIFF (3000 x 2168 px), restored from its origin; not tracked. The visible-light layer of the 2006 composite, on the frame whose place on the sky was measured on ESA's copy of the composite against Gaia DR3 (recipe observation). The star-free photograph and the two lifted layers are made from it. A display picture, not a calibrated scientific array.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "chandra-2006-1e0657-layers",
+            "role": "material",
+            "evidence": "src/objects/bullet-cluster-layers/source/provenance.json"
+          }
+        ]
+      },
+      "dependencies": [],
+      "license": "No copyright is asserted on Chandra content (https://chandra.harvard.edu/photo/image_use.html); retain the complete recorded credit.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "unresolved",
+            "label": "Hubble ACS F435W F606W F814W Magellan optical",
+            "evidence": "https://chandra.harvard.edu/photo/2006/1e0657/",
+            "reason": "The publisher's color composite; the retained record does not identify the individual exposures."
+          }
+        ]
+      }
+    },
+    {
+      "id": "gas-over-visible",
+      "path": "src/objects/bullet-cluster-layers/source/1e0657_xray_opt.tif",
+      "origin": "https://chandra.harvard.edu/photo/2006/1e0657/1e0657_xray_opt.tif",
+      "sourceUrl": "https://chandra.harvard.edu/photo/2006/1e0657/more.html",
+      "title": "1E 0657-56: X-ray gas over visible light",
+      "credit": "X-ray: NASA/CXC/CfA/M.Markevitch et al. Optical: NASA/STScI; Magellan/U.Arizona/D.Clowe et al. Lensing Map: NASA/STScI; ESO WFI; Magellan/U.Arizona/D.Clowe et al.",
+      "displayCredit": "Chandra X-ray Center",
+      "acquisition": "The publisher's TIFF (3000 x 2168 px), restored from its origin; not tracked. The visible-light layer with the X-ray gas over it, from which the gas is lifted. A display picture, not a calibrated scientific array.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "chandra-2006-1e0657-layers",
+            "role": "material",
+            "evidence": "src/objects/bullet-cluster-layers/source/provenance.json"
+          }
+        ]
+      },
+      "dependencies": [],
+      "license": "No copyright is asserted on Chandra content (https://chandra.harvard.edu/photo/image_use.html); retain the complete recorded credit.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "unresolved",
+            "label": "Chandra ACIS X-ray Hubble ACS F435W F606W F814W Magellan optical",
+            "evidence": "https://chandra.harvard.edu/photo/2006/1e0657/",
+            "reason": "The publisher's color composite; the retained record does not identify the individual exposures."
+          }
+        ]
+      }
+    },
+    {
+      "id": "mass-over-visible",
+      "path": "src/objects/bullet-cluster-layers/source/1e0657_opt_lens.tif",
+      "origin": "https://chandra.harvard.edu/photo/2006/1e0657/1e0657_opt_lens.tif",
+      "sourceUrl": "https://chandra.harvard.edu/photo/2006/1e0657/more.html",
+      "title": "1E 0657-56: lensing mass map over visible light",
+      "credit": "X-ray: NASA/CXC/CfA/M.Markevitch et al. Optical: NASA/STScI; Magellan/U.Arizona/D.Clowe et al. Lensing Map: NASA/STScI; ESO WFI; Magellan/U.Arizona/D.Clowe et al.",
+      "displayCredit": "Chandra X-ray Center",
+      "acquisition": "The publisher's TIFF (3000 x 2168 px), restored from its origin; not tracked. The visible-light layer with the lensing mass map over it, from which the mass is lifted. A display picture, not a calibrated scientific array.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "chandra-2006-1e0657-layers",
+            "role": "material",
+            "evidence": "src/objects/bullet-cluster-layers/source/provenance.json"
+          }
+        ]
+      },
+      "dependencies": [],
+      "license": "No copyright is asserted on Chandra content (https://chandra.harvard.edu/photo/image_use.html); retain the complete recorded credit.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "unresolved",
+            "label": "weak-lensing mass map Hubble ACS F435W F606W F814W Magellan optical",
+            "evidence": "https://chandra.harvard.edu/photo/2006/1e0657/",
+            "reason": "The publisher's color composite; the retained record does not identify the individual exposures."
+          }
+        ]
+      }
+    },
+    {
+      "id": "gas",
+      "path": "src/objects/bullet-cluster-layers/source/gas.png",
+      "generator": "packages/bake/authoring/bullet-cluster/layers.mts",
+      "title": "1E 0657-56: the X-ray gas alone",
+      "credit": "X-ray: NASA/CXC/CfA/M.Markevitch et al. Optical: NASA/STScI; Magellan/U.Arizona/D.Clowe et al. Lensing Map: NASA/STScI; ESO WFI; Magellan/U.Arizona/D.Clowe et al.",
+      "displayCredit": "Chandra X-ray Center",
+      "acquisition": "Written by `node packages/bake/authoring/bullet-cluster/layers.mts` from the publisher's layers: what undoing the screen blend of the gas layer against the visible-light layer leaves, with the 3.7% of pixels too bright in visible light filled from around them. Not tracked.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "chandra-2006-1e0657-layers",
+            "role": "material",
+            "evidence": "src/objects/bullet-cluster-layers/source/provenance.json"
+          }
+        ]
+      },
+      "dependencies": [
+        "visible",
+        "gas-over-visible"
+      ],
+      "license": "No copyright is asserted on Chandra content (https://chandra.harvard.edu/photo/image_use.html); retain the complete recorded credit."
+    },
+    {
+      "id": "mass",
+      "path": "src/objects/bullet-cluster-layers/source/mass.png",
+      "generator": "packages/bake/authoring/bullet-cluster/layers.mts",
+      "title": "1E 0657-56: the lensing mass map alone",
+      "credit": "X-ray: NASA/CXC/CfA/M.Markevitch et al. Optical: NASA/STScI; Magellan/U.Arizona/D.Clowe et al. Lensing Map: NASA/STScI; ESO WFI; Magellan/U.Arizona/D.Clowe et al.",
+      "displayCredit": "Chandra X-ray Center",
+      "acquisition": "Written by `node packages/bake/authoring/bullet-cluster/layers.mts` from the publisher's layers: what undoing the screen blend of the mass layer against the visible-light layer leaves, with the 3.7% of pixels too bright in visible light filled from around them. Not tracked.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "chandra-2006-1e0657-layers",
+            "role": "material",
+            "evidence": "src/objects/bullet-cluster-layers/source/provenance.json"
+          }
+        ]
+      },
+      "dependencies": [
+        "visible",
+        "mass-over-visible"
+      ],
+      "license": "No copyright is asserted on Chandra content (https://chandra.harvard.edu/photo/image_use.html); retain the complete recorded credit."
+    },
+    {
+      "id": "composite",
       "path": "src/objects/bullet-cluster-layers/source/source.jpg",
       "origin": "https://cdn.esahubble.org/archives/images/large/opo0639a.jpg",
       "sourceUrl": "https://esahubble.org/images/opo0639a/",
       "title": "Visible-light and x-ray composite image of galaxy cluster 1E 0657-556",
       "credit": "X-ray: NASA/CXC/M.Markevitch et al. Optical: NASA/STScI; Magellan/U.Arizona/D.Clowe et al. Lensing Map: NASA/STScI; ESO WFI; Magellan/U.Arizona/D.Clowe et al.",
       "displayCredit": "ESA/Hubble",
-      "acquisition": "The publisher's Large JPEG (3000 x 2168 px), restored from its origin; not tracked. Registration measured against Gaia DR3 (recipe observation). A display composite, not a calibrated scientific array.",
+      "acquisition": "The publisher's Large JPEG (3000 x 2168 px) of the whole composite, restored from its origin; not tracked. The frame's place on the sky was measured on it against Gaia DR3 (recipe observation), the lifted layers are checked against it, and it is the dataset's preview. A display composite, not a calibrated scientific array.",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -22,7 +202,6 @@
         ]
       },
       "dependencies": [],
-      "datasetId": "optical",
       "license": "CC-BY-4.0; retain the complete recorded credit.",
       "capture": {
         "attributions": [

@@ -1,0 +1,105 @@
+{
+  "schema": "cssearth-image-layer-recipe@1",
+  "id": "m1-layers",
+  "source": {
+    "path": "source.jpg",
+    "dimensions": [
+      3864,
+      3864
+    ],
+    "originalDimensions": [
+      3864,
+      3864
+    ],
+    "publisherUrl": "https://esahubble.org/images/heic0515a/",
+    "downloadUrl": "https://cdn.esahubble.org/archives/images/large/heic0515a.jpg",
+    "credit": "NASA, ESA and Allison Loll/Jeff Hester (Arizona State University). Acknowledgement: Davide De Martin (ESA/Hubble)",
+    "license": "CC-BY-4.0"
+  },
+  "observation": {
+    "centerRaDeg": 83.6355492,
+    "centerDecDeg": 22.0152273,
+    "fieldOfViewDeg": [
+      0.1068595,
+      0.1068595
+    ],
+    "northClockwiseDeg": 0
+  },
+  "target": {
+    "centerRaDeg": 83.6334511837,
+    "centerDecDeg": 22.0151236394,
+    "distancePc": 2000
+  },
+  "geometry": {
+    "kind": "inclined-disk",
+    "inclinationDeg": 0.001948,
+    "lineOfNodesPaDeg": 176.95,
+    "thicknessKpc": 0.00000187,
+    "depthWeights": [
+      0.25,
+      0.5,
+      0.25
+    ],
+    "supportRadiusKpc": 0.0017957,
+    "supportTaperFraction": 0.96,
+    "depthScales": [
+      1,
+      1,
+      1
+    ],
+    "unit": "pc",
+    "shape": {
+      "source": "martin-2021",
+      "basis": "Martin, Milisavljevic & Drissen (2021, Sect. 3.4) turn a Doppler speed into a distance along the sight line with one expansion factor, 1.160e-3 per year (from Nugent 1998), about the expansion centre of Kaplan et al. (2008), at the 2 kpc they adopt from Trimble (1973): d = v / e, which at 2 kpc is 10.9979 km/s per arcsec in November 2016, the cube's date. The same factor moves every filament across the sky, so at this picture's date, 2000.3 (exposures of October 1999, January 2000 and December 2000), the nebula was 1.93 % smaller and the law is 11.2138 km/s per arcsec. The paper says the expansion is not uniform near the centre, where the pulsar's wind has pushed material: the depths carry that. The shell the smooth light lies on (ring) is not the paper's: it is the ellipsoid that holds 99 % of the measured points, measured here (packages/bake/authoring/m1/filament-envelope.mts): 170 arcsec along position angle 128°, 130 arcsec across it, 125 arcsec along the sight line; the cloud's long axis is 10° out of the sky's plane and is drawn in it. Its expansionKmS is that depth under the law, not a measured speed. All three display channels take the same speeds: the paper's lines are H-alpha, [N II] and [S II], not this picture's.",
+      "expansionKmSPerArcsec": 11.2138,
+      "ring": {
+        "semiMajorArcsec": 170,
+        "semiMinorArcsec": 130,
+        "majorPaDeg": 128,
+        "polarTiltDeg": 0,
+        "polarLeansToPaDeg": 0,
+        "expansionKmS": [
+          1401.7,
+          1401.7,
+          1401.7
+        ]
+      },
+      "speeds": {
+        "source": "github-thomasorb-m1-paper",
+        "basis": "The files of the paper's 3D map (github.com/thomasorb/M1_paper at commit af491d4): 416,573 velocity components on 311,779 sight lines, one to six on each, each as its place from the page's place (arcsec east and north) and its Doppler speed (km/s, positive away from the Sun); 190,560 approach and 226,013 recede, to 1,814 km/s. The files do not say what their numbers are: read from the authors' notebook and measured here (packages/bake/authoring/m1/filament-speeds.mts), the first two are steps of one pixel on the paper's deep frame, counted from the pulsar's pixel, west and north. The frame's own header puts those pixels on the sky 1.5 to 1.8 % too close together, so the frame is tied to 317 Gaia DR3 stars instead (packages/bake/authoring/m1/frame-fit.mts, 0.051 arcsec rms). Each point is moved along its line from the expansion centre to this picture's date by the paper's factor. A speed is its own depth under the law. A place follows the points within about 1 arcsec, a presentation value: the cube's median seeing was 1.17 arcsec (Sect. 2.1) and its pixel 0.32.",
+        "path": "filament-speeds.dat",
+        "columns": {
+          "east": 0,
+          "north": 1,
+          "kmS": 2
+        },
+        "reachArcsec": 1,
+        "depth": "speed"
+      },
+      "smoothPixels": 8
+    }
+  },
+  "bake": {
+    "maxFacePixels": 750,
+    "crossAxisSlices": 32,
+    "crossAxisDepthPixels": 97,
+    "backgroundFloor": 0.03,
+    "encoding": {
+      "format": "webp",
+      "quality": 70,
+      "alphaQuality": 80
+    },
+    "diffuseFacePixels": 80,
+    "crossAxisAlongPixels": 384,
+    "edgeTaperFraction": 0.04,
+    "diffuseFraction": 0.65,
+    "diffuseSigmaPixels": 2,
+    "flat": true,
+    "bulgeSlices": 56,
+    "bulgeFacePixels": 256,
+    "bulgeCrossSlices": 56
+  },
+  "provenance": {
+    "path": "provenance.json"
+  }
+}

@@ -28,7 +28,7 @@
     ]
   },
   "introduction": {
-    "text": "In this picture pink is hot gas seen in X-rays and blue is where most of the mass is, mapped by gravitational lensing. The picture is flat and has no depth.",
+    "text": "In this picture pink is hot gas seen in X-rays and blue is where most of the mass is, mapped by gravitational lensing.",
     "sources": [
       {
         "catalogueId": "esahubble-opo0639a",
@@ -41,9 +41,9 @@
   },
   "datasets": {
     "optical": {
-      "title": "Gas, mass and galaxies of the Bullet",
+      "title": "Gas and mass of the Bullet",
       "detail": "3000 × 2168 px",
-      "summary": "Pink is X-ray gas and blue is the lensing mass map, over a visible-light image. A flat picture of the sky, with no depth.",
+      "summary": "Pink is X-ray gas and blue is the lensing mass map, each drawn round the line of the collision. Their depth is not measured.",
       "sources": [
         {
           "catalogueId": "esahubble-opo0639a",
@@ -51,6 +51,20 @@
           "label": "ESA/Hubble opo0639a: X-ray: NASA/CXC/M.Markevitch et al. Optical: NASA/STScI; Magellan/U.Arizona/D.Clowe et al. Lensing Map: NASA/STScI; ESO WFI; Magellan/U.Arizona/D.Clowe et al.",
           "checked": "2026-10-02",
           "locator": "Visible-light and x-ray composite image of galaxy cluster 1E 0657-556"
+        },
+        {
+          "catalogueId": "chandra-2006-1e0657-layers",
+          "url": "https://chandra.harvard.edu/photo/2006/1e0657/more.html",
+          "label": "Chandra X-ray Center, 1E 0657-56: X-ray: NASA/CXC/CfA/M.Markevitch et al. Optical: NASA/STScI; Magellan/U.Arizona/D.Clowe et al. Lensing Map: NASA/STScI; ESO WFI; Magellan/U.Arizona/D.Clowe et al.",
+          "checked": "2026-10-05",
+          "locator": "the composite in layers: visible light alone, with the X-ray gas, with the lensing map"
+        },
+        {
+          "catalogueId": "publication-clowe-2006-bullet-cluster-dark-matter",
+          "url": "https://arxiv.org/abs/astro-ph/0608407",
+          "label": "Clowe et al. (2006), ApJ 648, L109",
+          "checked": "2026-10-05",
+          "locator": "Table 2 and Sect. III: the places of the two gas clouds and the two mass peaks"
         }
       ]
     }

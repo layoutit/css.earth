@@ -13,7 +13,7 @@ import catalogueIds from '../../prepared/prepared-dot-catalogues.json' with { ty
 import { discoveryVisibility, type ObjectDiscovery } from '@cssearth/objects';
 import { WORLD_OBJECTS } from '../../world-objects.mts';
 import { APPLICATION_WORLD_CONTEXT } from '../../world-context-plan.mts';
-import { worldFilesOf } from '../../world-places.mts';
+import { worldFilesOf } from '../../server/world-places.mts';
 import { sourceArray, sourceId, sourceObject, sourceUnique } from '@cssearth/objects/sources';
 import { isJplMissionTarget } from './jpl-mission-targets.mts';
 import { readPreparedObjects } from '@cssearth/objects/node';

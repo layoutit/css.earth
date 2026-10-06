@@ -1,0 +1,577 @@
+{
+  "schema": "cssearth-volume-provenance@2",
+  "title": "ε Eridani corona: a published simulation for three observed magnetic maps, and a wind model from published measurements",
+  "kind": "published-simulation-and-published-measurements-through-a-stated-model",
+  "authors": [
+    "D. Ó Fionnagáin",
+    "R. D. Kavanagh",
+    "A. A. Vidotto",
+    "S. V. Jeffers",
+    "B. E. Wood",
+    "H.-R. Müller",
+    "G. P. Zank",
+    "J. L. Linsky",
+    "E. N. Parker",
+    "M. M. Bennedik",
+    "B. Stelzer"
+  ],
+  "organizations": [
+    "Zenodo (the simulation deposit)",
+    "Télescope Bernard Lyot/NARVAL (the spectropolarimetry behind the magnetic maps)",
+    "HST/STIS (the astrospheric Lyman-alpha absorption)",
+    "XMM-Newton, SRG/eROSITA and ROSAT (the X-ray temperature)"
+  ],
+  "license": {
+    "spdx": "CC-BY-4.0",
+    "note": "The simulation data are released under CC BY 4.0 on Zenodo; retain the citation. The wind model uses published numbers cited under normal scholarly citation."
+  },
+  "sources": [
+    {
+      "id": "simulation",
+      "url": "https://doi.org/10.5281/zenodo.5575241",
+      "bytes": 6355199342,
+      "role": "Ó Fionnagáin, Kavanagh, Vidotto et al. (2022), ApJ 924, 115: the nine BATS-R-US solution files of eEri_CME_simulations.tar.gz"
+    },
+    {
+      "id": "simulation-paper",
+      "url": "https://arxiv.org/abs/2111.02284",
+      "role": "The paper that describes the simulations, their magnetic maps and their eruptions"
+    },
+    {
+      "id": "inclination",
+      "url": "https://arxiv.org/abs/1710.09227",
+      "role": "Jeffers et al. (2017), MNRAS 471, L96: i = 46 ± 2°"
+    },
+    {
+      "id": "mass-loss",
+      "url": "https://doi.org/10.1086/340797",
+      "role": "Wood, Müller, Zank & Linsky (2002), ApJ 574, 412, Table 1: 30 times the solar mass-loss rate of 2e-14 solar masses a year"
+    },
+    {
+      "id": "temperature",
+      "url": "https://arxiv.org/abs/2607.27832",
+      "role": "Bennedik et al. (2026), arXiv:2607.27832, Table 5, row ε Eri: kT 0.35 keV"
+    },
+    {
+      "id": "wind-solution",
+      "url": "https://doi.org/10.1086/146579",
+      "role": "Parker (1958), ApJ 128, 664: the isothermal wind"
+    }
+  ],
+  "paper": {
+    "doi": "10.3847/1538-4357/ac35de",
+    "citation": "Ó Fionnagáin, Kavanagh, Vidotto et al. (2022), ApJ 924, 115, \"Coronal mass ejections and type II radio emission variability during a magnetic cycle on the solar-type star ε Eridani\""
+  },
+  "measured": {
+    "star": {
+      "massSolar": 0.82,
+      "massSource": "NASA Exoplanet Archive ps default row (THOMPSON_ET_AL_2025), st_mass; the star package cites it",
+      "radiusSolar": 0.74,
+      "radiusSource": "Baines & Armstrong (2012), ApJ 744, 138, section 3: 0.74 ± 0.01 solar radii; the star package cites it",
+      "coronalTemperatureKeV": 0.35,
+      "temperatureSource": "Bennedik et al. (2026), arXiv:2607.27832, Table 5, row ε Eri: kT 0.35 keV",
+      "radiusArcsec": 0.0010687445324970945,
+      "sceneOriginRaDecDeg": [
+        53.225364475322294,
+        -9.458106329436308
+      ],
+      "distancePc": 3.219989125999438
+    },
+    "wind": {
+      "massLossSolar": 30,
+      "solarMassLossSolarMassesPerYear": 2e-14,
+      "source": "Wood, Müller, Zank & Linsky (2002), ApJ 574, 412, Table 1: 30 times the solar mass-loss rate of 2e-14 solar masses a year",
+      "kelvin": 4061581.3419999992,
+      "massLossGramsPerSecond": 37805346414175.984,
+      "soundKmS": 236.31608034939225,
+      "criticalRadii": 1.8925843592635239,
+      "speedAtSurfaceKmS": 93.07990836611565,
+      "speedAt4RadiiKmS": 407.729590435189,
+      "electronsPerCm3": {
+        "1": 62280697.0345767,
+        "2": 5811996.457300361,
+        "3": 1874062.380840248,
+        "4": 888622.2800828472,
+        "1.5": 14182766.066706095
+      }
+    },
+    "simulation": {
+      "doi": "10.5281/zenodo.5575241",
+      "inclinationDegrees": 46,
+      "cube": {
+        "size": 128,
+        "halfUnits": 4
+      },
+      "maps": [
+        {
+          "id": "2008-01",
+          "label": "January 2008",
+          "drawnRun": "equator",
+          "cellsInsideCube": 5138137,
+          "eruptions": {
+            "equator": {
+              "file": "jan08eq_3dmhd_t00001000_n00152652.plt",
+              "shareOfDrawnVolume": 0.056326949384404926,
+              "meanLatitudeDegrees": -1.3603461784648236
+            },
+            "north": {
+              "file": "jan08poleN_3dmhd_t00001000_n00153068.plt",
+              "shareOfDrawnVolume": 0.07095241616445447,
+              "meanLatitudeDegrees": 42.26450906942081
+            },
+            "south": {
+              "file": "jan08poleS_3dmhd_t00001000_n00143955.plt",
+              "shareOfDrawnVolume": 0.11513291677450364,
+              "meanLatitudeDegrees": -40.76429737548699
+            }
+          },
+          "eruptionFactor": 1.25,
+          "twoRunsDisturbedShare": 0.012416349317854106,
+          "shells": [
+            {
+              "radius": 1.1,
+              "voxels": 7808,
+              "electronsPerCm3": {
+                "mean": 492293804.7787808,
+                "p05": 187442862.0393201,
+                "median": 337320367.21094596,
+                "p95": 1126225714.799922
+              },
+              "gauss": {
+                "median": 6.765958309173584,
+                "p95": 15.916902542114258
+              }
+            },
+            {
+              "radius": 1.25,
+              "voxels": 10256,
+              "electronsPerCm3": {
+                "mean": 161074466.6231235,
+                "p05": 75252940.60585411,
+                "median": 128673338.9092058,
+                "p95": 384288307.1864767
+              },
+              "gauss": {
+                "median": 4.902249336242676,
+                "p95": 10.413324356079102
+              }
+            },
+            {
+              "radius": 1.5,
+              "voxels": 14648,
+              "electronsPerCm3": {
+                "mean": 60681963.73061785,
+                "p05": 24334256.59832789,
+                "median": 46765348.16624964,
+                "p95": 171357119.06709933
+              },
+              "gauss": {
+                "median": 3.260568380355835,
+                "p95": 5.977038383483887
+              }
+            },
+            {
+              "radius": 2,
+              "voxels": 26120,
+              "electronsPerCm3": {
+                "mean": 15964241.64852618,
+                "p05": 5304100.3035226865,
+                "median": 12416847.915818183,
+                "p95": 51967716.874249734
+              },
+              "gauss": {
+                "median": 1.7611196041107178,
+                "p95": 2.7071549892425537
+              }
+            },
+            {
+              "radius": 2.5,
+              "voxels": 40064,
+              "electronsPerCm3": {
+                "mean": 6251927.612100194,
+                "p05": 2055563.6180889152,
+                "median": 4751067.629933114,
+                "p95": 21369210.518320113
+              },
+              "gauss": {
+                "median": 1.0934970378875732,
+                "p95": 1.5506298542022705
+              }
+            },
+            {
+              "radius": 3,
+              "voxels": 57704,
+              "electronsPerCm3": {
+                "mean": 3152572.5803338904,
+                "p05": 1044070.5157210144,
+                "median": 2320347.9517113436,
+                "p95": 10844411.333649613
+              },
+              "gauss": {
+                "median": 0.7492251992225647,
+                "p95": 1.0334991216659546
+              }
+            },
+            {
+              "radius": 3.5,
+              "voxels": 79016,
+              "electronsPerCm3": {
+                "mean": 1893514.4290239937,
+                "p05": 611963.4508110922,
+                "median": 1331060.9899009946,
+                "p95": 6652181.303042157
+              },
+              "gauss": {
+                "median": 0.5462104082107544,
+                "p95": 0.7519341707229614
+              }
+            },
+            {
+              "radius": 3.9,
+              "voxels": 98176,
+              "electronsPerCm3": {
+                "mean": 1342005.158113428,
+                "p05": 428311.73864022346,
+                "median": 914731.1523319207,
+                "p95": 4898050.743150653
+              },
+              "gauss": {
+                "median": 0.4371880292892456,
+                "p95": 0.6019288897514343
+              }
+            }
+          ]
+        },
+        {
+          "id": "2011-10",
+          "label": "October 2011",
+          "drawnRun": "equator",
+          "cellsInsideCube": 5231603,
+          "eruptions": {
+            "equator": {
+              "file": "oct11eq_3dmhd_t00001000_n00141228.plt",
+              "shareOfDrawnVolume": 0.09369061263726107,
+              "meanLatitudeDegrees": 10.039890263572222
+            },
+            "north": {
+              "file": "oct11poleN_3dmhd_t00001000_n00132318.plt",
+              "shareOfDrawnVolume": 0.10390801197914741,
+              "meanLatitudeDegrees": 55.040524568776256
+            },
+            "south": {
+              "file": "oct11poleS_3dmhd_t00001000_n00128423.plt",
+              "shareOfDrawnVolume": 0.14788331423078346,
+              "meanLatitudeDegrees": -44.6313517050826
+            }
+          },
+          "eruptionFactor": 1.25,
+          "twoRunsDisturbedShare": 0.012881280733537916,
+          "shells": [
+            {
+              "radius": 1.1,
+              "voxels": 7808,
+              "electronsPerCm3": {
+                "mean": 460331923.0395617,
+                "p05": 164943385.30094463,
+                "median": 311903508.282701,
+                "p95": 1153628335.0677176
+              },
+              "gauss": {
+                "median": 5.821274280548096,
+                "p95": 16.500329971313477
+              }
+            },
+            {
+              "radius": 1.25,
+              "voxels": 10256,
+              "electronsPerCm3": {
+                "mean": 137974497.32779184,
+                "p05": 61828249.178799465,
+                "median": 117360876.8783245,
+                "p95": 302106431.5609634
+              },
+              "gauss": {
+                "median": 4.2315874099731445,
+                "p95": 10.400080680847168
+              }
+            },
+            {
+              "radius": 1.5,
+              "voxels": 14648,
+              "electronsPerCm3": {
+                "mean": 51584557.72767471,
+                "p05": 20174361.161297057,
+                "median": 42668401.901743494,
+                "p95": 129129084.4299027
+              },
+              "gauss": {
+                "median": 2.8348355293273926,
+                "p95": 5.757658004760742
+              }
+            },
+            {
+              "radius": 2,
+              "voxels": 26120,
+              "electronsPerCm3": {
+                "mean": 14636991.055321291,
+                "p05": 4951253.4958076645,
+                "median": 11378912.555783864,
+                "p95": 44626698.39586225
+              },
+              "gauss": {
+                "median": 1.5457242727279663,
+                "p95": 2.5589730739593506
+              }
+            },
+            {
+              "radius": 2.5,
+              "voxels": 40064,
+              "electronsPerCm3": {
+                "mean": 5745413.934278158,
+                "p05": 1993911.8746550991,
+                "median": 4375561.434562472,
+                "p95": 18434396.73683835
+              },
+              "gauss": {
+                "median": 0.9464225172996521,
+                "p95": 1.464504361152649
+              }
+            },
+            {
+              "radius": 3,
+              "voxels": 57704,
+              "electronsPerCm3": {
+                "mean": 2719246.3305957443,
+                "p05": 995733.7403313819,
+                "median": 2100079.2583349477,
+                "p95": 8099571.634814898
+              },
+              "gauss": {
+                "median": 0.6389579176902771,
+                "p95": 0.9548625946044922
+              }
+            },
+            {
+              "radius": 3.5,
+              "voxels": 79016,
+              "electronsPerCm3": {
+                "mean": 1595285.8125942333,
+                "p05": 589662.2346893247,
+                "median": 1206020.9212713705,
+                "p95": 4709502.423060866
+              },
+              "gauss": {
+                "median": 0.4645002484321594,
+                "p95": 0.6853346824645996
+              }
+            },
+            {
+              "radius": 3.9,
+              "voxels": 98176,
+              "electronsPerCm3": {
+                "mean": 1132245.235628254,
+                "p05": 420211.955836275,
+                "median": 842512.9777434869,
+                "p95": 3330989.577602323
+              },
+              "gauss": {
+                "median": 0.37346142530441284,
+                "p95": 0.5501363277435303
+              }
+            }
+          ]
+        },
+        {
+          "id": "2013-10",
+          "label": "October 2013",
+          "drawnRun": "equator",
+          "cellsInsideCube": 5255059,
+          "eruptions": {
+            "equator": {
+              "file": "oct13_3dmhd_t00001000_n00115012.plt",
+              "shareOfDrawnVolume": 0.03682108921507006,
+              "meanLatitudeDegrees": 18.89692009929553
+            },
+            "north": {
+              "file": "oct13poleN_3dmhd_t00001000_n00123792.plt",
+              "shareOfDrawnVolume": 0.04374422301918882,
+              "meanLatitudeDegrees": 55.695819620286436
+            },
+            "south": {
+              "file": "oct13poleS_3dmhd_t00001000_n00125626.plt",
+              "shareOfDrawnVolume": 0.06384441897437794,
+              "meanLatitudeDegrees": -44.11538220165059
+            }
+          },
+          "eruptionFactor": 1.25,
+          "twoRunsDisturbedShare": 0.006078308130291714,
+          "shells": [
+            {
+              "radius": 1.1,
+              "voxels": 7808,
+              "electronsPerCm3": {
+                "mean": 578071099.0950181,
+                "p05": 196465083.54533878,
+                "median": 432304136.64925385,
+                "p95": 1200334935.6842961
+              },
+              "gauss": {
+                "median": 14.034188270568848,
+                "p95": 25.25817108154297
+              }
+            },
+            {
+              "radius": 1.25,
+              "voxels": 10256,
+              "electronsPerCm3": {
+                "mean": 240744828.98368737,
+                "p05": 81141186.6595411,
+                "median": 147118534.44979036,
+                "p95": 590150102.6453822
+              },
+              "gauss": {
+                "median": 9.88141918182373,
+                "p95": 16.6837215423584
+              }
+            },
+            {
+              "radius": 1.5,
+              "voxels": 14648,
+              "electronsPerCm3": {
+                "mean": 95363182.21146601,
+                "p05": 27978444.371566836,
+                "median": 48423580.73974982,
+                "p95": 321966450.40533483
+              },
+              "gauss": {
+                "median": 6.322842121124268,
+                "p95": 9.905643463134766
+              }
+            },
+            {
+              "radius": 2,
+              "voxels": 26120,
+              "electronsPerCm3": {
+                "mean": 23952650.790608592,
+                "p05": 7189463.330885557,
+                "median": 10954747.453186706,
+                "p95": 105791933.8621858
+              },
+              "gauss": {
+                "median": 3.298549175262451,
+                "p95": 4.611757278442383
+              }
+            },
+            {
+              "radius": 2.5,
+              "voxels": 40064,
+              "electronsPerCm3": {
+                "mean": 8859959.437309941,
+                "p05": 2860420.6760898214,
+                "median": 4157333.7131159464,
+                "p95": 43144700.558715045
+              },
+              "gauss": {
+                "median": 2.0204734802246094,
+                "p95": 2.6907920837402344
+              }
+            },
+            {
+              "radius": 3,
+              "voxels": 57704,
+              "electronsPerCm3": {
+                "mean": 3983742.3712603073,
+                "p05": 1434047.6075983027,
+                "median": 2127697.4115686663,
+                "p95": 17113437.3710911
+              },
+              "gauss": {
+                "median": 1.3544807434082031,
+                "p95": 1.717708706855774
+              }
+            },
+            {
+              "radius": 3.5,
+              "voxels": 79016,
+              "electronsPerCm3": {
+                "mean": 2111862.2627057536,
+                "p05": 838616.5486875238,
+                "median": 1270676.3849036484,
+                "p95": 7563070.48767837
+              },
+              "gauss": {
+                "median": 0.9610390067100525,
+                "p95": 1.165776014328003
+              }
+            },
+            {
+              "radius": 3.9,
+              "voxels": 98176,
+              "electronsPerCm3": {
+                "mean": 1465331.7476334062,
+                "p05": 591221.8943025619,
+                "median": 906142.5154565701,
+                "p95": 4763026.133019182
+              },
+              "gauss": {
+                "median": 0.7614377737045288,
+                "p95": 0.9047415852546692
+              }
+            }
+          ]
+        }
+      ],
+      "typicalElectronsPerCm3": {
+        "2": 11567464.195625037,
+        "3": 2180550.8661016054,
+        "1.1": 356958234.65599376,
+        "1.25": 130484753.27611664,
+        "1.5": 45887649.94296699,
+        "2.5": 4421265.837374309,
+        "3.5": 1268223.8572523843,
+        "3.9": 887201.3464344246
+      }
+    },
+    "display": {
+      "densityRangePerCm3": [
+        100000,
+        1000000000
+      ],
+      "innerFadeRadii": [
+        1,
+        1.16
+      ],
+      "outerFadeRadii": [
+        2.6,
+        4
+      ],
+      "fullScaleColumnRadii": 4.76,
+      "topAlpha": 0.9,
+      "color": [
+        1,
+        0.902,
+        0.816
+      ],
+      "radialFilter": {
+        "ceiling": 10
+      },
+      "exposureGain": 0.4837363640743794,
+      "filteredExposureGain": 4.837363640743794
+    }
+  },
+  "models": {
+    "simulation-2008-01": "Nobody has imaged this corona. This is the gas density in the magnetohydrodynamic simulation Ó Fionnagáin, Kavanagh, Vidotto et al. (2022), ApJ 924, 115 ran for this star, driven by the map of its surface magnetic field observed in January 2008 (Jeffers et al. (2014), A&A 569, A79), from the data they released (https://zenodo.org/records/5575241). The released state is ten minutes after the authors set off an eruption near the equator of the model; that eruption disturbs 6% of the volume drawn here. It is shown the way coronagraph pictures are: at each distance from the star brightness is proportional to the density there, and only the steep fall-off with distance is compressed. The rotation axis is tilted 46° from the line of sight, as the magnetic maps were fitted; these sources give neither where the axis points on the sky nor the star's rotation phase today, so both are drawn by convention.",
+    "simulation-2011-10": "Nobody has imaged this corona. This is the gas density in the magnetohydrodynamic simulation Ó Fionnagáin, Kavanagh, Vidotto et al. (2022), ApJ 924, 115 ran for this star, driven by the map of its surface magnetic field observed in October 2011 (Jeffers et al. (2014), A&A 569, A79), from the data they released (https://zenodo.org/records/5575241). The released state is ten minutes after the authors set off an eruption near the equator of the model; that eruption disturbs 9% of the volume drawn here. It is shown the way coronagraph pictures are: at each distance from the star brightness is proportional to the density there, and only the steep fall-off with distance is compressed. The rotation axis is tilted 46° from the line of sight, as the magnetic maps were fitted; these sources give neither where the axis points on the sky nor the star's rotation phase today, so both are drawn by convention.",
+    "simulation-2013-10": "Nobody has imaged this corona. This is the gas density in the magnetohydrodynamic simulation Ó Fionnagáin, Kavanagh, Vidotto et al. (2022), ApJ 924, 115 ran for this star, driven by the map of its surface magnetic field observed in October 2013 (Jeffers et al. (2014), A&A 569, A79), from the data they released (https://zenodo.org/records/5575241). The released state is ten minutes after the authors set off an eruption near the equator of the model; that eruption disturbs 4% of the volume drawn here. It is shown the way coronagraph pictures are: at each distance from the star brightness is proportional to the density there, and only the steep fall-off with distance is compressed. The rotation axis is tilted 46° from the line of sight, as the magnetic maps were fitted; these sources give neither where the axis points on the sky nor the star's rotation phase today, so both are drawn by convention.",
+    "wind": "Nobody has imaged this corona. This is the density of the wind Parker (1958) derives for gas at 4.06 million kelvin, the temperature measured from the star's X-ray spectrum, carrying 30 times the Sun's mass loss, which Wood et al. (2002) measure from the star's astrosphere. It leaves the surface at 93 kilometres a second and passes the speed of sound 1.89 radii out. It is the same in every direction, because the model has no magnetic field; the simulated datasets show what the field does to it."
+  },
+  "limitations": [
+    "No telescope has imaged this corona; every grid is a simulation or a model.",
+    "Each simulated grid is an instant ten minutes after an eruption the authors set off; the steady state it started from was not released. The drawn run is the one whose eruption disturbs the least of the drawn volume.",
+    "The simulation resolves the magnetic field only as far as the maps do: the large-scale field, not active regions.",
+    "The rotation axis is tilted from the line of sight by the fitted inclination; its position angle on the sky and the rotation phase are conventions, not measurements.",
+    "The magnetic maps are from 2008, 2011 and 2013; the star’s field changes within months.",
+    "The wind grid assumes one temperature at every distance and the same outflow in every direction.",
+    "The radial filter, the logarithmic scale, the two radial fades and the exposure are display choices."
+  ]
+}

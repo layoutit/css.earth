@@ -1,0 +1,78 @@
+{
+  "schema": "cssearth-nebula-delivery@2",
+  "id": "eps-eridani-corona",
+  "method": "density-grid",
+  "request": {
+    "path": "src/objects/eps-eridani-corona/source/volume-simulation-2013-10.json"
+  },
+  "inputPins": [
+    {
+      "path": "src/objects/eps-eridani-corona/source/provenance.json"
+    },
+    {
+      "path": "src/objects/eps-eridani-corona/source/density-simulation-2008-01.ktx2"
+    },
+    {
+      "path": "src/objects/eps-eridani-corona/source/density-simulation-2011-10.ktx2"
+    },
+    {
+      "path": "src/objects/eps-eridani-corona/source/density-simulation-2013-10.ktx2"
+    },
+    {
+      "path": "src/objects/eps-eridani-corona/source/density-wind.ktx2"
+    }
+  ],
+  "sky": {
+    "centerIcrsDegrees": [
+      53.225364475322294,
+      -9.458106329436308
+    ],
+    "distancePc": 3.219989125999438,
+    "imageRotationDegrees": 0,
+    "arcsecPerUnit": 0.0010687445324970945
+  },
+  "sourceUrl": "https://zenodo.org/records/5575241",
+  "description": "ε Eridani’s corona: the gas density of a published simulation driven by three observed maps of the star’s magnetic field, and a wind model from published measurements. One unit is one stellar radius. None is an observation.",
+  "defaultDataset": "simulation-2013-10",
+  "framingRadiusUnits": 4,
+  "attachedTo": "eps-eridani",
+  "acceptedLabResult": "eps-eridani-corona-density-grids",
+  "compactInputs": {
+    "path": "src/objects/eps-eridani-corona/source/volume-simulation-2013-10.json"
+  },
+  "compactMethod": "density-grid",
+  "grids": [
+    {
+      "id": "simulation-2008-01",
+      "label": "Simulated corona · January 2008",
+      "sourceUrl": "https://zenodo.org/records/5575241",
+      "recipe": {
+        "path": "src/objects/eps-eridani-corona/source/volume-simulation-2008-01.json"
+      }
+    },
+    {
+      "id": "simulation-2011-10",
+      "label": "Simulated corona · October 2011",
+      "sourceUrl": "https://zenodo.org/records/5575241",
+      "recipe": {
+        "path": "src/objects/eps-eridani-corona/source/volume-simulation-2011-10.json"
+      }
+    },
+    {
+      "id": "simulation-2013-10",
+      "label": "Simulated corona · October 2013",
+      "sourceUrl": "https://zenodo.org/records/5575241",
+      "recipe": {
+        "path": "src/objects/eps-eridani-corona/source/volume-simulation-2013-10.json"
+      }
+    },
+    {
+      "id": "wind",
+      "label": "Modelled wind · measured mass loss",
+      "sourceUrl": "https://doi.org/10.1086/340797",
+      "recipe": {
+        "path": "src/objects/eps-eridani-corona/source/volume-wind.json"
+      }
+    }
+  ]
+}

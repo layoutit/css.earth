@@ -109,6 +109,41 @@
           "locator": "Crab Nebula · Chandra · X-ray pulsar wind"
         }
       ]
+    },
+    "hubble-measured": {
+      "title": "Crab filaments at their measured depths",
+      "detail": "3864 × 3864 px",
+      "summary": "Hubble's picture with each filament at the depth its Doppler speed gives: 416,573 measured points.",
+      "sources": [
+        {
+          "catalogueId": "esahubble-heic0515a",
+          "url": "https://esahubble.org/images/heic0515a/",
+          "label": "ESA/Hubble heic0515a: NASA, ESA and Allison Loll/Jeff Hester (Arizona State University). Acknowledgement: Davide De Martin (ESA/Hubble)",
+          "checked": "2026-10-05",
+          "locator": "Most detailed image of the Crab Nebula"
+        },
+        {
+          "catalogueId": "martin-2021",
+          "url": "https://arxiv.org/pdf/2101.02709v1",
+          "label": "Martin, Milisavljevic & Drissen (2021), MNRAS 502, 1864: 3D mapping of the Crab Nebula with SITELLE. I",
+          "checked": "2026-10-05",
+          "locator": "Sect. 3.4: one expansion factor about one centre turns a Doppler speed into a distance along the sight line"
+        },
+        {
+          "catalogueId": "github-thomasorb-m1-paper",
+          "url": "https://github.com/thomasorb/M1_paper",
+          "label": "Martin, M1_paper: the points of the 3D map of Martin, Milisavljevic & Drissen (2021) and their deep frame",
+          "checked": "2026-10-05",
+          "locator": "3dmap_XYZflux.fits and 3dmap_XYZvel.fits: the points of the 3D map"
+        },
+        {
+          "catalogueId": "esahubble-heic0515",
+          "url": "https://esahubble.org/news/heic0515/",
+          "label": "ESA/Hubble release heic0515: Hubble's most detailed image of the Crab Nebula",
+          "checked": "2026-10-05",
+          "locator": "The exposures' dates"
+        }
+      ]
     }
   }
 }
