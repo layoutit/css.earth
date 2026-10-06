@@ -381,8 +381,8 @@ src/objects/mars/source/crust/*.dat
 # Compact native-cell GeoTIFFs, restored by the USGS acquisition recipes or source cache.
 /src/objects/*/source/science/usgs/*.tif
 
-# Netlify functions bundled by site/build/bundle-netlify-functions.mts during build:deploy.
-netlify/functions-bundled/
+# Netlify functions bundled by deploy/netlify/bundle-functions.mts during build:deploy.
+deploy/netlify/functions-bundled/
 
 # Per-object download rules, collected from the object folders. Rules shared by many objects apply to every object.
 src/objects/*/source/photometry/*.dat
@@ -520,8 +520,8 @@ src/objects/*/source/mirabile-gc/ngc3311.dat
 src/objects/*/source/federle-gc/tablea1.dat
 src/objects/m31-globular-clusters/source/dots/table1.dat
 
-# The Cloudflare Worker bundled by site/build/bundle-cloudflare-worker.mts.
-cloudflare/bundled/
+# The Cloudflare Worker bundled by deploy/cloudflare/bundle-worker.mts.
+deploy/cloudflare/bundled/
 # The Southern Ring's published density grid (39.7 MB); restored from its authors' repository (src/objects/ngc-3132-layers/source/manifest.json).
 src/objects/ngc-3132-layers/source/ngc3132_density_structure_101.dat
 # The same grid beside the Southern Ring's mid-infrared bank; restored from the same origin (src/objects/ngc-3132-miri-layers/source/manifest.json).

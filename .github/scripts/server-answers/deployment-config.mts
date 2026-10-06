@@ -1,6 +1,6 @@
 /** Deployment facts and isolated Netlify packages, read from the configuration shipped with this build. */
 import { cp, mkdir, mkdtemp, readFile, readdir, realpath, rm, stat } from 'node:fs/promises';
-import { dirname, isAbsolute, relative, resolve, sep } from 'node:path';
+import { dirname, isAbsolute, posix, relative, resolve, sep } from 'node:path';
 import { tmpdir } from 'node:os';
 import { object } from './model.mts';
 export interface DeploymentConfig {
@@ -67,8 +67,9 @@ export async function readDeploymentConfig(root: string, dist = resolve(root, 'd
   const includedFor = (text: string) => { const list = /included_files\s*=\s*\[([^\]]*)\]/u.exec(text)?.[1]; return list === undefined ? undefined : strings(list); };
   const included = includedFor(common) ?? [];
   const includedByFunction = Object.fromEntries(sections.filter(section => section[1]).map(section => [section[1]!, [...included, ...(includedFor(section[2]!) ?? [])]]));
-  const edgeSection = /^\[edge_functions\]\s*\n([\s\S]*?)(?=^\[|$(?![\s\S]))/gmu.exec(toml)?.[1] ?? '';
-  const edgeDirectory = /directory\s*=\s*"([^"]+)"/u.exec(edgeSection)?.[1] ?? 'netlify/edge-functions';
+  // Netlify's `[build] edge_functions`, or its default directory.
+  const buildSection = /^\[build\]\s*\n([\s\S]*?)(?=^\[|$(?![\s\S]))/gmu.exec(toml)?.[1] ?? '';
+  const edgeDirectory = /^\s*edge_functions\s*=\s*"([^"]+)"/mu.exec(buildSection)?.[1] ?? 'netlify/edge-functions';
   if (!safePath(edgeDirectory)) throw new Error('Unsafe edge directory');
   const edgeFunctions = [...toml.matchAll(/\[\[edge_functions\]\]([\s\S]*?)(?=^\[|$(?![\s\S]))/gmu)].map(section => {
     const path = /path\s*=\s*"([^"]+)"/u.exec(section[1]!)?.[1], name = /function\s*=\s*"([^"]+)"/u.exec(section[1]!)?.[1];
@@ -79,12 +80,28 @@ export async function readDeploymentConfig(root: string, dist = resolve(root, 'd
   const headers = await readFile(resolve(dist, '_headers'), 'utf8').catch(() => '');
   const assetsCache = /^\/_astro\/\*\s*\n\s+Cache-Control:\s*([^\n]+)/imu.exec(headers)?.[1]?.trim() ?? null;
   // Configuration currently contains comments, no strings with comment tokens; preserve quoted values when removing them.
-  const jsonc = (await readFile(resolve(root, 'wrangler.jsonc'), 'utf8')).replace(/"(?:\\.|[^"\\])*"|\/\/[^\n]*|\/\*[\s\S]*?\*\//gu, value => value.startsWith('"') ? value : '');
+  const wranglerConfig = await wranglerConfigPath(root);
+  if (!safePath(wranglerConfig)) throw new Error('Unsafe Wrangler configuration path');
+  const jsonc = (await readFile(resolve(root, wranglerConfig), 'utf8')).replace(/"(?:\\.|[^"\\])*"|\/\/[^\n]*|\/\*[\s\S]*?\*\//gu, value => value.startsWith('"') ? value : '');
   const wrangler = object(JSON.parse(jsonc));
+  // Wrangler resolves `main` and `assets.directory` from the folder its configuration file is in.
+  const fromConfig = (path: string) => posix.normalize(posix.join(posix.dirname(wranglerConfig), path));
   if (typeof wrangler.main !== 'string') throw new Error('Missing worker main');
-  if (!safePath(wrangler.main)) throw new Error('Unsafe worker main');
-  const facts = { headerRules: { netlify: netlifyHeaderRules(toml), assets: assetHeaderRules(headers) }, functionsDirectory, edgeDirectory, included, includedByFunction, edgeFunctions, immutableCache: { netlify, assets: assetsCache }, workerMain: wrangler.main, assets: object(wrangler.assets) };
-  return { ...facts, facts };
+  const workerMain = fromConfig(wrangler.main);
+  if (!safePath(workerMain)) throw new Error('Unsafe worker main');
+  const assets = object(wrangler.assets);
+  if (typeof assets.directory === 'string') assets.directory = fromConfig(assets.directory);
+  // Facts are what a host serves. Where the configuration and the bundles sit in the checkout is layout, so the
+  // directories and the Worker's script path stay out of them.
+  const facts = { headerRules: { netlify: netlifyHeaderRules(toml), assets: assetHeaderRules(headers) }, included, includedByFunction, edgeFunctions, immutableCache: { netlify, assets: assetsCache }, assets };
+  return { ...facts, functionsDirectory, edgeDirectory, workerMain, facts };
+}
+/** The Wrangler configuration this revision deploys with: the `--config` its `deploy:cloudflare-preview` script passes to
+ * Wrangler, else Wrangler's own default at the root. */
+async function wranglerConfigPath(root: string): Promise<string> {
+  const manifest = await readFile(resolve(root, 'package.json'), 'utf8').catch(() => undefined);
+  const script = manifest === undefined ? undefined : object(object(JSON.parse(manifest)).scripts)['deploy:cloudflare-preview'];
+  return (typeof script === 'string' ? /\bwrangler\S*\s+deploy\b[^&]*?\s(?:--config|-c)[\s=]+([^\s&]+)/u.exec(script)?.[1] : undefined) ?? 'wrangler.jsonc';
 }
 /** Expand only the included files into a fresh directory; bundled code receives no access to the source checkout. */
 export async function packagedFunction(root: string, name: string, config: DeploymentConfig): Promise<{ root: string; bundle: string }> {

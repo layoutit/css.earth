@@ -143,7 +143,7 @@ if (target === 'netlify') {
   if (typeof callable !== 'function') throw new Error('Worker missing fetch');
   worker = async request => {
     const pending: Promise<unknown>[] = [];
-    // The Workers ASSETS binding reads a built-site path whatever origin the caller names (cloudflare/assets.ts uses `https://assets.invalid`); it never leaves the machine.
+    // The Workers ASSETS binding reads a built-site path whatever origin the caller names (deploy/cloudflare/assets.ts uses `https://assets.invalid`); it never leaves the machine.
     const ASSETS = { fetch: (input: Request | URL | string, init?: RequestInit) => {
       const asked = new Request(input, init), url = new URL(asked.url);
       return scope.exit(() => staticAnswer(url.origin === publishedOrigin ? asked : new Request(`https://answers.invalid${url.pathname}${url.search}`, asked)));

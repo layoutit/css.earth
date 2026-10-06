@@ -1,10 +1,11 @@
 // Cloudflare's entry for the site: the built pages are the Worker's static assets, and this script answers only what a
-// static file cannot. It is Netlify's edge router and its three functions (netlify/) in one place, calling the same
-// handlers. site/build/bundle-cloudflare-worker.mts bundles it; wrangler.jsonc names the paths that skip it.
-import searchRoute from '../site/server/search-route.mts';
-import { FIND_PATH } from '../site/search/find-protocol.mts';
+// static file cannot. It is Netlify's edge router and its three functions (deploy/netlify/) in one place, calling the same
+// handlers. deploy/cloudflare/bundle-worker.mts bundles it; deploy/cloudflare/wrangler.jsonc names the paths that skip it.
+import searchRoute from '../../site/server/search-route.mts';
+import { FIND_PATH } from '../../site/search/find-protocol.mts';
 import { siteFetcher, useAssets, type Assets } from './assets.ts';
 import { answerOrFallback } from './fallback.ts';
+import { report } from '../handlers/report.ts';
 
 interface Env { readonly ASSETS?: Assets }
 /** The part of the runtime's request context the Worker uses. */
@@ -14,25 +15,16 @@ const SEARCH_PATH = '/.netlify/functions/search', REPORT_PATH = '/.netlify/funct
 /** How long a reader waits for a page rendered for its query before the static page is sent instead. */
 const PAGE_PATIENCE_MS = 10_000;
 
-/** A page's report of its own failure (site/startup/error-report.mts), written to the Worker's log and answered with no content.
- * Nothing is stored. The body is capped: this endpoint is public. */
-async function report(request: Request): Promise<Response> {
-  if (request.method !== 'POST') return new Response(null, { status: 405 });
-  const text = (await request.text()).slice(0, 2500);
-  console.error(`client-error ${JSON.stringify({ agent: (request.headers.get('user-agent') ?? '').slice(0, 200), report: text })}`);
-  return new Response(null, { status: 204 });
-}
-
 // The handlers load on their first request, not with the script: the page handler reads the whole world as it loads,
 // and an address with no query never needs it.
 async function find(request: Request): Promise<Response> {
   const [{ handleFindRequest }, { builtSearchData }, { FEATURE_PIN }] = await Promise.all([
-    import('../site/server/find.mts'), import('../site/server/search-data.mts'), import('../site/server/feature-pin.mts')]);
+    import('../../site/server/find.mts'), import('../../site/server/search-data.mts'), import('../../site/server/feature-pin.mts')]);
   return handleFindRequest(request, builtSearchData(FEATURE_PIN));
 }
 async function page(request: Request, assets: Assets): Promise<Response> {
   const [{ handleSearchRequest }, { builtSearchData }, { FEATURE_PIN }] = await Promise.all([
-    import('../site/server/search-response.mts'), import('../site/server/search-data.mts'), import('../site/server/feature-pin.mts')]);
+    import('../../site/server/search-response.mts'), import('../../site/server/search-data.mts'), import('../../site/server/feature-pin.mts')]);
   const origin = new URL(request.url).origin;
   return handleSearchRequest(request, builtSearchData(FEATURE_PIN), siteFetcher(origin, assets));
 }

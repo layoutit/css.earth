@@ -81,7 +81,7 @@ test('the Worker ASSETS binding reads the built site by path under either publis
       await writeFile(resolve(root, 'dist/binding.json'), '{"binding":true}');
       await writeFile(resolve(root, 'netlify.toml'), '[functions]\ndirectory = "functions"\n');
       await writeFile(resolve(root, 'wrangler.jsonc'), '{"main":"worker.mjs","assets":{"run_worker_first":true}}');
-      // cloudflare/assets.ts reads its own site through this exact URL; the binding must serve the path whatever the published origin is.
+      // deploy/cloudflare/assets.ts reads its own site through this exact URL; the binding must serve the path whatever the published origin is.
       await writeFile(resolve(root, 'worker.mjs'), `export default { fetch(request, env) { return env.ASSETS.fetch(new URL('/binding.json', 'https://assets.invalid')); } };`);
       child = spawn(process.execPath, [resolve(import.meta.dirname, 'host.mts'), 'cloudflare', resolve(root, 'dist'), origin], { cwd: root, stdio: ['ignore', 'pipe', 'pipe', 'ipc'] });
       let log = '';

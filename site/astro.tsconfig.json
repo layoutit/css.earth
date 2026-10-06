@@ -5,5 +5,5 @@
     "incremental": false,
     "tsBuildInfoFile": null
   },
-  "include": ["**/*.astro", "**/*.mts", "**/*.ts", "../netlify/**/*.ts", "../cloudflare/**/*.ts"]
+  "include": ["**/*.astro", "**/*.mts", "**/*.ts", "../deploy/**/*.ts", "../deploy/**/*.mts"]
 }

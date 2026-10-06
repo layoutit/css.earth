@@ -1,17 +1,18 @@
 {
-  // Cloudflare's host for the site: the built pages (`dist`) as static assets, and cloudflare/worker.ts for the
-  // addresses a static file cannot answer. The top level is the preview (`pnpm deploy:cloudflare-preview`); the site
+  // Cloudflare's host for the site: the built pages (`dist`) as static assets, and worker.ts beside this file for the
+  // addresses a static file cannot answer. Wrangler reads it with `--config deploy/cloudflare/wrangler.jsonc` and resolves
+  // `main` and `assets.directory` from this folder. The top level is the preview (`pnpm deploy:cloudflare-preview`); the site
   // itself is the `production` environment below (`pnpm deploy:cloudflare`). Run `pnpm build:deploy` first.
   // docs/ci-cd.md has the steps.
   "name": "cssearth-preview",
-  // Bundled by site/build/bundle-cloudflare-worker.mts, which swaps the modules that read a disk; wrangler uploads it as is.
-  "main": "cloudflare/bundled/worker.mjs",
+  // Bundled by deploy/cloudflare/bundle-worker.mts, which swaps the modules that read a disk; wrangler uploads it as is.
+  "main": "bundled/worker.mjs",
   "no_bundle": true,
   "compatibility_date": "2026-04-01",
   "workers_dev": true,
   "preview_urls": false,
   "assets": {
-    "directory": "dist",
+    "directory": "../../dist",
     "binding": "ASSETS",
     "html_handling": "auto-trailing-slash",
     "not_found_handling": "404-page",
