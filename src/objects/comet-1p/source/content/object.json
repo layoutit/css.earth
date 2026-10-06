@@ -23,7 +23,7 @@
   },
   "datasets": {
     "titleKey": "datasets",
-    "defaultDataset": "model",
+    "defaultDataset": "giotto",
     "labels": {
       "model": "Historical model",
       "giotto": "Giotto + Vega"
