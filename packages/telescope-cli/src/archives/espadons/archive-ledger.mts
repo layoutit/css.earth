@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /** What the Canadian archive holds of ESPaDOnS polarised spectra for this project's stars, and how far each star has come.
  *
- *   node packages/telescope-cli/src/archives/espadons/archive-ledger.mts [--local]     writes data/espadons/ledger.json and docs/espadons-ledger.md
+ *   node packages/telescope-cli/src/archives/espadons/archive-ledger.mts [--local]     writes src/sources/espadons/ledger.json and docs/espadons-ledger.md
  *
  * The archive is asked once: every polarimetric product grouped by the name its observer typed, with the mean of the
  * target positions, the count and the first and last night. Each name is given to the nearest shipped star within
@@ -93,7 +93,7 @@ page already draws a measured tilt or only a display convention.
 ${listed.map(row).join('\n')}
 ${reasons.length ? `\n## Reduced without a map\n\n${reasons.join('\n')}\n` : ''}`; }
 
-export const ESPADONS_LEDGER: ArchiveLedger<EspadonsLedger> = { schema: SCHEMA, files: ledgerFiles('data/espadons/ledger.json', 'docs/espadons-ledger.md'), indent: 1, guide, writes: 'always',
+export const ESPADONS_LEDGER: ArchiveLedger<EspadonsLedger> = { schema: SCHEMA, files: ledgerFiles('src/sources/espadons/ledger.json', 'docs/espadons-ledger.md'), indent: 1, guide, writes: 'always',
   survey: async () => { const answered = await tapRows(CADC_TAP, "SELECT o.target_name, AVG(o.targetPosition_coordinates_cval1) AS ra, AVG(o.targetPosition_coordinates_cval2) AS dec, COUNT(*) AS n, MIN(p.time_bounds_lower) AS first, MAX(p.time_bounds_lower) AS last FROM caom2.Observation o JOIN caom2.Plane p ON o.obsID=p.obsID WHERE o.collection='CFHT' AND o.instrument_name='ESPaDOnS' AND p.productID LIKE '%p' AND p.calibrationLevel=2 GROUP BY o.target_name", 10000);
     const targets = answered.map((row): ArchiveTarget => ({ name: row.target_name ?? '', raDegrees: Number(row.ra), decDegrees: Number(row.dec), spectra: Number(row.n), firstMjd: Number(row.first), lastMjd: Number(row.last) })).filter(target => [target.raDegrees, target.decDegrees, target.spectra, target.firstMjd, target.lastMjd].every(Number.isFinite));
     // Only the targets that fall on a shipped star are kept for the local pass; a star shipped later needs the archive asked again.
