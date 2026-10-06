@@ -1,0 +1,181 @@
+{
+  "schema": "cssearth-volume-source-manifest@2",
+  "pathBase": "repository",
+  "inputs": [
+    {
+      "id": "optical",
+      "path": "src/objects/galactic-centre-layers/source/paschen-alpha.png",
+      "origin": "https://archive.stsci.edu/pub/hlsp/hpsgc/hlsp_hpsgc_hst_nicmos-nic3_gc_palpha_v1_img.fits",
+      "sourceUrl": "https://archive.stsci.edu/prepds/hpsgc/",
+      "title": "HST/NICMOS Paschen-α Survey of the Galactic Centre: the Paschen-α line map, about Sgr A*",
+      "credit": "NASA, ESA, Q. D. Wang (University of Massachusetts, Amherst) and the HST/NICMOS Paschen-α Survey of the Galactic Centre (Wang et al. 2010; Dong et al. 2011), from MAST",
+      "displayCredit": "NASA/ESA Hubble",
+      "acquisition": "Built by the generator (`node packages/bake/authoring/galactic-centre/paschen-alpha.mts <rows directory> src/objects/galactic-centre-layers/source`) from two byte ranges of hlsp_hpsgc_hst_nicmos-nic3_gc_palpha_v1_img.fits (842,405,760 bytes; the whole mosaic is not fetched): its header, bytes 0 to 5759, and rows 2501 to 3586 of its 23,400 × 9,000 pixels, bytes 234099360 to 335748959 (101,649,600 bytes), which are 55 arcsec either side of Sgr A*. The rows are resampled onto a north-up square of 1101 px, 0.1 arcsec a pixel, and given display color: black at 4 µJy a pixel, an inverse hyperbolic sine about 6, full at 220, through matplotlib's afmhot ramp. Restored from the source cache; not tracked. A display picture of a calibrated line map, not the map's values.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "mast-hlsp-hpsgc-paschen-alpha",
+            "role": "material",
+            "evidence": "src/objects/galactic-centre-layers/source/provenance.json"
+          }
+        ]
+      },
+      "dependencies": [],
+      "datasetId": "optical",
+      "license": "Public NASA mission data (MAST); retain the recorded credit.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "hubble",
+            "evidence": "https://archive.stsci.edu/prepds/hpsgc/"
+          }
+        ]
+      },
+      "generator": "packages/bake/authoring/galactic-centre/paschen-alpha.mts"
+    },
+    {
+      "id": "northern-arm-depth",
+      "path": "src/objects/galactic-centre-layers/source/paumard-2004/fig7b.fit",
+      "origin": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/426/81/fig7b.fit",
+      "sourceUrl": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/426/81",
+      "title": "The Northern Arm's line-of-sight distance in the model of Paumard, Maillard & Morris (2004), fig7b.fit",
+      "credit": "Paumard, Maillard & Morris (2004), from the CDS",
+      "displayCredit": "Paumard et al. (2004)",
+      "acquisition": "Downloaded unchanged from the CDS; not tracked. 104 × 93 cells of 0.353 arcsec; line-of-sight distance from the plane of the sky through Sgr A*, in milliarcseconds, positive behind it.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "cds-j-a-a-426-81",
+            "role": "material",
+            "evidence": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/426/81"
+          }
+        ]
+      },
+      "license": "CDS catalogue data, public with citation of the paper and CDS",
+      "dependencies": [],
+      "datasetId": "optical",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "unresolved",
+            "label": "Canada-France-Hawaii Telescope, BEAR imaging Fourier transform spectrometer",
+            "evidence": "https://arxiv.org/abs/astro-ph/0405197",
+            "reason": "A model fitted to Brackett-γ radial velocities, not an observation of its own."
+          }
+        ]
+      }
+    },
+    {
+      "id": "northern-arm-depth-error",
+      "path": "src/objects/galactic-centre-layers/source/paumard-2004/fig7berr.fit",
+      "origin": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/426/81/fig7berr.fit",
+      "sourceUrl": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/426/81",
+      "title": "The error of that line-of-sight distance, fig7berr.fit",
+      "credit": "Paumard, Maillard & Morris (2004), from the CDS",
+      "displayCredit": "Paumard et al. (2004)",
+      "acquisition": "Downloaded unchanged from the CDS; not tracked. Read by packages/bake/authoring/galactic-centre/northern-arm-surface.mts for the comparison it prints; the bake does not read it.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "cds-j-a-a-426-81",
+            "role": "material",
+            "evidence": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/426/81"
+          }
+        ]
+      },
+      "license": "CDS catalogue data, public with citation of the paper and CDS",
+      "dependencies": [],
+      "datasetId": "optical",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "unresolved",
+            "label": "Canada-France-Hawaii Telescope, BEAR imaging Fourier transform spectrometer",
+            "evidence": "https://arxiv.org/abs/astro-ph/0405197",
+            "reason": "The error map of a model, not an observation of its own."
+          }
+        ]
+      }
+    },
+    {
+      "id": "northern-arm-surface",
+      "path": "src/objects/galactic-centre-layers/source/northern-arm-surface.png",
+      "origin": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/426/81/fig7b.fit",
+      "sourceUrl": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/426/81",
+      "title": "Where the Northern Arm's surface is in the model of Paumard, Maillard & Morris (2004)",
+      "credit": "Paumard, Maillard & Morris (2004)",
+      "displayCredit": "Paumard et al. (2004)",
+      "acquisition": "Built from source/paumard-2004/fig7b.fit by the generator (`node packages/bake/authoring/galactic-centre/northern-arm-surface.mts src/objects/galactic-centre-layers/source`): white on the cells of the continuous sheet that holds the wedge east of the arm's rim, black elsewhere, north up. Restored from the source cache; not tracked. Read by the image-layer bake for the arm's extent.",
+      "generator": "packages/bake/authoring/galactic-centre/northern-arm-surface.mts",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "publication-paumard-2004-minispiral",
+            "role": "method",
+            "evidence": "src/objects/galactic-centre-layers/source/paumard-2004/fig7b.fit"
+          }
+        ]
+      },
+      "license": "Derived from CDS catalogue data, public with citation of the paper and CDS",
+      "dependencies": [],
+      "datasetId": "optical",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "unresolved",
+            "label": "Canada-France-Hawaii Telescope, BEAR imaging Fourier transform spectrometer",
+            "evidence": "https://arxiv.org/abs/astro-ph/0405197",
+            "reason": "A footprint cut from a model's map, not an observation of its own."
+          }
+        ]
+      }
+    }
+  ],
+  "documents": [
+    {
+      "id": "recipe",
+      "path": "src/objects/galactic-centre-layers/source/recipe.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned processing, source interpretation or presentation record; the published image is separately bound as a material input."
+      },
+      "kind": "authored-document",
+      "origin": "cssEarth project-authored record",
+      "credit": "cssEarth contributors",
+      "title": "Image-layer preparation recipe",
+      "acquisition": "Checked-in project-authored JSON. This pin identifies local processing or interpretation metadata, not an original publisher document; the published image is separately bound in inputs."
+    },
+    {
+      "id": "provenance",
+      "path": "src/objects/galactic-centre-layers/source/provenance.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned processing, source interpretation or presentation record; the published image is separately bound as a material input."
+      },
+      "kind": "authored-document",
+      "origin": "cssEarth project-authored record",
+      "credit": "cssEarth contributors",
+      "title": "Published image interpretation and acquisition record",
+      "acquisition": "Checked-in project-authored JSON. This pin identifies local processing or interpretation metadata, not an original publisher document; the published image is separately bound in inputs."
+    },
+    {
+      "id": "presentation",
+      "path": "src/objects/galactic-centre-layers/source/presentation.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned processing, source interpretation or presentation record; the published image is separately bound as a material input."
+      },
+      "kind": "authored-document",
+      "origin": "cssEarth project-authored record",
+      "credit": "cssEarth contributors",
+      "title": "Dataset presentation and prepared-bank bindings",
+      "acquisition": "Checked-in project-authored JSON. This pin identifies local processing or interpretation metadata, not an original publisher document; the published image is separately bound in inputs."
+    }
+  ],
+  "generatedIntermediates": []
+}

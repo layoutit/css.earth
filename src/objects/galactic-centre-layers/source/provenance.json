@@ -1,0 +1,55 @@
+{
+  "schema": "cssearth-image-layer-provenance@1",
+  "title": "HST/NICMOS Paschen-α Survey of the Galactic Centre: the Paschen-α line map",
+  "publisher": "MAST (STScI)",
+  "sourceId": "hlsp_hpsgc_hst_nicmos-nic3_gc_palpha_v1_img.fits",
+  "sourcePage": "https://archive.stsci.edu/prepds/hpsgc/",
+  "download": "https://archive.stsci.edu/pub/hlsp/hpsgc/hlsp_hpsgc_hst_nicmos-nic3_gc_palpha_v1_img.fits",
+  "credit": "NASA, ESA, Q. D. Wang (University of Massachusetts, Amherst) and the HST/NICMOS Paschen-α Survey of the Galactic Centre (Wang et al. 2010; Dong et al. 2011), from MAST",
+  "license": "NASA-STScI",
+  "original": {
+    "dimensions": [
+      23400,
+      9000
+    ],
+    "bands": [
+      "Hubble",
+      "NICMOS",
+      "NIC3",
+      "F187N",
+      "F190N",
+      "Paschen-α 1.87 µm"
+    ],
+    "fieldOfViewDeg": [
+      0.6593,
+      0.2536
+    ]
+  },
+  "checkedSource": {
+    "kind": "Display picture cut from two byte ranges of the published FITS mosaic",
+    "dimensions": [
+      1101,
+      1101
+    ]
+  },
+  "geometryEvidence": {
+    "inclinationDeg": 0.001,
+    "lineOfNodesPaDeg": 0,
+    "reference": "A picture of the sky: the plane is the picture's own tangent plane about Sgr A*, perpendicular to the sight line, so it faces the Sun. Not the orientation of the gas."
+  },
+  "registration": {
+    "method": "The survey's mosaic is on a Galactic tangent plane, 0.1014 arcsec a pixel. packages/bake/authoring/galactic-centre/paschen-alpha.mts resamples the rows that cross the field onto a north-up tangent plane about Sgr A*'s place, 0.1 arcsec a pixel, east to the left. The bank stands where the world places Sgr A* at its epoch (JD 2461286.5), 0.171 arcsec from the catalogued place by the black hole's proper motion, which the gas shares. Check: the mean light at the 51 places Zhao et al. (2009) measured along the three streams (their Table 3) is greatest with the picture where the mosaic's own coordinates put it, to the 0.25 arcsec of the search's step.",
+    "pixelArcsec": 0.1,
+    "northClockwiseDeg": 0
+  },
+  "displayModel": "Each stream's light lies on the plane of its published orbit, where the sight line meets that plane inside the stream's bundle of orbits (the middle orbit with its semi-major axis from 0.75 to 1.25 times as long); the claim falls to none at twice that dispersion. The Northern Arm also holds the sight lines inside the surface Paumard et al. (2004) mapped. Where two streams claim a sight line they share it. Light no stream claims lies on the plane of the sky through Sgr A*: a presentation choice, no depth is published for it. From the Sun the planes add up to the picture.",
+  "coverage": "A circle about Sgr A*: the picture fades out between 45 and 50 arcsec, inside the rows fetched (55 arcsec either side), so no straight edge shows.",
+  "acquisition": {
+    "url": "https://archive.stsci.edu/pub/hlsp/hpsgc/hlsp_hpsgc_hst_nicmos-nic3_gc_palpha_v1_img.fits",
+    "dimensions": [
+      1101,
+      1101
+    ],
+    "operation": "Two byte ranges of the mosaic (its header and rows 2501 to 3586); resampled north up at 0.1 arcsec a pixel; display stretch and color ramp."
+  }
+}
