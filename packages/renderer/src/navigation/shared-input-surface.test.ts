@@ -4,6 +4,30 @@ import { isDeepStrictEqual } from 'node:util';
 import { parseHTML } from 'linkedom';
 import { bindInputEvent, retainInputSurface } from './shared-input-surface.js';
 import { clearCursor, setBaseCursor } from './cursor-state.js';
+import { setFlagsFromString } from 'node:v8';
+import { runInNewContext } from 'node:vm';
+
+setFlagsFromString('--expose-gc');
+const collect: unknown = runInNewContext('gc');
+
+/** Leases a slot to a scene and releases it, as a departing scene does. The reference tells whether the scene is held. */
+function leaseAndRelease(surface: HTMLElement, target: EventTarget): WeakRef<object> {
+  const scene = { name: 'departed' };
+  bindInputEvent(surface, 'zoom', target, 'wheel', () => { void scene; }, { passive: false })();
+  return new WeakRef(scene);
+}
+
+test('the native listener does not keep the scene that leased its slot first', async () => {
+  const surface = parseHTML('<div></div>').document.querySelector('div')!;
+  const target = new EventTarget(), destroy = retainInputSurface(surface);
+  const departed = leaseAndRelease(surface, target);
+  const release = bindInputEvent(surface, 'zoom', target, 'wheel', () => {}, { passive: false });
+  await new Promise(resolve => setTimeout(resolve));
+  assert.equal(typeof collect, 'function');
+  if (typeof collect === 'function') collect();
+  assert.equal(departed.deref(), undefined);
+  release(); destroy();
+});
 
 test('handoff retains native wheel registration and releases the departed scene callback', () => {
   const surface = parseHTML('<div></div>').document.querySelector('div')!;
