@@ -155,6 +155,6 @@ counts the measured period among the star's catalogued ones when it adopts a rot
 - These are the mission's calibrated images. The frames before calibration are public too, with a published calibrator
   (TICA, Fausnaugh et al. 2020), but that route works on whole detectors.
 - A periodic light is taken as rotation. A pulsating star or a close pair whose period is longer than the surface orbit's
-  would pass; the page's text says the period is the light's.
+  would pass as a turning, spotted star.
 - One sector is read for a star. A star whose sector is refused may show its rotation in another.
 - A star with no catalogued period whose light repeats twice a turn is given half its true period.
