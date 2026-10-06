@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { methodFor, parseAnalysis, REINHOLD_HEKKER_2020, type RotationAnalysis } from './methods.mts';
+import { methodFor, parseAnalysis, parseMissionLightCurve, REINHOLD_HEKKER_2020, type RotationAnalysis } from './methods.mts';
 
 /** K2-100 in campaign 5, as tools.py measured it. */
 const analysis: RotationAnalysis = { spanDays: 74.8, variabilityRange: 0.0142, peakHeight: 0.349, lombScargleDays: 4.251, waveletDays: 4.255, autocorrelationDays: 4.25, starPrivateer: '1.3.1', time: [0, 0.125], flux: [1, 1] };
@@ -11,8 +11,18 @@ test('a star is given the published method made for its kind, or the paper\'s re
   const giant = methodFor('K2', { effectiveTemperatureK: 4800, surfaceGravityLogg: 2.6 }); assert.ok('reason' in giant); assert.match(giant.reason, /log g 2\.6 the star is evolved: Reinhold & Hekker \(2020\) apply their method to stars with log g over 4\.2/u);
   const hot = methodFor('K2', { effectiveTemperatureK: 7200, surfaceGravityLogg: 4.3 }); assert.ok('reason' in hot); assert.match(hot.reason, /At 7200 K the star is outside the 3250 to 6250 K/u);
   const unknown = methodFor('K2', {}); assert.ok('reason' in unknown); assert.match(unknown.reason, /holds no temperature or no surface gravity/u);
-  // No paper read yet prints criteria for one Kepler quarter or one TESS sector.
-  for (const mission of ['Kepler', 'TESS'] as const) { const none = methodFor(mission, dwarf); assert.ok('reason' in none); assert.match(none.reason, /No published method is wired here/u); }
+  // No published method is wired yet for a TESS sector.
+  const none = methodFor('TESS', dwarf); assert.ok('reason' in none); assert.match(none.reason, /No published method is wired here for a TESS sector/u);
+  // The paper analyses campaigns 0 to 18 without campaign 9.
+  assert.equal(REINHOLD_HEKKER_2020.covers(13), undefined); assert.match(REINHOLD_HEKKER_2020.covers(9)!, /campaigns 0 to 18 without campaign 9, not campaign 9/u); assert.match(REINHOLD_HEKKER_2020.covers(19)!, /not campaign 19/u);
+});
+
+test('a star observed in several campaigns is given the mean of their periods, or excluded when they deviate by over 20%', () => {
+  const seen = (periodDays: number, amplitude: number) => ({ detected: true, periodDays, amplitude }), none = { detected: false, reason: 'The periodogram\'s highest peak is too low.' };
+  assert.deepEqual(REINHOLD_HEKKER_2020.star([seen(14.5, 0.006)]), seen(14.5, 0.006)); assert.deepEqual(REINHOLD_HEKKER_2020.star([none]), none);
+  // A campaign that fails the criteria is left out of the mean; the variability is the mean of the campaigns'.
+  assert.deepEqual(REINHOLD_HEKKER_2020.star([seen(10, 0.01), none, seen(11, 0.02)]), { detected: true, periodDays: 10.5, amplitude: 0.015 });
+  assert.match(REINHOLD_HEKKER_2020.star([seen(10, 0.01), seen(13, 0.01)]).reason!, /periods of 10 and 13 d, which deviate by more than the 20%/u);
 });
 
 test('Reinhold & Hekker\'s criteria are applied as their Sect. 3 prints them', () => {
@@ -32,4 +42,5 @@ test('Reinhold & Hekker\'s criteria are applied as their Sect. 3 prints them', (
 test('what the tool printed is read whole or refused', () => {
   assert.equal(parseAnalysis({ ...analysis }).waveletDays, 4.255);
   assert.throws(() => parseAnalysis({ ...analysis, flux: [1] }), /different lengths/u); assert.throws(() => parseAnalysis({ ...analysis, peakHeight: 'high' }), /peakHeight/u);
+  assert.deepEqual(parseMissionLightCurve({ frames: 2, window: 13, pipeline: 'r63269', time: [2987.6, 2987.62], flux: [1, 1.001] }).window, 13); assert.throws(() => parseMissionLightCurve({ frames: 1, window: 13, pipeline: '', time: [1], flux: [1] }), /or none/u);
 });

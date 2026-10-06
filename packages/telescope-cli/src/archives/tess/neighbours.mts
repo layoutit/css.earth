@@ -49,10 +49,11 @@ export function parseNeighbours(csv: string, radiusArcsec = NEIGHBOUR_ARCSEC): M
 /** What each mission's pixels can follow. Kepler's and K2's are 4 arcseconds wide and the pixels added up for a star reach
  * some four of them; their photometer follows stars far fainter than TESS, and its apertures take in a bright star's bleed. */
 export const PIXELS = { TESS: { radiusArcsec: NEIGHBOUR_ARCSEC, faintest: FAINTEST_MAGNITUDE, brightest: BRIGHTEST_MAGNITUDE, name: 'TESS' },
-  Kepler: { radiusArcsec: 16, faintest: 16, brightest: -Infinity, name: 'Kepler' }, K2: { radiusArcsec: 16, faintest: 16, brightest: -Infinity, name: 'K2' } } as const;
+  // A K2 star's light curve is the mission's, and no limit of ours is set on it: its neighbours are only counted, within four of its pixels, for the page to say.
+  K2: { radiusArcsec: 16 } } as const;
 
 /** Why a star's pixels are not fetched, when they are not. `light` counts the neighbours within the mission's own radius. */
-export function lightRefusal(light: PixelLight | undefined, mission: keyof typeof PIXELS = 'TESS'): string | undefined { const limits = PIXELS[mission];
+export function lightRefusal(light: PixelLight | undefined): string | undefined { const limits = PIXELS.TESS;
   if (!light) return `Gaia DR3 has no source within ${OWN_ARCSEC} arcseconds of the star's place, so how much of the light in its pixels is its own is not known.`;
   if (light.magnitude < limits.brightest) return `At magnitude ${light.magnitude.toFixed(1)} the star saturates ${limits.name}'s detector: its light bleeds beyond the pixels added up for it.`;
   if (light.magnitude > limits.faintest) return `At magnitude ${light.magnitude.toFixed(1)} the star is fainter than the ${limits.faintest} these pixels can follow.`;

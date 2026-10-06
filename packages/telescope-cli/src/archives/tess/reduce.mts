@@ -1,32 +1,36 @@
 #!/usr/bin/env node
-/** A star's rotation and brightness map from its pixels: a Kepler quarter or a K2 campaign when the mission watched it,
- * else one TESS sector.
+/** A star's rotation and brightness map from its light: the K2 mission's own light curves when it watched the star, else
+ * the pixels of one TESS sector.
  *
- *   node packages/telescope-cli/src/archives/tess/reduce.mts <star id>... [--keep-pixels] [--judge]
- *   node packages/telescope-cli/src/archives/tess/reduce.mts --all [--keep-pixels] [--judge]
+ *   node packages/telescope-cli/src/archives/tess/reduce.mts <star id>... [--keep-pixels]
+ *   node packages/telescope-cli/src/archives/tess/reduce.mts --all [--keep-pixels]
  *
- * For each star already in the tree: whose light its pixels hold (neighbours.mts); the Kepler and K2 files at its place
- * (kepler/pixels.mts) or the TESS sectors that imaged it (pixels.mts; `pickSector` says which), cut where the star was that
- * year; its light curve (photometry.mts); whether it shows the star turning; and, when it does, the brightness map that
- * reproduces the light curve (map.mts). A Kepler or K2 star is judged by the published method made for its kind of star
- * (methods.mts), and a star no method covers is not fetched. A TESS sector is still judged by this repository's own rule
- * (photometry.mts `rotationVerdict`). A star too faint, or whose pixels hold too much of other stars' light, is not fetched.
+ * A star K2 watched is judged by the published method made for its kind of star (methods.mts), on the light curve that
+ * method's paper uses: every campaign's light curve the paper covers is read from MAST as the mission publishes it
+ * (kepler/light-curves.mts), prepared and measured as the paper says, and the campaigns are combined by the paper's rule.
+ * A star the method is not for is not fetched. Nothing of ours decides for a K2 star.
  *
- * The result is a receipt, output/tess/<star id>/rotation.json: the star's and its neighbours' light, the window with its
- * pinned request, the method, what was measured and why a rotation was or was not accepted, and the codes' versions. The
- * light curve is kept beside it as measured, so `--judge` judges a star again from it, with nothing fetched. A map is
- * written as the table the star pages read. Receipts are results: they stay in ignored output/
- * (docs/provenance/CONTRACT.md). `--all` skips a star that already has a receipt, and keeps Gaia's answers in
- * output/tess/gaia-neighbours.csv, so a star is asked once. Pixels are deleted once measured unless `--keep-pixels`. */
+ * Any other star is read from one TESS sector: whose light its pixels hold (neighbours.mts); the sectors that imaged its
+ * place and its pixels in one of them (pixels.mts; `pickSector` says which), cut where the star was that year; its light
+ * curve and period (photometry.mts). That sector is still judged by this repository's own rule (`rotationVerdict`), and
+ * a star too faint, or whose pixels hold too much of other stars' light, is not fetched.
+ *
+ * When a rotation is accepted, starry makes the brightness map that reproduces each accepted light curve (map.mts). The
+ * result is a receipt, output/tess/<star id>/rotation.json: the star's and its neighbours' light, each window with its
+ * pinned request, the method, what was measured and why a rotation was or was not accepted, and the codes' versions.
+ * Each light curve is kept beside it, and a map is written as the table the star pages read. Receipts are results: they
+ * stay in ignored output/ (docs/provenance/CONTRACT.md). `--all` skips a star that already has a receipt, and keeps
+ * Gaia's answers in output/tess/gaia-neighbours.csv, so a star is asked once. TESS pixels are deleted once measured
+ * unless `--keep-pixels`. */
 import { mkdir, readdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { isRecord } from '@cssearth/core';
 import { WORKSPACE } from '@cssearth/telescope/node';
 import { ASSUMED_TILT_DEGREES, brightnessMap, brightnessTable } from './map.mts';
-import { fetchPixelFile, pickFile, pixelFilesAt } from '../kepler/pixels.mts';
+import { fetchLightCurve, lightCurvesAt } from '../kepler/light-curves.mts';
 import { GAIA_EPOCH_YEAR, lightRefusal, pixelLight, PIXELS, type PixelLight } from './neighbours.mts';
-import { methodFor, rotationAnalysis, type PeriodMethod, type StarKind } from './methods.mts';
+import { methodFor, missionLightCurve, rotationAnalysis, type PeriodMethod, type StarKind } from './methods.mts';
 import { besideCatalogued, BIN_DAYS, notTurning, rotationVerdict, sectorLightCurve, withinBreakup, type Mission, type RotationVerdict } from './photometry.mts';
 import { cadenceMinutes, fetchCutout, sectorsAt, type ImagedSector } from './pixels.mts';
 import { toolchainPins } from './toolchain.mts';
@@ -80,91 +84,80 @@ export async function starPlace(id: string): Promise<StarPlace | undefined> {
  * a neighbour counts: each mission's own (neighbours.mts PIXELS). */
 const KEPT_LIGHT = { csv: resolve(WORKSPACE, 'output/tess/gaia-neighbours.csv'), asked: resolve(WORKSPACE, 'output/tess/gaia-neighbours.asked.txt') };
 export const lightOf = (stars: readonly StarPlace[], keep = false, radiusArcsec: number = PIXELS.TESS.radiusArcsec) => pixelLight(stars.map(star => ({ id: star.id, ...placeAt(star, GAIA_EPOCH_YEAR) })), keep ? KEPT_LIGHT : undefined, radiusArcsec);
-/** A star's light counted at TESS's radius and at Kepler's; `null` where Gaia has no source at its place. */
+/** A star's light counted at TESS's radius and at K2's; `null` where Gaia has no source at its place. */
 export interface StarLight { readonly wide: PixelLight | null; readonly near: PixelLight | null }
-/** The years Kepler and K2 targets are looked for at, beside the star's recorded place: between Kepler's field (2009 to 2013)
- * and K2's campaigns (2014 to 2018), and 2000, the epoch of the surveys the missions' target lists took their places from
- * (Kepler-42 moves 0.4 arcseconds a year and its target sits 7 arcseconds from where Gaia has it in 2016). */
-export const KEPLER_YEARS = [2014, 2000] as const;
-/** The places a star's Kepler or K2 target may be listed at. */
-export const targetPlaces = (star: StarPlace) => [star, ...KEPLER_YEARS.map(year => placeAt(star, year))];
-/** A window's name in a file: a TESS sector, a K2 campaign, a Kepler quarter. */
-export const windowStem = (id: string, mission: Mission, window: number) => `${id}-${mission === 'TESS' ? `s${String(window).padStart(4, '0')}` : mission === 'K2' ? `c${String(window).padStart(2, '0')}` : `q${String(window).padStart(2, '0')}`}`;
+/** The years a K2 target is looked for at, beside the star's recorded place: the middle of the mission's campaigns (2014
+ * to 2018), and 2000, the epoch of the surveys its target list took its places from. */
+export const K2_YEARS = [2016, 2000] as const;
+/** The places a star's K2 target may be listed at. */
+export const targetPlaces = (star: StarPlace) => [star, ...K2_YEARS.map(year => placeAt(star, year))];
+/** A window's name in a file: a TESS sector, a K2 campaign. */
+export const windowStem = (id: string, mission: Mission, window: number) => `${id}-${mission === 'TESS' ? `s${String(window).padStart(4, '0')}` : `c${String(window).padStart(2, '0')}`}`;
 
 /** What a mission calls one of its windows. */
-const WINDOW: Readonly<Record<Mission, string>> = { TESS: 'sector', K2: 'campaign', Kepler: 'quarter' };
-type Curve = { readonly time: readonly number[]; readonly flux: readonly number[] };
-/** A Kepler or K2 light curve kept by an earlier run, with the window it is of and the request that fetched its pixels. */
-interface Kept extends Curve { readonly mission: Mission; readonly window: number; readonly tried: Record<string, unknown>; readonly pixelFiles: unknown }
-async function keptCurve(run: string, earlier: Record<string, unknown> | undefined): Promise<Kept | undefined> {
-  const last = Array.isArray(earlier?.tried) ? earlier.tried.filter(isRecord).at(-1) : undefined;
-  if (!last || (last.mission !== 'K2' && last.mission !== 'Kepler') || typeof last.window !== 'number' || typeof last.lightCurve !== 'string') return undefined;
-  const curve = await readJson(resolve(run, last.lightCurve)); if (!isRecord(curve) || !Array.isArray(curve.time)) return undefined;
-  // A curve kept while a drift was still taken out of `flux` holds the light as measured beside it.
-  const flux = Array.isArray(curve.measured) ? curve.measured : curve.flux; if (!Array.isArray(flux) || flux.length !== curve.time.length) return undefined;
-  return { mission: last.mission, window: last.window, time: curve.time as number[], flux: flux as number[], tried: last, pixelFiles: earlier?.pixelFiles };
-}
+const WINDOW: Readonly<Record<Mission, string>> = { TESS: 'sector', K2: 'campaign' };
+type Curve = { readonly window: number; readonly time: readonly number[]; readonly flux: readonly number[] };
 
-/** One star, reduced. Its Kepler or K2 pixels are read when the mission watched it: months of light in pixels a neighbour
- * seldom shares. Any other star is read from one TESS sector. `light` is what Gaia says of its pixels, when the caller has
- * asked for many stars at once; `earlier` is the star's receipt from an earlier run: one from before Kepler and K2 were
- * asked is kept when neither watched the star, and with `judge` a Kepler or K2 light curve it kept is judged again
- * without a request. */
-export async function reduceStar(id: string, keepPixels = false, light?: StarLight, earlier?: Record<string, unknown>, judge = false): Promise<Record<string, unknown>> {
+/** One star, reduced: by the published method for its kind on the K2 mission's light curves when K2 watched it, else from
+ * one TESS sector's pixels. `light` is what Gaia says of its surroundings, when the caller has asked for many stars at
+ * once; `earlier` is the star's receipt from before K2 was asked, kept when K2 did not watch the star. */
+export async function reduceStar(id: string, keepPixels = false, light?: StarLight, earlier?: Record<string, unknown>): Promise<Record<string, unknown>> {
   const star = await starPlace(id); if (!star) throw new Error(`${id} is not a star with a place on the sky.`);
   const run = resolve(WORKSPACE, 'output/tess', id), pixels = resolve(run, 'pixels'), pins = await toolchainPins(); await mkdir(run, { recursive: true });
-  const near = light === undefined ? (await lightOf([star], false, PIXELS.Kepler.radiusArcsec)).get(id) : light.near ?? undefined, tried: Record<string, unknown>[] = [];
-  const kept = judge ? await keptCurve(run, earlier) : undefined;
-  // Kepler and K2 are asked only for a star their pixels could follow as its own.
-  const files = kept || star.otherLight || lightRefusal(near, 'Kepler') ? [] : await pixelFilesAt(targetPlaces(star)), file = pickFile(files);
-  if (!file && !kept && earlier && !Array.isArray(earlier.pixelFiles)) { const same = { ...earlier, pixelFiles: [] }; await writeFile(receiptPath(id), `${JSON.stringify(same, null, 1)}\n`); return same; }
-  const mission: Mission = kept?.mission ?? file?.mission ?? 'TESS', own = mission !== 'TESS' ? near : light === undefined ? (await lightOf([star])).get(id) : light.wide ?? undefined, refusal = star.otherLight ?? lightRefusal(own, mission);
-  let rotation: RotationVerdict = { detected: false, reason: refusal ?? 'TESS has not imaged this place.' }, seen: { window: number; time: readonly number[]; flux: readonly number[] } | undefined, method: PeriodMethod | undefined;
-  const beside = (verdict: RotationVerdict) => withinBreakup(besideCatalogued(verdict, star.cataloguedPeriodDays), star.fastestTurnDays), stem = (window: number) => windowStem(id, mission, window);
-  const keep = async (window: number, curve: Curve) => { await writeFile(resolve(run, `${stem(window)}.curve.json`), `${JSON.stringify({ mission, window, binDays: BIN_DAYS, time: curve.time, flux: curve.flux })}\n`); };
-  /** A Kepler or K2 light curve, as measured, judged by the published method for the star's kind; the map is made from the light the method prepared. */
-  const published = async (window: number, curve: Curve, by: PeriodMethod) => { const analysis = await rotationAnalysis(by, curve.time, curve.flux); rotation = beside(by.verdict(analysis)); seen = { window, time: analysis.time, flux: analysis.flux };
-    return { method: by.id, analysis: { spanDays: Number(analysis.spanDays.toFixed(1)), variabilityRange: analysis.variabilityRange, peakHeight: analysis.peakHeight, lombScargleDays: analysis.lombScargleDays, waveletDays: analysis.waveletDays, autocorrelationDays: analysis.autocorrelationDays }, verdict: rotation }; };
+  const tried: Record<string, unknown>[] = [], accepted: Curve[] = [];
+  const campaigns = star.otherLight ? [] : await lightCurvesAt(targetPlaces(star));
+  if (!campaigns.length && earlier && !Array.isArray(earlier.pixelFiles)) { const same = { ...earlier, pixelFiles: [] }; await writeFile(receiptPath(id), `${JSON.stringify(same, null, 1)}\n`); return same; }
+  const mission: Mission = campaigns.length ? 'K2' : 'TESS', stem = (window: number) => windowStem(id, mission, window);
+  // A K2 star's neighbours are counted for the page to say, never to refuse it: its light curve is the mission's.
+  const own = mission === 'K2' ? (light === undefined ? (await lightOf([star], false, PIXELS.K2.radiusArcsec)).get(id) : light.near ?? undefined) : light === undefined ? (await lightOf([star])).get(id) : light.wide ?? undefined;
+  const refusal = star.otherLight ?? (mission === 'TESS' ? lightRefusal(own) : undefined);
+  let rotation: RotationVerdict = { detected: false, reason: refusal ?? 'TESS has not imaged this place.' }, method: PeriodMethod | undefined;
+  const beside = (verdict: RotationVerdict) => withinBreakup(besideCatalogued(verdict, star.cataloguedPeriodDays), star.fastestTurnDays);
+  const keep = async (curve: Curve, product: string) => { await writeFile(resolve(run, `${stem(curve.window)}.curve.json`), `${JSON.stringify({ mission, window: curve.window, product, time: curve.time, flux: curve.flux })}\n`); };
   let sectors: ImagedSector[] = [];
-  if (kept || file) { const applies = methodFor(mission, star), window = kept?.window ?? file!.window;
-    if ('reason' in applies) { rotation = { detected: false, reason: applies.reason }; tried.push(kept ? { ...kept.tried, verdict: rotation } : { mission, window, verdict: rotation }); }
-    else if (kept) { method = applies.method; const { strongest: _strongest, halves: _halves, ...request } = kept.tried; tried.push({ ...request, ...await published(kept.window, kept, method) }); }
-    // The campaign or quarter is the one the file's own header names; the archive's name for it stands when no light was measured.
-    else { method = applies.method; const held = await fetchPixelFile(file!, pixels), curve = await sectorLightCurve(held.file, mission), read = curve?.window ?? window;
-      if (!curve) rotation = { detected: false, reason: 'No pixel stands above the sky at the star.' }; else await keep(read, curve);
-      tried.push({ mission, window: read, cadenceMinutes: 30, pixels: { url: held.url, bytes: held.bytes }, ...(curve ? { frames: curve.frames, aperturePixels: curve.aperturePixels, lightCurve: `${stem(read)}.curve.json`, ...await published(read, curve, method) } : { verdict: rotation }) }); } }
+  if (mission === 'K2') { const applies = methodFor('K2', star);
+    if ('reason' in applies) rotation = { detected: false, reason: applies.reason };
+    else { method = applies.method; const verdicts: RotationVerdict[] = [], prepared: Curve[] = [];
+      for (const campaign of campaigns) { const left = method.covers(campaign.campaign);
+        if (left) { tried.push({ mission, window: campaign.campaign, verdict: { detected: false, reason: left } }); continue; }
+        const held = await fetchLightCurve(campaign, pixels), curve = await missionLightCurve(held.file); await keep(curve, 'pdcsap');
+        const analysis = await rotationAnalysis(method, curve.time, curve.flux), verdict = method.verdict(analysis); verdicts.push(verdict); if (verdict.detected) prepared.push({ window: curve.window, time: analysis.time, flux: analysis.flux });
+        tried.push({ mission, window: curve.window, method: method.id, lightCurveFile: { url: held.url, bytes: held.bytes, pipeline: curve.pipeline }, frames: curve.frames, lightCurve: `${stem(curve.window)}.curve.json`,
+          analysis: { spanDays: Number(analysis.spanDays.toFixed(1)), variabilityRange: analysis.variabilityRange, peakHeight: analysis.peakHeight, lombScargleDays: analysis.lombScargleDays, waveletDays: analysis.waveletDays, autocorrelationDays: analysis.autocorrelationDays }, verdict }); }
+      rotation = beside(method.star(verdicts)); if (rotation.detected) accepted.push(...prepared); } }
   else if (!refusal) { sectors = await sectorsAt(...Object.values(placeAt(star, MISSION_YEAR)) as [number, number]); const picked = pickSector(sectors), newest = sectors.at(-1);
     // A sector in which no pixel stands above the sky at the star (the star at a detector's edge, a frame full of scattered
     // light) holds no light curve to judge: the newest sector is read in its place.
     for (const { sector } of [...new Set([picked, newest].filter((one): one is ImagedSector => one !== undefined))]) { const place = placeAt(star, sectorYear(sector)), cutout = await fetchCutout(place.raDegrees, place.decDegrees, sector, pixels), curve = await sectorLightCurve(cutout.file);
       rotation = curve ? beside(rotationVerdict(curve)) : { detected: false, reason: 'No pixel stands above the sky at the star.' };
       tried.push({ mission, window: sector, sector, cadenceMinutes: Number(cadenceMinutes(sector).toFixed(2)), pixels: { url: cutout.url, bytes: cutout.bytes }, ...(curve ? { frames: curve.frames, aperturePixels: curve.aperturePixels, saturated: curve.saturated, strongest: curve.whole, orbits: curve.halves, lightCurve: `${stem(sector)}.curve.json` } : {}), verdict: rotation });
-      if (curve) { seen = { window: sector, time: curve.time, flux: curve.flux }; await keep(sector, curve); break; } } }
+      if (curve) { const seen = { window: sector, time: curve.time, flux: curve.flux }; await keep(seen, 'pixels'); if (rotation.detected) accepted.push(seen); break; } } }
   if (!keepPixels) await rm(pixels, { recursive: true, force: true });
-  const receipt: Record<string, unknown> = { schema: ROTATION_SCHEMA, star, ...(own ? { light: own } : {}), pixelFiles: kept ? kept.pixelFiles : files.map(one => ({ mission: one.mission, window: one.window, ...(one.days === undefined ? {} : { days: one.days }) })), sectorsImaged: sectors.map(sector => sector.sector), tried,
-    ...(method ? { method: { id: method.id, citation: method.citation, url: method.url, where: method.where, reliability: method.reliability } } : {}), rotation, toolchain: { id: pins.id, requirements: pins.entry.requirements } };
-  const read = seen as { window: number; time: readonly number[]; flux: readonly number[] } | undefined;
-  if (rotation.detected && read) { const tilt = star.tiltDegrees ?? ASSUMED_TILT_DEGREES, map = await brightnessMap(read, rotation.periodDays!, Math.min(tilt, 90)), table = `${stem(read.window)}.dat`, flat = map.values.flat();
+  const receipt: Record<string, unknown> = { schema: ROTATION_SCHEMA, star, ...(own ? { light: own } : {}), pixelFiles: campaigns.map(one => ({ mission: 'K2', window: one.campaign, file: one.filename })), sectorsImaged: sectors.map(sector => sector.sector), tried,
+    ...(method ? { method: { id: method.id, citation: method.citation, url: method.url, where: method.where, lightCurve: method.lightCurve, reliability: method.reliability } } : {}), rotation, toolchain: { id: pins.id, requirements: pins.entry.requirements } };
+  // One map for each window whose light was accepted, all at the star's one period.
+  const maps: Record<string, unknown>[] = [];
+  for (const read of rotation.detected ? accepted : []) { const tilt = star.tiltDegrees ?? ASSUMED_TILT_DEGREES, map = await brightnessMap(read, rotation.periodDays!, Math.min(tilt, 90)), table = `${stem(read.window)}.dat`, flat = map.values.flat();
     await writeFile(resolve(run, table), brightnessTable(`Brightness map of ${star.name} from its light in ${mission} ${WINDOW[mission]} ${read.window} (period ${rotation.periodDays} d)`, map));
-    receipt.map = { mission, window: read.window, ...(mission === 'TESS' ? { sector: read.window } : {}), table, degree: map.degree, inclinationDegrees: map.inclinationDegrees, inclinationFrom: star.tiltFrom, inclinationSource: star.tiltSource ?? `assumed: no tilt of the star is known, and ${ASSUMED_TILT_DEGREES} degrees is the middle tilt of axes that point at random`,
-      periodDays: map.periodDays, residual: Number(map.residual.toFixed(5)), noise: Number(map.noise.toFixed(5)), darkestPercent: Number((100 * Math.min(...flat)).toFixed(1)), brightestPercent: Number((100 * Math.max(...flat)).toFixed(1)), starry: map.starry }; }
+    maps.push({ mission, window: read.window, ...(mission === 'TESS' ? { sector: read.window } : {}), table, degree: map.degree, inclinationDegrees: map.inclinationDegrees, inclinationFrom: star.tiltFrom, inclinationSource: star.tiltSource ?? `assumed: no tilt of the star is known, and ${ASSUMED_TILT_DEGREES} degrees is the middle tilt of axes that point at random`,
+      periodDays: map.periodDays, residual: Number(map.residual.toFixed(5)), noise: Number(map.noise.toFixed(5)), darkestPercent: Number((100 * Math.min(...flat)).toFixed(1)), brightestPercent: Number((100 * Math.max(...flat)).toFixed(1)), starry: map.starry }); }
+  if (maps.length) receipt.maps = maps;
   await writeFile(receiptPath(id), `${JSON.stringify(receipt, null, 1)}\n`);
   return receipt;
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
-  const args = process.argv.slice(2), keep = args.includes('--keep-pixels'), judge = args.includes('--judge'), named = args.filter(argument => !argument.startsWith('--')), all = !named.length;
-  if (all && !args.includes('--all')) throw new TypeError('Usage: reduce.mts <star id>... | --all [--keep-pixels] [--judge]');
+  const args = process.argv.slice(2), keep = args.includes('--keep-pixels'), named = args.filter(argument => !argument.startsWith('--')), all = !named.length;
+  if (all && !args.includes('--all')) throw new TypeError('Usage: reduce.mts <star id>... | --all [--keep-pixels]');
   const stars: StarPlace[] = [];
   for (const id of all ? (await readdir(resolve(WORKSPACE, 'src/objects'))).sort() : named) { const star = await starPlace(id); if (star) stars.push(star); else if (!all) console.log(`${id}: not a star with a place on the sky.`); }
-  const wide = await lightOf(stars, true), near = await lightOf(stars, true, PIXELS.Kepler.radiusArcsec);
+  const wide = await lightOf(stars, true), near = await lightOf(stars, true, PIXELS.K2.radiusArcsec);
   for (const star of stars) {
-    // `--all` leaves a star alone once Kepler and K2 have been asked about it. A receipt from before they were is asked
-    // now, named or not, and kept when neither mission watched the star: its TESS sector is not read twice. `--judge`
-    // takes the stars whose receipt holds a Kepler or K2 light curve and judges each again from it.
-    const held = await readJson(receiptPath(star.id)), asked = isRecord(held) && Array.isArray(held.pixelFiles), curve = isRecord(held) && Array.isArray(held.tried) && held.tried.filter(isRecord).some(one => (one.mission === 'K2' || one.mission === 'Kepler') && typeof one.lightCurve === 'string');
-    if (judge ? !curve : all && asked) continue;
-    try { const receipt = await reduceStar(star.id, keep, { wide: wide.get(star.id) ?? null, near: near.get(star.id) ?? null }, isRecord(held) && (judge || !asked) ? held : undefined, judge), rotation = receipt.rotation as RotationVerdict; console.log(`${star.id}: ${rotation.detected ? `rotation ${rotation.periodDays} d, ${(100 * (rotation.amplitude ?? 0)).toFixed(2)}% swing${receipt.map ? '; map written' : ''}` : rotation.reason}`); }
+    // `--all` leaves a star alone once K2 has been asked about it. A receipt from before it was is asked now, named or
+    // not, and kept when K2 did not watch the star: its TESS sector is not read twice.
+    const held = await readJson(receiptPath(star.id)), asked = isRecord(held) && Array.isArray(held.pixelFiles); if (all && asked) continue;
+    try { const receipt = await reduceStar(star.id, keep, { wide: wide.get(star.id) ?? null, near: near.get(star.id) ?? null }, isRecord(held) && !asked ? held : undefined), rotation = receipt.rotation as RotationVerdict, maps = Array.isArray(receipt.maps) ? receipt.maps.length : 0;
+      console.log(`${star.id}: ${rotation.detected ? `rotation ${rotation.periodDays} d, ${(100 * (rotation.amplitude ?? 0)).toFixed(2)}% swing${maps ? `; ${maps} map${maps === 1 ? '' : 's'} written` : ''}` : rotation.reason}`); }
     catch (error) { console.log(`${star.id}: failed: ${String(error instanceof Error ? error.message : error).split('\n')[0]!.slice(0, 200)}`); }
   }
 }

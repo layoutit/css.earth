@@ -1,16 +1,20 @@
-"""The calls into the published codes that photometry.mts makes (toolchain.json pins them). Nothing is computed here.
+"""The calls into the published codes that photometry.mts and methods.mts make (toolchain.json pins them). Nothing is
+computed here.
 
-  tools.py light-curve <job.json>      a star's light from its pixels in one TESS sector, Kepler quarter or K2 campaign
-                                       (lightkurve), with the sky's variation or the spacecraft's motion taken out, and
-                                       the period of what is left (astropy's Lomb-Scargle)
+  tools.py light-curve <job.json>          a star's light from its pixels in one TESS sector (lightkurve), with the
+                                           sky's own variation regressed out, and the period of what is left
+                                           (astropy's Lomb-Scargle)
 
-  tools.py rotation <job.json>         the periods of a Kepler or K2 light curve by the three methods of Reinhold & Hekker
-                                       (2020, A&A 635, A43): generalized Lomb-Scargle (astropy), wavelet and
-                                       autocorrelation (star-privateer, Breton et al. 2024), after the paper's own
-                                       preparation of the light curve
+  tools.py mission-light-curve <job.json>  a K2 campaign's light curve as the mission publishes it: the PDC-MAP flux
+                                           of its long-cadence file, read by lightkurve
 
-  tools.py map <job.json>              the brightness map that reproduces a rotational light curve (starry); run with
-                                       the starry toolchain's interpreter
+  tools.py rotation <job.json>             the periods of a K2 light curve by the three methods of Reinhold & Hekker
+                                           (2020, A&A 635, A43): generalized Lomb-Scargle (astropy), wavelet and
+                                           autocorrelation (star-privateer, Breton et al. 2024), after the paper's own
+                                           preparation of the light curve
+
+  tools.py map <job.json>                  the brightness map that reproduces a rotational light curve (starry); run
+                                           with the starry toolchain's interpreter
 
 It prints one JSON document.
 """
@@ -25,29 +29,14 @@ def light_curve(job):
     import lightkurve as lk
     from astropy.timeseries import LombScargle
 
-    mission = job.get('mission', 'TESS')
-    window = None
-    if mission == 'TESS':
-        tpf = lk.TessTargetPixelFile(job['cutout'])
-        tpf = tpf[tpf.quality == 0]
-        mask = tpf.create_threshold_mask(threshold=job['threshold'], reference_pixel='center')
-        if mask.sum() == 0:
-            return {'frames': int(len(tpf.time)), 'aperturePixels': 0}
-        raw = tpf.to_lightcurve(aperture_mask=mask)
-        sky = lk.DesignMatrix(tpf.flux[:, ~mask].value, name='sky').pca(job['skyTerms']).append_constant()
-        curve = lk.RegressionCorrector(raw).correct(sky).remove_nans().normalize()
-    else:
-        # A Kepler or K2 target pixel file: the mission's own aperture where it gives one. K2 rolled about its boresight,
-        # and lightkurve's self-flat-fielding corrector (Vanderburg & Johnson 2014) takes that motion out and keeps the star's own trend.
-        tpf = lk.read(job['cutout'])
-        # The campaign or the quarter, as the file's own header has it.
-        window = tpf.campaign if mission == 'K2' else tpf.quarter
-        mask = tpf.pipeline_mask if tpf.pipeline_mask.sum() else tpf.create_threshold_mask(threshold=job['threshold'])
-        if mask.sum() == 0:
-            return {'frames': int(len(tpf.time)), 'aperturePixels': 0}
-        raw = tpf.to_lightcurve(aperture_mask=mask).remove_nans()
-        moved = raw.to_corrector('sff').correct(windows=job['sffWindows'], restore_trend=True) if mission == 'K2' else raw
-        curve = moved.remove_nans().remove_outliers(sigma=job['outlierSigma']).normalize()
+    tpf = lk.TessTargetPixelFile(job['cutout'])
+    tpf = tpf[tpf.quality == 0]
+    mask = tpf.create_threshold_mask(threshold=job['threshold'], reference_pixel='center')
+    if mask.sum() == 0:
+        return {'frames': int(len(tpf.time)), 'aperturePixels': 0}
+    raw = tpf.to_lightcurve(aperture_mask=mask)
+    sky = lk.DesignMatrix(tpf.flux[:, ~mask].value, name='sky').pca(job['skyTerms']).append_constant()
+    curve = lk.RegressionCorrector(raw).correct(sky).remove_nans().normalize()
     binned = curve.bin(time_bin_size=job['binDays']).remove_nans()
     time, flux = np.asarray(binned.time.value, dtype=float), np.asarray(binned.flux.value, dtype=float)
 
@@ -59,16 +48,27 @@ def light_curve(job):
         model = periodogram.model(t, frequency[best])
         return {'periodDays': float(1 / frequency[best]), 'power': float(power[best]), 'amplitude': float(model.max() - model.min())}
 
-    # The two orbits of a TESS sector, apart: the gap between them is the longest in the times. A Kepler quarter or a K2
-    # campaign has no such gap and is cut at the middle of its time.
-    gap = int(np.argmax(np.diff(time))) if mission == 'TESS' else int(np.searchsorted(time, (time.min() + time.max()) / 2)) - 1
-    halves = [(time[:gap + 1], flux[:gap + 1]), (time[gap + 1:], flux[gap + 1:])] if len(time) > 20 else []
+    # The two orbits of a sector, apart: the gap between them is the longest in the times.
+    gap = int(np.argmax(np.diff(time)))
+    halves = [(time[:gap + 1], flux[:gap + 1]), (time[gap + 1:], flux[gap + 1:])]
     span = float(time.max() - time.min())
-    longest = span / 2
-    return {'frames': int(len(curve.time)), 'aperturePixels': int(mask.sum()), **({} if window is None else {'window': int(window)}), 'saturated': bool(mission == 'TESS' and np.nanmax(tpf.flux.value) > job['saturationElectronsPerSecond']),
-            'spanDays': span, 'scatter': float(np.std(flux)), 'whole': peak(time, flux, longest),
-            'halves': [peak(t, f, min(longest, float(t.max() - t.min()))) if len(t) > 10 else None for t, f in halves],
+    return {'frames': int(len(curve.time)), 'aperturePixels': int(mask.sum()), 'saturated': bool(np.nanmax(tpf.flux.value) > job['saturationElectronsPerSecond']),
+            'spanDays': span, 'scatter': float(np.std(flux)), 'whole': peak(time, flux, span / 2),
+            'halves': [peak(t, f, float(t.max() - t.min())) if len(t) > 10 else None for t, f in halves],
             'time': [round(float(value), 5) for value in time], 'flux': [round(float(value), 6) for value in flux]}
+
+
+def mission_light_curve(job):
+    """The light curve a mission's pipeline publishes for a star, as it is: lightkurve reads the long-cadence file's
+    PDC-MAP flux with its default quality mask, and the campaign from the file's header."""
+    warnings.filterwarnings('ignore')
+    import numpy as np
+    import lightkurve as lk
+
+    curve = lk.read(job['file'], flux_column='pdcsap_flux').remove_nans()
+    flux = np.asarray(curve.flux.value, dtype=float)
+    return {'frames': int(len(flux)), 'window': int(curve.campaign), 'pipeline': str(curve.meta.get('PROCVER', '')),
+            'time': [round(float(value), 5) for value in np.asarray(curve.time.value, dtype=float)], 'flux': [round(float(value), 6) for value in flux / np.mean(flux)]}
 
 
 def rotation(job):
@@ -142,6 +142,9 @@ if __name__ == '__main__':
     if len(sys.argv) == 3 and sys.argv[1] == 'light-curve':
         with open(sys.argv[2]) as handle:
             result = light_curve(json.load(handle))
+    elif len(sys.argv) == 3 and sys.argv[1] == 'mission-light-curve':
+        with open(sys.argv[2]) as handle:
+            result = mission_light_curve(json.load(handle))
     elif len(sys.argv) == 3 and sys.argv[1] == 'rotation':
         with open(sys.argv[2]) as handle:
             result = rotation(json.load(handle))

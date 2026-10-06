@@ -1,15 +1,13 @@
-/** A star's light curve from its pixels (a TESS sector's cutout, a Kepler quarter's or a K2 campaign's file), and the
- * rule that judges a TESS sector.
+/** A star's light curve from its TESS pixels, the period of its light, and the rule that judges a TESS sector.
  *
- * The science is not this module's: lightkurve measures the star's light from the pixels and takes the sky's variation
- * (TESS) or the spacecraft's roll (K2) out of it, and astropy's Lomb-Scargle periodogram finds the period (tools.py holds
- * the calls, toolchain.json pins the codes). What is written here is the job those calls read and the reading of what
- * they print.
+ * The science is not this module's: lightkurve measures the star's light from the pixels and regresses the sky's own
+ * variation out of it, and astropy's Lomb-Scargle periodogram finds the period (tools.py holds the calls, toolchain.json
+ * pins the codes). What is written here is the job those calls read and the reading of what they print.
  *
- * Whether a Kepler or K2 light curve shows a rotation is a published method's to say (methods.mts). The rule for a TESS
- * sector below is still this repository's own, set on our labelled stars; it is to be replaced by a published one.
- * The choices lightkurve leaves open for a TESS cutout are the constants below; two sky terms reproduce AB Pictoris's
- * 3.89-day rotation with a correlation of 0.997 against the mission's own light curve, and five remove it. */
+ * Whether a light curve shows a rotation is a published method's to say (methods.mts), for the stars and the light
+ * curves its paper is about. No such method is wired yet for a TESS sector measured from full-frame pixels: the rule
+ * below (`rotationVerdict`) and the constants of the photometry are this repository's own, set on our labelled stars,
+ * and are to be replaced by a published method. */
 import { mkdtemp, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
@@ -28,7 +26,7 @@ export const SHORTEST_DAYS = 0.1, FREQUENCIES = 20000;
 export const SATURATION_ELECTRONS_PER_SECOND = 1.5e5;
 
 export interface Peak { readonly periodDays: number; readonly power: number; /** Peak to peak, as a share of the star's mean light. */ readonly amplitude: number }
-export interface SectorLightCurve { readonly frames: number; readonly aperturePixels: number; /** The campaign or quarter a Kepler or K2 file's header names. */ readonly window?: number; readonly saturated: boolean; readonly spanDays: number; readonly scatter: number;
+export interface SectorLightCurve { readonly frames: number; readonly aperturePixels: number; readonly saturated: boolean; readonly spanDays: number; readonly scatter: number;
   readonly whole: Peak; /** The same search in each of the sector's two orbits, where an orbit holds enough of the curve. */ readonly halves: readonly (Peak | null)[];
   readonly time: readonly number[]; readonly flux: readonly number[] }
 
@@ -99,18 +97,16 @@ export function parseLightCurve(value: unknown): SectorLightCurve | undefined {
   if (requireFiniteNumber(record.aperturePixels, 'aperture pixels') === 0) return undefined;
   const numbers = (key: string) => requireArray(record[key], key).map((entry, index) => requireFiniteNumber(entry, `${key}[${index}]`)), time = numbers('time'), flux = numbers('flux');
   if (time.length !== flux.length || !time.length) throw new TypeError('The light curve has times and fluxes of different lengths.');
-  return { frames: requireFiniteNumber(record.frames, 'frames'), aperturePixels: requireFiniteNumber(record.aperturePixels, 'aperture pixels'), ...(typeof record.window === 'number' ? { window: record.window } : {}), saturated: record.saturated === true, spanDays: requireFiniteNumber(record.spanDays, 'span'),
+  return { frames: requireFiniteNumber(record.frames, 'frames'), aperturePixels: requireFiniteNumber(record.aperturePixels, 'aperture pixels'), saturated: record.saturated === true, spanDays: requireFiniteNumber(record.spanDays, 'span'),
     scatter: requireFiniteNumber(record.scatter, 'scatter'), whole: peak(record.whole, 'whole sector'), halves: requireArray(record.halves, 'halves').map((half, index) => isRecord(half) ? peak(half, `orbit ${index + 1}`) : null), time, flux };
 }
 
+/** The missions whose light is read: TESS's full-frame cutouts here, and K2's own light curves (archives/kepler). */
+export type Mission = 'TESS' | 'K2';
 /** One sector's light curve of a star, from the cutout file of its pixels. */
-/** The missions whose pixels are read: TESS's full-frame cutouts (archives/tess), and Kepler's and K2's target pixel files (archives/kepler). */
-export type Mission = 'TESS' | 'Kepler' | 'K2';
-/** How many pieces lightkurve's self-flat-fielding cuts a K2 campaign into, and how far from the rest a point is dropped as an outlier. */
-export const SFF_WINDOWS = 20, OUTLIER_SIGMA = 5;
-export async function sectorLightCurve(cutoutFile: string, mission: Mission = 'TESS'): Promise<SectorLightCurve | undefined> {
+export async function sectorLightCurve(cutoutFile: string): Promise<SectorLightCurve | undefined> {
   const { python } = await toolchainPaths(), directory = await mkdtemp(join(tmpdir(), 'tess-')), job = join(directory, 'job.json');
-  try { await writeFile(job, JSON.stringify({ cutout: cutoutFile, mission, sffWindows: SFF_WINDOWS, outlierSigma: OUTLIER_SIGMA, threshold: APERTURE_THRESHOLD, skyTerms: SKY_TERMS, binDays: BIN_DAYS, shortestDays: SHORTEST_DAYS, frequencies: FREQUENCIES, saturationElectronsPerSecond: SATURATION_ELECTRONS_PER_SECOND }));
+  try { await writeFile(job, JSON.stringify({ cutout: cutoutFile, threshold: APERTURE_THRESHOLD, skyTerms: SKY_TERMS, binDays: BIN_DAYS, shortestDays: SHORTEST_DAYS, frequencies: FREQUENCIES, saturationElectronsPerSecond: SATURATION_ELECTRONS_PER_SECOND }));
     return parseLightCurve(runTool(python, ['light-curve', job])); }
   finally { await rm(directory, { recursive: true, force: true }); }
 }
