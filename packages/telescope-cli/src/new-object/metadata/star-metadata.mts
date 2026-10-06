@@ -30,6 +30,10 @@ export const METADATA_FIELDS = { spectralType: 'spectralTypeSource', metallicity
   rotationPeriodDays: 'rotationPeriodSource', projectedRotationSpeedKmS: 'projectedRotationSpeedSource', spinInclinationDegrees: 'spinInclinationSource' } as const;
 /** The list this pass also owns: every catalogued rotation period, adopted or not. */
 export const CATALOGUED_PERIODS = 'rotationPeriodsCatalogued';
+/** The period this project measured from a star's own light, and where: written by the route that measured it (brightness/brightness.mts), read here. */
+export const MEASURED_PERIOD = { days: 'rotationPeriodMeasuredDays', source: 'rotationPeriodMeasuredSource' } as const;
+export const measuredPeriod = (record: Readonly<Record<string, unknown>>): CataloguedPeriod | undefined => { const days = record[MEASURED_PERIOD.days], source = record[MEASURED_PERIOD.source];
+  return typeof days === 'number' && days > 0 && typeof source === 'string' ? { days, source } : undefined; };
 export type StarMetadata = Record<string, string | number | readonly CataloguedPeriod[]>;
 /** One table's rotation period of a star, in days, with the table and column it is printed in. */
 export interface CataloguedPeriod { readonly days: number; readonly source: string }
@@ -97,7 +101,7 @@ const trim = (value: number, digits: number) => Number(value.toFixed(digits));
 
 /** The fields a star's record gains. `radiusKm` is the record's own radius; `measuredAxis` says the page already draws a
  * measured tilt, which then stands and no tilt is computed. */
-export function starMetadata(star: { readonly radiusKm?: number; readonly measuredAxis: boolean }, host: HostRow | undefined, catalogued: SimbadRow | undefined, gaia?: GaiaRow, periods: readonly CataloguedPeriod[] = []): StarMetadata {
+export function starMetadata(star: { readonly radiusKm?: number; readonly measuredAxis: boolean }, host: HostRow | undefined, catalogued: SimbadRow | undefined, gaia?: GaiaRow, periods: readonly CataloguedPeriod[] = [], measured?: CataloguedPeriod): StarMetadata {
   const out: StarMetadata = {};
   if (host?.spectralType) { out.spectralType = host.spectralType.value; out.spectralTypeSource = archive(host, `spectral type ${host.spectralType.value}`, host.spectralType); }
   else if (catalogued?.spectralType) { out.spectralType = catalogued.spectralType.value; out.spectralTypeSource = simbad(catalogued, `spectral type ${catalogued.spectralType.value}`, catalogued.spectralType.bibcode); }
@@ -107,7 +111,9 @@ export function starMetadata(star: { readonly radiusKm?: number; readonly measur
   if (host?.ageGyr) { out.ageGyr = trim(host.ageGyr.value, 3); out.ageSource = archive(host, `age ${host.ageGyr.value} Gyr`, host.ageGyr); }
   else if (gaia?.ageGyr && gaia.flags === '00') { const [value, lower, upper] = gaia.ageGyr; out.ageGyr = trim(value, 3); out.ageSource = flame(gaia, `age_flame ${value} Gyr (16th to 84th percentiles ${lower} to ${upper})`); }
   if (host?.rotationPeriodDays) { out.rotationPeriodDays = trim(host.rotationPeriodDays.value, 4); out.rotationPeriodSource = archive(host, `rotation period ${host.rotationPeriodDays.value} d`, host.rotationPeriodDays); }
-  else { const adopted = adoptPeriod(periods); if (adopted) { out.rotationPeriodDays = trim(adopted.days, 4); out.rotationPeriodSource = periods.length > 1 ? `${adopted.source}. The middle of ${periods.length} catalogued periods, ${agreeing(periods, adopted)} of them within ${PERIOD_AGREEMENT * 100}% of it` : adopted.source; } }
+  // A period this project measured from the star's light stands beside the catalogued ones as one more of them.
+  else { const all = measured ? [...periods, measured] : periods, adopted = adoptPeriod(all); if (adopted) { out.rotationPeriodDays = trim(adopted.days, 4);
+    out.rotationPeriodSource = all.length > 1 ? `${adopted.source}. The middle of ${all.length} ${measured ? 'periods, catalogued and measured here' : 'catalogued periods'}, ${agreeing(all, adopted)} of them within ${PERIOD_AGREEMENT * 100}% of it` : adopted.source; } }
   if (periods.length) out[CATALOGUED_PERIODS] = [...periods].sort((a, b) => a.source.localeCompare(b.source));
   if (host?.vsiniKmS) { out.projectedRotationSpeedKmS = trim(host.vsiniKmS.value, 2); out.projectedRotationSpeedSource = archive(host, `projected rotation speed ${host.vsiniKmS.value} km/s`, host.vsiniKmS); }
   else if (catalogued?.vsiniKmS) { out.projectedRotationSpeedKmS = trim(catalogued.vsiniKmS.value, 2); out.projectedRotationSpeedSource = simbad(catalogued, `projected rotation speed ${trim(catalogued.vsiniKmS.value, 2)} km/s, the measurement SIMBAD prefers`, catalogued.vsiniKmS.bibcode); }

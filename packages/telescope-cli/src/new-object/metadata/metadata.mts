@@ -20,10 +20,10 @@ import { UNIFORM_DISC_STAR_SCHEMA } from '@cssearth/objects';
 import { GAIA_TAP, type Archive } from '../archives/archives.mts';
 import { simbadRows } from '../archives/tables/simbad-tap.mts';
 import { json } from '../dataset.mts';
-import { isConventionOnly } from '../magnetic/map-datasets.mts';
+import { isConventionOnly } from '../maps/surface-maps.mts';
 import { NASA_TAP } from '../orbit.mts';
 import { cataloguedPeriods } from './rotation-catalogues.mts';
-import { gaiaFlameQuery, METADATA_FIELDS, parseGaiaRows, parseHostRows, PSCOMPPARS_QUERY, recordedPeriods, starMetadata, withMetadata, type CataloguedPeriod, type GaiaRow, type HostRow, type SimbadRow } from './star-metadata.mts';
+import { gaiaFlameQuery, METADATA_FIELDS, parseGaiaRows, parseHostRows, PSCOMPPARS_QUERY, recordedPeriods, starMetadata, withMetadata, type CataloguedPeriod, type GaiaRow, type HostRow, type SimbadRow, measuredPeriod } from './star-metadata.mts';
 
 /** How far a catalogue's star may lie from the record's place and be the star, degrees: both are Gaia positions near 2016. */
 export const MATCH_DEGREES = 5 / 3600;
@@ -77,7 +77,7 @@ export async function writeStarMetadata(root: string, ids: readonly string[], ar
   report(`${list.length} stars; the archive lists ${hosts.length} hosts.`);
   const catalogued = await simbadByStar(archive, list), flame = await gaiaBySource(archive, list), lines: string[] = [], counts = new Map<string, number>(); let hosted = 0;
   const harvested: Map<string, CataloguedPeriod[]> | undefined = periods ? await cataloguedPeriods(list.map(star => ({ id: star.id, ...star.j2000 })), resolve(root, PERIODS_KEPT), periods === 'fresh', report) : undefined;
-  for (const star of list) { const host = hostOf(star, byGaia, hosts), fields = starMetadata({ ...(typeof star.record.radiusKm === 'number' ? { radiusKm: star.record.radiusKm } : {}), measuredAxis: star.measuredAxis }, host, catalogued.get(star.id), star.gaiaDr3 ? flame.get(star.gaiaDr3) : undefined, harvested ? harvested.get(star.id) ?? [] : recordedPeriods(star.record));
+  for (const star of list) { const host = hostOf(star, byGaia, hosts), fields = starMetadata({ ...(typeof star.record.radiusKm === 'number' ? { radiusKm: star.record.radiusKm } : {}), measuredAxis: star.measuredAxis }, host, catalogued.get(star.id), star.gaiaDr3 ? flame.get(star.gaiaDr3) : undefined, harvested ? harvested.get(star.id) ?? [] : recordedPeriods(star.record), measuredPeriod(star.record));
     if (host) hosted++; for (const field of Object.keys(METADATA_FIELDS)) if (field in fields) counts.set(field, (counts.get(field) ?? 0) + 1);
     const next = json(withMetadata(star.record, fields)); if (next !== json(star.record)) { await writeFile(star.path, next); lines.push(`${star.id}: ${Object.keys(METADATA_FIELDS).filter(field => field in fields).join(', ') || 'no catalogued value'}`); report(lines.at(-1)!); } }
   lines.push(`${list.length} stars, ${hosted} of them archive hosts, ${catalogued.size} in SIMBAD and ${flame.size} with a Gaia FLAME row: ${Object.keys(METADATA_FIELDS).map(field => `${field} ${counts.get(field) ?? 0}`).join(', ')}.`);
