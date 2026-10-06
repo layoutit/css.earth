@@ -42,10 +42,15 @@
     ]
   },
   "datasets": {
-    "model": {
-      "title": "Deep Space 1 size approximation",
-      "detail": "Approximate shape",
-      "summary": "A rough ellipsoid at the size estimated from flyby images and telescope light curves."
+    "shape": {
+      "title": "Light-curve shape model",
+      "detail": "Published shape",
+      "summary": "A coarse shape from brightness changes as it spins, with the proportions Deep Space 1 saw. The spin angle shown is arbitrary."
+    },
+    "elevation": {
+      "title": "Shape-derived elevations",
+      "detail": "Shape-derived radial height",
+      "summary": "Height above or below a 0.595 km sphere, sharing the size uncertainty. Colors mix the overall shape with local relief."
     }
   }
 }

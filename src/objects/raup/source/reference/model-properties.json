@@ -1,7 +1,7 @@
 {
-  "source": "https://damit.cuni.cz/projects/damit/asteroid_models/view/5835",
-  "modelId": 5835,
-  "modelVersion": "2019-10-23",
+  "source": "https://doi.org/10.5281/zenodo.22812438",
+  "model": "shape_models/model_9165_1.tri",
+  "modelVersion": "2026-09-17",
   "diameterKm": 4.839,
   "diameterInterpretation": "Approximate scale from a thermal diameter of 4.839 ± 0.167 km. Quoted fit error excludes about 20% survey systematic uncertainty and shape/aspect effects.",
   "calibration": {
@@ -128,22 +128,22 @@
     "sourceLabel": "Masiero et al. (2012), ApJL 759, L8",
     "visibleDescription": "Approximate scale from a thermal diameter of 4.839 ± 0.167 km. Quoted fit error excludes about 20% survey systematic uncertainty and shape/aspect effects."
   },
-  "periodHours": 46.22,
+  "periodHours": 1303.393531,
   "poleEclipticJ2000Degrees": [
-    269,
-    87
+    285.6,
+    56.9
   ],
   "modelLimitations": "The convex inversion resolves the broad shape; craters and concavities are unresolved.",
   "shape": {
-    "source": "https://damit.cuni.cz/projects/damit/stored_files/open/62233/shape.txt",
+    "source": "https://doi.org/10.5281/zenodo.22812438",
     "vertices": 574,
     "faces": 1144,
     "originalUnits": "uncalibrated source coordinates",
-    "metersPerUnit": 3900.2149058716022,
+    "metersPerUnit": 3900.2144925348866,
     "firstVertexKm": [
-      -1.1441748452163052,
-      1.0887800929082105,
-      1.9123728737214933
+      0.3976674297446541,
+      0.04778741707192862,
+      2.1480010094470696
     ],
     "firstFaceZeroBased": [
       0,
@@ -151,20 +151,20 @@
       2
     ],
     "extentsKm": [
-      4.560236573747535,
-      9.127614440987724,
-      3.890472169036735
+      5.666511260133798,
+      8.5055253618882,
+      4.081802628985572
     ],
-    "volumeCubicKm": 59.3287896675503,
-    "volumeEquivalentRadiusKm": 2.4194999999999998,
+    "volumeCubicKm": 59.32878966755032,
+    "volumeEquivalentRadiusKm": 2.4195,
     "radialRangeKm": [
-      1.8078776939674586,
-      4.70105409394641
+      1.6579232841652671,
+      4.955692666301384
     ]
   },
   "elevation": [
-    -0.7,
-    2.3
+    -1,
+    5
   ],
   "simplification": {
     "method": "source-meshoptimizer",
@@ -176,18 +176,18 @@
     "sourceFaces": 1144,
     "sourceVertices": 574,
     "weldedVertices": 574,
-    "outputFaces": 198,
+    "outputFaces": 264,
     "removedOppositeFaces": 0,
     "maximumErrorMeters": 48.39,
-    "estimatedErrorMeters": 47.035587310791016,
-    "sampledErrorMeters": 47.69032484432425,
+    "estimatedErrorMeters": 36.041194915771484,
+    "sampledErrorMeters": 42.69012734510453,
     "topology": {
-      "vertices": 101,
-      "edges": 297,
-      "faces": 198,
+      "vertices": 134,
+      "edges": 396,
+      "faces": 264,
       "components": 1,
       "eulerCharacteristic": 2,
-      "signedVolumeCubicMeters": 58613080513.83311
+      "signedVolumeCubicMeters": 59011877009.40552
     }
   }
 }

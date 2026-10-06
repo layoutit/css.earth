@@ -3,12 +3,22 @@
   "objectId": "orus",
   "entries": [
     {
-      "id": "selected-model",
-      "subject": "Selected source model",
+      "id": "selected-shape-and-spin",
+      "subject": "Ďurech & Hanuš (2026), model 1 of (21900) Orus: selected shape and spin",
       "status": "included",
-      "finding": "Ellipsoid approximation using the published convex model's maximum dimensions, as summarized by the Lucy mission paper. The original convex mesh and local concavities are not represented. Full approximation dimensions: 70.7 × 63 × 51.4 km. Published retrograde pole, with an arbitrary display meridian. The approximation has no qualified current surface longitude. The grid marks unmapped terrain. Source: [Mottola et al. (2023), The Planetary Science Journal 4, 18, Table 3; Levison et al. (2025), Space Science Reviews 221, 70](https://elib.dlr.de/194154/1/Mottola%20et%20al%202023_shapes%20of%20Eurybates%20and%20Orus.pdf). Checked 2026-09-08. The full axes are halved once; the reference radius is the geometric mean of these semiaxes. This is the approximation's rendering scale, not an independent observed radius or the volume of the original convex reconstruction. Formal axis uncertainties are included only where the source supplies them.",
+      "finding": "Model 1 of the deposit (version 2026-09-17), pole (36.8°, -54°), period 13.486235 h, taken unchanged from shape_models/model_21900_1.tri. The deposit lists two spin solutions with the same period. Solution 1 is selected because its pole lies beside the pole of Mottola et al. (2023), ecliptic (33°, −59°), which the 2021 October 16 occultation told apart from its mirror; the separation of both solutions is in /comparison.",
       "evidence": [
-        "https://elib.dlr.de/194154/1/Mottola%20et%20al%202023_shapes%20of%20Eurybates%20and%20Orus.pdf"
+        "https://doi.org/10.5281/zenodo.22812438",
+        "https://arxiv.org/abs/2610.06082"
+      ]
+    },
+    {
+      "id": "selected-physical-scale",
+      "subject": "Physical scale",
+      "status": "included",
+      "finding": "60 ± 0.9 km, volume-equivalent diameter of the occultation-scaled convex model. Table 3 gives the convex shape volume 1.13 × 10^5 km³ of the model its authors scaled to the 2021 October 16 occultation chords; a sphere of that volume is 60 km across. The quoted error is that of the table's surface-equivalent diameter, 60.5 ± 0.9 km. That model's mesh is not archived, so its volume is given to the Ďurech & Hanuš (2026) mesh, whose proportions differ: at this scale the mesh measures 70.4 × 59.8 × 58.2 km (longest extent across the spin axis, the extent at right angles to it, the extent along it) where the table lists 70.7 × 63 × 51.4 km.",
+      "evidence": [
+        "https://doi.org/10.3847/PSJ/acaf79"
       ]
     },
     {
@@ -27,21 +37,31 @@
       "status": "included",
       "finding": "The 2025 Lucy mission summary remains a contextual cross-reference. This metadata review did not use it to newly qualify geometry, imagery or rotational phase.",
       "evidence": [
-        "https://doi.org/10.1007/s11214-025-01173-7",
-        "https://github.com/layoutit/css.earth/blob/main/src/objects/orus/source/measurements.json"
+        "https://doi.org/10.1007/s11214-025-01173-7"
       ]
     },
     {
       "id": "damit-catalogue",
       "subject": "DAMIT model catalogue coverage",
       "status": "unresolved",
-      "finding": "The cached 2026-09-13 official DAMIT asteroid/model/reference CSV exports were joined by exact asteroid name and contained no Orus row with a listed model. This is bounded DAMIT coverage, not evidence that no numerical model exists elsewhere.",
-      "revisitWhen": "A future DAMIT export lists Orus, or another release provides a numerical model with documented frame, scale and terms.",
+      "finding": "The official DAMIT asteroid and model CSV exports read on 2026-10-06 (newest model created 2026-07-29) contain no Orus row. The Ďurech & Hanuš (2026) paper says its models go to DAMIT; until they appear there, the Zenodo deposit is the source.",
+      "revisitWhen": "A DAMIT export lists Orus with a model id.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/main/src/objects/orus/source/manifest.json",
         "https://astro.troja.mff.cuni.cz/projects/damit/pages/documentation",
         "https://damit.cuni.cz/projects/damit/exports/table/asteroids",
         "https://damit.cuni.cz/projects/damit/exports/table/asteroid_models"
+      ]
+    },
+    {
+      "id": "sbn-catalogue-facts",
+      "subject": "PDS SBN catalogue values that disagree with the factsheet or are not shown",
+      "status": "unresolved",
+      "finding": "Shown size Display reference radius \"30 km (size-calibrated model)\" (doi-10-3847-psj-acaf79); Published dimensions \"70.7 × 63 × 51.4 km\" (doi-10-3847-psj-acaf79) differs from the NEOWISE V2.0 neowise_jupiter_trojans.csv record 297 (Grav et al. 2012) diameter 50.810 ± 0.809 km (NEOWISE, NEATM); the shown value is kept.",
+      "revisitWhen": "A newer release of the named catalogue, or a review that replaces the shown value.",
+      "evidence": [
+        "https://sbnarchive.psi.edu/pds4/non_mission/neowise_diameters_albedos_V2_0/data/neowise_jupiter_trojans.csv",
+        "packages/bake/authoring/sbn-catalogue-facts/author.mts"
       ]
     }
   ]

@@ -42,10 +42,15 @@
     ]
   },
   "datasets": {
-    "model": {
-      "title": "Convex-model ellipsoid approximation",
-      "detail": "Approximate shape",
-      "summary": "An ellipsoid matching the extent of the published convex model; its irregular outline is not reproduced."
+    "shape": {
+      "title": "Light-curve shape model",
+      "detail": "Published shape",
+      "summary": "A coarse shape from brightness changes as it spins, measured by sky surveys. The spin angle shown is arbitrary."
+    },
+    "elevation": {
+      "title": "Shape-derived elevations",
+      "detail": "Shape-derived radial height",
+      "summary": "Height above or below a 34.15 km sphere, sharing the size uncertainty. Colors mix the overall shape with local relief."
     }
   }
 }

@@ -2,71 +2,63 @@
   "schema": "cssearth-authoritative-sources@3",
   "inputs": [
     {
-      "id": "occultation-approximation",
-      "path": "shape/ellipsoid.tab",
-      "origin": "https://doi.org/10.1006/icar.2001.6648",
-      "credit": "Oberst et al. (2001), Icarus 153, 16–23; Buratti et al. (2004), Icarus 167, 129–135, Table 1",
-      "license": "MIT authored approximation from published numerical scientific facts",
-      "licenseEvidence": [
-        "https://doi.org/10.1006/icar.2001.6648"
-      ],
-      "acquisition": "Checked-in authored data; formula and assumptions are in measurements.json.",
-      "redistribution": "Retain scientific attribution and model limitations.",
+      "id": "braille-shape",
+      "path": "shape/model_9969_1.tri",
+      "origin": "https://doi.org/10.5281/zenodo.22812438",
+      "credit": "Ďurech & Hanuš (2026), Spins and shapes of asteroids reconstructed from photometry from surveys, Zenodo 10.5281/zenodo.22812438; model 1 of (9969) Braille.",
+      "license": "CC-BY-4.0, Zenodo deposit; retain the model authors attribution.",
+      "acquisition": "Tracked copy of shape_models/model_9969_1.tri from shape_models.tar.gz of the deposit (506,746,645 bytes): the uncalibrated counted triangle table, unchanged.",
+      "redistribution": "Original and derived model data with CC-BY-4.0 attribution; see NOTICE.md.",
       "consumers": [
-        "shape"
+        "terrain",
+        "shape",
+        "elevation"
       ],
-      "coverage": "Ellipsoid approximation of the published 2.1 × 1 × 1 km size estimate combining Deep Space 1 images and ground-based photometry. The equal short axes are part of that coarse estimate; resolved local terrain is not represented. Full approximation dimensions: 2.1 × 1 × 1 km. Arbitrary display pole and meridian. The published 226.4 ± 1.3 h estimate is synodic and is not installed as a sidereal spin or an observed pole. The grid marks unmapped terrain.",
+      "datasetId": "elevation",
       "projection": {
-        "type": "equirectangular",
-        "longitudeDirection": "east-positive",
-        "referenceRadiusMeters": 640.2895824937472
+        "kind": "body-fixed-cartesian-triangular-mesh",
+        "longitudeDirection": "east",
+        "latitudeType": "planetocentric",
+        "units": "uncalibrated source coordinates",
+        "metersPerUnit": 959.1352052938472,
+        "referenceRadiusMeters": 595
       },
+      "coverage": "Published convex light-curve model, solution 1 of the deposit. Scale fitted to the published 2.1 × 1 × 1 km: volume-equivalent diameter 1.19 ± 0.04 km. The convex inversion resolves the broad shape; craters and concavities are unresolved.",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "doi-10-1006-icar-2001-6648",
-            "role": "method",
+            "catalogueId": "doi-10-5281-zenodo-22812438",
+            "role": "material",
             "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
-    },
+    }
+  ],
+  "generatedIntermediates": [
     {
-      "id": "model-surface",
-      "path": "material/neutral.png",
-      "origin": "https://doi.org/10.1006/icar.2001.6648",
-      "credit": "Oberst et al. (2001), Icarus 153, 16–23; Buratti et al. (2004), Icarus 167, 129–135, Table 1",
-      "license": "MIT authored approximation from published numerical scientific facts",
-      "licenseEvidence": [
-        "https://doi.org/10.1006/icar.2001.6648"
-      ],
-      "acquisition": "Checked-in authored data; formula and assumptions are in measurements.json.",
-      "redistribution": "Retain scientific attribution and model limitations.",
+      "id": "prepared-radial-context",
+      "path": "presentation/context.png",
+      "origin": "https://doi.org/10.5281/zenodo.22812438",
+      "credit": "Ďurech & Hanuš (2026), Spins and shapes of asteroids reconstructed from photometry from surveys, Zenodo 10.5281/zenodo.22812438; model 1 of (9969) Braille.",
+      "license": "CC-BY-4.0",
       "consumers": [
-        "surfaces"
+        "navigation"
       ],
-      "coverage": "Ellipsoid approximation of the published 2.1 × 1 × 1 km size estimate combining Deep Space 1 images and ground-based photometry. The equal short axes are part of that coarse estimate; resolved local terrain is not represented. Full approximation dimensions: 2.1 × 1 × 1 km. Arbitrary display pole and meridian. The published 226.4 ± 1.3 h estimate is synodic and is not installed as a sidereal spin or an observed pole. The grid marks unmapped terrain.",
-      "projection": {
-        "type": "equirectangular",
-        "longitudeDirection": "east-positive",
-        "referenceRadiusMeters": 640.2895824937472
+      "recipe": {
+        "generator": "packages/bake/src/objects/layers/terrestrial/radial-snapshot.ts",
+        "inputs": [
+          "braille-shape"
+        ],
+        "size": 512,
+        "longitudeDegrees": 0,
+        "latitudeDegrees": 35,
+        "ambient": 0.45,
+        "diffuse": 0.55,
+        "datasetId": "shape"
       },
-      "width": 64,
-      "height": 32,
-      "datasetId": "model",
-      "label": "Shape model",
-      "falseColor": false,
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "doi-10-1006-icar-2001-6648",
-            "role": "method",
-            "evidence": "Origin and product identifier recorded on this manifest entry."
-          }
-        ]
-      }
+      "generator": "packages/bake/src/objects/layers/terrestrial/radial-snapshot.ts"
     }
   ],
   "documents": [
@@ -76,9 +68,6 @@
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       }
-    },
-    {
-      "path": "measurements.json"
     },
     {
       "path": "preparation/acquisition.json"
@@ -96,6 +85,12 @@
       "path": "presentation/minimap.json"
     },
     {
+      "path": "reference/calibration.json"
+    },
+    {
+      "path": "reference/model-properties.json"
+    },
+    {
       "path": "reference/sbdb.json",
       "sourceBinding": {
         "kind": "catalogued",
@@ -107,32 +102,13 @@
           }
         ]
       }
-    }
-  ],
-  "generatedIntermediates": [
+    },
     {
-      "id": "prepared-ellipsoid-context",
-      "path": "presentation/context.png",
-      "origin": "https://doi.org/10.1006/icar.2001.6648",
-      "credit": "Oberst et al. (2001), Icarus 153, 16–23; Buratti et al. (2004), Icarus 167, 129–135, Table 1",
-      "license": "Authored display of scientific model; source attribution retained.",
-      "consumers": [
-        "navigation"
-      ],
-      "recipe": {
-        "generator": "packages/bake/src/objects/layers/terrestrial/radial-snapshot.ts",
-        "inputs": [
-          "occultation-approximation",
-          "model-surface"
-        ],
-        "size": 512,
-        "longitudeDegrees": 55,
-        "latitudeDegrees": 20,
-        "ambient": 0.45,
-        "diffuse": 0.55,
-        "datasetId": "model"
-      },
-      "generator": "packages/bake/src/objects/layers/terrestrial/radial-snapshot.ts"
+      "path": "reference/survey-model.json",
+      "purpose": "Selected model fields from the deposit's spin table, independently calculated source-mesh measurements and the comparison with earlier published values.",
+      "origin": "https://doi.org/10.5281/zenodo.22812438",
+      "credit": "Published model fields: Ďurech & Hanuš (2026). Mesh measurements, comparison and selection notes: cssEarth.",
+      "acquisition": "Values recorded from the deposit's spin_results table; the shape file is pinned separately. Mesh measurements are calculated from the unchanged source geometry."
     }
   ]
 }

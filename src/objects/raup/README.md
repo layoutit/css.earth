@@ -1,123 +1,65 @@
-# 9165 Raup
+# (9165) Raup
+
+Raup is a small asteroid of the inner main belt that turns once in about 54 days.
 
 Shape-only views use the shared neutral gray (#808080 sRGB). This is a display convention, not a measurement of surface color or albedo; gaps within photographic and scientific datasets retain the missing-data grid.
 
 ## Sources
 
-<a id="shape-selection"></a>
+<a id="shape-scale-and-orientation"></a>
 
 | Input | Selected source |
 | --- | --- |
-| Shape and spin | [DAMIT 5835](https://damit.cuni.cz/projects/damit/asteroid_models/view/5835) |
-| Physical scale | [Calibration and uncertainty](source/reference/calibration.json) |
+| Shape and spin | [Ďurech & Hanuš (2026), model 1 of (9165) Raup](https://doi.org/10.5281/zenodo.22812438) |
+| Physical scale | [Masiero et al. (2012), ApJL 759, L8](https://doi.org/10.1088/2041-8205/759/1/L8) ([record](source/reference/calibration.json)) |
 
-Selected [DAMIT model 5835](https://damit.cuni.cz/projects/damit/asteroid_models/view/5835), version 2019-10-23, from Ďurech et al.
+The shape is `shape_models/model_9165_1.tri` from `shape_models.tar.gz` of the [Zenodo deposit](https://doi.org/10.5281/zenodo.22812438) (version 2026-09-17, CC BY 4.0) of [Ďurech & Hanuš (2026)](https://arxiv.org/abs/2610.06082). It is a convex mesh fitted to sparse brightness measurements from sky surveys (Catalina, Mt. Lemmon, Pan-STARRS, ZTF, USNO, ATLAS, ASAS-SN, TESS and Gaia). The original 574 vertices and 1144 triangular faces are the source input. Its large-scale shape is inferred from how the asteroid's total brightness changes as it spins; concavities, craters, surface texture and the current rotation phase are not resolved.
 
-The adopted diameter is **4.839 km** from [Masiero et al. (2012), ApJL 759, L8](https://doi.org/10.1088/2041-8205/759/1/L8); [original measurement data](https://irsa.ipac.caltech.edu/TAP/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=select+%2A+from+neowisesbpropv2+where+asteroid_number%3D9165). Its quantity is **NEATM effective spherical diameter at the observing geometry**.
+The deposit's spin table gives the J2000 ecliptic pole λ = 285.6°, β = 56.9° and the sidereal period 1303.393531 h. It lists no second solution. It replaces DAMIT model 5835 (pole 269°, 87°; period 46.22 h), whose period the paper lists among those it corrects (its Table 2) and which the LCDB period of 1320 h already contradicted.
 
-[Model fields and mesh measurements](source/reference/damit-model.json).
+Adopted diameter: **4.839 ± 0.167 km**, meaning NEATM effective spherical diameter at the observing geometry, from [Masiero et al. (2012), ApJL 759, L8](https://doi.org/10.1088/2041-8205/759/1/L8). The reference-sphere radius is 2.4195 km. A thermal effective spherical diameter from NEOWISE, given to the mesh volume as an approximate display scale; its quoted fit error excludes about 20% systematic uncertainty.
+
+[Model fields, mesh measurements and comparison](source/reference/survey-model.json).
 
 ## Evidence
 
-The raup validation record contains source, scale, atlas, installation and browser results for its recorded files and revision.
+Checked 2026-10-06 against the deposit's files.
+
+- Mesh: positive signed volume (1.000000031 source units cubed), every edge used once in each direction, Euler characteristic 2.
+- Period: the model's 1303.393531 h is 1.3% from the 1320 h the JPL Small-Body Database quotes from the Lightcurve Database ([pinned record](source/reference/sbdb.json), `rot_per`). The model this package showed before, DAMIT 5835, had 46.22 h; Table 2 of the paper lists it among the DAMIT periods it corrects.
+- Pole: the new solution (285.6°, 56.9°) is 30° from DAMIT 5835's (269°, 87°). Nothing independent measures the pole.
+- Proportions about the spin axis: 2.217 × 0.958 × 1 (longest extent across the axis, the extent at right angles to it, the extent along it).
+- Display shape: the fewest faces the error allowance permits, 264 of at most 800, from the source's 1144. The farthest sampled point of the source lies 42.7 m from it, inside the 48.39 m allowance (2% of the radius).
+- Browser: the default view below, in headless Chrome 1280 × 800 from the local site after the bake, with every image loaded and no page error.
+
+![Raup in the app, default view](evidence/2026-10-06/default-view.jpg)
 
 ## Known problems
 
-DAMIT assigns quality flag **1**: a coarse reconstruction from sparse photometry with substantial shape and pole uncertainty. The model constrains a broad outline; small surface features and concavities are not resolved.
+- One pole solution is listed and no other measurement checks it. A period this long is in the range where the paper finds larger fit residuals and suspects tumbling for many bodies; the model assumes rotation about one fixed axis.
+- The thermal diameter is an effective spherical diameter at its observing geometry, with about 20% more systematic uncertainty than its quoted fit error. Giving it to the mesh volume is an approximate display scale.
+- No registered surface imagery exists for this shape; it shows the shared neutral gray. Convex inversion leaves concavities and fine relief unresolved.
+- Elevation is false color for model radius minus a reference sphere, not gravitational height or independent terrain.
+- The displayed rotation phase is arbitrary and not propagated from the model epoch. Orbit context is fixed at 2026-09-03 TT.
 
-- Diameter uncertainty: ±0.167 km. Published statistical/Monte Carlo fit error; excludes the additional systematic term below.
-- Additional limitation: Original publication reports approximately 20% additional systematic uncertainty in diameter. This is a population-level floor, not a shape-specific accuracy guarantee.
-- Selection: No four-band cryogenic row is available in this catalog. Retained the Masiero 2012 post-cryogenic fit also selected by SBDB, with its additional 20% systematic uncertainty and short-wave model dependence.
-
-The thermal measurement is an effective spherical diameter at its observing geometry, not an independent measurement of the convex model's enclosed volume. Applying it to a unit-volume mesh is an explicitly approximate display normalization. It is not a thermophysical refit using this mesh, a stellar-occultation size, or an exact volume-equivalent calibration.
-
-A scale uncertainty changes every linear model dimension by the same proportion.
-
-The Shape dataset uses cssEarth's existing shared grid to identify unavailable imagery. Any Elevation dataset is **source-shape radius minus the chosen reference sphere**, a model-derived geometric quantity whose absolute scale inherits the thermal-size uncertainty. It is not independent terrain surveying or gravitational elevation.
-
-Optional directional Shadows are illustrative lighting on that mesh, separate from the grid; Shadows default to off.
-
-The archived epoch and phase are retained for provenance, not claimed as the current attitude.
-
-[Inputs](source/manifest.json) · [Object definition](object.json) · [Preparation](source/preparation/) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
 
 ## Methods and source notes
 
 <details>
-<summary>Shape selection</summary>
+<summary>Physical scale</summary>
 
-Checked 2026-09-08. This package uses an original published convex lightcurve-inversion mesh, with an approximate physical scale derived from separate thermal observations. It does not contain a photographed surface or independently measured topography.
+The source's signed tetrahedral volume integral gives a volume-equivalent diameter of 1.24070099459 source units. The preparation conversion is:
 
-The [original vertex/facet table](https://damit.cuni.cz/projects/damit/stored_files/open/62233/shape.txt) contains 574 vertices and 1144 triangular facets. All current DAMIT matches for this number were inspected; none supplies a calibrated diameter. The selected file's numerical volume is 0.999999712994 source units cubed, consistent with the unit-volume normalization documented by DAMIT.
+`metersPerUnit = D_km × 1000 / (2 × cbrt(3 × V_source / (4 × pi)))`
 
-Source coordinates and face connectivity remain unchanged in the pinned input.
-
-</details>
-
-<a id="physical-scale-and-uncertainty"></a>
-
-<details>
-<summary>Physical scale and uncertainty</summary>
-
-Preparation uses the existing metre-per-source-unit parameter:
-
-```text
-V = Σ dot(a, cross(b, c)) / 6
-D_source = cbrt(6 * V / π)
-metresPerSourceUnit = 1000 * 4.839 / D_source
-                    = 3900.21490587
-referenceRadiusKm = 4.839 / 2 = 2.4195
-```
-
-The signed volume above is independently computed from the original closed triangle mesh, not assumed to be exactly one. No density, mass or gravitational parameter is inferred from this normalization.
-
-Other published epochs are retained separately, not averaged:
-
-| Reference code | Mean JD | Diameter (km) | Quoted fit error (km) |
-| --- | --- | --- | --- |
-| Nug16 | 2457201.2288498 | 4.325 | 0.824 |
-| Nug15 | 2456805.7107112 | 6.294 | 1.674 |
-
-These quoted errors have their original statistical/fit meaning and do not establish agreement with the selected scale or include all systematic effects.
-
-Slow spin can leave the thermal observations sensitive to viewing aspect and incomplete rotation coverage; the diameter is an approximate global display scale.
+For this input, `metersPerUnit = 3900.21449253489`. The raw mesh coordinates and connectivity are unchanged.
 
 </details>
 
-<a id="coordinates-spin-and-display-phase"></a>
-
 <details>
-<summary>Coordinates, spin and display phase</summary>
+<summary>Orientation and time</summary>
 
-[Original spin.txt](https://damit.cuni.cz/projects/damit/generated_files/open/AsteroidModel/5835/spin.txt) specifies the J2000 ecliptic pole λ = 269°, β = 87°, a sidereal period of 46.22 hours, reference epoch JD 2457228, and reference angle φ₀ = 0°. The original DAMIT co-rotating Cartesian frame is preserved: +Z is its north pole and +X defines the model meridian. [DAMIT's frame and file documentation](https://damit.cuni.cz/pages/documentation) defines the body-to-ecliptic transform.
-
-The display uses an **arbitrary phase** (`displayMeridianDegrees: 0`, `phase: arbitrary-display-phase`). It does not propagate the source JD₀ and φ₀ as an absolute rotational ephemeris. The published pole is converted to the existing J2000 equatorial convention using the shared obliquity transform.
-
-Accelerated viewer rotation is illustrative. Orbital position remains owned by the separately pinned JPL source and the shared preparation recipe; a fitted model's spin epoch is not its orbital epoch.
-
-</details>
-
-<a id="available-views-and-candidate-survey"></a>
-
-The [investigation ledger](investigations.json) records the source survey and alternative models.
-
-<a id="intake-evidence-and-remaining-qualification"></a>
-
-<details>
-<summary>Intake evidence and remaining qualification</summary>
-
-Intake verified original-file hashes, spin/model-field agreement, finite coordinates, valid indices, a closed two-manifold with consistently oriented shared edges, nonzero-area facets and positive signed volume. These checks qualify source intake only. The later validation record linked above covers preparation and application checks separately.
-
-</details>
-
-<a id="publications-and-reuse"></a>
-
-<details>
-<summary>Publications and reuse</summary>
-
-- [Ďurech et al. (2020) — Asteroid models reconstructed from ATLAS photometry](https://damit.cuni.cz/projects/damit/references/view/658).
-- [Masiero et al. (2012), ApJL 759, L8](https://doi.org/10.1088/2041-8205/759/1/L8) and its linked catalog field definitions.
-- DAMIT website/model material: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/), unless the original release explicitly states otherwise. Attribute the model authors and Astronomical Institute, Charles University, Josef Ďurech and Vojtěch Sidorin.
-- NEOWISE measurement values are distributed by NASA/IPAC IRSA and the NASA PDS Small Bodies Node; retain the cited original thermal-fit authors and survey attribution. Research PDFs are not runtime assets.
+Converted with obliquity 23.439291111°, the equatorial pole is α = 280.20°, δ = 34.01°. Model longitude zero is an inversion convention, not an observed landmark. JPL Horizons command "9165;" supplies the osculating elements and vector fixtures at 2026-09-03 TT; this is a fixed-date context, not a real-time trajectory or surface attitude.
 
 </details>

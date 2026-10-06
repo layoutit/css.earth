@@ -3,11 +3,11 @@
   "inputs": [
     {
       "id": "raup-shape",
-      "path": "shape/model-5835.txt",
-      "origin": "https://damit.cuni.cz/projects/damit/stored_files/open/62233/shape.txt",
-      "credit": "DAMIT, Astronomical Institute of Charles University; Raup model 5835; original model authors identified in its pinned reference records.",
-      "license": "CC-BY-4.0, DAMIT; retain original model and authors attribution.",
-      "acquisition": "Restore original uncalibrated counted triangle table through the pinned acquisition recipe.",
+      "path": "shape/model_9165_1.tri",
+      "origin": "https://doi.org/10.5281/zenodo.22812438",
+      "credit": "Ďurech & Hanuš (2026), Spins and shapes of asteroids reconstructed from photometry from surveys, Zenodo 10.5281/zenodo.22812438; model 1 of (9165) Raup.",
+      "license": "CC-BY-4.0, Zenodo deposit; retain the model authors attribution.",
+      "acquisition": "Tracked copy of shape_models/model_9165_1.tri from shape_models.tar.gz of the deposit (506,746,645 bytes): the uncalibrated counted triangle table, unchanged.",
       "redistribution": "Original and derived model data with CC-BY-4.0 attribution; see NOTICE.md.",
       "consumers": [
         "terrain",
@@ -20,15 +20,15 @@
         "longitudeDirection": "east",
         "latitudeType": "planetocentric",
         "units": "uncalibrated source coordinates",
-        "metersPerUnit": 3900.2149058716022,
+        "metersPerUnit": 3900.2144925348866,
         "referenceRadiusMeters": 2419.5
       },
-      "coverage": "Published convex light-curve model 5835. Approximate scale from a thermal diameter of 4.839 ± 0.167 km. Quoted fit error excludes about 20% survey systematic uncertainty and shape/aspect effects. The convex inversion resolves the broad shape; craters and concavities are unresolved.",
+      "coverage": "Published convex light-curve model, solution 1 of the deposit. Approximate scale from a thermal diameter of 4.839 ± 0.167 km. Quoted fit error excludes about 20% survey systematic uncertainty and shape/aspect effects. The convex inversion resolves the broad shape; craters and concavities are unresolved.",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "damit-shape-62233",
+            "catalogueId": "doi-10-5281-zenodo-22812438",
             "role": "material",
             "evidence": "Origin and product identifier recorded on this manifest entry."
           }
@@ -40,8 +40,8 @@
     {
       "id": "prepared-radial-context",
       "path": "presentation/context.png",
-      "origin": "https://damit.cuni.cz/projects/damit/stored_files/open/62233/shape.txt",
-      "credit": "DAMIT, Astronomical Institute of Charles University; Raup model 5835; original model authors identified in its pinned reference records.",
+      "origin": "https://doi.org/10.5281/zenodo.22812438",
+      "credit": "Ďurech & Hanuš (2026), Spins and shapes of asteroids reconstructed from photometry from surveys, Zenodo 10.5281/zenodo.22812438; model 1 of (9165) Raup.",
       "license": "CC-BY-4.0",
       "consumers": [
         "navigation"
@@ -85,13 +85,6 @@
       "path": "reference/calibration.json"
     },
     {
-      "path": "reference/damit-model.json",
-      "purpose": "Selected DAMIT model fields and independently calculated source-mesh measurements.",
-      "origin": "https://damit.cuni.cz/projects/damit/asteroid_models/view/5835",
-      "credit": "Published model fields: DAMIT, Charles University and the cited model authors. Mesh measurements and selection notes: cssEarth.",
-      "acquisition": "Values recorded from the identified DAMIT model table; original shape and spin files are pinned separately. Mesh measurements are calculated from the unchanged source geometry."
-    },
-    {
       "path": "reference/horizons-elements.txt"
     },
     {
@@ -124,7 +117,11 @@
       }
     },
     {
-      "path": "reference/spin.txt"
+      "path": "reference/survey-model.json",
+      "purpose": "Selected model fields from the deposit's spin table, independently calculated source-mesh measurements and the comparison with earlier published values.",
+      "origin": "https://doi.org/10.5281/zenodo.22812438",
+      "credit": "Published model fields: Ďurech & Hanuš (2026). Mesh measurements, comparison and selection notes: cssEarth.",
+      "acquisition": "Values recorded from the deposit's spin_results table; the shape file is pinned separately. Mesh measurements are calculated from the unchanged source geometry."
     }
   ]
 }

@@ -1,11 +1,10 @@
 {
   "schema": "cssearth-observed-pole@1",
-  "rightAscensionDegrees": 7.380311792824273,
-  "declinationDegrees": -67.28037980984683,
+  "rightAscensionDegrees": 13.320886400983682,
+  "declinationDegrees": -67.90589178097487,
   "displayMeridianDegrees": 0,
-  "periodHours": 8.7027283,
   "phase": "arbitrary-display-phase",
-  "source": "https://elib.dlr.de/194154/1/Mottola%20et%20al%202023_shapes%20of%20Eurybates%20and%20Orus.pdf",
-  "coordinateSystem": "ICRF/J2000; observed or explicitly approximate pole; arbitrary display meridian",
-  "qualification": "Published retrograde pole, with an arbitrary display meridian. The approximation has no qualified current surface longitude."
+  "periodHours": 8.702737,
+  "coordinateSystem": "Original model co-rotating Cartesian frame, +Z spin pole and +X reference meridian; east-positive longitude; arbitrary display phase",
+  "source": "Ďurech & Hanuš (2026), model 2 of (3548) Eurybates, deposit version 2026-09-17: ecliptic J2000 pole (321.7, -62.2) degrees; period 8.702737 hours; equatorial conversion with obliquity 23.439291111 degrees. The convex inversion resolves the broad shape; craters and concavities are unresolved."
 }

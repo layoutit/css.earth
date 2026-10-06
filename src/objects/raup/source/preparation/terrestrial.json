@@ -17,10 +17,10 @@
         "id": "elevation",
         "label": "Elevation",
         "consumer": "elevation",
-        "path": "shape/model-5835.txt",
+        "path": "shape/model_9165_1.tri",
         "format": "pds-plate-model",
         "grid": {
-          "metersPerUnit": 3900.2149058716022,
+          "metersPerUnit": 3900.2144925348866,
           "expectedVertices": 574,
           "expectedFaces": 1144,
           "indexBase": 1
@@ -29,8 +29,8 @@
           "scale": 0.001,
           "offset": -2.4195
         },
-        "minimum": -0.7,
-        "maximum": 2.3,
+        "minimum": -1,
+        "maximum": 5,
         "colors": [
           "#35306b",
           "#2c7db7",
@@ -75,10 +75,10 @@
     "mapUrl": "/scenes/raup/raup-shape-surface@2x.webp",
     "polesUrl": "/scenes/raup/raup-shape-surface@2x.webp",
     "radialTerrain": {
-      "path": "shape/model-5835.txt",
+      "path": "shape/model_9165_1.tri",
       "format": "pds-plate-model",
       "grid": {
-        "metersPerUnit": 3900.2149058716022,
+        "metersPerUnit": 3900.2144925348866,
         "expectedVertices": 574,
         "expectedFaces": 1144,
         "indexBase": 1
@@ -96,7 +96,7 @@
     }
   },
   "celestial": {
-    "sunSource": "Published DAMIT pole and period, physical scale from the pinned calibration, and fixed-epoch JPL Horizons orbit; arbitrary display phase."
+    "sunSource": "Published pole and period of Ďurech & Hanuš (2026), model 1 of (9165) Raup, physical scale from the pinned calibration, and fixed-epoch JPL Horizons orbit; arbitrary display phase."
   },
   "presentation": {
     "defaultDataset": "shape"
