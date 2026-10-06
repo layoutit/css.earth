@@ -12,6 +12,7 @@ import { readAuthoredRotation } from '@cssearth/bake/objects/scene';
 import { isRecord, requireArray, requireFiniteNumber, requireRecord, requireString } from '@cssearth/core';
 import { fetchPublication, VIZIER_ASU, type Archive } from '../archives/archives.mts';
 import { blendingCompanion, WDS_CREDIT } from '../companion-blend.mts';
+import { publicationRecord } from '../publication-record.mts';
 import { GM_SUN, SOLAR_RADIUS_KM } from '../hosted.mts';
 import { coronaFiles, coronaPhysics, parseCoronae, type CoronaEntry, type CoronaMapInput, type CoronaSource, type CoronaStar } from './corona-bank.mts';
 
@@ -101,7 +102,6 @@ async function sourceRecords(entry: CoronaEntry, checked: string, { root, archiv
       statements: [{ kind: 'credit', text: `${source.label}; VizieR (CDS)`, scope: 'citation', evidence: source.url }], publisher: 'CDS, Strasbourg' }, null, 2)}\n`); continue; }
     const publication = /arxiv\.org\/abs\/|doi\.org\//u.test(source.url) ? await fetchPublication(archive, source.url) : undefined;
     if (!publication) throw new Error(`${entry.bank}: ${path} does not exist, and ${source.url} is not a VizieR, arXiv or DOI link to write it from.`);
-    const { publicationRecord } = await import('../generate.mts');
     records.set(path, `${JSON.stringify(publicationRecord({ ...publication, id: source.catalogueId }), null, 2)}\n`);
   }
   return records;

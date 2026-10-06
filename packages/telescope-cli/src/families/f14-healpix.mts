@@ -1,7 +1,7 @@
 /** F14 HEALPix: Astropy reads FITS metadata; astropy-healpix owns native pixel indexing. */
 import { spawn } from 'node:child_process';
 import { astroqueryToolchain } from '@cssearth/telescope/node';
-import type { FamilyHandler, FamilyOperation } from '../family-handlers.mts';
+import type { FamilyHandler, FamilyOperation } from '../family-handler.mts';
 import type { DescriptorMember, ProductDescriptor } from '../product-descriptor.mts';
 import { descriptor, stable } from './common.mts';
 export interface HealpixPin {readonly path:string}

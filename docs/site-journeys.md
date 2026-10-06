@@ -171,8 +171,8 @@ export TMPDIR="$PWD/output/tmp"
 mkdir -p "$TMPDIR" output/journeys
 pnpm install --frozen-lockfile --ignore-scripts
 pnpm exec playwright install --with-deps chromium webkit
-(cd "$BASE_CHECKOUT" && NODE_OPTIONS=--max-old-space-size=6144 pnpm exec astro build --mode performance --outDir dist-journeys)
-(cd "$HEAD_CHECKOUT" && NODE_OPTIONS=--max-old-space-size=6144 pnpm exec astro build --mode performance --outDir dist-journeys)
+(cd "$BASE_CHECKOUT" && NODE_OPTIONS=--max-old-space-size=6144 pnpm exec astro build --config site/astro.config.mts --mode performance --outDir dist-journeys)
+(cd "$HEAD_CHECKOUT" && NODE_OPTIONS=--max-old-space-size=6144 pnpm exec astro build --config site/astro.config.mts --mode performance --outDir dist-journeys)
 export JOURNEY_OUTPUT="$(mktemp -d "$PWD/output/journeys/ci-XXXXXX")"
 pnpm journeys:mutations
 for JOURNEY_PROFILE in chromium-desktop webkit-desktop; do

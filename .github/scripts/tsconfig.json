@@ -1,11 +1,11 @@
 {
-  "extends": "../../tsconfig.base.json",
+  "extends": "../tsconfig.base.json",
   "compilerOptions": {
     "tsBuildInfoFile": "../../output/tsbuildinfo/scripts.tsbuildinfo"
   },
   "include": [
     "**/*.mts",
-    "../../astro.config.mts",
+    "../../site/astro.config.mts",
     "../../eslint.config.mts",
     "../../site/env.d.ts"
   ],

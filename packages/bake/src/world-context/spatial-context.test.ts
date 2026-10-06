@@ -4,7 +4,7 @@ import { readFile } from 'node:fs/promises';
 import test from 'node:test';
 import { M_PER_AU } from '@cssearth/astronomy';
 import { parseWorldContextSource, prepareWorldContext } from './spatial-context.ts';
-import type { OrbitalState } from './spatial-context.ts';
+import type { OrbitalState } from './orbital-state.ts';
 
 const sourcePath = 'src/objects/observable-universe/source/navigation/universe.json';
 // Unit cases supply their own body inventory; the application resolves catalogue membership.

@@ -60,7 +60,7 @@ async function hookClone() {
   await git('init', '-q');
   await git('config', 'user.name', 'test');
   await git('config', 'user.email', 'test@example.com');
-  for (const path of ['.githooks/commit-msg', '.github/scripts/ci/commit-message.mts']) {
+  for (const path of ['.github/hooks/commit-msg', '.github/scripts/ci/commit-message.mts']) {
     await mkdir(dirname(resolve(root, path)), { recursive: true });
     await copyFile(resolve(import.meta.dirname, '../../..', path), resolve(root, path));
   }
@@ -106,12 +106,33 @@ test('the installer keeps a hook of your own and any core.hooksPath already set'
     assert.match(await installHook(root), /hooks of your own \(pre-commit\); left unchanged/u);
     assert.equal(await git('config', '--get', 'core.hooksPath').then(() => 'set', () => 'unset'), 'unset');
     await rm(resolve(legacyHooks, 'pre-commit'));
-    await git('config', 'core.hooksPath', '.githooks');
-    assert.match(await installHook(root), /core\.hooksPath is "\.githooks"; left unchanged/u);
-    assert.equal((await git('config', '--get', 'core.hooksPath')).stdout.trim(), '.githooks');
+    await git('config', 'core.hooksPath', '.github/hooks');
+    assert.match(await installHook(root), /core\.hooksPath is "\.github\/hooks"; left unchanged/u);
+    assert.equal((await git('config', '--get', 'core.hooksPath')).stdout.trim(), '.github/hooks');
     await git('config', 'core.hooksPath', '');
     assert.match(await installHook(root), /core\.hooksPath is ""; left unchanged/u, 'an explicitly empty value is a setting, not an absence');
     assert.equal((await git('config', '--get', 'core.hooksPath')).stdout, '\n');
+  } finally {
+    await rm(root, { recursive: true, force: true });
+  }
+});
+
+test('the installer carries an opt-in to the former .githooks directory over to .github/hooks', async () => {
+  const { root, git } = await hookClone();
+  // The opt-in runs the tracked pre-push hook; a stub stands in for it.
+  await writeFile(resolve(root, '.github/hooks/pre-push'), '#!/bin/sh\necho opted-in pre-push\n', { mode: 0o755 });
+  const prePush = async () => { const run = await git('hook', 'run', '--ignore-missing', 'pre-push'); return run.stdout + run.stderr; };
+  try {
+    await git('config', 'core.hooksPath', '.githooks');
+    assert.equal(await prePush(), '', 'Git runs no hook from a directory that no longer exists');
+    assert.match(await installHook(root), /core\.hooksPath was "\.githooks", which no longer exists; it is now "\.github\/hooks"/u);
+    assert.equal((await git('config', '--get', 'core.hooksPath')).stdout.trim(), '.github/hooks');
+    assert.match(await prePush(), /opted-in pre-push/u);
+    // A checkout that still has .githooks keeps the setting: it names a directory that is there.
+    await git('config', 'core.hooksPath', '.githooks');
+    await mkdir(resolve(root, '.githooks'), { recursive: true });
+    assert.match(await installHook(root), /core\.hooksPath is "\.githooks"; left unchanged/u);
+    assert.equal((await git('config', '--get', 'core.hooksPath')).stdout.trim(), '.githooks');
   } finally {
     await rm(root, { recursive: true, force: true });
   }
@@ -128,10 +149,10 @@ test('the installer overwrites only its own dispatcher, and the dispatcher fails
     await rm(target);
     assert.match(await installHook(root), /Installed/u);
     assert.match(await readFile(target, 'utf8'), new RegExp(DISPATCHER_MARKER, 'u'));
-    await git('rm', '-q', '--cached', '.githooks/commit-msg');
-    await rm(resolve(root, '.githooks/commit-msg'));
+    await git('rm', '-q', '--cached', '.github/hooks/commit-msg');
+    await rm(resolve(root, '.github/hooks/commit-msg'));
     const missing = await git('commit', '-q', '--allow-empty', '-m', 'chore: fine').then(() => '', (error: { stderr: string }) => error.stderr);
-    assert.match(missing, /\.githooks\/commit-msg is missing; restore it/u);
+    assert.match(missing, /\.github\/hooks\/commit-msg is missing; restore it/u);
     assert.equal(await accepted('chore: fine'), false);
     const outside = await mkdtemp(resolve(tmpdir(), 'commit-message-outside-'));
     try {
@@ -147,11 +168,25 @@ test('the installer overwrites only its own dispatcher, and the dispatcher fails
   }
 });
 
+test('the dispatcher still runs the hook of a branch from before it moved under .github/', async () => {
+  const { root, git, accepted } = await hookClone();
+  try {
+    assert.match(await installHook(root), /Installed/u);
+    await mkdir(resolve(root, '.githooks'), { recursive: true });
+    await git('mv', '.github/hooks/commit-msg', '.githooks/commit-msg');
+    await git('commit', '-q', '--no-verify', '-m', 'chore: earlier layout');
+    assert.equal(await accepted('Bad message'), false);
+    assert.equal(await accepted('chore: a good message'), true);
+  } finally {
+    await rm(root, { recursive: true, force: true });
+  }
+});
+
 test('tracked hook fails loudly when its checker disappears', async () => {
   const { root, git } = await hookClone();
   try {
-    await chmod(resolve(root, '.githooks/commit-msg'), 0o755);
-    await git('config', 'core.hooksPath', '.githooks');
+    await chmod(resolve(root, '.github/hooks/commit-msg'), 0o755);
+    await git('config', 'core.hooksPath', '.github/hooks');
     await rm(resolve(root, '.github/scripts/ci/commit-message.mts'));
     await assert.rejects(git('commit', '-q', '--allow-empty', '-m', 'chore: missing checker'),
       /commit-message\.mts is missing; restore it/u);

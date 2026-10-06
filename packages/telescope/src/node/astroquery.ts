@@ -21,7 +21,7 @@ export type AstroqueryRequest =
   | { readonly operation: 'vo-parse'; readonly file: string; readonly url: string; readonly byteLimit: number; readonly timeFormat?: 'mjd' | 'jd'; readonly timeScale?: 'utc' | 'tai' | 'tt' | 'tdb'; readonly timeModel?: 'epn-tap-2.0' }
   | { readonly operation: 'mast-service'; readonly service: string; readonly parameters: Readonly<Record<string, unknown>>; readonly pagesize?: number; readonly page?: number }
   | { readonly operation: 'mast-download'; readonly uri: string; readonly destination: string }
-  | { readonly operation: 'tap-query'; readonly service: string; readonly query: string; readonly maxrec?: number }
+  | { readonly operation: 'tap-query'; readonly service: string; readonly query: string; readonly maxrec?: number; readonly mode?: 'async'; readonly allowedPrivateHosts?: readonly string[] }
   | { readonly operation: 'alma-data-info'; readonly ids: readonly string[]; readonly expandTarfiles?: boolean }
   | { readonly operation: 'vizier-region'; readonly catalog: string; readonly ra: number; readonly dec: number; readonly radiusDegrees: number; readonly columns: readonly string[] }
   | { readonly operation: 'horizons-ephemerides'; readonly id: string; readonly location: string; readonly epochs: HorizonsEpochs; readonly quantities: string; readonly raw?: boolean }
@@ -74,7 +74,8 @@ class SafeVoSession:
         self.trust_env = False  # Archive URLs must connect directly, never through an ambient proxy.
 
     def send(self, prepared_request, **kwargs):
-        import ipaddress, socket
+        import ipaddress, socket, time
+        import requests
         check_vo_url(prepared_request.url)
         original = socket.getaddrinfo
         allowed = request.get('allowedPrivateHosts') or []
@@ -86,7 +87,14 @@ class SafeVoSession:
             return answers
         socket.getaddrinfo = guarded_getaddrinfo
         try:
-            return super().send(prepared_request, **kwargs)
+            # An archive that drops the connection is asked again, twice: KOA closed one of four small queries on 2026-10-06.
+            # A timeout or an HTTP error is the archive's answer and is not asked again.
+            for attempt in range(3):
+                try:
+                    return super().send(prepared_request, **kwargs)
+                except requests.exceptions.ConnectionError as error:
+                    if attempt == 2 or isinstance(error, requests.exceptions.Timeout): raise
+                    time.sleep(2 * (attempt + 1))
         finally:
             socket.getaddrinfo = original
 
@@ -95,6 +103,8 @@ def value(item):
         return None
     if isinstance(item, bytes):
         return item.decode('utf-8', errors='replace')
+    if isinstance(item, np.floating) and item.dtype.itemsize < 8:
+        return value(float(str(item)))  # the decimal the archive holds (0.0488783), not its 64-bit expansion (0.048878300935029984)
     if isinstance(item, np.generic):
         return value(item.item())
     if isinstance(item, (list, tuple, np.ndarray)):
@@ -106,6 +116,8 @@ def value(item):
             pass
     if isinstance(item, float) and not math.isfinite(item):
         return None
+    if isinstance(item, int) and not isinstance(item, bool) and abs(item) > 9007199254740991:
+        return str(item)  # a JSON reader holds integers exactly only to 2**53; a Gaia source_id is larger
     if isinstance(item, (str, int, float, bool)):
         return item
     return str(item)
@@ -249,6 +261,7 @@ elif operation in ('vo-tap', 'vo-links', 'vo-parse'):
             if os.path.exists(staging): os.unlink(staging)
     if len(payload) > limit: raise ValueError('VO metadata byte limit exceeded')
     def lossless(v):
+        if isinstance(v, np.floating) and v.dtype.itemsize < 8: return value(v)  # the archive's decimal, as tap-query states it
         if isinstance(v, np.generic): return lossless(v.item())
         if isinstance(v, np.ndarray) and v.ndim == 0:
             return None if np.ma.is_masked(v) else lossless(v.item())
@@ -382,7 +395,9 @@ elif operation == 'tap-query':
                 kwargs['timeout'] = (15, 45)
             return super().request(method, url, **kwargs)
     answer['pyvo'] = pyvo.__version__
-    result = pyvo.dal.TAPService(request['service'], session=TapSession()).search(request['query'], maxrec=request.get('maxrec'))
+    service = pyvo.dal.TAPService(request['service'], session=TapSession())
+    # A query the service's synchronous limit cuts off runs as a job: PyVO submits it, waits for it and deletes it.
+    result = (service.run_async if request.get('mode') == 'async' else service.search)(request['query'], maxrec=request.get('maxrec'))
     status = str(result.query_status)
     answer['tap'] = {'queryStatus': status, 'complete': status.upper() == 'OK'}
     answer['rows'] = rows(result.to_table())
@@ -508,7 +523,14 @@ export async function astroqueryText(request: Extract<AstroqueryRequest, { reado
 }
 
 /** Generic VO table access belongs to PyVO. This string view keeps the archive ledgers stable while PyVO owns TAP and VOTable parsing. */
-export async function tapRows(service: string, query: string, maxrec?: number): Promise<Record<string, string>[]> {
-  const rows = await astroqueryRows({ operation: 'tap-query', service, query, ...(maxrec === undefined ? {} : { maxrec }) });
-  return rows.map(row => Object.fromEntries(Object.entries(row).map(([name, value]) => [name, value === null ? '' : String(value)])));
+export async function tapRows(service: string, query: string, maxrec?: number, mode?: 'async'): Promise<Record<string, string>[]> {
+  const answer = await tapAnswer(service, query, maxrec, mode);
+  if (!answer.complete) throw new Error(`TAP query was incomplete (${answer.queryStatus}); its rows cannot build a complete ledger.`);
+  return answer.rows;
+}
+/** The same rows with the service's own status, for a caller that knows what its archive means by an answer it marks cut short. */
+export async function tapAnswer(service: string, query: string, maxrec?: number, mode?: 'async'): Promise<{ readonly rows: Record<string, string>[]; readonly queryStatus: string; readonly complete: boolean }> {
+  const answer = await astroquery({ operation: 'tap-query', service, query, ...(maxrec === undefined ? {} : { maxrec }), ...(mode ? { mode } : {}) });
+  if (!answer.rows || !answer.tap) throw new TypeError('TAP query returned no rows or status.');
+  return { ...answer.tap, rows: answer.rows.map(row => Object.fromEntries(Object.entries(row).map(([name, value]) => [name, value === null ? '' : String(value)]))) };
 }

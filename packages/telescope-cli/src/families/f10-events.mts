@@ -2,7 +2,7 @@
 import{gunzipSync}from'node:zlib';
 import{binaryTable,numbers,readFitsHdus,tableColumn}from'@cssearth/bake/objects/raster';
 import{eventTable,requireEventColumn,scalar}from'../archives/chandra/events.mts';
-import type{FamilyHandler,FamilyOperation}from'../family-handlers.mts';
+import type{FamilyHandler,FamilyOperation}from'../family-handler.mts';
 import type{DescriptorMember,ProductDescriptor}from'../product-descriptor.mts';
 import { plotNumericPreview, type FigureOptions } from '@cssearth/telescope/node';
 import{csv,descriptor,stable}from'./common.mts';

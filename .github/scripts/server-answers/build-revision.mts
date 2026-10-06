@@ -6,7 +6,7 @@ import { pathToFileURL } from 'node:url';
 import { terminate } from './clone-restore.mts';
 import { readDeploymentConfig } from './deployment-config.mts';
 import { publicRoot } from './public-root.mts';
-import { scriptsAt, expandScript, offlineDeploySteps } from './revision-entries.mts';
+import { scriptsAt, expandScript, isAstroBuild, offlineDeploySteps } from './revision-entries.mts';
 
 export async function buildRevision(root: string, run: (step: string, index: number, env: NodeJS.ProcessEnv) => Promise<void>): Promise<void> {
   const scripts = await scriptsAt(root);
@@ -19,7 +19,7 @@ export async function buildRevision(root: string, run: (step: string, index: num
   const scenes = resolve(root, publicRoot(root), 'scenes'), held = resolve(root, '.server-answers-scenes');
   if (!(await lstat(scenes)).isSymbolicLink()) throw new Error('Offline build requires a restored clone with shared scenes symlink');
   for (const [index, step] of steps.entries()) {
-    const astro = /^(?:pnpm exec )?astro build$/u.test(step);
+    const astro = isAstroBuild(step);
     if (astro) await rename(scenes, held);
     try { await run(step, index, env); }
     finally { if (astro) await rename(held, scenes); }
@@ -41,9 +41,9 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
     });
   });
   const config = await readDeploymentConfig(root);
-  for (const file of ['dist/earth/index.html', `${config.functionsDirectory}/search.mjs`, config.workerMain]) {
+  for (const file of ['dist/earth/index.html', config.workerMain]) {
     if ((await stat(resolve(root, file))).size === 0) throw new Error(`Empty build artifact ${file}`);
   }
   if (!(await readFile(resolve(root, 'dist/earth/index.html'), 'utf8')).includes('https://assets.invalid')) throw new Error('Build omitted production asset origin');
-  console.log('Offline revision build complete: page and both bundles verified');
+  console.log('Offline revision build complete: page and Worker bundle verified');
 }

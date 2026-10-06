@@ -20,11 +20,11 @@ in the zoom commit.
 ## Run it
 
 Use a checkout whose packages, renderer, generated shell modules and prepared
-assets are already available. Follow [CONTRIBUTING](../CONTRIBUTING.md) for setup.
+assets are already available. Follow [CONTRIBUTING](../.github/CONTRIBUTING.md) for setup.
 From the repository root, start the existing site and then the experiment:
 
 ```sh
-pnpm exec astro dev --host 127.0.0.1 --port 4349
+pnpm exec astro dev --config site/astro.config.mts --host 127.0.0.1 --port 4349
 node labs/experiments/native-scroll/run.mts
 ```
 
@@ -105,5 +105,5 @@ Chrome process cleanup workaround.
 - The demonstration only exposes the Sun and prepared planet classification.
   Other context capabilities, orientations and saved views need their own checks.
 - Browser support, keyboard access to zoom on every target platform, real mobile
-  devices, production packaging and Netlify deployment remain unverified. The
+  devices, production packaging and Cloudflare deployment remain unverified. The
   experiment's scripts-blocked proxy is not the site's deployment architecture.

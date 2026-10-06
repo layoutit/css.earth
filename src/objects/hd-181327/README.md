@@ -16,7 +16,7 @@ Catalogue color: the swatch that search, the catalogue and the minimap show is t
 
 ## Evidence
 
-- Run of 2026-09-21: [`object-package-consistency.test.mts`](../../../src/objects/object-package-consistency.test.mts) checks that the catalogue color #eeedff is the color dataset's prepared color.
+- Run of 2026-09-21: [`object-package-consistency.test.mts`](../../../packages/telescope-cli/src/new-object/object-package-consistency.test.mts) checks that the catalogue color #eeedff is the color dataset's prepared color.
 
 ## Known problems
 

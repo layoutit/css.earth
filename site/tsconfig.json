@@ -17,5 +17,5 @@
     "tsBuildInfoFile": "../output/tsbuildinfo/shell.tsbuildinfo"
   },
   "include": ["**/*.mts", "**/*.ts", "../deploy/**/*.ts", "../deploy/**/*.mts"],
-  "exclude": ["test"]
+  "exclude": ["test", "astro.config.mts"]
 }

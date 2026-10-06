@@ -39,9 +39,10 @@ import { bindInputs, json, type PackageFiles } from '../dataset.mts';
 import { fetchPublication, liveArchive, type Archive, type Publication } from './archives.mts';
 import { scaffoldStarFiles } from '../scaffold.mts';
 import { writeLedger } from '../ledger.mts';
+import { publicationRecord } from '../publication-record.mts';
 import { datasetMarkerEntry } from '../planet-datasets.mts';
 import { storedSpecDocument, STORED_SPEC } from '../refresh.mts';
-import type { Cited, DraftText } from '../spec.mts';
+import type { Cited, DraftText } from '../spec-types.mts';
 
 const GM_SUN = 132712440041.93938, PARSEC_KM = 3.085677581491367e13, MAS_RAD = Math.PI / 180 / 3.6e6;
 const PLASMA = ['#0d0887', '#7e03a8', '#cc4778', '#f89540', '#f0f921'];
@@ -294,7 +295,6 @@ export async function generatePulsar(spec: PulsarSpec, { archive = liveArchive, 
     ...spec.notes.map(note => `- **Not shown.** ${note.replace(/\.$/u, '')}.`), '',
     '[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Delivered files](inventory.json) · [Credits](NOTICE.md)', ''].join('\n'));
 
-  const { publicationRecord } = await import('../generate.mts');
   for (const publication of publications.values()) files.set(`src/sources/${publication.id}.json`, json(publicationRecord(publication)));
   writeLedger(files, id, [
     { id: 'placement', subject: 'Placement', evidence: [spec.position.url, spec.distance.url, spec.radialVelocity.url], finding: `${String(body.star.sources.position)} Distance: ${String(body.star.sources.distance)} Radial velocity: ${String(body.star.sources.radialVelocity)}` },

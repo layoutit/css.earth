@@ -35,6 +35,8 @@ The inventory command resumes saved queries. Optional arguments select an object
 
 The optional enrichment command checks at most three representative records per archive for M42. Run it only after acquisition finishes. It reads published DataLink/observation metadata and file headers to resolve previews, download links and sizes; it never downloads science pixels. Repeat `--object` to select other targets. Provider failures remain visible in the saved receipts and produce exit code 2; they do not discard the inventory. ESO DataLink returned internal errors during the initial check, while MAST and IRSA resolved selected records.
 
+PyVO asks and decodes the inventory's archive tables and the DataLink answers, through the telescope's bridge (`packages/lab/src/adapters/sources/archive-tables.ts`), so both commands need the telescope's astronomy packages (`node packages/telescope-cli/src/toolchains/astronomy-toolchains.mts astroquery install`). Each DataLink answer is kept as the archive sent it under `.local/nebula-lab/catalogue/messier/datalink/`. On 6 October 2026 the lab's former reader refused all four ESO DataLink answers tried ("Unexpected markup in DataLink cell"); PyVO read them, and on eight IRSA answers both gave the same links.
+
 ## What the results mean
 
 | Field | Interpretation |

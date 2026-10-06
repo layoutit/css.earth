@@ -1,7 +1,8 @@
 /** Explicit single-writer metadata enrichment. Stop acquisition before invoking this command. */
-import { readFile, rename, writeFile } from 'node:fs/promises';
+import { mkdir, readFile, rename, writeFile } from 'node:fs/promises';
 import { basename, resolve } from 'node:path';
 import { enrichImageMetadata, selectEnrichmentCandidates, type EnrichedArchiveImage } from './enrich-messier.ts';
+import { archiveLinks } from '../../../adapters/sources/archive-tables.ts';
 import { inventoryStorage } from '../../../features/catalogue/selection.ts';
 import { readArchiveImage, readArchiveQuery, readMessierInventory, type ArchiveImage, type MessierInventory } from '../../../features/catalogue/types.ts';
 import { isRecord as record } from '@cssearth/core';
@@ -91,6 +92,9 @@ async function main() {
   const root = process.cwd(), original = await readFile(resolve(root, indexPath), 'utf8'), inventory = await hydrate(root, original);
   const controller = new AbortController();
   process.once('SIGINT', () => controller.abort()); process.once('SIGTERM', () => controller.abort());
+  // Each DataLink answer is kept as the archive sent it, beside the inventory it enriches.
+  const answers = resolve(root, directory, 'datalink'); await mkdir(answers, { recursive: true });
+  const askLinks = archiveLinks(answers);
   const updates = new Map<string, EnrichedArchiveImage>();
   for (const target of inventory.targets.filter(target => objects.includes(target.objectId))) {
     for (const query of target.queries) {
@@ -98,7 +102,7 @@ async function main() {
       for (const image of selectEnrichmentCandidates(query.images, maximum)) {
         const key = originalAccessKey(image); if (updates.has(key)) continue;
         console.log(`ENRICH ${target.objectId} ${query.provider} ${image.collection} ${image.id}`);
-        const result = await enrichImageMetadata(originalImage(image), controller.signal);
+        const result = await enrichImageMetadata(originalImage(image), askLinks, controller.signal);
         updates.set(key, result);
         console.log(`ENRICH_RESULT ${target.objectId} ${query.provider} preview=${Boolean(result.previewUrl)} bytes=${result.estimatedBytes ?? 'unknown'} ${result.metadataEvidence.map(e => `${e.stage}:${e.status}`).join(' ')}`);
       }

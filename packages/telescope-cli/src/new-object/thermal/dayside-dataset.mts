@@ -7,7 +7,7 @@
 import { requireArray, requireRecord } from '@cssearth/core';
 import { DAYSIDE_TEMPERATURE_SCHEMA } from '@cssearth/objects';
 import { bindInputs, json, openOnMap, type PackageFiles } from '../dataset.mts';
-import type { ThermalSpec } from '../spec.mts';
+import type { ThermalSpec } from '../spec-types.mts';
 
 /** The scale every measured day side shares: plasma from 300 to 3,000 K. */
 export const DAYSIDE_SCALE = { minimum: 300, maximum: 3000, colors: ['#0d0887', '#7e03a8', '#cc4778', '#f89540', '#f0f921'], labels: ['300', '1650', '3000'] };

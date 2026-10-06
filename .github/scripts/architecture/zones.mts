@@ -5,9 +5,9 @@
  * `@cssearth/bake` (`packages/bake/src/<topic>`, `packages/bake/src/objects/<topic>`,
  * `packages/bake/src/objects/layers/<kind>`, `packages/bake/cli`, `packages/bake/authoring/<body>`), so a cycle
  * between bake topics shows instead of hiding inside one package,
- * `src/renderers/css/<sub>`, `src/preparation/<sub>`, `site/<sub>`, `.github/scripts/<sub>`, and
+ * `src/renderers/css/<sub>`, `site/<sub>`, `.github/scripts/<sub>`, and
  * `<area>/<sub>` elsewhere. Loose files in a folder form a `(root)` zone, for example `site(root)`.
- * Files at the repository root, such as `astro.config.mts`, form the `(repository root)` zone.
+ * Files at the repository root, such as `eslint.config.mts`, form the `(repository root)` zone.
  * Change these rules together with the baseline when the layout changes. */
 
 export const REPOSITORY_ROOT_ZONE = '(repository root)';
@@ -21,7 +21,6 @@ export function zoneOf(file: string): string {
   if (file.startsWith('labs/nebula/packages/')) return `labs/nebula-pkg/${fourth}`;
   if (top === 'labs') return second === 'nebula' ? 'labs/nebula(app)' : `labs/${second}`;
   if (file.startsWith('src/renderers/css/')) return parts.length > 4 ? `src/renderers/css/${fourth}` : 'src/renderers/css(root)';
-  if (file.startsWith('src/preparation/')) return parts.length > 3 ? `src/preparation/${third}` : 'src/preparation(root)';
   if (file.startsWith('.github/scripts/')) return parts.length > 3 ? `.github/scripts/${third}` : '.github/scripts(root)';
   if (top === 'site') return parts.length > 2 ? `site/${second}` : 'site(root)';
   if (top === 'src' || top === 'tests') return parts.length > 2 ? `${top}/${second}` : `${top}(root)`;

@@ -2,7 +2,7 @@
  * dataset from the best archived spectrum (color.mts) with its limb-darkening law (limb.mts), the catalogue color and navigation
  * marker from that dataset, the manifest, acquisition plan, source records, credits and the README sections the data determine. Prose
  * only a person can write (the reader card and introduction, the README's account of the star) is marked TODO(new-object), which
- * src/objects/object-package-consistency.test.mts refuses. The package's own readers check every choice as it is made. */
+ * packages/telescope-cli/src/new-object/object-package-consistency.test.mts refuses. The package's own readers check every choice as it is made. */
 import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 import { execFileSync } from 'node:child_process';
 import { mkdir, readFile, stat, writeFile } from 'node:fs/promises';
@@ -13,14 +13,16 @@ import { bindInputs, installColorDataset, json } from './dataset.mts';
 import { CROSS_CHECK_AGREEMENT, inclinedPoleOrientation } from '@cssearth/bake/objects/stellar';
 import { neutralDiscMarker } from '@cssearth/bake/navigation';
 import { scaffoldStarFiles, solarRadii, TODO } from './scaffold.mts';
-import { citedName, isCollaboration, fetchGaiaEclipsingPeriod, fetchCatalogueRow, rowArchive, fetchGaiaRow, fetchPublication, GAIA_TAP, gaiaRowForm, identify, liveArchive, readIdentifiers, telescopeResolver, type Archive, type CatalogueRow, type GaiaRow, type Identifiers, type Publication, type Resolver } from './archives/archives.mts';
+import { fetchGaiaEclipsingPeriod, fetchCatalogueRow, rowArchive, fetchGaiaRow, fetchPublication, GAIA_TAP, gaiaRowForm, identify, liveArchive, readIdentifiers, telescopeResolver, type Archive, type CatalogueRow, type GaiaRow, type Identifiers, type Publication, type Resolver } from './archives/archives.mts';
 import { CHECKED, chooseColor, type ColorChoice } from './color.mts';
-import { chooseLimb, type LimbChoice } from './limb.mts';
+import { chooseLimb } from './limb.mts';
+import type { LimbChoice } from './limb-choice.mts';
 import { chooseGravity } from './archives/gravity.mts';
-import type { Cited, StarSpec } from './spec.mts';
+import type { Cited, StarSpec } from './spec-types.mts';
 import { citedRow, DUPLICATE_ARCSEC, duplicateName, duplicateStar, existingBodies, type Existing } from './identity.mts';
 import { mergeRefresh, removeStale, STORED_SPEC, storedSpecDocument, storedStarSpec } from './refresh.mts';
 import { quoteSource } from './prose.mts';
+import { publicationRecord } from './publication-record.mts';
 import { gaiaCepheidForm, installLightCurve } from './light-curve.mts';
 import type { SolarEpoch } from './solar-epoch.mts';
 import { gaiaCepheidClass } from '@cssearth/bake/photometry';
@@ -134,26 +136,6 @@ export function astronomyRecord(spec: StarSpec, row: GaiaRow | CatalogueRow, ids
 }
 
 /** A publication record in src/sources for a cited arXiv or DOI link. */
-export function publicationRecord(publication: Publication) {
-  if (publication.wikipedia) return { id: publication.id, kind: 'reference-page', identityLevel: 'work', title: `Wikipedia article: ${publication.title}`, identifiers: [{ type: 'Archive resource', value: publication.url }],
-    links: [{ role: 'landing', url: publication.url, label: `Wikipedia, ${publication.title}` }], evidence: [{ url: publication.url, checkedOn: CHECKED, locator: 'Lead section, as the REST summary API serves it; the quotes name the revision' }], relations: [],
-    statements: [{ kind: 'credit', text: `Wikipedia contributors, "${publication.title}", Wikipedia, The Free Encyclopedia`, scope: 'citation', evidence: publication.url },
-      { kind: 'rights', text: 'Creative Commons Attribution-ShareAlike 4.0; sentences quoted verbatim with attribution', scope: 'Quoted text', evidence: 'https://creativecommons.org/licenses/by-sa/4.0/' }], creators: publication.creators };
-  if (publication.page) return { id: publication.id, kind: 'reference-page', identityLevel: 'work', title: `Web page ${publication.title}`, identifiers: [{ type: 'Archive resource', value: publication.url }],
-    links: [{ role: 'landing', url: publication.url, label: publication.title }], evidence: [{ url: publication.url, checkedOn: CHECKED, locator: 'The page as cited by a NASA Exoplanet Archive parameter set or by a spec' }], relations: [],
-    statements: [{ kind: 'credit', text: publication.title, scope: 'citation', evidence: publication.url }] };
-  const identifiers = [...publication.arxiv ? [{ type: 'arXiv', value: publication.arxiv }] : [], ...publication.doi ? [{ type: 'DOI', value: publication.doi }] : [], ...publication.bibcode ? [{ type: 'bibliography-key', value: publication.bibcode }] : []];
-  if (publication.bibcode && !publication.arxiv && !publication.doi) return { id: publication.id, kind: 'publication', identityLevel: 'work', title: `Reference ${publication.bibcode}, as the NASA Exoplanet Archive cites it.`, identifiers,
-    links: [{ role: 'landing', url: publication.url, label: 'Published reference' }], evidence: [{ url: publication.url, checkedOn: CHECKED, locator: 'ADS bibcode from the NASA Exoplanet Archive ps table (pl_refname)' }], relations: [],
-    statements: [{ kind: 'limitation', text: 'Bibliographic identity transcribed from the NASA Exoplanet Archive; this record does not claim independent review of the paper.', scope: 'citation', evidence: publication.url }], publicationDate: publication.year };
-  const lead = publication.creators[0] ? citedName(publication.creators[0]) : 'Anonymous', authors = publication.creators.length > 2 ? (isCollaboration(publication.creators[0]!) ? lead : `${lead} et al.`) : publication.creators.map(citedName).join(' & ');
-  return { id: publication.id, kind: 'publication', identityLevel: 'work', title: `${authors} (${publication.year}): ${publication.title}`, identifiers,
-    links: [{ role: 'archive', url: publication.url, label: publication.arxiv ? 'arXiv preprint' : 'Publisher' }, ...publication.doi && publication.arxiv ? [{ role: 'landing', url: `https://doi.org/${publication.doi}`, label: publication.publisher ?? 'Journal version' }] : []],
-    evidence: [{ url: publication.url, checkedOn: CHECKED, locator: publication.arxiv ? 'arXiv API record: title, authors, journal reference' : 'Crossref record: title, authors, container' }],
-    relations: [], statements: [{ kind: 'credit', text: `${authors} (${publication.year})${publication.publisher ? `, ${publication.publisher}` : ''}`, scope: 'citation', evidence: publication.url }],
-    ...(publication.publisher ? { publisher: publication.publisher } : {}), creators: publication.creators.length > 3 ? [...publication.creators.slice(0, 3), 'et al.'] : publication.creators, publicationDate: publication.year };
-}
-
 export interface Generated {
   readonly id: string; readonly files: Map<string, string | Buffer>; readonly color: ColorChoice; readonly limb: LimbChoice; readonly hex: string;
   readonly todo: readonly string[];
@@ -312,7 +294,7 @@ export async function generateStar(spec: StarSpec, { archive = liveArchive, root
     `**Limb.** ${limb.limbDarkening ? `The disc is ${limb.sentence}.` : `${limb.sentence}.`}${gravity && limb.limbDarkening ? ` Gravity: ${gravity.sentence}.` : ''}`, '',
     ...spec.spin ? [`**Spin.** ${spec.spin.inclinationDegrees}° from the line of sight${spec.spin.periodDays ? `, period ${spec.spin.periodDays} d` : ''} (${spec.spin.source}). The axis's direction on the sky is unmeasured and set toward celestial north.`, ''] : [],
     '## Evidence', '', `Generated ${CHECKED} by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts) from ${gaia ? 'Gaia DR3, SIMBAD' : `${catalogueRow!.archive} ${spec.position!.catalogue}`} and the archives named above; each choice was read with the dataset's own reader.`, '',
-    ...color.crossCheck ? [`- The color's cross-check differs by ${color.crossCheck.difference} levels at most in any channel (threshold ${CROSS_CHECK_AGREEMENT}); [object-package-consistency.test.mts](../../../src/objects/object-package-consistency.test.mts) recomputes it after preparation.`] : [],
+    ...color.crossCheck ? [`- The color's cross-check differs by ${color.crossCheck.difference} levels at most in any channel (threshold ${CROSS_CHECK_AGREEMENT}); [object-package-consistency.test.mts](../../../packages/telescope-cli/src/new-object/object-package-consistency.test.mts) recomputes it after preparation.`] : [],
     ...spec.text ? [] : [`- ${TODO}: the tests and captures that prove the rest of the package.`], '',
     '## Known problems', '', '- **Assumptions of the frame.** The axis\'s position angle and the rotation phase are conventions.',
     ...limb.limbDarkening ? [`- **Model limb.** The limb darkening is a model atmosphere at the catalogued temperature and ${gravity?.kind === 'bounded' ? 'a display gravity inside its class\'s published range (see Limb)' : 'gravity'}, not a measurement of this star.`] : [],

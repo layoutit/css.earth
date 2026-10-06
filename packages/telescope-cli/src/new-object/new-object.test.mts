@@ -568,7 +568,7 @@ test('a DOI Crossref does not hold is read from DataCite, as the CDS VizieR cata
 
 test('a reference the archive cites only by its ADS bibcode is read as the paper it links to, keeping the bibcode', async () => {
   const { fetchPublication } = await import('./archives/archives.mts');
-  const { publicationRecord } = await import('./generate.mts');
+  const { publicationRecord } = await import('./publication-record.mts');
   const arxiv = '<feed><entry><title>Seven temperate terrestrial planets</title><published>2017-03-04T00:00:00Z</published><author><name>Michael Gillon</name></author><author><name>Amaury Triaud</name></author><author><name>Brice-Olivier Demory</name></author><arxiv:journal_ref>Nature 542, 456</arxiv:journal_ref></entry></feed>';
   const crossref = JSON.stringify({ message: { title: ['Seven temperate terrestrial planets'], issued: { 'date-parts': [[2017]] }, author: [{ given: 'Michael', family: 'Gillon' }, { given: 'Amaury', family: 'Triaud' }, { given: 'Brice-Olivier', family: 'Demory' }], 'container-title': ['Nature &amp; Astronomy'], volume: '1', 'article-number': '0056' } });
   const linked: Archive = { async text(url) { if (url.includes('api.crossref.org')) return crossref; if (url.includes('export.arxiv.org')) return arxiv; throw new Error(`unexpected ${url}`); }, async bytes() { throw new Error('none'); }, async exists() { return false; },

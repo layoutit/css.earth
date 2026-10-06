@@ -56,6 +56,40 @@ test("Back before an arrival's entry is written returns to the body the flight l
   assert.deepEqual(calls.map(([id, intent]) => [id, intent.url]), [['mars', 'https://css.earth/mars/']]);
 });
 
+test("a flight's entry written at its hand-over is pushed at once and once, and Back from it is an ordinary step", () => {
+  const listeners = new Map<string, (event: PopStateEvent) => void>(), calls: [string, { url?: string; history?: { history: string } }][] = [];
+  let href = 'https://css.earth/earth/', state: unknown = null, view: string | null = '/earth/', pushes = 0, replaces = 0, flying = false;
+  const windowTarget = {
+    get location() { return { href }; },
+    history: { forward() {}, get state() { return state; }, replaceState(value: unknown, _: string, url: string) { replaces++; state = value; href = new URL(url, href).href; },
+      pushState(value: unknown, _: string, url: string) { pushes++; state = value; href = new URL(url, href).href; } },
+    addEventListener(type: string, listener: (event: PopStateEvent) => void) { listeners.set(type, listener); },
+    removeEventListener() {},
+    setTimeout(callback: () => void) { queued.push(callback); return queued.length; }, clearTimeout() {},
+  } as unknown as Window;
+  const queued: (() => void)[] = [], rest = () => { for (const callback of queued.splice(0)) callback(); };
+  const history = createNavigationHistory({ windowTarget, capture: () => view, navigating: () => flying,
+    navigate: (id, intent) => { calls.push([id, intent as { url?: string; history?: { history: string } }]); return Promise.resolve(true); } });
+  const earth = state;
+  // The flight to Mars reaches its hand-over: the camera has not rested, and no task has run.
+  flying = true; view = null;
+  history.commit('/mars/', { history: 'push' }, true);
+  assert.deepEqual([pushes, href], [1, 'https://css.earth/mars/'], 'written at once');
+  const mars = state;
+  // It lands: the entry it already has is kept, and the History API hears nothing more.
+  replaces = 0;
+  history.commit('/mars/', { history: 'replace' }); rest();
+  assert.deepEqual([pushes, replaces, state], [1, 0, mars]);
+  // Another flight writes ahead, and the reader presses Back while its scene mounts: the browser is on Mars's entry.
+  history.commit('/moon/', { history: 'push' }, true);
+  assert.equal(pushes, 2);
+  href = 'https://css.earth/mars/'; state = mars;
+  listeners.get('popstate')!({ state: mars } as PopStateEvent);
+  assert.deepEqual(calls.map(([id, intent]) => [id, intent.url, intent.history?.history]), [['mars', 'https://css.earth/mars/', 'pop']],
+    'Back returns to the view the flight left, as a step back and not as a new entry');
+  assert.notEqual(earth, mars);
+});
+
 test('settled view checkpoints skip native history writes without losing real entries', () => {
   const writes: { kind: string; url: string }[] = [];
   const listeners = new Map<string, (event: PopStateEvent) => void>();

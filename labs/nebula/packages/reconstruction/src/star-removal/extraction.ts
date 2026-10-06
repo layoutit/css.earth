@@ -3,35 +3,8 @@ import { mkdir, writeFile } from 'node:fs/promises';
 import { basename, resolve } from 'node:path';
 import sharp from 'sharp';
 
-export interface ExtractionOptions {
-  inputPath: string;
-  outputDirectory: string;
-  id?: string;
-  maxPixels?: number | null;
-  /** Opt-in native extraction can omit the two large compact-source output banks. */
-  outputMode?: 'all' | 'diffuse-only';
-  medianSize?: number;
-  supportPixels?: number;
-  thresholdSigma?: number;
-  bridgeFraction?: number;
-  softEdgeFraction?: number;
-}
-
-export interface ExtractionReceipt {
-  schema: 'cssearth-nebula-extraction-lab@1'; id: string; width: number; height: number;
-  skyRgb: [number,number,number]; threshold: number; supportFraction: number;
-  outputs: { cutout: string; diffuse: string; residual: string; mask: string; comparison: string };
-  method: string; limitations: string[];
-}
-export interface NativeExtractionReceipt extends Omit<ExtractionReceipt, 'outputs'> {
-  outputs: { diffuse: string; mask: string; comparison: string; cutout?: string; residual?: string };
-  outputBytes: Record<string,number>;
-  options: { maxPixels: null; medianSize: number; outputMode: 'all' | 'diffuse-only'; supportPixels: number;
-    thresholdSigma: number; bridgeFraction: number; softEdgeFraction: number };
-  source: { path: string; bytes: number; depth: string; width: number; height: number };
-  processing: { nativeResolution: true; medianSize: number; outputMode: 'all' | 'diffuse-only';
-    borderStatistic: string; elapsedSeconds: number; maximumResidentBytes: number };
-}
+import type { ExtractionOptions, ExtractionReceipt, NativeExtractionReceipt } from './extraction-types.ts';
+export type { ExtractionOptions, ExtractionReceipt, NativeExtractionReceipt } from './extraction-types.ts';
 
 const clamp=(v:number,lo=0,hi=255)=>Math.max(lo,Math.min(hi,v));
 const quantile=(values:number[],q:number)=>{values.sort((a,b)=>a-b);return values[Math.min(values.length-1,Math.max(0,Math.floor(q*(values.length-1))))]??0;};

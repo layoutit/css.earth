@@ -53,7 +53,7 @@ surfaces. An `.mts` extension alone does not establish strict ownership. Missing
 local prepared assets or failures in that broader gate must be reported separately,
 not hidden by the focused oracle check.
 
-`pnpm typecheck` covers packages and their tooling, renderer, shared platform, preparation, root tools, shell, Astro, ownership enforcement and tests, including executable fixtures and browser/capture/oracle scripts. `pnpm typecheck:tests` checks every file discovered by the strict [test configuration](../../tsconfig.tests.json) with the configured TypeScript compiler; native Node execution alone does not typecheck it. External JSON starts as `unknown` and is checked where its geometry, observations, resources or optional capabilities are consumed. Offline adapters retain the actual types of their imported functions.
+`pnpm typecheck` covers packages and their tooling, renderer, shared platform, preparation, root tools, shell, Astro, ownership enforcement and tests, including executable fixtures and browser/capture/oracle scripts. `pnpm typecheck:tests` checks every file discovered by the strict [test configuration](../../.github/tsconfig.tests.json) with the configured TypeScript compiler; native Node execution alone does not typecheck it. External JSON starts as `unknown` and is checked where its geometry, observations, resources or optional capabilities are consumed. Offline adapters retain the actual types of their imported functions.
 
 Node must satisfy `^22.18.0 || >=24.0.0`. Node strips types for native `.mts` execution; the TypeScript gates perform checking. Shell and native-tool configurations reject syntax requiring runtime transformation.
 

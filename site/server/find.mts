@@ -75,10 +75,10 @@ export async function findResults(pin: FeatureIndexPin, query: string, objectId:
   });
 }
 
-// Results depend only on the query and the deploy's prepared data, and a deploy empties Netlify's cache. So the CDN
-// keeps an answer for the deploy's life and shares it between its locations (`durable`): on the live site an answer
-// from the edge took 0.16 s and one from the function 0.4 to 0.9 s, and with five minutes per location nearly every
-// keystroke reached the function (2026-10-01). The browser still asks again after five minutes.
+// Results depend only on the query and the deploy's prepared data. Netlify-CDN-Cache-Control let the site's first host
+// keep an answer for a deploy's life and share it between its locations (`durable`): there an answer from the edge took
+// 0.16 s and one from the function 0.4 to 0.9 s (2026-10-01). Cloudflare does not read that header; the Worker still sends
+// it, so its answers stay as they were. The browser asks again after five minutes.
 const CDN_CACHE = 'public, durable, max-age=31536000';
 // Only a whole answer is kept: an error, or one whose feature data could not load, must be asked again.
 const json = (value: unknown, status = 200, whole = status === 200) => new Response(JSON.stringify(value), { status, headers: {

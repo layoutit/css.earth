@@ -178,9 +178,11 @@
   ],
   "root": {
     "allow": [
+      "site/astro.config.mts",
       "site/env.d.ts"
     ],
     "entries": [
+      "site/astro.config.mts",
       "site/env.d.ts"
     ],
     "tier": 11
@@ -429,6 +431,20 @@
     "site/source/major-moons.json",
     "site/source/moon-catalogues.json",
     "site/source/moon-horizons.json.gz",
+    "site/source/navigation/SOURCE.md",
+    "site/source/navigation/black-hole-accretion-disk-nasa.jpg",
+    "site/source/navigation/cassiopeia-a-miri.png",
+    "site/source/navigation/download-mark.svg",
+    "site/source/navigation/earth.jpg",
+    "site/source/navigation/github-mark.svg",
+    "site/source/navigation/mercury.jpg",
+    "site/source/navigation/neptune.jpg",
+    "site/source/navigation/settings-mark.svg",
+    "site/source/navigation/share-mark.svg",
+    "site/source/navigation/sun-hmi.jpg",
+    "site/source/navigation/system-text.json",
+    "site/source/navigation/uranus.jpg",
+    "site/source/navigation/venus.webp",
     "site/source/overview-facts.json",
     "site/source/scientific-charts/planetary-context.json",
     "site/source/source-icons.json",

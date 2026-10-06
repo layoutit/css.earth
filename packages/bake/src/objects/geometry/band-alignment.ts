@@ -4,13 +4,13 @@
  * Correlation reads a 5-minus-31-pixel detail image only; original I/F is never changed. Disjoint checkerboard patches are
  * held out, and a camera is accepted when its held-out residuals stay within the criteria below.
  */
-import type {loadCameraShape} from './shape-camera-mosaic.ts';
+import type {SourceMesh} from './contracts.ts';
 
 export interface AlignmentImage {data:ArrayLike<number>;width:number;height:number}
 export interface AlignmentCamera {position:readonly number[];sun:readonly number[];ray(x:number,y:number):ArrayLike<number>;project(point:readonly number[]):readonly number[]|null}
 export interface AlignmentFrame {id:string;center?:readonly number[];northAzimuthDegrees?:number}
 export interface AlignmentSource<F extends AlignmentFrame> {frame:F;image:AlignmentImage}
-type AlignmentMesh = Pick<Awaited<ReturnType<typeof loadCameraShape>>,'intersect'|'indices'|'positions'>;
+type AlignmentMesh = Pick<SourceMesh,'intersect'|'indices'|'positions'>;
 
 export const BAND_ALIGNMENT_SETTINGS = {patchRadiusPixels:13,patchSampleStepPixels:2,searchRadiusPixels:9,detailBoxWidthsPixels:[5,31],maximumEmissionDegrees:65,
   maximumReferenceIncidenceDegrees:75,minimumValidSignal:.002,minimumDetailVariance:1e-6,minimumConvolutionMarginPixels:16,maximumSourceMeshVisibilityResidualMeters:1} as const;

@@ -9,16 +9,7 @@
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
 import { parsePublishedPhaseCurve, publishedPhaseCurveMap } from '@cssearth/bake/objects/raster';
 import { bindInputs, json, openOnMap, type PackageFiles } from './dataset.mts';
-
-export interface PhaseCurveEntry {
-  /** Dataset id, and the dataset key of its reader text. */
-  readonly dataset: string; readonly label: string;
-  /** The record's path inside the package's source directory. */
-  readonly path: string; readonly url: string;
-  /** Who fitted it ("Knutson et al. (2012)") and what they fitted ("a Spitzer IRAC phase curve of 2009"). */
-  readonly credit: string; readonly observed: string;
-  readonly record: Readonly<Record<string, unknown>>;
-}
+import type { PhaseCurveEntry } from './spec-types.mts';
 
 /** The false-color palette every published-fit map uses (plasma). */
 const PLASMA = ['#0d0887', '#7e03a8', '#cc4778', '#f89540', '#f0f921'];

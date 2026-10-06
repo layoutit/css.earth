@@ -17,7 +17,7 @@
  * Nothing is compared by hash: the stored spec is the record of what the tool wrote, and the rules above read text. */
 import { readFile, rm, stat } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import type { HostedSpec, StarSpec } from './spec.mts';
+import type { HostedSpec, StarSpec } from './spec-types.mts';
 import type { PackageFiles } from './dataset.mts';
 
 export const STORED_SPEC = 'source/preparation/new-object.json';

@@ -1,13 +1,21 @@
 {
-  "mode": "semantic",
+  "mode": "pure-move",
   "moves": {
-    "public/navigation/sidebar-thumbnails.json": "site/public/navigation/sidebar-thumbnails.json"
+    "src/navigation/SOURCE.md": "site/source/navigation/SOURCE.md",
+    "src/navigation/context-locator.test.mts": "packages/renderer/src/universe/context-locator.test.ts",
+    "src/navigation/source/black-hole-accretion-disk-nasa.jpg": "site/source/navigation/black-hole-accretion-disk-nasa.jpg",
+    "src/navigation/source/cassiopeia-a-miri.png": "site/source/navigation/cassiopeia-a-miri.png",
+    "src/navigation/source/download-mark.svg": "site/source/navigation/download-mark.svg",
+    "src/navigation/source/earth.jpg": "site/source/navigation/earth.jpg",
+    "src/navigation/source/github-mark.svg": "site/source/navigation/github-mark.svg",
+    "src/navigation/source/mercury.jpg": "site/source/navigation/mercury.jpg",
+    "src/navigation/source/neptune.jpg": "site/source/navigation/neptune.jpg",
+    "src/navigation/source/settings-mark.svg": "site/source/navigation/settings-mark.svg",
+    "src/navigation/source/share-mark.svg": "site/source/navigation/share-mark.svg",
+    "src/navigation/source/sun-hmi.jpg": "site/source/navigation/sun-hmi.jpg",
+    "src/navigation/source/uranus.jpg": "site/source/navigation/uranus.jpg",
+    "src/navigation/source/venus.webp": "site/source/navigation/venus.webp",
+    "src/navigation/system-text.json": "site/source/navigation/system-text.json"
   },
-  "outputs": [
-    {
-      "glob": "navigation/sidebar-thumbnails.json",
-      "reason": "The receipt names its preview inputs by repository path, which is now site/public/scenes/... instead of public/scenes/..."
-    }
-  ],
-  "change": "Plan 8 R3: move Astro's public directory from public/ into site/public/"
+  "change": "Plan 8 R5: move the navigation marker sources and system text from src/navigation into site/source/navigation"
 }

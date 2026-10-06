@@ -26,7 +26,7 @@ The papers command validates and resumes caches without an ADS token. `--object=
 
 ## Storage and integrity
 
-- Ignored cache: `.local/nebula-lab/catalogue/messier/papers/`. The index binds to the tracked object catalogue hash. Exact TAP responses, queries, digests and retrieval dates provide source receipts.
+- Ignored cache: `.local/nebula-lab/catalogue/messier/papers/`. The index binds to the tracked object catalogue hash. The rows PyVO decoded from each TAP answer, with their queries and retrieval dates, provide source receipts; an abstract SIMBAD holds as an empty text is stored as missing.
 - Content-addressed object pages use `.json.gzip`. This avoids the development server's automatic HTTP decompression of `.json.gz`: the browser must verify compressed bytes and size before explicit decompression and object/count checks.
 - Only the selected object's page loads. A single sequential writer publishes the index atomically; immutable pages preserve existing readers.
 - The query requests the counted total plus one, capped at 50,000 rows per object. `complete` requires matching counts; changes, caps and overflow yield `partial`. Failures remain visible and resumable.

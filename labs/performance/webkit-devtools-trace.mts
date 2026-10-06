@@ -15,7 +15,7 @@ import { gunzipSync } from 'node:zlib';
 import { restoreSchedulingStacks } from './webkit-trace-clues.mts';
 import { pathToFileURL } from 'node:url';
 import { isRecord, requireArray, requireFiniteNumber, requireRecord } from '@cssearth/core';
-import { writeNavigationAnalysis } from './webkit-trace-slices.mts';
+import { writeNavigationAnalysis } from './webkit-trace-report.mts';
 
 /** WebKit timeline record type → Chrome trace event name. Unlisted types keep their WebKit name. */
 export const DEVTOOLS_NAMES: Readonly<Record<string, string>> = {

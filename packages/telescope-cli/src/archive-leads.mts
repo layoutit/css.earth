@@ -65,7 +65,9 @@ export async function saveArchiveLeadEvidence(root: string, source: string, requ
 }
 const save = saveArchiveLeadEvidence;
 
-/** KOA publishes one TAP table per instrument. Query each sequentially to keep process and network load small. */
+/** KOA publishes one TAP table per instrument. They are asked a few at a time: one after another the 14 took 92 s for one star
+ * (2026-10-06), and each table's own queries still run in order. */
+const KECK_TABLES_AT_ONCE = 4;
 export async function searchKeckLeads(root: string, target: TargetCatalogueEntry, query: typeof koaQuery = koaQuery,
   filter?: ArchiveLeadFilter): Promise<ArchiveLeadService> {
   const time = leadTime(filter), tables = filter?.instrument ? INSTRUMENT_TABLES.filter(table => table.slice(4).toLowerCase() === filter.instrument!.toLowerCase()) : INSTRUMENT_TABLES;
@@ -75,8 +77,8 @@ export async function searchKeckLeads(root: string, target: TargetCatalogueEntry
   try { if (query === koaQuery) astroqueryToolchainSync(); }
   catch (error) { return { service: TAP_SYNC, state: 'unavailable', scope, reason: message(error), instruments: [] }; }
   const names = namesOf(target), literals = names.map(name => `'${name.replaceAll("'", "''")}'`).join(',');
-  const instruments: ArchiveLeadService['instruments'][number][] = [], sources: KeckSourceLead[] = [], failures: string[] = [], evidence: string[] = [];
-  const sample = async (table: (typeof INSTRUMENT_TABLES)[number]) => {
+  type Found = { instruments: ArchiveLeadService['instruments'][number][]; sources: KeckSourceLead[]; failures: string[]; evidence: string[] };
+  const sample = async (table: (typeof INSTRUMENT_TABLES)[number], { sources, evidence }: Found) => {
     const instrument = table.slice(4).toUpperCase();
     const exact = `SELECT TOP ${KECK_SOURCE_SAMPLE_LIMIT} koaid,targname,koaimtyp,filehand,date_obs FROM ${table} WHERE koaimtyp='object' AND targname IN (${literals}) AND filehand IS NOT NULL${date} ORDER BY koaid`;
     const frames = await query(exact);
@@ -93,9 +95,8 @@ export async function searchKeckLeads(root: string, target: TargetCatalogueEntry
     }
     evidence.push(pin); sources.push(...sampled);
   };
-  let attempted = 0;
-  for (const table of tables) {
-    attempted++;
+  const search = async (table: (typeof INSTRUMENT_TABLES)[number]): Promise<Found> => {
+    const found: Found = { instruments: [], sources: [], failures: [], evidence: [] }, { instruments, failures, evidence } = found;
     const adql = `SELECT targname, COUNT(*) AS frames FROM ${table} WHERE koaimtyp='object' AND targname IN (${literals})${date} GROUP BY targname`;
     let hasFrames = false;
     try {
@@ -112,11 +113,16 @@ export async function searchKeckLeads(root: string, target: TargetCatalogueEntry
       }
     } catch (error) {
       failures.push(`${table}: ${message(error)}`);
-      continue;
+      return found;
     }
-    if (hasFrames) try { await sample(table); }
+    if (hasFrames) try { await sample(table, found); }
     catch (error) { failures.push(`${table}: exact-file sampling failed: ${message(error)}`); }
-  }
+    return found;
+  };
+  const all: Found[] = [];
+  for (let first = 0; first < tables.length; first += KECK_TABLES_AT_ONCE) all.push(...await Promise.all(tables.slice(first, first + KECK_TABLES_AT_ONCE).map(search)));
+  const instruments = all.flatMap(found => found.instruments), sources = all.flatMap(found => found.sources), failures = all.flatMap(found => found.failures), evidence = all.flatMap(found => found.evidence);
+  const attempted = tables.length;
   return { service: TAP_SYNC, state: failures.length ? evidence.length ? 'overflow' : 'unavailable' : instruments.length ? 'sampled' : 'empty-in-scope', scope,
     reason: failures.length ? `${attempted - failures.length}/${attempted} attempted tables answered; ${failures.join('; ')}` : `${instruments.reduce((n, item) => n + item.records, 0)} matching public object frames; ${sources.length} exact FITS leads sampled. Archive names are not science qualifications.`,
     instruments, sources: sources.sort((a,b)=>a.instrument.localeCompare(b.instrument)||a.koaid.localeCompare(b.koaid)), evidence };

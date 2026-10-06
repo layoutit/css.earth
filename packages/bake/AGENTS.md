@@ -68,7 +68,9 @@ cycle. Share anything else through `@cssearth/core` or another package. Prepared
   `packages/bake/cli/publish-source-cache.mts` mirrors an object's downloads into the source cache with it. It also holds
   the inventoried runtime-asset locations (the R2 key, URL and restore path of each inventoried file, for a checkout root
   the caller passes in), the public scene images an object ships (its runtime manifest) and the publication of a staged
-  preparation into the object package. It imports `objects/sources`. Its tests are `node --test` suites in
+  preparation into the object package. `inventory-lookup.ts` answers what an inventory lists (files by name or location,
+  their bytes and addresses, what changed since a git revision); `packages/bake/cli/lookup/index.mts inventory` is its command.
+  It imports `objects/sources`. Its tests are `node --test` suites in
   `src/delivery/`; the runtime-manifest and publication tests are in `src/delivery/`.
 - `src/sources/` is published as `@cssearth/bake/sources` (Node only): source records preparation reads beside an
   object: its authored descriptor, the independent records of the source catalogue (`src/sources/`), the authored
@@ -80,6 +82,7 @@ cycle. Share anything else through `@cssearth/core` or another package. Prepared
   preparation still applies to a provenance record; the context packages' provenance, compiled from their manifests or read
   as installed, and the facility artwork refresh; and the investigation ledgers beside each object and facility with the
   shared surveys they quote (`src/sources/investigations/`) and the report over them (`packages/bake/cli/report-investigations.mts`
+  is its command), and the lookup of what a source manifest declares (`manifest-lookup.ts`; `packages/bake/cli/lookup/index.mts manifest`
   is its command). The application passes in the route its context objects show at
   (`CONTEXT_ROUTE`) and its dataset routes. It imports `runtime-source`, `objects/content` and `delivery`. `packages/bake/cli/acquire-moon-catalogues.mts` refreshes the pinned
   JPL moon catalogue (`site/source/moon-catalogues.json`). Its tests are `node --test` suites in `src/sources/`.
@@ -104,7 +107,7 @@ cycle. Share anything else through `@cssearth/core` or another package. Prepared
 - `src/astronomy/` is published as `@cssearth/bake/astronomy` (Node only): preparation's access to the built astronomy
   package (`loadAstronomyPackage`), which finds the build through this package's own name so the path holds from `dist/`.
   It imports no topic. `packages/bake/cli/prepare-solar-geometry.mts` generates `src/platform/solar-geometry.mts` from it;
-  its test is `src/platform/solar-geometry.test.mts`.
+  its test is `packages/bake/cli/prepare-solar-geometry.test.mts`.
 - `src/navigation/` is published as `@cssearth/bake/navigation` (Node only): the navigation distances
   the catalogue and search destinations are built with, and the marker recipes whose source bytes are checked and drawn
   into navigation marker sprites, and the navigation preparation (`prepare-navigation.ts`, with the Sun, black-hole,
@@ -263,8 +266,8 @@ cycle. Share anything else through `@cssearth/core` or another package. Prepared
     code that makes an intermediate, such as the radial snapshot and PDS constraint map in this topic.
     Terrestrial keeps its radial terrain and materials in `radial/`, its solid rasters in `solid/`, and the
     surface-observation pipeline (formats, cameras, pixel geometry, photometry, footprints, surface transfer, registration) in
-    `surface-observations/`, described in its README (its tests are in `src/objects/layers/terrestrial/surface-observations/`, its evidence in
-    `evidence/photograph-pipeline/`, the OSIRIS shape comparison in `packages/bake/cli/osiris-shape-comparison.mts`); the paged-ellipsoid globe (`globe/`) holds its recipe context and its scene, split into the
+    `surface-observations/`, described in its README (its tests are in `src/objects/layers/terrestrial/surface-observations/`,
+    the OSIRIS shape comparison in `packages/bake/cli/osiris-shape-comparison.mts`); the paged-ellipsoid globe (`globe/`) holds its recipe context and its scene, split into the
     shared scene context, the sphere leaves, the cutaway interior and the atmosphere material bank.
   Body pipeline tests stay in `packages/bake/authoring/<body>/`; domain tests also live under
   `packages/bake/src/objects/<topic>/`. The moved terrestrial Node suites live in

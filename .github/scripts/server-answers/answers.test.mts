@@ -9,8 +9,8 @@ import { canonicalHtml, compactHtml, recordAnswer, serialise, readRecording } fr
 import { assertNoFallback } from './record.mts';
 import { compare, dimensions } from './diff.mts';
 import { expectation, expectationTable, targetTables } from './expectations.mts';
-import { check, covered } from './check.mts';
-import edgeRoute from '../../../deploy/netlify/edge-functions/search-route.ts';
+import { check } from './check.mts';
+import { matchesPatterns } from './deployment-config.mts';
 const origin = 'http://127.0.0.1:12345';
 test('text bytes stay exact; JSON key order is deterministic; arrays retain order', async () => {
   const html = '<html>\r\n unchanged \t</html>';
@@ -27,29 +27,28 @@ test('binary records length, prefix and md5; volatile headers omitted and retain
   assert.equal(answer.headers['content-length'], 'nonzero'); assert.equal(answer.headers.location, 'https://answers.invalid/earth/');
   assert.equal(answer.headers['access-control-allow-origin'], '*'); assert.equal(answer.headers.vary, 'Accept-Encoding');
 });
-test('every status/header/body/closure difference and missing request is reported', () => {
+test('every status/header/body difference and missing request is reported', () => {
   const changes = dimensions('answer.json', { status: 200, headers: { type: 'json', cache: 'public' }, body: 'a' }, { status: 400, headers: { type: 'text' }, body: 'b' });
   assert.deepEqual(changes.map(change => change.dimension), ['body', 'headers.cache', 'headers.type', 'status']);
-  assert.equal(dimensions('closure.json', { find: ['a'] }, { find: ['b'] })[0]?.dimension, 'find');
+  assert.equal(dimensions('index.json', { config: ['a'] }, { config: ['b'] })[0]?.dimension, 'config');
   assert.equal(dimensions('gone.json', {}, undefined)[0]?.dimension, 'presence');
 });
-test('included_files glob matches complete path segments', () => {
-  assert.ok(covered('site/public/scenes/earth/earth-places.json', ['site/public/scenes/*/*-places.json']));
-  assert.ok(!covered('site/public/scenes/earth/deeper/earth-places.json', ['site/public/scenes/*/*-places.json']));
-  assert.ok(!covered('dist/catalogue/index.json', ['dist/catalogue/other.json']));
+test('glob patterns match complete path segments', () => {
+  assert.ok(matchesPatterns('site/public/scenes/earth/earth-places.json', ['site/public/scenes/*/*-places.json']));
+  assert.ok(!matchesPatterns('site/public/scenes/earth/deeper/earth-places.json', ['site/public/scenes/*/*-places.json']));
+  assert.ok(!matchesPatterns('dist/catalogue/index.json', ['dist/catalogue/other.json']));
 });
-async function fixture(dir: string, status = 200, files: string[] = []) {
+async function fixture(dir: string, status = 200) {
   await writeFile(resolve(dir, 'index.json'), serialise({ target: 'preview', requests: ['probe-navigation'], catalogue: [{ id: 'probe-navigation', expected: 200 }] }));
-  await writeFile(resolve(dir, 'closure.json'), serialise({ functions: { find: files }, included: ['site/public/*.json'] }));
   await writeFile(resolve(dir, 'probe-navigation.json'), serialise({ id: 'probe-navigation', status, headers: { 'content-type': 'text/html' }, body: { kind: 'text', value: 'ok' } }));
 }
-test('real directory checker rejects broken baselines, missing records and uncovered closure', async () => {
+test('real directory checker rejects broken baselines and missing records', async () => {
   const dir = await mkdtemp(resolve(tmpdir(), 'answers-test-'));
   try {
     await fixture(dir); await check(dir); assert.deepEqual(await compare(dir, dir), []);
     await fixture(dir, 502); await assert.rejects(check(dir), /server failure/u);
     await fixture(dir, 201); await assert.rejects(check(dir), /status/u);
-    await fixture(dir, 200, ['private/missing.json']); await assert.rejects(check(dir), /unpackaged/u);
+    await fixture(dir); await writeFile(resolve(dir, 'stray.json'), '{}'); await assert.rejects(check(dir), /Unexpected or missing files/u); await rm(resolve(dir, 'stray.json'));
     await rm(resolve(dir, 'probe-navigation.json')); await assert.rejects(readRecording(dir));
   } finally { await rm(dir, { recursive: true, force: true }); }
 });
@@ -62,17 +61,6 @@ test('differ CLI exits 0 identical, 1 changed, 2 invalid directory', async () =>
     await rm(resolve(head, 'index.json')); assert.equal(run().status, 2);
   } finally { await Promise.all([rm(base, { recursive: true, force: true }), rm(head, { recursive: true, force: true })]); }
 });
-test('Netlify edge entry preserves supported query shapes and passes static assets through', () => {
-  for (const query of ['q=europa', 'dataset=normal', 'settings=1&shadows=on', 'feature=1159321043', 'v=damaged', 'q=planets&view=system&category=planet']) {
-    const route = edgeRoute(new Request(`https://answers.invalid/earth/?${query}`));
-    assert.equal(route?.pathname, '/.netlify/functions/search');
-    assert.equal(route?.searchParams.get('object'), 'earth');
-    for (const [name, value] of new URLSearchParams(query)) assert.equal(route?.searchParams.get(name), value);
-  }
-  assert.equal(edgeRoute(new Request('https://answers.invalid/earth/?view=system')), undefined);
-  assert.equal(edgeRoute(new Request('https://answers.invalid/objects/earth/object.json?q=x')), undefined);
-});
-
 test('only the observed brand commit counter is pinned; other HTML text remains exact', async () => {
   const ask = async (counter: string) => recordAnswer('html', new Response(`<a class="explorer-brand-version" aria-label="GitHub v0.${counter}">v0.${counter}</a><p>v0.42</p>`, { headers: { 'content-type': 'text/html' } }), origin);
   assert.equal(serialise(await ask('6602')), serialise(await ask('6603')));
@@ -100,11 +88,9 @@ test('sanity rejects missing HTML first-view markup, titles, response types and 
 });
 
 test('target tables encode middleware versus direct-handler contracts', () => {
-  for (const target of ['netlify', 'cloudflare'] as const) {
-    assert.deepEqual(targetTables[target]['find-options'], { status: 405, type: 'text/plain' });
-    assert.deepEqual(targetTables[target]['search-get'], { status: 200, type: 'text/html' });
-    assert.deepEqual(targetTables[target]['report-post'], { status: 204, type: null });
-  }
+  assert.deepEqual(targetTables.cloudflare['find-options'], { status: 405, type: 'text/plain' });
+  assert.deepEqual(targetTables.cloudflare['search-get'], { status: 200, type: 'text/html' });
+  assert.deepEqual(targetTables.cloudflare['report-post'], { status: 204, type: null });
   assert.deepEqual(targetTables.preview['find-options'], { status: 204, type: null });
   for (const id of ['search-get', 'search-post', 'report-post']) assert.deepEqual(targetTables.preview[id], { status: 404, type: null });
   assert.deepEqual(targetTables.preview['static-range'], { status: 206, type: 'text/javascript' });

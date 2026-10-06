@@ -8,35 +8,7 @@
 // generator re-downloads the source series, re-derives the truncation, and
 // prints the error budget it certifies; the numbers in README.md come from it.
 
-import type { KeplerianElements } from '../kepler.js'
-import type { PeriodicVectorCorrection } from '../periodicCorrection.js'
-
-export interface SatelliteRecord {
-  /** Bounded prepared ICRF position residual about the fitted ellipse. */
-  readonly positionCorrection?: PeriodicVectorCorrection
-  /** Prepared slow libration in mean longitude; fitted inside the stated interval. */
-  readonly longitudeHarmonics?: readonly { readonly rateRadPerDay: number; readonly cosineRad: number; readonly sineRad: number; readonly epochJdTt: number }[]
-  /** Body id of the planet this moon orbits. */
-  readonly parent: string
-  /** Horizons target code, so a fixture can be re-fetched without guessing. */
-  readonly horizonsCode: string
-  /** Companion defining a binary barycentre; output remains parent-centred. */
-  readonly barycentreCompanion?: string
-  /** First and last JPL Horizons epochs sampled by the element fit. */
-  readonly fitFromJdTdb: number
-  readonly fitToJdTdb: number
-  readonly fitStepDays: number
-  /**
-   * Pole of this moon's own mean orbit plane (its local Laplace plane), in
-   * ICRF. `elements` are referred to the plane with this pole, x-axis along
-   * that plane's ascending node on the ICRF equator — the basis
-   * `satelliteLaplaceBasis` rebuilds.
-   */
-  readonly poleRightAscensionRad: number
-  readonly poleDeclinationRad: number
-  /** Referred to this moon's Laplace plane, epoch J2000 TT. */
-  readonly elements: KeplerianElements
-}
+export type { SatelliteRecord } from './records.js'
 
 /**
  * Mean elements for the selected moons, derived from Horizons as described in

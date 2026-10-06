@@ -3,10 +3,9 @@ import type { PreparedWorldCameraFrame, PreparedContextCameraPresentation as Wor
 import { cross3 as cross, dot3 as dot } from '@cssearth/core';
 import { prepareBoundView, prepareGroupView, prepareSystemView } from './system-view.ts';
 import type { SystemViewPolicy } from './system-view.ts';
+import type { OrbitalState, Vector3 } from './orbital-state.ts';
 import { M_PER_AU } from '@cssearth/astronomy';
 import { prepareHyperbolicPath } from './hyperbolic-path.ts';
-
-export type Vector3 = readonly [number, number, number];
 
 export interface SkyBaseline {
   readonly scenePitchDegrees: number; readonly sceneYawDegrees: number;
@@ -41,16 +40,6 @@ export interface WorldContextSource {
     readonly discHalfHeightM?: number;
     readonly opacityProfile?: VolumeOpacityProfile };
   readonly stars: { readonly objectId: string; readonly fadeStartDistanceM: number; readonly fullDistanceM: number };
-}
-export interface OrbitalState {
-  readonly positionM: Vector3;
-  readonly centerBodyId: string;
-  readonly centerPositionM: Vector3;
-  readonly normal: Vector3;
-  readonly perihelionDirection: Vector3;
-  readonly semiMajorAxisM: number;
-  readonly eccentricity: number;
-  readonly trueAnomalyRadians: number;
 }
 /** `none`: a body placed by its astrometry rather than an orbit, such as a star; it is listed with its position and radius only.
  * `boundTo`: a placed star measured to be bound to another with no measured orbit (a wide binary companion), with the pair's

@@ -7,11 +7,11 @@ import { join } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { parallel, recordingConcurrency, recordingIsolation } from './parallel.mts';
 import { hostPort } from '../server-answers/host-port.mts';
-test('three targets all finish and failure stays visible without exceeding the finite bound', async () => {
+test('every target finishes and failure stays visible without exceeding the finite bound', async () => {
   let active = 0, peak = 0; const finished: string[] = [];
-  const result = await parallel(['preview', 'netlify', 'cloudflare', 'fourth'], recordingConcurrency, async target => {
+  const result = await parallel(['preview', 'cloudflare', 'third', 'fourth'], recordingConcurrency, async target => {
     active++; peak = Math.max(active, peak);
-    try { await new Promise(accept => setTimeout(accept, 15)); finished.push(target); if (target === 'netlify') throw new Error('positive failure evidence'); }
+    try { await new Promise(accept => setTimeout(accept, 15)); finished.push(target); if (target === 'cloudflare') throw new Error('positive failure evidence'); }
     finally { active--; }
   });
   assert.equal(peak, 3); assert.equal(finished.length, 4);
@@ -20,16 +20,15 @@ test('three targets all finish and failure stays visible without exceeding the f
 });
 async function portContract(port: typeof hostPort) {
   assert.equal(port('preview'), 0, 'preview requires OS-assigned port');
-  assert.equal(port('netlify'), undefined, 'Netlify host is IPC-only');
   assert.equal(port('cloudflare'), undefined, 'Cloudflare host is IPC-only');
 }
-test('hosts use ephemeral preview ports, IPC-only deployment hosts and distinct recording directories, including simultaneous preview/Netlify', async () => {
+test('hosts use ephemeral preview ports, an IPC-only Worker host and distinct recording directories for simultaneous recordings', async () => {
   await portContract(hostPort);
   const root = await mkdtemp(join(tmpdir(), 'recording-isolation-'));
   try {
-    const isolated = await Promise.all(['preview', 'netlify', 'cloudflare'].map(target => recordingIsolation(root, target)));
+    const isolated = await Promise.all(['preview', 'cloudflare'].map(target => recordingIsolation(root, target)));
     try {
-      assert.equal(new Set(isolated.map(value => value.directory)).size, 3);
+      assert.equal(new Set(isolated.map(value => value.directory)).size, 2);
       for (const value of isolated) { assert.equal(value.env.TMPDIR, value.directory); assert.equal(value.env.TEMP, value.directory); assert.match(value.env.NODE_OPTIONS ?? '', /512/u); }
       const host = await readFile(new URL('../server-answers/host.mts', import.meta.url), 'utf8');
       assert.ok(host.includes("port: hostPort(target ?? '')"));

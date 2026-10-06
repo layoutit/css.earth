@@ -11,7 +11,7 @@
 import { inclinedPoleOrientation, parseGravityDarkeningRecord, ROCHE_VON_ZEIPEL_SCHEMA } from '@cssearth/bake/objects/stellar';
 import { CHECKED } from './color.mts';
 import { json, type PackageFiles } from './dataset.mts';
-import type { StarSpec } from './spec.mts';
+import type { StarSpec } from './spec-types.mts';
 
 export const ROCHE_RECORD_PATH = 'photometry/gravity-darkening.json';
 const CONVENTION_NOTE = " presentationUp: the display axis is a sky-plane convention; the spin axis's position angle on the sky is not measured.";

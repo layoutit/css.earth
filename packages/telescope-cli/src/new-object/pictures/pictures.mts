@@ -7,6 +7,7 @@ import { dirname, resolve } from 'node:path';
 import sharp from 'sharp';
 import { isRecord, requireArray, requireRecord, requireString } from '@cssearth/core';
 import { fetchPublication, type Archive } from '../archives/archives.mts';
+import { publicationRecord } from '../publication-record.mts';
 import { TODO } from '../scaffold.mts';
 import { esaPictureAddress, readEsaPage, skyTags, type EsaPage } from './esa-image.mts';
 import { colorsPhrase, pageColors, parsePictures, pictureFiles, type PictureEntry } from './picture-bank.mts';
@@ -77,7 +78,6 @@ async function sourceRecords(entry: PictureEntry, { root, archive }: Context) {
     if (await exists(resolve(root, path))) continue;
     const publication = /arxiv\.org\/abs\/|doi\.org\//u.test(source.url) ? await fetchPublication(archive, source.url) : undefined;
     if (!publication) throw new Error(`${entry.bank}: ${path} does not exist, and ${source.url} is not an arXiv or DOI link to write it from.`);
-    const { publicationRecord } = await import('../generate.mts');
     records.set(path, `${JSON.stringify(publicationRecord({ ...publication, id: source.catalogueId }), null, 2)}\n`);
   }
   return records;

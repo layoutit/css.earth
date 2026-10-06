@@ -108,6 +108,8 @@ Read the current `package.json` and runner arguments before using commands:
 | --- | --- |
 | Install published prepared assets for one body | `pnpm setup:assets --object=<id>` |
 | Start the shared development site | `pnpm dev` |
+| See what a body's inventory lists, or what changed in it since a revision | `pnpm lookup inventory <id> [--search=<text>] [--since=<revision>]` |
+| See what a body's source manifest declares | `pnpm lookup manifest <id> [--search=<text>] [--full]` |
 | Restore missing source inputs | `node packages/bake/cli/restore-source-inputs.mts --object=<id>`; the source manifest reader checks declared-file coverage, not stored digests |
 | Prepare one authored package | `pnpm prepare:objects -- --object=<id>` |
 | Update the source/mission catalogues | `node site/build/prepare/prepare-facilities.mts --catalog-only` |

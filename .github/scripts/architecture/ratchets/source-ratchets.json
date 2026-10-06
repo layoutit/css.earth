@@ -7,7 +7,7 @@
       "packages/objects/src/density-volume.ts": "Checks density-grid placement quaternions are normalized.",
       "packages/objects/src/stars/point-field-validation.ts": "Sorts serialized star-field keys to reject unexpected fields.",
       "packages/objects/src/provenance/source-credits.ts": "Sorts contributing object ids for stable credit grouping.",
-      "packages/objects/src/provenance/product-input-evidence.ts": "Sorts dataset-role evidence labels for deterministic product records.",
+      "packages/objects/src/provenance/object-lineage.ts": "Sorts dataset-role evidence labels for deterministic product records.",
       "packages/objects/src/provenance/prepared-sources.ts": "Sorts the declared prepared source closure for canonical transport.",
       "packages/objects/src/registry/fact-order.ts": "Sorts authored fact rows by presentation order and label.",
       "packages/objects/src/registry/object-schema.ts": "Checks the authored world-frame orbit-up direction is normalized.",

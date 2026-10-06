@@ -14,7 +14,7 @@
 
 Generated 2026-09-26 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts) from Gaia DR3, SIMBAD and the archives named above; each choice was read with the dataset's own reader.
 
-- The color's cross-check differs by 0 levels at most in any channel (threshold 12); [object-package-consistency.test.mts](../../../src/objects/object-package-consistency.test.mts) recomputes it after preparation.
+- The color's cross-check differs by 0 levels at most in any channel (threshold 12); [object-package-consistency.test.mts](../../../packages/telescope-cli/src/new-object/object-package-consistency.test.mts) recomputes it after preparation.
 - `eps-eridani-default-views.png`: ε Eridani, ε Eridani b and the system view on this branch's dev server, headless Chromium at 1440 × 900 after each page reported ready; no browser errors.
 
 ## Known problems

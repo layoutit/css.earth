@@ -44,10 +44,20 @@ export function createSceneView({ windowTarget, scenes, requests, getHistory, ge
     if (scenes.isCurrent(session)) publish(session, url);
   }
 
+  // The requests whose entry was written at their hand-over: landing, they keep that entry.
+  const ahead = new WeakSet<NavigationRequest>();
+  /** Writes a flight's entry at its hand-over, before its scene mounts (navigation-history.mts). */
+  function commitAhead(request: NavigationRequest) {
+    const history = getHistory();
+    if (!history || request.history.history !== 'push' || ahead.has(request)) return;
+    ahead.add(request);
+    history.commit(request.url, request.history, true);
+  }
+
   function commit(request: NavigationRequest, session: SceneSession) {
     return requests.commit(request, () => {
       session.url = request.url;
-      getHistory()?.commit(request.url, request.history);
+      getHistory()?.commit(request.url, ahead.has(request) ? { history: 'replace' } : request.history);
     });
   }
 
@@ -111,5 +121,5 @@ export function createSceneView({ windowTarget, scenes, requests, getHistory, ge
     return true;
   }
 
-  return { capture, commit, replace, syncDataset, arrive };
+  return { capture, commit, commitAhead, wroteAhead: (request: NavigationRequest) => ahead.has(request), replace, syncDataset, arrive };
 }

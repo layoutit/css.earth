@@ -7,7 +7,7 @@ const files = CSSEARTH_PROJECT_FILES;
 /** A checked-in project file's JSON, from the bundle. */
 export async function readProjectJson(_fromUrl: string | URL, path: string): Promise<unknown> {
   const text = Object.hasOwn(files, path) ? files[path] : undefined;
-  if (text === undefined) throw new Error(`The Worker's bundle holds no ${path}; FUNCTION_PROJECT_FILES (deploy/handlers/function-project-files.mts) lists what it carries.`);
+  if (text === undefined) throw new Error(`The Worker's bundle holds no ${path}; WORKER_PROJECT_FILES (deploy/cloudflare/worker-project-files.mts) lists what it carries.`);
   return JSON.parse(text);
 }
 

@@ -2,7 +2,9 @@
 
 `index.mts check` runs resolved graph rules (`rules.mts`) and repository rules
 (`repository-rules.mts`). Repository rules always fail on findings, including
-baseline updates. Contract lint runs the check and `node --test .github/scripts/architecture/*.test.mts`.
+baseline updates. `file-cycles.mts` fails on any file-level import cycle in `packages/`,
+counting type-only, dynamic and test imports; it has no baseline either.
+Contract lint runs the check and `node --test .github/scripts/architecture/*.test.mts`.
 
 - `bake-without-renderer.mts` locks bake's dependency fields and forbids bake entries
   in the preparation renderer exception list. `declared-dependencies.mts` rejects
