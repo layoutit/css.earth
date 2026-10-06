@@ -6,7 +6,7 @@ import { projectRoot } from '@cssearth/core/node';
  * Node-only: the `file:` URL of a checked-in project file, resolved against the
  * discovered project root rather than the caller's own (possibly relocated)
  * module URL. Reached only from the `file:`-protocol branch of
- * `site/world-context-plan.mts`, which a real browser never takes. It lives
+ * `site/directory/world-context-plan.mts`, which a real browser never takes. It lives
  * apart so its `node:` imports stay out of the client module graph.
  */
 export function nodeProjectFileUrl(fromUrl: string | URL, path: string): string {

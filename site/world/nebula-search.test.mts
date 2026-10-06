@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
-import { OBJECTS } from '../objects.mts';
+import { OBJECTS } from '../directory/objects.mts';
 import { catalogueObject, defineObjects, normalizeDestinationQuery } from '@cssearth/objects';
 
 test('rendered nebulae contribute common names and catalogue aliases to search', async () => {

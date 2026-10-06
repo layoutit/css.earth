@@ -83,7 +83,7 @@ def summarize(label, entries):
         duplicates[v['oid']].append(p)
     selected = {p for p in entries if re.fullmatch(r'src/objects/[^/]+/(object|source/manifest)\.json', p)}
     selected.update(p for p,v in docs.items() if Path(p).suffix in ('.md','.json') and v['bytes'] < 6_000_000)
-    registry = next((path for path in ('site/objects.mts', 'site/objects.mjs') if path in entries), None)
+    registry = next((path for path in ('site/directory/objects.mts', 'site/objects.mjs') if path in entries), None)
     if registry is None:
         raise RuntimeError('The selected revision has no object registry')
     selected.add(registry)

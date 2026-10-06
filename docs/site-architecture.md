@@ -11,7 +11,7 @@ A folder imports itself or strictly lower layers. Sibling folders, including L0 
 <!-- generated:folders -->
 | Tier | Folder | Purpose | Incoming moves |
 | ---: | --- | --- | --- |
-| 0 | `browser/` | Browser input, DOM and serialized import queue | 1; `import-queue.mts` |
+| 0 | `browser/` | Browser input, DOM and serialized import queue | 0 |
 | 0 | `model/` | Object identities, routes and held addresses | 0 |
 | 0 | `overview/` | Prepared spectral overview readers | 0 |
 | 0 | `prepared/` | Prepared transports and generated inputs | 0 |
@@ -19,19 +19,19 @@ A folder imports itself or strictly lower layers. Sibling folders, including L0 
 | 0 | `vendor/` | Preserved third-party notices | 0 |
 | 0 | `server-assets/` | Server and build prepared-asset origin | 0 |
 | 0 | `contracts/` | Shared page and shell interfaces | 0 |
-| 1 | `directory/` | Startup reads and object catalogue directory | 9; `startup-world.mts`, `object-directory.mts`, `objects.mts`, `world-context-plan.mts` |
+| 1 | `directory/` | Startup reads and object catalogue directory | 0 |
 | 1 | `minimap/` | Surface-map measurements and view formatting | 0 |
-| 2 | `world/` | Shared framing, visibility and camera context | 29; `world-objects.mts`, `world-system-views.mts`, `application-world-context.mts`, `application-world-resources.mts` |
-| 3 | `content/` | Card content, citations and metadata | 8; `seo.mts`, `seo-trail.mts`, `system-card.mts`, `object-children.mts` |
-| 3 | `navigation/` | History, requests, flights and arrivals | 1 |
+| 2 | `world/` | Shared framing, visibility and camera context | 0 |
+| 3 | `content/` | Card content, citations and metadata | 0 |
+| 3 | `navigation/` | History, requests, flights and arrivals | 0 |
 | 4 | `search/` | Catalogue search and result presentation | 0 |
-| 4 | `selection/` | Committed selection and camera handovers | 8; `scene/scene-selection.mts`, `satellite-selection.mts`, `overview-selection.mts`, `showcase.mts` |
-| 5 | `shell/` | Retained shell controls and panels | 3; `diagnostic-recorder.mts` |
-| 6 | `server/` | SSR readers, responses and host middleware | 2; `dot-catalogue-data.mts` |
-| 6 | `scene/` | Scene sessions, replacement and publication | 7; `object-adapter.mts`, `packaged-object-runtime.mts`, `scene-imports.mts` |
-| 7 | `startup/` | Page boot helpers and router entry | 3; `shared-imports.mts` |
+| 4 | `selection/` | Committed selection and camera handovers | 0 |
+| 5 | `shell/` | Retained shell controls and panels | 0 |
+| 6 | `server/` | SSR readers, responses and host middleware | 0 |
+| 6 | `scene/` | Scene sessions, replacement and publication | 0 |
+| 7 | `startup/` | Page boot helpers and router entry | 0 |
 | 7 | `build/` | Site preparation and packaging | 0 |
-| 8 | `layouts/` | Shared page frame and its styles | 2; `components/ObjectSwatchStyles.astro`, `object-shell.css` |
+| 8 | `layouts/` | Shared page frame and its styles | 0 |
 | 9 | `components/` | Reusable Astro markup and SSR composition | 0 |
 | 10 | `pages/` | Routes and object-page entries | 0 |
 | 11 | `journeys/` | Cross-cutting journeys and support | 0 |
@@ -68,13 +68,13 @@ Read sources: site/import-queue.mts:13–26, site/shared-imports.mts:1–7, site
 ```text
 layout → startup/shared-imports → queued router import (module autostart)
        → startup/startup-boot   → scene/scene-imports → registry/runtime
-                               → world/world-imports → application world
+                               → scene/world-imports → application world
                                   all loaders → browser/import-queue
 router → directory runtime-loader registration → first scene call
 ```
 
 - Move queuedImport and its **single last chain** to browser/import-queue. Keep its pending sharing and rejection-reset semantics unchanged. It has no imports of scene/runtime modules.
-- Scene/scene-imports owns importSceneRegistry and importPackagedObjectRuntime. World/world-imports owns importApplicationWorld. Each function still wraps only import(), using the same queuedImport. Startup/shared-imports keeps only importSceneRouter; startup-boot imports scene/world loaders directly.
+- Scene/scene-imports owns importSceneRegistry and importPackagedObjectRuntime. Scene/world-imports owns importApplicationWorld. Each function still wraps only import(), using the same queuedImport. Startup/shared-imports keeps only importSceneRouter; startup-boot imports scene/world loaders directly.
 - Router imports scene/world loader modules. Its existing object-directory import registers only the directory runtime loader before any scene call, then runs the existing module-evaluation autostart. The adapter directly imports scene/scene-imports; its frozen default remains intact. No factory or .then(start) is introduced.
 - Directory exports a typed registration function. It reads the configured loader at scene invocation, never during objectFromEntry or registry construction. Missing registration fails clearly. Metadata callers in build, Astro SSR and server endpoints remain valid without a loader. System-host recursion, abort signals, retry and entry identity must remain identical.
 - Root-level scene-imports/world-imports exist during S3; imports point at current paths until S4. No thunk awaits a queued function behind itself. The router's rejection remains a module-evaluation failure with the existing retry behavior and layout failure cleanup.

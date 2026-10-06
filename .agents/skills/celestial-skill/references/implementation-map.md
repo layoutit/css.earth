@@ -46,7 +46,7 @@ fallback requirements are not the current authored-package template.
 
 | Change | Source owners |
 | --- | --- |
-| Identity, route, lazy loading | Body `object.json` → `site/build/prepare/prepare-catalog.mts` → `site/objects.mts`; `site/object-adapter.mts`, `site/packaged-object-runtime.mts` |
+| Identity, route, lazy loading | Body `object.json` → `site/build/prepare/prepare-catalog.mts` → `site/directory/objects.mts`; `site/scene/object-adapter.mts`, `site/scene/packaged-object-runtime.mts` |
 | Physical data, orbit records and acquisition choices | `packages/astronomy/data/bodies/<id>.json`, `packages/astronomy/cli/body-records.mts` |
 | Authored and prepared object contracts | `packages/objects/src/descriptor.ts`, `packages/objects/src/authored.ts`, `packages/objects/src/prepared-data/runtime-validation/` |
 | Preparation dispatch and publication | `site/build/prepare/prepare-authored.ts`, `packages/bake/src/delivery/publication.ts`, `site/build/prepare/prepare-object-json.mts` |
@@ -78,7 +78,7 @@ requires behavior the existing capability cannot express.
 `site/pages/[id].astro` derives routes from `OBJECTS` and passes the selected id
 to `ObjectPage.astro`. That component loads the body's prepared page and content,
 applies its declared stylesheets, and uses the shared head/panel and `ObjectLayout`.
-`site/objects.mts` loads descriptors through `loadPackagedObject`. Preserve one
+`site/directory/objects.mts` loads descriptors through `loadPackagedObject`. Preserve one
 registry, generic adapter, shared shell and active object scene; navigation uses
 the shared world camera.
 

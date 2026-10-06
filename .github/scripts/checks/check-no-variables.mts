@@ -7,7 +7,7 @@
  *
  * The bake's working form does name custom properties, inside its own headless measurement
  * (packages/bake/src/presentation/*-records.ts); it is not checked here. The shell's stylesheets (site/shell, site/layouts/site.css,
- * site/object-shell.css) keep their design tokens: they style the interface, not a body.
+ * site/layouts/object-shell.css) keep their design tokens: they style the interface, not a body.
  */
 import { execFileSync } from 'node:child_process';
 import { readFileSync } from 'node:fs';

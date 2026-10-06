@@ -6,7 +6,7 @@
   NODE_VERSION = "24"
 
 # The search function renders the selection card, whose modules read the world summary and its systems from disk at load
-# (site/world-context-plan.mts finds it under the project root, marked by pnpm-workspace.yaml). Both functions search
+# (site/directory/world-context-plan.mts finds it under the project root, marked by pnpm-workspace.yaml). Both functions search
 # the built object catalogue, the feature index and the places catalogues from disk (site/server/search-data.mts):
 # fetching them over HTTP made a new instance's first search take 3 to 4.5 s.
 [functions]

@@ -19,7 +19,7 @@ Catalogue color: #ff2f96, the color dataset's prepared color.
 Run of 2026-09-23 (this version):
 
 - [`hostedOrbits.test.ts`](../../../packages/astronomy/src/hostedOrbits.test.ts) places B around A where Garcia et al. (2017) measured it, which also tests the barycentre placement at the scale of the orbit.
-- [`object-systems.test.mts`](../../../site/test/object-systems.test.mts) places Luhman 16 A and B in one system.
+- [`object-systems.test.mts`](../../../site/world/object-systems.test.mts) places Luhman 16 A and B in one system.
 
 ## Known problems
 

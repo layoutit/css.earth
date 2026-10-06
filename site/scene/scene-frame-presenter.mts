@@ -1,4 +1,4 @@
-import type { createApplicationWorldContext } from '../application-world-context.mts';
+import type { createApplicationWorldContext } from './application-world-context.mts';
 
 /** The world's code loads when the world does (`scene-router.mts`); its viewport exists from the start. */
 export type WorldContextOwner = Pick<ReturnType<typeof createApplicationWorldContext>, 'mount'> & {

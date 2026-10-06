@@ -114,7 +114,7 @@ pnpm test:site
 ```
 
 This is the broad native suite. For a focused edit, run the affected tests under
-`packages/objects/src/provenance/`, `src/sources/` and `site/test/` after preparing the inputs
+`packages/objects/src/provenance/`, `src/sources/` and `site/**/*.test.mts` after preparing the inputs
 they require. Source-dependent cases may skip on a bare checkout; report those
 separately. Neither a skipped case nor a catalogue refresh proves a surface bake.
 

@@ -254,7 +254,8 @@ its own `package.json` declares it, and outside tests of a package tsup builds
 only when `dependencies` ships it, since tsup inlines a `devDependencies` package
 (`declared-dependencies.mts`); pnpm hoisting resolves an undeclared one anyway. And pre-install imports: a
 script a workflow job runs before it installs dependencies imports, with everything it reaches, only `node:`
-built-ins and files that job's sparse checkout keeps (`pre-install-imports.mts`). Not yet enforced:
+built-ins and files that job's sparse checkout keeps (`pre-install-imports.mts`). And the site root: `site/` holds directly only the files in `site-root-allowlist.json`
+(`site-root-allowlist.mts`). Not yet enforced:
 unused files in library folders (untangle item K).
 
 Reference implementations live beside their owning package code; the shared harness lives in `packages/core/src/node/oracle/` with a pinned

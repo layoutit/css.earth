@@ -5,11 +5,11 @@ import { parseHTML } from 'linkedom';
 
 const calls: string[] = [];
 let failing = false;
-mock.module(new URL('../scene-imports.mts', import.meta.url).href, { namedExports: {
+mock.module(new URL('../scene/scene-imports.mts', import.meta.url).href, { namedExports: {
   async importPackagedObjectRuntime() { calls.push('runtime'); if (failing) throw new Error('import failed'); return { prestartObjectDecoding() { calls.push('decode'); } }; },
   async importSceneRegistry() { calls.push('registry'); return { async loadObject(id: string) { calls.push(`object:${id}`); if (failing) throw new Error('entry failed'); }, async loadSystemView(id: string) { calls.push(`system:${id}`); } }; },
 } });
-mock.module(new URL('../world-imports.mts', import.meta.url).href, { namedExports: {
+mock.module(new URL('../scene/world-imports.mts', import.meta.url).href, { namedExports: {
   async importApplicationWorld() { calls.push('world'); return { prestartWorldPlanner() { calls.push('planner'); }, async loadApplicationUniverse() { calls.push('universe'); if (failing) throw new Error('world failed'); } }; },
 } });
 const { startBodyCode, startViewCode } = await import('./startup-boot.mts');

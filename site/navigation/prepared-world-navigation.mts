@@ -1,11 +1,11 @@
-import { namesSystem } from './navigation-scope.mts';
-import { satelliteSystemByHost } from '../satellite-systems.mts';
+import { namesSystem } from '../world/navigation-scope.mts';
+import { satelliteSystemByHost } from '../world/satellite-systems.mts';
 import { eyeDistanceM, sameEyePlace } from '@cssearth/engine';
 import { createZoomCarry } from '../world/zoom-carry.mts';
 import { createPreparedSceneOwnership } from './prepared-scene-ownership.mts';
 import { createPreparedArrival } from './prepared-arrival.mts';
 import { canUseArrivalBillboard, frameArrivalBillboard, prepareArrivalBillboard } from './arrival-billboard.mts';
-import type { ObjectEntry } from '../objects.mts';
+import type { ObjectEntry } from '../directory/objects.mts';
 import type { SceneFactory, ShellCamera, MountOptions } from '../browser/browser-types.mts';
 import type { ObjectWorldNavigation } from '@cssearth/renderer/runtime/world-navigation-types.ts';
 import type { ObjectSceneLifecycle } from '@cssearth/renderer/runtime/object-scene.ts';
@@ -34,9 +34,9 @@ interface WorldFlightRequest {
 }
 
 import { CENTER_SELECTION_DURATION_SECONDS, FLIGHT_ARRIVAL_EASE_RATE, FLIGHT_ARRIVAL_TOLERANCE, FLIGHT_VISIBLE_APPROACH, FLIGHT_WHEEL_SPEEDUP, MOBILE_VIEWPORT_QUERY } from '../browser/runtime-policy.mts';
-import { STELLAR_SYSTEMS, SYSTEM_CENTERS, SYSTEM_FRAMING_RADII, SYSTEM_RANGES, SYSTEM_VIEWS, SYSTEM_VIEW_HOSTS, DATASET_VOLUMES, categoryZoomTarget, drawnGalaxiesZoomTarget, volumeZoomTarget, systemFramingRect, systemViewTarget, systemOverviewDistance } from '../system-framing.mts';
-import { bodyViewAtCamera, zoomFrameDistanceM } from '../zoom-scope.mts';
-import { knownObject } from '../object-directory.mts';
+import { STELLAR_SYSTEMS, SYSTEM_CENTERS, SYSTEM_FRAMING_RADII, SYSTEM_RANGES, SYSTEM_VIEWS, SYSTEM_VIEW_HOSTS, DATASET_VOLUMES, categoryZoomTarget, drawnGalaxiesZoomTarget, volumeZoomTarget, systemFramingRect, systemViewTarget, systemOverviewDistance } from '../world/system-framing.mts';
+import { bodyViewAtCamera, zoomFrameDistanceM } from '../world/zoom-scope.mts';
+import { knownObject } from '../directory/object-directory.mts';
 import { systemHostId } from '../model/system-address.mts';
 import { createSelectionFlight, sampleSelectionFlightInto, createSelectionFlightSample, advanceSelectionFlightInto } from '@cssearth/engine';
 import { createCameraMotion, createWorldSelectionTarget, savedWorldCamera, parseSharedView } from '@cssearth/renderer/navigation';
@@ -50,7 +50,7 @@ const AIMED_AT_CENTER_PIXELS = 2;
 export function createPreparedWorldNavigation({ objects, motion = createCameraMotion(), windowTarget = window, documentTarget = document,
   systemRadii = SYSTEM_FRAMING_RADII, systemViews = SYSTEM_VIEWS, systemViewHosts = SYSTEM_VIEW_HOSTS, systemCenters = SYSTEM_CENTERS, stellarSystems = STELLAR_SYSTEMS }: {objects: readonly (Pick<ObjectEntry, 'id' | 'worldFrame'> & Partial<Pick<ObjectEntry, 'discovery'>>)[];
   /** The camera motion the first body mounted with, when navigation is created after it. */ motion?: ReturnType<typeof createCameraMotion>; windowTarget?: Window; documentTarget?: Document; systemRadii?: typeof SYSTEM_FRAMING_RADII; systemViews?: ReadonlyMap<string, Parameters<typeof systemViewTarget>[3]>; systemViewHosts?: ReadonlySet<string>; systemCenters?: typeof SYSTEM_CENTERS; stellarSystems?: ReadonlySet<string>}) {
-  // `objects` may be the live directory (site/object-directory.mts): an object's frame is read when navigation asks for it.
+  // `objects` may be the live directory (site/directory/object-directory.mts): an object's frame is read when navigation asks for it.
   const find = (id: string) => objects.find(object => object.id === id);
   const frames = { get: (id: string) => find(id)?.worldFrame };
   const arrivals = { get: (id: string) => find(id)?.discovery?.arrival };

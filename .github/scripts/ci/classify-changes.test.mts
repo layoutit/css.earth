@@ -38,7 +38,7 @@ test('a body README or any other Markdown under src/objects/ is never a doc path
 });
 
 test('ordinary source and config paths are not doc paths', () => {
-  assert.equal(isDocPath('site/objects.mts'), false);
+  assert.equal(isDocPath('site/directory/objects.mts'), false);
   assert.equal(isDocPath('.github/scripts/ci/classify-changes.mts'), false);
   assert.equal(isDocPath('package.json'), false);
   assert.equal(isDocPath('.github/workflows/universe.yml'), false);
@@ -52,9 +52,9 @@ test('classifyChangedPaths: all-doc changes are docs-only', () => {
 
 test('classifyChangedPaths: one code file among many docs is not docs-only', () => {
   // Mutation check: a single non-doc path must flip the whole verdict, not just get counted alongside it.
-  const result = classifyChangedPaths(['README.md', 'docs/guide.md', 'site/objects.mts']);
+  const result = classifyChangedPaths(['README.md', 'docs/guide.md', 'site/directory/objects.mts']);
   assert.equal(result.docsOnly, false);
-  assert.deepEqual([...result.codePaths], ['site/objects.mts']);
+  assert.deepEqual([...result.codePaths], ['site/directory/objects.mts']);
 });
 
 test('classifyChangedPaths: a body README mixed with a generic doc is not docs-only', () => {

@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { mock, test } from 'node:test';
-import { importWithJson } from '../test/fixtures/module-import.mts';
+import { importWithJson } from './fixtures/module-import.mts';
 const bank = { schema: 'cssearth-object@2', id: 'dots', type: 'catalogue-point-bank', properties: { host: 'star' } };
 mock.module(new URL('../prepared/prepared-hosted-banks.json', import.meta.url).href, { defaultExport: {
   dots: { carriers: ['star'], descriptor: bank, files: { 'prepared/dots.bin': '/dots.bin' } },

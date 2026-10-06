@@ -1,5 +1,5 @@
 import { SEARCH_OBJECTS } from '../../search/search-objects.mts';
-import type { ObjectEntry } from '../../objects.mts';
+import type { ObjectEntry } from '../../directory/objects.mts';
 import { systemObjectId } from '../../model/system-address.mts';
 import { readMoonCatalogue } from '../../content/moon-catalogue.mts';
 export { parseMoonCatalogue, catalogueMoons } from '../../content/moon-catalogue.mts';

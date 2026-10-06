@@ -3,7 +3,7 @@ import { rm } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 
 import { defineConfig } from "astro/config";
-import { SITE_ORIGIN } from "./site/seo.mts";
+import { SITE_ORIGIN } from "./site/content/seo.mts";
 import { performanceSourceMaps } from "./site/build/source-maps.mts";
 import { packageSources } from "./site/build/package-sources.mts";
 import { inlinePageStylesheets } from "./site/build/inline-page-stylesheet.mts";

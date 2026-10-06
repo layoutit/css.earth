@@ -1,5 +1,5 @@
-import type { SceneSubject, SelectionTarget } from './scene-selection.mts';
-import { subjectHost, subjectView } from './scene-subject.mts';
+import type { SceneSubject, SelectionTarget } from '../selection/scene-selection.mts';
+import { subjectHost, subjectView } from '../world/scene-subject.mts';
 import type { SceneState } from '../browser/shell-contract-types.mts';
 import type { SceneSessionState } from './scene-session.mts';
 import type { NavigationRequest } from '../navigation/navigation-lifecycle.mts';

@@ -83,9 +83,9 @@ test('the node builder finishes the clean form', () => {
 });
 
 test('the shell stylesheet gives the leaf class exactly the rule the bake removes from each leaf', async () => {
-  const css = await readFile(resolve(root, 'site/object-shell.css'), 'utf8');
+  const css = await readFile(resolve(root, 'site/layouts/object-shell.css'), 'utf8');
   const rule = new RegExp(String.raw`(?:^|\})\s*\.${PREPARED_LEAF_CLASS}\s*\{([^}]*)\}`, 'mu').exec(css.replace(/\/\*[\s\S]*?\*\//gu, ''));
-  assert.ok(rule, `site/object-shell.css declares .${PREPARED_LEAF_CLASS}`);
+  assert.ok(rule, `site/layouts/object-shell.css declares .${PREPARED_LEAF_CLASS}`);
   const declarations = Object.fromEntries(rule[1]!.split(';').map(part => part.trim()).filter(Boolean).map(part => part.split(/\s*:\s*/u) as [string, string]));
   assert.deepEqual(declarations, Object.fromEntries(Object.entries(PREPARED_LEAF_RULE).map(([name, value]) => [preparedPropertyName({ name, custom: false }), value])));
 });

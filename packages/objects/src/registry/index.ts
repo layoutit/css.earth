@@ -1,7 +1,7 @@
 // The application registry's shared contracts: the object entry schema and catalogue decoding, the discovery, distance,
 // arrival and zoom parsers, the classification categories, the fact order, the destination-name normalisation
 // preparation and search share, the context color, and world-rotation validation. The host binds the registry to its
-// scene loader (`site/objects.mts`); nothing here loads a scene or reads a file.
+// scene loader (`site/directory/objects.mts`); nothing here loads a scene or reads a file.
 export { parseArrivalView, parseArrivalBillboard } from './arrival-view.js';
 export type { PreparedArrivalView, PreparedArrivalBillboard } from './arrival-view.js';
 export { composited, contextColor, contrastRatio, DEFAULT_CONTEXT_COLOR, NEUTRAL_CATALOGUE_COLOR, NEUTRAL_CATALOGUE_RGB, readableOnSky, relativeLuminance, SKY_BACKGROUND, TEXT_CONTRAST_MINIMUM } from './context-color.js';

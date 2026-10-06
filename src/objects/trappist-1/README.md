@@ -54,7 +54,7 @@ the mid-times this project's joint fit of the ten visits gives. [TRAPPIST-1b](..
   path, including the rule for samples consistent with zero and the quadratic limb plate.
 - `source.test.mts` checks every package's source pins, and that each planet turns
   synchronously with longitude 0 on the star and orbits it.
-- [`object-systems.test.mts`](../../../site/test/object-systems.test.mts) checks that the system holds all seven planets.
+- [`object-systems.test.mts`](../../../site/world/object-systems.test.mts) checks that the system holds all seven planets.
 - Driven in a real browser: the system view draws the seven orbits, markers and labels around the star. The orbits are inclined
   89.7 to 89.9 degrees with the node at celestial north, so from the default angle they project onto a single line — the geometry
   that makes these planets transit.

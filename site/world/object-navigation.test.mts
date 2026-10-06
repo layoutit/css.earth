@@ -4,7 +4,7 @@ import { tmpdir } from "node:os";
 import { resolve } from "node:path";
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
-import { OBJECTS, SCENE_OBJECTS } from "../objects.mts";
+import { OBJECTS, SCENE_OBJECTS } from "../directory/objects.mts";
 import { authoredObjectFixture } from "../build/fixtures/authored-object-fixture.mts";
 import { objectNavigation, SEARCH_OBJECTS, PLANET_NAVIGATION_OBJECTS } from "../search/search-objects.mts";
 import { BODY_MARKER_ATLAS_PAGE_SIZE, loadMarkerDescriptors } from "@cssearth/bake/navigation";

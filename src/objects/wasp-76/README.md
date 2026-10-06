@@ -19,7 +19,7 @@ Catalogue color: #f8f3ff, this dataset's prepared color.
 Run of 2026-09-23 (this version):
 
 - [`object-package-consistency.test.mts`](../../../src/objects/object-package-consistency.test.mts) checks the catalogue distance against the world frame and that the catalogue color is the color dataset's prepared color.
-- [`object-systems.test.mts`](../../../site/test/object-systems.test.mts) places WASP-76 and WASP-76b in one system.
+- [`object-systems.test.mts`](../../../site/world/object-systems.test.mts) places WASP-76 and WASP-76b in one system.
 
 ## Known problems
 

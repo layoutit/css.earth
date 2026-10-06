@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { APPLICATION_WORLD_CONTEXT as context } from '../world-context-plan.mts';
+import { APPLICATION_WORLD_CONTEXT as context } from '../directory/world-context-plan.mts';
 import { billboardBodyRadiusPixels, preparedBodyBillboards } from '@cssearth/renderer/navigation/prepared-body-billboards.ts';
 
 const bodies = [context.focus, ...context.bodies];

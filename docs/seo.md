@@ -2,7 +2,7 @@
 
 The shared layout emits each object's title, description, canonical URL, and
 Open Graph/Twitter metadata in static HTML. Object descriptions come from the
-`OBJECTS` registry. `site/seo.mts` owns the production origin and the
+`OBJECTS` registry. `site/content/seo.mts` owns the production origin and the
 shared metadata format.
 
 Object routes such as `/earth/` and `/saturn/` are canonical. The homepage opens
@@ -14,7 +14,7 @@ and `/robots.txt` advertises it.
 Each page carries one schema.org record in JSON-LD. The homepage has a
 `WebSite` record, which lets search results show the site's name. A body page
 has a `BreadcrumbList` down its orbit chain (cssEarth › Sun › Mars › Phobos),
-built by `site/seo-trail.mts` from the prepared world context. A centre without
+built by `site/content/seo-trail.mts` from the prepared world context. A centre without
 a page, such as a binary's barycentre, is skipped.
 
 Every page has a share image of its own. The 16 committed captures in
@@ -47,7 +47,7 @@ The social-image preparer starts and closes a preview on port 4266; pass
 
 ## Check metadata and deployment
 
-`site/test/seo.test.mts` checks the homepage metadata, the breadcrumb trails and
+`site/content/seo.test.mts` checks the homepage metadata, the breadcrumb trails and
 that every scene page has a share image of its own. `site/journeys/seo-discovery.test.mts` checks the reachability algorithm with synthetic
 page graphs. It does not crawl a running site. Inspect the built HTML and an
 already-running preview for titles, descriptions, canonical URLs, headings,

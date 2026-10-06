@@ -52,7 +52,7 @@ description, and a system of bound stars alone a sentence that names its stars.
 
 Every object with something inside it lists it under **Celestial bodies**, with
 the count, using the same rows as search. One rule builds every list
-([`object-children.mts`](../site/object-children.mts)): the rows are the objects
+([`object-children.mts`](../site/content/object-children.mts)): the rows are the objects
 whose parent it is in the object tree.
 
 - A child that is a system shows as its host: the Solar System lists Jupiter,

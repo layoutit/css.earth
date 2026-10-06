@@ -41,7 +41,7 @@ at Solar System scale; their tiny orbits need not be drawn. Orbit visibility
 continues to follow Settings.
 
 The Slideshow pill, beside the app actions, tours the featured bodies, nebulae
-and galaxies listed in `site/showcase.mts`: it flies to one at random, stays
+and galaxies listed in `site/selection/showcase.mts`: it flies to one at random, stays
 seven seconds after landing while the camera turns sixty degrees around it, and
 flies on, showing every one before repeating any. A galaxy, a cluster or a
 nebula is a picture with little depth, so the camera turns fifteen degrees

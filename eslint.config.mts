@@ -164,7 +164,7 @@ export default [
   {
     // The site's browser runtime (not its build steps or tests) and the renderer draw with retained DOM and CSS only.
     files: ['site/**/*.{ts,mts}', 'packages/renderer/src/**/*.ts'],
-    ignores: ['site/build/**', 'site/test/**', '**/*.test.{ts,mts}'],
+    ignores: ['site/build/**', '**/*.test.{ts,mts}'],
     rules: {
       'no-restricted-globals': ['error', ...['OffscreenCanvas', 'WebGLRenderingContext', 'WebGL2RenderingContext'].map(name => ({ name, message: noCanvas }))],
       'no-restricted-properties': ['error', { property: 'getContext', message: noCanvas }],
@@ -172,7 +172,7 @@ export default [
   },
   {
     files: ['site/**/*.{ts,mts}'],
-    ignores: ['site/build/**', 'site/test/**', '**/*.test.{ts,mts}'],
+    ignores: ['site/build/**', '**/*.test.{ts,mts}'],
     rules: { 'no-restricted-imports': ['error', { patterns: [{ group: ['@wwtelescope/*'], message: noCanvas }] }] },
   },
   {

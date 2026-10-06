@@ -7,7 +7,7 @@ import { markerStyle } from '@cssearth/renderer/navigation/marker-presentation.t
 import { sourceDocumentation } from '../content/source-documentation.mts';
 import type { CatalogueIndex, CatalogueIndexEntry } from './catalogue-index.mts';
 import { listDistance } from './list-distance.mts';
-import { systemCard } from '../system-card.mts';
+import { systemCard } from '../content/system-card.mts';
 
 /** A row's sprite is drawn at this share of its prepared size: the largest marker is 14 px. */
 const THUMBNAIL_SCALE = 14 / Math.max(...Object.values(PREPARED_NAVIGATION_MARKERS).map(({ presentation }) => presentation.size));
