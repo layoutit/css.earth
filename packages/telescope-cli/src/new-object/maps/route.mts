@@ -108,11 +108,3 @@ export async function bakeSurfaceMaps(results: readonly SurfaceMapResult[], { ro
 
 export const formatSurfaceMaps = (name: string, results: readonly SurfaceMapResult[], spec: string, baked: boolean) => `${results.map(result => result.failed ? `${result.host} (${name}): FAILED, not written: ${result.failed}`
   : `${result.host}: ${result.files} files. ${result.report}`).join('\n')}\n${baked ? `${results.filter(result => !result.failed).length} star(s) baked.` : `Then bake: telescope new-object ${spec} --bake`}\n`;
-
-/** Every kind of map a spec may list, by the spec's key. */
-export const MAP_ROUTES: Readonly<Record<string, { readonly name: string; readonly run: (spec: string, context: RouteContext) => Promise<SurfaceMapResult[]> }>> = {
-  // Magnetic maps reduced from archived polarised spectra (magnetic/maps.mts).
-  magneticMaps: { name: 'magnetic maps', run: async (spec, context) => runSurfaceMaps((await import('../magnetic/maps.mts')).MAGNETIC_ROUTE, spec, context) },
-  // Brightness maps made from a star's light in the TESS full-frame images (brightness/brightness.mts).
-  brightnessMaps: { name: 'brightness maps', run: async (spec, context) => runSurfaceMaps((await import('../brightness/brightness.mts')).BRIGHTNESS_ROUTE, spec, context) },
-};

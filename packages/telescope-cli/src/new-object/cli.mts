@@ -25,7 +25,7 @@ export function parseNewObjectOptions(value:unknown):NewObjectOptions{
 const holds=async(spec:string,key:'pictures'|'coronae')=>{const {readFile}=await import('node:fs/promises'),value:unknown=JSON.parse(await readFile(spec,'utf8'));return typeof value==='object'&&value!==null&&key in value;};
 
 /** The key under which a spec lists maps of one of the kinds maps/route.mts writes, when it does. */
-const mapSpecKey=async(spec:string)=>{const {readFile}=await import('node:fs/promises'),{MAP_ROUTES}=await import('./maps/route.mts'),value:unknown=JSON.parse(await readFile(spec,'utf8'));return typeof value==='object'&&value!==null?Object.keys(MAP_ROUTES).find(key=>key in value):undefined;};
+const mapSpecKey=async(spec:string)=>{const {readFile}=await import('node:fs/promises'),{MAP_ROUTES}=await import('./maps/routes.mts'),value:unknown=JSON.parse(await readFile(spec,'utf8'));return typeof value==='object'&&value!==null?Object.keys(MAP_ROUTES).find(key=>key in value):undefined;};
 
 /** The result text and exit code for one parsed `new-object` command. */
 export async function newObjectCommand(options:NewObjectOptions,root:string,stderr:(text:string)=>void):Promise<{readonly text:string;readonly code:number}>{
@@ -49,8 +49,8 @@ export async function newObjectCommand(options:NewObjectOptions,root:string,stde
     const baked=options.bake&&good.length?await bakeCoronae(good,{root,progress}):true;
     text=options.json?`${JSON.stringify(results)}\n`:formatCoronae(results,options.spec!,baked&&options.bake&&good.length>0);code=baked&&good.length===results.length?0:1;
   }else if(mapKey=await mapSpecKey(options.spec!)){
-    // A spec of maps this repository reduced from archive data, of any kind: each one a dataset of its star's page (maps/route.mts).
-    const {MAP_ROUTES,bakeSurfaceMaps,formatSurfaceMaps}=await import('./maps/route.mts'),route=MAP_ROUTES[mapKey]!,results=await route.run(options.spec!,{root,progress}),good=results.filter(result=>!result.failed);
+    // A spec of maps this repository reduced from archive data, of any kind: each one a dataset of its star's page (maps/routes.mts).
+    const {MAP_ROUTES}=await import('./maps/routes.mts'),{bakeSurfaceMaps,formatSurfaceMaps}=await import('./maps/route.mts'),route=MAP_ROUTES[mapKey]!,results=await route.run(options.spec!,{root,progress}),good=results.filter(result=>!result.failed);
     const baked=options.bake&&good.length?await bakeSurfaceMaps(good,{root,progress}):true;
     text=options.json?`${JSON.stringify(results)}\n`:formatSurfaceMaps(route.name,results,options.spec!,baked&&options.bake&&good.length>0);code=baked&&good.length===results.length?0:1;
   }else if(await holds(options.spec!,'pictures')){

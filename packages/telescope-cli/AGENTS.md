@@ -97,7 +97,7 @@ rule's constants carry their measurement on our own labelled stars; change one o
 
 Every kind of surface map this repository reduces reaches a star's page through `src/new-object/maps/`: `surface-maps.mts`
 writes the records any map needs (table, manifest input, raster surface, dataset, control, text) from a `MapKind`, and
-`route.mts` reads a spec, writes each star and bakes from a `MapRoute`. A kind supplies only what is its own: its column,
+`route.mts` reads a spec, writes each star and bakes from a `MapRoute`; `routes.mts` lists the kinds (`MAP_ROUTES`). A kind supplies only what is its own: its column,
 units, colors, sentences, how its reduction is read and the catalogue records it is bound to. `magnetic/` is the kind for
 maps from polarised spectra (`--from-spectra`, a spec's `magneticMaps`; a convention page takes the maps' tilt) and
 `brightness/` the kind for maps from TESS light (`--from-pixels`, a spec's `brightnessMaps`; the page's axis is never
