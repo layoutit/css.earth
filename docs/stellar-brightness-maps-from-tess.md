@@ -206,16 +206,17 @@ the flat **Color** the star had.
 | Drawn | From |
 | --- | --- |
 | Which longitudes are darker | The light curve |
-| How much darker | The Brightness map's own scale and grays, tinted with the star's color: far stronger than the real contrast |
+| How much darker | The Brightness map's own scale, drawn from a darker, richer tone of the star's hue up to its color: far stronger than the real contrast |
 | The color | The star's Color dataset: the scale's bright end is drawn at that color |
-| The darkening toward the edge | The Color dataset's limb law, the same plate |
+| The darkening toward the edge | The Color dataset's limb law, drawn 1.5 times as strong (its light raised to the power 1.5), still toward black: chosen by eye |
 | The latitude and shape of each patch | Not measured: the smoothest map that reproduces the light |
-| Any change of color inside a spot | Not drawn: none is measured |
+| Any change of hue inside a spot | Not drawn: none is measured. The darker tone keeps the star's hue |
 
 The contrast is drawn stronger because the measured one cannot be seen. AU Microscopii is among the most spotted stars
 here: its darkest longitude gives 21% less light than its brightest, which is one tenth on a display, and most stars swing by
-1 or 2%. Two weaker stretches were tried on the page and were still faint, so the color view takes the Brightness map's full
-contrast, chosen by eye. Each dataset's text says so with the star's own number, and the Brightness map carries the measured
+1 or 2%. Two weaker stretches were tried on the page and were still faint, and a scale that ran toward black read as shadow
+on the star. So the darkest part is drawn as a darker, richer step of the star's own hue (0.4 lower in lightness and 0.12
+higher in chroma, in OKLCH), chosen by eye from sheets of options. Each dataset's text says so with the star's own number, and the Brightness map carries the measured
 values on its scale. Every star's scale is its own, so a faintly spotted star is drawn as strongly as a heavily spotted one;
 the scale's ends and the text tell them apart.
 

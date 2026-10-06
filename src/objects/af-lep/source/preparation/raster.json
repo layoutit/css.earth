@@ -149,10 +149,10 @@
         "minimum": 98,
         "maximum": 102,
         "colors": [
-          "#1a191a",
-          "#5b585c",
-          "#9b969c",
-          "#d4ced6",
+          "#9c5dac",
+          "#b483c1",
+          "#cda9d5",
+          "#e5cfea",
           "#fdf5ff"
         ],
         "labels": [
@@ -160,7 +160,8 @@
           "102%"
         ],
         "limbOf": "color",
-        "description": "The star's color (#fdf5ff, its Color dataset) over the brightness map this project made from the star's light in TESS sector 32 (November and December 2020): the map's scale, 98% to 102% of the mean surface, runs from a dark tone of the color to the color itself. The contrast is drawn far stronger than it is, so the parts can be told apart: the darkest part gives 3.7% less light than the brightest. Longitudes are fixed by the light curve; latitudes and shapes are not. No color change of the spots is drawn: none is measured. A reduction made in this project, not a published map.",
+        "limbStrength": 1.5,
+        "description": "The star's color (#fdf5ff, its Color dataset) over the brightness map this project made from the star's light in TESS sector 32 (November and December 2020): the map's scale, 98% to 102% of the mean surface, runs from a darker, richer tone of the same hue to the color itself. The contrast is drawn far stronger than it is, so the parts can be told apart: the darkest part gives 3.7% less light than the brightest. Longitudes are fixed by the light curve; latitudes and shapes are not. No color change of the spots is drawn: none is measured. A reduction made in this project, not a published map.",
         "title": "TESS · the star in its color over its brightness map · November and December 2020",
         "sourceUrl": "https://mast.stsci.edu/tesscut/"
       }

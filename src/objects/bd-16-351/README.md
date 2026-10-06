@@ -27,14 +27,14 @@ polarised profile for each spectrum, and ZDIpy fits the field to each run's prof
 ([rotation.json](source/preparation/rotation.json)). Longitude 0 faces us at the middle of each run. One color scale, ±200 G, serves
 the map.
 
-**Brightness from TESS.** The Color + brightness and Brightness map datasets are made in this project from the star's light in TESS's full-frame images of sector 30 (September and October 2020), cut at the star's place by MAST's [TESScut](https://mast.stsci.edu/tesscut/) ([source record](../../sources/mast-tess-full-frame-images.json)). lightkurve measures the light, astropy its period, and starry (Luger et al. 2019) the map that reproduces it ([method](../../../docs/stellar-brightness-maps-from-tess.md)). The map's table is built by `packages/telescope-cli/src/archives/tess/reduce.mts` and restored from the source cache.
+**Brightness from TESS.** The Color + brightness and Brightness map datasets are made in this project from the star's light in the TESS full-frame images of sector 30 (September and October 2020), cut at the star's place by MAST's [TESScut](https://mast.stsci.edu/tesscut/) ([source record](../../sources/mast-tess-full-frame-images.json)). lightkurve measures the light, astropy its period, and starry (Luger et al. 2019) the map that reproduces it ([method](../../../docs/stellar-brightness-maps-from-tess.md)). The map's table is built by `packages/telescope-cli/src/archives/tess/reduce.mts` and restored from the source cache.
 
 ## Evidence
 
 Generated 2026-10-06 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts) from Gaia DR3, SIMBAD and the archives named above; each choice was read with the dataset's own reader.
 - Sep 2012: the map reaches a reduced chi-square of 1.30, against 5.80 with no field; mean field 69.3 G, 57% of its energy toroidal. Folsom, C. P. et al., arXiv:1601.00684 give 49 G and 38.2% for this run (instruments ESPaDOnS; maxG: 209.3; poloidalPct: 61.8; axisymmetricPct: 41.1; axisymmetricOf: total energy).
 
-**Brightness from TESS.** In sector 30 the light swings by 4.9% with a period of 3.23 d, and each of the sector's two orbits alone shows the same period within 20%. The star's record holds no catalogued rotation period to set it beside. The map's light curve leaves a scatter of 0.35% about the light, whose own noise is 0.10%. Gaia DR3 lists 3 other stars within 63 arcseconds, giving 0.57% of the light in the star's pixels.
+**Brightness from TESS.** In TESS sector 30 the light swings by 4.9% with a period of 3.23 d, and each of the sector's two orbits alone shows the same period within 20%. The star's record holds no catalogued rotation period to set it beside. The map's light curve leaves a scatter of 0.35% about the light, whose own noise is 0.10%. Gaia DR3 lists 3 other stars within 63 arcseconds, giving 0.57% of the light in the star's pixels.
 
 ## Known problems
 

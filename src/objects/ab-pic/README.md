@@ -16,13 +16,13 @@ AB Pic is a young K-type star in the Carina association. Its companion b, found 
 
 **Rotation.** No axis on the sky is measured; the display axis is celestial north ([rotation.json](source/preparation/rotation.json)).
 
-**Brightness from TESS.** The Color + brightness and Brightness map datasets are made in this project from the star's light in TESS's full-frame images of sector 39 (May and June 2021), cut at the star's place by MAST's [TESScut](https://mast.stsci.edu/tesscut/) ([source record](../../sources/mast-tess-full-frame-images.json)). lightkurve measures the light, astropy its period, and starry (Luger et al. 2019) the map that reproduces it ([method](../../../docs/stellar-brightness-maps-from-tess.md)). The map's table is built by `packages/telescope-cli/src/archives/tess/reduce.mts` and restored from the source cache.
+**Brightness from TESS.** The Color + brightness and Brightness map datasets are made in this project from the star's light in the TESS full-frame images of sector 39 (May and June 2021), cut at the star's place by MAST's [TESScut](https://mast.stsci.edu/tesscut/) ([source record](../../sources/mast-tess-full-frame-images.json)). lightkurve measures the light, astropy its period, and starry (Luger et al. 2019) the map that reproduces it ([method](../../../docs/stellar-brightness-maps-from-tess.md)). The map's table is built by `packages/telescope-cli/src/archives/tess/reduce.mts` and restored from the source cache.
 
 ## Evidence
 
 Run of 2026-09-23 (this version): see the planet's README for its placement against the measured positions. The four stars in the app, headless Chromium at 800 × 600 on this version: each is drawn in its Gaia spectrum's color, with its planet's orbit crossing the view.
 
-**Brightness from TESS.** In sector 39 the light swings by 1.6% with a period of 3.92 d, and each of the sector's two orbits alone shows the same period within 20%. The star's record holds 3.87 d from the catalogues. The map's light curve leaves a scatter of 0.26% about the light, whose own noise is 0.04%. Gaia DR3 lists 7 other stars within 63 arcseconds, giving under 0.1% of the light in the star's pixels.
+**Brightness from TESS.** In TESS sector 39 the light swings by 1.6% with a period of 3.92 d, and each of the sector's two orbits alone shows the same period within 20%. The star's record holds 3.87 d from the catalogues. The map's light curve leaves a scatter of 0.26% about the light, whose own noise is 0.04%. Gaia DR3 lists 7 other stars within 63 arcseconds, giving under 0.1% of the light in the star's pixels.
 
 ## Known problems
 

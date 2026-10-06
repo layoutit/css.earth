@@ -117,7 +117,7 @@ mission is one table, `MISSIONS`; a K2 map's records name the published method t
 changed, and the measured period goes into the star's measurements record; `new-object-cli.mts --pixel-light` writes the
 reduction's verdict, mission, window and light scatter into the record of every star it looked at, mapped or not). A kind whose maps are how the star looks
 supplies `natural`: the newest map in the star's own color, which becomes the dataset the page opens on
-(`Color + brightness`). It is the Brightness map's scale and grays tinted with the color (`tinted`), far stronger than the
+(`Color + brightness`). It is the Brightness map's scale drawn from a darker, richer step of the star's own hue up to its color (`tinted`, `DARK_STEP`; never toward black), far stronger than the
 real contrast, which cannot be seen; its sentences say so with the star's number, and say what is measured (longitudes) and
 what is not (latitudes, shapes, any color change). A new calculation is a new kind and a line in `MAP_ROUTES`, not a second writer.
 

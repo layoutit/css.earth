@@ -218,13 +218,13 @@
       "productId": "Brightness map of BD-16 351 from its light in TESS sector 30",
       "title": "Brightness map of BD-16 351 from its light curve in TESS sector 30, measured from the full-frame images: brightness on a longitude-latitude grid",
       "sourceUrl": "https://mast.stsci.edu/tesscut/",
-      "credit": "NASA TESS full-frame images, sector 30, from MAST's TESScut; photometry and map made in this project with lightkurve 2.6.0 and starry 1.2.0. This work includes data collected by the TESS mission, funded by the NASA Explorer Program, obtained from the Mikulski Archive for Space Telescopes (MAST).",
+      "credit": "NASA TESS full-frame images, sector 30, from MAST; photometry and map made in this project with lightkurve 2.6.0 and starry 1.2.0. This work includes data collected by the TESS mission, funded by the NASA Explorer Program, obtained from the Mikulski Archive for Space Telescopes (MAST).",
       "displayCredit": "NASA TESS · mapped here",
       "license": "Public NASA mission data (MAST); reduction by this project",
       "licenseEvidence": [
         "https://archive.stsci.edu/publishing/data-use"
       ],
-      "acquisition": "Built by the generator for this star, from the pixels TESScut cuts out of the sector's full-frame images. Restored from the source cache; not tracked. The receipt (the sector's request, what was measured and the codes) is written again by the generator under output/tess and is not kept in git.",
+      "acquisition": "Built by the generator for this star, from the pixels of the sector cut at the star's place by MAST's TESScut. Restored from the source cache; not tracked. The receipt (the sector's request, what was measured and the codes) is written again by the generator under output/tess and is not kept in git.",
       "generator": "packages/telescope-cli/src/archives/tess/reduce.mts",
       "redistribution": "Public TESS data, reduced here.",
       "consumers": [

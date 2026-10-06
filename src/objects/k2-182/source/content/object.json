@@ -51,7 +51,7 @@
           "url": "https://archive.stsci.edu/missions-and-data/k2"
         },
         "falseColor": false,
-        "notes": "K2-182 in its own color, darker where its light in K2's images of May to July 2018 says it was darker. As the star turned once in 23.6 days its light rose and fell by 1.2%. The contrast is drawn far stronger than it is, so the eye can see it: the darkest part gives 4% less light than the brightest, and is drawn as dark as on the Brightness map, whose scale has the measured values. The longitudes of the darker and brighter parts are measured. Their latitudes and shapes are not: they are the smoothest that reproduce the light. No change of color is drawn, because none is measured. Spots come and go within weeks or months: this is the star then. The darkening toward the edge is the Color dataset's."
+        "notes": "K2-182 in its own color, darker where its light in K2's images of May to July 2018 says it was darker. As the star turned once in 23.6 days its light rose and fell by 1.2%. The contrast is drawn far stronger than it is, so the eye can see it: the darkest part gives 4% less light than the brightest, and is drawn as a much darker tone of the star's own hue; the Brightness map's scale has the measured values. The longitudes of the darker and brighter parts are measured. Their latitudes and shapes are not: they are the smoothest that reproduce the light. No change of color is drawn, because none is measured. Spots come and go within weeks or months: this is the star then. The darkening toward the edge is the Color dataset's limb law, drawn 1.5 times as strong."
       },
       {
         "id": "brightness-campaign-18",

@@ -82,11 +82,34 @@ export function monthsOf(fromUtc: string, toUtc: string): string { const [a, b] 
 /** The same in the few characters a dataset's detail line has: "Aug 2025", "Aug to Sep 2025", "Dec 2025 to Jan 2026". */
 export function shortMonthsOf(fromUtc: string, toUtc: string): string { const [a, b] = [fromUtc, toUtc].map(day => ({ year: day.slice(0, 4), month: MONTHS[Number(day.slice(5, 7)) - 1]!.slice(0, 3) }));
   return a!.year === b!.year && a!.month === b!.month ? `${a!.month} ${a!.year}` : a!.year === b!.year ? `${a!.month} to ${b!.month} ${a!.year}` : `${a!.month} ${a!.year} to ${b!.month} ${b!.year}`; }
-/** The star's own color over the gray scale of its Brightness map: each gray, as a share of white, times the color. The map's
- * measured contrast cannot be seen on a page (AU Mic, among the most spotted stars here, gives 21% less light at its darkest
- * longitude, one tenth on a display), and two weaker stretches were still faint; the owner of the project chose the map's full
- * contrast by eye (2026-10-06). The dataset's text says the contrast is drawn stronger than it is, with the star's own numbers. */
-export const tinted = (colorHex: string) => PALETTE.map(([gray]) => `#${[1, 3, 5].map(at => Math.round(Number.parseInt(colorHex.slice(at, at + 2), 16) * gray! / 255).toString(16).padStart(2, '0')).join('')}`);
+/** A color in OKLCH (Ottosson 2020): lightness, chroma and hue, where a step of lightness looks the same size at any hue. */
+const toLinear = (value: number) => { const unit = value / 255; return unit <= 0.04045 ? unit / 12.92 : ((unit + 0.055) / 1.055) ** 2.4; };
+const fromLinear = (unit: number) => 255 * (unit <= 0.0031308 ? 12.92 * unit : 1.055 * unit ** (1 / 2.4) - 0.055);
+function toOklch([red, green, blue]: readonly [number, number, number]): [number, number, number] { const r = toLinear(red), g = toLinear(green), b = toLinear(blue);
+  const l = Math.cbrt(0.4122214708 * r + 0.5363325363 * g + 0.0514459929 * b), m = Math.cbrt(0.2119034982 * r + 0.6806995451 * g + 0.1073969566 * b), s = Math.cbrt(0.0883024619 * r + 0.2817188376 * g + 0.6299787005 * b);
+  const L = 0.2104542553 * l + 0.793617785 * m - 0.0040720468 * s, A = 1.9779984951 * l - 2.428592205 * m + 0.4505937099 * s, B = 0.0259040371 * l + 0.7827717662 * m - 0.808675766 * s;
+  return [L, Math.hypot(A, B), Math.atan2(B, A)]; }
+/** The sRGB color of an OKLCH one; a chroma the display cannot show is lowered until it can, the lightness and hue kept. */
+function fromOklch(L: number, C: number, H: number): [number, number, number] { for (let chroma = C; ; chroma *= 0.96) { const A = chroma * Math.cos(H), B = chroma * Math.sin(H);
+  const l = (L + 0.3963377774 * A + 0.2158037573 * B) ** 3, m = (L - 0.1055613458 * A - 0.0638541728 * B) ** 3, s = (L - 0.0894841775 * A - 1.291485548 * B) ** 3;
+  const rgb = [4.0767416621 * l - 3.3077115913 * m + 0.2309699292 * s, -1.2684380046 * l + 2.6097574011 * m - 0.3413193965 * s, -0.0041960863 * l - 0.7034186147 * m + 1.707614701 * s] as const;
+  if (chroma < 0.002 || rgb.every(unit => unit >= -0.0005 && unit <= 1.0005)) return rgb.map(unit => fromLinear(Math.max(0, Math.min(1, unit)))) as [number, number, number]; } }
+/** How the darkest part of Color + brightness is drawn: the star's own hue, this much lower in lightness and this much
+ * richer in chroma (OKLCH), "four steps darker, richer" of a sheet of options. Nothing is mixed with black. */
+export const DARK_STEP = { lightness: 0.4, chroma: 0.12 } as const;
+/** How much stronger than the Color dataset's the darkening toward the edge is drawn on Color + brightness: the limb law's
+ * light raised to this power, still toward black. Chosen by eye by the owner of the project from a sheet of options
+ * (2026-10-06); the Color dataset keeps the published law as it is. */
+export const LIMB_STRENGTH = 1.5;
+/** The colors of Color + brightness, from the map's darkest value to its brightest: a darker, richer step of the star's
+ * own hue, up to the star's color. The map's measured contrast cannot be seen on a page (AU Mic, among the most spotted
+ * stars here, gives 21% less light at its darkest longitude, one tenth on a display), and a scale that ran toward black
+ * read as shadow, not as the star; the owner of the project chose this step by eye from sheets of options (2026-10-06).
+ * The dataset's text says the contrast is drawn stronger than it is, with the star's own numbers. */
+export function tinted(colorHex: string): string[] { const color = [1, 3, 5].map(at => Number.parseInt(colorHex.slice(at, at + 2), 16)) as [number, number, number], [L, C, H] = toOklch(color), 
+  // A color with no hue of its own (a pure white or gray) is given none: its darker step stays neutral.
+  dark = fromOklch(Math.max(0, L - DARK_STEP.lightness), C < 0.002 ? 0 : C + DARK_STEP.chroma, H);
+  return PALETTE.map((_stop, index) => `#${color.map((channel, at) => Math.round(dark[at]! + (channel - dark[at]!) * index / (PALETTE.length - 1)).toString(16).padStart(2, '0')).join('')}`); }
 /** The scale all of a star's brightness maps share: the same reach either side of the mean surface. */
 const brightnessScale = (maps: readonly BrightnessSurfaceMap[]) => { const reach = scaleEnd(Math.max(...maps.flatMap(map => [100 - map.darkestPercent, map.brightestPercent - 100]))); return { minimum: 100 - reach, maximum: 100 + reach, labels: [`${100 - reach}%`, '100%', `${100 + reach}%`] }; };
 
@@ -155,13 +178,13 @@ export const BRIGHTNESS_MAPS: MapKind<BrightnessSurfaceMap> = {
       text: { title: `Brightness map, ${choice.label}`, detail: `${choice.label}, mapped here`, summary: 'Darker and brighter longitudes of the star, worked out in this project from how its light changes as it turns.' } }; },
   // Only a page that measures the star's axis draws the star at the map's tilt.
   outlines: map => map.tiltFrom === 'page',
-  // The star in its own color, as dark and as bright as its Brightness map draws it: the map's scale, tinted.
+  // The star in its own color over its Brightness map's scale: a darker tone of its hue where it is dimmer.
   natural(map, star) { const when = monthsOf(map.fromUtc, map.toUtc), darkest = Number((100 * (1 - map.darkestPercent / map.brightestPercent)).toFixed(1)), scale = brightnessScale([map]);
     const halved = map.lightPeriodDays === undefined ? '' : ` The light repeats every ${days(map.lightPeriodDays)}, half the catalogued rotation period, and the star is taken to turn once in two of them.`;
-    return { id: 'color-brightness', label: 'Color + brightness', minimum: scale.minimum, maximum: scale.maximum, colors: tinted(star.colorHex),
-      description: `The star's color (${star.colorHex}, its Color dataset) over the brightness map this project made from the star's light in ${windowName(map.mission, map.window)} (${when}): the map's scale, ${scale.minimum}% to ${scale.maximum}% of the mean surface, runs from a dark tone of the color to the color itself. The contrast is drawn far stronger than it is, so the parts can be told apart: the darkest part gives ${darkest}% less light than the brightest. Longitudes are fixed by the light curve; latitudes and shapes are not. No color change of the spots is drawn: none is measured. A reduction made in this project, not a published map.`,
+    return { id: 'color-brightness', label: 'Color + brightness', minimum: scale.minimum, maximum: scale.maximum, colors: tinted(star.colorHex), limbStrength: LIMB_STRENGTH,
+      description: `The star's color (${star.colorHex}, its Color dataset) over the brightness map this project made from the star's light in ${windowName(map.mission, map.window)} (${when}): the map's scale, ${scale.minimum}% to ${scale.maximum}% of the mean surface, runs from a darker, richer tone of the same hue to the color itself. The contrast is drawn far stronger than it is, so the parts can be told apart: the darkest part gives ${darkest}% less light than the brightest. Longitudes are fixed by the light curve; latitudes and shapes are not. No color change of the spots is drawn: none is measured. A reduction made in this project, not a published map.`,
       surfaceTitle: `${MISSIONS[map.mission].name} · the star in its color over its brightness map · ${when}`, qualification: `The star's color, darker where ${MISSIONS[map.mission].name} saw it dimmer (contrast drawn stronger) · ${when}, mapped in this project`,
-      notes: `${map.targetName} in its own color, darker where its light in ${MISSIONS[map.mission].name}'s images of ${when} says it was darker. As the star turned once in ${days(map.periodDays)} its light rose and fell by ${percent(map.amplitude)}%.${halved} The contrast is drawn far stronger than it is, so the eye can see it: the darkest part gives ${darkest}% less light than the brightest, and is drawn as dark as on the Brightness map, whose scale has the measured values. The longitudes of the darker and brighter parts are measured. Their latitudes and shapes are not: they are the smoothest that reproduce the light. No change of color is drawn, because none is measured. Spots come and go within weeks or months: this is the star then. The darkening toward the edge is the Color dataset's.`,
+      notes: `${map.targetName} in its own color, darker where its light in ${MISSIONS[map.mission].name}'s images of ${when} says it was darker. As the star turned once in ${days(map.periodDays)} its light rose and fell by ${percent(map.amplitude)}%.${halved} The contrast is drawn far stronger than it is, so the eye can see it: the darkest part gives ${darkest}% less light than the brightest, and is drawn as a much darker tone of the star's own hue; the Brightness map's scale has the measured values. The longitudes of the darker and brighter parts are measured. Their latitudes and shapes are not: they are the smoothest that reproduce the light. No change of color is drawn, because none is measured. Spots come and go within weeks or months: this is the star then. The darkening toward the edge is the Color dataset's limb law, drawn ${LIMB_STRENGTH} times as strong.`,
       text: { title: `Color + brightness, ${shortMonthsOf(map.fromUtc, map.toUtc)}`, detail: windowName(map.mission, map.window), summary: 'The star in its own color, darker where its light shows it darker; the contrast is drawn stronger to be seen.' } }; },
   report(maps, scale) { const count = maps.length; return `${count} brightness ${count === 1 ? 'map' : 'maps'} on one scale of ${scale.minimum}% to ${scale.maximum}% (${maps.map(map => `${map.choice.label}: turns in ${days(map.periodDays)}, light swings ${percent(map.amplitude)}%`).join('; ')})`; },
 };
