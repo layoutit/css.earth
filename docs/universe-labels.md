@@ -108,8 +108,8 @@ barycentre is therefore outside its host's family; this is a known gap.
 
 Markers, circles and captions do not dim with selection. They share one
 emphasis with their path: 30% outside a highlighted category, and 30% for
-another star's bodies seen from inside the focus star's system, rising to full
-as the surrounding stars fill the view. A hovered body is never dimmed. These
+another star's bodies seen from inside a star's system (the Sun's or any placed
+star's), rising to full as the surrounding stars fill the view. A hovered body is never dimmed. These
 multipliers do not decide label admission or navigation availability.
 
 ## Verification
