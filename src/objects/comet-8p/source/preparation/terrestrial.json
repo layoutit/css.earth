@@ -60,9 +60,10 @@
         "expectedFaces": 4096
       },
       "faceBudget": 1000,
-      "atlasTexels": 4096000,
+      "texelsPerFace": 4096,
       "simplification": {
         "method": "source-meshoptimizer",
+        "targetFaces": 1000,
         "maximumErrorMeters": 50
       },
       "primitive": "u",
@@ -116,9 +117,10 @@
           "expectedFaces": 4096
         },
         "faceBudget": 1000,
-        "atlasTexels": 4096000,
+        "texelsPerFace": 4096,
         "simplification": {
           "method": "source-meshoptimizer",
+          "targetFaces": 1000,
           "maximumErrorMeters": 75
         },
         "primitive": "u",
