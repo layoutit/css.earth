@@ -1,6 +1,6 @@
 /** Dependency-free source selection: application inputs for semantic seeds, `site/` for the refactor declaration gate. */
 import { execFileSync } from 'node:child_process';
-export const applicationSource = (path: string): boolean => /^(?:site\/|src\/|packages\/[^/]+\/src\/|astro\.config\.mts$)/u.test(path) && !/\.(?:test|spec)\.[cm]?[jt]sx?$/u.test(path);
+export const applicationSource = (path: string): boolean => /^(?:site\/|src\/|packages\/[^/]+\/src\/)/u.test(path) && !/\.(?:test|spec)\.[cm]?[jt]sx?$/u.test(path);
 /** The declaration gate guards plan 7's scope only: files under `site/`. Moves elsewhere (object data, packages) need no declaration. */
 export const siteSource = (path: string): boolean => path.startsWith('site/') && !/\.(?:test|spec)\.[cm]?[jt]sx?$/u.test(path);
 /** Git output for a whole-repository move list runs past Node's 1 MiB default; a gate that dies on a big move would block it. */

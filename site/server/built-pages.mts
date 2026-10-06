@@ -1,4 +1,4 @@
-// `CSSEARTH_BUILD_PAGES=/,/earth/ astro build`: a production build that prerenders only the named object pages and the
+// `CSSEARTH_BUILD_PAGES=/,/earth/ astro build --config site/astro.config.mts`: a production build that prerenders only the named object pages and the
 // scene routes they mount, for a cold test that opens a few pages, not all of them. Unset, every route builds as before.
 
 /** A page: an object's mounts its own scene, or `sceneId`'s when it shows another's (a system's mounts its host's). */

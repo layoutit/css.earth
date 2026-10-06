@@ -5,7 +5,7 @@
   },
   "include": [
     "**/*.mts",
-    "../../astro.config.mts",
+    "../../site/astro.config.mts",
     "../../eslint.config.mts",
     "../../site/env.d.ts"
   ],

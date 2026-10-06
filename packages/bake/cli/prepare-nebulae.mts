@@ -31,7 +31,7 @@ for (const entry of (await readdir(objects,{withFileTypes:true})).filter(entry=>
   } else continue;
   results.push(result);
   // An unavailable object's `prepared/` output is incomplete by definition: no manifest to write, and the
-  // shared context-availability check (astro.config.mts) is what reports it, not this inventory.
+  // shared context-availability check (site/astro.config.mts) is what reports it, not this inventory.
   if (result.status === 'unavailable') continue;
   // Its whole `prepared/` bake (this loop's only output) is the R2
   // inventory — a full nested closure, no exclusions needed since `object.json` and the `.prepared-<pid>`

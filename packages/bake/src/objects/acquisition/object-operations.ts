@@ -52,7 +52,7 @@ export async function runOperations(mode:string,id:string,argumentsList:string[]
  }
  if(mode==='assemble'){
   const productionRoot=resolve(root,'dist/scenes',id);
-  // ASSET_ORIGIN builds never populate dist/scenes (astro.config.mts removes the publicDir
+  // ASSET_ORIGIN builds never populate dist/scenes (site/astro.config.mts removes the publicDir
   // copy once the build finishes): nothing here needs verifying or pruning.
   if(process.env.ASSET_ORIGIN?.trim()&&!(await lstat(productionRoot).catch(()=>null))?.isDirectory())return parseRuntimeManifest(JSON.parse(await readFile(inventoryPath,'utf8')) as unknown,id);
   return assembleRuntimeAssets({id,inventory:JSON.parse(await readFile(inventoryPath,'utf8')) as unknown,productionRoot});

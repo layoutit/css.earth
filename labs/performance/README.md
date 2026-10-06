@@ -8,7 +8,7 @@ A cold test of first-visit bytes and load time needs a production build, but onl
 
 ```sh
 ASSET_ORIGIN=https://earth-assets.lowpoly.cc pnpm prepare:catalog
-ASSET_ORIGIN=https://earth-assets.lowpoly.cc CSSEARTH_BUILD_PAGES=/,/earth/ pnpm exec astro build
+ASSET_ORIGIN=https://earth-assets.lowpoly.cc CSSEARTH_BUILD_PAGES=/,/earth/ pnpm exec astro build --config site/astro.config.mts
 pnpm preview --host 0.0.0.0
 ```
 
@@ -30,7 +30,7 @@ It needs Xcode, `ios_webkit_debug_proxy` and AXe (`brew install cameroncooke/axe
 - A `screenshot` is the full device or simulator screen (`.screen.png`); a `viewport` is only the Web Inspector page image (`.viewport.png`). A device screenshot fails if the native screen service is unavailable; it never falls back to the page image. Check the screenshots before reading any numbers: a tap on the wrong control records the wrong moment.
 - `--native page` (the default) traces only the web content process holding the page. `--native all` records every process on the Mac, for compositor and GPU questions; its trace is several times larger. `--native off` skips it. A recording that fails to stop within 30 s is killed and the report says so.
 
-For JavaScript names, build with source maps: `CSSEARTH_PERFORMANCE_SOURCEMAPS=1 pnpm build:renderer`, then `astro build --mode performance`, and pass that output as `--dist`. Output goes to `output/performance/ios-captures/<name>-<time>/`: `report.json`, a `README.md` summary, `native.trace` (open it in Instruments) and the screenshots.
+For JavaScript names, build with source maps: `CSSEARTH_PERFORMANCE_SOURCEMAPS=1 pnpm build:renderer`, then `astro build --config site/astro.config.mts --mode performance`, and pass that output as `--dist`. Output goes to `output/performance/ios-captures/<name>-<time>/`: `report.json`, a `README.md` summary, `native.trace` (open it in Instruments) and the screenshots.
 
 The simulator runs on the Mac's CPU and GPU, so absolute times are not a phone's. Compare builds with the same steps.
 
@@ -59,7 +59,7 @@ Every capture writes `input.json`: each pointer event the page received and the 
 
 For a local iPad preview, open Safari on the unlocked device and enable Settings > Apps > Safari > Advanced > Web Inspector. Run `pnpm ipad` (or `pnpm ipad --route /jupiter/`). It starts the dev server on the Mac's LAN, navigates the existing Safari tab and confirms its URL. It reuses a server on port 4210 only if that server belongs to this checkout. `--open-only` uses an already running server; `--port` and `--address` override the defaults.
 
-`--device [udid]` records a device instead of the simulator. Trust this Mac, keep the device unlocked (Auto-Lock off while plugged in) with the page open in Safari, and start the dev server on the network (`pnpm exec astro dev --host 0.0.0.0 --port 4210`). An `--open` path that starts with `/` loads from this Mac's address (`--origin` overrides it):
+`--device [udid]` records a device instead of the simulator. Trust this Mac, keep the device unlocked (Auto-Lock off while plugged in) with the page open in Safari, and start the dev server on the network (`pnpm exec astro dev --config site/astro.config.mts --host 0.0.0.0 --port 4210`). An `--open` path that starts with `/` loads from this Mac's address (`--origin` overrides it):
 
 ```sh
 node labs/performance/ios-capture.mts --device --name ipad-drag --open /jupiter/ --seconds 15
