@@ -18,13 +18,15 @@ test('a star no pixel shows gives no light curve, and a broken answer is refused
   assert.throws(() => parseLightCurve({ ...printed, whole: { periodDays: 'x' } }), /whole sector period/u);
 });
 
-test('a rotation is believed from one sector only when the peak is strong, both orbits show it and it is short enough', () => {
+test('a rotation is believed from one sector only when the peak is strong, both orbits show it, it is short enough and the light swings enough', () => {
   const curve = parseLightCurve({ ...printed, halves: [{ ...peak, periodDays: 3.76 }, { ...peak, periodDays: 3.88 }] })!;
   assert.deepEqual(rotationVerdict(curve), { detected: true, periodDays: 3.88, amplitude: 0.031 });
   assert.match(rotationVerdict({ ...curve, whole: { ...peak, power: 0.21 } }).reason!, /No period stands out/u);
   assert.match(rotationVerdict({ ...curve, halves: [{ ...peak, periodDays: 3.19 }, { ...peak, periodDays: 5.64 }] }).reason!, /two orbits do not show the same period \(3\.19 d and 5\.64 d/u);
   assert.match(rotationVerdict({ ...curve, halves: [curve.halves[0]!, null] }).reason!, /two orbits/u);
   const slow = { ...peak, periodDays: 12.72 }, long = rotationVerdict({ ...curve, whole: slow, halves: [slow, slow] });
-  assert.deepEqual([long.detected, long.periodDays], [false, 12.72]); assert.match(long.reason!, /second sector/u);
+  assert.deepEqual([long.detected, long.periodDays], [false, undefined]); assert.match(long.reason!, /12\.72 d is longer than the 9 d a sector can vouch for/u);
+  // The three wrong periods of the labelled stars all swung under 0.7%.
+  assert.match(rotationVerdict({ ...curve, whole: { ...peak, amplitude: 0.0051 } }).reason!, /swings by 0\.51% at 3\.88 d, under the 0\.7%/u);
   assert.match(rotationVerdict({ ...curve, saturated: true }).reason!, /saturates/u);
 });

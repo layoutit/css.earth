@@ -30,10 +30,11 @@ export interface SectorLightCurve { readonly frames: number; readonly aperturePi
   readonly time: readonly number[]; readonly flux: readonly number[] }
 
 /** When one sector's light curve is believed to show the star turning. Settled on our own stars whose rotation the
- * catalogues print and whose light the mission also measured: with these values every period the rule accepted was the
- * mission's or the catalogue's (17 of 17 on the first 37 stars); without the limit on the period, 2 of 19 were wrong, both
- * longer than 9 days, where a sector holds too few turns. */
-export const ROTATION_POWER = 0.3, ORBIT_AGREEMENT = 0.2, ONE_SECTOR_DAYS = 9;
+ * catalogues print and whose light the mission also measured (76 of them measured from pixels): with these values every
+ * period the rule accepted was the catalogue's or the mission's, 24 of 24. Without the floor on the light's swing 3 of 33
+ * were wrong, all swinging under 0.7%; and both periods over 9 days that passed the other tests were wrong, a sector
+ * holding too few turns and the spacecraft's own 13.7-day orbit leaving its mark in the light. */
+export const ROTATION_POWER = 0.3, ORBIT_AGREEMENT = 0.2, ONE_SECTOR_DAYS = 9, ROTATION_SWING = 0.007;
 export interface RotationVerdict { readonly detected: boolean; readonly periodDays?: number; /** Peak to peak, as a share of the mean light. */ readonly amplitude?: number; readonly reason?: string }
 
 /** Whether a sector's light curve shows the star's rotation, and why not when it does not. */
@@ -42,7 +43,8 @@ export function rotationVerdict(curve: SectorLightCurve): RotationVerdict {
   if (curve.saturated) return { detected: false, reason: 'The star saturates the detector: its light has bled out of the aperture.' };
   if (whole.power < ROTATION_POWER) return { detected: false, reason: `No period stands out: the strongest, ${days} d, has a periodogram power of ${whole.power.toFixed(2)}, under the ${ROTATION_POWER} a rotation asks for.` };
   if (!halves.every(half => half !== null && Math.abs(half.periodDays - whole.periodDays) <= ORBIT_AGREEMENT * whole.periodDays)) return { detected: false, reason: `The sector's two orbits do not show the same period (${halves.map(half => half === null ? 'none' : `${half.periodDays.toFixed(2)} d`).join(' and ')} against ${days} d over both).` };
-  if (whole.periodDays > ONE_SECTOR_DAYS) return { detected: false, periodDays: days, reason: `A period of ${days} d is longer than the ${ONE_SECTOR_DAYS} d one sector can vouch for: a second sector has to show it too.` };
+  if (whole.periodDays > ONE_SECTOR_DAYS) return { detected: false, reason: `A period of ${days} d is longer than the ${ONE_SECTOR_DAYS} d a sector can vouch for.` };
+  if (whole.amplitude < ROTATION_SWING) return { detected: false, reason: `The light swings by ${(100 * whole.amplitude).toFixed(2)}% at ${days} d, under the ${(100 * ROTATION_SWING).toFixed(1)}% at which a period from these pixels can be trusted.` };
   return { detected: true, periodDays: days, amplitude: whole.amplitude };
 }
 

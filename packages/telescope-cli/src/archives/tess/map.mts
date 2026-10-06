@@ -15,7 +15,7 @@ import { runTool } from './toolchain.mts';
 export const MAP_DEGREE = 5, PRIOR_WIDTH = 0.01;
 /** The grid a map is written on, degrees: the one the star pages' other maps use. */
 export const GRID_STEP_DEGREES = 5;
-/** The tilt a map is made at when the star's record has none: the one the mapping papers assume when it is unconstrained. */
+/** The tilt a map is made at when none is known for the star: half of all axes that point at random are tilted less than this (cos 60° = 0.5). */
 export const ASSUMED_TILT_DEGREES = 60;
 
 export interface BrightnessMap { readonly longitudes: readonly number[]; readonly latitudes: readonly number[]; /** Brightness over the map's mean, rows by latitude from south. */ readonly values: readonly (readonly number[])[];
