@@ -1,7 +1,7 @@
 /** A picture ESA publishes for Hubble or Webb (esahubble.org, esawebb.org): what its page says of it, and the sky tags
  * its JPEG carries. The page gives the title, the credit, the release date and the colors; the file gives its own size,
  * and in its embedded Astronomy Visualization Metadata the scale, the direction of north and one place on the sky. */
-import { decodeEntities } from '../orbit.mts';
+import { decodeEntities } from '../archives/archives.mts';
 import type { Archive } from '../archives/archives.mts';
 
 /** A JPEG's sky tags, for the file as downloaded: degrees a pixel, north's turn counter-clockwise from up, and the sky

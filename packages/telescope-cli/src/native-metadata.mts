@@ -1,6 +1,6 @@
 /** Product metadata, never catalogue capabilities. Deliberately bounded format support. */
 import { requireArray, requireRecord, requireString, requireFiniteNumber } from '@cssearth/core';
-import type { ProductFacts } from './request-satisfaction.mts';
+import type { ResolutionEvidence } from '@cssearth/objects';
 
 export interface NativeMetadata {
   readonly fitsHdu?: number;
@@ -57,7 +57,13 @@ function units(raw: unknown, source: string, limitations: string[]): NativeMetad
   const value = raw.trim();
   return { value, source };
 }
-type MetadataFacts = Pick<ProductFacts, 'nativeMetadata' | 'wavelengthIntervalsMicrometres' | 'angularResolutionArcsec' | 'resolutionEvidence'>;
+/** The product facts a native label establishes: the metadata itself, its wavelength coverage and any measured resolution. */
+export interface MetadataFacts {
+  readonly nativeMetadata?: NativeMetadata;
+  readonly wavelengthIntervalsMicrometres?: readonly (readonly [number, number])[];
+  readonly angularResolutionArcsec?: number;
+  readonly resolutionEvidence?: readonly ResolutionEvidence[];
+}
 const missingResolution = 'No product-specific measured PSF or calibrated beam; pixel spacing and nominal optics do not establish achieved resolution.';
 
 /** ISIS groups are confined to the attached label, not binary data or original uncalibrated labels. */

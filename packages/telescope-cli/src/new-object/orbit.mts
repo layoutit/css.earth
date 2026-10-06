@@ -8,7 +8,7 @@
  *
  * The conversion keeps an imaged orbit at its fitted angular size and places it at the host's Gaia distance, as the imaged planets
  * already shipped do, and stores the argument of periastron as the star's (orbitize!'s is the companion's). */
-import type { Archive } from './archives/archives.mts';
+import { decodeEntities, type Archive } from './archives/archives.mts';
 
 export const AU_KM = 149597870.7, DAYS_PER_YEAR = 365.25;
 export const NASA_TAP = 'https://exoplanetarchive.ipac.caltech.edu/TAP/sync';
@@ -19,10 +19,6 @@ export interface HostedOrbit {
   readonly ascendingNodePositionAngleDegrees: number; readonly sources: Readonly<Record<string, string>>;
 }
 const round = (value: number, digits: number) => Number(value.toFixed(digits));
-/** The archive writes reference labels as HTML: accented author names arrive as entities. */
-const NAMED_ENTITIES: Record<string, string> = { amp: '&', lt: '<', gt: '>', quot: '"', apos: "'", nbsp: ' ', aacute: 'á', eacute: 'é', iacute: 'í', oacute: 'ó', uacute: 'ú', agrave: 'à', egrave: 'è', ntilde: 'ñ', uuml: 'ü', ouml: 'ö', auml: 'ä', ccedil: 'ç', szlig: 'ß', oslash: 'ø', aring: 'å', Aacute: 'Á', Eacute: 'É', Oslash: 'Ø', ecirc: 'ê', ocirc: 'ô', acirc: 'â', scaron: 'š', zcaron: 'ž', ccaron: 'č', mu: 'µ', deg: '°' };
-export const decodeEntities = (text: string) => text.replace(/&(#x[0-9a-f]+|#\d+|[a-zA-Z]+);/gu, (whole, code: string) =>
-  code.startsWith('#x') ? String.fromCodePoint(parseInt(code.slice(2), 16)) : code.startsWith('#') ? String.fromCodePoint(Number(code.slice(1))) : NAMED_ENTITIES[code] ?? whole);
 const mod360 = (value: number) => ((value % 360) + 360) % 360;
 
 /** orbitize!'s orbit (packages/telescope-cli/src/new-object/hosted-orbits/posterior-pick.py's orbit.json) as a hosted orbit around a host of `hostRadiusKm`

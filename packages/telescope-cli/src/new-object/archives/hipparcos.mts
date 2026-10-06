@@ -26,7 +26,7 @@ import { chooseGravity, citedGravity, type GravityChoice } from './gravity.mts';
 import { readIauNames } from './iau-names.mts';
 import { slug } from '../identity.mts';
 import { sunWidth, wikipediaQuotes } from '../prose.mts';
-import type { Cited } from '../spec.mts';
+import type { Cited } from '../spec-types.mts';
 
 export const MCDONALD = { source: 'J/MNRAS/471/770/table2', paper: 'https://doi.org/10.1093/mnras/stx1433', credit: 'McDonald, Zijlstra & Watson (2017), MNRAS 471, 770' };
 export const XHIP = { catalogue: 'V/137D/XHIP', url: 'https://doi.org/10.1134/S1063773712050015', credit: 'Anderson & Francis (2012), Astronomy Letters 38, 331 (XHIP), Hipparcos astrometry' };

@@ -10,7 +10,7 @@ import { copyFile, mkdir, stat } from 'node:fs/promises';
 import { basename, resolve } from 'node:path';
 import { pds3Values } from '@cssearth/telescope';
 import { fileSize } from '@cssearth/telescope/node';
-import type { FamilyHandler, FamilyOperation } from '../../family-handlers.mts';
+import type { FamilyHandler, FamilyOperation } from '../../family-handler.mts';
 import type { AxisDescriptor, DescriptorIssue, DescriptorMember, ProductComponent, ProductDescriptor, UncertaintyDescriptor } from '../../product-descriptor.mts';
 import { assertPlanetaryProductSemantics, planetaryOutputPolicy } from '../../planetary-depth-policy.mts';
 import { JUNO_MWR_NH3_F16_PROFILE } from '../../observation-families.mts';

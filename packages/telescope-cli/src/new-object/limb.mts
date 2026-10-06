@@ -26,9 +26,10 @@
 import { interpolateGrid, readHowarthNode, readLimbGrid, type GridNode, type QuadraticLimbDarkening } from '@cssearth/bake/objects/stellar';
 import { VIZIER_ASU, type Archive } from './archives/archives.mts';
 import { fromPicaso, PICASO } from './picaso-limb.mts';
+import type { LimbChoice, LimbGridKey, WhiteDwarfAtmosphere } from './limb-choice.mts';
 
 interface Grid {
-  readonly key: 'atlas' | 'tlusty' | 'tlusty-b' | 'neilson' | 'phoenix' | 'white-dwarf'; readonly inputId: string; readonly file: string; readonly source: string; readonly cite: string; readonly models: string; readonly band: string;
+  readonly key: LimbGridKey; readonly inputId: string; readonly file: string; readonly source: string; readonly cite: string; readonly models: string; readonly band: string;
   readonly vizier: string; readonly modelColumns: Readonly<Record<string, string>>;
   readonly columns: { readonly teff: string; readonly logg: string; readonly u1: string; readonly u2: string; readonly mass?: string };
   readonly form: (teff: string, logg: string, mass?: string) => Record<string, string>;
@@ -38,8 +39,6 @@ interface Grid {
   readonly window?: { readonly teff: number; readonly logg: number };
 }
 /** The atmospheres Claret et al. (2020) tabulate for white dwarfs. */
-export const WHITE_DWARF_ATMOSPHERES = ['DA', 'DB', 'DBA'] as const;
-export type WhiteDwarfAtmosphere = typeof WHITE_DWARF_ATMOSPHERES[number];
 const ATMOSPHERE_WORDS: Readonly<Record<WhiteDwarfAtmosphere, string>> = { DA: 'pure-hydrogen (DA) white-dwarf', DB: 'pure-helium (DB) white-dwarf', DBA: 'helium with trace hydrogen (DBA) white-dwarf' };
 /** Claret et al. (2020) for one atmosphere class: 5,000 K apart above 20,000 K, so the first request looks 6,000 K either side. */
 export const whiteDwarfGrid = (atmosphere: WhiteDwarfAtmosphere): Grid => ({ key: 'white-dwarf', inputId: 'claret-2020-limb-darkening', file: 'photometry/claret-2020-v-quadratic.tsv', source: 'J/A+A/634/A93/tableab',
@@ -80,16 +79,6 @@ const rewritten = (grid: Grid, text: string) => (grid.rewrite ?? []).reduce((out
 const REPLACEMENTS = [{ pattern: '^#.*\\n', flags: 'gm', replacement: '' }, { pattern: '^\\s*\\n', flags: 'gm', replacement: '' }];
 const LICENSE = { license: 'VizieR catalogue data, public with citation of the paper and CDS', licenseEvidence: ['https://cds.unistra.fr/vizier-org/licences_vizier.html'] };
 
-export interface LimbChoice {
-  readonly limbDarkening?: Record<string, unknown>;
-  /** The source files the law is read from, their acquisition steps and manifest inputs. */
-  readonly files?: readonly { readonly path: string; readonly text: string }[];
-  readonly acquisitions?: readonly Record<string, unknown>[]; readonly inputs?: readonly Record<string, unknown>[]; readonly coefficients?: QuadraticLimbDarkening;
-  /** The sentence the dataset qualification, README and NOTICE use. */
-  readonly sentence: string; readonly credit?: string; readonly grid?: Grid['key'] | 'howarth' | 'picaso';
-  /** A transcribed row of a model grid, the nearest to a star no grid reaches (star-limb.mts). */
-  readonly nearestModel?: boolean;
-}
 
 // The node range a request names, written as the grid writes its values (the form every existing package restores with).
 const range = (values: readonly number[]) => `${Math.min(...values)}..${Math.max(...values)}`;
