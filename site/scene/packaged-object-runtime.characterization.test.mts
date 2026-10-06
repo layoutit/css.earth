@@ -19,7 +19,7 @@ mock.module('@cssearth/renderer', { namedExports: { ...renderer,
   createWorldContextObjectRuntime(config: unknown) { configuration = config; return (_stage: HTMLElement, options: unknown) => { mountedOptions = options; return mounted; }; },
   async loadNavigableObject(_descriptor: unknown, reader: { read(reference: string, signal?: AbortSignal): Promise<ArrayBuffer> }, _bind: unknown, signal?: AbortSignal) { return reader.read(reference, signal); },
 } });
-mock.module(new URL('../world/inside-view.mts', import.meta.url).href, { namedExports: { insideViewDescriptor: async (value: unknown) => value } });
+mock.module(new URL('../world/systems/inside-view.mts', import.meta.url).href, { namedExports: { insideViewDescriptor: async (value: unknown) => value } });
 mock.module(new URL('../directory/startup-requests.mts', import.meta.url).href, { namedExports: {
   async startupFetch(url: string, options: { signal?: AbortSignal }) { requests.push({ url, signal: options.signal }); return new Response(new Uint8Array([1, 2, 3]), { status }); },
 } });

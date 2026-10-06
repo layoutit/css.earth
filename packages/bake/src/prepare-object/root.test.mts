@@ -19,7 +19,7 @@ test('an explicit checkout owns object lookup, geometry lookup and both child ex
     assert.deepEqual(await geometry.commands(['root-fixture'], { root }), [['node', 'packages/bake/cli/prepare-solar-geometry.mts']]);
     for (const [step, script] of [
       ['builds', 'packages/bake/cli/check-stale-builds.mts'],
-      ['sources', 'site/build/prepare/author-source-records.mts'],
+      ['sources', 'site/build/prepare/catalog/author-source-records.mts'],
     ]) {
       await put(script!, `import { writeFileSync } from 'node:fs'; writeFileSync('${step}.cwd', process.cwd());`);
       assert.equal(await prepareObjects(['root-fixture'], { root, from: step, to: step, progress: () => {} }), true);

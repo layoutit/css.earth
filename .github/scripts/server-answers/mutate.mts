@@ -59,7 +59,7 @@ try {
     await previewChanged('static-byte', 'dist/earth/index.html', '<!DOCTYPE html>', '<!DOCTYPE htmL>');
     await previewChanged('query-trigger', 'site/server/search-route.mts', "['q', 'dataset'", "['dataset'");
     await previewChanged('prepared-range', 'site/server/prepared-files.mts', 'response.writeHead(200,', 'response.writeHead(request.headers.range ? 206 : 200,');
-    await previewChanged('query-html', 'site/server/search-server.mts', 'Buffer.from(await answer.arrayBuffer())', "Buffer.from((await answer.text()) + (answer.headers.get('content-type')?.includes('text/html') && url.searchParams.has('q') ? '<!-- changed query-bearing HTML -->' : ''))");
+    await previewChanged('query-html', 'site/server/search/search-server.mts', 'Buffer.from(await answer.arrayBuffer())', "Buffer.from((await answer.text()) + (answer.headers.get('content-type')?.includes('text/html') && url.searchParams.has('q') ? '<!-- changed query-bearing HTML -->' : ''))");
     const restored = 'output/server-answers-preview-mutations/restored';
     await run('restored-record', [scripts + 'record.mts', '--target', 'preview', '--dist', 'dist', '--out', restored], 0);
     await run('restored-check', [scripts + 'check.mts', '--recorded', restored], 0);
@@ -68,9 +68,9 @@ try {
   await run('base-bundle', bundleArgs, 0);
   await run('base-record', [scripts + 'record.mts', '--target', 'cloudflare', '--dist', 'dist', '--out', base], 0);
   await run('base-check', [scripts + 'check.mts', '--recorded', base], 0);
-  await changed('header', 'site/server/search-response.mts', "headers.set('cache-control', 'private, no-store')", "headers.set('cache-control', 'public, max-age=9')");
-  await changed('status', 'site/server/find.mts', "return json({ error: 'Pass object=<body id>.' }, 400)", "return json({ error: 'Pass object=<body id>.' }, 401)");
-  await changed('body', 'site/server/find.mts', 'Pass object=<body id>.', 'Deliberately changed response.');
+  await changed('header', 'site/server/search/search-response.mts', "headers.set('cache-control', 'private, no-store')", "headers.set('cache-control', 'public, max-age=9')");
+  await changed('status', 'site/server/search/find.mts', "return json({ error: 'Pass object=<body id>.' }, 400)", "return json({ error: 'Pass object=<body id>.' }, 401)");
+  await changed('body', 'site/server/search/find.mts', 'Pass object=<body id>.', 'Deliberately changed response.');
   const missing = resolve(copy, 'src/objects/observable-universe/prepared/world-index.json');
   await rename(missing, missing + '.mutation');
   // The Worker carries the project files the page handler reads in its script: one missing fails the bundle, not a request.
@@ -80,7 +80,7 @@ try {
   const route = resolve(copy, 'site/server/search-route.mts'), routeText = await readFile(route, 'utf8');
   try {
     await writeFile(route, routeText.replace("['q', 'dataset'", "['dataset'"));
-    await run('query-pure-logic', ['--test', '--test-name-pattern=The page route keeps', 'site/server/search-response.test.mts'], 1);
+    await run('query-pure-logic', ['--test', '--test-name-pattern=The page route keeps', 'site/server/search/search-response.test.mts'], 1);
   } finally { await writeFile(route, routeText); }
   await run('prepared-base', ['.github/scripts/server-answers/prepared-probe.mts'], 0);
   const prepared = resolve(copy, 'site/server/prepared-files.mts'), preparedText = await readFile(prepared, 'utf8');

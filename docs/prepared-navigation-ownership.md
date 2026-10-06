@@ -113,7 +113,7 @@ comparisons and the interpretation used for its model.
 ## Verification
 
 - `node --test packages/objects/src/node/prepared-activation-transport.test.mts` checks the served transport carries the runtime whole.
-- `node --test site/navigation/navigation-lifecycle.test.mts site/scene/scene-session.test.mts`
+- `node --test site/navigation/navigation-lifecycle.test.mts site/scene/session/scene-session.test.mts`
   checks navigation and retained scene state.
 - `node --test site/journeys/rendered-page.test.mts` parses built HTML for the
   information-tab rules. It does not run Chrome or verify animation and flight behavior.

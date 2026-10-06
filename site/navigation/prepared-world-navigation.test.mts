@@ -1,5 +1,5 @@
 import { sourceTest } from '@cssearth/objects/node/source-test';
-import { readSystemViewFile } from '../world/system-view-file.test-support.mts';
+import { readSystemViewFile } from '../world/systems/system-view-file.test-support.mts';
 const test = sourceTest();
 import assert from 'node:assert/strict';
 import { getEventListeners } from 'node:events';
@@ -18,7 +18,7 @@ import type { ObjectSceneLifecycle } from '@cssearth/renderer/runtime/object-sce
 import type { ObjectPreparationView } from '@cssearth/renderer/runtime/prepared-object-navigation.ts';
 import type { SceneFactory } from '../browser/browser-types.mts';
 import type { WorldHandoff } from './prepared-world-navigation.mts';
-import { SYSTEM_VIEW_HOSTS, loadSystemView } from '../world/system-framing.mts';
+import { SYSTEM_VIEW_HOSTS, loadSystemView } from '../world/systems/system-framing.mts';
 // System framing's candidates load after the first body mounts in the app; these tests need them loaded.
 await Promise.all([...SYSTEM_VIEW_HOSTS].map(id => loadSystemView(id, readSystemViewFile)));
 type Mutable<T> = { -readonly [K in keyof T]: T[K] };

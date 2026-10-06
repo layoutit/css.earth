@@ -28,7 +28,7 @@ test('disposing a replaced registration preserves the current reader', () => {
 });
 
 test('world resources import the lower held-address reader without depending on history', () => {
-  const world = readFileSync(new URL('../world/application-world-resources.mts', import.meta.url), 'utf8');
+  const world = readFileSync(new URL('../world/application/application-world-resources.mts', import.meta.url), 'utf8');
   assert.match(world, /import \{ navigationHref \} from '\.\.\/model\/navigation-href\.mts';/u);
   assert.doesNotMatch(world, /from '\.\.\/navigation\/navigation-history\.mts'/u);
 });

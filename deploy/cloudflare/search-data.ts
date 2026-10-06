@@ -1,10 +1,10 @@
-// The Worker's site/server/search-data.mts: the same exports, read from the built site's assets instead of a disk.
+// The Worker's site/server/search/search-data.mts: the same exports, read from the built site's assets instead of a disk.
 // deploy/cloudflare/bundle-worker.mts swaps this module in, so the handlers and their warm-instance cache
-// (site/server/find.mts keys it on `readPublicFile`) are the ones the preview server runs.
+// (site/server/search/find.mts keys it on `readPublicFile`) are the ones the preview server runs.
 import { parseCatalogueIndex, type CatalogueIndexEntry } from '../../site/search/catalogue-index.mts';
 import type { FeatureIndexPin } from '../../site/search/feature-search.mts';
-import type { ReadPrepared, SearchData } from '../../site/server/search-data.mts';
-import { keptLoad } from '../../site/server/kept-load.mts';
+import type { ReadPrepared, SearchData } from '../../site/server/search/search-data.mts';
+import { keptLoad } from '../../site/server/search/kept-load.mts';
 import { readAssetJson } from './assets.ts';
 
 export type { ReadPrepared, SearchData };

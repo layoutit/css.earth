@@ -57,7 +57,7 @@ dependency binding and a behavioral test, not a body-specific UI condition.
 After changing source records or bindings, rebuild the catalogues:
 
 ```sh
-node site/build/prepare/prepare-facilities.mts --catalog-only
+node site/build/prepare/catalog/prepare-facilities.mts --catalog-only
 ```
 
 The lineage establishes the recorded source chain, not a fresh acquisition or a

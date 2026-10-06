@@ -51,6 +51,16 @@ test('lateral pairs are directed allowances; longest folder prefix wins', () => 
   assert.equal(project({ ...input, tiers: { ...lateralTiers, lateral: [['site/b', 'site/a']] } }).failed, true);
 });
 
+test('a subfolder belongs to its parent folder and tier: nested siblings import each other, and its upward imports still fail', () => {
+  const one = 'site/a/x/one.mts', two = 'site/a/y/two.mts';
+  const nested = (edges: Edge[]) => project({ declarations: declarations(edges, [one, two, b]), moves: {}, tiers });
+  const siblings = nested([{ from: one, to: two, kind: 'value' }, { from: b, to: one, kind: 'type' }]);
+  assert.deepEqual([siblings.failed, siblings.unassigned, siblings.views.all?.lateral, siblings.views.all?.upward], [false, [], [], []]);
+  const upward = nested([{ from: one, to: b, kind: 'value' }]);
+  assert.equal(upward.failed, true);
+  assert.deepEqual(upward.views.value?.upward.map(edge => edge.from), [one]);
+});
+
 test('unassigned isolated files fail; external targets are ignored and counted; root allow works', () => {
   const result = project({ declarations: declarations([{ from: a, to: 'node:fs', kind: 'value' }], [a, 'site/orphan.mts']), moves: {}, tiers });
   assert.deepEqual(result.unassigned, ['site/orphan.mts']); assert.equal(result.failed, true);

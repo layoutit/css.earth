@@ -43,7 +43,7 @@ This is one scenario. Nobody has detected an atmosphere on TRAPPIST-1d. JWST's t
 - `source.test.mts` checks the pins, and that the planet turns synchronously
   with longitude 0 on its star and orbits it;
   [`hostedOrbits.test.ts`](../../../packages/astronomy/src/hostedOrbits.test.ts) checks that it transits at the published times.
-- [`object-systems.test.mts`](../../../site/world/object-systems.test.mts) checks that the TRAPPIST-1 system holds all seven planets.
+- [`object-systems.test.mts`](../../../site/world/systems/object-systems.test.mts) checks that the TRAPPIST-1 system holds all seven planets.
 - Driven in a real browser: the seven orbits and labels draw around the star in the system view, and this planet's page opens on the
   climate model at the measured radius.
 
