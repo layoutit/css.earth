@@ -25,7 +25,7 @@ interface SerializedSnapshot {id: string; bytes: string;}
 interface NasaRecord {id: number; title: {rendered: string}; link: string; modified: string;}
 
 /** The snapshots of the checkout the command runs in. */
-const OUTPUT_DIRECTORY = resolve(checkoutProjectRoot(import.meta.url), "data/object-information");
+const OUTPUT_DIRECTORY = resolve(checkoutProjectRoot(import.meta.url), "src/sources/object-information");
 
 const SELECTED_SECTIONS = new Set([
   "Introduction",

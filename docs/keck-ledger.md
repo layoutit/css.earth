@@ -88,4 +88,4 @@ carrying the same number, so 52 Europa is not Jupiter's moon.
 | iapetus | 140 | NIRSPEC 114, NIRC 26 |
 | venus | 138 | HIRES 120, ESI 14, NIRC 4 |
 
-127 objects matched in all; the rest are in [the ledger](../data/keck/ledger.json).
+127 objects matched in all; the rest are in [the ledger](../src/sources/keck/ledger.json).

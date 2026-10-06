@@ -6,7 +6,7 @@ import { pathToFileURL } from 'node:url';
 import { loadTargetAssociations, parseTargetAssociationSources, type TargetAssociationSource, WORKSPACE } from '@cssearth/telescope/node';
 
 const ROOT = WORKSPACE;
-export const TARGET_ASSOCIATIONS = resolve(ROOT, 'data/telescopes/target-associations.json');
+export const TARGET_ASSOCIATIONS = resolve(ROOT, 'src/sources/telescopes/target-associations.json');
 
 export async function verifyHstTargetAssociations(sources: readonly TargetAssociationSource[]) {
   const hst = sources.filter(entry => entry.collection === 'HST');

@@ -79,7 +79,7 @@ cycle. Share anything else through `@cssearth/core` or another package. Prepared
   bibliography citations of the prepared galaxy and cluster catalogues, and the digest that says whether a recorded
   preparation still applies to a provenance record; the context packages' provenance, compiled from their manifests or read
   as installed, and the facility artwork refresh; and the investigation ledgers beside each object and facility with the
-  shared surveys they quote (`data/investigations/`) and the report over them (`packages/bake/cli/report-investigations.mts`
+  shared surveys they quote (`src/sources/investigations/`) and the report over them (`packages/bake/cli/report-investigations.mts`
   is its command). The application passes in the route its context objects show at
   (`CONTEXT_ROUTE`) and its dataset routes. It imports `runtime-source`, `objects/content` and `delivery`. `packages/bake/cli/acquire-moon-catalogues.mts` refreshes the pinned
   JPL moon catalogue (`site/source/moon-catalogues.json`). Its tests are `node --test` suites in `src/sources/`.
