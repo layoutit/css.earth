@@ -23,7 +23,7 @@ import { isRecord } from '@cssearth/core';
 import { WORKSPACE } from '@cssearth/telescope/node';
 import { ASSUMED_TILT_DEGREES, brightnessMap, brightnessTable } from './map.mts';
 import { GAIA_EPOCH_YEAR, lightRefusal, pixelLight, type PixelLight } from './neighbours.mts';
-import { besideCatalogued, BIN_DAYS, rotationVerdict, sectorLightCurve, type RotationVerdict } from './photometry.mts';
+import { besideCatalogued, BIN_DAYS, rotationVerdict, sectorLightCurve, withinBreakup, type RotationVerdict } from './photometry.mts';
 import { cadenceMinutes, fetchCutout, sectorsAt, type ImagedSector } from './pixels.mts';
 import { toolchainPins } from './toolchain.mts';
 
@@ -34,7 +34,7 @@ export const receiptPath = (id: string) => resolve(WORKSPACE, 'output/tess', id,
 export type TiltFrom = 'page' | 'record' | 'assumed';
 /** A star's place at `epochYear` and how it moves on the sky, degrees a year (the motion in right ascension as an arc on the sky). */
 export interface StarPlace { readonly id: string; readonly name: string; readonly raDegrees: number; readonly decDegrees: number; readonly epochYear: number; readonly motionRaDegreesPerYear: number; readonly motionDecDegreesPerYear: number;
-  /** The rotation period the star's record holds from the catalogues. */ readonly cataloguedPeriodDays?: number; readonly tiltDegrees?: number; readonly tiltSource?: string; readonly tiltFrom: TiltFrom }
+  /** The rotation period the star's record holds from the catalogues. */ readonly cataloguedPeriodDays?: number; /** The period of an orbit at the star's surface, from its recorded radius and mass: it cannot turn faster. */ readonly fastestTurnDays?: number; readonly tiltDegrees?: number; readonly tiltSource?: string; readonly tiltFrom: TiltFrom }
 /** Where the star is in a given year. A nearby star crosses a TESS pixel in a few years. */
 export function placeAt(star: Pick<StarPlace, 'raDegrees' | 'decDegrees' | 'epochYear' | 'motionRaDegreesPerYear' | 'motionDecDegreesPerYear'>, year: number): { readonly raDegrees: number; readonly decDegrees: number } {
   const years = year - star.epochYear, dec = star.decDegrees + star.motionDecDegreesPerYear * years;
@@ -64,7 +64,8 @@ export async function starPlace(id: string): Promise<StarPlace | undefined> {
   const tilt = drawn !== undefined && drawn <= 90 ? { tiltDegrees: drawn, tiltSource: `${rotationPath}: the measured axis the star's page draws`, tiltFrom: 'page' as const }
     : isRecord(record) && typeof record.spinInclinationDegrees === 'number' ? { tiltDegrees: record.spinInclinationDegrees, tiltSource: `src/objects/${id}/source/measurements.json, spinInclinationDegrees`, tiltFrom: 'record' as const } : { tiltFrom: 'assumed' as const };
   return { id, name: isRecord(body.physical) && typeof body.physical.name === 'string' ? body.physical.name : id, raDegrees: star.rightAscensionDegrees as number, decDegrees: star.declinationDegrees as number, epochYear: typeof star.positionEpochJulianYear === 'number' ? star.positionEpochJulianYear : 2000,
-    motionRaDegreesPerYear: motion('properMotionRaMasPerYear'), motionDecDegreesPerYear: motion('properMotionDecMasPerYear'), ...(isRecord(record) && typeof record.rotationPeriodDays === 'number' && record.rotationPeriodDays > 0 ? { cataloguedPeriodDays: record.rotationPeriodDays } : {}), ...tilt };
+    motionRaDegreesPerYear: motion('properMotionRaMasPerYear'), motionDecDegreesPerYear: motion('properMotionDecMasPerYear'), ...(isRecord(record) && typeof record.rotationPeriodDays === 'number' && record.rotationPeriodDays > 0 ? { cataloguedPeriodDays: record.rotationPeriodDays } : {}),
+    ...(isRecord(body.physical) && typeof body.physical.meanRadiusKm === 'number' && typeof body.physical.gravitationalParameterKm3PerS2 === 'number' && body.physical.gravitationalParameterKm3PerS2 > 0 ? { fastestTurnDays: Number((2 * Math.PI * Math.sqrt(body.physical.meanRadiusKm ** 3 / body.physical.gravitationalParameterKm3PerS2) / 86400).toFixed(4)) } : {}), ...tilt };
 }
 
 /** Each star's own and neighbouring light from Gaia, by star id: the stars are asked at their places at Gaia's epoch. Gaia's
@@ -82,7 +83,7 @@ export async function reduceStar(id: string, keepPixels = false, light?: PixelLi
   // A sector in which no pixel stands above the sky at the star (the star at a detector's edge, a frame full of scattered
   // light) holds no light curve to judge: the newest sector is read in its place.
   for (const { sector } of [...new Set([picked, newest].filter((one): one is ImagedSector => one !== undefined))]) { const place = placeAt(star, sectorYear(sector)), cutout = await fetchCutout(place.raDegrees, place.decDegrees, sector, pixels), curve = await sectorLightCurve(cutout.file);
-    rotation = curve ? besideCatalogued(rotationVerdict(curve), star.cataloguedPeriodDays) : { detected: false, reason: 'No pixel stands above the sky at the star.' };
+    rotation = curve ? withinBreakup(besideCatalogued(rotationVerdict(curve), star.cataloguedPeriodDays), star.fastestTurnDays) : { detected: false, reason: 'No pixel stands above the sky at the star.' };
     tried.push({ sector, cadenceMinutes: Number(cadenceMinutes(sector).toFixed(2)), pixels: { url: cutout.url, bytes: cutout.bytes }, ...(curve ? { frames: curve.frames, aperturePixels: curve.aperturePixels, saturated: curve.saturated, strongest: curve.whole, orbits: curve.halves, lightCurve: `${stem(sector)}.curve.json` } : {}), verdict: rotation });
     if (curve) { seen = { sector, time: curve.time, flux: curve.flux }; await writeFile(resolve(run, `${stem(sector)}.curve.json`), `${JSON.stringify({ sector, binDays: BIN_DAYS, time: curve.time, flux: curve.flux })}\n`); break; } }
   if (!keepPixels) await rm(pixels, { recursive: true, force: true });

@@ -52,6 +52,15 @@ export function besideCatalogued(verdict: RotationVerdict, cataloguedDays: numbe
   return { detected: false, reason: `The light's period, ${verdict.periodDays} d, is neither the star's catalogued rotation period, ${cataloguedDays} d, nor its half.` };
 }
 
+/** A verdict set beside the fastest the star could turn: the period of an orbit at its surface, from its recorded radius and
+ * mass. A star turning faster would fly apart, so a shorter period in its light is something else: a pulsation, a close
+ * pair, or another star's light. */
+export function withinBreakup(verdict: RotationVerdict, fastestTurnDays: number | undefined): RotationVerdict {
+  const shortest = verdict.lightPeriodDays ?? verdict.periodDays;
+  if (!verdict.detected || shortest === undefined || fastestTurnDays === undefined || (verdict.periodDays ?? 0) >= fastestTurnDays) return verdict;
+  return { detected: false, reason: `The light's period, ${shortest} d, is shorter than the ${fastestTurnDays.toFixed(2)} d of an orbit at the star's surface (its recorded radius and mass): the star cannot turn that fast, so the light changes for another reason.` };
+}
+
 /** Whether a sector's light curve shows the star's rotation, and why not when it does not. */
 export function rotationVerdict(curve: SectorLightCurve): RotationVerdict {
   const { whole, halves } = curve, days = Number(whole.periodDays.toFixed(2));
