@@ -59,6 +59,58 @@
           "checked": "2026-09-27"
         }
       ]
+    },
+    "corona-2008-01": {
+      "title": "Simulated corona, January 2008",
+      "detail": "A simulation, not an image",
+      "summary": "Gas around the star in a published simulation driven by its magnetic field as mapped in January 2008.",
+      "sources": [
+        {
+          "catalogueId": "zenodo-5575241-eps-eridani-cme-simulations",
+          "url": "https://doi.org/10.5281/zenodo.5575241",
+          "label": "Ó Fionnagáin et al. (2022), simulation data on Zenodo",
+          "checked": "2026-10-05"
+        }
+      ]
+    },
+    "corona-2011-10": {
+      "title": "Simulated corona, October 2011",
+      "detail": "A simulation, not an image",
+      "summary": "The same simulation for the field mapped in October 2011, when its pattern had changed.",
+      "sources": [
+        {
+          "catalogueId": "zenodo-5575241-eps-eridani-cme-simulations",
+          "url": "https://doi.org/10.5281/zenodo.5575241",
+          "label": "Ó Fionnagáin et al. (2022), simulation data on Zenodo",
+          "checked": "2026-10-05"
+        }
+      ]
+    },
+    "corona-2013-10": {
+      "title": "Simulated corona, October 2013",
+      "detail": "A simulation, not an image",
+      "summary": "The simulation for the field mapped in October 2013. Brightness follows density at each distance.",
+      "sources": [
+        {
+          "catalogueId": "zenodo-5575241-eps-eridani-cme-simulations",
+          "url": "https://doi.org/10.5281/zenodo.5575241",
+          "label": "Ó Fionnagáin et al. (2022), simulation data on Zenodo",
+          "checked": "2026-10-05"
+        }
+      ]
+    },
+    "corona-wind": {
+      "title": "Modelled wind",
+      "detail": "A model, not an image",
+      "summary": "The wind that carries the star's measured mass loss at its measured temperature, the same in every direction.",
+      "sources": [
+        {
+          "catalogueId": "source-eps-eridani-corona-wind-parameters",
+          "url": "https://doi.org/10.1086/340797",
+          "label": "Wood et al. (2002), Table 1",
+          "checked": "2026-10-05"
+        }
+      ]
     }
   }
 }
