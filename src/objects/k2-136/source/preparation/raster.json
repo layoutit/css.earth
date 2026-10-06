@@ -47,6 +47,80 @@
         },
         "qualification": "Photosphere color from the star's Gaia DR3 BP/RP spectrum, dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 4,500 K and log g 4.65 (u1 0.774, u2 0.021): a model, because no fit of this star's limb is used. The disc is unresolved: no map or absolute brightness is implied. Self-luminous, so no lighting."
       }
+    },
+    {
+      "id": "brightness-campaign-13",
+      "output": "k2-136-surface-{id}{suffix}.webp",
+      "thumbnail": "k2-136-dataset-{id}.webp",
+      "source": "science/k2/k2-136-c13.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "brightness-campaign-13",
+        "label": "Campaign 13",
+        "format": "tecplot-lonlat-map",
+        "path": "science/k2/k2-136-c13.dat",
+        "variable": "Brightness [%]",
+        "consumer": "k2-starry",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "%",
+        "minimum": 99.4,
+        "maximum": 100.6,
+        "colors": [
+          "#1a1a1a",
+          "#5c5c5c",
+          "#9c9c9c",
+          "#d6d6d6",
+          "#ffffff"
+        ],
+        "labels": [
+          "99.4%",
+          "100%",
+          "100.6%"
+        ],
+        "description": "Brightness of the star's surface that reproduces its light as it turns once in 15.1 days, fitted with starry to the light curve this project measured from the K2 target pixel files of campaign 13 (the light swings by 0.45%; the map's curve leaves a scatter of 0.14%, the light's own noise being 0.01%). A light curve fixes how bright each longitude is, not the latitude of what darkens it. The map is made at a tilt of 61°, worked out from the star's rotation speed, period and radius. Gaia DR3 lists no other star within 16 arcseconds of it. A reduction made in this project, not a published map.",
+        "title": "K2 · brightness map made here · Campaign 13",
+        "sourceUrl": "https://archive.stsci.edu/missions-and-data/k2"
+      }
+    },
+    {
+      "id": "color-brightness",
+      "output": "k2-136-surface-{id}{suffix}.webp",
+      "thumbnail": "k2-136-dataset-{id}.webp",
+      "source": "science/k2/k2-136-c13.dat",
+      "falseColor": false,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "color-brightness",
+        "label": "Color + brightness",
+        "format": "tecplot-lonlat-map",
+        "path": "science/k2/k2-136-c13.dat",
+        "variable": "Brightness [%]",
+        "consumer": "k2-starry",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "%",
+        "minimum": 99.4,
+        "maximum": 100.6,
+        "colors": [
+          "#1a1411",
+          "#5c483a",
+          "#9c7a63",
+          "#d6a788",
+          "#ffc7a2"
+        ],
+        "labels": [
+          "99.4%",
+          "100.6%"
+        ],
+        "limbOf": "color",
+        "description": "The star's color (#ffc7a2, its Color dataset) over the brightness map this project made from the star's light in K2 campaign 13 (March to May 2017): the map's scale, 99.4% to 100.6% of the mean surface, runs from a dark tone of the color to the color itself. The contrast is drawn far stronger than it is, so the parts can be told apart: the darkest part gives 1.2% less light than the brightest. Longitudes are fixed by the light curve; latitudes and shapes are not. No color change of the spots is drawn: none is measured. A reduction made in this project, not a published map.",
+        "title": "K2 · the star in its color over its brightness map · March to May 2017",
+        "sourceUrl": "https://archive.stsci.edu/missions-and-data/k2"
+      }
     }
   ],
   "emission": {

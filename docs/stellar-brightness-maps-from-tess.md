@@ -144,6 +144,11 @@ and two print 6.02 from TESS's, and the star's record adopts 6.02.
 A period is then set beside the catalogued one, as for TESS: the same within 20% is kept, half of it is doubled, and any
 other is refused.
 
+K2-136, a star of the Hyades, is the first page made this way. In K2's campaign 13 (March to May 2017) its light swings by
+0.45% every 15.12 days, where the catalogues print 15, and each half of the campaign shows the same period.
+
+![K2-136 in the app: Color + brightness above, Brightness map below](images/stellar-brightness-maps-k2.webp)
+
 SIMBAD files 804 of our 1,090 Kepler and K2 stars as giants. A giant turns in months, so one campaign seldom shows
 its spots turning; what its light shows is its oscillations, which this route does not read.
 
