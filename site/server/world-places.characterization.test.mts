@@ -19,10 +19,10 @@ test('world places keep root-first file order, optional rows and sorted unique c
   writeFileSync(script, `import assert from 'node:assert/strict';
 import { mock } from 'node:test';
 const fileOf = new Map([['moon', 'earth'], ['plain', 'plain'], ['remote', 'holder'], ['root-body', 'root']]);
-mock.module(${JSON.stringify(new URL('../world-context-plan.mts', import.meta.url).href)}, { namedExports: {
+mock.module(${JSON.stringify(new URL('../directory/world-context-plan.mts', import.meta.url).href)}, { namedExports: {
   APPLICATION_WORLD_INDEX: { files: ['root', 'earth', 'holder'], rows: { plain: { id: 'plain' } } }, APPLICATION_WORLD_FILE_OF: fileOf,
 } });
-mock.module(${JSON.stringify(new URL('../objects.mts', import.meta.url).href)}, { namedExports: { OBJECTS: [
+mock.module(${JSON.stringify(new URL('../directory/objects.mts', import.meta.url).href)}, { namedExports: { OBJECTS: [
   { id: 'root' }, { id: 'earth', parent: 'root' }, { id: 'moon', parent: 'earth' }, { id: 'remote', parent: 'root' },
 ] } });
 

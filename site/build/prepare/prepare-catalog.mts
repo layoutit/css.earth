@@ -276,7 +276,7 @@ export async function prepareCatalog({ projectRoot = root } = {}) {
   await writeGenerated(resolve(projectRoot, 'site/prepared/prepared-fit-boxes.json'), JSON.stringify(prepareFitBoxes(descriptors)) + '\n');
   await rm(resolve(projectRoot, 'site/prepared-local-group-galaxies.json'), { force: true });
   const contexts = await readContextObjects(resolve(projectRoot, 'src/objects'), descriptors);
-  // Read by the build only (site/dot-catalogue-data.mts and the preparation steps that read a catalogue's records).
+  // Read by the build only (site/server/dot-catalogue-data.mts and the preparation steps that read a catalogue's records).
   await writeGenerated(resolve(projectRoot, 'site/prepared/prepared-dot-catalogues.json'), JSON.stringify(dotCatalogueIds(contexts)) + '\n');
   await writeGenerated(resolve(projectRoot, 'site/prepared/prepared-stellar-extents.json'), JSON.stringify(await readStellarExtents([...entries, ...contexts], projectRoot)) + '\n');
   const { inline, banks } = splitContextObjectAssets(contexts, await contextObjectAssetUrls(contexts, projectRoot, assetOrigin()));

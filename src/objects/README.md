@@ -2,7 +2,7 @@
 
 Every detailed body is an authored data package under `src/objects/<id>/`.
 The directory name also covers the Sun, moons, dwarf planets, asteroids and
-comets. `OBJECTS` in `site/objects.mts` remains the only rendered-body registry.
+comets. `OBJECTS` in `site/directory/objects.mts` remains the only rendered-body registry.
 Navigation selects one active scene; it does not embed child scenes.
 
 Read [AGENTS.md](../../AGENTS.md), the

@@ -1,4 +1,4 @@
-import { SITE_ORIGIN } from "../seo.mts";
+import { SITE_ORIGIN } from "../content/seo.mts";
 
 export function GET() {
   return new Response(

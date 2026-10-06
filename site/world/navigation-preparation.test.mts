@@ -6,7 +6,7 @@ import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import sharp from "sharp";
 
-import { SCENE_OBJECTS } from "../objects.mts";
+import { SCENE_OBJECTS } from "../directory/objects.mts";
 import { authoredObjectFixture } from "../build/fixtures/authored-object-fixture.mts";
 import {
   loadMarkerDescriptors,

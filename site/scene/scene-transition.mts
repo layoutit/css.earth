@@ -2,16 +2,16 @@ import type { ObjectDescriptor } from '@cssearth/objects';
 import type { BrowserWindow, SceneFactory } from '../browser/browser-types.mts';
 import type { createNavigationContent } from '../navigation/navigation-content.mts';
 import type { NavigationLifecycle, NavigationRequest } from '../navigation/navigation-lifecycle.mts';
-import type { ObjectEntry } from '../objects.mts';
+import type { ObjectEntry } from '../directory/objects.mts';
 import type { ShellNavigationTransition } from '../shell/object-shell-types.mts';
 import type { createPreparedWorldNavigation } from '../navigation/prepared-world-navigation.mts';
 import type { SceneSession } from './scene-session.mts';
 import type { SceneView } from './scene-view.mts';
-import { subjectView } from './scene-subject.mts';
+import { subjectView } from '../world/scene-subject.mts';
 import type { WorldContextMount } from './scene-world.mts';
 import { selectSceneDataset } from './scene-datasets.mts';
 import { navigationHref } from '../navigation/navigation-history.mts';
-import { loadWorldSystemOf } from '../world-context-plan.mts';
+import { loadWorldSystemOf } from '../directory/world-context-plan.mts';
 
 type Navigation = ReturnType<typeof createPreparedWorldNavigation>;
 
@@ -99,7 +99,7 @@ export function prepareSceneReplacement({ fromId, source, object, request, navig
   getWorld(): WorldContextMount | null;
 }) {
   // A body of another system is previewed and flown to once that system's bodies are in the world
-  // (site/world-context-plan.mts); for a body the world already holds this resolves at once.
+  // (site/directory/world-context-plan.mts); for a body the world already holds this resolves at once.
   const systemTask = loadWorldSystemOf(object.id);
   const contentTask = contentTransport.load(object, { signal: request.signal })
     .then(content => {

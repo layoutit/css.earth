@@ -301,7 +301,7 @@ test('a sheet that starts at its peek publishes it without touching the snap dur
 
 test('no rule of the shell stylesheets anchors :has() on the body: a page restyles whole when an element is added under such an anchor', async () => {
   const { readFile } = await import('node:fs/promises');
-  for (const sheet of ['shell-layout.css', 'maps-shell.css', 'settings-panel.css', '../object-shell.css']) {
+  for (const sheet of ['shell-layout.css', 'maps-shell.css', 'settings-panel.css', '../layouts/object-shell.css']) {
     const text = (await readFile(new URL(`./${sheet}`, import.meta.url), 'utf8')).replace(/\/\*[\s\S]*?\*\//gu, '');
     const anchored = [...text.matchAll(/(?:^|[{},])\s*((?:html|body)[^{},]*:has\([^{]*)/gmu)].map(match => match[1]!.trim());
     assert.deepEqual(anchored, [], `${sheet}: ${anchored.join(' | ')}`);

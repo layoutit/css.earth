@@ -7,7 +7,7 @@ import { createPreparedObjectNavigation } from '@cssearth/renderer/runtime/prepa
 import { selectPreparedTextureLevel } from '@cssearth/renderer/rendering/prepared-texture-levels.ts';
 import { presentWorldCamera } from '@cssearth/renderer/navigation/world-camera.ts';
 import { readPreparedObjectBytes } from '../server/object-page-data.mts';
-import { requireObject } from '../objects.mts';
+import { requireObject } from '../directory/objects.mts';
 import { usesDefaultStartupView, readStartupSavedView } from './startup-billboard.mts';
 import { canUseArrivalBillboard } from '../navigation/arrival-billboard.mts';
 

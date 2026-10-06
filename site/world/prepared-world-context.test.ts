@@ -18,9 +18,9 @@ import { createWorldContextFrameEncoder } from '../../packages/renderer/src/univ
 import { type PackedWorldContextView, unpackWorldBodies } from '../../packages/renderer/src/universe/world-context/world-context-view-transport.js';
 import { createWorldContextPlanner } from '../../packages/renderer/src/universe/world-context/world-context-planner.js';
 import { CONTEXT_LINE_WIDTH, INDICATOR_DOT_MAX_DIAMETER, indicatorDotDiameter } from '../../packages/renderer/src/universe/world-context/context-scale.js';
-import { SCENE_OBJECTS } from '../objects.mts';
+import { SCENE_OBJECTS } from '../directory/objects.mts';
 import { labelImportance } from '../../packages/renderer/src/labels/universe-label-policy.js';
-import { SYSTEM_RANGES, SYSTEM_VIEWS, SYSTEM_VIEW_HOSTS, loadSystemView, systemFramingRect, systemViewTarget } from '../system-framing.mts';
+import { SYSTEM_RANGES, SYSTEM_VIEWS, SYSTEM_VIEW_HOSTS, loadSystemView, systemFramingRect, systemViewTarget } from './system-framing.mts';
 import { stubGlobal, unstubAllGlobals } from '@cssearth/objects/node/contract';
 import { unpackPreparedBinary } from '@cssearth/objects/node';
 // System framing's candidates load after the first body mounts in the app; these tests need them loaded.
@@ -2856,7 +2856,7 @@ test('CSSOM transform serialization cannot turn an unchanged publication into an
 test('the orbit banks decode to the orbits of the full prepared file, each vertex within half an Int32 step', { timeout: 120_000 }, async () => {
   const objects = new URL('../../src/objects/', import.meta.url);
   const full = parsePreparedWorldContext(JSON.parse(await readFile(new URL('observable-universe/prepared/world-context.json', objects), 'utf8')));
-  // Every object's file read, as Node reads the world (site/world-context-plan.mts): the summary and the index are the root object's.
+  // Every object's file read, as Node reads the world (site/directory/world-context-plan.mts): the summary and the index are the root object's.
   const index = JSON.parse(await readFile(new URL('observable-universe/prepared/world-index.json', objects), 'utf8')) as { files: string[] };
   const summary = await parseCompleteWorldContext(JSON.parse(await readFile(new URL('observable-universe/prepared/world.json', objects), 'utf8')),
     async id => JSON.parse(await readFile(new URL(`${id}/prepared/members.json`, objects), 'utf8')), index);

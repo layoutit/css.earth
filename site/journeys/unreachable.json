@@ -9,37 +9,37 @@
     {
       "id": "control:site:components:ObjectShell:button:markup:8",
       "reason": "Diagnostic recorder has no visible native entry in the production shell; force-clicking or calling its private start API would manufacture reachability.",
-      "evidence": "site/components/ObjectShell.astro:251 renders data-diagnostic-record with hidden; site/diagnostic-recorder.mts:99 queries that button, createDiagnosticRecorder binds click at line 92 and starts RAF/error listeners at lines 68-70. No application code removes its hidden attribute (source search). Tranche e native capabilities-recorder probe asserts the missing visible entry."
+      "evidence": "site/components/ObjectShell.astro:251 renders data-diagnostic-record with hidden; site/shell/diagnostic-recorder.mts:99 queries that button, createDiagnosticRecorder binds click at line 92 and starts RAF/error listeners at lines 68-70. No application code removes its hidden attribute (source search). Tranche e native capabilities-recorder probe asserts the missing visible entry."
     },
     {
       "id": "control:site:diagnostic-recorder:link:a:1",
       "reason": "The diagnostic download link is created unattached and clicked programmatically only after the hidden recorder is stopped; no visible native activation path exists.",
-      "evidence": "site/diagnostic-recorder.mts:136-141 creates an unattached anchor and calls link.click() in the recorder download callback; stop at lines 74-88 calls download only after start, whose native button is hidden at site/components/ObjectShell.astro:251. Native trusted-control attribution cannot credit a scripted click or an unattached anchor."
+      "evidence": "site/shell/diagnostic-recorder.mts:136-141 creates an unattached anchor and calls link.click() in the recorder download callback; stop at lines 74-88 calls download only after start, whose native button is hidden at site/components/ObjectShell.astro:251. Native trusted-control attribution cannot credit a scripted click or an unattached anchor."
     },
     {
       "id": "handler:site:diagnostic-recorder:createDiagnosticRecorder:click:1",
       "reason": "Diagnostic recorder has no visible native entry in the production shell; force-clicking or calling its private start API would manufacture reachability.",
-      "evidence": "site/components/ObjectShell.astro:251 renders data-diagnostic-record with hidden; site/diagnostic-recorder.mts:99 queries that button, createDiagnosticRecorder binds click at line 92 and starts RAF/error listeners at lines 68-70. No application code removes its hidden attribute (source search). Tranche e native capabilities-recorder probe asserts the missing visible entry."
+      "evidence": "site/components/ObjectShell.astro:251 renders data-diagnostic-record with hidden; site/shell/diagnostic-recorder.mts:99 queries that button, createDiagnosticRecorder binds click at line 92 and starts RAF/error listeners at lines 68-70. No application code removes its hidden attribute (source search). Tranche e native capabilities-recorder probe asserts the missing visible entry."
     },
     {
       "id": "handler:site:diagnostic-recorder:start:animation-frame:1",
       "reason": "Diagnostic recorder has no visible native entry in the production shell; force-clicking or calling its private start API would manufacture reachability.",
-      "evidence": "site/components/ObjectShell.astro:251 renders data-diagnostic-record with hidden; site/diagnostic-recorder.mts:99 queries that button, createDiagnosticRecorder binds click at line 92 and starts RAF/error listeners at lines 68-70. No application code removes its hidden attribute (source search). Tranche e native capabilities-recorder probe asserts the missing visible entry."
+      "evidence": "site/components/ObjectShell.astro:251 renders data-diagnostic-record with hidden; site/shell/diagnostic-recorder.mts:99 queries that button, createDiagnosticRecorder binds click at line 92 and starts RAF/error listeners at lines 68-70. No application code removes its hidden attribute (source search). Tranche e native capabilities-recorder probe asserts the missing visible entry."
     },
     {
       "id": "handler:site:diagnostic-recorder:tick:animation-frame:1",
       "reason": "Diagnostic recorder has no visible native entry in the production shell; force-clicking or calling its private start API would manufacture reachability.",
-      "evidence": "site/components/ObjectShell.astro:251 renders data-diagnostic-record with hidden; site/diagnostic-recorder.mts:99 queries that button, createDiagnosticRecorder binds click at line 92 and starts RAF/error listeners at lines 68-70. No application code removes its hidden attribute (source search). Tranche e native capabilities-recorder probe asserts the missing visible entry."
+      "evidence": "site/components/ObjectShell.astro:251 renders data-diagnostic-record with hidden; site/shell/diagnostic-recorder.mts:99 queries that button, createDiagnosticRecorder binds click at line 92 and starts RAF/error listeners at lines 68-70. No application code removes its hidden attribute (source search). Tranche e native capabilities-recorder probe asserts the missing visible entry."
     },
     {
       "id": "handler:site:diagnostic-recorder:start:error:1",
       "reason": "Diagnostic recorder has no visible native entry in the production shell; force-clicking or calling its private start API would manufacture reachability.",
-      "evidence": "site/components/ObjectShell.astro:251 renders data-diagnostic-record with hidden; site/diagnostic-recorder.mts:99 queries that button, createDiagnosticRecorder binds click at line 92 and starts RAF/error listeners at lines 68-70. No application code removes its hidden attribute (source search). Tranche e native capabilities-recorder probe asserts the missing visible entry."
+      "evidence": "site/components/ObjectShell.astro:251 renders data-diagnostic-record with hidden; site/shell/diagnostic-recorder.mts:99 queries that button, createDiagnosticRecorder binds click at line 92 and starts RAF/error listeners at lines 68-70. No application code removes its hidden attribute (source search). Tranche e native capabilities-recorder probe asserts the missing visible entry."
     },
     {
       "id": "handler:site:diagnostic-recorder:start:unhandledrejection:1",
       "reason": "Diagnostic recorder has no visible native entry in the production shell; force-clicking or calling its private start API would manufacture reachability.",
-      "evidence": "site/components/ObjectShell.astro:251 renders data-diagnostic-record with hidden; site/diagnostic-recorder.mts:99 queries that button, createDiagnosticRecorder binds click at line 92 and starts RAF/error listeners at lines 68-70. No application code removes its hidden attribute (source search). Tranche e native capabilities-recorder probe asserts the missing visible entry."
+      "evidence": "site/components/ObjectShell.astro:251 renders data-diagnostic-record with hidden; site/shell/diagnostic-recorder.mts:99 queries that button, createDiagnosticRecorder binds click at line 92 and starts RAF/error listeners at lines 68-70. No application code removes its hidden attribute (source search). Tranche e native capabilities-recorder probe asserts the missing visible entry."
     },
     {
       "id": "handler:site:error-report:errorReportBootstrap:embedded:error:1",
@@ -54,7 +54,7 @@
     {
       "id": "handler:site:application-world-context:createApplicationWorldContext:abort:1",
       "reason": "Shared world survives detail navigation; its mount abort is available only during loading at router disposal, before the current ready-load API returns. Outgoing document observations are not retained after replacement.",
-      "evidence": "site/application-world-context.mts:38 registers signal abort; site/scene/scene-world.mts:31-59 creates the controller only in loading state, destroy at lines 124-130 aborts only loading state; site/scene/scene-router.mts:166 binds pagehide to destroyActiveScene, whose session disposal runs at line 614. journeyApi.load waits through the ready barrier before returning. Tranche e ready-page navigation did not invoke this abort."
+      "evidence": "site/scene/application-world-context.mts:38 registers signal abort; site/scene/scene-world.mts:31-59 creates the controller only in loading state, destroy at lines 124-130 aborts only loading state; site/scene/scene-router.mts:166 binds pagehide to destroyActiveScene, whose session disposal runs at line 614. journeyApi.load waits through the ready barrier before returning. Tranche e ready-page navigation did not invoke this abort."
     }
   ]
 }

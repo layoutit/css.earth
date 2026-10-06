@@ -48,8 +48,8 @@ test('the world hears of every entry read, those read before it listened first, 
 
 test('an object entry carries the banks it holds and the dots of the body it orbits, which its object reads unchanged', async () => {
   const { GET } = await import('../../pages/objects/[id]/entry.json.ts');
-  const { APPLICATION_WORLD_CONTEXT } = await import('../../world-context-plan.mts');
-  const { objectFromEntry } = await import('../../object-directory.mts');
+  const { APPLICATION_WORLD_CONTEXT } = await import('../../directory/world-context-plan.mts');
+  const { objectFromEntry } = await import('../../directory/object-directory.mts');
   const { OBJECT_ENTRY_IDS } = await import('../../server/object-entry.mts');
   const records: Record<string, { carriers: string[]; descriptor: { id: string; type: string; properties: { host?: string } } }> =
     (await import('../../prepared/prepared-hosted-banks.json', { with: { type: 'json' } })).default as never;

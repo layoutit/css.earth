@@ -55,7 +55,7 @@
     {
       "id": "capability:ipad-import-queue",
       "kind": "capability",
-      "source": "site/import-queue.mts:1"
+      "source": "site/browser/import-queue.mts:1"
     },
     {
       "id": "capability:keyboard",
@@ -754,7 +754,7 @@
     {
       "id": "control:site:components:ObjectSwatchStyles:style:markup:1",
       "kind": "control",
-      "source": "site/components/ObjectSwatchStyles.astro:9",
+      "source": "site/layouts/ObjectSwatchStyles.astro:9",
       "tag": "style",
       "selector": "[data-object-style=\"site/components/ObjectSwatchStyles.astro\"]",
       "markup": "<style is:inline data-object-style=\"site/components/ObjectSwatchStyles.astro\" set:html={`.prepared-world-context { color: ${DEFAULT_CONTEXT_COLOR}; }`}>"
@@ -834,7 +834,7 @@
     {
       "id": "control:site:diagnostic-recorder:link:a:1",
       "kind": "control",
-      "source": "site/diagnostic-recorder.mts:139",
+      "source": "site/shell/diagnostic-recorder.mts:139",
       "tag": "a",
       "selector": "a"
     },
@@ -1686,7 +1686,7 @@
     {
       "id": "handler:site:application-world-context:createApplicationWorldContext:abort:1",
       "kind": "handler",
-      "source": "site/application-world-context.mts:38",
+      "source": "site/scene/application-world-context.mts:38",
       "eventTypes": [
         "abort"
       ],
@@ -1695,7 +1695,7 @@
     {
       "id": "handler:site:application-world-context:createApplicationWorldContext:objectmotionchange:1",
       "kind": "handler",
-      "source": "site/application-world-context.mts:82",
+      "source": "site/scene/application-world-context.mts:82",
       "eventTypes": [
         "objectmotionchange"
       ],
@@ -1704,7 +1704,7 @@
     {
       "id": "handler:site:application-world-context:createApplicationWorldContext:objectrotationchange:1",
       "kind": "handler",
-      "source": "site/application-world-context.mts:77",
+      "source": "site/scene/application-world-context.mts:77",
       "eventTypes": [
         "objectrotationchange"
       ],
@@ -1785,7 +1785,7 @@
     {
       "id": "handler:site:diagnostic-recorder:createDiagnosticRecorder:click:1",
       "kind": "handler",
-      "source": "site/diagnostic-recorder.mts:92",
+      "source": "site/shell/diagnostic-recorder.mts:92",
       "eventTypes": [
         "click"
       ],
@@ -1794,7 +1794,7 @@
     {
       "id": "handler:site:diagnostic-recorder:start:animation-frame:1",
       "kind": "handler",
-      "source": "site/diagnostic-recorder.mts:68",
+      "source": "site/shell/diagnostic-recorder.mts:68",
       "eventTypes": [
         "animation-frame"
       ],
@@ -1803,7 +1803,7 @@
     {
       "id": "handler:site:diagnostic-recorder:start:error:1",
       "kind": "handler",
-      "source": "site/diagnostic-recorder.mts:70",
+      "source": "site/shell/diagnostic-recorder.mts:70",
       "eventTypes": [
         "error"
       ],
@@ -1812,7 +1812,7 @@
     {
       "id": "handler:site:diagnostic-recorder:start:unhandledrejection:1",
       "kind": "handler",
-      "source": "site/diagnostic-recorder.mts:70",
+      "source": "site/shell/diagnostic-recorder.mts:70",
       "eventTypes": [
         "unhandledrejection"
       ],
@@ -1821,7 +1821,7 @@
     {
       "id": "handler:site:diagnostic-recorder:tick:animation-frame:1",
       "kind": "handler",
-      "source": "site/diagnostic-recorder.mts:49",
+      "source": "site/shell/diagnostic-recorder.mts:49",
       "eventTypes": [
         "animation-frame"
       ],
@@ -2537,7 +2537,7 @@
     {
       "id": "handler:site:showcase:createShowcaseController:click:1",
       "kind": "handler",
-      "source": "site/showcase.mts:52",
+      "source": "site/selection/showcase.mts:52",
       "eventTypes": [
         "click"
       ],
@@ -2546,7 +2546,7 @@
     {
       "id": "handler:site:showcase:start:dynamic-type:1",
       "kind": "handler",
-      "source": "site/showcase.mts:66",
+      "source": "site/selection/showcase.mts:66",
       "eventTypes": [
         "keydown",
         "pointerdown",
@@ -2557,7 +2557,7 @@
     {
       "id": "handler:site:showcase:start:popstate:1",
       "kind": "handler",
-      "source": "site/showcase.mts:68",
+      "source": "site/selection/showcase.mts:68",
       "eventTypes": [
         "popstate"
       ],
@@ -2566,7 +2566,7 @@
     {
       "id": "handler:site:showcase:start:visibilitychange:1",
       "kind": "handler",
-      "source": "site/showcase.mts:67",
+      "source": "site/selection/showcase.mts:67",
       "eventTypes": [
         "visibilitychange"
       ],

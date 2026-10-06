@@ -5,7 +5,7 @@ const test = sourceTest();
 import { readFile } from "node:fs/promises";
 
 import { requireObjectControls } from '@cssearth/objects';
-import { SCENE_OBJECTS } from "../objects.mts";
+import { SCENE_OBJECTS } from "../directory/objects.mts";
 
 import { parse, object, array, string, optional, boolean } from '@cssearth/core/schema';
 const preparedControls = (value: unknown) => parse(value, object({ controls: object({ settings: object({

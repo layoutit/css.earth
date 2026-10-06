@@ -6,7 +6,7 @@
  * The Worker runs the handlers Netlify's functions run, and it has no disk. Two modules that read one are swapped for the
  * Worker's own (cloudflare/search-data.ts, cloudflare/project-files.ts); the project files the page handler reads go into
  * the script, and the catalogues the search reads are staged beside the built pages. `import.meta.url` is a `file:`
- * address, so site/world-context-plan.mts reads the whole world as it does in Node.
+ * address, so site/directory/world-context-plan.mts reads the whole world as it does in Node.
  *
  * `--noindex` marks every response as not to be indexed: a preview address must not compete with the site.
  */

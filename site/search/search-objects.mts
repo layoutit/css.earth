@@ -1,4 +1,4 @@
-import { OBJECTS } from "../objects.mts";
+import { OBJECTS } from "../directory/objects.mts";
 
 // Pages label classifications without loading the registry.
 export { objectClassificationLabel, objectTypeLabel } from "../model/object-classification-label.mts";

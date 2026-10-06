@@ -47,7 +47,7 @@ test('folders follow the prototype zones', () => {
     'src/renderers/css/index.ts': 'src/renderers/css(root)',
     'src/preparation/stars/x.ts': 'src/preparation/stars',
     'site/components/X.astro': 'site/components',
-    'site/directory/objects.mts': 'site(root)',
+    'site/env.d.ts': 'site(root)',
     '.github/scripts/ci/x.mts': '.github/scripts/ci',
     '.github/scripts/x.mts': '.github/scripts(root)',
     'netlify/functions/x.mts': 'netlify',

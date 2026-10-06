@@ -2,15 +2,15 @@ import type { APIRoute, GetStaticPaths } from 'astro';
 import { OBJECT_ENTRY_IDS, objectEntry } from '../../../server/object-entry.mts';
 import { resolveSceneAddressesDeep } from '../../../server-assets/asset-origin.mts';
 import { worldPlaceOf } from '../../../server/world-places.mts';
-import { OBJECTS, ancestorsOf } from '../../../objects.mts';
-import { APPLICATION_WORLD_CONTEXT } from '../../../world-context-plan.mts';
+import { OBJECTS, ancestorsOf } from '../../../directory/objects.mts';
+import { APPLICATION_WORLD_CONTEXT } from '../../../directory/world-context-plan.mts';
 import { hostedBanksOf } from '../../../world/hosted-banks.mts';
 import { surroundedBody, surroundingHosts } from '../../../world/surrounded-body.mts';
 import bankAssets from '../../../prepared/prepared-context-bank-assets.json' with { type: 'json' };
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 
-// One navigable object's prepared entry, read by the page's object directory (site/object-directory.mts) the first time
+// One navigable object's prepared entry, read by the page's object directory (site/directory/object-directory.mts) the first time
 // it needs that object.
 export const getStaticPaths: GetStaticPaths = async () => OBJECT_ENTRY_IDS.map(id => ({ params: { id } }));
 

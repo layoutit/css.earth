@@ -2,8 +2,8 @@ import assert from 'node:assert/strict';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import { readFile } from 'node:fs/promises';
-import { OBJECTS, SCENE_OBJECTS, ancestorsOf, requireObject } from '../objects.mts';
-import { objectAdapter } from '../object-adapter.mts';
+import { OBJECTS, SCENE_OBJECTS, ancestorsOf, requireObject } from '../directory/objects.mts';
+import { objectAdapter } from '../scene/object-adapter.mts';
 import { SEARCH_OBJECTS } from '../search/search-objects.mts';
 import { prepareSceneDistance } from '@cssearth/bake/navigation';
 import { readObjectDescriptors } from '@cssearth/objects/node';
@@ -143,7 +143,7 @@ test('every object is inside exactly one object, and the Observable Universe is 
   // A body with a system of its own is inside it, and the system sits where the body would.
   for (const system of OBJECTS.filter(object => object.system)) assert.equal(requireObject(system.system!.host).parent, system.id, system.id);
   // Every body an orbit graph gives a star's system is inside that system in the tree.
-  const { allPlanetarySystems } = await import('../object-systems.mts');
+  const { allPlanetarySystems } = await import('./object-systems.mts');
   for (const system of allPlanetarySystems(SCENE_OBJECTS)) {
     const inside = requireObject(system.id).parent!;
     for (const member of system.memberIds) if (byId.has(member)) assert.ok(ancestorsOf(member).some(object => object.id === inside), `${member} orbits ${system.id} and is inside ${inside}`);

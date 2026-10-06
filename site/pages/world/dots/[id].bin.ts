@@ -1,7 +1,7 @@
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import type { APIRoute, GetStaticPaths } from 'astro';
-import { WORLD_DOT_BANKS } from '../../../world-context-plan.mts';
+import { WORLD_DOT_BANKS } from '../../../directory/world-context-plan.mts';
 
 // The dots of the plain stars inside one object (the bake's `plain-stars` bank: the catalogued stars of another galaxy
 // that the map does not label or open by click), copied at build from that object's package. The world draws them while

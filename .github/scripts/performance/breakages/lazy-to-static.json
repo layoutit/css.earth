@@ -3,7 +3,7 @@
   "expected": "FAIL",
   "edits": [
     {
-      "file": "site/import-queue.mts",
+      "file": "site/browser/import-queue.mts",
       "before": "export const importPackagedObjectRuntime = queuedImport(() => import('./packaged-object-runtime.mts'));",
       "after": "import * as l7aEagerRuntime from './packaged-object-runtime.mts';\nexport const importPackagedObjectRuntime = queuedImport(() => Promise.resolve(l7aEagerRuntime));"
     }

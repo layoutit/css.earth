@@ -5,7 +5,7 @@ import { worldPlaceFiles } from '../../../server/world-places.mts';
 
 // One object's places, copied at build from its own package (`src/objects/<id>/prepared/places.json`): where each of its
 // children's systems is and the range its orbits are authored to, read after a page's first view so the camera reads a
-// system's file when it comes near (site/world-approach.mts).
+// system's file when it comes near (site/world/world-approach.mts).
 export const getStaticPaths: GetStaticPaths = async () => worldPlaceFiles().map(id => ({ params: { id } }));
 
 export const GET: APIRoute = async ({ params }) => {

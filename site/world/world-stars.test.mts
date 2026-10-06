@@ -4,7 +4,7 @@ import { gunzipSync } from 'node:zlib';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 import { decodeCatalogueBankBinary, readCataloguePointBank, parseCompleteWorldContext, parsePreparedWorldContextSummary, parsePreparedWorldIndex } from '@cssearth/objects';
 import { unpackPreparedBinary } from '@cssearth/objects/node';
-import { OBJECTS } from '../objects.mts';
+import { OBJECTS } from '../directory/objects.mts';
 const test = sourceTest();
 
 const prepared = new URL('../../src/objects/observable-universe/prepared/', import.meta.url);

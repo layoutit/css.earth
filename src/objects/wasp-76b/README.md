@@ -29,7 +29,7 @@ Run of 2026-09-23:
 
 - [`published-phase-curve-map.test.mts`](../../../packages/bake/src/objects/raster/eclipse-map/published-phase-curve-map.test.mts) evaluates the recipe through SPIDERMAN 1.0.3. The day side agrees with the paper within its uncertainty, in flux and in temperature. The night side lies within two standard deviations below the paper's. The curve has no peak offset, the map is the same east and west of noon, and the negative patch at midnight is left without a temperature.
 - The lo0 reading. May et al.'s Table 4 labels lo0 in degrees; SPIDERMAN takes radians. Read as 0.67 radians, the map's corrected day side is 3,423 ppm and its half amplitude 1,266 ppm, far from the paper. Read as 0.67°, they are 3,704 and 1,546 ppm. The degree reading is used.
-- [`object-systems.test.mts`](../../../site/test/object-systems.test.mts) checks the system.
+- [`object-systems.test.mts`](../../../site/world/object-systems.test.mts) checks the system.
 - `hot-jupiter-default-views.png`: the default views of KELT-9, KELT-9b, WASP-76 and WASP-76b on this branch's dev server, headless Chrome at 1440 × 900 after the page reported ready. Both planets open on their substellar point; KELT-9b's hot spot shows east of centre.
 
 Run of 2026-10-04, when the planet moved to the lit lane. The map did not change, so the tests above still apply.

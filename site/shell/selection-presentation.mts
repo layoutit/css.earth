@@ -1,5 +1,5 @@
-import type { SceneView, SelectionTarget } from '../scene/scene-selection.mts';
-import { selectionKey, starSystem, subjectHost, subjectView } from '../scene/scene-selection.mts';
+import type { SceneView, SelectionTarget } from '../selection/scene-selection.mts';
+import { selectionKey, starSystem, subjectHost, subjectView } from '../selection/scene-selection.mts';
 import { requiredSection, setLinkSelected } from '../browser/browser-types.mts';
 import type { CatalogueSelection } from '../search/catalogue-window.mts';
 import { renderSourceLink, type SourceDocumentReference } from '../browser/source-link.mts';

@@ -1,5 +1,5 @@
-import { OBJECTS } from "../objects.mts";
-import { homeSeo, objectSeo } from "../seo.mts";
+import { OBJECTS } from "../directory/objects.mts";
+import { homeSeo, objectSeo } from "../content/seo.mts";
 import { ROOT_OBJECT_ID } from "../model/root-object.mts";
 
 /** The site's own page, `/`, then every page `/<id>/`: each object's. */

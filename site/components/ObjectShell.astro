@@ -2,7 +2,7 @@
 import { DIAGNOSTICS_ENABLED } from "../browser/diagnostics-policy.mts";
 import ObjectInformationPanel from "./ObjectInformationPanel.astro";
 import type { Props } from "../contracts/object-shell-types";
-import { SCENE_OBJECTS } from "../objects.mts";
+import { SCENE_OBJECTS } from "../directory/objects.mts";
 import { PREPARED_SHELL_TITLES } from "../prepared/prepared-shell-titles.mjs";
 import { requireObjectControls } from "@cssearth/objects";
 import SourcesLink from './SourcesLink.astro';
@@ -13,7 +13,7 @@ import CssEarthWordmark from "./CssEarthWordmark.astro";
 import ObjectCard from './ObjectCard.astro';
 import ObjectBreadcrumbs from './ObjectBreadcrumbs.astro';
 import Accordion from './Accordion.astro';
-import { SOLAR_SYSTEM_ID, systemOfObject } from '../object-systems.mts';
+import { SOLAR_SYSTEM_ID, systemOfObject } from '../world/object-systems.mts';
 import { SEARCH_QUERY_LIMIT } from '../search/object-search.mts';
 
 declare const __CSSEARTH_VERSION__: string;

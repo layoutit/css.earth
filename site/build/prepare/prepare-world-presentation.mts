@@ -11,9 +11,9 @@ import { dirname, resolve } from 'node:path';
 import majorMoons from '../../source/major-moons.json' with { type: 'json' };
 import catalogueIds from '../../prepared/prepared-dot-catalogues.json' with { type: 'json' };
 import { discoveryVisibility, type ObjectDiscovery } from '@cssearth/objects';
-import { WORLD_OBJECTS } from '../../world-objects.mts';
-import { ancestorsOf } from '../../objects.mts';
-import { APPLICATION_WORLD_CONTEXT } from '../../world-context-plan.mts';
+import { WORLD_OBJECTS } from '../../world/world-objects.mts';
+import { ancestorsOf } from '../../directory/objects.mts';
+import { APPLICATION_WORLD_CONTEXT } from '../../directory/world-context-plan.mts';
 import { worldFilesOf } from '../../server/world-places.mts';
 import { sourceArray, sourceId, sourceObject, sourceUnique } from '@cssearth/objects/sources';
 import { isJplMissionTarget } from './jpl-mission-targets.mts';
@@ -141,7 +141,7 @@ export function prepareCategoryFrames(worldObjects: typeof WORLD_OBJECTS,
     const narrowed = notables.length >= 2 && notables.length < bodies.length;
     const markedBodies = narrowed ? notables : bodies;
     const frame = prepareCategoryFrame(framedMembers(markedBodies, regionsOf).map(object => {
-      // Preparation reads every system's file (site/world-context-plan.mts), so every body is placed.
+      // Preparation reads every system's file (site/directory/world-context-plan.mts), so every body is placed.
       if (!object.worldFrame) throw new TypeError(`${object.id} has no world position; the world context read here lacks its system.`);
       return object.worldFrame.originM;
     }));

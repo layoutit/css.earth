@@ -1,6 +1,6 @@
 // Written by site/build/prepare/prepare-world-presentation.mts from the moon groups, the JPL mission targets and the galaxy
 // and cluster presentation recipes; the browser only validates it. It lists no system: a page reads a system's members
-// and framing from the bodies its world holds (site/object-systems.mts, site/system-framing.mts).
+// and framing from the bodies its world holds (site/world/object-systems.mts, site/world/system-framing.mts).
 import prepared from '../prepared/prepared-world-presentation.json' with { type: 'json' };
 import { isRecord } from '@cssearth/core';
 
