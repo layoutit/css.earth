@@ -9,14 +9,14 @@ const probe = 'packages/module-style-probe.test.ts';
 const lint = async (code: string) => (await eslint.lintText(code, { filePath: probe }))[0]!.messages;
 const rules = ['no-duplicate-imports', 'module/header-comment-first', 'eol-last'];
 
-test('real config applies error gates to package extensions and excludes site and src', async () => {
+test('real config applies error gates to package extensions, site and src', async () => {
   for (const extension of ['ts', 'mts', 'cts', 'jsx']) {
     const config = await eslint.calculateConfigForFile(`packages/module-style-probe.test.${extension}`);
     for (const rule of rules) assert.equal(config.rules[rule][0], 2, rule);
   }
-  for (const filePath of ['site/x.mts', 'src/x.mts']) {
+  for (const filePath of ['site/x.mts', 'src/x.mts', 'site/build/x.ts']) {
     const config = await eslint.calculateConfigForFile(filePath);
-    for (const rule of rules) assert.ok(!config.rules[rule] || config.rules[rule][0] === 0, rule);
+    for (const rule of rules) assert.equal(config.rules[rule][0], 2, `${rule} in ${filePath}`);
   }
   const messages = await lint("import { a } from 'x';\nimport { b } from 'x';\n/** Module purpose. */\n\nexport { a, b };");
   for (const rule of rules) assert.ok(messages.some(message => message.ruleId === rule && message.severity === 2), rule);

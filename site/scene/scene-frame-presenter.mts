@@ -7,4 +7,3 @@ export type WorldContextMount = Awaited<ReturnType<WorldContextOwner['mount']>>;
 type WorldFramePresenter = ReturnType<NonNullable<WorldContextMount['createFramePresenter']>>;
 /** A detail's frame presenter. One mounted before the world commits its own frames until `attach`. */
 export type SceneFramePresenter = WorldFramePresenter & { attach?(world: WorldContextMount): void };
-

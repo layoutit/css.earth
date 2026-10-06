@@ -1,8 +1,7 @@
-import { readChartAssetRecipe } from '@cssearth/objects';
+import { readChartAssetRecipe, PREPARED_CONTENT_SCHEMA, validateObjectContentEnvelope, type ObjectContentSource, type PreparedObjectContent, type PreparedObjectContentDocument, type GalleryRecipe } from '@cssearth/objects';
 // Shared object-content preparation. Source JSON owns facts, labels, recipes,
 // and provenance; this module owns the derived shell payload.
 
-import { PREPARED_CONTENT_SCHEMA, validateObjectContentEnvelope, type ObjectContentSource, type PreparedObjectContent, type PreparedObjectContentDocument, type GalleryRecipe } from '@cssearth/objects';
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { basename, resolve } from "node:path";
 import { PREPARED_SHELL_TITLES } from "../../prepared/prepared-shell-titles.mjs";

@@ -1,16 +1,13 @@
 import { readFile } from 'node:fs/promises';
 import { relative, resolve, sep } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { parseObjectDescriptor, readSourceManifestInputs, readVolumePresentationPreviews } from '@cssearth/objects';
-import { PREPARED_VOLUME_DATASET_INDEX_SCHEMA, parseDensityVolumeFrame } from '@cssearth/objects';
-import { readVolumeDatasetBank } from '@cssearth/objects/node';
+import { parseObjectDescriptor, readSourceManifestInputs, readVolumePresentationPreviews, PREPARED_VOLUME_DATASET_INDEX_SCHEMA, parseDensityVolumeFrame } from '@cssearth/objects';
+import { readVolumeDatasetBank, readContextObjects, requireInventory } from '@cssearth/objects/node';
 import { lineageSource } from '@cssearth/objects/provenance';
 import type { ContextAvailability } from '@cssearth/objects/provenance';
 import { sourceArray, sourceObject } from '@cssearth/objects/sources';
 import { parsePreparedVolumePresentation } from '../../content/volume-presentation.mts';
-import { readContextObjects } from '@cssearth/objects/node';
 import { hasErrorCode } from '@cssearth/core';
-import { requireInventory } from '@cssearth/objects/node';
 
 const root = resolve(import.meta.dirname, '../../..');
 type PublicAssetAvailability = 'local' | 'manifest';

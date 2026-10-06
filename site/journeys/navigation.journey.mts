@@ -445,4 +445,3 @@ journeys.push({
       throw new Error('World marker selection reloaded the document');
   },
 });
-
