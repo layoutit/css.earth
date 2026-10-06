@@ -78,7 +78,7 @@ field strength (correlation 0.13), and one fixed sheet width of 20° (2.3).
 For Carrington rotation 2053 the Sun has both a measured surface field (the Wilcox Solar Observatory's harmonic
 coefficients, [wso.stanford.edu/Harmonic.rad/CR2053](http://wso.stanford.edu/Harmonic.rad/CR2053)) and a measured corona (the STEREO-B COR1 tomography [the Sun's page](../src/objects/sun-cor1-density/README.md)
 shows). The reversal line computed here from the first was compared with the density measured in the second
-([`corona-sun-check.mts`](../packages/bake/cli/corona-sun-check.mts)):
+([`corona/sun-check.mts`](../packages/bake/cli/corona/sun-check.mts)):
 
 | Radius | Within 5° of the line | 5° to 10° | 10° to 20° | 20° to 40° | Beyond 40° |
 | --- | --- | --- | --- | --- | --- |

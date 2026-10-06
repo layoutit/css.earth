@@ -3,7 +3,7 @@
  * field, extrapolated from the Sun's surface field of one rotation, mark where STEREO measured the corona dense in that
  * rotation? docs/stellar-corona-from-magnetic-maps.md quotes what this prints.
  *
- *   node packages/bake/cli/corona-sun-check.mts <WSO coefficients> <cor1b-n3d_CR2053P1_m10.fits>
+ *   node packages/bake/cli/corona/sun-check.mts <WSO coefficients> <cor1b-n3d_CR2053P1_m10.fits>
  *
  * The field: the Wilcox Solar Observatory's harmonic coefficients of the radial photospheric field for Carrington rotation
  * 2053, Schmidt-normalised, in microtesla (http://wso.stanford.edu/Harmonic.rad/CR2053, 990 bytes, saved unchanged). The
@@ -14,7 +14,7 @@ import { fitsImageAccessor, readFitsHdu } from '@cssearth/fits';
 import { readFile } from 'node:fs/promises';
 
 const [coefficientPath, fitsPath] = process.argv.slice(2);
-if (!coefficientPath || !fitsPath) throw new TypeError('Usage: corona-sun-check.mts <WSO coefficients> <COR1 density FITS>');
+if (!coefficientPath || !fitsPath) throw new TypeError('Usage: corona/sun-check.mts <WSO coefficients> <COR1 density FITS>');
 
 /** WSO's Schmidt-normalised g and h as the orthonormal real harmonics the derivation uses, which carry the Condon-Shortley
  * phase: g and h times (-1)^m sqrt(4π / (2l + 1)), and microtesla to gauss. */

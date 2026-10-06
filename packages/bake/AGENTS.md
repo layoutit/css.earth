@@ -193,7 +193,7 @@ cycle. Share anything else through `@cssearth/core` or another package. Prepared
     continuous Gaia XP spectrum (`xp-continuous-sample.py`) the body READMEs name; and, in `corona/`, a corona density derived
     from a surface magnetic map (the potential field to a source surface, its reversal line and open share, gas at rest and
     Parker's wind, the radial-filter display), described with its checks in `docs/stellar-corona-from-magnetic-maps.md`.
-    `packages/bake/cli/corona-sun-check.mts` is the Sun check that note quotes. It imports `objects/color`,
+    `packages/bake/cli/corona/sun-check.mts` is the Sun check that note quotes. It imports `objects/color`,
     `objects/raster` and `objects/sources`. It is not part of `objects/layers/observation`, whose code the nebula lab's
     compiler identity reaches, so that identity does not pin the source-manifest readers.
   - `objects/candidates`: what public archives hold for a body or a star before it is reworked: read-only searches of

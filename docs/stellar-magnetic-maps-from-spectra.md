@@ -140,4 +140,9 @@ then be given a corona ([A star's corona from its magnetic map](stellar-corona-f
 - **The bake.** A map is a new surface image, so the star is baked through its page text. Its arrival picture is retaken
   only when its axis changed.
 
+![One map of each of the six stars mapped so far, as their pages draw it](images/stellar-magnetic-maps.webp)
+
+One map of each star mapped so far, as its page draws it on 6 October 2026: red where the field points out of the star, blue
+where it points in, each star on its own scale.
+
 [What the archive holds](espadons-ledger.md) lists every shipped star with spectra and how far each has come.
