@@ -14,7 +14,9 @@ function fixture() {
 test('the keeping animation starts on the element, is paused two frames later and is cancelled on release', () => {
   const f = fixture(), release = keepLayers(f.element, f.view);
   assert.equal(f.animated.length, 1);
-  assert.deepEqual(f.animated[0]!.keyframes, [{ translate: '0px 0px' }, { translate: '0.01px 0px' }], 'the element keeps its own transform');
+  assert.deepEqual(f.animated[0]!.keyframes, [{ rotate: '0deg' }, { rotate: '0.01deg' }]);
+  for (const frame of f.animated[0]!.keyframes as Record<string, string>[]) for (const property of ['translate', 'scale', 'transform'])
+    assert.equal(property in frame, false, `the camera root keeps its own ${property}: an animation's value would replace it`);
   assert.equal(f.animation.id, 'kept-layers');
   f.frame();
   assert.deepEqual(f.calls, [], 'still running after one frame');
