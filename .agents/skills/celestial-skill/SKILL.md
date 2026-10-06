@@ -41,6 +41,7 @@ changed capability. The stages below are not a checklist to rerun for every task
 | Repair an existing view or refresh its detail | Reproduce the defect, trace its source/recipe, and reuse valid registration, geometry and interaction evidence. Prepare the affected assets and inspect their changed appearance. |
 | Add a body or selected dataset | Survey the relevant sources, choose the supported presentation, and deliver the selected view end to end. Additional interesting datasets remain recorded opportunities. |
 | Add a shared preparation capability | Establish the missing source interpretation, extend the shared owner within the authorized scope, and check that interpretation and its consumers. An offline decoder is not a runtime change. |
+| Nebula, supernova remnant, galaxy or cluster page | It is a picture layer bank, not a body surface. Start from [pictures on published shapes](references/implementation-map.md#pictures-on-published-shapes) and give the picture depth only from values a paper prints. A volumetric bake belongs to the Nebula Lab skill (`.agents/skills/nebula-lab/SKILL.md`). |
 | Repair findings from a catalog review | Reuse the audit and ledgers, check their revisions and affected inputs, and repair the demonstrated defects. Refresh inventory only for changed membership or missing coverage. |
 
 Choose by the actual quantity as well: a scalar map, shape-only view or metadata
@@ -294,7 +295,9 @@ it chose and why. `--full` bakes everything, and is needed when a source image w
 companion stars, starts with `node packages/bake/cli/star-candidates.mts "<SIMBAD identifier>"` and then `pnpm telescope new-object
 <spec.json>` (the spec format is in `packages/telescope-cli/src/new-object/spec.mts`): it writes the whole system from the archives and leaves
 only the prose marked `TODO(new-object)`; `--check` runs the chain through the page data on what it wrote, `--bake` the whole chain,
-and `telescope new-object --bake <id>...` bakes objects already in the tree. `--from-archive` also quotes each body's English
+and `telescope new-object --bake <id>...` bakes objects already in the tree. The
+[implementation map](references/implementation-map.md#commands-and-test-routing) lists the generator's other entry points: the
+`--from-<route>` drafts, `--skip-existing`, `--refresh`, `--rename`, the photometry draft and the two shape-only scaffolds. `--from-archive` also quotes each body's English
 Wikipedia lead, verbatim and cited at its revision under CC BY-SA 4.0 (`packages/telescope-cli/src/new-object/prose.mts`): the sentence naming the body for
 the card and the next for the introduction, looked up by the name Wikipedia titles it with (55 Cancri e for the archive's 55 Cnc e, Kepler-62f); a body with no article gets no quote and a note. A planet whose archive mass is only an upper limit keeps GM 0, the records' unpublished value, and shows the limit ("Under 0.11 Jupiter masses"). One whose archive adopts no mass at all keeps GM 0 too and shows "Not measured". The generator never writes a sentence of its own. Planets for a star that already exists take a `{ "host": "<id>", "planets": [...] }` entry. In a multiple system, `--from-archive` adds each bound wide companion
 (El-Badry et al. 2021, chance alignment below 0.1; TIC v8.2 temperature, radius and mass) as a placed star of the host's system at its own Gaia

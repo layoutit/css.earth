@@ -55,6 +55,7 @@ refuses an implemented object that has none.
 | Shared page and content presentation | `site/pages/[id].astro`, `site/components/ObjectPage.astro`, `site/server/object-page-data.mts`, `site/contracts/object-page-contract.mts`, `site/layouts/ObjectLayout.astro` |
 | Content, dataset labels and minimap preparation | `@cssearth/bake/objects/content` (the content contract, dataset labels, dataset steps and legends), `site/build/content/prepare.ts`, `@cssearth/bake/surface-previews` (`surface-minimaps.ts`) |
 | Search and marker presentation | `site/search/search-objects.mts`, `packages/bake/src/navigation/prepare-navigation.ts`, `packages/renderer/src/navigation/marker-presentation.ts` |
+| Picture layer banks: nebulae, remnants, galaxies and clusters | `packages/bake/src/image-layers/`, `packages/bake/cli/prepare-image-layers.mts`; see [pictures on published shapes](#pictures-on-published-shapes) |
 | Open hyperbolic trajectories | `packages/astronomy/src/kepler.ts`, `packages/bake/src/world-context/hyperbolic-path.ts`, shared world-context preparation and orbit validation/projector |
 
 Minimap preparation accepts authored source paths and prepared source records.
@@ -410,6 +411,32 @@ OSIRIS; gzip band reversal and the paired flat for AMICA), so a declaration
 would restate constants while turning validity policy into data. Revisit only
 if a third attached-label, pointer-addressed PDS3 geometry archive appears.
 
+## Pictures on published shapes
+
+A nebula, supernova remnant, galaxy or galaxy cluster is drawn from a picture, not
+from a surface map. Its package is a layer bank beside its page, such as
+`src/objects/m57-layers/`. The bank's `source/recipe.json`
+(`cssearth-image-layer-recipe@1`, parsed by `packages/bake/src/image-layers/config.ts`)
+places the picture's light in depth. Choose the `geometry` form by what the paper
+publishes. The form's values are ones a paper prints; its comment in `config.ts`
+names each field.
+
+| The paper gives | Recipe form | Owner in `packages/bake/src/image-layers/` | Example bank |
+| --- | --- | --- | --- |
+| Emission-line speeds and an expansion law, so a speed is a depth | `geometry.shape`: walls in front of and behind the star | `shape.ts` | `m57-layers`, `cassiopeia-a-layers`, `ngc-2392-layers` |
+| A filled spheroid, with its envelope and cavities | `geometry.body` | `body.ts` | `m97-layers` |
+| A disc and the ring around it, in two tilted planes | `geometry.rings` | `rings.ts` | `helix-layers` |
+| A closed mesh made from spectra, as a binary STL | `geometry.surface` | `surface.ts` | `homunculus-nebula-layers`, `m76-layers` |
+| A cube of gas densities made from velocity cubes | `geometry.densityGrid` | `density-grid.ts` | `ngc-3132-layers`, `m1-67-layers` |
+| Gas streams on Keplerian orbits about a centre | `geometry.streams` | `streams.ts` | `galactic-centre-layers` |
+| A cluster merger's hot gas and mass, each round about its line | `geometry.collision` | `collision.ts` | `bullet-cluster-layers`, `el-gordo-hubble-layers`, `macs-j0025-layers` |
+| A relaxed cluster's hot gas and mass as fitted ellipsoidal shells | `geometry.ellipsoid` | `collision.ts`, `galaxies.ts` | `abell-1689-chandra-layers` |
+| A bulge-plus-disc fit of a galaxy's light | `geometry.bulge` | `bulge.ts` | `m31-layers`, `m81-layers`, `m104-layers` |
+
+The [Messier guide](../../../../docs/messier/README.md) explains the walls, the body
+and the bulge. A volumetric bake from images and a spatial prior belongs to the
+Nebula Lab skill (`.agents/skills/nebula-lab/SKILL.md`), not to this route.
+
 ## Oracles
 
 The pipeline derives nothing from an oracle; an oracle recomputes what the
@@ -479,6 +506,15 @@ purposes; run those needed for the task, not every preparation step by default.
 | Write a ground-based dataset's two Horizons tables | `node packages/bake/cli/sphere-horizons.mts <id> [--write]`: Paranal rows at each frame's exposure start and heliocentric vectors one light time earlier, asked in batches of 25 and declared in the manifest; a table the manifest does not name yet is declared for `node site/build/prepare/author-source-records.mts` |
 | Measure a ground-based dataset against its paper's comparison figure | `node packages/bake/cli/published-comparison.mts <id> [--write]`: reads the figure from the pinned PDF (`packages/bake/src/sources/pdf-image.ts`), writes `evidence/published-comparison.json` and its image; a new record's zero pixel digest is adopted on the first `--write` |
 | Generate a placed star, its planets and companion stars | `pnpm telescope new-object <spec.json>` (also `node packages/telescope-cli/src/new-object/new-object-cli.mts --spec <spec.json>`; format in `packages/telescope-cli/src/new-object/spec.mts`). SIMBAD, through the telescope's resolver, names the star and gives its Gaia DR3 source; placement from the Gaia row. Color: the first spectrum that reads, in the order STIS NGSL, Gaia XP (the ARI Heidelberg mirror when ESA's DataLink is down), Pulkovo, Kiehling, Kharitonov, Burnashev part 2, with the next as the cross-check, else Planck at the cited temperature; coverage gaps declared. Limb: Claret & Bloemen (2011) ATLAS V, else Claret (2017) PHOENIX, else none with the reason. Orbits: a whereistheplanet posterior picked by `posterior-pick.py`, one paper's NASA Exoplanet Archive `ps` row, or cited elements. Source records are written or reused by identity. Only prose is left marked `TODO(new-object)`, then `prepare-object`. The shape-only scaffold (`node packages/telescope-cli/src/new-object/new-object-cli.mts <id> --name ...`) remains for a black hole. `packages/telescope-cli/src/new-object/new-object.test.mts` reproduces GJ 504 b's shipped orbit from its posterior pick and checks the route choice, gaps and archive rows on fixtures |
+| Draft a spec from one archive or catalogue | `pnpm telescope new-object --from-<route> NAME... --out spec.json` (`packages/telescope-cli/src/new-object/drafts.mts`): a draft names what its source lacks, and the spec parser refuses it until a person has cited the rest. Star routes: `--from-archive HOST` (NASA Exoplanet Archive), `--from-debcat SYSTEM` (both stars of an eclipsing binary), `--from-apokasc KIC`, `--from-k2 EPIC` and `--from-tess TIC` (giants weighed by their oscillations), `--from-gaia SOURCE_ID`, `--from-hipparcos HIP`, `--from-chara HD` and `--from-npoi HD` (measured discs), `--from-iau all\|NAME` (IAU-named stars the universe lacks), `--from-cepheids NAME`, `--from-sh0es HOST[/ID]`, `--from-m31cepheids all\|V1\|ID`, `--from-m33cepheids all\|ID` and `--from-table CLASS:GALAXY=TABLE[#ROW]` (a star of another galaxy from a VizieR table; `telescope stars GALAXY` finds the tables). Dataset routes for a page that exists: `--from-esa HOST=PAGE_URL` (a Hubble or Webb picture), `--from-magnetic HOST` (a corona derived from the page's magnetic maps) and `--from-spectra HOST` (magnetic maps reduced here from archived polarised spectra) |
+| Run a spec without rewriting bodies already in the tree | `pnpm telescope new-object <spec.json> --skip-existing [--check \| --bake]`: an entry whose `src/objects/<id>` exists is skipped |
+| Regenerate bodies the generator made | `pnpm telescope new-object --refresh <id>... [--check \| --bake]` (`packages/telescope-cli/src/new-object/refresh.mts`): reads each package's stored spec, `source/preparation/new-object.json`, and generates again from the archives as they are today. It refuses a hand-made package and one a person extended with datasets the generator does not make; it keeps a reader card, introduction or README a person rewrote and every investigation-ledger entry |
+| Rename generated stars by the order of preference | `node packages/telescope-cli/src/new-object/new-object-cli.mts --rename <star id>...` (`rename.mts`): asks SIMBAD for the star's designations and rewrites the stored specs of the star and the bodies it hosts. Ids, folders and addresses stay, and the old name becomes an alias. `--refresh` then regenerates |
+| Band photometry for imaged planets already in the tree | `new-object-cli.mts --draft-photometry <id>[="name in the sheet"]... --out entries.json` drafts entries from the UltracoolSheet (`archives/ultracool.mts`); `--photometry entries.json` applies them, then `prepare-object.mts` bakes |
+| Scaffold a shape-only star or black hole from its astronomy record | `new-object-cli.mts <id> --name <display name> --system <system name> --temperature <K> --temperature-source <citation with URL> --description <catalogue line> --paper <url> --paper-credit <credit> [--order <n>]`; a black hole takes `--black-hole --shadow-source <citation>` in place of the temperature pair. Needs `packages/astronomy/data/bodies/<id>.json` with a `star` block and `physical.meanRadiusKm` |
+| Scaffold a shape-only planet of another star | `node packages/telescope-cli/src/new-object/new-hosted-planet.mts <id> --name <display name> --system <system name> --description <catalogue line> --paper <url> --paper-credit <credit> [--order <n>] [--color <#rrggbb>] [--rotation synchronous\|unmeasured] [--self-luminous <K> --temperature-source <citation>]`. Needs an astronomy record with a `hostedOrbit` and a `physical.parent` that is a placed star; prose is left marked `TODO(new-hosted-planet)` |
+| Refresh the IAU star-name bank | `node packages/telescope-cli/src/new-object/archives/iau-names.mts --acquire` rewrites `src/references/iau-star-names` from the IAU Working Group on Star Names' catalogue; nothing else writes it |
+| Bake a picture layer bank | `node packages/bake/cli/prepare-image-layers.mts src/objects/<bank id>`; see [pictures on published shapes](#pictures-on-published-shapes) |
 | Restore selected-body sources before baking | `node packages/bake/cli/restore-source-inputs.mts --object=<id>`, then `pnpm prepare:objects --object=<id>` |
 | Build the site and assemble declared runtime files | `pnpm build` |
 
