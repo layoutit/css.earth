@@ -3,6 +3,7 @@ import sharp from 'sharp';
 import type { CollisionBody, EllipsoidBody, ImageLayerRecipe, LayerAxis } from './config.ts';
 import { rad } from './disc.ts';
 import { removeCompactSources } from './compact-sources.ts';
+import { imageLayerGalaxies } from './galaxies.ts';
 import { paintTexel } from './texel.ts';
 
 /** A cluster merger's hot gas and mass (`geometry.collision`). The X-ray papers take the gas as round about the line
@@ -20,9 +21,12 @@ import { paintTexel } from './texel.ts';
  *
  * A relaxed cluster's gas and mass (`geometry.ellipsoid`) are spread the same way through ellipsoidal shells about a
  * published centre: ellipses on the sky, and a published number of times as long along the sight line as their long
- * axis on the sky. There the light is taken apart shell by shell, and a body has one station. */
+ * axis on the sky. There the light is taken apart shell by shell, and a body has one station. With
+ * `geometry.ellipsoid.galaxies` the photograph's own light leaves its plane too (./galaxies.ts). */
 type Collision = NonNullable<ImageLayerRecipe['geometry']['collision']> | NonNullable<ImageLayerRecipe['geometry']['ellipsoid']>;
 type Corner = [u: number, v: number, depthArcsec: number];
+/** A body of the leaves: its light by channel as optical depth on each face pixel, and how much of it lies at a place and depth. */
+interface Body { name: string; medium?: CollisionBody | EllipsoidBody; source: string; tau: Float32Array[]; emission: (east: number, north: number, depth: number) => number; pixels: number; sources: number; wholeArcsec: number; reachArcsec: number; differs: number; refused: number }
 export interface CollisionLeaf { id: string; axis: LayerAxis; rgba: Buffer; width: number; height: number; corners: [Corner, Corner, Corner, Corner] }
 
 /** Steps along a sight line within one slab, when a body's emission there is summed. */
@@ -37,11 +41,17 @@ const LEAST_OPACITY = 4;
  * short by in rounding. Without a limit, a sum that is nearly full and a little short asks every nearer slab for a
  * nearly opaque texel: plates that come apart as soon as the stack is seen from beside the Sun's line. */
 const MAKE_UP = 4;
+/** The depths a photograph's galaxies stand at when seen from the Sun: each on the nearest of this many sheets. A sheet's
+ * light is raised to make up what the slabs in front of it hide, by this many times at most: from beside the Sun's
+ * line the slabs in front are others, and what was raised shows. */
+const GALAXY_SHEETS = 16, MOST_RAISED = 3;
 /** An ellipsoid's picture fades out over this share of the largest shell its frame holds whole, so that the body ends
  * on a shell and not on the frame's rectangle. */
 const SHELL_FADE = .25;
 
 export async function imageLayerCollision(options: { recipe: ImageLayerRecipe; sourceDirectory: string; width: number; height: number;
+  /** The photograph on its plane, RGBA with straight color: with `geometry.ellipsoid.galaxies`, the light that leaves the plane is cleared from it. */
+  photograph?: Buffer;
   /** A face pixel's place on the sky from the bank's target, arcseconds east and north. */
   sky: (px: number, py: number) => [number, number];
   /** A sky position's face pixel. */
@@ -69,20 +79,22 @@ export async function imageLayerCollision(options: { recipe: ImageLayerRecipe; s
       for (let c = 0; c < 3; c++) { const value = Math.max(0, rgb[3 * p + c]! - PICTURE_FLOOR) / (255 - PICTURE_FLOOR) * fade; tau[c]![p] = -Math.log(1 - Math.min(value, .998)); light[p] += tau[c]![p]!; }
       framed[p] = fade === 1 ? 1 : 0;
       if (light[p]! > 0) pixels++; }
-    const place = placed(name, medium), s = new Float32Array(count), r = new Float32Array(count); let whole = Infinity;
+    const place = placed(name, medium), s = new Float32Array(count), r = new Float32Array(count), faded = new Float32Array(count).fill(1); let whole = Infinity;
     for (let py = 0; py < H; py++) for (let px = 0; px < W; px++) { const p = py * W + px, [east, north] = sky(px, py); s[p] = place.station(east, north); r[p] = place.offset(east, north);
       if (!framed[p] || px === 0 || py === 0 || px === W - 1 || py === H - 1) whole = Math.min(whole, Math.abs(r[p]!)); }
     // An ellipsoid ends on a shell: its picture fades out toward the largest shell the frame holds whole.
-    if (place.shells) { pixels = 0; for (let p = 0; p < count; p++) { const t = Math.min(1, Math.max(0, (whole - Math.abs(r[p]!)) / (SHELL_FADE * whole))), fade = t * t * (3 - 2 * t); light[p] *= fade; for (let c = 0; c < 3; c++) tau[c]![p] *= fade; if (light[p]! > 0) pixels++; } }
+    if (place.shells) { pixels = 0; for (let p = 0; p < count; p++) { const t = Math.min(1, Math.max(0, (whole - Math.abs(r[p]!)) / (SHELL_FADE * whole))), fade = t * t * (3 - 2 * t); faded[p] = fade; light[p] *= fade; for (let c = 0; c < 3; c++) tau[c]![p] *= fade; if (light[p]! > 0) pixels++; } }
     if (!pixels) throw new TypeError(`${recipe.id}: the ${name} picture (${medium.path}) holds no light above its background.`);
-    return { name, medium, tau, light, framed, pixels, sources, place, s, r, wholeArcsec: whole }; };
+    return { name, medium, tau, light, framed, pixels, sources, place, s, r, faded, wholeArcsec: whole }; };
   const pictures = [await read('gas'), ...(collision.mass ? [await read('mass')] : [])];
+  // The photograph's galaxies follow the mass's shells, or the gas's where the recipe has no mass.
+  const galaxies = 'galaxies' in collision && options.photograph ? { ...collision.galaxies!, photograph: options.photograph, shells: pictures.at(-1)! } : null;
   let left = W, top = H, right = -1, bottom = -1;
-  for (let py = 0; py < H; py++) for (let px = 0; px < W; px++) if (pictures.some(picture => picture.light[py * W + px]! > 0)) { left = Math.min(left, px); right = Math.max(right, px); top = Math.min(top, py); bottom = Math.max(bottom, py); }
+  for (let py = 0; py < H; py++) for (let px = 0; px < W; px++) if (pictures.some(picture => picture.light[py * W + px]! > 0) || (galaxies && galaxies.photograph[4 * (py * W + px) + 3]! * galaxies.shells.faded[py * W + px]! > 0)) { left = Math.min(left, px); right = Math.max(right, px); top = Math.min(top, py); bottom = Math.max(bottom, py); }
   const bw = right - left + 1, bh = bottom - top + 1, fscale = Math.min(1, facePixels / Math.max(bw, bh)), sw = Math.max(2, Math.round(bw * fscale)), sh = Math.max(2, Math.round(bh * fscale));
   // Stations and rings are as wide as a cell of the leaves: a body can show nothing finer.
   const bin = pixelArcsec / fscale;
-  const bodies = pictures.map(({ name, medium, tau, light, framed, pixels, sources, place: { shells, deep, station, offset }, s, r, wholeArcsec }) => {
+  const bodies: Body[] = pictures.map(({ name, medium, tau, light, framed, pixels, sources, place: { shells, deep, station, offset }, s, r, wholeArcsec }) => {
     let first = Infinity, last = -Infinity, widest = 0;
     for (let p = 0; p < count; p++) if (light[p]! > 0) { first = Math.min(first, s[p]!); last = Math.max(last, s[p]!); widest = Math.max(widest, Math.abs(r[p]!)); }
     const stations = Math.floor((last - first) / bin) + 1, rings = Math.floor(widest / bin) + 1, sums = [new Float64Array(stations * rings), new Float64Array(stations * rings)], counts = [new Uint32Array(stations * rings), new Uint32Array(stations * rings)];
@@ -107,22 +119,29 @@ export async function imageLayerCollision(options: { recipe: ImageLayerRecipe; s
     /** How much the body emits at a place on the sky and a depth. */
     const emission = (east: number, north: number, depth: number) => { const alongSky = station(east, north), z = depth / deep; return emit(alongSky * cos + z * sin, Math.hypot(offset(east, north), z * cos - alongSky * sin)); };
     return { name, medium, source: medium.source, tau, emission, pixels, sources, wholeArcsec, reachArcsec: (outermost + 1) * bin * deep, differs: all > 0 ? differs / all : 0, refused: whole > 0 ? refused / whole : 0 }; });
+  let lifted: ReturnType<typeof imageLayerGalaxies> | null = null;
+  if (galaxies) { const shells = bodies.at(-1)!, medium = galaxies.shells.medium as EllipsoidBody;
+    lifted = imageLayerGalaxies({ photograph: galaxies.photograph, width: W, height: H, radius: Math.max(1, Math.ceil(galaxies.widthArcsec / 2 / pixelArcsec)), pixelArcsec, binArcsec: bin, sky,
+      shells: { emission: shells.emission, reachArcsec: shells.reachArcsec, fade: galaxies.shells.faded, centre: options.pixel(medium.centre.raDeg, medium.centre.decDeg) } });
+    const blank = { source: galaxies.source, sources: 0, wholeArcsec: shells.wholeArcsec, reachArcsec: shells.reachArcsec, differs: 0, refused: 0 };
+    bodies.push({ ...blank, name: 'galaxies', tau: lifted.own, emission: lifted.emission, pixels: lifted.ownPixels }, { ...blank, name: 'starlight', tau: lifted.diffuse, emission: shells.emission, pixels: lifted.diffusePixels }); }
   // The grid of the leaves: each cell's place on the sky and each picture's light toward the Sun there by channel (0 to 1).
   const cells = Array.from({ length: sw * sh }, (_, t) => { const i = t % sw, j = Math.floor(t / sw), x0 = left + Math.floor(i * bw / sw), x1 = Math.max(x0 + 1, left + Math.floor((i + 1) * bw / sw)), y0 = top + Math.floor(j * bh / sh), y1 = Math.max(y0 + 1, top + Math.floor((j + 1) * bh / sh));
     const area = (x1 - x0) * (y1 - y0), [east, north] = sky((x0 + x1 - 1) / 2, (y0 + y1 - 1) / 2);
     return { east, north, lights: bodies.map(body => body.tau.map(channel => { let sum = 0; for (let y = y0; y < y1; y++) for (let x = x0; x < x1; x++) sum += 1 - Math.exp(-channel[y * W + x]!); return Math.min(.998, sum / area); })) }; });
-  return { collision, bodies, cells, columns: sw, rows: sh, reachArcsec: Math.max(...bodies.map(body => body.reachArcsec)), binArcsec: bin,
+  return { collision, bodies, lifted, width: W, height: H, grid: [left, top, bw, bh] as const, cells, columns: sw, rows: sh, reachArcsec: Math.max(...bodies.map(body => body.reachArcsec)), binArcsec: bin,
     window: [2 * left / W - 1, 2 * (right + 1) / W - 1, 1 - 2 * top / H, 1 - 2 * (bottom + 1) / H] as const, sizeArcsec: [bw * pixelArcsec, bh * pixelArcsec] as const };
 }
 
 /** What the prepared bank says of the bodies: the model in a sentence, and each body's account with its measured numbers. */
 export function imageLayerCollisionAccount(model: Awaited<ReturnType<typeof imageLayerCollision>>): { model: string; limitations: string[] } {
-  const { collision, bodies } = model, tiltDeg = 'tiltDeg' in collision ? collision.tiltDeg : 0, pictures = bodies.length > 1 ? 'The hot gas and the mass, each a picture of its own on the same frame, are' : 'The hot gas, a picture of its own on the same frame, is';
+  const { collision, lifted } = model, bodies = model.bodies.filter((body): body is Body & { medium: CollisionBody | EllipsoidBody } => body.medium !== undefined), tiltDeg = 'tiltDeg' in collision ? collision.tiltDeg : 0, pictures = bodies.length > 1 ? 'The hot gas and the mass, each a picture of its own on the same frame, are' : 'The hot gas, a picture of its own on the same frame, is';
   const taken = (body: typeof bodies[number]) => `${(100 * body.refused).toFixed(2)}% asked for less than nothing and was left at none`, sources = (body: typeof bodies[number]) => body.sources ? ` ${body.sources} point sources narrower than ${body.medium.pointSourceArcsec} arcsec were taken down to the light around them.` : '';
   return { model: `The photograph lies on one plane. ${pictures} spread along each sight line through ${'tiltDeg' in collision ? 'a body of revolution about a published line' : 'ellipsoidal shells of a published shape'}.`,
     limitations: bodies.map(body => 'from' in body.medium
       ? `The ${body.name} (${body.source}) is taken as round about its published line, ${tiltDeg ? `tipped ${tiltDeg} degrees from the plane of the sky with the subcluster's end the farther` : 'in the plane of the sky'}; ${body.pixels} face pixels hold its light, out to ${body.reachArcsec.toFixed(0)} arcsec along the sight line. How much it emits at each distance from the line is read from its picture, the two sides' mean taken apart ring by ring in steps of ${model.binArcsec.toFixed(2)} arcsec: ${(100 * body.differs).toFixed(1)}% of the picture's light differs between the two sides, and ${taken(body)}. The picture is a display, not a calibrated map; no depth is measured.${sources(body)}`
-      : `The ${body.name} (${body.source}) is taken as ellipsoidal shells about its published centre: on the sky ellipses ${body.medium.axisRatio} as wide as long, the long axis at position angle ${body.medium.majorAxisPaDeg} degrees, and ${body.medium.elongation} times as long along the sight line as that axis; ${body.pixels} face pixels hold its light, out to ${body.reachArcsec.toFixed(0)} arcsec along the sight line. The picture fades out toward the largest shell the frame holds whole, ${body.wholeArcsec.toFixed(0)} arcsec along the long axis. How much each shell emits is read from the picture, the shells' mean light taken apart from the outside in, in steps of ${model.binArcsec.toFixed(2)} arcsec: ${(100 * body.differs).toFixed(1)}% of the picture's light differs from its shell's mean, and ${taken(body)}. The picture is a display, not a calibrated map; the shells' length along the sight line is the published one, and the long axis is drawn on the sight line; where a pixel's light lies within the shells is not measured.${sources(body)}`) };
+      : `The ${body.name} (${body.source}) is taken as ellipsoidal shells about its published centre: on the sky ellipses ${body.medium.axisRatio} as wide as long, the long axis at position angle ${body.medium.majorAxisPaDeg} degrees, and ${body.medium.elongation} times as long along the sight line as that axis; ${body.pixels} face pixels hold its light, out to ${body.reachArcsec.toFixed(0)} arcsec along the sight line. The picture fades out toward the largest shell the frame holds whole, ${body.wholeArcsec.toFixed(0)} arcsec along the long axis. How much each shell emits is read from the picture, the shells' mean light taken apart from the outside in, in steps of ${model.binArcsec.toFixed(2)} arcsec: ${(100 * body.differs).toFixed(1)}% of the picture's light differs from its shell's mean, and ${taken(body)}. The picture is a display, not a calibrated map; the shells' length along the sight line is the published one, and the long axis is drawn on the sight line; where a pixel's light lies within the shells is not measured.${sources(body)}`)
+      .concat(lifted && 'galaxies' in collision ? [`The photograph's galaxies (${collision.galaxies!.source}) are not at measured depths. A galaxy is a bright nucleus with the compact light nearer to it than to another; each is put at a depth drawn once, by its place in the picture, from where the ${collision.mass ? 'mass' : 'gas'}'s shells put matter on its sight line, the one nearest the shells' centre at their middle. A galaxy's light is what is narrower than ${collision.galaxies!.widthArcsec} arcsec, ${(100 * lifted.compactShare).toFixed(1)}% of the photograph's: seen from the Sun its own cut-out of the photograph, on the nearest of ${GALAXY_SHEETS} sheets, and seen from the side a blob at its depth. ${lifted.galaxies} galaxies were placed, and ${lifted.islands} patches of compact light with no nucleus. The rest of the photograph, its diffuse light, is spread through the shells. The photograph fades out toward the largest shell the frame holds whole.`] : []) };
 }
 
 /** The gas and the mass as leaves, from one grid of cells over their pictures. Face-on (the z bank): slabs parallel to
@@ -148,17 +167,29 @@ export function imageLayerCollisionLeaves(model: Awaited<ReturnType<typeof image
   // its own light and what it hides. Its opacity is the least that can and leaves room above its brightest channel; its
   // color is stored in the middle of the values that give its light, since a browser keeps color times opacity in whole
   // numbers and the encoding moves the color a little. Every slab is the same rectangle, so a browser places them all alike.
-  const owed = new Float32Array(count * 3), shown = new Float32Array(count * 3), drawn: CollisionLeaf[] = [];
+  // A photograph's galaxies are not in the slabs: seen from the Sun each is its own sharp cut-out, on a sheet at its depth.
+  const sheeted = new Set(bodies.flatMap((body, b) => body.name === 'galaxies' ? [b] : []));
+  const owed = new Float32Array(count * 3), shown = new Float32Array(count * 3), drawn: CollisionLeaf[] = [], veils: (Buffer | undefined)[] = [];
   for (let k = slices - 1; k >= 0; k--) { const rgba = Buffer.alloc(count * 4), depth = -reach + (k + .5) * step; let any = false;
     for (let t = 0; t < count; t++) { const o = 4 * t, wanted = [0, 0, 0]; let opacity = 0, own = 0;
       // Color is kept under transparent texels too, so the lossy encoding has no dark edge to bleed in.
-      for (let c = 0; c < 3; c++) { rgba[o + c] = hues[t * 3 + c]!; let within = 0; for (let b = 0; b < B; b++) within += depths[(t * B + b) * 3 + c]! * parts[(t * B + b) * slices + k]!; own = Math.max(own, within); owed[t * 3 + c] += within; wanted[c] = 1 - Math.exp(-owed[t * 3 + c]!); if (shown[t * 3 + c]! < 1) opacity = Math.max(opacity, (wanted[c]! - shown[t * 3 + c]!) / (1 - shown[t * 3 + c]!)); }
+      for (let c = 0; c < 3; c++) { rgba[o + c] = hues[t * 3 + c]!; let within = 0; for (let b = 0; b < B; b++) if (!sheeted.has(b)) within += depths[(t * B + b) * 3 + c]! * parts[(t * B + b) * slices + k]!; own = Math.max(own, within); owed[t * 3 + c] += within; wanted[c] = 1 - Math.exp(-owed[t * 3 + c]!); if (shown[t * 3 + c]! < 1) opacity = Math.max(opacity, (wanted[c]! - shown[t * 3 + c]!) / (1 - shown[t * 3 + c]!)); }
       if (!(own > 0 && 255 * opacity >= .5)) continue;
       const stored = Math.min(254, Math.max(LEAST_OPACITY, Math.ceil(Math.min(255 * opacity, 255 * (1 - Math.exp(-own)) + MAKE_UP) - 1e-6))), light = [0, 1, 2].map(c => Math.max(0, Math.min(stored - 1, Math.round(255 * (wanted[c]! - (1 - stored / 255) * shown[t * 3 + c]!)))));
       rgba[o + 3] = stored; any = true;
       for (let c = 0; c < 3; c++) { rgba[o + c] = Math.min(255, Math.ceil((light[c]! + .5) * 255 / stored)); shown[t * 3 + c] = Math.min(light[c]!, Math.floor(rgba[o + c]! * stored / 255)) / 255 + (1 - stored / 255) * shown[t * 3 + c]!; } }
+    if (any) veils[k] = rgba;
     if (any) drawn.push({ id: name('z', k), axis: 'z', rgba, width: sw, height: sh, corners: [[u0, v0, depth], [u1, v0, depth], [u1, v1, depth], [u0, v1, depth]] }); }
   leaves.push(...drawn.reverse());
+  // A galaxy's sheet stands among the slabs, and the slabs nearer the Sun veil it. So a sheet's light is raised by what
+  // those slabs take away, cell by cell, up to `MOST_RAISED` times and as far as a texel can hold: seen from the Sun the
+  // galaxy then shows its own light.
+  if (model.lifted) { const { width: W, height: H, grid: [left, top, bw, bh] } = model;
+    for (const [index, sheet] of model.lifted.sheets(Array.from({ length: GALAXY_SHEETS }, (_, k) => -reach + (k + .5) * 2 * reach / GALAXY_SHEETS)).entries()) { const through = new Float32Array(count).fill(1);
+      for (let k = 0; k < slices; k++) if (veils[k] && -reach + (k + .5) * step < sheet.depth) for (let t = 0; t < count; t++) through[t]! *= 1 - veils[k]![4 * t + 3]! / 255;
+      for (let y = 0; y < sheet.height; y++) for (let x = 0; x < sheet.width; x++) { const o = 4 * (y * sheet.width + x) + 3; if (!sheet.rgba[o]) continue; const i = Math.floor((sheet.left + x - left) * sw / bw), j = Math.floor((sheet.top + y - top) * sh / bh); if (i < 0 || j < 0 || i >= sw || j >= sh) continue; sheet.rgba[o] = Math.min(255, Math.round(sheet.rgba[o]! / Math.max(through[j * sw + i]!, 1 / MOST_RAISED))); }
+      const a = 2 * sheet.left / W - 1, b = 2 * (sheet.left + sheet.width) / W - 1, c = 1 - 2 * sheet.top / H, d = 1 - 2 * (sheet.top + sheet.height) / H;
+      leaves.push({ id: `galaxies-${String(index).padStart(2, '0')}`, axis: 'z', rgba: sheet.rgba, width: sheet.width, height: sheet.height, corners: [[a, c, sheet.depth], [b, c, sheet.depth], [b, d, sheet.depth], [a, d, sheet.depth]] }); } }
   const depthPixels = Math.max(8, Math.round(2 * reach / model.binArcsec)), planeFrom = -reach + plane * step;
   for (const axis of ['x', 'y'] as const) { const lengthPixels = axis === 'x' ? sh : sw, acrossCells = axis === 'x' ? sw : sh, spacing = model.sizeArcsec[axis === 'x' ? 0 : 1] / crossSlices, size = lengthPixels * depthPixels, rounding = new Float32Array(size);
     // Each channel's light in each curtain's slab of cells, per unit length, times the curtain spacing; and all of it on each sight line through the curtains.

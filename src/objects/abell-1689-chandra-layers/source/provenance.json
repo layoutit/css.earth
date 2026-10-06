@@ -23,7 +23,7 @@
     ]
   },
   "checkedSource": {
-    "kind": "TIFF layers on one frame: Hubble alone and the X-ray gas alone; the mass map lifted from ESA/Hubble heic1014a, the same frame less 98 rows",
+    "kind": "TIFFs on one frame: Hubble alone; the X-ray gas lifted from the album's composite, the same frame less 7 columns and 4 rows; the mass map lifted from ESA/Hubble heic1014a, the same frame less 98 rows",
     "dimensions": [
       3853,
       4000
@@ -44,7 +44,7 @@
     "northClockwiseDeg": 115.217,
     "embeddedTags": "The TIFFs' embedded scale is half the measured one; the tags are not used."
   },
-  "displayModel": "The Hubble picture, its stars removed, lies on one flat plane facing the Sun at the cluster's comoving distance. The hot gas and the mass are each spread along the sight line through ellipsoidal shells of a published shape: ellipses on the sky, 1.22 (gas) and 1.19 (mass) times as long along the sight line as their long axis on the sky, with that axis drawn on the sight line. The shells' length is measured; the depth of a pixel's light within them is not.",
+  "displayModel": "The hot gas and the mass are each spread along the sight line through ellipsoidal shells of a published shape: ellipses on the sky, 1.22 (gas) and 1.19 (mass) times as long along the sight line as their long axis on the sky, with that axis drawn on the sight line. The shells' length is measured; the depth of a pixel's light within them is not. The Hubble picture's galaxies, the Milky Way's stars removed, each stand at a depth drawn from the mass's shells, and its diffuse light is spread through them; nothing of it is left on a plane.",
   "coverage": "The whole published frame. Purple and blue are the publishers' renderings of an X-ray image and a mass map, not light the eye would see.",
   "acquisition": {
     "url": "https://chandra.harvard.edu/photo/2008/a1689/a1689_opt.tif",
@@ -52,6 +52,6 @@
       3853,
       4000
     ],
-    "operation": "Download the publishers' TIFFs; no crop or resample. The mass map is lifted from ESA/Hubble's composite by packages/bake/authoring/abell-1689/layers.mts."
+    "operation": "Download the publishers' TIFFs; no crop or resample. The gas and the mass map are lifted from the publishers' composites by packages/bake/authoring/abell-1689/layers.mts."
   }
 }

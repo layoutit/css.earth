@@ -284,9 +284,12 @@ export async function prepareImageLayers(options: { sourceDirectory: string; out
     const kept=[0,0,0];let weight=0;for(let p=0;p<count;p++){if(!Number.isNaN(spans[N*p]!))base[4*p+3]=0;const a=base[4*p+3]!;if(!a)continue;weight+=a;for(let c=0;c<3;c++)kept[c]!+=a*base[4*p+c]!;}
     if(weight>0)for(let p=0;p<count;p++)if(!Number.isNaN(spans[N*p]!))for(let c=0;c<3;c++)base[4*p+c]=Math.round(kept[c]!/weight);
     bodyFill={spans,tau,dense,hue,radius,emit,along,pixels,carved,hollow};}
+  const collisionArcsec=distanceKpc*Math.PI/648000,gasBody=recipe.geometry.collision||recipe.geometry.ellipsoid?await imageLayerCollision({recipe,sourceDirectory:options.sourceDirectory,width:info.width,height:info.height,photograph:base,
+    sky:(px,py)=>{const ray=rayLocal(2*(px+.5)/info.width-1,1-2*(py+.5)/info.height);return [ray[0]/ray[2]*distanceKpc/collisionArcsec,ray[1]/ray[2]*distanceKpc/collisionArcsec];},
+    pixel:(raDeg,decDeg)=>{const crop=view.crop(raDeg,decDeg);if(!crop)throw new TypeError(`${recipe.id}: ${raDeg}, ${decDeg} (geometry.${recipe.geometry.collision?'collision':'ellipsoid'}) is behind the photograph.`);return [(crop[0]+1)/2*info.width-.5,(1-crop[1])/2*info.height-.5];}}):null;
   let left=info.width,top=info.height,right=-1,bottom=-1;
   for(let py=0;py<info.height;py++)for(let px=0;px<info.width;px++)if(base[4*(py*info.width+px)+3]){left=Math.min(left,px);right=Math.max(right,px);top=Math.min(top,py);bottom=Math.max(bottom,py);}
-  if(right<left)throw new TypeError('Physical support removed the complete observation.');
+  if(right<left){if(!gasBody?.lifted)throw new TypeError('Physical support removed the complete observation.');left=right=info.width>>1;top=bottom=info.height>>1;}
   left=Math.max(0,left-1);right=Math.min(info.width-1,right+1);top=Math.max(0,top-1);bottom=Math.min(info.height-1,bottom+1);
   const extractSized=(rgba:Buffer,width:number,x0:number,y0:number,x1:number,y1:number):Buffer=>{const out=Buffer.alloc((x1-x0)*(y1-y0)*4);for(let py=y0;py<y1;py++)rgba.copy(out,(py-y0)*(x1-x0)*4,4*(py*width+x0),4*(py*width+x1));return out;};
   const luminance=Buffer.alloc(info.width*info.height);for(let p=0;p<info.width*info.height;p++){const i=4*p,a=base[i+3]/255;luminance[p]=Math.round(a*(.2126*base[i]+.7152*base[i+1]+.0722*base[i+2]));}
@@ -560,9 +563,6 @@ export async function prepareImageLayers(options: { sourceDirectory: string; out
         await push(name(axis,s),axis,rgba,lengthPx,depthPx,quad,axis==='x'?(quad[0][0]+quad[1][0])/2:(quad[0][1]+quad[1][1])/2);}}}
   // A cluster merger's hot gas (./collision.ts): its own picture's light, spread along each sight line through a body round
   // about the published collision line, as slabs and curtains. The photograph keeps its plane.
-  const collisionArcsec=distanceKpc*Math.PI/648000,gasBody=recipe.geometry.collision||recipe.geometry.ellipsoid?await imageLayerCollision({recipe,sourceDirectory:options.sourceDirectory,width:info.width,height:info.height,
-    sky:(px,py)=>{const ray=rayLocal(2*(px+.5)/info.width-1,1-2*(py+.5)/info.height);return [ray[0]/ray[2]*distanceKpc/collisionArcsec,ray[1]/ray[2]*distanceKpc/collisionArcsec];},
-    pixel:(raDeg,decDeg)=>{const crop=view.crop(raDeg,decDeg);if(!crop)throw new TypeError(`${recipe.id}: ${raDeg}, ${decDeg} (geometry.${recipe.geometry.collision?'collision':'ellipsoid'}) is behind the photograph.`);return [(crop[0]+1)/2*info.width-.5,(1-crop[1])/2*info.height-.5];}}):null;
   if(gasBody){const toward=Math.sign(intersect(0,0,1)[2]-intersect(0,0,0)[2])||1;
     for(const leaf of imageLayerCollisionLeaves(gasBody,recipe.bake)){const v=leaf.corners.map(([u,w,depth])=>intersect(u,w,toward*depth*collisionArcsec)) as Quad['verticesUnits'],path=`layers/${leaf.id}.webp`,bytes=await encode(leaf.rgba,leaf.width,leaf.height,path,true);
       leaves.push({id:leaf.id,axis:leaf.axis,offsetKpc:leaf.axis==='z'?toward*leaf.corners[0][2]*collisionArcsec:leaf.axis==='x'?(v[0][0]+v[1][0])/2:(v[0][1]+v[1][1])/2,centerUnits:scale(add(...v),.25),doubleSided:true,texturePath:path,widthPx:leaf.width,heightPx:leaf.height,verticesUnits:v,uvs:[[0,0],[1,0],[1,1],[0,1]],style:styleOf(v,path,leaf.width,leaf.height,leaves.length),bytes:bytes.length});}}

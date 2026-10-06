@@ -2,7 +2,15 @@
   "schema": "cssearth-image-layer-recipe@1",
   "id": "abell-1689-chandra-layers",
   "source": {
-    "path": "starless.jpg",
+    "path": "a1689_opt.tif",
+    "foregroundStars": {
+      "path": "gaia-dr3-stars.csv",
+      "raDegColumn": "ra",
+      "decDegColumn": "dec",
+      "gMagColumn": "phot_g_mean_mag",
+      "source": "gaia-2023-dr3",
+      "basis": "The Gaia DR3 sources in the field whose parallax or proper motion is three of its errors or more from none: stars of the Milky Way, in front of the cluster. A galaxy's nucleus shows neither. The query is this table's origin in the source manifest."
+    },
     "dimensions": [
       3853,
       4000
@@ -52,7 +60,7 @@
       "basis": "Umetsu et al. (2015) fit weak and strong lensing, X-ray and Sunyaev-Zel'dovich measurements together with ellipsoidal shells. On the sky: the X-ray gas is concentric ellipses of ellipticity 0.15 +/- 0.03 at position angle 12 +/- 3 degrees (Sect. VII.2, from Sereno et al. 2012) about the X-ray centre 13:11:29.50, -01:20:29.92 (Table 1); the mass has ellipticity 0.29 +/- 0.05 at 11.4 +/- 4.9 degrees about a centroid 0.0 +/- 1.3, -1.9 +/- 1.4 arcsec from the brightest galaxy at 13:11:29.52, -01:20:27.59 (Table 5, weak and strong lensing together). Along the sight line: a shell's half length over its long half axis on the sky (their Eq. 35) is 1.22 +/- 0.24 for the gas and 1.19 +/- 0.37 for the mass in the joint fit (Sect. VIII.2); X-ray and Sunyaev-Zel'dovich data alone give the gas 1.70 +/- 0.29 (Sect. VII.2). The fit puts the long axis 22 +/- 10 degrees from the sight line; no measurement tells its near end from its far one, so it is drawn on the sight line.",
       "gas": {
         "source": "chandra-2008-abell-1689-layers",
-        "path": "a1689_xray.tif",
+        "path": "gas.png",
         "centre": {
           "raDeg": 197.8729167,
           "decDeg": -1.3416444
@@ -72,6 +80,11 @@
         "axisRatio": 0.71,
         "majorAxisPaDeg": 11.4,
         "elongation": 1.19
+      },
+      "galaxies": {
+        "source": "chandra-2008-abell-1689-layers",
+        "basis": "No measurement gives a galaxy's place along the sight line: a redshift gives its speed, not its distance within the cluster. Umetsu et al. (2015) find the mass aligned with the distribution of the cluster's galaxies, so each galaxy's depth is drawn from the mass's shells.",
+        "widthArcsec": 10
       }
     }
   },

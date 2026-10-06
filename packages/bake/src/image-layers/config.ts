@@ -99,7 +99,12 @@ export interface ImageLayerRecipe {
      * its plane; each picture's light is spread along each sight line through the shells that add up to it, out to the
      * largest shell the frame holds whole. The shells' long axis is drawn on the sight line: a fit gives its angle from
      * it, but no measurement tells the near end from the far one. */
-    ellipsoid?: { source: string; basis: string; gas: EllipsoidBody; mass?: EllipsoidBody };
+    ellipsoid?: { source: string; basis: string; gas: EllipsoidBody; mass?: EllipsoidBody;
+      /** The photograph's galaxies in depth (./galaxies.ts): each at a depth drawn from the mass's shells (the gas's
+       * without a mass), with the photograph's light nearest to it. Light narrower than `widthArcsec` is a galaxy's
+       * compact light, a blob in the views from the side; the rest is spread through the shells there. Nothing
+       * measures a galaxy's depth. */
+      galaxies?: { source: string; basis: string; widthArcsec: number } };
     body?: { source: string; basis: string; semiPolarArcsec: number; semiEquatorialArcsec: number; polarTiltDeg: number; polarLeansToPaDeg: number;
       envelope?: { source: string; radiusArcsec: number };
       cavities?: { source: string; emission: number; sizeArcsec: number; farBetweenPaDeg: [number, number] } };
@@ -240,7 +245,9 @@ const ellipsoidOf = (v: unknown): NonNullable<ImageLayerRecipe['geometry']['elli
     if (axisRatio > 1) throw new TypeError(`${name}.axisRatio is the shells' short axis on the sky over their long one, at most 1; got ${axisRatio}.`);
     return { source: text(b.source, `${name}.source`), path: path(b.path), centre: { raDeg: finite(centre.raDeg, `${name}.centre.raDeg`), decDeg: finite(centre.decDeg, `${name}.centre.decDeg`) }, axisRatio, majorAxisPaDeg: finite(b.majorAxisPaDeg, `${name}.majorAxisPaDeg`), elongation: positive(b.elongation, `${name}.elongation`),
       ...(b.pointSourceArcsec === undefined ? {} : { pointSourceArcsec: positive(b.pointSourceArcsec, `${name}.pointSourceArcsec`) }) }; };
-  return { source: text(e.source, 'geometry.ellipsoid.source'), basis: text(e.basis, 'geometry.ellipsoid.basis'), gas: body(e.gas, 'geometry.ellipsoid.gas'), ...(e.mass === undefined ? {} : { mass: body(e.mass, 'geometry.ellipsoid.mass') }) };
+  const galaxies = e.galaxies === undefined ? undefined : object(e.galaxies, 'geometry.ellipsoid.galaxies');
+  return { source: text(e.source, 'geometry.ellipsoid.source'), basis: text(e.basis, 'geometry.ellipsoid.basis'), gas: body(e.gas, 'geometry.ellipsoid.gas'), ...(e.mass === undefined ? {} : { mass: body(e.mass, 'geometry.ellipsoid.mass') }),
+    ...(galaxies === undefined ? {} : { galaxies: { source: text(galaxies.source, 'geometry.ellipsoid.galaxies.source'), basis: text(galaxies.basis, 'geometry.ellipsoid.galaxies.basis'), widthArcsec: positive(galaxies.widthArcsec, 'geometry.ellipsoid.galaxies.widthArcsec') } }) };
 };
 const parsecUnit = (v: unknown, unsupported: boolean): 'pc' => {
   if (v !== 'pc' || unsupported) throw new TypeError(`geometry.unit is "pc", on a flat bank without a bulge; got ${JSON.stringify(v)}${unsupported ? ' on a bank that is not flat or has a bulge' : ''}.`);

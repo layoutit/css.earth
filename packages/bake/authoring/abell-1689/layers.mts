@@ -1,7 +1,16 @@
 // Entry script: node packages/bake/authoring/abell-1689/layers.mts [bank id, abell-1689-chandra-layers if none]
 /**
- * Abell 1689's mass map as a picture of its own on the 2008 frame.
+ * Abell 1689's hot gas and its mass map, each as a picture of its own on the 2008 frame.
  *
+ * The gas. The Chandra X-ray Center's 2008 composite (`a1689.tif`, 3846 by 3996 px) is its Hubble layer
+ * (`a1689_opt.tif`, 3853 by 4000 px) with the X-ray gas over it. The album's X-ray picture alone is another, far
+ * brighter rendering, so the gas is lifted from the composite, as it shows it. Measured here: where the composite lies
+ * on the Hubble layer's frame, and that the two were added by a screen: undone, 1 - (1 - composite) / (1 - Hubble),
+ * the gas under the galaxies comes out as the gas beside them. Where the Hubble layer is brighter than `BRIGHT` the
+ * division has nothing to work with; by cells of `CELL` px the gas is the mean of its readings, and a cell without
+ * enough takes the mean of the cells around it.
+ *
+ * The mass.
  * ESA/Hubble published the lensing mass map released with Jullo et al. (2010) laid over a Hubble picture (heic1014a,
  * 3853 by 3902 px). The Chandra X-ray Center's 2008 album has the Hubble layer alone (`a1689_opt.tif`, 3853 by 4000 px) on the frame
  * its X-ray layer shares. Measured here:
@@ -23,8 +32,8 @@
  * most): light narrower than the disc comes down to the light around it, and the wide mass stays.
  * The opened map is smoothed over a quarter of the disc's radius.
  *
- * Input, beside the bank's recipe: `a1689_opt.tif` and `heic1014a.tif`. Output: `mass.png`, and printed, the shift, how
- * much was read and filled, and how far the Hubble rendering and the lifted map, screened back together, are from the composite.
+ * Input, beside the bank's recipe: `a1689_opt.tif`, `a1689.tif` and `heic1014a.tif`. Output: `gas.png` and `mass.png`,
+ * and printed, each composite's shift, how much was read and filled, and the checks.
  */
 import { resolve } from 'node:path';
 import sharp from 'sharp';
@@ -39,6 +48,10 @@ const WIDTHS = [1, 2, 5, 12, 30], SHARE = .25;
 const OPEN = 20;
 /** The corners hold no mass map beyond this share of the frame's half diagonal. */
 const CORNER = .85;
+/** The Hubble layer's brightest channel, of 255, from which a pixel holds no reading of the gas. */
+const BRIGHT = 140;
+/** Widths, in cells, of the neighbourhoods a cell without a reading of the gas is filled from. */
+const GAS_WIDTHS = [1, 2, 5, 12, 30, 60];
 
 const source = resolve(import.meta.dirname, '../../../../src/objects', process.argv[2] ?? 'abell-1689-chandra-layers', 'source');
 const read = async (name: string) => { const { data, info } = await sharp(resolve(source, name), { limitInputPixels: false }).toColorspace('srgb').removeAlpha().raw().toBuffer({ resolveWithObject: true }); return { data, width: info.width, height: info.height }; };
@@ -94,3 +107,31 @@ console.log(`mass.png: ${hubble.width} by ${hubble.height} px. The composite lie
 console.log(`Read in blue: ${(100 * readPixels / (W * H)).toFixed(1)}% of the pixels, ${(100 * knownCells / (w * h)).toFixed(1)}% of the cells; filled from around, by width in cells: ${WIDTHS.map((width, k) => `${width}: ${filled[k]}`).join(', ')}.`);
 console.log(`Opened by a disc of ${OPEN} cells: ${(100 * taken / all).toFixed(1)}% of the map's blue was narrower than the disc and came down.`);
 console.log(`The Hubble rendering and the lifted map, screened back together, are ${(apart / compared).toFixed(1)} of 255 from the composite on average.`);
+
+// The gas, from the 2008 composite: its place on the frame, the screen undone by cells, the cells without a reading filled.
+{ const album = await read('a1689.tif'), aw = album.width, ah = album.height; if (aw > hubble.width || ah > hubble.height) throw new TypeError(`a1689.tif is ${aw} by ${ah} px and a1689_opt.tif ${hubble.width} by ${hubble.height}: the composite is the Hubble layer's frame less some rows and columns.`);
+  const white = lit(hubble, 200), spots = lit(album, 200), marks: number[] = []; for (let y = 40; y < ah - 40; y++) for (let x = 40; x < aw - 40; x++) if (spots[y * aw + x]) marks.push(y * aw + x);
+  let placed = { dx: 0, dy: 0, share: 0 };
+  for (let dy = 0; dy <= hubble.height - ah; dy++) for (let dx = 0; dx <= hubble.width - aw; dx++) { let hit = 0, tried = 0; for (let i = 0; i < marks.length; i += 5) { const p = marks[i]!; hit += white[(Math.floor(p / aw) + dy) * hubble.width + p % aw + dx]!; tried++; } if (hit / tried > placed.share) placed = { dx, dy, share: hit / tried }; }
+  const under = (x: number, y: number) => 3 * ((y + placed.dy) * hubble.width + x + placed.dx), gw = Math.floor(aw / CELL), gh = Math.floor(ah / CELL), cells = gw * gh;
+  const gas = [0, 1, 2].map(() => new Float32Array(cells)), got = new Uint8Array(cells); let dark = 0;
+  // The check, by blocks of 16 cells: the gas read under galaxies against the gas read beside them in the same block.
+  const bw = Math.ceil(gw / 16), blocks = Array.from({ length: bw * Math.ceil(gh / 16) }, () => ({ beside: [0, 0, 0, 0], beneath: [0, 0, 0, 0] }));
+  for (let j = 0; j < gh; j++) for (let i = 0; i < gw; i++) { const sum = [0, 0, 0]; let readings = 0;
+    for (let y = j * CELL; y < (j + 1) * CELL; y++) for (let x = i * CELL; x < (i + 1) * CELL; x++) { const p = 3 * (y * aw + x), o = under(x, y), top = Math.max(hubble.data[o]!, hubble.data[o + 1]!, hubble.data[o + 2]!); if (top >= BRIGHT) { dark++; continue; }
+      readings++; const block = blocks[(j >> 4) * bw + (i >> 4)]!, into = top < 20 ? block.beside : top >= 60 ? block.beneath : null; if (into) into[3]!++;
+      for (let c = 0; c < 3; c++) { const value = unscreen(album.data[p + c]!, hubble.data[o + c]!); sum[c]! += value; if (into) into[c]! += value; } }
+    if (readings >= ENOUGH) { got[j * gw + i] = 1; for (let c = 0; c < 3; c++) gas[c]![j * gw + i] = sum[c]! / readings; } }
+  const tableOf = (values: ArrayLike<number>) => { const sums = new Float64Array((gw + 1) * (gh + 1)); for (let y = 0; y < gh; y++) { let row = 0; for (let x = 0; x < gw; x++) { row += values[y * gw + x]!; sums[(y + 1) * (gw + 1) + x + 1] = sums[y * (gw + 1) + x + 1]! + row; } } return sums; };
+  const boxOf = (sums: Float64Array, x: number, y: number, reach: number) => { const x0 = Math.max(0, x - reach), x1 = Math.min(gw, x + reach + 1), y0 = Math.max(0, y - reach), y1 = Math.min(gh, y + reach + 1); return [sums[y1 * (gw + 1) + x1]! - sums[y0 * (gw + 1) + x1]! - sums[y1 * (gw + 1) + x0]! + sums[y0 * (gw + 1) + x0]!, (x1 - x0) * (y1 - y0)] as const; };
+  const held = tableOf(got), nearby = gas.map(tableOf), took = new Array<number>(GAS_WIDTHS.length).fill(0), tiny = Buffer.alloc(3 * cells);
+  for (let j = 0; j < gh; j++) for (let i = 0; i < gw; i++) { const t = j * gw + i; let level = -1;
+    if (!got[t]) for (let k = 0; k < GAS_WIDTHS.length; k++) { const [readings, area] = boxOf(held, i, j, GAS_WIDTHS[k]!); if (readings >= SHARE * area || k === GAS_WIDTHS.length - 1) { level = k; took[k]!++; break; } }
+    for (let c = 0; c < 3; c++) { const readings = level < 0 ? 1 : boxOf(held, i, j, GAS_WIDTHS[level]!)[0]; tiny[3 * t + c] = Math.round(255 * (level < 0 ? gas[c]![t]! : readings > 0 ? boxOf(nearby[c]!, i, j, GAS_WIDTHS[level]!)[0] / readings : 0)); } }
+  const wide = await sharp(tiny, { raw: { width: gw, height: gh, channels: 3 } }).blur(1).resize({ width: gw * CELL, height: gh * CELL, kernel: 'cubic' }).raw().toBuffer(), picture = Buffer.alloc(3 * hubble.width * hubble.height);
+  for (let y = 0; y < gh * CELL; y++) wide.copy(picture, under(0, y), 3 * y * gw * CELL, 3 * (y + 1) * gw * CELL);
+  await sharp(picture, { raw: { width: hubble.width, height: hubble.height, channels: 3 } }).png({ compressionLevel: 9 }).toFile(resolve(source, 'gas.png'));
+  console.log(`gas.png: ${hubble.width} by ${hubble.height} px. The 2008 composite lies ${placed.dx}, ${placed.dy} px from the Hubble layer's corner (${(100 * placed.share).toFixed(1)}% of its white light on that layer's).`);
+  console.log(`${(100 * dark / (aw * ah)).toFixed(1)}% of the pixels were too bright in the Hubble layer; cells filled from around, by width in cells: ${GAS_WIDTHS.map((width, k) => `${width}: ${took[k]}`).join(', ')}.`);
+  const both = blocks.filter(block => block.beside[3]! > 50 && block.beneath[3]! > 50), apartBy = [0, 1, 2].map(c => both.map(block => 255 * (block.beneath[c]! / block.beneath[3]! - block.beside[c]! / block.beside[3]!)).sort((a, b) => a - b)[both.length >> 1]!);
+  console.log(`The screen undone: in ${both.length} blocks of 64 px, the gas under galaxies (Hubble layer 60 to ${BRIGHT}) is ${apartBy.map(value => value.toFixed(1)).join(', ')} of 255 from the gas beside them (Hubble layer under 20), in red, green and blue (medians).`); }

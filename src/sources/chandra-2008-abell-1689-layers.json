@@ -22,8 +22,8 @@
     },
     {
       "role": "original",
-      "url": "https://chandra.harvard.edu/photo/2008/a1689/a1689_xray.tif",
-      "label": "Chandra X-ray gas, TIFF, 3853 x 4000 px, 8.4 MB"
+      "url": "https://chandra.harvard.edu/photo/2008/a1689/a1689.tif",
+      "label": "X-ray gas over the Hubble picture, TIFF, 3846 x 3996 px, 48.9 MB"
     },
     {
       "role": "original",
@@ -40,7 +40,7 @@
     {
       "url": "https://chandra.harvard.edu/photo/2008/a1689/more.html",
       "checkedOn": "2026-10-06",
-      "locator": "The page lists the Chandra X-ray image alone (a1689_xray) and the Hubble image alone (a1689_opt) as JPEG and TIFF, each 3853 x 4000 px on one frame, and wide-field versions of both. Chandra ACIS, 53 hours in five pointings from 2004 to 2006 (Obs. ID 540, 1663, 5004, 6930, 7289); X-ray in purple. The TIFFs' embedded scale is half the true one. Measured on the Hubble layer against Gaia DR3: 67 of the 71 catalogued sources in the frame have a peak at their place, rms 0.18 arcsec, giving 0.0500 arcsec per pixel, north 115.22 deg right of vertical, centre 197.875322, -1.338501, a field of 3.21 x 3.33 arcmin."
+      "locator": "The album has the composite of the Chandra X-ray gas over the Hubble picture (a1689, 3846 x 3996 px), the Hubble image alone (a1689_opt, 3853 x 4000 px) and the X-ray image alone (a1689_xray), as JPEG and TIFF, and wide-field versions. Chandra ACIS, 53 hours in five pointings from 2004 to 2006 (Obs. ID 540, 1663, 5004, 6930, 7289); X-ray in purple. Measured on the files: the composite is the Hubble image's frame less 7 columns and 4 rows, 1 px from its corner, and is that image and a gas layer added by a screen (undone, the gas under the galaxies is within 6 of 255 of the gas beside them); the X-ray image alone is another, far brighter rendering of the gas. The TIFFs' embedded scale is half the true one. Measured on the Hubble image against Gaia DR3: 67 of the 71 catalogued sources in the frame have a peak at their place, rms 0.18 arcsec, giving 0.0500 arcsec per pixel, north 115.22 deg right of vertical, centre 197.875322, -1.338501, a field of 3.21 x 3.33 arcmin."
     },
     {
       "url": "https://chandra.harvard.edu/photo/image_use.html",

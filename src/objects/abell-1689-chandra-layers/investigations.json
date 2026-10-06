@@ -6,10 +6,19 @@
       "id": "chandra-2008-layers",
       "subject": "Chandra X-ray Center: Abell 1689 (2008) in layers",
       "status": "included",
-      "finding": "The Hubble picture and the X-ray gas each alone, TIFFs of 3853 x 4000 px on one frame. Their embedded scale is half the true one: the Hubble layer was registered against Gaia DR3 (67 of 71 sources in the frame, 0.18 arcsec rms; 0.05000 arcsec per pixel, north 115.22 degrees right of vertical).",
+      "finding": "The Hubble picture alone (3853 x 4000 px) and the composite of the X-ray gas over it (the same frame less 7 columns and 4 rows). Their embedded scale is half the true one: the Hubble layer was registered against Gaia DR3 (67 of 71 sources in the frame, 0.18 arcsec rms; 0.05000 arcsec per pixel, north 115.22 degrees right of vertical).",
       "evidence": [
         "https://chandra.harvard.edu/photo/2008/a1689/more.html",
         "https://chandra.harvard.edu/photo/image_use.html"
+      ]
+    },
+    {
+      "id": "x-ray-alone",
+      "subject": "The album's X-ray picture alone",
+      "status": "excluded",
+      "finding": "A different rendering of the gas, far brighter than the gas in the composite: where the Hubble layer is dark and the X-ray picture reads 138, 69, 138 of 255, the composite reads 100, 14, 163. Drawn with it, the gas washed the galaxies out. The gas is lifted from the composite instead, as the publisher shows it over the galaxies; undone as a screen, the gas under the galaxies comes out within 6 of 255 of the gas beside them.",
+      "evidence": [
+        "https://chandra.harvard.edu/photo/2008/a1689/more.html"
       ]
     },
     {
@@ -62,14 +71,25 @@
       "revisitWhen": "A measurement that tells front from back, such as galaxy distances within the cluster, is published."
     },
     {
-      "id": "star-removal",
-      "subject": "NOX star removal on the Hubble layer",
+      "id": "galaxy-depths",
+      "subject": "Depth of the galaxies",
       "status": "included",
-      "finding": "NOX over a1689_opt.tif, then again over a copy a quarter of the size for the saturated stars (25.86% of the picture took that pass). NOX takes compact light whatever it is: the smaller galaxies went with the Milky Way's stars and the larger ones stay, on the photograph's plane.",
+      "finding": "No measurement places a galaxy along the sight line: a redshift gives its speed, not its distance within the cluster. Umetsu et al. (2015) find the mass aligned with the distribution of the cluster's galaxies. So each galaxy of the photograph stands at a depth drawn once, by its place in the picture, from where the mass's shells put matter on its sight line, the one nearest the shells' centre at their middle; the diffuse light is spread through the same shells. A drawing of where the galaxies are likely to be, not a map of where each one is. Asked for on 2026-10-06, when the galaxies still lay on one flat sheet inside the gas.",
       "evidence": [
+        "https://arxiv.org/abs/1503.01482"
+      ],
+      "revisitWhen": "Distances to the cluster's galaxies of their own, better than the cluster is deep, are published."
+    },
+    {
+      "id": "star-removal",
+      "subject": "The Milky Way's stars in the photograph",
+      "status": "included",
+      "finding": "Removed by the bake from a Gaia DR3 table: the sources in the field whose parallax or proper motion is three of its errors or more from none. NOX was tried first and is not used: it took the bright middles of the galaxies with the stars, and the galaxies came out hollow and dim.",
+      "evidence": [
+        "https://gea.esac.esa.int/tap-server/tap/sync",
         "https://chandra.harvard.edu/photo/2008/a1689/"
       ],
-      "revisitWhen": "The cluster's galaxies are to come back: the page's first dataset has them."
+      "revisitWhen": "A star without a Gaia parallax or proper motion shows among the galaxies."
     }
   ]
 }
