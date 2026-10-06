@@ -65,7 +65,7 @@ export interface BrightnessSurfaceMap extends SurfaceMap { /** The mission whose
   /** The share of the light in the star's pixels that Gaia's other stars give, and how many they are. */ readonly neighbourShare?: number; readonly neighbours?: number;
   /** Where the map's tilt comes from: the measured axis the page draws, the tilt the star's record works out, or none. */ readonly tiltFrom: 'page' | 'record' | 'assumed'; readonly codes: readonly string[];
   /** The published method that judged the light a rotation, with what it measured: the height of the periodogram's peak and the periods of its three methods. */
-  readonly method?: { readonly id: string; readonly citation: string; readonly url: string; /** The light curve the method's paper uses, which is the one read. */ readonly lightCurve: string; readonly reliability: string; readonly peakHeight: number; readonly periodsDays: readonly [number, number, number] } }
+  readonly method?: { readonly id: string; readonly citation: string; readonly url: string; /** The light curve the method's paper uses, which is the one read. */ readonly lightCurve: string; readonly reliability: string; /** How many of the star's campaigns were accepted: its period is the mean of theirs. */ readonly campaigns: number; readonly peakHeight: number; readonly periodsDays: readonly [number, number, number] } }
 
 /** "TESS sector 95", "K2 campaign 13", "Kepler quarter 9". */
 export const windowName = (mission: LightMission, window: number) => `${MISSIONS[mission].name} ${MISSIONS[mission].window} ${window}`;
@@ -106,7 +106,7 @@ export function reducedBrightness(choice: SurfaceMapChoice, receipt: unknown, ta
   // A K2 map's receipt names the published method that judged it and what the method measured of this campaign.
   const by = isRecord(record.method) ? record.method : undefined, measured = by && Array.isArray(record.tried) ? record.tried.filter(isRecord).find(one => one.window === window)?.analysis : undefined;
   if (mission !== 'TESS' && !(by && isRecord(measured))) throw new TypeError(`${choice.program}: its receipt names no published method; reduce the star again.`);
-  const method = by && isRecord(measured) ? { id: requireString(by.id, 'method id'), citation: requireString(by.citation, 'method citation'), url: requireString(by.url, 'method url'), lightCurve: requireString(by.lightCurve, 'method light curve'), reliability: requireString(by.reliability, 'method reliability'), peakHeight: requireFiniteNumber(measured.peakHeight, 'peak height'),
+  const method = by && isRecord(measured) ? { id: requireString(by.id, 'method id'), citation: requireString(by.citation, 'method citation'), url: requireString(by.url, 'method url'), lightCurve: requireString(by.lightCurve, 'method light curve'), campaigns: Array.isArray(record.maps) ? record.maps.length : 1, reliability: requireString(by.reliability, 'method reliability'), peakHeight: requireFiniteNumber(measured.peakHeight, 'peak height'),
     periodsDays: [requireFiniteNumber(measured.lombScargleDays, 'periodogram period'), requireFiniteNumber(measured.waveletDays, 'wavelet period'), requireFiniteNumber(measured.autocorrelationDays, 'autocorrelation period')] as const } : undefined;
   const privateer = toolchain.find(pin => pin.startsWith('star-privateer'));
   const tiltFrom = map.inclinationFrom; if (tiltFrom !== 'page' && tiltFrom !== 'record' && tiltFrom !== 'assumed') throw new TypeError(`${choice.program}: its receipt does not say where the map's tilt comes from; reduce the star again.`);
@@ -138,7 +138,9 @@ export const BRIGHTNESS_MAPS: MapKind<BrightnessSurfaceMap> = {
     // A K2 star's light curve is the mission's own, the one the method's paper uses; a TESS star's is measured here from the pixels.
     const own = map.method !== undefined, curve = own ? `the ${from.name} mission's own light curve of ${from.window} ${map.window} (its PDC-MAP flux)` : `the light curve this project measured from the ${from.name} ${from.pixels} of ${from.window} ${map.window}`;
     // The published method that judged the light a rotation, with its three periods and the peak it asks to be over 0.3.
-    const judged = map.method ? ` The period is the mean of three methods' periods (periodogram ${map.method.periodsDays[0].toFixed(2)} d, wavelet ${map.method.periodsDays[1].toFixed(2)} d, autocorrelation ${map.method.periodsDays[2].toFixed(2)} d; periodogram peak ${map.method.peakHeight.toFixed(2)}), accepted by the criteria of ${map.method.citation}.` : '';
+    const three = map.method ? `periodogram ${map.method.periodsDays[0].toFixed(2)} d, wavelet ${map.method.periodsDays[1].toFixed(2)} d, autocorrelation ${map.method.periodsDays[2].toFixed(2)} d; periodogram peak ${map.method.peakHeight.toFixed(2)}` : '';
+    const judged = !map.method ? '' : map.method.campaigns > 1 ? ` This ${from.window}'s three methods give its period (${three}), accepted by the criteria of ${map.method.citation}; the star's period is the mean of its ${map.method.campaigns} accepted ${from.window}s.`
+      : ` The period is the mean of three methods' periods (${three}), accepted by the criteria of ${map.method.citation}.`;
     return { productId: `Brightness map of ${map.targetName} from its light in ${where}`,
       inputTitle: `Brightness map of ${map.targetName} from its light curve in ${where}${own ? ', the mission\'s own' : `, measured from the ${from.pixels}`}: brightness on a longitude-latitude grid`,
       credit: own ? `NASA ${from.name} mission light curve (PDC-MAP), ${from.window} ${map.window}, from MAST; its rotation judged by the criteria of ${map.method!.citation}; map made in this project with ${map.codes.join(', ').replace(/, ([^,]*)$/u, ' and $1')}. ${from.acknowledgment}`
