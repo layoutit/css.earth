@@ -12,8 +12,8 @@
 import { readFitsHeader, skyProjection } from '@cssearth/fits';
 import { locateFitsHdus } from '@cssearth/fits/node';
 import { mastDownloadUrl } from '@cssearth/telescope/node';
-import type { CataloguePosition } from '../../spec.mts';
-import type { Archive, CatalogueRow } from '../archives.mts';
+import type { CataloguePosition } from '../../spec-types.mts';
+import type { Archive, CatalogueRow } from '../archive.mts';
 
 /** Header records asked for at a time: eight (23,040 bytes) hold an HST primary header, or an extension's, in one request. */
 const HEADER_READ = 8 * 2880;

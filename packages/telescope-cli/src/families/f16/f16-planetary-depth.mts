@@ -3,7 +3,7 @@ import {spawn} from 'node:child_process';
 import {copyFile} from 'node:fs/promises';
 import {requireArray,requireFiniteNumber,requireRecord,requireString} from '@cssearth/core';
 import { astroqueryToolchain, fileSize } from '@cssearth/telescope/node';
-import type {FamilyHandler,FamilyOperation} from '../../family-handlers.mts';
+import type {FamilyHandler,FamilyOperation} from '../../family-handler.mts';
 import {
   PLANETARY_AXIS_ROLES,
   parseDepthDescriptor,

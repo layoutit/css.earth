@@ -18,7 +18,7 @@ import { blendingCompanion, blendRefusal } from './companion-blend.mts';
 import { gunzipSync } from 'node:zlib';
 import { CROSS_CHECK_AGREEMENT, measuredSpectrumColor, planckColor, readMeasuredSpectrum, type StellarColor } from '@cssearth/bake/objects/stellar';
 import { ARI_TAP, BURNASHEV_PART2, KHARITONOV_CATALOG, ngslUrl, PULKOVO_TABLE5, VIZIER_ASU, xpSampledMirrorForm, xpSampledUrl, type Archive, type GaiaRow, type Identifiers } from './archives/archives.mts';
-import type { Cited, ColorRoute, StarSpec } from './spec.mts';
+import type { Cited, ColorRoute, StarSpec } from './spec-types.mts';
 
 export const CHECKED = new Date().toISOString().slice(0, 10);
 const VIZIER_LICENSE = { license: 'CDS VizieR catalogue: free use with citation', licenseEvidence: ['https://cds.unistra.fr/vizier-org/licences_vizier.html'] };

@@ -12,7 +12,7 @@
  * or "10" for the luminosity (derived from the parallax), and "00" alone for the age, which FLAME marks less sure for a
  * giant. Where two hold a value, the archive's is kept before SIMBAD's and Gaia's: it names a paper. Nothing is fitted or
  * averaged here, and a value the record already holds is never replaced by a catalogue's. */
-import { decodeEntities } from '../orbit.mts';
+import { decodeEntities } from '../archives/archives.mts';
 import { SOLAR_RADIUS_KM } from '../hosted.mts';
 
 export const PSCOMPPARS_COLUMNS = 'hostname,gaia_dr3_id,ra,dec,st_spectype,st_spectype_reflink,st_met,st_metratio,st_met_reflink,st_lum,st_lum_reflink,st_age,st_age_reflink,st_vsin,st_vsin_reflink,st_rotp,st_rotp_reflink';

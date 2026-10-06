@@ -4,7 +4,7 @@
 import { loadStellarPhotometricColor, type StellarColor } from '@cssearth/bake/objects/stellar';
 import { requireArray, requireRecord } from '@cssearth/core';
 import type { ColorChoice } from './color.mts';
-import type { LimbChoice } from './limb.mts';
+import type { LimbChoice } from './limb-choice.mts';
 
 export const json = (value: unknown) => `${JSON.stringify(value, null, 2)}\n`;
 const hex = (color: StellarColor) => `#${color.srgb.map(value => value.toString(16).padStart(2, '0')).join('')}`;

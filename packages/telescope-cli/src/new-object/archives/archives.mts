@@ -2,19 +2,14 @@
  * the URL it read; a failed request says which archive, which URL and which status. */
 import { requireString } from '@cssearth/core';
 import { assertRangeResponse, rangeRequestHeader, type SourceRange } from '@cssearth/objects/node';
-import { decodeEntities } from '../orbit.mts';
-import type { CataloguePosition } from '../spec.mts';
+import type { CataloguePosition } from '../spec-types.mts';
+import type { Archive, CatalogueRow } from './archive.mts';
+export type { Archive, CatalogueRow } from './archive.mts';
 
-export interface Archive {
-  /** GET, or POST a form when `form` is given; the response text. */
-  text(url: string, form?: Readonly<Record<string, string>>): Promise<string>;
-  /** The whole answer, or exactly the bytes of `range`: a ranged request answered with anything else is refused. */
-  bytes(url: string, range?: SourceRange): Promise<Buffer>;
-  /** Whether a HEAD request answers 200. */
-  exists(url: string): Promise<boolean>;
-  /** Where a redirecting URL points, without following it; undefined when it does not redirect. */
-  location?(url: string): Promise<string | undefined>;
-}
+/** The archive writes reference labels as HTML: accented author names arrive as entities. */
+const NAMED_ENTITIES: Record<string, string> = { amp: '&', lt: '<', gt: '>', quot: '"', apos: "'", nbsp: ' ', aacute: 'á', eacute: 'é', iacute: 'í', oacute: 'ó', uacute: 'ú', agrave: 'à', egrave: 'è', ntilde: 'ñ', uuml: 'ü', ouml: 'ö', auml: 'ä', ccedil: 'ç', szlig: 'ß', oslash: 'ø', aring: 'å', Aacute: 'Á', Eacute: 'É', Oslash: 'Ø', ecirc: 'ê', ocirc: 'ô', acirc: 'â', scaron: 'š', zcaron: 'ž', ccaron: 'č', mu: 'µ', deg: '°' };
+export const decodeEntities = (text: string) => text.replace(/&(#x[0-9a-f]+|#\d+|[a-zA-Z]+);/gu, (whole, code: string) =>
+  code.startsWith('#x') ? String.fromCodePoint(parseInt(code.slice(2), 16)) : code.startsWith('#') ? String.fromCodePoint(Number(code.slice(1))) : NAMED_ENTITIES[code] ?? whole);
 
 /** A dropped connection, before or during the transfer, is retried twice, a second apart; an HTTP error answer is not, so a
  * failed service is reported at once. Every failure names its URL. A request that gives nothing for TRANSFER_TIMEOUT_MS is a
@@ -121,17 +116,6 @@ export async function fetchGaiaRow(archive: Archive, sourceId: string) {
   return { csv, row: parseGaiaRow(csv, sourceId) };
 }
 
-/** One row of a VizieR table, for a star Gaia cannot see (spec `position`): the whole row as VizieR serves it, archived beside the
- * body, and the J2000 position it gives. A star a paper lists by its detector pixel is held the same way: `tsv` is then the header of
- * the archived exposure's extension, and `image` says where in the file it lies (images/image-pixel.mts). Coordinates a paper prints in a
- * table no archive holds are a row too, with nothing kept: the paper is cited by its DOI, as every other printed value is (`paper`). */
-export interface CatalogueRow { readonly catalogue: string; readonly tsv: string; readonly form: Readonly<Record<string, string>>; readonly cells: Readonly<Record<string, string>>; readonly ra: number; readonly dec: number; readonly words: string;
-  /** The columns the position was read from: the table's RAJ2000 and DEJ2000 unless the spec names others. */
-  readonly columns: { readonly ra: string; readonly dec: string };
-  /** Where the row is held, and how a manifest records it (rowArchive). */
-  readonly archive: 'VizieR' | 'SIMBAD' | 'MAST' | 'DOI'; readonly paper?: { readonly url: string }; readonly image?: { readonly url: string; readonly file: string; readonly extension: string; readonly range: SourceRange };
-  /** The Julian year of the position, 2000 unless the spec's `motion` says otherwise, and the row's proper motion (mas/yr) when it names the columns. */
-  readonly epoch: number; readonly pmra?: number; readonly pmdec?: number }
 /** Where a catalogue-placed star's archived row is kept, beside where a Gaia row would be; an exposure's header is kept beside it. */
 export const CATALOGUE_ROW_PATH = 'photometry/catalogue-row.tsv', EXPOSURE_HEADER_PATH = 'photometry/exposure-header.txt';
 export const SIMBAD_TAP = 'https://simbad.cds.unistra.fr/simbad/sim-tap/sync';

@@ -12,7 +12,7 @@
  * and the models are the three things a caller names. */
 import { bobcatNodes, diamondbackGrid, diamondbackNodes, elfOwlGrid, elfOwlNodes, exoRemGrid, exoRemNodes, picasoLimbNodes, picasoPassband, picasoToolchainSync, type PicasoGrid, type PicasoNode } from '@cssearth/telescope/node';
 import { interpolateGrid, readLimbGrid } from '@cssearth/bake/objects/stellar';
-import type { LimbChoice } from './limb.mts';
+import type { LimbChoice } from './limb-choice.mts';
 
 export const PICASO = { cite: 'PICASO 4.1 (Batalha et al. 2019, ApJ 878, 70)', models: 'Sonora Bobcat cloud-free (Marley et al. 2021, ApJ 920, 85)',
   file: 'photometry/picaso-bobcat-v-quadratic.tsv', profiles: 'https://doi.org/10.5281/zenodo.5063476', opacities: 'https://doi.org/10.5281/zenodo.18636725' } as const;
