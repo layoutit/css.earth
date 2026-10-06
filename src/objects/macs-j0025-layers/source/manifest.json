@@ -1,0 +1,212 @@
+{
+  "schema": "cssearth-volume-source-manifest@2",
+  "pathBase": "repository",
+  "inputs": [
+    {
+      "id": "optical",
+      "path": "src/objects/macs-j0025-layers/source/starless.jpg",
+      "origin": "https://chandra.harvard.edu/photo/2008/macs/macs_optical.tif",
+      "sourceUrl": "https://chandra.harvard.edu/photo/2008/macs/more.html",
+      "title": "MACS J0025.4-1222: Hubble, stars removed",
+      "credit": "X-ray: NASA/CXC/Stanford/S.Allen. Optical/Lensing: NASA/STScI/UC Santa Barbara/M.Bradac",
+      "displayCredit": "Chandra X-ray Center",
+      "acquisition": "The publisher's optical layer with its stars removed by `node labs/nebula/run.mts remove-stars src/objects/macs-j0025-layers --from=macs_optical.tif --coarse=4` (NOX over the whole picture, then again over a copy a quarter of the size, 1050 x 1036 px, for the saturated stars: 7.76% of the picture took that pass). NOX takes compact light whatever it is, the cluster's galaxies with the Milky Way's stars. Not tracked. A display picture, not a calibrated scientific array.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "chandra-2008-macs-j0025-layers",
+            "role": "material",
+            "evidence": "src/objects/macs-j0025-layers/source/provenance.json"
+          }
+        ]
+      },
+      "dependencies": [
+        "visible"
+      ],
+      "datasetId": "optical",
+      "license": "No copyright is asserted on Chandra content (https://chandra.harvard.edu/photo/image_use.html); retain the complete recorded credit.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "unresolved",
+            "label": "Hubble ACS F555W F814W",
+            "evidence": "https://chandra.harvard.edu/photo/2008/macs/",
+            "reason": "The publisher's color composite; the retained record does not identify the individual exposures."
+          }
+        ]
+      },
+      "generator": "labs/nebula/run.mts remove-stars"
+    },
+    {
+      "id": "visible",
+      "path": "src/objects/macs-j0025-layers/source/macs_optical.tif",
+      "origin": "https://chandra.harvard.edu/photo/2008/macs/macs_optical.tif",
+      "sourceUrl": "https://chandra.harvard.edu/photo/2008/macs/more.html",
+      "title": "MACS J0025.4-1222: optical",
+      "credit": "X-ray: NASA/CXC/Stanford/S.Allen. Optical/Lensing: NASA/STScI/UC Santa Barbara/M.Bradac",
+      "displayCredit": "Chandra X-ray Center",
+      "acquisition": "The publisher's TIFF (4200 x 4143 px), restored from its origin; not tracked. The frame's place on the sky was measured on it against Gaia DR3 (recipe observation); the star-free photograph is made from it. A display picture, not a calibrated scientific array.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "chandra-2008-macs-j0025-layers",
+            "role": "material",
+            "evidence": "src/objects/macs-j0025-layers/source/provenance.json"
+          }
+        ]
+      },
+      "dependencies": [],
+      "license": "No copyright is asserted on Chandra content (https://chandra.harvard.edu/photo/image_use.html); retain the complete recorded credit.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "unresolved",
+            "label": "Hubble ACS F555W F814W",
+            "evidence": "https://chandra.harvard.edu/photo/2008/macs/",
+            "reason": "The publisher's color composite; the retained record does not identify the individual exposures."
+          }
+        ]
+      }
+    },
+    {
+      "id": "gas",
+      "path": "src/objects/macs-j0025-layers/source/macs_xray.tif",
+      "origin": "https://chandra.harvard.edu/photo/2008/macs/macs_xray.tif",
+      "sourceUrl": "https://chandra.harvard.edu/photo/2008/macs/more.html",
+      "title": "MACS J0025.4-1222: X-ray",
+      "credit": "X-ray: NASA/CXC/Stanford/S.Allen. Optical/Lensing: NASA/STScI/UC Santa Barbara/M.Bradac",
+      "displayCredit": "Chandra X-ray Center",
+      "acquisition": "The publisher's TIFF (4200 x 4143 px) of the X-ray gas alone, on the optical layer's frame; restored from its origin, not tracked. A display picture, not a calibrated scientific array.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "chandra-2008-macs-j0025-layers",
+            "role": "material",
+            "evidence": "src/objects/macs-j0025-layers/source/provenance.json"
+          }
+        ]
+      },
+      "dependencies": [],
+      "license": "No copyright is asserted on Chandra content (https://chandra.harvard.edu/photo/image_use.html); retain the complete recorded credit.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "unresolved",
+            "label": "Chandra ACIS X-ray",
+            "evidence": "https://chandra.harvard.edu/photo/2008/macs/",
+            "reason": "The publisher's color composite; the retained record does not identify the individual exposures."
+          }
+        ]
+      }
+    },
+    {
+      "id": "mass",
+      "path": "src/objects/macs-j0025-layers/source/macs_lens.tif",
+      "origin": "https://chandra.harvard.edu/photo/2008/macs/macs_lens.tif",
+      "sourceUrl": "https://chandra.harvard.edu/photo/2008/macs/more.html",
+      "title": "MACS J0025.4-1222: lensing",
+      "credit": "X-ray: NASA/CXC/Stanford/S.Allen. Optical/Lensing: NASA/STScI/UC Santa Barbara/M.Bradac",
+      "displayCredit": "Chandra X-ray Center",
+      "acquisition": "The publisher's TIFF (4200 x 4143 px) of the lensing mass map alone, on the optical layer's frame; restored from its origin, not tracked. A display picture, not a calibrated scientific array.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "chandra-2008-macs-j0025-layers",
+            "role": "material",
+            "evidence": "src/objects/macs-j0025-layers/source/provenance.json"
+          }
+        ]
+      },
+      "dependencies": [],
+      "license": "No copyright is asserted on Chandra content (https://chandra.harvard.edu/photo/image_use.html); retain the complete recorded credit.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "unresolved",
+            "label": "weak- and strong-lensing mass map",
+            "evidence": "https://chandra.harvard.edu/photo/2008/macs/",
+            "reason": "The publisher's color composite; the retained record does not identify the individual exposures."
+          }
+        ]
+      }
+    },
+    {
+      "id": "composite",
+      "path": "src/objects/macs-j0025-layers/source/macs.jpg",
+      "origin": "https://chandra.harvard.edu/photo/2008/macs/macs.jpg",
+      "sourceUrl": "https://chandra.harvard.edu/photo/2008/macs/more.html",
+      "title": "MACS J0025.4-1222: X-ray, lensing and optical",
+      "credit": "X-ray: NASA/CXC/Stanford/S.Allen. Optical/Lensing: NASA/STScI/UC Santa Barbara/M.Bradac",
+      "displayCredit": "Chandra X-ray Center",
+      "acquisition": "The publisher's 720 x 710 px JPEG of the three layers together, restored from its origin; not tracked. The dataset's preview. A display picture, not a calibrated scientific array.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "chandra-2008-macs-j0025-layers",
+            "role": "material",
+            "evidence": "src/objects/macs-j0025-layers/source/provenance.json"
+          }
+        ]
+      },
+      "dependencies": [],
+      "license": "No copyright is asserted on Chandra content (https://chandra.harvard.edu/photo/image_use.html); retain the complete recorded credit.",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "unresolved",
+            "label": "Chandra ACIS X-ray lensing mass map Hubble ACS F555W F814W",
+            "evidence": "https://chandra.harvard.edu/photo/2008/macs/",
+            "reason": "The publisher's color composite; the retained record does not identify the individual exposures."
+          }
+        ]
+      }
+    }
+  ],
+  "documents": [
+    {
+      "id": "recipe",
+      "path": "src/objects/macs-j0025-layers/source/recipe.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned processing, source interpretation or presentation record; the published image is separately bound as a material input."
+      },
+      "kind": "authored-document",
+      "origin": "cssEarth project-authored record",
+      "credit": "cssEarth contributors",
+      "title": "Image-layer preparation recipe",
+      "acquisition": "Checked-in project-authored JSON. This pin identifies local processing or interpretation metadata, not an original publisher document; the published image is separately bound in inputs."
+    },
+    {
+      "id": "provenance",
+      "path": "src/objects/macs-j0025-layers/source/provenance.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned processing, source interpretation or presentation record; the published image is separately bound as a material input."
+      },
+      "kind": "authored-document",
+      "origin": "cssEarth project-authored record",
+      "credit": "cssEarth contributors",
+      "title": "Published image interpretation and acquisition record",
+      "acquisition": "Checked-in project-authored JSON. This pin identifies local processing or interpretation metadata, not an original publisher document; the published image is separately bound in inputs."
+    },
+    {
+      "id": "presentation",
+      "path": "src/objects/macs-j0025-layers/source/presentation.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned processing, source interpretation or presentation record; the published image is separately bound as a material input."
+      },
+      "kind": "authored-document",
+      "origin": "cssEarth project-authored record",
+      "credit": "cssEarth contributors",
+      "title": "Dataset presentation and prepared-bank bindings",
+      "acquisition": "Checked-in project-authored JSON. This pin identifies local processing or interpretation metadata, not an original publisher document; the published image is separately bound in inputs."
+    }
+  ],
+  "generatedIntermediates": []
+}

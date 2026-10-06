@@ -1,0 +1,72 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "macs-j0025",
+  "card": {
+    "text": "Two clusters that collided head-on, leaving their hot gas between two clumps of mass.",
+    "sources": [
+      {
+        "catalogueId": "chandra-2008-macs-j0025-layers",
+        "url": "https://chandra.harvard.edu/photo/2008/macs/",
+        "label": "Chandra X-ray Center, MACS J0025.4-1222: X-ray: NASA/CXC/Stanford/S.Allen. Optical/Lensing: NASA/STScI/UC Santa Barbara/M.Bradac",
+        "checked": "2026-10-05",
+        "locator": "caption: MACS J0025 formed after an incredibly energetic collision between two large clusters in almost the plane of the sky; the image shows a clear separation between dark and ordinary matter"
+      },
+      {
+        "catalogueId": "ned-macs-j0025",
+        "url": "https://ned.ipac.caltech.edu/byname?objname=MACS%20J0025.4-1222",
+        "label": "NASA/IPAC Extragalactic Database (NED), MACS J0025.4-1222: position from 2011MNRAS.410.1939Z, redshift from 2024A&A...690A.322K",
+        "checked": "2026-10-05",
+        "locator": "NED preferred values of MACS J0025.4-1222: RA 6.372420833°, Dec -12.37696111° (2011MNRAS.410.1939Z); redshift 0.584 (2024A&A...690A.322K)"
+      },
+      {
+        "catalogueId": "planck-2018-cosmology",
+        "url": "https://arxiv.org/abs/1807.06209",
+        "label": "Planck Collaboration (2020), Planck 2018 results VI, A&A 641, A6; the Planck18 parameters as Astropy defines them",
+        "checked": "2026-10-05",
+        "locator": "z = 0.584: comoving distance 2,222 Mpc, lookback time 5.78 Gyr, age 8008 Myr"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Pink is hot gas seen in X-rays and blue is where most of the mass is, mapped by gravitational lensing. The gas lies between the two clumps of mass.",
+    "sources": [
+      {
+        "catalogueId": "chandra-2008-macs-j0025-layers",
+        "url": "https://chandra.harvard.edu/photo/2008/macs/",
+        "label": "Chandra X-ray Center, MACS J0025.4-1222: X-ray: NASA/CXC/Stanford/S.Allen. Optical/Lensing: NASA/STScI/UC Santa Barbara/M.Bradac",
+        "checked": "2026-10-05",
+        "locator": "Color code: X-ray (purple), lensing (blue), optical (yellow and cyan)"
+      },
+      {
+        "catalogueId": "publication-bradac-2008-macs-j0025",
+        "url": "https://arxiv.org/abs/0806.2320",
+        "label": "Bradač et al. (2008), ApJ 687, 959",
+        "checked": "2026-10-05",
+        "locator": "Abstract: the total mass of each subcluster is offset from the peak of the hot X-ray emitting gas and aligned with the galaxies"
+      }
+    ]
+  },
+  "datasets": {
+    "optical": {
+      "title": "Gas and mass of MACS J0025",
+      "detail": "4200 × 4143 px",
+      "summary": "Pink is X-ray gas and blue is the lensing mass map, each drawn round the line of the collision. Their depth is not measured.",
+      "sources": [
+        {
+          "catalogueId": "chandra-2008-macs-j0025-layers",
+          "url": "https://chandra.harvard.edu/photo/2008/macs/",
+          "label": "Chandra X-ray Center, MACS J0025.4-1222: X-ray: NASA/CXC/Stanford/S.Allen. Optical/Lensing: NASA/STScI/UC Santa Barbara/M.Bradac",
+          "checked": "2026-10-05",
+          "locator": "the composite in layers: optical, X-ray and lensing, each alone"
+        },
+        {
+          "catalogueId": "publication-bradac-2008-macs-j0025",
+          "url": "https://arxiv.org/abs/0806.2320",
+          "label": "Bradač et al. (2008), ApJ 687, 959",
+          "checked": "2026-10-05",
+          "locator": "Table 2: the gas peak and the two mass peaks"
+        }
+      ]
+    }
+  }
+}
