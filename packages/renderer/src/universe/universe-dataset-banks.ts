@@ -6,6 +6,7 @@ import { type DensityVolumeFrame, type PreparedPointVisibility, type DatasetBank
 import { type WorldCameraPose } from '@cssearth/engine';
 import type { WorldCameraViewport } from '../navigation/world-camera.js';
 import { createPreparedVolumeDatasets, type PreparedVolumeDatasetSource } from '../volume/prepared-volume-datasets.js';
+import { STACK_OPACITY_CEILING } from '../volume/prepared-volume-runtime.js';
 import { projectedVolumeOpacity, projectVolumeSphere, volumeFramingRadiusUnits } from '../volume/projected-volume-visibility.js';
 
 import { mountDatasetBillboards } from './dataset-billboards.js';
@@ -186,16 +187,17 @@ export function createUniverseDatasetBanks({ root, end, frontRoot, frontEnd, lif
    * behind it: the bank keeps the images it shows until every image of the next is decoded, then takes them in one
    * frame. Written at once, each atlas painted as it landed: picking a dataset on M42 on the iPad made frames of 99, 77
    * and 75 ms, and one of 143 ms when the last atlas came off the network three seconds later (2026-10-05). */
-  function texturesReady(bank: DatasetBank, publication: { world: WorldCameraPose; viewport: WorldCameraViewport }, demanded: boolean, incoming: boolean): boolean {
+  function texturesReady(bank: DatasetBank, publication: { world: WorldCameraPose; viewport: WorldCameraViewport }, demanded: boolean, incoming: boolean,
+    /** The bank is asked on screen, not only kept resident: images nothing drew are decoded again first (`undrawn`). */ shows: boolean): boolean {
     const { mounted, textures } = bank;
     if (!mounted || !textures) return false;
     const urls = () => demanded ? mounted.textureUrls(publication, incoming) : [];
     const next = mounted.stagedDataset(), shown = urls();
-    if (next === null) return textures.ready(shown);
+    if (next === null) return textures.ready(shown, shows);
     // Nothing of the shown dataset is on screen to keep.
-    if (!shown.length || !shown.every(url => textures.decoded(url))) { mounted.selectDataset(next); return textures.ready(urls()); }
+    if (!shown.length || !shown.every(url => textures.decoded(url))) { mounted.selectDataset(next); return textures.ready(urls(), shows); }
     // The swap is a change of images: it waits for a coast to stop (motion-freezes-membership.md).
-    if (textures.ready([...new Set([...shown, ...mounted.textureUrls(publication, incoming, next)])]) && !coasting) mounted.selectDataset(next);
+    if (textures.ready([...new Set([...shown, ...mounted.textureUrls(publication, incoming, next)])], shows) && !coasting) mounted.selectDataset(next);
     return true;
   }
 
@@ -302,7 +304,7 @@ export function createUniverseDatasetBanks({ root, end, frontRoot, frontEnd, lif
         const shown = bank.enabled || detailed ? presentationOpacity * contextOpacity : 0;
         const requestedOpacity = shown * projectedVolumeOpacity(world, viewport, frame, radiusUnits, visibility);
         const incoming = bank.id === detailedObjectId;
-        const ready = texturesReady(bank, { world, viewport }, shown > 0 && (requestedOpacity > 0 || incoming), incoming);
+        const ready = texturesReady(bank, { world, viewport }, shown > 0 && (requestedOpacity > 0 || incoming), incoming, requestedOpacity > 0);
         const opacity = ready ? requestedOpacity : 0;
         if (billboards && bank.billboardIndex >= 0) {
           // The billboard pictures the selected dataset; a dataset with no view of its own draws none.
@@ -325,13 +327,21 @@ export function createUniverseDatasetBanks({ root, end, frontRoot, frontEnd, lif
         if (visible !== bank.visible) { bank.visible = visible; bank.lastUsed = ++useClock; residencyChanged = true; }
         // Opacity is compared with what was last written to each root (retained-write.ts), so a bank a coast faded while
         // membership stayed frozen is restored. Display is a keyword and is read from the style, which mounting also writes.
+        // Never 1 (STACK_OPACITY_CEILING), as a stack's own opacity: Safari paints every slice under the root again when its
+        // opacity leaves or reaches 1. Each zoom out of the Crab and back had three frames over 33 ms on an iPad: 48 to 56 ms
+        // as its 171 slices began to fade, 56 to 57 ms as they came back and 51 to 57 ms as the root reached 1; under the
+        // ceiling, with the images decoded again before the return (`undrawn`), one of 46 to 50 ms (2026-10-06).
         for (const target of [bank.mounted.root, bank.mounted.frontRoot]) {
           if (!target) continue;
           if (coasting && target.style.display === 'none') continue;
-          writeStyle(target, 'opacity', String(opacity));
+          writeStyle(target, 'opacity', String(Math.min(STACK_OPACITY_CEILING, opacity)));
           if (!coasting) {
             const display = opacity > 0 ? 'block' : 'none';
-            if (target.style.display !== display) target.style.display = display;
+            if (target.style.display !== display) {
+              target.style.display = display;
+              // Out of layout nothing draws the bank's images: they are decoded again before it shows (volume-texture-readiness.ts).
+              if (display === 'none') bank.textures?.undrawn();
+            }
           }
         }
         bank.mounted.publish({ world, viewport }, visible && Boolean(ready), coasting);
