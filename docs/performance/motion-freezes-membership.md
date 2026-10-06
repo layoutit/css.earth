@@ -58,6 +58,12 @@ held differently while coasting:
   that draws, and the bank a host showed before a dataset pick stands in for the picked one. Without that the Ring had
   nothing drawn for a recorded grab at a turn and at each dataset pick, 0.5 s of a 10.5 s visit on the iPad, the
   Southern Ring 0.8 s and Cassiopeia A 0.7 s; with it none, 0.2 and 0.4 s (2026-10-06).
+  The bank last drawn for the selected body stays in layout at opacity 0 when it leaves the picture, until the body
+  changes or another of its banks takes that place: Safari keeps the layers and surfaces of a bank at opacity 0, and
+  makes them all again for one that left layout or was hidden by `visibility`. Shown again, Cassiopeia A's 1,397
+  patches made a frame of 272 to 281 ms from out of layout, 220 to 231 ms from `visibility: hidden` and 24 to 42 ms
+  from opacity 0; going back to its first dataset had frames of 86 and 214 ms, and 47 and 60 ms with the bank kept,
+  for 25 MB more while its second bank is the one kept (iPad, 2026-10-06).
   A dataset picked on a slice volume that is on screen waits the same way (`universe/universe-dataset-banks.ts`): the
   volume keeps the dataset it shows until every atlas of the next is decoded, then takes them in one frame, and not
   while the camera coasts. Written at once, each atlas painted as it landed: on M42 frames of 99, 77 and 75 ms at the
