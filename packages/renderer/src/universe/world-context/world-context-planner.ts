@@ -336,7 +336,7 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
         const flightDestination = navigationInFlight && emphasised;
         // Past the Local Group scale the galaxies are the objects: a body's dot fades with its distance from the camera, as its name
         // does below (a star in no system has no other fade); a galaxy or a cluster fades at its own scale (extendedRetirement).
-        const beyondLocalGroup = extendedRetirement(entry.kind, fromFocus) ?? logarithmicFade(Math.hypot(...eye), entry.scale.returnDistanceM, entry.scale.enterDistanceM);
+        const beyondLocalGroup = extendedRetirement(entry.kind, fromFocus, highlighted) ?? logarithmicFade(Math.hypot(...eye), entry.scale.returnDistanceM, entry.scale.enterDistanceM);
         const galaxyHost = body.id !== plan.focus.id && entry.orbit === null && body.classification === 'star' &&
           entry.galaxyField && (annotationPriorities[body.id] ?? 0) < FEATURED_STAR_TIER;
         // A retired galaxy level takes its own stars and nebulae with it; another galaxy's star, a galaxy, a cluster and a black hole (a galaxy's centre, its landmark from outside) keep their dots.
@@ -434,7 +434,7 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
         // read as neighbourhood: an inner planet is not less part of its system because the camera frames the outer one.
         // Past the Local Group scale the galaxies are named, not the stars inside them: a name fades with the body's distance
         // from the camera over the band where the overview becomes the Local Group (the cluster scale beyond it).
-        const galactic = 1 - (extendedRetirement(entry.kind, fromFocus) ?? logarithmicFade(fromCamera, entry.scale.returnDistanceM, entry.scale.enterDistanceM));
+        const galactic = 1 - (extendedRetirement(entry.kind, fromFocus, highlighted) ?? logarithmicFade(fromCamera, entry.scale.returnDistanceM, entry.scale.enterDistanceM));
         const alpha = flightDestination ? 1 : referenceAnnotationOnly ? galactic : targeted ? markerOpacity : Math.min(markerOpacity, galactic, resolvedDisc || hostedPlanet ? 1 : labelExtentOpacity(localExtent));
         // Naming policy, decided before any slot is contested: suppressed, unresolved, too faint
         // or out of context here, and the body is not one this camera names at all.

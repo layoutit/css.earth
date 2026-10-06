@@ -9,13 +9,11 @@ export interface InteriorPalette {
     combinedMantleCrust: readonly number[];
     layerContact: readonly number[];
 }
-export interface LambertRasterConfig {
-    minimumLightViewZ: number;
-    maximumLightViewZ: number;
-    frameCount: number;
+/** The authored sphere law of a shared lighting bank: a flood-lit limb floor, an ambient term, a terminator ramp and the
+ * darkest overlay alpha. It has no published source; a body with one names `lighting.limb` instead. */
+export interface AuthoredSphereLaw {
     shadowlessFloodLimbFloor: number;
     ambientIntensity: number;
-    radiusScale: number;
     terminator: readonly number[];
     maximumAlpha: number;
 }
@@ -64,24 +62,20 @@ export interface SurfaceRasterRecipe {
 }
 /** An unlit body: per-dataset off-limb context and limb plates written by the interpretation instead of a lighting bank. */
 export interface EmissionRecipe { offLimbSize: number; limbSize: number; bodyDiameter: number; offLimbOutput: string; limbOutput: string; metadata: Record<string, unknown>; }
-/** The authored sphere law of the shared bank: a floor, an ambient term and a terminator ramp, with no published source. */
-type AuthoredSphereLaw = 'shadowlessFloodLimbFloor' | 'ambientIntensity' | 'terminator' | 'maximumAlpha';
-export interface LightingRecipe extends Omit<LambertRasterConfig, AuthoredSphereLaw>, Partial<Pick<LambertRasterConfig, AuthoredSphereLaw>> {
-    /** A shared bank (lighting-banks.ts) whose fields this recipe takes; the parser fills them in. */
+/**
+ * A sphere's lighting: the frames of one sheet and the flood-lit frame beside it (packages/bake/src/raster/lighting-sheet.ts
+ * owns their count, size and file names). A recipe names a shared bank, whose authored law the parser fills in, or the
+ * body's published photometric models; never both.
+ */
+export interface LightingRecipe extends Partial<AuthoredSphereLaw> {
+    /** A shared bank (lighting-banks.ts) whose authored law this recipe takes. */
     bank?: string;
-    /** The body's published photometric models (packages/bake/src/photometry/limb.ts); a recipe with one states no authored sphere law. */
+    /** The body's published photometric models (packages/bake/src/photometry/limb.ts). */
     limb?: LimbBlock;
-    frameSize: number;
-    columns: number;
+    /** The overlay's width in CSS pixels: the body's logical diameter. */
     presentationSize: number;
-    defaultFrame: number;
-    billboardFrameSize: number;
-    billboardColumns: number;
-    rowOutput: string;
-    billboardOutput: string;
-    metadata: Record<string, unknown>;
-    bankSchema: string;
-    billboardSchema: string;
+    /** Notes the prepared lighting record carries, such as the law a published model is. */
+    metadata?: Record<string, unknown>;
 }
 /**
  * A body with an atmosphere: its disc lit by its published photometric models and, when the body has one, a halo read

@@ -44,6 +44,10 @@
         "title": "Ren et al. (2023), VizieR J/A+A/672/A114, Beta_Pic_STIS.fits",
         "credit": "NASA/ESA HST/STIS, programmes 7125 (PI S. Heap), 12551 (PI D. Apai) and 12923 (PI A. Gaspar); reduced by Ren et al. 2023, A&A 672, A114, deposited at CDS",
         "displayCredit": "NASA/ESA HST, Ren et al. 2023 (CDS)",
+        "facility": {
+          "facilityId": "hubble",
+          "missionId": "hubble"
+        },
         "license": "Data deposited at CDS under the VizieR catalogue J/A+A/672/A114; free for scientific use with the reference cited (Ren et al. 2023, A&A 672, A114).",
         "acquisition": "Downloaded unchanged from the CDS FTP archive of VizieR J/A+A/672/A114 (fits/Beta_Pic_STIS.fits) and pinned by digest in this recipe."
       },

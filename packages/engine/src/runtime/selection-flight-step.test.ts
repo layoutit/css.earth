@@ -35,6 +35,27 @@ describe('selection flight continuity', () => {
       assert.ok(frames < 400, `${frames} frames`);
     }
   });
+  it('leaves a planet for a framing billions of light-years out instead of stalling on its first frame', () => {
+    // The Galaxies pill pressed on Saturn's page (live, 2026-10-06), with the poses that flight had: the curve's first
+    // sample rounds to 1.2e10 m from the start pose, more than the step's floor, so no time that moved the camera was allowed.
+    const saturn = [1390634722841.8352, 245138173773.5476, 41364624140.6779] as const;
+    const focus = [-8.593969355465693e+24, -7.047032806046394e+23, -4.348655659863507e+23] as const;
+    const orientationXyzw = [0.09627295644801497, 0.5685264563603395, 0.7582765518477641, 0.30418063250801997] as const;
+    const leaving = createSelectionFlight({ focusPositionM: focus, durationS: .35,
+      from: { positionM: [1390871876228.572, 245525640035.8693, 41526151238.89276], orientationXyzw,
+        focusOffset: { originM: saturn, offsetM: [237153386.73682132, 387466262.3216939, 161527098.21485683] } },
+      to: { positionM: [1.490196918028024e+25, 3.7683462325854434e+25, 1.5568409039260555e+25], orientationXyzw,
+        focusOffset: { originM: focus, offsetM: [2.3495938535745934e+25, 3.8388165606459075e+25, 1.6003274605246906e+25] } } });
+    const bodies = [{ positionM: saturn, radiusM: 60268000 }], out = createSelectionFlightSample();
+    let elapsed = 0, frames = 0, place: readonly number[] = leaving.from.positionM;
+    while (elapsed < leaving.durationS && frames++ < 5000) {
+      elapsed = advanceSelectionFlightInto(leaving, bodies, elapsed, leaving.durationS, out);
+      assert.ok(out.positionM.some((value, axis) => value !== place[axis]), `held in place at ${elapsed} s of ${leaving.durationS} s`);
+      place = [...out.positionM];
+    }
+    assert.equal(elapsed, leaving.durationS);
+    assert.ok(frames < 400, `${frames} frames`);
+  });
   it('reaches a small body from galactic range instead of freezing a few thousand kilometres out', () => {
     // Milky Way overview to Bennu: 2.9e21 m departure, 1,469 m arrival around a 245 m body.
     const body = [1.5e11, 0, 0] as const, bodies = [{ positionM: body, radiusM: 245 }];

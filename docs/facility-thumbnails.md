@@ -4,7 +4,7 @@
 
 A spacecraft card shows NASA's official artwork for that spacecraft whenever
 NASA publishes it. The [spacecraft icons collection](https://science.nasa.gov/multimedia/spacecraft-icons/)
-covers 22 of our spacecraft, from Cassini to Voyager; both Voyagers share one
+covers 29 of our spacecraft, from Cassini to Voyager; both Voyagers share one
 image. [`photograph-records.json`](../site/source/facilities/photograph-records.json)
 records each original file, its credit and its byte count, and
 [`prepare-facility-photographs.mts`](../packages/bake/cli/prepare-facility-photographs.mts)
@@ -24,7 +24,11 @@ are mirror-like foil that goes dark against a black sky.
 
 Magellan and Mars Global Surveyor have no NASA artwork, so they are still
 rendered from their NASA 3D Resources models. Telescopes and ground stations use
-published photographs from the same records file.
+published photographs from the same records file. Deep Space 1 shows NASA/JPL's
+artist's concept and NICER a NASA photograph of it on the space station, both
+from Wikimedia Commons. Giotto and Kaguya have no card picture: we found no
+public-domain or CC BY picture of either that fills the 592 × 296 frame (ESA's
+are share-alike, and the one public-domain Kaguya picture is 267 × 200).
 
 ## Model renders
 

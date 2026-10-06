@@ -1,20 +1,21 @@
 import { refuseAuthoredCameraAngles } from '../../../scene/index.ts';
 import {requireRecord,shape,number,text,optional,nullable,array,boolean,dictionary,choice} from '@cssearth/core';
 import { parseSciencePalette } from '../../../raster/index.ts';
+import { resolveLightingRecipe } from '../../../../raster/index.ts';
 import { parseTransform } from '../../../geometry/index.ts';
 import { parseSolidScience, parseSolidRasterConfig } from './solid-source.ts';
 import { parseRadialSource } from './radial-source.ts';
 import { parseLimbBlock } from '@cssearth/objects';
 
-/** A sphere's lighting frames: lit by the body's published photometric models (`limb`, packages/bake/src/photometry/limb.ts) or
- * by the lane's authored sphere law, never both. */
-const AUTHORED_SPHERE_LAW=['terminatorWidth','directionalAmbient','fullPhaseAmbient','fullPhaseDiffuse','maximumOpacity'] as const;
+/** A sphere's lighting: the sheet of every phase (packages/bake/src/raster/lighting-sheet.ts), lit by the body's published
+ * photometric models (`limb`, packages/bake/src/photometry/limb.ts) or by a shared bank's authored law (`bank`), never both. */
+const RETIRED_LIGHTING=['frameSize','frameCount','columns','logicalSize','terminatorWidth','directionalAmbient','fullPhaseAmbient','fullPhaseDiffuse','maximumOpacity'] as const;
 export function parseSolidLighting(value:unknown) {
-  const source=requireRecord(value), frames=shape({frameSize:number,frameCount:number,columns:number,logicalSize:number})(value);
-  if(source.limb===undefined) return {...frames,...shape({terminatorWidth:number,directionalAmbient:number,fullPhaseAmbient:number,fullPhaseDiffuse:number,maximumOpacity:number})(value)};
-  const stated=AUTHORED_SPHERE_LAW.filter(key=>key in source);
-  if(stated.length) throw new TypeError(`limb names published models, so the authored sphere law is not stated: remove ${stated.join(', ')}`);
-  return {...frames,limb:parseLimbBlock(source.limb,'limb')};
+  const source=requireRecord(value), retired=RETIRED_LIGHTING.filter(key=>key in source);
+  if(retired.length) throw new TypeError(`lighting states its presentationSize and its limb models or its bank; the sheet's layout and an authored law are the lane's: remove ${retired.join(', ')}`);
+  const {presentationSize,bank}=shape({presentationSize:number,bank:optional(text)})(value);
+  if((source.limb===undefined)===(bank===undefined)) throw new TypeError(`lighting names the body's published models (limb) or a shared bank (bank), one of the two`);
+  return bank===undefined?{presentationSize,limb:parseLimbBlock(source.limb,'limb')}:resolveLightingRecipe({bank,presentationSize});
 }
 
 const grid = shape({width:optional(number),height:optional(number),noData:optional(nullable(number)),

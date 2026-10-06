@@ -1,0 +1,72 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "galactic-centre",
+  "card": {
+    "text": "The Galactic Centre is the middle of the Milky Way, 8,277 parsecs away: gas and stars orbiting a black hole.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-2112-07478",
+        "url": "https://arxiv.org/abs/2112.07478",
+        "label": "GRAVITY Collaboration (2022), A&A 657, L12",
+        "checked": "2026-10-05",
+        "locator": "Table 1: R0 = 8277 ± 9 pc"
+      },
+      {
+        "catalogueId": "publication-zhao-2009-sgr-a-west-streams",
+        "url": "https://arxiv.org/abs/0904.3133",
+        "label": "Zhao, Morris, Goss & An (2009), ApJ 699, 186: Dynamics of ionized gas at the Galactic Center",
+        "checked": "2026-10-05",
+        "locator": "Abstract: three ionized streams in the central 3 pc, on Keplerian orbits around Sgr A*"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Three streams of hot hydrogen, together called Sagittarius A West, circle the black hole once in 45,000 to 76,000 years. Two of them meet just behind it.",
+    "sources": [
+      {
+        "catalogueId": "publication-zhao-2009-sgr-a-west-streams",
+        "url": "https://arxiv.org/abs/0904.3133",
+        "label": "Zhao, Morris, Goss & An (2009), ApJ 699, 186: Dynamics of ionized gas at the Galactic Center",
+        "checked": "2026-10-05",
+        "locator": "Table 5: periods of 45, 76 and 54 thousand years; abstract: the Northern and Eastern Arm streams may collide in the Bar region, where most of the gas is behind Sgr A*"
+      },
+      {
+        "catalogueId": "mast-hlsp-hpsgc-paschen-alpha",
+        "url": "https://archive.stsci.edu/prepds/hpsgc/",
+        "label": "MAST, HST/NICMOS Paschen-α Survey of the Galactic Centre: hlsp_hpsgc_hst_nicmos-nic3_gc_palpha_v1_img.fits",
+        "checked": "2026-10-05",
+        "locator": "HST/NICMOS Paschen-α Survey of the Galactic Centre: the Paschen-α line map; hydrogen Paschen-α line, 1.87 µm, the 1.90 µm continuum subtracted"
+      }
+    ]
+  },
+  "datasets": {
+    "optical": {
+      "title": "Sagittarius A West in hydrogen light",
+      "detail": "1101 × 1101 px",
+      "summary": "Hubble's map of glowing hydrogen on the planes of the three gas streams' orbits about the black hole.",
+      "sources": [
+        {
+          "catalogueId": "mast-hlsp-hpsgc-paschen-alpha",
+          "url": "https://archive.stsci.edu/prepds/hpsgc/",
+          "label": "MAST, HST/NICMOS Paschen-α Survey of the Galactic Centre: hlsp_hpsgc_hst_nicmos-nic3_gc_palpha_v1_img.fits",
+          "checked": "2026-10-05",
+          "locator": "hlsp_hpsgc_hst_nicmos-nic3_gc_palpha_v1_img.fits"
+        },
+        {
+          "catalogueId": "publication-zhao-2009-sgr-a-west-streams",
+          "url": "https://arxiv.org/abs/0904.3133",
+          "label": "Zhao, Morris, Goss & An (2009), ApJ 699, 186: Dynamics of ionized gas at the Galactic Center",
+          "checked": "2026-10-05",
+          "locator": "Table 5: the three streams' orbits; Sect. 4.2: the bundles' dispersion and true-anomaly ranges"
+        },
+        {
+          "catalogueId": "publication-paumard-2004-minispiral",
+          "url": "https://arxiv.org/abs/astro-ph/0405197",
+          "label": "Paumard, Maillard & Morris (2004), A&A 426, 81: Kinematic and structural analysis of the Minispiral",
+          "checked": "2026-10-05",
+          "locator": "Sect. 5.5 and the CDS file fig7b.fit: the Northern Arm's surface"
+        }
+      ]
+    }
+  }
+}

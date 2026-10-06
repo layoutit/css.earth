@@ -1,0 +1,125 @@
+{
+  "schema": "cssearth-circumstellar-volume@2",
+  "id": "fomalhaut-disc",
+  "host": "fomalhaut",
+  "name": "Fomalhaut dust ring",
+  "description": "The narrow belt of dust around Fomalhaut, 136 au along its long half-axis, in its own glow at 1.3 millimetres, as ALMA imaged it in December 2015 and January 2016 (project 2015.1.00966.S), in the color scale MacGregor et al. (2017) show it in. The belt is eccentric: its centre lies 14 au north of the star. One unit is one astronomical unit; the ring's depth is the inclined ring that best projects to the image, and its thickness is the opening angle MacGregor et al. cite, not a measurement made here.",
+  "sourceUrl": "https://almascience.nrao.edu/aq/?projectCode=2015.1.00966.S",
+  "credit": "ALMA (ESO/NAOJ/NRAO), project 2015.1.00966.S (PI P. Kalas); ARI-L image, ALMA Science Archive (Massardi et al. 2021, PASP 133, 085001); MacGregor et al. (2017), ApJ 842, 8",
+  "license": {
+    "spdx": "CC-BY-4.0",
+    "url": "https://almascience.eso.org/alma-data/data-policy",
+    "note": "ALMA data are released under CC BY 4.0; the observatory asks for its standard acknowledgement, which the host star's NOTICE.md carries."
+  },
+  "grid": {
+    "size": 230,
+    "halfUnits": 230,
+    "slabs": 115
+  },
+  "defaultDataset": "dust",
+  "datasets": [
+    {
+      "id": "dust",
+      "label": "ALMA · dust ring, 1.3 mm",
+      "title": "The dust ring around Fomalhaut in its own glow at 1.3 millimetres, from ALMA",
+      "summary": "The narrow belt of dust around the star, 136 au along its long half-axis, in its own glow at 1.3 mm, as ALMA imaged it. Its centre lies 14 au off the star.",
+      "description": "ALMA observed Fomalhaut seven times, four on 29 and 30 December 2015 and three on 14 January 2016, at 1.3 millimetres, in seven pointings because the belt is wider than one antenna's field of view. What it sees is the dust's own faint heat, not starlight. This is the image the ARI-L project made from those observations for the public archive, brought to the resolution of the image MacGregor et al. (2017) made from them and shown in the color map and scale of their Figure 1. ARI-L images are meant to show what the data hold, not as final science images; at that resolution this one's ring peaks within 8% of the brightness cuts MacGregor et al. plot. The star's own glow at the centre and the background galaxy MacGregor et al. find south-east of the star are removed with the fluxes they fit, so neither is drawn as dust. The belt is eccentric: MacGregor et al. fit an eccentricity of 0.12, and on this image its centre lies 14 au north of the star. The image has no third axis, so the depth is inferred: a tilted ring of the geometry measured on the image projects to it better than a spherical shell or a constant depth, and each line of sight is placed on that ring. The ring's plane is drawn through the star, which puts its centre 12 au nearer than the star. Its thickness is the opening angle of about 1° that MacGregor et al. cite from Boley et al. (2012), and its east side is drawn nearer, as Kalas et al. (2013) read the starlight the dust scatters. The star itself is the sphere at the centre.",
+      "program": "",
+      "archive": {
+        "band": "ALMA-B6-CONT",
+        "path": ".local/fomalhaut-disc/observations/member.uid___A001_X2d8_X7c.ari_l.Fomalhaut_sci.spw0_1_2_3_223746MHz.12m.cont.I.pbcor.fits",
+        "url": "https://almascience.nrao.edu/dataPortal/member.uid___A001_X2d8_X7c.ari_l.member.uid___A001_X2d8_X7c.ari_l.Fomalhaut_sci.spw0_1_2_3_223746MHz.12m_223746MHz.12m.cont.I.pbcor.fits",
+        "landing": "https://almascience.nrao.edu/aq/?projectCode=2015.1.00966.S",
+        "bytes": 639360,
+        "unit": "Jy/beam",
+        "filter": "Band 6 continuum, 214 to 233 GHz (1.3 mm)",
+        "instrument": "ALMA 12-m array, a seven-pointing mosaic in a compact configuration",
+        "observed": "29 and 30 December 2015 and 14 January 2016",
+        "title": "ALMA project 2015.1.00966.S, member OUS uid://A001/X2d8/X7c, ARI-L continuum image Fomalhaut_sci.spw0_1_2_3_223746MHz.12m.cont.I.pbcor",
+        "credit": "ALMA (ESO/NAOJ/NRAO), project 2015.1.00966.S (PI P. Kalas); imaged by the ARI-L project (Massardi et al. 2021, PASP 133, 085001; CASA 5.6.1-8) and served by the ALMA Science Archive. This paper makes use of the following ALMA data: ADS/JAO.ALMA#2015.1.00966.S.",
+        "displayCredit": "ALMA (ESO/NAOJ/NRAO)",
+        "license": "ALMA data are released under CC BY 4.0, with the observatory acknowledgement in the host star's NOTICE.md.",
+        "acquisition": "Downloaded unchanged from the ALMA Science Archive data portal on 2026-10-06 (the ARI-L product the archive lists for member OUS uid://A001/X2d8/X7c); restored from that origin or the R2 source cache when missing.",
+        "limitation": "The image is the ARI-L project’s, not the paper’s own: made from the same observations with other weighting and cleaning, and meant to show what the data hold, not as a final science image. At the paper’s resolution its ring peaks at 483, 381, 226 and 222 µJy per beam along the major and minor axes, within 8% of the cuts MacGregor et al. (2017) plot in their Figure 5. Emission fainter than the drawn noise is not claimed."
+      },
+      "pointSources": {
+        "sources": [
+          {
+            "id": "star",
+            "raDeg": 344.4144014,
+            "decDeg": -29.6229533,
+            "peak": 0.00075
+          },
+          {
+            "id": "SE",
+            "raDeg": 344.4198583,
+            "decDeg": -29.6256414,
+            "peak": 0.00015
+          }
+        ],
+        "source": "MacGregor et al. (2017), ApJ 842, 8, arXiv:1705.05867: the star, a point source of 0.75 ± 0.02 mJy in their fit (Table 2), 0.08″ east and 0.06″ north of the pointing centre (Table 2), which is this image's reference position; and the unresolved source south-east of the star at 22h57m40.766s −29°37′32.309″, which they attribute to a background galaxy, 0.150 ± 0.014 mJy from a point-source fit to the visibilities (section 3.1). A point source's peak per beam is its flux, whatever the beam"
+      },
+      "smoothTo": {
+        "beamArcsec": [
+          1.56,
+          1.15
+        ],
+        "positionAngleDeg": -87,
+        "source": "the beam of MacGregor et al. (2017, section 3.1 and the Figure 1 caption), 1.56″ × 1.15″ at −87°, from natural weighting of these same observations; this image's ARI-L weighting gave 1.284″ × 0.940″ at −89.0°"
+      },
+      "colorMap": {
+        "path": "macgregor-2017-figure-1-colormap.json",
+        "range": [
+          0,
+          800
+        ],
+        "unitScale": 1000000,
+        "unit": "µJy/beam",
+        "source": "the color bar of MacGregor et al. (2017), Figure 1, left panel, decoded from the figure in the paper's arXiv source: linear from 0.0 to 0.8 mJy per beam, black at the low end and white at the high end. The printed panel is brighter than this scale gives: its colors read about 1.5 times the brightness cuts of the paper's Figure 5 on the panel's own bar, so the ring is drawn darker here than in print"
+      },
+      "geometry": "ring",
+      "noiseFade": {
+        "fromNoise": 1,
+        "toNoise": 2,
+        "source": "Stated, a display choice: a column fades in as its brightness rises from one to two times its per-pixel noise (12.6 µJy per beam, measured 2 to 4.5 arcseconds out), so empty sky is not drawn; the ring's ridge stands 14 to 38 times above that noise in every azimuth and is drawn in full. Every channel of a column is scaled alike, so no color changes."
+      },
+      "channels": {
+        "red": [
+          "ALMA-B6-CONT"
+        ],
+        "green": [
+          "ALMA-B6-CONT"
+        ],
+        "blue": [
+          "ALMA-B6-CONT"
+        ]
+      },
+      "stellarFluxJy": {},
+      "stellarFluxSource": "Not divided by the star: at 1.3 mm the ring is the dust's own thermal emission, not scattered starlight, and it is shown in its own brightness, Jy per beam.",
+      "innerMaskArcsec": 0,
+      "innerMaskSource": "No mask: an interferometer image has no coronagraph, and the star's own emission, the central point source, is removed as MacGregor et al. (2017) fit it (pointSources). The star is the host body's own sphere.",
+      "outerUnits": 190,
+      "backgroundAnnulusArcsec": [
+        2,
+        4.5
+      ],
+      "nearSidePositionAngleDeg": 67.9,
+      "nearSideSource": "the east side is drawn nearer: Kalas et al. (2013, ApJ 775, 56, arXiv:1305.2222) find the eastern half of the belt brighter in scattered starlight and take it as the side out of the sky plane, in the forward-scattering direction. They note that Le Bouquin et al. (2009), from the star's spin, tentatively put the western side nearer instead. The near end of the minor axis is the ring's position angle, 337.9°, plus 90°",
+      "heightOfRadius": 0.0175,
+      "heightSource": "MacGregor et al. (2017, section 3.2) model the belt as flat, citing Boley et al. (2012, ApJL 750, L21) for a vertical scale height described by an opening angle of about 1° from the mid-plane; tan 1° = 0.0175 of the radius. It is a cited model value, not a measurement made here; at this resolution the image cannot resolve it",
+      "planeThroughStar": "the belt is eccentric: MacGregor et al. (2017, Table 2) fit a forced eccentricity of 0.12 ± 0.01, and the star, the focus of the dust's orbits, lies in their plane",
+      "taperInPlane": "at this ring's tilt, sky more than about 100 au from the ring's centre along its minor axis crosses the ring's plane outside the 230 au grid; that sky holds only noise, which rises toward the mosaic's edge in a primary-beam-corrected image",
+      "topAlpha": 0.5,
+      "published": {
+        "citation": "MacGregor et al. (2017), ApJ 842, 8, Table 2, arXiv:1705.05867",
+        "url": "https://arxiv.org/abs/1705.05867",
+        "radiusUnits": 136.3,
+        "widthFwhmUnits": 13.5,
+        "inclinationDeg": 65.6,
+        "positionAngleDeg": 337.9,
+        "toleranceDeg": 5,
+        "radiusTolerance": 0.1
+      }
+    }
+  ]
+}

@@ -96,11 +96,13 @@ describe('native source pole sampling', () => {
             await assert.rejects(readFile(join(directory,'poles-science.webp')));
             assert.deepEqual(([prepared.surfaces.science.url, prepared.surfaces.science.url2x]), ['/scenes/test/science@2x.webp', '/scenes/test/science@2x.webp']);
             assert.throws(() => readRasterRecipe({...config,densities:[1,2]}), /one canonical density/);
-            // A lighting recipe naming a shared bank parses to the bank's fields plus its own, and may not restate the bank's.
-            const lighting = { bank: 'sphere', presentationSize: 460, defaultFrame: 230, bankSchema: 'test-bank@1', billboardSchema: 'test-billboard@1', metadata: { schema: 'test-lighting@1' } };
+            // A lighting recipe names a shared bank and takes its authored law; it lays out no frames and states no law of its own.
+            const lighting = { bank: 'sphere', presentationSize: 460, metadata: { note: 'test' } };
             const banked = readRasterRecipe({ ...config, lighting }).lighting!;
-            assert.deepEqual(([banked.bank, banked.frameSize, banked.columns, banked.frameCount, banked.rowOutput, banked.terminator, banked.presentationSize]), ['sphere', 512, 8, 256, 'lighting-{density}x-row-{row}.webp', [0, 0.1], 460]);
-            assert.throws(() => readRasterRecipe({ ...config, lighting: { ...lighting, frameSize: 512 } }), /bank's/);
+            assert.deepEqual(([banked.bank, banked.shadowlessFloodLimbFloor, banked.ambientIntensity, banked.terminator, banked.maximumAlpha, banked.presentationSize]), ['sphere', 0.35, 0.05, [0, 0.1], 0.95, 460]);
+            assert.throws(() => readRasterRecipe({ ...config, lighting: { ...lighting, frameSize: 512 } }), /the sheet's layout is the lane's/);
+            assert.throws(() => readRasterRecipe({ ...config, lighting: { ...lighting, ambientIntensity: 0.1 } }), /belongs to a shared bank/);
+            assert.throws(() => readRasterRecipe({ ...config, lighting: { presentationSize: 460 } }), /one of the two/);
             assert.throws(() => readRasterRecipe({ ...config, lighting: { ...lighting, bank: 'cube' } }), /Unknown lighting bank/);
             assert.throws(() => readRasterRecipe({...config,surfaces:[{...config.surfaces[0],resolutionScale:.3}]}), /integer/);
         } finally { await rm(directory,{recursive:true,force:true}); }

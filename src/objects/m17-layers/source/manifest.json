@@ -27,10 +27,9 @@
       "capture": {
         "attributions": [
           {
-            "kind": "unresolved",
-            "label": "MPG/ESO 2.2-metre telescope, Wide Field Imager",
-            "evidence": "https://www.eso.org/public/images/eso1537a/",
-            "reason": "The publisher's color composite; the retained record does not identify the individual exposures."
+            "kind": "facility",
+            "facilityId": "mpg-eso-2-2m",
+            "evidence": "https://www.eso.org/public/images/eso1537a/"
           }
         ]
       },

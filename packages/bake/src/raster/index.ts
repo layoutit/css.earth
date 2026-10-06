@@ -9,6 +9,7 @@ export * from './missing-coverage.ts';
 export * from './lossy-lane.ts';
 export * from './emission-preview.ts';
 export * from './lighting-banks.ts';
+export * from './lighting-sheet.ts';
 export * from './lighting.ts';
 export * from './lighting-bank-bake.ts';
 export * from './materials.ts';

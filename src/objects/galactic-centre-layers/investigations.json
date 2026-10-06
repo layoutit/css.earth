@@ -1,0 +1,107 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "galactic-centre-layers",
+  "entries": [
+    {
+      "id": "paschen-alpha",
+      "subject": "The picture: Hubble's Paschen-α line map",
+      "status": "included",
+      "finding": "HST/NICMOS Paschen-α Survey of the Galactic Centre: the Paschen-α line map (programme GO 11120, 2008): the 1.87 µm line with the 1.90 µm continuum subtracted, 0.2 arcsec sharp, in µJy a pixel; one mosaic of 23,400 × 9,000 px over 39 × 15 arcmin. The stars' continuum is subtracted, so the map is the gas; stars with their own Paschen-α emission stay as points, and the brightest stars leave dark spots. The survey's mosaic is on a Galactic tangent plane, 0.1014 arcsec a pixel. packages/bake/authoring/galactic-centre/paschen-alpha.mts resamples the rows that cross the field onto a north-up tangent plane about Sgr A*'s place, 0.1 arcsec a pixel, east to the left. The bank stands where the world places Sgr A* at its epoch (JD 2461286.5), 0.171 arcsec from the catalogued place by the black hole's proper motion, which the gas shares. Check: the mean light at the 51 places Zhao et al. (2009) measured along the three streams (their Table 3) is greatest with the picture where the mosaic's own coordinates put it, to the 0.25 arcsec of the search's step.",
+      "evidence": [
+        "https://archive.stsci.edu/prepds/hpsgc/",
+        "https://arxiv.org/abs/0911.2226",
+        "https://arxiv.org/abs/1105.1703",
+        "https://archive.stsci.edu/publishing/data-use"
+      ]
+    },
+    {
+      "id": "alma-continuum",
+      "subject": "ALMA's 3 mm continuum image",
+      "status": "excluded",
+      "finding": "The archive's image of project 2013.1.01242.S (member uid://A001/X197/X27, ARI-L product, 0.5 arcsec, 2592 × 2744 px) was fetched and looked at: Sgr A* peaks at 3.21 Jy a beam and its residual sidelobes cover the streams; no arm can be made out. The ARI-L readme says its images show what the data hold and are not meant for science.",
+      "evidence": [
+        "https://almascience.eso.org/dataPortal/member.uid___A001_X197_X27.ari_l.Circumnuclear_Ring_sci.spw0_1_2_3_92126MHz.12m.cont.I.tt0.pbcor.fits",
+        "https://almascience.org/alma-data/aril"
+      ]
+    },
+    {
+      "id": "nrao-legacy",
+      "subject": "NRAO's 3.6 cm picture of the streams",
+      "status": "excluded",
+      "finding": "The NRAO/AUI archive's \"Sagittarius A West\" (Roberts, Yusef-Zadeh & Goss, VLA, 1993) states that NRAO/AUI/NSF does not hold full copyright for the image.",
+      "evidence": [
+        "https://www.nrao.edu/archives/items/show/33442"
+      ]
+    },
+    {
+      "id": "streams",
+      "subject": "Where the gas is along each sight line",
+      "status": "included",
+      "finding": "Zhao, Morris, Goss & An (2009) measured the motion of the ionized gas with the Very Large Array: across the sky from compact radio features over years of images, along the sight line from the H92α line. Each of the three streams fits one Keplerian orbit about Sgr A*; Table 5 prints the orbits (distance 8 kpc, mass 4.2 million Suns). The paper draws each stream as a bundle of such orbits, the semi-major axis spread by ±0.25 of its value to roughly match the stream's width, over a range of true anomaly: 192° to 460°, 195° to 430° and 130° to 420°. Each semi-major axis here is the table's value in thousands of astronomical units at its 8 kpc, an angle on the sky: 205 kau, 25.625 arcsec; 289 kau, 36.125 arcsec; 236 kau, 29.500 arcsec. The Western Arc's printed parsecs (1.11) do not match its printed 236 kau (1.144 pc); the paper's own 17 places on that stream (Table 3) lie 0.35 arcsec from the orbit with 236 kau and 0.77 arcsec with 1.11 pc, root mean square, so the kau value is used. The Western Arc is ended at a true anomaly of 302°, just past its last measured place (W17 of Table 3, at 301°): the paper's calculation runs on to 420°, through the Northern Arm. Checked against the paper's own measurements with packages/bake/src/image-layers/streams.test.ts: the orbits pass the 51 places of Table 3 within 0.19, 0.61, 0.35 arcsec and give their radial velocities within 36, 40, 21 km/s (Northern Arm, Eastern Arm, Western Arc; root mean square). The planes: the Northern Arm's and the Western Arc's are 23° apart, the Eastern Arm's 76° and 93° from them, as the paper says (the first two nearly coplanar, the third nearly perpendicular). South-west of Sgr A*, where the Northern and Eastern Arms meet, both planes are behind the black hole, as the paper finds for the Bar.",
+      "evidence": [
+        "https://arxiv.org/abs/0904.3133"
+      ]
+    },
+    {
+      "id": "northern-arm-surface",
+      "subject": "The Northern Arm east of its rim",
+      "status": "included",
+      "finding": "With the bundles alone 32.3% of the picture's light was claimed by no stream, most of it the bright wedge east of the Northern Arm's rim. Paumard, Maillard & Morris (2004) fit a system of Keplerian orbits to the Northern Arm's radial velocities over a field of about 40 arcsec and found that the arm is not only the bright narrow lane of the pictures: it is a faint, continuous, triangular surface whose western rim is bright. Their model's line-of-sight distance at each 0.353 arcsec cell is at the CDS (J/A+A/426/81, fig7b.fit). packages/bake/authoring/galactic-centre/northern-arm-surface.mts keeps the continuous sheet of that map that holds the wedge east of the rim (2,959 cells, 369 square arcsec); the model's orbits cross the field a second time and those cells are left out. The sheet says where the arm is; its depth here is the plane of Zhao et al.'s orbit, which the map's own depths differ from by 3.3 arcsec at the median (90% under 12.8, 7 root mean square), against the map's own error of 4 arcsec. With it 44.2% of the picture's light is on the Northern Arm's plane, 22.1% on the Eastern Arm's, 15.5% on the Western Arc's and 18.2% on the plane of the sky.",
+      "evidence": [
+        "https://arxiv.org/abs/astro-ph/0405197",
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/426/81"
+      ]
+    },
+    {
+      "id": "saddle",
+      "subject": "The Northern Arm's own depths",
+      "status": "deferred",
+      "finding": "Paumard et al.'s map is a warped surface, not a plane: its depths over the sheet run from −13.9 to +10.5 arcsec, and at the sheet's north-east corner they are in front of Sgr A* where the plane of Zhao et al.'s orbit is behind it (−5.4 against +8.3 arcsec at 18 arcsec east, 15 north). The bank draws planes, so the arm is on one plane. No single plane through Sgr A* does better: the sheet's own best one misses it by 4.4 arcsec, root mean square.",
+      "evidence": [
+        "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/426/81"
+      ],
+      "revisitWhen": "The bake draws a published depth map as a surface."
+    },
+    {
+      "id": "unclaimed-light",
+      "subject": "Light outside the streams",
+      "status": "included",
+      "finding": "18.2% of the picture's light is outside every stream: the Bar's southern side, the gas inside the streams' curve and filaments to the north-east. Zhao et al. model three streams and Paumard et al. the Northern Arm; Paumard et al. name other moving patches (the Eastern Bridge, the Tip, the Bar) without a depth. That light lies on the plane of the sky through Sgr A*.",
+      "evidence": [
+        "https://arxiv.org/abs/0904.3133",
+        "https://arxiv.org/abs/astro-ph/0405197"
+      ]
+    },
+    {
+      "id": "circumnuclear-ring",
+      "subject": "The molecular ring around the streams",
+      "status": "deferred",
+      "finding": "A ring of molecular gas, about 1.9 pc in radius and tilted about 69° to the plane of the sky (Ferrière 2012, A&A 540, A50, compiling earlier work), surrounds the streams; the Western Arc is its ionized inner edge. It shines in molecular lines, not in Paschen-α, so this picture does not show it.",
+      "evidence": [
+        "https://arxiv.org/abs/1201.6031"
+      ],
+      "revisitWhen": "A molecular-line picture of the ring is added as a dataset."
+    },
+    {
+      "id": "later-orbits",
+      "subject": "Later fits of the streams' orbits",
+      "status": "deferred",
+      "finding": "Tsuboi et al. (2017, ApJ 842, 94) refit the streams with ALMA's H42α line and Nitschai et al. (2020, arXiv:2004.13707) with Brackett-γ; neither was compared with Zhao et al.'s orbits here.",
+      "evidence": [
+        "https://arxiv.org/abs/1608.08714",
+        "https://arxiv.org/abs/2004.13707"
+      ],
+      "revisitWhen": "The streams are reworked."
+    },
+    {
+      "id": "sgr-a-star",
+      "subject": "The gas on the black hole's own page",
+      "status": "deferred",
+      "finding": "Sagittarius A* and its stars are objects inside the page (src/objects/sgr-a-star), reached from their labels. The bank is not drawn around them, and a zoom in on the gas stops at the page's nearest view. Every stream's plane passes through the black hole, and the renderer leaves out the sheets through a body it draws a bank around. Measured in headless Chromium at 1440 × 900 on 2026-10-05: drawn around the black hole, all of the gas was gone two zoom steps in, 10.5 light-years out; with the sheets kept, the Northern Arm's plane and the sky's changed 76.5% of the black hole's page between 600 AU and 3 light-years, where one texel of the map is 827 AU.",
+      "evidence": [
+        "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Sgr+A*"
+      ],
+      "revisitWhen": "The renderer leaves out a sheet through a body by the camera's distance from it."
+    }
+  ]
+}

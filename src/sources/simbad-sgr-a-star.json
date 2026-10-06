@@ -1,0 +1,35 @@
+{
+  "id": "simbad-sgr-a-star",
+  "kind": "reference-page",
+  "identityLevel": "work",
+  "title": "SIMBAD: Sgr A*",
+  "identifiers": [
+    {
+      "type": "Archive resource",
+      "value": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Sgr+A*"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Sgr+A*",
+      "label": "SIMBAD, Sgr A*"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Sgr+A*",
+      "checkedOn": "2026-10-05",
+      "locator": "Main identifier NAME Sgr A*; ICRS coordinates 266.41681662499997°, -29.00782497222222°, coordinate reference 2011AJ....142...35P (Petrov et al. 2011, VLBA), as the astronomy record of sgr-a-star cites it."
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "SIMBAD, CDS, Strasbourg",
+      "scope": "citation",
+      "evidence": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Sgr+A*"
+    }
+  ]
+}

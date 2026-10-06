@@ -139,6 +139,14 @@
       "bytes": 14810
     },
     {
+      "path": "src/objects/fomalhaut-disc/prepared/presentation.json",
+      "bytes": 3399
+    },
+    {
+      "path": "public/scenes/fomalhaut-disc/datasets/dust.webp",
+      "bytes": 1762
+    },
+    {
       "path": "src/objects/gn-z11-volume/prepared/presentation.json",
       "bytes": 1522
     },
@@ -917,6 +925,24 @@
       ],
       "credit": "ALMA (ESO/NAOJ/NRAO)",
       "sourceUrl": "https://almascience.eso.org/aq/?projectCode=2019.1.00696.S"
+    },
+    "fomalhaut-disc/dust": {
+      "url2x": "/navigation/focus-fomalhaut-disc-dust@2x.webp",
+      "inputs": [
+        "src/objects/fomalhaut-disc/prepared/presentation.json",
+        "public/scenes/fomalhaut-disc/datasets/dust.webp"
+      ],
+      "credit": "ALMA (ESO/NAOJ/NRAO)",
+      "sourceUrl": "https://almascience.nrao.edu/aq/?projectCode=2015.1.00966.S"
+    },
+    "fomalhaut-disc": {
+      "url2x": "/navigation/focus-object-fomalhaut-disc@2x.webp",
+      "inputs": [
+        "src/objects/fomalhaut-disc/prepared/presentation.json",
+        "public/scenes/fomalhaut-disc/datasets/dust.webp"
+      ],
+      "credit": "ALMA (ESO/NAOJ/NRAO)",
+      "sourceUrl": "https://almascience.nrao.edu/aq/?projectCode=2015.1.00966.S"
     },
     "gn-z11-volume/optical": {
       "url2x": "/navigation/focus-gn-z11-volume-optical@2x.webp",
@@ -1972,6 +1998,7 @@
     "el-gordo-layers": "el-gordo-layers",
     "eps-eridani-corona": "eps-eridani-corona",
     "eps-eridani-disc": "eps-eridani-disc",
+    "fomalhaut-disc": "fomalhaut-disc",
     "gn-z11-volume": "gn-z11-volume",
     "hd-181327-disc": "hd-181327-disc",
     "helix-volume": "helix-volume",

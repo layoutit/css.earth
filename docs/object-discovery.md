@@ -19,13 +19,23 @@ Matching named features appear in a collapsed section inside that same results
 card. Each feature names its parent body. Clearing search returns to the current
 selection without moving the camera.
 
-The Planets, Moons, Comets and Asteroids pills filter the list and highlight
-the same eligible objects in the current view. Planets includes dwarf planets.
+The Planets, Moons, Comets, Asteroids, Stars, Exoplanets, Nebulae and Galaxies
+pills filter the list and highlight the same eligible objects in the view.
+Planets includes dwarf planets; Stars and Exoplanets mark their notable members.
 Category browsing respects **Illustration models** and updates when that setting
 changes; an explicit name search still finds an excluded illustration.
-Pills do not move the camera or expand the information sheet. Clicking the
-active pill clears it; choosing a result navigates to that body. Zoom and
-crowding still determine which matching labels fit on screen. Explicit category
+A pill also flies the camera, at its current angle, to a prepared box around
+its members (`prepareCategoryFrames` in
+[`prepare-world-presentation.mts`](../site/build/prepare/prepare-world-presentation.mts)).
+The box holds the members inside the smallest region of the zoom that holds
+most of them, the Milky Way for the stars and the Nearby Universe for the
+galaxies, and of those the nearest nine in ten. Members outside the box, such
+as a star of another galaxy, stay highlighted. A highlighted galaxy keeps its
+marker past the distance where galaxies give way to their clusters. The pill
+stays pressed when its landing hands the view to another scene. It does not
+expand the information sheet. Clicking the active pill clears it; choosing a
+result navigates to that body. Zoom and crowding still determine which matching
+labels fit on screen. Explicit category
 highlights bypass the fade tied to orbit size, so moons remain identifiable
 at Solar System scale; their tiny orbits need not be drawn. Orbit visibility
 continues to follow Settings.

@@ -34,8 +34,7 @@ export function preparedMaterialState(track: PreparedMaterialTrack, selected: Pr
   const reference = view.reference?.sunViewDirection ?? direction;
   const useDefault = view.sceneMatrix === view.reference?.sceneMatrix &&
     direction.every((value, i) => Math.abs(value-reference[i]) < 1e-9);
-  const far = track.farBank !== undefined && (view.levelOfDetail?.stage ?? "geometry") !== "geometry";
-  const bank = track.banks.find(bank => bank.id === (far ? track.farBank : selected.bank));
+  const bank = track.banks.find(bank => bank.id === selected.bank);
   if (!bank) throw new TypeError(`Unprepared material bank: ${selected.bank}.`);
   const mode = selected.mode === "fixed" ? selected.fixedMode : useDefault && bank.default ? "default" : "directional";
   const address = selected.mode === "fixed" ? bank.fixed : useDefault && bank.default ? bank.default : bank.frames[frame];

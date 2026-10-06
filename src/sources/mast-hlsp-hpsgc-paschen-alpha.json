@@ -1,0 +1,52 @@
+{
+  "id": "mast-hlsp-hpsgc-paschen-alpha",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "HST/NICMOS Paschen-α Survey of the Galactic Centre: the Paschen-α line map",
+  "identifiers": [
+    {
+      "type": "Archive resource",
+      "value": "hlsp_hpsgc_hst_nicmos-nic3_gc_palpha_v1_img.fits"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://archive.stsci.edu/prepds/hpsgc/",
+      "label": "Published source"
+    },
+    {
+      "role": "original",
+      "url": "https://archive.stsci.edu/pub/hlsp/hpsgc/hlsp_hpsgc_hst_nicmos-nic3_gc_palpha_v1_img.fits",
+      "label": "FITS mosaic, 23,400 x 9,000 px, 842 MB"
+    },
+    {
+      "role": "rights",
+      "url": "https://archive.stsci.edu/publishing/data-use",
+      "label": "Reuse terms"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://archive.stsci.edu/prepds/hpsgc/",
+      "checkedOn": "2026-10-05",
+      "locator": "hlsp_hpsgc_hst_nicmos-nic3_gc_palpha_v1_img.fits: the Paschen-α mosaic in µJy a pixel (the survey's readme). Header: 23,400 x 9,000 px, GLON/GLAT tangent plane, 2.81756e-5° a pixel, reference pixel 11700.5, 4500.5 at l 359.94197°, b −0.00514°; observed February to June 2008. The survey's mosaic is on a Galactic tangent plane, 0.1014 arcsec a pixel. packages/bake/authoring/galactic-centre/paschen-alpha.mts resamples the rows that cross the field onto a north-up tangent plane about Sgr A*'s place, 0.1 arcsec a pixel, east to the left. The bank stands where the world places Sgr A* at its epoch (JD 2461286.5), 0.171 arcsec from the catalogued place by the black hole's proper motion, which the gas shares. Check: the mean light at the 51 places Zhao et al. (2009) measured along the three streams (their Table 3) is greatest with the picture where the mosaic's own coordinates put it, to the 0.25 arcsec of the search's step."
+    }
+  ],
+  "publisher": "MAST (STScI)",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "NASA, ESA, Q. D. Wang (University of Massachusetts, Amherst) and the HST/NICMOS Paschen-α Survey of the Galactic Centre (Wang et al. 2010; Dong et al. 2011), from MAST",
+      "scope": "Published source",
+      "evidence": "https://archive.stsci.edu/prepds/hpsgc/"
+    },
+    {
+      "kind": "rights",
+      "text": "Public NASA mission data; acknowledge the archive and cite the survey's papers.",
+      "scope": "Published source",
+      "evidence": "https://archive.stsci.edu/publishing/data-use"
+    }
+  ]
+}

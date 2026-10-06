@@ -1,0 +1,97 @@
+{
+  "schema": "cssearth-volume-source-manifest@2",
+  "pathBase": "repository",
+  "inputs": [
+    {
+      "id": "dust-b6-cont",
+      "dependencies": [],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-fomalhaut-disc-dust-b6-cont",
+            "role": "material",
+            "evidence": "src/objects/fomalhaut-disc/source/manifest.json#/inputs/0"
+          }
+        ]
+      },
+      "path": ".local/fomalhaut-disc/observations/member.uid___A001_X2d8_X7c.ari_l.Fomalhaut_sci.spw0_1_2_3_223746MHz.12m.cont.I.pbcor.fits",
+      "origin": "https://almascience.nrao.edu/dataPortal/member.uid___A001_X2d8_X7c.ari_l.member.uid___A001_X2d8_X7c.ari_l.Fomalhaut_sci.spw0_1_2_3_223746MHz.12m_223746MHz.12m.cont.I.pbcor.fits",
+      "sourceUrl": "https://almascience.nrao.edu/aq/?projectCode=2015.1.00966.S",
+      "title": "ALMA project 2015.1.00966.S, member OUS uid://A001/X2d8/X7c, ARI-L continuum image Fomalhaut_sci.spw0_1_2_3_223746MHz.12m.cont.I.pbcor",
+      "credit": "ALMA (ESO/NAOJ/NRAO), project 2015.1.00966.S (PI P. Kalas); imaged by the ARI-L project (Massardi et al. 2021, PASP 133, 085001; CASA 5.6.1-8) and served by the ALMA Science Archive. This paper makes use of the following ALMA data: ADS/JAO.ALMA#2015.1.00966.S.",
+      "displayCredit": "ALMA (ESO/NAOJ/NRAO)",
+      "acquisition": "Downloaded unchanged from the ALMA Science Archive data portal on 2026-10-06 (the ARI-L product the archive lists for member OUS uid://A001/X2d8/X7c); restored from that origin or the R2 source cache when missing.",
+      "license": "ALMA data are released under CC BY 4.0, with the observatory acknowledgement in the host star's NOTICE.md.",
+      "datasetId": "dust"
+    }
+  ],
+  "documents": [
+    {
+      "id": "circumstellar-json",
+      "path": "src/objects/fomalhaut-disc/source/circumstellar.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned recipe: the datasets, their pinned program and bands, the stated conventions and the published geometry each is checked against."
+      }
+    },
+    {
+      "id": "macgregor-2017-figure-1-colormap-json",
+      "path": "src/objects/fomalhaut-disc/source/macgregor-2017-figure-1-colormap.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "The publisher's color map the dust dataset is shown in, read from the published figure as the file itself records (the color bar of MacGregor et al. (2017), Figure 1, left panel, decoded from the figure in the paper's arXiv source: linear from 0.0 to 0.8 mJy per beam, black at the low end and white at the high end. The printed panel is brighter than this scale gives: its colors read about 1.5 times the brightness cuts of the paper's Figure 5 on the panel's own bar, so the ring is drawn darker here than in print)."
+      }
+    },
+    {
+      "id": "delivery-json",
+      "path": "src/objects/fomalhaut-disc/source/delivery.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, presentation or provenance record written by the author; the published inputs it cites are bound above."
+      }
+    },
+    {
+      "id": "presentation-json",
+      "path": "src/objects/fomalhaut-disc/source/presentation.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, presentation or provenance record written by the author; the published inputs it cites are bound above."
+      }
+    },
+    {
+      "id": "provenance-json",
+      "path": "src/objects/fomalhaut-disc/source/provenance.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, presentation or provenance record written by the author; the published inputs it cites are bound above."
+      }
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "density-dust-ktx2",
+      "path": "src/objects/fomalhaut-disc/source/density-dust.ktx2",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Written by packages/telescope-cli/authoring/circumstellar/author.mts from the mosaics bound above and the recipe circumstellar.json."
+      }
+    },
+    {
+      "id": "volume-dust-json",
+      "path": "src/objects/fomalhaut-disc/source/volume-dust.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Written by packages/telescope-cli/authoring/circumstellar/author.mts from the mosaics bound above and the recipe circumstellar.json."
+      }
+    },
+    {
+      "id": "previews-dust-png",
+      "path": "src/objects/fomalhaut-disc/source/previews/dust.png",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Written by packages/telescope-cli/authoring/circumstellar/author.mts from the mosaics bound above and the recipe circumstellar.json."
+      }
+    }
+  ]
+}

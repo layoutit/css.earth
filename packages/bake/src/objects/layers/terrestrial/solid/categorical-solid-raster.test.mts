@@ -7,7 +7,7 @@ import { mkdtemp, writeFile, readFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import sharp from 'sharp';
-import { prepareSolidRasters, prepareSolidMaterial } from '@cssearth/bake/objects/layers/terrestrial';
+import { parseSolidLighting, prepareSolidRasters, prepareSolidMaterial } from '@cssearth/bake/objects/layers/terrestrial';
 import { reprojectSolidBodySurfaceRaster, prepareSolidBodyPoleRaster } from '@cssearth/bake/scene';
 const test = sourceTest();
 
@@ -67,7 +67,7 @@ test('actual category pack, encoded atlases, poles, legend and thumbnail retain 
     const pinned = await fixtureSource(root, entries);
     const source = {...pinned, async validateGroup(consumer: string) { assert.equal(consumer, 'geology'); return pinned.validateGroup(consumer); }};
     const config={namespace:'fixture',publicBase:'/scenes/fixture/',raster:{width:64,height:32,bandCount:8,gutter:1,poleSize:16,observations:[],scientific:[dataset]},
-      lighting:{frameSize:4,columns:1,frameCount:2,logicalSize:4,terminatorWidth:.1,directionalAmbient:.12,fullPhaseAmbient:.12,fullPhaseDiffuse:.88,maximumOpacity:1}};
+      lighting:parseSolidLighting({bank:'sphere',presentationSize:4})};
     const surfaces=await prepareSolidRasters({sourceDirectory:root,publicDirectory:root,outputDirectory:root,config,source});
     await prepareSolidMaterial({surfaces,publicDirectory:root,outputDirectory:root,config});
     const surface=surfaces[0];assert.equal(surface.categorical,true);assert.equal(surface.missingPixels,0);
@@ -96,7 +96,7 @@ test('explicit nearest numeric display preserves missing-cell colors through enc
     const entries=['grid.img','grid.lbl'].map(path=>({path,id:path,consumers:['science']}));
     const source = await fixtureSource(root, entries);
     const config={namespace:'fixture',publicBase:'/scenes/fixture/',raster:{width:64,height:32,bandCount:8,gutter:1,poleSize:16,observations:[],scientific:[dataset]},
-      lighting:{frameSize:4,columns:1,frameCount:2,logicalSize:4,terminatorWidth:.1,directionalAmbient:.12,fullPhaseAmbient:.12,fullPhaseDiffuse:.88,maximumOpacity:1}};
+      lighting:parseSolidLighting({bank:'sphere',presentationSize:4})};
     const surfaces=await prepareSolidRasters({sourceDirectory:root,publicDirectory:root,outputDirectory:root,config,source});
     await prepareSolidMaterial({surfaces,publicDirectory:root,outputDirectory:root,config});
     const surface=surfaces[0];assert.equal(surface.displaySampling,'nearest');assert.equal(surface.categorical,undefined);assert.equal(surface.missingPixels,1024);
