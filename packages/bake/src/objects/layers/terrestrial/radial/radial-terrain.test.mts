@@ -31,17 +31,8 @@ test('source topology preserves translated inward-facing facets and welds duplic
   assert.throws(() => Reflect.apply(removeOppositeFacePairs, undefined, [[0,1,2,1,2,0]]), /ambiguous duplicate/);
 });
 
-test('a source within the face target is kept whole, and an unreachable target names the object, file and the error it needs', async () => {
-  const simplification = { method: 'source-meshoptimizer', targetFaces: 8, maximumErrorMeters: 0.001 };
-  // Nyx's 512-face DAMIT mesh under an 800-face target used to stop meshoptimizer with a bare "Assertion failed".
-  const vertices = [[1,1,1],[1,-1,-1],[-1,1,-1],[-1,-1,1]], tetrahedron = [[0,1,2],[0,3,1],[0,2,3],[1,3,2]];
-  const small = await simplifyRadialShape(createIndexedShape(vertices, tetrahedron, { metersPerUnit: 1, expectedVertices: 4, expectedFaces: 4 }),
-    { faceBudget: 8, simplification, source: 'tetra: shape.txt' }, 1);
-  await assert.rejects(simplifyRadialShape(createIndexedShape(vertices, tetrahedron, { metersPerUnit: 1, expectedVertices: 4, expectedFaces: 4 }),
-    { faceBudget: 2001, simplification }, 1), /Invalid source mesh simplification/);
-  assert.equal(small.length, 4);
-  assert.deepEqual([fixtureRecord(small.simplification).outputFaces, fixtureRecord(small.simplification).estimatedErrorMeters], [4, 0]);
-  // A once-subdivided octahedron on the unit sphere: no collapse fits a millimetre, eight faces fit once the bound is lifted.
+/** A once-subdivided octahedron on the unit sphere: 32 faces. */
+function subdividedOctahedron() {
   const corners = [[1,0,0],[-1,0,0],[0,1,0],[0,-1,0],[0,0,1],[0,0,-1]], positions = corners.map(v => [...v]), midpoints = new Map<string, number>();
   const midpoint = (a: number, b: number) => {
     const key = a < b ? `${a},${b}` : `${b},${a}`;
@@ -52,9 +43,37 @@ test('a source within the face target is kept whole, and an unreachable target n
     const ab = midpoint(a, b), bc = midpoint(b, c), ca = midpoint(c, a);
     return [[a, ab, ca], [ab, b, bc], [ca, bc, c], [ab, bc, ca]];
   });
-  const sphere = createIndexedShape(positions, faces, { metersPerUnit: 1, expectedVertices: positions.length, expectedFaces: faces.length });
+  return createIndexedShape(positions, faces, { metersPerUnit: 1, expectedVertices: positions.length, expectedFaces: faces.length });
+}
+
+test('a source within the face target is kept whole, and an unreachable target names the object, file and the error it needs', async () => {
+  const simplification = { method: 'source-meshoptimizer', targetFaces: 8, maximumErrorMeters: 0.001 };
+  // Nyx's 512-face DAMIT mesh under an 800-face target used to stop meshoptimizer with a bare "Assertion failed".
+  const vertices = [[1,1,1],[1,-1,-1],[-1,1,-1],[-1,-1,1]], tetrahedron = [[0,1,2],[0,3,1],[0,2,3],[1,3,2]];
+  const small = await simplifyRadialShape(createIndexedShape(vertices, tetrahedron, { metersPerUnit: 1, expectedVertices: 4, expectedFaces: 4 }),
+    { faceBudget: 8, simplification, source: 'tetra: shape.txt' }, 1);
+  await assert.rejects(simplifyRadialShape(createIndexedShape(vertices, tetrahedron, { metersPerUnit: 1, expectedVertices: 4, expectedFaces: 4 }),
+    { faceBudget: 2001, simplification }, 1), /Invalid source mesh simplification/);
+  assert.equal(small.length, 4);
+  assert.deepEqual([fixtureRecord(small.simplification).outputFaces, fixtureRecord(small.simplification).estimatedErrorMeters], [4, 0]);
+  // No collapse of the 32-face sphere fits a millimetre; eight faces fit once the bound is lifted.
+  const sphere = subdividedOctahedron();
   await assert.rejects(simplifyRadialShape(sphere, { faceBudget: 8, simplification, source: 'sphere: source/shape/sphere.txt' }, 1),
     /^Error: sphere: source\/shape\/sphere\.txt: simplification stopped at 32 of 32 source faces at 0 m estimated error; the target is 8 faces within maximumErrorMeters 0\.001\. Reaching 8 faces needs 0\.\d+ m\.$/u);
+});
+
+test('without a face target the error bound decides the face count, up to the face budget', async () => {
+  const sphere = subdividedOctahedron();
+  const within = (maximumErrorMeters: number, faceBudget = 32) => simplifyRadialShape(sphere,
+    { faceBudget, simplification: { method: 'source-meshoptimizer', maximumErrorMeters }, source: 'sphere: source/shape/sphere.txt' }, 1);
+  const tight = await within(0.001), loose = await within(0.4);
+  assert.equal(tight.length, 32, 'no collapse fits a millimetre');
+  assert.equal(loose.length, 8, 'four tenths of the radius allow the octahedron and nothing coarser');
+  assert.ok(Number(fixtureRecord(loose.simplification).estimatedErrorMeters) <= 0.4);
+  assert.equal(fixtureRecord(loose.simplification).outputFaces, loose.length);
+  assert.equal('targetFaces' in fixtureRecord(loose.simplification), false, 'the report names no target when none was authored');
+  await assert.rejects(within(0.001, 8),
+    /^Error: sphere: source\/shape\/sphere\.txt: simplification stopped at 32 of 32 source faces at 0 m estimated error; the face budget is 8 faces within maximumErrorMeters 0\.001\. Reaching 8 faces needs 0\.\d+ m\.$/u);
 });
 
 test('radial geometry retains independently specified ellipsoid axes and rejects missing radii', () => {
@@ -149,11 +168,29 @@ test('two-sided radial preparation retains exact source geometry and atlas layou
   } finally { await rm(directory, { recursive: true, force: true }); }
 });
 
+test('a mesh states its atlas budget for the whole atlas or by the face, one of the two', async () => {
+  const directory = await mkdtemp(join(tmpdir(), 'cssearth-radial-atlas-'));
+  try {
+    await writeFile(join(directory, 'shape.obj'), 'v 1 0 0\nv 0 1 0\nv 0 0 1\nv 0 0 0\nf 1 2 3\nf 1 4 2\nf 2 4 3\nf 3 4 1\n');
+    const terrain = { path: 'shape.obj', format: 'wavefront-obj', grid: { metersPerUnit: 1, expectedVertices: 4, expectedFaces: 4 }, faceBudget: 4,
+      simplification: { method: 'source-meshoptimizer', maximumErrorMeters: .001 } };
+    const source = await fixtureSource(directory, [{ id: 'shape', path: 'shape.obj', consumers: ['geometry'] }]);
+    const prepare = async (budget: Record<string, number>) => required(await loadRadialTerrain({ sourceDirectory: directory, source,
+      config: { namespace: 'fixture', geometry: { radius: 1, radiusKm: .001, radialTerrain: { ...terrain, ...budget } } } }));
+    const byFace = await prepare({ texelsPerFace: 256 }), whole = await prepare({ atlasTexels: 1024 }), larger = await prepare({ atlasTexels: 4096 });
+    assert.equal(byFace.faces.length, 4, 'the error bound keeps the four source faces');
+    assert.deepEqual(whole.plans, byFace.plans, 'four faces at 256 texels each are an atlas of 1,024');
+    assert.ok(larger.width * larger.height <= 4096 && larger.width * larger.height > whole.width * whole.height, 'the atlas follows its own budget, not the face count');
+    await assert.rejects(prepare({}), /texelsPerFace or atlasTexels/);
+    await assert.rejects(prepare({ texelsPerFace: 256, atlasTexels: 1024 }), /texelsPerFace or atlasTexels/);
+  } finally { await rm(directory, { recursive: true, force: true }); }
+});
+
 test('raster atlas: each face gets its own rectangle at one texel density, and its leaf is that rectangle', () => {
   // A large face, a small one and a sliver, in source units.
   const faces = [[[0,0,0],[40,0,0],[0,30,0]], [[0,0,5],[4,0,5],[0,3,5]], [[0,0,9],[40,0,9],[20,1,9]]]
     .map(vertices => ({ vertices, normal: [0,0,1], vertexNormals: [[0,0,1],[0,0,1],[0,0,1]] }));
-  const { plans, width, height } = rasterAtlasLayout(faces, 4096, 8);
+  const { plans, width, height } = rasterAtlasLayout(faces, 4096 * faces.length, 8);
   assert.ok(plans.reduce((sum, { rect }) => sum + rect.width * rect.height, 0) <= 4096 * faces.length, 'the budget holds');
   assert.ok(width <= 16383 && height <= 16383);
   for (const [i, { rect, geometry, matrix: m }] of plans.entries()) {

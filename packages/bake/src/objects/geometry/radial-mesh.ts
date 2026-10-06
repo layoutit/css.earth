@@ -6,7 +6,9 @@ import { removeOppositeFacePairs } from './mesh-face-pairs.ts';
 import { repairImageDemDiagonals, measureImageDemReduction } from './image-dem-reduction.ts';
 import { validateObservedReduction } from './open-surface.ts';
 
-export interface RadialSimplification {method?: string; targetFaces: number; maximumErrorMeters: number; regularize?: boolean; prune?: boolean;}
+/** `targetFaces` is an authored face count. Without one the error bound decides: the shape is reduced to the fewest
+ * faces within `maximumErrorMeters`, and the profile's face budget is the most it may keep. */
+export interface RadialSimplification {method?: string; targetFaces?: number; maximumErrorMeters: number; regularize?: boolean; prune?: boolean;}
 export interface TerrainMesh extends SourceMesh {
   coverage?: Record<string, unknown>; lockedPositions?: readonly number[][]; imagePlaneCoordinates?: number[][];
   sourceOrientation?: unknown; heightAt?(x: number, y: number): number | null;
@@ -32,12 +34,14 @@ const unit = (a: readonly number[]) => a.map(v => v / Math.hypot(...a));
 
 /** Simplify the released topology before UV sampling. Original positions are
  * retained; geometry and the simplifier never enter the browser runtime. A source
- * already within the face target is kept whole. `source` names the object and file
- * in a refusal. */
+ * already within an authored face target is kept whole; without a target the error
+ * bound decides the count. `source` names the object and file in a refusal. */
 export async function simplifyRadialShape(mesh: TerrainMesh, profile: {faceBudget: number; sourceTopology?: string; simplification: RadialSimplification; source?: string}, scale: number) {
   const { targetFaces, maximumErrorMeters } = profile.simplification;
-  if (!mesh.positions || !mesh.indices || !Number.isInteger(targetFaces) || targetFaces < 4 ||
-      !Number.isInteger(profile.faceBudget) || targetFaces > profile.faceBudget || profile.faceBudget > 2000 ||
+  // The most faces the result may have: the authored target, or the whole budget when the error bound decides.
+  const ceiling = targetFaces ?? profile.faceBudget;
+  if (!mesh.positions || !mesh.indices || !Number.isInteger(ceiling) || ceiling < 4 ||
+      !Number.isInteger(profile.faceBudget) || ceiling > profile.faceBudget || profile.faceBudget > 2000 ||
       !(maximumErrorMeters > 0) || !Number.isFinite(maximumErrorMeters) || !(scale > 0) ||
       (['regularize', 'prune'] as const).some(key => profile.simplification[key] !== undefined && typeof profile.simplification[key] !== 'boolean')) throw new TypeError('Invalid source mesh simplification.');
   await MeshoptSimplifier.ready;
@@ -72,8 +76,9 @@ export async function simplifyRadialShape(mesh: TerrainMesh, profile: {faceBudge
   // preserves the height-field orientation, unlike unconstrained 3D collapse.
   const extent = imagePlane ? Math.max(...[0, 1].map(axis => mesh.bounds[1][axis] - mesh.bounds[0][axis])) : 0;
   // meshoptimizer refuses a target above the source's own count (a bare "Assertion failed" on Nyx's 512 faces).
-  const targetIndices = Math.min(targetFaces * 3, sourceIndices.length);
-  const reduce = (errorLimit: number) => imagePlane
+  const indicesFor = (faces: number) => Math.min(faces * 3, sourceIndices.length);
+  // Asked for the fewest faces a mesh can have, the simplifier stops where the next collapse would pass the error bound.
+  const reduce = (errorLimit: number, targetIndices = indicesFor(targetFaces ?? 4)) => imagePlane
     ? MeshoptSimplifier.simplifyWithAttributes(sourceIndices,
       Float32Array.from(positions.flatMap(p => [p[0], p[1], 0])), 3,
       Float32Array.from(positions, p => p[2] / extent), 1, [1], null,
@@ -90,12 +95,12 @@ export async function simplifyRadialShape(mesh: TerrainMesh, profile: {faceBudge
   if (imagePlane && !mesh.imagePlaneCoordinates) throw new Error('Image DEM lacks its source plane coordinates.');
   const repaired = imagePlane && mesh.imagePlaneCoordinates ? repairImageDemDiagonals(cleaned, mesh.imagePlaneCoordinates) : null;
   const indices = repaired?.indices ?? cleaned;
-  if (!indices.length || indices.length / 3 > targetFaces) {
+  if (!indices.length || indices.length / 3 > ceiling) {
     // Name what the target costs, so the author can raise the bound or the target from a number instead of guessing.
-    const [unbounded, needed] = reduce(Infinity);
+    const [unbounded, needed] = reduce(Infinity, indicesFor(ceiling));
     throw new Error(`${profile.source ?? 'Source mesh'}: simplification stopped at ${indices.length / 3} of ${sourceIndices.length / 3} source faces at ${error} m estimated error; ` +
-      `the target is ${targetFaces} faces within maximumErrorMeters ${maximumErrorMeters}. ` +
-      (unbounded.length / 3 <= targetFaces ? `Reaching ${targetFaces} faces needs ${needed} m.` : `Without an error bound it still stops at ${unbounded.length / 3} faces.`));
+      `the ${targetFaces === undefined ? 'face budget' : 'target'} is ${ceiling} faces within maximumErrorMeters ${maximumErrorMeters}. ` +
+      (unbounded.length / 3 <= ceiling ? `Reaching ${ceiling} faces needs ${needed} m.` : `Without an error bound it still stops at ${unbounded.length / 3} faces.`));
   }
   const topology = open ? validateObservedReduction(sourceIndices, indices, positions)
     : preserveSource ? validateClosedMesh(indices, positions) : undefined;
@@ -107,7 +112,7 @@ export async function simplifyRadialShape(mesh: TerrainMesh, profile: {faceBudge
   const faces = surfaceTriangles(triangles, preserveSource);
   if (preserveSource) faces.simplification = { method: 'source-meshoptimizer', version: '1.2.0', flags,
     sourceFaces: mesh.indices.length, sourceVertices: mesh.positions.length, weldedVertices: positions.length,
-    targetFaces, outputFaces: faces.length, removedOppositeFaces: (simplified.length - indices.length) / 3,
+    ...(targetFaces === undefined ? {} : { targetFaces }), outputFaces: faces.length, removedOppositeFaces: (simplified.length - indices.length) / 3,
     maximumErrorMeters, ...(imagePlane ? { imageReduction, optimizerError: error,
       optimizerErrorUnits: 'Combined planar and normalized height metric; physical metre deviations measured separately.' }
       : { estimatedErrorMeters: error }), topology,
@@ -206,15 +211,16 @@ export function shadeRadialFaces(faces: UnshadedFace[]): RadialFaces {
 
 /** Simplify before UV/lighting baking so atlas seams cannot constrain collapses. */
 export async function simplifyRadialTerrain(sample: RadiusSampler, profile: RadialSamplingProfile & {simplification: RadialSimplification}, scale: number) {
-  const options = profile.simplification;
-  if (options?.method !== 'meshoptimizer' || !Number.isInteger(options.targetFaces) || options.targetFaces < 4 ||
-      !Number.isInteger(profile.faceBudget) || options.targetFaces > profile.faceBudget || profile.faceBudget > 2000 ||
+  // A resampled sphere has no source faces for an error bound to count, so this method needs its authored target.
+  const options = profile.simplification, targetFaces = options?.targetFaces;
+  if (options?.method !== 'meshoptimizer' || targetFaces === undefined || !Number.isInteger(targetFaces) || targetFaces < 4 ||
+      !Number.isInteger(profile.faceBudget) || targetFaces > profile.faceBudget || profile.faceBudget > 2000 ||
       !Number.isFinite(options.maximumErrorMeters) || options.maximumErrorMeters <= 0 ||
       (options.regularize !== undefined && typeof options.regularize !== 'boolean')) {
     throw new TypeError('Invalid radial meshoptimizer budget or error limit.');
   }
   const dense = sampleRadialTriangles(sample, profile.latitudeSegments, profile.longitudeSegments, scale, true);
-  if (dense.length < options.targetFaces) throw new TypeError('Radial source mesh is smaller than its simplification target.');
+  if (dense.length < targetFaces) throw new TypeError('Radial source mesh is smaller than its simplification target.');
   await MeshoptSimplifier.ready;
   const sourceVertices = dense.flatMap(face => face.vertices);
   // Exact-position welding removes face duplication and joins the longitude
@@ -229,9 +235,9 @@ export async function simplifyRadialTerrain(sample: RadiusSampler, profile: Radi
   const positions = new Float32Array(vertices.flat());
   const flags: SimplifierFlags[] = ['ErrorAbsolute', ...(options.regularize ? ['RegularizeLight' as const] : [])];
   const [simplified, error] = MeshoptSimplifier.simplify(indices, positions, 3,
-    options.targetFaces * 3, options.maximumErrorMeters * scale, flags);
-  if (simplified.length / 3 > options.targetFaces || error > options.maximumErrorMeters * scale) {
-    throw new Error(`Meshoptimizer reached ${simplified.length / 3} faces at ${(error / scale).toFixed(3)} m estimated error; requested ${options.targetFaces} faces within ${options.maximumErrorMeters} m.`);
+    targetFaces * 3, options.maximumErrorMeters * scale, flags);
+  if (simplified.length / 3 > targetFaces || error > options.maximumErrorMeters * scale) {
+    throw new Error(`Meshoptimizer reached ${simplified.length / 3} faces at ${(error / scale).toFixed(3)} m estimated error; requested ${targetFaces} faces within ${options.maximumErrorMeters} m.`);
   }
   const edges = new Map<string, [number, number]>();
   for (let i = 0; i < simplified.length; i += 3) for (let j = 0; j < 3; j++) {
@@ -256,7 +262,7 @@ export async function simplifyRadialTerrain(sample: RadiusSampler, profile: Radi
   }
   return { faces: shadeRadialFaces(faces), report: {
     method: 'meshoptimizer', version: '1.2.0', flags, sourceFaces: dense.length,
-    sourceVertices: vertexCount, targetFaces: options.targetFaces, outputFaces: faces.length,
+    sourceVertices: vertexCount, targetFaces, outputFaces: faces.length,
     maximumErrorMeters: options.maximumErrorMeters, estimatedErrorMeters: error / scale,
   } };
 }
