@@ -32,6 +32,8 @@ This package is the layer above the libraries: it imports `@cssearth/telescope`,
   `node packages/telescope-cli/src/toolchains/astronomy-toolchains.mts <toolchain> install|verify`), which the
   `@cssearth/telescope/node` errors name when a toolchain is missing.
 
+`src/archives/archives.mts` describes every archive once (registry identifier and pinned address, the search `explore` runs, the ledger command); `explore`, the registry check and `src/archives/ledgers.mts`, which runs every ledger command, read that list, and a new archive is added there, not in each of them. `src/archives/memory.mts` is the memory between explorations: a question asked in the last day is answered from the evidence file it saved, never from anything else, and `--fresh` turns it off.
+
 The object generator behind `telescope new-object` is `src/new-object/`: `cli.mts` is the entry the telescope runs as a process of its
 own through `workspace-commands/new-object.mts`, `new-object-cli.mts` is the standalone entry for the modes the telescope does not expose
 (`--star-limb`, `--imaged-limb`, `--star-lit`, `--thermal`, `--thermal-entries`, `--expected-glow`, `--host-light`, `--phase-curve`, `--simulation`, `--rock-eclipse`, `--published-map`, `--charts`, `--retext`, `--retime`, `--rename`, `--draft-photometry`, `--photometry`, the shape-only scaffold), and

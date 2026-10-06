@@ -125,7 +125,9 @@ test('with a place on the sky, Keck and Gemini are asked by name and by place, a
     const gemini = await searchGeminiLeads(root, target, async query => { cadc.push(query); return query.includes('INTERSECTS(')
       ? [frame('S20141101S0001.fits', 'HR 8799'), frame('S20141101S0002.fits', 'HD218396')] : [frame('S20141101S0001.fits', 'HR 8799')]; }, undefined, position);
     assert.equal(cadc.length, 2);
-    assert.match(cadc[1]!, /INTERSECTS\(CIRCLE\('ICRS', 346\.8696, 21\.1343, 0\.008333333333333333\), p\.position_bounds\) = 1/u);
+    // The two are asked at once, so either may be recorded first.
+    assert.equal(cadc.filter(query => /INTERSECTS\(CIRCLE\('ICRS', 346\.8696, 21\.1343, 0\.008333333333333333\), p\.position_bounds\) = 1/u.test(query)).length, 1);
+    assert.equal(cadc.filter(query => query.includes("o.target_name IN ('HR 8799','HR8799','HR-8799')")).length, 1);
     assert.deepEqual(gemini.instruments.map(item => [item.instrument, item.records]), [['GPI', 2]]);
     assert.equal(gemini.evidence?.length, 2);
   } finally { await rm(root, { recursive: true, force: true }); }

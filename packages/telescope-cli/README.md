@@ -28,7 +28,7 @@ A name the catalogue does not ship is resolved by SIMBAD, and records are select
 
 In a terminal, `explore` shows the observations, unknown metadata, unsupported records and provider limits, then asks which observation to retrieve. Press Enter to keep the exploration without retrieving. With `--json` or redirected input or output it never prompts. Without `--out` it creates a run under `./telescope-runs/`. The saved `outcome` has a `selection` (`available` or `none`) and a `coverage` (`target-unresolved`, `incomplete` or `bounded`). Even `bounded` describes only the configured searches, not every observatory. An empty search is not proof that no observations exist.
 
-`explore` asks every archive at once and reports the ledgers that index the target, the ESPaDOnS polarised spectra at CADC among them; an archive that drops the connection is asked again, twice.
+`explore` asks every archive at once and reports the ledgers that index the target, the ESPaDOnS polarised spectra at CADC among them; an archive that drops the connection is asked again, twice. Keck and Gemini are asked by the target's place on the sky as well as by name. A question asked in the last day is answered from its saved answer; `--fresh` asks every archive again.
 
 `telescope fetch RUN/explore.json --archive ARCHIVE --pick N --out NEW_DIRECTORY` retrieves one raw source from `keck`, `gemini`, `chandra`, `spitzer` or `opus`. When a Chandra ObsID or Spitzer AOR has several science files, pass `--file NAME`. A failed Gemini, OPUS, Chandra or Spitzer fetch keeps completed files in `NEW_DIRECTORY.partial`; repeat the same command with `--resume`. A fetched raw file is not qualified for detection, calibration or scientific use.
 
