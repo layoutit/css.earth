@@ -38,7 +38,7 @@ Development startup checks installed volume packages without preparing every
 nebula. A missing or invalid package leaves its catalogue facts accessible and
 marks its 3D view unavailable; other installed objects keep working. The selected
 body and shared world resources still need their prepared assets. See the
-[nebula guide](docs/nebulae/README.md#reproduce-from-a-clean-checkout) for restoration.
+[nebula guide](../docs/nebulae/README.md#reproduce-from-a-clean-checkout) for restoration.
 Restart the server after installing a package: its available banks stay fixed for
 the session. Production builds require every configured volume package and
 reject missing files, invalid metadata and assets their inventories do not publish.
@@ -111,7 +111,7 @@ That approval does not publish assets; use the separate workflow above.
 
 Prepared runtime files are served from an R2 bucket, content-addressed as `runtime-assets/<sha256>/<filename>`. One small inventory per object is tracked in Git instead of the baked bytes: `inventory.json`, listing the public browser textures and everything baked under `prepared/`, each entry with its location, filename, bytes and hash (`object.json` and `page.json` are regenerated, not inventoried). The inventory owner also excludes audit-only terrain reports and source-index rasters.
 
-A page embeds only the hashes its first view reads: files its prepared markup and styles name, its startup resources and the textures its server markup writes. Each other resource's hash waits in a same-origin group file, `/objects/<id>/asset-hashes/<group>.json`, which the browser reads the first time a zoom level or dataset needs it. Resources whose keys differ only in their first index share a group (one dataset's pages at one level); keys without an index share one. A hash is 64 characters that do not compress, so Earth's page would otherwise carry 1,754 of them ([`site/server-assets/asset-origin.mts`](./site/server-assets/asset-origin.mts)).
+A page embeds only the hashes its first view reads: files its prepared markup and styles name, its startup resources and the textures its server markup writes. Each other resource's hash waits in a same-origin group file, `/objects/<id>/asset-hashes/<group>.json`, which the browser reads the first time a zoom level or dataset needs it. Resources whose keys differ only in their first index share a group (one dataset's pages at one level); keys without an index share one. A hash is 64 characters that do not compress, so Earth's page would otherwise carry 1,754 of them ([`site/server-assets/asset-origin.mts`](../site/server-assets/asset-origin.mts)).
 
 After baking, publish and commit the refreshed inventory:
 
@@ -143,7 +143,7 @@ input with `--object=<id>` after running its generator.
 Both scripts need an authenticated `wrangler`. Neither ever deletes a key.
 
 The public asset bucket's read-only CORS policy is
-[`packages/bake/src/asset-publication/r2-cors.json`](packages/bake/src/asset-publication/r2-cors.json). It permits `GET` and
+[`packages/bake/src/asset-publication/r2-cors.json`](../packages/bake/src/asset-publication/r2-cors.json). It permits `GET` and
 `HEAD` from any origin so LAN previews can read the same published JSON as
 production without adding each device address and port. It does not permit
 browser writes. A maintainer applies it with
@@ -154,7 +154,7 @@ and verifies it with `npx --yes wrangler@4.129.0 r2 bucket cors list cssearth-as
 
 ## Check your change
 
-The [CI/CD maintenance guide](docs/ci-cd.md) sets the shared **2-minute target,
+The [CI/CD maintenance guide](../docs/ci-cd.md) sets the shared **2-minute target,
 3-minute maximum** for required PR feedback and the rules for changing the pipeline.
 
 `pnpm check:pr` and `pnpm check:ci` read the workflow commands and the shared
@@ -195,7 +195,7 @@ conservative whole-tree key. Cached
 baked JSON remains subject to the installer's byte and SHA-256 checks on every run.
 Cold and cached CI timings must be reported separately.
 
-To run the fast subset before every push, opt in with `git config core.hooksPath .githooks`: the
+To run the fast subset before every push, opt in with `git config core.hooksPath .github/hooks`: the
 pre-push hook runs `pnpm check:pr --quick`, which runs the `Contract lint` merge
 gate and the advisory repository audit, skipping the network check and the
 documentation audits. Skip it once with `git push --no-verify` or
@@ -226,7 +226,7 @@ from. It groups the files into folders and fails when a change adds:
 Bake declares no renderer dependency or exception. Shared prepared schema literals
 belong in objects. The rule computes sharing across owners; internal formats need
 no inventory. Schema/owner debt exceptions fail when stale. See
-[prepared format ownership](docs/prepared-format-ownership.md). Contract lint also
+[prepared format ownership](../docs/prepared-format-ownership.md). Contract lint also
 runs the architecture mutation tests.
 
 Type-only imports count. The package-only and application-entry layer rules have
@@ -261,7 +261,7 @@ unused files in library folders (untangle item K).
 Reference implementations live beside their owning package code; the shared harness lives in `packages/core/src/node/oracle/` with a pinned
 Python environment (`node packages/core/src/node/oracle/setup.mts`); the fixtures beside them
 are committed evidence, and the comparing tests run without Python. See
-[packages/core/src/node/oracle/README.md](packages/core/src/node/oracle/README.md) before adding or regenerating
+[packages/core/src/node/oracle/README.md](../packages/core/src/node/oracle/README.md) before adding or regenerating
 one. When an archive product has no reader, route or kernel bank yet, open an
 issue from the archive-product template instead of writing a reader for one body.
 
@@ -282,7 +282,7 @@ claiming that object's interaction check. The installed-bank tamper test likewis
 requires its referenced bank to be present.
 
 Telescope family/import integration tests require the pinned astronomy toolchain
-described in [Astronomy package ownership](docs/astronomy-package-ownership.md).
+described in [Astronomy package ownership](../docs/astronomy-package-ownership.md).
 Without it, content qualification and Python-backed operations fail; that is an
 environment limitation, not a passing integration result.
 
@@ -290,11 +290,11 @@ environment limitation, not a passing integration result.
 
 | You want to | Read |
 | --- | --- |
-| Understand the rules every change must keep | [AGENTS.md](AGENTS.md) |
-| Add or fix a planet, moon, asteroid or comet | [Body guide](src/objects/README.md) and the [celestial skill](.agents/skills/celestial-skill/SKILL.md) |
-| Record sources, credits and evidence | [Provenance and documentation contract](docs/provenance/CONTRACT.md) |
-| Find the shared guides | [docs/README.md](docs/README.md) |
-| Write the PR | [PR template](.github/pull_request_template.md) and the [PR rules](docs/provenance/CONTRACT.md#pull-requests) |
+| Understand the rules every change must keep | [AGENTS.md](../AGENTS.md) |
+| Add or fix a planet, moon, asteroid or comet | [Body guide](../src/objects/README.md) and the [celestial skill](../.agents/skills/celestial-skill/SKILL.md) |
+| Record sources, credits and evidence | [Provenance and documentation contract](../docs/provenance/CONTRACT.md) |
+| Find the shared guides | [docs/README.md](../docs/README.md) |
+| Write the PR | [PR template](pull_request_template.md) and the [PR rules](../docs/provenance/CONTRACT.md#pull-requests) |
 
 ## Commits
 
@@ -304,7 +304,7 @@ Split a change into small steps so each line explains one step. Git's own merge,
 accepted as Git writes them.
 
 `pnpm install` installs a `commit-msg` hook that checks each message as you commit: it points `core.hooksPath` at a
-small dispatcher in `.git/cssearth-hooks/` that runs each worktree's own `.githooks/commit-msg`. It leaves hooks of
+small dispatcher in `.git/cssearth-hooks/` that runs each worktree's own `.github/hooks/commit-msg`. It leaves hooks of
 your own in `.git/hooks` and any `core.hooksPath` you already set in place. The `publish-assets.yml` asset job runs lifecycle scripts, so
 its throwaway checkout gets this `core.hooksPath` too; it never commits there, so the setting is harmless. CI runs the same check over every commit in a pull request as part of the required `Classify changes`
 job, so reword a rejected commit with `git rebase -i` rather than skipping the hook.
@@ -327,5 +327,5 @@ Root keeps third-party dependencies that root-level tools import (site, labs and
 
 ## Licence
 
-Code is MIT ([LICENSE](LICENSE)). Scientific sources keep their own licences
+Code is MIT ([LICENSE](../LICENSE)). Scientific sources keep their own licences
 and credits, recorded in each body's `NOTICE.md` and `source/manifest.json`.

@@ -324,7 +324,7 @@ jobs:
       - name: Restore only compiler inputs and generate real shell data
         run: pnpm prepare:typecheck
       - name: Typecheck test, fixture and capture files
-        # Native tsc builds the per-owner test programs through tsconfig.tests.json; keep a 6 GB heap
+        # Native tsc builds the per-owner test programs through .github/tsconfig.tests.json; keep a 6 GB heap
         # until per-owner peak measurements justify reducing it; 2026-09-30 peaks were about 4.6 GB on T6 and 5.1 GB on main.
         env:
           NODE_OPTIONS: --max-old-space-size=6144

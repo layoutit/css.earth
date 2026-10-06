@@ -3,7 +3,7 @@ import { test } from 'node:test';
 import { execFileSync } from 'node:child_process';
 import { globSync, mkdirSync, mkdtempSync, rmSync, writeFileSync, readFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
-import { join, resolve } from 'node:path';
+import { join, relative, resolve } from 'node:path';
 import { checkStaleReferences, staleReferenceLines, workflowCommandPaths, workflowPathTracked } from './check-stale-references.mts';
 
 const bytes = (value: string) => new TextEncoder().encode(value);
@@ -129,11 +129,11 @@ test('mutation: a tracked workflow stale test path is red and a tracked replacem
 });
 
 function missingTestProjects(root: string): string[] {
-  const value: unknown = JSON.parse(readFileSync(resolve(root, 'tsconfig.tests.json'), 'utf8'));
+  const value: unknown = JSON.parse(readFileSync(resolve(root, '.github/tsconfig.tests.json'), 'utf8'));
   if (!value || typeof value !== 'object' || !('references' in value) || !Array.isArray(value.references)) throw new TypeError('Invalid test references');
   const references = new Set(value.references.map((entry: unknown) => {
     if (!entry || typeof entry !== 'object' || !('path' in entry) || typeof entry.path !== 'string') throw new TypeError('Invalid project reference');
-    return entry.path.replace(/^\.\//u, '');
+    return relative(root, resolve(root, '.github', entry.path));
   }));
   return [...new Set(globSync('packages/**/*.test.{ts,mts}', { cwd: root }).map(file => file.split('/')[1]!))]
     .filter(name => !references.has(`packages/${name}/tsconfig.tests.json`)).sort();
@@ -147,9 +147,10 @@ test('mutation: adding an unreferenced package with tests is red, adding its ref
     mkdirSync(resolve(root, 'packages/new/src'), { recursive: true });
     writeFileSync(resolve(root, 'packages/new/package.json'), '{"name":"@cssearth/new"}');
     writeFileSync(resolve(root, 'packages/new/src/value.test.ts'), '');
-    writeFileSync(resolve(root, 'tsconfig.tests.json'), '{"references":[]}');
+    mkdirSync(resolve(root, '.github'), { recursive: true });
+    writeFileSync(resolve(root, '.github/tsconfig.tests.json'), '{"references":[]}');
     assert.deepEqual(missingTestProjects(root), ['new']);
-    writeFileSync(resolve(root, 'tsconfig.tests.json'), '{"references":[{"path":"./packages/new/tsconfig.tests.json"}]}');
+    writeFileSync(resolve(root, '.github/tsconfig.tests.json'), '{"references":[{"path":"../packages/new/tsconfig.tests.json"}]}');
     assert.deepEqual(missingTestProjects(root), []);
   } finally { rmSync(root, { recursive: true, force: true }); }
 });

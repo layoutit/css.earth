@@ -89,14 +89,14 @@ test('offline preload rejects network and writes into shared public scenes', asy
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 
-test('offline revision build detaches scenes for Astro, rebuilds packages and preserves every deploy stage', async () => {
+for (const astro of ['astro build', 'astro build --config site/astro.config.mts']) test(`offline revision build detaches scenes for ${astro}, rebuilds packages and preserves every deploy stage`, async () => {
   const root = await mkdtemp(resolve(tmpdir(), 'answer-build-plan-'));
   try {
     await mkdir(resolve(root, 'site/public'), { recursive: true }); await mkdir(resolve(root, 'shared'));
     await symlink(resolve(root, 'shared'), resolve(root, 'site/public/scenes'));
     await writeFile(resolve(root, 'package.json'), JSON.stringify({ scripts: {
       'build:packages': 'pnpm -r build', 'prepare:shell': 'node moved/shell.mts', 'setup:asset-data': 'node download.mts',
-      'build:deploy': 'pnpm build:packages && pnpm setup:asset-data && node moved/metadata.mts && astro build && node moved/share.mts && node moved/assemble.mts && node moved/netlify.mts',
+      'build:deploy': 'pnpm build:packages && pnpm setup:asset-data && node moved/metadata.mts && ' + astro + ' && node moved/share.mts && node moved/assemble.mts && node moved/netlify.mts',
       'deploy:cloudflare-preview': 'node moved/worker.mts --noindex && npx deploy',
     } }));
     const seen: string[] = [];
@@ -104,11 +104,11 @@ test('offline revision build detaches scenes for Astro, rebuilds packages and pr
       seen.push(step); assert.equal(env.ASSET_ORIGIN, 'https://assets.invalid'); assert.equal(env.CSSEARTH_SKIP_DECLARATIONS, '1');
       assert.match(env.NODE_OPTIONS!, /offline\.mts/u);
       assert.equal(env.PATH!.split(':')[0], resolve(root, 'node_modules/.bin'), 'a bare workspace binary such as `astro` is found as it is under pnpm run');
-      if (step === 'astro build') await assert.rejects(lstat(resolve(root, 'site/public/scenes')), /ENOENT/u);
+      if (step === astro) await assert.rejects(lstat(resolve(root, 'site/public/scenes')), /ENOENT/u);
       else assert.equal((await lstat(resolve(root, 'site/public/scenes'))).isSymbolicLink(), true);
     });
-    assert.deepEqual(seen, ['pnpm build:packages', 'pnpm prepare:shell', 'node moved/metadata.mts', 'astro build', 'node moved/share.mts', 'node moved/assemble.mts', 'node moved/netlify.mts', 'node moved/worker.mts']);
-    await assert.rejects(buildRevision(root, async step => { if (step === 'astro build') throw new Error('deliberate failure'); }), /deliberate failure/u);
+    assert.deepEqual(seen, ['pnpm build:packages', 'pnpm prepare:shell', 'node moved/metadata.mts', astro, 'node moved/share.mts', 'node moved/assemble.mts', 'node moved/netlify.mts', 'node moved/worker.mts']);
+    await assert.rejects(buildRevision(root, async step => { if (step === astro) throw new Error('deliberate failure'); }), /deliberate failure/u);
     assert.equal((await lstat(resolve(root, 'site/public/scenes'))).isSymbolicLink(), true);
   } finally { await rm(root, { recursive: true, force: true }); }
 });

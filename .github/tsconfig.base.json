@@ -18,12 +18,12 @@
     "noEmit": true,
     "resolveJsonModule": true,
     "typeRoots": [
-      "./node_modules/.pnpm/node_modules/@types"
+      "../node_modules/.pnpm/node_modules/@types"
     ],
     "types": [
       "node"
     ],
     "incremental": true,
-    "tsBuildInfoFile": "./output/tsbuildinfo/base.tsbuildinfo"
+    "tsBuildInfoFile": "../output/tsbuildinfo/base.tsbuildinfo"
   }
 }

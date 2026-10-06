@@ -12,7 +12,7 @@ const execFileAsync = promisify(execFile);
 
 test('a Markdown file anywhere outside src/objects/ is a doc path', () => {
   assert.equal(isDocPath('README.md'), true);
-  assert.equal(isDocPath('CONTRIBUTING.md'), true);
+  assert.equal(isDocPath('.github/CONTRIBUTING.md'), true);
   assert.equal(isDocPath('docs/provenance/CONTRACT.md'), true);
   assert.equal(isDocPath('.github/pull_request_template.md'), true);
 });

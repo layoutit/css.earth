@@ -22,6 +22,9 @@ test('only two revision-owned post-build bundlers run; unknown post-build stages
   const scripts = { 'build:deploy': 'pnpm prepare && astro build && node site/build/share-images.mts && node packages/bake/cli/run-implemented-objects.mts assemble && pnpm netlify:bundle', 'netlify:bundle': 'node moved/functions.mts', 'deploy:cloudflare-preview': 'pnpm worker:bundle && npx wrangler deploy', 'worker:bundle': 'node moved/worker.mts --noindex' };
   assert.deepEqual(postBuildSteps(scripts), ['node moved/functions.mts', 'node moved/worker.mts']);
   for (const step of ['astro build', 'node unknown.mts', 'node moved/functions.mts; curl network.invalid']) assert.throws(() => postBuildSteps({ ...scripts, 'build:deploy': scripts['build:deploy'] + ' && ' + step }));
+  const named = { ...scripts, 'build:deploy': scripts['build:deploy'].replace('astro build', 'astro build --config site/astro.config.mts') };
+  assert.deepEqual(postBuildSteps(named), ['node moved/functions.mts', 'node moved/worker.mts'], 'a recipe naming the config under site/ has the same boundary');
+  assert.throws(() => postBuildSteps({ ...scripts, 'build:deploy': scripts['build:deploy'].replace('astro build', 'pnpm exec astro build') }), /one standalone Astro build/u);
 });
 
 

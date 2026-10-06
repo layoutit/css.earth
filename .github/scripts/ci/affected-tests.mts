@@ -22,7 +22,7 @@ export function testOwners(root: string): ReadonlyMap<string, readonly string[]>
   }));
 }
 
-const SHARED = [/^package\.json$/u, /^pnpm-lock\.yaml$/u, /^pnpm-workspace\.yaml$/u, /^tsconfig[^/]*\.json$/u, /^(?:\.github\/scripts|labs)\/tsconfig\.json$/u, /^integration\/tsconfig\.tests\.json$/u, /^\.github\/workflows\//u];
+const SHARED = [/^package\.json$/u, /^pnpm-lock\.yaml$/u, /^pnpm-workspace\.yaml$/u, /^(?:\.github\/)?tsconfig[^/]*\.json$/u, /^(?:\.github\/scripts|labs)\/tsconfig\.json$/u, /^integration\/tsconfig\.tests\.json$/u, /^\.github\/workflows\//u];
 /** The offline preparation and archive tools. Many changes touch a package they import, so a
  * tool joins only when it, or another tool it imports, changed; a push to main tests them whatever changed. */
 const TOOLS = new Set(['bake', 'telescope-cli']);

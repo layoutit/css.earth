@@ -10,6 +10,10 @@ export async function scriptsAt(root: string): Promise<Record<string, string>> {
   if (!Object.values(scripts).every(value => typeof value === 'string')) throw new Error('Invalid package scripts');
   return Object.fromEntries(Object.entries(scripts).map(([key, value]) => [key, String(value)]));
 }
+/** The deploy recipe's Astro build, with or without the config path a revision keeping its config under site/ passes. */
+export function isAstroBuild(step: string): boolean {
+  return /^(?:pnpm exec )?astro build(?: --config site\/astro\.config\.mts)?$/u.test(step);
+}
 /** This project uses node entry scripts, pnpm script references and && sequences. Reject unsupported syntax. */
 export function expandScript(scripts: Record<string, string>, name: string, visiting: string[] = []): string[] {
   if (visiting.includes(name) || !scripts[name]) throw new Error(`Missing or cyclic script: ${name}`);
@@ -49,7 +53,7 @@ export function offlineDeploySteps(scripts: Record<string, string>): string[] {
 /** Reuse the comparison build: only the final deployment bundler and the Worker bundler remain. */
 export function postBuildSteps(scripts: Record<string, string>): string[] {
   const deploy = expandScript(scripts, 'build:deploy');
-  const boundaries = deploy.flatMap((step, index) => step === 'astro build' ? [index] : []);
+  const boundaries = deploy.flatMap((step, index) => isAstroBuild(step) && !step.startsWith('pnpm exec ') ? [index] : []);
   if (boundaries.length !== 1) throw new Error('Expected one standalone Astro build');
   const remaining = deploy.slice(boundaries[0]! + 1).filter(step => !/\bshare-images\b/u.test(step) && !/\brun-implemented-objects\.mts assemble$/u.test(step));
   const worker = expandScript(scripts, 'deploy:cloudflare-preview').find(step => step.startsWith('node '));

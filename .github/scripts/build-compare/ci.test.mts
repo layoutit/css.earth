@@ -22,6 +22,11 @@ test('CI uses only preparation before the production build boundary', () => {
   for (const value of [{}, { scripts: {} }, { scripts: { 'build:deploy': 'astro build' } },
     { scripts: { 'build:deploy': 'a && astro build && b && astro build && c' } }]) assert.throws(() => preparationCommand(value));
 });
+test('the build boundary is the same when the recipe names the Astro config under site/', () => {
+  assert.equal(preparationCommand({ scripts: { 'build:deploy': 'pnpm a && astro build --config site/astro.config.mts && node post.mts' } }), 'pnpm a');
+  for (const recipe of ['pnpm a && astro build --config other.mts && node post.mts', 'pnpm a && astro build && astro build --config site/astro.config.mts'])
+    assert.throws(() => preparationCommand({ scripts: { 'build:deploy': recipe } }), /standalone astro build/u);
+});
 test('workflow always gates refactors and executes selector from merge-base', async () => {
   const source = await readFile(new URL('../../workflows/site-safety-net.yml', import.meta.url), 'utf8');
   const workflow = parse(source);
