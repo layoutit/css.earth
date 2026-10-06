@@ -3,7 +3,7 @@ import { open, stat } from 'node:fs/promises';
 import { parsePlanetaryGridQualification, type PlanetaryGridQualification } from './f16-planetary-depth.mts';
 import { requireArray, requireRecord, requireString, requireFiniteNumber } from '@cssearth/core';
 import { MRO_SHARAD_3D_F16_PROFILE } from '../../observation-families.mts';
-import type { FamilyHandler } from '../../family-handlers.mts';
+import type { FamilyHandler } from '../../family-handler.mts';
 
 /** One profile id for this archive format: the same one the source observations name. */
 export const SHARAD_PDS4_PROFILE = MRO_SHARAD_3D_F16_PROFILE;

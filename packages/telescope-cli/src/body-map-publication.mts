@@ -16,7 +16,8 @@ import { readBodyMapProduct, resolutionElementsAcrossDisc, surfaceResolutionKm }
 import { productRecordPath } from '@cssearth/telescope';
 import { runKey, sameRun, WORKSPACE } from '@cssearth/telescope/node';
 import { loadQueryInputs, queryCapabilities, requestFromArguments, selectObservation } from './query.mts';
-import { type ConstraintVerdict, type ObservationSelection } from './query-contract.mts';
+import { type ObservationSelection } from './query-contract.mts';
+import type { ConstraintVerdict } from './request-satisfaction.mts';
 
 export const BODY_MAP_PUBLICATION_STAGE = 'body-map';
 export const TELESCOPE_LAYER_SCHEMA = 'cssearth-telescope-layer@1';

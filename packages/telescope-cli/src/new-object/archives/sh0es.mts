@@ -9,7 +9,7 @@
 import { VIZIER_ASU, type Archive } from './archives.mts';
 import { adql, csv, SIMBAD_TAP } from '../companions.mts';
 import { CEPHEID_GRAVITIES } from './cepheids.mts';
-import type { CataloguePosition } from '../spec.mts';
+import type { CataloguePosition } from '../spec-types.mts';
 
 export const HOFFMANN = { catalogue: 'J/ApJ/830/10/table5', credit: 'Hoffmann et al. (2016), ApJ 830, 10', paper: 'https://arxiv.org/abs/1607.08658' };
 const COLUMNS = ['Gal', 'RAJ2000', 'DEJ2000', 'ID', 'Per', 'F555W', 'F814W', 'SimbadName'] as const;

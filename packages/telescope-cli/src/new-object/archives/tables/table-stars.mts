@@ -32,7 +32,7 @@ import { imageLayerDisc, imageLayerDiscDistanceKpc } from '@cssearth/bake/image-
 import { VIZIER_ASU, type Archive } from '../archives.mts';
 import { preferredName, simbadIdentifiers } from '../../display-name.mts';
 import { slug } from '../../identity.mts';
-import type { CataloguePosition } from '../../spec.mts';
+import type { CataloguePosition } from '../../spec-types.mts';
 import { fetchImagePixel } from '../images/image-pixel.mts';
 import { GROENEWEGEN_2020, galaxyVelocity, relationCepheidDraft } from '../sh0es.mts';
 import { simbadAt, simbadQuoted, simbadRows } from './simbad-tap.mts';
