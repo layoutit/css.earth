@@ -77,6 +77,12 @@ export async function focusExistingScene({ session, request, selectionTransition
   return true;
 }
 
+/** The scene a flight delivers keeps that flight's callbacks for as long as it is mounted. The world's publisher is
+ * built here, outside the request, so that it names the world and nothing of the scene the flight left. */
+function worldPresenter(getWorld: () => WorldContextMount | null): NonNullable<Parameters<Navigation['prepare']>[0]['presentWorld']> {
+  return (world, viewport, options) => getWorld()?.present(world, viewport, options);
+}
+
 /** Content, factory and flight prepare concurrently, with resources still owned by the request. */
 export function prepareSceneReplacement({ fromId, source, object, request, navigation, requests, loadObject,
   contentTransport, reducedMotion, getWorld, stage }: {
@@ -115,7 +121,8 @@ export function prepareSceneReplacement({ fromId, source, object, request, navig
   // the destination factory, content and texture bank load independently.
   requests.advance(request, 'flying');
   // What the flight starts from is read now, as if it started now; a body of another system starts once that system is read.
-  const fromMount = source?.mount ?? null, cameraViewport = getWorld()?.viewport, presenting = getWorld() !== null;
+  const fromMount = source?.mount ?? null, cameraViewport = getWorld()?.viewport;
+  const presentWorld = getWorld() ? worldPresenter(getWorld) : null;
   const prepare = () => navigation.prepare({
     fromId, toId: object.id, fromMount, toFactory: factoryTask,
     signal: request.signal, url: request.url, stage,
@@ -126,7 +133,7 @@ export function prepareSceneReplacement({ fromId, source, object, request, navig
     preserveView: request.camera.kind === 'preserve',
     cameraViewport,
     timing: request.timing,
-    presentWorld: presenting ? (world, viewport, options) => getWorld()?.present(world, viewport, options) : null,
+    presentWorld,
   });
   const preparationTask = systemTask ? systemTask.then(prepare) : prepare();
   return request.lifetime.wait(Promise.all([factoryTask, contentTask, preparationTask]));

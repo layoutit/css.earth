@@ -1,3 +1,5 @@
+import { releaseAnimation } from './prepared-playback.js';
+
 /** How long the keeping animation would run: it is paused two frames in and never plays. */
 const KEPT_MILLISECONDS = 100_000_000;
 
@@ -23,5 +25,5 @@ export function keepLayers(element: HTMLElement, view: Pick<Window, 'requestAnim
     request = --frames > 0 ? view.requestAnimationFrame(wait) : 0;
     if (!request) animation.pause();
   });
-  return () => { if (request) view.cancelAnimationFrame(request); request = 0; animation.cancel(); };
+  return () => { if (request) view.cancelAnimationFrame(request); request = 0; releaseAnimation(animation); };
 }
