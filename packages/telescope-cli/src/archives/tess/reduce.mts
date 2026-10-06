@@ -124,9 +124,10 @@ if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) 
   for (const id of all ? (await readdir(resolve(WORKSPACE, 'src/objects'))).sort() : named) { const star = await starPlace(id); if (star) stars.push(star); else if (!all) console.log(`${id}: not a star with a place on the sky.`); }
   const wide = await lightOf(stars, true), near = await lightOf(stars, true, PIXELS.Kepler.radiusArcsec);
   for (const star of stars) {
-    // `--all` leaves a star alone once Kepler and K2 have been asked about it; a receipt from before they were is asked now.
-    const held = all ? await readJson(receiptPath(star.id)) : null; if (isRecord(held) && Array.isArray(held.pixelFiles)) continue;
-    try { const receipt = await reduceStar(star.id, keep, { wide: wide.get(star.id) ?? null, near: near.get(star.id) ?? null }, isRecord(held) ? held : undefined), rotation = receipt.rotation as RotationVerdict; console.log(`${star.id}: ${rotation.detected ? `rotation ${rotation.periodDays} d, ${(100 * (rotation.amplitude ?? 0)).toFixed(2)}% swing${receipt.map ? '; map written' : ''}` : rotation.reason}`); }
+    // `--all` leaves a star alone once Kepler and K2 have been asked about it. A receipt from before they were is asked
+    // now, named or not, and kept when neither mission watched the star: its TESS sector is not read twice.
+    const held = await readJson(receiptPath(star.id)), asked = isRecord(held) && Array.isArray(held.pixelFiles); if (all && asked) continue;
+    try { const receipt = await reduceStar(star.id, keep, { wide: wide.get(star.id) ?? null, near: near.get(star.id) ?? null }, isRecord(held) && !asked ? held : undefined), rotation = receipt.rotation as RotationVerdict; console.log(`${star.id}: ${rotation.detected ? `rotation ${rotation.periodDays} d, ${(100 * (rotation.amplitude ?? 0)).toFixed(2)}% swing${receipt.map ? '; map written' : ''}` : rotation.reason}`); }
     catch (error) { console.log(`${star.id}: failed: ${String(error instanceof Error ? error.message : error).split('\n')[0]!.slice(0, 200)}`); }
   }
 }
