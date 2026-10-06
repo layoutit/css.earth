@@ -22,7 +22,9 @@ export default [
     // Generated output and the open-ended registries. `src/platform/solar-geometry.mts` alone is
     // 26,968 generated lines; `src/objects` is 586 authored body packages, not modules.
     '**/prepared/**', '**/generated/**', 'src/objects/**/*', '!src/objects/**/', '!src/objects/**/*.test.mts', 'src/sources/**/*', '!src/sources/**/*.test.mts',
-    'src/platform/solar-geometry.mts', 'site/prepared/prepared-context-objects.mts'] },
+    'src/platform/solar-geometry.mts', 'site/prepared/prepared-context-objects.mts',
+    // The hosts' bundles, written by deploy/*/bundle-*.mts.
+    'deploy/cloudflare/bundled/**', 'deploy/netlify/functions-bundled/**'] },
   {
     // `src` and `site` (and once `tools`) — roughly 232,000 authored lines — had no ESLint at all, so the
     // size and boundary rules below governed only the two smallest trees. Warnings, not errors:

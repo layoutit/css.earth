@@ -40,7 +40,7 @@ test('a page report is logged and answered with no content', async t => {
 });
 
 test('a Worker deployed without its assets binding says which setting names it', async () => {
-  await assert.rejects(worker.fetch(new Request('https://css.test/earth/'), {}, context), /no ASSETS binding; wrangler\.jsonc `assets\.binding`/u);
+  await assert.rejects(worker.fetch(new Request('https://css.test/earth/'), {}, context), /no ASSETS binding; deploy\/cloudflare\/wrangler\.jsonc `assets\.binding`/u);
 });
 
 test('the search data is read from the built site by its site path', async () => {
