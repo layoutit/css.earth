@@ -504,7 +504,7 @@ export function createSceneRouter({
       });
       const selectionTransition = shellOwner?.shell?.beginNavigation?.(ofStar
         ? { view: 'system', object, preview: request.camera.kind === 'frame' && request.camera.framing === 'center' }
-        : { view: requestView, object,
+        : { view: requestView, object, handover: request.camera.kind === 'preserve',
           targetWorldCamera: request.camera.kind === 'frame' ? request.camera.world ?? undefined : undefined });
       if (selectionTransition) request.own(() => selectionTransition.dispose());
       if (source && request.scene === 'reuse') {

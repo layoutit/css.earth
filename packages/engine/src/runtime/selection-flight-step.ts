@@ -17,7 +17,7 @@ const POSITION_RESOLUTION = 4 * Number.EPSILON;
 /** Retimes the original curve without changing any position or orientation on it.
  * Call once per painted frame and retain the returned curve time across owners.
  * A body's radius bounds its clearance below, including paths through its centre,
- * so a finite path cannot stall at a zero-clearance surface.
+ * so a finite path cannot stall at a zero-clearance surface. A step always moves the camera.
  */
 export function advanceSelectionFlightInto(flight: SelectionFlight, anchors: readonly FlightBodyAnchor[],
   fromElapsedS: number, requestedElapsedS: number, out: SelectionFlightSample): number {
@@ -63,7 +63,14 @@ export function advanceSelectionFlightInto(flight: SelectionFlight, anchors: rea
     if (low > fromElapsedS && high - low <= (low - fromElapsedS) * 2 ** -16) break;
   }
   sampleSelectionFlightInto(flight, low, out);
-  return low;
+  // The cap may not hold the camera where it is. A curve sample is a direction times a range, and its rounding can exceed
+  // the floor above: leaving Saturn for a framing 4.8e25 m out, the curve's first sample lay 1.2e10 m from the start pose,
+  // over the 7.7e9 m floor, so no time that moved the camera was permitted and the Galaxies pill pressed on Saturn's page
+  // did nothing (live, 2026-10-06). The step then takes the nearest sample that moves.
+  const held = fromFocus();
+  if (held.x !== x || held.y !== y || held.z !== z || high <= low) return low;
+  sampleSelectionFlightInto(flight, high, out);
+  return high;
 }
 
 /** The nearest body's clearance from a place given as an offset from `focusM`. */
