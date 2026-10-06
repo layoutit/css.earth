@@ -2,7 +2,7 @@ import { it } from 'node:test';
 import assert from 'node:assert/strict';
 import { prepareSheetLighting } from './lighting-track.ts';
 import { prepareMaterialTracks } from './prepare-materials.ts';
-import type { SheetLighting } from './types.ts';
+import type { SheetLighting } from '../types.ts';
 
 const frameCount = 5, zs = Array.from({ length: frameCount }, (_, frame) => -Math.cos(Math.PI * frame / (frameCount - 1)));
 const lighting: SheetLighting = { frameCount, defaultFrame: frameCount - 1,

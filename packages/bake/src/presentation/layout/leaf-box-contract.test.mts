@@ -16,7 +16,7 @@ test('blocks group leaves by direction and publish conservative bounds through t
   const points = new Map<string, number[][]>();
   sphere.forEach((centre, index) => points.set(`--step-${blocks[index]}`, [...points.get(`--step-${blocks[index]}`) ?? [], centre]));
   const placements = leafBoxPlacements(points, [0, 0, 0]);
-  assert.deepEqual(placements, JSON.parse(readFileSync(new URL('../../../renderer/test/fixtures/leaf-box-placements.json', import.meta.url), 'utf8')),
+  assert.deepEqual(placements, JSON.parse(readFileSync(new URL('../../../../renderer/test/fixtures/leaf-box-placements.json', import.meta.url), 'utf8')),
     'the 16-block output consumed by renderer culling must remain identical');
   for (const [name, corners] of points) {
     const write = placements.writes[name]!;

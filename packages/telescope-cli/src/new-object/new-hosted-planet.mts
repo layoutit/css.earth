@@ -35,7 +35,7 @@ const GEOMETRY_SCALE = 1.25;
 const NEUTRAL_GRAY = NEUTRAL_CATALOGUE_COLOR;
 
 /** A lit hosted planet's page stylesheet: the shared lane template that sizes its 460px lighting frames. It names no dataset
- * image: each dataset's variant writes the textures every leaf reads (scene/projector.ts, presentation/composite.ts). */
+ * image: each dataset's variant writes the textures every leaf reads (scene/projector.ts, presentation/lighting/composite.ts). */
 export const HOSTED_PLANET_STYLESHEET = 'src/renderers/css/styles/templates/composite-planet.css';
 /** A lit hosted planet's lighting recipe: the shared sphere bank under its own star's light. */
 export const hostedPlanetLighting = () => ({ bank: 'sphere', presentationSize: 460,

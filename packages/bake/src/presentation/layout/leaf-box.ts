@@ -1,6 +1,6 @@
 import { LEAF_BOX_PROPERTY, LEAF_BOX_FACTOR, type PreparedTree, type PreparedSilhouetteSteps, type PreparedTexturePlacements } from '@cssearth/objects';
 import { walkSilhouetteLevels } from '@cssearth/engine';
-import { rebuildPropertyTable } from './property-table.ts';
+import { rebuildPropertyTable } from '../css/property-table.ts';
 
 // Leaf boxes that follow the body's size on screen.
 //

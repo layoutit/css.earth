@@ -4,11 +4,11 @@ import { resolve } from 'node:path';
 import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 
-import { createPreparedNodeTree } from './prepared-node-tree.ts';
+import { createPreparedNodeTree } from '../layout/prepared-node-tree.ts';
 import { PREPARED_LEAF_CLASS, PREPARED_LEAF_RULE, RASTER_TRIANGLE_ATTRIBUTES, cleanPreparedTree, preparedPropertyName, withCleanLeaves,
   withoutCleanLeaves } from './clean-leaves.ts';
 
-const root = resolve(import.meta.dirname, '../../../..');
+const root = resolve(import.meta.dirname, '../../../../..');
 const LEAF = [
   { name: 'transformStyle', value: 'preserve-3d', custom: false }, { name: 'backgroundRepeat', value: 'no-repeat', custom: false },
   { name: 'backgroundOrigin', value: 'border-box', custom: false }, { name: 'backgroundClip', value: 'border-box', custom: false },

@@ -6,9 +6,9 @@ import { canonicalPreparedAsset, preparedResourcePool, PREPARED_PRESENTATION_SCH
 // limb plate are silhouette-fitted roots beside the camera, exactly as the retired static presentation mounted them.
 import { POINT_MIN_RADIUS_PX } from '@cssearth/engine';
 
-import type { PresentationInputs, PresentationDraft } from './types.ts';
-import type { PresentationAdapters } from './adapters.ts';
-import { seamOutsetBinding, seamOutsetInitialValue } from '../scene/index.ts';
+import type { PresentationInputs, PresentationDraft } from '../types.ts';
+import type { PresentationAdapters } from '../adapters.ts';
+import { seamOutsetBinding, seamOutsetInitialValue } from '../../scene/index.ts';
 const LAYERS = ['surface', 'poles', 'corona', 'limb'] as const;
 
 type EmissiveDataset = PresentationInputs['datasets']['controls'][number];

@@ -1,6 +1,6 @@
-import { rebuildPropertyTable } from './property-table.ts';
+import { rebuildPropertyTable } from '../css/property-table.ts';
 import { isRecord } from '@cssearth/core';
-import { scanCssDeclarations } from './css-declaration-scanner.ts';
+import { scanCssDeclarations } from '../css/css-declaration-scanner.ts';
 
 // Selected images as prepared records (the last step of the presentation bindings, prepared-presentation-bindings.ts).
 //

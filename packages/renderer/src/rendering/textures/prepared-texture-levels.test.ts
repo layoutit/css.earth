@@ -142,7 +142,7 @@ test('system-scale proxies require no detail images and acquire them on geometry
   assert.equal(detail.deferredTextures, undefined);
 });
 
-// Two of Earth's page leaves (packages/bake/src/presentation/texture-tile-records.ts): page 0's first two leaves under the
+// Two of Earth's page leaves (packages/bake/src/presentation/records/texture-tile-records.ts): page 0's first two leaves under the
 // body, node 1, whose image write is --page-0.
 const tileLeaves: PreparedTextureTileLeaves[] = [{ target: 1, name: '--page-0', unit: -1, width: 168, initial: { x: 168, y: 0, scale: 7 }, leaves: [[2, 0.25, 0.25], [3, 84.0625, 0.25]] }];
 const tiledLevels = { hysteresis: 0.2, tileLeaves, levels: [

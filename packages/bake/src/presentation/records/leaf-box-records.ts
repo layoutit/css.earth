@@ -1,7 +1,7 @@
 import type { LeafBoxComponent, PreparedLeafBox } from '@cssearth/objects';
-import { rebuildPropertyTable } from './property-table.ts';
+import { rebuildPropertyTable } from '../css/property-table.ts';
 import { isRecord } from '@cssearth/core';
-import { scanCssDeclarations } from './css-declaration-scanner.ts';
+import { scanCssDeclarations } from '../css/css-declaration-scanner.ts';
 
 // Leaf boxes as prepared records (the last step of the presentation bindings, prepared-presentation-bindings.ts).
 //
@@ -12,8 +12,8 @@ import { scanCssDeclarations } from './css-declaration-scanner.ts';
 // coefficients and its density, with the steps' initial values on their bindings. The runtime writes a leaf's final
 // values from it (packages/renderer/src/rendering/culling/prepared-leaf-box-direct.ts); no variable, `calc()` or parse reaches
 // the page. A later bindings run expands the records back to the variable form first, so it measures what it always did.
-import { LEAF_BOX_FACTOR, LEAF_BOX_PROPERTY, leafBoxLengths } from './leaf-box.ts';
-import { SURFACE_SEAM_OUTSET_PROPERTY } from '../scene/index.ts';
+import { LEAF_BOX_FACTOR, LEAF_BOX_PROPERTY, leafBoxLengths } from '../layout/leaf-box.ts';
+import { SURFACE_SEAM_OUTSET_PROPERTY } from '../../scene/index.ts';
 
 interface Property { name: string; value: string; custom: boolean }
 interface TreeNode { parent: number; style: string; properties: readonly number[] }

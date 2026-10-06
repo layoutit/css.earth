@@ -4,7 +4,7 @@
 :where(.object-stage) .polycss-mesh { translate: 0px 0px 0px; }
 
 /* Every prepared projective leaf: one raster plane that is never a hit target. The bake writes these once here instead of
- * on each leaf (packages/bake/src/presentation/clean-leaves.ts, PREPARED_LEAF_RULE); a leaf's inline style still wins. */
+ * on each leaf (packages/bake/src/presentation/css/clean-leaves.ts, PREPARED_LEAF_RULE); a leaf's inline style still wins. */
 .prepared-leaf { transform-style: preserve-3d; background-repeat: no-repeat; pointer-events: none; }
 
 .object-cubic-sky {

@@ -1,5 +1,5 @@
 /**
- * Leaf boxes written from their prepared records (packages/bake/src/presentation/leaf-box-records.ts).
+ * Leaf boxes written from their prepared records (packages/bake/src/presentation/records/leaf-box-records.ts).
  *
  * The bake ships each leaf's full box, background, matrix, seam coefficients and density, with the steps' initial values
  * on their bindings. A step or seam outset change writes the leaf's final `width`, `height`, `background-size`,

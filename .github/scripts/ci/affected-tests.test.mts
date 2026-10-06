@@ -16,7 +16,7 @@ const packages = [
 ];
 const site = ['@cssearth/core', '@cssearth/renderer'];
 const mount = 'integration/prepared-object-mount/navigable-object-mount.test.mts';
-const owners = new Map([[mount, ['bake', 'renderer']], ['packages/bake/src/presentation/depth-partition-contract.test.ts', ['objects']]]);
+const owners = new Map([[mount, ['bake', 'renderer']], ['packages/bake/src/presentation/layout/depth-partition-contract.test.ts', ['objects']]]);
 const renderer = [mount];
 const select = (paths: readonly string[] | null) => affectedTests(paths, packages, site, owners);
 
@@ -78,7 +78,7 @@ test('directly edited integration suites stay in the packages lane and two chang
 
 test('foreign package tests follow imports without a handwritten owner map', () => {
   const result = select(['packages/objects/src/format.ts']);
-  assert.deepEqual(result.files, ['packages/bake/src/presentation/depth-partition-contract.test.ts']);
+  assert.deepEqual(result.files, ['packages/bake/src/presentation/layout/depth-partition-contract.test.ts']);
 });
 
 
@@ -98,7 +98,7 @@ test('real-tree discovery keeps offline tools bounded for objects and runs them 
   const bounded = new Map(toolTests.slice(0, TOOL_OBJECT_TEST_LIMIT));
   const boundedResult = affectedTests(['packages/objects/src/index.ts'], workspaces, site, bounded, new Map());
   assert.deepEqual(boundedResult.files, [...bounded.keys()].sort(), 'real discovered imports run at the bounded count');
-  assert.ok(objects.files.includes('packages/bake/src/presentation/depth-partition-contract.test.ts'));
+  assert.ok(objects.files.includes('packages/bake/src/presentation/layout/depth-partition-contract.test.ts'));
   assert.ok(objects.files.filter(file => /^packages\/(bake|telescope-cli)\//u.test(file)).length <= toolTests.length);
   const bake = affectedTests(['packages/bake/src/stars/point-field-bank.ts'], workspaces, site, discovered);
   assert.ok(bake.packages.includes('bake') && bake.packages.includes('telescope-cli'));
@@ -110,7 +110,7 @@ test('real-tree discovery keeps offline tools bounded for objects and runs them 
 
 test('objects depth-partition changes retain the bake producer consumer contract above the count limit', () => {
   const files = affectedTests(['packages/objects/src/prepared-data/runtime-validation/depth-partitions.ts'], packages, site).files;
-  assert.ok(files.includes('packages/bake/src/presentation/depth-partition-contract.test.ts'));
+  assert.ok(files.includes('packages/bake/src/presentation/layout/depth-partition-contract.test.ts'));
 });
 
 test('foreign fixtures outside test folders select their bake reader', () => {

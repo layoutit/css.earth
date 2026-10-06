@@ -111,7 +111,7 @@ stays in the scanner and is pinned by its tests.
 | Leaf boxes | `LEAF_BOX_DECLARATION_NAME` | Case-sensitive exclusion; colonless fragments have no name and remain. |
 | Texture tiles | `TEXTURE_DECLARATION_NAME` | Preserve case; historical colonless name drops its last character (`slice(0, -1)`). |
 
-`src/presentation/css-declaration-scanner.test.mts` pins these separate policies,
+`src/presentation/css/css-declaration-scanner.test.mts` pins these separate policies,
 including malformed fragments. This documents the texture adapter's existing
 truncation without changing its admission during a relocation.
 
