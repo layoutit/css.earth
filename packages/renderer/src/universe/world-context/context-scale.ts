@@ -153,3 +153,14 @@ const STAR_FIELD_BEFORE_SYSTEM_FADE = 20;
 export function starFieldFade(distanceM: number, system: { readonly fadeOutStartDistanceM: number }): number {
   return logarithmicFade(distanceM, system.fadeOutStartDistanceM / STAR_FIELD_BEFORE_SYSTEM_FADE, system.fadeOutStartDistanceM);
 }
+
+/** The share of the galaxy's dots drawn inside the Solar System; a presentation choice, by eye on 2026-09-30. */
+const SOLAR_SYSTEM_DOTS = .3;
+/**
+ * How strongly the galaxy's catalogue dots draw around the selected body. Inside the Solar System a faint share stays,
+ * behind the system's own dots, and rises to full with the star field. Another star's system has no dots of its own:
+ * at that share TRAPPIST-1's 320 dots and WASP-33's 58 read as an empty sky on an iPad (2026-10-06), so there they are whole.
+ */
+export function catalogueDotsOpacity(starField: number, inSolarSystem: boolean): number {
+  return inSolarSystem ? SOLAR_SYSTEM_DOTS + (1 - SOLAR_SYSTEM_DOTS) * starField : 1;
+}
