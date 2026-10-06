@@ -83,6 +83,6 @@ test('a marker, its caption and its path share one emphasis, and a hovered body 
   assert.equal(contextEmphasis(false, false, false, .3), .3);
   assert.equal(contextEmphasis(false, true, false, .5), .15);
   assert.equal(contextEmphasis(true, true, false, .3), 1);
-  // Other systems read as not belonging inside the focus star's system, and come up with the star field.
+  // Other systems read as not belonging inside the camera's own system, and come up with the star field.
   assert.deepEqual([otherSystemsOpacity(1, 0), otherSystemsOpacity(1, 1), otherSystemsOpacity(.4, 0)], [.3, 1, 1]);
 });

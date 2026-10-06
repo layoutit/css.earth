@@ -4,7 +4,8 @@ import promises from 'node:fs/promises';
 import { syncBuiltinESMExports } from 'node:module';
 import { resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
-const scenes = resolve('public/scenes');
+import { publicRoot } from './public-root.mts';
+const scenes = resolve(publicRoot(process.cwd()), 'scenes');
 function guard(value: unknown): void {
   if (!(typeof value === 'string' || value instanceof URL || Buffer.isBuffer(value))) return;
   const path = resolve(value instanceof URL ? fileURLToPath(value) : String(value));

@@ -16,7 +16,15 @@ export const normalisations = [
   'ETag retains presence and weak/strong kind; values contain file timestamps and can change between recordings of the same build.',
   'Content-Length reduced to absent/zero/nonzero: exact body size is retained in the body.',
   'Loopback origins in retained header values replaced with https://answers.invalid; ephemeral port is not build behavior.',
+  'Deployment file paths in closure.json and index.json name the public directory <public>/: plan 8 moved it from public/ to site/public/, and each side is recorded in its own layout.',
 ];
+/** A recorded deployment path that starts in the public directory, under either layout, starts with `<public>/` instead. */
+export function publicLayoutNeutral(value: unknown): unknown {
+  if (typeof value === 'string') return value.replace(/^(!?)(?:site\/)?public\//u, '$1<public>/');
+  if (Array.isArray(value)) return value.map(publicLayoutNeutral);
+  if (isObject(value)) return Object.fromEntries(Object.entries(value).map(([key, item]) => [key, publicLayoutNeutral(item)]));
+  return value;
+}
 function isObject(value: unknown): value is Record<string, unknown> {
   return typeof value === 'object' && value !== null && !Array.isArray(value);
 }

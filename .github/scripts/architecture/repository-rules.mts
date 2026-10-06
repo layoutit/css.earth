@@ -26,7 +26,7 @@ export interface RepositoryRule {
 }
 
 /** Folders that no longer exist: `tools/` held preparation code until it moved to its canonical homes
- * (`packages/bake`, `packages/telescope-cli`, `site/build`, `.github/scripts`, `labs`, `evidence/`). A file under one means
+ * (`packages/bake`, `packages/telescope-cli`, `site/build`, `.github/scripts`, `labs`, `docs/evidence/`). A file under one means
  * code went back to a retired location. */
 export const RETIRED_FOLDERS: readonly string[] = ['tools'];
 

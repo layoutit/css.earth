@@ -87,21 +87,28 @@ export function createSystemFade(plan: Pick<PreparedWorldContext, 'focus' | 'bod
   const MARGIN = 1e-9;
   const nearSquares = Float64Array.from(fades, fade => fade.fadeOutStartDistanceM ** 2 * (1 - MARGIN));
   const farSquares = Float64Array.from(fades, fade => fade.hiddenDistanceM ** 2 * (1 + MARGIN));
+  // The camera's own system: the one it draws strongest, the nearer star's between two drawn alike; none once all are gone.
+  let own = -1, ownSquare = Number.POSITIVE_INFINITY;
   return Object.freeze({
     /** The largest system opacity, after measuring every system from this camera position. Once the view has left the
      * systems' scale for a larger one (`retired`: the application's overview scope is past its system), every system is
      * gone and its star stands for it. */
     update(positionM: readonly number[], retired = false) {
+      own = -1;
       if (retired) { values.fill(0); return 0; }
       let maximum = 0;
       for (let index = 0; index < roots.length; index++) {
         const star = positions[index]!;
         const dx = positionM[0]! - star[0], dy = positionM[1]! - star[1], dz = positionM[2]! - star[2], square = dx * dx + dy * dy + dz * dz;
         if (square > farSquares[index]!) { values[index] = 0; continue; }
-        if (square < nearSquares[index]!) { values[index] = 1; maximum = 1; continue; }
-        const t = Math.max(0, Math.min(1, (Math.log(Math.hypot(dx, dy, dz)) - logStarts[index]!) / logSpans[index]!));
-        values[index] = 1 - t * t * (3 - 2 * t);
-        maximum = Math.max(maximum, values[index]!);
+        let value = 1;
+        if (square >= nearSquares[index]!) {
+          const t = Math.max(0, Math.min(1, (Math.log(Math.hypot(dx, dy, dz)) - logStarts[index]!) / logSpans[index]!));
+          value = 1 - t * t * (3 - 2 * t);
+        }
+        values[index] = value;
+        if (value > 0 && (value > maximum || (value === maximum && square < ownSquare))) { own = index; ownSquare = square; }
+        maximum = Math.max(maximum, value);
       }
       return maximum;
     },
@@ -112,8 +119,11 @@ export function createSystemFade(plan: Pick<PreparedWorldContext, 'focus' | 'bod
     isSystemStar(id: string) { return rootSet.has(id); },
     /** The indexed point belongs to a system this camera still draws; a star outside every system never does. */
     inShownSystem(pointIndex: number) { const root = rootIndex[pointIndex]!; return root >= 0 && values[root]! > 0; },
-    /** The indexed point belongs to the focus star's own system. */
-    inFocusSystem(pointIndex: number) { return rootIndex[pointIndex] === 0; },
+    /** The opacity of the camera's own system, 0 with none drawn, and the camera's distance from that system's star. */
+    ownOpacity() { return own < 0 ? 0 : values[own]!; },
+    ownStarDistanceM() { return own < 0 ? Number.POSITIVE_INFINITY : Math.sqrt(ownSquare); },
+    /** The indexed point belongs to the camera's own system: the Sun's or a placed star's. */
+    inOwnSystem(pointIndex: number) { return own >= 0 && rootIndex[pointIndex] === own; },
     /** Inside its host's authored range a system draws every member's orbit, named or not. */
     hasAuthoredRange(pointIndex: number) { const root = rootIndex[pointIndex]!; return root >= 0 && ranges[root] !== undefined; },
   });
@@ -138,6 +148,7 @@ const STAR_FIELD_BEFORE_SYSTEM_FADE = 20;
  * The stars around a system fill the view while the camera is still among its outer bodies: from a twentieth of the
  * distance where the system starts to retire (for the Solar System, about Neptune's orbit) to that distance. The
  * catalogue dots fade in over it, and the other systems' stars, dimmed inside the system, come up to full with them.
+ * The same distances serve the Sun's system and a placed star's.
  */
 export function starFieldFade(distanceM: number, system: { readonly fadeOutStartDistanceM: number }): number {
   return logarithmicFade(distanceM, system.fadeOutStartDistanceM / STAR_FIELD_BEFORE_SYSTEM_FADE, system.fadeOutStartDistanceM);

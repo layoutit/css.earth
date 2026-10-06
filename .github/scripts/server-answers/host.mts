@@ -10,6 +10,7 @@ import { AsyncLocalStorage } from 'node:async_hooks';
 import { createHash } from 'node:crypto';
 import { previewEntry, loadEdge } from './revision-entries.mts';
 import { object } from './model.mts';
+import { publicRoot } from './public-root.mts';
 import { packagedFunction, readDeploymentConfig, matchesRoutes, directoryRedirect, hostingHeaders } from './deployment-config.mts';
 let fallback = false;
 const logError = console.error;
@@ -72,7 +73,7 @@ async function publishedFile(path: string): Promise<string | undefined> {
         // Published addresses retain the object directory and content-address filename from the inventory.
         const digest = Object.entries(asset).find(([key]) => key.startsWith('sha'))?.[1];
         if (typeof digest !== 'string') throw new Error(`${entry.name}: missing content address`);
-        assetPaths.set(`/runtime-assets/${digest}/${asset.filename}`, resolve(root, 'public/scenes', entry.name, asset.filename));
+        assetPaths.set(`/runtime-assets/${digest}/${asset.filename}`, resolve(root, publicRoot(root), 'scenes', entry.name, asset.filename));
       }
     }
   }

@@ -192,7 +192,7 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
       const focusShare = focusInView ? focusDiameter / height : 0;
       const fades = closeOrbitFades(plan.camera.presentation.orbitLineFade, focusShare);
       const outsideFamily = outsideFamilyOrbitOpacity(subject.id === null || subject.hostIsStar ? undefined : byId.get(subject.hostId), host => Math.hypot(...frame.eye(host)));
-      const highlighting = bodies.some(entry => entry.highlighted === true), otherSystems = otherSystemsOpacity(systemFade.of(0), starFieldFade(focusDistanceM, plan.system));
+      const highlighting = bodies.some(entry => entry.highlighted === true), otherSystems = otherSystemsOpacity(systemFade.ownOpacity(), starFieldFade(systemFade.ownStarDistanceM(), plan.system));
       const near = opacity > 0
         ? Math.max(1, Math.min(...bodies.map(entry => Math.hypot(...frame.eye(entry.body)))) * 0.01) : 1;
       // The coarsest prepared chord bank within 0.1 px of the full path, bounded at
@@ -238,7 +238,7 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
         // growth, as its own orbit does, and return as the camera pulls back. A hover or preview shows a path at any range.
         const hostPageMoon = entry.satellite && subject.page && entry.parent!.id === subject.focusId && !hovered && !highlighted;
         const bodyOrbitOpacity = pathOpacity(subject, inSubjectFamily(subject, entry.orbit?.centerBodyId), emphasised, isOrbitFocus || hostPageMoon, hovered || highlighted, fades, outsideFamily);
-        const emphasis = contextEmphasis(hovered, highlighting && !highlighted, systemFade.inFocusSystem(entry.index), otherSystems);
+        const emphasis = contextEmphasis(hovered, highlighting && !highlighted, systemFade.inOwnSystem(entry.index), otherSystems);
         const systemOpacity = systemFade.of(entry.index);
         // A body of a faded-out system that nothing targets or shows has no marker, path or caption: the stub, unprojected.
         const retiredWithSystem = entry.retired = systemOpacity === 0 && entry.orbit !== null && !ownsDetail && !targeted && !entry.indicatorShown && !entry.labelShown;
@@ -565,7 +565,7 @@ export function createWorldContextPlanner(plan: PreparedWorldContext | PreparedW
       output.indicatorCutout = entry.indicatorCutout; output.orbitAppearance = entry.orbitAppearance; output.emphasis = projected.emphasis;
       return output;
     };
-    // `otherSystems`: the dimming of every body outside the focus star's system, which the stars drawn as bank dots share.
+    // `otherSystems`: the dimming of every body outside the camera's own system, which the stars drawn as bank dots share.
     return { emphasizedId, opacity, width, height, otherSystems, ...(labelMeasurements.length ? { labelMeasurements } : {}), projectedBodies: projectedBodies.map(plannedBody) };
   };
   return Object.assign(planFrame, {

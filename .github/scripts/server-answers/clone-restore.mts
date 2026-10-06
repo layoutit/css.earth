@@ -5,6 +5,7 @@ import { cp, lstat, realpath, rm, mkdir, symlink } from 'node:fs/promises';
 import { dirname, relative, resolve, sep } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { parseArgs } from 'node:util';
+import { publicRoot } from './public-root.mts';
 
 export function terminate(child: ChildProcess, signal: NodeJS.Signals = 'SIGTERM'): void {
   if (!child.pid || child.exitCode !== null || child.signalCode !== null) return;
@@ -31,7 +32,7 @@ export async function command(program: string, args: string[], cwd: string): Pro
 export function restoreInput(path: string): boolean {
   return /^(?:node_modules|packages\/[^/]+\/node_modules)(?:\/|$)/u.test(path) ||
     /^src\/objects\/[^/]+\/prepared(?:\/|$)/u.test(path) ||
-    /^public\/(?!features(?:\/|$)|shell(?:\/|$)|scenes(?:\/|$))/u.test(path);
+    /^(?:site\/)?public\/(?!features(?:\/|$)|shell(?:\/|$)|scenes(?:\/|$))/u.test(path);
 }
 export async function cloneRestore(source: string, destination: string, revision = 'HEAD'): Promise<{ revision: string; restored: number }> {
   const root = await realpath(source), target = resolve(destination);
@@ -53,8 +54,9 @@ export async function cloneRestore(source: string, destination: string, revision
       restored++;
     }
     // Shared downloaded public inputs are read only by the comparison. Never copied into a clone.
-    await mkdir(resolve(target, 'public'), { recursive: true });
-    await symlink(resolve(root, 'public/scenes'), resolve(target, 'public/scenes'));
+    const targetPublic = resolve(target, publicRoot(target));
+    await mkdir(targetPublic, { recursive: true });
+    await symlink(resolve(root, publicRoot(root), 'scenes'), resolve(targetPublic, 'scenes'));
     return { revision: commit, restored };
   } catch (error) {
     await rm(target, { recursive: true, force: true });
