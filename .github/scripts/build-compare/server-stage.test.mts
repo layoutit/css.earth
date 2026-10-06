@@ -5,7 +5,6 @@ import { mkdtemp, mkdir, writeFile, readFile, rm, realpath } from 'node:fs/promi
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { packagedFunction, readDeploymentConfig } from '../server-answers/deployment-config.mts';
 import { serverVerdict, retainRecordingPair } from './server-policy.mts';
 import { serverStage, serverSummary, supervisedRun, type Run } from './server-stage.mts';
 
@@ -45,10 +44,10 @@ async function dryRun(mode: 'report' | 'pure-move' | 'semantic', broken = false)
       await mkdir(join(out, side, 'dist/catalogue'), { recursive: true });
       await writeFile(join(out, side, 'dist/catalogue/index.json'), '{"entries":[]}');
       await mkdir(join(checkout, 'bundled'), { recursive: true });
-      await writeFile(join(checkout, 'bundled/search.mjs'), 'bundle');
       await writeFile(join(checkout, 'bundled/worker.mjs'), 'worker');
-      await writeFile(join(checkout, 'package.json'), JSON.stringify({ scripts: { 'build:deploy': 'node prepare.mts && astro build && node site/build/share-images.mts && node packages/bake/cli/run-implemented-objects.mts assemble && node moved/netlify.mts', 'deploy:cloudflare-preview': 'node moved/worker.mts --noindex && npx deploy' } }));
-      await writeFile(join(checkout, 'netlify.toml'), '[functions]\ndirectory = "bundled"\nincluded_files = ["dist/catalogue/index.json"]\n');
+      // The base still runs a second host's bundler after Astro; the head runs only the Worker's.
+      const extra = side === 'base' ? ' && node moved/functions.mts' : '';
+      await writeFile(join(checkout, 'package.json'), JSON.stringify({ scripts: { 'build:deploy': `node prepare.mts && astro build && node site/build/share-images.mts && node packages/bake/cli/run-implemented-objects.mts assemble${extra}`, 'deploy:cloudflare-preview': 'node moved/worker.mts --noindex && npx deploy' } }));
       await writeFile(join(checkout, 'wrangler.jsonc'), '{"main":"bundled/worker.mjs","assets":{}}');
     }
     const run: Run = async (stage, _program, args, cwd, env) => {
@@ -57,31 +56,29 @@ async function dryRun(mode: 'report' | 'pure-move' | 'semantic', broken = false)
       if (stage.includes('-bundle-')) {
         assert.match(env.NODE_OPTIONS ?? '', /offline\.mts/u);
         await writeFile(join(cwd, 'dist/staged-by-bundler.txt'), 'L2 only');
-        assert.match(args.at(-1) ?? '', /node moved\/(netlify|worker)\.mts$/u);
+        assert.match(args.at(-1) ?? '', /node moved\/(functions|worker)\.mts$/u);
         assert.ok(!(args.at(-1) ?? '').includes('--noindex'));
       }
       if (stage.includes('-record-')) {
         assert.equal(await realpath(join(cwd, 'dist')), join(await realpath(cwd), 'dist'));
-        const pack = await packagedFunction(cwd, 'search', await readDeploymentConfig(cwd));
-        try { assert.equal(await readFile(join(pack.root, 'dist/catalogue/index.json'), 'utf8'), '{"entries":[]}'); }
-        finally { await rm(pack.root, { recursive: true, force: true }); }
+        assert.equal(await readFile(join(cwd, 'dist/catalogue/index.json'), 'utf8'), '{"entries":[]}');
         assert.equal(args[args.indexOf('--asset-origin') + 1], 'https://earth-assets.lowpoly.cc');
         const dir = args[args.indexOf('--out') + 1]!;
         await mkdir(dir, { recursive: true });
         await writeFile(join(dir, 'index.json'), '{"requests":["one","two"]}');
       }
-      if (stage.includes('-check-') && !(broken && stage === 'base-check-netlify')) return { exitCode: 0, output: 'Sane baseline: 2 answers; closure covered' };
-      if (broken && stage === 'base-check-netlify') return { exitCode: 1, output: 'sanity mutation' };
+      if (stage.includes('-check-') && !(broken && stage === 'base-check-cloudflare')) return { exitCode: 0, output: 'Sane baseline: 2 answers' };
+      if (broken && stage === 'base-check-cloudflare') return { exitCode: 1, output: 'sanity mutation' };
       return { exitCode: stage === 'diff-preview' ? 1 : 0, output: JSON.stringify({ differences: stage === 'diff-preview' ? [{ file: 'one.json', dimension: 'headers.cache-control' }] : [] }) };
     };
     const report = await serverStage(base, head, out, mode, 'https://earth-assets.lowpoly.cc', run);
     assert.equal(report.exitCode, mode === 'report' ? 0 : broken ? 2 : 1);
     assert.equal(report.targets[0]?.base, 2);
     assert.ok(serverSummary(report).includes('one.json — headers.cache-control'));
-    assert.equal(report.timings.length, broken ? 18 : 19);
-    assert.equal(calls.filter(call => call.includes('-bundle-')).length, 4);
-    assert.equal(calls.filter(call => call.includes('-record-')).length, 6);
-    assert.equal(calls.filter(call => call.includes('-check-')).length, 6);
+    assert.equal(report.timings.length, broken ? 12 : 13);
+    assert.equal(calls.filter(call => call.includes('-bundle-')).length, 3);
+    assert.equal(calls.filter(call => call.includes('-record-')).length, 4);
+    assert.equal(calls.filter(call => call.includes('-check-')).length, 4);
     assert.equal(JSON.parse(await readFile(join(out, 'server-answers.json'), 'utf8')).exitCode, report.exitCode);
     assert.ok((await readFile(join(out, 'server-answers/artifacts/preview-diff.json'), 'utf8')).includes('cache-control'));
     assert.ok(report.retainedBytes > 0);
@@ -93,13 +90,13 @@ async function dryRun(mode: 'report' | 'pure-move' | 'semantic', broken = false)
       const cached = await serverStage(base, head, out, mode, 'https://earth-assets.lowpoly.cc', run, { cachedBase: true });
       assert.equal(cached.exitCode, report.exitCode);
       assert.ok(!calls.some(call => call.startsWith('base-')), 'no base bundles, recordings or checks on a cache hit');
-      assert.equal(calls.filter(call => call.startsWith('head-record-')).length, 3);
+      assert.equal(calls.filter(call => call.startsWith('head-record-')).length, 2);
       assert.deepEqual(await readFile(join(out, 'server-answers.json')), before, 'cached and fresh L2 reports are byte-identical');
     }
 
   } finally { await rm(root, { recursive: true, force: true }); }
 }
-test('offline dry run reuses both outputs, resolves moved bundles, checks six recordings and retains small diffs', async () => { await dryRun('semantic'); });
+test('offline dry run reuses both outputs, resolves moved bundles, checks four recordings and retains small diffs', async () => { await dryRun('semantic'); });
 test('report-mode sanity failure is a notice; enforced sanity failure blocks', async () => { await dryRun('report', true); await dryRun('pure-move', true); });
 test('subprocess supervision retains failure logs and enforces the total budget', async () => {
   const out = await mkdtemp(join(tmpdir(), 'answer-watch-'));

@@ -105,5 +105,5 @@ Chrome process cleanup workaround.
 - The demonstration only exposes the Sun and prepared planet classification.
   Other context capabilities, orientations and saved views need their own checks.
 - Browser support, keyboard access to zoom on every target platform, real mobile
-  devices, production packaging and Netlify deployment remain unverified. The
+  devices, production packaging and Cloudflare deployment remain unverified. The
   experiment's scripts-blocked proxy is not the site's deployment architecture.

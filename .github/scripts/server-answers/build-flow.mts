@@ -66,13 +66,13 @@ async function build(label: string, revision: string): Promise<string> {
   });
   await measureDisk(`${label}-built`, destination);
   const config = await readDeploymentConfig(destination);
-  for (const path of ['dist/earth/index.html', `${config.functionsDirectory}/search.mjs`, config.workerMain]) {
+  for (const path of ['dist/earth/index.html', config.workerMain]) {
     if ((await stat(resolve(destination, path))).size === 0) throw new Error(`${label}: empty build artifact ${path}`);
   }
   if (!(await readFile(resolve(destination, 'dist/earth/index.html'), 'utf8')).includes('https://assets.invalid')) throw new Error('Asset-origin build did not rewrite Earth HTML.');
   const recordingEnv = { ...process.env, NODE_OPTIONS: '--max-old-space-size=6144' };
   let failedTarget = false;
-  for (const target of ['preview', 'netlify', 'cloudflare']) {
+  for (const target of ['preview', 'cloudflare']) {
     const recording = resolve(out, label, target);
     const args = [process.execPath, resolve(import.meta.dirname, 'record.mts'), '--target', target, '--dist', 'dist', '--out', recording];
     if (await stage(`${label}-record-${target}`, args, destination, recordingEnv) !== 0) { failedTarget = true; continue; }
@@ -93,7 +93,7 @@ try {
   let differences = 0;
   const comparisons: Record<string, number> = {};
   const compare = async (head: string) => {
-    for (const target of ['preview', 'netlify', 'cloudflare']) {
+    for (const target of ['preview', 'cloudflare']) {
       const code = await stage(`diff-${head}-${target}`, [process.execPath, resolve(import.meta.dirname, 'diff.mts'), '--base', resolve(out, 'base', target), '--head', resolve(out, head, target), '--summary'], source);
       differences = Math.max(differences, code);
       comparisons[`${head}-${target}`] = code;

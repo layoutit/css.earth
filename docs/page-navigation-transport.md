@@ -90,7 +90,7 @@ cancellation never disturbs another decode. Page disposal rejects pending jobs
 and releases the worker. Failed validation never falls back to main-thread
 scene decoding.
 
-## Native dataset selection and search on Netlify
+## Native dataset selection and search on the server
 
 Dataset buttons submit an ordinary GET form to the current object's route, for
 example `/saturn/?dataset=ultraviolet`. The response uses the same prepared
@@ -132,27 +132,25 @@ with a `feature` parameter (`city-<id>` for a city). The response selects
 a compatible dataset and publishes the same feature caption used by live labels;
 JavaScript adds the camera flight after that body is ready.
 
-`deploy/netlify/edge-functions/search-route.ts` (its routing is `site/server/search-route.mts`) routes requests containing `q`, `dataset`,
-`settings`, `feature`, `v` or `overview` to the Node function in
-`deploy/netlify/functions/search.ts`. It keeps the view parameters, and passes ordinary pages and assets straight through.
-The search work runs in Node because parsing the shell and searching the index
-can exceed Netlify's edge CPU budget. The application continues to build static
-pages; it does not need an Astro server adapter.
+[The Worker](../deploy/cloudflare/worker.ts) (its routing is `site/server/search-route.mts`) routes requests containing
+`q`, `dataset`, `settings`, `feature`, `v` or `overview` to the page handler in `site/server/search-response.mts`. It
+keeps the view parameters, and leaves ordinary pages and assets to its static assets. The application continues to
+build static pages; it does not need an Astro server adapter.
 
-The function fetches the current object's prebuilt page without a query and
+The handler fetches the current object's prebuilt page without a query and
 updates the retained search controls between the `search-shell` boundaries, and
 lists every matching object with the same matcher, order and row markup as live
 search. Search alone passes the scene through unchanged; dataset, setting,
 saved-view and focus requests also update the existing stage between the
 `prepared-scene` boundaries. The
 head, stylesheet bytes and application scripts pass through unchanged. The
-function fetches existing prepared data and never regenerates it. The feature
+handler fetches existing prepared data and never regenerates it. The feature
 index is checked against the feature count that same page states;
-warm function instances cache only index data that passed that check. Query responses
+warm Worker instances cache only index data that passed that check. Query responses
 are not cached and carry `noindex, follow`. An index failure leaves object
 search usable and displays a retry message in the existing feature section.
 
-Live search asks `deploy/netlify/functions/find.ts` instead of downloading anything.
+Live search asks the Worker's find endpoint, answered by `site/server/find.mts`, instead of downloading anything.
 One request per query, `?q=<query>&object=<body>`, answers the first 40 matching
 objects, their total and the named-feature rows together; `&offset=<row>` answers
 a later page of objects as the list scrolls (the Stars category lists about
@@ -167,15 +165,16 @@ separately. The page waits one
 animation frame after typing, so keystrokes that arrive faster than it draws send
 one request for the newest text; a newer request cancels the older one.
 
-Both functions read their data from files deployed beside them (`included_files`
-in `netlify.toml`, read by `site/server/search-data.mts`): the object catalogue
-the build writes to `dist/catalogue/index.json`, the feature index and each
-body's places catalogue from `site/public/`. Fetching them over HTTP made a new
-function instance's first search take 3 to 4.5 s; from disk it takes about
-0.2 s. The object catalogue is built under Vite, which the bundled functions
-cannot run, so they read the built file; Astro dev computes the same catalogue
-through Vite. The deploy's function bundler answers one query before publishing,
-so a missing file fails the deploy instead of every search. A city that a named
+Both handlers read the object catalogue the build writes to
+`dist/catalogue/index.json`, the feature index and each body's places catalogue
+from `site/public/` (`site/server/search-data.mts`). The Worker's bundler stages
+them beside the built pages, and the Worker reads them through its assets
+binding (`deploy/cloudflare/search-data.ts`). Fetching them over HTTP made a new
+instance's first search take 3 to 4.5 s; from local files it takes about
+0.2 s. The object catalogue is built under Vite, which the Worker cannot run, so
+it reads the built file; Astro dev computes the same catalogue through Vite. The
+Worker's bundler answers one query and one page before publishing, so a missing
+file fails the deploy instead of every search. A city that a named
 feature already carries within 50 km is listed once, as that feature, and its
 alternate names find it.
 
@@ -188,10 +187,8 @@ in the normal site.
 
 `site/server/search-server.mts` calls the same routing and request handlers in Astro
 dev. `astro preview` does not run Vite's preview hooks, so neither search works
-there; use dev, or a Netlify deploy. `netlify.toml` declares the production build, Node function
-and edge route. Deployment is deferred: before launch, verify a real Netlify
-Deploy Preview, prepared asset restoration, query routing and the initial page
-with JavaScript disabled. No site has been deployed by this PR.
+there; use dev, or the Cloudflare preview (`pnpm deploy:cloudflare-preview`).
+[The wrangler configuration](../deploy/cloudflare/wrangler.jsonc) declares the Worker and its static assets.
 
 For image/DOM leases, read [prepared navigation ownership](prepared-navigation-ownership.md).
 For the camera handoff and interruption behavior, read [flight lifecycle](flight-lifecycle.md).
@@ -229,8 +226,8 @@ disabled at desktop and phone widths. It then delays startup and verifies the
 same scene, form, result rows, query and computed result styles before exercising
 live search. Native feature links stay usable while scripts load.
 The request tests cover parameter routing, escaping, pinned-index
-failure and unchanged scene bytes. Netlify's local function build checks the
-server bundle; it does not prove a deployed site's configuration.
+failure and unchanged scene bytes. The Worker's bundler checks the server
+bundle; it does not prove a deployed site's configuration.
 
 The native dataset browser check switches Saturn textures and cross-sections,
 returns to the default, reloads, goes Back, searches and clears that search with

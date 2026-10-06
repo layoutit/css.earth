@@ -9,9 +9,9 @@ import { cacheKey, sealCache, useCache, validateCache, packCache, unpackCache, t
 const identity: CacheIdentity = { commit: 'a'.repeat(40), toolchain: { node: process.version, pnpm: '10' }, lockfile: Buffer.from('lock') };
 async function fixture(root: string) {
   const data: Record<string, string> = { 'base/dist/index.html': 'page', 'base/metadata/client.json': '{}', 'base/inventories/body.json': '{}', 'base/toolchain.json': JSON.stringify(identity.toolchain), 'base/pnpm-lock.yaml': 'lock', 'base/build.json': '{}', 'performance/base/measures.json': '{}', 'performance/base.md': 'measures' };
-  for (const target of ['preview', 'netlify', 'cloudflare']) {
-    data[`server-answers/base/${target}/index.json`] = JSON.stringify({ schema: 2, target, requests: ['one'] });
-    for (const name of ['closure', 'one']) data[`server-answers/base/${target}/${name}.json`] = '{}';
+  for (const target of ['preview', 'cloudflare']) {
+    data[`server-answers/base/${target}/index.json`] = JSON.stringify({ schema: 3, target, requests: ['one'] });
+    data[`server-answers/base/${target}/one.json`] = '{}';
   }
   for (const [path, value] of Object.entries(data)) { await mkdir(dirname(join(root, path)), { recursive: true }); await writeFile(join(root, path), value); }
   await sealCache(root, identity);

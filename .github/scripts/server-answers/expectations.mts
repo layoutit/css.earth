@@ -1,7 +1,7 @@
 /** Target tables describe code-owned behavior, never values learned from recorded answers.
  * Vite preview: CORS precedes plugins; searchServer handles FIND_PATH and page rewrites only.
  * Vite's bundled sirv handles ranges/ETag, but not If-Modified-Since; final middleware sends 404.
- * Handler targets: find.mts, search-response.mts, deploy/handlers/report.ts and deploy/cloudflare/worker.ts.
+ * Handler targets: find.mts, search-response.mts, deploy/cloudflare/report.ts and deploy/cloudflare/worker.ts.
  * Worker static types: host.mts's offline ASSETS adapter (not provider HTTP behavior).
  */
 import { type Target, type AnswerRequest, object } from './model.mts';
@@ -23,7 +23,6 @@ const handler: Readonly<Record<string, Expectation>> = {
   ...Object.fromEntries(['post', 'empty', 'huge'].map(id => [`report-${id}`, { status: 204, type: null }])),
 };
 export const targetTables: Readonly<Record<Target, Readonly<Record<string, Expectation>>>> = {
-  netlify: { ...handler, robots: { status: 200, type: text }, sitemap: { status: 200, type: 'application/xml' }, 'missing-page': { status: 404, type: null }, 'missing-file': { status: 404, type: null }, 'static-range': { status: 206, type: 'text/javascript' }, 'static-range-invalid': { status: 416, type: null }, 'static-etag': { status: 304, type: null }, 'static-modified': { status: 304, type: null }, prepared: { status: 200, type: json }, 'prepared-range': { status: 200, type: json } },
   cloudflare: { ...handler, 'cloudflare-www': { status: 301, type: null }, robots: { status: 200, type: text }, sitemap: { status: 200, type: 'application/xml' }, 'missing-page': { status: 404, type: null }, 'missing-file': { status: 404, type: null } },
   preview: {
     ...handler,

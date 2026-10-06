@@ -10,7 +10,7 @@
   },
   "scripts": {
     "build": "astro build && node packages/bake/cli/run-implemented-objects.mts assemble",
-    "build:deploy": "pnpm build:packages && pnpm setup:asset-data && pnpm prepare:inputs && pnpm prepare:world-presentation && pnpm prepare:shell-assets && pnpm prepare:dataset-sprites && node packages/bake/cli/prepare-factsheets.mts --quiet && node site/build/prepare/prepare-feature-index.mts && pnpm prepare:dataset-billboards && pnpm prepare:environment-images && node packages/bake/cli/prepare-nebulae.mts --if-missing && node site/build/prepare/prepare-facilities.mts --catalog-only && astro build && node site/build/share-images.mts && node packages/bake/cli/run-implemented-objects.mts assemble && node deploy/netlify/bundle-functions.mts",
+    "build:deploy": "pnpm build:packages && pnpm setup:asset-data && pnpm prepare:inputs && pnpm prepare:world-presentation && pnpm prepare:shell-assets && pnpm prepare:dataset-sprites && node packages/bake/cli/prepare-factsheets.mts --quiet && node site/build/prepare/prepare-feature-index.mts && pnpm prepare:dataset-billboards && pnpm prepare:environment-images && node packages/bake/cli/prepare-nebulae.mts --if-missing && node site/build/prepare/prepare-facilities.mts --catalog-only && astro build && node site/build/share-images.mts && node packages/bake/cli/run-implemented-objects.mts assemble",
     "build:astronomy": "pnpm --filter @cssearth/astronomy build",
     "build:catalog": "pnpm --filter @cssearth/catalog build",
     "build:core": "pnpm --filter @cssearth/core build",

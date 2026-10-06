@@ -214,8 +214,8 @@ from. It groups the files into folders and fails when a change adds:
 - a new workspace package dependency cycle (dependencies, devDependencies and
   peerDependencies), or growth of a recorded cycle's strongly connected component;
 - an import from `packages/*` into any other tree;
-- an import into `site/`, `labs/` or `.github/` from outside that tree (Netlify
-  functions and root `*.config.*` files are allowed);
+- an import into `site/`, `labs/` or `.github/` from outside that tree (the
+  Cloudflare Worker in `deploy/` and root `*.config.*` files are allowed);
 - an import of `@cssearth/bake` or `@cssearth/telescope-cli` from `site/` or
   `packages/renderer/src/` (renderer tests may use bake);
 - an import of a `packages/*/cli/` command entry, including from another

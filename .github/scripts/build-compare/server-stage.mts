@@ -49,7 +49,7 @@ export async function serverStage(base: string, head: string, out: string, mode:
   const evidence = join(out, 'server-answers');
   await mkdir(evidence, { recursive: true });
   const execute = run ?? supervisedRun(evidence);
-  const report: ServerReport = { exitCode: 0, failures: [], targets: ['preview', 'netlify', 'cloudflare'].map(target => ({ target, base: null, head: null, differences: [], compared: false })), timings: [], retainedBytes: 0 };
+  const report: ServerReport = { exitCode: 0, failures: [], targets: ['preview', 'cloudflare'].map(target => ({ target, base: null, head: null, differences: [], compared: false })), timings: [], retainedBytes: 0 };
   const fail = (message: string) => { report.failures.push(message); console.warn(`::notice::Server answers: ${message.replaceAll('\n', '%0A').replaceAll('\r', '%0D')}`); };
   const stage = async (name: string, program: string, args: string[], cwd: string, env: NodeJS.ProcessEnv) => {
     const start = performance.now();
@@ -80,7 +80,7 @@ export async function serverStage(base: string, head: string, out: string, mode:
         if (result.exitCode) throw new Error(`${side} bundle failed; see log`);
       }
       const config = await readDeploymentConfig(checkout);
-      for (const file of [`${config.functionsDirectory}/search.mjs`, config.workerMain]) if (!(await stat(resolve(checkout, file))).size) throw new Error(`Empty bundle: ${file}`);
+      if (!(await stat(resolve(checkout, config.workerMain))).size) throw new Error(`Empty bundle: ${config.workerMain}`);
       // Host owns fetch routing; the offline preload is only for bundling.
       const recordedTargets = await parallel(report.targets, recordingConcurrency, async target => {
         const isolated = await recordingIsolation(join(evidence, 'temporary'), `${side}-${target.target}`);

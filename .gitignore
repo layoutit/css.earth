@@ -383,9 +383,6 @@ src/objects/mars/source/crust/*.dat
 # Compact native-cell GeoTIFFs, restored by the USGS acquisition recipes or source cache.
 /src/objects/*/source/science/usgs/*.tif
 
-# Netlify functions bundled by deploy/netlify/bundle-functions.mts during build:deploy.
-deploy/netlify/functions-bundled/
-
 # Per-object download rules, collected from the object folders. Rules shared by many objects apply to every object.
 src/objects/*/source/photometry/*.dat
 src/objects/*/source/photometry/*.gz

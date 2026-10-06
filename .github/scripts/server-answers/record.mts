@@ -1,4 +1,4 @@
-/** Record a build through a supervised real preview and imported deployment bundles. */
+/** Record a build through a supervised real preview and the imported Worker bundle. */
 import { assetOrigin } from './asset-origin.mts';
 import { spawn } from 'node:child_process';
 import { mkdir, writeFile, readFile, readdir } from 'node:fs/promises';
@@ -73,9 +73,7 @@ export async function record(target: Target, dist: string, out: string, publishe
       await writeFile(resolve(out, `${request.id}.json`), serialise(storedAnswer(answer)));
     }
     const config = await readDeploymentConfig(process.cwd(), resolve(dist));
-    const closureReply = await send({ command: 'closure' });
-    await writeFile(resolve(out, 'closure.json'), serialise({ functions: object(closureReply.functions), included: closureReply.included ?? config.included, includedByFunction: closureReply.includedByFunction }));
-    await writeFile(resolve(out, 'index.json'), serialise({ schema: 2, target, requests: requests.map(request => request.id), catalogue: requests.map(request => ({ ...request, path: canonicalHtml(request.path) })), config: config.facts, normalisations }));
+    await writeFile(resolve(out, 'index.json'), serialise({ schema: 3, target, requests: requests.map(request => request.id), catalogue: requests.map(request => ({ ...request, path: canonicalHtml(request.path) })), config: config.facts, normalisations }));
     rejectFallback();
     console.log(`Recorded ${requests.length} ${target} answers in ${out}`);
   } finally {
@@ -90,9 +88,9 @@ export async function record(target: Target, dist: string, out: string, publishe
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
   try {
     const { values } = parseArgs({ options: { 'asset-origin': { type: 'string' }, target: { type: 'string' }, dist: { type: 'string' }, out: { type: 'string' } } });
-    if (!['preview', 'netlify', 'cloudflare'].includes(values.target ?? '') || !values.dist || !values.out) throw new Error('Usage: record.mts --target preview|netlify|cloudflare --dist dist --out <empty dir> [--asset-origin <origin>]');
+    if (!['preview', 'cloudflare'].includes(values.target ?? '') || !values.dist || !values.out) throw new Error('Usage: record.mts --target preview|cloudflare --dist dist --out <empty dir> [--asset-origin <origin>]');
     const target = values.target;
-    if (target !== 'preview' && target !== 'netlify' && target !== 'cloudflare') throw new Error('Invalid target');
+    if (target !== 'preview' && target !== 'cloudflare') throw new Error('Invalid target');
     await record(target, values.dist, values.out, values['asset-origin']);
   } catch (error) { console.error(String(error)); process.exitCode = 2; }
 }
