@@ -1,4 +1,4 @@
-import { fetchTap, tapUrl, type TapRequestConfig } from './tap.ts';
+import { tapUrl, type AskTap } from './tap.ts';
 import { readArchiveImage, safeArchiveUrl, type ArchiveImage, type ArchiveProvider, type ArchiveQuery, type ArchiveTarget } from './model.ts';
 
 
@@ -55,8 +55,8 @@ export function imageFromRow(provider: ArchiveProvider, row: Record<string, unkn
     estimatedBytes: provider === 'mast' || size === null ? null : size * 1000,
     accessUrl, accessFormat: format, sourceUrl, previewUrl });
 }
-export interface ArchiveDiscoveryConfig { endpoint: string; radiusDegrees: number; transport: TapRequestConfig }
-export function pendingQuery(provider: ArchiveProvider, config: ArchiveDiscoveryConfig): ArchiveQuery {
+export interface ArchiveDiscoveryConfig { endpoint: string; radiusDegrees: number; table: AskTap }
+export function pendingQuery(provider: ArchiveProvider, config: Pick<ArchiveDiscoveryConfig, 'endpoint' | 'radiusDegrees'>): ArchiveQuery {
   return { provider, status: 'pending', queriedAt: null, endpoint: config.endpoint, query: '', radiusDegrees: config.radiusDegrees,
     matchedCount: null, matchedEstimatedBytes: null, matchedUnknownSizeCount: null, images: [] };
 }
@@ -65,9 +65,10 @@ export async function inventoryQuery(provider: ArchiveProvider, object: ArchiveT
   const query = `SELECT TOP ${maxRecords + 1} ${columns} FROM ivoa.ObsCore WHERE ${where}`;
   base.query = query; base.queriedAt = new Date().toISOString();
   try {
-    const result = await fetchTap(base.endpoint, query, maxRecords + 1, config.transport, signal);
+    const result = await config.table(base.endpoint, query, maxRecords + 1), url = tapUrl(base.endpoint, query, maxRecords + 1).href;
+    signal?.throwIfAborted();
     const unique = new Map<string, ArchiveImage>();
-    for (const row of result.rows) { const image = imageFromRow(provider, row, result.url); unique.set(image.id, image); }
+    for (const row of result.rows) { const image = imageFromRow(provider, row, url); unique.set(image.id, image); }
     const capped = result.overflow || result.rows.length > maxRecords;
     base.images = [...unique.values()].slice(0, maxRecords);
     base.status = capped ? 'truncated' : 'complete';

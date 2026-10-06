@@ -2,7 +2,7 @@ export const AUTHORED_OBJECT_SCHEMA = 'cssearth-authored-object@2';
 import type { ObjectDescriptor } from './descriptor.js';
 import { parseObjectDescriptor } from './parse.js';
 import { isRecord } from '@cssearth/core';
-import { isExtendedClassification } from './registry/object-schema.js';
+import { isExtendedClassification } from './registry/object-classification.js';
 
 export type ShapeKind = 'sphere' | 'ellipsoid' | 'radial-terrain';
 /** A recipe input by id and package path. The source manifest declares the file once, never here. */

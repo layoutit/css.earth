@@ -2,7 +2,7 @@
 import { mkdir, readFile, rename, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { gzipSync, gunzipSync } from 'node:zlib';
-import { fetchTap } from '../../../features/catalogue/tap.ts';
+import { archiveTable } from '../../../adapters/sources/archive-tables.ts';
 import { readMessierCatalogue } from '../../../features/catalogue/types.ts';
 import { countQuery, papersQuery, readPaperCounts, papersFromRows } from '../../../features/catalogue/papers/query.ts';
 import { paperEndpoint, paperRoot, paperSchema, readPaperIndex, readPaperPage, type PaperIndex, type PaperReference } from '../../../features/catalogue/papers/types.ts';
@@ -16,10 +16,10 @@ let index: PaperIndex | undefined;
 try { index = readPaperIndex(JSON.parse(await readFile(indexPath,'utf8'))); if (index.catalogue !== cataloguePath) index = undefined; }
 catch (error) { if (!(error instanceof Error && 'code' in error && error.code === 'ENOENT')) console.log('PAPER_INDEX_REBUILD',error instanceof Error?error.message:String(error)); }
 if (!index || refresh) {
-  const counts = await fetchTap(paperEndpoint,countQuery,1000);
-  const rows = readPaperCounts(JSON.parse(counts.bytes)), old = index;
+  const counts = await archiveTable(paperEndpoint,countQuery,1000);
+  const rows = readPaperCounts(counts), old = index;
   const countSource = `${paperRoot}/counts.json.gz`;
-  await writeFile(resolve(countSource),gzipSync(counts.bytes));
+  await writeFile(resolve(countSource),gzipSync(JSON.stringify(counts)));
   index = {schema:'cssearth-messier-paper-index@1',catalogue:cataloguePath,generatedAt:new Date().toISOString(),countQuery,countSource,
     objects:catalogue.objects.map(object=>{
       const row = rows.find(r=>r.objectId === object.id); if(!row) throw new Error(`Missing ${object.id} bibliography identity.`);
@@ -48,10 +48,10 @@ for (const reference of snapshot.objects) {
   }
   try {
     const limit = Math.min(50000,reference.expectedCount+1), query = papersQuery(reference.simbadId,limit);
-    const response = await fetchTap(paperEndpoint,query,limit), papers = papersFromRows(response.rows);
+    const response = await archiveTable(paperEndpoint,query,limit), papers = papersFromRows(response.rows);
     const source = `${paperRoot}/source-${reference.objectId}.json.gz`;
     const page = readPaperPage({schema:paperSchema,objectId:reference.objectId,simbadId:reference.simbadId,retrievedAt:new Date().toISOString(),query,source,expectedCount:reference.expectedCount,papers});
-    await writeFile(resolve(source),gzipSync(response.bytes));
+    await writeFile(resolve(source),gzipSync(JSON.stringify(response)));
     const bytes = gzipSync(JSON.stringify(page)), path = `${paperRoot}/${reference.objectId}.json.gzip`;
     await writeFile(`${path}.tmp`,bytes); await rename(`${path}.tmp`,path);
     const status: PaperReference['status'] = !response.overflow && papers.length === reference.expectedCount ? 'complete' : 'partial';

@@ -9,6 +9,7 @@ lab
 ├── reconstruction ── @cssearth/bake/volume + @cssearth/objects
 ├── volume-viewer ─── @cssearth/objects
 ├── @cssearth/bake/volume/node ── @cssearth/bake/volume
+├── @cssearth/telescope/node (host adapters only: archive tables and DataLink through PyVO)
 └── @cssearth/bake/volume ── @cssearth/objects
 ```
 

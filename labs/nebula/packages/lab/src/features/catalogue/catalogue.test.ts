@@ -3,7 +3,6 @@ import { test } from 'node:test';
 import { readFile } from 'node:fs/promises';
 import { readMessierCatalogue, readMessierInventory, readArchiveQuery, readArchiveImage } from './types';
 import { imageFromRow, numberValue, pendingQuery, queryWhere } from './archives';
-import { readTapTable } from './tap';
 import { imageSuitability, inventoryStorage } from './selection';
 
 const catalogue = readMessierCatalogue(JSON.parse(await readFile('labs/nebula/models/messier/catalogue.json', 'utf8')));
@@ -31,15 +30,6 @@ test('a high-resolution partial field remains a detail candidate', () => {
   const quality = imageSuitability(image, {...orion, majorArcmin:60});
   assert.equal(quality.role, 'detail'); assert.ok(quality.fieldRatio! < 1);
   assert.equal(imageSuitability({...image,resolutionArcsec:null},orion).role,'unrated');
-});
-test('archive tables validate shape, failed responses and explicit overflow across JSON formats', () => {
-  assert.deepEqual(readTapTable({metadata:[{name:'Size'}],data:[[123]]}).rows,[{size:123}]);
-  assert.deepEqual(readTapTable({info:[{name:'Size'}],data:[['123']]}).rows,[{size:'123'}]);
-  const irsa = { VOTABLE:{RESOURCE_ARRAY:[{'<xmlattr>':{type:'results'},INFO_ARRAY:[{'<xmlattr>':{name:'QUERY_STATUS',value:'OVERFLOW'}}],
-    TABLE:{FIELD_ARRAY:[{'<xmlattr>':{name:'Size'}}],DATA:{TABLEDATA:[['123']]}}}]}};
-  assert.equal(readTapTable(irsa).overflow,true);
-  irsa.VOTABLE.RESOURCE_ARRAY[0]!.INFO_ARRAY[0]!['<xmlattr>'].value='ERROR'; assert.throws(()=>readTapTable(irsa));
-  assert.throws(()=>readTapTable({metadata:[{name:'size'}],data:[[1,2]]}));
 });
 test('unknown counts, duplicate file hits, and partial searches cannot produce a complete total', () => {
   const targets = catalogue.objects.map(o => ({objectId:o.id,queries:(['mast','irsa','eso'] as const).map(p=>pendingQuery(p,o))}));

@@ -35,6 +35,7 @@
     "@cssearth/fits": "workspace:*",
     "@cssearth/bake": "workspace:*",
     "@cssearth/nebula-reconstruction": "workspace:*",
+    "@cssearth/telescope": "workspace:*",
     "@cssearth/volume-viewer": "workspace:*",
     "esbuild": "0.27.7",
     "react": "19.2.8",

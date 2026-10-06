@@ -1,13 +1,23 @@
-import { parsePreparedWorldCameraFrame } from '../world/world-frame.js';
+import { parsePreparedWorldCameraFrame, type PreparedWorldCameraFrame } from '../world/world-frame.js';
 import { finite, positive, record, text } from '../world/world-guards.js';
-import type { PreparedContextCameraPresentation, PreparedWorldContext } from '../world/world-context.js';
+import type { LevelOfDetailPlan, OrbitLineFade } from '../presentation/world-presentation.js';
 
 // What a mounted body reads from the world, kept apart from the world context's parser so a body's first mount does
 // not load the whole world module.
 
 /** The shared frame, the focus body's identity and the camera (`cssearth-world-camera@1`). Each page embeds it, so a
  * body mounts before the world summary has downloaded. */
-export interface PreparedWorldCamera { readonly frame: PreparedWorldContext['frame']; readonly focusId: string; readonly camera: PreparedWorldContext['camera']; }
+export interface PreparedWorldCamera { readonly frame: PreparedWorldCameraFrame; readonly focusId: string; readonly camera: PreparedWorldCameraLimits; }
+/** The world camera's distance interval and how it presents the world: the `camera` of a world context and of its record. */
+export interface PreparedWorldCameraLimits { readonly minimumDistanceM: number; readonly maximumDistanceM: number; readonly framingReferenceZoom: number;
+  readonly presentation: PreparedContextCameraPresentation }
+export interface PreparedContextCameraPresentation {
+  readonly projection: { readonly model: 'css-perspective-shared-with-sky'; readonly cssPerspective: string };
+  readonly dolly: { readonly model: 'multiplicative-wheel-distance'; readonly wheelStepPerDelta: number; readonly minimumDistanceRadii: number; readonly maximumDistanceOverOrbitExtent: number };
+  readonly levelOfDetail: LevelOfDetailPlan;
+  readonly orbitLineFade: OrbitLineFade;
+  readonly drag: { readonly model: 'screen-axis-tumble' };
+}
 export const PREPARED_WORLD_CAMERA_SCHEMA = 'cssearth-world-camera@1';
 
 /** The world camera record of a prepared world context or its summary: the fields a page embeds, unvalidated. */

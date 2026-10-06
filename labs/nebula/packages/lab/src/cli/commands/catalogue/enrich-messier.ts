@@ -1,5 +1,6 @@
 /** Bounded metadata GETs and file HEADs only. Call after inventory acquisition has stopped. */
 import { readArchiveImage, safeArchiveUrl, type ArchiveImage } from '../../../features/catalogue/types.ts';
+import type { AskLinks, DataLinkAnswer } from '../../../adapters/sources/archive-tables.ts';
 import { isRecord as record } from '@cssearth/core';
 
 export interface MetadataLink {
@@ -27,60 +28,25 @@ function byteLength(value: unknown): number | null {
   const n = typeof value === 'number' ? value : typeof value === 'string' && /^\d+$/.test(value.trim()) ? Number(value) : NaN;
   return Number.isSafeInteger(n) && n > 0 ? n : null;
 }
-function decodeXml(value: string): string {
-  const decoded = value.replace(/&(#x[0-9a-f]+|#\d+|amp|lt|gt|quot|apos);/gi, (_, entity: string) => {
-    const named: Record<string, string> = { amp: '&', lt: '<', gt: '>', quot: '"', apos: "'" };
-    if (!entity.startsWith('#')) return named[entity.toLowerCase()]!;
-    const code = Number.parseInt(entity.slice(entity[1]?.toLowerCase() === 'x' ? 2 : 1), entity[1]?.toLowerCase() === 'x' ? 16 : 10);
-    if (!Number.isInteger(code) || code < 1 || code > 0x10ffff || (code >= 0xd800 && code <= 0xdfff)) throw new TypeError('Invalid XML character.');
-    return String.fromCodePoint(code);
-  });
-  if (/&(?:[a-z][\w.-]*|#\w+);/i.test(decoded)) throw new TypeError('Unsupported XML entity.');
-  return decoded.trim();
-}
-function attributes(source: string): Record<string, string> {
-  return Object.fromEntries([...source.matchAll(/([\w:.-]+)\s*=\s*(?:"([^"]*)"|'([^']*)')/g)]
-    .map(match => [match[1]!.toLowerCase(), decodeXml(match[2] ?? match[3] ?? '')]));
-}
-
-/** Only the standard, textual TABLEDATA representation is accepted; no entity resolution. */
-export function readDataLink(text: string, publishedId: string): MetadataLink[] {
-  if (Buffer.byteLength(text) > metadataLimit || /<!DOCTYPE|<!ENTITY/i.test(text) || !/<(?:\w+:)?VOTABLE\b/i.test(text)) {
-    throw new TypeError('Expected bounded VOTable DataLink metadata.');
-  }
-  for (const info of text.matchAll(/<(?:\w+:)?INFO\b([^>]*)>/gi)) {
-    const a = attributes(info[1]!);
-    if (a.name?.toUpperCase() === 'QUERY_STATUS' && ['ERROR', 'OVERFLOW'].includes(a.value?.toUpperCase() ?? '')) throw new Error('Incomplete DataLink response.');
-  }
+/** The usable links of one published dataset. PyVO read the VOTable (the lab's adapter); which links count is decided here. */
+export function readDataLink(answer: DataLinkAnswer, publishedId: string): MetadataLink[] {
+  if (answer.queryStatus !== 'OK') throw new Error('Incomplete DataLink response.');
+  const names = answer.fields.map(field => field.name.toLowerCase());
+  if (!['id', 'access_url', 'semantics', 'content_type'].every(name => names.includes(name))) throw new TypeError('No DataLink result table.');
+  if (new Set(names).size !== names.length) throw new TypeError('Duplicate DataLink columns.');
+  const lengthField = answer.fields[names.indexOf('content_length')];
+  if (lengthField && lengthField.unit?.toLowerCase() !== 'byte') throw new TypeError('DataLink length unit is not byte.');
   const links: MetadataLink[] = [];
-  let matchedTable = false;
-  for (const table of text.matchAll(/<(?:\w+:)?TABLE\b[^>]*>([\s\S]*?)<\/(?:\w+:)?TABLE\s*>/gi)) {
-    const body = table[1]!, fields = [...body.matchAll(/<(?:\w+:)?FIELD\b([^>]*)>/gi)].map(field => attributes(field[1]!));
-    const names = fields.map(field => field.name?.toLowerCase());
-    if (!['id', 'access_url', 'semantics', 'content_type'].every(name => names.includes(name))) continue;
-    if (new Set(names).size !== names.length) throw new TypeError('Duplicate DataLink columns.');
-    const lengthField = fields[names.indexOf('content_length')];
-    if (lengthField && lengthField.unit?.toLowerCase() !== 'byte') throw new TypeError('DataLink length unit is not byte.');
-    const data = /<(?:\w+:)?TABLEDATA\b[^>]*>([\s\S]*?)<\/(?:\w+:)?TABLEDATA\s*>/i.exec(body);
-    if (!data) throw new TypeError('DataLink must use textual TABLEDATA.');
-    matchedTable = true;
-    for (const row of data[1]!.matchAll(/<(?:\w+:)?TR\b[^>]*>([\s\S]*?)<\/(?:\w+:)?TR\s*>/gi)) {
-      const cells = [...row[1]!.matchAll(/<(?:\w+:)?TD\b[^>]*(?:\/>|>([\s\S]*?)<\/(?:\w+:)?TD\s*>)/gi)].map(cell => {
-        const value = (cell[1] ?? '').replace(/<!\[CDATA\[([\s\S]*?)\]\]>/g, (_, cdata: string) => cdata.replace(/&/g, '&amp;').replace(/</g, '&lt;'));
-        if (/<[^>]*>/.test(value)) throw new TypeError('Unexpected markup in DataLink cell.');
-        return decodeXml(value);
-      });
-      if (cells.length !== names.length) throw new TypeError('Malformed DataLink row.');
-      const get = (name: string) => cells[names.indexOf(name)] ?? '';
-      if (get('id') !== publishedId) continue;
-      if (get('semantics') === '#this' && get('error_message')) throw new Error(`DataLink science access: ${get('error_message').slice(0, 240)}`);
-      if (get('error_message') || ['0', 'false'].includes(get('link_authorized').toLowerCase())) continue;
-      const url = safeArchiveUrl(get('access_url'));
-      if (!url || get('service_def')) continue;
-      links.push({ id: publishedId, url, semantics: get('semantics'), contentType: get('content_type'), contentLength: byteLength(get('content_length')) });
-    }
+  for (const row of answer.rows) {
+    const cells = new Map(Object.entries(row).map(([name, value]) => [name.toLowerCase(), value]));
+    const get = (name: string) => { const value = cells.get(name); return value === null || value === undefined ? '' : String(value).trim(); };
+    if (get('id') !== publishedId) continue;
+    if (get('semantics') === '#this' && get('error_message')) throw new Error(`DataLink science access: ${get('error_message').slice(0, 240)}`);
+    if (get('error_message') || ['0', 'false'].includes(get('link_authorized').toLowerCase())) continue;
+    const url = safeArchiveUrl(get('access_url'));
+    if (!url || get('service_def')) continue;
+    links.push({ id: publishedId, url, semantics: get('semantics'), contentType: get('content_type'), contentLength: byteLength(cells.get('content_length')) });
   }
-  if (!matchedTable) throw new TypeError('No DataLink result table.');
   return links;
 }
 
@@ -157,7 +123,8 @@ async function mastPreview(image: ArchiveImage, signal: AbortSignal | undefined,
   } catch (error) { signal?.throwIfAborted(); return { ...base, status: 'error' as const, error: error instanceof Error ? error.message : String(error) }; }
 }
 
-export async function enrichImageMetadata(image: ArchiveImage, signal?: AbortSignal, fetcher: Fetcher = fetch): Promise<EnrichedArchiveImage> {
+/** `askLinks` reads a DataLink answer (the lab's PyVO adapter); `fetcher` makes the MAST preview request and the file HEADs. */
+export async function enrichImageMetadata(image: ArchiveImage, askLinks: AskLinks, signal?: AbortSignal, fetcher: Fetcher = fetch): Promise<EnrichedArchiveImage> {
   readArchiveImage(image); signal?.throwIfAborted();
   const result: EnrichedArchiveImage = { ...image, metadataOriginal: { publishedId: did(image), accessUrl: image.accessUrl,
     accessFormat: image.accessFormat, estimatedBytes: image.estimatedBytes, previewUrl: image.previewUrl }, metadataEvidence: [] };
@@ -165,10 +132,11 @@ export async function enrichImageMetadata(image: ArchiveImage, signal?: AbortSig
   if (image.accessUrl && /datalink/i.test(image.accessFormat ?? '')) {
     const url = secureProviderUrl(image.accessUrl), base = { stage: 'datalink' as const, requestUrl: url, retrievedAt: new Date().toISOString() };
     try {
-      const response = await metadataGet(url, signal, fetcher), links = readDataLink(response.text, did(image));
+      const response = await askLinks(url), links = readDataLink(response, did(image));
+      signal?.throwIfAborted();
       const science = links.filter(link => link.semantics === '#this' && fitsMime.test(link.contentType));
       const previews = links.filter(link => link.semantics === '#preview' && imageMime.test(link.contentType));
-      const { text: _text, ...receipt } = response;
+      const receipt = { resolvedUrl: response.resolvedUrl, httpStatus: response.httpStatus, responseBytes: response.responseBytes };
       result.metadataEvidence.push({ ...base, ...receipt, status: science.length === 1 ? 'resolved' : 'unavailable', links });
       // Multiple science files are a compound dataset. Never pick an arbitrary member.
       if (science.length === 1) { result.accessUrl = science[0]!.url; result.accessFormat = science[0]!.contentType;
