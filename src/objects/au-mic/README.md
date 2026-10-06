@@ -10,13 +10,13 @@ Its radius and temperature follow Mallorquín et al. 2024. It is also HD 197481,
 
 **Limb.** The disc is dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 3,540 K and log g 4.37 (u1 0.476, u2 0.311): a model, because no fit of this star's limb is used.
 
-**Brightness from TESS.** The Color + brightness and Brightness map datasets are made in this project from the star's light in TESS's full-frame images of sector 95 (July and August 2025), cut at the star's place by MAST's [TESScut](https://mast.stsci.edu/tesscut/) ([source record](../../sources/mast-tess-full-frame-images.json)). lightkurve measures the light, astropy its period, and starry (Luger et al. 2019) the map that reproduces it ([method](../../../docs/stellar-brightness-maps-from-tess.md)). The map's table is built by `packages/telescope-cli/src/archives/tess/reduce.mts` and restored from the source cache.
+**Brightness from TESS.** The Color + brightness and Brightness map datasets are made in this project from the star's light in the TESS full-frame images of sector 95 (July and August 2025), cut at the star's place by MAST's [TESScut](https://mast.stsci.edu/tesscut/) ([source record](../../sources/mast-tess-full-frame-images.json)). lightkurve measures the light, astropy its period, and starry (Luger et al. 2019) the map that reproduces it ([method](../../../docs/stellar-brightness-maps-from-tess.md)). The map's table is built by `packages/telescope-cli/src/archives/tess/reduce.mts` and restored from the source cache.
 
 ## Evidence
 
 Generated 2026-09-29 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts) from Gaia DR3, SIMBAD and the archives named above; each choice was read with the dataset's own reader.
 
-**Brightness from TESS.** In sector 95 the light swings by 8.5% with a period of 4.85 d, and each of the sector's two orbits alone shows the same period within 20%. The star's record holds 4.856 d from the catalogues. The map's light curve leaves a scatter of 0.53% about the light, whose own noise is 0.17%. Gaia DR3 lists 16 other stars within 63 arcseconds, giving 0.29% of the light in the star's pixels.
+**Brightness from TESS.** In TESS sector 95 the light swings by 8.5% with a period of 4.85 d, and each of the sector's two orbits alone shows the same period within 20%. The star's record holds 4.856 d from the catalogues. The map's light curve leaves a scatter of 0.53% about the light, whose own noise is 0.17%. Gaia DR3 lists 16 other stars within 63 arcseconds, giving 0.29% of the light in the star's pixels.
 
 ## Known problems
 

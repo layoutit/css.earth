@@ -1,0 +1,49 @@
+{
+  "id": "arxiv-2001-08214",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Reinhold & Hekker (2020): Stellar rotation periods from K2 Campaigns 0-18",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2001.08214"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/201936887"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/2001.08214",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/201936887",
+      "label": "Journal version"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/2001.08214",
+      "checkedOn": "2026-10-06",
+      "locator": "arXiv listing: title, authors, DOI, A&A 635, A43. Sects. 2 and 3 print how a light curve is prepared and the criteria a rotation period must meet."
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Reinhold & Hekker (2020)",
+      "scope": "citation",
+      "evidence": "https://arxiv.org/abs/2001.08214"
+    }
+  ],
+  "creators": [
+    "T. Reinhold",
+    "S. Hekker"
+  ],
+  "publicationDate": "2020"
+}

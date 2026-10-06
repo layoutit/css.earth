@@ -8,6 +8,16 @@ import { isDeepStrictEqual } from 'node:util';
 import { loadNativeSourcePoleSampler, prepareSurfaces } from './surfaces.ts';
 import { readRasterRecipe, prepareRasterAssets, surfaceCoordinateWidth } from './assets.ts';
 import { loadNativeObservationPoleSampler, parseObservationDataset } from '../objects/layers/observation/index.ts';
+import { strongerLimb } from './science.ts';
+
+describe('a borrowed limb plate drawn stronger', () => {
+  it('raises the light the plate lets through to the power of its strength, and keeps the plate black', () => {
+    // Four pixels: no darkening, half the light kept, a quarter kept, none kept.
+    const plate = { data: new Uint8Array([0, 0, 0, 0, 0, 0, 0, 128, 0, 0, 0, 191, 0, 0, 0, 255]), size: 2, lossless: true };
+    assert.deepEqual([...strongerLimb(plate, 1.5).data], [0, 0, 0, 0, 0, 0, 0, 165, 0, 0, 0, 223, 0, 0, 0, 255]);
+    assert.equal(strongerLimb(plate, 1), plate); assert.throws(() => strongerLimb(plate, 0), /over 0/);
+  });
+});
 
 describe('native source pole sampling', () => {
     it('stores constant opaque lossless surfaces as one exact texel while preserving their coordinate domain and polar alpha', async () => {

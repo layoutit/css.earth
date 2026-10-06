@@ -1,4 +1,5 @@
-/** `telescope new-object` for the brightness maps this repository makes from a star's light in the TESS full-frame images:
+/** `telescope new-object` for the brightness maps this repository makes from a star's light in a space telescope's pixels
+ * (a Kepler quarter, a K2 campaign, a TESS sector):
  * draft a spec from the stars already reduced, and the route (maps/route.mts) that writes each map as a dataset of the
  * star's page and bakes the star. brightness-maps.mts holds the records; `archives/tess/` reduces a star.
  *
@@ -12,7 +13,7 @@ import { receiptPath, ROTATION_SCHEMA } from '../../archives/tess/reduce.mts';
 import { readJson, type MapRoute, type RouteContext } from '../maps/route.mts';
 import type { SurfaceMapChoice } from '../maps/surface-maps.mts';
 import { MEASURED_PERIOD } from '../metadata/star-metadata.mts';
-import { BRIGHTNESS_GENERATOR, BRIGHTNESS_MAPS, brightnessChoice, brightnessSourceRecords, monthsOf, percent, reducedBrightness, TESS_ARCHIVE, type BrightnessSurfaceMap } from './brightness-maps.mts';
+import { BRIGHTNESS_GENERATOR, BRIGHTNESS_MAPS, brightnessChoice, brightnessSourceRecords, MISSIONS, monthsOf, percent, reducedBrightness, windowName, type BrightnessSurfaceMap, type LightMission } from './brightness-maps.mts';
 
 const reduce = (host: string) => `node ${BRIGHTNESS_GENERATOR} ${host}`;
 /** The light's swing as the star turns, percent of its mean, beside the measured period in the star's record. */
@@ -34,38 +35,46 @@ function beforeShape(record: Readonly<Record<string, unknown>>, fields: Readonly
   rest(); return out; }
 
 /** The star's measurements record with the period of its newest map, the light's swing and where both come from. */
-export function withMeasuredRotation(record: Readonly<Record<string, unknown>>, map: Pick<BrightnessSurfaceMap, 'periodDays' | 'sector' | 'amplitude' | 'lightPeriodDays'>): Record<string, unknown> {
-  return beforeShape(record, { [MEASURED_PERIOD.days]: map.periodDays, [MEASURED_PERIOD.source]: `Measured in this project from the star's light in the TESS full-frame images of sector ${map.sector} (${BRIGHTNESS_GENERATOR}): ${map.periodDays} d, the light swinging by ${percent(map.amplitude)}% as the star turns${map.lightPeriodDays === undefined ? '' : ` (the light repeats every ${map.lightPeriodDays} d, half the catalogued rotation period, and the star is taken to turn once in two of them)`}`,
+type Measured = Pick<BrightnessSurfaceMap, 'periodDays' | 'mission' | 'window' | 'amplitude' | 'lightPeriodDays' | 'method'>;
+/** "5, 16 and 18". */
+const listed = (items: readonly (string | number)[]) => items.join(', ').replace(/, ([^,]*)$/u, ' and $1');
+/** A campaign's own period by its method: the mean of the three methods' periods. */
+const ownDays = (map: Pick<BrightnessSurfaceMap, 'method'>) => Number((map.method!.periodsDays.reduce((sum, days) => sum + days, 0) / 3).toFixed(2));
+/** `all` is every map of the star, when it has several: a star observed in several campaigns has one period, the mean of theirs. */
+export function withMeasuredRotation(record: Readonly<Record<string, unknown>>, map: Measured, all: readonly Measured[] = [map]): Record<string, unknown> { const several = map.method !== undefined && all.length > 1, from = MISSIONS[map.mission];
+  return beforeShape(record, { [MEASURED_PERIOD.days]: map.periodDays, [MEASURED_PERIOD.source]: `Measured in this project from ${several ? `the ${from.name} mission's own light curves of ${from.window}s ${listed(all.map(one => one.window))}` : `${map.method ? `the ${from.name} mission's own light curve` : `the star's light in the ${from.name} ${from.pixels}`} of ${from.window} ${map.window}`} (${BRIGHTNESS_GENERATOR})${map.method ? `, by the method and criteria of ${map.method.citation}` : ''}: ${map.periodDays} d${several ? `, the mean of the ${from.window}s' ${listed(all.map(ownDays))} d` : ''}, the light swinging by ${percent(map.amplitude)}% as the star turns${map.lightPeriodDays === undefined ? '' : ` (the light repeats every ${map.lightPeriodDays} d, half the catalogued rotation period, and the star is taken to turn once in two of them)`}`,
     [LIGHT_SWING]: Number((100 * map.amplitude).toFixed(2)) });
 }
 
-/** What the reduction found in a star's TESS light, for every star it looked at and not only those with a map: the verdict in
- * the reduction's own sentence, the sector read, and the scatter of the light over it. A star not read says why. */
-export const TESS_LIGHT = { verdict: 'tessLight', sector: 'tessLightSector', scatter: 'tessLightScatterPercent', source: 'tessLightSource' } as const;
-export function withTessLight(record: Readonly<Record<string, unknown>>, receipt: unknown, curve?: unknown): Record<string, unknown> {
-  const reduced = requireRecord(receipt, 'receipt'), rotation = requireRecord(reduced.rotation, 'receipt rotation'), tried = Array.isArray(reduced.tried) ? reduced.tried.filter(isRecord).at(-1) : undefined, sector = typeof tried?.sector === 'number' ? tried.sector : undefined;
+/** What the reduction found in a star's light, for every star it looked at and not only those with a map: the verdict in
+ * the reduction's own sentence, the mission and window read, and the scatter of the light over it. A star not read says why. */
+export const PIXEL_LIGHT = { verdict: 'pixelLight', mission: 'pixelLightMission', window: 'pixelLightWindow', scatter: 'pixelLightScatterPercent', source: 'pixelLightSource' } as const;
+export function withPixelLight(record: Readonly<Record<string, unknown>>, receipt: unknown, curve?: unknown): Record<string, unknown> {
+  const reduced = requireRecord(receipt, 'receipt'), rotation = requireRecord(reduced.rotation, 'receipt rotation'), tried = Array.isArray(reduced.tried) ? reduced.tried.filter(isRecord).at(-1) : undefined;
+  // A receipt from before K2 was read names a TESS sector alone.
+  const window = typeof tried?.window === 'number' ? tried.window : typeof tried?.sector === 'number' ? tried.sector : undefined, mission: LightMission = tried?.mission === 'K2' ? 'K2' : 'TESS', from = MISSIONS[mission];
   const verdict = rotation.detected === true ? `The star's rotation is seen: ${String(rotation.periodDays)} d, the light swinging by ${percent(Number(rotation.amplitude))}%.` : typeof rotation.reason === 'string' ? rotation.reason : 'No rotation is seen.';
   const flux = isRecord(curve) && Array.isArray(curve.flux) ? curve.flux.filter((value): value is number => typeof value === 'number') : [], mean = flux.reduce((sum, value) => sum + value, 0) / (flux.length || 1);
   const scatter = flux.length > 1 && mean > 0 ? Number((100 * Math.sqrt(flux.reduce((sum, value) => sum + (value - mean) ** 2, 0) / flux.length) / mean).toFixed(2)) : undefined;
-  const fields: Record<string, unknown> = { [TESS_LIGHT.verdict]: verdict, ...(sector === undefined ? {} : { [TESS_LIGHT.sector]: sector }), ...(scatter === undefined ? {} : { [TESS_LIGHT.scatter]: scatter }),
-    [TESS_LIGHT.source]: sector === undefined ? `Looked at in this project before any pixel was fetched (${BRIGHTNESS_GENERATOR}); the star's TESS pixels were not read` : `Read in this project from the TESS full-frame images of sector ${sector} (${BRIGHTNESS_GENERATOR})${scatter === undefined ? '' : '; the scatter is the standard deviation of the light in 30-minute bins over the sector, as a share of its mean'}` };
-  // A field of an earlier look that this one does not have (a sector, a scatter) goes; the others keep their place.
-  return beforeShape(Object.fromEntries(Object.entries(record).filter(([key]) => !(Object.values(TESS_LIGHT) as readonly string[]).includes(key) || key in fields)), fields);
+  const fields: Record<string, unknown> = { [PIXEL_LIGHT.verdict]: verdict, ...(window === undefined ? {} : { [PIXEL_LIGHT.mission]: mission, [PIXEL_LIGHT.window]: window }), ...(scatter === undefined ? {} : { [PIXEL_LIGHT.scatter]: scatter }),
+    [PIXEL_LIGHT.source]: window === undefined ? `Looked at in this project before any pixel was fetched (${BRIGHTNESS_GENERATOR}); the star's pixels were not read` : `Read in this project from the ${from.name} ${from.pixels} of ${from.window} ${window} (${BRIGHTNESS_GENERATOR})${scatter === undefined ? '' : `; the scatter is the standard deviation of the light ${mission === 'TESS' ? 'in 30-minute bins ' : ''}over the ${from.window}, as a share of its mean`}` };
+  // A field of an earlier look that this one does not have (a window, a scatter) goes; the others keep their place.
+  return beforeShape(Object.fromEntries(Object.entries(record).filter(([key]) => !(Object.values(PIXEL_LIGHT) as readonly string[]).includes(key) || key in fields)), fields);
 }
 
-/** `--tess-light --all | STAR_ID...`: each star the reduction has looked at gains what it found, in its measurements record. */
-export async function writeTessLight(root: string, ids: readonly string[] | 'all', report: (line: string) => void): Promise<number> {
+/** `--pixel-light --all | STAR_ID...`: each star the reduction has looked at gains what it found, in its measurements record. */
+export async function writePixelLight(root: string, ids: readonly string[] | 'all', report: (line: string) => void): Promise<number> {
   const hosts = ids === 'all' ? (await readdir(resolve(root, 'output/tess'), { withFileTypes: true }).catch(() => [])).filter(entry => entry.isDirectory()).map(entry => entry.name).sort() : ids; let written = 0;
   for (const host of hosts) { const receipt: unknown = await readFile(receiptPath(host), 'utf8').then(text => JSON.parse(text) as unknown, () => undefined), path = resolve(root, 'src/objects', host, 'source/measurements.json');
     const record: unknown = await readFile(path, 'utf8').then(text => JSON.parse(text) as unknown, () => undefined);
     if (!isRecord(receipt) || receipt.schema !== ROTATION_SCHEMA || !isRecord(record)) { if (ids !== 'all') report(`  ${host}: not written: ${isRecord(record) ? `not reduced (${reduce(host)})` : 'no measurements record'}`); continue; }
     const last = Array.isArray(receipt.tried) ? receipt.tried.filter(isRecord).at(-1) : undefined, curve: unknown = typeof last?.lightCurve === 'string' ? await readFile(resolve(root, 'output/tess', host, last.lightCurve), 'utf8').then(text => JSON.parse(text) as unknown, () => undefined) : undefined;
-    const next = `${JSON.stringify(withTessLight(record, receipt, curve), null, 2)}\n`; if (next !== await readFile(path, 'utf8')) { await writeFile(path, next); written += 1; } }
+    const next = `${JSON.stringify(withPixelLight(record, receipt, curve), null, 2)}\n`; if (next !== await readFile(path, 'utf8')) { await writeFile(path, next); written += 1; } }
   report(`${written} record(s) changed of ${hosts.length} star(s) looked at.`); return written;
 }
 
-/** The lead every paragraph this route writes into a star's README begins with: a later run finds and replaces them by it. */
-const README_LEAD = '**Brightness from TESS.**';
+/** The lead every paragraph this route writes into a star's README begins with, by mission: a later run finds and replaces them by it. */
+const leadOf = (mission: LightMission) => `**Brightness from ${MISSIONS[mission].name}.**`, README_LEADS = (Object.keys(MISSIONS) as LightMission[]).map(leadOf);
 const NOTE = '../../../docs/stellar-brightness-maps-from-tess.md';
 /** A README with `text` as the last paragraph of `section`, before the next section or the links that close the file. A README without the section is left as it is. */
 function atEndOf(readme: string, section: string, text: string): string {
@@ -75,24 +84,26 @@ function atEndOf(readme: string, section: string, text: string): string {
 }
 /** The star's README with what its brightness datasets are made from, what was measured and what is not known, in the
  * sections it already has. Written again, the paragraphs are replaced, not added. */
-export function withBrightnessReadme(readme: string, map: BrightnessSurfaceMap, cataloguedDays?: number): string {
-  const kept = readme.split('\n\n').filter(paragraph => !paragraph.trimStart().replace(/^- /u, '').startsWith(README_LEAD)).join('\n\n'), when = monthsOf(map.fromUtc, map.toUtc);
+export function withBrightnessReadme(readme: string, map: BrightnessSurfaceMap, cataloguedDays?: number, all: readonly BrightnessSurfaceMap[] = [map]): string {
+  const kept = readme.split('\n\n').filter(paragraph => !README_LEADS.some(lead => paragraph.trimStart().replace(/^- /u, '').startsWith(lead))).join('\n\n'), when = monthsOf(map.fromUtc, map.toUtc), from = MISSIONS[map.mission], README_LEAD = leadOf(map.mission);
+  const several = map.method !== undefined && all.length > 1, three = (one: BrightnessSurfaceMap) => listed(one.method!.periodsDays.map(days => days.toFixed(2)));
+  const pieces = 'each of the sector\'s two orbits', served = `cut at the star's place by MAST's [TESScut](${from.archive})`;
   const beside = cataloguedDays === undefined ? 'The star\'s record holds no catalogued rotation period to set it beside.' : map.lightPeriodDays !== undefined ? `The light repeats every ${map.lightPeriodDays} d, half the ${cataloguedDays} d the star's record holds from the catalogues, so the star is taken to turn once in two of them.` : `The star's record holds ${cataloguedDays} d from the catalogues.`;
-  const others = map.neighbours === 0 ? 'Gaia DR3 lists no other star within 63 arcseconds.' : `Gaia DR3 lists ${map.neighbours} other ${map.neighbours === 1 ? 'star' : 'stars'} within 63 arcseconds, giving ${map.neighbourShare < 0.001 ? 'under 0.1' : percent(map.neighbourShare)}% of the light in the star's pixels.`;
+  const others = map.neighbours === undefined || map.neighbourShare === undefined ? '' : map.neighbours === 0 ? ` Gaia DR3 lists no other star within ${from.radiusArcsec} arcseconds.` : ` Gaia DR3 lists ${map.neighbours} other ${map.neighbours === 1 ? 'star' : 'stars'} within ${from.radiusArcsec} arcseconds, ${map.method ? `with ${map.neighbourShare < 0.001 ? 'under 0.1' : percent(map.neighbourShare)}% of their light and the star's together` : `giving ${map.neighbourShare < 0.001 ? 'under 0.1' : percent(map.neighbourShare)}% of the light in the star's pixels`}.`;
   const tilt = map.tiltFrom === 'assumed' ? `No tilt of the axis is known, so the map is made at ${map.inclinationDegrees}°, the middle tilt of axes that point at random.` : map.tiltFrom === 'record' ? `The map is made at a tilt of ${map.inclinationDegrees}°, worked out from the star's rotation speed, period and radius; the page draws the axis by convention.` : `The map is made at the tilt the page draws, ${map.inclinationDegrees}°.`;
   const paragraphs: readonly (readonly [string, string])[] = [
-    ['Sources', `${README_LEAD} The Color + brightness and Brightness map datasets are made in this project from the star's light in TESS's full-frame images of sector ${map.sector} (${when}), cut at the star's place by MAST's [TESScut](${TESS_ARCHIVE.pixels}) ([source record](../../sources/mast-tess-full-frame-images.json)). lightkurve measures the light, astropy its period, and starry (Luger et al. 2019) the map that reproduces it ([method](${NOTE})). The map's table is built by \`${BRIGHTNESS_GENERATOR}\` and restored from the source cache.`],
-    ['Evidence', `${README_LEAD} In sector ${map.sector} the light swings by ${percent(map.amplitude)}% with a period of ${map.periodDays} d, and each of the sector's two orbits alone shows the same period within 20%. ${beside} The map's light curve leaves a scatter of ${percent(map.residual)}% about the light, whose own noise is ${percent(map.noise)}%. ${others}`],
+    ['Sources', `${README_LEAD} The Color + brightness and Brightness map datasets are made in this project from ${map.method ? `the ${from.name} mission's own ${several ? `light curves of ${from.window}s ${listed(all.map(one => one.window))} (the newest of ${when}; their` : `light curve of ${from.window} ${map.window} (${when}; its`} PDC-MAP flux, kept at [MAST](${from.archive}))` : `the star's light in the ${from.name} ${from.pixels} of ${from.window} ${map.window} (${when}), ${served}`} ([source record](../../sources/${from.record}.json)). ${map.method ? `${several ? 'They are the light curves' : 'It is the light curve'} [${map.method.citation}](${map.method.url}) use, and their criteria decide whether ${several ? 'each' : 'it'} shows the star turning: astropy and star-privateer compute their three periods,` : 'lightkurve measures the light, astropy its period,'} and starry (Luger et al. 2019) ${map.method ? 'makes ' : ''}the map that reproduces ${several ? 'each' : 'it'} ([method](${NOTE})). The map's table is built by \`${BRIGHTNESS_GENERATOR}\` and restored from the source cache.`],
+    ['Evidence', `${README_LEAD} ${several ? `K2 observed the star in ${from.window}s ${listed(all.map(one => one.window))}, and the light of each meets what ${map.method!.citation} ask of a rotation (the three methods' periods within a day of each other under 10 days, two days to 20 and five beyond; a periodogram peak over 0.3): ${all.map(one => `${from.window} ${one.window} gives ${three(one)} d with a peak of ${one.method!.peakHeight.toFixed(2)}`).join('; ')}. The star's period is the mean of the ${from.window}s' ${listed(all.map(ownDays))} d: ${map.lightPeriodDays ?? map.periodDays} d, as the paper takes it for a star observed more than once. The light varies by ${percent(map.amplitude)}% (the range between its 5th and 95th percentiles, the mean of the ${from.window}s'). ${map.method!.reliability}` : map.method ? `In ${windowName(map.mission, map.window)} the light varies by ${percent(map.amplitude)}% (the range between its 5th and 95th percentiles). The periodogram, the wavelet and the autocorrelation give ${map.method.periodsDays.map(days => days.toFixed(2)).join(', ').replace(/, ([^,]*)$/u, ' and $1')} d, and the periodogram's peak has a height of ${map.method.peakHeight.toFixed(2)}: within what ${map.method.citation} ask of a rotation (the three within ${map.method.periodsDays[0] < 10 ? 'a day' : map.method.periodsDays[0] < 20 ? 'two days' : 'five days'} of each other, a peak over 0.3). The period is their mean, ${map.lightPeriodDays ?? map.periodDays} d. ${map.method.reliability}` : `In ${windowName(map.mission, map.window)} the light swings by ${percent(map.amplitude)}% with a period of ${map.periodDays} d, and ${pieces} alone shows the same period within 20%.`} ${beside} The map's light curve leaves a scatter of ${percent(map.residual)}% about the light, whose own noise is ${percent(map.noise)}%.${others}`],
     ['Known problems', `- ${README_LEAD} Which longitudes are darker, and by how much, is measured. The latitude and shape of each patch are the smoothest that reproduce the light, and no color change of the spots is drawn. Color + brightness draws the contrast far stronger than it is, on the Brightness map's scale, so it can be seen; Brightness map has the measured values. ${tilt} The map is of ${when}: spots come and go within weeks or months.`]];
   return paragraphs.reduce((text, [section, paragraph]) => atEndOf(text, section, paragraph), kept);
 }
 
 async function starRecords(root: string, host: string, maps: readonly BrightnessSurfaceMap[]): Promise<Map<string, string>> {
-  const path = `src/objects/${host}/source/measurements.json`, record = await readFile(resolve(root, path), 'utf8').then(text => JSON.parse(text) as unknown, () => undefined), newest = [...maps].sort((a, b) => a.sector - b.sector).at(-1), out = new Map<string, string>();
+  const path = `src/objects/${host}/source/measurements.json`, record = await readFile(resolve(root, path), 'utf8').then(text => JSON.parse(text) as unknown, () => undefined), ordered = [...maps].sort((a, b) => a.toUtc.localeCompare(b.toUtc)), newest = ordered.at(-1), out = new Map<string, string>();
   if (!newest) return out;
-  if (isRecord(record)) out.set(path, `${JSON.stringify(withMeasuredRotation(record, newest), null, 2)}\n`);
+  if (isRecord(record)) out.set(path, `${JSON.stringify(withMeasuredRotation(record, newest, ordered), null, 2)}\n`);
   const readmePath = `src/objects/${host}/README.md`, readme = await readFile(resolve(root, readmePath), 'utf8').catch(() => undefined), catalogued = isRecord(record) && typeof record.rotationPeriodDays === 'number' && !String(record.rotationPeriodSource ?? '').includes(BRIGHTNESS_GENERATOR) ? record.rotationPeriodDays : undefined;
-  if (readme !== undefined) out.set(readmePath, withBrightnessReadme(readme, newest, catalogued));
+  if (readme !== undefined) out.set(readmePath, withBrightnessReadme(readme, newest, catalogued, ordered));
   return out;
 }
 
@@ -105,12 +116,14 @@ export async function draftsFromReducedPixels(names: readonly string[], context:
   const brightnessMaps: unknown[] = [], report: string[] = []; let unseen = 0;
   for (const host of hosts) { const receipt: unknown = await readFile(receiptPath(host), 'utf8').then(text => JSON.parse(text) as unknown, () => undefined);
     if (!isRecord(receipt) || receipt.schema !== ROTATION_SCHEMA) { if (!all) report.push(`  ${host}: not drafted: not reduced (${reduce(host)})`); continue; }
-    if (!isRecord(receipt.map) || typeof receipt.map.sector !== 'number') { unseen += 1; if (!all) report.push(`  ${host}: not drafted: ${isRecord(receipt.rotation) && typeof receipt.rotation.reason === 'string' ? receipt.rotation.reason : 'its rotation is not seen'}`); continue; }
+    // A receipt holds one map for each window accepted; one from before K2 was read holds a single map.
+    const maps = (Array.isArray(receipt.maps) ? receipt.maps : isRecord(receipt.map) ? [receipt.map] : []).filter(isRecord).flatMap(map => { const window = map.window ?? map.sector; return typeof window === 'number' ? [brightnessChoice(host, map.mission === 'K2' ? 'K2' : 'TESS', window)] : []; });
+    if (!maps.length) { unseen += 1; if (!all) report.push(`  ${host}: not drafted: ${isRecord(receipt.rotation) && typeof receipt.rotation.reason === 'string' ? receipt.rotation.reason : 'its rotation is not seen'}`); continue; }
     // A star reduced before its record held SIMBAD's type, and now known to change its light for another reason, is left out too.
     const record: unknown = await readFile(resolve(context.root, 'src/objects', host, 'source/measurements.json'), 'utf8').then(text => JSON.parse(text) as unknown, () => undefined);
     const other = isRecord(record) ? notTurning(typeof record.objectType === 'string' ? record.objectType : undefined, typeof record.objectTypePath === 'string' ? record.objectTypePath : undefined) : undefined;
     if (other) { unseen += 1; report.push(`  ${host}: not drafted: ${other}`); continue; }
-    const choice = brightnessChoice(host, receipt.map.sector); brightnessMaps.push({ host, maps: [choice] }); if (!all) report.push(`  ${host}: ${choice.label} (${choice.program})`); }
+    brightnessMaps.push({ host, maps }); if (!all) report.push(`  ${host}: ${maps.map(choice => `${choice.label} (${choice.program})`).join(', ')}`); }
   if (all) report.push(`  ${brightnessMaps.length} stars with a map; ${unseen} reduced stars whose rotation is not seen.`);
   return { stars: [], brightnessMaps, report };
 }

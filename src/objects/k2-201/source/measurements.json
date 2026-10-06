@@ -22,6 +22,9 @@
   "ageSource": "Gaia DR3 FLAME (Creevey et al. 2023, A&A 674, A26), astrophysical_parameters of Gaia DR3 6771370981322320128, flags_flame 00: age_flame 7.650994 Gyr (16th to 84th percentiles 5.9749346 to 9.414713)",
   "projectedRotationSpeedKmS": 2.6,
   "projectedRotationSpeedSource": "SIMBAD, K2-201: projected rotation speed 2.6 km/s, the measurement SIMBAD prefers (2025A&A...697A.102T)",
+  "rotationPeriodMeasuredDays": 13.08,
+  "rotationPeriodMeasuredSource": "Measured in this project from the K2 mission's own light curve of campaign 7 (packages/telescope-cli/src/archives/tess/reduce.mts), by the method and criteria of Reinhold & Hekker (2020, A&A 635, A43): 13.08 d, the light swinging by 2.0% as the star turns",
+  "rotationLightSwingPercent": 2,
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

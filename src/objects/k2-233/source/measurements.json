@@ -26,6 +26,9 @@
   "rotationPeriodSource": "NASA Exoplanet Archive, composite parameters of K2-233 (pscomppars): rotation period 9.754 d, from Barragán et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023MNRAS.522.3458B/abstract)",
   "projectedRotationSpeedKmS": 4.5,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of K2-233 (pscomppars): projected rotation speed 4.5 km/s, from Barragán et al. 2023 (https://ui.adsabs.harvard.edu/abs/2023MNRAS.522.3458B/abstract)",
+  "rotationPeriodMeasuredDays": 9.61,
+  "rotationPeriodMeasuredSource": "Measured in this project from the K2 mission's own light curve of campaign 15 (packages/telescope-cli/src/archives/tess/reduce.mts), by the method and criteria of Reinhold & Hekker (2020, A&A 635, A43): 9.61 d, the light swinging by 1.4% as the star turns",
+  "rotationLightSwingPercent": 1.45,
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from a blackbody at the star's published temperature (photometry/stellar-color.json); no image of the photosphere exists."

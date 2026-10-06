@@ -4,7 +4,7 @@ import { resolve } from 'node:path';
 import { completeEnhancedCoverage, completeEnhancedPolarTile, polarTile, createPolarSprite, packLatitudeRaster, applySurfaceExposure } from '../baking/index.ts';
 import { CANONICAL_PREPARED_IMAGE_DENSITY as RASTER_DENSITY, type RasterRecipe } from '@cssearth/objects';
 import { raster, readRgba, assetPath } from './io.ts';
-import { applyUnderlay, withAlpha, type ObservationInterpretation, type InterpretedPlate } from './science.ts';
+import { applyUnderlay, strongerLimb, withAlpha, type ObservationInterpretation, type InterpretedPlate } from './science.ts';
 import { composeLimbPreview } from './emission-preview.ts';
 import { encodeLossyWebp, writeLossyWebp } from './lossy-lane.ts';
 import { missingCoverageColor } from './missing-coverage.ts';
@@ -130,8 +130,11 @@ export async function prepareSurfaces(config: RasterRecipe, sourceDirectory: str
                 // A surface may be dimmed toward the limb as another surface of the body is (a star's brightness map as its color):
                 // `science.limbOf` names that surface, prepared before this one, and its plate is written for this one too.
                 const limbOf = typeof surface.science.limbOf === 'string' ? surface.science.limbOf : undefined;
-                const limb = limbOf === undefined ? plates.limb : limbPlates.get(limbOf);
-                if (!limb) throw new TypeError(`Surface ${surface.id}: limbOf names ${limbOf}, which is not prepared before it with a limb plate.`);
+                const borrowed = limbOf === undefined ? plates.limb : limbPlates.get(limbOf);
+                if (!borrowed) throw new TypeError(`Surface ${surface.id}: limbOf names ${limbOf}, which is not prepared before it with a limb plate.`);
+                // A borrowed plate may be drawn stronger (`science.limbStrength`): the light it lets through, raised to that
+                // power. The plate stays black; only how much it darkens changes.
+                const limb = strongerLimb(borrowed, limbOf !== undefined && typeof surface.science.limbStrength === 'number' ? surface.science.limbStrength : 1);
                 limbPlates.set(surface.id, limb);
                 if (surface.thumbnailFromLimbPlate) thumbnailLimb = limb;
                 // A lossless plate keeps its values; a lossy one is encoded in the lossy lane (lossy-lane.ts).

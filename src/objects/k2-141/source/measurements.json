@@ -32,6 +32,9 @@
   ],
   "projectedRotationSpeedKmS": 3,
   "projectedRotationSpeedSource": "NASA Exoplanet Archive, composite parameters of K2-141 (pscomppars): projected rotation speed 3 km/s, from Barragán et al. 2018 (https://ui.adsabs.harvard.edu/abs/2018A&A...612A..95B/abstract)",
+  "rotationPeriodMeasuredDays": 14.02,
+  "rotationPeriodMeasuredSource": "Measured in this project from the K2 mission's own light curve of campaign 12 (packages/telescope-cli/src/archives/tess/reduce.mts), by the method and criteria of Reinhold & Hekker (2020, A&A 635, A43): 14.02 d, the light swinging by 1.1% as the star turns (the light repeats every 7.01 d, half the catalogued rotation period, and the star is taken to turn once in two of them)",
+  "rotationLightSwingPercent": 1.09,
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."

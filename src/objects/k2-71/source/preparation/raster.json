@@ -47,6 +47,81 @@
         },
         "qualification": "Photosphere color from a blackbody at the star's published temperature, dimmed toward the limb by the quadratic law Claret & Bloemen (2011), A&A 529, A75 compute from ATLAS model atmospheres for the Johnson V band at 4,006 K and log g 4.86 (u1 0.471, u2 0.277): a model, because no fit of this star's limb is used. The disc is unresolved: no map or absolute brightness is implied. Self-luminous, so no lighting."
       }
+    },
+    {
+      "id": "brightness-campaign-3",
+      "output": "k2-71-surface-{id}{suffix}.webp",
+      "thumbnail": "k2-71-dataset-{id}.webp",
+      "source": "science/k2/pdcsap/k2-71-c03.dat",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "brightness-campaign-3",
+        "label": "Campaign 3",
+        "format": "tecplot-lonlat-map",
+        "path": "science/k2/pdcsap/k2-71-c03.dat",
+        "variable": "Brightness [%]",
+        "consumer": "k2-starry",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "%",
+        "minimum": 99,
+        "maximum": 101,
+        "colors": [
+          "#1a1a1a",
+          "#5c5c5c",
+          "#9c9c9c",
+          "#d6d6d6",
+          "#ffffff"
+        ],
+        "labels": [
+          "99%",
+          "100%",
+          "101%"
+        ],
+        "description": "Brightness of the star's surface that reproduces its light as it turns once in 21.8 days, fitted with starry to the K2 mission's own light curve of campaign 3 (its PDC-MAP flux) (the light varies by 0.85%; the map's curve leaves a scatter of 0.17%, the light's own noise being 0.13%). A light curve fixes how bright each longitude is, not the latitude of what darkens it. The period is the mean of three methods' periods (periodogram 22.23 d, wavelet 21.53 d, autocorrelation 21.63 d; periodogram peak 0.61), accepted by the criteria of Reinhold & Hekker (2020, A&A 635, A43). No tilt of this star's axis is known: the map is made at 60°, the middle tilt of axes that point at random. Gaia DR3 lists no other star within 16 arcseconds of it. A reduction made in this project, not a published map.",
+        "title": "K2 · brightness map made here · Campaign 3",
+        "sourceUrl": "https://archive.stsci.edu/missions-and-data/k2"
+      }
+    },
+    {
+      "id": "color-brightness",
+      "output": "k2-71-surface-{id}{suffix}.webp",
+      "thumbnail": "k2-71-dataset-{id}.webp",
+      "source": "science/k2/pdcsap/k2-71-c03.dat",
+      "falseColor": false,
+      "science": {
+        "kind": "terrestrial-scientific",
+        "id": "color-brightness",
+        "label": "Color + brightness",
+        "format": "tecplot-lonlat-map",
+        "path": "science/k2/pdcsap/k2-71-c03.dat",
+        "variable": "Brightness [%]",
+        "consumer": "k2-starry",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "%",
+        "minimum": 99,
+        "maximum": 101,
+        "colors": [
+          "#895404",
+          "#a6742c",
+          "#c49354",
+          "#e1b37d",
+          "#ffd3a5"
+        ],
+        "labels": [
+          "99%",
+          "101%"
+        ],
+        "limbOf": "color",
+        "limbStrength": 1.5,
+        "description": "The star's color (#ffd3a5, its Color dataset) over the brightness map this project made from the star's light in K2 campaign 3 (November 2014 to January 2015): the map's scale, 99% to 101% of the mean surface, runs from a darker, richer tone of the same hue to the color itself. The contrast is drawn far stronger than it is, so the parts can be told apart: the darkest part gives 1.9% less light than the brightest. Longitudes are fixed by the light curve; latitudes and shapes are not. No color change of the spots is drawn: none is measured. A reduction made in this project, not a published map.",
+        "title": "K2 · the star in its color over its brightness map · November 2014 to January 2015",
+        "sourceUrl": "https://archive.stsci.edu/missions-and-data/k2"
+      }
     }
   ],
   "emission": {

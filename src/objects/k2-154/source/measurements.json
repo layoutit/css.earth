@@ -20,6 +20,9 @@
   "metallicitySource": "NASA Exoplanet Archive, composite parameters of K2-154 (pscomppars): [Fe/H] 0.21 dex, from Livingston et al. 2018 (https://ui.adsabs.harvard.edu/abs/2018AJ....156...78L/abstract)",
   "luminosityLogSolar": -1.018,
   "luminositySource": "NASA Exoplanet Archive, composite parameters of K2-154 (pscomppars): log10 of the luminosity in solar units -1.01773, from Hirano et al. 2018 (https://ui.adsabs.harvard.edu/abs/2018AJ....155..127H/abstract)",
+  "rotationPeriodMeasuredDays": 12.86,
+  "rotationPeriodMeasuredSource": "Measured in this project from the K2 mission's own light curve of campaign 102 (packages/telescope-cli/src/archives/tess/reduce.mts), by the method and criteria of Reinhold & Hekker (2020, A&A 635, A43): 12.86 d, the light swinging by 0.68% as the star turns",
+  "rotationLightSwingPercent": 0.68,
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, colored from the star's Gaia DR3 BP/RP spectrum (photometry/stellar-color.json); no image of the photosphere exists."
