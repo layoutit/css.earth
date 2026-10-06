@@ -143,7 +143,20 @@ lightkurve reads the mission's file. The periodogram is astropy's; the wavelet a
 codes. Campaigns 10 and 11 were filed in two parts; the second is read, whose 48 days are the "50 to 70 days" the paper
 gives for those campaigns.
 
-@@RESULT@@
+Of our stars, 67 are in the paper's range and have a K2 light curve. What the method gave on them:
+
+| Outcome | Stars |
+| --- | --- |
+| A rotation accepted | 35 |
+| Accepted in two campaigns whose periods deviate by over 20%, so excluded | 2 |
+| Refused: the periodogram's peak is not over 0.3 | 24 |
+| Refused: the three methods' periods do not agree | 4 |
+| Refused: the period is not under half the time span | 1 |
+| The star's only campaign is one the paper does not analyse | 1 |
+
+Forty of the 67 have a rotation period in the catalogues. The method accepts 26 of them: 20 at the catalogue's period
+within 20%, 3 at half of it and 3 at another period. This is a comparison, not a setting: no number above was chosen
+from it.
 
 A period is then set beside the one the star's record holds from the catalogues: the same within 20% is kept; half of it
 means the star turns once in two of the light's periods (Reinhold, Reiners & Basri 2013 describe spots on opposite sides
@@ -153,7 +166,13 @@ A star's receipt names the method, the light curve's file and pipeline version, 
 the paper's sentence of refusal when there is one. Each accepted campaign becomes one Brightness map of the star, all at
 the star's one period.
 
-@@FIRST@@
+After that, 32 stars have maps, 37 maps in all: the three whose period is neither the catalogued one nor its half have
+none (K2-199, K2-275 and K2-277), and the three at half are drawn at twice the light's period (K2-3, K2-29 and K2-141).
+Nine of the 32 have no catalogued period, and the paper's method alone vouches for theirs.
+
+K2-136, a star of the Hyades, is one of them. In campaign 13 (March to May 2017) the three methods give 15.00, 14.63 and
+13.75 days, so 14.46, where the catalogues print 15, and the periodogram's peak has a height of 0.56. K2-102 was observed
+in three campaigns, which give 11.54, 11.70 and 11.25 days: its period is their mean, 11.5 days, and it has three maps.
 
 ![K2-136 in the app: Color + brightness above, Brightness map below](images/stellar-brightness-maps-k2.webp)
 
