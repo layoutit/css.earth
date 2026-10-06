@@ -6,9 +6,9 @@ body's source record. Reuse helpers from the [implementation map](implementation
 their algorithms are reusable, their body-specific parameters are not defaults.
 
 Paged ellipsoids declare a `limb` block: the published photometric models of
-the body's map (`limb.models`) and the image that gives the overlay its colour
+the body's map (`limb.models`) and the image that gives the overlay its color
 (`limb.reference`). The prepared Shadows-off overlay is that law relative to
-the flood-lit disc centre; a recipe sets no overlay colour or opacity. The
+the flood-lit disc centre; a recipe sets no overlay color or opacity. The
 asset preparer's `materials` mode rebuilds the overlay without rebuilding
 surface imagery.
 
