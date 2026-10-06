@@ -150,6 +150,19 @@ map, all at the period of the stitched light curve: 53 maps.
 AU Mic's sectors 1, 27 and 95 give 4.97, 4.89 and 5.00 days. Sector 27 is not valid, because its peaks' width is 0.38
 where the paper asks for more than 0.4, so it has no map. All three together give 4.84 days.
 
+### What here is not printed in a paper
+
+Five things around the two methods are this repository's, and a reader should know them as such:
+
+1. Holcomb et al.'s criteria are applied to sectors after their sample's 26.
+2. A star's temperature and surface gravity are read from its record here; Holcomb et al. read them from the TESS Input
+   Catalog v7.
+3. A star that SIMBAD files as a pulsating variable, an eclipsing or interacting pair is not read. Holcomb et al. write
+   that such stars give periodic signals that are not rotation, and had no catalogue to remove them with.
+4. A period shorter than an orbit at the star's surface, from its recorded radius and mass, is refused: no star turns
+   faster.
+5. A period is set beside the catalogued one as described above: kept within 20%, doubled at half, not drawn otherwise.
+
 ## What the map is and is not
 
 A light curve is one number at each moment: the star's whole disc added up. It fixes how bright each longitude is. It does
