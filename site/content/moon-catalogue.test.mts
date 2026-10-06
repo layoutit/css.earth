@@ -57,8 +57,8 @@ test('production children read the shared reader and never name preparation; pre
   const children = modulesNamedBy(new URL('../object-children.mts', import.meta.url));
   const reader = new URL('./moon-catalogue.mts', import.meta.url).pathname;
   assert.ok(children.includes(reader), 'Children use the shared reader');
-  assert.ok(!children.includes(new URL('../prepare-body-moons.mts', import.meta.url).pathname), 'Children never import preparation');
-  const preparation = modulesNamedBy(new URL('../prepare-body-moons.mts', import.meta.url));
+  assert.ok(!children.includes(new URL('../build/prepare/prepare-body-moons.mts', import.meta.url).pathname), 'Children never import preparation');
+  const preparation = modulesNamedBy(new URL('../build/prepare/prepare-body-moons.mts', import.meta.url));
   assert.ok(preparation.includes(reader), 'Preparation reads the shared catalogue');
   assert.ok(!preparation.some(module => module.endsWith('/moon-catalogues.json') || module === '@cssearth/objects/sources'), 'Preparation must not re-parse a separate catalogue');
 });

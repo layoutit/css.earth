@@ -5,7 +5,7 @@ import { SCENE_OBJECTS } from '../objects.mts';
 import { WORLD_OBJECTS } from '../world-objects.mts';
 import { SOLAR_SYSTEM_ID, allPlanetarySystems, planetarySystems, systemById, systemOfObject } from '../object-systems.mts';
 import { planetarySystemMembers } from '../model/planetary-system-members.mts';
-import { PREPARED_WORLD_PRESENTATION } from '../prepared-world-presentation.mts';
+import { PREPARED_WORLD_PRESENTATION } from '../world/prepared-world-presentation.mts';
 import { SYSTEM_CENTERS, SYSTEM_FRAMING_RADII, systemFramingRadii } from '../system-framing.mts';
 import { APPLICATION_WORLD_CONTEXT } from '../world-context-plan.mts';
 

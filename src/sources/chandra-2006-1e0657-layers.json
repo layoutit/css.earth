@@ -1,0 +1,67 @@
+{
+  "id": "chandra-2006-1e0657-layers",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "1E 0657-56: the 2006 composite in its layers",
+  "identifiers": [
+    {
+      "type": "Archive resource",
+      "value": "https://chandra.harvard.edu/photo/2006/1e0657/more.html"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://chandra.harvard.edu/photo/2006/1e0657/",
+      "label": "Published source"
+    },
+    {
+      "role": "original",
+      "url": "https://chandra.harvard.edu/photo/2006/1e0657/1e0657_opt.tif",
+      "label": "Visible light, TIFF, 3000 x 2168 px, 9.5 MB"
+    },
+    {
+      "role": "original",
+      "url": "https://chandra.harvard.edu/photo/2006/1e0657/1e0657_xray_opt.tif",
+      "label": "Visible light with the X-ray gas, TIFF, 3000 x 2168 px, 9.9 MB"
+    },
+    {
+      "role": "original",
+      "url": "https://chandra.harvard.edu/photo/2006/1e0657/1e0657_opt_lens.tif",
+      "label": "Visible light with the lensing mass map, TIFF, 3000 x 2168 px, 9.7 MB"
+    },
+    {
+      "role": "rights",
+      "url": "https://chandra.harvard.edu/photo/image_use.html",
+      "label": "Reuse terms"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://chandra.harvard.edu/photo/2006/1e0657/more.html",
+      "checkedOn": "2026-10-05",
+      "locator": "The page lists the composite in layers as JPEG and TIFF: visible light alone (1e0657_opt), X-ray with visible light (1e0657_xray_opt), visible light with the lensing map (1e0657_opt_lens), each 3000 x 2168 px, the frame of ESA/Hubble opo0639a. Measured on these files: the visible-light layer is the same in all three, and the layers were added by a screen (it fits 3 to 4 of 255 where adding fits 20 to 32)."
+    },
+    {
+      "url": "https://chandra.harvard.edu/photo/image_use.html",
+      "checkedOn": "2026-10-05",
+      "locator": "For Chandra content no claim to copyright is asserted and the material may be used in accordance with NASA guidelines; acknowledgement of NASA/SAO is requested. Material provided by other institutions may be theirs."
+    }
+  ],
+  "publisher": "Chandra X-ray Center",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "X-ray: NASA/CXC/CfA/M.Markevitch et al. Optical: NASA/STScI; Magellan/U.Arizona/D.Clowe et al. Lensing Map: NASA/STScI; ESO WFI; Magellan/U.Arizona/D.Clowe et al.",
+      "scope": "Published source",
+      "evidence": "https://chandra.harvard.edu/photo/2006/1e0657/"
+    },
+    {
+      "kind": "rights",
+      "text": "No claim to copyright is asserted for Chandra content; acknowledgement is requested. Material other institutions provided may be theirs.",
+      "scope": "Published source",
+      "evidence": "https://chandra.harvard.edu/photo/image_use.html"
+    }
+  ]
+}

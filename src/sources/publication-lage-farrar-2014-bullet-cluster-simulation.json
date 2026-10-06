@@ -1,0 +1,38 @@
+{
+  "id": "publication-lage-farrar-2014-bullet-cluster-simulation",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Constrained Simulation of the Bullet Cluster",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1312.0959"
+    },
+    {
+      "type": "doi",
+      "value": "10.1088/0004-637X/787/2/144"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/1312.0959",
+      "label": "Published reference"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/1312.0959",
+      "checkedOn": "2026-10-05",
+      "locator": "Sect. 4.3: in the simulation that best fits the lensing and X-ray maps, the relative velocity of the bullet cluster and the main cluster is inclined approximately 10 degrees to the plane of the sky, the bullet cluster's dark matter centroid receding at 837 km/s relative to the main cluster's. The fitted snapshot is not published; the authors' repository holds the code and the starting conditions."
+    }
+  ],
+  "creators": [
+    "Lage, C.",
+    "Farrar, G."
+  ],
+  "publisher": "ApJ 787, 144",
+  "publicationDate": "2014",
+  "relations": [],
+  "statements": []
+}

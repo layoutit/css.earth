@@ -11,7 +11,7 @@ import type { SceneFactory } from '../browser/browser-types.mts';
 import { SCENE_OBJECTS } from '../objects.mts';
 import { allSatelliteSystems } from '../satellite-systems.mts';
 import { satelliteSelectionAtCamera } from '../satellite-selection.mts';
-import { createPreparedWorldNavigation } from '../prepared-world-navigation.mts';
+import { createPreparedWorldNavigation } from './prepared-world-navigation.mts';
 import { loadSystemView } from '../system-framing.mts';
 import { navigationFixture, required, unusedSharedView } from './navigation-test-values.test-support.mts';
 

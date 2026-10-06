@@ -40,6 +40,22 @@
         "falseColor": false
       },
       {
+        "id": "hubble-measured",
+        "label": "Hubble \u00b7 measured depths",
+        "thumbnail": "m1-dataset-hubble-measured.webp",
+        "volume": {
+          "objectId": "m1-layers",
+          "datasetId": "optical",
+          "surface": "hubble-measured"
+        },
+        "source": {
+          "id": "m1-layers-optical",
+          "path": "../../m1-layers/source/manifest.json",
+          "url": "https://esahubble.org/images/heic0515a/"
+        },
+        "falseColor": false
+      },
+      {
         "id": "webb-infrared",
         "label": "Webb \u00b7 near/mid-infrared",
         "thumbnail": "m1-dataset-webb-infrared.webp",

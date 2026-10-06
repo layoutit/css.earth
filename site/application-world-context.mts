@@ -5,13 +5,13 @@ import { prepareObjectResources, createRetainedGeometrySnapshot } from '@csseart
 import { createCameraViewport } from '@cssearth/renderer/navigation';
 import type { PreparedLabelEdge } from '@cssearth/renderer/navigation/prepared-label-edge.ts';
 import type { PreparedWorldCameraFrame } from '@cssearth/objects';
-import { PREPARED_WORLD_PRESENTATION } from './prepared-world-presentation.mts';
+import { PREPARED_WORLD_PRESENTATION } from './world/prepared-world-presentation.mts';
 import { APPLICATION_WORLD_CONTEXT as applicationContext } from './world-context-plan.mts';
 import { createWorldApproach } from './world-approach.mts';
 import { DIAGNOSTICS_ENABLED } from './browser/diagnostics-policy.mts';
 import { CONTEXT_AVAILABILITY } from './world/context-availability.mts';
 import { suppressMinorMoonOrbitPaint } from './world/moon-orbit-policy.mts';
-import { mountCatalogueMoonLabels } from './catalogue-moon-labels.mts';
+import { mountCatalogueMoonLabels } from './world/catalogue-moon-labels.mts';
 import { loadApplicationUniverse } from './application-world-resources.mts';
 import { ancestorIds, knownAncestors } from './object-directory.mts';
 import { CONTEXT_OBJECT_DESCRIPTORS } from './prepared/prepared-context-objects.mts';
@@ -20,9 +20,9 @@ import { surroundingHosts } from './world/surrounded-body.mts';
 /** The world's prepared data and planner worker, which `startup-boot.mts` starts while the first body still loads. */
 export { loadApplicationUniverse };
 export { prestartWorldContextPlanner as prestartWorldPlanner } from '@cssearth/renderer/universe';
-import { createApplicationWorldFrames } from './application-world-frames.mts';
+import { createApplicationWorldFrames } from './world/application-world-frames.mts';
 import { createApplicationWorldVisibility, worldVisibilityPolicy } from './application-world-visibility.mts';
-import type { ApplicationWorldLayer } from './application-world-types.mts';
+import type { ApplicationWorldLayer } from './world/application-world-types.mts';
 
 /** The objects whose picture lies on walls around their middle (surrounded-body.mts). */
 const WALLED = surroundingHosts(CONTEXT_OBJECT_DESCRIPTORS);

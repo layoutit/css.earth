@@ -9,7 +9,7 @@ seedObjectDirectory(OBJECTS);
 import contextInput from '../../src/objects/observable-universe/prepared/world-context.json' with { type: 'json' };
 import { STELLAR_SYSTEMS, SYSTEM_FRAMING_RADII, SYSTEM_VIEWS, SYSTEM_VIEW_HOSTS, loadSystemView, systemFramingRadii, systemFramingRect, systemViewTarget } from '../system-framing.mts';
 import { bodyViewAtCamera } from '../zoom-scope.mts';
-import { createPreparedWorldNavigation } from '../prepared-world-navigation.mts';
+import { createPreparedWorldNavigation } from '../navigation/prepared-world-navigation.mts';
 import { createWorldSelectionTarget, parseSharedView, savedWorldCamera } from '@cssearth/renderer/navigation';
 import { worldQuaternionFromRotation, worldRotationFromQuaternion } from '@cssearth/engine';
 import { presentWorldCamera } from '@cssearth/renderer/navigation/world-camera.ts';
