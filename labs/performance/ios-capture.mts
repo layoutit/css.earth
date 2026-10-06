@@ -9,7 +9,7 @@
 // Advanced > Web Inspector, trust this Mac and keep the device unlocked with cssEarth open in Safari. The terminal says when a
 // --seconds recording starts and ends. An --open path starting with /
 // loads from this Mac's network address (--origin, default http://<en0 address>:4210, `pnpm dev`'s port); start the dev
-// server on the network for it: `pnpm exec astro dev --host 0.0.0.0 --port 4210`.
+// server on the network for it: `pnpm exec astro dev --config site/astro.config.mts --host 0.0.0.0 --port 4210`.
 // On a device, pymobiledevice3 (https://github.com/doronz88/pymobiledevice3; --pymobiledevice3 <path>, default from
 // $PYMOBILEDEVICE3 or PATH) samples what Web Inspector cannot: the frames per second Core Animation delivers and the memory
 // of Safari's web content processes. It needs Developer Mode on the device and the developer disk image mounted

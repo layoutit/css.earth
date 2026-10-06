@@ -7,9 +7,9 @@ The comparator checks the complete final Astro output, with production mode,
 a pinned source revision and version, UTC and the C locale. It adds hidden client/worker source maps
 and read-only module metadata. It does not run deployment, share-image generation,
 object assembly during comparison. After comparison, the safety-net job reuses the
-same two outputs for [server answers](server-answers.md): it bundles Netlify
-functions and the Cloudflare Worker, records preview, Netlify and Cloudflare,
-checks each recording and compares each target. It never builds the site again.
+same two outputs for [server answers](server-answers.md): it bundles the
+Cloudflare Worker, records preview and Cloudflare, checks each recording and
+compares each target. It never builds the site again.
 
 ## Run locally
 
@@ -145,7 +145,7 @@ checkout before accepting a move.
 
 [Site safety net](../.github/workflows/site-safety-net.yml) selects the full lane
 only when the diff touches `applicationSource`: `site/`, `src/`,
-`packages/*/src/` or `astro.config.mts`, excluding test/spec modules. Both names
+`packages/*/src/`, which holds the Astro config `site/astro.config.mts` too, excluding test/spec modules. Both names
 of a rename count. `tool-change` and workflow dispatch force the lane.
 Declarations, `refactor`, `compare-build` and an `untangle` branch alone do not
 select builds. Docs/tools/test-only changes rely on the changed tools' own
@@ -367,7 +367,6 @@ changes without explaining missing files.
 | `refresh-photographs.ts` | Raw recursive order determines refresh processing; authoring command outside comparison recipe. |
 | `refresh-content.mts` | Raw order determines independent copied outputs; authoring command outside comparison recipe. |
 | `inline-page-stylesheet.mts` | Raw directory order determines independent page processing after emit; cannot change prerender module graph. |
-| `deploy/netlify/bundle-functions.mts` | Raw order determines entry list; deployment command excluded from comparison. |
 | `deploy/cloudflare/bundle-worker.mts` | Object ids are sorted; scene/name iteration uses raw order for independent copies; excluded deployment command. |
 | `object-page-data.mts` | Reads explicit object paths; no directory/glob discovery. Reaches `ObjectPage.astro` directly. |
 
@@ -413,13 +412,13 @@ A hit skips base installation, preparation, build, bundles, recordings and measu
 All trusted comparison/diff/measurement entry points execute from the copied
 head tool directories, using head's dependencies: a cache hit needs no base install.
 
-After L3, L2 runs up to three recordings concurrently, alongside L7. Preview
-binds an OS-assigned port (`0`); Netlify and Cloudflare bind no listening ports
-and communicate through independent IPC hosts. Every recorder has its own
-output and temporary directory, inherited by its host/function packages.
+After L3, L2 runs its two recordings concurrently (at most three at once), alongside L7.
+Preview binds an OS-assigned port (`0`); Cloudflare binds no listening port
+and communicates through an independent IPC host. Every recorder has its own
+output and temporary directory, inherited by its host.
 Bundles finish before recordings; no recorder writes to the retained L3 tree.
-The three recorder heaps are capped at 512 MiB each, their hosts at 768 MiB,
-and L7 at 1536 MiB: 5.25 GiB of maximum JS heaps on a standard 7 GiB runner,
+The recorder heaps are capped at 512 MiB each, their hosts at 768 MiB,
+and L7 at 1536 MiB: at the bound of three, 5.25 GiB of maximum JS heaps on a standard 7 GiB runner,
 leaving about 1.75 GiB for native overhead and the supervisor. This makes
 three a finite planning bound; hosted peak RSS still needs proof. The existing
 shared five-minute L2 deadline, readiness/probe limits and process-group

@@ -50,8 +50,8 @@ test('folders follow the prototype zones', () => {
     'site/env.d.ts': 'site(root)',
     '.github/scripts/ci/x.mts': '.github/scripts/ci',
     '.github/scripts/x.mts': '.github/scripts(root)',
-    'deploy/netlify/functions/x.mts': 'deploy',
-    'astro.config.mts': '(repository root)',
+    'deploy/cloudflare/x.mts': 'deploy',
+    'eslint.config.mts': '(repository root)',
   };
   for (const [file, zone] of Object.entries(expected)) assert.equal(zoneOf(file), zone, file);
   for (const file of ['packages/renderer/test/x.mts', 'labs/a.test.mts', 'tests/objects/x.mts', 'src/x/fixtures/a.json', 'labs/ci/foo-harness.mts'])
@@ -147,11 +147,11 @@ test('layer rules name each forbidden file import once, and tests are exempt exc
     ['packages/renderer/src/stars/bank.ts', 'packages/core/src/index.ts'],
     ['site/c.mts', 'packages/telescope-cli/src/query.mts'], ['packages/renderer/src/sky/d.ts', 'packages/telescope-cli/src/archives/programs.mts', 'type'],
     ['packages/renderer/src/sky/d.test.ts', 'packages/telescope-cli/src/query.mts'],
-    ['labs/objects/o.mts', 'site/directory/objects.mts'], ['astro.config.mts', 'labs/prepare/p.mts'],
-    ['deploy/netlify/functions/f.mts', 'site/find.mts'], ['labs/nebula/run.mts', 'labs/nebula/x.mts'],
+    ['labs/objects/o.mts', 'site/directory/objects.mts'], ['site/astro.config.mts', 'labs/prepare/p.mts'],
+    ['deploy/cloudflare/worker.ts', 'site/find.mts'], ['labs/nebula/run.mts', 'labs/nebula/x.mts'],
     ['labs/ci/x.mts', '.github/scripts/ci/y.mts'], ['.github/scripts/ci/y.mts', 'labs/ci/z.mts'], ['.github/scripts/ci/y.mts', 'packages/core/src/validate.ts'],
     ['site/build/prepare/p.mts', 'packages/bake/src/stars/index.ts'], ['site/e.mts', 'site/build/prepare/p.mts', 'type'], ['site/world/e.test.mts', 'site/build/prepare/p.mts'],
-    ['astro.config.mts', 'site/build/source-maps.mts'], ['packages/renderer/src/f.ts', 'site/build/prepare/p.mts', 'type'], ['packages/bake/src/g.ts', 'site/build/prepare/p.mts'],
+    ['site/astro.config.mts', 'site/build/source-maps.mts'], ['packages/renderer/src/f.ts', 'site/build/prepare/p.mts', 'type'], ['packages/bake/src/g.ts', 'site/build/prepare/p.mts'],
   ));
   const pairs = (rule: string) => (violations.get(rule) ?? []).map(item => `${item.from}>${item.to}`);
   assert.deepEqual(pairs('packages-import-only-packages'), ['packages/bake/src/g.ts>site/build/prepare/p.mts', 'packages/p/src/a.test.ts>labs/helper.mts',

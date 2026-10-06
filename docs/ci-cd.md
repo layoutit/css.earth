@@ -21,7 +21,7 @@ The planned browser lane and its current implementation limits are documented in
 | [Object-scope gate](../.github/workflows/object-scope.yml) | Every PR: more than 12 changed object directories needs the `pipeline-change` label. Labels re-evaluate this gate. |
 | [Nightly asset sweep](../.github/workflows/nightly.yml) | Scheduled/manual runs check published keys, test types and a production build/browser probe. They do not publish the site or run on PRs. |
 | [Site safety net](../.github/workflows/site-safety-net.yml) | PR declaration gate for refactor labels and renames or moves under `site/`; require this gate in branch protection. Application inputs (tests excluded), `tool-change` or dispatch select the full comparison. Docs/tools-only changes run universe tests without builds. Main pushes produce one commit-addressed base archive. Semantic outputs require declared globs within the computed closure. [Modes, settings and cost](build-comparison.md). |
-| [Deploy](../.github/workflows/deploy.yml) | Manual dispatch only. The default R2 deployment checks build asset references and requires verified published keys before shipping, then publishes to Cloudflare; the `host` input can publish to Netlify instead. Merging validates the gate; it does not deploy. |
+| [Deploy](../.github/workflows/deploy.yml) | Manual dispatch only. The default R2 deployment checks build asset references and requires verified published keys before shipping, then publishes to Cloudflare. Merging validates the gate; it does not deploy. |
 
 The astroquery filter covers the owning workspaces of its discovered test files and their transitive runtime dependencies, toolchain pins and lane configuration. Its pip and toolchain caches are keyed on the pinned requirements and toolchain record. A skipped test or an incomplete derived file run fails the lane.
 
@@ -39,14 +39,11 @@ check and the base-ref check.
 
 ## Serving the site from Cloudflare
 
-Cloudflare serves css.earth. It does not meter bandwidth or static file requests. Netlify, which meters bandwidth, is the
-standby host: the Deploy workflow's `host` input publishes the same build there instead. Everything either host runs is in
-[deploy/](../deploy): `cloudflare/` and `netlify/` hold each host's entry code and bundler, and `handlers/` what both share.
-Netlify's configuration stays at the root as [netlify.toml](../netlify.toml), because `netlify deploy` reads it only from
-the directory it runs in and resolves its paths from there.
+Cloudflare serves css.earth, and it is the only host. It does not meter bandwidth or static file requests. Everything it
+runs is in [deploy/cloudflare/](../deploy/cloudflare): the Worker, its bundler and its wrangler configuration.
 
 The built pages become a Worker's static assets. [The Worker](../deploy/cloudflare/worker.ts) answers the find and report
-endpoints and page addresses that carry a query, with the handlers the Netlify functions call. The
+endpoints and page addresses that carry a query, with the site's own handlers in [site/server/](../site/server). The
 [Deploy workflow](../.github/workflows/deploy.yml) publishes it with the repository secrets `CLOUDFLARE_API_TOKEN` (from
 the "Edit Cloudflare Workers" token template) and `CLOUDFLARE_ACCOUNT_ID`. From a checkout with a wrangler login, these
 commands do the same:
@@ -62,7 +59,7 @@ the `_headers` file into `dist`, answers one search and one page from the bundle
 asks search engines not to index it. [The wrangler configuration](../deploy/cloudflare/wrangler.jsonc), passed to wrangler
 with `--config`, names both targets; the site's own address is the `production` environment, which attaches `css.earth` and `www.css.earth` to the Worker.
 
-Tested on 2026-10-04 from Buenos Aires, against the Netlify site the same day:
+Tested on 2026-10-04 from Buenos Aires, against the Netlify site (then the standby host) the same day:
 
 | Request | Cloudflare preview | Netlify |
 | --- | --- | --- |
@@ -78,7 +75,7 @@ The Netlify site did not yet have this change's faster world load (6.1 s to 1.6 
 The whole site is 50,711 files, 9,874 of them HTML. Workers Free allows 20,000 static files in a Worker and stops the
 page handler for its CPU time (error 1102), so the site needs Workers Paid, which allows 100,000 files.
 
-How the Worker differs from the Netlify functions:
+How the Worker behaves:
 
 - An instance keeps the search catalogues and the world it loaded for later requests, and Cloudflare can stop a request in
   the middle of such a load. The Worker holds a load open when its reader disconnects. A search that has waited 10 s on
@@ -86,8 +83,7 @@ How the Worker differs from the Netlify functions:
 - A page address with a query gets the static page when its handler fails or has no answer in 10 s, and the Worker logs
   `page-handler-fallback` with the reason. The page's scripts read a view, dataset or feature from the address; a
   submitted search (`q`) and everything a reader without scripts would get are not rendered.
-- Netlify keeps each find answer at its CDN until the next deploy. The Worker answers every find request itself; the
-  browser still keeps an answer for five minutes.
+- The Worker answers every find request itself; the browser keeps an answer for five minutes.
 
 ## Keep the PR path lean without dropping proof
 
@@ -103,7 +99,7 @@ How the Worker differs from the Netlify functions:
   default R2 deploy downloads and sha-verifies every inventoried key from R2 in
   its setup, with no restored cache, and runs `pnpm check:deploy-assets`; a key
   R2 does not serve blocks publication. The nightly sweep checks every key again. See the
-  [publishing instructions](../CONTRIBUTING.md#publishing-prepared-assets-maintainers).
+  [publishing instructions](../.github/CONTRIBUTING.md#publishing-prepared-assets-maintainers).
 - Gate on what ships; report what is merely incomplete. A merge-required check may
   only assert something whose failure means the shipped application is broken, wrong
   or unverifiable as shipped: it does not compile, it does not build, it does not
@@ -255,7 +251,7 @@ limit before merging.
 ## Server answer comparison
 
 The local [server answers safety net](server-answers.md) records and compares real preview middleware and built
-deployment handlers, checks baseline sanity and verifies the observed Netlify package closure. Its guide supplies
+Worker, and checks baseline sanity. Its guide supplies
 the base/head job sequence, normalisations, mutation replay and measured offline coverage. The site safety-net
 workflow should call this runner after both builds.
 
@@ -306,7 +302,7 @@ test goes red; restore it and confirm green. A comment alone proves nothing.
 
 ## Repairing asset and provenance failures
 
-The [publishing instructions](../CONTRIBUTING.md#publishing-prepared-assets-maintainers)
+The [publishing instructions](../.github/CONTRIBUTING.md#publishing-prepared-assets-maintainers)
 own the commands and credentials. These rules prevent stale-receipt failures:
 
 1. Verify actual bytes against their owning inventory before changing that
@@ -335,7 +331,7 @@ the first failing owner when many consumers report the same missing input.
 
 ## Verifying a CI change
 
-Use the [contributor checks](../CONTRIBUTING.md#check-your-change) to prepare a
+Use the [contributor checks](../.github/CONTRIBUTING.md#check-your-change) to prepare a
 clean checkout. `pnpm check:pr --list` prints the selected workflow commands;
 `pnpm check:pr` runs that plan locally. The local runner can include advisory and
 production-smoke jobs even though their GitHub triggers exclude PRs.

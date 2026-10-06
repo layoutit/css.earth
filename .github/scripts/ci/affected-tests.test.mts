@@ -44,7 +44,7 @@ test('object data and the site test no package; documentation tests nothing', ()
 test('a push or a shared configuration change tests everything', () => {
   assert.deepEqual(select(null), { packages: 'all', site: true, files: [] });
   assert.deepEqual(select(['pnpm-lock.yaml', 'src/objects/mars/text.json']), { packages: 'all', site: true, files: [] });
-  for (const path of ['tsconfig.base.json', 'tsconfig.tests.json', '.github/scripts/tsconfig.json', 'labs/tsconfig.json', 'integration/tsconfig.tests.json'])
+  for (const path of ['.github/tsconfig.base.json', '.github/tsconfig.tests.json', 'tsconfig.json', '.github/scripts/tsconfig.json', 'labs/tsconfig.json', 'integration/tsconfig.tests.json'])
     assert.deepEqual(select([path]), { packages: 'all', site: true, files: [] }, path);
 });
 

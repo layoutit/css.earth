@@ -29,10 +29,11 @@ export const RUNTIME_CODE = ['site/', 'packages/renderer/src/'] as const;
  * the runtime never imports it, and packages never import any of `site/`. */
 export const SITE_BUILD = 'site/build/';
 
-/** Entry glue that may reach into an application tree: each host's entry code in deploy/ (Netlify's functions,
- * Cloudflare's Worker and their bundlers) and root build configuration (`astro.config.mts` wires `site/build` into the Astro build). Astro pages
- * live inside `site/` and need no entry here. */
-export const ENTRY_GLUE: readonly RegExp[] = [/^deploy\//u, /^[^/]+\.config\.[cm]?[jt]s$/u];
+/** Entry glue that may reach into an application tree: the host's entry code in deploy/ (Cloudflare's Worker and its
+ * bundler), root configuration files and the Astro config (`site/astro.config.mts` wires `site/build` into the Astro
+ * build). Astro pages live inside `site/` and need no entry here. */
+export const ENTRY_GLUE: readonly RegExp[] = [/^deploy\//u, /^[^/]+\.config\.[cm]?[jt]s$/u, /^site\/astro\.config\.mts$/u];
+const entryGlue = (path: string): boolean => ENTRY_GLUE.some(pattern => pattern.test(path));
 
 export const APPLICATION_TREES = ['site', 'labs', '.github'] as const;
 
@@ -78,7 +79,7 @@ export const LAYER_RULES: readonly LayerRule[] = [
     noBaseline: true,
     description: 'site/, labs/ and .github/ (CI scripts) are entry points: nothing outside each tree imports it, entry glue excepted (tests and type-only imports count)',
     forbids: (from, to) => APPLICATION_TREES.some(tree => topLevel(to) === tree && topLevel(from) !== tree)
-      && !ENTRY_GLUE.some(pattern => pattern.test(from)),
+      && !entryGlue(from),
     includeTests: true,
   },
   {
@@ -89,7 +90,7 @@ export const LAYER_RULES: readonly LayerRule[] = [
   {
     id: 'runtime-imports-no-site-build',
     description: 'site/build/ is site-owned preparation: the rest of site/ never imports it (type-only imports count; tests and entry glue may)',
-    forbids: (from, to) => from.startsWith('site/') && !from.startsWith(SITE_BUILD) && to.startsWith(SITE_BUILD),
+    forbids: (from, to) => from.startsWith('site/') && !from.startsWith(SITE_BUILD) && !entryGlue(from) && to.startsWith(SITE_BUILD),
   },
   {
     id: 'nothing-imports-cli-entries',

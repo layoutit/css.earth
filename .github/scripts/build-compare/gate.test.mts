@@ -28,7 +28,7 @@ import { join } from 'node:path';
 import { tmpdir } from 'node:os';
 import { pathToFileURL } from 'node:url';
 const selectionContract = (select: typeof gateDecision) => {
-  for (const path of ['site/a.mts', 'src/objects/body/object.json', 'packages/engine/src/a.ts', 'astro.config.mts']) assert.equal(select({ ...ordinary, applicationChanged: applicationSource(path) }).run, true, path);
+  for (const path of ['site/a.mts', 'src/objects/body/object.json', 'packages/engine/src/a.ts', 'site/astro.config.mts']) assert.equal(select({ ...ordinary, applicationChanged: applicationSource(path) }).run, true, path);
   for (const path of ['site/a.test.mts', 'src/a.spec.ts', 'packages/engine/src/a.test.ts', 'docs/a.md', '.github/scripts/a.mts', 'untangle/a.md']) assert.equal(select({ ...ordinary, applicationChanged: applicationSource(path), declarationStatus: 'M\t.github/site-refactor.json', labels: ['refactor', 'compare-build'] }).run, false, path);
   assert.equal(select({ ...ordinary, labels: ['tool-change'] }).run, true);
   assert.equal(select({ ...ordinary, dispatch: true }).run, true);

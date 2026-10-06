@@ -64,7 +64,7 @@ async function ensureDevServer(origin: URL): Promise<void> {
     return;
   }
   const head = (await exec('git', ['rev-parse', 'HEAD'], { cwd: root })).stdout.trim();
-  const child = spawn(process.execPath, [resolve(root, 'node_modules/astro/bin/astro.mjs'), 'dev', '--host', '0.0.0.0', '--port', origin.port],
+  const child = spawn(process.execPath, [resolve(root, 'node_modules/astro/bin/astro.mjs'), 'dev', '--config', 'site/astro.config.mts', '--host', '0.0.0.0', '--port', origin.port],
     { cwd: root, detached: true, stdio: 'ignore', env: { ...process.env, COMMIT_REF: head } });
   child.unref();
   console.error(`Started the dev server on ${origin.origin} (pid ${child.pid}); it keeps running for the next journey.`);
@@ -73,7 +73,7 @@ async function ensureDevServer(origin: URL): Promise<void> {
 async function ensureCurrentBuild(): Promise<void> {
   const built = await stat(resolve(root, 'dist/index.html')).catch(() => null);
   const head = (await exec('git', ['rev-parse', 'HEAD'], { cwd: root })).stdout.trim();
-  const sourcePaths = ['site', 'src', 'packages', 'astro.config.mts'];
+  const sourcePaths = ['site', 'src', 'packages'];
   // Git identifies the sources: a build made from a clean checkout of HEAD is current; any local change rebuilds.
   const status = await exec('git', ['status', '--porcelain', '--', ...sourcePaths], { cwd: root });
   const clean = status.stdout.trim() === '';
@@ -82,7 +82,7 @@ async function ensureCurrentBuild(): Promise<void> {
   console.error('Built preview is missing the current performance build; rebuilding before the iPad trace…');
   // The dedicated tracer checkout has its prepared assets installed already.
   // Rebuilding the site does not need to re-run source processing for every journey.
-  await exec('pnpm', ['exec', 'astro', 'build', '--mode', 'performance'], { cwd: root, maxBuffer: 16 * 1024 * 1024 });
+  await exec('pnpm', ['exec', 'astro', 'build', '--config', 'site/astro.config.mts', '--mode', 'performance'], { cwd: root, maxBuffer: 16 * 1024 * 1024 });
   await writeFile(resolve(root, 'dist/.cssearth-performance-build.json'), JSON.stringify({
     schema: 'cssearth-performance-build@2', head, clean, builtAt: new Date().toISOString(),
   }) + '\n');

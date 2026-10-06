@@ -1,13 +1,7 @@
 {
-  "mode": "semantic",
+  "mode": "pure-move",
   "moves": {
-    "public/navigation/sidebar-thumbnails.json": "site/public/navigation/sidebar-thumbnails.json"
+    "astro.config.mts": "site/astro.config.mts"
   },
-  "outputs": [
-    {
-      "glob": "navigation/sidebar-thumbnails.json",
-      "reason": "The receipt names its preview inputs by repository path, which is now site/public/scenes/... instead of public/scenes/..."
-    }
-  ],
-  "change": "Plan 8 R3: move Astro's public directory from public/ into site/public/"
+  "change": "Plan 8 R7: move the Astro config from the repository root into site/"
 }

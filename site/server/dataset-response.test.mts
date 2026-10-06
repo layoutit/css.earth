@@ -110,7 +110,7 @@ test('a city link is left to the page, which selects the city on arrival', async
   // The native response used to reject every non-numeric feature, so a shared city link answered 400.
   assert.equal(await renderDatasetResponse(html, new URL('/saturn/?feature=city-3435910', origin), 'saturn', read), html);
 });
-test('Netlify handles dataset and combined search queries without intercepting static assets', () => {
+test('The page route sends dataset and combined search queries to the page handler without intercepting static assets', () => {
   for (const query of ['dataset=ultraviolet', 'q=Titan&dataset=methane&v=view']) {
     const destination = searchRoute(new Request(`${origin}/saturn/?${query}`));
     assert.equal(destination?.pathname, '/.netlify/functions/search');

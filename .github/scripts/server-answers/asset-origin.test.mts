@@ -18,10 +18,16 @@ test('both qualification and production asset origins route offline, and other o
   }
   for (const origin of ['https://example.com/path', 'file:///tmp/data', 'https://user:pass@example.com']) assert.throws(() => assetOrigin(origin));
 });
-test('only two revision-owned post-build bundlers run; unknown post-build stages fail explicitly', () => {
-  const scripts = { 'build:deploy': 'pnpm prepare && astro build && node site/build/share-images.mts && node packages/bake/cli/run-implemented-objects.mts assemble && pnpm netlify:bundle', 'netlify:bundle': 'node moved/functions.mts', 'deploy:cloudflare-preview': 'pnpm worker:bundle && npx wrangler deploy', 'worker:bundle': 'node moved/worker.mts --noindex' };
-  assert.deepEqual(postBuildSteps(scripts), ['node moved/functions.mts', 'node moved/worker.mts']);
-  for (const step of ['astro build', 'node unknown.mts', 'node moved/functions.mts; curl network.invalid']) assert.throws(() => postBuildSteps({ ...scripts, 'build:deploy': scripts['build:deploy'] + ' && ' + step }));
+test('the Worker bundler runs after at most one other revision-owned bundler; unknown post-build stages fail explicitly', () => {
+  const scripts = { 'build:deploy': 'pnpm prepare && astro build && node site/build/share-images.mts && node packages/bake/cli/run-implemented-objects.mts assemble', 'deploy:cloudflare-preview': 'pnpm worker:bundle && npx wrangler deploy', 'worker:bundle': 'node moved/worker.mts --noindex' };
+  assert.deepEqual(postBuildSteps(scripts), ['node moved/worker.mts']);
+  const older = { ...scripts, 'build:deploy': scripts['build:deploy'] + ' && pnpm functions:bundle', 'functions:bundle': 'node moved/functions.mts' };
+  assert.deepEqual(postBuildSteps(older), ['node moved/functions.mts', 'node moved/worker.mts']);
+  for (const step of ['astro build', 'node unknown.mts', 'node moved/functions.mts; curl network.invalid']) assert.throws(() => postBuildSteps({ ...older, 'build:deploy': older['build:deploy'] + ' && ' + step }));
+  for (const step of ['astro build', 'node moved/functions.mts; curl network.invalid']) assert.throws(() => postBuildSteps({ ...scripts, 'build:deploy': scripts['build:deploy'] + ' && ' + step }));
+  const named = { ...older, 'build:deploy': older['build:deploy'].replace('astro build', 'astro build --config site/astro.config.mts') };
+  assert.deepEqual(postBuildSteps(named), ['node moved/functions.mts', 'node moved/worker.mts'], 'a recipe naming the config under site/ has the same boundary');
+  assert.throws(() => postBuildSteps({ ...older, 'build:deploy': older['build:deploy'].replace('astro build', 'pnpm exec astro build') }), /one standalone Astro build/u);
 });
 
 
@@ -33,7 +39,6 @@ test('real child host resolves both origins from inventory and preserves static 
       for (const dir of ['dist', 'src/objects/earth', 'site/public/scenes/earth']) await mkdir(resolve(root, dir), { recursive: true });
       await writeFile(resolve(root, 'site/public/scenes/earth/probe.json'), '{"offline":true}');
       await writeFile(resolve(root, 'src/objects/earth/inventory.json'), JSON.stringify({ assets: [{ location: 'public', filename: 'probe.json', sha256: 'a'.repeat(64) }] }));
-      await writeFile(resolve(root, 'netlify.toml'), '[functions]\ndirectory = "functions"\n');
       await writeFile(resolve(root, 'wrangler.jsonc'), '{"main":"worker.mjs","assets":{"run_worker_first":true}}');
       await writeFile(resolve(root, 'worker.mjs'), `export default { fetch(request, env) { return env.ASSETS.fetch(new Request(${JSON.stringify(origin + '/runtime-assets/' + 'a'.repeat(64) + '/probe.json')}, request)); } };`);
       child = spawn(process.execPath, [resolve(import.meta.dirname, 'host.mts'), 'cloudflare', resolve(root, 'dist'), origin], { cwd: root, stdio: ['ignore', 'pipe', 'pipe', 'ipc'] });
@@ -79,7 +84,6 @@ test('the Worker ASSETS binding reads the built site by path under either publis
     try {
       await mkdir(resolve(root, 'dist'), { recursive: true });
       await writeFile(resolve(root, 'dist/binding.json'), '{"binding":true}');
-      await writeFile(resolve(root, 'netlify.toml'), '[functions]\ndirectory = "functions"\n');
       await writeFile(resolve(root, 'wrangler.jsonc'), '{"main":"worker.mjs","assets":{"run_worker_first":true}}');
       // deploy/cloudflare/assets.ts reads its own site through this exact URL; the binding must serve the path whatever the published origin is.
       await writeFile(resolve(root, 'worker.mjs'), `export default { fetch(request, env) { return env.ASSETS.fetch(new URL('/binding.json', 'https://assets.invalid')); } };`);

@@ -1,4 +1,4 @@
-/** The files `site/` may hold directly: the type declarations and tsconfigs that tooling finds by that location.
+/** The files `site/` may hold directly: the Astro config, type declarations and tsconfigs that tooling finds by that location.
  * Every other file lives in the folder that owns it (docs/site-architecture.md). */
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';

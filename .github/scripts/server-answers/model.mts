@@ -3,7 +3,7 @@ import { gzipSync, gunzipSync } from 'node:zlib';
 import { createHash } from 'node:crypto';
 import { readFile, readdir, stat } from 'node:fs/promises';
 import { resolve } from 'node:path';
-export type Target = 'preview' | 'netlify' | 'cloudflare';
+export type Target = 'preview' | 'cloudflare';
 export interface AnswerRequest { id: string; path: string; method?: string; headers?: Record<string, string>; body?: string; expected?: number; title?: string; html?: boolean; conditional?: 'etag' | 'modified'; }
 export interface Answer { id: string; status: number; headers: Record<string, string>; body: unknown; }
 export const normalisations = [
@@ -16,15 +16,7 @@ export const normalisations = [
   'ETag retains presence and weak/strong kind; values contain file timestamps and can change between recordings of the same build.',
   'Content-Length reduced to absent/zero/nonzero: exact body size is retained in the body.',
   'Loopback origins in retained header values replaced with https://answers.invalid; ephemeral port is not build behavior.',
-  'Deployment file paths in closure.json and index.json name the public directory <public>/: plan 8 moved it from public/ to site/public/, and each side is recorded in its own layout.',
 ];
-/** A recorded deployment path that starts in the public directory, under either layout, starts with `<public>/` instead. */
-export function publicLayoutNeutral(value: unknown): unknown {
-  if (typeof value === 'string') return value.replace(/^(!?)(?:site\/)?public\//u, '$1<public>/');
-  if (Array.isArray(value)) return value.map(publicLayoutNeutral);
-  if (isObject(value)) return Object.fromEntries(Object.entries(value).map(([key, item]) => [key, publicLayoutNeutral(item)]));
-  return value;
-}
 function isObject(value: unknown): value is Record<string, unknown> {
   return typeof value === 'object' && value !== null && !Array.isArray(value);
 }
@@ -102,7 +94,7 @@ export function compactHtml(value: string, staticHtml: string, file: string, req
     firstView: /data-startup-discovery|data-prepared-descriptor/u.test(value), searchSubmitted: value.includes('data-search-submitted') };
 }
 // Provider clocks and routing/request identifiers describe the host, not the application.
-export const volatileHeaders = new Set(['date', 'server', 'connection', 'keep-alive', 'host', 'x-nf-request-id', 'cf-ray', 'cf-cache-status', 'age', 'server-timing', 'x-served-by', 'x-cache', 'x-cache-hits', 'via']);
+export const volatileHeaders = new Set(['date', 'server', 'connection', 'keep-alive', 'host', 'cf-ray', 'cf-cache-status', 'age', 'server-timing', 'x-served-by', 'x-cache', 'x-cache-hits', 'via']);
 export async function recordAnswer(id: string, response: Response, origin: string, page?: { html: string; file: string; request: AnswerRequest }): Promise<Answer> {
   const headers: Record<string, string> = {};
   for (const [name, value] of response.headers) {
@@ -136,7 +128,7 @@ export function storedAnswer(answer: Answer): Answer {
 export async function readRecording(dir: string): Promise<Map<string, unknown>> {
   const result = new Map<string, unknown>();
   for (const file of (await readdir(dir)).filter(name => name.endsWith('.json')).sort()) result.set(file, JSON.parse(await readFile(resolve(dir, file), 'utf8')));
-  if (!result.has('index.json') || !result.has('closure.json')) throw new Error('Recording lacks index.json or closure.json');
+  if (!result.has('index.json')) throw new Error('Recording lacks index.json');
   const index = object(result.get('index.json'));
   if (!Array.isArray(index.requests) || !index.requests.every(id => typeof id === 'string' && /^[a-z0-9-]+$/u.test(id))) throw new Error('Invalid request index');
   for (const id of index.requests) {

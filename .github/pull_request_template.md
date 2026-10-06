@@ -26,7 +26,7 @@ Only for a pull request that bakes or rebakes anything under a `prepared/` direc
 `site/public/scenes`. Delete this whole section when no baked bytes change.
 R2 holds the bytes; Git holds the inventory that pins them. Both have to land, or the
 object renders blank in production — the deploy ships no same-origin copy to fall back on.
-Full steps: CONTRIBUTING.md, "Checklist: a change that bakes or rebakes assets".
+Full steps: .github/CONTRIBUTING.md, "Checklist: a change that bakes or rebakes assets".
 -->
 
 - [ ] Baked the object (`pnpm prepare:objects --object=<id>`, or `pnpm prepare:volume src/objects/<id>`).

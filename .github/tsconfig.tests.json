@@ -1,0 +1,56 @@
+{
+  "files": [],
+  "references": [
+    {
+      "path": "../site/tsconfig.tests.json"
+    },
+    {
+      "path": "../src/tsconfig.tests.json"
+    },
+    {
+      "path": "./scripts/tsconfig.tests.json"
+    },
+    {
+      "path": "../labs/performance/tsconfig.tests.json"
+    },
+    {
+      "path": "../packages/renderer/tsconfig.tests.json"
+    },
+    {
+      "path": "../packages/astronomy/tsconfig.tests.json"
+    },
+    {
+      "path": "../packages/core/tsconfig.tests.json"
+    },
+    {
+      "path": "../packages/telescope/tsconfig.tests.json"
+    },
+    {
+      "path": "../packages/spice/tsconfig.tests.json"
+    },
+    {
+      "path": "../packages/catalog/tsconfig.tests.json"
+    },
+    {
+      "path": "../packages/objects/tsconfig.tests.json"
+    },
+    {
+      "path": "../packages/volume-viewer/tsconfig.tests.json"
+    },
+    {
+      "path": "../packages/fits/tsconfig.tests.json"
+    },
+    {
+      "path": "../packages/bake/tsconfig.tests.json"
+    },
+    {
+      "path": "../packages/telescope-cli/tsconfig.tests.json"
+    },
+    {
+      "path": "../packages/engine/tsconfig.tests.json"
+    },
+    {
+      "path": "../integration/tsconfig.tests.json"
+    }
+  ]
+}

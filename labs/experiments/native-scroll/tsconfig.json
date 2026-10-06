@@ -1,5 +1,5 @@
 {
-  "extends": "../../../tsconfig.base.json",
+  "extends": "../../../.github/tsconfig.base.json",
   "include": [
     "*.mts",
     "./*.mts"

@@ -1,5 +1,6 @@
 /** Run only the final offline Astro stage with pinned process and version inputs. */
 import { execFileSync, spawn } from 'node:child_process';
+import { existsSync } from 'node:fs';
 import { chmod, mkdir, readFile, rename, rm, writeFile } from 'node:fs/promises';
 import { createRequire } from 'node:module';
 import { join, resolve } from 'node:path';
@@ -10,6 +11,10 @@ const quote = (value: string): string => `'${value.replaceAll("'", "'\\''")}'`;
 export function pinnedInputs(count = '12345'): { COMMIT_REF: string; version: string; TZ: string; LC_ALL: string; CSSEARTH_BUILD_PAGES: string; assetOrigin: string } {
   if (!/^\d+$/u.test(count) || !Number.isSafeInteger(Number(count))) throw new Error('Invalid pinned count');
   return { COMMIT_REF: '0000000000000000000000000000000000000001', version: `${Math.floor(Number(count) / 10000)}.${Number(count) % 10000}`, TZ: 'UTC', LC_ALL: 'C', CSSEARTH_BUILD_PAGES: '', assetOrigin: 'https://earth-assets.lowpoly.cc' };
+}
+/** The checkout's own Astro config: under site/, or at the root in revisions from before it moved. */
+export function productionConfig(checkout: string): string {
+  return existsSync(join(checkout, 'site/astro.config.mts')) ? 'site/astro.config.mts' : 'astro.config.mts';
 }
 export function toolchainMatches(prior: unknown, current: unknown, baseLock: Uint8Array, headLock: Uint8Array): boolean {
   return JSON.stringify(prior) === JSON.stringify(current) && Buffer.from(baseLock).equals(Buffer.from(headLock));
@@ -49,7 +54,7 @@ export async function build(checkout: string, output: string, options: { toolcha
   if (observed !== count) throw new Error('Git shim was not selected');
   await writeFile(log, ''); // Only the subsequent config execSync can satisfy this check.
   const started = performance.now();
-  const command = ['exec', 'astro', 'build', ...(options.production ? [] : ['--config', '.github/scripts/build-compare/astro.compare.config.mts'])];
+  const command = ['exec', 'astro', 'build', '--config', options.production ? productionConfig(checkout) : '.github/scripts/build-compare/astro.compare.config.mts'];
   await new Promise<void>((accept, reject) => {
     const child = spawn('pnpm', command, { cwd: checkout, env: environment, stdio: 'inherit' });
     const timer = setTimeout(() => { child.kill('SIGTERM'); reject(new Error('Astro build exceeded 25 minutes')); }, 1_500_000);

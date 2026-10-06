@@ -178,9 +178,11 @@
   ],
   "root": {
     "allow": [
+      "site/astro.config.mts",
       "site/env.d.ts"
     ],
     "entries": [
+      "site/astro.config.mts",
       "site/env.d.ts"
     ],
     "tier": 11

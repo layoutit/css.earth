@@ -1,16 +1,21 @@
 import { execSync } from "node:child_process";
 import { rm } from "node:fs/promises";
+import { resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { defineConfig } from "astro/config";
-import { SITE_ORIGIN } from "./site/content/seo.mts";
-import { performanceSourceMaps } from "./site/build/source-maps.mts";
-import { packageSources } from "./site/build/package-sources.mts";
-import { inlinePageStylesheets } from "./site/build/inline-page-stylesheet.mts";
-import { searchServer } from './site/server/search-server.mts';
-import { prepareContextAvailability } from "./site/build/prepare/prepare-context-availability.mts";
-import { preparedMotionCss } from "./site/build/prepared-motion-css.mts";
-import { assetOrigin, resolveWorldBillboards } from "./site/server-assets/asset-origin.mts";
+import { SITE_ORIGIN } from "./content/seo.mts";
+import { performanceSourceMaps } from "./build/source-maps.mts";
+import { packageSources } from "./build/package-sources.mts";
+import { inlinePageStylesheets } from "./build/inline-page-stylesheet.mts";
+import { searchServer } from './server/search-server.mts';
+import { prepareContextAvailability } from "./build/prepare/prepare-context-availability.mts";
+import { preparedMotionCss } from "./build/prepared-motion-css.mts";
+import { assetOrigin, resolveWorldBillboards } from "./server-assets/asset-origin.mts";
+
+// Astro resolves relative directories against the working directory, not this file: name them from here, so the
+// config builds the same site from any working directory.
+const root = resolve(fileURLToPath(new URL("..", import.meta.url)));
 
 function cssEarthVersion() {
   try {
@@ -28,9 +33,10 @@ function cssEarthVersion() {
 export default defineConfig({
   site: SITE_ORIGIN,
   trailingSlash: "always",
-  srcDir: "./site",
-  publicDir: "./site/public",
-  outDir: "./dist",
+  root,
+  srcDir: resolve(root, "site"),
+  publicDir: resolve(root, "site/public"),
+  outDir: resolve(root, "dist"),
   output: "static",
   devToolbar: { enabled: false },
   integrations: [{ name: 'prepared-context-availability', hooks: {
@@ -61,7 +67,7 @@ export default defineConfig({
     },
   } }],
   vite: {
-    css: { postcss: { plugins: [preparedMotionCss(process.cwd())] } },
+    css: { postcss: { plugins: [preparedMotionCss(root)] } },
     plugins: [searchServer(), performanceSourceMaps(), packageSources(),
       // Safari fetches a module a second time when Vite's preload helper links one the import graph already requested
       // (163 KB of 932 on Earth's first visit, 2026-09-30). The client environment owns the browser bundle's setting.

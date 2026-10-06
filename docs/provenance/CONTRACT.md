@@ -287,7 +287,7 @@ result is evidence about this change: a test that fails on `main` and passes her
 or a measurement the change was made to move. Name the checks that merely passed on
 one line. Collect unrelated failures in a table and state once that they match
 `main`; do not repeat that reasoning for each row. Record a standing environment
-limit, such as a runner that cannot start, in [CONTRIBUTING](../../CONTRIBUTING.md#check-your-change)
+limit, such as a runner that cannot start, in [CONTRIBUTING](../../.github/CONTRIBUTING.md#check-your-change)
 and cite it, rather than explaining it again in each PR.
 
 Each added artifact must support a named claim, explanation or test. Explain

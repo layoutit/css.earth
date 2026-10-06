@@ -6,7 +6,7 @@ import { readBuiltCatalogue, readPublicFile } from '../../deploy/cloudflare/sear
 import { answerOrFallback } from '../../deploy/cloudflare/fallback.ts';
 
 // The Worker's own parts: its routing of what needs no handler, and the modules that stand in for a disk. The handlers
-// it calls are Netlify's, with their own tests (search-response.test.mts, search-api.test.mts); the bundle step answers a
+// it calls are the site's, with their own tests (search-response.test.mts, search-api.test.mts); the bundle step answers a
 // search and a page from the bundled script (deploy/cloudflare/bundle-worker.mts).
 const built = (files: Readonly<Record<string, unknown>>): Assets & { readonly asked: string[] } => {
   const asked: string[] = [];
@@ -60,7 +60,7 @@ test('a project file the bundle does not carry is named', async () => {
   Object.assign(globalThis, { CSSEARTH_PROJECT_FILES: { 'src/objects/observable-universe/prepared/world.json': '{"schema":"world"}' } });
   const { readProjectJson, nodeProjectFileUrl } = await import('../../deploy/cloudflare/project-files.ts');
   assert.deepEqual(await readProjectJson('file:///anywhere', 'src/objects/observable-universe/prepared/world.json'), { schema: 'world' });
-  await assert.rejects(readProjectJson('file:///anywhere', 'src/objects/earth/prepared/members.json'), /holds no src\/objects\/earth\/prepared\/members\.json; FUNCTION_PROJECT_FILES \(deploy\/handlers\/function-project-files\.mts\)/u);
+  await assert.rejects(readProjectJson('file:///anywhere', 'src/objects/earth/prepared/members.json'), /holds no src\/objects\/earth\/prepared\/members\.json; WORKER_PROJECT_FILES \(deploy\/cloudflare\/worker-project-files\.mts\)/u);
   await assert.rejects(readProjectJson('file:///anywhere', 'toString'), /holds no toString/u);
   assert.throws(() => nodeProjectFileUrl('file:///anywhere', 'src/objects/earth/prepared/members.json'), /no project directory/u);
 });

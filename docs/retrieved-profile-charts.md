@@ -72,7 +72,7 @@ that would clip a displayed uncertainty band. It performs no atmospheric fit.
    input to the chart product.
 5. Check the units and several independent values against the original paper;
    inspect the mounted panel on desktop and mobile. Publish the changed
-   inventory through the [prepared-asset workflow](../CONTRIBUTING.md#publishing-prepared-assets-maintainers).
+   inventory through the [prepared-asset workflow](../.github/CONTRIBUTING.md#publishing-prepared-assets-maintainers).
 
 The implementation is [retrieved-profile.ts](../packages/bake/src/objects/charts/retrieved-profile.ts),
 dispatched by [charts.ts](../site/build/charts/charts.ts). Its focused check is

@@ -67,13 +67,15 @@ export function toolSource(_declaration: RefactorDeclaration, labels: string[], 
   if (labels.includes('tool-change')) return 'head';
   return baseHasTools ? 'merge-base' : 'bootstrap';
 }
+/** The deploy recipe's Astro build, with or without the config path a revision keeping its config under site/ passes. */
+const ASTRO_BUILD = /^astro build(?: --config site\/astro\.config\.mts)?$/u;
 export function preparationCommand(raw: unknown): string {
   if (raw === null || typeof raw !== 'object' || !('scripts' in raw)) throw new Error('Missing package scripts.');
   const scripts = raw.scripts;
   if (scripts === null || typeof scripts !== 'object' || !('build:deploy' in scripts) || typeof scripts['build:deploy'] !== 'string')
     throw new Error('Missing build:deploy recipe.');
   const steps = scripts['build:deploy'].split(/\s*&&\s*/u).map(step => step.trim());
-  const boundaries = steps.flatMap((step, index) => step === 'astro build' ? [index] : []);
+  const boundaries = steps.flatMap((step, index) => ASTRO_BUILD.test(step) ? [index] : []);
   const boundary = boundaries[0];
   if (boundaries.length !== 1 || boundary === undefined || boundary === 0) throw new Error('build:deploy must contain exactly one standalone astro build after preparation');
   return steps.slice(0, boundary).join(' && ');

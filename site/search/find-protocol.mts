@@ -9,7 +9,8 @@ import { parseCatalogueRow, type CatalogueRow } from './catalogue-index.mts';
  *   GET /.netlify/functions/find?q=<query>&object=<body id>[&offset=<row>][&illustrations=1]   FindResponse
  *   GET /.netlify/functions/find?place=<id>&object=<body id>                                  { place: <the catalogue record> }
  *
- * A query answers one page of object rows from `offset`; the first page also carries the query's feature rows.
+ * A query answers one page of object rows from `offset`; the first page also carries the query's feature rows. The
+ * address keeps the `/.netlify/functions/` prefix of the site's first host: built pages name it and the Worker answers it.
  */
 export const FIND_PATH = '/.netlify/functions/find';
 export const FIND_QUERY_LIMIT = 200;

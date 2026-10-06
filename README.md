@@ -67,7 +67,7 @@ Preparation reads archive formats directly with in-house TypeScript readers. The
 - **Rendering:** every body is a [PolyCSS](https://github.com/LayoutitStudio/polycss) mesh of HTML elements, placed with CSS `matrix3d(...)` and painted from prepared texture atlases. No canvas or WebGL. The runtime is [`@cssearth/renderer`](packages/renderer/README.md).
 - **Preparation:** Node reads declared source products and writes the textures, geometry, orbits and page text, each recording its sources. Runtime inventories pin the published outputs; source manifests record paths, acquisition and attribution.
 - **Objects:** each one is a package under [`src/objects/<id>/`](src/objects/README.md). One registry, one shell and one camera serve them all.
-- **Delivery:** prepared files are stored in R2; `pnpm setup:assets` fetches them before Astro builds the site for Netlify.
+- **Delivery:** prepared files are stored in R2; `pnpm setup:assets` fetches them before Astro builds the site, which a Cloudflare Worker serves.
 - **Runtime:** the browser loads prepared state and moves the camera. It never derives geometry or textures.
 
 ## How to Run
@@ -91,7 +91,7 @@ Re-preparing an object from its original sources needs more: `node packages/bake
 - [Adding a body](src/objects/README.md): package layout and the preparation steps.
 - [Provenance and documentation contract](docs/provenance/CONTRACT.md): how sources, credits and evidence are recorded.
 - [Documentation index](docs/README.md): surface preparation, interferometric imaging, eclipse mapping, navigation, performance and more.
-- [Contributing](CONTRIBUTING.md): setup, which checks to run and where things live.
+- [Contributing](.github/CONTRIBUTING.md): setup, which checks to run and where things live.
 - [Celestial skill](.agents/skills/celestial-skill/SKILL.md): the workflow agents follow for body work.
 
 ## License and Data

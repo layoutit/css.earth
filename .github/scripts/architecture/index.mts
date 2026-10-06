@@ -8,7 +8,7 @@
  *
  * Workspace package cycles, package-only and application-entry layers have no baseline: every finding fails.
  * The check is a ratchet: existing debt is recorded in the baseline, so it is visible without blocking
- * work, and a change may only keep or reduce it. See CONTRIBUTING.md, "Check your change". */
+ * work, and a change may only keep or reduce it. See .github/CONTRIBUTING.md, "Check your change". */
 import { existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
