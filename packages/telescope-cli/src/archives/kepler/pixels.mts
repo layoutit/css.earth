@@ -9,7 +9,7 @@
  *   - `Mast.Caom.Filtered.Position`: the Kepler and K2 time series at a place;
  *   - `Mast.Caom.Products`: an observation's files, of which the long-cadence target pixel files are kept.
  * A file is fetched by its `dataURI`. */
-import { mkdir, stat, writeFile } from 'node:fs/promises';
+import { mkdir, rename, stat, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { isRecord } from '@cssearth/core';
 import { paced } from '../tess/pixels.mts';
@@ -21,7 +21,8 @@ export const MATCH_DEGREES = 4 / 3600;
 export const LONG_CADENCE_SECONDS = 1800;
 
 export type KeplerMission = 'Kepler' | 'K2';
-export interface Observation { readonly obsid: number; readonly mission: KeplerMission; readonly target: string }
+export interface Place { readonly raDegrees: number; readonly decDegrees: number }
+export interface Observation extends Place { readonly obsid: number; readonly mission: KeplerMission; readonly target: string }
 /** One quarter's or campaign's pixels of a target: `window` is the quarter or campaign number. */
 export interface PixelFile { readonly mission: KeplerMission; readonly target: string; readonly window: number; readonly filename: string; readonly uri: string; readonly bytes: number }
 
@@ -29,7 +30,8 @@ const rows = (body: unknown, what: string) => { if (!isRecord(body) || body.stat
 /** MAST's answer for a place, as the long-cadence observations of Kepler and K2 there. */
 export function parseObservations(body: unknown): Observation[] {
   return rows(body, 'a list of observations').flatMap(row => { const mission = row.obs_collection, obsid = Number(row.obsid);
-    return (mission === 'Kepler' || mission === 'K2') && Number(row.t_exptime) === LONG_CADENCE_SECONDS && Number.isInteger(obsid) && typeof row.target_name === 'string' ? [{ obsid, mission, target: row.target_name }] : []; });
+    return (mission === 'Kepler' || mission === 'K2') && Number(row.t_exptime) === LONG_CADENCE_SECONDS && Number.isInteger(obsid) && typeof row.target_name === 'string' && typeof row.s_ra === 'number' && typeof row.s_dec === 'number'
+      ? [{ obsid, mission, target: row.target_name, raDegrees: row.s_ra, decDegrees: row.s_dec }] : []; });
 }
 /** An observation's files, as its long-cadence target pixel files, oldest first. The quarter or campaign is in each file's description. */
 export function parseProducts(body: unknown, observation: Observation): PixelFile[] {
@@ -46,24 +48,33 @@ async function invoke(request: unknown): Promise<unknown> {
   return response.json();
 }
 
-/** Every long-cadence target pixel file of Kepler and K2 at a place. */
-export async function pixelFilesAt(raDegrees: number, decDegrees: number): Promise<PixelFile[]> {
-  if (![raDegrees, decDegrees].every(Number.isFinite) || Math.abs(decDegrees) > 90) throw new RangeError('A place needs a right ascension and a declination in degrees.');
-  const observations = parseObservations(await invoke({ service: 'Mast.Caom.Filtered.Position', format: 'json', params: { columns: 'obsid,obs_collection,target_name,t_exptime',
-    filters: [{ paramName: 'obs_collection', values: ['Kepler', 'K2'] }, { paramName: 'dataproduct_type', values: ['timeseries'] }], position: `${raDegrees}, ${decDegrees}, ${MATCH_DEGREES}` } }));
+const apart = (a: Place, b: Place) => Math.hypot((a.raDegrees - b.raDegrees) * Math.cos(a.decDegrees * Math.PI / 180), a.decDegrees - b.decDegrees);
+/** Every long-cadence target pixel file of Kepler and K2 of the target at a star's place. A star that moves is given at
+ * more than one place (where its record has it, and where it was when the mission looked): the missions' own target
+ * lists hold each star at one epoch or another, and the target within a pixel of any of them is the star's. */
+export async function pixelFilesAt(places: readonly Place[]): Promise<PixelFile[]> {
+  const first = places[0];
+  if (!first || !places.every(place => Number.isFinite(place.raDegrees) && Number.isFinite(place.decDegrees) && Math.abs(place.decDegrees) <= 90)) throw new RangeError('A place needs a right ascension and a declination in degrees.');
+  const reach = MATCH_DEGREES + Math.max(...places.map(place => apart(first, place)));
+  const observations = parseObservations(await invoke({ service: 'Mast.Caom.Filtered.Position', format: 'json', params: { columns: 'obsid,obs_collection,target_name,t_exptime,s_ra,s_dec',
+    filters: [{ paramName: 'obs_collection', values: ['Kepler', 'K2'] }, { paramName: 'dataproduct_type', values: ['timeseries'] }], position: `${first.raDegrees}, ${first.decDegrees}, ${reach}` } }))
+    .filter(observation => places.some(place => apart(place, observation) <= MATCH_DEGREES));
   const files: PixelFile[] = [];
   for (const observation of observations) files.push(...parseProducts(await invoke({ service: 'Mast.Caom.Products', format: 'json', params: { obsid: observation.obsid } }), observation));
   return files;
 }
 
-/** One file, written under `directory` as the archive serves it; one already there at its listed size is kept. */
+/** One file, written under `directory` as the archive serves it; one already there is kept. The size MAST lists for a file
+ * is not always the size it serves (two of the first nineteen read differed, 2026-10-06), so a download is checked against
+ * the length the answer itself declares. */
 export async function fetchPixelFile(file: PixelFile, directory: string): Promise<{ readonly file: string; readonly url: string; readonly bytes: number }> {
-  const url = `${MAST_FILE}?uri=${encodeURIComponent(file.uri)}`, path = resolve(directory, file.filename);
-  if (await stat(path).then(info => info.size, () => -1) === file.bytes) return { file: path, url, bytes: file.bytes };
+  const url = `${MAST_FILE}?uri=${encodeURIComponent(file.uri)}`, path = resolve(directory, file.filename), held = await stat(path).then(info => info.size, () => 0);
+  if (held > 0) return { file: path, url, bytes: held };
   const response = await paced(url);
   if (!response.ok) throw new Error(`MAST answered ${response.status} for ${file.filename}.`);
-  const bytes = Buffer.from(await response.arrayBuffer());
-  if (bytes.length !== file.bytes) throw new Error(`${file.filename} is ${bytes.length} bytes, not the ${file.bytes} MAST lists.`);
-  await mkdir(directory, { recursive: true }); await writeFile(path, bytes);
+  const bytes = Buffer.from(await response.arrayBuffer()), declared = Number(response.headers.get('content-length') ?? bytes.length);
+  if (bytes.length === 0 || bytes.length !== declared) throw new Error(`${file.filename} arrived as ${bytes.length} bytes of the ${declared} MAST declared.`);
+  // Written beside its place and moved there whole: a file cut short by a stopped run is never taken for the file.
+  await mkdir(directory, { recursive: true }); await writeFile(`${path}.part`, bytes); await rename(`${path}.part`, path);
   return { file: path, url, bytes: bytes.length };
 }

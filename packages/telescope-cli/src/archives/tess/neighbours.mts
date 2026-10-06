@@ -32,7 +32,7 @@ export interface PixelLight { /** The star's own Gaia DR3 source and its magnitu
 
 const cells = (line: string) => line.split(',');
 /** X-Match's CSV answer as each star's light: its own source is the nearest within OWN_ARCSEC. A star with no source there is left out. */
-export function parseNeighbours(csv: string): Map<string, PixelLight> {
+export function parseNeighbours(csv: string, radiusArcsec = NEIGHBOUR_ARCSEC): Map<string, PixelLight> {
   const [header, ...lines] = csv.trim().split(/\r?\n/u), names = cells(header ?? ''), at = (name: string) => names.indexOf(name), [distance, id, source, red, green] = [at('angDist'), at('id'), at('Source'), at('RPmag'), at('Gmag')];
   if ([distance, id, source, red, green].some(index => index! < 0)) throw new TypeError('X-Match did not answer with Gaia DR3 sources.');
   const byStar = new Map<string, { gaiaDr3: string; magnitude: number; arcsec: number }[]>();
@@ -40,18 +40,23 @@ export function parseNeighbours(csv: string): Map<string, PixelLight> {
     byStar.set(row[id!]!, [...byStar.get(row[id!]!) ?? [], { gaiaDr3: row[source!]!, magnitude, arcsec: Number(row[distance!]) }]); }
   const out = new Map<string, PixelLight>(), flux = (magnitude: number) => 10 ** (-0.4 * magnitude);
   for (const [star, sources] of byStar) { const own = sources.filter(one => one.arcsec <= OWN_ARCSEC).sort((a, b) => a.arcsec - b.arcsec)[0]; if (!own) continue;
-    const others = sources.filter(one => one !== own).sort((a, b) => a.magnitude - b.magnitude), theirs = others.reduce((sum, one) => sum + flux(one.magnitude), 0), brightest = others[0];
+    const others = sources.filter(one => one !== own && one.arcsec <= radiusArcsec).sort((a, b) => a.magnitude - b.magnitude), theirs = others.reduce((sum, one) => sum + flux(one.magnitude), 0), brightest = others[0];
     out.set(star, { gaiaDr3: own.gaiaDr3, magnitude: own.magnitude, neighbours: others.length, neighbourShare: Number((theirs / (theirs + flux(own.magnitude))).toFixed(4)),
       ...(brightest ? { brightest: { gaiaDr3: brightest.gaiaDr3, magnitude: brightest.magnitude, arcsec: Number(brightest.arcsec.toFixed(1)) } } : {}) }); }
   return out;
 }
 
-/** Why a star's pixels are not fetched, when they are not. */
-export function lightRefusal(light: PixelLight | undefined): string | undefined {
+/** What each mission's pixels can follow. Kepler's and K2's are 4 arcseconds wide and the pixels added up for a star reach
+ * some four of them; their photometer follows stars far fainter than TESS, and its apertures take in a bright star's bleed. */
+export const PIXELS = { TESS: { radiusArcsec: NEIGHBOUR_ARCSEC, faintest: FAINTEST_MAGNITUDE, brightest: BRIGHTEST_MAGNITUDE, name: 'TESS' },
+  Kepler: { radiusArcsec: 16, faintest: 16, brightest: -Infinity, name: 'Kepler' }, K2: { radiusArcsec: 16, faintest: 16, brightest: -Infinity, name: 'K2' } } as const;
+
+/** Why a star's pixels are not fetched, when they are not. `light` counts the neighbours within the mission's own radius. */
+export function lightRefusal(light: PixelLight | undefined, mission: keyof typeof PIXELS = 'TESS'): string | undefined { const limits = PIXELS[mission];
   if (!light) return `Gaia DR3 has no source within ${OWN_ARCSEC} arcseconds of the star's place, so how much of the light in its pixels is its own is not known.`;
-  if (light.magnitude < BRIGHTEST_MAGNITUDE) return `At magnitude ${light.magnitude.toFixed(1)} the star saturates TESS's detector: its light bleeds beyond the pixels added up for it.`;
-  if (light.magnitude > FAINTEST_MAGNITUDE) return `At magnitude ${light.magnitude.toFixed(1)} the star is fainter than the ${FAINTEST_MAGNITUDE} these pixels can follow.`;
-  if (light.neighbourShare > NEIGHBOUR_LIGHT_LIMIT) return `Other stars give ${(100 * light.neighbourShare).toFixed(0)}% of the light within ${NEIGHBOUR_ARCSEC} arcseconds of the star (Gaia DR3${light.brightest ? `; the brightest, ${light.brightest.arcsec} arcseconds away, has magnitude ${light.brightest.magnitude.toFixed(1)} against the star's ${light.magnitude.toFixed(1)}` : ''}): a period in these pixels would not be known to be the star's.`;
+  if (light.magnitude < limits.brightest) return `At magnitude ${light.magnitude.toFixed(1)} the star saturates ${limits.name}'s detector: its light bleeds beyond the pixels added up for it.`;
+  if (light.magnitude > limits.faintest) return `At magnitude ${light.magnitude.toFixed(1)} the star is fainter than the ${limits.faintest} these pixels can follow.`;
+  if (light.neighbourShare > NEIGHBOUR_LIGHT_LIMIT) return `Other stars give ${(100 * light.neighbourShare).toFixed(0)}% of the light within ${limits.radiusArcsec} arcseconds of the star (Gaia DR3${light.brightest ? `; the brightest, ${light.brightest.arcsec} arcseconds away, has magnitude ${light.brightest.magnitude.toFixed(1)} against the star's ${light.magnitude.toFixed(1)}` : ''}): a period in these pixels would not be known to be the star's.`;
   return undefined;
 }
 
@@ -66,10 +71,10 @@ export async function askNeighbours(stars: readonly { readonly id: string; reado
 
 /** Each star's light, by star id, with what is kept from earlier runs: `kept` is X-Match's answers so far and `asked` the
  * stars they cover, one id a line. Only the stars not yet asked are asked, in one request, and both files grow. */
-export async function pixelLight(stars: readonly { readonly id: string; readonly raDegrees: number; readonly decDegrees: number }[], kept?: { readonly csv: string; readonly asked: string }): Promise<Map<string, PixelLight>> {
+export async function pixelLight(stars: readonly { readonly id: string; readonly raDegrees: number; readonly decDegrees: number }[], kept?: { readonly csv: string; readonly asked: string }, radiusArcsec = NEIGHBOUR_ARCSEC): Promise<Map<string, PixelLight>> {
   const held = kept ? await readFile(kept.csv, 'utf8').catch(() => '') : '', asked = new Set(kept ? (await readFile(kept.asked, 'utf8').catch(() => '')).split('\n').filter(Boolean) : []), fresh = stars.filter(star => !asked.has(star.id));
-  if (!fresh.length) return parseNeighbours(held);
+  if (!fresh.length) return parseNeighbours(held, radiusArcsec);
   const answer = await askNeighbours(fresh), csv = held ? `${held.trimEnd()}\n${answer.split(/\r?\n/u).slice(1).join('\n')}` : answer;
   if (kept) { await mkdir(dirname(kept.csv), { recursive: true }); await writeFile(kept.csv, csv); await writeFile(kept.asked, [...asked, ...fresh.map(star => star.id)].map(id => `${id}\n`).join('')); }
-  return parseNeighbours(csv);
+  return parseNeighbours(csv, radiusArcsec);
 }

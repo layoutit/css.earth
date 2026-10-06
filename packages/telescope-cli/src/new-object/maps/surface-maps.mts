@@ -38,6 +38,11 @@ export interface MapKind<M extends SurfaceMap> {
   report(maps: readonly M[], scale: MapScale): string;
   /** Whether a map's page draws the star at the map's tilt, so the latitude the star never shows may be outlined. Left out: it does. */
   outlines?(map: M): boolean;
+  /** Where one map's table goes, the archive it is read from and the records it is bound to, when they differ from map to map
+   * (a kind fed by several missions). Left out: the kind's own `directory`, `archiveUrl` and `references`. */
+  directoryOf?(map: M): string; archiveOf?(map: M): string; referencesOf?(map: M): readonly { readonly catalogueId: string; readonly role: string; readonly evidence: string }[];
+  /** The same for the name a map's surface and input carry and the middle of its input id, with every name the kind gives: a run finds and replaces them all. */
+  consumerOf?(map: M): string; inputTagOf?(map: M): string; readonly consumers?: readonly string[];
   /** The newest map in the star's own color, when the kind's maps are how the star looks: the page then opens on it. */
   natural?(map: M, star: { readonly id: string; readonly name: string; readonly colorHex: string }): NaturalView;
 }
@@ -68,46 +73,49 @@ export function surfaceMapFiles<M extends SurfaceMap>(kind: MapKind<M>, entry: S
   const at = `src/objects/${star.id}`, files = new Map<string, string>(), ids = new Set(entry.maps.map(map => map.id)), scale = kind.scale(maps), labels = [...scale.labels];
   const raster = structuredClone(host.raster), surfaces = requireArray(raster.surfaces, `${star.id} raster surfaces`).map(surface => requireRecord(surface, `${star.id} raster surface`)), first = surfaces[0];
   if (!first) throw new Error(`${star.id}: its raster recipe has no surface to take the file names from.`);
-  const taken = surfaces.filter(surface => ids.has(requireString(surface.id, 'surface id')) && !(isRecord(surface.science) && surface.science.consumer === kind.consumer)).map(surface => surface.id);
+  const former = new Set<unknown>([kind.consumer, ...kind.consumers ?? []]);
+  const taken = surfaces.filter(surface => ids.has(requireString(surface.id, 'surface id')) && !(isRecord(surface.science) && former.has(surface.science.consumer))).map(surface => surface.id);
   if (taken.length) throw new Error(`${star.id}: dataset ${taken.join(', ')} already exists and is not one of these maps.`);
   const manifest = structuredClone(host.manifest), inputs = requireArray(manifest.inputs, `${star.id} manifest inputs`).map(input => requireRecord(input, `${star.id} manifest input`));
   const content = structuredClone(host.content), shown = requireRecord(content.datasets, `${star.id} content datasets`), controls = requireArray(shown.controls, `${star.id} dataset controls`).map(control => requireRecord(control, `${star.id} dataset control`));
   const text = structuredClone(host.text), texts = requireRecord(text.datasets, `${star.id} text datasets`), count = maps.length, epochs = `${count} ${count === 1 ? 'epoch' : 'epochs'}`;
   const newSurfaces: Json[] = [], newInputs: Json[] = [], newControls: Json[] = [];
-  for (const map of maps) { const { choice } = map, path = `${kind.directory}/${choice.program}.dat`, inputId = `${star.id}-${kind.inputTag}-${choice.id}`, tilt = Math.round(map.inclinationDegrees), outlined = tilt <= 85 && (kind.outlines?.(map) ?? true);
+  const directoryOf = (map: M) => kind.directoryOf?.(map) ?? kind.directory, archiveOf = (map: M) => kind.archiveOf?.(map) ?? kind.archiveUrl, mine = (consumer: unknown) => consumer === kind.consumer || (typeof consumer === 'string' && (kind.consumers ?? []).includes(consumer));
+  const consumerOf = (map: M) => kind.consumerOf?.(map) ?? kind.consumer, inputIdOf = (map: M) => `${star.id}-${kind.inputTagOf?.(map) ?? kind.inputTag}-${map.choice.id}`;
+  for (const map of maps) { const { choice } = map, path = `${directoryOf(map)}/${choice.program}.dat`, archive = archiveOf(map), inputId = inputIdOf(map), tilt = Math.round(map.inclinationDegrees), outlined = tilt <= 85 && (kind.outlines?.(map) ?? true);
     const words = kind.words(map, { star, count, epochs, tilt, outlined });
     files.set(`${at}/source/${path}`, map.table);
-    newInputs.push({ id: inputId, path, origin: kind.archiveUrl, productId: words.productId,
-      title: words.inputTitle, sourceUrl: kind.archiveUrl,
+    newInputs.push({ id: inputId, path, origin: archive, productId: words.productId,
+      title: words.inputTitle, sourceUrl: archive,
       credit: words.credit, displayCredit: words.displayCredit,
       license: words.license, licenseEvidence: [...words.licenseEvidence],
       acquisition: words.acquisition, ...(kind.generator ? { generator: kind.generator } : {}),
-      redistribution: words.redistribution, consumers: [kind.consumer],
-      sourceBinding: { kind: 'catalogued', references: kind.references.map(reference => ({ ...reference })) } });
+      redistribution: words.redistribution, consumers: [consumerOf(map)],
+      sourceBinding: { kind: 'catalogued', references: (kind.referencesOf?.(map) ?? kind.references).map(reference => ({ ...reference })) } });
     newSurfaces.push({ id: choice.id, output: first.output, thumbnail: first.thumbnail, source: path, falseColor: true, science: { kind: 'terrestrial-scientific', id: choice.id, label: choice.label, format: 'tecplot-lonlat-map', path, variable: kind.variable,
-      ...(outlined ? { outlineLatitudes: [-tilt] } : {}), consumer: kind.consumer, sampling: 'bilinear', displaySampling: 'bilinear', outputLongitudeOrigin: 0, units: kind.units, minimum: scale.minimum, maximum: scale.maximum, colors: [...kind.colors], labels,
+      ...(outlined ? { outlineLatitudes: [-tilt] } : {}), consumer: consumerOf(map), sampling: 'bilinear', displaySampling: 'bilinear', outputLongitudeOrigin: 0, units: kind.units, minimum: scale.minimum, maximum: scale.maximum, colors: [...kind.colors], labels,
       description: words.description,
-      title: words.surfaceTitle, sourceUrl: kind.archiveUrl } });
+      title: words.surfaceTitle, sourceUrl: archive } });
     newControls.push({ id: choice.id, label: kind.controlLabel, qualification: words.qualification, thumbnail: `${star.id}-dataset-${choice.id}.webp`, surface: `${star.id}-surface-${choice.id}@2x.webp`, poles: `${star.id}-poles-${choice.id}@2x.webp`,
-      source: { id: inputId, path: '../manifest.json', url: kind.archiveUrl }, falseColor: true, ...(count > 1 ? { step: { group: kind.stepGroup, label: choice.label } } : {}),
-      legend: { kind: 'scale', title: kind.legendTitle, labels, recipe: { palette: kind.palette.map(color => [...color]), labels }, meta: kind.units, sourceUrl: kind.archiveUrl },
+      source: { id: inputId, path: '../manifest.json', url: archive }, falseColor: true, ...(count > 1 ? { step: { group: kind.stepGroup, label: choice.label } } : {}),
+      legend: { kind: 'scale', title: kind.legendTitle, labels, recipe: { palette: kind.palette.map(color => [...color]), labels }, meta: kind.units, sourceUrl: archive },
       notes: words.notes,
       legendNote: words.legendNote });
     texts[choice.id] = { ...words.text };
   }
   // The newest map again, in the star's color: one more surface of the same table, first in the list and the page's default.
   const newest = maps.at(-1), natural = newest && kind.natural && star.colorHex ? kind.natural(newest, { id: star.id, name: star.name, colorHex: star.colorHex }) : undefined;
-  if (natural && newest) { const path = `${kind.directory}/${newest.choice.program}.dat`, inputId = `${star.id}-${kind.inputTag}-${newest.choice.id}`;
+  if (natural && newest) { const path = `${directoryOf(newest)}/${newest.choice.program}.dat`, archive = archiveOf(newest), inputId = inputIdOf(newest);
     if (ids.has(natural.id)) throw new Error(`${star.id}: a map is listed under the id ${natural.id}, which is the id of the star drawn in its own color.`);
-    if (surfaces.some(surface => surface.id === natural.id && !(isRecord(surface.science) && surface.science.consumer === kind.consumer))) throw new Error(`${star.id}: dataset ${natural.id} already exists and is not one of these maps.`);
+    if (surfaces.some(surface => surface.id === natural.id && !(isRecord(surface.science) && mine(surface.science.consumer)))) throw new Error(`${star.id}: dataset ${natural.id} already exists and is not one of these maps.`);
     ids.add(natural.id);
     newSurfaces.push({ id: natural.id, output: first.output, thumbnail: first.thumbnail, source: path, falseColor: false, science: { kind: 'terrestrial-scientific', id: natural.id, label: natural.label, format: 'tecplot-lonlat-map', path, variable: kind.variable,
-      consumer: kind.consumer, sampling: 'bilinear', displaySampling: 'bilinear', outputLongitudeOrigin: 0, units: kind.units, minimum: natural.minimum, maximum: natural.maximum, colors: [...natural.colors], labels: [`${natural.minimum}${kind.units}`, `${natural.maximum}${kind.units}`],
-      limbOf: first.id, description: natural.description, title: natural.surfaceTitle, sourceUrl: kind.archiveUrl } });
+      consumer: consumerOf(newest), sampling: 'bilinear', displaySampling: 'bilinear', outputLongitudeOrigin: 0, units: kind.units, minimum: natural.minimum, maximum: natural.maximum, colors: [...natural.colors], labels: [`${natural.minimum}${kind.units}`, `${natural.maximum}${kind.units}`],
+      limbOf: first.id, description: natural.description, title: natural.surfaceTitle, sourceUrl: archive } });
     newControls.unshift({ id: natural.id, label: natural.label, qualification: natural.qualification, thumbnail: `${star.id}-dataset-${natural.id}.webp`, surface: `${star.id}-surface-${natural.id}@2x.webp`, poles: `${star.id}-poles-${natural.id}@2x.webp`,
-      source: { id: inputId, path: '../manifest.json', url: kind.archiveUrl }, falseColor: false, notes: natural.notes });
+      source: { id: inputId, path: '../manifest.json', url: archive }, falseColor: false, notes: natural.notes });
     texts[natural.id] = { ...natural.text }; }
-  const ours = (record: Json) => isRecord(record.science) && record.science.consumer === kind.consumer, oursInput = (input: Json) => Array.isArray(input.consumers) && input.consumers.includes(kind.consumer);
+  const ours = (record: Json) => isRecord(record.science) && mine(record.science.consumer), oursInput = (input: Json) => Array.isArray(input.consumers) && input.consumers.some(mine);
   const dropped = new Set(surfaces.filter(ours).map(surface => requireString(surface.id, 'surface id')).filter(id => !ids.has(id)));
   // The descriptor declares each surface dataset the page prepares, the way it declares the star's first one.
   const descriptor = structuredClone(host.descriptor), declared = requireArray(requireRecord(requireRecord(descriptor.properties, `${star.id} descriptor properties`).recipe, `${star.id} descriptor recipe`).surfaces, `${star.id} descriptor surfaces`).map(surface => requireRecord(surface, `${star.id} descriptor surface`));
