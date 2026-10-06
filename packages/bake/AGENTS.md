@@ -266,8 +266,8 @@ cycle. Share anything else through `@cssearth/core` or another package. Prepared
     code that makes an intermediate, such as the radial snapshot and PDS constraint map in this topic.
     Terrestrial keeps its radial terrain and materials in `radial/`, its solid rasters in `solid/`, and the
     surface-observation pipeline (formats, cameras, pixel geometry, photometry, footprints, surface transfer, registration) in
-    `surface-observations/`, described in its README (its tests are in `src/objects/layers/terrestrial/surface-observations/`, its evidence in
-    `evidence/photograph-pipeline/`, the OSIRIS shape comparison in `packages/bake/cli/osiris-shape-comparison.mts`); the paged-ellipsoid globe (`globe/`) holds its recipe context and its scene, split into the
+    `surface-observations/`, described in its README (its tests are in `src/objects/layers/terrestrial/surface-observations/`,
+    the OSIRIS shape comparison in `packages/bake/cli/osiris-shape-comparison.mts`); the paged-ellipsoid globe (`globe/`) holds its recipe context and its scene, split into the
     shared scene context, the sphere leaves, the cutaway interior and the atmosphere material bank.
   Body pipeline tests stay in `packages/bake/authoring/<body>/`; domain tests also live under
   `packages/bake/src/objects/<topic>/`. The moved terrestrial Node suites live in
