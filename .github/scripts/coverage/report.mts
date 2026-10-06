@@ -15,7 +15,7 @@ import { list, repoPath } from './raw.mts';
 
 export function scopeFiles(root:string,scope:string):string[] {
   if(scope!=='root' && scope!=='site') return list(JSON.parse(readFileSync(resolve(root,scope),'utf8'))).map(repoPath);
-  return execFileSync('git',['ls-files','site'],{cwd:root,encoding:'utf8'}).split('\n').filter(f=>/\.(mts|ts)$/u.test(f) && !/\.d\.m?ts$/u.test(f) && !/\.test\./u.test(f) && !f.startsWith('site/test/') && !f.includes('/evidence/') && (scope==='site' || f.split('/').length===2)).sort();
+  return execFileSync('git',['ls-files','site'],{cwd:root,encoding:'utf8'}).split('\n').filter(f=>/\.(mts|ts)$/u.test(f) && !/\.d\.m?ts$/u.test(f) && !/\.test\./u.test(f) && !f.includes('/evidence/') && (scope==='site' || f.split('/').length===2)).sort();
 }
 export function table(summary:Summary):string {
   const row=(name:string,v:Summary['aggregate'])=>`${name.padEnd(22)} ${v.lines.pct.toFixed(2).padStart(7)} ${v.branches.pct.toFixed(2).padStart(8)} ${v.functions.pct.toFixed(2).padStart(9)}`;

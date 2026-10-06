@@ -82,7 +82,7 @@ function loadManifest(root: string): Manifest {
 function boundaryRoleFor(path: string): BoundaryRole | undefined {
   // The FITS and SBMT oracle gates are evidence harnesses; other CLIs are not exempt.
   if (path === 'packages/bake/cli/test-sbmt.mts' || path === '.github/scripts/checks/test-fits.mts') return 'evidence';
-  if (/\.(?:test|spec)\.[cm]?[jt]sx?$/u.test(path) || path.startsWith('site/test/')
+  if (/\.(?:test|spec)\.[cm]?[jt]sx?$/u.test(path)
     || /^src\/(?:[^/]+\/)*test\//u.test(path)
     || path.startsWith('tests/') || /(?:^|\/)(?:__fixtures__|fixtures)(?:\/|$)/u.test(path)) return 'test';
   // This exact namespace combines observation signals; it is authored processing,
