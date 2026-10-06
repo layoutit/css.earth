@@ -2,12 +2,12 @@ import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import type { APIRoute, GetStaticPaths } from 'astro';
 import { systemViewFile } from '@cssearth/objects';
-import { SYSTEM_VIEW_HOSTS } from '../../../system-framing.mts';
-import { requireObject } from '../../../objects.mts';
+import { SYSTEM_VIEW_HOSTS } from '../../../world/system-framing.mts';
+import { requireObject } from '../../../directory/objects.mts';
 
 // One system's camera candidates, copied at build from the package of the system its host is inside
 // (`src/objects/<system>/prepared/views/<host>.json`): navigation fetches the system it frames
-// (site/world-system-views.mts), so no page downloads every system's.
+// (site/world/world-system-views.mts), so no page downloads every system's.
 export const getStaticPaths: GetStaticPaths = async () => [...SYSTEM_VIEW_HOSTS].map(id => ({ params: { id } }));
 
 export const GET: APIRoute = async ({ params }) => {

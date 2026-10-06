@@ -13,7 +13,7 @@ aliases and classification tabs use this inventory.
 | Published source | A scientific work, release or product identified in the source catalogue; a local file hash identifies retained bytes separately. |
 
 Every page is `/<id>/`, one URL system for every object:
-[`navigation-scope.mts`](../site/navigation/navigation-scope.mts) reads and
+[`navigation-scope.mts`](../site/world/navigation-scope.mts) reads and
 writes them. Every object has a scene of its own, and its page mounts it, except a
 system, whose page mounts its host's scene seen out to its members. The page of an
 object seen from inside, opened cold, mounts the world host, the Sun, at that zoom.
@@ -33,12 +33,12 @@ An object with a scene of its own (another galaxy, a cluster of galaxies) shows 
 body from outside, so it takes the view once the camera is outside it: as far from
 the body as that object's centre and its radius. A star of the Large Magellanic Cloud
 zooms out into the Cloud, M87* into M87, M87 into the Virgo Cluster. That scene is
-then left the way any body's is ([overview-selection.mts](../site/overview-selection.mts),
-[inside-view.mts](../site/inside-view.mts)). The way back in needs no click where the object's walls
+then left the way any body's is ([overview-selection.mts](../site/selection/overview-selection.mts),
+[inside-view.mts](../site/world/inside-view.mts)). The way back in needs no click where the object's walls
 surround a body: its entry names that body (`inner`, [surrounded-body.mts](../site/world/surrounded-body.mts)), and
 a zoom in that reaches the nearest view the object's scene allows goes on into the body's scene, which draws
 the walls around it. While that body is selected the object has no marker: the view is among its walls, and its
-breadcrumb names it ([application-world-context.mts](../site/application-world-context.mts)). The Homunculus Nebula zooms in to Eta Carinae, NGC 2392 to HD 59088. A system can be inside another: a star
+breadcrumb names it ([application-world-context.mts](../site/scene/application-world-context.mts)). The Homunculus Nebula zooms in to Eta Carinae, NGC 2392 to HD 59088. A system can be inside another: a star
 bound to another, with bodies of its own, hosts its system inside that star's. The
 brown dwarfs Epsilon Indi Ba and Bb are Epsilon Indi B, inside Epsilon Indi A's
 system, and zooming out of Epsilon Indi B hands the view to that system the same way.
@@ -64,9 +64,9 @@ WASP-43b form another. Each world row says which object its body is inside: the
 object whose file the row arrives in.
 [`planetary-system-members.mts`](../site/model/planetary-system-members.mts) reads each
 system's members from that, and
-[`object-systems.mts`](../site/object-systems.mts) joins them with the registry,
+[`object-systems.mts`](../site/world/object-systems.mts) joins them with the registry,
 so no list names the systems and nothing walks orbits or bonds to find them. The
-moon systems ([`satellite-systems.mts`](../site/satellite-systems.mts)) and the
+moon systems ([`satellite-systems.mts`](../site/world/satellite-systems.mts)) and the
 set of bodies a selected star opens are read the same way. A star without orbiting bodies, such as Betelgeuse, belongs to no
 system. A system is named by its star's system name (the TRAPPIST-1 system, the
 Galactic Centre).
@@ -96,16 +96,16 @@ has a [satellite-system view](satellite-system-navigation.md). Its
 the plain host and satellite routes name individual bodies. The family uses the
 host's mounted scene and the same world camera.
 
-There is one selection: an object, by its id (`site/scene/scene-subject.mts`, `{ objectId }`). A
+There is one selection: an object, by its id (`site/world/scene-subject.mts`, `{ objectId }`). A
 system is an object of its own, the host's system (`/jupiter-system/`, `/trappist-1-system/`,
 `/solar-system/`), whose page mounts the host's scene; how far out that scene is seen (`body`, or
 `system` for a host out to what is inside its system) is read from the selected object. Both show
 the same card, the host's: the system's header, tabs and list are parts of it
 ([`SystemCard.astro`](../site/components/SystemCard.astro)), mounted while the system is the view.
 A star's planets, a star's companion stars and a planet's moons are one card, read from the
-system's object and the objects inside it ([`system-card.mts`](../site/system-card.mts)). An address names a
+system's object and the objects inside it ([`system-card.mts`](../site/content/system-card.mts)). An address names a
 system by the registry's id rule alone, and whether it is a star's system or a planet's moons is
-what its host is ([`scene-subject.mts`](../site/scene/scene-subject.mts)): no table of systems is asked.
+what its host is ([`scene-subject.mts`](../site/world/scene-subject.mts)): no table of systems is asked.
 
 ![The WASP-43 system overview: the star, WASP-43b and its orbit, with the system's card](images/wasp-43-system-overview.png)
 

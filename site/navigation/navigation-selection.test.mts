@@ -3,7 +3,7 @@ import { readFileSync } from 'node:fs';
 import test from 'node:test';
 import ts from 'typescript';
 import { readNavigationSelection } from './navigation-request.mts';
-import { selectionTargetFromUrl } from '../scene/scene-selection.mts';
+import { selectionTargetFromUrl } from '../selection/scene-selection.mts';
 
 /** Every module a file names by import, re-export or inline `import()` type, resolved against that file. */
 function modulesNamedBy(file: URL): string[] {

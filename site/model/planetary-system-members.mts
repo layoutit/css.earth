@@ -21,7 +21,7 @@ export function planetarySystemParents(plan: PlanetarySystemPlan): ReadonlyMap<s
 /** Every candidate system host with the prepared bodies inside its system at any depth, in plan order. Candidates are the
  * focus and every body with a system view, wherever it is in the tree: a star inside another's system hosts its own inside
  * it (Epsilon Indi Ba, with Bb around it, hosts Epsilon Indi B inside Epsilon Indi A's system), and its members are
- * members of both. Whether a candidate is a star is the registry's to say (site/object-systems.mts): a planet with moons
+ * members of both. Whether a candidate is a star is the registry's to say (site/world/object-systems.mts): a planet with moons
  * is a candidate too, and no planetary system. A cyclic chain anywhere in the plan is rejected. */
 export function planetarySystemMembers(plan: PlanetarySystemPlan): readonly PlanetarySystemMembers[] {
   const parents = planetarySystemParents(plan);

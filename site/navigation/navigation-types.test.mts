@@ -5,7 +5,7 @@ import ts from 'typescript';
 import type { WorldHandoff, NavigationHistory, NavigationIntent, SceneView, SelectionTarget } from './navigation-types.mts';
 import type { WorldHandoff as OldWorldHandoff } from './prepared-world-navigation.mts';
 import type { NavigationHistory as OldNavigationHistory, NavigationIntent as OldNavigationIntent } from './navigation-request.mts';
-import type { SceneView as OldSceneView, SelectionTarget as OldSelectionTarget } from '../scene/scene-selection.mts';
+import type { SceneView as OldSceneView, SelectionTarget as OldSelectionTarget } from '../selection/scene-selection.mts';
 
 type Equal<A, B> = (<T>() => T extends A ? 1 : 2) extends (<T>() => T extends B ? 1 : 2) ? true : false;
 const compatibility: [Equal<WorldHandoff, OldWorldHandoff>, Equal<NavigationHistory, OldNavigationHistory>,

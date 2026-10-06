@@ -1,8 +1,8 @@
 import type { WorldPreferences } from '../world/world-preferences.mts';
 import type { BrowserWindow, ShellCamera, PlaybackState } from '../browser/browser-types.mts';
 import type { NavigationContent } from '../navigation/navigation-content.mts';
-import type { ObjectEntry } from '../objects.mts';
-import type { SceneSubject, SceneView, SelectionTarget } from '../scene/scene-selection.mts';
+import type { ObjectEntry } from '../directory/objects.mts';
+import type { SceneSubject, SceneView, SelectionTarget } from '../selection/scene-selection.mts';
 import type { WorldCameraPose } from '@cssearth/engine';
 import type { DestinationPresentation } from './destination-browser.mts';
 
@@ -22,7 +22,9 @@ export interface ShellOptions {
 }
 
 /** The arriving object and the view of it; `preview` shows a system's selection while its framing flight is under way. */
-export interface ShellNavigationTarget { view: SceneView; object: ObjectEntry; targetWorldCamera?: WorldCameraPose; preview?: boolean }
+export interface ShellNavigationTarget { view: SceneView; object: ObjectEntry; targetWorldCamera?: WorldCameraPose; preview?: boolean;
+  /** The camera carried the view to this scene (a zoom's or a pill landing's hand-over): the reader chose no result, so an open search stays. */
+  handover?: boolean }
 
 export interface ShellNavigationTransition {
   /** Publish the arriving selection while its camera can still be in flight. */

@@ -1,0 +1,46 @@
+{
+  "id": "publication-umetsu-2015-abell-1689-triaxial",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Three-dimensional Multi-probe Analysis of the Galaxy Cluster A1689",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1503.01482"
+    },
+    {
+      "type": "doi",
+      "value": "10.1088/0004-637X/806/2/207"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/1503.01482",
+      "label": "Published reference"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/1503.01482",
+      "checkedOn": "2026-10-06",
+      "locator": "Table 1, J2000: brightest galaxy 13:11:29.52, -01:20:27.59; X-ray centre 13:11:29.50, -01:20:29.92; redshift 0.183. Sect. VII.2 (from Sereno et al. 2012): the Chandra X-ray image is concentric ellipses of ellipticity 0.15 +/- 0.03 at position angle 12 +/- 3 degrees east of north; X-ray and Sunyaev-Zel'dovich data alone give the gas a line-of-sight elongation of 1.70 +/- 0.29. Table 5, weak and strong lensing together: mass ellipticity 0.29 +/- 0.05 at 11.4 +/- 4.9 degrees, centroid 0.0 +/- 1.3, -1.9 +/- 1.4 arcsec from the brightest galaxy. Eq. 35: the elongation is a shell's half length along the sight line over its long half axis on the sky. Sect. VIII.2, joint fit with flat priors: elongation 1.19 +/- 0.37 for the mass and 1.22 +/- 0.24 for the gas; Table 7: intrinsic axis ratios 0.39 +/- 0.15 and 0.57 +/- 0.19, cosine of the angle between the long axis and the sight line 0.93 +/- 0.06 (22 +/- 10 degrees); Table 8: gas axis ratios 0.60 +/- 0.14 and 0.70 +/- 0.16."
+    }
+  ],
+  "creators": [
+    "Umetsu, K.",
+    "Sereno, M.",
+    "Medezinski, E.",
+    "Nonino, M.",
+    "Mroczkowski, T.",
+    "Diego, J. M.",
+    "Ettori, S.",
+    "Okabe, N.",
+    "Broadhurst, T.",
+    "Lemze, D."
+  ],
+  "publisher": "ApJ 806, 207",
+  "publicationDate": "2015",
+  "relations": [],
+  "statements": []
+}

@@ -1,7 +1,7 @@
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
-import { APPLICATION_WORLD_INDEX, APPLICATION_WORLD_FILE_OF } from '../world-context-plan.mts';
-import { OBJECTS } from '../objects.mts';
+import { APPLICATION_WORLD_INDEX, APPLICATION_WORLD_FILE_OF } from '../directory/world-context-plan.mts';
+import { OBJECTS } from '../directory/objects.mts';
 
 /** The build's reading of the world's files, in Node only: what each page, object entry and world endpoint says of where a
  * body's row is. Every world body is in the file of the object it is inside (`summarizeWorldContext` in @cssearth/bake);

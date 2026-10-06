@@ -16,6 +16,6 @@
     "incremental": true,
     "tsBuildInfoFile": "../output/tsbuildinfo/shell.tsbuildinfo"
   },
-  "include": ["**/*.mts", "**/*.ts", "../netlify/**/*.ts", "../cloudflare/**/*.ts"],
+  "include": ["**/*.mts", "**/*.ts", "../deploy/**/*.ts", "../deploy/**/*.mts"],
   "exclude": ["test"]
 }

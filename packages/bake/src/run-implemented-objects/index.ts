@@ -1,6 +1,6 @@
 import { projectRoot as checkoutProjectRoot } from '@cssearth/core/node';
 import { testLaneFiles } from '../preparation/index.ts';
-// `@cssearth/bake/run-implemented-objects` (Node only): runs a registered scene object's acquire, prepare, test, browser
+// `@cssearth/bake/run-implemented-objects` (Node only): runs a registered scene object's acquire, prepare, test
 // or assemble command, and the concurrency-limited scheduler that prepares several objects with a memory budget. It
 // imports `sources`. `packages/bake/cli/run-implemented-objects.mts` is its command.
 import { isArray } from '@cssearth/core';
@@ -65,7 +65,6 @@ export async function resolveObjectCommand(
   const scripts: Readonly<Partial<Record<string, string>>> = Object.freeze({
     acquire: 'packages/bake/cli/object-operations.mts',
     prepare: 'site/build/prepare/prepare-authored.ts',
-    browser: 'site/test/dom-cleanliness-browser.mts',
     assemble: 'packages/bake/cli/object-operations.mts',
   });
   const relative = scripts[mode];
@@ -268,16 +267,11 @@ function printPreparationProgress(event: PreparationEvent) {
 }
 
 export async function main(mode = process.argv[2]) {
-  if (!new Set(["acquire", "prepare", "test", "browser", "assemble"]).has(mode)) {
+  if (!new Set(["acquire", "prepare", "test", "assemble"]).has(mode)) {
     throw new TypeError(
       "Usage: node packages/bake/cli/run-implemented-objects.mts " +
-      "acquire|prepare|test|browser|assemble",
+      "acquire|prepare|test|assemble",
     );
-  }
-
-  if (mode === "browser") {
-    await run(process.execPath, [resolve("site/test/dom-cleanliness-browser.mts"), ...process.argv.slice(3)]);
-    return;
   }
 
   if (mode === "prepare") {
@@ -302,7 +296,7 @@ export async function main(mode = process.argv[2]) {
     }
     const argumentsList = mode === "test"
       ? ["--test", ...await discoverObjectTests(id)]
-      : [await resolveObjectCommand(id, mode), ...(mode !== 'browser' ? [mode, id] : []), ...process.argv.slice(3)];
+      : [await resolveObjectCommand(id, mode), mode, id, ...process.argv.slice(3)];
     await run(process.execPath, argumentsList, mode === "test" ? { ...process.env, CSSEARTH_TEST_OBJECTS: id } : undefined);
   }
 }

@@ -163,3 +163,19 @@ test("a bank's billboard pictures the dataset its host selected, not the bank's 
   assert.equal(leaf.style.backgroundImage, 'url("/billboards/shell.webp")');
   lifetime.destroy();
 });
+
+test('a bank that stands in for the detailed one is drawn as the detailed one is, and says whether it draws', async () => {
+  const f = await fixture();
+  const publish = (standIn?: string) => f.banks.publish({ referenceFrame: 'fixture', epochJdTt: 1, pose: { positionM: [0, 0, 10], orientationXyzw: [0, 0, 0, 1] } },
+    { focalPixels: 100, principalOffsetPixels: [0, 0], widthPixels: 400, heightPixels: 300 }, 1, 0, 'picked', 1, standIn);
+  // Another bank of the body is detailed: inside its close-up this one is out of the picture.
+  publish();
+  for (const root of f.targets) assert.equal(root.style.display, 'none');
+  assert.equal(f.banks.drawing('fixture'), false);
+  publish('fixture');
+  for (const root of f.targets) assert.deepEqual([root.style.display, root.style.opacity], ['block', '1']);
+  assert.equal(f.banks.drawing('fixture'), true);
+  decode.ready = false; publish('fixture');
+  assert.equal(f.banks.drawing('fixture'), false, 'its own images gone, it draws nothing');
+  f.lifetime.destroy();
+});

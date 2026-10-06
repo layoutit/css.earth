@@ -3,7 +3,7 @@ import { sourceTest } from '@cssearth/objects/node/source-test';
 const test = sourceTest();
 import { readFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
-import { SCENE_OBJECTS } from '../objects.mts';
+import { SCENE_OBJECTS } from '../directory/objects.mts';
 import { required } from '../navigation/navigation-test-values.test-support.mts';
 import { SourceEvidence } from './source-evidence-values.test-support.mts';
 import { hasErrorCode } from '@cssearth/core';

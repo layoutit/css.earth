@@ -42,6 +42,13 @@ import { hostedPlanetStateRelativeKm, PARSEC_KM, skyBasis, starAstrometry } from
 const METERS_PER_PARSEC = 3.085677581491367e16;
 const repositoryRoot = checkoutProjectRoot(import.meta.url);
 
+/** The telescope behind an image: its facility in site/source/facilities, and the mission it flew as when the catalogue pairs
+ * the two. A JWST program's bands and HST products name theirs by their route; a deposit or an archive image states it. */
+export interface BandFacility { readonly facilityId: string; readonly missionId?: string }
+function parseFacility(value: unknown, label: string): BandFacility {
+  const f = requireRecord(value, label);
+  return { facilityId: requireString(f.facilityId, `${label} facilityId`), ...(f.missionId === undefined ? {} : { missionId: requireString(f.missionId, `${label} missionId`) }) };
+}
 export interface CircumstellarDataset {
   readonly id: string; readonly label: string; readonly title: string; readonly summary: string; readonly description: string;
   /** The pinned JWST imaging program the bands come from, or '' when the dataset reads an author's deposited image instead. */
@@ -53,6 +60,7 @@ export interface CircumstellarDataset {
     readonly pixelArcsec: number; readonly orientation: 'north-up-east-left'; readonly starPixel: 'array-centre'; readonly orientationSource: string;
     readonly unit: string; readonly filter: string; readonly instrument: string; readonly observed: string;
     readonly title: string; readonly credit: string; readonly displayCredit: string; readonly license: string; readonly acquisition: string;
+    readonly facility?: BandFacility;
   };
   /** An archive image with its own sky coordinates, named by its path and origin: an ALMA pipeline continuum image, read through its WCS (SIN or
    * TAN) from its primary HDU. The star is the host's catalogue position moved by its proper motion to the image's DATE-OBS. Its one
@@ -61,6 +69,7 @@ export interface CircumstellarDataset {
     readonly band: string; readonly path: string; readonly url: string; readonly landing: string; readonly bytes: number;
     readonly unit: string; readonly filter: string; readonly instrument: string; readonly observed: string;
     readonly title: string; readonly credit: string; readonly displayCredit: string; readonly license: string; readonly acquisition: string;
+    readonly facility?: BandFacility;
     /** The same product's primary beam, gzipped FITS on the image's own pixels: the image is multiplied by it, undoing the
      * primary-beam correction, when the publisher shows the image uncorrected. */
     readonly primaryBeam?: { readonly path: string; readonly url: string; readonly bytes: number; readonly title: string; readonly source: string };
@@ -154,7 +163,8 @@ export function parseCircumstellarRecipe(value: unknown): CircumstellarRecipe {
       return { band: text('band'), path: text('path'), url: text('url'), landing: text('landing'), bytes: requireFiniteNumber(d.bytes, 'deposit bytes'),
         pixelArcsec: requireFiniteNumber(d.pixelArcsec, 'deposit pixelArcsec'), orientation: 'north-up-east-left' as const, starPixel: 'array-centre' as const,
         orientationSource: text('orientationSource'), unit: text('unit'), filter: text('filter'), instrument: text('instrument'), observed: text('observed'),
-        title: text('title'), credit: text('credit'), displayCredit: text('displayCredit'), license: text('license'), acquisition: text('acquisition') };
+        title: text('title'), credit: text('credit'), displayCredit: text('displayCredit'), license: text('license'), acquisition: text('acquisition'),
+        ...(d.facility === undefined ? {} : { facility: parseFacility(d.facility, 'deposit facility') }) };
     })();
     const hst = dataset.hst === undefined ? undefined : (() => {
       const h = requireRecord(dataset.hst, 'hst'), text = (key: string) => requireString(h[key], `hst ${key}`);
@@ -174,7 +184,8 @@ export function parseCircumstellarRecipe(value: unknown): CircumstellarRecipe {
         return { path: field('path'), url: field('url'), bytes: requireFiniteNumber(b.bytes, 'archive primaryBeam bytes'), title: field('title'), source: field('source') }; })();
       return { band: text('band'), path: text('path'), url: text('url'), landing: text('landing'), bytes: requireFiniteNumber(a.bytes, 'archive bytes'),
         unit: text('unit'), filter: text('filter'), instrument: text('instrument'), observed: text('observed'), title: text('title'), credit: text('credit'),
-        displayCredit: text('displayCredit'), license: text('license'), acquisition: text('acquisition'), ...(beam ? { primaryBeam: beam } : {}),
+        displayCredit: text('displayCredit'), license: text('license'), acquisition: text('acquisition'),
+        ...(a.facility === undefined ? {} : { facility: parseFacility(a.facility, 'archive facility') }), ...(beam ? { primaryBeam: beam } : {}),
         ...(a.limitation === undefined ? {} : { limitation: text('limitation') }) };
     })();
     const pointSources = dataset.pointSources === undefined ? undefined : (() => {
@@ -280,7 +291,11 @@ function hstFilter(band: string) { const filter = band.split('-').at(-1)!; if (!
  * along it. */
 /** Where a band's image comes from, as the manifest, provenance and presentation cite it. */
 interface BandOrigin { readonly file: string; readonly url: string; readonly bytes: number; readonly title: string; readonly credit: string; readonly displayCredit: string;
-  readonly license: string; readonly acquisition: string; readonly role: string; readonly landing: string; readonly observed: string; readonly instrument: string }
+  readonly license: string; readonly acquisition: string; readonly role: string; readonly landing: string; readonly observed: string; readonly instrument: string;
+  readonly facility?: BandFacility }
+/** The telescope record of a manifest input, as the catalogues read it: the facility, evidenced by the input's own origin and credit. */
+const captureOf = (facility: BandFacility | undefined, origin: string, credit: string) =>
+  facility ? { capture: { attributions: [{ kind: 'facility', ...facility, evidence: `${origin} \u2014 ${credit}` }] } } : {};
 type BandRead = { band: string; mosaic: string; primary: Record<string, unknown>; sky: SkyPlane; origin: BandOrigin; inputId?: string };
 
 /** An HST dataset's bands: each roll's drizzled PSF-subtracted product, checked by size, read about the star where the subtraction
@@ -307,7 +322,8 @@ export async function hstChannels(dataset: CircumstellarDataset, distancePc: num
         origin: { file: name, url: hst.landing, bytes: product.bytes, title: `HST programme ${hst.subtraction.replace(/^.*-/u, '')} · ACS/HRC ${filter}, roll ${product.roll}, PSF-subtracted and drizzled here`,
           credit: hst.credit, displayCredit: hst.displayCredit, license: hst.license,
           acquisition: `Made here: node packages/telescope-cli/src/archives/hst/psf-subtract.mts ${hst.subtraction} ${hst.work} recalibrates the raw exposures pinned in packages/telescope-cli/src/archives/hst/programs/${hst.subtraction.replace(/-\d+$/u, '')}-${hst.subtraction.replace(/^.*-/u, '')}.json with calacs, subtracts the reference star as packages/telescope-cli/src/archives/hst/programs/${hst.subtraction}.psf-subtraction.json states, and drizzles the result north up; its product record is beside it.`,
-          role: `${hst.instrument} ${filter} image of roll ${product.roll}, PSF-subtracted and drizzled here, the ${dataset.id} leaves`, landing: hst.landing, observed: hst.observed, instrument: hst.instrument } });
+          role: `${hst.instrument} ${filter} image of roll ${product.roll}, PSF-subtracted and drizzled here, the ${dataset.id} leaves`, landing: hst.landing, observed: hst.observed, instrument: hst.instrument,
+          facility: { facilityId: 'hubble', missionId: 'hubble' } } });
     }
     const plane = Float32Array.from(rolls[0]!.plane, (_, p) => {
       const values = rolls.map(roll => roll.plane[p]! * perSteradian(roll)).filter(Number.isFinite);
@@ -357,7 +373,8 @@ async function buildDataset(recipe: CircumstellarRecipe, dataset: CircumstellarD
     read = { channels: CHANNELS.map(() => Float32Array.from(plane.plane)), planes: new Map([[deposit.band, plane]]) };
     bands.push({ band: deposit.band, mosaic: file, primary: { 'DATE-OBS': deposit.observed }, sky: plane,
       origin: { file: deposit.path.replace(/^.*\//u, ''), url: deposit.url, bytes: deposit.bytes, title: deposit.title, credit: deposit.credit, displayCredit: deposit.displayCredit, license: deposit.license,
-        acquisition: deposit.acquisition, role: `${deposit.instrument} ${deposit.filter} image deposited with its paper, the ${dataset.id} leaves`, landing: deposit.landing, observed: deposit.observed, instrument: deposit.instrument } });
+        acquisition: deposit.acquisition, role: `${deposit.instrument} ${deposit.filter} image deposited with its paper, the ${dataset.id} leaves`, landing: deposit.landing, observed: deposit.observed, instrument: deposit.instrument,
+        ...(deposit.facility ? { facility: deposit.facility } : {}) } });
   } else if (dataset.archive) {
     // An archive image with its own sky coordinates, read through its WCS about the star where its catalogue position and
     // proper motion put it on the day of the observation.
@@ -380,7 +397,8 @@ async function buildDataset(recipe: CircumstellarRecipe, dataset: CircumstellarD
     read = { channels: CHANNELS.map(() => Float32Array.from(plane.plane)), planes: new Map([[archive.band, plane]]) };
     bands.push({ band: archive.band, mosaic: file, primary: { 'DATE-OBS': observed, starRaDecDeg: [starRaDeg, starDecDeg] }, sky: plane,
       origin: { file: archive.path.replace(/^.*\//u, ''), url: archive.url, bytes: archive.bytes, title: archive.title, credit: archive.credit, displayCredit: archive.displayCredit, license: archive.license,
-        acquisition: archive.acquisition, role: `${archive.instrument} ${archive.filter} image from its archive, the ${dataset.id} leaves`, landing: archive.landing, observed: archive.observed, instrument: archive.instrument } });
+        acquisition: archive.acquisition, role: `${archive.instrument} ${archive.filter} image from its archive, the ${dataset.id} leaves`, landing: archive.landing, observed: archive.observed, instrument: archive.instrument,
+        ...(archive.facility ? { facility: archive.facility } : {}) } });
   } else if (dataset.hst) {
     read = await hstChannels(dataset, distancePc, halfUnits, size, bands);
   } else {
@@ -398,7 +416,7 @@ async function buildDataset(recipe: CircumstellarRecipe, dataset: CircumstellarD
         credit: recipe.credit, displayCredit: 'NASA/ESA/CSA JWST, MAST', license: recipe.license.note,
         acquisition: jwstAcquisition(dataset.program, entry.level3.uri, manifest),
         role: `MAST level-3 coronagraph mosaic ${entry.level3.name} (calwebb_coron3), the ${filterOf(band)} band of the ${dataset.id} leaves`, landing: recipe.sourceUrl,
-        observed: String(primary['DATE-OBS']), instrument: `JWST/NIRCam behind the ${JWST_BANDS[band]!.coronagraph} coronagraph` } });
+        observed: String(primary['DATE-OBS']), instrument: `JWST/NIRCam behind the ${JWST_BANDS[band]!.coronagraph} coronagraph`, facility: { facilityId: 'webb' } } });
   }
   // The ring is measured on the mean reflectance of the three channels; its noise is the bands' combined, in reflectance.
   const mean = Float32Array.from({ length: count }, (_, p) => (read.channels[0]![p]! + read.channels[1]![p]! + read.channels[2]![p]!) / 3);
@@ -638,7 +656,7 @@ function edgeOnLimitations(datasets: readonly CircumstellarDataset[]) {
     'Nothing finer than an image\u2019s pixels or the grid\u2019s cells is in the drawn volume.',
     ...datasets.flatMap(dataset => dataset.beyondGrid ? [`${dataset.id}: ${dataset.beyondGrid}`] : []),
     ...datasets.flatMap(dataset => dataset.deposit ? [
-      `${dataset.id}: the ${dataset.deposit.instrument} image is the authors\u2019 own reduction (${dataset.deposit.title}), combined from observations made ${dataset.deposit.observed}, and carries no sky coordinates; its orientation is stated and checked, not read from a header. Close to the star its PSF subtraction leaves light off the disc too, which is drawn with the disc. It is one visible filter shown in grey, brightness only.`,
+      `${dataset.id}: the ${dataset.deposit.instrument} image is the authors\u2019 own reduction (${dataset.deposit.title}), combined from observations made ${dataset.deposit.observed}, and carries no sky coordinates; its orientation is stated and checked, not read from a header. Close to the star its PSF subtraction leaves light off the disc too, which is drawn with the disc. It is one visible filter shown in gray, brightness only.`,
     ] : dataset.hst ? [
       `${dataset.id}: the colors are the disc\u2019s contrast to the star in ${Object.keys(dataset.hst.products).map(filterOf).join(', ')}, blue, green and red, which the eye would see as its color against the star\u2019s: a white disc scatters like the star shines. The reference star\u2019s light was removed at the flux ratio the paper states, not at the scale that best cancels it here, and what that leaves near the star and along the occulting finger is drawn with the disc (${dataset.hst.subtraction}.psf-subtraction.json records the scale a free fit would choose).`,
     ] : [
@@ -796,7 +814,7 @@ export async function author(id: string, options: { sources?: readonly string[] 
     return { id: inputId, dependencies: [], sourceBinding: { kind: 'catalogued', references: [{ catalogueId, role: 'material', evidence }] },
       path: dataset.deposit ? dataset.deposit.path : dataset.archive ? dataset.archive.path : dataset.hst ? `${dataset.hst.work}/psf-subtracted/${band.origin.file}` : `${downloadsBase}/observations/${band.origin.file}`, origin: band.origin.url, sourceUrl: band.origin.landing,
       title: band.origin.title, credit: band.origin.credit, displayCredit: band.origin.displayCredit, acquisition: band.origin.acquisition,
-      license: band.origin.license, datasetId: dataset.id };
+      license: band.origin.license, datasetId: dataset.id, ...captureOf(band.origin.facility, band.origin.url, band.origin.credit) };
   });
   for (const b of built) {
     const beam = b.dataset.archive?.primaryBeam;
@@ -805,7 +823,7 @@ export async function author(id: string, options: { sources?: readonly string[] 
     const evidence = pinnedEvidence.get(`${inputId}/${catalogueId}`) ?? `${packageBase}/manifest.json#/inputs/${index}`;
     inputs.push({ id: inputId, dependencies: [], sourceBinding: { kind: 'catalogued', references: [{ catalogueId, role: 'material', evidence }] }, path: beam.path, origin: beam.url,
       sourceUrl: b.dataset.archive!.landing, title: beam.title, credit: b.dataset.archive!.credit, displayCredit: b.dataset.archive!.displayCredit, acquisition: b.dataset.archive!.acquisition,
-      license: b.dataset.archive!.license, datasetId: b.dataset.id });
+      license: b.dataset.archive!.license, datasetId: b.dataset.id, ...captureOf(b.dataset.archive!.facility, beam.url, b.dataset.archive!.credit) });
   }
   const produced = new Map(outputs.map(([name, bytes]) => [name, bytes]));
   const local = (path: string, reason: string) => ({ id: path.replace(/[^a-z0-9-]+/gu, '-').toLowerCase(), path: `${packageBase}/${path}`, sourceBinding: { kind: 'local', reason } });
@@ -813,7 +831,10 @@ export async function author(id: string, options: { sources?: readonly string[] 
     local(name, `Written by packages/telescope-cli/authoring/circumstellar/author.mts from the mosaics bound above and the recipe circumstellar.json.`));
   const documents = [local('circumstellar.json', 'Object-owned recipe: the datasets, their pinned program and bands, the stated conventions and the published geometry each is checked against.'),
     ...recipe.datasets.flatMap(dataset => dataset.colorMap ? [local(dataset.colorMap.path, `The publisher's color map the ${dataset.id} dataset is shown in, read from the published figure as the file itself records (${dataset.colorMap.source}).`)] : []),
-    ...['delivery.json', 'presentation.json', 'provenance.json'].map(name => local(name, 'Object-owned delivery, presentation or provenance record written by the author; the published inputs it cites are bound above.'))];
+    ...['delivery.json', 'presentation.json', 'provenance.json'].map(name => local(name, 'Object-owned delivery, presentation or provenance record written by the author; the published inputs it cites are bound above.')),
+    // An edge-on dataset's depth is the lab's reconstruction; its record sits under source/ with the density it wrote, in name order.
+    ...built.flatMap(b => b.kind === 'edge-on' ? [b.dataset] : []).sort((a, b) => a.id < b.id ? -1 : 1).map(dataset => local(reconstructionPath(dataset),
+      `Object-owned record of the ${dataset.id} dataset reconstruction: the grid it solved on, the shown image it was fitted to and the settings that produced the density this package ships.`))];
   outputs.push(['manifest.json', Buffer.from(JSON.stringify({ schema: VOLUME_SOURCE_MANIFEST_SCHEMA, pathBase: 'repository', inputs, documents, generatedIntermediates: intermediates }, null, 2) + '\n')]);
   return { outputs, measured, root };
 }

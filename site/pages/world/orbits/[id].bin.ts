@@ -1,7 +1,7 @@
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import type { APIRoute, GetStaticPaths } from 'astro';
-import { APPLICATION_WORLD_CONTEXT, APPLICATION_WORLD_FILE_OF } from '../../../world-context-plan.mts';
+import { APPLICATION_WORLD_CONTEXT, APPLICATION_WORLD_FILE_OF } from '../../../directory/world-context-plan.mts';
 
 // One body's binary orbit bank, copied at build from the package of the object whose file has the body
 // (`src/objects/<object>/prepared/orbits/<body>.bin`): the planner worker reads a bank when a frame first draws its orbit

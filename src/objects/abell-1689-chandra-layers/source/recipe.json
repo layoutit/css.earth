@@ -1,0 +1,114 @@
+{
+  "schema": "cssearth-image-layer-recipe@1",
+  "id": "abell-1689-chandra-layers",
+  "source": {
+    "path": "a1689_opt.tif",
+    "foregroundStars": {
+      "path": "gaia-dr3-stars.csv",
+      "raDegColumn": "ra",
+      "decDegColumn": "dec",
+      "gMagColumn": "phot_g_mean_mag",
+      "source": "gaia-2023-dr3",
+      "basis": "The Gaia DR3 sources in the field whose parallax or proper motion is three of its errors or more from none: stars of the Milky Way, in front of the cluster. A galaxy's nucleus shows neither. The query is this table's origin in the source manifest."
+    },
+    "dimensions": [
+      3853,
+      4000
+    ],
+    "originalDimensions": [
+      3853,
+      4000
+    ],
+    "publisherUrl": "https://chandra.harvard.edu/photo/2008/a1689/",
+    "downloadUrl": "https://chandra.harvard.edu/photo/2008/a1689/a1689_opt.tif",
+    "credit": "X-ray: NASA/CXC/MIT/E.-H Peng et al; Optical: NASA/STScI. Mass map: NASA, ESA, E. Jullo (JPL/LAM), P. Natarajan (Yale) and J-P. Kneib (LAM)",
+    "license": "NASA-SAO"
+  },
+  "observation": {
+    "centerRaDeg": 197.8753215,
+    "centerDecDeg": -1.3385011,
+    "fieldOfViewDeg": [
+      0.0535153,
+      0.0555571
+    ],
+    "northClockwiseDeg": 115.217
+  },
+  "target": {
+    "centerRaDeg": 197.875,
+    "centerDecDeg": -1.3354,
+    "distancePc": 776055140.5590516
+  },
+  "geometry": {
+    "kind": "inclined-disk",
+    "inclinationDeg": 0.003118,
+    "lineOfNodesPaDeg": 264.083,
+    "thicknessKpc": 1,
+    "depthWeights": [
+      0.25,
+      0.5,
+      0.25
+    ],
+    "supportRadiusKpc": 533,
+    "supportTaperFraction": 0.995,
+    "depthScales": [
+      1,
+      1,
+      1
+    ],
+    "ellipsoid": {
+      "source": "publication-umetsu-2015-abell-1689-triaxial",
+      "basis": "Umetsu et al. (2015) fit weak and strong lensing, X-ray and Sunyaev-Zel'dovich measurements together with ellipsoidal shells. On the sky: the X-ray gas is concentric ellipses of ellipticity 0.15 +/- 0.03 at position angle 12 +/- 3 degrees (Sect. VII.2, from Sereno et al. 2012) about the X-ray centre 13:11:29.50, -01:20:29.92 (Table 1); the mass has ellipticity 0.29 +/- 0.05 at 11.4 +/- 4.9 degrees about a centroid 0.0 +/- 1.3, -1.9 +/- 1.4 arcsec from the brightest galaxy at 13:11:29.52, -01:20:27.59 (Table 5, weak and strong lensing together). Along the sight line: a shell's half length over its long half axis on the sky (their Eq. 35) is 1.22 +/- 0.24 for the gas and 1.19 +/- 0.37 for the mass in the joint fit (Sect. VIII.2); X-ray and Sunyaev-Zel'dovich data alone give the gas 1.70 +/- 0.29 (Sect. VII.2). The fit puts the long axis 22 +/- 10 degrees from the sight line; no measurement tells its near end from its far one, so it is drawn on the sight line.",
+      "gas": {
+        "source": "chandra-2008-abell-1689-layers",
+        "path": "gas.png",
+        "centre": {
+          "raDeg": 197.8729167,
+          "decDeg": -1.3416444
+        },
+        "axisRatio": 0.85,
+        "majorAxisPaDeg": 12,
+        "elongation": 1.22,
+        "pointSourceArcsec": 3
+      },
+      "mass": {
+        "source": "esahubble-heic1014a",
+        "path": "mass.png",
+        "centre": {
+          "raDeg": 197.873,
+          "decDeg": -1.341525
+        },
+        "axisRatio": 0.71,
+        "majorAxisPaDeg": 11.4,
+        "elongation": 1.19
+      },
+      "galaxies": {
+        "source": "chandra-2008-abell-1689-layers",
+        "basis": "No measurement gives a galaxy's place along the sight line: a redshift gives its speed, not its distance within the cluster. Umetsu et al. (2015) find the mass aligned with the distribution of the cluster's galaxies, so each galaxy's depth is drawn from the mass's shells.",
+        "widthArcsec": 10
+      }
+    }
+  },
+  "bake": {
+    "maxFacePixels": 1024,
+    "crossAxisSlices": 32,
+    "crossAxisDepthPixels": 97,
+    "backgroundFloor": 0.19,
+    "encoding": {
+      "format": "webp",
+      "quality": 70,
+      "alphaQuality": 80
+    },
+    "diffuseFacePixels": 80,
+    "crossAxisAlongPixels": 384,
+    "edgeTaperFraction": 0.04,
+    "diffuseFraction": 0.65,
+    "diffuseSigmaPixels": 2,
+    "flat": true,
+    "bulgeSlices": 32,
+    "bulgeFacePixels": 256,
+    "bulgeCrossSlices": 40
+  },
+  "provenance": {
+    "path": "provenance.json"
+  }
+}

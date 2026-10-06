@@ -1,5 +1,5 @@
-import { zoomStepOf } from '../inside-view.mts';
-import { moonSystem, subjectView } from './scene-subject.mts';
+import { zoomStepOf } from '../world/inside-view.mts';
+import { moonSystem, subjectView } from '../world/scene-subject.mts';
 import type { BrowserWindow } from '../browser/browser-types.mts';
 import { errorMessage } from '../browser/browser-types.mts';
 import { isRecord } from '@cssearth/core';
@@ -9,7 +9,7 @@ import type { createPreparedWorldNavigation, WorldHandoff } from '../navigation/
 import { selectSceneDataset } from './scene-datasets.mts';
 import type { SceneSession } from './scene-session.mts';
 import type { SceneView } from './scene-view.mts';
-import { loadSystemView } from '../system-framing.mts';
+import { loadSystemView } from '../world/system-framing.mts';
 import { navigationHref } from '../navigation/navigation-history.mts';
 
 /** Arrival restores prepared state before the session becomes ready; every binding belongs to that session. */

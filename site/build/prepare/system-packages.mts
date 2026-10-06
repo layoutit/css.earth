@@ -1,27 +1,26 @@
-import { sourceObject } from '@cssearth/objects/sources';
-import { readObjectDescriptorRecord, readSystemText, SYSTEM_TEXT_SCHEMA } from '@cssearth/objects';
 /**
  * A system is an object: a host with the bodies that orbit it has a package, an address and a page of its own
  * (`src/objects/<host>-system/object.json`; the Sun's is `solar-system`). This writes each one from what the repository
- * already holds: a star's planetary system from the prepared world's orbit graph (site/object-systems.mts), a star system
+ * already holds: a star's planetary system from the prepared world's orbit graph (site/world/object-systems.mts), a star system
  * from the stars the records say are bound to a star nothing orbits, a planet's or small body's satellite system from its
- * prepared moons (site/satellite-systems.mts) and its cited introduction (src/navigation/system-text.json). A system
+ * prepared moons (site/world/satellite-systems.mts) and its cited introduction (src/navigation/system-text.json). A system
  * places nothing and draws nothing of its own: it shows its host's scene out to its members, and takes its host's place,
  * color and distance. It sits in the object tree where its host sat, and its host sits inside it, with the stars bound to
  * the host: this writes those parents.
  *
  * Usage: node site/build/prepare/system-packages.mts [host id ...]   (no ids: every system)
  */
-import { OBJECT_SCHEMA } from '@cssearth/objects';
+import { sourceObject } from '@cssearth/objects/sources';
+import { readObjectDescriptorRecord, readSystemText, SYSTEM_TEXT_SCHEMA, OBJECT_SCHEMA } from '@cssearth/objects';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { SCENE_OBJECTS } from '../../objects.mts';
-import { allPlanetarySystems, SOLAR_SYSTEM_ID } from '../../object-systems.mts';
-import { allSatelliteSystems } from '../../satellite-systems.mts';
+import { SCENE_OBJECTS } from '../../directory/objects.mts';
+import { allPlanetarySystems, SOLAR_SYSTEM_ID } from '../../world/object-systems.mts';
+import { allSatelliteSystems } from '../../world/satellite-systems.mts';
 import { systemObjectId } from '../../model/system-address.mts';
 import { readSourceCatalog } from '@cssearth/bake/sources';
 import { prepareSystemIntroductions } from './system-text.mts';
-import { APPLICATION_WORLD_CONTEXT } from '../../world-context-plan.mts';
+import { APPLICATION_WORLD_CONTEXT } from '../../directory/world-context-plan.mts';
 
 const objectsRoot = resolve(import.meta.dirname, '../../../src/objects');
 const only = new Set(process.argv.slice(2));

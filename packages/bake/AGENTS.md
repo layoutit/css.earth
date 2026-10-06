@@ -114,7 +114,7 @@ cycle. Share anything else through `@cssearth/core` or another package. Prepared
   presentation with the shared rules in `@cssearth/objects` (`marker-presentation.ts`, which the shell also uses to
   draw them). It imports `raster`, `delivery`, `sources`, `astronomy`, and `objects/raster` (loaded only when a marker is
   drawn from a science raster). `packages/bake/cli/prepare-navigation.mts` is its command. Its tests are `node --test`
-  suites in `src/navigation/`, with the navigation preparation's in `site/test/`.
+  suites in `src/navigation/`, with the navigation preparation's in `site/world/navigation-preparation.test.mts`.
 - `src/facility-renders/` is published as `@cssearth/bake/facility-renders` (Node only): the illustrative poses of the rendered
   facility models, and the types of the three.js renderer (`render.ts`) that `packages/bake/cli/prepare-facility-renders.mts`
   bundles from its source into a browser page. The command imports the canonical dataset routes from
@@ -123,7 +123,7 @@ cycle. Share anything else through `@cssearth/core` or another package. Prepared
   not an object's own: dataset sprites and search thumbnails (committed; `prepare-navigation` remakes them) cut from prepared page and navigation images, the object-row
   thumbnail framing (`object-thumbnail.ts`: an object's light cut to its measured extent and faded out before the image frame), the planets'
   photometric phase charts. It imports `raster`, `runtime-source`, `objects/raster` and `objects/charts`. Its commands are
-  `packages/bake/cli/prepare-{dataset-sprites,search-thumbnails,scientific-charts}.mts`; its tests are in `src/site-assets/` and `site/test/`.
+  `packages/bake/cli/prepare-{dataset-sprites,search-thumbnails,scientific-charts}.mts`; its tests are in `src/site-assets/`.
 - `src/surface-previews/` is published as `@cssearth/bake/surface-previews` (Node only): the prepared records a surface
   minimap or preview raster is drawn from, read and checked; the sidebar minimaps and preview rasters themselves, with the
   coverage direction of each dataset's map, which the world-navigation stage turns a partial dataset toward. It imports the topics

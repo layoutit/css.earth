@@ -1,5 +1,5 @@
 import type { APIRoute, GetStaticPaths } from 'astro';
-import { OBJECTS, SCENE_OBJECTS, PAGES } from '../../../objects.mts';
+import { OBJECTS, SCENE_OBJECTS, PAGES } from '../../../directory/objects.mts';
 import { ROOT_OBJECT_ID } from '../../../model/root-object.mts';
 import { builtScenePaths } from '../../../server/built-pages.mts';
 import { readPreparedObjectBytes } from '../../../server/object-page-data.mts';

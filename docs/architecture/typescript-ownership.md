@@ -19,7 +19,7 @@ replays both generators. The source vectors and generators remain committed. Ins
 run this preparation before consuming the modules.
 
 Astro and ESLint use `.mts` configuration entry points, checked by
-`pnpm typecheck:configs` and the main typecheck command. The configured Node runtime loads the TypeScript entry points.
+`pnpm typecheck:scripts` (through [the scripts configuration](../../.github/scripts/tsconfig.json)) and the main typecheck command. The configured Node runtime loads the TypeScript entry points.
 
 Application and test consumers import typed owners directly. The five obsolete
 JavaScript compatibility entry points have been removed. Historical source

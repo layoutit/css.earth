@@ -1,0 +1,44 @@
+{
+  "schema": "cssearth-object@2",
+  "id": "abell-1689-chandra-layers",
+  "type": "image-layer-bank",
+  "properties": {
+    "preparation": {
+      "source": "source/recipe.json"
+    },
+    "host": "abell-1689",
+    "frame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -2.2784431394706964e+25,
+        -7.348193646310441e+24,
+        -5.5807496960408515e+23
+      ],
+      "localToReferenceXyzw": [
+        0.5782299862139983,
+        -0.421073142587126,
+        -0.41137175402309983,
+        0.5649077549713044
+      ],
+      "metersPerUnit": 30856775814913670000,
+      "boundsUnits": {
+        "min": [
+          -367.7213687439328,
+          -442.10098896291163,
+          -347.55723893560935
+        ],
+        "max": [
+          312.88538347296253,
+          276.61151622348797,
+          347.56590316887014
+        ]
+      }
+    },
+    "surrounds": true
+  },
+  "prepared": {
+    "format": "cssearth-image-layer-bank@1",
+    "url": "prepared/image-layers.json"
+  }
+}

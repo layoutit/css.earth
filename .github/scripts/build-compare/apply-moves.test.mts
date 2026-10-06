@@ -96,7 +96,7 @@ test('nonfinite loop URL targets remain ambiguous', () => {
   });
 });
 test('repository-root ancestor prefix is a warning rather than a moved-folder prefix', () => {
-  fixture({ 'site/a.mts': '', 'site/test/check.mts': 'new URL(`../../${path}`, import.meta.url);' }, root => {
+  fixture({ 'site/a.mts': '', 'site/world/check.mts': 'new URL(`../../${path}`, import.meta.url);' }, root => {
     const plan = applyMoves(root, { 'site/a.mts': 'site/world/a.mts' }, { dryRun: true });
     assert.equal(plan.manualReviewRequired.length, 0); assert.equal(plan.unrelatedWarnings, 1);
     assert.equal(existsSync(resolve(root, 'site/a.mts')), true);

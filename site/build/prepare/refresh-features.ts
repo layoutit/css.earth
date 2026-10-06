@@ -1,10 +1,9 @@
-import { requireInventory } from '@cssearth/objects/node';
+import { requireInventory, updateInventory } from '@cssearth/objects/node';
 import { parsePreparedObjectRuntime } from '@cssearth/objects';
 // Refresh the named-feature catalogue of an already prepared object without re-preparing its surfaces: verify the
 // authored source pins, re-run the shared feature attachment against the prepared runtime definition, and rewrite the
 // catalogue, the runtime plan, the content document, the runtime asset manifest and the
 // object descriptor. Usage: node site/build/prepare/refresh-features.ts <objectId> [...]
-import { updateInventory } from '@cssearth/objects/node';
 import { sha256 } from '@cssearth/core/node';
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';

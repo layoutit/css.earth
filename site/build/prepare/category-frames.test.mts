@@ -2,9 +2,10 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { sourceTest } from '@cssearth/objects/node/source-test';
-import { notableBodies, prepareCategoryFrame, CATEGORY_FRAMED_SHARE } from './prepare-world-presentation.mts';
+import { framedMembers, notableBodies, prepareCategoryFrame, CATEGORY_FRAMED_SHARE } from './prepare-world-presentation.mts';
+import { WORLD_OBJECTS } from '../../world/world-objects.mts';
 import { PREPARED_WORLD_PRESENTATION } from '../../world/prepared-world-presentation.mts';
-import { CATEGORY_FRAMES, categoryZoomTarget } from '../../system-framing.mts';
+import { CATEGORY_FRAMES, categoryZoomTarget } from '../../world/system-framing.mts';
 const test = sourceTest();
 
 test('a category frames the nearest members around their own centre, leaving the far outliers out', () => {
@@ -19,6 +20,37 @@ test('a category with one member, or with every member at one point, has no fram
   assert.equal(prepareCategoryFrame([[1, 2, 3]]), null);
   assert.equal(prepareCategoryFrame([[1, 2, 3], [1, 2, 3]]), null);
   assert.equal(prepareCategoryFrame([]), null);
+});
+
+test('a category frames its members inside the smallest region that holds most of them', () => {
+  // Three stars of the galaxy and one of another galaxy, both galaxies inside the group: the galaxy holds most.
+  const regions: Record<string, string[]> = { a: ['galaxy', 'group'], b: ['galaxy', 'group'], c: ['galaxy', 'group'], far: ['group'], loose: [] };
+  const regionsOf = (id: string) => regions[id]!;
+  const members = (...ids: string[]) => ids.map(id => ({ id }));
+  assert.deepEqual(framedMembers(members('a', 'b', 'c', 'far'), regionsOf), members('a', 'b', 'c'));
+  // Half is not most: the group, which holds all four, frames them.
+  assert.deepEqual(framedMembers(members('a', 'b', 'far', 'far'), regionsOf).length, 4);
+  // No region holds most of them: every member is framed.
+  assert.deepEqual(framedMembers(members('a', 'loose', 'loose'), regionsOf).length, 3);
+  assert.deepEqual(framedMembers([], regionsOf), []);
+});
+
+test('the Stars box holds the Milky Way\'s stars and the Galaxies box the Nearby Universe\'s galaxies', () => {
+  const PARSEC_M = 3.085677581491367e16;
+  const place = (id: string) => WORLD_OBJECTS.find(object => object.id === id)!.worldFrame!.originM;
+  const holds = (classification: string, id: string) => {
+    const frame = PREPARED_WORLD_PRESENTATION.categoryFrames.get(classification)!;
+    return place(id).every((value, axis) => value >= frame.centreM[axis]! + frame.minimumM[axis]! && value <= frame.centreM[axis]! + frame.maximumM[axis]!);
+  };
+  const side = (classification: string) => { const frame = PREPARED_WORLD_PRESENTATION.categoryFrames.get(classification)!; return Math.max(...frame.maximumM.map((value, axis) => value - frame.minimumM[axis]!)); };
+  // Fitted around every notable star, the box was 8.6 Mpc wide: the camera landed among galaxies, where no star is drawn.
+  for (const star of ['sirius', 'betelgeuse', 'deneb']) assert.ok(holds('star', star), `${star} lies outside the star frame`);
+  assert.ok(!holds('star', 'm31-v1'), 'a star of Andromeda is marked, not framed');
+  assert.ok(side('star') < 30e3 * PARSEC_M, 'the star frame is smaller than the Milky Way');
+  // The galaxies' box reached the quasar 3C 273, 670 Mpc out, where the markers are clusters.
+  for (const galaxy of ['m81', 'm87', 'ngc-1365']) assert.ok(holds('galaxy', galaxy), `${galaxy} lies outside the galaxy frame`);
+  assert.ok(!holds('galaxy', 'quasar-3c-273'), 'a quasar past the Nearby Universe is marked, not framed');
+  assert.ok(side('galaxy') < 100e6 * PARSEC_M, 'the galaxy frame is smaller than the Nearby Universe');
 });
 
 test('every header pill has a prepared frame, and the galaxy frame holds the Magellanic Clouds and Andromeda', async () => {

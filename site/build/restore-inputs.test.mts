@@ -10,8 +10,7 @@ import { validateObjectPackageFiles } from './object-package-contract.mts';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
 import { parseAcquisitionPlan } from '@cssearth/bake/objects/acquisition';
 import { sourceFormatProblem } from '@cssearth/bake/objects/sources';
-import { requireInventory } from '@cssearth/objects/node';
-import { readPreparedObjects } from '@cssearth/objects/node';
+import { requireInventory, readPreparedObjects } from '@cssearth/objects/node';
 
 const SCENE_OBJECTS = readPreparedObjects(resolve(import.meta.dirname, '../..')).sceneObjects;
 
@@ -28,7 +27,7 @@ async function fixture(t: TestContext, id = 'titan'): Promise<string> {
   await copyFile(resolve(project, 'packages/bake/cli/object-operations.mts'), resolve(root, 'packages/bake/cli/object-operations.mts'));
   await symlink(resolve(project, 'src/platform'), resolve(root, 'src/platform'));
   await symlink(resolve(project, 'node_modules'), resolve(root, 'node_modules'));
-  await writeFile(resolve(root, 'site/objects.mts'), `export const OBJECTS = [{id:'${id}',name:'${id}'}];\nexport const SCENE_OBJECTS = OBJECTS;`);
+  await writeFile(resolve(root, 'site/directory/objects.mts'), `export const OBJECTS = [{id:'${id}',name:'${id}'}];\nexport const SCENE_OBJECTS = OBJECTS;`);
   await json(resolve(root, `src/objects/${id}/object.json`), { id });
   return root;
 }
@@ -149,7 +148,7 @@ test('repository volume package restores a missing download from the object sour
   await json(resolve(root, 'src/objects/nebula/source/presentation.json'), {
     schema: VOLUME_PRESENTATION_SOURCE_SCHEMA,
   });
-  await rm(resolve(root, 'site/objects.mts'));
+  await rm(resolve(root, 'site/directory/objects.mts'));
   await run(root, [RESTORE, '--repository-volumes']);
   assert.deepEqual(requests, ['/source-cache/nebula/src/objects/nebula/source.bin', '/source-cache/nebula/src/objects/nebula/preview.png']);
   assert.deepEqual(await readFile(resolve(root, 'src/objects/nebula/source.bin')), bytes);
@@ -185,7 +184,7 @@ test('repository volume restore refuses a publisher page and takes a built input
     inputs: [{ id: 'optical', path: composite, origin: `${origin}/public/images/panorama/`, ...input }],
   });
   await json(resolve(root, 'src/objects/galaxy/source/presentation.json'), { schema: VOLUME_PRESENTATION_SOURCE_SCHEMA });
-  await rm(resolve(root, 'site/objects.mts'));
+  await rm(resolve(root, 'site/directory/objects.mts'));
 
   // A download whose origin turns out to be a page: both the mirror miss and the HTML body are named, and nothing is written.
   await manifest({});

@@ -140,7 +140,7 @@ test('test exceptions and preparation wrappers cannot be used as inbound runtime
     f.write('site/runtime.mts', 'export {};');
     f.write('site/build/prepare.mts', 'export {};');
     f.write('integration/prepared-object-mount/fixtures/helper.mts', "import '@cssearth/bake/public'; export const helper = 1;");
-    f.write('site/test/helper.test.mts', "import '../../integration/prepared-object-mount/fixtures/helper.mts';");
+    f.write('site/journeys/helper.test.mts', "import '../../integration/prepared-object-mount/fixtures/helper.mts';");
     assert.deepEqual(f.check(), [], 'the moved integration harness is test code');
     f.write('site/runtime.mts', "import '../integration/prepared-object-mount/fixtures/helper.mts';");
     assert.ok(f.check().some(error => error.includes('runtime closure forbids') && error.includes('via integration/prepared-object-mount/fixtures/helper.mts')));
@@ -179,11 +179,11 @@ test('root research dependencies remain development-only and computed policy sta
     assert.ok(f.check().some(error => error.includes('site/build/plugin.mts: unchecked computed nebula module loading')));
     // An owner-local test helper may import the bake; a runtime module that reaches it may not.
     f.write('site/build/plugin.mts', 'export {};');
-    f.write('site/test/fixtures/helper.mts', "import '@cssearth/bake/public'; export const helper = 1;");
-    f.write('site/build/plugin.test.mts', "import { helper } from '../test/fixtures/helper.mts'; export { helper };");
+    f.write('site/world/fixtures/helper.mts', "import '@cssearth/bake/public'; export const helper = 1;");
+    f.write('site/build/plugin.test.mts', "import { helper } from '../world/fixtures/helper.mts'; export { helper };");
     assert.deepEqual(f.check(), []);
-    f.write('site/plugin.mts', "import { helper } from './test/fixtures/helper.mts'; export { helper };");
-    assert.ok(f.check().some(error => error.includes('site/plugin.mts: runtime closure forbids @cssearth/bake/public via site/test/fixtures/helper.mts')));
+    f.write('site/plugin.mts', "import { helper } from './world/fixtures/helper.mts'; export { helper };");
+    assert.ok(f.check().some(error => error.includes('site/plugin.mts: runtime closure forbids @cssearth/bake/public via site/world/fixtures/helper.mts')));
     f.write('site/plugin.mts', 'export {};');
   } finally { f.cleanup(); }
 });
@@ -277,7 +277,7 @@ test('the telescope command is preparation; a runtime package stays refused', ()
 test('relocated owner fixtures stay test-only while runtime imports check their closure', () => {
   const f = fixture();
   try {
-    for (const path of ['site/test/fixtures/helper.mts', 'src/platform/fixtures/helper.mts', 'src/objects/earth/fixtures/helper.mts']) {
+    for (const path of ['site/world/fixtures/helper.mts', 'src/platform/fixtures/helper.mts', 'src/objects/earth/fixtures/helper.mts']) {
       f.write(path, "import '@cssearth/bake/public'; export const helper = 1;");
       assert.deepEqual(f.check(), [], path);
       f.write('site/plugin.mts', `import { helper } from '../${path}'; export { helper };`);
@@ -292,12 +292,12 @@ test('tests reach package-owned bake fixtures without a public export; runtime a
   const f = fixture();
   try {
     f.write('packages/bake/src/contract/fixtures/helper.mts', "import '@cssearth/bake/public'; export const helper = 1;");
-    f.write('site/test/example.test.mts', "import '../../packages/bake/src/contract/fixtures/helper.mts';");
+    f.write('site/journeys/example.test.mts', "import '../../packages/bake/src/contract/fixtures/helper.mts';");
     assert.deepEqual(f.check(), []);
     f.write('site/runtime.mts', "import '../packages/bake/src/contract/fixtures/helper.mts';");
     assert.ok(f.check().some(error => error.includes('direct path into packages/bake')));
     f.write('site/runtime.mts', 'export {};');
-    f.write('site/test/example.test.mts', "import '../../packages/bake/src/public.ts';");
+    f.write('site/journeys/example.test.mts', "import '../../packages/bake/src/public.ts';");
     assert.ok(f.check().some(error => error.includes('direct path into packages/bake')));
   } finally { f.cleanup(); }
 });

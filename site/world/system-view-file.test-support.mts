@@ -1,6 +1,6 @@
 import { readFile } from 'node:fs/promises';
 import { systemViewFile } from '@cssearth/objects';
-import { requireObject } from '../objects.mts';
+import { requireObject } from '../directory/objects.mts';
 
 /** A host's prepared system view, read from the package of the system its host is inside (its parent). */
 export async function readSystemViewFile(host: string): Promise<unknown> {

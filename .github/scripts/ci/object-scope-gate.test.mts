@@ -48,7 +48,7 @@ test('touchedObjectDirectories extracts the distinct object ids from src/objects
     'src/objects/iris/inventory.json',
     'README.md',
     'src/objects/README.md', // no trailing object id, must not match
-    'site/objects.mts',
+    'site/directory/objects.mts',
   ]);
   assert.deepEqual([...ids].sort(), ['hebe', 'iris']);
 });

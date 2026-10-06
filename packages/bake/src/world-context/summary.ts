@@ -17,7 +17,7 @@ type Body = PreparedWorldContextData['focus'] | PreparedWorldContextData['bodies
  *   centres and orbit-bank pins. A file whose bodies the map draws from anywhere (`drawnFromAnywhere`: the Solar System's
  *   planets, the Milky Way's featured stars, the galaxies) is read by every page at startup; every page also reads the
  *   files of the objects it is inside. Any other file is read when the camera comes near its place or navigation goes to
- *   one of its bodies (site/world-context-plan.mts).
+ *   one of its bodies (site/directory/world-context-plan.mts).
  * - `places` (`src/objects/<object id>/prepared/places.json`) is, per object, where each file read on approach is: its
  *   system's host star or planet, rounded, and the range its orbits are authored to. A file with places is read at startup.
  * - A star drawn as a plain dot with nothing round it has its row in `index.rows`, which its object entry carries; an

@@ -6,6 +6,10 @@ export type LayerAxis = 'x' | 'y' | 'z';
  * that stands alone and is narrower than `pointSourceArcsec` is a point source (an active galaxy, a star), not the body's:
  * it is taken down to the light around it. */
 export interface CollisionBody { source: string; path: string; from: { raDeg: number; decDeg: number }; to: { raDeg: number; decDeg: number }; pointSourceArcsec?: number }
+/** A body of a relaxed cluster: shells that are ellipses on the sky about `centre`, `axisRatio` as wide as long, their
+ * long axis at `majorAxisPaDeg` east of north, and `elongation` times as long along the sight line as that axis is on
+ * the sky. `pointSourceArcsec` is a collision body's. */
+export interface EllipsoidBody { source: string; path: string; centre: { raDeg: number; decDeg: number }; axisRatio: number; majorAxisPaDeg: number; elongation: number; pointSourceArcsec?: number }
 
 export interface ImageLayerRecipe {
   schema: 'cssearth-image-layer-recipe@1';
@@ -98,6 +102,19 @@ export interface ImageLayerRecipe {
      * subcluster's. `tiltDeg` is the lines' angle from the plane of the sky, the `to` end the farther; 0 where no paper says which end is. The photograph stays
      * on its plane; each picture's light is spread along each sight line through the body of revolution that adds up to it. */
     collision?: { source: string; basis: string; tiltDeg: number; gas: CollisionBody; mass?: CollisionBody };
+    /** A relaxed cluster's hot gas and mass (./collision.ts), where X-ray, Sunyaev-Zel'dovich and lensing measurements
+     * are fitted together with ellipsoidal shells: the X-ray picture and the mass map give the shells' ellipse on the
+     * sky, and the gas's X-ray brightness against its pressure gives how long they are along the sight line. `gas` and
+     * `mass` each have a picture of their own on the photograph's frame, as a collision's do. The photograph stays on
+     * its plane; each picture's light is spread along each sight line through the shells that add up to it, out to the
+     * largest shell the frame holds whole. The shells' long axis is drawn on the sight line: a fit gives its angle from
+     * it, but no measurement tells the near end from the far one. */
+    ellipsoid?: { source: string; basis: string; gas: EllipsoidBody; mass?: EllipsoidBody;
+      /** The photograph's galaxies in depth (./galaxies.ts): each at a depth drawn from the mass's shells (the gas's
+       * without a mass), with the photograph's light nearest to it. Light narrower than `widthArcsec` is a galaxy's
+       * compact light, a blob in the views from the side; the rest is spread through the shells there. Nothing
+       * measures a galaxy's depth. */
+      galaxies?: { source: string; basis: string; widthArcsec: number } };
     body?: { source: string; basis: string; semiPolarArcsec: number; semiEquatorialArcsec: number; polarTiltDeg: number; polarLeansToPaDeg: number;
       envelope?: { source: string; radiusArcsec: number };
       cavities?: { source: string; emission: number; sizeArcsec: number; farBetweenPaDeg: [number, number] } };
@@ -253,6 +270,16 @@ const collisionOf = (v: unknown): NonNullable<ImageLayerRecipe['geometry']['coll
   const body = (value: unknown, name: string): CollisionBody => { const b = object(value, name); return { source: text(b.source, `${name}.source`), path: path(b.path), from: place(b.from, `${name}.from`), to: place(b.to, `${name}.to`), ...(b.pointSourceArcsec === undefined ? {} : { pointSourceArcsec: positive(b.pointSourceArcsec, `${name}.pointSourceArcsec`) }) }; };
   return { source: text(c.source, 'geometry.collision.source'), basis: text(c.basis, 'geometry.collision.basis'), tiltDeg: tilt, gas: body(c.gas, 'geometry.collision.gas'), ...(c.mass === undefined ? {} : { mass: body(c.mass, 'geometry.collision.mass') }) };
 };
+const ellipsoidOf = (v: unknown): NonNullable<ImageLayerRecipe['geometry']['ellipsoid']> => {
+  const e = object(v, 'geometry.ellipsoid');
+  const body = (value: unknown, name: string): EllipsoidBody => { const b = object(value, name), centre = object(b.centre, `${name}.centre`), axisRatio = positive(b.axisRatio, `${name}.axisRatio`);
+    if (axisRatio > 1) throw new TypeError(`${name}.axisRatio is the shells' short axis on the sky over their long one, at most 1; got ${axisRatio}.`);
+    return { source: text(b.source, `${name}.source`), path: path(b.path), centre: { raDeg: finite(centre.raDeg, `${name}.centre.raDeg`), decDeg: finite(centre.decDeg, `${name}.centre.decDeg`) }, axisRatio, majorAxisPaDeg: finite(b.majorAxisPaDeg, `${name}.majorAxisPaDeg`), elongation: positive(b.elongation, `${name}.elongation`),
+      ...(b.pointSourceArcsec === undefined ? {} : { pointSourceArcsec: positive(b.pointSourceArcsec, `${name}.pointSourceArcsec`) }) }; };
+  const galaxies = e.galaxies === undefined ? undefined : object(e.galaxies, 'geometry.ellipsoid.galaxies');
+  return { source: text(e.source, 'geometry.ellipsoid.source'), basis: text(e.basis, 'geometry.ellipsoid.basis'), gas: body(e.gas, 'geometry.ellipsoid.gas'), ...(e.mass === undefined ? {} : { mass: body(e.mass, 'geometry.ellipsoid.mass') }),
+    ...(galaxies === undefined ? {} : { galaxies: { source: text(galaxies.source, 'geometry.ellipsoid.galaxies.source'), basis: text(galaxies.basis, 'geometry.ellipsoid.galaxies.basis'), widthArcsec: positive(galaxies.widthArcsec, 'geometry.ellipsoid.galaxies.widthArcsec') } }) };
+};
 const parsecUnit = (v: unknown, unsupported: boolean): 'pc' => {
   if (v !== 'pc' || unsupported) throw new TypeError(`geometry.unit is "pc", on a flat bank without a bulge; got ${JSON.stringify(v)}${unsupported ? ' on a bank that is not flat or has a bulge' : ''}.`);
   return v;
@@ -337,11 +364,12 @@ export function parseImageLayerRecipe(value: unknown): ImageLayerRecipe {
       ...(g.surface===undefined?{}:{surface:(()=>{if(g.bulge!==undefined||g.shape!==undefined||g.body!==undefined||g.rings!==undefined||b.flat!==true)throw new TypeError('geometry.surface is for a flat bank without a bulge, walls, a body or rings.');return surfaceOf(g.surface);})()}),
       ...(g.densityGrid===undefined?{}:{densityGrid:(()=>{if(g.bulge!==undefined||g.shape!==undefined||g.body!==undefined||g.rings!==undefined||g.surface!==undefined||b.flat!==true)throw new TypeError('geometry.densityGrid is for a flat bank without a bulge, walls, a body, rings or a surface.');return densityOf(g.densityGrid);})()}),
       ...(g.collision===undefined?{}:{collision:(()=>{if(g.bulge!==undefined||g.shape!==undefined||g.body!==undefined||g.rings!==undefined||g.surface!==undefined||g.densityGrid!==undefined||b.flat!==true)throw new TypeError('geometry.collision is for a flat bank without a bulge, walls, a body, rings, a surface or a density grid.');return collisionOf(g.collision);})()}),
+      ...(g.ellipsoid===undefined?{}:{ellipsoid:(()=>{if(g.bulge!==undefined||g.shape!==undefined||g.body!==undefined||g.rings!==undefined||g.surface!==undefined||g.densityGrid!==undefined||g.collision!==undefined||b.flat!==true)throw new TypeError('geometry.ellipsoid is for a flat bank without a bulge, walls, a body, rings, a surface, a density grid or a collision.');return ellipsoidOf(g.ellipsoid);})()}),
       ...(g.unit===undefined?{}:{unit:parsecUnit(g.unit,g.bulge!==undefined||b.flat!==true)}) },
     bake: { maxFacePixels: positive(b.maxFacePixels, 'maxFacePixels', true), diffuseFacePixels: positive(b.diffuseFacePixels,'diffuseFacePixels',true),
       ...(b.levels===undefined?{}:{levels:levelsOf(b.levels)}),
       ...(b.colorTie===undefined?{}:{colorTie:colorTieOf(b.colorTie)}),
-      ...(g.bulge===undefined&&g.shape===undefined&&g.densityGrid===undefined&&g.body===undefined&&g.collision===undefined&&(g.rings as {lineOfSightThicknessArcsec?:unknown}|undefined)?.lineOfSightThicknessArcsec===undefined?{}:{bulgeSlices:positive(b.bulgeSlices,'bulgeSlices',true),bulgeFacePixels:positive(b.bulgeFacePixels,'bulgeFacePixels',true),bulgeCrossSlices:positive(b.bulgeCrossSlices,'bulgeCrossSlices',true)}), crossAxisSlices: positive(b.crossAxisSlices, 'crossAxisSlices', true),
+      ...(g.bulge===undefined&&g.shape===undefined&&g.densityGrid===undefined&&g.body===undefined&&g.collision===undefined&&g.ellipsoid===undefined&&(g.rings as {lineOfSightThicknessArcsec?:unknown}|undefined)?.lineOfSightThicknessArcsec===undefined?{}:{bulgeSlices:positive(b.bulgeSlices,'bulgeSlices',true),bulgeFacePixels:positive(b.bulgeFacePixels,'bulgeFacePixels',true),bulgeCrossSlices:positive(b.bulgeCrossSlices,'bulgeCrossSlices',true)}), crossAxisSlices: positive(b.crossAxisSlices, 'crossAxisSlices', true),
       crossAxisAlongPixels:positive(b.crossAxisAlongPixels,'crossAxisAlongPixels',true),crossAxisDepthPixels: positive(b.crossAxisDepthPixels, 'crossAxisDepthPixels', true), backgroundFloor,edgeTaperFraction,diffuseFraction,diffuseSigmaPixels:positive(b.diffuseSigmaPixels,'diffuseSigmaPixels'),
       ...(b.flat===undefined?{}:{flat:flatOf(b.flat)}),
       encoding: { format: 'webp', quality, ...(e.alphaQuality===undefined?{}:{alphaQuality:alphaQualityOf(e.alphaQuality)}) } }, provenance: { path: path(p.path) } };

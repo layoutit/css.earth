@@ -1,5 +1,4 @@
-import { hasVolumePresentationSource } from '@cssearth/objects';
-import { VOLUME_PRESENTATION_SOURCE_SCHEMA } from '@cssearth/objects';
+import { hasVolumePresentationSource, VOLUME_PRESENTATION_SOURCE_SCHEMA } from '@cssearth/objects';
 // Entry script: node site/build/prepare/author-source-records.mts <object-id>. Binds an object's inputs to the source catalogue
 // (`authorSourceRecords` in @cssearth/bake/sources), then writes the volume packages' presentations again when a volume's
 // manifest changed, since each dataset preview credits its manifest input.

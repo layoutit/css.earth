@@ -1,5 +1,5 @@
-import { importPackagedObjectRuntime, importSceneRegistry } from '../scene-imports.mts';
-import { importApplicationWorld } from '../world-imports.mts';
+import { importPackagedObjectRuntime, importSceneRegistry } from '../scene/scene-imports.mts';
+import { importApplicationWorld } from '../scene/world-imports.mts';
 
 /** Starts the body runtime and its decoding worker as soon as the page's first script runs, beside the world summary's
  * request instead of after it. Neither depends on the world. The readers own every failure: a read that fails here is

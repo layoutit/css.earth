@@ -1,17 +1,14 @@
-import { fromEyeM } from '@cssearth/engine';
+import { fromEyeM, cssCameraAxesFromOrientation, rotateWorldPosition, worldRotationFromQuaternion } from '@cssearth/engine';
 import { formatViewDate, formatViewDistance, formatViewCoordinate, viewScale } from '../minimap/view-format.mts';
-import type { WorldCameraPose } from '@cssearth/engine';
-import type { PositionM } from '@cssearth/engine';
+import type { WorldCameraPose, PositionM } from '@cssearth/engine';
 import type { BrowserWindow, ShellCamera, PlaybackState } from '../browser/browser-types.mts';
 import { requiredElement } from '../browser/browser-types.mts';
 import { sectionElements } from '@cssearth/renderer';
 import type { SurfaceMapReader } from '../minimap/surface-map-context.mts';
-import { parseSurfaceMapConfig } from '../minimap/surface-map-context.mts';
-import type { ZoomScope } from '../zoom-scope.mts';
-import { cssCameraAxesFromOrientation, rotateWorldPosition, worldRotationFromQuaternion } from '@cssearth/engine';
+import { parseSurfaceMapConfig, surfaceMapContext, surfaceMapViewport } from '../minimap/surface-map-context.mts';
+import type { ZoomScope } from '../world/zoom-scope.mts';
 import { measureView } from '../minimap/view-measure.mts';
-import { surfaceMapContext, surfaceMapViewport } from '../minimap/surface-map-context.mts';
-import { viewDistance } from '../zoom-scope.mts';
+import { viewDistance } from '../world/zoom-scope.mts';
 import { dotN as dot } from '@cssearth/core';
 /** A subject with no surface (a galaxy, a cluster, a nebula): the readout measures to its centre, not above a radius. */
 type ExtendedSubject = { readonly name: string; readonly positionM: readonly [number, number, number] };

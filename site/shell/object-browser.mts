@@ -2,14 +2,14 @@ import { createSearchClient, type SearchOutcome } from '../search/search-client.
 import { createSelectionPresentation } from './selection-presentation.mts';
 import type { SceneLifetime } from '@cssearth/engine';
 import type { BrowserWindow } from '../browser/browser-types.mts';
-import type { SceneSubject } from '../scene/scene-selection.mts';
-import { subjectView } from '../scene/scene-subject.mts';
+import type { SceneSubject } from '../selection/scene-selection.mts';
+import { subjectView } from '../world/scene-subject.mts';
 import type { DestinationPresentation } from './destination-browser.mts';
 import { requiredElement, sectionElement } from '../browser/browser-types.mts';
 import { createDestinationBrowser } from './destination-browser.mts';
 import { createFeatureBrowser } from './feature-browser.mts';
 import { createSearchPresentation } from '../search/search-results-presentation.mts';
-import { WORLD_OBJECTS } from '../world-objects.mts';
+import { WORLD_OBJECTS } from '../world/world-objects.mts';
 import { SEARCH_SUGGESTION_MIN_CHARACTERS } from '../browser/runtime-policy.mts';
 
 export interface ObjectBrowserOptions {
@@ -278,13 +278,17 @@ export function createObjectBrowserController(documentTarget: Document, windowTa
   presentBrowser();
   refreshSelection();
 
-  const previewSelection = (subject: SceneSubject) => {
+  const previewSelection = (subject: SceneSubject, keepSearch = false) => {
     const previous = subjectOverride, previousOpen = open, previousQuery = search.value;
     const preview = { subject };
     subjectOverride = preview;
-    // Choosing a result ends that search; a cancelled flight gives the query back.
-    if (search.value) search.value = '';
-    setOpen(false);
+    // Choosing a result ends that search; a cancelled flight gives the query back. A view the camera carried to another
+    // scene chose no result, so its search stays (`keepSearch`): the Stars pill pressed on Earth ended un-pressed, its list
+    // closed and no star marked, once its landing handed the view to the Milky Way (2026-10-06).
+    if (!keepSearch) {
+      if (search.value) search.value = '';
+      setOpen(false);
+    }
     presentSelection();
     return () => {
       if (subjectOverride !== preview) return;

@@ -1,7 +1,7 @@
 import type { APIRoute } from 'astro';
 import { catalogueDots, encodeCatalogueDots } from '@cssearth/objects';
 import { packPreparedBank } from '@cssearth/objects/node';
-import { DOT_CATALOGUES } from '../../dot-catalogue-data.mts';
+import { DOT_CATALOGUES } from '../../server/dot-catalogue-data.mts';
 import { CONTEXT_GALAXY_SAMPLE } from '../../prepared/prepared-context-objects.mts';
 
 // The galaxy catalogue's dots as the page draws them (@cssearth/objects catalogue-dots.ts): the sampled Local Group

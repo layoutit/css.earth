@@ -7,11 +7,17 @@ import { waitFor } from '@cssearth/objects/node/contract';
 
 /** Whether each mounted bank's last drawing was around a body (the runtime's second argument). */
 const drawnAround: boolean[] = [];
+/** The banks whose images are still decoding, by id, and what each mounted bank was given to say that it draws. */
+const decoding = new Set<string>(), drawn = new Map<string, () => void>();
+/** The banks told that their root is shown again, in order. */
+const resumed: string[] = [];
 mock.module('../image-layers/prepared-image-layer-runtime.js', { namedExports: {
-  mountPreparedCssImageLayers: ({ host, before }: { host: HTMLElement; before: Element }) => {
+  mountPreparedCssImageLayers: ({ host, before, payload, onDrawn }: { host: HTMLElement; before: Element; payload: { id: string }; onDrawn?: () => void }) => {
     const root = host.ownerDocument.createElement('div');
+    root.dataset.imageLayerObject = payload.id;
     host.insertBefore(root, before);
-    return { root, publish(_publication: unknown, around: readonly number[] | false = false) { drawnAround.push(around !== false); }, resume() {}, destroy() { root.remove(); } };
+    drawn.set(payload.id, () => { decoding.delete(payload.id); onDrawn?.(); });
+    return { root, drawing: () => !decoding.has(payload.id), publish(_publication: unknown, around: readonly number[] | false = false) { drawnAround.push(around !== false); }, resume() { resumed.push(payload.id); }, destroy() { root.remove(); } };
   },
 } });
 // The modules under test import the mocked ones, so they load after the mocks.
@@ -61,6 +67,65 @@ test("a host's other bank gives its billboard way to the bank selected for that 
   await waitFor(() => assert.equal(root.dataset.imageLayerResidentBankCount, '1'));
   publish('gas');
   assert.deepEqual([shown('picture'), shown('gas'), shown('elsewhere')], [false, false, true], "the selected bank's slices stand for the cluster: neither of its billboards shows");
+});
+
+test("a bank's billboard stays until the bank draws, and a bank that stands in is drawn as the detailed one is", async t => {
+  decoding.add('picture').add('gas'); t.after(() => { decoding.clear(); });
+  const { document } = parseHTML('<div id="root"><span></span></div>');
+  const root = document.getElementById('root')!, lifetime = createSceneLifetime(), billboard = { radiusUnits: 1, back: [0, 0, 1], right: [1, 0, 0], down: [0, 1, 0] };
+  const plan = parseDatasetBillboards({ schema: 'cssearth-dataset-billboards@2', imagePx: 256, banks: ['picture', 'gas'].map(id => ({ id, contextVisibility: 'galactic', attached: false, billboard })) });
+  const banks = createUniverseCatalogBanks({ prepareBillboardImage: () => true, root, end: root.firstElementChild!, stage: root, lifetime,
+    declarations: [{ id: 'picture', frame, host: 'cluster' }, { id: 'gas', frame, host: 'cluster' }],
+    initialImages: new Map(), volumeDeclarations: [], catalogBank: undefined, loadCatalog: undefined,
+    loadImageLayer: async id => ({ payload: { id, frame } }) as never, billboards: { plan, imageUrl: id => `/billboards/${id}.webp` } });
+  const billboardShown = (id: string) => { const node = root.querySelector<HTMLElement>(`[data-dataset-billboard="${id}"]`)!; return node.style.display === 'block' && Number(node.style.opacity) > 0; };
+  const bankShown = (id: string) => { const node = root.querySelector<HTMLElement>(`[data-image-layer-object="${id}"]`); return node !== null && node.style.display !== 'none'; };
+  const publish = (detailed: string, standIn?: string) => banks.publishImages({ referenceFrame: 'fixture', epochJdTt: 1, pose: { positionM: [0, 0, 10], orientationXyzw: [0, 0, 0, 1] } },
+    { focalPixels: 1000, principalOffsetPixels: [0, 0], widthPixels: 400, heightPixels: 300 }, 1, detailed, undefined, [], undefined, standIn);
+  publish('picture');
+  await waitFor(() => assert.equal(root.dataset.imageLayerResidentBankCount, '1'));
+  publish('picture');
+  assert.deepEqual([bankShown('picture'), billboardShown('picture'), banks.drawing('picture')], [true, true, false], 'mounted, its images still decoding: the billboard is all there is to see');
+  drawn.get('picture')!(); publish('picture');
+  assert.deepEqual([bankShown('picture'), billboardShown('picture'), banks.drawing('picture')], [true, false, true], 'it draws: the billboard gives way');
+  // Another dataset of the same host is picked: its bank mounts and decodes while the one drawn before stands in.
+  publish('gas', 'picture');
+  await waitFor(() => assert.equal(root.dataset.imageLayerResidentBankCount, '2'));
+  publish('gas', 'picture');
+  assert.deepEqual([bankShown('picture'), bankShown('gas'), billboardShown('picture'), billboardShown('gas'), banks.drawing('gas')], [true, true, false, false, false], 'no billboard shows over the stand-in');
+  drawn.get('gas')!(); publish('gas');
+  assert.deepEqual([bankShown('picture'), bankShown('gas'), billboardShown('gas'), banks.drawing('gas')], [false, true, false, true], 'the picked bank draws: the stand-in is no longer asked for');
+  lifetime.destroy();
+});
+
+test('the bank last drawn for the selected body stays in layout at opacity 0, and leaves it when the body changes', async t => {
+  t.after(() => { resumed.length = 0; });
+  const { document } = parseHTML('<div id="root"><span></span></div>');
+  const root = document.getElementById('root')!, lifetime = createSceneLifetime(), asked = mock.fn(() => true);
+  const banks = createUniverseCatalogBanks({ prepareBillboardImage: () => true, root, end: root.firstElementChild!, stage: root, lifetime, requestPublication: asked,
+    declarations: ['first', 'second', 'third'].map(id => ({ id, frame, host: 'nebula' })), initialImages: new Map(), volumeDeclarations: [], catalogBank: undefined, loadCatalog: undefined,
+    loadImageLayer: async id => ({ payload: { id, frame } }) as never });
+  const nebula = {}, elsewhere = {};
+  const look = (id: string) => { const node = root.querySelector<HTMLElement>(`[data-image-layer-object="${id}"]`); return node ? `${node.style.display || 'in'}/${node.style.opacity}` : 'unmounted'; };
+  const publish = (detailed: string | undefined, subject: unknown) => banks.publishImages({ referenceFrame: 'fixture', epochJdTt: 1, pose: { positionM: [0, 0, 10], orientationXyzw: [0, 0, 0, 1] } },
+    { focalPixels: 1000, principalOffsetPixels: [0, 0], widthPixels: 400, heightPixels: 300 }, 1, detailed, undefined, [], undefined, undefined, subject);
+  const visit = async (id: string, mounted: number) => { publish(id, nebula); await waitFor(() => assert.equal(root.dataset.imageLayerResidentBankCount, String(mounted))); publish(id, nebula); };
+  await visit('first', 1);
+  await visit('second', 2);
+  assert.deepEqual([look('first'), look('second')], ['in/0', 'in/0.999'], 'the dataset shown before stays in layout, unseen');
+  const requests = asked.mock.callCount();
+  resumed.length = 0;
+  publish('first', nebula);
+  assert.deepEqual([look('first'), look('second'), resumed], ['in/0.999', 'in/0', []], 'gone back to, it is shown as it was: no layer is made again and no decode waited for');
+  assert.equal(asked.mock.callCount(), requests + 1, 'and who waits for it to draw is told');
+  await visit('third', 3);
+  assert.deepEqual([look('first'), look('second'), look('third')], ['in/0', 'none/0', 'in/0.999'], 'one bank is kept: the one before it leaves layout');
+  publish(undefined, elsewhere);
+  assert.deepEqual([look('first'), look('third')], ['none/0', 'none/0'], 'another body selected: nothing of this one stays in layout');
+  resumed.length = 0;
+  publish('first', nebula);
+  assert.deepEqual([look('first'), resumed], ['in/0.999', ['first']], 'out of layout, it is shown again as a bank first shown is');
+  lifetime.destroy();
 });
 
 test('a bank whose light lies on walls draws around a body inside its host, the first declared for that host; a photograph never does', async () => {

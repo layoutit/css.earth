@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { importWithJson } from '../test/fixtures/module-import.mts';
+import { importWithJson } from './fixtures/module-import.mts';
 const input = { schema: 'cssearth-world-presentation@6', moons: { major: ['moon'], minor: ['minor-moon'] }, defaultFeatureIds: ['feature'], orbitFeatureIds: [], hiddenOrbitIds: [],
   galaxies: { fadeStartDistanceM: 1, fullDistanceM: 2, maximumDistanceM: 3, minimumDistanceRadii: 4, defaultFocusRadiusM: 5, metersPerParsec: 6 },
   clusters: { fadeStartDistanceM: 7, fullDistanceM: 8 }, categoryFrames: { planet: { centreM: [0, 0, 0], minimumM: [-1, -2, -3], maximumM: [1, 2, 3] } },

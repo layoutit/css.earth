@@ -1,18 +1,18 @@
 ---
 import { worldPlaceOf, worldStartupFiles } from '../server/world-places.mts';
 import { informationTabStyles } from '../server/information-tab-styles.mts';
-import ObjectSwatchStyles from "../components/ObjectSwatchStyles.astro";
+import ObjectSwatchStyles from "./ObjectSwatchStyles.astro";
 import { webAnalyticsBootstrap } from "../startup/web-analytics.mts";
 import { errorReportBootstrap } from "../startup/error-report.mts";
 import { initialShellContextBootstrap } from '../startup/initial-shell-context.mts';
 import { startupRequestsBootstrap } from '../directory/startup-requests.mts';
 import { defaultDatasetBank } from '../server/object-page-data.mts';
 import contextBankAssets from '../prepared/prepared-context-bank-assets.json';
-import { SYSTEM_VIEW_HOSTS } from '../system-framing.mts';
+import { SYSTEM_VIEW_HOSTS } from '../world/system-framing.mts';
 import { inlineSceneImage, resolveBuildSceneAddress } from '../server-assets/asset-origin.mts';
-import { SCENE_OBJECTS, requireObject } from "../objects.mts";
-import { breadcrumbJsonLd, homeSeo, objectSeo, websiteJsonLd } from "../seo.mts";
-import { pageTrail } from "../seo-trail.mts";
+import { SCENE_OBJECTS, requireObject } from "../directory/objects.mts";
+import { breadcrumbJsonLd, homeSeo, objectSeo, websiteJsonLd } from "../content/seo.mts";
+import { pageTrail } from "../content/seo-trail.mts";
 import { availableSocialImages, DEFAULT_SOCIAL_IMAGE_ID } from "../server/social-images.mts";
 import "./cubic-sky.css";
 import "@cssearth/renderer/styles/volume.css";
@@ -162,8 +162,8 @@ const structuredData = JSON.stringify(home ? websiteJsonLd() : breadcrumbJsonLd(
     {!navigation && <script>
       import { bindNativeViewForms } from '../shell/native-view-forms.mts';
       import { startBodyCode, startViewCode } from '../startup/startup-boot.mts';
-      import { importSceneRouter } from '../shared-imports.mts';
-      import { loadStartupWorld } from '../startup-world.mts';
+      import { importSceneRouter } from '../startup/shared-imports.mts';
+      import { loadStartupWorld } from '../directory/startup-world.mts';
       bindNativeViewForms(document, window);
       startBodyCode(document);
       // The page reads its world first, so no module waits for it (startup-world.mts), and its modules load one at a time

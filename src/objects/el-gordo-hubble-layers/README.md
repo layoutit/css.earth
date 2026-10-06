@@ -51,15 +51,16 @@ drawn from the pictures themselves. The page's other dataset is [Webb's picture]
   24.5% differs and 1.36% was set to none.
 - **Reach:** 114″ (gas) and 114″ (mass) either side of the plane along the sight line, 1,643 kpc at the comoving distance.
 - **Leaves:** one grid of 256 × 155 cells. Face-on, 32 slabs parallel to the photograph; from the sides, 39 and 39
-  curtains of 155 × 190 and 256 × 190 texels.
+  curtains of 155 × 190 and 256 × 190 texels. From straight beside, the curtains add up as a
+  screen does: each texel is as much whiter than its own light as all the light on its sight line through the curtains is.
 - **Bytes:** 111 images, 0.85 MB: the photograph 0.00 MB, slabs 0.25 MB, curtains 0.60 MB.
 
 ## Evidence
 
-![El Gordo's gas and mass in the app](evidence/2026-10-05/views.jpg)
+![El Gordo's gas and mass in the app](evidence/2026-10-06/views.jpg)
 
 The El Gordo page with this dataset in headless Chromium at 1440 × 900, device pixel ratio 2, on this branch on
-2026-10-05: the dataset's arrival and the camera turned in steps toward the side.
+2026-10-06: the dataset's arrival and the camera turned in steps toward the side.
 
 ## Measured, chosen and inferred
 

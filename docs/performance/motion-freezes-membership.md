@@ -41,11 +41,15 @@ held differently while coasting:
   A nebula's slices follow this (`volume/prepared-volume-runtime.ts`): an axis stack whose weight reached zero, an
   optical copy whose alpha did and a slice that left the view stay as they are until the camera stops. Hiding them as
   the camera turned flipped `display` on 2,016 slices in one throw of a drag at the Milky Way (2026-10-03). A stack
-  the camera turns to joins a paced share of its slices a frame, every eighth slice first, and a stack that leaves at
-  rest leaves whole: on the iPad joining costs by the slices in the frame (8 a frame none over 21 ms, all 628 at once
-  182 ms), and leaving by the slices still there (all at once 42 to 50 ms, 16 a frame eight frames of 34 to 93 ms,
-  2026-10-04). A stack's opacity in the mix stops at 0.999: Safari painted every slice under a stack again each time its
-  opacity left or reached 1 (54 ms for 88 slices with the camera still, nothing for 0.99 to 0.98).
+  the camera turns to joins eight slices a frame, every eighth slice first, and a stack that leaves at rest leaves
+  whole. Eight, not more: through three turns on the iPad a share that doubled to 32 cost the Crab 726 ms beyond 17 ms
+  a frame and 16 frames over 33 ms, against 321 ms and 6 (2026-10-06). A stack's root is displayed in the frame its
+  first slices are, never before: Safari draws nothing of a stack whose root was first displayed empty, however many
+  slices join it afterwards (M42 turned a quarter of the way round was gone for 8.5 of 9.9 s of a recorded visit on
+  the iPad, and for none with the root displayed with its first slices, 2026-10-06). On the iPad leaving costs by the
+  slices still there (all at once 42 to 50 ms, 16 a frame eight frames of 34 to 93 ms, 2026-10-04). A stack's opacity
+  in the mix stops at 0.999: Safari painted every slice under a stack again each time its opacity left or reached 1
+  (54 ms for 88 slices with the camera still, nothing for 0.99 to 0.98).
   A galaxy's or nebula's picture layers follow the same two rules (`image-layers/prepared-image-layer-runtime.ts`,
   `universe/universe-catalog-banks.ts`): the bank's own opacity stops at 0.999 too, for sheets and for patches
   (Cassiopeia A's 1,397 patches repainted in one frame of 291 ms each time the bank crossed 1 on a zoom out, 51 ms
@@ -53,6 +57,17 @@ held differently while coasting:
   images are decoded off the page's thread, then shows whole: decoded inside the paint, NGC 2392's 57 layers made a
   frame of 235 ms on a turn and 270 ms on a dataset switch, against 34 and 31 ms decoded first (iPad, 2026-10-05).
   Joining such a stack a share a frame was measured and rejected: each joining frame painted the layers already shown.
+  What such a stack or bank replaces stays until it is decoded: the stacks already drawn share the whole picture, the
+  one that drew most stays when the camera has turned fully away from it, a bank's billboard gives way only to a bank
+  that draws, and the bank a host showed before a dataset pick stands in for the picked one. Without that the Ring had
+  nothing drawn for a recorded grab at a turn and at each dataset pick, 0.5 s of a 10.5 s visit on the iPad, the
+  Southern Ring 0.8 s and Cassiopeia A 0.7 s; with it none, 0.2 and 0.4 s (2026-10-06).
+  The bank last drawn for the selected body stays in layout at opacity 0 when it leaves the picture, until the body
+  changes or another of its banks takes that place: Safari keeps the layers and surfaces of a bank at opacity 0, and
+  makes them all again for one that left layout or was hidden by `visibility`. Shown again, Cassiopeia A's 1,397
+  patches made a frame of 272 to 281 ms from out of layout, 220 to 231 ms from `visibility: hidden` and 24 to 42 ms
+  from opacity 0; going back to its first dataset had frames of 86 and 214 ms, and 47 and 60 ms with the bank kept,
+  for 25 MB more while its second bank is the one kept (iPad, 2026-10-06).
   A dataset picked on a slice volume that is on screen waits the same way (`universe/universe-dataset-banks.ts`): the
   volume keeps the dataset it shows until every atlas of the next is decoded, then takes them in one frame, and not
   while the camera coasts. Written at once, each atlas painted as it landed: on M42 frames of 99, 77 and 75 ms at the

@@ -7,7 +7,7 @@ import { tmpdir } from "node:os";
 import { dirname, resolve } from "node:path";
 
 import { required } from '../navigation/navigation-test-values.test-support.mts';
-import { SCENE_OBJECTS } from "../objects.mts";
+import { SCENE_OBJECTS } from "../directory/objects.mts";
 import { authoredObjectFixture } from "./fixtures/authored-object-fixture.mts";
 import { objectInformationSource, validateObjectEditorial } from "@cssearth/bake/sources";
 import {
@@ -30,7 +30,7 @@ test("accepts a complete non-NASA package and still rejects corrupt or undeclare
   const body = authoredObjectFixture(object.id, { path: "source/local-data.bin" });
   const fixture = { ...body, properties: { ...body.properties, page: { stylesheets: ["src/body.css"] } } };
   await writeFile(resolve(paths.root, "object.json"), JSON.stringify(fixture));
-  for (const path of ["src/body.css", "site/object-shell.css"]) { await mkdir(dirname(resolve(projectRoot,path)), {recursive:true}); await writeFile(resolve(projectRoot,path), ""); }
+  for (const path of ["src/body.css", "site/layouts/object-shell.css"]) { await mkdir(dirname(resolve(projectRoot,path)), {recursive:true}); await writeFile(resolve(projectRoot,path), ""); }
   await mkdir(paths.publicAssets, { recursive: true });
   await writeFile(resolve(paths.publicAssets, "surface.webp"), bytes);
   await writeFile(resolve(paths.sourceRoot, "local-data.bin"), bytes);
