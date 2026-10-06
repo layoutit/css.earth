@@ -1,0 +1,57 @@
+{
+  "schema": "cssearth-volume-presentation-source@2",
+  "objectId": "ngc-7662-layers",
+  "name": "Blue Snowball Nebula",
+  "defaultDataset": "optical",
+  "bank": {
+    "path": "src/objects/ngc-7662-layers/prepared/image-layers.json"
+  },
+  "recipes": [
+    {
+      "id": "image-layer-recipe",
+      "path": "src/objects/ngc-7662-layers/source/recipe.json"
+    },
+    {
+      "id": "source-evidence",
+      "path": "src/objects/ngc-7662-layers/source/provenance.json"
+    }
+  ],
+  "sharedInputs": [],
+  "datasets": [
+    {
+      "id": "optical",
+      "label": "Hubble · optical",
+      "title": "The Blue Snowball in visible light",
+      "description": "ESA/Hubble's picture of the Blue Snowball Nebula, WFPC2: H-alpha 656 nm in green, [N II] 658 nm in red and [O I] 631 nm in magenta, as ESA's page lists them: a bright inner shell inside a fainter outer one, with red knots of slower-ionised gas near the rim. It lies on the walls of those two shells as Guerrero, Jaxon & Chu (2004) fit them to the nebula's spectra: two stretched shells, one inside the other, their long axis tilted 50° from our sight line with its north-east end toward us. Each shell's light is on its near wall and its far wall. No knot's own depth is measured.",
+      "summary": "Hubble's picture on the walls of the nebula's two shells, with the shape, tilt and speed its spectra give them.",
+      "detail": "737 × 737 px",
+      "facts": [
+        {
+          "id": "bands",
+          "label": "Colors",
+          "value": "H-alpha 656 nm, [N II] 658 nm and [O I] 631 nm"
+        },
+        {
+          "id": "source-pixels",
+          "label": "Source pixels",
+          "value": "737 × 737"
+        },
+        {
+          "id": "coverage",
+          "label": "Field",
+          "value": "33.3 × 33.3 arcsec"
+        },
+        {
+          "id": "license",
+          "label": "License",
+          "value": "CC-BY-4.0"
+        }
+      ],
+      "input": "optical",
+      "preview": {
+        "path": "src/objects/ngc-7662-layers/source/source.jpg",
+        "url": "https://cdn.esahubble.org/archives/images/large/opo9738c20.jpg"
+      }
+    }
+  ]
+}
