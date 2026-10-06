@@ -75,6 +75,8 @@ export interface PreparedUniverseOptions {
   loadVolumeDataset?(id: string): Promise<Parameters<typeof createPreparedVolumeDatasets>[0] & { cataloguePointUrls?: readonly string[] }>;
   /** Testable cap for hidden banks with no active navigation subscriber. */
   warmVolumeDatasetDomNodeBudget?: number;
+  /** The same cap for image-layer banks. */
+  warmImageLayerDomNodeBudget?: number;
   catalog?: PreparedCatalogBank;
   /** Fade metadata is sufficient to gate the catalogue without fetching or parsing its records. */
   catalogBank?: Omit<PreparedCatalogBank, 'payload' | 'galaxySample' | 'nebulae' | 'clusters'> & {

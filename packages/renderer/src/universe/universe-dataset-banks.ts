@@ -38,6 +38,20 @@ interface DatasetBank {
   enabled: boolean;
 }
 
+/** A bank the world keeps mounted for a return visit: it is not drawn and no focus holds it. */
+export interface WarmBank { readonly lastUsed: number; readonly nodes: number; evict(): boolean }
+
+/** Releases the least recently used of `warm` until those left weigh no more than `budget` DOM nodes. Every kind of bank
+ * the world keeps for a return visit is trimmed by this rule: the volumes here and the pictures of
+ * universe-catalog-banks.ts. */
+export function trimWarmBanks(warm: readonly WarmBank[], budget: number): void {
+  let nodes = warm.reduce((total, bank) => total + bank.nodes, 0);
+  for (const bank of [...warm].sort((left, right) => left.lastUsed - right.lastUsed)) {
+    if (nodes <= budget) break;
+    if (bank.evict()) nodes -= bank.nodes;
+  }
+}
+
 /** One stable record owns each declared bank through load, publication and eviction. */
 export function createUniverseDatasetBanks({ root, end, frontRoot, frontEnd, lifetime, declarations, facts, frame, visibility,
   billboards: preparedBillboards, load, warmDomNodeBudget, requestPublication, prepareBillboardImage }: {
@@ -121,12 +135,7 @@ export function createUniverseDatasetBanks({ root, end, frontRoot, frontEnd, lif
     const warm = banks.filter(bank => bank.mounted && !bank.visible && bank.subscribers === 0);
     // Slice leaves appear as a bank is approached; weigh its current DOM.
     for (const bank of warm) updateWeight(bank);
-    let nodes = warm.reduce((total, bank) => total + bank.residentNodes, 0);
-    for (const bank of warm.sort((left, right) => left.lastUsed - right.lastUsed)) {
-      if (nodes <= warmDomNodeBudget) break;
-      const weight = bank.residentNodes;
-      if (evict(bank)) nodes -= weight;
-    }
+    trimWarmBanks(warm.map(bank => ({ lastUsed: bank.lastUsed, nodes: bank.residentNodes, evict: () => evict(bank) })), warmDomNodeBudget);
     publishResidency();
   }
   function ensureLoaded(bank: DatasetBank): Promise<void> {

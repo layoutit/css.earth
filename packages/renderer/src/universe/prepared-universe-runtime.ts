@@ -45,8 +45,10 @@ const GALAXY_PREFETCH_RATIO = 1 / 32;
 const IMAGE_MESH_LOAD_DISTANCE_M = 7e9 * 3.0856775814913673e16;
 /** Hidden, unsubscribed dataset banks are retained only within this measured DOM budget. */
 export const WARM_VOLUME_DATASET_DOM_NODE_BUDGET = 5_000;
+/** The same for hidden image-layer banks that no focus holds. */
+export const WARM_IMAGE_LAYER_DOM_NODE_BUDGET = 5_000;
 
-export function createPreparedUniverse({ context, volume, pointAppearance, resolvePointResource, resolveResource, sprites, shells = [], contextBanks = [], imageLayers = [], imageLayerBanks = [], loadImageLayer, pointBanks = [], volumeDatasetBanks = [], loadVolumeDataset, warmVolumeDatasetDomNodeBudget = WARM_VOLUME_DATASET_DOM_NODE_BUDGET, backgroundCataloguePoints = [], imageMeshes = [], environmentLinks, stellarExtents = {}, galaxyCataloguePoints = [], galaxyBacking, catalog, catalogBank, loadCatalog, annotationPriorities: initialPriorities = {}, annotationLandmarks, annotationOpacities: initialOpacities = {}, plannerSource, nonNavigableIds, plainDots, datasetVisibility = DEFAULT_POINT_VISIBILITY, datasetBillboards, sky = true }: PreparedUniverseOptions) {
+export function createPreparedUniverse({ context, volume, pointAppearance, resolvePointResource, resolveResource, sprites, shells = [], contextBanks = [], imageLayers = [], imageLayerBanks = [], loadImageLayer, pointBanks = [], volumeDatasetBanks = [], loadVolumeDataset, warmVolumeDatasetDomNodeBudget = WARM_VOLUME_DATASET_DOM_NODE_BUDGET, warmImageLayerDomNodeBudget = WARM_IMAGE_LAYER_DOM_NODE_BUDGET, backgroundCataloguePoints = [], imageMeshes = [], environmentLinks, stellarExtents = {}, galaxyCataloguePoints = [], galaxyBacking, catalog, catalogBank, loadCatalog, annotationPriorities: initialPriorities = {}, annotationLandmarks, annotationOpacities: initialOpacities = {}, plannerSource, nonNavigableIds, plainDots, datasetVisibility = DEFAULT_POINT_VISIBILITY, datasetBillboards, sky = true }: PreparedUniverseOptions) {
   let plan = parsePreparedWorldContextPlan(context);
   const payload = validatePreparedCssVolume(volume);
   // What another system's bodies reach once read (addSystem): every planner made and every mounted world layer.
@@ -67,7 +69,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
   const declaredVolumes = [...volumeDatasetBanks], declaredPoints = [...pointBanks];
   const datasetFacts = declaredVolumes.map(factsOf);
   const bankMounts = new Set<{ add(volumes: typeof declaredVolumes, points: typeof declaredPoints): void }>();
-  if (!Number.isSafeInteger(warmVolumeDatasetDomNodeBudget) || warmVolumeDatasetDomNodeBudget < 0) {
+  if ([warmVolumeDatasetDomNodeBudget, warmImageLayerDomNodeBudget].some(budget => !Number.isSafeInteger(budget) || budget < 0)) {
     throw new TypeError('Warm volume dataset DOM node budget must be a non-negative integer.');
   }
   if (payload.id !== plan.volume.objectId || pointAppearance.id !== plan.stars.objectId ||
@@ -235,7 +237,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
             hidden: mesh.hidden?.() ?? false, hiddenCaption: mesh.hiddenCaption })) }));
         const catalogBanks = createUniverseCatalogBanks({ root, end, stage, lifetime, imagesBefore: galaxyImages,
           declarations: declaredImageLayers, initialImages: initialImageLayers, volumeDeclarations: [...declaredVolumes],
-          pointBanks: [...declaredPoints],
+          pointBanks: [...declaredPoints], warmDomNodeBudget: warmImageLayerDomNodeBudget,
           initialCatalog: catalog, catalogBank, loadCatalog, loadImageLayer, requestPublication, billboards: datasetBillboards, stellarExtents, prepareBillboardImage });
         let labelBudget = createLabelBudget(0, 0);
         let labelBlockers: readonly LabelScreenRect[] = [];

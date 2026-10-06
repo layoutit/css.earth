@@ -65,6 +65,7 @@ test('image textures are demanded once when their retained axis first contribute
   const resolveResource = mock.fn((path: string) => `/prepared/${path}`);
   const runtime = mountPreparedCssImageLayers({ host: host as unknown as HTMLElement, before: before as unknown as Element, payload, resolveResource });
   const retained = [...document.elements];
+  assert.equal(runtime.nodes, retained.length - 2, 'the bank reports the nodes it mounted: every element but the host and its marker');
   const leaf = (axis: string) => document.elements.find(element => element.dataset.imageLayerLeaf === axis)!;
   const bank = (axis: string) => document.elements.find(element => element.dataset.imageLayerAxis === axis)!;
   const publish = (orientationXyzw: readonly [number, number, number, number]) => runtime.publish({

@@ -7,11 +7,15 @@ import { waitFor } from '@cssearth/objects/node/contract';
 
 /** Whether each mounted bank's last drawing was around a body (the runtime's second argument). */
 const drawnAround: boolean[] = [];
+/** How many leaves the next mounted banks have under their root. */
+let leaves = 0;
 mock.module('../image-layers/prepared-image-layer-runtime.js', { namedExports: {
-  mountPreparedCssImageLayers: ({ host, before }: { host: HTMLElement; before: Element }) => {
+  mountPreparedCssImageLayers: ({ host, before, payload }: { host: HTMLElement; before: Element; payload: { id: string } }) => {
     const root = host.ownerDocument.createElement('div');
+    root.dataset.imageLayerObject = payload.id;
+    for (let leaf = 0; leaf < leaves; leaf++) root.appendChild(host.ownerDocument.createElement('s'));
     host.insertBefore(root, before);
-    return { root, publish(_publication: unknown, around: readonly number[] | false = false) { drawnAround.push(around !== false); }, resume() {}, destroy() { root.remove(); } };
+    return { root, nodes: 1 + leaves, publish(_publication: unknown, around: readonly number[] | false = false) { drawnAround.push(around !== false); }, resume() {}, destroy() { root.remove(); } };
   },
 } });
 // The modules under test import the mocked ones, so they load after the mocks.
@@ -27,7 +31,7 @@ const plan = parseDatasetBillboards({ schema: 'cssearth-dataset-billboards@2', i
 test('a galaxy drawn from image layers shows its billboard from afar and hands it to its slices once they load', async () => {
   const { document } = parseHTML('<div id="root"><span></span></div>');
   const root = document.getElementById('root')!, lifetime = createSceneLifetime();
-  const banks = createUniverseCatalogBanks({ prepareBillboardImage: () => true, root, end: root.firstElementChild!, stage: root, lifetime, declarations: [{ id: 'galaxy', frame }],
+  const banks = createUniverseCatalogBanks({ warmDomNodeBudget: 5_000, prepareBillboardImage: () => true, root, end: root.firstElementChild!, stage: root, lifetime, declarations: [{ id: 'galaxy', frame }],
     initialImages: new Map(), volumeDeclarations: [], catalogBank: undefined, loadCatalog: undefined,
     loadImageLayer: async () => ({ payload: { id: 'galaxy', frame } }) as never, billboards: { plan, imageUrl: id => `/billboards/${id}.webp` } });
   const billboard = root.querySelector<HTMLElement>('[data-dataset-billboard="galaxy"]')!;
@@ -48,7 +52,7 @@ test("a host's other bank gives its billboard way to the bank selected for that 
   const { document } = parseHTML('<div id="root"><span></span></div>');
   const root = document.getElementById('root')!, lifetime = createSceneLifetime(), billboard = { radiusUnits: 1, back: [0, 0, 1], right: [1, 0, 0], down: [0, 1, 0] };
   const both = parseDatasetBillboards({ schema: 'cssearth-dataset-billboards@2', imagePx: 256, banks: ['picture', 'gas', 'elsewhere'].map(id => ({ id, contextVisibility: 'galactic', attached: false, billboard })) });
-  const banks = createUniverseCatalogBanks({ prepareBillboardImage: () => true, root, end: root.firstElementChild!, stage: root, lifetime,
+  const banks = createUniverseCatalogBanks({ warmDomNodeBudget: 5_000, prepareBillboardImage: () => true, root, end: root.firstElementChild!, stage: root, lifetime,
     declarations: [{ id: 'picture', frame, host: 'cluster' }, { id: 'gas', frame, surrounds: true, host: 'cluster' }, { id: 'elsewhere', frame, host: 'other-cluster' }],
     initialImages: new Map(), volumeDeclarations: [], catalogBank: undefined, loadCatalog: undefined,
     loadImageLayer: async id => ({ payload: { id, frame } }) as never, billboards: { plan: both, imageUrl: id => `/billboards/${id}.webp` } });
@@ -66,7 +70,7 @@ test("a host's other bank gives its billboard way to the bank selected for that 
 test('a bank whose light lies on walls draws around a body inside its host, the first declared for that host; a photograph never does', async () => {
   const { document } = parseHTML('<div id="root"><span></span></div>');
   const root = document.getElementById('root')!, lifetime = createSceneLifetime();
-  const banks = createUniverseCatalogBanks({ prepareBillboardImage: () => true, root, end: root.firstElementChild!, stage: root, lifetime,
+  const banks = createUniverseCatalogBanks({ warmDomNodeBudget: 5_000, prepareBillboardImage: () => true, root, end: root.firstElementChild!, stage: root, lifetime,
     declarations: [{ id: 'photograph', frame, host: 'galaxy' }, { id: 'walls', frame, surrounds: true, host: 'nebula' }, { id: 'walls-infrared', frame, surrounds: true, host: 'nebula' }],
     initialImages: new Map(), volumeDeclarations: [], catalogBank: undefined, loadCatalog: undefined,
     loadImageLayer: async id => ({ payload: { id, frame } }) as never });
@@ -89,7 +93,7 @@ test('a bank whose light lies on walls draws around a body inside its host, the 
 test('a package of catalogue dots mounts them when its row is selected, and hides them when another is', () => {
   const { document } = parseHTML('<div id="root"><span></span></div>');
   const root = document.getElementById('root')!, lifetime = createSceneLifetime();
-  const banks = createUniverseCatalogBanks({ prepareBillboardImage: () => true, root, end: root.firstElementChild!, stage: root, lifetime, declarations: [],
+  const banks = createUniverseCatalogBanks({ warmDomNodeBudget: 5_000, prepareBillboardImage: () => true, root, end: root.firstElementChild!, stage: root, lifetime, declarations: [],
     initialImages: new Map(), volumeDeclarations: [], catalogBank: undefined, loadCatalog: undefined, loadImageLayer: undefined,
     pointBanks: [{ id: 'cluster', url: '/cluster/dots.bin' }] });
   const publish = (selected?: string) => banks.publishPoints({ referenceFrame: 'fixture', epochJdTt: 1,
@@ -109,7 +113,7 @@ test('a package of catalogue dots mounts them when its row is selected, and hide
 test('a bank that belongs to a body draws while that body or one of its system is selected', () => {
   const { document } = parseHTML('<div id="root"><span></span></div>');
   const root = document.getElementById('root')!, lifetime = createSceneLifetime();
-  const banks = createUniverseCatalogBanks({ prepareBillboardImage: () => true, root, end: root.firstElementChild!, stage: root, lifetime, declarations: [],
+  const banks = createUniverseCatalogBanks({ warmDomNodeBudget: 5_000, prepareBillboardImage: () => true, root, end: root.firstElementChild!, stage: root, lifetime, declarations: [],
     initialImages: new Map(), volumeDeclarations: [], catalogBank: undefined, loadCatalog: undefined, loadImageLayer: undefined,
     pointBanks: [{ id: 'minor-moons', url: '/minor-moons/dots.bin', host: 'planet' }] });
   const publish = (...system: string[]) => banks.publishPoints({ referenceFrame: 'fixture', epochJdTt: 1,
@@ -130,7 +134,7 @@ test('a bank that belongs to a body draws while that body or one of its system i
 test('a bank of plain-dot stars draws while the selected body is inside its host, dimmed as the other stars are', () => {
   const { document } = parseHTML('<div id="root"><span></span></div>');
   const root = document.getElementById('root')!, lifetime = createSceneLifetime();
-  const banks = createUniverseCatalogBanks({ prepareBillboardImage: () => true, root, end: root.firstElementChild!, stage: root, lifetime, declarations: [],
+  const banks = createUniverseCatalogBanks({ warmDomNodeBudget: 5_000, prepareBillboardImage: () => true, root, end: root.firstElementChild!, stage: root, lifetime, declarations: [],
     initialImages: new Map(), volumeDeclarations: [], catalogBank: undefined, loadCatalog: undefined, loadImageLayer: undefined,
     pointBanks: [{ id: 'cloud/plain-stars', url: '/world/dots/cloud.bin', host: 'cloud', stars: true }, { id: 'group-members', url: '/group/dots.bin', host: 'group' }] });
   let asked = 0;
@@ -157,7 +161,7 @@ test('a bank of plain-dot stars draws while the selected body is inside its host
 test('a package of catalogue dots declared after mount draws while its host is selected, mounted once', () => {
   const { document } = parseHTML('<div id="root"><span></span></div>');
   const root = document.getElementById('root')!, lifetime = createSceneLifetime();
-  const banks = createUniverseCatalogBanks({ prepareBillboardImage: () => true, root, end: root.firstElementChild!, stage: root, lifetime, declarations: [],
+  const banks = createUniverseCatalogBanks({ warmDomNodeBudget: 5_000, prepareBillboardImage: () => true, root, end: root.firstElementChild!, stage: root, lifetime, declarations: [],
     initialImages: new Map(), volumeDeclarations: [], catalogBank: undefined, loadCatalog: undefined, loadImageLayer: undefined });
   const publish = (...system: string[]) => banks.publishPoints({ referenceFrame: 'fixture', epochJdTt: 1,
     pose: { positionM: [0, 0, 10], orientationXyzw: [0, 0, 0, 1] } },
@@ -170,4 +174,34 @@ test('a package of catalogue dots declared after mount draws while its host is s
   assert.equal(root.querySelectorAll('[data-catalogue-points]').length, 1, 'mounted once, drawn for a body of its host');
   lifetime.destroy();
   assert.equal(root.querySelector('[data-catalogue-points]'), null);
+});
+
+test('a picture bank left behind stays for a return visit within the warm budget; a held bank stays; a coast defers the release', async t => {
+  leaves = 3; t.after(() => { leaves = 0; });
+  const { document } = parseHTML('<div id="root"><span></span></div>');
+  const root = document.getElementById('root')!, lifetime = createSceneLifetime();
+  // Each bank weighs four nodes, so the budget keeps one bank that is neither drawn nor held.
+  const banks = createUniverseCatalogBanks({ warmDomNodeBudget: 5, prepareBillboardImage: () => true, root, end: root.firstElementChild!, stage: root, lifetime,
+    declarations: ['a', 'b', 'c'].map(id => ({ id, frame })), initialImages: new Map(), volumeDeclarations: [], catalogBank: undefined, loadCatalog: undefined,
+    loadImageLayer: async id => ({ payload: { id, frame } }) as never });
+  const publish = (detailed: string) => banks.publishImages({ referenceFrame: 'fixture', epochJdTt: 1, pose: { positionM: [0, 0, 10], orientationXyzw: [0, 0, 0, 1] } },
+    { focalPixels: 1000, principalOffsetPixels: [0, 0], widthPixels: 400, heightPixels: 300 }, 1, detailed);
+  const mounted = () => [...root.querySelectorAll<HTMLElement>('[data-image-layer-object]')].map(node => node.dataset.imageLayerObject).sort().join('');
+  const visit = async (id: string, expected: string) => { publish(id); await waitFor(() => assert.equal(mounted(), expected)); publish(id); };
+  await visit('a', 'a');
+  await visit('b', 'ab');
+  assert.equal(mounted(), 'ab', 'one bank left behind fits the budget');
+  await visit('c', 'bc');
+  assert.equal(root.dataset.imageLayerResidentBankCount, '2', 'the bank used longest ago gave its nodes back');
+  const release = banks.focusBank('b')!.subscribe(() => {});
+  await visit('a', 'abc');
+  assert.equal(mounted(), 'abc', 'a held bank is not counted against the budget');
+  release();
+  assert.equal(mounted(), 'ab', 'released, it is the most recently used: the older one goes');
+  banks.setCoasting(true);
+  await visit('c', 'abc');
+  assert.equal(mounted(), 'abc', 'nothing is removed while the camera coasts');
+  banks.setCoasting(false);
+  assert.equal(mounted(), 'ac', 'the release lands when the coast stops');
+  lifetime.destroy();
 });

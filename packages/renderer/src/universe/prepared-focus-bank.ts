@@ -21,14 +21,15 @@ export function imageFocusDatasets(objectId: string): PreparedFocusDatasets {
     datasets: [{ id: 'optical', label: 'Optical', title: 'Visible-light observation', description: 'Prepared image layers', sourceUrl: '' }] };
 }
 
-export function createImageFocusBank(objectId: string, frame: DensityVolumeFrame, load: () => Promise<void>): PreparedFocusBank {
+export function createImageFocusBank(objectId: string, frame: DensityVolumeFrame, load: () => Promise<void>,
+  subscribe: PreparedFocusBank['subscribe'] = () => () => {}): PreparedFocusBank {
   const state = imageFocusDatasets(objectId);
   // Image framing is already authored in the descriptor; it does not wait for the layers to decode.
   const radiusM = Math.max(...frame.boundsUnits.max.map((value, axis) => Math.abs(value - frame.boundsUnits.min[axis]!) / 2)) * frame.metersPerUnit;
   return {
     objectId, framingRadiusM: () => radiusM, state: () => state, load,
     selectDataset(id) { if (id !== 'optical') throw new TypeError('Unknown image-layer dataset.'); },
-    subscribe: () => () => {},
+    subscribe,
   };
 }
 

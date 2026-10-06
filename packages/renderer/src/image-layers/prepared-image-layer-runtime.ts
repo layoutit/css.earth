@@ -127,6 +127,8 @@ export function mountPreparedCssImageLayers({ host, before, payload, resolveReso
   let destroyed = false;
   const quotable = (address: string) => address.replace(/["\\\n\r]/g, char => `\\${char}`);
   return Object.freeze({ root,
+    /** The DOM nodes the bank mounted: its root, and each drawn stack's projection, scenes and leaves. */
+    nodes: 1 + banks.reduce((total, bank) => total + 1 + bank.runs.reduce((sum, run) => sum + 3 + run.leaves.length, 0), 0),
     /** The bank root is shown again: each stack it draws waits for its images' decode, as one the camera turns to does. */
     resume() { for (const bank of banks) { bank.drawn = false; bank.turn++; } },
     /** `around`: the bank is drawn around a body that stands inside it, at that place (reference metres). The sheets the

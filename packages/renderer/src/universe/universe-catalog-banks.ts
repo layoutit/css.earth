@@ -10,6 +10,7 @@ import { mountPreparedGalaxyCatalog } from './prepared-galaxy-catalog.js';
 import { mountDatasetBillboards } from './dataset-billboards.js';
 import { mountCataloguePoints } from './catalogue-points.js';
 import { fetchPreparedCatalogueBank } from './catalogue-point-transport.js';
+import { trimWarmBanks } from './universe-dataset-banks.js';
 import type { PreparedCatalogBank, PreparedUniverseOptions, PreparedImageLayerMount } from './prepared-universe-types.js';
 
 interface ImageBank {
@@ -31,12 +32,19 @@ interface ImageBank {
    * inside it (ImageLayerBankDescriptor `surrounds` and `host`). */
   surrounds: boolean;
   host: string | undefined;
+  /** Whether the last publication drew the bank or its dots, and the order in which that last changed. A mounted bank
+   * that is not drawn and that no focus holds (`subscribers`) is kept for a return visit, within the warm budget. */
+  shown: boolean;
+  lastUsed: number;
+  subscribers: number;
+  /** The DOM nodes of its mounted layers (prepared-image-layer-runtime.ts `nodes`). */
+  nodes: number;
 }
 
 /** Catalogue and image layers remain descriptor-only until visibility or navigation admits them. */
 export function createUniverseCatalogBanks({ root, end, stage, lifetime, declarations, initialImages, volumeDeclarations,
   initialCatalog, catalogBank, loadCatalog, loadImageLayer, requestPublication, billboards: prepared, stellarExtents = {}, prepareBillboardImage,
-  pointBanks = [], imagesBefore = end }: {
+  pointBanks = [], imagesBefore = end, warmDomNodeBudget }: {
   root: HTMLElement; end: Element; stage: HTMLElement; lifetime: SceneLifetime;
   /** Where a galaxy's billboard and its image slices mount: under the world's dot layer, so its catalogue's dots and its
    * stars' show over its picture. Without one they mount where every other layer does. */
@@ -56,6 +64,8 @@ export function createUniverseCatalogBanks({ root, end, stage, lifetime, declara
   billboards?: PreparedUniverseOptions['datasetBillboards'];
   /** Packages that are only catalogue dots (PreparedUniverseOptions.pointBanks). */
   pointBanks?: PreparedUniverseOptions['pointBanks'];
+  /** How many DOM nodes of mounted image banks that are neither drawn nor held may stay for a return visit. */
+  warmDomNodeBudget: number;
 }) {
   let catalog: ReturnType<typeof mountPreparedGalaxyCatalog> | null = null;
   let catalogPayload = initialCatalog, catalogLoading: Promise<void> | null = null;
@@ -64,7 +74,8 @@ export function createUniverseCatalogBanks({ root, end, stage, lifetime, declara
     const facts = prepared?.plan.banks.get(bank.id);
     return { id: bank.id, frame: bank.frame, radiusUnits: volumeFramingRadiusUnits(bank.frame), mounted: null, points: [], dotsShown: false, loading: null, publishedOpacity: NaN,
       billboardIndex: facts?.billboard ? billboardCount++ : -1, billboardRadiusUnits: facts?.billboard?.radiusUnits ?? 0,
-      independent: facts?.contextVisibility === 'independent', surrounds: bank.surrounds === true, host: bank.host };
+      independent: facts?.contextVisibility === 'independent', surrounds: bank.surrounds === true, host: bank.host,
+      shown: false, lastUsed: 0, subscribers: 0, nodes: 0 };
   });
   const byId = new Map(images.map(bank => [bank.id, bank]));
   // A package that is only catalogue dots mounts them the first time its catalogue row is selected; they draw while it is.
@@ -94,6 +105,43 @@ export function createUniverseCatalogBanks({ root, end, stage, lifetime, declara
     mounted?.destroy();
   });
 
+  let useClock = 0, coasting = false, trimWaits = false;
+  function evict(bank: ImageBank) {
+    if (!bank.mounted || bank.shown || bank.subscribers > 0) return false;
+    for (const layer of bank.points) layer.destroy();
+    bank.points = [];
+    bank.mounted.destroy();
+    bank.mounted = null;
+    bank.dotsShown = false;
+    bank.publishedOpacity = NaN;
+    return true;
+  }
+  /** Every visited image bank used to stay mounted, hidden, for the life of the page: 22 banks and 12,565 nodes back at
+   * Earth after twenty picture objects on an iPad, where a new page has 870 (2026-10-06). They are now kept as the
+   * volume banks are, least recently used first out (universe-dataset-banks.ts `trimWarmBanks`). Removing a bank changes
+   * what is mounted, so it waits for a coast to stop (motion-freezes-membership.md). */
+  function trimWarmResidency() {
+    if (lifetime.disposed) return;
+    if (coasting) { trimWaits = true; return; }
+    trimWaits = false;
+    trimWarmBanks(images.filter(bank => bank.mounted && !bank.shown && bank.subscribers === 0)
+      .map(bank => ({ lastUsed: bank.lastUsed, nodes: bank.nodes, evict: () => evict(bank) })), warmDomNodeBudget);
+    publishResidency();
+  }
+  /** Holds the bank mounted until the release: the focus of a flight holds its destination before it is drawn. */
+  function hold(bank: ImageBank) {
+    if (lifetime.disposed) return () => {};
+    bank.subscribers++;
+    bank.lastUsed = ++useClock;
+    let released = false;
+    return () => {
+      if (released) return;
+      released = true;
+      bank.subscribers--;
+      bank.lastUsed = ++useClock;
+      trimWarmResidency();
+    };
+  }
   function publishResidency() {
     if (lifetime.disposed) return;
     root.dataset.imageLayerDeclaredBankCount = String(images.length);
@@ -136,9 +184,12 @@ export function createUniverseCatalogBanks({ root, end, stage, lifetime, declara
       }
       bank.mounted = mountPreparedCssImageLayers({ host: root, before: imagesBefore, payload: loaded.payload, resolveResource: loaded.resolveResource });
       bank.mounted.root.style.display = 'none';
+      bank.nodes = bank.mounted.nodes;
+      bank.lastUsed = ++useClock;
       // The dots are mounted beside the slices, not inside them: from inside the galaxy they draw without its photograph.
       bank.points = (loaded.cataloguePointUrls ?? []).map(url => mountCataloguePoints({ host: root, before: end, url,
         loadBank: target => fetchPreparedCatalogueBank(target, (input, init) => root.ownerDocument.defaultView!.fetch(input, init)) }));
+      trimWarmResidency();
       requestPublication?.();
     }).finally(() => { bank.loading = null; publishResidency(); });
     publishResidency();
@@ -161,7 +212,7 @@ export function createUniverseCatalogBanks({ root, end, stage, lifetime, declara
     },
     focusBank(id: string) {
       const bank = byId.get(id);
-      if (bank) return createImageFocusBank(bank.id, bank.frame, () => ensureImage(bank));
+      if (bank) return createImageFocusBank(bank.id, bank.frame, () => ensureImage(bank), () => hold(bank));
       // A bank of dots has one dataset, its members; the dots mount when they are first shown.
       return points.some(point => point.id === id) ? createPointFocusBank(id) : null;
     },
@@ -183,7 +234,11 @@ export function createUniverseCatalogBanks({ root, end, stage, lifetime, declara
       }
     },
     /** While the camera coasts no billboard is revealed or hidden (motion-freezes-membership.md). */
-    setCoasting(active: boolean) { billboards?.setCoasting(active); catalog?.setCoasting(active); },
+    setCoasting(active: boolean) {
+      billboards?.setCoasting(active); catalog?.setCoasting(active);
+      coasting = active;
+      if (!active && trimWaits) trimWarmResidency();
+    },
     /** The image bank whose framing sphere holds `positionM`: the galaxy a selected star is in. */
     imageBankContaining(positionM: readonly number[]): string | undefined {
       // Asked on every frame of every bank: plain arithmetic, where a mapped array for each bank was 2.1 % of an iPad's
@@ -210,6 +265,7 @@ export function createUniverseCatalogBanks({ root, end, stage, lifetime, declara
       // cluster's two banks are seen from where that context is in full view.
       const selected = images.find(bank => bank.id === detailedObjectId && bank.host !== undefined && bank.mounted);
       const selectedOpacity = selected ? projectedVolumeOpacity(world, viewport, selected.frame, selected.radiusUnits) : 0;
+      let residencyChanged = false;
       for (const bank of images) {
         // A galaxy's slices paint only for the observer who selected it, at any distance from it: the context's distance
         // fade is measured from the selected body, which is the galaxy itself. Walls paint around a body inside them too.
@@ -223,6 +279,7 @@ export function createUniverseCatalogBanks({ root, end, stage, lifetime, declara
             outsideVolumeOpacity(world, bank.frame, bank.radiusUnits), world, viewport);
         }
         const dotOpacity = Math.max(opacity, inside?.objectId === bank.id ? inside.opacity : 0);
+        if (dotOpacity > 0 !== bank.shown) { bank.shown = dotOpacity > 0; bank.lastUsed = ++useClock; residencyChanged = true; }
         if (!bank.mounted) {
           if (dotOpacity > 0) void ensureImage(bank).catch(() => {});
           continue;
@@ -242,6 +299,7 @@ export function createUniverseCatalogBanks({ root, end, stage, lifetime, declara
         }
         if (opacity > 0) bank.mounted.publish({ world, viewport }, bank.id === around && bank.id !== detailedObjectId && bodyM !== undefined ? bodyM : false);
       }
+      if (residencyChanged) trimWarmResidency();
     },
   };
 }
