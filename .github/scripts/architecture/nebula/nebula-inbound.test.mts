@@ -45,7 +45,7 @@ test('preparation accepts the public bake entries while the runtime accepts none
   const f = fixture();
   try {
     f.write('site/build/prepare.mts', "import {value} from '@cssearth/bake/public'; export {value as core} from '@cssearth/bake/public';");
-    for (const path of ['site/build/volume.ts', 'packages/bake/src/volume/other.ts', 'packages/telescope-cli/src/query.mts']) {
+    for (const path of ['site/build/volume.ts', 'packages/bake/src/volume/other.ts', 'packages/telescope-cli/src/observation-query/query.mts']) {
       f.write(path, "import {value, type Contract} from '@cssearth/bake/public'; export {value};"); assert.deepEqual(f.check(), [], path);
       f.write(path, 'export {};');
     }

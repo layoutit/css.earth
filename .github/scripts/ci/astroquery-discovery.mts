@@ -3,7 +3,7 @@ import { globSync, readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 
 export const ASTROQUERY_EXCLUSIONS: Readonly<Record<string, string>> = {
-  'packages/telescope-cli/src/output-handoffs.test.mts': 'Mixed PDS decoding and stellar handoffs require the PDS toolchain and restored stellar-neighbourhood stars.json/stars.bin; remains in the source-qualified CLI lane.',
+  'packages/telescope-cli/src/delivery/output-handoffs.test.mts': 'Mixed PDS decoding and stellar handoffs require the PDS toolchain and restored stellar-neighbourhood stars.json/stars.bin; remains in the source-qualified CLI lane.',
   'packages/bake/src/objects/raster/healpix-map.test.mts': 'Mixed toolchain and deposited Luhman 16 B maps: requires untracked posterior NPY sources; remains in the source-qualified bake lane.',
 };
 export function astroqueryTestFiles(root: string): string[] {

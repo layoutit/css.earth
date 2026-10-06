@@ -5,19 +5,19 @@ import { randomUUID } from 'node:crypto';
 import { hasErrorCode, requireArray, requireRecord, requireString } from '@cssearth/core';
 import { fileSize, readProductRecord } from '@cssearth/telescope/node';
 import type { ProductRecord } from '@cssearth/objects';
-import { loadQueryInputs, queryCapabilities, requestFromArguments, selectObservation, assessObservationSelection, type ArchiveSelection } from './query.mts';
-import { type CapabilityAnswer, type QueryInputs } from './query-contract.mts';
-import type { CapabilityRequest } from './recipe-request.mts';
-import { matchingProduct, loadQualifiedObservations, type QualifiedObservation } from './qualified-observations.mts';
-import { qualifyObservation, type QualificationRequest } from './qualify.mts';
-import { selectedProductInput, qualifiedProductInput } from './selected-product.mts';
-import { assessRequest, type ProductFacts } from './request-satisfaction.mts';
-import type { QualificationConfiguration } from './qualification-routes.mts';
+import { loadQueryInputs, queryCapabilities, requestFromArguments, selectObservation, assessObservationSelection, type ArchiveSelection } from './observation-query/query.mts';
+import { type CapabilityAnswer, type QueryInputs } from './observation-query/query-contract.mts';
+import type { CapabilityRequest } from './requests/recipe-request.mts';
+import { matchingProduct, loadQualifiedObservations, type QualifiedObservation } from './qualification/qualified-observations.mts';
+import { qualifyObservation, type QualificationRequest } from './qualification/qualify.mts';
+import { selectedProductInput, qualifiedProductInput } from './observation-query/selected-product.mts';
+import { assessRequest, type ProductFacts } from './requests/request-satisfaction.mts';
+import type { QualificationConfiguration } from './qualification/qualification-routes.mts';
 import { EXPLORATION_SCHEMA, exploreTarget, parseExplorationArguments, type ExplorationAnswer, type ExplorationChoice, type ExplorationRequest } from './exploration.mts';
 import { SERVICES } from './vo/discovery.mts';
-import type { DeliveryContext, ExplorationReference as DeliveryExplorationReference } from './delivery-context.mts';
+import type { DeliveryContext, ExplorationReference as DeliveryExplorationReference } from './delivery/delivery-context.mts';
 import { canonical } from '@cssearth/objects';
-import { sourceQuestionFromRequest } from './source-relevance.mts';
+import { sourceQuestionFromRequest } from './products/source-relevance.mts';
 
 export const SESSION_SCHEMA = 'cssearth-telescope-session@1';
 export interface Choice {
@@ -212,7 +212,7 @@ async function getScientificSession(root: string, directory: string, pick: numbe
   return locked(directory, async () => {
     const saved = readSavedChoice(JSON.parse(await readFile(resolve(directory, 'query.json'), 'utf8')), pick), request = sessionRequest(saved.args);
     if (options.offline) {
-      const resultPath = resolve(directory, `pick-${pick}`, 'result.json'), { delivery } = await import('./outputs.mts');
+      const resultPath = resolve(directory, `pick-${pick}`, 'result.json'), { delivery } = await import('./delivery/outputs.mts');
       const local = await delivery(resultPath), { canonical } = await import('@cssearth/objects');
       if (local.context.kind !== 'scientific-request' || local.record.choice !== saved.key || canonical(local.context.request) !== canonical({ ...request, target: saved.target })) throw new Error('Offline delivery differs from its saved scientific request or choice.');
       progress('Replaying the pinned local delivery; no remote archive was refreshed.');
@@ -313,7 +313,7 @@ async function getExplorationSession(root: string, directory: string, pick: numb
     const saved = readExplorationChoice(JSON.parse(await readFile(resolve(directory, 'explore.json'), 'utf8')), pick), request = parseExplorationArguments(saved.args);
     const resultPath = resolve(directory, `pick-${pick}`, 'result.json');
     if (options.offline) {
-      const { delivery } = await import('./outputs.mts'), local = await delivery(resultPath);
+      const { delivery } = await import('./delivery/outputs.mts'), local = await delivery(resultPath);
       if (local.context.kind !== 'exploration' || local.context.target !== saved.target || local.record.choice !== saved.key || canonical(local.context.discovery) !== canonical({ schema: EXPLORATION_SCHEMA, choice: saved.reference }))
         throw new Error('Offline delivery differs from its saved exploration or choice.');
       progress('Replaying the pinned local delivery; no remote archive was refreshed.');
@@ -370,9 +370,9 @@ export async function getSession(root: string, directory: string, pick: number, 
 
 /** Additive saved assessment for a selected family descriptor. It deliberately does not run the strict archive query. */
 export const FAMILY_REQUEST_SESSION_SCHEMA='cssearth-telescope-family-request@1' as const;
-export interface FamilyRequestSession {readonly schema:typeof FAMILY_REQUEST_SESSION_SCHEMA;readonly createdAt:string;readonly original:import('./family-request.mts').NormalizedFamilyRequest;readonly assessment:import('./family-request.mts').FamilyRequestAssessment;readonly status:'matched'|'unresolved'|'refused';readonly descriptor?:{readonly path:string;readonly bytes:number}}
-export async function saveFamilyRequestSession(directory:string,input:import('./family-request.mts').FamilyScientificRequest,descriptor:unknown,
+export interface FamilyRequestSession {readonly schema:typeof FAMILY_REQUEST_SESSION_SCHEMA;readonly createdAt:string;readonly original:import('./requests/family-request.mts').NormalizedFamilyRequest;readonly assessment:import('./requests/family-request.mts').FamilyRequestAssessment;readonly status:'matched'|'unresolved'|'refused';readonly descriptor?:{readonly path:string;readonly bytes:number}}
+export async function saveFamilyRequestSession(directory:string,input:import('./requests/family-request.mts').FamilyScientificRequest,descriptor:unknown,
   source?:{readonly path:string;readonly bytes:number}):Promise<FamilyRequestSession>{
-  const {assessFamilyRequest}=await import('./family-request.mts');const assessment=await assessFamilyRequest(input,descriptor),answers=Object.values(assessment.verdicts).filter((value):value is NonNullable<typeof value>=>value!==undefined),status=answers.some(v=>v.answer==='no')?'refused':answers.length&&answers.every(v=>v.answer==='yes')?'matched':'unresolved';
+  const {assessFamilyRequest}=await import('./requests/family-request.mts');const assessment=await assessFamilyRequest(input,descriptor),answers=Object.values(assessment.verdicts).filter((value):value is NonNullable<typeof value>=>value!==undefined),status=answers.some(v=>v.answer==='no')?'refused':answers.length&&answers.every(v=>v.answer==='yes')?'matched':'unresolved';
   return locked(directory,async()=>{const path=resolve(directory,'family-request.json');try{await readFile(path);throw new Error(`${path} already exists. Use a new --out directory.`);}catch(error){if(!hasErrorCode(error,'ENOENT'))throw error;}const saved:FamilyRequestSession={schema:FAMILY_REQUEST_SESSION_SCHEMA,createdAt:new Date().toISOString(),original:assessment.request,assessment,status,...(source?{descriptor:source}:{})};const temporary=`${path}.${randomUUID()}.partial`;try{await writeFile(temporary,`${JSON.stringify(saved,null,2)}\n`);await rename(temporary,path);}finally{await rm(temporary,{force:true});}return saved;});
 }

@@ -47,19 +47,14 @@
       "tests": 17,
       "reason": "Universe context projection and prepared catalogue display form one renderer owner; retain the existing ceiling pending dedicated decomposition."
     },
-    "packages/telescope-cli/src": {
-      "implementations": 60,
-      "tests": 42,
-      "reason": "The telescope CLI root holds its public command and shared ingestion entry surface; isolating the additional module would not establish a separate command owner."
-    },
     "packages/telescope-cli/src/archives/interferometry": {
       "implementations": 27,
       "tests": 20,
       "reason": "Archive calibration and reconstruction modules share the interferometry acquisition owner and its colocated tests."
     },
     "packages/telescope-cli/src/new-object": {
-      "implementations": 33,
-      "tests": 14,
+      "implementations": 22,
+      "tests": 10,
       "reason": "Object drafting orchestration remains one command owner; archive-specific provider readers and their tests now live in archives/."
     },
     "site": {

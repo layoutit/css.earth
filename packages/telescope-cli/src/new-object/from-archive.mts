@@ -7,14 +7,14 @@
  * out and named, so the README can say so; a host left with no planet to add is left out, not drafted as a lone star. A host the
  * universe holds is found by the Gaia DR3 source its position cites, then by name. The card and introduction are
  * drafted from the row's numbers and cite the row's paper; a person edits them, or keeps them. */
-import { archiveHostQuery, assembleArchiveOrbit, assembleMeasuredOrbit, compositeMass, compositeRadius, NASA_TAP, parseArchiveRows } from './orbit.mts';
+import { archiveHostQuery, assembleArchiveOrbit, assembleMeasuredOrbit, compositeMass, compositeRadius, NASA_TAP, parseArchiveRows } from './planets/orbit.mts';
 import { decodeEntities, fetchGaiaRow, type Archive } from './archives/archives.mts';
-import { duplicateName, hostId as idForHost, planetId, planetPrefix, type Existing } from './identity.mts';
+import { duplicateName, hostId as idForHost, planetId, planetPrefix, type Existing } from './names/identity.mts';
 import { TIC, ticRow, wideCompanions } from './companions.mts';
 import { wikipediaQuotes } from './prose.mts';
-import { hasArchiveSpectrum, orbitFold, timingSigma } from './planet-charts.mts';
-import { detectTransit, type TessArchive } from './transit-chart.mts';
-import { thermalFromArchive } from './planet-datasets.mts';
+import { hasArchiveSpectrum, orbitFold, timingSigma } from './planets/planet-charts.mts';
+import { detectTransit, type TessArchive } from './planets/transit-chart.mts';
+import { thermalFromArchive } from './planets/planet-datasets.mts';
 
 const STAR_COLUMNS = 'pl_name,hostname,default_flag,pl_refname,st_refname,st_rad,st_raderr1,st_teff,st_tefferr1,st_mass,st_masserr1,sy_dist,disc_year,discoverymethod,tran_flag,pl_letter,hd_name,hip_name,gaia_dr3_id,cb_flag,sy_snum,disc_facility,sy_pnum';
 const short = (value: number, digits = 2) => Number(value.toPrecision(digits));

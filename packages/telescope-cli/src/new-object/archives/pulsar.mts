@@ -40,7 +40,7 @@ import { fetchPublication, liveArchive, type Archive, type Publication } from '.
 import { scaffoldStarFiles } from '../scaffold.mts';
 import { writeLedger } from '../ledger.mts';
 import { publicationRecord } from '../publication-record.mts';
-import { datasetMarkerEntry } from '../planet-datasets.mts';
+import { datasetMarkerEntry } from '../planets/planet-datasets.mts';
 import { storedSpecDocument, STORED_SPEC } from '../refresh.mts';
 import type { Cited, DraftText } from '../spec-types.mts';
 

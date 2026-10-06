@@ -1,5 +1,5 @@
 /** The shape of a star spec and of the bodies it hosts: what spec.mts parses and the generator reads. */
-import type { WhiteDwarfAtmosphere } from './limb-choice.mts';
+import type { WhiteDwarfAtmosphere } from './darkening/limb-choice.mts';
 
 export interface Cited { readonly value: number; readonly source: string; readonly url: string; readonly uncertainty?: number }
 export type ColorRoute = 'stis-ngsl' | 'gaia-xp' | 'pulkovo' | 'kiehling' | 'kharitonov' | 'burnashev';

@@ -15,12 +15,12 @@ import { CHECKED, planckChoice } from './color.mts';
 import { bindInputs, installColorDataset, json, type PackageFiles } from './dataset.mts';
 import { quoteSource } from './prose.mts';
 import { writeLedger } from './ledger.mts';
-import { hostLightOf, installBandColorDataset, installHostLight, installThermalDataset, datasetMarkerEntry, thermalColorLine, thermalFromArchive } from './planet-datasets.mts';
-import { installPhaseCurveDataset } from './phase-curve-dataset.mts';
-import { installPlanetCharts } from './planet-charts.mts';
-import { chooseLimb } from './limb.mts';
+import { hostLightOf, installBandColorDataset, installHostLight, installThermalDataset, datasetMarkerEntry, thermalColorLine, thermalFromArchive } from './planets/planet-datasets.mts';
+import { installPhaseCurveDataset } from './planets/phase-curve-dataset.mts';
+import { installPlanetCharts } from './planets/planet-charts.mts';
+import { chooseLimb } from './darkening/limb.mts';
 import { storedHostedSpec, storedSpecDocument } from './refresh.mts';
-import { archiveRows, assembleArchiveOrbit, assembleMeasuredOrbit, compositeMass, compositeRadius, orbitizeHostedOrbit, type AssembledOrbit, type HostedOrbit } from './orbit.mts';
+import { archiveRows, assembleArchiveOrbit, assembleMeasuredOrbit, compositeMass, compositeRadius, orbitizeHostedOrbit, type AssembledOrbit, type HostedOrbit } from './planets/orbit.mts';
 import { TODO } from './scaffold.mts';
 import type { Cited, HostedSpec, StarSpec } from './spec-types.mts';
 

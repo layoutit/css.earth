@@ -8,9 +8,9 @@ import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { astroquery } from '@cssearth/telescope/node';
 import { saveSession, getSession, type SessionServices, saveExploration, sessionRequest } from '../session.mts';
-import { loadQualifiedObservations } from '../qualified-observations.mts';
-import { delivery, listOutputs, exportOutput } from '../outputs.mts';
-import { listArtifactOutputs } from '../artifact-outputs.mts';
+import { loadQualifiedObservations } from '../qualification/qualified-observations.mts';
+import { delivery, listOutputs, exportOutput } from '../delivery/outputs.mts';
+import { listArtifactOutputs } from '../delivery/artifact-outputs.mts';
 import { executeFamilyOperation } from '../family-operation.mts';
 import { explorationAnswer } from '../exploration.mts';
 import { binaryTableHdu, primaryHdu } from '@cssearth/bake/objects/raster';
@@ -18,7 +18,7 @@ import { normalizeSnapshot, SERVICES } from './discovery.mts';
 import { parseSnapshot, jsonValue } from '@cssearth/objects';
 import { planAccess } from './access.mts';
 import { qualifyVoProduct } from './qualify.mts';
-import type { QueryInputs } from '../query-contract.mts';
+import type { QueryInputs } from '../observation-query/query-contract.mts';
 
 test('confirmed direct FITS table reaches F08 export through saved exploration and get', async () => {
   const root = await mkdtemp(resolve(tmpdir(), 'vo-table-session-'));

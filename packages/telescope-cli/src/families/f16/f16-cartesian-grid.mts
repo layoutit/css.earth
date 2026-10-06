@@ -6,7 +6,7 @@ import {resolve} from 'node:path';
 import { astroqueryToolchain, WORKSPACE } from '@cssearth/telescope/node';
 import {encodeDensityKtx2} from '@cssearth/bake/density';
 import type {FamilyHandler,FamilyOperation} from '../../family-handler.mts';
-import type {DescriptorMember,ProductDescriptor} from '../../product-descriptor.mts';
+import type {DescriptorMember,ProductDescriptor} from '../../products/product-descriptor.mts';
 import {descriptor,stable} from '../common.mts';
 import { runWorkspaceScript } from '../../workspace-commands.mts';
 import { PREPARE_VOLUME_COMMAND } from '../../workspace-commands/prepare-volume.mts';

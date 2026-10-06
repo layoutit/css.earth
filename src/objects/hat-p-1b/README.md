@@ -16,7 +16,7 @@ It is the only planet known around HAT-P-1. Its orbit and size follow Nikolov et
 
 Generated 2026-09-29 by [new-object-cli.mts](../../../packages/telescope-cli/src/new-object/new-object-cli.mts); the orbit is the one recorded in [its astronomy record](../../../packages/astronomy/data/bodies/hat-p-1b.json).
 
-- Run of 2026-10-04: [`new-object --thermal`](../../../packages/telescope-cli/src/new-object/planet-datasets.mts) gave it the measured glow, with 34 other planets; `--expected-glow` gave 62 unmeasured hot giants an estimated one. Seven of them as their pages open, gray before and after:
+- Run of 2026-10-04: [`new-object --thermal`](../../../packages/telescope-cli/src/new-object/planets/planet-datasets.mts) gave it the measured glow, with 34 other planets; `--expected-glow` gave 62 unmeasured hot giants an estimated one. Seven of them as their pages open, gray before and after:
 
 ![Seven planets, gray before and glowing after: HAT-P-1 b, WASP-79 b, KELT-20 b and K2-141 b at their measured day side, HAT-P-14 b, WASP-99 b and WASP-189 b at an estimated one](evidence/2026-10-04/glow.jpg)
 

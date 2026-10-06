@@ -21,10 +21,10 @@
  * by its preferred name (display-name.mts, the IAU name first); one with a name of its own is a map target. */
 import { VIZIER_ASU, type Archive } from './archives.mts';
 import { adql, csv, SIMBAD_TAP } from '../companions.mts';
-import { preferredName, simbadIdentifiers } from '../display-name.mts';
+import { preferredName, simbadIdentifiers } from '../names/display-name.mts';
 import { chooseGravity, citedGravity, type GravityChoice } from './gravity.mts';
 import { readIauNames } from './iau-names.mts';
-import { slug } from '../identity.mts';
+import { slug } from '../names/identity.mts';
 import { sunWidth, wikipediaQuotes } from '../prose.mts';
 import type { Cited } from '../spec-types.mts';
 

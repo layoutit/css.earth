@@ -9,8 +9,8 @@ import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { imageLayerDisc, imageLayerDiscDistanceKpc } from '@cssearth/bake/image-layers';
 import { VIZIER_ASU, type Archive } from './archives.mts';
-import { preferredName, simbadIdentifiers } from '../display-name.mts';
-import { slug } from '../identity.mts';
+import { preferredName, simbadIdentifiers } from '../names/display-name.mts';
+import { slug } from '../names/identity.mts';
 import { galaxyVelocity, relationCepheidDraft } from './sh0es.mts';
 
 export const LI_2021 = { catalogue: 'J/ApJ/920/84/table2', credit: 'Li et al. (2021), ApJ 920, 84', paper: 'https://arxiv.org/abs/2107.08029',

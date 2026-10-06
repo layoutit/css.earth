@@ -7,7 +7,7 @@ import { requireFiniteNumber, requireRecord, requireString } from '@cssearth/cor
 import { eurekaToolchain } from '../toolchain.mts';
 import { toolchainPython } from '@cssearth/telescope/node';
 import { openSpectralCube } from '@cssearth/bake/objects/layers/observation';
-import type { ProductFacts } from '../../../request-satisfaction.mts';
+import type { ProductFacts } from '../../../requests/request-satisfaction.mts';
 
 export const RESOLUTION_METHOD = 'jwst-point-source-profile@1';
 export const RESOLUTION_PYTHON = String.raw`

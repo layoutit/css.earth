@@ -9,7 +9,7 @@ import { mkdir, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { requireArray, requireRecord, requireString } from '@cssearth/core';
 import { displayName } from '../papers.mts';
-import { loadTargetCatalogue } from '../query.mts';
+import { loadTargetCatalogue } from '../observation-query/query.mts';
 
 export const SIMULATIONS_SCHEMA = 'cssearth-telescope-simulations@1';
 export const ZENODO_RECORDS = 'https://zenodo.org/api/records';
