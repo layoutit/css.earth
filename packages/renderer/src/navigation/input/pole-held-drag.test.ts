@@ -2,9 +2,9 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import { planPoleCoast, poleCoastMovement, poleHoldFor, recordFrameMovement, turnPoleHeld } from './pole-held-drag.js';
 import type { FrameMovement } from './pole-held-drag.js';
-import type { TrackballMetrics } from './types.js';
+import type { TrackballMetrics } from '../types.js';
 // CesiumJS 1.145.0's own globe under twelve drags, written by `node labs/experiments/drag-oracle/run.mts record`.
-import recorded from '../../../engine/src/navigation/pole-drag.cesium.json' with { type: 'json' };
+import recorded from '../../../../engine/src/navigation/pole-drag.cesium.json' with { type: 'json' };
 
 const apart = (a: readonly number[], b: readonly number[]) => Math.max(...a.map((value, i) => Math.abs(value - b[i]!)));
 const trackballOf = (gesture: (typeof recorded.gestures)[number]): TrackballMetrics => {

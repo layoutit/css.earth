@@ -1,4 +1,4 @@
-import type { CameraMotionSignal } from '../../navigation/camera-motion-signal.js';
+import type { CameraMotionSignal } from '../../navigation/motion/camera-motion-signal.js';
 import { opacityClockFor, type OpacityWindow } from '../../stars/opacity-clock.js';
 
 /**

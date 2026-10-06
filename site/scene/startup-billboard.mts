@@ -1,7 +1,7 @@
-import { parseSharedView } from '@cssearth/renderer/navigation/view-url.ts';
+import { parseSharedView } from '@cssearth/renderer/navigation/camera/view-url.ts';
 import { parseObjectDiscovery } from '@cssearth/objects';
 import type { SceneFactory } from '../browser/browser-types.mts';
-import type { CameraViewport } from '@cssearth/renderer/navigation/camera-viewport.ts';
+import type { CameraViewport } from '@cssearth/renderer/navigation/camera/camera-viewport.ts';
 import { prepareArrivalBillboard } from '../navigation/arrival-billboard.mts';
 import { createPreparedArrival } from '../navigation/prepared-arrival.mts';
 import { namesSystem } from '../world/systems/navigation-scope.mts';

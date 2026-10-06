@@ -4,7 +4,7 @@ import type { ObjectSelection } from '@cssearth/renderer/runtime/object-contract
 
 import type { publishPreparedNativeView } from '@cssearth/renderer/rendering/view/prepared-native-view.ts';
 import { selectedPreparedVariant } from '@cssearth/renderer/rendering/view/prepared-presentation.ts';
-import { readPreparedTransform } from '@cssearth/renderer/navigation/prepared-camera-basis.ts';
+import { readPreparedTransform } from '@cssearth/renderer/navigation/camera/prepared-camera-basis.ts';
 import { readPreparedMatrix4 } from '@cssearth/core';
 
 import { CssValues } from './css-values.mts';

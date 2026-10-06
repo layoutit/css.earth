@@ -1,5 +1,5 @@
 import { CAMERA_POSE_SCHEMA } from '@cssearth/objects';
-import type { CameraOrientation } from '../src/navigation/camera-orientation.ts';
+import type { CameraOrientation } from '../src/navigation/camera/camera-orientation.ts';
 
 /** Fixed browser orientation for DOM-free dolly and viewport checks. */
 export function fixedCameraOrientation(rotation = [1, 0, 0, 0, 1, 0, 0, 0, 1]): CameraOrientation {

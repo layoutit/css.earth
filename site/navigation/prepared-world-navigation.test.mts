@@ -7,12 +7,12 @@ import { parseHTML } from 'linkedom';
 import { setImmediate as nextTurn } from 'node:timers/promises';
 import { createSelectionFlight, sampleSelectionFlight, createSelectionFlightSample, advanceSelectionFlightInto, type WorldCameraPose } from '@cssearth/engine';
 import { createWorldSelectionTarget, formatSharedView, savedWorldCamera } from '@cssearth/renderer/navigation';
-import { presentWorldCamera } from '@cssearth/renderer/navigation/world-camera.ts';
+import { presentWorldCamera } from '@cssearth/renderer/navigation/camera/world-camera.ts';
 import { createPreparedWorldNavigation } from './prepared-world-navigation.mts';
 
 import { required, position, navigationFixture, unusedSharedView } from './navigation-test-values.test-support.mts';
 import { type PreparedWorldCameraFrame, type PreparedArrivalView } from '@cssearth/objects';
-import type { WorldCameraPresentation } from '@cssearth/renderer/navigation/world-camera.ts';
+import type { WorldCameraPresentation } from '@cssearth/renderer/navigation/camera/world-camera.ts';
 import type { ObjectWorldNavigation } from '@cssearth/renderer/runtime/world-navigation-types.ts';
 import type { ObjectSceneLifecycle } from '@cssearth/renderer/runtime/object-scene.ts';
 import type { ObjectPreparationView } from '@cssearth/renderer/runtime/prepared-object-navigation.ts';

@@ -1,4 +1,4 @@
-import type { WorldCameraViewport } from '../navigation/world-camera.js';
+import type { WorldCameraViewport } from '../navigation/camera/world-camera.js';
 
 const SVG_NS = 'http://www.w3.org/2000/svg';
 /** Dot centres are rounded to this fraction of a pixel: an eighth is below what shows, and few enough places that every

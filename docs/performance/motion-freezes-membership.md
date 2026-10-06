@@ -108,7 +108,7 @@ gesture.
 
 ## The pieces
 
-- **Signal:** `src/renderers/css/navigation/camera-motion-signal.ts` tells whether the camera moves and whether it
+- **Signal:** `packages/renderer/src/navigation/motion/camera-motion-signal.ts` tells whether the camera moves and whether it
   coasts. It is announced as `objectmotionchange` `{ active, coasting }` on the input surface. The drag controls report
   `drag`, `inertia` and `fly-to`; the wheel zoom reports `zoom` and `glide`.
 - **Pacer:** a document has one pacer (`packages/renderer/src/rendering/loading/settle-pacer.ts`), on its one frame clock

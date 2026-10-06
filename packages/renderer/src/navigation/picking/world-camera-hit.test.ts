@@ -2,7 +2,7 @@ import { it } from 'node:test';
 import assert from 'node:assert/strict';
 import { isDeepStrictEqual } from 'node:util';
 import { hitsProjectedBody } from './world-camera-hit.js';
-import { presentWorldCamera } from './world-camera.js';
+import { presentWorldCamera } from '../camera/world-camera.js';
 
 it('near-surface off-axis picking follows forward sphere rays even when no bounded ellipse exists', () => {
   const frame = { referenceFrame: 'test', epochJdTt: 1, originM: [0,0,0] as const,

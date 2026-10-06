@@ -32,11 +32,6 @@
       "tests": 22,
       "reason": "Measured-map preparation modules and colocated science tests form one raster-object owner; the extra module does not create an independent format area."
     },
-    "packages/renderer/src/navigation": {
-      "implementations": 36,
-      "tests": 23,
-      "reason": "The retained world camera and input policy form one navigation owner; its decomposition requires a dedicated interaction change."
-    },
     "packages/renderer/src/universe": {
       "implementations": 29,
       "tests": 17,

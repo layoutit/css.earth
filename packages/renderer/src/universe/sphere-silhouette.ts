@@ -1,6 +1,6 @@
 import { fromEyeM, cssViewFromOrientation } from '@cssearth/engine';
 import type { WorldCameraPose } from '@cssearth/engine';
-import type { WorldCameraViewport } from '../navigation/world-camera.js';
+import type { WorldCameraViewport } from '../navigation/camera/world-camera.js';
 
 /** A sphere's outline on screen, in pixels from the viewport centre (y down): an ellipse, `major` along `angle`. */
 export interface SphereSilhouette { readonly x: number; readonly y: number; readonly major: number; readonly minor: number; readonly angle: number }

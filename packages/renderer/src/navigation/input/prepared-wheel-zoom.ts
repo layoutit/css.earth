@@ -1,8 +1,8 @@
 import { bindInputEvent } from './shared-input-surface.js';
-import type { RuntimePolicy, WheelInputKind, WheelZoomInertia, WheelZoomPinch } from './runtime-policy.js';
-import { opacityClockFor } from '../stars/opacity-clock.js';
-import { cameraMotionSignalFor } from './camera-motion-signal.js';
-import type { NavigationCamera, CameraDelta, ControlsUpdate } from './types.js';
+import type { RuntimePolicy, WheelInputKind, WheelZoomInertia, WheelZoomPinch } from '../runtime-policy.js';
+import { opacityClockFor } from '../../stars/opacity-clock.js';
+import { cameraMotionSignalFor } from '../motion/camera-motion-signal.js';
+import type { NavigationCamera, CameraDelta, ControlsUpdate } from '../types.js';
 export interface PreparedWheelZoomOptions { inputSurface: HTMLElement; runtimePolicy: RuntimePolicy; camera: NavigationCamera; rotate(delta: CameraDelta): void; speedMultiplier?: number; dolly: { stepPerDelta: number; minimumDistance?: () => number }; inertia?: WheelZoomInertia | null; inertiaInputKinds?: readonly WheelInputKind[]; onError?: ((error: unknown) => void) | null; }
 export type PreparedWheelZoomControls = ReturnType<typeof createPreparedWheelZoomControls>;
 // Each wheel event adds its magnitude and device gain to the target

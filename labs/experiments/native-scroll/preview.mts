@@ -10,7 +10,7 @@ import { publishPreparedNativeView } from '@cssearth/renderer/rendering/view/pre
 import { addNativeResizeInput } from '@cssearth/telescope-cli/sphere/native-scroll/resize-input';
 import { addNativeCamera } from '@cssearth/telescope-cli/sphere/native-scroll/native-camera';
 import { carryViewportValues } from '@cssearth/telescope-cli/sphere/native-scroll/carry-values';
-import type { SharedView } from '@cssearth/renderer/navigation/view-url.ts';
+import type { SharedView } from '@cssearth/renderer/navigation/camera/view-url.ts';
 
 const origin = process.argv[2] ?? 'http://127.0.0.1:4349';
 const port = Number(process.argv[3] ?? 4350);

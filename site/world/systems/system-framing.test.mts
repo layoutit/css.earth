@@ -12,7 +12,7 @@ import { bodyViewAtCamera } from './zoom-scope.mts';
 import { createPreparedWorldNavigation } from '../../navigation/prepared-world-navigation.mts';
 import { createWorldSelectionTarget, parseSharedView, savedWorldCamera } from '@cssearth/renderer/navigation';
 import { worldQuaternionFromRotation, worldRotationFromQuaternion, createSelectionFlight, sampleSelectionFlight, type WorldCameraPose } from '@cssearth/engine';
-import { presentWorldCamera } from '@cssearth/renderer/navigation/world-camera.ts';
+import { presentWorldCamera } from '@cssearth/renderer/navigation/camera/world-camera.ts';
 import { SYSTEM_FRAMING_ANGLES } from '../../browser/runtime-policy.mts';
 
 import { required, position, quaternion, navigationFixture, unusedSharedView } from '../../navigation/navigation-test-values.test-support.mts';

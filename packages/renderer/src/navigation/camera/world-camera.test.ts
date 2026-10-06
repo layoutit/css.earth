@@ -2,13 +2,14 @@ import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { createSelectionFlight, sampleSelectionFlight, worldCameraFromCenteredPresentation, worldCameraFromPresentation } from '@cssearth/engine';
 import type { PositionM } from '@cssearth/engine';
-import { fileURLToPath } from 'node:url';
+import { resolve } from 'node:path';
+import { projectRoot } from '@cssearth/core/node';
 import { createSourceManifest } from '@cssearth/objects/node';
-import mercuryDefinition from "../../../../src/objects/mercury/prepared/runtime.json" with {type: "json"};
-import venusDefinition from "../../../../src/objects/venus/prepared/runtime.json" with {type: "json"};
+import mercuryDefinition from "../../../../../src/objects/mercury/prepared/runtime.json" with {type: "json"};
+import venusDefinition from "../../../../../src/objects/venus/prepared/runtime.json" with {type: "json"};
 import { cross3, isRecord } from '@cssearth/core';
 import { ASTRONOMICAL_UNIT_KILOMETERS, BODY_FIXED_ECLIPTIC_NORTH_DIRECTIONS, BODY_FIXED_SUN_DIRECTIONS, BODY_FIXED_TO_ICRF_MATRICES,
-  BODY_ORBITS, SOLAR_GEOMETRY_EPOCH_JD_TT } from '../../../../src/platform/solar-geometry.mts';
+  BODY_ORBITS, SOLAR_GEOMETRY_EPOCH_JD_TT } from '../../../../../src/platform/solar-geometry.mts';
 import { type PreparedWorldCameraFrame } from '@cssearth/objects';
 import { presentWorldCamera } from './world-camera.js';
 import type { WorldCameraViewport } from './world-camera.js';
@@ -41,7 +42,7 @@ function preparedFrame(id: 'mercury' | 'venus', radiusM: number, radiusUnits: nu
     bodyRadiusM: radiusM, metersPerUnit: radiusM / radiusUnits };
 }
 async function authoredRadiusM(id: 'mercury' | 'venus'): Promise<number> {
-  const sourceRoot = fileURLToPath(new URL(`../../../../src/objects/${id}/source/`, import.meta.url));
+  const sourceRoot = resolve(projectRoot(import.meta.url), `src/objects/${id}/source`) + '/';
   const sources = await createSourceManifest({ objectId: id, objectName: id, sourceRoot });
   const solar: unknown = JSON.parse((await sources.readSource('presentation/solar-system.json')).toString('utf8'));
   if (!isRecord(solar) || typeof solar.bodyRadiusKilometers !== 'number' ||

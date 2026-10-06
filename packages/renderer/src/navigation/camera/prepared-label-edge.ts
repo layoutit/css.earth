@@ -4,7 +4,7 @@ import { type WorldCameraPose } from '@cssearth/engine';
 import type { WorldCameraViewport } from './world-camera.js';
 
 import { presentWorldCamera, worldCameraViewport } from './world-camera.js';
-import { physicalProjectionFromCamera } from '../prepared-data/physical-projection.js';
+import { physicalProjectionFromCamera } from '../../prepared-data/physical-projection.js';
 
 export type PreparedLabelEdge = (world: WorldCameraPose, viewport: WorldCameraViewport) => number | null;
 

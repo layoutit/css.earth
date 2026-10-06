@@ -2,7 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { isDeepStrictEqual } from 'node:util';
 import { createFramePacer, createSettlePacer, SETTLE_PACING } from './settle-pacer.js';
-import { cameraMotionSignalFor } from '../../navigation/camera-motion-signal.js';
+import { cameraMotionSignalFor } from '../../navigation/motion/camera-motion-signal.js';
 
 function harness(holdWhile: 'motion' | 'coasting', pending: number) {
   const frames: ((now?: number) => void)[] = [], slices: [number, boolean][] = [];

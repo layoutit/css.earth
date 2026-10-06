@@ -2,7 +2,7 @@ import { type CameraPose, type PerspectiveCameraPlan, type PreparedWorldCameraFr
 import { cameraProjectionScale, worldCameraFromCenteredPresentation, worldCameraFromPresentation, type WorldCameraPose, preparedScenePitch, distanceForSilhouetteRadius, rotationFromMatrix3d, silhouetteRadiusAtDistance, scaleWorldPosition, validateWorldPosition } from '@cssearth/engine';
 
 import type { PositionM } from '@cssearth/engine';
-import type { CameraAngles, CameraDelta, CameraUpdate, Vector3 } from './types.js';
+import type { CameraAngles, CameraDelta, CameraUpdate, Vector3 } from '../types.js';
 
 import { createCameraOrientation } from './camera-orientation.js';
 import { worldCameraViewport, presentWorldCamera } from './world-camera.js';

@@ -1,5 +1,5 @@
-import type { MotionCompletion } from './types.js';
-import { createSteadyFrameTime } from '../stars/steady-frame-time.js';
+import type { MotionCompletion } from '../types.js';
+import { createSteadyFrameTime } from '../../stars/steady-frame-time.js';
 
 type FlightFrame = 'presented' | 'idle' | 'complete';
 interface Options {

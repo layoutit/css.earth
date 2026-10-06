@@ -2,8 +2,8 @@
 // stream as the Cesium globe. Only the trackball below is mirrored from the app (perspective-dolly.ts trackball(),
 // object-interaction-controls.ts, object-orbit.ts bodyPole()); everything it feeds is the shipped code. The input policy
 // is the renderer's test one: a primary press starts a drag anywhere on the screen, as the site's does.
-import { createUnboundedMatrixDragControls } from '@cssearth/renderer/navigation/camera-input.ts';
-import { createCameraMotion } from '@cssearth/renderer/navigation/camera-motion.ts';
+import { createUnboundedMatrixDragControls } from '@cssearth/renderer/navigation/input/camera-input.ts';
+import { createCameraMotion } from '@cssearth/renderer/navigation/motion/camera-motion.ts';
 import type { TrackballMetrics } from '@cssearth/renderer/navigation/types.ts';
 import { interactionTrackball, directAngularDegreesPerTrackballRadius, directPitchResponseForZoom, rotateVector } from '@cssearth/engine';
 import { runtimePolicy } from '../../../packages/renderer/test/runtime-policy-fixture.mts';

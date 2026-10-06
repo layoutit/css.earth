@@ -1,6 +1,6 @@
 import type { WorldCameraPose } from '@cssearth/engine';
 import { sameEyePlace } from '@cssearth/engine';
-import type { WorldCameraViewport } from '../navigation/world-camera.js';
+import type { WorldCameraViewport } from '../navigation/camera/world-camera.js';
 import type { ObjectWorldNavigationListener } from './world-navigation-types.js';
 
 export function createWorldNavigationPublicationHub(onError: (error: unknown) => void) {

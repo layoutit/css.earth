@@ -1,5 +1,5 @@
 import type { PreparedLeafBounds } from '@cssearth/objects';
-import type { WorldCameraViewport } from '../../navigation/world-camera.js';
+import type { WorldCameraViewport } from '../../navigation/camera/world-camera.js';
 
 /** Transport five camera clip planes into the prepared leaf coordinate frame.
  * Missing viewport dimensions conservatively retain every leaf. The two-pixel

@@ -4,7 +4,7 @@ Earth's drag is meant to feel like dragging a CesiumJS globe. This lab puts the 
 pointer stream, so a change to the drag can be checked against Cesium instead of by feel.
 
 - Left: CesiumJS 1.145.0 with its own `ScreenSpaceCameraController`. No cssEarth code runs on this side.
-- Right: this checkout's drag controller (`packages/renderer/src/navigation/camera-input.ts`) and engine math
+- Right: this checkout's drag controller (`packages/renderer/src/navigation/input/camera-input.ts`) and engine math
   (`packages/engine/src/navigation/pole-drag.ts`). A second Cesium globe draws its orientation and takes no input.
 
 Both stand at the same pole, distance and field of view. Cesium keeps north up; cssEarth leans Earth's pole 8° on

@@ -1,4 +1,4 @@
-import { opacityClockFor, type OpacityClock, type OpacityWindow } from '../stars/opacity-clock.js';
+import { opacityClockFor, type OpacityClock, type OpacityWindow } from '../../stars/opacity-clock.js';
 import type { WorldFrameRequest } from './world-frame-presenter.js';
 import { sameEyePlace } from '@cssearth/engine';
 

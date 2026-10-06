@@ -6,7 +6,7 @@ import prepared from '../../prepared/moon-labels.prepared.json' with { type: 'js
 import { sourceArray, sourceId, sourceObject, sourceText, sourceUnique } from '@cssearth/objects/sources';
 import type { LabelScreenRect } from '@cssearth/renderer/labels/screen-label-layout.ts';
 import type { WorldCameraPose } from '@cssearth/engine';
-import type { WorldCameraViewport } from '@cssearth/renderer/navigation/world-camera.ts';
+import type { WorldCameraViewport } from '@cssearth/renderer/navigation/camera/world-camera.ts';
 import { createLabelBudget, labelExtentOpacity, type LabelBudget } from '@cssearth/renderer/labels/universe-label-policy.ts';
 
 interface Point { id: string; positionM: readonly number[]; radiusM: number; orbit?: { centerBodyId: string }; }

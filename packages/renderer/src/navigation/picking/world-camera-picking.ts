@@ -1,8 +1,8 @@
-import { bindInputEvent } from './shared-input-surface.js';
-import { cameraMotionSignalFor } from './camera-motion-signal.js';
+import { bindInputEvent } from '../input/shared-input-surface.js';
+import { cameraMotionSignalFor } from '../motion/camera-motion-signal.js';
 import { screenPicking } from './screen-picking.js';
-import { opacityClockFor } from '../stars/opacity-clock.js';
-import { setHoverCursor } from './cursor-state.js';
+import { opacityClockFor } from '../../stars/opacity-clock.js';
+import { setHoverCursor } from '../input/cursor-state.js';
 
 /** The transparent input surface owns gestures. The presentation publishes
  * its already-clipped targets; input never searches the rendered document. */
