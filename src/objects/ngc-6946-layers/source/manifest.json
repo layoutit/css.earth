@@ -27,10 +27,9 @@
       "capture": {
         "attributions": [
           {
-            "kind": "unresolved",
-            "label": "Mayall 4-m Mosaic U B V R I, Hα, [O III], [S II]",
-            "evidence": "https://noirlab.edu/public/images/noao-ngc6946kpno/",
-            "reason": "The publisher's color composite; the retained record does not identify the individual exposures."
+            "kind": "facility",
+            "facilityId": "mayall-4m",
+            "evidence": "https://noirlab.edu/public/images/noao-ngc6946kpno/"
           }
         ]
       }

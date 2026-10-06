@@ -33,10 +33,9 @@
       "capture": {
         "attributions": [
           {
-            "kind": "unresolved",
-            "label": "Local Group Survey (KPNO Mayall 4-m, Mosaic)",
-            "evidence": "https://noirlab.edu/public/images/noao-m31lgs_ubvIha/",
-            "reason": "The publisher's color composite of ten Mosaic pointings in U, B, V, I and H-alpha; the retained record does not identify the individual exposures."
+            "kind": "facility",
+            "facilityId": "mayall-4m",
+            "evidence": "https://noirlab.edu/public/images/noao-m31lgs_ubvIha/"
           },
           {
             "kind": "unresolved",

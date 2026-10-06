@@ -27,10 +27,9 @@
       "capture": {
         "attributions": [
           {
-            "kind": "unresolved",
-            "label": "DECam, Dark Energy Survey",
-            "evidence": "https://noirlab.edu/public/images/iotw2127a/",
-            "reason": "The publisher's color composite; its page names neither the filters nor the individual exposures."
+            "kind": "facility",
+            "facilityId": "blanco-4m",
+            "evidence": "https://noirlab.edu/public/images/iotw2127a/"
           }
         ]
       }

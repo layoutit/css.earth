@@ -27,10 +27,9 @@
       "capture": {
         "attributions": [
           {
-            "kind": "unresolved",
-            "label": "Mayall 4-m Mosaic, color composite",
-            "evidence": "https://noirlab.edu/public/images/noao-m81m82/",
-            "reason": "The publisher's color composite; the retained record does not identify the individual exposures."
+            "kind": "facility",
+            "facilityId": "wiyn-0-9m",
+            "evidence": "https://www.astropix.org/image/noirlab/noao-m81m82 — NOIRLab-curated Color Mapping: WIYN-0.9m (Mosaic I), optical B, V, R, I and H-alpha; the image page names the same telescope as the KPNO 0.9m"
           }
         ]
       }
