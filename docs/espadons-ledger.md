@@ -5,7 +5,7 @@ The counts are the archive's own, from one grouped query. Every state is worked 
 `packages/telescope-cli/src/archives/espadons/programs`, not declared. [A star's magnetic map from archived
 spectra](stellar-magnetic-maps-from-spectra.md) describes what a map is made with and what it cannot do.
 
-The archive holds 22,652 polarised spectra under 3,005 typed target names. 164 of the 3,105 stars this project ships have some: 4,831 spectra.
+The archive holds 22,652 polarised spectra under 3,005 typed target names. 164 of the 3,107 stars this project ships have some: 4,831 spectra.
 81 stars have 6 or more and are listed. Mapped: 6. Reduced without a map: 0. Pinned: 0. Held: 158.
 
 Spectra alone do not make a map. A star also needs its rotation period, the tilt of its axis and its projected rotation
